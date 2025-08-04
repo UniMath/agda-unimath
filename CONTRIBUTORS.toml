@@ -15,9 +15,9 @@ usernames = [ "Egbert Rijke" ]
 homepage = "https://egbertrijke.github.io"
 github = "EgbertRijke"
 bio = '''
-Egbert Rijke is a postdoctoral researcher at Johns Hopkins University. His
-research is on homotopy type theory and general mathematics from a univalent
-point of view.
+[Egbert Rijke](https://egbertrijke.github.io) is a postdoctoral researcher at
+Johns Hopkins University. His research is on homotopy type theory and general
+mathematics from a univalent point of view.
 '''
 
 [[contributors]]
@@ -27,8 +27,9 @@ usernames = [ "Fredrik Bakke" ]
 homepage = "https://www.ntnu.edu/employees/fredrik.bakke"
 github = "fredrik-bakke"
 bio = '''
-Fredrik is a PhD student at the Norwegian University of Science and Technology
-in Trondheim. His research is on homotopy type theory and higher category theory.
+[Fredrik](https://www.ntnu.edu/employees/fredrik.bakke) is a PhD student at the
+Norwegian University of Science and Technology in Trondheim. His research is on
+homotopy type theory and higher category theory.
 '''
 
 [[contributors]]
@@ -38,8 +39,8 @@ usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier" ]
 homepage = "https://elisabeth.stenholm.one"
 github = "elisabethstenholm"
 bio = '''
-Elisabeth is a PhD student at the University of Bergen. Her research is on
-homotopy type theory.
+[Elisabeth](https://elisabeth.stenholm.one) is a PhD student at the University
+of Bergen. Her research is on homotopy type theory.
 '''
 
 [[contributors]]
@@ -49,9 +50,9 @@ usernames = [ "Jonathan Cubides", "Jonathan Prieto-Cubides" ]
 homepage = "https://jonaprieto.github.io"
 github = "jonaprieto"
 bio = '''
-Jonathan is a researcher and a compiler engineer at Heliax designing and
-implementing the functional programming language Juvix. His PhD research is on
-graph theory from a univalent point of view.
+[Jonathan](https://jonaprieto.github.io) is a researcher and a compiler engineer
+at Heliax designing and implementing the functional programming language Juvix.
+His PhD research is on graph theory from a univalent point of view.
 '''
 
 [[contributors]]
@@ -61,9 +62,9 @@ usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
 homepage = "https://vojtechstep.eu/"
 github = "VojtechStep"
 bio = '''
-Vojtěch is a master\'s student at Charles University in Prague. His background
-is in software engineering, and he\'s working on formalizing synthetic
-homotopy theoretic topics for his thesis.
+[Vojtěch](https://vojtechstep.eu/) is a master's student at Charles University
+in Prague. His background is in software engineering, and he's working on
+formalizing synthetic homotopy theoretic topics for his thesis.
 '''
 
 [[contributors]]
