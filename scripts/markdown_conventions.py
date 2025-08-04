@@ -17,7 +17,7 @@ empty_block_pattern = re.compile(
 unclosed_backtick_pattern = re.compile(r'^([^`]*`[^`]*`)*[^`]+`[^`]*$')
 
 
-def find_ill_formed_block(mdcode):
+def find_ill_formed_block(lines):
     """
     Checks if in a markdown file, every (specified) opening block guard is
     paired with a closing block guard before a new one is opened.
@@ -28,7 +28,6 @@ def find_ill_formed_block(mdcode):
     Note: This also disallows unspecified code blocks.
     """
     stack = []
-    lines = mdcode.split('\n')
 
     for line_number, line in enumerate(lines, 1):
         line = line.strip()
@@ -58,15 +57,13 @@ empty_section_eof = re.compile(
     r'^(.*\n)*#+\s([^\n]*)\n(\s*\n)*$', flags=re.MULTILINE)
 
 
-def check_unclosed_inline_code_guard(mdcode):
+def check_unclosed_inline_code_guard(lines):
     """
     Checks if in a markdown file, every opening inline code block guard is
     paired with a closing guard.
 
     Returns a list of line numbers.
     """
-    # Split the content into lines for line number tracking
-    lines = mdcode.split('\n')
 
     # Check each line that's not in a code block
     in_code_block = False
@@ -98,9 +95,9 @@ if __name__ == '__main__':
             inputText = f.read()
 
         output = inputText
+        lines = output.split('\n')
 
-        offender_line_number, offender_is_closing = find_ill_formed_block(
-            output)
+        offender_line_number, offender_is_closing = find_ill_formed_block(lines)
 
         if offender_line_number is not None:
             if offender_is_closing:
@@ -113,7 +110,7 @@ if __name__ == '__main__':
             status |= STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK
 
         # Check for unmatched backticks outside of Agda code blocks
-        backtick_lines = check_unclosed_inline_code_guard(output)
+        backtick_lines = check_unclosed_inline_code_guard(lines)
         if backtick_lines:
             line_list = ", ".join(str(line) for line in backtick_lines)
             print(
