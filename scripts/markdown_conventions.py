@@ -10,6 +10,8 @@ import re
 import itertools
 
 
+HEADING_WITH_LINK = re.compile(r'^#+[^\]]*\]\(')
+
 empty_block_pattern = re.compile(
     r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
@@ -80,6 +82,21 @@ def check_unclosed_inline_code_guard(lines):
 
     return problematic_lines
 
+def find_invalid_headings(lines):
+    """
+    Finds headings which contain links.
+
+    Adding links to headings is not valid, as headings themselves get turned
+    into links, and links within links are disallowed by the HTML standard.
+    """
+
+    invalid_heading_lines = []
+
+    for i, line in enumerate(lines, 1):
+        if HEADING_WITH_LINK.match(line):
+            invalid_heading_lines.append(i)
+
+    return invalid_heading_lines
 
 if __name__ == '__main__':
 
@@ -87,6 +104,7 @@ if __name__ == '__main__':
     STATUS_TOP_LEVEL_HEADER_AFTER_FIRST_LINE = 2
     STATUS_EMPTY_SECTION = 4
     STATUS_UNCLOSED_BACKTICK = 8
+    STATUS_INVALID_HEADING = 16
 
     status = 0
 
@@ -135,6 +153,15 @@ if __name__ == '__main__':
                 f"Error! File '{fpath}' has an empty section at the end of the file. Please consider removing the section or adding  a sentence explaining why it is empty. For instance, depending on context, you may write 'This remains to be shown.'")
 
             status |= STATUS_EMPTY_SECTION
+
+        invalid_heading_lines = find_invalid_headings(lines)
+        if invalid_heading_lines:
+            print(
+                f"Error! File '{fpath}' contains headings with links in them. Please move the link into the section text.")
+            status |= STATUS_INVALID_HEADING
+            for line in invalid_heading_lines:
+                print(
+                    f"{line}:\t{lines[line-1]}")
 
         # Remove empty code blocks
         output = empty_block_pattern.sub('', output)
