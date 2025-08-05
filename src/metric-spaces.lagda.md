@@ -70,6 +70,9 @@ open import metric-spaces.induced-premetric-structures-on-preimages public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public
+open import metric-spaces.large-metric-spaces public
+open import metric-spaces.large-premetric-spaces public
+open import metric-spaces.large-rational-neighborhoods public
 open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-premetric-spaces public
@@ -108,6 +111,7 @@ open import metric-spaces.sequences-premetric-spaces public
 open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
+open import metric-spaces.similarity-of-elements-large-premetric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.triangular-premetric-structures public
