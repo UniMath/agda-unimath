@@ -71,6 +71,7 @@ open import metric-spaces.limits-of-functions-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
+open import metric-spaces.located-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
