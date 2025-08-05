@@ -99,4 +99,8 @@ module _
   combinator-commutes-with-labelings-full-binary-tree =
     eq-pair-Σ refl
     ( eq-htpy htpy-combinator-commutes-with-labelings-full-binary-tree)
+
+  is-refl-htpy-combinator-commutes-with-labelings-full-binary-tree :
+    htpy-combinator-commutes-with-labelings-full-binary-tree ＝ {!   !} -- this should fill with refl-htpy but somehow the LHS doesn't judgementally rewrite to the RHS - why are they not definitionally equal? is there another way?
+  is-refl-htpy-combinator-commutes-with-labelings-full-binary-tree = {!   !}
 ```

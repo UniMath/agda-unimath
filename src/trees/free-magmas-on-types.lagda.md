@@ -157,10 +157,9 @@ module _
         ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma
           ( pr1 V , (λ x → pr2 V x)) (pr1 f , pr2 f))
         ∙ inv (pr2 f (pr1 U , (λ x → pr2 U x)) (pr1 V , (λ x → pr2 V x)))
-        ∙ p ∙ pr2 f U V) {!   !} ∙ {!   !} ∙
-          is-section-inv-concat' (pr2 f U V) (ap-binary (pr2 M)
-        ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma U f)
-        ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma V f))) ∙
+        ∙ p ∙ pr2 f U V) {!   !} ∙ -- this goal *should* be filed with a path that combinator-commutes-with-labelings.. is refl but this isn't judgementally so...
+        {!   !} ∙
+          is-section-inv-concat' (pr2 f U V) _) ∙
       ap-binary-htpy
       ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f)
       ( mul-Magma M))))
