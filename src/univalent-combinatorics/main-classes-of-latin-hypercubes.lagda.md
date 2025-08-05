@@ -24,8 +24,8 @@ open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -190,10 +190,10 @@ is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
 ### The groupoid of main classes of Latin hypercubes of finite order is π₁-finite
 
 ```agda
-is-π-finite-Main-Class-Latin-Hypercube-of-Order :
-  (n m : ℕ) → is-π-finite 1 (Main-Class-Latin-Hypercube-of-Order n m)
-is-π-finite-Main-Class-Latin-Hypercube-of-Order n m =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Main-Class-Latin-Hypercube-of-Order :
+  (n m : ℕ) → is-truncated-π-finite 1 (Main-Class-Latin-Hypercube-of-Order n m)
+is-truncated-π-finite-Main-Class-Latin-Hypercube-of-Order n m =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Main-Class-Latin-Hypercube-of-Order n m)
     ( is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order 1 n m)
 ```
