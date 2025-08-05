@@ -7,18 +7,24 @@ module lists.universal-property-lists-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-binary-homotopies-binary-functions
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.transport-along-identifications-dependent-functions
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
+open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.transport-along-identifications
 
 open import group-theory.homomorphisms-semigroups
 
@@ -339,12 +345,65 @@ module _
   map-inv-elim-list-Wild-Monoid f x =
     map-hom-Wild-Monoid (list-Wild-Monoid X) M f (cons x nil)
 
+  htpy-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    pr1 (pr1 ((elim-list-Wild-Monoid M ∘ (λ g x → pr1 (pr1 g) (cons x nil))) f))
+    ~ map-hom-Wild-Monoid _ _ f
+  htpy-elim-list-Wild-Monoid ((f , pt-f) , _) nil =
+    inv pt-f
+  htpy-elim-list-Wild-Monoid f (cons x y) =
+    ap-binary (mul-Wild-Monoid M) refl (htpy-elim-list-Wild-Monoid f y) ∙
+    inv (preserves-mul-hom-Wild-Monoid (list-Wild-Monoid X) M f)
+
+  dependent-identification-mul-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    pr1 (tr (preserves-unital-mul-pointed-map-H-Space (list-H-Space X) (pr1 M))
+      (eq-pointed-htpy
+        ((λ x →
+          map-elim-list-Wild-Monoid M
+            (λ x₁ → pr1 (pr1 f) (cons x₁ nil)) x) , refl)
+        ((λ x → pr1 (pr1 f) x) , pr2 (pr1 f))
+        (htpy-elim-list-Wild-Monoid f , inv (left-inv (pr2 (pr1 f)))))
+      (pr2 (elim-list-Wild-Monoid M (λ x → pr1 (pr1 f) (cons x nil))))) ＝
+    preserves-mul-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-mul-elim-list-Wild-Monoid ((f , pt-f) , mul-f , _) =
+    {!   !} -- this should fill with eq-binary-htpy as mul-f is a binary function but the type checker is unhappy with that...
+
+  dependent-identification-left-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-left-unit-law-mul-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-left-unit-law-elim-list-Wild-Monoid f = {!   !}
+
+  dependent-identification-right-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-right-unit-law-mul-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-right-unit-law-elim-list-Wild-Monoid f = {!   !}
+
+  dependent-identification-coh-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-coh-unit-laws-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-coh-unit-law-elim-list-Wild-Monoid f = {!   !}
+
   is-equiv-elim-list-Wild-Monoid : is-equiv (elim-list-Wild-Monoid M)
   pr1 (pr1 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
-  pr2 (pr1 is-equiv-elim-list-Wild-Monoid) f = {!   !}
+  pr2 (pr1 is-equiv-elim-list-Wild-Monoid) f =
+    eq-pair-Σ
+    ( eq-pointed-htpy _ _
+      ( htpy-elim-list-Wild-Monoid f ,
+      inv (left-inv
+        ( preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M f))))
+    ( eq-pair-Σ {! dependent-identification-mul-elim-list-Wild-Monoid f !} -- this should fill with dependent-identification-mul-elim-list-Wild-Monoid f but the type checker is unhappy with that too?
+      ( eq-pair-Σ
+      {!   !}
+        (eq-pair-Σ
+        {!   !}
+        {!   !})))
   pr1 (pr2 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
-  pr2 (pr2 is-equiv-elim-list-Wild-Monoid) x =
-    eq-htpy (λ y → pr1 (pr2 (pr2 (pr2 (pr1 M)))) (x y))
+  pr2 (pr2 is-equiv-elim-list-Wild-Monoid) f =
+    eq-htpy (λ x → pr1 (pr2 (pr2 (pr2 (pr1 M)))) (f x))
 
   equiv-elim-list-Wild-Monoid :
     (X → type-Wild-Monoid M) ≃ hom-Wild-Monoid (list-Wild-Monoid X) M
