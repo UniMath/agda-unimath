@@ -22,6 +22,9 @@ A binary operation `f : A → B → C` is said to be a binary equivalence if the
 functions `λ x → f x b` and `λ y → f a y` are equivalences for each `a : A` and
 `b : B` respectively.
 
+In [`equivalences`](foundation.equivalences.md), we show that being a binary
+equivalence is a [property](foundation-core.propositions.md).
+
 ## Definitions
 
 ```agda

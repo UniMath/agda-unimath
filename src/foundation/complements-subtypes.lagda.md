@@ -9,6 +9,8 @@ module foundation.complements-subtypes where
 ```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
 open import foundation.full-subtypes
 open import foundation.negation
@@ -18,6 +20,8 @@ open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
+open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.subtypes
 
@@ -92,4 +96,18 @@ module _
     B ⊆ C →
     complement-subtype C ⊆ complement-subtype B
   reverses-order-complement-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
+```
+
+### The complement of a [decidable subtype](foundation.decidable-subtypes.md) is decidable
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  is-decidable-complement-subtype :
+    is-decidable-subtype (complement-subtype (subtype-decidable-subtype P))
+  is-decidable-complement-subtype x with is-decidable-Decidable-Prop (P x)
+  ... | inl p = inr (λ z → z p)
+  ... | inr p = inl p
 ```
