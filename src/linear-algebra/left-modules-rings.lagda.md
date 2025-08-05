@@ -57,8 +57,6 @@ which also imply
    r(-x) = -(rx)
 ```
 
-// ldma rdma lulm am
-
 Equivalently, a left module `M` over a ring `R` consists of an abelian group `M`
 equipped with a ring homomorphism `R → endomorphism-ring-Ab M`.
 
@@ -461,12 +459,8 @@ make-left-module-Ring :
   left-module-Ring l2 R
 make-left-module-Ring R A _×_ ldma rdma lulm am =
   ( A ,
-    ( ( λ r → ( r ×_ , λ {a} {b} → ldma r a b)) ,
-      λ {r} {s} → eq-preserves-mul (eq-htpy (rdma r s))) ,
-    ( λ {r} {s} → eq-preserves-mul (eq-htpy (am r s))) ,
-    eq-preserves-mul (eq-htpy lulm))
-    where
-      eq-preserves-mul =
-        eq-type-subtype
-          ( preserves-mul-prop-Semigroup (semigroup-Ab A) (semigroup-Ab A))
+    ( ( λ r → ( r ×_ , ldma r _ _)) ,
+      ( eq-htpy-hom-Ab A A (rdma _ _))) ,
+    ( eq-htpy-hom-Ab A A (am _ _)) ,
+    ( eq-htpy-hom-Ab A A lulm))
 ```
