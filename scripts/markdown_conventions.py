@@ -105,10 +105,16 @@ if __name__ == '__main__':
     STATUS_EMPTY_SECTION = 4
     STATUS_UNCLOSED_BACKTICK = 8
     STATUS_INVALID_HEADING = 16
+    STATUS_NONASCII_NAME = 32
 
     status = 0
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
+        if not fpath.name.isascii():
+            print(
+                f"Error! File '{fpath}' has a name consisting of non-ASCII characters.")
+            status |= STATUS_NONASCII_NAME
+
         with open(fpath, 'r') as f:
             inputText = f.read()
 
