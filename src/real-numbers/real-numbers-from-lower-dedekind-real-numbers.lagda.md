@@ -45,7 +45,7 @@ we can convert `x` to a
 [complement](foundation.complements-subtypes.md) of the cut of `x` is
 [inhabited](foundation.inhabited-subtypes.md) and for any `p q : ℚ` with
 `p < q`, `p` is in the cut of `x` [or](foundation.disjunction.md) `q` is in the
-[complement](foundation.inhabited-subtypes.md) of the cut of `x`.
+[complement](foundation.complements-subtypes.md) of the cut of `x`.
 
 ## Definition
 
@@ -144,3 +144,7 @@ module _
       ( is-disjoint-cut-real-lower-ℝ)
       ( is-located-cut-real-lower-ℝ)
 ```
+
+## See also
+
+- [Real numbers from upper Dedekind real numbers](real-numbers.real-numbers-from-upper-dedekind-real-numbers.md)

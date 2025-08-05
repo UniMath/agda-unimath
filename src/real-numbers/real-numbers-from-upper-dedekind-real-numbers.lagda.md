@@ -44,8 +44,8 @@ we can convert `x` to a
 [Dedekind real number](real-numbers.dedekind-real-numbers.md) if and only if the
 [complement](foundation.complements-subtypes.md) of the cut of `x` is
 [inhabited](foundation.inhabited-subtypes.md) and for any `p q : ℚ` with
-`p < q`, `p` is in the [complement](foundation.inhabited-subtypes.md) of the cut
-of `x` [or](foundation.disjunction.md) `q` is in the cut of `x`.
+`p < q`, `p` is in the [complement](foundation.complements-subtypes.md) of the
+cut of `x` [or](foundation.disjunction.md) `q` is in the cut of `x`.
 
 ## Definition
 
@@ -137,3 +137,7 @@ module _
       ( is-disjoint-cut-real-upper-ℝ)
       ( is-located-cut-real-upper-ℝ)
 ```
+
+## See also
+
+- [Real numbers from lower Dedekind real numbers](real-numbers.real-numbers-from-lower-dedekind-real-numbers.md)
