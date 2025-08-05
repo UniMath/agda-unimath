@@ -265,3 +265,17 @@ abstract
 is-univalent-type-Set : {l : Level} → is-univalent (type-Set {l})
 is-univalent-type-Set = is-univalent-inclusion-subuniverse is-set-Prop
 ```
+
+### The subtype of of preimages of an element of a Set
+
+```agda
+preimage-Set :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) → (A → type-Set B) → type-Set B →
+  subtype l2 A
+preimage-Set B f b a = Id-Prop B (f a) b
+
+is-in-preimage-Set :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) → (A → type-Set B) → type-Set B →
+  A → UU l2
+is-in-preimage-Set B f b a = type-Prop (preimage-Set B f b a)
+```
