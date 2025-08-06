@@ -132,7 +132,7 @@ module _
             coherence-triangle-maps (pr2 (x j) i) (y i) (tr (B i {j}) p)}
           ( is-torsorial-Id (pr1 (x j)))
           ( pr1 (x j) , refl)
-          (is-torsorial-binary-htpy (pr2 (x j))))
+          ( is-torsorial-binary-htpy (pr2 (x j))))
 
   is-equiv-Eq-eq-type-polynomial-functor :
     (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
