@@ -365,8 +365,8 @@ module _
     {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
     (f : (i : I) → X i → Y i) (k : K) →
     ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k) ~
-    ( map-compute-type-comp-polynomial-functor Y k) ∘
-    ( map-polynomial-functor comp-polynomial-functor f k) ∘
-    ( map-inv-compute-type-comp-polynomial-functor X k)
+    ( map-compute-type-comp-polynomial-functor Y k ∘
+      map-polynomial-functor comp-polynomial-functor f k ∘
+      map-inv-compute-type-comp-polynomial-functor X k)
   compute-map-comp-polynomial-functor' f k x = refl
 ```
