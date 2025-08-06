@@ -372,3 +372,15 @@ module _
       map-inv-compute-type-comp-polynomial-functor X k)
   compute-map-comp-polynomial-functor' f k x = refl
 ```
+
+## References
+
+Multivariable polynomial functors over locally cartesian closed categories are
+considered in {{#cite GK12}}.
+
+{{#bibliography}}
+
+## External links
+
+- [_Multivariate containers_](https://git.app.uib.no/hott/containers/-/blob/main/src/containers/multivariate.agda)
+  by [Elisabeth Stenholm](https://elisabeth.stenholm.one), Agda formalization
