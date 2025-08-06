@@ -119,28 +119,30 @@ module _
   Eq-eq-type-polynomial-functor x .x refl =
     refl-Eq-type-polynomial-functor x
 
-  is-torsorial-Eq-type-polynomial-functor :
-    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
-    is-torsorial (Eq-type-polynomial-functor x)
-  is-torsorial-Eq-type-polynomial-functor x =
-    is-torsorial-Eq-Π
-      ( λ j →
-        is-torsorial-Eq-structure
-          { D =
-            λ a y p →
-            (i : I) →
-            coherence-triangle-maps (pr2 (x j) i) (y i) (tr (B i {j}) p)}
-          ( is-torsorial-Id (pr1 (x j)))
-          ( pr1 (x j) , refl)
-          ( is-torsorial-binary-htpy (pr2 (x j))))
+  abstract
+    is-torsorial-Eq-type-polynomial-functor :
+      (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+      is-torsorial (Eq-type-polynomial-functor x)
+    is-torsorial-Eq-type-polynomial-functor x =
+      is-torsorial-Eq-Π
+        ( λ j →
+          is-torsorial-Eq-structure
+            { D =
+              λ a y p →
+              (i : I) →
+              coherence-triangle-maps (pr2 (x j) i) (y i) (tr (B i {j}) p)}
+            ( is-torsorial-Id (pr1 (x j)))
+            ( pr1 (x j) , refl)
+            ( is-torsorial-binary-htpy (pr2 (x j))))
 
-  is-equiv-Eq-eq-type-polynomial-functor :
-    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
-    is-equiv (Eq-eq-type-polynomial-functor x y)
-  is-equiv-Eq-eq-type-polynomial-functor x =
-    fundamental-theorem-id
-      ( is-torsorial-Eq-type-polynomial-functor x)
-      ( Eq-eq-type-polynomial-functor x)
+  abstract
+    is-equiv-Eq-eq-type-polynomial-functor :
+      (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+      is-equiv (Eq-eq-type-polynomial-functor x y)
+    is-equiv-Eq-eq-type-polynomial-functor x =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-type-polynomial-functor x)
+        ( Eq-eq-type-polynomial-functor x)
 
   eq-Eq-type-polynomial-functor :
     (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
