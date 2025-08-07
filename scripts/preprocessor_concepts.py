@@ -155,12 +155,11 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         if agda_id is not None:
             destination = f'{url_path}#{agda_id}'
             index_entry['definition'] = destination
-        else:
+        elif not config.get('skip-agda', False):
             eprint('Warning: Concept definition not found:',
                    plaintext, '; expected', agda_name, 'to exist in',
                    path)
-            if not config.get('skip-agda', False):
-                mut_error_locations.add(path)
+            mut_error_locations.add(path)
     anchor += f'<a id="{target_id}" class="concept"></a>'
     index_entry['link'] = f'{url_path}#{target_id}'
     # For now the link is the best thing we have as an identifier
