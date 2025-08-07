@@ -132,6 +132,10 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     has_wikidata_id = wikidata_id is not None and wikidata_id != 'NA'
     has_wikidata_label = wikidata_label is not None
 
+    if text.find('$') >= 0:
+        eprint('Warning: LaTeX fragments are not supported in concept tags:', text)
+        mut_error_locations.add(path)
+
     if has_wikidata_id:
         index_entry['wikidata'] = wikidata_id
         target_id = wikidata_id

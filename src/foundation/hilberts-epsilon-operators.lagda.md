@@ -19,7 +19,7 @@ open import foundation-core.function-types
 
 ## Idea
 
-{{#concept "Hilbert's $ε$-operator"}} at a type `A` is a map
+{{#concept "Hilbert's ε-operator"}} at a type `A` is a map
 
 ```text
   ε : ║A║₋₁ → A
