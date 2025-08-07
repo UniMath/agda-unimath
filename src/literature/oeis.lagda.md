@@ -22,7 +22,7 @@ open import foundation.function-types
 
 ### The number of groups of order `n`
 
-[A000001](https://oeis.org/A000001)
+OEIS: [A000001](https://oeis.org/A000001)
 
 ```agda
 open import finite-group-theory.finite-groups using
@@ -31,7 +31,7 @@ open import finite-group-theory.finite-groups using
 
 ### The Kolakoski sequence
 
-[A000002](https://oeis.org/A000002)
+OEIS: [A000002](https://oeis.org/A000002)
 
 ```agda
 open import elementary-number-theory.kolakoski-sequence using
@@ -40,7 +40,7 @@ open import elementary-number-theory.kolakoski-sequence using
 
 ### The zero sequence
 
-[A000004](https://oeis.org/A000004)
+OEIS: [A000004](https://oeis.org/A000004)
 
 ```agda
 A000004 : ℕ → ℕ
@@ -49,7 +49,7 @@ A000004 _ = zero-ℕ
 
 ### The characteristic function for 0
 
-[A000007](https://oeis.org/A000007)
+OEIS: [A000007](https://oeis.org/A000007)
 
 ```agda
 A000007 : ℕ → ℕ
@@ -59,7 +59,7 @@ A000007 (succ-ℕ _) = 0
 
 ### Euler's totient function
 
-[A000010](https://oeis.org/A000010)
+OEIS: [A000010](https://oeis.org/A000010)
 
 ```agda
 open import elementary-number-theory.eulers-totient-function using
@@ -68,7 +68,7 @@ open import elementary-number-theory.eulers-totient-function using
 
 ### All 1's sequence
 
-[A000012](https://oeis.org/A000012)
+OEIS: [A000012](https://oeis.org/A000012)
 
 ```agda
 A000012 : ℕ → ℕ
@@ -77,7 +77,7 @@ A000012 _ = 1
 
 ### The positive integers
 
-[A000027](https://oeis.org/A000027)
+OEIS: [A000027](https://oeis.org/A000027)
 
 ```agda
 A000027 : ℕ → ℕ
@@ -86,7 +86,7 @@ A000027 = succ-ℕ
 
 ### The prime numbers
 
-[A000040](https://oeis.org/A000040)
+OEIS: [A000040](https://oeis.org/A000040)
 
 ```agda
 open import elementary-number-theory.infinitude-of-primes using
@@ -95,7 +95,7 @@ open import elementary-number-theory.infinitude-of-primes using
 
 ### The Fibonacci sequence
 
-[A000045](https://oeis.org/A000045)
+OEIS: [A000045](https://oeis.org/A000045)
 
 ```agda
 open import elementary-number-theory.fibonacci-sequence using
@@ -104,7 +104,7 @@ open import elementary-number-theory.fibonacci-sequence using
 
 ### Sylvester's sequence
 
-[A000058](https://oeis.org/A000058)
+OEIS: [A000058](https://oeis.org/A000058)
 
 ```agda
 open import elementary-number-theory.sylvesters-sequence using
@@ -113,7 +113,7 @@ open import elementary-number-theory.sylvesters-sequence using
 
 ### Powers of `2`
 
-[A000079](https://oeis.org/A000079)
+OEIS: [A000079](https://oeis.org/A000079)
 
 ```agda
 A000079 : ℕ → ℕ
@@ -122,7 +122,7 @@ A000079 = exp-ℕ 2
 
 ### The Catalan numbers
 
-[A000108](https://oeis.org/A000108)
+OEIS: [A000108](https://oeis.org/A000108)
 
 ```agda
 open import elementary-number-theory.catalan-numbers using
@@ -131,7 +131,7 @@ open import elementary-number-theory.catalan-numbers using
 
 ### The Bell numbers
 
-[A000110](https://oeis.org/A000110)
+OEIS: [A000110](https://oeis.org/A000110)
 
 ```agda
 open import elementary-number-theory.bell-numbers using
@@ -140,7 +140,7 @@ open import elementary-number-theory.bell-numbers using
 
 ### Factorials
 
-[A000142](https://oeis.org/A000142)
+OEIS: [A000142](https://oeis.org/A000142)
 
 ```agda
 open import elementary-number-theory.factorials using
@@ -149,7 +149,7 @@ open import elementary-number-theory.factorials using
 
 ### The Fermat numbers
 
-[A000215](https://oeis.org/A000215)
+OEIS: [A000215](https://oeis.org/A000215)
 
 ```agda
 open import elementary-number-theory.fermat-numbers using
@@ -158,7 +158,7 @@ open import elementary-number-theory.fermat-numbers using
 
 ### Powers of `3`
 
-[A000244](https://oeis.org/A000244)
+OEIS: [A000244](https://oeis.org/A000244)
 
 ```agda
 A000244 : ℕ → ℕ
@@ -167,7 +167,7 @@ A000244 = exp-ℕ 3
 
 ### The prime counting function
 
-[A000720](https://oeis.org/A000720)
+OEIS: [A000720](https://oeis.org/A000720)
 
 ```agda
 open import elementary-number-theory.infinitude-of-primes using
@@ -176,7 +176,7 @@ open import elementary-number-theory.infinitude-of-primes using
 
 ### The Euclid–Mullin sequence
 
-[A000945](https://oeis.org/A000945)
+OEIS: [A000945](https://oeis.org/A000945)
 
 ```agda
 open import elementary-number-theory.euclid-mullin-sequence using
@@ -185,7 +185,7 @@ open import elementary-number-theory.euclid-mullin-sequence using
 
 ### Pisano periods
 
-[A001175](https://oeis.org/A001175)
+OEIS: [A001175](https://oeis.org/A001175)
 
 ```agda
 open import elementary-number-theory.pisano-periods using
@@ -194,7 +194,7 @@ open import elementary-number-theory.pisano-periods using
 
 ### The cofibonacci sequence
 
-[A001177](https://oeis.org/A001177)
+OEIS: [A001177](https://oeis.org/A001177)
 
 ```agda
 open import elementary-number-theory.cofibonacci using
@@ -203,7 +203,7 @@ open import elementary-number-theory.cofibonacci using
 
 ### The natural numbers
 
-[A001477](https://oeis.org/A001477)
+OEIS: [A001477](https://oeis.org/A001477)
 
 ```agda
 A001477 : ℕ → ℕ
@@ -212,7 +212,7 @@ A001477 = id
 
 ### The number of main classes of Latin squares of order `n`
 
-[A003090](https://oeis.org/A003090)
+OEIS: [A003090](https://oeis.org/A003090)
 
 ```agda
 open import univalent-combinatorics.main-classes-of-latin-squares using
@@ -221,7 +221,7 @@ open import univalent-combinatorics.main-classes-of-latin-squares using
 
 ### Collatz' bijection
 
-[A006369](https://oeis.org/A006369)
+OEIS: [A006369](https://oeis.org/A006369)
 
 ```agda
 open import elementary-number-theory.collatz-bijection using
@@ -230,7 +230,7 @@ open import elementary-number-theory.collatz-bijection using
 
 ### The number of semigroups of order `n` up to isomorphism
 
-[A027851](https://oeis.org/A027851)
+OEIS: [A027851](https://oeis.org/A027851)
 
 ```agda
 open import finite-group-theory.finite-semigroups using
@@ -239,7 +239,7 @@ open import finite-group-theory.finite-semigroups using
 
 ### The main diagonal of the Ackermann–Péter function
 
-[A046859](https://oeis.org/A046859)
+OEIS: [A046859](https://oeis.org/A046859)
 
 ```agda
 open import elementary-number-theory.ackermann-function using
@@ -248,7 +248,7 @@ open import elementary-number-theory.ackermann-function using
 
 ### The number of monoids of order `n` up to isomorphism
 
-[A058129](https://oeis.org/A058129)
+OEIS: [A058129](https://oeis.org/A058129)
 
 ```agda
 open import finite-group-theory.finite-monoids using
