@@ -34,7 +34,7 @@ open import linear-algebra.right-modules-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.opposite-rings
-open import ring-theory.rational-extensions-rings
+open import ring-theory.ring-extensions-rational-numbers
 open import ring-theory.rings
 ```
 

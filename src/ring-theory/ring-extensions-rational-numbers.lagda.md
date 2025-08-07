@@ -1,9 +1,9 @@
-# Ring extension of the rational numbers
+# Ring extensions of the rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module ring-theory.rational-extensions-rings where
+module ring-theory.ring-extensions-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -80,10 +80,6 @@ The unique ring homomorphism from `ℚ` to a ring extension of `ℚ` is given by
 `(p/q : ℚ) ↦ (ι p)(ι q)⁻¹` where `ι : ℤ → R` is the
 [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
 `R`.
-
-As a corollary, `ℚ` is the [localization](ring-theory.localizations-rings.md) of
-`ℤ` at `ℤ⁺`: any ring homomorphism `ℤ → R` that inverts the positive integers
-extends to a ring homomorphism `ℚ → R`.
 
 ## Definitions
 
@@ -182,7 +178,7 @@ module _
       ( is-rational-extension-ring-Rational-Extension-Ring k k>0)
 ```
 
-### Homorphisms of rational rings
+### Homorphisms of ring extensions of `ℚ`
 
 ```agda
 module _
@@ -207,7 +203,7 @@ module _
       ( ring-Rational-Extension-Ring B)
 ```
 
-### The initial ring homomorphism into a rational ring
+### The initial ring homomorphism into a ring extension of `ℚ`
 
 ```agda
 module _
@@ -225,7 +221,7 @@ module _
     map-initial-hom-Ring (ring-Rational-Extension-Ring R)
 ```
 
-### Fractional extension of the initial ring homomorphism into a rational ring
+### Fractional extension of the initial ring homomorphism into a ring extension of `ℚ`
 
 It is defined as `φ : (p/q : fraction-ℤ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where
 `ι : ℤ → R` is the initial ring homomorphism.
@@ -304,7 +300,7 @@ module _
         ( pr))
 ```
 
-### Rational extension of the initial ring homomorphism into a rational ring
+### Rational extension of the initial ring homomorphism into a ring extension of `ℚ`
 
 It is defined as `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where `ι : ℤ → R`
 is the initial ring homomorphism.
@@ -329,7 +325,7 @@ module _
     htpy-map-initial-hom-fraction-Rational-Extension-Ring' R (fraction-ℚ x)
 ```
 
-### The type of rational homomorphisms into a rational ring
+### The type of rational homomorphisms into a ring extension of `ℚ`
 
 ```agda
 module _
@@ -348,7 +344,7 @@ module _
 
 ## Properties
 
-### A ring is rational if and only if its opposite ring is rational
+### A ring is an extension of `ℚ` if and only if its opposite ring is
 
 ```agda
 module _
@@ -390,7 +386,7 @@ module _
       ( is-rational-extension-ring-Rational-Extension-Ring R))
 ```
 
-### The product of rational rings is rational
+### The product of ring extensions of `ℚ` is a ring extension of `ℚ`
 
 ```agda
 module _
@@ -444,7 +440,7 @@ module _
     ( is-rational-extension-ring-Π-Rational-Extension-Ring)
 ```
 
-### The inverse of the image of one in a rational ring is one
+### The inverse of the image of one in a ring extension of `ℚ` is one
 
 ```agda
 module _
@@ -470,7 +466,7 @@ module _
         ( right-inverse-law-positive-integer-Rational-Extension-Ring R one-ℤ⁺))
 ```
 
-### The inverse of a product of positive integers in a rational ring is the product of their inverses
+### The inverse of a product of positive integers in a ring extension of `ℚ` is the product of their inverses
 
 ```agda
 module _
@@ -573,7 +569,7 @@ module _
       ( right-inverse-law-positive-integer-Rational-Extension-Ring R q)
 ```
 
-### A ring `R` that admits a ring homomorphism `ℚ → R` is rational
+### A ring `R` that admits a ring homomorphism `ℚ → R` is a ring extension of `ℚ`
 
 ```agda
 module _
@@ -639,7 +635,7 @@ module _
     htpy-map-integer-rational-hom-Ring (ring-Rational-Extension-Ring R) f
 ```
 
-### A ring homomorphism `ℚ → R` preserves reciprocals of positive integers
+### Any ring homomorphism `ℚ → R` preserves reciprocals of positive integers
 
 ```agda
 module _
@@ -753,7 +749,7 @@ module _
       ( f)
 ```
 
-### All ring homomorphisms `ℚ → R` into a rational ring are equal
+### All ring homomorphisms `ℚ → R` into a ring extension of `ℚ` are equal
 
 ```agda
 module _
@@ -815,21 +811,6 @@ module _
   has-rational-hom-prop-Ring : Prop l
   has-rational-hom-prop-Ring =
     hom-Ring ring-ℚ R , is-prop-has-rational-hom-Ring
-```
-
-### `ℚ` is a rational extension of itself
-
-```agda
-rational-extension-ring-ℚ : Rational-Extension-Ring lzero
-rational-extension-ring-ℚ =
-  ( ring-ℚ) ,
-  ( inv-tr
-    ( inverts-subset-hom-Ring
-      ( ℤ-Ring)
-      ( ring-ℚ)
-      ( subtype-positive-ℤ))
-      ( eq-initial-hom-ring-rational-ℤ)
-      ( inverts-positive-integers-rational-ℤ))
 ```
 
 ### The fractional initial map into a ring extension of `ℚ` extends the initial ring homomorphism
@@ -1436,20 +1417,6 @@ module _
     is-prop-is-contr is-contr-rational-hom-Rational-Extension-Ring
 ```
 
-### The ring of rational numbers is the initial ring extension of `ℚ`
-
-```agda
-module _
-  {l : Level}
-  where
-
-  is-initial-rational-ring-ℚ :
-    (R : Rational-Extension-Ring l) →
-    is-contr (hom-Rational-Extension-Ring rational-extension-ring-ℚ R)
-  is-initial-rational-ring-ℚ R =
-    is-contr-rational-hom-Rational-Extension-Ring R
-```
-
 ### A ring `R` is a ring extension of `ℚ` if and only if there exists a ring homomorphism `ℚ → R`
 
 ```agda
@@ -1481,35 +1448,4 @@ module _
   iff-is-rational-extension-is-contr-rational-hom-Ring =
     ( is-rational-extension-has-rational-hom-Ring R ∘ center) ,
     ( is-contr-rational-hom-Rational-Extension-Ring ∘ pair R)
-```
-
-### The ring of rational numbers is the localization of the ring of integers at `ℤ⁺`
-
-```agda
-module _
-  {l : Level}
-  where
-
-  universal-property-localization-positive-integers-rational-Ring :
-    universal-property-localization-subset-Ring
-      ( l)
-      ( ℤ-Ring)
-      ( ring-ℚ)
-      ( subtype-positive-ℤ)
-      ( initial-hom-Ring ring-ℚ)
-      ( is-rational-extension-ring-Rational-Extension-Ring
-        rational-extension-ring-ℚ)
-  universal-property-localization-positive-integers-rational-Ring T =
-    is-equiv-has-converse-is-prop
-      ( is-prop-has-rational-hom-Ring T)
-      ( is-prop-type-subtype
-        ( inverts-subset-prop-hom-Ring ℤ-Ring T subtype-positive-ℤ)
-        ( is-prop-is-contr (is-initial-ℤ-Ring T)))
-      ( λ (f , H) →
-        initial-hom-Rational-Extension-Ring
-          ( ( T) ,
-            ( inv-tr
-              ( inverts-subset-hom-Ring ℤ-Ring T subtype-positive-ℤ)
-              ( contraction-initial-hom-Ring T f)
-              ( H))))
 ```

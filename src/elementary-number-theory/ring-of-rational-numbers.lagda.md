@@ -130,3 +130,11 @@ module _
         ( f)
         ( inverts-positive-integers-rational-ℤ k k>0)
 ```
+
+## See also
+
+- [ring-extension-rational-numbers-of-rational-numbers](elementary-number-theory.ring-extension-rational-numbers-of-rational-numbers.md):
+  the trivial
+  [ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.md) where
+  it is proven that `ℚ` is the
+  [localization](ring-theory.localizations-rings.md) of `ℤ` at `ℤ⁺`.
