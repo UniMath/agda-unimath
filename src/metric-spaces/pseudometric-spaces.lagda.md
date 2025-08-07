@@ -23,7 +23,6 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications

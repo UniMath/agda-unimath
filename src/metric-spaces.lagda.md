@@ -62,9 +62,11 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.extensional-pseudometric-spaces public
 open import metric-spaces.functions-metric-spaces public
+open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
+open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.limits-of-functions-metric-spaces public
