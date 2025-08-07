@@ -48,9 +48,10 @@ A {{#concept "rational module" Agda=Rational-Module}} is an
 [propositions](foundation.propositions.md) holds:
 
 - its [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md)
-  is [a ring extension of `ℚ`](ring-theory.rational-extensions-rings.md), i.e.,
-  the [initial ring homomorphism](elementary-number-theory.ring-of-integers.md)
-  in its ring of endomorphisms [inverts](ring-theory.localizations-rings.md) the
+  is [a ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.md),
+  i.e., the
+  [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
+  its ring of endomorphisms [inverts](ring-theory.localizations-rings.md) the
   [positive integers](elementary-number-theory.positive-integers.md);
 - it is a [left module](linear-algebra.left-modules-rings.md) over the
   [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md);
