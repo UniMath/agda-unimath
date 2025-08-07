@@ -244,7 +244,9 @@ module _
             ( h X x y)))
 ```
 
-### A map is `k`-acyclic if and only if it is an dependent `k`-epimorphism
+### A map is `k`-acyclic if and only if it is a dependent `k`-epimorphism { #a-map-is-k-acyclic-if-and-only-if-it-is-an-dependent-k-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The proof is similar to that of dependent epimorphisms and
 [acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).

@@ -222,7 +222,9 @@ module _
             ( h x y)))
 ```
 
-### A map is acyclic if and only if it is an dependent epimorphism
+### A map is acyclic if and only if it is a dependent epimorphism { #a-map-is-acyclic-if-and-only-if-it-is-an-dependent-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The following diagram is a helpful illustration in the second proof:
 
