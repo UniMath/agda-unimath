@@ -64,3 +64,7 @@ has-structure-equiv' :
   {l1 l2 : Level} (𝒫 : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → 𝒫 Y → 𝒫 X
 has-structure-equiv' 𝒫 e = tr 𝒫 (inv (eq-equiv e))
 ```
+
+## See also
+
+- [Species of types](species.species-of-types.md)
