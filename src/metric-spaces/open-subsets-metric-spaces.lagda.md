@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.unions-subtypes
 open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -170,4 +171,41 @@ module _
                 ( εT)
                 ( leq-right-min-ℚ⁺ εS εT)
                 ( y∈Nεminx))))
+```
+
+### Unions of a family of open subsets are open
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) {I : UU l3}
+  (F : I → open-subset-Metric-Space l4 X)
+  where
+
+  subset-union-family-open-subset-Metric-Space : subset-Metric-Space (l3 ⊔ l4) X
+  subset-union-family-open-subset-Metric-Space =
+    union-family-of-subtypes (λ i → subset-open-subset-Metric-Space X (F i))
+
+  abstract
+    is-open-subset-union-family-open-subset-Metric-Space :
+      is-open-subset-Metric-Space
+        ( X)
+        ( subset-union-family-open-subset-Metric-Space)
+    is-open-subset-union-family-open-subset-Metric-Space x x∈union =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( interior-subset-Metric-Space
+              ( X)
+              ( subset-union-family-open-subset-Metric-Space)
+              ( x))
+      in do
+        (i , x∈Fi) ← x∈union
+        (ε , Nεx⊆Fi) ← is-open-subset-open-subset-Metric-Space X (F i) x x∈Fi
+        intro-exists ε (λ y y∈Nεx → intro-exists i (Nεx⊆Fi y y∈Nεx))
+
+  union-family-open-subset-Metric-Space :
+    open-subset-Metric-Space (l3 ⊔ l4) X
+  union-family-open-subset-Metric-Space =
+    ( subset-union-family-open-subset-Metric-Space ,
+      is-open-subset-union-family-open-subset-Metric-Space)
 ```

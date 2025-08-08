@@ -155,3 +155,7 @@ module _
     ( subset-intersection-family-closed-subset-Metric-Space ,
       is-closed-subset-intersection-family-closed-subset-Metric-Space)
 ```
+
+### If the union of two closed sets is closed, then LLPO
+
+This has yet to be formalized.
