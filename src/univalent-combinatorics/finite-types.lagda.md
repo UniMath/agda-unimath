@@ -52,7 +52,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type is
-{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404}}
+{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404 Agda=is-finite}}
 if it is [merely equivalent](foundation.mere-equivalences.md) to a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
@@ -593,6 +593,10 @@ is-decidable-type-trunc-Prop-is-finite H =
     ( map-universal-property-trunc-Prop empty-Prop)
       ( is-inhabited-or-empty-is-finite H)
 ```
+
+### If `X` is finite, then it has decidable equality
+
+TO DO BEFORE SUBMIT
 
 ### If a type is finite, then its propositional truncation is finite
 
