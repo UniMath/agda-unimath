@@ -155,9 +155,9 @@ module _
     ( symmetric-sim-Pseudometric-Space A) ,
     ( transitive-sim-Pseudometric-Space A)
 
-  equivalence-sim-Pseudometric-Space :
+  equivalence-relation-sim-Pseudometric-Space :
     equivalence-relation l2 (type-Pseudometric-Space A)
-  equivalence-sim-Pseudometric-Space =
+  equivalence-relation-sim-Pseudometric-Space =
     ( sim-prop-Pseudometric-Space A) ,
     ( is-equivalence-relation-sim-Pseudometric-Space)
 ```

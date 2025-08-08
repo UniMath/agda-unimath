@@ -316,10 +316,10 @@ module _
   transitive-sim-Metric-Space =
     transitive-sim-Pseudometric-Space (pseudometric-Metric-Space A)
 
-  equivalence-sim-Metric-Space :
+  equivalence-relation-sim-Metric-Space :
     equivalence-relation l2 (type-Metric-Space A)
-  equivalence-sim-Metric-Space =
-    equivalence-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+  equivalence-relation-sim-Metric-Space =
+    equivalence-relation-sim-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
 ## Properties
