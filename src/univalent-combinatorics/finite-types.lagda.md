@@ -15,8 +15,6 @@ open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.connected-components-universes
 open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -42,12 +40,10 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
 open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -56,7 +52,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type is
-{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404 Agda=is-finite}}
+{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404}}
 if it is [merely equivalent](foundation.mere-equivalences.md) to a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
