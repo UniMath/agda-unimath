@@ -33,6 +33,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
 open import univalent-combinatorics.coproduct-types
@@ -347,6 +348,18 @@ module _
                 ( f)
           ＝ sum-finite-Commutative-Monoid M B (f ∘ map-inv-equiv H)
             by inv (eq-sum-finite-sum-count-Commutative-Monoid M B cB _)
+
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  (H : aut-Finite-Type A)
+  where
+
+  sum-equiv-aut-Commutative-Monoid :
+    (f : type-Finite-Type A → type-Commutative-Monoid M) →
+    sum-finite-Commutative-Monoid M A f ＝
+    sum-finite-Commutative-Monoid M A (f ∘ map-inv-equiv H)
+  sum-equiv-aut-Commutative-Monoid =
+    sum-equiv-finite-Commutative-Monoid M A A H
 ```
 
 #### Sums over finite types distribute over coproducts
@@ -674,4 +687,40 @@ module _
               ( count-unit)
               ( f)
         ＝ f star by compute-sum-one-element-Commutative-Monoid M _
+```
+
+### Sums of constant functions
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  where
+
+  sum-const-finite-type-Commutative-Monoid :
+    (c : type-Commutative-Monoid M) →
+    sum-finite-Commutative-Monoid M A (λ _ → c) ＝
+    power-Commutative-Monoid M (number-of-elements-Finite-Type A) c
+  sum-const-finite-type-Commutative-Monoid c =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( Id-Prop
+            ( set-Commutative-Monoid M)
+            ( sum-finite-Commutative-Monoid M A (λ _ → c))
+            ( power-Commutative-Monoid M (number-of-elements-Finite-Type A) c))
+    in do
+      cA ← is-finite-type-Finite-Type A
+      equational-reasoning
+        sum-finite-Commutative-Monoid M A (λ _ → c)
+        ＝ sum-count-Commutative-Monoid M (type-Finite-Type A) cA (λ _ → c)
+          by eq-sum-finite-sum-count-Commutative-Monoid M A cA _
+        ＝ power-Commutative-Monoid M (number-of-elements-count cA) c
+          by sum-const-sequence-type-Commutative-Monoid M _ c
+        ＝ power-Commutative-Monoid M (number-of-elements-Finite-Type A) c
+          by
+            ap
+              ( λ n → power-Commutative-Monoid M n c)
+              ( compute-number-of-elements-is-finite
+                ( cA)
+                ( is-finite-type-Finite-Type A))
 ```

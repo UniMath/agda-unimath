@@ -615,6 +615,9 @@ equiv-Finite-Type :
   {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
 equiv-Finite-Type X Y = type-Finite-Type X ≃ type-Finite-Type Y
 
+aut-Finite-Type : {l : Level} → Finite-Type l → UU l
+aut-Finite-Type X = equiv-Finite-Type X X
+
 id-equiv-Finite-Type : {l : Level} (X : Finite-Type l) → equiv-Finite-Type X X
 id-equiv-Finite-Type X = id-equiv
 

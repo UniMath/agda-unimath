@@ -234,10 +234,24 @@ module _
     equiv-le-succ-ℕ-leq-ℕ n ∘e
     equiv-classical-standard-Fin-reverse (succ-ℕ n)
 
+  is-finite-type-binary-sum-decomposition-ℕ :
+    is-finite (binary-sum-decomposition-ℕ n)
+  is-finite-type-binary-sum-decomposition-ℕ =
+    is-finite-count count-binary-sum-decomposition-ℕ
+
   finite-type-binary-sum-decomposition-ℕ : Finite-Type lzero
   finite-type-binary-sum-decomposition-ℕ =
     ( binary-sum-decomposition-ℕ n ,
-      is-finite-count count-binary-sum-decomposition-ℕ)
+      is-finite-type-binary-sum-decomposition-ℕ)
+
+  number-of-elements-finite-type-binary-sum-decomposition-ℕ :
+    number-of-elements-Finite-Type finite-type-binary-sum-decomposition-ℕ ＝
+    succ-ℕ n
+  number-of-elements-finite-type-binary-sum-decomposition-ℕ =
+    inv
+      ( compute-number-of-elements-is-finite
+        ( count-binary-sum-decomposition-ℕ)
+        ( is-finite-type-binary-sum-decomposition-ℕ))
 ```
 
 ### Permuting components in a triple of sums

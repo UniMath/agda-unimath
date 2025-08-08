@@ -20,6 +20,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import group-theory.monoids
+open import group-theory.powers-of-elements-monoids
 
 open import linear-algebra.finite-sequences-in-monoids
 
@@ -202,4 +203,18 @@ split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
     ( mul-Monoid' M (f (inr star)))
     ( split-sum-fin-sequence-type-Monoid M n m (f ∘ inl))) ∙
   ( associative-mul-Monoid M _ _ _)
+```
+
+### The sum of a sequence of length `n` of a constant `c` is `n` times `c`
+
+```agda
+abstract
+  sum-const-sequence-type-Monoid :
+    {l : Level} (M : Monoid l) (n : ℕ) (c : type-Monoid M) →
+    sum-fin-sequence-type-Monoid M n (λ _ → c) ＝ power-Monoid M n c
+  sum-const-sequence-type-Monoid M 0 c = refl
+  sum-const-sequence-type-Monoid M 1 c =
+    compute-sum-one-element-Monoid M (λ _ → c)
+  sum-const-sequence-type-Monoid M (succ-ℕ (succ-ℕ n)) c =
+    ap-mul-Monoid M (sum-const-sequence-type-Monoid M (succ-ℕ n) c) refl
 ```
