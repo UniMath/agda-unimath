@@ -10,7 +10,10 @@ module metric-spaces.closed-subsets-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
@@ -50,6 +53,23 @@ module _
 
   is-closed-subset-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
   is-closed-subset-Metric-Space = type-Prop is-closed-prop-subset-Metric-Space
+
+closed-subset-Metric-Space :
+  {l1 l2 : Level} (l3 : Level) (X : Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+closed-subset-Metric-Space l3 X =
+  type-subtype (is-closed-prop-subset-Metric-Space {l3 = l3} X)
+
+module _
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2)
+  (S : closed-subset-Metric-Space l3 X)
+  where
+
+  subset-closed-subset-Metric-Space : subset-Metric-Space l3 X
+  subset-closed-subset-Metric-Space = pr1 S
+
+  is-closed-subset-closed-subset-Metric-Space :
+    is-closed-subset-Metric-Space X subset-closed-subset-Metric-Space
+  is-closed-subset-closed-subset-Metric-Space = pr2 S
 ```
 
 ## Properties
@@ -95,4 +115,43 @@ module _
         ( type-Prop ∘ S)
         ( is-discrete-metric-space-Discrete-Metric-Space X one-ℚ⁺ x y y∈N1x)
         ( y∈S)
+```
+
+### The intersection of a family of closed subsets is closed
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2)
+  {I : UU l3} (F : I → closed-subset-Metric-Space l4 X)
+  where
+
+  subset-intersection-family-closed-subset-Metric-Space :
+    subset-Metric-Space (l3 ⊔ l4) X
+  subset-intersection-family-closed-subset-Metric-Space =
+    intersection-family-of-subtypes
+      ( λ i → subset-closed-subset-Metric-Space X (F i))
+
+  abstract
+    is-closed-subset-intersection-family-closed-subset-Metric-Space :
+      is-closed-subset-Metric-Space
+        ( X)
+        ( subset-intersection-family-closed-subset-Metric-Space)
+    is-closed-subset-intersection-family-closed-subset-Metric-Space x x∈cl i =
+      is-closed-subset-closed-subset-Metric-Space X (F i) x
+        ( λ ε →
+          let
+            open
+              do-syntax-trunc-Prop
+                ( intersect-prop-subtype
+                  ( neighborhood-prop-Metric-Space X ε x)
+                  ( subset-closed-subset-Metric-Space X (F i)))
+          in do
+            (y , y∈Nεx , y∈F) ← x∈cl ε
+            intro-exists y (y∈Nεx , y∈F i))
+
+  intersection-family-closed-subset-Metric-Space :
+    closed-subset-Metric-Space (l3 ⊔ l4) X
+  intersection-family-closed-subset-Metric-Space =
+    ( subset-intersection-family-closed-subset-Metric-Space ,
+      is-closed-subset-intersection-family-closed-subset-Metric-Space)
 ```
