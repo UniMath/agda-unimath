@@ -10,6 +10,8 @@ module metric-spaces.closed-subsets-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.complements-subtypes
+open import foundation.empty-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -25,9 +27,11 @@ open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
+open import metric-spaces.open-subsets-metric-spaces
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.located-metric-spaces
 ```
 
 </details>
@@ -70,6 +74,31 @@ module _
   is-closed-subset-closed-subset-Metric-Space :
     is-closed-subset-Metric-Space X subset-closed-subset-Metric-Space
   is-closed-subset-closed-subset-Metric-Space = pr2 S
+```
+
+### Closed subsets of located metric spaces
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2) (S : subset-Located-Metric-Space l3 X)
+  where
+
+  is-closed-prop-subset-Located-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
+  is-closed-prop-subset-Located-Metric-Space =
+    is-closed-prop-subset-Metric-Space
+      ( metric-space-Located-Metric-Space X)
+      ( S)
+
+  is-closed-subset-Located-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
+  is-closed-subset-Located-Metric-Space =
+    type-Prop is-closed-prop-subset-Located-Metric-Space
+
+closed-subset-Located-Metric-Space :
+  {l1 l2 : Level} (l3 : Level)
+  (X : Located-Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+closed-subset-Located-Metric-Space l3 X =
+  closed-subset-Metric-Space l3 (metric-space-Located-Metric-Space X)
 ```
 
 ## Properties
@@ -159,3 +188,30 @@ module _
 ### If the union of two closed sets is closed, then LLPO
 
 This has yet to be formalized.
+
+### In a metric space, the complement of an open metric space is closed
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2)
+  (S : open-subset-Metric-Space l3 X)
+  where
+
+  subset-complement-open-subset-Metric-Space :
+    subset-Metric-Space l3 X
+  subset-complement-open-subset-Metric-Space =
+    complement-subtype (subset-open-subset-Metric-Space X S)
+
+  is-closed-subset-complement-open-subset-Metric-Space :
+    is-closed-subset-Metric-Space
+      ( X)
+      ( subset-complement-open-subset-Metric-Space)
+  is-closed-subset-complement-open-subset-Metric-Space x x∈cl-¬S x∈S =
+    let open do-syntax-trunc-Prop empty-Prop
+    in do
+      (ε , Nεx⊆S) ← is-open-subset-open-subset-Metric-Space X S x x∈S
+      (y , y∈Nεx , y∈¬S) ← x∈cl-¬S ε
+      y∈¬S (Nεx⊆S y y∈Nεx)
+```
+
+To prove: the converse implies a constructive taboo.

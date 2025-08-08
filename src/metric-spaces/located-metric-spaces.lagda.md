@@ -34,6 +34,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
@@ -81,6 +82,31 @@ module _
 
   is-located-Metric-Space : UU (l1 ⊔ l2)
   is-located-Metric-Space = type-Prop is-located-prop-Metric-Space
+
+Located-Metric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Located-Metric-Space l1 l2 =
+  type-subtype (is-located-prop-Metric-Space {l1} {l2})
+
+module _
+  {l1 l2 : Level} (X : Located-Metric-Space l1 l2)
+  where
+
+  metric-space-Located-Metric-Space : Metric-Space l1 l2
+  metric-space-Located-Metric-Space = pr1 X
+
+  type-Located-Metric-Space : UU l1
+  type-Located-Metric-Space =
+    type-Metric-Space metric-space-Located-Metric-Space
+
+  is-located-metric-space-Located-Metric-Space :
+    is-located-Metric-Space metric-space-Located-Metric-Space
+  is-located-metric-space-Located-Metric-Space = pr2 X
+
+subset-Located-Metric-Space :
+  {l1 l2 : Level} (l3 : Level) (X : Located-Metric-Space l1 l2) →
+  UU (l1 ⊔ lsuc l3)
+subset-Located-Metric-Space l3 X =
+  subset-Metric-Space l3 (metric-space-Located-Metric-Space X)
 ```
 
 ## Properties

@@ -27,6 +27,7 @@ open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.interior-subsets-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.located-metric-spaces
 ```
 
 </details>
@@ -46,17 +47,17 @@ module _
   {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (S : subset-Metric-Space l3 X)
   where
 
-  is-open-subset-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
-  is-open-subset-prop-Metric-Space =
+  is-open-prop-subset-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
+  is-open-prop-subset-Metric-Space =
     leq-prop-subtype S (interior-subset-Metric-Space X S)
 
   is-open-subset-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
-  is-open-subset-Metric-Space = type-Prop is-open-subset-prop-Metric-Space
+  is-open-subset-Metric-Space = type-Prop is-open-prop-subset-Metric-Space
 
 open-subset-Metric-Space :
   {l1 l2 : Level} (l3 : Level) (X : Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 open-subset-Metric-Space l3 X =
-  type-subtype (is-open-subset-prop-Metric-Space {l3 = l3} X)
+  type-subtype (is-open-prop-subset-Metric-Space {l3 = l3} X)
 
 module _
   {l1 l2 l3 : Level} (X : Metric-Space l1 l2)
@@ -70,6 +71,46 @@ module _
     (O : open-subset-Metric-Space l3 X) →
     is-open-subset-Metric-Space X (subset-open-subset-Metric-Space O)
   is-open-subset-open-subset-Metric-Space = pr2
+```
+
+
+### Open subsets of located metric spaces
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2) (S : subset-Located-Metric-Space l3 X)
+  where
+
+  is-open-prop-subset-Located-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
+  is-open-prop-subset-Located-Metric-Space =
+    is-open-prop-subset-Metric-Space
+      ( metric-space-Located-Metric-Space X)
+      ( S)
+
+  is-open-subset-Located-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
+  is-open-subset-Located-Metric-Space =
+    type-Prop is-open-prop-subset-Located-Metric-Space
+
+open-subset-Located-Metric-Space :
+  {l1 l2 : Level} (l3 : Level)
+  (X : Located-Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+open-subset-Located-Metric-Space l3 X =
+  open-subset-Metric-Space l3 (metric-space-Located-Metric-Space X)
+
+module _
+  {l1 l2 l3 : Level} (X : Located-Metric-Space l1 l2)
+  (S : open-subset-Located-Metric-Space l3 X)
+  where
+
+  subset-open-subset-Located-Metric-Space : subset-Located-Metric-Space l3 X
+  subset-open-subset-Located-Metric-Space = pr1 S
+
+  is-open-subset-open-subset-Located-Metric-Space :
+    is-open-subset-Located-Metric-Space
+      ( X)
+      ( subset-open-subset-Located-Metric-Space)
+  is-open-subset-open-subset-Located-Metric-Space = pr2 S
 ```
 
 ## Properties
