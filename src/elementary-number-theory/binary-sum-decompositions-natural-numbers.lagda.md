@@ -249,9 +249,9 @@ module _
     succ-ℕ n
   number-of-elements-finite-type-binary-sum-decomposition-ℕ =
     inv
-      ( compute-number-of-elements-is-finite
-        ( count-binary-sum-decomposition-ℕ)
-        ( is-finite-type-binary-sum-decomposition-ℕ))
+      ( compute-number-of-elements-Finite-Type
+        ( finite-type-binary-sum-decomposition-ℕ)
+        ( count-binary-sum-decomposition-ℕ))
 ```
 
 ### Permuting components in a triple of sums

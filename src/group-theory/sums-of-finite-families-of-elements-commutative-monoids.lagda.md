@@ -720,7 +720,5 @@ module _
           by
             ap
               ( λ n → power-Commutative-Monoid M n c)
-              ( compute-number-of-elements-is-finite
-                ( cA)
-                ( is-finite-type-Finite-Type A))
+              ( compute-number-of-elements-Finite-Type A cA)
 ```
