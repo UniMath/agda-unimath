@@ -154,6 +154,7 @@ open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
+open import foundation.empty-subtypes public
 open import foundation.empty-types public
 open import foundation.endomorphisms public
 open import foundation.epimorphisms public

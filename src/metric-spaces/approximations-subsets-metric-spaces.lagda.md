@@ -7,24 +7,26 @@ module metric-spaces.approximations-subsets-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import metric-spaces.subspaces-metric-spaces
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unions-subtypes
-open import foundation.propositions
-open import elementary-number-theory.positive-rational-numbers
+open import foundation.universe-levels
+
 open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
 
 ## Idea
 
-For an `ε : ℚ⁺`, a [metric space](metric-spaces.metric-spaces.md) `X`, and
-a [subset](foundation.subtypes.md) `S` of `X`, an
-{{#concept "ε-approximation" disambiguation="in a metric space"}} of `S` is
-a subset `T ⊆ S` such that `S` is a subset of the
+For an `ε : ℚ⁺`, a [metric space](metric-spaces.metric-spaces.md) `X`, and a
+[subset](foundation.subtypes.md) `S` of `X`, an
+{{#concept "ε-approximation" disambiguation="in a metric space"}} of `S` is a
+subset `T ⊆ S` such that `S` is a subset of the
 [union](foundation.union-subtypes.md) of `ε`-neighborhoods of elements of `T`.
 
 ## Definitions
