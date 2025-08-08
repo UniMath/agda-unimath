@@ -94,83 +94,45 @@ upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
-### Metric Structures on a type
-
-```agda
-module _
-  {l1 : Level} (A : UU l1) {l2 : Level}
-  (B : Rational-Neighborhood-Relation l2 A)
-  where
-
-  is-metric-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2)
-  is-metric-prop-Rational-Neighborhood-Relation =
-    Σ-Prop
-      ( is-pseudometric-prop-Rational-Neighborhood-Relation A B)
-      ( λ H →
-        is-extensional-prop-Pseudometric-Space (A , B , H))
-
-  is-metric-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
-  is-metric-Rational-Neighborhood-Relation =
-    type-Prop is-metric-prop-Rational-Neighborhood-Relation
-
-  is-prop-is-metric-Rational-Neighborhood-Relation :
-    is-prop is-metric-Rational-Neighborhood-Relation
-  is-prop-is-metric-Rational-Neighborhood-Relation =
-    is-prop-type-Prop (is-metric-prop-Rational-Neighborhood-Relation)
-
-Metric-Structure :
-  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
-Metric-Structure l2 A =
-  type-subtype (is-metric-prop-Rational-Neighborhood-Relation A {l2})
-```
-
 ### The type of metric spaces
 
 ```agda
 Metric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Space l1 l2 =
-  Σ (UU l1) (Metric-Structure l2)
+  Σ (Pseudometric-Space l1 l2) (is-extensional-Pseudometric-Space)
 
-make-Metric-Space :
-  { l1 l2 : Level} →
-  ( A : UU l1) →
-  ( B : Rational-Neighborhood-Relation l2 A) →
-  ( refl-B : is-reflexive-Rational-Neighborhood-Relation B) →
-  ( symmetric-B : is-symmetric-Rational-Neighborhood-Relation B) →
-  ( triangular-B : is-triangular-Rational-Neighborhood-Relation B) →
-  ( saturated-B : is-saturated-Rational-Neighborhood-Relation B) →
-  ( extensional-B :
+module _
+  {l1 l2 : Level}
+  ( A : UU l1)
+  ( N : Rational-Neighborhood-Relation l2 A)
+  ( refl-N : is-reflexive-Rational-Neighborhood-Relation N)
+  ( symmetric-N : is-symmetric-Rational-Neighborhood-Relation N)
+  ( triangular-N : is-triangular-Rational-Neighborhood-Relation N)
+  ( saturated-N : is-saturated-Rational-Neighborhood-Relation N)
+  ( extensional-N :
     is-extensional-Pseudometric-Space
-      (A , B , refl-B , symmetric-B , triangular-B , saturated-B)) →
-  Metric-Space l1 l2
-make-Metric-Space
-  A B refl-B symmetric-B triangular-B saturated-B extensional-B =
-  ( A) ,
-  ( ( B) ,
-    ( refl-B , symmetric-B , triangular-B , saturated-B) ,
-    ( extensional-B))
+      ( A , N , refl-N , symmetric-N , triangular-N , saturated-N))
+  where
+
+  make-Metric-Space : Metric-Space l1 l2
+  pr1 make-Metric-Space =
+    (A , N , refl-N , symmetric-N , triangular-N , saturated-N)
+  pr2 make-Metric-Space = extensional-N
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
+  pseudometric-Metric-Space : Pseudometric-Space l1 l2
+  pseudometric-Metric-Space = pr1 M
+
   type-Metric-Space : UU l1
   type-Metric-Space =
-    pr1 M
-
-  structure-Metric-Space : Metric-Structure l2 type-Metric-Space
-  structure-Metric-Space = pr2 M
-
-  pseudometric-Metric-Space : Pseudometric-Space l1 l2
-  pseudometric-Metric-Space =
-    ( type-Metric-Space) ,
-    ( pr1 structure-Metric-Space) ,
-    ( pr1 (pr2 structure-Metric-Space))
+    type-Pseudometric-Space pseudometric-Metric-Space
 
   is-extensional-pseudometric-Metric-Space :
     is-extensional-Pseudometric-Space pseudometric-Metric-Space
-  is-extensional-pseudometric-Metric-Space =
-    pr2 (pr2 structure-Metric-Space)
+  is-extensional-pseudometric-Metric-Space = pr2 M
 
   pseudometric-structure-Metric-Space :
     Pseudometric-Structure l2 type-Metric-Space
@@ -363,26 +325,6 @@ module _
     x ＝ y
   eq-sim-Metric-Space x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space x y)
-```
-
-### Characterization of the transport of metric structures along equalities
-
-```agda
-equiv-Eq-tr-Metric-Structure :
-  {l1 l2 : Level} (A B : UU l1) →
-  (P : Metric-Structure l2 A) →
-  (Q : Metric-Structure l2 B) →
-  (e : A ＝ B) →
-  (tr (Metric-Structure l2) e P ＝ Q) ≃
-  (Eq-Rational-Neighborhood-Relation
-    ( pr1 P)
-    ( preimage-Rational-Neighborhood-Relation (map-eq e) (pr1 Q)))
-equiv-Eq-tr-Metric-Structure A .A P Q refl =
-  ( equiv-Eq-eq-Rational-Neighborhood-Relation (pr1 P) (pr1 Q)) ∘e
-  ( extensionality-type-subtype'
-    ( is-metric-prop-Rational-Neighborhood-Relation A)
-    ( P)
-    ( Q))
 ```
 
 ## External links

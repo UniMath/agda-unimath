@@ -25,6 +25,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import metric-spaces.equality-of-pseudometric-spaces
 open import metric-spaces.extensional-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -110,13 +111,13 @@ module _
   equiv-eq-isometric-eq-Metric-Space :
     (A ＝ B) ≃ isometric-eq-Metric-Space A B
   equiv-eq-isometric-eq-Metric-Space =
-    ( equiv-tot
-      ( equiv-Eq-tr-Metric-Structure
-        ( type-Metric-Space A)
-        ( type-Metric-Space B)
-        ( structure-Metric-Space A)
-        ( structure-Metric-Space B))) ∘e
-    ( equiv-pair-eq-Σ A B)
+    equiv-eq-isometric-eq-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B) ∘e
+    ( extensionality-type-subtype'
+      ( is-extensional-prop-Pseudometric-Space)
+      ( A)
+      ( B))
 
   eq-isometric-eq-Metric-Space :
     isometric-eq-Metric-Space A B → A ＝ B
