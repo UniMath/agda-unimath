@@ -175,7 +175,7 @@ module _
     ( equiv-eq-isometric-eq-Metric-Space A B)
 ```
 
-### Isometric equivalence is torsorial
+### Isometric equivalence of metric spaces is torsorial
 
 ```agda
 module _
@@ -234,7 +234,7 @@ module _
     map-inv-equiv equiv-eq-isometric-equiv-Metric-Space'
 ```
 
-### The existence of invertibe isometries between metric spaces is torsorial
+### The existence of invertible isometries between metric spaces is torsorial
 
 ```agda
 module _

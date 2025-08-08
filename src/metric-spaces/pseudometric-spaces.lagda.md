@@ -30,6 +30,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.preimage-rational-neighborhoods
 open import metric-spaces.rational-neighborhoods
 open import metric-spaces.reflexive-rational-neighborhoods
 open import metric-spaces.saturated-rational-neighborhoods
@@ -203,6 +204,28 @@ module _
       neighborhood-prop-Pseudometric-Space
       monotonic-neighborhood-Pseudometric-Space
       saturated-neighborhood-Pseudometric-Space
+```
+
+## Properties
+
+### Characterization of the transport of pseudometric structures along equalities
+
+```agda
+equiv-Eq-tr-Pseudometric-Structure :
+  {l1 l2 : Level} (A B : UU l1) →
+  (P : Pseudometric-Structure l2 A) →
+  (Q : Pseudometric-Structure l2 B) →
+  (e : A ＝ B) →
+  (tr (Pseudometric-Structure l2) e P ＝ Q) ≃
+  (Eq-Rational-Neighborhood-Relation
+    ( pr1 P)
+    ( preimage-Rational-Neighborhood-Relation (map-eq e) (pr1 Q)))
+equiv-Eq-tr-Pseudometric-Structure A .A P Q refl =
+  ( equiv-Eq-eq-Rational-Neighborhood-Relation (pr1 P) (pr1 Q)) ∘e
+  ( extensionality-type-subtype'
+    ( is-pseudometric-prop-Rational-Neighborhood-Relation A)
+    ( P)
+    ( Q))
 ```
 
 ## External links
