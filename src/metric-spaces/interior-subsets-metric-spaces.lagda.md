@@ -50,6 +50,22 @@ module _
 
 ## Properties
 
+### The interior of `S` is a subset of `S`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (S : subset-Metric-Space l3 X)
+  where
+
+  is-subset-interior-subset-Metric-Space :
+    interior-subset-Metric-Space X S ⊆ S
+  is-subset-interior-subset-Metric-Space x ∃ε =
+    let open do-syntax-trunc-Prop (S x)
+    in do
+      (ε , Nεx⊆S) ← ∃ε
+      Nεx⊆S x (refl-neighborhood-Metric-Space X ε x)
+```
+
 ### The interior of the empty subset is empty
 
 ```agda

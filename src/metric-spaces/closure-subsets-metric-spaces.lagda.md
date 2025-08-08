@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.empty-subtypes
 open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -57,6 +58,18 @@ module _
 ```
 
 ## Properties
+
+### `S` is a subset of its closure
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (S : subset-Metric-Space l3 X)
+  where
+
+  is-subset-closure-subset-Metric-Space : S ⊆ closure-subset-Metric-Space X S
+  is-subset-closure-subset-Metric-Space x x∈S ε =
+    intro-exists x (refl-neighborhood-Metric-Space X ε x , x∈S)
+```
 
 ### The closure of the empty set is empty
 

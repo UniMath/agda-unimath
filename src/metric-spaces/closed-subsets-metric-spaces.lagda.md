@@ -7,19 +7,22 @@ module metric-spaces.closed-subsets-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
-open import foundation.empty-subtypes
-open import foundation.empty-types
-open import foundation.intersections-subtypes
+open import foundation.function-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
+open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -31,7 +34,8 @@ open import metric-spaces.subspaces-metric-spaces
 A [subset](foundation.subtypes.md) `S` of a
 [metric space](metric-spaces.metric-spaces.md) `X` is
 {{#concept "closed" disambiguation="subset of a metric space" WDID=Q320357 WD="closed set" Agda=is-closed-subset-Metric-Space}}
-if its [closure](metric-spaces.closure-subsets-metric-spaces.md) is itself.
+if its [closure](metric-spaces.closure-subsets-metric-spaces.md) is a subset of
+`S`.
 
 ## Definition
 
@@ -42,7 +46,7 @@ module _
 
   is-closed-prop-subset-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
   is-closed-prop-subset-Metric-Space =
-    has-same-elements-subtype-Prop (closure-subset-Metric-Space X S) S
+    leq-prop-subtype (closure-subset-Metric-Space X S) S
 
   is-closed-subset-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
   is-closed-subset-Metric-Space = type-Prop is-closed-prop-subset-Metric-Space
@@ -59,9 +63,8 @@ module _
 
   is-closed-empty-subset-Metric-Space :
     is-closed-subset-Metric-Space X (empty-subset-Metric-Space X)
-  pr1 (is-closed-empty-subset-Metric-Space x) x∈closure =
+  is-closed-empty-subset-Metric-Space x x∈closure =
     map-raise (is-empty-closure-empty-subset-Metric-Space X x x∈closure)
-  pr2 (is-closed-empty-subset-Metric-Space x) (map-raise ⊥) = ex-falso ⊥
 ```
 
 ### A metric space is closed in itself
@@ -69,7 +72,27 @@ module _
 ```agda
   is-closed-full-subset-Metric-Space :
     is-closed-subset-Metric-Space X (full-subset-Metric-Space X)
-  pr1 (is-closed-full-subset-Metric-Space x) x∈closure = map-raise star
-  pr2 (is-closed-full-subset-Metric-Space x) _ =
-    is-dense-full-subset-Metric-Space X x
+  is-closed-full-subset-Metric-Space x _ = map-raise star
+```
+
+### Every subset of a discrete metric space is closed
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Discrete-Metric-Space l1 l2)
+  where
+
+  is-closed-subset-Discrete-Metric-Space :
+    (S : subtype l3 (type-Discrete-Metric-Space X)) →
+    is-closed-subset-Metric-Space
+      ( metric-space-Discrete-Metric-Space X)
+      ( S)
+  is-closed-subset-Discrete-Metric-Space S x x∈closure =
+    let open do-syntax-trunc-Prop (S x)
+    in do
+      (y , y∈N1x , y∈S) ← x∈closure one-ℚ⁺
+      inv-tr
+        ( type-Prop ∘ S)
+        ( is-discrete-metric-space-Discrete-Metric-Space X one-ℚ⁺ x y y∈N1x)
+        ( y∈S)
 ```
