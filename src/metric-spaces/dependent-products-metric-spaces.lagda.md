@@ -102,8 +102,8 @@ module _
 
   pseudometric-space-Π-Metric-Space : Pseudometric-Space (l ⊔ l1) (l ⊔ l2)
   pseudometric-space-Π-Metric-Space =
-    ( type-Π-Metric-Space) ,
-    ( neighborhood-prop-Π-Metric-Space ,
+    ( type-Π-Metric-Space ,
+      neighborhood-prop-Π-Metric-Space ,
       is-reflexive-neighborhood-Π-Metric-Space ,
       is-symmetric-neighborhood-Π-Metric-Space ,
       is-triangular-neighborhood-Π-Metric-Space ,
@@ -156,7 +156,7 @@ module _
     short-function-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-  short-ev-Π-Metric-Space = (ev a) , (is-short-ev-Π-Metric-Space)
+  short-ev-Π-Metric-Space = (ev a , is-short-ev-Π-Metric-Space)
 ```
 
 ### The partial applications of a Cauchy approximation in a dependent product metric space are Cauchy approximations
@@ -245,8 +245,8 @@ module _
   is-complete-Π-Metric-Space :
     is-complete-Metric-Space (Π-Metric-Space A P)
   is-complete-Π-Metric-Space u =
-    limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
-    is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u
+    ( limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
+      is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u)
 ```
 
 ### The complete product of complete metric spaces
