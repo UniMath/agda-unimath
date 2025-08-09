@@ -32,6 +32,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.rational-cauchy-approximations
@@ -93,7 +94,7 @@ zero-limit-cauchy-approximation-ℚ =
   type-subtype
     ( λ f →
       is-limit-cauchy-approximation-prop-Metric-Space
-        metric-space-leq-ℚ
+        metric-space-ℚ
         f
         zero-ℚ)
 
@@ -111,7 +112,7 @@ module _
 
   is-cauchy-map-zero-limit-cauchy-approximation-ℚ :
     is-cauchy-approximation-Metric-Space
-      metric-space-leq-ℚ
+      metric-space-ℚ
       map-zero-limit-cauchy-approximation-ℚ
   is-cauchy-map-zero-limit-cauchy-approximation-ℚ =
     is-cauchy-map-cauchy-approximation-ℚ
@@ -119,7 +120,7 @@ module _
 
   is-zero-limit-approximation-zero-limit-cauchy-approximation-ℚ :
     is-limit-cauchy-approximation-Metric-Space
-      metric-space-leq-ℚ
+      metric-space-ℚ
       approximation-zero-limit-cauchy-approximation-ℚ
       zero-ℚ
   is-zero-limit-approximation-zero-limit-cauchy-approximation-ℚ = pr2 f
@@ -138,10 +139,10 @@ module _
   abstract
     is-cauchy-approximation-is-approximation-of-zero-ℚ :
       is-cauchy-approximation-Metric-Space
-        metric-space-leq-ℚ
+        metric-space-ℚ
         f
     is-cauchy-approximation-is-approximation-of-zero-ℚ ε δ =
-      neighborhood-leq-leq-dist-ℚ
+      neighborhood-leq-dist-ℚ
         ( ε +ℚ⁺ δ)
         ( f ε)
         ( f δ)
@@ -166,11 +167,11 @@ module _
   abstract
     is-zero-limit-is-approximation-of-zero-ℚ :
       is-limit-cauchy-approximation-Metric-Space
-        metric-space-leq-ℚ
+        metric-space-ℚ
         cauchy-approximation-is-approximation-of-zero-ℚ
         zero-ℚ
     is-zero-limit-is-approximation-of-zero-ℚ ε δ =
-      neighborhood-leq-leq-dist-ℚ
+      neighborhood-leq-dist-ℚ
         ( ε +ℚ⁺ δ)
         ( f ε)
         ( zero-ℚ)
@@ -198,7 +199,7 @@ module _
 
   is-zero-limit-cauchy-approximation-of-zero-ℚ :
     is-limit-cauchy-approximation-Metric-Space
-      metric-space-leq-ℚ
+      metric-space-ℚ
       cauchy-approximation-of-zero-ℚ
       zero-ℚ
   is-zero-limit-cauchy-approximation-of-zero-ℚ =
@@ -215,7 +216,7 @@ module _
   ( f : cauchy-approximation-ℚ)
   ( L :
     is-limit-cauchy-approximation-Metric-Space
-      metric-space-leq-ℚ
+      metric-space-ℚ
       f
       zero-ℚ)
   where
@@ -229,11 +230,12 @@ module _
         ( ap
           ( rational-ℚ⁰⁺)
           ( right-zero-law-dist-ℚ (map-cauchy-approximation-ℚ f ε)))
-        ( leq-dist-neighborhood-leq-ℚ
+        ( leq-dist-neighborhood-ℚ
           ( ε)
           ( map-cauchy-approximation-ℚ f ε)
           ( zero-ℚ)
-          ( is-saturated-metric-space-leq-ℚ
+          ( saturated-neighborhood-Metric-Space
+            ( metric-space-ℚ)
             ( ε)
             ( map-cauchy-approximation-ℚ f ε)
             ( zero-ℚ)
@@ -258,11 +260,11 @@ section-zero-limit-cauchy-approximation-of-zero-ℚ =
     eq-type-subtype
       ( λ h →
         is-limit-cauchy-approximation-prop-Metric-Space
-          metric-space-leq-ℚ
+          metric-space-ℚ
           h
           zero-ℚ)
       ( eq-type-subtype
-        ( is-cauchy-approximation-prop-Metric-Space metric-space-leq-ℚ)
+        ( is-cauchy-approximation-prop-Metric-Space metric-space-ℚ)
         ( refl)))
 
 retraction-zero-limit-cauchy-approximation-of-zero-ℚ :

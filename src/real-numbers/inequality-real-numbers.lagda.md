@@ -500,10 +500,10 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  reverses-lower-neighborhood-leq-neg-ℝ :
+  reverses-lower-neighborhood-neg-ℝ :
     leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
     leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-  reverses-lower-neighborhood-leq-neg-ℝ x≤y+d =
+  reverses-lower-neighborhood-neg-ℝ x≤y+d =
     tr
       ( leq-ℝ (neg-ℝ y))
       ( ( distributive-neg-add-ℝ x ((neg-ℝ ∘ real-ℚ ∘ rational-ℚ⁺) d)) ∙
