@@ -34,7 +34,7 @@ contractible. This principle is also referred to as _hypercompleteness_ and is
 not validated in every ∞-topos.
 
 In
-(`whitehead-principle-maps`)[synthetic-homotopy-theory.whitehead-principle-maps.md]
+[`whitehead-principle-maps`](synthetic-homotopy-theory.whitehead-principle-maps.md)
 we show, assuming the Whitehead principle in enough universes, that the
 Whitehead principle for types is
 [equivalent](foundation.logical-equivalences.md) to asking that maps whose

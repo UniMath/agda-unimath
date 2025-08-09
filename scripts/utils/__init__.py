@@ -215,8 +215,10 @@ def is_agda_opening_or_closing_tag(line):
 
 def get_git_tracked_files():
     # Get list of Git-tracked files
-    git_output = subprocess.check_output(['git', 'ls-files'], text=True)
-    git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
+    # Use the -z flag to prevent git from escaping non-ascii characters with
+    # backslashes
+    git_output = subprocess.check_output(['git', 'ls-files', '-z'], text=True)
+    git_tracked_files = map(pathlib.Path, git_output.strip().split('\0')[:-1])
     return git_tracked_files
 
 def get_git_last_modified(file_path):
