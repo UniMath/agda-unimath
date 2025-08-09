@@ -88,7 +88,11 @@ module _
 
 ## Properties
 
-### A map is `k`-acyclic if and only if it is an [epimorphism with respect to `k`-types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+### A map is `k`-acyclic if and only if it is an epimorphism with respect to `k`-types
+
+This theorem characterizes the
+[`k`-epimorphisms](foundation.epimorphisms-with-respect-to-truncated-types.md)
+in homotopy type theory. {{#cite BdJR24}}
 
 ```agda
 module _
@@ -240,7 +244,9 @@ module _
             ( h X x y)))
 ```
 
-### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
+### A map is `k`-acyclic if and only if it is a dependent `k`-epimorphism { #a-map-is-k-acyclic-if-and-only-if-it-is-an-dependent-k-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The proof is similar to that of dependent epimorphisms and
 [acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).
