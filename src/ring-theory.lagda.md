@@ -7,6 +7,7 @@ module ring-theory where
 
 open import ring-theory.additive-orders-of-elements-rings public
 open import ring-theory.algebras-rings public
+open import ring-theory.arithmetic-sequences-semirings public
 open import ring-theory.binomial-theorem-rings public
 open import ring-theory.binomial-theorem-semirings public
 open import ring-theory.category-of-cyclic-rings public
@@ -26,6 +27,7 @@ open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
 open import ring-theory.generating-elements-rings public
+open import ring-theory.geometric-sequences-semirings public
 open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-cyclic-rings public
 open import ring-theory.homomorphisms-rings public
