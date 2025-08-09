@@ -16,6 +16,8 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.powers-of-elements-commutative-monoids
+
 open import ring-theory.rings
 open import ring-theory.sums-of-finite-families-of-elements-semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-rings
@@ -189,4 +191,22 @@ eq-sum-finite-sum-count-Ring :
   sum-finite-Ring R A f ＝ sum-count-Ring R (type-Finite-Type A) cA f
 eq-sum-finite-sum-count-Ring R =
   eq-sum-finite-sum-count-Semiring (semiring-Ring R)
+```
+
+### Sums of constant functions
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
+  where
+
+  sum-const-finite-type-Ring :
+    (c : type-Ring R) →
+    sum-finite-Ring R A (λ _ → c) ＝
+    power-Commutative-Monoid
+      ( additive-commutative-monoid-Ring R)
+      ( number-of-elements-Finite-Type A)
+      ( c)
+  sum-const-finite-type-Ring =
+    sum-const-finite-type-Semiring (semiring-Ring R) A
 ```

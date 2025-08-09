@@ -410,6 +410,12 @@ module _
 number-of-elements-Finite-Type : {l : Level} → Finite-Type l → ℕ
 number-of-elements-Finite-Type X =
   number-of-elements-is-finite (is-finite-type-Finite-Type X)
+
+compute-number-of-elements-Finite-Type :
+  {l : Level} → (F : Finite-Type l) → (c : count (type-Finite-Type F)) →
+  number-of-elements-count c ＝ number-of-elements-Finite-Type F
+compute-number-of-elements-Finite-Type F c =
+  compute-number-of-elements-is-finite c (is-finite-type-Finite-Type F)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`
@@ -614,6 +620,9 @@ pr2 (trunc-prop-Finite-Type A) =
 equiv-Finite-Type :
   {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
 equiv-Finite-Type X Y = type-Finite-Type X ≃ type-Finite-Type Y
+
+aut-Finite-Type : {l : Level} → Finite-Type l → UU l
+aut-Finite-Type X = equiv-Finite-Type X X
 
 id-equiv-Finite-Type : {l : Level} (X : Finite-Type l) → equiv-Finite-Type X X
 id-equiv-Finite-Type X = id-equiv

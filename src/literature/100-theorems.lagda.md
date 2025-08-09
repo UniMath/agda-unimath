@@ -106,6 +106,15 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
+### 68. Sum of an arithmetic series {#68}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import ring-theory.finite-arithmetic-sequences-semirings using
+  ( sum-arithmetic-sequence-Semiring)
+```
+
 ### 69. Greatest common divisor algorithm {#69}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)

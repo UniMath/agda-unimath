@@ -20,6 +20,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
 
 open import ring-theory.semirings
@@ -208,6 +209,16 @@ module _
       ( A)
       ( B)
       ( H)
+
+module _
+  {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (H : aut-Finite-Type A)
+  where
+
+  sum-aut-finite-Semiring :
+    (f : type-Finite-Type A → type-Semiring R) →
+    sum-finite-Semiring R A f ＝ sum-finite-Semiring R A (f ∘ map-inv-equiv H)
+  sum-aut-finite-Semiring = sum-equiv-finite-Semiring R A A H
 ```
 
 ### Sums over finite types distribute over coproducts
@@ -367,4 +378,21 @@ module _
       h : type-Finite-Type A → Fin 2 → type-Semiring R
       h a (inl (inr _)) = f a
       h a (inr _) = g a
+```
+
+### Sums of constant functions
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  where
+
+  sum-const-finite-type-Semiring :
+    (c : type-Semiring R) →
+    sum-finite-Semiring R A (λ _ → c) ＝
+    power-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+      ( number-of-elements-Finite-Type A)
+      ( c)
+  sum-const-finite-type-Semiring = sum-const-finite-type-Commutative-Monoid _ A
 ```

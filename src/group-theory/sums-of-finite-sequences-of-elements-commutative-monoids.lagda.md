@@ -30,6 +30,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
 open import linear-algebra.finite-sequences-in-commutative-monoids
@@ -298,6 +299,18 @@ module _
       ap
         ( λ τ → sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv τ))
         ( eq-permutation-list-standard-transpositions-Fin n σ)
+```
+
+### The sum of a sequence of length `n` of a constant `c` is `n` times `c`
+
+```agda
+sum-const-sequence-type-Commutative-Monoid :
+  {l : Level} (M : Commutative-Monoid l) (n : ℕ) →
+  (c : type-Commutative-Monoid M) →
+  sum-fin-sequence-type-Commutative-Monoid M n (λ _ → c) ＝
+  power-Commutative-Monoid M n c
+sum-const-sequence-type-Commutative-Monoid M =
+  sum-const-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ## See also
