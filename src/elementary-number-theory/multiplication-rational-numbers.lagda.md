@@ -452,6 +452,46 @@ abstract
       ＝ q +ℚ q by ap-add-ℚ (left-unit-law-mul-ℚ q) (left-unit-law-mul-ℚ q)
 ```
 
+### The product of a rational number and its denominator is its numerator
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  opaque
+    unfolding mul-ℚ
+
+    eq-numerator-mul-denominator-ℚ :
+      mul-ℚ
+        ( x)
+        ( rational-ℤ (denominator-ℚ x)) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ =
+      ( eq-ℚ-sim-fraction-ℤ
+        ( mul-fraction-ℤ
+          ( fraction-ℚ x)
+          ( in-fraction-ℤ (denominator-ℚ x)))
+        ( in-fraction-ℤ (numerator-ℚ x))
+        ( associative-mul-ℤ
+          ( numerator-ℚ x)
+          ( denominator-ℚ x)
+          ( one-ℤ))) ∙
+      ( is-retraction-rational-fraction-ℚ
+        ( rational-ℤ (numerator-ℚ x)))
+
+    eq-numerator-mul-denominator-ℚ' :
+      mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ' =
+      ( commutative-mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x)) ∙
+      ( eq-numerator-mul-denominator-ℚ)
+```
+
 ## See also
 
 - The multiplicative monoid structure on the rational numbers is defined in

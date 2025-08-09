@@ -7,7 +7,12 @@ module ring-theory.dependent-products-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.ring-of-integers
+
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -19,6 +24,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import ring-theory.dependent-products-semirings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 open import ring-theory.semirings
 ```
@@ -142,4 +148,33 @@ module _
   pr2 (pr2 (pr1 (pr2 (pr2 Π-Ring)))) = right-unit-law-mul-Π-Ring
   pr1 (pr2 (pr2 (pr2 Π-Ring))) = left-distributive-mul-add-Π-Ring
   pr2 (pr2 (pr2 (pr2 Π-Ring))) = right-distributive-mul-add-Π-Ring
+```
+
+## Properties
+
+### The initial ring homomorphism from `ℤ` to a product ring is the product of the initial homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (I : UU l1) (R : I → Ring l2)
+  where
+
+  initial-hom-Π-Ring : hom-Ring ℤ-Ring (Π-Ring I R)
+  pr1 (pr1 initial-hom-Π-Ring) k i = map-initial-hom-Ring (R i) k
+  pr2 (pr1 initial-hom-Π-Ring) {p} {q} =
+    eq-htpy
+      ( λ i → preserves-add-initial-hom-Ring (R i) p q)
+  pr1 (pr2 initial-hom-Π-Ring) {p} {q} =
+    eq-htpy
+      ( λ i → preserves-mul-initial-hom-Ring (R i) p q)
+  pr2 (pr2 initial-hom-Π-Ring) =
+    eq-htpy
+      ( λ i → preserves-one-initial-hom-Ring (R i))
+
+  eq-initial-hom-Π-Ring :
+    initial-hom-Ring (Π-Ring I R) ＝ initial-hom-Π-Ring
+  eq-initial-hom-Π-Ring =
+    contraction-initial-hom-Ring
+      ( Π-Ring I R)
+      ( initial-hom-Π-Ring)
 ```

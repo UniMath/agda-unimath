@@ -73,6 +73,7 @@ open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
+open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
