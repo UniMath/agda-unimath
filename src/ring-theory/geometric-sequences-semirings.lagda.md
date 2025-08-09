@@ -244,6 +244,27 @@ module _
       ( n))
 ```
 
+### Constant sequences are gemoetric with common ratio one
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (a : type-Semiring R)
+  where
+
+  one-common-ratio-const-sequence-Semiring :
+    is-common-difference-sequence-Semigroup
+      ( multiplicative-semigroup-Semiring R)
+      ( λ _ → a)
+      ( one-Semiring R)
+  one-common-ratio-const-sequence-Semiring n =
+    inv (right-unit-law-mul-Semiring R a)
+
+  geometric-const-sequence-Semiring : geometric-sequence-Semiring R
+  pr1 geometric-const-sequence-Semiring _ = a
+  pr2 geometric-const-sequence-Semiring =
+    ( one-Semiring R , one-common-ratio-const-sequence-Semiring)
+```
+
 ## External links
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)

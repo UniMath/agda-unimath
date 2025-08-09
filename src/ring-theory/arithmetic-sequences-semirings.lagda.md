@@ -243,6 +243,27 @@ module _
       ( n))
 ```
 
+### Constant sequences are arithmetic with common difference zero
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (a : type-Semiring R)
+  where
+
+  zero-common-difference-const-sequence-Semiring :
+    is-common-difference-sequence-Semigroup
+      ( additive-semigroup-Semiring R)
+      ( λ _ → a)
+      ( zero-Semiring R)
+  zero-common-difference-const-sequence-Semiring n =
+    inv (right-unit-law-add-Semiring R a)
+
+  arithmetic-const-sequence-Semiring : arithmetic-sequence-Semiring R
+  pr1 arithmetic-const-sequence-Semiring _ = a
+  pr2 arithmetic-const-sequence-Semiring =
+    ( zero-Semiring R , zero-common-difference-const-sequence-Semiring)
+```
+
 ## External links
 
 - [Arithmetic progressions](https://en.wikipedia.org/wiki/Arithmetic_progression)
