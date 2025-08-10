@@ -254,13 +254,12 @@ finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
       true → finite-enumeration-equiv eX (compute-raise l2 X)
   in
     finite-enumeration-equiv
-      ( finite-enumeration-equiv
-        ( finite-enumeration-Σ
-          ( finite-enumeration-count (2 , equiv-bool-Fin-2))
-          ( F)
-          ( eF))
-        ( equiv-Σ-bool-coproduct F))
-      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y))
+      ( finite-enumeration-Σ
+        ( finite-enumeration-count (2 , equiv-bool-Fin-2))
+        ( F)
+        ( eF))
+      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y) ∘e
+        equiv-Σ-bool-coproduct F)
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
