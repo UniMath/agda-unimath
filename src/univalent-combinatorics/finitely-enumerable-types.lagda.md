@@ -17,9 +17,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
@@ -36,7 +34,6 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cartesian-product-types
