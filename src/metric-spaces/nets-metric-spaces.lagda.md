@@ -8,11 +8,14 @@ module metric-spaces.nets-metric-spaces where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 open import foundation.subtypes
+open import foundation.dependent-pair-types
 open import univalent-combinatorics.finite-subtypes
 open import metric-spaces.metric-spaces
+open import foundation.propositional-truncations
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import foundation.propositions
 open import metric-spaces.approximations-metric-spaces
@@ -54,6 +57,16 @@ net-Metric-Space l3 X ε =
   type-subtype (is-net-prop-Metric-Space {l3 = l3} X ε)
 ```
 
+### In located metric spaces
+
+```agda
+net-Located-Metric-Space :
+  {l1 l2 : Level} (l3 : Level) → Located-Metric-Space l1 l2 → ℚ⁺ →
+  UU (l1 ⊔ l2 ⊔ lsuc l3)
+net-Located-Metric-Space l3 X =
+  net-Metric-Space l3 (metric-space-Located-Metric-Space X)
+```
+
 ## Properties
 
 ### For any `δ < ε`, if there is a finitely enumerable `δ`-approximation in a located metric space, there is an `ε`-net
@@ -61,16 +74,15 @@ net-Metric-Space l3 X ε =
 Lemma 2.2.2 in {{#cite BV06}}.
 
 ```agda
-module _
+net-finite-enumeration-approximation-Located-Metric-Space :
   {l1 l2 l3 : Level} (X : Located-Metric-Space l1 l2)
   (δ : ℚ⁺) (S : approximation-Located-Metric-Space l3 X δ)
-  (E :
-    is-finitely-enumerable-subtype
-      ( subset-approximation-Located-Metric-Space X δ S))
-  (ε : ℚ⁺) (δ<ε : le-ℚ⁺ δ ε)
-  where
-
-  net-finitely-enumerable-approximation-Located-Metric-Space : {!   !}
+  (ε : ℚ⁺) (δ<ε : le-ℚ⁺ δ ε) →
+  finite-enumeration
+    ( type-approximation-Located-Metric-Space X δ S) →
+  type-trunc-Prop (net-Located-Metric-Space l3 X ε)
+net-finite-enumeration-approximation-Located-Metric-Space
+  X δ S ε δ<ε eS@(zero-ℕ , _) = {!   !}
 ```
 
 ## References
