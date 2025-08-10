@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.singleton-subtypes
 open import foundation.subtypes
@@ -84,4 +85,15 @@ singleton-finite-subtype :
 singleton-finite-subtype X x =
   ( subtype-standard-singleton-subtype X x ,
     is-finite-is-contr (is-torsorial-Id x))
+```
+
+### Raising the universe level of finite subtypes
+
+```agda
+raise-finite-subtype :
+  {l1 l2 : Level} {X : UU l1} → (l3 : Level) →
+  finite-subtype l2 X → finite-subtype (l2 ⊔ l3) X
+raise-finite-subtype l3 (S , is-finite-S) =
+  ( raise-subtype l3 S ,
+    is-finite-equiv (compute-raise-subtype l3 S) is-finite-S)
 ```
