@@ -88,7 +88,7 @@ is-trunc-projective : {l1 : Level} → ℕ → UU l1 → UUω
 is-trunc-projective k X = {l2 l3 : Level} → is-trunc-projective-Level l2 l3 k X
 ```
 
-### Alternative statement of projectivity
+### Alternative statement of set-projectivity
 
 ```agda
 is-projective-Level' : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
