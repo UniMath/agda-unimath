@@ -167,6 +167,14 @@ module _
     fin-sequence-sequence (succ-ℕ n) (skip-zero-Fin n i) ＝
     u (succ-ℕ (nat-Fin n i))
   eq-skip-zero-fin-sequence-sequence n i = ap u (nat-skip-zero-Fin n i)
+
+module _
+  {l : Level} {A : UU l} (u v : sequence A) (H : u ~ v)
+  where
+
+  htpy-fin-sequence-sequence :
+    (n : ℕ) → fin-sequence-sequence u n ~ fin-sequence-sequence v n
+  htpy-fin-sequence-sequence n i = H (nat-Fin n i)
 ```
 
 ## See also

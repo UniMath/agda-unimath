@@ -77,8 +77,10 @@ open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.series-semirings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
+open import ring-theory.sum-of-terms-arithmetic-sequences-semirings public
 open import ring-theory.sums-of-finite-families-of-elements-rings public
 open import ring-theory.sums-of-finite-families-of-elements-semirings public
 open import ring-theory.sums-of-finite-sequences-of-elements-rings public
