@@ -260,7 +260,7 @@ module _
   (f : cauchy-approximation-Metric-Space (metric-space-Discrete-Metric-Space A))
   where
 
-  is-wconstant-cauchy-approximation-Disrcete-Metric-Space :
+  is-wconstant-cauchy-approximation-Discrete-Metric-Space :
     (ε δ : ℚ⁺) →
     Id
       ( map-cauchy-approximation-Metric-Space
@@ -271,7 +271,7 @@ module _
         ( metric-space-Discrete-Metric-Space A)
         ( f)
         ( δ))
-  is-wconstant-cauchy-approximation-Disrcete-Metric-Space ε δ =
+  is-wconstant-cauchy-approximation-Discrete-Metric-Space ε δ =
     is-discrete-metric-space-Discrete-Metric-Space
       ( A)
       ( ε +ℚ⁺ δ)
