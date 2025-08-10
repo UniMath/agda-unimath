@@ -80,7 +80,10 @@ module _
 
 ## Properties
 
-### A map is acyclic if and only if it is an [epimorphism](foundation.epimorphisms.md)
+### A map is acyclic if and only if it is an epimorphism
+
+This theorem characterizes the usual [epimorphisms](foundation.epimorphisms.md)
+in homotopy type theory. {{#cite BdJR24}}
 
 ```agda
 module _
@@ -219,7 +222,9 @@ module _
             ( h x y)))
 ```
 
-### A map is acyclic if and only if it is an [dependent epimorphism](foundation.dependent-epimorphisms.md)
+### A map is acyclic if and only if it is a dependent epimorphism { #a-map-is-acyclic-if-and-only-if-it-is-an-dependent-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The following diagram is a helpful illustration in the second proof:
 

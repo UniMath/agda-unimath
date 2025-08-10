@@ -24,7 +24,7 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-A {{#concept "directed $n$-graph" Agda=Higher-Directed-Graph}} consists of a
+A {{#concept "directed `n`-graph" Agda=Higher-Directed-Graph}} consists of a
 type of vertices equipped with a binary family of directed `n-1`-graphs on its
 edges, where a directed `0`-graph consists of just a type of vertices.
 

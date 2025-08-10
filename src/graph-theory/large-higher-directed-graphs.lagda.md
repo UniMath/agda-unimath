@@ -26,7 +26,7 @@ open import graph-theory.higher-directed-graphs
 
 ## Idea
 
-A {{#concept "large directed $n$-graph" Agda=Large-Higher-Directed-Graph}} is
+A {{#concept "large directed `n`-graph" Agda=Large-Higher-Directed-Graph}} is
 defined inductively:
 
 - A large directed $0$-graph is a large collection of vertices.
