@@ -190,38 +190,30 @@ module _
           count-decidable-subtype
             ( λ iₙ₊ → is-left-Decidable-Prop (map-surjection Fin-n+↠X+Y iₙ₊))
             ( count-Fin n+)
-        map-surj-left : Fin nₗ → X
-        map-surj-left iₗ =
+        map-surj :
+          Σ (Fin n+) (λ iₙ₊ → is-left (map-surjection Fin-n+↠X+Y iₙ₊)) → X
+        map-surj =
           ind-Σ
             ( λ iₙ₊ is-left-f-iₙ₊ →
               left-is-left (map-surjection Fin-n+↠X+Y iₙ₊) (is-left-f-iₙ₊))
-            ( map-equiv Fin-nₗ≃n+-inl iₗ)
         helper :
           (x? : X + Y) (x' : X) → (x? ＝ inl x') → (L : is-left x?) →
           left-is-left x? L ＝ x'
         helper = λ where
           (inl _) _ x?=inl-x' _ → is-injective-inl x?=inl-x'
-        is-surjective-map-surj-left : is-surjective map-surj-left
-        is-surjective-map-surj-left x =
-          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj-left x))
+        is-surjective-map-surj : is-surjective map-surj
+        is-surjective-map-surj x =
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj x))
           in do
             (iₙ₊ , fiₙ₊=inl-x) ← is-surjective-map-surjection Fin-n+↠X+Y (inl x)
-            let
-              is-left-fiₙ₊ = inv-tr is-left fiₙ₊=inl-x star
-              iₗ = map-inv-equiv Fin-nₗ≃n+-inl (iₙ₊ , is-left-fiₙ₊)
+            let is-left-fiₙ₊ = inv-tr is-left fiₙ₊=inl-x star
             intro-exists
-              ( iₗ)
-              ( ap
-                ( ind-Σ
-                  ( λ iₙ₊ is-left-fiₙ₊ →
-                    left-is-left
-                      ( map-surjection Fin-n+↠X+Y iₙ₊)
-                      ( is-left-fiₙ₊)))
-                ( is-section-map-section-map-equiv
-                  ( Fin-nₗ≃n+-inl)
-                  ( iₙ₊ , is-left-fiₙ₊)) ∙
-                helper _ _ fiₙ₊=inl-x is-left-fiₙ₊)
-      in (nₗ , map-surj-left , is-surjective-map-surj-left)
+              ( iₙ₊ , is-left-fiₙ₊)
+              ( helper _ _ fiₙ₊=inl-x is-left-fiₙ₊)
+      in
+        ( nₗ ,
+          map-surj ∘ map-equiv Fin-nₗ≃n+-inl ,
+          is-surjective-right-comp-equiv is-surjective-map-surj Fin-nₗ≃n+-inl)
 
 abstract
   finite-enumeration-right-summand :
