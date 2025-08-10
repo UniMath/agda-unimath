@@ -48,11 +48,14 @@ module _
     Π-Prop
       ( ℚ⁺)
       ( λ ε →
-        neighborhood-prop-Metric-Space
-          ( A)
-          ( ε)
-          ( map-cauchy-approximation-Metric-Space A f ε)
-          ( lim))
+        Π-Prop
+          ( ℚ⁺)
+          ( λ δ →
+            neighborhood-prop-Metric-Space
+              ( A)
+              ( ε +ℚ⁺ δ)
+              ( map-cauchy-approximation-Metric-Space A f ε)
+              ( lim)))
 
   is-limit-cauchy-approximation-Metric-Space :
     type-Metric-Space A → UU l2
@@ -75,18 +78,46 @@ module _
     is-limit-cauchy-approximation-Metric-Space A f x →
     is-limit-cauchy-approximation-Metric-Space A f y →
     sim-Metric-Space A x y
-  all-sim-is-limit-cauchy-approximation-Metric-Space lim-x lim-y δ =
+  all-sim-is-limit-cauchy-approximation-Metric-Space lim-x lim-y d =
     let
-      (ε , ε+ε<δ) = bound-double-le-ℚ⁺ δ
-      fε = map-cauchy-approximation-Metric-Space A f ε
+      (ε , δ , ε+δ=d) = split-ℚ⁺ d
+      θ = mediant-zero-min-ℚ⁺ ε δ
+      θ<ε = le-left-mediant-zero-min-ℚ⁺ ε δ
+      θ<δ = le-right-mediant-zero-min-ℚ⁺ ε δ
+      ε' = le-diff-ℚ⁺ θ ε θ<ε
+      δ' = le-diff-ℚ⁺ θ δ θ<δ
+      fθ = map-cauchy-approximation-Metric-Space A f θ
+
+      Nεx : neighborhood-Metric-Space A ε fθ x
+      Nεx =
+        tr
+          ( is-upper-bound-dist-Metric-Space A fθ x)
+          ( right-diff-law-add-ℚ⁺ θ ε θ<ε)
+          ( lim-x θ ε')
+
+      Nδy : neighborhood-Metric-Space A δ fθ y
+      Nδy =
+        tr
+          ( is-upper-bound-dist-Metric-Space A fθ y)
+          ( right-diff-law-add-ℚ⁺ θ δ θ<δ)
+          ( lim-y θ δ')
+
+      Nxy : neighborhood-Metric-Space A (ε +ℚ⁺ δ) x y
+      Nxy =
+        triangular-neighborhood-Metric-Space
+          ( A)
+          ( x)
+          ( fθ)
+          ( y)
+          ( ε)
+          ( δ)
+          ( Nδy)
+          ( symmetric-neighborhood-Metric-Space A ε fθ x Nεx)
     in
-      monotonic-neighborhood-Metric-Space A x y
-        ( ε +ℚ⁺ ε)
-        ( δ)
-        ( ε+ε<δ)
-        ( triangular-neighborhood-Metric-Space A x fε y ε ε
-          ( lim-y ε)
-          ( symmetric-neighborhood-Metric-Space A ε fε x (lim-x ε)))
+      tr
+        ( is-upper-bound-dist-Metric-Space A x y)
+        ( ε+δ=d)
+        ( Nxy)
 
   all-eq-is-limit-cauchy-approximation-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space A f x →

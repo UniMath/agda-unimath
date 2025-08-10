@@ -115,6 +115,9 @@ module _
       in
         intro-exists
           ( xε)
-          ( symmetric-neighborhood-Metric-Space X ε xε lim-x (is-lim-lim-x ε) ,
+          ( saturated-neighborhood-Metric-Space X ε lim-x xε
+            ( λ δ →
+              symmetric-neighborhood-Metric-Space X _ xε lim-x
+                ( is-lim-lim-x ε δ)) ,
             x⊆S ε)
 ```

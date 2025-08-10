@@ -147,9 +147,6 @@ opaque
   neg-ℚ : ℚ → ℚ
   pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
   pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
-
-  is-zero-neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
-  is-zero-neg-zero-ℚ = refl
 ```
 
 ### The mediant of two rationals

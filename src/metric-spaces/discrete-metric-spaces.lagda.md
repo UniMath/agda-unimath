@@ -260,7 +260,7 @@ module _
   (f : cauchy-approximation-Metric-Space (metric-space-Discrete-Metric-Space A))
   where
 
-  is-wconstant-cauchy-approximation-Discrete-Metric-Space :
+  is-wconstant-cauchy-approximation-Disrcete-Metric-Space :
     (ε δ : ℚ⁺) →
     Id
       ( map-cauchy-approximation-Metric-Space
@@ -271,7 +271,7 @@ module _
         ( metric-space-Discrete-Metric-Space A)
         ( f)
         ( δ))
-  is-wconstant-cauchy-approximation-Discrete-Metric-Space ε δ =
+  is-wconstant-cauchy-approximation-Disrcete-Metric-Space ε δ =
     is-discrete-metric-space-Discrete-Metric-Space
       ( A)
       ( ε +ℚ⁺ δ)
@@ -303,17 +303,17 @@ module _
     is-complete-Metric-Space A
   is-complete-is-discrete-Metric-Space A H f =
     ( map-cauchy-approximation-Metric-Space A f one-ℚ⁺) ,
-    ( λ ε →
-      refl-eq-neighborhood-Metric-Space A ε
-        ( H
-          ( ε +ℚ⁺ one-ℚ⁺)
-          ( map-cauchy-approximation-Metric-Space A f ε)
-          ( map-cauchy-approximation-Metric-Space A f one-ℚ⁺)
-          ( is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-            ( A)
-            ( f)
-            ( ε)
-            ( one-ℚ⁺))))
+    ( λ ε δ →
+      sim-eq-Metric-Space
+        ( A)
+        ( map-cauchy-approximation-Metric-Space A f ε)
+        ( map-cauchy-approximation-Metric-Space A f one-ℚ⁺)
+        ( is-wconstant-cauchy-approximation-Disrcete-Metric-Space
+          ( A , H)
+          ( f)
+          ( ε)
+          ( one-ℚ⁺))
+        ( ε +ℚ⁺ δ))
 
   complete-Discrete-Metric-Space :
     Discrete-Metric-Space l1 l2 → Complete-Metric-Space l1 l2
