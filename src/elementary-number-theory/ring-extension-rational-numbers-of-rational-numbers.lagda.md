@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import ring-theory.homomorphisms-ring-extensions-rational-numbers
 open import ring-theory.homomorphisms-rings
 open import ring-theory.localizations-rings
+open import ring-theory.rational-extension-initial-hom-ring-extensions-rational-numbers
 open import ring-theory.ring-extensions-rational-numbers
 open import ring-theory.rings
 ```
