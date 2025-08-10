@@ -335,7 +335,11 @@ elim-list-Wild-Monoid M f =
 
 ### Pulling back `hom (list X) M` along the inclusion `X → list X` is an equivalence
 
+This remains to be formalized. Below is some work towards this goal:
+
 ```agda
+{-
+
 module _
   {l1 l2 : Level} (X : UU l1) (M : Wild-Monoid l2)
   where
@@ -415,4 +419,6 @@ is-free-wild-monoid-on-type-list-Wild-Monoid :
   is-free-wild-monoid-on-type X (list-Wild-Monoid X) (λ x → cons x nil)
 is-free-wild-monoid-on-type-list-Wild-Monoid X N =
   is-equiv-map-inv-is-equiv (is-equiv-elim-list-Wild-Monoid X N)
+
+-}
 ```
