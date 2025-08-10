@@ -96,6 +96,7 @@ has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
+- [Finitely enumerable types](univalent-combinatorics.finitely-enumerable-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
 
 ## External links
