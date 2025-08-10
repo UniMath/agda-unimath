@@ -44,12 +44,10 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.dependent-products-rings
 open import ring-theory.groups-of-units-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
-open import ring-theory.opposite-rings
 open import ring-theory.rings
 ```
 
@@ -176,31 +174,6 @@ module _
     is-right-inverse-inv-is-invertible-element-Ring
       ( ring-Rational-Extension-Ring)
       ( is-rational-extension-ring-Rational-Extension-Ring k k>0)
-```
-
-### Homorphisms of ring extensions of `ℚ`
-
-```agda
-module _
-  {l1 l2 : Level}
-  (A : Rational-Extension-Ring l1)
-  (B : Rational-Extension-Ring l2)
-  where
-
-  hom-Rational-Extension-Ring : UU (l1 ⊔ l2)
-  hom-Rational-Extension-Ring =
-    hom-Ring
-      ( ring-Rational-Extension-Ring A)
-      ( ring-Rational-Extension-Ring B)
-
-  map-hom-Rational-Extension-Ring :
-    hom-Rational-Extension-Ring →
-    type-Rational-Extension-Ring A →
-    type-Rational-Extension-Ring B
-  map-hom-Rational-Extension-Ring =
-    map-hom-Ring
-      ( ring-Rational-Extension-Ring A)
-      ( ring-Rational-Extension-Ring B)
 ```
 
 ### The initial ring homomorphism into a ring extension of `ℚ`
@@ -343,102 +316,6 @@ module _
 ```
 
 ## Properties
-
-### A ring is an extension of `ℚ` if and only if its opposite ring is
-
-```agda
-module _
-  {l : Level} (R : Ring l)
-  where
-
-  is-rational-extension-op-is-rational-extension-Ring :
-    is-rational-extension-Ring R → is-rational-extension-Ring (op-Ring R)
-  is-rational-extension-op-is-rational-extension-Ring H k k>0 =
-    ( inv-positive-integer-Rational-Extension-Ring (R , H) (k , k>0)) ,
-    ( left-inverse-law-positive-integer-Rational-Extension-Ring
-      ( R , H)
-      ( k , k>0)) ,
-    ( right-inverse-law-positive-integer-Rational-Extension-Ring
-      ( R , H)
-      ( k , k>0))
-
-  is-rational-extension-is-rational-extension-op-Ring :
-    is-rational-extension-Ring (op-Ring R) → is-rational-extension-Ring R
-  is-rational-extension-is-rational-extension-op-Ring H k k>0 =
-    ( inv-positive-integer-Rational-Extension-Ring (op-Ring R , H) (k , k>0)) ,
-    ( left-inverse-law-positive-integer-Rational-Extension-Ring
-      ( op-Ring R , H)
-      ( k , k>0)) ,
-    ( right-inverse-law-positive-integer-Rational-Extension-Ring
-      ( op-Ring R , H)
-      ( k , k>0))
-
-module _
-  {l : Level}
-  where
-
-  op-Rational-Extension-Ring :
-    Rational-Extension-Ring l → Rational-Extension-Ring l
-  op-Rational-Extension-Ring R =
-    ( op-Ring (ring-Rational-Extension-Ring R)) ,
-    ( is-rational-extension-op-is-rational-extension-Ring
-      ( ring-Rational-Extension-Ring R)
-      ( is-rational-extension-ring-Rational-Extension-Ring R))
-```
-
-### The product of ring extensions of `ℚ` is a ring extension of `ℚ`
-
-```agda
-module _
-  {l1 l2 : Level} (I : UU l1) (R : I → Rational-Extension-Ring l2)
-  where
-
-  is-rational-extension-ring-Π-Rational-Extension-Ring :
-    is-rational-extension-Ring (Π-Ring I (ring-Rational-Extension-Ring ∘ R))
-  is-rational-extension-ring-Π-Rational-Extension-Ring k k>0 =
-    ( λ i → inv-positive-integer-Rational-Extension-Ring (R i) (k , k>0)) ,
-    ( eq-htpy
-      ( λ i →
-        inv-tr
-          ( λ h →
-            mul-Rational-Extension-Ring
-              ( R i)
-              ( map-hom-Ring
-                ( ℤ-Ring)
-                ( Π-Ring I (ring-Rational-Extension-Ring ∘ R))
-                ( h)
-                ( k)
-                ( i))
-              ( inv-positive-integer-Rational-Extension-Ring (R i) (k , k>0)) ＝
-            one-Ring (ring-Rational-Extension-Ring (R i)))
-          ( eq-initial-hom-Π-Ring I (ring-Rational-Extension-Ring ∘ R))
-          ( right-inverse-law-positive-integer-Rational-Extension-Ring
-            ( R i)
-            ( k , k>0)))) ,
-    ( eq-htpy
-      ( λ i →
-        inv-tr
-          ( λ h →
-            mul-Rational-Extension-Ring
-              ( R i)
-              ( inv-positive-integer-Rational-Extension-Ring (R i) (k , k>0))
-              ( map-hom-Ring
-                ( ℤ-Ring)
-                ( Π-Ring I (ring-Rational-Extension-Ring ∘ R))
-                ( h)
-                ( k)
-                ( i)) ＝
-            one-Ring (ring-Rational-Extension-Ring (R i)))
-          ( eq-initial-hom-Π-Ring I (ring-Rational-Extension-Ring ∘ R))
-          ( left-inverse-law-positive-integer-Rational-Extension-Ring
-            ( R i)
-            ( k , k>0))))
-
-  Π-Rational-Extension-Ring : Rational-Extension-Ring (l1 ⊔ l2)
-  Π-Rational-Extension-Ring =
-    ( Π-Ring I (ring-Rational-Extension-Ring ∘ R)) ,
-    ( is-rational-extension-ring-Π-Rational-Extension-Ring)
-```
 
 ### The inverse of the image of one in a ring extension of `ℚ` is one
 
