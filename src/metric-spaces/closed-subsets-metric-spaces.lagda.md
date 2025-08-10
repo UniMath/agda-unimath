@@ -28,7 +28,9 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.closure-subsets-metric-spaces
+open import metric-spaces.complete-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.discrete-metric-spaces
@@ -36,7 +38,6 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.open-subsets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.complete-metric-spaces
 ```
 
 </details>
@@ -261,4 +262,47 @@ module _
                 ( subset-closed-subset-Metric-Space (X i) (C i)))))
           ( λ ( g , g∈Nεf , k) → unit-trunc-Prop (g i , g∈Nεf i , k i))
           ( f∈ΠC ε))
+```
+
+### A closed subset of a complete metric space is complete
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Complete-Metric-Space l1 l2)
+  (C : closed-subset-Metric-Space l3 (metric-space-Complete-Metric-Space X))
+  where
+
+  is-complete-closed-subspace-Complete-Metric-Space :
+    is-complete-Metric-Space
+      ( subspace-Metric-Space
+        ( metric-space-Complete-Metric-Space X)
+        ( subset-closed-subset-Metric-Space
+          ( metric-space-Complete-Metric-Space X)
+          ( C)))
+  is-complete-closed-subspace-Complete-Metric-Space x =
+    ( ( lim-x ,
+        is-closed-subset-closed-subset-Metric-Space
+          ( X')
+          ( C)
+          ( lim-x)
+          ( in-closure-limit-cauchy-approximation-subset-Metric-Space X'
+            ( subset-closed-subset-Metric-Space X' C)
+            ( convergent-cauchy-approximation-Complete-Metric-Space X x')
+            ( λ ε → pr2 (pr1 x ε)))) ,
+      is-limit-limit-cauchy-approximation-Complete-Metric-Space X x')
+    where
+      X' = metric-space-Complete-Metric-Space X
+      x' : cauchy-approximation-Metric-Space X'
+      x' = pr1 ∘ pr1 x , pr2 x
+      lim-x = limit-cauchy-approximation-Complete-Metric-Space X x'
+
+  complete-closed-subspace-Complete-Metric-Space :
+    Complete-Metric-Space (l1 ⊔ l3) l2
+  complete-closed-subspace-Complete-Metric-Space =
+    ( subspace-Metric-Space
+        ( metric-space-Complete-Metric-Space X)
+        ( subset-closed-subset-Metric-Space
+          ( metric-space-Complete-Metric-Space X)
+          ( C)) ,
+      is-complete-closed-subspace-Complete-Metric-Space)
 ```

@@ -14,6 +14,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -90,9 +91,7 @@ abstract
 ### The absolute value of a nonnegative rational number is the number itself
 
 ```agda
-opaque
-  unfolding neg-ℚ
-
+abstract
   abs-rational-ℚ⁰⁺ : (q : ℚ⁰⁺) → abs-ℚ (rational-ℚ⁰⁺ q) ＝ q
   abs-rational-ℚ⁰⁺ (q , nonneg-q) =
     eq-ℚ⁰⁺
@@ -104,7 +103,10 @@ opaque
           ( zero-ℚ)
           ( q)
           ( leq-zero-is-nonnegative-ℚ q nonneg-q)
-          ( neg-leq-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q))))
+          ( tr
+            ( leq-ℚ (neg-ℚ q))
+            ( is-zero-neg-zero-ℚ)
+            ( neg-leq-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q)))))
 
   rational-abs-zero-leq-ℚ : (q : ℚ) → leq-ℚ zero-ℚ q → rational-abs-ℚ q ＝ q
   rational-abs-zero-leq-ℚ q 0≤q =
@@ -120,8 +122,22 @@ opaque
         ( q)
         ( zero-ℚ)
         ( neg-ℚ q)
-        ( neg-leq-ℚ q zero-ℚ q≤0)
+        ( tr
+          ( λ p → leq-ℚ p (neg-ℚ q))
+          ( is-zero-neg-zero-ℚ)
+          ( neg-leq-ℚ q zero-ℚ q≤0))
         ( q≤0))
+```
+
+### The absolute value of a positive rational number is the number itself
+
+```agda
+abstract
+  rational-abs-rational-ℚ⁺ :
+    (q : ℚ⁺) →
+    rational-abs-ℚ (rational-ℚ⁺ q) ＝ rational-ℚ⁺ q
+  rational-abs-rational-ℚ⁺ q⁺ =
+    ap rational-ℚ⁰⁺ (abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ q⁺))
 ```
 
 ### The absolute value of the negation of `q` is the absolute value of `q`

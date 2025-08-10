@@ -435,21 +435,18 @@ is-zero-limit-rational-ℚ⁺ :
     ( metric-space-ℚ)
     ( cauchy-approximation-rational-ℚ⁺)
     ( zero-ℚ)
-is-zero-limit-rational-ℚ⁺ ε δ =
-  ( leq-le-ℚ
-    { zero-ℚ}
-    { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
-    ( le-zero-is-positive-ℚ
-      ( rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ)))
-      ( is-positive-rational-ℚ⁺
-        (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
-  ( leq-le-ℚ
-    { rational-ℚ⁺ ε}
-    { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}
-    ( inv-tr
-      ( le-ℚ (rational-ℚ⁺ ε))
-      ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-left-add-ℚ⁺ ε δ)))
+is-zero-limit-rational-ℚ⁺ ε⁺@(ε , is-pos-ε) =
+  neighborhood-leq-dist-ℚ ε⁺
+    ( ε)
+    ( zero-ℚ)
+    ( leq-eq-ℚ _ _
+      ( equational-reasoning
+        rational-dist-ℚ ε zero-ℚ
+        ＝ rational-abs-ℚ (ε +ℚ zero-ℚ)
+          by ap rational-abs-ℚ (ap (ε +ℚ_) is-zero-neg-zero-ℚ)
+        ＝ rational-abs-ℚ ε
+          by ap rational-abs-ℚ (right-unit-law-add-ℚ ε)
+        ＝ ε by rational-abs-rational-ℚ⁺ ε⁺))
 
 convergent-rational-ℚ⁺ :
   convergent-cauchy-approximation-Metric-Space metric-space-ℚ

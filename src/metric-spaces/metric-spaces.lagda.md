@@ -225,6 +225,12 @@ module _
   refl-neighborhood-Metric-Space =
     refl-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
+  refl-eq-neighborhood-Metric-Space :
+    (d : ℚ⁺) {x y : type-Metric-Space} → x ＝ y →
+    neighborhood-Metric-Space d x y
+  refl-eq-neighborhood-Metric-Space d {x} {y} x=y =
+    tr (neighborhood-Metric-Space d x) x=y (refl-neighborhood-Metric-Space d x)
+
   symmetric-neighborhood-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space) →
     neighborhood-Metric-Space d x y →

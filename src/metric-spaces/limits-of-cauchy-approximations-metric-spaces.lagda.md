@@ -85,8 +85,8 @@ module _
         ( δ)
         ( ε+ε<δ)
         ( triangular-neighborhood-Metric-Space A x fε y ε ε
-          {!   !}
-          {!   !})
+          ( lim-y ε)
+          ( symmetric-neighborhood-Metric-Space A ε fε x (lim-x ε)))
 
   all-eq-is-limit-cauchy-approximation-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space A f x →

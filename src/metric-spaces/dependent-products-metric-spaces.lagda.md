@@ -196,8 +196,8 @@ module _
       ( P x)
       ( ev-cauchy-approximation-Π-Metric-Space A P f x)
       ( g x)
-  is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space L x ε δ =
-    L ε δ x
+  is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space L x ε =
+    L ε x
 
   is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space :
     ( (x : A) →
@@ -209,8 +209,8 @@ module _
       ( Π-Metric-Space A P)
       ( f)
       ( g)
-  is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space L ε δ x =
-    L x ε δ
+  is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space L ε x =
+    L x ε
 ```
 
 ### A product of complete metric spaces is complete
@@ -235,12 +235,11 @@ module _
       ( Π-Metric-Space A P)
       ( u)
       ( limit-cauchy-approximation-Π-is-complete-Metric-Space u)
-  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
+  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε x =
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( P x , Π-complete x)
       ( ev-cauchy-approximation-Π-Metric-Space A P u x)
       ( ε)
-      ( δ)
 
   is-complete-Π-Metric-Space :
     is-complete-Metric-Space (Π-Metric-Space A P)

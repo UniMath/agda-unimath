@@ -132,10 +132,10 @@ module _
   limit-convergent-cauchy-approximation-Metric-Space = pr1 (pr2 f)
 
   is-limit-limit-convergent-cauchy-approximation-Metric-Space :
-    (ε δ : ℚ⁺) →
+    (ε : ℚ⁺) →
     neighborhood-Metric-Space
       ( A)
-      ( ε +ℚ⁺ δ)
+      ( ε)
       ( map-convergent-cauchy-approximation-Metric-Space ε)
       ( limit-convergent-cauchy-approximation-Metric-Space)
   is-limit-limit-convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)

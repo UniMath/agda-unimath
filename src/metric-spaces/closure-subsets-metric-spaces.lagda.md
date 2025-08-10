@@ -1,6 +1,6 @@
 # The closure of subsets of metric spaces
-```agda
 
+```agda
 module metric-spaces.closure-subsets-metric-spaces where
 ```
 
@@ -14,18 +14,18 @@ open import foundation.empty-subtypes
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.images
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
-open import foundation.images
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-approximations-metric-spaces
 ```
 
 </details>
@@ -99,22 +99,22 @@ module _
   {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (S : subset-Metric-Space l3 X)
   where
 
-  limit-cauchy-approximation-in-closure-subset-Metric-Space :
+  in-closure-limit-cauchy-approximation-subset-Metric-Space :
     (x : convergent-cauchy-approximation-Metric-Space X) →
     (x⊆S :
-      subtype-im (map-convergent-cauchy-approximation-Metric-Space X x) ⊆ S) →
+      (ε : ℚ⁺) →
+      type-Prop (S (map-convergent-cauchy-approximation-Metric-Space X x ε))) →
     type-Prop
       (closure-subset-Metric-Space
         ( X)
         ( S)
         ( limit-convergent-cauchy-approximation-Metric-Space X x))
-  limit-cauchy-approximation-in-closure-subset-Metric-Space
+  in-closure-limit-cauchy-approximation-subset-Metric-Space
     (x , lim-x , is-lim-lim-x) x⊆S ε =
       let xε = map-cauchy-approximation-Metric-Space X x ε
       in
         intro-exists
           ( xε)
-          ( {! is-lim-lim-x ? ? !} ,
-            x⊆S xε (intro-exists ε refl))
-
+          ( symmetric-neighborhood-Metric-Space X ε xε lim-x (is-lim-lim-x ε) ,
+            x⊆S ε)
 ```
