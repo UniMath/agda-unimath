@@ -360,4 +360,4 @@ module _
 ## See also
 
 - [`rational-extension-initial-hom-ring-extensions-rational-numbers`](ring-theory.rational-extension-initial-hom-ring-extensions-rational-numbers.md):
-  the initial ring homomorphism from `ℚ` into a rational extension of `ℚ`.
+  the initial ring homomorphism from `ℚ` into a ring extension of `ℚ`.
