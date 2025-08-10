@@ -36,6 +36,7 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.open-subsets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.complete-metric-spaces
 ```
 
 </details>
