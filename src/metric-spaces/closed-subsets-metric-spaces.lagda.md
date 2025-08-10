@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import logic.functoriality-existential-quantification
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
@@ -105,6 +106,24 @@ closed-subset-Located-Metric-Space l3 X =
 
 ## Properties
 
+### If a set is closed, its closure has the same elements as itself
+
+```agda
+module _
+  {l1 l2 : Level} (X : Metric-Space l1 l2)
+  where
+
+  has-same-elements-closure-closed-subset-Metric-Space :
+    {l3 : Level} (S : closed-subset-Metric-Space l3 X) →
+    has-same-elements-subtype
+      ( subset-closed-subset-Metric-Space X S)
+      ( closure-subset-Metric-Space X (subset-closed-subset-Metric-Space X S))
+  pr1 (has-same-elements-closure-closed-subset-Metric-Space (S , closed-S) x) =
+    is-subset-closure-subset-Metric-Space X S x
+  pr2 (has-same-elements-closure-closed-subset-Metric-Space (S , closed-S) x) =
+    closed-S x
+```
+
 ### The empty set is closed
 
 ```agda
@@ -169,16 +188,7 @@ module _
         ( subset-intersection-family-closed-subset-Metric-Space)
     is-closed-subset-intersection-family-closed-subset-Metric-Space x x∈cl i =
       is-closed-subset-closed-subset-Metric-Space X (F i) x
-        ( λ ε →
-          let
-            open
-              do-syntax-trunc-Prop
-                ( intersect-prop-subtype
-                  ( neighborhood-prop-Metric-Space X ε x)
-                  ( subset-closed-subset-Metric-Space X (F i)))
-          in do
-            (y , y∈Nεx , y∈F) ← x∈cl ε
-            intro-exists y (y∈Nεx , y∈F i))
+        ( λ ε → map-tot-exists (λ _ (y∈Nεx , y∈F) → (y∈Nεx , y∈F i)) (x∈cl ε))
 
   intersection-family-closed-subset-Metric-Space :
     closed-subset-Metric-Space (l3 ⊔ l4) X
@@ -187,7 +197,7 @@ module _
       is-closed-subset-intersection-family-closed-subset-Metric-Space)
 ```
 
-### If the union of two closed sets is closed, then LLPO
+### If the union of two closed sets is always closed, then LLPO
 
 This has yet to be formalized.
 
