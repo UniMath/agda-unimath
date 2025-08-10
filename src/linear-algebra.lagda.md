@@ -15,6 +15,7 @@ open import linear-algebra.finite-sequences-in-commutative-semirings public
 open import linear-algebra.finite-sequences-in-euclidean-domains public
 open import linear-algebra.finite-sequences-in-monoids public
 open import linear-algebra.finite-sequences-in-rings public
+open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.left-modules-rings public

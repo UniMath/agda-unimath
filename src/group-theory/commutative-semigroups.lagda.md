@@ -81,6 +81,13 @@ module _
     type-Commutative-Semigroup
   mul-Commutative-Semigroup' y x = mul-Commutative-Semigroup x y
 
+  ap-mul-Commutative-Semigroup :
+    {x x' y y' : type-Commutative-Semigroup} →
+    x ＝ x' → y ＝ y' →
+    mul-Commutative-Semigroup x y ＝ mul-Commutative-Semigroup x' y'
+  ap-mul-Commutative-Semigroup =
+    ap-mul-Semigroup semigroup-Commutative-Semigroup
+
   associative-mul-Commutative-Semigroup :
     (x y z : type-Commutative-Semigroup) →
     mul-Commutative-Semigroup (mul-Commutative-Semigroup x y) z ＝
