@@ -7,6 +7,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -17,11 +18,13 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -36,6 +39,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -280,6 +284,54 @@ module _
       enum-X ← eX
       enum-Y ← eY
       unit-trunc-Prop (finite-enumeration-coproduct enum-X enum-Y)
+```
+
+### Finitely enumerable types are closed under Cartesian products
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  finite-enumeration-product :
+    finite-enumeration X → finite-enumeration Y → finite-enumeration (X × Y)
+  finite-enumeration-product (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
+    let
+      surj-map : (Fin nX × Fin nY) → X × Y
+      surj-map =
+        map-product (map-surjection Fin-nX↠X) (map-surjection Fin-nY↠Y)
+      is-surjective-surj-map : is-surjective surj-map
+      is-surjective-surj-map =
+        λ (x , y) →
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber surj-map (x , y)))
+          in do
+            (ix , fix=x) ← is-surjective-map-surjection Fin-nX↠X x
+            (iy , fiy=y) ← is-surjective-map-surjection Fin-nY↠Y y
+            intro-exists (ix , iy) (eq-pair fix=x fiy=y)
+    in
+      ( nX *ℕ nY ,
+        surj-map ∘ map-inv-equiv (product-Fin nX nY) ,
+        is-surjective-right-comp-equiv
+          ( is-surjective-surj-map)
+          ( inv-equiv (product-Fin nX nY)))
+
+  is-finitely-enumerable-product :
+    is-finitely-enumerable X → is-finitely-enumerable Y →
+    is-finitely-enumerable (X × Y)
+  is-finitely-enumerable-product eX eY =
+    let open do-syntax-trunc-Prop (is-finitely-enumerable-prop (X × Y))
+    in do
+      ex ← eX
+      ey ← eY
+      unit-trunc-Prop (finite-enumeration-product ex ey)
+
+product-Finitely-Enumerable-Type :
+  {l1 l2 : Level}
+  (X : Finitely-Enumerable-Type l1)
+  (Y : Finitely-Enumerable-Type l2) →
+  Finitely-Enumerable-Type (l1 ⊔ l2)
+product-Finitely-Enumerable-Type (X , eX) (Y , eY) =
+  (X × Y , is-finitely-enumerable-product eX eY)
 ```
 
 ## See also
