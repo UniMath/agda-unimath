@@ -45,7 +45,7 @@ propositions:
   [invertible elements](ring-theory.invertible-elements-rings.md), i.e., the
   initial ring homomorphism [inverts](ring-theory.localizations-rings.md) the
   subset of positive integers;
-- there exist a [ring homomorphism](ring-theory.homomorphisms-rings.md) `ℚ → R`
+- there exists a [ring homomorphism](ring-theory.homomorphisms-rings.md) `ℚ → R`
   from the
   [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md)
   to `R`;
