@@ -83,7 +83,7 @@ The unique ring homomorphism from `ℚ` to a ring extension of `ℚ` is given by
 
 ## Definitions
 
-### The property of being a rational ring
+### The predicate on a ring of being a ring extension of the rational numbers
 
 ```agda
 module _
