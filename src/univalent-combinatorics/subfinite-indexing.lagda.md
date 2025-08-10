@@ -47,6 +47,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.dedekind-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.pigeonhole-principle
@@ -117,19 +118,19 @@ module _
   is-injective-map-emb-subfinite-indexing =
     is-injective-map-subcount subcount-indexing-type-subfinite-indexing
 
-  projection-subfinite-indexing :
+  surjection-subfinite-indexing :
     indexing-type-subfinite-indexing ↠ X
-  projection-subfinite-indexing = pr2 (pr2 e)
+  surjection-subfinite-indexing = pr2 (pr2 e)
 
-  map-projection-subfinite-indexing :
+  map-surjection-subfinite-indexing :
     indexing-type-subfinite-indexing → X
-  map-projection-subfinite-indexing =
-    map-surjection projection-subfinite-indexing
+  map-surjection-subfinite-indexing =
+    map-surjection surjection-subfinite-indexing
 
-  is-surjective-map-projection-subfinite-indexing :
-    is-surjective map-projection-subfinite-indexing
-  is-surjective-map-projection-subfinite-indexing =
-    is-surjective-map-surjection projection-subfinite-indexing
+  is-surjective-map-surjection-subfinite-indexing :
+    is-surjective map-surjection-subfinite-indexing
+  is-surjective-map-surjection-subfinite-indexing =
+    is-surjective-map-surjection surjection-subfinite-indexing
 ```
 
 ## Properties
@@ -198,7 +199,7 @@ module _
   indexing-subtype-subfinite-indexing-subtype :
     subtype l2 (indexing-type-subfinite-indexing f)
   indexing-subtype-subfinite-indexing-subtype d =
-    P (map-projection-subfinite-indexing f d)
+    P (map-surjection-subfinite-indexing f d)
 
   indexing-type-subfinite-indexing-subtype : UU (l2 ⊔ l3)
   indexing-type-subfinite-indexing-subtype =
@@ -222,30 +223,30 @@ module _
     ( bound-number-of-elements-subfinite-indexing-subtype ,
       emb-subfinite-indexing-subtype)
 
-  map-projection-subfinite-indexing-subtype :
+  map-surjection-subfinite-indexing-subtype :
     indexing-type-subfinite-indexing-subtype → type-subtype P
-  map-projection-subfinite-indexing-subtype (d , p) =
-    (map-projection-subfinite-indexing f d , p)
+  map-surjection-subfinite-indexing-subtype (d , p) =
+    (map-surjection-subfinite-indexing f d , p)
 
   abstract
-    is-surjective-map-projection-subfinite-indexing-subtype :
-      is-surjective map-projection-subfinite-indexing-subtype
-    is-surjective-map-projection-subfinite-indexing-subtype (x , p) =
+    is-surjective-map-surjection-subfinite-indexing-subtype :
+      is-surjective map-surjection-subfinite-indexing-subtype
+    is-surjective-map-surjection-subfinite-indexing-subtype (x , p) =
       map-trunc-Prop
         ( λ where (y , refl) → ((y , p) , refl))
-        ( is-surjective-map-projection-subfinite-indexing f x)
+        ( is-surjective-map-surjection-subfinite-indexing f x)
 
-  projection-subfinite-indexing-subtype :
+  surjection-subfinite-indexing-subtype :
     indexing-type-subfinite-indexing-subtype ↠ type-subtype P
-  projection-subfinite-indexing-subtype =
-    ( map-projection-subfinite-indexing-subtype ,
-      is-surjective-map-projection-subfinite-indexing-subtype)
+  surjection-subfinite-indexing-subtype =
+    ( map-surjection-subfinite-indexing-subtype ,
+      is-surjective-map-surjection-subfinite-indexing-subtype)
 
   subfinite-indexing-subtype : subfinite-indexing (l2 ⊔ l3) (type-subtype P)
   subfinite-indexing-subtype =
     ( indexing-type-subfinite-indexing-subtype ,
       subcount-subfinite-indexing-subtype ,
-      projection-subfinite-indexing-subtype)
+      surjection-subfinite-indexing-subtype)
 ```
 
 ### Types equipped with subfinite indexings are closed under embeddings
@@ -327,91 +328,6 @@ module _
   where
 
   abstract
-    lemma-is-surjective-is-injective-endo-subfinite-indexing :
-      (f : X → X) →
-      is-injective f →
-      (x : X) →
-      ((i : Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c))) →
-      fiber
-        ( map-projection-subfinite-indexing c)
-        ( iterate
-          ( nat-Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) i)
-          ( f)
-          ( x))) →
-      fiber f x
-    lemma-is-surjective-is-injective-endo-subfinite-indexing
-      f is-injective-f x hy =
-      ( iterate k f x , compute-iterate-dist-f-x)
-      where abstract
-        y :
-          Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) →
-          indexing-type-subfinite-indexing c
-        y = pr1 ∘ hy
-
-        r : repetition-of-values y
-        r =
-          inv-ap-repetition-of-values
-            ( is-injective-emb (emb-subfinite-indexing c))
-            ( repetition-of-values-Fin-succ-to-Fin
-              ( bound-number-of-elements-subfinite-indexing c)
-              ( map-emb-subfinite-indexing c ∘ y))
-
-        i : ℕ
-        i =
-          nat-Fin
-            ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
-            ( first-repetition-of-values y r)
-
-        j : ℕ
-        j =
-          nat-Fin
-            ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
-            ( second-repetition-of-values y r)
-
-        k+1-nonzero : ℕ⁺
-        k+1-nonzero =
-          ( dist-ℕ i j ,
-            dist-neq-ℕ i j
-              ( distinction-repetition-of-values y r ∘
-                is-injective-nat-Fin
-                  ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))))
-
-        k : ℕ
-        k = pred-ℕ⁺ k+1-nonzero
-
-        compute-succ-k : succ-ℕ k ＝ dist-ℕ i j
-        compute-succ-k = ap pr1 (is-section-succ-nonzero-ℕ' k+1-nonzero)
-
-        compute-iterate-f-x : iterate i f x ＝ iterate j f x
-        compute-iterate-f-x =
-          inv (pr2 (hy (first-repetition-of-values y r))) ∙
-          ap
-            ( map-projection-subfinite-indexing c)
-            ( is-repetition-of-values-repetition-of-values y r) ∙
-          pr2 (hy (second-repetition-of-values y r))
-
-        compute-iterate-min-max-f-x :
-          iterate (max-ℕ i j) f x ＝ iterate (min-ℕ i j) f x
-        compute-iterate-min-max-f-x =
-          eq-value-min-max-eq-value-sequence
-            ( λ u → iterate u f x)
-            ( i)
-            ( j)
-            ( compute-iterate-f-x)
-
-        compute-iterate-dist-f-x : f (iterate k f x) ＝ x
-        compute-iterate-dist-f-x =
-          compute-iterate-offset f is-injective-f
-            ( min-ℕ i j)
-            ( k)
-            ( ( ap
-                ( λ u → iterate u f x)
-                ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
-                  ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
-                  ( eq-max-dist-min-ℕ i j))) ∙
-              ( compute-iterate-min-max-f-x))
-
-  abstract
     is-surjective-is-injective-endo-subfinite-indexing :
       (f : X → X) → is-injective f → is-surjective f
     is-surjective-is-injective-endo-subfinite-indexing f F x =
@@ -420,16 +336,101 @@ module _
         ( finite-choice-Fin
           ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
           ( λ i →
-            is-surjective-map-projection-subfinite-indexing c
+            is-surjective-map-surjection-subfinite-indexing c
               ( iterate
                 ( nat-Fin
                   ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
                   ( i))
                 ( f)
                 ( x))))
+      where abstract
+        lemma-is-surjective-is-injective-endo-subfinite-indexing :
+          (f : X → X) →
+          is-injective f →
+          (x : X) →
+          ((i : Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c))) →
+          fiber
+            ( map-surjection-subfinite-indexing c)
+            ( iterate
+              ( nat-Fin
+                ( succ-ℕ (bound-number-of-elements-subfinite-indexing c)) i)
+              ( f)
+              ( x))) →
+          fiber f x
+        lemma-is-surjective-is-injective-endo-subfinite-indexing
+          f is-injective-f x hy =
+          ( iterate k f x , compute-iterate-dist-f-x)
+          where abstract
+            y :
+              Fin (succ-ℕ (bound-number-of-elements-subfinite-indexing c)) →
+              indexing-type-subfinite-indexing c
+            y = pr1 ∘ hy
 
-  is-dedekind-finite-subfinite-indexing :
-    (f : X → X) → is-emb f → is-equiv f
+            r : repetition-of-values y
+            r =
+              repetition-of-values-right-factor'
+                ( is-injective-emb (emb-subfinite-indexing c))
+                ( repetition-of-values-Fin-succ-to-Fin
+                  ( bound-number-of-elements-subfinite-indexing c)
+                  ( map-emb-subfinite-indexing c ∘ y))
+
+            i : ℕ
+            i =
+              nat-Fin
+                ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+                ( first-repetition-of-values y r)
+
+            j : ℕ
+            j =
+              nat-Fin
+                ( succ-ℕ (bound-number-of-elements-subfinite-indexing c))
+                ( second-repetition-of-values y r)
+
+            k+1-nonzero : ℕ⁺
+            k+1-nonzero =
+              ( dist-ℕ i j ,
+                dist-neq-ℕ i j
+                  ( distinction-repetition-of-values y r ∘
+                    is-injective-nat-Fin
+                      ( succ-ℕ
+                        ( bound-number-of-elements-subfinite-indexing c))))
+
+            k : ℕ
+            k = pred-ℕ⁺ k+1-nonzero
+
+            compute-succ-k : succ-ℕ k ＝ dist-ℕ i j
+            compute-succ-k = ap pr1 (is-section-succ-nonzero-ℕ' k+1-nonzero)
+
+            compute-iterate-f-x : iterate i f x ＝ iterate j f x
+            compute-iterate-f-x =
+              inv (pr2 (hy (first-repetition-of-values y r))) ∙
+              ap
+                ( map-surjection-subfinite-indexing c)
+                ( is-repetition-of-values-repetition-of-values y r) ∙
+              pr2 (hy (second-repetition-of-values y r))
+
+            compute-iterate-min-max-f-x :
+              iterate (max-ℕ i j) f x ＝ iterate (min-ℕ i j) f x
+            compute-iterate-min-max-f-x =
+              eq-value-min-max-eq-value-sequence
+                ( λ u → iterate u f x)
+                ( i)
+                ( j)
+                ( compute-iterate-f-x)
+
+            compute-iterate-dist-f-x : f (iterate k f x) ＝ x
+            compute-iterate-dist-f-x =
+              compute-iterate-offset f is-injective-f
+                ( min-ℕ i j)
+                ( k)
+                ( ( ap
+                    ( λ u → iterate u f x)
+                    ( ( inv (left-successor-law-add-ℕ k (min-ℕ i j))) ∙
+                      ( ap (_+ℕ min-ℕ i j) compute-succ-k) ∙
+                      ( eq-max-dist-min-ℕ i j))) ∙
+                  ( compute-iterate-min-max-f-x))
+
+  is-dedekind-finite-subfinite-indexing : is-dedekind-finite X
   is-dedekind-finite-subfinite-indexing f is-emb-f =
     is-equiv-is-emb-is-surjective
       ( is-surjective-is-injective-endo-subfinite-indexing f

@@ -37,8 +37,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "repetition of values" Disambiguation="of a map of types"}} of a
-map `f : A → B` consists of a
+A **repetition of values** of a map `f : A → B` consists of a
 [pair of distinct elements](foundation.pairs-of-distinct-elements.md) `x ≠ y` of
 `A` that get mapped to the [same](foundation-core.identity-types.md) element in
 `B`: `f x ＝ f y`.
@@ -90,8 +89,8 @@ repetition-of-values-is-not-injective-Fin k l f N =
       ( K)
 ```
 
-> We could modify this construction to provide proof that `i < j` rather than
-> `i ≠ j`.
+> **Comment.** We could modify this construction to provide proof that `i < j`
+> rather than `i ≠ j`.
 
 ### On the standard finite sets, we can count the number of pairs of distinct elements
 
@@ -118,12 +117,12 @@ is-decidable-is-repeated-value-Fin k l f x =
     ( λ (y , p) → has-decidable-equality-Fin l (f x) (f y))
 ```
 
-### On the standard finite sets, `has-repetition-of-values f` is decidable
+### On the standard finite sets, `repetition-of-values f` is decidable
 
 ```agda
-is-decidable-has-repetition-of-values-Fin :
+is-decidable-repetition-of-values-Fin :
   (k l : ℕ) (f : Fin k → Fin l) → is-decidable (repetition-of-values f)
-is-decidable-has-repetition-of-values-Fin k l f =
+is-decidable-repetition-of-values-Fin k l f =
   is-decidable-Σ-count
     ( count-pair-of-distinct-elements-Fin k)
     ( λ (x , y , _) → has-decidable-equality-Fin l (f x) (f y))

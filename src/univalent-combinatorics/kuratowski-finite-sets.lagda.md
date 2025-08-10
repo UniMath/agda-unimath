@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "Kuratowski finite set" agda=Kuratowski-Finite-Set}} is a
+A {{#concept "Kuratowski finite set" Agda=Kuratowski-Finite-Set}} is a
 [set](foundation-core.sets.md) `X` for which there exists a
 [surjection](foundation.surjective-maps.md) into `X` from a standard finite
 type. In other words, a Kuratowski finite set is a

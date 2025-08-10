@@ -162,6 +162,7 @@ coproducts or products. {{#cite Sto87}}
 - [`Fin.Dedekind`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/Fin.Dedekind.html)
   at TypeTopology
 - [finite object#Dedekind finiteness](https://ncatlab.org/nlab/show/finite+object#dedekind_finiteness)
+  at $n$Lab
 - [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
 - [Dedekind-infinite set](https://en.wikipedia.org/wiki/Dedekind-infinite_set)
   at Wikipedia

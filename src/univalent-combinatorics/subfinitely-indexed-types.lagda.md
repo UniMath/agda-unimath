@@ -7,8 +7,6 @@ module univalent-combinatorics.subfinitely-indexed-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -35,7 +33,7 @@ open import univalent-combinatorics.subfinite-types
 ## Idea
 
 A type `X` is
-{{#concept "subfinitely indexed" agda=is-subfinitely-indexed agda=Subfinitely-Indexed-Type}},
+{{#concept "subfinitely indexed" Agda=is-subfinitely-indexed Agda=Subfinitely-Indexed-Type}},
 or **Kuratowski subfinite**, if there
 [exists](foundation.existential-quantification.md) a
 [surjection](foundation.surjective-maps.md) onto `X` from a

@@ -196,8 +196,20 @@ module _
 
 ### Embeddings of repetitions of values
 
-Given an embedding of arrows `f ↪ g`, then the type of repetitions of values of
-`f` embeds into the type of repetitions of values of `g`.
+Given an embedding of arrows `f ↪ g`, i.e. a commuting square
+
+```text
+         e
+    A ------> C
+    |         |
+  f |         | g
+    ∨         ∨
+    B ------> D
+         d
+```
+
+where `e` and `d` are embeddings, then the type of repetitions of values of `f`
+embeds into the type of repetitions of values of `g`.
 
 ```agda
 module _

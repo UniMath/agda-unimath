@@ -123,23 +123,15 @@ module _
   {f : A → B} {g : B → C}
   where
 
-  ap-repetition-of-values :
-    repetition-of-values f → repetition-of-values (g ∘ f)
-  ap-repetition-of-values (q , p) = (q , ap g p)
-
   is-noninjective-comp :
     is-noninjective f → is-noninjective (g ∘ f)
   is-noninjective-comp =
-    map-trunc-Prop ap-repetition-of-values
-
-  inv-ap-repetition-of-values :
-    is-injective g → repetition-of-values (g ∘ f) → repetition-of-values f
-  inv-ap-repetition-of-values G (q , p) = (q , G p)
+    map-trunc-Prop (repetition-of-values-comp {g = g} {f})
 
   is-noninjective-right-factor :
     is-injective g → is-noninjective (g ∘ f) → is-noninjective f
   is-noninjective-right-factor G =
-    map-trunc-Prop (inv-ap-repetition-of-values G)
+    map-trunc-Prop (repetition-of-values-right-factor' G)
 ```
 
 ## See also
