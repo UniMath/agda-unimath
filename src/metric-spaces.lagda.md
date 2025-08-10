@@ -54,6 +54,7 @@ open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
+open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
@@ -109,6 +110,7 @@ open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-rational-neighborhoods public
+open import metric-spaces.totally-bounded-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhoods public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 ```

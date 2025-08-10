@@ -83,6 +83,7 @@ net-Located-Metric-Space l3 X =
 Lemma 2.2.2 in {{#cite BV06}}.
 
 ```agda
+{-
 net-finite-enumeration-approximation-Located-Metric-Space :
   {l1 l2 l3 : Level} (X : Located-Metric-Space l1 l2)
   (δ : ℚ⁺) (S : approximation-Located-Metric-Space l3 X δ)
@@ -111,6 +112,7 @@ net-finite-enumeration-approximation-Located-Metric-Space
           ( subtype-standard-singleton-subtype (set-Located-Metric-Space X) s) ,
           {!   !})
         {!   !}
+-}
 ```
 
 ## References
