@@ -130,7 +130,7 @@ AC0-is-set-projective H A B K =
   axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
 - [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
   another weaker form of the axiom of choice.
-- [Finite choice](univalent-combinatorics.finite-choice.md)
+- [Finite choice](univalent-combinatorics.finite-choice.md), is the constructively true principle of the axiom of choice restricted to [finite types](univalent-combinatorics.finite-types.md).
 
 ## References
 
