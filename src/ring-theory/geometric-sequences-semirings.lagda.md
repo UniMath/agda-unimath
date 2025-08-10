@@ -226,13 +226,13 @@ module _
   {l : Level} (R : Semiring l) (u : geometric-sequence-Semiring R)
   where
 
-  hpty-mul-pow-geometric-sequence-Semiring :
+  htpy-mul-pow-geometric-sequence-Semiring :
     mul-pow-nat-Semiring
       ( R)
       ( initial-term-geometric-sequence-Semiring R u)
       ( common-ratio-geometric-sequence-Semiring R u) ~
     seq-geometric-sequence-Semiring R u
-  hpty-mul-pow-geometric-sequence-Semiring n =
+  htpy-mul-pow-geometric-sequence-Semiring n =
     ( htpy-mul-pow-standard-geometric-sequence-Semiring
       ( R)
       ( initial-term-geometric-sequence-Semiring R u)
