@@ -11,20 +11,20 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
-open import foundation.dependent-pair-types
-open import foundation.unit-type
 open import foundation.decidable-equality
 open import foundation.decidable-types
-open import foundation.universe-levels
-open import foundation.torsorial-type-families
+open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.torsorial-type-families
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.sets
-open import foundation-core.coproduct-types
 open import foundation-core.identity-types
+open import foundation-core.sets
 ```
 
 </details>
