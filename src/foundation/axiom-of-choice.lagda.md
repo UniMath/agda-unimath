@@ -7,6 +7,10 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
@@ -17,6 +21,8 @@ open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
+open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -26,6 +32,10 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -124,6 +134,10 @@ of choice for all types.
 
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
   the axiom of choice implies the law of excluded middle.
+- [The axiom of countable choice](foundation.axiom-of-countable-choice.md), the
+  axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
+- [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
+  another weaker form of the axiom of choice.
 
 ## References
 

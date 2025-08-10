@@ -33,7 +33,7 @@ elements of such a type are often called _2-paths_ and a twice iterated identity
 type is often called a _type of 2-paths_.
 
 Since 2-paths are just identifications, they have the usual operations and
-coherences on paths/identifications. In the context of 2-paths, this famliar
+coherences on paths/identifications. In the context of 2-paths, this familiar
 concatenation operation is called vertical concatenation (see
 `vertical-concat-Id²` below). However, 2-paths have novel operations and
 coherences derived from the operations and coherences of the boundary 1-paths
@@ -266,8 +266,8 @@ module _
   horizontal-inv-Id² = ap inv
 ```
 
-This operation satisfies a left and right idenity induced by the inverse laws on
-1-paths
+This operation satisfies a left and right identity induced by the inverse laws
+on 1-paths
 
 ```agda
 module _

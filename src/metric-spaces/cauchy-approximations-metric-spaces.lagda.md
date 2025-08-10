@@ -10,6 +10,7 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -80,6 +81,20 @@ module _
 ```
 
 ## Properties
+
+### Constant maps in metric spaces are Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  const-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space A
+  const-cauchy-approximation-Metric-Space =
+    (const ℚ⁺ x) , (λ ε δ → is-reflexive-structure-Metric-Space A (ε +ℚ⁺ δ) x)
+```
 
 ### Short maps between metric spaces preserve Cauchy approximations
 

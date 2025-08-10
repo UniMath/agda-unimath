@@ -36,6 +36,7 @@ open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
@@ -177,6 +178,14 @@ one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
+### The type of positive rational numbers is inhabited
+
+```agda
+abstract
+  is-inhabited-ℚ⁺ : ║ ℚ⁺ ║₋₁
+  is-inhabited-ℚ⁺ = unit-trunc-Prop one-ℚ⁺
+```
+
 ### The rational image of a positive natural number is positive
 
 ```agda
@@ -187,7 +196,9 @@ positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺
 ### The rational image of a positive integer fraction is positive
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-positive-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
     is-positive-ℚ (rational-fraction-ℤ x)
@@ -201,7 +212,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding le-ℚ-Prop
+
     le-zero-is-positive-ℚ : is-positive-ℚ x → le-ℚ zero-ℚ x
     le-zero-is-positive-ℚ =
       is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
@@ -255,21 +268,26 @@ module _
 ### A nonzero rational number or its negative is positive
 
 ```agda
-decide-is-negative-is-positive-is-nonzero-ℚ :
-  {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
-decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
-  rec-coproduct
-    ( inl ∘ is-positive-neg-is-negative-ℤ)
-    ( inr)
-    ( decide-sign-nonzero-ℤ
-      { numerator-ℚ x}
-      (is-nonzero-numerator-is-nonzero-ℚ x H))
+opaque
+  unfolding neg-ℚ
+
+  decide-is-negative-is-positive-is-nonzero-ℚ :
+    {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
+  decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
+    rec-coproduct
+      ( inl ∘ is-positive-neg-is-negative-ℤ)
+      ( inr)
+      ( decide-sign-nonzero-ℤ
+        { numerator-ℚ x}
+        ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
 ### A rational and its negative are not both positive
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   not-is-negative-is-positive-ℚ :
     (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
   not-is-negative-is-positive-ℚ x (N , P) =
@@ -299,7 +317,9 @@ nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ### The sum of two positive rational numbers is positive
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   is-positive-add-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
   is-positive-add-ℚ {x} {y} P Q =
@@ -334,6 +354,10 @@ add-ℚ⁺' x y = add-ℚ⁺ y x
 
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
+
+ap-add-ℚ⁺ :
+  {x y x' y' : ℚ⁺} → x ＝ x' → y ＝ y' → x +ℚ⁺ y ＝ x' +ℚ⁺ y'
+ap-add-ℚ⁺ p q = ap-binary add-ℚ⁺ p q
 ```
 
 ### The positive sum of positive rational numbers is associative
@@ -369,7 +393,9 @@ interchange-law-add-add-ℚ⁺ x y u v =
 ### The product of two positive rational numbers is positive
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   is-positive-mul-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
   is-positive-mul-ℚ {x} {y} P Q =
@@ -453,15 +479,17 @@ module _
   (x : ℚ) (P : is-positive-ℚ x)
   where
 
-  inv-is-positive-ℚ : ℚ
-  pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
-  pr2 inv-is-positive-ℚ =
-    is-reduced-inv-is-positive-fraction-ℤ
-      ( fraction-ℚ x)
-      ( P)
-      ( is-reduced-fraction-ℚ x)
+  opaque
+    unfolding mul-ℚ
 
-  abstract
+    inv-is-positive-ℚ : ℚ
+    pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
+    pr2 inv-is-positive-ℚ =
+      is-reduced-inv-is-positive-fraction-ℤ
+        ( fraction-ℚ x)
+        ( P)
+        ( is-reduced-fraction-ℚ x)
+
     left-inverse-law-mul-is-positive-ℚ : inv-is-positive-ℚ *ℚ x ＝ one-ℚ
     left-inverse-law-mul-is-positive-ℚ =
       ( eq-ℚ-sim-fraction-ℤ
@@ -712,7 +740,10 @@ module _
 ### Multiplication by a positive rational number preserves strict inequality
 
 ```agda
-abstract
+opaque
+  unfolding le-ℚ-Prop
+  unfolding mul-ℚ
+
   preserves-le-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
     le-ℚ q r →
@@ -750,73 +781,79 @@ abstract
 ### Multiplication by a positive rational number preserves inequality
 
 ```agda
-preserves-leq-left-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-preserves-leq-left-mul-ℚ⁺
-  p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
-  q@((q-num , q-denom , _) , _)
-  r@((r-num , r-denom , _) , _)
-  q≤r =
-    preserves-leq-rational-fraction-ℤ
-      ( mul-fraction-ℤ p (fraction-ℚ q))
-      ( mul-fraction-ℤ p (fraction-ℚ r))
-      ( binary-tr
-        ( leq-ℤ)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-leq-right-mul-nonnegative-ℤ
-          ( nonnegative-positive-ℤ
-            ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
-          ( q-num *ℤ r-denom)
-          ( r-num *ℤ q-denom)
-          ( q≤r)))
+opaque
+  unfolding leq-ℚ-Prop
+  unfolding mul-ℚ
 
-preserves-leq-right-mul-ℚ⁺ :
-  (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
-  leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-preserves-leq-right-mul-ℚ⁺ p q r q≤r =
-  binary-tr
-    ( leq-ℚ)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
-    ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
-    ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+  preserves-leq-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
+  preserves-leq-left-mul-ℚ⁺
+    p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
+    q@((q-num , q-denom , _) , _)
+    r@((r-num , r-denom , _) , _)
+    q≤r =
+      preserves-leq-rational-fraction-ℤ
+        ( mul-fraction-ℤ p (fraction-ℚ q))
+        ( mul-fraction-ℤ p (fraction-ℚ r))
+        ( binary-tr
+          ( leq-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-leq-right-mul-nonnegative-ℤ
+            ( nonnegative-positive-ℤ
+              ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
+            ( q-num *ℤ r-denom)
+            ( r-num *ℤ q-denom)
+            ( q≤r)))
+
+abstract
+  preserves-leq-right-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
+  preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+    binary-tr
+      ( leq-ℚ)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
+      ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
+      ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
 
 ```agda
-le-left-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
-le-left-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( le-ℚ⁺ ( p *ℚ⁺ q))
-    ( left-unit-law-mul-ℚ⁺ q)
-    ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
+abstract
+  le-left-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ q) q
+  le-left-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( le-ℚ⁺ ( p *ℚ⁺ q))
+      ( left-unit-law-mul-ℚ⁺ q)
+      ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
 
-le-right-mul-less-than-one-ℚ⁺ :
-  (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
-le-right-mul-less-than-one-ℚ⁺ p p<1 q =
-  tr
-    ( λ r → le-ℚ⁺ r q)
-    ( commutative-mul-ℚ⁺ p q)
-    ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
+  le-right-mul-less-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
+  le-right-mul-less-than-one-ℚ⁺ p p<1 q =
+    tr
+      ( λ r → le-ℚ⁺ r q)
+      ( commutative-mul-ℚ⁺ p q)
+      ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
 ```
 
 ### The positive mediant between zero and a positive rational number
 
 ```agda
-mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
-mediant-zero-ℚ⁺ x =
-  ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
-    is-positive-le-zero-ℚ
-      ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
-      ( le-left-mediant-ℚ
-        ( zero-ℚ)
-        ( rational-ℚ⁺ x)
-        ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
+opaque
+  mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
+  mediant-zero-ℚ⁺ x =
+    ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
+      is-positive-le-zero-ℚ
+        ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
+        ( le-left-mediant-ℚ
+          ( zero-ℚ)
+          ( rational-ℚ⁺ x)
+          ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
 
-abstract
   le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
   le-mediant-zero-ℚ⁺ x =
     le-right-mediant-ℚ
@@ -885,23 +922,24 @@ module _
   mediant-zero-min-ℚ⁺ : ℚ⁺
   mediant-zero-min-ℚ⁺ = mediant-zero-ℚ⁺ (min-ℚ⁺ x y)
 
-  le-left-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ x
-  le-left-mediant-zero-min-ℚ⁺ =
-    concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
-      ( rational-ℚ⁺ (min-ℚ⁺ x y))
-      ( rational-ℚ⁺ x)
-      ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
-      ( leq-left-min-ℚ⁺ x y)
+  abstract
+    le-left-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ x
+    le-left-mediant-zero-min-ℚ⁺ =
+      concatenate-le-leq-ℚ
+        ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
+        ( rational-ℚ⁺ (min-ℚ⁺ x y))
+        ( rational-ℚ⁺ x)
+        ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
+        ( leq-left-min-ℚ⁺ x y)
 
-  le-right-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ y
-  le-right-mediant-zero-min-ℚ⁺ =
-    concatenate-le-leq-ℚ
-      ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
-      ( rational-ℚ⁺ (min-ℚ⁺ x y))
-      ( rational-ℚ⁺ y)
-      ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
-      ( leq-right-min-ℚ⁺ x y)
+    le-right-mediant-zero-min-ℚ⁺ : le-ℚ⁺ mediant-zero-min-ℚ⁺ y
+    le-right-mediant-zero-min-ℚ⁺ =
+      concatenate-le-leq-ℚ
+        ( rational-ℚ⁺ mediant-zero-min-ℚ⁺)
+        ( rational-ℚ⁺ (min-ℚ⁺ x y))
+        ( rational-ℚ⁺ y)
+        ( le-mediant-zero-ℚ⁺ (min-ℚ⁺ x y))
+        ( leq-right-min-ℚ⁺ x y)
 ```
 
 ### Any positive rational number `p` has a `q` with `q + q < p`
@@ -961,27 +999,28 @@ module _
 ### Addition with a positive rational number is an increasing map
 
 ```agda
-le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
-le-left-add-rational-ℚ⁺ x d =
-  concatenate-leq-le-ℚ
-    ( x)
-    ( zero-ℚ +ℚ x)
-    ( (rational-ℚ⁺ d) +ℚ x)
-    ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-    ( preserves-le-left-add-ℚ
+abstract
+  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+  le-left-add-rational-ℚ⁺ x d =
+    concatenate-leq-le-ℚ
       ( x)
-      ( zero-ℚ)
-      ( rational-ℚ⁺ d)
-      ( le-zero-is-positive-ℚ
+      ( zero-ℚ +ℚ x)
+      ( (rational-ℚ⁺ d) +ℚ x)
+      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+      ( preserves-le-left-add-ℚ
+        ( x)
+        ( zero-ℚ)
         ( rational-ℚ⁺ d)
-        ( is-positive-rational-ℚ⁺ d)))
+        ( le-zero-is-positive-ℚ
+          ( rational-ℚ⁺ d)
+          ( is-positive-rational-ℚ⁺ d)))
 
-le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
-le-right-add-rational-ℚ⁺ x d =
-  inv-tr
-    ( le-ℚ x)
-    ( commutative-add-ℚ x (rational-ℚ⁺ d))
-    ( le-left-add-rational-ℚ⁺ x d)
+  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+  le-right-add-rational-ℚ⁺ x d =
+    inv-tr
+      ( le-ℚ x)
+      ( commutative-add-ℚ x (rational-ℚ⁺ d))
+      ( le-left-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map

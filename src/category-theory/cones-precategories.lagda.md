@@ -51,9 +51,10 @@ open import foundation.universe-levels
 A
 {{#concept "cone" Disambiguation="over a functor between precategories" Agda=cone-Precategory}}
 over a [functor](category-theory.functors-precategories.md) `F` between
-[precategories](category-theory.precategories.md) is a
+[precategories](category-theory.precategories.md) is an object `d` of the
+codomain together with a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
-from a [constant functor](category-theory.constant-functors.md) to `F`.
+from the [constant functor](category-theory.constant-functors.md) at `d` to `F`.
 
 In this context, we usually think of (and refer to) the functor `F` as a
 **diagram** in its codomain, A cone over such diagram then corresponds to an
@@ -166,16 +167,16 @@ module _
   pr1 (cone-map-Precategory τ d f) x =
     comp-hom-Precategory D (component-cone-Precategory τ x) f
   pr2 (cone-map-Precategory τ d f) h =
-    inv (associative-comp-hom-Precategory D _ _ _) ∙
-    ap
+    ( inv (associative-comp-hom-Precategory D _ _ _)) ∙
+    ( ap
       ( λ g → comp-hom-Precategory D g f)
-      ( inv (naturality-cone-Precategory τ h)) ∙
-    inv (right-unit-law-comp-hom-Precategory D _)
+      ( inv (naturality-cone-Precategory τ h))) ∙
+    ( inv (right-unit-law-comp-hom-Precategory D _))
 ```
 
 ## Properties
 
-### Characterization of equality of cones over functors between precategories
+### Characterization of equality of cones
 
 ```agda
   coherence-htpy-cone-Precategory :
@@ -267,15 +268,17 @@ module _
   equiv-right-extension-cone-Precategory :
     cone-Precategory ≃
     right-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F
+      ( terminal-functor-Precategory C)
+      ( F)
   equiv-right-extension-cone-Precategory =
     equiv-Σ-equiv-base
-    ( λ K → natural-transformation-Precategory C D
-      ( comp-functor-Precategory C terminal-Precategory D
-        ( K)
-        ( terminal-functor-Precategory C))
-      ( F))
-    ( equiv-point-Precategory D)
+      ( λ K →
+        natural-transformation-Precategory C D
+          ( comp-functor-Precategory C terminal-Precategory D
+            ( K)
+            ( terminal-functor-Precategory C))
+          ( F))
+      ( equiv-point-Precategory D)
 
   right-extension-cone-Precategory :
     cone-Precategory →
@@ -293,9 +296,15 @@ module _
 
   vertex-right-extension-Precategory :
     right-extension-Precategory C terminal-Precategory D
-      (terminal-functor-Precategory C) F →
+      ( terminal-functor-Precategory C)
+      ( F) →
     obj-Precategory D
   vertex-right-extension-Precategory R =
     vertex-cone-Precategory
       ( cone-right-extension-Precategory R)
 ```
+
+## See also
+
+- [Limits](category-theory.limits-precategories.md) for universal cones.
+- [Cocones](category-theory.cocones-precategories.md) for the dual concept.

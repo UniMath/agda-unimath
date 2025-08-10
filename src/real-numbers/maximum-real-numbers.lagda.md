@@ -9,6 +9,9 @@ module real-numbers.maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -17,15 +20,23 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.metric-space-of-short-functions-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
+
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -36,8 +47,16 @@ open import real-numbers.upper-dedekind-real-numbers
 The
 {{#concept "maximum" Disambiguation="binary, Dedekind real numbers" Agda=max-ℝ WD="maximum" WDID=Q10578722}}
 of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
-`y` is a Dedekind real number with lower cut equal to the union of `x` and `y`'s
-lower cuts, and upper cut equal to the intersection of their upper cuts.
+`y` is the Dedekind real number `max-ℝ x y` with lower cut equal to the union of
+`x` and `y`'s lower cuts, and upper cut equal to the intersection of their upper
+cuts.
+
+For any `x : ℝ`, `max-ℝ x` is a
+[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
+Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
+[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+of `ℝ`.
 
 ## Definition
 
@@ -223,4 +242,123 @@ abstract
     (b : ℝ l2) (b' : ℝ l3) → sim-ℝ b b' →
     sim-ℝ (max-ℝ a b) (max-ℝ a b')
   preserves-sim-right-max-ℝ a = preserves-sim-max-ℝ a a (refl-sim-ℝ a)
+```
+
+### The binary maximum preserves lower neighborhoods
+
+```agda
+module _
+  {l1 l2 l3 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  preserves-lower-neighborhood-leq-left-max-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( max-ℝ x y)
+      ( (max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d =
+    leq-is-least-binary-upper-bound-Large-Poset
+      ( ℝ-Large-Poset)
+      ( x)
+      ( y)
+      ( is-least-binary-upper-bound-max-ℝ x y)
+      ( (max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+      ( ( transitive-leq-ℝ
+          ( x)
+          ( max-ℝ x z)
+          ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( leq-le-ℝ
+            ( max-ℝ x z)
+            ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( le-left-add-real-ℝ⁺
+              ( max-ℝ x z)
+              ( positive-real-ℚ⁺ d)))
+          ( leq-left-max-ℝ x z)) ,
+        ( transitive-leq-ℝ
+          ( y)
+          ( z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( preserves-leq-right-add-ℝ
+            ( real-ℚ (rational-ℚ⁺ d))
+            ( z)
+            ( max-ℝ x z)
+            ( leq-right-max-ℝ x z))
+          ( z≤y+d)))
+
+  preserves-lower-neighborhood-leq-right-max-ℝ :
+    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
+    leq-ℝ
+      ( max-ℝ y x)
+      ( (max-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
+  preserves-lower-neighborhood-leq-right-max-ℝ z≤y+d =
+    binary-tr
+      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
+      ( commutative-max-ℝ x y)
+      ( commutative-max-ℝ x z)
+      ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
+```
+
+### The maximum with a real number is a short function `ℝ → ℝ`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1)
+  where
+
+  is-short-function-left-max-ℝ :
+    is-short-function-Metric-Space
+      ( metric-space-leq-ℝ l2)
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( max-ℝ x)
+  is-short-function-left-max-ℝ d y z Nyz =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( max-ℝ x y)
+      ( max-ℝ x z)
+      ( preserves-lower-neighborhood-leq-left-max-ℝ d x y z
+        ( left-real-bound-neighborhood-leq-ℝ d y z Nyz))
+      ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
+        ( right-real-bound-neighborhood-leq-ℝ d y z Nyz))
+
+  short-left-max-ℝ :
+    short-function-Metric-Space
+      ( metric-space-leq-ℝ l2)
+      ( metric-space-leq-ℝ (l1 ⊔ l2))
+  short-left-max-ℝ =
+    (max-ℝ x , is-short-function-left-max-ℝ)
+```
+
+### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  is-short-function-short-left-max-ℝ :
+    is-short-function-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-of-short-functions-Metric-Space
+        ( metric-space-leq-ℝ l2)
+        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+      ( short-left-max-ℝ)
+  is-short-function-short-left-max-ℝ d x y Nxy z =
+    neighborhood-real-bound-each-leq-ℝ
+      ( d)
+      ( max-ℝ x z)
+      ( max-ℝ y z)
+      ( preserves-lower-neighborhood-leq-right-max-ℝ d z x y
+        ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
+      ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
+        ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))
+
+  short-max-ℝ :
+    short-function-Metric-Space
+      ( metric-space-leq-ℝ l1)
+      ( metric-space-of-short-functions-Metric-Space
+        ( metric-space-leq-ℝ l2)
+        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+  short-max-ℝ =
+    (short-left-max-ℝ , is-short-function-short-left-max-ℝ)
 ```

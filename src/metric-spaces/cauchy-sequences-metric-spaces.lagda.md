@@ -34,8 +34,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
@@ -303,8 +303,8 @@ module _
   (x : cauchy-sequence-Metric-Space M)
   (lim : type-Metric-Space M)
   (H :
-    is-limit-cauchy-approximation-Premetric-Space
-      ( premetric-Metric-Space M)
+    is-limit-cauchy-approximation-Metric-Space
+      ( M)
       ( cauchy-approximation-cauchy-sequence-Metric-Space M x)
       ( lim))
   where
@@ -484,22 +484,20 @@ module _
 module _
   { l1 l2 : Level} (M : Metric-Space l1 l2)
   ( x : cauchy-approximation-Metric-Space M)
-  ( l : type-Metric-Space M)
+  ( lim : type-Metric-Space M)
   ( H :
     limit-modulus-sequence-Metric-Space
       ( M)
       ( map-cauchy-sequence-Metric-Space
         ( M)
         ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
-      ( l))
+      ( lim))
   where
 
   abstract
     is-limit-cauchy-approximation-limit-modulus-cauchy-sequence-cauchy-approximation-Metric-Space :
-      is-limit-cauchy-approximation-Premetric-Space
-        ( premetric-Metric-Space M)
-        ( x)
-        ( l)
+      is-limit-cauchy-approximation-Metric-Space M x lim
+
     is-limit-cauchy-approximation-limit-modulus-cauchy-sequence-cauchy-approximation-Metric-Space
       ε⁺@(ε , _) δ⁺@(δ , _) =
       let
@@ -512,7 +510,7 @@ module _
           ( map-cauchy-sequence-Metric-Space
             ( M)
             ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
-          ( l)
+          ( lim)
           ( H)
           ( δ'⁺)
         n = max-ℕ n₁ n₂
@@ -521,14 +519,14 @@ module _
         xε = map-cauchy-approximation-Metric-Space M x ε⁺
         x1/n' = map-cauchy-approximation-Metric-Space M x 1/n'
         x1/n'-l-neighborhood :
-          neighborhood-Metric-Space M δ'⁺ x1/n' l
+          neighborhood-Metric-Space M δ'⁺ x1/n' lim
         x1/n'-l-neighborhood =
           is-modulus-limit-modulus-sequence-Metric-Space
             ( M)
             ( map-cauchy-sequence-Metric-Space
               ( M)
               ( cauchy-sequence-cauchy-approximation-Metric-Space M x))
-            ( l)
+            ( lim)
             ( H)
             ( δ'⁺)
             ( n)
@@ -537,7 +535,7 @@ module _
         is-monotonic-structure-Metric-Space
           ( M)
           ( xε)
-          ( l)
+          ( lim)
           ( (ε⁺ +ℚ⁺ δ'⁺) +ℚ⁺ δ'⁺)
           ( ε⁺ +ℚ⁺ δ⁺)
           ( inv-tr
@@ -548,7 +546,7 @@ module _
             ( M)
             ( xε)
             ( x1/n')
-            ( l)
+            ( lim)
             ( ε⁺ +ℚ⁺ δ'⁺)
             ( δ'⁺)
             ( x1/n'-l-neighborhood)
@@ -590,7 +588,7 @@ module _
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   (x : cauchy-approximation-Metric-Space M)
-  (l : type-Metric-Space M)
+  (lim : type-Metric-Space M)
   where
 
   abstract
@@ -598,22 +596,16 @@ module _
       is-limit-cauchy-sequence-Metric-Space
         ( M)
         ( cauchy-sequence-cauchy-approximation-Metric-Space M x)
-        ( l) →
-      is-limit-cauchy-approximation-Premetric-Space
-        ( premetric-Metric-Space M)
-        ( x)
-        ( l)
+        ( lim) →
+      is-limit-cauchy-approximation-Metric-Space M x lim
     is-limit-cauchy-approximation-limit-cauchy-sequence-cauchy-approximation-Metric-Space
       =
         rec-trunc-Prop
-          ( is-limit-cauchy-approximation-prop-Premetric-Space
-            ( premetric-Metric-Space M)
-            ( x)
-            ( l))
+          ( is-limit-cauchy-approximation-prop-Metric-Space M x lim)
           ( is-limit-cauchy-approximation-limit-modulus-cauchy-sequence-cauchy-approximation-Metric-Space
             ( M)
             ( x)
-            ( l))
+            ( lim))
 ```
 
 ### Short maps between metric spaces preserve Cauchy sequences
