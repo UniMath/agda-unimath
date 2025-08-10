@@ -354,14 +354,14 @@ module _
   is-not-emb-le-is-finite f p E =
     let open do-syntax-trunc-Prop empty-Prop
     in do
-    e ← H
-    d ← K
-    is-not-emb-le-count e d f
-      ( concatenate-eq-le-eq-ℕ
-        ( compute-number-of-elements-is-finite d K)
-        ( p)
-        ( inv (compute-number-of-elements-is-finite e H)))
-      ( E)
+      e ← H
+      d ← K
+      is-not-emb-le-count e d f
+        ( concatenate-eq-le-eq-ℕ
+          ( compute-number-of-elements-is-finite d K)
+          ( p)
+          ( inv (compute-number-of-elements-is-finite e H)))
+        ( E)
 ```
 
 #### There are no injective maps between finite types `A` and `B` such that `|B| < |A|`
