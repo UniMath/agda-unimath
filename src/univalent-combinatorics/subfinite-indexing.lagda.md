@@ -16,44 +16,28 @@ open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
 open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
-open import foundation.noninjective-maps
 open import foundation.propositional-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.repetitions-of-values
 open import foundation.retracts-of-types
 open import foundation.sets
-open import foundation.split-surjective-maps
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting
 open import univalent-combinatorics.dedekind-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subcounting
-open import univalent-combinatorics.subfinite-types
 ```
 
 </details>
