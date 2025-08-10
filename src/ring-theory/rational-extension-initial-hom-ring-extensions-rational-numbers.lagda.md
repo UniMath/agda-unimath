@@ -48,7 +48,7 @@ Given a [ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.m
 `R`, the
 {{#concept "initial rational ring homomorphism" Agda=initial-hom-Rational-Extension-Ring}}
 into `R`, is the unique [ring homomorphism](ring-theory.homomorphisms-rings.md)
-from [`ℚ`](elementary-number-theory.ring-of-rational-numbers.md) to `R` ; it is
+from [`ℚ`](elementary-number-theory.ring-of-rational-numbers.md) to `R`; it is
 given by:
 
 ```text
