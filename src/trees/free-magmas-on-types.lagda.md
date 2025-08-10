@@ -165,13 +165,6 @@ module _
       ap-binary-htpy
       ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f)
       ( mul-Magma M))))
-            where
-            lem : (U V : labeled-full-binary-tree X) →
-              ap (pr1 f)
-              (combinator-commutes-with-labelings-full-binary-tree X (pr1 U)
-              (pr1 V) (pr2 (combinator-labeled-full-binary-tree X U V))) ＝
-              refl
-            lem U V = {!   !}
 
   is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma :
     is-equiv ev-label-leaf-hom-Magma
