@@ -10,6 +10,7 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.inhabited-subtypes
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.universe-levels
@@ -25,8 +26,14 @@ open import order-theory.greatest-lower-bounds-large-posets
 
 ## Idea
 
-The intersection of two subtypes `A` and `B` is the subtype that contains the
-elements that are in `A` and in `B`.
+The
+{{#concept "intersection" disambiguation="of two subtypes" WDID=Q185837 WD="intersection" Agda=intersection-subtype}}
+of two [subtypes](foundation.subtypes.md) `A` and `B` is the subtype that
+contains the elements that are in `A` and in `B`.
+
+Two subtypes
+{{#concept "intersect" disambiguation="subtypes" Agda=intersect-subtype}} if
+their intersection is [inhabited](foundation.inhabited-subtypes.md).
 
 ## Definition
 
@@ -84,4 +91,18 @@ module _
   intersection-family-of-subtypes :
     {I : UU l2} (P : I → subtype l3 X) → subtype (l2 ⊔ l3) X
   intersection-family-of-subtypes {I} P x = Π-Prop I (λ i → P i x)
+```
+
+### Whether two subtypes intersect
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
+  where
+
+  intersect-prop-subtype : Prop (l1 ⊔ l2 ⊔ l3)
+  intersect-prop-subtype = is-inhabited-subtype-Prop (intersection-subtype P Q)
+
+  intersect-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  intersect-subtype = type-Prop intersect-prop-subtype
 ```

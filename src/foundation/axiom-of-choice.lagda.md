@@ -122,50 +122,6 @@ AC0-is-set-projective H A B K =
         ( id))
 ```
 
-### Choice holds constructively for finite types
-
-```agda
-instance-choice-Fin :
-  (n : ℕ) → {l : Level} → (F : Fin n → UU l) →
-  instance-choice (Fin n) F
-instance-choice-Fin zero-ℕ F _ = unit-trunc-Prop (λ ())
-instance-choice-Fin (succ-ℕ n) F inhabited-F =
-  let
-    open do-syntax-trunc-Prop (is-inhabited-Prop ((x : Fin (succ-ℕ n)) → F x))
-  in do
-    f<n ← instance-choice-Fin n (F ∘ inl-Fin n) (inhabited-F ∘ inl-Fin n)
-    fn ← inhabited-F (neg-one-Fin n)
-    unit-trunc-Prop
-      ( λ where
-        (inr star) → fn
-        (inl k) → f<n k)
-
-module _
-  {l : Level} (A : Finite-Type l)
-  where
-
-  instance-choice-Finite-Type :
-    {l' : Level} → (B : type-Finite-Type A → UU l') →
-    instance-choice (type-Finite-Type A) B
-  instance-choice-Finite-Type B inhabited-B =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( is-inhabited-Prop ((a : type-Finite-Type A) → B a))
-    in do
-      (n , Fin-n≃A) ← is-finite-type-Finite-Type A
-      f-Fin-n ←
-        instance-choice-Fin
-          ( n)
-          ( B ∘ map-equiv Fin-n≃A)
-          ( inhabited-B ∘ map-equiv Fin-n≃A)
-      unit-trunc-Prop
-        ( λ a →
-          map-eq
-            ( ap B (is-section-map-section-map-equiv Fin-n≃A a))
-            ( f-Fin-n (map-inv-equiv Fin-n≃A a)))
-```
-
 ## See also
 
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
@@ -174,6 +130,7 @@ module _
   axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
 - [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
   another weaker form of the axiom of choice.
+- [Finite choice](univalent-combinatorics.finite-choice.md)
 
 ## References
 
