@@ -13,7 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.sets
+open import foundation.singleton-subtypes
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
@@ -71,4 +74,14 @@ empty-finite-subtype :
 empty-finite-subtype l2 X =
   ( ( λ _ → raise-empty-Prop l2) ,
     is-finite-is-empty (is-empty-raise-empty ∘ pr2))
+```
+
+### Singleton finite subtypes
+
+```agda
+singleton-finite-subtype :
+  {l : Level} (X : Set l) (x : type-Set X) → finite-subtype l (type-Set X)
+singleton-finite-subtype X x =
+  ( subtype-standard-singleton-subtype X x ,
+    is-finite-is-contr (is-torsorial-Id x))
 ```
