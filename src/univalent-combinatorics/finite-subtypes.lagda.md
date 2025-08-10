@@ -10,6 +10,8 @@ module univalent-combinatorics.finite-subtypes where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -59,4 +61,14 @@ module _
   number-of-elements-finite-subtype : ℕ
   number-of-elements-finite-subtype =
     number-of-elements-Finite-Type finite-type-finite-subtype
+```
+
+### The empty finite subtype
+
+```agda
+empty-finite-subtype :
+  {l1 : Level} (l2 : Level) (X : UU l1) → finite-subtype l2 X
+empty-finite-subtype l2 X =
+  ( ( λ _ → raise-empty-Prop l2) ,
+    is-finite-is-empty (is-empty-raise-empty ∘ pr2))
 ```
