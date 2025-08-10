@@ -180,27 +180,9 @@ module _
   pr1 (pr1 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree T f g)) =
     inv-refl-compute-tr-Eq-labeling-full-binary-tree T f g
   pr2 (pr1 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree
-    leaf-full-binary-tree f g)) p =
-    eq-htpy htpy
-    where
-    htpy :
-      (refl-compute-tr-Eq-labeling-full-binary-tree leaf-full-binary-tree f g ∘
-        pr1 (pr1 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree
-        leaf-full-binary-tree f g))) p ~
-      p
-    htpy star = {!   !}
+    leaf-full-binary-tree f g)) p = {!   !}
   pr2 (pr1 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree
-    (join-full-binary-tree T T₁) f g)) p =
-    eq-htpy htpy
-    where
-    htpy :
-      (refl-compute-tr-Eq-labeling-full-binary-tree
-        (join-full-binary-tree T T₁) f g ∘
-        pr1 (pr1 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree
-          (join-full-binary-tree T T₁) f g))) p ~
-      p
-    htpy (inl x) = {!   !}
-    htpy (inr x) = {!   !}
+    (join-full-binary-tree T T₁) f g)) p = {!   !}
   pr1 (pr2 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree T f g)) =
     inv-refl-compute-tr-Eq-labeling-full-binary-tree T f g
   pr2 (pr2 (is-equiv-refl-compute-tr-Eq-labeling-full-binary-tree
