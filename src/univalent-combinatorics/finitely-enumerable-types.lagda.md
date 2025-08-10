@@ -121,6 +121,23 @@ is-finite-is-finitely-enumerable-discrete D eX =
 finite-enumeration-count :
   {l : Level} {X : UU l} → count X → finite-enumeration X
 finite-enumeration-count (n , Fin-n≃X) = (n , surjection-equiv Fin-n≃X)
+
+is-finitely-enumerable-is-finite :
+  {l : Level} {X : UU l} → is-finite X → is-finitely-enumerable X
+is-finitely-enumerable-is-finite {X = X} =
+  rec-trunc-Prop
+    ( is-finitely-enumerable-prop X)
+    ( unit-trunc-Prop ∘ finite-enumeration-count)
+
+is-finitely-enumerable-type-Finite-Type :
+  {l : Level} (X : Finite-Type l) → is-finitely-enumerable (type-Finite-Type X)
+is-finitely-enumerable-type-Finite-Type (X , is-finite-X) =
+  is-finitely-enumerable-is-finite is-finite-X
+
+finitely-enumerable-type-Finite-Type :
+  {l : Level} → Finite-Type l → Finitely-Enumerable-Type l
+finitely-enumerable-type-Finite-Type (X , is-finite-X) =
+  (X , is-finitely-enumerable-is-finite is-finite-X)
 ```
 
 ### If `A` is finitely enumerable, and `B a` is finitely enumerable for every `a : A`, `Σ A B` is finitely enumerable
