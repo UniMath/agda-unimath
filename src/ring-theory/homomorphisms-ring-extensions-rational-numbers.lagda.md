@@ -19,7 +19,7 @@ open import ring-theory.ring-extensions-rational-numbers
 
 ## Idea
 
-{{#concept "Homomorphisms" Disambiguation="of rational extensions of ℚ" Agda=hom-Rational-Extension-Ring}}
+{{#concept "Homomorphisms" Disambiguation="of ring extensions of ℚ" Agda=hom-Rational-Extension-Ring}}
 of [rational extensions of ℚ](ring-theory.ring-extensions-rational-numbers.md)
 are [homomorphisms](ring-theory.homomorphisms-rings.md) between their underlying
 [rings](ring-theory.rings.md).
