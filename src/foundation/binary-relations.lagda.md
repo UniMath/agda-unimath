@@ -10,6 +10,7 @@ module foundation.binary-relations where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.subtypes
 open import foundation.univalence
@@ -242,6 +243,35 @@ module _
 
   is-antisymmetric-Relation-Prop : UU (l1 ⊔ l2)
   is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
+```
+
+### The predicate of being an entire relation
+
+A relation `R` on a type `A` is said to be
+{{#concept "entire" Disambiguation="relation on a type" Agda=is-entire-Relation}}
+if for all `a : A`, `Σ A (R a)` is [inhabited](foundation.inhabited-types.md).
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+
+  is-entire-Relation : UU (l1 ⊔ l2)
+  is-entire-Relation = (a : A) → is-inhabited (Σ A (R a))
+```
+
+### The predicate of being an entire relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be entire if the
+underlying relation is entire.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-entire-Relation-Prop : UU (l1 ⊔ l2)
+  is-entire-Relation-Prop = is-entire-Relation (type-Relation-Prop R)
 ```
 
 ## Properties
