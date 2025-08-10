@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.acyclic-maps
 
 ## Idea
 
-{{#concept "Dual Dedekind finite types"  Agda=is-dual-dedekind-finite Agda=Dual-Dedekind-Finite-Type}}
+{{#concept "Dual Dedekind finite types" Agda=is-dual-dedekind-finite Agda=Dual-Dedekind-Finite-Type}}
 are types `X` with the [property](foundation-core.propositions.md) that every
 [acyclic](synthetic-homotopy-theory.acyclic-maps.md) endomap `X ↠ X` is an
 [equivalence](foundation-core.equivalences.md).
