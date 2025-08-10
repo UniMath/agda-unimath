@@ -36,7 +36,7 @@ for some [arithmetic sequence](ring-theory.arithmetic-sequences-semirings.md)
 `u` in the semiring. These are the sums
 
 ```text
-n ↦ Σ (k < n) (a + d * k)
+n ↦ Σ (k < n) (a + k * d)
 ```
 
 for some elements `a d : R` in the semiring.
@@ -107,7 +107,7 @@ module _
       ( standard-arithmetic-sequence-Semiring R a d)
 ```
 
-### The sums `Σ (i < n) (a + d * i)`
+### The sums `Σ (i < n) (a + i * d)`
 
 ```agda
 module _
@@ -165,7 +165,7 @@ module _
     htpy-seq-standard-arithmetic-sequence-Semiring R
 ```
 
-### The nth partial sum of terms of the standard arithmetic sequence with initial term `a` and common difference `d` is the sum `Σ (i < n) (a + d * i)`
+### The nth partial sum of terms of the standard arithmetic sequence with initial term `a` and common difference `d` is the sum `Σ (i < n) (a + i * d)`
 
 ```agda
 module _
