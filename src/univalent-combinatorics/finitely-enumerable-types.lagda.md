@@ -282,3 +282,7 @@ module _
       enum-Y ← eY
       unit-trunc-Prop (finite-enumeration-coproduct enum-X enum-Y)
 ```
+
+## See also
+
+* A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md) is precisely a finitely enumerable [set](foundation.sets.md).
