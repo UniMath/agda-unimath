@@ -12,10 +12,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 open import foundation.subtypes
+open import foundation.empty-types
+open import foundation.surjective-maps
 open import foundation.dependent-pair-types
 open import univalent-combinatorics.finite-subtypes
 open import metric-spaces.metric-spaces
 open import foundation.propositional-truncations
+open import foundation.existential-quantification
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import foundation.propositions
 open import metric-spaces.approximations-metric-spaces
@@ -82,7 +85,19 @@ net-finite-enumeration-approximation-Located-Metric-Space :
     ( type-approximation-Located-Metric-Space X δ S) →
   type-trunc-Prop (net-Located-Metric-Space l3 X ε)
 net-finite-enumeration-approximation-Located-Metric-Space
-  X δ S ε δ<ε eS@(zero-ℕ , _) = {!   !}
+  {l3 = l3} X δ S ε δ<ε eS@(zero-ℕ , Fin0↠S) =
+    intro-exists
+      ( empty-finite-subtype l3 (type-Located-Metric-Space X))
+      ( λ x →
+        let open do-syntax-trunc-Prop empty-Prop in
+        ex-falso
+          ( do
+              ((s , s∈S) , _) ← pr2 S x
+              (⊥ , _) ← is-surjective-map-surjection Fin0↠S (s , s∈S)
+              ⊥))
+net-finite-enumeration-approximation-Located-Metric-Space
+  {l3 = l3} X δ S ε δ<ε eS@(1 , Fin1↠S) =
+    {!   !}
 ```
 
 ## References
