@@ -23,18 +23,19 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
-open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
@@ -101,6 +102,9 @@ module _
   is-located-metric-space-Located-Metric-Space :
     is-located-Metric-Space metric-space-Located-Metric-Space
   is-located-metric-space-Located-Metric-Space = pr2 X
+
+  set-Located-Metric-Space : Set l1
+  set-Located-Metric-Space = set-Metric-Space metric-space-Located-Metric-Space
 
 subset-Located-Metric-Space :
   {l1 l2 : Level} (l3 : Level) (X : Located-Metric-Space l1 l2) →

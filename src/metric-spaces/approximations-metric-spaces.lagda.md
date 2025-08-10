@@ -8,15 +8,17 @@ module metric-spaces.approximations-metric-spaces where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
-open import foundation.subtypes
-open import metric-spaces.subspaces-metric-spaces
-open import foundation.propositions
 open import foundation.full-subtypes
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.unions-subtypes
-open import metric-spaces.metric-spaces
+open import foundation.universe-levels
+
 open import metric-spaces.located-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
@@ -26,8 +28,8 @@ open import metric-spaces.located-metric-spaces
 For an `ε : ℚ⁺`, an
 `ε`-{{#concept "approximation" disambiguation="of a metric space"}} of a
 [metric space](metric-spaces.metric-spaces.md) `X` is a
-[subset](foundation.subtypes.md) `S` of `X` such that every point in `X` is
-in an `ε`-neighborhood of some `s ∈ S`.
+[subset](foundation.subtypes.md) `S` of `X` such that every point in `X` is in
+an `ε`-neighborhood of some `s ∈ S`.
 
 This terminology is taken from {{#cite BV06}} section 2.2.
 

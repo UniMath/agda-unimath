@@ -17,17 +17,17 @@ open import foundation.function-types
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.unions-subtypes
 open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.interior-subsets-metric-spaces
+open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.located-metric-spaces
 ```
 
 </details>
@@ -72,7 +72,6 @@ module _
     is-open-subset-Metric-Space X (subset-open-subset-Metric-Space O)
   is-open-subset-open-subset-Metric-Space = pr2
 ```
-
 
 ### Open subsets of located metric spaces
 

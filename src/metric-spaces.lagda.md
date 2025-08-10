@@ -45,7 +45,7 @@ property of **indistinguishability of identicals**
 ```agda
 module metric-spaces where
 
-open import metric-spaces.approximations-subsets-metric-spaces public
+open import metric-spaces.approximations-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
@@ -90,6 +90,7 @@ open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhoods public
+open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
 open import metric-spaces.ordering-rational-neighborhoods public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public

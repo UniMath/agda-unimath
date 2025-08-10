@@ -7,32 +7,38 @@ module metric-spaces.nets-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.universe-levels
-open import foundation.subtypes
-open import foundation.empty-types
-open import foundation.surjective-maps
 open import foundation.dependent-pair-types
-open import univalent-combinatorics.finite-subtypes
-open import metric-spaces.metric-spaces
-open import foundation.propositional-truncations
+open import foundation.empty-types
 open import foundation.existential-quantification
-open import univalent-combinatorics.finitely-enumerable-subtypes
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.singleton-subtypes
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.torsorial-type-families
+open import foundation.universe-levels
+
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.located-metric-spaces
+open import metric-spaces.metric-spaces
+
+open import univalent-combinatorics.finite-subtypes
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-For an `ε : ℚ⁺`, an
-`ε`-{{#concept "net" disambiguation="in a metric space"}} to a
-[metric space](metric-spaces.metric-spaces.md) `X` is a
+For an `ε : ℚ⁺`, an `ε`-{{#concept "net" disambiguation="in a metric space"}} to
+a [metric space](metric-spaces.metric-spaces.md) `X` is a
 [finite](univalent-combinatorics.finite-subtypes.md)
 ε-[approximation](metric-spaces.approximations-metric-spaces.md) of `X`.
 
@@ -83,11 +89,11 @@ net-finite-enumeration-approximation-Located-Metric-Space :
   (ε : ℚ⁺) (δ<ε : le-ℚ⁺ δ ε) →
   finite-enumeration
     ( type-approximation-Located-Metric-Space X δ S) →
-  type-trunc-Prop (net-Located-Metric-Space l3 X ε)
+  type-trunc-Prop (net-Located-Metric-Space (l1 ⊔ l3) X ε)
 net-finite-enumeration-approximation-Located-Metric-Space
-  {l3 = l3} X δ S ε δ<ε eS@(zero-ℕ , Fin0↠S) =
+  {l1 = l1} {l3 = l3} X δ S ε δ<ε eS@(zero-ℕ , Fin0↠S) =
     intro-exists
-      ( empty-finite-subtype l3 (type-Located-Metric-Space X))
+      ( empty-finite-subtype (l1 ⊔ l3) (type-Located-Metric-Space X))
       ( λ x →
         let open do-syntax-trunc-Prop empty-Prop in
         ex-falso
@@ -97,7 +103,14 @@ net-finite-enumeration-approximation-Located-Metric-Space
               ⊥))
 net-finite-enumeration-approximation-Located-Metric-Space
   {l3 = l3} X δ S ε δ<ε eS@(1 , Fin1↠S) =
-    {!   !}
+    let (s , s∈S) = map-surjection Fin1↠S (neg-one-Fin 0)
+    in
+      intro-exists
+        ( raise-subtype
+          ( l3)
+          ( subtype-standard-singleton-subtype (set-Located-Metric-Space X) s) ,
+          {!   !})
+        {!   !}
 ```
 
 ## References

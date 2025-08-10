@@ -9,10 +9,10 @@ module metric-spaces.closed-subsets-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.dependent-pair-types
 open import foundation.complements-subtypes
-open import foundation.empty-types
+open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.intersections-subtypes
@@ -27,11 +27,11 @@ open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
-open import metric-spaces.open-subsets-metric-spaces
 open import metric-spaces.discrete-metric-spaces
-open import metric-spaces.metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.located-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.open-subsets-metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
