@@ -9,15 +9,10 @@ module ring-theory.series-semirings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sequences
-open import foundation.sets
 open import foundation.universe-levels
 
 open import lists.finite-sequences
@@ -66,10 +61,6 @@ module _
   opaque
     series-Semiring : UU l
     series-Semiring = ℕ → type-Semiring R
-
-  opaque
-    unfolding
-      series-Semiring
 
     series-sum-sequence-Semiring : (ℕ → type-Semiring R) → series-Semiring
     series-sum-sequence-Semiring u = u

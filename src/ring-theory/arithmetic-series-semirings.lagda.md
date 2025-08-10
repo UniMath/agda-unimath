@@ -1,7 +1,7 @@
-# The sum of terms of an arithmetic sequences in a semiring
+# Arithmetic series in semirings
 
 ```agda
-module ring-theory.sum-of-terms-arithmetic-sequences-semirings where
+module ring-theory.arithmetic-series-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -9,21 +9,9 @@ module ring-theory.sum-of-terms-arithmetic-sequences-semirings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
-open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sequences
-open import foundation.sets
 open import foundation.universe-levels
-
-open import group-theory.arithmetic-sequences-semigroups
-
-open import lists.finite-sequences
 
 open import ring-theory.arithmetic-sequences-semirings
 open import ring-theory.semirings
@@ -35,19 +23,61 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 ## Ideas
 
-The
-{{#concept "sum of initial terms of an arithmetic sequence" Agda=seq-sum-arithmetic-sequence-Semiring}}
-in a [semiring](ring-theory.semirings.md) is the
-[sequence](foundation.sequences.md) defined by
+An
+{{#concept "arithmetic series" Disambiguation="in a semiring" Agda=arithmetic-series-Semiring}}
+in a [semiring](ring-theory.semirings.md) is a
+[series](ring-theory.series-semirings.md) of the partial sums:
 
 ```text
 n ↦ Σ (k < n) (u k)
 ```
 
-for some [arithmetic sequence](ring-theory.arithmetic-sequences-semirings.md) in
-the semiring.
+for some [arithmetic sequence](ring-theory.arithmetic-sequences-semirings.md)
+`u` in the semiring. These are the sums
+
+```text
+n ↦ Σ (k < n) (a + d * k)
+```
+
+for some elements `a d : R` in the semiring.
 
 ## Definitions
+
+### Arithmetic series in semirings
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  opaque
+    arithmetic-series-Semiring : UU l
+    arithmetic-series-Semiring = arithmetic-sequence-Semiring R
+
+    arithmetic-series-arithmetic-sequence-Semiring :
+      arithmetic-sequence-Semiring R → arithmetic-series-Semiring
+    arithmetic-series-arithmetic-sequence-Semiring u = u
+
+    series-arithmetic-series-Semiring :
+      arithmetic-series-Semiring → series-Semiring R
+    series-arithmetic-series-Semiring =
+      series-sum-sequence-Semiring R ∘
+      seq-arithmetic-sequence-Semiring R
+
+    arithmetic-terms-arithmetic-series-Semiring :
+      arithmetic-series-Semiring → arithmetic-sequence-Semiring R
+    arithmetic-terms-arithmetic-series-Semiring u = u
+
+    seq-terms-arithmetic-series-Semiring :
+      arithmetic-series-Semiring → ℕ → type-Semiring R
+    seq-terms-arithmetic-series-Semiring =
+      seq-arithmetic-sequence-Semiring R
+
+  seq-arithmetic-series-Semiring :
+    arithmetic-series-Semiring → ℕ → type-Semiring R
+  seq-arithmetic-series-Semiring =
+    seq-series-Semiring R ∘ series-arithmetic-series-Semiring
+```
 
 ### The partial sums of terms of an arithmetic sequence in a semiring
 
@@ -92,6 +122,29 @@ module _
 ```
 
 ## Properties
+
+### The values of an arithmetic series are the partial sums of its arithmetic sequence of terms
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  opaque
+    unfolding arithmetic-series-Semiring
+    unfolding htpy-seq-series-sum-sequence-Semiring
+
+    htpy-seq-arithmetic-series-Semiring :
+      ( u : arithmetic-series-Semiring R) →
+      ( seq-sum-arithmetic-sequence-Semiring
+        ( R)
+        ( arithmetic-terms-arithmetic-series-Semiring R u)) ~
+      ( seq-arithmetic-series-Semiring R u)
+    htpy-seq-arithmetic-series-Semiring u =
+      htpy-seq-series-sum-sequence-Semiring
+        ( R)
+        ( seq-terms-arithmetic-series-Semiring R u)
+```
 
 ### The sum of terms of an arithmetic sequence is determined by its initial term and common differenence
 
