@@ -22,6 +22,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
+open import foundation-core.propositions
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
@@ -78,6 +79,20 @@ Eq-full-binary-tree leaf-full-binary-tree (join-full-binary-tree V V₁) = empty
 Eq-full-binary-tree (join-full-binary-tree U U₁) leaf-full-binary-tree = empty
 Eq-full-binary-tree (join-full-binary-tree U U₁) (join-full-binary-tree V V₁) =
   Eq-full-binary-tree U V × Eq-full-binary-tree U₁ V₁
+
+is-prop-Eq-full-binary-tree :
+  (U V : full-binary-tree) → is-prop (Eq-full-binary-tree U V)
+is-prop-Eq-full-binary-tree leaf-full-binary-tree leaf-full-binary-tree =
+  is-prop-unit
+is-prop-Eq-full-binary-tree leaf-full-binary-tree (join-full-binary-tree V V₁) =
+  is-prop-empty
+is-prop-Eq-full-binary-tree (join-full-binary-tree U U₁) leaf-full-binary-tree =
+  is-prop-empty
+is-prop-Eq-full-binary-tree
+  (join-full-binary-tree U U₁) (join-full-binary-tree V V₁) =
+    is-prop-product
+    ( is-prop-Eq-full-binary-tree U V)
+    ( is-prop-Eq-full-binary-tree U₁ V₁)
 
 refl-Eq-full-binary-tree : (U : full-binary-tree) → Eq-full-binary-tree U U
 refl-Eq-full-binary-tree leaf-full-binary-tree = star
