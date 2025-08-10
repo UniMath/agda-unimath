@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
+open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
@@ -215,3 +217,36 @@ module _
 ```
 
 To prove: the converse implies a constructive taboo.
+
+### The dependent product of closed subsets is closed in the product metric space
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {I : UU l1} (X : I → Metric-Space l2 l3)
+  (C : (i : I) → closed-subset-Metric-Space l4 (X i))
+  where
+
+  subset-Π-closed-subset-Metric-Space :
+    subset-Metric-Space (l1 ⊔ l4) (Π-Metric-Space I X)
+  subset-Π-closed-subset-Metric-Space =
+    Π-subtype (λ i → subset-closed-subset-Metric-Space (X i) (C i))
+
+  is-closed-subset-Π-closed-subset-Metric-Space :
+    is-closed-subset-Metric-Space
+      ( Π-Metric-Space I X)
+      ( subset-Π-closed-subset-Metric-Space)
+  is-closed-subset-Π-closed-subset-Metric-Space f f∈ΠC i =
+    is-closed-subset-closed-subset-Metric-Space
+      ( X i)
+      ( C i)
+      ( f i)
+      ( λ ε →
+        rec-trunc-Prop
+          ( trunc-Prop
+            ( type-subtype
+              ( intersection-subtype
+                ( neighborhood-prop-Metric-Space (X i) ε (f i))
+                ( subset-closed-subset-Metric-Space (X i) (C i)))))
+          ( λ ( g , g∈Nεf , k) → unit-trunc-Prop (g i , g∈Nεf i , k i))
+          ( f∈ΠC ε))
+```
