@@ -51,8 +51,8 @@ open import univalent-combinatorics.surjective-maps
 
 A type `X` is
 {{#concept "finitely enumerable" disambiguation="type" Agda=finitely-enumerable-type}}
-if there [exists](foundation.existential-quantification.md) an `n : ℕ` and a [surjection](foundation.surjective-maps.md) from
-`Fin n → X`.
+if there [exists](foundation.existential-quantification.md) an `n : ℕ` and a
+[surjection](foundation.surjective-maps.md) from `Fin n → X`.
 
 ## Definition
 
@@ -285,4 +285,5 @@ module _
 
 ## See also
 
-* A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md) is precisely a finitely enumerable [set](foundation.sets.md).
+- A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md)
+  is precisely a finitely enumerable [set](foundation.sets.md).
