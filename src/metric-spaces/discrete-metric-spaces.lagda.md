@@ -308,7 +308,7 @@ module _
         ( A)
         ( map-cauchy-approximation-Metric-Space A f ε)
         ( map-cauchy-approximation-Metric-Space A f one-ℚ⁺)
-        ( is-wconstant-cauchy-approximation-Disrcete-Metric-Space
+        ( is-wconstant-cauchy-approximation-Discrete-Metric-Space
           ( A , H)
           ( f)
           ( ε)
