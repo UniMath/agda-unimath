@@ -56,7 +56,7 @@ given by:
 ```
 
 where `ι : ℤ → R` is the
-[initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
+[initial ring homomorphism](elementary-number-theory.ring-of-integers.md) into
 `R`.
 
 ## Definitions
