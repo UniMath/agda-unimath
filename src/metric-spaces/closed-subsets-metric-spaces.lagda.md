@@ -19,13 +19,14 @@ open import foundation.function-types
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import logic.functoriality-existential-quantification
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces

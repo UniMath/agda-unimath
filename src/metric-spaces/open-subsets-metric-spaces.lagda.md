@@ -114,6 +114,26 @@ module _
 
 ## Properties
 
+### An open subset has the same elements as its interior
+
+```agda
+module _
+  {l1 l2 : Level} (X : Metric-Space l1 l2)
+  where
+
+  has-same-elements-interior-open-subset-Metric-Space :
+    {l3 : Level} (S : open-subset-Metric-Space l3 X) →
+    has-same-elements-subtype
+      ( subset-open-subset-Metric-Space X S)
+      ( interior-subset-Metric-Space
+        ( X)
+        ( subset-open-subset-Metric-Space X S))
+  pr1 (has-same-elements-interior-open-subset-Metric-Space (S , is-open-S) x) =
+    is-open-S x
+  pr2 (has-same-elements-interior-open-subset-Metric-Space (S , is-open-S) x) =
+    is-subset-interior-subset-Metric-Space X S x
+```
+
 ### The empty subset is open
 
 ```agda
