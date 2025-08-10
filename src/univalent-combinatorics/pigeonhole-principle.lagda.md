@@ -315,11 +315,11 @@ module _
     number-of-elements-is-finite H ≤-ℕ number-of-elements-is-finite K
   leq-emb-is-finite f =
     let
-    open
-      do-syntax-trunc-Prop
-        ( leq-ℕ-Prop
-          ( number-of-elements-is-finite H)
-          ( number-of-elements-is-finite K))
+      open
+        do-syntax-trunc-Prop
+          ( leq-ℕ-Prop
+            ( number-of-elements-is-finite H)
+            ( number-of-elements-is-finite K))
     in do
     eA ← H
     eB ← K
