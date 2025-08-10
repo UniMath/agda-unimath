@@ -65,6 +65,10 @@ module _
     series-sum-sequence-Semiring : (ℕ → type-Semiring R) → series-Semiring
     series-sum-sequence-Semiring u = u
 
+    seq-terms-series-Semiring :
+      series-Semiring → ℕ → type-Semiring R
+    seq-terms-series-Semiring u = u
+
     seq-series-Semiring : series-Semiring → ℕ → type-Semiring R
     seq-series-Semiring = seq-sum-sequence-Semiring R
 
@@ -73,6 +77,13 @@ module _
       seq-series-Semiring (series-sum-sequence-Semiring u) ~
       seq-sum-sequence-Semiring R u
     htpy-seq-series-sum-sequence-Semiring u n = refl
+
+    htpy-seq-sum-terms-seq-series-Semiring :
+      (u : series-Semiring) →
+      seq-sum-sequence-Semiring R
+        ( seq-terms-series-Semiring u) ~
+      seq-series-Semiring u
+    htpy-seq-sum-terms-seq-series-Semiring u n = refl
 ```
 
 ## Properties
