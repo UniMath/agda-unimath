@@ -321,12 +321,12 @@ module _
             ( number-of-elements-is-finite H)
             ( number-of-elements-is-finite K))
     in do
-    eA ← H
-    eB ← K
-    concatenate-eq-leq-eq-ℕ
-      ( inv (compute-number-of-elements-is-finite eA H))
-      ( leq-emb-count eA eB f)
-      ( compute-number-of-elements-is-finite eB K)
+      eA ← H
+      eB ← K
+      concatenate-eq-leq-eq-ℕ
+        ( inv (compute-number-of-elements-is-finite eA H))
+        ( leq-emb-count eA eB f)
+        ( compute-number-of-elements-is-finite eB K)
 
   leq-is-emb-is-finite :
     {f : A → B} → is-emb f →
