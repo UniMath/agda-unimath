@@ -51,7 +51,7 @@ open import univalent-combinatorics.surjective-maps
 
 A type `X` is
 {{#concept "finitely enumerable" disambiguation="type" Agda=finitely-enumerable-type}}
-if there is an `n : ℕ` and a [surjection](foundation.surjective-maps.md) from
+if there [exists](foundation.existential-quantification.md) an `n : ℕ` and a [surjection](foundation.surjective-maps.md) from
 `Fin n → X`.
 
 ## Definition
@@ -87,7 +87,7 @@ module _
 
 ## Properties
 
-### If `X ≃ Y` and `X` is finitely enumerable, so is `Y`
+### Finitely enumerable types are closed under equivalences
 
 ```agda
 finite-enumeration-equiv :
@@ -140,7 +140,7 @@ finitely-enumerable-type-Finite-Type (X , is-finite-X) =
   (X , is-finitely-enumerable-is-finite is-finite-X)
 ```
 
-### If `A` is finitely enumerable, and `B a` is finitely enumerable for every `a : A`, `Σ A B` is finitely enumerable
+### Finitely enumerable types are closed under dependent sums
 
 ```agda
 abstract
