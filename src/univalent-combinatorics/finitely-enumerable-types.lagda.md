@@ -190,8 +190,6 @@ module _
           count-decidable-subtype
             ( λ iₙ₊ → is-left-Decidable-Prop (map-surjection Fin-n+↠X+Y iₙ₊))
             ( count-Fin n+)
-        map-surj :
-          Σ (Fin n+) (λ iₙ₊ → is-left (map-surjection Fin-n+↠X+Y iₙ₊)) → X
         map-surj =
           ind-Σ
             ( λ iₙ₊ is-left-f-iₙ₊ →
@@ -201,7 +199,6 @@ module _
           left-is-left x? L ＝ x'
         helper = λ where
           (inl _) _ x?=inl-x' _ → is-injective-inl x?=inl-x'
-        is-surjective-map-surj : is-surjective map-surj
         is-surjective-map-surj x =
           let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj x))
           in do
@@ -228,7 +225,6 @@ finite-enumeration-coproduct :
   finite-enumeration X → finite-enumeration Y → finite-enumeration (X + Y)
 finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
   let
-    F : bool → UU (l1 ⊔ l2)
     F = rec-bool (raise l2 X) (raise l1 Y)
     eF : (b : bool) → finite-enumeration (F b)
     eF = λ where
