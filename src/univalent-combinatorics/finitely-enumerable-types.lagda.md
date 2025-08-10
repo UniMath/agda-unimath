@@ -158,34 +158,23 @@ abstract
         count-Σ
           ( count-Fin nA)
           ( count-Fin ∘ pr1 ∘ eB ∘ map-surjection Fin-nA↠A)
-      map-surj :
-        (i : Fin nA) → Fin (pr1 (eB (map-surjection Fin-nA↠A i))) → Σ A B
-      map-surj iA i-nBa =
-        ( map-surjection Fin-nA↠A iA ,
-          map-surjection (pr2 (eB (map-surjection Fin-nA↠A iA))) i-nBa)
-      is-surjective-map-surj :
-        is-surjective (ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn)
+      map-surj =
+        ind-Σ
+          ( λ iA i-nBa →
+            ( map-surjection Fin-nA↠A iA ,
+              map-surjection (pr2 (eB (map-surjection Fin-nA↠A iA))) i-nBa))
       is-surjective-map-surj =
         λ (a , b) →
-          let
-            open
-              do-syntax-trunc-Prop
-                ( trunc-Prop
-                  ( fiber (ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn) (a , b)))
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj (a , b)))
           in do
-            (ia , eA-ia=a@refl) ← is-surjective-map-surjection Fin-nA↠A a
-            (ib , eBa-ib=b) ← is-surjective-map-surjection (pr2 (eB a)) b
-            let
-              ib' = map-inv-eq (ap (Fin ∘ pr1 ∘ eB) eA-ia=a) ib
-              iΣ = map-inv-equiv Fin-n≃ΣAn (ia , ib')
-            intro-exists
-              iΣ
-              ( ap
-                  ( ind-Σ map-surj)
-                  ( is-section-map-inv-equiv Fin-n≃ΣAn (ia , ib')) ∙
-                eq-pair-Σ eA-ia=a eBa-ib=b)
+            (ia , refl) ← is-surjective-map-surjection Fin-nA↠A a
+            (ib , refl) ←
+              is-surjective-map-surjection (pr2 (eB a)) b
+            intro-exists (ia , ib) refl
     in
-      ( n , ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn , is-surjective-map-surj)
+      ( n ,
+        map-surj ∘ map-equiv Fin-n≃ΣAn ,
+        is-surjective-right-comp-equiv is-surjective-map-surj Fin-n≃ΣAn)
 ```
 
 ### `X` and `Y` are finitely enumerable if and only if `X + Y` is finitely enumerable
