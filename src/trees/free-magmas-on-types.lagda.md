@@ -1,6 +1,8 @@
 # Free magmas on types
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module trees.free-magmas-on-types where
 ```
 
@@ -157,12 +159,19 @@ module _
         ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma
           ( pr1 V , (λ x → pr2 V x)) (pr1 f , pr2 f))
         ∙ inv (pr2 f (pr1 U , (λ x → pr2 U x)) (pr1 V , (λ x → pr2 V x)))
-        ∙ p ∙ pr2 f U V) {!   !} ∙ -- this goal *should* be filed with a path that combinator-commutes-with-labelings.. is refl but this isn't judgementally so...
-        {!   !} ∙
+        ∙ p ∙ pr2 f U V) (lem U V) ∙ -- this goal *should* be filled with a path that combinator-commutes-with-labelings-_ is refl but this isn't judgementally so...
+          {!   !} ∙
           is-section-inv-concat' (pr2 f U V) _) ∙
       ap-binary-htpy
       ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f)
       ( mul-Magma M))))
+            where
+            lem : (U V : labeled-full-binary-tree X) →
+              ap (pr1 f)
+              (combinator-commutes-with-labelings-full-binary-tree X (pr1 U)
+              (pr1 V) (pr2 (combinator-labeled-full-binary-tree X U V))) ＝
+              refl
+            lem U V = {!   !}
 
   is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma :
     is-equiv ev-label-leaf-hom-Magma
