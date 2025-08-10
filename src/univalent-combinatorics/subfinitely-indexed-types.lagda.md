@@ -135,12 +135,12 @@ module _
   (Y : Subfinitely-Indexed-Type l3 l4)
   where
 
-  cantor-schröder-bernstein-Subfinitely-Indexed-Type :
+  Cantor-Schröder-Bernstein-Subfinitely-Indexed-Type :
     (type-Subfinitely-Indexed-Type X ↪ type-Subfinitely-Indexed-Type Y) →
     (type-Subfinitely-Indexed-Type Y ↪ type-Subfinitely-Indexed-Type X) →
     type-Subfinitely-Indexed-Type X ≃ type-Subfinitely-Indexed-Type Y
-  cantor-schröder-bernstein-Subfinitely-Indexed-Type =
-    cantor-schröder-bernstein-Dedekind-Finite-Type
+  Cantor-Schröder-Bernstein-Subfinitely-Indexed-Type =
+    Cantor-Schröder-Bernstein-Dedekind-Finite-Type
       ( dedekind-finite-type-Subfinitely-Indexed-Type X)
       ( dedekind-finite-type-Subfinitely-Indexed-Type Y)
 ```

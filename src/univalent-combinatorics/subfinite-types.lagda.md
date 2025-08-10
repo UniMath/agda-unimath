@@ -180,12 +180,12 @@ module _
   {l1 l2 : Level} (X : Subfinite-Type l1) (Y : Subfinite-Type l2)
   where
 
-  cantor-schröder-bernstein-Subfinite-Type :
+  Cantor-Schröder-Bernstein-Subfinite-Type :
     (type-Subfinite-Type X ↪ type-Subfinite-Type Y) →
     (type-Subfinite-Type Y ↪ type-Subfinite-Type X) →
     type-Subfinite-Type X ≃ type-Subfinite-Type Y
-  cantor-schröder-bernstein-Subfinite-Type =
-    cantor-schröder-bernstein-Dedekind-Finite-Type
+  Cantor-Schröder-Bernstein-Subfinite-Type =
+    Cantor-Schröder-Bernstein-Dedekind-Finite-Type
       ( dedekind-finite-type-Subfinite-Type X)
       ( dedekind-finite-type-Subfinite-Type Y)
 ```

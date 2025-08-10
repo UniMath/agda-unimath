@@ -98,9 +98,9 @@ module _
   (g : type-Dedekind-Finite-Type Y ↪ type-Dedekind-Finite-Type X)
   where
 
-  is-equiv-map-cantor-schröder-bernstein-Dedekind-Finite-Type :
+  is-equiv-map-Cantor-Schröder-Bernstein-Dedekind-Finite-Type :
     is-equiv (map-emb f)
-  is-equiv-map-cantor-schröder-bernstein-Dedekind-Finite-Type =
+  is-equiv-map-Cantor-Schröder-Bernstein-Dedekind-Finite-Type =
     is-equiv-left-is-equiv-top-is-equiv-bottom-square
       ( map-emb f)
       ( map-emb f)
@@ -114,10 +114,10 @@ module _
         ( map-emb f ∘ map-emb g)
         ( is-emb-map-comp-emb f g))
 
-  cantor-schröder-bernstein-Dedekind-Finite-Type :
+  Cantor-Schröder-Bernstein-Dedekind-Finite-Type :
     type-Dedekind-Finite-Type X ≃ type-Dedekind-Finite-Type Y
-  cantor-schröder-bernstein-Dedekind-Finite-Type =
-    ( map-emb f , is-equiv-map-cantor-schröder-bernstein-Dedekind-Finite-Type)
+  Cantor-Schröder-Bernstein-Dedekind-Finite-Type =
+    ( map-emb f , is-equiv-map-Cantor-Schröder-Bernstein-Dedekind-Finite-Type)
 ```
 
 ### If all elements are merely equal, then the type is Dedekind finite

@@ -121,9 +121,9 @@ module _
       ( type-Dual-Dedekind-Finite-Type X))
   where
 
-  is-equiv-map-cantor-schröder-bernstein-Dual-Dedekind-Finite-Type :
+  is-equiv-map-Cantor-Schröder-Bernstein-Dual-Dedekind-Finite-Type :
     is-equiv (map-acyclic-map f)
-  is-equiv-map-cantor-schröder-bernstein-Dual-Dedekind-Finite-Type =
+  is-equiv-map-Cantor-Schröder-Bernstein-Dual-Dedekind-Finite-Type =
     is-equiv-left-is-equiv-top-is-equiv-bottom-square
       ( map-acyclic-map f)
       ( map-acyclic-map f)
@@ -137,11 +137,11 @@ module _
         ( map-acyclic-map f ∘ map-acyclic-map g)
         ( is-acyclic-map-comp-acyclic-map f g))
 
-  cantor-schröder-bernstein-Dual-Dedekind-Finite-Type :
+  Cantor-Schröder-Bernstein-Dual-Dedekind-Finite-Type :
     type-Dual-Dedekind-Finite-Type X ≃ type-Dual-Dedekind-Finite-Type Y
-  cantor-schröder-bernstein-Dual-Dedekind-Finite-Type =
+  Cantor-Schröder-Bernstein-Dual-Dedekind-Finite-Type =
     ( map-acyclic-map f ,
-      is-equiv-map-cantor-schröder-bernstein-Dual-Dedekind-Finite-Type)
+      is-equiv-map-Cantor-Schröder-Bernstein-Dual-Dedekind-Finite-Type)
 ```
 
 ## See also
