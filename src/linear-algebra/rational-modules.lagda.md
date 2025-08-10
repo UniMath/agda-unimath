@@ -35,7 +35,6 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.opposite-ring-extensions-rational-numbers
 open import ring-theory.opposite-rings
-open import ring-theory.rational-extension-initial-hom-ring-extensions-rational-numbers
 open import ring-theory.ring-extensions-rational-numbers
 open import ring-theory.rings
 ```
