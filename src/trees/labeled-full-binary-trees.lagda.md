@@ -150,6 +150,29 @@ module _
     (join-full-binary-tree L R , lab) (inr x) =
     compute-tr-refl-Eq-labeling-full-binary-tree (R , (λ y → lab (inr y))) x
 
+  refl-Eq-htpy-labeled-full-binary-tree :
+    (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+    Eq-htpy-labeled-full-binary-tree (T , f) (T , f) (refl-Eq-full-binary-tree T)
+  refl-Eq-htpy-labeled-full-binary-tree T f =
+    inv-htpy (compute-tr-refl-Eq-labeling-full-binary-tree (T , f))
+
+  compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree :
+    (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+    refl-tr-Eq-labeling-full-binary-tree T f f refl ＝
+    refl-Eq-htpy-labeled-full-binary-tree T f
+  compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree leaf-full-binary-tree f =
+    refl
+  compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree
+    (join-full-binary-tree L R) f =
+    eq-htpy htpy
+      where
+      htpy :
+        refl-tr-Eq-labeling-full-binary-tree (join-full-binary-tree L R)
+          f f refl ~
+        refl-Eq-htpy-labeled-full-binary-tree (join-full-binary-tree L R) f
+      htpy (inl x) = htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree L (λ y → f (inl y))) x
+      htpy (inr x) = htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree R (λ y → f (inr y))) x
+
   compute-tr-Eq-labeling-full-binary-tree' :
     (U : labeled-full-binary-tree X)
     (V : full-binary-tree)
@@ -222,62 +245,89 @@ module _
     ( eq-Eq-full-binary-tree U V p)
     ( compute-tr-Eq-labeling-full-binary-tree (U , lab-U) (V , lab-V) (p , q))
 
-  dependent-identification-Eq-labeled-full-binary-tree :
-    (T U : labeled-full-binary-tree X) (p : Eq-labeled-full-binary-tree T U) →
-    dependent-identification
-      (Eq-labeled-full-binary-tree T)
-      (eq-Eq-labeled-full-binary-tree T U p)
-      (refl-Eq-labeled-full-binary-tree T)
-      p
-  dependent-identification-Eq-labeled-full-binary-tree
-    (leaf-full-binary-tree , lab-T) (leaf-full-binary-tree , lab-U) (star , p) =
-      eq-pair-Σ refl (eq-htpy htpy)
-        where
-        htpy :
-          tr (Eq-htpy-labeled-full-binary-tree
-            ( leaf-full-binary-tree , lab-T)
-            ( leaf-full-binary-tree , lab-U))
-            refl (pr2 (tr (Eq-labeled-full-binary-tree
-              ( leaf-full-binary-tree , lab-T))
-              ( eq-Eq-labeled-full-binary-tree (leaf-full-binary-tree , lab-T)
-            ( leaf-full-binary-tree , lab-U) (star , p))
-            ( refl-Eq-labeled-full-binary-tree
-            ( leaf-full-binary-tree , lab-T)))) ~ p
-        htpy star = {!   !}
-  dependent-identification-Eq-labeled-full-binary-tree
-    (join-full-binary-tree T T₁ , lab-T)
-    (join-full-binary-tree U U₁ , lab-U) ((p , q) , r) =
-      eq-pair-Σ
-      ( eq-pair
-        ( eq-is-prop (is-prop-Eq-full-binary-tree T U))
-        ( eq-is-prop (is-prop-Eq-full-binary-tree T₁ U₁)))
-      ( eq-htpy htpy)
-        where
-        htpy :
-          tr
-          (Eq-htpy-labeled-full-binary-tree
-           (join-full-binary-tree T T₁ , lab-T)
-           (join-full-binary-tree U U₁ , lab-U))
-          (eq-pair (eq-is-prop (is-prop-Eq-full-binary-tree T U))
-           (eq-is-prop (is-prop-Eq-full-binary-tree T₁ U₁)))
-          (pr2
-           (tr
-            (Eq-labeled-full-binary-tree (join-full-binary-tree T T₁ , lab-T))
-            (eq-Eq-labeled-full-binary-tree
-             (join-full-binary-tree T T₁ , lab-T)
-             (join-full-binary-tree U U₁ , lab-U) ((p , q) , r))
-            (refl-Eq-labeled-full-binary-tree
-             (join-full-binary-tree T T₁ , lab-T)))) ~ r
-        htpy (inl x) = {!   !}
-        htpy (inr x) = {!   !}
+  inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
+    Eq-htpy-labeled-full-binary-tree (T , f) (T , g)
+      (refl-Eq-full-binary-tree T) →
+    f ＝ g
+  inv-refl-tr-Eq-labeling-full-binary-tree T f g p =
+    eq-htpy (compute-tr-refl-Eq-labeling-full-binary-tree (T , f) ∙h p)
 
-  is-torsorial-Eq-labeled-full-binary-tree :
-    (T : labeled-full-binary-tree X) →
-    is-torsorial (Eq-labeled-full-binary-tree T)
-  pr1 (is-torsorial-Eq-labeled-full-binary-tree T) =
-    T , (refl-Eq-labeled-full-binary-tree T)
-  pr2 (is-torsorial-Eq-labeled-full-binary-tree T) (U , p) =
-    eq-pair-Σ
-    ( eq-Eq-labeled-full-binary-tree T U p)
-    (dependent-identification-Eq-labeled-full-binary-tree T U p)
+  htpy-compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+    compute-tr-refl-Eq-labeling-full-binary-tree (T , f) ∙h refl-Eq-htpy-labeled-full-binary-tree T f ＝ refl-htpy
+  htpy-compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree leaf-full-binary-tree f = refl
+  htpy-compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree (join-full-binary-tree L R) f = eq-htpy htpy
+    where
+    htpy : compute-tr-refl-Eq-labeling-full-binary-tree (join-full-binary-tree L R , f) ∙h refl-Eq-htpy-labeled-full-binary-tree (join-full-binary-tree L R) f ~ refl-htpy
+    htpy (inl x) = {!   !}
+    htpy (inr x) = {!   !}
+
+  compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+    inv-refl-tr-Eq-labeling-full-binary-tree T f f
+      (refl-Eq-htpy-labeled-full-binary-tree T f) ＝
+    refl
+  compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree T f =
+    ap eq-htpy (htpy-compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree T f) ∙ eq-htpy-refl-htpy f
+
+  compute-htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T)
+    (p : Eq-htpy-labeled-full-binary-tree
+      (T , f) (T , g) (refl-Eq-full-binary-tree T)) →
+    (refl-tr-Eq-labeling-full-binary-tree T f g ∘
+      inv-refl-tr-Eq-labeling-full-binary-tree T f g) p ~
+    p
+  compute-htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p x = {!   !}
+
+  is-section-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
+    is-section
+      (refl-tr-Eq-labeling-full-binary-tree T f g)
+      (inv-refl-tr-Eq-labeling-full-binary-tree T f g)
+  is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p =
+    eq-htpy
+    ( compute-htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p)
+
+  is-retraction-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+      (inv-refl-tr-Eq-labeling-full-binary-tree T f f ∘
+        refl-tr-Eq-labeling-full-binary-tree T f f)
+        refl ＝
+      refl
+  is-retraction-inv-refl-tr-Eq-labeling-full-binary-tree T f =
+    equational-reasoning
+    ( inv-refl-tr-Eq-labeling-full-binary-tree T f f ∘
+      refl-tr-Eq-labeling-full-binary-tree T f f)
+      refl
+    ＝ inv-refl-tr-Eq-labeling-full-binary-tree T f f
+      ( refl-Eq-htpy-labeled-full-binary-tree T f)
+      by ap (inv-refl-tr-Eq-labeling-full-binary-tree T f f)
+        ( compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree T f)
+    ＝ refl
+      by compute-refl-Eq-htpy-inv-refl-tr-Eq-labeling-full-binary-tree T f
+
+  is-equiv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
+    is-equiv (refl-tr-Eq-labeling-full-binary-tree T f g)
+  pr1 (pr1 (is-equiv-refl-tr-Eq-labeling-full-binary-tree T f g)) =
+    inv-refl-tr-Eq-labeling-full-binary-tree T f g
+  pr2 (pr1 (is-equiv-refl-tr-Eq-labeling-full-binary-tree T f g)) =
+    is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g
+  pr1 (pr2 (is-equiv-refl-tr-Eq-labeling-full-binary-tree T f g)) =
+    inv-refl-tr-Eq-labeling-full-binary-tree T f g
+  pr2 (pr2 (is-equiv-refl-tr-Eq-labeling-full-binary-tree T f f)) refl =
+    is-retraction-inv-refl-tr-Eq-labeling-full-binary-tree T f
+
+  is-equiv-Eq-eq-labeled-full-binary-tree :
+    (U V : labeled-full-binary-tree X) →
+    is-equiv (Eq-eq-labeled-full-binary-tree U V)
+  is-equiv-Eq-eq-labeled-full-binary-tree U =
+    structure-identity-principle
+    ( λ {T} lab p → Eq-htpy-labeled-full-binary-tree U (T , lab) p)
+    ( refl-Eq-full-binary-tree (pr1 U))
+    ( refl-tr-Eq-labeling-full-binary-tree (pr1 U) (pr2 U) (pr2 U) refl)
+    ( Eq-eq-labeled-full-binary-tree U)
+    ( λ T → is-equiv-Eq-eq-full-binary-tree)
+    ( λ lab → is-equiv-refl-tr-Eq-labeling-full-binary-tree (pr1 U) (pr2 U) lab)
 ```
