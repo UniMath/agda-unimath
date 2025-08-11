@@ -31,9 +31,9 @@ open import logic.double-negation-elimination
 
 The [subuniverse](foundation.subuniverses.md) of
 {{#concept "irrefutable types" Agda=Irrefutable-Type}}, or
-{{#concept "double negation
-dense types" Agda=Irrefutable-Type}}, consists of types `X` for which the [double negation](foundation.double-negation.md)
-`¬¬X` is true.
+{{#concept "double negation dense types" Agda=Irrefutable-Type}}, consists of
+types `X` for which the [double negation](foundation.double-negation.md) `¬¬X`
+is true.
 
 **Terminology.** The term _dense_ used here is in the sense of dense with
 respect to a
