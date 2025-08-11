@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
@@ -383,4 +384,15 @@ module _
     ( associative-add-Semiring R
       ( mul-nat-scalar-Semiring m x)
       ( mul-nat-scalar-Semiring n x) x)
+
+  map-nat-Semiring : ℕ → type-Semiring R
+  map-nat-Semiring n = mul-nat-scalar-Semiring n (one-Semiring R)
+
+  htpy-mul-map-mul-nat-scalar-Semiring :
+    (n : ℕ) →
+    mul-Semiring R (map-nat-Semiring n) ~
+    mul-nat-scalar-Semiring n
+  htpy-mul-map-mul-nat-scalar-Semiring n x =
+    ( left-nat-scalar-law-mul-Semiring n (one-Semiring R) x) ∙
+    ( ap (mul-nat-scalar-Semiring n) (left-unit-law-mul-Semiring R x))
 ```
