@@ -14,7 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 
-open import ring-theory.series-semirings
+open import ring-theory.partial-sums-sequences-semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 ```
 
@@ -22,9 +22,9 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 ## Idea
 
-{{#concept "Triangular nuumbers" Agda=triangular-number-ℕ WDID=Q245102}} are
-the sequence of [natural numbers](elementary-number-theory.natural-numbers.md)
-`Tₙ` defined by :
+{{#concept "Triangular nuumbers" Agda=triangular-number-ℕ WDID=Q245102}} are the
+sequence of [natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ`
+defined by :
 
 - `T₀ = 0`;
 - `Tₙ₊₁ = Tₙ + n + 1`.

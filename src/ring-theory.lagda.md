@@ -59,6 +59,7 @@ open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
 open import ring-theory.opposite-rings public
+open import ring-theory.partial-sums-sequences-semirings public
 open import ring-theory.poset-of-cyclic-rings public
 open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
@@ -78,7 +79,6 @@ open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
 open import ring-theory.rings public
 open import ring-theory.semirings public
-open import ring-theory.series-semirings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-of-finite-families-of-elements-rings public
