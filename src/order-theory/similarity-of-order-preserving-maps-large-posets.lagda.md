@@ -31,12 +31,13 @@ In other words, a **similarity of order preserving maps** between `f` and `g`
 consists of an assignment `x ↦ h x` where
 
 ```text
-  h x : f x ≈ g x
+  h x : f x ≍ g x
 ```
 
 for each `x : type-Large-Poset P`. In informal writing we will use the notation
-`f ≈ g` to assert that the order preserving map `f` is similar to the order
-preserving map `g`.
+`f ≍ g` to assert that the order preserving map `f` is similar to the order
+preserving map `g`. The symbol `≍` is the unicode symbol
+[Equivalent To](https://codepoints.net/U+224d) (agda-input: `\asymp`).
 
 ## Definitions
 

@@ -23,8 +23,10 @@ open import order-theory.large-preorders
 Two elements `x` and `y` of a [large preorder](order-theory.large-preorders.md)
 `P` are said to be **similar** if both `x ≤ y` and `y ≤ x` hold.
 
-In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
-are similar elements in a preorder `P`.
+**Notation.** In informal writing we will use the notation `x ≍ y` to assert
+that `x` and `y` are similar elements in a preorder `P`. The symbol `≍` is the
+unicode symbol [Equivalent To](https://codepoints.net/U+224d) (agda-input:
+`\asymp`).
 
 ## Definition
 
