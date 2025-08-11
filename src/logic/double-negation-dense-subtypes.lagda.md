@@ -117,10 +117,11 @@ module _
     ( inclusion-subtype P ,
       is-double-negation-dense-inclusion-is-double-negation-dense-subtype H)
 
-  is-dense-is-double-negation-dense-inclusion-subtype :
+  is-double-negation-dense-subtype-is-double-negation-dense-inclusion-subtype :
     is-double-negation-dense-map (inclusion-subtype P) →
     is-double-negation-dense-subtype P
-  is-dense-is-double-negation-dense-inclusion-subtype H x =
+  is-double-negation-dense-subtype-is-double-negation-dense-inclusion-subtype
+    H x =
     map-double-negation (λ p → tr (is-in-subtype P) (pr2 p) (pr2 (pr1 p))) (H x)
 
 module _

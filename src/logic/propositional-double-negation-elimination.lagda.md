@@ -12,6 +12,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.empty-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.irrefutable-equality
@@ -126,7 +127,7 @@ module _
     has-prop-double-negation-elim-iff' (iff-retract e)
 ```
 
-### If the negation of a type with double negation elimination is decidable, then the type is merely decidable
+### If the negation of a type with double negation elimination is decidable, then the type is inhabited or empty
 
 ```agda
 module _
@@ -146,7 +147,7 @@ module _
 ```
 
 **Remark.** It is an established fact that both the property of satisfying
-double negation elimination, and the property of having decidable negation, are
+double negation elimination and the property of having decidable negation are
 strictly weaker conditions than being decidable. Therefore, this result
 demonstrates that they are independent too.
 
@@ -160,7 +161,7 @@ has-prop-double-negation-elim-has-double-negation-elim :
 has-prop-double-negation-elim-has-double-negation-elim H = unit-trunc-Prop ∘ H
 ```
 
-### Propositional double negation elimination for merely decidable types
+### Propositional double negation elimination for inhabited or empty types
 
 ```agda
 prop-double-negation-elim-is-inhabited-or-empty :

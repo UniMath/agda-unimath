@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.irrefutable-equality
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -34,6 +35,13 @@ if for every two elements `x` and `y` in `A`, it is
 [equal](foundation-core.identity-types.md). In other words, if all elements of
 `A` are [irrefutably equal](foundation.irrefutable-equality.md).
 
+**Terminology.** The term _dense_ used here is in the sense of dense with
+respect to a
+[reflective subuniverse](orthogonal-factorization-systems.reflective-global-subuniverses.md)/[modality](orthogonal-factorization-systems.higher-modalities.md),
+or connected. Here, it means that the double negation of the identity types of
+the relevant type are contractible. Since negations are propositions, it
+suffices that the double negation has an element.
+
 ## Definitions
 
 ### Types with double negation dense equality
@@ -44,15 +52,6 @@ has-double-negation-dense-equality A = (x y : A) → irrefutable-eq x y
 ```
 
 ## Properties
-
-### If irrefutable equality maps into the identity type of `A`, then `A` is a set
-
-```agda
-is-set-irrefutable-eq-in-id :
-  {l : Level} {A : UU l} → ((x y : A) → irrefutable-eq x y → x ＝ y) → is-set A
-is-set-irrefutable-eq-in-id =
-  is-set-prop-in-id irrefutable-eq is-prop-irrefutable-eq refl-irrefutable-eq
-```
 
 ### Retracts of types with double negation dense equality
 

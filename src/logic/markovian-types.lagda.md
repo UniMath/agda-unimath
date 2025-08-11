@@ -82,7 +82,7 @@ module _
 
 > This remains to be formalized.
 
-### Types with decidability search are markovian
+### Types with decidability search are Markovian
 
 > This remains to be formalized.
 

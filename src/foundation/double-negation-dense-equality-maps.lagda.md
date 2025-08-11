@@ -7,6 +7,7 @@ module foundation.double-negation-dense-equality-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
 open import foundation.universe-levels
 

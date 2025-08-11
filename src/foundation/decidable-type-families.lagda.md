@@ -12,6 +12,7 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
 open import foundation.negation
 open import foundation.propositions

@@ -9,6 +9,7 @@ module foundation.decidable-dependent-pair-types where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
 open import foundation.maybe
 open import foundation.propositional-truncations
