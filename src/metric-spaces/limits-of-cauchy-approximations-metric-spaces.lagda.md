@@ -18,6 +18,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -32,6 +33,13 @@ A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 if `f ε` is in a `ε + δ`-[neighborhood](metric-spaces.rational-neighborhoods.md)
 of `x` for all `ε δ : ℚ⁺`.
 
+These are
+[limits](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md)
+in the underlying [pseudometric space](metric-spaces.pseudometric-spaces.md)
+but, because metric spaces are
+[extensional](metric-spaces.extensional-pseudometric-spaces.md), all limits of a
+Cauchy approximation in a metric space are equal.
+
 ## Definitions
 
 ### The property of having a limit in a metric space
@@ -44,18 +52,10 @@ module _
 
   is-limit-cauchy-approximation-prop-Metric-Space :
     type-Metric-Space A → Prop l2
-  is-limit-cauchy-approximation-prop-Metric-Space lim =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε →
-        Π-Prop
-          ( ℚ⁺)
-          ( λ δ →
-            neighborhood-prop-Metric-Space
-              ( A)
-              ( ε +ℚ⁺ δ)
-              ( map-cauchy-approximation-Metric-Space A f ε)
-              ( lim)))
+  is-limit-cauchy-approximation-prop-Metric-Space =
+    is-limit-cauchy-approximation-prop-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 
   is-limit-cauchy-approximation-Metric-Space :
     type-Metric-Space A → UU l2
@@ -78,46 +78,12 @@ module _
     is-limit-cauchy-approximation-Metric-Space A f x →
     is-limit-cauchy-approximation-Metric-Space A f y →
     sim-Metric-Space A x y
-  all-sim-is-limit-cauchy-approximation-Metric-Space lim-x lim-y d =
-    let
-      (ε , δ , ε+δ=d) = split-ℚ⁺ d
-      θ = mediant-zero-min-ℚ⁺ ε δ
-      θ<ε = le-left-mediant-zero-min-ℚ⁺ ε δ
-      θ<δ = le-right-mediant-zero-min-ℚ⁺ ε δ
-      ε' = le-diff-ℚ⁺ θ ε θ<ε
-      δ' = le-diff-ℚ⁺ θ δ θ<δ
-      fθ = map-cauchy-approximation-Metric-Space A f θ
-
-      Nεx : neighborhood-Metric-Space A ε fθ x
-      Nεx =
-        tr
-          ( is-upper-bound-dist-Metric-Space A fθ x)
-          ( right-diff-law-add-ℚ⁺ θ ε θ<ε)
-          ( lim-x θ ε')
-
-      Nδy : neighborhood-Metric-Space A δ fθ y
-      Nδy =
-        tr
-          ( is-upper-bound-dist-Metric-Space A fθ y)
-          ( right-diff-law-add-ℚ⁺ θ δ θ<δ)
-          ( lim-y θ δ')
-
-      Nxy : neighborhood-Metric-Space A (ε +ℚ⁺ δ) x y
-      Nxy =
-        triangular-neighborhood-Metric-Space
-          ( A)
-          ( x)
-          ( fθ)
-          ( y)
-          ( ε)
-          ( δ)
-          ( Nδy)
-          ( symmetric-neighborhood-Metric-Space A ε fθ x Nεx)
-    in
-      tr
-        ( is-upper-bound-dist-Metric-Space A x y)
-        ( ε+δ=d)
-        ( Nxy)
+  all-sim-is-limit-cauchy-approximation-Metric-Space =
+    all-sim-is-limit-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
+      ( x)
+      ( y)
 
   all-eq-is-limit-cauchy-approximation-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space A f x →
