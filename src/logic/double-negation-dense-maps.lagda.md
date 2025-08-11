@@ -45,8 +45,8 @@ open import logic.irrefutable-types
 A map `f : A → B` is
 {{#concept "double negation dense" Disambiguation="map of types" Agda=is-double-negation-dense-map}},
 if all of its [fibers](foundation-core.fibers-of-maps.md) are
-[irrefutable](foundation.irrefutable-types.md). I.e., for every `y : B`, it is
-not not true that `y` has a preimage under `f`.
+[irrefutable](logic.irrefutable-types.md). I.e., for every `y : B`, it is not
+not true that `y` has a preimage under `f`.
 
 Double negation dense maps are a close cousin of
 [surjective maps](foundation.surjective-maps.md), but don't require the
