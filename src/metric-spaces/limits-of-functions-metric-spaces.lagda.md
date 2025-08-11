@@ -30,7 +30,8 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between
 {{#concept "limit" Disambiguation="of function between metric spaces at a point" Agda=is-pt-limit-function-Metric-Space}}
 `y : Y` at a point `x : X` if there exists a function `m : ℚ⁺ → ℚ⁺` such that
 whenever `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an
-`ε`-neighborhood of `y`. In this case `m` is called a limit modulus of `f` at `x`.
+`ε`-neighborhood of `y`. In this case `m` is called a limit modulus of `f` at
+`x`.
 
 ## Definitions
 

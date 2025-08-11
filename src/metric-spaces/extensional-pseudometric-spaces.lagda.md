@@ -184,5 +184,5 @@ module _
 
 ## See also
 
-- Extensional
-  pseudometric spaces are called [metric spaces](metric-spaces.metric-spaces.md).
+- Extensional pseudometric spaces are called
+  [metric spaces](metric-spaces.metric-spaces.md).

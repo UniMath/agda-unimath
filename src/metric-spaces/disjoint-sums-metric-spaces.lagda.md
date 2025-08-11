@@ -58,8 +58,8 @@ metric space `A` is the metric space with underlying type `Σ A P` and the
 identification is a `d`-neighbor of `y` in `P y`.
 
 The [projection](foundation.dependent-pair-types.md) on the first component is
-[locally constant](metric-spaces.locally-constant-functions-metric-spaces.md), and
-for any `x : A` the embedding `P x → Σ A P` is an
+[locally constant](metric-spaces.locally-constant-functions-metric-spaces.md),
+and for any `x : A` the embedding `P x → Σ A P` is an
 [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions

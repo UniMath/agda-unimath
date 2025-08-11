@@ -273,8 +273,8 @@ module _
   are sequences with a limit;
 - The
   [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md)
-  is the metric space of convergent sequences in a metric space with the
-  product metric structure.
+  is the metric space of convergent sequences in a metric space with the product
+  metric structure.
 
 ## External links
 
