@@ -750,4 +750,14 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
   ( inr star)
   ( inr star)
   ( neq) = ex-falso (neq refl)
+
+eq-permutation-list-adjacent-transpositions-transposition-Fin :
+  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
+  permutation-list-adjacent-transpositions
+    ( n)
+    ( list-adjacent-transpositions-transposition-Fin n i j) ＝
+  transposition-Fin (succ-ℕ n) i j neq
+eq-permutation-list-adjacent-transpositions-transposition-Fin n i j i≠j =
+  eq-htpy-equiv
+    ( htpy-permutation-list-adjacent-transpositions-transposition-Fin n i j i≠j)
 ```

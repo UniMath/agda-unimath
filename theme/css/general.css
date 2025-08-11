@@ -307,3 +307,27 @@ kbd {
 span.prefer-nobreak {
   display: inline-block;
 }
+
+.art-fredrik-dependency-graph-legend {
+  line-height: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.art-fredrik-dependency-graph-dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 2.5px;
+  margin-left: 4px;
+}
+
+.art-fredrik-dependency-graph-label {
+  white-space: nowrap;
+  font-size: 50%;
+  display: inline-block;
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+}

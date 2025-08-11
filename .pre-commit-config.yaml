@@ -13,8 +13,29 @@ repos:
       # - id: check-json # Doesn't accept json with comments
       # - id: requirements-txt-fixer # Can't handle comments
 
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: Spellcheck with codespell
+        types_or: [text, markdown]
+        args:
+          [
+            '--config',
+            '.codespellrc',
+            '--builtin',
+            'clear,rare,informal,usage,code,names,en-GB_to_en-US',
+            '--dictionary',
+            'codespell-dictionary.txt,-',
+          ]
+
   - repo: local
     hooks:
+      - id: sort-codespell-files
+        name: Sort codespell dictionary and ignore files
+        entry: bash -c 'for f in "$@"; do LC_ALL=C sort -o "$f" "$f"; done' --
+        language: system
+        files: ^codespell-(dictionary|ignore)\.txt$
       - id: markdown-conventions
         name: Markdown conventions
         entry: scripts/markdown_conventions.py

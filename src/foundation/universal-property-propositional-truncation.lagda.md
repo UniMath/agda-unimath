@@ -108,7 +108,7 @@ module _
 
 ## Properties
 
-### Being a propositional trunction is equivalent to satisfying the universal property of the propositional truncation
+### Being a propositional truncation is equivalent to satisfying the universal property of the propositional truncation
 
 ```agda
 abstract

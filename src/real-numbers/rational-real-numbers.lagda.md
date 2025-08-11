@@ -39,6 +39,7 @@ open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -70,7 +71,7 @@ is-dedekind-lower-upper-real-ℚ x =
   located-le-ℚ x
 ```
 
-### The canonical map from `ℚ` to `ℝ`
+### The canonical map from `ℚ` to `ℝ lzero`
 
 ```agda
 real-ℚ : ℚ → ℝ lzero
@@ -89,6 +90,19 @@ zero-ℝ = real-ℚ zero-ℚ
 ```agda
 one-ℝ : ℝ lzero
 one-ℝ = real-ℚ one-ℚ
+```
+
+### The canonical map from `ℚ` to `ℝ l`
+
+```agda
+raise-real-ℚ : (l : Level) → ℚ → ℝ l
+raise-real-ℚ l q = raise-ℝ l (real-ℚ q)
+
+raise-zero-ℝ : (l : Level) → ℝ l
+raise-zero-ℝ l = raise-real-ℚ l zero-ℚ
+
+raise-one-ℝ : (l : Level) → ℝ l
+raise-one-ℝ l = raise-real-ℚ l one-ℚ
 ```
 
 ### The property of being a rational real number

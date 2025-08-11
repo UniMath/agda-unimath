@@ -43,7 +43,9 @@ its negation.
 rational-abs-ℚ : ℚ → ℚ
 rational-abs-ℚ q = max-ℚ q (neg-ℚ q)
 
-abstract
+opaque
+  unfolding neg-ℚ
+
   is-nonnegative-rational-abs-ℚ : (q : ℚ) → is-nonnegative-ℚ (rational-abs-ℚ q)
   is-nonnegative-rational-abs-ℚ q =
     rec-coproduct
@@ -88,7 +90,9 @@ abstract
 ### The absolute value of a nonnegative rational number is the number itself
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   abs-rational-ℚ⁰⁺ : (q : ℚ⁰⁺) → abs-ℚ (rational-ℚ⁰⁺ q) ＝ q
   abs-rational-ℚ⁰⁺ (q , nonneg-q) =
     eq-ℚ⁰⁺
@@ -144,7 +148,9 @@ abstract
 ### The absolute value of `q` is zero iff `q` is zero
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   eq-zero-eq-abs-zero-ℚ : (q : ℚ) → abs-ℚ q ＝ zero-ℚ⁰⁺ → q ＝ zero-ℚ
   eq-zero-eq-abs-zero-ℚ q abs=0 =
     rec-coproduct
@@ -207,7 +213,9 @@ abstract
 ### `|ab| = |a||b|`
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   abs-left-mul-nonnegative-ℚ :
     (q : ℚ) (p : ℚ⁰⁺) → abs-ℚ (rational-ℚ⁰⁺ p *ℚ q) ＝ p *ℚ⁰⁺ abs-ℚ q
   abs-left-mul-nonnegative-ℚ q p⁰⁺@(p , nonneg-p) with linear-leq-ℚ zero-ℚ q

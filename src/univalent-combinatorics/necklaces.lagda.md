@@ -61,8 +61,8 @@ module _
   is-cyclic-endo-necklace : is-cyclic-Type-With-Endomorphism m endo-necklace
   is-cyclic-endo-necklace = mere-equiv-endo-Cyclic-Type m cyclic-necklace
 
-  colouring-necklace : type-necklace → Fin n
-  colouring-necklace = pr2 N
+  coloring-necklace : type-necklace → Fin n
+  coloring-necklace = pr2 N
 ```
 
 ### Necklace patterns
@@ -90,8 +90,8 @@ module _
   equiv-necklace N1 N2 =
     Σ ( equiv-Cyclic-Type m (cyclic-necklace m n N1) (cyclic-necklace m n N2))
       ( λ e →
-        ( colouring-necklace m n N1) ~
-        ( ( colouring-necklace m n N2) ∘
+        ( coloring-necklace m n N1) ~
+        ( ( coloring-necklace m n N2) ∘
           ( map-equiv-Cyclic-Type m
             ( cyclic-necklace m n N1)
             ( cyclic-necklace m n N2)
@@ -115,7 +115,7 @@ module _
   extensionality-necklace N1 =
     extensionality-Σ
       ( λ {X} f e →
-        ( colouring-necklace m n N1) ~
+        ( coloring-necklace m n N1) ~
         ( f ∘ map-equiv-Cyclic-Type m (cyclic-necklace m n N1) X e))
       ( id-equiv-Cyclic-Type m (cyclic-necklace m n N1))
       ( refl-htpy)

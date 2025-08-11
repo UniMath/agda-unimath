@@ -45,6 +45,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -312,31 +313,6 @@ module _
     real-bound-is-in-lower-neighborhood-leq-ℝ d x y H
 ```
 
-### The canonical embedding from rational to real numbers is an isometry between metric spaces
-
-```agda
-is-isometry-metric-space-leq-real-ℚ :
-  is-isometry-Metric-Space
-    ( metric-space-leq-ℚ)
-    ( metric-space-leq-ℝ lzero)
-    ( real-ℚ)
-is-isometry-metric-space-leq-real-ℚ d x y =
-  pair
-    ( map-product
-      ( le-le-add-positive-leq-add-positive-ℚ x y d)
-      ( le-le-add-positive-leq-add-positive-ℚ y x d))
-    ( map-product
-      ( leq-add-positive-le-le-add-positive-ℚ x y d)
-      ( leq-add-positive-le-le-add-positive-ℚ y x d))
-
-isometry-metric-space-leq-real-ℚ :
-  isometry-Metric-Space
-    ( metric-space-leq-ℚ)
-    ( metric-space-leq-ℝ lzero)
-isometry-metric-space-leq-real-ℚ =
-  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
-```
-
 ### Similarity of real numbers preserves neighborhoods
 
 ```agda
@@ -376,6 +352,101 @@ module _
           ( x')
           ( x~x'))
         ( right-real-bound-neighborhood-leq-ℝ d x y H))
+```
+
+### The canonical embedding from rational to real numbers is an isometry between metric spaces
+
+```agda
+is-isometry-metric-space-leq-real-ℚ :
+  is-isometry-Metric-Space
+    ( metric-space-leq-ℚ)
+    ( metric-space-leq-ℝ lzero)
+    ( real-ℚ)
+is-isometry-metric-space-leq-real-ℚ d x y =
+  pair
+    ( map-product
+      ( le-le-add-positive-leq-add-positive-ℚ x y d)
+      ( le-le-add-positive-leq-add-positive-ℚ y x d))
+    ( map-product
+      ( leq-add-positive-le-le-add-positive-ℚ x y d)
+      ( leq-add-positive-le-le-add-positive-ℚ y x d))
+
+isometry-metric-space-leq-real-ℚ :
+  isometry-Metric-Space
+    ( metric-space-leq-ℚ)
+    ( metric-space-leq-ℝ lzero)
+isometry-metric-space-leq-real-ℚ =
+  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
+```
+
+### Raising real numbers is an isometry
+
+```agda
+module _
+  {l0 : Level} (l : Level)
+  where
+
+  is-isometry-metric-space-leq-raise-ℝ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+      ( raise-ℝ l)
+  pr1 (is-isometry-metric-space-leq-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( x)
+      ( y)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( sim-raise-ℝ l x)
+      ( sim-raise-ℝ l y)
+  pr2 (is-isometry-metric-space-leq-raise-ℝ d x y) =
+    preserves-neighborhood-sim-ℝ
+      ( d)
+      ( raise-ℝ l x)
+      ( raise-ℝ l y)
+      ( x)
+      ( y)
+      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
+      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+
+  isometry-metric-space-leq-raise-ℝ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℝ l0)
+      ( metric-space-leq-ℝ (l0 ⊔ l))
+  isometry-metric-space-leq-raise-ℝ =
+    ( raise-ℝ l , is-isometry-metric-space-leq-raise-ℝ)
+```
+
+### Raising rational numbers to real numbers is an isometry
+
+```agda
+module _
+  (l : Level)
+  where
+
+  isometry-metric-space-leq-raise-real-ℚ :
+    isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+  isometry-metric-space-leq-raise-real-ℚ =
+    comp-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ lzero)
+      ( metric-space-leq-ℝ l)
+      ( isometry-metric-space-leq-raise-ℝ l)
+      ( isometry-metric-space-leq-real-ℚ)
+
+  is-isometry-metric-space-leq-raise-real-ℚ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+      ( raise-real-ℚ l)
+  is-isometry-metric-space-leq-raise-real-ℚ =
+    is-isometry-map-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℝ l)
+      ( isometry-metric-space-leq-raise-real-ℚ)
 ```
 
 ## References

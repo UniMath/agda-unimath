@@ -31,6 +31,7 @@ open import elementary-number-theory.bell-numbers public
 open import elementary-number-theory.bernoullis-inequality-positive-rational-numbers public
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
+open import elementary-number-theory.binary-sum-decompositions-natural-numbers public
 open import elementary-number-theory.binomial-coefficients public
 open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
@@ -164,6 +165,7 @@ open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
+open import elementary-number-theory.ring-extension-rational-numbers-of-rational-numbers public
 open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
