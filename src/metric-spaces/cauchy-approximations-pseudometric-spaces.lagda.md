@@ -100,7 +100,7 @@ module _
     (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x)
 ```
 
-### Homotopic cauchy approximations are equal
+### Homotopic Cauchy approximations are equal
 
 ```agda
 module _
