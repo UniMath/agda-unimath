@@ -46,7 +46,7 @@ open import ring-theory.rings
 A {{#concept "rational module" Agda=Rational-Module}} is an
 [abelian group](group-theory.abelian-groups.md) for which any of the following
 [logically equivalent](foundation.logical-equivalences.md)
-[propositions](foundation.propositions.md) holds:
+[propositions](foundation.propositions.md) hold:
 
 - its [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md)
   is [a ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.md),
