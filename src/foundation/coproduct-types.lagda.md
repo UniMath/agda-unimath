@@ -60,6 +60,12 @@ module _
   is-left-or-is-right : (x : X + Y) → is-left x + is-right x
   is-left-or-is-right (inl x) = inl star
   is-left-or-is-right (inr x) = inr star
+
+  left-is-left : (x : X + Y) → is-left x → X
+  left-is-left (inl x) _ = x
+
+  right-is-right : (x : X + Y) → is-right x → Y
+  right-is-right (inr y) _ = y
 ```
 
 ### The predicate that a subuniverse is closed under coproducts
