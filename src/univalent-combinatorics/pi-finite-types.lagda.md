@@ -54,9 +54,13 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 A type is
 {{#concept "π-finite" Disambiguation="type" Agda=is-π-finite Agda=π-Finite-Type}}
-if all of its [homotopy groups](synthetic-homotopy-theory.homotopy-groups.md)
-are [finite](univalent-combinatorics.finite-types.md) and it is $n$-truncated
-for some $n$.
+if it has
+[finitely many connected components](univalent-combinatorics.finitely-many-connected-components.md),
+all of its [homotopy groups](synthetic-homotopy-theory.homotopy-groups.md) are
+[finite](univalent-combinatorics.finite-types.md), and it is $n$-truncated for
+some $n$ {{#cite Anel24}}. However, formally we define a π-finite type to be a
+[merely truncated type](foundation.merely-truncated-types.md) that is
+[unbounded π-finite](univalent-combinatorics.unbounded-pi-finite-types.md).
 
 ## Definitions
 
@@ -143,10 +147,10 @@ is-π-finite-is-truncated-π-finite n H =
 is-π-finite-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A retract-of B → is-π-finite B → is-π-finite A
-is-π-finite-retract R H =
-  ( is-merely-trunc-retract-of R (is-merely-trunc-is-π-finite H) ,
-    λ n →
-    is-untruncated-π-finite-retract n R (is-unbounded-π-finite-is-π-finite H n))
+pr1 (is-π-finite-retract R H) =
+  is-merely-trunc-retract-of R (is-merely-trunc-is-π-finite H)
+pr2 (is-π-finite-retract R H) n =
+  is-untruncated-π-finite-retract n R (is-unbounded-π-finite-is-π-finite H n)
 ```
 
 ### π-finite types are closed under equivalences
@@ -217,11 +221,12 @@ is-π-finite-coproduct hA hB =
 coproduct-π-Finite-Type :
   {l1 l2 : Level} →
   π-Finite-Type l1 → π-Finite-Type l2 → π-Finite-Type (l1 ⊔ l2)
-coproduct-π-Finite-Type A B =
-  ( type-π-Finite-Type A + type-π-Finite-Type B) ,
-  ( is-π-finite-coproduct
+pr1 (coproduct-π-Finite-Type A B) =
+  type-π-Finite-Type A + type-π-Finite-Type B
+pr2 (coproduct-π-Finite-Type A B) =
+  is-π-finite-coproduct
     ( is-π-finite-type-π-Finite-Type A)
-    ( is-π-finite-type-π-Finite-Type B))
+    ( is-π-finite-type-π-Finite-Type B)
 ```
 
 ### `Maybe A` of any π-finite type `A` is π-finite
@@ -233,7 +238,7 @@ is-π-finite-Maybe H = is-π-finite-coproduct H (is-π-finite-unit)
 
 Maybe-π-Finite-Type :
   {l : Level} → π-Finite-Type l → π-Finite-Type l
-Maybe-π-Finite-Type A = coproduct-π-Finite-Type A (unit-π-Finite-Type)
+Maybe-π-Finite-Type (A , H) = (Maybe A , is-π-finite-Maybe H)
 ```
 
 ### Any standard finite type is π-finite
@@ -279,6 +284,10 @@ is-finite-is-π-finite H K =
     ( equiv-unit-trunc-Set (_ , H))
     ( has-finitely-many-connected-components-is-π-finite K)
 ```
+
+## References
+
+{{#bibliography}}
 
 ## See also
 

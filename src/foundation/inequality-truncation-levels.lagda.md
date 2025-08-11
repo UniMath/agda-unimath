@@ -38,9 +38,10 @@ open import order-theory.total-orders
 
 ## Idea
 
-The relation `≤` on [truncation levels](foundation-core.truncation-levels.md) is
-the unique relation such that `-2` is less than any truncation levels, and such
-that `m+1 ≤ n+1` is [equivalent](foundation-core.equivalences.md) to `m ≤ n`.
+The ordering `≤` on [truncation levels](foundation-core.truncation-levels.md)
+mirrors the
+[ordering on integers](elementary-number-theory.inequality-integers.md) greater
+than or equal to `-2`.
 
 ## Definitions
 
@@ -53,6 +54,7 @@ leq-𝕋 (succ-𝕋 n) neg-two-𝕋 = empty
 leq-𝕋 (succ-𝕋 n) (succ-𝕋 m) = leq-𝕋 n m
 
 infix 30 _≤-𝕋_
+_≤-𝕋_ : 𝕋 → 𝕋 → UU lzero
 _≤-𝕋_ = leq-𝕋
 ```
 
@@ -70,8 +72,7 @@ data leq-𝕋' : 𝕋 → 𝕋 → UU lzero where
 
 ```agda
 is-prop-leq-𝕋 : (m n : 𝕋) → is-prop (leq-𝕋 m n)
-is-prop-leq-𝕋 neg-two-𝕋 neg-two-𝕋 = is-prop-unit
-is-prop-leq-𝕋 neg-two-𝕋 (succ-𝕋 n) = is-prop-unit
+is-prop-leq-𝕋 neg-two-𝕋 _ = is-prop-unit
 is-prop-leq-𝕋 (succ-𝕋 m) neg-two-𝕋 = is-prop-empty
 is-prop-leq-𝕋 (succ-𝕋 m) (succ-𝕋 n) = is-prop-leq-𝕋 m n
 

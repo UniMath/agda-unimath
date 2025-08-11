@@ -48,10 +48,16 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 A type is
 {{#concept "πₙ-finite" Disambiguation="type" Agda=is-truncated-π-finite Agda=Truncated-π-Finite-Type}},
 or **n-truncated π-finite**, if it has
-[finitely](univalent-combinatorics.finite-types.md) many
-[connected components](foundation.connected-components.md), all of its homotopy
-groups up to level `n` at all base points are finite, and all higher homotopy
-groups are [trivial](group-theory.trivial-groups.md).
+[finitely many connected components](univalent-combinatorics.finitely-many-connected-components.md),
+all of its [homotopy groups](synthetic-homotopy-theory.homotopy-groups.md) up to
+level `n` at all base points are finite, and all higher homotopy groups are
+[trivial](group-theory.trivial-groups.md). Formally we define this condition
+inductively:
+
+- A π₀-finite type is a [finite type](univalent-combinatorics.finite-types.md).
+- A πₙ₊₁-finite type is a type with
+  [finitely many connected components](univalent-combinatorics.finitely-many-connected-components.md)
+  whose [identity types](foundation-core.identity-types.md) are πₙ-finite.
 
 ## Definitions
 
@@ -80,6 +86,12 @@ has-finitely-many-connected-components-is-truncated-π-finite :
 has-finitely-many-connected-components-is-truncated-π-finite zero-ℕ =
   has-finitely-many-connected-components-is-finite
 has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) = pr1
+
+is-truncated-pi-finite-Id :
+  {l : Level} (k : ℕ) {X : UU l} →
+  is-truncated-π-finite (succ-ℕ k) X →
+  (x y : X) → is-truncated-π-finite k (x ＝ y)
+is-truncated-pi-finite-Id k = pr2
 ```
 
 ### πₙ-finite types are n-truncated
@@ -90,7 +102,7 @@ is-trunc-is-truncated-π-finite :
   is-truncated-π-finite k X → is-trunc (truncation-level-ℕ k) X
 is-trunc-is-truncated-π-finite zero-ℕ = is-set-is-finite
 is-trunc-is-truncated-π-finite (succ-ℕ k) H x y =
-  is-trunc-is-truncated-π-finite k (pr2 H x y)
+  is-trunc-is-truncated-π-finite k (is-truncated-pi-finite-Id k H x y)
 ```
 
 ### πₙ-finite types are untruncated πₙ-finite
@@ -103,9 +115,11 @@ is-untruncated-π-finite-is-truncated-π-finite zero-ℕ H =
   is-finite-equiv
     ( equiv-unit-trunc-Set (_ , (is-set-is-finite H)))
     ( H)
-pr1 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
+pr1 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) =
+  has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) H
 pr2 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
-  is-untruncated-π-finite-is-truncated-π-finite k (pr2 H x y)
+  is-untruncated-π-finite-is-truncated-π-finite k
+    ( is-truncated-pi-finite-Id k H x y)
 ```
 
 ### The subuniverse of πₙ-finite types
@@ -129,13 +143,13 @@ module _
     is-trunc (truncation-level-ℕ k) type-Truncated-π-Finite-Type
   is-trunc-type-Truncated-π-Finite-Type =
     is-trunc-is-truncated-π-finite k
-      is-truncated-π-finite-type-Truncated-π-Finite-Type
+      ( is-truncated-π-finite-type-Truncated-π-Finite-Type)
 
   is-untruncated-π-finite-type-Truncated-π-Finite-Type :
     is-untruncated-π-finite k type-Truncated-π-Finite-Type
   is-untruncated-π-finite-type-Truncated-π-Finite-Type =
     is-untruncated-π-finite-is-truncated-π-finite k
-      is-truncated-π-finite-type-Truncated-π-Finite-Type
+      ( is-truncated-π-finite-type-Truncated-π-Finite-Type)
 ```
 
 ## Properties
@@ -150,7 +164,9 @@ is-truncated-π-finite-is-untruncated-π-finite zero-ℕ H K =
   is-finite-is-untruncated-π-finite zero-ℕ H K
 pr1 (is-truncated-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) = pr1 K
 pr2 (is-truncated-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) x y =
-  is-truncated-π-finite-is-untruncated-π-finite k (H x y) (pr2 K x y)
+  is-truncated-π-finite-is-untruncated-π-finite k
+    ( H x y)
+    ( is-untruncated-π-finite-Id k K x y)
 ```
 
 ### πₙ-finite types are closed under retracts
@@ -161,13 +177,14 @@ is-truncated-π-finite-retract :
   A retract-of B → is-truncated-π-finite k B → is-truncated-π-finite k A
 is-truncated-π-finite-retract zero-ℕ = is-finite-retract
 pr1 (is-truncated-π-finite-retract (succ-ℕ k) r H) =
-  has-finitely-many-connected-components-retract
-    ( r)
+  has-finitely-many-connected-components-retract r
     ( has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) H)
 pr2 (is-truncated-π-finite-retract (succ-ℕ k) r H) x y =
   is-truncated-π-finite-retract k
     ( retract-eq r x y)
-    ( pr2 H (inclusion-retract r x) (inclusion-retract r y))
+    ( is-truncated-pi-finite-Id k H
+      ( inclusion-retract r x)
+      ( inclusion-retract r y))
 ```
 
 ### πₙ-finite types are closed under equivalences
@@ -204,7 +221,7 @@ is-truncated-π-finite-is-empty (succ-ℕ k) f =
   ( has-finitely-many-connected-components-is-empty f , ex-falso ∘ f)
 ```
 
-### Contractible types are π-finite
+### Contractible types are πₙ-finite
 
 ```agda
 is-truncated-π-finite-is-contr :
@@ -225,7 +242,7 @@ unit-Truncated-π-Finite-Type k =
   ( unit , is-truncated-π-finite-unit k)
 ```
 
-### Coproducts of π-finite types are π-finite
+### Coproducts of πₙ-finite types are πₙ-finite
 
 ```agda
 is-truncated-π-finite-coproduct :
@@ -248,14 +265,14 @@ coproduct-Truncated-π-Finite-Type :
   Truncated-π-Finite-Type l2 k →
   Truncated-π-Finite-Type (l1 ⊔ l2) k
 pr1 (coproduct-Truncated-π-Finite-Type k A B) =
-  (type-Truncated-π-Finite-Type k A + type-Truncated-π-Finite-Type k B)
+  type-Truncated-π-Finite-Type k A + type-Truncated-π-Finite-Type k B
 pr2 (coproduct-Truncated-π-Finite-Type k A B) =
   is-truncated-π-finite-coproduct k
     ( is-truncated-π-finite-type-Truncated-π-Finite-Type k A)
     ( is-truncated-π-finite-type-Truncated-π-Finite-Type k B)
 ```
 
-### `Maybe A` of any π-finite type `A` is π-finite
+### `Maybe A` of any πₙ-finite type `A` is πₙ-finite
 
 ```agda
 is-truncated-π-finite-Maybe :
@@ -267,11 +284,11 @@ is-truncated-π-finite-Maybe k H =
 Maybe-Truncated-π-Finite-Type :
   {l : Level} (k : ℕ) →
   Truncated-π-Finite-Type l k → Truncated-π-Finite-Type l k
-Maybe-Truncated-π-Finite-Type k A =
-  coproduct-Truncated-π-Finite-Type k A (unit-Truncated-π-Finite-Type k)
+Maybe-Truncated-π-Finite-Type k (A , H) =
+  ( Maybe A , is-truncated-π-finite-Maybe k H)
 ```
 
-### Any standard finite type is π-finite
+### Any standard finite type is πₙ-finite
 
 ```agda
 is-truncated-π-finite-Fin : (k n : ℕ) → is-truncated-π-finite k (Fin n)
@@ -283,7 +300,7 @@ Fin-Truncated-π-Finite-Type : (k : ℕ) (n : ℕ) → Truncated-π-Finite-Type 
 Fin-Truncated-π-Finite-Type k n = (Fin n , is-truncated-π-finite-Fin k n)
 ```
 
-### Any type equipped with a counting is π-finite
+### Any type equipped with a counting is πₙ-finite
 
 ```agda
 is-truncated-π-finite-count :
@@ -350,7 +367,7 @@ Type-With-Cardinality-ℕ-Truncated-π-Finite-Type l n =
     is-truncated-π-finite-Type-With-Cardinality-ℕ n)
 ```
 
-### Finite products of π-finite types are π-finite
+### Finite products of πₙ-finite types are πₙ-finite
 
 ```agda
 is-truncated-π-finite-Π :
@@ -375,7 +392,7 @@ pr2 (finite-Π-Truncated-π-Finite-Type k A B) =
       ( λ x → is-truncated-π-finite-type-Truncated-π-Finite-Type k (B x))
 ```
 
-### Dependent sums of π-finite types are π-finite
+### Dependent sums of πₙ-finite types are πₙ-finite
 
 ```agda
 is-truncated-π-finite-Σ :

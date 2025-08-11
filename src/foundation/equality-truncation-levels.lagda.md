@@ -150,7 +150,7 @@ map-total-Eq-𝕋 m (n , e) = (succ-𝕋 n , e)
 is-torsorial-Eq-𝕋 : (m : 𝕋) → is-torsorial (Eq-𝕋 m)
 pr1 (pr1 (is-torsorial-Eq-𝕋 m)) = m
 pr2 (pr1 (is-torsorial-Eq-𝕋 m)) = refl-Eq-𝕋 m
-pr2 (is-torsorial-Eq-𝕋 neg-two-𝕋) (neg-two-𝕋 , star) = refl
+pr2 (is-torsorial-Eq-𝕋 neg-two-𝕋) (neg-two-𝕋 , *) = refl
 pr2 (is-torsorial-Eq-𝕋 (succ-𝕋 m)) (succ-𝕋 n , e) =
   ap (map-total-Eq-𝕋 m) (pr2 (is-torsorial-Eq-𝕋 m) (n , e))
 

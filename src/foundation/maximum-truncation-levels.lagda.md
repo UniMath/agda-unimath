@@ -1,4 +1,4 @@
-# Maximums of truncation levels
+# The maximum of truncation levels
 
 ```agda
 module foundation.maximum-truncation-levels where
@@ -151,7 +151,7 @@ right-successor-diagonal-law-max-𝕋 (succ-𝕋 x) =
   ap succ-𝕋 (right-successor-diagonal-law-max-𝕋 x)
 ```
 
-### If a type is `k`-truncated and `k ≤ r`, then it is `r`-truncated
+### If a type is `k`-truncated and then it is `k ⊔ r`-truncated for every `r`
 
 ```agda
 is-trunc-left-max-𝕋 :

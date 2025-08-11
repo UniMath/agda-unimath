@@ -312,3 +312,7 @@ product-Finitely-Enumerable-Type (X , eX) (Y , eY) =
 
 - A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md)
   is precisely a finitely enumerable [set](foundation.sets.md).
+- A type is finitely enumerable if and only if it has
+  [finitely many connected components](univalent-combinatorics.finitely-many-connected-components).
+- Finitely enumerable types are precisely
+  [untruncated π₀-finite types](univalent-combinatorics.untruncated-pi-finite-types.md).

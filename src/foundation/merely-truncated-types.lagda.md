@@ -40,7 +40,7 @@ open import logic.functoriality-existential-quantification
 ## Idea
 
 A type $A$ is
-{{#concept "merely truncated" Disambiguation="type" Agda=is-merely-trunc Agda=Merely-Merely-Truncated-Type}}
+{{#concept "merely truncated" Disambiguation="type" Agda=is-merely-trunc Agda=Merely-Truncated-Type}}
 if there [exists](foundation.existential-quantification.md) some $n$ such that
 $A$ is $n$-[truncated](foundation-core.truncated-types.md).
 
