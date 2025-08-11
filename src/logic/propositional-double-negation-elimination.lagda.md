@@ -148,8 +148,8 @@ module _
 
 **Remark.** It is an established fact that both the property of satisfying
 double negation elimination and the property of having decidable negation are
-strictly weaker conditions than being decidable. Therefore, this result
-demonstrates that they are independent too.
+strictly weaker conditions than being decidable {{#cite Johnstone02}}.
+Therefore, this result demonstrates that they are independent too.
 
 ### Types with double negation elimination satisfy propositional double negation elimination
 
@@ -262,6 +262,10 @@ has-prop-double-negation-elim-product {A = A} {B} f g nnab =
         ( g (map-double-negation pr2 nnab)))
     ( f (map-double-negation pr1 nnab))
 ```
+
+## References
+
+{{#bibliography}}
 
 ## See also
 
