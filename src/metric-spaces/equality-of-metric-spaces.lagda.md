@@ -66,8 +66,9 @@ module _
 
   isometric-eq-Metric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
   isometric-eq-Metric-Space =
-    Σ ( type-Metric-Space A ＝ type-Metric-Space B)
-      ( λ e → is-isometry-Metric-Space A B (map-eq e))
+    isometric-eq-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
 ```
 
 ### Isometric equivalence of metric spaces
@@ -80,8 +81,9 @@ module _
 
   isometric-equiv-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space =
-    Σ ( type-Metric-Space A ≃ type-Metric-Space B)
-      ( λ e → is-isometry-Metric-Space A B (map-equiv e))
+    isometric-equiv-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
 ```
 
 ### Isometric equivalences between metric spaces
@@ -94,8 +96,9 @@ module _
 
   isometric-equiv-Metric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space' =
-    Σ ( type-function-Metric-Space A B)
-      ( λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
+    isometric-equiv-Pseudometric-Space'
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
 ```
 
 ## Properties
@@ -153,12 +156,9 @@ module _
   equiv-isometric-eq-equiv-Metric-Space :
     isometric-eq-Metric-Space A B ≃ isometric-equiv-Metric-Space A B
   equiv-isometric-eq-equiv-Metric-Space =
-    equiv-Σ
-      ( λ e → is-isometry-Metric-Space A B (map-equiv e))
-      ( equiv-univalence)
-      ( λ (e : type-Metric-Space A ＝ type-Metric-Space B) →
-        equiv-eq
-          (ap (is-isometry-Metric-Space A B) (eq-htpy (λ x → refl))))
+    equiv-isometric-eq-equiv-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
 ```
 
 ### Isometric equivalences of metric spaces characterize their equalities
@@ -204,15 +204,9 @@ module _
   equiv-isometric-equiv-isometric-equiv-Metric-Space' :
     isometric-equiv-Metric-Space A B ≃ isometric-equiv-Metric-Space' A B
   equiv-isometric-equiv-isometric-equiv-Metric-Space' =
-    ( equiv-tot
-      ( λ f →
-        equiv-tot
-          ( λ e →
-            equiv-eq (ap (is-isometry-Metric-Space A B) refl)))) ∘e
-    ( associative-Σ
-      ( type-function-Metric-Space A B)
-      ( is-equiv)
-      ( is-isometry-Metric-Space A B ∘ map-equiv))
+    equiv-isometric-equiv-isometric-equiv-Pseudometric-Space'
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
 ```
 
 ### Isometric equivalences between metric spaces characterize their equality
