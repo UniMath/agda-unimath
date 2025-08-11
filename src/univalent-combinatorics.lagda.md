@@ -53,6 +53,7 @@ open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-pair-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
+open import univalent-combinatorics.disjunction public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
 open import univalent-combinatorics.embeddings public
@@ -66,7 +67,10 @@ open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-presentations public
+open import univalent-combinatorics.finite-subtypes public
 open import univalent-combinatorics.finite-types public
+open import univalent-combinatorics.finitely-enumerable-subtypes public
+open import univalent-combinatorics.finitely-enumerable-types public
 open import univalent-combinatorics.finitely-many-connected-components public
 open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
