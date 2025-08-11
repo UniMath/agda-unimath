@@ -56,7 +56,8 @@ A {{#concept "ring extension of ℚ" Agda=Rational-Extension-Ring}} is a
 initial ring homomorphism [inverts](ring-theory.localizations-rings.md) the
 subset of positive integers.
 
-This is equivalent to the following conditions:
+The following conditions are equivalent to being a ring extension of the
+rational numbers:
 
 - there exists a [ring homomorphism](ring-theory.homomorphisms-rings.md) `ℚ → R`
   from the
