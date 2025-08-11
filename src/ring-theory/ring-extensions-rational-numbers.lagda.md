@@ -283,8 +283,9 @@ module _
 
 ### Rational extension of the initial ring homomorphism into a ring extension of `ℚ`
 
-It is defined as `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where `ι : ℤ → R`
-is the initial ring homomorphism.
+The _rational extension of the initial ring homomorphism_ into a ring extension
+of `ℚ` is defined as `γ : (p/q : ℚ) ↦ (ι p)(ι q)⁻¹ = (ι q)⁻¹(ι p)` where
+`ι : ℤ → R` is the initial ring homomorphism.
 
 ```agda
 module _
