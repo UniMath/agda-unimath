@@ -22,9 +22,9 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 ## Idea
 
-{{#concept "Triangular nuumbers" Agda=triangular-number-ℕ WDID=Q245102}} are the
-sequence of [natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ`
-defined by :
+{{#concept "Triangular nuumbers" Agda=triangular-number-ℕ WD="triangular number" WDID=Q245102}}
+are the sequence of
+[natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ` defined by :
 
 - `T₀ = 0`;
 - `Tₙ₊₁ = Tₙ + n + 1`.
