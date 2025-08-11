@@ -352,7 +352,7 @@ module _
       ( E)
 ```
 
-### Any isometry between metric spaces is an embedding
+### Isometries between metric spaces are embeddings
 
 ```agda
 module _
