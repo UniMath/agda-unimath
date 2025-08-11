@@ -160,33 +160,24 @@ code .content a:hover,
 a.concept:hover {
   text-decoration: none;
 }
-/* External link indicator */
-.content p > a[href^='http']::after,
-.content p > a[href^='https']::after,
-.content li > a[href^='http']::after,
-.content li > a[href^='https']::after,
-.content h1 > a[href^='http']::after,
-.content h1 > a[href^='https']::after,
-.content h2 > a[href^='http']::after,
-.content h2 > a[href^='https']::after,
-.content h3 > a[href^='http']::after,
-.content h3 > a[href^='https']::after,
-.content h4 > a[href^='http']::after,
-.content h4 > a[href^='https']::after,
-.content h5 > a[href^='http']::after,
-.content h5 > a[href^='https']::after,
-.content h6 > a[href^='http']::after,
-.content h6 > a[href^='https']::after,
-.content dt > a[href^='http']::after,
-.content dt > a[href^='https']::after,
-.content dd > a[href^='http']::after,
-.content dd > a[href^='https']::after {
-  content: '⇱';
-  font-size: 0.8em;
-  vertical-align: super;
-  text-decoration: none;
+
+/* External link indicator using inline SVG */
+.content a[href^="http"]::after,
+.content a[href^="https://"]::after
+{
+  content: '';
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   display: inline-block;
   color: var(--fg);
+}
+nav.pagetoc a::after {
+  display: none !important;
 }
 a.concept[href^='http']::after,
 a.concept[href^='https']::after {
