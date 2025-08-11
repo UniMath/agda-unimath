@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
-open import synthetic-homotopy-theory.equifibered-dependent-sequential-diagrams
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams
 open import synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -32,7 +32,7 @@ Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
 The data required to construct a type family is called
 {{#concept "descent data" Disambiguation="sequential colimits" Agda=descent-data-sequential-colimit}}
 for sequential colimits, and it is exactly an
-[equifibered sequential diagram](synthetic-homotopy-theory.equifibered-dependent-sequential-diagrams.md).
+[equifibered sequential diagram](synthetic-homotopy-theory.equifibered-sequential-diagrams.md).
 
 The fact that the type of descent data for a sequential diagram is equivalent to
 the type of type families over its colimit is recorded in
@@ -49,7 +49,7 @@ module _
 
   descent-data-sequential-colimit : (l2 : Level) → UU (l1 ⊔ lsuc l2)
   descent-data-sequential-colimit =
-    equifibered-dependent-sequential-diagram A
+    equifibered-sequential-diagram A
 ```
 
 ### Components of descent data for sequential colimits
@@ -89,7 +89,7 @@ module _
 
   dependent-sequential-diagram-descent-data : dependent-sequential-diagram A l2
   dependent-sequential-diagram-descent-data =
-    dependent-sequential-diagram-equifibered-dependent-sequential-diagram B
+    dependent-sequential-diagram-equifibered-sequential-diagram B
 ```
 
 ### Morphisms of descent data for sequential colimits
@@ -104,8 +104,8 @@ module _
   hom-descent-data-sequential-colimit : UU (l1 ⊔ l2 ⊔ l3)
   hom-descent-data-sequential-colimit =
     hom-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram B)
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
 ```
 
 ### Equivalences of descent data for sequential colimits
@@ -120,8 +120,8 @@ module _
   equiv-descent-data-sequential-colimit : UU (l1 ⊔ l2 ⊔ l3)
   equiv-descent-data-sequential-colimit =
     equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram B)
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
 
 module _
   {l1 l2 l3 : Level} {A : sequential-diagram l1}
@@ -136,7 +136,7 @@ module _
     family-descent-data-sequential-colimit C n a
   equiv-equiv-descent-data-sequential-colimit =
     equiv-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( e)
 
   map-equiv-descent-data-sequential-colimit :
@@ -145,7 +145,7 @@ module _
     family-descent-data-sequential-colimit C n a
   map-equiv-descent-data-sequential-colimit =
     map-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( e)
 
   is-equiv-map-equiv-descent-data-sequential-colimit :
@@ -153,24 +153,24 @@ module _
     is-equiv (map-equiv-descent-data-sequential-colimit n a)
   is-equiv-map-equiv-descent-data-sequential-colimit =
     is-equiv-map-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( e)
 
   coh-equiv-descent-data-sequential-colimit :
     coherence-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram B)
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( equiv-equiv-descent-data-sequential-colimit)
   coh-equiv-descent-data-sequential-colimit =
     coh-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( e)
 
   hom-equiv-descent-data-sequential-colimit :
     hom-descent-data-sequential-colimit B C
   hom-equiv-descent-data-sequential-colimit =
     hom-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
       ( e)
 
 module _
@@ -182,7 +182,7 @@ module _
     equiv-descent-data-sequential-colimit B B
   id-equiv-descent-data-sequential-colimit =
     id-equiv-dependent-sequential-diagram
-      ( dependent-sequential-diagram-equifibered-dependent-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
 ```
 
 ### Descent data induced by families over cocones under sequential diagrams
@@ -196,5 +196,5 @@ module _
   descent-data-family-cocone-sequential-diagram :
     {l3 : Level} → (X → UU l3) → descent-data-sequential-colimit A l3
   descent-data-family-cocone-sequential-diagram =
-    equifibered-dependent-sequential-diagram-family-cocone c
+    equifibered-sequential-diagram-family-cocone c
 ```

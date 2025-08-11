@@ -58,13 +58,13 @@ open import synthetic-homotopy-theory.descent-property-pushouts public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
-open import synthetic-homotopy-theory.equifibered-dependent-sequential-diagrams public
-open import synthetic-homotopy-theory.equifibered-dependent-span-diagrams public
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
+open import synthetic-homotopy-theory.equifibered-span-diagrams public
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-descent-data-pushouts public
-open import synthetic-homotopy-theory.equivalences-equifibered-dependent-span-diagrams public
+open import synthetic-homotopy-theory.equivalences-equifibered-span-diagrams public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.families-descent-data-pushouts public
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public

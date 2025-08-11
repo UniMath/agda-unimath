@@ -157,6 +157,6 @@ module _
 
 ## See also
 
-- [Equifibered dependent span diagrams](synthetic-homotopy-theory.equifibered-dependent-span-diagrams.md)
+- [Equifibered span diagrams](synthetic-homotopy-theory.equifibered-span-diagrams.md)
   is a variant of descent data for pushouts where an additional type family over
   the middle vertex is specified.

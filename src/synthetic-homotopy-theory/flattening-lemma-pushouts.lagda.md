@@ -29,9 +29,9 @@ open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.equifibered-dependent-span-diagrams
+open import synthetic-homotopy-theory.equifibered-span-diagrams
 open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
-open import synthetic-homotopy-theory.equivalences-equifibered-dependent-span-diagrams
+open import synthetic-homotopy-theory.equivalences-equifibered-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -258,116 +258,116 @@ module _
       ( cocone-flattening-descent-data-pushout)
 ```
 
-### The statement of the flattening lemma for pushouts, using equifibered dependent span diagrams
+### The statement of the flattening lemma for pushouts, using equifibered span diagrams
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : equifibered-dependent-span-diagram 𝒮 l4 l5 l6)
+  (P : equifibered-span-diagram 𝒮 l4 l5 l6)
   where
 
-  vertical-map-span-flattening-equifibered-dependent-span-diagram :
+  vertical-map-span-flattening-equifibered-span-diagram :
     Σ ( spanning-type-span-diagram 𝒮)
-      ( spanning-type-family-equifibered-dependent-span-diagram P) →
+      ( spanning-type-family-equifibered-span-diagram P) →
     Σ ( domain-span-diagram 𝒮)
-      ( left-family-equifibered-dependent-span-diagram P)
-  vertical-map-span-flattening-equifibered-dependent-span-diagram =
+      ( left-family-equifibered-span-diagram P)
+  vertical-map-span-flattening-equifibered-span-diagram =
     map-Σ
-      ( left-family-equifibered-dependent-span-diagram P)
+      ( left-family-equifibered-span-diagram P)
       ( left-map-span-diagram 𝒮)
-      ( map-left-family-equifibered-dependent-span-diagram P)
+      ( map-left-family-equifibered-span-diagram P)
 
-  horizontal-map-span-flattening-equifibered-dependent-span-diagram :
+  horizontal-map-span-flattening-equifibered-span-diagram :
     Σ ( spanning-type-span-diagram 𝒮)
-      ( spanning-type-family-equifibered-dependent-span-diagram P) →
+      ( spanning-type-family-equifibered-span-diagram P) →
     Σ ( codomain-span-diagram 𝒮)
-      ( right-family-equifibered-dependent-span-diagram P)
-  horizontal-map-span-flattening-equifibered-dependent-span-diagram =
+      ( right-family-equifibered-span-diagram P)
+  horizontal-map-span-flattening-equifibered-span-diagram =
     map-Σ
-      ( right-family-equifibered-dependent-span-diagram P)
+      ( right-family-equifibered-span-diagram P)
       ( right-map-span-diagram 𝒮)
-      ( map-right-family-equifibered-dependent-span-diagram P)
+      ( map-right-family-equifibered-span-diagram P)
 
-  span-diagram-flattening-equifibered-dependent-span-diagram :
+  span-diagram-flattening-equifibered-span-diagram :
     span-diagram (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
-  span-diagram-flattening-equifibered-dependent-span-diagram =
+  span-diagram-flattening-equifibered-span-diagram =
     make-span-diagram
-      ( vertical-map-span-flattening-equifibered-dependent-span-diagram)
-      ( horizontal-map-span-flattening-equifibered-dependent-span-diagram)
+      ( vertical-map-span-flattening-equifibered-span-diagram)
+      ( horizontal-map-span-flattening-equifibered-span-diagram)
 
 module _
   { l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : equifibered-dependent-span-diagram (make-span-diagram f g) l5 l6 l7)
+  ( P : equifibered-span-diagram (make-span-diagram f g) l5 l6 l7)
   ( Q : X → UU l8)
   ( e :
-    equiv-equifibered-dependent-span-diagram
+    equiv-equifibered-span-diagram
       ( P)
-      ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q))
+      ( equifibered-span-diagram-family-cocone-span-diagram c Q))
   where
 
-  horizontal-map-cocone-flattening-equifibered-dependent-span-diagram :
-    Σ A (left-family-equifibered-dependent-span-diagram P) → Σ X Q
-  horizontal-map-cocone-flattening-equifibered-dependent-span-diagram =
+  horizontal-map-cocone-flattening-equifibered-span-diagram :
+    Σ A (left-family-equifibered-span-diagram P) → Σ X Q
+  horizontal-map-cocone-flattening-equifibered-span-diagram =
     map-Σ Q
       ( horizontal-map-cocone f g c)
-      ( left-map-equiv-equifibered-dependent-span-diagram
+      ( left-map-equiv-equifibered-span-diagram
         ( P)
-        ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+        ( equifibered-span-diagram-family-cocone-span-diagram c Q)
         ( e))
 
-  vertical-map-cocone-flattening-equifibered-dependent-span-diagram :
-    Σ B (right-family-equifibered-dependent-span-diagram P) → Σ X Q
-  vertical-map-cocone-flattening-equifibered-dependent-span-diagram =
+  vertical-map-cocone-flattening-equifibered-span-diagram :
+    Σ B (right-family-equifibered-span-diagram P) → Σ X Q
+  vertical-map-cocone-flattening-equifibered-span-diagram =
     map-Σ Q
       ( vertical-map-cocone f g c)
-      ( right-map-equiv-equifibered-dependent-span-diagram
+      ( right-map-equiv-equifibered-span-diagram
         ( P)
-        ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+        ( equifibered-span-diagram-family-cocone-span-diagram c Q)
         ( e))
 ```
 
 > The rest remains to be formalized.
 
 ```text
-  coherence-square-cocone-flattening-equifibered-dependent-span-diagram :
+  coherence-square-cocone-flattening-equifibered-span-diagram :
     coherence-square-maps
-      ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
-      ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
-      ( vertical-map-cocone-flattening-equifibered-dependent-span-diagram)
-      ( horizontal-map-cocone-flattening-equifibered-dependent-span-diagram)
-  coherence-square-cocone-flattening-equifibered-dependent-span-diagram =
+      ( horizontal-map-span-flattening-equifibered-span-diagram P)
+      ( vertical-map-span-flattening-equifibered-span-diagram P)
+      ( vertical-map-cocone-flattening-equifibered-span-diagram)
+      ( horizontal-map-cocone-flattening-equifibered-span-diagram)
+  coherence-square-cocone-flattening-equifibered-span-diagram =
     htpy-map-Σ Q
       ( coherence-square-cocone f g c)
       ( λ s t →
-        left-map-equiv-equifibered-dependent-span-diagram
+        left-map-equiv-equifibered-span-diagram
           ( P)
-          ( equifibered-dependent-span-diagram-family-cocone-span-diagram c Q)
+          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
           ( e)
           ( f s)
-          ( map-left-family-equifibered-dependent-span-diagram P s t))
+          ( map-left-family-equifibered-span-diagram P s t))
       ( λ s t → {!   !})
 
-  cocone-flattening-equifibered-dependent-span-diagram :
+  cocone-flattening-equifibered-span-diagram :
     cocone
-      ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
-      ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
+      ( vertical-map-span-flattening-equifibered-span-diagram P)
+      ( horizontal-map-span-flattening-equifibered-span-diagram P)
       ( Σ X Q)
-  pr1 cocone-flattening-equifibered-dependent-span-diagram =
-    horizontal-map-cocone-flattening-equifibered-dependent-span-diagram
-  pr1 (pr2 cocone-flattening-equifibered-dependent-span-diagram) =
-    vertical-map-cocone-flattening-equifibered-dependent-span-diagram
-  pr2 (pr2 cocone-flattening-equifibered-dependent-span-diagram) =
-    coherence-square-cocone-flattening-equifibered-dependent-span-diagram
+  pr1 cocone-flattening-equifibered-span-diagram =
+    horizontal-map-cocone-flattening-equifibered-span-diagram
+  pr1 (pr2 cocone-flattening-equifibered-span-diagram) =
+    vertical-map-cocone-flattening-equifibered-span-diagram
+  pr2 (pr2 cocone-flattening-equifibered-span-diagram) =
+    coherence-square-cocone-flattening-equifibered-span-diagram
 
-  flattening-lemma-equifibered-dependent-span-diagram-statement : UUω
-  flattening-lemma-equifibered-dependent-span-diagram-statement =
+  flattening-lemma-equifibered-span-diagram-statement : UUω
+  flattening-lemma-equifibered-span-diagram-statement =
     universal-property-pushout f g c →
     universal-property-pushout
-      ( vertical-map-span-flattening-equifibered-dependent-span-diagram P)
-      ( horizontal-map-span-flattening-equifibered-dependent-span-diagram P)
-      ( cocone-flattening-equifibered-dependent-span-diagram)
+      ( vertical-map-span-flattening-equifibered-span-diagram P)
+      ( horizontal-map-span-flattening-equifibered-span-diagram P)
+      ( cocone-flattening-equifibered-span-diagram)
 ```
 
 ## Properties
