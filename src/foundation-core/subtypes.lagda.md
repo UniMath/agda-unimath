@@ -56,6 +56,14 @@ subtype : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 subtype l A = A → Prop l
 
 module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  subtype-is-subtype : is-subtype B → subtype l2 A
+  pr1 (subtype-is-subtype H a) = B a
+  pr2 (subtype-is-subtype H a) = H a
+
+module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
