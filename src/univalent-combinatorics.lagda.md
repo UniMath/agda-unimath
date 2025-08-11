@@ -67,7 +67,6 @@ open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
-open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-subtypes public
 open import univalent-combinatorics.finite-types public
 open import univalent-combinatorics.finitely-enumerable-subtypes public
