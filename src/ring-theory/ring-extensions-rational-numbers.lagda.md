@@ -54,7 +54,7 @@ A {{#concept "ring extension of ℚ" Agda=Rational-Extension-Ring}} is a
 [initial ring homomorphism](elementary-number-theory.ring-of-integers.md)) are
 [invertible elements](ring-theory.invertible-elements-rings.md), i.e., where the
 initial ring homomorphism [inverts](ring-theory.localizations-rings.md) the
-subset of positive integers;
+subset of positive integers.
 
 This is equivalent to the following conditions:
 
