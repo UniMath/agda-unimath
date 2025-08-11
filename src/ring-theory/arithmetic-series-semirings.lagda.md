@@ -9,6 +9,7 @@ module ring-theory.arithmetic-series-semirings where
 ```agda
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.triangular-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -42,10 +43,11 @@ for some [arithmetic sequence](ring-theory.arithmetic-sequences-semirings.md)
 `u` in the semiring. These are the sums
 
 ```text
-n ↦ Σ (k ≤ n) (a + k * d)
+n ↦ Σ (k ≤ n) (a + k * d) = (n + 1) * a + Tₙ * d
 ```
 
-for some elements `a d : R` in the semiring.
+for some elements `a d : R` in the semiring, where `Tₙ` is the nth
+[triangular number](elementary-number-theory.triangular-numbers.md).
 
 ## Definitions
 
@@ -187,7 +189,7 @@ module _
       ( htpy-add-mul-standard-arithmetic-sequence-Semiring R a d)
 ```
 
-### The sum `Σ (i ≤ n) (a + i * d)` is equal to `(n + 1) * a + (Σ (k ≤ n) k) * d`
+### The sum `Σ (i ≤ n) (a + i * d)` is equal to `(n + 1) * a + Tₙ * d` where `Tₙ` is the nth triangular number
 
 ```agda
 module _
@@ -201,17 +203,17 @@ module _
       ( mul-nat-scalar-Semiring R (succ-ℕ n) a)
       ( mul-nat-scalar-Semiring
         ( R)
-        ( seq-sum-sequence-Semiring
-          ( ℕ-Semiring)
-          ( λ k → k)
-          ( n))
+        ( triangular-number-ℕ n)
         ( d)) ＝
     seq-sum-add-mul-nat-Semiring R a d n
   compute-sum-add-mul-nat-Semiring n =
     ap-binary
       ( add-Semiring R)
       ( inv (eq-mul-nat-scalar-sum-const-fin-sequence-Semiring R a (succ-ℕ n)))
-      ( lemma-mul-nat-seq-sum) ∙
+      ( ( ap
+          ( λ i → mul-nat-scalar-Semiring R i d)
+          ( inv (htpy-sum-fin-triangular-number-ℕ n))) ∙
+        ( lemma-mul-nat-seq-sum)) ∙
     ( interchange-add-sum-fin-sequence-type-Semiring
       ( R)
       ( succ-ℕ n)
