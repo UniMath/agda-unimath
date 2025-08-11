@@ -30,9 +30,9 @@ open import metric-spaces.short-functions-metric-spaces
 A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
 in a [metric space](metric-spaces.metric-spaces.md) `A` is a map `f` from
-[`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to its carrier
-type such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
-(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e. the
+[`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to the carrier
+type of `A` such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e., the
 distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
@@ -101,7 +101,7 @@ module _
     (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Metric-Space A (ε +ℚ⁺ δ) x)
 ```
 
-### Short maps between metric spaces are functorial on Cauchy approximations
+### The action of short maps on Cauchy approximations
 
 ```agda
 module _
@@ -155,7 +155,7 @@ module _
   eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
 ```
 
-### Homotopic cauchy approximations are equal
+### Homotopic Cauchy approximations are equal
 
 ```agda
 module _
