@@ -47,7 +47,7 @@ A type is
 if it has [finitely](univalent-combinatorics.finite-types.md) many
 [connected components](foundation.connected-components.md) and all of its
 homotopy groups at all base points and all dimensions are finite. Unbounded
-π-finiteness can be understood as an ∞-dimensional analogue of
+π-finiteness can be understood as an ∞-dimensional analog of
 [Kuratowski finitneness](univalent-combinatorics.kuratowski-finite-sets.md)
 {{#cite Anel24}}.
 

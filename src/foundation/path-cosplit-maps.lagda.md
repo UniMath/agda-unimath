@@ -226,7 +226,7 @@ is-path-cosplit-id :
 is-path-cosplit-id k = is-path-cosplit-retraction k (id , refl-htpy)
 ```
 
-### If a type maps into a `k`-truncted type via a `k`-path-cosplit map then it is `k`-truncated
+### If a type maps into a `k`-truncated type via a `k`-path-cosplit map then it is `k`-truncated
 
 ```agda
 is-trunc-domain-is-path-cosplit-is-trunc-codomain :

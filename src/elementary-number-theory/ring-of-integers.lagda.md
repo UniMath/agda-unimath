@@ -203,3 +203,27 @@ compute-integer-multiple-ℤ-Ring k l =
       by
       integer-multiple-one-ℤ-Ring _
 ```
+
+### The image of `ℤ` in a ring is commutative
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  abstract
+    is-commutative-map-initial-hom-Ring :
+      (p q : ℤ) →
+      mul-Ring
+        ( R)
+        ( map-initial-hom-Ring R p)
+        ( map-initial-hom-Ring R q) ＝
+      mul-Ring
+        ( R)
+        ( map-initial-hom-Ring R q)
+        ( map-initial-hom-Ring R p)
+    is-commutative-map-initial-hom-Ring p q =
+      ( inv (preserves-mul-initial-hom-Ring R p q)) ∙
+      ( ap (map-initial-hom-Ring R) (commutative-mul-ℤ p q)) ∙
+      ( preserves-mul-initial-hom-Ring R q p)
+```

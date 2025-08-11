@@ -30,7 +30,7 @@ We describe conditions under which
 [dependent sums](foundation.dependent-pair-types.md) are
 [decidable](foundation.decidable-types.md)
 
-## Properites
+## Properties
 
 ### Dependent sums of a uniformly decidable family of types
 

@@ -172,7 +172,7 @@ module _
 
 ## References
 
-Our defintion of Cauchy approximation follows Definition 4.5.5 of
+Our definition of Cauchy approximation follows Definition 4.5.5 of
 {{#cite Booij20PhD}} and Definition 11.2.10 of {{#cite UF13}}.
 
 {{#bibliography}}
