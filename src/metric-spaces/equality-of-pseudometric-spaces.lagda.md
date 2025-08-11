@@ -96,7 +96,7 @@ module _
 
 ## Properties
 
-### Equality of pseudometric spaces is equivalent to the existence of an isometric equality between their carrier types
+### Equality of pseudometric spaces is equivalent to isometric equality of their carrier types
 
 ```agda
 module _
@@ -138,7 +138,7 @@ module _
       ( is-torsorial-Id A)
 ```
 
-### Isometric equality between the carrier types of pseudometric spaces is equivalent to the existence of an isometric equivalence between them
+### Isometric equality between the carrier types of pseudometric spaces is equivalent to isometric equivalence between them
 
 ```agda
 module _
@@ -157,7 +157,7 @@ module _
           (ap (is-isometry-Pseudometric-Space A B) (eq-htpy (λ x → refl))))
 ```
 
-### Isometric equivalences of pseudometric spaces characterize their equalities
+### Isometric equivalences of pseudometric spaces characterize their equality
 
 ```agda
 module _
@@ -232,7 +232,7 @@ module _
     map-inv-equiv equiv-eq-isometric-equiv-Pseudometric-Space'
 ```
 
-### The existence of invertible isometries between pseudometric spaces is torsorial
+### Invertible isometry between pseudometric spaces is torsorial
 
 ```agda
 module _

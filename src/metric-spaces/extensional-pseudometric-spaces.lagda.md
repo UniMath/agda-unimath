@@ -1,4 +1,4 @@
-# Extensional pseudometric spaces
+# Extensionality of pseudometric spaces
 
 ```agda
 module metric-spaces.extensional-pseudometric-spaces where
@@ -33,7 +33,7 @@ A [pseudometric space](metric-spaces.pseudometric-spaces.md) is called
 {{#concept "extensional" Disambiguation="pseudometric space" Agda=is-extensional-Pseudometric-Space}}
 if any of the following equivalent conditions holds:
 
-- any [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
+- [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
   elements are [identical](foundation-core.identity-types.md);
 - the similarity relation has [propositional](foundation.propositions.md)
   fibers;
