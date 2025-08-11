@@ -66,8 +66,8 @@ module _
 
   isometric-eq-Metric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
   isometric-eq-Metric-Space =
-    Σ (type-Metric-Space A ＝ type-Metric-Space B)
-      (λ e → is-isometry-Metric-Space A B (map-eq e))
+    Σ ( type-Metric-Space A ＝ type-Metric-Space B)
+      ( λ e → is-isometry-Metric-Space A B (map-eq e))
 ```
 
 ### Isometric equivalence of metric spaces
@@ -80,8 +80,8 @@ module _
 
   isometric-equiv-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space =
-    Σ (type-Metric-Space A ≃ type-Metric-Space B)
-      (λ e → is-isometry-Metric-Space A B (map-equiv e))
+    Σ ( type-Metric-Space A ≃ type-Metric-Space B)
+      ( λ e → is-isometry-Metric-Space A B (map-equiv e))
 ```
 
 ### Isometric equivalences between metric spaces
@@ -94,13 +94,13 @@ module _
 
   isometric-equiv-Metric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Metric-Space' =
-    Σ (type-function-Metric-Space A B)
-      (λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
+    Σ ( type-function-Metric-Space A B)
+      ( λ f → (is-equiv f) × (is-isometry-Metric-Space A B f))
 ```
 
 ## Properties
 
-### Equality of metric spaces is equivalent to the existence of an isometric equality between their carrier types
+### Equality of metric spaces is equivalent to isometric equality of their carrier types
 
 ```agda
 module _
@@ -142,7 +142,7 @@ module _
       ( is-torsorial-Id A)
 ```
 
-### Isometric equality between the carrier types of metric spaces is equivalent to the existence of an isometric equivalence between them
+### Isometric equality between the carrier types of metric spaces is equivalent isometric equivalence between them
 
 ```agda
 module _

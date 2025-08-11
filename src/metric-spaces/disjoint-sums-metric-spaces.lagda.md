@@ -234,11 +234,11 @@ module _
     type-Metric-Space (P (base-point-Σ-Metric-Space x))
   fiber-point-Σ-Metric-Space = pr2
 
-  emb-fiber-Σ-Metric-Space :
+  map-emb-fiber-Σ-Metric-Space :
     (x : type-Metric-Space A) →
     type-Metric-Space ( P x) →
     type-Σ-Metric-Space
-  emb-fiber-Σ-Metric-Space x px = (x , px)
+  map-emb-fiber-Σ-Metric-Space x px = (x , px)
 ```
 
 ## Properties
