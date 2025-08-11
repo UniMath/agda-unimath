@@ -225,12 +225,10 @@ module _
           ( λ k → k)
           ( n))
         ( d) ＝
-      sum-fin-sequence-type-Semiring
+      seq-sum-sequence-Semiring
         ( R)
-        ( succ-ℕ n)
-        ( fin-sequence-sequence
-          ( λ k → mul-nat-scalar-Semiring R k d)
-          ( succ-ℕ n))
+        ( λ k → mul-nat-scalar-Semiring R k d)
+        ( n)
     lemma-mul-nat-seq-sum =
       ( inv
         ( htpy-mul-map-mul-nat-scalar-Semiring
