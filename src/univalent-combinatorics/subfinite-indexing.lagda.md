@@ -49,6 +49,10 @@ data of a type `D` [equipped](foundation.structure.md) with a
 [subcounting](univalent-combinatorics.subcounting.md) `D ↪ Fin n` and a
 [surjection](foundation.surjective-maps.md) `D ↠ X`.
 
+Note that the subcounting of `D` is _proof-relevant_, and hence having a
+subfinite indexing is a stronger condition than having an enumeration from a
+[subfinite type](univalent-combinatorics.subfinite-types.md).
+
 ## Definitions
 
 ```agda
