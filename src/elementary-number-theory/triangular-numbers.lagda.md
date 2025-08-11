@@ -20,6 +20,17 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 </details>
 
+## Idea
+
+{{#concept "Triangular nuumbers" Agda=triangular-number-ℕ WDID=Q245102}} are
+the sequence of [natural numbers](elementary-number-theory.natural-numbers.md)
+`Tₙ` defined by :
+
+- `T₀ = 0`;
+- `Tₙ₊₁ = Tₙ + n + 1`.
+
+I.e., `Tₙ = Σ (k ≤ n) k`.
+
 ## Definition
 
 ```agda
@@ -46,3 +57,8 @@ htpy-sum-fin-triangular-number-ℕ (succ-ℕ n) =
     ( add-ℕ' (succ-ℕ n))
     ( htpy-sum-fin-triangular-number-ℕ n)
 ```
+
+## External references
+
+- [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at
+  Wikipedia.
