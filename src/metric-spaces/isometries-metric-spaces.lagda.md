@@ -155,7 +155,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
 
-### An isometry preserves and reflects neighborhoods
+### Isometries preserve and reflect neighborhoods
 
 ```agda
 module _
