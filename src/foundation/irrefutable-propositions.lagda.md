@@ -25,10 +25,17 @@ open import logic.irrefutable-types
 ## Idea
 
 The [subuniverse](foundation.subuniverses.md) of
-{{#concept "irrefutable propositions" Agda=Irrefutable-Prop}}, or **double
-negation dense propositions**, consists of
-[propositions](foundation-core.propositions.md) `P` for which the
-[double negation](foundation.double-negation.md) `¬¬P` is true.
+{{#concept "irrefutable propositions" Agda=Irrefutable-Prop}}, or
+{{#concept "double
+negation dense propositions" Agda=Irrefutable-Prop}}, consists of [propositions](foundation-core.propositions.md)
+`P` for which the [double negation](foundation.double-negation.md) `¬¬P` is true.
+
+**Terminology.** The term _dense_ used here is in the sense of dense with
+respect to a
+[reflective subuniverse](orthogonal-factorization-systems.reflective-global-subuniverses.md)/[modality](orthogonal-factorization-systems.higher-modalities.md),
+or connected. Here, it means that the double negation of `P` is contractible.
+Since negations are propositions, it thus suffices that the double negation is
+true.
 
 ## Definitions
 

@@ -7,7 +7,12 @@ module logic.dirk-gentlys-principle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.law-of-excluded-middle
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -16,10 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-{{#concept "Dirk Gently's principle" Agda=Dirk-Gently's-Principle}} is the
-logical axiom that the type of [propositions](foundation-core.propositions.md)
-is [linearly ordered](order-theory.total-orders.md). In other words, for every
-pair of propositions `P` and `Q`, either `P` implies `Q` or `Q` implies `P`:
+{{#concept "Dirk Gently's principle" Agda=Dirk-Gently-Principle}} is the logical
+axiom that the type of [propositions](foundation-core.propositions.md) is
+[linearly ordered](order-theory.total-orders.md). In other words, for every pair
+of propositions `P` and `Q`, either `P` implies `Q` or `Q` implies `P`:
 
 $$
   (P ⇒ Q) ∨ (Q ⇒ P).
@@ -36,32 +41,48 @@ The proof strength of this principle lies strictly between the
 ## Statement
 
 ```agda
-instance-prop-Dirk-Gently's-Principle :
+instance-prop-Dirk-Gently-Principle :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-instance-prop-Dirk-Gently's-Principle P Q = (P ⇒ Q) ∨ (Q ⇒ P)
+instance-prop-Dirk-Gently-Principle P Q = (P ⇒ Q) ∨ (Q ⇒ P)
 
-instance-Dirk-Gently's-Principle :
+instance-Dirk-Gently-Principle :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-instance-Dirk-Gently's-Principle P Q =
-  type-Prop (instance-prop-Dirk-Gently's-Principle P Q)
+instance-Dirk-Gently-Principle P Q =
+  type-Prop (instance-prop-Dirk-Gently-Principle P Q)
 
-Dirk-Gently's-Principle-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Dirk-Gently's-Principle-Level l1 l2 =
-  (P : Prop l1) (Q : Prop l2) → instance-Dirk-Gently's-Principle P Q
+level-Dirk-Gently-Principle : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+level-Dirk-Gently-Principle l1 l2 =
+  (P : Prop l1) (Q : Prop l2) → instance-Dirk-Gently-Principle P Q
 
-Dirk-Gently's-Principle : UUω
-Dirk-Gently's-Principle =
-  {l1 l2 : Level} → Dirk-Gently's-Principle-Level l1 l2
+Dirk-Gently-Principle : UUω
+Dirk-Gently-Principle =
+  {l1 l2 : Level} → level-Dirk-Gently-Principle l1 l2
 ```
 
 ## Properties
 
 ### The law of excluded middle implies Dirk Gently's principle
 
-**Proof.** Assuming the law of excluded middle, then every proposition is either
-true or false, so since false ≤ true, we are done.
+```agda
+instance-Dirk-Gently-Principle-LEM' :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+  is-decidable (type-Prop P) →
+  instance-Dirk-Gently-Principle P Q
+instance-Dirk-Gently-Principle-LEM' P Q (inl p) =
+  inr-disjunction (λ _ → p)
+instance-Dirk-Gently-Principle-LEM' P Q (inr np) =
+  inl-disjunction (ex-falso ∘ np)
 
-> This remains to be formalized.
+level-Dirk-Gently-Principle-LEM :
+  (l1 l2 : Level) → LEM l1 → level-Dirk-Gently-Principle l1 l2
+level-Dirk-Gently-Principle-LEM l1 l2 lem P Q =
+  instance-Dirk-Gently-Principle-LEM' P Q (lem P)
+
+level-Dirk-Gently-Principle-LEM' :
+  (l1 l2 : Level) → LEM l2 → level-Dirk-Gently-Principle l1 l2
+level-Dirk-Gently-Principle-LEM' l1 l2 lem P Q =
+  swap-disjunction (level-Dirk-Gently-Principle-LEM l2 l1 lem Q P)
+```
 
 ## References
 

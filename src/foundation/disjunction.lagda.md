@@ -10,9 +10,11 @@ module foundation.disjunction where
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -334,6 +336,17 @@ module _
       is-decidable-disjunction
         ( is-decidable-Decidable-Prop P)
         ( is-decidable-Decidable-Prop Q))
+```
+
+### Symmetry of the disjuction
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  swap-disjunction : disjunction-type A B → disjunction-type B A
+  swap-disjunction = map-trunc-Prop (map-commutative-coproduct A B)
 ```
 
 ## See also

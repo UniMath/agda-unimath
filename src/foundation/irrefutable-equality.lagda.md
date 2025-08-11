@@ -54,6 +54,13 @@ module _
 
 ### Types with double negation dense equality
 
+**Terminology.** The term _dense_ used here is in the sense of dense with
+respect to a
+[reflective subuniverse](orthogonal-factorization-systems.reflective-global-subuniverses.md)/[modality](orthogonal-factorization-systems.higher-modalities.md),
+or connected. Here, it means that the double negation of the identity types of
+the relevant type are contractible. Since negations are propositions, it thus
+suffices that the double negation has an element.
+
 ```agda
 has-double-negation-dense-equality : {l : Level} → UU l → UU l
 has-double-negation-dense-equality A = (x y : A) → irrefutable-eq x y
