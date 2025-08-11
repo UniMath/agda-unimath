@@ -151,7 +151,7 @@ coproducts or products. {{#cite Sto87}}
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
 - [Subfinite types](univalent-combinatorics.subfinite-types.md)
-- [Subfinitely indexed types](univalent-combinatorics.subfinitely-indexed-types.md)
+- [Subfinitely enumerable types](univalent-combinatorics.subfinitely-enumerable-types.md)
 
 ## References
 

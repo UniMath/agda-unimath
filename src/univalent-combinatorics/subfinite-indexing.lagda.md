@@ -248,7 +248,7 @@ module _
       ( subfinite-indexing-subtype (fiber-emb-Prop e) f)
 ```
 
-### A type is subfinitely indexed if and only if it is a subtype of a finitely indexed type
+### A type has a subfinite indexing if and only if it is a subtype of a type with a finite indexing
 
 **Proof.** Given a subfinite indexing on `X`, we may form the
 [pushout](synthetic-homotopy-theory.pushouts.md)
@@ -266,7 +266,7 @@ they are stable under cobase change, so the right vertical map is surjective.
 And by Proposition 2.2.6 of {{#cite ABFJ20}} the pushout of an embedding is an
 embedding, so the bottom horizontal map is an embedding.
 
-Conversely, given a subtype of a finitely indexed type, we may form the
+Conversely, given a subtype of a type with a finite indexing, we may form the
 [pullback](foundation-core.pullbacks.md)
 
 ```text
@@ -289,11 +289,11 @@ We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
 answer: <https://mathoverflow.net/a/433318>.
 
-**Proof.** Let $X$ be a subfinitely indexed type, witnessed by $Fin n ↩ D ↠ X$
-where $h$ is the surjection. We wish to show $X$ is Dedekind finite, so let
-$f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an equivalence it
-suffices to prove $f$ is surjective, so assume given an arbitrary $x : X$ where
-we want to show there exists $z : X$ such that $f(z) ＝ x$.
+**Proof.** Let $X$ be a subfinitely enumerable type, witnessed by
+$Fin n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$ is Dedekind
+finite, so let $f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
+equivalence it suffices to prove $f$ is surjective, so assume given an arbitrary
+$x : X$ where we want to show there exists $z : X$ such that $f(z) ＝ x$.
 
 The mapping $i ↦ fⁱ(x)$ defines a sequence of elements of $X$. By surjectivity
 of $h$ each $fⁱ(x)$ merely has a representative in $D$, so by
@@ -425,3 +425,7 @@ module _
 ## References
 
 {{#bibliograhy}}
+
+## See also
+
+- [Subfinitely enumerable types](univalent-combinatorics.subfinitely-enumerable-types.md)

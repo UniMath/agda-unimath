@@ -113,7 +113,7 @@ open import univalent-combinatorics.steiner-triple-systems public
 open import univalent-combinatorics.subcounting public
 open import univalent-combinatorics.subfinite-indexing public
 open import univalent-combinatorics.subfinite-types public
-open import univalent-combinatorics.subfinitely-indexed-types public
+open import univalent-combinatorics.subfinitely-enumerable-types public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public

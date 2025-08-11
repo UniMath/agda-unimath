@@ -209,5 +209,5 @@ notions of finite type, including
 - [Finite types](univalent-combinatorics.finite-types.md) (unformalized)
 - [Subfinite types](univalent-combinatorics.subfinite-types.md)
 - [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
-- [Subfinitely indexed types](univalent-combinatorics.subfinitely-indexed-types.md)
+- [Subfinitely enumerable types](univalent-combinatorics.subfinitely-enumerable-types.md)
 - [Dedekind finite types](univalent-combinatorics.dedekind-finite-types.md)

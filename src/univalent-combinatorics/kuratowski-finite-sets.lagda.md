@@ -28,7 +28,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subfinite-types
-open import univalent-combinatorics.subfinitely-indexed-types
+open import univalent-combinatorics.subfinitely-enumerable-types
 ```
 
 </details>
@@ -100,25 +100,25 @@ has-decidable-equality-is-Kuratowski-Finite-Set-Finite-Set X =
 
 > This remains to be formalized. ([Markovian types](logic.markovian-types.md))
 
-### Kuratowski finite sets are subfinitely indexed
+### Kuratowski finite sets are subfinitely enumerable
 
 ```agda
 module _
   {l : Level} (X : Kuratowski-Finite-Set l)
   where
 
-  is-subfinitely-indexed-type-Kuratowski-Finite-Set :
-    is-subfinitely-indexed lzero (type-Kuratowski-Finite-Set X)
-  is-subfinitely-indexed-type-Kuratowski-Finite-Set =
+  is-subfinitely-enumerable-type-Kuratowski-Finite-Set :
+    is-subfinitely-enumerable lzero (type-Kuratowski-Finite-Set X)
+  is-subfinitely-enumerable-type-Kuratowski-Finite-Set =
     map-trunc-Prop
       (λ (n , s) → (Fin-Subfinite-Type n , s))
       ( is-kuratowski-finite-Kuratowski-Finite-Set X)
 
-  subfinitely-indexed-type-Kuratowski-Finite-Set :
-    Subfinitely-Indexed-Type l lzero
-  subfinitely-indexed-type-Kuratowski-Finite-Set =
+  subfinitely-enumerable-type-Kuratowski-Finite-Set :
+    subfinitely-enumerable-Type l lzero
+  subfinitely-enumerable-type-Kuratowski-Finite-Set =
     ( type-Kuratowski-Finite-Set X ,
-      is-subfinitely-indexed-type-Kuratowski-Finite-Set)
+      is-subfinitely-enumerable-type-Kuratowski-Finite-Set)
 ```
 
 ### Kuratowski finite sets are Dedekind finite
@@ -131,8 +131,8 @@ module _
   is-dedekind-finite-type-Kuratowski-Finite-Set :
     is-dedekind-finite (type-Kuratowski-Finite-Set X)
   is-dedekind-finite-type-Kuratowski-Finite-Set =
-    is-dedekind-finite-type-Subfinitely-Indexed-Type
-      ( subfinitely-indexed-type-Kuratowski-Finite-Set X)
+    is-dedekind-finite-type-subfinitely-enumerable-Type
+      ( subfinitely-enumerable-type-Kuratowski-Finite-Set X)
 
   dedekind-finite-type-Kuratowski-Finite-Set : Dedekind-Finite-Type l
   dedekind-finite-type-Kuratowski-Finite-Set =
