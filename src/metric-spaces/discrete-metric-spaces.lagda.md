@@ -65,7 +65,7 @@ the
 on its underlying [set](foundation.sets.md).
 
 Any [map](metric-spaces.functions-metric-spaces.md) from a discrete metric space
-is [short](metric-spaces.short-functions-metric-spaces.md); a map into a
+is [short](metric-spaces.short-functions-metric-spaces.md), and a map into a
 discrete metric space is short if and only if it is
 [locally constant](metric-spaces.locally-constant-functions-metric-spaces.md).
 
