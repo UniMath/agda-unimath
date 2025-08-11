@@ -269,11 +269,12 @@ module _
 
 ## See also
 
-- [Convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md):
-  the type of sequences that have a limit
+- [Convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md)
+  are sequences with a limit;
 - The
-  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md):
-  the metric structure on the type of convergent sequences
+  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md)
+  is the metric space of convergent sequences in a metric space with the
+  product metric structure.
 
 ## External links
 
