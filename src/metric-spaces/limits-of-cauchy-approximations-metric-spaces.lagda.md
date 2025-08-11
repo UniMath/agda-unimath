@@ -133,8 +133,7 @@ module _
 
 ## See also
 
-- [convergent cauchy approximations](metric-spaces.convergent-cauchy-approximations-metric-spaces.md):
-  the type of Cauchy approximations with a limit.
+- [Convergent cauchy approximations](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) are Cauchy approximations with a limit.
 
 ## References
 
