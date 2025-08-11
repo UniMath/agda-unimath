@@ -34,13 +34,15 @@ open import metric-spaces.rational-neighborhoods
 
 ## Idea
 
-An
+A [map of metric spaces](metric-spaces.functions-metric-spaces.md) `f : A → B`
+is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
-between two [metric spaces](metric-spaces.metric-spaces.md) is an
-[isometry](metric-spaces.isometries-pseudometric-spaces.md) between their
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md), i.e., upper bounds
-on the distance between two points in `A` are exactly the upper bounds of the
-distance between their images in `B`.
+if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
+on `A` is equivalent to the
+[preimage](metric-spaces.preimage-rational-neighborhoods.md) under `f` of the
+rational neighborhood relation on `B`. In other words, `f` is an isometry if it
+is an [isometry](metric-spaces.isometries-pseudometric-spaces.md) between the
+underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
 ## Definitions
 
