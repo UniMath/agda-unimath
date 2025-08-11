@@ -115,6 +115,16 @@ left-successor-law-add-𝕋 neg-two-𝕋 n = refl
 left-successor-law-add-𝕋 (succ-𝕋 neg-two-𝕋) n = refl
 left-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) n =
   ap succ-𝕋 (left-successor-law-add-𝕋 (succ-𝕋 k) n)
+
+right-successor-law-add+2-𝕋 :
+  (n k : 𝕋) → add+2-𝕋 k (succ-𝕋 n) ＝ succ-𝕋 (add+2-𝕋 k n)
+right-successor-law-add+2-𝕋 n k = refl
+
+left-successor-law-add+2-𝕋 :
+  (n k : 𝕋) → add+2-𝕋 (succ-𝕋 k) n ＝ succ-𝕋 (add+2-𝕋 k n)
+left-successor-law-add+2-𝕋 neg-two-𝕋 n = refl
+left-successor-law-add+2-𝕋 (succ-𝕋 k) n =
+  ap succ-𝕋 (left-successor-law-add+2-𝕋 k n)
 ```
 
 ### The balancing law of the successor function over addition
