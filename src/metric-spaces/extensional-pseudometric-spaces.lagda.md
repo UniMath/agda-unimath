@@ -91,7 +91,7 @@ module _
 
 ## Properties
 
-### Any tight pseudometric space is extensional
+### Tight pseudometric spaces are extensional
 
 ```agda
 module _
@@ -148,7 +148,7 @@ module _
     map-inv-equiv (equiv-sim-eq-is-extensional-Pseudometric-Space x y)
 ```
 
-### Any extensional pseudometric is tight
+### Extensional pseudometric spaces are tight
 
 ```agda
 module _
@@ -184,5 +184,5 @@ module _
 
 ## See also
 
-- [metric spaces](metric-spaces.metric-spaces.md): the type of extensional
-  pseudometric spaces.
+- Extensional
+  pseudometric spaces are called [metric spaces](metric-spaces.metric-spaces.md).

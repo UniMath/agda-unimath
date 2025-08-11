@@ -37,7 +37,7 @@ A [function](metric-spaces.functions-pseudometric-spaces.md) between
 {{#concept "isometry" Disambiguation="between pseudometric spaces" Agda=is-isometry-Pseudometric-Space}}
 if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
 on `A` is equivalent to the
-[preimage](metric-spaces.preimage-rational-neighborhoods.md) by `f` of the
+[preimage](metric-spaces.preimage-rational-neighborhoods.md) under `f` of the
 rational neighborhood relation on `B`. I.e., upper bounds on the distance
 between two points in `A` are exactly the upper bounds of the distance between
 their images in `B`.

@@ -48,7 +48,7 @@ with a {{concept "pseudometric structure" Agda=Pseudometric-Structure}}: a
 [symmetric](metric-spaces.symmetric-rational-neighborhoods.md),
 [triangular](metric-spaces.triangular-rational-neighborhoods.md) and
 [saturated](metric-spaces.saturated-rational-neighborhoods.md)
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
+[rational neighborhood relation](metric-spaces.rational-neighborhoods.md).
 
 Given a pseudometric structure `B` on `A` and some positive rational number
 `d : ℚ⁺` such that `B d x y` holds for some pair of points `x y : A`, we
