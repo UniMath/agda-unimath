@@ -137,14 +137,7 @@ h6:target::before {
 .content a:hover {
   text-decoration: solid underline;
 }
-.content a.adjacent-link {
-  text-decoration: dotted underline;
-  text-underline-offset: 1px;
-  text-decoration-thickness: 1px;
-}
-.content a.adjacent-link:hover {
-  text-decoration: solid underline;
-}
+
 .content pre a,
 .content code a,
 pre .content a,
