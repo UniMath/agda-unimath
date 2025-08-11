@@ -104,7 +104,7 @@ module _
   where
 
   htpy-sum-arithmetic-standard-arithmetic-sequence-Semiring :
-    (u : arithmetic-sequence-Semiring R) →
+    ( u : arithmetic-sequence-Semiring R) →
     ( seq-sum-standard-arithmetic-sequence-Semiring
       ( R)
       ( initial-term-arithmetic-sequence-Semiring R u)
@@ -139,7 +139,7 @@ module _
   where
 
   compute-sum-add-mul-nat-Semiring :
-    (n : ℕ) →
+    ( n : ℕ) →
     add-Semiring
       ( R)
       ( mul-nat-scalar-Semiring R (succ-ℕ n) a)
