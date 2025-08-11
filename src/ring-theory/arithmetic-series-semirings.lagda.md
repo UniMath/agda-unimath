@@ -131,6 +131,35 @@ module _
       ( htpy-add-mul-standard-arithmetic-sequence-Semiring R a d)
 ```
 
+### The sum `Σ (k ≤ n) k` in a semiring is the image of the nth triangular number
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  compute-sum-map-nat-Semiring :
+    ( n : ℕ) →
+    ( seq-sum-sequence-Semiring R (map-nat-Semiring R) n) ＝
+    ( map-nat-Semiring R (sum-leq-ℕ n))
+  compute-sum-map-nat-Semiring zero-ℕ =
+    compute-sum-one-element-Semiring
+      ( R)
+      ( λ _ → zero-Semiring R) ∙
+      ( inv (left-zero-law-mul-nat-scalar-Semiring R (one-Semiring R)))
+  compute-sum-map-nat-Semiring (succ-ℕ n) =
+    ap-binary
+      ( add-Semiring R)
+      ( compute-sum-map-nat-Semiring n)
+      ( inv (eq-fin-sequence-sequence (map-nat-Semiring R) (succ-ℕ n))) ∙
+    inv
+      ( right-distributive-mul-nat-scalar-add-Semiring
+        ( R)
+        ( sum-leq-ℕ n)
+        ( succ-ℕ n)
+        ( one-Semiring R))
+```
+
 ### The sum `Σ (i ≤ n) (a + i * d)` is equal to `(n + 1) * a + Tₙ * d` where `Tₙ` is the nth triangular number
 
 ```agda
@@ -154,9 +183,14 @@ module _
       ( inv (eq-mul-nat-scalar-sum-const-fin-sequence-Semiring R a (succ-ℕ n)))
       ( ( ap
           ( λ i → mul-nat-scalar-Semiring R i d)
-          ( inv (htpy-sum-fin-triangular-number-ℕ n))) ∙
-        ( lemma-mul-nat-seq-sum)) ∙
-    ( interchange-add-sum-fin-sequence-type-Semiring
+          ( htpy-sum-leq-triangular-ℕ n)) ∙
+        ( inv
+          ( htpy-mul-map-mul-nat-scalar-Semiring R (sum-leq-ℕ n) d)) ∙
+        ( ap
+          ( mul-Semiring' R d)
+          ( inv (compute-sum-map-nat-Semiring R n))) ∙
+        ( inv lemma-seq-sum-mul-nat)) ∙
+      ( interchange-add-sum-fin-sequence-type-Semiring
       ( R)
       ( succ-ℕ n)
       ( fin-sequence-sequence (λ _ → a) (succ-ℕ n))
@@ -190,56 +224,4 @@ module _
             ( R)
             ( λ i → htpy-mul-map-mul-nat-scalar-Semiring R i d)
             ( n)))
-
-    lemma-seq-sum-map-nat :
-      ( k : ℕ) →
-      ( seq-sum-sequence-Semiring R (map-nat-Semiring R) k) ＝
-      ( map-nat-Semiring
-        ( R)
-        ( seq-sum-sequence-Semiring
-          ( ℕ-Semiring)
-          ( λ i → i)
-          ( k)))
-    lemma-seq-sum-map-nat zero-ℕ =
-      compute-sum-one-element-Semiring
-        ( R)
-        ( λ _ → zero-Semiring R) ∙
-        ( inv (left-zero-law-mul-nat-scalar-Semiring R (one-Semiring R)))
-    lemma-seq-sum-map-nat (succ-ℕ k) =
-      ap-binary
-        ( add-Semiring R)
-        ( lemma-seq-sum-map-nat k)
-        ( inv (eq-fin-sequence-sequence (map-nat-Semiring R) (succ-ℕ k))) ∙
-      inv
-        ( right-distributive-mul-nat-scalar-add-Semiring
-          ( R)
-          ( seq-sum-sequence-Semiring ℕ-Semiring (λ i → i) k)
-          ( succ-ℕ k)
-          ( one-Semiring R))
-
-    lemma-mul-nat-seq-sum :
-      mul-nat-scalar-Semiring
-        ( R)
-        ( seq-sum-sequence-Semiring
-          ( ℕ-Semiring)
-          ( λ k → k)
-          ( n))
-        ( d) ＝
-      seq-sum-sequence-Semiring
-        ( R)
-        ( λ k → mul-nat-scalar-Semiring R k d)
-        ( n)
-    lemma-mul-nat-seq-sum =
-      ( inv
-        ( htpy-mul-map-mul-nat-scalar-Semiring
-          ( R)
-          ( seq-sum-sequence-Semiring
-            ( ℕ-Semiring)
-            ( λ k → k)
-            ( n))
-          ( d))) ∙
-      ( ap
-        ( mul-Semiring' R d)
-        ( inv (lemma-seq-sum-map-nat n))) ∙
-      ( inv lemma-seq-sum-mul-nat)
 ```
