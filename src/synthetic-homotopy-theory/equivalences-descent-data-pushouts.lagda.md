@@ -267,7 +267,8 @@ module _
 
   abstract
     is-torsorial-equiv-descent-data-pushout :
-      is-torsorial (equiv-descent-data-pushout {l6 = l4} {l7 = l5} P)
+      is-torsorial
+        ( λ (Q : descent-data-pushout 𝒮 l4 l5) → equiv-descent-data-pushout P Q)
     is-torsorial-equiv-descent-data-pushout =
       is-torsorial-Eq-structure
         ( is-torsorial-Eq-Π
