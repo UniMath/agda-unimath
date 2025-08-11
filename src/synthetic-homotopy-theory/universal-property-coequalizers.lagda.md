@@ -208,7 +208,7 @@ module _
           ( domain-equiv-equiv-double-arrow a a' e)
           ( domain-equiv-equiv-double-arrow a a' e))
         ( domain-equiv-equiv-double-arrow a a' e)
-        (codomain-equiv-equiv-double-arrow a a' e)
+        ( codomain-equiv-equiv-double-arrow a a' e)
         ( equiv-equiv-cofork-equiv-double-arrow c c' e e')
         ( coherence-square-cocone-cofork a c)
         ( inv-htpy

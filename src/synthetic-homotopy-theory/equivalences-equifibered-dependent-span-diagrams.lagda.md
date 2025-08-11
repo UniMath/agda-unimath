@@ -255,9 +255,9 @@ module _
   id-equiv-equifibered-dependent-span-diagram :
     equiv-equifibered-dependent-span-diagram P P
   id-equiv-equifibered-dependent-span-diagram =
-    ( λ _ → id-equiv) ,
-    ( λ _ → id-equiv) ,
-    ( λ _ → id-equiv) ,
-    ( λ _ → refl-htpy) ,
-    ( λ _ → refl-htpy)
+    ( ( λ _ → id-equiv) ,
+      ( λ _ → id-equiv) ,
+      ( λ _ → id-equiv) ,
+      ( λ _ → refl-htpy) ,
+      ( λ _ → refl-htpy))
 ```

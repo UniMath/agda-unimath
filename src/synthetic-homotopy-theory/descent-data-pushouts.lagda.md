@@ -150,13 +150,13 @@ module _
   descent-data-family-cocone-span-diagram :
     {l5 : Level} → (X → UU l5) → descent-data-pushout 𝒮 l5 l5
   descent-data-family-cocone-span-diagram P =
-    ( P ∘ horizontal-map-cocone _ _ c) ,
-    ( P ∘ vertical-map-cocone _ _ c) ,
-    ( equiv-tr P ∘ coherence-square-cocone _ _ c)
+    ( ( P ∘ horizontal-map-cocone _ _ c) ,
+      ( P ∘ vertical-map-cocone _ _ c) ,
+      ( equiv-tr P ∘ coherence-square-cocone _ _ c))
 ```
 
 ## See also
 
 - [Equifibered dependent span diagrams](synthetic-homotopy-theory.equifibered-dependent-span-diagrams.md)
-  is a variant descent data for pushouts where an additional type family over
+  is a variant of descent data for pushouts where an additional type family over
   the middle vertex is specified.

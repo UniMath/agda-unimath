@@ -346,9 +346,9 @@ module _
   is-equiv-map-equiv-total-fiber' : is-equiv map-equiv-total-fiber'
   is-equiv-map-equiv-total-fiber' =
     is-equiv-is-invertible
-      map-inv-equiv-total-fiber'
-      is-section-map-inv-equiv-total-fiber'
-      is-retraction-map-inv-equiv-total-fiber'
+      ( map-inv-equiv-total-fiber')
+      ( is-section-map-inv-equiv-total-fiber')
+      ( is-retraction-map-inv-equiv-total-fiber')
 
   is-equiv-map-inv-equiv-total-fiber' : is-equiv map-inv-equiv-total-fiber'
   is-equiv-map-inv-equiv-total-fiber' =
