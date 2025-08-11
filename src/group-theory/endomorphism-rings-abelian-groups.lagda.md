@@ -7,15 +7,21 @@ module group-theory.endomorphism-rings-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.ring-of-integers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
@@ -57,6 +63,46 @@ module _
 ```
 
 ## Properties
+
+### The integer multiple in an abelian group is the initial ring homomorphism in the endomorphism ring
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  hom-ring-integer-multiple-Ab :
+    hom-Ring ℤ-Ring (endomorphism-ring-Ab A)
+  hom-ring-integer-multiple-Ab =
+    ( hom-integer-multiple-Ab A ,
+      λ {i} {j} →
+      eq-htpy-hom-Ab
+        ( A)
+        ( A)
+        ( λ x → distributive-integer-multiple-add-Ab A x i j)) ,
+    ( ( λ {i} {j} →
+        eq-htpy-hom-Ab
+          ( A)
+          ( A)
+          ( integer-multiple-mul-Ab A i j)) ,
+      ( eq-htpy-hom-Ab A A (integer-multiple-one-Ab A)))
+
+  htpy-initial-hom-integer-multiple-endomorphism-ring-Ab :
+    map-initial-hom-Ring (endomorphism-ring-Ab A) ~
+    hom-integer-multiple-Ab A
+  htpy-initial-hom-integer-multiple-endomorphism-ring-Ab =
+    htpy-initial-hom-Ring
+      ( endomorphism-ring-Ab A)
+      ( hom-ring-integer-multiple-Ab)
+
+  eq-initial-hom-integer-multiple-endomorphism-ring-Ab :
+    initial-hom-Ring (endomorphism-ring-Ab A) ＝
+    hom-ring-integer-multiple-Ab
+  eq-initial-hom-integer-multiple-endomorphism-ring-Ab =
+    contraction-initial-hom-Ring
+      ( endomorphism-ring-Ab A)
+      ( hom-ring-integer-multiple-Ab)
+```
 
 ### Multiplication in a ring is a ring homomorphism in the ring of endomorphism of its underlying abelian additive group
 
