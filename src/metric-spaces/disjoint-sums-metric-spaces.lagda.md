@@ -124,7 +124,7 @@ module _
     is-saturated-Rational-Neighborhood-Relation
       neighborhood-prop-Σ-Metric-Space
   is-saturated-neighborhood-Σ-Metric-Space d (x , Px) (y , Py) H =
-    x=y , lemma-neighborhood-Σ
+    ( x=y , lemma-neighborhood-Σ)
     where
 
     x=y : x ＝ y
@@ -166,8 +166,8 @@ module _
   pseudometric-space-Σ-Metric-Space :
     Pseudometric-Space (la ⊔ lp) (la ⊔ lp')
   pseudometric-space-Σ-Metric-Space =
-    ( type-Σ-Metric-Space) ,
-    ( neighborhood-prop-Σ-Metric-Space ,
+    ( type-Σ-Metric-Space ,
+      neighborhood-prop-Σ-Metric-Space ,
       is-reflexive-neighborhood-Σ-Metric-Space ,
       is-symmetric-neighborhood-Σ-Metric-Space ,
       is-triangular-neighborhood-Σ-Metric-Space ,
@@ -236,7 +236,7 @@ module _
 
   map-emb-fiber-Σ-Metric-Space :
     (x : type-Metric-Space A) →
-    type-Metric-Space ( P x) →
+    type-Metric-Space (P x) →
     type-Σ-Metric-Space
   map-emb-fiber-Σ-Metric-Space x px = (x , px)
 ```
@@ -322,12 +322,12 @@ module _
       ( Σ-Metric-Space A P)
       ( map-emb-fiber-Σ-Metric-Space A P x)
   is-isometry-emb-fiber-Σ-Metric-Space d px px' =
-    ( is-short-emb-fiber-Σ-Metric-Space d px px') ,
-    ( reflects-neighborhood-emb-fiber-Σ-Metric-Space d px px')
+    ( is-short-emb-fiber-Σ-Metric-Space d px px' ,
+      reflects-neighborhood-emb-fiber-Σ-Metric-Space d px px')
 
   isometry-emb-fiber-Σ-Metric-Space :
     isometry-Metric-Space (P x) (Σ-Metric-Space A P)
   isometry-emb-fiber-Σ-Metric-Space =
-    ( map-emb-fiber-Σ-Metric-Space A P x) ,
-    ( is-isometry-emb-fiber-Σ-Metric-Space)
+    ( map-emb-fiber-Σ-Metric-Space A P x ,
+      is-isometry-emb-fiber-Σ-Metric-Space)
 ```

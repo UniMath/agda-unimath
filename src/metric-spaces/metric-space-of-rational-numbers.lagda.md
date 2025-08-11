@@ -164,11 +164,11 @@ is-saturated-neighborhood-ℚ ε x y H =
 pseudometric-space-ℚ : Pseudometric-Space lzero lzero
 pr1 pseudometric-space-ℚ = ℚ
 pr2 pseudometric-space-ℚ =
-  neighborhood-prop-ℚ ,
-  is-reflexive-neighborhood-ℚ ,
-  is-symmetric-neighborhood-ℚ ,
-  is-triangular-neighborhood-ℚ ,
-  is-saturated-neighborhood-ℚ
+  ( neighborhood-prop-ℚ ,
+    is-reflexive-neighborhood-ℚ ,
+    is-symmetric-neighborhood-ℚ ,
+    is-triangular-neighborhood-ℚ ,
+    is-saturated-neighborhood-ℚ)
 
 is-tight-pseudometric-space-ℚ :
   is-tight-Pseudometric-Space pseudometric-space-ℚ
