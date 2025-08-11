@@ -53,7 +53,7 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 ## Idea
 
-A [metric space](metric-spaces.metric-spaces.md) is called
+A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "discrete" Disambiguation="metric space" Agda=is-discrete-Metric-Space}}
 if all
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
