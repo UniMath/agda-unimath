@@ -41,7 +41,10 @@ numbers.
 ### Proof
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+  unfolding neg-ℚ
+
   eq-square-sum-minus-four-mul-ℚ-square-diff :
     (x y : ℚ) →
     square-ℚ (x +ℚ y) -ℚ rational-ℕ 4 *ℚ (x *ℚ y) ＝ square-ℚ (x -ℚ y)

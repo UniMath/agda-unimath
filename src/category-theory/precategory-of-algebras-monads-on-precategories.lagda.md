@@ -1,4 +1,4 @@
-# The precategory of algebras of a monad
+# The precategory of algebras over a monad
 
 ```agda
 module category-theory.precategory-of-algebras-monads-on-precategories where
@@ -35,8 +35,8 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 The
-{{#concept "precategory of algebras" Disambiguation="of a monad on a precategory" Agda=algebras-monad-Precategory}}
-of a [monad on a precategory](category-theory.monads-on-precategories.md) `T`,
+{{#concept "precategory of algebras" Disambiguation="over a monad on a precategory" Agda=algebras-monad-Precategory}}
+over a [monad on a precategory](category-theory.monads-on-precategories.md) `T`,
 denoted `EM(T)`, also called the **Eilenberg–Moore precategory**, consists of
 all `T`-algebras and `T`-algebra morphisms. It comes with an adjunction
 `C ⇄ EM(T)`.
@@ -311,7 +311,7 @@ The counit is the vertical map given by the structure map of the algebra
       ( inv (mul-law-algebra-monad-Precategory C T x))) ,
     ( λ {x} {y} f →
       eq-pair-Σ
-        ( comm-hom-morphism-algebra-monad-Precategory C T x y f)
+        ( coh-hom-morphism-algebra-monad-Precategory C T x y f)
         ( eq-is-prop (is-set-hom-Precategory C _ _ _ _)))
 
   left-triangle-algebras-monad-Precategory :

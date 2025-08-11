@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -20,6 +21,8 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import linear-algebra.finite-sequences-in-rings
+open import linear-algebra.left-modules-rings
+open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
 
@@ -231,6 +234,24 @@ module _
     sum-fin-sequence-type-Ring R n (f ∘ map-equiv σ)
   preserves-sum-permutation-fin-sequence-type-Ring =
     preserves-sum-permutation-fin-sequence-type-Semiring (semiring-Ring R)
+```
+
+### The linear form of the sum of coordinates
+
+```agda
+module _
+  {l : Level} (R : Ring l) (n : ℕ)
+  where
+
+  is-linear-sum-fin-sequence-type-Ring :
+    is-linear-map-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( left-module-ring-Ring R)
+      ( sum-fin-sequence-type-Ring R n)
+  is-linear-sum-fin-sequence-type-Ring =
+    ( λ x y → inv (interchange-add-sum-fin-sequence-type-Ring R n x y)) ,
+    ( λ c x → inv (left-distributive-mul-sum-fin-sequence-type-Ring R n c x))
 ```
 
 ## See also

@@ -109,11 +109,10 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  eq-zero-sum-zero-fin-sequence-type-RingRing :
+  sum-zero-finite-Ring :
     {l2 : Level} (A : Finite-Type l2) →
     sum-finite-Ring R A (λ _ → zero-Ring R) ＝ zero-Ring R
-  eq-zero-sum-zero-fin-sequence-type-RingRing =
-    eq-zero-sum-zero-fin-sequence-type-RingSemiring (semiring-Ring R)
+  sum-zero-finite-Ring = sum-zero-finite-Semiring (semiring-Ring R)
 ```
 
 ### Sums over finite types are preserved by equivalences
