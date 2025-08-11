@@ -58,6 +58,10 @@ Hilbert, we will not assume that such an operator exists for each type `A`.
 
 {{#bibliography}}
 
+## See also
+
+- [Global choice](foundation.global-choice.md)
+
 ## External links
 
 - [Epsilon calculus](https://en.wikipedia.org/wiki/Epsilon_calculus) at
