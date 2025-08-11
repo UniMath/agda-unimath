@@ -162,6 +162,7 @@ module _
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
+- [Finitely enumerable types](univalent-combinatorics.finitely-enumerable-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
 - In
   [`univalent-combinatorics.surjective-maps`](univalent-combinatorics.surjective-maps.md)
