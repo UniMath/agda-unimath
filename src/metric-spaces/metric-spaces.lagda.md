@@ -24,7 +24,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.preimage-rational-neighborhoods
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhoods
@@ -77,7 +77,7 @@ The neighborhood relation on a metric space must satisfy the following axioms:
 This gives `A` the structure of a
 [**pseudometric space**](metric-spaces.pseudometric-spaces.md); finally, we ask
 that our metric spaces are
-[**extensional**](metric-spaces.extensional-pseudometric-spaces.md):
+[**extensional**](metric-spaces.extensionality-pseudometric-spaces.md):
 [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) elements
 are [equal](foundation-core.identity-types.md):
 

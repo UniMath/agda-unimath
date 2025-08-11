@@ -37,8 +37,8 @@ These are
 [limits](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md)
 in the underlying [pseudometric space](metric-spaces.pseudometric-spaces.md)
 but, because metric spaces are
-[extensional](metric-spaces.extensional-pseudometric-spaces.md), all limits of a
-Cauchy approximation in a metric space are equal.
+[extensional](metric-spaces.extensionality-pseudometric-spaces.md), all limits
+of a Cauchy approximation in a metric space are equal.
 
 ## Definitions
 

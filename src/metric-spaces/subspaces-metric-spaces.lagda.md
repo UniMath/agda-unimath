@@ -13,7 +13,7 @@ open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces

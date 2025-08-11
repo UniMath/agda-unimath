@@ -34,7 +34,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.locally-constant-functions-metric-spaces
 open import metric-spaces.metric-spaces

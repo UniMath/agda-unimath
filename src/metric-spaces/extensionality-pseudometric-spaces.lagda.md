@@ -1,7 +1,7 @@
 # Extensionality of pseudometric spaces
 
 ```agda
-module metric-spaces.extensional-pseudometric-spaces where
+module metric-spaces.extensionality-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
