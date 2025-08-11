@@ -5,7 +5,7 @@
 ### Quick setup
 
 To work or experiment with the agda-unimath library on your machine, you will
-need to have `agda` version 2.7.0 installed, and a suitable editor such as
+need to have Agda version 2.8.0 installed, and a suitable editor such as
 [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/). The following instructions
 will help you on your way right away:
@@ -123,7 +123,7 @@ working branches when necessary.
 
 ## Installing Agda {#installing-agda}
 
-The agda-unimath library is built and verified with Agda 2.7.0, and we provide
+The agda-unimath library is built and verified with Agda 2.8.0, and we provide
 two methods for installation: with or without the package manager
 [Nix](https://nixos.org/). Nix streamlines the installation of Agda and its
 dependencies, providing a consistent and reproducible environment for the
@@ -131,7 +131,7 @@ library across different systems.
 
 ### Without Nix
 
-To install Agda 2.7.0 without Nix, follow the
+To install Agda 2.8.0 without Nix, follow the
 [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html)
 provided on the Agda documentation page.
 
