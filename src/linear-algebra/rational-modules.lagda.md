@@ -44,16 +44,16 @@ open import ring-theory.rings
 ## Idea
 
 A {{#concept "rational module" Agda=Rational-Module}} is an
-[abelian group](group-theory.abelian-groups.md) for which any of the following
-[logically equivalent](foundation.logical-equivalences.md)
-[propositions](foundation.propositions.md) hold:
+[abelian group](group-theory.abelian-groups.md) whose
+[ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md) is a
+[ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.md), i.e.,
+the [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
+its ring of endomorphisms [inverts](ring-theory.localizations-rings.md) the
+[positive integers](elementary-number-theory.positive-integers.md).
 
-- its [ring of endomorphisms](group-theory.endomorphism-rings-abelian-groups.md)
-  is [a ring extension of `ℚ`](ring-theory.ring-extensions-rational-numbers.md),
-  i.e., the
-  [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) in
-  its ring of endomorphisms [inverts](ring-theory.localizations-rings.md) the
-  [positive integers](elementary-number-theory.positive-integers.md);
+This condition is [logically equivalent](foundation.logical-equivalences.md) to
+the following [propositions](foundation.propositions.md):
+
 - it is a [left module](linear-algebra.left-modules-rings.md) over the
   [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md);
 - it is a [right module](linear-algebra.right-modules-rings.md) over the
