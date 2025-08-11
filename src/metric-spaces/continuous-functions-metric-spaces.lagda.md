@@ -32,8 +32,8 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between
 at a point `x` if `f x` is the
 [limit](metric-spaces.limits-of-functions-metric-spaces.md) of `f` at `x`. I.e.,
 there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an
-`m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. In this case, `m` is
-called a modulus of continuity of `f` at `x`.
+`m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. In this
+case, `m` is called a modulus of continuity of `f` at `x`.
 
 ## Definitions
 

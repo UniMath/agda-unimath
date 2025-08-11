@@ -280,14 +280,14 @@ module _
     is-short-function-Metric-Space
       ( P x)
       ( Σ-Metric-Space A P)
-      ( emb-fiber-Σ-Metric-Space A P x)
+      ( map-emb-fiber-Σ-Metric-Space A P x)
   is-short-emb-fiber-Σ-Metric-Space d px px' Nxx' =
     ( refl , Nxx')
 
   short-emb-fiber-Σ-Metric-Space :
     short-function-Metric-Space (P x) (Σ-Metric-Space A P)
   short-emb-fiber-Σ-Metric-Space =
-    ( emb-fiber-Σ-Metric-Space A P x) ,
+    ( map-emb-fiber-Σ-Metric-Space A P x) ,
     ( is-short-emb-fiber-Σ-Metric-Space)
 
   reflects-neighborhood-emb-fiber-Σ-Metric-Space :
@@ -295,8 +295,8 @@ module _
     neighborhood-Metric-Space
       ( Σ-Metric-Space A P)
       ( d)
-      ( emb-fiber-Σ-Metric-Space A P x px)
-      ( emb-fiber-Σ-Metric-Space A P x px') →
+      ( map-emb-fiber-Σ-Metric-Space A P x px)
+      ( map-emb-fiber-Σ-Metric-Space A P x px') →
     neighborhood-Metric-Space
       ( P x)
       ( d)
@@ -320,7 +320,7 @@ module _
     is-isometry-Metric-Space
       ( P x)
       ( Σ-Metric-Space A P)
-      ( emb-fiber-Σ-Metric-Space A P x)
+      ( map-emb-fiber-Σ-Metric-Space A P x)
   is-isometry-emb-fiber-Σ-Metric-Space d px px' =
     ( is-short-emb-fiber-Σ-Metric-Space d px px') ,
     ( reflects-neighborhood-emb-fiber-Σ-Metric-Space d px px')
@@ -328,6 +328,6 @@ module _
   isometry-emb-fiber-Σ-Metric-Space :
     isometry-Metric-Space (P x) (Σ-Metric-Space A P)
   isometry-emb-fiber-Σ-Metric-Space =
-    ( emb-fiber-Σ-Metric-Space A P x) ,
+    ( map-emb-fiber-Σ-Metric-Space A P x) ,
     ( is-isometry-emb-fiber-Σ-Metric-Space)
 ```
