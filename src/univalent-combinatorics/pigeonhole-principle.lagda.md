@@ -41,11 +41,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-If `f : X → Y` is an [injective map](foundation-core.injective-maps.md) between
-[finite types](univalent-combinatorics.finite-types.md) `X` and `Y` with `k` and
-`l` elements, then `k ≤ l`. Conversely, if `l < k`, then every map `f : X → Y`
-[repeats a value](foundation.repetitions-of-values.md), and hence is
-[noninjective](foundation.noninjective-maps.md).
+Given a map `f : X → Y` between
+[finite types](univalent-combinatorics.finite-types.md) with `k` and `l`
+elements respectively, then if `f` is
+[injective](foundation-core.injective-maps.md), `k` is
+[less than or equal](elementary-number-theory.inequality-natural-numbers.md) to
+`l`. Conversely, if `l` is
+[less than](elementary-number-theory.strict-inequality-natural-numbers.md) `k`,
+the map `f` [repeats a value](foundation.repetitions-of-values.md), meaning it
+is [noninjective](foundation.noninjective-maps.md).
 
 ## Theorems
 
@@ -55,7 +59,7 @@ If `f : X → Y` is an [injective map](foundation-core.injective-maps.md) betwee
 
 ```agda
 leq-emb-Fin :
-  (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
+  (k l : ℕ) → (Fin k ↪ Fin l) → k ≤-ℕ l
 leq-emb-Fin 0 0 f = refl-leq-ℕ 0
 leq-emb-Fin (succ-ℕ k) 0 f = map-emb f (inr star)
 leq-emb-Fin 0 (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
