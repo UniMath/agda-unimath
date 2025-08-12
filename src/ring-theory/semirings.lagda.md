@@ -8,6 +8,7 @@ module ring-theory.semirings where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -15,6 +16,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.homotopies
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
@@ -385,14 +387,11 @@ module _
       ( mul-nat-scalar-Semiring m x)
       ( mul-nat-scalar-Semiring n x) x)
 
-  map-nat-Semiring : ℕ → type-Semiring R
-  map-nat-Semiring n = mul-nat-scalar-Semiring n (one-Semiring R)
+  htpy-comp-mul-nat-mul-Semiring :
+    ( m n : ℕ) →
+    ( mul-nat-scalar-Semiring (m *ℕ n)) ~
+    ( mul-nat-scalar-Semiring m ∘ mul-nat-scalar-Semiring n)
+  htpy-comp-mul-nat-mul-Semiring zero-ℕ n x = refl
+  htpy-comp-mul-nat-mul-Semiring (succ-ℕ m) n x = {!!}
 
-  htpy-mul-map-mul-nat-scalar-Semiring :
-    (n : ℕ) →
-    mul-Semiring R (map-nat-Semiring n) ~
-    mul-nat-scalar-Semiring n
-  htpy-mul-map-mul-nat-scalar-Semiring n x =
-    ( left-nat-scalar-law-mul-Semiring n (one-Semiring R) x) ∙
-    ( ap (mul-nat-scalar-Semiring n) (left-unit-law-mul-Semiring R x))
 ```
