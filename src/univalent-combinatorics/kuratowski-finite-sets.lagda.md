@@ -36,11 +36,12 @@ open import univalent-combinatorics.subfinitely-enumerable-types
 ## Idea
 
 A {{#concept "Kuratowski finite set" Agda=Kuratowski-Finite-Set}} is a
-[set](foundation-core.sets.md) `X` for which there exists a
-[surjection](foundation.surjective-maps.md) into `X` from a standard finite
-type. In other words, a Kuratowski finite set is a
-[set-quotient](foundation.set-quotients.md) of a
-[standard finite type](univalent-combinatorics.standard-finite-types.md).
+[set](foundation-core.sets.md) `X` for which there
+[exists](foundation.existential-quantification.md) a
+[surjection](foundation.surjective-maps.md) into `X` from a
+[standard finite type](univalent-combinatorics.standard-finite-types.md). In
+other words, a Kuratowski finite set is a
+[set-quotient](foundation.set-quotients.md) of a standard finite type.
 
 ## Definition
 
