@@ -225,3 +225,37 @@ module _
             ( λ i → htpy-mul-map-mul-nat-scalar-Semiring R i d)
             ( n)))
 ```
+
+### The nth term of an arithmetic sequence with initial term `a` and common difference `d` is equal to `(n + 1) * a + Tₙ * d` where `Tₙ` is the nth triangular number
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (u : arithmetic-sequence-Semiring R)
+  where
+
+  compute-sum-arithmetic-sequence-Semiring :
+    (n : ℕ) →
+    add-Semiring
+      ( R)
+      ( mul-nat-scalar-Semiring
+        ( R)
+        ( succ-ℕ n)
+        ( initial-term-arithmetic-sequence-Semiring R u))
+      ( mul-nat-scalar-Semiring
+        ( R)
+        ( triangular-number-ℕ n)
+        ( common-difference-arithmetic-sequence-Semiring R u)) ＝
+    seq-sum-arithmetic-sequence-Semiring R u n
+  compute-sum-arithmetic-sequence-Semiring n =
+    ( compute-sum-add-mul-nat-Semiring
+      ( R)
+      ( initial-term-arithmetic-sequence-Semiring R u)
+      ( common-difference-arithmetic-sequence-Semiring R u)
+      ( n)) ∙
+    ( htpy-sum-standard-arithmetic-sequence-add-mul-nat-Semiring
+      ( R)
+      ( initial-term-arithmetic-sequence-Semiring R u)
+      ( common-difference-arithmetic-sequence-Semiring R u)
+      ( n)) ∙
+    ( htpy-sum-arithmetic-standard-arithmetic-sequence-Semiring R u n)
+```
