@@ -11,8 +11,8 @@ open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -100,7 +100,8 @@ module _
       ( map-nat-Semiring m)
       ( map-nat-Semiring n)
   preserves-mul-map-nat-Semiring m n =
-    ?
+    htpy-comp-mul-nat-mul-Semiring R m n (one-Semiring R) ∙
+    inv (htpy-mul-map-mul-nat-scalar-Semiring m (map-nat-Semiring n))
 
 module _
   {l : Level} (R : Semiring l)
@@ -116,4 +117,4 @@ module _
     preserves-mul-map-nat-Semiring R m n
   pr2 (pr2 initial-hom-Semiring) =
     preserves-one-map-nat-Semiring R
-  ```
+```
