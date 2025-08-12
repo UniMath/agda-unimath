@@ -15,6 +15,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
@@ -28,6 +29,19 @@ open import ring-theory.semirings
 ```
 
 </details>
+
+## Idea
+
+The type of [natural numbers](elementary-number-theory.natural-numbers.md)
+equipped with [addition](elementary-number-theory.addition-natural-numbers.md)
+and [multiplication](elementary-number-theory.multiplication-natural-numbers.md)
+is a [commutative semiring](commutative-algebra.commutative-semirings.md).
+
+The {{#concept "semiring of natural numbers" Agda=ℕ-Semiring}} is the
+**initial** semiring: for any semiring `R`, there's a unique
+[semiring homomorphism](ring-theory.homomorphisms-semirings.md) from `ℕ` to `R`,
+i.e., the type of semiring homomorphisms `hom-Semiring ℕ-Semiring R` is
+[contractible](foundation.contractible-types.md).
 
 ## Definition
 
@@ -117,4 +131,41 @@ module _
     preserves-mul-map-nat-Semiring R m n
   pr2 (pr2 initial-hom-Semiring) =
     preserves-one-map-nat-Semiring R
+```
+
+### Any semiring homomorphism from `ℕ` to a semiring is the initial inclusion
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (f : hom-Semiring ℕ-Semiring R)
+  where
+
+  htpy-map-nat-hom-Semiring :
+    map-nat-Semiring R ~ map-hom-Semiring ℕ-Semiring R f
+  htpy-map-nat-hom-Semiring zero-ℕ =
+    inv (preserves-zero-hom-Semiring ℕ-Semiring R f)
+  htpy-map-nat-hom-Semiring (succ-ℕ n) =
+    ( ap-add-Semiring
+      ( R)
+      ( htpy-map-nat-hom-Semiring n)
+      ( inv (preserves-unit-hom-Semiring ℕ-Semiring R f))) ∙
+    ( inv (preserves-addition-hom-Semiring ℕ-Semiring R f))
+```
+
+### The type of semiring homomorphisms from `ℕ` to a semiring is contractible
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  is-contr-nat-hom-Semiring : is-contr (hom-Semiring ℕ-Semiring R)
+  pr1 is-contr-nat-hom-Semiring = initial-hom-Semiring R
+  pr2 is-contr-nat-hom-Semiring f =
+    eq-htpy-hom-Semiring
+      ( ℕ-Semiring)
+      ( R)
+      ( initial-hom-Semiring R)
+      ( f)
+      ( htpy-map-nat-hom-Semiring R f)
 ```
