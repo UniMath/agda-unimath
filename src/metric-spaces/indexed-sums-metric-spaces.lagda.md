@@ -1,7 +1,7 @@
-# Disjoint sums of metric spaces
+# Indexed sums of metric spaces
 
 ```agda
-module metric-spaces.disjoint-sums-metric-spaces where
+module metric-spaces.indexed-sums-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -47,10 +48,11 @@ open import metric-spaces.triangular-rational-neighborhoods
 ## Idea
 
 The
-{{#concept "disjoint sum" Disambiguation="of a type family of metric spaces" Agda=Σ-Metric-Space}}
+{{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=Σ-Metric-Space}}
 of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
-metric space `A` is the metric space with underlying type `Σ A P` and the
-[neighborhood relation](metric-spaces.rational-neighborhoods.md) defined as:
+[set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
+and the [neighborhood relation](metric-spaces.rational-neighborhoods.md) defined
+as:
 
 `(x , Px)` is `d`-neighbor of `(y , Py)` if and only if `x` is
 [equal](foundation.identity-types.md) to `y` and the
@@ -64,25 +66,24 @@ and for any `x : A` the embedding `P x → Σ A P` is an
 
 ## Definitions
 
-### Disjoint sum of metric spaces
+### Indexed sum of metric spaces
 
 ```agda
 module _
-  {la la' lp lp' : Level}
-  (A : Metric-Space la la')
-  (P : type-Metric-Space A → Metric-Space lp lp')
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
   where
 
   type-Σ-Metric-Space : UU (la ⊔ lp)
-  type-Σ-Metric-Space =
-    Σ (type-Metric-Space A) (type-Metric-Space ∘ P)
+  type-Σ-Metric-Space = Σ (type-Set A) (type-Metric-Space ∘ P)
 
   neighborhood-prop-Σ-Metric-Space :
     Rational-Neighborhood-Relation (la ⊔ lp') type-Σ-Metric-Space
   neighborhood-prop-Σ-Metric-Space d (x , Px) (y , Py) =
     Σ-Prop
       ( Id-Prop
-        ( set-Metric-Space A)
+        ( A)
         ( x)
         ( y))
       ( λ e →
@@ -134,7 +135,7 @@ module _
       (δ : ℚ⁺) → pr1 (H δ) ＝ x=y
     all-eq-x=y δ =
       is-set-has-uip
-        ( is-set-type-Set (set-Metric-Space A))
+        ( is-set-type-Set A)
         ( x)
         ( y)
         ( pr1 (H δ))
@@ -201,7 +202,7 @@ module _
       (δ : ℚ⁺) → pr1 (H δ) ＝ x=y
     all-eq-x=y δ =
       is-set-has-uip
-        ( is-set-type-Set (set-Metric-Space A))
+        ( is-set-type-Set A)
         ( x)
         ( y)
         ( pr1 (H δ))
@@ -226,7 +227,7 @@ module _
       is-extensional-pseudometric-space-Σ-Metric-Space
 
   base-point-Σ-Metric-Space :
-    type-function-Metric-Space Σ-Metric-Space A
+    type-Metric-Space Σ-Metric-Space → type-Set A
   base-point-Σ-Metric-Space = pr1
 
   fiber-point-Σ-Metric-Space :
@@ -235,7 +236,7 @@ module _
   fiber-point-Σ-Metric-Space = pr2
 
   map-emb-fiber-Σ-Metric-Space :
-    (x : type-Metric-Space A) →
+    (x : type-Set A) →
     type-Metric-Space (P x) →
     type-Σ-Metric-Space
   map-emb-fiber-Σ-Metric-Space x px = (x , px)
@@ -243,24 +244,24 @@ module _
 
 ## Properties
 
-### The projection on the first component of a dependent sum of metric spaces is locally constant
+### The projection on the first component of a indexed of metric spaces is locally constant
 
 ```agda
 module _
-  {la la' lp lp' : Level}
-  (A : Metric-Space la la')
-  (P : type-Metric-Space A → Metric-Space lp lp')
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
   where
 
   is-locally-constant-base-point-Σ-Metric-Space :
     is-locally-constant-function-Metric-Space
       ( Σ-Metric-Space A P)
-      ( A)
+      ( metric-space-discrete-metric-space-Set A)
       ( base-point-Σ-Metric-Space A P)
   is-locally-constant-base-point-Σ-Metric-Space x y =
     elim-exists
       ( Id-Prop
-        ( set-Metric-Space A)
+        ( A)
         ( base-point-Σ-Metric-Space A P x)
         ( base-point-Σ-Metric-Space A P y))
       ( λ d Nxy → pr1 Nxy)
@@ -270,10 +271,10 @@ module _
 
 ```agda
 module _
-  {la la' lp lp' : Level}
-  (A : Metric-Space la la')
-  (P : type-Metric-Space A → Metric-Space lp lp')
-  (x : type-Metric-Space A)
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
+  (x : type-Set A)
   where
 
   is-short-emb-fiber-Σ-Metric-Space :
@@ -311,7 +312,7 @@ module _
           ( tr (type-Metric-Space ∘ P) e' px)
           ( px'))
       ( axiom-K-is-set
-        ( is-set-type-Set (set-Metric-Space A))
+        ( is-set-type-Set A)
         ( x)
         ( e))
       ( Nxx')

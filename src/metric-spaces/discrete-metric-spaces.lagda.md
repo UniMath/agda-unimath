@@ -164,12 +164,12 @@ module _
 
   discrete-pseudometric-Set : Pseudometric-Space l l
   discrete-pseudometric-Set =
-    ( type-Set A) ,
-    ( discrete-neighborhood-prop-Set) ,
-    ( is-reflexive-discrete-neighborhood-Set) ,
-    ( is-symmetric-discrete-neighborhood-Set) ,
-    ( is-triangluar-discrete-neighborhood-Set) ,
-    ( is-saturated-discrete-neighborhood-Set)
+    ( type-Set A ,
+      discrete-neighborhood-prop-Set ,
+      is-reflexive-discrete-neighborhood-Set ,
+      is-symmetric-discrete-neighborhood-Set ,
+      is-triangluar-discrete-neighborhood-Set ,
+      is-saturated-discrete-neighborhood-Set)
 
   is-tight-discrete-pseudometric-space-Set :
     is-tight-Pseudometric-Space discrete-pseudometric-Set
