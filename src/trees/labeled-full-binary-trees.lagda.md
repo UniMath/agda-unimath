@@ -170,8 +170,12 @@ module _
         refl-tr-Eq-labeling-full-binary-tree (join-full-binary-tree L R)
           f f refl ~
         refl-Eq-htpy-labeled-full-binary-tree (join-full-binary-tree L R) f
-      htpy (inl x) = htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree L (λ y → f (inl y))) x
-      htpy (inr x) = htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree R (λ y → f (inr y))) x
+      htpy (inl x) =
+        htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree L
+        ( λ y → f (inl y))) x
+      htpy (inr x) =
+        htpy-eq (compute-refl-Eq-refl-tr-Eq-labeled-full-binary-tree R
+        ( λ y → f (inr y))) x
 
   compute-tr-Eq-labeling-full-binary-tree' :
     (U : labeled-full-binary-tree X)
@@ -244,13 +248,22 @@ module _
   inv-refl-tr-Eq-labeling-full-binary-tree T f g p =
     eq-htpy (compute-tr-refl-Eq-labeling-full-binary-tree (T , f) ∙h p)
 
+  htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T)
+    (p : Eq-htpy-labeled-full-binary-tree (T , f) (T , g)
+      (refl-Eq-full-binary-tree T)) →
+    (refl-tr-Eq-labeling-full-binary-tree T f g ∘
+      inv-refl-tr-Eq-labeling-full-binary-tree T f g) p ~
+    p
+  htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p = {!   !}
+
   is-section-inv-refl-tr-Eq-labeling-full-binary-tree :
     (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
     is-section
       (refl-tr-Eq-labeling-full-binary-tree T f g)
       (inv-refl-tr-Eq-labeling-full-binary-tree T f g)
   is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p =
-    eq-htpy {!   !}
+    eq-htpy (htpy-is-section-inv-refl-tr-Eq-labeling-full-binary-tree T f g p)
 
   is-retraction-inv-refl-tr-Eq-labeling-full-binary-tree :
     (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
@@ -260,7 +273,7 @@ module _
       refl
   is-retraction-inv-refl-tr-Eq-labeling-full-binary-tree T f =
     equational-reasoning
-    ( inv-refl-tr-Eq-labeling-full-binary-tree T f f ∘
+      ( inv-refl-tr-Eq-labeling-full-binary-tree T f f ∘
       refl-tr-Eq-labeling-full-binary-tree T f f)
       refl
     ＝ inv-refl-tr-Eq-labeling-full-binary-tree T f f
