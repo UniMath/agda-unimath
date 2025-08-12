@@ -10,6 +10,7 @@ module metric-spaces.open-subsets-metric-spaces where
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -23,6 +24,7 @@ open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.interior-subsets-metric-spaces
 open import metric-spaces.located-metric-spaces
@@ -268,4 +270,51 @@ module _
   union-family-open-subset-Metric-Space =
     ( subset-union-family-open-subset-Metric-Space ,
       is-open-subset-union-family-open-subset-Metric-Space)
+```
+
+### The Cartesian product of two open subsets is open
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (Ox : open-subset-Metric-Space l5 X) (Oy : open-subset-Metric-Space l6 Y)
+  where
+
+  abstract
+    is-open-subset-product-open-subset-Metric-Space :
+      is-open-subset-Metric-Space
+        ( product-Metric-Space X Y)
+        ( product-subtype (pr1 Ox) (pr1 Oy))
+    is-open-subset-product-open-subset-Metric-Space (x , y) (x∈Ox , y∈Oy) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( interior-subset-Metric-Space
+              ( product-Metric-Space X Y)
+              ( product-subtype (pr1 Ox) (pr1 Oy))
+              ( x , y))
+      in do
+        (δ , Nδx⊆Ox) ← is-open-subset-open-subset-Metric-Space X Ox x x∈Ox
+        (ε , Nεy⊆Oy) ← is-open-subset-open-subset-Metric-Space Y Oy y y∈Oy
+        intro-exists
+          ( min-ℚ⁺ δ ε)
+          ( λ (x' , y') (Nminxx' , Nminyy') →
+            ( Nδx⊆Ox x'
+              ( weakly-monotonic-neighborhood-Metric-Space X x x'
+                ( min-ℚ⁺ δ ε)
+                ( δ)
+                ( leq-left-min-ℚ⁺ δ ε)
+                ( Nminxx')) ,
+              Nεy⊆Oy y'
+                ( weakly-monotonic-neighborhood-Metric-Space Y y y'
+                  ( min-ℚ⁺ δ ε)
+                  ( ε)
+                  ( leq-right-min-ℚ⁺ δ ε)
+                  ( Nminyy'))))
+
+  product-open-subset-Metric-Space :
+    open-subset-Metric-Space (l5 ⊔ l6) (product-Metric-Space X Y)
+  product-open-subset-Metric-Space =
+    product-subtype (pr1 Ox) (pr1 Oy) ,
+    is-open-subset-product-open-subset-Metric-Space
 ```

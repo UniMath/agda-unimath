@@ -46,6 +46,7 @@ property of **indistinguishability of identicals**
 module metric-spaces where
 
 open import metric-spaces.approximations-metric-spaces public
+open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
