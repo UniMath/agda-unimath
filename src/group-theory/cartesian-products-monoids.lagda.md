@@ -14,6 +14,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.cartesian-products-semigroups
+open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -75,4 +76,40 @@ module _
   pr1 (pr2 product-Monoid) = unit-product-Monoid
   pr1 (pr2 (pr2 product-Monoid)) = left-unit-law-mul-product-Monoid
   pr2 (pr2 (pr2 product-Monoid)) = right-unit-law-mul-product-Monoid
+```
+
+## Properties
+
+### The homomorphism from `M` to `M × N`
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  where
+
+  map-left-hom-product-Monoid : type-Monoid M → type-product-Monoid M N
+  map-left-hom-product-Monoid m = (m , unit-Monoid N)
+
+  left-hom-product-Monoid : hom-Monoid M (product-Monoid M N)
+  left-hom-product-Monoid =
+    ( map-left-hom-product-Monoid ,
+      eq-pair refl (inv (left-unit-law-mul-Monoid N _))) ,
+    refl
+```
+
+### The homomorphism from `N` to `M × N`
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  where
+
+  map-right-hom-product-Monoid : type-Monoid N → type-product-Monoid M N
+  map-right-hom-product-Monoid n = (unit-Monoid M , n)
+
+  right-hom-product-Monoid : hom-Monoid N (product-Monoid M N)
+  right-hom-product-Monoid =
+    ( map-right-hom-product-Monoid ,
+      eq-pair (inv (left-unit-law-mul-Monoid M _)) refl) ,
+    refl
 ```
