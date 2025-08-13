@@ -62,22 +62,14 @@ monoids, the extra term `k` is needed.
 
 ## Definition
 
-```agda
-module _
-  {l : Level} (M : Commutative-Monoid l)
-  (let _*M_ = mul-Commutative-Monoid M)
-  (let unit-M = unit-Commutative-Monoid M)
-  (let comm-* = commutative-mul-Commutative-Monoid M)
-  (let assoc-* = associative-mul-Commutative-Monoid M)
-  (let ap-* = ap-mul-Commutative-Monoid M)
-  (let interchange-*-* = interchange-mul-mul-Commutative-Monoid M)
-  (let left-swap-* = left-swap-mul-Commutative-Monoid M)
-  where
-```
-
 ### The Grothendieck equivalence relation
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  (let _*_ = mul-Commutative-Monoid M)
+  where
+
   grothendieck-relation-prop-Commutative-Monoid :
     Relation-Prop l (type-product-Commutative-Monoid M M)
   grothendieck-relation-prop-Commutative-Monoid (p1 , n1) (p2 , n2) =
@@ -95,7 +87,8 @@ module _
 
   refl-grothendieck-relation-Commutative-Monoid :
     is-reflexive-Relation-Prop grothendieck-relation-prop-Commutative-Monoid
-  refl-grothendieck-relation-Commutative-Monoid _ = intro-exists unit refl
+  refl-grothendieck-relation-Commutative-Monoid _ =
+    intro-exists (unit-Commutative-Monoid M) refl
 
   symmetric-grothendieck-relation-Commutative-Monoid :
     is-symmetric-Relation-Prop grothendieck-relation-prop-Commutative-Monoid
@@ -113,6 +106,10 @@ module _
               ( grothendieck-relation-prop-Commutative-Monoid
                 ( p1 , n1)
                 ( p3 , n3))
+          ap-* = ap-mul-Commutative-Monoid M
+          interchange-*-* = interchange-mul-mul-Commutative-Monoid M
+          assoc-* = associative-mul-Commutative-Monoid M
+          comm-* = commutative-mul-Commutative-Monoid M
         in do
           (k23 , p2n3k23=p3n2k23) ← ∃k23
           (k12 , p1n2k12=p2n1k12) ← ∃k12
@@ -125,7 +122,7 @@ module _
               ＝ (p1 * (n2 * k12)) * (n3 * (p2 * k23))
                 by interchange-*-* _ _ _ _
               ＝ (p1 * (n2 * k12)) * (p2 * (n3 * k23))
-                by ap-* refl (left-swap-* _ _ _)
+                by ap-* refl (left-swap-mul-Commutative-Monoid M _ _ _)
               ＝ ((p1 * n2) * k12) * ((p2 * n3) * k23)
                 by inv (ap-* (assoc-* _ _ _) (assoc-* _ _ _))
               ＝ ((p2 * n1) * k12) * ((p3 * n2) * k23)
@@ -160,24 +157,33 @@ module _
 ### The set quotient by the equivalence relation
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   set-grothendieck-ab-Commutative-Monoid : Set l
   set-grothendieck-ab-Commutative-Monoid =
-    quotient-Set grothendieck-equivalence-relation-Commutative-Monoid
+    quotient-Set (grothendieck-equivalence-relation-Commutative-Monoid M)
 
   type-grothendieck-ab-Commutative-Monoid : UU l
   type-grothendieck-ab-Commutative-Monoid =
-    set-quotient grothendieck-equivalence-relation-Commutative-Monoid
+    set-quotient (grothendieck-equivalence-relation-Commutative-Monoid M)
 ```
 
 ### Addition in the Grothendieck group
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  (let _*_ = mul-Commutative-Monoid M)
+  where
+
   abstract
     binary-hom-add-grothendieck-ab-Commutative-Monoid :
       binary-hom-equivalence-relation
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
     pr1 binary-hom-add-grothendieck-ab-Commutative-Monoid
       (p1 , n1) (p2 , n2) = (p1 * p2 , n1 * n2)
     pr2 binary-hom-add-grothendieck-ab-Commutative-Monoid
@@ -186,8 +192,11 @@ module _
           open
             do-syntax-trunc-Prop
               ( grothendieck-relation-prop-Commutative-Monoid
+                ( M)
                 ( p1 * p2 , n1 * n2)
                 ( p1' * p2' , n1' * n2'))
+          ap-* = ap-mul-Commutative-Monoid M
+          interchange-*-* = interchange-mul-mul-Commutative-Monoid M
         in do
           (k11' , p1n1'k11'=p1'n1k11') ← ∃k11'
           (k22' , p2n2'k22'=p2'n2k22') ← ∃k22'
@@ -207,20 +216,20 @@ module _
                 by ap-* (interchange-*-* _ _ _ _) refl)
 
   add-grothendieck-ab-Commutative-Monoid :
-    type-grothendieck-ab-Commutative-Monoid →
-    type-grothendieck-ab-Commutative-Monoid →
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M →
+    type-grothendieck-ab-Commutative-Monoid M →
+    type-grothendieck-ab-Commutative-Monoid M
   add-grothendieck-ab-Commutative-Monoid =
     binary-map-set-quotient
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
       ( binary-hom-add-grothendieck-ab-Commutative-Monoid)
 
   add-grothendieck-ab-Commutative-Monoid' :
-    type-grothendieck-ab-Commutative-Monoid →
-    type-grothendieck-ab-Commutative-Monoid →
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M →
+    type-grothendieck-ab-Commutative-Monoid M →
+    type-grothendieck-ab-Commutative-Monoid M
   add-grothendieck-ab-Commutative-Monoid' x y =
     add-grothendieck-ab-Commutative-Monoid y x
 ```
@@ -228,210 +237,250 @@ module _
 ### Mapping from the product monoid to the Grothendieck group
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   map-hom-grothendieck-ab-Commutative-Monoid' :
     type-product-Commutative-Monoid M M →
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M
   map-hom-grothendieck-ab-Commutative-Monoid' =
     quotient-map
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
 ```
 
 ### The identity
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   unit-grothendieck-ab-Commutative-Monoid :
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M
   unit-grothendieck-ab-Commutative-Monoid =
-    map-hom-grothendieck-ab-Commutative-Monoid'
+    map-hom-grothendieck-ab-Commutative-Monoid' M
       ( unit-product-Commutative-Monoid M M)
 ```
 
 ### The map from the product monoid to the Grothendieck group turns multiplication to addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   abstract
     compute-add-grothendieck-ab-Commutative-Monoid' :
       (x y : type-product-Commutative-Monoid M M) →
-      add-grothendieck-ab-Commutative-Monoid
-        ( map-hom-grothendieck-ab-Commutative-Monoid' x)
-        ( map-hom-grothendieck-ab-Commutative-Monoid' y) ＝
-      map-hom-grothendieck-ab-Commutative-Monoid'
+      add-grothendieck-ab-Commutative-Monoid M
+        ( map-hom-grothendieck-ab-Commutative-Monoid' M x)
+        ( map-hom-grothendieck-ab-Commutative-Monoid' M y) ＝
+      map-hom-grothendieck-ab-Commutative-Monoid' M
         ( mul-product-Commutative-Monoid M M x y)
     compute-add-grothendieck-ab-Commutative-Monoid' =
       compute-binary-map-set-quotient
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( binary-hom-add-grothendieck-ab-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( binary-hom-add-grothendieck-ab-Commutative-Monoid M)
 ```
 
 ### Commutativity of addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  abstract
     commutative-add-grothendieck-ab-Commutative-Monoid :
-      (x y : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid x y ＝
-      add-grothendieck-ab-Commutative-Monoid y x
+      (x y : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M x y ＝
+      add-grothendieck-ab-Commutative-Monoid M y x
     commutative-add-grothendieck-ab-Commutative-Monoid =
       double-induction-set-quotient'
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( λ x y →
           Id-Prop
-            ( set-grothendieck-ab-Commutative-Monoid)
-            ( add-grothendieck-ab-Commutative-Monoid x y)
-            ( add-grothendieck-ab-Commutative-Monoid y x))
+            ( set-grothendieck-ab-Commutative-Monoid M)
+            ( add-grothendieck-ab-Commutative-Monoid M x y)
+            ( add-grothendieck-ab-Commutative-Monoid M y x))
         ( λ x y →
-          compute-add-grothendieck-ab-Commutative-Monoid' x y ∙
+          compute-add-grothendieck-ab-Commutative-Monoid' M x y ∙
           ap
-            ( map-hom-grothendieck-ab-Commutative-Monoid')
+            ( map-hom-grothendieck-ab-Commutative-Monoid' M)
             ( commutative-mul-product-Commutative-Monoid M M x y) ∙
-          inv (compute-add-grothendieck-ab-Commutative-Monoid' y x))
+          inv (compute-add-grothendieck-ab-Commutative-Monoid' M y x))
 ```
 
 ### Unit laws for addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  abstract
     left-unit-law-add-grothendieck-ab-Commutative-Monoid :
-      (x : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid
-        unit-grothendieck-ab-Commutative-Monoid
+      (x : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M
+        ( unit-grothendieck-ab-Commutative-Monoid M)
         x ＝
       x
     left-unit-law-add-grothendieck-ab-Commutative-Monoid =
       induction-set-quotient
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( λ x →
           Id-Prop
-            ( set-grothendieck-ab-Commutative-Monoid)
-            ( add-grothendieck-ab-Commutative-Monoid
-              ( unit-grothendieck-ab-Commutative-Monoid)
+            ( set-grothendieck-ab-Commutative-Monoid M)
+            ( add-grothendieck-ab-Commutative-Monoid M
+              ( unit-grothendieck-ab-Commutative-Monoid M)
               ( x))
             ( x))
         ( λ x →
-          compute-add-grothendieck-ab-Commutative-Monoid'
+          compute-add-grothendieck-ab-Commutative-Monoid' M
             ( unit-product-Commutative-Monoid M M)
             ( x) ∙
           ap
-            ( map-hom-grothendieck-ab-Commutative-Monoid')
+            ( map-hom-grothendieck-ab-Commutative-Monoid' M)
             ( left-unit-law-mul-Commutative-Monoid
               ( product-Commutative-Monoid M M)
               ( x)))
 
     right-unit-law-add-grothendieck-ab-Commutative-Monoid :
-      (x : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid
+      (x : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M
         ( x)
-        ( unit-grothendieck-ab-Commutative-Monoid) ＝
+        ( unit-grothendieck-ab-Commutative-Monoid M) ＝
       x
     right-unit-law-add-grothendieck-ab-Commutative-Monoid _ =
-      commutative-add-grothendieck-ab-Commutative-Monoid _ _ ∙
+      commutative-add-grothendieck-ab-Commutative-Monoid M _ _ ∙
       left-unit-law-add-grothendieck-ab-Commutative-Monoid _
 ```
 
 ### Associativity of addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  abstract
     associative-add-grothendieck-ab-Commutative-Monoid :
-      (x y z : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid
-        ( add-grothendieck-ab-Commutative-Monoid x y)
+      (x y z : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M
+        ( add-grothendieck-ab-Commutative-Monoid M x y)
         ( z) ＝
-      add-grothendieck-ab-Commutative-Monoid
+      add-grothendieck-ab-Commutative-Monoid M
         ( x)
-        ( add-grothendieck-ab-Commutative-Monoid y z)
+        ( add-grothendieck-ab-Commutative-Monoid M y z)
     associative-add-grothendieck-ab-Commutative-Monoid =
       triple-induction-set-quotient'
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( λ x y z →
           Id-Prop
-            ( set-grothendieck-ab-Commutative-Monoid)
-            ( add-grothendieck-ab-Commutative-Monoid
-              ( add-grothendieck-ab-Commutative-Monoid x y)
+            ( set-grothendieck-ab-Commutative-Monoid M)
+            ( add-grothendieck-ab-Commutative-Monoid M
+              ( add-grothendieck-ab-Commutative-Monoid M x y)
               ( z))
-            ( add-grothendieck-ab-Commutative-Monoid
+            ( add-grothendieck-ab-Commutative-Monoid M
               ( x)
-              ( add-grothendieck-ab-Commutative-Monoid y z)))
+              ( add-grothendieck-ab-Commutative-Monoid M y z)))
         ( λ x y z →
           ap
-            ( add-grothendieck-ab-Commutative-Monoid'
-              ( map-hom-grothendieck-ab-Commutative-Monoid' z))
-            ( compute-add-grothendieck-ab-Commutative-Monoid' x y) ∙
-          compute-add-grothendieck-ab-Commutative-Monoid'
+            ( add-grothendieck-ab-Commutative-Monoid' M
+              ( map-hom-grothendieck-ab-Commutative-Monoid' M z))
+            ( compute-add-grothendieck-ab-Commutative-Monoid' M x y) ∙
+          compute-add-grothendieck-ab-Commutative-Monoid' M
             ( mul-product-Commutative-Monoid M M x y)
             ( z) ∙
           ap
-            ( map-hom-grothendieck-ab-Commutative-Monoid')
+            ( map-hom-grothendieck-ab-Commutative-Monoid' M)
             ( associative-mul-product-Commutative-Monoid M M x y z) ∙
           inv
-            ( compute-add-grothendieck-ab-Commutative-Monoid'
+            ( compute-add-grothendieck-ab-Commutative-Monoid' M
               ( x)
               ( mul-product-Commutative-Monoid M M y z)) ∙
           ap
-            ( add-grothendieck-ab-Commutative-Monoid
-              ( map-hom-grothendieck-ab-Commutative-Monoid' x))
-            ( inv (compute-add-grothendieck-ab-Commutative-Monoid' y z)))
+            ( add-grothendieck-ab-Commutative-Monoid M
+              ( map-hom-grothendieck-ab-Commutative-Monoid' M x))
+            ( inv (compute-add-grothendieck-ab-Commutative-Monoid' M y z)))
 ```
 
 ### The commutative monoid of Grothendieck addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   semigroup-grothendieck-ab-Commutative-Monoid : Semigroup l
   semigroup-grothendieck-ab-Commutative-Monoid =
-    ( set-grothendieck-ab-Commutative-Monoid ,
-      add-grothendieck-ab-Commutative-Monoid ,
-      associative-add-grothendieck-ab-Commutative-Monoid)
+    ( set-grothendieck-ab-Commutative-Monoid M ,
+      add-grothendieck-ab-Commutative-Monoid M ,
+      associative-add-grothendieck-ab-Commutative-Monoid M)
 
   monoid-grothendieck-ab-Commutative-Monoid : Monoid l
   monoid-grothendieck-ab-Commutative-Monoid =
     ( semigroup-grothendieck-ab-Commutative-Monoid ,
-      unit-grothendieck-ab-Commutative-Monoid ,
-      left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
-      right-unit-law-add-grothendieck-ab-Commutative-Monoid)
+      unit-grothendieck-ab-Commutative-Monoid M ,
+      left-unit-law-add-grothendieck-ab-Commutative-Monoid M ,
+      right-unit-law-add-grothendieck-ab-Commutative-Monoid M)
 
   commutative-monoid-grothendieck-ab-Commutative-Monoid :
     Commutative-Monoid l
   commutative-monoid-grothendieck-ab-Commutative-Monoid =
     ( monoid-grothendieck-ab-Commutative-Monoid ,
-      commutative-add-grothendieck-ab-Commutative-Monoid)
+      commutative-add-grothendieck-ab-Commutative-Monoid M)
 ```
 
 ### The monoid homomorphism from the original monoid to the commutative monoid of Grothendieck addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   hom-grothendieck-ab-Commutative-Monoid' :
     hom-Commutative-Monoid
       ( product-Commutative-Monoid M M)
-      ( commutative-monoid-grothendieck-ab-Commutative-Monoid)
+      ( commutative-monoid-grothendieck-ab-Commutative-Monoid M)
   hom-grothendieck-ab-Commutative-Monoid' =
-    ( map-hom-grothendieck-ab-Commutative-Monoid' ,
-      inv (compute-add-grothendieck-ab-Commutative-Monoid' _ _)) ,
+    ( map-hom-grothendieck-ab-Commutative-Monoid' M ,
+      inv (compute-add-grothendieck-ab-Commutative-Monoid' M _ _)) ,
     refl
 
   hom-grothendieck-ab-Commutative-Monoid :
     hom-Commutative-Monoid
       ( M)
-      ( commutative-monoid-grothendieck-ab-Commutative-Monoid)
+      ( commutative-monoid-grothendieck-ab-Commutative-Monoid M)
   hom-grothendieck-ab-Commutative-Monoid =
     comp-hom-Commutative-Monoid
       ( M)
       ( product-Commutative-Monoid M M)
-      ( commutative-monoid-grothendieck-ab-Commutative-Monoid)
+      ( commutative-monoid-grothendieck-ab-Commutative-Monoid M)
       ( hom-grothendieck-ab-Commutative-Monoid')
       ( left-hom-product-Commutative-Monoid M M)
 
   map-hom-grothendieck-ab-Commutative-Monoid :
     type-Commutative-Monoid M →
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M
   map-hom-grothendieck-ab-Commutative-Monoid =
     map-hom-Commutative-Monoid
       ( M)
-      ( commutative-monoid-grothendieck-ab-Commutative-Monoid)
+      ( commutative-monoid-grothendieck-ab-Commutative-Monoid M)
       ( hom-grothendieck-ab-Commutative-Monoid)
 ```
 
 ### The negation operation
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  (let _*_ = mul-Commutative-Monoid M)
+  where
+
   inv-product-grothendieck-ab-Commutative-Monoid :
     type-product-Commutative-Monoid M M →
     type-product-Commutative-Monoid M M
@@ -439,8 +488,8 @@ module _
 
   hom-inv-grothendieck-ab-Commutative-Monoid' :
     hom-equivalence-relation
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
   pr1 hom-inv-grothendieck-ab-Commutative-Monoid' =
     inv-product-grothendieck-ab-Commutative-Monoid
   pr2 hom-inv-grothendieck-ab-Commutative-Monoid'
@@ -448,9 +497,11 @@ module _
       let
         open
           do-syntax-trunc-Prop
-            ( grothendieck-relation-prop-Commutative-Monoid
+            ( grothendieck-relation-prop-Commutative-Monoid M
               ( n , p)
               ( n' , p'))
+        ap-* = ap-mul-Commutative-Monoid M
+        comm-* = commutative-mul-Commutative-Monoid M
       in do
         (k , pn'k=p'nk) ← ∃k
         intro-exists
@@ -462,113 +513,127 @@ module _
             ＝ (n' * p) * k by ap-* (comm-* _ _) refl)
 
   inv-grothendieck-ab-Commutative-Monoid :
-    type-grothendieck-ab-Commutative-Monoid →
-    type-grothendieck-ab-Commutative-Monoid
+    type-grothendieck-ab-Commutative-Monoid M →
+    type-grothendieck-ab-Commutative-Monoid M
   inv-grothendieck-ab-Commutative-Monoid =
     map-set-quotient
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
-      ( grothendieck-equivalence-relation-Commutative-Monoid)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
       ( hom-inv-grothendieck-ab-Commutative-Monoid')
 
   abstract
     compute-inv-grothendieck-ab-Commutative-Monoid' :
       (x : type-product-Commutative-Monoid M M) →
       inv-grothendieck-ab-Commutative-Monoid
-        ( map-hom-grothendieck-ab-Commutative-Monoid' x) ＝
-      map-hom-grothendieck-ab-Commutative-Monoid'
+        ( map-hom-grothendieck-ab-Commutative-Monoid' M x) ＝
+      map-hom-grothendieck-ab-Commutative-Monoid' M
         ( inv-product-grothendieck-ab-Commutative-Monoid x)
     compute-inv-grothendieck-ab-Commutative-Monoid' =
       coherence-square-map-set-quotient
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( hom-inv-grothendieck-ab-Commutative-Monoid')
 ```
 
 ### Inverse laws of addition
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  (let _*_ = mul-Commutative-Monoid M)
+  where
+
+  abstract
     left-inverse-law-product-grothendieck-ab-Commutative-Monoid :
       ( x : type-product-Commutative-Monoid M M) →
-      grothendieck-relation-Commutative-Monoid
+      grothendieck-relation-Commutative-Monoid M
         ( mul-product-Commutative-Monoid M M
-          ( inv-product-grothendieck-ab-Commutative-Monoid x)
+          ( inv-product-grothendieck-ab-Commutative-Monoid M x)
           ( x))
         ( unit-product-Commutative-Monoid M M)
     left-inverse-law-product-grothendieck-ab-Commutative-Monoid (p , n) =
-      intro-exists
-        ( unit)
-        ( ap (_* unit) (comm-* _ _ ∙ ap (unit *_) (comm-* _ _)))
+      let
+        comm-* = commutative-mul-Commutative-Monoid M
+        u = unit-Commutative-Monoid M
+      in
+        intro-exists
+          ( u)
+          ( ap (_* u) (comm-* _ _ ∙ ap (u *_) (comm-* _ _)))
 
     left-inverse-law-add-grothendieck-ab-Commutative-Monoid :
-      (x : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid
-        ( inv-grothendieck-ab-Commutative-Monoid x)
+      (x : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M
+        ( inv-grothendieck-ab-Commutative-Monoid M x)
         ( x) ＝
-      unit-grothendieck-ab-Commutative-Monoid
+      unit-grothendieck-ab-Commutative-Monoid M
     left-inverse-law-add-grothendieck-ab-Commutative-Monoid =
       induction-set-quotient
-        ( grothendieck-equivalence-relation-Commutative-Monoid)
+        ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( λ x →
           Id-Prop
-            ( set-grothendieck-ab-Commutative-Monoid)
-            ( add-grothendieck-ab-Commutative-Monoid
-              ( inv-grothendieck-ab-Commutative-Monoid x)
+            ( set-grothendieck-ab-Commutative-Monoid M)
+            ( add-grothendieck-ab-Commutative-Monoid M
+              ( inv-grothendieck-ab-Commutative-Monoid M x)
               ( x))
-            ( unit-grothendieck-ab-Commutative-Monoid))
+            ( unit-grothendieck-ab-Commutative-Monoid M))
         ( λ x →
           ap
-            ( add-grothendieck-ab-Commutative-Monoid'
-              ( map-hom-grothendieck-ab-Commutative-Monoid' x))
-            ( compute-inv-grothendieck-ab-Commutative-Monoid' x) ∙
-          compute-add-grothendieck-ab-Commutative-Monoid' _ _ ∙
+            ( add-grothendieck-ab-Commutative-Monoid' M
+              ( map-hom-grothendieck-ab-Commutative-Monoid' M x))
+            ( compute-inv-grothendieck-ab-Commutative-Monoid' M x) ∙
+          compute-add-grothendieck-ab-Commutative-Monoid' M _ _ ∙
           apply-effectiveness-quotient-map'
-            ( grothendieck-equivalence-relation-Commutative-Monoid)
+            ( grothendieck-equivalence-relation-Commutative-Monoid M)
             ( left-inverse-law-product-grothendieck-ab-Commutative-Monoid
               ( x)))
 
     right-inverse-law-add-grothendieck-ab-Commutative-Monoid :
-      (x : type-grothendieck-ab-Commutative-Monoid) →
-      add-grothendieck-ab-Commutative-Monoid
+      (x : type-grothendieck-ab-Commutative-Monoid M) →
+      add-grothendieck-ab-Commutative-Monoid M
         ( x)
-        ( inv-grothendieck-ab-Commutative-Monoid x) ＝
-      unit-grothendieck-ab-Commutative-Monoid
+        ( inv-grothendieck-ab-Commutative-Monoid M x) ＝
+      unit-grothendieck-ab-Commutative-Monoid M
     right-inverse-law-add-grothendieck-ab-Commutative-Monoid x =
-      commutative-add-grothendieck-ab-Commutative-Monoid _ _ ∙
+      commutative-add-grothendieck-ab-Commutative-Monoid M _ _ ∙
       left-inverse-law-add-grothendieck-ab-Commutative-Monoid x
 ```
 
 ### The Grothendieck group
 
 ```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
   group-grothendieck-ab-Commutative-Monoid : Group l
   group-grothendieck-ab-Commutative-Monoid =
-    ( semigroup-grothendieck-ab-Commutative-Monoid ,
-      ( unit-grothendieck-ab-Commutative-Monoid ,
-        left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
-        right-unit-law-add-grothendieck-ab-Commutative-Monoid) ,
-      inv-grothendieck-ab-Commutative-Monoid ,
-      left-inverse-law-add-grothendieck-ab-Commutative-Monoid ,
-      right-inverse-law-add-grothendieck-ab-Commutative-Monoid)
+    ( semigroup-grothendieck-ab-Commutative-Monoid M ,
+      ( unit-grothendieck-ab-Commutative-Monoid M ,
+        left-unit-law-add-grothendieck-ab-Commutative-Monoid M ,
+        right-unit-law-add-grothendieck-ab-Commutative-Monoid M) ,
+      inv-grothendieck-ab-Commutative-Monoid M ,
+      left-inverse-law-add-grothendieck-ab-Commutative-Monoid M ,
+      right-inverse-law-add-grothendieck-ab-Commutative-Monoid M)
 
   grothendieck-ab-Commutative-Monoid : Ab l
   grothendieck-ab-Commutative-Monoid =
     ( group-grothendieck-ab-Commutative-Monoid ,
-      commutative-add-grothendieck-ab-Commutative-Monoid)
+      commutative-add-grothendieck-ab-Commutative-Monoid M)
 
   abstract
     compute-add-grothendieck-ab-Commutative-Monoid :
       (x y : type-Commutative-Monoid M) →
-      add-grothendieck-ab-Commutative-Monoid
-        ( map-hom-grothendieck-ab-Commutative-Monoid x)
-        ( map-hom-grothendieck-ab-Commutative-Monoid y) ＝
-      map-hom-grothendieck-ab-Commutative-Monoid
+      add-grothendieck-ab-Commutative-Monoid M
+        ( map-hom-grothendieck-ab-Commutative-Monoid M x)
+        ( map-hom-grothendieck-ab-Commutative-Monoid M y) ＝
+      map-hom-grothendieck-ab-Commutative-Monoid M
         ( mul-Commutative-Monoid M x y)
     compute-add-grothendieck-ab-Commutative-Monoid x y =
       inv
         ( preserves-mul-hom-Commutative-Monoid
           ( M)
-          ( commutative-monoid-grothendieck-ab-Commutative-Monoid)
-          ( hom-grothendieck-ab-Commutative-Monoid))
+          ( commutative-monoid-grothendieck-ab-Commutative-Monoid M)
+          ( hom-grothendieck-ab-Commutative-Monoid M))
 ```
 
 ## Properties
