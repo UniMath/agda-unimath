@@ -112,7 +112,7 @@ module _
 
   right-hom-product-Monoid : hom-Monoid N (product-Monoid M N)
   right-hom-product-Monoid =
-    ( map-right-hom-product-Monoid ,
-      eq-pair (inv (left-unit-law-mul-Monoid M _)) refl) ,
-    refl
+    ( ( map-right-hom-product-Monoid ,
+        eq-pair (inv (left-unit-law-mul-Monoid M _)) refl) ,
+      refl)
 ```

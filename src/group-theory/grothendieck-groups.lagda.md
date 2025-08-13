@@ -38,7 +38,7 @@ open import logic.functoriality-existential-quantification
 ## Idea
 
 The
-{{#concept "Grothendieck group" WD="Grothendieck group" WDID=Q1128678 Agda=grothendieck-ab-Commutative-Monoid}}
+{{#concept "Grothendieck group" Disambiguation="associated to a commutative monoid" WD="Grothendieck group" WDID=Q1128678 Agda=grothendieck-ab-Commutative-Monoid}}, or **group of differences**,
 of a [commutative monoid](group-theory.commutative-monoids.md) `M` is a certain
 [abelian group](group-theory.abelian-groups.md) `K` such that for any
 [commutative monoid homomorphism](group-theory.homomorphisms-commutative-monoids.md)
@@ -53,7 +53,7 @@ The Grothendieck group can be constructed as a
 with itself by the [equivalence relation](foundation.equivalence-relations.md)
 
 ```text
-(p₁ , n₁) ~ (p₂ , n₂) := ∃ (k : M) (p₁ * n₂ * k ＝ p₂ * n₁ * k)
+  (p₁ , n₁) ~ (p₂ , n₂) := ∃ (k : M) (p₁ * n₂ * k ＝ p₂ * n₁ * k)
 ```
 
 Intuitively, `p` represents the "positive component" and `n` the "negative
@@ -65,8 +65,8 @@ monoids, the extra term `k` is needed.
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
-  (let _*_ = mul-Commutative-Monoid M)
-  (let unit = unit-Commutative-Monoid M)
+  (let _*M_ = mul-Commutative-Monoid M)
+  (let unit-M = unit-Commutative-Monoid M)
   (let comm-* = commutative-mul-Commutative-Monoid M)
   (let assoc-* = associative-mul-Commutative-Monoid M)
   (let ap-* = ap-mul-Commutative-Monoid M)
@@ -320,8 +320,8 @@ module _
     right-unit-law-add-grothendieck-ab-Commutative-Monoid :
       (x : type-grothendieck-ab-Commutative-Monoid) →
       add-grothendieck-ab-Commutative-Monoid
-        x
-        unit-grothendieck-ab-Commutative-Monoid ＝
+        ( x)
+        ( unit-grothendieck-ab-Commutative-Monoid) ＝
       x
     right-unit-law-add-grothendieck-ab-Commutative-Monoid _ =
       commutative-add-grothendieck-ab-Commutative-Monoid _ _ ∙
@@ -377,22 +377,22 @@ module _
 ```agda
   semigroup-grothendieck-ab-Commutative-Monoid : Semigroup l
   semigroup-grothendieck-ab-Commutative-Monoid =
-    set-grothendieck-ab-Commutative-Monoid ,
-    add-grothendieck-ab-Commutative-Monoid ,
-    associative-add-grothendieck-ab-Commutative-Monoid
+    ( set-grothendieck-ab-Commutative-Monoid ,
+      add-grothendieck-ab-Commutative-Monoid ,
+      associative-add-grothendieck-ab-Commutative-Monoid)
 
   monoid-grothendieck-ab-Commutative-Monoid : Monoid l
   monoid-grothendieck-ab-Commutative-Monoid =
-    semigroup-grothendieck-ab-Commutative-Monoid ,
-    unit-grothendieck-ab-Commutative-Monoid ,
-    left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
-    right-unit-law-add-grothendieck-ab-Commutative-Monoid
+    ( semigroup-grothendieck-ab-Commutative-Monoid ,
+      unit-grothendieck-ab-Commutative-Monoid ,
+      left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
+      right-unit-law-add-grothendieck-ab-Commutative-Monoid)
 
   commutative-monoid-grothendieck-ab-Commutative-Monoid :
     Commutative-Monoid l
   commutative-monoid-grothendieck-ab-Commutative-Monoid =
-    monoid-grothendieck-ab-Commutative-Monoid ,
-    commutative-add-grothendieck-ab-Commutative-Monoid
+    ( monoid-grothendieck-ab-Commutative-Monoid ,
+      commutative-add-grothendieck-ab-Commutative-Monoid)
 ```
 
 ### The monoid homomorphism from the original monoid to the commutative monoid of Grothendieck addition
@@ -542,18 +542,18 @@ module _
 ```agda
   group-grothendieck-ab-Commutative-Monoid : Group l
   group-grothendieck-ab-Commutative-Monoid =
-    semigroup-grothendieck-ab-Commutative-Monoid ,
-    ( unit-grothendieck-ab-Commutative-Monoid ,
-      left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
-      right-unit-law-add-grothendieck-ab-Commutative-Monoid) ,
-    inv-grothendieck-ab-Commutative-Monoid ,
-    left-inverse-law-add-grothendieck-ab-Commutative-Monoid ,
-    right-inverse-law-add-grothendieck-ab-Commutative-Monoid
+    ( semigroup-grothendieck-ab-Commutative-Monoid ,
+      ( unit-grothendieck-ab-Commutative-Monoid ,
+        left-unit-law-add-grothendieck-ab-Commutative-Monoid ,
+        right-unit-law-add-grothendieck-ab-Commutative-Monoid) ,
+      inv-grothendieck-ab-Commutative-Monoid ,
+      left-inverse-law-add-grothendieck-ab-Commutative-Monoid ,
+      right-inverse-law-add-grothendieck-ab-Commutative-Monoid)
 
   grothendieck-ab-Commutative-Monoid : Ab l
   grothendieck-ab-Commutative-Monoid =
-    group-grothendieck-ab-Commutative-Monoid ,
-    commutative-add-grothendieck-ab-Commutative-Monoid
+    ( group-grothendieck-ab-Commutative-Monoid ,
+      commutative-add-grothendieck-ab-Commutative-Monoid)
 
   abstract
     compute-add-grothendieck-ab-Commutative-Monoid :
@@ -586,9 +586,9 @@ module _
     type-product-Commutative-Monoid M M → type-Ab G
   map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
     (p , n) =
-      add-Ab G
-        ( map-hom-Commutative-Monoid M MG f p)
-        ( neg-Ab G (map-hom-Commutative-Monoid M MG f n))
+    add-Ab G
+      ( map-hom-Commutative-Monoid M MG f p)
+      ( neg-Ab G (map-hom-Commutative-Monoid M MG f n))
 
   hom-map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid :
     hom-equivalence-relation
@@ -810,3 +810,9 @@ module _
 ```
 
 We have yet to prove that this is a group homomorphism or that it is unique.
+
+## External links
+
+- [Grothendieck group](https://en.wikipedia.org/wiki/Grothendieck_group) on Wikipedia
+- [Grothendieck group](https://ncatlab.org/nlab/show/Grothendieck+group) on $n$Lab
+- [Grothendieck group](https://encyclopediaofmath.org/wiki/Grothendieck_group) on Encyclopedia of Mathematics
