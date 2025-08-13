@@ -141,12 +141,12 @@ module _
   add-mul-nat-Semiring n =
     add-Semiring R a (mul-nat-scalar-Semiring R n d)
 
-  common-difference-add-mul-nat-Semiring :
+  is-common-difference-add-mul-nat-Semiring :
     is-common-difference-sequence-Semigroup
       ( additive-semigroup-Semiring R)
       ( add-mul-nat-Semiring)
       ( d)
-  common-difference-add-mul-nat-Semiring n =
+  is-common-difference-add-mul-nat-Semiring n =
     inv
       ( associative-add-Semiring
         ( R)
@@ -159,7 +159,7 @@ module _
       ( additive-semigroup-Semiring R)
       ( add-mul-nat-Semiring)
   is-arithmetic-add-mul-nat-Semiring =
-    ( d , common-difference-add-mul-nat-Semiring)
+    ( d , is-common-difference-add-mul-nat-Semiring)
 
   arithmetic-add-mul-nat-Semiring : arithmetic-sequence-Semiring R
   arithmetic-add-mul-nat-Semiring =
@@ -225,13 +225,13 @@ module _
   {l : Level} (R : Semiring l) (u : arithmetic-sequence-Semiring R)
   where
 
-  hpty-add-mul-arithmetic-sequence-Semiring :
+  htpy-add-mul-arithmetic-sequence-Semiring :
     add-mul-nat-Semiring
       ( R)
       ( initial-term-arithmetic-sequence-Semiring R u)
       ( common-difference-arithmetic-sequence-Semiring R u) ~
     seq-arithmetic-sequence-Semiring R u
-  hpty-add-mul-arithmetic-sequence-Semiring n =
+  htpy-add-mul-arithmetic-sequence-Semiring n =
     ( htpy-add-mul-standard-arithmetic-sequence-Semiring
       ( R)
       ( initial-term-arithmetic-sequence-Semiring R u)
@@ -250,18 +250,18 @@ module _
   {l : Level} (R : Semiring l) (a : type-Semiring R)
   where
 
-  zero-common-difference-const-sequence-Semiring :
+  zero-is-common-difference-const-sequence-Semiring :
     is-common-difference-sequence-Semigroup
       ( additive-semigroup-Semiring R)
       ( λ _ → a)
       ( zero-Semiring R)
-  zero-common-difference-const-sequence-Semiring n =
+  zero-is-common-difference-const-sequence-Semiring n =
     inv (right-unit-law-add-Semiring R a)
 
   arithmetic-const-sequence-Semiring : arithmetic-sequence-Semiring R
   pr1 arithmetic-const-sequence-Semiring _ = a
   pr2 arithmetic-const-sequence-Semiring =
-    ( zero-Semiring R , zero-common-difference-const-sequence-Semiring)
+    ( zero-Semiring R , zero-is-common-difference-const-sequence-Semiring)
 ```
 
 ## External links
