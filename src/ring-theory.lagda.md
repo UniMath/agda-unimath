@@ -7,6 +7,7 @@ module ring-theory where
 
 open import ring-theory.additive-orders-of-elements-rings public
 open import ring-theory.algebras-rings public
+open import ring-theory.arithmetic-sequences-rings public
 open import ring-theory.arithmetic-sequences-semirings public
 open import ring-theory.arithmetic-series-semirings public
 open import ring-theory.binomial-theorem-rings public
