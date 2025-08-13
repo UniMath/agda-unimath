@@ -26,7 +26,7 @@ open import group-theory.semigroups
 The
 {{#concept "cartesian product" disambiguation="of groups" Agda=product-Group WDID=Q173740 WD="Cartesian product"}}
 of two [groups](group-theory.groups.md) `G` and `H` consists of the
-[product](foundation.cartesian-products.md) `G × H` of the underlying
+[product](foundation.cartesian-product-types.md) `G × H` of the underlying
 [sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
