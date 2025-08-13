@@ -26,8 +26,8 @@ open import group-theory.monoids
 The
 {{#concept "cartesian product" disambiguation="of commutative monoids" Agda=product-Commutative-Monoid WDID=Q173740 WD="Cartesian product"}}
 of two [commutative monoids](group-theory.commutative-monoids.md) `M` and `N`
-consists of the product `M × N` of the underlying sets and the componentwise
-operation on it.
+consists of the [product](foundation.cartesian-products.md) `M × N` of the
+underlying [sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
 

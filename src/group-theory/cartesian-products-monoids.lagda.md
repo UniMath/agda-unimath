@@ -23,8 +23,11 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two monoids `M` and `N` consists of the product `M × N`
-of the underlying sets and the componentwise operation on it.
+The
+{{#concept "cartesian product" disambiguation="of monoids" Agda=product-Monoid WDID=Q173740 WD="Cartesian product"}}
+of two [monoids](group-theory.monoids.md) `M` and `N` consists of the
+[product](foundation.cartesian-products.md) `M × N` of the underlying
+[sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
 
