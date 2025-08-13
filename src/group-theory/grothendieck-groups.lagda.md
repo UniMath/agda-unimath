@@ -432,17 +432,17 @@ module _
 ### The negation operation
 
 ```agda
-  inv-untruncated-grothendieck-ab-Commutative-Monoid :
+  inv-product-grothendieck-ab-Commutative-Monoid :
     type-product-Commutative-Monoid M M →
     type-product-Commutative-Monoid M M
-  inv-untruncated-grothendieck-ab-Commutative-Monoid (p , n) = (n , p)
+  inv-product-grothendieck-ab-Commutative-Monoid (p , n) = (n , p)
 
   hom-inv-grothendieck-ab-Commutative-Monoid' :
     hom-equivalence-relation
       ( grothendieck-equivalence-relation-Commutative-Monoid)
       ( grothendieck-equivalence-relation-Commutative-Monoid)
   pr1 hom-inv-grothendieck-ab-Commutative-Monoid' =
-    inv-untruncated-grothendieck-ab-Commutative-Monoid
+    inv-product-grothendieck-ab-Commutative-Monoid
   pr2 hom-inv-grothendieck-ab-Commutative-Monoid'
     {p , n} {p' , n'} ∃k =
       let
@@ -476,7 +476,7 @@ module _
       inv-grothendieck-ab-Commutative-Monoid
         ( map-hom-grothendieck-ab-Commutative-Monoid' x) ＝
       map-hom-grothendieck-ab-Commutative-Monoid'
-        ( inv-untruncated-grothendieck-ab-Commutative-Monoid x)
+        ( inv-product-grothendieck-ab-Commutative-Monoid x)
     compute-inv-grothendieck-ab-Commutative-Monoid' =
       coherence-square-map-set-quotient
         ( grothendieck-equivalence-relation-Commutative-Monoid)
@@ -487,27 +487,17 @@ module _
 ### Inverse laws of addition
 
 ```agda
-    left-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid :
+    left-inverse-law-product-grothendieck-ab-Commutative-Monoid :
       ( x : type-product-Commutative-Monoid M M) →
       grothendieck-relation-Commutative-Monoid
         ( mul-product-Commutative-Monoid M M
-          ( inv-untruncated-grothendieck-ab-Commutative-Monoid x)
+          ( inv-product-grothendieck-ab-Commutative-Monoid x)
           ( x))
         ( unit-product-Commutative-Monoid M M)
-    left-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid (p , n) =
+    left-inverse-law-product-grothendieck-ab-Commutative-Monoid (p , n) =
       intro-exists
         ( unit)
         ( ap (_* unit) (comm-* _ _ ∙ ap (unit *_) (comm-* _ _)))
-
-    right-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid :
-      ( x : type-product-Commutative-Monoid M M) →
-      grothendieck-relation-Commutative-Monoid
-        ( mul-product-Commutative-Monoid M M
-          ( inv-untruncated-grothendieck-ab-Commutative-Monoid x)
-          ( x))
-        ( unit-product-Commutative-Monoid M M)
-    right-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid =
-      left-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid
 
     left-inverse-law-add-grothendieck-ab-Commutative-Monoid :
       (x : type-grothendieck-ab-Commutative-Monoid) →
@@ -526,33 +516,15 @@ module _
               ( x))
             ( unit-grothendieck-ab-Commutative-Monoid))
         ( λ x →
-          equational-reasoning
-            add-grothendieck-ab-Commutative-Monoid
-              ( inv-grothendieck-ab-Commutative-Monoid
-                ( map-hom-grothendieck-ab-Commutative-Monoid' x))
-              ( map-hom-grothendieck-ab-Commutative-Monoid' x)
-            ＝
-              add-grothendieck-ab-Commutative-Monoid
-                ( map-hom-grothendieck-ab-Commutative-Monoid'
-                  ( inv-untruncated-grothendieck-ab-Commutative-Monoid x))
-                ( map-hom-grothendieck-ab-Commutative-Monoid' x)
-              by
-                ap
-                  ( add-grothendieck-ab-Commutative-Monoid'
-                    ( map-hom-grothendieck-ab-Commutative-Monoid' x))
-                  ( compute-inv-grothendieck-ab-Commutative-Monoid' x)
-            ＝
-              map-hom-grothendieck-ab-Commutative-Monoid'
-                ( mul-product-Commutative-Monoid M M
-                  ( inv-untruncated-grothendieck-ab-Commutative-Monoid x)
-                  ( x))
-              by compute-add-grothendieck-ab-Commutative-Monoid' _ _
-            ＝ unit-grothendieck-ab-Commutative-Monoid
-              by
-                apply-effectiveness-quotient-map'
-                  ( grothendieck-equivalence-relation-Commutative-Monoid)
-                  ( left-inverse-law-untruncated-grothendieck-ab-Commutative-Monoid
-                    ( x)))
+          ap
+            ( add-grothendieck-ab-Commutative-Monoid'
+              ( map-hom-grothendieck-ab-Commutative-Monoid' x))
+            ( compute-inv-grothendieck-ab-Commutative-Monoid' x) ∙
+          compute-add-grothendieck-ab-Commutative-Monoid' _ _ ∙
+          apply-effectiveness-quotient-map'
+            ( grothendieck-equivalence-relation-Commutative-Monoid)
+            ( left-inverse-law-product-grothendieck-ab-Commutative-Monoid
+              ( x)))
 
     right-inverse-law-add-grothendieck-ab-Commutative-Monoid :
       (x : type-grothendieck-ab-Commutative-Monoid) →
