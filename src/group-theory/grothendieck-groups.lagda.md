@@ -38,8 +38,9 @@ open import logic.functoriality-existential-quantification
 ## Idea
 
 The
-{{#concept "Grothendieck group" Disambiguation="associated to a commutative monoid" WD="Grothendieck group" WDID=Q1128678 Agda=grothendieck-ab-Commutative-Monoid}}, or **group of differences**,
-of a [commutative monoid](group-theory.commutative-monoids.md) `M` is a certain
+{{#concept "Grothendieck group" Disambiguation="associated to a commutative monoid" WD="Grothendieck group" WDID=Q1128678 Agda=grothendieck-ab-Commutative-Monoid}},
+or **group of differences**, of a
+[commutative monoid](group-theory.commutative-monoids.md) `M` is a certain
 [abelian group](group-theory.abelian-groups.md) `K` such that for any
 [commutative monoid homomorphism](group-theory.homomorphisms-commutative-monoids.md)
 `f` from `M` to an abelian group `G`,
@@ -878,6 +879,9 @@ We have yet to prove that this is a group homomorphism or that it is unique.
 
 ## External links
 
-- [Grothendieck group](https://en.wikipedia.org/wiki/Grothendieck_group) on Wikipedia
-- [Grothendieck group](https://ncatlab.org/nlab/show/Grothendieck+group) on $n$Lab
-- [Grothendieck group](https://encyclopediaofmath.org/wiki/Grothendieck_group) on Encyclopedia of Mathematics
+- [Grothendieck group](https://en.wikipedia.org/wiki/Grothendieck_group) on
+  Wikipedia
+- [Grothendieck group](https://ncatlab.org/nlab/show/Grothendieck+group) on
+  $n$Lab
+- [Grothendieck group](https://encyclopediaofmath.org/wiki/Grothendieck_group)
+  on Encyclopedia of Mathematics

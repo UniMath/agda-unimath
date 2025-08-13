@@ -30,6 +30,7 @@ of two [abelian groups](group-theory.abelian-groups.md) `A` and `B` is the
 abelian group structure on the
 [cartesian product](foundation.cartesian-product-types.md) of the underlying
 [sets](foundation.sets.md) given by
+
 ```text
   (a , b) * (a' , b') := (a * a' , b * b').
 ```
