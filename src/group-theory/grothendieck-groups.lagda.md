@@ -24,6 +24,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.monoids
 open import group-theory.products-commutative-monoids
@@ -562,4 +563,238 @@ module _
 
 ### The universal property of the Grothendieck group
 
-This has yet to be proved.
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (G : Ab l2)
+  (let MG = commutative-monoid-Ab G)
+  (f : hom-Commutative-Monoid M MG)
+  where
+
+  map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid :
+    type-product-Commutative-Monoid M M → type-Ab G
+  map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
+    (p , n) =
+      add-Ab G
+        ( map-hom-Commutative-Monoid M MG f p)
+        ( neg-Ab G (map-hom-Commutative-Monoid M MG f n))
+
+  hom-map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid :
+    hom-equivalence-relation
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( Id-equivalence-relation (set-Ab G))
+  pr1
+    hom-map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid =
+      map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
+  pr2
+    hom-map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
+      {p1 , n1} {p2 , n2} ∃k =
+        let
+          open
+            do-syntax-trunc-Prop
+              ( Id-Prop
+                ( set-Ab G)
+                ( map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
+                  (p1 , n1))
+                ( map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid
+                  (p2 , n2)))
+        in do
+          (k , p1n2k=p2n1k) ← ∃k
+          equational-reasoning
+            add-Ab G
+              ( map-hom-Commutative-Monoid M MG f p1)
+              ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p1)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1)))
+                ( zero-Ab G)
+              by inv (right-unit-law-add-Ab G _)
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p1)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1)))
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f n2)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by
+                ap-add-Ab G refl (inv (right-inverse-law-add-Ab G _))
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p1)
+                  ( map-hom-Commutative-Monoid M MG f n2))
+                ( add-Ab G
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by interchange-add-add-Ab G _ _ _ _
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( add-Ab G
+                    ( map-hom-Commutative-Monoid M MG f p1)
+                    ( map-hom-Commutative-Monoid M MG f n2))
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2))))
+                ( zero-Ab G)
+              by inv (right-unit-law-add-Ab G _)
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f
+                    ( mul-Commutative-Monoid M p1 n2))
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2))))
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f k)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by
+                inv
+                  ( ap-add-Ab G
+                    ( ap-add-Ab G
+                      ( preserves-mul-hom-Commutative-Monoid M MG f)
+                      ( refl))
+                    ( right-inverse-law-add-Ab G _))
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f
+                    ( mul-Commutative-Monoid M p1 n2))
+                  ( map-hom-Commutative-Monoid M MG f k))
+                ( add-Ab G
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by interchange-add-add-Ab G _ _ _ _
+            ＝
+              add-Ab G
+                ( map-hom-Commutative-Monoid M MG f
+                  ( mul-Commutative-Monoid M
+                    ( mul-Commutative-Monoid M p1 n2)
+                    ( k)))
+                ( add-Ab G
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by
+                ap-add-Ab G
+                  ( inv (preserves-mul-hom-Commutative-Monoid M MG f))
+                  ( refl)
+            ＝
+              add-Ab G
+                ( map-hom-Commutative-Monoid M MG f
+                  ( mul-Commutative-Monoid M
+                    ( mul-Commutative-Monoid M p2 n1)
+                    ( k)))
+                ( add-Ab G
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by
+                ap-add-Ab G
+                  ( ap (map-hom-Commutative-Monoid M MG f) p1n2k=p2n1k)
+                  ( refl)
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f
+                    ( mul-Commutative-Monoid M p2 n1))
+                  ( map-hom-Commutative-Monoid M MG f k))
+                ( add-Ab G
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by ap-add-Ab G (preserves-mul-hom-Commutative-Monoid M MG f) refl
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f
+                    ( mul-Commutative-Monoid M p2 n1))
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2))))
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f k)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f k)))
+              by interchange-add-add-Ab G _ _ _ _
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( add-Ab G
+                    ( map-hom-Commutative-Monoid M MG f p2)
+                    ( map-hom-Commutative-Monoid M MG f n1))
+                  ( add-Ab G
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                    ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2))))
+                ( zero-Ab G)
+              by
+                ap-add-Ab G
+                  ( ap-add-Ab G
+                    ( preserves-mul-hom-Commutative-Monoid M MG f)
+                    ( refl))
+                  ( right-inverse-law-add-Ab G _)
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p2)
+                  ( map-hom-Commutative-Monoid M MG f n1))
+                ( add-Ab G
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by right-unit-law-add-Ab G _
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f n1)
+                  ( map-hom-Commutative-Monoid M MG f p2))
+                ( add-Ab G
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1))
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by ap-add-Ab G (commutative-add-Ab G _ _) refl
+            ＝
+              add-Ab G
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f n1)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n1)))
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p2)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by interchange-add-add-Ab G _ _ _ _
+            ＝
+              add-Ab G
+                ( zero-Ab G)
+                ( add-Ab G
+                  ( map-hom-Commutative-Monoid M MG f p2)
+                  ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2)))
+              by ap-add-Ab G (right-inverse-law-add-Ab G _) refl
+            ＝
+              add-Ab G
+                ( map-hom-Commutative-Monoid M MG f p2)
+                ( neg-Ab G (map-hom-Commutative-Monoid M MG f n2))
+              by left-unit-law-add-Ab G _
+
+  map-hom-universal-property-grothendieck-ab-Commutative-Monoid :
+    type-grothendieck-ab-Commutative-Monoid M → type-Ab G
+  map-hom-universal-property-grothendieck-ab-Commutative-Monoid =
+    map-is-set-quotient
+      ( grothendieck-equivalence-relation-Commutative-Monoid M)
+      ( set-grothendieck-ab-Commutative-Monoid M)
+      ( reflecting-map-quotient-map
+        ( grothendieck-equivalence-relation-Commutative-Monoid M))
+      ( Id-equivalence-relation (set-Ab G))
+      ( set-Ab G)
+      ( id-reflecting-map-Id-equivalence-relation (set-Ab G))
+      ( is-set-quotient-set-quotient
+        ( grothendieck-equivalence-relation-Commutative-Monoid M))
+      ( is-set-quotient-id-Id-equivalence-relation (set-Ab G))
+      ( hom-map-untruncated-universal-property-grothendieck-ab-Commutative-Monoid)
+```
+
+We have yet to prove that this is a group homomorphism or that it is unique.

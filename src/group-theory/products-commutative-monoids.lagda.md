@@ -40,6 +40,10 @@ module _
   type-product-Commutative-Monoid =
     type-Commutative-Monoid M × type-Commutative-Monoid N
 
+  set-product-Commutative-Monoid : Set (l1 ⊔ l2)
+  set-product-Commutative-Monoid =
+    product-Set (set-Commutative-Monoid M) (set-Commutative-Monoid N)
+
   mul-product-Commutative-Monoid :
     type-product-Commutative-Monoid → type-product-Commutative-Monoid →
     type-product-Commutative-Monoid
