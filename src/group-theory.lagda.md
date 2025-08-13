@@ -83,6 +83,7 @@ open import group-theory.functoriality-quotient-groups public
 open import group-theory.furstenberg-groups public
 open import group-theory.generating-elements-groups public
 open import group-theory.generating-sets-groups public
+open import group-theory.grothendieck-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
@@ -156,7 +157,10 @@ open import group-theory.precategory-of-orbits-monoid-actions public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.products-commutative-monoids public
+open import group-theory.products-monoids public
 open import group-theory.products-of-elements-monoids public
+open import group-theory.products-semigroups public
 open import group-theory.pullbacks-subgroups public
 open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
