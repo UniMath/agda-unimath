@@ -49,8 +49,8 @@ of a [commutative monoid](group-theory.commutative-monoids.md) `M` is a certain
 
 The Grothendieck group can be constructed as a
 [quotient](foundation.set-quotients.md) of the
-[product monoid](group-theory.products-commutative-monoids.md) of `M` with
-itself by the [equivalence relation](foundation.equivalence-relations.md)
+[product monoid](group-theory.cartesian-products-commutative-monoids.md) of `M`
+with itself by the [equivalence relation](foundation.equivalence-relations.md)
 
 ```text
 (p₁ , n₁) ~ (p₂ , n₂) := ∃ (k : M) (p₁ * n₂ * k ＝ p₂ * n₁ * k)
