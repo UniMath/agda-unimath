@@ -174,6 +174,43 @@ pr1 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) x y =
 pr2 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) = star
 ```
 
+## Shorthand
+
+When extensively referring to a monoid `M` and its properties, it may be
+easier to write `let open shorthand-Monoid M in ...` to get access to a
+standard shorthand for `M` and its operations.
+
+```agda
+module shorthand-Monoid {l : Level} (M : Monoid l) where
+  type-Mon : UU l
+  type-Mon = type-Monoid M
+
+  set-Mon : Set l
+  set-Mon = set-Monoid M
+
+  infixl 35 _*Mon_
+
+  _*Mon_ : type-Mon → type-Mon → type-Mon
+  _*Mon_ = mul-Monoid M
+
+  associative-*Mon :
+    (x y z : type-Mon) → (x *Mon y) *Mon z ＝ x *Mon (y *Mon z)
+  associative-*Mon = associative-mul-Monoid M
+
+  unit-Mon : type-Mon
+  unit-Mon = unit-Monoid M
+
+  left-unit-*-Mon : (x : type-Mon) → unit-Mon *Mon x ＝ x
+  left-unit-*-Mon = left-unit-law-mul-Monoid M
+
+  right-unit-*-Mon : (x : type-Mon) → x *Mon unit-Mon ＝ x
+  right-unit-*-Mon = right-unit-law-mul-Monoid M
+
+  ap-*Mon :
+    {x x' y y' : type-Mon} → x ＝ x' → y ＝ y' → x *Mon y ＝ x' *Mon y'
+  ap-*Mon = ap-mul-Monoid M
+```
+
 ## See also
 
 - In [one object precategories](category-theory.one-object-precategories.md), we

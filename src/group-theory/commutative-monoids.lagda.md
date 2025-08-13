@@ -185,3 +185,56 @@ module _
   is-unit-prop-Commutative-Monoid x =
     Id-Prop (set-Commutative-Monoid M) x unit-Commutative-Monoid
 ```
+
+## Shorthand
+
+When extensively referring to a commutative monoid `M` and its properties, it
+may be easier to write `let open shorthand-Commutative-Monoid M in ...` to get
+access to a standard shorthand for `M` and its operations.
+
+```agda
+module shorthand-Commutative-Monoid {l : Level} (M : Commutative-Monoid l) where
+  type-CMon : UU l
+  type-CMon = type-Commutative-Monoid M
+
+  set-CMon : Set l
+  set-CMon = set-Commutative-Monoid M
+
+  infixl 35 _*CMon_
+
+  _*CMon_ : type-CMon → type-CMon → type-CMon
+  _*CMon_ = mul-Commutative-Monoid M
+
+  associative-*CMon :
+    (x y z : type-CMon) → (x *CMon y) *CMon z ＝ x *CMon (y *CMon z)
+  associative-*CMon = associative-mul-Commutative-Monoid M
+
+  unit-CMon : type-CMon
+  unit-CMon = unit-Commutative-Monoid M
+
+  left-unit-*-CMon : (x : type-CMon) → unit-CMon *CMon x ＝ x
+  left-unit-*-CMon = left-unit-law-mul-Commutative-Monoid M
+
+  right-unit-*-CMon : (x : type-CMon) → x *CMon unit-CMon ＝ x
+  right-unit-*-CMon = right-unit-law-mul-Commutative-Monoid M
+
+  commutative-*CMon : (x y : type-CMon) → x *CMon y ＝ y *CMon x
+  commutative-*CMon = commutative-mul-Commutative-Monoid M
+
+  left-swap-*CMon :
+    (x y z : type-CMon) → x *CMon (y *CMon z) ＝ y *CMon (x *CMon z)
+  left-swap-*CMon = left-swap-mul-Commutative-Monoid M
+
+  right-swap-*CMon :
+    (x y z : type-CMon) → (x *CMon y) *CMon z ＝ (x *CMon z) *CMon y
+  right-swap-*CMon = right-swap-mul-Commutative-Monoid M
+
+  interchange-*CMon-*CMon :
+    (x y z w : type-CMon) →
+    (x *CMon y) *CMon (z *CMon w) ＝ (x *CMon z) *CMon (y *CMon w)
+  interchange-*CMon-*CMon = interchange-mul-mul-Commutative-Monoid M
+
+  ap-*CMon :
+    {x x' y y' : type-CMon} → x ＝ x' → y ＝ y' → x *CMon y ＝ x' *CMon y'
+  ap-*CMon = ap-mul-Commutative-Monoid M
+```

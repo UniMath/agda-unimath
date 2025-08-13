@@ -114,3 +114,31 @@ semigroup-structure-semigroup :
 pr1 (semigroup-structure-semigroup X (s , g)) = X , s
 pr2 (semigroup-structure-semigroup X (s , g)) = g
 ```
+
+## Shorthand
+
+When extensively referring to a semigroup `G` and its properties, it may be
+easier to write `let open shorthand-Semigroup G in ...` to get access to a
+standard shorthand for `G` and its operations.
+
+```agda
+module shorthand-Semigroup {l : Level} (G : Semigroup l) where
+  type-Sgrp : UU l
+  type-Sgrp = type-Semigroup G
+
+  set-Sgrp : Set l
+  set-Sgrp = set-Semigroup G
+
+  infixl 35 _*Sgrp_
+
+  _*Sgrp_ : type-Sgrp → type-Sgrp → type-Sgrp
+  _*Sgrp_ = mul-Semigroup G
+
+  associative-*Sgrp :
+    (x y z : type-Sgrp) → (x *Sgrp y) *Sgrp z ＝ x *Sgrp (y *Sgrp z)
+  associative-*Sgrp = associative-mul-Semigroup G
+
+  ap-*Sgrp :
+    {x x' y y' : type-Sgrp} → x ＝ x' → y ＝ y' → x *Sgrp y ＝ x' *Sgrp y'
+  ap-*Sgrp = ap-mul-Semigroup G
+```
