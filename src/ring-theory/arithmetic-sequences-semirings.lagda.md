@@ -264,6 +264,59 @@ module _
     ( zero-Semiring R , zero-is-common-difference-const-sequence-Semiring)
 ```
 
+### The sum of the common differences of two arithmetic sequences is a common difference of their sum
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  (u v : arithmetic-sequence-Semiring R)
+  where
+
+  seq-add-arithmetic-sequence-Semiring : ℕ → type-Semiring R
+  seq-add-arithmetic-sequence-Semiring n =
+    add-Semiring
+      ( R)
+      ( seq-arithmetic-sequence-Semiring R u n)
+      ( seq-arithmetic-sequence-Semiring R v n)
+
+  is-common-difference-add-arithmetic-sequence-Semiring :
+    is-common-difference-sequence-Semigroup
+      ( additive-semigroup-Semiring R)
+      ( seq-add-arithmetic-sequence-Semiring)
+      ( add-Semiring
+        ( R)
+        ( common-difference-arithmetic-sequence-Semiring R u)
+        ( common-difference-arithmetic-sequence-Semiring R v))
+  is-common-difference-add-arithmetic-sequence-Semiring n =
+    ( ap-add-Semiring
+      ( R)
+      ( is-common-difference-arithmetic-sequence-Semiring R u n)
+      ( is-common-difference-arithmetic-sequence-Semiring R v n)) ∙
+    ( interchange-add-add-Semiring
+      ( R)
+      ( seq-arithmetic-sequence-Semiring R u n)
+      ( common-difference-arithmetic-sequence-Semiring R u)
+      ( seq-arithmetic-sequence-Semiring R v n)
+      ( common-difference-arithmetic-sequence-Semiring R v))
+
+  is-arithmetic-add-arithmetic-sequence-Semiring :
+    is-arithmetic-sequence-Semigroup
+      ( additive-semigroup-Semiring R)
+      ( seq-add-arithmetic-sequence-Semiring)
+  pr1 is-arithmetic-add-arithmetic-sequence-Semiring =
+    add-Semiring
+      ( R)
+      ( common-difference-arithmetic-sequence-Semiring R u)
+      ( common-difference-arithmetic-sequence-Semiring R v)
+  pr2 is-arithmetic-add-arithmetic-sequence-Semiring =
+    is-common-difference-add-arithmetic-sequence-Semiring
+
+  add-arithmetic-sequence-Semiring : arithmetic-sequence-Semiring R
+  add-arithmetic-sequence-Semiring =
+    ( seq-add-arithmetic-sequence-Semiring ,
+      is-arithmetic-add-arithmetic-sequence-Semiring)
+```
+
 ## External links
 
 - [Arithmetic progressions](https://en.wikipedia.org/wiki/Arithmetic_progression)
