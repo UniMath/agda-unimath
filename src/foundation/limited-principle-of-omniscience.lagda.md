@@ -24,6 +24,8 @@ open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -66,7 +68,7 @@ has-true-or-all-false-Prop f =
     is-prop-coproduct
       ( elim-exists
         ( ¬' ∀' ℕ (λ n → is-false-Prop (f n)))
-        ( λ n t h → not-is-false-is-true (f n) t (h n)))
+        ( λ n t h → is-not-false-is-true (f n) t (h n)))
       ( is-prop-exists ℕ (λ n → is-true-Prop (f n)))
       ( is-prop-for-all-Prop ℕ (λ n → is-false-Prop (f n))))
 
@@ -94,7 +96,7 @@ abstract
       ( λ f~false →
         inr-disjunction
           ( λ (a , a∈S) →
-            not-is-false-is-true
+            is-not-false-is-true
               ( f a)
               ( is-true-map-bool-is-in-decidable-subtype S a a∈S)
               ( f~false a)))

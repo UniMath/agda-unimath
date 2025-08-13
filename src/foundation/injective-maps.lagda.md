@@ -9,7 +9,6 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -33,7 +32,8 @@ open import foundation-core.sets
 
 ## Idea
 
-A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is **injective**, also called _left cancellable_, if
+`f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 

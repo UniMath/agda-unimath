@@ -8,7 +8,6 @@ module logic.de-morgan-types where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -16,13 +15,9 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.evaluation-functions
 open import foundation.function-types
-open import foundation.identity-types
-open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.truncation-levels
@@ -34,7 +29,8 @@ open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
 open import foundation-core.propositions
 
-open import logic.de-morgans-law
+open import logic.irrefutable-types
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -249,7 +245,8 @@ module _
 ### It is irrefutable that a type is De Morgan
 
 ```agda
-is-irrefutable-is-de-morgan : {l : Level} {A : UU l} → ¬¬ (is-de-morgan A)
+is-irrefutable-is-de-morgan :
+  {l : Level} {A : UU l} → is-irrefutable (is-de-morgan A)
 is-irrefutable-is-de-morgan = is-irrefutable-is-decidable
 ```
 
