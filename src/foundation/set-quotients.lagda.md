@@ -14,6 +14,8 @@ open import foundation.embeddings
 open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.reflecting-maps-equivalence-relations
@@ -415,6 +417,45 @@ module _
       ( reflecting-map-quotient-map R)
       ( is-set-quotient-set-quotient R)
       B f Uf
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  Σ-quotient-Set : UU (l1 ⊔ l2)
+  Σ-quotient-Set =
+    Σ (set-quotient R) (type-subtype ∘ subtype-set-quotient R)
+
+  map-Σ-quotient-Set : Σ-quotient-Set → A
+  map-Σ-quotient-Set (X , x , x∈X) = x
+
+  postulate
+    lemma-quotient-Set :
+      (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
+  -- lemma-quotient-Set x = {!!}
+
+  map-split-Σ-quotient-Set : A → Σ-quotient-Set
+  map-split-Σ-quotient-Set x =
+    ( quotient-map R x , x , lemma-quotient-Set x)
+
+  is-section-map-Σ-quotient-Set :
+    map-Σ-quotient-Set ∘ map-split-Σ-quotient-Set ~ id
+  is-section-map-Σ-quotient-Set x = refl
+
+  is-retraction-map-Σ-quotient-Set :
+    map-split-Σ-quotient-Set ∘ map-Σ-quotient-Set ~ id
+  is-retraction-map-Σ-quotient-Set (X , x , x∈X) =
+    {!!}
+
+  is-equiv-map-Σ-quotient-Set : is-equiv map-Σ-quotient-Set
+  is-equiv-map-Σ-quotient-Set =
+    is-equiv-is-invertible
+      map-split-Σ-quotient-Set
+      is-section-map-Σ-quotient-Set
+      {!!}
+
 ```
 
 ## See also

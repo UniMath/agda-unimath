@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.set-quotients
 open import foundation.subtypes
 open import foundation.universe-levels
 
