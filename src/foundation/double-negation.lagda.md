@@ -20,9 +20,11 @@ open import foundation-core.propositions
 
 </details>
 
-## Definition
+## Idea
 
-We define double negation and triple negation
+We define double negation and triple negation.
+
+## Definitions
 
 ```agda
 infix 25 ¬¬_ ¬¬¬_
@@ -49,6 +51,9 @@ map-binary-double-negation :
   {l1 l2 l3 : Level} {P : UU l1} {Q : UU l2} {R : UU l3} →
   (P → Q → R) → ¬¬ P → ¬¬ Q → ¬¬ R
 map-binary-double-negation f nnp nnq nr = nnp (λ p → nnq (λ q → nr (f p q)))
+
+elim-triple-negation : {l : Level} {P : UU l} → ¬¬¬ P → ¬ P
+elim-triple-negation = map-neg intro-double-negation
 ```
 
 ## Properties
@@ -101,23 +106,28 @@ double-negation-linearity-implication {P = P} {Q = Q} f =
 ### Maps into double negations extend along `intro-double-negation`
 
 ```agda
-double-negation-extend :
+extend-double-negation :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
-double-negation-extend {P = P} {Q = Q} f nnp nq = nnp (λ p → f p nq)
+extend-double-negation {P = P} {Q = Q} f nnp nq = nnp (λ p → f p nq)
 ```
 
 ### The double negation of a type is logically equivalent to the double negation of its propositional truncation
 
 ```agda
 abstract
+  intro-double-negation-type-trunc-Prop :
+    {l : Level} {A : UU l} → type-trunc-Prop A → ¬¬ A
+  intro-double-negation-type-trunc-Prop {A = A} =
+    map-universal-property-trunc-Prop
+      ( double-negation-type-Prop A)
+      ( intro-double-negation)
+
+abstract
   double-negation-double-negation-type-trunc-Prop :
-    {l : Level} (A : UU l) → ¬¬ (type-trunc-Prop A) → ¬¬ A
-  double-negation-double-negation-type-trunc-Prop A =
-    double-negation-extend
-      ( map-universal-property-trunc-Prop
-        ( double-negation-type-Prop A)
-        ( intro-double-negation))
+    {l : Level} {A : UU l} → ¬¬ (type-trunc-Prop A) → ¬¬ A
+  double-negation-double-negation-type-trunc-Prop =
+    extend-double-negation intro-double-negation-type-trunc-Prop
 
 abstract
   double-negation-type-trunc-Prop-double-negation :
