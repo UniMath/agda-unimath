@@ -157,18 +157,19 @@ module _
     is-uniformly-continuous-function-Metric-Space X Y f →
     is-uniformly-continuous-function-Metric-Space X Z (g ∘ f)
   is-uniformly-continuous-comp-function-Metric-Space g f H K =
-    do
-      mg , is-modulus-uniform-mg ← H
-      mf , is-modulus-uniform-mf ← K
-      intro-exists
-        ( mf ∘ mg)
-        ( λ x ε x' →
-          is-modulus-uniform-mg (f x) ε (f x') ∘
-          is-modulus-uniform-mf x (mg ε) x')
-    where
+    let
       open
         do-syntax-trunc-Prop
           ( is-uniformly-continuous-prop-function-Metric-Space X Z (g ∘ f))
+    in
+      do
+        mg , is-modulus-uniform-mg ← H
+        mf , is-modulus-uniform-mf ← K
+        intro-exists
+          ( mf ∘ mg)
+          ( λ x ε x' →
+            is-modulus-uniform-mg (f x) ε (f x') ∘
+            is-modulus-uniform-mf x (mg ε) x')
 
   comp-uniformly-continuous-function-Metric-Space :
     uniformly-continuous-function-Metric-Space Y Z →
