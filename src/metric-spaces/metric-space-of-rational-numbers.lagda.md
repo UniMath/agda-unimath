@@ -184,8 +184,8 @@ is-extensional-pseudometric-space-ℚ :
   is-extensional-Pseudometric-Space pseudometric-space-ℚ
 is-extensional-pseudometric-space-ℚ =
   is-extensional-is-tight-Pseudometric-Space
-    pseudometric-space-ℚ
-    is-tight-pseudometric-space-ℚ
+    ( pseudometric-space-ℚ)
+    ( is-tight-pseudometric-space-ℚ)
 ```
 
 ### The standard metric space of rational numbers
@@ -194,13 +194,13 @@ is-extensional-pseudometric-space-ℚ =
 metric-space-ℚ : Metric-Space lzero lzero
 metric-space-ℚ =
   make-Metric-Space
-    ℚ
-    neighborhood-prop-ℚ
-    is-reflexive-neighborhood-ℚ
-    is-symmetric-neighborhood-ℚ
-    is-triangular-neighborhood-ℚ
-    is-saturated-neighborhood-ℚ
-    is-extensional-pseudometric-space-ℚ
+    ( ℚ)
+    ( neighborhood-prop-ℚ)
+    ( is-reflexive-neighborhood-ℚ)
+    ( is-symmetric-neighborhood-ℚ)
+    ( is-triangular-neighborhood-ℚ)
+    ( is-saturated-neighborhood-ℚ)
+    ( is-extensional-pseudometric-space-ℚ)
 ```
 
 ## Properties
