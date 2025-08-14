@@ -87,11 +87,11 @@ has-finitely-many-connected-components-is-truncated-π-finite zero-ℕ =
   has-finitely-many-connected-components-is-finite
 has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) = pr1
 
-is-truncated-pi-finite-Id :
+is-truncated-π-finite-Id :
   {l : Level} (k : ℕ) {X : UU l} →
   is-truncated-π-finite (succ-ℕ k) X →
   (x y : X) → is-truncated-π-finite k (x ＝ y)
-is-truncated-pi-finite-Id k = pr2
+is-truncated-π-finite-Id k = pr2
 ```
 
 ### πₙ-finite types are n-truncated
@@ -102,7 +102,7 @@ is-trunc-is-truncated-π-finite :
   is-truncated-π-finite k X → is-trunc (truncation-level-ℕ k) X
 is-trunc-is-truncated-π-finite zero-ℕ = is-set-is-finite
 is-trunc-is-truncated-π-finite (succ-ℕ k) H x y =
-  is-trunc-is-truncated-π-finite k (is-truncated-pi-finite-Id k H x y)
+  is-trunc-is-truncated-π-finite k (is-truncated-π-finite-Id k H x y)
 ```
 
 ### πₙ-finite types are untruncated πₙ-finite
@@ -119,7 +119,7 @@ pr1 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) =
   has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) H
 pr2 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
   is-untruncated-π-finite-is-truncated-π-finite k
-    ( is-truncated-pi-finite-Id k H x y)
+    ( is-truncated-π-finite-Id k H x y)
 ```
 
 ### The subuniverse of πₙ-finite types
@@ -182,7 +182,7 @@ pr1 (is-truncated-π-finite-retract (succ-ℕ k) r H) =
 pr2 (is-truncated-π-finite-retract (succ-ℕ k) r H) x y =
   is-truncated-π-finite-retract k
     ( retract-eq r x y)
-    ( is-truncated-pi-finite-Id k H
+    ( is-truncated-π-finite-Id k H
       ( inclusion-retract r x)
       ( inclusion-retract r y))
 ```

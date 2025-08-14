@@ -260,11 +260,12 @@ contradiction-leq-𝕋' m n K H = contradiction-leq-𝕋 m n H K
 
 ```agda
 example-not-reflects-leq-left-add-𝕋 :
-  (neg-one-𝕋 +𝕋 neg-two-𝕋) ≤-𝕋 (neg-two-𝕋 +𝕋 neg-two-𝕋) ×
+  (add-𝕋 neg-one-𝕋 neg-two-𝕋) ≤-𝕋 (add-𝕋 neg-two-𝕋 neg-two-𝕋) ×
   ¬ (neg-one-𝕋 ≤-𝕋 neg-two-𝕋)
 example-not-reflects-leq-left-add-𝕋 = (star , id)
 
-not-reflects-leq-left-add-𝕋 : ¬ ((k m n : 𝕋) → (m +𝕋 k) ≤-𝕋 (n +𝕋 k) → m ≤-𝕋 n)
+not-reflects-leq-left-add-𝕋 :
+  ¬ ((k m n : 𝕋) → (add-𝕋 m k) ≤-𝕋 (add-𝕋 n k) → m ≤-𝕋 n)
 not-reflects-leq-left-add-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
 ```
 

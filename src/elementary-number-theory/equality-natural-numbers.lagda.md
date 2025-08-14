@@ -161,7 +161,7 @@ is-torsorial-Eq-ℕ :
   (m : ℕ) → is-torsorial (Eq-ℕ m)
 pr1 (pr1 (is-torsorial-Eq-ℕ m)) = m
 pr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m
-pr2 (is-torsorial-Eq-ℕ zero-ℕ) (zero-ℕ , *) = refl
+pr2 (is-torsorial-Eq-ℕ zero-ℕ) (zero-ℕ , _) = refl
 pr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (succ-ℕ n , e) =
   ap (map-total-Eq-ℕ m) (pr2 (is-torsorial-Eq-ℕ m) (pair n e))
 

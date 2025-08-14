@@ -147,16 +147,18 @@ is-decidable-is-neg-one-𝕋' n = has-decidable-equality-𝕋 neg-one-𝕋 n
 map-total-Eq-𝕋 : (m : 𝕋) → Σ 𝕋 (Eq-𝕋 m) → Σ 𝕋 (Eq-𝕋 (succ-𝕋 m))
 map-total-Eq-𝕋 m (n , e) = (succ-𝕋 n , e)
 
-is-torsorial-Eq-𝕋 : (m : 𝕋) → is-torsorial (Eq-𝕋 m)
-pr1 (pr1 (is-torsorial-Eq-𝕋 m)) = m
-pr2 (pr1 (is-torsorial-Eq-𝕋 m)) = refl-Eq-𝕋 m
-pr2 (is-torsorial-Eq-𝕋 neg-two-𝕋) (neg-two-𝕋 , *) = refl
-pr2 (is-torsorial-Eq-𝕋 (succ-𝕋 m)) (succ-𝕋 n , e) =
-  ap (map-total-Eq-𝕋 m) (pr2 (is-torsorial-Eq-𝕋 m) (n , e))
+opaque
+  is-torsorial-Eq-𝕋 : (m : 𝕋) → is-torsorial (Eq-𝕋 m)
+  pr1 (pr1 (is-torsorial-Eq-𝕋 m)) = m
+  pr2 (pr1 (is-torsorial-Eq-𝕋 m)) = refl-Eq-𝕋 m
+  pr2 (is-torsorial-Eq-𝕋 neg-two-𝕋) (neg-two-𝕋 , *) = refl
+  pr2 (is-torsorial-Eq-𝕋 (succ-𝕋 m)) (succ-𝕋 n , e) =
+    ap (map-total-Eq-𝕋 m) (pr2 (is-torsorial-Eq-𝕋 m) (n , e))
 
-is-equiv-Eq-eq-𝕋 : {m n : 𝕋} → is-equiv (Eq-eq-𝕋 {m} {n})
-is-equiv-Eq-eq-𝕋 {m} {n} =
-  fundamental-theorem-id (is-torsorial-Eq-𝕋 m) (λ y → Eq-eq-𝕋 {m} {y}) n
+abstract
+  is-equiv-Eq-eq-𝕋 : {m n : 𝕋} → is-equiv (Eq-eq-𝕋 {m} {n})
+  is-equiv-Eq-eq-𝕋 {m} {n} =
+    fundamental-theorem-id (is-torsorial-Eq-𝕋 m) (λ y → Eq-eq-𝕋 {m} {y}) n
 
 extensionality-𝕋 : {m n : 𝕋} → (m ＝ n) ≃ Eq-𝕋 m n
 extensionality-𝕋 = (Eq-eq-𝕋 , is-equiv-Eq-eq-𝕋)
