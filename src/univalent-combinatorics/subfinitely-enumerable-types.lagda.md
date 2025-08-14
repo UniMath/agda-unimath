@@ -33,7 +33,7 @@ open import univalent-combinatorics.subfinite-types
 ## Idea
 
 A type `X` is
-{{#concept "subfinitely enumerable" Agda=is-subfinitely-enumerable Agda=subfinitely-enumerable-Type}},
+{{#concept "subfinitely enumerable" Agda=is-subfinitely-enumerable Agda=Subfinitely-Enumerable-Type}},
 or **Kuratowski subfinite**, if there
 [exists](foundation.existential-quantification.md) a
 [surjection](foundation.surjective-maps.md) onto `X` from a
@@ -62,19 +62,19 @@ is-prop-is-subfinitely-enumerable {l2 = l2} {X} =
 ### The subuniverse of subfinitely enumerable types
 
 ```agda
-subfinitely-enumerable-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-subfinitely-enumerable-Type l1 l2 = Σ (UU l1) (is-subfinitely-enumerable l2)
+Subfinitely-Enumerable-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Subfinitely-Enumerable-Type l1 l2 = Σ (UU l1) (is-subfinitely-enumerable l2)
 
 module _
-  {l1 l2 : Level} (X : subfinitely-enumerable-Type l1 l2)
+  {l1 l2 : Level} (X : Subfinitely-Enumerable-Type l1 l2)
   where
 
-  type-subfinitely-enumerable-Type : UU l1
-  type-subfinitely-enumerable-Type = pr1 X
+  type-Subfinitely-Enumerable-Type : UU l1
+  type-Subfinitely-Enumerable-Type = pr1 X
 
-  is-subfinitely-enumerable-subfinitely-enumerable-Type :
-    is-subfinitely-enumerable l2 type-subfinitely-enumerable-Type
-  is-subfinitely-enumerable-subfinitely-enumerable-Type = pr2 X
+  is-subfinitely-enumerable-Subfinitely-Enumerable-Type :
+    is-subfinitely-enumerable l2 type-Subfinitely-Enumerable-Type
+  is-subfinitely-enumerable-Subfinitely-Enumerable-Type = pr2 X
 ```
 
 ## Properties
@@ -105,22 +105,22 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (X : subfinitely-enumerable-Type l1 l2)
+  {l1 l2 : Level} (X : Subfinitely-Enumerable-Type l1 l2)
   where
 
-  is-dedekind-finite-type-subfinitely-enumerable-Type :
-    is-dedekind-finite (type-subfinitely-enumerable-Type X)
-  is-dedekind-finite-type-subfinitely-enumerable-Type f is-emb-f =
+  is-dedekind-finite-type-Subfinitely-Enumerable-Type :
+    is-dedekind-finite (type-Subfinitely-Enumerable-Type X)
+  is-dedekind-finite-type-Subfinitely-Enumerable-Type f is-emb-f =
     rec-trunc-Prop
       ( is-equiv-Prop f)
       ( λ c → is-dedekind-finite-subfinite-indexing c f is-emb-f)
       ( is-inhabited-subfinite-indexing-is-subfinitely-enumerable
-        ( is-subfinitely-enumerable-subfinitely-enumerable-Type X))
+        ( is-subfinitely-enumerable-Subfinitely-Enumerable-Type X))
 
-  dedekind-finite-type-subfinitely-enumerable-Type : Dedekind-Finite-Type l1
-  dedekind-finite-type-subfinitely-enumerable-Type =
-    ( type-subfinitely-enumerable-Type X ,
-      is-dedekind-finite-type-subfinitely-enumerable-Type)
+  dedekind-finite-type-Subfinitely-Enumerable-Type : Dedekind-Finite-Type l1
+  dedekind-finite-type-Subfinitely-Enumerable-Type =
+    ( type-Subfinitely-Enumerable-Type X ,
+      is-dedekind-finite-type-Subfinitely-Enumerable-Type)
 ```
 
 ### The Cantor–Schröder–Bernstein theorem for subfinitely enumerable types
@@ -131,18 +131,18 @@ If two subfinitely enumerable types `X` and `Y` mutually embed, `X ↪ Y` and
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (X : subfinitely-enumerable-Type l1 l2)
-  (Y : subfinitely-enumerable-Type l3 l4)
+  (X : Subfinitely-Enumerable-Type l1 l2)
+  (Y : Subfinitely-Enumerable-Type l3 l4)
   where
 
-  Cantor-Schröder-Bernstein-subfinitely-enumerable-Type :
-    (type-subfinitely-enumerable-Type X ↪ type-subfinitely-enumerable-Type Y) →
-    (type-subfinitely-enumerable-Type Y ↪ type-subfinitely-enumerable-Type X) →
-    type-subfinitely-enumerable-Type X ≃ type-subfinitely-enumerable-Type Y
-  Cantor-Schröder-Bernstein-subfinitely-enumerable-Type =
+  Cantor-Schröder-Bernstein-Subfinitely-Enumerable-Type :
+    (type-Subfinitely-Enumerable-Type X ↪ type-Subfinitely-Enumerable-Type Y) →
+    (type-Subfinitely-Enumerable-Type Y ↪ type-Subfinitely-Enumerable-Type X) →
+    type-Subfinitely-Enumerable-Type X ≃ type-Subfinitely-Enumerable-Type Y
+  Cantor-Schröder-Bernstein-Subfinitely-Enumerable-Type =
     Cantor-Schröder-Bernstein-Dedekind-Finite-Type
-      ( dedekind-finite-type-subfinitely-enumerable-Type X)
-      ( dedekind-finite-type-subfinitely-enumerable-Type Y)
+      ( dedekind-finite-type-Subfinitely-Enumerable-Type X)
+      ( dedekind-finite-type-Subfinitely-Enumerable-Type Y)
 ```
 
 ## External links

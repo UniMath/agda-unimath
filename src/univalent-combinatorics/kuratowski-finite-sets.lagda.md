@@ -112,11 +112,11 @@ module _
     is-subfinitely-enumerable lzero (type-Kuratowski-Finite-Set X)
   is-subfinitely-enumerable-type-Kuratowski-Finite-Set =
     map-trunc-Prop
-      (λ (n , s) → (Fin-Subfinite-Type n , s))
+      ( λ (n , s) → (Fin-Subfinite-Type n , s))
       ( is-kuratowski-finite-Kuratowski-Finite-Set X)
 
   subfinitely-enumerable-type-Kuratowski-Finite-Set :
-    subfinitely-enumerable-Type l lzero
+    Subfinitely-Enumerable-Type l lzero
   subfinitely-enumerable-type-Kuratowski-Finite-Set =
     ( type-Kuratowski-Finite-Set X ,
       is-subfinitely-enumerable-type-Kuratowski-Finite-Set)
@@ -132,7 +132,7 @@ module _
   is-dedekind-finite-type-Kuratowski-Finite-Set :
     is-dedekind-finite (type-Kuratowski-Finite-Set X)
   is-dedekind-finite-type-Kuratowski-Finite-Set =
-    is-dedekind-finite-type-subfinitely-enumerable-Type
+    is-dedekind-finite-type-Subfinitely-Enumerable-Type
       ( subfinitely-enumerable-type-Kuratowski-Finite-Set X)
 
   dedekind-finite-type-Kuratowski-Finite-Set : Dedekind-Finite-Type l
