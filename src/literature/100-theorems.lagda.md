@@ -136,6 +136,13 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 
 ### 91. The triangle inequality {#91}
 
+**Author:** [malarbol](https://github.com/malarbol)
+
+```agda
+open import real-numbers.metric-space-of-real-numbers using
+  ( is-triangular-neighborhood-ℝ)
+```
+
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
