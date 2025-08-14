@@ -221,13 +221,13 @@ module _
   indexed-sum-Metric-Space : Metric-Space (la ⊔ lp) (la ⊔ lp')
   indexed-sum-Metric-Space =
     make-Metric-Space
-      type-indexed-sum-Metric-Space
-      neighborhood-prop-indexed-sum-Metric-Space
-      is-reflexive-neighborhood-indexed-sum-Metric-Space
-      is-symmetric-neighborhood-indexed-sum-Metric-Space
-      is-triangular-neighborhood-indexed-Metric-Space
-      is-saturated-neighborhood-indexed-sum-Metric-Space
-      is-extensional-pseudometric-space-indexed-sum-Metric-Space
+      ( type-indexed-sum-Metric-Space)
+      ( neighborhood-prop-indexed-sum-Metric-Space)
+      ( is-reflexive-neighborhood-indexed-sum-Metric-Space)
+      ( is-symmetric-neighborhood-indexed-sum-Metric-Space)
+      ( is-triangular-neighborhood-indexed-Metric-Space)
+      ( is-saturated-neighborhood-indexed-sum-Metric-Space)
+      ( is-extensional-pseudometric-space-indexed-sum-Metric-Space)
 
   base-point-indexed-sum-Metric-Space :
     type-Metric-Space indexed-sum-Metric-Space → type-Set A

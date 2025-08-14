@@ -128,13 +128,13 @@ module _
   Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
   Π-Metric-Space =
     make-Metric-Space
-      type-Π-Metric-Space
-      neighborhood-prop-Π-Metric-Space
-      is-reflexive-neighborhood-Π-Metric-Space
-      is-symmetric-neighborhood-Π-Metric-Space
-      is-triangular-neighborhood-Π-Metric-Space
-      is-saturated-neighborhood-Π-Metric-Space
-      is-extensional-pseudometric-space-Π-Metric-Space
+      ( type-Π-Metric-Space)
+      ( neighborhood-prop-Π-Metric-Space)
+      ( is-reflexive-neighborhood-Π-Metric-Space)
+      ( is-symmetric-neighborhood-Π-Metric-Space)
+      ( is-triangular-neighborhood-Π-Metric-Spac)
+      ( is-saturated-neighborhood-Π-Metric-Space)
+      ( is-extensional-pseudometric-space-Π-Metric-Space)
 ```
 
 ## Properties
