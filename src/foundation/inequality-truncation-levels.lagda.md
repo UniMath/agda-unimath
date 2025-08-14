@@ -8,7 +8,6 @@ module foundation.inequality-truncation-levels where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.addition-truncation-levels
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -254,19 +253,6 @@ contradiction-leq-𝕋 (succ-𝕋 m) (succ-𝕋 n) = contradiction-leq-𝕋 m n
 
 contradiction-leq-𝕋' : (m n : 𝕋) → (succ-𝕋 n) ≤-𝕋 m → ¬ (m ≤-𝕋 n)
 contradiction-leq-𝕋' m n K H = contradiction-leq-𝕋 m n H K
-```
-
-### Addition does not reflect inequality of truncation levels
-
-```agda
-example-not-reflects-leq-left-add-𝕋 :
-  (add-𝕋 neg-one-𝕋 neg-two-𝕋) ≤-𝕋 (add-𝕋 neg-two-𝕋 neg-two-𝕋) ×
-  ¬ (neg-one-𝕋 ≤-𝕋 neg-two-𝕋)
-example-not-reflects-leq-left-add-𝕋 = (star , id)
-
-not-reflects-leq-left-add-𝕋 :
-  ¬ ((k m n : 𝕋) → (add-𝕋 m k) ≤-𝕋 (add-𝕋 n k) → m ≤-𝕋 n)
-not-reflects-leq-left-add-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
 ```
 
 ### The partially ordered set of truncation levels ordered by inequality

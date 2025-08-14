@@ -24,7 +24,6 @@ open import foundation.action-on-identifications-binary-dependent-functions publ
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
-open import foundation.addition-truncation-levels public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
@@ -272,6 +271,7 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
 open import foundation.iterated-dependent-pair-types public
 open import foundation.iterated-dependent-product-types public
+open import foundation.iterated-successors-truncation-levels public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-families-of-maps public
 open import foundation.iterating-functions public
@@ -458,6 +458,7 @@ open import foundation.transposition-identifications-along-sections public
 open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
+open import foundation.truncated-addition-truncation-levels public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public

@@ -10,7 +10,6 @@ module foundation.path-cosplit-maps where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.addition-truncation-levels
 open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -30,6 +29,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
+open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
 open import foundation.morphisms-arrows
@@ -190,7 +190,7 @@ is-path-cosplit-succ-is-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
 ```agda
 is-path-cosplit-iterated-succ-is-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) (r : ℕ) {A : UU l1} {B : UU l2} {f : A → B} →
-  is-path-cosplit k f → is-path-cosplit (iterated-succ-𝕋 r k) f
+  is-path-cosplit k f → is-path-cosplit (iterate-succ-𝕋 r k) f
 is-path-cosplit-iterated-succ-is-path-cosplit k zero-ℕ = id
 is-path-cosplit-iterated-succ-is-path-cosplit k (succ-ℕ r) F =
   is-path-cosplit-iterated-succ-is-path-cosplit (succ-𝕋 k) r

@@ -7,12 +7,12 @@ module foundation.connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.addition-truncation-levels
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.iterated-successors-truncation-levels
 open import foundation.precomposition-dependent-functions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
