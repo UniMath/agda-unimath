@@ -99,6 +99,7 @@ open import metric-spaces.reflexive-rational-neighborhood-relations public
 open import metric-spaces.saturated-rational-neighborhood-relations public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
+open import metric-spaces.short-functions-pseudometric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-rational-neighborhood-relations public

@@ -73,7 +73,10 @@ module _
 
   map-cauchy-approximation-Metric-Space :
     ℚ⁺ → type-Metric-Space A
-  map-cauchy-approximation-Metric-Space = pr1 f
+  map-cauchy-approximation-Metric-Space =
+    map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space :
     (ε δ : ℚ⁺) →
@@ -82,7 +85,10 @@ module _
       ( ε +ℚ⁺ δ)
       ( map-cauchy-approximation-Metric-Space ε)
       ( map-cauchy-approximation-Metric-Space δ)
-  is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
+  is-cauchy-approximation-map-cauchy-approximation-Metric-Space =
+    is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 ```
 
 ## Properties
@@ -115,17 +121,11 @@ module _
   map-short-function-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
-  map-short-function-cauchy-approximation-Metric-Space (u , H) =
-    ( map-short-function-Metric-Space A B f ∘ u ,
-      λ ε δ →
-        is-short-map-short-function-Metric-Space
-          ( A)
-          ( B)
-          ( f)
-          ( ε +ℚ⁺ δ)
-          ( u ε)
-          ( u δ)
-          ( H ε δ))
+  map-short-function-cauchy-approximation-Metric-Space =
+    map-short-function-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
+      ( f)
 
 module _
   {l1 l2 : Level}
@@ -170,9 +170,9 @@ module _
 
   eq-htpy-cauchy-approximation-Metric-Space : f ＝ g
   eq-htpy-cauchy-approximation-Metric-Space =
-    eq-type-subtype
-      ( is-cauchy-approximation-prop-Metric-Space A)
-      ( eq-htpy f~g)
+    eq-htpy-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f~g)
 ```
 
 ## References
