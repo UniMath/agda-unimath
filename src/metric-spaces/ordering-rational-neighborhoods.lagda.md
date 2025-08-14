@@ -33,8 +33,8 @@ than another rational neighborhood relation `V` if `(U d)`-neighborhoods are
 `(V d)`-neighborhoods for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `d`,
 i.e., if any upper bound on the distance between two points in `U` also bounds
-their distance in `V`. This defines a [partial order](order-theory.posets.md) on the
-type of rational neighborhood relations on `A`.
+their distance in `V`. This defines a [partial order](order-theory.posets.md) on
+the type of rational neighborhood relations on `A`.
 
 ## Definitions
 

@@ -25,10 +25,11 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 ## Idea
 
-Given a [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) `U`
-on a type `B` and map `f : A → B`, then we may define a rational neighborhood relation `f⁻¹U` on `A`
-where `x y : A` are `d`-neighbors in `f⁻¹U` if `f x` and `f y` are `d`-neighbors in `U`.
-This is the
+Given a
+[rational neighborhood relation](metric-spaces.rational-neighborhoods.md) `U` on
+a type `B` and map `f : A → B`, then we may define a rational neighborhood
+relation `f⁻¹U` on `A` where `x y : A` are `d`-neighbors in `f⁻¹U` if `f x` and
+`f y` are `d`-neighbors in `U`. This is the
 {{#concept "preimage" Disambiguation="rational neighborhood relation" Agda=preimage-Rational-Neighborhood-Relation}}
 of `U` along `f`.
 

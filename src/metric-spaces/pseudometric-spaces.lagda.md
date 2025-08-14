@@ -50,7 +50,8 @@ with a {{concept "pseudometric structure" Agda=Pseudometric-Structure}}: a
 [saturated](metric-spaces.saturated-rational-neighborhoods.md)
 [rational neighborhood relation](metric-spaces.rational-neighborhoods.md).
 
-Given a pseudometric structure `B` on `A` and some [positive rational number](elementary-number-theory.positive-rational-numbers.md)
+Given a pseudometric structure `B` on `A` and some
+[positive rational number](elementary-number-theory.positive-rational-numbers.md)
 `d : ℚ⁺` such that `B d x y` holds for some pair of points `x y : A`, we
 interpret `d` as an
 {{#concept "upper bound" Disambiguation="on distance in a pseudometric space" Agda=is-upper-bound-dist-Pseudometric-Space}}
