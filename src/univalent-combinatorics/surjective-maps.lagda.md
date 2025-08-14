@@ -63,8 +63,7 @@ module _
   where
 
   count-surjection-has-decidable-equality :
-    (n : ℕ) → (has-decidable-equality X) → (Fin n ↠ X) →
-    count (X)
+    (n : ℕ) → (has-decidable-equality X) → (Fin n ↠ X) → count X
   count-surjection-has-decidable-equality n dec-X f =
     count-decidable-emb
       ( ( map-equiv

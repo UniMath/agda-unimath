@@ -265,6 +265,20 @@ module _
       ( is-connected-map-connected-map f)
 ```
 
+### Right cancellation of connected maps
+
+```agda
+is-connected-map-left-factor :
+  {l1 l2 l3 : Level} (k : 𝕋)
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {h : A → B} →
+  is-connected-map k h → is-connected-map k (g ∘ h) → is-connected-map k g
+is-connected-map-left-factor k {g = g} {h} H GH z =
+  is-connected-base k
+    ( H ∘ pr1)
+    ( is-connected-equiv' (compute-fiber-comp g h z) (GH z))
+```
+
 ### The total map induced by a family of maps is `k`-connected if and only if all maps in the family are `k`-connected
 
 ```agda

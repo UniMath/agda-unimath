@@ -10,6 +10,7 @@ module elementary-number-theory.maximum-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -101,6 +102,26 @@ is-least-upper-bound-max-ℕ m n =
     { max-ℕ m n}
     ( left-leq-max-ℕ m n , right-leq-max-ℕ m n)
     ( λ x (H , K) → leq-max-ℕ x m n H K)
+```
+
+### The maximum computes to the greater of the two numbers
+
+```agda
+abstract
+  leq-left-max-ℕ : (m n : ℕ) → n ≤-ℕ m → max-ℕ m n ＝ m
+  leq-left-max-ℕ zero-ℕ zero-ℕ p = refl
+  leq-left-max-ℕ (succ-ℕ m) zero-ℕ p = refl
+  leq-left-max-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (leq-left-max-ℕ m n p)
+
+  le-left-max-ℕ : (m n : ℕ) → n <-ℕ m → max-ℕ m n ＝ m
+  le-left-max-ℕ m n p = leq-left-max-ℕ m n (leq-le-ℕ n m p)
+
+  leq-right-max-ℕ : (m n : ℕ) → m ≤-ℕ n → max-ℕ m n ＝ n
+  leq-right-max-ℕ zero-ℕ n p = refl
+  leq-right-max-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (leq-right-max-ℕ m n p)
+
+  le-right-max-ℕ : (m n : ℕ) → m <-ℕ n → max-ℕ m n ＝ n
+  le-right-max-ℕ m n p = leq-right-max-ℕ m n (leq-le-ℕ m n p)
 ```
 
 ### Associativity of `max-ℕ`

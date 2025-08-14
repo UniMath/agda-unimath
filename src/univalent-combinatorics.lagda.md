@@ -37,7 +37,6 @@ open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-pair-types public
-open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.cycle-partitions public
@@ -50,12 +49,14 @@ open import univalent-combinatorics.decidable-equivalence-relations public
 open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public
+open import univalent-combinatorics.dedekind-finite-types public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-pair-types public
 open import univalent-combinatorics.discrete-sigma-decompositions public
 open import univalent-combinatorics.disjunction public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
+open import univalent-combinatorics.dual-dedekind-finite-types public
 open import univalent-combinatorics.embeddings public
 open import univalent-combinatorics.embeddings-standard-finite-types public
 open import univalent-combinatorics.equality-finite-types public
@@ -66,7 +67,6 @@ open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
-open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-subtypes public
 open import univalent-combinatorics.finite-types public
 open import univalent-combinatorics.finitely-enumerable-subtypes public
@@ -110,6 +110,10 @@ open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public
 open import univalent-combinatorics.steiner-systems public
 open import univalent-combinatorics.steiner-triple-systems public
+open import univalent-combinatorics.subcounting public
+open import univalent-combinatorics.subfinite-indexing public
+open import univalent-combinatorics.subfinite-types public
+open import univalent-combinatorics.subfinitely-enumerable-types public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
