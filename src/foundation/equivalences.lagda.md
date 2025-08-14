@@ -10,8 +10,10 @@ open import foundation-core.equivalences public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
@@ -191,6 +193,22 @@ module _
   emb-map-equiv : (A ≃ B) ↪ (A → B)
   pr1 emb-map-equiv = map-equiv
   pr2 emb-map-equiv = is-emb-map-equiv
+```
+
+This implies that being a
+[binary equivalence](foundation.binary-equivalences.md) is a property as well.
+We include this fact here to avoid creating a cyclic module dependency.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  is-prop-is-binary-equiv : is-prop (is-binary-equiv f)
+  is-prop-is-binary-equiv =
+    is-prop-all-elements-equal (λ x y → eq-pair
+    ( eq-htpy (λ b → eq-is-prop (is-property-is-equiv (λ v → f v b))))
+    ( eq-htpy (λ a → eq-is-prop (is-property-is-equiv (f a)))))
 ```
 
 ### The 3-for-2 property of being an equivalence
