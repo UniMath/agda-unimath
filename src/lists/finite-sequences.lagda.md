@@ -9,12 +9,14 @@ module lists.finite-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.sequences
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -140,6 +142,39 @@ module _
       ( v)
   cons-head-tail-fin-sequence n v =
     eq-htpy (htpy-cons-head-tail-fin-sequence n v)
+```
+
+### Any sequence `u` in a type determines a sequence of finite sequences `(i : Fin n) ↦ u i`
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  fin-sequence-sequence : (n : ℕ) → fin-sequence A n
+  fin-sequence-sequence n i = u (nat-Fin n i)
+
+  eq-fin-sequence-sequence :
+    (n : ℕ) → fin-sequence-sequence (succ-ℕ n) (neg-one-Fin n) ＝ u n
+  eq-fin-sequence-sequence n = refl
+
+  eq-zero-fin-sequence-sequence :
+    (n : ℕ) → fin-sequence-sequence (succ-ℕ n) (zero-Fin n) ＝ u 0
+  eq-zero-fin-sequence-sequence n = ap u (is-zero-nat-zero-Fin {n})
+
+  eq-skip-zero-fin-sequence-sequence :
+    (n : ℕ) (i : Fin n) →
+    fin-sequence-sequence (succ-ℕ n) (skip-zero-Fin n i) ＝
+    u (succ-ℕ (nat-Fin n i))
+  eq-skip-zero-fin-sequence-sequence n i = ap u (nat-skip-zero-Fin n i)
+
+module _
+  {l : Level} {A : UU l} (u v : sequence A) (H : u ~ v)
+  where
+
+  htpy-fin-sequence-sequence :
+    (n : ℕ) → fin-sequence-sequence u n ~ fin-sequence-sequence v n
+  htpy-fin-sequence-sequence n i = H (nat-Fin n i)
 ```
 
 ## See also
