@@ -9,7 +9,6 @@ module metric-spaces.cauchy-approximations-pseudometric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -98,8 +97,9 @@ module _
 
   const-cauchy-approximation-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space A
-  const-cauchy-approximation-Pseudometric-Space =
-    (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x)
+  pr1 const-cauchy-approximation-Pseudometric-Space _ = x
+  pr2 const-cauchy-approximation-Pseudometric-Space ε δ =
+    refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x
 ```
 
 ### Homotopic Cauchy approximations are equal

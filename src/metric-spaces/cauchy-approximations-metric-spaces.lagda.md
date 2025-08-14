@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
@@ -29,9 +30,11 @@ open import metric-spaces.short-functions-metric-spaces
 
 A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
-in a [metric space](metric-spaces.metric-spaces.md) `A` is a map `f` from
-[`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to the carrier
-type of `A` such that for all
+in a [metric space](metric-spaces.metric-spaces.md) `A` is a
+[Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+in its underlying [pseudometric-space](metric-spaces.pseudometric-spaces.md): a
+map `f` from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to
+the carrier type of `A` such that for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε`
 and `δ`, `f ε` and `f δ` are in a
 (`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e., the
@@ -50,7 +53,7 @@ module _
     (ℚ⁺ → type-Metric-Space A) → Prop l2
   is-cauchy-approximation-prop-Metric-Space =
     is-cauchy-approximation-prop-Pseudometric-Space
-      ( pseudometric-space-Metric-Space A)
+      ( pseudometric-Metric-Space A)
 
   is-cauchy-approximation-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → UU l2
@@ -95,7 +98,9 @@ module _
   const-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A
   const-cauchy-approximation-Metric-Space =
-    (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Metric-Space A (ε +ℚ⁺ δ) x)
+    const-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( x)
 ```
 
 ### The action of short maps on Cauchy approximations
@@ -111,16 +116,16 @@ module _
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
   map-short-function-cauchy-approximation-Metric-Space (u , H) =
-    ( map-short-function-Metric-Space A B f ∘ u) ,
-    ( λ ε δ →
-      is-short-map-short-function-Metric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( ε +ℚ⁺ δ)
-      ( u ε)
-      ( u δ)
-      ( H ε δ))
+    ( map-short-function-Metric-Space A B f ∘ u ,
+      λ ε δ →
+        is-short-map-short-function-Metric-Space
+          ( A)
+          ( B)
+          ( f)
+          ( ε +ℚ⁺ δ)
+          ( u ε)
+          ( u δ)
+          ( H ε δ))
 
 module _
   {l1 l2 : Level}
