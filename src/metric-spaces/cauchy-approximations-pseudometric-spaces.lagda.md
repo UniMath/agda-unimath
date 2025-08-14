@@ -30,7 +30,7 @@ A
 {{#concept "Cauchy approximation" Disambiguation="in a pseudometric space" Agda=is-cauchy-approximation-Pseudometric-Space}}
 in a [pseudometric space](metric-spaces.pseudometric-spaces.md) `A` is a map `f`
 from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to the
-carrier type of `A` such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
+carrier type of `A` such that for all [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε` and `δ`, `f ε` and `f δ` are in a
 (`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e., the
 distance between `f ε` and `f δ` is bounded by `ε + δ`.
 

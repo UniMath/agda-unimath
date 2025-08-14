@@ -52,12 +52,12 @@ The
 of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 [set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
 and the [neighborhood relation](metric-spaces.rational-neighborhoods.md) defined
-as:
+by:
 
-`(x , Px)` is `d`-neighbor of `(y , Py)` if and only if `x` is
+The pair `(x , x')` is a `d`-neighbor of `(y , y')` if and only if `x` is
 [equal](foundation.identity-types.md) to `y` and the
-[transport](foundation.transport-along-identifications.md) of `Px` along this
-identification is a `d`-neighbor of `y` in `P y`.
+[transport](foundation.transport-along-identifications.md) of `x'` along this
+identification is a `d`-neighbor of `y'` in `P y`.
 
 The [projection](foundation.dependent-pair-types.md) on the first component is
 [locally constant](metric-spaces.locally-constant-functions-metric-spaces.md),
