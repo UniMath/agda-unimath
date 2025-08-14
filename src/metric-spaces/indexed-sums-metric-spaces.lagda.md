@@ -48,7 +48,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 ## Idea
 
 The
-{{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=Σ-Metric-Space}}
+{{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=indexed-sum-Metric-Space}}
 of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 [set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
 and the
@@ -76,12 +76,12 @@ module _
   (P : type-Set A → Metric-Space lp lp')
   where
 
-  type-Σ-Metric-Space : UU (la ⊔ lp)
-  type-Σ-Metric-Space = Σ (type-Set A) (type-Metric-Space ∘ P)
+  type-indexed-sum-Metric-Space : UU (la ⊔ lp)
+  type-indexed-sum-Metric-Space = Σ (type-Set A) (type-Metric-Space ∘ P)
 
-  neighborhood-prop-Σ-Metric-Space :
-    Rational-Neighborhood-Relation (la ⊔ lp') type-Σ-Metric-Space
-  neighborhood-prop-Σ-Metric-Space d (x , Px) (y , Py) =
+  neighborhood-prop-indexed-sum-Metric-Space :
+    Rational-Neighborhood-Relation (la ⊔ lp') type-indexed-sum-Metric-Space
+  neighborhood-prop-indexed-sum-Metric-Space d (x , x') (y , y') =
     Σ-Prop
       ( Id-Prop
         ( A)
@@ -91,41 +91,42 @@ module _
         neighborhood-prop-Metric-Space
         ( P y)
         ( d)
-        ( tr (type-Metric-Space ∘ P) e Px)
-        ( Py))
+        ( tr (type-Metric-Space ∘ P) e x')
+        ( y'))
 
-  is-reflexive-neighborhood-Σ-Metric-Space :
+  is-reflexive-neighborhood-indexed-sum-Metric-Space :
     is-reflexive-Rational-Neighborhood-Relation
-      neighborhood-prop-Σ-Metric-Space
-  is-reflexive-neighborhood-Σ-Metric-Space d (x , Px) =
-    (refl , refl-neighborhood-Metric-Space (P x) d Px)
+      neighborhood-prop-indexed-sum-Metric-Space
+  is-reflexive-neighborhood-indexed-sum-Metric-Space d (x , x') =
+    (refl , refl-neighborhood-Metric-Space (P x) d x')
 
-  is-symmetric-neighborhood-Σ-Metric-Space :
+  is-symmetric-neighborhood-indexed-sum-Metric-Space :
     is-symmetric-Rational-Neighborhood-Relation
-      neighborhood-prop-Σ-Metric-Space
-  is-symmetric-neighborhood-Σ-Metric-Space d (x , Px) (.x , Px') (refl , Nxx') =
-    (refl , symmetric-neighborhood-Metric-Space (P x) d Px Px' Nxx')
+      neighborhood-prop-indexed-sum-Metric-Space
+  is-symmetric-neighborhood-indexed-sum-Metric-Space
+    d (x , x') (.x , x'') (refl , N) =
+    (refl , symmetric-neighborhood-Metric-Space (P x) d x' x'' N)
 
-  is-triangular-neighborhood-Σ-Metric-Space :
+  is-triangular-neighborhood-indexed-Metric-Space :
     is-triangular-Rational-Neighborhood-Relation
-      neighborhood-prop-Σ-Metric-Space
-  is-triangular-neighborhood-Σ-Metric-Space
-    (x , Px) (.x , Px') (.x , Px'') d₁ d₂ (refl , K) (refl , H) =
+      neighborhood-prop-indexed-sum-Metric-Space
+  is-triangular-neighborhood-indexed-Metric-Space
+    (x , xp) (.x , xp') (.x , xp'') d₁ d₂ (refl , K) (refl , H) =
     ( refl ,
       triangular-neighborhood-Metric-Space
-      ( P x)
-      ( Px)
-      ( Px')
-      ( Px'')
-      ( d₁)
-      ( d₂)
-      ( K)
-      ( H))
+        ( P x)
+        ( xp)
+        ( xp')
+        ( xp'')
+        ( d₁)
+        ( d₂)
+        ( K)
+        ( H))
 
-  is-saturated-neighborhood-Σ-Metric-Space :
+  is-saturated-neighborhood-indexed-sum-Metric-Space :
     is-saturated-Rational-Neighborhood-Relation
-      neighborhood-prop-Σ-Metric-Space
-  is-saturated-neighborhood-Σ-Metric-Space d (x , Px) (y , Py) H =
+      neighborhood-prop-indexed-sum-Metric-Space
+  is-saturated-neighborhood-indexed-sum-Metric-Space d (x , x') (y , y') H =
     ( x=y , lemma-neighborhood-Σ)
     where
 
@@ -146,38 +147,38 @@ module _
       neighborhood-Metric-Space
         ( P y)
         ( d)
-        ( tr (type-Metric-Space ∘ P) x=y Px)
-        ( Py)
+        ( tr (type-Metric-Space ∘ P) x=y x')
+        ( y')
     lemma-neighborhood-Σ =
       saturated-neighborhood-Metric-Space
         ( P y)
         ( d)
-        ( tr (type-Metric-Space ∘ P) x=y Px)
-        ( Py)
+        ( tr (type-Metric-Space ∘ P) x=y x')
+        ( y')
         ( λ δ →
           tr
             ( λ e →
               neighborhood-Metric-Space
                 (P y)
                 (d +ℚ⁺ δ)
-                ( tr (type-Metric-Space ∘ P) e Px)
-                ( Py))
+                ( tr (type-Metric-Space ∘ P) e x')
+                ( y'))
             ( all-eq-x=y δ)
             ( pr2 (H δ)))
 
-  pseudometric-space-Σ-Metric-Space :
+  pseudometric-space-indexed-sum-Metric-Space :
     Pseudometric-Space (la ⊔ lp) (la ⊔ lp')
-  pseudometric-space-Σ-Metric-Space =
-    ( type-Σ-Metric-Space ,
-      neighborhood-prop-Σ-Metric-Space ,
-      is-reflexive-neighborhood-Σ-Metric-Space ,
-      is-symmetric-neighborhood-Σ-Metric-Space ,
-      is-triangular-neighborhood-Σ-Metric-Space ,
-      is-saturated-neighborhood-Σ-Metric-Space)
+  pseudometric-space-indexed-sum-Metric-Space =
+    ( type-indexed-sum-Metric-Space ,
+      neighborhood-prop-indexed-sum-Metric-Space ,
+      is-reflexive-neighborhood-indexed-sum-Metric-Space ,
+      is-symmetric-neighborhood-indexed-sum-Metric-Space ,
+      is-triangular-neighborhood-indexed-Metric-Space ,
+      is-saturated-neighborhood-indexed-sum-Metric-Space)
 
-  is-tight-pseudometric-space-Σ-Metric-Space :
-    is-tight-Pseudometric-Space pseudometric-space-Σ-Metric-Space
-  is-tight-pseudometric-space-Σ-Metric-Space (x , Px) (y , Py) H =
+  is-tight-pseudometric-space-indexed-sum-Metric-Space :
+    is-tight-Pseudometric-Space pseudometric-space-indexed-sum-Metric-Space
+  is-tight-pseudometric-space-indexed-sum-Metric-Space (x , Px) (y , Py) H =
     eq-pair-Σ
       ( x=y)
       ( eq-sim-Metric-Space
@@ -209,38 +210,39 @@ module _
         ( pr1 (H δ))
         ( x=y)
 
-  is-extensional-pseudometric-space-Σ-Metric-Space :
-    is-extensional-Pseudometric-Space pseudometric-space-Σ-Metric-Space
-  is-extensional-pseudometric-space-Σ-Metric-Space =
+  is-extensional-pseudometric-space-indexed-sum-Metric-Space :
+    is-extensional-Pseudometric-Space
+      pseudometric-space-indexed-sum-Metric-Space
+  is-extensional-pseudometric-space-indexed-sum-Metric-Space =
     is-extensional-is-tight-Pseudometric-Space
-      pseudometric-space-Σ-Metric-Space
-      is-tight-pseudometric-space-Σ-Metric-Space
+      pseudometric-space-indexed-sum-Metric-Space
+      is-tight-pseudometric-space-indexed-sum-Metric-Space
 
-  Σ-Metric-Space : Metric-Space (la ⊔ lp) (la ⊔ lp')
-  Σ-Metric-Space =
+  indexed-sum-Metric-Space : Metric-Space (la ⊔ lp) (la ⊔ lp')
+  indexed-sum-Metric-Space =
     make-Metric-Space
-      type-Σ-Metric-Space
-      neighborhood-prop-Σ-Metric-Space
-      is-reflexive-neighborhood-Σ-Metric-Space
-      is-symmetric-neighborhood-Σ-Metric-Space
-      is-triangular-neighborhood-Σ-Metric-Space
-      is-saturated-neighborhood-Σ-Metric-Space
-      is-extensional-pseudometric-space-Σ-Metric-Space
+      type-indexed-sum-Metric-Space
+      neighborhood-prop-indexed-sum-Metric-Space
+      is-reflexive-neighborhood-indexed-sum-Metric-Space
+      is-symmetric-neighborhood-indexed-sum-Metric-Space
+      is-triangular-neighborhood-indexed-Metric-Space
+      is-saturated-neighborhood-indexed-sum-Metric-Space
+      is-extensional-pseudometric-space-indexed-sum-Metric-Space
 
-  base-point-Σ-Metric-Space :
-    type-Metric-Space Σ-Metric-Space → type-Set A
-  base-point-Σ-Metric-Space = pr1
+  base-point-indexed-sum-Metric-Space :
+    type-Metric-Space indexed-sum-Metric-Space → type-Set A
+  base-point-indexed-sum-Metric-Space = pr1
 
-  fiber-point-Σ-Metric-Space :
-    (x : type-Σ-Metric-Space) →
-    type-Metric-Space (P (base-point-Σ-Metric-Space x))
-  fiber-point-Σ-Metric-Space = pr2
+  fiber-point-indexed-sum-Metric-Space :
+    (x : type-indexed-sum-Metric-Space) →
+    type-Metric-Space (P (base-point-indexed-sum-Metric-Space x))
+  fiber-point-indexed-sum-Metric-Space = pr2
 
-  map-emb-fiber-Σ-Metric-Space :
+  map-emb-fiber-indexed-sum-Metric-Space :
     (x : type-Set A) →
     type-Metric-Space (P x) →
-    type-Σ-Metric-Space
-  map-emb-fiber-Σ-Metric-Space x px = (x , px)
+    type-indexed-sum-Metric-Space
+  map-emb-fiber-indexed-sum-Metric-Space x px = (x , px)
 ```
 
 ## Properties
@@ -254,17 +256,17 @@ module _
   (P : type-Set A → Metric-Space lp lp')
   where
 
-  is-locally-constant-base-point-Σ-Metric-Space :
+  is-locally-constant-base-point-indexed-sum-Metric-Space :
     is-locally-constant-function-Metric-Space
-      ( Σ-Metric-Space A P)
+      ( indexed-sum-Metric-Space A P)
       ( metric-space-discrete-metric-space-Set A)
-      ( base-point-Σ-Metric-Space A P)
-  is-locally-constant-base-point-Σ-Metric-Space x y =
+      ( base-point-indexed-sum-Metric-Space A P)
+  is-locally-constant-base-point-indexed-sum-Metric-Space x y =
     elim-exists
       ( Id-Prop
         ( A)
-        ( base-point-Σ-Metric-Space A P x)
-        ( base-point-Σ-Metric-Space A P y))
+        ( base-point-indexed-sum-Metric-Space A P x)
+        ( base-point-indexed-sum-Metric-Space A P y))
       ( λ d Nxy → pr1 Nxy)
 ```
 
@@ -278,33 +280,33 @@ module _
   (x : type-Set A)
   where
 
-  is-short-emb-fiber-Σ-Metric-Space :
+  is-short-emb-fiber-indexed-sum-Metric-Space :
     is-short-function-Metric-Space
       ( P x)
-      ( Σ-Metric-Space A P)
-      ( map-emb-fiber-Σ-Metric-Space A P x)
-  is-short-emb-fiber-Σ-Metric-Space d px px' Nxx' =
+      ( indexed-sum-Metric-Space A P)
+      ( map-emb-fiber-indexed-sum-Metric-Space A P x)
+  is-short-emb-fiber-indexed-sum-Metric-Space d px px' Nxx' =
     ( refl , Nxx')
 
-  short-emb-fiber-Σ-Metric-Space :
-    short-function-Metric-Space (P x) (Σ-Metric-Space A P)
-  short-emb-fiber-Σ-Metric-Space =
-    ( map-emb-fiber-Σ-Metric-Space A P x) ,
-    ( is-short-emb-fiber-Σ-Metric-Space)
+  short-emb-fiber-indexed-sum-Metric-Space :
+    short-function-Metric-Space (P x) (indexed-sum-Metric-Space A P)
+  short-emb-fiber-indexed-sum-Metric-Space =
+    ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
+      is-short-emb-fiber-indexed-sum-Metric-Space)
 
-  reflects-neighborhood-emb-fiber-Σ-Metric-Space :
+  reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space :
     (d : ℚ⁺) (px px' : type-Metric-Space (P x)) →
     neighborhood-Metric-Space
-      ( Σ-Metric-Space A P)
+      ( indexed-sum-Metric-Space A P)
       ( d)
-      ( map-emb-fiber-Σ-Metric-Space A P x px)
-      ( map-emb-fiber-Σ-Metric-Space A P x px') →
+      ( map-emb-fiber-indexed-sum-Metric-Space A P x px)
+      ( map-emb-fiber-indexed-sum-Metric-Space A P x px') →
     neighborhood-Metric-Space
       ( P x)
       ( d)
       ( px)
       ( px')
-  reflects-neighborhood-emb-fiber-Σ-Metric-Space d px px' (e , Nxx') =
+  reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space d px px' (e , Nxx') =
     inv-tr
       ( λ e' →
         neighborhood-Metric-Space
@@ -318,18 +320,18 @@ module _
         ( e))
       ( Nxx')
 
-  is-isometry-emb-fiber-Σ-Metric-Space :
+  is-isometry-emb-fiber-indexed-sum-Metric-Space :
     is-isometry-Metric-Space
       ( P x)
-      ( Σ-Metric-Space A P)
-      ( map-emb-fiber-Σ-Metric-Space A P x)
-  is-isometry-emb-fiber-Σ-Metric-Space d px px' =
-    ( is-short-emb-fiber-Σ-Metric-Space d px px' ,
-      reflects-neighborhood-emb-fiber-Σ-Metric-Space d px px')
+      ( indexed-sum-Metric-Space A P)
+      ( map-emb-fiber-indexed-sum-Metric-Space A P x)
+  is-isometry-emb-fiber-indexed-sum-Metric-Space d px px' =
+    ( is-short-emb-fiber-indexed-sum-Metric-Space d px px' ,
+      reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space d px px')
 
-  isometry-emb-fiber-Σ-Metric-Space :
-    isometry-Metric-Space (P x) (Σ-Metric-Space A P)
-  isometry-emb-fiber-Σ-Metric-Space =
-    ( map-emb-fiber-Σ-Metric-Space A P x ,
-      is-isometry-emb-fiber-Σ-Metric-Space)
+  isometry-emb-fiber-indexed-Metric-Space :
+    isometry-Metric-Space (P x) (indexed-sum-Metric-Space A P)
+  isometry-emb-fiber-indexed-Metric-Space =
+    ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
+      is-isometry-emb-fiber-indexed-sum-Metric-Space)
 ```
