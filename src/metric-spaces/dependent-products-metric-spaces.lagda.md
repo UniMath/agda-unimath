@@ -132,7 +132,7 @@ module _
       ( neighborhood-prop-Π-Metric-Space)
       ( is-reflexive-neighborhood-Π-Metric-Space)
       ( is-symmetric-neighborhood-Π-Metric-Space)
-      ( is-triangular-neighborhood-Π-Metric-Spac)
+      ( is-triangular-neighborhood-Π-Metric-Space)
       ( is-saturated-neighborhood-Π-Metric-Space)
       ( is-extensional-pseudometric-space-Π-Metric-Space)
 ```
