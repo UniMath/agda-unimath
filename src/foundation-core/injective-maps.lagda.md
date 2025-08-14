@@ -183,23 +183,6 @@ module _
     is-equiv-is-invertible g G (λ x → H (G (f x)))
 ```
 
-### Any embedding is injective
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-injective-is-emb : {f : A → B} → is-emb f → is-injective f
-  is-injective-is-emb is-emb-f {x} {y} = map-inv-is-equiv (is-emb-f x y)
-
-  is-injective-emb : (e : A ↪ B) → is-injective (map-emb e)
-  is-injective-emb e {x} {y} = map-inv-is-equiv (is-emb-map-emb e x y)
-
-  injection-emb : (A ↪ B) → injection A B
-  injection-emb e = (map-emb e , is-injective-emb e)
-```
-
 ### Any map out of a contractible type is injective
 
 ```agda
