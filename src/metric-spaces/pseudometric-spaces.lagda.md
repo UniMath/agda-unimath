@@ -43,7 +43,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 ## Idea
 
 A
-{{#concept "pseudometric space" Agda=Pseudometric-Space WD='pseudometric space' WDID=Q1397059}}
+{{#concept "pseudometric space" Agda=Pseudometric-Space WD="pseudometric space" WDID=Q1397059}}
 is a type [structured](foundation.structure.md) with a concept of distance on
 its elements.
 
