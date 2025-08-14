@@ -146,6 +146,9 @@ open import real-numbers.metric-space-of-real-numbers using
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
+open import real-numbers.absolute-value-real-numbers using
+  ( triangle-inequality-abs-ℝ)
+
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```
