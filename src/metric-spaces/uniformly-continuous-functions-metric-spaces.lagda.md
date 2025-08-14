@@ -49,6 +49,11 @@ module _
       ( premetric-Metric-Space Y)
       ( f)
 
+  is-modulus-of-uniform-continuity-Metric-Space :
+    (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)
+  is-modulus-of-uniform-continuity-Metric-Space =
+    type-Prop ∘ is-modulus-of-uniform-continuity-prop-Metric-Space
+
   modulus-of-uniform-continuity-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   modulus-of-uniform-continuity-map-Metric-Space =
     type-subtype is-modulus-of-uniform-continuity-prop-Metric-Space
