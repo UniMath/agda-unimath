@@ -31,12 +31,11 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 A [pseudometric space](metric-spaces.pseudometric-spaces.md) is called
 {{#concept "extensional" Disambiguation="pseudometric space" Agda=is-extensional-Pseudometric-Space}}
-if any of the following equivalent conditions holds:
+if the similarity relation has [propositional](foundation.propositions.md)
+fibers. This is equivalent to the following conditions:
 
 - [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
   elements are [identical](foundation-core.identity-types.md);
-- the similarity relation has [propositional](foundation.propositions.md)
-  fibers;
 - the similarity relation is [torsorial](foundation.torsorial-type-families.md).
 
 The carrier type of an extensional pseudometric space is a
