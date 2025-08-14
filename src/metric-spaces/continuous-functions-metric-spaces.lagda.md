@@ -48,21 +48,21 @@ module _
 
   is-continuous-at-point-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-continuous-at-point-prop-function-Metric-Space =
-    is-pt-limit-prop-function-Metric-Space X Y f x (f x)
+    is-point-limit-prop-function-Metric-Space X Y f x (f x)
 
   is-continuous-at-point-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-continuous-at-point-function-Metric-Space =
-    is-pt-limit-function-Metric-Space X Y f x (f x)
+    is-point-limit-function-Metric-Space X Y f x (f x)
 
   is-modulus-of-continuity-at-point-prop-function-Metric-Space :
     (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)
   is-modulus-of-continuity-at-point-prop-function-Metric-Space =
-    is-modulus-of-pt-limit-prop-function-Metric-Space X Y f x (f x)
+    is-modulus-of-point-limit-prop-function-Metric-Space X Y f x (f x)
 
   is-modulus-of-continuity-at-point-function-Metric-Space :
     (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)
   is-modulus-of-continuity-at-point-function-Metric-Space =
-    is-modulus-of-pt-limit-function-Metric-Space X Y f x (f x)
+    is-modulus-of-point-limit-function-Metric-Space X Y f x (f x)
 
   modulus-of-continuity-at-point-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   modulus-of-continuity-at-point-function-Metric-Space =
