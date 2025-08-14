@@ -29,6 +29,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
+open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
 open import foundation.morphisms-arrows
@@ -189,7 +190,7 @@ is-path-cosplit-succ-is-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
 ```agda
 is-path-cosplit-iterated-succ-is-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) (r : ℕ) {A : UU l1} {B : UU l2} {f : A → B} →
-  is-path-cosplit k f → is-path-cosplit (iterated-succ-𝕋 r k) f
+  is-path-cosplit k f → is-path-cosplit (iterate-succ-𝕋 r k) f
 is-path-cosplit-iterated-succ-is-path-cosplit k zero-ℕ = id
 is-path-cosplit-iterated-succ-is-path-cosplit k (succ-ℕ r) F =
   is-path-cosplit-iterated-succ-is-path-cosplit (succ-𝕋 k) r
@@ -269,7 +270,7 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
 ```agda
 is-trunc-is-path-cosplit-is-trunc-succ-domain :
   {l1 l2 : Level} {k r : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-trunc (succ-succ-add-𝕋 r k) A → is-trunc r (is-path-cosplit k f)
+  is-trunc (add+2-𝕋 r k) A → is-trunc r (is-path-cosplit k f)
 is-trunc-is-path-cosplit-is-trunc-succ-domain {k = neg-two-𝕋} =
   is-trunc-retraction
 is-trunc-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} {r} is-trunc-A =
