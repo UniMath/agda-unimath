@@ -1,4 +1,4 @@
-# Monotonic rational neighborhoods on types
+# Monotonic rational neighborhood relations
 
 ```agda
 module metric-spaces.monotonic-rational-neighborhoods where
@@ -21,7 +21,7 @@ open import metric-spaces.rational-neighborhoods
 
 A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
 {{#concept "monotonic" Disambiguation="rational neighborhood relation" Agda=is-monotonic-Rational-Neighborhood-Relation}}
-if all `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`.
+if, for all `d₁ < d₂`, all `d₁`-neighborhoods are `d₂`-neighborhoods.
 
 ## Definitions
 

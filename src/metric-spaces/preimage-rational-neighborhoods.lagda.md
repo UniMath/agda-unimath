@@ -1,4 +1,4 @@
-# Preimage of rational neighborhood relations along maps
+# Preimages of rational neighborhood relations along maps
 
 ```agda
 module metric-spaces.preimage-rational-neighborhoods where
@@ -25,12 +25,12 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) `U`
-on a type `B` and map `f : A → B` define a rational neighborhood relation on `A`
-where `x y : A` are `d`-neighbors if `f x` and `f y` are `d`-neighbors in `U`.
+Given a [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) `U`
+on a type `B` and map `f : A → B`, then we may define a rational neighborhood relation `f⁻¹U` on `A`
+where `x y : A` are `d`-neighbors in `f⁻¹U` if `f x` and `f y` are `d`-neighbors in `U`.
 This is the
 {{#concept "preimage" Disambiguation="rational neighborhood relation" Agda=preimage-Rational-Neighborhood-Relation}}
-of `U` by `f`.
+of `U` along `f`.
 
 ## Definitions
 

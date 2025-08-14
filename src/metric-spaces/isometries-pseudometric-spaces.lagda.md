@@ -113,7 +113,7 @@ module _
 
   isometry-id-Pseudometric-Space : isometry-Pseudometric-Space A A
   isometry-id-Pseudometric-Space =
-    id-Pseudometric-Space A , is-isometry-id-Pseudometric-Space
+    ( id-Pseudometric-Space A , is-isometry-id-Pseudometric-Space)
 ```
 
 ### Equality of isometries in pseudometric spaces is equivalent to homotopies between their carrier maps
@@ -244,7 +244,7 @@ module _
         (isometry-id-Pseudometric-Space B)
         ( f))
       ( f)
-      ( λ x → refl)
+      ( refl-htpy)
 
   right-unit-law-comp-isometry-Pseudometric-Space :
     ( comp-isometry-Pseudometric-Space A A B
@@ -262,7 +262,7 @@ module _
         ( B)
         ( f)
         ( isometry-id-Pseudometric-Space A))
-      ( λ x → refl)
+      ( refl-htpy)
 ```
 
 ### Associativity of composition of isometries between pseudometric spaces
@@ -296,7 +296,7 @@ module _
       ( comp-isometry-Pseudometric-Space A C D
         ( h)
         ( comp-isometry-Pseudometric-Space A B C g f))
-      ( λ x → refl)
+      ( refl-htpy)
 ```
 
 ### The inverse of an isometric equivalence is an isometry
@@ -352,44 +352,28 @@ module _
       ( E))
 
   is-section-isometry-inv-is-equiv-isometry-Pseudometric-Space :
-    ( comp-isometry-Pseudometric-Space
-      B
-      A
-      B
-      f
-      isometry-inv-is-equiv-isometry-Pseudometric-Space) ＝
+    ( comp-isometry-Pseudometric-Space B A B
+      ( f)
+      ( isometry-inv-is-equiv-isometry-Pseudometric-Space)) ＝
     ( isometry-id-Pseudometric-Space B)
   is-section-isometry-inv-is-equiv-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( B)
-      ( B)
-      ( comp-isometry-Pseudometric-Space
-        B
-        A
-        B
-        f
-        isometry-inv-is-equiv-isometry-Pseudometric-Space)
+    eq-htpy-map-isometry-Pseudometric-Space B B
+      ( comp-isometry-Pseudometric-Space B A B
+        ( f)
+        ( isometry-inv-is-equiv-isometry-Pseudometric-Space))
       ( isometry-id-Pseudometric-Space B)
       ( is-section-map-inv-is-equiv E)
 
   is-retraction-isometry-inv-is-equiv-isometry-Pseudometric-Space :
-    ( comp-isometry-Pseudometric-Space
-      A
-      B
-      A
-      isometry-inv-is-equiv-isometry-Pseudometric-Space
-      f) ＝
+    ( comp-isometry-Pseudometric-Space A B A
+      ( isometry-inv-is-equiv-isometry-Pseudometric-Space)
+      ( f)) ＝
     ( isometry-id-Pseudometric-Space A)
   is-retraction-isometry-inv-is-equiv-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( A)
-      ( comp-isometry-Pseudometric-Space
-        A
-        B
-        A
-        isometry-inv-is-equiv-isometry-Pseudometric-Space
-        f)
+    eq-htpy-map-isometry-Pseudometric-Space A A
+      ( comp-isometry-Pseudometric-Space A B A
+        ( isometry-inv-is-equiv-isometry-Pseudometric-Space)
+        ( f))
       ( isometry-id-Pseudometric-Space A)
       ( is-retraction-map-inv-is-equiv E)
 ```

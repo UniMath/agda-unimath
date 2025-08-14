@@ -46,14 +46,9 @@ module _
 
   is-cauchy-approximation-prop-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → Prop l2
-  is-cauchy-approximation-prop-Metric-Space f =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε →
-        Π-Prop
-          ( ℚ⁺)
-          ( λ δ →
-            neighborhood-prop-Metric-Space A (ε +ℚ⁺ δ) (f ε) (f δ)))
+  is-cauchy-approximation-prop-Metric-Space =
+    is-cauchy-approximation-prop-Pseudometric-Space
+      ( pseudometric-space-Metric-Space A)
 
   is-cauchy-approximation-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → UU l2
