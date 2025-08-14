@@ -143,5 +143,7 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits pub
 open import synthetic-homotopy-theory.universal-property-suspensions public
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
+open import synthetic-homotopy-theory.whitehead-principle-maps public
+open import synthetic-homotopy-theory.whitehead-principle-types public
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams public
 ```

@@ -36,6 +36,8 @@ open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
+open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
+open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public

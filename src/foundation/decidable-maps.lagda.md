@@ -13,8 +13,10 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
 open import foundation.retracts-of-maps
 open import foundation.universe-levels
@@ -81,7 +83,7 @@ module _
 ### Decidable maps are closed under homotopy
 
 ```agda
-abstract
+opaque
   is-decidable-map-htpy :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
     f ~ g → is-decidable-map g → is-decidable-map f
@@ -279,3 +281,56 @@ module _
       ( retract-fiber-retract-map f g R x)
       ( G (map-codomain-inclusion-retract-map f g R x))
 ```
+
+### Decidable maps have Hilbert ε-operators
+
+A decidable map `f` induces "eliminators" on the propositional truncations of
+its fibers
+
+```text
+ ε : (x : A) → ║ fiber f x ║₋₁ → fiber f x.
+```
+
+Such "eliminators" are called
+[Hilbert ε-operators](foundation.hilbert-epsilon-operators-maps.md), or _split
+supports_.
+
+```agda
+ε-operator-map-is-decidable-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-decidable-map f → ε-operator-map f
+ε-operator-map-is-decidable-map F = ε-operator-is-decidable ∘ F
+```
+
+### Decidable injective maps are embeddings
+
+**Proof.** Given a decidable map `f : A → B` then `f` decomposes
+`B ≃ (im f) + B∖(im f)`. Restricting to `im f` we have a section given by the
+Hilbert ε-operator on `f`. Now, by injectivity of `f` we know this restriction
+map is an equivalence. Hence, `f` is a composite of embeddings and so must be an
+embedding as well.
+
+```text
+    im f ╰────→ im f + B\(im f)
+    ↟ ⋮              │
+    │ ⋮ ~            │ ~
+    │ ↓      f       ↓
+     A ────────────→ B
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-emb-is-injective-is-decidable-map :
+    is-decidable-map f → is-injective f → is-emb f
+  is-emb-is-injective-is-decidable-map H K =
+    is-emb-is-injective-ε-operator-map (ε-operator-map-is-decidable-map H) K
+```
+
+There is also an analogous proof using the double negation image. This analogous
+proof avoids the use of propositional truncations, but cannot be included here
+due to introducing cyclic dependencies. See
+[`foundation.double-negation-images`](foundation.double-negation-images.md)
+instead.
