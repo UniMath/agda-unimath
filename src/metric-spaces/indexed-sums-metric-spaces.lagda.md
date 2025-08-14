@@ -49,7 +49,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 
 The
 {{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=indexed-sum-Metric-Space}}
-of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
+of a family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 [set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
 and the
 [neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
