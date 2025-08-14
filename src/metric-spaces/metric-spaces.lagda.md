@@ -27,12 +27,12 @@ open import foundation.universe-levels
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -50,7 +50,7 @@ defined by a family of _neighborhood_
 [relations](foundation.binary-relations.md) on it indexed by the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `ℚ⁺`, a
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md):
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md):
 
 ```text
   N : ℚ⁺ → A → A → Prop l
@@ -61,17 +61,18 @@ saying that _`d` is an upper bound on the distance from `x` to `y`_.
 
 The neighborhood relation on a metric space must satisfy the following axioms:
 
-- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhoods.md) Every
-  positive rational `d` is an upper bound on the distance from `x` to itself.
-- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhoods.md) Any upper
-  bound on the distance from `x` to `y` is an upper bound on the distance from
-  `y` to `x`.
-- [**Triangularity.**](metric-spaces.triangular-rational-neighborhoods.md) If
-  `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
+- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhood-relations.md)
+  Every positive rational `d` is an upper bound on the distance from `x` to
+  itself.
+- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhood-relations.md)
+  Any upper bound on the distance from `x` to `y` is an upper bound on the
+  distance from `y` to `x`.
+- [**Triangularity.**](metric-spaces.triangular-rational-neighborhood-relations.md)
+  If `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
   bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
   distance from `x` to `z`.
-- [**Saturation.**](metric-spaces.saturated-rational-neighborhoods.md): any
-  neighborhood `N d x y` contains the intersection of all `N d' x y` for
+- [**Saturation.**](metric-spaces.saturated-rational-neighborhood-relations.md):
+  any neighborhood `N d x y` contains the intersection of all `N d' x y` for
   `d < d'`.
 
 This gives `A` the structure of a

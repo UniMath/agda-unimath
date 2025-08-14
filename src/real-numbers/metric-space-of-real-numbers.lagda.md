@@ -33,11 +33,11 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -57,9 +57,9 @@ open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-n
 The {{#concept "standard metric space of real numbers" Agda=metric-space-ℝ}} is
 the [metric space](metric-spaces.metric-spaces.md) with carrier type
 [`ℝ`](real-numbers.dedekind-real-numbers.md) and the
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md) where
-`x y : ℝ` are `d`-neighbors when for any `r : ℚ` the following two conditions
-hold:
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+where `x y : ℝ` are `d`-neighbors when for any `r : ℚ` the following two
+conditions hold:
 
 - if `r + d` is in the lower cut of `y`, `r` is in the lower cut of `x`
 - if `r + d` is in the lower cut of `x`, `r` is in the lower cut of `y`

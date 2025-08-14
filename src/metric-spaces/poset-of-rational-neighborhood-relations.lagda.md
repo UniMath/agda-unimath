@@ -1,7 +1,7 @@
 # The poset of rational neighborhood relations on a type
 
 ```agda
-module metric-spaces.ordering-rational-neighborhoods where
+module metric-spaces.poset-of-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +16,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 
 open import order-theory.posets
 open import order-theory.preorders
@@ -26,8 +26,9 @@ open import order-theory.preorders
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) `U`
-on a type `A` is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+`U` on a type `A` is
 {{#concept "finer" Disambiguation="rational neighborhood relation on a type" Agda=leq-Rational-Neighborhood-Relation}}
 than another rational neighborhood relation `V` if `(U d)`-neighborhoods are
 `(V d)`-neighborhoods for any

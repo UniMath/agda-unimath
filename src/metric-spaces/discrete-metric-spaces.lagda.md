@@ -40,13 +40,13 @@ open import metric-spaces.locally-constant-functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>

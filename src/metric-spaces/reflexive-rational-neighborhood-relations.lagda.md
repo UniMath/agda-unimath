@@ -1,7 +1,7 @@
-# Reflexive rational neighborhoods on types
+# Reflexive rational neighborhood relations
 
 ```agda
-module metric-spaces.reflexive-rational-neighborhoods where
+module metric-spaces.reflexive-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +14,16 @@ open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+is
 {{#concept "reflexive" Disambiguation="rational neighborhood relation" Agda=is-reflexive-Rational-Neighborhood-Relation}}
 if any element is in all neighborhoods of itself, i.e., if all `ε`-neighborhoods
 are reflexive [binary relations](foundation.binary-relations.md).

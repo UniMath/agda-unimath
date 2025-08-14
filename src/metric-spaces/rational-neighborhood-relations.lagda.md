@@ -1,7 +1,7 @@
-# Rational neighborhood relations on types
+# Rational neighborhood relations
 
 ```agda
-module metric-spaces.rational-neighborhoods where
+module metric-spaces.rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>

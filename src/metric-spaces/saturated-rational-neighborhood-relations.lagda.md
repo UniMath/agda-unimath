@@ -1,7 +1,7 @@
 # Saturated rational neighborhood relations
 
 ```agda
-module metric-spaces.saturated-rational-neighborhoods where
+module metric-spaces.saturated-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -29,17 +29,18 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.monotonic-rational-neighborhoods
-open import metric-spaces.ordering-rational-neighborhoods
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
+open import metric-spaces.poset-of-rational-neighborhood-relations
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) on a
-type `A` is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+on a type `A` is
 {{#concept "saturated" Disambiguation="rational neighborhood relation" Agda=is-saturated-Rational-Neighborhood-Relation}}
 if `ε`-neighborhoods satisfy the following condition:
 
@@ -48,8 +49,8 @@ if `ε`-neighborhoods satisfy the following condition:
   `δ`, then they are in a `ε`-neighborhood.
 
 Or, equivalently if for any `(x y : A)`, the subset of
-[upper bounds](metric-spaces.rational-neighborhoods.md) on the distance between
-`x` and `y` is closed on the left:
+[upper bounds](metric-spaces.rational-neighborhood-relations.md) on the distance
+between `x` and `y` is closed on the left:
 
 - For any `ε : ℚ⁺`, if `ε + δ` is an upper bound of the distance between `x` and
   `y` for all `(δ : ℚ⁺)`, then so is `ε`.
@@ -64,8 +65,8 @@ This is the
 {{#concept "saturation" Disambiguation="rational neighborhood relation" Agda=saturate-Rational-Neighborhood-Relation}}
 of a rational neighborhood relation. The saturation of a rational neighborhood
 relation is **saturated** and
-[finer](metric-spaces.ordering-rational-neighborhoods.md) than all saturated
-rational neighborhood coarser than it.
+[finer](metric-spaces.poset-of-rational-neighborhood-relations.md) than all
+saturated rational neighborhood coarser than it.
 
 ## Definitions
 

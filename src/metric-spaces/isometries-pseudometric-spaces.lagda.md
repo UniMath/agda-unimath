@@ -25,7 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
@@ -35,7 +35,8 @@ open import metric-spaces.rational-neighborhoods
 A [function](metric-spaces.functions-pseudometric-spaces.md) between
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between pseudometric spaces" Agda=is-isometry-Pseudometric-Space}}
-if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
+if the
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
 on `A` is equivalent to the
 [preimage](metric-spaces.preimages-rational-neighborhood-relations.md) under `f`
 of the rational neighborhood relation on `B`. I.e., upper bounds on the distance

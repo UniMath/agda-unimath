@@ -32,8 +32,8 @@ A
 has a
 {{#concept "limit" Disambiguation="of a Cauchy approximation in a pseudometric space Agda=is-limit-cauchy-approximation-Pseudometric-Space}}
 `x : A` if `f ε` is near `x` for small `ε : ℚ⁺`; more precisely, if `f ε` is in
-a `ε + δ`-[neighborhood](metric-spaces.rational-neighborhoods.md) of `x` for all
-`ε δ : ℚ⁺`.
+a `ε + δ`-[neighborhood](metric-spaces.rational-neighborhood-relations.md) of
+`x` for all `ε δ : ℚ⁺`.
 
 ## Definitions
 

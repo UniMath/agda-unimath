@@ -1,7 +1,7 @@
 # Monotonic rational neighborhood relations
 
 ```agda
-module metric-spaces.monotonic-rational-neighborhoods where
+module metric-spaces.monotonic-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -12,14 +12,16 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+is
 {{#concept "monotonic" Disambiguation="rational neighborhood relation" Agda=is-monotonic-Rational-Neighborhood-Relation}}
 if, for all `d₁ < d₂`, all `d₁`-neighborhoods are `d₂`-neighborhoods.
 

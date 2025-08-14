@@ -34,13 +34,13 @@ open import metric-spaces.locally-constant-functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -51,8 +51,9 @@ The
 {{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=Σ-Metric-Space}}
 of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 [set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
-and the [neighborhood relation](metric-spaces.rational-neighborhoods.md) defined
-by:
+and the
+[neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+defined by:
 
 The pair `(x , x')` is a `d`-neighbor of `(y , y')` if and only if `x` is
 [equal](foundation.identity-types.md) to `y` and the

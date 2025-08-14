@@ -84,8 +84,8 @@ open import metric-spaces.metric-space-of-lipschitz-functions-metric-spaces publ
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
-open import metric-spaces.monotonic-rational-neighborhoods public
-open import metric-spaces.ordering-rational-neighborhoods public
+open import metric-spaces.monotonic-rational-neighborhood-relations public
+open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
@@ -93,16 +93,16 @@ open import metric-spaces.preimages-rational-neighborhood-relations public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public
-open import metric-spaces.rational-neighborhoods public
+open import metric-spaces.rational-neighborhood-relations public
 open import metric-spaces.rational-sequences-approximating-zero public
-open import metric-spaces.reflexive-rational-neighborhoods public
-open import metric-spaces.saturated-rational-neighborhoods public
+open import metric-spaces.reflexive-rational-neighborhood-relations public
+open import metric-spaces.saturated-rational-neighborhood-relations public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
-open import metric-spaces.symmetric-rational-neighborhoods public
-open import metric-spaces.triangular-rational-neighborhoods public
+open import metric-spaces.symmetric-rational-neighborhood-relations public
+open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 ```
 

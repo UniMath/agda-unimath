@@ -29,13 +29,13 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.preimages-rational-neighborhood-relations
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -44,11 +44,11 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a type equipped
 with a {{concept "pseudometric structure" Agda=Pseudometric-Structure}}: a
-[reflexive](metric-spaces.reflexive-rational-neighborhoods.md),
-[symmetric](metric-spaces.symmetric-rational-neighborhoods.md),
-[triangular](metric-spaces.triangular-rational-neighborhoods.md) and
-[saturated](metric-spaces.saturated-rational-neighborhoods.md)
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md).
+[reflexive](metric-spaces.reflexive-rational-neighborhood-relations.md),
+[symmetric](metric-spaces.symmetric-rational-neighborhood-relations.md),
+[triangular](metric-spaces.triangular-rational-neighborhood-relations.md) and
+[saturated](metric-spaces.saturated-rational-neighborhood-relations.md)
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md).
 
 Given a pseudometric structure `B` on `A` and some
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)

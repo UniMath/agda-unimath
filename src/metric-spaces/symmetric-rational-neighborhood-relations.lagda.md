@@ -1,7 +1,7 @@
-# Symmetric rational neighborhoods on types
+# Symmetric rational neighborhood relations
 
 ```agda
-module metric-spaces.symmetric-rational-neighborhoods where
+module metric-spaces.symmetric-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +14,16 @@ open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+is
 {{#concept "symmetric" Disambiguation="rational neighborhood relation" Agda=is-symmetric-Rational-Neighborhood-Relation}}
 if all `ε`-neighborhoods are symmetric
 [binary relations](foundation.binary-relations.md).

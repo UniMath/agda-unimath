@@ -1,7 +1,7 @@
-# Triangular rational neighborhood relations on types
+# Triangular rational neighborhood relations
 
 ```agda
-module metric-spaces.triangular-rational-neighborhoods where
+module metric-spaces.triangular-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -16,16 +16,18 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.monotonic-rational-neighborhoods
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [rational neighborhood relation](metric-spaces.rational-neighborhoods.md) is
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+is
 {{#concept "triangular" Disambiguation="rational neighborhood relation" agda=is-triangular-Rational-Neighborhood-Relation}}
 if it is additively transitive, i.e., if any `d₂`-neighbor of a `d₁`-neighbor of
 an element is its `d₁ + d₂`-neighbor.

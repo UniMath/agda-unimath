@@ -30,8 +30,9 @@ A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 `f : ℚ⁺ → A` in a [metric space](metric-spaces.metric-spaces.md) `A` has a
 {{#concept "limit" Disambiguation="of a Cauchy approximation in a metric space" Agda=is-limit-cauchy-approximation-Metric-Space}}
 `x : A` if `f ε` is near `x` for small `ε : ℚ⁺`. More precisely, `f` has a limit
-if `f ε` is in a `ε + δ`-[neighborhood](metric-spaces.rational-neighborhoods.md)
-of `x` for all
+if `f ε` is in a
+`ε + δ`-[neighborhood](metric-spaces.rational-neighborhood-relations.md) of `x`
+for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε`
 and `δ`.
 

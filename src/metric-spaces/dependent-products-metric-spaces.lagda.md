@@ -21,14 +21,14 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -38,12 +38,13 @@ open import metric-spaces.triangular-rational-neighborhoods
 A family of [metric spaces](metric-spaces.metric-spaces.md) over a type produces
 a {{#concept "product metric space" Agda=Π-Metric-Space}} on the type of
 dependent functions into the carrier types of the family. Two functions `f` and
-`g` are in a [`d`-neighborhood](metric-spaces.rational-neighborhoods.md) in the
+`g` are in a
+[`d`-neighborhood](metric-spaces.rational-neighborhood-relations.md) in the
 product structure if this holds for all the evaluations `f x` and `g x`. I.e.,
-[upper bounds](metric-spaces.rational-neighborhoods.md) on the distance between
-`f` and `g` are bounded below by the supremum of the distances between each
-`f x` and `g x`. The evaluation functions from the product metric space to each
-projected metric space are
+[upper bounds](metric-spaces.rational-neighborhood-relations.md) on the distance
+between `f` and `g` are bounded below by the supremum of the distances between
+each `f x` and `g x`. The evaluation functions from the product metric space to
+each projected metric space are
 [short maps](metric-spaces.short-functions-metric-spaces.md).
 
 ## Definitions

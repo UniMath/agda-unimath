@@ -37,8 +37,8 @@ map `f` from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) t
 the carrier type of `A` such that for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε`
 and `δ`, `f ε` and `f δ` are in a
-(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e., the
-distance between `f ε` and `f δ` is bounded by `ε + δ`.
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhood-relations.md),
+i.e., the distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
 

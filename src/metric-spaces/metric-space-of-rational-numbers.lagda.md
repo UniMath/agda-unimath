@@ -43,14 +43,14 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.lipschitz-functions-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -59,10 +59,11 @@ open import metric-spaces.triangular-rational-neighborhoods
 
 [Inequality](elementary-number-theory.inequality-rational-numbers.md) on the
 [rational numbers](elementary-number-theory.rational-numbers.md) induces a
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md) on `ℚ`
-where `x y : ℚ` are in a `d`-neighborhood when `y ≤ x + d` and `x ≤ y + d`, i.e.
-if the [distance](elementary-number-theory.distance-rational-numbers.md) between
-`x` and `y` is less than or equal to `d`. This is a
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+on `ℚ` where `x y : ℚ` are in a `d`-neighborhood when `y ≤ x + d` and
+`x ≤ y + d`, i.e. if the
+[distance](elementary-number-theory.distance-rational-numbers.md) between `x`
+and `y` is less than or equal to `d`. This is a
 [metric structure](metric-spaces.metric-spaces.md) on `ℚ` that defines the
 {{#concept "standard metric space of rational numbers" Agda=metric-space-ℚ}}.
 
