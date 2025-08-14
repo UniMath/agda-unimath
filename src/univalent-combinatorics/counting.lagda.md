@@ -115,38 +115,38 @@ module _
   pr2 (count-equiv' e f) = equiv-count-equiv' e f
 
   count-is-equiv : {f : X → Y} → is-equiv f → count X → count Y
-  count-is-equiv H = count-equiv (pair _ H)
+  count-is-equiv H = count-equiv (_ , H)
 
   count-is-equiv' :
     {f : X → Y} → is-equiv f → count Y → count X
-  count-is-equiv' H = count-equiv' (pair _ H)
+  count-is-equiv' H = count-equiv' (_ , H)
 ```
 
-### A type as 0 elements if and only if it is empty
+### A type has 0 elements if and only if it is empty
 
 ```agda
 abstract
   is-empty-is-zero-number-of-elements-count :
     {l : Level} {X : UU l} (e : count X) →
     is-zero-ℕ (number-of-elements-count e) → is-empty X
-  is-empty-is-zero-number-of-elements-count (pair .zero-ℕ e) refl x =
+  is-empty-is-zero-number-of-elements-count (.0 , e) refl x =
     map-inv-equiv e x
 
 abstract
   is-zero-number-of-elements-count-is-empty :
     {l : Level} {X : UU l} (e : count X) →
     is-empty X → is-zero-ℕ (number-of-elements-count e)
-  is-zero-number-of-elements-count-is-empty (pair zero-ℕ e) H = refl
-  is-zero-number-of-elements-count-is-empty (pair (succ-ℕ k) e) H =
+  is-zero-number-of-elements-count-is-empty (0 , e) H = refl
+  is-zero-number-of-elements-count-is-empty (succ-ℕ k , e) H =
     ex-falso (H (map-equiv e (zero-Fin k)))
 
 count-is-empty :
   {l : Level} {X : UU l} → is-empty X → count X
-pr1 (count-is-empty H) = zero-ℕ
-pr2 (count-is-empty H) = inv-equiv (pair H (is-equiv-is-empty' H))
+pr1 (count-is-empty H) = 0
+pr2 (count-is-empty H) = inv-equiv (H , is-equiv-is-empty' H)
 
 count-empty : count empty
-count-empty = count-Fin zero-ℕ
+count-empty = count-Fin 0
 ```
 
 ### A type has 1 element if and only if it is contractible
@@ -161,18 +161,18 @@ abstract
   is-contr-is-one-number-of-elements-count :
     {l : Level} {X : UU l} (e : count X) →
     is-one-ℕ (number-of-elements-count e) → is-contr X
-  is-contr-is-one-number-of-elements-count (pair .(succ-ℕ zero-ℕ) e) refl =
+  is-contr-is-one-number-of-elements-count (.1 , e) refl =
     is-contr-equiv' (Fin 1) e is-contr-Fin-1
 
 abstract
   is-one-number-of-elements-count-is-contr :
     {l : Level} {X : UU l} (e : count X) →
     is-contr X → is-one-ℕ (number-of-elements-count e)
-  is-one-number-of-elements-count-is-contr (pair zero-ℕ e) H =
+  is-one-number-of-elements-count-is-contr (0 , e) H =
     ex-falso (map-inv-equiv e (center H))
-  is-one-number-of-elements-count-is-contr (pair (succ-ℕ zero-ℕ) e) H =
+  is-one-number-of-elements-count-is-contr (1 , e) H =
     refl
-  is-one-number-of-elements-count-is-contr (pair (succ-ℕ (succ-ℕ k)) e) H =
+  is-one-number-of-elements-count-is-contr (succ-ℕ (succ-ℕ k) , e) H =
     ex-falso
       ( Eq-Fin-eq (succ-ℕ (succ-ℕ k))
         ( is-injective-equiv e
@@ -189,18 +189,18 @@ count-unit = count-is-contr is-contr-unit
 ```agda
 has-decidable-equality-count :
   {l : Level} {X : UU l} → count X → has-decidable-equality X
-has-decidable-equality-count (pair k e) =
+has-decidable-equality-count (k , e) =
   has-decidable-equality-equiv' e (has-decidable-equality-Fin k)
 ```
 
-### This with a count are either inhabited or empty
+### Types with a count are either inhabited or empty
 
 ```agda
 is-inhabited-or-empty-count :
   {l1 : Level} {A : UU l1} → count A → is-inhabited-or-empty A
-is-inhabited-or-empty-count (pair zero-ℕ e) =
-  inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
-is-inhabited-or-empty-count (pair (succ-ℕ k) e) =
+is-inhabited-or-empty-count (0 , e) =
+  inr (is-empty-is-zero-number-of-elements-count (0 , e) refl)
+is-inhabited-or-empty-count (succ-ℕ k , e) =
   inl (unit-trunc-Prop (map-equiv e (zero-Fin k)))
 ```
 
@@ -209,11 +209,11 @@ is-inhabited-or-empty-count (pair (succ-ℕ k) e) =
 ```agda
 count-type-trunc-Prop :
   {l1 : Level} {A : UU l1} → count A → count (type-trunc-Prop A)
-count-type-trunc-Prop (pair zero-ℕ e) =
+count-type-trunc-Prop (0 , e) =
   count-is-empty
     ( is-empty-type-trunc-Prop
-      ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl))
-count-type-trunc-Prop (pair (succ-ℕ k) e) =
+      ( is-empty-is-zero-number-of-elements-count (0 , e) refl))
+count-type-trunc-Prop (succ-ℕ k , e) =
   count-is-contr
     ( is-proof-irrelevant-is-prop
       ( is-prop-type-trunc-Prop)
