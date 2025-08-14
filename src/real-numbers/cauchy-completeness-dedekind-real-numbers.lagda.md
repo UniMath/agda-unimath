@@ -532,7 +532,7 @@ pr1 (complete-metric-space-ℝ l) = metric-space-ℝ l
 pr2 (complete-metric-space-ℝ l) = is-complete-metric-space-ℝ l
 ```
 
-### Limits of Cauchy sequences in `ℝ`
+### Limits of Cauchy sequences in ℝ
 
 ```agda
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
