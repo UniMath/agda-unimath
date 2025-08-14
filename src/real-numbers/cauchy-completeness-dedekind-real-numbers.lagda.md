@@ -93,7 +93,7 @@ is-cauchy-map-cauchy-approximation-ℝ {l} x =
 
 ## Properties
 
-### The limit of a Cauchy approximation in `ℝ`
+### The limit of a Cauchy approximation in ℝ
 
 ```agda
 module _
