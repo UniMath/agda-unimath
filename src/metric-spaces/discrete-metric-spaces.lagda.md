@@ -38,7 +38,7 @@ open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.locally-constant-functions-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhoods
 open import metric-spaces.reflexive-rational-neighborhoods

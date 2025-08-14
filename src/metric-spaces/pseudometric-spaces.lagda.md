@@ -30,7 +30,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.monotonic-rational-neighborhoods
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.rational-neighborhoods
 open import metric-spaces.reflexive-rational-neighborhoods
 open import metric-spaces.saturated-rational-neighborhoods

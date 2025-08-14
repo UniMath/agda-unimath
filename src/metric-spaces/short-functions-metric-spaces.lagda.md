@@ -28,7 +28,7 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.ordering-rational-neighborhoods
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 ```
 
 </details>
@@ -40,8 +40,8 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between two
 {{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space WD="metric map" WDID=Q2713824}}
 if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
 on `A` is [finer](metric-spaces.ordering-rational-neighborhoods.md) than the
-[preimage](metric-spaces.preimage-rational-neighborhoods.md) by `f` of the
-rational neighborhood relation on `B`. I.e., upper bounds on the distance
+[preimage](metric-spaces.preimages-rational-neighborhood-relations.md) by `f` of
+the rational neighborhood relation on `B`. I.e., upper bounds on the distance
 between two points in `A` are upper bounds of the distance between their images
 in `B`.
 

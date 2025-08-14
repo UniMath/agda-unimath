@@ -25,7 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhoods
 ```
@@ -39,10 +39,10 @@ is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
 if the [rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
 on `A` is equivalent to the
-[preimage](metric-spaces.preimage-rational-neighborhoods.md) under `f` of the
-rational neighborhood relation on `B`. In other words, `f` is an isometry if it
-is an [isometry](metric-spaces.isometries-pseudometric-spaces.md) between the
-underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
+[preimage](metric-spaces.preimages-rational-neighborhood-relations.md) under `f`
+of the rational neighborhood relation on `B`. In other words, `f` is an isometry
+if it is an [isometry](metric-spaces.isometries-pseudometric-spaces.md) between
+the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
 ## Definitions
 

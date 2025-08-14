@@ -1,7 +1,7 @@
 # Preimages of rational neighborhood relations along maps
 
 ```agda
-module metric-spaces.preimage-rational-neighborhoods where
+module metric-spaces.preimages-rational-neighborhood-relations where
 ```
 
 <details><summary>Imports</summary>
