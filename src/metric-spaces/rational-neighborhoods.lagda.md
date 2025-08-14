@@ -51,7 +51,7 @@ relation.
 
 ## Definitions
 
-### Rational neighborhood relation on a type
+### Rational neighborhood relations on a type
 
 ```agda
 module _
