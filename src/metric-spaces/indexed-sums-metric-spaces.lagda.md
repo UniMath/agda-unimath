@@ -49,7 +49,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 
 The
 {{#concept "indexed sum" Disambiguation="of a type family of metric spaces" Agda=indexed-sum-Metric-Space}}
-of a type family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
+of a family `P` of [metric spaces](metric-spaces.metric-spaces.md) over a
 [set](foundation.sets.md) `A` is the metric space with underlying type `Σ A P`
 and the
 [neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
@@ -221,13 +221,13 @@ module _
   indexed-sum-Metric-Space : Metric-Space (la ⊔ lp) (la ⊔ lp')
   indexed-sum-Metric-Space =
     make-Metric-Space
-      type-indexed-sum-Metric-Space
-      neighborhood-prop-indexed-sum-Metric-Space
-      is-reflexive-neighborhood-indexed-sum-Metric-Space
-      is-symmetric-neighborhood-indexed-sum-Metric-Space
-      is-triangular-neighborhood-indexed-Metric-Space
-      is-saturated-neighborhood-indexed-sum-Metric-Space
-      is-extensional-pseudometric-space-indexed-sum-Metric-Space
+      ( type-indexed-sum-Metric-Space)
+      ( neighborhood-prop-indexed-sum-Metric-Space)
+      ( is-reflexive-neighborhood-indexed-sum-Metric-Space)
+      ( is-symmetric-neighborhood-indexed-sum-Metric-Space)
+      ( is-triangular-neighborhood-indexed-Metric-Space)
+      ( is-saturated-neighborhood-indexed-sum-Metric-Space)
+      ( is-extensional-pseudometric-space-indexed-sum-Metric-Space)
 
   base-point-indexed-sum-Metric-Space :
     type-Metric-Space indexed-sum-Metric-Space → type-Set A

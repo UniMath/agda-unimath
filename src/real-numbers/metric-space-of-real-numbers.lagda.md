@@ -141,8 +141,8 @@ module _
   is-saturated-neighborhood-ℝ :
     is-saturated-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
   is-saturated-neighborhood-ℝ ε x y H =
-    ( is-closed-lower-neighborhood-ℝ x y ε (pr1 ∘ H)) ,
-    ( is-closed-lower-neighborhood-ℝ y x ε (pr2 ∘ H))
+    ( is-closed-lower-neighborhood-ℝ x y ε (pr1 ∘ H) ,
+      is-closed-lower-neighborhood-ℝ y x ε (pr2 ∘ H))
     where
 
     is-closed-lower-neighborhood-ℝ :
@@ -176,12 +176,12 @@ module _
 
   pseudometric-space-ℝ : Pseudometric-Space (lsuc l) l
   pseudometric-space-ℝ =
-    ( ℝ l) ,
-    ( neighborhood-prop-ℝ l) ,
-    ( is-reflexive-neighborhood-ℝ) ,
-    ( is-symmetric-neighborhood-ℝ) ,
-    ( is-triangular-neighborhood-ℝ) ,
-    ( is-saturated-neighborhood-ℝ)
+    ( ℝ l ,
+      neighborhood-prop-ℝ l ,
+      is-reflexive-neighborhood-ℝ ,
+      is-symmetric-neighborhood-ℝ ,
+      is-triangular-neighborhood-ℝ ,
+      is-saturated-neighborhood-ℝ)
 
 module _
   {l : Level}

@@ -32,7 +32,7 @@ A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
 in a [metric space](metric-spaces.metric-spaces.md) `A` is a
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-in its underlying [pseudometric-space](metric-spaces.pseudometric-spaces.md): a
+in its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md): a
 map `f` from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to
 the carrier type of `A` such that for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε`
