@@ -51,7 +51,7 @@ open import univalent-combinatorics.surjective-maps
 ## Idea
 
 A type `X` is
-{{#concept "finitely enumerable" disambiguation="type" Agda=finitely-enumerable-type}}
+{{#concept "finitely enumerable" disambiguation="type" Agda=is-finitely-enumerable}}
 if there [exists](foundation.existential-quantification.md) an `n : ℕ` and a
 [surjection](foundation.surjective-maps.md) from `Fin n → X`.
 
