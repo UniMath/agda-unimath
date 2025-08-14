@@ -31,7 +31,7 @@ A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 {{#concept "limit" Disambiguation="of a Cauchy approximation in a metric space" Agda=is-limit-cauchy-approximation-Metric-Space}}
 `x : A` if `f ε` is near `x` for small `ε : ℚ⁺`. More precisely, `f` has a limit
 if `f ε` is in a `ε + δ`-[neighborhood](metric-spaces.rational-neighborhoods.md)
-of `x` for all `ε δ : ℚ⁺`.
+of `x` for all [positive rationals](elementary-number-theory.positive-rational-numbers.md) `ε` and `δ`.
 
 These are
 [limits](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md)
