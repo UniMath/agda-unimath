@@ -7,6 +7,8 @@ module foundation.double-negation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -28,10 +30,10 @@ We define double negation and triple negation.
 infix 25 ¬¬_ ¬¬¬_
 
 ¬¬_ : {l : Level} → UU l → UU l
-¬¬ P = ¬ (¬ P)
+¬¬ P = ¬ ¬ P
 
 ¬¬¬_ : {l : Level} → UU l → UU l
-¬¬¬ P = ¬ (¬ (¬ P))
+¬¬¬ P = ¬ ¬ ¬ P
 ```
 
 We also define the introduction rule for double negation, and the action on maps
@@ -44,6 +46,11 @@ intro-double-negation p f = f p
 map-double-negation :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → ¬¬ P → ¬¬ Q
 map-double-negation f = map-neg (map-neg f)
+
+map-binary-double-negation :
+  {l1 l2 l3 : Level} {P : UU l1} {Q : UU l2} {R : UU l3} →
+  (P → Q → R) → ¬¬ P → ¬¬ Q → ¬¬ R
+map-binary-double-negation f nnp nnq nr = nnp (λ p → nnq (λ q → nr (f p q)))
 
 elim-triple-negation : {l : Level} {P : UU l} → ¬¬¬ P → ¬ P
 elim-triple-negation = map-neg intro-double-negation
@@ -127,6 +134,22 @@ abstract
     {l : Level} {A : UU l} → ¬¬ A → ¬¬ (type-trunc-Prop A)
   double-negation-type-trunc-Prop-double-negation =
     map-double-negation unit-trunc-Prop
+```
+
+### Distributivity over cartesian products
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-distributive-double-negation-product : ¬¬ (A × B) → (¬¬ A × ¬¬ B)
+  map-distributive-double-negation-product nnp =
+    ( map-double-negation pr1 nnp , map-double-negation pr2 nnp)
+
+  map-inv-distributive-double-negation-product : (¬¬ A × ¬¬ B) → ¬¬ (A × B)
+  map-inv-distributive-double-negation-product (nna , nnb) =
+    map-binary-double-negation pair nna nnb
 ```
 
 ## See also

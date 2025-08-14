@@ -225,3 +225,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
 ## References
 
 {{#bibliography}}
+
+## See also
+
+- [Counting the elements of decidable subtypes](univalent-combinatorics.counting-decidable-subtypes.md)
