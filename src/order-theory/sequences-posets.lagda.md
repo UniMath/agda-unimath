@@ -14,8 +14,9 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import order-theory.posets
 open import order-theory.sequences-preorders
@@ -26,8 +27,8 @@ open import order-theory.sequences-preorders
 ## Idea
 
 A {{#concept "sequence" Disambiguation="in a poset" Agda=sequence-type-Poset}}
-in a [poset](order-theory.posets.md) is a [sequence](foundation.sequences.md) in
-its underlying type.
+in a [poset](order-theory.posets.md) is a [sequence](lists.sequences.md) in its
+underlying type.
 
 ## Definitions
 

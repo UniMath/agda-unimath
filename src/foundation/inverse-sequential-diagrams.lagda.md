@@ -21,8 +21,8 @@ open import foundation.universe-levels
 
 An
 {{#concept "inverse sequential diagram" Disambiguation="types" Agda=inverse-sequential-diagram}}
-of types `A` is a [sequence](foundation.sequences.md) of types together with
-maps between every two consecutive types
+of types `A` is a [sequence](lists.sequences.md) of types together with maps
+between every two consecutive types
 
 ```text
   fₙ : Aₙ₊₁ → Aₙ

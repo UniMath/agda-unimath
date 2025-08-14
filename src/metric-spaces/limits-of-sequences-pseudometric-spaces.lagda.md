@@ -19,11 +19,12 @@ open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
-open import foundation.subsequences
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import lists.sequences
+open import lists.subsequences
 
 open import metric-spaces.limits-of-sequences-premetric-spaces
 open import metric-spaces.pseudometric-spaces

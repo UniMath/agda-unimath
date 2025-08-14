@@ -27,11 +27,12 @@ open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 

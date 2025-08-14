@@ -47,6 +47,8 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 
+open import lists.shifting-sequences
+
 open import univalent-combinatorics.standard-finite-types
 ```
 
