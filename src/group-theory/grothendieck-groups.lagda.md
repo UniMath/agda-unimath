@@ -68,7 +68,7 @@ monoids, the extra term `k` is needed.
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
-  (let _*_ = mul-Commutative-Monoid M)
+  (let _*M_ = mul-Commutative-Monoid M)
   where
 
   grothendieck-relation-prop-Commutative-Monoid :
@@ -78,8 +78,8 @@ module _
       ( λ k →
         Id-Prop
           ( set-Commutative-Monoid M)
-          ( (p1 * n2) * k)
-          ( (p2 * n1) * k))
+          ( (p1 *M n2) *M k)
+          ( (p2 *M n1) *M k))
 
   grothendieck-relation-Commutative-Monoid :
     Relation l (type-product-Commutative-Monoid M M)
@@ -107,37 +107,37 @@ module _
               ( grothendieck-relation-prop-Commutative-Monoid
                 ( p1 , n1)
                 ( p3 , n3))
-          ap-* = ap-mul-Commutative-Monoid M
-          interchange-*-* = interchange-mul-mul-Commutative-Monoid M
-          assoc-* = associative-mul-Commutative-Monoid M
-          comm-* = commutative-mul-Commutative-Monoid M
+          ap-*M = ap-mul-Commutative-Monoid M
+          interchange-*M-*M = interchange-mul-mul-Commutative-Monoid M
+          associative-*M = associative-mul-Commutative-Monoid M
+          commutative-*M = commutative-mul-Commutative-Monoid M
         in do
           (k23 , p2n3k23=p3n2k23) ← ∃k23
           (k12 , p1n2k12=p2n1k12) ← ∃k12
           intro-exists
-            ((n2 * p2) * (k12 * k23))
+            ((n2 *M p2) *M (k12 *M k23))
             ( equational-reasoning
-              (p1 * n3) * ((n2 * p2) * (k12 * k23))
-              ＝ (p1 * n3) * ((n2 * k12) * (p2 * k23))
-                by ap-* refl (interchange-*-* _ _ _ _)
-              ＝ (p1 * (n2 * k12)) * (n3 * (p2 * k23))
-                by interchange-*-* _ _ _ _
-              ＝ (p1 * (n2 * k12)) * (p2 * (n3 * k23))
-                by ap-* refl (left-swap-mul-Commutative-Monoid M _ _ _)
-              ＝ ((p1 * n2) * k12) * ((p2 * n3) * k23)
-                by inv (ap-* (assoc-* _ _ _) (assoc-* _ _ _))
-              ＝ ((p2 * n1) * k12) * ((p3 * n2) * k23)
-                by ap-* p1n2k12=p2n1k12 p2n3k23=p3n2k23
-              ＝ ((p2 * n1) * (p3 * n2)) * (k12 * k23)
-                by interchange-*-* _ _ _ _
-              ＝ ((p3 * n2) * (p2 * n1)) * (k12 * k23)
-                by ap-* (comm-* _ _) refl
-              ＝ ((p3 * n2) * (n1 * p2)) * (k12 * k23)
-                by ap-* (ap-* refl (comm-* _ _)) refl
-              ＝ ((p3 * n1) * (n2 * p2)) * (k12 * k23)
-                by ap-* (interchange-*-* _ _ _ _) refl
-              ＝ (p3 * n1) * ((n2 * p2) * (k12 * k23))
-                by assoc-* _ _ _)
+              (p1 *M n3) *M ((n2 *M p2) *M (k12 *M k23))
+              ＝ (p1 *M n3) *M ((n2 *M k12) *M (p2 *M k23))
+                by ap-*M refl (interchange-*M-*M _ _ _ _)
+              ＝ (p1 *M (n2 *M k12)) *M (n3 *M (p2 *M k23))
+                by interchange-*M-*M _ _ _ _
+              ＝ (p1 *M (n2 *M k12)) *M (p2 *M (n3 *M k23))
+                by ap-*M refl (left-swap-mul-Commutative-Monoid M _ _ _)
+              ＝ ((p1 *M n2) *M k12) *M ((p2 *M n3) *M k23)
+                by inv (ap-*M (associative-*M _ _ _) (associative-*M _ _ _))
+              ＝ ((p2 *M n1) *M k12) *M ((p3 *M n2) *M k23)
+                by ap-*M p1n2k12=p2n1k12 p2n3k23=p3n2k23
+              ＝ ((p2 *M n1) *M (p3 *M n2)) *M (k12 *M k23)
+                by interchange-*M-*M _ _ _ _
+              ＝ ((p3 *M n2) *M (p2 *M n1)) *M (k12 *M k23)
+                by ap-*M (commutative-*M _ _) refl
+              ＝ ((p3 *M n2) *M (n1 *M p2)) *M (k12 *M k23)
+                by ap-*M (ap-*M refl (commutative-*M _ _)) refl
+              ＝ ((p3 *M n1) *M (n2 *M p2)) *M (k12 *M k23)
+                by ap-*M (interchange-*M-*M _ _ _ _) refl
+              ＝ (p3 *M n1) *M ((n2 *M p2) *M (k12 *M k23))
+                by associative-*M _ _ _)
 
     is-equivalence-relation-grothendieck-relation-prop-Commutative-Monoid :
       is-equivalence-relation grothendieck-relation-prop-Commutative-Monoid
@@ -176,7 +176,7 @@ module _
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
-  (let _*_ = mul-Commutative-Monoid M)
+  (let _*M_ = mul-Commutative-Monoid M)
   where
 
   abstract
@@ -186,7 +186,7 @@ module _
         ( grothendieck-equivalence-relation-Commutative-Monoid M)
         ( grothendieck-equivalence-relation-Commutative-Monoid M)
     pr1 binary-hom-add-grothendieck-ab-Commutative-Monoid
-      (p1 , n1) (p2 , n2) = (p1 * p2 , n1 * n2)
+      (p1 , n1) (p2 , n2) = (p1 *M p2 , n1 *M n2)
     pr2 binary-hom-add-grothendieck-ab-Commutative-Monoid
       {p1 , n1} {p1' , n1'} {p2 , n2} {p2' , n2'} ∃k11' ∃k22' =
         let
@@ -194,27 +194,27 @@ module _
             do-syntax-trunc-Prop
               ( grothendieck-relation-prop-Commutative-Monoid
                 ( M)
-                ( p1 * p2 , n1 * n2)
-                ( p1' * p2' , n1' * n2'))
-          ap-* = ap-mul-Commutative-Monoid M
-          interchange-*-* = interchange-mul-mul-Commutative-Monoid M
+                ( p1 *M p2 , n1 *M n2)
+                ( p1' *M p2' , n1' *M n2'))
+          ap-*M = ap-mul-Commutative-Monoid M
+          interchange-*M-*M = interchange-mul-mul-Commutative-Monoid M
         in do
           (k11' , p1n1'k11'=p1'n1k11') ← ∃k11'
           (k22' , p2n2'k22'=p2'n2k22') ← ∃k22'
           intro-exists
-            ( k11' * k22')
+            ( k11' *M k22')
             ( equational-reasoning
-              ((p1 * p2) * (n1' * n2')) * (k11' * k22')
-              ＝ ((p1 * n1') * (p2 * n2')) * (k11' * k22')
-                by ap-* (interchange-*-* _ _ _ _) refl
-              ＝ ((p1 * n1') * k11') * ((p2 * n2') * k22')
-                by interchange-*-* _ _ _ _
-              ＝ ((p1' * n1) * k11') * ((p2' * n2) * k22')
-                by ap-* p1n1'k11'=p1'n1k11' p2n2'k22'=p2'n2k22'
-              ＝ ((p1' * n1) * (p2' * n2)) * (k11' * k22')
-                by interchange-*-* _ _ _ _
-              ＝ ((p1' * p2') * (n1 * n2)) * (k11' * k22')
-                by ap-* (interchange-*-* _ _ _ _) refl)
+              ((p1 *M p2) *M (n1' *M n2')) *M (k11' *M k22')
+              ＝ ((p1 *M n1') *M (p2 *M n2')) *M (k11' *M k22')
+                by ap-*M (interchange-*M-*M _ _ _ _) refl
+              ＝ ((p1 *M n1') *M k11') *M ((p2 *M n2') *M k22')
+                by interchange-*M-*M _ _ _ _
+              ＝ ((p1' *M n1) *M k11') *M ((p2' *M n2) *M k22')
+                by ap-*M p1n1'k11'=p1'n1k11' p2n2'k22'=p2'n2k22'
+              ＝ ((p1' *M n1) *M (p2' *M n2)) *M (k11' *M k22')
+                by interchange-*M-*M _ _ _ _
+              ＝ ((p1' *M p2') *M (n1 *M n2)) *M (k11' *M k22')
+                by ap-*M (interchange-*M-*M _ _ _ _) refl)
 
   add-grothendieck-ab-Commutative-Monoid :
     type-grothendieck-ab-Commutative-Monoid M →
@@ -479,7 +479,7 @@ module _
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
-  (let _*_ = mul-Commutative-Monoid M)
+  (let _*M_ = mul-Commutative-Monoid M)
   where
 
   inv-product-grothendieck-ab-Commutative-Monoid :
@@ -501,17 +501,17 @@ module _
             ( grothendieck-relation-prop-Commutative-Monoid M
               ( n , p)
               ( n' , p'))
-        ap-* = ap-mul-Commutative-Monoid M
-        comm-* = commutative-mul-Commutative-Monoid M
+        ap-*M = ap-mul-Commutative-Monoid M
+        commutative-*M = commutative-mul-Commutative-Monoid M
       in do
         (k , pn'k=p'nk) ← ∃k
         intro-exists
           ( k)
           ( equational-reasoning
-            (n * p') * k
-            ＝ (p' * n) * k by ap-* (comm-* _ _) refl
-            ＝ (p * n') * k by inv pn'k=p'nk
-            ＝ (n' * p) * k by ap-* (comm-* _ _) refl)
+            (n *M p') *M k
+            ＝ (p' *M n) *M k by ap-*M (commutative-*M _ _) refl
+            ＝ (p *M n') *M k by inv pn'k=p'nk
+            ＝ (n' *M p) *M k by ap-*M (commutative-*M _ _) refl)
 
   inv-grothendieck-ab-Commutative-Monoid :
     type-grothendieck-ab-Commutative-Monoid M →
@@ -541,7 +541,7 @@ module _
 ```agda
 module _
   {l : Level} (M : Commutative-Monoid l)
-  (let _*_ = mul-Commutative-Monoid M)
+  (let _*M_ = mul-Commutative-Monoid M)
   where
 
   abstract
@@ -554,12 +554,12 @@ module _
         ( unit-product-Commutative-Monoid M M)
     left-inverse-law-product-grothendieck-ab-Commutative-Monoid (p , n) =
       let
-        comm-* = commutative-mul-Commutative-Monoid M
+        commutative-*M = commutative-mul-Commutative-Monoid M
         u = unit-Commutative-Monoid M
       in
         intro-exists
           ( u)
-          ( ap (_* u) (comm-* _ _ ∙ ap (u *_) (comm-* _ _)))
+          ( ap (_*M u) (commutative-*M _ _ ∙ ap (u *M_) (commutative-*M _ _)))
 
     left-inverse-law-add-grothendieck-ab-Commutative-Monoid :
       (x : type-grothendieck-ab-Commutative-Monoid M) →
