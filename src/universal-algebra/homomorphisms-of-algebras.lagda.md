@@ -7,15 +7,19 @@ module universal-algebra.homomorphisms-of-algebras where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.raising-universe-levels
+open import foundation.unit-type
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
@@ -250,4 +254,64 @@ module _
     eq-htpy-hom-Algebra Sg Th Alg1 Alg2
     ( comp-hom-Algebra Sg Th Alg1 Alg1 Alg2 f (id-hom-Algebra Sg Th Alg1)) f
     ( refl-htpy)
+```
+
+### The inverse of an equivalence of algebras
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 : Level}
+  ( Alg1 : Algebra Sg Th l3)
+  ( Alg2 : Algebra Sg Th l4)
+  ( f : hom-Algebra Sg Th Alg1 Alg2)
+  ( eq : is-equiv (map-hom-Algebra Sg Th Alg1 Alg2 f))
+  where
+
+  inv-equiv-hom-Algebra : hom-Algebra Sg Th Alg2 Alg1
+  pr1 inv-equiv-hom-Algebra =
+    map-inv-is-equiv eq
+  pr2 inv-equiv-hom-Algebra op v =
+    map-inv-is-equiv
+    ( is-emb-is-equiv eq
+      ( pr1 inv-equiv-hom-Algebra (pr2 (pr1 Alg2) op v))
+      ( pr2 (pr1 Alg1) op (map-tuple (pr1 inv-equiv-hom-Algebra) v)))
+    ( is-section-map-inv-is-equiv eq (pr2 (pr1 Alg2) op v) ∙
+      ( ap (pr2 (pr1 Alg2) op) (eq-Eq-tuple (pr2 Sg op) v (map-tuple (pr1 f)
+        ( map-tuple (pr1 inv-equiv-hom-Algebra) v)) (eq2 (pr2 Sg op) v)) ∙
+        ( inv (pr2 f op (map-tuple (pr1 inv-equiv-hom-Algebra) v)))))
+          where
+          eq2 : (n : ℕ) (w : tuple (pr1 (pr1 (pr1 Alg2))) n) →
+            Eq-tuple n w (map-tuple (pr1 f) (map-tuple (map-inv-is-equiv eq) w))
+          eq2 zero-ℕ empty-tuple = map-raise star
+          pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
+            inv (is-section-map-section-is-equiv eq x)
+          pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
+```
+
+### The property that a homomorphism of algebras is an equivalence
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 : Level}
+  ( Alg1 : Algebra Sg Th l3)
+  ( Alg2 : Algebra Sg Th l4)
+  where
+
+  is-equiv-hom-Algebra : (f : hom-Algebra Sg Th Alg1 Alg2) → UU (l3 ⊔ l4)
+  is-equiv-hom-Algebra f = is-equiv (map-hom-Algebra Sg Th Alg1 Alg2 f)
+
+  is-prop-is-equiv-hom-Algebra :
+    (f : hom-Algebra Sg Th Alg1 Alg2) → is-prop (is-equiv-hom-Algebra f)
+  is-prop-is-equiv-hom-Algebra f = is-property-is-equiv (pr1 f)
+
+  is-equiv-hom-Algebra-Prop : (f : hom-Algebra Sg Th Alg1 Alg2) → Prop (l3 ⊔ l4)
+  pr1 (is-equiv-hom-Algebra-Prop f) = is-equiv-hom-Algebra f
+  pr2 (is-equiv-hom-Algebra-Prop f) = is-prop-is-equiv-hom-Algebra f
+
+  equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
+  equiv-hom-Algebra = Σ (hom-Algebra Sg Th Alg1 Alg2) is-equiv-hom-Algebra
 ```

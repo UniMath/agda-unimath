@@ -95,6 +95,25 @@ module _
     map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) f X-assign ~
     Y-assign
 
+  is-prop-tr-is-model-signature-equiv-Set :
+    {l2 : Level} (X : Model-Signature S l2) (Y : Set l2)
+    (p : is-model-signature S Y) (eq : equiv-Set (set-Model-Signature S X) Y) →
+    is-prop (tr-is-model-signature-equiv-Set X Y p eq)
+  is-prop-tr-is-model-signature-equiv-Set X Y p eq =
+    is-prop-Π
+    ( λ f → is-set-function-type (pr2 Y)
+      ( map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) eq (pr2 X) f)
+      ( p f))
+
+  tr-is-model-signature-equiv-Set-Prop :
+    {l2 : Level} (X : Model-Signature S l2) (Y : Set l2)
+    (p : is-model-signature S Y) (eq : equiv-Set (set-Model-Signature S X) Y) →
+    Prop (l1 ⊔ l2)
+  pr1 (tr-is-model-signature-equiv-Set-Prop X Y p eq) =
+    tr-is-model-signature-equiv-Set X Y p eq
+  pr2 (tr-is-model-signature-equiv-Set-Prop X Y p eq) =
+    is-prop-tr-is-model-signature-equiv-Set X Y p eq
+
   Eq-Model-Signature : {l2 : Level} (X Y : Model-Signature S l2) → UU (l1 ⊔ l2)
   Eq-Model-Signature (X , X-assign) (Y , Y-assign) =
     Σ
