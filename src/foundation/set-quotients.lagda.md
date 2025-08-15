@@ -8,11 +8,14 @@ module foundation.set-quotients where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -22,6 +25,7 @@ open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.torsorial-type-families
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
@@ -422,6 +426,35 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  (x : A) (y : set-quotient R)
+  where
+
+  Eq-quotient-map-quotient : UU (l1 ⊔ l2)
+  Eq-quotient-map-quotient = quotient-map R x ＝ y
+
+  is-prop-Eq-quotient-map-quotient : is-prop Eq-quotient-map-quotient
+  is-prop-Eq-quotient-map-quotient =
+    is-set-set-quotient R (quotient-map R x) y
+
+  Eq-prop-quotient-map-quotient : Prop (l1 ⊔ l2)
+  Eq-prop-quotient-map-quotient =
+    ( Eq-quotient-map-quotient , is-prop-Eq-quotient-map-quotient)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) (x : A)
+  where
+
+  is-torsorial-Eq-quotient-map-quotient :
+    is-torsorial (Eq-quotient-map-quotient R x)
+  pr1 is-torsorial-Eq-quotient-map-quotient =
+    ( quotient-map R x , refl)
+  pr2 is-torsorial-Eq-quotient-map-quotient (y , H) =
+    eq-type-subtype (Eq-prop-quotient-map-quotient R x) H
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
   Σ-quotient-Set : UU (l1 ⊔ l2)
@@ -431,14 +464,31 @@ module _
   map-Σ-quotient-Set : Σ-quotient-Set → A
   map-Σ-quotient-Set (X , x , x∈X) = x
 
-  postulate
-    lemma-quotient-Set :
-      (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
-  -- lemma-quotient-Set x = {!!}
+
+  -- postulate
+  --   lemma-quotient-Set :
+  --     (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
+  lemma-quotient-Set :
+    (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
+  lemma-quotient-Set x =
+    {!!}
 
   map-split-Σ-quotient-Set : A → Σ-quotient-Set
   map-split-Σ-quotient-Set x =
     ( quotient-map R x , x , lemma-quotient-Set x)
+
+  lemma-contr-map-Σ-quotient-Set :
+    (x : A) (y : fiber map-Σ-quotient-Set x) →
+    (map-split-Σ-quotient-Set x , refl) ＝ y
+  lemma-contr-map-Σ-quotient-Set x ((Y , y , y∈Y) , H) =
+    eq-pair-Σ
+      ( eq-pair-Σ {!!} {!!})
+      {!!}
+
+  is-contr-map-Σ-quotient-Set : is-contr-map map-Σ-quotient-Set
+  is-contr-map-Σ-quotient-Set x =
+    ( ( map-split-Σ-quotient-Set x , refl) ,
+      ( lemma-contr-map-Σ-quotient-Set x))
 
   is-section-map-Σ-quotient-Set :
     map-Σ-quotient-Set ∘ map-split-Σ-quotient-Set ~ id
@@ -447,15 +497,23 @@ module _
   is-retraction-map-Σ-quotient-Set :
     map-split-Σ-quotient-Set ∘ map-Σ-quotient-Set ~ id
   is-retraction-map-Σ-quotient-Set (X , x , x∈X) =
-    {!!}
+    eq-pair-Σ
+      ( α)
+      ( eq-pair-Σ
+        {!!}
+        {!!})
+    where
+
+    α : quotient-map R x ＝ X
+    α = {!!}
+
 
   is-equiv-map-Σ-quotient-Set : is-equiv map-Σ-quotient-Set
   is-equiv-map-Σ-quotient-Set =
     is-equiv-is-invertible
-      map-split-Σ-quotient-Set
-      is-section-map-Σ-quotient-Set
-      {!!}
-
+      ( map-split-Σ-quotient-Set)
+      ( is-section-map-Σ-quotient-Set)
+      ( is-retraction-map-Σ-quotient-Set)
 ```
 
 ## See also
