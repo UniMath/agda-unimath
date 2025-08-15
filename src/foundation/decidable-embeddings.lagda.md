@@ -641,3 +641,10 @@ module _
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
 ```
+
+## References
+
+Decidable embeddings are discussed in {{#cite Warn24}} under the name
+_complemented embeddings_.
+
+{{#bibliography}}

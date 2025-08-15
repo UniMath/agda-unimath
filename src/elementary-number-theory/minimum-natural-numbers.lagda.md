@@ -10,6 +10,7 @@ module elementary-number-theory.minimum-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -85,6 +86,26 @@ is-greatest-lower-bound-min-ℕ l m =
     ( leq-left-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)) ,
       leq-right-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)))
     ( λ x (H , K) → leq-min-ℕ x l m H K)
+```
+
+### The minimum computes to the lesser of the two numbers
+
+```agda
+abstract
+  leq-left-min-ℕ : (m n : ℕ) → m ≤-ℕ n → min-ℕ m n ＝ m
+  leq-left-min-ℕ zero-ℕ n p = refl
+  leq-left-min-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (leq-left-min-ℕ m n p)
+
+  le-left-min-ℕ : (m n : ℕ) → m <-ℕ n → min-ℕ m n ＝ m
+  le-left-min-ℕ m n p = leq-left-min-ℕ m n (leq-le-ℕ m n p)
+
+  leq-right-min-ℕ : (m n : ℕ) → n ≤-ℕ m → min-ℕ m n ＝ n
+  leq-right-min-ℕ zero-ℕ zero-ℕ p = refl
+  leq-right-min-ℕ (succ-ℕ m) zero-ℕ p = refl
+  leq-right-min-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (leq-right-min-ℕ m n p)
+
+  le-right-min-ℕ : (m n : ℕ) → n <-ℕ m → min-ℕ m n ＝ n
+  le-right-min-ℕ m n p = leq-right-min-ℕ m n (leq-le-ℕ n m p)
 ```
 
 ### Associativity of `min-ℕ`
