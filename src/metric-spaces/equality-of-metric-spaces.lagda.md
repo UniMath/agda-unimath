@@ -136,13 +136,15 @@ module _
   (A : Metric-Space l1 l2)
   where
 
-  is-torsorial-isometric-eq-Metric-Space :
-    is-torsorial (isometric-eq-Metric-Space A)
-  is-torsorial-isometric-eq-Metric-Space =
-    is-contr-equiv'
-      ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-eq-Metric-Space A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-eq-Metric-Space :
+      is-torsorial
+        (λ (B : Metric-Space l1 l2) → isometric-eq-Metric-Space A B)
+    is-torsorial-isometric-eq-Metric-Space =
+      is-contr-equiv'
+        ( Σ (Metric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-eq-Metric-Space A))
+        ( is-torsorial-Id A)
 ```
 
 ### Isometric equality between the carrier types of metric spaces is equivalent isometric equivalence between them
@@ -184,13 +186,15 @@ module _
   (A : Metric-Space l1 l2)
   where
 
-  is-torsorial-isometric-equiv-Metric-Space :
-    is-torsorial (isometric-equiv-Metric-Space A)
-  is-torsorial-isometric-equiv-Metric-Space =
-    is-contr-equiv'
-      ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-equiv-Metric-Space :
+      is-torsorial
+        (λ (B : Metric-Space l1 l2) → isometric-equiv-Metric-Space A B)
+    is-torsorial-isometric-equiv-Metric-Space =
+      is-contr-equiv'
+        ( Σ (Metric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space A))
+        ( is-torsorial-Id A)
 ```
 
 ### Two metric spaces are isometrically equivalent if and only if there is an isometric equivalence between them
@@ -237,11 +241,13 @@ module _
   (A : Metric-Space l1 l2)
   where
 
-  is-torsorial-isometric-equiv-Metric-Space' :
-    is-torsorial (isometric-equiv-Metric-Space' A)
-  is-torsorial-isometric-equiv-Metric-Space' =
-    is-contr-equiv'
-      ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space' A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-equiv-Metric-Space' :
+      is-torsorial
+        (λ (B : Metric-Space l1 l2) → isometric-equiv-Metric-Space' A B)
+    is-torsorial-isometric-equiv-Metric-Space' =
+      is-contr-equiv'
+        ( Σ (Metric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space' A))
+        ( is-torsorial-Id A)
 ```

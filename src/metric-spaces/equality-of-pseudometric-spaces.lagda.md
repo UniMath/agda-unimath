@@ -129,13 +129,16 @@ module _
   (A : Pseudometric-Space l1 l2)
   where
 
-  is-torsorial-isometric-eq-Pseudometric-Space :
-    is-torsorial (isometric-eq-Pseudometric-Space A)
-  is-torsorial-isometric-eq-Pseudometric-Space =
-    is-contr-equiv'
-      ( Σ (Pseudometric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-eq-Pseudometric-Space A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-eq-Pseudometric-Space :
+      is-torsorial
+        ( λ ( B : Pseudometric-Space l1 l2) →
+            ( isometric-eq-Pseudometric-Space A B))
+    is-torsorial-isometric-eq-Pseudometric-Space =
+      is-contr-equiv'
+        ( Σ (Pseudometric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-eq-Pseudometric-Space A))
+        ( is-torsorial-Id A)
 ```
 
 ### Isometric equality between the carrier types of pseudometric spaces is equivalent to isometric equivalence between them
@@ -180,13 +183,16 @@ module _
   (A : Pseudometric-Space l1 l2)
   where
 
-  is-torsorial-isometric-equiv-Pseudometric-Space :
-    is-torsorial (isometric-equiv-Pseudometric-Space A)
-  is-torsorial-isometric-equiv-Pseudometric-Space =
-    is-contr-equiv'
-      ( Σ (Pseudometric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-equiv-Pseudometric-Space A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-equiv-Pseudometric-Space :
+      is-torsorial
+        ( λ ( B : Pseudometric-Space l1 l2) →
+            ( isometric-equiv-Pseudometric-Space A B))
+    is-torsorial-isometric-equiv-Pseudometric-Space =
+      is-contr-equiv'
+        ( Σ (Pseudometric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-equiv-Pseudometric-Space A))
+        ( is-torsorial-Id A)
 ```
 
 ### Two pseudometric spaces are isometrically equivalent if and only if there is an isometric equivalence between them
@@ -240,11 +246,14 @@ module _
   (A : Pseudometric-Space l1 l2)
   where
 
-  is-torsorial-isometric-equiv-Pseudometric-Space' :
-    is-torsorial (isometric-equiv-Pseudometric-Space' A)
-  is-torsorial-isometric-equiv-Pseudometric-Space' =
-    is-contr-equiv'
-      ( Σ (Pseudometric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-eq-isometric-equiv-Pseudometric-Space' A))
-      ( is-torsorial-Id A)
+  abstract
+    is-torsorial-isometric-equiv-Pseudometric-Space' :
+      is-torsorial
+        ( λ ( B : Pseudometric-Space l1 l2) →
+            ( isometric-equiv-Pseudometric-Space' A B))
+    is-torsorial-isometric-equiv-Pseudometric-Space' =
+      is-contr-equiv'
+        ( Σ (Pseudometric-Space l1 l2) (Id A))
+        ( equiv-tot (equiv-eq-isometric-equiv-Pseudometric-Space' A))
+        ( is-torsorial-Id A)
 ```
