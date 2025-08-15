@@ -108,4 +108,7 @@ module _
     is-set-type-subtype
     ( hom-Algebra-Subtype Sg Th Alg1 Alg2)
     ( is-set-hom-Set (set-Algebra Sg Th Alg1) (set-Algebra Sg Th Alg2))
+
+  set-hom-Algebra : Set (l1 ⊔ l3 ⊔ l4)
+  set-hom-Algebra = (hom-Algebra Sg Th Alg1 Alg2) , is-set-hom-Algebra
 ```
