@@ -13,6 +13,7 @@ open import universal-algebra.congruences public
 open import universal-algebra.homomorphisms-of-algebras public
 open import universal-algebra.kernels public
 open import universal-algebra.models-of-signatures public
+open import universal-algebra.precategory-of-algebras-of-theories public
 open import universal-algebra.quotient-algebras public
 open import universal-algebra.signatures public
 open import universal-algebra.terms-over-signatures public

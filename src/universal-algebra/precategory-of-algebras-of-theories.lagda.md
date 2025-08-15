@@ -15,11 +15,11 @@ open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import universal-algebra.signatures
-open import universal-algebra.models-of-signatures
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.models-of-signatures
+open import universal-algebra.signatures
 ```
 
 </details>
@@ -46,7 +46,8 @@ module _
     ( set-hom-Algebra S T)
     ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra S T X Y Z)
     ( λ {l} {X} → id-hom-Algebra S T X)
-    ( associative-comp-hom-Algebra S T)
-    ( left-unit-law-comp-hom-Algebra S T)
-    ( right-unit-law-comp-hom-Algebra S T)
+    ( λ {l3} {l4} {l5} {l6} {X} {Y} {Z} {W} →
+      associative-comp-hom-Algebra S T X Y Z W)
+    ( λ {l3} {l4} {X} {Y} → left-unit-law-comp-hom-Algebra S T X Y)
+    ( λ {l3} {l4} {X} {Y} → right-unit-law-comp-hom-Algebra S T X Y)
 ```

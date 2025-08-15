@@ -7,20 +7,19 @@ module universal-algebra.homomorphisms-of-algebras where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
-open import foundation.sets
 
-open import foundation.action-on-identifications-functions
-open import foundation-core.identity-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.subtypes
 open import foundation-core.propositions
+open import foundation-core.subtypes
 
 open import lists.functoriality-tuples
 open import lists.tuples
@@ -201,10 +200,10 @@ module _
   { l1 : Level} ( Sg : signature l1)
   { l2 : Level} ( Th : Theory Sg l2)
   { l3 l4 l5 l6 : Level}
-  { Alg1 : Algebra Sg Th l3}
-  { Alg2 : Algebra Sg Th l4}
-  { Alg3 : Algebra Sg Th l5}
-  { Alg4 : Algebra Sg Th l6}
+  ( Alg1 : Algebra Sg Th l3)
+  ( Alg2 : Algebra Sg Th l4)
+  ( Alg3 : Algebra Sg Th l5)
+  ( Alg4 : Algebra Sg Th l6)
   where
 
   associative-comp-hom-Algebra :
@@ -231,8 +230,8 @@ module _
   { l1 : Level} ( Sg : signature l1)
   { l2 : Level} ( Th : Theory Sg l2)
   { l3 l4 : Level}
-  { Alg1 : Algebra Sg Th l3}
-  { Alg2 : Algebra Sg Th l4}
+  ( Alg1 : Algebra Sg Th l3)
+  ( Alg2 : Algebra Sg Th l4)
   where
 
   left-unit-law-comp-hom-Algebra :
