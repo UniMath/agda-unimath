@@ -40,13 +40,13 @@ module _
   where
 
   Algebra-Large-Precategory :
-    Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) {!   !}
+    Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 l4 → l1 ⊔ l3 ⊔ l4)
   Algebra-Large-Precategory = make-Large-Precategory
     ( Algebra S T)
     ( set-hom-Algebra S T)
-    ( comp-hom-Algebra S T)
+    ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra S T X Y Z)
     ( λ {l} {X} → id-hom-Algebra S T X)
-    {!   !}
-    {!   !}
-    {!   !}
+    ( associative-comp-hom-Algebra S T)
+    ( left-unit-law-comp-hom-Algebra S T)
+    ( right-unit-law-comp-hom-Algebra S T)
 ```
