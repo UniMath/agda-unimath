@@ -11,7 +11,10 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
 
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
@@ -102,4 +105,29 @@ module _
       ( λ e →
         ( is-prop-Π
           ( λ assign → is-set-type-Model-Signature Sg M _ _)))
+```
+
+### Characterizing identifications of algebras
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  where
+
+  Eq-eq-Algebra :
+    {l3 : Level} (A B : Algebra Sg Th l3) → A ＝ B →
+    Eq-Model-Signature Sg (model-Algebra Sg Th A) (model-Algebra Sg Th B)
+  Eq-eq-Algebra A .A refl = refl-Eq-Model-Signature Sg (model-Algebra Sg Th A)
+
+  is-equiv-Eq-eq-Algebra :
+    {l3 : Level} (A B : Algebra Sg Th l3) →
+    is-equiv (Eq-eq-Algebra A B)
+  is-equiv-Eq-eq-Algebra (A , p) =
+    subtype-identity-principle
+    ( is-prop-is-algebra Sg Th)
+    ( p)
+    ( refl-Eq-Model-Signature Sg A)
+    ( Eq-eq-Algebra (A , p))
+    ( is-equiv-Eq-eq-Model-Signature Sg A)
 ```

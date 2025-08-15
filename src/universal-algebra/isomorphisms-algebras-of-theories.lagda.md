@@ -45,8 +45,18 @@ module _
   { l2 : Level} ( T : Theory S l2)
   where
 
+  iso-Eq-Model-Signature :
+    {l3 : Level} (A B : Algebra S T l3)
+    (b : Eq-Model-Signature S (model-Algebra S T A) (model-Algebra S T B)) →
+    iso-Large-Precategory (Algebra-Large-Precategory S T) A B
+  pr1 (iso-Eq-Model-Signature A B b) = {!   !}
+  pr1 (pr2 (iso-Eq-Model-Signature A B b)) = {!   !}
+  pr1 (pr2 (pr2 (iso-Eq-Model-Signature A B b))) = {!   !}
+  pr2 (pr2 (pr2 (iso-Eq-Model-Signature A B b))) = {!   !}
+
   id-iso-comp-htpy-Algebra :
     {l3 : Level} (A B : Algebra S T l3) →
-    iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A B ~ {!   !} ∘ {!   !}
+    iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A B ~
+    {!   !} ∘ Eq-eq-Algebra S T A B
   id-iso-comp-htpy-Algebra A B = {!   !}
 ```
