@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.transport-along-equivalences
 open import foundation.universe-levels
 
@@ -22,6 +23,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 
@@ -119,21 +121,38 @@ module _
     ( λ z → z f g)
     ( compute-map-tr-equiv-id-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v))
 
+  is-prop-tr-eq-refl-is-model-signature-equiv-Set :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
+    is-prop (tr-is-model-signature-equiv-Set (X , f) X g id-equiv)
+  is-prop-tr-eq-refl-is-model-signature-equiv-Set X f g =
+    is-prop-Π (λ h → is-set-hom-Set (tuple-Set X (pr2 S h)) X
+      ( map-tr-equiv (λ v → (x : pr1 S) →
+        tuple v (pr2 S x) → v) id-equiv f h) (g h))
+
+  tr-eq-refl-is-model-signature-equiv-Set-Prop :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
+    Prop (l1 ⊔ l2)
+  pr1 (tr-eq-refl-is-model-signature-equiv-Set-Prop X f g) =
+    tr-is-model-signature-equiv-Set (X , f) X g id-equiv
+  pr2 (tr-eq-refl-is-model-signature-equiv-Set-Prop X f g) =
+    is-prop-tr-eq-refl-is-model-signature-equiv-Set X f g
+
   is-torsorial-tr-is-model-signature-equiv-Set :
     {l2 : Level} (X : Set l2) (f : is-model-signature S X) →
     is-torsorial (λ z → tr-is-model-signature-equiv-Set (X , f) X z id-equiv)
   pr1 (pr1 (is-torsorial-tr-is-model-signature-equiv-Set X f)) = f
   pr2 (pr1 (is-torsorial-tr-is-model-signature-equiv-Set X f)) =
-    htpy-eq
-    ( ap (λ z → z f)
+    tr-eq-refl-is-model-signature-equiv-Set X f f refl
+  pr2 (is-torsorial-tr-is-model-signature-equiv-Set X f) (g , p) =
+    inv-map-extensionality-type-subtype
+    ( tr-eq-refl-is-model-signature-equiv-Set-Prop X f)
+    ( tr-eq-refl-is-model-signature-equiv-Set X f f refl)
+    ( refl-htpy)
+    ( λ h → equiv-funext)
+    ( g , p)
+    ( inv-htpy (λ h → ap (λ j x → j f h x)
       ( compute-map-tr-equiv-id-equiv
-        ( λ v → (x : pr1 S) → tuple v (pr2 S x) → v)))
-  pr2 (is-torsorial-tr-is-model-signature-equiv-Set X f) (g , htpy) =
-    eq-pair-Σ
-    ( eq-htpy (inv-htpy (λ h → ap (λ j x → j f h x)
-      ( compute-map-tr-equiv-id-equiv
-        ( λ v → (x : pr1 S) → tuple v (pr2 S x) → v))) ∙h htpy))
-    ( eq-htpy λ x → {!   !})
+        ( λ v → (x₁ : pr1 S) → tuple v (pr2 S x₁) → v))) ∙h p)
 
   is-equiv-tr-eq-refl-is-model-signature-equiv-Set :
     {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
