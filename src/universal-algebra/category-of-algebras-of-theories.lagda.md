@@ -7,9 +7,9 @@ module universal-algebra.category-of-algebras-of-theories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.dependent-pair-types
 open import foundation.sets
@@ -24,8 +24,8 @@ open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
-open import universal-algebra.signatures
 open import universal-algebra.precategory-of-algebras-of-theories
+open import universal-algebra.signatures
 ```
 
 </details>

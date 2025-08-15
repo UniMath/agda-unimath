@@ -9,6 +9,7 @@ open import universal-algebra.abstract-equations-over-signatures public
 open import universal-algebra.algebraic-theories public
 open import universal-algebra.algebraic-theory-of-groups public
 open import universal-algebra.algebras-of-theories public
+open import universal-algebra.category-of-algebras-of-theories public
 open import universal-algebra.congruences public
 open import universal-algebra.homomorphisms-of-algebras public
 open import universal-algebra.kernels public

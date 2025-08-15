@@ -19,11 +19,11 @@ open import foundation.universe-levels
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.identity-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.transport-along-identifications
+open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
+open import foundation-core.transport-along-identifications
 
 open import lists.tuples
 
@@ -86,9 +86,12 @@ module _
 
   tr-is-model-signature-equiv-Set :
     {l2 : Level} (X : Model-Signature S l2) (Y : Set l2) →
-    is-model-signature S Y → equiv-Set (set-Model-Signature S X) Y → UU (l1 ⊔ l2)
+    is-model-signature S Y →
+    equiv-Set (set-Model-Signature S X) Y →
+    UU (l1 ⊔ l2)
   tr-is-model-signature-equiv-Set (X , X-assign) Y Y-assign f =
-    map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) f X-assign ~ Y-assign
+    map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) f X-assign ~
+    Y-assign
 
   Eq-Model-Signature : {l2 : Level} (X Y : Model-Signature S l2) → UU (l1 ⊔ l2)
   Eq-Model-Signature (X , X-assign) (Y , Y-assign) =

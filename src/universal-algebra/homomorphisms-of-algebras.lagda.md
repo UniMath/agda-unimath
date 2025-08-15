@@ -66,7 +66,8 @@ module _
         (pr2 (pr1 Alg2) x (map-tuple f y))))
 
   preserves-operations-Algebra-Prop :
-    (f : type-Algebra Sg Th Alg1 → type-Algebra Sg Th Alg2) → Prop (l1 ⊔ l3 ⊔ l4)
+    (f : type-Algebra Sg Th Alg1 → type-Algebra Sg Th Alg2) →
+    Prop (l1 ⊔ l3 ⊔ l4)
   preserves-operations-Algebra-Prop f =
     ( preserves-operations-Algebra f) , (is-prop-preserves-operations-Algebra f)
 
