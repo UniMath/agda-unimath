@@ -62,3 +62,20 @@ module _
   binary-map-tuple f empty-tuple empty-tuple = empty-tuple
   binary-map-tuple f (x ∷ v) (y ∷ w) = f x y ∷ binary-map-tuple f v w
 ```
+
+## Properties
+
+### The `tuple` functor preserves identity maps
+
+```agda
+preserves-id-map-tuple :
+  {l : Level} (A : UU l) (n : ℕ) (x : tuple A n) → x ＝ map-tuple id x
+preserves-id-map-tuple A zero-ℕ empty-tuple = refl
+preserves-id-map-tuple A (succ-ℕ n) (x ∷ xs) =
+  eq-Eq-tuple
+  ( succ-ℕ n)
+  ( x ∷ xs)
+  ( map-tuple id (x ∷ xs))
+  ( refl ,
+    Eq-eq-tuple n xs (map-tuple (λ a → a) xs) (preserves-id-map-tuple A n xs))
+```

@@ -14,8 +14,10 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 open import foundation.sets
 
+open import foundation.action-on-identifications-functions
 open import foundation-core.identity-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.subtypes
 open import foundation-core.propositions
@@ -111,4 +113,20 @@ module _
 
   set-hom-Algebra : Set (l1 ⊔ l3 ⊔ l4)
   set-hom-Algebra = (hom-Algebra Sg Th Alg1 Alg2) , is-set-hom-Algebra
+```
+
+### The identity map is an algebra homomorphism
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 : Level} ( Alg : Algebra Sg Th l3)
+  where
+
+  is-hom-id-Algebra : preserves-operations-Algebra Sg Th Alg Alg id
+  is-hom-id-Algebra op v = ap (pr2 (pr1 Alg) op) (preserves-id-map-tuple (pr1 (pr1 (pr1 Alg))) (pr2 Sg op) v)
+
+  id-hom-Algebra : hom-Algebra Sg Th Alg Alg
+  id-hom-Algebra = id , is-hom-id-Algebra
 ```

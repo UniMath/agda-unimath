@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+
 open import universal-algebra.signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.algebraic-theories
@@ -40,10 +42,10 @@ module _
   Algebra-Large-Precategory :
     Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) {!   !}
   Algebra-Large-Precategory = make-Large-Precategory
-    (Algebra S T)
-    (set-hom-Algebra S T)
+    ( Algebra S T)
+    ( set-hom-Algebra S T)
     {!   !}
-    {!   !}
+    ( λ {l} {X} → id-hom-Algebra S T X)
     {!   !}
     {!   !}
     {!   !}
