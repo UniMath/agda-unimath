@@ -79,3 +79,18 @@ preserves-id-map-tuple A (succ-ℕ n) (x ∷ xs) =
   ( refl ,
     Eq-eq-tuple n xs (map-tuple (λ a → a) xs) (preserves-id-map-tuple A n xs))
 ```
+
+### The `tuple` functor preserves compositions
+
+```agda
+preserves-comp-map-tuple :
+  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3) (n : ℕ) (x : tuple A n) (f : A → B) (g : B → C) → map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
+preserves-comp-map-tuple A B C zero-ℕ empty-tuple f g = refl
+preserves-comp-map-tuple A B C (succ-ℕ n) (x ∷ xs) f g =
+  eq-Eq-tuple
+  ( succ-ℕ n)
+  ( map-tuple g (map-tuple f (x ∷ xs)))
+  ( map-tuple (g ∘ f) (x ∷ xs))
+  ( refl , Eq-eq-tuple n (map-tuple g (map-tuple f xs)) (map-tuple (g ∘ f) xs)
+    ( preserves-comp-map-tuple A B C n xs f g))
+```

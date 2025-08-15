@@ -44,7 +44,7 @@ module _
   Algebra-Large-Precategory = make-Large-Precategory
     ( Algebra S T)
     ( set-hom-Algebra S T)
-    {!   !}
+    ( comp-hom-Algebra S T)
     ( λ {l} {X} → id-hom-Algebra S T X)
     {!   !}
     {!   !}

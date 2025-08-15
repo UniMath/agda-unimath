@@ -92,6 +92,40 @@ module _
   hom-Algebra-Subtype = preserves-operations-Algebra-Prop
 ```
 
+### Composition of algebra homomorphisms
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 l4 l5 : Level}
+  { Alg1 : Algebra Sg Th l3}
+  { Alg2 : Algebra Sg Th l4}
+  { Alg3 : Algebra Sg Th l5}
+  where
+
+  comp-hom-Algebra :
+    (f : hom-Algebra Sg Th Alg2 Alg3) (g : hom-Algebra Sg Th Alg1 Alg2) →
+    hom-Algebra Sg Th Alg1 Alg3
+  pr1 (comp-hom-Algebra (f , p) (g , q)) = f ∘ g
+  pr2 (comp-hom-Algebra (f , p) (g , q)) op v =
+    equational-reasoning
+    pr1 (comp-hom-Algebra (f , p) (g , q)) (pr2 (pr1 Alg1) op v)
+    ＝ f (pr2 (pr1 Alg2) op (map-tuple g v))
+      by ap f (q op v)
+    ＝ pr2 (pr1 Alg3) op (map-tuple f (map-tuple g v))
+      by p op (map-tuple g v)
+    ＝ pr2 (pr1 Alg3) op
+      (map-tuple (pr1 (comp-hom-Algebra (f , p) (g , q))) v)
+      by ap (pr2 (pr1 Alg3) op)
+      ( preserves-comp-map-tuple
+        ( pr1 (pr1 (pr1 Alg1)))
+        ( pr1 (pr1 (pr1 Alg2)))
+        ( pr1 (pr1 (pr1 Alg3)))
+        ( pr2 Sg op)
+        v g f)
+```
+
 ## Properties
 
 ### The type of algebra homomorphisms for any theory is a set
@@ -125,7 +159,10 @@ module _
   where
 
   is-hom-id-Algebra : preserves-operations-Algebra Sg Th Alg Alg id
-  is-hom-id-Algebra op v = ap (pr2 (pr1 Alg) op) (preserves-id-map-tuple (pr1 (pr1 (pr1 Alg))) (pr2 Sg op) v)
+  is-hom-id-Algebra op v =
+    ap
+    ( pr2 (pr1 Alg) op)
+    ( preserves-id-map-tuple (pr1 (pr1 (pr1 Alg))) (pr2 Sg op) v)
 
   id-hom-Algebra : hom-Algebra Sg Th Alg Alg
   id-hom-Algebra = id , is-hom-id-Algebra
