@@ -154,14 +154,17 @@ module _
           ( λ y →
             eq-iff' (N d x y) (N' d x y) (H d x y))))
 
-  is-torsorial-Eq-Rational-Neighborhood-Relation :
-    is-torsorial (Eq-Rational-Neighborhood-Relation N)
-  is-torsorial-Eq-Rational-Neighborhood-Relation =
-    ( N , refl-Eq-Rational-Neighborhood-Relation) ,
-    ( λ (N' , e) →
-      eq-type-subtype
-        ( Eq-prop-Rational-Neighborhood-Relation N)
-        ( eq-Eq-Rational-Neighborhood-Relation N' e))
+  abstract
+    is-torsorial-Eq-Rational-Neighborhood-Relation :
+      is-torsorial
+        ( λ ( N' : Rational-Neighborhood-Relation l2 A) →
+            ( Eq-Rational-Neighborhood-Relation N N'))
+    is-torsorial-Eq-Rational-Neighborhood-Relation =
+      ( N , refl-Eq-Rational-Neighborhood-Relation) ,
+      ( λ (N' , e) →
+        eq-type-subtype
+          ( Eq-prop-Rational-Neighborhood-Relation N)
+          ( eq-Eq-Rational-Neighborhood-Relation N' e))
 
   is-fiberwise-equiv-Eq-eq-Rational-Neighborhood-Relation :
     (N' : Rational-Neighborhood-Relation l2 A) →
