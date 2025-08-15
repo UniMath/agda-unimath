@@ -20,8 +20,11 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two semigroups `A` and `B` consists of the cartesian
-product of its underlying sets and the componentwise multiplication
+The
+{{#concept "cartesian product" disambiguation="of semigroups" Agda=product-Semigroup WDID=Q173740 WD="Cartesian product"}}
+of two [semigroups](group-theory.semigroups.md) `G` and `H` consists of the
+[product](foundation.cartesian-product-types.md) `G × H` of the underlying
+[sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
 
