@@ -350,7 +350,8 @@ module _
   where
 
   equiv-total-is-in-equivalence-class :
-    Σ A (λ x → Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x)) ≃ A
+    Σ A (λ x → Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x)) ≃
+    ( A)
   equiv-total-is-in-equivalence-class =
     right-unit-law-Σ-is-contr
       ( is-torsorial-is-in-equivalence-class R)

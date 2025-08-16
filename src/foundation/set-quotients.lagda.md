@@ -454,43 +454,36 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
-  equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class :
-    (x : A) →
-    Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x) ≃
-    Σ (set-quotient R) (λ X → is-in-equivalence-class-set-quotient R X x)
-  equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class x =
-    equiv-Σ
-      ( λ X → is-in-equivalence-class-set-quotient R X x)
-      ( compute-set-quotient R)
-      ( λ X →
-        equiv-iff-is-prop
-          ( is-prop-is-in-equivalence-class R X x)
-          ( is-prop-is-in-equivalence-class-set-quotient
-            ( R)
-            ( set-quotient-equivalence-class R X)
-            ( x))
-          ( λ x∈X →
-            inv-tr
-              ( λ Y → is-in-equivalence-class R Y x)
-              ( is-retraction-equivalence-class-set-quotient R X)
-              ( x∈X))
-          ( λ x∈X →
-            tr
-              ( λ Y → is-in-equivalence-class R Y x)
-              ( is-retraction-equivalence-class-set-quotient R X)
-              ( x∈X)))
-
-  is-contr-total-is-in-equivalence-class-set-quotient :
-    (x : A) →
-    is-contr
-      ( Σ ( set-quotient R)
-          ( λ X → is-in-equivalence-class-set-quotient R X x))
-  is-contr-total-is-in-equivalence-class-set-quotient x =
-    is-contr-equiv'
-      ( Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x))
-      ( equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class
-        ( x))
-      ( is-torsorial-is-in-equivalence-class R x)
+  abstract
+    is-torsorial-is-in-equivalence-class-set-quotient :
+      (x : A) →
+      is-contr
+        ( Σ ( set-quotient R)
+            ( λ X → is-in-equivalence-class-set-quotient R X x))
+    is-torsorial-is-in-equivalence-class-set-quotient x =
+      is-contr-equiv'
+        ( Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x))
+        ( equiv-Σ
+          ( λ X → is-in-equivalence-class-set-quotient R X x)
+          ( compute-set-quotient R)
+          ( λ X →
+            equiv-iff-is-prop
+              ( is-prop-is-in-equivalence-class R X x)
+              ( is-prop-is-in-equivalence-class-set-quotient
+                ( R)
+                ( set-quotient-equivalence-class R X)
+                ( x))
+              ( λ x∈X →
+                inv-tr
+                  ( λ Y → is-in-equivalence-class R Y x)
+                  ( is-retraction-equivalence-class-set-quotient R X)
+                  ( x∈X))
+              ( λ x∈X →
+                tr
+                  ( λ Y → is-in-equivalence-class R Y x)
+                  ( is-retraction-equivalence-class-set-quotient R X)
+                  ( x∈X))))
+        ( is-torsorial-is-in-equivalence-class R x)
 
   equiv-total-is-in-equivalence-class-set-quotient :
     Σ ( A)
@@ -500,7 +493,7 @@ module _
     ( A)
   equiv-total-is-in-equivalence-class-set-quotient =
     right-unit-law-Σ-is-contr
-      ( is-contr-total-is-in-equivalence-class-set-quotient)
+      ( is-torsorial-is-in-equivalence-class-set-quotient)
 
   Σ-decomposition-is-in-equivalence-class-set-quotient :
     Σ ( set-quotient R)
