@@ -9,6 +9,7 @@ module foundation.set-quotients where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
@@ -18,14 +19,18 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
+open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
@@ -33,9 +38,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalence-relations
-open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
@@ -158,7 +161,7 @@ module _
       ( is-surjective-quotient-map)
 ```
 
-### The map `class : A → equivalence-class R` is an effective quotient map
+### The map `class : A → set-quotient R` is an effective quotient map
 
 ```agda
 module _
@@ -423,97 +426,88 @@ module _
       B f Uf
 ```
 
+### Any quotient class containing a given element is equal to its image by `quotient-map`
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
-  (x : A) (y : set-quotient R)
   where
 
-  Eq-quotient-map-quotient : UU (l1 ⊔ l2)
-  Eq-quotient-map-quotient = quotient-map R x ＝ y
-
-  is-prop-Eq-quotient-map-quotient : is-prop Eq-quotient-map-quotient
-  is-prop-Eq-quotient-map-quotient =
-    is-set-set-quotient R (quotient-map R x) y
-
-  Eq-prop-quotient-map-quotient : Prop (l1 ⊔ l2)
-  Eq-prop-quotient-map-quotient =
-    ( Eq-quotient-map-quotient , is-prop-Eq-quotient-map-quotient)
-
-module _
-  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) (x : A)
-  where
-
-  is-torsorial-Eq-quotient-map-quotient :
-    is-torsorial (Eq-quotient-map-quotient R x)
-  pr1 is-torsorial-Eq-quotient-map-quotient =
-    ( quotient-map R x , refl)
-  pr2 is-torsorial-Eq-quotient-map-quotient (y , H) =
-    eq-type-subtype (Eq-prop-quotient-map-quotient R x) H
+  eq-set-quotient-equivalence-class-set-quotient :
+    (X : set-quotient R) {x : A} →
+    is-in-equivalence-class-set-quotient R X x →
+    quotient-map R x ＝ X
+  eq-set-quotient-equivalence-class-set-quotient X {x} H =
+    ( ap
+      ( set-quotient-equivalence-class R)
+      ( eq-class-equivalence-class
+        ( R)
+        ( equivalence-class-set-quotient R X)
+        ( H))) ∙
+    ( is-section-equivalence-class-set-quotient R X)
 ```
 
+### Σ-decompositions of types induced by set quotients
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
-  Σ-quotient-Set : UU (l1 ⊔ l2)
-  Σ-quotient-Set =
-    Σ (set-quotient R) (type-subtype ∘ subtype-set-quotient R)
+  equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class :
+    (x : A) →
+    Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x) ≃
+    Σ (set-quotient R) (λ X → is-in-equivalence-class-set-quotient R X x)
+  equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class x =
+    equiv-Σ
+      ( λ X → is-in-equivalence-class-set-quotient R X x)
+      ( compute-set-quotient R)
+      ( λ X →
+        equiv-iff-is-prop
+          ( is-prop-is-in-equivalence-class R X x)
+          ( is-prop-is-in-equivalence-class-set-quotient
+            ( R)
+            ( set-quotient-equivalence-class R X)
+            ( x))
+          ( λ x∈X →
+            inv-tr
+              ( λ Y → is-in-equivalence-class R Y x)
+              ( is-retraction-equivalence-class-set-quotient R X)
+              ( x∈X))
+          ( λ x∈X →
+            tr
+              ( λ Y → is-in-equivalence-class R Y x)
+              ( is-retraction-equivalence-class-set-quotient R X)
+              ( x∈X)))
 
-  map-Σ-quotient-Set : Σ-quotient-Set → A
-  map-Σ-quotient-Set (X , x , x∈X) = x
+  is-contr-total-is-in-equivalence-class-set-quotient :
+    (x : A) →
+    is-contr
+      ( Σ ( set-quotient R)
+          ( λ X → is-in-equivalence-class-set-quotient R X x))
+  is-contr-total-is-in-equivalence-class-set-quotient x =
+    is-contr-equiv'
+      ( Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x))
+      ( equiv-total-is-in-equivalence-class-set-quotient-is-in-equivalence-class
+        ( x))
+      ( is-torsorial-is-in-equivalence-class R x)
 
+  equiv-total-is-in-equivalence-class-set-quotient :
+    Σ ( A)
+      ( λ x →
+        Σ ( set-quotient R)
+          ( λ X → is-in-equivalence-class-set-quotient R X x)) ≃
+    ( A)
+  equiv-total-is-in-equivalence-class-set-quotient =
+    right-unit-law-Σ-is-contr
+      ( is-contr-total-is-in-equivalence-class-set-quotient)
 
-  -- postulate
-  --   lemma-quotient-Set :
-  --     (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
-  lemma-quotient-Set :
-    (x : A) → is-in-equivalence-class-set-quotient R (quotient-map R x) x
-  lemma-quotient-Set x =
-    {!!}
-
-  map-split-Σ-quotient-Set : A → Σ-quotient-Set
-  map-split-Σ-quotient-Set x =
-    ( quotient-map R x , x , lemma-quotient-Set x)
-
-  lemma-contr-map-Σ-quotient-Set :
-    (x : A) (y : fiber map-Σ-quotient-Set x) →
-    (map-split-Σ-quotient-Set x , refl) ＝ y
-  lemma-contr-map-Σ-quotient-Set x ((Y , y , y∈Y) , H) =
-    eq-pair-Σ
-      ( eq-pair-Σ {!!} {!!})
-      {!!}
-
-  is-contr-map-Σ-quotient-Set : is-contr-map map-Σ-quotient-Set
-  is-contr-map-Σ-quotient-Set x =
-    ( ( map-split-Σ-quotient-Set x , refl) ,
-      ( lemma-contr-map-Σ-quotient-Set x))
-
-  is-section-map-Σ-quotient-Set :
-    map-Σ-quotient-Set ∘ map-split-Σ-quotient-Set ~ id
-  is-section-map-Σ-quotient-Set x = refl
-
-  is-retraction-map-Σ-quotient-Set :
-    map-split-Σ-quotient-Set ∘ map-Σ-quotient-Set ~ id
-  is-retraction-map-Σ-quotient-Set (X , x , x∈X) =
-    eq-pair-Σ
-      ( α)
-      ( eq-pair-Σ
-        {!!}
-        {!!})
-    where
-
-    α : quotient-map R x ＝ X
-    α = {!!}
-
-
-  is-equiv-map-Σ-quotient-Set : is-equiv map-Σ-quotient-Set
-  is-equiv-map-Σ-quotient-Set =
-    is-equiv-is-invertible
-      ( map-split-Σ-quotient-Set)
-      ( is-section-map-Σ-quotient-Set)
-      ( is-retraction-map-Σ-quotient-Set)
+  Σ-decomposition-is-in-equivalence-class-set-quotient :
+    Σ ( set-quotient R)
+      ( type-subtype ∘ is-in-equivalence-class-set-quotient-Prop R) ≃
+    ( A)
+  Σ-decomposition-is-in-equivalence-class-set-quotient =
+    equiv-total-is-in-equivalence-class-set-quotient ∘e equiv-left-swap-Σ
 ```
 
 ## See also

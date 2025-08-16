@@ -8,11 +8,15 @@ module foundation.equivalence-classes where
 
 ```agda
 open import foundation.conjunction
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
+open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
@@ -23,13 +27,13 @@ open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
-open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -336,6 +340,25 @@ module _
       fundamental-theorem-id
         ( is-torsorial-is-in-equivalence-class)
         ( is-in-equivalence-class-eq-equivalence-class)
+```
+
+### Σ-decompositions of types induced by equivalence classes
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  equiv-total-is-in-equivalence-class :
+    Σ A (λ x → Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x)) ≃ A
+  equiv-total-is-in-equivalence-class =
+    right-unit-law-Σ-is-contr
+      ( is-torsorial-is-in-equivalence-class R)
+
+  Σ-decomposition-is-in-equivalence-class :
+    Σ (equivalence-class R) (type-subtype ∘ is-in-equivalence-class-Prop R) ≃ A
+  Σ-decomposition-is-in-equivalence-class =
+    equiv-total-is-in-equivalence-class ∘e equiv-left-swap-Σ
 ```
 
 ### The map `class : A → equivalence-class R` is an effective quotient map
