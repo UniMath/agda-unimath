@@ -151,7 +151,7 @@ map-equiv-Fin-1 : Fin 1 → unit
 map-equiv-Fin-1 (inr x) = x
 
 map-inv-equiv-Fin-1 : unit → Fin 1
-map-inv-equiv-Fin-1 x = inr x
+map-inv-equiv-Fin-1 = inr
 
 is-section-map-inv-equiv-Fin-1 :
   ( map-equiv-Fin-1 ∘ map-inv-equiv-Fin-1) ~ id
@@ -174,6 +174,12 @@ pr2 equiv-Fin-1 = is-equiv-map-equiv-Fin-1
 
 is-contr-Fin-1 : is-contr (Fin 1)
 is-contr-Fin-1 = is-contr-equiv unit equiv-Fin-1 is-contr-unit
+
+is-prop-Fin-1 : is-prop (Fin 1)
+is-prop-Fin-1 = is-prop-is-contr is-contr-Fin-1
+
+Fin-1-Prop : Prop lzero
+Fin-1-Prop = (Fin 1 , is-prop-Fin-1)
 
 is-not-contractible-Fin :
   (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)

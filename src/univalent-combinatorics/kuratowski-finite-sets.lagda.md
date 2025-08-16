@@ -11,59 +11,67 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
+open import univalent-combinatorics.dedekind-finite-sets
+open import univalent-combinatorics.dedekind-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.subfinite-types
+open import univalent-combinatorics.subfinitely-enumerable-types
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "Kuratowski finite set" agda=Kuratowski-Finite-Set}} is a
-[set](foundation-core.sets.md) `X` for which there exists a
-[surjection](foundation.surjective-maps.md) into `X` from a standard finite
-type. In other words, the Kuratowski finite set are the
-[set-quotient](foundation.set-quotients.md) of a
-[standard finite type](univalent-combinatorics.standard-finite-types.md).
+A {{#concept "Kuratowski finite set" Agda=Kuratowski-Finite-Set}} is a
+[set](foundation-core.sets.md) `X` for which there
+[exists](foundation.existential-quantification.md) a
+[surjection](foundation.surjective-maps.md) into `X` from a
+[standard finite type](univalent-combinatorics.standard-finite-types.md). In
+other words, a Kuratowski finite set is a
+[set-quotient](foundation.set-quotients.md) of a standard finite type.
 
 ## Definition
 
 ```agda
-is-kuratowski-finite-set-Prop : {l : Level} → Set l → Prop l
-is-kuratowski-finite-set-Prop X =
+is-kuratowski-finite-prop-Set : {l : Level} → Set l → Prop l
+is-kuratowski-finite-prop-Set X =
   exists-structure-Prop ℕ (λ n → Fin n ↠ type-Set X)
 
-is-kuratowski-finite-set : {l : Level} → Set l → UU l
-is-kuratowski-finite-set X = type-Prop (is-kuratowski-finite-set-Prop X)
+is-kuratowski-finite-Set : {l : Level} → Set l → UU l
+is-kuratowski-finite-Set X = type-Prop (is-kuratowski-finite-prop-Set X)
 
 Kuratowski-Finite-Set : (l : Level) → UU (lsuc l)
-Kuratowski-Finite-Set l = Σ (Set l) is-kuratowski-finite-set
+Kuratowski-Finite-Set l = Σ (Set l) is-kuratowski-finite-Set
 
 module _
   {l : Level} (X : Kuratowski-Finite-Set l)
   where
 
-  set-Finite-Type-Kuratowski : Set l
-  set-Finite-Type-Kuratowski = pr1 X
+  set-Kuratowski-Finite-Set : Set l
+  set-Kuratowski-Finite-Set = pr1 X
 
   type-Kuratowski-Finite-Set : UU l
-  type-Kuratowski-Finite-Set = type-Set set-Finite-Type-Kuratowski
+  type-Kuratowski-Finite-Set = type-Set set-Kuratowski-Finite-Set
 
   is-set-type-Kuratowski-Finite-Set : is-set type-Kuratowski-Finite-Set
-  is-set-type-Kuratowski-Finite-Set = is-set-type-Set set-Finite-Type-Kuratowski
+  is-set-type-Kuratowski-Finite-Set = is-set-type-Set set-Kuratowski-Finite-Set
 
-  is-kuratowski-finite-set-Finite-Type-Kuratowski :
-    is-kuratowski-finite-set set-Finite-Type-Kuratowski
-  is-kuratowski-finite-set-Finite-Type-Kuratowski = pr2 X
+  is-kuratowski-finite-Kuratowski-Finite-Set :
+    is-kuratowski-finite-Set set-Kuratowski-Finite-Set
+  is-kuratowski-finite-Kuratowski-Finite-Set = pr2 X
 ```
 
 ## Properties
@@ -77,15 +85,15 @@ is-finite-has-decidable-equality-type-Kuratowski-Finite-Set :
   is-finite (type-Kuratowski-Finite-Set X)
 is-finite-has-decidable-equality-type-Kuratowski-Finite-Set X H =
   apply-universal-property-trunc-Prop
-    ( is-kuratowski-finite-set-Finite-Type-Kuratowski X)
+    ( is-kuratowski-finite-Kuratowski-Finite-Set X)
     ( is-finite-Prop (type-Kuratowski-Finite-Set X))
     ( λ (n , f , s) → is-finite-codomain (is-finite-Fin n) s H)
 
-has-decidable-equality-is-finite-type-Kuratowski-Finite-Set :
+has-decidable-equality-is-Kuratowski-Finite-Set-Finite-Set :
   {l : Level} (X : Kuratowski-Finite-Set l) →
   is-finite (type-Kuratowski-Finite-Set X) →
   has-decidable-equality (type-Kuratowski-Finite-Set X)
-has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
+has-decidable-equality-is-Kuratowski-Finite-Set-Finite-Set X =
   has-decidable-equality-is-finite
 ```
 
@@ -93,11 +101,74 @@ has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
 
 > This remains to be formalized. ([Markovian types](logic.markovian-types.md))
 
+### Kuratowski finite sets are subfinitely enumerable
+
+```agda
+module _
+  {l : Level} (X : Kuratowski-Finite-Set l)
+  where
+
+  is-subfinitely-enumerable-type-Kuratowski-Finite-Set :
+    is-subfinitely-enumerable lzero (type-Kuratowski-Finite-Set X)
+  is-subfinitely-enumerable-type-Kuratowski-Finite-Set =
+    map-trunc-Prop
+      ( λ (n , s) → (Fin-Subfinite-Type n , s))
+      ( is-kuratowski-finite-Kuratowski-Finite-Set X)
+
+  subfinitely-enumerable-type-Kuratowski-Finite-Set :
+    Subfinitely-Enumerable-Type l lzero
+  subfinitely-enumerable-type-Kuratowski-Finite-Set =
+    ( type-Kuratowski-Finite-Set X ,
+      is-subfinitely-enumerable-type-Kuratowski-Finite-Set)
+```
+
+### Kuratowski finite sets are Dedekind finite
+
+```agda
+module _
+  {l : Level} (X : Kuratowski-Finite-Set l)
+  where
+
+  is-dedekind-finite-type-Kuratowski-Finite-Set :
+    is-dedekind-finite (type-Kuratowski-Finite-Set X)
+  is-dedekind-finite-type-Kuratowski-Finite-Set =
+    is-dedekind-finite-type-Subfinitely-Enumerable-Type
+      ( subfinitely-enumerable-type-Kuratowski-Finite-Set X)
+
+  dedekind-finite-type-Kuratowski-Finite-Set : Dedekind-Finite-Type l
+  dedekind-finite-type-Kuratowski-Finite-Set =
+    type-Kuratowski-Finite-Set X , is-dedekind-finite-type-Kuratowski-Finite-Set
+```
+
+### The Cantor–Schröder–Bernstein theorem for Kuratowski finite sets
+
+If two Kuratowski finite sets `X` and `Y` mutually embed, `X ↪ Y` and `Y ↪ X`,
+then `X ≃ Y`.
+
+```agda
+module _
+  {l1 l2 : Level} (X : Kuratowski-Finite-Set l1) (Y : Kuratowski-Finite-Set l2)
+  where
+
+  Cantor-Schröder-Bernstein-Kuratowski-Finite-Set :
+    (type-Kuratowski-Finite-Set X ↪ type-Kuratowski-Finite-Set Y) →
+    (type-Kuratowski-Finite-Set Y ↪ type-Kuratowski-Finite-Set X) →
+    type-Kuratowski-Finite-Set X ≃ type-Kuratowski-Finite-Set Y
+  Cantor-Schröder-Bernstein-Kuratowski-Finite-Set =
+    Cantor-Schröder-Bernstein-Dedekind-Finite-Type
+      ( dedekind-finite-type-Kuratowski-Finite-Set X)
+      ( dedekind-finite-type-Kuratowski-Finite-Set Y)
+```
+
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Finitely enumerable types](univalent-combinatorics.finitely-enumerable-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
+- In
+  [`univalent-combinatorics.surjective-maps`](univalent-combinatorics.surjective-maps.md)
+  it is shown that if a Kuratowski finite set has decidable equality then it is
+  finite.
 
 ## External links
 

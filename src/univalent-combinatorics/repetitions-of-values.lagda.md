@@ -18,9 +18,15 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.noninjective-maps
+open import foundation.pairs-of-distinct-elements
 open import foundation.sets
 
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -31,14 +37,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **repetition of values** of a function `f : A → B` consists of a pair
-`a a' : A` such that `a ≠ a'` and `f a ＝ f a'`.
+A **repetition of values** of a map `f : A → B` consists of a
+[pair of distinct elements](foundation.pairs-of-distinct-elements.md) `x ≠ y` of
+`A` that get mapped to the [same](foundation-core.identity-types.md) element in
+`B`: `f x ＝ f y`.
 
 ## Properties
 
 ### If `f : Fin k → Fin l` is not injective, then it has a repetition of values
-
-b
 
 ```agda
 repetition-of-values-is-not-injective-Fin :
@@ -83,80 +89,45 @@ repetition-of-values-is-not-injective-Fin k l f N =
       ( K)
 ```
 
-### On the standard finite sets, `is-repetition-of-values f x` is decidable
+> **Comment.** We could modify this construction to provide proof that `i < j`
+> rather than `i ≠ j`.
 
-```text
-is-decidable-is-repetition-of-values-Fin :
-  {k l : ℕ} (f : Fin k → Fin l) (x : Fin k) →
-  is-decidable (is-repetition-of-values f x)
-is-decidable-is-repetition-of-values-Fin f x =
-  is-decidable-Σ-Fin
-    ( λ y →
-      is-decidable-product
-        ( is-decidable-neg (has-decidable-equality-Fin x y))
-        ( has-decidable-equality-Fin (f x) (f y)))
+### On the standard finite sets, we can count the number of pairs of distinct elements
+
+```agda
+count-pair-of-distinct-elements-Fin :
+  (k : ℕ) → count (pair-of-distinct-elements (Fin k))
+count-pair-of-distinct-elements-Fin k =
+  count-Σ-Fin k
+    ( λ x →
+      count-decidable-subtype-Fin k
+        ( λ y → neg-Decidable-Prop (decidable-Eq-Fin k x y)))
 ```
 
 ### On the standard finite sets, `is-repeated-value f x` is decidable
 
-```text
+```agda
 is-decidable-is-repeated-value-Fin :
   (k l : ℕ) (f : Fin k → Fin l) (x : Fin k) →
   is-decidable (is-repeated-value f x)
 is-decidable-is-repeated-value-Fin k l f x =
-  is-decidable-Σ-Fin k
-    ( λ y →
-      is-decidable-product
-        ( is-decidable-neg (has-decidable-equality-Fin k x y))
-        ( has-decidable-equality-Fin l (f x) (f y)))
+  is-decidable-Σ-count
+    ( count-decidable-subtype-Fin k
+      ( λ y → neg-Decidable-Prop (decidable-Eq-Fin k x y)))
+    ( λ (y , p) → has-decidable-equality-Fin l (f x) (f y))
 ```
 
-### The predicate that `f` maps two different elements to the same value
+### On the standard finite sets, `repetition-of-values f` is decidable
 
-This remains to be defined.
-[#748](https://github.com/UniMath/agda-unimath/issues/748)
-
-### On the standard finite sets, `has-repetition-of-values f` is decidable
-
-```text
-is-decidable-has-repetition-of-values-Fin :
-  (k l : ℕ) (f : Fin k → Fin l) → is-decidable (has-repetition-of-values f)
-is-decidable-has-repetition-of-values-Fin k l f =
-  is-decidable-Σ-Fin k (is-decidable-is-repetition-of-values-Fin k l f)
+```agda
+is-decidable-repetition-of-values-Fin :
+  (k l : ℕ) (f : Fin k → Fin l) → is-decidable (repetition-of-values f)
+is-decidable-repetition-of-values-Fin k l f =
+  is-decidable-Σ-count
+    ( count-pair-of-distinct-elements-Fin k)
+    ( λ (x , y , _) → has-decidable-equality-Fin l (f x) (f y))
 ```
 
-### If `f` is not injective, then it has a `repetition-of-values`
+## See also
 
-```text
-is-injective-map-Fin-0-Fin :
-  {k : ℕ} (f : Fin zero-ℕ → Fin k) → is-injective f
-is-injective-map-Fin-0-Fin f {()}
-
-is-injective-map-Fin-1-Fin : {k : ℕ} (f : Fin 1 → Fin k) → is-injective f
-is-injective-map-Fin-1-Fin f {inr star} {inr star} p = refl
-
-has-repetition-of-values-is-not-injective-Fin :
-  (k l : ℕ) (f : Fin l → Fin k) →
-  is-not-injective f → has-repetition-of-values f
-has-repetition-of-values-is-not-injective-Fin k zero-ℕ f H =
-  ex-falso (H (is-injective-map-Fin-0-Fin {k} f))
-has-repetition-of-values-is-not-injective-Fin k (succ-ℕ l) f H with
-  is-decidable-is-repetition-of-values-Fin (succ-ℕ l) k f (inr star)
-... | inl r = pair (inr star) r
-... | inr g =
-  α (has-repetition-of-values-is-not-injective-Fin k l (f ∘ inl) K)
-  where
-  K : is-not-injective (f ∘ inl)
-  K I = H (λ {x} {y} → J x y)
-    where
-    J : (x y : Fin (succ-ℕ l)) → Id (f x) (f y) → Id x y
-    J (inl x) (inl y) p = ap inl (I p)
-    J (inl x) (inr star) p =
-      ex-falso (g (triple (inl x) (Eq-Fin-eq (succ-ℕ l)) (inv p)))
-    J (inr star) (inl y) p =
-      ex-falso (g (triple (inl y) (Eq-Fin-eq (succ-ℕ l)) p))
-    J (inr star) (inr star) p = refl
-    α : has-repetition-of-values (f ∘ inl) → has-repetition-of-values f
-    α (pair x (pair y (pair h q))) =
-      pair (inl x) (pair (inl y) (pair (λ r → h (is-injective-inl r)) q))
-```
+- [The pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
