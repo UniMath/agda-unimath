@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module universal-algebra.isomorphisms-algebras-of-theories where
+module universal-algebra.isomorphisms-of-algebras where
 ```
 
 <details><summary>Imports</summary>
@@ -114,7 +114,14 @@ module _
     ( is-prop-is-iso-Algebra)
     ( is-equiv-is-iso-Algebra)
     ( is-iso-is-equiv-Algebra) ∘e
-    {!   !}
+    ( inv-equiv (equiv-equiv-hom-Algebra' S T A B)) ∘e
+    ( equiv-Eq-Model-Signature' S (pr1 A) (pr1 B))
+
+  iso-Eq-Algebra : Eq-Algebra S T A B → iso-Algebra
+  iso-Eq-Algebra = map-equiv equiv-iso-Eq-Algebra
+
+  is-equiv-iso-Eq-Algebra : is-equiv iso-Eq-Algebra
+  is-equiv-iso-Eq-Algebra = is-equiv-map-equiv equiv-iso-Eq-Algebra
 
 module _
   { l1 : Level} ( S : signature l1)
@@ -128,4 +135,12 @@ module _
     ( Σ (Algebra S T l3) (Eq-Algebra S T A))
     ( equiv-tot (equiv-iso-Eq-Algebra S T A))
     ( is-torsorial-Eq-Algebra S T A)
+
+  is-equiv-iso-eq-Algebra :
+    (B : Algebra S T l3) →
+    is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A B)
+  is-equiv-iso-eq-Algebra =
+    fundamental-theorem-id
+    ( is-torsorial-iso-Algebra)
+    ( iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A)
 ```
