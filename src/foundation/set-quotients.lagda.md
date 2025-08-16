@@ -426,7 +426,7 @@ module _
       B f Uf
 ```
 
-### Any quotient class containing a given element is equal to its image by `quotient-map`
+### Any quotient class containing a given element `x` is equal to `quotient-map x`
 
 ```agda
 module _
