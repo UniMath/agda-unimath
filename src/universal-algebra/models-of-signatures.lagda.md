@@ -28,6 +28,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 
 open import lists.tuples
+open import lists.functoriality-tuples
 
 open import universal-algebra.signatures
 ```
@@ -86,112 +87,107 @@ module _
   {l1 : Level} (S : signature l1)
   where
 
-  tr-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Model-Signature S l2) (Y : Set l2) →
-    is-model-signature S Y →
-    equiv-Set (set-Model-Signature S X) Y →
+  preserves-operations-equiv-Model-Signature :
+    {l2 : Level} (X Y : Model-Signature S l2)
+    (f : equiv-Set (set-Model-Signature S X) (set-Model-Signature S Y)) →
     UU (l1 ⊔ l2)
-  tr-is-model-signature-equiv-Set (X , X-assign) Y Y-assign f =
-    map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) f X-assign ~
-    Y-assign
+  preserves-operations-equiv-Model-Signature
+    ((X , _) , assign-X) (Y , assign-Y) (f , _) =
+      ( op : operation-signature S)
+      ( v : tuple X (arity-operation-signature S op)) →
+        f (assign-X op v) ＝ assign-Y op (map-tuple f v)
 
-  is-prop-tr-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Model-Signature S l2) (Y : Set l2)
-    (p : is-model-signature S Y) (eq : equiv-Set (set-Model-Signature S X) Y) →
-    is-prop (tr-is-model-signature-equiv-Set X Y p eq)
-  is-prop-tr-is-model-signature-equiv-Set X Y p eq =
-    is-prop-Π
-    ( λ f → is-set-function-type (pr2 Y)
-      ( map-tr-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v) eq (pr2 X) f)
-      ( p f))
-
-  tr-is-model-signature-equiv-Set-Prop :
-    {l2 : Level} (X : Model-Signature S l2) (Y : Set l2)
-    (p : is-model-signature S Y) (eq : equiv-Set (set-Model-Signature S X) Y) →
-    Prop (l1 ⊔ l2)
-  pr1 (tr-is-model-signature-equiv-Set-Prop X Y p eq) =
-    tr-is-model-signature-equiv-Set X Y p eq
-  pr2 (tr-is-model-signature-equiv-Set-Prop X Y p eq) =
-    is-prop-tr-is-model-signature-equiv-Set X Y p eq
+  is-prop-preserves-operations-equiv-Model-Signature :
+    {l2 : Level} (X Y : Model-Signature S l2)
+    (f : equiv-Set (set-Model-Signature S X) (set-Model-Signature S Y)) →
+    is-prop (preserves-operations-equiv-Model-Signature X Y f)
+  is-prop-preserves-operations-equiv-Model-Signature
+    ((X , set-X) , assign-X) ((Y , set-Y) , assign-Y) (f , _) =
+    is-prop-Π (λ op →
+      is-prop-Π (λ v → set-Y (f (assign-X op v)) (assign-Y op (map-tuple f v))))
 
   Eq-Model-Signature : {l2 : Level} (X Y : Model-Signature S l2) → UU (l1 ⊔ l2)
   Eq-Model-Signature (X , X-assign) (Y , Y-assign) =
     Σ
     ( equiv-Set X Y)
-    ( tr-is-model-signature-equiv-Set (X , X-assign) Y Y-assign)
+    ( preserves-operations-equiv-Model-Signature (X , X-assign) (Y , Y-assign))
+
+  preserves-operations-id-equiv-Model-Signature :
+    {l2 : Level} (X : Model-Signature S l2) →
+    preserves-operations-equiv-Model-Signature X X id-equiv
+  preserves-operations-id-equiv-Model-Signature ((X , _) , assign-X) op v =
+    ap
+    ( assign-X op)
+    ( preserves-id-map-tuple X (arity-operation-signature S op) v)
 
   refl-Eq-Model-Signature :
     {l2 : Level} (X : Model-Signature S l2) → Eq-Model-Signature X X
   pr1 (refl-Eq-Model-Signature X) = id-equiv
-  pr2 (refl-Eq-Model-Signature (X , X-assign)) f =
-    ap
-    ( λ z → z X-assign f)
-    ( compute-map-tr-equiv-id-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v))
+  pr2 (refl-Eq-Model-Signature X) =
+    preserves-operations-id-equiv-Model-Signature X
+
+  htpy-preserves-operations-Model-Signature :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) → UU (l1 ⊔ l2)
+  htpy-preserves-operations-Model-Signature X f g =
+    preserves-operations-equiv-Model-Signature (X , f) (X , g) id-equiv
+
+  htpy-eq-preserves-operations-Model-Signature :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
+    f ＝ g → htpy-preserves-operations-Model-Signature X f g
+  htpy-eq-preserves-operations-Model-Signature (X , _) f .f refl op v =
+    ap (f op) (preserves-id-map-tuple X (arity-operation-signature S op) v)
+
+  eq-htpy-preserves-operations-Model-Signature :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
+    htpy-preserves-operations-Model-Signature X f g → f ＝ g
+  eq-htpy-preserves-operations-Model-Signature (X , _) f g p =
+    eq-htpy
+    ( λ op → eq-htpy
+      ( λ v → p op v ∙
+        inv (ap (g op) (preserves-id-map-tuple X
+          ( arity-operation-signature S op) v))))
+
+  is-equiv-htpy-eq-preserves-operations-Model-Signature :
+    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
+    is-equiv (htpy-eq-preserves-operations-Model-Signature X f g)
+  pr1 (pr1 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) =
+    eq-htpy-preserves-operations-Model-Signature X f g
+  pr2 (pr1 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) p =
+    eq-htpy (λ op → eq-htpy (λ v → pr1
+      ( pr2 X (pr1 id-equiv (f op v)) (g op (map-tuple (pr1 id-equiv) v))
+      (( htpy-eq-preserves-operations-Model-Signature X f g ∘
+        pr1
+        ( pr1
+          ( is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)))
+        p op v)
+      ( p op v))))
+  pr1 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) =
+    eq-htpy-preserves-operations-Model-Signature X f g
+  pr2 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f .f)) refl =
+    is-set-has-uip
+    ( is-set-Π (λ op → is-set-function-type (pr2 X)))
+    ( f)
+    ( f)
+    (( eq-htpy-preserves-operations-Model-Signature X f f
+      ∘ htpy-eq-preserves-operations-Model-Signature X f f) refl)
+    ( refl)
 
   Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature S l2) → X ＝ Y → Eq-Model-Signature X Y
   Eq-eq-Model-Signature X .X refl = refl-Eq-Model-Signature X
-
-  tr-eq-refl-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
-    f ＝ g → tr-is-model-signature-equiv-Set (X , f) X g id-equiv
-  tr-eq-refl-is-model-signature-equiv-Set X f .f refl g =
-    ap
-    ( λ z → z f g)
-    ( compute-map-tr-equiv-id-equiv (λ v → (x : pr1 S) → tuple v (pr2 S x) → v))
-
-  is-prop-tr-eq-refl-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
-    is-prop (tr-is-model-signature-equiv-Set (X , f) X g id-equiv)
-  is-prop-tr-eq-refl-is-model-signature-equiv-Set X f g =
-    is-prop-Π (λ h → is-set-hom-Set (tuple-Set X (pr2 S h)) X
-      ( map-tr-equiv (λ v → (x : pr1 S) →
-        tuple v (pr2 S x) → v) id-equiv f h) (g h))
-
-  tr-eq-refl-is-model-signature-equiv-Set-Prop :
-    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
-    Prop (l1 ⊔ l2)
-  pr1 (tr-eq-refl-is-model-signature-equiv-Set-Prop X f g) =
-    tr-is-model-signature-equiv-Set (X , f) X g id-equiv
-  pr2 (tr-eq-refl-is-model-signature-equiv-Set-Prop X f g) =
-    is-prop-tr-eq-refl-is-model-signature-equiv-Set X f g
-
-  is-torsorial-tr-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Set l2) (f : is-model-signature S X) →
-    is-torsorial (λ z → tr-is-model-signature-equiv-Set (X , f) X z id-equiv)
-  pr1 (pr1 (is-torsorial-tr-is-model-signature-equiv-Set X f)) = f
-  pr2 (pr1 (is-torsorial-tr-is-model-signature-equiv-Set X f)) =
-    tr-eq-refl-is-model-signature-equiv-Set X f f refl
-  pr2 (is-torsorial-tr-is-model-signature-equiv-Set X f) (g , p) =
-    inv-map-extensionality-type-subtype
-    ( tr-eq-refl-is-model-signature-equiv-Set-Prop X f)
-    ( tr-eq-refl-is-model-signature-equiv-Set X f f refl)
-    ( refl-htpy)
-    ( λ h → equiv-funext)
-    ( g , p)
-    ( inv-htpy (λ h → ap (λ j x → j f h x)
-      ( compute-map-tr-equiv-id-equiv
-        ( λ v → (x₁ : pr1 S) → tuple v (pr2 S x₁) → v))) ∙h p)
-
-  is-equiv-tr-eq-refl-is-model-signature-equiv-Set :
-    {l2 : Level} (X : Set l2) (f g : is-model-signature S X) →
-    is-equiv (tr-eq-refl-is-model-signature-equiv-Set X f g)
-  is-equiv-tr-eq-refl-is-model-signature-equiv-Set X f =
-    fundamental-theorem-id
-    ( is-torsorial-tr-is-model-signature-equiv-Set X f)
-    ( tr-eq-refl-is-model-signature-equiv-Set X f)
 
   is-equiv-Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature S l2) →
     is-equiv (Eq-eq-Model-Signature X Y)
   is-equiv-Eq-eq-Model-Signature (X , X-assign) =
     structure-identity-principle
-    ( λ {Y} → tr-is-model-signature-equiv-Set (X , X-assign) Y)
+    ( λ {x} z →
+        preserves-operations-equiv-Model-Signature (X , X-assign) (x , z))
     ( id-equiv)
-    ( pr2 (refl-Eq-Model-Signature (X , X-assign)))
+    ( preserves-operations-id-equiv-Model-Signature (X , X-assign))
     ( Eq-eq-Model-Signature (X , X-assign))
     ( is-equiv-equiv-eq-Set X)
-    ( λ f → is-equiv-tr-eq-refl-is-model-signature-equiv-Set X X-assign f)
+    ( λ f → is-equiv-htpy-eq-preserves-operations-Model-Signature X X-assign f)
 
   equiv-Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature S l2) →
