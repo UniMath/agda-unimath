@@ -107,6 +107,11 @@ module _
       ( λ e →
         ( is-prop-Π
           ( λ assign → is-set-type-Model-Signature Sg M _ _)))
+
+  is-algebra-Prop :
+    {l3 : Level} (X : Model-Signature Sg l3) → Prop (l2 ⊔ l3)
+  pr1 (is-algebra-Prop X) = is-algebra X
+  pr2 (is-algebra-Prop X) = is-prop-is-algebra X
 ```
 
 ### Characterizing identifications of algebras
