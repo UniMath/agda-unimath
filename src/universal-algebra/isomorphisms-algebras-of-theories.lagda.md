@@ -107,52 +107,14 @@ module _
       htpy : map-inv-is-equiv eq ∘ pr1 f ~ pr1 (pr2 eq) ∘ pr1 f
       htpy x = htpy-map-inv-equiv-retraction (pr1 f , eq) (pr2 eq) (pr1 f x)
 
-  Eq-Algebra-equiv-Algebra :
-    Eq-Algebra S T A B → Σ (hom-Algebra S T A B) (is-equiv-hom-Algebra S T A B)
-  pr1 (pr1 (Eq-Algebra-equiv-Algebra ((f , eq) , p))) = f
-  pr2 (pr1 (Eq-Algebra-equiv-Algebra ((f , eq) , p))) op v =
-    {!   !} ∙
-    pr2 (pr1 eq)
-    ( pr2 (pr1 B) op
-    ( map-tuple (pr1 (pr1 (Eq-Algebra-equiv-Algebra ((f , eq) , p)))) v))
-  pr2 (Eq-Algebra-equiv-Algebra ((f , eq) , p)) = eq
-
-  equiv-Algebra-Eq-Algebra :
-    Σ (hom-Algebra S T A B) (is-equiv-hom-Algebra S T A B) → Eq-Algebra S T A B
-  pr1 (equiv-Algebra-Eq-Algebra ((f , _) , eq)) = f , eq
-  pr2 (equiv-Algebra-Eq-Algebra ((f , p) , eq)) g = eq-htpy htpy
-    where
-    htpy :
-      map-tr-equiv
-      ( λ v → (x : pr1 S) → tuple v (pr2 S x) → v)
-      ( pr1 (equiv-Algebra-Eq-Algebra ((f , p) , eq))) (pr2 (pr1 A)) g ~
-      pr2 (pr1 B) g
-    htpy x = {!   !} ∙ {!   !}
-
-  equiv-Eq-Algebra-equiv-Algebra :
-    Eq-Algebra S T A B ≃ Σ (hom-Algebra S T A B) (is-equiv-hom-Algebra S T A B)
-  pr1 equiv-Eq-Algebra-equiv-Algebra = Eq-Algebra-equiv-Algebra
-  pr1 (pr1 (pr2 equiv-Eq-Algebra-equiv-Algebra)) = equiv-Algebra-Eq-Algebra
-  pr2 (pr1 (pr2 equiv-Eq-Algebra-equiv-Algebra)) (f , p) =
-    eq-type-subtype
-    ( is-equiv-hom-Algebra-Prop S T A B)
-    ( eq-htpy-hom-Algebra S T A B (pr1
-      (( pr1 equiv-Eq-Algebra-equiv-Algebra ∘
-        pr1 (pr1 (pr2 equiv-Eq-Algebra-equiv-Algebra)))
-        ( f , p))) f (λ x → refl))
-  pr1 (pr2 (pr2 equiv-Eq-Algebra-equiv-Algebra)) = equiv-Algebra-Eq-Algebra
-  pr2 (pr2 (pr2 equiv-Eq-Algebra-equiv-Algebra)) (f , p) =
-    eq-type-subtype
-    ( tr-is-model-signature-equiv-Set-Prop S (pr1 A) (pr1 (pr1 B)) (pr2 (pr1 B)))
-    (eq-type-subtype is-equiv-Prop (eq-htpy (λ x → refl)))
-
   equiv-iso-Eq-Algebra : Eq-Algebra S T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
     equiv-type-subtype
     ( is-prop-is-equiv-hom-Algebra S T A B)
     ( is-prop-is-iso-Algebra)
     ( is-equiv-is-iso-Algebra)
-    ( is-iso-is-equiv-Algebra) ∘e {!   !}
+    ( is-iso-is-equiv-Algebra) ∘e
+    {!   !}
 
 module _
   { l1 : Level} ( S : signature l1)

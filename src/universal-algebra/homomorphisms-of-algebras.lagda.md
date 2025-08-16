@@ -1,6 +1,8 @@
 # Homomorphisms of algebras
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module universal-algebra.homomorphisms-of-algebras where
 ```
 
@@ -11,17 +13,23 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.transport-along-equivalences
 open import foundation.unit-type
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
+open import foundation-core.dependent-identifications
+open import foundation-core.transport-along-identifications
 open import foundation-core.homotopies
+open import foundation-core.torsorial-type-families
 open import foundation-core.propositions
 open import foundation-core.subtypes
 
@@ -30,6 +38,7 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
 
@@ -177,6 +186,10 @@ module _
   eq-htpy-hom-Algebra :
     (f g : hom-Algebra Sg Th Alg1 Alg2) → htpy-hom-Algebra f g → f ＝ g
   eq-htpy-hom-Algebra f g = map-inv-equiv (equiv-htpy-eq-hom-Algebra f g)
+
+  refl-htpy-hom-Algebra :
+    (f : hom-Algebra Sg Th Alg1 Alg2) → htpy-hom-Algebra f f
+  refl-htpy-hom-Algebra f = refl-htpy
 ```
 
 ### The identity map is an algebra homomorphism
@@ -314,4 +327,42 @@ module _
 
   equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   equiv-hom-Algebra = Σ (hom-Algebra Sg Th Alg1 Alg2) is-equiv-hom-Algebra
+```
+
+### Another characterization of the identity types of algebras
+
+```agda
+module _
+  { l1 : Level} ( Sg : signature l1)
+  { l2 : Level} ( Th : Theory Sg l2)
+  { l3 : Level} ( A : Algebra Sg Th l3)
+  where
+
+  id-equiv-hom-Algebra : equiv-hom-Algebra Sg Th A A
+  pr1 id-equiv-hom-Algebra = id-hom-Algebra Sg Th A
+  pr2 id-equiv-hom-Algebra = is-equiv-id
+
+  equiv-eq-hom-Algebra :
+    (B : Algebra Sg Th l3) → A ＝ B → equiv-hom-Algebra Sg Th A B
+  equiv-eq-hom-Algebra .A refl = id-equiv-hom-Algebra
+
+  is-torsorial-equiv-eq-hom-Algebra :
+    is-torsorial (λ z → equiv-hom-Algebra Sg Th A z)
+  pr1 (pr1 is-torsorial-equiv-eq-hom-Algebra) = A
+  pr2 (pr1 is-torsorial-equiv-eq-hom-Algebra) = id-equiv-hom-Algebra
+  pr2 is-torsorial-equiv-eq-hom-Algebra ((B , p) , ((f , q) , eq)) =
+    eq-pair-Σ
+    ( eq-type-subtype (is-algebra-Prop Sg Th)
+      ( eq-Eq-Model-Signature Sg (model-Algebra Sg Th A) B
+        (( f , eq) , (λ g → eq-htpy (λ x → {!   !})))))
+    ( eq-type-subtype (is-equiv-hom-Algebra-Prop Sg Th A (B , p))
+      ( eq-htpy-hom-Algebra Sg Th A (B , p) {!   !} (f , q)
+        ( λ x → {!   !})))
+
+  is-equiv-equiv-eq-hom-Algebra :
+    (B : Algebra Sg Th l3) → is-equiv (equiv-eq-hom-Algebra B)
+  is-equiv-equiv-eq-hom-Algebra =
+    fundamental-theorem-id
+      is-torsorial-equiv-eq-hom-Algebra
+      equiv-eq-hom-Algebra
 ```
