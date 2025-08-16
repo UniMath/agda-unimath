@@ -8,22 +8,21 @@ module metric-spaces.subspaces-metric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-structures
-open import metric-spaces.pseudometric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.saturated-metric-spaces
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -32,7 +31,10 @@ open import metric-spaces.triangular-premetric-structures
 
 [Subsets](foundation.subtypes.md) of
 [metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
-their ambient space. Moreover, the natural inclusion is an
+their ambient space; these are
+{{#concept "metric subspaces" Agda=subspace-Metric-Space}} of metric spaces.
+
+The natural inclusion of subspace into its ambient space is an
 [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
@@ -48,69 +50,105 @@ module _
   subset-Metric-Space = subtype l (type-Metric-Space A)
 ```
 
-## Properties
-
-### Subsets of metric spaces are metric spaces
+### Metric subspace of a metric space
 
 ```agda
 module _
-  {l l1 l2 : Level} (A : Metric-Space l1 l2) (S : subset-Metric-Space l A)
+  {l l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
   where
 
-  structure-subset-Metric-Space : Premetric l2 (type-subtype S)
-  structure-subset-Metric-Space d x y =
-    structure-Metric-Space A d (pr1 x) (pr1 y)
+  neighborhood-prop-subset-Metric-Space :
+    Rational-Neighborhood-Relation l2 (type-subtype S)
+  neighborhood-prop-subset-Metric-Space d x y =
+    neighborhood-prop-Metric-Space A d (pr1 x) (pr1 y)
 
-  is-reflexive-structure-subset-Metric-Space :
-    is-reflexive-Premetric structure-subset-Metric-Space
-  is-reflexive-structure-subset-Metric-Space d x =
-    is-reflexive-structure-Metric-Space A d (pr1 x)
+  is-reflexive-neighborhood-subset-Metric-Space :
+    is-reflexive-Rational-Neighborhood-Relation
+      neighborhood-prop-subset-Metric-Space
+  is-reflexive-neighborhood-subset-Metric-Space d x =
+    refl-neighborhood-Metric-Space A d (pr1 x)
 
-  is-symmetric-structure-subset-Metric-Space :
-    is-symmetric-Premetric structure-subset-Metric-Space
-  is-symmetric-structure-subset-Metric-Space d x y =
-    is-symmetric-structure-Metric-Space A d (pr1 x) (pr1 y)
+  is-symmetric-neighborhood-subset-Metric-Space :
+    is-symmetric-Rational-Neighborhood-Relation
+      neighborhood-prop-subset-Metric-Space
+  is-symmetric-neighborhood-subset-Metric-Space d x y =
+    symmetric-neighborhood-Metric-Space A d (pr1 x) (pr1 y)
 
-  is-triangular-structure-subset-Metric-Space :
-    is-triangular-Premetric structure-subset-Metric-Space
-  is-triangular-structure-subset-Metric-Space x y z =
-    is-triangular-structure-Metric-Space A (pr1 x) (pr1 y) (pr1 z)
+  is-triangular-neighborhood-subset-Metric-Space :
+    is-triangular-Rational-Neighborhood-Relation
+      neighborhood-prop-subset-Metric-Space
+  is-triangular-neighborhood-subset-Metric-Space x y z =
+    triangular-neighborhood-Metric-Space A (pr1 x) (pr1 y) (pr1 z)
 
-  is-pseudometric-structure-subset-Metric-Space :
-    is-pseudometric-Premetric structure-subset-Metric-Space
-  is-pseudometric-structure-subset-Metric-Space =
-    is-reflexive-structure-subset-Metric-Space ,
-    is-symmetric-structure-subset-Metric-Space ,
-    is-triangular-structure-subset-Metric-Space
+  is-saturated-neighborhood-subset-Metric-Space :
+    is-saturated-Rational-Neighborhood-Relation
+      neighborhood-prop-subset-Metric-Space
+  is-saturated-neighborhood-subset-Metric-Space ε x y =
+    saturated-neighborhood-Metric-Space
+      ( A)
+      ( ε)
+      ( pr1 x)
+      ( pr1 y)
 
-  is-metric-structure-subset-Metric-Space :
-    is-metric-Premetric structure-subset-Metric-Space
-  pr1 is-metric-structure-subset-Metric-Space =
-    is-pseudometric-structure-subset-Metric-Space
-  pr2 is-metric-structure-subset-Metric-Space =
-    ( is-local-is-tight-Premetric
-      ( structure-subset-Metric-Space)
-      ( λ x y H →
-        eq-type-subtype
-          ( S)
-          ( is-tight-structure-Metric-Space A (pr1 x) (pr1 y) H)))
+  pseudometric-subspace-Metric-Space :
+    Pseudometric-Space (l ⊔ l1) l2
+  pseudometric-subspace-Metric-Space =
+    ( type-subtype S) ,
+    ( neighborhood-prop-subset-Metric-Space ,
+      is-reflexive-neighborhood-subset-Metric-Space ,
+      is-symmetric-neighborhood-subset-Metric-Space ,
+      is-triangular-neighborhood-subset-Metric-Space ,
+      is-saturated-neighborhood-subset-Metric-Space)
+
+  is-extensional-pseudometric-subspace-Metric-Space :
+    is-extensional-Pseudometric-Space
+      pseudometric-subspace-Metric-Space
+  is-extensional-pseudometric-subspace-Metric-Space =
+    is-extensional-is-tight-Pseudometric-Space
+      ( pseudometric-subspace-Metric-Space)
+      ( λ x y →
+        eq-type-subtype S ∘
+        eq-sim-Metric-Space A (pr1 x) (pr1 y))
 
   subspace-Metric-Space : Metric-Space (l ⊔ l1) l2
-  pr1 subspace-Metric-Space =
-    type-subtype S , structure-subset-Metric-Space
-  pr2 subspace-Metric-Space =
-    is-metric-structure-subset-Metric-Space
+  subspace-Metric-Space =
+    make-Metric-Space
+      ( type-subtype S)
+      ( neighborhood-prop-subset-Metric-Space)
+      ( is-reflexive-neighborhood-subset-Metric-Space)
+      ( is-symmetric-neighborhood-subset-Metric-Space)
+      ( is-triangular-neighborhood-subset-Metric-Space)
+      ( is-saturated-neighborhood-subset-Metric-Space)
+      ( is-extensional-pseudometric-subspace-Metric-Space)
+```
+
+### Inclusion of a metric subspace into its ambient space
+
+```agda
+module _
+  {l l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
+  where
 
   inclusion-subspace-Metric-Space :
-    map-type-Metric-Space subspace-Metric-Space A
+    type-function-Metric-Space
+      ( subspace-Metric-Space A S)
+      ( A)
   inclusion-subspace-Metric-Space = inclusion-subtype S
 ```
+
+## Properties
 
 ### The inclusion of a subspace into its ambient space is an isometry
 
 ```agda
 module _
-  {l l1 l2 : Level} (A : Metric-Space l1 l2) (S : subset-Metric-Space l A)
+  {l l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
   where
 
   is-isometry-inclusion-subspace-Metric-Space :
@@ -125,18 +163,4 @@ module _
   isometry-inclusion-subspace-Metric-Space =
     inclusion-subspace-Metric-Space A S ,
     is-isometry-inclusion-subspace-Metric-Space
-```
-
-### Subspaces of saturated metric spaces are saturated
-
-```agda
-module _
-  {l l1 l2 : Level} (A : Metric-Space l1 l2) (H : is-saturated-Metric-Space A)
-  (S : subset-Metric-Space l A)
-  where
-
-  is-saturated-subspace-is-saturated-Metric-Space :
-    is-saturated-Metric-Space (subspace-Metric-Space A S)
-  is-saturated-subspace-is-saturated-Metric-Space ε x y =
-    H ε (inclusion-subtype S x) (inclusion-subtype S y)
 ```
