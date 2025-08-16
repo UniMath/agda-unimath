@@ -319,12 +319,13 @@ module _
       ( λ D → is-in-equivalence-class-Prop R D a)
       ( eq-class-equivalence-class R C H)
 
-  is-torsorial-is-in-equivalence-class :
-    is-torsorial (λ P → is-in-equivalence-class R P a)
-  pr1 is-torsorial-is-in-equivalence-class =
-    center-total-is-in-equivalence-class
-  pr2 is-torsorial-is-in-equivalence-class =
-    contraction-total-is-in-equivalence-class
+  abstract
+    is-torsorial-is-in-equivalence-class :
+      is-torsorial (λ P → is-in-equivalence-class R P a)
+    pr1 is-torsorial-is-in-equivalence-class =
+      center-total-is-in-equivalence-class
+    pr2 is-torsorial-is-in-equivalence-class =
+      contraction-total-is-in-equivalence-class
 
   is-in-equivalence-class-eq-equivalence-class :
     (q : equivalence-class R) → class R a ＝ q →

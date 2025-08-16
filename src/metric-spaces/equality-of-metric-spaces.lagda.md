@@ -203,6 +203,27 @@ module _
         ( is-torsorial-Id A)
 ```
 
+### Composition of isometric equivalences
+
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Metric-Space la la') (B : Metric-Space lb lb') (C : Metric-Space lc lc')
+  where
+
+  comp-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space B C →
+    isometric-equiv-Metric-Space A B →
+    isometric-equiv-Metric-Space A C
+  comp-isometric-equiv-Metric-Space (B≃C , isometry-B≃C) (A≃B , isometry-A≃B) =
+    ( B≃C ∘e A≃B ,
+      is-isometry-comp-is-isometry-Metric-Space A B C
+        ( map-equiv B≃C)
+        ( map-equiv A≃B)
+        ( isometry-B≃C)
+        ( isometry-A≃B))
+```
+
 ### Two metric spaces are isometrically equivalent if and only if there is an isometric equivalence between them
 
 ```agda

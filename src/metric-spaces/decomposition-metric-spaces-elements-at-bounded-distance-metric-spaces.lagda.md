@@ -319,3 +319,46 @@ module _
     ( equiv-type-Σ-components-at-bounded-distance-Metric-Space A ,
       is-isometry-map-equiv-Σ-components-at-bounded-distance-Metric-Space A)
 ```
+
+### The decomposition into subspaces of elements at bounded distance is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  idempotent-Σ-components-at-bounded-distance-Metric-Space :
+    Σ-components-at-bounded-distance-Metric-Space
+      ( Σ-components-at-bounded-distance-Metric-Space A) ＝
+    Σ-components-at-bounded-distance-Metric-Space A
+  idempotent-Σ-components-at-bounded-distance-Metric-Space =
+    eq-isometric-equiv-Metric-Space
+      ( Σ-components-at-bounded-distance-Metric-Space
+        ( Σ-components-at-bounded-distance-Metric-Space A))
+      ( Σ-components-at-bounded-distance-Metric-Space A)
+      ( isometric-equiv-Σ-components-at-bounded-distance-Metric-Space
+        ( Σ-components-at-bounded-distance-Metric-Space A))
+```
+
+### Universal property of the decomposition into subspaces of elements at bounded distance
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  eq-Σ-components-at-bounded-distance-Metric-Space :
+    (M : Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)) →
+    isometric-equiv-Metric-Space A M →
+    Σ-components-at-bounded-distance-Metric-Space A ＝ M
+  eq-Σ-components-at-bounded-distance-Metric-Space M isometric-equiv-M =
+    eq-isometric-equiv-Metric-Space
+      ( Σ-components-at-bounded-distance-Metric-Space A)
+      ( M)
+      ( comp-isometric-equiv-Metric-Space
+        ( Σ-components-at-bounded-distance-Metric-Space A)
+        ( A)
+        ( M)
+        ( isometric-equiv-M)
+        ( isometric-equiv-Σ-components-at-bounded-distance-Metric-Space A))
+```
