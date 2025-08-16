@@ -55,6 +55,7 @@ open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
+open import metric-spaces.decomposition-metric-spaces-elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public

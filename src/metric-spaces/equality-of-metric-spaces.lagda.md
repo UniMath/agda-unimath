@@ -176,6 +176,12 @@ module _
   equiv-eq-isometric-equiv-Metric-Space =
     ( equiv-isometric-eq-equiv-Metric-Space A B) ∘e
     ( equiv-eq-isometric-eq-Metric-Space A B)
+
+  eq-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space A B → A ＝ B
+  eq-isometric-equiv-Metric-Space =
+    map-inv-equiv
+      ( equiv-eq-isometric-equiv-Metric-Space)
 ```
 
 ### Isometric equivalence of metric spaces is torsorial
