@@ -59,6 +59,33 @@ abstract
   commutative-dist-ℚ : (p q : ℚ) → dist-ℚ p q ＝ dist-ℚ q p
   commutative-dist-ℚ p q =
     inv (abs-neg-ℚ _) ∙ ap abs-ℚ (distributive-neg-diff-ℚ _ _)
+
+  commutative-rational-dist-ℚ :
+    (p q : ℚ) → rational-dist-ℚ p q ＝ rational-dist-ℚ q p
+  commutative-rational-dist-ℚ p q = ap rational-ℚ⁰⁺ (commutative-dist-ℚ p q)
+```
+
+### If `p ≤ q`, the distance between `p` and `q` is `q - p`
+
+```agda
+abstract
+  dist-leq-ℚ :
+    {p q : ℚ} → (p≤q : leq-ℚ p q) → dist-ℚ p q ＝ nonnegative-diff-leq-ℚ p q p≤q
+  dist-leq-ℚ {p} {q} p≤q =
+    commutative-dist-ℚ p q ∙
+    abs-rational-ℚ⁰⁺ (nonnegative-diff-leq-ℚ p q p≤q)
+
+  rational-dist-leq-ℚ :
+    {p q : ℚ} → (p≤q : leq-ℚ p q) → rational-dist-ℚ p q ＝ q -ℚ p
+  rational-dist-leq-ℚ p≤q = ap rational-ℚ⁰⁺ (dist-leq-ℚ p≤q)
+
+  dist-leq-reversed-ℚ :
+    {p q : ℚ} → (q≤p : leq-ℚ q p) → dist-ℚ p q ＝ nonnegative-diff-leq-ℚ q p q≤p
+  dist-leq-reversed-ℚ q≤p = commutative-dist-ℚ _ _ ∙ dist-leq-ℚ q≤p
+
+  rational-dist-leq-reversed-ℚ :
+    {p q : ℚ} → (q≤p : leq-ℚ q p) → rational-dist-ℚ p q ＝ p -ℚ q
+  rational-dist-leq-reversed-ℚ q≤p = ap rational-ℚ⁰⁺ (dist-leq-reversed-ℚ q≤p)
 ```
 
 ### The differences of the arguments are less than or equal to their distance

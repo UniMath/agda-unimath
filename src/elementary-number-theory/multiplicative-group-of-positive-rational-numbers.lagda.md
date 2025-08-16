@@ -181,3 +181,11 @@ module _
     eq-denominator-inv-numerator-ℚ⁺ =
       ind-Σ eq-denominator-inv-numerator-is-positive-ℚ x
 ```
+
+### Group laws on the positive rational numbers
+
+```agda
+abstract
+  is-section-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
+  is-section-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
+```

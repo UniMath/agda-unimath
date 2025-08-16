@@ -93,10 +93,12 @@ open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
 open import order-theory.nuclei-large-locales public
+open import order-theory.opposite-decidable-total-orders public
 open import order-theory.opposite-large-posets public
 open import order-theory.opposite-large-preorders public
 open import order-theory.opposite-posets public
 open import order-theory.opposite-preorders public
+open import order-theory.opposite-total-orders public
 open import order-theory.order-preserving-maps-large-posets public
 open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public

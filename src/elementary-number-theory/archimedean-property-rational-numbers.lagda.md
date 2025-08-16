@@ -25,6 +25,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 ```
 
 </details>
@@ -74,4 +75,19 @@ abstract
       exists ℕ (λ n → le-ℚ-Prop y (rational-ℤ (int-ℕ n) *ℚ x))
   archimedean-property-ℚ x y pos-x =
     unit-trunc-Prop (bound-archimedean-property-ℚ x y pos-x)
+```
+
+## Corollaries
+
+### For any rational `q`, there exists a natural number `n` with `q < n`
+
+```agda
+abstract
+  exists-greater-natural-ℚ :
+    (q : ℚ) → exists ℕ (λ n → le-ℚ-Prop q (rational-ℕ n))
+  exists-greater-natural-ℚ q =
+    let open do-syntax-trunc-Prop (∃ ℕ (λ n → le-ℚ-Prop q (rational-ℕ n)))
+    in do
+      (n , q<1n) ← archimedean-property-ℚ one-ℚ q _
+      intro-exists n (tr (le-ℚ q) (right-unit-law-mul-ℚ _) q<1n)
 ```
