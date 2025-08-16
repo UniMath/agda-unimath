@@ -1,6 +1,8 @@
 # The category of algebras of theories
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module universal-algebra.category-of-algebras-of-theories where
 ```
 
@@ -23,6 +25,7 @@ open import foundation-core.identity-types
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
+open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.precategory-of-algebras-of-theories
@@ -46,7 +49,7 @@ module _
 
   is-large-category-Algebra-Large-Precategory :
     is-large-category-Large-Precategory (Algebra-Large-Precategory S T)
-  is-large-category-Algebra-Large-Precategory (X , p) = {!   !}
+  is-large-category-Algebra-Large-Precategory = is-equiv-iso-eq-Algebra S T
 
   Algebra-Large-Category :
     Large-Category (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 → _⊔_ (l1 ⊔ l3))

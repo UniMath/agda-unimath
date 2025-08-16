@@ -1,6 +1,8 @@
 # Algebras
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module universal-algebra.algebras-of-theories where
 ```
 
@@ -141,6 +143,17 @@ module _
     ( refl-Eq-Model-Signature Sg A)
     ( Eq-eq-Algebra (A , p))
     ( is-equiv-Eq-eq-Model-Signature Sg A)
+
+  equiv-Eq-eq-Algebra :
+    {l3 : Level} (A B : Algebra Sg Th l3) →
+    (A ＝ B) ≃ Eq-Algebra A B
+  pr1 (equiv-Eq-eq-Algebra A B) = Eq-eq-Algebra A B
+  pr2 (equiv-Eq-eq-Algebra A B) = is-equiv-Eq-eq-Algebra A B
+
+  eq-Eq-Algebra :
+    {l3 : Level} (A B : Algebra Sg Th l3) →
+    Eq-Algebra A B → A ＝ B
+  eq-Eq-Algebra A B = map-inv-equiv (equiv-Eq-eq-Algebra A B)
 
   is-torsorial-Eq-Algebra :
     {l3 : Level} (A : Algebra Sg Th l3) → is-torsorial (Eq-Algebra A)

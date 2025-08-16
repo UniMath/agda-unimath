@@ -17,14 +17,17 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.raising-universe-levels
 open import foundation.transport-along-equivalences
 open import foundation.unit-type
+open import foundation.structure-identity-principle
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.dependent-identifications
 open import foundation-core.transport-along-identifications
@@ -329,7 +332,10 @@ module _
   equiv-hom-Algebra = Σ (hom-Algebra Sg Th Alg1 Alg2) is-equiv-hom-Algebra
 ```
 
-### Another characterization of the identity types of algebras
+### A useful factorization for characterizing isomorphisms of algebras
+
+Although we do not prove it here for cyclic module dependency reasons, this
+gives another characterization of the identity types of algebras.
 
 ```agda
 module _
@@ -338,31 +344,13 @@ module _
   { l3 : Level} ( A : Algebra Sg Th l3)
   where
 
-  id-equiv-hom-Algebra : equiv-hom-Algebra Sg Th A A
-  pr1 id-equiv-hom-Algebra = id-hom-Algebra Sg Th A
-  pr2 id-equiv-hom-Algebra = is-equiv-id
-
-  equiv-eq-hom-Algebra :
-    (B : Algebra Sg Th l3) → A ＝ B → equiv-hom-Algebra Sg Th A B
-  equiv-eq-hom-Algebra .A refl = id-equiv-hom-Algebra
-
-  is-torsorial-equiv-eq-hom-Algebra :
-    is-torsorial (λ z → equiv-hom-Algebra Sg Th A z)
-  pr1 (pr1 is-torsorial-equiv-eq-hom-Algebra) = A
-  pr2 (pr1 is-torsorial-equiv-eq-hom-Algebra) = id-equiv-hom-Algebra
-  pr2 is-torsorial-equiv-eq-hom-Algebra ((B , p) , ((f , q) , eq)) =
-    eq-pair-Σ
-    ( eq-type-subtype (is-algebra-Prop Sg Th)
-      ( eq-Eq-Model-Signature Sg (model-Algebra Sg Th A) B
-        (( f , eq) , (λ g → eq-htpy (λ x → {!   !})))))
-    ( eq-type-subtype (is-equiv-hom-Algebra-Prop Sg Th A (B , p))
-      ( eq-htpy-hom-Algebra Sg Th A (B , p) {!   !} (f , q)
-        ( λ x → {!   !})))
-
-  is-equiv-equiv-eq-hom-Algebra :
-    (B : Algebra Sg Th l3) → is-equiv (equiv-eq-hom-Algebra B)
-  is-equiv-equiv-eq-hom-Algebra =
-    fundamental-theorem-id
-      is-torsorial-equiv-eq-hom-Algebra
-      equiv-eq-hom-Algebra
+  equiv-equiv-hom-Algebra' :
+    (B : Algebra Sg Th l3) → equiv-hom-Algebra Sg Th A B ≃
+    Σ (hom-Set (pr1 (pr1 A)) (pr1 (pr1 B)))
+      (λ f → is-equiv f × preserves-operations-Algebra Sg Th A B f)
+  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
+  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
+  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```
