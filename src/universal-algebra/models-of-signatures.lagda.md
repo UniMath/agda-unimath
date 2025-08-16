@@ -192,4 +192,14 @@ module _
     ( Eq-eq-Model-Signature (X , X-assign))
     ( is-equiv-equiv-eq-Set X)
     ( λ f → is-equiv-tr-eq-refl-is-model-signature-equiv-Set X X-assign f)
+
+  equiv-Eq-eq-Model-Signature :
+    {l2 : Level} (X Y : Model-Signature S l2) →
+    (X ＝ Y) ≃ Eq-Model-Signature X Y
+  pr1 (equiv-Eq-eq-Model-Signature X Y) = Eq-eq-Model-Signature X Y
+  pr2 (equiv-Eq-eq-Model-Signature X Y) = is-equiv-Eq-eq-Model-Signature X Y
+
+  eq-Eq-Model-Signature :
+    {l2 : Level} (X Y : Model-Signature S l2) → Eq-Model-Signature X Y → X ＝ Y
+  eq-Eq-Model-Signature X Y = map-inv-equiv (equiv-Eq-eq-Model-Signature X Y)
 ```
