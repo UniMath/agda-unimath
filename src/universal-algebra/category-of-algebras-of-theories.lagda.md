@@ -25,8 +25,8 @@ open import foundation-core.identity-types
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
-open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.precategory-of-algebras-of-theories
 open import universal-algebra.signatures

@@ -9,33 +9,33 @@ module universal-algebra.isomorphisms-of-algebras where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.equivalences
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.subtype-identity-principle
-open import foundation.universe-levels
-open import foundation.transport-along-equivalences
-open import foundation.torsorial-type-families
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.torsorial-type-families
+open import foundation.transport-along-equivalences
+open import foundation.universe-levels
 
-open import foundation-core.transport-along-identifications
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
-open import foundation-core.propositions
-open import foundation-core.sections
-open import foundation-core.retractions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.transport-along-identifications
 
 open import lists.functoriality-tuples
 open import lists.tuples
@@ -91,7 +91,9 @@ module _
     ( id-hom-Algebra S T A) q
 
   is-equiv-is-iso-Algebra :
-    (f : hom-Algebra S T A B) → is-equiv-hom-Algebra S T A B f → is-iso-Algebra f
+    (f : hom-Algebra S T A B) →
+    is-equiv-hom-Algebra S T A B f →
+    is-iso-Algebra f
   pr1 (is-equiv-is-iso-Algebra f eq) = inv-equiv-hom-Algebra S T A B f eq
   pr1 (pr2 (is-equiv-is-iso-Algebra f eq)) =
     eq-htpy-hom-Algebra S T B B

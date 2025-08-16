@@ -19,19 +19,19 @@ open import foundation.subtype-identity-principle
 open import foundation.transport-along-equivalences
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.cartesian-product-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 
-open import lists.tuples
 open import lists.functoriality-tuples
+open import lists.tuples
 
 open import universal-algebra.signatures
 ```
@@ -177,14 +177,15 @@ module _
       ( p op v))))
   pr1 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) =
     eq-htpy-preserves-operations-Model-Signature X f g
-  pr2 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f .f)) refl =
-    is-set-has-uip
-    ( is-set-Π (λ op → is-set-function-type (pr2 X)))
-    ( f)
-    ( f)
-    (( eq-htpy-preserves-operations-Model-Signature X f f
-      ∘ htpy-eq-preserves-operations-Model-Signature X f f) refl)
-    ( refl)
+  pr2 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f .f))
+    refl =
+      is-set-has-uip
+      ( is-set-Π (λ op → is-set-function-type (pr2 X)))
+      ( f)
+      ( f)
+      (( eq-htpy-preserves-operations-Model-Signature X f f
+        ∘ htpy-eq-preserves-operations-Model-Signature X f f) refl)
+      ( refl)
 
   Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature S l2) → X ＝ Y → Eq-Model-Signature X Y
