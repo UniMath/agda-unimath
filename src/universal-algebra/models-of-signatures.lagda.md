@@ -12,11 +12,8 @@ module universal-algebra.models-of-signatures where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
-open import foundation.transport-along-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -28,7 +25,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
 
 open import lists.functoriality-tuples
 open import lists.tuples

@@ -84,7 +84,10 @@ preserves-id-map-tuple A (succ-ℕ n) (x ∷ xs) =
 
 ```agda
 preserves-comp-map-tuple :
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3) (n : ℕ) (x : tuple A n) (f : A → B) (g : B → C) → map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
+  {l1 l2 l3 : Level}
+  (A : UU l1) (B : UU l2) (C : UU l3)
+  (n : ℕ) (x : tuple A n) (f : A → B) (g : B → C) →
+  map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
 preserves-comp-map-tuple A B C zero-ℕ empty-tuple f g = refl
 preserves-comp-map-tuple A B C (succ-ℕ n) (x ∷ xs) f g =
   eq-Eq-tuple
