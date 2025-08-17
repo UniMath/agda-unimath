@@ -47,7 +47,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 The
 {{#concept "induced metric space" Disambiguation="of a pseudometric space" Agda=induced-metric-space-Pseudometric-Space}}
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) is the
-[metric space](metric-spaces.metric-spaces.lagda.md) whose points are
+[metric space](metric-spaces.metric-spaces.md) whose points are
 [quotient classes](foundation.set-quotients.md) of `M` by the
 [similarity relation](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
 and [neighborhoods](metric-spaces.rational-neighborhood-relations.md) given by
