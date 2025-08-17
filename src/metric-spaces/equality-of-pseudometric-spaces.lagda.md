@@ -157,7 +157,7 @@ module _
       ( equiv-univalence)
       ( λ (e : type-Pseudometric-Space A ＝ type-Pseudometric-Space B) →
         equiv-eq
-          (ap (is-isometry-Pseudometric-Space A B) (eq-htpy (λ x → refl))))
+          (ap (is-isometry-Pseudometric-Space A B) (eq-htpy refl-htpy)))
 ```
 
 ### Isometric equivalences of pseudometric spaces characterize their equality
