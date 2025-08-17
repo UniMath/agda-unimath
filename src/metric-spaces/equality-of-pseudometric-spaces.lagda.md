@@ -186,8 +186,8 @@ module _
   abstract
     is-torsorial-isometric-equiv-Pseudometric-Space :
       is-torsorial
-        ( λ ( B : Pseudometric-Space l1 l2) →
-            ( isometric-equiv-Pseudometric-Space A B))
+        ( λ (B : Pseudometric-Space l1 l2) →
+          isometric-equiv-Pseudometric-Space A B)
     is-torsorial-isometric-equiv-Pseudometric-Space =
       is-contr-equiv'
         ( Σ (Pseudometric-Space l1 l2) (Id A))
