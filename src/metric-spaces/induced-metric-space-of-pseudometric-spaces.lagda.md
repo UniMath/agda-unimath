@@ -19,6 +19,7 @@ open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -30,13 +31,19 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-functions-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
@@ -480,4 +487,84 @@ module _
     ( map-induced-metric-space-Metric-Space ,
       is-equiv-map-induced-metric-space-Metric-Space ,
       is-isometry-map-induced-metric-space-Metric-Space)
+```
+
+### The pointwise quotient of a Cauchy approximation in a pseudometric space is a Cauchy approximation in the induced metric space
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  where
+
+  map-induced-metric-space-cauchy-approximation-Pseudometric-Space :
+    cauchy-approximation-Pseudometric-Space M →
+    cauchy-approximation-Metric-Space
+      ( induced-metric-space-Pseudometric-Space M)
+  map-induced-metric-space-cauchy-approximation-Pseudometric-Space =
+    map-short-function-cauchy-approximation-Pseudometric-Space
+      ( M)
+      ( pseudometric-induced-metric-space-Pseudometric-Space M)
+      ( short-isometry-Pseudometric-Space
+        ( M)
+        ( pseudometric-induced-metric-space-Pseudometric-Space M)
+        ( isometry-map-induced-metric-space-Pseudometric-Space M))
+```
+
+### The pointwise quotient of Cauchy approximations in the induced metric space preserves limits
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space M)
+  (lim : type-Pseudometric-Space M)
+  (is-lim :
+    is-limit-cauchy-approximation-Pseudometric-Space M u lim)
+  where
+
+  preserves-limit-map-induced-metric-space-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( induced-metric-space-Pseudometric-Space M)
+      ( map-induced-metric-space-cauchy-approximation-Pseudometric-Space M u)
+      ( map-induced-metric-space-Pseudometric-Space M lim)
+  preserves-limit-map-induced-metric-space-cauchy-approximation-Pseudometric-Space
+    ε δ (x , x∈uε) (y , y∈lim) =
+    let
+      lim~y : sim-Pseudometric-Space M lim y
+      lim~y =
+        sim-is-in-equivalence-class-set-quotient
+          ( equivalence-relation-sim-Pseudometric-Space M)
+          ( lim)
+          ( y)
+          ( y∈lim)
+
+      uε~x :
+        sim-Pseudometric-Space M
+          ( map-cauchy-approximation-Pseudometric-Space M u ε)
+          ( x)
+      uε~x =
+        sim-is-in-equivalence-class-set-quotient
+          ( equivalence-relation-sim-Pseudometric-Space M)
+          ( map-cauchy-approximation-Pseudometric-Space M u ε)
+          ( x)
+          ( x∈uε)
+    in
+      preserves-neighborhood-sim-Pseudometric-Space'
+        ( M)
+        ( lim~y)
+        ( ε +ℚ⁺ δ)
+        ( x)
+        ( preserves-neighborhood-sim-Pseudometric-Space
+          ( M)
+          ( uε~x)
+          ( ε +ℚ⁺ δ)
+          ( lim)
+          ( is-lim ε δ))
+
+  convergent-map-induced-metric-space-cauchy-approximation-Pseudometric-Space :
+    convergent-cauchy-approximation-Metric-Space
+      ( induced-metric-space-Pseudometric-Space M)
+  convergent-map-induced-metric-space-cauchy-approximation-Pseudometric-Space =
+    ( map-induced-metric-space-cauchy-approximation-Pseudometric-Space M u ,
+      map-induced-metric-space-Pseudometric-Space M lim ,
+      preserves-limit-map-induced-metric-space-cauchy-approximation-Pseudometric-Space)
 ```
