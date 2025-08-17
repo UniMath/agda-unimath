@@ -200,6 +200,17 @@ module _
               ( y)
               ( x≍y δ))))
 
+  preserves-neighborhood-sim-Pseudometric-Space' :
+    { x y : type-Pseudometric-Space A} →
+    ( sim-Pseudometric-Space A x y) →
+    ( d : ℚ⁺) (z : type-Pseudometric-Space A) →
+    neighborhood-Pseudometric-Space A d z x →
+    neighborhood-Pseudometric-Space A d z y
+  preserves-neighborhood-sim-Pseudometric-Space' {x} {y} x≍y d z Nzx =
+    symmetric-neighborhood-Pseudometric-Space A d y z
+      ( preserves-neighborhood-sim-Pseudometric-Space x≍y d z
+        ( symmetric-neighborhood-Pseudometric-Space A d z x Nzx))
+
   iff-same-neighbors-sim-Pseudometric-Space :
     { x y : type-Pseudometric-Space A} →
     ( sim-Pseudometric-Space A x y) ↔
