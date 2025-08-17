@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -38,17 +39,16 @@ open import metric-spaces.pseudometric-spaces
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is characterized by
 the following equivalent concepts:
 
-- an [equality](foundation-core.identity-types.md) between their carrier types
+- an equality between their carrier types
   such that the induced map under [`map-eq`](foundation-core.univalence.md) is
   an [isometry](metric-spaces.isometries-pseudometric-spaces.md);
 
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
   such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
-  is an [isometry](metric-spaces.isometries-pseudometric-spaces.md);
+  is an isometry;
 
 - a function between their carrier types that is both an
-  [equivalence](foundation-core.equivalences.md) and an
-  [isometry](metric-spaces.isometries-pseudometric-spaces.md).
+  equivalence and an isometry.
 
 ## Definitions
 
