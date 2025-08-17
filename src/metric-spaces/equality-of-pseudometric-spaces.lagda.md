@@ -39,16 +39,16 @@ open import metric-spaces.pseudometric-spaces
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is characterized by
 the following equivalent concepts:
 
-- an equality between their carrier types
-  such that the induced map under [`map-eq`](foundation-core.univalence.md) is
-  an [isometry](metric-spaces.isometries-pseudometric-spaces.md);
+- an equality between their carrier types such that the induced map under
+  [`map-eq`](foundation-core.univalence.md) is an
+  [isometry](metric-spaces.isometries-pseudometric-spaces.md);
 
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
   such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
   is an isometry;
 
-- a function between their carrier types that is both an
-  equivalence and an isometry.
+- a function between their carrier types that is both an equivalence and an
+  isometry.
 
 ## Definitions
 
