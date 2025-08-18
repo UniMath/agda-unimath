@@ -40,7 +40,7 @@ equations in the theory.
 
 ```agda
 module _
-  { l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
   where
 
   is-algebra :
@@ -54,9 +54,7 @@ module _
       eval-term σ (is-model-set-Model-Signature σ M) assign
         ( rhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e))
 
-  Algebra :
-    ( l3 : Level) →
-    UU (l1 ⊔ l2 ⊔ lsuc l3)
+ Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =
     Σ ( Model-Signature σ l3) (is-algebra)
 
@@ -119,7 +117,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
   where
 
   Eq-Algebra : {l3 : Level} (A B : Algebra σ T l3) → UU (l1 ⊔ l3)
