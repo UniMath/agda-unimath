@@ -1,7 +1,7 @@
 # The pseudometric completion of a pseudometric space
 
 ```agda
-module metric-spaces.pseudometric-completion-pseudometric-spaces where
+module metric-spaces.pseudometric-completion-of-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -33,12 +33,18 @@ open import metric-spaces.rational-neighborhood-relations
 
 ## Idea
 
-For any [metric space](metric-spaces.metric-spaces.md) `M`, there is a
-[pseudometric space](metric-spaces.pseudometric-spaces.md) of
-[Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md) in
-`M`, whose neighborhood relation defines that two Cauchy approximations `x` and
-`y` are in a `d`-neighborhood of one another if for all `δ ε : ℚ⁺`, `x δ` and
-`y ε` are in a `(δ + ε + d)`-neighborhood of one another in `M`.
+The
+{{#concept "pseudometric completion" Disambiguation="of a pseudometric space" Agda=pseudometric-completion-Pseudometric-Space}}
+of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M` is the
+pseudometric space of
+[Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+in `M` where two Cauchy approximations `x` and `y` are in a
+[`d`-neighborhood](metric-spaces.rational-neighborhood-relations.md) of one
+another if for all `δ ε : ℚ⁺`, `x δ` and `y ε` are in a
+`(δ + ε + d)`-neighborhood of one another in `M`.
+
+Any Cauchy approximation in the pseudometric completion has a
+[limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md).
 
 ## Definition
 
