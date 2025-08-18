@@ -27,7 +27,7 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 ## Idea
 
-{{#concept "Triangular numbers" Agda=triangular-number-ℕ WD="triangular number" WDID=Q245102}}
+{{#concept "Triangular numbers" WD="triangular number" WDID=Q245102 OEIS=A000217 Agda=triangular-number-ℕ}}
 are the sequence of
 [natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ` defined by :
 
@@ -103,3 +103,4 @@ module _
 
 - [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at
   Wikipedia.
+- [A000217]https://oeis.org/A000217 in the OEIS
