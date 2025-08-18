@@ -201,25 +201,6 @@ module _
         ( is-torsorial-Id A)
 ```
 
-### Two metric spaces are isometrically equivalent if and only if there is an isometric equivalence between them
-
-```agda
-module _
-  {l1 l2 : Level}
-  (A : Metric-Space l1 l2)
-  where
-
-  abstract
-    is-torsorial-isometric-equiv-Metric-Space :
-      is-torsorial
-        (λ (B : Metric-Space l1 l2) → isometric-equiv-Metric-Space A B)
-    is-torsorial-isometric-equiv-Metric-Space =
-      is-contr-equiv'
-        ( Σ (Metric-Space l1 l2) (Id A))
-        ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space A))
-        ( is-torsorial-Id A)
-```
-
 ### Composition of isometric equivalences
 
 ```agda
@@ -245,6 +226,7 @@ module _
 
 ```agda
 module _
+  {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
   where
 
