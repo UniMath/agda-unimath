@@ -1,7 +1,7 @@
 # The bounded distance decomposition of metric spaces
 
 ```agda
-module metric-spaces.decomposition-metric-spaces-elements-at-bounded-distance-metric-spaces where
+module metric-spaces.bounded-distance-decompositions-of-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
