@@ -108,29 +108,12 @@ open import foundation.cantors-theorem using
 
 ### 68. Sum of an arithmetic series {#68}
 
-#### 68.1. Gauss summation of triangular numbers
-
 **Author:** [malarbol](http://www.github.com/malarbol)
-
-```text
-Tₙ = Σ (k ≤ n) k = n(n+1)/2
-```
 
 ```agda
 open import
   elementary-number-theory.triangular-numbers using
     ( compute-triangular-ℕ)
-```
-
-#### 68.2. Partial sums of arithmetic series in sermirings
-
-**Author:** [malarbol](http://www.github.com/malarbol)
-
-```text
-Σ (k ≤ n) (a + k * d) = (n + 1) * a + Tₙ * d
-```
-
-```agda
 open import
   ring-theory.arithmetic-series-semirings using
   ( compute-sum-add-mul-nat-Semiring)
