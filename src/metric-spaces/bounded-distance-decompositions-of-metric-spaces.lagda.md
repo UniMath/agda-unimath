@@ -42,7 +42,7 @@ open import metric-spaces.subspaces-metric-spaces
 
 Any [metric space](metric-spaces.metric-spaces.md) is
 [isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to its
-{{#concept "bounded distance decomposition" Agda=total-bounded-distance-components-Metric-Space}},
+{{#concept "bounded distance decomposition" Agda=bounded-distance-decomposition-Metric-Space}},
 the [indexed sum](metric-spaces.indexed-sums-metric-spaces.md) of its
 [subspaces](metric-spaces.subspaces-metric-spaces.md) of
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
@@ -59,19 +59,19 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  set-bounded-distance-components-Metric-Space : Set (l1 ⊔ l2)
-  set-bounded-distance-components-Metric-Space =
+  set-bounded-distance-component-Metric-Space : Set (l1 ⊔ l2)
+  set-bounded-distance-component-Metric-Space =
     quotient-Set
       ( equivalence-relation-bounded-dist-Metric-Space A)
 
-  type-bounded-distance-components-Metric-Space : UU (l1 ⊔ l2)
-  type-bounded-distance-components-Metric-Space =
-    type-Set set-bounded-distance-components-Metric-Space
+  type-bounded-distance-component-Metric-Space : UU (l1 ⊔ l2)
+  type-bounded-distance-component-Metric-Space =
+    type-Set set-bounded-distance-component-Metric-Space
 
-  map-type-bounded-distance-components-Metric-Space :
+  map-type-bounded-distance-component-Metric-Space :
     type-Metric-Space A →
-    type-bounded-distance-components-Metric-Space
-  map-type-bounded-distance-components-Metric-Space =
+    type-bounded-distance-component-Metric-Space
+  map-type-bounded-distance-component-Metric-Space =
     quotient-map
       ( equivalence-relation-bounded-dist-Metric-Space A)
 ```
@@ -81,41 +81,41 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
-  (x : type-bounded-distance-components-Metric-Space A)
+  (x : type-bounded-distance-component-Metric-Space A)
   where
 
-  subspace-bounded-distance-components-Metric-Space :
+  subspace-bounded-distance-component-Metric-Space :
     Metric-Space (l1 ⊔ l2) l2
-  subspace-bounded-distance-components-Metric-Space =
+  subspace-bounded-distance-component-Metric-Space =
     subspace-Metric-Space
       ( A)
       ( subtype-set-quotient
         ( equivalence-relation-bounded-dist-Metric-Space A)
         ( x))
 
-  type-subspace-bounded-distance-components-Metric-Space : UU (l1 ⊔ l2)
-  type-subspace-bounded-distance-components-Metric-Space =
+  type-subspace-bounded-distance-component-Metric-Space : UU (l1 ⊔ l2)
+  type-subspace-bounded-distance-component-Metric-Space =
     type-Metric-Space
-      subspace-bounded-distance-components-Metric-Space
+      subspace-bounded-distance-component-Metric-Space
 ```
 
-### The total metric space of bounded distance components
+### The bounded distance decomposition of a metric space
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  total-sum-bounded-distance-components-Metric-Space :
+  bounded-distance-decomposition-Metric-Space :
     Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)
-  total-sum-bounded-distance-components-Metric-Space =
+  bounded-distance-decomposition-Metric-Space =
     indexed-sum-Metric-Space
-      ( set-bounded-distance-components-Metric-Space A)
-      ( subspace-bounded-distance-components-Metric-Space A)
+      ( set-bounded-distance-component-Metric-Space A)
+      ( subspace-bounded-distance-component-Metric-Space A)
 
-  type-total-sum-bounded-distance-components-Metric-Space : UU (l1 ⊔ l2)
-  type-total-sum-bounded-distance-components-Metric-Space =
-    type-Metric-Space total-sum-bounded-distance-components-Metric-Space
+  type-bounded-distance-decomposition-Metric-Space : UU (l1 ⊔ l2)
+  type-bounded-distance-decomposition-Metric-Space =
+    type-Metric-Space bounded-distance-decomposition-Metric-Space
 ```
 
 ## Properties
@@ -125,16 +125,16 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
-  (X : type-bounded-distance-components-Metric-Space A)
+  (X : type-bounded-distance-component-Metric-Space A)
   where
 
-  all-elements-at-bounded-distance-subspace-bounded-distance-components-Metric-Space :
-    (x y : type-subspace-bounded-distance-components-Metric-Space A X) →
+  all-elements-at-bounded-distance-subspace-bounded-distance-component-Metric-Space :
+    (x y : type-subspace-bounded-distance-component-Metric-Space A X) →
     bounded-dist-Metric-Space
-      ( subspace-bounded-distance-components-Metric-Space A X)
+      ( subspace-bounded-distance-component-Metric-Space A X)
       ( x)
       ( y)
-  all-elements-at-bounded-distance-subspace-bounded-distance-components-Metric-Space
+  all-elements-at-bounded-distance-subspace-bounded-distance-component-Metric-Space
     (x , x∈X) (y , y∈X) =
     apply-effectiveness-quotient-map
       ( equivalence-relation-bounded-dist-Metric-Space A)
@@ -156,23 +156,23 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  lemma-iff-neighborhood-total-sum-bounded-distance-components-Metric-Space :
+  lemma-iff-neighborhood-bounded-distance-decomposition-Metric-Space :
     ( d : ℚ⁺) →
-    ( X Y : type-bounded-distance-components-Metric-Space A) →
+    ( X Y : type-bounded-distance-component-Metric-Space A) →
     ( eqXY : X ＝ Y) →
-    ( x : type-subspace-bounded-distance-components-Metric-Space A X) →
-    ( y : type-subspace-bounded-distance-components-Metric-Space A Y) →
+    ( x : type-subspace-bounded-distance-component-Metric-Space A X) →
+    ( y : type-subspace-bounded-distance-component-Metric-Space A Y) →
     ( neighborhood-Metric-Space
-      ( subspace-bounded-distance-components-Metric-Space A Y)
+      ( subspace-bounded-distance-component-Metric-Space A Y)
       ( d)
       ( tr
         ( type-Metric-Space ∘
-          subspace-bounded-distance-components-Metric-Space A)
+          subspace-bounded-distance-component-Metric-Space A)
         ( eqXY)
         ( x))
       ( y)) ↔
     neighborhood-Metric-Space A d (pr1 x) (pr1 y)
-  lemma-iff-neighborhood-total-sum-bounded-distance-components-Metric-Space
+  lemma-iff-neighborhood-bounded-distance-decomposition-Metric-Space
     d X .X refl (x , x∈X) (y , y∈X) = id-iff
 ```
 
@@ -185,20 +185,20 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  equiv-type-total-sum-bounded-distance-components-Metric-Space :
-    type-total-sum-bounded-distance-components-Metric-Space A ≃
+  equiv-type-bounded-distance-decomposition-Metric-Space :
+    type-bounded-distance-decomposition-Metric-Space A ≃
     type-Metric-Space A
-  equiv-type-total-sum-bounded-distance-components-Metric-Space =
+  equiv-type-bounded-distance-decomposition-Metric-Space =
     Σ-decomposition-is-in-equivalence-class-set-quotient
       ( equivalence-relation-bounded-dist-Metric-Space A)
 
-  map-equiv-total-sum-bounded-distance-components-Metric-Space :
+  map-equiv-bounded-distance-decomposition-Metric-Space :
     type-function-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A)
+      ( bounded-distance-decomposition-Metric-Space A)
       ( A)
-  map-equiv-total-sum-bounded-distance-components-Metric-Space =
+  map-equiv-bounded-distance-decomposition-Metric-Space =
     map-equiv
-      ( equiv-type-total-sum-bounded-distance-components-Metric-Space)
+      ( equiv-type-bounded-distance-decomposition-Metric-Space)
 ```
 
 #### The equivalence between a metric space and its bounded distance decomposition is an isometry
@@ -208,21 +208,21 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  preserves-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space :
+  preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space :
     ( d : ℚ⁺)
-    ( x y : type-total-sum-bounded-distance-components-Metric-Space A) →
+    ( x y : type-bounded-distance-decomposition-Metric-Space A) →
     neighborhood-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A)
+      ( bounded-distance-decomposition-Metric-Space A)
       ( d)
       ( x)
       ( y) →
     neighborhood-Metric-Space A d
-      ( map-equiv-total-sum-bounded-distance-components-Metric-Space A x)
-      ( map-equiv-total-sum-bounded-distance-components-Metric-Space A y)
-  preserves-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space
+      ( map-equiv-bounded-distance-decomposition-Metric-Space A x)
+      ( map-equiv-bounded-distance-decomposition-Metric-Space A y)
+  preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
     d (X , x , x∈X) (Y , y , y∈Y) (X=Y , Nxy) =
     forward-implication
-      ( lemma-iff-neighborhood-total-sum-bounded-distance-components-Metric-Space
+      ( lemma-iff-neighborhood-bounded-distance-decomposition-Metric-Space
         ( A)
         ( d)
         ( X)
@@ -232,22 +232,22 @@ module _
         ( y , y∈Y))
       ( Nxy)
 
-  reflects-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space :
+  reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space :
     ( d : ℚ⁺)
-    ( x y : type-total-sum-bounded-distance-components-Metric-Space A) →
+    ( x y : type-bounded-distance-decomposition-Metric-Space A) →
     neighborhood-Metric-Space A d
-      ( map-equiv-total-sum-bounded-distance-components-Metric-Space A x)
-      ( map-equiv-total-sum-bounded-distance-components-Metric-Space A y) →
+      ( map-equiv-bounded-distance-decomposition-Metric-Space A x)
+      ( map-equiv-bounded-distance-decomposition-Metric-Space A y) →
     neighborhood-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A)
+      ( bounded-distance-decomposition-Metric-Space A)
       ( d)
       ( x)
       ( y)
-  reflects-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space
+  reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
     d (X , x , x∈X) (Y , y , y∈Y) Nxy =
     ( lemma-eq ,
       backward-implication
-        ( lemma-iff-neighborhood-total-sum-bounded-distance-components-Metric-Space
+        ( lemma-iff-neighborhood-bounded-distance-decomposition-Metric-Space
           ( A)
           ( d)
           ( X)
@@ -259,7 +259,7 @@ module _
     where
 
       lemma-eq-Y :
-        map-type-bounded-distance-components-Metric-Space A y ＝ Y
+        map-type-bounded-distance-component-Metric-Space A y ＝ Y
       lemma-eq-Y =
         eq-set-quotient-equivalence-class-set-quotient
           ( equivalence-relation-bounded-dist-Metric-Space A)
@@ -267,17 +267,17 @@ module _
           ( y∈Y)
 
       lemma-eq-X :
-        map-type-bounded-distance-components-Metric-Space A x ＝ X
+        map-type-bounded-distance-component-Metric-Space A x ＝ X
       lemma-eq-X =
         eq-set-quotient-equivalence-class-set-quotient
           ( equivalence-relation-bounded-dist-Metric-Space A)
           ( X)
           ( x∈X)
 
-      lemma-eq-map-type-bounded-distance-components-Metric-Space :
-        ( map-type-bounded-distance-components-Metric-Space A x) ＝
-        ( map-type-bounded-distance-components-Metric-Space A y)
-      lemma-eq-map-type-bounded-distance-components-Metric-Space =
+      lemma-eq-map-type-bounded-distance-component-Metric-Space :
+        ( map-type-bounded-distance-component-Metric-Space A x) ＝
+        ( map-type-bounded-distance-component-Metric-Space A y)
+      lemma-eq-map-type-bounded-distance-component-Metric-Space =
         apply-effectiveness-quotient-map'
           ( equivalence-relation-bounded-dist-Metric-Space A)
           ( unit-trunc-Prop (d , Nxy))
@@ -285,21 +285,21 @@ module _
       lemma-eq : X ＝ Y
       lemma-eq =
         ( inv lemma-eq-X) ∙
-        ( lemma-eq-map-type-bounded-distance-components-Metric-Space) ∙
+        ( lemma-eq-map-type-bounded-distance-component-Metric-Space) ∙
         ( lemma-eq-Y)
 
-  is-isometry-map-equiv-total-sum-bounded-distance-components-Metric-Space :
+  is-isometry-map-equiv-bounded-distance-decomposition-Metric-Space :
     is-isometry-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A)
+      ( bounded-distance-decomposition-Metric-Space A)
       ( A)
-      ( map-equiv-total-sum-bounded-distance-components-Metric-Space A)
-  is-isometry-map-equiv-total-sum-bounded-distance-components-Metric-Space
+      ( map-equiv-bounded-distance-decomposition-Metric-Space A)
+  is-isometry-map-equiv-bounded-distance-decomposition-Metric-Space
     d x y =
-    ( ( preserves-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space
+    ( ( preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
         ( d)
         ( x)
         ( y)) ,
-      ( reflects-neighborhood-map-equiv-total-sum-bounded-distance-components-Metric-Space
+      ( reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
         ( d)
         ( x)
         ( y)))
@@ -312,14 +312,13 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  isometric-equiv-total-sum-bounded-distance-components-Metric-Space :
+  isometric-equiv-bounded-distance-decomposition-Metric-Space :
     isometric-equiv-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A)
+      ( bounded-distance-decomposition-Metric-Space A)
       ( A)
-  isometric-equiv-total-sum-bounded-distance-components-Metric-Space =
-    ( equiv-type-total-sum-bounded-distance-components-Metric-Space A ,
-      is-isometry-map-equiv-total-sum-bounded-distance-components-Metric-Space
-        ( A))
+  isometric-equiv-bounded-distance-decomposition-Metric-Space =
+    ( equiv-type-bounded-distance-decomposition-Metric-Space A ,
+      is-isometry-map-equiv-bounded-distance-decomposition-Metric-Space A)
 ```
 
 ### The bounded distance decomposition operation is idempotent
@@ -329,15 +328,15 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  idempotent-total-sum-bounded-distance-components-Metric-Space :
-    total-sum-bounded-distance-components-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space A) ＝
-    total-sum-bounded-distance-components-Metric-Space A
-  idempotent-total-sum-bounded-distance-components-Metric-Space =
+  is-idempotent-bounded-distance-decomposition-Metric-Space :
+    bounded-distance-decomposition-Metric-Space
+      ( bounded-distance-decomposition-Metric-Space A) ＝
+    bounded-distance-decomposition-Metric-Space A
+  is-idempotent-bounded-distance-decomposition-Metric-Space =
     eq-isometric-equiv-Metric-Space
-      ( total-sum-bounded-distance-components-Metric-Space
-        ( total-sum-bounded-distance-components-Metric-Space A))
-      ( total-sum-bounded-distance-components-Metric-Space A)
-      ( isometric-equiv-total-sum-bounded-distance-components-Metric-Space
-        ( total-sum-bounded-distance-components-Metric-Space A))
+      ( bounded-distance-decomposition-Metric-Space
+        ( bounded-distance-decomposition-Metric-Space A))
+      ( bounded-distance-decomposition-Metric-Space A)
+      ( isometric-equiv-bounded-distance-decomposition-Metric-Space
+        ( bounded-distance-decomposition-Metric-Space A))
 ```
