@@ -38,10 +38,11 @@ interpreting the result as a truncation level again, mapping any result less
 than -2 to -2.
 
 **Note.** This operation, while conceptually clear, has many flaws that makes it
-ill-equipped for use in formalization and hence is not recommended. For
+ill-equipped for use in formalization, and hence is not recommended. For
 instance, the operation is not associative and does not reflect inequality. See
 instead
-[`iterated-successors-truncation-levels`](foundation.iterated-successors-truncation-levels.md).
+[`iterated-successors-truncation-levels`](foundation.iterated-successors-truncation-levels.md)
+for a more natural alternative.
 
 ## Definitions
 

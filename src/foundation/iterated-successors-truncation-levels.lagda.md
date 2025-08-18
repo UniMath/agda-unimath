@@ -36,10 +36,6 @@ iterate-succ-𝕋 n x = iterate' n succ-𝕋 x
 
 iterate-succ-𝕋' : 𝕋 → ℕ → 𝕋
 iterate-succ-𝕋' x n = iterate-succ-𝕋 n x
-
-iterate-succ-𝕋'' : ℕ → 𝕋 → 𝕋
-iterate-succ-𝕋'' zero-ℕ x = x
-iterate-succ-𝕋'' (succ-ℕ n) x = succ-𝕋 (iterate-succ-𝕋 n x)
 ```
 
 ### The double successor of addition on truncation levels
@@ -69,9 +65,8 @@ reassociate-iterate-succ-𝕋 zero-ℕ k = refl
 reassociate-iterate-succ-𝕋 (succ-ℕ n) k =
   reassociate-iterate-succ-𝕋 n (succ-𝕋 k)
 
-compute-iterate-succ-𝕋 : (n : ℕ) → iterate-succ-𝕋 n ~ iterate-succ-𝕋'' n
-compute-iterate-succ-𝕋 zero-ℕ = refl-htpy
-compute-iterate-succ-𝕋 (succ-ℕ n) k = reassociate-iterate-succ-𝕋 n k
+compute-iterate-succ-𝕋 : (n : ℕ) → iterate n succ-𝕋 ~ iterate-succ-𝕋 n
+compute-iterate-succ-𝕋 n = reassociate-iterate n succ-𝕋
 ```
 
 ### Unit laws for addition of truncation levels
