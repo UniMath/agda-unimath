@@ -42,17 +42,15 @@ open import metric-spaces.rational-neighborhood-relations
 [metric spaces](metric-spaces.metric-spaces.md) is characterized by the
 following equivalent concepts:
 
-- an [equality](foundation-core.identity-types.md) between their carrier types
-  such that the induced map under [`map-eq`](foundation-core.univalence.md) is
-  an [isometry](metric-spaces.isometries-metric-spaces.md);
+- an equality between their carrier types such that the induced map under
+  [`map-eq`](foundation-core.univalence.md) is an
+  [isometry](metric-spaces.isometries-metric-spaces.md);
 
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
-  such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
-  is an [isometry](metric-spaces.isometries-metric-spaces.md);
+  such that the induced map under `map-equiv` is an isometry;
 
-- a function between their carrier types that is both an
-  [equivalence](foundation-core.equivalences.md) and an
-  [isometry](metric-spaces.isometries-metric-spaces.md).
+- a function between their carrier types that is both an equivalence and an
+  isometry.
 
 ## Definitions
 
