@@ -8,18 +8,25 @@ module foundation.decidable-subtypes where
 
 ```agda
 open import foundation.1-types
+open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equality-dependent-function-types
+open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.postcomposition-functions
 open import foundation.propositional-maps
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.structured-type-duality
 open import foundation.subtypes
@@ -93,6 +100,11 @@ module _
     (a : A) → is-prop (is-in-decidable-subtype a)
   is-prop-is-in-decidable-subtype =
     is-prop-is-in-subtype subtype-decidable-subtype
+
+  is-proof-irrelevant-is-in-decidable-subtype :
+    (a : A) → is-proof-irrelevant (is-in-decidable-subtype a)
+  is-proof-irrelevant-is-in-decidable-subtype a =
+    is-proof-irrelevant-is-prop (is-prop-is-in-decidable-subtype a)
 ```
 
 ### The underlying type of a decidable subtype
@@ -154,43 +166,61 @@ module _
       ( is-decidable-emb-map-decidable-emb f)
       ( y)
 
-  compute-type-decidable-type-decidable-emb :
+  compute-type-decidable-subtype-decidable-emb :
     type-decidable-subtype decidable-subtype-decidable-emb ≃ X
-  compute-type-decidable-type-decidable-emb =
+  compute-type-decidable-subtype-decidable-emb =
     equiv-total-fiber (map-decidable-emb f)
 
-  inv-compute-type-decidable-type-decidable-emb :
+  inv-compute-type-decidable-subtype-decidable-emb :
     X ≃ type-decidable-subtype decidable-subtype-decidable-emb
-  inv-compute-type-decidable-type-decidable-emb =
+  inv-compute-type-decidable-subtype-decidable-emb =
     inv-equiv-total-fiber (map-decidable-emb f)
 ```
 
-## Examples
+## Properties
 
-### The decidable subtypes of left and right elements in a coproduct type
+### Inhabitedness of a decidable subtype
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
   where
 
-  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
-  is-decidable-is-left (inl x) = is-decidable-unit
-  is-decidable-is-left (inr x) = is-decidable-empty
+  is-inhabited-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-inhabited-decidable-subtype-Prop =
+    is-inhabited-subtype-Prop (subtype-decidable-subtype P)
 
-  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
-  pr1 (is-left-Decidable-Prop x) = is-left x
-  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
-  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
+  is-inhabited-decidable-subtype : UU (l1 ⊔ l2)
+  is-inhabited-decidable-subtype = type-Prop is-inhabited-decidable-subtype-Prop
+```
 
-  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
-  is-decidable-is-right (inl x) = is-decidable-empty
-  is-decidable-is-right (inr x) = is-decidable-unit
+### Emptiness of a decidable subtype
 
-  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
-  pr1 (is-right-Decidable-Prop x) = is-right x
-  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
-  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  is-empty-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-empty-decidable-subtype-Prop = is-empty-Prop (type-decidable-subtype P)
+
+  is-empty-decidable-subtype : UU (l1 ⊔ l2)
+  is-empty-decidable-subtype = type-Prop is-empty-decidable-subtype-Prop
+```
+
+### Fullness of a decidable subtype
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  is-full-decidable-subtype-Prop : Prop (l1 ⊔ l2)
+  is-full-decidable-subtype-Prop =
+    is-full-subtype-Prop (subtype-decidable-subtype P)
+
+  is-full-decidable-subtype : UU (l1 ⊔ l2)
+  is-full-decidable-subtype = type-Prop is-full-decidable-subtype-Prop
 ```
 
 ## Properties
@@ -232,10 +262,10 @@ module _
 ### Decidable subtypes are double negation stable
 
 ```agda
-is-double-negation-stable-decicable-subtype :
+is-double-negation-stable-decidable-subtype :
   {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
   is-double-negation-stable-subtype (subtype-decidable-subtype P)
-is-double-negation-stable-decicable-subtype P x =
+is-double-negation-stable-decidable-subtype P x =
   double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 
@@ -346,4 +376,111 @@ equiv-Fiber-Decidable-Prop l A =
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
           ( equiv-product-left (equiv-is-prop-map-is-emb f)))))
+```
+
+### The type of decidable subtypes of `A` is equivalent to mappings `A → bool`
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1)
+  where
+
+  map-bool-decidable-subtype-equiv : decidable-subtype l2 A ≃ (A → bool)
+  map-bool-decidable-subtype-equiv = equiv-postcomp A equiv-bool-Decidable-Prop
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  abstract
+    is-true-map-bool-is-in-decidable-subtype :
+      (a : A) → is-in-decidable-subtype P a →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-true-map-bool-is-in-decidable-subtype a a∈P with P a
+    ... | (_ , _ , inl a∈P') = refl
+    ... | (_ , _ , inr a∉P) = ex-falso (a∉P a∈P)
+
+    is-in-decidable-subtype-is-true-map-bool :
+      (a : A) → is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      is-in-decidable-subtype P a
+    is-in-decidable-subtype-is-true-map-bool a fa=true with P a
+    ... | (_ , _ , inl a∈P) = a∈P
+
+    is-true-map-bool-iff-is-in-decidable-subtype :
+      (a : A) →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      is-in-decidable-subtype P a
+    is-true-map-bool-iff-is-in-decidable-subtype a =
+      ( is-in-decidable-subtype-is-true-map-bool a ,
+        is-true-map-bool-is-in-decidable-subtype a)
+
+    is-false-map-bool-is-not-in-decidable-subtype :
+      (a : A) → ¬ (is-in-decidable-subtype P a) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-false-map-bool-is-not-in-decidable-subtype a a∉P with P a
+    ... | (_ , _ , inl a∈P) = ex-falso (a∉P a∈P)
+    ... | (_ , _ , inr a∉P') = refl
+
+    is-not-in-decidable-subtype-is-false-map-bool :
+      (a : A) → is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      ¬ (is-in-decidable-subtype P a)
+    is-not-in-decidable-subtype-is-false-map-bool a fa=false with P a
+    ... | (_ , _ , inr a∉P) = a∉P
+
+    is-false-map-bool-iff-is-not-in-decidable-subtype :
+      (a : A) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      ¬ (is-in-decidable-subtype P a)
+    is-false-map-bool-iff-is-not-in-decidable-subtype a =
+      ( is-not-in-decidable-subtype-is-false-map-bool a ,
+        is-false-map-bool-is-not-in-decidable-subtype a)
+```
+
+### Raising the universe level of decidable subtypes
+
+```agda
+raise-decidable-subtype :
+  {l0 l1 : Level} → (l : Level) → {A : UU l0} → decidable-subtype l1 A →
+  decidable-subtype (l1 ⊔ l) A
+raise-decidable-subtype l S a = raise-Decidable-Prop l (S a)
+```
+
+## Examples
+
+### The decidable subtypes of left and right elements in a coproduct type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
+  is-decidable-is-left (inl x) = is-decidable-unit
+  is-decidable-is-left (inr x) = is-decidable-empty
+
+  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-left-Decidable-Prop x) = is-left x
+  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
+  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
+
+  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
+  is-decidable-is-right (inl x) = is-decidable-empty
+  is-decidable-is-right (inr x) = is-decidable-unit
+
+  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-right-Decidable-Prop x) = is-right x
+  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
+  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
+```
+
+### True booleans
+
+```agda
+is-decidable-is-true : (x : bool) → is-decidable (is-true x)
+is-decidable-is-true false = inr (λ ())
+is-decidable-is-true true = inl refl
+
+is-true-decidable-subtype : decidable-subtype lzero bool
+is-true-decidable-subtype x =
+  ( is-true x , is-prop-is-true x , is-decidable-is-true x)
 ```

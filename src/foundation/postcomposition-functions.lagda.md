@@ -188,23 +188,22 @@ is-equiv-is-equiv-postcomp' {l} {X} {Y} f is-equiv-postcomp-f =
           ( pr1 section-f ∘ f , ap (_∘ f) (pr2 section-f))
           ( id , refl))))
 
-abstract
-  is-equiv-postcomp-is-equiv :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) → is-equiv f →
-    {l3 : Level} (A : UU l3) → is-equiv (postcomp A f)
-  is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
-    is-equiv-is-invertible
-      ( postcomp A (map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘
-        right-whisker-comp (is-section-map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘
-        right-whisker-comp (is-retraction-map-inv-is-equiv is-equiv-f))
+is-equiv-postcomp-is-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) → is-equiv f →
+  {l3 : Level} (A : UU l3) → is-equiv (postcomp A f)
+is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
+  is-equiv-is-invertible
+    ( postcomp A (map-inv-is-equiv is-equiv-f))
+    ( eq-htpy ∘
+      right-whisker-comp (is-section-map-inv-is-equiv is-equiv-f))
+    ( eq-htpy ∘
+      right-whisker-comp (is-retraction-map-inv-is-equiv is-equiv-f))
 
-  is-equiv-postcomp-equiv :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ≃ Y) →
-    {l3 : Level} (A : UU l3) → is-equiv (postcomp A (map-equiv f))
-  is-equiv-postcomp-equiv f =
-    is-equiv-postcomp-is-equiv (map-equiv f) (is-equiv-map-equiv f)
+is-equiv-postcomp-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ≃ Y) →
+  {l3 : Level} (A : UU l3) → is-equiv (postcomp A (map-equiv f))
+is-equiv-postcomp-equiv f =
+  is-equiv-postcomp-is-equiv (map-equiv f) (is-equiv-map-equiv f)
 
 equiv-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →

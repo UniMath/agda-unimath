@@ -13,8 +13,29 @@ repos:
       # - id: check-json # Doesn't accept json with comments
       # - id: requirements-txt-fixer # Can't handle comments
 
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        name: Spellcheck with codespell
+        types_or: [text, markdown]
+        args:
+          [
+            '--config',
+            '.codespellrc',
+            '--builtin',
+            'clear,rare,informal,usage,code,names,en-GB_to_en-US',
+            '--dictionary',
+            'codespell-dictionary.txt,-',
+          ]
+
   - repo: local
     hooks:
+      - id: sort-codespell-files
+        name: Sort codespell dictionary and ignore files
+        entry: bash -c 'for f in "$@"; do LC_ALL=C sort -o "$f" "$f"; done' --
+        language: system
+        files: ^codespell-(dictionary|ignore)\.txt$
       - id: markdown-conventions
         name: Markdown conventions
         entry: scripts/markdown_conventions.py
@@ -90,6 +111,17 @@ repos:
         pass_filenames: false
         require_serial: true
 
+      # ! Experimental hook
+      # - id: spaces-convention
+      #   name: Check Agda code block spaces convention
+      #   entry: scripts/spaces_convention.py
+      #   language: python
+      #   always_run: true
+      #   verbose: true
+      #   files: ^src\/.+\.lagda\.md$
+      #   types_or: [markdown, text]
+      #   require_serial: false
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
@@ -110,14 +142,27 @@ repos:
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting
         types_or: [css, javascript, yaml, markdown]
 
-      # Experimental hooks
-
-      # - id: spaces-convention
-      #   name: Check Agda code block spaces convention
-      #   entry: scripts/spaces_convention.py
-      #   language: python
-      #   always_run: true
-      #   verbose: true
-      #   files: ^src\/.+\.lagda\.md$
-      #   types_or: [markdown, text]
-      #   require_serial: false
+  - repo: https://github.com/FlamingTempura/bibtex-tidy
+    rev: v1.14.0
+    hooks:
+      - id: bibtex-tidy
+        name: BibTeX formatting
+        args:
+          [
+            '--modify',
+            '--align=14',
+            '--space=2',
+            '--blank-lines',
+            '--sort',
+            '--trailing-commas',
+            '--no-escape',
+            '--numeric',
+            '--months',
+            '--numeric',
+            '--duplicates=key,doi,abstract',
+            '--sort-fields=title,shorttitle,author,year,month,day,date,journal,fjournal,shortjournal,booktitle,location,on,publisher,address,series,volume,number,pages,doi,isbn,issn,eprint,eprinttype,archiveprefix,eprintclass,primaryclass,url,urldate,copyright,category,note,metadata',
+            '--encode-urls',
+            '--tidy-comments',
+            '--no-remove-empty-fields',
+            '--remove-dupe-fields',
+          ]

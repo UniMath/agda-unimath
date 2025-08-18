@@ -49,11 +49,17 @@ open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-premetric-spaces public
+open import metric-spaces.cauchy-sequences-complete-metric-spaces public
+open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-premetric-structures public
 open import metric-spaces.complete-metric-spaces public
+open import metric-spaces.continuous-functions-metric-spaces public
+open import metric-spaces.continuous-functions-premetric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
+open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-premetric-structures public
+open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.extensional-premetric-structures public
@@ -64,11 +70,22 @@ open import metric-spaces.induced-premetric-structures-on-preimages public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces public
-open import metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space public
-open import metric-spaces.metric-space-of-convergent-cauchy-approximations-in-a-metric-space public
+open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces public
+open import metric-spaces.limits-of-sequences-metric-spaces public
+open import metric-spaces.limits-of-sequences-premetric-spaces public
+open import metric-spaces.limits-of-sequences-pseudometric-spaces public
+open import metric-spaces.lipschitz-functions-metric-spaces public
+open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
+open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
+open import metric-spaces.metric-space-of-cauchy-approximations-saturated-complete-metric-spaces public
+open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
+open import metric-spaces.metric-space-of-convergent-sequences-metric-spaces public
+open import metric-spaces.metric-space-of-functions-metric-spaces public
+open import metric-spaces.metric-space-of-isometries-metric-spaces public
+open import metric-spaces.metric-space-of-lipschitz-functions-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
+open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
@@ -80,13 +97,22 @@ open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
+open import metric-spaces.rational-approximations-of-zero public
+open import metric-spaces.rational-cauchy-approximations public
+open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-premetric-structures public
+open import metric-spaces.saturated-complete-metric-spaces public
 open import metric-spaces.saturated-metric-spaces public
+open import metric-spaces.sequences-metric-spaces public
+open import metric-spaces.sequences-premetric-spaces public
+open import metric-spaces.sequences-pseudometric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-premetric-structures public
 open import metric-spaces.triangular-premetric-structures public
+open import metric-spaces.uniformly-continuous-functions-metric-spaces public
+open import metric-spaces.uniformly-continuous-functions-premetric-spaces public
 ```
 
 ## References

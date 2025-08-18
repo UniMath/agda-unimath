@@ -416,3 +416,8 @@ module _
       ( is-set-quotient-set-quotient R)
       B f Uf
 ```
+
+## See also
+
+- [Set coequalizers](foundation.set-coequalizers.md) for an equivalent notion
+  implemented here using set quotients.

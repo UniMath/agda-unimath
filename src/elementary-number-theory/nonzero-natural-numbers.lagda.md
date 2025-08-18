@@ -17,7 +17,11 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.propositions
+open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -57,6 +61,9 @@ nat-ℕ⁺ = nat-nonzero-ℕ
 
 is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
 is-nonzero-nat-nonzero-ℕ = pr2
+
+eq-nonzero-ℕ : {m n : nonzero-ℕ} → nat-nonzero-ℕ m ＝ nat-nonzero-ℕ n → m ＝ n
+eq-nonzero-ℕ m=n = eq-pair-Σ m=n (eq-is-prop is-prop-nonequal)
 ```
 
 ### The nonzero natural number `1`
@@ -74,8 +81,8 @@ one-ℕ⁺ = one-nonzero-ℕ
 
 ```agda
 succ-nonzero-ℕ : nonzero-ℕ → nonzero-ℕ
-pr1 (succ-nonzero-ℕ (pair x _)) = succ-ℕ x
-pr2 (succ-nonzero-ℕ (pair x _)) = is-nonzero-succ-ℕ x
+pr1 (succ-nonzero-ℕ (x , _)) = succ-ℕ x
+pr2 (succ-nonzero-ℕ (x , _)) = is-nonzero-succ-ℕ x
 ```
 
 ### The successor function from the natural numbers to the nonzero natural numbers
@@ -86,13 +93,31 @@ pr1 (succ-nonzero-ℕ' n) = succ-ℕ n
 pr2 (succ-nonzero-ℕ' n) = is-nonzero-succ-ℕ n
 ```
 
+### The predecessor function from the nonzero natural numbers to the natural numbers
+
+```agda
+pred-nonzero-ℕ : nonzero-ℕ → ℕ
+pred-nonzero-ℕ (succ-ℕ n , _) = n
+pred-nonzero-ℕ (zero-ℕ , H) = ex-falso (H refl)
+
+pred-ℕ⁺ : nonzero-ℕ → ℕ
+pred-ℕ⁺ = pred-nonzero-ℕ
+
+is-section-succ-nonzero-ℕ' : is-section succ-nonzero-ℕ' pred-nonzero-ℕ
+is-section-succ-nonzero-ℕ' (zero-ℕ , H) = ex-falso (H refl)
+is-section-succ-nonzero-ℕ' (succ-ℕ n , _) = eq-nonzero-ℕ refl
+
+is-section-pred-nonzero-ℕ : is-section pred-nonzero-ℕ succ-nonzero-ℕ'
+is-section-pred-nonzero-ℕ n = refl
+```
+
 ### The quotient of a nonzero natural number by a divisor
 
 ```agda
 quotient-div-nonzero-ℕ :
   (d : ℕ) (x : nonzero-ℕ) (H : div-ℕ d (pr1 x)) → nonzero-ℕ
-pr1 (quotient-div-nonzero-ℕ d (pair x K) H) = quotient-div-ℕ d x H
-pr2 (quotient-div-nonzero-ℕ d (pair x K) H) = is-nonzero-quotient-div-ℕ H K
+pr1 (quotient-div-nonzero-ℕ d (x , K) H) = quotient-div-ℕ d x H
+pr2 (quotient-div-nonzero-ℕ d (x , K) H) = is-nonzero-quotient-div-ℕ H K
 ```
 
 ### Addition of nonzero natural numbers
@@ -127,6 +152,10 @@ _*ℕ⁺_ = mul-nonzero-ℕ
 ```agda
 le-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
 le-ℕ⁺ (p , _) (q , _) = le-ℕ p q
+
+infix 30 _<-ℕ⁺_
+_<-ℕ⁺_ : ℕ⁺ → ℕ⁺ → UU lzero
+_<-ℕ⁺_ = le-ℕ⁺
 ```
 
 ### Inequality on nonzero natural numbers
@@ -134,6 +163,10 @@ le-ℕ⁺ (p , _) (q , _) = le-ℕ p q
 ```agda
 leq-ℕ⁺ : ℕ⁺ → ℕ⁺ → UU lzero
 leq-ℕ⁺ (p , _) (q , _) = leq-ℕ p q
+
+infix 30 _≤-ℕ⁺_
+_≤-ℕ⁺_ : ℕ⁺ → ℕ⁺ → UU lzero
+_≤-ℕ⁺_ = leq-ℕ⁺
 ```
 
 ### Addition of nonzero natural numbers is a strictly inflationary map
@@ -144,5 +177,15 @@ le-left-add-nat-ℕ⁺ m (n , n≠0) =
   tr
     ( λ p → le-ℕ p (m +ℕ n))
     ( right-unit-law-add-ℕ m)
-    ( preserves-le-left-add-ℕ m zero-ℕ n (le-is-nonzero-ℕ n n≠0))
+    ( preserves-le-left-add-ℕ m 0 n (le-is-nonzero-ℕ n n≠0))
+```
+
+### The predecessor function from the nonzero natural numbers reflects inequality
+
+```agda
+reflects-leq-pred-nonzero-ℕ :
+  (m n : ℕ⁺) → leq-ℕ (pred-ℕ⁺ m) (pred-ℕ⁺ n) → leq-ℕ⁺ m n
+reflects-leq-pred-nonzero-ℕ (succ-ℕ m , _) (succ-ℕ n , _) m≤n = m≤n
+reflects-leq-pred-nonzero-ℕ (zero-ℕ , H) _ = ex-falso (H refl)
+reflects-leq-pred-nonzero-ℕ (succ-ℕ _ , _) (zero-ℕ , H) = ex-falso (H refl)
 ```

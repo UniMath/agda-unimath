@@ -62,7 +62,7 @@ baire-space-Set = (baire-space , is-set-baire-space)
 ### The Baire space is uncountable
 
 We give two proofs. The first proof uses that the successor function on the
-nautral numbers has no fixed points and applies
+natural numbers has no fixed points and applies
 [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md). The
 second proof uses that equality on the natural numbers is
 [decidable](foundation.decidable-types.md), and applies

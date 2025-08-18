@@ -78,9 +78,29 @@ module _
   is-prop-is-acyclic-map f = is-prop-type-Prop (is-acyclic-map-Prop f)
 ```
 
+### The type of acyclic maps
+
+```agda
+acyclic-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+acyclic-map A B = Σ (A → B) (is-acyclic-map)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : acyclic-map A B)
+  where
+
+  map-acyclic-map : A → B
+  map-acyclic-map = pr1 f
+
+  is-acyclic-acyclic-map : is-acyclic-map map-acyclic-map
+  is-acyclic-acyclic-map = pr2 f
+```
+
 ## Properties
 
-### A map is acyclic if and only if it is an [epimorphism](foundation.epimorphisms.md)
+### A map is acyclic if and only if it is an epimorphism
+
+This theorem characterizes the usual [epimorphisms](foundation.epimorphisms.md)
+in homotopy type theory. {{#cite BdJR24}}
 
 ```agda
 module _
@@ -219,7 +239,9 @@ module _
             ( h x y)))
 ```
 
-### A map is acyclic if and only if it is an [dependent epimorphism](foundation.dependent-epimorphisms.md)
+### A map is acyclic if and only if it is a dependent epimorphism { #a-map-is-acyclic-if-and-only-if-it-is-an-dependent-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The following diagram is a helpful illustration in the second proof:
 
@@ -290,20 +312,29 @@ corresponding facts about [epimorphisms](foundation.epimorphisms.md).
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (g : B → C) (f : A → B)
   where
 
   is-acyclic-map-comp :
+    {g : B → C} {f : A → B} →
     is-acyclic-map g → is-acyclic-map f → is-acyclic-map (g ∘ f)
-  is-acyclic-map-comp ag af =
+  is-acyclic-map-comp {g} {f} ag af =
     is-acyclic-map-is-epimorphism (g ∘ f)
       ( is-epimorphism-comp g f
         ( is-epimorphism-is-acyclic-map g ag)
         ( is-epimorphism-is-acyclic-map f af))
 
+  is-acyclic-map-comp-acyclic-map :
+    (g : acyclic-map B C) (f : acyclic-map A B) →
+    is-acyclic-map (map-acyclic-map g ∘ map-acyclic-map f)
+  is-acyclic-map-comp-acyclic-map (g , ag) (f , af) = is-acyclic-map-comp ag af
+
+  comp-acyclic-map : acyclic-map B C → acyclic-map A B → acyclic-map A C
+  comp-acyclic-map (g , ag) (f , af) = (g ∘ f , is-acyclic-map-comp ag af)
+
   is-acyclic-map-left-factor :
+    {g : B → C} {f : A → B} →
     is-acyclic-map (g ∘ f) → is-acyclic-map f → is-acyclic-map g
-  is-acyclic-map-left-factor ac af =
+  is-acyclic-map-left-factor {g} {f} ac af =
     is-acyclic-map-is-epimorphism g
       ( is-epimorphism-left-factor g f
         ( is-epimorphism-is-acyclic-map (g ∘ f) ac)
@@ -476,8 +507,6 @@ module _
     is-acyclic-is-acyclic-map-terminal-map
       ( Σ A B)
       ( is-acyclic-map-comp
-        ( terminal-map A)
-        ( pr1)
         ( is-acyclic-map-terminal-map-is-acyclic A ac-A)
         ( λ a → is-acyclic-equiv (equiv-fiber-pr1 B a) (ac-B a)))
 ```
@@ -495,8 +524,6 @@ module _
     is-acyclic-is-acyclic-map-terminal-map
       ( A × B)
       ( is-acyclic-map-comp
-        ( terminal-map B)
-        ( pr2)
         ( is-acyclic-map-terminal-map-is-acyclic B ac-B)
         ( is-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
@@ -523,8 +550,6 @@ module _
       ( λ a →
         is-acyclic-is-acyclic-map-terminal-map A
           ( is-acyclic-map-left-factor
-            ( terminal-map A)
-            ( point a)
             ( is-acyclic-map-terminal-map-is-acyclic unit is-acyclic-unit)
             ( λ b → is-acyclic-equiv (compute-fiber-point a b) (l-ac a b))))
 ```

@@ -18,6 +18,7 @@ open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.cyclic-rings public
+open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
 open import ring-theory.division-rings public
@@ -28,6 +29,7 @@ open import ring-theory.function-semirings public
 open import ring-theory.generating-elements-rings public
 open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-cyclic-rings public
+open import ring-theory.homomorphisms-ring-extensions-rational-numbers public
 open import ring-theory.homomorphisms-rings public
 open import ring-theory.homomorphisms-semirings public
 open import ring-theory.ideals-generated-by-subsets-rings public
@@ -50,12 +52,12 @@ open import ring-theory.left-ideals-rings public
 open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
-open import ring-theory.modules-rings public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
+open import ring-theory.opposite-ring-extensions-rational-numbers public
 open import ring-theory.opposite-rings public
 open import ring-theory.poset-of-cyclic-rings public
 open import ring-theory.poset-of-ideals-rings public
@@ -74,12 +76,15 @@ open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.right-ideals-generated-by-subsets-rings public
 open import ring-theory.right-ideals-rings public
+open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
-open import ring-theory.sums-rings public
-open import ring-theory.sums-semirings public
+open import ring-theory.sums-of-finite-families-of-elements-rings public
+open import ring-theory.sums-of-finite-families-of-elements-semirings public
+open import ring-theory.sums-of-finite-sequences-of-elements-rings public
+open import ring-theory.sums-of-finite-sequences-of-elements-semirings public
 open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups public
 open import ring-theory.trivial-rings public
 ```

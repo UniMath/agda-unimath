@@ -156,15 +156,18 @@ section of `(RΣA, RΣB, RΣS)`, respectively.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4) {a₀ : domain-span-diagram 𝒮}
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5) {a₀ : domain-span-diagram 𝒮}
   (p₀ : left-family-descent-data-pushout P a₀)
   where
 
   ev-refl-section-descent-data-pushout :
-    {l5 : Level}
+    {l6 l7 : Level}
     (R :
-      descent-data-pushout (span-diagram-flattening-descent-data-pushout P) l5)
+      descent-data-pushout
+        ( span-diagram-flattening-descent-data-pushout P)
+        ( l6)
+        ( l7))
     (t : section-descent-data-pushout R) →
     left-family-descent-data-pushout R (a₀ , p₀)
   ev-refl-section-descent-data-pushout R t =
@@ -175,18 +178,19 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4) {a₀ : domain-span-diagram 𝒮}
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5) {a₀ : domain-span-diagram 𝒮}
   (p₀ : left-family-descent-data-pushout P a₀)
   where
 
   is-identity-system-descent-data-pushout : UUω
   is-identity-system-descent-data-pushout =
-    {l5 : Level}
+    {l6 : Level}
     (R :
       descent-data-pushout
         ( span-diagram-flattening-descent-data-pushout P)
-        ( l5)) →
+        ( l6)
+        ( l6)) →
     section (ev-refl-section-descent-data-pushout P p₀ R)
 ```
 
@@ -232,9 +236,9 @@ section if and only if the right map has a section.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
   {a₀ : domain-span-diagram 𝒮}
   (p₀ : left-family-family-with-descent-data-pushout P a₀)
   where
@@ -252,7 +256,7 @@ module _
         ( inv-equiv-descent-data-family-with-descent-data-pushout P)
 
   square-ev-refl-section-descent-data-pushout :
-    {l5 : Level}
+    {l5 l6 l7 : Level}
     (R :
       family-with-descent-data-pushout
         ( cocone-flattening-descent-data-pushout _ _ c
@@ -260,7 +264,9 @@ module _
           ( family-cocone-family-with-descent-data-pushout P)
           ( inv-equiv-descent-data-pushout _ _
             ( equiv-descent-data-family-with-descent-data-pushout P)))
-        ( l5)) →
+        ( l5)
+        ( l6)
+        ( l7)) →
     coherence-square-maps
       ( section-descent-data-section-family-cocone-span-diagram R ∘ ind-Σ)
       ( ev-refl-identity-system
@@ -307,7 +313,7 @@ right map has a section, hence the left map has a section.
                 ( up-c)))))
         ( id-system-P (descent-data-family-with-descent-data-pushout fam-R))
       where
-        fam-R : family-with-descent-data-pushout cocone-flattening l
+        fam-R : family-with-descent-data-pushout cocone-flattening l l l
         fam-R =
           family-with-descent-data-pushout-family-cocone
             ( cocone-flattening)
@@ -340,7 +346,7 @@ assumption, so the right map has a section.
           ( section-map-equiv
             ( left-equiv-family-with-descent-data-pushout fam-R (a₀ , p₀))))
       where
-        fam-R : family-with-descent-data-pushout cocone-flattening l
+        fam-R : family-with-descent-data-pushout cocone-flattening l l l
         fam-R =
           family-with-descent-data-pushout-descent-data-pushout
             ( flattening-lemma-descent-data-pushout _ _ c
@@ -404,7 +410,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : descent-data-pushout 𝒮 l5) {a₀ : domain-span-diagram 𝒮}
+  (P : descent-data-pushout 𝒮 l5 l5) {a₀ : domain-span-diagram 𝒮}
   (p₀ : left-family-descent-data-pushout P a₀)
   (id-system-P : is-identity-system-descent-data-pushout P p₀)
   where
@@ -446,7 +452,7 @@ module _
               ( up-c)
               ( id-system-P))))
       where
-      fam-P : family-with-descent-data-pushout c l5
+      fam-P : family-with-descent-data-pushout c l5 l5 l5
       fam-P = family-with-descent-data-pushout-descent-data-pushout up-c P
       p₀' :
         family-cocone-family-with-descent-data-pushout
@@ -481,7 +487,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : descent-data-pushout 𝒮 l5) {a₀ : domain-span-diagram 𝒮}
+  (P : descent-data-pushout 𝒮 l5 l5) {a₀ : domain-span-diagram 𝒮}
   (p₀ : left-family-descent-data-pushout P a₀)
   where
 
@@ -492,6 +498,7 @@ module _
         (R :
           descent-data-pushout
             ( span-diagram-flattening-descent-data-pushout P)
+            ( l6)
             ( l6))
         (r₀ : left-family-descent-data-pushout R (a₀ , p₀)) →
         section-descent-data-pushout R) →

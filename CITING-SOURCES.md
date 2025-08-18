@@ -1,8 +1,9 @@
 # Citing sources
 
 All of the references and sources of the agda-unimath library are managed in a
-[BibLaTeX](https://www.ctan.org/pkg/biblatex) file `references.bib`, and we have
-a custom set of macros to work with them.
+[BibLaTeX](https://www.ctan.org/pkg/biblatex) file
+[`references.bib`](https://github.com/UniMath/agda-unimath/blob/master/references.bib),
+and we have a custom set of macros to work with them.
 
 The macros are as follows:
 
@@ -31,13 +32,12 @@ not available, please define them as empty fields. E.g. `publisher = {},`.
 
 If you are unsure about how to structure your BibLaTeX entry, it may be useful
 to know that the references are checked by the `linkcheck` GitHub workflow, so
-when you post your pull request to agda-unimath you can refer to the CI for
-possible issues.
+when you post your pull request to the agda-unimath repository you can refer to
+the CI for possible issues.
 
 **Note:** If the citation label of your reference is not being generated
-properly, we support a custom `citeas` field that can be used to overwrite it.
-For instance, _Homotopy Type Theory: Univalent Foundations of Mathematics_
-should be cited as {{#cite UF13}}, and to make it so we have set
-`citeas = {UF13}` for its BibLaTeX entry. Keep in mind that if the citation
-label is not being generated properly, then it is likely that the author list is
-not being parsed properly either.
+properly, we support a custom `citeas` field that overwrites it. For instance,
+_Homotopy Type Theory: Univalent Foundations of Mathematics_ should be cited as
+{{#cite UF13}}, and to make it so we have set `citeas = {UF13}` for its BibLaTeX
+entry. Keep in mind that if the citation label is not being generated properly,
+then it is likely that the author list is not being parsed properly either.

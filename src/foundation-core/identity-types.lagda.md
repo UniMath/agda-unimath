@@ -120,8 +120,17 @@ have the induction principle of the identity type.
 ind-Id :
   {l1 l2 : Level} {A : UU l1}
   (x : A) (B : (y : A) (p : x ＝ y) → UU l2) →
-  (B x refl) → (y : A) (p : x ＝ y) → B y p
+  B x refl → (y : A) (p : x ＝ y) → B y p
 ind-Id x B b y refl = b
+```
+
+### The recursion principle of identity types
+
+```agda
+rec-Id :
+  {l1 l2 : Level} {A : UU l1} (x : A) {B : A → UU l2} →
+  B x → (y : A) → x ＝ y → B y
+rec-Id x {B} = ind-Id x (λ y p → B y)
 ```
 
 ## Operations on the identity type
@@ -151,7 +160,7 @@ is a family of binary operations
 
 indexed by `x y z : A`. However, there are essentially three different ways we
 can define concatenation of identifications, all with different computational
-behaviours.
+behaviors.
 
 1. We can define concatenation by induction on the equality `x ＝ y`. This gives
    us the computation rule `refl ∙ q ≐ q`.
@@ -240,7 +249,7 @@ module _
 
   assoc :
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
-    ((p ∙ q) ∙ r) ＝ (p ∙ (q ∙ r))
+    (p ∙ q) ∙ r ＝ p ∙ (q ∙ r)
   assoc refl q r = refl
 ```
 
@@ -268,13 +277,13 @@ module _
 
   double-assoc :
     {x y z w v : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) →
-    (((p ∙ q) ∙ r) ∙ s) ＝ p ∙ (q ∙ (r ∙ s))
+    ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
   double-assoc refl q r s = assoc q r s
 
   triple-assoc :
     {x y z w v u : A}
     (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) (t : v ＝ u) →
-    ((((p ∙ q) ∙ r) ∙ s) ∙ t) ＝ p ∙ (q ∙ (r ∙ (s ∙ t)))
+    (((p ∙ q) ∙ r) ∙ s) ∙ t ＝ p ∙ (q ∙ (r ∙ (s ∙ t)))
   triple-assoc refl q r s t = double-assoc q r s t
 ```
 
@@ -298,7 +307,7 @@ module _
   left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
   left-inv refl = refl
 
-  right-inv : {x y : A} (p : x ＝ y) → p ∙ (inv p) ＝ refl
+  right-inv : {x y : A} (p : x ＝ y) → p ∙ inv p ＝ refl
   right-inv refl = refl
 ```
 
@@ -355,11 +364,11 @@ module _
   where
 
   is-retraction-inv-concat :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → inv p ∙ (p ∙ q) ＝ q
   is-retraction-inv-concat refl q = refl
 
   is-section-inv-concat :
-    {x y z : A} (p : x ＝ y) (r : x ＝ z) → (p ∙ (inv p ∙ r)) ＝ r
+    {x y z : A} (p : x ＝ y) (r : x ＝ z) → p ∙ (inv p ∙ r) ＝ r
   is-section-inv-concat refl r = refl
 
   is-retraction-inv-concat' :

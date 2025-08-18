@@ -27,14 +27,14 @@ def does_support(backend):
 def module_source_path_from_md_name(roots, module_name):
     """
     Tries to find a source literate Agda or markdown file given
-    a list of directories to seach, and a 'module name', which is an
+    a list of directories to search, and a 'module name', which is an
     entry in the websites table of contents
     (usually of the form `agda-module.submodule.md`).
 
     Returns None if no such file is found.
     """
     base_name = module_name.replace('.', os.sep)[:-len('.md')]
-    # Check agains "lagda", not ".lagda", since that period would
+    # Check against "lagda", not ".lagda", since that period would
     # have been replaced by the previous line
     if base_name.endswith('lagda'):
         base_name = base_name[:-len('.lagda')]

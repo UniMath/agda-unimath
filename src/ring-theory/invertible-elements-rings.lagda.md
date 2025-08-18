@@ -9,6 +9,7 @@ module ring-theory.invertible-elements-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -221,7 +222,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### Any invertible element of a monoid has a contractible type of right inverses
+### Any invertible element of a ring has a contractible type of right inverses
 
 ```agda
 module _
@@ -234,9 +235,17 @@ module _
   is-contr-is-right-invertible-element-Ring =
     is-contr-is-right-invertible-element-Monoid
       ( multiplicative-monoid-Ring R)
+
+  contraction-right-inverse-is-invertible-element-Ring :
+    (x : type-Ring R) (Ix : is-invertible-element-Ring R x) →
+    (y : type-Ring R) →
+    is-right-inverse-element-Ring R x y →
+    inv-is-invertible-element-Ring R Ix ＝ y
+  contraction-right-inverse-is-invertible-element-Ring x I y H =
+    ap pr1 (pr2 (is-contr-is-right-invertible-element-Ring x I) (y , H))
 ```
 
-### Any invertible element of a monoid has a contractible type of left inverses
+### Any invertible element of a ring has a contractible type of left inverses
 
 ```agda
 module _
@@ -251,7 +260,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### The unit of a monoid is invertible
+### The unit of a ring is invertible
 
 ```agda
 module _

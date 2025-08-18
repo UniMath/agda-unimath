@@ -37,7 +37,7 @@ precategories.
 To do this, we introduce the type `Precategory-Expression`, which is a syntactic
 representation of a morphism. Then, noting that every morphism is represented by
 an expression (through `in-Precategory-Expression`), it will be sufficient to
-prove an equality of expresions to prove an equality of morphisms. However, if
+prove an equality of expressions to prove an equality of morphisms. However, if
 two morphisms are equal, then their normalized expressions are equal by
 reflexivity, so that the problem is reduced to finding which
 `Precategory-Expression` represents a given morphism.
