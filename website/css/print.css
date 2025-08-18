@@ -49,7 +49,7 @@ a:hover {
 
 a[href^='http']::after,
 a[href^='https']::after {
-  content: '' !important;
+  display: none !important;
 }
 
 h1,
