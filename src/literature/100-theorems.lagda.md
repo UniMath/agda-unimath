@@ -2,8 +2,8 @@
 
 This file records formalized results from
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s
-[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/).
-{{#cite 100theorems}}
+[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/)
+{{#cite 100theorems}}.
 
 ```agda
 module literature.100-theorems where

@@ -1,9 +1,9 @@
 # Wikipedia's list of theorems
 
 On this page, we record formalized results in the agda-unimath library that are
-on
-[Wikipedia's list of theorems](https://en.wikipedia.org/wiki/List_of_theorems)
-or have a Wikidata entry listed as an instance of a
+on Wikipedia's
+[list of theorems](https://en.wikipedia.org/wiki/List_of_theorems) or have a
+Wikidata entry listed as an instance of a
 [theorem](https://www.wikidata.org/wiki/Q65943). Additions to this list are very
 welcome!
 
@@ -164,6 +164,6 @@ open import category-theory.yoneda-lemma-precategories using
 - [List of theorems](https://en.wikipedia.org/wiki/List_of_theorems) on
   Wikipedia
 - The [1000plus project](https://github.com/1000-plus)'s
-  [_1000+ theorems_](https://1000-plus.github.io/) records formalized results
-  from Wikipedia's list of theorems in the 6 proof assistants Isabelle, HOL
-  Light, Coq/Rocq, Lean, Metamath, and Mizar.
+  [_1000+ theorems_](https://1000-plus.github.io/) aims to record formalized
+  results from Wikipedia's list of theorems in the 6 proof assistants Isabelle,
+  HOL Light, Coq/Rocq, Lean, Metamath, and Mizar.
