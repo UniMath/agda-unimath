@@ -42,7 +42,7 @@ open import metric-spaces.subspaces-metric-spaces
 
 Any [metric space](metric-spaces.metric-spaces.md) is
 [isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to its
-{{#concept "Σ-decomposition into subspaces of elements at bounded distance" Agda=Σ-components-at-bounded-distance-Metric-Space}},
+{{#concept "bounded distance decomposition" Agda=Σ-components-at-bounded-distance-Metric-Space}},
 the [indexed sum](metric-spaces.indexed-sums-metric-spaces.md) of its
 [subspaces](metric-spaces.subspaces-metric-spaces.md) of
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
