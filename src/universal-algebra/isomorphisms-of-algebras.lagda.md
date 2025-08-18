@@ -132,7 +132,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
   where
 
   equiv-equiv-hom-Algebra' :
@@ -150,9 +150,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 : Level} ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A B : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A B : Algebra σ T l3)
   where
 
   is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3)

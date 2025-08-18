@@ -45,11 +45,11 @@ original one.
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( R : congruence-Algebra σ T A l4)
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (R : congruence-Algebra σ T A l4)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
