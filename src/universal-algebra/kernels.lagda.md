@@ -38,24 +38,24 @@ The kernel of a homomorphism `f` of algebras is the congruence relation given by
 
 ```agda
 module _
-  { l1 : Level} ( Sg : signature l1)
-  { l2 : Level} ( Th : Theory Sg l2)
-  { l3 l4 : Level}
-  ( Alg1 : Algebra Sg Th l3)
-  ( Alg2 : Algebra Sg Th l4)
-  ( F : hom-Algebra Sg Th Alg1 Alg2)
+  { l1 l2 l3 l4 : Level}
+  ( σ : signature l1)
+  ( T : Theory σ l2)
+  ( A : Algebra σ T l3)
+  ( B : Algebra σ T l4)
+  ( F : hom-Algebra σ T A B)
   where
 
   rel-prop-kernel-hom-Algebra :
-    Relation-Prop l4 (type-Algebra Sg Th Alg1)
+    Relation-Prop l4 (type-Algebra σ T A)
   pr1 (rel-prop-kernel-hom-Algebra x y) =
-    map-hom-Algebra Sg Th Alg1 Alg2 F x ＝
-      map-hom-Algebra Sg Th Alg1 Alg2 F y
+    map-hom-Algebra σ T A B F x ＝
+      map-hom-Algebra σ T A B F y
   pr2 (rel-prop-kernel-hom-Algebra x y) =
-    is-set-Algebra Sg Th Alg2 _ _
+    is-set-Algebra σ T B _ _
 
   equivalence-relation-kernel-hom-Algebra :
-    equivalence-relation l4 (type-Algebra Sg Th Alg1)
+    equivalence-relation l4 (type-Algebra σ T A)
   pr1 equivalence-relation-kernel-hom-Algebra =
     rel-prop-kernel-hom-Algebra
   pr1 (pr2 equivalence-relation-kernel-hom-Algebra) _ = refl
@@ -63,26 +63,26 @@ module _
   pr2 (pr2 (pr2 equivalence-relation-kernel-hom-Algebra)) _ _ _ f g = g ∙ f
 
   kernel-hom-Algebra :
-    congruence-Algebra Sg Th Alg1 l4
+    congruence-Algebra σ T A l4
   pr1 kernel-hom-Algebra = equivalence-relation-kernel-hom-Algebra
   pr2 kernel-hom-Algebra op v v' p =
     equational-reasoning
-      f (is-model-set-Algebra Sg Th Alg1 op v)
-      ＝ is-model-set-Algebra Sg Th Alg2 op (map-tuple f v)
-        by preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v
-      ＝ is-model-set-Algebra Sg Th Alg2 op (map-tuple f v')
+      f (is-model-set-Algebra σ T A op v)
+      ＝ is-model-set-Algebra σ T B op (map-tuple f v)
+        by preserves-operations-hom-Algebra σ T A B F op v
+      ＝ is-model-set-Algebra σ T B op (map-tuple f v')
         by
           ap
-            ( is-model-set-Algebra Sg Th Alg2 op)
-            ( map-hom-Algebra-lemma (pr2 Sg op) v v' p)
-      ＝ f (is-model-set-Algebra Sg Th Alg1 op v')
-        by inv (preserves-operations-hom-Algebra Sg Th Alg1 Alg2 F op v')
+            ( is-model-set-Algebra σ T B op)
+            ( map-hom-Algebra-lemma (pr2 σ op) v v' p)
+      ＝ f (is-model-set-Algebra σ T A op v')
+        by inv (preserves-operations-hom-Algebra σ T A B F op v')
     where
-    f = map-hom-Algebra Sg Th Alg1 Alg2 F
+    f = map-hom-Algebra σ T A B F
     map-hom-Algebra-lemma :
       ( n : ℕ) →
-      ( v v' : tuple (type-Algebra Sg Th Alg1) n) →
-      ( relation-holds-all-tuple Sg Th Alg1
+      ( v v' : tuple (type-Algebra σ T A) n) →
+      ( relation-holds-all-tuple σ T A
         equivalence-relation-kernel-hom-Algebra v v') →
       (map-tuple f v) ＝ (map-tuple f v')
     map-hom-Algebra-lemma zero-ℕ empty-tuple empty-tuple p = refl
