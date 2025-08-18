@@ -132,7 +132,6 @@ module _
 module _
   {l1 l2 : Level}
   (A : Metric-Space l1 l2)
-
   where
 
   abstract
