@@ -15,6 +15,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
@@ -34,6 +35,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.subtypes
 open import foundation-core.transport-along-identifications
 
 open import trees.full-binary-trees
@@ -90,32 +92,32 @@ module _
   where
 
   {-# TERMINATING #-}
-  Eq-htpy-labeled-full-binary-tree :
+  htpy-labeled-full-binary-tree :
     (U V : labeled-full-binary-tree X) →
     Eq-full-binary-tree
       (tree-labeled-full-binary-tree X U)
       (tree-labeled-full-binary-tree X V) →
     UU l
-  Eq-htpy-labeled-full-binary-tree
+  htpy-labeled-full-binary-tree
     (leaf-full-binary-tree , f) (leaf-full-binary-tree , g) star =
       f star ＝ g star
-  Eq-htpy-labeled-full-binary-tree
+  htpy-labeled-full-binary-tree
     (join-full-binary-tree U U₁ , f) (join-full-binary-tree V V₁ , g) (p , q) =
-      ( Eq-htpy-labeled-full-binary-tree
+      ( htpy-labeled-full-binary-tree
         ( U , (λ z → f (inl z))) (V , (λ z → g (inl z))) p) ×
-      ( Eq-htpy-labeled-full-binary-tree
+      ( htpy-labeled-full-binary-tree
         ( U₁ , (λ z → f (inr z))) (V₁ , (λ z → g (inr z))) q)
 
   {-# TERMINATING #-}
-  refl-Eq-htpy-labeled-full-binary-tree :
+  refl-htpy-labeled-full-binary-tree :
     (T : labeled-full-binary-tree X) →
-    Eq-htpy-labeled-full-binary-tree T T
+    htpy-labeled-full-binary-tree T T
       (refl-Eq-full-binary-tree (tree-labeled-full-binary-tree X T))
-  refl-Eq-htpy-labeled-full-binary-tree (leaf-full-binary-tree , f) = refl
-  pr1 (refl-Eq-htpy-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
-    refl-Eq-htpy-labeled-full-binary-tree (T , λ z → f (inl z))
-  pr2 (refl-Eq-htpy-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
-    refl-Eq-htpy-labeled-full-binary-tree (T₁ , λ z → f (inr z))
+  refl-htpy-labeled-full-binary-tree (leaf-full-binary-tree , f) = refl
+  pr1 (refl-htpy-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
+    refl-htpy-labeled-full-binary-tree (T , λ z → f (inl z))
+  pr2 (refl-htpy-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
+    refl-htpy-labeled-full-binary-tree (T₁ , λ z → f (inr z))
 
   Eq-labeled-full-binary-tree :
     labeled-full-binary-tree X → labeled-full-binary-tree X → UU l
@@ -123,7 +125,7 @@ module _
     Σ ( Eq-full-binary-tree
         ( tree-labeled-full-binary-tree X U)
         ( tree-labeled-full-binary-tree X V))
-      ( Eq-htpy-labeled-full-binary-tree U V)
+      ( htpy-labeled-full-binary-tree U V)
 
   refl-Eq-labeled-full-binary-tree :
     (T : labeled-full-binary-tree X) → Eq-labeled-full-binary-tree T T
@@ -131,22 +133,46 @@ module _
   pr1 (refl-Eq-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
     ( refl-Eq-full-binary-tree T , refl-Eq-full-binary-tree T₁)
   pr2 (refl-Eq-labeled-full-binary-tree (join-full-binary-tree T T₁ , f)) =
-    refl-Eq-htpy-labeled-full-binary-tree ((join-full-binary-tree T T₁) , f)
+    refl-htpy-labeled-full-binary-tree ((join-full-binary-tree T T₁) , f)
 
   Eq-eq-labeled-full-binary-tree :
     (U V : labeled-full-binary-tree X) → U ＝ V →
     Eq-labeled-full-binary-tree U V
   Eq-eq-labeled-full-binary-tree U .U refl = refl-Eq-labeled-full-binary-tree U
 
+  htpy-eq-labeled-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T) → f ＝ g →
+    htpy-labeled-full-binary-tree (T , f) (T , g) (refl-Eq-full-binary-tree T)
+  htpy-eq-labeled-full-binary-tree T f .f refl =
+    refl-htpy-labeled-full-binary-tree (T , f)
+
+  abstract
+    is-torsorial-htpy-labeled-full-binary-tree :
+      (T : full-binary-tree) (f : labeling-full-binary-tree X T) →
+      is-torsorial (λ g → htpy-labeled-full-binary-tree (T , f) (T , g)
+        (refl-Eq-full-binary-tree T))
+    pr1 (pr1 (is-torsorial-htpy-labeled-full-binary-tree T f)) = f
+    pr2 (pr1 (is-torsorial-htpy-labeled-full-binary-tree T f)) =
+      refl-htpy-labeled-full-binary-tree (T , f)
+    pr2 (is-torsorial-htpy-labeled-full-binary-tree T f) (g , p) = {!   !}
+
+  is-equiv-htpy-eq-labeled-full-binary-tree :
+    (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
+    is-equiv (htpy-eq-labeled-full-binary-tree T f g)
+  is-equiv-htpy-eq-labeled-full-binary-tree T f =
+    fundamental-theorem-id
+    ( is-torsorial-htpy-labeled-full-binary-tree T f)
+    ( htpy-eq-labeled-full-binary-tree T f)
+
   is-equiv-Eq-eq-labeled-full-binary-tree :
     (U V : labeled-full-binary-tree X) →
     is-equiv (Eq-eq-labeled-full-binary-tree U V)
   is-equiv-Eq-eq-labeled-full-binary-tree (U , f) =
     structure-identity-principle
-    {!   !}
+    ( λ {V} g → htpy-labeled-full-binary-tree (U , f) (V , g))
     ( refl-Eq-full-binary-tree U)
-    ( refl-Eq-htpy-labeled-full-binary-tree (U , f))
-    {!   !}
-    {!   !}
-    {!   !}
+    ( refl-htpy-labeled-full-binary-tree (U , f))
+    ( Eq-eq-labeled-full-binary-tree (U , f))
+    ( λ _ → is-equiv-Eq-eq-full-binary-tree)
+    ( is-equiv-htpy-eq-labeled-full-binary-tree U f)
 ```
