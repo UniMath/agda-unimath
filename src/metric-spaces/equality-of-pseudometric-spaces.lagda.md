@@ -44,8 +44,7 @@ the following equivalent concepts:
   [isometry](metric-spaces.isometries-pseudometric-spaces.md);
 
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
-  such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
-  is an isometry;
+  such that the induced map under `map-equiv` is an isometry;
 
 - a function between their carrier types that is both an equivalence and an
   isometry.
