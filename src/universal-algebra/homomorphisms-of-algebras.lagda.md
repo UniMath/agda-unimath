@@ -72,15 +72,15 @@ module _
     is-prop-Π
       ( λ x →
         is-prop-Π
-          ( λ y → is-set-type-Algebra σ T B
-            ( f (is-model-set-Algebra σ T A x y))
-            ( is-model-set-Algebra σ T B x (map-tuple f y))))
+          ( λ y →
+            is-set-type-Algebra σ T B
+              ( f (is-model-set-Algebra σ T A x y))
+              ( is-model-set-Algebra σ T B x (map-tuple f y))))
 
-  preserves-operations-Algebra-Prop :
-    (f : type-Algebra σ T A → type-Algebra σ T B) →
-    Prop (l1 ⊔ l3 ⊔ l4)
-  preserves-operations-Algebra-Prop f =
-    ( preserves-operations-Algebra f) , (is-prop-preserves-operations-Algebra f)
+  preserves-operations-prop-Algebra :
+    (type-Algebra σ T A → type-Algebra σ T B) → Prop (l1 ⊔ l3 ⊔ l4)
+  preserves-operations-prop-Algebra f =
+    ( preserves-operations-Algebra f , is-prop-preserves-operations-Algebra f)
 
   hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   hom-Algebra =
@@ -97,10 +97,6 @@ module _
     ( f : hom-Algebra) →
     preserves-operations-Algebra (map-hom-Algebra f)
   preserves-operations-hom-Algebra = pr2
-
-  hom-Algebra-Subtype :
-    subtype (l1 ⊔ l3 ⊔ l4) (type-Algebra σ T A → type-Algebra σ T B)
-  hom-Algebra-Subtype = preserves-operations-Algebra-Prop
 ```
 
 ### Composition of algebra homomorphisms
@@ -199,14 +195,14 @@ module _
   {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
   where
 
-  is-hom-id-Algebra : preserves-operations-Algebra σ T A A id
-  is-hom-id-Algebra op v =
+  preserves-operations-id-Algebra : preserves-operations-Algebra σ T A A id
+  preserves-operations-id-Algebra op v =
     ap
       ( is-model-set-Algebra σ T A op)
       ( preserves-id-map-tuple (arity-operation-signature σ op) v)
 
   id-hom-Algebra : hom-Algebra σ T A A
-  id-hom-Algebra = (id , is-hom-id-Algebra)
+  id-hom-Algebra = (id , preserves-operations-id-Algebra)
 ```
 
 ### Composition of algebra homomorphisms is associative
@@ -232,11 +228,11 @@ module _
       ( comp-hom-Algebra σ T A B C g f)
   associative-comp-hom-Algebra h g f =
     eq-htpy-hom-Algebra σ T A D
-    ( comp-hom-Algebra σ T A B D
-      ( comp-hom-Algebra σ T B C D h g) f)
-    ( comp-hom-Algebra σ T A C D h
-      ( comp-hom-Algebra σ T A B C g f))
-    ( refl-htpy)
+      ( comp-hom-Algebra σ T A B D
+        ( comp-hom-Algebra σ T B C D h g) f)
+      ( comp-hom-Algebra σ T A C D h
+        ( comp-hom-Algebra σ T A B C g f))
+      ( refl-htpy)
 ```
 
 ### Left and right unit laws for homomorphism composition

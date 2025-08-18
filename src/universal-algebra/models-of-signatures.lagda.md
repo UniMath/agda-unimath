@@ -107,19 +107,18 @@ module _
 
   Eq-Model-Signature : {l2 : Level} (X Y : Model-Signature σ l2) → UU (l1 ⊔ l2)
   Eq-Model-Signature (X , X-assign) (Y , Y-assign) =
-    Σ
-    ( equiv-Set X Y)
-    ( λ (f , _) →
-      preserves-operations-Model-Signature (X , X-assign) (Y , Y-assign) f)
+    Σ ( equiv-Set X Y)
+      ( λ (f , _) →
+        preserves-operations-Model-Signature (X , X-assign) (Y , Y-assign) f)
 
   equiv-Eq-Model-Signature' :
     {l2 : Level} (X Y : Model-Signature σ l2) → Eq-Model-Signature X Y ≃
     Σ (hom-Set (pr1 X) (pr1 Y))
       (λ f → is-equiv f × preserves-operations-Model-Signature X Y f)
-  pr1 (equiv-Eq-Model-Signature' X Y) ((f , eq) , p) = f , eq , p
-  pr1 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = (f , eq) , p
+  pr1 (equiv-Eq-Model-Signature' X Y) ((f , eq) , p) = (f , eq , p)
+  pr1 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = ((f , eq) , p)
   pr2 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) _ = refl
-  pr1 (pr2 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = (f , eq) , p
+  pr1 (pr2 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = ((f , eq) , p)
   pr2 (pr2 (pr2 (equiv-Eq-Model-Signature' X Y))) _ = refl
 
   preserves-operations-id-Model-Signature :

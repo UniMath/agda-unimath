@@ -167,34 +167,36 @@ module _
   is-prop-is-iso-Algebra =
     is-prop-is-iso-Large-Precategory (Algebra-Large-Precategory σ T)
 
-  is-iso-is-equiv-Algebra :
+  is-equiv-hom-is-iso-Algebra :
     (f : hom-Algebra σ T A B) →
     is-iso-Algebra f →
     is-equiv-hom-Algebra σ T A B f
-  pr1 (pr1 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra σ T B A g
-  pr2 (pr1 (is-iso-is-equiv-Algebra f (g , (p , q)))) =
+  pr1 (pr1 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
+  pr2 (pr1 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
     htpy-eq-hom-Algebra σ T B B
-    ( comp-hom-Algebra σ T B A B f g)
-    ( id-hom-Algebra σ T B) p
-  pr1 (pr2 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra σ T B A g
-  pr2 (pr2 (is-iso-is-equiv-Algebra f (g , (p , q)))) =
+      ( comp-hom-Algebra σ T B A B f g)
+      ( id-hom-Algebra σ T B)
+      ( p)
+  pr1 (pr2 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
+  pr2 (pr2 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
     htpy-eq-hom-Algebra σ T A A
-    ( comp-hom-Algebra σ T A B A g f)
-    ( id-hom-Algebra σ T A) q
+      ( comp-hom-Algebra σ T A B A g f)
+      ( id-hom-Algebra σ T A)
+      ( q)
 
-  is-equiv-is-iso-Algebra :
+  is-iso-is-equiv-hom-Algebra :
     (f : hom-Algebra σ T A B) →
     is-equiv-hom-Algebra σ T A B f →
     is-iso-Algebra f
-  pr1 (is-equiv-is-iso-Algebra f eq) =
+  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
     hom-inv-is-equiv-hom-Algebra* σ T A B f eq
-  pr1 (pr2 (is-equiv-is-iso-Algebra f eq)) =
+  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T B B
     ( comp-hom-Algebra σ T B A B f
       ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq))
     ( id-hom-Algebra σ T B)
     ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
-  pr2 (pr2 (is-equiv-is-iso-Algebra f eq)) =
+  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T A A
     ( comp-hom-Algebra σ T A B A
       ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq) f)
@@ -209,19 +211,19 @@ module _
           map-equiv ((map-hom-Algebra σ T A B f) , eq)
       htpy x =
         htpy-map-inv-equiv-retraction
-        ( map-hom-Algebra σ T A B f , eq)
-        ( retraction-is-equiv eq)
-        ( map-hom-Algebra σ T A B f x)
+          ( map-hom-Algebra σ T A B f , eq)
+          ( retraction-is-equiv eq)
+          ( map-hom-Algebra σ T A B f x)
 
   equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
     equiv-type-subtype
-    ( is-prop-is-equiv-hom-Algebra σ T A B)
-    ( is-prop-is-iso-Algebra)
-    ( is-equiv-is-iso-Algebra)
-    ( is-iso-is-equiv-Algebra) ∘e
-    ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
-    ( equiv-Eq-Model-Signature' σ (model-Algebra σ T A) (model-Algebra σ T B))
+      ( is-prop-is-equiv-hom-Algebra σ T A B)
+      ( is-prop-is-iso-Algebra)
+      ( is-iso-is-equiv-hom-Algebra)
+      ( is-equiv-hom-is-iso-Algebra) ∘e
+      ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
+      ( equiv-Eq-Model-Signature' σ (model-Algebra σ T A) (model-Algebra σ T B))
 
   iso-Eq-Algebra : Eq-Algebra σ T A B → iso-Algebra
   iso-Eq-Algebra = map-equiv equiv-iso-Eq-Algebra
@@ -236,15 +238,15 @@ module _
   is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)
   is-torsorial-iso-Algebra =
     is-contr-equiv'
-    ( Σ (Algebra σ T l3) (Eq-Algebra σ T A))
-    ( equiv-tot (equiv-iso-Eq-Algebra σ T A))
-    ( is-torsorial-Eq-Algebra σ T A)
+      ( Σ (Algebra σ T l3) (Eq-Algebra σ T A))
+      ( equiv-tot (equiv-iso-Eq-Algebra σ T A))
+      ( is-torsorial-Eq-Algebra σ T A)
 
   is-equiv-iso-eq-Algebra :
     (B : Algebra σ T l3) →
     is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A B)
   is-equiv-iso-eq-Algebra =
     fundamental-theorem-id
-    ( is-torsorial-iso-Algebra)
-    ( iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A)
+      ( is-torsorial-iso-Algebra)
+      ( iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A)
 ```
