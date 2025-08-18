@@ -152,12 +152,14 @@ module _
     htpy-preserves-operations-Model-Signature X f g → f ＝ g
   eq-htpy-preserves-operations-Model-Signature (X , _) f g p =
     eq-htpy
-    ( λ op → eq-htpy
-      ( λ v → p op v ∙
-        inv
-        ( ap
-          ( g op)
-          ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
+    ( λ op →
+      eq-htpy
+        ( λ v →
+          ( p op v) ∙
+          ( inv
+            ( ap
+              ( g op)
+              ( preserves-id-map-tuple (arity-operation-signature σ op) v)))))
 
   is-equiv-htpy-eq-preserves-operations-Model-Signature :
     {l2 : Level} (X : Set l2) (f g : is-model-signature σ X) →
@@ -165,25 +167,30 @@ module _
   pr1 (pr1 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) =
     eq-htpy-preserves-operations-Model-Signature X f g
   pr2 (pr1 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) p =
-    eq-htpy (λ op → eq-htpy (λ v → pr1
-      ( is-set-type-Set X
-        ( map-equiv id-equiv (f op v))
-        ( g op (map-tuple (map-equiv id-equiv) v))
-      (( htpy-eq-preserves-operations-Model-Signature X f g ∘
-        eq-htpy-preserves-operations-Model-Signature X f g)
-        p op v)
-      ( p op v))))
+    eq-htpy
+      ( λ op →
+        eq-htpy
+          ( λ v →
+            pr1
+              ( is-set-type-Set X
+                ( f op v)
+                ( g op (map-tuple id v))
+              ( htpy-eq-preserves-operations-Model-Signature X f g
+                ( eq-htpy-preserves-operations-Model-Signature X f g p)
+              ( op)
+              ( v))
+          ( p op v))))
   pr1 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f g)) =
     eq-htpy-preserves-operations-Model-Signature X f g
   pr2 (pr2 (is-equiv-htpy-eq-preserves-operations-Model-Signature X f .f))
     refl =
       is-set-has-uip
-      ( is-set-Π (λ op → is-set-function-type (is-set-type-Set X)))
-      ( f)
-      ( f)
-      (( eq-htpy-preserves-operations-Model-Signature X f f
-        ∘ htpy-eq-preserves-operations-Model-Signature X f f) refl)
-      ( refl)
+        ( is-set-Π (λ op → is-set-function-type (is-set-type-Set X)))
+        ( f)
+        ( f)
+        ( eq-htpy-preserves-operations-Model-Signature X f f
+          ( htpy-eq-preserves-operations-Model-Signature X f f refl))
+        ( refl)
 
   Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature σ l2) → X ＝ Y → Eq-Model-Signature X Y

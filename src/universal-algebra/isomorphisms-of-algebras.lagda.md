@@ -12,14 +12,19 @@ module universal-algebra.isomorphisms-of-algebras where
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
+open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -46,6 +51,80 @@ open import universal-algebra.signatures
 We characterize
 [isomorphisms](category-theory.isomorphisms-in-large-precategories.md) of
 [algebras of theories](universal-algebra.precategory-of-algebras-of-theories.md).
+
+## Definition
+
+### The property that a homomorphism of algebras is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (B : Algebra σ T l4)
+  where
+
+  is-equiv-hom-Algebra : (f : hom-Algebra σ T A B) → UU (l3 ⊔ l4)
+  is-equiv-hom-Algebra f = is-equiv (map-hom-Algebra σ T A B f)
+
+  is-prop-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) → is-prop (is-equiv-hom-Algebra f)
+  is-prop-is-equiv-hom-Algebra f = is-property-is-equiv (pr1 f)
+
+  is-equiv-hom-Algebra-Prop : (f : hom-Algebra σ T A B) → Prop (l3 ⊔ l4)
+  pr1 (is-equiv-hom-Algebra-Prop f) = is-equiv-hom-Algebra f
+  pr2 (is-equiv-hom-Algebra-Prop f) = is-prop-is-equiv-hom-Algebra f
+
+  equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
+  equiv-hom-Algebra = Σ (hom-Algebra σ T A B) is-equiv-hom-Algebra
+```
+
+### The inverse of an equivalence of algebras
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (B : Algebra σ T l4)
+  (f : hom-Algebra σ T A B)
+  (eq : is-equiv (map-hom-Algebra σ T A B f))
+  where
+
+  preserves-operations-map-hom-inv-is-equiv-hom-Algebra* :
+    preserves-operations-Algebra σ T B A
+      (map-inv-equiv ((map-hom-Algebra σ T A B f) , eq))
+  preserves-operations-map-hom-inv-is-equiv-hom-Algebra* op v =
+    map-inv-is-equiv
+    ( is-emb-is-equiv eq
+      ( map-inv-is-equiv eq (is-model-set-Algebra σ T B op v))
+      ( is-model-set-Algebra σ T A op (map-tuple (map-inv-is-equiv eq) v)))
+    ( is-section-map-inv-is-equiv eq (is-model-set-Algebra σ T B op v) ∙
+      ( ap (is-model-set-Algebra σ T B op)
+        ( eq-Eq-tuple (arity-operation-signature σ op) v
+          ( map-tuple (map-hom-Algebra σ T A B f)
+        ( map-tuple (map-inv-is-equiv eq) v))
+          ( eq2 (arity-operation-signature σ op) v)) ∙
+        ( inv (preserves-operations-hom-Algebra σ T A B f op
+          ( map-tuple (map-inv-is-equiv eq) v)))))
+          where
+          eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
+            Eq-tuple n w (map-tuple
+              (map-hom-Algebra σ T A B f)
+              (map-tuple (map-inv-is-equiv eq) w))
+          eq2 zero-ℕ empty-tuple = map-raise star
+          pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
+            inv (is-section-map-section-is-equiv eq x)
+          pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
+
+  hom-inv-is-equiv-hom-Algebra* : hom-Algebra σ T B A
+  pr1 hom-inv-is-equiv-hom-Algebra* =
+    map-inv-is-equiv eq
+  pr2 hom-inv-is-equiv-hom-Algebra* =
+    preserves-operations-map-hom-inv-is-equiv-hom-Algebra*
+```
 
 ## Proof
 
@@ -107,17 +186,18 @@ module _
     (f : hom-Algebra σ T A B) →
     is-equiv-hom-Algebra σ T A B f →
     is-iso-Algebra f
-  pr1 (is-equiv-is-iso-Algebra f eq) = inv-equiv-hom-Algebra σ T A B f eq
+  pr1 (is-equiv-is-iso-Algebra f eq) =
+    hom-inv-is-equiv-hom-Algebra* σ T A B f eq
   pr1 (pr2 (is-equiv-is-iso-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T B B
     ( comp-hom-Algebra σ T B A B f
-      ( inv-equiv-hom-Algebra σ T A B f eq))
+      ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq))
     ( id-hom-Algebra σ T B)
     ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
   pr2 (pr2 (is-equiv-is-iso-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T A A
     ( comp-hom-Algebra σ T A B A
-      ( inv-equiv-hom-Algebra σ T A B f eq) f)
+      ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq) f)
     ( id-hom-Algebra σ T A)
     ( htpy ∙h is-retraction-map-retraction-map-equiv
       ( map-hom-Algebra σ T A B f , eq))

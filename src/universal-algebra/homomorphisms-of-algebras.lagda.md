@@ -48,11 +48,11 @@ underlying types such that all the structure is preserved.
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( B : Algebra σ T l4)
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (B : Algebra σ T l4)
   where
 
   preserves-operations-Algebra :
@@ -115,13 +115,13 @@ module _
   (C : Algebra σ T l5)
   where
 
-  comp-hom-Algebra :
+  preserves-operations-map-comp-hom-Algebra :
     (g : hom-Algebra σ T B C) (f : hom-Algebra σ T A B) →
-    hom-Algebra σ T A C
-  pr1 (comp-hom-Algebra (g , _) (f , _)) = g ∘ f
-  pr2 (comp-hom-Algebra (g , q) (f , p)) op v =
+    preserves-operations-Algebra σ T A C
+      (map-hom-Algebra σ T B C g ∘ map-hom-Algebra σ T A B f)
+  preserves-operations-map-comp-hom-Algebra (g , q) (f , p) op v =
     equational-reasoning
-    pr1 (comp-hom-Algebra (g , q) (f , p)) (is-model-set-Algebra σ T A op v)
+    (g ∘ f) (is-model-set-Algebra σ T A op v)
     ＝ g (is-model-set-Algebra σ T B op (map-tuple f v))
       by ap g (p op v)
     ＝ is-model-set-Algebra σ T C op (map-tuple g (map-tuple f v))
@@ -130,6 +130,14 @@ module _
       (map-tuple (g ∘ f) v)
       by ap (is-model-set-Algebra σ T C op)
       ( preserves-comp-map-tuple (arity-operation-signature σ op) f g v)
+
+  comp-hom-Algebra :
+    (g : hom-Algebra σ T B C) (f : hom-Algebra σ T A B) →
+    hom-Algebra σ T A C
+  pr1 (comp-hom-Algebra (g , _) (f , _)) = g ∘ f
+  pr2 (comp-hom-Algebra g f) op v =
+    preserves-operations-map-comp-hom-Algebra g f op v
+
 ```
 
 ## Properties
@@ -195,8 +203,8 @@ module _
   is-hom-id-Algebra : preserves-operations-Algebra σ T A A id
   is-hom-id-Algebra op v =
     ap
-    ( is-model-set-Algebra σ T A op)
-    ( preserves-id-map-tuple (arity-operation-signature σ op) v)
+      ( is-model-set-Algebra σ T A op)
+      ( preserves-id-map-tuple (arity-operation-signature σ op) v)
 
   id-hom-Algebra : hom-Algebra σ T A A
   id-hom-Algebra = (id , is-hom-id-Algebra)
@@ -206,13 +214,13 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( B : Algebra σ T l4)
-  ( C : Algebra σ T l5)
-  ( D : Algebra σ T l6)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (B : Algebra σ T l4)
+  (C : Algebra σ T l5)
+  (D : Algebra σ T l6)
   where
 
   associative-comp-hom-Algebra :
@@ -236,11 +244,11 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( B : Algebra σ T l4)
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Theory σ l2)
+  (A : Algebra σ T l3)
+  (B : Algebra σ T l4)
   where
 
   left-unit-law-comp-hom-Algebra :
@@ -258,70 +266,4 @@ module _
     eq-htpy-hom-Algebra σ T A B
       ( comp-hom-Algebra σ T A A B f (id-hom-Algebra σ T A)) f
       ( refl-htpy)
-```
-
-### The inverse of an equivalence of algebras
-
-```agda
-module _
-  { l1 l2 l3 l4 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( B : Algebra σ T l4)
-  ( f : hom-Algebra σ T A B)
-  ( eq : is-equiv (map-hom-Algebra σ T A B f))
-  where
-
-  inv-equiv-hom-Algebra : hom-Algebra σ T B A
-  pr1 inv-equiv-hom-Algebra =
-    map-inv-is-equiv eq
-  pr2 inv-equiv-hom-Algebra op v =
-    map-inv-is-equiv
-    ( is-emb-is-equiv eq
-      ( map-inv-is-equiv eq (is-model-set-Algebra σ T B op v))
-      ( is-model-set-Algebra σ T A op (map-tuple (map-inv-is-equiv eq) v)))
-    ( is-section-map-inv-is-equiv eq (is-model-set-Algebra σ T B op v) ∙
-      ( ap (is-model-set-Algebra σ T B op)
-        ( eq-Eq-tuple (arity-operation-signature σ op) v
-          ( map-tuple (map-hom-Algebra σ T A B f)
-        ( map-tuple (map-inv-is-equiv eq) v))
-          ( eq2 (arity-operation-signature σ op) v)) ∙
-        ( inv (preserves-operations-hom-Algebra σ T A B f op
-          ( map-tuple (map-inv-is-equiv eq) v)))))
-          where
-          eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
-            Eq-tuple n w (map-tuple
-              (map-hom-Algebra σ T A B f)
-              (map-tuple (map-inv-is-equiv eq) w))
-          eq2 zero-ℕ empty-tuple = map-raise star
-          pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
-            inv (is-section-map-section-is-equiv eq x)
-          pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
-```
-
-### The property that a homomorphism of algebras is an equivalence
-
-```agda
-module _
-  { l1 l2 l3 l4 : Level}
-  ( σ : signature l1)
-  ( T : Theory σ l2)
-  ( A : Algebra σ T l3)
-  ( B : Algebra σ T l4)
-  where
-
-  is-equiv-hom-Algebra : (f : hom-Algebra σ T A B) → UU (l3 ⊔ l4)
-  is-equiv-hom-Algebra f = is-equiv (map-hom-Algebra σ T A B f)
-
-  is-prop-is-equiv-hom-Algebra :
-    (f : hom-Algebra σ T A B) → is-prop (is-equiv-hom-Algebra f)
-  is-prop-is-equiv-hom-Algebra f = is-property-is-equiv (pr1 f)
-
-  is-equiv-hom-Algebra-Prop : (f : hom-Algebra σ T A B) → Prop (l3 ⊔ l4)
-  pr1 (is-equiv-hom-Algebra-Prop f) = is-equiv-hom-Algebra f
-  pr2 (is-equiv-hom-Algebra-Prop f) = is-prop-is-equiv-hom-Algebra f
-
-  equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
-  equiv-hom-Algebra = Σ (hom-Algebra σ T A B) is-equiv-hom-Algebra
 ```
