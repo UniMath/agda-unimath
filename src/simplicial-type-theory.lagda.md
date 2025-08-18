@@ -13,6 +13,7 @@ open import simplicial-type-theory.2-simplices public
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions public
 open import simplicial-type-theory.action-on-directed-edges-functions public
 open import simplicial-type-theory.arrows public
+open import simplicial-type-theory.associativity-of-composition-segal-types public
 open import simplicial-type-theory.boundary-standard-simplices public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.compositions-of-directed-edges public
@@ -42,6 +43,7 @@ open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public
 open import simplicial-type-theory.rewriting-directed-circle public
+open import simplicial-type-theory.segal-types public
 open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.spines public
 open import simplicial-type-theory.standard-simplices public

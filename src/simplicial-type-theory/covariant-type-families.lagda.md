@@ -106,7 +106,7 @@ module _
   is-simplicially-covariant' : UU (I1 ⊔ l1 ⊔ l2)
   is-simplicially-covariant' =
     (α : arrow▵ A) (x' : B (α 0▵)) →
-    is-torsorial (dependent-hom▵ B (hom▵-arrow▵ α) x')
+    is-torsorial (dependent-hom▵ B (hom-arrow▵ α) x')
 ```
 
 ## Properties

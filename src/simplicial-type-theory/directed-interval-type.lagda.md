@@ -213,7 +213,7 @@ We show that `map-directed-interval-bool` is an
 **Proof.** A type is 0-connected only if all pairs of elements are
 [merely equal](foundation.mere-equality.md), and since we are attempting to
 deduce a contradiction we may assume we have that all elements are equal, but
-`0▵` and `1▵` are not.
+`0▵` and `1▵` are not equal.
 
 ```agda
 is-not-0-connected-Δ¹ : ¬ (is-0-connected Δ¹)

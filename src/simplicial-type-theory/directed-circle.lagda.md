@@ -44,13 +44,13 @@ open import foundation.universe-levels
 
 open import reflection.erasing-equality
 
-open import simplicial-type-theory.Discrete-Type▵s I
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
 open import simplicial-type-theory.free-directed-loops I
 open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.universal-property-directed-circle I
 
 open import synthetic-homotopy-theory.circle
