@@ -47,11 +47,11 @@ module _
   _≼-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ≼-𝕎 y = type-Prop (x ≼-𝕎-Prop y)
 
-  _≈-𝕎-Prop_ : (x y : 𝕎 A B) → Prop (l1 ⊔ l2)
-  x ≈-𝕎-Prop y = product-Prop (x ≼-𝕎-Prop y) (y ≼-𝕎-Prop x)
+  _≍-𝕎-Prop_ : (x y : 𝕎 A B) → Prop (l1 ⊔ l2)
+  x ≍-𝕎-Prop y = product-Prop (x ≼-𝕎-Prop y) (y ≼-𝕎-Prop x)
 
-  _≈-𝕎_ : (x y : 𝕎 A B) → UU (l1 ⊔ l2)
-  x ≈-𝕎 y = type-Prop (x ≈-𝕎-Prop y)
+  _≍-𝕎_ : (x y : 𝕎 A B) → UU (l1 ⊔ l2)
+  x ≍-𝕎 y = type-Prop (x ≍-𝕎-Prop y)
 ```
 
 ### Strict rank comparison
