@@ -18,7 +18,7 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An algebraic theory is a collection of abstract equations over a signature `S`
+An algebraic theory is a collection of abstract equations over a signature `σ`
 that we consider to 'hold' in the theory. It is algebraic in the sense that we
 only require equations involving function symbols from the signature, in
 contrast to, say, requiring additional types of relations.
@@ -29,11 +29,11 @@ contrast to, say, requiring additional types of relations.
 
 ```agda
 module _
-  {l1 : Level} (Sg : signature l1)
+  {l1 : Level} (σ : signature l1)
   where
 
   Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation Sg))
+  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation σ))
 
   index-Theory : {l2 : Level} → Theory l2 → UU l2
   index-Theory = pr1
@@ -42,6 +42,6 @@ module _
     { l2 : Level}
     ( Th : Theory l2) →
     ( index-Theory Th) →
-    Abstract-Equation Sg
+    Abstract-Equation σ
   index-Abstract-Equation-Theory Th e = pr2 Th e
 ```
