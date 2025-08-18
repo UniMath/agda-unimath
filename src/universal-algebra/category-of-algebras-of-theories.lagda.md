@@ -44,7 +44,7 @@ is a [category](category-theory.large-categories.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory S l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
   where
 
   is-large-category-Algebra-Large-Precategory :

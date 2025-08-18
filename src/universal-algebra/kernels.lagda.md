@@ -52,7 +52,7 @@ module _
     map-hom-Algebra σ T A B F x ＝
       map-hom-Algebra σ T A B F y
   pr2 (rel-prop-kernel-hom-Algebra x y) =
-    is-set-Algebra σ T B _ _
+    is-set-type-Algebra σ T B _ _
 
   equivalence-relation-kernel-hom-Algebra :
     equivalence-relation l4 (type-Algebra σ T A)
