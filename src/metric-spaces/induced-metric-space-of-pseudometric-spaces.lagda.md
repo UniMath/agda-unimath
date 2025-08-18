@@ -489,6 +489,29 @@ module _
       is-isometry-map-induced-metric-space-Metric-Space)
 ```
 
+### The construction of the induced metric space of a pseudometric space is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  where
+
+  is-idempotent-induced-metric-space-Pseudometric-Space :
+    induced-metric-space-Pseudometric-Space
+      ( pseudometric-Metric-Space
+        ( induced-metric-space-Pseudometric-Space M)) ＝
+    induced-metric-space-Pseudometric-Space M
+  is-idempotent-induced-metric-space-Pseudometric-Space =
+    inv
+      ( eq-isometric-equiv-Metric-Space'
+        ( induced-metric-space-Pseudometric-Space M)
+        ( induced-metric-space-Pseudometric-Space
+          ( pseudometric-Metric-Space
+            ( induced-metric-space-Pseudometric-Space M)))
+        ( isometric-equiv-induced-metric-space-Metric-Space'
+          ( induced-metric-space-Pseudometric-Space M)))
+```
+
 ### The pointwise quotient of a Cauchy approximation in a pseudometric space is a Cauchy approximation in the induced metric space
 
 ```agda
