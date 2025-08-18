@@ -52,7 +52,7 @@ module _
       eval-term σ (is-model-set-Model-Signature σ M) assign
         ( rhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e))
 
- Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+  Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =
     Σ ( Model-Signature σ l3) (is-algebra)
 
