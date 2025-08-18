@@ -11,7 +11,9 @@ module metric-spaces.induced-metric-space-of-pseudometric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -20,15 +22,19 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retractions
 open import foundation.sections
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
@@ -36,6 +42,7 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -43,6 +50,7 @@ open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.short-functions-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
@@ -406,6 +414,24 @@ module _
       is-isometry-map-induced-metric-space-Pseudometric-Space M)
 ```
 
+### The short map from a pseudometric space tp its induced metric space
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  where
+
+  short-map-induced-metric-space-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( M)
+      ( pseudometric-induced-metric-space-Pseudometric-Space M)
+  short-map-induced-metric-space-Pseudometric-Space =
+    short-isometry-Pseudometric-Space
+      ( M)
+      ( pseudometric-induced-metric-space-Pseudometric-Space M)
+      ( isometry-map-induced-metric-space-Pseudometric-Space M)
+```
+
 ### The isometric equivalence between a metric space and the induced metric space of its pseudometric
 
 ```agda
@@ -590,4 +616,218 @@ module _
     ( map-induced-metric-space-cauchy-approximation-Pseudometric-Space M u ,
       map-induced-metric-space-Pseudometric-Space M lim ,
       preserves-limit-map-induced-metric-space-cauchy-approximation-Pseudometric-Space)
+```
+
+### Characterization of functions from the induced metric space into metric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  where
+
+  precomp-map-induced-metric-space-Pseudometric-Space :
+    type-function-Metric-Space
+      ( induced-metric-space-Pseudometric-Space A)
+      ( B) →
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( type-Metric-Space B)
+  precomp-map-induced-metric-space-Pseudometric-Space =
+    precomp-Set-Quotient
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( set-induced-metric-space-Pseudometric-Space A)
+      ( reflecting-map-quotient-map
+        ( equivalence-relation-sim-Pseudometric-Space A))
+      ( set-Metric-Space B)
+
+  is-equiv-precomp-map-induced-metric-space-Pseudometric-Space :
+    is-equiv precomp-map-induced-metric-space-Pseudometric-Space
+  is-equiv-precomp-map-induced-metric-space-Pseudometric-Space =
+    is-set-quotient-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( set-Metric-Space B)
+
+  equiv-type-function-induced-metric-space-Pseudometric-Space :
+    type-function-Metric-Space
+      ( induced-metric-space-Pseudometric-Space A)
+      ( B) ≃
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( type-Metric-Space B)
+  equiv-type-function-induced-metric-space-Pseudometric-Space =
+    ( precomp-map-induced-metric-space-Pseudometric-Space ,
+      is-equiv-precomp-map-induced-metric-space-Pseudometric-Space)
+```
+
+### Short maps from a pseudometric space to a metric space reflects similarity
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
+  where
+
+  reflects-sim-map-short-function-metric-space-Pseudometric-Space :
+    {x y : type-Pseudometric-Space A} →
+    sim-Pseudometric-Space A x y →
+    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f x ＝
+    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f y
+  reflects-sim-map-short-function-metric-space-Pseudometric-Space {x} {y} x~y =
+    eq-sim-Metric-Space B
+      ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( x))
+      ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( y))
+      ( preserves-sim-map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( x)
+        ( y)
+        ( x~y))
+
+  reflecting-map-short-function-metric-space-Pseudometric-Space :
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( type-Metric-Space B)
+  reflecting-map-short-function-metric-space-Pseudometric-Space =
+    ( ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)) ,
+      ( reflects-sim-map-short-function-metric-space-Pseudometric-Space))
+```
+
+### Induced short function from the induced metric space into a metric space
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
+  where
+
+  map-short-function-induced-metric-space-Pseudometric-space :
+    type-function-Metric-Space
+      ( induced-metric-space-Pseudometric-Space A)
+      ( B)
+  map-short-function-induced-metric-space-Pseudometric-space =
+    inv-precomp-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( set-Metric-Space B)
+      ( reflecting-map-short-function-metric-space-Pseudometric-Space A B f)
+
+  htpy-map-short-function-induced-metric-space-Pseudometric-Space :
+    ( ( map-short-function-induced-metric-space-Pseudometric-space) ∘
+      ( map-induced-metric-space-Pseudometric-Space A)) ~
+    ( map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f)
+  htpy-map-short-function-induced-metric-space-Pseudometric-Space =
+    is-section-inv-precomp-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( set-Metric-Space B)
+      ( reflecting-map-short-function-metric-space-Pseudometric-Space A B f)
+
+  abstract
+    is-short-map-short-function-induced-metric-space-Pseudometric-Space :
+      is-short-function-Metric-Space
+        ( induced-metric-space-Pseudometric-Space A)
+        ( B)
+        ( map-short-function-induced-metric-space-Pseudometric-space)
+    is-short-map-short-function-induced-metric-space-Pseudometric-Space
+      d X Y N⟨X,Y⟩ =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( neighborhood-prop-Metric-Space
+              ( B)
+              ( d)
+              ( map-short-function-induced-metric-space-Pseudometric-space X)
+              ( map-short-function-induced-metric-space-Pseudometric-space Y))
+        in do
+          ( x , x∈X) ←
+            is-inhabited-subtype-set-quotient
+              ( equivalence-relation-sim-Pseudometric-Space A)
+              ( X)
+          ( y , y∈Y) ←
+            is-inhabited-subtype-set-quotient
+              ( equivalence-relation-sim-Pseudometric-Space A)
+              ( Y)
+          let
+            lemma-eq-X :
+              map-induced-metric-space-Pseudometric-Space A x ＝ X
+            lemma-eq-X =
+              eq-set-quotient-equivalence-class-set-quotient
+                ( equivalence-relation-sim-Pseudometric-Space A)
+                ( X)
+                ( x∈X)
+
+            lemma-eq-fX :
+              ( map-short-function-Pseudometric-Space
+                ( A)
+                ( pseudometric-Metric-Space B)
+                ( f)
+                ( x)) ＝
+              ( map-short-function-induced-metric-space-Pseudometric-space X)
+            lemma-eq-fX =
+              ( inv
+                ( htpy-map-short-function-induced-metric-space-Pseudometric-Space
+                  ( x))) ∙
+              ( ap
+                ( map-short-function-induced-metric-space-Pseudometric-space)
+                ( lemma-eq-X))
+
+            lemma-eq-Y :
+              map-induced-metric-space-Pseudometric-Space A y ＝ Y
+            lemma-eq-Y =
+              eq-set-quotient-equivalence-class-set-quotient
+                ( equivalence-relation-sim-Pseudometric-Space A)
+                ( Y)
+                ( y∈Y)
+
+            lemma-eq-fY :
+              ( map-short-function-Pseudometric-Space
+                ( A)
+                ( pseudometric-Metric-Space B)
+                ( f)
+                ( y)) ＝
+              ( map-short-function-induced-metric-space-Pseudometric-space Y)
+            lemma-eq-fY =
+              ( inv
+                ( htpy-map-short-function-induced-metric-space-Pseudometric-Space
+                  ( y))) ∙
+              ( ap
+                ( map-short-function-induced-metric-space-Pseudometric-space)
+                ( lemma-eq-Y))
+
+          binary-tr
+            ( neighborhood-Metric-Space B d)
+            ( lemma-eq-fX)
+            ( lemma-eq-fY)
+            ( is-short-map-short-function-Pseudometric-Space
+              ( A)
+              ( pseudometric-Metric-Space B)
+              ( f)
+              ( d)
+              ( x)
+              ( y)
+              ( N⟨X,Y⟩ (x , x∈X) (y , y∈Y)))
+
+  short-function-induced-metric-space-Pseudometric-Space :
+    short-function-Metric-Space
+      ( induced-metric-space-Pseudometric-Space A)
+      ( B)
+  short-function-induced-metric-space-Pseudometric-Space =
+    ( map-short-function-induced-metric-space-Pseudometric-space ,
+      is-short-map-short-function-induced-metric-space-Pseudometric-Space)
 ```
