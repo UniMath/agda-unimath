@@ -123,8 +123,10 @@ module _
       by q op (map-tuple f v)
     ＝ is-model-set-Algebra σ T C op
       (map-tuple (g ∘ f) v)
-      by ap (is-model-set-Algebra σ T C op)
-      ( preserves-comp-map-tuple (arity-operation-signature σ op) f g v)
+      by
+        ap
+          ( is-model-set-Algebra σ T C op)
+          ( preserves-comp-map-tuple (arity-operation-signature σ op) f g v)
 
   comp-hom-Algebra :
     (g : hom-Algebra σ T B C) (f : hom-Algebra σ T A B) →
@@ -154,7 +156,7 @@ module _
       ( is-set-hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
 
   set-hom-Algebra : Set (l1 ⊔ l3 ⊔ l4)
-  set-hom-Algebra = (hom-Algebra σ T A B) , is-set-hom-Algebra
+  set-hom-Algebra = (hom-Algebra σ T A B , is-set-hom-Algebra)
 
   htpy-hom-Algebra : (f g : hom-Algebra σ T A B) → UU (l3 ⊔ l4)
   htpy-hom-Algebra (f , _) (g , _) = f ~ g
