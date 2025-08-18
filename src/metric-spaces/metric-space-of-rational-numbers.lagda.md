@@ -61,7 +61,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 [rational numbers](elementary-number-theory.rational-numbers.md) induces a
 [rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
 on `ℚ` where `x y : ℚ` are in a `d`-neighborhood when `y ≤ x + d` and
-`x ≤ y + d`, i.e. if the
+`x ≤ y + d`, i.e., if the
 [distance](elementary-number-theory.distance-rational-numbers.md) between `x`
 and `y` is less than or equal to `d`. This is a
 [metric structure](metric-spaces.metric-spaces.md) on `ℚ` that defines the

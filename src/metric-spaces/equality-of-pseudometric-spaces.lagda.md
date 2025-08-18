@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -38,17 +39,15 @@ open import metric-spaces.pseudometric-spaces
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is characterized by
 the following equivalent concepts:
 
-- an [equality](foundation-core.identity-types.md) between their carrier types
-  such that the induced map under [`map-eq`](foundation-core.univalence.md) is
-  an [isometry](metric-spaces.isometries-pseudometric-spaces.md);
+- an equality between their carrier types such that the induced map under
+  [`map-eq`](foundation-core.univalence.md) is an
+  [isometry](metric-spaces.isometries-pseudometric-spaces.md);
 
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
-  such that the induced map under [`map-equiv`](foundation-core.equivalences.md)
-  is an [isometry](metric-spaces.isometries-pseudometric-spaces.md);
+  such that the induced map under `map-equiv` is an isometry;
 
-- a function between their carrier types that is both an
-  [equivalence](foundation-core.equivalences.md) and an
-  [isometry](metric-spaces.isometries-pseudometric-spaces.md).
+- a function between their carrier types that is both an equivalence and an
+  isometry.
 
 ## Definitions
 
@@ -157,7 +156,7 @@ module _
       ( equiv-univalence)
       ( λ (e : type-Pseudometric-Space A ＝ type-Pseudometric-Space B) →
         equiv-eq
-          (ap (is-isometry-Pseudometric-Space A B) (eq-htpy (λ x → refl))))
+          (ap (is-isometry-Pseudometric-Space A B) (eq-htpy refl-htpy)))
 ```
 
 ### Isometric equivalences of pseudometric spaces characterize their equality
@@ -186,8 +185,8 @@ module _
   abstract
     is-torsorial-isometric-equiv-Pseudometric-Space :
       is-torsorial
-        ( λ ( B : Pseudometric-Space l1 l2) →
-            ( isometric-equiv-Pseudometric-Space A B))
+        ( λ (B : Pseudometric-Space l1 l2) →
+          isometric-equiv-Pseudometric-Space A B)
     is-torsorial-isometric-equiv-Pseudometric-Space =
       is-contr-equiv'
         ( Σ (Pseudometric-Space l1 l2) (Id A))
