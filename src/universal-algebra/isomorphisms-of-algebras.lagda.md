@@ -198,11 +198,12 @@ module _
     ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
   pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T A A
-    ( comp-hom-Algebra σ T A B A
-      ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq) f)
-    ( id-hom-Algebra σ T A)
-    ( htpy ∙h is-retraction-map-retraction-map-equiv
-      ( map-hom-Algebra σ T A B f , eq))
+      ( comp-hom-Algebra σ T A B A
+        ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq)
+        ( f))
+      ( id-hom-Algebra σ T A)
+      ( htpy ∙h
+        is-retraction-map-retraction-map-equiv (map-hom-Algebra σ T A B f , eq))
       where
       htpy :
         map-inv-is-equiv eq ∘

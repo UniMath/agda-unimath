@@ -151,7 +151,7 @@ module _
   is-set-hom-Algebra : is-set (hom-Algebra σ T A B)
   is-set-hom-Algebra =
     is-set-type-subtype
-    ( hom-Algebra-Subtype σ T A B)
+    ( preserves-operations-prop-Algebra σ T A B)
     ( is-set-hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
 
   set-hom-Algebra : Set (l1 ⊔ l3 ⊔ l4)
