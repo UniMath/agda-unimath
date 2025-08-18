@@ -277,7 +277,8 @@ module _
   concat-s-inf s =
     map-equiv (equiv-id-pushout s)
 
-  descent-data-zigzag-id-pushout : descent-data-pushout 𝒮 (l1 ⊔ l2 ⊔ l3)
+  descent-data-zigzag-id-pushout :
+    descent-data-pushout 𝒮 (l1 ⊔ l2 ⊔ l3) (l1 ⊔ l2 ⊔ l3)
   pr1 descent-data-zigzag-id-pushout = left-id-pushout
   pr1 (pr2 descent-data-zigzag-id-pushout) = right-id-pushout
   pr2 (pr2 descent-data-zigzag-id-pushout) = equiv-id-pushout
@@ -312,6 +313,7 @@ module _
     (R : descent-data-pushout
       ( span-diagram-flattening-descent-data-pushout
         ( descent-data-zigzag-id-pushout 𝒮 a₀))
+      ( l5)
       ( l5))
     (r₀ : left-family-descent-data-pushout R (a₀ , refl-id-pushout 𝒮 a₀))
     where

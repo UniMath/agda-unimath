@@ -23,7 +23,6 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -60,20 +59,27 @@ module _
 
 ## Properties
 
-### The map from a convergent Cauchy approximation in `M` to its limit is a short map into the saturated metric space of `M`
+### The map from a convergent Cauchy approximation to its limit is short
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space :
-    is-short-function-Metric-Space
+  lemma-short-lim-convergent-cauchy-approximation-Metric-Space :
+    (ε : ℚ⁺) (x y : convergent-cauchy-approximation-Metric-Space A) →
+    neighborhood-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
-      ( saturate-Metric-Space A)
-      ( limit-convergent-cauchy-approximation-Metric-Space A)
-  is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space
-    ε x y Nxy δ =
+      ( ε)
+      ( x)
+      ( y) →
+    (δ : ℚ⁺) →
+    neighborhood-Metric-Space
+      ( A)
+      ( ε +ℚ⁺ δ)
+      ( limit-convergent-cauchy-approximation-Metric-Space A x)
+      ( limit-convergent-cauchy-approximation-Metric-Space A y)
+  lemma-short-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy δ =
     tr
       ( λ d →
         neighborhood-Metric-Space A d
@@ -91,7 +97,7 @@ module _
         ( limit-convergent-cauchy-approximation-Metric-Space A x)
         ( limit-convergent-cauchy-approximation-Metric-Space A y)
     lemma-neighborhood-limit θ η η' =
-      is-triangular-structure-Metric-Space
+      triangular-neighborhood-Metric-Space
         ( A)
         ( limit-convergent-cauchy-approximation-Metric-Space A x)
         ( map-convergent-cauchy-approximation-Metric-Space A y θ)
@@ -99,7 +105,7 @@ module _
         ( θ +ℚ⁺ η +ℚ⁺ ε)
         ( θ +ℚ⁺ η')
         ( is-limit-limit-convergent-cauchy-approximation-Metric-Space A y θ η')
-        ( is-triangular-structure-Metric-Space
+        ( triangular-neighborhood-Metric-Space
           ( A)
           ( limit-convergent-cauchy-approximation-Metric-Space A x)
           ( map-convergent-cauchy-approximation-Metric-Space A x θ)
@@ -107,7 +113,7 @@ module _
           ( θ +ℚ⁺ η)
           ( ε)
           ( Nxy θ)
-          ( is-symmetric-structure-Metric-Space
+          ( symmetric-neighborhood-Metric-Space
             ( A)
             ( θ +ℚ⁺ η)
             ( map-convergent-cauchy-approximation-Metric-Space A x θ)
@@ -158,39 +164,25 @@ module _
       ( ap (add-ℚ⁺' δ₂) (commutative-add-ℚ⁺ δ₁ ε)) ∙
       ( associative-add-ℚ⁺ ε δ₁ δ₂) ∙
       ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ))
-```
 
-### The map from a convergent Cauchy approximation in a saturated metric to its limit is short
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
-  (is-saturated : is-saturated-Metric-Space A)
-  where
-
-  is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
+  is-short-limit-convergent-cauchy-approximation-Metric-Space :
     is-short-function-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
-  is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
-    ε x y Nxy =
-    is-saturated
+  is-short-limit-convergent-cauchy-approximation-Metric-Space ε x y Nxy =
+    saturated-neighborhood-Metric-Space
+      ( A)
       ( ε)
       ( limit-convergent-cauchy-approximation-Metric-Space A x)
       ( limit-convergent-cauchy-approximation-Metric-Space A y)
-      ( is-short-saturated-limit-convergent-cauchy-approximation-Metric-Space
-        ( A)
-        ( ε)
-        ( x)
-        ( y)
-        ( Nxy))
+      ( lemma-short-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy)
 
-  short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space :
+  short-limit-convergent-cauchy-approximation-Metric-Space :
     short-function-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
-  short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space =
+  short-limit-convergent-cauchy-approximation-Metric-Space =
     limit-convergent-cauchy-approximation-Metric-Space A ,
-    is-short-limit-convergent-cauchy-approximation-is-saturated-Metric-Space
+    is-short-limit-convergent-cauchy-approximation-Metric-Space
 ```
