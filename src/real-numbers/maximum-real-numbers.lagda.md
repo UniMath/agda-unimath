@@ -308,8 +308,8 @@ module _
 
   is-short-function-left-max-ℝ :
     is-short-function-Metric-Space
-      ( metric-space-leq-ℝ l2)
-      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
       ( max-ℝ x)
   is-short-function-left-max-ℝ d y z Nyz =
     neighborhood-real-bound-each-leq-ℝ
@@ -317,14 +317,14 @@ module _
       ( max-ℝ x y)
       ( max-ℝ x z)
       ( preserves-lower-neighborhood-leq-left-max-ℝ d x y z
-        ( left-real-bound-neighborhood-leq-ℝ d y z Nyz))
+        ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
       ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
-        ( right-real-bound-neighborhood-leq-ℝ d y z Nyz))
+        ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
 
   short-left-max-ℝ :
     short-function-Metric-Space
-      ( metric-space-leq-ℝ l2)
-      ( metric-space-leq-ℝ (l1 ⊔ l2))
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
   short-left-max-ℝ =
     (max-ℝ x , is-short-function-left-max-ℝ)
 ```
@@ -338,10 +338,10 @@ module _
 
   is-short-function-short-left-max-ℝ :
     is-short-function-Metric-Space
-      ( metric-space-leq-ℝ l1)
+      ( metric-space-ℝ l1)
       ( metric-space-of-short-functions-Metric-Space
-        ( metric-space-leq-ℝ l2)
-        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2)))
       ( short-left-max-ℝ)
   is-short-function-short-left-max-ℝ d x y Nxy z =
     neighborhood-real-bound-each-leq-ℝ
@@ -349,16 +349,16 @@ module _
       ( max-ℝ x z)
       ( max-ℝ y z)
       ( preserves-lower-neighborhood-leq-right-max-ℝ d z x y
-        ( left-real-bound-neighborhood-leq-ℝ d x y Nxy))
+        ( left-leq-real-bound-neighborhood-ℝ d x y Nxy))
       ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
-        ( right-real-bound-neighborhood-leq-ℝ d x y Nxy))
+        ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
 
   short-max-ℝ :
     short-function-Metric-Space
-      ( metric-space-leq-ℝ l1)
+      ( metric-space-ℝ l1)
       ( metric-space-of-short-functions-Metric-Space
-        ( metric-space-leq-ℝ l2)
-        ( metric-space-leq-ℝ (l1 ⊔ l2)))
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2)))
   short-max-ℝ =
     (short-left-max-ℝ , is-short-function-short-left-max-ℝ)
 ```
