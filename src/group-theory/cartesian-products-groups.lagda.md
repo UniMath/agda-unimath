@@ -23,9 +23,11 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two groups `G` and `H` has the product of the
-underlying sets of `G` and `H` as its underlying type, and is equipped with
-pointwise multiplication.
+The
+{{#concept "cartesian product" disambiguation="of groups" Agda=product-Group WDID=Q173740 WD="Cartesian product"}}
+of two [groups](group-theory.groups.md) `G` and `H` consists of the
+[product](foundation.cartesian-product-types.md) `G × H` of the underlying
+[sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
 
