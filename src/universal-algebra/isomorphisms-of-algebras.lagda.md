@@ -72,9 +72,9 @@ module _
     (f : hom-Algebra σ T A B) → is-prop (is-equiv-hom-Algebra f)
   is-prop-is-equiv-hom-Algebra f = is-property-is-equiv (pr1 f)
 
-  is-equiv-hom-Algebra-Prop : (f : hom-Algebra σ T A B) → Prop (l3 ⊔ l4)
-  pr1 (is-equiv-hom-Algebra-Prop f) = is-equiv-hom-Algebra f
-  pr2 (is-equiv-hom-Algebra-Prop f) = is-prop-is-equiv-hom-Algebra f
+  is-equiv-hom-prop-Algebra : (f : hom-Algebra σ T A B) → Prop (l3 ⊔ l4)
+  pr1 (is-equiv-hom-prop-Algebra f) = is-equiv-hom-Algebra f
+  pr2 (is-equiv-hom-prop-Algebra f) = is-prop-is-equiv-hom-Algebra f
 
   equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   equiv-hom-Algebra = Σ (hom-Algebra σ T A B) is-equiv-hom-Algebra
@@ -93,10 +93,10 @@ module _
   (eq : is-equiv (map-hom-Algebra σ T A B f))
   where
 
-  preserves-operations-map-hom-inv-is-equiv-hom-Algebra* :
+  preserves-operations-map-hom-inv-is-equiv-hom-Algebra :
     preserves-operations-Algebra σ T B A
       (map-inv-equiv ((map-hom-Algebra σ T A B f) , eq))
-  preserves-operations-map-hom-inv-is-equiv-hom-Algebra* op v =
+  preserves-operations-map-hom-inv-is-equiv-hom-Algebra op v =
     map-inv-is-equiv
     ( is-emb-is-equiv eq
       ( map-inv-is-equiv eq (is-model-set-Algebra σ T B op v))
@@ -119,11 +119,11 @@ module _
             inv (is-section-map-section-is-equiv eq x)
           pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
 
-  hom-inv-is-equiv-hom-Algebra* : hom-Algebra σ T B A
-  pr1 hom-inv-is-equiv-hom-Algebra* =
+  hom-inv-is-equiv-hom-Algebra : hom-Algebra σ T B A
+  pr1 hom-inv-is-equiv-hom-Algebra =
     map-inv-is-equiv eq
-  pr2 hom-inv-is-equiv-hom-Algebra* =
-    preserves-operations-map-hom-inv-is-equiv-hom-Algebra*
+  pr2 hom-inv-is-equiv-hom-Algebra =
+    preserves-operations-map-hom-inv-is-equiv-hom-Algebra
 ```
 
 ## Proof
@@ -139,10 +139,10 @@ module _
     (B : Algebra σ T l3) → equiv-hom-Algebra σ T A B ≃
     Σ (hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
       (λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
-  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
-  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = (f , eq , p)
+  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
   pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
-  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
   pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```
 
@@ -189,17 +189,17 @@ module _
     is-equiv-hom-Algebra σ T A B f →
     is-iso-Algebra f
   pr1 (is-iso-is-equiv-hom-Algebra f eq) =
-    hom-inv-is-equiv-hom-Algebra* σ T A B f eq
+    hom-inv-is-equiv-hom-Algebra σ T A B f eq
   pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T B B
     ( comp-hom-Algebra σ T B A B f
-      ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq))
+      ( hom-inv-is-equiv-hom-Algebra σ T A B f eq))
     ( id-hom-Algebra σ T B)
     ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
   pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
     eq-htpy-hom-Algebra σ T A A
       ( comp-hom-Algebra σ T A B A
-        ( hom-inv-is-equiv-hom-Algebra* σ T A B f eq)
+        ( hom-inv-is-equiv-hom-Algebra σ T A B f eq)
         ( f))
       ( id-hom-Algebra σ T A)
       ( htpy ∙h

@@ -94,7 +94,7 @@ module _
     ((X , _) , assign-X) (Y , assign-Y) f =
       ( op : operation-signature σ)
       ( v : tuple X (arity-operation-signature σ op)) →
-        f (assign-X op v) ＝ assign-Y op (map-tuple f v)
+      f (assign-X op v) ＝ assign-Y op (map-tuple f v)
 
   is-prop-preserves-operations-Model-Signature :
     {l2 : Level} (X Y : Model-Signature σ l2)
@@ -102,8 +102,13 @@ module _
     is-prop (preserves-operations-Model-Signature X Y f)
   is-prop-preserves-operations-Model-Signature
     ((X , set-X) , assign-X) ((Y , set-Y) , assign-Y) f =
-    is-prop-Π (λ op →
-      is-prop-Π (λ v → set-Y (f (assign-X op v)) (assign-Y op (map-tuple f v))))
+    is-prop-Π
+      ( λ op →
+        is-prop-Π
+          ( λ v →
+            set-Y
+              ( f (assign-X op v))
+              ( assign-Y op (map-tuple f v))))
 
   Eq-Model-Signature : {l2 : Level} (X Y : Model-Signature σ l2) → UU (l1 ⊔ l2)
   Eq-Model-Signature (X , X-assign) (Y , Y-assign) =
@@ -112,9 +117,10 @@ module _
         preserves-operations-Model-Signature (X , X-assign) (Y , Y-assign) f)
 
   equiv-Eq-Model-Signature' :
-    {l2 : Level} (X Y : Model-Signature σ l2) → Eq-Model-Signature X Y ≃
-    Σ (hom-Set (pr1 X) (pr1 Y))
-      (λ f → is-equiv f × preserves-operations-Model-Signature X Y f)
+    {l2 : Level} (X Y : Model-Signature σ l2) →
+    Eq-Model-Signature X Y ≃
+    Σ ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
+      ( λ f → is-equiv f × preserves-operations-Model-Signature X Y f)
   pr1 (equiv-Eq-Model-Signature' X Y) ((f , eq) , p) = (f , eq , p)
   pr1 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = ((f , eq) , p)
   pr2 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) _ = refl
@@ -126,8 +132,8 @@ module _
     preserves-operations-Model-Signature X X id
   preserves-operations-id-Model-Signature ((X , _) , assign-X) op v =
     ap
-    ( assign-X op)
-    ( preserves-id-map-tuple (arity-operation-signature σ op) v)
+      ( assign-X op)
+      ( preserves-id-map-tuple (arity-operation-signature σ op) v)
 
   refl-Eq-Model-Signature :
     {l2 : Level} (X : Model-Signature σ l2) → Eq-Model-Signature X X

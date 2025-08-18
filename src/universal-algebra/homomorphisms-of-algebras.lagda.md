@@ -60,10 +60,9 @@ module _
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations-Algebra f =
     ( op : operation-signature σ) →
-    ( v : tuple (type-Algebra σ T A)
-      ( arity-operation-signature σ op)) →
-        ( f (is-model-set-Algebra σ T A op v) ＝
-          ( is-model-set-Algebra σ T B op (map-tuple f v)))
+    ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
+    f (is-model-set-Algebra σ T A op v) ＝
+    is-model-set-Algebra σ T B op (map-tuple f v)
 
   is-prop-preserves-operations-Algebra :
     (f : type-Algebra σ T A → type-Algebra σ T B) →
@@ -114,7 +113,7 @@ module _
   preserves-operations-map-comp-hom-Algebra :
     (g : hom-Algebra σ T B C) (f : hom-Algebra σ T A B) →
     preserves-operations-Algebra σ T A C
-      (map-hom-Algebra σ T B C g ∘ map-hom-Algebra σ T A B f)
+      ( map-hom-Algebra σ T B C g ∘ map-hom-Algebra σ T A B f)
   preserves-operations-map-comp-hom-Algebra (g , q) (f , p) op v =
     equational-reasoning
     (g ∘ f) (is-model-set-Algebra σ T A op v)
@@ -151,8 +150,8 @@ module _
   is-set-hom-Algebra : is-set (hom-Algebra σ T A B)
   is-set-hom-Algebra =
     is-set-type-subtype
-    ( preserves-operations-prop-Algebra σ T A B)
-    ( is-set-hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
+      ( preserves-operations-prop-Algebra σ T A B)
+      ( is-set-hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
 
   set-hom-Algebra : Set (l1 ⊔ l3 ⊔ l4)
   set-hom-Algebra = (hom-Algebra σ T A B) , is-set-hom-Algebra
