@@ -111,11 +111,9 @@ open import foundation.cantors-theorem using
 **Author:** [malarbol](http://www.github.com/malarbol)
 
 ```agda
-open import
-  elementary-number-theory.triangular-numbers using
-    ( compute-triangular-ℕ)
-open import
-  ring-theory.arithmetic-series-semirings using
+open import elementary-number-theory.triangular-numbers using
+  ( compute-triangular-ℕ)
+open import ring-theory.arithmetic-series-semirings using
   ( compute-sum-add-mul-nat-Semiring)
 ```
 
