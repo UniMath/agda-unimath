@@ -10,12 +10,17 @@ module metric-spaces.metric-space-of-cauchy-approximations-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.involutions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
+open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.saturated-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -52,21 +57,29 @@ module _
 
 ## Properties
 
-### The metric space of Cauchy approximations in a saturated metric space is saturated
+### The map `(x : A) ↦ const x` is an isometry between `A` and the metric space of cauchy approximations in `A`
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2) (H : is-saturated-Metric-Space A)
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space :
-    is-saturated-Metric-Space
-      (metric-space-of-cauchy-approximations-Metric-Space A)
-  is-saturated-metric-space-of-cauchy-approximations-is-saturated-Metric-Space =
-    is-saturated-subspace-is-saturated-Metric-Space
-      ( Π-Metric-Space ℚ⁺ (λ _ → A))
-      ( is-saturated-Π-is-saturated-Metric-Space ℚ⁺ (λ _ → A) (λ _ → H))
-      ( is-cauchy-approximation-prop-Metric-Space A)
+  is-isometry-const-cauchy-approximation-Metric-Space :
+    is-isometry-Metric-Space
+      ( A)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( const-cauchy-approximation-Metric-Space A)
+  is-isometry-const-cauchy-approximation-Metric-Space ε x y =
+    ( λ Nxy η → Nxy) ,
+    ( λ Nxy → Nxy one-ℚ⁺)
+
+  isometry-const-cauchy-approximation-Metric-Space :
+    isometry-Metric-Space
+      ( A)
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+  isometry-const-cauchy-approximation-Metric-Space =
+    ( const-cauchy-approximation-Metric-Space A ,
+      is-isometry-const-cauchy-approximation-Metric-Space)
 ```
 
 ### The action of short maps on Cauchy approximations is short
@@ -98,7 +111,7 @@ module _
     is-short-map-short-function-cauchy-approximation-Metric-Space
 ```
 
-### The partial application of a Cauchy approximation of Cauchy approximations is a Cauchy approximation
+### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation
 
 ```agda
 module _
@@ -107,23 +120,147 @@ module _
     ( metric-space-of-cauchy-approximations-Metric-Space A))
   where
 
-  swap-cauchy-approximation-cauchy-approximations-Metric-Space :
-    ℚ⁺ → cauchy-approximation-Metric-Space A
-  swap-cauchy-approximation-cauchy-approximations-Metric-Space
-    η =
-    ( λ ε →
-      map-cauchy-approximation-Metric-Space
-        ( A)
-        ( map-cauchy-approximation-Metric-Space
-          ( metric-space-of-cauchy-approximations-Metric-Space A)
-          ( U)
-          ( ε))
-          ( η)) ,
-    ( λ ε δ →
-      is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+  map-swap-map-cauchy-approximation-Metric-Space :
+    ℚ⁺ → ℚ⁺ → type-Metric-Space A
+  map-swap-map-cauchy-approximation-Metric-Space η ε =
+    map-cauchy-approximation-Metric-Space
+      ( A)
+      ( map-cauchy-approximation-Metric-Space
         ( metric-space-of-cauchy-approximations-Metric-Space A)
         ( U)
-        ( ε)
-        ( δ)
+        ( ε))
+      ( η)
+
+  is-cauchy-map-swap-map-cauchy-approximation-Metric-Space :
+    (η : ℚ⁺) →
+    is-cauchy-approximation-Metric-Space
+      ( A)
+      ( map-swap-map-cauchy-approximation-Metric-Space η)
+  is-cauchy-map-swap-map-cauchy-approximation-Metric-Space η ε δ =
+    is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( U)
+      ( ε)
+      ( δ)
+      ( η)
+
+  map-swap-cauchy-approximation-Metric-Space :
+    ℚ⁺ → cauchy-approximation-Metric-Space A
+  map-swap-cauchy-approximation-Metric-Space η =
+    ( map-swap-map-cauchy-approximation-Metric-Space η ,
+      is-cauchy-map-swap-map-cauchy-approximation-Metric-Space η)
+
+  is-cauchy-map-swap-cauchy-approximation-Metric-Space :
+    is-cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( map-swap-cauchy-approximation-Metric-Space)
+  is-cauchy-map-swap-cauchy-approximation-Metric-Space ε δ η =
+    is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+      ( A)
+      ( map-cauchy-approximation-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A)
+        ( U)
         ( η))
+      ( ε)
+      ( δ)
+
+  swap-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+  swap-cauchy-approximation-Metric-Space =
+    ( map-swap-cauchy-approximation-Metric-Space ,
+      is-cauchy-map-swap-cauchy-approximation-Metric-Space)
+```
+
+### Swapping the arguments of a Cauchy approximation of Cauchy approximations is an involution
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-involution-swap-cauchy-approximation-Metric-Space :
+    is-involution
+      ( swap-cauchy-approximation-Metric-Space A)
+  is-involution-swap-cauchy-approximation-Metric-Space U =
+    eq-htpy-cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( λ ε →
+        eq-htpy-cauchy-approximation-Metric-Space
+          ( A)
+          ( λ δ → refl))
+
+  is-equiv-swap-cauchy-approximation-Metric-Space :
+    is-equiv (swap-cauchy-approximation-Metric-Space A)
+  is-equiv-swap-cauchy-approximation-Metric-Space =
+    is-equiv-is-involution
+      is-involution-swap-cauchy-approximation-Metric-Space
+
+  equiv-swap-cauchy-approximation-Metric-Space :
+    ( cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)) ≃
+    ( cauchy-approximation-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A))
+  equiv-swap-cauchy-approximation-Metric-Space =
+    ( swap-cauchy-approximation-Metric-Space A ,
+      is-equiv-swap-cauchy-approximation-Metric-Space)
+```
+
+### Swapping the arguments of a Cauchy approximation of Cauchy approximations is a short map
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-short-swap-cauchy-approximation-Metric-Space :
+    is-short-function-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+      ( swap-cauchy-approximation-Metric-Space A)
+  is-short-swap-cauchy-approximation-Metric-Space ε U V Nuv δ η =
+    Nuv η δ
+```
+
+### Swapping the arguments of a Cauchy approximation of Cauchy approximations is an isometry
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  is-isometry-swap-cauchy-approximation-Metric-Space :
+    is-isometry-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+      ( swap-cauchy-approximation-Metric-Space A)
+  is-isometry-swap-cauchy-approximation-Metric-Space ε U V =
+    ( is-short-swap-cauchy-approximation-Metric-Space A ε U V ,
+      is-short-swap-cauchy-approximation-Metric-Space
+        ( A)
+        ( ε)
+        ( swap-cauchy-approximation-Metric-Space A U)
+        ( swap-cauchy-approximation-Metric-Space A V))
+```
+
+### Swapping the arguments of a Cauchy approximation of Cauchy approximations is an isometric equivalence
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  isometric-equiv-swap-cauchy-approximation-Metric-Space :
+    isometric-equiv-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+      ( metric-space-of-cauchy-approximations-Metric-Space
+        ( metric-space-of-cauchy-approximations-Metric-Space A))
+  isometric-equiv-swap-cauchy-approximation-Metric-Space =
+    ( equiv-swap-cauchy-approximation-Metric-Space A ,
+      is-isometry-swap-cauchy-approximation-Metric-Space A)
 ```
