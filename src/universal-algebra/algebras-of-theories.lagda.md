@@ -43,9 +43,7 @@ module _
   { l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
   where
 
-  is-algebra :
-    { l3 : Level} →
-    ( X : Model-Signature σ l3) → UU (l2 ⊔ l3)
+  is-algebra : {l3 : Level} → Model-Signature σ l3 → UU (l2 ⊔ l3)
   is-algebra M =
     ( e : index-Theory σ T) →
     ( assign : assignment σ (type-Model-Signature σ M)) →
@@ -63,35 +61,35 @@ module _
   model-Algebra :
     { l3 : Level} →
     Algebra l3 → Model-Signature σ l3
-  model-Algebra Alg = pr1 Alg
+  model-Algebra A = pr1 A
 
   set-Algebra :
     { l3 : Level} →
     Algebra l3 → Set l3
-  set-Algebra Alg = pr1 (pr1 Alg)
+  set-Algebra A = pr1 (pr1 A)
 
   is-model-set-Algebra :
     { l3 : Level} →
-    ( Alg : Algebra l3) →
-    is-model-signature σ (set-Algebra Alg)
-  is-model-set-Algebra Alg = pr2 (pr1 Alg)
+    ( A : Algebra l3) →
+    is-model-signature σ (set-Algebra A)
+  is-model-set-Algebra A = pr2 (pr1 A)
 
   type-Algebra :
     { l3 : Level} →
     Algebra l3 → UU l3
-  type-Algebra Alg =
-    pr1 (pr1 (pr1 Alg))
+  type-Algebra A =
+    pr1 (pr1 (pr1 A))
 
   is-set-type-Algebra :
     { l3 : Level} →
-    (Alg : Algebra l3) → is-set (type-Algebra Alg)
-  is-set-type-Algebra Alg = pr2 (pr1 (pr1 Alg))
+    (A : Algebra l3) → is-set (type-Algebra A)
+  is-set-type-Algebra A = pr2 (pr1 (pr1 A))
 
   is-algebra-Algebra :
     { l3 : Level} →
-    ( Alg : Algebra l3) →
-    is-algebra (model-Algebra Alg)
-  is-algebra-Algebra Alg = pr2 Alg
+    ( A : Algebra l3) →
+    is-algebra (model-Algebra A)
+  is-algebra-Algebra A = pr2 A
 ```
 
 ## Properties
