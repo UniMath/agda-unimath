@@ -1,4 +1,4 @@
-# Decomposition of metric spaces as indexed sums of metric spaces with elements at bounded distance
+# The bounded distance decomposition of metric spaces
 
 ```agda
 module metric-spaces.decomposition-metric-spaces-elements-at-bounded-distance-metric-spaces where
