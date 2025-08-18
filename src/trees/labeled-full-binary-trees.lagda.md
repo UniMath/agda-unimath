@@ -154,7 +154,8 @@ module _
     pr1 (pr1 (is-torsorial-htpy-labeled-full-binary-tree T f)) = f
     pr2 (pr1 (is-torsorial-htpy-labeled-full-binary-tree T f)) =
       refl-htpy-labeled-full-binary-tree (T , f)
-    pr2 (is-torsorial-htpy-labeled-full-binary-tree T f) (g , p) = {!   !}
+    pr2 (is-torsorial-htpy-labeled-full-binary-tree leaf-full-binary-tree f) (g , p) = ?
+    pr2 (is-torsorial-htpy-labeled-full-binary-tree (join-full-binary-tree T T₁) f) (g , p) = {!   !}
 
   is-equiv-htpy-eq-labeled-full-binary-tree :
     (T : full-binary-tree) (f g : labeling-full-binary-tree X T) →
