@@ -76,7 +76,7 @@ module _
       ( equivalence-relation-bounded-dist-Metric-Space A)
 ```
 
-### The metric subspaces of elements at bounded distance in a metric space
+### The family of metric subspaces of elements at bounded distance
 
 ```agda
 module _
