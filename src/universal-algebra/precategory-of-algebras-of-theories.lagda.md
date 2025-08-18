@@ -26,8 +26,8 @@ open import universal-algebra.signatures
 
 ## Idea
 
-For any [signature](universal-algebra.signatures.md) `S` and
-`S`-[theory](universal-algebra.algebraic-theories.md) `T`, there is a
+For any [signature](universal-algebra.signatures.md) `σ` and
+`σ`-[theory](universal-algebra.algebraic-theories.md) `T`, there is a
 [large precategory](category-theory.large-precategories.md) of
 `T`-[algebras](universal-algebra.algebras-of-theories.md) and `T`-algebra
 [homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
@@ -36,18 +36,18 @@ For any [signature](universal-algebra.signatures.md) `S` and
 
 ```agda
 module _
-  {l1 l2 : Level} (S : signature l1) (T : Theory S l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
   where
 
   Algebra-Large-Precategory :
     Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 l4 → l1 ⊔ l3 ⊔ l4)
   Algebra-Large-Precategory = make-Large-Precategory
-    ( Algebra S T)
-    ( set-hom-Algebra S T)
-    ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra S T X Y Z)
-    ( λ {l} {X} → id-hom-Algebra S T X)
+    ( Algebra σ T)
+    ( set-hom-Algebra σ T)
+    ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra σ T X Y Z)
+    ( λ {l} {X} → id-hom-Algebra σ T X)
     ( λ {l3} {l4} {l5} {l6} {X} {Y} {Z} {W} →
-      associative-comp-hom-Algebra S T X Y Z W)
-    ( λ {l3} {l4} {X} {Y} → left-unit-law-comp-hom-Algebra S T X Y)
-    ( λ {l3} {l4} {X} {Y} → right-unit-law-comp-hom-Algebra S T X Y)
+      associative-comp-hom-Algebra σ T X Y Z W)
+    ( λ {l3} {l4} {X} {Y} → left-unit-law-comp-hom-Algebra σ T X Y)
+    ( λ {l3} {l4} {X} {Y} → right-unit-law-comp-hom-Algebra σ T X Y)
 ```
