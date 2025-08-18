@@ -72,7 +72,7 @@ module _
     is-prop-Π
       ( λ x →
         is-prop-Π
-          ( λ y → is-set-Algebra σ T B
+          ( λ y → is-set-type-Algebra σ T B
             ( f (is-model-set-Algebra σ T A x y))
             ( is-model-set-Algebra σ T B x (map-tuple f y))))
 
@@ -304,9 +304,9 @@ module _
 
 ```agda
 module _
-  { l1 : Level} ( σ : signature l1)
-  { l2 : Level} ( T : Theory σ l2)
-  { l3 l4 : Level}
+  { l1 l2 l3 l4 : Level}
+  ( σ : signature l1)
+  ( T : Theory σ l2)
   ( A : Algebra σ T l3)
   ( B : Algebra σ T l4)
   where
@@ -324,27 +324,4 @@ module _
 
   equiv-hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   equiv-hom-Algebra = Σ (hom-Algebra σ T A B) is-equiv-hom-Algebra
-```
-
-### A useful factorization for characterizing isomorphisms of algebras
-
-Although we do not prove it here for cyclic module dependency reasons, this
-gives another characterization of the identity types of algebras.
-
-```agda
-module _
-  { l1 : Level} ( σ : signature l1)
-  { l2 : Level} ( T : Theory σ l2)
-  { l3 : Level} ( A : Algebra σ T l3)
-  where
-
-  equiv-equiv-hom-Algebra' :
-    (B : Algebra σ T l3) → equiv-hom-Algebra σ T A B ≃
-    Σ (hom-Set (pr1 (pr1 A)) (pr1 (pr1 B)))
-      (λ f → (is-equiv f) × (preserves-operations-Algebra σ T A B f))
-  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
-  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
-  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
-  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
-  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```

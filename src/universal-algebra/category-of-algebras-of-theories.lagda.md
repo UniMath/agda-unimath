@@ -44,17 +44,17 @@ is a [category](category-theory.large-categories.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (S : signature l1) (T : Theory S l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Theory S l2)
   where
 
   is-large-category-Algebra-Large-Precategory :
-    is-large-category-Large-Precategory (Algebra-Large-Precategory S T)
-  is-large-category-Algebra-Large-Precategory = is-equiv-iso-eq-Algebra S T
+    is-large-category-Large-Precategory (Algebra-Large-Precategory σ T)
+  is-large-category-Algebra-Large-Precategory = is-equiv-iso-eq-Algebra σ T
 
   Algebra-Large-Category :
     Large-Category (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 → _⊔_ (l1 ⊔ l3))
   large-precategory-Large-Category Algebra-Large-Category =
-    Algebra-Large-Precategory S T
+    Algebra-Large-Precategory σ T
   is-large-category-Large-Category Algebra-Large-Category =
     is-large-category-Algebra-Large-Precategory
 ```

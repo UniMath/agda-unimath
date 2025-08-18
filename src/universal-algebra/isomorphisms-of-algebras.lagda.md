@@ -21,6 +21,7 @@ open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -46,93 +47,124 @@ We characterize
 [isomorphisms](category-theory.isomorphisms-in-large-precategories.md) of
 [algebras of theories](universal-algebra.precategory-of-algebras-of-theories.md).
 
+## Proof
+
+### A useful factorization for characterizing isomorphisms of algebras
+
 ```agda
 module _
-  { l1 : Level} ( S : signature l1)
-  { l2 : Level} ( T : Theory S l2)
-  { l3 : Level} ( A B : Algebra S T l3)
+  { l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
   where
 
-  is-iso-Algebra : (f : hom-Algebra S T A B) → UU (l1 ⊔ l3)
+  equiv-equiv-hom-Algebra' :
+    (B : Algebra σ T l3) → equiv-hom-Algebra σ T A B ≃
+    Σ (hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
+      (λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
+  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
+  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
+  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
+```
+
+### Characterizing isomorphisms of algebras
+
+```agda
+module _
+  { l1 l2 l3 : Level} ( σ : signature l1)
+  ( T : Theory σ l2)
+  ( A B : Algebra σ T l3)
+  where
+
+  is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3)
   is-iso-Algebra f =
-    is-iso-Large-Precategory (Algebra-Large-Precategory S T) {X = A} {Y = B} f
+    is-iso-Large-Precategory (Algebra-Large-Precategory σ T) {X = A} {Y = B} f
 
   iso-Algebra : UU (l1 ⊔ l3)
-  iso-Algebra = iso-Large-Precategory (Algebra-Large-Precategory S T) A B
+  iso-Algebra = iso-Large-Precategory (Algebra-Large-Precategory σ T) A B
 
   is-prop-is-iso-Algebra :
-    (f : hom-Algebra S T A B) → is-prop (is-iso-Algebra f)
+    (f : hom-Algebra σ T A B) → is-prop (is-iso-Algebra f)
   is-prop-is-iso-Algebra =
-    is-prop-is-iso-Large-Precategory (Algebra-Large-Precategory S T)
+    is-prop-is-iso-Large-Precategory (Algebra-Large-Precategory σ T)
 
   is-iso-is-equiv-Algebra :
-    (f : hom-Algebra S T A B) →
+    (f : hom-Algebra σ T A B) →
     is-iso-Algebra f →
-    is-equiv-hom-Algebra S T A B f
-  pr1 (pr1 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra S T B A g
+    is-equiv-hom-Algebra σ T A B f
+  pr1 (pr1 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra σ T B A g
   pr2 (pr1 (is-iso-is-equiv-Algebra f (g , (p , q)))) =
-    htpy-eq-hom-Algebra S T B B
-    ( comp-hom-Algebra S T B A B f g)
-    ( id-hom-Algebra S T B) p
-  pr1 (pr2 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra S T B A g
+    htpy-eq-hom-Algebra σ T B B
+    ( comp-hom-Algebra σ T B A B f g)
+    ( id-hom-Algebra σ T B) p
+  pr1 (pr2 (is-iso-is-equiv-Algebra f (g , p))) = map-hom-Algebra σ T B A g
   pr2 (pr2 (is-iso-is-equiv-Algebra f (g , (p , q)))) =
-    htpy-eq-hom-Algebra S T A A
-    ( comp-hom-Algebra S T A B A g f)
-    ( id-hom-Algebra S T A) q
+    htpy-eq-hom-Algebra σ T A A
+    ( comp-hom-Algebra σ T A B A g f)
+    ( id-hom-Algebra σ T A) q
 
   is-equiv-is-iso-Algebra :
-    (f : hom-Algebra S T A B) →
-    is-equiv-hom-Algebra S T A B f →
+    (f : hom-Algebra σ T A B) →
+    is-equiv-hom-Algebra σ T A B f →
     is-iso-Algebra f
-  pr1 (is-equiv-is-iso-Algebra f eq) = inv-equiv-hom-Algebra S T A B f eq
+  pr1 (is-equiv-is-iso-Algebra f eq) = inv-equiv-hom-Algebra σ T A B f eq
   pr1 (pr2 (is-equiv-is-iso-Algebra f eq)) =
-    eq-htpy-hom-Algebra S T B B
-    ( comp-hom-Algebra S T B A B f
-      ( inv-equiv-hom-Algebra S T A B f eq))
-    ( id-hom-Algebra S T B) (pr2 (pr1 eq))
+    eq-htpy-hom-Algebra σ T B B
+    ( comp-hom-Algebra σ T B A B f
+      ( inv-equiv-hom-Algebra σ T A B f eq))
+    ( id-hom-Algebra σ T B)
+    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
   pr2 (pr2 (is-equiv-is-iso-Algebra f eq)) =
-    eq-htpy-hom-Algebra S T A A
-    ( comp-hom-Algebra S T A B A
-      ( inv-equiv-hom-Algebra S T A B f eq) f)
-    ( id-hom-Algebra S T A) (htpy ∙h pr2 (pr2 eq))
+    eq-htpy-hom-Algebra σ T A A
+    ( comp-hom-Algebra σ T A B A
+      ( inv-equiv-hom-Algebra σ T A B f eq) f)
+    ( id-hom-Algebra σ T A)
+    ( htpy ∙h is-retraction-map-retraction-map-equiv
+      ( map-hom-Algebra σ T A B f , eq))
       where
-      htpy : map-inv-is-equiv eq ∘ pr1 f ~ pr1 (pr2 eq) ∘ pr1 f
-      htpy x = htpy-map-inv-equiv-retraction (pr1 f , eq) (pr2 eq) (pr1 f x)
+      htpy :
+        map-inv-is-equiv eq ∘
+          map-hom-Algebra σ T A B f ~
+        map-retraction-map-equiv ((map-hom-Algebra σ T A B f) , eq) ∘
+          map-equiv ((map-hom-Algebra σ T A B f) , eq)
+      htpy x =
+        htpy-map-inv-equiv-retraction
+        ( map-hom-Algebra σ T A B f , eq)
+        ( retraction-is-equiv eq)
+        ( map-hom-Algebra σ T A B f x)
 
-  equiv-iso-Eq-Algebra : Eq-Algebra S T A B ≃ iso-Algebra
+  equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
     equiv-type-subtype
-    ( is-prop-is-equiv-hom-Algebra S T A B)
+    ( is-prop-is-equiv-hom-Algebra σ T A B)
     ( is-prop-is-iso-Algebra)
     ( is-equiv-is-iso-Algebra)
     ( is-iso-is-equiv-Algebra) ∘e
-    ( inv-equiv (equiv-equiv-hom-Algebra' S T A B)) ∘e
-    ( equiv-Eq-Model-Signature' S (pr1 A) (pr1 B))
+    ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
+    ( equiv-Eq-Model-Signature' σ (model-Algebra σ T A) (model-Algebra σ T B))
 
-  iso-Eq-Algebra : Eq-Algebra S T A B → iso-Algebra
+  iso-Eq-Algebra : Eq-Algebra σ T A B → iso-Algebra
   iso-Eq-Algebra = map-equiv equiv-iso-Eq-Algebra
 
   is-equiv-iso-Eq-Algebra : is-equiv iso-Eq-Algebra
   is-equiv-iso-Eq-Algebra = is-equiv-map-equiv equiv-iso-Eq-Algebra
 
 module _
-  { l1 : Level} ( S : signature l1)
-  { l2 : Level} ( T : Theory S l2)
-  { l3 : Level} ( A : Algebra S T l3)
+  { l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
   where
 
-  is-torsorial-iso-Algebra : is-torsorial (iso-Algebra S T A)
+  is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)
   is-torsorial-iso-Algebra =
     is-contr-equiv'
-    ( Σ (Algebra S T l3) (Eq-Algebra S T A))
-    ( equiv-tot (equiv-iso-Eq-Algebra S T A))
-    ( is-torsorial-Eq-Algebra S T A)
+    ( Σ (Algebra σ T l3) (Eq-Algebra σ T A))
+    ( equiv-tot (equiv-iso-Eq-Algebra σ T A))
+    ( is-torsorial-Eq-Algebra σ T A)
 
   is-equiv-iso-eq-Algebra :
-    (B : Algebra S T l3) →
-    is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A B)
+    (B : Algebra σ T l3) →
+    is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A B)
   is-equiv-iso-eq-Algebra =
     fundamental-theorem-id
     ( is-torsorial-iso-Algebra)
-    ( iso-eq-Large-Precategory (Algebra-Large-Precategory S T) A)
+    ( iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A)
 ```
