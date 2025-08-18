@@ -76,9 +76,9 @@ module _
     arrow▵' A
   arrow-hom▵ = pr1
 
-  hom▵-arrow▵ :
+  hom-arrow▵ :
     (α : arrow▵' A) → hom▵' (α 0▵) (α 1▵)
-  hom▵-arrow▵ α = (α , refl , refl)
+  hom-arrow▵ α = (α , refl , refl)
 ```
 
 ### Directed edges
@@ -131,7 +131,7 @@ module _
 
 ```agda
 id-hom▵ : {l : Level} {A : UU l} (x : A) → x →▵ x
-id-hom▵ = hom▵-arrow▵ ∘ id-arrow▵
+id-hom▵ = hom-arrow▵ ∘ id-arrow▵
 ```
 
 ### The representing edge of the directed interval

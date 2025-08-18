@@ -4,12 +4,12 @@
 open import foundation.booleans
 open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
-import simplicial-type-theory.Discrete-Type▵s
+import simplicial-type-theory.simplicially-discrete-types
 
 module
   simplicial-type-theory.discreteness-booleans
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
-  (let open simplicial-type-theory.Discrete-Type▵s I)
+  (let open simplicial-type-theory.simplicially-discrete-types I)
   (is-discrete▵-bool : is-discrete▵ bool)
   where
 ```
@@ -65,9 +65,10 @@ open import simplicial-type-theory.directed-interval-type I
 ## Idea
 
 If we assume that the [booleans](foundation.booleans.md) are
-[simplicially discrete](simplicial-type-theory.Discrete-Type▵s.md) and hence
-that all its [directed edges](simplicial-type-theory.directed-edges.md) are
-constant, we refute the models of the
+[simplicially discrete](simplicial-type-theory.simplicially-discrete-types.md)
+and hence that all its
+[directed edges](simplicial-type-theory.directed-edges.md) are constant, we
+refute the models of the
 [directed interval](simplicial-type-theory.directed-interval.md) in the
 booleans, as this gives a distinguishing property between `Δ¹` and `bool`. As a
 corollary we have that the universe of simplicially discrete types is closed

@@ -39,7 +39,6 @@ open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
 
-open import simplicial-type-theory.Discrete-Type▵s I
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
@@ -47,6 +46,7 @@ open import simplicial-type-theory.directed-edges-cartesian-product-types I
 open import simplicial-type-theory.directed-edges-dependent-pair-types I
 open import simplicial-type-theory.fully-faithful-maps I
 open import simplicial-type-theory.natural-transformations I
+open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.whiskering-directed-edges I
 ```
 

@@ -49,6 +49,9 @@ open import simplicial-type-theory.standard-simplices I
 
 </details>
 
+> This page is present for archiving purposes. It is out of date with the
+> library and is not being type checked.
+
 ## Idea
 
 Given a pair of consecutive
@@ -111,8 +114,8 @@ module _
   composition-horn : (Λ²₁ → A) → UU l
   composition-horn = dependent-composition-horn (λ _ → A)
 
-  composition-arr : (f g : arrow▵ A) → f 1▵ ＝ g 0▵ → UU l
-  composition-arr f g p = composition-horn (rec-arr-Λ²₁ f g p)
+  composition-arrow : (f g : arrow▵ A) → f 1▵ ＝ g 0▵ → UU l
+  composition-arrow f g p = composition-horn (rec-arrow-Λ²₁ f g p)
 
   composition : {x y z : A} → hom x y → hom y z → UU l
   composition f g = composition-horn (rec-hom-Λ²₁ f g)
@@ -129,9 +132,9 @@ module _
     {fg : Λ²₁ → A} → composition-horn fg → Δ 2 → A
   witness-composition-horn = pr1
 
-  witness-composition-arr :
-    {f g : arr A} {p : f 1▵ ＝ g 0▵} → composition-arr f g p → Δ 2 → A
-  witness-composition-arr = pr1
+  witness-composition-arrow :
+    {f g : arrow A} {p : f 1▵ ＝ g 0▵} → composition-arrow f g p → Δ 2 → A
+  witness-composition-arrow = pr1
 
   witness-composition :
     {x y z : A} (f : hom x y) (g : hom y z) → composition f g → Δ 2 → A
@@ -150,10 +153,10 @@ module _
     fg ~ witness-composition-horn c ∘ inclusion-Δ²-Λ²₁
   htpy-composition-horn = pr2
 
-  htpy-composition-arr :
-    {f g : arr A} {p : f 1▵ ＝ g 0▵} (c : composition-arr f g p) →
-    rec-arr-Λ²₁ f g p ~ witness-composition-arr c ∘ inclusion-Δ²-Λ²₁
-  htpy-composition-arr = pr2
+  htpy-composition-arrow :
+    {f g : arrow A} {p : f 1▵ ＝ g 0▵} (c : composition-arrow f g p) →
+    rec-arrow-Λ²₁ f g p ~ witness-composition-arrow c ∘ inclusion-Δ²-Λ²₁
+  htpy-composition-arrow = pr2
 
   htpy-composition :
     {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
@@ -168,72 +171,72 @@ module _
   {l : Level} {A : UU l}
   where
 
-  arr-composite-composition-horn :
-    (fg : Λ²₁ → A) → composition-horn fg → arr A
-  arr-composite-composition-horn fg c t =
+  arrow-composite-composition-horn :
+    (fg : Λ²₁ → A) → composition-horn fg → arrow A
+  arrow-composite-composition-horn fg c t =
     witness-composition-horn c ((t , t) , refl-≤)
 
-  arr-composite-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) → composition-arr f g p → arr A
-  arr-composite-composition-arr f g p =
-    arr-composite-composition-horn (rec-arr-Λ²₁ f g p)
+  arrow-composite-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) → composition-arrow f g p → arrow A
+  arrow-composite-composition-arrow f g p =
+    arrow-composite-composition-horn (rec-arrow-Λ²₁ f g p)
 
-  eq-source-arr-composite-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) (c : composition-arr f g p) →
-    arr-composite-composition-arr f g p c 0▵ ＝ f 0▵
-  eq-source-arr-composite-composition-arr f g p c =
-    ( ap (witness-composition-arr c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
-    ( inv (htpy-composition-arr c ((0▵ , 0▵) , inl-join refl))) ∙
+  eq-source-arrow-composite-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
+    arrow-composite-composition-arrow f g p c 0▵ ＝ f 0▵
+  eq-source-arrow-composite-composition-arrow f g p c =
+    ( ap (witness-composition-arrow c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
+    ( inv (htpy-composition-arrow c ((0▵ , 0▵) , inl-join refl))) ∙
     ( compute-inl-cogap-join _ refl)
 
-  eq-target-arr-composite-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) (c : composition-arr f g p) →
-    arr-composite-composition-arr f g p c 1▵ ＝ g 1▵
-  eq-target-arr-composite-composition-arr f g p c =
-    ( ap (witness-composition-arr c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
-    ( inv (htpy-composition-arr c ((1▵ , 1▵) , inr-join refl))) ∙
+  eq-target-arrow-composite-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
+    arrow-composite-composition-arrow f g p c 1▵ ＝ g 1▵
+  eq-target-arrow-composite-composition-arrow f g p c =
+    ( ap (witness-composition-arrow c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
+    ( inv (htpy-composition-arrow c ((1▵ , 1▵) , inr-join refl))) ∙
     ( compute-inr-cogap-join _ refl)
 
-  composite-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) → composition-arr f g p → hom (f 0▵) (g 1▵)
-  pr1 (composite-composition-arr f g p c) =
-    arr-composite-composition-arr f g p c
-  pr1 (pr2 (composite-composition-arr f g p c)) =
-    eq-source-arr-composite-composition-arr f g p c
-  pr2 (pr2 (composite-composition-arr f g p c)) =
-    eq-target-arr-composite-composition-arr f g p c
+  composite-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) → composition-arrow f g p → hom (f 0▵) (g 1▵)
+  pr1 (composite-composition-arrow f g p c) =
+    arrow-composite-composition-arrow f g p c
+  pr1 (pr2 (composite-composition-arrow f g p c)) =
+    eq-source-arrow-composite-composition-arrow f g p c
+  pr2 (pr2 (composite-composition-arrow f g p c)) =
+    eq-target-arrow-composite-composition-arrow f g p c
 ```
 
 ```text
-  arr-composite-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) → composition f g → arr A
-  arr-composite-composition f g =
-    arr-composite-composition-horn (rec-hom-Λ²₁ f g)
+  arrow-composite-composition :
+    {x y z : A} (f : hom x y) (g : hom y z) → composition f g → arrow A
+  arrow-composite-composition f g =
+    arrow-composite-composition-horn (rec-hom-Λ²₁ f g)
 
-  eq-source-arr-composite-composition :
+  eq-source-arrow-composite-composition :
     {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-    arr-composite-composition f g c 0▵ ＝ x
-  eq-source-arr-composite-composition f g c =
-    ( eq-source-arr-composite-composition-arr
-      ( arr-hom f) (arr-hom g) (eq-source-target-hom f g) c) ∙
+    arrow-composite-composition f g c 0▵ ＝ x
+  eq-source-arrow-composite-composition f g c =
+    ( eq-source-arrow-composite-composition-arrow
+      ( arrow-hom f) (arrow-hom g) (eq-source-target-hom f g) c) ∙
     ( eq-source-hom f)
 
-  eq-target-arr-composite-composition :
+  eq-target-arrow-composite-composition :
     {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-    arr-composite-composition f g c 1▵ ＝ z
-  eq-target-arr-composite-composition f g c =
-    ( eq-target-arr-composite-composition-arr
-      ( arr-hom f) (arr-hom g) (eq-source-target-hom f g) c) ∙
+    arrow-composite-composition f g c 1▵ ＝ z
+  eq-target-arrow-composite-composition f g c =
+    ( eq-target-arrow-composite-composition-arrow
+      ( arrow-hom f) (arrow-hom g) (eq-source-target-hom f g) c) ∙
     ( eq-target-hom g)
 
   composite-composition :
     {x y z : A} (f : hom x y) (g : hom y z) → composition f g → hom x z
   pr1 (composite-composition f g c) =
-    arr-composite-composition-horn (rec-hom-Λ²₁ f g) c
+    arrow-composite-composition-horn (rec-hom-Λ²₁ f g) c
   pr1 (pr2 (composite-composition f g c)) =
-    eq-source-arr-composite-composition f g c
+    eq-source-arrow-composite-composition f g c
   pr2 (pr2 (composite-composition f g c)) =
-    eq-target-arr-composite-composition f g c
+    eq-target-arrow-composite-composition f g c
 ```
 
 ## Computations
@@ -272,43 +275,43 @@ module _
   {l : Level} {A : UU l}
   where
 
-  compute-first-witness-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) (c : composition-arr f g p) →
+  compute-first-witness-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
     (t : Δ¹) {r : predicate-Δ 2 (t , 0▵)} →
-    witness-composition-arr c ((t , 0▵) , r) ＝ f t
-  compute-first-witness-composition-arr f g p c t =
+    witness-composition-arrow c ((t , 0▵) , r) ＝ f t
+  compute-first-witness-composition-arrow f g p c t =
     ( ap
-      ( λ r → witness-composition-arr c ((t , 0▵) , r))
+      ( λ r → witness-composition-arrow c ((t , 0▵) , r))
       ( eq-is-in-subtype (subtype-Δ 2))) ∙
     ( inv (pr2 c ((t , 0▵) , inl-join refl))) ∙
-    ( compute-first-rec-arr-Λ²₁ f g p t)
+    ( compute-first-rec-arrow-Λ²₁ f g p t)
 
-  compute-second-witness-composition-arr :
-    (f g : arr A) (p : f 1▵ ＝ g 0▵) (c : composition-arr f g p) →
+  compute-second-witness-composition-arrow :
+    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
     (t : Δ¹) {r : predicate-Δ 2 (1▵ , t)} →
-    witness-composition-arr c ((1▵ , t) , r) ＝ g t
-  compute-second-witness-composition-arr f g p c t =
+    witness-composition-arrow c ((1▵ , t) , r) ＝ g t
+  compute-second-witness-composition-arrow f g p c t =
     ( ap
-      ( λ r → witness-composition-arr c ((1▵ , t) , r))
+      ( λ r → witness-composition-arrow c ((1▵ , t) , r))
       ( eq-is-in-subtype (subtype-Δ 2))) ∙
     ( inv (pr2 c ((1▵ , t) , inr-join refl))) ∙
-    ( compute-second-rec-arr-Λ²₁ f g p t)
+    ( compute-second-rec-arrow-Λ²₁ f g p t)
 
   compute-first-witness-composition :
       {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
       (t : Δ¹) {r : predicate-Δ 2 (t , 0▵)} →
-      witness-composition f g c ((t , 0▵) , r) ＝ arr-hom f t
+      witness-composition f g c ((t , 0▵) , r) ＝ arrow-hom f t
   compute-first-witness-composition f g =
-    compute-first-witness-composition-arr
-      (arr-hom f) (arr-hom g) (eq-source-target-hom f g)
+    compute-first-witness-composition-arrow
+      (arrow-hom f) (arrow-hom g) (eq-source-target-hom f g)
 
   compute-second-witness-composition :
       {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
       (t : Δ¹) {r : predicate-Δ 2 (1▵ , t)} →
-      witness-composition f g c ((1▵ , t) , r) ＝ arr-hom g t
+      witness-composition f g c ((1▵ , t) , r) ＝ arrow-hom g t
   compute-second-witness-composition f g =
-    compute-second-witness-composition-arr
-      (arr-hom f) (arr-hom g) (eq-source-target-hom f g)
+    compute-second-witness-composition-arrow
+      (arrow-hom f) (arrow-hom g) (eq-source-target-hom f g)
 ```
 
 TODO: move part below
@@ -325,14 +328,14 @@ module _
 
   is-composite-horn : UU l
   is-composite-horn =
-    Σ (composition-horn fg) (λ c → arr-composite-composition-horn fg c ＝ h)
+    Σ (composition-horn fg) (λ c → arrow-composite-composition-horn fg c ＝ h)
 
   triangle-horn :
     fg ((0▵ , 0▵) , inl-join refl) ＝ h 0▵ →
     fg ((1▵ , 1▵) , inr-join refl) ＝ h 1▵ →
     ∂Δ² → A
   triangle-horn h0 h1 =
-    rec-arr-∂Δ²
+    rec-arrow-∂Δ²
       ( λ t → fg ((t , 0▵) , inl-join refl))
       ( λ s → fg ((1▵ , s) , inr-join refl))
       ( h)
@@ -359,9 +362,9 @@ hom² f g h = extension ∂Δ²→Δ² (rec-hom-∂Δ² f g h)
 ```
 
 ```text
-is-composite-arr :
-  {l : Level} {A : UU l} → (f g : arr A) → f 1▵ ＝ g 0▵ → arr A → UU l
-is-composite-arr f g p h = is-composite-horn (rec-arr-Λ²₁ f g p) h
+is-composite-arrow :
+  {l : Level} {A : UU l} → (f g : arrow A) → f 1▵ ＝ g 0▵ → arrow A → UU l
+is-composite-arrow f g p h = is-composite-horn (rec-arrow-Λ²₁ f g p) h
 ```
 
 These definitions are not compatible in the same way as the previous ones, as

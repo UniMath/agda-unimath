@@ -5,7 +5,7 @@ open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
 
 module
-  simplicial-type-theory.Discrete-Type▵s
+  simplicial-type-theory.simplicially-discrete-types
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
