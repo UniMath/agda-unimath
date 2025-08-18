@@ -320,7 +320,7 @@ module _
       is-isometry-map-equiv-Σ-components-at-bounded-distance-Metric-Space A)
 ```
 
-### The decomposition into subspaces of elements at bounded distance is idempotent
+### The bounded distance decomposition operation is idempotent
 
 ```agda
 module _
