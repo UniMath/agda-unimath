@@ -159,9 +159,9 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  is-contr-nat-hom-Semiring : is-contr (hom-Semiring ℕ-Semiring R)
-  pr1 is-contr-nat-hom-Semiring = initial-hom-Semiring R
-  pr2 is-contr-nat-hom-Semiring f =
+  is-initial-semiring-ℕ : is-contr (hom-Semiring ℕ-Semiring R)
+  pr1 is-initial-semiring-ℕ = initial-hom-Semiring R
+  pr2 is-initial-semiring-ℕ f =
     eq-htpy-hom-Semiring
       ( ℕ-Semiring)
       ( R)
