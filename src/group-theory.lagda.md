@@ -11,6 +11,7 @@ open import group-theory.addition-homomorphisms-abelian-groups public
 open import group-theory.arithmetic-sequences-semigroups public
 open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
+open import group-theory.cartesian-products-commutative-monoids public
 open import group-theory.cartesian-products-concrete-groups public
 open import group-theory.cartesian-products-groups public
 open import group-theory.cartesian-products-monoids public
@@ -83,6 +84,7 @@ open import group-theory.functoriality-quotient-groups public
 open import group-theory.furstenberg-groups public
 open import group-theory.generating-elements-groups public
 open import group-theory.generating-sets-groups public
+open import group-theory.grothendieck-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
