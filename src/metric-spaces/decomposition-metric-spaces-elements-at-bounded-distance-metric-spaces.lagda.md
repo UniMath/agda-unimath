@@ -99,7 +99,7 @@ module _
       subspace-components-at-bounded-distance-Metric-Space
 ```
 
-### The sum of metric subspaces of elements at bounded distance indexed by the set of components
+### The total metric space of bounded distance components
 
 ```agda
 module _
