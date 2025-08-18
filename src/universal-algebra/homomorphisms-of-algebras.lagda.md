@@ -137,7 +137,6 @@ module _
   pr1 (comp-hom-Algebra (g , _) (f , _)) = g ∘ f
   pr2 (comp-hom-Algebra g f) op v =
     preserves-operations-map-comp-hom-Algebra g f op v
-
 ```
 
 ## Properties
