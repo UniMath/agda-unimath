@@ -108,9 +108,9 @@ module _
       ( is-equiv-map-equiv ∘ f)
       ( z)
 
-  inv-map-extensionality-type-subtype :
+  map-inv-extensionality-type-subtype :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
     (z : Σ A (type-Prop ∘ P)) → Eq-A (pr1 z) → (a , p) ＝ z
-  inv-map-extensionality-type-subtype f z =
+  map-inv-extensionality-type-subtype f z =
     map-inv-equiv (extensionality-type-subtype f z)
 ```

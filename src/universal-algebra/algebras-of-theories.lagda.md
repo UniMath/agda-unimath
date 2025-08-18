@@ -129,8 +129,7 @@ module _
     Eq-Model-Signature Sg (model-Algebra Sg Th A) (model-Algebra Sg Th B)
 
   Eq-eq-Algebra :
-    {l3 : Level} (A B : Algebra Sg Th l3) → A ＝ B →
-    Eq-Algebra A B
+    {l3 : Level} (A B : Algebra Sg Th l3) → A ＝ B → Eq-Algebra A B
   Eq-eq-Algebra A .A refl = refl-Eq-Model-Signature Sg (model-Algebra Sg Th A)
 
   is-equiv-Eq-eq-Algebra :
@@ -138,11 +137,11 @@ module _
     is-equiv (Eq-eq-Algebra A B)
   is-equiv-Eq-eq-Algebra (A , p) =
     subtype-identity-principle
-    ( is-prop-is-algebra Sg Th)
-    ( p)
-    ( refl-Eq-Model-Signature Sg A)
-    ( Eq-eq-Algebra (A , p))
-    ( is-equiv-Eq-eq-Model-Signature Sg A)
+      ( is-prop-is-algebra Sg Th)
+      ( p)
+      ( refl-Eq-Model-Signature Sg A)
+      ( Eq-eq-Algebra (A , p))
+      ( is-equiv-Eq-eq-Model-Signature Sg A)
 
   equiv-Eq-eq-Algebra :
     {l3 : Level} (A B : Algebra Sg Th l3) →
@@ -155,10 +154,11 @@ module _
     Eq-Algebra A B → A ＝ B
   eq-Eq-Algebra A B = map-inv-equiv (equiv-Eq-eq-Algebra A B)
 
-  is-torsorial-Eq-Algebra :
-    {l3 : Level} (A : Algebra Sg Th l3) → is-torsorial (Eq-Algebra A)
-  is-torsorial-Eq-Algebra A =
-    fundamental-theorem-id'
-    ( Eq-eq-Algebra A)
-    ( λ B → is-equiv-Eq-eq-Algebra A B)
+  abstract
+    is-torsorial-Eq-Algebra :
+      {l3 : Level} (A : Algebra Sg Th l3) → is-torsorial (Eq-Algebra A)
+    is-torsorial-Eq-Algebra A =
+      fundamental-theorem-id'
+        ( Eq-eq-Algebra A)
+        ( λ B → is-equiv-Eq-eq-Algebra A B)
 ```

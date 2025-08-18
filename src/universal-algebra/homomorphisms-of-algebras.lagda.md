@@ -69,9 +69,10 @@ module _
     (f : type-Algebra Sg Th Alg1 → type-Algebra Sg Th Alg2) →
     is-prop (preserves-operations-Algebra f)
   is-prop-preserves-operations-Algebra f =
-    is-prop-Π (λ x →
-      is-prop-Π (λ y → pr2 (pr1 (pr1 Alg2)) (f (pr2 (pr1 Alg1) x y))
-        (pr2 (pr1 Alg2) x (map-tuple f y))))
+    is-prop-Π
+      ( λ x →
+        is-prop-Π
+          ( λ y → pr2 (pr1 (pr1 Alg2)) (f (pr2 (pr1 Alg1) x y)) (pr2 (pr1 Alg2) x (map-tuple f y))))
 
   preserves-operations-Algebra-Prop :
     (f : type-Algebra Sg Th Alg1 → type-Algebra Sg Th Alg2) →
@@ -104,12 +105,12 @@ module _
 
 ```agda
 module _
-  { l1 : Level} ( Sg : signature l1)
-  { l2 : Level} ( Th : Theory Sg l2)
-  { l3 l4 l5 : Level}
-  ( Alg1 : Algebra Sg Th l3)
-  ( Alg2 : Algebra Sg Th l4)
-  ( Alg3 : Algebra Sg Th l5)
+  {l1 l2 l3 l4 l5 : Level}
+  (Sg : signature l1)
+  (Th : Theory Sg l2)
+  (Alg1 : Algebra Sg Th l3)
+  (Alg2 : Algebra Sg Th l4)
+  (Alg3 : Algebra Sg Th l5)
   where
 
   comp-hom-Algebra :
@@ -140,11 +141,11 @@ module _
 
 ```agda
 module _
-  { l1 : Level} ( Sg : signature l1)
-  { l2 : Level} ( Th : Theory Sg l2)
-  { l3 l4 : Level}
-  ( Alg1 : Algebra Sg Th l3)
-  ( Alg2 : Algebra Sg Th l4)
+  {l1 l2 l3 l4 : Level}
+  (Sg : signature l1)
+  (Th : Theory Sg l2)
+  (Alg1 : Algebra Sg Th l3)
+  (Alg2 : Algebra Sg Th l4)
   where
 
   is-set-hom-Algebra : is-set (hom-Algebra Sg Th Alg1 Alg2)
@@ -167,16 +168,16 @@ module _
     (f g : hom-Algebra Sg Th Alg1 Alg2) → is-equiv (htpy-eq-hom-Algebra f g)
   is-equiv-htpy-eq-hom-Algebra (f , p) =
     subtype-identity-principle
-    ( is-prop-preserves-operations-Algebra Sg Th Alg1 Alg2)
-    ( p)
-    ( refl-htpy)
-    ( htpy-eq-hom-Algebra (f , p))
-    ( funext f)
+      ( is-prop-preserves-operations-Algebra Sg Th Alg1 Alg2)
+      ( p)
+      ( refl-htpy)
+      ( htpy-eq-hom-Algebra (f , p))
+      ( funext f)
 
   equiv-htpy-eq-hom-Algebra :
     (f g : hom-Algebra Sg Th Alg1 Alg2) → (f ＝ g) ≃ (htpy-hom-Algebra f g)
   equiv-htpy-eq-hom-Algebra f g =
-    (htpy-eq-hom-Algebra f g) , is-equiv-htpy-eq-hom-Algebra f g
+    ( htpy-eq-hom-Algebra f g , is-equiv-htpy-eq-hom-Algebra f g)
 
   eq-htpy-hom-Algebra :
     (f g : hom-Algebra Sg Th Alg1 Alg2) → htpy-hom-Algebra f g → f ＝ g
@@ -191,9 +192,7 @@ module _
 
 ```agda
 module _
-  { l1 : Level} ( Sg : signature l1)
-  { l2 : Level} ( Th : Theory Sg l2)
-  { l3 : Level} ( Alg : Algebra Sg Th l3)
+  {l1 l2 l3 : Level} (Sg : signature l1) (Th : Theory Sg l2) (Alg : Algebra Sg Th l3)
   where
 
   is-hom-id-Algebra : preserves-operations-Algebra Sg Th Alg Alg id
@@ -203,7 +202,7 @@ module _
     ( preserves-id-map-tuple (pr1 (pr1 (pr1 Alg))) (pr2 Sg op) v)
 
   id-hom-Algebra : hom-Algebra Sg Th Alg Alg
-  id-hom-Algebra = id , is-hom-id-Algebra
+  id-hom-Algebra = (id , is-hom-id-Algebra)
 ```
 
 ### Composition of algebra homomorphisms is associative
@@ -260,8 +259,8 @@ module _
     comp-hom-Algebra Sg Th Alg1 Alg1 Alg2 f (id-hom-Algebra Sg Th Alg1) ＝ f
   right-unit-law-comp-hom-Algebra f =
     eq-htpy-hom-Algebra Sg Th Alg1 Alg2
-    ( comp-hom-Algebra Sg Th Alg1 Alg1 Alg2 f (id-hom-Algebra Sg Th Alg1)) f
-    ( refl-htpy)
+      ( comp-hom-Algebra Sg Th Alg1 Alg1 Alg2 f (id-hom-Algebra Sg Th Alg1)) f
+      ( refl-htpy)
 ```
 
 ### The inverse of an equivalence of algebras
@@ -339,7 +338,7 @@ module _
   equiv-equiv-hom-Algebra' :
     (B : Algebra Sg Th l3) → equiv-hom-Algebra Sg Th A B ≃
     Σ (hom-Set (pr1 (pr1 A)) (pr1 (pr1 B)))
-      (λ f → is-equiv f × preserves-operations-Algebra Sg Th A B f)
+      (λ f → (is-equiv f) × (preserves-operations-Algebra Sg Th A B f))
   pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
   pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
   pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl

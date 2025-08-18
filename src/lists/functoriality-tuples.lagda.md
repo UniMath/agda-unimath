@@ -65,35 +65,37 @@ module _
 
 ## Properties
 
-### The `tuple` functor preserves identity maps
+### The action on maps of tuples preserves identity maps
 
 ```agda
 preserves-id-map-tuple :
-  {l : Level} (A : UU l) (n : ℕ) (x : tuple A n) → x ＝ map-tuple id x
-preserves-id-map-tuple A zero-ℕ empty-tuple = refl
-preserves-id-map-tuple A (succ-ℕ n) (x ∷ xs) =
+  {l : Level} (n : ℕ) {A : UU l} (x : tuple A n) → x ＝ map-tuple id x
+preserves-id-map-tuple zero-ℕ empty-tuple = refl
+preserves-id-map-tuple (succ-ℕ n) (x ∷ xs) =
   eq-Eq-tuple
   ( succ-ℕ n)
   ( x ∷ xs)
   ( map-tuple id (x ∷ xs))
   ( refl ,
-    Eq-eq-tuple n xs (map-tuple (λ a → a) xs) (preserves-id-map-tuple A n xs))
+    Eq-eq-tuple n xs (map-tuple id xs) (preserves-id-map-tuple n xs))
 ```
 
-### The `tuple` functor preserves compositions
+### The action on maps of tuples preserves composition
 
 ```agda
 preserves-comp-map-tuple :
-  {l1 l2 l3 : Level}
-  (A : UU l1) (B : UU l2) (C : UU l3)
-  (n : ℕ) (x : tuple A n) (f : A → B) (g : B → C) →
+  {l1 l2 l3 : Level} (n : ℕ) {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) (g : B → C) (x : tuple A n) →
   map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
-preserves-comp-map-tuple A B C zero-ℕ empty-tuple f g = refl
-preserves-comp-map-tuple A B C (succ-ℕ n) (x ∷ xs) f g =
+preserves-comp-map-tuple zero-ℕ f g empty-tuple = refl
+preserves-comp-map-tuple (succ-ℕ n) f g (x ∷ xs) =
   eq-Eq-tuple
   ( succ-ℕ n)
   ( map-tuple g (map-tuple f (x ∷ xs)))
   ( map-tuple (g ∘ f) (x ∷ xs))
-  ( refl , Eq-eq-tuple n (map-tuple g (map-tuple f xs)) (map-tuple (g ∘ f) xs)
-    ( preserves-comp-map-tuple A B C n xs f g))
+  ( refl ,
+    Eq-eq-tuple n
+      ( map-tuple g (map-tuple f xs))
+      ( map-tuple (g ∘ f) xs)
+      ( preserves-comp-map-tuple n f g xs))
 ```
