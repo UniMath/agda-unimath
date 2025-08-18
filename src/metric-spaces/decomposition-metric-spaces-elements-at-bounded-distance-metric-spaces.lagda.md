@@ -304,7 +304,7 @@ module _
         ( y)))
 ```
 
-#### The isometric equivalence between a metric space and its decompositions into subspaces of elements at bounded distance
+#### The isometric equivalence between a metric space and its bounded distance decomposition
 
 ```agda
 module _
