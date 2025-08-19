@@ -136,17 +136,11 @@ module _
       ( y)
   all-elements-at-bounded-distance-subspace-bounded-distance-component-Metric-Space
     (x , x∈X) (y , y∈X) =
-    apply-effectiveness-quotient-map
+    sim-is-in-equivalence-class-set-quotient
       ( equivalence-relation-bounded-dist-Metric-Space A)
-      ( ( eq-set-quotient-equivalence-class-set-quotient
-          ( equivalence-relation-bounded-dist-Metric-Space A)
-          ( X)
-          ( x∈X)) ∙
-        ( inv
-          ( eq-set-quotient-equivalence-class-set-quotient
-            ( equivalence-relation-bounded-dist-Metric-Space A)
-            ( X)
-            ( y∈X))))
+      ( X)
+      ( x∈X)
+      ( y∈X)
 ```
 
 ### Neighborhoods in subspaces of equal components are neigborhoods in the ambient metric space

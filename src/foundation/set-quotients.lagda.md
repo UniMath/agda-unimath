@@ -498,7 +498,7 @@ module _
       ( eq-set-quotient-equivalence-class-set-quotient R Y y∈Y))
 ```
 
-### Any element in the quotient class of another is similar to it
+### Two elements in the same quotient class are similar
 
 ```agda
 module _
@@ -506,20 +506,36 @@ module _
   where
 
   sim-is-in-equivalence-class-set-quotient :
+    (X : set-quotient R) {x y : A} →
+    is-in-equivalence-class-set-quotient R X x →
+    is-in-equivalence-class-set-quotient R X y →
+    sim-equivalence-relation R x y
+  sim-is-in-equivalence-class-set-quotient X {x} {y} x∈X y∈X =
+    apply-effectiveness-quotient-map
+      ( R)
+      ( ( eq-set-quotient-equivalence-class-set-quotient R X x∈X) ∙
+        ( inv (eq-set-quotient-equivalence-class-set-quotient R X y∈X)))
+```
+
+### Any element in the quotient class of another is similar to it
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  sim-is-in-equivalence-class-quotient-map-set-quotient :
     (x y : A) →
     is-in-equivalence-class-set-quotient
       ( R)
       ( quotient-map R x)
       ( y) →
     sim-equivalence-relation R x y
-  sim-is-in-equivalence-class-set-quotient x y y∈X =
-    apply-effectiveness-quotient-map
+  sim-is-in-equivalence-class-quotient-map-set-quotient x y =
+    sim-is-in-equivalence-class-set-quotient
       ( R)
-      ( inv
-        ( eq-set-quotient-equivalence-class-set-quotient
-          ( R)
-          ( quotient-map R x)
-          ( y∈X)))
+      ( quotient-map R x)
+      ( is-in-equivalence-class-quotient-map-set-quotient R x)
 ```
 
 ### Σ-decompositions of types induced by set quotients
