@@ -67,7 +67,6 @@ open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
-open import metric-spaces.induced-metric-space-of-pseudometric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
@@ -76,6 +75,7 @@ open import metric-spaces.limits-of-functions-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
+open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
