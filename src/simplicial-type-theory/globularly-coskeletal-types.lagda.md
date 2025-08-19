@@ -354,8 +354,8 @@ abstract
     is-contr-Π is-globularly-coskeletal-B
   is-globularly-coskeletal-Π (succ-𝕋 k) is-globularly-coskeletal-B f g =
     is-globularly-coskeletal-is-equiv k (f ⇒▵ g)
-      ( simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
-      ( is-equiv-simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
+      ( natural-transformation▵-hom▵-Π)
+      ( is-equiv-natural-transformation▵-hom▵-Π)
       ( is-globularly-coskeletal-Π k
         ( λ x → is-globularly-coskeletal-B x (f x) (g x)))
 

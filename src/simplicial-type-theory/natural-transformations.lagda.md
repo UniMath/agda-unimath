@@ -45,7 +45,7 @@ open import simplicial-type-theory.directed-interval-type I
 
 Given two [dependent functions](foundation.dependent-function-types.md)
 `f g : (x : A) → B x`, a
-{{#concept "natural transformation" Disambiguation="in simplicial type theory" Agda=simplicial-natural-transformation}}
+{{#concept "natural transformation" Disambiguation="in simplicial type theory" Agda=natural-transformation▵}}
 `α` from `f` to `g` is a family of
 [directed edges](simplicial-type-theory.directed-edges.md)
 
@@ -76,34 +76,28 @@ module _
   where
 
   _⇒▵_ : ((x : A) → B x) → ((x : A) → B x) → UU (I1 ⊔ l1 ⊔ l2)
-  f ⇒▵ g = (x : A) → f x →▵ g x
+  f ⇒▵ g = ((x : A) → (f x →▵ g x))
 
   infix 7 _⇒▵_
 
-  simplicial-natural-transformation :
+  natural-transformation▵ :
     ((x : A) → B x) → ((x : A) → B x) → UU (I1 ⊔ l1 ⊔ l2)
-  simplicial-natural-transformation = _⇒▵_
+  natural-transformation▵ = _⇒▵_
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} (α : f ⇒▵ g)
   where
 
-  family-of-simplicial-arrows-simplicial-natural-transformation :
-    (x : A) → arrow▵ (B x)
-  family-of-simplicial-arrows-simplicial-natural-transformation x t =
-    arrow-hom▵ (α x) t
+  family-of-arrows-natural-transformation▵ : (x : A) → arrow▵ (B x)
+  family-of-arrows-natural-transformation▵ x = arrow-hom▵ (α x)
 
-  eq-source-simplicial-natural-transformation :
-    (x : A) →
-    family-of-simplicial-arrows-simplicial-natural-transformation x 0▵ ＝ f x
-  eq-source-simplicial-natural-transformation x =
-    eq-source-hom▵ (α x)
+  eq-source-natural-transformation▵ :
+    (x : A) → family-of-arrows-natural-transformation▵ x 0▵ ＝ f x
+  eq-source-natural-transformation▵ x = eq-source-hom▵ (α x)
 
-  eq-target-simplicial-natural-transformation :
-    (x : A) →
-    family-of-simplicial-arrows-simplicial-natural-transformation x 1▵ ＝ g x
-  eq-target-simplicial-natural-transformation x =
-    eq-target-hom▵ (α x)
+  eq-target-natural-transformation▵ :
+    (x : A) → family-of-arrows-natural-transformation▵ x 1▵ ＝ g x
+  eq-target-natural-transformation▵ x = eq-target-hom▵ (α x)
 ```
 
 ## Properties
@@ -116,18 +110,15 @@ module _
   where
 
   family-of-simplicial-arrows-arrow▵-of-dependent-functions :
-    arrow▵' (λ t → (x : A) → B x t) →
-    (x : A) → arrow▵' (B x)
+    arrow▵' (λ t → (x : A) → B x t) → (x : A) → arrow▵' (B x)
   family-of-simplicial-arrows-arrow▵-of-dependent-functions = swap-Π
 
   arrow▵-of-dependent-functions-family-of-simplicial-arrows :
-    ((x : A) → arrow▵' (B x)) →
-    arrow▵' (λ t → (x : A) → B x t)
+    ((x : A) → arrow▵' (B x)) → arrow▵' (λ t → (x : A) → B x t)
   arrow▵-of-dependent-functions-family-of-simplicial-arrows = swap-Π
 
   equiv-family-of-simplicial-arrows-arrow▵-of-dependent-functions :
-    ( arrow▵' (λ t → (x : A) → B x t)) ≃
-    ( (x : A) → arrow▵' (B x))
+    (arrow▵' (λ t → (x : A) → B x t)) ≃ ((x : A) → arrow▵' (B x))
   equiv-family-of-simplicial-arrows-arrow▵-of-dependent-functions =
     equiv-swap-Π
 ```
@@ -142,23 +133,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   where
 
-  simplicial-natural-transformation-simplicial-edge-of-dependent-functions :
-    f →▵ g → f ⇒▵ g
-  simplicial-natural-transformation-simplicial-edge-of-dependent-functions
+  natural-transformation▵-hom▵-Π : (f →▵ g) → (f ⇒▵ g)
+  natural-transformation▵-hom▵-Π
     ( α , p , q) x =
     ( ( λ t → α t x) , htpy-eq p x , htpy-eq q x)
 
-  simplicial-edge-of-dependent-functions-simplicial-natural-transformation :
-    f ⇒▵ g → f →▵ g
-  simplicial-edge-of-dependent-functions-simplicial-natural-transformation α =
+  hom▵-Π-natural-transformation▵ : (f ⇒▵ g) → (f →▵ g)
+  hom▵-Π-natural-transformation▵ α =
     ( (λ t x → pr1 (α x) t) , eq-htpy (pr1 ∘ pr2 ∘ α) , eq-htpy (pr2 ∘ pr2 ∘ α))
 
-  is-section-simplicial-edge-of-dependent-functions-simplicial-natural-transformation :
-    is-section
-      ( simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
-      ( simplicial-edge-of-dependent-functions-simplicial-natural-transformation)
-  is-section-simplicial-edge-of-dependent-functions-simplicial-natural-transformation
-    α =
+  is-section-hom▵-Π-natural-transformation▵ :
+    is-section natural-transformation▵-hom▵-Π hom▵-Π-natural-transformation▵
+  is-section-hom▵-Π-natural-transformation▵ α =
     eq-htpy
       ( λ x →
         eq-pair-eq-fiber
@@ -166,34 +152,30 @@ module _
             ( htpy-eq (is-section-eq-htpy (pr1 ∘ pr2 ∘ α)) x)
             ( htpy-eq (is-section-eq-htpy (pr2 ∘ pr2 ∘ α)) x)))
 
-  is-retraction-simplicial-edge-of-dependent-functions-simplicial-natural-transformation :
-    is-retraction
-      ( simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
-      ( simplicial-edge-of-dependent-functions-simplicial-natural-transformation)
-  is-retraction-simplicial-edge-of-dependent-functions-simplicial-natural-transformation
-    ( α , p , q) =
+  is-retraction-hom▵-Π-natural-transformation▵ :
+    is-retraction natural-transformation▵-hom▵-Π hom▵-Π-natural-transformation▵
+  is-retraction-hom▵-Π-natural-transformation▵ (α , p , q) =
     eq-pair-eq-fiber
       ( eq-pair (is-retraction-eq-htpy p) (is-retraction-eq-htpy q))
 
-  is-equiv-simplicial-natural-transformation-simplicial-edge-of-dependent-functions :
-    is-equiv
-      ( simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
-  is-equiv-simplicial-natural-transformation-simplicial-edge-of-dependent-functions =
+  is-equiv-natural-transformation▵-hom▵-Π :
+    is-equiv natural-transformation▵-hom▵-Π
+  is-equiv-natural-transformation▵-hom▵-Π =
     is-equiv-is-invertible
-      ( simplicial-edge-of-dependent-functions-simplicial-natural-transformation)
-      ( is-section-simplicial-edge-of-dependent-functions-simplicial-natural-transformation)
-      ( is-retraction-simplicial-edge-of-dependent-functions-simplicial-natural-transformation)
+      ( hom▵-Π-natural-transformation▵)
+      ( is-section-hom▵-Π-natural-transformation▵)
+      ( is-retraction-hom▵-Π-natural-transformation▵)
 
-  extensionality-simplicial-natural-transformation : (f →▵ g) ≃ (f ⇒▵ g)
-  extensionality-simplicial-natural-transformation =
-    ( simplicial-natural-transformation-simplicial-edge-of-dependent-functions ,
-      is-equiv-simplicial-natural-transformation-simplicial-edge-of-dependent-functions)
+  extensionality-natural-transformation▵ : (f →▵ g) ≃ (f ⇒▵ g)
+  extensionality-natural-transformation▵ =
+    ( natural-transformation▵-hom▵-Π ,
+      is-equiv-natural-transformation▵-hom▵-Π)
 ```
 
 ## The identity natural transformation
 
 ```agda
-id-simplicial-natural-transformation :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) → f ⇒▵ f
-id-simplicial-natural-transformation f x = id-hom▵ (f x)
+id-natural-transformation▵ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) → (f ⇒▵ f)
+id-natural-transformation▵ f x = id-hom▵ (f x)
 ```

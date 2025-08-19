@@ -171,7 +171,7 @@ Given a transposing biadjoint `q! ⊣ q* ⊣ q∗` and a conorm map
   integral-map-is-conormed-map x y f =
     map-equiv
       {! is-transposing-adjoint-map-left-adjoint-is-conormed-map H (q x) y ∘e ? !}
-      {! action-hom▵-simplicial-natural-transformation (conorm-map-is-conormed-map H) f  !}
+      {! action-hom▵-natural-transformation▵ (conorm-map-is-conormed-map H) f  !}
 ```
 
 ### The cardinality operator associated to a conormed map
@@ -191,7 +191,7 @@ module _
     is-conormed-map q → is-conormed-map p → is-conormed-map (q ∘ p)
   is-conormed-map-comp (Q , Conm-q) (P , Conm-p) =
     ( is-transposing-biadjoint-comp Q P) ,
-    ( horizontal-comp-simplicial-natural-transformation Conm-p Conm-q)
+    ( horizontal-comp-natural-transformation▵ Conm-p Conm-q)
 ```
 
 ## Examples

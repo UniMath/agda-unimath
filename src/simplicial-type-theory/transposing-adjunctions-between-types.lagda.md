@@ -259,9 +259,9 @@ module _
     ((x : I) → is-transposing-adjunction (L x) (R x)) →
     is-transposing-adjunction (map-Π L) (map-Π R)
   is-transposing-adjunction-Π H f g =
-    inv-equiv extensionality-simplicial-natural-transformation ∘e
+    inv-equiv extensionality-natural-transformation▵ ∘e
     equiv-Π-equiv-family (λ i → H i (f i) (g i)) ∘e
-    extensionality-simplicial-natural-transformation
+    extensionality-natural-transformation▵
 
   is-transposing-left-adjoint-Π :
     {L : (x : I) → A x → B x} →

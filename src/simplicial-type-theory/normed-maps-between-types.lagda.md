@@ -195,7 +195,7 @@ module _
       ( is-transposing-adjoint-map-right-adjoint-is-normed-map H
         ( map-left-adjoint-is-normed-map H (q x))
         ( q y))
-      ( action-hom▵-simplicial-natural-transformation
+      ( action-hom▵-natural-transformation▵
         ( norm-map-is-normed-map H) f)
 ```
 
@@ -262,7 +262,7 @@ module _
     map-left-adjoint-is-normed-map H (q x) →▵
     map-right-adjoint-is-normed-map H (q y)
   action-hom-image-norm-map-is-normed-map =
-    action-hom▵-simplicial-natural-transformation (norm-map-is-normed-map H)
+    action-hom▵-natural-transformation▵ (norm-map-is-normed-map H)
 ```
 
 ### The factors of the cardinality of a normed map
@@ -293,7 +293,7 @@ module _
     is-normed-map q → is-normed-map p → is-normed-map (q ∘ p)
   is-normed-map-comp (Q , Nm-q) (P , Nm-p) =
     ( is-transposing-biadjoint-comp Q P) ,
-    ( horizontal-comp-simplicial-natural-transformation Nm-p Nm-q)
+    ( horizontal-comp-natural-transformation▵ Nm-p Nm-q)
 ```
 
 ## Examples
