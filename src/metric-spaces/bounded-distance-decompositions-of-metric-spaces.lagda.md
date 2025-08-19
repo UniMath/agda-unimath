@@ -258,35 +258,15 @@ module _
         ( Nxy))
     where
 
-      lemma-eq-Y :
-        map-type-bounded-distance-component-Metric-Space A y ＝ Y
-      lemma-eq-Y =
-        eq-set-quotient-equivalence-class-set-quotient
-          ( equivalence-relation-bounded-dist-Metric-Space A)
-          ( Y)
-          ( y∈Y)
-
-      lemma-eq-X :
-        map-type-bounded-distance-component-Metric-Space A x ＝ X
-      lemma-eq-X =
-        eq-set-quotient-equivalence-class-set-quotient
-          ( equivalence-relation-bounded-dist-Metric-Space A)
-          ( X)
-          ( x∈X)
-
-      lemma-eq-map-type-bounded-distance-component-Metric-Space :
-        ( map-type-bounded-distance-component-Metric-Space A x) ＝
-        ( map-type-bounded-distance-component-Metric-Space A y)
-      lemma-eq-map-type-bounded-distance-component-Metric-Space =
-        apply-effectiveness-quotient-map'
-          ( equivalence-relation-bounded-dist-Metric-Space A)
-          ( unit-trunc-Prop (d , Nxy))
-
-      lemma-eq : X ＝ Y
-      lemma-eq =
-        ( inv lemma-eq-X) ∙
-        ( lemma-eq-map-type-bounded-distance-component-Metric-Space) ∙
-        ( lemma-eq-Y)
+    lemma-eq : X ＝ Y
+    lemma-eq =
+      eq-set-quotient-sim-element-set-quotient
+        ( equivalence-relation-bounded-dist-Metric-Space A)
+        ( X)
+        ( Y)
+        ( x∈X)
+        ( y∈Y)
+        ( unit-trunc-Prop (d , Nxy))
 
   is-isometry-map-equiv-bounded-distance-decomposition-Metric-Space :
     is-isometry-Metric-Space

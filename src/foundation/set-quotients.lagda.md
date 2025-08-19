@@ -161,6 +161,37 @@ module _
       ( is-surjective-quotient-map)
 ```
 
+### Any element is in the class of its quotient
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  is-in-equivalence-class-quotient-map-set-quotient :
+    (x : A) →
+    is-in-equivalence-class-set-quotient
+      ( R)
+      ( quotient-map R x)
+      ( x)
+  is-in-equivalence-class-quotient-map-set-quotient x =
+    is-in-equivalence-class-eq-equivalence-class
+      ( R)
+      ( x)
+      ( equivalence-class-set-quotient R (quotient-map R x))
+      ( inv
+        ( is-retraction-equivalence-class-set-quotient R (class R x)))
+
+  inhabitant-equivalence-class-quotient-map-set-quotient :
+    (x : A) →
+    type-subtype
+      ( subtype-set-quotient R (quotient-map R x))
+  inhabitant-equivalence-class-quotient-map-set-quotient x =
+    (x , is-in-equivalence-class-quotient-map-set-quotient x)
+```
+
+## Properties
+
 ### The map `class : A → set-quotient R` is an effective quotient map
 
 ```agda
@@ -445,6 +476,50 @@ module _
         ( equivalence-class-set-quotient R X)
         ( H))) ∙
     ( is-section-equivalence-class-set-quotient R X)
+```
+
+### Two quotient classes that contain similar elements are equal
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  eq-set-quotient-sim-element-set-quotient :
+    (X : set-quotient R) {x : A} →
+    (Y : set-quotient R) {y : A} →
+    is-in-equivalence-class-set-quotient R X x →
+    is-in-equivalence-class-set-quotient R Y y →
+    sim-equivalence-relation R x y →
+    X ＝ Y
+  eq-set-quotient-sim-element-set-quotient X {x} Y {y} x∈X y∈Y x~y =
+    ( ( inv (eq-set-quotient-equivalence-class-set-quotient R X x∈X)) ∙
+      ( apply-effectiveness-quotient-map' R x~y) ∙
+      ( eq-set-quotient-equivalence-class-set-quotient R Y y∈Y))
+```
+
+### Any element in the quotient class of another is similar to it
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  sim-is-in-equivalence-class-set-quotient :
+    (x y : A) →
+    is-in-equivalence-class-set-quotient
+      ( R)
+      ( quotient-map R x)
+      ( y) →
+    sim-equivalence-relation R x y
+  sim-is-in-equivalence-class-set-quotient x y y∈X =
+    apply-effectiveness-quotient-map
+      ( R)
+      ( inv
+        ( eq-set-quotient-equivalence-class-set-quotient
+          ( R)
+          ( quotient-map R x)
+          ( y∈X)))
 ```
 
 ### Σ-decompositions of types induced by set quotients
