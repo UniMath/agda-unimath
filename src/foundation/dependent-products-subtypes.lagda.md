@@ -16,8 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an indexing type `I`, a type `Aᵢ` for each `i ∈ I`, and a
-[subtype](foundation.subtypes.md) `Sᵢ ⊆ Aᵢ` for each `i ∈ I`, a function
+Given an indexing type `I`, a type `Aᵢ` for each `i : I`, and a
+[subtype](foundation.subtypes.md) `Sᵢ ⊆ Aᵢ` for each `i : I`, a function
 `f : (i : I) → Aᵢ` is in the
 {{#concept "dependent product" disambiguation="of subtypes" Agda=Π-subtype}} if
 for each `i`, `f i ∈ Sᵢ`.
