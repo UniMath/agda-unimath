@@ -131,11 +131,13 @@ module _
             ( λ T →
               is-retraction-extension-of-point-full-binary-tree-Magma T f))
           ( refl)
-          ( pr2 f U V)
+          ( preserves-mul-map-hom-Magma full-binary-tree-Magma M f U V)
           ( ( ap
-              ( _∙ pr2 f U V)
+              ( _∙ preserves-mul-map-hom-Magma full-binary-tree-Magma M f U V)
               ( htpy-eq (is-section-eq-htpy _) _)) ∙
-            ( is-section-inv-concat' (pr2 f U V) _) ∙
+            ( is-section-inv-concat'
+              ( preserves-mul-map-hom-Magma full-binary-tree-Magma M f U V)
+              ( _)) ∙
             ( ap-binary-htpy
               ( λ T →
                 is-retraction-extension-of-point-full-binary-tree-Magma T f)

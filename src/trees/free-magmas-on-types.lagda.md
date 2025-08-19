@@ -131,40 +131,34 @@ module _
     dependent-identification
     ( preserves-mul-Magma (labeled-full-binary-tree-Magma X) M)
     ( eq-htpy
-    ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-    ( λ T U → refl) (pr2 f)
+      ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
+    ( λ T U → refl)
+    ( preserves-mul-map-hom-Magma
+      ( labeled-full-binary-tree-Magma X)
+      ( M)
+      ( f))
   dependent-identification-preserves-mul-labeled-full-binary-tree-Magma f =
-    eq-binary-htpy _ _ (λ U V → htpy-eq
-      ( tr-Π (eq-htpy
-        ( λ T →
-          is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-        ( λ T U → refl) U) V ∙ tr-Π (eq-htpy
-        ( λ T →
-          is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-      ( λ U → refl) V ∙ (map-compute-dependent-identification-eq-value-function
-      ( λ f → f (combinator-labeled-full-binary-tree X U V))
-      ( λ f → mul-Magma M (f U) (f V))
-      ( eq-htpy
-        ( λ T →
-          is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-      ( refl)
-      ( pr2 f U V)
-      ( ap (λ p → p ∙ pr2 f U V) (htpy-eq (is-section-eq-htpy
-        ( λ T →
-          is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-        ( combinator-labeled-full-binary-tree X U V)) ∙
-      ( ap (λ p → ap-binary (pr2 M)
-        ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma
-          ( pr1 U , (λ x → pr2 U x)) (pr1 f , pr2 f))
-        ( is-retraction-extension-of-map-labeled-full-binary-tree-Magma
-          ( pr1 V , (λ x → pr2 V x)) (pr1 f , pr2 f))
-        ∙ inv (pr2 f (pr1 U , (λ x → pr2 U x)) (pr1 V , (λ x → pr2 V x)))
-        ∙ p ∙ pr2 f U V) (lem U V) ∙ -- this goal *should* be filled with a path that combinator-commutes-with-labelings-_ is refl but this isn't judgementally so...
-          {!   !} ∙
-          is-section-inv-concat' (pr2 f U V) _) ∙
-      ap-binary-htpy
-      ( λ T → is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f)
-      ( mul-Magma M))))
+    eq-binary-htpy _ _
+      ( λ U V →
+        ( htpy-eq
+          ( tr-Π _ ( λ T U₁ → refl) ( U))
+          ( V)) ∙
+        ( tr-Π _ (λ U₁ → refl) V) ∙
+        ( map-compute-dependent-identification-eq-value-function
+          ( λ f → f (combinator-labeled-full-binary-tree X U V))
+          ( λ f → mul-Magma M (f U) (f V))
+          ( eq-htpy
+            ( λ T →
+              is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
+          ( refl)
+          ( preserves-mul-map-hom-Magma
+            ( labeled-full-binary-tree-Magma X) M f U V)
+          ( ( ap
+              ( _∙ preserves-mul-map-hom-Magma
+                ( labeled-full-binary-tree-Magma X) M f U V)
+              ( htpy-eq (is-section-eq-htpy _) _)) ∙
+            ( {!   !}) ∙
+            ( ap-binary-htpy _ (mul-Magma M)))))
 
   is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma :
     is-equiv ev-label-leaf-hom-Magma

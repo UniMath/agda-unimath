@@ -7,10 +7,12 @@ module trees.combinator-full-binary-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
@@ -79,24 +81,38 @@ That is, for binary trees `L R : full-binary-tree` and an `X`-labeling `lab` of
 ```
 
 ```agda
-module _
+Eq-combinator-commutes-with-labelings-full-binary-tree :
   {l : Level} (X : UU l) (L R : full-binary-tree)
-  (lab : labeling-full-binary-tree X (join-full-binary-tree L R))
-  where
+  (lab : labeling-full-binary-tree X (join-full-binary-tree L R)) →
+  Eq-labeled-full-binary-tree X
+    (combinator-labeled-full-binary-tree X
+      (L , (λ z → lab (inl z)))
+      (R , (λ z → lab (inr z))))
+    ((join-full-binary-tree L R) , lab)
+pr1 (Eq-combinator-commutes-with-labelings-full-binary-tree X L R lab) =
+  ( refl-Eq-full-binary-tree L , refl-Eq-full-binary-tree R)
+pr2 (Eq-combinator-commutes-with-labelings-full-binary-tree X L R lab) =
+  (( refl-htpy-labeled-full-binary-tree X (L , λ x → lab (inl x))) ,
+    refl-htpy-labeled-full-binary-tree X (R , (λ x → lab (inr x))))
 
-  htpy-combinator-commutes-with-labelings-full-binary-tree :
-    tr (labeling-full-binary-tree X) refl
-      ( pr2 (combinator-labeled-full-binary-tree X
-      ( L , λ x → lab (inl x)) (R , (λ x → lab (inr x))))) ~
-    lab
-  htpy-combinator-commutes-with-labelings-full-binary-tree (inl x) = refl
-  htpy-combinator-commutes-with-labelings-full-binary-tree (inr x) = refl
+is-refl-Eq-combinator-commutes-with-labelings-full-binary-tree :
+  {l : Level} (X : UU l) (L R : full-binary-tree)
+  (lab : labeling-full-binary-tree X (join-full-binary-tree L R)) →
+  Eq-combinator-commutes-with-labelings-full-binary-tree X L R lab ＝
+  refl-Eq-labeled-full-binary-tree X ((join-full-binary-tree L R) , lab)
+is-refl-Eq-combinator-commutes-with-labelings-full-binary-tree X L R lab = refl
 
-  combinator-commutes-with-labelings-full-binary-tree :
-    combinator-labeled-full-binary-tree X
-      ( L , (λ x → lab (inl x))) (R , (λ x → lab (inr x))) ＝
+combinator-commutes-with-labelings-full-binary-tree :
+  {l : Level} (X : UU l) (L R : full-binary-tree)
+  (lab : labeling-full-binary-tree X (join-full-binary-tree L R)) →
+  combinator-labeled-full-binary-tree X
+    ( L , (λ x → lab (inl x))) (R , (λ x → lab (inr x))) ＝
+  ( join-full-binary-tree L R , lab)
+combinator-commutes-with-labelings-full-binary-tree X L R lab =
+  eq-Eq-labeled-full-binary-tree X
+    ( combinator-labeled-full-binary-tree X
+      ( L , (λ x → lab (inl x)))
+      ( R , (λ x → lab (inr x))))
     ( join-full-binary-tree L R , lab)
-  combinator-commutes-with-labelings-full-binary-tree =
-    eq-pair-Σ refl
-    ( eq-htpy htpy-combinator-commutes-with-labelings-full-binary-tree)
+    ( Eq-combinator-commutes-with-labelings-full-binary-tree X L R lab)
 ```
