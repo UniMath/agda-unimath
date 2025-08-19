@@ -24,6 +24,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -273,4 +274,55 @@ module _
     htpy-hom-sequential-diagram B f f' → (f ＝ f')
   eq-htpy-sequential-diagram f f' =
     map-inv-equiv (extensionality-hom-sequential-diagram f f')
+```
+
+### Composition of morphisms of sequential diagrams is associative
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : sequential-diagram l1} {B : sequential-diagram l2}
+  {C : sequential-diagram l3} {D : sequential-diagram l4}
+  (f : hom-sequential-diagram A B) (g : hom-sequential-diagram B C)
+  (h : hom-sequential-diagram C D)
+  where
+
+  assoc-comp-hom-sequential-diagram :
+    htpy-hom-sequential-diagram D
+      ( comp-hom-sequential-diagram A B D
+        ( comp-hom-sequential-diagram B C D h g)
+        ( f))
+      ( comp-hom-sequential-diagram A C D h
+        ( comp-hom-sequential-diagram A B C g f))
+  pr1 assoc-comp-hom-sequential-diagram n = refl-htpy
+  pr2 assoc-comp-hom-sequential-diagram n =
+    right-unit-htpy ∙h
+    assoc-htpy
+      ( naturality-map-hom-sequential-diagram D h n ·r
+        ( map-hom-sequential-diagram C g n ∘
+          map-hom-sequential-diagram B f n))
+      ( map-hom-sequential-diagram D h (succ-ℕ n) ·l
+        naturality-map-hom-sequential-diagram C g n ·r
+        map-hom-sequential-diagram B f n)
+      ( ( map-hom-sequential-diagram D h (succ-ℕ n) ∘
+          map-hom-sequential-diagram C g (succ-ℕ n)) ·l
+        naturality-map-hom-sequential-diagram B f n) ∙h
+    left-whisker-concat-htpy
+      ( naturality-map-hom-sequential-diagram D h n ·r
+        ( map-hom-sequential-diagram C g n ∘ map-hom-sequential-diagram B f n))
+      ( left-whisker-concat-htpy
+          ( map-hom-sequential-diagram D h (succ-ℕ n) ·l
+            naturality-map-hom-sequential-diagram C g n ·r
+            map-hom-sequential-diagram B f n)
+          ( inv-preserves-comp-left-whisker-comp
+            ( map-hom-sequential-diagram D h (succ-ℕ n))
+            ( map-hom-sequential-diagram C g (succ-ℕ n))
+            ( naturality-map-hom-sequential-diagram B f n)) ∙h
+        inv-htpy
+          ( distributive-left-whisker-comp-concat
+            ( map-hom-sequential-diagram D h (succ-ℕ n))
+            ( naturality-map-hom-sequential-diagram C g n ·r
+              map-hom-sequential-diagram B f n)
+            ( map-hom-sequential-diagram C g (succ-ℕ n) ·l
+              naturality-map-hom-sequential-diagram B f n)))
 ```
