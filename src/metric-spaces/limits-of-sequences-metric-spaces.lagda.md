@@ -38,8 +38,8 @@ An element `l` of a [metric space](metric-spaces.metric-spaces.md) is the
 {{#concept "limit" Disambiguation="of a sequence in a metric spaces" WD="limit of a sequence" WDID=Q847204 Agda=is-limit-sequence-Metric-Space}}
 of a [sequence in metric spaces](metric-spaces.sequences-metric-spaces.md) `u`
 if there exists a function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`,
-`u n` is in an [`ε`-neighborhood](metric-spaces.rational-neighborhoods.md) of
-`l`.
+`u n` is in an
+[`ε`-neighborhood](metric-spaces.rational-neighborhood-relations.md) of `l`.
 
 ## Definition
 
@@ -269,11 +269,12 @@ module _
 
 ## See also
 
-- [Convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md):
-  the type of sequences that have a limit
+- [Convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md)
+  are sequences with a limit;
 - The
-  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md):
-  the metric structure on the type of convergent sequences
+  [metric space of convergent sequences](metric-spaces.metric-space-of-convergent-sequences-metric-spaces.md)
+  is the metric space of convergent sequences in a metric space with the product
+  metric structure.
 
 ## External links
 

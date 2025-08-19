@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
@@ -29,11 +30,14 @@ open import metric-spaces.short-functions-metric-spaces
 
 A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
-in a [metric space](metric-spaces.metric-spaces.md) `A` is a map `f` from
-[`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to its carrier
-type such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
-(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e. the
-distance between `f ε` and `f δ` is bounded by `ε + δ`.
+in a [metric space](metric-spaces.metric-spaces.md) `A` is a
+[Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+in its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md): a
+map `f` from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to
+the carrier type of `A` such that for all positive rationals `ε` and `δ`, `f ε`
+and `f δ` are in a
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhood-relations.md),
+i.e., the distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
 
@@ -46,14 +50,9 @@ module _
 
   is-cauchy-approximation-prop-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → Prop l2
-  is-cauchy-approximation-prop-Metric-Space f =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε →
-        Π-Prop
-          ( ℚ⁺)
-          ( λ δ →
-            neighborhood-prop-Metric-Space A (ε +ℚ⁺ δ) (f ε) (f δ)))
+  is-cauchy-approximation-prop-Metric-Space =
+    is-cauchy-approximation-prop-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
 
   is-cauchy-approximation-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → UU l2
@@ -73,7 +72,10 @@ module _
 
   map-cauchy-approximation-Metric-Space :
     ℚ⁺ → type-Metric-Space A
-  map-cauchy-approximation-Metric-Space = pr1 f
+  map-cauchy-approximation-Metric-Space =
+    map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space :
     (ε δ : ℚ⁺) →
@@ -82,7 +84,10 @@ module _
       ( ε +ℚ⁺ δ)
       ( map-cauchy-approximation-Metric-Space ε)
       ( map-cauchy-approximation-Metric-Space δ)
-  is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
+  is-cauchy-approximation-map-cauchy-approximation-Metric-Space =
+    is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 ```
 
 ## Properties
@@ -98,10 +103,12 @@ module _
   const-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A
   const-cauchy-approximation-Metric-Space =
-    (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Metric-Space A (ε +ℚ⁺ δ) x)
+    const-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( x)
 ```
 
-### Short maps between metric spaces are functorial on Cauchy approximations
+### The action of short maps on Cauchy approximations
 
 ```agda
 module _
@@ -113,17 +120,11 @@ module _
   map-short-function-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
-  map-short-function-cauchy-approximation-Metric-Space (u , H) =
-    ( map-short-function-Metric-Space A B f ∘ u) ,
-    ( λ ε δ →
-      is-short-map-short-function-Metric-Space
-      ( A)
-      ( B)
+  map-short-function-cauchy-approximation-Metric-Space =
+    map-short-function-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
       ( f)
-      ( ε +ℚ⁺ δ)
-      ( u ε)
-      ( u δ)
-      ( H ε δ))
 
 module _
   {l1 l2 : Level}
@@ -155,7 +156,7 @@ module _
   eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
 ```
 
-### Homotopic cauchy approximations are equal
+### Homotopic Cauchy approximations are equal
 
 ```agda
 module _
@@ -168,9 +169,9 @@ module _
 
   eq-htpy-cauchy-approximation-Metric-Space : f ＝ g
   eq-htpy-cauchy-approximation-Metric-Space =
-    eq-type-subtype
-      ( is-cauchy-approximation-prop-Metric-Space A)
-      ( eq-htpy f~g)
+    eq-htpy-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f~g)
 ```
 
 ## References

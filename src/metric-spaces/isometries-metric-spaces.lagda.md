@@ -25,22 +25,25 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-An
+A [map of metric spaces](metric-spaces.functions-metric-spaces.md) `f : A → B`
+is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
-between two [metric spaces](metric-spaces.metric-spaces.md) is an
-[isometry](metric-spaces.isometries-pseudometric-spaces.md) between their
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md), i.e., upper bounds
-on the distance between two points in `A` are exactly the upper bounds of the
-distance between their images in `B`.
+if the
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+on `A` is equivalent to the
+[preimage](metric-spaces.preimages-rational-neighborhood-relations.md) under `f`
+of the rational neighborhood relation on `B`. In other words, `f` is an isometry
+if it is an [isometry](metric-spaces.isometries-pseudometric-spaces.md) between
+the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
 ## Definitions
 
@@ -155,7 +158,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
 
-### An isometry preserves and reflects neighborhoods
+### Isometries preserve and reflect neighborhoods
 
 ```agda
 module _
@@ -352,7 +355,7 @@ module _
       ( E)
 ```
 
-### Any isometry between metric spaces is an embedding
+### Isometries between metric spaces are embeddings
 
 ```agda
 module _

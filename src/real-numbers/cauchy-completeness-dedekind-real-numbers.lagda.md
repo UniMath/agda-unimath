@@ -93,7 +93,7 @@ is-cauchy-map-cauchy-approximation-ℝ {l} x =
 
 ## Properties
 
-### The limit of a Cauchy approximation in `ℝ`
+### The limit of a Cauchy approximation in ℝ
 
 ```agda
 module _
@@ -532,7 +532,7 @@ pr1 (complete-metric-space-ℝ l) = metric-space-ℝ l
 pr2 (complete-metric-space-ℝ l) = is-complete-metric-space-ℝ l
 ```
 
-### Limits of Cauchy sequences in `ℝ`
+### Limits of Cauchy sequences in ℝ
 
 ```agda
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)

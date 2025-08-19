@@ -29,31 +29,68 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.monotonic-rational-neighborhoods
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
+open import metric-spaces.preimages-rational-neighborhood-relations
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a type equipped
-with a {{concept "pseudometric structure" Agda=Pseudometric-Structure}}: a
-[reflexive](metric-spaces.reflexive-rational-neighborhoods.md),
-[symmetric](metric-spaces.symmetric-rational-neighborhoods.md),
-[triangular](metric-spaces.triangular-rational-neighborhoods.md) and
-[saturated](metric-spaces.saturated-rational-neighborhoods.md)
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md)
+A
+{{#concept "pseudometric space" Agda=Pseudometric-Space WD="pseudometric space" WDID=Q1397059}}
+is a type [structured](foundation.structure.md) with a concept of distance on
+its elements.
 
-Given a pseudometric structure `B` on `A` and some positive rational number
-`d : ℚ⁺` such that `B d x y` holds for some pair of points `x y : A`, we
-interpret `d` as an
+Since we operate in a constructive setting, the concept of distance is captured
+by considering
 {{#concept "upper bound" Disambiguation="on distance in a pseudometric space" Agda=is-upper-bound-dist-Pseudometric-Space}}
-on the distance between `x` and `y` in the pseudometric space.
+on the distance between points, rather than by a distance function as in the
+classical approach. Thus, a pseudometric space `A` is defined by a family of
+_neighborhood_ [relations](foundation.binary-relations.md) on it indexed by the
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+`ℚ⁺`, a
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md):
+
+```text
+  N : ℚ⁺ → A → A → Prop l
+```
+
+that satisfies certain axioms. Constructing a proof of `N d x y` amounts to
+saying that _`d` is an upper bound on the distance from `x` to `y`_.
+
+The neighborhood relation on a pseudometric space must satisfy the following
+axioms:
+
+- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhood-relations.md)
+  Every positive rational `d` is an upper bound on the distance from `x` to
+  itself.
+- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhood-relations.md)
+  Any upper bound on the distance from `x` to `y` is an upper bound on the
+  distance from `y` to `x`.
+- [**Triangularity.**](metric-spaces.triangular-rational-neighborhood-relations.md)
+  If `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
+  bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
+  distance from `x` to `z`.
+- [**Saturation.**](metric-spaces.saturated-rational-neighborhood-relations.md):
+  any neighborhood `N d x y` contains the intersection of all `N d' x y` for
+  `d < d'`.
+
+Unlike in [metric spaces](metric-spaces.metric-spaces.md), the rational
+neighborhood relation in a pseudometric space is not required to be
+[extensional](metric-spaces.extensionality-pseudometric-spaces.md) so
+[similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) are not
+necessarily [equal](foundation.identity-types.md).
+
+NB: When working with actual distance functions, the _saturation_ condition
+always holds, defining `N d x y` as `dist(x , y) ≤ d`. Since we're working with
+_upper bounds on distances_, we add this axiom to ensure that the subsets of
+upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
@@ -204,6 +241,34 @@ module _
       monotonic-neighborhood-Pseudometric-Space
       saturated-neighborhood-Pseudometric-Space
 ```
+
+## Properties
+
+### Characterization of the transport of pseudometric structures along equalities
+
+```agda
+equiv-Eq-tr-Pseudometric-Structure :
+  {l1 l2 : Level} (A B : UU l1) →
+  (P : Pseudometric-Structure l2 A) →
+  (Q : Pseudometric-Structure l2 B) →
+  (e : A ＝ B) →
+  (tr (Pseudometric-Structure l2) e P ＝ Q) ≃
+  (Eq-Rational-Neighborhood-Relation
+    ( pr1 P)
+    ( preimage-Rational-Neighborhood-Relation (map-eq e) (pr1 Q)))
+equiv-Eq-tr-Pseudometric-Structure A .A P Q refl =
+  ( equiv-Eq-eq-Rational-Neighborhood-Relation (pr1 P) (pr1 Q)) ∘e
+  ( extensionality-type-subtype'
+    ( is-pseudometric-prop-Rational-Neighborhood-Relation A)
+    ( P)
+    ( Q))
+```
+
+## See also
+
+- The type of [metric spaces](metric-spaces.metric-spaces.md) is the type of
+  [extensional](metric-spaces.extensionality-pseudometric-spaces.md)
+  pseudometric spaces.
 
 ## External links
 

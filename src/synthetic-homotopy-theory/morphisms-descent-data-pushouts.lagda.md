@@ -121,12 +121,12 @@ proofs of `is-equiv` of their gluing maps.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
-  (Q : descent-data-pushout 𝒮 l5)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
+  (Q : descent-data-pushout 𝒮 l6 l7)
   where
 
-  hom-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  hom-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7)
   hom-descent-data-pushout =
     Σ ( (a : domain-span-diagram 𝒮) →
         left-family-descent-data-pushout P a →
@@ -173,8 +173,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   where
 
   id-hom-descent-data-pushout : hom-descent-data-pushout P P
@@ -187,10 +187,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
-  (Q : descent-data-pushout 𝒮 l5)
-  (R : descent-data-pushout 𝒮 l6)
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
+  (Q : descent-data-pushout 𝒮 l6 l7)
+  (R : descent-data-pushout 𝒮 l8 l9)
   (g : hom-descent-data-pushout Q R)
   (f : hom-descent-data-pushout P Q)
   where
@@ -223,13 +223,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
-  (Q : descent-data-pushout 𝒮 l5)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
+  (Q : descent-data-pushout 𝒮 l6 l7)
   (f g : hom-descent-data-pushout P Q)
   where
 
-  htpy-hom-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  htpy-hom-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7)
   htpy-hom-descent-data-pushout =
     Σ ( (a : domain-span-diagram 𝒮) →
         left-map-hom-descent-data-pushout P Q f a ~
@@ -253,9 +253,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
-  (Q : descent-data-pushout 𝒮 l5)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
+  (Q : descent-data-pushout 𝒮 l6 l7)
   (f : hom-descent-data-pushout P Q)
   where
 
@@ -271,9 +271,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
-  (Q : descent-data-pushout 𝒮 l5)
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
+  (Q : descent-data-pushout 𝒮 l6 l7)
   (f : hom-descent-data-pushout P Q)
   where
 

@@ -57,7 +57,7 @@ abstract
   trichotomy-sign-ℚ :
     {l : Level} {A : UU l} (x : ℚ) →
     ( is-negative-ℚ x → A) →
-    ( Id x zero-ℚ → A) →
+    ( x ＝ zero-ℚ → A) →
     ( is-positive-ℚ x → A) →
     A
   trichotomy-sign-ℚ x neg zero pos =

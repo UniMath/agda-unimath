@@ -9,7 +9,6 @@ module metric-spaces.cauchy-approximations-pseudometric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -20,6 +19,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.short-functions-pseudometric-spaces
 ```
 
 </details>
@@ -29,10 +29,11 @@ open import metric-spaces.pseudometric-spaces
 A
 {{#concept "Cauchy approximation" Disambiguation="in a pseudometric space" Agda=is-cauchy-approximation-Pseudometric-Space}}
 in a [pseudometric space](metric-spaces.pseudometric-spaces.md) `A` is a map `f`
-from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to its
-carrier type such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
-(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhoods.md), i.e. the
-distance between `f ε` and `f δ` is bounded by `ε + δ`.
+from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to the
+carrier type of `A` such that for all positive rationals `ε` and `δ`, `f ε` and
+`f δ` are in a
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhood-relations.md),
+i.e., the distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
 
@@ -96,11 +97,37 @@ module _
 
   const-cauchy-approximation-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space A
-  const-cauchy-approximation-Pseudometric-Space =
-    (const ℚ⁺ x) , (λ ε δ → refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x)
+  pr1 const-cauchy-approximation-Pseudometric-Space _ = x
+  pr2 const-cauchy-approximation-Pseudometric-Space ε δ =
+    refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x
 ```
 
-### Homotopic cauchy approximations are equal
+### The action of short maps on Cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A B)
+  where
+
+  map-short-function-cauchy-approximation-Pseudometric-Space :
+    cauchy-approximation-Pseudometric-Space A →
+    cauchy-approximation-Pseudometric-Space B
+  map-short-function-cauchy-approximation-Pseudometric-Space (u , H) =
+    ( map-short-function-Pseudometric-Space A B f ∘ u ,
+      λ ε δ →
+        is-short-map-short-function-Pseudometric-Space
+          ( A)
+          ( B)
+          ( f)
+          ( ε +ℚ⁺ δ)
+          ( u ε)
+          ( u δ)
+          ( H ε δ))
+```
+
+### Homotopic Cauchy approximations are equal
 
 ```agda
 module _

@@ -22,7 +22,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
 ```
 
 </details>
@@ -35,7 +35,7 @@ Two elements `x y` of a
 if any of the following equivalent propositions holds:
 
 - they are similar w.r.t the underlying
-  [rational neighborhood relation](metric-spaces.rational-neighborhoods.md);
+  [rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md);
 - they have the same neighbors: `∀ δ z → N δ x z ↔ N δ y z`;
 - they share all neighborhoods: `∀ δ → N δ x y`.
 
@@ -155,9 +155,9 @@ module _
     ( symmetric-sim-Pseudometric-Space A) ,
     ( transitive-sim-Pseudometric-Space A)
 
-  equivalence-sim-Pseudometric-Space :
+  equivalence-relation-sim-Pseudometric-Space :
     equivalence-relation l2 (type-Pseudometric-Space A)
-  equivalence-sim-Pseudometric-Space =
+  equivalence-relation-sim-Pseudometric-Space =
     ( sim-prop-Pseudometric-Space A) ,
     ( is-equivalence-relation-sim-Pseudometric-Space)
 ```

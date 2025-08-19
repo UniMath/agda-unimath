@@ -32,7 +32,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Properties
 
-### Given a function `(i : Fin n) → A i ∨ B i`, we have `∀' (Fin n) A ∨ ∃ (Fin n) B`
+### Given a function `(i : Fin n) → (A i) ∨ (B i)`, we have `(∀' (Fin n) A) ∨ (∃ (Fin n) B)`
 
 ```agda
 Π-disjunction-Fin :
@@ -41,24 +41,25 @@ open import univalent-combinatorics.standard-finite-types
   type-disjunction-Prop (Π-Prop (Fin n) A) (∃ (Fin n) B)
 Π-disjunction-Fin zero-ℕ _ _ _ = inl-disjunction (λ ())
 Π-disjunction-Fin (succ-ℕ n) A B f =
-  elim-disjunction
-    ( motive)
-    ( λ Πi<n:A →
-      elim-disjunction
-        ( motive)
-        ( λ An →
-          inl-disjunction
-            ( λ where
-              (inl i) → Πi<n:A i
-              (inr _) → An))
-        ( inr-disjunction ∘ intro-exists (neg-one-Fin n))
-        ( f (neg-one-Fin n)))
-    ( inr-disjunction ∘ map-exists (type-Prop ∘ B) inl (λ _ Bi → Bi))
-    ( Π-disjunction-Fin n (A ∘ inl) (B ∘ inl) (f ∘ inl))
-  where motive = Π-Prop (Fin (succ-ℕ n)) A ∨ (∃ (Fin (succ-ℕ n)) B)
+  let motive = Π-Prop (Fin (succ-ℕ n)) A ∨ (∃ (Fin (succ-ℕ n)) B)
+  in
+    elim-disjunction
+      ( motive)
+      ( λ Πi<n:A →
+        elim-disjunction
+          ( motive)
+          ( λ An →
+            inl-disjunction
+              ( λ where
+                (inl i) → Πi<n:A i
+                (inr _) → An))
+          ( inr-disjunction ∘ intro-exists (neg-one-Fin n))
+          ( f (neg-one-Fin n)))
+      ( inr-disjunction ∘ map-exists (type-Prop ∘ B) inl (λ _ Bi → Bi))
+      ( Π-disjunction-Fin n (A ∘ inl) (B ∘ inl) (f ∘ inl))
 ```
 
-### Given a finitely enumerable type `X` and a function `(x : X) → A x ∨ B x`, we have `∀' X A ∨ ∃ X B`
+### Given a finitely enumerable type `X` and a function `(x : X) → (A x) ∨ (B x)`, we have `(∀' X A) ∨ (∃ X B)`
 
 ```agda
 Π-disjunction-finite-enumeration :
@@ -68,7 +69,7 @@ open import univalent-combinatorics.standard-finite-types
   type-disjunction-Prop (∀' X A) (∃ X B)
 Π-disjunction-finite-enumeration {X = X} (n , Fin-n↠X) A B f =
   elim-disjunction
-    ( motive)
+    ( (∀' X A) ∨ (∃ X B))
     ( λ ∀iA →
       inl-disjunction
         ( λ x →
@@ -83,7 +84,6 @@ open import univalent-combinatorics.standard-finite-types
       ( A ∘ map-surjection Fin-n↠X)
       ( B ∘ map-surjection Fin-n↠X)
       ( f ∘ map-surjection Fin-n↠X))
-  where motive = ∀' X A ∨ ∃ X B
 
 Π-disjunction-Finitely-Enumerable-Type :
   {l1 l2 l3 : Level} (X : Finitely-Enumerable-Type l1)
@@ -100,7 +100,7 @@ open import univalent-combinatorics.standard-finite-types
     ( ∃eX)
 ```
 
-### Given a finite type `X` and a function `(x : X) → A x ∨ B x`, we have `∀' X A ∨ ∃ X B`
+### Given a finite type `X` and a function `(x : X) → (A x) ∨ (B x)`, we have `(∀' X A) ∨ (∃ X B)`
 
 ```agda
 Π-disjunction-Finite-Type :

@@ -7,7 +7,9 @@ module foundation.set-presented-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.1-types
 open import foundation.action-on-identifications-functions
+open import foundation.connected-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -23,39 +25,92 @@ open import foundation.images
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.sets
 ```
 
 </details>
 
 ## Idea
 
-A type `A` is said to be
-{{#concept "set presented" Agda=has-set-presentation-Prop}} if there
-[exists](foundation.existential-quantification.md) a map `f : X → A` from a
-[set](foundation-core.sets.md) `X` such that the composite
-`X → A → type-trunc-Set A` is an [equivalence](foundation.equivalences.md).
+A type `A` is said to be {{#concept "set presented" Agda=has-set-presentation}}
+if there [exists](foundation.existential-quantification.md) a map `f : X → A`
+from a [set](foundation-core.sets.md) `X` such that the composite
+`η ∘ f : X → A → ║A║₀` is an [equivalence](foundation.equivalences.md).
 
 ## Definitions
 
-### Set presentations of types
+### The underlying structure of a set presentation
+
+```agda
+is-set-presentation-map :
+  {l1 l2 : Level} {A : UU l1} (X : Set l2) → (type-Set X → A) → UU (l1 ⊔ l2)
+is-set-presentation-map X f = is-equiv (unit-trunc-Set ∘ f)
+
+set-presentation-structure : {l1 l2 : Level} → UU l1 → Set l2 → UU (l1 ⊔ l2)
+set-presentation-structure A X = Σ (type-Set X → A) (is-set-presentation-map X)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : set-presentation-structure A X)
+  where
+
+  map-set-presentation-structure : type-Set X → A
+  map-set-presentation-structure = pr1 f
+
+  is-set-presentation-map-map-set-presentation-structure :
+    is-set-presentation-map X map-set-presentation-structure
+  is-set-presentation-map-map-set-presentation-structure = pr2 f
+```
+
+### The predicate on a set of being a set presentation of a type
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Set l1) (B : UU l2)
+  {l1 l2 : Level} (A : UU l1) (X : Set l2)
   where
 
-  has-set-presentation-Prop : Prop (l1 ⊔ l2)
-  has-set-presentation-Prop =
-    ∃ (type-Set A → B) (λ f → is-equiv-Prop (unit-trunc-Set ∘ f))
+  is-set-presentation-Prop : Prop (l1 ⊔ l2)
+  is-set-presentation-Prop = trunc-Prop (set-presentation-structure A X)
 
-  has-set-presentation : UU (l1 ⊔ l2)
+  is-set-presentation : UU (l1 ⊔ l2)
+  is-set-presentation = type-Prop is-set-presentation-Prop
+
+  is-prop-is-set-presentation : is-prop is-set-presentation
+  is-prop-is-set-presentation = is-prop-type-Prop is-set-presentation-Prop
+```
+
+### The type of set presentations of a type at a universe level
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (A : UU l1)
+  where
+
+  set-presentation : UU (l1 ⊔ lsuc l2)
+  set-presentation = Σ (Set l2) (is-set-presentation A)
+
+  is-1-type-set-presentation : is-1-type set-presentation
+  is-1-type-set-presentation =
+    is-1-type-type-subtype (is-set-presentation-Prop A) is-1-type-Set
+```
+
+### The predicate of having a set presentation at a universe level
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (A : UU l1)
+  where
+
+  has-set-presentation-Prop : Prop (l1 ⊔ lsuc l2)
+  has-set-presentation-Prop = trunc-Prop (set-presentation l2 A)
+
+  has-set-presentation : UU (l1 ⊔ lsuc l2)
   has-set-presentation = type-Prop has-set-presentation-Prop
 
   is-prop-has-set-presentation : is-prop has-set-presentation
@@ -66,31 +121,31 @@ module _
 
 ### Types set presented by coproducts are coproducts
 
-Given a type `B` that is set presented by a coproduct
+Given a type `A` that is set presented by a coproduct
 
 ```text
-              B
+              A
             ∧   \
          f /     \ η
           /   ~   ∨
-  (A1 + A2) -----> ║B║₀,
+  (X1 + X2) -----> ║A║₀,
 ```
 
-then `B` computes as the coproduct of the images of the restrictions of `f`
-along the left and right inclusion of the coproduct `A1 + A2`
+then `A` computes as the coproduct of the images of the restrictions of `f`
+along the left and right inclusion of the coproduct `X1 + X2`
 
 ```text
-  B ≃ im (f ∘ inl) + im (f ∘ inr).
+  A ≃ im (f ∘ inl) + im (f ∘ inr).
 ```
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
-  (f : A1 + A2 → B) (e : (A1 + A2) ≃ ║ B ║₀)
+  {l1 l2 l3 : Level} {X1 : UU l1} {X2 : UU l2} {A : UU l3}
+  (f : X1 + X2 → A) (e : (X1 + X2) ≃ ║ A ║₀)
   (H : unit-trunc-Set ∘ f ~ map-equiv e)
   where
 
-  map-is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
+  map-is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) → A
   map-is-coproduct-codomain = rec-coproduct pr1 pr1
 
   triangle-is-coproduct-codomain :
@@ -137,10 +192,10 @@ module _
                 ( a)) ,
               ( triangle-is-coproduct-codomain a ∙ inv p)))
       where
-      a : A1 + A2
+      a : X1 + X2
       a = map-inv-equiv e (unit-trunc-Set b)
 
-  is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
+  is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ A
   pr1 is-coproduct-codomain = map-is-coproduct-codomain
   pr2 is-coproduct-codomain =
     is-equiv-is-emb-is-surjective

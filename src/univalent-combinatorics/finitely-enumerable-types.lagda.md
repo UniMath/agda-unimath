@@ -7,6 +7,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -16,12 +17,12 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equality-dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -33,9 +34,9 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
+open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
@@ -50,9 +51,9 @@ open import univalent-combinatorics.surjective-maps
 ## Idea
 
 A type `X` is
-{{#concept "finitely enumerable" disambiguation="type" Agda=finitely-enumerable-type}}
-if there is an `n : ℕ` and a [surjection](foundation.surjective-maps.md) from
-`Fin n → X`.
+{{#concept "finitely enumerable" disambiguation="type" Agda=is-finitely-enumerable}}
+if there [exists](foundation.existential-quantification.md) an `n : ℕ` and a
+[surjection](foundation.surjective-maps.md) from `Fin n → X`.
 
 ## Definition
 
@@ -87,7 +88,7 @@ module _
 
 ## Properties
 
-### If `X ≃ Y` and `X` is finitely enumerable, so is `Y`
+### Finitely enumerable types are closed under equivalences
 
 ```agda
 finite-enumeration-equiv :
@@ -140,7 +141,7 @@ finitely-enumerable-type-Finite-Type (X , is-finite-X) =
   (X , is-finitely-enumerable-is-finite is-finite-X)
 ```
 
-### If `A` is finitely enumerable, and `B a` is finitely enumerable for every `a : A`, `Σ A B` is finitely enumerable
+### Finitely enumerable types are closed under dependent sums
 
 ```agda
 abstract
@@ -154,34 +155,23 @@ abstract
         count-Σ
           ( count-Fin nA)
           ( count-Fin ∘ pr1 ∘ eB ∘ map-surjection Fin-nA↠A)
-      map-surj :
-        (i : Fin nA) → Fin (pr1 (eB (map-surjection Fin-nA↠A i))) → Σ A B
-      map-surj iA i-nBa =
-        ( map-surjection Fin-nA↠A iA ,
-          map-surjection (pr2 (eB (map-surjection Fin-nA↠A iA))) i-nBa)
-      is-surjective-map-surj :
-        is-surjective (ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn)
+      map-surj =
+        ind-Σ
+          ( λ iA i-nBa →
+            ( map-surjection Fin-nA↠A iA ,
+              map-surjection (pr2 (eB (map-surjection Fin-nA↠A iA))) i-nBa))
       is-surjective-map-surj =
         λ (a , b) →
-          let
-            open
-              do-syntax-trunc-Prop
-                ( trunc-Prop
-                  ( fiber (ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn) (a , b)))
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj (a , b)))
           in do
-            (ia , eA-ia=a@refl) ← is-surjective-map-surjection Fin-nA↠A a
-            (ib , eBa-ib=b) ← is-surjective-map-surjection (pr2 (eB a)) b
-            let
-              ib' = map-inv-eq (ap (Fin ∘ pr1 ∘ eB) eA-ia=a) ib
-              iΣ = map-inv-equiv Fin-n≃ΣAn (ia , ib')
-            intro-exists
-              iΣ
-              ( ap
-                  ( ind-Σ map-surj)
-                  ( is-section-map-inv-equiv Fin-n≃ΣAn (ia , ib')) ∙
-                eq-pair-Σ eA-ia=a eBa-ib=b)
+            (ia , refl) ← is-surjective-map-surjection Fin-nA↠A a
+            (ib , refl) ←
+              is-surjective-map-surjection (pr2 (eB a)) b
+            intro-exists (ia , ib) refl
     in
-      ( n , ind-Σ map-surj ∘ map-equiv Fin-n≃ΣAn , is-surjective-map-surj)
+      ( n ,
+        map-surj ∘ map-equiv Fin-n≃ΣAn ,
+        is-surjective-right-comp-equiv is-surjective-map-surj Fin-n≃ΣAn)
 ```
 
 ### `X` and `Y` are finitely enumerable if and only if `X + Y` is finitely enumerable
@@ -200,38 +190,27 @@ module _
           count-decidable-subtype
             ( λ iₙ₊ → is-left-Decidable-Prop (map-surjection Fin-n+↠X+Y iₙ₊))
             ( count-Fin n+)
-        map-surj-left : Fin nₗ → X
-        map-surj-left iₗ =
+        map-surj =
           ind-Σ
             ( λ iₙ₊ is-left-f-iₙ₊ →
               left-is-left (map-surjection Fin-n+↠X+Y iₙ₊) (is-left-f-iₙ₊))
-            ( map-equiv Fin-nₗ≃n+-inl iₗ)
         helper :
           (x? : X + Y) (x' : X) → (x? ＝ inl x') → (L : is-left x?) →
           left-is-left x? L ＝ x'
         helper = λ where
           (inl _) _ x?=inl-x' _ → is-injective-inl x?=inl-x'
-        is-surjective-map-surj-left : is-surjective map-surj-left
-        is-surjective-map-surj-left x =
-          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj-left x))
+        is-surjective-map-surj x =
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber map-surj x))
           in do
             (iₙ₊ , fiₙ₊=inl-x) ← is-surjective-map-surjection Fin-n+↠X+Y (inl x)
-            let
-              is-left-fiₙ₊ = inv-tr is-left fiₙ₊=inl-x star
-              iₗ = map-inv-equiv Fin-nₗ≃n+-inl (iₙ₊ , is-left-fiₙ₊)
+            let is-left-fiₙ₊ = inv-tr is-left fiₙ₊=inl-x star
             intro-exists
-              ( iₗ)
-              ( ap
-                ( ind-Σ
-                  ( λ iₙ₊ is-left-fiₙ₊ →
-                    left-is-left
-                      ( map-surjection Fin-n+↠X+Y iₙ₊)
-                      ( is-left-fiₙ₊)))
-                ( is-section-map-section-map-equiv
-                  ( Fin-nₗ≃n+-inl)
-                  ( iₙ₊ , is-left-fiₙ₊)) ∙
-                helper _ _ fiₙ₊=inl-x is-left-fiₙ₊)
-      in (nₗ , map-surj-left , is-surjective-map-surj-left)
+              ( iₙ₊ , is-left-fiₙ₊)
+              ( helper _ _ fiₙ₊=inl-x is-left-fiₙ₊)
+      in
+        ( nₗ ,
+          map-surj ∘ map-equiv Fin-nₗ≃n+-inl ,
+          is-surjective-right-comp-equiv is-surjective-map-surj Fin-nₗ≃n+-inl)
 
 abstract
   finite-enumeration-right-summand :
@@ -246,7 +225,6 @@ finite-enumeration-coproduct :
   finite-enumeration X → finite-enumeration Y → finite-enumeration (X + Y)
 finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
   let
-    F : bool → UU (l1 ⊔ l2)
     F = rec-bool (raise l2 X) (raise l1 Y)
     eF : (b : bool) → finite-enumeration (F b)
     eF = λ where
@@ -254,13 +232,12 @@ finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
       true → finite-enumeration-equiv eX (compute-raise l2 X)
   in
     finite-enumeration-equiv
-      ( finite-enumeration-equiv
-        ( finite-enumeration-Σ
-          ( finite-enumeration-count (2 , equiv-bool-Fin-2))
-          ( F)
-          ( eF))
-        ( equiv-Σ-bool-coproduct F))
-      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y))
+      ( finite-enumeration-Σ
+        ( finite-enumeration-count (2 , equiv-bool-Fin-2))
+        ( F)
+        ( eF))
+      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y) ∘e
+        equiv-Σ-bool-coproduct F)
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
@@ -282,3 +259,56 @@ module _
       enum-Y ← eY
       unit-trunc-Prop (finite-enumeration-coproduct enum-X enum-Y)
 ```
+
+### Finitely enumerable types are closed under Cartesian products
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  finite-enumeration-product :
+    finite-enumeration X → finite-enumeration Y → finite-enumeration (X × Y)
+  finite-enumeration-product (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
+    let
+      surj-map : (Fin nX × Fin nY) → X × Y
+      surj-map =
+        map-product (map-surjection Fin-nX↠X) (map-surjection Fin-nY↠Y)
+      is-surjective-surj-map : is-surjective surj-map
+      is-surjective-surj-map =
+        λ (x , y) →
+          let open do-syntax-trunc-Prop (trunc-Prop (fiber surj-map (x , y)))
+          in do
+            (ix , fix=x) ← is-surjective-map-surjection Fin-nX↠X x
+            (iy , fiy=y) ← is-surjective-map-surjection Fin-nY↠Y y
+            intro-exists (ix , iy) (eq-pair fix=x fiy=y)
+    in
+      ( nX *ℕ nY ,
+        surj-map ∘ map-inv-equiv (product-Fin nX nY) ,
+        is-surjective-right-comp-equiv
+          ( is-surjective-surj-map)
+          ( inv-equiv (product-Fin nX nY)))
+
+  is-finitely-enumerable-product :
+    is-finitely-enumerable X → is-finitely-enumerable Y →
+    is-finitely-enumerable (X × Y)
+  is-finitely-enumerable-product eX eY =
+    let open do-syntax-trunc-Prop (is-finitely-enumerable-prop (X × Y))
+    in do
+      ex ← eX
+      ey ← eY
+      unit-trunc-Prop (finite-enumeration-product ex ey)
+
+product-Finitely-Enumerable-Type :
+  {l1 l2 : Level}
+  (X : Finitely-Enumerable-Type l1)
+  (Y : Finitely-Enumerable-Type l2) →
+  Finitely-Enumerable-Type (l1 ⊔ l2)
+product-Finitely-Enumerable-Type (X , eX) (Y , eY) =
+  (X × Y , is-finitely-enumerable-product eX eY)
+```
+
+## See also
+
+- A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md)
+  is precisely a finitely enumerable [set](foundation.sets.md).

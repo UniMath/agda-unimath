@@ -13,7 +13,6 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
@@ -27,15 +26,15 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-pseudometric-spaces
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -53,7 +52,7 @@ defined by a family of _neighborhood_
 [relations](foundation.binary-relations.md) on it indexed by the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `ℚ⁺`, a
-[rational neighborhood relation](metric-spaces.rational-neighborhoods.md):
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md):
 
 ```text
   N : ℚ⁺ → A → A → Prop l
@@ -64,23 +63,24 @@ saying that _`d` is an upper bound on the distance from `x` to `y`_.
 
 The neighborhood relation on a metric space must satisfy the following axioms:
 
-- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhoods.md) Every
-  positive rational `d` is an upper bound on the distance from `x` to itself.
-- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhoods.md) Any upper
-  bound on the distance from `x` to `y` is an upper bound on the distance from
-  `y` to `x`.
-- [**Triangularity.**](metric-spaces.triangular-rational-neighborhoods.md) If
-  `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
+- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhood-relations.md)
+  Every positive rational `d` is an upper bound on the distance from `x` to
+  itself.
+- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhood-relations.md)
+  Any upper bound on the distance from `x` to `y` is an upper bound on the
+  distance from `y` to `x`.
+- [**Triangularity.**](metric-spaces.triangular-rational-neighborhood-relations.md)
+  If `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
   bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
   distance from `x` to `z`.
-- [**Saturation.**](metric-spaces.saturated-rational-neighborhoods.md): any
-  neighborhood `N d x y` contains the intersection of all `N d' x y` for
+- [**Saturation.**](metric-spaces.saturated-rational-neighborhood-relations.md):
+  any neighborhood `N d x y` contains the intersection of all `N d' x y` for
   `d < d'`.
 
 This gives `A` the structure of a
 [**pseudometric space**](metric-spaces.pseudometric-spaces.md); finally, we ask
 that our metric spaces are
-[**extensional**](metric-spaces.extensional-pseudometric-spaces.md):
+[**extensional**](metric-spaces.extensionality-pseudometric-spaces.md):
 [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) elements
 are [equal](foundation-core.identity-types.md):
 
@@ -97,83 +97,45 @@ upper bounds on distances between elements is closed on the left.
 
 ## Definitions
 
-### Metric Structures on a type
-
-```agda
-module _
-  {l1 : Level} (A : UU l1) {l2 : Level}
-  (B : Rational-Neighborhood-Relation l2 A)
-  where
-
-  is-metric-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2)
-  is-metric-prop-Rational-Neighborhood-Relation =
-    Σ-Prop
-      ( is-pseudometric-prop-Rational-Neighborhood-Relation A B)
-      ( λ H →
-        is-extensional-prop-Pseudometric-Space (A , B , H))
-
-  is-metric-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
-  is-metric-Rational-Neighborhood-Relation =
-    type-Prop is-metric-prop-Rational-Neighborhood-Relation
-
-  is-prop-is-metric-Rational-Neighborhood-Relation :
-    is-prop is-metric-Rational-Neighborhood-Relation
-  is-prop-is-metric-Rational-Neighborhood-Relation =
-    is-prop-type-Prop (is-metric-prop-Rational-Neighborhood-Relation)
-
-Metric-Structure :
-  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
-Metric-Structure l2 A =
-  type-subtype (is-metric-prop-Rational-Neighborhood-Relation A {l2})
-```
-
 ### The type of metric spaces
 
 ```agda
 Metric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Space l1 l2 =
-  Σ (UU l1) (Metric-Structure l2)
+  Σ (Pseudometric-Space l1 l2) (is-extensional-Pseudometric-Space)
 
-make-Metric-Space :
-  { l1 l2 : Level} →
-  ( A : UU l1) →
-  ( B : Rational-Neighborhood-Relation l2 A) →
-  ( refl-B : is-reflexive-Rational-Neighborhood-Relation B) →
-  ( symmetric-B : is-symmetric-Rational-Neighborhood-Relation B) →
-  ( triangular-B : is-triangular-Rational-Neighborhood-Relation B) →
-  ( saturated-B : is-saturated-Rational-Neighborhood-Relation B) →
-  ( extensional-B :
+module _
+  {l1 l2 : Level}
+  ( A : UU l1)
+  ( N : Rational-Neighborhood-Relation l2 A)
+  ( refl-N : is-reflexive-Rational-Neighborhood-Relation N)
+  ( symmetric-N : is-symmetric-Rational-Neighborhood-Relation N)
+  ( triangular-N : is-triangular-Rational-Neighborhood-Relation N)
+  ( saturated-N : is-saturated-Rational-Neighborhood-Relation N)
+  ( extensional-N :
     is-extensional-Pseudometric-Space
-      (A , B , refl-B , symmetric-B , triangular-B , saturated-B)) →
-  Metric-Space l1 l2
-make-Metric-Space
-  A B refl-B symmetric-B triangular-B saturated-B extensional-B =
-  ( A) ,
-  ( ( B) ,
-    ( refl-B , symmetric-B , triangular-B , saturated-B) ,
-    ( extensional-B))
+      ( A , N , refl-N , symmetric-N , triangular-N , saturated-N))
+  where
+
+  make-Metric-Space : Metric-Space l1 l2
+  pr1 make-Metric-Space =
+    (A , N , refl-N , symmetric-N , triangular-N , saturated-N)
+  pr2 make-Metric-Space = extensional-N
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
+  pseudometric-Metric-Space : Pseudometric-Space l1 l2
+  pseudometric-Metric-Space = pr1 M
+
   type-Metric-Space : UU l1
   type-Metric-Space =
-    pr1 M
-
-  structure-Metric-Space : Metric-Structure l2 type-Metric-Space
-  structure-Metric-Space = pr2 M
-
-  pseudometric-Metric-Space : Pseudometric-Space l1 l2
-  pseudometric-Metric-Space =
-    ( type-Metric-Space) ,
-    ( pr1 structure-Metric-Space) ,
-    ( pr1 (pr2 structure-Metric-Space))
+    type-Pseudometric-Space pseudometric-Metric-Space
 
   is-extensional-pseudometric-Metric-Space :
     is-extensional-Pseudometric-Space pseudometric-Metric-Space
-  is-extensional-pseudometric-Metric-Space =
-    pr2 (pr2 structure-Metric-Space)
+  is-extensional-pseudometric-Metric-Space = pr2 M
 
   pseudometric-structure-Metric-Space :
     Pseudometric-Structure l2 type-Metric-Space
@@ -225,12 +187,6 @@ module _
   refl-neighborhood-Metric-Space =
     refl-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  refl-eq-neighborhood-Metric-Space :
-    (d : ℚ⁺) {x y : type-Metric-Space} → x ＝ y →
-    neighborhood-Metric-Space d x y
-  refl-eq-neighborhood-Metric-Space d {x} {y} x=y =
-    tr (neighborhood-Metric-Space d x) x=y (refl-neighborhood-Metric-Space d x)
-
   symmetric-neighborhood-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space) →
     neighborhood-Metric-Space d x y →
@@ -260,19 +216,6 @@ module _
     neighborhood-Metric-Space d₂ x y
   monotonic-neighborhood-Metric-Space =
     monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
-
-  weakly-monotonic-neighborhood-Metric-Space :
-    (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
-    leq-ℚ⁺ d₁ d₂ →
-    neighborhood-Metric-Space d₁ x y →
-    neighborhood-Metric-Space d₂ x y
-  weakly-monotonic-neighborhood-Metric-Space
-    x y d₁⁺@(d₁ , _) d₂⁺@(d₂ , _) d₁≤d₂ Nd₁xy =
-    trichotomy-le-ℚ d₁ d₂
-      ( λ d₁<d₂ → monotonic-neighborhood-Metric-Space x y d₁⁺ d₂⁺ d₁<d₂ Nd₁xy)
-      ( λ d₁=d₂ →
-        tr (λ d → neighborhood-Metric-Space d x y) (eq-ℚ⁺ d₁=d₂) Nd₁xy)
-      ( λ d₂<d₁ → ex-falso (not-leq-le-ℚ d₂ d₁ d₂<d₁ d₁≤d₂))
 
   saturated-neighborhood-Metric-Space :
     (ε : ℚ⁺) (x y : type-Metric-Space) →
@@ -338,10 +281,10 @@ module _
   transitive-sim-Metric-Space =
     transitive-sim-Pseudometric-Space (pseudometric-Metric-Space A)
 
-  equivalence-sim-Metric-Space :
+  equivalence-relation-sim-Metric-Space :
     equivalence-relation l2 (type-Metric-Space A)
-  equivalence-sim-Metric-Space =
-    equivalence-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+  equivalence-relation-sim-Metric-Space =
+    equivalence-relation-sim-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
 ## Properties
@@ -385,26 +328,6 @@ module _
     x ＝ y
   eq-sim-Metric-Space x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space x y)
-```
-
-### Characterization of the transport of metric structures along equalities
-
-```agda
-equiv-Eq-tr-Metric-Structure :
-  {l1 l2 : Level} (A B : UU l1) →
-  (P : Metric-Structure l2 A) →
-  (Q : Metric-Structure l2 B) →
-  (e : A ＝ B) →
-  (tr (Metric-Structure l2) e P ＝ Q) ≃
-  (Eq-Rational-Neighborhood-Relation
-    ( pr1 P)
-    ( preimage-Rational-Neighborhood-Relation (map-eq e) (pr1 Q)))
-equiv-Eq-tr-Metric-Structure A .A P Q refl =
-  ( equiv-Eq-eq-Rational-Neighborhood-Relation (pr1 P) (pr1 Q)) ∘e
-  ( extensionality-type-subtype'
-    ( is-metric-prop-Rational-Neighborhood-Relation A)
-    ( P)
-    ( Q))
 ```
 
 ## External links

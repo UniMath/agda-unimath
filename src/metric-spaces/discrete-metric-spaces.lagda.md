@@ -34,26 +34,26 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.locally-constant-functions-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.preimage-rational-neighborhoods
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
 
 ## Idea
 
-A [metric space](metric-spaces.metric-spaces.md) is called
+A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "discrete" Disambiguation="metric space" Agda=is-discrete-Metric-Space}}
 if all
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
@@ -65,7 +65,7 @@ the
 on its underlying [set](foundation.sets.md).
 
 Any [map](metric-spaces.functions-metric-spaces.md) from a discrete metric space
-is [short](metric-spaces.short-functions-metric-spaces.md); a map into a
+is [short](metric-spaces.short-functions-metric-spaces.md), and a map into a
 discrete metric space is short if and only if it is
 [locally constant](metric-spaces.locally-constant-functions-metric-spaces.md).
 
@@ -164,12 +164,12 @@ module _
 
   discrete-pseudometric-Set : Pseudometric-Space l l
   discrete-pseudometric-Set =
-    ( type-Set A) ,
-    ( discrete-neighborhood-prop-Set) ,
-    ( is-reflexive-discrete-neighborhood-Set) ,
-    ( is-symmetric-discrete-neighborhood-Set) ,
-    ( is-triangluar-discrete-neighborhood-Set) ,
-    ( is-saturated-discrete-neighborhood-Set)
+    ( type-Set A ,
+      discrete-neighborhood-prop-Set ,
+      is-reflexive-discrete-neighborhood-Set ,
+      is-symmetric-discrete-neighborhood-Set ,
+      is-triangluar-discrete-neighborhood-Set ,
+      is-saturated-discrete-neighborhood-Set)
 
   is-tight-discrete-pseudometric-space-Set :
     is-tight-Pseudometric-Space discrete-pseudometric-Set
@@ -260,7 +260,7 @@ module _
   (f : cauchy-approximation-Metric-Space (metric-space-Discrete-Metric-Space A))
   where
 
-  is-wconstant-cauchy-approximation-Disrcete-Metric-Space :
+  is-wconstant-cauchy-approximation-Discrete-Metric-Space :
     (ε δ : ℚ⁺) →
     Id
       ( map-cauchy-approximation-Metric-Space
@@ -271,7 +271,7 @@ module _
         ( metric-space-Discrete-Metric-Space A)
         ( f)
         ( δ))
-  is-wconstant-cauchy-approximation-Disrcete-Metric-Space ε δ =
+  is-wconstant-cauchy-approximation-Discrete-Metric-Space ε δ =
     is-discrete-metric-space-Discrete-Metric-Space
       ( A)
       ( ε +ℚ⁺ δ)
@@ -308,7 +308,7 @@ module _
         ( A)
         ( map-cauchy-approximation-Metric-Space A f ε)
         ( map-cauchy-approximation-Metric-Space A f one-ℚ⁺)
-        ( is-wconstant-cauchy-approximation-Disrcete-Metric-Space
+        ( is-wconstant-cauchy-approximation-Discrete-Metric-Space
           ( A , H)
           ( f)
           ( ε)
