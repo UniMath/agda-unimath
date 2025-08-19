@@ -88,11 +88,12 @@ module _
   extension-of-map-labeled-full-binary-tree-Magma
     f (leaf-full-binary-tree , label-T) = f (label-T star)
   extension-of-map-labeled-full-binary-tree-Magma
-    f (join-full-binary-tree L R , label-T) = mul-Magma M
-    ( extension-of-map-labeled-full-binary-tree-Magma f
-      ( L , (λ x → label-T (inl x))))
-    ( extension-of-map-labeled-full-binary-tree-Magma f
-      ( R , (λ x → label-T (inr x))))
+    f (join-full-binary-tree L R , label-T) =
+      mul-Magma M
+        ( extension-of-map-labeled-full-binary-tree-Magma f
+          ( L , (λ x → label-T (inl x))))
+        ( extension-of-map-labeled-full-binary-tree-Magma f
+          ( R , (λ x → label-T (inr x))))
 
   is-hom-extension-of-map-labeled-full-binary-tree-Magma :
     ( f : X → type-Magma M) →
@@ -170,7 +171,7 @@ module _
   pr2 (pr2 (is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma)) f =
     eq-pair-Σ (eq-htpy (λ T →
     is-retraction-extension-of-map-labeled-full-binary-tree-Magma T f))
-    ( dependent-identification-preserves-mul-labeled-full-binary-tree-Magma f)
+      ( dependent-identification-preserves-mul-labeled-full-binary-tree-Magma f)
 
   equiv-ev-label-leaf-hom-Magma-labeled-full-binary-tree-Magma :
     hom-Magma (labeled-full-binary-tree-Magma X) M ≃ (X → type-Magma M)
@@ -180,9 +181,10 @@ module _
     is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma
 
 is-free-magma-on-type-labeled-full-binary-tree-Magma :
-  {l : Level} (X : UU l) → is-free-magma-on-type
-  ( labeled-full-binary-tree-Magma X) X
-  ( λ x → leaf-full-binary-tree , λ _ → x)
+  {l : Level} (X : UU l) →
+  is-free-magma-on-type
+    ( labeled-full-binary-tree-Magma X) X
+    ( λ x → leaf-full-binary-tree , λ _ → x)
 is-free-magma-on-type-labeled-full-binary-tree-Magma X =
   is-equiv-ev-label-leaf-hom-Magma-full-binary-tree-Magma X
 ```
