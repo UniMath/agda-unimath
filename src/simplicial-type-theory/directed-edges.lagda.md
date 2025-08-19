@@ -154,7 +154,7 @@ hom▵-eq p =
 
 ## Properties
 
-### Characterizing equality of homomorphisms
+### Characterizing equality of directed edges
 
 ```agda
 module _
@@ -184,8 +184,7 @@ module _
 
   abstract
     is-torsorial-htpy-hom▵ :
-      (f : x →▵ y) →
-      is-contr (Σ (x →▵ y) (htpy-hom▵ f))
+      (f : x →▵ y) → is-torsorial (htpy-hom▵ f)
     is-torsorial-htpy-hom▵ f =
       is-torsorial-Eq-structure
         ( is-torsorial-htpy (arrow-hom▵ f))
@@ -213,7 +212,7 @@ module _
     map-inv-equiv (extensionality-hom▵ f g)
 ```
 
-### The homotopy of directed edges associated to a homotopy of simplicial arrows
+### The homotopy of directed edges associated to a homotopy of arrows
 
 ```agda
 module _
@@ -372,7 +371,7 @@ module _
       is-equiv-map-inv-compute-total-hom▵)
 ```
 
-### The hom type is an extension type
+### The hom-type as an extension type
 
 The hom-type `x →▵ y` is equivalent to the
 [type of extensions](orthogonal-factorization-systems.extensions-maps.md) of

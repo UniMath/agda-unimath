@@ -17,16 +17,19 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -170,6 +173,50 @@ module _
   extensionality-natural-transformation▵ =
     ( natural-transformation▵-hom▵-Π ,
       is-equiv-natural-transformation▵-hom▵-Π)
+```
+
+### Characterizing equality of natural transformations
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  htpy-natural-transformation▵ : (α β : f ⇒▵ g) → UU (I1 ⊔ l1 ⊔ l2)
+  htpy-natural-transformation▵ α β = (x : A) → htpy-hom▵ (α x) (β x)
+
+  refl-htpy-natural-transformation▵ :
+    (α : f ⇒▵ g) → htpy-natural-transformation▵ α α
+  refl-htpy-natural-transformation▵ α x = refl-htpy-hom▵ (α x)
+
+  htpy-eq-natural-transformation▵ :
+    (α β : f ⇒▵ g) → α ＝ β → htpy-natural-transformation▵ α β
+  htpy-eq-natural-transformation▵ α .α refl =
+    refl-htpy-natural-transformation▵ α
+
+  abstract
+    is-torsorial-htpy-natural-transformation▵ :
+      (α : f ⇒▵ g) → is-torsorial (htpy-natural-transformation▵ α)
+    is-torsorial-htpy-natural-transformation▵ α =
+      is-torsorial-Eq-Π (is-torsorial-htpy-hom▵ ∘ α)
+
+  is-equiv-htpy-eq-natural-transformation▵ :
+    (α β : f ⇒▵ g) → is-equiv (htpy-eq-natural-transformation▵ α β)
+  is-equiv-htpy-eq-natural-transformation▵ α =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-natural-transformation▵ α)
+      ( htpy-eq-natural-transformation▵ α)
+
+  equiv-htpy-eq-natural-transformation▵ :
+    (α β : f ⇒▵ g) → (α ＝ β) ≃ (htpy-natural-transformation▵ α β)
+  equiv-htpy-eq-natural-transformation▵ α β =
+    ( htpy-eq-natural-transformation▵ α β ,
+      is-equiv-htpy-eq-natural-transformation▵ α β)
+
+  eq-htpy-natural-transformation▵ :
+    (α β : f ⇒▵ g) → htpy-natural-transformation▵ α β → α ＝ β
+  eq-htpy-natural-transformation▵ α β =
+    map-inv-equiv (extensionality-natural-transformation▵ α β)
 ```
 
 ## The identity natural transformation

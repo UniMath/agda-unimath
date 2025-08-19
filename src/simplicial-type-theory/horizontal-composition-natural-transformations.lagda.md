@@ -83,7 +83,7 @@ module _
       ( eq-target-natural-transformation▵ β (g x)))
 ```
 
-### The action of a natural transformation on a directed edge
+### The action of natural transformations on directed edges
 
 ```agda
 module _
