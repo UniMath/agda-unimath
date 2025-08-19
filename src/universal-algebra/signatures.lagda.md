@@ -31,52 +31,52 @@ signature : (l : Level) → UU (lsuc l)
 signature (l) = Σ (UU l) (λ operations → (operations → ℕ))
 
 operation-signature : {l : Level} → signature l → UU l
-operation-signature Sg = pr1 Sg
+operation-signature σ = pr1 σ
 
 arity-operation-signature :
-  { l : Level} →
-  ( Sg : signature l) →
-  ( operation-signature Sg → ℕ)
-arity-operation-signature Sg = pr2 Sg
+  {l : Level} →
+  (σ : signature l) →
+  (operation-signature σ → ℕ)
+arity-operation-signature σ = pr2 σ
 ```
 
 ### Extension of signatures
 
 ```agda
 is-extension-signature :
-  { l1 l2 : Level} →
+  {l1 l2 : Level} →
   signature l1 → signature l2 → UU (l1 ⊔ l2)
-is-extension-signature Sg1 Sg2 =
-  Σ ( operation-signature Sg2 → operation-signature Sg1)
+is-extension-signature σ τ =
+  Σ ( operation-signature τ → operation-signature σ)
     ( λ f → is-emb f ×
-      ( ( op : operation-signature Sg2) →
-        arity-operation-signature Sg2 op ＝
-          arity-operation-signature Sg1 (f op)))
+      ( ( op : operation-signature τ) →
+        arity-operation-signature τ op ＝
+          arity-operation-signature σ (f op)))
 
 emb-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  is-extension-signature Sg1 Sg2 →
-  ( operation-signature Sg2 → operation-signature Sg1)
-emb-extension-signature Sg1 Sg2 ext = pr1 ext
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  is-extension-signature σ τ →
+  (operation-signature τ → operation-signature σ)
+emb-extension-signature σ τ ext = pr1 ext
 
 is-emb-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  ( ext : is-extension-signature Sg1 Sg2) →
-  is-emb (emb-extension-signature Sg1 Sg2 ext)
-is-emb-extension-signature Sg1 Sg2 ext = pr1 (pr2 ext)
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  (ext : is-extension-signature σ τ) →
+  is-emb (emb-extension-signature σ τ ext)
+is-emb-extension-signature σ τ ext = pr1 (pr2 ext)
 
 arity-preserved-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  ( ext : is-extension-signature Sg1 Sg2) →
-  ( op : operation-signature Sg2) →
-  arity-operation-signature Sg2 op ＝
-    arity-operation-signature Sg1
-      ( emb-extension-signature Sg1 Sg2 ext op)
-arity-preserved-extension-signature Sg1 Sg2 ext = pr2 (pr2 ext)
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  (ext : is-extension-signature σ τ) →
+  (op : operation-signature τ) →
+  arity-operation-signature τ op ＝
+    arity-operation-signature σ
+      (emb-extension-signature σ τ ext op)
+arity-preserved-extension-signature σ τ ext = pr2 (pr2 ext)
 ```
