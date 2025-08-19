@@ -119,14 +119,15 @@ module _
       ( α)) ＝
     ( α)
   left-unit-law-horizontal-comp-natural-transformation▵ α =
-    eq-htpy
+    eq-htpy-natural-transformation▵
+      ( horizontal-comp-natural-transformation▵
+        ( id-natural-transformation▵ id)
+        ( α))
+      ( α)
       ( λ x →
-        eq-pair-eq-fiber
-          ( eq-pair
-            ( right-unit ∙
-              ap-id (eq-source-natural-transformation▵ α x))
-            ( right-unit ∙
-              ap-id (eq-target-natural-transformation▵ α x))))
+        ( refl-htpy ,
+          right-unit ∙ ap-id (eq-source-natural-transformation▵ α x) ,
+          right-unit ∙ ap-id (eq-target-natural-transformation▵ α x)))
 
   right-unit-law-horizontal-comp-natural-transformation▵ :
     (α : f ⇒▵ g) →
@@ -137,13 +138,83 @@ module _
   right-unit-law-horizontal-comp-natural-transformation▵ α = refl
 ```
 
-### Associativity of horizontal composition of directed edges of functions
+### Associativity of horizontal composition of natural transformations
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {h h' : C → D} {g g' : B → C} {f f' : A → B}
   where
+
+  htpy-associative-horizontal-comp-natural-transformation▵ :
+    (γ : h ⇒▵ h') (β : g ⇒▵ g') (α : f ⇒▵ f') →
+    htpy-natural-transformation▵
+      ( horizontal-comp-natural-transformation▵
+        ( horizontal-comp-natural-transformation▵ γ β)
+        ( α))
+      ( horizontal-comp-natural-transformation▵
+        ( γ)
+        ( horizontal-comp-natural-transformation▵ β α))
+  pr1 (htpy-associative-horizontal-comp-natural-transformation▵ γ β α x) =
+    refl-htpy
+  pr1 (pr2 (htpy-associative-horizontal-comp-natural-transformation▵ γ β α x)) =
+    ( inv
+      ( assoc
+        ( ap
+          ( arrow-natural-transformation▵ γ 0▵ ∘
+            arrow-natural-transformation▵ β 0▵)
+          ( eq-source-natural-transformation▵ α x))
+        ( ap
+          ( arrow-natural-transformation▵ γ 0▵)
+          ( eq-source-natural-transformation▵ β (f x)))
+        ( eq-source-natural-transformation▵ γ (g (f x))))) ∙
+    ( ap
+      ( _∙ eq-source-natural-transformation▵ γ (g (f x)))
+      ( ( ap
+          ( _∙
+            ( ap
+              ( arrow-natural-transformation▵ γ 0▵)
+              ( eq-source-natural-transformation▵ β (f x))))
+          ( ap-comp
+            ( arrow-natural-transformation▵ γ 0▵)
+            ( arrow-natural-transformation▵ β 0▵)
+            ( eq-source-natural-transformation▵ α x))) ∙
+        ( inv
+          ( ap-concat
+            ( arrow-natural-transformation▵ γ 0▵)
+            ( ap
+              ( arrow-natural-transformation▵ β 0▵)
+              ( eq-source-natural-transformation▵ α x))
+            ( eq-source-natural-transformation▵ β (f x))))))
+  pr2 (pr2 (htpy-associative-horizontal-comp-natural-transformation▵ γ β α x)) =
+    ( inv
+      ( assoc
+        ( ap
+          ( arrow-natural-transformation▵ γ 1▵ ∘
+            arrow-natural-transformation▵ β 1▵)
+          ( eq-target-natural-transformation▵ α x))
+        ( ap
+          ( arrow-natural-transformation▵ γ 1▵)
+          ( eq-target-natural-transformation▵ β (f' x)))
+        ( eq-target-natural-transformation▵ γ (g' (f' x))))) ∙
+    ( ap
+      ( _∙ eq-target-natural-transformation▵ γ (g' (f' x)))
+      ( ap
+        ( _∙
+          ( ap
+            ( arrow-natural-transformation▵ γ 1▵)
+            ( eq-target-natural-transformation▵ β (f' x))))
+        ( ap-comp
+          ( arrow-natural-transformation▵ γ 1▵)
+          ( arrow-natural-transformation▵ β 1▵)
+          ( eq-target-natural-transformation▵ α x)) ∙
+        ( inv
+          ( ap-concat
+            ( arrow-natural-transformation▵ γ 1▵)
+            ( ap
+              ( arrow-natural-transformation▵ β 1▵)
+              ( eq-target-natural-transformation▵ α x))
+            ( eq-target-natural-transformation▵ β (f' x))))))
 
   associative-horizontal-comp-natural-transformation▵ :
     (γ : h ⇒▵ h') (β : g ⇒▵ g') (α : f ⇒▵ f') →
@@ -154,10 +225,12 @@ module _
       ( γ)
       ( horizontal-comp-natural-transformation▵ β α))
   associative-horizontal-comp-natural-transformation▵ γ β α =
-    eq-htpy
-      ( λ x →
-        eq-pair-eq-fiber
-          ( eq-pair
-            ( equational-reasoning {!  !} ＝ {!   !} by {!   !})
-            {!   !}))
+    eq-htpy-natural-transformation▵
+      ( horizontal-comp-natural-transformation▵
+        ( horizontal-comp-natural-transformation▵ γ β)
+        ( α))
+      ( horizontal-comp-natural-transformation▵
+        ( γ)
+        ( horizontal-comp-natural-transformation▵ β α))
+      ( htpy-associative-horizontal-comp-natural-transformation▵ γ β α)
 ```

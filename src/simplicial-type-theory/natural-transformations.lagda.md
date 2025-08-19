@@ -94,6 +94,9 @@ module _
   family-of-arrows-natural-transformation▵ : (x : A) → arrow▵ (B x)
   family-of-arrows-natural-transformation▵ x = arrow-hom▵ (α x)
 
+  arrow-natural-transformation▵ : arrow▵ ((x : A) → B x)
+  arrow-natural-transformation▵ t x = arrow-hom▵ (α x) t
+
   eq-source-natural-transformation▵ :
     (x : A) → family-of-arrows-natural-transformation▵ x 0▵ ＝ f x
   eq-source-natural-transformation▵ x = eq-source-hom▵ (α x)
@@ -105,24 +108,24 @@ module _
 
 ## Properties
 
-### Families of simplicial arrows are simplicial arrows of dependent functions
+### Families of arrows are arrows of dependent functions
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → Δ¹ → UU l2}
   where
 
-  family-of-simplicial-arrows-arrow▵-of-dependent-functions :
+  family-of-arrows-arrow-of-dependent-functions▵ :
     arrow▵' (λ t → (x : A) → B x t) → (x : A) → arrow▵' (B x)
-  family-of-simplicial-arrows-arrow▵-of-dependent-functions = swap-Π
+  family-of-arrows-arrow-of-dependent-functions▵ = swap-Π
 
-  arrow▵-of-dependent-functions-family-of-simplicial-arrows :
+  arrow-of-dependent-functions-family-of-arrows▵ :
     ((x : A) → arrow▵' (B x)) → arrow▵' (λ t → (x : A) → B x t)
-  arrow▵-of-dependent-functions-family-of-simplicial-arrows = swap-Π
+  arrow-of-dependent-functions-family-of-arrows▵ = swap-Π
 
-  equiv-family-of-simplicial-arrows-arrow▵-of-dependent-functions :
+  equiv-family-of-arrows-arrow-of-dependent-functions▵ :
     (arrow▵' (λ t → (x : A) → B x t)) ≃ ((x : A) → arrow▵' (B x))
-  equiv-family-of-simplicial-arrows-arrow▵-of-dependent-functions =
+  equiv-family-of-arrows-arrow-of-dependent-functions▵ =
     equiv-swap-Π
 ```
 
@@ -143,7 +146,9 @@ module _
 
   hom▵-Π-natural-transformation▵ : (f ⇒▵ g) → (f →▵ g)
   hom▵-Π-natural-transformation▵ α =
-    ( (λ t x → pr1 (α x) t) , eq-htpy (pr1 ∘ pr2 ∘ α) , eq-htpy (pr2 ∘ pr2 ∘ α))
+    ( arrow-natural-transformation▵ α ,
+      eq-htpy (pr1 ∘ pr2 ∘ α) ,
+      eq-htpy (pr2 ∘ pr2 ∘ α))
 
   is-section-hom▵-Π-natural-transformation▵ :
     is-section natural-transformation▵-hom▵-Π hom▵-Π-natural-transformation▵
@@ -183,7 +188,7 @@ module _
   where
 
   htpy-natural-transformation▵ : (α β : f ⇒▵ g) → UU (I1 ⊔ l1 ⊔ l2)
-  htpy-natural-transformation▵ α β = (x : A) → htpy-hom▵ (α x) (β x)
+  htpy-natural-transformation▵ α β = ((x : A) → htpy-hom▵ (α x) (β x))
 
   refl-htpy-natural-transformation▵ :
     (α : f ⇒▵ g) → htpy-natural-transformation▵ α α
@@ -216,7 +221,7 @@ module _
   eq-htpy-natural-transformation▵ :
     (α β : f ⇒▵ g) → htpy-natural-transformation▵ α β → α ＝ β
   eq-htpy-natural-transformation▵ α β =
-    map-inv-equiv (extensionality-natural-transformation▵ α β)
+    map-inv-equiv (equiv-htpy-eq-natural-transformation▵ α β)
 ```
 
 ## The identity natural transformation
