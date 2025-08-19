@@ -142,12 +142,12 @@ module _
   mul-pow-nat-Semiring n =
     mul-Semiring R a (power-Semiring R n r)
 
-  common-ratio-mul-pow-nat-Semiring :
+  is-common-ratio-mul-pow-nat-Semiring :
     is-common-difference-sequence-Semigroup
       ( multiplicative-semigroup-Semiring R)
       ( mul-pow-nat-Semiring)
       ( r)
-  common-ratio-mul-pow-nat-Semiring n =
+  is-common-ratio-mul-pow-nat-Semiring n =
     ( ap
       ( mul-Semiring R a)
       ( power-succ-Semiring R n r)) ∙
@@ -163,7 +163,7 @@ module _
       ( multiplicative-semigroup-Semiring R)
       ( mul-pow-nat-Semiring)
   is-geometric-mul-pow-nat-Semiring =
-    ( r , common-ratio-mul-pow-nat-Semiring)
+    ( r , is-common-ratio-mul-pow-nat-Semiring)
 
   geometric-mul-pow-nat-Semiring : geometric-sequence-Semiring R
   geometric-mul-pow-nat-Semiring =
