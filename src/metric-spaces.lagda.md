@@ -45,6 +45,7 @@ property of **indistinguishability of identicals**
 ```agda
 module metric-spaces where
 
+open import metric-spaces.bounded-distance-decompositions-of-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
