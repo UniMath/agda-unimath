@@ -53,4 +53,5 @@ open import simplicial-type-theory.universal-property-directed-circle public
 open import simplicial-type-theory.whiskering-arrows-functions public
 open import simplicial-type-theory.whiskering-directed-edges-functions public
 open import simplicial-type-theory.whiskering-directed-edges-identifications public
+open import simplicial-type-theory.whiskering-natural-transformations-functions public
 ```
