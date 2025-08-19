@@ -507,6 +507,15 @@ module _
           ( η +ℚ⁺ θ +ℚ⁺ δ +ℚ⁺ ε)
           ( le-left-add-ℚ⁺ ( η +ℚ⁺ θ +ℚ⁺ δ) ε)
           ( lemma-lim))
+
+  has-limit-cauchy-approximation-pseudometric-completion-Pseudometric-Space :
+    Σ ( cauchy-approximation-Pseudometric-Space M)
+      ( is-limit-cauchy-approximation-Pseudometric-Space
+        ( pseudometric-completion-Pseudometric-Space M)
+        ( U))
+  has-limit-cauchy-approximation-pseudometric-completion-Pseudometric-Space =
+    ( lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space ,
+      is-limit-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space)
 ```
 
 ### Short maps into complete metric spaces factor through pseudometric completions
