@@ -57,35 +57,35 @@ module _
     Σ ( Model-Signature σ l3) (is-algebra)
 
   model-Algebra :
-    { l3 : Level} →
+    {l3 : Level} →
     Algebra l3 → Model-Signature σ l3
   model-Algebra A = pr1 A
 
   set-Algebra :
-    { l3 : Level} →
+    {l3 : Level} →
     Algebra l3 → Set l3
   set-Algebra A = pr1 (pr1 A)
 
   is-model-set-Algebra :
-    { l3 : Level} →
-    ( A : Algebra l3) →
+    {l3 : Level} →
+    (A : Algebra l3) →
     is-model-signature σ (set-Algebra A)
   is-model-set-Algebra A = pr2 (pr1 A)
 
   type-Algebra :
-    { l3 : Level} →
+    {l3 : Level} →
     Algebra l3 → UU l3
   type-Algebra A =
     pr1 (pr1 (pr1 A))
 
   is-set-type-Algebra :
-    { l3 : Level} →
+    {l3 : Level} →
     (A : Algebra l3) → is-set (type-Algebra A)
   is-set-type-Algebra A = pr2 (pr1 (pr1 A))
 
   is-algebra-Algebra :
-    { l3 : Level} →
-    ( A : Algebra l3) →
+    {l3 : Level} →
+    (A : Algebra l3) →
     is-algebra (model-Algebra A)
   is-algebra-Algebra A = pr2 A
 ```
@@ -96,8 +96,8 @@ module _
 
 ```agda
   is-prop-is-algebra :
-    { l3 : Level} →
-    ( X : Model-Signature σ l3) →
+    {l3 : Level} →
+    (X : Model-Signature σ l3) →
     is-prop (is-algebra X)
   is-prop-is-algebra M =
     is-prop-Π

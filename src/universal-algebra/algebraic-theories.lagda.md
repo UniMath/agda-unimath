@@ -39,9 +39,6 @@ module _
   index-Theory = pr1
 
   index-Abstract-Equation-Theory :
-    { l2 : Level}
-    ( Th : Theory l2) →
-    ( index-Theory Th) →
-    Abstract-Equation σ
+    {l2 : Level} (Th : Theory l2) → (index-Theory Th) → Abstract-Equation σ
   index-Abstract-Equation-Theory Th e = pr2 Th e
 ```

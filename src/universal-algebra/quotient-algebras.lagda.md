@@ -54,7 +54,7 @@ module _
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
   set-quotient-Algebra =
-    quotient-Set ( equivalence-relation-congruence-Algebra σ T A R)
+    quotient-Set (equivalence-relation-congruence-Algebra σ T A R)
 
   type-quotient-Algebra : UU (l3 ⊔ l4)
   type-quotient-Algebra = pr1 set-quotient-Algebra
@@ -64,15 +64,15 @@ module _
 
   compute-quotient-Algebra :
     equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R) ≃
-      ( type-quotient-Algebra)
+      (equivalence-relation-congruence-Algebra σ T A R) ≃
+      (type-quotient-Algebra)
   compute-quotient-Algebra =
     compute-set-quotient
       ( equivalence-relation-congruence-Algebra σ T A R)
 
   set-quotient-equivalence-class-Algebra :
     equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R) →
+      (equivalence-relation-congruence-Algebra σ T A R) →
     type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
@@ -80,12 +80,12 @@ module _
   equivalence-class-set-quotient-Algebra :
     type-quotient-Algebra →
     equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R)
+      (equivalence-relation-congruence-Algebra σ T A R)
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
   tuple-type-quotient-tuple-type-Algebra :
-    { n : ℕ} →
+    {n : ℕ} →
     tuple type-quotient-Algebra n →
     type-trunc-Prop (tuple (type-Algebra σ T A) n)
   tuple-type-quotient-tuple-type-Algebra empty-tuple =
@@ -100,17 +100,17 @@ module _
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
   relation-holds-all-tuple-all-sim-equivalence-relation :
-    { n : ℕ}
-    ( v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
-    ( type-Prop
-      ( prop-equivalence-relation
-        ( all-sim-equivalence-relation n
-          ( λ _ → type-Algebra σ T A)
-          ( λ _ → equivalence-relation-congruence-Algebra σ T A R)) v v')) →
+    {n : ℕ}
+    (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
+    (type-Prop
+      (prop-equivalence-relation
+        (all-sim-equivalence-relation n
+          (λ _ → type-Algebra σ T A)
+          (λ _ → equivalence-relation-congruence-Algebra σ T A R)) v v')) →
     relation-holds-all-tuple σ T A
-      ( equivalence-relation-congruence-Algebra σ T A R)
-      ( tuple-multivariable-input n (type-Algebra σ T A) v)
-      ( tuple-multivariable-input n (type-Algebra σ T A) v')
+      (equivalence-relation-congruence-Algebra σ T A R)
+      (tuple-multivariable-input n (type-Algebra σ T A) v)
+      (tuple-multivariable-input n (type-Algebra σ T A) v')
   relation-holds-all-tuple-all-sim-equivalence-relation {zero-ℕ} v v' p =
     raise-star
   relation-holds-all-tuple-all-sim-equivalence-relation

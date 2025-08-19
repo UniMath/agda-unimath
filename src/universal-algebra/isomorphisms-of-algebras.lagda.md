@@ -231,7 +231,7 @@ module _
   is-equiv-iso-Eq-Algebra = is-equiv-map-equiv equiv-iso-Eq-Algebra
 
 module _
-  { l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
   where
 
   is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)

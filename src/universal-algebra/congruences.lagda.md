@@ -38,11 +38,11 @@ module _
   where
 
   relation-holds-all-tuple :
-    { l4 : Level} →
-    ( R : equivalence-relation l4 (type-Algebra σ T A)) →
-    { n : ℕ} →
-    ( v : tuple (type-Algebra σ T A) n) →
-    ( v' : tuple (type-Algebra σ T A) n) →
+    {l4 : Level} →
+    (R : equivalence-relation l4 (type-Algebra σ T A)) →
+    {n : ℕ} →
+    (v : tuple (type-Algebra σ T A) n) →
+    (v' : tuple (type-Algebra σ T A) n) →
     UU l4
   relation-holds-all-tuple {l4} R {.zero-ℕ} empty-tuple empty-tuple =
     raise-unit l4
@@ -51,8 +51,8 @@ module _
     ( relation-holds-all-tuple R v v')
 
   preserves-operations :
-    { l4 : Level} →
-    ( R : equivalence-relation l4 (type-Algebra σ T A)) →
+    {l4 : Level} →
+    (R : equivalence-relation l4 (type-Algebra σ T A)) →
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations R =
     ( op : operation-signature σ) →
@@ -67,20 +67,20 @@ module _
               ( is-model-set-Algebra σ T A op v'))))
 
   congruence-Algebra :
-    ( l4 : Level) →
+    (l4 : Level) →
     UU (l1 ⊔ l3 ⊔ lsuc l4)
   congruence-Algebra l4 =
     Σ ( equivalence-relation l4 (type-Algebra σ T A))
       ( preserves-operations)
 
   equivalence-relation-congruence-Algebra :
-    { l4 : Level} →
+    {l4 : Level} →
     congruence-Algebra l4 → ( equivalence-relation l4 (type-Algebra σ T A))
   equivalence-relation-congruence-Algebra = pr1
 
   preserves-operations-congruence-Algebra :
-    { l4 : Level} →
-    ( R : congruence-Algebra l4) →
-    ( preserves-operations (equivalence-relation-congruence-Algebra R))
+    {l4 : Level} →
+    (R : congruence-Algebra l4) →
+    (preserves-operations (equivalence-relation-congruence-Algebra R))
   preserves-operations-congruence-Algebra = pr2
 ```

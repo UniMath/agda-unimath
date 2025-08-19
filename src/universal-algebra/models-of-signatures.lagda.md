@@ -46,13 +46,13 @@ element of `A`.
 
 ```agda
 module _
-  {l1 : Level} (Sg : signature l1)
+  {l1 : Level} (σ : signature l1)
   where
 
   is-model : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
   is-model X =
-    ( f : operation-signature Sg) →
-    ( tuple X (arity-operation-signature Sg f) → X)
+    ( f : operation-signature σ) →
+    ( tuple X (arity-operation-signature σ f) → X)
 
   is-model-signature : {l2 : Level} → (Set l2) → UU (l1 ⊔ l2)
   is-model-signature X = is-model (type-Set X)
@@ -64,8 +64,8 @@ module _
   set-Model-Signature M = pr1 M
 
   is-model-set-Model-Signature :
-    { l2 : Level} →
-    ( M : Model-Signature l2) →
+    {l2 : Level} →
+    (M : Model-Signature l2) →
     is-model-signature (set-Model-Signature M)
   is-model-set-Model-Signature M = pr2 M
 
@@ -73,8 +73,8 @@ module _
   type-Model-Signature M = pr1 (set-Model-Signature M)
 
   is-set-type-Model-Signature :
-    { l2 : Level} →
-    ( M : Model-Signature l2) →
+    {l2 : Level} →
+    (M : Model-Signature l2) →
     is-set (type-Model-Signature M)
   is-set-type-Model-Signature M = pr2 (set-Model-Signature M)
 ```

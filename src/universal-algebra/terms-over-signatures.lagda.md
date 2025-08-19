@@ -87,7 +87,7 @@ evaluated to a concrete element of the type `A`.
     is-model σ A → assignment A → Term → A
 
   eval-tuple :
-    { l2 : Level} → {A : UU l2} {n : ℕ} →
+    {l2 : Level} → {A : UU l2} {n : ℕ} →
     is-model σ A → assignment A → tuple Term n → tuple A n
 
   eval-term m assign (var-Term n) = assign n
@@ -98,7 +98,7 @@ evaluated to a concrete element of the type `A`.
     eval-term m assign x ∷ (eval-tuple m assign v)
 
   eval-tuple-map-tuple-eval-term :
-    { l2 : Level} {A : UU l2} {n : ℕ} →
+    {l2 : Level} {A : UU l2} {n : ℕ} →
     (m : is-model σ A) → (assign : assignment A) → (v : tuple Term n) →
     eval-tuple m assign v ＝ map-tuple (eval-term m assign) v
   eval-tuple-map-tuple-eval-term m assign empty-tuple = refl
@@ -113,17 +113,17 @@ element of `A`.
 
 ```agda
   eval-constant-term :
-    { l2 : Level} {A : UU l2} →
-    ( is-model σ A) →
-    ( t : Term) →
+    {l2 : Level} {A : UU l2} →
+    (is-model σ A) →
+    (t : Term) →
     (de-bruijn-variables-term t ＝ nil) →
     A
 
   eval-constant-term-tuple :
-    { l2 : Level} {A : UU l2} {n : ℕ} →
-    ( is-model σ A) →
-    ( v : tuple Term n) →
-    ( all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
+    {l2 : Level} {A : UU l2} {n : ℕ} →
+    (is-model σ A) →
+    (v : tuple Term n) →
+    (all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
     tuple A n
 
   eval-constant-term m (op-Term f x) p =
@@ -198,17 +198,17 @@ element of `A`.
 
 ```agda
 translation-term :
-  { l1 l2 : Level} →
-  ( σ : signature l1) →
-  ( τ : signature l2) →
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
   is-extension-signature σ τ →
   Term τ → Term σ
 
 translation-tuple :
-  { l1 l2 : Level} →
-  ( σ : signature l1) →
-  ( τ : signature l2) →
-  { n : ℕ} →
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  {n : ℕ} →
   is-extension-signature σ τ →
   tuple (Term τ) n → tuple (Term σ) n
 
