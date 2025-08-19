@@ -60,7 +60,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ## Idea
 
 The
-{{#concept "quotient metric space" Disambiguation="of a pseudometric space" Agda=metric-quotient-Pseudometric-Space}}
+{{#concept "metric quotient" Disambiguation="of a pseudometric space" Agda=metric-quotient-Pseudometric-Space}}
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) is the
 [metric space](metric-spaces.metric-spaces.md) whose points are
 [quotient classes](foundation.set-quotients.md) of `M` by the
