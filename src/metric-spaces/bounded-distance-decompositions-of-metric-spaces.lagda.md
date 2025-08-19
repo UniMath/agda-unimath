@@ -189,7 +189,7 @@ module _
     type-bounded-distance-decomposition-Metric-Space A ≃
     type-Metric-Space A
   equiv-type-bounded-distance-decomposition-Metric-Space =
-    Σ-decomposition-is-in-equivalence-class-set-quotient
+    equiv-total-sum-set-quotient
       ( equivalence-relation-bounded-dist-Metric-Space A)
 
   map-equiv-bounded-distance-decomposition-Metric-Space :

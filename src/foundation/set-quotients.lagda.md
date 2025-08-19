@@ -560,22 +560,14 @@ module _
                   ( x∈X))))
         ( is-torsorial-is-in-equivalence-class R x)
 
-  equiv-total-is-in-equivalence-class-set-quotient :
-    Σ ( A)
-      ( λ x →
-        Σ ( set-quotient R)
-          ( λ X → is-in-equivalence-class-set-quotient R X x)) ≃
-    ( A)
-  equiv-total-is-in-equivalence-class-set-quotient =
-    right-unit-law-Σ-is-contr
-      ( is-torsorial-is-in-equivalence-class-set-quotient)
-
-  Σ-decomposition-is-in-equivalence-class-set-quotient :
+  equiv-total-sum-set-quotient :
     Σ ( set-quotient R)
       ( type-subtype ∘ is-in-equivalence-class-set-quotient-Prop R) ≃
     ( A)
-  Σ-decomposition-is-in-equivalence-class-set-quotient =
-    equiv-total-is-in-equivalence-class-set-quotient ∘e equiv-left-swap-Σ
+  equiv-total-sum-set-quotient =
+    ( right-unit-law-Σ-is-contr
+      ( is-torsorial-is-in-equivalence-class-set-quotient)) ∘e
+    ( equiv-left-swap-Σ)
 ```
 
 ## See also

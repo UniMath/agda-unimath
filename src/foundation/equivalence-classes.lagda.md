@@ -350,17 +350,12 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
-  equiv-total-is-in-equivalence-class :
-    Σ A (λ x → Σ (equivalence-class R) (λ X → is-in-equivalence-class R X x)) ≃
-    ( A)
-  equiv-total-is-in-equivalence-class =
-    right-unit-law-Σ-is-contr
-      ( is-torsorial-is-in-equivalence-class R)
-
-  Σ-decomposition-is-in-equivalence-class :
+  equiv-total-sum-equivalence-class :
     Σ (equivalence-class R) (type-subtype ∘ is-in-equivalence-class-Prop R) ≃ A
-  Σ-decomposition-is-in-equivalence-class =
-    equiv-total-is-in-equivalence-class ∘e equiv-left-swap-Σ
+  equiv-total-sum-equivalence-class =
+    ( right-unit-law-Σ-is-contr
+      ( is-torsorial-is-in-equivalence-class R)) ∘e
+    ( equiv-left-swap-Σ)
 ```
 
 ### The map `class : A → equivalence-class R` is an effective quotient map
