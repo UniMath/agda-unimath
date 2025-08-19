@@ -45,9 +45,11 @@ open import simplicial-type-theory.natural-transformations I
 
 ## Idea
 
-Given a natural transformation `α` between functions `f g : A → B` and a natural
-transformation `β` of functions `f' g' : B → C`, we may
-{{#concept "horizontally compose" Disambiguation="natural transformations of functions" Agda=horizontal-comp-simplicial-natural-transformation}}
+Given a
+[natural transformation](simplicial-type-theory.natural-transformations.md) `α`
+between functions `f g : A → B` and a natural transformation `β` of functions
+`f' g' : B → C`, we may
+{{#concept "horizontally compose" Disambiguation="natural transformations of functions" Agda=horizontal-comp-natural-transformation▵}}
 them to obtain a natural transformation of functions `f' ∘ f ⇒▵ g' ∘ g`. The
 horizontal composite is constructed by "synchronously traversing `α` and `β`",
 defined on the underlying [simplicial arrows](simplicial-type-theory.arrows.md)
@@ -67,21 +69,18 @@ module _
   {f g : A → B} {f' g' : B → C}
   where
 
-  horizontal-comp-simplicial-natural-transformation :
-    f' ⇒▵ g' → f ⇒▵ g → (f' ∘ f) ⇒▵ (g' ∘ g)
-  horizontal-comp-simplicial-natural-transformation β α x =
-    ( λ t →
-      arrow-hom▵
-        ( β (arrow-hom▵ (α x) t))
-        ( t)) ,
+  horizontal-comp-natural-transformation▵ :
+    (f' ⇒▵ g') → (f ⇒▵ g) → ((f' ∘ f) ⇒▵ (g' ∘ g))
+  horizontal-comp-natural-transformation▵ β α x =
+    ( λ t → arrow-hom▵ (β (arrow-hom▵ (α x) t)) t) ,
     ( ( ap
         ( λ u → arrow-hom▵ (β u) 0▵)
-        ( eq-source-simplicial-natural-transformation α x)) ∙
-      ( eq-source-simplicial-natural-transformation β (f x))) ,
+        ( eq-source-natural-transformation▵ α x)) ∙
+      ( eq-source-natural-transformation▵ β (f x))) ,
     ( ( ap
         ( λ u → arrow-hom▵ (β u) 1▵)
-        ( eq-target-simplicial-natural-transformation α x)) ∙
-      ( eq-target-simplicial-natural-transformation β (g x)))
+        ( eq-target-natural-transformation▵ α x)) ∙
+      ( eq-target-natural-transformation▵ β (g x)))
 ```
 
 ### The action of a natural transformation on a directed edge
@@ -91,18 +90,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
   where
 
-  action-hom▵-simplicial-natural-transformation :
-    f ⇒▵ g → {x y : A} → x →▵ y → f x →▵ g y
-  action-hom▵-simplicial-natural-transformation α a =
+  action-hom▵-natural-transformation▵ :
+    (f ⇒▵ g) → {x y : A} → (x →▵ y) → (f x →▵ g y)
+  action-hom▵-natural-transformation▵ α a =
     ( λ t →
-      family-of-simplicial-arrows-simplicial-natural-transformation α
+      family-of-arrows-natural-transformation▵ α
         ( arrow-hom▵ a t)
         ( t)) ,
-    ( ( eq-source-simplicial-natural-transformation α
-        ( arrow-hom▵ a 0▵)) ∙
+    ( ( eq-source-natural-transformation▵ α (arrow-hom▵ a 0▵)) ∙
       ( ap f (eq-source-hom▵ a))) ,
-    ( ( eq-target-simplicial-natural-transformation α
-        ( arrow-hom▵ a 1▵)) ∙
+    ( ( eq-target-natural-transformation▵ α (arrow-hom▵ a 1▵)) ∙
       ( ap g (eq-target-hom▵ a)))
 ```
 
@@ -115,29 +112,29 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
   where
 
-  left-unit-law-horizontal-comp-simplicial-natural-transformation :
+  left-unit-law-horizontal-comp-natural-transformation▵ :
     (α : f ⇒▵ g) →
-    ( horizontal-comp-simplicial-natural-transformation
-      ( id-simplicial-natural-transformation id)
+    ( horizontal-comp-natural-transformation▵
+      ( id-natural-transformation▵ id)
       ( α)) ＝
     ( α)
-  left-unit-law-horizontal-comp-simplicial-natural-transformation α =
+  left-unit-law-horizontal-comp-natural-transformation▵ α =
     eq-htpy
       ( λ x →
         eq-pair-eq-fiber
           ( eq-pair
             ( right-unit ∙
-              ap-id (eq-source-simplicial-natural-transformation α x))
+              ap-id (eq-source-natural-transformation▵ α x))
             ( right-unit ∙
-              ap-id (eq-target-simplicial-natural-transformation α x))))
+              ap-id (eq-target-natural-transformation▵ α x))))
 
-  right-unit-law-horizontal-comp-simplicial-natural-transformation :
+  right-unit-law-horizontal-comp-natural-transformation▵ :
     (α : f ⇒▵ g) →
-    ( horizontal-comp-simplicial-natural-transformation
+    ( horizontal-comp-natural-transformation▵
       ( α)
-      ( id-simplicial-natural-transformation id)) ＝
+      ( id-natural-transformation▵ id)) ＝
     ( α)
-  right-unit-law-horizontal-comp-simplicial-natural-transformation α = refl
+  right-unit-law-horizontal-comp-natural-transformation▵ α = refl
 ```
 
 ### Associativity of horizontal composition of directed edges of functions
@@ -148,15 +145,15 @@ module _
   {h h' : C → D} {g g' : B → C} {f f' : A → B}
   where
 
-  associative-horizontal-comp-simplicial-natural-transformation :
+  associative-horizontal-comp-natural-transformation▵ :
     (γ : h ⇒▵ h') (β : g ⇒▵ g') (α : f ⇒▵ f') →
-    ( horizontal-comp-simplicial-natural-transformation
-      ( horizontal-comp-simplicial-natural-transformation γ β)
+    ( horizontal-comp-natural-transformation▵
+      ( horizontal-comp-natural-transformation▵ γ β)
       ( α)) ＝
-    ( horizontal-comp-simplicial-natural-transformation
+    ( horizontal-comp-natural-transformation▵
       ( γ)
-      ( horizontal-comp-simplicial-natural-transformation β α))
-  associative-horizontal-comp-simplicial-natural-transformation γ β α =
+      ( horizontal-comp-natural-transformation▵ β α))
+  associative-horizontal-comp-natural-transformation▵ γ β α =
     eq-htpy
       ( λ x →
         eq-pair-eq-fiber
