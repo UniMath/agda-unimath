@@ -31,7 +31,7 @@ A [subset](foundation.subtypes.md) `S` of a
 [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "dense" disambiguation="in a metric space" WDID=Q673444 WD="dense set" Agda=is-dense-subset-Metric-Space}}
 if its [closure](metric-spaces.closure-subsets-metric-spaces.md) is
-[full](foundation.full-subtypes.md)
+[full](foundation.full-subtypes.md).
 
 ## Definition
 
