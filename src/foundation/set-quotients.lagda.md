@@ -168,15 +168,15 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  (x : A)
   where
 
   is-in-equivalence-class-quotient-map-set-quotient :
-    (x : A) →
     is-in-equivalence-class-set-quotient
       ( R)
       ( quotient-map R x)
       ( x)
-  is-in-equivalence-class-quotient-map-set-quotient x =
+  is-in-equivalence-class-quotient-map-set-quotient =
     is-in-equivalence-class-eq-equivalence-class
       ( R)
       ( x)
@@ -185,11 +185,10 @@ module _
         ( is-retraction-equivalence-class-set-quotient R (class R x)))
 
   inhabitant-equivalence-class-quotient-map-set-quotient :
-    (x : A) →
     type-subtype
       ( subtype-set-quotient R (quotient-map R x))
-  inhabitant-equivalence-class-quotient-map-set-quotient x =
-    (x , is-in-equivalence-class-quotient-map-set-quotient x)
+  inhabitant-equivalence-class-quotient-map-set-quotient =
+    (x , is-in-equivalence-class-quotient-map-set-quotient)
 ```
 
 ### The map `class : A → set-quotient R` is an effective quotient map
