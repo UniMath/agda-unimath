@@ -15,6 +15,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -22,11 +24,16 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
+open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-functions-pseudometric-spaces
 ```
 
 </details>
@@ -500,4 +507,74 @@ module _
           ( η +ℚ⁺ θ +ℚ⁺ δ +ℚ⁺ ε)
           ( le-left-add-ℚ⁺ ( η +ℚ⁺ θ +ℚ⁺ δ) ε)
           ( lemma-lim))
+```
+
+### Short maps into complete metric spaces factor through pseudometric completions
+
+```agda
+module _
+  { l1 l2 l1' l2' : Level}
+  ( A : Pseudometric-Space l1 l2)
+  ( C : Complete-Metric-Space l1' l2')
+  ( f :
+    short-function-Pseudometric-Space A (pseudometric-Complete-Metric-Space C))
+  where
+
+  map-short-function-complete-pseudometric-completion-Pseudometric-Space :
+    type-function-Pseudometric-Space
+      ( pseudometric-completion-Pseudometric-Space A)
+      ( pseudometric-Complete-Metric-Space C)
+  map-short-function-complete-pseudometric-completion-Pseudometric-Space =
+    ( limit-cauchy-approximation-Complete-Metric-Space C) ∘
+    ( map-short-function-cauchy-approximation-Pseudometric-Space
+      ( A)
+      ( pseudometric-Complete-Metric-Space C)
+      ( f))
+
+  htpy-comp-map-short-function-complete-pseudometric-completion-Pseudometric-Space :
+    ( map-short-function-complete-pseudometric-completion-Pseudometric-Space ∘
+      map-pseudometric-completion-Pseudometric-Space A) ~
+    ( map-short-function-Pseudometric-Space
+      ( A)
+      ( pseudometric-Complete-Metric-Space C)
+      ( f))
+  htpy-comp-map-short-function-complete-pseudometric-completion-Pseudometric-Space
+    x =
+    all-eq-is-limit-cauchy-approximation-Metric-Space
+      ( metric-Complete-Metric-Space C)
+      ( map-short-function-cauchy-approximation-Pseudometric-Space
+        ( A)
+        ( pseudometric-Complete-Metric-Space C)
+        ( f)
+        ( const-cauchy-approximation-Pseudometric-Space A x))
+      ( map-short-function-complete-pseudometric-completion-Pseudometric-Space
+        ( map-pseudometric-completion-Pseudometric-Space A x))
+      ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Complete-Metric-Space C)
+        ( f)
+        ( x))
+      ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
+        ( C)
+        ( map-short-function-cauchy-approximation-Pseudometric-Space
+          ( A)
+          ( pseudometric-Complete-Metric-Space C)
+          ( f)
+          ( const-cauchy-approximation-Pseudometric-Space A x)))
+      ( is-limit-const-cauchy-approximation-Metric-Space
+        ( metric-Complete-Metric-Space C)
+        ( map-short-function-Pseudometric-Space
+          ( A)
+          ( pseudometric-Complete-Metric-Space C)
+          ( f)
+          ( x)))
+
+  -- is-short-map-short-function-complete-pseudometric-completion-Pseudometric-Space :
+  --   is-short-function-Pseudometric-Space
+  --     ( pseudometric-completion-Pseudometric-Space A)
+  --     ( pseudometric-Complete-Metric-Space C)
+  --     ( map-short-function-complete-pseudometric-completion-Pseudometric-Space)
+  -- is-short-map-short-function-complete-pseudometric-completion-Pseudometric-Space
+  --   d x y Nxy =
+  --   {!!}
 ```
