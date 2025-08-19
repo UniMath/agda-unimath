@@ -22,17 +22,17 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.extensional-pseudometric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.monotonic-rational-neighborhoods
+open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhoods
-open import metric-spaces.reflexive-rational-neighborhoods
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.symmetric-rational-neighborhoods
-open import metric-spaces.triangular-rational-neighborhoods
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
