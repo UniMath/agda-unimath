@@ -161,6 +161,8 @@ module _
       ( is-surjective-quotient-map)
 ```
 
+## Properties
+
 ### Any element is in the class of its quotient
 
 ```agda
@@ -189,8 +191,6 @@ module _
   inhabitant-equivalence-class-quotient-map-set-quotient x =
     (x , is-in-equivalence-class-quotient-map-set-quotient x)
 ```
-
-## Properties
 
 ### The map `class : A → set-quotient R` is an effective quotient map
 
