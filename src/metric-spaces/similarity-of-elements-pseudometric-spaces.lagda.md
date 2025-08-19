@@ -23,6 +23,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-functions-pseudometric-spaces
 ```
 
 </details>
@@ -200,6 +201,17 @@ module _
               ( y)
               ( x≍y δ))))
 
+  preserves-neighborhood-sim-Pseudometric-Space' :
+    { x y : type-Pseudometric-Space A} →
+    ( sim-Pseudometric-Space A x y) →
+    ( d : ℚ⁺) (z : type-Pseudometric-Space A) →
+    neighborhood-Pseudometric-Space A d z x →
+    neighborhood-Pseudometric-Space A d z y
+  preserves-neighborhood-sim-Pseudometric-Space' {x} {y} x≍y d z Nzx =
+    symmetric-neighborhood-Pseudometric-Space A d y z
+      ( preserves-neighborhood-sim-Pseudometric-Space x≍y d z
+        ( symmetric-neighborhood-Pseudometric-Space A d z x Nzx))
+
   iff-same-neighbors-sim-Pseudometric-Space :
     { x y : type-Pseudometric-Space A} →
     ( sim-Pseudometric-Space A x y) ↔
@@ -257,4 +269,24 @@ module _
   iff-same-neighborhood-sim-Pseudometric-Space =
     ( iff-same-neighbors-same-neighborhood-Pseudometric-Space) ∘iff
     ( iff-same-neighbors-sim-Pseudometric-Space A)
+```
+
+### Short maps between pseudometric spaces preserves similarity
+
+```agda
+module _
+  { l1 l2 l1' l2' : Level}
+  ( A : Pseudometric-Space l1 l2)
+  ( B : Pseudometric-Space l1' l2')
+  ( f : short-function-Pseudometric-Space A B)
+  where
+
+  preserves-sim-map-short-function-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) →
+    ( sim-Pseudometric-Space B
+      ( map-short-function-Pseudometric-Space A B f x)
+      ( map-short-function-Pseudometric-Space A B f y))
+  preserves-sim-map-short-function-Pseudometric-Space x y x~y d =
+    is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
 ```
