@@ -244,7 +244,7 @@ module _
       ( n))
 ```
 
-### Constant sequences are gemoetric with common ratio one
+### Constant sequences are geometric with common ratio one
 
 ```agda
 module _
