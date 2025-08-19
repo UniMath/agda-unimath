@@ -7,15 +7,19 @@ module foundation.images-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functoriality-propositional-truncation
 open import foundation.images
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.pullbacks-subtypes
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -63,9 +67,21 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (S : subtype l3 A)
   where
 
-  is-image-map-subtype : {l4 : Level} (T : subtype l4 B) → UUω
-  is-image-map-subtype T =
+  is-image-map-subtype-ω : {l4 : Level} (T : subtype l4 B) → UUω
+  is-image-map-subtype-ω T =
     {l : Level} (U : subtype l B) → (T ⊆ U) ↔ (S ⊆ U ∘ f)
+
+  is-image-map-subtype-prop :
+    {l4 : Level} (T : subtype l4 B) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-image-map-subtype-prop T =
+    Π-Prop (type-subtype S) (λ (s , s∈S) → T (f s)) ∧
+    Π-Prop (type-subtype T)
+      ( λ (t , t∈T) →
+        trunc-Prop (Σ (type-subtype S) (λ (s , s∈S) → f s ＝ t)))
+
+  is-image-map-subtype :
+    {l4 : Level} (T : subtype l4 B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-image-map-subtype T = type-Prop (is-image-map-subtype-prop T)
 ```
 
 ### The image of a subtype under a map
@@ -155,6 +171,36 @@ module _
 ```
 
 ## Properties
+
+### The definitions of being the image of a subtype under a map are equivalent
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (S : subtype l3 A)
+  {l4 : Level} (T : subtype l4 B)
+  where
+
+  is-image-map-subtype-ω-is-image-map-subtype :
+    is-image-map-subtype f S T → is-image-map-subtype-ω f S T
+  pr1 (is-image-map-subtype-ω-is-image-map-subtype (fs∈T , f⇸T) U) T⊆U s s∈S =
+    T⊆U (f s) (fs∈T (s , s∈S))
+  pr2 (is-image-map-subtype-ω-is-image-map-subtype (fs∈T , f⇸T) U) S⊆Uf t t∈T =
+    rec-trunc-Prop
+      ( U t)
+      ( λ ((s , s∈S) , fs=t) → tr (type-Prop ∘ U) fs=t (S⊆Uf s s∈S))
+      ( f⇸T (t , t∈T))
+
+  is-image-map-subtype-is-image-map-subtype-ω :
+    is-image-map-subtype-ω f S T → is-image-map-subtype f S T
+  pr1 (is-image-map-subtype-is-image-map-subtype-ω H) (s , s∈S) =
+    forward-implication (H T) (λ _ → id) s s∈S
+  pr2 (is-image-map-subtype-is-image-map-subtype-ω H) (t , t∈T) =
+    backward-implication
+      ( H (im-subtype f S))
+      ( λ s s∈S → unit-trunc-Prop ((s , s∈S) , refl))
+      ( t)
+      ( t∈T)
+```
 
 ### If `S` and `T` have the same elements, then `im-subtype f S` and `im-subtype f T` have the same elements
 
