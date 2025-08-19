@@ -29,7 +29,7 @@ open import metric-spaces.monotonic-rational-neighborhoods
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhoods
 open import metric-spaces.reflexive-rational-neighborhoods
-open import metric-spaces.saturated-rational-neighborhoods
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhoods
 open import metric-spaces.triangular-rational-neighborhoods

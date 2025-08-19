@@ -8,6 +8,8 @@ module metric-spaces.subspaces-metric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.empty-subtypes
+open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.subtypes
