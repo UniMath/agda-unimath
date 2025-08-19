@@ -1,9 +1,9 @@
-# Freek Wiedijk's 100 Theorems
+# Wiedijk's 100 Theorems
 
 This file records formalized results from
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s
-[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/).
-{{#cite 100theorems}}
+[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/)
+{{#cite 100theorems}}.
 
 ```agda
 module literature.100-theorems where
@@ -155,8 +155,7 @@ open import real-numbers.distance-real-numbers using
 
 ## See also
 
-- The spiritual successor to _Formalizing 100 Theorems_ is
-  [_1000+ theorems_](literature.1000plus-theorems.md), also due to Freek Wiedijk
+- The spiritual successor to _Formalizing 100 Theorems_ is _1000+ theorems_
   {{#cite 1000+theorems}}.
 
 ## References

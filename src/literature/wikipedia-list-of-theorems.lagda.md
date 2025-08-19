@@ -1,20 +1,20 @@
-# 1000+ theorems
+# Wikipedia's list of theorems
 
-On this page, we record formalized results in the agda-unimath library following
-[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/) and
-[collaborators](https://github.com/1000-plus)'
-[_1000+ theorems_](https://1000-plus.github.io/) project
-{{#cite 1000+theorems}}. This project records the formalization status of
-theorems in mathematics that have their own Wikipedia entry. We welcome any
-contribution to this list!
+On this page, we record formalized results in the agda-unimath library that are
+on Wikipedia's
+[list of theorems](https://en.wikipedia.org/wiki/List_of_theorems) or have a
+Wikidata entry listed as an instance of a
+[theorem](https://www.wikidata.org/wiki/Q65943). Additions to this list are very
+welcome!
 
 ```agda
-module literature.1000plus-theorems where
+module literature.wikipedia-list-of-theorems where
 ```
 
 ## Formalized theorems
 
-The theorems are ordered alphabetically, omitting definite articles ("the").
+The theorems are ordered alphabetically, omitting leading definite articles
+("the").
 
 ### Bézout's lemma {#Q513028}
 
@@ -159,19 +159,11 @@ open import category-theory.yoneda-lemma-precategories using
   ( lemma-yoneda-Precategory)
 ```
 
-## See also
-
-- The spiritual predecessor of _1000+ theorems_ is
-  [_Formalizing 100 Theorems_](literature.100-theorems.md), also due to Freek
-  Wiedijk {{#cite 100theorems}}.
-
-## References
-
-{{#bibliography}}
-
 ## External links
 
 - [List of theorems](https://en.wikipedia.org/wiki/List_of_theorems) on
   Wikipedia
-- [1000+ theorems](https://1000-plus.github.io/)
-- [1000-plus](https://github.com/1000-plus/1000-plus.github.io) on GitHub
+- The [1000plus project](https://github.com/1000-plus)'s
+  [_1000+ theorems_](https://1000-plus.github.io/) aims to record formalized
+  results from Wikipedia's list of theorems in the 6 proof assistants Isabelle,
+  HOL Light, Coq/Rocq, Lean, Metamath, and Mizar.
