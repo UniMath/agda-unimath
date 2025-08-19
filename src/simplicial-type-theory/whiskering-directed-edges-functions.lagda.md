@@ -5,7 +5,7 @@ open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
 
 module
-  simplicial-type-theory.whiskering-directed-edges-functions
+  simplicial-type-theory.whiskering-directed-edges-identifications-functions
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
@@ -45,10 +45,13 @@ open import simplicial-type-theory.horizontal-composition-directed-edges-functio
 ## Idea
 
 Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : f →▵ f'`
-of functions in `A → B` we may _whisker it on the left_ by a function
-`h : B → C` to obtain a directed edge of functions `hα : hf →▵ hf'`, or we may
-_whisker it on the right_ by a function `g : C → A` to obtain a directed edge of
-functions `αg : fg →▵ f'g`.
+of functions in `A → B` we may
+{{#concept "left whisker" Disambiguation="directed edge by function" Agda=left-whisker-comp-hom▵}}
+by a function `h : B → C` to obtain a directed edge of functions
+`hα : hf →▵ hf'`, or we may
+{{#concept "right whisker" Disambiguation="directed edge by function" Agda=right-whisker-comp-hom▵}}
+by a function `g : C → A` to obtain a directed edge of functions
+`αg : fg →▵ f'g`.
 
 ## Definitions
 
@@ -111,14 +114,12 @@ module _
 
   right-absorption-law-left-whisker-comp-hom▵ :
     (g : B → C) (f : A → B) →
-    left-whisker-comp-hom▵ g (id-hom▵ f) ＝
-    id-hom▵ (g ∘ f)
+    left-whisker-comp-hom▵ g (id-hom▵ f) ＝ id-hom▵ (g ∘ f)
   right-absorption-law-left-whisker-comp-hom▵ g f = refl
 
   left-absorption-law-right-whisker-comp-hom▵ :
     (g : B → C) (f : A → B) →
-    right-whisker-comp-hom▵ (id-hom▵ g) f ＝
-    id-hom▵ (g ∘ f)
+    right-whisker-comp-hom▵ (id-hom▵ g) f ＝ id-hom▵ (g ∘ f)
   left-absorption-law-right-whisker-comp-hom▵ g f = refl
 ```
 

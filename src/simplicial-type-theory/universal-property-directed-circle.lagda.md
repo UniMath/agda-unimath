@@ -43,6 +43,14 @@ open import simplicial-type-theory.free-directed-loops I
 
 </details>
 
+## Idea
+
+The
+{{#concept "universal property" Disambiguation="of the directed circle" Agda=universal-property-directed-circle}}
+of the [directed circle](simplicial-type-theory.directed-circle.md) states that
+it classifies
+[free directed loops](simplicial-type-theory.free-directed-loops.md).
+
 ## Definitions
 
 ### Evaluating an ordinary function at a free directed loop
@@ -136,9 +144,11 @@ module _
 
 ### The induction principle of the directed circle implies the dependent universal property of the directed circle
 
-To prove this, we have to show that the section of `ev-free-directed-loop-Π` is
-also a retraction. This construction is also by the induction principle of the
-directed circle, but it requires (a minimal amount of) preparations.
+To prove that the induction principle of the directed circle implies the
+dependent universal property we have to show that the section of
+`ev-free-directed-loop-Π` is also a retraction. This construction is also by the
+induction principle of the directed circle, but it requires (a minimal amount
+of) preparations.
 
 ```agda
 module _
@@ -179,8 +189,8 @@ module _
               ( apd g (compute-target-free-directed-loop α))))
 
   is-retraction-ind-directed-circle :
-    ( I : induction-principle-directed-circle α)
-    { l2 : Level} (P : X → UU l2) →
+    (I : induction-principle-directed-circle α)
+    {l2 : Level} (P : X → UU l2) →
     is-retraction
       ( ev-free-directed-loop-Π α P)
       ( function-induction-principle-directed-circle α I P)

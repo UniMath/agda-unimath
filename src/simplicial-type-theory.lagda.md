@@ -51,6 +51,6 @@ open import simplicial-type-theory.transposing-adjunctions-between-types public
 open import simplicial-type-theory.transposing-biadjunctions-between-types public
 open import simplicial-type-theory.universal-property-directed-circle public
 open import simplicial-type-theory.whiskering-arrows-functions public
-open import simplicial-type-theory.whiskering-directed-edges public
 open import simplicial-type-theory.whiskering-directed-edges-functions public
+open import simplicial-type-theory.whiskering-directed-edges-identifications public
 ```

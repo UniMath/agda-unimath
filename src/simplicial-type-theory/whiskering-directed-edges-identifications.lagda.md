@@ -1,11 +1,11 @@
-# Whiskering directed edges
+# Whiskering directed edges by identifications
 
 ```agda
 open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
 
 module
-  simplicial-type-theory.whiskering-directed-edges
+  simplicial-type-theory.whiskering-directed-edges-identifications
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
@@ -48,9 +48,13 @@ open import simplicial-type-theory.directed-interval-type I
 ## Idea
 
 Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y`
-in `A` and an [identification](foundation-core.identity-types.md) `p : y ＝ z`,
-we may {#concept "whisker" Disambiguation="directed edge by identification"} `α`
-by `p` to obtain a directed edge `x →▵ z`.
+in `A` then we may
+{{#concept "right whisker" Disambiguation="directed edge by identification" Agda=whisker-target-hom▵}}
+`α` by any [identification](foundation-core.identity-types.md) `p : y ＝ z`, and
+we may to obtain a directed edge `αp : x →▵ z`, or we may
+{{#concept "right whisker" Disambiguation="directed edge by identification" Agda=whisker-source-hom▵}}
+`α` by any [identification](foundation-core.identity-types.md) `q : z ＝ x` to
+obtain a directed edge `qα : z →▵ y`.
 
 ## Definitions
 
@@ -62,7 +66,7 @@ module _
   where
 
   whisker-target-hom▵ :
-    {x y z : A} → y ＝ z → x →▵ y → x →▵ z
+    {x y z : A} → (y ＝ z) → (x →▵ y) → (x →▵ z)
   whisker-target-hom▵ p α =
     ( arrow-hom▵ α ,
       eq-source-hom▵ α ,
@@ -77,7 +81,7 @@ module _
   where
 
   whisker-source-hom▵ :
-    {x y z : A} → x ＝ z → x →▵ y → z →▵ y
+    {x y z : A} → (x ＝ z) → (x →▵ y) → (z →▵ y)
   whisker-source-hom▵ p α =
     ( arrow-hom▵ α ,
       eq-source-hom▵ α ∙ᵣ p ,
@@ -92,7 +96,7 @@ module _
   where
 
   double-whisker-hom▵ :
-    {x y x' y' : A} → x ＝ x' → y ＝ y' → x →▵ y → x' →▵ y'
+    {x y x' y' : A} → (x ＝ x') → (y ＝ y') → (x →▵ y) → (x' →▵ y')
   double-whisker-hom▵ p q α =
     ( arrow-hom▵ α ,
       eq-source-hom▵ α ∙ᵣ p ,
@@ -147,7 +151,7 @@ nat-htpy▵ :
   {x y : A} (α : x →▵ y) →
   action-hom▵-function g α ＝
   double-whisker-hom▵ (H x) (H y) (action-hom▵-function f α)
-nat-htpy▵ {A = A} {f = f} {g} H {x} {y} α =
+nat-htpy▵ {f = f} {g} H {x} {y} α =
   ind-htpy f
     ( λ g H →
       action-hom▵-function g α ＝
@@ -225,7 +229,7 @@ module _
   where
 
   is-hom-injective-retraction :
-    {x y : A} → i x →▵ i y → x →▵ y
+    {x y : A} → (i x →▵ i y) → (x →▵ y)
   is-hom-injective-retraction =
     is-hom-injective-has-retraction i
       ( map-retraction i R)
