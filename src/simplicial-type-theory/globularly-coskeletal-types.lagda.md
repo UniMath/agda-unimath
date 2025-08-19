@@ -47,7 +47,7 @@ open import simplicial-type-theory.directed-edges-dependent-pair-types I
 open import simplicial-type-theory.fully-faithful-maps I
 open import simplicial-type-theory.natural-transformations I
 open import simplicial-type-theory.simplicially-discrete-types I
-open import simplicial-type-theory.whiskering-directed-edges I
+open import simplicial-type-theory.whiskering-directed-edges-identifications I
 ```
 
 </details>

@@ -44,7 +44,7 @@ open import orthogonal-factorization-systems.orthogonal-maps
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval-type I
-open import simplicial-type-theory.whiskering-directed-edges I
+open import simplicial-type-theory.whiskering-directed-edges-identifications I
 ```
 
 </details>
