@@ -120,7 +120,7 @@ module _
   count-is-equiv' H = count-equiv' (pair _ H)
 ```
 
-### A type as 0 elements if and only if it is empty
+### A type has 0 elements if and only if it is empty
 
 ```agda
 abstract
