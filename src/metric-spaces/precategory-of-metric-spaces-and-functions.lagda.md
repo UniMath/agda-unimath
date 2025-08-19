@@ -38,7 +38,7 @@ module _
   precategory-function-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-map-type-Metric-Space)
+      ( set-function-Metric-Space)
       ( λ {A B C} g f → g ∘ f)
       ( λ A → id)
       ( λ {A B C D} h g f → refl)
