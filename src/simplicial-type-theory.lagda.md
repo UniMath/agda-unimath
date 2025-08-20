@@ -30,6 +30,7 @@ open import simplicial-type-theory.directed-interval public
 open import simplicial-type-theory.directed-joins public
 open import simplicial-type-theory.directed-mapping-cylinders public
 open import simplicial-type-theory.directed-suspension public
+open import simplicial-type-theory.discrete-types public
 open import simplicial-type-theory.discreteness-booleans public
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.fully-faithful-maps public
@@ -44,7 +45,6 @@ open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.segal-types public
-open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.spines public
 open import simplicial-type-theory.standard-simplices public
 open import simplicial-type-theory.transposing-adjunctions-between-types public

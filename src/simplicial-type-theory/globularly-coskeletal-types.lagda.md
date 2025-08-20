@@ -44,9 +44,9 @@ open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-edges-cartesian-product-types I
 open import simplicial-type-theory.directed-edges-dependent-pair-types I
+open import simplicial-type-theory.discrete-types I
 open import simplicial-type-theory.fully-faithful-maps I
 open import simplicial-type-theory.natural-transformations I
-open import simplicial-type-theory.simplicially-discrete-types I
 open import simplicial-type-theory.whiskering-directed-edges-identifications I
 ```
 
