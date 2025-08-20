@@ -52,7 +52,7 @@ open import simplicial-type-theory.whiskering-directed-edges-identifications I
 ## Idea
 
 A
-{{#concept "simplicially fully-faithful map" Disambiguation="of simplicial types" Agda=is-fully-faithful▵}}
+{{#concept "(simplicially) fully-faithful map" Disambiguation="of simplicial types" Agda=is-fully-faithful▵}}
 from one type into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [hom-types](simplicial-type-theory.directed-edges.md). In other words, the
@@ -68,13 +68,13 @@ module _
 
   is-fully-faithful▵ : (A → B) → UU (I1 ⊔ l1 ⊔ l2)
   is-fully-faithful▵ f =
-    (x y : A) → is-equiv (action-hom▵-function f {x} {y})
+    (x y : A) → is-equiv (ap▵ f {x} {y})
 
   equiv-action-is-fully-faithful▵ :
     {f : A → B} (e : is-fully-faithful▵ f)
     {x y : A} → (x →▵ y) ≃ (f x →▵ f y)
   equiv-action-is-fully-faithful▵ {f} e {x} {y} =
-    ( action-hom▵-function f , e x y)
+    ( ap▵ f , e x y)
 
   inv-equiv-action-is-fully-faithful▵ :
     {f : A → B} (e : is-fully-faithful▵ f)
@@ -131,7 +131,7 @@ module _
     is-prop-Π
       ( λ x →
         is-prop-Π
-          ( λ y → is-property-is-equiv (action-hom▵-function f)))
+          ( λ y → is-property-is-equiv (ap▵ f)))
 
   is-fully-faithful▵-Prop : (A → B) → Prop (I1 ⊔ l1 ⊔ l2)
   is-fully-faithful▵-Prop f =
@@ -179,7 +179,7 @@ module _
   equiv-action-hom▵ :
     (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)
   equiv-action-hom▵ e x y =
-    ( action-hom▵-function (map-equiv e) ,
+    ( ap▵ (map-equiv e) ,
       is-fully-faithful▵-is-equiv (is-equiv-map-equiv e) x y)
 ```
 
@@ -213,9 +213,9 @@ module _
       is-fully-faithful▵ f
     is-fully-faithful▵-htpy {f} {g} H is-ff-g x y =
       is-equiv-top-map-triangle
-        ( action-hom▵-function g)
+        ( ap▵ g)
         ( double-whisker-hom▵ (H x) (H y))
-        ( action-hom▵-function f)
+        ( ap▵ f)
         ( nat-htpy▵ H)
         ( is-equiv-double-whisker-hom▵ (H x) (H y))
         ( is-ff-g x y)
@@ -280,9 +280,9 @@ module _
     is-fully-faithful▵ (g ∘ h)
   is-fully-faithful▵-comp g h is-ff-g is-ff-h x y =
     is-equiv-left-map-triangle
-      ( action-hom▵-function (g ∘ h))
-      ( action-hom▵-function g)
-      ( action-hom▵-function h)
+      ( ap▵ (g ∘ h))
+      ( ap▵ g)
+      ( ap▵ h)
       ( compute-action-hom▵-comp-function g h)
       ( is-ff-h x y)
       ( is-ff-g (h x) (h y))
@@ -316,9 +316,9 @@ module _
     is-fully-faithful▵ h
   is-fully-faithful▵-right-factor g h is-ff-g is-ff-gh x y =
     is-equiv-top-map-triangle
-      ( action-hom▵-function (g ∘ h))
-      ( action-hom▵-function g)
-      ( action-hom▵-function h)
+      ( ap▵ (g ∘ h))
+      ( ap▵ g)
+      ( ap▵ h)
       ( compute-action-hom▵-comp-function g h)
       ( is-ff-g (h x) (h y))
       ( is-ff-gh x y)
@@ -333,9 +333,9 @@ module _
     is-fully-faithful▵-top-map-triangle
       f g h H is-ff-g is-ff-f x y =
       is-equiv-top-map-triangle
-        ( action-hom▵-function (g ∘ h))
-        ( action-hom▵-function g)
-        ( action-hom▵-function h)
+        ( ap▵ (g ∘ h))
+        ( ap▵ g)
+        ( ap▵ h)
         ( compute-action-hom▵-comp-function g h)
         ( is-ff-g (h x) (h y))
         ( is-fully-faithful▵-htpy (inv-htpy H) is-ff-f x y)

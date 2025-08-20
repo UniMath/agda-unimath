@@ -57,8 +57,8 @@ if one of the following equivalent conditions hold:
    type of dependent directed edges over `f` based at `x'` is
    [torsorial](foundation.torsorial-type-families.md).
 
-2. For every simplicial arrow `α` in `A`, and element `x'` over `α 0▵`, the type
-   of dependent directed edges over `α` based at `x'` is torsorial.
+2. For every arrow `α` in `A`, and element `x'` over `α 0▵`, the type of
+   dependent directed edges over `α` based at `x'` is torsorial.
 
    ```text
      (α : arrow A) (x' : B (α 0▵)) →

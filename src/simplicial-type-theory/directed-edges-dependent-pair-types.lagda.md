@@ -69,7 +69,7 @@ module _
   action-hom▵-dependent-function-pr2' :
     {x y : Σ A B} (α : x →▵ y) →
     dependent-hom▵ B
-      ( action-hom▵-function pr1 α)
+      ( ap▵ pr1 α)
       ( pr2 x)
       ( pr2 y)
   pr1 (action-hom▵-dependent-function-pr2' (α , p , q)) = pr2 ∘ α
@@ -81,7 +81,7 @@ module _
   map-compute-hom▵-Σ :
     {x y : Σ A B} → x →▵ y → hom▵-Σ x y
   map-compute-hom▵-Σ α =
-    ( action-hom▵-function pr1 α ,
+    ( ap▵ pr1 α ,
       action-hom▵-dependent-function-pr2' α)
 
   map-inv-compute-hom▵-Σ :

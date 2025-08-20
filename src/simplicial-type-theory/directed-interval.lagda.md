@@ -62,14 +62,14 @@ source and target elements. In the module
 we postulate the existence of the directed relation on the directed interval
 type.
 
-**Computational behaviour.** Although the directed interval is defined from the
+**Computational behavior.** Although the directed interval is defined from the
 bounded total order `I`, it is marked `opaque`, meaning that we have to state
 explicitly to Agda that we wish to unfold the basic definitions in order for
 Agda to draw any connection between the two objects at a later point.
 
 ## Definitions
 
-### The directed interval type
+### The directed interval
 
 ```agda
 opaque
@@ -88,21 +88,21 @@ opaque
 
 ## Properties
 
-### The directed interval type is not a proposition
+### The directed interval is not a proposition
 
 ```agda
 is-not-prop-Δ¹ : ¬ (is-prop Δ¹)
 is-not-prop-Δ¹ H = is-nontrivial-Δ¹ (eq-is-prop H)
 ```
 
-### The directed interval type is not contractible
+### The directed interval is not contractible
 
 ```agda
 is-not-contractible-Δ¹ : is-not-contractible Δ¹
 is-not-contractible-Δ¹ H = is-nontrivial-Δ¹ (eq-is-contr H)
 ```
 
-### The directed interval type is noncontractible
+### The directed interval is noncontractible
 
 ```agda
 noncontractibility-Δ¹' : noncontractibility' Δ¹ 1

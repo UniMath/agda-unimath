@@ -34,7 +34,7 @@ Any [function](foundation-core.function-types.md) `f : A → B` preserves
 maps any edge `p : x →▵ y` in `A` to a directed edge
 `action-hom▵ f p : f x →▵ f y` in `B`. This action on directed edges can be
 understood as
-{{#concept "functoriality" Disambiguation="of functions in simplicial type theory" Agda=action-hom▵-function}}
+{{#concept "functoriality" Disambiguation="of functions in simplicial type theory" Agda=ap▵}}
 of functions in simplicial type theory.
 
 ## Definition
@@ -42,10 +42,10 @@ of functions in simplicial type theory.
 ### The functorial action of functions on directed edges
 
 ```agda
-action-hom▵-function :
+ap▵ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
   (x →▵ y) → (f x →▵ f y)
-action-hom▵-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
+ap▵ f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ```
 
 ## Properties
@@ -55,7 +55,7 @@ action-hom▵-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ```agda
 compute-action-hom▵-id-function :
   {l : Level} {A : UU l} {x y : A} (p : x →▵ y) →
-  (action-hom▵-function id p) ＝ p
+  (ap▵ id p) ＝ p
 compute-action-hom▵-id-function (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
@@ -66,16 +66,16 @@ compute-action-hom▵-id-function (α , s , t) =
 compute-action-hom▵-comp-function :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
   (f : A → B) {x y : A} (p : x →▵ y) →
-  (action-hom▵-function (g ∘ f) p) ＝
-  ((action-hom▵-function g ∘ action-hom▵-function f) p)
+  (ap▵ (g ∘ f) p) ＝
+  ((ap▵ g ∘ ap▵ f) p)
 compute-action-hom▵-comp-function g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp g f s) (ap-comp g f t))
 
 associative-action-hom▵-comp-function :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x →▵ y) →
-  action-hom▵-function (h ∘ g) (action-hom▵-function f p) ＝
-  action-hom▵-function h (action-hom▵-function (g ∘ f) p)
+  ap▵ (h ∘ g) (ap▵ f p) ＝
+  ap▵ h (ap▵ (g ∘ f) p)
 associative-action-hom▵-comp-function h g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp-assoc h g f s) (ap-comp-assoc h g f t))
 ```
@@ -87,7 +87,7 @@ In fact, the identity edges are preserved strictly.
 ```agda
 compute-action-id-hom▵-function :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
-  action-hom▵-function f (id-hom▵ x) ＝
+  ap▵ f (id-hom▵ x) ＝
   id-hom▵ (f x)
 compute-action-id-hom▵-function f x = refl
 ```
@@ -97,7 +97,7 @@ compute-action-id-hom▵-function f x = refl
 ```agda
 compute-action-hom▵-const-function :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A} (p : x →▵ y) →
-  action-hom▵-function (const A b) p ＝ id-hom▵ b
+  ap▵ (const A b) p ＝ id-hom▵ b
 compute-action-hom▵-const-function b (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-const b s) (ap-const b t))
 ```

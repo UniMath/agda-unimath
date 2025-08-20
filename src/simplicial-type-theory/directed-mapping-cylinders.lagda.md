@@ -55,8 +55,9 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a map `f : X → Y`, we define the {{#concept "directed mapping cylinder"}}
-of `f` as the [pushout](synthetic-homotopy-theory.pushouts.md)
+Given a map `f : X → Y`, we define the
+{{#concept "directed mapping cylinder" Agda=directed-mapping-cylinder}} of `f`
+as the [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
                   f
@@ -64,7 +65,7 @@ of `f` as the [pushout](synthetic-homotopy-theory.pushouts.md)
             |           |
   (id , 1▵) |           |
             ∨         ⌜ ∨
-          X × Δ¹ ----> cyl₂ f
+          X × Δ¹ ----> cyl▵ f
 ```
 
 Intuitively, the directed mapping cylinder of `f` can be understood as `X` glued

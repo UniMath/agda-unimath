@@ -50,7 +50,7 @@ on the [directed interval type](simplicial-type-theory.directed-interval.md)
 [bottom element](order-theory.bottom-elements-posets.md), and `1▵` as the
 [top element](order-theory.top-elements-posets.md).
 
-**Computational behaviour.** Although the directed interval is defined from the
+**Computational behavior.** Although the directed interval is defined from the
 bounded total order `I`, it is marked `opaque`, meaning that we have to state
 explicitly to Agda that we wish to unfold the basic definitions in order for
 Agda to draw any connection between the two objects at a later point.
@@ -110,10 +110,11 @@ total-leq-Δ¹' {x} {y} =
 **Note.** We define totality using the
 [join operation](synthetic-homotopy-theory.joins-of-types.md) on types as we may
 commonly want to eliminate the directed relation into types, and not just
-propositions. Moreover, the join operation is defined in terms of the
-[standard pushout](synthetic-homotopy-theory.pushouts.md) which we can enable
-rewrite rules for by importing the module
-[`synthetic-homotopy-theory.rewriting-pushouts`](synthetic-homotopy-theory.rewriting-pushouts.md).
+propositions. Moreover, we can enable rewrite rules for the join operation by
+importing the module
+[`synthetic-homotopy-theory.rewriting-pushouts`](synthetic-homotopy-theory.rewriting-pushouts.md),
+since it is defined in terms of the
+[standard pushout](synthetic-homotopy-theory.pushouts.md).
 
 ### The source and target of the directed interval are bottom and top elements
 

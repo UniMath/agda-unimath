@@ -62,7 +62,7 @@ the canonical map
 
 is an [equivalence](foundation-core.equivalences.md) for all `x y : A`. A
 simplicially discrete type bears only trivial simplicial structure in the sense
-that its simplices act precisely as its identifications. In particular,
+that its arrows act precisely as its identifications. In particular,
 simplicially discrete types are Rezk complete and Segal.
 
 ## Definitions

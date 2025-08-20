@@ -149,26 +149,26 @@ edge `p : x →▵ y` in `A`, we have a commuting square
 nat-htpy▵ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (α : x →▵ y) →
-  action-hom▵-function g α ＝
-  double-whisker-hom▵ (H x) (H y) (action-hom▵-function f α)
+  ap▵ g α ＝
+  double-whisker-hom▵ (H x) (H y) (ap▵ f α)
 nat-htpy▵ {f = f} {g} H {x} {y} α =
   ind-htpy f
     ( λ g H →
-      action-hom▵-function g α ＝
+      ap▵ g α ＝
       double-whisker-hom▵ (H x) (H y)
-        ( action-hom▵-function f α))
+        ( ap▵ f α))
     ( refl)
     ( H)
 ```
 
 Note that this proof only relies on
 [function extensionality](foundation.function-extensionality.md) to get
-extensionality for [simplicial arrows](simplicial-type-theory.arrows.md).
+extensionality for [arrows](simplicial-type-theory.arrows.md).
 
-### For any map `i : A → B`, a retraction of `i` induces a retraction of the action on identifications of `i`
+### For any map `i : A → B`, a retraction of `i` induces a retraction of the action on directed edges of `i`
 
-**Proof:** Suppose that `H : r ∘ i ~ id` and `p : i x ＝ i y` is an
-identification in `B`. Then we get the directed edge
+**Proof:** Suppose that `H : r ∘ i ~ id` and `p : i x →▵ i y` is a directed edge
+in `B`. Then we get the directed edge
 
 ```text
      H x           ap▵ r p           H y
@@ -183,7 +183,7 @@ i.e., that the whiskering
   x ===== r (i x) ----------------> r (i y) ===== y
 ```
 
-is identical to `p : x ＝ y` for all `p : x ＝ y`, we proceed by identification
+is identical to `p : x →▵ y` for all `p : x →▵ y`, we proceed by identification
 elimination. Then it suffices to show that `(H x)⁻¹ ∙ (H x)` is identical to
 `refl`, which is indeed the case by the left inverse law of concatenation of
 identifications.
@@ -196,16 +196,11 @@ module _
 
   is-hom-injective-has-retraction : {x y : A} → (i x →▵ i y) → (x →▵ y)
   is-hom-injective-has-retraction {x} {y} p =
-    double-whisker-hom▵
-      ( H x)
-      ( H y)
-      ( action-hom▵-function r p)
+    double-whisker-hom▵ (H x) (H y) (ap▵ r p)
 
   is-retraction-is-hom-injective-has-retraction' :
     {x y : A} (α : x →▵ y) →
-    htpy-hom▵
-      ( is-hom-injective-has-retraction (action-hom▵-function i α))
-      ( α)
+    htpy-hom▵ (is-hom-injective-has-retraction (ap▵ i α)) α
   pr1 (is-retraction-is-hom-injective-has-retraction' (α , p , q)) =
     H ·r α
   pr1 (pr2 (is-retraction-is-hom-injective-has-retraction' (α , refl , q))) =
@@ -216,11 +211,11 @@ module _
   is-retraction-is-hom-injective-has-retraction :
     {x y : A} →
     is-retraction
-      ( action-hom▵-function i {x} {y})
+      ( ap▵ i {x} {y})
       ( is-hom-injective-has-retraction)
   is-retraction-is-hom-injective-has-retraction α =
     eq-htpy-hom▵
-      ( is-hom-injective-has-retraction (action-hom▵-function i α))
+      ( is-hom-injective-has-retraction (ap▵ i α))
       ( α)
       ( is-retraction-is-hom-injective-has-retraction' α)
 
@@ -228,23 +223,20 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B) (R : retraction i)
   where
 
-  is-hom-injective-retraction :
-    {x y : A} → (i x →▵ i y) → (x →▵ y)
+  is-hom-injective-retraction : {x y : A} → (i x →▵ i y) → (x →▵ y)
   is-hom-injective-retraction =
     is-hom-injective-has-retraction i
       ( map-retraction i R)
       ( is-retraction-map-retraction i R)
 
   is-retraction-is-hom-injective-retraction :
-    {x y : A} →
-    is-hom-injective-retraction ∘ action-hom▵-function i {x} {y} ~ id
+    {x y : A} → is-hom-injective-retraction ∘ ap▵ i {x} {y} ~ id
   is-retraction-is-hom-injective-retraction =
     is-retraction-is-hom-injective-has-retraction i
       ( map-retraction i R)
       ( is-retraction-map-retraction i R)
 
-  retraction-ap▵ :
-    {x y : A} → retraction (action-hom▵-function i {x} {y})
+  retraction-ap▵ : {x y : A} → retraction (ap▵ i {x} {y})
   pr1 retraction-ap▵ = is-hom-injective-retraction
   pr2 retraction-ap▵ = is-retraction-is-hom-injective-retraction
 ```
@@ -258,8 +250,7 @@ module _
 
   retract-hom▵ :
     (x →▵ y) retract-of (inclusion-retract R x →▵ inclusion-retract R y)
-  pr1 retract-hom▵ =
-    action-hom▵-function (inclusion-retract R)
-  pr2 retract-hom▵ =
-    retraction-ap▵ (inclusion-retract R) (retraction-retract R)
+  retract-hom▵ =
+    ( ap▵ (inclusion-retract R) ,
+      retraction-ap▵ (inclusion-retract R) (retraction-retract R))
 ```

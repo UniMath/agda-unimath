@@ -295,7 +295,7 @@ Steps:
     loop-directed-circle ≠ id-hom▵ base-directed-circle
   is-nontrivial-loop-directed-circle p =
     is-nontrivial-loop-hom▵-𝕊¹
-      {! ? ∙ ap (action-hom▵-function map-directed-circle-circle) p ∙ ? !}
+      {! ? ∙ ap (ap▵ map-directed-circle-circle) p ∙ ? !}
 ```
 
 > It remains to formalize that the circle is simplicially discrete. Note that
