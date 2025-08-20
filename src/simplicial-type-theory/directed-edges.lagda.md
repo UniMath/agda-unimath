@@ -41,7 +41,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.arrows I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 ```
 
 </details>

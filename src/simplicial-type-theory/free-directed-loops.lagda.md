@@ -35,7 +35,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 
 open import synthetic-homotopy-theory.free-loops
 ```

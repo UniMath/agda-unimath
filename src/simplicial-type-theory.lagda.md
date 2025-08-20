@@ -26,7 +26,7 @@ open import simplicial-type-theory.directed-cones public
 open import simplicial-type-theory.directed-edges public
 open import simplicial-type-theory.directed-edges-cartesian-product-types public
 open import simplicial-type-theory.directed-edges-dependent-pair-types public
-open import simplicial-type-theory.directed-interval-type public
+open import simplicial-type-theory.directed-interval public
 open import simplicial-type-theory.directed-joins public
 open import simplicial-type-theory.directed-mapping-cylinders public
 open import simplicial-type-theory.directed-suspension public

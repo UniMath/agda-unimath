@@ -40,7 +40,7 @@ open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 ```
 
 </details>

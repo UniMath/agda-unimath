@@ -47,7 +47,7 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.action-on-directed-edges-functions I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.free-directed-loops I
 open import simplicial-type-theory.inequality-directed-interval-type I
 open import simplicial-type-theory.simplicially-discrete-types I

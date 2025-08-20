@@ -39,7 +39,7 @@ open import orthogonal-factorization-systems.null-types
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.circle

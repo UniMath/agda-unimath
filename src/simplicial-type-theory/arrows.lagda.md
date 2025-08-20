@@ -19,7 +19,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 ```
 
 </details>
@@ -28,9 +28,9 @@ open import simplicial-type-theory.directed-interval-type I
 
 An {{#concept "arrow" Disambiguation="in a simplicial type" Agda=arrow▵}} in a
 type `A` is a map from the
-[directed interval](simplicial-type-theory.directed-interval-type.md) to the
-type, `Δ¹ → A`. Given a simplicial arrow `α` in `A`, we call `α 0▵` the
-_source_, and `α 1▵` the _target_ of the arrow. See
+[directed interval](simplicial-type-theory.directed-interval.md) to the type,
+`Δ¹ → A`. Given a simplicial arrow `α` in `A`, we call `α 0▵` the _source_, and
+`α 1▵` the _target_ of the arrow. See
 [directed edges](simplicial-type-theory.directed-edges.md) for simplicial arrows
 with a specified source and target.
 

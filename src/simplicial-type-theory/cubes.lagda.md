@@ -29,7 +29,7 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.inequality-directed-interval-type I
 
 open import synthetic-homotopy-theory.joins-of-types
@@ -42,9 +42,8 @@ open import synthetic-homotopy-theory.joins-of-types
 Given a [natural number](elementary-number-theory.natural-numbers.md) 𝑛, the
 {{#concept "standard directed 𝑛-cube" Disambiguation="simplicial type theory" Agda=directed-cube}}
 consists of 𝑛-fold pairs of elements of the
-[directed interval](simplicial-type-theory.directed-interval-type.md). The
-standard directed 0-cube is defined to be the
-[unit type](foundation.unit-type.md).
+[directed interval](simplicial-type-theory.directed-interval.md). The standard
+directed 0-cube is defined to be the [unit type](foundation.unit-type.md).
 
 ## Definitions
 
