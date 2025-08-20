@@ -50,9 +50,9 @@ open import simplicial-type-theory.directed-interval I
 Given a [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y`
 in `A` then we may
 {{#concept "right whisker" Disambiguation="directed edge by identification" Agda=whisker-target-hom▵}}
-`α` by any [identification](foundation-core.identity-types.md) `p : y ＝ z`, and
-we may to obtain a directed edge `αp : x →▵ z`, or we may
-{{#concept "right whisker" Disambiguation="directed edge by identification" Agda=whisker-source-hom▵}}
+`α` by any [identification](foundation-core.identity-types.md) `p : y ＝ z` to
+obtain a directed edge `αp : x →▵ z`, or we may
+{{#concept "left whisker" Disambiguation="directed edge by identification" Agda=whisker-source-hom▵}}
 `α` by any [identification](foundation-core.identity-types.md) `q : z ＝ x` to
 obtain a directed edge `qα : z →▵ y`.
 
@@ -65,12 +65,9 @@ module _
   {l : Level} {A : UU l}
   where
 
-  whisker-target-hom▵ :
-    {x y z : A} → (y ＝ z) → (x →▵ y) → (x →▵ z)
+  whisker-target-hom▵ : {x y z : A} → (y ＝ z) → (x →▵ y) → (x →▵ z)
   whisker-target-hom▵ p α =
-    ( arrow-hom▵ α ,
-      eq-source-hom▵ α ,
-      eq-target-hom▵ α ∙ᵣ p)
+    ( arrow-hom▵ α , eq-source-hom▵ α , eq-target-hom▵ α ∙ᵣ p)
 ```
 
 ### Whiskering at the source of a directed edge
@@ -80,12 +77,9 @@ module _
   {l : Level} {A : UU l}
   where
 
-  whisker-source-hom▵ :
-    {x y z : A} → (x ＝ z) → (x →▵ y) → (z →▵ y)
+  whisker-source-hom▵ : {x y z : A} → (x ＝ z) → (x →▵ y) → (z →▵ y)
   whisker-source-hom▵ p α =
-    ( arrow-hom▵ α ,
-      eq-source-hom▵ α ∙ᵣ p ,
-      eq-target-hom▵ α)
+    ( arrow-hom▵ α , eq-source-hom▵ α ∙ᵣ p , eq-target-hom▵ α)
 ```
 
 ### Whiskering both end points of a directed edge
@@ -98,9 +92,7 @@ module _
   double-whisker-hom▵ :
     {x y x' y' : A} → (x ＝ x') → (y ＝ y') → (x →▵ y) → (x' →▵ y')
   double-whisker-hom▵ p q α =
-    ( arrow-hom▵ α ,
-      eq-source-hom▵ α ∙ᵣ p ,
-      eq-target-hom▵ α ∙ᵣ q)
+    ( arrow-hom▵ α , eq-source-hom▵ α ∙ᵣ p , eq-target-hom▵ α ∙ᵣ q)
 ```
 
 ## Properties
@@ -153,10 +145,7 @@ nat-htpy▵ :
   double-whisker-hom▵ (H x) (H y) (ap▵ f α)
 nat-htpy▵ {f = f} {g} H {x} {y} α =
   ind-htpy f
-    ( λ g H →
-      ap▵ g α ＝
-      double-whisker-hom▵ (H x) (H y)
-        ( ap▵ f α))
+    ( λ g H → ap▵ g α ＝ double-whisker-hom▵ (H x) (H y) (ap▵ f α))
     ( refl)
     ( H)
 ```
@@ -172,7 +161,7 @@ in `B`. Then we get the directed edge
 
 ```text
      H x           ap▵ r p           H y
-  x ===== r (i x) --------> r (i y) ===== y
+  x ===== r (i x) --------> r (i y) ===== y.
 ```
 
 This defines a map `s : (i x →▵ i y) → (x →▵ y)`. To see that `s ∘ ap▵ i ~ id`,
@@ -209,10 +198,7 @@ module _
     left-unit-right-strict-concat ∙ inv right-unit
 
   is-retraction-is-hom-injective-has-retraction :
-    {x y : A} →
-    is-retraction
-      ( ap▵ i {x} {y})
-      ( is-hom-injective-has-retraction)
+    {x y : A} → is-retraction (ap▵ i {x} {y}) (is-hom-injective-has-retraction)
   is-retraction-is-hom-injective-has-retraction α =
     eq-htpy-hom▵
       ( is-hom-injective-has-retraction (ap▵ i α))

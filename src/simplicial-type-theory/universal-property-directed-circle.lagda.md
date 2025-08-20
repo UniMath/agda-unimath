@@ -51,6 +51,11 @@ of the [directed circle](simplicial-type-theory.directed-circle.md) states that
 it classifies
 [free directed loops](simplicial-type-theory.free-directed-loops.md).
 
+Note that the directed circle should not be confused with the _representing
+endomorphism_, which would have the universal property of being the classifying
+type of the [natural numbers](elementary-number-theory.natural-numbers.md) (in
+the appropriate sense).
+
 ## Definitions
 
 ### Evaluating an ordinary function at a free directed loop

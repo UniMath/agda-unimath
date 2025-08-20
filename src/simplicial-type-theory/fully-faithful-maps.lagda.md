@@ -52,7 +52,7 @@ open import simplicial-type-theory.whiskering-directed-edges-identifications I
 ## Idea
 
 A
-{{#concept "(simplicially) fully-faithful map" Disambiguation="of simplicial types" Agda=is-fully-faithful▵}}
+{{#concept "(simplicially) fully-faithful map" Disambiguation="of simplicial types" Agda=is-fully-faithful}}
 from one type into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [hom-types](simplicial-type-theory.directed-edges.md). In other words, the
@@ -66,54 +66,54 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-fully-faithful▵ : (A → B) → UU (I1 ⊔ l1 ⊔ l2)
-  is-fully-faithful▵ f =
+  is-fully-faithful : (A → B) → UU (I1 ⊔ l1 ⊔ l2)
+  is-fully-faithful f =
     (x y : A) → is-equiv (ap▵ f {x} {y})
 
-  equiv-action-is-fully-faithful▵ :
-    {f : A → B} (e : is-fully-faithful▵ f)
+  equiv-action-is-fully-faithful :
+    {f : A → B} (e : is-fully-faithful f)
     {x y : A} → (x →▵ y) ≃ (f x →▵ f y)
-  equiv-action-is-fully-faithful▵ {f} e {x} {y} =
+  equiv-action-is-fully-faithful {f} e {x} {y} =
     ( ap▵ f , e x y)
 
-  inv-equiv-action-is-fully-faithful▵ :
-    {f : A → B} (e : is-fully-faithful▵ f)
+  inv-equiv-action-is-fully-faithful :
+    {f : A → B} (e : is-fully-faithful f)
     {x y : A} → (f x →▵ f y) ≃ (x →▵ y)
-  inv-equiv-action-is-fully-faithful▵ e =
-    inv-equiv (equiv-action-is-fully-faithful▵ e)
+  inv-equiv-action-is-fully-faithful e =
+    inv-equiv (equiv-action-is-fully-faithful e)
 
-fully-faithful-map▵ : {l1 l2 : Level} → UU l1 → UU l2 → UU (I1 ⊔ l1 ⊔ l2)
-fully-faithful-map▵ A B = Σ (A → B) (is-fully-faithful▵)
+fully-faithful-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (I1 ⊔ l1 ⊔ l2)
+fully-faithful-map A B = Σ (A → B) (is-fully-faithful)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-fully-faithful-map▵ : fully-faithful-map▵ A B → A → B
-  map-fully-faithful-map▵ = pr1
+  map-fully-faithful-map : fully-faithful-map A B → A → B
+  map-fully-faithful-map = pr1
 
-  is-fully-faithful▵-map-fully-faithful-map▵ :
-    (f : fully-faithful-map▵ A B) →
-    is-fully-faithful▵ (map-fully-faithful-map▵ f)
-  is-fully-faithful▵-map-fully-faithful-map▵ = pr2
+  is-fully-faithful-map-fully-faithful-map :
+    (f : fully-faithful-map A B) →
+    is-fully-faithful (map-fully-faithful-map f)
+  is-fully-faithful-map-fully-faithful-map = pr2
 
-  equiv-action-fully-faithful-map▵ :
-    (e : fully-faithful-map▵ A B) {x y : A} →
+  equiv-action-fully-faithful-map :
+    (e : fully-faithful-map A B) {x y : A} →
     ( x →▵ y) ≃
-    ( map-fully-faithful-map▵ e x →▵
-      map-fully-faithful-map▵ e y)
-  equiv-action-fully-faithful-map▵ e =
-    equiv-action-is-fully-faithful▵
-      ( is-fully-faithful▵-map-fully-faithful-map▵ e)
+    ( map-fully-faithful-map e x →▵
+      map-fully-faithful-map e y)
+  equiv-action-fully-faithful-map e =
+    equiv-action-is-fully-faithful
+      ( is-fully-faithful-map-fully-faithful-map e)
 
-  inv-equiv-action-fully-faithful-map▵ :
-    (e : fully-faithful-map▵ A B)
+  inv-equiv-action-fully-faithful-map :
+    (e : fully-faithful-map A B)
     {x y : A} →
-    ( map-fully-faithful-map▵ e x →▵
-      map-fully-faithful-map▵ e y) ≃
+    ( map-fully-faithful-map e x →▵
+      map-fully-faithful-map e y) ≃
     ( x →▵ y)
-  inv-equiv-action-fully-faithful-map▵ e =
-    inv-equiv (equiv-action-fully-faithful-map▵ e)
+  inv-equiv-action-fully-faithful-map e =
+    inv-equiv (equiv-action-fully-faithful-map e)
 ```
 
 ## Properties
@@ -125,18 +125,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-property-is-fully-faithful▵ :
-    (f : A → B) → is-prop (is-fully-faithful▵ f)
-  is-property-is-fully-faithful▵ f =
+  is-property-is-fully-faithful :
+    (f : A → B) → is-prop (is-fully-faithful f)
+  is-property-is-fully-faithful f =
     is-prop-Π
       ( λ x →
         is-prop-Π
           ( λ y → is-property-is-equiv (ap▵ f)))
 
-  is-fully-faithful▵-Prop : (A → B) → Prop (I1 ⊔ l1 ⊔ l2)
-  is-fully-faithful▵-Prop f =
-    ( is-fully-faithful▵ f ,
-      is-property-is-fully-faithful▵ f)
+  is-fully-faithful-Prop : (A → B) → Prop (I1 ⊔ l1 ⊔ l2)
+  is-fully-faithful-Prop f =
+    ( is-fully-faithful f ,
+      is-property-is-fully-faithful f)
 ```
 
 ### The identity map is fully faithful
@@ -146,14 +146,14 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-fully-faithful▵-id :
-    is-fully-faithful▵ (id {A = A})
-  is-fully-faithful▵-id x y =
+  is-fully-faithful-id :
+    is-fully-faithful (id {A = A})
+  is-fully-faithful-id x y =
     is-equiv-htpy id compute-action-hom▵-id-function is-equiv-id
 
-  id-fully-faithful-map▵ : fully-faithful-map▵ A A
-  id-fully-faithful-map▵ =
-    ( id , is-fully-faithful▵-id)
+  id-fully-faithful-map : fully-faithful-map A A
+  id-fully-faithful-map =
+    ( id , is-fully-faithful-id)
 ```
 
 ### Equivalences are fully faithful
@@ -163,9 +163,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-fully-faithful▵-is-equiv :
-    {f : A → B} → is-equiv f → is-fully-faithful▵ f
-  is-fully-faithful▵-is-equiv {f} H x y =
+  is-fully-faithful-is-equiv :
+    {f : A → B} → is-equiv f → is-fully-faithful f
+  is-fully-faithful-is-equiv {f} H x y =
     is-equiv-map-Σ
       ( λ α → (α 0▵ ＝ f x) × (α 1▵ ＝ f y))
       ( is-equiv-postcomp-is-equiv f H Δ¹)
@@ -180,7 +180,7 @@ module _
     (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)
   equiv-action-hom▵ e x y =
     ( ap▵ (map-equiv e) ,
-      is-fully-faithful▵-is-equiv (is-equiv-map-equiv e) x y)
+      is-fully-faithful-is-equiv (is-equiv-map-equiv e) x y)
 ```
 
 ### A map is fully faithful if and only if it is `(∂Δ¹ → Δ¹)`-orthogonal
@@ -194,9 +194,9 @@ module _
   {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
   where
 
-  is-fully-faithful▵-is-fully-faithful▵ :
-    (A → is-fully-faithful▵ f) → is-fully-faithful▵ f
-  is-fully-faithful▵-is-fully-faithful▵ H x y = H x x y
+  is-fully-faithful-is-fully-faithful :
+    (A → is-fully-faithful f) → is-fully-faithful f
+  is-fully-faithful-is-fully-faithful H x y = H x x y
 ```
 
 ### fully faithful maps are closed under homotopies
@@ -207,11 +207,11 @@ module _
   where
 
   abstract
-    is-fully-faithful▵-htpy :
+    is-fully-faithful-htpy :
       {f g : A → B} (H : f ~ g) →
-      is-fully-faithful▵ g →
-      is-fully-faithful▵ f
-    is-fully-faithful▵-htpy {f} {g} H is-ff-g x y =
+      is-fully-faithful g →
+      is-fully-faithful f
+    is-fully-faithful-htpy {f} {g} H is-ff-g x y =
       is-equiv-top-map-triangle
         ( ap▵ g)
         ( double-whisker-hom▵ (H x) (H y))
@@ -220,33 +220,33 @@ module _
         ( is-equiv-double-whisker-hom▵ (H x) (H y))
         ( is-ff-g x y)
 
-  is-fully-faithful▵-htpy-fully-faithful-map▵ :
-    {f : A → B} (e : fully-faithful-map▵ A B) →
-    f ~ map-fully-faithful-map▵ e →
-    is-fully-faithful▵ f
-  is-fully-faithful▵-htpy-fully-faithful-map▵ e H =
-    is-fully-faithful▵-htpy H
-      ( is-fully-faithful▵-map-fully-faithful-map▵ e)
+  is-fully-faithful-htpy-fully-faithful-map :
+    {f : A → B} (e : fully-faithful-map A B) →
+    f ~ map-fully-faithful-map e →
+    is-fully-faithful f
+  is-fully-faithful-htpy-fully-faithful-map e H =
+    is-fully-faithful-htpy H
+      ( is-fully-faithful-map-fully-faithful-map e)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
-    is-fully-faithful▵-htpy' :
+    is-fully-faithful-htpy' :
       {f g : A → B} (H : f ~ g) →
-      is-fully-faithful▵ f →
-      is-fully-faithful▵ g
-    is-fully-faithful▵-htpy' H is-ff-f =
-      is-fully-faithful▵-htpy (inv-htpy H) is-ff-f
+      is-fully-faithful f →
+      is-fully-faithful g
+    is-fully-faithful-htpy' H is-ff-f =
+      is-fully-faithful-htpy (inv-htpy H) is-ff-f
 
-  is-fully-faithful▵-htpy-fully-faithful-map▵' :
-    (e : fully-faithful-map▵ A B) {g : A → B} →
-    map-fully-faithful-map▵ e ~ g →
-    is-fully-faithful▵ g
-  is-fully-faithful▵-htpy-fully-faithful-map▵' e H =
-    is-fully-faithful▵-htpy' H
-      ( is-fully-faithful▵-map-fully-faithful-map▵ e)
+  is-fully-faithful-htpy-fully-faithful-map' :
+    (e : fully-faithful-map A B) {g : A → B} →
+    map-fully-faithful-map e ~ g →
+    is-fully-faithful g
+  is-fully-faithful-htpy-fully-faithful-map' e H =
+    is-fully-faithful-htpy' H
+      ( is-fully-faithful-map-fully-faithful-map e)
 ```
 
 ### Any map between propositions is fully faithful
@@ -255,11 +255,11 @@ module _
 fully-faithful map between them is an embedding.
 
 ```text
-is-fully-faithful▵-is-prop :
+is-fully-faithful-is-prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-prop A → is-prop B → is-fully-faithful▵ f
-is-fully-faithful▵-is-prop H K =
-  is-fully-faithful▵-is-prop-map (is-trunc-map-is-trunc-domain-codomain neg-one-𝕋 H K)
+  is-prop A → is-prop B → is-fully-faithful f
+is-fully-faithful-is-prop H K =
+  is-fully-faithful-is-prop-map (is-trunc-map-is-trunc-domain-codomain neg-one-𝕋 H K)
 ```
 
 ### fully faithful maps are closed under retracts of maps
@@ -273,12 +273,12 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  is-fully-faithful▵-comp :
+  is-fully-faithful-comp :
     (g : B → C) (h : A → B) →
-    is-fully-faithful▵ g →
-    is-fully-faithful▵ h →
-    is-fully-faithful▵ (g ∘ h)
-  is-fully-faithful▵-comp g h is-ff-g is-ff-h x y =
+    is-fully-faithful g →
+    is-fully-faithful h →
+    is-fully-faithful (g ∘ h)
+  is-fully-faithful-comp g h is-ff-g is-ff-h x y =
     is-equiv-left-map-triangle
       ( ap▵ (g ∘ h))
       ( ap▵ g)
@@ -288,18 +288,18 @@ module _
       ( is-ff-g (h x) (h y))
 
   abstract
-    is-fully-faithful▵-left-map-triangle :
+    is-fully-faithful-left-map-triangle :
       (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h) →
-      is-fully-faithful▵ g →
-      is-fully-faithful▵ h → is-fully-faithful▵ f
-    is-fully-faithful▵-left-map-triangle f g h H is-ff-g is-ff-h =
-      is-fully-faithful▵-htpy H
-        ( is-fully-faithful▵-comp g h is-ff-g is-ff-h)
+      is-fully-faithful g →
+      is-fully-faithful h → is-fully-faithful f
+    is-fully-faithful-left-map-triangle f g h H is-ff-g is-ff-h =
+      is-fully-faithful-htpy H
+        ( is-fully-faithful-comp g h is-ff-g is-ff-h)
 
-  comp-fully-faithful-map▵ :
-    fully-faithful-map▵ B C → fully-faithful-map▵ A B → fully-faithful-map▵ A C
-  comp-fully-faithful-map▵ (g , H) (f , K) =
-    ( g ∘ f , is-fully-faithful▵-comp g f H K)
+  comp-fully-faithful-map :
+    fully-faithful-map B C → fully-faithful-map A B → fully-faithful-map A C
+  comp-fully-faithful-map (g , H) (f , K) =
+    ( g ∘ f , is-fully-faithful-comp g f H K)
 ```
 
 ### The right factor of a fully faithful composite is fully faithful
@@ -309,12 +309,12 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  is-fully-faithful▵-right-factor :
+  is-fully-faithful-right-factor :
     (g : B → C) (h : A → B) →
-    is-fully-faithful▵ g →
-    is-fully-faithful▵ (g ∘ h) →
-    is-fully-faithful▵ h
-  is-fully-faithful▵-right-factor g h is-ff-g is-ff-gh x y =
+    is-fully-faithful g →
+    is-fully-faithful (g ∘ h) →
+    is-fully-faithful h
+  is-fully-faithful-right-factor g h is-ff-g is-ff-gh x y =
     is-equiv-top-map-triangle
       ( ap▵ (g ∘ h))
       ( ap▵ g)
@@ -324,13 +324,13 @@ module _
       ( is-ff-gh x y)
 
   abstract
-    is-fully-faithful▵-top-map-triangle :
+    is-fully-faithful-top-map-triangle :
       (f : A → C) (g : B → C) (h : A → B)
       (H : coherence-triangle-maps f g h) →
-      is-fully-faithful▵ g →
-      is-fully-faithful▵ f →
-      is-fully-faithful▵ h
-    is-fully-faithful▵-top-map-triangle
+      is-fully-faithful g →
+      is-fully-faithful f →
+      is-fully-faithful h
+    is-fully-faithful-top-map-triangle
       f g h H is-ff-g is-ff-f x y =
       is-equiv-top-map-triangle
         ( ap▵ (g ∘ h))
@@ -338,32 +338,32 @@ module _
         ( ap▵ h)
         ( compute-action-hom▵-comp-function g h)
         ( is-ff-g (h x) (h y))
-        ( is-fully-faithful▵-htpy (inv-htpy H) is-ff-f x y)
+        ( is-fully-faithful-htpy (inv-htpy H) is-ff-f x y)
 
   abstract
-    is-fully-faithful▵-triangle-is-equiv :
+    is-fully-faithful-triangle-is-equiv :
       (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e →
-      is-fully-faithful▵ g →
-      is-fully-faithful▵ f
-    is-fully-faithful▵-triangle-is-equiv
+      is-fully-faithful g →
+      is-fully-faithful f
+    is-fully-faithful-triangle-is-equiv
       f g e H is-equiv-e is-ff-g =
-      is-fully-faithful▵-left-map-triangle f g e H is-ff-g
-        ( is-fully-faithful▵-is-equiv is-equiv-e)
+      is-fully-faithful-left-map-triangle f g e H is-ff-g
+        ( is-fully-faithful-is-equiv is-equiv-e)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   abstract
-    is-fully-faithful▵-triangle-is-equiv' :
+    is-fully-faithful-triangle-is-equiv' :
       (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
       is-equiv e →
-      is-fully-faithful▵ f →
-      is-fully-faithful▵ g
-    is-fully-faithful▵-triangle-is-equiv'
+      is-fully-faithful f →
+      is-fully-faithful g
+    is-fully-faithful-triangle-is-equiv'
       f g e H is-equiv-e is-ff-f =
-      is-fully-faithful▵-triangle-is-equiv g f
+      is-fully-faithful-triangle-is-equiv g f
         ( map-inv-is-equiv is-equiv-e)
         ( triangle-section f g e H
           ( pair
@@ -383,7 +383,7 @@ module _
 
 ### Equivalence on total spaces induced by fully faithful maps on the base types
 
-We saw above that given a fully faithful map `f : fully-faithful-map▵ A B` and a
+We saw above that given a fully faithful map `f : fully-faithful-map A B` and a
 type family `C` over `B` we obtain a fully faithful map
 
 ```text
@@ -401,39 +401,39 @@ a section `((b , c) : Σ B C) → fiber f b`, then it follows that
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
-  (f : fully-faithful-map▵ A B)
-  (H : ((b , c) : Σ B C) → fiber (map-fully-faithful-map▵ f) b)
+  (f : fully-faithful-map A B)
+  (H : ((b , c) : Σ B C) → fiber (map-fully-faithful-map f) b)
   where
 
-  map-inv-Σ-fully-faithful-map▵-base :
-    Σ B C → Σ A (C ∘ map-fully-faithful-map▵ f)
-  pr1 (map-inv-Σ-fully-faithful-map▵-base u) = pr1 (H u)
-  pr2 (map-inv-Σ-fully-faithful-map▵-base u) =
+  map-inv-Σ-fully-faithful-map-base :
+    Σ B C → Σ A (C ∘ map-fully-faithful-map f)
+  pr1 (map-inv-Σ-fully-faithful-map-base u) = pr1 (H u)
+  pr2 (map-inv-Σ-fully-faithful-map-base u) =
     inv-tr C (pr2 (H u)) (pr2 u)
 
-  is-section-map-inv-Σ-fully-faithful-map▵-base :
+  is-section-map-inv-Σ-fully-faithful-map-base :
     is-section
-      ( map-Σ-map-base (map-fully-faithful-map▵ f) C)
-      ( map-inv-Σ-fully-faithful-map▵-base)
-  is-section-map-inv-Σ-fully-faithful-map▵-base (b , c) =
+      ( map-Σ-map-base (map-fully-faithful-map f) C)
+      ( map-inv-Σ-fully-faithful-map-base)
+  is-section-map-inv-Σ-fully-faithful-map-base (b , c) =
     ap
       ( λ s → (pr1 s , inv-tr C (pr2 s) c))
       ( eq-is-contr (is-torsorial-Id' b))
 
-  -- is-retraction-map-inv-Σ-fully-faithful-map▵-base :
-  --   is-retraction (map-Σ-map-base (map-fully-faithful-map▵ f) C) map-inv-Σ-fully-faithful-map▵-base
-  -- is-retraction-map-inv-Σ-fully-faithful-map▵-base (a , c) =
+  -- is-retraction-map-inv-Σ-fully-faithful-map-base :
+  --   is-retraction (map-Σ-map-base (map-fully-faithful-map f) C) map-inv-Σ-fully-faithful-map-base
+  -- is-retraction-map-inv-Σ-fully-faithful-map-base (a , c) =
   --   ap
   --     ( λ s → (pr1 s , inv-tr C (pr2 s) c))
-  --     ( eq-is-prop (is-prop-map-is-fully-faithful▵ (pr2 f) (map-fully-faithful-map▵ f a)))
+  --     ( eq-is-prop (is-prop-map-is-fully-faithful (pr2 f) (map-fully-faithful-map f a)))
 
-  -- equiv-Σ-fully-faithful-map▵-base : Σ A (C ∘ map-fully-faithful-map▵ f) ≃ Σ B C
-  -- pr1 equiv-Σ-fully-faithful-map▵-base = map-Σ-map-base (map-fully-faithful-map▵ f) C
-  -- pr2 equiv-Σ-fully-faithful-map▵-base =
+  -- equiv-Σ-fully-faithful-map-base : Σ A (C ∘ map-fully-faithful-map f) ≃ Σ B C
+  -- pr1 equiv-Σ-fully-faithful-map-base = map-Σ-map-base (map-fully-faithful-map f) C
+  -- pr2 equiv-Σ-fully-faithful-map-base =
   --   is-equiv-is-invertible
-  --     map-inv-Σ-fully-faithful-map▵-base
-  --     is-section-map-inv-Σ-fully-faithful-map▵-base
-  --     is-retraction-map-inv-Σ-fully-faithful-map▵-base
+  --     map-inv-Σ-fully-faithful-map-base
+  --     is-section-map-inv-Σ-fully-faithful-map-base
+  --     is-retraction-map-inv-Σ-fully-faithful-map-base
 ```
 
 > This remains to be formalized.
@@ -445,3 +445,10 @@ module _
 ### Fully faithful maps are closed under pullback
 
 > This remains to be formalized.
+
+## See also
+
+- In
+  [whiskering directed edges by identifications](simplicial-type-theory.whiskering-directed-edges-functions.md)
+  we show that the action on directed edges of a retract of types is a
+  retraction.

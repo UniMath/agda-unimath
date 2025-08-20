@@ -272,27 +272,27 @@ abstract
 
 ```agda
 abstract
-  is-globularly-coskeletal-is-fully-faithful▵ :
+  is-globularly-coskeletal-is-fully-faithful :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-    is-fully-faithful▵ f →
+    is-fully-faithful f →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
-  is-globularly-coskeletal-is-fully-faithful▵ k f Ef H x y =
+  is-globularly-coskeletal-is-fully-faithful k f Ef H x y =
     is-globularly-coskeletal-is-equiv k (f x →▵ f y)
       ( ap▵ f {x} {y})
       ( Ef x y)
       ( H (f x) (f y))
 
 abstract
-  is-globularly-coskeletal-fully-faithful-map▵ :
+  is-globularly-coskeletal-fully-faithful-map :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
-    (f : fully-faithful-map▵ A B) →
+    (f : fully-faithful-map A B) →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
-  is-globularly-coskeletal-fully-faithful-map▵ k f =
-    is-globularly-coskeletal-is-fully-faithful▵ k
-      ( map-fully-faithful-map▵ f)
-      ( is-fully-faithful▵-map-fully-faithful-map▵ f)
+  is-globularly-coskeletal-fully-faithful-map k f =
+    is-globularly-coskeletal-is-fully-faithful k
+      ( map-fully-faithful-map f)
+      ( is-fully-faithful-map-fully-faithful-map f)
 ```
 
 In fact, it suffices that the action on homs has a retraction.
