@@ -51,6 +51,7 @@ open import order-theory.posets
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -471,4 +472,15 @@ module _
       ( upper-real-mul-ℝ)
       ( is-disjoint-lower-upper-cut-mul-ℝ)
       ( is-located-mul-ℝ)
+```
+
+## Properties
+
+### Multiplication of rational reals
+
+```agda
+abstract
+  is-rational-mul-real-ℚ :
+    (p q : ℚ) →
+    is-rational-ℝ (mul-ℝ (real-ℚ p) (real-ℚ q)) (p *ℚ q)
 ```
