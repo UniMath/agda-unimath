@@ -473,13 +473,13 @@ module _
 Given equivalences of arrows `f' ≃ f` and `g' ≃ g`, then `f ⊥ g` if and only if
 `f' ⊥ g'`.
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Orthogonality is preserved under retracts of maps
 
 Given retracts of maps `f' → f` and `g → g'`, then `f ⊥ g` implies `f' ⊥ g'`.
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Equivalences are orthogonal to every map
 
@@ -1370,8 +1370,8 @@ This remains to be formalized.
 
 ### Right orthogonality is preserved under sequential limits
 
-Given a [tower](foundation.inverse-sequential-diagrams.md) of `f`-orthogonal
-maps
+Given an [inverse sequential diagram](foundation.inverse-sequential-diagrams.md)
+of `f`-orthogonal maps
 
 ```text
      g₃      g₂      g₁      g₀

@@ -21,12 +21,12 @@ Agda's builtin primitive `primEraseEquality` is a special construct on
 identification `x ＝ y` gives another identification `x ＝ y` with the following
 reduction behaviour:
 
-- If the two end points of `p : x ＝ y` normalize to the same term,
+- If the two end points of `p : x ＝ y` normalize to the same term, then
   `primEraseEquality p` reduces to `refl`.
 
 For example, `primEraseEquality` applied to the loop of the
 [circle](synthetic-homotopy-theory.circle.md) will compute to `refl`, while
-`primEraseEquality` applied to the nontrivial identification in the
+`primEraseEquality` applied to the generating identification in the
 [interval](synthetic-homotopy-theory.interval.md) will not reduce.
 
 This primitive is useful for [rewrite rules](reflection.rewriting.md), as it
