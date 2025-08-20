@@ -8,11 +8,17 @@ module elementary-number-theory.intervals-rational-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.closed-intervals-posets
@@ -34,16 +40,62 @@ interval-ℚ : UU lzero
 interval-ℚ = closed-interval-Poset ℚ-Poset
 
 lower-bound-interval-ℚ : interval-ℚ → ℚ
-lower-bound-interval-ℚ =
-  lower-bound-closed-interval-Poset ℚ-Poset
+lower-bound-interval-ℚ = lower-bound-closed-interval-Poset ℚ-Poset
 
 upper-bound-interval-ℚ : interval-ℚ → ℚ
-upper-bound-interval-ℚ =
-  lower-bound-closed-interval-Poset ℚ-Poset
+upper-bound-interval-ℚ = upper-bound-closed-interval-Poset ℚ-Poset
 
 subtype-interval-ℚ : interval-ℚ → subtype lzero ℚ
-subtype-interval-ℚ = subposet-closed-interval-Poset ℚ-Poset
+subtype-interval-ℚ = subtype-closed-interval-Poset ℚ-Poset
 
 is-closed-interval-map-prop-ℚ :
-  (ℚ → ℚ) → interval-ℚ → interval-ℚ → Prop ?
+  (ℚ → ℚ) → interval-ℚ → interval-ℚ → Prop lzero
+is-closed-interval-map-prop-ℚ =
+  is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
+
+is-below-prop-interval-ℚ : interval-ℚ → subtype lzero ℚ
+is-below-prop-interval-ℚ ((a , _) , _) b = le-ℚ-Prop b a
+
+is-above-prop-interval-ℚ : interval-ℚ → subtype lzero ℚ
+is-above-prop-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
+
+nonnegative-width-interval-ℚ : interval-ℚ → ℚ⁰⁺
+nonnegative-width-interval-ℚ ((a , b) , a≤b) = nonnegative-diff-leq-ℚ a b a≤b
+
+width-interval-ℚ : interval-ℚ → ℚ
+width-interval-ℚ [a,b] = rational-ℚ⁰⁺ (nonnegative-width-interval-ℚ [a,b])
+```
+
+### Important ranges
+
+```agda
+zero-zero-interval-ℚ : interval-ℚ
+zero-zero-interval-ℚ = ((zero-ℚ , zero-ℚ) , refl-leq-ℚ zero-ℚ)
+
+one-one-interval-ℚ : interval-ℚ
+one-one-interval-ℚ = ((one-ℚ , one-ℚ) , refl-leq-ℚ one-ℚ)
+```
+
+## Properties
+
+### Characterization of equality
+
+```agda
+eq-interval-ℚ :
+  ([a,b] [c,d] : interval-ℚ) →
+  lower-bound-interval-ℚ [a,b] ＝ lower-bound-interval-ℚ [c,d] →
+  upper-bound-interval-ℚ [a,b] ＝ upper-bound-interval-ℚ [c,d] →
+  [a,b] ＝ [c,d]
+eq-interval-ℚ = eq-closed-interval-Poset ℚ-Poset
+
+set-interval-ℚ : Set lzero
+set-interval-ℚ = set-closed-interval-Poset ℚ-Poset
+```
+
+### Unordered intervals
+
+```agda
+unordered-interval-ℚ : ℚ → ℚ → interval-ℚ
+unordered-interval-ℚ a b =
+  ( (min-ℚ a b , max-ℚ a b) , ?)
 ```
