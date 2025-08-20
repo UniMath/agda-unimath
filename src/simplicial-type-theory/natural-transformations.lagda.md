@@ -59,7 +59,7 @@ Given two [dependent functions](foundation.dependent-function-types.md)
 Naturality follows automatically from the fact that every section is natural in
 the base. I.e., for every edge `x →▵ y` in `A`, we have a dependent edge
 `α x →▵ α y` over it, giving us a dependent commuting square of
-[simplicial arrows](simplicial-type-theory.arrows.md)
+[arrows](simplicial-type-theory.arrows.md)
 
 ```text
            α x
@@ -125,8 +125,7 @@ module _
 
   equiv-family-of-arrows-arrow-of-dependent-functions▵ :
     (arrow▵' (λ t → (x : A) → B x t)) ≃ ((x : A) → arrow▵' (B x))
-  equiv-family-of-arrows-arrow-of-dependent-functions▵ =
-    equiv-swap-Π
+  equiv-family-of-arrows-arrow-of-dependent-functions▵ = equiv-swap-Π
 ```
 
 ### Extensionality for natural transformations

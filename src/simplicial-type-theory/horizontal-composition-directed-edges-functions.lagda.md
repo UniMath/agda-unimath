@@ -48,7 +48,7 @@ Given a directed edge `α` between functions `f g : A → B` and a directed edge
 {{#concept "horizontally compose" Disambiguation="directed edges of functions" Agda=horizontal-comp-hom▵}}
 them to obtain a directed edge of functions `f' ∘ f →▵ g' ∘ g`. The horizontal
 composite is constructed by "synchronously traversing `α` and `β`", defined on
-the underlying [simplicial arrows](simplicial-type-theory.arrows.md) as:
+the underlying [arrows](simplicial-type-theory.arrows.md) as:
 
 ```text
   β □ α := (t ↦ x ↦ β t (α t x)).

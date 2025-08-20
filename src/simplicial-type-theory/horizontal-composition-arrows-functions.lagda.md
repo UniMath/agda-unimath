@@ -1,4 +1,4 @@
-# Horizontal composition of arrows in functions
+# Horizontal composition of arrows of functions
 
 ```agda
 open import foundation.universe-levels
@@ -40,11 +40,11 @@ open import simplicial-type-theory.directed-interval I
 
 ## Idea
 
-Given a [simplicial arrow](simplicial-type-theory.arrows.md) `α` of functions
-`A → B` and a simplicial arrow `β` of functions `B → C`, we may
-{{#concept "horizontally compose" Disambiguation="simplicial arrows of functions" Agda=horizontal-comp-arrow▵}}
-them to obtain a simplicial arrow of functions `A → C`. The horizontal composite
-is constructed by "synchronously traversing `α` and `β`":
+Given an [arrow](simplicial-type-theory.arrows.md) `α` of functions `A → B` and
+an arrow `β` of functions `B → C`, we may
+{{#concept "horizontally compose" Disambiguation="arrows of functions between simplicial types" Agda=horizontal-comp-arrow▵}}
+them to obtain an arrow of functions `A → C`. The horizontal composite is
+constructed by "synchronously traversing `α` and `β`":
 
 ```text
   β □ α := (t ↦ x ↦ β t (α t x)),
@@ -54,7 +54,7 @@ and thus satisfies unit laws and associativity strictly.
 
 ## Definitions
 
-### Horizontal composition of simplicial arrows of functions
+### Horizontal composition of arrows of functions
 
 ```agda
 module _
@@ -68,7 +68,7 @@ module _
 
 ## Properties
 
-### Unit laws for horizontal composition of simplicial arrows of functions
+### Unit laws for horizontal composition of arrows of functions
 
 ```agda
 module _
@@ -86,7 +86,7 @@ module _
   right-unit-law-horizontal-comp-arrow▵ α = refl
 ```
 
-### Associativity of horizontal composition of simplicial arrows of functions
+### Associativity of horizontal composition of arrows of functions
 
 ```agda
 module _

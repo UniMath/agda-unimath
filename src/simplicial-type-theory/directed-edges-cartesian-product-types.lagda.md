@@ -67,8 +67,8 @@ module _
   map-compute-hom▵-product :
     {x y : A × B} → x →▵ y → hom▵-product x y
   map-compute-hom▵-product α =
-    ( action-hom▵-function pr1 α ,
-      action-hom▵-function pr2 α)
+    ( ap▵ pr1 α ,
+      ap▵ pr2 α)
 
   map-inv-compute-hom▵-product :
     {x y : A × B} → hom▵-product x y → x →▵ y

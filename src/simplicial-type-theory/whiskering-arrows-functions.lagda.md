@@ -1,4 +1,4 @@
-# Whiskering operations on simplicial arrows of functions
+# Whiskering operations on arrows of functions
 
 ```agda
 open import foundation.universe-levels
@@ -43,17 +43,16 @@ open import simplicial-type-theory.horizontal-composition-arrows-functions I
 
 ## Idea
 
-Given a [simplicial arrow](simplicial-type-theory.arrows.md) `α` of functions
-`A → B` we may
-{{#concept "left whisker" Disambiguation="simplicial arrow by function" Agda=left-whisker-comp-arrow▵}}
-by a function `f : B → C` to obtain a simplicial arrow of functions `A → C`, or
-we may
-{{#concept "right whisker" Disambiguation="simplicial arrow by function" Agda=right-whisker-comp-arrow▵}}
-by a function `g : C → A` to obtain a simplicial arrow of functions `C → B`.
+Given an [arrow](simplicial-type-theory.arrows.md) `α` of functions `A → B` we
+may
+{{#concept "left whisker" Disambiguation="arrow by function of simplicial types" Agda=left-whisker-comp-arrow▵}}
+by a function `f : B → C` to obtain an arrow of functions `A → C`, or we may
+{{#concept "right whisker" Disambiguation="arrow by function of simplicial types" Agda=right-whisker-comp-arrow▵}}
+by a function `g : C → A` to obtain an arrow of functions `C → B`.
 
 ## Definitions
 
-### Left whiskering simplicial arrows of functions by functions
+### Left whiskering arrows of functions by functions
 
 ```agda
 module _
@@ -66,7 +65,7 @@ module _
     horizontal-comp-arrow▵ (id-arrow▵ f)
 ```
 
-### Right whiskering simplicial arrows of functions by functions
+### Right whiskering arrows of functions by functions
 
 ```agda
 module _
@@ -81,7 +80,7 @@ module _
 
 ## Properties
 
-### Unit laws of whiskering of simplicial arrows
+### Unit laws for whiskering of arrows of functions by functions
 
 ```agda
 module _
@@ -101,7 +100,7 @@ module _
     right-unit-law-horizontal-comp-arrow▵
 ```
 
-### Absorption laws of whiskering of simplicial arrows
+### Absorption laws for whiskering of arrows of functions by functions
 
 ```agda
 module _
@@ -121,7 +120,7 @@ module _
   left-absorption-law-right-whisker-comp-arrow▵ g f = refl
 ```
 
-### Whiskering of simplicial arrows between functions preserves function composition
+### Whiskering of arrows of functions preserves function composition
 
 ```agda
 module _

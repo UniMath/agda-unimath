@@ -54,8 +54,8 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-The {{#concept "inner 2-horn" Disambiguation="simplicial type"}} $Λ²₁$, also
-called the _2-1-horn_, is the universal type generated from the data of two
+The {{#concept "inner 2-horn" Disambiguation="simplicial type" Agda=Λ²₁}} $Λ²₁$,
+also called the _2-1-horn_, is the universal type generated from the data of two
 directed edges such that the source of the first is the target of the second,
 pictorially:
 
@@ -80,16 +80,14 @@ The inner 2-horn has multiple defining properties:
         |        |
      1▵ |        |
         ∨      ⌜ ∨
-        Δ¹ -----> Λ²₁.
+        Δ¹ ----> Λ²₁.
    ```
 
 3. The inner 2-horn is the 2-[spine](simplicial-type-theory.spines.md).
 
 ## Definitions
 
-### The inner 2-horn as a subtype of the lower simplicial triangle
-
-> TODO: replace with `subtype-spine 2`
+### The inner 2-horn as a subtype of the directed square
 
 ```agda
 subtype-Λ²₁ : subtype I1 (Δ¹ × Δ¹)
@@ -109,7 +107,7 @@ inr-Λ²₁ : Δ¹ → Λ²₁
 inr-Λ²₁ s = ((1▵ , s) , inr-join refl)
 ```
 
-### The cogap map of the inner 2-horn as a subtype of the lower simplicial triangle
+### The cogap map of the inner 2-horn as a subtype of the directed square
 
 ```agda
 module _
@@ -133,7 +131,7 @@ module _
      |        |
   1▵ |        |
      ∨      ⌜ ∨
-     Δ¹ -----> Λ²₁.
+     Δ¹ ----> Λ²₁.
 ```
 
 ```agda
@@ -157,21 +155,17 @@ is-set-Λ²₁ =
   is-set-type-subtype subtype-Λ²₁ (is-set-product is-set-Δ¹ is-set-Δ¹)
 ```
 
-### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the square
+### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the directed square
 
 ```agda
-map-inner-two-horn-pushout-Λ²₁ :
-  pushout-Λ²₁ → Λ²₁
+map-inner-two-horn-pushout-Λ²₁ : pushout-Λ²₁ → Λ²₁
 map-inner-two-horn-pushout-Λ²₁ =
   cogap
     ( point 1▵)
     ( point 0▵)
-    ( inl-Λ²₁ ,
-      inr-Λ²₁ ,
-      λ _ → eq-type-subtype subtype-Λ²₁ refl)
+    ( inl-Λ²₁ , inr-Λ²₁ , λ _ → eq-type-subtype subtype-Λ²₁ refl)
 
-map-pushout-inner-two-horn-Λ²₁ :
-  inner-two-horn → pushout-Λ²₁
+map-pushout-inner-two-horn-Λ²₁ : Λ²₁ → pushout-Λ²₁
 map-pushout-inner-two-horn-Λ²₁ =
   cogap-Λ²₁
     ( inl-pushout-Λ²₁)
@@ -182,8 +176,7 @@ map-pushout-inner-two-horn-Λ²₁ =
 ### The inclusion of the 2-horn into the 2-simplex
 
 ```agda
-leq-subtype-two-simplex-Λ²₁ :
-  subtype-Λ²₁ ⊆ subtype-lower-simplicial-triangle
+leq-subtype-two-simplex-Λ²₁ : subtype-Λ²₁ ⊆ subtype-Δ²
 leq-subtype-two-simplex-Λ²₁ (x , y) =
   cogap-join
     ( y ≤-Δ¹ x)

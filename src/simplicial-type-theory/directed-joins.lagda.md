@@ -50,8 +50,8 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-We define the {{#concept "standard directed join"}} of two types `A *▵ B` as the
-colimit of the diagram
+We define the {{#concept "standard directed join" Agda=standard-directed-join}}
+of two types `A *▵ B` as the colimit of the diagram
 
 ```text
                A × B ----> B
@@ -81,16 +81,11 @@ edges `a →▵ b` for every `a : A` and `b : B`.
 This construction satisfies the laws
 
 - $Δ¹ ≃ 1 *▵ 1$
-
 - $Δⁿ⁺¹ ≃ Δⁿ⁺¹ *▵ 1 ≃ 1 *▵ Δⁿ⁺¹$
-
 - $Λ²₀ ≃ 1 *▵ bool$
-
 - $Λ²₂ ≃ bool *▵ 1$
-
 - $1 *▵ (-)$ is the directed cone
-
-- $(-) *▵ 1$ is the simplicial cocone
+- $(-) *▵ 1$ is the directed cocone
 
 ## Postulates
 
@@ -117,7 +112,3 @@ module _
 
 > It remains to define and postulate the induction principle of the simplicial
 > join.
-
-## See also
-
-- The simplicial pushout join

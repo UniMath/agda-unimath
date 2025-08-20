@@ -279,7 +279,7 @@ abstract
     is-globularly-coskeletal (succ-𝕋 k) A
   is-globularly-coskeletal-is-fully-faithful▵ k f Ef H x y =
     is-globularly-coskeletal-is-equiv k (f x →▵ f y)
-      ( action-hom▵-function f {x} {y})
+      ( ap▵ f {x} {y})
       ( Ef x y)
       ( H (f x) (f y))
 
@@ -301,12 +301,12 @@ In fact, it suffices that the action on homs has a retraction.
 abstract
   is-globularly-coskeletal-retraction-ap :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-    ((x y : A) → retraction (action-hom▵-function f {x} {y})) →
+    ((x y : A) → retraction (ap▵ f {x} {y})) →
     is-globularly-coskeletal (succ-𝕋 k) B →
     is-globularly-coskeletal (succ-𝕋 k) A
   is-globularly-coskeletal-retraction-ap k f Ef H x y =
     is-globularly-coskeletal-retract-of k
-      ( action-hom▵-function f {x} {y} , Ef x y)
+      ( ap▵ f {x} {y} , Ef x y)
       ( H (f x) (f y))
 ```
 

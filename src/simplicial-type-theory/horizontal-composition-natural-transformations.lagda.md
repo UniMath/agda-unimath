@@ -47,13 +47,12 @@ open import simplicial-type-theory.natural-transformations I
 
 Given a
 [natural transformation](simplicial-type-theory.natural-transformations.md) `α`
-between functions `f g : A → B` and a natural transformation `β` of functions
-`f' g' : B → C`, we may
+between functions `f g : A → B` and a natural transformation `β` between
+functions `f' g' : B → C`, we may
 {{#concept "horizontally compose" Disambiguation="natural transformations of functions" Agda=horizontal-comp-natural-transformation▵}}
 them to obtain a natural transformation of functions `f' ∘ f ⇒▵ g' ∘ g`. The
 horizontal composite is constructed by "synchronously traversing `α` and `β`",
-defined on the underlying [simplicial arrows](simplicial-type-theory.arrows.md)
-as:
+defined on the underlying [arrows](simplicial-type-theory.arrows.md) as:
 
 ```text
   β □ α := (t ↦ x ↦ β t (α t x)).
@@ -105,7 +104,7 @@ module _
 
 ## Properties
 
-### Unit laws for horizontal composition of directed edges of functions
+### Unit laws for horizontal composition of natural transformations between functions
 
 ```agda
 module _

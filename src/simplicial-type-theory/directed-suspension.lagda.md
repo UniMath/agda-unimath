@@ -78,3 +78,7 @@ consisting of a point at the north and south pole, and a
 every element `x : X`. It is constructed by taking the
 [cartesian product](foundation-core.cartesian-product-types.md) `X × Δ¹`, and
 "pinching" it together at the north and south pole.
+
+## Definitions
+
+> This remains to be formalized.
