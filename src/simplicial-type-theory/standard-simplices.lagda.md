@@ -51,6 +51,17 @@ open import synthetic-homotopy-theory.pushouts
 
 </details>
 
+## Idea
+
+We define the
+{{#concept "standard simplices" Disambiguation="in simplicial type theory" Agda=Δ}}
+as the subtypes of the [directed cubes](simplicial-type-theory.cubes.md) of
+descending elements.
+
+**Note.** This is not the only possible definition of the standard simplices,
+and other alternatives may satisfy different universal properties. Hence this
+definition may be subject to change in the future.
+
 ## Definitions
 
 ### The standard simplices
@@ -84,7 +95,9 @@ standard-simplex = type-subtype ∘ subtype-standard-simplex
 
 ### The standard 𝑛-simplex is a retract of the directed 𝑛-cube
 
-This remains to be formalized. Lemma 4.2.2 {{#cite MR23b}}
+This is Lemma 4.2.2 in {{#cite MR23b}}.
+
+> This remains to be formalized.
 
 ## References
 
