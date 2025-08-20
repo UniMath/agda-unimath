@@ -80,7 +80,7 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  composition-hom▵ : hom▵ y z → hom▵ x y → UU l
+  composition-hom▵ : hom▵ y z → hom▵ x y → UU {!   !}
   composition-hom▵ g f = Σ (Δ 2 → A) (λ σ → {!   !})
 ```
 

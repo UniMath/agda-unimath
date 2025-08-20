@@ -245,7 +245,7 @@ diagram
        1▵
 ```
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### The canonical comparison map to the homotopical circle
 
@@ -262,6 +262,9 @@ compute-map-directed-circle-circle-id-arrow x = refl-htpy
 ```
 
 ### The loop of the directed circle is nontrivial
+
+First, we note that if the homotopical circle is simplicially discrete then the
+loop is not mapped to a constant edge by `hom▵-eq`.
 
 ```agda
 module _
@@ -280,12 +283,12 @@ Steps:
 - construct computation on edges of the recursor of the directed circle
 - show that the loop of the directed circle maps to `hom▵-eq loop-𝕊¹`
 
-```agda
-  -- is-nontrivial-loop-directed-circle :
-  --   loop-directed-circle ≠ id-hom▵ base-directed-circle
-  -- is-nontrivial-loop-directed-circle p =
-  --   is-nontrivial-loop-hom▵-𝕊¹
-  --     {! ? ∙ ap (action-hom▵-function map-directed-circle-circle) p ∙ ? !}
+```text
+  is-nontrivial-loop-directed-circle :
+    loop-directed-circle ≠ id-hom▵ base-directed-circle
+  is-nontrivial-loop-directed-circle p =
+    is-nontrivial-loop-hom▵-𝕊¹
+      {! ? ∙ ap (action-hom▵-function map-directed-circle-circle) p ∙ ? !}
 ```
 
 > It remains to formalize that the circle is simplicially discrete. Note that

@@ -33,7 +33,7 @@ Any [function](foundation-core.function-types.md) `f : A → B` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
 maps any edge `p : x →▵ y` in `A` to a directed edge
 `action-hom▵ f p : f x →▵ f y` in `B`. This action on directed edges can be
-thought of as
+understood as
 {{#concept "functoriality" Disambiguation="of functions in simplicial type theory" Agda=action-hom▵-function}}
 of functions in simplicial type theory.
 
@@ -44,7 +44,7 @@ of functions in simplicial type theory.
 ```agda
 action-hom▵-function :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
-  x →▵ y → f x →▵ f y
+  (x →▵ y) → (f x →▵ f y)
 action-hom▵-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ```
 
