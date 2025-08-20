@@ -483,4 +483,31 @@ abstract
   is-rational-mul-real-ℚ :
     (p q : ℚ) →
     is-rational-ℝ (mul-ℝ (real-ℚ p) (real-ℚ q)) (p *ℚ q)
+  is-rational-mul-real-ℚ a b =
+    ( ( λ ab<ℝaℝb →
+        let open do-syntax-trunc-Prop empty-Prop
+        in do
+          ((((p , p<a) , (p' , a<p')) , ((q , q<b) , (q' , b<q'))) , r<min) ←
+            ab<ℝaℝb
+          not-leq-le-ℚ _ _
+            ( r<min)
+            ( pr1
+              ( mul-closed-interval-closed-interval-ℚ p p' a q q' b
+                ( leq-le-ℚ p<a , leq-le-ℚ a<p')
+                ( leq-le-ℚ q<b , leq-le-ℚ b<q')))) ,
+      ( λ ℝaℝb<ab →
+        let open do-syntax-trunc-Prop empty-Prop
+        in do
+          ((((p , p<a) , (p' , a<p')) , ((q , q<b) , (q' , b<q'))) , max<r) ←
+            ℝaℝb<ab
+          not-leq-le-ℚ _ _
+            ( max<r)
+            ( pr2
+              ( mul-closed-interval-closed-interval-ℚ p p' a q q' b
+                ( leq-le-ℚ p<a , leq-le-ℚ a<p')
+                ( leq-le-ℚ q<b , leq-le-ℚ b<q')))))
+
+  mul-real-ℚ : (p q : ℚ) → mul-ℝ (real-ℚ p) (real-ℚ q) ＝ real-ℚ (p *ℚ q)
+  mul-real-ℚ p q =
+    inv (eq-real-rational-is-rational-ℝ _ (p *ℚ q) (is-rational-mul-real-ℚ p q))
 ```
