@@ -24,8 +24,16 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two abelian groups `A` and `B` is an abelian group
-structure on the cartesian product of the underlying sets.
+The
+{{#concept "cartesian product" disambiguation="of abelian groups" Agda=product-Ab WDID=Q173740 WD="Cartesian product"}}
+of two [abelian groups](group-theory.abelian-groups.md) `A` and `B` is the
+abelian group structure on the
+[cartesian product](foundation.cartesian-product-types.md) of the underlying
+[sets](foundation.sets.md) given by
+
+```text
+  (a , b) * (a' , b') := (a * a' , b * b').
+```
 
 ## Definition
 
