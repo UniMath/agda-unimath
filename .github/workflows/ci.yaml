@@ -74,9 +74,6 @@ jobs:
   # any other packages; that gives a warning during building, but doesn't
   # fail the build.
   link-check:
-    if:
-      ${{ github.event_name == 'workflow_dispatch' || (github.event_name ==
-      'pull_request' && github.event.pull_request.draft == false) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -110,9 +107,6 @@ jobs:
           make SKIPAGDA=1 website
 
   pre-commit:
-    if:
-      ${{ github.event_name == 'workflow_dispatch' || (github.event_name ==
-      'pull_request' && github.event.pull_request.draft == false) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
