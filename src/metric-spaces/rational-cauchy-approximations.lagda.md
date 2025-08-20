@@ -21,7 +21,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
@@ -48,21 +48,21 @@ the
 ```agda
 cauchy-approximation-ℚ : UU lzero
 cauchy-approximation-ℚ =
-  cauchy-approximation-Metric-Space metric-space-leq-ℚ
+  cauchy-approximation-Metric-Space metric-space-ℚ
 
 map-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℚ⁺ → ℚ
 map-cauchy-approximation-ℚ =
   map-cauchy-approximation-Metric-Space
-    metric-space-leq-ℚ
+    metric-space-ℚ
 
 is-cauchy-map-cauchy-approximation-ℚ :
   (f : cauchy-approximation-ℚ) →
   is-cauchy-approximation-Metric-Space
-    ( metric-space-leq-ℚ)
+    ( metric-space-ℚ)
     ( map-cauchy-approximation-ℚ f)
 is-cauchy-map-cauchy-approximation-ℚ =
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-    metric-space-leq-ℚ
+    metric-space-ℚ
 ```
 
 ## Properties
@@ -79,7 +79,7 @@ bound-dist-map-cauchy-approximation-ℚ :
       ( map-cauchy-approximation-ℚ f δ))
     ( rational-ℚ⁺ (ε +ℚ⁺ δ))
 bound-dist-map-cauchy-approximation-ℚ f ε δ =
-  leq-dist-neighborhood-leq-ℚ
+  leq-dist-neighborhood-ℚ
     ( ε +ℚ⁺ δ)
     ( map-cauchy-approximation-ℚ f ε)
     ( map-cauchy-approximation-ℚ f δ)
@@ -92,13 +92,13 @@ bound-dist-map-cauchy-approximation-ℚ f ε δ =
 real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
 real-limit-cauchy-approximation-ℚ f =
   limit-cauchy-approximation-Complete-Metric-Space
-    ( complete-metric-space-leq-ℝ lzero)
+    ( complete-metric-space-ℝ lzero)
     ( map-short-function-cauchy-approximation-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ lzero)
+      ( metric-space-ℚ)
+      ( metric-space-ℝ lzero)
       ( short-isometry-Metric-Space
-        ( metric-space-leq-ℚ)
-        ( metric-space-leq-ℝ lzero)
-        ( isometry-metric-space-leq-real-ℚ))
+        ( metric-space-ℚ)
+        ( metric-space-ℝ lzero)
+        ( isometry-metric-space-real-ℚ))
       ( f))
 ```

@@ -98,7 +98,7 @@ AC0 = {l1 l2 : Level} → level-AC0 l1 l2
 ```agda
 is-set-projective-AC0 :
   {l1 l2 l3 : Level} → level-AC0 l2 (l1 ⊔ l2) →
-  (X : UU l3) → is-set-projective l1 l2 X
+  (X : UU l3) → is-set-projective-Level l1 l2 X
 is-set-projective-AC0 ac X A B f h =
   map-trunc-Prop
     ( ( map-Σ
@@ -110,7 +110,7 @@ is-set-projective-AC0 ac X A B f h =
 
 AC0-is-set-projective :
   {l1 l2 : Level} →
-  ({l : Level} (X : UU l) → is-set-projective (l1 ⊔ l2) l1 X) →
+  ({l : Level} (X : UU l) → is-set-projective-Level (l1 ⊔ l2) l1 X) →
   level-AC0 l1 l2
 AC0-is-set-projective H A B K =
   map-trunc-Prop
@@ -122,49 +122,14 @@ AC0-is-set-projective H A B K =
         ( id))
 ```
 
-### Choice holds constructively for finite types
+## Comments
 
-```agda
-instance-choice-Fin :
-  (n : ℕ) → {l : Level} → (F : Fin n → UU l) →
-  instance-choice (Fin n) F
-instance-choice-Fin zero-ℕ F _ = unit-trunc-Prop (λ ())
-instance-choice-Fin (succ-ℕ n) F inhabited-F =
-  let
-    open do-syntax-trunc-Prop (is-inhabited-Prop ((x : Fin (succ-ℕ n)) → F x))
-  in do
-    f<n ← instance-choice-Fin n (F ∘ inl-Fin n) (inhabited-F ∘ inl-Fin n)
-    fn ← inhabited-F (neg-one-Fin n)
-    unit-trunc-Prop
-      ( λ where
-        (inr star) → fn
-        (inl k) → f<n k)
-
-module _
-  {l : Level} (A : Finite-Type l)
-  where
-
-  instance-choice-Finite-Type :
-    {l' : Level} → (B : type-Finite-Type A → UU l') →
-    instance-choice (type-Finite-Type A) B
-  instance-choice-Finite-Type B inhabited-B =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( is-inhabited-Prop ((a : type-Finite-Type A) → B a))
-    in do
-      (n , Fin-n≃A) ← is-finite-type-Finite-Type A
-      f-Fin-n ←
-        instance-choice-Fin
-          ( n)
-          ( B ∘ map-equiv Fin-n≃A)
-          ( inhabited-B ∘ map-equiv Fin-n≃A)
-      unit-trunc-Prop
-        ( λ a →
-          map-eq
-            ( ap B (is-section-map-section-map-equiv Fin-n≃A a))
-            ( f-Fin-n (map-inv-equiv Fin-n≃A a)))
-```
+The axiom of choice fails to hold for arbitrary types. Indeed, it already fails
+to hold for the 0-connected 1-type $\operatorname{B}ℤ₂$ as demonstrated in
+Corollary 17.5.3 of {{#cite Rij22}}. This counterexample is formalized in
+[`foundation.global-choice`](foundation.global-choice.md). Hence it is both
+incompatible with univalence and with the existence of higher inductive types to
+assume the axiom of choice for all types.
 
 ## See also
 
@@ -174,6 +139,9 @@ module _
   axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
 - [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
   another weaker form of the axiom of choice.
+- [Finite choice](univalent-combinatorics.finite-choice.md), is the
+  constructively true principle of the axiom of choice restricted to
+  [finite types](univalent-combinatorics.finite-types.md).
 
 ## References
 
