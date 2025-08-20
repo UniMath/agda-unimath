@@ -176,7 +176,7 @@ that extends to an equivalence of maps
   ⟨f □ g , h⟩ ≃ ⟨f , ⟨g , h⟩⟩.
 ```
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ## See also
 

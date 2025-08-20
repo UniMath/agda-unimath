@@ -129,11 +129,11 @@ pr2 (is-globularly-coskeletal-Prop k A) = is-prop-is-globularly-coskeletal k A
 
 ### A type is `-1`-globularly coskeletal if and only if it is `∂Δ¹ ↪ Δ¹`-local
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### A type is `k`-globularly coskeletal if and only if it is local at the `k`'th directed suspension of `0 → 1`
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### If a type is `k`-globularly coskeletal then it is `k+1`-globularly coskeletal
 
