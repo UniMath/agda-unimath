@@ -63,9 +63,8 @@ module _
   where
 
   left-whisker-comp-hom▵ :
-    (h : B → C) {f f' : A → B} → f →▵ f' → h ∘ f →▵ h ∘ f'
-  left-whisker-comp-hom▵ h =
-    horizontal-comp-hom▵ (id-hom▵ h)
+    (h : B → C) {f f' : A → B} → (f →▵ f') → (h ∘ f →▵ h ∘ f')
+  left-whisker-comp-hom▵ h = horizontal-comp-hom▵ (id-hom▵ h)
 ```
 
 ### Right whiskering directed edges between functions by functions
@@ -76,9 +75,8 @@ module _
   where
 
   right-whisker-comp-hom▵ :
-    {f f' : A → B} → f →▵ f' → (g : C → A) → f ∘ g →▵ f' ∘ g
-  right-whisker-comp-hom▵ α g =
-    horizontal-comp-hom▵ α (id-hom▵ g)
+    {f f' : A → B} → (f →▵ f') → (g : C → A) → (f ∘ g →▵ f' ∘ g)
+  right-whisker-comp-hom▵ α g = horizontal-comp-hom▵ α (id-hom▵ g)
 ```
 
 ## Properties
@@ -91,14 +89,12 @@ module _
   where
 
   left-unit-law-left-whisker-comp-hom▵ :
-    {f f' : A → B} (α : f →▵ f') →
-    left-whisker-comp-hom▵ id α ＝ α
+    {f f' : A → B} (α : f →▵ f') → left-whisker-comp-hom▵ id α ＝ α
   left-unit-law-left-whisker-comp-hom▵ =
     left-unit-law-horizontal-comp-hom▵
 
   right-unit-law-right-whisker-comp-hom▵ :
-    {f f' : A → B} (α : f →▵ f') →
-    right-whisker-comp-hom▵ α id ＝ α
+    {f f' : A → B} (α : f →▵ f') → right-whisker-comp-hom▵ α id ＝ α
   right-unit-law-right-whisker-comp-hom▵ =
     right-unit-law-horizontal-comp-hom▵
 ```

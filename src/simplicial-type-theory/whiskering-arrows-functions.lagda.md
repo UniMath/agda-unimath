@@ -59,10 +59,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  left-whisker-comp-arrow▵ :
-    (B → C) → arrow▵ (A → B) → arrow▵ (A → C)
-  left-whisker-comp-arrow▵ f =
-    horizontal-comp-arrow▵ (id-arrow▵ f)
+  left-whisker-comp-arrow▵ : (B → C) → arrow▵ (A → B) → arrow▵ (A → C)
+  left-whisker-comp-arrow▵ f = horizontal-comp-arrow▵ (id-arrow▵ f)
 ```
 
 ### Right whiskering arrows of functions by functions
@@ -72,10 +70,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  right-whisker-comp-arrow▵ :
-    arrow▵ (B → C) → (A → B) → arrow▵ (A → C)
-  right-whisker-comp-arrow▵ β g =
-    horizontal-comp-arrow▵ β (id-arrow▵ g)
+  right-whisker-comp-arrow▵ : arrow▵ (B → C) → (A → B) → arrow▵ (A → C)
+  right-whisker-comp-arrow▵ β g = horizontal-comp-arrow▵ β (id-arrow▵ g)
 ```
 
 ## Properties
@@ -88,14 +84,12 @@ module _
   where
 
   left-unit-law-left-whisker-comp-arrow▵ :
-    (α : arrow▵ (A → B)) →
-    left-whisker-comp-arrow▵ id α ＝ α
+    (α : arrow▵ (A → B)) → left-whisker-comp-arrow▵ id α ＝ α
   left-unit-law-left-whisker-comp-arrow▵ =
     left-unit-law-horizontal-comp-arrow▵
 
   right-unit-law-right-whisker-comp-arrow▵ :
-    (α : arrow▵ (A → B)) →
-    right-whisker-comp-arrow▵ α id ＝ α
+    (α : arrow▵ (A → B)) → right-whisker-comp-arrow▵ α id ＝ α
   right-unit-law-right-whisker-comp-arrow▵ =
     right-unit-law-horizontal-comp-arrow▵
 ```
@@ -109,14 +103,12 @@ module _
 
   right-absorption-law-left-whisker-comp-arrow▵ :
     (g : B → C) (f : A → B) →
-    left-whisker-comp-arrow▵ g (id-arrow▵ f) ＝
-    id-arrow▵ (g ∘ f)
+    left-whisker-comp-arrow▵ g (id-arrow▵ f) ＝ id-arrow▵ (g ∘ f)
   right-absorption-law-left-whisker-comp-arrow▵ g f = refl
 
   left-absorption-law-right-whisker-comp-arrow▵ :
     (g : B → C) (f : A → B) →
-    right-whisker-comp-arrow▵ (id-arrow▵ g) f ＝
-    id-arrow▵ (g ∘ f)
+    right-whisker-comp-arrow▵ (id-arrow▵ g) f ＝ id-arrow▵ (g ∘ f)
   left-absorption-law-right-whisker-comp-arrow▵ g f = refl
 ```
 
@@ -130,15 +122,12 @@ module _
   preserves-comp-left-whisker-comp-arrow▵ :
     (h : C → D) (g : B → C) (α : arrow▵ (A → B)) →
     left-whisker-comp-arrow▵ (h ∘ g) α ＝
-    left-whisker-comp-arrow▵ h
-      ( left-whisker-comp-arrow▵ g α)
+    left-whisker-comp-arrow▵ h (left-whisker-comp-arrow▵ g α)
   preserves-comp-left-whisker-comp-arrow▵ h g α = refl
 
   preserves-comp-right-whisker-comp-arrow▵ :
     (α : arrow▵ (C → D)) (g : B → C) (f : A → B) →
     right-whisker-comp-arrow▵ α (g ∘ f) ＝
-    right-whisker-comp-arrow▵
-      ( right-whisker-comp-arrow▵ α g)
-      ( f)
+    right-whisker-comp-arrow▵ (right-whisker-comp-arrow▵ α g) f
   preserves-comp-right-whisker-comp-arrow▵ h g α = refl
 ```

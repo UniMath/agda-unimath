@@ -45,8 +45,8 @@ open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-arrow public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.segal-types public
-open import simplicial-type-theory.standard-spines public
 open import simplicial-type-theory.standard-simplices public
+open import simplicial-type-theory.standard-spines public
 open import simplicial-type-theory.transposing-adjunctions-between-types public
 open import simplicial-type-theory.transposing-biadjunctions-between-types public
 open import simplicial-type-theory.universal-property-directed-circle public
