@@ -42,7 +42,7 @@ open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.inequality-directed-interval I
-open import simplicial-type-theory.spines I
+open import simplicial-type-theory.standard-spines I
 open import simplicial-type-theory.standard-simplices I
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -83,7 +83,7 @@ The inner 2-horn has multiple defining properties:
         Δ¹ ----> Λ²₁.
    ```
 
-3. The inner 2-horn is the 2-[spine](simplicial-type-theory.spines.md).
+3. The inner 2-horn is the 2-[spine](simplicial-type-theory.standard-spines.md).
 
 ## Definitions
 

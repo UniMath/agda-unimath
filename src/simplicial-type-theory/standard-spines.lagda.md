@@ -1,11 +1,11 @@
-# Spines
+# The standard spines
 
 ```agda
 open import foundation.universe-levels
 open import order-theory.nontrivial-bounded-total-orders
 
 module
-  simplicial-type-theory.spines
+  simplicial-type-theory.standard-spines
   {I1 I2 : Level} (I : Nontrivial-Bounded-Total-Order I1 I2)
   where
 ```
@@ -66,8 +66,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "𝑛-spine" Agda=spine}} is the classifying type of chains of
-directed edges of length 𝑛.
+The {{#concept "𝑛-spine" Disambiguation="in simplicial type theory" Agda=spine}}
+is the classifying type of chains of directed edges of length 𝑛.
 
 ```text
   0 ---> 1 ----> ... ----> (n-1) ----> n
@@ -95,7 +95,7 @@ where
 
 ### The type of 𝑛-spines
 
-> TODO Reconsider this definition.
+> TODO: Reconsider this definition.
 
 ```agda
 postulate

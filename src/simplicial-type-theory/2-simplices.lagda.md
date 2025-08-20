@@ -51,15 +51,6 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Definitions
 
-<!-- TODO remove this -->
-
-```agda
-eq-image-eq-point-is-prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-prop A →
-  (f : A → B) → (b : B) (x : A) → b ＝ f x → {y : A} → b ＝ f y
-eq-image-eq-point-is-prop is-prop-A f b x p = p ∙ ap f (eq-is-prop is-prop-A)
-```
-
 ### The lower simplicial triangle
 
 ```agda
@@ -126,6 +117,15 @@ subtype-Δ² = subtype-lower-simplicial-triangle
 ```
 
 ### The boundary of the standard 2-simplex
+
+<!-- TODO remove this lemma -->
+
+```agda
+eq-image-eq-point-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-prop A →
+  (f : A → B) → (b : B) (x : A) → b ＝ f x → {y : A} → b ＝ f y
+eq-image-eq-point-is-prop is-prop-A f b x p = p ∙ ap f (eq-is-prop is-prop-A)
+```
 
 ```agda
 subtype-∂Δ² : subtype I1 (Δ¹ × Δ¹)

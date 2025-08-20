@@ -280,6 +280,8 @@ module _
     ( counit-right-adjoint-is-normed-map H x , wrong-way-unit-is-normed-map H x)
 ```
 
+If `B` were Segal, we could compose these factors to obtain the cardinality.
+
 ## Properties
 
 ### Composition of normed maps
