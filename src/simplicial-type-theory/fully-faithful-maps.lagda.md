@@ -450,5 +450,4 @@ module _
 
 - In
   [whiskering directed edges by identifications](simplicial-type-theory.whiskering-directed-edges-functions.md)
-  we show that the action on directed edges of a retract of types is a
-  retraction.
+  we show that the action on directed edges of a retract of types is a retract.
