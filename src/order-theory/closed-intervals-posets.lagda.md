@@ -7,25 +7,19 @@ module order-theory.closed-intervals-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.conjunction
-open import foundation.disjunction
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.cartesian-product-types
 open import foundation.equality-dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
-open import foundation.unions-subtypes
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import order-theory.interval-subposets
@@ -38,7 +32,8 @@ open import order-theory.posets
 
 A
 {{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
-in a poset `P` consists of a pair of elements `x` and `y` in `P` with `x ≤ y`.
+in a [poset](order-theory.posets.md) `P` consists of a pair of elements `x` and
+`y` in `P` with `x ≤ y`.
 
 ## Definition
 
@@ -73,6 +68,29 @@ module _
 
 ## Properties
 
+### The endpoints of a closed interval are in the interval
+
+```agda
+module _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+
+  abstract
+    lower-bound-is-in-closed-interval-Poset :
+      ([a,b] : closed-interval-Poset X) →
+      is-in-closed-interval-Poset X [a,b]
+        ( lower-bound-closed-interval-Poset X [a,b])
+    lower-bound-is-in-closed-interval-Poset ((a , b) , a≤b) =
+      ( refl-leq-Poset X a , a≤b)
+
+    upper-bound-is-in-closed-interval-Poset :
+      ([a,b] : closed-interval-Poset X) →
+      is-in-closed-interval-Poset X [a,b]
+        ( upper-bound-closed-interval-Poset X [a,b])
+    upper-bound-is-in-closed-interval-Poset ((a , b) , a≤b) =
+      ( a≤b , refl-leq-Poset X b)
+```
+
 ### Closed intervals are inhabited
 
 ```agda
@@ -86,8 +104,7 @@ module _
     is-inhabited-closed-interval-Poset =
       unit-trunc-Prop
         ( lower-bound-closed-interval-Poset X [x,y] ,
-          refl-leq-Poset X _ ,
-          pr2 [x,y])
+          lower-bound-is-in-closed-interval-Poset X [x,y])
 ```
 
 ### Characterization of equality

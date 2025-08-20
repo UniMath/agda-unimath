@@ -12,6 +12,7 @@ open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closed-intervals-posets public
+open import order-theory.closed-intervals-total-orders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public

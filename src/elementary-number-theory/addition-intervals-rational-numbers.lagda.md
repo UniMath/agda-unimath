@@ -7,29 +7,27 @@ module elementary-number-theory.addition-intervals-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.intervals-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.intervals-rational-numbers
+open import elementary-number-theory.rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.propositions
-open import foundation.existential-quantification
 open import foundation.coproduct-types
-open import foundation.subtypes
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.semigroups
-open import group-theory.monoids
 open import group-theory.commutative-monoids
-open import order-theory.closed-intervals-posets
 open import group-theory.minkowski-multiplication-commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
+
+open import order-theory.closed-intervals-posets
 ```
 
 </details>
@@ -38,12 +36,10 @@ open import group-theory.minkowski-multiplication-commutative-monoids
 
 Given two [intervals](elementary-number-theory.intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
-[rational numbers](elementary-number-theory.rational-numbers.md),
-the
+[rational numbers](elementary-number-theory.rational-numbers.md), the
 [Minkowski sum](group-theory.minkowski-multiplications-commutative-monoids.md)
 of those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
 agrees with the interval `[a +ℚ c, b +ℚ d]`.
-
 
 ## Definition
 
