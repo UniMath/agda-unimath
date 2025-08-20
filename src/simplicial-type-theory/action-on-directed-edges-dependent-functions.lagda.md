@@ -37,7 +37,7 @@ Any [dependent function](foundation.dependent-function-types.md)
 maps any edge `p : x →▵ y` in `A` to a
 [dependent edge](simplicial-type-theory.dependent-directed-edges.md)
 `action-hom▵-dependent-function f p` from `f x` to `f y` over `p` in `B`. This
-action on directed edges can be thought of as
+action on directed edges can be understood as
 {{#concept "functoriality" Disambiguation="of dependent functions in simplicial type theory" Agda=action-hom▵-dependent-function}}
 of dependent functions in simplicial type theory.
 

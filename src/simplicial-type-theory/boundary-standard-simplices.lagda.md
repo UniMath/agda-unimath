@@ -178,7 +178,9 @@ inclusion-boundary-standard-simplex n =
 
 ### The standard 𝑛-simplex is a retract of the directed 𝑛-cube
 
-This remains to be formalized. See Lemma 4.2.2 {{#cite MR23b}}
+This is Lemma 4.2.2 in {{#cite MR23b}}.
+
+> This remains to be formalized.
 
 ## References
 

@@ -26,9 +26,8 @@ open import simplicial-type-theory.directed-interval-type I
 
 ## Idea
 
-A
-{{#concept "simplicial arrow" Disambiguation="simplicial type theory" Agda=arrow▵}}
-in a type `A` is a map from the
+An {{#concept "arrow" Disambiguation="in a simplicial type" Agda=arrow▵}} in a
+type `A` is a map from the
 [directed interval](simplicial-type-theory.directed-interval-type.md) to the
 type, `Δ¹ → A`. Given a simplicial arrow `α` in `A`, we call `α 0▵` the
 _source_, and `α 1▵` the _target_ of the arrow. See
@@ -37,21 +36,21 @@ with a specified source and target.
 
 ## Definitions
 
-### Simplicial arrows in types dependent over the directed interval
+### Arrows in types over the directed interval
 
 ```agda
 arrow▵' : {l : Level} → (Δ¹ → UU l) → UU (I1 ⊔ l)
 arrow▵' A = (t : Δ¹) → A t
 ```
 
-### Simplicial arrows
+### Arrows
 
 ```agda
 arrow▵ : {l : Level} → UU l → UU (I1 ⊔ l)
 arrow▵ A = arrow▵' (λ _ → A)
 ```
 
-### The identity/constant simplicial arrows
+### The identity/constant arrows
 
 ```agda
 id-arrow▵ : {l : Level} {A : UU l} → A → arrow▵ A
@@ -65,7 +64,7 @@ representing-arrow-Δ¹ : arrow▵ Δ¹
 representing-arrow-Δ¹ = id
 ```
 
-### Simplicial arrows arising from equalities
+### Arrows arising from identifications
 
 ```agda
 module _

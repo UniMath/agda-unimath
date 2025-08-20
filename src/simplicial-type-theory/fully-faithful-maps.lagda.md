@@ -82,24 +82,23 @@ module _
   inv-equiv-action-is-fully-faithful▵ e =
     inv-equiv (equiv-action-is-fully-faithful▵ e)
 
-infix 5 _↪▵_
-_↪▵_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (I1 ⊔ l1 ⊔ l2)
-A ↪▵ B = Σ (A → B) (is-fully-faithful▵)
+fully-faithful-map▵ : {l1 l2 : Level} → UU l1 → UU l2 → UU (I1 ⊔ l1 ⊔ l2)
+fully-faithful-map▵ A B = Σ (A → B) (is-fully-faithful▵)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-fully-faithful-map▵ : A ↪▵ B → A → B
+  map-fully-faithful-map▵ : fully-faithful-map▵ A B → A → B
   map-fully-faithful-map▵ = pr1
 
   is-fully-faithful▵-map-fully-faithful-map▵ :
-    (f : A ↪▵ B) →
+    (f : fully-faithful-map▵ A B) →
     is-fully-faithful▵ (map-fully-faithful-map▵ f)
   is-fully-faithful▵-map-fully-faithful-map▵ = pr2
 
   equiv-action-fully-faithful-map▵ :
-    (e : A ↪▵ B) {x y : A} →
+    (e : fully-faithful-map▵ A B) {x y : A} →
     ( x →▵ y) ≃
     ( map-fully-faithful-map▵ e x →▵
       map-fully-faithful-map▵ e y)
@@ -108,7 +107,7 @@ module _
       ( is-fully-faithful▵-map-fully-faithful-map▵ e)
 
   inv-equiv-action-fully-faithful-map▵ :
-    (e : A ↪▵ B)
+    (e : fully-faithful-map▵ A B)
     {x y : A} →
     ( map-fully-faithful-map▵ e x →▵
       map-fully-faithful-map▵ e y) ≃
@@ -152,7 +151,7 @@ module _
   is-fully-faithful▵-id x y =
     is-equiv-htpy id compute-action-hom▵-id-function is-equiv-id
 
-  id-fully-faithful-map▵ : A ↪▵ A
+  id-fully-faithful-map▵ : fully-faithful-map▵ A A
   id-fully-faithful-map▵ =
     ( id , is-fully-faithful▵-id)
 ```
@@ -222,7 +221,7 @@ module _
         ( is-ff-g x y)
 
   is-fully-faithful▵-htpy-fully-faithful-map▵ :
-    {f : A → B} (e : A ↪▵ B) →
+    {f : A → B} (e : fully-faithful-map▵ A B) →
     f ~ map-fully-faithful-map▵ e →
     is-fully-faithful▵ f
   is-fully-faithful▵-htpy-fully-faithful-map▵ e H =
@@ -242,7 +241,7 @@ module _
       is-fully-faithful▵-htpy (inv-htpy H) is-ff-f
 
   is-fully-faithful▵-htpy-fully-faithful-map▵' :
-    (e : A ↪▵ B) {g : A → B} →
+    (e : fully-faithful-map▵ A B) {g : A → B} →
     map-fully-faithful-map▵ e ~ g →
     is-fully-faithful▵ g
   is-fully-faithful▵-htpy-fully-faithful-map▵' e H =
@@ -298,7 +297,7 @@ module _
         ( is-fully-faithful▵-comp g h is-ff-g is-ff-h)
 
   comp-fully-faithful-map▵ :
-    (B ↪▵ C) → (A ↪▵ B) → (A ↪▵ C)
+    fully-faithful-map▵ B C → fully-faithful-map▵ A B → fully-faithful-map▵ A C
   comp-fully-faithful-map▵ (g , H) (f , K) =
     ( g ∘ f , is-fully-faithful▵-comp g f H K)
 ```
@@ -384,14 +383,14 @@ module _
 
 ### Equivalence on total spaces induced by fully faithful maps on the base types
 
-We saw above that given an embedding `f : A ↪▵ B` and a type family `C` over `B`
-we obtain an embedding
+We saw above that given a fully faithful map `f : fully-faithful-map▵ A B` and a
+type family `C` over `B` we obtain a fully faithful map
 
 ```text
-  Σ A (C ∘ f) ↪▵ Σ B C.
+  Σ A (C ∘ f) ↪ Σ B C.
 ```
 
-This embedding can be upgraded to an equivalence if we furthermore know that the
+This map can be upgraded to an equivalence if, furthermore, we know that the
 support of `C` is contained in the image of `f`. More precisely, if we are given
 a section `((b , c) : Σ B C) → fiber f b`, then it follows that
 
@@ -401,7 +400,8 @@ a section `((b , c) : Σ B C) → fiber f b`, then it follows that
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} (f : A ↪▵ B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  (f : fully-faithful-map▵ A B)
   (H : ((b , c) : Σ B C) → fiber (map-fully-faithful-map▵ f) b)
   where
 
