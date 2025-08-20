@@ -344,7 +344,7 @@ module _
 
 ### Null types are closed under identity types
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Null types are closed under dependent sums
 
