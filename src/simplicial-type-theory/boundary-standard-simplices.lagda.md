@@ -173,15 +173,3 @@ inclusion-boundary-standard-simplex : (n : ℕ) → ∂Δ n → Δ n
 inclusion-boundary-standard-simplex n =
   tot (leq-subtype-boundary-standard-simplex-standard-simplex n)
 ```
-
-## Properties
-
-### The standard 𝑛-simplex is a retract of the directed 𝑛-cube
-
-This is Lemma 4.2.2 in {{#cite MR23b}}.
-
-> This remains to be formalized.
-
-## References
-
-{{#bibliography}}
