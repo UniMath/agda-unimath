@@ -175,14 +175,14 @@ module _
     is-transposing-adjunction (map-inv-is-equiv u) f
   is-transposing-adjunction-is-equiv' y x =
     equiv-eq (ap (λ p → hom▵ p (f x)) (is-section-map-inv-is-equiv u y)) ∘e
-    equiv-action-hom▵ (f , u) (map-inv-is-equiv u y) x
+    equiv-ap▵ (f , u) (map-inv-is-equiv u y) x
 
   is-transposing-adjunction-is-equiv :
     is-transposing-adjunction f (map-inv-is-equiv u)
   is-transposing-adjunction-is-equiv x y =
     inv-equiv
       ( equiv-eq (ap (hom▵ (f x)) (is-section-map-inv-is-equiv u y)) ∘e
-        equiv-action-hom▵ (f , u) x (map-inv-is-equiv u y))
+        equiv-ap▵ (f , u) x (map-inv-is-equiv u y))
 
   is-transposing-left-adjoint-is-equiv : is-transposing-left-adjoint f
   is-transposing-left-adjoint-is-equiv =

@@ -89,13 +89,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
   where
 
-  action-hom▵-natural-transformation▵ :
+  action-hom-natural-transformation▵ :
     (f ⇒▵ g) → {x y : A} → (x →▵ y) → (f x →▵ g y)
-  action-hom▵-natural-transformation▵ α a =
-    ( λ t →
-      family-of-arrows-natural-transformation▵ α
-        ( arrow-hom▵ a t)
-        ( t)) ,
+  action-hom-natural-transformation▵ α a =
+    ( λ t → family-of-arrows-natural-transformation▵ α (arrow-hom▵ a t) t) ,
     ( ( eq-source-natural-transformation▵ α (arrow-hom▵ a 0▵)) ∙
       ( ap f (eq-source-hom▵ a))) ,
     ( ( eq-target-natural-transformation▵ α (arrow-hom▵ a 1▵)) ∙
