@@ -35,7 +35,7 @@ open import orthogonal-factorization-systems.extensions-maps
 
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.horizontal-composition-arrows-functions I
 ```
 

@@ -33,7 +33,7 @@ open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.total-orders
 
-open import simplicial-type-theory.directed-interval-type I
+open import simplicial-type-theory.directed-interval I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
@@ -45,9 +45,8 @@ open import synthetic-homotopy-theory.joins-of-types
 
 The
 {{#concept "directed relation" Disambiguation="on the directed interval type" Agda=_≤-Δ¹_}}
-on the
-[directed interval type](simplicial-type-theory.directed-interval-type.md) `Δ¹`
-is a [total order](order-theory.total-orders.md) with `0▵` as the
+on the [directed interval type](simplicial-type-theory.directed-interval.md)
+`Δ¹` is a [total order](order-theory.total-orders.md) with `0▵` as the
 [bottom element](order-theory.bottom-elements-posets.md), and `1▵` as the
 [top element](order-theory.top-elements-posets.md).
 

@@ -27,7 +27,7 @@ reduction behaviour:
 For example, `primEraseEquality` applied to the loop of the
 [circle](synthetic-homotopy-theory.circle.md) will compute to `refl`, while
 `primEraseEquality` applied to the nontrivial identification in the
-[interval](synthetic-homotopy-theory.interval-type.md) will not reduce.
+[interval](synthetic-homotopy-theory.interval.md) will not reduce.
 
 This primitive is useful for [rewrite rules](reflection.rewriting.md), as it
 ensures that the identification used in defining the rewrite rule also computes
