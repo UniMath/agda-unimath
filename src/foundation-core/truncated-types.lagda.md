@@ -194,6 +194,9 @@ abstract
     is-trunc-retract-of k (ap f , Ef x y) (H (f x) (f y))
 ```
 
+- See [path-cosplit maps](foundation.path-cosplit-maps.md) for the concept of a
+  map whose action on identifications has a retraction.
+
 ### Truncated types are closed under dependent pair types
 
 ```agda
