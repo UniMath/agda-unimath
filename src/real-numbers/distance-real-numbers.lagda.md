@@ -80,11 +80,11 @@ only if their distance is at most `ε`.
 
 ```agda
 abstract
-  diff-bound-neighborhood-leq-ℝ :
+  diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    is-in-neighborhood-leq-ℝ l d x y →
+    neighborhood-ℝ l d x y →
     x -ℝ y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
-  diff-bound-neighborhood-leq-ℝ d⁺@(d , _) x y (H , K) =
+  diff-bound-neighborhood-ℝ d⁺@(d , _) x y (H , K) =
     leq-transpose-right-add-ℝ
       ( x)
       ( real-ℚ d)
@@ -101,32 +101,32 @@ abstract
               ( q -ℚ d)
               ( inv-tr (is-in-lower-cut-ℝ x) (is-section-diff-ℚ d q) q<x))))
 
-  reversed-diff-bound-neighborhood-leq-ℝ :
+  reversed-diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    is-in-neighborhood-leq-ℝ l d x y →
+    neighborhood-ℝ l d x y →
     y -ℝ x ≤-ℝ real-ℚ (rational-ℚ⁺ d)
-  reversed-diff-bound-neighborhood-leq-ℝ d x y H =
-    diff-bound-neighborhood-leq-ℝ d y x (is-symmetric-premetric-leq-ℝ d x y H)
+  reversed-diff-bound-neighborhood-ℝ d x y H =
+    diff-bound-neighborhood-ℝ d y x (is-symmetric-neighborhood-ℝ d x y H)
 
   leq-dist-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    is-in-neighborhood-leq-ℝ l d x y →
+    neighborhood-ℝ l d x y →
     dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
   leq-dist-neighborhood-ℝ d⁺@(d , _) x y H =
     leq-abs-leq-leq-neg-ℝ
       ( x -ℝ y)
       ( real-ℚ d)
-      ( diff-bound-neighborhood-leq-ℝ d⁺ x y H)
+      ( diff-bound-neighborhood-ℝ d⁺ x y H)
       ( inv-tr
         ( λ z → leq-ℝ z (real-ℚ d))
         ( distributive-neg-diff-ℝ _ _)
-        ( reversed-diff-bound-neighborhood-leq-ℝ d⁺ x y H))
+        ( reversed-diff-bound-neighborhood-ℝ d⁺ x y H))
 
-  lower-neighborhood-leq-diff-ℝ :
+  lower-neighborhood-diff-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     x -ℝ y ≤-ℝ real-ℚ (rational-ℚ⁺ d) →
-    is-in-lower-neighborhood-leq-ℝ d y x
-  lower-neighborhood-leq-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
+    lower-neighborhood-ℝ d y x
+  lower-neighborhood-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
     is-in-lower-cut-le-real-ℚ
       ( q)
       ( y)
@@ -140,12 +140,12 @@ abstract
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
-  neighborhood-leq-dist-ℝ :
+  neighborhood-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d) →
-    is-in-neighborhood-leq-ℝ l d x y
-  neighborhood-leq-dist-ℝ d⁺@(d , _) x y |x-y|≤d =
-    ( lower-neighborhood-leq-diff-ℝ
+    neighborhood-ℝ l d x y
+  neighborhood-dist-ℝ d⁺@(d , _) x y |x-y|≤d =
+    ( lower-neighborhood-diff-ℝ
       ( d⁺)
       ( y)
       ( x)
@@ -158,7 +158,7 @@ abstract
           ( real-ℚ d)
           ( |x-y|≤d)
           ( neg-leq-abs-ℝ _))) ,
-      lower-neighborhood-leq-diff-ℝ
+      lower-neighborhood-diff-ℝ
       ( d⁺)
       ( x)
       ( y)
@@ -171,11 +171,11 @@ abstract
 
   neighborhood-iff-leq-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    is-in-neighborhood-leq-ℝ l d x y ↔
+    neighborhood-ℝ l d x y ↔
     dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
   neighborhood-iff-leq-dist-ℝ d x y =
     ( leq-dist-neighborhood-ℝ d x y ,
-      neighborhood-leq-dist-ℝ d x y)
+      neighborhood-dist-ℝ d x y)
 ```
 
 ### Triangle inequality
