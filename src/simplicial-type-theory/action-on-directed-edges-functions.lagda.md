@@ -31,9 +31,8 @@ open import simplicial-type-theory.directed-edges I
 
 Any [function](foundation-core.function-types.md) `f : A → B` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
-maps any edge `p : x →▵ y` in `A` to a directed edge
-`action-hom▵ f p : f x →▵ f y` in `B`. This action on directed edges can be
-understood as
+maps any edge `p : x →▵ y` in `A` to a directed edge `ap▵ f p : f x →▵ f y` in
+`B`. This action on directed edges can be understood as
 {{#concept "functoriality" Disambiguation="of functions in simplicial type theory" Agda=ap▵}}
 of functions in simplicial type theory.
 
@@ -53,30 +52,25 @@ ap▵ f (α , s , t) = (f ∘ α , ap f s , ap f t)
 ### The identity function acts trivially on directed edges
 
 ```agda
-compute-action-hom▵-id-function :
-  {l : Level} {A : UU l} {x y : A} (p : x →▵ y) →
-  (ap▵ id p) ＝ p
-compute-action-hom▵-id-function (α , s , t) =
-  eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
+ap▵-id : {l : Level} {A : UU l} {x y : A} (p : x →▵ y) → (ap▵ id p) ＝ p
+ap▵-id (α , s , t) = eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
 
 ### The action on directed edges of a composite function is the composite of the actions
 
 ```agda
-compute-action-hom▵-comp-function :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  (f : A → B) {x y : A} (p : x →▵ y) →
-  (ap▵ (g ∘ f) p) ＝
-  ((ap▵ g ∘ ap▵ f) p)
-compute-action-hom▵-comp-function g f (α , s , t) =
+ap▵-comp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B) {x y : A} (p : x →▵ y) →
+  ap▵ (g ∘ f) p ＝ (ap▵ g ∘ ap▵ f) p
+ap▵-comp g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp g f s) (ap-comp g f t))
 
-associative-action-hom▵-comp-function :
+associative-ap▵-comp :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (h : C → D) (g : B → C) (f : A → B) {x y : A} (p : x →▵ y) →
-  ap▵ (h ∘ g) (ap▵ f p) ＝
-  ap▵ h (ap▵ (g ∘ f) p)
-associative-action-hom▵-comp-function h g f (α , s , t) =
+  ap▵ (h ∘ g) (ap▵ f p) ＝ ap▵ h (ap▵ (g ∘ f) p)
+associative-ap▵-comp h g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp-assoc h g f s) (ap-comp-assoc h g f t))
 ```
 
@@ -85,19 +79,18 @@ associative-action-hom▵-comp-function h g f (α , s , t) =
 In fact, the identity edges are preserved strictly.
 
 ```agda
-compute-action-id-hom▵-function :
+ap▵-id-hom▵ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
-  ap▵ f (id-hom▵ x) ＝
-  id-hom▵ (f x)
-compute-action-id-hom▵-function f x = refl
+  ap▵ f (id-hom▵ x) ＝ id-hom▵ (f x)
+ap▵-id-hom▵ f x = refl
 ```
 
 ### The action on identifications of a constant map is constant
 
 ```agda
-compute-action-hom▵-const-function :
+ap▵-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A} (p : x →▵ y) →
   ap▵ (const A b) p ＝ id-hom▵ b
-compute-action-hom▵-const-function b (α , s , t) =
+ap▵-const b (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-const b s) (ap-const b t))
 ```

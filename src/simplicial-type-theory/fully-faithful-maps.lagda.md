@@ -149,7 +149,7 @@ module _
   is-fully-faithful-id :
     is-fully-faithful (id {A = A})
   is-fully-faithful-id x y =
-    is-equiv-htpy id compute-action-hom▵-id-function is-equiv-id
+    is-equiv-htpy id ap▵-id is-equiv-id
 
   id-fully-faithful-map : fully-faithful-map A A
   id-fully-faithful-map =
@@ -176,9 +176,9 @@ module _
           ( is-emb-is-equiv H (α 0▵) x)
           ( is-emb-is-equiv H (α 1▵) y))
 
-  equiv-action-hom▵ :
+  equiv-ap▵ :
     (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)
-  equiv-action-hom▵ e x y =
+  equiv-ap▵ e x y =
     ( ap▵ (map-equiv e) ,
       is-fully-faithful-is-equiv (is-equiv-map-equiv e) x y)
 ```
@@ -283,7 +283,7 @@ module _
       ( ap▵ (g ∘ h))
       ( ap▵ g)
       ( ap▵ h)
-      ( compute-action-hom▵-comp-function g h)
+      ( ap▵-comp g h)
       ( is-ff-h x y)
       ( is-ff-g (h x) (h y))
 
@@ -319,7 +319,7 @@ module _
       ( ap▵ (g ∘ h))
       ( ap▵ g)
       ( ap▵ h)
-      ( compute-action-hom▵-comp-function g h)
+      ( ap▵-comp g h)
       ( is-ff-g (h x) (h y))
       ( is-ff-gh x y)
 
@@ -336,7 +336,7 @@ module _
         ( ap▵ (g ∘ h))
         ( ap▵ g)
         ( ap▵ h)
-        ( compute-action-hom▵-comp-function g h)
+        ( ap▵-comp g h)
         ( is-ff-g (h x) (h y))
         ( is-fully-faithful-htpy (inv-htpy H) is-ff-f x y)
 

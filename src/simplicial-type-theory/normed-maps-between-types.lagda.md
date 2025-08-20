@@ -195,8 +195,7 @@ module _
       ( is-transposing-adjoint-map-right-adjoint-is-normed-map H
         ( map-left-adjoint-is-normed-map H (q x))
         ( q y))
-      ( action-hom▵-natural-transformation▵
-        ( norm-map-is-normed-map H) f)
+      ( action-hom-natural-transformation▵ (norm-map-is-normed-map H) f)
 ```
 
 ### The wrong way unit associated to a normed map
@@ -262,7 +261,7 @@ module _
     map-left-adjoint-is-normed-map H (q x) →▵
     map-right-adjoint-is-normed-map H (q y)
   action-hom-image-norm-map-is-normed-map =
-    action-hom▵-natural-transformation▵ (norm-map-is-normed-map H)
+    action-hom-natural-transformation▵ (norm-map-is-normed-map H)
 ```
 
 ### The factors of the cardinality of a normed map

@@ -109,3 +109,9 @@ module _
     {x y : A × B} → hom▵-product x y ≃ (x →▵ y)
   inv-compute-hom▵-product = inv-equiv compute-hom▵-product
 ```
+
+## See also
+
+- [Directed edges in dependent pair types](simplicial-type-theory.directed-edges-dependent-pair-types.md)
+- [Natural transformations](simplicial-type-theory.natural-transformations.md)
+  for the characterization of directed edges in (dependent) function types.
