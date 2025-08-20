@@ -40,7 +40,7 @@ open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.dependent-directed-edges I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -50,7 +50,7 @@ open import synthetic-homotopy-theory.circle
 ## Idea
 
 A type family `B : A → 𝒰` is
-{{#concept "(simplicially) covariant" Disambiguation="type family" Agda=is-simplicially-covariant}}
+{{#concept "covariant" Disambiguation="simplicial type family" Agda=is-covariant-family▵}}
 if one of the following equivalent conditions hold:
 
 1. For every directed edge `f : x →▵ y` in `A` and element `x'` over `x`, the
@@ -94,8 +94,8 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant : UU (I1 ⊔ l1 ⊔ l2)
-  is-simplicially-covariant = is-local-family (point 0▵) B
+  is-covariant-family▵ : UU (I1 ⊔ l1 ⊔ l2)
+  is-covariant-family▵ = is-local-family (point 0▵) B
 ```
 
 ```agda
@@ -103,8 +103,8 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-simplicially-covariant' : UU (I1 ⊔ l1 ⊔ l2)
-  is-simplicially-covariant' =
+  is-covariant-family▵' : UU (I1 ⊔ l1 ⊔ l2)
+  is-covariant-family▵' =
     (α : arrow▵ A) (x' : B (α 0▵)) →
     is-torsorial (dependent-hom▵ B (hom-arrow▵ α) x')
 ```

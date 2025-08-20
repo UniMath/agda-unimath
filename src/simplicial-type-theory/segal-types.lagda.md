@@ -37,7 +37,7 @@ open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.compositions-of-directed-edges I
 open import simplicial-type-theory.cubes I
 open import simplicial-type-theory.directed-interval I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 open import simplicial-type-theory.natural-transformations I
 
 open import synthetic-homotopy-theory.joins-of-types

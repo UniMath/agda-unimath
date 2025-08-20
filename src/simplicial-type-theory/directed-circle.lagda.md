@@ -50,7 +50,7 @@ open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
 open import simplicial-type-theory.discrete-types I
 open import simplicial-type-theory.free-directed-loops I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 open import simplicial-type-theory.universal-property-directed-circle I
 
 open import synthetic-homotopy-theory.circle
@@ -60,9 +60,11 @@ open import synthetic-homotopy-theory.circle
 
 ## Idea
 
-The {{#concept "directed circle"}} is the type consisting of a point `*` and a
-nontrivial [directed edge](simplicial-type-theory.directed-edges.md) `* →▵ *`.
-The directed circle classifies
+The
+{{#concept "directed circle" Disambiguation="in simplicial type theory" Agda=directed-circle}}
+is the type consisting of a point `*` and a nontrivial
+[directed edge](simplicial-type-theory.directed-edges.md) `* →▵ *`. The directed
+circle classifies
 [free directed loops](simplicial-type-theory.free-directed-loops.md), meaning
 that maps `directed-circle → X` are in correspondence with free directed loops
 of `X`.
@@ -82,6 +84,11 @@ of the diagram
 In
 [`rewriting-directed-circle`](simplicial-type-theory.rewriting-directed-circle.md)
 we make the directed circle the strict coequalizer of this diagram.
+
+Note that the directed circle should not be confused with the _representing
+endomorphism_, which would be the classifying type of the
+[natural numbers](elementary-number-theory.natural-numbers.md) (in the
+appropriate sense).
 
 ## Postulates
 

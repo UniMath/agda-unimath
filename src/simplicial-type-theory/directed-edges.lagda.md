@@ -48,9 +48,9 @@ open import simplicial-type-theory.directed-interval I
 
 ## Idea
 
-A {{#concept "directed edge" Disambiguation="simplicial type theory" Agda=hom▵}}
-in a type `A` from `x : A` to `y : A` is a
-[simplicial arrow](simplicial-type-theory.arrows.md) `α` in `A` together with
+A {{#concept "directed edge" Disambiguation="in a simplicial type" Agda=hom▵}}
+in a type `A` from `x : A` to `y : A` is an
+[arrow](simplicial-type-theory.arrows.md) `α` in `A` together with
 [identifications](foundation-core.identity-types.md) `α 0▵ ＝ x` and
 `α 1▵ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
 

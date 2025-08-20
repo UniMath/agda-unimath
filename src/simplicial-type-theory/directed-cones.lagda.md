@@ -43,7 +43,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -56,7 +56,7 @@ open import synthetic-homotopy-theory.pushouts
 ## Idea
 
 Given a type `X`, we define the
-{{#concept "directed cone type" Agda= directed-cone}} as the
+{{#concept "directed cone type" Agda=directed-cone}} as the
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
@@ -204,9 +204,9 @@ module _
   |          |
   |          |
   ∨        ⌜ ∨
-  Δ¹ ---> directed-cone 1,
+  Δ¹ --> directed-cone 1,
 ```
 
-and since the top horizontal map is an equivalence, so is its pushout.
+and since the top horizontal map is an equivalence, so is its pushout. ∎
 
 > This remains to be formalized.

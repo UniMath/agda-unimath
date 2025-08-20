@@ -41,7 +41,7 @@ open import simplicial-type-theory.2-simplices I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 open import simplicial-type-theory.spines I
 open import simplicial-type-theory.standard-simplices I
 

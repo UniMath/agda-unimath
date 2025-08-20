@@ -1,4 +1,4 @@
-# The directed interval type
+# The directed interval
 
 ```agda
 open import foundation.universe-levels
@@ -58,7 +58,7 @@ a [total order](order-theory.total-orders.md) with `0▵` as a
 
 In this file, we postulate the existence of the directed interval type together
 with its distinct source and target elements. In the module
-[`inequality-directed-interval-type`](simplicial-type-theory.inequality-directed-interval-type.md),
+[`inequality-directed-interval`](simplicial-type-theory.inequality-directed-interval.md),
 we postulate the existence of the directed relation on the directed interval
 type.
 
@@ -206,7 +206,7 @@ retraction-ap-map-directed-interval-bool =
 
 We show that `map-directed-interval-bool` is an
 [embedding](foundation-core.embeddings.md) in
-[`inequality-directed-interval-type`](simplicial-type-theory.inequality-directed-interval-type.md).
+[`inequality-directed-interval`](simplicial-type-theory.inequality-directed-interval.md).
 
 ### The directed interval is not connected
 
@@ -220,3 +220,7 @@ is-not-0-connected-Δ¹ : ¬ (is-0-connected Δ¹)
 is-not-0-connected-Δ¹ H =
   rec-trunc-Prop empty-Prop is-nontrivial-Δ¹ (mere-eq-is-0-connected H 0▵ 1▵)
 ```
+
+## See also
+
+- [`inequality-directed-interval`](simplicial-type-theory.inequality-directed-interval.md).

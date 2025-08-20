@@ -156,12 +156,11 @@ Given a transposing biadjoint `q! ⊣ q* ⊣ q∗` and a conorm map
   μ : id =====> q∗q* =====> q!q*.
 ```
 
-> This remains to be formalized. Here we need composition in the underlying
-> types.
+> This remains to be formalized as we need composition in the underlying types.
 
 ### The integral map associated to a conormed map
 
-> Here we need composition in the underlying types.
+> This remains to be formalized as we need composition in the underlying types.
 
 ```text
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {q : A → B} (H : is-conormed-map q)
@@ -176,7 +175,7 @@ Given a transposing biadjoint `q! ⊣ q* ⊣ q∗` and a conorm map
 
 ### The cardinality operator associated to a conormed map
 
-> Here we need composition in the underlying types.
+> This remains to be formalized as we need composition in the underlying types.
 
 ## Properties
 
