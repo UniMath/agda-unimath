@@ -42,7 +42,7 @@ open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.cubes I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
-open import simplicial-type-theory.inequality-directed-interval-type I
+open import simplicial-type-theory.inequality-directed-interval I
 open import simplicial-type-theory.standard-simplices I
 
 open import synthetic-homotopy-theory.cocones-under-spans

@@ -44,9 +44,10 @@ open import simplicial-type-theory.directed-interval I
 Given a type family `B : A → 𝒰` and a
 [directed edge](simplicial-type-theory.directed-edges.md) `α : x →▵ y` in `A`, a
 {{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-hom▵}}
-_over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : Δ¹ → 𝒰`. such
-that `β 0▵ ＝ x'` over the identification `α 0▵ ＝ x` and `β 1▵ ＝ y'` over the
-identification `α 1▵ ＝ y`.
+_over_ `α` from `x'` to `y'` is an arrow `β` in the family `B ∘ α : Δ¹ → 𝒰`.
+such that `β 0▵ ＝ x'` over the
+[identification](foundation-core.identity-types.md) `α 0▵ ＝ x` and `β 1▵ ＝ y'`
+over the identification `α 1▵ ＝ y`.
 
 Assuming for simplicity that the endpoints are strict, i.e., `α 0▵ ≐ x` and
 `α 1▵ ≐ y`, the situation can be drawn as in the following diagram. The

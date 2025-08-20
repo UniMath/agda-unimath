@@ -38,7 +38,7 @@ open import simplicial-type-theory.globularly-coskeletal-types public
 open import simplicial-type-theory.horizontal-composition-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-directed-edges-functions public
 open import simplicial-type-theory.horizontal-composition-natural-transformations public
-open import simplicial-type-theory.inequality-directed-interval-type public
+open import simplicial-type-theory.inequality-directed-interval public
 open import simplicial-type-theory.inner-2-horn public
 open import simplicial-type-theory.natural-transformations public
 open import simplicial-type-theory.normed-maps-between-types public
