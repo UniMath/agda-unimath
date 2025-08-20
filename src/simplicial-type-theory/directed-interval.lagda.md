@@ -56,13 +56,18 @@ a [total order](order-theory.total-orders.md) with `0▵` as a
 [bottom element](order-theory.bottom-elements-posets.md), and `1▵` as a
 [top element](order-theory.top-elements-posets.md).
 
-In this file, we postulate the existence of the directed interval type together
-with its distinct source and target elements. In the module
+In this file, we define the directed interval type together with its distinct
+source and target elements. In the module
 [`inequality-directed-interval`](simplicial-type-theory.inequality-directed-interval.md),
 we postulate the existence of the directed relation on the directed interval
 type.
 
-## Postulates
+**Computational behaviour.** Although the directed interval is defined from the
+bounded total order `I`, it is marked `opaque`, meaning that we have to state
+explicitly to Agda that we wish to unfold the basic definitions in order for
+Agda to draw any connection between the two objects at a later point.
+
+## Definitions
 
 ### The directed interval type
 

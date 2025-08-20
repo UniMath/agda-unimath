@@ -50,7 +50,12 @@ on the [directed interval type](simplicial-type-theory.directed-interval.md)
 [bottom element](order-theory.bottom-elements-posets.md), and `1▵` as the
 [top element](order-theory.top-elements-posets.md).
 
-## Postulates
+**Computational behaviour.** Although the directed interval is defined from the
+bounded total order `I`, it is marked `opaque`, meaning that we have to state
+explicitly to Agda that we wish to unfold the basic definitions in order for
+Agda to draw any connection between the two objects at a later point.
+
+## Definitions
 
 ### The directed relation on the directed interval
 
@@ -178,8 +183,6 @@ abstract
       ( eq-is-prop (is-prop-join-is-prop is-prop-leq-Δ¹ is-prop-leq-Δ¹))) ∙
     ( compute-inr-cogap-join (cocone-min-Δ¹ t s) p)
 ```
-
-## Definitions
 
 ### The inequality binary propositional relation on the directed interval
 
