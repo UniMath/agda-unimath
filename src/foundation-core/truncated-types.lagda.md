@@ -21,7 +21,9 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.invertible-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
@@ -76,8 +78,7 @@ module _
 abstract
   is-trunc-succ-is-trunc :
     (k : 𝕋) {l : Level} {A : UU l} → is-trunc k A → is-trunc (succ-𝕋 k) A
-  pr1 (is-trunc-succ-is-trunc neg-two-𝕋 H x y) = eq-is-contr H
-  pr2 (is-trunc-succ-is-trunc neg-two-𝕋 H x .x) refl = left-inv (pr2 H x)
+  is-trunc-succ-is-trunc neg-two-𝕋 = is-prop-is-contr
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
 
 truncated-type-succ-Truncated-Type :
@@ -122,11 +123,11 @@ module _
   where
 
   is-trunc-retract-of :
-    {k : 𝕋} {A : UU l1} {B : UU l2} →
+    (k : 𝕋) {A : UU l1} {B : UU l2} →
     A retract-of B → is-trunc k B → is-trunc k A
-  is-trunc-retract-of {neg-two-𝕋} = is-contr-retract-of _
-  is-trunc-retract-of {succ-𝕋 k} R H x y =
-    is-trunc-retract-of (retract-eq R x y) (H (pr1 R x) (pr1 R y))
+  is-trunc-retract-of neg-two-𝕋 = is-contr-retract-of _
+  is-trunc-retract-of (succ-𝕋 k) R H x y =
+    is-trunc-retract-of k (retract-eq R x y) (H (pr1 R x) (pr1 R y))
 ```
 
 ### `k`-truncated types are closed under equivalences
@@ -137,7 +138,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-trunc k B → is-trunc k A
   is-trunc-is-equiv k B f is-equiv-f =
-    is-trunc-retract-of (pair f (pr2 is-equiv-f))
+    is-trunc-retract-of k (pair f (pr2 is-equiv-f))
 
 abstract
   is-trunc-equiv :
@@ -180,6 +181,21 @@ abstract
     is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
 ```
+
+In fact, it suffices that the map's action on identifications has a retraction.
+
+```agda
+abstract
+  is-trunc-retraction-ap :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+    ((x y : A) → retraction (ap f {x} {y})) →
+    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-retraction-ap k f Ef H x y =
+    is-trunc-retract-of k (ap f , Ef x y) (H (f x) (f y))
+```
+
+- See [path-cosplit maps](foundation.path-cosplit-maps.md) for the concept of a
+  map whose action on identifications has a retraction.
 
 ### Truncated types are closed under dependent pair types
 
@@ -244,7 +260,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k A → is-trunc k B → is-trunc k (A × B)
   is-trunc-product k is-trunc-A is-trunc-B =
-    is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
+    is-trunc-Σ is-trunc-A (λ _ → is-trunc-B)
 
 product-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋) →
@@ -255,37 +271,43 @@ pr2 (product-Truncated-Type k A B) =
   is-trunc-product k
     ( is-trunc-type-Truncated-Type A)
     ( is-trunc-type-Truncated-Type B)
+```
 
+We need only show that each factor is `k`-truncated given that the opposite
+factor has an element when `k ≥ -1`.
+
+```agda
 is-trunc-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
-  (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
+  (B → is-trunc (succ-𝕋 k) A) →
+  (A → is-trunc (succ-𝕋 k) B) →
   is-trunc (succ-𝕋 k) (A × B)
 is-trunc-product' k f g (pair a b) (pair a' b') =
   is-trunc-equiv k
-    ( Eq-product (pair a b) (pair a' b'))
+    ( Eq-product (a , b) (pair a' b'))
     ( equiv-pair-eq (pair a b) (pair a' b'))
     ( is-trunc-product k (f b a a') (g a b b'))
 
-is-trunc-left-factor-product :
+is-trunc-left-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → B → is-trunc k A
-is-trunc-left-factor-product neg-two-𝕋 {A} {B} H b =
+is-trunc-left-factor-product' neg-two-𝕋 {A} {B} H b =
   is-contr-left-factor-product A B H
-is-trunc-left-factor-product (succ-𝕋 k) H b a a' =
-  is-trunc-left-factor-product k {A = (a ＝ a')} {B = (b ＝ b)}
+is-trunc-left-factor-product' (succ-𝕋 k) H b a a' =
+  is-trunc-left-factor-product' k {A = (a ＝ a')} {B = (b ＝ b)}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a' b)
       ( equiv-pair-eq (pair a b) (pair a' b))
       ( H (pair a b) (pair a' b)))
     ( refl)
 
-is-trunc-right-factor-product :
+is-trunc-right-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → A → is-trunc k B
-is-trunc-right-factor-product neg-two-𝕋 {A} {B} H a =
+is-trunc-right-factor-product' neg-two-𝕋 {A} {B} H a =
   is-contr-right-factor-product A B H
-is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
-  is-trunc-right-factor-product k {A = (a ＝ a)} {B = (b ＝ b')}
+is-trunc-right-factor-product' (succ-𝕋 k) {A} {B} H a b b' =
+  is-trunc-right-factor-product' k {A = (a ＝ a)} {B = (b ＝ b')}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a b')
       ( equiv-pair-eq (pair a b) (pair a b'))
@@ -353,7 +375,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k B → is-trunc k (A → B)
   is-trunc-function-type k {A} {B} is-trunc-B =
-    is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
+    is-trunc-Π k {B = λ (x : A) → B} (λ _ → is-trunc-B)
 
 function-type-Truncated-Type :
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →
@@ -421,7 +443,12 @@ module _
               ( is-trunc-function-type k H)
               ( λ h →
                 is-trunc-Π k (λ x → is-trunc-Id H (h (f x)) x))))
+```
 
+Alternatively, this follows from the fact that equivalences embed into function
+types, and function types between `k`-truncated types are `k`-truncated.
+
+```agda
 type-equiv-Truncated-Type :
   {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
   UU (l1 ⊔ l2)

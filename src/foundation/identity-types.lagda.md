@@ -21,6 +21,8 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -393,4 +395,51 @@ module _
     fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))
   compute-fiber-unbased-map-out-of-identity-type x =
     compute-fiber-map-out-of-identity-type (f x)
+```
+
+### Computing the total type of identifications
+
+```text
+  (Σ (x y : A), (x ＝ y)) ≃ A
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  map-compute-total-Id : A → Σ A (λ x → Σ A (λ y → x ＝ y))
+  map-compute-total-Id x = (x , x , refl)
+
+  map-inv-compute-total-Id : Σ A (λ x → Σ A (λ y → x ＝ y)) → A
+  map-inv-compute-total-Id = pr1
+
+  is-section-map-inv-compute-total-Id :
+    is-section map-compute-total-Id map-inv-compute-total-Id
+  is-section-map-inv-compute-total-Id (x , .x , refl) = refl
+
+  is-retraction-map-inv-compute-total-Id :
+    is-retraction map-compute-total-Id map-inv-compute-total-Id
+  is-retraction-map-inv-compute-total-Id = refl-htpy
+
+  is-equiv-map-compute-total-Id : is-equiv map-compute-total-Id
+  is-equiv-map-compute-total-Id =
+    is-equiv-is-invertible
+      ( map-inv-compute-total-Id)
+      ( is-section-map-inv-compute-total-Id)
+      ( is-retraction-map-inv-compute-total-Id)
+
+  compute-total-Id : A ≃ Σ A (λ x → Σ A (λ y → x ＝ y))
+  compute-total-Id = (map-compute-total-Id , is-equiv-map-compute-total-Id)
+
+  is-equiv-map-inv-compute-total-Id : is-equiv map-inv-compute-total-Id
+  is-equiv-map-inv-compute-total-Id =
+    is-equiv-is-invertible
+      ( map-compute-total-Id)
+      ( is-retraction-map-inv-compute-total-Id)
+      ( is-section-map-inv-compute-total-Id)
+
+  inv-compute-total-Id : Σ A (λ x → Σ A (λ y → x ＝ y)) ≃ A
+  inv-compute-total-Id =
+    ( map-inv-compute-total-Id , is-equiv-map-inv-compute-total-Id)
 ```
