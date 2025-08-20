@@ -11,13 +11,16 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
@@ -25,6 +28,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
@@ -34,6 +38,7 @@ open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.shifting-sequences
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -494,6 +499,85 @@ is-countable-Fin-Set zero-ℕ = is-countable-empty
 is-countable-Fin-Set (succ-ℕ n) =
   is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
+```
+
+### For any countable set `X` with decidable equality, there exists an embedding `X ↪ ℕ`
+
+```agda
+module _
+  {l : Level} (X : Set l)
+  (e : enumeration X) (K : has-decidable-equality (type-Set X))
+  where
+
+  preimage-prop-enumeration-discrete-Set : type-Set X → subtype l ℕ
+  preimage-prop-enumeration-discrete-Set x =
+    preimage-Set (maybe-Set X) (map-enumeration X e) (unit-Maybe x)
+
+  preimage-enumeration-discrete-Set : type-Set X → ℕ → UU l
+  preimage-enumeration-discrete-Set x n =
+    type-Prop (preimage-prop-enumeration-discrete-Set x n)
+
+  minimal-preimage-prop-enumeration-discrete-Set : type-Set X → Prop l
+  minimal-preimage-prop-enumeration-discrete-Set x =
+    minimal-element-ℕ-Prop (preimage-prop-enumeration-discrete-Set x)
+
+  abstract
+    minimal-preimage-enumeration-discrete-Set :
+      (x : type-Set X) →
+      type-Prop (minimal-preimage-prop-enumeration-discrete-Set x)
+    minimal-preimage-enumeration-discrete-Set x =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( minimal-preimage-prop-enumeration-discrete-Set x)
+      in do
+        m ← is-surjective-map-enumeration X e (unit-Maybe x)
+        well-ordering-principle-ℕ
+          ( preimage-enumeration-discrete-Set x)
+          ( λ n →
+            has-decidable-equality-coproduct
+              ( K)
+              ( has-decidable-equality-unit)
+              ( map-enumeration X e n)
+              ( unit-Maybe x))
+          ( m)
+
+  map-emb-ℕ-enumeration-discrete-Set : type-Set X → ℕ
+  map-emb-ℕ-enumeration-discrete-Set x =
+    pr1 (minimal-preimage-enumeration-discrete-Set x)
+
+  abstract
+    is-emb-map-emb-ℕ-enumeration-discrete-Set :
+      is-emb map-emb-ℕ-enumeration-discrete-Set
+    is-emb-map-emb-ℕ-enumeration-discrete-Set =
+      is-emb-is-injective
+        ( is-set-ℕ)
+        ( λ {x} {y} fx=fy →
+          let
+            (nx , enx=unit-x , _) = minimal-preimage-enumeration-discrete-Set x
+            (ny , eny=unit-y , _) = minimal-preimage-enumeration-discrete-Set y
+          in
+            is-injective-unit-Maybe
+              ( inv enx=unit-x ∙ ap (map-enumeration X e) fx=fy ∙ eny=unit-y))
+
+  emb-ℕ-enumeration-discrete-Set : type-Set X ↪ ℕ
+  emb-ℕ-enumeration-discrete-Set =
+    ( map-emb-ℕ-enumeration-discrete-Set ,
+      is-emb-map-emb-ℕ-enumeration-discrete-Set)
+
+module _
+  {l : Level} (X : Set l)
+  (H : is-countable X) (K : has-decidable-equality (type-Set X))
+  where
+
+  abstract
+    exists-emb-ℕ-countable-discrete-Set :
+      exists (type-Set X → ℕ) is-emb-Prop
+    exists-emb-ℕ-countable-discrete-Set =
+      rec-trunc-Prop
+        ( ∃ (type-Set X → ℕ) is-emb-Prop)
+        ( λ e → unit-trunc-Prop (emb-ℕ-enumeration-discrete-Set X e K))
+        ( H)
 ```
 
 ## See also

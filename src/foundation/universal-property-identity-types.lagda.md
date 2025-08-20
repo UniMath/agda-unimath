@@ -26,11 +26,12 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 ```
 
@@ -46,47 +47,48 @@ also known as the **type theoretic Yoneda lemma**.
 ## Theorem
 
 ```agda
-ev-refl :
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → a ＝ x → UU l2} →
-  ((x : A) (p : a ＝ x) → B x p) → B a refl
-ev-refl a f = f a refl
+module _
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → a ＝ x → UU l2}
+  where
 
-ev-refl' :
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
-  ((x : A) (p : x ＝ a) → B x p) → B a refl
-ev-refl' a f = f a refl
+  ev-refl : ((x : A) (p : a ＝ x) → B x p) → B a refl
+  ev-refl f = f a refl
 
-abstract
-  is-equiv-ev-refl :
-    {l1 l2 : Level} {A : UU l1} (a : A)
-    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B})
-  is-equiv-ev-refl a =
-    is-equiv-is-invertible
-      ( ind-Id a _)
-      ( λ b → refl)
-      ( λ f → eq-htpy
-        ( λ x → eq-htpy
-          ( ind-Id a
-            ( λ x' p' → ind-Id a _ (f a refl) x' p' ＝ f x' p')
-            ( refl) x)))
+  is-retraction-ev-refl : is-retraction (ind-Id a B) ev-refl
+  is-retraction-ev-refl = refl-htpy
 
-equiv-ev-refl :
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → a ＝ x → UU l2} →
-  ((x : A) (p : a ＝ x) → B x p) ≃ (B a refl)
-pr1 (equiv-ev-refl a) = ev-refl a
-pr2 (equiv-ev-refl a) = is-equiv-ev-refl a
+  abstract
+    is-section-ev-refl : is-section (ind-Id a B) ev-refl
+    is-section-ev-refl f =
+      eq-htpy
+        ( λ x →
+          eq-htpy
+            ( ind-Id a
+              ( λ x' p' → ind-Id a _ (f a refl) x' p' ＝ f x' p')
+              ( refl)
+              ( x)))
 
-equiv-ev-refl' :
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
-  ((x : A) (p : x ＝ a) → B x p) ≃ B a refl
-equiv-ev-refl' a {B} =
-  ( equiv-ev-refl a) ∘e
-  ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
+  is-equiv-ev-refl : is-equiv ev-refl
+  is-equiv-ev-refl =
+    is-equiv-is-invertible (ind-Id a B) is-retraction-ev-refl is-section-ev-refl
 
-is-equiv-ev-refl' :
-  {l1 l2 : Level} {A : UU l1} (a : A)
-  {B : (x : A) → x ＝ a → UU l2} → is-equiv (ev-refl' a {B})
-is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
+  equiv-ev-refl : ((x : A) (p : a ＝ x) → B x p) ≃ B a refl
+  equiv-ev-refl = (ev-refl , is-equiv-ev-refl)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2}
+  where
+
+  ev-refl' : ((x : A) (p : x ＝ a) → B x p) → B a refl
+  ev-refl' f = f a refl
+
+  equiv-ev-refl' : ((x : A) (p : x ＝ a) → B x p) ≃ B a refl
+  equiv-ev-refl' =
+    ( equiv-ev-refl a) ∘e
+    ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
+
+  is-equiv-ev-refl' : is-equiv ev-refl'
+  is-equiv-ev-refl' = is-equiv-map-equiv equiv-ev-refl'
 ```
 
 ### The type of fiberwise maps from `Id a` to a torsorial type family `B` is equivalent to the type of fiberwise equivalences

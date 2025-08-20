@@ -11,6 +11,8 @@ open import commutative-algebra.boolean-rings public
 open import commutative-algebra.category-of-commutative-rings public
 open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
+open import commutative-algebra.convolution-sequences-commutative-rings public
+open import commutative-algebra.convolution-sequences-commutative-semirings public
 open import commutative-algebra.dependent-products-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public

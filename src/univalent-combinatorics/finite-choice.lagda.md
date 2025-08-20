@@ -180,6 +180,12 @@ module _
         ( finite-double-negation-choice-Fin k (H ∘ map-equiv e))
 
   abstract
+    finite-double-negation-choice-double-negation-count :
+      ¬¬ count X → ((x : X) → ¬¬ (Y x)) → ¬¬ ((x : X) → Y x)
+    finite-double-negation-choice-double-negation-count nnc H nf =
+      nnc (λ c → finite-double-negation-choice-count c H nf)
+
+  abstract
     finite-double-negation-choice :
       is-finite X → ((x : X) → ¬¬ (Y x)) → ¬¬ ((x : X) → Y x)
     finite-double-negation-choice is-finite-X H =

@@ -22,10 +22,6 @@ def format_maintainer(maintainer):
     extra = maintainer.get('extra')
     if extra is not None:
         formatted_name += extra
-    appropriate_link = maintainer.get(
-        'homepage') or github_page_for_contributor(maintainer)
-    if appropriate_link is not None:
-        formatted_name = f'[{formatted_name}]({appropriate_link})'
     bio = maintainer.get('bio', '')
 
     return f'### {formatted_name}\n\n{bio}'

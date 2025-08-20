@@ -73,6 +73,7 @@ opaque
 ```agda
 opaque
   unfolding abs-ℝ
+  unfolding neg-ℚ
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
   is-nonnegative-abs-ℝ x q q<0 =
@@ -177,8 +178,8 @@ module _
   abstract
     is-short-abs-ℝ :
       is-short-function-Metric-Space
-        ( metric-space-leq-ℝ l)
-        ( metric-space-leq-ℝ l)
+        ( metric-space-ℝ l)
+        ( metric-space-ℝ l)
         ( abs-ℝ)
     is-short-abs-ℝ d x y I =
       neighborhood-real-bound-each-leq-ℝ
@@ -197,7 +198,7 @@ module _
               ( y)
               ( abs-ℝ y)
               ( leq-abs-ℝ y))
-            ( left-real-bound-neighborhood-leq-ℝ d x y I))
+            ( left-leq-real-bound-neighborhood-ℝ d x y I))
           ( transitive-leq-ℝ
             ( neg-ℝ x)
             ( neg-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
@@ -207,11 +208,11 @@ module _
               ( neg-ℝ y)
               ( abs-ℝ y)
               ( neg-leq-abs-ℝ y))
-            ( reverses-lower-neighborhood-leq-neg-ℝ
+            ( reverses-lower-neighborhood-neg-ℝ
               ( d)
               ( y)
               ( x)
-              ( right-real-bound-neighborhood-leq-ℝ d x y I))))
+              ( right-leq-real-bound-neighborhood-ℝ d x y I))))
         ( leq-abs-leq-leq-neg-ℝ
           ( y)
           ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
@@ -224,7 +225,7 @@ module _
               ( x)
               ( abs-ℝ x)
               ( leq-abs-ℝ x))
-            ( right-real-bound-neighborhood-leq-ℝ d x y I))
+            ( right-leq-real-bound-neighborhood-ℝ d x y I))
           ( transitive-leq-ℝ
             ( neg-ℝ y)
             ( neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
@@ -234,13 +235,13 @@ module _
               ( neg-ℝ x)
               ( abs-ℝ x)
               ( neg-leq-abs-ℝ x))
-            ( reverses-lower-neighborhood-leq-neg-ℝ
+            ( reverses-lower-neighborhood-neg-ℝ
               ( d)
               ( x)
               ( y)
-              ( left-real-bound-neighborhood-leq-ℝ d x y I))))
+              ( left-leq-real-bound-neighborhood-ℝ d x y I))))
 
   short-abs-ℝ :
-    short-function-Metric-Space (metric-space-leq-ℝ l) (metric-space-leq-ℝ l)
+    short-function-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
   short-abs-ℝ = (abs-ℝ , is-short-abs-ℝ)
 ```

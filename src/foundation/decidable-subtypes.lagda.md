@@ -100,6 +100,11 @@ module _
     (a : A) → is-prop (is-in-decidable-subtype a)
   is-prop-is-in-decidable-subtype =
     is-prop-is-in-subtype subtype-decidable-subtype
+
+  is-proof-irrelevant-is-in-decidable-subtype :
+    (a : A) → is-proof-irrelevant (is-in-decidable-subtype a)
+  is-proof-irrelevant-is-in-decidable-subtype a =
+    is-proof-irrelevant-is-prop (is-prop-is-in-decidable-subtype a)
 ```
 
 ### The underlying type of a decidable subtype
@@ -161,14 +166,14 @@ module _
       ( is-decidable-emb-map-decidable-emb f)
       ( y)
 
-  compute-type-decidable-type-decidable-emb :
+  compute-type-decidable-subtype-decidable-emb :
     type-decidable-subtype decidable-subtype-decidable-emb ≃ X
-  compute-type-decidable-type-decidable-emb =
+  compute-type-decidable-subtype-decidable-emb =
     equiv-total-fiber (map-decidable-emb f)
 
-  inv-compute-type-decidable-type-decidable-emb :
+  inv-compute-type-decidable-subtype-decidable-emb :
     X ≃ type-decidable-subtype decidable-subtype-decidable-emb
-  inv-compute-type-decidable-type-decidable-emb =
+  inv-compute-type-decidable-subtype-decidable-emb =
     inv-equiv-total-fiber (map-decidable-emb f)
 ```
 

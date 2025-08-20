@@ -60,8 +60,9 @@ Below is a summary of the tasks this tool performs:
 - **Markdown conventions**: Checks/enforces various of our conventions related
   to markdown code. This includes removing punctuation in section headers,
   removing empty code blocks, ensuring that there is only one top-level header
-  and that this is placed on the first line of the file, and checking that no
-  section is void of contents.
+  and that this is placed on the first line of the file, checking that no
+  section is void of contents, checking that headings don't contain links, and
+  checking that file names consist only of ASCII characters.
 
 - **Blank line conventions**: Searches for and removes any double or multiple
   blank lines.

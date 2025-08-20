@@ -237,3 +237,18 @@ module _
   interchange-sum-add-finite-Commutative-Semiring =
     interchange-sum-add-finite-Semiring (semiring-Commutative-Semiring R) A
 ```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  sum-zero-finite-Commutative-Semiring :
+    {l2 : Level} (A : Finite-Type l2) →
+    sum-finite-Commutative-Semiring R A (λ _ → zero-Commutative-Semiring R) ＝
+    zero-Commutative-Semiring R
+  sum-zero-finite-Commutative-Semiring =
+    sum-zero-finite-Semiring (semiring-Commutative-Semiring R)
+```

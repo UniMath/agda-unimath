@@ -29,6 +29,8 @@ open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
+open import foundation.axiom-of-countable-choice public
+open import foundation.axiom-of-dependent-choice public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
 open import foundation.bicomposition-functions public
@@ -57,6 +59,7 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coalgebras-maybe public
 open import foundation.codiagonal-maps-of-types public
+open import foundation.coherently-constant-maps public
 open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
 open import foundation.coinhabited-pairs-of-types public
@@ -110,6 +113,7 @@ open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
+open import foundation.decidable-type-families public
 open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
@@ -144,6 +148,9 @@ open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
+open import foundation.double-negation-dense-equality public
+open import foundation.double-negation-dense-equality-maps public
+open import foundation.double-negation-images public
 open import foundation.double-negation-modality public
 open import foundation.double-negation-stable-equality public
 open import foundation.double-negation-stable-propositions public
@@ -197,6 +204,7 @@ open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.fixed-points-endofunctions public
+open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -223,6 +231,7 @@ open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public
 open import foundation.globular-type-of-functions public
 open import foundation.higher-homotopies-morphisms-arrows public
+open import foundation.hilbert-epsilon-operators-maps public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
@@ -241,7 +250,10 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.inequality-booleans public
 open import foundation.infinitely-coherent-equivalences public
+open import foundation.infinity-connected-maps public
+open import foundation.infinity-connected-types public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
@@ -250,6 +262,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-equality public
 open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
@@ -276,6 +289,7 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maybe public
@@ -308,6 +322,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.noninjective-maps public
 open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
@@ -372,6 +387,7 @@ open import foundation.sections public
 open import foundation.separated-types-subuniverses public
 open import foundation.sequences public
 open import foundation.sequential-limits public
+open import foundation.set-coequalizers public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public

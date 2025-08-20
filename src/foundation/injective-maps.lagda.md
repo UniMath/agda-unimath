@@ -9,7 +9,6 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -33,7 +32,8 @@ open import foundation-core.sets
 
 ## Idea
 
-A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is **injective**, also called _left cancellable_, if
+`f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
@@ -43,17 +43,6 @@ maps between general types it is recommended to use the notion of
 [embedding](foundation-core.embeddings.md).
 
 ## Definitions
-
-### Noninjective maps
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-not-injective : (A → B) → UU (l1 ⊔ l2)
-  is-not-injective f = ¬ (is-injective f)
-```
 
 ### Any map out of an empty type is injective
 
@@ -157,3 +146,4 @@ module _
 
 - [Embeddings](foundation-core.embeddings.md)
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
+- [Noninjective maps](foundation.noninjective-maps.md)

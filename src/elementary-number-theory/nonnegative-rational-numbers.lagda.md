@@ -160,7 +160,9 @@ nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
 ### The rational image of a nonnegative integer fraction is nonnegative
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-nonnegative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-nonnegative-fraction-ℤ x) →
     is-nonnegative-ℚ (rational-fraction-ℤ x)
@@ -178,7 +180,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding leq-ℚ-Prop
+
     leq-zero-is-nonnegative-ℚ : is-nonnegative-ℚ x → leq-ℚ zero-ℚ x
     leq-zero-is-nonnegative-ℚ =
       is-nonnegative-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
@@ -216,7 +220,9 @@ positive-succ-ℚ⁰⁺ (q , H) = (succ-ℚ q , is-positive-succ-is-nonnegative-
 ### The product of two nonnegative rational numbers is nonnegative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   is-nonnegative-mul-nonnegative-ℚ :
     {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y →
     is-nonnegative-ℚ (x *ℚ y)
@@ -232,7 +238,10 @@ abstract
 ### Multiplication by a nonnegative rational number preserves inequality
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℚ-Prop
+  unfolding mul-ℚ
+
   preserves-leq-right-mul-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
@@ -269,7 +278,9 @@ abstract
 ### Addition on nonnegative rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   is-nonnegative-add-ℚ :
     (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (p +ℚ q)
@@ -293,7 +304,9 @@ _+ℚ⁰⁺_ = add-ℚ⁰⁺
 ### Multiplication on nonnegative rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   is-nonnegative-mul-ℚ :
     (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (p *ℚ q)

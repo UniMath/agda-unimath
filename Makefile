@@ -8,6 +8,10 @@ everythingOpts := --guardedness --cohesion --flat-split --rewriting
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
 
+# use "$ export SKIPAGDA=1" or "make SKIPAGDA=1 ..." to skip Agda processing
+# when building the website
+SKIPAGDA ?=
+
 ifeq ($(CI),)
 	AGDA_MIN_HEAP ?= 2G
 else
@@ -131,7 +135,11 @@ profile-module:
 agda-html: ./src/everything.lagda.md
 	@rm -rf ./docs/
 	@mkdir -p ./docs/
-	@${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md
+# Use bash if instead of ifeq, because we want to change SKIPAGDA with rules
+	@if [ -z "$(SKIPAGDA)" ];\
+	then ${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md; \
+	else python3 ./scripts/generate_noagda_html.py ./docs/; \
+	fi
 
 SUMMARY.md: ${AGDAFILES} ./scripts/generate_main_index_file.py
 	@python3 ./scripts/generate_main_index_file.py
@@ -161,11 +169,13 @@ website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
 
 .PHONY: website
 website: website-prepare
-	@mdbook build
+	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
+	  mdbook build
 
 .PHONY: serve-website
 serve-website: website-prepare
-	@mdbook serve -p 8080 --open -d ./book/html
+	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
+	  mdbook serve -p 8080 --open -d ./book/html
 
 docs/dependency.dot : ./src/everything.lagda.md ${AGDAFILES}
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=$@ $<

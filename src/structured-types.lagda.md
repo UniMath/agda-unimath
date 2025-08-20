@@ -39,6 +39,7 @@ open import structured-types.involutive-types public
 open import structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms public
 open import structured-types.iterated-pointed-cartesian-product-types public
 open import structured-types.magmas public
+open import structured-types.medial-magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
@@ -68,6 +69,7 @@ open import structured-types.pointed-unit-type public
 open import structured-types.pointed-universal-property-contractible-types public
 open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
+open import structured-types.product-magmas public
 open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.small-pointed-types public
 open import structured-types.symmetric-elements-involutive-types public

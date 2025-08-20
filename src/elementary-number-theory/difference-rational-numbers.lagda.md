@@ -75,7 +75,9 @@ abstract
 ### The difference of a rational number with zero is itself
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
   right-zero-law-diff-ℚ = right-unit-law-add-ℚ
 ```

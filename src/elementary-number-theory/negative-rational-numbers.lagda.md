@@ -95,14 +95,17 @@ module _
   is-negative-rational-ℚ⁻ : is-negative-ℚ rational-ℚ⁻
   is-negative-rational-ℚ⁻ = pr2 x
 
-  is-negative-fraction-ℚ⁻ : is-negative-fraction-ℤ fraction-ℚ⁻
-  is-negative-fraction-ℚ⁻ =
-    tr
-      ( is-negative-fraction-ℤ)
-      ( neg-neg-fraction-ℤ fraction-ℚ⁻)
-      ( is-negative-neg-positive-fraction-ℤ
-        ( neg-fraction-ℤ fraction-ℚ⁻)
-        ( is-negative-rational-ℚ⁻))
+  opaque
+    unfolding neg-ℚ
+
+    is-negative-fraction-ℚ⁻ : is-negative-fraction-ℤ fraction-ℚ⁻
+    is-negative-fraction-ℚ⁻ =
+      tr
+        ( is-negative-fraction-ℤ)
+        ( neg-neg-fraction-ℤ fraction-ℚ⁻)
+        ( is-negative-neg-positive-fraction-ℤ
+          ( neg-fraction-ℤ fraction-ℚ⁻)
+          ( is-negative-rational-ℚ⁻))
 
   is-negative-numerator-ℚ⁻ : is-negative-ℤ numerator-ℚ⁻
   is-negative-numerator-ℚ⁻ = is-negative-fraction-ℚ⁻
@@ -133,7 +136,9 @@ is-set-ℚ⁻ = is-set-type-subtype is-negative-prop-ℚ is-set-ℚ
 ### The rational image of a negative integer is negative
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   is-negative-rational-ℤ :
     (x : ℤ) → is-negative-ℤ x → is-negative-ℚ (rational-ℤ x)
   is-negative-rational-ℤ _ = is-positive-neg-is-negative-ℤ
@@ -146,7 +151,10 @@ negative-rational-negative-ℤ (x , x-is-neg) =
 ### The rational image of a negative integer fraction is negative
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+  unfolding rational-fraction-ℤ
+
   is-negative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-negative-fraction-ℤ x) →
     is-negative-ℚ (rational-fraction-ℤ x)
@@ -161,7 +169,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding neg-ℚ
+
     le-zero-is-negative-ℚ : is-negative-ℚ x → le-ℚ x zero-ℚ
     le-zero-is-negative-ℚ x-is-neg =
       tr
@@ -213,7 +223,10 @@ abstract
 ### The product of two negative rational numbers is positive
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
+
   is-positive-mul-negative-ℚ :
     {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)
   is-positive-mul-negative-ℚ {x} {y} P Q =

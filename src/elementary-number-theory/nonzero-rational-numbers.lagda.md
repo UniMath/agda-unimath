@@ -112,7 +112,9 @@ one-nonzero-ℚ = (one-ℚ , is-nonzero-one-ℚ)
 ### The negative of a nonzero rational number is nonzero
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   is-nonzero-neg-ℚ : {x : ℚ} → is-nonzero-ℚ x → is-nonzero-ℚ (neg-ℚ x)
   is-nonzero-neg-ℚ {x} H =
     is-nonzero-is-nonzero-numerator-ℚ

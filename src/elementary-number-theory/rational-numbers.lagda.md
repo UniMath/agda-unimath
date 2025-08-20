@@ -93,9 +93,10 @@ module _
 ### Inclusion of fractions
 
 ```agda
-rational-fraction-ℤ : fraction-ℤ → ℚ
-pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
-pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
+opaque
+  rational-fraction-ℤ : fraction-ℤ → ℚ
+  pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
+  pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ```
 
 ### Inclusion of the integers
@@ -142,20 +143,22 @@ is-one-ℚ x = (x ＝ one-ℚ)
 ### The negative of a rational number
 
 ```agda
-neg-ℚ : ℚ → ℚ
-pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
-pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
+opaque
+  neg-ℚ : ℚ → ℚ
+  pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
+  pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
 ```
 
 ### The mediant of two rationals
 
 ```agda
-mediant-ℚ : ℚ → ℚ → ℚ
-mediant-ℚ x y =
-  rational-fraction-ℤ
-    ( mediant-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y))
+opaque
+  mediant-ℚ : ℚ → ℚ → ℚ
+  mediant-ℚ x y =
+    rational-fraction-ℤ
+      ( mediant-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y))
 ```
 
 ## Properties
@@ -163,7 +166,9 @@ mediant-ℚ x y =
 ### The rational images of two similar integer fractions are equal
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   eq-ℚ-sim-fraction-ℤ :
     (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
     rational-fraction-ℤ x ＝ rational-fraction-ℤ y
@@ -192,7 +197,9 @@ pr2 ℚ-Set = is-set-ℚ
 ### The rationals are a retract of the integer fractions
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
   is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
@@ -277,7 +284,9 @@ module _
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   preserves-neg-rational-ℤ :
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
   preserves-neg-rational-ℤ k =
@@ -287,7 +296,10 @@ abstract
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+  unfolding rational-fraction-ℤ
+
   preserves-neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
@@ -305,7 +317,9 @@ abstract
 ### The negative function on the rational numbers is an involution
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
   neg-neg-ℚ x = eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
 ```

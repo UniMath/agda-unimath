@@ -40,8 +40,9 @@ basic properties.
 ## Definition
 
 ```agda
-add-ℚ : ℚ → ℚ → ℚ
-add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
+opaque
+  add-ℚ : ℚ → ℚ → ℚ
+  add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
 
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
@@ -69,7 +70,9 @@ pred-ℚ = add-ℚ neg-one-ℚ
 ### Unit laws
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
   left-unit-law-add-ℚ (x , p) =
     eq-ℚ-sim-fraction-ℤ
@@ -90,7 +93,10 @@ abstract
 ### Addition is associative
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding rational-fraction-ℤ
+
   associative-add-ℚ :
     (x y z : ℚ) →
     (x +ℚ y) +ℚ z ＝ x +ℚ (y +ℚ z)
@@ -117,7 +123,9 @@ abstract
 ### Addition is commutative
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   commutative-add-ℚ :
     (x y : ℚ) →
     x +ℚ y ＝ y +ℚ x
@@ -144,7 +152,10 @@ abstract
 ### The negative of a rational number is its additive inverse
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -180,7 +191,10 @@ abstract
 ### The negatives of rational numbers distribute over addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
@@ -194,7 +208,10 @@ abstract
 ### The successor and predecessor functions on ℚ are mutual inverses
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
   is-retraction-pred-ℚ x =
     equational-reasoning
@@ -238,7 +255,10 @@ pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
 ### The inclusion of integer fractions preserves addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding rational-fraction-ℤ
+
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
     rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝

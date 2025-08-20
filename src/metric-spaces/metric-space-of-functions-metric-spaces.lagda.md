@@ -17,6 +17,7 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -78,7 +79,7 @@ module _
   ( f :
     cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B))
-  ( g : map-type-Metric-Space A B)
+  ( g : type-function-Metric-Space A B)
   where
 
   is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space :

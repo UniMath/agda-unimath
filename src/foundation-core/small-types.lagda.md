@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -25,8 +26,10 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
+open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -132,15 +135,14 @@ module _
   is-prop-is-small = is-prop-is-proof-irrelevant is-proof-irrelevant-is-small
 
   is-small-Prop : Prop (lsuc l ⊔ l1)
-  is-small-Prop = is-small l A , is-prop-is-small
+  is-small-Prop = (is-small l A , is-prop-is-small)
 ```
 
 ### Any type in `UU l1` is `l1`-small
 
 ```agda
 is-small' : {l1 : Level} {A : UU l1} → is-small l1 A
-pr1 (is-small' {A = A}) = A
-pr2 is-small' = id-equiv
+is-small' {A = A} = (A , id-equiv)
 ```
 
 ### Every type of universe level `l1` is `(l1 ⊔ l2)`-small
@@ -151,8 +153,7 @@ module _
   where
 
   is-small-lmax : is-small (l1 ⊔ l2) X
-  pr1 is-small-lmax = raise l2 X
-  pr2 is-small-lmax = compute-raise l2 X
+  is-small-lmax = (raise l2 X , compute-raise l2 X)
 
   is-contr-is-small-lmax :
     is-contr (is-small (l1 ⊔ l2) X)
@@ -164,7 +165,7 @@ module _
 
 ```agda
 is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
-is-small-lsuc {l} X = is-small-lmax (lsuc l) X
+is-small-lsuc {l} = is-small-lmax (lsuc l)
 ```
 
 ### Small types are closed under equivalences
@@ -173,8 +174,7 @@ is-small-lsuc {l} X = is-small-lmax (lsuc l) X
 is-small-equiv :
   {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
   A ≃ B → is-small l3 B → is-small l3 A
-pr1 (is-small-equiv B e (X , h)) = X
-pr2 (is-small-equiv B e (X , h)) = h ∘e e
+is-small-equiv B e (X , h) = (X , h ∘e e)
 
 is-small-equiv' :
   {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
@@ -210,13 +210,31 @@ is-small-mere-equiv l e H =
     ( λ e' → is-small-equiv _ e' H)
 ```
 
+### The equality type of the smallness predicate is equivalent to the fiber of `equiv-eq`
+
+This computation uses the function extensionality axiom.
+
+```agda
+compute-eq-is-small :
+  {l1 l2 : Level} {X : UU l1} (α β : is-small l2 X) →
+  (α ＝ β) ≃ fiber equiv-eq (equiv-is-small β ∘e inv-equiv-is-small α)
+compute-eq-is-small {X = X} (Y , α) (Y' , α') =
+  equivalence-reasoning
+  ( (Y , α) ＝ (Y' , α'))
+  ≃ Σ (Y ＝ Y') (λ x → dependent-identification (λ Y → X ≃ Y) x α α')
+    by equiv-pair-eq-Σ (Y , α) (Y' , α')
+  ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ∘e α ＝ α')
+    by equiv-tot (λ p → equiv-concat (tr-equiv-type-right p α) α')
+  ≃ Σ (Y ＝ Y') (λ x → equiv-eq x ＝ α' ∘e inv-equiv α)
+    by equiv-tot (λ p → equiv-right-transpose-equiv-comp α (equiv-eq p) α')
+```
+
 ### Any contractible type is small
 
 ```agda
 is-small-is-contr :
   (l : Level) {l1 : Level} {A : UU l1} → is-contr A → is-small l A
-pr1 (is-small-is-contr l H) = raise-unit l
-pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
+is-small-is-contr l H = (raise-unit l , equiv-is-contr H is-contr-raise-unit)
 ```
 
 ### The unit type is small with respect to any universe

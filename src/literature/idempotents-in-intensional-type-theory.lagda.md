@@ -205,12 +205,12 @@ splitting.
 
 ```agda
 open import foundation.weakly-constant-maps using
-  ( is-weakly-constant -- "the type of witnesses that a map is weakly constant"
+  ( is-weakly-constant-map -- "the type of witnesses that a map is weakly constant"
   ; weakly-constant-map -- "the type of weakly constant maps"
   )
 
 open import foundation.split-idempotent-maps using
-  ( is-split-idempotent-is-weakly-constant-is-idempotent
+  ( is-split-idempotent-is-weakly-constant-map-is-idempotent
   )
 ```
 

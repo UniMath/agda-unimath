@@ -15,6 +15,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -98,6 +99,9 @@ module _
 ```agda
 one-positive-ℤ : positive-ℤ
 one-positive-ℤ = (one-ℤ , star)
+
+one-ℤ⁺ : ℤ⁺
+one-ℤ⁺ = one-positive-ℤ
 ```
 
 ## Properties
@@ -105,7 +109,7 @@ one-positive-ℤ = (one-ℤ , star)
 ### Positivity is decidable
 
 ```agda
-is-decidable-is-positive-ℤ : is-decidable-fam is-positive-ℤ
+is-decidable-is-positive-ℤ : is-decidable-family is-positive-ℤ
 is-decidable-is-positive-ℤ (inl x) = inr id
 is-decidable-is-positive-ℤ (inr (inl x)) = inr id
 is-decidable-is-positive-ℤ (inr (inr x)) = inl star
@@ -156,6 +160,27 @@ is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
 
 positive-int-ℕ⁺ : ℕ⁺ → positive-ℤ
 positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n≠0
+
+positive-nat-ℤ⁺ : positive-ℤ → ℕ⁺
+positive-nat-ℤ⁺ (inr (inr x) , k>0) = succ-nonzero-ℕ' x
+
+abstract
+  is-section-positive-nat-ℤ⁺ :
+    (k : ℤ⁺) → positive-int-ℕ⁺ (positive-nat-ℤ⁺ k) ＝ k
+  is-section-positive-nat-ℤ⁺ (inr (inr k) , k>0) =
+    eq-type-subtype subtype-positive-ℤ refl
+
+  is-retraction-positive-nat-ℤ⁺ :
+    (n : ℕ⁺) → positive-nat-ℤ⁺ (positive-int-ℕ⁺ n) ＝ n
+  is-retraction-positive-nat-ℤ⁺ (zero-ℕ , n≠0) = ex-falso (n≠0 refl)
+  is-retraction-positive-nat-ℤ⁺ (succ-ℕ n , n≠0) = eq-nonzero-ℕ refl
+
+  is-equiv-positive-int-ℕ⁺ : is-equiv positive-int-ℕ⁺
+  is-equiv-positive-int-ℕ⁺ =
+    is-equiv-is-invertible
+      ( positive-nat-ℤ⁺)
+      ( is-section-positive-nat-ℤ⁺)
+      ( is-retraction-positive-nat-ℤ⁺)
 ```
 
 ### The canonical equivalence between natural numbers and positive integers

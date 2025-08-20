@@ -11,6 +11,8 @@ authors:
     given-names: "Jonathan"
   - family-names: "Bakke"
     given-names: "Fredrik"
+  - family-names: "Štěpančík"
+    given-names: "Vojtěch"
   - name: "others"
 url: "https://unimath.github.io/agda-unimath/"
 repository-code: "https://github.com/UniMath/agda-unimath/"

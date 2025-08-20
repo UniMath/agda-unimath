@@ -245,14 +245,14 @@ module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
   where
 
-  eq-zero-eq-zero-sum-zero-fin-sequence-type-RingCommutative-Monoid :
+  sum-zero-finite-Commutative-Monoid :
     is-unit-Commutative-Monoid
       ( M)
       ( sum-finite-Commutative-Monoid
         ( M)
         ( A)
         ( λ _ → unit-Commutative-Monoid M))
-  eq-zero-eq-zero-sum-zero-fin-sequence-type-RingCommutative-Monoid =
+  sum-zero-finite-Commutative-Monoid =
     let
       open
         do-syntax-trunc-Prop

@@ -7,14 +7,21 @@ module ring-theory.function-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-maps
+open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.monoids
 
+open import linear-algebra.left-modules-rings
+
 open import ring-theory.dependent-products-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -131,4 +138,88 @@ module _
     add-function-Ring (mul-function-Ring f h) (mul-function-Ring g h)
   right-distributive-mul-add-function-Ring =
     right-distributive-mul-add-Π-Ring X (λ _ → R)
+```
+
+## Properties
+
+### The constant map is a ring homomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : UU l2)
+  where
+
+  const-hom-function-Ring : hom-Ring R (function-Ring R I)
+  const-hom-function-Ring =
+    ( ( const I) ,
+      ( λ {x y} → refl)) ,
+    ( ( λ {x y} → refl) ,
+      ( refl))
+```
+
+### The evaluation maps are ring homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : UU l2) (i : I)
+  where
+
+  ev-hom-function-Ring : hom-Ring (function-Ring R I) R
+  ev-hom-function-Ring =
+    ( ( ev i) ,
+      ( λ {x y} → refl)) ,
+    ( ( λ {x y} → refl) ,
+      ( refl))
+```
+
+### Evaluating a constant ring function is the identity homomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : UU l2) (i : I)
+  where
+
+  eq-ev-const-hom-function-Ring :
+    comp-hom-Ring
+      ( R)
+      ( function-Ring R I)
+      ( R)
+      ( ev-hom-function-Ring R I i)
+      ( const-hom-function-Ring R I) ＝
+    id-hom-Ring R
+  eq-ev-const-hom-function-Ring =
+    eq-htpy-hom-Ring
+      ( R)
+      ( R)
+      ( comp-hom-Ring
+        ( R)
+        ( function-Ring R I)
+        ( R)
+        ( ev-hom-function-Ring R I i)
+        ( const-hom-function-Ring R I))
+      ( id-hom-Ring R)
+      ( λ x → refl)
+```
+
+### The abelian group of functions in a ring is a left module over it
+
+```agda
+module _
+  {lr li : Level} (R : Ring lr) (I : UU li)
+  where
+
+  hom-ring-ab-function-Ring :
+    hom-Ring R (endomorphism-ring-Ab (ab-Ring (function-Ring R I)))
+  hom-ring-ab-function-Ring =
+    comp-hom-Ring
+      ( R)
+      ( function-Ring R I)
+      ( endomorphism-ring-Ab (ab-Ring (function-Ring R I)))
+      ( hom-mul-endomorphism-ring-ab-Ring (function-Ring R I))
+      ( const-hom-function-Ring R I)
+
+  left-module-function-Ring : left-module-Ring (lr ⊔ li) R
+  left-module-function-Ring =
+    ( ab-Ring (function-Ring R I)) ,
+    ( hom-ring-ab-function-Ring)
 ```
