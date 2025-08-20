@@ -67,17 +67,18 @@ type.
 ### The directed interval type
 
 ```agda
-Δ¹ : UU I1
-Δ¹ = type-Nontrivial-Bounded-Total-Order I
+opaque
+  Δ¹ : UU I1
+  Δ¹ = type-Nontrivial-Bounded-Total-Order I
 
-0▵ : Δ¹
-0▵ = bottom-Nontrivial-Bounded-Total-Order I
+  0▵ : Δ¹
+  0▵ = bottom-Nontrivial-Bounded-Total-Order I
 
-1▵ : Δ¹
-1▵ = top-Nontrivial-Bounded-Total-Order I
+  1▵ : Δ¹
+  1▵ = top-Nontrivial-Bounded-Total-Order I
 
-is-nontrivial-Δ¹ : 0▵ ≠ 1▵
-is-nontrivial-Δ¹ = is-nontrivial-Nontrivial-Bounded-Total-Order I
+  is-nontrivial-Δ¹ : 0▵ ≠ 1▵
+  is-nontrivial-Δ¹ = is-nontrivial-Nontrivial-Bounded-Total-Order I
 ```
 
 ## Properties

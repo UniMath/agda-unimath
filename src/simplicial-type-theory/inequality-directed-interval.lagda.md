@@ -55,13 +55,16 @@ on the [directed interval type](simplicial-type-theory.directed-interval.md)
 ### The directed relation on the directed interval
 
 ```agda
-infix 30 _≤-Δ¹_
+opaque
+  unfolding Δ¹
 
-_≤-Δ¹_ : Δ¹ → Δ¹ → UU I2
-_≤-Δ¹_ = leq-Nontrivial-Bounded-Total-Order I
+  infix 30 _≤-Δ¹_
 
-is-prop-leq-Δ¹ : {x y : Δ¹} → is-prop (x ≤-Δ¹ y)
-is-prop-leq-Δ¹ {x} {y} = is-prop-leq-Nontrivial-Bounded-Total-Order I x y
+  _≤-Δ¹_ : Δ¹ → Δ¹ → UU I2
+  _≤-Δ¹_ = leq-Nontrivial-Bounded-Total-Order I
+
+  is-prop-leq-Δ¹ : {x y : Δ¹} → is-prop (x ≤-Δ¹ y)
+  is-prop-leq-Δ¹ {x} {y} = is-prop-leq-Nontrivial-Bounded-Total-Order I x y
 
 leq-Δ¹-Prop : (x y : Δ¹) → Prop I2
 leq-Δ¹-Prop x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
@@ -73,20 +76,23 @@ leq-Δ¹ = _≤-Δ¹_
 ### The directed relation is a total order
 
 ```agda
-refl-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ x
-refl-leq-Δ¹ {x} = refl-leq-Nontrivial-Bounded-Total-Order I x
+opaque
+  unfolding Δ¹ _≤-Δ¹_
 
-transitive-leq-Δ¹ : {x y z : Δ¹} → y ≤-Δ¹ z → x ≤-Δ¹ y → x ≤-Δ¹ z
-transitive-leq-Δ¹ {x} {y} {z} =
-  transitive-leq-Nontrivial-Bounded-Total-Order I x y z
+  refl-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ x
+  refl-leq-Δ¹ {x} = refl-leq-Nontrivial-Bounded-Total-Order I x
 
-antisymmetric-leq-Δ¹ : {x y : Δ¹} → x ≤-Δ¹ y → y ≤-Δ¹ x → x ＝ y
-antisymmetric-leq-Δ¹ {x} {y} =
-  antisymmetric-leq-Nontrivial-Bounded-Total-Order I x y
+  transitive-leq-Δ¹ : {x y z : Δ¹} → y ≤-Δ¹ z → x ≤-Δ¹ y → x ≤-Δ¹ z
+  transitive-leq-Δ¹ {x} {y} {z} =
+    transitive-leq-Nontrivial-Bounded-Total-Order I x y z
 
-is-total-leq-Δ¹ : (x y : Δ¹) → disjunction-type (x ≤-Δ¹ y) (y ≤-Δ¹ x)
-is-total-leq-Δ¹ =
-  is-total-Total-Order (total-order-Nontrivial-Bounded-Total-Order I)
+  antisymmetric-leq-Δ¹ : {x y : Δ¹} → x ≤-Δ¹ y → y ≤-Δ¹ x → x ＝ y
+  antisymmetric-leq-Δ¹ {x} {y} =
+    antisymmetric-leq-Nontrivial-Bounded-Total-Order I x y
+
+  is-total-leq-Δ¹ : (x y : Δ¹) → disjunction-type (x ≤-Δ¹ y) (y ≤-Δ¹ x)
+  is-total-leq-Δ¹ =
+    is-total-Total-Order (total-order-Nontrivial-Bounded-Total-Order I)
 
 total-leq-Δ¹' : {x y : Δ¹} → (x ≤-Δ¹ y) * (y ≤-Δ¹ x)
 total-leq-Δ¹' {x} {y} =
@@ -107,11 +113,14 @@ rewrite rules for by importing the module
 ### The source and target of the directed interval are bottom and top elements
 
 ```agda
-min-leq-Δ¹ : {x : Δ¹} → 0▵ ≤-Δ¹ x
-min-leq-Δ¹ {x} = is-bottom-element-bottom-Nontrivial-Bounded-Total-Order I x
+opaque
+  unfolding Δ¹ _≤-Δ¹_
 
-max-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ 1▵
-max-leq-Δ¹ {x} = is-top-element-top-Nontrivial-Bounded-Total-Order I x
+  min-leq-Δ¹ : {x : Δ¹} → 0▵ ≤-Δ¹ x
+  min-leq-Δ¹ {x} = is-bottom-element-bottom-Nontrivial-Bounded-Total-Order I x
+
+  max-leq-Δ¹ : {x : Δ¹} → x ≤-Δ¹ 1▵
+  max-leq-Δ¹ {x} = is-top-element-top-Nontrivial-Bounded-Total-Order I x
 ```
 
 ## Operations
