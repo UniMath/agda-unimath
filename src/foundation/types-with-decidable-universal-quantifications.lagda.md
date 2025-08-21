@@ -1,7 +1,7 @@
 # Types with decidable universal quantifications
 
 ```agda
-module foundation.types-with-decidable-universal-quantification where
+module foundation.types-with-decidable-universal-quantifications where
 ```
 
 <details><summary>Imports</summary>

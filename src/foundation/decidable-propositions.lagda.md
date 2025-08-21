@@ -129,9 +129,6 @@ module _
   bool-Decidable-Prop : Decidable-Prop l → bool
   bool-Decidable-Prop = map-equiv equiv-bool-Decidable-Prop
 
-  bool-Decidable-Prop : Decidable-Prop l → bool
-  bool-Decidable-Prop = map-equiv equiv-bool-Decidable-Prop
-
   abstract
     compute-equiv-bool-Decidable-Prop :
       (P : Decidable-Prop l) →

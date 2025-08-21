@@ -11,7 +11,6 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.irrefutable-equality
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.propositions
@@ -23,6 +22,7 @@ open import foundation.universe-levels
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation.double-negation-dense-equality
 open import foundation-core.function-types
 
 open import logic.propositionally-decidable-types
@@ -53,14 +53,15 @@ is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
 is-decidable-Π-uniformly-decidable-family (inr na) _ =
   inl (ex-falso ∘ na)
 
-is-decidable-prop-Π-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A →
-  is-uniformly-decidable-family B →
-  ((x : A) → is-prop (B x)) →
-  is-decidable-prop ((a : A) → (B a))
-is-decidable-prop-Π-uniformly-decidable-family dA dB H =
-  ( is-prop-Π H , is-decidable-Π-uniformly-decidable-family dA dB)
+abstract
+  is-decidable-prop-Π-uniformly-decidable-family :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-decidable A →
+    is-uniformly-decidable-family B →
+    ((x : A) → is-prop (B x)) →
+    is-decidable-prop ((a : A) → (B a))
+  is-decidable-prop-Π-uniformly-decidable-family dA dB H =
+    ( is-prop-Π H , is-decidable-Π-uniformly-decidable-family dA dB)
 
 abstract
   is-decidable-prop-Π-uniformly-decidable-family' :
@@ -150,8 +151,8 @@ module _
 
 ### Dependent products of decidable propositions over a base with mere equality are decidable propositions
 
-Assuming the base `A` is empty or 0-connected, a dependent product of decidable
-propositions over `A` is again a decidable proposition.
+Assuming that all elements are merely equal in a type `A` then a dependent
+product of decidable propositions over `A` is again a decidable proposition.
 
 ```agda
 module _

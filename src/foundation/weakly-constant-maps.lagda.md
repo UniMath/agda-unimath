@@ -125,35 +125,7 @@ module _
     ( fixed-point f , is-prop-fixed-point-is-weakly-constant-map)
 ```
 
-### The type of fixed points of a weakly constant endomap is a proposition
-
-This is Lemma 4.1 of {{#cite KECA17}}. We follow the second proof, due to
-Christian Sattler.
-
-```agda
-module _
-  {l : Level} {A : UU l} {f : A → A} (W : is-weakly-constant f)
-  where
-
-  is-proof-irrelevant-fixed-point-is-weakly-constant :
-    is-proof-irrelevant (fixed-point f)
-  is-proof-irrelevant-fixed-point-is-weakly-constant (x , p) =
-    is-contr-equiv
-      ( Σ A (λ z → f x ＝ z))
-      ( equiv-tot (λ z → equiv-concat (W x z) z))
-      ( is-torsorial-Id (f x))
-
-  is-prop-fixed-point-is-weakly-constant : is-prop (fixed-point f)
-  is-prop-fixed-point-is-weakly-constant =
-    is-prop-is-proof-irrelevant
-      ( is-proof-irrelevant-fixed-point-is-weakly-constant)
-
-  prop-fixed-point-is-weakly-constant : Prop l
-  prop-fixed-point-is-weakly-constant =
-    ( fixed-point f , is-prop-fixed-point-is-weakly-constant)
-```
-
-### The action on identifications of a weakly constant map is weakly constant
+### The action on identifications of weakly constant maps are weakly constant
 
 This is Auxiliary Lemma 4.3 of {{#cite KECA17}}.
 

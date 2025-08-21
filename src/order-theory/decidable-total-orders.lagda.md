@@ -28,6 +28,7 @@ open import order-theory.decidable-posets
 open import order-theory.decidable-total-preorders
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.join-semilattices
+open import order-theory.similarity-of-elements-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets

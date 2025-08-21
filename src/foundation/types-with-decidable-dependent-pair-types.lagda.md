@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
+open import foundation.double-negation-dense-equality
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
@@ -357,7 +358,7 @@ module _
             nxpf
               ( pr1 xr ,
                 tr (family-decidable-family P) (inv (pr2 xr)) (pr2 yp))))
-      ( f (reindex-decidable-family P (map-double-negation-dense-map h)))
+      ( f (base-change-decidable-family P (map-double-negation-dense-map h)))
 ```
 
 ### Having decidable Σ-types transfers along surjections
@@ -425,7 +426,7 @@ has-decidable-Σ-type-decidable-subtype {X = X} f P Q =
   is-decidable-equiv
     ( associative-Σ X (is-in-decidable-subtype P) (family-decidable-family Q))
     ( f ( comp-decidable-family-decidable-subtype P
-          ( reindex-decidable-family Q ∘ pair)))
+          ( base-change-decidable-family Q ∘ pair)))
 
 has-decidable-Σ-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
@@ -481,8 +482,8 @@ module _
               ( λ where
                 (inl x , p) → nx (x , p)
                 (inr y , p) → ny (y , p)))
-          ( g (reindex-decidable-family P inr)))
-      ( f (reindex-decidable-family P inl))
+          ( g (base-change-decidable-family P inr)))
+      ( f (base-change-decidable-family P inl))
 
   has-decidable-Σ-left-summand-coproduct :
     has-decidable-Σ (X + Y) →
@@ -512,7 +513,7 @@ module _
     is-decidable-equiv
       ( associative-Σ A B (family-decidable-family P))
       ( f ( ( λ x → Σ (B x) (λ y → family-decidable-family P (x , y))) ,
-            ( λ x → g x (reindex-decidable-family P (λ b → (x , b))))))
+            ( λ x → g x (base-change-decidable-family P (λ b → (x , b))))))
 ```
 
 ### The total space of decidable families of types with double negation dense equality over types with decidable Σ-types have decidable Σ-types
@@ -632,4 +633,4 @@ has-decidable-Σ-bool' =
 ## See also
 
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
-- [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantification.md)
+- [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantifications.md)

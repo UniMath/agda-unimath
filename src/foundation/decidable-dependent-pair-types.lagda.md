@@ -53,21 +53,6 @@ module _
   is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
 ```
 
-### Decidability of dependent sums over equivalences
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
-  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
-  where
-
-  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
-  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
-
-  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
-  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
-```
-
 ### Dependent sums of a uniformly decidable family of types
 
 ```agda

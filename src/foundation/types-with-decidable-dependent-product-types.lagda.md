@@ -21,6 +21,7 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.double-negation-dense-equality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.irrefutable-equality
@@ -114,7 +115,7 @@ has-decidable-Π-double-negation-dense-map h f P =
                 np (tr (family-decidable-family P) (pr2 yp) (p (pr1 yp))))))
         ( is-decidable-decidable-family P x))
     ( λ nph p → nph (p ∘ map-double-negation-dense-map h))
-    ( f (reindex-decidable-family P (map-double-negation-dense-map h)))
+    ( f (base-change-decidable-family P (map-double-negation-dense-map h)))
 ```
 
 ### Having decidable Π-types transfers along surjections
@@ -196,9 +197,9 @@ module _
         rec-coproduct
           ( λ pr → inl (ind-coproduct (family-decidable-family P) pl pr))
           ( λ npr → inr (λ p → npr (p ∘ inr)))
-          ( g (reindex-decidable-family P inr)))
+          ( g (base-change-decidable-family P inr)))
       ( λ npl → inr (λ p → npl (p ∘ inl)))
-      ( f (reindex-decidable-family P inl))
+      ( f (base-change-decidable-family P inl))
 
   has-decidable-Π-left-summand-coproduct :
     has-decidable-Π (X + Y) →
@@ -231,7 +232,7 @@ module _
   has-decidable-Π-Σ f g P =
     is-decidable-equiv equiv-ev-pair
       ( f ( ( λ x → (y : B x) → family-decidable-family P (x , y)) ,
-            ( λ x → g x (reindex-decidable-family P (pair x)))))
+            ( λ x → g x (base-change-decidable-family P (pair x)))))
 
   has-decidable-Π-base-has-decidable-Π-Σ :
     has-decidable-Π (Σ A B) →
@@ -399,4 +400,4 @@ has-decidable-Π-decidable-emb h f =
 ## See also
 
 - [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md)
-- [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantification.md)
+- [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantifications.md)

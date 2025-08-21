@@ -259,7 +259,7 @@ force-ℕ∞↑' x (succ-ℕ n) = or-bool (x (succ-ℕ n)) (force-ℕ∞↑' x n
 abstract
   is-increasing-force-ℕ∞↑ :
     (x : cantor-space) → is-increasing-binary-sequence (force-ℕ∞↑' x)
-  is-increasing-force-ℕ∞↑ x n = leq-or-bool' {x (succ-ℕ n)} {force-ℕ∞↑' x n}
+  is-increasing-force-ℕ∞↑ x n = right-leq-or-bool {x (succ-ℕ n)} {force-ℕ∞↑' x n}
 
 force-ℕ∞↑ : cantor-space → ℕ∞↑
 force-ℕ∞↑ x = (force-ℕ∞↑' x , is-increasing-force-ℕ∞↑ x)
@@ -274,7 +274,7 @@ abstract
       ( compute-force-ℕ∞↑' x H n)) ∙
     ( antisymmetric-leq-bool
       ( leq-right-or-bool {x n} {x (succ-ℕ n)} (H n))
-      ( leq-or-bool {x (succ-ℕ n)} {x n}))
+      ( left-leq-or-bool {x (succ-ℕ n)} {x n}))
 
 abstract
   is-retraction-force-ℕ∞↑ : is-retraction sequence-ℕ∞↑ force-ℕ∞↑

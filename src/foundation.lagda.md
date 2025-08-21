@@ -476,7 +476,7 @@ open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
 open import foundation.types-with-decidable-dependent-pair-types public
 open import foundation.types-with-decidable-dependent-product-types public
-open import foundation.types-with-decidable-universal-quantification public
+open import foundation.types-with-decidable-universal-quantifications public
 open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
 open import foundation.uniqueness-image public

@@ -81,10 +81,7 @@ module _
   not-in-image-subtype-theorem-Cantor (ξ , α) =
     no-fixed-points-neg-Prop (f ξ ξ) (iff-eq (htpy-eq α ξ))
 
-  theorem-double-negation-dense-Cantor : ¬ (is-double-negation-dense-map f)
-  theorem-double-negation-dense-Cantor H =
-    H subtype-theorem-Cantor not-in-image-subtype-theorem-Cantor
-
+  abstract
     theorem-double-negation-dense-Cantor : ¬ (is-double-negation-dense-map f)
     theorem-double-negation-dense-Cantor H =
       H subtype-theorem-Cantor not-in-image-subtype-theorem-Cantor
