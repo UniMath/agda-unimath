@@ -48,7 +48,7 @@ open import set-theory.inequality-increasing-binary-sequences
 
 The canonical map `ℕ → ℕ∞↑` defined by induction to send zero to zero, and the
 successor of `n` to the successor of the map evaluated at `n` is the
-{{#concept "canonical inclusion" Disambiguaiton="of the natural numbers into increasing binary sequences" Agda=inclusion-ℕ∞↑-ℕ}}.
+{{#concept "canonical inclusion" Disambiguation="of the natural numbers into increasing binary sequences" Agda=inclusion-ℕ∞↑-ℕ}}.
 This map is a [embedding](foundation-core.embeddings.md) of
 [sets](foundation-core.sets.md) that is
 non-[surjective](foundation.surjective-maps.md), as it does not hit the element

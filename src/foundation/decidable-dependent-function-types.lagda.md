@@ -10,6 +10,7 @@ module foundation.decidable-dependent-function-types where
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
 open import foundation.functoriality-dependent-function-types
 open import foundation.maybe
 open import foundation.mere-equality
@@ -22,7 +23,6 @@ open import foundation.universe-levels
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation.double-negation-dense-equality
 open import foundation-core.function-types
 
 open import logic.propositionally-decidable-types

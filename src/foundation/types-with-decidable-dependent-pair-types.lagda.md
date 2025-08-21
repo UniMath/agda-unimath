@@ -14,12 +14,12 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
-open import foundation.double-negation-dense-equality
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types

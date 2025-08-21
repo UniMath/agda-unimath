@@ -18,10 +18,10 @@ open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.double-negation-dense-equality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.irrefutable-equality
