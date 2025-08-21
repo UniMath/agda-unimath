@@ -56,8 +56,8 @@ tight-apartness-relation-baire-space :
   Tight-Apartness-Relation lzero baire-space
 tight-apartness-relation-baire-space =
   tight-apartness-relation-function-into-Type-With-Tight-Apartness
-    ℕ
-    ℕ-Type-With-Tight-Apartness
+    ( ℕ)
+    ( ℕ-Type-With-Tight-Apartness)
 
 baire-space-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
 baire-space-Type-With-Tight-Apartness =

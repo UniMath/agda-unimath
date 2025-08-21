@@ -208,14 +208,10 @@ module _
 
 {{#bibliography}} {{#reference KECA17}}
 
-# <<<<<<< HEAD
-
 ## See also
 
 - [Coherently constant maps](foundation.coherently-constant-maps.md)
 - [Null-homotopic maps](foundation.null-homotopic-maps.md)
-
-> > > > > > > upstream/master
 
 ## External links
 

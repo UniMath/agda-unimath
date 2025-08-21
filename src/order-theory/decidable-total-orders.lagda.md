@@ -202,6 +202,7 @@ module _
 
 **Proof.** By antisymmetry, equality `x ＝ y` in a decidable total order is
 characterized by smiliarity, `(x ≤ y) × (y ≤ x)`, and this is a decidable type.
+∎
 
 ```agda
 module _

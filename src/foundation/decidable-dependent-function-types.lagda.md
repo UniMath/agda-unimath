@@ -105,7 +105,7 @@ is-decidable-Π-Maybe {B = B} du de =
     ( is-decidable-product du de)
 ```
 
-### Dependent products of decidable propositions over a base with double negation dense equality are decidable propositions
+### Dependent products of decidable propositions over a merely decidable base with double negation dense equality are decidable propositions
 
 ```agda
 module _
@@ -120,7 +120,7 @@ module _
     is-decidable-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-has-double-negation-dense-equality-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
 
   is-decidable-prop-Π-has-double-negation-dense-equality-base :
@@ -131,9 +131,9 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-has-double-negation-dense-equality-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
-      ( is-prop-type-Decidable-Prop ∘ B)
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 
   is-decidable-prop-Π-has-double-negation-dense-equality-base' :
     has-double-negation-dense-equality A →
@@ -143,13 +143,13 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family' dA
       ( is-uniformly-decidable-family-has-double-negation-dense-equality-base'
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA)
-        ( is-prop-type-Decidable-Prop ∘ B))
-      ( is-prop-type-Decidable-Prop ∘ B)
+        ( λ x → is-prop-type-Decidable-Prop (B x)))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 ```
 
-### Dependent products of decidable propositions over a base with mere equality are decidable propositions
+### Dependent products of decidable propositions over a merely decidable base with mere equality are decidable propositions
 
 Assuming that all elements are merely equal in a type `A` then a dependent
 product of decidable propositions over `A` is again a decidable proposition.
@@ -167,7 +167,7 @@ module _
     is-decidable-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
 
   is-decidable-prop-Π-all-elements-merely-equal-base :
@@ -178,9 +178,9 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA))
-      ( is-prop-type-Decidable-Prop ∘ B)
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 
   is-decidable-prop-Π-all-elements-merely-equal-base' :
     all-elements-merely-equal A →
@@ -190,10 +190,10 @@ module _
     is-decidable-prop-Π-uniformly-decidable-family' dA
       ( is-uniformly-decidable-family-all-elements-merely-equal-base'
         ( H)
-        ( is-decidable-Decidable-Prop ∘ B)
+        ( λ x → is-decidable-Decidable-Prop (B x))
         ( dA)
-        ( is-prop-type-Decidable-Prop ∘ B))
-      ( is-prop-type-Decidable-Prop ∘ B)
+        ( λ x → is-prop-type-Decidable-Prop (B x)))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
 ```
 
 ### Decidability of dependent products over an equivalence
