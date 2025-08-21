@@ -7,8 +7,6 @@ module foundation.large-apartness-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
-open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.negated-equality
@@ -23,8 +21,9 @@ open import foundation.universe-levels
 
 A
 {{#concept "large apartness relation" WD="apartness relation" WDID=Q4779193 Agda=Large-Apartness-Relation}}
-on a family of types indexed by universe levels `A` is a
-[large binary relation](foundation.large-binary-relations.md) `R` which is
+on a family of types indexed by [universe levels](foundation.universe-levels.md)
+`A` is a [large binary relation](foundation.large-binary-relations.md) `R` which
+is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
