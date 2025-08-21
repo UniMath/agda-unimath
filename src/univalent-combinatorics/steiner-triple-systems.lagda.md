@@ -71,6 +71,23 @@ module _
   (np : x ≠ y)
   where
 
+  all-elements-equal-lem-mul-Steiner-Triple-System :
+    all-elements-equal
+      (Σ
+        (type-Steiner-System X)
+        (λ z →
+          type-Decidable-Prop
+            (subtype-subtype-map-Steiner-System X
+              (decidable-subtype-standard-2-Element-Decidable-Subtype
+                (has-decidable-equality-Steiner-System X) np)
+              (has-two-elements-type-standard-2-Element-Decidable-Subtype
+                (has-decidable-equality-Steiner-System X) np)
+              ( z))))
+  all-elements-equal-lem-mul-Steiner-Triple-System (z , _) (w , _) =
+    eq-type-subtype
+      ( λ a → prop-Decidable-Prop _)
+      ( {!   !})
+
   lem-mul-Steiner-Triple-System :
     is-contr (Σ (type-Steiner-System X) (λ z → type-Decidable-Prop
       (subtype-subtype-map-Steiner-System X
@@ -81,8 +98,16 @@ module _
         z)))
   lem-mul-Steiner-Triple-System =
     is-contr-is-inhabited-is-prop
-    ( {!   !})
-    ( {!   !})
+    ( is-prop-all-elements-equal {!   !})
+    ( unit-trunc
+      ( x , pr2
+        (pr1
+          (pr2 (pr2 X)
+            (decidable-subtype-standard-2-Element-Decidable-Subtype
+              (has-decidable-equality-Steiner-System X) np)
+            (has-two-elements-type-standard-2-Element-Decidable-Subtype
+              (has-decidable-equality-Steiner-System X) np)))
+        x (inl refl)))
 ```
 
 ### The [wild quasigroup](structured-types.wild-quasigroups.md) of a Steiner triple system
@@ -93,7 +118,7 @@ mul-Steiner-Triple-System :
   type-Steiner-System X → type-Steiner-System X → type-Steiner-System X
 mul-Steiner-Triple-System {n} X x y with has-decidable-equality-Steiner-System X x y
 ... | inl p = x
-... | inr np = pr1 (pr1 (lem-mul-Steiner-Triple-System X x y np))
+... | inr np = pr1 (center (lem-mul-Steiner-Triple-System X x y np))
 
 is-left-equiv-mul-Steiner-System :
   {n : ℕ} (X : Steiner-Triple-System n) (x : type-Steiner-System X) →
@@ -126,4 +151,13 @@ is-idempotent-mul-Steiner-Triple-System :
   {n : ℕ} {X : Steiner-Triple-System n} (x : type-Steiner-System X) →
   mul-Steiner-Triple-System X x x ＝ x
 is-idempotent-mul-Steiner-Triple-System x = {! refl  !}
+```
+
+### The wild quasigroup of a Steiner triple system is commutative
+
+```agda
+is-commutative-mul-Steiner-Triple-System :
+  {n : ℕ} {X : Steiner-Triple-System n} (x y : type-Steiner-System X) →
+  mul-Steiner-Triple-System X x y ＝ mul-Steiner-Triple-System X y x
+is-commutative-mul-Steiner-Triple-System x y = {!   !}
 ```
