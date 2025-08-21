@@ -854,7 +854,7 @@ open import elementary-number-theory.natural-numbers using
   )
 ```
 
-The above proof uses Agda's built-in mechanism for recognizing that two elemens
+The above proof uses Agda's built-in mechanism for recognizing that two elements
 of an inductive type built out of different constructors cannot be equal (the
 "no confusion" principle). The proof from the book follows:
 

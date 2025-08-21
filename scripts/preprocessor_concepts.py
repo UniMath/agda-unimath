@@ -132,6 +132,10 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     has_wikidata_id = wikidata_id is not None and wikidata_id != 'NA'
     has_wikidata_label = wikidata_label is not None
 
+    if text.find('$') >= 0:
+        eprint('Warning: LaTeX fragments are not supported in concept tags:', text)
+        mut_error_locations.add(path)
+
     if has_wikidata_id:
         index_entry['wikidata'] = wikidata_id
         target_id = wikidata_id
@@ -155,7 +159,7 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         if agda_id is not None:
             destination = f'{url_path}#{agda_id}'
             index_entry['definition'] = destination
-        else:
+        elif not config.get('skip-agda', False):
             eprint('Warning: Concept definition not found:',
                    plaintext, '; expected', agda_name, 'to exist in',
                    path)

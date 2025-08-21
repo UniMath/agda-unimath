@@ -83,13 +83,14 @@ module _
 ### Decidable maps are closed under homotopy
 
 ```agda
-is-decidable-map-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-  f ~ g → is-decidable-map g → is-decidable-map f
-is-decidable-map-htpy H K b =
-  is-decidable-equiv
-    ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
-    ( K b)
+opaque
+  is-decidable-map-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-map g → is-decidable-map f
+  is-decidable-map-htpy H K b =
+    is-decidable-equiv
+      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
+      ( K b)
 ```
 
 ### Composition of decidable maps
@@ -283,6 +284,17 @@ module _
 
 ### Decidable maps have Hilbert ε-operators
 
+A decidable map `f` induces "eliminators" on the propositional truncations of
+its fibers
+
+```text
+ ε : (x : A) → ║ fiber f x ║₋₁ → fiber f x.
+```
+
+Such "eliminators" are called
+[Hilbert ε-operators](foundation.hilbert-epsilon-operators-maps.md), or _split
+supports_.
+
 ```agda
 ε-operator-map-is-decidable-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
@@ -295,7 +307,16 @@ module _
 **Proof.** Given a decidable map `f : A → B` then `f` decomposes
 `B ≃ (im f) + B∖(im f)`. Restricting to `im f` we have a section given by the
 Hilbert ε-operator on `f`. Now, by injectivity of `f` we know this restriction
-map is an equivalence. Hence, by 3-for-2 `f` is also an embedding.
+map is an equivalence. Hence, `f` is a composite of embeddings and so must be an
+embedding as well.
+
+```text
+    im f ╰────→ im f + B\(im f)
+    ↟ ⋮              │
+    │ ⋮ ~            │ ~
+    │ ↓      f       ↓
+     A ────────────→ B
+```
 
 ```agda
 module _
@@ -308,4 +329,8 @@ module _
     is-emb-is-injective-ε-operator-map (ε-operator-map-is-decidable-map H) K
 ```
 
-There is also an analogous proof using the double negation image.
+There is also an analogous proof using the double negation image. This analogous
+proof avoids the use of propositional truncations, but cannot be included here
+due to introducing cyclic dependencies. See
+[`foundation.double-negation-images`](foundation.double-negation-images.md)
+instead.

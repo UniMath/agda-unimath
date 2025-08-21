@@ -38,6 +38,20 @@ Below is a summary of the tasks this tool performs:
 
 - **YAML**: Checks yaml files for parseable syntax.
 
+- **Spellcheck with codespell**: Checks for spelling mistakes with the
+  [codespell](https://github.com/codespell-project/codespell) tool. This is a
+  permissible spellchecker that only reports known misspellings, rather than
+  words it does not recognize. I.e., it is a blacklist based spellchecker. We
+  maintain an additional library-defined dictionary of misspellings at:
+  [`codespell-dictionary.txt`](https://github.com/UniMath/agda-unimath/blob/master/codespell-dictionary.txt).
+  If you find a misspelled word in the library, it is good practice to add it to
+  this dictionary in addition to correcting the mistake. If codespell
+  erroneously reports a word as misspelled, please add it to
+  [`codespell-ignore.txt`](https://github.com/UniMath/agda-unimath/blob/master/codespell-ignore.txt).
+
+- **Sort codespell dictionary and ignore files**: Sorts and formats the
+  associated codespell dictionary and ignore files.
+
 - **Case conflicts**: Checks for files that would conflict in case-insensitive
   filesystems.
 
@@ -46,8 +60,9 @@ Below is a summary of the tasks this tool performs:
 - **Markdown conventions**: Checks/enforces various of our conventions related
   to markdown code. This includes removing punctuation in section headers,
   removing empty code blocks, ensuring that there is only one top-level header
-  and that this is placed on the first line of the file, and checking that no
-  section is void of contents.
+  and that this is placed on the first line of the file, checking that no
+  section is void of contents, checking that headings don't contain links, and
+  checking that file names consist only of ASCII characters.
 
 - **Blank line conventions**: Searches for and removes any double or multiple
   blank lines.
@@ -55,7 +70,7 @@ Below is a summary of the tasks this tool performs:
 - **Agda space conventions**: Corrects some common spacing mistakes according to
   our conventions. This includes removing repeat whitespace characters between
   two non-whitespace characters in a line, having whitespace before an opening
-  brace or semicolon if it is not preceeded by a dot or another opening brace,
+  brace or semicolon if it is not preceded by a dot or another opening brace,
   and having whitespace after a closing brace or semicolon if it is not
   succeeded by a closing brace.
 
@@ -99,6 +114,10 @@ pre-commit tool and just not stage that file.
   markdown tables, among others. Note that this script takes care of all
   formatting for these file types, so you should not worry about formatting such
   files.
+
+- **BibTeX formatting:** Formats the
+  [`references.bib`](https://github.com/UniMath/agda-unimath/blob/master/references.bib)
+  file using [`bibtex-tidy`](https://github.com/FlamingTempura/bibtex-tidy).
 
 ## The `make website` tool
 

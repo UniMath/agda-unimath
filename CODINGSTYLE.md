@@ -69,7 +69,7 @@ with their unique skills and perspectives, to contribute to the project's
 ongoing success.
 
 So, in particular, refactoring isn't just about "cleaning up" the code; it's a
-strategic endeavour to ensure the longevity, vitality, and success of the
+strategic endeavor to ensure the longevity, vitality, and success of the
 agda-unimath project.
 
 ## Guidelines for definitions in the agda-unimath library
@@ -88,8 +88,8 @@ agda-unimath project.
   usage and scope of each concept in the library, we often invest in building
   comprehensive infrastructure around it. This approach not only clarifies the
   intent behind the definition but also helps keeping a consistent naming scheme
-  by providing names for frequently used projections and other readily
-  inferrable definitions. The emphasis on infrastructure enhances the library's
+  by providing names for frequently used projections and other readily inferable
+  definitions. The emphasis on infrastructure enhances the library's
   maintainability since modifications to well-supported definitions can be
   executed more easily than those lacking robust infrastructure. This is another
   way we endeavor to ensure the clarity, resilience, and continual evolution of
@@ -453,8 +453,8 @@ library:
   clear to you when you are writing the code, it puts a burden on the reader if
   you omit them. It is also hugely beneficial if you can see the specification
   of a certain entry by jumping to its definition. Furthermore, omitting
-  specifications of entries might make maintainance a bit more difficult,
-  because some name changes might still result in valid definitions, but with an
+  specifications of entries might make maintenance a bit more difficult, because
+  some name changes might still result in valid definitions, but with an
   unintended specifications. Catching such mistakes becomes a bit harder when
   you leave your entries untyped.
 

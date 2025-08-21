@@ -65,9 +65,9 @@ module _
   map-inhabited-or-empty-map : A → B
   map-inhabited-or-empty-map = pr1 f
 
-  is-decidable-inhabited-or-empty-map :
+  is-inhabited-or-empty-inhabited-or-empty-map :
     is-inhabited-or-empty-map map-inhabited-or-empty-map
-  is-decidable-inhabited-or-empty-map = pr2 f
+  is-inhabited-or-empty-inhabited-or-empty-map = pr2 f
 ```
 
 ## Properties

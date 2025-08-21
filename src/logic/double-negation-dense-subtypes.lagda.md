@@ -30,7 +30,7 @@ open import logic.double-negation-dense-maps
 ## Idea
 
 A
-{{#concept "double negationdense" Disambiguation="subtype" Agda=is-double-negation-dense-subtype Agda=double-negation-dense-subtype}}
+{{#concept "double negation dense" Disambiguation="subtype" Agda=is-double-negation-dense-subtype Agda=double-negation-dense-subtype}}
 [subtype](foundation.subtypes.md) of a type `X` is a subtype `P ⊆ X` such that
 its double [complement](foundation.complements-subtypes.md) is
 [full](foundation.full-subtypes.md).
@@ -117,10 +117,11 @@ module _
     ( inclusion-subtype P ,
       is-double-negation-dense-inclusion-is-double-negation-dense-subtype H)
 
-  is-dense-is-double-negation-dense-inclusion-subtype :
+  is-double-negation-dense-subtype-is-double-negation-dense-inclusion-subtype :
     is-double-negation-dense-map (inclusion-subtype P) →
     is-double-negation-dense-subtype P
-  is-dense-is-double-negation-dense-inclusion-subtype H x =
+  is-double-negation-dense-subtype-is-double-negation-dense-inclusion-subtype
+    H x =
     map-double-negation (λ p → tr (is-in-subtype P) (pr2 p) (pr2 (pr1 p))) (H x)
 
 module _

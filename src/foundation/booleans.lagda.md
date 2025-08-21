@@ -215,6 +215,14 @@ bool-Type-With-Tight-Apartness =
   type-with-tight-apartness-Discrete-Type bool-Discrete-Type
 ```
 
+### The booleans have a tight apartness relation
+
+```agda
+bool-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+bool-Type-With-Tight-Apartness =
+  type-with-tight-apartness-Discrete-Type bool-Discrete-Type
+```
+
 ### The "is true" predicate on booleans
 
 ```agda

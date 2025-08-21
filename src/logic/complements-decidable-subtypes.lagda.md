@@ -121,16 +121,16 @@ module _
     A ≃ type-decidable-subtype P + type-complement-decidable-subtype P
   equiv-coproduct-decomposition-decidable-subtype =
     equivalence-reasoning
-    A
-    ≃ Σ A (λ x → is-decidable (is-in-decidable-subtype P x))
-      by
+      A
+      ≃ Σ A (λ x → is-decidable (is-in-decidable-subtype P x))
+        by
         inv-right-unit-law-Σ-is-contr
           ( λ x →
             is-proof-irrelevant-is-prop
               ( is-prop-is-decidable (is-prop-is-in-decidable-subtype P x))
               ( is-decidable-decidable-subtype P x))
-    ≃ type-decidable-subtype P + type-complement-decidable-subtype P
-      by
+      ≃ type-decidable-subtype P + type-complement-decidable-subtype P
+        by
         left-distributive-Σ-coproduct A
           ( is-in-decidable-subtype P)
           ( is-in-complement-decidable-subtype P)

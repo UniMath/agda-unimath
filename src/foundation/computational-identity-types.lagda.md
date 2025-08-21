@@ -336,7 +336,7 @@ module _
 
 ### The strict recursion principle for the computational identity types
 
-Using the fact that the recusion principles of both the Yoneda identity types
+Using the fact that the recursion principles of both the Yoneda identity types
 and the strictly involutive identity types can be defined to compute strictly,
 we obtain a strictly computing recursion principle for the computational
 identity types as well.

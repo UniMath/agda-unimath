@@ -1,4 +1,4 @@
-# Decidable families
+# Decidable type families
 
 ```agda
 module foundation.decidable-type-families where
@@ -12,6 +12,7 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
 open import foundation.negation
 open import foundation.propositions
@@ -28,9 +29,9 @@ open import foundation-core.identity-types
 
 A type family `B : A → 𝒰` is said to be
 {{#concept "decidable" Disambiguation="type family" Agda=is-decidable-family}}
-if we, for every `x : A`, can either construct an element of `B x`, or we can
-prove that it is [empty](foundation-core.empty-types.md). In other words, we
-interpret decidability via the
+if we can for every `x : A` either construct an element of `B x` or we can prove
+that it is [empty](foundation-core.empty-types.md). In other words, we interpret
+decidability via the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory. A related concept is that a type family is either
 [inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
@@ -70,15 +71,15 @@ decidable-family-decidable-subtype P =
 
 ## Properties
 
-### Reindexing decidable type families
+### Base change of decidable type families
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (P : decidable-family l3 B)
   where
 
-  reindex-decidable-family : (f : A → B) → decidable-family l3 A
-  reindex-decidable-family f =
+  base-change-decidable-family : (f : A → B) → decidable-family l3 A
+  base-change-decidable-family f =
     ( family-decidable-family P ∘ f , is-decidable-decidable-family P ∘ f)
 ```
 
@@ -90,34 +91,42 @@ module _
   where
 
   is-decidable-neg-decidable-family :
-    is-decidable-family (¬_ ∘ family-decidable-family P)
+    is-decidable-family (λ x → ¬ (family-decidable-family P x))
   is-decidable-neg-decidable-family =
     is-decidable-neg ∘ is-decidable-decidable-family P
 
   neg-decidable-family : decidable-family l2 A
   neg-decidable-family =
-    ( ¬_ ∘ family-decidable-family P , is-decidable-neg-decidable-family)
+    ( ( λ x → ¬ (family-decidable-family P x)) ,
+      is-decidable-neg-decidable-family)
 ```
 
 ### Composition of decidable families
 
 Given a decidable family of types with double negation dense equality
-`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then we may
-_compose_ `Q` after `P` and obtain a decidabe type family `Q ∘ P : A → 𝒰`.
+`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then, via
+[type duality](foundation.type-duality.md) we may _compose_ `Q` after `P` and
+obtain a decidable type family `Q ∘ P : A → 𝒰`, defined on elements as
+[dependent pair types](foundation.dependent-pair-types.md).
+
+```text
+  (Q ∘ P) x := Σ (y : P x), (Q x y).
+```
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1}
   where
 
-  is-decidable-comp-decidable-family-decidable-subtype' :
+  is-decidable-comp-decidable-family-has-double-negation-dense-equality :
     (P : decidable-family l2 A)
     (Q : (x : A) → decidable-family l3 (family-decidable-family P x)) →
     ( (x : A) →
       has-double-negation-dense-equality (family-decidable-family P x)) →
     is-decidable-family
       ( λ x → Σ (family-decidable-family P x) (family-decidable-family (Q x)))
-  is-decidable-comp-decidable-family-decidable-subtype' P Q H x =
+  is-decidable-comp-decidable-family-has-double-negation-dense-equality
+    P Q H x =
     rec-coproduct
       ( λ p →
         rec-coproduct
@@ -131,35 +140,34 @@ module _
                   ( λ r →
                     nq (tr (family-decidable-family (Q x)) (inv r) (pr2 q)))))
           ( is-decidable-decidable-family (Q x) p))
-      (λ np → inr (map-neg pr1 np))
+      ( λ np → inr (map-neg pr1 np))
       ( is-decidable-decidable-family P x)
 
-  comp-decidable-family-decidable-subtype' :
+  comp-decidable-family-has-double-negation-dense-equality :
     (P : decidable-family l2 A) →
-    ((x : A) → decidable-family l3 (family-decidable-family P x)) →
+    ( (x : A) → decidable-family l3 (family-decidable-family P x)) →
     ( (x : A) →
       has-double-negation-dense-equality (family-decidable-family P x)) →
     decidable-family (l2 ⊔ l3) A
-  comp-decidable-family-decidable-subtype' P Q H =
+  comp-decidable-family-has-double-negation-dense-equality P Q H =
     ( λ x → Σ (family-decidable-family P x) (family-decidable-family (Q x))) ,
-    ( is-decidable-comp-decidable-family-decidable-subtype' P Q H)
+    ( is-decidable-comp-decidable-family-has-double-negation-dense-equality
+      ( P)
+      ( Q)
+      ( H))
 
   comp-decidable-family-decidable-subtype :
     (P : decidable-subtype l2 A) →
     ((x : A) → decidable-family l3 (is-in-decidable-subtype P x)) →
     decidable-family (l2 ⊔ l3) A
   comp-decidable-family-decidable-subtype P Q =
-    comp-decidable-family-decidable-subtype'
+    comp-decidable-family-has-double-negation-dense-equality
       ( decidable-family-decidable-subtype P)
       ( Q)
       ( λ x p q →
         intro-double-negation
           ( eq-is-prop (is-prop-is-in-decidable-subtype P x)))
 ```
-
-### Decidable families on the subuniverse of propositions
-
-> TODO
 
 ## See also
 

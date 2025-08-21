@@ -11,6 +11,7 @@ module elementary-number-theory.additive-group-of-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -32,7 +34,7 @@ open import group-theory.semigroups
 The type of [rational numbers](elementary-number-theory.rational-numbers.md)
 equipped with [addition](elementary-number-theory.addition-rational-numbers.md)
 is a [commutative group](group-theory.abelian-groups.md) with unit `zero-ℚ` and
-inverse given by`neg-ℚ`.
+inverse given by `neg-ℚ`.
 
 ## Definitions
 
@@ -92,4 +94,17 @@ abstract
 
   is-retraction-diff-ℚ : (p q : ℚ) → (q +ℚ p) -ℚ p ＝ q
   is-retraction-diff-ℚ = is-retraction-right-div-Group group-add-ℚ
+
+  right-swap-add-ℚ : (p q r : ℚ) → (p +ℚ q) +ℚ r ＝ (p +ℚ r) +ℚ q
+  right-swap-add-ℚ = right-swap-add-Ab abelian-group-add-ℚ
+
+  left-swap-add-ℚ : (p q r : ℚ) → p +ℚ (q +ℚ r) ＝ q +ℚ (p +ℚ r)
+  left-swap-add-ℚ = left-swap-add-Ab abelian-group-add-ℚ
+```
+
+### The inclusion of integers in the rationals is an additive homomorphism
+
+```agda
+hom-add-rational-ℤ : hom-Ab ℤ-Ab abelian-group-add-ℚ
+hom-add-rational-ℤ = (rational-ℤ , λ {x y} → inv (add-rational-ℤ x y))
 ```

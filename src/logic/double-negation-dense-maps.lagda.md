@@ -43,10 +43,10 @@ open import logic.irrefutable-types
 ## Idea
 
 A map `f : A → B` is
-{{#concept "double negation dense" Agda=is-double-negation-dense-map}}, if all
-of its [fibers](foundation-core.fibers-of-maps.md) are
-[irrefutable](foundation.irrefutable-propositions.md). I.e., for every `y : B`,
-it is not not true that `y` has a preimage under `f`.
+{{#concept "double negation dense" Disambiguation="map of types" Agda=is-double-negation-dense-map}},
+if all of its [fibers](foundation-core.fibers-of-maps.md) are
+[irrefutable](logic.irrefutable-types.md). I.e., for every `y : B`, it is not
+not true that `y` has a preimage under `f`.
 
 Double negation dense maps are a close cousin of
 [surjective maps](foundation.surjective-maps.md), but don't require the
@@ -57,6 +57,13 @@ map followed by a
 [double negation stable embedding](logic.double-negation-stable-embeddings.md),
 through its [double negation image](foundation.double-negation-images.md).
 
+**Terminology.** The term _dense_ used here is in the sense of dense with
+respect to a
+[reflective subuniverse](orthogonal-factorization-systems.reflective-global-subuniverses.md)/[modality](orthogonal-factorization-systems.higher-modalities.md),
+or connected. Here, it means that the double negation of the fibers of the
+relevant map are contractible. Since negations are propositions, it suffices
+that the double negation has an element.
+
 ## Definitions
 
 ### The predicate on maps of being double negation dense
@@ -65,7 +72,7 @@ through its [double negation image](foundation.double-negation-images.md).
 is-double-negation-dense-map-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
 is-double-negation-dense-map-Prop {B = B} f =
-  Π-Prop B (double-negation-type-Prop ∘ fiber f)
+  Π-Prop B (is-irrefutable-prop-Type ∘ fiber f)
 
 is-double-negation-dense-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -81,12 +88,12 @@ is-prop-is-double-negation-dense-map f =
 ### The type of double negation dense maps
 
 ```agda
+double-negation-dense-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+double-negation-dense-map A B = Σ (A → B) is-double-negation-dense-map
+
 infix 5 _↠¬¬_
 _↠¬¬_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A ↠¬¬ B = Σ (A → B) is-double-negation-dense-map
-
-double-negation-dense-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-double-negation-dense-map = _↠¬¬_
+_↠¬¬_ = double-negation-dense-map
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠¬¬ B)
@@ -318,10 +325,11 @@ module _
 
   double-negation-dense-map-product :
     (A ↠¬¬ C) → (B ↠¬¬ D) → ((A × B) ↠¬¬ (C × D))
-  double-negation-dense-map-product f g =
+  pr1 (double-negation-dense-map-product f g) =
     map-product
       ( map-double-negation-dense-map f)
-      ( map-double-negation-dense-map g) ,
+      ( map-double-negation-dense-map g)
+  pr2 (double-negation-dense-map-product f g) =
     is-double-negation-dense-map-product
       ( is-double-negation-dense-map-double-negation-dense-map f)
       ( is-double-negation-dense-map-double-negation-dense-map g)
@@ -418,7 +426,7 @@ module _
     (g : A ↠¬¬ B) → (f ＝ g) ≃ htpy-double-negation-dense-map g
   extensionality-double-negation-dense-map g =
     ( htpy-eq-double-negation-dense-map g ,
-    is-equiv-htpy-eq-double-negation-dense-map g)
+      is-equiv-htpy-eq-double-negation-dense-map g)
 
   eq-htpy-double-negation-dense-map :
     (g : A ↠¬¬ B) → htpy-double-negation-dense-map g → f ＝ g

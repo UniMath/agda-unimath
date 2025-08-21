@@ -32,9 +32,11 @@ open import order-theory.total-orders
 ## Idea
 
 The
-{{#concept "standard inequality relation" Disambiguation="on booleans" Agda=}}
-on [booleans](foundation.booleans.md) is the inductively defined
-[relation](foundation.binary-relations.md) given by the four inequalities
+{{#concept "standard inequality relation" Disambiguation="on booleans" Agda=leq-bool}}
+on [booleans](foundation.booleans.md) is the
+[partial order](order-theory.posets.md) defined by the logical connective `⇒`,
+i.e. `(x ≤ y) := (x ⇒ y)`. This means it is the unique partial order on the
+booleans satisfying the four inequalities
 
 ```text
   false ≤ false
@@ -148,22 +150,22 @@ bool-Total-Order = (bool-Poset , is-total-leq-bool)
 bool-Decidable-Total-Order : Decidable-Total-Order lzero lzero
 bool-Decidable-Total-Order =
   ( bool-Poset ,
-    ( is-total-leq-bool) ,
+    is-total-leq-bool ,
     ( λ x y → is-decidable-Decidable-Prop (leq-bool-Decidable-Prop x y)))
 ```
 
 ### Interactions between the inequality relation and the disjunction operation
 
 ```agda
-leq-or-bool : {x y : bool} → leq-bool x (or-bool x y)
-leq-or-bool {true} {y} = star
-leq-or-bool {false} {y} = star
+left-leq-or-bool : {x y : bool} → leq-bool x (or-bool x y)
+left-leq-or-bool {true} {y} = star
+left-leq-or-bool {false} {y} = star
 
-leq-or-bool' : {x y : bool} → leq-bool y (or-bool x y)
-leq-or-bool' {true} {true} = star
-leq-or-bool' {true} {false} = star
-leq-or-bool' {false} {true} = star
-leq-or-bool' {false} {false} = star
+right-leq-or-bool : {x y : bool} → leq-bool y (or-bool x y)
+right-leq-or-bool {true} {true} = star
+right-leq-or-bool {true} {false} = star
+right-leq-or-bool {false} {true} = star
+right-leq-or-bool {false} {false} = star
 
 leq-left-or-bool : {x y : bool} → leq-bool x y → leq-bool (or-bool x y) y
 leq-left-or-bool {true} {true} p = star
@@ -174,27 +176,27 @@ leq-right-or-bool : {x y : bool} → leq-bool x y → leq-bool (or-bool y x) y
 leq-right-or-bool {x} {true} p = star
 leq-right-or-bool {false} {false} p = star
 
-leq-or-bool'' :
+is-upper-bound-or-bool :
   {x y z : bool} → leq-bool x z → leq-bool y z → leq-bool (or-bool x y) z
-leq-or-bool'' {true} {y} {true} p q = star
-leq-or-bool'' {false} {true} {true} p q = star
-leq-or-bool'' {false} {false} {true} p q = star
-leq-or-bool'' {false} {false} {false} p q = star
+is-upper-bound-or-bool {true} {y} {true} p q = star
+is-upper-bound-or-bool {false} {true} {true} p q = star
+is-upper-bound-or-bool {false} {false} {true} p q = star
+is-upper-bound-or-bool {false} {false} {false} p q = star
 ```
 
 ### Interactions between the inequality relation and the conjunction operation
 
 ```agda
-leq-and-bool : {x y : bool} → leq-bool (and-bool x y) x
-leq-and-bool {true} {true} = star
-leq-and-bool {false} {true} = star
-leq-and-bool {true} {false} = star
-leq-and-bool {false} {false} = star
+left-leq-and-bool : {x y : bool} → leq-bool (and-bool x y) x
+left-leq-and-bool {true} {true} = star
+left-leq-and-bool {false} {true} = star
+left-leq-and-bool {true} {false} = star
+left-leq-and-bool {false} {false} = star
 
-leq-and-bool' : {x y : bool} → leq-bool (and-bool x y) y
-leq-and-bool' {true} {true} = star
-leq-and-bool' {true} {false} = star
-leq-and-bool' {false} {y} = star
+right-leq-and-bool : {x y : bool} → leq-bool (and-bool x y) y
+right-leq-and-bool {true} {true} = star
+right-leq-and-bool {true} {false} = star
+right-leq-and-bool {false} {y} = star
 
 leq-left-and-bool : {x y : bool} → leq-bool x y → leq-bool x (and-bool x y)
 leq-left-and-bool {true} {true} p = star
@@ -204,10 +206,10 @@ leq-right-and-bool : {x y : bool} → leq-bool x y → leq-bool x (and-bool y x)
 leq-right-and-bool {true} {true} p = star
 leq-right-and-bool {false} {y} p = star
 
-leq-and-bool'' :
+is-lower-bound-and-bool :
   {x y z : bool} → leq-bool x y → leq-bool x z → leq-bool x (and-bool y z)
-leq-and-bool'' {true} {true} {true} p q = star
-leq-and-bool'' {false} {y} {z} p q = star
+is-lower-bound-and-bool {true} {true} {true} p q = star
+is-lower-bound-and-bool {false} {y} {z} p q = star
 ```
 
 ```agda

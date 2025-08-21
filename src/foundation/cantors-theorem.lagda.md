@@ -40,6 +40,11 @@ shows that there is [no](foundation-core.negation.md)
   ¬ (A ↠ 𝒫(A))
 ```
 
+In fact, no map `A → PA` into a
+[complement](foundation.complements-subtypes.md)-closed
+[subset](foundation-core.subtypes.md) `PA` of the powerset may be
+[double negation dense](logic.double-negation-dense-maps.md).
+
 ## Theorem
 
 **Proof.** The proof is an instance of an argument _by diagonalization_. Given a
@@ -80,13 +85,18 @@ module _
   theorem-double-negation-dense-Cantor H =
     H subtype-theorem-Cantor not-in-image-subtype-theorem-Cantor
 
-  abstract
+    theorem-double-negation-dense-Cantor : ¬ (is-double-negation-dense-map f)
+    theorem-double-negation-dense-Cantor H =
+      H subtype-theorem-Cantor not-in-image-subtype-theorem-Cantor
+
     theorem-Cantor : ¬ (is-surjective f)
     theorem-Cantor =
       map-neg
         is-double-negation-dense-map-is-surjective
         theorem-double-negation-dense-Cantor
 ```
+
+## Alternative statements
 
 ### Cantor's theorem for the set of decidable subtypes
 

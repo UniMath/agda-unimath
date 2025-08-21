@@ -211,4 +211,4 @@ module _
         ( precategory-Category C) is-prop-hom-C f g)
 ```
 
-It remains to show that these constructions form inverses to eachother.
+It remains to show that these constructions form inverses to each other.

@@ -133,6 +133,17 @@ def build_dependency_graph(root_dir, most_imported_drop_count=20):
 
     return graph, file_sizes
 
+def generate_html_legend(label_colors, used_labels, output_file, label_counts):
+    """Generate an HTML legend with used namespaces and their colors."""
+    sorted_labels = sorted(used_labels, key=lambda label: label_counts.get(label, 0), reverse=True)
+    with open(output_file, 'w') as f:
+        f.write('<div class="art-fredrik-dependency-graph-legend">\n')
+        for label in sorted_labels:
+            if label in label_colors:
+                color = label_colors[label]
+                f.write(f'  <pre class="art-fredrik-dependency-graph-label" id="{label}"><span class="art-fredrik-dependency-graph-dot" style="background-color: #{color};"></span>{label}</pre>\n')
+        f.write('</div>\n')
+
 def render_graph(graph, file_sizes, output_file, format, repo):
     """Render the dependency graph using Graphviz."""
     # Fetch GitHub labels and colors
@@ -147,13 +158,24 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     node_sizes = {node: max(0.05, 0.3 * math.sqrt(file_sizes.get(node, 0) / max_lines)) for node in graph}
     node_colors = {node: module_based_color(node[:node.rfind(".")], label_colors) for node in graph}
 
+    used_labels = set()
+    label_counts = defaultdict(int)
+
     for node, dependencies in graph.items():
         node_color = node_colors[node]
+        label = node[:node.rfind(".")]
+        used_labels.add(label)
+        label_counts[label] += 1
         dot.node(node, shape="circle", style="filled", fillcolor=node_color, color="#FFFFFF00", width=str(node_sizes[node]), height=str(node_sizes[node]), label="")
         for dep in dependencies:
             if dep in graph:  # Ensure we're not linking to removed nodes
                 edge_color =  node_color + "10"
                 dot.edge(node, dep, color=edge_color, arrowhead="none")
+
+    # Generate HTML legend
+    html_legend_output_file = output_file + "_legend.html"
+    generate_html_legend(label_colors, used_labels, html_legend_output_file, label_counts)
+    eprint(f"HTML Legend saved as {html_legend_output_file}")
 
     dot.render(output_file, format=format, cleanup=True)
 

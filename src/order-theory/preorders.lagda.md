@@ -184,4 +184,4 @@ module _
     comp-hom-Precategory C
 ```
 
-It remains to show that these constructions form inverses to eachother.
+It remains to show that these constructions form inverses to each other.

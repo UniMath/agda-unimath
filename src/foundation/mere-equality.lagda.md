@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
@@ -31,8 +32,14 @@ open import foundation-core.sets
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the
-propositionally truncated identity type between them.
+Two elements `x` and `y` in a type `A` are said to be
+{{#concept "merely equal" Agda=mere-eq}} if there is an element of the
+[propositionally truncated](foundation.propositional-truncations.md)
+[identity type](foundation-core.identity-types.md) between them.
+
+```text
+ ║ x ＝ y ║₋₁
+```
 
 ## Definitions
 
@@ -51,7 +58,7 @@ module _
   is-prop-mere-eq x y = is-prop-type-trunc-Prop
 ```
 
-### Types whose elements are merely equal
+### Types whose elements are all merely equal
 
 ```agda
 all-elements-merely-equal : {l : Level} → UU l → UU l
@@ -96,10 +103,8 @@ abstract
 ```agda
 mere-eq-equivalence-relation :
   {l1 : Level} (A : UU l1) → equivalence-relation l1 A
-pr1 (mere-eq-equivalence-relation A) = mere-eq-Prop
-pr1 (pr2 (mere-eq-equivalence-relation A)) = refl-mere-eq
-pr1 (pr2 (pr2 (mere-eq-equivalence-relation A))) = symmetric-mere-eq
-pr2 (pr2 (pr2 (mere-eq-equivalence-relation A))) = transitive-mere-eq
+mere-eq-equivalence-relation A =
+  ( mere-eq-Prop , refl-mere-eq , symmetric-mere-eq , transitive-mere-eq)
 ```
 
 ### Any map into a set reflects mere equality
@@ -133,7 +138,8 @@ is-set-mere-eq-in-id =
 ```
 
 In other words, if equality on `A` has an
-[ε-operator](foundation.hilberts-epsilon-operators.md), then `A` is a set.
+[ε-operator](foundation.hilberts-epsilon-operators.md), or "split support", then
+`A` is a set.
 
 ### Retracts of types with merely equal elements
 

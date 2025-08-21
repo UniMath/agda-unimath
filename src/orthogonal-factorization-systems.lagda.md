@@ -9,6 +9,7 @@
 ```agda
 module orthogonal-factorization-systems where
 
+open import orthogonal-factorization-systems.anodyne-maps public
 open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
@@ -71,6 +72,7 @@ open import orthogonal-factorization-systems.types-local-at-maps public
 open import orthogonal-factorization-systems.types-separated-at-maps public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses public
+open import orthogonal-factorization-systems.weakly-anodyne-maps public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.wide-global-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

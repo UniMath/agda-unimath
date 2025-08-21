@@ -9,6 +9,7 @@ module foundation.decidable-dependent-pair-types where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
 open import foundation.maybe
 open import foundation.propositional-truncations
@@ -35,7 +36,22 @@ We describe conditions under which
 [dependent sums](foundation.dependent-pair-types.md) are
 [decidable](foundation.decidable-types.md)
 
-## Properites
+## Properties
+
+### Decidability of dependent sums over equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
+  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
+  where
+
+  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
+  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
+
+  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
+  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
+```
 
 ### Decidability of dependent sums over equivalences
 
@@ -95,6 +111,12 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
 ```
 
 ### Decidability of dependent sums over bases with double negation dense equality
+
+This is a special case of the more general fact that a type has decidable sums
+if and only if its totally separated reflection does, and totally separated
+types have double negation stable equality
+[`TypeTopology.TotallySeparated`](http://martinescardo.github.io/TypeTopology/TypeTopology.TotallySeparated.html)
+{{#cite TypeTopology}}.
 
 ```agda
 module _

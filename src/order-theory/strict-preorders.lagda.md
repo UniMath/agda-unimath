@@ -24,10 +24,13 @@ A {{#concept "strict preorder" Agda=Strict-Preorder}} consists of a type $A$, a
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
 irreflexive and transitive:
 
-- For any $x:A$ we have $x \nless x$.
+- For any $x:A$ we have $x ≮ x$.
 - For any $x,y,z:A$ we have $(y<z) → (x<y) → (x<z)$.
 
-Strict preorders satisfy antisymmetry by irreflexivity and transitivity.
+Note that strict preorders satisfy antisymmetry by irreflexivity and
+transitivity, but this is not the correct extensionality principle for strict
+preorders. The correct extensionality principle is considered on the page on
+[strict orders](order-theory.strict-orders.md).
 
 ## Definitions
 

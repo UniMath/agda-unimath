@@ -152,7 +152,7 @@ pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
 
-### Characterisation of embeddings into subtypes
+### Characterization of embeddings into subtypes
 
 ```agda
 module _

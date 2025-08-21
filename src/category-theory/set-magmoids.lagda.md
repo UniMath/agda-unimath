@@ -22,18 +22,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **set-magmoid** is the [structure](foundation.structure.md) of a
+A {{#concept "set-magmoid" Agda=Set-Magmoid}} is the
+[structure](foundation.structure.md) of a
 [composition operation on a binary family of sets](category-theory.composition-operations-on-binary-families-of-sets.md),
-and are in one sense the "oidification" of [magmas](structured-types.magmas.md)
-in [sets](foundation-core.sets.md). We call elements of the indexing type
-**objects**, and elements of the set-family **morphisms** or **homomorphisms**.
+and are the _oidification_ of [magmas](structured-types.magmas.md) in
+[sets](foundation-core.sets.md) in one sense of the term. We call elements of
+the indexing type **objects**, and elements of the set-family **morphisms** or
+**homomorphisms**.
 
-These objects serve as our starting point in the study of the
-[stucture](foundation.structure.md) of
+Set-magmoids serve as our starting point in the study of the
+[structure](foundation.structure.md) of
 [categories](category-theory.categories.md). Indeed, categories form a
 [subtype](foundation-core.subtypes.md) of set-magmoids, although
-structure-preserving maps of set-magmoids do not automatically preserve
-identity-morphisms.
+structure-preserving maps of set-magmoids do not automatically preserve identity
+morphisms.
 
 Set-magmoids are commonly referred to as _magmoids_ in the literature, but we
 use the "set-" prefix to make clear its relation to magmas. Set-magmoids should
@@ -152,12 +154,15 @@ module _
 ### The predicate on set-magmoids of being unital
 
 **Proof:** To show that unitality is a proposition, suppose
-`e e' : (x : A) → hom-set x x` are both right and left units with regard to
-composition. It is enough to show that `e ＝ e'` since the right and left unit
-laws are propositions (because all hom-types are sets). By function
-extensionality, it is enough to show that `e x ＝ e' x` for all `x : A`. But by
-the unit laws we have the following chain of equalities:
-`e x ＝ (e' x) ∘ (e x) ＝ e' x.`
+`e e' : (x : A) → hom x x` are both two-sided units with respect to composition.
+It is enough to show that `e ＝ e'` since the right and left unit laws are
+propositions by the set-condition on hom-types. By function extensionality, it
+is enough to show that `e x ＝ e' x` for all `x : A`, and by the unit laws we
+have:
+
+```text
+  e x ＝ (e' x) ∘ (e x) ＝ e' x. ∎
+```
 
 ```agda
 module _
@@ -218,6 +223,8 @@ module _
 
 ## See also
 
+- [Magmas](structured-types.magmas.md) are types equipped with a binary
+  operation.
 - [Nonunital precategories](category-theory.nonunital-precategories.md) are
   associative set-magmoids.
 - [Precategories](category-theory.precategories.md) are associative and unital

@@ -22,6 +22,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -98,6 +99,26 @@ abstract
   has-decidable-equality-retract-of (i , r , R) =
     has-decidable-equality-injection
       ( i , is-injective-has-retraction i r R)
+```
+
+### Types with decidable equality are closed under injections
+
+```agda
+has-decidable-equality-injection :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  injection A B → has-decidable-equality B → has-decidable-equality A
+has-decidable-equality-injection (i , H) d x y =
+  is-decidable-iff H (ap i) (d (i x) (i y))
+```
+
+### Types with decidable equality are closed under embeddings
+
+```agda
+has-decidable-equality-emb :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ↪ B → has-decidable-equality B → has-decidable-equality A
+has-decidable-equality-emb i =
+  has-decidable-equality-injection (injection-emb i)
 ```
 
 ### Types with decidable equality are closed under equivalences
