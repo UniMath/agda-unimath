@@ -17,6 +17,7 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import group-theory.commutative-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -68,6 +69,10 @@ module _
 
   semigroup-Commutative-Monoid : Semigroup l
   semigroup-Commutative-Monoid = semigroup-Monoid monoid-Commutative-Monoid
+
+  commutative-semigroup-Commutative-Monoid : Commutative-Semigroup l
+  commutative-semigroup-Commutative-Monoid =
+    semigroup-Commutative-Monoid , pr2 M
 
   set-Commutative-Monoid : Set l
   set-Commutative-Monoid = set-Monoid monoid-Commutative-Monoid
@@ -124,32 +129,24 @@ module _
       ( mul-Commutative-Monoid x x')
       ( mul-Commutative-Monoid y y'))
   interchange-mul-mul-Commutative-Monoid =
-    interchange-law-commutative-and-associative
-      mul-Commutative-Monoid
-      commutative-mul-Commutative-Monoid
-      associative-mul-Commutative-Monoid
+    interchange-mul-mul-Commutative-Semigroup
+      commutative-semigroup-Commutative-Monoid
 
   right-swap-mul-Commutative-Monoid :
     (x y z : type-Commutative-Monoid) →
     mul-Commutative-Monoid (mul-Commutative-Monoid x y) z ＝
     mul-Commutative-Monoid (mul-Commutative-Monoid x z) y
-  right-swap-mul-Commutative-Monoid x y z =
-    ( associative-mul-Commutative-Monoid x y z) ∙
-    ( ap
-      ( mul-Commutative-Monoid x)
-      ( commutative-mul-Commutative-Monoid y z)) ∙
-    ( inv (associative-mul-Commutative-Monoid x z y))
+  right-swap-mul-Commutative-Monoid =
+    right-swap-mul-Commutative-Semigroup
+      commutative-semigroup-Commutative-Monoid
 
   left-swap-mul-Commutative-Monoid :
     (x y z : type-Commutative-Monoid) →
     mul-Commutative-Monoid x (mul-Commutative-Monoid y z) ＝
     mul-Commutative-Monoid y (mul-Commutative-Monoid x z)
-  left-swap-mul-Commutative-Monoid x y z =
-    ( inv (associative-mul-Commutative-Monoid x y z)) ∙
-    ( ap
-      ( mul-Commutative-Monoid' z)
-      ( commutative-mul-Commutative-Monoid x y)) ∙
-    ( associative-mul-Commutative-Monoid y x z)
+  left-swap-mul-Commutative-Monoid =
+    left-swap-mul-Commutative-Semigroup
+      commutative-semigroup-Commutative-Monoid
 ```
 
 ### The unit element of a commutative monoid
