@@ -367,7 +367,7 @@ module _
           a = min-ℚ (min-ℚ (p *ℚ r) (p *ℚ s)) (min-ℚ (q *ℚ r) (q *ℚ s))
           b = max-ℚ (max-ℚ (p *ℚ r) (p *ℚ s)) (max-ℚ (q *ℚ r) (q *ℚ s))
         intro-exists
-          (a -ℚ δ , b +ℚ δ)
+          ( a -ℚ δ , b +ℚ δ)
           ( tr
             ( le-ℚ (b +ℚ δ))
             ( commutative-add-ℚ _ _)
