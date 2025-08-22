@@ -11,6 +11,7 @@ open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public
+open import linear-algebra.finite-sequences-in-commutative-semigroups public
 open import linear-algebra.finite-sequences-in-commutative-semirings public
 open import linear-algebra.finite-sequences-in-euclidean-domains public
 open import linear-algebra.finite-sequences-in-monoids public

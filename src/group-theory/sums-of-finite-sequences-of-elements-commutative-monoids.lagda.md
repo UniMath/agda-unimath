@@ -13,31 +13,23 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.negated-equality
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
 open import linear-algebra.finite-sequences-in-commutative-monoids
 
-open import lists.lists
-
 open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -62,6 +54,31 @@ sum-fin-sequence-type-Commutative-Monoid M =
 ```
 
 ## Properties
+
+### Sums in the commutative semigroup
+
+```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid :
+    (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
+    sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
+    sum-fin-sequence-type-Commutative-Semigroup
+      ( commutative-semigroup-Commutative-Monoid M)
+      ( n)
+      ( f)
+  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid zero-ℕ f =
+    left-unit-law-mul-Commutative-Monoid M _
+  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+    (succ-ℕ n) f =
+      ap
+        ( mul-Commutative-Monoid' M _)
+        ( sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( n)
+          ( f ∘ inl))
+```
 
 ### Sums of one and two elements
 
@@ -208,96 +225,29 @@ module _
   where
 
   abstract
-    preserves-sum-adjacent-transposition-sum-fin-sequence-type-Commutative-Monoid :
-      (n : ℕ) → (k : Fin n) →
-      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
-      sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
-      sum-fin-sequence-type-Commutative-Monoid
-        M (succ-ℕ n) (f ∘ map-adjacent-transposition-Fin n k)
-    preserves-sum-adjacent-transposition-sum-fin-sequence-type-Commutative-Monoid
-      (succ-ℕ n) (inl x) f =
-        ap-mul-Commutative-Monoid
-          ( M)
-          ( preserves-sum-adjacent-transposition-sum-fin-sequence-type-Commutative-Monoid
-            ( n)
-            ( x)
-            ( f ∘ inl-Fin (succ-ℕ n)))
-          ( refl)
-    preserves-sum-adjacent-transposition-sum-fin-sequence-type-Commutative-Monoid
-      (succ-ℕ n) (inr star) f = right-swap-mul-Commutative-Monoid M _ _ _
-
-    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Monoid :
-      (n : ℕ) → (L : list (Fin n)) →
-      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
-      sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
-      sum-fin-sequence-type-Commutative-Monoid
-        M (succ-ℕ n) (f ∘ map-permutation-list-adjacent-transpositions n L)
-    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Monoid
-      n nil f = refl
-    preserves-sum-permutation-list-adjacent-transpositions-Commutative-Monoid
-      n (cons x L) f =
-        preserves-sum-adjacent-transposition-sum-fin-sequence-type-Commutative-Monoid
-          ( n)
-          ( x)
-          ( f) ∙
-        preserves-sum-permutation-list-adjacent-transpositions-Commutative-Monoid
-          ( n)
-          ( L)
-          ( f ∘ map-adjacent-transposition-Fin n x)
-
-    preserves-sum-transposition-Commutative-Monoid :
-      (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
-      (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
-      sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
-      sum-fin-sequence-type-Commutative-Monoid
-        M (succ-ℕ n) (f ∘ map-transposition-Fin (succ-ℕ n) i j neq)
-    preserves-sum-transposition-Commutative-Monoid n i j i≠j f =
-      preserves-sum-permutation-list-adjacent-transpositions-Commutative-Monoid
-        ( n)
-        ( list-adjacent-transpositions-transposition-Fin n i j)
-        ( f) ∙
-      ap
-        ( λ g →
-          sum-fin-sequence-type-Commutative-Monoid M
-            ( succ-ℕ n)
-            ( f ∘ map-equiv g))
-        ( eq-permutation-list-adjacent-transpositions-transposition-Fin
-          ( n)
-          ( i)
-          ( j)
-          ( i≠j))
-
-    preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid :
-      (n : ℕ) → (L : list (Σ (Fin n × Fin n) ( λ (i , j) → i ≠ j))) →
-      (f : fin-sequence-type-Commutative-Monoid M n) →
-      sum-fin-sequence-type-Commutative-Monoid M n f ＝
-      sum-fin-sequence-type-Commutative-Monoid
-        M n (f ∘ map-equiv (permutation-list-standard-transpositions-Fin n L))
-    preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
-      zero-ℕ _ _ = refl
-    preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
-      (succ-ℕ n) nil f = refl
-    preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
-      (succ-ℕ n) (cons ((i , j) , i≠j) L) f =
-        preserves-sum-transposition-Commutative-Monoid n i j i≠j f ∙
-        preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
-          ( succ-ℕ n)
-          ( L)
-          ( f ∘ map-transposition-Fin (succ-ℕ n) i j i≠j)
-
     preserves-sum-permutation-fin-sequence-type-Commutative-Monoid :
       (n : ℕ) → (σ : Permutation n) →
       (f : fin-sequence-type-Commutative-Monoid M n) →
       sum-fin-sequence-type-Commutative-Monoid M n f ＝
       sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv σ)
-    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid n σ f =
-      preserves-sum-permutation-list-standard-transpositions-Commutative-Monoid
-        ( n)
-        ( list-standard-transpositions-permutation-Fin n σ)
-        ( f) ∙
-      ap
-        ( λ τ → sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv τ))
-        ( eq-permutation-list-standard-transpositions-Fin n σ)
+    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid zero-ℕ _ f =
+      refl
+    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
+      (succ-ℕ n) σ f =
+        sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( f) ∙
+        preserves-sum-permutation-fin-sequence-type-Commutative-Semigroup
+          ( commutative-semigroup-Commutative-Monoid M)
+          ( n)
+          ( σ)
+          ( f) ∙
+        inv
+          ( sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+            ( M)
+            ( n)
+            ( f ∘ map-equiv σ))
 ```
 
 ## See also
