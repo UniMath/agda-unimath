@@ -62,20 +62,20 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid :
+  eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid :
     (n : ℕ) (f : fin-sequence-type-Commutative-Monoid M (succ-ℕ n)) →
     sum-fin-sequence-type-Commutative-Monoid M (succ-ℕ n) f ＝
     sum-fin-sequence-type-Commutative-Semigroup
       ( commutative-semigroup-Commutative-Monoid M)
       ( n)
       ( f)
-  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid zero-ℕ f =
-    left-unit-law-mul-Commutative-Monoid M _
-  sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+  eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+    zero-ℕ f = left-unit-law-mul-Commutative-Monoid M _
+  eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
     (succ-ℕ n) f =
       ap
         ( mul-Commutative-Monoid' M _)
-        ( sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+        ( eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
           ( n)
           ( f ∘ inl))
 ```
@@ -234,7 +234,7 @@ module _
       refl
     preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
       (succ-ℕ n) σ f =
-        sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+        eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
           ( M)
           ( n)
           ( f) ∙
@@ -244,7 +244,7 @@ module _
           ( σ)
           ( f) ∙
         inv
-          ( sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
             ( M)
             ( n)
             ( f ∘ map-equiv σ))

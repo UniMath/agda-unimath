@@ -47,7 +47,7 @@ open import univalent-combinatorics.standard-finite-types
 The
 {{#concept "sum operation" Disambiguation="of a finite sequence in a commutative semigroup" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Commutative-Semigroup}}
 extends the binary operation on a
-[commutative semigroup](group-theory.commutative-monoids.md) `G` to any
+[commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
 [finite sequence](lists.finite-sequences.md) of elements of `G`.
 
 ## Definition
