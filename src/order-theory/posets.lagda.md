@@ -201,3 +201,17 @@ module _
 ```
 
 It remains to show that these constructions form inverses to each other.
+
+### 3-cycles in poset inequalities
+
+```agda
+abstract
+  3-cycle-leq-Poset :
+    {l1 l2 : Level} → (P : Poset l1 l2) → {a b c : type-Poset P} →
+    leq-Poset P a b → leq-Poset P b c → leq-Poset P c a →
+    (a ＝ b) × (a ＝ c) × (b ＝ c)
+  3-cycle-leq-Poset P {a} {b} {c} a≤b b≤c c≤a =
+    ( antisymmetric-leq-Poset P a b a≤b (transitive-leq-Poset P _ c _ c≤a b≤c) ,
+      antisymmetric-leq-Poset P a c (transitive-leq-Poset P _ b _ b≤c a≤b) c≤a ,
+      antisymmetric-leq-Poset P b c b≤c (transitive-leq-Poset P _ a _ a≤b c≤a))
+```

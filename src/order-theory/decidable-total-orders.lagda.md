@@ -13,6 +13,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -507,6 +508,67 @@ module _
   max-leq-leq-Decidable-Total-Order =
     join-leq-leq-Order-Theoretic-Join-Semilattice
       ( order-theoretic-join-semilattice-Decidable-Total-Order)
+```
+
+### `max a b` is equal to `a` or `b`
+
+```agda
+module _
+  {l1 l2 : Level} (D : Decidable-Total-Order l1 l2)
+  where
+
+  abstract
+    max-eq-one-Decidable-Total-Order :
+      (a b : type-Decidable-Total-Order D) →
+      ( (max-Decidable-Total-Order D a b ＝ a) +
+        (max-Decidable-Total-Order D a b ＝ b))
+    max-eq-one-Decidable-Total-Order x y
+      with is-leq-or-strict-greater-Decidable-Total-Order D x y
+    ... | inl _ = inr refl
+    ... | inr _ = inl refl
+
+    max-eq-one-of-four-Decidable-Total-Order :
+      (a b c d : type-Decidable-Total-Order D) →
+      let max-D = max-Decidable-Total-Order D in
+      ( ( max-D (max-D a b) (max-D c d) ＝ a) +
+        ( max-D (max-D a b) (max-D c d) ＝ b)) +
+      ( ( max-D (max-D a b) (max-D c d) ＝ c) +
+        ( max-D (max-D a b) (max-D c d) ＝ d))
+    max-eq-one-of-four-Decidable-Total-Order a b c d =
+      map-coproduct
+        ( λ p →
+          map-coproduct (p ∙_) (p ∙_) (max-eq-one-Decidable-Total-Order a b))
+        ( λ p →
+          map-coproduct (p ∙_) (p ∙_) (max-eq-one-Decidable-Total-Order c d))
+        ( max-eq-one-Decidable-Total-Order
+          ( max-Decidable-Total-Order D a b)
+          ( max-Decidable-Total-Order D c d))
+
+    min-eq-one-Decidable-Total-Order :
+      (a b : type-Decidable-Total-Order D) →
+      ( (min-Decidable-Total-Order D a b ＝ a) +
+        (min-Decidable-Total-Order D a b ＝ b))
+    min-eq-one-Decidable-Total-Order x y
+      with is-leq-or-strict-greater-Decidable-Total-Order D x y
+    ... | inl _ = inl refl
+    ... | inr _ = inr refl
+
+    min-eq-one-of-four-Decidable-Total-Order :
+      (a b c d : type-Decidable-Total-Order D) →
+      let min-D = min-Decidable-Total-Order D in
+      ( ( min-D (min-D a b) (min-D c d) ＝ a) +
+        ( min-D (min-D a b) (min-D c d) ＝ b)) +
+      ( ( min-D (min-D a b) (min-D c d) ＝ c) +
+        ( min-D (min-D a b) (min-D c d) ＝ d))
+    min-eq-one-of-four-Decidable-Total-Order a b c d =
+      map-coproduct
+        ( λ p →
+          map-coproduct (p ∙_) (p ∙_) (min-eq-one-Decidable-Total-Order a b))
+        ( λ p →
+          map-coproduct (p ∙_) (p ∙_) (min-eq-one-Decidable-Total-Order c d))
+        ( min-eq-one-Decidable-Total-Order
+          ( min-Decidable-Total-Order D a b)
+          ( min-Decidable-Total-Order D c d))
 ```
 
 ### Subsets of decidable total orders are decidable total orders

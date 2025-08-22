@@ -9,12 +9,15 @@ module order-theory.opposite-posets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.least-upper-bounds-posets
 open import order-theory.opposite-preorders
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
@@ -117,4 +120,24 @@ module _
       ( opposite-hom-Poset P Q f) ＝
     f
   is-involution-opposite-hom-Poset = refl
+```
+
+### A greatest lower bound in a poset is a least upper bound in the opposite poset, and vice versa
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (a b : type-Poset P)
+  where
+
+  is-greatest-binary-lower-bound-opposite-Poset :
+    (c : type-Poset P) →
+    is-greatest-binary-lower-bound-Poset P a b c →
+    is-least-binary-upper-bound-Poset (opposite-Poset P) a b c
+  is-greatest-binary-lower-bound-opposite-Poset c = id
+
+  is-least-binary-upper-bound-opposite-Poset :
+    (c : type-Poset P) →
+    is-least-binary-upper-bound-Poset P a b c →
+    is-greatest-binary-lower-bound-Poset (opposite-Poset P) a b c
+  is-least-binary-upper-bound-opposite-Poset c = id
 ```

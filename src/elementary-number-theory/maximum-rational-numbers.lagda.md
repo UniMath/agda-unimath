@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -38,6 +39,9 @@ number of the two. This is the
 ```agda
 max-ℚ : ℚ → ℚ → ℚ
 max-ℚ = max-Decidable-Total-Order ℚ-Decidable-Total-Order
+
+ap-max-ℚ : {x x' : ℚ} → x ＝ x' → {y y' : ℚ} → y ＝ y' → max-ℚ x y ＝ max-ℚ x' y'
+ap-max-ℚ = ap-binary max-ℚ
 ```
 
 ## Properties
