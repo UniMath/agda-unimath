@@ -14,6 +14,7 @@ open import elementary-number-theory.absolute-value-rational-numbers public
 open import elementary-number-theory.ackermann-function public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
+open import elementary-number-theory.addition-intervals-rational-numbers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-positive-and-negative-integers public
 open import elementary-number-theory.addition-rational-numbers public
@@ -101,6 +102,7 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.intervals-rational-numbers public
 open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
@@ -119,6 +121,7 @@ open import elementary-number-theory.monoid-of-natural-numbers-with-addition pub
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
 open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
+open import elementary-number-theory.multiplication-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
