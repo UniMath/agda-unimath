@@ -140,3 +140,26 @@ module _
       ( limit-convergent-cauchy-approximation-Metric-Space)
   is-limit-limit-convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)
 ```
+
+## Properties
+
+### Constant Cauchy approximations are convergent
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2) (x : type-Metric-Space A)
+  where
+
+  is-convergent-const-cauchy-approximation-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( A)
+      ( const-cauchy-approximation-Metric-Space A x)
+  is-convergent-const-cauchy-approximation-Metric-Space =
+    ( x , is-limit-const-cauchy-approximation-Metric-Space A x)
+
+  const-convergent-cauchy-approximation-Metric-Space :
+    convergent-cauchy-approximation-Metric-Space A
+  const-convergent-cauchy-approximation-Metric-Space =
+    ( const-cauchy-approximation-Metric-Space A x ,
+      is-convergent-const-cauchy-approximation-Metric-Space)
+```

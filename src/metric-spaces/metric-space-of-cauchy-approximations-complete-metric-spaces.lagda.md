@@ -61,7 +61,7 @@ module _
     Metric-Space (l1 ⊔ l2) l2
   metric-space-of-cauchy-approximations-Complete-Metric-Space =
     metric-space-of-cauchy-approximations-Metric-Space
-      ( metric-space-Complete-Metric-Space A)
+      ( metric-Complete-Metric-Space A)
 ```
 
 ## Properties
@@ -77,7 +77,7 @@ module _
     is-isometry-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( convergent-cauchy-approximation-Complete-Metric-Space A)
   is-isometry-convergent-cauchy-approximation-Complete-Metric-Space d x y =
     (id , id)
@@ -86,7 +86,7 @@ module _
     isometry-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
   isometry-convergent-cauchy-approximation-Complete-Metric-Space =
     convergent-cauchy-approximation-Complete-Metric-Space A ,
     is-isometry-convergent-cauchy-approximation-Complete-Metric-Space
@@ -102,12 +102,12 @@ module _
   eq-metric-space-convergent-cauchy-approximations-Complete-Metric-Space :
     ( metric-space-of-cauchy-approximations-Complete-Metric-Space A) ＝
     ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-      ( metric-space-Complete-Metric-Space A))
+      ( metric-Complete-Metric-Space A))
   eq-metric-space-convergent-cauchy-approximations-Complete-Metric-Space =
     eq-isometric-equiv-Metric-Space'
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( convergent-cauchy-approximation-Complete-Metric-Space A ,
         is-equiv-convergent-cauchy-approximation-Complete-Metric-Space A ,
         is-isometry-convergent-cauchy-approximation-Complete-Metric-Space A)
@@ -124,25 +124,25 @@ module _
     short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
   short-convergent-cauchy-approximation-Complete-Metric-Space =
     short-isometry-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( isometry-convergent-cauchy-approximation-Complete-Metric-Space A)
 
   is-short-convergent-cauchy-approximation-Complete-Metric-Space :
     is-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( convergent-cauchy-approximation-Complete-Metric-Space A)
   is-short-convergent-cauchy-approximation-Complete-Metric-Space =
     is-short-map-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( short-convergent-cauchy-approximation-Complete-Metric-Space)
 ```
 
@@ -156,26 +156,26 @@ module _
   short-limit-cauchy-approximation-Complete-Metric-Space :
     short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
-      ( metric-space-Complete-Metric-Space A)
+      ( metric-Complete-Metric-Space A)
   short-limit-cauchy-approximation-Complete-Metric-Space =
     comp-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
-      ( metric-space-Complete-Metric-Space A)
+        ( metric-Complete-Metric-Space A))
+      ( metric-Complete-Metric-Space A)
       ( short-limit-convergent-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
+        ( metric-Complete-Metric-Space A))
       ( short-convergent-cauchy-approximation-Complete-Metric-Space A)
 
   is-short-limit-cauchy-approximation-Complete-Metric-Space :
     is-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
-      ( metric-space-Complete-Metric-Space A)
+      ( metric-Complete-Metric-Space A)
       ( limit-cauchy-approximation-Complete-Metric-Space A)
   is-short-limit-cauchy-approximation-Complete-Metric-Space =
     is-short-map-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Complete-Metric-Space A)
-      ( metric-space-Complete-Metric-Space A)
+      ( metric-Complete-Metric-Space A)
       ( short-limit-cauchy-approximation-Complete-Metric-Space)
 ```
 
@@ -204,13 +204,13 @@ module _
     limit-cauchy-approximation-Complete-Metric-Space
       ( A)
       ( map-swap-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
+        ( metric-Complete-Metric-Space A)
         ( U)
         ( η))
 
   is-cauchy-map-lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space :
     is-cauchy-approximation-Metric-Space
-      ( metric-space-Complete-Metric-Space A)
+      ( metric-Complete-Metric-Space A)
       ( map-lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space)
   is-cauchy-map-lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space
     ε δ =
@@ -218,16 +218,16 @@ module _
       ( A)
       ( ε +ℚ⁺ δ)
       ( map-swap-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
+        ( metric-Complete-Metric-Space A)
         ( U)
         ( ε))
       ( map-swap-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
+        ( metric-Complete-Metric-Space A)
         ( U)
         ( δ))
       ( λ η →
         is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-          ( metric-space-Complete-Metric-Space A)
+          ( metric-Complete-Metric-Space A)
           ( map-cauchy-approximation-Metric-Space
             ( metric-space-of-cauchy-approximations-Complete-Metric-Space
               ( A))
@@ -237,8 +237,7 @@ module _
           ( δ))
 
   lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space :
-    cauchy-approximation-Metric-Space
-      (metric-space-Complete-Metric-Space A)
+    cauchy-approximation-Metric-Space (metric-Complete-Metric-Space A)
   lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space
     =
     map-lim-cauchy-approximation-cauchy-approximations-Complete-Metric-Space ,
@@ -255,7 +254,7 @@ module _
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( A)
       ( map-swap-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
+        ( metric-Complete-Metric-Space A)
         ( U)
         ( η))
       ( ε)
