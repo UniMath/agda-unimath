@@ -37,6 +37,7 @@ open import lists.sequences
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
@@ -190,21 +191,21 @@ module _
       in
         modulus-limit-modulus-sequence-Metric-Space M x lim H ε'⁺ ,
         λ m k n≤m n≤k →
-        is-monotonic-structure-Metric-Space
+        monotonic-neighborhood-Metric-Space
           ( M)
           ( x m)
           ( x k)
           ( ε'⁺ +ℚ⁺ ε'⁺)
           ( ε⁺)
           ( 2ε'<ε)
-          ( is-triangular-structure-Metric-Space
+          ( triangular-neighborhood-Metric-Space
             ( M)
             ( x m)
             ( lim)
             ( x k)
             ( ε'⁺)
             ( ε'⁺)
-            ( is-symmetric-structure-Metric-Space
+            ( symmetric-neighborhood-Metric-Space
               ( M)
               ( ε'⁺)
               ( x k)
@@ -254,7 +255,7 @@ module _
         in
           rec-coproduct
             ( λ mε≤mδ →
-              is-monotonic-structure-Metric-Space
+              monotonic-neighborhood-Metric-Space
                 ( M)
                 ( xmε)
                 ( xmδ)
@@ -268,14 +269,14 @@ module _
                   ( mδ)
                   ( mε≤mδ)))
             ( λ mδ≤mε →
-              is-monotonic-structure-Metric-Space
+              monotonic-neighborhood-Metric-Space
                 ( M)
                 ( xmε)
                 ( xmδ)
                 ( δ⁺)
                 ( ε⁺ +ℚ⁺ δ⁺)
                 ( le-left-add-rational-ℚ⁺ δ ε⁺)
-                ( is-symmetric-structure-Metric-Space
+                ( symmetric-neighborhood-Metric-Space
                   ( M)
                   ( δ⁺)
                   ( xmδ)
@@ -336,7 +337,7 @@ module _
       xn = map-cauchy-sequence-Metric-Space M x n
       xm = map-cauchy-sequence-Metric-Space M x m
     in
-      is-monotonic-structure-Metric-Space
+      monotonic-neighborhood-Metric-Space
         ( M)
         ( xm)
         ( lim)
@@ -348,7 +349,7 @@ module _
           ( ε)
           ( 2ε'<ε)
           ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
-        ( is-triangular-structure-Metric-Space
+        ( triangular-neighborhood-Metric-Space
           ( M)
           ( xm)
           ( xn)
@@ -359,7 +360,7 @@ module _
             ( λ d → neighborhood-Metric-Space M d xn lim)
             ( eq-add-split-ℚ⁺ ε'⁺)
             ( H ε''⁺ (right-summand-split-ℚ⁺ ε'⁺)))
-          ( is-symmetric-structure-Metric-Space
+          ( symmetric-neighborhood-Metric-Space
             ( M)
             ( ε''⁺)
             ( xn)
@@ -425,7 +426,7 @@ module _
             1/m' = positive-reciprocal-rational-ℕ⁺ m'
             1/k' = positive-reciprocal-rational-ℕ⁺ k'
           in
-            is-monotonic-structure-Metric-Space
+            monotonic-neighborhood-Metric-Space
               ( M)
               ( xm)
               ( xk)
@@ -533,7 +534,7 @@ module _
             ( n)
             ( right-leq-max-ℕ n₁ n₂)
       in
-        is-monotonic-structure-Metric-Space
+        monotonic-neighborhood-Metric-Space
           ( M)
           ( xε)
           ( lim)
@@ -543,7 +544,7 @@ module _
             ( λ y → le-ℚ⁺ y (ε⁺ +ℚ⁺ δ⁺))
             ( associative-add-ℚ⁺ ε⁺ δ'⁺ δ'⁺)
             ( preserves-le-right-add-ℚ ε (δ' +ℚ δ') δ 2δ'<δ))
-          ( is-triangular-structure-Metric-Space
+          ( triangular-neighborhood-Metric-Space
             ( M)
             ( xε)
             ( x1/n')
@@ -551,7 +552,7 @@ module _
             ( ε⁺ +ℚ⁺ δ'⁺)
             ( δ'⁺)
             ( x1/n'-l-neighborhood)
-            ( is-monotonic-structure-Metric-Space
+            ( monotonic-neighborhood-Metric-Space
               ( M)
               ( xε)
               ( x1/n')

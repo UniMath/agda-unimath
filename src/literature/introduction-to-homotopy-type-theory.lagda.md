@@ -302,16 +302,16 @@ open import foundation.booleans using
   ; ind-bool)
 
 -- (a)
-open import foundation.booleans using
+open import foundation.logical-operations-booleans using
   ( neg-bool)
 
 -- (b)
-open import foundation.booleans using
-  ( conjunction-bool)
+open import foundation.logical-operations-booleans using
+  ( and-bool)
 
 -- (c)
-open import foundation.booleans using
-  ( disjunction-bool)
+open import foundation.logical-operations-booleans using
+  ( or-bool)
 ```
 
 **Exercise 4.3.** Double negation.
@@ -336,7 +336,7 @@ open import foundation.double-negation using
   ( ¬¬_
   ; intro-double-negation -- P → ¬¬P
   ; map-double-negation -- (P → Q) → (¬¬P → ¬¬Q)
-  ; double-negation-extend -- (P → ¬¬Q) → (¬¬P → ¬¬Q)
+  ; extend-double-negation -- (P → ¬¬Q) → (¬¬P → ¬¬Q)
   )
 
 -- (c)
@@ -345,7 +345,7 @@ open import foundation.double-negation using
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
   )
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-is-decidable -- ¬¬(P + ¬P)
   )
 
@@ -382,7 +382,7 @@ _ =
       ( double-negation-elim-neg (¬ Q))
 
 -- (f)
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-product -- ¬¬A → ¬¬B → ¬¬(A × B)
   )
 
@@ -935,7 +935,7 @@ _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 
 -- (c)
-open import foundation.booleans using
+open import foundation.logical-operations-booleans using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
 _ : ¬ (false ＝ true)
@@ -1753,7 +1753,7 @@ open import elementary-number-theory.collatz-conjecture using
 
 ```agda
 open import foundation.decidable-types using
-  ( idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
+  ( map-idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
   )
 ```
 
