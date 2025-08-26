@@ -288,7 +288,7 @@ factorization system is stable, so are the surjections. ■
 
 > This remains to be formalized.
 
-### Types equipped with subfinite indexings are Dedekind finite
+### Types equipped with subfinite indexings are Dedekind finite {#MO433318}
 
 We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
