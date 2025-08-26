@@ -46,7 +46,7 @@ open import univalent-combinatorics.subcounting
 
 A {{#concept "subfinite indexing" Agda=subfinite-indexing}} of a type `X` is the
 data of a type `D` [equipped](foundation.structure.md) with a
-[subcounting](univalent-combinatorics.subcounting.md) `D ↪ Fin n` and a
+[subcounting](univalent-combinatorics.subcounting.md), i.e., an embedding `D ↪ Fin n`, and a
 [surjection](foundation.surjective-maps.md) `D ↠ X`.
 
 Note that the subcounting of `D` is _proof-relevant_, and hence having a
@@ -294,7 +294,7 @@ We reproduce a proof given by
 answer: <https://mathoverflow.net/a/433318>.
 
 **Proof.** Let $X$ be a subfinitely enumerable type, witnessed by
-$Fin n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$ is Dedekind
+$\operatorname{Fin}n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$ is Dedekind
 finite, so let $f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
 equivalence it suffices to prove $f$ is surjective, so assume given an arbitrary
 $x : X$ where we want to show there exists $z : X$ such that $f(z) ＝ x$.
@@ -428,7 +428,7 @@ module _
 
 ## References
 
-{{#bibliograhy}}
+{{#bibliography}}
 
 ## See also
 
