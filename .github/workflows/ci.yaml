@@ -7,6 +7,11 @@ on:
         description: the repository ref to build
         required: true
         default: master
+      runner:
+        description:
+          runner label to use when manually dispatching (e.g. "self-hosted")
+        required: false
+        default: ubuntu-latest
 
   push:
     branches:
@@ -27,10 +32,11 @@ concurrency:
 
 jobs:
   typecheck:
-    runs-on: ${{ matrix.os }}
+    runs-on:
+      ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.runner
+      || 'ubuntu-latest' }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
         agda: ['2.7.0']
     steps:
       - name: Checkout our repository
@@ -70,7 +76,10 @@ jobs:
   # any other packages; that gives a warning during building, but doesn't
   # fail the build.
   link-check:
-    runs-on: ubuntu-latest
+    # Use the same conditional runner selection (manual dispatch can pick your self-hosted label)
+    runs-on:
+      ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.runner
+      || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -103,7 +112,10 @@ jobs:
           make SKIPAGDA=1 website
 
   pre-commit:
-    runs-on: ubuntu-latest
+    # Use the same conditional runner selection here as well
+    runs-on:
+      ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.runner
+      || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v4
 
