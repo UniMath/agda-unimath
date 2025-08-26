@@ -83,6 +83,9 @@ module _
   type-left-module-Ring : UU l2
   type-left-module-Ring = type-Ab ab-left-module-Ring
 
+  is-set-type-left-module-Ring : is-set type-left-module-Ring
+  is-set-type-left-module-Ring = pr2 set-left-module-Ring
+
   add-left-module-Ring :
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
