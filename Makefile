@@ -6,7 +6,7 @@ WEBSITE_DIR := website
 WEBSITE_CSS_DIR := $(WEBSITE_DIR)/css
 WEBSITE_IMAGES_DIR := $(WEBSITE_DIR)/images
 WEBSITE_JS_DIR := $(WEBSITE_DIR)/js
-THEME_DIR := theme
+THEME_DIR := website/theme
 # MDBOOK input, corresponds to the `src` variable in `book.toml`
 MDBOOK_SRC := docs
 # MDBOOK build directory

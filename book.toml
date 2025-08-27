@@ -66,6 +66,7 @@ before = [ "git-metadata" ]
 follow-web-links = false
 
 [output.html]
+theme = "website/theme"
 default-theme = "light"
 preferred-dark-theme = "Ayu"
 # The following option is renamed to smart-punctuation in mdbook 0.4.38
@@ -76,13 +77,13 @@ additional-css = [
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
   "website/css/bibliography.css",
-  "theme/catppuccin.css",
-  "theme/catppuccin-admonish.css",
-  "theme/pagetoc.css",
+  "website/theme/catppuccin.css",
+  "website/theme/catppuccin-admonish.css",
+  "website/theme/pagetoc.css",
 ]
 additional-js = [
   "website/js/custom.js",
-  "theme/pagetoc.js"
+  "website/theme/pagetoc.js"
 ]
 no-section-label = false
 site-url = "/agda-unimath/"
