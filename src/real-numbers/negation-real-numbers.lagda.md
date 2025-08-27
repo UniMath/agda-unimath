@@ -39,6 +39,7 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -119,4 +120,32 @@ neg-Rational-ℝ (x , q , q≮x , x≮q) =
   neg-ℚ q ,
   x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
   q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
+
+neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
+neg-real-ℚ q = eq-sim-ℝ (sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
 ```
+
+### Negation preserves similarity
+
+```agda
+abstract
+  preserves-sim-neg-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l2} →
+    sim-ℝ x x' → sim-ℝ (neg-ℝ x) (neg-ℝ x')
+  preserves-sim-neg-ℝ {x = x} {x' = x'} x~x' =
+    let
+      (lx⊆lx' , lx'⊆lx) =
+        backward-implication (sim-lower-cut-iff-sim-ℝ x x') x~x'
+    in
+      forward-implication
+        ( sim-upper-cut-iff-sim-ℝ _ _)
+        ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
+```
+
+## See also
+
+- In
+  [The negation isometry on real numbers](real-numbers.isometry-negation-real-numbers.md)
+  we show that negation is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) on the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)

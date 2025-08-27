@@ -224,7 +224,7 @@ module _
     has-same-elements-sim-subtype
       ( im-subtype (g ∘ f) S)
       ( im-subtype g (im-subtype f S))
-      ( lower-sim-upper-sim-galois-connection-Large-Poset
+      ( sim-lower-sim-upper-galois-connection-Large-Poset
         ( powerset-Large-Poset A)
         ( powerset-Large-Poset C)
         ( image-pullback-subtype-galois-connection-Large-Poset (g ∘ f))
@@ -252,7 +252,7 @@ module _
     has-same-elements-subtype (subtype-im (g ∘ f)) (im-subtype g (subtype-im f))
   compute-subtype-im-comp x =
     logical-equivalence-reasoning
-      is-in-subtype-im (g ∘ f) x
+      is-in-im (g ∘ f) x
       ↔ is-in-im-subtype (g ∘ f) (full-subtype lzero A) x
         by
         inv-iff (compute-im-full-subtype (g ∘ f) x)

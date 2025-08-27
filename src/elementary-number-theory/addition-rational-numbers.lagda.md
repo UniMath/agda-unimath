@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -39,8 +40,9 @@ basic properties.
 ## Definition
 
 ```agda
-add-ℚ : ℚ → ℚ → ℚ
-add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
+opaque
+  add-ℚ : ℚ → ℚ → ℚ
+  add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
 
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
@@ -68,7 +70,9 @@ pred-ℚ = add-ℚ neg-one-ℚ
 ### Unit laws
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
   left-unit-law-add-ℚ (x , p) =
     eq-ℚ-sim-fraction-ℤ
@@ -89,7 +93,10 @@ abstract
 ### Addition is associative
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding rational-fraction-ℤ
+
   associative-add-ℚ :
     (x y z : ℚ) →
     (x +ℚ y) +ℚ z ＝ x +ℚ (y +ℚ z)
@@ -116,7 +123,9 @@ abstract
 ### Addition is commutative
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+
   commutative-add-ℚ :
     (x y : ℚ) →
     x +ℚ y ＝ y +ℚ x
@@ -143,7 +152,10 @@ abstract
 ### The negative of a rational number is its additive inverse
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -161,10 +173,28 @@ abstract
     commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
 
-### The negatives of rational numbers distribute over addition
+### If `p + q = 0`, then `p = -q`
 
 ```agda
 abstract
+  unique-left-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → p ＝ neg-ℚ q
+  unique-left-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      p
+      ＝ p +ℚ zero-ℚ by inv (right-unit-law-add-ℚ p)
+      ＝ p +ℚ (q +ℚ neg-ℚ q) by ap (p +ℚ_) (inv (right-inverse-law-add-ℚ q))
+      ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
+      ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
+      ＝ neg-ℚ q by left-unit-law-add-ℚ _
+```
+
+### The negatives of rational numbers distribute over addition
+
+```agda
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
@@ -178,7 +208,10 @@ abstract
 ### The successor and predecessor functions on ℚ are mutual inverses
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding neg-ℚ
+
   is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
   is-retraction-pred-ℚ x =
     equational-reasoning
@@ -222,7 +255,10 @@ pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
 ### The inclusion of integer fractions preserves addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding rational-fraction-ℤ
+
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
     rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
@@ -274,6 +310,15 @@ abstract
 abstract
   succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
   succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
+### The embedding of the successor of a natural number is the successor of its embedding
+
+```agda
+abstract
+  succ-rational-int-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
+  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also

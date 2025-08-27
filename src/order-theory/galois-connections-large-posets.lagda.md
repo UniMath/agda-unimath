@@ -303,14 +303,14 @@ module _
   (H : galois-connection-Large-Poset γH δH P Q)
   where
 
-  lower-sim-galois-connection-Large-Poset : UUω
-  lower-sim-galois-connection-Large-Poset =
+  sim-lower-galois-connection-Large-Poset : UUω
+  sim-lower-galois-connection-Large-Poset =
     sim-hom-Large-Poset P Q
       ( lower-adjoint-galois-connection-Large-Poset G)
       ( lower-adjoint-galois-connection-Large-Poset H)
 
-  upper-sim-galois-connection-Large-Poset : UUω
-  upper-sim-galois-connection-Large-Poset =
+  sim-upper-galois-connection-Large-Poset : UUω
+  sim-upper-galois-connection-Large-Poset =
     sim-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
       ( upper-adjoint-galois-connection-Large-Poset H)
@@ -398,10 +398,10 @@ module _
   (H : galois-connection-Large-Poset γH δH P Q)
   where
 
-  upper-sim-lower-sim-galois-connection-Large-Poset :
-    lower-sim-galois-connection-Large-Poset P Q G H →
-    upper-sim-galois-connection-Large-Poset P Q H G
-  upper-sim-lower-sim-galois-connection-Large-Poset
+  sim-upper-sim-lower-galois-connection-Large-Poset :
+    sim-lower-galois-connection-Large-Poset P Q G H →
+    sim-upper-galois-connection-Large-Poset P Q H G
+  sim-upper-sim-lower-galois-connection-Large-Poset
     p x =
     sim-has-same-elements-principal-lower-set-element-Large-Poset P
       ( λ y →
@@ -424,10 +424,10 @@ module _
               ( map-upper-adjoint-galois-connection-Large-Poset P Q G x)
             by adjoint-relation-galois-connection-Large-Poset G y x)
 
-  lower-sim-upper-sim-galois-connection-Large-Poset :
-    upper-sim-galois-connection-Large-Poset P Q H G →
-    lower-sim-galois-connection-Large-Poset P Q G H
-  lower-sim-upper-sim-galois-connection-Large-Poset
+  sim-lower-sim-upper-galois-connection-Large-Poset :
+    sim-upper-galois-connection-Large-Poset P Q H G →
+    sim-lower-galois-connection-Large-Poset P Q G H
+  sim-lower-sim-upper-galois-connection-Large-Poset
     p y =
     sim-has-same-elements-principal-upper-set-element-Large-Poset Q
       ( λ x →
@@ -478,7 +478,7 @@ module _
     htpy-sim-hom-Large-Poset Q P
       ( upper-adjoint-galois-connection-Large-Poset G)
       ( upper-adjoint-galois-connection-Large-Poset H)
-      ( upper-sim-lower-sim-galois-connection-Large-Poset P Q H G
+      ( sim-upper-sim-lower-galois-connection-Large-Poset P Q H G
         ( sim-htpy-hom-Large-Poset P Q
           ( lower-adjoint-galois-connection-Large-Poset H)
           ( lower-adjoint-galois-connection-Large-Poset G)
@@ -491,7 +491,7 @@ module _
     htpy-sim-hom-Large-Poset P Q
       ( lower-adjoint-galois-connection-Large-Poset G)
       ( lower-adjoint-galois-connection-Large-Poset H)
-      ( lower-sim-upper-sim-galois-connection-Large-Poset P Q G H
+      ( sim-lower-sim-upper-galois-connection-Large-Poset P Q G H
         ( sim-htpy-hom-Large-Poset Q P
           ( upper-adjoint-galois-connection-Large-Poset H)
           ( upper-adjoint-galois-connection-Large-Poset G)

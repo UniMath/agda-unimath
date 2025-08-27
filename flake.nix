@@ -77,7 +77,7 @@
 
             # Development tools
             packages = [
-              # maintanance scripts
+              # maintenance scripts
               python
               # pre-commit checks
               pkgs.pre-commit

@@ -8,6 +8,10 @@ everythingOpts := --guardedness --cohesion --flat-split --rewriting
 # use "$ export AGDAVERBOSE=-v20" if you want to see all
 AGDAVERBOSE ?= -v1
 
+# use "$ export SKIPAGDA=1" or "make SKIPAGDA=1 ..." to skip Agda processing
+# when building the website
+SKIPAGDA ?=
+
 ifeq ($(CI),)
 	AGDA_MIN_HEAP ?= 2G
 else
@@ -22,7 +26,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # css flag, which only affects how files with the .agda extension are processed.
 # However, the HTML backend also processes referenced library files
 # (Agda.Primitive at the time of writing), which is a pure Agda file, and
-# setting higlight=code would make it not recognized as code at all, so the
+# setting highlight=code would make it not recognized as code at all, so the
 # resulting page looks garbled. With highlight=auto and the default Agda.css, it
 # at is at least in a proper code block with syntax highlighting, albeit without
 # the agda-unimath chrome.
@@ -40,7 +44,7 @@ METAFILES := \
 	CONTRIBUTORS.md \
 	FILE-CONVENTIONS.md \
 	DESIGN-PRINCIPLES.md \
-	GRANT-ACKNOWLEDGEMENTS.md \
+	GRANT-ACKNOWLEDGMENTS.md \
 	HOME.md \
 	HOWTO-INSTALL.md \
 	LICENSE.md \
@@ -131,7 +135,11 @@ profile-module:
 agda-html: ./src/everything.lagda.md
 	@rm -rf ./docs/
 	@mkdir -p ./docs/
-	@${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md
+# Use bash if instead of ifeq, because we want to change SKIPAGDA with rules
+	@if [ -z "$(SKIPAGDA)" ];\
+	then ${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md; \
+	else python3 ./scripts/generate_noagda_html.py ./docs/; \
+	fi
 
 SUMMARY.md: ${AGDAFILES} ./scripts/generate_main_index_file.py
 	@python3 ./scripts/generate_main_index_file.py
@@ -145,12 +153,13 @@ CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./scripts/generate_contributo
 website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppuccin.css
 	@python3 ./scripts/generate_agda_css.py
 
-website/images/agda_dependency_graph.svg: ${AGDAFILES}
+website/images/agda_dependency_graph.svg website/images/agda_dependency_graph_legend.html &: ${AGDAFILES}
 	@python3 ./scripts/generate_dependency_graph_rendering.py website/images/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
-								 ./website/css/Agda-highlight.css ./website/images/agda_dependency_graph.svg
+								 ./website/css/Agda-highlight.css ./website/images/agda_dependency_graph.svg \
+								 ./website/images/agda_dependency_graph_legend.html
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
 	@cp -r ./website/images ./docs/website/
@@ -160,11 +169,13 @@ website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
 
 .PHONY: website
 website: website-prepare
-	@mdbook build
+	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
+	  mdbook build
 
 .PHONY: serve-website
 serve-website: website-prepare
-	@mdbook serve -p 8080 --open -d ./book/html
+	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
+	  mdbook serve -p 8080 --open -d ./book/html
 
 docs/dependency.dot : ./src/everything.lagda.md ${AGDAFILES}
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=$@ $<

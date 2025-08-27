@@ -31,7 +31,7 @@ family `P` of types over `ℕ` and any natural number `k : ℕ`, equipped with
 
 such that
 
-1. `based-ind-ℕ k P p0 pS k K ＝ p0` for any `K : k ≤-ℕ k, and
+1. `based-ind-ℕ k P p0 pS k K ＝ p0` for any `K : k ≤-ℕ k`, and
 2. `based-ind-ℕ k P p0 pS (n + 1) N' ＝ pS n N (based-ind-ℕ k P p0 pS n N` for
    any `N : k ≤-ℕ n` and any `N' : k ≤-ℕ n + 1`.
 

@@ -10,7 +10,6 @@ module logic.double-negation-eliminating-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -18,11 +17,10 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.retractions
 open import foundation.retracts-of-maps
-open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -53,7 +51,7 @@ eliminating maps come [equipped](foundation.structure.md) with a map
   (y : B) → ¬¬ (fiber f y) → fiber f y.
 ```
 
-## Definintion
+## Definition
 
 ### Double negation elimination structure on a map
 
@@ -180,7 +178,7 @@ module _
     (y : B) → ¬¬ (fiber f y) → Σ (fiber g (g y)) (λ t → fiber f (pr1 t))
   fiber-comp-is-double-negation-eliminating-map-right-factor' y nnfy =
     map-compute-fiber-comp g f (g y)
-      ( GF (g y) (λ ngfgy → nnfy λ x → ngfgy ((pr1 x) , ap g (pr2 x))))
+      ( GF (g y) (map-double-negation (λ x → (pr1 x , ap g (pr2 x))) nnfy))
 
   is-double-negation-eliminating-map-right-factor' :
     is-injective g → is-double-negation-eliminating-map f
@@ -333,3 +331,27 @@ module _
       ( retract-fiber-retract-map f g R x)
       ( G (map-codomain-inclusion-retract-map f g R x))
 ```
+
+### Double negation eliminating maps have Hilbert ε-operators
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  ε-operator-map-is-double-negation-eliminating-map :
+    {f : A → B} → is-double-negation-eliminating-map f → ε-operator-map f
+  ε-operator-map-is-double-negation-eliminating-map H x =
+    ε-operator-Hilbert-has-double-negation-elim (H x)
+
+  ε-operator-double-negation-eliminating-map :
+    (f : A →¬¬ B) → ε-operator-map (map-double-negation-eliminating-map f)
+  ε-operator-double-negation-eliminating-map f =
+    ε-operator-map-is-double-negation-eliminating-map
+      ( is-double-negation-eliminating-double-negation-eliminating-map f)
+```
+
+## See also
+
+- In [double negation images](foundation.double-negation-images.md) we show that
+  injective maps with double negation elimination are embeddings.

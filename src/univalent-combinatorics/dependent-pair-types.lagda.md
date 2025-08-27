@@ -31,6 +31,8 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -75,7 +77,7 @@ pr2 (Σ-Finite-Type A B) =
     ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
-### If `A` and `Σ A B` are finite, then eacy `B a` is finite
+### If `A` and `Σ A B` are finite, then each `B a` is finite
 
 ```agda
 abstract

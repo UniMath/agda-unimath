@@ -72,7 +72,7 @@ in several ways:
   and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is
   [equal](foundation-core.identity-types.md) to `n` is contractible.
 
-Note that the [univalence axiom](foundation-core.univalence.md) is neccessary to
+Note that the [univalence axiom](foundation-core.univalence.md) is necessary to
 prove the second uniqueness property of prime factorizations.
 
 The fundamental theorem of arithmetic is the

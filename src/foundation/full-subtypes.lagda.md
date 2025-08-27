@@ -7,7 +7,6 @@ module foundation.full-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -36,22 +35,13 @@ module _
   where
 
   is-full-subtype-Prop : Prop (l1 ⊔ l2)
-  is-full-subtype-Prop = Π-Prop A (λ x → P x)
+  is-full-subtype-Prop = Π-Prop A P
 
   is-full-subtype : UU (l1 ⊔ l2)
   is-full-subtype = type-Prop is-full-subtype-Prop
 
   is-prop-is-full-subtype : is-prop is-full-subtype
   is-prop-is-full-subtype = is-prop-type-Prop is-full-subtype-Prop
-```
-
-### Full decidable subtypes
-
-```agda
-is-full-decidable-subtype :
-  {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → UU (l1 ⊔ l2)
-is-full-decidable-subtype P =
-  is-full-subtype (subtype-decidable-subtype P)
 ```
 
 ### The full subtype at a universe level

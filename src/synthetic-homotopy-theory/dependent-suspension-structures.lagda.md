@@ -59,12 +59,12 @@ merid : (x : X) → dependent-identification P (h x) ((north ∘ (terminal-map X
 
 Using the [universal property of `unit`](foundation.unit-type.md) and the
 previous characterization of suspension cocones (to be found in the file
-[synthetic-homotopy-theory.suspension-structures](synthetic-homotopy-theory.suspension-structures.md)),
+[`synthetic-homotopy-theory.suspension-structures`](synthetic-homotopy-theory.suspension-structures.md)),
 we can characterize dependent cocones over a suspension cocone as equivalent to
 the following:
 
 For a suspension structure `(N , S , m)`, a dependent suspension structure in
-`P` over (N , S , m)` is given by points
+`P` over `(N , S , m)` is given by points
 
 ```text
 north : P N

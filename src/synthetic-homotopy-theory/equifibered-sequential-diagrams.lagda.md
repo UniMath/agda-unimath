@@ -45,7 +45,9 @@ over `(A, a)`
      a₀      a₁      a₂
 ```
 
-which are said to be "fibered over `A`", whose maps `bₙ` are equivalences.
+which are said to be "fibered over `A`", whose maps `bₙ` are equivalences. This
+terminology was originally introduced by Charles Rezk in _Toposes and Homotopy
+Toposes_ {{#cite Rezk10HomotopyToposes}}.
 
 ## Definitions
 
@@ -124,7 +126,8 @@ module _
     (B : equifibered-sequential-diagram A l2) →
     is-equifibered-dependent-sequential-diagram
       ( dependent-sequential-diagram-equifibered-sequential-diagram B)
-  is-equifibered-dependent-sequential-diagram-equifibered-sequential-diagram B =
+  is-equifibered-dependent-sequential-diagram-equifibered-sequential-diagram
+    B =
     is-equiv-map-equifibered-sequential-diagram B
 ```
 
@@ -145,9 +148,16 @@ module _
   equifibered-sequential-diagram-dependent-sequential-diagram :
     is-equifibered-dependent-sequential-diagram B →
     equifibered-sequential-diagram A l2
-  pr1 (equifibered-sequential-diagram-dependent-sequential-diagram _) =
+  pr1
+    ( equifibered-sequential-diagram-dependent-sequential-diagram _) =
     family-dependent-sequential-diagram B
-  pr2 (equifibered-sequential-diagram-dependent-sequential-diagram is-equiv-map)
+  pr2
+    ( equifibered-sequential-diagram-dependent-sequential-diagram
+      is-equiv-map)
     n a =
-    (map-dependent-sequential-diagram B n a , is-equiv-map n a)
+    ( map-dependent-sequential-diagram B n a , is-equiv-map n a)
 ```
+
+## References
+
+{{#bibliography}}
