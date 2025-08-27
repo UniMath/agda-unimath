@@ -1,10 +1,20 @@
 [book]
+title = "agda-unimath"
+description = "A community-driven library of formalized mathematics from a univalent point of view using the dependently typed programming language Agda."
+authors = [
+  "Egbert Rijke",
+  "Elisabeth Stenholm",
+  "Jonathan Prieto-Cubides",
+  "Fredrik Bakke",
+  "Vojtěch Štěpančík",
+  "others"
+]
 language = "en"
 multilingual = false
 src = "book/src"
-title = "agda-unimath"
 
 [build]
+build-dir = "book"
 create-missing = true
 
 [preprocessor.index]
