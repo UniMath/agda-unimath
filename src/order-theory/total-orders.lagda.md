@@ -272,7 +272,7 @@ module _
     poset-Total-Order T , is-meet-semilattice-Total-Order
 ```
 
-### Decidable total orders are join semilattices
+### Total orders are join semilattices
 
 ```agda
 module _
