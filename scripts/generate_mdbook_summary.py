@@ -105,7 +105,7 @@ you need to change the template in ./scripts/generate_mdbook_summary.py
 - [Community](CONTRIBUTORS.md)
   - [Maintainers](MAINTAINERS.md)
   - [Contributors](CONTRIBUTORS.md)
-  - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
+  - [Statement of inclusivity](STATEMENT-OF-INCLUSIVITY.md)
   - [Projects using agda-unimath](PROJECTS.md)
   - [Grant acknowledgments](GRANT-ACKNOWLEDGMENTS.md)
 - [Guides](HOWTO-INSTALL.md)
@@ -120,7 +120,7 @@ you need to change the template in ./scripts/generate_mdbook_summary.py
   - [Citing the library](CITE-THIS-LIBRARY.md)
 - [Library explorer](VISUALIZATION.md)
 - [Art](ART.md)
-- [Full list of library contents](SUMMARY.md)
+- [Full list of contents](SUMMARY.md)
 {literature_index}
 
 # The agda-unimath library
