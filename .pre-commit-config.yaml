@@ -96,16 +96,8 @@ repos:
         require_serial: true
 
       - id: generate-namespace-index-modules
-        name: Generate Agda namespace index modules
+        name: Generate namespace indexes of modules
         entry: scripts/generate_namespace_index_modules.py
-        language: python
-        always_run: true
-        pass_filenames: false
-        require_serial: true
-
-      - id: generate-main-index-file
-        name: Generate main index file
-        entry: scripts/generate_main_index_file.py
         language: python
         always_run: true
         pass_filenames: false

@@ -157,8 +157,8 @@ agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 	else python3 ./$(SCRIPTS_DIR)/generate_noagda_html.py ./$(MDBOOK_SRC)/; \
 	fi
 
-SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_main_index_file.py
-	@python3 ./$(SCRIPTS_DIR)/generate_main_index_file.py
+SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_mdbook_summary.py
+	@python3 ./$(SCRIPTS_DIR)/generate_mdbook_summary.py SUMMARY.md
 
 ./$(MDBOOK_SRC)/MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
 	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/MAINTAINERS.md
