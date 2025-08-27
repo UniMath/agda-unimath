@@ -3,19 +3,19 @@ SOURCE_DIR := src
 SCRIPTS_DIR := scripts
 # Website assets
 WEBSITE_DIR := website
-WEBSITE_CSS_DIR := $(WEBSITE_DIR)/css
-WEBSITE_IMAGES_DIR := $(WEBSITE_DIR)/images
-WEBSITE_JS_DIR := $(WEBSITE_DIR)/js
-THEME_DIR := website/theme
+WEBSITE_CSS := $(WEBSITE_DIR)/css
+WEBSITE_IMAGES := $(WEBSITE_DIR)/images
+WEBSITE_JS := $(WEBSITE_DIR)/js
+WEBSITE_THEME := website/theme
 # MDBOOK input, corresponds to the `src` variable in `book.toml`
 MDBOOK_SRC := book-src
 # MDBOOK build directory
-MDBOOK_DIR := book
+MDBOOK_BUILD := book
 # Base directory where Agda interface files are stored
-AGDA_BUILD_DIR := _build
+AGDA_BUILD := _build
 # Agda profiling directory
-AGDA_PROFILING_TEMP_DIR := temp
-AGDA_PROFILING_OUTPUT_FILE := $(AGDA_PROFILING_TEMP_DIR)/typecheck_output.txt
+AGDA_PROFILING_TEMP := temp
+AGDA_PROFILING_FILE := $(AGDA_PROFILING_TEMP)/typecheck_output.txt
 # Docs
 DOCS_DIR := docs
 TABLES_DIR := $(DOCS_DIR)/tables
@@ -57,7 +57,7 @@ AGDAFILES := $(shell find $(SOURCE_DIR) -name temp -prune -o -type f \( -name "*
 # resulting page looks garbled. With highlight=auto and the default Agda.css, it
 # at is at least in a proper code block with syntax highlighting, albeit without
 # the agda-unimath chrome.
-AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=$(MDBOOK_SRC) --css=$(WEBSITE_CSS_DIR)/Agda.css --only-scope-checking
+AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=$(MDBOOK_SRC) --css=$(WEBSITE_CSS)/Agda.css --only-scope-checking
 AGDAPROFILEFLAGS ?= --profile=modules +RTS -s -RTS
 AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
 TIME ?= time
@@ -112,24 +112,24 @@ profile-module:
 	fi
 	@# Attempt to delete the interface file only if the build directory exists
 	@echo "\033[0;32mAttempting to delete interface file for $(MODULE)\033[0m"
-	@find ./$(AGDA_BUILD_DIR) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+ 2>/dev/null || \
-		echo "\033[0;31m$(AGDA_BUILD_DIR) directory does not exist, skipping deletion of interface files.\033[0m"
+	@find ./$(AGDA_BUILD) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+ 2>/dev/null || \
+		echo "\033[0;31m$(AGDA_BUILD) directory does not exist, skipping deletion of interface files.\033[0m"
 	@# Ensure the temporary directory exists
-	@mkdir -p ./$(AGDA_PROFILING_TEMP_DIR)
+	@mkdir -p ./$(AGDA_PROFILING_TEMP)
 	@# Profile typechecking the module and capture the output in the temp directory, also display on terminal
 	@echo "\033[0;32mProfiling typechecking of $(MODULE)\033[0m"
-	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md 2>&1 | tee ./$(AGDA_PROFILING_OUTPUT_FILE)
+	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md 2>&1 | tee ./$(AGDA_PROFILING_FILE)
 	@# Check for additional modules being typechecked by looking for any indented "Checking" line
-	@if grep -E "^\s+Checking " ./$(AGDA_PROFILING_OUTPUT_FILE) > /dev/null; then \
+	@if grep -E "^\s+Checking " ./$(AGDA_PROFILING_FILE) > /dev/null; then \
 		echo "\033[0;31mOther modules were also checked. Repeating profiling after deleting interface file again.\033[0m"; \
-		find ./$(AGDA_BUILD_DIR) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+; \
+		find ./$(AGDA_BUILD) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+; \
 		$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md; \
 	else \
 		echo "\033[0;32mOnly $(MODULE) was checked. Profiling complete.\033[0m"; \
 	fi
 
 	@# Cleanup
-	@rm -f ./$(AGDA_PROFILING_OUTPUT_FILE)
+	@rm -f ./$(AGDA_PROFILING_FILE)
 
 agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 	@rm -rf ./$(MDBOOK_SRC)/
@@ -149,22 +149,22 @@ agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 ./$(MDBOOK_SRC)/CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_contributors.py
 	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/CONTRIBUTORS.md
 
-$(WEBSITE_CSS_DIR)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(THEME_DIR)/catppuccin.css
+$(WEBSITE_CSS)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(WEBSITE_THEME)/catppuccin.css
 	@python3 ./$(SCRIPTS_DIR)/generate_agda_css.py
 
-$(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg $(WEBSITE_IMAGES_DIR)/agda_dependency_graph_legend.html &: ${AGDAFILES}
-	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES_DIR)/agda_dependency_graph svg || true
+$(WEBSITE_IMAGES)/agda_dependency_graph.svg $(WEBSITE_IMAGES)/agda_dependency_graph_legend.html &: ${AGDAFILES}
+	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
 website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
-								 ./$(WEBSITE_CSS_DIR)/Agda-highlight.css ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg \
-								 ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph_legend.html
+								 ./$(WEBSITE_CSS)/Agda-highlight.css ./$(WEBSITE_IMAGES)/agda_dependency_graph.svg \
+								 ./$(WEBSITE_IMAGES)/agda_dependency_graph_legend.html
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/
 	@cp -r ./$(DOCS_DIR)/ ./$(MDBOOK_SRC)
 	@mkdir -p ./$(MDBOOK_SRC)/website
-	@cp -r ./$(WEBSITE_IMAGES_DIR) ./$(MDBOOK_SRC)/website/
-	@cp -r ./$(WEBSITE_CSS_DIR) ./$(MDBOOK_SRC)/website/
-	@cp -r ./$(WEBSITE_JS_DIR) ./$(MDBOOK_SRC)/website/
+	@cp -r ./$(WEBSITE_IMAGES) ./$(MDBOOK_SRC)/website/
+	@cp -r ./$(WEBSITE_CSS) ./$(MDBOOK_SRC)/website/
+	@cp -r ./$(WEBSITE_JS) ./$(MDBOOK_SRC)/website/
 
 .PHONY: website
 website: website-prepare
@@ -174,7 +174,7 @@ website: website-prepare
 .PHONY: serve-website
 serve-website: website-prepare
 	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
-	  mdbook serve -p 8080 --open -d ./$(MDBOOK_DIR)/html
+	  mdbook serve -p 8080 --open -d ./$(MDBOOK_BUILD)/html
 
 $(MDBOOK_SRC)/dependency.dot : ./$(SOURCE_DIR)/everything.lagda.md ${AGDAFILES}
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=$@ $<
@@ -184,7 +184,7 @@ graph: $(MDBOOK_SRC)/dependency.dot
 
 .PHONY: clean
 clean:
-	@rm -Rf ./$(AGDA_BUILD_DIR)/ ./$(MDBOOK_DIR)/ ./$(MDBOOK_SRC)/ ./$(AGDA_PROFILING_TEMP_DIR)/
+	@rm -Rf ./$(AGDA_BUILD)/ ./$(MDBOOK_BUILD)/ ./$(MDBOOK_SRC)/ ./$(AGDA_PROFILING_TEMP)/
 
 .PHONY: pre-commit
 pre-commit:
