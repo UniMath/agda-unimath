@@ -200,7 +200,7 @@ module _
       is-closed-subset-intersection-family-closed-subset-Metric-Space)
 ```
 
-### If the union of two closed sets is always closed, then LLPO
+### If the union of two closed sets is always closed, then LLPO holds
 
 This has yet to be formalized.
 

@@ -29,7 +29,7 @@ open import order-theory.greatest-lower-bounds-large-posets
 The
 {{#concept "intersection" disambiguation="of two subtypes" WDID=Q185837 WD="intersection" Agda=intersection-subtype}}
 of two [subtypes](foundation.subtypes.md) `A` and `B` is the subtype that
-contains the elements that are in `A` and in `B`.
+contains the elements that are in `A` [and](foundation.conjunction.md) in `B`.
 
 Two subtypes
 {{#concept "intersect" disambiguation="subtypes" Agda=intersect-subtype}} if

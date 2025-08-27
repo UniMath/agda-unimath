@@ -36,7 +36,7 @@ This terminology is taken from {{#cite BV06}} section 2.2.
 A [finitely enumerable](univalent-combinatorics.finitely-enumerable-types.md)
 `ε`-approximation is called an [`ε`-net](metric-spaces.nets-metric-spaces.md).
 
-## Definition
+## Definitions
 
 ```agda
 module _
