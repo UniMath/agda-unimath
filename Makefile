@@ -35,7 +35,6 @@ METAFILES := \
 	MIXFIX-OPERATORS.md \
 	README.md \
 	STATEMENT-OF-INCLUSION.md \
-	SUMMARY.md \
 	TEMPLATE.lagda.md \
 	PROJECTS.md \
 	VISUALIZATION.md
@@ -157,8 +156,8 @@ agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 	else python3 ./$(SCRIPTS_DIR)/generate_noagda_html.py ./$(MDBOOK_SRC)/; \
 	fi
 
-SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_mdbook_summary.py
-	@python3 ./$(SCRIPTS_DIR)/generate_mdbook_summary.py SUMMARY.md
+./$(MDBOOK_SRC)/SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_mdbook_summary.py
+	@python3 ./$(SCRIPTS_DIR)/generate_mdbook_summary.py ./$(MDBOOK_SRC)/SUMMARY.md
 
 ./$(MDBOOK_SRC)/MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
 	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/MAINTAINERS.md
@@ -173,7 +172,7 @@ $(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg $(WEBSITE_IMAGES_DIR)/agda_depen
 	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES_DIR)/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
-website-prepare: agda-html ./SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
+website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
 								 ./$(WEBSITE_CSS_DIR)/Agda-highlight.css ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg \
 								 ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph_legend.html
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/

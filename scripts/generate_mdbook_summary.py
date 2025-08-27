@@ -150,4 +150,5 @@ if __name__ == '__main__':
         )
         with open(summary_path, 'w') as summary_file:
             summary_file.write(summary_contents)
+        print(f'Wrote mdbook summary content to {summary_path}.')
     sys.exit(status)
