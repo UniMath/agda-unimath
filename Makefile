@@ -26,7 +26,6 @@ METAFILES := \
 	CITING-SOURCES.md \
 	CODINGSTYLE.md \
 	CONTRIBUTING.md \
-	CONTRIBUTORS.md \
 	FILE-CONVENTIONS.md \
 	DESIGN-PRINCIPLES.md \
 	GRANT-ACKNOWLEDGMENTS.md \
@@ -34,7 +33,6 @@ METAFILES := \
 	HOWTO-INSTALL.md \
 	LICENSE.md \
 	MIXFIX-OPERATORS.md \
-	MAINTAINERS.md \
 	README.md \
 	STATEMENT-OF-INCLUSION.md \
 	SUMMARY.md \
@@ -162,11 +160,11 @@ agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_main_index_file.py
 	@python3 ./$(SCRIPTS_DIR)/generate_main_index_file.py
 
-MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
-	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} MAINTAINERS.md
+./$(MDBOOK_SRC)/MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
+	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/MAINTAINERS.md
 
-CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_contributors.py
-	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} CONTRIBUTORS.md
+./$(MDBOOK_SRC)/CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_contributors.py
+	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/CONTRIBUTORS.md
 
 $(WEBSITE_CSS_DIR)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(THEME_DIR)/catppuccin.css
 	@python3 ./$(SCRIPTS_DIR)/generate_agda_css.py
@@ -175,7 +173,7 @@ $(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg $(WEBSITE_IMAGES_DIR)/agda_depen
 	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES_DIR)/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
-website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
+website-prepare: agda-html ./SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
 								 ./$(WEBSITE_CSS_DIR)/Agda-highlight.css ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph.svg \
 								 ./$(WEBSITE_IMAGES_DIR)/agda_dependency_graph_legend.html
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/
