@@ -26,6 +26,7 @@ assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
+contributors_file = "CONTRIBUTORS.toml"
 # Disable by default - it takes a nontrivial amount of time
 # Can be overridden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell

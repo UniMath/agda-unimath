@@ -19,7 +19,7 @@ AGDA_PROFILING_OUTPUT_FILE := $(AGDA_PROFILING_TEMP_DIR)/typecheck_output.txt
 
 # Docs
 TABLES_DIR := tables
-
+CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 METAFILES := \
 	ART.md \
 	CITE-THIS-LIBRARY.md \
@@ -65,7 +65,6 @@ endif
 
 AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M6G -RTS
 AGDAFILES := $(shell find $(SOURCE_DIR) -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
-CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 
 # All our code is in literate Agda, so we could set highlight=code and drop the
 # css flag, which only affects how files with the .agda extension are processed.
@@ -164,10 +163,10 @@ SUMMARY.md: ${AGDAFILES} ./$(SCRIPTS_DIR)/generate_main_index_file.py
 	@python3 ./$(SCRIPTS_DIR)/generate_main_index_file.py
 
 MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
-	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py
+	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} MAINTAINERS.md
 
 CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_contributors.py
-	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py
+	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} CONTRIBUTORS.md
 
 $(WEBSITE_CSS_DIR)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(THEME_DIR)/catppuccin.css
 	@python3 ./$(SCRIPTS_DIR)/generate_agda_css.py

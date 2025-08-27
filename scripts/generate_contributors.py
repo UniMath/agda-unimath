@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/generate_contributors.py
+# $ ./scripts/generate_contributors.py CONTRIBUTORS.toml book-src/CONTRIBUTORS.md
 
 import subprocess
+import argparse
+import os
+import sys
 from utils import github_page_for_contributor
-from utils.contributors import CONTRIBUTORS_FILE, parse_contributors_file, sorted_authors_from_raw_shortlog_lines
+from utils.contributors import parse_contributors_file, sorted_authors_from_raw_shortlog_lines
 
 
 template = """
@@ -38,7 +41,13 @@ def format_contributor(contributor):
 
 
 if __name__ == '__main__':
-    contributors_data = parse_contributors_file()
+    parser = argparse.ArgumentParser(
+        description='Generate contributors markdown content. Usage: generate_contributors.py <CONTRIBUTORS_FILE> <OUTPUT_FILE>')
+    parser.add_argument('contributors_file', help='Path to the CONTRIBUTORS.toml file.')
+    parser.add_argument('output_file', help='Output file path to write the generated contributors markdown content to.')
+    args = parser.parse_args()
+
+    contributors_data = parse_contributors_file(args.contributors_file)
 
     git_log_output = subprocess.run([
         'git', 'shortlog',
@@ -49,11 +58,19 @@ if __name__ == '__main__':
     ], capture_output=True, text=True, check=True).stdout.splitlines()
 
     sorted_authors = sorted_authors_from_raw_shortlog_lines(
-        git_log_output, contributors_data)
+        git_log_output, contributors_data, args.contributors_file)
     output = template.format(
         names='\n'.join((format_contributor(c) for c in sorted_authors)),
-        CONTRIBUTORS_FILE=CONTRIBUTORS_FILE
+        CONTRIBUTORS_FILE=args.contributors_file
     )
 
-    with open('CONTRIBUTORS.md', 'w') as output_file:
+    out_path = args.output_file
+    if os.path.isdir(out_path):
+        print(f'Error: {out_path!r} is a directory; please provide a path including the filename.', file=sys.stderr)
+        sys.exit(2)
+    parent = os.path.dirname(out_path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    with open(out_path, 'w') as output_file:
         output_file.write(output)
+    print(f'Wrote contributors markdown content to {out_path}.')

@@ -4,14 +4,11 @@
 # and it adheres to the appropriate protocol; see
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
-from collections import defaultdict
 import json
 from multiprocessing import Pool
 import os
 import subprocess
 import sys
-import time
-import tomli
 from utils import github_page_for_commit, eprint
 from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
 
@@ -60,7 +57,7 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
-def get_author_element_for_file(filename, include_contributors, contributors):
+def get_author_element_for_file(filename, include_contributors, contributors, contributors_file):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -89,7 +86,7 @@ def get_author_element_for_file(filename, include_contributors, contributors):
           # Collect authors and sort by number of commits
           author_names = [
               author['displayName']
-              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
+              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors, contributors_file)
           ]
           attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
@@ -124,7 +121,7 @@ def get_author_element_for_file(filename, include_contributors, contributors):
                 continue
             author_index = get_real_author_index(raw_author, contributors)
             if author_index is None:
-                print_skipping_contributor_warning(raw_author)
+                print_skipping_contributor_warning(raw_author,contributors_file)
                 continue
             author_indices.append(author_index)
         if len(author_indices) == 0:
@@ -164,8 +161,9 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     header_info_element, footer_info_element = get_author_element_for_file(
         source_file_name,
         any((source_file_name.endswith(ext)
-            for ext in config['attribute_file_extensions'])),
-        contributors)
+            for ext in config['attribute-file-extensions'])),
+        contributors,
+        config['contributors_file'])
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
     chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
@@ -212,9 +210,6 @@ if __name__ == '__main__':
             else:
                 sys.exit(0)
 
-    # Load the contributors data
-    contributors_data = parse_contributors_file()
-
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
     metadata_config = context['config']['preprocessor']['git-metadata']
@@ -222,6 +217,11 @@ if __name__ == '__main__':
         'attribute_file_extensions', [])
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
+    metadata_config['contributors_file'] = metadata_config.get(
+        'contributors_file', "CONTRIBUTORS.toml")
+
+    # Load the contributors data
+    contributors_data = parse_contributors_file(metadata_config['contributors_file'])
 
     if bool(metadata_config.get('enable')):
         # Split the work between PROCESS_COUNT processes
