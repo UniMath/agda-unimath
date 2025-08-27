@@ -19,7 +19,7 @@ static-css = false
 include-src = false
 block-delimiter = {left = "$$", right = "$$"}
 inline-delimiter = {left = "$", right = "$"}
-macros = "website/latex-macros.txt"
+macros = "config/latex-macros.txt"
 
 [preprocessor.catppuccin]
 assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`

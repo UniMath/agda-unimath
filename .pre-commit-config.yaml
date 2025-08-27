@@ -22,11 +22,11 @@ repos:
         args:
           [
             '--config',
-            '.codespellrc',
+            'config/.codespellrc',
             '--builtin',
             'clear,rare,informal,usage,code,names,en-GB_to_en-US',
             '--dictionary',
-            'codespell-dictionary.txt,-',
+            'config/codespell-dictionary.txt,-',
           ]
 
   - repo: local
@@ -35,7 +35,7 @@ repos:
         name: Sort codespell dictionary and ignore files
         entry: bash -c 'for f in "$@"; do LC_ALL=C sort -o "$f" "$f"; done' --
         language: system
-        files: ^codespell-(dictionary|ignore)\.txt$
+        files: ^config/codespell-(dictionary|ignore)\.txt$
       - id: markdown-conventions
         name: Markdown conventions
         entry: scripts/markdown_conventions.py
@@ -133,6 +133,7 @@ repos:
       - id: prettier
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting
         types_or: [css, javascript, yaml, markdown]
+        args: ['--ignore-path', 'config/.prettierignore']
 
   - repo: https://github.com/FlamingTempura/bibtex-tidy
     rev: v1.14.0
