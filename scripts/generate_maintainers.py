@@ -34,7 +34,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generate maintainers markdown content. Usage: generate_maintainers.py <CONTRIBUTORS_FILE> <OUTPUT_FILE>')
     parser.add_argument('contributors_file', help='Path to the CONTRIBUTORS.toml file.')
-    parser.add_argument('output_file', help='Output file path to write the generated contributors markdown content to.')
+    parser.add_argument('output_file', help='Output file path to write the generated maintainers markdown content to.')
     args = parser.parse_args()
 
     contributors_data = parse_contributors_file(args.contributors_file)
