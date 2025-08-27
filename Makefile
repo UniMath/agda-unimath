@@ -8,7 +8,7 @@ WEBSITE_IMAGES_DIR := $(WEBSITE_DIR)/images
 WEBSITE_JS_DIR := $(WEBSITE_DIR)/js
 THEME_DIR := website/theme
 # MDBOOK input, corresponds to the `src` variable in `book.toml`
-MDBOOK_SRC := docs
+MDBOOK_SRC := book-src
 # MDBOOK build directory
 MDBOOK_DIR := book
 # Base directory where Agda interface files are stored

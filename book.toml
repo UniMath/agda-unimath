@@ -1,7 +1,7 @@
 [book]
 language = "en"
 multilingual = false
-src = "docs"
+src = "book-src"
 title = "agda-unimath"
 
 [build]
@@ -48,7 +48,7 @@ suppress_processing = [
 
 [preprocessor.concepts]
 command = "python3 ./scripts/preprocessor_concepts.py"
-output-file = "docs/concept_index.json"
+output-file = "book-src/concept_index.json"
 mathswitch-template = "https://mathswitch.xyz/concept/Wd/{wikidata_id}"
 wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 skip-agda = false
