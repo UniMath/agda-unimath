@@ -14,9 +14,12 @@ def parse_contributors_file(contributors_file):
 
 
 def print_skipping_contributor_warning(contributor, contributors_file):
-    print('Warning: not attributing changes to', contributor,
-          f'. If you want your work to be attributed to you, add yourself to {contributors_file}',
-          file=sys.stderr)
+    print('Warning: not attributing changes to ',
+          contributor,
+          '. If you want your work to be attributed to you, add yourself to ',
+          contributors_file,
+          '.',
+          file=sys.stderr, sep='')
 
 
 def get_real_author_index(raw_username, contributors):
