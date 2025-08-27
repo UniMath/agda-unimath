@@ -15,7 +15,7 @@ MDBOOK_BUILD := book
 AGDA_BUILD := _build
 # Agda profiling directory
 AGDA_PROFILING_TEMP := temp
-AGDA_PROFILING_FILE := $(AGDA_PROFILING_TEMP)/typecheck_output.txt
+AGDA_PROFILING_OUTPUT := $(AGDA_PROFILING_TEMP)/typecheck_output.txt
 # Docs
 DOCS_DIR := docs
 TABLES_DIR := $(DOCS_DIR)/tables
@@ -118,9 +118,9 @@ profile-module:
 	@mkdir -p ./$(AGDA_PROFILING_TEMP)
 	@# Profile typechecking the module and capture the output in the temp directory, also display on terminal
 	@echo "\033[0;32mProfiling typechecking of $(MODULE)\033[0m"
-	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md 2>&1 | tee ./$(AGDA_PROFILING_FILE)
+	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md 2>&1 | tee ./$(AGDA_PROFILING_OUTPUT)
 	@# Check for additional modules being typechecked by looking for any indented "Checking" line
-	@if grep -E "^\s+Checking " ./$(AGDA_PROFILING_FILE) > /dev/null; then \
+	@if grep -E "^\s+Checking " ./$(AGDA_PROFILING_OUTPUT) > /dev/null; then \
 		echo "\033[0;31mOther modules were also checked. Repeating profiling after deleting interface file again.\033[0m"; \
 		find ./$(AGDA_BUILD) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+; \
 		$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md; \
@@ -129,7 +129,7 @@ profile-module:
 	fi
 
 	@# Cleanup
-	@rm -f ./$(AGDA_PROFILING_FILE)
+	@rm -f ./$(AGDA_PROFILING_OUTPUT)
 
 agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 	@rm -rf ./$(MDBOOK_SRC)/
