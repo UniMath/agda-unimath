@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/generate_maintainers.py CONTRIBUTORS.toml book-src/MAINTAINERS.md
+# $ ./scripts/generate_maintainers.py CONTRIBUTORS.toml book/src/MAINTAINERS.md
 
 import argparse
 import os

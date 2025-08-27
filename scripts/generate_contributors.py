@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/generate_contributors.py CONTRIBUTORS.toml book-src/CONTRIBUTORS.md
+# $ ./scripts/generate_contributors.py CONTRIBUTORS.toml book/src/CONTRIBUTORS.md
 
 import subprocess
 import argparse

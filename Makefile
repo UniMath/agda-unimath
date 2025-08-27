@@ -7,10 +7,11 @@ WEBSITE_CSS := $(WEBSITE_DIR)/css
 WEBSITE_IMAGES := $(WEBSITE_DIR)/images
 WEBSITE_JS := $(WEBSITE_DIR)/js
 WEBSITE_THEME := website/theme
+
+# MDBOOK directory
+MDBOOK_DIR := book
 # MDBOOK input, corresponds to the `src` variable in `book.toml`
-MDBOOK_SRC := book-src
-# MDBOOK build directory
-MDBOOK_BUILD := book
+MDBOOK_SRC := $(MDBOOK_DIR)/src
 # Base directory where Agda interface files are stored
 AGDA_BUILD := _build
 # Agda profiling directory
@@ -174,7 +175,7 @@ website: website-prepare
 .PHONY: serve-website
 serve-website: website-prepare
 	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
-	  mdbook serve -p 8080 --open -d ./$(MDBOOK_BUILD)/html
+	  mdbook serve -p 8080 --open -d ./$(MDBOOK_DIR)/html
 
 $(MDBOOK_SRC)/dependency.dot : ./$(SOURCE_DIR)/everything.lagda.md ${AGDAFILES}
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=$@ $<
@@ -184,7 +185,7 @@ graph: $(MDBOOK_SRC)/dependency.dot
 
 .PHONY: clean
 clean:
-	@rm -Rf ./$(AGDA_BUILD)/ ./$(MDBOOK_BUILD)/ ./$(MDBOOK_SRC)/ ./$(AGDA_PROFILING_TEMP)/
+	@rm -Rf ./$(MDBOOK_DIR)/ ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/
 
 .PHONY: pre-commit
 pre-commit:

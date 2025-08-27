@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/generate_mdbook_summary.py book-src/SUMMARY.md
+# $ ./scripts/generate_mdbook_summary.py book/src/SUMMARY.md
 
 import argparse
 import sys
