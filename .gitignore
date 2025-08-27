@@ -420,7 +420,6 @@ node_modules/*
 package-lock.json
 
 # mdbook, automatically generated files
-docs/
 html/
 book/
 temp/
