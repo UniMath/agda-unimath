@@ -36,14 +36,14 @@ attribute_file_extensions = [ ".lagda.md" ]
 # Don't add anything to the "non-content" pages,
 # i.e. top-level markdown files which aren't guides
 suppress_processing = [
+  "ART.md",
+  "CONTRIBUTORS.md",
+  "GRANT-ACKNOWLEDGMENTS.md",
   "HOME.md",
   "MAINTAINERS.md",
-  "CONTRIBUTORS.md",
-  "STATEMENT-OF-INCLUSION",
   "PROJECTS.md",
-  "GRANT-ACKNOWLEDGMENTS.md",
+  "STATEMENT-OF-INCLUSION.md",
   "SUMMARY.md",
-  "ART.md",
   "VISUALIZATION.md"
 ]
 
