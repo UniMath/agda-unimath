@@ -201,7 +201,7 @@ graph: $(AGDA_HTML_DIR)/dependency.dot
 
 .PHONY: clean
 clean:
-	@rm -Rf ./$(AGDA_BUILD_DIR)/ ./$(MDBOOK_DIR)/ ./$(AGDA_HTML_DIR)/
+	@rm -Rf ./$(AGDA_BUILD_DIR)/ ./$(MDBOOK_DIR)/ ./$(AGDA_HTML_DIR)/ ./$(PROFILING_TEMP_DIR)/
 
 .PHONY: pre-commit
 pre-commit:
