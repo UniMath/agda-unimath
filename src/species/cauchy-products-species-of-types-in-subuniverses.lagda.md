@@ -41,7 +41,7 @@ of two [species](species.species-of-types-in-subuniverses.md) `S` and `T` from
 `P` to `Q` of types in [subuniverses](foundation.subuniverses.md) is defined by
 
 ```text
-  X ↦ Σ (k : P), Σ (k' : P), Σ (e : k + k' ≃ X), S(k) × T(k')
+  X ↦ Σ (k : P), Σ (k' : P), Σ (e : k + k' ≃ X), S(k) × T(k').
 ```
 
 If `Q` is closed under [products](foundation.cartesian-product-types.md) and
@@ -281,7 +281,7 @@ module _
 
 ```agda
 unit-cauchy-product-species-subuniverse :
-  {l1 l2 l3 : Level} → (P : subuniverse l1 l2) → (Q : subuniverse l1 l3) →
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
   ( (X : type-subuniverse P) →
     is-in-subuniverse Q ( is-empty (inclusion-subuniverse P X))) →
   species-subuniverse P Q
