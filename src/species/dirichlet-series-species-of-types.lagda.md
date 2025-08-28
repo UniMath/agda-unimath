@@ -20,23 +20,23 @@ open import species.species-of-types
 
 In classical mathematics, the _Dirichlet series_ of a
 [species of finite inhabited types](species.of-finite-inhabited-types.md) `T` is
-the formal series in `s` :
+the formal series in `s`:
 
 ```text
-  Σ (n : ℕ∖{0}), (|T({1,...,n})| n^(-s) / n!)
+  Σ (n : ℕ∖{0}), (|T({1,...,n})| n^(-s) / n!).
 ```
 
 If `s` is a [negative integer](elementary-number-theory.negative-integers.md),
 the categorified version of this formula is
 
 ```text
-  Σ (F : Finite-Type∖{∅}), T(F) × (S → F)
+  Σ (F : Finite-Type∖{∅}), T(F) × (S → F).
 ```
 
 We can generalize it to [species of types](species.species-of-types.md) as
 
 ```text
-  Σ (X : UU), (T(X) × (S → X))
+  Σ (X : UU), (T(X) × (S → X)).
 ```
 
 The interesting case is when `s` is a positive number. The categorified version
@@ -57,7 +57,7 @@ such that for every `X , Y : P` the following
 of any species of types `T` by
 
 ```text
-  Σ (X : P), (T(X) × (S → H (X))).
+  Σ (X : P), (T(X) × (S → H(X))).
 ```
 
 The condition on `H` ensure that all the usual properties of the Dirichlet

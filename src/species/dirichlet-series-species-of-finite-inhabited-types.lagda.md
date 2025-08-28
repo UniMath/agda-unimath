@@ -36,7 +36,7 @@ If `s` is a [negative integer](elementary-number-theory.negative-integers.md),
 the categorified version of this formula is
 
 ```text
-  Σ (F : Finite-Type∖{∅}), T(F) × (S → F)
+  Σ (F : Finite-Type∖{∅}), T(F) × (S → F).
 ```
 
 We can generalize it to [species of types](species.species-of-types.md) as

@@ -151,3 +151,11 @@ coh-refl-htpy-polynomial-endofunctor A B f (x , α) =
 
 - [Multivariable polynomial functors](trees.multivariable-polynomial-functors.md)
   for the generalization of polynomial endofunctors to type families.
+- [Cauchy series of species of types](species.cauchy-series-species-of-types.md)
+  are polynomial endofunctors of the form
+  ```text
+    X ↦ Σ (U : Type), S(U) × (U → X)
+  ```
+  In other words, given a [species of types](species.species-of-types.md) `S`,
+  the shapes are types equipped with `S`-structure, and the positions are
+  points.

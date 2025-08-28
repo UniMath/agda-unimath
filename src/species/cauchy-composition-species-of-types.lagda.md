@@ -99,7 +99,7 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
+  {l1 l2 l3 l4 l5 : Level}
   (S : species-types l1 l2)
   (T : species-types l1 l3)
   (U : species-types l1 l4)

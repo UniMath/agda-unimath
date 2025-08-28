@@ -31,13 +31,13 @@ If `s` is a [negative integer](elementary-number-theory.negative-integers.md),
 the categorified version of this formula is
 
 ```text
-  Σ (F : Finite-Type∖{∅}), T(F) × (S → F)
+  Σ (F : Finite-Type∖{∅}), T(F) × (S → F).
 ```
 
 We can generalize it to [species of types](species.species-of-types.md) as
 
 ```text
-  Σ (X : UU), (T(X) × (S → X))
+  Σ (X : UU), (T(X) × (S → X)).
 ```
 
 The interesting case is when `s` is a positive number. The categorified version
@@ -60,7 +60,7 @@ a species such that for every `X , Y : P` the following
 to any species of types in subuniverses `T` by
 
 ```text
-  Σ (X : P), (T(X) × (S → H (X))).
+  Σ (X : P), (T(X) × (S → H(X))).
 ```
 
 The condition on `H` ensure that all the usual properties of the Dirichlet
