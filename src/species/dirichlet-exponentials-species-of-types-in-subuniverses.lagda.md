@@ -56,7 +56,8 @@ of types in subuniverses from `P` to `Q`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   where
 
   type-dirichlet-exponential-species-subuniverse :
@@ -75,9 +76,10 @@ module _
 
 ```agda
 is-closed-under-dirichlet-exponential-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
+  {α : Level → Level} {l1 l2 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α) →
   UUω
-is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
+is-closed-under-dirichlet-exponential-species-subuniverse {α} {l1} {l2} P Q =
   {l3 : Level}
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (X : type-subuniverse P) →
@@ -90,7 +92,8 @@ is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   where
 
@@ -108,7 +111,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   (C2 :
     ( U : UU l1) →
@@ -207,8 +211,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   (C2 : is-closed-under-coproduct-species-subuniverse P Q)
   (C3 : is-closed-under-dirichlet-product-species-subuniverse P Q)

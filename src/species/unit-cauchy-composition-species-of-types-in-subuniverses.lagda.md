@@ -35,9 +35,8 @@ by
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C4 :
     is-closed-under-is-contr-subuniverses P
       ( subuniverse-global-subuniverse Q l1))

@@ -57,12 +57,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  (X : UU l5)
+  (X : UU l4)
   where
 
   equiv-exponential-cauchy-series-composition-unit-species-subuniverse :
@@ -80,9 +79,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)

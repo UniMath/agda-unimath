@@ -37,9 +37,8 @@ series of `T` at `X`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -65,9 +64,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -113,9 +111,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))

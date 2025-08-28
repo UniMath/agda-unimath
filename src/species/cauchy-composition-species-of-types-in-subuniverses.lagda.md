@@ -60,9 +60,9 @@ Cauchy series of `S` and `T`.
 
 ```agda
 module _
-  {l1 l2 : Level}
+  {α : Level → Level} {l1 l2 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  (Q : global-subuniverse α)
   where
 
   type-cauchy-composition-species-subuniverse :
@@ -91,9 +91,10 @@ module _
       ( type-cauchy-composition-species-subuniverse S T X)
 
 module _
+  {α : Level → Level}
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -114,9 +115,10 @@ module _
 
 ```agda
 module _
+  {α : Level → Level}
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C2 : is-closed-under-Σ-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
@@ -171,7 +173,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   ( C3 : is-in-subuniverse P (raise-unit l1))
   ( C4 :
     is-closed-under-is-contr-subuniverses P
@@ -233,16 +236,17 @@ module _
     is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse
 
 module _
-  { l1 l2 l3 : Level}
-  ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
-  ( C2 : is-closed-under-Σ-subuniverse P)
-  ( C3 : is-in-subuniverse P (raise-unit l1))
-  ( C4 :
+  {α : Level → Level}
+  {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2)
+  (Q : global-subuniverse α)
+  (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
+  (C2 : is-closed-under-Σ-subuniverse P)
+  (C3 : is-in-subuniverse P (raise-unit l1))
+  (C4 :
     is-closed-under-is-contr-subuniverses P
       ( subuniverse-global-subuniverse Q l1))
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   where
 
   equiv-left-unit-law-cauchy-composition-species-subuniverse :
@@ -331,14 +335,15 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level}
-  ( P : subuniverse l1 l2)
-  ( Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
-  ( C2 : is-closed-under-Σ-subuniverse P)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-  ( U : species-subuniverse P (subuniverse-global-subuniverse Q l5))
+  {α : Level → Level}
+  {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2)
+  (Q : global-subuniverse α)
+  (C1 : is-closed-under-cauchy-composition-species-subuniverse P Q)
+  (C2 : is-closed-under-Σ-subuniverse P)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (U : species-subuniverse P (subuniverse-global-subuniverse Q l5))
   where
 
   equiv-associative-cauchy-composition-species-subuniverse :

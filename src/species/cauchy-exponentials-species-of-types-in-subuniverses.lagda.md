@@ -62,7 +62,8 @@ types in subuniverses from `P` to `Q`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   where
 
   type-cauchy-exponential-species-subuniverse :
@@ -81,9 +82,10 @@ module _
 
 ```agda
 is-closed-under-cauchy-exponential-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
+  {α : Level → Level} {l1 l2 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α) →
   UUω
-is-closed-under-cauchy-exponential-species-subuniverse {l1} {l2} P Q =
+is-closed-under-cauchy-exponential-species-subuniverse {α} {l1} {l2} P Q =
   {l3 : Level}
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (X : type-subuniverse P) →
@@ -96,8 +98,9 @@ is-closed-under-cauchy-exponential-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
+  (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   where
 
   cauchy-exponential-species-subuniverse :
@@ -114,9 +117,10 @@ module _
 
 ```agda
 module _
+  {α : Level → Level}
   {l1 l2 l3 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
@@ -141,15 +145,16 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
-  ( C2 :
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
+  (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
+  (C2 :
     ( U : UU l1) →
     ( V : U → UU l1) →
     ( (u : U) → is-in-subuniverse P (V u)) →
     is-in-subuniverse P (Σ U V) → is-in-subuniverse P U)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( X : type-subuniverse P)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (X : type-subuniverse P)
   where
 
   equiv-cauchy-exponential-Σ-extension-species-subuniverse :
@@ -241,25 +246,27 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
-  ( Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
-  ( C2 : is-closed-under-coproduct-species-subuniverse P Q)
-  ( C3 : is-closed-under-cauchy-product-species-subuniverse P Q)
-  ( C4 :
+  {α : Level → Level}
+  {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2)
+  (Q : global-subuniverse α)
+  (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
+  (C2 : is-closed-under-coproduct-species-subuniverse P Q)
+  (C3 : is-closed-under-cauchy-product-species-subuniverse P Q)
+  (C4 :
     ( U : UU l1) →
     ( V : U → UU l1) →
     ( (u : U) → is-in-subuniverse P (V u)) →
       ( is-in-subuniverse P (Σ U V)) →
       ( is-in-subuniverse P U))
-  ( C5 : is-closed-under-coproducts-subuniverse P)
-  ( C6 :
+  (C5 : is-closed-under-coproducts-subuniverse P)
+  (C6 :
     ( A B : UU l1) →
     is-in-subuniverse P (A + B) →
     is-in-subuniverse P A × is-in-subuniverse P B)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-  ( X : type-subuniverse P)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : type-subuniverse P)
   where
 
   equiv-cauchy-exponential-sum-species-subuniverse :

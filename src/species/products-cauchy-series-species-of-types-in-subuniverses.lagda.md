@@ -38,9 +38,8 @@ is just the pointwise [product](foundation.cartesian-product-types.md).
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -61,9 +60,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -101,9 +99,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))

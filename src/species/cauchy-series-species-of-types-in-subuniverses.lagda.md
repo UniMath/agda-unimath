@@ -70,9 +70,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (f :
