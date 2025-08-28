@@ -55,17 +55,17 @@ equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type X =
     ( equiv-total-is-in-subuniverse-Σ-Decomposition
       ( is-finite-and-inhabited-Prop)
       ( map-compute-Inhabited-Finite-Type' X))) ∘e
-  ( ( equiv-tot
-      ( λ D →
-        equiv-product-left
-          ( equiv-add-redundant-prop
-            ( is-property-is-inhabited _)
-            ( λ _ →
-              map-is-inhabited
-                ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
-                ( is-inhabited-type-Inhabited-Finite-Type X))))) ∘e
-    ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type
-        ( finite-type-Inhabited-Finite-Type X))))
+  ( equiv-tot
+    ( λ D →
+      equiv-product-left
+        ( equiv-add-redundant-prop
+          ( is-property-is-inhabited _)
+          ( λ _ →
+            map-is-inhabited
+              ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
+              ( is-inhabited-type-Inhabited-Finite-Type X))))) ∘e
+  ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type
+    ( finite-type-Inhabited-Finite-Type X))
 
 is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
   {l : Level} (X : Inhabited-Finite-Type l) →
@@ -178,22 +178,19 @@ module _
     C6 X =
       is-finite-is-decidable-Prop
         ( _ ,
-          is-prop-equiv
-            ( inv-equiv
-              ( equiv-is-small
-                ( is-small-lmax l2
-                  ( is-contr
-                    ( type-Inhabited-Finite-Type
-                      ( map-inv-compute-Inhabited-Finite-Type' X))))))
-                ( is-property-is-contr))
-        ( is-decidable-equiv
-          ( inv-equiv
+          is-prop-equiv'
             ( equiv-is-small
-              ( is-small-lmax
-                ( l2)
+              ( is-small-lmax l2
                 ( is-contr
                   ( type-Inhabited-Finite-Type
-                    ( map-inv-compute-Inhabited-Finite-Type' X))))))
+                    ( map-inv-compute-Inhabited-Finite-Type' X)))))
+            ( is-property-is-contr))
+        ( is-decidable-equiv'
+          ( equiv-is-small
+            ( is-small-lmax l2
+              ( is-contr
+                ( type-Inhabited-Finite-Type
+                  ( map-inv-compute-Inhabited-Finite-Type' X)))))
           ( is-decidable-is-contr-is-finite
             ( is-finite-Inhabited-Finite-Type
               ( map-inv-compute-Inhabited-Finite-Type' X))))

@@ -135,8 +135,7 @@ module _
               ( is-in-subuniverse P)
               ( eq-equiv
                 ( inv-equiv
-                  ( matching-correspondence-Relaxed-Σ-Decomposition
-                    (pr1 D))))
+                  ( matching-correspondence-Relaxed-Σ-Decomposition (pr1 D))))
               ( C3
                 ( indexing-type-Relaxed-Σ-Decomposition (pr1 D) , pr1 (pr2 D))
                 ( λ x →
@@ -197,8 +196,7 @@ module _
           eq-pair
             ( eq-is-prop (is-prop-type-Prop (P X)))
             ( eq-is-prop
-                ( is-prop-equiv
-                    ( inv-equiv (equiv-is-small (C5 X))) is-property-is-contr)))
+              ( is-prop-equiv' (equiv-is-small (C5 X)) is-property-is-contr)))
 
     htpy-left-unit-law-small-cauchy-composition-species-subuniverse :
       ( S : species-subuniverse P Q)

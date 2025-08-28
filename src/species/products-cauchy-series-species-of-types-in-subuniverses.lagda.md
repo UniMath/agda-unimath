@@ -83,19 +83,18 @@ module _
       ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-product-cauchy-series-Σ-extension-species-subuniverse =
-    equiv-product
-      ( inv-equiv
+    inv-equiv
+      ( equiv-product
         ( equiv-cauchy-series-Σ-extension-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l3)
-            ( S)
-            ( X)))
-      ( inv-equiv
+          ( P)
+          ( subuniverse-global-subuniverse Q l3)
+          ( S)
+          ( X))
         ( equiv-cauchy-series-Σ-extension-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l4)
-            ( T)
-            ( X)))
+          ( P)
+          ( subuniverse-global-subuniverse Q l4)
+          ( T)
+          ( X)))
 ```
 
 ### The Cauchy series associated to the Cauchy product of `S` and `T` is equal to the product of theirs Cauchy series

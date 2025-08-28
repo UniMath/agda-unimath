@@ -152,9 +152,8 @@ module _
       ( λ D →
         Relaxed-Σ-Decomposition l1 l1 (indexing-type-Relaxed-Σ-Decomposition D))
       ( _)) ∘e
-    ( inv-equiv
-      ( equiv-Σ-equiv-base _
-        ( equiv-displayed-fibered-Relaxed-Σ-Decomposition))) ∘e
+    ( equiv-Σ-equiv-base _
+      ( inv-equiv equiv-displayed-fibered-Relaxed-Σ-Decomposition)) ∘e
     ( inv-associative-Σ
       ( Relaxed-Σ-Decomposition l1 l1 A)
       ( λ D →
