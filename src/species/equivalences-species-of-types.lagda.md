@@ -19,7 +19,10 @@ open import species.species-of-types
 
 ## Idea
 
-An equivalence of species of types from `F` to `G` is a pointwise equivalence.
+An
+{{#concept "equivalence" Disambiguation="of species of types" Agda=equiv-species-types}}
+of [species of types](species.species-of-types.md) from `F` to `G` is a
+pointwise [equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -27,7 +30,7 @@ An equivalence of species of types from `F` to `G` is a pointwise equivalence.
 equiv-species-types :
   {l1 l2 l3 : Level} → species-types l1 l2 → species-types l1 l3 →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-equiv-species-types {l1} F G = (X : UU l1) → F X ≃ G X
+equiv-species-types {l1} F G = ((X : UU l1) → F X ≃ G X)
 ```
 
 ## Properties

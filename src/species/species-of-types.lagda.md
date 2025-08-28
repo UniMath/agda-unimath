@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ### Idea
 
-A **species of types** is defined to be a map from a universe to a universe.
+A {{#concept "species of types" Agda=species-types}} is a map between
+[universes](foundation.universe-levels.md) of types.
 
 ## Definitions
 

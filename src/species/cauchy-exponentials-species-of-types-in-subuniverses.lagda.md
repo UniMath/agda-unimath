@@ -1,4 +1,4 @@
-# Cauchy exponentials of species of types in a subuniverse
+# Cauchy exponentials of species of types in subuniverses
 
 ```agda
 module species.cauchy-exponentials-species-of-types-in-subuniverses where
@@ -25,10 +25,12 @@ open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import species.cauchy-composition-species-of-types
 open import species.cauchy-composition-species-of-types-in-subuniverses
 open import species.cauchy-exponentials-species-of-types
 open import species.cauchy-products-species-of-types-in-subuniverses
@@ -41,16 +43,18 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The **Cauchy exponential** of a species `S : P → Q` of types in subuniverse is
-defined by
+The
+{{#concept "Cauchy exponential" Disambiguation="of species of types in subuniverses" Agda=cauchy-exponential-species-subuniverse}}
+of a [species](species.species-of-types-in-subuniverses.md) `S : P → Q` of types
+in [subuniverses](foundation.subuniverses.md) is defined by
 
 ```text
   X ↦ Σ ((U , V , e) : Σ-Decomposition-subuniverse P X),  Π (u : U) → S (V u).
 ```
 
-If `Q` is a global subuniverse, and if the previous definition is in `Q`, then
-the Cauchy exponential is also a species of types in subuniverse from `P` to
-`Q`.
+If `Q` is a [global subuniverse](foundation.global-subuniverses.md), and if the
+previous definition is in `Q`, then the Cauchy exponential is also a species of
+types in subuniverses from `P` to `Q`.
 
 ## Definition
 
@@ -88,7 +92,7 @@ is-closed-under-cauchy-exponential-species-subuniverse {l1} {l2} P Q =
     ( type-cauchy-exponential-species-subuniverse P Q S X)
 ```
 
-### The Cauchy exponential of a species of types in a subuniverse
+### The Cauchy exponential of a species of types in subuniverses
 
 ```agda
 module _
@@ -106,7 +110,7 @@ module _
 
 ## Propositions
 
-### The Cauchy exponential in term of composition
+### The Cauchy exponential in terms of composition
 
 ```agda
 module _
@@ -130,10 +134,10 @@ module _
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
       ( cauchy-exponential-species-subuniverse P Q C1 S X)
   equiv-cauchy-exponential-composition-unit-species-subuniverse =
-    equiv-tot λ _ → left-unit-law-product-is-contr is-contr-unit
+    equiv-tot (λ _ → left-unit-law-product)
 ```
 
-### Equivalence form with species of types
+### Equivalence to Cauchy exponentials of species of types
 
 ```agda
 module _
@@ -148,7 +152,46 @@ module _
   ( X : type-subuniverse P)
   where
 
-  private
+  equiv-cauchy-exponential-Σ-extension-species-subuniverse :
+    Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+      ( cauchy-exponential-species-subuniverse P Q C1 S)
+      ( inclusion-subuniverse P X) ≃
+    cauchy-exponential-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( inclusion-subuniverse P X)
+  equiv-cauchy-exponential-Σ-extension-species-subuniverse =
+    ( reassociate') ∘e
+    ( equiv-tot
+      ( λ d →
+        equiv-Σ-equiv-base
+          ( λ p →
+            ( u : indexing-type-Relaxed-Σ-Decomposition d) →
+            inclusion-subuniverse
+              ( subuniverse-global-subuniverse Q l3)
+              ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))
+          ( ( equiv-remove-redundant-prop
+              ( is-prop-type-Prop (P (indexing-type-Relaxed-Σ-Decomposition d)))
+              ( λ pV →
+                C2
+                  ( indexing-type-Relaxed-Σ-Decomposition d)
+                  ( cotype-Relaxed-Σ-Decomposition d)
+                  ( pV)
+                  ( tr
+                    ( is-in-subuniverse P)
+                    ( eq-equiv
+                      ( matching-correspondence-Relaxed-Σ-Decomposition d))
+                    ( pr2 X)))) ∘e
+            ( commutative-product) ∘e
+            ( equiv-remove-redundant-prop
+              ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
+              ( λ _ → pr2 X))))) ∘e
+    ( reassociate)
+    where
     reassociate :
       Σ-extension-species-subuniverse
         ( P)
@@ -192,49 +235,6 @@ module _
         ( λ (d , f) → (d , pr1 ∘ f , pr2 ∘ f))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-cauchy-exponential-Σ-extension-species-subuniverse :
-    Σ-extension-species-subuniverse
-      ( P)
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
-      ( cauchy-exponential-species-subuniverse P Q C1 S)
-      ( inclusion-subuniverse P X) ≃
-    cauchy-exponential-species-types
-      ( Σ-extension-species-subuniverse
-        ( P)
-        ( subuniverse-global-subuniverse Q l3)
-        ( S))
-      ( inclusion-subuniverse P X)
-  equiv-cauchy-exponential-Σ-extension-species-subuniverse =
-    ( reassociate') ∘e
-    ( ( equiv-tot
-        ( λ d →
-          equiv-Σ-equiv-base
-            ( λ p →
-              ( u : indexing-type-Relaxed-Σ-Decomposition d) →
-              inclusion-subuniverse
-                ( subuniverse-global-subuniverse Q l3)
-                ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))
-            ( ( inv-equiv
-                ( equiv-add-redundant-prop
-                  ( is-prop-type-Prop
-                    ( P (indexing-type-Relaxed-Σ-Decomposition d)))
-                  ( λ pV →
-                    C2
-                      ( indexing-type-Relaxed-Σ-Decomposition d)
-                      ( cotype-Relaxed-Σ-Decomposition d)
-                      ( pV)
-                      ( tr
-                        ( is-in-subuniverse P)
-                        ( eq-equiv
-                          ( matching-correspondence-Relaxed-Σ-Decomposition d))
-                        ( pr2 X))))) ∘e
-              ( ( commutative-product) ∘e
-                ( inv-equiv
-                  ( equiv-add-redundant-prop
-                    ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
-                    ( λ _ → pr2 X))))))) ∘e
-      ( reassociate))
 ```
 
 ### The Cauchy exponential of the sum of a species is equivalent to the Cauchy product of the exponential of the two species
@@ -274,90 +274,69 @@ module _
         ( cauchy-exponential-species-subuniverse P Q C1 T)
         ( X))
   equiv-cauchy-exponential-sum-species-subuniverse =
-    ( ( inv-equiv
-        ( equiv-Σ-extension-species-subuniverse
-          ( P)
-          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-          ( cauchy-product-species-subuniverse P Q C3
-            ( cauchy-exponential-species-subuniverse P Q C1 S)
-            ( cauchy-exponential-species-subuniverse P Q C1 T))
-          ( X))) ∘e
-      ( ( inv-equiv
-          ( equiv-cauchy-product-Σ-extension-species-subuniverse
-            ( P)
-            ( Q)
-            ( C3)
-            ( C5)
-            ( cauchy-exponential-species-subuniverse P Q C1 S)
-            ( cauchy-exponential-species-subuniverse P Q C1 T)
-            ( inclusion-subuniverse P X))) ∘e
-        ( ( equiv-tot
-            ( λ d →
-              equiv-product
-                ( inv-equiv
-                  ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
-                    ( P)
-                    ( Q)
-                    ( C1)
-                    ( C4)
-                    ( S)
-                    ( left-summand-binary-coproduct-Decomposition d ,
-                      pr1 (lemma-C6 d))))
-                ( inv-equiv
-                  ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
-                    ( P)
-                    ( Q)
-                    ( C1)
-                    ( C4)
-                    ( T)
-                    ( right-summand-binary-coproduct-Decomposition d ,
-                      pr2 (lemma-C6 d)))))) ∘e
-          ( ( equiv-cauchy-exponential-sum-species-types
-              ( Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l3)
-                ( S))
-              ( Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l4)
-                ( T))
-              ( pr1 X)) ∘e
-            ( ( equiv-tot
-                ( λ d →
-                  equiv-Π
-                    ( λ x →
-                      coproduct-species-types
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l3)
-                          ( S))
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l4)
-                          ( T))
-                        ( cotype-Relaxed-Σ-Decomposition d x))
-                    ( id-equiv)
-                    ( λ x →
-                      equiv-coproduct-Σ-extension-species-subuniverse
-                        ( P)
-                        ( Q)
-                        ( C2)
-                        ( S)
-                        ( T)
-                        ( cotype-Relaxed-Σ-Decomposition d x)))) ∘e
-              ( ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
-                  ( P)
-                  ( Q)
-                  ( C1)
-                  ( C4)
-                  ( coproduct-species-subuniverse P Q C2 S T)
-                  ( X)) ∘e
-                ( equiv-Σ-extension-species-subuniverse
-                  ( P)
-                  ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-                  ( cauchy-exponential-species-subuniverse P Q C1
-                    ( coproduct-species-subuniverse P Q C2 S T))
-                  ( X))))))))
+    ( inv-equiv
+      ( equiv-Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+        ( cauchy-product-species-subuniverse P Q C3
+          ( cauchy-exponential-species-subuniverse P Q C1 S)
+          ( cauchy-exponential-species-subuniverse P Q C1 T))
+        ( X))) ∘e
+    ( inv-equiv
+      ( equiv-cauchy-product-Σ-extension-species-subuniverse
+        ( P)
+        ( Q)
+        ( C3)
+        ( C5)
+        ( cauchy-exponential-species-subuniverse P Q C1 S)
+        ( cauchy-exponential-species-subuniverse P Q C1 T)
+        ( inclusion-subuniverse P X))) ∘e
+    ( equiv-tot
+      ( λ d →
+        equiv-product
+          ( inv-equiv
+            ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+              ( P)
+              ( Q)
+              ( C1)
+              ( C4)
+              ( S)
+              ( left-summand-binary-coproduct-Decomposition d ,
+                pr1 (lemma-C6 d))))
+          ( inv-equiv
+            ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
+              ( P)
+              ( Q)
+              ( C1)
+              ( C4)
+              ( T)
+              ( right-summand-binary-coproduct-Decomposition d ,
+                pr2 (lemma-C6 d)))))) ∘e
+    ( equiv-cauchy-exponential-sum-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l4)
+        ( T))
+      ( pr1 X)) ∘e
+    ( equiv-tot
+      ( λ d →
+        equiv-Π-equiv-family
+          ( λ x →
+            equiv-coproduct-Σ-extension-species-subuniverse P Q C2 S T
+              ( cotype-Relaxed-Σ-Decomposition d x)))) ∘e
+    ( equiv-cauchy-exponential-Σ-extension-species-subuniverse P Q C1 C4
+      ( coproduct-species-subuniverse P Q C2 S T)
+      ( X)) ∘e
+    ( equiv-Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+      ( cauchy-exponential-species-subuniverse P Q C1
+        ( coproduct-species-subuniverse P Q C2 S T))
+      ( X))
     where
     lemma-C6 =
       λ d →

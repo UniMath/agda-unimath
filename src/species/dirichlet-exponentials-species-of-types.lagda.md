@@ -35,7 +35,9 @@ open import species.species-of-types
 
 ## Idea
 
-The **Dirichlet exponential** of a species of types `S` is defined as follows:
+The
+{{#concept "Dirichlet exponential" Disambiguation="of species of types" Agda=dirichlet-exponential-species-types}}
+of a [species of types](species.species-of-types.md) `S` is defined as follows:
 
 ```text
   X ↦ Σ ((U , V , e) : Π-Decomposition X),  Π (u : U) → S (V u).
@@ -64,7 +66,46 @@ module _
   (T : species-types l1 l3)
   where
 
-  private
+  equiv-dirichlet-exponential-sum-species-types :
+    equiv-species-types
+      ( dirichlet-exponential-species-types (coproduct-species-types S T))
+      ( dirichlet-product-species-types
+        ( dirichlet-exponential-species-types S)
+        ( dirichlet-exponential-species-types T))
+  equiv-dirichlet-exponential-sum-species-types X =
+    ( reassociate X) ∘e
+    ( equiv-Σ
+      ( λ D →
+        ( ( b : indexing-type-Π-Decomposition (pr1 (pr2 D))) →
+          S (cotype-Π-Decomposition (pr1 (pr2 D)) b)) ×
+        ( ( b : indexing-type-Π-Decomposition (pr2 (pr2 D))) →
+          T (cotype-Π-Decomposition (pr2 (pr2 D)) b)))
+      ( equiv-binary-product-Decomposition-Π-Decomposition)
+      ( λ D →
+        equiv-product
+          ( equiv-Π-equiv-family
+            ( λ a' →
+              equiv-eq
+                ( ap S
+                  ( inv
+                    ( compute-left-equiv-binary-product-Decomposition-Π-Decomposition
+                      ( D)
+                      ( a'))))))
+          ( equiv-Π-equiv-family
+            ( λ b' →
+              equiv-eq
+                ( ap T
+                  ( inv
+                    ( compute-right-equiv-binary-product-Decomposition-Π-Decomposition
+                      ( D)
+                      ( b')))))))) ∘e
+    ( inv-associative-Σ
+      ( Π-Decomposition l1 l1 X)
+      ( λ d →
+        binary-coproduct-Decomposition l1 l1 (indexing-type-Π-Decomposition d))
+      ( _)) ∘e
+    ( equiv-tot (λ d → distributive-Π-coproduct-binary-coproduct-Decomposition))
+    where
     reassociate :
       ( X : UU l1) →
       Σ ( Σ ( binary-product-Decomposition l1 l1 X)
@@ -89,46 +130,4 @@ module _
         ( λ ( d , (dl , s) , dr , t) → ((d , dl , dr) , s , t))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-dirichlet-exponential-sum-species-types :
-    equiv-species-types
-      ( dirichlet-exponential-species-types (coproduct-species-types S T))
-      ( dirichlet-product-species-types
-        ( dirichlet-exponential-species-types S)
-        ( dirichlet-exponential-species-types T))
-  equiv-dirichlet-exponential-sum-species-types X =
-    ( reassociate X) ∘e
-    ( ( equiv-Σ
-        ( λ D →
-          ( ( b : indexing-type-Π-Decomposition (pr1 (pr2 D))) →
-            S (cotype-Π-Decomposition (pr1 (pr2 D)) b)) ×
-          ( ( b : indexing-type-Π-Decomposition (pr2 (pr2 D))) →
-            T (cotype-Π-Decomposition (pr2 (pr2 D)) b)))
-        ( equiv-binary-product-Decomposition-Π-Decomposition)
-        ( λ D →
-          equiv-product
-            ( equiv-Π-equiv-family
-              ( λ a' →
-                equiv-eq
-                  ( ap S
-                    ( inv
-                      ( compute-left-equiv-binary-product-Decomposition-Π-Decomposition
-                        ( D)
-                        ( a'))))))
-            ( equiv-Π-equiv-family
-              ( λ b' →
-                equiv-eq
-                  ( ap T
-                    ( inv
-                      ( compute-right-equiv-binary-product-Decomposition-Π-Decomposition
-                        ( D)
-                        ( b')))))))) ∘e
-      ( ( inv-associative-Σ
-          ( Π-Decomposition l1 l1 X)
-          ( λ d →
-            binary-coproduct-Decomposition l1 l1
-              ( indexing-type-Π-Decomposition d))
-              ( _)) ∘e
-        ( equiv-tot
-          ( λ d → distributive-Π-coproduct-binary-coproduct-Decomposition))))
 ```

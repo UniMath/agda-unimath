@@ -1,4 +1,4 @@
-# Cauchy series of species of types in a subuniverse
+# Cauchy series of species of types in subuniverses
 
 ```agda
 module species.cauchy-series-species-of-types-in-subuniverses where
@@ -27,11 +27,13 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The **Cauchy series** of a species `S` of types in subuniverse from `P` to `Q`
-at `X` is defined as :
+The
+{{#concept "Cauchy series" Disambiguation="of species of types in subuniverses" Agda=cauchy-series-species-subuniverse}}
+of a [species](species.species-of-types-in-subuniverses.md) `S` of types in
+[subuniverse](foundation.subuniverses.md) from `P` to `Q` at `X` is defined as
 
 ```text
-Σ (U : type-subuniverse P) (S(U) × (U → X))
+  Σ (U : type-subuniverse P) (S(U) × (U → X)).
 ```
 
 ## Definition
@@ -101,7 +103,7 @@ module _
       ( T)
       ( X)
   equiv-cauchy-series-equiv-species-subuniverse =
-    equiv-tot λ X → equiv-product (f X) id-equiv
+    equiv-tot (λ X → equiv-product-left (f X))
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -119,5 +121,5 @@ module _
   equiv-cauchy-series-species-subuniverse =
     equiv-tot
       ( λ F →
-        equiv-product id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
+        equiv-product-right (equiv-postcomp (inclusion-subuniverse P F) e))
 ```

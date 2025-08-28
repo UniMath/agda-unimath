@@ -25,9 +25,13 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The composition of Cauchy series of two species of subuniverse `S` and `T` at
-`X` is defined as the Cauchy series of `S` applied to the Cauchy series of `T`
-at `X`
+The
+{{#concept "composition" Disambiguation="of Cauchy series of two species of types in subuniverses" Agda=composition-cauchy-series-species-subuniverse}}
+of [Cauchy series](species.cauchy-series-species-of-types-in-subuniverses.md) of
+two
+[species of types in subuniverses](species.species-of-types-in-subuniverses.md)
+`S` and `T` at `X` is defined as the Cauchy series of `S` applied to the Cauchy
+series of `T` at `X`.
 
 ## Definition
 
@@ -92,28 +96,17 @@ module _
           ( subuniverse-global-subuniverse Q l4)
           ( T)
           ( X)))) ∘e
-      ( equiv-cauchy-series-species-types
-        ( Σ-extension-species-subuniverse
-          ( P)
-          ( subuniverse-global-subuniverse Q l3)
-          ( S))
-        ( cauchy-series-species-types
-          ( Σ-extension-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l4)
-            ( T))
-          ( X))
-        ( cauchy-series-species-subuniverse
+    ( equiv-cauchy-series-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( inv-equiv
+        ( equiv-cauchy-series-Σ-extension-species-subuniverse
           ( P)
           ( subuniverse-global-subuniverse Q l4)
           ( T)
-          ( X))
-        ( inv-equiv
-          ( equiv-cauchy-series-Σ-extension-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l4)
-            ( T)
-            ( X))))
+          ( X))))
 ```
 
 ### The Cauchy series associated to the composition of the species `S` and `T` is the composition of their Cauchy series
@@ -140,7 +133,22 @@ module _
   equiv-cauchy-series-composition-species-subuniverse =
     ( equiv-composition-cauchy-series-Σ-extension-species-subuniverse P Q S T
       ( X)) ∘e
-    ( ( equiv-cauchy-series-composition-species-types
+    ( equiv-cauchy-series-composition-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l4)
+        ( T))
+      ( X)) ∘e
+    ( equiv-cauchy-series-equiv-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+        ( cauchy-composition-species-subuniverse P Q C1 C2 S T))
+      ( cauchy-composition-species-types
         ( Σ-extension-species-subuniverse
           ( P)
           ( subuniverse-global-subuniverse Q l3)
@@ -148,33 +156,18 @@ module _
         ( Σ-extension-species-subuniverse
           ( P)
           ( subuniverse-global-subuniverse Q l4)
-          ( T))
-        ( X)) ∘e
-      ( ( equiv-cauchy-series-equiv-species-types
-          ( Σ-extension-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-            ( cauchy-composition-species-subuniverse P Q C1 C2 S T))
-          ( cauchy-composition-species-types
-            ( Σ-extension-species-subuniverse
-              ( P)
-              ( subuniverse-global-subuniverse Q l3)
-              ( S))
-            ( Σ-extension-species-subuniverse
-              ( P)
-              ( subuniverse-global-subuniverse Q l4)
-              ( T)))
-          ( preserves-cauchy-composition-Σ-extension-species-subuniverse
-            ( P)
-            ( Q)
-            ( C1)
-            ( C2)
-            ( S)
-            ( T))
-          ( X)) ∘e
-        ( equiv-cauchy-series-Σ-extension-species-subuniverse
-          ( P)
-          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-          ( cauchy-composition-species-subuniverse P Q C1 C2 S T)
-          ( X))))
+          ( T)))
+      ( preserves-cauchy-composition-Σ-extension-species-subuniverse
+        ( P)
+        ( Q)
+        ( C1)
+        ( C2)
+        ( S)
+        ( T))
+      ( X)) ∘e
+    ( equiv-cauchy-series-Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+      ( cauchy-composition-species-subuniverse P Q C1 C2 S T)
+      ( X))
 ```

@@ -57,16 +57,15 @@ equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type X =
       ( map-compute-Inhabited-Finite-Type' X))) ∘e
   ( ( equiv-tot
       ( λ D →
-        equiv-product
+        equiv-product-left
           ( equiv-add-redundant-prop
             ( is-property-is-inhabited _)
             ( λ _ →
               map-is-inhabited
                 ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
-                ( is-inhabited-type-Inhabited-Finite-Type X)))
-          ( id-equiv))) ∘e
+                ( is-inhabited-type-Inhabited-Finite-Type X))))) ∘e
     ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type
-        (finite-type-Inhabited-Finite-Type X))))
+        ( finite-type-Inhabited-Finite-Type X))))
 
 is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
   {l : Level} (X : Inhabited-Finite-Type l) →
@@ -82,9 +81,9 @@ is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X =
 
 finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
   {l : Level} (X : Inhabited-Finite-Type l) → Finite-Type (lsuc l)
-pr1 (finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type {l} X) =
+pr1 (finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X) =
   Σ-Decomposition-Subuniverse
-    ( is-finite-and-inhabited-Prop {l})
+    ( is-finite-and-inhabited-Prop)
     ( map-compute-Inhabited-Finite-Type' X)
 pr2 (finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X) =
   is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X
@@ -94,7 +93,7 @@ module _
   where
 
   finite-small-cauchy-composition-species-subuniverse :
-    ( S T : species-Inhabited-Finite-Type l1 (l1 ⊔ l2))
+    (S T : species-Inhabited-Finite-Type l1 (l1 ⊔ l2))
     (X : Inhabited-Finite-Type l1) →
     Finite-Type (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =

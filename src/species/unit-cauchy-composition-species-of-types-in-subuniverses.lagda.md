@@ -20,8 +20,12 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-Given a global subuniverse closed under `is-contr`, we define the unit of the
-Cauchy composition of species of types in a subuniverse by
+Given a [global subuniverse](foundation.global-subuniverses.md) closed under
+`is-contr`, we define the unit of the
+[Cauchy composition](species.cauchy-composition-species-of-types-in-subuniverses.md)
+of
+[species of types in a subuniverse](species.species-of-types-in-subuniverses.md)
+by
 
 ```text
   X ↦ is-contr X.

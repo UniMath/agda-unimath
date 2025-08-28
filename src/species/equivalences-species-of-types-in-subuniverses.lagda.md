@@ -19,7 +19,11 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-An equivalence of species of types from `F` to `G` is a pointwise equivalence.
+An
+{{#concept "equivalence" Disambiguation="of species of types in subuniverses" Agda=equiv-species-subuniverse}}
+of
+[species of types in subuniverses](species.species-of-types-in-subuniverses.md)
+from `F` to `G` is a pointwise [equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -41,7 +45,7 @@ equiv-species-subuniverse {l1} P Q S T =
 extensionality-species-subuniverse :
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
   (S : species-subuniverse P Q) → (T : species-subuniverse P Q) →
-  (Id S T) ≃ (equiv-species-subuniverse P Q S T)
+  (S ＝ T) ≃ (equiv-species-subuniverse P Q S T)
 extensionality-species-subuniverse P Q S T =
   extensionality-fam-subuniverse Q S T
 ```

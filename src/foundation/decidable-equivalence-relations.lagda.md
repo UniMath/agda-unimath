@@ -506,44 +506,40 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation :
   Decidable-Equivalence-Relation l1 A ≃
   Σ (UU l1) (λ X → (A ↠ X) × has-decidable-equality X)
 equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
-  ( ( equiv-Σ
-      ( λ z → (A ↠ z) × has-decidable-equality z)
-      ( id-equiv)
-      ( λ X →
-        ( equiv-product
-          ( id-equiv)
-          ( inv-equiv
-              ( equiv-add-redundant-prop
-                ( is-prop-is-set ( X))
-                ( is-set-has-decidable-equality)) ∘e
-            commutative-product) ∘e
+  ( equiv-tot
+    ( λ X →
+      ( equiv-product-right
+        ( ( equiv-remove-redundant-prop
+            ( is-prop-is-set X)
+            ( is-set-has-decidable-equality)) ∘e
+          ( commutative-product)) ∘e
         ( equiv-left-swap-Σ)))) ∘e
-    ( ( associative-Σ
-        ( UU l1)
-        ( λ X → is-set X)
-        ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
-      ( ( associative-Σ
-          ( Set l1)
-          ( λ X → (A ↠ type-Set X))
-          ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
-        ( ( equiv-type-subtype
-            ( λ surj →
-              is-prop-Π
-                ( λ x →
-                  is-prop-Π
-                    ( λ y →
-                      is-prop-is-decidable
-                        ( is-prop-sim-equivalence-relation
-                          ( equivalence-relation-Surjection-Into-Set surj)
-                          ( x)
-                          ( y)))))
-            ( λ _ → is-prop-has-decidable-equality)
-            ( λ s → has-decidable-equality-type-Surjection-Into-Set s)
-            ( λ s → is-decidable-equivalence-relation-Surjection-Into-Set s)) ∘e
-          ( ( inv-equiv
-              ( equiv-Σ-equiv-base
-                ( λ R → is-decidable-equivalence-relation R)
-                ( inv-equiv
-                  ( equiv-surjection-into-set-equivalence-relation A)))) ∘e
-            ( equiv-equivalence-relation-is-decidable-Decidable-Equivalence-Relation))))))
+  ( associative-Σ
+    ( UU l1)
+    ( λ X → is-set X)
+    ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
+  ( associative-Σ
+    ( Set l1)
+    ( λ X → (A ↠ type-Set X))
+    ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
+  ( equiv-type-subtype
+    ( λ surj →
+      is-prop-Π
+        ( λ x →
+          is-prop-Π
+            ( λ y →
+              is-prop-is-decidable
+                ( is-prop-sim-equivalence-relation
+                  ( equivalence-relation-Surjection-Into-Set surj)
+                  ( x)
+                  ( y)))))
+    ( λ _ → is-prop-has-decidable-equality)
+    ( λ s → has-decidable-equality-type-Surjection-Into-Set s)
+    ( λ s → is-decidable-equivalence-relation-Surjection-Into-Set s)) ∘e
+  ( inv-equiv
+    ( equiv-Σ-equiv-base
+      ( λ R → is-decidable-equivalence-relation R)
+      ( inv-equiv
+        ( equiv-surjection-into-set-equivalence-relation A)))) ∘e
+  ( equiv-equivalence-relation-is-decidable-Decidable-Equivalence-Relation)
 ```

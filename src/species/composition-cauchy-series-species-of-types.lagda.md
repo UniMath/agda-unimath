@@ -29,8 +29,11 @@ open import species.species-of-types
 
 ## Idea
 
-The composition of Cauchy series of two species of types `S` and `T` at `X` is
-defined as the Cauchy series of `S` applied to the Cauchy series of `T` at `X`
+The
+{{#concept "composition" Disambiguation="of Cauchy series of two species of types in subuniverses" Agda=composition-cauchy-series-species-subuniverse}}
+of of [Cauchy series](species.cauchy-series-species-of-types.md) of two
+[species of types](species.species-of-types.md) `S` and `T` at `X` is defined as
+the Cauchy series of `S` applied to the Cauchy series of `T` at `X`.
 
 ## Definition
 
@@ -42,7 +45,7 @@ composition-cauchy-series-species-types S T X =
   cauchy-series-species-types S (cauchy-series-species-types T X)
 ```
 
-## Property
+## Properties
 
 ### The Cauchy series associated to the composition of the species `S` and `T` is the composition of their Cauchy series
 
@@ -54,7 +57,26 @@ module _
   (X : UU l4)
   where
 
-  private
+  equiv-cauchy-series-composition-species-types :
+    cauchy-series-species-types
+      ( cauchy-composition-species-types S T)
+      ( X) ≃
+    composition-cauchy-series-species-types S T X
+  equiv-cauchy-series-composition-species-types =
+    ( equiv-tot
+      ( λ U →
+        ( equiv-product-right inv-distributive-Π-Σ) ∘e
+        ( inv-equiv left-distributive-product-Σ) ∘e
+          ( equiv-tot
+            ( λ V →
+              ( equiv-product-right
+                ( ( inv-equiv-up-product) ∘e
+                  ( equiv-product-right equiv-ev-pair))) ∘e
+              ( left-unit-law-Σ-is-contr
+                ( is-torsorial-equiv' (Σ U V))
+                ( Σ U V , id-equiv)))))) ∘e
+    ( reassociate)
+    where
     reassociate :
       cauchy-series-species-types (cauchy-composition-species-types S T) X ≃
       Σ ( UU l1)
@@ -71,27 +93,4 @@ module _
           (F , ((U , V , e) , s , fs) , ft))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-cauchy-series-composition-species-types :
-    cauchy-series-species-types
-      ( cauchy-composition-species-types S T)
-      ( X) ≃
-    composition-cauchy-series-species-types S T X
-  equiv-cauchy-series-composition-species-types =
-    ( equiv-tot
-      ( λ U →
-        ( equiv-product
-          ( id-equiv)
-          ( inv-equiv distributive-Π-Σ)) ∘e
-        ( ( inv-equiv left-distributive-product-Σ) ∘e
-          ( equiv-tot
-            ( λ V →
-              ( equiv-product
-                ( id-equiv)
-                ( ( inv-equiv equiv-up-product) ∘e
-                  ( equiv-product id-equiv equiv-ev-pair))) ∘e
-              ( left-unit-law-Σ-is-contr
-                ( is-torsorial-equiv' (Σ U V))
-                ( Σ U V , id-equiv))))))) ∘e
-      ( reassociate)
 ```

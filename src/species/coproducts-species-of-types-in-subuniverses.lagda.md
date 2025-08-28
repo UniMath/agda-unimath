@@ -25,9 +25,13 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The coproduct of two species of types of subuniverse `F` and `G` is the
-pointwise coproduct provided that the domain subuniverse of `F` and `G` is
-stable by coproduct.
+The
+{{#concept "coproduct" Disambiguation="of species of types in subuniverses" Agda=coproduct-species-subuniverse}}
+of two
+[species of types in subuniverses](species.species-of-types-in-subuniverses.md)
+`F` and `G` is the pointwise [coproduct](foundation.coproduct-types.md) provided
+that the domain [subuniverse](foundation.subuniverses.md) of `F` and `G` is
+stable under coproduct.
 
 ## Definitions
 
@@ -74,7 +78,7 @@ is-closed-under-coproduct-species-subuniverse P Q =
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
   (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
+  (C1 : is-closed-under-coproduct-species-subuniverse P Q)
   where
 
   coproduct-species-subuniverse :
@@ -92,12 +96,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
-  ( Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-  ( X : UU l1)
+  {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
+  (C1 : is-closed-under-coproduct-species-subuniverse P Q)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : UU l1)
   where
 
   map-coproduct-Σ-extension-species-subuniverse :
@@ -116,8 +121,8 @@ module _
           ( subuniverse-global-subuniverse Q l4)
           ( T))
       ( X)
-  map-coproduct-Σ-extension-species-subuniverse (p , inl x) = inl ( p , x)
-  map-coproduct-Σ-extension-species-subuniverse (p , inr x) = inr ( p , x)
+  map-coproduct-Σ-extension-species-subuniverse (p , inl x) = inl (p , x)
+  map-coproduct-Σ-extension-species-subuniverse (p , inr x) = inr (p , x)
 
   map-inv-coproduct-Σ-extension-species-subuniverse :
     coproduct-species-types

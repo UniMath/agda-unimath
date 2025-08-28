@@ -30,8 +30,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-Given a type `A` equipped with a type family `B` over `A`, the
-{{#concept "polynomial endofunctor"}} `𝑃 A B` is defined by
+Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
+`A`, the {{#concept "polynomial endofunctor"}} `𝑃 A B` is defined by
 
 ```text
   X ↦ Σ (x : A), (B x → X)
@@ -115,7 +115,7 @@ module _
     is-retraction-eq-Eq-type-polynomial-endofunctor x x refl
 ```
 
-### The action on morphisms of the polynomial endofunctor
+### The action on maps of the polynomial endofunctor
 
 ```agda
 map-polynomial-endofunctor :
