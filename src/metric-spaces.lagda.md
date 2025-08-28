@@ -45,6 +45,7 @@ property of **indistinguishability of identicals**
 ```agda
 module metric-spaces where
 
+open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
 open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
@@ -53,6 +54,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
+open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
@@ -93,7 +95,9 @@ open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
+open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
+open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public

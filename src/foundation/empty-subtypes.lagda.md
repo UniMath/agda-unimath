@@ -79,15 +79,16 @@ module _
   {l1 : Level} (l2 : Level) (X : UU l1)
   where
 
-  is-torsorial-is-empty-subtype :
-    is-torsorial (is-empty-subtype {l2 = l2} {X = X})
-  is-torsorial-is-empty-subtype =
-    ( (empty-subtype l2 X , is-empty-subtype-empty-subtype X) ,
-      λ (S , is-empty-S) →
-        eq-pair-Σ
-          ( eq-has-same-elements-subtype _ _
-            ( λ x → (ex-falso ∘ map-inv-raise , map-raise ∘ is-empty-S x)))
-          ( eq-is-prop (is-prop-type-Prop (is-empty-prop-subtype {X = X} S))))
+  abstract
+    is-torsorial-is-empty-subtype :
+      is-torsorial (is-empty-subtype {l2 = l2} {X = X})
+    is-torsorial-is-empty-subtype =
+      ( (empty-subtype l2 X , is-empty-subtype-empty-subtype X) ,
+        λ (S , is-empty-S) →
+          eq-pair-Σ
+            ( eq-has-same-elements-subtype _ _
+              ( λ x → (ex-falso ∘ map-inv-raise , map-raise ∘ is-empty-S x)))
+            ( eq-is-prop (is-prop-type-Prop (is-empty-prop-subtype {X = X} S))))
 ```
 
 ### The empty subtype is contained in all other subtypes

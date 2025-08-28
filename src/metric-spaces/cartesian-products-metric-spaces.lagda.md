@@ -46,6 +46,9 @@ For any two [metric spaces](metric-spaces.metric-spaces.md) `X`, `Y`, there is a
 structure if `x₁` and `x₂` are in a `d`-neighborhood and `y₁` and `y₂` are in a
 `d`-neighborhood.
 
+This metric is not canonical, but is consistent with the
+[dependent product of metric spaces](metric-spaces.dependent-products-metric-spaces.md).
+
 ## Definition
 
 ```agda

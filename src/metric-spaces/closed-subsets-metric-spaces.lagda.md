@@ -34,7 +34,6 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.dense-subsets-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.discrete-metric-spaces
-open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.open-subsets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
@@ -80,31 +79,6 @@ module _
   is-closed-subset-closed-subset-Metric-Space :
     is-closed-subset-Metric-Space X subset-closed-subset-Metric-Space
   is-closed-subset-closed-subset-Metric-Space = pr2 S
-```
-
-### Closed subsets of located metric spaces
-
-```agda
-module _
-  {l1 l2 l3 : Level}
-  (X : Located-Metric-Space l1 l2) (S : subset-Located-Metric-Space l3 X)
-  where
-
-  is-closed-prop-subset-Located-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
-  is-closed-prop-subset-Located-Metric-Space =
-    is-closed-prop-subset-Metric-Space
-      ( metric-space-Located-Metric-Space X)
-      ( S)
-
-  is-closed-subset-Located-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
-  is-closed-subset-Located-Metric-Space =
-    type-Prop is-closed-prop-subset-Located-Metric-Space
-
-closed-subset-Located-Metric-Space :
-  {l1 l2 : Level} (l3 : Level)
-  (X : Located-Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-closed-subset-Located-Metric-Space l3 X =
-  closed-subset-Metric-Space l3 (metric-space-Located-Metric-Space X)
 ```
 
 ## Properties
@@ -200,7 +174,7 @@ module _
       is-closed-subset-intersection-family-closed-subset-Metric-Space)
 ```
 
-### If the union of two closed sets is always closed, then LLPO
+### If the union of two closed sets is always closed, then LLPO holds
 
 This has yet to be formalized.
 
