@@ -193,10 +193,7 @@ module _
               X
               C2)
         ( λ d → associative-product _ _ _)) ∘e
-      ( inv-associative-Σ
-        ( binary-product-Decomposition-Subuniverse P X)
-        ( λ z → binary-product-Decomposition-Subuniverse P (pr1 z))
-        ( _)) ∘e
+      ( inv-associative-Σ _ _ _) ∘e
       ( equiv-tot (λ d → right-distributive-product-Σ))
 
     equiv-right-iterated-dirichlet-product-species-subuniverse :
@@ -234,10 +231,7 @@ module _
           P
           X
           C2)) ∘e
-      ( inv-associative-Σ
-          ( binary-product-Decomposition-Subuniverse P X)
-          ( λ z → binary-product-Decomposition-Subuniverse P (pr1 (pr2 z)))
-          ( _)) ∘e
+      ( inv-associative-Σ _ _ _) ∘e
         ( ( equiv-tot (λ d → left-distributive-product-Σ)))
 
     equiv-associative-dirichlet-product-species-subuniverse :
@@ -362,24 +356,7 @@ module _
         P
         X
         C2)) ∘e
-    ( inv-associative-Σ
-      ( binary-product-Decomposition-Subuniverse P X)
-      ( λ d →
-        inclusion-subuniverse
-          ( subuniverse-global-subuniverse Q l1)
-          ( unit-dirichlet-product-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l1)
-            ( C3)
-            ( right-summand-binary-product-Decomposition-Subuniverse P X d)))
-      ( λ z →
-        inclusion-subuniverse
-          ( subuniverse-global-subuniverse Q l3)
-          ( S
-            ( left-summand-binary-product-Decomposition-Subuniverse
-              P
-              X
-              (pr1 z))))) ∘e
+    ( inv-associative-Σ _ _ _) ∘e
     ( equiv-tot (λ _ → commutative-product))
 
   equiv-left-unit-law-dirichlet-product-species-subuniverse :

@@ -78,10 +78,7 @@ left-unit-law-cauchy-composition-species-types {l1} F A =
     ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
     ( trivial-Relaxed-Σ-Decomposition l1 A ,
       is-trivial-trivial-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
-  ( ( inv-associative-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D → is-contr (indexing-type-Relaxed-Σ-Decomposition D))
-      ( λ C → F (cotype-Relaxed-Σ-Decomposition (pr1 C) (center (pr2 C))))) ∘e
+  ( ( inv-associative-Σ _ _ _) ∘e
     ( ( equiv-tot
         ( λ D → equiv-tot (λ C → left-unit-law-Π-is-contr C (center C))))))
 
@@ -94,13 +91,8 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
     ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
     ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
       is-discrete-discrete-Relaxed-Σ-Decomposition)) ∘e
-  ( ( inv-associative-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D →
-          ( y : indexing-type-Relaxed-Σ-Decomposition D) →
-            is-contr (cotype-Relaxed-Σ-Decomposition D y))
-      ( λ D → F (indexing-type-Relaxed-Σ-Decomposition (pr1 D)))) ∘e
-    ( ( equiv-tot (λ _ → commutative-product))))
+  ( inv-associative-Σ _ _ _) ∘e
+  ( equiv-tot (λ _ → commutative-product))
 ```
 
 ### Associativity of composition of species
@@ -129,12 +121,7 @@ module _
         ( inv-equiv right-distributive-product-Σ) ∘e
         ( equiv-tot
           ( λ D2 →
-            ( inv-associative-Σ
-              ( S (indexing-type-Relaxed-Σ-Decomposition D2))
-              ( λ _ →
-                ( x : indexing-type-Relaxed-Σ-Decomposition D2) →
-                T ( cotype-Relaxed-Σ-Decomposition D2 x))
-              _))) ∘e
+            ( inv-associative-Σ _ _ _))) ∘e
         ( equiv-tot
           ( λ D2 →
             ( equiv-product-right
@@ -147,19 +134,10 @@ module _
                       ( λ x → U (cotype-Relaxed-Σ-Decomposition D1 x)))) ∘e
                     ( equiv-ind-Σ))) ∘e
                 ( distributive-Π-Σ))))))) ∘e
-    ( associative-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D →
-        Relaxed-Σ-Decomposition l1 l1 (indexing-type-Relaxed-Σ-Decomposition D))
-      ( _)) ∘e
+    ( associative-Σ _ _ _) ∘e
     ( equiv-Σ-equiv-base _
       ( inv-equiv equiv-displayed-fibered-Relaxed-Σ-Decomposition)) ∘e
-    ( inv-associative-Σ
-      ( Relaxed-Σ-Decomposition l1 l1 A)
-      ( λ D →
-        ( x : indexing-type-Relaxed-Σ-Decomposition D) →
-          Relaxed-Σ-Decomposition l1 l1 (cotype-Relaxed-Σ-Decomposition D x))
-      ( _)) ∘e
+    ( inv-associative-Σ _ _ _) ∘e
     ( equiv-tot
       ( λ D →
         left-distributive-product-Σ ∘e equiv-product-right distributive-Π-Σ))

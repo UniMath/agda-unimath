@@ -63,16 +63,7 @@ module _
     cauchy-series-species-subuniverse ≃
     cauchy-series-species-types (Σ-extension-species-subuniverse P Q S) X
   equiv-cauchy-series-Σ-extension-species-subuniverse =
-    ( equiv-tot
-      ( λ U →
-        inv-associative-Σ
-          ( type-Prop (P U))
-          ( λ p → inclusion-subuniverse Q (S (U , p)))
-          ( λ _ → U → X))) ∘e
-    ( associative-Σ
-      ( UU l1)
-      ( λ U → type-Prop (P U))
-      ( λ U → Σ ( inclusion-subuniverse Q (S U)) (λ _ → pr1 U → X)))
+    (equiv-tot (λ U → inv-associative-Σ _ _ _)) ∘e (associative-Σ _ _ _)
 ```
 
 ### Equivalences

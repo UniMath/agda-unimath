@@ -173,10 +173,7 @@ module _
             ( equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
         ( λ d → associative-product _ _ _)) ∘e
-      ( inv-associative-Σ
-        ( binary-coproduct-Decomposition-subuniverse P X)
-        ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 z))
-        ( _)) ∘e
+      ( inv-associative-Σ _ _ _) ∘e
       ( equiv-tot (λ d → right-distributive-product-Σ))
 
     equiv-right-iterated-cauchy-product-species-subuniverse :
@@ -203,10 +200,7 @@ module _
         ( _)
         ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse
             P X C2)) ∘e
-      ( inv-associative-Σ
-        ( binary-coproduct-Decomposition-subuniverse P X)
-        ( λ z → binary-coproduct-Decomposition-subuniverse P (pr1 (pr2 z)))
-        ( _)) ∘e
+      ( inv-associative-Σ _ _ _) ∘e
       ( equiv-tot (λ d → left-distributive-product-Σ))
 
     equiv-associative-cauchy-product-species-subuniverse :
@@ -331,21 +325,7 @@ module _
         P
         X
         C2)) ∘e
-    ( inv-associative-Σ
-      ( binary-coproduct-Decomposition-subuniverse P X)
-      ( λ d →
-        inclusion-subuniverse
-          ( subuniverse-global-subuniverse Q l1)
-          ( unit-cauchy-product-species-subuniverse
-            ( P)
-            ( subuniverse-global-subuniverse Q l1)
-            ( C3)
-            ( right-summand-binary-coproduct-Decomposition-subuniverse P X d)))
-      ( λ z →
-        inclusion-subuniverse
-          ( subuniverse-global-subuniverse Q l3)
-          ( S ( left-summand-binary-coproduct-Decomposition-subuniverse P X
-                ( pr1 z))))) ∘e
+    ( inv-associative-Σ _ _ _) ∘e
     ( equiv-tot (λ _ → commutative-product))
 
   equiv-left-unit-law-cauchy-product-species-subuniverse :
