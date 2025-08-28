@@ -31,7 +31,7 @@ open import species.species-of-types
 
 The
 {{#concept "composition" Disambiguation="of Cauchy series of two species of types in subuniverses" Agda=composition-cauchy-series-species-subuniverse}}
-of of [Cauchy series](species.cauchy-series-species-of-types.md) of two
+of [Cauchy series](species.cauchy-series-species-of-types.md) of two
 [species of types](species.species-of-types.md) `S` and `T` at `X` is defined as
 the Cauchy series of `S` applied to the Cauchy series of `T` at `X`.
 
