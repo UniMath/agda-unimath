@@ -465,9 +465,8 @@ module _
   is-decidable-is-in-equivalence-class-is-decidable F T a =
     apply-universal-property-trunc-Prop
       ( pr2 T)
-      ( is-decidable-Prop
-        ( subtype-equivalence-class R T a))
-      ( λ (pair t P) →
+      ( is-decidable-Prop (subtype-equivalence-class R T a))
+      ( λ (t , P) →
         is-decidable-iff
           ( backward-implication (P a))
           ( forward-implication (P a))
@@ -514,14 +513,8 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
             ( is-set-has-decidable-equality)) ∘e
           ( commutative-product)) ∘e
         ( equiv-left-swap-Σ)))) ∘e
-  ( associative-Σ
-    ( UU l1)
-    ( λ X → is-set X)
-    ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
-  ( associative-Σ
-    ( Set l1)
-    ( λ X → (A ↠ type-Set X))
-    ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
+  ( associative-Σ _ _ _) ∘e
+  ( associative-Σ _ _ _) ∘e
   ( equiv-type-subtype
     ( λ surj →
       is-prop-Π
