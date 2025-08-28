@@ -271,3 +271,13 @@ module _
                 ( λ where refl → refl)
                 ( center (K a x)))))
 ```
+
+In particular, inhabited types are `-1`-connected; their identity types are
+`-2`-connected, as all types are.
+
+```agda
+is-neg-one-connected-is-inhabited :
+  {l : Level} (A : UU l) → is-inhabited A → is-connected neg-one-𝕋 A
+is-neg-one-connected-is-inhabited A a =
+  is-connected-succ-is-connected-eq a (λ x y → is-neg-two-connected (x ＝ y))
+```
