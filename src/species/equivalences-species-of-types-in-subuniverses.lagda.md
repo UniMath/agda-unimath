@@ -29,9 +29,9 @@ from `F` to `G` is a pointwise [equivalence](foundation-core.equivalences.md).
 
 ```agda
 equiv-species-subuniverse :
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4) →
   species-subuniverse P Q → species-subuniverse P Q →
-  UU (lsuc l1 ⊔ l2)
+  UU (lsuc l1 ⊔ l2 ⊔ l3)
 equiv-species-subuniverse {l1} P Q S T =
   (X : type-subuniverse P) →
   inclusion-subuniverse Q (S X) ≃ inclusion-subuniverse Q (T X)
@@ -43,7 +43,7 @@ equiv-species-subuniverse {l1} P Q S T =
 
 ```agda
 extensionality-species-subuniverse :
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4) →
   (S : species-subuniverse P Q) → (T : species-subuniverse P Q) →
   (S ＝ T) ≃ (equiv-species-subuniverse P Q S T)
 extensionality-species-subuniverse P Q S T =
