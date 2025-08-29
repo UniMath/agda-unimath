@@ -101,13 +101,14 @@ module _
           cut-lower-ℝ lower-real-max-ℝ p ∨
           cut-upper-ℝ upper-real-max-ℝ q
 
-  max-ℝ : ℝ (l1 ⊔ l2)
-  max-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-max-ℝ)
-      ( upper-real-max-ℝ)
-      ( is-disjoint-lower-upper-max-ℝ)
-      ( is-located-lower-upper-max-ℝ)
+  opaque
+    max-ℝ : ℝ (l1 ⊔ l2)
+    max-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-max-ℝ)
+        ( upper-real-max-ℝ)
+        ( is-disjoint-lower-upper-max-ℝ)
+        ( is-located-lower-upper-max-ℝ)
 ```
 
 ## Properties
