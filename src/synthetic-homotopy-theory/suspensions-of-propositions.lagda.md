@@ -19,6 +19,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.set-truncations
+open import foundation.propositional-truncations
 open import foundation.subsingleton-induction
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
@@ -485,6 +487,28 @@ module _
       ( comp-surjection
         ( surjection-bool-suspension)
         ( surjection-equiv equiv-bool-Fin-2))
+```
+
+### Suspensions _almost_ commute with propositional truncations
+
+The problem is that empty types suspend to a two-element set. This is easily
+fixed by adjusting the truncation level, and we do have that
+`Σ (trunc-Prop X) = trunc-Set (Σ X)`.
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  suspension-structure-suspension-trunc-prop-trunc-set-suspension :
+    suspension-structure (type-trunc-Prop X) (type-trunc-Set (suspension X))
+  pr1 suspension-structure-suspension-trunc-prop-trunc-set-suspension = {!   !}
+  pr1 (pr2 suspension-structure-suspension-trunc-prop-trunc-set-suspension) = {!   !}
+  pr2 (pr2 suspension-structure-suspension-trunc-prop-trunc-set-suspension) = {!   !}
+
+  suspension-trunc-prop-trunc-set-suspension :
+    suspension (type-trunc-Prop X) → type-trunc-Set (suspension X)
+  suspension-trunc-prop-trunc-set-suspension = cogap-suspension {!   !}
 ```
 
 ## See also
