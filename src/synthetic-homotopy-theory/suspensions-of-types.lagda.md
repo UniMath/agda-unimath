@@ -795,7 +795,7 @@ In fact, the following are logically equivalent:
 - `X` is [inhabited or empty](logic.propositionally-decidable-types.md)
 - `trunc-Set (Σ X)` is [finite](univalent-combinatorics.finite-types.md)
 
-Proof:
+**Proof.**
 
 (->): When `X` is empty, its suspension is the set `Fin 2`. When `X` is
 inhabited, its suspension is 0-connected, and 0-truncated 0-connected types are
