@@ -29,6 +29,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 ```
@@ -114,7 +115,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} (y : I → ℝ l2) (x : ℝ l3)
+  {l1 l2 l3 : Level} {I : UU l1} (y : I → ℝ l2) (x : ℝ l3)
   (is-supremum-x-yᵢ : is-supremum-family-ℝ y x)
   where
 
@@ -143,6 +144,49 @@ module _
     pr2 (is-least-upper-bound-is-supremum-family-ℝ z) x≤z i =
       transitive-leq-ℝ (y i) x z x≤z
         ( is-upper-bound-is-supremum-family-ℝ y x is-supremum-x-yᵢ i)
+```
+
+### Suprema are unique up to similarity
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (x : I → ℝ l2)
+  where
+
+  abstract
+    sim-is-supremum-family-ℝ :
+      {l3 : Level} (y : ℝ l3) → is-supremum-family-ℝ x y →
+      {l4 : Level} (z : ℝ l4) → is-supremum-family-ℝ x z →
+      sim-ℝ y z
+    sim-is-supremum-family-ℝ y is-sup-y z is-sup-z =
+      sim-sim-leq-ℝ
+        ( sim-is-least-upper-bound-family-of-elements-Large-Poset ℝ-Large-Poset
+          ( is-least-upper-bound-is-supremum-family-ℝ x y is-sup-y)
+          ( is-least-upper-bound-is-supremum-family-ℝ x z is-sup-z))
+```
+
+### Having a supremum at a given universe level is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (x : I → ℝ l2) (l3 : Level)
+  where
+
+  has-supremum-family-ℝ : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  has-supremum-family-ℝ = Σ (ℝ l3) (is-supremum-family-ℝ x)
+
+  abstract
+    is-prop-has-supremum-family-ℝ : is-prop has-supremum-family-ℝ
+    is-prop-has-supremum-family-ℝ =
+      is-prop-all-elements-equal
+        ( λ (y , is-sup-y) (z , is-sup-z) →
+          eq-type-subtype
+            ( is-supremum-prop-family-ℝ x)
+            ( eq-sim-ℝ (sim-is-supremum-family-ℝ x y is-sup-y z is-sup-z)))
+
+  has-supremum-prop-family-ℝ : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  has-supremum-prop-family-ℝ =
+    ( has-supremum-family-ℝ , is-prop-has-supremum-family-ℝ)
 ```
 
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`

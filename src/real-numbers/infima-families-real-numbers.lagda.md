@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -29,7 +30,6 @@ open import logic.functoriality-existential-quantification
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.lower-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
-open import real-numbers.subsets-real-numbers
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -38,7 +38,9 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 ```
 
@@ -123,7 +125,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} (y : I → ℝ l2) (x : ℝ l3)
+  {l1 l2 l3 : Level} {I : UU l1} (y : I → ℝ l2) (x : ℝ l3)
   (is-infimum-x-yᵢ : is-infimum-family-ℝ y x)
   where
 
@@ -152,6 +154,50 @@ module _
       transitive-leq-ℝ z x (y i)
         ( is-lower-bound-is-infimum-family-ℝ y x is-infimum-x-yᵢ i)
         ( z≤x)
+```
+
+### Infima are unique up to similarity
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (x : I → ℝ l2)
+  where
+
+  abstract
+    sim-is-infimum-family-ℝ :
+      {l3 : Level} (y : ℝ l3) → is-infimum-family-ℝ x y →
+      {l4 : Level} (z : ℝ l4) → is-infimum-family-ℝ x z →
+      sim-ℝ y z
+    sim-is-infimum-family-ℝ y is-inf-y z is-inf-z =
+      sim-sim-leq-ℝ
+        ( sim-is-greatest-lower-bound-family-of-elements-Large-Poset
+          ( ℝ-Large-Poset)
+          ( is-greatest-lower-bound-is-infimum-family-ℝ x y is-inf-y)
+          ( is-greatest-lower-bound-is-infimum-family-ℝ x z is-inf-z))
+```
+
+### Having an infimum at a given universe level is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (x : I → ℝ l2) (l3 : Level)
+  where
+
+  has-infimum-family-ℝ : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  has-infimum-family-ℝ = Σ (ℝ l3) (is-infimum-family-ℝ x)
+
+  abstract
+    is-prop-has-infimum-family-ℝ : is-prop has-infimum-family-ℝ
+    is-prop-has-infimum-family-ℝ =
+      is-prop-all-elements-equal
+        ( λ (y , is-inf-y) (z , is-inf-z) →
+          eq-type-subtype
+            ( is-infimum-prop-family-ℝ x)
+            ( eq-sim-ℝ (sim-is-infimum-family-ℝ x y is-inf-y z is-inf-z)))
+
+  has-infimum-prop-family-ℝ : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  has-infimum-prop-family-ℝ =
+    ( has-infimum-family-ℝ , is-prop-has-infimum-family-ℝ)
 ```
 
 ### A real number `r` is greater than the infimum of the `yᵢ` if and only if it is greater than some `yᵢ`
