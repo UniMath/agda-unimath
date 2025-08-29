@@ -204,6 +204,7 @@ open import foundation.fibers-of-maps public
 open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
+open import foundation.finitely-truncated-types public
 open import foundation.fixed-points-endofunctions public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
@@ -303,7 +304,6 @@ open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
 open import foundation.mere-path-cosplit-maps public
-open import foundation.finitely-truncated-types public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public

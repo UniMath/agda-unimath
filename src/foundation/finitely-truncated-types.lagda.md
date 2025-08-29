@@ -52,7 +52,8 @@ $A$ is $n$-[truncated](foundation-core.truncated-types.md).
 is-finitely-trunc : {l : Level} → UU l → UU l
 is-finitely-trunc A = exists-structure 𝕋 (λ k → is-trunc k A)
 
-is-prop-is-finitely-trunc : {l : Level} {A : UU l} → is-prop (is-finitely-trunc A)
+is-prop-is-finitely-trunc :
+  {l : Level} {A : UU l} → is-prop (is-finitely-trunc A)
 is-prop-is-finitely-trunc {A = A} = is-prop-exists 𝕋 (λ k → is-trunc-Prop k A)
 
 is-finitely-trunc-Prop : {l : Level} → UU l → Prop l
@@ -83,7 +84,8 @@ abstract
   is-finitely-trunc-Id :
     {l : Level} {A : UU l} →
     is-finitely-trunc A → (x y : A) → is-finitely-trunc (x ＝ y)
-  is-finitely-trunc-Id {l} H x y = map-tot-exists (λ k H' → is-trunc-Id H' x y) H
+  is-finitely-trunc-Id {l} H x y =
+    map-tot-exists (λ k H' → is-trunc-Id H' x y) H
 
 Id-Finitely-Truncated-Type :
   {l : Level} (A : Finitely-Truncated-Type l) →
@@ -276,7 +278,8 @@ is-finitely-trunc-type-hom-Finitely-Truncated-Type :
   (B : Finitely-Truncated-Type l2) →
   is-finitely-trunc (type-hom-Finitely-Truncated-Type A B)
 is-finitely-trunc-type-hom-Finitely-Truncated-Type A B =
-  is-finitely-trunc-function-type (is-finitely-trunc-type-Finitely-Truncated-Type B)
+  is-finitely-trunc-function-type
+    ( is-finitely-trunc-type-Finitely-Truncated-Type B)
 
 hom-Finitely-Truncated-Type :
   {l1 l2 : Level} (A : Finitely-Truncated-Type l1)

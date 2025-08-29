@@ -20,12 +20,12 @@ open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.finitely-truncated-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.maybe
-open import foundation.finitely-truncated-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
