@@ -126,7 +126,8 @@ is-finite-is-finitely-enumerable-discrete D eX =
 ```
 
 We can say more: the cardinality of `X` enumerated by `Fin n` is bounded above
-by `n`.
+by `n`. This is a dual
+[pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md).
 
 ```agda
 is-upper-bound-finite-enumeration :
