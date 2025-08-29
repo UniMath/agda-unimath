@@ -865,12 +865,12 @@ module _
       ( is-nonempty-is-inhabited
         ( is-inhabited-suspension X)
         ( is-empty-set-truncation-is-empty
-          ( is-empty-is-zero-number-of-elements-is-finite p {!   !})))
+          ( is-empty-is-zero-number-of-elements-is-finite p {! refl  !})))
   ... | 1 =
     inl
       ( is-inhabited-suspension-is-0-connected
         ( X)
-        ( is-contr-is-one-number-of-elements-is-finite p {!   !}))
+        ( is-contr-is-one-number-of-elements-is-finite p {! refl  !}))
   ... | 2 = inr (is-empty-trunc-suspension-has-two-elements {!   !})
   ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
 ```
