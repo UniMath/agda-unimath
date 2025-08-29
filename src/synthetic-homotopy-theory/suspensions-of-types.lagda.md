@@ -847,7 +847,7 @@ module _
   is-empty-trunc-suspension-has-two-elements p x =
     intro-double-negation
       ( ap unit-trunc-Set (meridian-suspension x))
-      ( λ q → is-not-one-two-ℕ (eq-cardinality p (unit-trunc-Prop eq)))
+      ( λ _ → is-not-one-two-ℕ (eq-cardinality p (unit-trunc-Prop eq)))
         where
         eq : Fin 1 ≃ type-trunc-Set (suspension X)
         pr1 eq (inr star) = unit-trunc-Set north-suspension
