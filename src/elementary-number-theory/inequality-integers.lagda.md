@@ -225,21 +225,23 @@ abstract
       ( is-nonnegative-ℤ)
       ( inv (right-unit-law-add-ℤ (int-ℕ y)))
       ( is-nonnegative-int-ℕ y)
-  leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
-    ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
-      ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
-        ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
-    ( leq-int-ℕ x y H)
+  leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H =
+    tr
+      ( is-nonnegative-ℤ)
+      ( ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x))) ∙
+        ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y)) ∙
+        ( ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
+      ( leq-int-ℕ x y H)
 
   reflects-leq-int-ℕ : (x y : ℕ) → leq-ℤ (int-ℕ x) (int-ℕ y) → leq-ℕ x y
   reflects-leq-int-ℕ zero-ℕ y x≤y = star
   reflects-leq-int-ℕ (succ-ℕ x) (succ-ℕ y) x≤y =
     reflects-leq-int-ℕ x y
       ( tr
-          ( is-nonnegative-ℤ)
-          ( ap-diff-ℤ (inv (succ-int-ℕ y)) (inv (succ-int-ℕ x)) ∙
-            diff-succ-ℤ (int-ℕ y) (int-ℕ x))
-          ( x≤y))
+        ( is-nonnegative-ℤ)
+        ( ap-diff-ℤ (inv (succ-int-ℕ y)) (inv (succ-int-ℕ x)) ∙
+          diff-succ-ℤ (int-ℕ y) (int-ℕ x))
+        ( x≤y))
 
   iff-leq-int-ℕ : (x y : ℕ) → leq-ℕ x y ↔ leq-ℤ (int-ℕ x) (int-ℕ y)
   pr1 (iff-leq-int-ℕ x y) = leq-int-ℕ x y

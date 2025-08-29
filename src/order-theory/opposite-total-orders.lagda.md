@@ -49,7 +49,7 @@ module _
         ( incident-Poset-Prop poset-opposite-Total-Order x y)
         ( inr-disjunction)
         ( inl-disjunction)
-        (is-total-Total-Order X x y)
+        ( is-total-Total-Order X x y)
 
   opposite-Total-Order : Total-Order l1 l2
   opposite-Total-Order =
