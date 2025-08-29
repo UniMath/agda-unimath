@@ -1,9 +1,9 @@
-# The maximum of real numbers
+# The binary maximum of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.maximum-real-numbers where
+module real-numbers.binary-maximum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 
+open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
@@ -201,6 +202,15 @@ has-joins-ℝ-Large-Poset : has-joins-Large-Poset ℝ-Large-Poset
 join-has-joins-Large-Poset has-joins-ℝ-Large-Poset = max-ℝ
 is-least-binary-upper-bound-join-has-joins-Large-Poset
   has-joins-ℝ-Large-Poset = is-least-binary-upper-bound-max-ℝ
+```
+
+### The real numbers at a specific universe level are a join semilattice
+
+```agda
+ℝ-Order-Theoretic-Join-Semilattice :
+  (l : Level) → Order-Theoretic-Join-Semilattice (lsuc l) l
+ℝ-Order-Theoretic-Join-Semilattice l =
+  ( ℝ-Poset l , λ x y → (max-ℝ x y , is-least-binary-upper-bound-max-ℝ x y))
 ```
 
 ### The binary maximum preserves similarity
