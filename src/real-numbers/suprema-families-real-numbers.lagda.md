@@ -232,4 +232,7 @@ module _
 ## See also
 
 - [Infima of families of real numbers](real-numbers.infima-families-real-numbers.md)
+
+## External links
+
 - [Suprema](https://ncatlab.org/nlab/show/join#constructive) at $n$Lab

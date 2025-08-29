@@ -328,4 +328,7 @@ module _
 ## See also
 
 - [Suprema of families of real numbers](real-numbers.suprema-families-real-numbers.md)
+
+## External links
+
 - [Infima](https://ncatlab.org/nlab/show/join#constructive) at $n$Lab
