@@ -353,6 +353,33 @@ module _
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
+### The rational numbers are dense in the real numbers
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    dense-rational-le-ℝ :
+      le-ℝ x y →
+      exists ℚ (λ z → le-ℝ-Prop x (real-ℚ z) ∧ le-ℝ-Prop (real-ℚ z) y)
+    dense-rational-le-ℝ x<y =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ℚ (λ z → le-ℝ-Prop x (real-ℚ z) ∧ le-ℝ-Prop (real-ℚ z) y))
+      in do
+        ( q , x<q , q<y) ← x<y
+        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
+        intro-exists
+          ( q)
+          ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+```
+
 ### Strict inequality on the real numbers is dense
 
 ```agda
@@ -366,17 +393,11 @@ module _
     dense-le-ℝ :
       le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
     dense-le-ℝ x<y =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
-      in do
-        ( q , x<q , q<y) ← x<y
-        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
-        intro-exists
-          ( real-ℚ q)
-          ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+      map-exists
+        ( _)
+        ( real-ℚ)
+        ( λ _ → id)
+        ( dense-rational-le-ℝ x y x<y)
 ```
 
 ### Strict inequality on the real numbers is cotransitive
