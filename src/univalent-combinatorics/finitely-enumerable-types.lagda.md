@@ -133,9 +133,9 @@ is-upper-bound-finite-enumeration :
   {l : Level} (X : UU l) →
   (eq : has-decidable-equality X) →
   (f : finite-enumeration X) →
-  ¬ le-ℕ
-    (cardinality-finite-enumeration X f)
+  leq-ℕ
     (number-of-elements-count (count-finite-enumeration-discrete eq f))
+    (cardinality-finite-enumeration X f)
 is-upper-bound-finite-enumeration X eq (0 , f) p =
   tr (le-ℕ (cardinality-finite-enumeration X (0 , f))) h p
   where
