@@ -761,9 +761,9 @@ module _
           ( is-equiv-id))
 ```
 
-### `Σ X` is 0-connected if and only if `X` is inhabited
+### `Σ X` is 0-connected iff `X` is inhabited
 
-Note that `Σ empty = bool` is not 0-connected.
+Note that `Σ empty = bool` is not `0`-connected.
 
 The forward direction is the subtle one. When `Σ X` is 0-connected, then in
 particular we merely have `p ∈ north-suspension ＝ south-suspension`; such
@@ -798,7 +798,7 @@ contractible and hence are `Fin 1`.
 `Fin 2 = bool` can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)`
 is 0-connected, then it follows that `Σ X` is also 0-connected, therefore that
 `X` is inhabited. When it's 2, i.e. when there are no identifications
-`north = south` in `Σ X`, then `X` had to have been empty.
+`north = south` in `Σ X`, then `X` better have been empty.
 
 ```agda
 module _
