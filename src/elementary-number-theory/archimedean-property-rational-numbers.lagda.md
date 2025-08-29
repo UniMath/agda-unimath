@@ -26,6 +26,8 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
@@ -86,8 +88,7 @@ abstract
   exists-greater-natural-ℚ :
     (q : ℚ) → exists ℕ (λ n → le-ℚ-Prop q (rational-ℕ n))
   exists-greater-natural-ℚ q =
-    let open do-syntax-trunc-Prop (∃ ℕ (λ n → le-ℚ-Prop q (rational-ℕ n)))
-    in do
-      (n , q<1n) ← archimedean-property-ℚ one-ℚ q _
-      intro-exists n (tr (le-ℚ q) (right-unit-law-mul-ℚ _) q<1n)
+    map-tot-exists
+      ( λ _ → tr (le-ℚ q) (right-unit-law-mul-ℚ _))
+      ( archimedean-property-ℚ one-ℚ q _)
 ```

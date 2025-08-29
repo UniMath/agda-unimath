@@ -442,7 +442,7 @@ module _
                                 ( refl) ∙
                                 ap
                                   ( rational-ℚ⁺)
-                                  ( is-section-mul-ℚ⁺
+                                  ( is-section-right-mul-ℚ⁺
                                     ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
                                     ( ε-max-min-x +ℚ⁺ ε-max-min-y) ∙
                                     ε-max-min-split))
