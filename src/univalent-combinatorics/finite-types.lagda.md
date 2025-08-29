@@ -148,16 +148,6 @@ abstract
 
 ## Properties
 
-### Properties of finite types
-
-```agda
-is-empty-Finite-Type : {l : Level} → Finite-Type l → UU l
-is-empty-Finite-Type (T , _) = is-empty T
-
-is-inhabited-Finite-Type : {l : Level} → Finite-Type l → UU l
-is-inhabited-Finite-Type (T , _) = is-inhabited T
-```
-
 ### Finite types are closed under equivalences
 
 ```agda

@@ -59,7 +59,8 @@ elements of `M` indexed by a
 
 We use additive terminology consistently with the linear algebra definition of
 [finite sequences in commutative monoids](linear-algebra.finite-sequences-in-commutative-monoids.md)
-despite the use of multiplicative terminology for commutative monoids in general.
+despite the use of multiplicative terminology for commutative monoids in
+general.
 
 ## Sums over counted types
 
