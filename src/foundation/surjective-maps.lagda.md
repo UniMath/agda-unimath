@@ -881,8 +881,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (emp-A : is-empty A)
   where
 
-  is-empty-surjection-empty : A ↠ B → is-empty B
-  is-empty-surjection-empty (f , p) b =
+  is-empty-surjection : A ↠ B → is-empty B
+  is-empty-surjection (f , p) b =
     rec-trunc-Prop empty-Prop (λ (a , q) → emp-A a) (p b)
 ```
 
