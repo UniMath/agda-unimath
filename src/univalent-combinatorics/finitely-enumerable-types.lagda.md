@@ -11,7 +11,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 ```agda
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
@@ -136,21 +136,7 @@ is-upper-bound-finite-enumeration :
   leq-ℕ
     (number-of-elements-count (count-finite-enumeration-discrete eq f))
     (cardinality-finite-enumeration X f)
-is-upper-bound-finite-enumeration X eq (0 , f) p =
-  tr (le-ℕ (cardinality-finite-enumeration X (0 , f))) h p
-  where
-  h :
-    number-of-elements-count (count-finite-enumeration-discrete eq (0 , f)) ＝ 0
-  h =
-    eq-cardinality
-      ( {!   !})
-      ( unit-trunc-Prop
-        ( equiv-is-empty
-          ( λ ())
-          ( is-empty-surjection-empty
-            ( λ ())
-            ( f))))
-is-upper-bound-finite-enumeration X eq (succ-ℕ n , f) p = {!   !}
+is-upper-bound-finite-enumeration X eq f = {!   !}
 ```
 
 ### Finite types are finitely enumerable
