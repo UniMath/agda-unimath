@@ -15,11 +15,14 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import set-theory.cardinalities
 
 open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dedekind-finite-types
@@ -160,10 +163,48 @@ module _
       ( dedekind-finite-type-Kuratowski-Finite-Set Y)
 ```
 
+### Antisymmetry of inequality of cardinality of Kuratowski finite sets
+
+```agda
+cardinality-Kuratowski-Finite-Set :
+  {l : Level} → Kuratowski-Finite-Set l → cardinal l
+cardinality-Kuratowski-Finite-Set X =
+  cardinality (set-Kuratowski-Finite-Set X)
+
+module _
+  {l : Level} (X Y : Kuratowski-Finite-Set l)
+  where
+
+  antisymmetric-leq-cardinality-Kuratowski-Finite-Set :
+    leq-cardinality
+      ( cardinality-Kuratowski-Finite-Set X)
+      ( cardinality-Kuratowski-Finite-Set Y) →
+    leq-cardinality
+      ( cardinality-Kuratowski-Finite-Set Y)
+      ( cardinality-Kuratowski-Finite-Set X) →
+    cardinality-Kuratowski-Finite-Set X ＝
+    cardinality-Kuratowski-Finite-Set Y
+  antisymmetric-leq-cardinality-Kuratowski-Finite-Set p q =
+    eq-mere-equiv-cardinality
+      ( set-Kuratowski-Finite-Set X)
+      ( set-Kuratowski-Finite-Set Y)
+      ( map-binary-trunc-Prop
+        ( Cantor-Schröder-Bernstein-Kuratowski-Finite-Set X Y)
+        ( inv-unit-leq-cardinality
+          ( set-Kuratowski-Finite-Set X)
+          ( set-Kuratowski-Finite-Set Y)
+          ( p))
+        ( inv-unit-leq-cardinality
+          ( set-Kuratowski-Finite-Set Y)
+          ( set-Kuratowski-Finite-Set X)
+          ( q)))
+```
+
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
 - [Finitely enumerable types](univalent-combinatorics.finitely-enumerable-types.md)
+- [Subfinitely enumerable types](univalent-combinatorics.subfinitely-enumerable-types.md)
 - [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
 - In
   [`univalent-combinatorics.surjective-maps`](univalent-combinatorics.surjective-maps.md)
