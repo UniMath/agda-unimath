@@ -60,25 +60,21 @@ i.e., if the elements in the complement of `B` can be counted.
 ### `Σ A B` can be counted if `A` can be counted and if each `B x` can be counted
 
 ```agda
+count-Σ-Fin :
+  {l : Level} (k : ℕ) {B : Fin k → UU l} →
+  ((x : Fin k) → count (B x)) → count (Σ (Fin k) B)
+count-Σ-Fin 0 f = count-is-empty pr1
+count-Σ-Fin (succ-ℕ k) {B} f =
+  count-equiv'
+    ( ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr))) ∘e
+      ( right-distributive-Σ-coproduct (Fin k) unit B))
+    ( count-coproduct (count-Σ-Fin k (f ∘ inl)) (f (inr star)))
+
 count-Σ' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  (k : ℕ) (e : Fin k ≃ A) → ((x : A) → count (B x)) → count (Σ A B)
-count-Σ' zero-ℕ e f =
-  count-is-empty
-    ( λ x →
-      is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl (pr1 x))
-count-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e f =
-  count-equiv
-    ( ( equiv-Σ-equiv-base B e) ∘e
-      ( ( inv-equiv
-          ( right-distributive-Σ-coproduct (Fin k) unit (B ∘ map-equiv e))) ∘e
-        ( equiv-coproduct
-          ( id-equiv)
-          ( inv-equiv
-            ( left-unit-law-Σ (B ∘ (map-equiv e ∘ inr)))))))
-    ( count-coproduct
-      ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
-      ( f (map-equiv e (inr star))))
+  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
+  (e : Fin k ≃ A) → ((x : A) → count (B x)) → count (Σ A B)
+count-Σ' k {B = B} e f =
+  count-equiv (equiv-Σ-equiv-base B e) (count-Σ-Fin k (f ∘ map-equiv e))
 
 abstract
   equiv-count-Σ' :

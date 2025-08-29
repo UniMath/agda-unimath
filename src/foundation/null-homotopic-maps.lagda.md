@@ -12,7 +12,6 @@ open import foundation.commuting-triangles-of-identifications
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -29,6 +28,7 @@ open import foundation.weakly-constant-maps
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 ```
 

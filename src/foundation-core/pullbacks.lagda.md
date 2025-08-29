@@ -315,6 +315,86 @@ module _
   (f : A → X) (g : B → X) (c : cone f g C)
   where
 
+  triangle-tot-map-fiber-vertical-map-cone' :
+    tot (map-fiber-vertical-map-cone' f g c) ~
+    gap f g c ∘ map-equiv-total-fiber' (vertical-map-cone f g c)
+  triangle-tot-map-fiber-vertical-map-cone'
+    (.(vertical-map-cone f g c x) , x , refl) = refl
+
+  abstract
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' :
+      is-pullback f g c →
+      is-fiberwise-equiv (map-fiber-vertical-map-cone' f g c)
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' pb =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-left-map-triangle
+          ( tot (map-fiber-vertical-map-cone' f g c))
+          ( gap f g c)
+          ( map-equiv-total-fiber' (vertical-map-cone f g c))
+          ( triangle-tot-map-fiber-vertical-map-cone')
+          ( is-equiv-map-equiv-total-fiber' (vertical-map-cone f g c))
+          ( pb))
+
+  fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' :
+      is-pullback f g c → (x : A) →
+      fiber' (vertical-map-cone f g c) x ≃ fiber' g (f x)
+  fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' pb x =
+    ( map-fiber-vertical-map-cone' f g c x ,
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' pb x)
+
+  equiv-tot-map-fiber-vertical-map-cone-is-pullback' :
+      is-pullback f g c →
+      Σ A (fiber' (vertical-map-cone f g c)) ≃ Σ A (fiber' g ∘ f)
+  equiv-tot-map-fiber-vertical-map-cone-is-pullback' pb =
+    equiv-tot (fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback' pb)
+
+  abstract
+    is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone' :
+      is-fiberwise-equiv (map-fiber-vertical-map-cone' f g c) →
+      is-pullback f g c
+    is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone' is-equiv-fsq =
+      is-equiv-right-map-triangle
+        ( tot (map-fiber-vertical-map-cone' f g c))
+        ( gap f g c)
+        ( map-equiv-total-fiber' (vertical-map-cone f g c))
+        ( triangle-tot-map-fiber-vertical-map-cone')
+        ( is-equiv-tot-is-fiberwise-equiv is-equiv-fsq)
+        ( is-equiv-map-equiv-total-fiber' (vertical-map-cone f g c))
+
+  abstract
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback' :
+      universal-property-pullback f g c →
+      is-fiberwise-equiv (map-fiber-vertical-map-cone' f g c)
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+      up =
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback'
+        ( is-pullback-universal-property-pullback f g c up)
+
+  fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback' :
+      universal-property-pullback f g c → (x : A) →
+      fiber' (vertical-map-cone f g c) x ≃ fiber' g (f x)
+  fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+    pb x =
+    ( map-fiber-vertical-map-cone' f g c x ,
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+        ( pb)
+        ( x))
+
+  equiv-tot-map-fiber-vertical-map-cone-universal-property-pullback' :
+      universal-property-pullback f g c →
+      Σ A (fiber' (vertical-map-cone f g c)) ≃ Σ A (fiber' g ∘ f)
+  equiv-tot-map-fiber-vertical-map-cone-universal-property-pullback' pb =
+    equiv-tot
+      ( fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+        ( pb))
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
   square-tot-map-fiber-vertical-map-cone :
     gap f g c ∘ map-equiv-total-fiber (vertical-map-cone f g c) ~
     tot (λ _ → tot (λ _ → inv)) ∘ tot (map-fiber-vertical-map-cone f g c)
@@ -356,6 +436,15 @@ module _
           ( λ x →
             is-equiv-tot-is-fiberwise-equiv (λ y → is-equiv-inv (g y) (f x))))
         ( is-equiv-tot-is-fiberwise-equiv is-equiv-fsq)
+
+  abstract
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback :
+      universal-property-pullback f g c →
+      is-fiberwise-equiv (map-fiber-vertical-map-cone f g c)
+    is-fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback
+      up =
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
+        ( is-pullback-universal-property-pullback f g c up)
 ```
 
 ### A cone is a pullback if and only if it induces a family of equivalences between the fibers of the horizontal maps

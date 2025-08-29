@@ -30,7 +30,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-13, ubuntu-latest]
+        os: [ubuntu-latest]
         agda: ['2.7.0']
     steps:
       - name: Checkout our repository
