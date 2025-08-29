@@ -303,7 +303,7 @@ open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
 open import foundation.mere-path-cosplit-maps public
-open import foundation.merely-truncated-types public
+open import foundation.finitely-truncated-types public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public

@@ -25,7 +25,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.maybe
-open import foundation.merely-truncated-types
+open import foundation.finitely-truncated-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
@@ -59,7 +59,7 @@ if it has
 all of its [homotopy groups](synthetic-homotopy-theory.homotopy-groups.md) are
 [finite](univalent-combinatorics.finite-types.md), and it is $n$-truncated for
 some $n$ {{#cite Anel24}}. However, formally we define a π-finite type to be a
-[merely truncated type](foundation.merely-truncated-types.md) that is
+[finitely truncated type](foundation.finitely-truncated-types.md) that is
 [unbounded π-finite](univalent-combinatorics.unbounded-pi-finite-types.md).
 
 ## Definitions
@@ -69,7 +69,7 @@ some $n$ {{#cite Anel24}}. However, formally we define a π-finite type to be a
 ```agda
 is-π-finite-Prop : {l : Level} → UU l → Prop l
 is-π-finite-Prop A =
-  is-merely-trunc-Prop A ∧ is-unbounded-π-finite-Prop' A
+  is-finitely-trunc-Prop A ∧ is-unbounded-π-finite-Prop' A
 
 is-π-finite : {l : Level} → UU l → UU l
 is-π-finite A = type-Prop (is-π-finite-Prop A)
@@ -83,8 +83,8 @@ module _
   {l : Level} {A : UU l} (H : is-π-finite A)
   where
 
-  is-merely-trunc-is-π-finite : is-merely-trunc A
-  is-merely-trunc-is-π-finite = pr1 H
+  is-finitely-trunc-is-π-finite : is-finitely-trunc A
+  is-finitely-trunc-is-π-finite = pr1 H
 
   is-unbounded-π-finite-is-π-finite : is-unbounded-π-finite' A
   is-unbounded-π-finite-is-π-finite = pr2 H
@@ -112,10 +112,10 @@ module _
   is-π-finite-type-π-Finite-Type : is-π-finite type-π-Finite-Type
   is-π-finite-type-π-Finite-Type = pr2 A
 
-  is-merely-trunc-type-π-Finite-Type :
-    is-merely-trunc type-π-Finite-Type
-  is-merely-trunc-type-π-Finite-Type =
-    is-merely-trunc-is-π-finite is-π-finite-type-π-Finite-Type
+  is-finitely-trunc-type-π-Finite-Type :
+    is-finitely-trunc type-π-Finite-Type
+  is-finitely-trunc-type-π-Finite-Type =
+    is-finitely-trunc-is-π-finite is-π-finite-type-π-Finite-Type
 
   is-unbounded-π-finite-type-π-Finite-Type :
     is-unbounded-π-finite' type-π-Finite-Type
@@ -148,7 +148,7 @@ is-π-finite-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A retract-of B → is-π-finite B → is-π-finite A
 pr1 (is-π-finite-retract R H) =
-  is-merely-trunc-retract-of R (is-merely-trunc-is-π-finite H)
+  is-finitely-trunc-retract-of R (is-finitely-trunc-is-π-finite H)
 pr2 (is-π-finite-retract R H) n =
   is-untruncated-π-finite-retract n R (is-unbounded-π-finite-is-π-finite H n)
 ```
@@ -210,9 +210,9 @@ is-π-finite-coproduct :
   is-π-finite A → is-π-finite B →
   is-π-finite (A + B)
 is-π-finite-coproduct hA hB =
-  ( ( is-merely-trunc-coproduct
-      ( is-merely-trunc-is-π-finite hA)
-      ( is-merely-trunc-is-π-finite hB)) ,
+  ( ( is-finitely-trunc-coproduct
+      ( is-finitely-trunc-is-π-finite hA)
+      ( is-finitely-trunc-is-π-finite hB)) ,
     ( λ n →
       is-untruncated-π-finite-coproduct n
         ( is-unbounded-π-finite-is-π-finite hA n)
