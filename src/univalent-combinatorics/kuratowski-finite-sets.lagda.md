@@ -28,6 +28,7 @@ open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dedekind-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-enumerable-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.subfinite-types
@@ -114,8 +115,7 @@ module _
   is-subfinitely-enumerable-type-Kuratowski-Finite-Set :
     is-subfinitely-enumerable lzero (type-Kuratowski-Finite-Set X)
   is-subfinitely-enumerable-type-Kuratowski-Finite-Set =
-    map-trunc-Prop
-      ( λ (n , s) → (Fin-Subfinite-Type n , s))
+    is-subfinitely-enumerable-is-finitely-enumerable
       ( is-kuratowski-finite-Kuratowski-Finite-Set X)
 
   subfinitely-enumerable-type-Kuratowski-Finite-Set :
