@@ -538,7 +538,7 @@ module _
       ( cogap-suspension
           suspension-structure-trunc-set-suspension-suspension-trunc-prop)
 
-  dependent-suspension-structure-retraction-suspension-trunc-prop-trunc-set-suspension :
+  dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension :
     dependent-suspension-structure
       ( λ z →
         ( trunc-set-suspension-suspension-trunc-prop ∘
@@ -546,12 +546,18 @@ module _
         ( z)
         ＝ z)
       ( suspension-structure-suspension (type-trunc-Prop X))
-  pr1 dependent-suspension-structure-retraction-suspension-trunc-prop-trunc-set-suspension =
+  pr1 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension =
     ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
-  pr1 (pr2 dependent-suspension-structure-retraction-suspension-trunc-prop-trunc-set-suspension) =
+  pr1 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) =
     ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
-  pr2 (pr2 dependent-suspension-structure-retraction-suspension-trunc-prop-trunc-set-suspension) x =
-    eq-is-prop {! is-set  !}
+  pr2 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) _ =
+    eq-is-prop
+      ( is-set-suspension-Prop
+        ( trunc-Prop X)
+        ( ( trunc-set-suspension-suspension-trunc-prop ∘
+            suspension-trunc-prop-trunc-set-suspension)
+          ( south-suspension))
+        ( south-suspension))
 
   suspension-structure-eq-trunc-set-suspension :
     (x : type-trunc-Set (suspension X)) →
@@ -563,7 +569,13 @@ module _
       x)
   pr1 (suspension-structure-eq-trunc-set-suspension x) = {!   !}
   pr1 (pr2 (suspension-structure-eq-trunc-set-suspension x)) = {!   !}
-  pr2 (pr2 (suspension-structure-eq-trunc-set-suspension x)) = {!   !}
+  pr2 (pr2 (suspension-structure-eq-trunc-set-suspension x)) _ =
+    eq-is-prop
+      ( is-set-type-trunc-Set
+        ( ( suspension-trunc-prop-trunc-set-suspension ∘
+            trunc-set-suspension-suspension-trunc-prop)
+          ( x))
+        ( x))
 
   is-equiv-suspension-trunc-prop-trunc-set-suspension :
     is-equiv suspension-trunc-prop-trunc-set-suspension
@@ -589,7 +601,7 @@ module _
           suspension-trunc-prop-trunc-set-suspension)
         ( z)
         ＝ z)
-      ( dependent-suspension-structure-retraction-suspension-trunc-prop-trunc-set-suspension)
+      ( dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension)
 ```
 
 ## See also
