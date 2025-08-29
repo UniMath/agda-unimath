@@ -806,7 +806,7 @@ contractible and hence are `Fin 1`.
 can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)` is 0-connected
 and hence contractible, well, this is the definition of 0-connectedness of
 `Σ X`, and therefore `X` is inhabited. When it's 2, i.e. when there are no
-identifications `north ＝ south` in `Σ X`, then `X` better have been empty.
+identifications `north ＝ south` in `Σ X`, then `X` better have been empty. ∎
 
 ```agda
 module _
