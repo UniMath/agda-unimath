@@ -1,7 +1,7 @@
 # Finitely enumerable types
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas --lossy-unification #-}
 
 module univalent-combinatorics.finitely-enumerable-types where
 ```
@@ -9,7 +9,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -22,6 +22,7 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.negation
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
@@ -132,10 +133,24 @@ is-upper-bound-finite-enumeration :
   {l : Level} (X : UU l) →
   (eq : has-decidable-equality X) →
   (f : finite-enumeration X) →
-  leq-ℕ
-    (number-of-elements-count (count-finite-enumeration-discrete eq f))
+  ¬ le-ℕ
     (cardinality-finite-enumeration X f)
-is-upper-bound-finite-enumeration X eq (n , f) = {!   !}
+    (number-of-elements-count (count-finite-enumeration-discrete eq f))
+is-upper-bound-finite-enumeration X eq (0 , f) p =
+  tr (le-ℕ (cardinality-finite-enumeration X (0 , f))) h p
+  where
+  h :
+    number-of-elements-count (count-finite-enumeration-discrete eq (0 , f)) ＝ 0
+  h =
+    eq-cardinality
+      ( {!   !})
+      ( unit-trunc-Prop
+        ( equiv-is-empty
+          ( λ ())
+          ( is-empty-surjection-empty
+            ( λ ())
+            ( f))))
+is-upper-bound-finite-enumeration X eq (succ-ℕ n , f) p = {!   !}
 ```
 
 ### Finite types are finitely enumerable
