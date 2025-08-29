@@ -72,7 +72,7 @@ module _
 
   commutative-semigroup-Commutative-Monoid : Commutative-Semigroup l
   commutative-semigroup-Commutative-Monoid =
-    semigroup-Commutative-Monoid , pr2 M
+    ( semigroup-Commutative-Monoid , is-commutative-Commutative-Monoid)
 
   set-Commutative-Monoid : Set l
   set-Commutative-Monoid = set-Monoid monoid-Commutative-Monoid
