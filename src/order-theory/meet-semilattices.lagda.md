@@ -513,7 +513,7 @@ module _
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-          ≤ x     by leq-left-meet-Order-Theoretic-Meet-Semilattice A x y
+          ≤ x by leq-left-meet-Order-Theoretic-Meet-Semilattice A x y
 
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ y
@@ -525,7 +525,7 @@ module _
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-          ≤ y     by leq-right-meet-Order-Theoretic-Meet-Semilattice A x y
+          ≤ y by leq-right-meet-Order-Theoretic-Meet-Semilattice A x y
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ z
@@ -547,7 +547,7 @@ module _
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-          ≤ y     by leq-left-meet-Order-Theoretic-Meet-Semilattice A y z
+          ≤ y by leq-left-meet-Order-Theoretic-Meet-Semilattice A y z
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ z
@@ -559,7 +559,7 @@ module _
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-          ≤ z     by leq-right-meet-Order-Theoretic-Meet-Semilattice A y z
+          ≤ z by leq-right-meet-Order-Theoretic-Meet-Semilattice A y z
 
   leq-associative-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ (x ∧ (y ∧ z))
