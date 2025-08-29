@@ -559,6 +559,16 @@ module _
   where
 
   abstract
+    le-transpose-left-add-ℝ' : le-ℝ (x +ℝ y) z → le-ℝ y (z -ℝ x)
+    le-transpose-left-add-ℝ' x+y<z =
+      le-transpose-left-add-ℝ y x z
+        ( tr (λ w → le-ℝ w z) (commutative-add-ℝ _ _) x+y<z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
     le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
     le-transpose-right-diff-ℝ x<y-z =
       preserves-le-right-sim-ℝ
@@ -598,6 +608,15 @@ module _
   abstract
     le-transpose-right-add-ℝ : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ z) y
     le-transpose-right-add-ℝ = backward-implication (iff-add-right-le-ℝ x z y)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    le-transpose-right-add-ℝ' : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ y) z
+    le-transpose-right-add-ℝ' x<y+z =
+      le-transpose-right-add-ℝ x z y (tr (le-ℝ x) (commutative-add-ℝ _ _) x<y+z)
 ```
 
 ## References

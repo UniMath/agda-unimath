@@ -12,6 +12,7 @@ module real-numbers.rational-real-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -76,6 +77,9 @@ is-dedekind-lower-upper-real-ℚ x =
 ```agda
 real-ℚ : ℚ → ℝ lzero
 real-ℚ x = (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+
+real-ℚ⁺ : ℚ⁺ → ℝ lzero
+real-ℚ⁺ q = real-ℚ (rational-ℚ⁺ q)
 ```
 
 ### Zero as a real number
