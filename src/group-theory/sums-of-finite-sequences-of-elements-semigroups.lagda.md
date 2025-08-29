@@ -38,6 +38,10 @@ operation extends the binary operation on a
 [semigroup](group-theory.semigroups.md) `G` to any nonempty
 [finite sequence](lists.finite-sequences.md) of elements of `G`.
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in semigroups](linear-algebra.finite-sequences-in-semigroups.md)
+despite the use of multiplicative terminology for semigroups in general.
+
 ## Definition
 
 ```agda

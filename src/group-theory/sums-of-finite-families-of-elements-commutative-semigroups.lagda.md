@@ -23,6 +23,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-coproduct-types
@@ -40,7 +41,6 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.double-counting
-open import foundation.inhabited-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -52,10 +52,15 @@ open import univalent-combinatorics.standard-finite-types
 The
 {{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative semigroup" WD="sum" WDID=Q218005 Agda=sum-finite-Commutative-Semigroup}}
 extends the binary operation on a
-[commutative semigroup](group-theory.commutative-semigroups.md) `G` to any family
-of elements of `G` indexed by an
+[commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
+family of elements of `G` indexed by an
 [inhabited](foundation.inhabited-types.md)
 [finite type](univalent-combinatorics.finite-types.md).
+
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative semigroups](linear-algebra.finite-sequences-in-commutative-semigroups.md)
+despite the use of multiplicative terminology for commutative semigroups in
+general.
 
 ## Sums over counted types
 

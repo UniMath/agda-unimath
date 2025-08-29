@@ -23,8 +23,8 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
@@ -34,8 +34,8 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
@@ -57,6 +57,10 @@ extends the binary operation on a
 elements of `M` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative monoids](linear-algebra.finite-sequences-in-commutative-monoids.md)
+despite the use of multiplicative terminology for commutative monoids in general.
+
 ## Sums over counted types
 
 ### Definition
@@ -71,7 +75,7 @@ sum-count-Commutative-Monoid M A (n , Fin-n≃A) f =
 
 ### Properties
 
-#### Sums for counts in the commutative semigroup
+#### Sums for counts in a commutative monoid equal sums in the corresponding commutative semigroup
 
 ```agda
 module _

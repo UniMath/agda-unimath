@@ -191,6 +191,7 @@ open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.sums-of-finite-families-of-elements-commutative-monoids public
+open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups public
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids public
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups public
 open import group-theory.sums-of-finite-sequences-of-elements-monoids public

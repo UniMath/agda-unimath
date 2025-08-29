@@ -50,6 +50,11 @@ extends the binary operation on a
 [commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
 [finite sequence](lists.finite-sequences.md) of elements of `G`.
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative semigroups](linear-algebra.finite-sequences-in-commutative-semigroups.md)
+despite the use of multiplicative terminology for commutative semigroups in
+general.
+
 ## Definition
 
 ```agda

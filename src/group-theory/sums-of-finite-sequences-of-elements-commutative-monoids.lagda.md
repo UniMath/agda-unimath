@@ -43,6 +43,11 @@ extends the binary operation on a
 [commutative monoid](group-theory.commutative-monoids.md) `M` to any
 [finite sequence](lists.finite-sequences.md) of elements of `M`.
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative monoids](linear-algebra.finite-sequences-in-commutative-monoids.md)
+despite the use of multiplicative terminology for commutative monoids in
+general.
+
 ## Definition
 
 ```agda
@@ -55,7 +60,7 @@ sum-fin-sequence-type-Commutative-Monoid M =
 
 ## Properties
 
-### Sums in the commutative semigroup
+#### Sums in a commutative monoid equal sums in the corresponding commutative semigroup
 
 ```agda
 module _
