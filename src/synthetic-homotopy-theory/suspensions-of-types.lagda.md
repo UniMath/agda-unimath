@@ -20,6 +20,8 @@ open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.double-negation
+open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -30,7 +32,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.path-algebra
+open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
@@ -38,6 +40,7 @@ open import foundation.sections
 open import foundation.set-truncations
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
+open import foundation.transport-along-equivalences
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -47,8 +50,10 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.coproduct-types
-open import foundation-core.empty-types
+open import foundation-core.negation
 open import foundation-core.sets
+
+open import logic.propositionally-decidable-types
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -59,7 +64,11 @@ open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
 
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -102,6 +111,10 @@ meridian-suspension :
   north-suspension {X = X} ＝ south-suspension {X = X}
 meridian-suspension {X = X} =
   glue-pushout (terminal-map X) (terminal-map X)
+
+is-inhabited-suspension :
+  {l : Level} (X : UU l) → is-inhabited (suspension X)
+is-inhabited-suspension X = unit-trunc-Prop north-suspension
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
@@ -563,6 +576,19 @@ module _
     is-surjective-map-surjection-bool-suspension
 ```
 
+This provides a
+[finite enumeration](univalent-combinatorics.finitely-enumerable-types.md) of
+`Σ X`.
+
+```agda
+  finite-enumeration-suspension : finite-enumeration (suspension X)
+  pr1 finite-enumeration-suspension = 2
+  pr2 finite-enumeration-suspension =
+    comp-surjection
+      ( surjection-bool-suspension)
+      ( surjection-equiv equiv-bool-Fin-2)
+```
+
 ### The suspension of an empty type is the booleans
 
 ```agda
@@ -570,15 +596,70 @@ module _
   {l : Level} (X : UU l) (emp : is-empty X)
   where
 
+  suspension-structure-empty-bool : suspension-structure X bool
+  pr1 suspension-structure-empty-bool = true
+  pr1 (pr2 suspension-structure-empty-bool) = false
+  pr2 (pr2 suspension-structure-empty-bool) = ex-falso ∘ emp
+
+  inv-map-surjection-bool-suspension : suspension X → bool
+  inv-map-surjection-bool-suspension =
+    cogap-suspension suspension-structure-empty-bool
+
+  compute-true-suspension-empty-bool :
+    inv-map-surjection-bool-suspension north-suspension ＝ true
+  compute-true-suspension-empty-bool =
+    compute-north-cogap-suspension suspension-structure-empty-bool
+
+  compute-false-suspension-empty-bool :
+    inv-map-surjection-bool-suspension south-suspension ＝ false
+  compute-false-suspension-empty-bool =
+    compute-south-cogap-suspension suspension-structure-empty-bool
+
+  compute-north-suspension-empty-bool :
+    (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+      north-suspension
+    ＝ north-suspension
+  compute-north-suspension-empty-bool =
+    ap map-surjection-bool-suspension compute-true-suspension-empty-bool
+
+  compute-south-suspension-empty-bool :
+    (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+      south-suspension
+    ＝ south-suspension
+  compute-south-suspension-empty-bool =
+    ap map-surjection-bool-suspension compute-false-suspension-empty-bool
+
+  dependent-suspension-sutructure-surjection-bool-suspension :
+    dependent-suspension-structure
+      (λ z →
+        (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+        (z)
+        ＝ z)
+      (suspension-structure-suspension X)
+  pr1 dependent-suspension-sutructure-surjection-bool-suspension =
+    compute-north-suspension-empty-bool
+  pr1 (pr2 dependent-suspension-sutructure-surjection-bool-suspension) =
+    compute-south-suspension-empty-bool
+  pr2 (pr2 dependent-suspension-sutructure-surjection-bool-suspension) x =
+    ex-falso (emp x)
+
   is-equiv-map-surjection-bool-suspension :
     is-equiv map-surjection-bool-suspension
   pr1 (pr1 is-equiv-map-surjection-bool-suspension) =
-    cogap-suspension (true , (false , ex-falso ∘ emp))
-  pr2 (pr1 is-equiv-map-surjection-bool-suspension) x = {!   !}
+    inv-map-surjection-bool-suspension
+  pr2 (pr1 is-equiv-map-surjection-bool-suspension) =
+    dependent-cogap-suspension
+      ( λ z →
+        ( map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+        ( z)
+        ＝ z)
+      ( dependent-suspension-sutructure-surjection-bool-suspension)
   pr1 (pr2 is-equiv-map-surjection-bool-suspension) =
-    cogap-suspension (true , (false , ex-falso ∘ emp))
-  pr2 (pr2 is-equiv-map-surjection-bool-suspension) true = {!   !}
-  pr2 (pr2 is-equiv-map-surjection-bool-suspension) false = {!   !}
+    inv-map-surjection-bool-suspension
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) true =
+    compute-true-suspension-empty-bool
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) false =
+    compute-false-suspension-empty-bool
 
   equiv-map-surjection-bool-suspension :
     bool ≃ suspension X
@@ -686,7 +767,7 @@ Note that `Σ empty = bool` is not 0-connected.
 
 The forward direction is the subtle one. When `Σ X` is 0-connected, then in
 particular we merely have `p ∈ north-suspension ＝ south-suspension`; such
-identifications are generated by `X`.
+identifications are inductively generated by `X`.
 
 ```agda
 suspension-is-0-connected-is-inhabited :
@@ -697,13 +778,13 @@ suspension-is-0-connected-is-inhabited X x =
 
 is-inhabited-suspension-is-0-connected :
   {l : Level} (X : UU l) → is-0-connected (suspension X) → is-inhabited X
-is-inhabited-suspension-is-0-connected X (sx , p) =
-  {!   !}
+is-inhabited-suspension-is-0-connected X p =
+  unit-trunc-Prop {!   !}
 ```
 
 In fact, the following are logically equivalent:
 
-- `X` is empty or inhabited
+- `X` is [inhabited or empty](logic.propositionally-decidable-types.md)
 - `trunc-Set (Σ X)` is [finite](univalent-combinatorics.finite-types.md)
 
 Proof:
@@ -712,37 +793,68 @@ Proof:
 inhabited, its suspension is 0-connected, and 0-truncated 0-connected types are
 contractible and hence are `Fin 1`.
 
-(<-): Such a cardinality can only be 1 or 2. When it's 1, i.e. when
-`trunc-Set (Σ X)` is 0-connected, then it follows that `Σ X` is also
-0-connected, therefore that `X` is inhabited. When it's 2, i.e. when there are
-no identifications `north = south` in `Σ X`, then `X` had to have been empty.
+(<-): Such a cardinality can only be 1 or 2 - suspensions are inhabited, say, by
+`north-suspension`, and the cardinality of a type finitely enumerated by
+`Fin 2 = bool` can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)`
+is 0-connected, then it follows that `Σ X` is also 0-connected, therefore that
+`X` is inhabited. When it's 2, i.e. when there are no identifications
+`north = south` in `Σ X`, then `X` had to have been empty.
 
 ```agda
 module _
   {l : Level} (X : UU l)
   where
 
+  trunc-suspension-is-contractible-is-pointed :
+    X → is-contr (type-trunc-Set (suspension X))
+  trunc-suspension-is-contractible-is-pointed x =
+    suspension-is-0-connected-is-inhabited X (unit-trunc-Prop x)
+
+  trunc-suspension-is-contractible-is-inhabited :
+    is-inhabited X → is-contr (type-trunc-Set (suspension X))
+  trunc-suspension-is-contractible-is-inhabited x =
+    rec-trunc-Prop
+      ( is-contr-Prop (type-trunc-Set (suspension X)))
+      ( trunc-suspension-is-contractible-is-pointed)
+      ( x)
+
   is-finite-suspension-is-inhabited-or-empty :
-    is-empty X + is-inhabited X → is-finite (type-trunc-Set (suspension X))
+    is-inhabited-or-empty X → is-finite (type-trunc-Set (suspension X))
   is-finite-suspension-is-inhabited-or-empty (inl x) =
+    is-finite-is-contr (trunc-suspension-is-contractible-is-inhabited x)
+  is-finite-suspension-is-inhabited-or-empty (inr x) =
     is-finite-equiv
       ( equiv-unit-trunc-set
           ( suspension X ,
-          is-set-equiv
-            ( bool)
-            ( inv-equiv
-              ( equiv-map-surjection-bool-suspension X x))
-            ( is-set-bool)) ∘e
+            is-set-equiv
+              ( bool)
+              ( inv-equiv
+                ( equiv-map-surjection-bool-suspension X x))
+              ( is-set-bool)) ∘e
         equiv-map-surjection-bool-suspension X x)
       ( is-finite-bool)
-  is-finite-suspension-is-inhabited-or-empty (inr x) =
-    is-finite-is-contr {!   !}
+
+  is-empty-trunc-suspension-has-two-elements :
+    has-two-elements (type-trunc-Set (suspension X)) → is-empty X
+  is-empty-trunc-suspension-has-two-elements p x =
+    intro-double-negation
+      ( ap unit-trunc-Set (meridian-suspension x))
+      ( λ q → is-not-one-two-ℕ (eq-cardinality p (unit-trunc-Prop eq)))
+        where
+        eq : Fin 1 ≃ type-trunc-Set (suspension X)
+        pr1 eq (inr star) = unit-trunc-Set north-suspension
+        pr1 (pr1 (pr2 eq)) _ = inr star
+        pr2 (pr1 (pr2 eq)) _ =
+          eq-is-contr (trunc-suspension-is-contractible-is-pointed x)
+        pr1 (pr2 (pr2 eq)) _ = inr star
+        pr2 (pr2 (pr2 eq)) (inr star) = refl
 
   is-inhabited-or-empty-is-finite-suspension :
-    is-finite (type-trunc-Set (suspension X)) → is-empty X + is-inhabited X
+    is-finite (type-trunc-Set (suspension X)) → is-inhabited-or-empty X
   is-inhabited-or-empty-is-finite-suspension p with number-of-elements-is-finite p
-  ... | 0 = ex-falso {!   !}
-  ... | 1 = inr {!   !}
-  ... | 2 = inl {!   !}
+  ... | 0 =
+    ex-falso (is-nonempty-is-inhabited (is-inhabited-suspension X) (is-empty-set-truncation-is-empty (is-empty-is-zero-number-of-elements-is-finite p {!   !})))
+  ... | 1 = inl (is-inhabited-suspension-is-0-connected X {!   !})
+  ... | 2 = inr (is-empty-trunc-suspension-has-two-elements {!   !})
   ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
 ```

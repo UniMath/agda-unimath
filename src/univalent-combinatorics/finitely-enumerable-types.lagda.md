@@ -1,12 +1,15 @@
 # Finitely enumerable types
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module univalent-combinatorics.finitely-enumerable-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -35,6 +38,8 @@ open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.empty-types
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -70,6 +75,9 @@ module _
 
   is-finitely-enumerable : UU l
   is-finitely-enumerable = type-Prop is-finitely-enumerable-prop
+
+  cardinality-finite-enumeration : finite-enumeration → ℕ
+  cardinality-finite-enumeration (n , _) = n
 
 Finitely-Enumerable-Type : (l : Level) → UU (lsuc l)
 Finitely-Enumerable-Type l = type-subtype (is-finitely-enumerable-prop {l})
@@ -114,6 +122,20 @@ is-finite-is-finitely-enumerable-discrete :
   has-decidable-equality X → is-finitely-enumerable X → is-finite X
 is-finite-is-finitely-enumerable-discrete D eX =
   ∃-surjection-has-decidable-equality-if-is-finite (D , eX)
+```
+
+We can say more: the cardinality of `X` enumerated by `Fin n` is bounded above
+by `n`.
+
+```agda
+is-upper-bound-finite-enumeration :
+  {l : Level} (X : UU l) →
+  (eq : has-decidable-equality X) →
+  (f : finite-enumeration X) →
+  leq-ℕ
+    (number-of-elements-count (count-finite-enumeration-discrete eq f))
+    (cardinality-finite-enumeration X f)
+is-upper-bound-finite-enumeration X eq (n , f) = {!   !}
 ```
 
 ### Finite types are finitely enumerable

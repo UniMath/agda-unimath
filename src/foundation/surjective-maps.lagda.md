@@ -34,6 +34,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
+open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -871,6 +872,18 @@ module _
     A ↠ B → is-inhabited B → is-inhabited A
   is-inhabited-surjection f =
     is-inhabited-is-surjective (is-surjective-map-surjection f)
+```
+
+### When `X` is empty and `X` surjects onto `Y`, then `Y` is empty
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (emp-A : is-empty A)
+  where
+
+  is-empty-surjection-empty : A ↠ B → is-empty B
+  is-empty-surjection-empty (f , p) b =
+    rec-trunc-Prop empty-Prop (λ (a , q) → emp-A a) (p b)
 ```
 
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
