@@ -578,6 +578,13 @@ module _
         ( cancel-right-diff-add-ℝ y z)
         ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
 
+    le-transpose-right-diff-ℝ' : le-ℝ x (y -ℝ z) → le-ℝ (z +ℝ x) y
+    le-transpose-right-diff-ℝ' x<y-z =
+      tr
+        ( λ w → le-ℝ w y)
+        ( commutative-add-ℝ _ _)
+        ( le-transpose-right-diff-ℝ x<y-z)
+
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where

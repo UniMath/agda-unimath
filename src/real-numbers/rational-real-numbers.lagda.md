@@ -10,9 +10,9 @@ module real-numbers.rational-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
