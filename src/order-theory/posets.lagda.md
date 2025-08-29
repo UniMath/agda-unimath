@@ -121,38 +121,37 @@ module _
 Inequalities in preorders can be constructed by equational reasoning as follows:
 
 ```text
-calculate-in-Poset X
+let open inequality-reasoning-Poset X
+in
   chain-of-inequalities
   x ≤ y
       by ineq-1
-      in-Poset X
     ≤ z
       by ineq-2
-      in-Poset X
     ≤ v
       by ineq-3
-      in-Poset X
 ```
 
 Note, however, that in our setup of equational reasoning with inequalities it is
 not possible to mix inequalities with equalities or strict inequalities.
 
 ```agda
-infixl 1 calculate-in-Poset_chain-of-inequalities_
-infixl 0 step-calculate-in-Poset
-
-calculate-in-Poset_chain-of-inequalities_ :
+module inequality-reasoning-Poset
   {l1 l2 : Level} (X : Poset l1 l2)
-  (x : type-Poset X) → leq-Poset X x x
-calculate-in-Poset_chain-of-inequalities_ = refl-leq-Poset
+  where
 
-step-calculate-in-Poset :
-  {l1 l2 : Level} (X : Poset l1 l2)
-  {x y : type-Poset X} → leq-Poset X x y →
-  (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
-step-calculate-in-Poset X {x} {y} u z v = transitive-leq-Poset X x y z v u
+  infixl 1 chain-of-inequalities_
+  infixl 0 step-calculate-in-Poset
 
-syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
+  chain-of-inequalities_ : (x : type-Poset X) → leq-Poset X x x
+  chain-of-inequalities_ = refl-leq-Poset X
+
+  step-calculate-in-Poset :
+    {x y : type-Poset X} → leq-Poset X x y →
+    (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
+  step-calculate-in-Poset {x} {y} u z v = transitive-leq-Poset X x y z v u
+
+  syntax step-calculate-in-Poset u z v = u ≤ z by v
 ```
 
 ## Properties

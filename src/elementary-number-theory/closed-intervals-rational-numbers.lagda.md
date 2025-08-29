@@ -254,6 +254,7 @@ abstract
     (d -ℚ c) *ℚ max-ℚ (rational-abs-ℚ a) (rational-abs-ℚ b)
   bound-width-mul-interval-ℚ a b c d a≤b c≤d =
     let
+      open inequality-reasoning-Poset ℚ-Poset
       ||_|| = rational-abs-ℚ
       <b-a><max|c||d|>⁰⁺ =
         mul-ℚ⁰⁺
@@ -265,11 +266,11 @@ abstract
           ( nonnegative-diff-leq-ℚ c d c≤d)
           ( max-ℚ⁰⁺ (abs-ℚ a) (abs-ℚ b))
       <d-c><max|a||b|> = rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺
+      -- A value is "good" if it is less than the bound this lemma is proving.
       good : ℚ → UU lzero
       good q = q ≤-ℚ ( <b-a><max|c||d|> +ℚ <d-c><max|a||b|>)
       good-|ac-ad| : good (|| (a *ℚ c) -ℚ (a *ℚ d) ||)
       good-|ac-ad| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (a *ℚ c) -ℚ (a *ℚ d) ||
             ≤ (d -ℚ c) *ℚ || a ||
@@ -279,7 +280,6 @@ abstract
                     rational-abs-mul-ℚ _ _ ∙
                     ap-mul-ℚ refl (rational-dist-leq-ℚ c≤d) ∙
                     commutative-mul-ℚ _ _)
-              in-Poset ℚ-Poset
             ≤ <d-c><max|a||b|>
               by
                 preserves-leq-left-mul-ℚ⁰⁺
@@ -287,13 +287,10 @@ abstract
                   ( || a ||)
                   ( max-ℚ (|| a ||) (|| b ||))
                   ( leq-left-max-ℚ _ _)
-              in-Poset ℚ-Poset
             ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
               by is-inflationary-map-left-add-rational-ℚ⁰⁺ <b-a><max|c||d|>⁰⁺ _
-              in-Poset ℚ-Poset
       good-|bc-bd| : good (|| (b *ℚ c) -ℚ (b *ℚ d) ||)
       good-|bc-bd| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (b *ℚ c) -ℚ (b *ℚ d) ||
           ≤ (d -ℚ c) *ℚ || b ||
@@ -303,7 +300,6 @@ abstract
                   rational-abs-mul-ℚ _ _ ∙
                   ap-mul-ℚ refl (rational-dist-leq-ℚ c≤d) ∙
                   commutative-mul-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <d-c><max|a||b|>
             by
               preserves-leq-left-mul-ℚ⁰⁺
@@ -311,13 +307,10 @@ abstract
                 ( || b ||)
                 ( max-ℚ (|| a ||) (|| b ||))
                 ( leq-right-max-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by is-inflationary-map-left-add-rational-ℚ⁰⁺ <b-a><max|c||d|>⁰⁺ _
-            in-Poset ℚ-Poset
       good-|ac-bc| : good (|| (a *ℚ c) -ℚ (b *ℚ c) ||)
       good-|ac-bc| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (a *ℚ c) -ℚ (b *ℚ c) ||
           ≤ (b -ℚ a) *ℚ || c ||
@@ -328,7 +321,6 @@ abstract
                   ( inv (right-distributive-mul-diff-ℚ a b c)) ∙
                   rational-abs-mul-ℚ _ _ ∙
                   ap-mul-ℚ (rational-dist-leq-ℚ a≤b) refl)
-            in-Poset ℚ-Poset
           ≤ (b -ℚ a) *ℚ max-ℚ (|| c ||) (|| d ||)
             by
               preserves-leq-left-mul-ℚ⁰⁺
@@ -336,13 +328,10 @@ abstract
                 ( || c ||)
                 ( max-ℚ (|| c ||) (|| d ||))
                 ( leq-left-max-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by is-inflationary-map-right-add-rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺ _
-            in-Poset ℚ-Poset
       good-|ad-bd| : good (|| (a *ℚ d) -ℚ (b *ℚ d) ||)
       good-|ad-bd| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (a *ℚ d) -ℚ (b *ℚ d) ||
           ≤ (b -ℚ a) *ℚ || d ||
@@ -353,7 +342,6 @@ abstract
                   ( inv (right-distributive-mul-diff-ℚ a b d)) ∙
                   rational-abs-mul-ℚ _ _ ∙
                   ap-mul-ℚ (rational-dist-leq-ℚ a≤b) refl)
-            in-Poset ℚ-Poset
           ≤ (b -ℚ a) *ℚ max-ℚ (|| c ||) (|| d ||)
             by
               preserves-leq-left-mul-ℚ⁰⁺
@@ -361,10 +349,8 @@ abstract
                 ( || d ||)
                 ( max-ℚ (|| c ||) (|| d ||))
                 ( leq-right-max-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by is-inflationary-map-right-add-rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺ _
-            in-Poset ℚ-Poset
       x : GroupSyntax 3
       x = inner (zero-Inductive-Fin)
       y : GroupSyntax 3
@@ -373,7 +359,6 @@ abstract
       z = inner (succ-Inductive-Fin (succ-Inductive-Fin zero-Inductive-Fin))
       good-|ad-bc| : good (|| (a *ℚ d) -ℚ (b *ℚ c) ||)
       good-|ad-bc| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (a *ℚ d) -ℚ (b *ℚ c) ||
           ≤ || (a *ℚ d -ℚ a *ℚ c) +ℚ (a *ℚ c -ℚ b *ℚ c) ||
@@ -385,7 +370,6 @@ abstract
                       ( group-add-ℚ)
                       ( gMul (gMul x (gInv y)) (gMul y (gInv z)))
                       ( a *ℚ d ∷ a *ℚ c ∷ b *ℚ c ∷ empty-tuple))))
-            in-Poset ℚ-Poset
           ≤ || a *ℚ (d -ℚ c) +ℚ (a -ℚ b) *ℚ c ||
             by
               leq-eq-ℚ _ _
@@ -394,10 +378,8 @@ abstract
                     ( ap-add-ℚ
                       ( left-distributive-mul-diff-ℚ a d c)
                       ( right-distributive-mul-diff-ℚ a b c))))
-            in-Poset ℚ-Poset
           ≤ (|| a *ℚ (d -ℚ c) ||) +ℚ (|| ( a -ℚ b) *ℚ c ||)
             by triangle-inequality-abs-ℚ _ _
-            in-Poset ℚ-Poset
           ≤ ((b -ℚ a) *ℚ || c ||) +ℚ ((d -ℚ c) *ℚ || a ||)
             by
               leq-eq-ℚ _ _
@@ -408,7 +390,6 @@ abstract
                   ( rational-abs-mul-ℚ _ _ ∙
                     ap-mul-ℚ (rational-dist-leq-ℚ a≤b) refl) ∙
                   commutative-add-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by
               preserves-leq-add-ℚ
@@ -422,10 +403,8 @@ abstract
                   ( || a ||)
                   ( max-ℚ (|| a ||) (|| b ||))
                   ( leq-left-max-ℚ _ _))
-            in-Poset ℚ-Poset
       good-|ac-bd| : good (|| (a *ℚ c) -ℚ (b *ℚ d) ||)
       good-|ac-bd| =
-        calculate-in-Poset ℚ-Poset
         chain-of-inequalities
           || (a *ℚ c) -ℚ (b *ℚ d) ||
           ≤ || (a *ℚ c -ℚ a *ℚ d) +ℚ (a *ℚ d -ℚ b *ℚ d) ||
@@ -437,7 +416,6 @@ abstract
                       ( group-add-ℚ)
                       ( gMul (gMul x (gInv y)) (gMul y (gInv z)))
                       ( a *ℚ c ∷ a *ℚ d ∷ b *ℚ d ∷ empty-tuple))))
-            in-Poset ℚ-Poset
           ≤ || a *ℚ (c -ℚ d) +ℚ (a -ℚ b) *ℚ d ||
             by
               leq-eq-ℚ _ _
@@ -446,10 +424,8 @@ abstract
                     ( ap-add-ℚ
                       ( left-distributive-mul-diff-ℚ a c d)
                       ( right-distributive-mul-diff-ℚ a b d))))
-            in-Poset ℚ-Poset
           ≤ (|| a *ℚ (c -ℚ d) ||) +ℚ (|| ( a -ℚ b) *ℚ d ||)
             by triangle-inequality-abs-ℚ _ _
-            in-Poset ℚ-Poset
           ≤ ((b -ℚ a) *ℚ || d ||) +ℚ ((d -ℚ c) *ℚ || a ||)
             by
               leq-eq-ℚ _ _
@@ -460,7 +436,6 @@ abstract
                   ( rational-abs-mul-ℚ _ _ ∙
                     ap-mul-ℚ (rational-dist-leq-ℚ a≤b) refl) ∙
                   commutative-add-ℚ _ _)
-            in-Poset ℚ-Poset
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by
               preserves-leq-add-ℚ
@@ -474,7 +449,6 @@ abstract
                   ( || a ||)
                   ( max-ℚ (|| a ||) (|| b ||))
                   ( leq-left-max-ℚ _ _))
-            in-Poset ℚ-Poset
       good-x-x : (x : ℚ) → good (|| x -ℚ x ||)
       good-x-x x =
         inv-tr good
