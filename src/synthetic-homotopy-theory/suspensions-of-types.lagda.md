@@ -874,3 +874,7 @@ module _
   ... | 2 = inr (is-empty-trunc-suspension-has-two-elements {!   !})
   ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
 ```
+
+## See also
+
+- [Suspensions of propositions](synthetic-homotopy-theory.suspensions-of-propositions.md)
