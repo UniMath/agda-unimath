@@ -83,8 +83,8 @@ is-acyclic-unit = is-acyclic-is-contr unit is-contr-unit
 
 ### Acyclic types are inhabited
 
-Proof: `Σ X` is 0-connected if and only if `X` is inhabited, and contractible
-types are of course 0-connected.
+**Proof.** `Σ X` is 0-connected if and only if `X` is inhabited, and contractible
+types are of course 0-connected. ∎
 
 ```agda
 is-inhabited-is-acyclic : {l : Level} (A : UU l) → is-acyclic A → is-inhabited A

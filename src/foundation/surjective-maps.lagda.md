@@ -874,7 +874,7 @@ module _
     is-inhabited-is-surjective (is-surjective-map-surjection f)
 ```
 
-### When `X` is empty and `X` surjects onto `Y`, then `Y` is empty
+### Empty types are closed under surjections
 
 ```agda
 module _

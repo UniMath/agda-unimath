@@ -274,7 +274,7 @@ module _
 
 In particular, inhabited types are `-1`-connected; their identity types are
 `-2`-connected, as all types are. This characterizes the `-1`-connected types,
-i.e. `X` is `-1`-connected iff it's inhabited.
+i.e., `X` is `-1`-connected iff it's inhabited.
 
 ```agda
 is-neg-one-connected-is-inhabited :
