@@ -121,7 +121,7 @@ module _
 
 ## Properties
 
-### A infimum is a greatest lower bound
+### An infimum is a greatest lower bound
 
 ```agda
 module _
