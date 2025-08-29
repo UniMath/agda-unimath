@@ -392,7 +392,7 @@ module _
           ( max-ℝ x y -ℝ real-ℚ ε)
           ( max-ℝ x y)
           ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
-      (r , q<r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
+      (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
       let q<r = reflects-le-real-ℚ q r q-<ℝ-r
       elim-disjunction motive
         ( λ q<x →
