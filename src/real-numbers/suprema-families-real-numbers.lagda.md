@@ -18,6 +18,7 @@ open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-large-posets
@@ -29,6 +30,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.subsets-real-numbers
 ```
 
 </details>
@@ -50,6 +52,8 @@ equivalent, but constructively being a supremum is a stronger condition, often
 required for constructive analysis.
 
 ## Definition
+
+### Suprema of families of real numbers
 
 ```agda
 module _
@@ -87,6 +91,21 @@ module _
     {l3 : Level} → (x : ℝ l3) → is-supremum-family-ℝ x →
     is-approximated-below-family-ℝ x
   is-approximated-below-is-supremum-family-ℝ _ = pr2
+```
+
+### Suprema of subsets of real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (S : subset-ℝ l1 l2) where
+
+  is-supremum-prop-subset-ℝ :
+    {l3 : Level} → ℝ l3 → Prop (l1 ⊔ lsuc l2 ⊔ l3)
+  is-supremum-prop-subset-ℝ =
+    is-supremum-prop-family-ℝ (inclusion-subset-ℝ S)
+
+  is-supremum-subset-ℝ : {l3 : Level} → ℝ l3 → UU (l1 ⊔ lsuc l2 ⊔ l3)
+  is-supremum-subset-ℝ x = type-Prop (is-supremum-prop-subset-ℝ x)
 ```
 
 ## Properties

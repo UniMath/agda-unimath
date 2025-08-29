@@ -29,6 +29,7 @@ open import logic.functoriality-existential-quantification
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.lower-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
+open import real-numbers.subsets-real-numbers
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -60,6 +61,8 @@ equivalent, but constructively being an infimum is a stronger condition, often
 required for constructive analysis.
 
 ## Definition
+
+### Infima of families of real numbers
 
 ```agda
 module _
@@ -97,6 +100,21 @@ module _
     {l3 : Level} → (x : ℝ l3) → is-infimum-family-ℝ x →
     is-approximated-above-family-ℝ x
   is-approximated-above-is-infimum-family-ℝ _ = pr2
+```
+
+### Infima of subsets of real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (S : subset-ℝ l1 l2) where
+
+  is-infimum-prop-subset-ℝ :
+    {l3 : Level} → ℝ l3 → Prop (l1 ⊔ lsuc l2 ⊔ l3)
+  is-infimum-prop-subset-ℝ =
+    is-infimum-prop-family-ℝ (inclusion-subset-ℝ S)
+
+  is-infimum-subset-ℝ : {l3 : Level} → ℝ l3 → UU (l1 ⊔ lsuc l2 ⊔ l3)
+  is-infimum-subset-ℝ x = type-Prop (is-infimum-prop-subset-ℝ x)
 ```
 
 ## Properties
