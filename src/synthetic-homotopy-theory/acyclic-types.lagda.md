@@ -7,15 +7,15 @@ module synthetic-homotopy-theory.acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.0-connected-types
+open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.propositional-truncations
 
 open import synthetic-homotopy-theory.functoriality-suspensions
 open import synthetic-homotopy-theory.suspensions-of-types

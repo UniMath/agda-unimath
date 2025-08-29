@@ -280,4 +280,8 @@ is-neg-one-connected-is-inhabited :
   {l : Level} (A : UU l) → is-inhabited A → is-connected neg-one-𝕋 A
 is-neg-one-connected-is-inhabited A a =
   is-connected-succ-is-connected-eq a (λ x y → is-neg-two-connected (x ＝ y))
+
+is-inhabited-is-neg-one-connected :
+  {l : Level} (A : UU l) → is-connected neg-one-𝕋 A → is-inhabited A
+is-inhabited-is-neg-one-connected A (a , _) = a
 ```

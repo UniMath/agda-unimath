@@ -1,18 +1,17 @@
 # Suspensions of types
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.suspensions-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.0-connected-types
-open import foundation.inhabited-types
 open import foundation.booleans
 open import foundation.commuting-squares-of-identifications
 open import foundation.connected-types
@@ -25,17 +24,18 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.set-truncations
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.path-algebra
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.set-truncations
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -46,6 +46,10 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.coproduct-types
+open import foundation-core.empty-types
+open import foundation-core.sets
+
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
@@ -54,6 +58,8 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
+
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -557,6 +563,30 @@ module _
     is-surjective-map-surjection-bool-suspension
 ```
 
+### The suspension of an empty type is the booleans
+
+```agda
+module _
+  {l : Level} (X : UU l) (emp : is-empty X)
+  where
+
+  is-equiv-map-surjection-bool-suspension :
+    is-equiv map-surjection-bool-suspension
+  pr1 (pr1 is-equiv-map-surjection-bool-suspension) =
+    cogap-suspension (true , (false , ex-falso ∘ emp))
+  pr2 (pr1 is-equiv-map-surjection-bool-suspension) x = {!   !}
+  pr1 (pr2 is-equiv-map-surjection-bool-suspension) =
+    cogap-suspension (true , (false , ex-falso ∘ emp))
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) true = {!   !}
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) false = {!   !}
+
+  equiv-map-surjection-bool-suspension :
+    bool ≃ suspension X
+  pr1 equiv-map-surjection-bool-suspension = map-surjection-bool-suspension
+  pr2 equiv-map-surjection-bool-suspension =
+    is-equiv-map-surjection-bool-suspension
+```
+
 ### The suspension of a contractible type is contractible
 
 ```agda
@@ -669,4 +699,50 @@ is-inhabited-suspension-is-0-connected :
   {l : Level} (X : UU l) → is-0-connected (suspension X) → is-inhabited X
 is-inhabited-suspension-is-0-connected X (sx , p) =
   {!   !}
+```
+
+In fact, the following are logically equivalent:
+
+- `X` is empty or inhabited
+- `trunc-Set (Σ X)` is [finite](univalent-combinatorics.finite-types.md)
+
+Proof:
+
+(->): When `X` is empty, its suspension is the set `Fin 2`. When `X` is
+inhabited, its suspension is 0-connected, and 0-truncated 0-connected types are
+contractible and hence are `Fin 1`.
+
+(<-): Such a cardinality can only be 1 or 2. When it's 1, i.e. when
+`trunc-Set (Σ X)` is 0-connected, then it follows that `Σ X` is also
+0-connected, therefore that `X` is inhabited. When it's 2, i.e. when there are
+no identifications `north = south` in `Σ X`, then `X` had to have been empty.
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  is-finite-suspension-is-inhabited-or-empty :
+    is-empty X + is-inhabited X → is-finite (type-trunc-Set (suspension X))
+  is-finite-suspension-is-inhabited-or-empty (inl x) =
+    is-finite-equiv
+      ( equiv-unit-trunc-set
+          ( suspension X ,
+          is-set-equiv
+            ( bool)
+            ( inv-equiv
+              ( equiv-map-surjection-bool-suspension X x))
+            ( is-set-bool)) ∘e
+        equiv-map-surjection-bool-suspension X x)
+      ( is-finite-bool)
+  is-finite-suspension-is-inhabited-or-empty (inr x) =
+    is-finite-is-contr {!   !}
+
+  is-inhabited-or-empty-is-finite-suspension :
+    is-finite (type-trunc-Set (suspension X)) → is-empty X + is-inhabited X
+  is-inhabited-or-empty-is-finite-suspension p with number-of-elements-is-finite p
+  ... | 0 = ex-falso {!   !}
+  ... | 1 = inr {!   !}
+  ... | 2 = inl {!   !}
+  ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
 ```
