@@ -619,15 +619,17 @@ module _
     compute-south-cogap-suspension suspension-structure-empty-bool
 
   compute-north-suspension-empty-bool :
-    (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
-      north-suspension
+    ( map-surjection-bool-suspension {X = X} ∘
+      inv-map-surjection-bool-suspension)
+        north-suspension
     ＝ north-suspension
   compute-north-suspension-empty-bool =
     ap map-surjection-bool-suspension compute-true-suspension-empty-bool
 
   compute-south-suspension-empty-bool :
-    (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
-      south-suspension
+    ( map-surjection-bool-suspension {X = X} ∘
+      inv-map-surjection-bool-suspension)
+        south-suspension
     ＝ south-suspension
   compute-south-suspension-empty-bool =
     ap map-surjection-bool-suspension compute-false-suspension-empty-bool
