@@ -578,7 +578,7 @@ module _
 
 This provides a
 [finite enumeration](univalent-combinatorics.finitely-enumerable-types.md) of
-`Σ X`.
+`Σ X` by the canonical equivalence `bool ≃ Fin 2`.
 
 ```agda
   finite-enumeration-suspension : finite-enumeration (suspension X)
