@@ -1,7 +1,7 @@
 # Suspensions of types
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
 
 module synthetic-homotopy-theory.suspensions-of-types where
 ```
