@@ -17,8 +17,8 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.semigroups
 open import group-theory.commutative-semigroups
+open import group-theory.semigroups
 
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
@@ -34,9 +34,8 @@ A
 {{#concept "join-semilattice" WDID=Q29018101 WD="upper semilattice" Agda=Join-Semilattice}}
 is a [poset](order-theory.posets.md) in which every pair of elements has a
 [least binary upper bound](order-theory.least-upper-bounds-posets.md).
-Alternatively, join-semilattices can be defined
-algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
-satisfying
+Alternatively, join-semilattices can be defined algebraically as a set `X`
+equipped with a binary operation `∧ : X → X → X` satisfying
 
 1. Asociativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
