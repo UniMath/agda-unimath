@@ -11,10 +11,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.universe-levels
 
 open import lists.finite-sequences
+open import lists.sequences
 
 open import ring-theory.semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
@@ -26,7 +26,7 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 The
 {{#concept "sequence of partial sums" Disambiguation="of a sequence in a semiring" Agda=seq-sum-sequence-Semiring}}
-of a [sequence](foundation.sequences.md) `u` in a
+of a [sequence](lists.sequences.md) `u` in a
 [semiring](ring-theory.semirings.md) is the sequence of sums of terms of `u`:
 
 ```text

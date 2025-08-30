@@ -28,7 +28,11 @@ open import species.species-of-types
 
 ## Idea
 
-The product of two Cauchy series is just the pointwise product.
+The
+{{#concept "product" Disambiguation="of Caucy series of species of types" Agda=product-cauchy-series-species-types}}
+of two [Cauchy series](species.cauchy-series-species-of-types.md) of
+[species of types in subuniverses](species.species-of-types.md) is just the
+pointwise [product](foundation.cartesian-product-types.md).
 
 ## Definition
 
@@ -52,7 +56,21 @@ module _
   (X : UU l4)
   where
 
-  private
+  equiv-cauchy-series-cauchy-product-species-types :
+    cauchy-series-species-types (cauchy-product-species-types S T) X ≃
+    product-cauchy-series-species-types S T X
+  equiv-cauchy-series-cauchy-product-species-types =
+    ( reassociate') ∘e
+    ( equiv-tot
+      ( λ A →
+        equiv-tot
+          ( λ B →
+            ( equiv-product-right (equiv-universal-property-coproduct X)) ∘e
+            ( left-unit-law-Σ-is-contr
+              ( is-torsorial-equiv' (A + B))
+              ( A + B , id-equiv))))) ∘e
+    ( reassociate)
+    where
     reassociate :
       cauchy-series-species-types (cauchy-product-species-types S T) X ≃
       Σ ( UU l1)
@@ -80,21 +98,4 @@ module _
           (A , B , (s , t) , (fs , ft)))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-cauchy-series-cauchy-product-species-types :
-    cauchy-series-species-types (cauchy-product-species-types S T) X ≃
-    product-cauchy-series-species-types S T X
-  equiv-cauchy-series-cauchy-product-species-types =
-    ( reassociate') ∘e
-    ( ( equiv-tot
-        ( λ A →
-          equiv-tot
-            ( λ B →
-              ( equiv-product
-                ( id-equiv)
-                ( equiv-universal-property-coproduct X)) ∘e
-              ( left-unit-law-Σ-is-contr
-                ( is-torsorial-equiv' (A + B))
-                ( A + B , id-equiv))))) ∘e
-      ( reassociate))
 ```

@@ -19,12 +19,14 @@ open import univalent-combinatorics.cyclic-finite-types
 
 ## Idea
 
-The cycle index series of a species of types `F` is a type family indexed by
-finite families of cyclic types. Note that a finite family of cyclic types `Cᵢ`
-uniquely determines a permutation `e` on the disjoint union `C := Σᵢ Cᵢ` of the
-underlying types of the `Cᵢ`. This permutation determines an action `F e` on
-`F C`. The cycle index series of `F` at the family `Cᵢ` is the type `Fix (F e)`
-of fixed points of `F e`.
+The {{#concept "cycle index series" Disambiguation="of species of types"}} of a
+[species of types](species.species-of-types.md) `F` is a type family indexed by
+finite families of
+[cyclic types](univalent-combinatorics.cyclic-finite-types.md). Note that a
+finite family of cyclic types `Cᵢ` uniquely determines a permutation `e` on the
+disjoint union `C := Σᵢ Cᵢ` of the underlying types of the `Cᵢ`. This
+permutation determines an action `F e` on `F C`. The cycle index series of `F`
+at the family `Cᵢ` is the type `Fix (F e)` of fixed points of `F e`.
 
 ## Definition
 

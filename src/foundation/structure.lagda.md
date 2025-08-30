@@ -66,7 +66,7 @@ structure-equality 𝒫 A = (x y : A) → 𝒫 (x ＝ y)
 
 ### Having structure is closed under equivalences
 
-This is a consequence of [the univalence axiom](foundation.univalence.md)
+This is a consequence of [the univalence axiom](foundation.univalence.md).
 
 ```agda
 has-structure-equiv :
