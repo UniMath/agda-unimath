@@ -22,7 +22,7 @@ open import metric-spaces.metric-spaces
 A
 {{#concept "sequence" Disambiguation="in a metric space" Agda=sequence-type-Metric-Space}}
 in a [metric space](metric-spaces.metric-spaces.md) is a
-[sequence](foundation.sequences.md) in its underlying type.
+[sequence](lists.sequences.md) in its underlying type.
 
 ## Definitions
 
