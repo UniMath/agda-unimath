@@ -72,7 +72,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (X : Order-Theoretic-Join-Semilattice l1 l2)
-  {l3 : Level} (I : UU l3) (|I| : is-inhabited I) (cI : count I)
+  {l3 : Level} {I : UU l3} (|I| : is-inhabited I) (cI : count I)
   where
 
   join-counted-family-type-Order-Theoretic-Join-Semilattice :
@@ -165,20 +165,20 @@ module _
 abstract
   is-least-upper-bound-join-counted-family-type-Order-Theoretic-Join-Semilattice :
     {l1 l2 : Level} (X : Order-Theoretic-Join-Semilattice l1 l2) →
-    {l3 : Level} (I : UU l3) (|I| : is-inhabited I) (cI : count I) →
+    {l3 : Level} {I : UU l3} (|I| : is-inhabited I) (cI : count I) →
     (f : I → type-Order-Theoretic-Join-Semilattice X) →
     is-least-upper-bound-family-of-elements-Poset
       ( poset-Order-Theoretic-Join-Semilattice X)
       ( f)
-      ( join-counted-family-type-Order-Theoretic-Join-Semilattice X I |I| cI f)
+      ( join-counted-family-type-Order-Theoretic-Join-Semilattice X |I| cI f)
   is-least-upper-bound-join-counted-family-type-Order-Theoretic-Join-Semilattice
-    X I |I| cI@(zero-ℕ , _) _ =
+    X |I| cI@(zero-ℕ , _) _ =
       ex-falso
         ( is-nonempty-is-inhabited
           ( |I|)
           ( is-empty-is-zero-number-of-elements-count cI refl))
   is-least-upper-bound-join-counted-family-type-Order-Theoretic-Join-Semilattice
-    X I |I| cI@(succ-ℕ n , Fin-sn≃I) f y =
+    X |I| cI@(succ-ℕ n , Fin-sn≃I) f y =
       is-least-upper-bound-join-fin-sequence-type-Order-Theoretic-Join-Semilattice
         ( X)
         ( n)
@@ -230,7 +230,6 @@ module _
                 ( f))
               ( is-least-upper-bound-join-counted-family-type-Order-Theoretic-Join-Semilattice
                 ( X)
-                ( type-Inhabited-Finite-Type I)
                 ( is-inhabited-type-Inhabited-Finite-Type I)
                 ( cI)
                 ( f)))

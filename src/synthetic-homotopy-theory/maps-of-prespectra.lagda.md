@@ -32,7 +32,7 @@ open import synthetic-homotopy-theory.prespectra
 
 A {{#concept "map" Disambiguation="of prespectra" Agda=map-Prespectrum}} of
 [prespectra](synthetic-homotopy-theory.prespectra.md) `f : A → B` is a
-[sequence](foundation.dependent-sequences.md) of
+[sequence](lists.dependent-sequences.md) of
 [pointed maps](structured-types.pointed-maps.md)
 
 ```text

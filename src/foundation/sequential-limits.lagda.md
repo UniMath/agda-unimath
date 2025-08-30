@@ -52,7 +52,7 @@ of `Aₙ` thus completing the diagram
 ```
 
 The standard sequential limit consists of "points at infinity", which can be
-recorded as [sequences](foundation.dependent-sequences.md) of terms whose images
+recorded as [sequences](lists.dependent-sequences.md) of terms whose images
 under `f` agree:
 
 ```text

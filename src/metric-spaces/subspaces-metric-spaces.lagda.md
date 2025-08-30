@@ -23,6 +23,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -175,4 +176,22 @@ module _
   isometry-inclusion-subspace-Metric-Space =
     inclusion-subspace-Metric-Space A S ,
     is-isometry-inclusion-subspace-Metric-Space
+```
+
+### The inclusion of a subspace into its ambient space is short
+
+```agda
+module _
+  {l l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
+  where
+
+  short-inclusion-subspace-Metric-Space :
+    short-function-Metric-Space (subspace-Metric-Space A S) A
+  short-inclusion-subspace-Metric-Space =
+    short-isometry-Metric-Space
+      ( subspace-Metric-Space A S)
+      ( A)
+      ( isometry-inclusion-subspace-Metric-Space A S)
 ```
