@@ -604,7 +604,7 @@ eq-reduce-is-reduced-fraction-ℤ x red-x =
         ( div-right-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))))
 ```
 
-### The reduction of integer fractions is idempotent
+### The reduction operation on integer fractions is idempotent
 
 ```agda
 is-idempotent-reduce-fraction-ℤ :
