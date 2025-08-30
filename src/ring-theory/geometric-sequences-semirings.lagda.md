@@ -36,7 +36,7 @@ in a [semiring](ring-theory.semirings.md) is an
 [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
 semiring multiplicative [semigroup](group-theory.semigroups.md).
 
-These are the sequences `n ↦ a * r ⁿ` for some elements `a r` in the semiring.
+These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the semiring.
 
 ## Definitions
 
