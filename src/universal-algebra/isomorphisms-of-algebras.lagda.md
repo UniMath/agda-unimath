@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.injective-maps
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.unit-type
@@ -30,8 +31,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.sections
-open import foundation-core.retractions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
@@ -99,27 +98,30 @@ module _
     preserves-operations-Algebra σ T B A
       (map-inv-equiv ((map-hom-Algebra σ T A B f) , eq))
   preserves-operations-map-hom-inv-is-equiv-hom-Algebra op v =
-    map-inv-is-equiv
-    ( is-emb-is-equiv eq
-      ( map-inv-is-equiv eq (is-model-set-Algebra σ T B op v))
-      ( is-model-set-Algebra σ T A op (map-tuple (map-inv-is-equiv eq) v)))
-    ( is-section-map-inv-is-equiv eq (is-model-set-Algebra σ T B op v) ∙
-      ( ap (is-model-set-Algebra σ T B op)
-        ( eq-Eq-tuple (arity-operation-signature σ op) v
-          ( map-tuple (map-hom-Algebra σ T A B f)
-        ( map-tuple (map-inv-is-equiv eq) v))
-          ( eq2 (arity-operation-signature σ op) v)) ∙
-        ( inv (preserves-operations-hom-Algebra σ T A B f op
-          ( map-tuple (map-inv-is-equiv eq) v)))))
-          where
-          eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
-            Eq-tuple n w (map-tuple
-              (map-hom-Algebra σ T A B f)
-              (map-tuple (map-inv-is-equiv eq) w))
-          eq2 zero-ℕ empty-tuple = map-raise star
-          pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
-            inv (is-section-map-section-is-equiv eq x)
-          pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
+    is-injective-is-equiv eq
+      ( is-section-map-inv-is-equiv eq
+        ( is-model-set-Algebra σ T B op v) ∙
+          ( ap
+            ( is-model-set-Algebra σ T B op)
+            ( eq-Eq-tuple
+              ( arity-operation-signature σ op)
+              ( v)
+              ( map-tuple
+                ( map-hom-Algebra σ T A B f)
+                ( map-tuple (map-inv-is-equiv eq) v))
+              ( eq2 (arity-operation-signature σ op) v)) ∙
+            ( inv
+              ( preserves-operations-hom-Algebra σ T A B f op
+                ( map-tuple (map-inv-is-equiv eq) v)))))
+                  where
+                  eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
+                    Eq-tuple n w (map-tuple
+                      (map-hom-Algebra σ T A B f)
+                      (map-tuple (map-inv-is-equiv eq) w))
+                  eq2 zero-ℕ empty-tuple = map-raise star
+                  pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
+                    inv (is-section-map-section-is-equiv eq x)
+                  pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
 
   hom-inv-is-equiv-hom-Algebra : hom-Algebra σ T B A
   pr1 hom-inv-is-equiv-hom-Algebra =
@@ -171,27 +173,33 @@ module _
     (f : hom-Algebra σ T A B) →
     is-iso-Algebra f →
     is-equiv-hom-Algebra σ T A B f
-  is-equiv-hom-is-iso-Algebra f (g , (p , q)) =
-    is-equiv-is-invertible
-      ( map-hom-Algebra σ T B A g)
-      ( htpy-eq-hom-Algebra σ T B B
-        ( comp-hom-Algebra σ T B A B f g)
-        ( id-hom-Algebra σ T B)
-        ( p))
-      ( htpy-eq-hom-Algebra σ T A A
-        ( comp-hom-Algebra σ T A B A g f)
-        ( id-hom-Algebra σ T A)
-        ( q))
+  pr1 (pr1 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
+  pr2 (pr1 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
+    htpy-eq-hom-Algebra σ T B B
+      ( comp-hom-Algebra σ T B A B f g)
+      ( id-hom-Algebra σ T B)
+      ( p)
+  pr1 (pr2 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
+  pr2 (pr2 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
+    htpy-eq-hom-Algebra σ T A A
+      ( comp-hom-Algebra σ T A B A g f)
+      ( id-hom-Algebra σ T A)
+      ( q)
 
-  is-section-is-iso-hom-Algebra : (f : hom-Algebra σ T A B) → is-section {! f  !} {!   !}
-  is-section-is-iso-hom-Algebra f = {!     eq-htpy-hom-Algebra σ T B B
+  is-iso-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) →
+    is-equiv-hom-Algebra σ T A B f →
+    is-iso-Algebra f
+  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
+    hom-inv-is-equiv-hom-Algebra σ T A B f eq
+  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    eq-htpy-hom-Algebra σ T B B
     ( comp-hom-Algebra σ T B A B f
       ( hom-inv-is-equiv-hom-Algebra σ T A B f eq))
     ( id-hom-Algebra σ T B)
-    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))  !}
-
-  is-retraction-is-iso-hom-Algebra : (f : hom-Algebra σ T A B) → is-retraction {!   !} {!   !}
-  is-retraction-is-iso-hom-Algebra = {!     eq-htpy-hom-Algebra σ T A A
+    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
+  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    eq-htpy-hom-Algebra σ T A A
       ( comp-hom-Algebra σ T A B A
         ( hom-inv-is-equiv-hom-Algebra σ T A B f eq)
         ( f))
@@ -208,18 +216,7 @@ module _
         htpy-map-inv-equiv-retraction
           ( map-hom-Algebra σ T A B f , eq)
           ( retraction-is-equiv eq)
-          ( map-hom-Algebra σ T A B f x)  !}
-
-  is-iso-is-equiv-hom-Algebra :
-    (f : hom-Algebra σ T A B) →
-    is-equiv-hom-Algebra σ T A B f →
-    is-iso-Algebra f
-  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
-    hom-inv-is-equiv-hom-Algebra σ T A B f eq
-  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
-    is-section-is-iso-hom-Algebra f {!   !}
-  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
-    {!   !}
+          ( map-hom-Algebra σ T A B f x)
 
   equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
