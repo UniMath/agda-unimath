@@ -40,11 +40,11 @@ max-ℕ 0 n = n
 max-ℕ (succ-ℕ m) 0 = succ-ℕ m
 max-ℕ (succ-ℕ m) (succ-ℕ n) = succ-ℕ (max-ℕ m n)
 
-ap-max-ℕ : {x x' y y' : ℕ} → x ＝ x' → y ＝ y' → max-ℕ x y ＝ max-ℕ x' y'
-ap-max-ℕ p = ap-binary max-ℕ p
-
 max-ℕ' : ℕ → (ℕ → ℕ)
 max-ℕ' x y = max-ℕ y x
+
+ap-max-ℕ : {x x' y y' : ℕ} → x ＝ x' → y ＝ y' → max-ℕ x y ＝ max-ℕ x' y'
+ap-max-ℕ p q = ap-binary max-ℕ p q
 ```
 
 ### Maximum of elements of standard finite types

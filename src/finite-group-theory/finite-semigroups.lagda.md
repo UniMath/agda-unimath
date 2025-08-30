@@ -32,8 +32,8 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -205,10 +205,10 @@ is-untruncated-π-finite-Semigroup-of-Order k n =
     ( compute-Semigroup-of-Order n)
     ( is-untruncated-π-finite-Semigroup-of-Order' k n)
 
-is-π-finite-Semigroup-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Semigroup-of-Order l n)
-is-π-finite-Semigroup-of-Order {l} n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Semigroup-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Semigroup-of-Order l n)
+is-truncated-π-finite-Semigroup-of-Order {l} n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Semigroup-of-Order n)
     ( is-untruncated-π-finite-Semigroup-of-Order 1 n)
 ```
