@@ -59,6 +59,8 @@ METAFILES := \
 
 .PHONY: agdaFiles
 agdaFiles:
+	@rm -rf $@
+	@rm -rf ./src/everything.lagda.md
 	@git ls-files src | grep '\.lagda.md$$' > $@
 	@sort -o $@ $@
 	@wc -l $@
