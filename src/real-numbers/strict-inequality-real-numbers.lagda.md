@@ -520,6 +520,12 @@ module _
         ( commutative-add-ℝ y z)
         ( preserves-le-right-add-ℝ x<y)
 
+abstract
+  preserves-le-diff-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
+    le-ℝ x y → le-ℝ (x -ℝ z) (y -ℝ z)
+  preserves-le-diff-ℝ z = preserves-le-right-add-ℝ (neg-ℝ z)
+
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where

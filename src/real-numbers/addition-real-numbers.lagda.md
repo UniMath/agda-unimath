@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -140,6 +141,12 @@ module _
 
 infixl 35 _+ℝ_
 _+ℝ_ = add-ℝ
+
+ap-add-ℝ :
+  {l1 : Level} {x x' : ℝ l1} → (x ＝ x') →
+  {l2 : Level} {y y' : ℝ l2} → (y ＝ y') →
+  (x +ℝ y) ＝ (x' +ℝ y')
+ap-add-ℝ x=x' y=y' = ap-binary add-ℝ x=x' y=y'
 ```
 
 ## Properties
