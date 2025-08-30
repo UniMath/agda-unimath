@@ -38,8 +38,8 @@ open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -217,10 +217,10 @@ is-untruncated-π-finite-Monoid-of-Order {l} k n =
         is-untruncated-π-finite-is-finite k
           ( is-finite-is-unital-Semigroup n X)))
 
-is-π-finite-Monoid-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Monoid-of-Order l n)
-is-π-finite-Monoid-of-Order n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Monoid-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Monoid-of-Order l n)
+is-truncated-π-finite-Monoid-of-Order n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Monoid-of-Order n)
     ( is-untruncated-π-finite-Monoid-of-Order 1 n)
 ```
