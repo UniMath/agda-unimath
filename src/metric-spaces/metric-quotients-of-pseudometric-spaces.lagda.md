@@ -465,7 +465,7 @@ module _
       ( isometry-map-metric-quotient-Pseudometric-Space M)
 ```
 
-### The isometric equivalence between a metric space and the quotient metric space of its pseudometric
+### The isometric equivalence between a metric space and the quotient metric space of its pseudometric space
 
 ```agda
 module _
