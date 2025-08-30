@@ -641,14 +641,6 @@ module _
           ( ε +ℚ⁺ δ)
           ( lim)
           ( is-lim ε δ))
-
-  convergent-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
-    convergent-cauchy-approximation-Metric-Space
-      ( metric-quotient-Pseudometric-Space M)
-  convergent-map-metric-quotient-cauchy-approximation-Pseudometric-Space =
-    ( map-metric-quotient-cauchy-approximation-Pseudometric-Space M u ,
-      map-metric-quotient-Pseudometric-Space M lim ,
-      preserves-limit-map-metric-quotient-cauchy-approximation-Pseudometric-Space)
 ```
 
 ### Lifts of Cauchy approximations in the quotient metric space up to similarity
