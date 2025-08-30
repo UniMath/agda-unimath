@@ -169,18 +169,17 @@ module _
     (f : hom-Algebra σ T A B) →
     is-iso-Algebra f →
     is-equiv-hom-Algebra σ T A B f
-  pr1 (pr1 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
-  pr2 (pr1 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
-    htpy-eq-hom-Algebra σ T B B
-      ( comp-hom-Algebra σ T B A B f g)
-      ( id-hom-Algebra σ T B)
-      ( p)
-  pr1 (pr2 (is-equiv-hom-is-iso-Algebra f (g , p))) = map-hom-Algebra σ T B A g
-  pr2 (pr2 (is-equiv-hom-is-iso-Algebra f (g , (p , q)))) =
-    htpy-eq-hom-Algebra σ T A A
-      ( comp-hom-Algebra σ T A B A g f)
-      ( id-hom-Algebra σ T A)
-      ( q)
+  is-equiv-hom-is-iso-Algebra f (g , (p , q)) =
+    is-equiv-is-invertible
+      ( map-hom-Algebra σ T B A g)
+      ( htpy-eq-hom-Algebra σ T B B
+        ( comp-hom-Algebra σ T B A B f g)
+        ( id-hom-Algebra σ T B)
+        ( p))
+      ( htpy-eq-hom-Algebra σ T A A
+        ( comp-hom-Algebra σ T A B A g f)
+        ( id-hom-Algebra σ T A)
+        ( q))
 
   is-iso-is-equiv-hom-Algebra :
     (f : hom-Algebra σ T A B) →

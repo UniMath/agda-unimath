@@ -90,11 +90,10 @@ module _
     {l2 : Level} (X Y : Model-Signature σ l2)
     (f : hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y)) →
     UU (l1 ⊔ l2)
-  preserves-operations-Model-Signature
-    ((X , _) , assign-X) (Y , assign-Y) f =
-      ( op : operation-signature σ)
-      ( v : tuple X (arity-operation-signature σ op)) →
-      f (assign-X op v) ＝ assign-Y op (map-tuple f v)
+  preserves-operations-Model-Signature ((X , _) , assign-X) (Y , assign-Y) f =
+    ( op : operation-signature σ)
+    ( v : tuple X (arity-operation-signature σ op)) →
+    f (assign-X op v) ＝ assign-Y op (map-tuple f v)
 
   is-prop-preserves-operations-Model-Signature :
     {l2 : Level} (X Y : Model-Signature σ l2)

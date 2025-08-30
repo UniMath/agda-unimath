@@ -73,11 +73,11 @@ preserves-id-map-tuple :
 preserves-id-map-tuple zero-ℕ empty-tuple = refl
 preserves-id-map-tuple (succ-ℕ n) (x ∷ xs) =
   eq-Eq-tuple
-  ( succ-ℕ n)
-  ( x ∷ xs)
-  ( map-tuple id (x ∷ xs))
-  ( refl ,
-    Eq-eq-tuple n xs (map-tuple id xs) (preserves-id-map-tuple n xs))
+    ( succ-ℕ n)
+    ( x ∷ xs)
+    ( map-tuple id (x ∷ xs))
+    ( refl ,
+      Eq-eq-tuple n xs (map-tuple id xs) (preserves-id-map-tuple n xs))
 ```
 
 ### The action on maps of tuples preserves composition
@@ -90,12 +90,12 @@ preserves-comp-map-tuple :
 preserves-comp-map-tuple zero-ℕ f g empty-tuple = refl
 preserves-comp-map-tuple (succ-ℕ n) f g (x ∷ xs) =
   eq-Eq-tuple
-  ( succ-ℕ n)
-  ( map-tuple g (map-tuple f (x ∷ xs)))
-  ( map-tuple (g ∘ f) (x ∷ xs))
-  ( refl ,
-    Eq-eq-tuple n
-      ( map-tuple g (map-tuple f xs))
-      ( map-tuple (g ∘ f) xs)
-      ( preserves-comp-map-tuple n f g xs))
+    ( succ-ℕ n)
+    ( map-tuple g (map-tuple f (x ∷ xs)))
+    ( map-tuple (g ∘ f) (x ∷ xs))
+    ( refl ,
+      Eq-eq-tuple n
+        ( map-tuple g (map-tuple f xs))
+        ( map-tuple (g ∘ f) xs)
+        ( preserves-comp-map-tuple n f g xs))
 ```
