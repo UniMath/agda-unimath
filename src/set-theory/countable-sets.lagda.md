@@ -369,7 +369,7 @@ abstract
           ( inr _) → unit-trunc-Prop (1 , refl)))
 ```
 
-### If `X` and `Y` are countable sets, then so is their coproduct `X + Y`
+### Countable sets are closed under coproducts
 
 ```agda
 module _
@@ -393,7 +393,7 @@ module _
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
-### If `X` and `Y` are countable sets, then so is their product `X × Y`
+### Countable sets are closed under products
 
 ```agda
 module _
