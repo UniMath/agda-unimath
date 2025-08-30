@@ -16,6 +16,7 @@ open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
@@ -26,9 +27,9 @@ open import metric-spaces.subspaces-metric-spaces
 ## Idea
 
 For an `ε : ℚ⁺`, an
-`ε`-{{#concept "approximation" disambiguation="of a metric space"}} of a
-[located metric space](metric-spaces.located-metric-spaces.md) `X` is an
-[`ε`-approximation])(metric-spaces.approximations-metric-spaces.md) in the
+`ε`-{{#concept "approximation" disambiguation="of a located metric space" Agda=approximation-Located-Metric-Space}}
+of a [located metric space](metric-spaces.located-metric-spaces.md) `X` is an
+[`ε`-approximation](metric-spaces.approximations-metric-spaces.md) in the
 corresponding [metric space](metric-spaces.metric-spaces.md)
 
 ## Definition

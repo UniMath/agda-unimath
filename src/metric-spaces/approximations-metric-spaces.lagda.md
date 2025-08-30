@@ -26,8 +26,8 @@ open import metric-spaces.subspaces-metric-spaces
 ## Idea
 
 For an `ε : ℚ⁺`, an
-`ε`-{{#concept "approximation" disambiguation="of a metric space"}} of a
-[metric space](metric-spaces.metric-spaces.md) `X` is a
+`ε`-{{#concept "approximation" disambiguation="of a metric space" Agda=approximation-Metric-Space}}
+of a [metric space](metric-spaces.metric-spaces.md) `X` is a
 [subset](foundation.subtypes.md) `S` of `X` such that every point in `X` is in
 an `ε`-neighborhood of some `s ∈ S`.
 

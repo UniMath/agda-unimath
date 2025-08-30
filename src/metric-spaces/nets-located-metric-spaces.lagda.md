@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.nets-metric-spaces
 
 open import univalent-combinatorics.finite-subtypes
 open import univalent-combinatorics.finite-types
@@ -37,8 +38,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-For an `ε : ℚ⁺`, an `ε`-{{#concept "net" disambiguation="in a metric space"}} to
-a [located metric space](metric-spaces.located-metric-spaces.md) `X` is an
+For an `ε : ℚ⁺`, an
+`ε`-{{#concept "net" disambiguation="in a located metric space" Agda=net-Located-Metric-Space}}
+to a [located metric space](metric-spaces.located-metric-spaces.md) `X` is an
 [`ε`-net](metric-spaces.nets-metric-spaces.md) in the underlying
 [metric space](metric-spaces.metric-spaces.md).
 
