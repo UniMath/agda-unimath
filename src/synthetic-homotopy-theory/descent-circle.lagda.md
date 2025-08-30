@@ -51,8 +51,7 @@ way made precise in further sections of this file. The pair `(X, e)` is called
 **descent data** for the circle.
 
 ```agda
-descent-data-circle :
-  ( l1 : Level) → UU (lsuc l1)
+descent-data-circle : (l : Level) → UU (lsuc l)
 descent-data-circle = Type-With-Automorphism
 
 module _
