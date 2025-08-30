@@ -581,7 +581,7 @@ unique-reduce-fraction-ℤ x y H =
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```
 
-### A reduced fractions is its own reduction
+### A reduced fraction is its own reduction
 
 ```agda
 eq-reduce-is-reduced-fraction-ℤ :
