@@ -86,6 +86,16 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
+### Zero is strictly lesser than one
+
+```agda
+opaque
+  unfolding le-ℚ-Prop
+
+  le-zero-one-ℚ : le-ℚ zero-ℚ one-ℚ
+  le-zero-one-ℚ = _
+```
+
 ### Strict inequality on the rational numbers is decidable
 
 ```agda

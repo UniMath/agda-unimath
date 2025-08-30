@@ -580,3 +580,39 @@ unique-reduce-fraction-ℤ x y H =
           ( eq-is-prop
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```
+
+### A reduced fractions is its own reduction
+
+```agda
+eq-reduce-is-reduced-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-reduced-fraction-ℤ x →
+  reduce-fraction-ℤ x ＝ x
+eq-reduce-is-reduced-fraction-ℤ x red-x =
+  eq-pair
+    ( eq-quotient-div-is-one-ℤ
+      ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+      ( numerator-fraction-ℤ x)
+      ( red-x)
+      ( div-left-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
+    ( eq-type-subtype
+      ( subtype-positive-ℤ)
+      ( eq-quotient-div-is-one-ℤ
+        ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+        ( denominator-fraction-ℤ x)
+        ( red-x)
+        ( div-right-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))))
+```
+
+### The reduction of integer fractions is idempotent
+
+```agda
+is-idempotent-reduce-fraction-ℤ :
+  (x : fraction-ℤ) →
+  reduce-fraction-ℤ (reduce-fraction-ℤ x) ＝
+  reduce-fraction-ℤ x
+is-idempotent-reduce-fraction-ℤ x =
+  eq-reduce-is-reduced-fraction-ℤ
+    ( reduce-fraction-ℤ x)
+    ( is-reduced-reduce-fraction-ℤ x)
+```
