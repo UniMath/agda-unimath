@@ -47,6 +47,7 @@ module metric-spaces where
 
 open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
+open import metric-spaces.bounded-distance-decompositions-of-metric-spaces public
 open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
