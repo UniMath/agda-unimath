@@ -243,15 +243,15 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Complete-Metric-Space l1 l2)
-  (C : closed-subset-Metric-Space l3 (metric-space-Complete-Metric-Space X))
+  (C : closed-subset-Metric-Space l3 (metric-Complete-Metric-Space X))
   where
 
   is-complete-closed-subspace-Complete-Metric-Space :
     is-complete-Metric-Space
       ( subspace-Metric-Space
-        ( metric-space-Complete-Metric-Space X)
+        ( metric-Complete-Metric-Space X)
         ( subset-closed-subset-Metric-Space
-          ( metric-space-Complete-Metric-Space X)
+          ( metric-Complete-Metric-Space X)
           ( C)))
   is-complete-closed-subspace-Complete-Metric-Space x =
     ( ( lim-x ,
@@ -265,7 +265,7 @@ module _
             ( λ ε → pr2 (pr1 x ε)))) ,
       is-limit-limit-cauchy-approximation-Complete-Metric-Space X x')
     where
-      X' = metric-space-Complete-Metric-Space X
+      X' = metric-Complete-Metric-Space X
       x' : cauchy-approximation-Metric-Space X'
       x' = pr1 ∘ pr1 x , pr2 x
       lim-x = limit-cauchy-approximation-Complete-Metric-Space X x'
@@ -274,9 +274,9 @@ module _
     Complete-Metric-Space (l1 ⊔ l3) l2
   complete-closed-subspace-Complete-Metric-Space =
     ( subspace-Metric-Space
-        ( metric-space-Complete-Metric-Space X)
+        ( metric-Complete-Metric-Space X)
         ( subset-closed-subset-Metric-Space
-          ( metric-space-Complete-Metric-Space X)
+          ( metric-Complete-Metric-Space X)
           ( C)) ,
       is-complete-closed-subspace-Complete-Metric-Space)
 ```

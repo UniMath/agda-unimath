@@ -259,10 +259,10 @@ module _
 
   Π-Complete-Metric-Space : Complete-Metric-Space (l ⊔ l1) (l ⊔ l2)
   pr1 Π-Complete-Metric-Space =
-    Π-Metric-Space A (metric-space-Complete-Metric-Space ∘ C)
+    Π-Metric-Space A (metric-Complete-Metric-Space ∘ C)
   pr2 Π-Complete-Metric-Space =
     is-complete-Π-Metric-Space
       ( A)
-      ( metric-space-Complete-Metric-Space ∘ C)
-      ( is-complete-metric-space-Complete-Metric-Space ∘ C)
+      ( metric-Complete-Metric-Space ∘ C)
+      ( is-complete-metric-Complete-Metric-Space ∘ C)
 ```

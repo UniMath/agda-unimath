@@ -100,6 +100,25 @@ module _
       ( all-sim-is-limit-cauchy-approximation-Metric-Space lim-x lim-y)
 ```
 
+### The value of a constant Cauchy approximation is its limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  is-limit-const-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( A)
+      ( const-cauchy-approximation-Metric-Space A x)
+      ( x)
+  is-limit-const-cauchy-approximation-Metric-Space =
+    is-limit-const-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( x)
+```
+
 ## See also
 
 - [Convergent cauchy approximations](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
