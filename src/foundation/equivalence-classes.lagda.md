@@ -350,9 +350,9 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
-  equiv-total-sum-equivalence-class :
+  equiv-total-equivalence-class :
     Σ (equivalence-class R) (type-subtype ∘ is-in-equivalence-class-Prop R) ≃ A
-  equiv-total-sum-equivalence-class =
+  equiv-total-equivalence-class =
     ( right-unit-law-Σ-is-contr
       ( is-torsorial-is-in-equivalence-class R)) ∘e
     ( equiv-left-swap-Σ)
