@@ -164,7 +164,7 @@ module _
         ( eq-common-difference))
 ```
 
-### Any arithmetic sequence in a semigroup is standard
+### Any arithmetic sequence in a semigroup is homotopic to a standard arithmetic sequence
 
 ```agda
 module _
