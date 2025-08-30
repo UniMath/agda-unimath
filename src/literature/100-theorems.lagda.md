@@ -112,7 +112,7 @@ open import foundation.cantors-theorem using
 
 ```agda
 open import elementary-number-theory.triangular-numbers using
-  ( compute-triangular-ℕ)
+  ( compute-triangular-number-ℕ)
 open import ring-theory.arithmetic-series-semirings using
   ( compute-sum-add-mul-nat-Semiring)
 ```
