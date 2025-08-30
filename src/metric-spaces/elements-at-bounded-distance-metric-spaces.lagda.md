@@ -212,7 +212,7 @@ module _
           ( f)
           ( ε)
           ( δ)))
-``` 
+```
 
 ### Elements at bounded distance can be assigned an upper real distance
 
