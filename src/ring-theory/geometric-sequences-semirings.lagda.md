@@ -30,7 +30,7 @@ open import ring-theory.semirings
 
 ## Ideas
 
-An
+A
 {{#concept "geometric sequence" Disambiguation="in a semiring" Agda=geometric-sequence-Semiring}}
 in a [semiring](ring-theory.semirings.md) is an
 [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
