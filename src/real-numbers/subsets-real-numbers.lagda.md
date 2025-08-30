@@ -19,7 +19,7 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-A subset of the [real numbers](real-numbers.dedekind-real-numbers.md) is a
+A {{#concept "subset" Disambiguation="of the real numbers" Agda=subset-ℝ}} of the [real numbers](real-numbers.dedekind-real-numbers.md) is a
 [subtype](foundation.subtypes.md).
 
 ## Definition
