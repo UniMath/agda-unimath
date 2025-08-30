@@ -7,12 +7,24 @@ module lists.universal-property-lists-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-binary-homotopies-binary-functions
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.transport-along-identifications-dependent-functions
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
+
+open import foundation-core.dependent-identifications
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.transport-along-identifications
 
 open import group-theory.homomorphisms-semigroups
 
@@ -22,6 +34,7 @@ open import lists.lists
 open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.morphisms-wild-monoids
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
@@ -31,10 +44,29 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-The type of lists of elements of `X` is the initial wild monoid equipped with a
-map from `X` into it.
+The type of lists of elements of `X` is the free wild monoid on `X` - that is,
+for any wild monoid `M`, there is an equivalence:
+
+```text
+  (X → type-Wild-Monoid M)
+  ≃
+  hom-Wild-Monoid (list X) M
+```
 
 ## Definition
+
+### The universal property of free wild monoids on a type
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (M : Wild-Monoid l2) (f : X → type-Wild-Monoid M)
+  where
+
+  is-free-wild-monoid-on-type : UUω
+  is-free-wild-monoid-on-type =
+    {l3 : Level} (N : Wild-Monoid l3) →
+    is-equiv (λ g → map-hom-Wild-Monoid M N g ∘ f)
+```
 
 ### The pointed type of lists of elements of `X`
 
@@ -301,48 +333,92 @@ elim-list-Wild-Monoid M f =
           ( preserves-coh-unit-laws-map-elim-list-Wild-Monoid M f))))
 ```
 
-### Contractibility of the type `hom (list X) M` of morphisms of wild monoids
+### Pulling back `hom (list X) M` along the inclusion `X → list X` is an equivalence
 
-This remains to be formalized. The following block contains some abandoned old
-code towards this goal:
+This remains to be formalized. Below is some work towards this goal:
 
-```text
-htpy-elim-list-Wild-Monoid :
-  {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
-  (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
-  ( H : ( map-hom-Wild-Monoid (list-Wild-Monoid X) M g ∘ unit-list) ~
-        ( map-hom-Wild-Monoid (list-Wild-Monoid X) M h ∘ unit-list)) →
-  htpy-hom-Wild-Monoid (list-Wild-Monoid X) M g h
-htpy-elim-list-Wild-Monoid {X = X} M g h H =
-  pair (pair α β) γ
+```agda
+{-
+
+module _
+  {l1 l2 : Level} (X : UU l1) (M : Wild-Monoid l2)
   where
-  α : pr1 (pr1 g) ~ pr1 (pr1 h)
-  α nil =
-    ( preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M g) ∙
-    ( inv (preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M h))
-  α (cons x l) =
-    ( preserves-mul-map-hom-Wild-Monoid
-      ( list-Wild-Monoid X)
-      ( M)
-      ( g)
-      ( unit-list x)
-      ( l)) ∙
-    ( ( ap-mul-Wild-Monoid M (H x) (α l)) ∙
-      ( inv
-        ( preserves-mul-map-hom-Wild-Monoid
-          ( list-Wild-Monoid X)
-          ( M)
-          ( h)
-          ( unit-list x)
-          ( l))))
-  β : (x y : pr1 (pr1 (list-Wild-Monoid X))) →
-      Id ( pr2 (pr1 g) x y ∙ ap-mul-Wild-Monoid M (α x) (α y))
-         ( α (concat-list x y) ∙ pr2 (pr1 h) x y)
-  β nil y = {!!}
-  β (cons x x₁) y = {!!}
-  γ : Id (pr2 g) (α nil ∙ pr2 h)
-  γ =
-    ( inv right-unit) ∙
-    ( ( left-whisker-concat (pr2 g) (inv (left-inv (pr2 h)))) ∙
-      ( inv (assoc (pr2 g) (inv (pr2 h)) (pr2 h))))
+
+  map-inv-elim-list-Wild-Monoid :
+    hom-Wild-Monoid (list-Wild-Monoid X) M → X → type-Wild-Monoid M
+  map-inv-elim-list-Wild-Monoid f x =
+    map-hom-Wild-Monoid (list-Wild-Monoid X) M f (cons x nil)
+
+  htpy-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    pr1 (pr1 ((elim-list-Wild-Monoid M ∘ (λ g x → pr1 (pr1 g) (cons x nil))) f))
+    ~ map-hom-Wild-Monoid _ _ f
+  htpy-elim-list-Wild-Monoid ((f , pt-f) , _) nil =
+    inv pt-f
+  htpy-elim-list-Wild-Monoid f (cons x y) =
+    ap-binary (mul-Wild-Monoid M) refl (htpy-elim-list-Wild-Monoid f y) ∙
+    inv (preserves-mul-hom-Wild-Monoid (list-Wild-Monoid X) M f)
+
+  dependent-identification-mul-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    pr1 (tr (preserves-unital-mul-pointed-map-H-Space (list-H-Space X) (pr1 M))
+      (eq-pointed-htpy
+        ((λ x →
+          map-elim-list-Wild-Monoid M
+            (λ x₁ → pr1 (pr1 f) (cons x₁ nil)) x) , refl)
+        ((λ x → pr1 (pr1 f) x) , pr2 (pr1 f))
+        (htpy-elim-list-Wild-Monoid f , inv (left-inv (pr2 (pr1 f)))))
+      (pr2 (elim-list-Wild-Monoid M (λ x → pr1 (pr1 f) (cons x nil))))) ＝
+    preserves-mul-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-mul-elim-list-Wild-Monoid ((f , pt-f) , mul-f , _) =
+    {!   !} -- this should fill with eq-binary-htpy as mul-f is a binary function but the type checker is unhappy with that...
+
+  dependent-identification-left-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-left-unit-law-mul-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-left-unit-law-elim-list-Wild-Monoid f = {!   !}
+
+  dependent-identification-right-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-right-unit-law-mul-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-right-unit-law-elim-list-Wild-Monoid f = {!   !}
+
+  dependent-identification-coh-unit-law-elim-list-Wild-Monoid :
+    (f : hom-Wild-Monoid (list-Wild-Monoid X) M) →
+    {!   !} ＝
+    preserves-coh-unit-laws-map-hom-Wild-Monoid (list-Wild-Monoid X) M f
+  dependent-identification-coh-unit-law-elim-list-Wild-Monoid f = {!   !}
+
+  is-equiv-elim-list-Wild-Monoid : is-equiv (elim-list-Wild-Monoid M)
+  pr1 (pr1 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
+  pr2 (pr1 is-equiv-elim-list-Wild-Monoid) f =
+    eq-pair-Σ
+    ( eq-pointed-htpy _ _
+      ( htpy-elim-list-Wild-Monoid f ,
+      inv (left-inv
+        ( preserves-unit-map-hom-Wild-Monoid (list-Wild-Monoid X) M f))))
+    ( eq-pair-Σ {! dependent-identification-mul-elim-list-Wild-Monoid f !} -- this should fill with dependent-identification-mul-elim-list-Wild-Monoid f but the type checker is unhappy with that too?
+      ( eq-pair-Σ
+      {!   !}
+        (eq-pair-Σ
+        {!   !}
+        {!   !})))
+  pr1 (pr2 is-equiv-elim-list-Wild-Monoid) = map-inv-elim-list-Wild-Monoid
+  pr2 (pr2 is-equiv-elim-list-Wild-Monoid) f =
+    eq-htpy (λ x → pr1 (pr2 (pr2 (pr2 (pr1 M)))) (f x))
+
+  equiv-elim-list-Wild-Monoid :
+    (X → type-Wild-Monoid M) ≃ hom-Wild-Monoid (list-Wild-Monoid X) M
+  pr1 equiv-elim-list-Wild-Monoid = elim-list-Wild-Monoid M
+  pr2 equiv-elim-list-Wild-Monoid = is-equiv-elim-list-Wild-Monoid
+
+is-free-wild-monoid-on-type-list-Wild-Monoid :
+  {l : Level} (X : UU l) →
+  is-free-wild-monoid-on-type X (list-Wild-Monoid X) (λ x → cons x nil)
+is-free-wild-monoid-on-type-list-Wild-Monoid X N =
+  is-equiv-map-inv-is-equiv (is-equiv-elim-list-Wild-Monoid X N)
+
+-}
 ```
