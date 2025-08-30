@@ -15,8 +15,9 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets

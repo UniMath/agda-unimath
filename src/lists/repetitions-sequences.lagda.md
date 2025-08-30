@@ -1,7 +1,7 @@
 # Repetitions in sequences
 
 ```agda
-module foundation.repetitions-sequences where
+module lists.repetitions-sequences where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
-open import foundation.sequences
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -25,6 +24,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+
+open import lists.sequences
 ```
 
 </details>
