@@ -86,7 +86,7 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
-### Zero is strictly lesser than one
+### Zero is strictly less than one
 
 ```agda
 opaque
