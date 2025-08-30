@@ -71,7 +71,7 @@ abstract
       ( fraction-ℚ y)
 ```
 
-### The cross-multiplication difference of zero and an rational number is its numerator
+### The cross-multiplication difference of zero and a rational number is its numerator
 
 ```agda
 module _
