@@ -29,7 +29,7 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 {{#concept "Triangular numbers" WD="triangular number" WDID=Q245102 OEIS=A000217 Agda=triangular-number-ℕ}}
 are the sequence of
-[natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ` defined by :
+[natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ` defined by:
 
 - `T₀ = 0`;
 - `Tₙ₊₁ = Tₙ + n + 1`.
