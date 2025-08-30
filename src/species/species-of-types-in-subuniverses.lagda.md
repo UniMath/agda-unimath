@@ -24,8 +24,8 @@ open import species.species-of-types
 
 ### Idea
 
-A **species of types in a subuniverse** is a map from a subuniverse `P` to a
-subuniverse `Q`.
+A {{#concept "species of types in a subuniverse" Agda=species-subuniverse}} is a
+map from a [subuniverse](foundation.subuniverses.md) `P` to a subuniverse `Q`.
 
 ## Definitions
 
