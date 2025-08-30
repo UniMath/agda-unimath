@@ -17,6 +17,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -24,6 +25,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -41,8 +43,10 @@ open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.dedekind-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.subfinitely-enumerable-types
 open import univalent-combinatorics.surjective-maps
 ```
 
@@ -308,7 +312,75 @@ product-Finitely-Enumerable-Type (X , eX) (Y , eY) =
   (X × Y , is-finitely-enumerable-product eX eY)
 ```
 
+### Finitely enumerable types are subfinitely enumerable
+
+```agda
+is-subfinitely-enumerable-is-finitely-enumerable :
+  {l : Level} {X : UU l} →
+  is-finitely-enumerable X → is-subfinitely-enumerable lzero X
+is-subfinitely-enumerable-is-finitely-enumerable =
+  map-trunc-Prop (λ (n , s) → (Fin n , unit-trunc-Prop (n , id-emb)) , s)
+
+is-subfinitely-enumerable-type-Finitely-Enumerable-Type :
+  {l : Level} (X : Finitely-Enumerable-Type l) →
+  is-subfinitely-enumerable lzero (type-Finitely-Enumerable-Type X)
+is-subfinitely-enumerable-type-Finitely-Enumerable-Type (X , H) =
+  is-subfinitely-enumerable-is-finitely-enumerable H
+
+subfinitely-enumerable-type-Finitely-Enumerable-Type :
+  {l : Level} → Finitely-Enumerable-Type l → Subfinitely-Enumerable-Type l lzero
+subfinitely-enumerable-type-Finitely-Enumerable-Type (X , H) =
+  ( X , is-subfinitely-enumerable-is-finitely-enumerable H)
+```
+
+### Finitely enumerable types are Dedekind finite
+
+```agda
+is-dedekind-finite-is-finitely-enumerable :
+  {l : Level} {X : UU l} → is-finitely-enumerable X → is-dedekind-finite X
+is-dedekind-finite-is-finitely-enumerable =
+  is-dedekind-finite-is-subfinitely-enumerable ∘
+  is-subfinitely-enumerable-is-finitely-enumerable
+
+is-dedekind-finite-type-Finitely-Enumerable-Type :
+  {l : Level} (X : Finitely-Enumerable-Type l) →
+  is-dedekind-finite (type-Finitely-Enumerable-Type X)
+is-dedekind-finite-type-Finitely-Enumerable-Type (X , H) =
+  is-dedekind-finite-is-finitely-enumerable H
+
+dedekind-finite-type-Finitely-Enumerable-Type :
+  {l : Level} → Finitely-Enumerable-Type l → Dedekind-Finite-Type l
+dedekind-finite-type-Finitely-Enumerable-Type (X , H) =
+  ( X , is-dedekind-finite-is-finitely-enumerable H)
+```
+
+### The Cantor–Schröder–Bernstein theorem for finitely enumerable types
+
+If two finitely enumerable types `X` and `Y` mutually embed, `X ↪ Y` and
+`Y ↪ X`, then `X ≃ Y`.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Finitely-Enumerable-Type l1)
+  (Y : Finitely-Enumerable-Type l2)
+  where
+
+  Cantor-Schröder-Bernstein-Finitely-Enumerable-Type :
+    (type-Finitely-Enumerable-Type X ↪ type-Finitely-Enumerable-Type Y) →
+    (type-Finitely-Enumerable-Type Y ↪ type-Finitely-Enumerable-Type X) →
+    type-Finitely-Enumerable-Type X ≃ type-Finitely-Enumerable-Type Y
+  Cantor-Schröder-Bernstein-Finitely-Enumerable-Type =
+    Cantor-Schröder-Bernstein-Dedekind-Finite-Type
+      ( dedekind-finite-type-Finitely-Enumerable-Type X)
+      ( dedekind-finite-type-Finitely-Enumerable-Type Y)
+```
+
 ## See also
 
 - A [Kuratowski finite set](univalent-combinatorics.kuratowski-finite-sets.md)
   is precisely a finitely enumerable [set](foundation.sets.md).
+- A type is finitely enumerable if and only if it has
+  [finitely many connected components](univalent-combinatorics.finitely-many-connected-components.md).
+- Finitely enumerable types are precisely
+  [untruncated π₀-finite types](univalent-combinatorics.untruncated-pi-finite-types.md).

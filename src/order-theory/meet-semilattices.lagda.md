@@ -298,7 +298,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-greatest-binary-lower-bound-Poset-Prop P x))
+          ( has-greatest-binary-lower-bound-prop-Poset P x))
 
   is-meet-semilattice-Poset : UU (l1 ⊔ l2)
   is-meet-semilattice-Poset = type-Prop is-meet-semilattice-Poset-Prop

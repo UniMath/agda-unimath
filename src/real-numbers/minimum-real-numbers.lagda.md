@@ -9,20 +9,28 @@ module real-numbers.minimum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.minimum-lower-dedekind-real-numbers
 open import real-numbers.minimum-upper-dedekind-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -79,13 +87,14 @@ module _
           cut-lower-ℝ lower-real-min-ℝ p ∨
           cut-upper-ℝ upper-real-min-ℝ q
 
-  min-ℝ : ℝ (l1 ⊔ l2)
-  min-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-min-ℝ)
-      ( upper-real-min-ℝ)
-      ( is-disjoint-lower-upper-min-ℝ)
-      ( is-located-lower-upper-min-ℝ)
+  opaque
+    min-ℝ : ℝ (l1 ⊔ l2)
+    min-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-min-ℝ)
+        ( upper-real-min-ℝ)
+        ( is-disjoint-lower-upper-min-ℝ)
+        ( is-located-lower-upper-min-ℝ)
 ```
 
 ## Properties
@@ -98,17 +107,26 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  is-greatest-binary-lower-bound-min-ℝ :
-    is-greatest-binary-lower-bound-Large-Poset
-      ( ℝ-Large-Poset)
-      ( x)
-      ( y)
-      ( min-ℝ x y)
-  is-greatest-binary-lower-bound-min-ℝ z =
-    is-greatest-binary-lower-bound-binary-min-lower-ℝ
-      ( lower-real-ℝ x)
-      ( lower-real-ℝ y)
-      ( lower-real-ℝ z)
+  opaque
+    unfolding min-ℝ
+
+    is-greatest-binary-lower-bound-min-ℝ :
+      is-greatest-binary-lower-bound-Large-Poset
+        ( ℝ-Large-Poset)
+        ( x)
+        ( y)
+        ( min-ℝ x y)
+    is-greatest-binary-lower-bound-min-ℝ z =
+      is-greatest-binary-lower-bound-binary-min-lower-ℝ
+        ( lower-real-ℝ x)
+        ( lower-real-ℝ y)
+        ( lower-real-ℝ z)
+
+  abstract
+    leq-min-leq-leq-ℝ :
+      {l3 : Level} (z : ℝ l3) → leq-ℝ z x → leq-ℝ z y → leq-ℝ z (min-ℝ x y)
+    leq-min-leq-leq-ℝ z x≤z y≤z =
+      forward-implication (is-greatest-binary-lower-bound-min-ℝ z) (x≤z , y≤z)
 ```
 
 ### The large poset of real numbers has meets
@@ -118,4 +136,58 @@ has-meets-ℝ-Large-Poset : has-meets-Large-Poset ℝ-Large-Poset
 meet-has-meets-Large-Poset has-meets-ℝ-Large-Poset = min-ℝ
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
   has-meets-ℝ-Large-Poset = is-greatest-binary-lower-bound-min-ℝ
+```
+
+### For any `ε : ℚ⁺`, `(x < min-ℝ x y + ε) ∨ (y < min-ℝ x y + ε)`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    approximate-above-min-ℝ :
+      (ε : ℚ⁺) →
+      type-disjunction-Prop
+        ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε))
+        ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε))
+    approximate-above-min-ℝ ε⁺@(ε , _) =
+      let
+        motive =
+          ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ ε)) ∨
+          ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ ε))
+        open do-syntax-trunc-Prop motive
+      in do
+        (r , min<r , r<min+ε) ←
+          dense-rational-le-ℝ (min-ℝ x y) (min-ℝ x y +ℝ real-ℚ ε)
+            ( le-left-add-real-ℝ⁺ (min-ℝ x y) (positive-real-ℚ⁺ ε⁺))
+        (q , min<q , q-<ℝ-r) ← dense-rational-le-ℝ (min-ℝ x y) (real-ℚ r) min<r
+        let q<r = reflects-le-real-ℚ q r q-<ℝ-r
+        elim-disjunction
+          ( motive)
+          ( λ q<x →
+            elim-disjunction
+              ( motive)
+              ( λ q<y →
+                ex-falso
+                  ( irreflexive-le-ℝ (min-ℝ x y)
+                    ( concatenate-le-leq-ℝ (min-ℝ x y) (real-ℚ q) (min-ℝ x y)
+                      ( min<q)
+                      ( leq-min-leq-leq-ℝ x y (real-ℚ q)
+                        ( leq-le-ℝ (real-ℚ q) x
+                          ( le-real-is-in-lower-cut-ℚ q x q<x))
+                        ( leq-le-ℝ (real-ℚ q) y
+                          ( le-real-is-in-lower-cut-ℚ q y q<y))))))
+              ( λ y<r →
+                inr-disjunction
+                  ( transitive-le-ℝ y (real-ℚ r) (min-ℝ x y +ℝ real-ℚ ε)
+                    ( r<min+ε)
+                    ( le-real-is-in-upper-cut-ℚ r y y<r)))
+              ( is-located-lower-upper-cut-ℝ y q r q<r))
+          ( λ x<r →
+            inl-disjunction
+              ( transitive-le-ℝ x (real-ℚ r) (min-ℝ x y +ℝ real-ℚ ε)
+                ( r<min+ε)
+                ( le-real-is-in-upper-cut-ℚ r x x<r)))
+          ( is-located-lower-upper-cut-ℝ x q r q<r)
 ```

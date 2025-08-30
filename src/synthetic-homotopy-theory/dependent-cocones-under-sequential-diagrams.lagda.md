@@ -46,8 +46,8 @@ _dependent_ cocones on `P` over `c`.
 
 A **dependent cocone under a
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)** on `P`
-over `c ≐ (X, i, H)` consists of a [sequence](foundation.dependent-sequences.md)
-of dependent maps `i'ₙ : (x : Aₙ) → P (iₙ x)` and a sequence of
+over `c ≐ (X, i, H)` consists of a [sequence](lists.dependent-sequences.md) of
+dependent maps `i'ₙ : (x : Aₙ) → P (iₙ x)` and a sequence of
 [dependent homotopies](foundation.dependent-homotopies.md)
 `H'ₙ : i'ₙ ~ i'ₙ₊₁ ∘ aₙ` over `H`.
 

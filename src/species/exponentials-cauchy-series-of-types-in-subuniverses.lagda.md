@@ -15,6 +15,7 @@ open import foundation.global-subuniverses
 open import foundation.sigma-closed-subuniverses
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -56,12 +57,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  (X : UU l5)
+  (X : UU l4)
   where
 
   equiv-exponential-cauchy-series-composition-unit-species-subuniverse :
@@ -72,16 +72,15 @@ module _
       ( S)
       ( X)
   equiv-exponential-cauchy-series-composition-unit-species-subuniverse =
-    equiv-tot (λ F → left-unit-law-product-is-contr is-contr-unit)
+    equiv-tot (λ F → left-unit-law-product)
 ```
 
 ### The Cauchy series associated to the Cauchy exponential of `S` is equal to the exponential of its Cauchy series
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
@@ -106,25 +105,25 @@ module _
       ( C2)
       ( S)
       ( X)) ∘e
-    ( ( equiv-cauchy-series-composition-species-subuniverse P Q C3 C4
+    ( equiv-cauchy-series-composition-species-subuniverse P Q C3 C4
+      ( λ _ → unit , C2)
+      ( S)
+      ( X)) ∘e
+    ( equiv-cauchy-series-equiv-species-subuniverse P Q
+      ( cauchy-exponential-species-subuniverse P Q C1 S)
+      ( cauchy-composition-species-subuniverse P Q C3 C4
         ( λ _ → unit , C2)
-        ( S)
-        ( X)) ∘e
-      ( equiv-cauchy-series-equiv-species-subuniverse P Q
-        ( cauchy-exponential-species-subuniverse P Q C1 S)
-        ( cauchy-composition-species-subuniverse P Q C3 C4
-          ( λ _ → unit , C2)
-          ( S))
-        ( λ F →
-          inv-equiv
-            ( equiv-cauchy-exponential-composition-unit-species-subuniverse
-              ( P)
-              ( Q)
-              ( C1)
-              ( C2)
-              ( C3)
-              ( C4)
-              ( S)
-              ( F)))
-        ( X)))
+        ( S))
+      ( λ F →
+        inv-equiv
+          ( equiv-cauchy-exponential-composition-unit-species-subuniverse
+            ( P)
+            ( Q)
+            ( C1)
+            ( C2)
+            ( C3)
+            ( C4)
+            ( S)
+            ( F)))
+      ( X))
 ```

@@ -28,7 +28,11 @@ open import species.species-of-types
 
 ## Idea
 
-The product of two Dirichlet series is the pointwise product.
+The
+{{#concept "product" Disambiguation="of Caucy series of species of types" Agda=product-dirichlet-series-species-subuniverse}}
+of two [Dirichlet series](species.dirichlet-series-species-of-types.md) of
+[species of types in subuniverses](species.species-of-types.md) is just the
+pointwise [product](foundation.cartesian-product-types.md).
 
 ## Definition
 
@@ -62,7 +66,26 @@ module _
   (X : UU l4)
   where
 
-  private
+  equiv-dirichlet-series-dirichlet-product-species-types :
+    dirichlet-series-species-types
+      ( H)
+      ( C1)
+      ( dirichlet-product-species-types S T)
+      ( X) ≃
+    product-dirichlet-series-species-types H C1 S T X
+  equiv-dirichlet-series-dirichlet-product-species-types =
+    ( reassociate') ∘e
+    ( equiv-tot
+      ( λ A →
+        equiv-tot
+          ( λ B →
+            ( equiv-product-right
+              ( equiv-up-product ∘e equiv-postcomp X (C1 A B))) ∘e
+            ( left-unit-law-Σ-is-contr
+              ( is-torsorial-equiv' (A × B))
+              ( A × B , id-equiv))))) ∘e
+    ( reassociate)
+    where
     reassociate :
       dirichlet-series-species-types
         ( H)
@@ -93,25 +116,4 @@ module _
           (A , B , (s , t) , (fs , ft)))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-dirichlet-series-dirichlet-product-species-types :
-    dirichlet-series-species-types
-      ( H)
-      ( C1)
-      ( dirichlet-product-species-types S T)
-      ( X) ≃
-    product-dirichlet-series-species-types H C1 S T X
-  equiv-dirichlet-series-dirichlet-product-species-types =
-    ( reassociate') ∘e
-    ( ( equiv-tot
-        ( λ A →
-          equiv-tot
-            ( λ B →
-              ( equiv-product
-                ( id-equiv)
-                ( equiv-up-product ∘e equiv-postcomp X (C1 A B))) ∘e
-              ( left-unit-law-Σ-is-contr
-                ( is-torsorial-equiv' (A × B))
-                ( A × B , id-equiv))))) ∘e
-      ( reassociate))
 ```

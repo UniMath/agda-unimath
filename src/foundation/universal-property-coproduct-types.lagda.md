@@ -45,7 +45,7 @@ module _
   dependent-universal-property-coproduct P =
     is-equiv-is-invertible
       ( λ p → ind-coproduct P (pr1 p) (pr2 p))
-      ( ind-Σ (λ f g → eq-pair refl refl))
+      ( ind-Σ (λ f g → refl))
       ( λ s → eq-htpy (ind-coproduct _ refl-htpy refl-htpy))
 
   equiv-dependent-universal-property-coproduct :

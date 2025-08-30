@@ -8,12 +8,15 @@ module ring-theory.semirings where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
@@ -383,4 +386,13 @@ module _
     ( associative-add-Semiring R
       ( mul-nat-scalar-Semiring m x)
       ( mul-nat-scalar-Semiring n x) x)
+
+  htpy-comp-mul-nat-mul-Semiring :
+    ( m n : ℕ) →
+    ( mul-nat-scalar-Semiring (m *ℕ n)) ~
+    ( mul-nat-scalar-Semiring m ∘ mul-nat-scalar-Semiring n)
+  htpy-comp-mul-nat-mul-Semiring zero-ℕ n x = refl
+  htpy-comp-mul-nat-mul-Semiring (succ-ℕ m) n x =
+    ( right-distributive-mul-nat-scalar-add-Semiring (m *ℕ n) n x) ∙
+    ( ap (add-Semiring' R _) (htpy-comp-mul-nat-mul-Semiring m n x))
 ```

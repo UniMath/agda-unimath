@@ -24,8 +24,10 @@ open import species.species-of-types
 
 ### Idea
 
-A homomorphism between two species is a pointwise family of maps between their
-values.
+A
+{{#concept "homomorphism" Disambiguation="between species of types" Agda=hom-species-types}}
+between two [species of types](species.species-of-types.md) is a pointwise
+family of maps.
 
 ## Definitions
 
@@ -39,7 +41,7 @@ hom-species-types {l1} F G = (X : UU l1) → F X → G X
 
 id-hom-species-types :
   {l1 l2 : Level} → (F : species-types l1 l2) → hom-species-types F F
-id-hom-species-types F = λ X x → x
+id-hom-species-types F X = id
 
 comp-hom-species-types :
   {l1 l2 l3 l4 : Level}
@@ -47,7 +49,7 @@ comp-hom-species-types :
   {G : species-types l1 l3}
   {H : species-types l1 l4} →
   hom-species-types G H → hom-species-types F G → hom-species-types F H
-comp-hom-species-types f g X = (f X) ∘ (g X)
+comp-hom-species-types f g X = f X ∘ g X
 ```
 
 ### Homotopies between morphisms of species
@@ -56,7 +58,7 @@ comp-hom-species-types f g X = (f X) ∘ (g X)
 htpy-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3} →
   hom-species-types F G → hom-species-types F G → UU (lsuc l1 ⊔ l2 ⊔ l3)
-htpy-hom-species-types {l1} f g = (X : UU l1) → (f X) ~ (g X)
+htpy-hom-species-types {l1} f g = (X : UU l1) → f X ~ g X
 
 refl-htpy-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
