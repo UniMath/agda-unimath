@@ -30,6 +30,8 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.sections
+open import foundation-core.retractions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
@@ -182,20 +184,15 @@ module _
       ( id-hom-Algebra σ T A)
       ( q)
 
-  is-iso-is-equiv-hom-Algebra :
-    (f : hom-Algebra σ T A B) →
-    is-equiv-hom-Algebra σ T A B f →
-    is-iso-Algebra f
-  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
-    hom-inv-is-equiv-hom-Algebra σ T A B f eq
-  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
-    eq-htpy-hom-Algebra σ T B B
+  is-section-is-iso-hom-Algebra : (f : hom-Algebra σ T A B) → is-section {! f  !} {!   !}
+  is-section-is-iso-hom-Algebra f = {!     eq-htpy-hom-Algebra σ T B B
     ( comp-hom-Algebra σ T B A B f
       ( hom-inv-is-equiv-hom-Algebra σ T A B f eq))
     ( id-hom-Algebra σ T B)
-    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
-  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
-    eq-htpy-hom-Algebra σ T A A
+    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))  !}
+
+  is-retraction-is-iso-hom-Algebra : (f : hom-Algebra σ T A B) → is-retraction {!   !} {!   !}
+  is-retraction-is-iso-hom-Algebra = {!     eq-htpy-hom-Algebra σ T A A
       ( comp-hom-Algebra σ T A B A
         ( hom-inv-is-equiv-hom-Algebra σ T A B f eq)
         ( f))
@@ -212,7 +209,18 @@ module _
         htpy-map-inv-equiv-retraction
           ( map-hom-Algebra σ T A B f , eq)
           ( retraction-is-equiv eq)
-          ( map-hom-Algebra σ T A B f x)
+          ( map-hom-Algebra σ T A B f x)  !}
+
+  is-iso-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) →
+    is-equiv-hom-Algebra σ T A B f →
+    is-iso-Algebra f
+  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
+    hom-inv-is-equiv-hom-Algebra σ T A B f eq
+  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    is-section-is-iso-hom-Algebra f {!   !}
+  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    {!   !}
 
   equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
