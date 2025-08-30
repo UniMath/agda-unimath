@@ -33,7 +33,7 @@ An
 {{#concept "arithmetic sequence" Disambiguation="in a semiring" Agda=arithmetic-sequence-Semiring}}
 in a [semiring](ring-theory.semirings.md) is an
 [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
-semiring additive [semigroup](group-theory.semigroups.md).
+semiring's additive [semigroup](group-theory.semigroups.md).
 
 These are the sequences `n ↦ a + n * d` for some elements `a d` in the semiring.
 
