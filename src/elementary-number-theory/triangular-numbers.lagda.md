@@ -67,17 +67,17 @@ htpy-sum-leq-triangular-ℕ (succ-ℕ n) =
 ### Twice the nth triangular number is `n(n+1)`
 
 ```agda
-compute-twice-triangular-ℕ :
+compute-twice-triangular-number-ℕ :
   (n : ℕ) → (triangular-number-ℕ n) +ℕ (triangular-number-ℕ n) ＝ n *ℕ succ-ℕ n
-compute-twice-triangular-ℕ zero-ℕ = refl
-compute-twice-triangular-ℕ (succ-ℕ n) =
+compute-twice-triangular-number-ℕ zero-ℕ = refl
+compute-twice-triangular-number-ℕ (succ-ℕ n) =
   ( interchange-law-add-add-ℕ
     ( triangular-number-ℕ n)
     ( succ-ℕ n)
     ( triangular-number-ℕ n)
     ( succ-ℕ n)) ∙
   ( ap-add-ℕ
-    ( compute-twice-triangular-ℕ n)
+    ( compute-twice-triangular-number-ℕ n)
     ( inv (left-two-law-mul-ℕ (succ-ℕ n)))) ∙
   ( inv (right-distributive-mul-add-ℕ n 2 (succ-ℕ n))) ∙
   ( commutative-mul-ℕ (n +ℕ 2) (succ-ℕ n))
@@ -90,13 +90,14 @@ module _
   (n : ℕ)
   where
 
-  compute-triangular-ℕ :
+  compute-triangular-number-ℕ :
     Σ ( div-ℕ 2 (n *ℕ succ-ℕ n))
       ( λ H → quotient-div-ℕ 2 (n *ℕ succ-ℕ n) H ＝ triangular-number-ℕ n)
-  pr1 (pr1 compute-triangular-ℕ) = triangular-number-ℕ n
-  pr2 (pr1 compute-triangular-ℕ) =
-    right-two-law-mul-ℕ (triangular-number-ℕ n) ∙ compute-twice-triangular-ℕ n
-  pr2 compute-triangular-ℕ = refl
+  pr1 (pr1 compute-triangular-number-ℕ) = triangular-number-ℕ n
+  pr2 (pr1 compute-triangular-number-ℕ) =
+    ( right-two-law-mul-ℕ (triangular-number-ℕ n)) ∙
+    ( compute-twice-triangular-number-ℕ n)
+  pr2 compute-triangular-number-ℕ = refl
 ```
 
 ## External references
