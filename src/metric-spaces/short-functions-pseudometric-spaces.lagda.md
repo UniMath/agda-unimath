@@ -19,10 +19,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces

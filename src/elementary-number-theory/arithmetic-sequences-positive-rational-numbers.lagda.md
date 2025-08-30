@@ -28,12 +28,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.sequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.arithmetic-sequences-semigroups
 open import group-theory.powers-of-elements-monoids
+
+open import lists.sequences
 
 open import order-theory.increasing-sequences-posets
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets

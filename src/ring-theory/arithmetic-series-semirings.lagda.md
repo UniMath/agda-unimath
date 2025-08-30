@@ -32,9 +32,8 @@ open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 An
 {{#concept "arithmetic series" Disambiguation="in a semiring" Agda=seq-sum-arithmetic-sequence-Semiring}}
-in a [semiring](ring-theory.semirings.md) is the
-[sequence](foundation.sequences.md) of
-[partial sums](ring-theory.partial-sums-sequences-semirings.md)
+in a [semiring](ring-theory.semirings.md) is the [sequence](lists.sequences.md)
+of [partial sums](ring-theory.partial-sums-sequences-semirings.md)
 
 ```text
 n ↦ Σ (k ≤ n) (u k)

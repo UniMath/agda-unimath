@@ -16,11 +16,12 @@ open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.arithmetic-sequences-semigroups
+
+open import lists.sequences
 
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.semirings
