@@ -212,8 +212,8 @@ was considered in the context of [infinite sets](set-theory.infinite-sets.md).
 - Cantor's theorem generalizes
   [Cantor's diagonal argument](set-theory.cantors-diagonal-argument.md), which
   shows that the [set](foundation-core.sets.md) of
-  [infinite sequences](foundation.sequences.md) on a set with at least two
-  distinct elements is [uncountable](set-theory.uncountable-sets.md).
+  [infinite sequences](lists.sequences.md) on a set with at least two distinct
+  elements is [uncountable](set-theory.uncountable-sets.md).
 - Cantor's theorem is generalized by
   [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md).
 

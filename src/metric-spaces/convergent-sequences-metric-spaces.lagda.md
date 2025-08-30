@@ -9,9 +9,10 @@ module metric-spaces.convergent-sequences-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces

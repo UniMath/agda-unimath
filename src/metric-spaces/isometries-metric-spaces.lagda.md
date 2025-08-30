@@ -22,6 +22,8 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces

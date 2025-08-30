@@ -1,16 +1,17 @@
 # Sequences
 
 ```agda
-module foundation.sequences where
+module lists.sequences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-sequences
 open import foundation.universe-levels
 
 open import foundation-core.function-types
+
+open import lists.dependent-sequences
 ```
 
 </details>

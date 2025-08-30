@@ -30,7 +30,7 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A **spectrum** is a [sequence](foundation.sequences.md) of
+A **spectrum** is a [sequence](lists.sequences.md) of
 [pointed types](structured-types.pointed-types.md) `A` equipped with an
 equivalence
 

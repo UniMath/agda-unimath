@@ -302,11 +302,11 @@ $f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
 surjective, so we want to show that given an arbitrary $x : X$ there exists a
 $z : X$ such that $x = f(z)$.
 
-The mapping $i ↦ fⁱ(x)$ defines a [sequence](foundation.sequences.md) of
-elements of $X$. By surjectivity of $h$ each $fⁱ(x)$ merely has a representative
-in $D$, so by [finite choice](univalent-combinatorics.finite-choice.md) there
-exists a [finite sequence](lists.finite-sequences.md)
-$y₋ : \operatorname{Fin}n → D$ lifting $x,f(x),…,f^{n-1}(x)$.
+The mapping $i ↦ fⁱ(x)$ defines a [sequence](lists.sequences.md) of elements of
+$X$. By surjectivity of $h$ each $fⁱ(x)$ merely has a representative in $D$, so
+by [finite choice](univalent-combinatorics.finite-choice.md) there exists a
+[finite sequence](lists.finite-sequences.md) $y₋ : \operatorname{Fin}n → D$
+lifting $x,f(x),…,f^{n-1}(x)$.
 
 Now, the [pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
 applies to $\operatorname{Fin}n$, so there has to be $i < j$ in
