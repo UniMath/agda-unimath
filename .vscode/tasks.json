@@ -10,7 +10,7 @@
         "isDefault": true
       },
       "dependsOn": ["pre-commit", "link-check", "typecheck"],
-      "dependsOrder": "sequence"
+      "dependsOrder": "parallel"
     },
     {
       "label": "typecheck",
@@ -19,7 +19,12 @@
       "command": "make",
       "args": ["check"],
       "problemMatcher": [],
-      "group": { "kind": "build", "isDefault": true }
+      "group": { "kind": "build" },
+      "dependsOn": "pre-commit",
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
     },
     {
       "label": "pre-commit",
@@ -28,10 +33,11 @@
       "command": "pre-commit",
       "args": ["run", "--all-files"],
       "problemMatcher": [],
-      "group": {
-        "kind": "test"
-      },
-      "hide": true
+      "hide": true,
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
     },
     {
       "label": "link-check",
@@ -42,6 +48,10 @@
       "problemMatcher": [],
       "group": {
         "kind": "test"
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
       }
     },
     {
