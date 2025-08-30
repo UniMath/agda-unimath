@@ -8,6 +8,8 @@ module metric-spaces.subspaces-metric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.empty-subtypes
+open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.subtypes
@@ -49,6 +51,16 @@ module _
 
   subset-Metric-Space : UU (lsuc l ⊔ l1)
   subset-Metric-Space = subtype l (type-Metric-Space A)
+
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  empty-subset-Metric-Space : subset-Metric-Space lzero A
+  empty-subset-Metric-Space = empty-subtype lzero (type-Metric-Space A)
+
+  full-subset-Metric-Space : subset-Metric-Space lzero A
+  full-subset-Metric-Space = full-subtype lzero (type-Metric-Space A)
 ```
 
 ### Metric subspace of a metric space

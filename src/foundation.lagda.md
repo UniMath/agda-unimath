@@ -54,6 +54,7 @@ open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.cartesian-products-subtypes public
 open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
@@ -125,6 +126,7 @@ open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-products-pullbacks public
+open import foundation.dependent-products-subtypes public
 open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
@@ -158,6 +160,7 @@ open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
+open import foundation.empty-subtypes public
 open import foundation.empty-types public
 open import foundation.endomorphisms public
 open import foundation.epimorphisms public
@@ -168,6 +171,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equality-truncation-levels public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
@@ -203,6 +207,7 @@ open import foundation.fibers-of-maps public
 open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
+open import foundation.finitely-truncated-types public
 open import foundation.fixed-points-endofunctions public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
@@ -251,6 +256,7 @@ open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.inequality-booleans public
+open import foundation.inequality-truncation-levels public
 open import foundation.infinitely-coherent-equivalences public
 open import foundation.infinity-connected-maps public
 open import foundation.infinity-connected-types public
@@ -269,6 +275,7 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
 open import foundation.iterated-dependent-pair-types public
 open import foundation.iterated-dependent-product-types public
+open import foundation.iterated-successors-truncation-levels public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-families-of-maps public
 open import foundation.iterating-functions public
@@ -292,6 +299,7 @@ open import foundation.logical-equivalences public
 open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
+open import foundation.maximum-truncation-levels public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -453,6 +461,7 @@ open import foundation.transposition-identifications-along-sections public
 open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
+open import foundation.truncated-addition-truncation-levels public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
