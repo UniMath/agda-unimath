@@ -55,7 +55,6 @@ module _
         ( λ _ → equiv-explicit-implicit-Π))
       ( is-torsorial-Eq-Π)
 
-
   is-torsorial-Eq-implicit-Π' : is-torsorial (λ g → (x : A) → C x (g {x}))
   is-torsorial-Eq-implicit-Π' =
     is-contr-equiv

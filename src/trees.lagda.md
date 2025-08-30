@@ -45,6 +45,7 @@ open import trees.morphisms-enriched-directed-trees public
 open import trees.multiset-indexed-dependent-products-of-types public
 open import trees.multisets public
 open import trees.multivariable-polynomial-functors public
+open import trees.natural-transformations-polynomial-endofunctors public
 open import trees.planar-binary-trees public
 open import trees.plane-trees public
 open import trees.polynomial-endofunctors public

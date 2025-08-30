@@ -586,7 +586,6 @@ module _
         ap (g a') (tr-ap pr1 (λ x _ → pr2 x) p a)) ＝
     ap (tot g) {a , x} {a' , x'} p
   inv-compute-ap-tot' p = inv (compute-ap-tot' p)
-
 ```
 
 ### Computing the action on identifications of the functorial action of Σ
