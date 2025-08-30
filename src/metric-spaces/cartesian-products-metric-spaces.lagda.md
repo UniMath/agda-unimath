@@ -40,11 +40,11 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 ## Idea
 
 For any two [metric spaces](metric-spaces.metric-spaces.md) `X`, `Y`, there is a
-{{#concept "Cartesian product metric space" Agda=product-Metric-Space}} on
-`X × Y`. Pairs `(x₁ , y₁)` and `(x₂ , y₂)` are in a
-[`d`-neighborhood](metric-spaces.rational-neighborhoods.md) in the product
-structure if `x₁` and `x₂` are in a `d`-neighborhood and `y₁` and `y₂` are in a
-`d`-neighborhood.
+{{#concept "cartesian product metric space" Agda=product-Metric-Space}} `X × Y`.
+Pairs `(x₁ , y₁)` and `(x₂ , y₂)` are in a
+[`d`-neighborhood](metric-spaces.rational-neighborhood-relations.md) in the
+product structure if `x₁` and `x₂` are in a `d`-neighborhood and `y₁` and `y₂`
+are in a `d`-neighborhood.
 
 This metric is not canonical, but is consistent with the
 [dependent product of metric spaces](metric-spaces.dependent-products-metric-spaces.md).
