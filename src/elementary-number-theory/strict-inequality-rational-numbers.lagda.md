@@ -48,6 +48,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -93,7 +94,7 @@ opaque
   unfolding le-ℚ-Prop
 
   le-zero-one-ℚ : le-ℚ zero-ℚ one-ℚ
-  le-zero-one-ℚ = _
+  le-zero-one-ℚ = star
 ```
 
 ### Strict inequality on the rational numbers is decidable
