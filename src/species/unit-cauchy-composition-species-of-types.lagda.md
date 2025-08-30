@@ -1,4 +1,4 @@
-# The unit of Cauchy composition of types
+# The unit of Cauchy composition of species of types
 
 ```agda
 module species.unit-cauchy-composition-species-of-types where
@@ -17,7 +17,10 @@ open import species.species-of-types
 
 ## Idea
 
-The **unit** of Cauchy composition of species of types is the species
+The
+{{#concept "unit" Disambiguation="of Cauchy composition of species of types" Agda=unit-species-types}}
+of [Cauchy composition](species.cauchy-composition-species-of-types.md) of
+[species of types](species.species-of-types.md) is the species
 
 ```text
   X ↦ is-contr X.

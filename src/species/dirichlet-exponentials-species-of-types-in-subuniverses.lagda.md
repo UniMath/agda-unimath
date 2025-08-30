@@ -1,4 +1,4 @@
-# Dirichlet exponentials of species of types in a subuniverse
+# Dirichlet exponentials of species of types in subuniverses
 
 ```agda
 module species.dirichlet-exponentials-species-of-types-in-subuniverses where
@@ -37,16 +37,18 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The **Dirichlet exponential** of a species `S : P → Q` of types in subuniverse
-is defined by
+The
+{{#concept "Dirichlet exponential" Disambiguation="of species of types in subuniverses" Agda=dirichlet-exponential-species-subuniverse}}
+of a [species](species.species-of-types-in-subuniverses.md) `S : P → Q` of types
+in [subuniverses](foundation.subuniverses.md) is defined by
 
 ```text
   X ↦ Σ ((U , V , e) : Π-Decomposition-subuniverse P X),  Π (u : U) → S (V u).
 ```
 
-If `Q` is a global subuniverse, and if the previous definition is in `Q`, then
-the Dirichlet exponential is also a species of types in subuniverse from `P` to
-`Q`.
+If `Q` is a [global subuniverse](foundation.global-subuniverses.md), and if the
+previous definition is in `Q`, then the Dirichlet exponential is also a species
+of types in subuniverses from `P` to `Q`.
 
 ## Definition
 
@@ -54,7 +56,8 @@ the Dirichlet exponential is also a species of types in subuniverse from `P` to
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   where
 
   type-dirichlet-exponential-species-subuniverse :
@@ -73,9 +76,10 @@ module _
 
 ```agda
 is-closed-under-dirichlet-exponential-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
+  {α : Level → Level} {l1 l2 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α) →
   UUω
-is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
+is-closed-under-dirichlet-exponential-species-subuniverse {α} {l1} {l2} P Q =
   {l3 : Level}
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (X : type-subuniverse P) →
@@ -88,8 +92,9 @@ is-closed-under-dirichlet-exponential-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
+  (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
   where
 
   dirichlet-exponential-species-subuniverse :
@@ -106,18 +111,57 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
-  ( C2 :
+  {α : Level → Level} {l1 l2 l3 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
+  (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
+  (C2 :
     ( U : UU l1) →
     ( V : U → UU l1) →
     ( (u : U) → is-in-subuniverse P (V u)) →
     is-in-subuniverse P (Π U V) → is-in-subuniverse P U)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( X : type-subuniverse P)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (X : type-subuniverse P)
   where
 
-  private
+  equiv-dirichlet-exponential-Σ-extension-species-subuniverse :
+    Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+      ( dirichlet-exponential-species-subuniverse P Q C1 S)
+      ( inclusion-subuniverse P X) ≃
+    dirichlet-exponential-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( inclusion-subuniverse P X)
+  equiv-dirichlet-exponential-Σ-extension-species-subuniverse =
+    ( reassociate') ∘e
+    ( equiv-tot
+        ( λ d →
+          equiv-Σ-equiv-base
+            ( λ p →
+              ( u : indexing-type-Π-Decomposition d) →
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l3)
+                ( S (cotype-Π-Decomposition d u , p u)))
+            ( ( equiv-remove-redundant-prop
+                ( is-prop-type-Prop (P (indexing-type-Π-Decomposition d)))
+                ( λ pV →
+                  C2
+                    ( indexing-type-Π-Decomposition d)
+                    ( cotype-Π-Decomposition d)
+                    ( pV)
+                    ( tr
+                      ( is-in-subuniverse P)
+                      ( eq-equiv (matching-correspondence-Π-Decomposition d))
+                      ( pr2 X)))) ∘e
+              ( commutative-product) ∘e
+              ( equiv-remove-redundant-prop
+                ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
+                ( λ _ → pr2 X))))) ∘e
+      ( reassociate)
+    where
     reassociate :
       Σ-extension-species-subuniverse
         ( P)
@@ -161,73 +205,31 @@ module _
         ( λ (d , f) → (d , pr1 ∘ f , pr2 ∘ f))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-dirichlet-exponential-Σ-extension-species-subuniverse :
-    Σ-extension-species-subuniverse
-      ( P)
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
-      ( dirichlet-exponential-species-subuniverse P Q C1 S)
-      ( inclusion-subuniverse P X) ≃
-    dirichlet-exponential-species-types
-      ( Σ-extension-species-subuniverse
-        ( P)
-        ( subuniverse-global-subuniverse Q l3)
-        ( S))
-      ( inclusion-subuniverse P X)
-  equiv-dirichlet-exponential-Σ-extension-species-subuniverse =
-    ( reassociate') ∘e
-    ( ( equiv-tot
-        ( λ d →
-          equiv-Σ-equiv-base
-            ( λ p →
-              ( u : indexing-type-Π-Decomposition d) →
-              inclusion-subuniverse
-                ( subuniverse-global-subuniverse Q l3)
-                ( S (cotype-Π-Decomposition d u , p u)))
-            ( ( inv-equiv
-                ( equiv-add-redundant-prop
-                  ( is-prop-type-Prop
-                    ( P (indexing-type-Π-Decomposition d)))
-                  ( λ pV →
-                    C2
-                      ( indexing-type-Π-Decomposition d)
-                      ( cotype-Π-Decomposition d)
-                      ( pV)
-                      ( tr
-                        ( is-in-subuniverse P)
-                        ( eq-equiv (matching-correspondence-Π-Decomposition d))
-                        ( pr2 X))))) ∘e
-              ( ( commutative-product) ∘e
-                ( inv-equiv
-                  ( equiv-add-redundant-prop
-                    ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
-                    ( λ _ → pr2 X))))))) ∘e
-      ( reassociate))
 ```
 
 ### The Dirichlet exponential of the sum of a species is equivalent to the Dirichlet product of the exponential of the two species
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
-  ( C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
-  ( C2 : is-closed-under-coproduct-species-subuniverse P Q)
-  ( C3 : is-closed-under-dirichlet-product-species-subuniverse P Q)
-  ( C4 :
+  {α : Level → Level} {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
+  (C1 : is-closed-under-dirichlet-exponential-species-subuniverse P Q)
+  (C2 : is-closed-under-coproduct-species-subuniverse P Q)
+  (C3 : is-closed-under-dirichlet-product-species-subuniverse P Q)
+  (C4 :
     ( U : UU l1) →
     ( V : U → UU l1) →
     ( (u : U) → is-in-subuniverse P (V u)) →
       ( is-in-subuniverse P (Π U V)) →
       ( is-in-subuniverse P U))
-  ( C5 : is-closed-under-products-subuniverse P)
-  ( C6 :
+  (C5 : is-closed-under-products-subuniverse P)
+  (C6 :
     ( A B : UU l1) →
     is-in-subuniverse P (A × B) →
     is-in-subuniverse P A × is-in-subuniverse P B)
-  ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
-  ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-  ( X : type-subuniverse P)
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : type-subuniverse P)
   where
 
   equiv-dirichlet-exponential-sum-species-subuniverse :
@@ -242,90 +244,65 @@ module _
         ( dirichlet-exponential-species-subuniverse P Q C1 T)
         ( X))
   equiv-dirichlet-exponential-sum-species-subuniverse =
-    ( ( inv-equiv
-        ( equiv-Σ-extension-species-subuniverse
-          ( P)
-          ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-          ( dirichlet-product-species-subuniverse P Q C3
-            ( dirichlet-exponential-species-subuniverse P Q C1 S)
-            ( dirichlet-exponential-species-subuniverse P Q C1 T))
-          ( X))) ∘e
-      ( ( inv-equiv
-          ( equiv-dirichlet-product-Σ-extension-species-subuniverse
-            ( P)
-            ( Q)
-            ( C3)
-            ( C5)
-            ( dirichlet-exponential-species-subuniverse P Q C1 S)
-            ( dirichlet-exponential-species-subuniverse P Q C1 T)
-            ( inclusion-subuniverse P X))) ∘e
-        ( ( equiv-tot
-            ( λ d →
-              equiv-product
-                (( inv-equiv
-                  ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
-                    ( P)
-                    ( Q)
-                    ( C1)
-                    ( C4)
-                    ( S)
-                    ( left-summand-binary-product-Decomposition d ,
-                      pr1 (lemma-C6 d)))))
-                (( inv-equiv
-                  ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
-                    ( P)
-                    ( Q)
-                    ( C1)
-                    ( C4)
-                    ( T)
-                    ( right-summand-binary-product-Decomposition d ,
-                      pr2 (lemma-C6 d))))))) ∘e
-          ( ( equiv-dirichlet-exponential-sum-species-types
-              ( Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l3)
-                ( S))
-              ( Σ-extension-species-subuniverse
-                ( P)
-                ( subuniverse-global-subuniverse Q l4)
-                ( T))
-              ( pr1 X)) ∘e
-            ( ( equiv-tot
-                ( λ d →
-                  equiv-Π
-                    ( λ x →
-                      coproduct-species-types
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l3)
-                          ( S))
-                        ( Σ-extension-species-subuniverse
-                          ( P)
-                          ( subuniverse-global-subuniverse Q l4)
-                          ( T))
-                        ( cotype-Π-Decomposition d x))
-                    ( id-equiv)
-                    ( λ x →
-                      equiv-coproduct-Σ-extension-species-subuniverse
-                        ( P)
-                        ( Q)
-                        ( C2)
-                        ( S)
-                        ( T)
-                        ( cotype-Π-Decomposition d x)))) ∘e
-              ( ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
-                  ( P)
-                  ( Q)
-                  ( C1)
-                  ( C4)
-                  ( coproduct-species-subuniverse P Q C2 S T)
-                  ( X)) ∘e
-                ( equiv-Σ-extension-species-subuniverse
-                  ( P)
-                  ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-                  ( dirichlet-exponential-species-subuniverse P Q C1
-                    ( coproduct-species-subuniverse P Q C2 S T))
-                  ( X))))))))
+    ( inv-equiv
+      ( equiv-Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+        ( dirichlet-product-species-subuniverse P Q C3
+          ( dirichlet-exponential-species-subuniverse P Q C1 S)
+          ( dirichlet-exponential-species-subuniverse P Q C1 T))
+        ( X))) ∘e
+    ( inv-equiv
+      ( equiv-dirichlet-product-Σ-extension-species-subuniverse P Q C3 C5
+        ( dirichlet-exponential-species-subuniverse P Q C1 S)
+        ( dirichlet-exponential-species-subuniverse P Q C1 T)
+        ( inclusion-subuniverse P X))) ∘e
+    ( equiv-tot
+      ( λ d →
+        equiv-product
+          ( inv-equiv
+            ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
+              ( P)
+              ( Q)
+              ( C1)
+              ( C4)
+              ( S)
+              ( left-summand-binary-product-Decomposition d ,
+                pr1 (lemma-C6 d))))
+          ( inv-equiv
+            ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse
+              ( P)
+              ( Q)
+              ( C1)
+              ( C4)
+              ( T)
+              ( right-summand-binary-product-Decomposition d ,
+                pr2 (lemma-C6 d)))))) ∘e
+    ( equiv-dirichlet-exponential-sum-species-types
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l3)
+        ( S))
+      ( Σ-extension-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q l4)
+        ( T))
+      ( pr1 X)) ∘e
+    ( equiv-tot
+      ( λ d →
+        equiv-Π-equiv-family
+          ( λ x →
+            equiv-coproduct-Σ-extension-species-subuniverse P Q C2 S T
+              ( cotype-Π-Decomposition d x)))) ∘e
+    ( equiv-dirichlet-exponential-Σ-extension-species-subuniverse P Q C1 C4
+      ( coproduct-species-subuniverse P Q C2 S T)
+      ( X)) ∘e
+    ( equiv-Σ-extension-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+      ( dirichlet-exponential-species-subuniverse P Q C1
+        ( coproduct-species-subuniverse P Q C2 S T))
+      ( X))
     where
     lemma-C6 =
       λ d →

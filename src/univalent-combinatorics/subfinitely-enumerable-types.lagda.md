@@ -121,6 +121,12 @@ module _
   dedekind-finite-type-Subfinitely-Enumerable-Type =
     ( type-Subfinitely-Enumerable-Type X ,
       is-dedekind-finite-type-Subfinitely-Enumerable-Type)
+
+is-dedekind-finite-is-subfinitely-enumerable :
+  {l1 l2 : Level} {X : UU l1} →
+  is-subfinitely-enumerable l2 X → is-dedekind-finite X
+is-dedekind-finite-is-subfinitely-enumerable H =
+  is-dedekind-finite-type-Subfinitely-Enumerable-Type (_ , H)
 ```
 
 ### The Cantor–Schröder–Bernstein theorem for subfinitely enumerable types

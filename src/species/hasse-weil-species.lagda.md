@@ -21,13 +21,18 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Let `S` be a function from the type of commutative finite rings to the finite
-types that preserves cartesian products. The **Hasse-Weil species** is a species
-of finite inhabited types defined for any finite inhabited type `k` as
+Let `S` be a function from the type of
+[commutative finite rings](finite-algebra.commutative-finite-rings.md) to the
+[finite types](univalent-combinatorics.finite-types.md) that preserves cartesian
+products. The {{#concept "Hasse-Weil species"}} is a
+[species of finite inhabited types](species.species-of-finite-inhabited-types.md)
+defined for any
+[finite inhabited type](univalent-combinatorics.inhabited-finite-types.md) `k`
+as
 
 ```text
 Σ ( p : structure-semisimple-commutative-ring-Finite-Type k),
-  ( S (commutative-finite-ring-finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type k p))
+  ( S (commutative-finite-ring-finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type k p)).
 ```
 
 ## Definitions
@@ -54,13 +59,14 @@ module _
   hasse-weil-species-Inhabited-Finite-Type :
     species-Inhabited-Finite-Type l1 (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
   hasse-weil-species-Inhabited-Finite-Type ( k , (f , i)) =
-    Σ-Finite-Type {!!}
-        ( λ p →
-          S
-            ( commutative-finite-ring-Semisimple-Finite-Commutative-Ring
-              ( finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type
-                ( l3)
-                ( l4)
-                ( k , f)
-                ( p))))
+    Σ-Finite-Type
+      {!!}
+      ( λ p →
+        S
+          ( commutative-finite-ring-Semisimple-Finite-Commutative-Ring
+            ( finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type
+              ( l3)
+              ( l4)
+              ( k , f)
+              ( p))))
 ```

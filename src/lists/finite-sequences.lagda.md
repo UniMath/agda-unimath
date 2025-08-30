@@ -16,12 +16,13 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -179,4 +180,4 @@ module _
 
 ## See also
 
-- [Sequences](foundation.sequences.md)
+- [Sequences](lists.sequences.md)
