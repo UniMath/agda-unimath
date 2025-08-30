@@ -104,4 +104,4 @@ module _
 
 - [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at
   Wikipedia.
-- [A000217]https://oeis.org/A000217 in the OEIS
+- [A000217](https://oeis.org/A000217) in the OEIS

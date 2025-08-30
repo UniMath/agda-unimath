@@ -1,4 +1,4 @@
-# Geomeric sequences in semirings
+# Geometric sequences in semirings
 
 ```agda
 module ring-theory.geometric-sequences-semirings where
@@ -36,7 +36,8 @@ in a [semiring](ring-theory.semirings.md) is an
 [arithmetic sequence](group-theory.arithmetic-sequences-semigroups.md) in the
 semiring multiplicative [semigroup](group-theory.semigroups.md).
 
-These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the semiring.
+These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
+semiring.
 
 ## Definitions
 
@@ -131,7 +132,7 @@ module _
       standard-geometric-sequence-Semiring
 ```
 
-### The geometric sequences `n ↦ a * r ⁿ`
+### The geometric sequences `n ↦ a * rⁿ`
 
 ```agda
 module _
