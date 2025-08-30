@@ -604,9 +604,7 @@ is-trunc-map-precomp-Π-is-surjective :
 is-trunc-map-precomp-Π-is-surjective k H =
   is-trunc-map-precomp-Π-is-connected-map
     ( neg-one-𝕋)
-    ( succ-𝕋 k)
     ( k)
-    ( refl)
     ( is-neg-one-connected-map-is-surjective H)
 ```
 
