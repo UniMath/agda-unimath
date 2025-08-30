@@ -100,30 +100,27 @@ div-cross-mul-diff-common-divisor-mediant-fraction-ℤ :
     ( denominator-fraction-ℤ (mediant-fraction-ℤ x y))
     ( k) →
   div-ℤ k (cross-mul-diff-fraction-ℤ x y)
-div-cross-mul-diff-common-divisor-mediant-fraction-ℤ x y k (div-N , div-D) =
-  let
-    (nx , dx , px) = x
-    (ny , dy , py) = y
-  in
-    inv-tr
-      ( div-ℤ k)
-      ( cross-mul-diff-left-mediant-fraction-ℤ x y)
-      ( div-add-ℤ
+div-cross-mul-diff-common-divisor-mediant-fraction-ℤ
+  x@(nx , dx , _) y@(ny , dy , _) k (div-N , div-D) =
+  inv-tr
+    ( div-ℤ k)
+    ( cross-mul-diff-left-mediant-fraction-ℤ x y)
+    ( div-add-ℤ
+      ( k)
+      ( (nx +ℤ ny) *ℤ dx)
+      ( neg-ℤ (nx *ℤ (dx +ℤ dy)))
+      ( inv-tr
+        ( div-ℤ k)
+        ( commutative-mul-ℤ (nx +ℤ ny) dx)
+        ( div-mul-ℤ dx k (nx +ℤ ny) div-N))
+      ( div-neg-ℤ
         ( k)
-        ( (nx +ℤ ny) *ℤ dx)
-        ( neg-ℤ (nx *ℤ (dx +ℤ dy)))
-        ( inv-tr
-          ( div-ℤ k)
-          ( commutative-mul-ℤ (nx +ℤ ny) dx)
-          ( div-mul-ℤ dx k (nx +ℤ ny) div-N))
-        ( div-neg-ℤ
+        ( nx *ℤ (dx +ℤ dy))
+        ( div-mul-ℤ
+          ( nx)
           ( k)
-          ( nx *ℤ (dx +ℤ dy))
-          ( div-mul-ℤ
-            ( nx)
-            ( k)
-            ( dx +ℤ dy)
-            ( div-D))))
+          ( dx +ℤ dy)
+          ( div-D))))
 ```
 
 ### If the cross-multiplication difference of two fractions is 1 their mediant integer fraction is reduced
