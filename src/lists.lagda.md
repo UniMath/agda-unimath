@@ -17,6 +17,7 @@ open import lists.functoriality-tuples public
 open import lists.functoriality-tuples-finite-sequences public
 open import lists.lists public
 open import lists.lists-discrete-types public
+open import lists.partial-sequences public
 open import lists.permutation-lists public
 open import lists.permutation-tuples public
 open import lists.predicates-on-lists public

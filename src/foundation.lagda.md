@@ -338,7 +338,6 @@ open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
-open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-cosplit-maps public
