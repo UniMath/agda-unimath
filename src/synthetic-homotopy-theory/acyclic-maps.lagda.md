@@ -22,6 +22,7 @@ open import foundation.epimorphisms
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.surjective-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -125,6 +126,29 @@ module _
             ( suspension (fiber f b))
             ( inv-equiv (equiv-fiber-codiagonal-map-suspension-fiber f b))
             ( ac b)))
+```
+
+### Acyclic maps are surjective
+
+Hence, epimorphisms are surjective.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-surjective-is-acyclic-map : is-acyclic-map f → is-surjective f
+    is-surjective-is-acyclic-map ac x =
+      is-inhabited-is-acyclic
+        ( fiber f x)
+        ( ac x)
+
+    is-surjective-is-epimorphism : is-epimorphism f → is-surjective f
+    is-surjective-is-epimorphism epi x =
+      is-inhabited-is-acyclic
+        ( fiber f x)
+        ( is-acyclic-map-is-epimorphism f epi x)
 ```
 
 ### A type is acyclic if and only if its terminal map is an acyclic map

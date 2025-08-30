@@ -203,7 +203,7 @@ pr1 (extensionality-2-Element-Type X Y) = equiv-eq-2-Element-Type X Y
 pr2 (extensionality-2-Element-Type X Y) = is-equiv-equiv-eq-2-Element-Type X Y
 ```
 
-### Characterization the identifications of `Fin 2` with a `2`-element type `X`
+### Characterizing the identifications of `Fin 2` with a `2`-element type `X`
 
 #### Evaluating an equivalence and an automorphism at `0 : Fin 2`
 

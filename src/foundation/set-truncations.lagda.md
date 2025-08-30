@@ -567,3 +567,18 @@ module _
   triangle-distributive-trunc-product-Set =
     pr2 (center distributive-trunc-product-Set)
 ```
+
+### `X` is empty iff its set truncation is empty
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  is-empty-set-truncation-is-empty : is-empty (type-trunc-Set X) → is-empty X
+  is-empty-set-truncation-is-empty p x = p (unit-trunc-Set x)
+
+  set-truncation-is-empty-is-empty : is-empty X → is-empty (type-trunc-Set X)
+  set-truncation-is-empty-is-empty p x =
+    apply-universal-property-trunc-Set empty-Set x p
+```
