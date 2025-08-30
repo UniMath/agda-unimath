@@ -36,6 +36,10 @@ The
 operation extends the binary operation on a [monoid](group-theory.monoids.md)
 `M` to any [finite sequence](lists.finite-sequences.md) of elements of `M`.
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in monoids](linear-algebra.finite-sequences-in-monoids.md)
+despite the use of multiplicative terminology for monoids in general.
+
 ## Definition
 
 ```agda

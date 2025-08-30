@@ -23,6 +23,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-coproduct-types
@@ -33,6 +34,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
 open import univalent-combinatorics.coproduct-types
@@ -55,6 +57,11 @@ extends the binary operation on a
 elements of `M` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative monoids](linear-algebra.finite-sequences-in-commutative-monoids.md)
+despite the use of multiplicative terminology for commutative monoids in
+general.
+
 ## Sums over counted types
 
 ### Definition
@@ -68,6 +75,38 @@ sum-count-Commutative-Monoid M A (n , Fin-n≃A) f =
 ```
 
 ### Properties
+
+#### Sums for counts in a commutative monoid equal sums in the corresponding commutative semigroup
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
+  (|A| : is-inhabited A)
+  where
+
+  abstract
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid :
+      (cA : count A) (f : A → type-Commutative-Monoid M) →
+      sum-count-Commutative-Monoid M A cA f ＝
+      sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Commutative-Monoid M)
+        ( A)
+        ( |A|)
+        ( cA)
+        ( f)
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid cA@(zero-ℕ , _) _
+      =
+        ex-falso
+          ( is-nonempty-is-inhabited
+            ( |A|)
+            ( is-empty-is-zero-number-of-elements-count cA refl))
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid
+      cA@(succ-ℕ n , Fin-sn≃A) f =
+        eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( f ∘ map-equiv Fin-sn≃A)
+```
 
 #### Sums for a counted type are homotopy invariant
 
@@ -93,42 +132,32 @@ module _
   where
 
   abstract
-    eq-sum-count-equiv-Commutative-Monoid :
-      (n : ℕ) → (equiv1 equiv2 : Fin n ≃ A) →
-      (f : A → type-Commutative-Monoid M) →
-      sum-count-Commutative-Monoid M A (n , equiv1) f ＝
-      sum-count-Commutative-Monoid M A (n , equiv2) f
-    eq-sum-count-equiv-Commutative-Monoid n equiv1 equiv2 f =
-      equational-reasoning
-      sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv1)
-      ＝
-        sum-fin-sequence-type-Commutative-Monoid
-          ( M)
-          ( n)
-          ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
-        by
-          preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
-            ( M)
-            ( n)
-            ( inv-equiv equiv1 ∘e equiv2)
-            ( f ∘ map-equiv equiv1)
-      ＝ sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv2)
-        by
-          ap
-            ( λ g →
-              sum-fin-sequence-type-Commutative-Monoid
-                ( M)
-                ( n)
-                ( f ∘ (g ∘ map-equiv equiv2)))
-            ( eq-htpy (is-section-map-inv-equiv equiv1))
-
     eq-sum-count-Commutative-Monoid :
       (f : A → type-Commutative-Monoid M) (c1 c2 : count A) →
       sum-count-Commutative-Monoid M A c1 f ＝
       sum-count-Commutative-Monoid M A c2 f
-    eq-sum-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
+    eq-sum-count-Commutative-Monoid f c1@(zero-ℕ , _) c2@(_ , e2)
       with double-counting c1 c2
-    ... | refl = eq-sum-count-equiv-Commutative-Monoid n e1 e2 f
+    ... | refl = refl
+    eq-sum-count-Commutative-Monoid f c1@(succ-ℕ n , e1) c2@(_ , e2)
+      with double-counting c1 c2
+    ... | refl =
+      eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+        ( M)
+        ( n)
+        ( f ∘ map-equiv e1) ∙
+      eq-sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Commutative-Monoid M)
+        ( A)
+        ( unit-trunc-Prop (map-equiv e1 (inr star)))
+        ( f)
+        ( c1)
+        ( c2) ∙
+      inv
+        ( eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( f ∘ map-equiv e2))
 ```
 
 #### Sums of counted families indexed by equivalent types are equal
