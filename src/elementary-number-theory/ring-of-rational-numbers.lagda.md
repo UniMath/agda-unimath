@@ -10,8 +10,12 @@ module elementary-number-theory.ring-of-rational-numbers where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.integral-domains
 
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.equality-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.positive-integers
@@ -21,11 +25,13 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import group-theory.groups
 open import group-theory.semigroups
 
 open import ring-theory.homomorphisms-rings
@@ -71,6 +77,28 @@ pr2 ring-ℚ = has-mul-abelian-group-add-ℚ
 commutative-ring-ℚ : Commutative-Ring lzero
 pr1 commutative-ring-ℚ = ring-ℚ
 pr2 commutative-ring-ℚ = commutative-mul-ℚ
+```
+
+### The ring of rational numbers is an integral domain
+
+```agda
+abstract
+  cancellation-property-commutative-ring-ℚ :
+    cancellation-property-Commutative-Ring commutative-ring-ℚ
+  cancellation-property-commutative-ring-ℚ x x≠0 {y} {z} xy=xz =
+    rec-coproduct
+      ( λ x=0 → ex-falso (x≠0 x=0))
+      ( eq-is-unit-right-div-Group group-add-ℚ)
+      ( decide-is-zero-factor-is-zero-mul-ℚ x (y -ℚ z)
+        ( left-distributive-mul-diff-ℚ x y z ∙
+          ap-diff-ℚ xy=xz refl ∙
+          right-inverse-law-add-ℚ _))
+
+integral-domain-ℚ : Integral-Domain lzero
+integral-domain-ℚ =
+  ( commutative-ring-ℚ ,
+    cancellation-property-commutative-ring-ℚ ,
+    λ ())
 ```
 
 ### The inclusion of integers in the rationals is the initial ring homomorphism

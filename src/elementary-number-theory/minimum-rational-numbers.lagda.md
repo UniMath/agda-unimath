@@ -12,8 +12,11 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 
 open import order-theory.decidable-total-orders
@@ -37,6 +40,9 @@ the
 ```agda
 min-ℚ : ℚ → ℚ → ℚ
 min-ℚ = min-Decidable-Total-Order ℚ-Decidable-Total-Order
+
+ap-min-ℚ : {x x' : ℚ} → x ＝ x' → {y y' : ℚ} → y ＝ y' → min-ℚ x y ＝ min-ℚ x' y'
+ap-min-ℚ = ap-binary min-ℚ
 ```
 
 ## Properties
@@ -113,6 +119,16 @@ abstract
       ( right-leq-left-min-Decidable-Total-Order
           ℚ-Decidable-Total-Order x y y≤x)
       ( z<y)
+
+  leq-min-leq-both-ℚ : (z x y : ℚ) → leq-ℚ z x → leq-ℚ z y → leq-ℚ z (min-ℚ x y)
+  leq-min-leq-both-ℚ z x y z≤x z≤y =
+    forward-implication
+      ( min-is-greatest-binary-lower-bound-Decidable-Total-Order
+        ( ℚ-Decidable-Total-Order)
+        ( x)
+        ( y)
+        ( z))
+      ( z≤x , z≤y)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`

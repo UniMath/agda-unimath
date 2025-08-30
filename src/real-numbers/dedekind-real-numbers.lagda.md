@@ -265,6 +265,12 @@ module _
           ( is-disjoint-cut-ℝ x p
               ( H , leq-upper-cut-ℝ x q p I H')))
       ( decide-le-leq-ℚ p q)
+
+  leq-lower-upper-cut-ℝ :
+    is-in-lower-cut-ℝ x p →
+    is-in-upper-cut-ℝ x q →
+    leq-ℚ p q
+  leq-lower-upper-cut-ℝ p<x x<q = leq-le-ℚ (le-lower-upper-cut-ℝ p<x x<q)
 ```
 
 ### Characterization of each cut by the other

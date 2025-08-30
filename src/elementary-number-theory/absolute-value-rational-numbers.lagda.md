@@ -10,10 +10,12 @@ module elementary-number-theory.absolute-value-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -106,6 +108,11 @@ opaque
           ( leq-zero-is-nonnegative-ℚ q nonneg-q)
           ( neg-leq-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q))))
 
+  rational-abs-rational-ℚ⁰⁺ :
+    (q : ℚ⁰⁺) → rational-abs-ℚ (rational-ℚ⁰⁺ q) ＝ rational-ℚ⁰⁺ q
+  rational-abs-rational-ℚ⁰⁺ q =
+    ap rational-ℚ⁰⁺ (abs-rational-ℚ⁰⁺ q)
+
   rational-abs-zero-leq-ℚ : (q : ℚ) → leq-ℚ zero-ℚ q → rational-abs-ℚ q ＝ q
   rational-abs-zero-leq-ℚ q 0≤q =
     ap rational-ℚ⁰⁺ (abs-rational-ℚ⁰⁺ (q , is-nonnegative-leq-zero-ℚ q 0≤q))
@@ -122,6 +129,12 @@ opaque
         ( neg-ℚ q)
         ( neg-leq-ℚ q zero-ℚ q≤0)
         ( q≤0))
+
+abstract
+  rational-abs-rational-ℚ⁺ :
+    (q : ℚ⁺) → rational-abs-ℚ (rational-ℚ⁺ q) ＝ rational-ℚ⁺ q
+  rational-abs-rational-ℚ⁺ q =
+    rational-abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
 ```
 
 ### The absolute value of the negation of `q` is the absolute value of `q`
@@ -132,6 +145,9 @@ abstract
   abs-neg-ℚ q =
     eq-ℚ⁰⁺
       ( ap (max-ℚ (neg-ℚ q)) (neg-neg-ℚ q) ∙ commutative-max-ℚ _ _)
+
+  rational-abs-neg-ℚ : (q : ℚ) → rational-abs-ℚ (neg-ℚ q) ＝ rational-abs-ℚ q
+  rational-abs-neg-ℚ q = ap rational-ℚ⁰⁺ (abs-neg-ℚ q)
 ```
 
 ### `q` is less than or equal to `abs-ℚ q`
@@ -208,6 +224,14 @@ abstract
           { rational-abs-ℚ q}
           ( neg-leq-abs-ℚ p)
           ( neg-leq-abs-ℚ q)))
+
+  triangle-inequality-abs-diff-ℚ :
+    (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ (p -ℚ q)) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
+  triangle-inequality-abs-diff-ℚ p q =
+    tr
+      ( leq-ℚ (rational-abs-ℚ (p -ℚ q)))
+      ( ap-add-ℚ refl (rational-abs-neg-ℚ q))
+      ( triangle-inequality-abs-ℚ p (neg-ℚ q))
 ```
 
 ### `|ab| = |a||b|`
@@ -285,4 +309,8 @@ opaque
                   is-nonnegative-leq-zero-ℚ (neg-ℚ p) (neg-leq-ℚ p zero-ℚ p≤0)))
         ＝ rational-abs-ℚ p *ℚ rational-abs-ℚ q
           by ap (_*ℚ rational-abs-ℚ q) (inv (rational-abs-leq-zero-ℚ p p≤0)))
+
+  rational-abs-mul-ℚ :
+    (p q : ℚ) → rational-abs-ℚ (p *ℚ q) ＝ rational-abs-ℚ p *ℚ rational-abs-ℚ q
+  rational-abs-mul-ℚ p q = ap rational-ℚ⁰⁺ (abs-mul-ℚ p q)
 ```

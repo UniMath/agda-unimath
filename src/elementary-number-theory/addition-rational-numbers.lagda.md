@@ -11,6 +11,7 @@ module elementary-number-theory.addition-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -302,6 +303,11 @@ abstract
         ( add-in-fraction-ℤ x y)
     ＝ rational-ℤ (x +ℤ y)
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
+
+  add-rational-ℕ :
+    (m n : ℕ) → rational-ℕ m +ℚ rational-ℕ n ＝ rational-ℕ (m +ℕ n)
+  add-rational-ℕ m n =
+    add-rational-ℤ _ _ ∙ ap rational-ℤ (add-int-ℕ m n)
 ```
 
 ### The rational successor of an integer is the successor of the integer
@@ -316,9 +322,9 @@ abstract
 
 ```agda
 abstract
-  succ-rational-int-ℕ :
-    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
-  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
+  succ-rational-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℕ n) ＝ rational-ℕ (succ-ℕ n)
+  succ-rational-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also
