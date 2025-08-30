@@ -171,10 +171,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-greatest-binary-lower-bound-Poset
 
-  has-greatest-binary-lower-bound-Poset-Prop : Prop (l1 ⊔ l2)
-  pr1 has-greatest-binary-lower-bound-Poset-Prop =
+  has-greatest-binary-lower-bound-prop-Poset : Prop (l1 ⊔ l2)
+  pr1 has-greatest-binary-lower-bound-prop-Poset =
     has-greatest-binary-lower-bound-Poset
-  pr2 has-greatest-binary-lower-bound-Poset-Prop =
+  pr2 has-greatest-binary-lower-bound-prop-Poset =
     is-prop-has-greatest-binary-lower-bound-Poset
 
 module _
