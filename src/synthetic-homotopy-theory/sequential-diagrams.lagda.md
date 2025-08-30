@@ -19,8 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **sequential diagram** `(A, a)` is a [sequence](foundation.sequences.md) of
-types `A : ℕ → 𝒰` over the natural numbers, equipped with a family of maps
+A **sequential diagram** `(A, a)` is a [sequence](lists.sequences.md) of types
+`A : ℕ → 𝒰` over the natural numbers, equipped with a family of maps
 `aₙ : Aₙ → Aₙ₊₁` for all `n`.
 
 They can be represented by diagrams
