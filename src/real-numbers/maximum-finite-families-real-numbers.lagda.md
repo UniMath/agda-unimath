@@ -31,6 +31,7 @@ open import logic.functoriality-existential-quantification
 
 open import order-theory.join-semilattices
 open import order-theory.joins-finite-families-join-semilattices
+open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
 open import real-numbers.addition-real-numbers
@@ -310,4 +311,25 @@ module _
         ( x)
         ( max-finite-family-ℝ I x)
         ( is-supremum-max-finite-family-ℝ)
+```
+
+### The maximum of a finite family is its least upper bound
+
+```agda
+module _
+  {l1 l2 : Level} (I : Inhabited-Finite-Type l1)
+  (x : type-Inhabited-Finite-Type I → ℝ l2)
+  where
+
+  abstract
+    is-least-upper-bound-max-finite-family-ℝ :
+      is-least-upper-bound-family-of-elements-Large-Poset
+        ( ℝ-Large-Poset)
+        ( x)
+        ( max-finite-family-ℝ I x)
+    is-least-upper-bound-max-finite-family-ℝ =
+      is-least-upper-bound-is-supremum-family-ℝ
+        ( x)
+        ( max-finite-family-ℝ I x)
+        ( is-supremum-max-finite-family-ℝ I x)
 ```
