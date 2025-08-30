@@ -54,6 +54,16 @@ module _
         ( equiv-explicit-implicit-Π)
         ( λ _ → equiv-explicit-implicit-Π))
       ( is-torsorial-Eq-Π)
+
+
+  is-torsorial-Eq-implicit-Π' : is-torsorial (λ g → (x : A) → C x (g {x}))
+  is-torsorial-Eq-implicit-Π' =
+    is-contr-equiv
+      ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+      ( equiv-Σ-equiv-base
+        ( λ g → (x : A) → C x (g x))
+        ( equiv-explicit-implicit-Π))
+      ( is-torsorial-Eq-Π)
 ```
 
 ### Extensionality

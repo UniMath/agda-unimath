@@ -55,8 +55,7 @@ Any family of maps induces a map on the total spaces.
 
 ```agda
   tot : Σ A B → Σ A C
-  pr1 (tot t) = pr1 t
-  pr2 (tot t) = f (pr1 t) (pr2 t)
+  tot t = (pr1 t , f (pr1 t) (pr2 t))
 ```
 
 ### Any map `f : A → B` induces a map `Σ A (C ∘ f) → Σ B C`
@@ -67,8 +66,7 @@ module _
   where
 
   map-Σ-map-base : Σ A (λ x → C (f x)) → Σ B C
-  pr1 (map-Σ-map-base s) = f (pr1 s)
-  pr2 (map-Σ-map-base s) = pr2 s
+  map-Σ-map-base s = (f (pr1 s) , pr2 s)
 ```
 
 ### The functorial action of dependent pair types, and its defining homotopy
@@ -79,10 +77,8 @@ module _
   (D : B → UU l4)
   where
 
-  map-Σ :
-    (f : A → B) (g : (x : A) → C x → D (f x)) → Σ A C → Σ B D
-  pr1 (map-Σ f g t) = f (pr1 t)
-  pr2 (map-Σ f g t) = g (pr1 t) (pr2 t)
+  map-Σ : (f : A → B) (g : (x : A) → C x → D (f x)) → Σ A C → Σ B D
+  map-Σ f g t = (f (pr1 t) , g (pr1 t) (pr2 t))
 
   triangle-map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) →
@@ -123,7 +119,7 @@ tot-htpy H (pair x y) = eq-pair-eq-fiber (H x y)
 tot-id :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   (tot (λ x (y : B x) → y)) ~ id
-tot-id B (pair x y) = refl
+tot-id B p = refl
 ```
 
 ### The map `tot` preserves composition
@@ -134,7 +130,7 @@ preserves-comp-tot :
   {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
   (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
   tot (λ x → (g x) ∘ (f x)) ~ ((tot g) ∘ (tot f))
-preserves-comp-tot f g (pair x y) = refl
+preserves-comp-tot f g p = refl
 ```
 
 ### The fibers of `tot`
@@ -414,7 +410,8 @@ module _
 equiv-Σ-equiv-base :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →
   Σ A (C ∘ map-equiv e) ≃ Σ B C
-pr1 (equiv-Σ-equiv-base C (pair f is-equiv-f)) = map-Σ-map-base f C
+pr1 (equiv-Σ-equiv-base C (pair f is-equiv-f)) =
+  map-Σ-map-base f C
 pr2 (equiv-Σ-equiv-base C (pair f is-equiv-f)) =
   is-equiv-map-Σ-map-base f C is-equiv-f
 ```
@@ -477,13 +474,13 @@ module _
 
   fiber-triangle :
     (x : X) → fiber f x → fiber g x
-  pr1 (fiber-triangle .(f a) (pair a refl)) = h a
-  pr2 (fiber-triangle .(f a) (pair a refl)) = inv (H a)
+  pr1 (fiber-triangle .(f a) (a , refl)) = h a
+  pr2 (fiber-triangle .(f a) (a , refl)) = inv (H a)
 
   square-tot-fiber-triangle :
     ( h ∘ map-equiv-total-fiber f) ~
     ( map-equiv-total-fiber g ∘ tot fiber-triangle)
-  square-tot-fiber-triangle (pair .(f a) (pair a refl)) = refl
+  square-tot-fiber-triangle (.(f a) , a , refl) = refl
 ```
 
 ### In a commuting triangle, the top map is an equivalence if and only if it induces an equivalence on fibers
@@ -560,10 +557,36 @@ module _
   (g : (a : A) → X a → Y a) {a a' : A} {x : X a} {x' : X a'}
   where
 
-  compute-ap-tot :
+  coh-ap-tot :
     pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
-    tot (λ p q → inv (preserves-tr g p x) ∙ ap (g a') q) ∘ pair-eq-Σ
-  compute-ap-tot refl = refl
+    tot (λ p q → inv-preserves-tr g p x ∙ ap (g a') q) ∘ pair-eq-Σ
+  coh-ap-tot refl = refl
+
+  compute-ap-tot :
+    (p : a ＝ a') →
+    (q : dependent-identification X p x x') →
+    ap (tot g) {a , x} {a' , x'} (eq-pair-Σ p q) ＝
+    eq-pair-Σ p (inv-preserves-tr g p x ∙ ap (g a') q)
+  compute-ap-tot refl refl = refl
+
+  compute-ap-tot' :
+    (p : (a , x) ＝ (a' , x')) →
+    ap (tot g) {a , x} {a' , x'} p ＝
+    eq-pair-Σ
+      ( ap pr1 p)
+      ( inv-preserves-tr g (ap pr1 p) x ∙
+        ap (g a') (tr-ap pr1 (λ x _ → pr2 x) p a))
+  compute-ap-tot' refl = refl
+
+  inv-compute-ap-tot' :
+    (p : (a , x) ＝ (a' , x')) →
+    eq-pair-Σ
+      ( ap pr1 p)
+      ( inv-preserves-tr g (ap pr1 p) x ∙
+        ap (g a') (tr-ap pr1 (λ x _ → pr2 x) p a)) ＝
+    ap (tot g) {a , x} {a' , x'} p
+  inv-compute-ap-tot' p = inv (compute-ap-tot' p)
+
 ```
 
 ### Computing the action on identifications of the functorial action of Σ

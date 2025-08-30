@@ -31,7 +31,8 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
-`A`, the {{#concept "polynomial endofunctor"}} `𝑃 A B` is defined by
+`A`, the {{#concept "polynomial endofunctor" Agda=polynomial-endofunctor}}
+`𝑃 A B` is defined by
 
 ```text
   X ↦ Σ (x : A), (B x → X)
@@ -43,13 +44,38 @@ Polynomial endofunctors are important in the study of
 
 ## Definitions
 
+### The type of polynomial endofunctors
+
+```agda
+polynomial-endofunctor : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+polynomial-endofunctor l1 l2 = Σ (UU l1) (λ A → (A → UU l2))
+
+module _
+  {l1 l2 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  where
+
+  shapes-polynomial-endofunctor : UU l1
+  shapes-polynomial-endofunctor = pr1 𝑃
+
+  positions-polynomial-endofunctor : shapes-polynomial-endofunctor → UU l2
+  positions-polynomial-endofunctor = pr2 𝑃
+
+make-polynomial-endofunctor :
+  {l1 l2 : Level} {A : UU l1} → (A → UU l2) → polynomial-endofunctor l1 l2
+make-polynomial-endofunctor B = (_ , B)
+```
+
 ### The action on types of a polynomial endofunctor
 
 ```agda
-type-polynomial-endofunctor :
+type-polynomial-endofunctor' :
   {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (X : UU l3) →
   UU (l1 ⊔ l2 ⊔ l3)
-type-polynomial-endofunctor A B X = Σ A (λ x → B x → X)
+type-polynomial-endofunctor' A B X = Σ A (λ x → B x → X)
+
+type-polynomial-endofunctor :
+  {l1 l2 l3 : Level} → polynomial-endofunctor l1 l2 → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
+type-polynomial-endofunctor (A , B) = type-polynomial-endofunctor' A B
 ```
 
 ### The identity type of `type-polynomial-endofunctor`
@@ -60,23 +86,23 @@ module _
   where
 
   Eq-type-polynomial-endofunctor :
-    (x y : type-polynomial-endofunctor A B X) → UU (l1 ⊔ l2 ⊔ l3)
+    (x y : type-polynomial-endofunctor' A B X) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-type-polynomial-endofunctor x y =
     Σ (pr1 x ＝ pr1 y) (λ p → coherence-triangle-maps (pr2 x) (pr2 y) (tr B p))
 
   refl-Eq-type-polynomial-endofunctor :
-    (x : type-polynomial-endofunctor A B X) →
+    (x : type-polynomial-endofunctor' A B X) →
     Eq-type-polynomial-endofunctor x x
   refl-Eq-type-polynomial-endofunctor (x , α) = (refl , refl-htpy)
 
   Eq-eq-type-polynomial-endofunctor :
-    (x y : type-polynomial-endofunctor A B X) →
+    (x y : type-polynomial-endofunctor' A B X) →
     x ＝ y → Eq-type-polynomial-endofunctor x y
   Eq-eq-type-polynomial-endofunctor x .x refl =
     refl-Eq-type-polynomial-endofunctor x
 
   is-torsorial-Eq-type-polynomial-endofunctor :
-    (x : type-polynomial-endofunctor A B X) →
+    (x : type-polynomial-endofunctor' A B X) →
     is-torsorial (Eq-type-polynomial-endofunctor x)
   is-torsorial-Eq-type-polynomial-endofunctor (x , α) =
     is-torsorial-Eq-structure
@@ -85,7 +111,7 @@ module _
       ( is-torsorial-htpy α)
 
   is-equiv-Eq-eq-type-polynomial-endofunctor :
-    (x y : type-polynomial-endofunctor A B X) →
+    (x y : type-polynomial-endofunctor' A B X) →
     is-equiv (Eq-eq-type-polynomial-endofunctor x y)
   is-equiv-Eq-eq-type-polynomial-endofunctor x =
     fundamental-theorem-id
@@ -93,13 +119,13 @@ module _
       ( Eq-eq-type-polynomial-endofunctor x)
 
   eq-Eq-type-polynomial-endofunctor :
-    (x y : type-polynomial-endofunctor A B X) →
+    (x y : type-polynomial-endofunctor' A B X) →
     Eq-type-polynomial-endofunctor x y → x ＝ y
   eq-Eq-type-polynomial-endofunctor x y =
     map-inv-is-equiv (is-equiv-Eq-eq-type-polynomial-endofunctor x y)
 
   is-retraction-eq-Eq-type-polynomial-endofunctor :
-    (x y : type-polynomial-endofunctor A B X) →
+    (x y : type-polynomial-endofunctor' A B X) →
     is-retraction
       ( Eq-eq-type-polynomial-endofunctor x y)
       ( eq-Eq-type-polynomial-endofunctor x y)
@@ -108,7 +134,7 @@ module _
       ( is-equiv-Eq-eq-type-polynomial-endofunctor x y)
 
   coh-refl-eq-Eq-type-polynomial-endofunctor :
-    (x : type-polynomial-endofunctor A B X) →
+    (x : type-polynomial-endofunctor' A B X) →
     ( eq-Eq-type-polynomial-endofunctor x x
       ( refl-Eq-type-polynomial-endofunctor x)) ＝ refl
   coh-refl-eq-Eq-type-polynomial-endofunctor x =
@@ -118,33 +144,52 @@ module _
 ### The action on maps of the polynomial endofunctor
 
 ```agda
-map-polynomial-endofunctor :
+map-polynomial-endofunctor' :
   {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {X : UU l3} {Y : UU l4}
   (f : X → Y) →
-  type-polynomial-endofunctor A B X → type-polynomial-endofunctor A B Y
-map-polynomial-endofunctor A B f = tot (λ x α → f ∘ α)
+  type-polynomial-endofunctor' A B X → type-polynomial-endofunctor' A B Y
+map-polynomial-endofunctor' A B f = tot (λ x α → f ∘ α)
+
+map-polynomial-endofunctor :
+  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {X : UU l3} {Y : UU l4} (f : X → Y) →
+  type-polynomial-endofunctor 𝑃 X → type-polynomial-endofunctor 𝑃 Y
+map-polynomial-endofunctor (A , B) = map-polynomial-endofunctor' A B
 ```
 
 ### The action on homotopies of the polynomial endofunctor
 
 ```agda
-htpy-polynomial-endofunctor :
+htpy-polynomial-endofunctor' :
   {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {X : UU l3} {Y : UU l4}
   {f g : X → Y} →
-  f ~ g → map-polynomial-endofunctor A B f ~ map-polynomial-endofunctor A B g
-htpy-polynomial-endofunctor A B {f = f} {g} H (x , α) =
+  f ~ g → map-polynomial-endofunctor' A B f ~ map-polynomial-endofunctor' A B g
+htpy-polynomial-endofunctor' A B {f = f} {g} H (x , α) =
   eq-Eq-type-polynomial-endofunctor
-    ( map-polynomial-endofunctor A B f (x , α))
-    ( map-polynomial-endofunctor A B g (x , α))
+    ( map-polynomial-endofunctor' A B f (x , α))
+    ( map-polynomial-endofunctor' A B g (x , α))
     ( refl , H ·r α)
 
-coh-refl-htpy-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {X : UU l3} {Y : UU l4}
-  (f : X → Y) →
-  htpy-polynomial-endofunctor A B (refl-htpy {f = f}) ~ refl-htpy
-coh-refl-htpy-polynomial-endofunctor A B f (x , α) =
+htpy-polynomial-endofunctor :
+  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {X : UU l3} {Y : UU l4} {f g : X → Y} →
+  f ~ g → map-polynomial-endofunctor 𝑃 f ~ map-polynomial-endofunctor 𝑃 g
+htpy-polynomial-endofunctor (A , B) = htpy-polynomial-endofunctor' A B
+
+coh-refl-htpy-polynomial-endofunctor' :
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  {X : UU l3} {Y : UU l4} (f : X → Y) →
+  htpy-polynomial-endofunctor' A B (refl-htpy' f) ~ refl-htpy
+coh-refl-htpy-polynomial-endofunctor' A B f (x , α) =
   coh-refl-eq-Eq-type-polynomial-endofunctor
-    ( map-polynomial-endofunctor A B f (x , α))
+    ( map-polynomial-endofunctor' A B f (x , α))
+
+coh-refl-htpy-polynomial-endofunctor :
+  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {X : UU l3} {Y : UU l4} (f : X → Y) →
+  htpy-polynomial-endofunctor 𝑃 (refl-htpy' f) ~ refl-htpy
+coh-refl-htpy-polynomial-endofunctor (A , B) =
+  coh-refl-htpy-polynomial-endofunctor' A B
 ```
 
 ## See also
