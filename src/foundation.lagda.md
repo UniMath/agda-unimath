@@ -54,6 +54,7 @@ open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.cartesian-products-subtypes public
 open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
@@ -125,6 +126,7 @@ open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-products-pullbacks public
+open import foundation.dependent-products-subtypes public
 open import foundation.dependent-sequences public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
@@ -158,6 +160,7 @@ open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
+open import foundation.empty-subtypes public
 open import foundation.empty-types public
 open import foundation.endomorphisms public
 open import foundation.epimorphisms public
