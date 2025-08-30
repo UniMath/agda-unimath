@@ -194,6 +194,31 @@ abstract
                 ( inv (is-section-map-inv-equiv Fin-sn≃I i)))))
 ```
 
+### The join of an inhabited finite family of elements is its join over any count for that family
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Order-Theoretic-Join-Semilattice l1 l2)
+  (I : Inhabited-Finite-Type l3) (cI : count (type-Inhabited-Finite-Type I))
+  (f : type-Inhabited-Finite-Type I → type-Order-Theoretic-Join-Semilattice X)
+  where
+
+  abstract
+    eq-join-inhabited-finite-family-join-counted-family-Order-Theoretic-Join-Semilattice :
+      join-inhabited-finite-family-Order-Theoretic-Join-Semilattice X I f ＝
+      join-counted-family-type-Order-Theoretic-Join-Semilattice
+        ( X)
+        ( is-inhabited-type-Inhabited-Finite-Type I)
+        ( cI)
+        ( f)
+    eq-join-inhabited-finite-family-join-counted-family-Order-Theoretic-Join-Semilattice =
+      eq-sum-finite-sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
+        ( I)
+        ( cI)
+        ( f)
+```
+
 ### The join of an inhabited finite family of elements is its least upper bound
 
 ```agda
@@ -223,8 +248,8 @@ module _
               ( is-least-upper-bound-family-of-elements-Poset
                 ( poset-Order-Theoretic-Join-Semilattice X)
                 ( f))
-              ( eq-sum-finite-sum-count-Commutative-Semigroup
-                ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
+              ( eq-join-inhabited-finite-family-join-counted-family-Order-Theoretic-Join-Semilattice
+                ( X)
                 ( I)
                 ( cI)
                 ( f))

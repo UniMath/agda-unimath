@@ -14,12 +14,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.transport-along-identifications
 open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -42,10 +44,9 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.suprema-families-real-numbers
 
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.counting
-open import foundation.empty-types
 ```
 
 </details>
@@ -80,16 +81,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (I : UU l1) (|I| : is-inhabited I) (cI : count I)
+  {l1 l2 : Level} {I : UU l1} (|I| : is-inhabited I) (cI : count I)
   (x : I → ℝ l2)
   where
 
   max-counted-family-ℝ : ℝ l2
   max-counted-family-ℝ =
     join-counted-family-type-Order-Theoretic-Join-Semilattice
-      ( ℝ-Order-Theoretic-Join-Semilattice l)
-      ( I)
-
+      ( ℝ-Order-Theoretic-Join-Semilattice l2)
+      ( |I|)
+      ( cI)
+      ( x)
 ```
 
 ### The maximum of an inhabited finite family of real numbers
@@ -206,6 +208,58 @@ abstract
     is-approximated-below-max-fin-sequence-ℝ n x
 ```
 
+### The maximum of a counted family is its supremum
+
+```agda
+abstract
+  is-upper-bound-max-counted-family-ℝ :
+    {l1 l2 : Level} {I : UU l1} (|I| : is-inhabited I) (cI : count I) →
+    (x : I → ℝ l2) →
+    is-upper-bound-family-of-elements-Large-Poset
+      ( ℝ-Large-Poset)
+      ( x)
+      ( max-counted-family-ℝ |I| cI x)
+  is-upper-bound-max-counted-family-ℝ |I| cI@(zero-ℕ , _) _ =
+    ex-falso
+      ( is-nonempty-is-inhabited
+        ( |I|)
+        ( is-empty-is-zero-number-of-elements-count cI refl))
+  is-upper-bound-max-counted-family-ℝ |I| cI@(succ-ℕ n , Fin-sn≃I) x i =
+    tr
+      ( λ j → leq-ℝ (x j) (max-counted-family-ℝ |I| cI x))
+      ( is-section-map-inv-equiv Fin-sn≃I i)
+      ( is-upper-bound-max-fin-sequence-ℝ
+        ( n)
+        ( x ∘ map-equiv Fin-sn≃I)
+        ( map-inv-equiv Fin-sn≃I i))
+
+  is-approximated-below-max-counted-family-ℝ :
+    {l1 l2 : Level} {I : UU l1} (|I| : is-inhabited I) (cI : count I) →
+    (x : I → ℝ l2) →
+    is-approximated-below-family-ℝ
+      ( x)
+      ( max-counted-family-ℝ |I| cI x)
+  is-approximated-below-max-counted-family-ℝ |I| cI@(zero-ℕ , _) _ =
+    ex-falso
+      ( is-nonempty-is-inhabited
+        ( |I|)
+        ( is-empty-is-zero-number-of-elements-count cI refl))
+  is-approximated-below-max-counted-family-ℝ |I| cI@(succ-ℕ n , Fin-sn≃I) x ε =
+    map-exists _
+      ( map-equiv Fin-sn≃I)
+      ( λ i → id)
+      ( is-approximated-below-max-fin-sequence-ℝ n (x ∘ map-equiv Fin-sn≃I) ε)
+
+  is-supremum-max-counted-family-ℝ :
+    {l1 l2 : Level} {I : UU l1} (|I| : is-inhabited I) (cI : count I) →
+    (x : I → ℝ l2) →
+    is-supremum-family-ℝ x (max-counted-family-ℝ |I| cI x)
+  pr1 (is-supremum-max-counted-family-ℝ |I| cI x) =
+    is-upper-bound-max-counted-family-ℝ |I| cI x
+  pr2 (is-supremum-max-counted-family-ℝ |I| cI x) =
+    is-approximated-below-max-counted-family-ℝ |I| cI x
+```
+
 ### The maximum of a finite family is its supremum
 
 ```agda
@@ -215,14 +269,45 @@ module _
   where
 
   abstract
+    is-supremum-max-finite-family-ℝ :
+      is-supremum-family-ℝ x (max-finite-family-ℝ I x)
+    is-supremum-max-finite-family-ℝ =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-supremum-prop-family-ℝ x (max-finite-family-ℝ I x))
+      in do
+        cI ← is-finite-Inhabited-Finite-Type I
+        inv-tr
+          ( is-supremum-family-ℝ x)
+          ( eq-join-inhabited-finite-family-join-counted-family-Order-Theoretic-Join-Semilattice
+            ( ℝ-Order-Theoretic-Join-Semilattice l2)
+            ( I)
+            ( cI)
+            ( x))
+          ( is-supremum-max-counted-family-ℝ
+            ( is-inhabited-type-Inhabited-Finite-Type I)
+            ( cI)
+            ( x))
+
     is-upper-bound-max-finite-family-ℝ :
       is-upper-bound-family-of-elements-Large-Poset
         ( ℝ-Large-Poset)
         ( x)
         ( max-finite-family-ℝ I x)
-    is-upper-bound-max-finite-family-ℝ i =
-      let
-        open do-syntax-trunc-Prop (leq-ℝ-Prop (x i) (max-finite-family-ℝ I x))
-      in do
-        {!   !}
+    is-upper-bound-max-finite-family-ℝ =
+      is-upper-bound-is-supremum-family-ℝ
+        ( x)
+        ( max-finite-family-ℝ I x)
+        ( is-supremum-max-finite-family-ℝ)
+
+    is-approximated-below-max-finite-family-ℝ :
+      is-approximated-below-family-ℝ
+        ( x)
+        ( max-finite-family-ℝ I x)
+    is-approximated-below-max-finite-family-ℝ =
+      is-approximated-below-is-supremum-family-ℝ
+        ( x)
+        ( max-finite-family-ℝ I x)
+        ( is-supremum-max-finite-family-ℝ)
 ```
