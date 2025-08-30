@@ -2,24 +2,46 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "check",
-      "detail": "Typecheck the entire library.",
+      "label": "quality-test",
+      "detail": "Run GitHub tests",
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "dependsOn": ["pre-commit", "link-check", "typecheck"],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "typecheck",
+      "detail": "Typecheck the library",
       "type": "shell",
       "command": "make",
       "args": ["check"],
       "problemMatcher": [],
-      "group": "build"
+      "group": { "kind": "build", "isDefault": true }
     },
     {
       "label": "pre-commit",
-      "detail": "Quality assurance for the library.",
+      "detail": "Check and fix code conventions",
       "type": "shell",
-      "command": "make",
-      "args": ["pre-commit"],
+      "command": "pre-commit",
+      "args": ["run", "--all-files"],
       "problemMatcher": [],
       "group": {
-        "kind": "build",
-        "isDefault": true
+        "kind": "test"
+      },
+      "hide": true
+    },
+    {
+      "label": "link-check",
+      "detail": "Check website links and bibtex references",
+      "type": "shell",
+      "command": "make",
+      "args": ["SKIPAGDA=1", "website"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test"
       }
     },
     {
@@ -48,10 +70,11 @@
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
       "problemMatcher": [],
       "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
-      "dependsOrder": "sequence"
+      "dependsOrder": "sequence",
+      "hide": true
     },
     {
-      "label": "remove-unused-imports-current-file",
+      "label": "unused-imports-here",
       "detail": "Remove unused imports in current file",
       "type": "shell",
       "command": "${workspaceFolder}/scripts/remove_unused_imports.py",
