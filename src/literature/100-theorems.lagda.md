@@ -106,6 +106,17 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
+### 68. Sum of an arithmetic series {#68}
+
+**Author:** [malarbol](http://www.github.com/malarbol)
+
+```agda
+open import elementary-number-theory.triangular-numbers using
+  ( compute-triangular-number-ℕ)
+open import ring-theory.arithmetic-series-semirings using
+  ( compute-sum-add-mul-nat-Semiring)
+```
+
 ### 69. Greatest common divisor algorithm {#69}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
