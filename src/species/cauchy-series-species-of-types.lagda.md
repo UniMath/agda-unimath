@@ -23,7 +23,7 @@ open import species.species-of-types
 ## Idea
 
 In classical mathematics, the _Cauchy series_ of a
-[species](species.finite-species.md) (of
+[species](species.species-of-finite-types.md) (of
 [finite types](univalent-combinatorics.finite-types.md)) `S` is the formal
 series in `x`:
 

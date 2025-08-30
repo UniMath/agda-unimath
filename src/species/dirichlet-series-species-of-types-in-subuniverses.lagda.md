@@ -20,8 +20,8 @@ open import species.species-of-types-in-subuniverses
 ## Idea
 
 In classical mathematics, the _Dirichlet series_ of a
-[species of finite inhabited types](species.of-finite-inhabited-types.md) `T` is
-the formal series in `s` :
+[species of finite inhabited types](species.species-of-finite-inhabited-types.md)
+`T` is the formal series in `s` :
 
 ```text
   Σ (n : ℕ∖{0}), (|T({1,...,n})| n^(-s) / n!)
