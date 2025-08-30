@@ -27,7 +27,7 @@ Let `S` be a function from the type of
 products. The {{#concept "Hasse-Weil species"}} is a
 [species of finite inhabited types](species.species-of-finite-inhabited-types.md)
 defined for any
-[finite inhabited type](univalent-combinatorics.finite-inhabited-types.md) `k`
+[finite inhabited type](univalent-combinatorics.inhabited-finite-types.md) `k`
 as
 
 ```text
