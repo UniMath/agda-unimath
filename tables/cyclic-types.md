@@ -1,7 +1,5 @@
 | Concept                                           | File                                                                                                                                            |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Acyclic maps                                      | [`synthetic-homotopy-theory.acyclic-maps`](synthetic-homotopy-theory.acyclic-maps.md)                                                           |
-| Acyclic types                                     | [`synthetic-homotopy-theory.acyclic-types`](synthetic-homotopy-theory.acyclic-types.md)                                                         |
 | Acyclic undirected graphs                         | [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md)                                                           |
 | Bracelets                                         | [`univalent-combinatorics.bracelets`](univalent-combinatorics.bracelets.md)                                                                     |
 | The category of cyclic rings                      | [`ring-theory.category-of-cyclic-rings`](ring-theory.category-of-cyclic-rings.md)                                                               |
@@ -15,7 +13,6 @@
 | Euler's totient function                          | [`elementary-number-theory.eulers-totient-function`](elementary-number-theory.eulers-totient-function.md)                                       |
 | Finitely cyclic maps                              | [`elementary-number-theory.finitely-cyclic-maps`](elementary-number-theory.finitely-cyclic-maps.md)                                             |
 | Generating elements of groups                     | [`group-theory.generating-elements-groups`](group-theory.generating-elements-groups.md)                                                         |
-| Hatcher's acyclic type                            | [`synthetic-homotopy-theory.hatchers-acyclic-type`](synthetic-homotopy-theory.hatchers-acyclic-type.md)                                         |
 | Homomorphisms of cyclic rings                     | [`ring-theory.homomorphisms-cyclic-rings`](ring-theory.homomorphisms-cyclic-rings.md)                                                           |
 | Infinite cyclic types                             | [`synthetic-homotopy-theory.infinite-cyclic-types`](synthetic-homotopy-theory.infinite-cyclic-types.md)                                         |
 | Multiplicative units in the standard cyclic rings | [`elementary-number-theory.multiplicative-units-standard-cyclic-rings`](elementary-number-theory.multiplicative-units-standard-cyclic-rings.md) |

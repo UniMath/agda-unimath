@@ -1,12 +1,17 @@
 # Suspensions of types
 
 ```agda
+{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
+
 module synthetic-homotopy-theory.suspensions-of-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
@@ -17,6 +22,8 @@ open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.double-negation
+open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -26,13 +33,17 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra
+open import foundation.inhabited-types
+open import foundation.mere-equality
+open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.set-truncations
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
+open import foundation.transport-along-equivalences
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -40,6 +51,12 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.coproduct-types
+open import foundation-core.negation
+open import foundation-core.sets
+
+open import logic.propositionally-decidable-types
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -49,6 +66,12 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
+
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -64,7 +87,7 @@ type `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of the
 ```
 
 Suspensions play an important role in synthetic homotopy theory. For example,
-they star in the freudenthal suspension theorem and give us a definition of
+they star in the Freudenthal suspension theorem and give us a definition of
 [the spheres](synthetic-homotopy-theory.spheres.md).
 
 ## Definitions
@@ -91,6 +114,10 @@ meridian-suspension :
   north-suspension {X = X} ＝ south-suspension {X = X}
 meridian-suspension {X = X} =
   glue-pushout (terminal-map X) (terminal-map X)
+
+is-inhabited-suspension :
+  {l : Level} (X : UU l) → is-inhabited (suspension X)
+is-inhabited-suspension X = unit-trunc-Prop north-suspension
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
@@ -552,6 +579,100 @@ module _
     is-surjective-map-surjection-bool-suspension
 ```
 
+This provides a
+[finite enumeration](univalent-combinatorics.finitely-enumerable-types.md) of
+`Σ X` by the canonical equivalence `bool ≃ Fin 2`.
+
+```agda
+  finite-enumeration-suspension : finite-enumeration (suspension X)
+  pr1 finite-enumeration-suspension = 2
+  pr2 finite-enumeration-suspension =
+    comp-surjection
+      ( surjection-bool-suspension)
+      ( surjection-equiv equiv-bool-Fin-2)
+```
+
+### The suspension of an empty type is the booleans
+
+```agda
+module _
+  {l : Level} (X : UU l) (emp : is-empty X)
+  where
+
+  suspension-structure-empty-bool : suspension-structure X bool
+  pr1 suspension-structure-empty-bool = true
+  pr1 (pr2 suspension-structure-empty-bool) = false
+  pr2 (pr2 suspension-structure-empty-bool) = ex-falso ∘ emp
+
+  inv-map-surjection-bool-suspension : suspension X → bool
+  inv-map-surjection-bool-suspension =
+    cogap-suspension suspension-structure-empty-bool
+
+  compute-true-suspension-empty-bool :
+    inv-map-surjection-bool-suspension north-suspension ＝ true
+  compute-true-suspension-empty-bool =
+    compute-north-cogap-suspension suspension-structure-empty-bool
+
+  compute-false-suspension-empty-bool :
+    inv-map-surjection-bool-suspension south-suspension ＝ false
+  compute-false-suspension-empty-bool =
+    compute-south-cogap-suspension suspension-structure-empty-bool
+
+  compute-north-suspension-empty-bool :
+    ( map-surjection-bool-suspension {X = X} ∘
+      inv-map-surjection-bool-suspension)
+        north-suspension
+    ＝ north-suspension
+  compute-north-suspension-empty-bool =
+    ap map-surjection-bool-suspension compute-true-suspension-empty-bool
+
+  compute-south-suspension-empty-bool :
+    ( map-surjection-bool-suspension {X = X} ∘
+      inv-map-surjection-bool-suspension)
+        south-suspension
+    ＝ south-suspension
+  compute-south-suspension-empty-bool =
+    ap map-surjection-bool-suspension compute-false-suspension-empty-bool
+
+  dependent-suspension-sutructure-surjection-bool-suspension :
+    dependent-suspension-structure
+      (λ z →
+        (map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+        (z)
+        ＝ z)
+      (suspension-structure-suspension X)
+  pr1 dependent-suspension-sutructure-surjection-bool-suspension =
+    compute-north-suspension-empty-bool
+  pr1 (pr2 dependent-suspension-sutructure-surjection-bool-suspension) =
+    compute-south-suspension-empty-bool
+  pr2 (pr2 dependent-suspension-sutructure-surjection-bool-suspension) x =
+    ex-falso (emp x)
+
+  is-equiv-map-surjection-bool-suspension :
+    is-equiv map-surjection-bool-suspension
+  pr1 (pr1 is-equiv-map-surjection-bool-suspension) =
+    inv-map-surjection-bool-suspension
+  pr2 (pr1 is-equiv-map-surjection-bool-suspension) =
+    dependent-cogap-suspension
+      ( λ z →
+        ( map-surjection-bool-suspension ∘ inv-map-surjection-bool-suspension)
+        ( z)
+        ＝ z)
+      ( dependent-suspension-sutructure-surjection-bool-suspension)
+  pr1 (pr2 is-equiv-map-surjection-bool-suspension) =
+    inv-map-surjection-bool-suspension
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) true =
+    compute-true-suspension-empty-bool
+  pr2 (pr2 is-equiv-map-surjection-bool-suspension) false =
+    compute-false-suspension-empty-bool
+
+  equiv-map-surjection-bool-suspension :
+    bool ≃ suspension X
+  pr1 equiv-map-surjection-bool-suspension = map-surjection-bool-suspension
+  pr2 equiv-map-surjection-bool-suspension =
+    is-equiv-map-surjection-bool-suspension
+```
+
 ### The suspension of a contractible type is contractible
 
 ```agda
@@ -644,3 +765,116 @@ module _
               ( Y))
           ( is-equiv-id))
 ```
+
+### `Σ X` is 0-connected iff `X` is inhabited
+
+Note that `Σ empty ＝ bool` is _not_ `0`-connected.
+
+The forward direction is the subtle one. When `Σ X` is 0-connected, then in
+particular we [merely](foundation.mere-equality.md) have `p ∈ north ＝ south`;
+such identifications are inductively generated by `X`.
+
+```agda
+suspension-is-0-connected-is-inhabited :
+  {l : Level} (X : UU l) → is-inhabited X → is-0-connected (suspension X)
+suspension-is-0-connected-is-inhabited X x =
+  is-connected-succ-suspension-is-connected
+    ( is-neg-one-connected-is-inhabited X x)
+
+is-inhabited-suspension-is-0-connected :
+  {l : Level} (X : UU l) → is-0-connected (suspension X) → is-inhabited X
+is-inhabited-suspension-is-0-connected X ΣX-conn =
+  rec-trunc-Prop (is-inhabited-Prop X) (λ h → {!   !}) p
+    where
+    p : mere-eq (north-suspension {X = X}) (south-suspension {X = X})
+    p = mere-eq-is-0-connected ΣX-conn north-suspension south-suspension
+```
+
+In fact, the following are logically equivalent:
+
+- `X` is [inhabited or empty](logic.propositionally-decidable-types.md)
+- `trunc-Set (Σ X)` is [finite](univalent-combinatorics.finite-types.md)
+
+**Proof.**
+
+(->): When `X` is empty, its suspension is the set `Fin 2`. When `X` is
+inhabited, its suspension is 0-connected, and 0-truncated 0-connected types are
+contractible and hence are `Fin 1`.
+
+(<-): Such a cardinality can only be 1 or 2 - suspensions are inhabited, say, by
+`north`, and the cardinality of a type finitely enumerated by `Fin 2 ＝ bool`
+can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)` is 0-connected
+and hence contractible, well, this is the definition of 0-connectedness of
+`Σ X`, and therefore `X` is inhabited. When it's 2, i.e. when there are no
+identifications `north ＝ south` in `Σ X`, then `X` better have been empty. ∎
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  trunc-suspension-is-contractible-is-pointed :
+    X → is-contr (type-trunc-Set (suspension X))
+  trunc-suspension-is-contractible-is-pointed x =
+    suspension-is-0-connected-is-inhabited X (unit-trunc-Prop x)
+
+  trunc-suspension-is-contractible-is-inhabited :
+    is-inhabited X → is-contr (type-trunc-Set (suspension X))
+  trunc-suspension-is-contractible-is-inhabited x =
+    rec-trunc-Prop
+      ( is-contr-Prop (type-trunc-Set (suspension X)))
+      ( trunc-suspension-is-contractible-is-pointed)
+      ( x)
+
+  is-finite-suspension-is-inhabited-or-empty :
+    is-inhabited-or-empty X → is-finite (type-trunc-Set (suspension X))
+  is-finite-suspension-is-inhabited-or-empty (inl x) =
+    is-finite-is-contr (trunc-suspension-is-contractible-is-inhabited x)
+  is-finite-suspension-is-inhabited-or-empty (inr x) =
+    is-finite-equiv
+      ( equiv-unit-trunc-set
+          ( suspension X ,
+            is-set-equiv
+              ( bool)
+              ( inv-equiv
+                ( equiv-map-surjection-bool-suspension X x))
+              ( is-set-bool)) ∘e
+        equiv-map-surjection-bool-suspension X x)
+      ( is-finite-bool)
+
+  is-empty-trunc-suspension-has-two-elements :
+    has-two-elements (type-trunc-Set (suspension X)) → is-empty X
+  is-empty-trunc-suspension-has-two-elements p x =
+    intro-double-negation
+      ( ap unit-trunc-Set (meridian-suspension x))
+      ( λ _ → is-not-one-two-ℕ (eq-cardinality p (unit-trunc-Prop eq)))
+        where
+        eq : Fin 1 ≃ type-trunc-Set (suspension X)
+        pr1 eq (inr star) = unit-trunc-Set north-suspension
+        pr1 (pr1 (pr2 eq)) _ = inr star
+        pr2 (pr1 (pr2 eq)) _ =
+          eq-is-contr (trunc-suspension-is-contractible-is-pointed x)
+        pr1 (pr2 (pr2 eq)) _ = inr star
+        pr2 (pr2 (pr2 eq)) (inr star) = refl
+
+  is-inhabited-or-empty-is-finite-suspension :
+    is-finite (type-trunc-Set (suspension X)) → is-inhabited-or-empty X
+  is-inhabited-or-empty-is-finite-suspension p with number-of-elements-is-finite p
+  ... | 0 =
+    ex-falso
+      ( is-nonempty-is-inhabited
+        ( is-inhabited-suspension X)
+        ( is-empty-set-truncation-is-empty
+          ( is-empty-is-zero-number-of-elements-is-finite p {! refl  !})))
+  ... | 1 =
+    inl
+      ( is-inhabited-suspension-is-0-connected
+        ( X)
+        ( is-contr-is-one-number-of-elements-is-finite p {! refl  !}))
+  ... | 2 = inr (is-empty-trunc-suspension-has-two-elements {!   !})
+  ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
+```
+
+## See also
+
+- [Suspensions of propositions](synthetic-homotopy-theory.suspensions-of-propositions.md)

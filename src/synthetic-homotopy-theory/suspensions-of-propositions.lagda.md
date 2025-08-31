@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.suspensions-of-propositions where
 ```agda
 open import foundation.booleans
 open import foundation.contractible-types
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -19,6 +20,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.set-truncations
+open import foundation.propositional-truncations
 open import foundation.subsingleton-induction
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
@@ -485,6 +488,120 @@ module _
       ( comp-surjection
         ( surjection-bool-suspension)
         ( surjection-equiv equiv-bool-Fin-2))
+```
+
+### Suspensions _almost_ commute with propositional truncations
+
+The problem is that empty types suspend to a two-element set. This is easily
+fixed by adjusting the truncation level, and we do have that
+`Σ (trunc-Prop X) = trunc-Set (Σ X)`.
+
+```agda
+module _
+  {l : Level} (X : UU l)
+  where
+
+  suspension-structure-suspension-trunc-prop-trunc-set-suspension :
+    suspension-structure (type-trunc-Prop X) (type-trunc-Set (suspension X))
+  pr1 suspension-structure-suspension-trunc-prop-trunc-set-suspension =
+    unit-trunc-Set north-suspension
+  pr1 (pr2 suspension-structure-suspension-trunc-prop-trunc-set-suspension) =
+    unit-trunc-Set south-suspension
+  pr2 (pr2 suspension-structure-suspension-trunc-prop-trunc-set-suspension) =
+    rec-trunc-Prop
+      ( Id-Prop
+        ( trunc-Set (suspension X))
+        ( unit-trunc-Set north-suspension)
+        ( unit-trunc-Set south-suspension))
+      ( λ x → ap unit-trunc-Set (meridian-suspension x))
+
+  suspension-trunc-prop-trunc-set-suspension :
+    suspension (type-trunc-Prop X) → type-trunc-Set (suspension X)
+  suspension-trunc-prop-trunc-set-suspension =
+    cogap-suspension
+      ( suspension-structure-suspension-trunc-prop-trunc-set-suspension)
+
+  suspension-structure-trunc-set-suspension-suspension-trunc-prop :
+    suspension-structure X (suspension (type-trunc-Prop X))
+  pr1 suspension-structure-trunc-set-suspension-suspension-trunc-prop =
+    north-suspension
+  pr1 (pr2 suspension-structure-trunc-set-suspension-suspension-trunc-prop) =
+    south-suspension
+  pr2 (pr2 suspension-structure-trunc-set-suspension-suspension-trunc-prop) x =
+    meridian-suspension (unit-trunc-Prop x)
+
+  trunc-set-suspension-suspension-trunc-prop :
+    type-trunc-Set (suspension X) → suspension (type-trunc-Prop X)
+  trunc-set-suspension-suspension-trunc-prop =
+    map-universal-property-trunc-Set
+      ( suspension-set-Prop (trunc-Prop X))
+      ( cogap-suspension
+          suspension-structure-trunc-set-suspension-suspension-trunc-prop)
+
+  dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension :
+    dependent-suspension-structure
+      ( λ z →
+        ( trunc-set-suspension-suspension-trunc-prop ∘
+          suspension-trunc-prop-trunc-set-suspension)
+        ( z)
+        ＝ z)
+      ( suspension-structure-suspension (type-trunc-Prop X))
+  pr1 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension =
+    ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
+  pr1 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) =
+    ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
+  pr2 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) _ =
+    eq-is-prop
+      ( is-set-suspension-Prop
+        ( trunc-Prop X)
+        ( ( trunc-set-suspension-suspension-trunc-prop ∘
+            suspension-trunc-prop-trunc-set-suspension)
+          ( south-suspension))
+        ( south-suspension))
+
+  suspension-structure-eq-trunc-set-suspension :
+    (x : type-trunc-Set (suspension X)) →
+    suspension-structure
+      (X)
+      ((suspension-trunc-prop-trunc-set-suspension ∘
+        trunc-set-suspension-suspension-trunc-prop)
+        x ＝
+      x)
+  pr1 (suspension-structure-eq-trunc-set-suspension x) = {!   !}
+  pr1 (pr2 (suspension-structure-eq-trunc-set-suspension x)) = {!   !}
+  pr2 (pr2 (suspension-structure-eq-trunc-set-suspension x)) _ =
+    eq-is-prop
+      ( is-set-type-trunc-Set
+        ( ( suspension-trunc-prop-trunc-set-suspension ∘
+            trunc-set-suspension-suspension-trunc-prop)
+          ( x))
+        ( x))
+
+  is-equiv-suspension-trunc-prop-trunc-set-suspension :
+    is-equiv suspension-trunc-prop-trunc-set-suspension
+  pr1 (pr1 is-equiv-suspension-trunc-prop-trunc-set-suspension) =
+    trunc-set-suspension-suspension-trunc-prop
+  pr2 (pr1 is-equiv-suspension-trunc-prop-trunc-set-suspension) x =
+    apply-universal-property-trunc-Set
+      ( set-Prop
+        ( Id-Prop
+          ( trunc-Set (suspension X))
+          ( ( suspension-trunc-prop-trunc-set-suspension ∘
+              trunc-set-suspension-suspension-trunc-prop)
+            x)
+          ( x)))
+        ( x)
+        ( cogap-suspension (suspension-structure-eq-trunc-set-suspension x))
+  pr1 (pr2 is-equiv-suspension-trunc-prop-trunc-set-suspension) =
+    trunc-set-suspension-suspension-trunc-prop
+  pr2 (pr2 is-equiv-suspension-trunc-prop-trunc-set-suspension) =
+    dependent-cogap-suspension
+      ( λ z →
+        ( trunc-set-suspension-suspension-trunc-prop ∘
+          suspension-trunc-prop-trunc-set-suspension)
+        ( z)
+        ＝ z)
+      ( dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension)
 ```
 
 ## See also

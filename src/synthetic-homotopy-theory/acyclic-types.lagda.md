@@ -7,8 +7,11 @@ module synthetic-homotopy-theory.acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.equivalences
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.unit-type
@@ -80,7 +83,16 @@ is-acyclic-unit = is-acyclic-is-contr unit is-contr-unit
 
 ### Acyclic types are inhabited
 
-> TODO
+**Proof.** `Σ X` is 0-connected if and only if `X` is inhabited, and contractible
+types are of course 0-connected. ∎
+
+```agda
+is-inhabited-is-acyclic : {l : Level} (A : UU l) → is-acyclic A → is-inhabited A
+is-inhabited-is-acyclic A ac =
+  is-inhabited-suspension-is-0-connected
+    ( A)
+    ( is-0-connected-is-contr (suspension A) ac)
+```
 
 ## See also
 
