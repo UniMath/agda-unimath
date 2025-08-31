@@ -204,3 +204,5 @@ coh-refl-htpy-polynomial-endofunctor (A , B) =
   In other words, given a [species of types](species.species-of-types.md) `S`,
   the shapes are types equipped with `S`-structure, and the positions are
   points.
+- Via [type duality](foundation.type-duality.md), polynomial endofunctors are
+  classified by maps of types.

@@ -89,6 +89,31 @@ module _
       ( λ a → precomp (positions-hom-polynomial-endofunctor a) X)
 ```
 
+### The identity morphism
+
+```agda
+id-hom-polynomial-endofunctor :
+  {l1 l2 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2) →
+  hom-polynomial-endofunctor 𝑃 𝑃
+id-hom-polynomial-endofunctor 𝑃 = (id , (λ a → id))
+```
+
+### Composition of morphisms
+
+```agda
+comp-hom-polynomial-endofunctor :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (𝑅 : polynomial-endofunctor l5 l6) →
+  hom-polynomial-endofunctor 𝑄 𝑅 →
+  hom-polynomial-endofunctor 𝑃 𝑄 →
+  hom-polynomial-endofunctor 𝑃 𝑅
+comp-hom-polynomial-endofunctor 𝑃 𝑄 𝑅 (β₀ , β₁) (α₀ , α₁) =
+  ( β₀ ∘ α₀ , (λ a → α₁ a ∘ β₁ (α₀ a)))
+```
+
 ## Properties
 
 ### Characterizing equality of morphisms
@@ -217,8 +242,7 @@ module _
   where
 
   shapes-natural-transformation-polynomial-endofunctor :
-    shapes-polynomial-endofunctor 𝑃 →
-    shapes-polynomial-endofunctor 𝑄
+    shapes-polynomial-endofunctor 𝑃 → shapes-polynomial-endofunctor 𝑄
   shapes-natural-transformation-polynomial-endofunctor a =
     pr1 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
 
