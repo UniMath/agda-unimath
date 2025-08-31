@@ -79,7 +79,10 @@ Two real numbers `x` and `y` are in an `ε`-neighborhood of each other if and
 only if their distance is at most `ε`.
 
 ```agda
-abstract
+opaque
+  unfolding neighborhood-prop-ℝ
+  unfolding leq-ℝ-Prop
+
   diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     neighborhood-ℝ l d x y →

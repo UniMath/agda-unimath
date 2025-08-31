@@ -1,6 +1,8 @@
 # Inequality on the real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.inequality-real-numbers where
 ```
 
@@ -66,8 +68,9 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  leq-ℝ-Prop : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop = leq-lower-ℝ-Prop (lower-real-ℝ x) (lower-real-ℝ y)
+  opaque
+    leq-ℝ-Prop : Prop (l1 ⊔ l2)
+    leq-ℝ-Prop = leq-lower-ℝ-Prop (lower-real-ℝ x) (lower-real-ℝ y)
 
   leq-ℝ : UU (l1 ⊔ l2)
   leq-ℝ = type-Prop leq-ℝ-Prop
@@ -85,13 +88,17 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  leq-ℝ-Prop' : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop' = leq-upper-ℝ-Prop (upper-real-ℝ x) (upper-real-ℝ y)
+  opaque
+    leq-ℝ-Prop' : Prop (l1 ⊔ l2)
+    leq-ℝ-Prop' = leq-upper-ℝ-Prop (upper-real-ℝ x) (upper-real-ℝ y)
 
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  abstract
+  opaque
+    unfolding leq-ℝ-Prop
+    unfolding leq-ℝ-Prop'
+
     leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
     leq'-leq-ℝ lx⊆ly q y<q =
       elim-exists
@@ -137,7 +144,9 @@ module _
 ### Inequality on the real numbers is reflexive
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℝ-Prop
+
   refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
   refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
 
@@ -146,6 +155,7 @@ abstract
 
 opaque
   unfolding sim-ℝ
+  unfolding leq-ℝ-Prop
 
   leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
@@ -156,6 +166,7 @@ opaque
 ```agda
 opaque
   unfolding sim-ℝ
+  unfolding leq-ℝ-Prop
 
   sim-antisymmetric-leq-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
@@ -177,9 +188,12 @@ module _
   (z : ℝ l3)
   where
 
-  transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
-  transitive-leq-ℝ =
-    transitive-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
+  opaque
+    unfolding leq-ℝ-Prop
+
+    transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
+    transitive-leq-ℝ =
+      transitive-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
 ### The large preorder of real numbers
@@ -205,6 +219,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 ```agda
 opaque
   unfolding sim-ℝ
+  unfolding leq-ℝ-Prop
 
   sim-sim-leq-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
@@ -235,14 +250,17 @@ opaque
 ### The canonical map from rational numbers to the reals preserves and reflects inequality
 
 ```agda
-preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
-preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
+opaque
+  unfolding leq-ℝ-Prop
 
-reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
-reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
+  preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
+  preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
 
-iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
-iff-leq-real-ℚ = iff-leq-lower-real-ℚ
+  reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
+  reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
+
+  iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
+  iff-leq-real-ℚ = iff-leq-lower-real-ℚ
 ```
 
 ### Negation reverses inequality on the real numbers
@@ -252,8 +270,12 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
-  neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
+  opaque
+    unfolding leq-ℝ-Prop'
+    unfolding leq-ℝ-Prop
+
+    neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
+    neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
 ```
 
 ### Inequality on the real numbers is invariant under similarity
@@ -265,6 +287,7 @@ module _
 
   opaque
     unfolding sim-ℝ
+    unfolding leq-ℝ-Prop
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
     preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
@@ -297,6 +320,7 @@ module _
 
   opaque
     unfolding add-ℝ
+    unfolding leq-ℝ-Prop
 
     preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
     preserves-leq-right-add-ℝ x≤y _ =
@@ -305,6 +329,12 @@ module _
     preserves-leq-left-add-ℝ : leq-ℝ x y → leq-ℝ (z +ℝ x) (z +ℝ y)
     preserves-leq-left-add-ℝ x≤y _ =
       map-tot-exists (λ (_ , qx) → map-product id (map-product (x≤y qx) id))
+
+abstract
+  preserves-leq-diff-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
+    leq-ℝ x y → leq-ℝ (x -ℝ z) (y -ℝ z)
+  preserves-leq-diff-ℝ z = preserves-leq-right-add-ℝ (neg-ℝ z)
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)

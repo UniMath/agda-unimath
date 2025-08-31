@@ -17,6 +17,7 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
+open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
@@ -25,6 +26,7 @@ open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
+open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
@@ -45,6 +47,7 @@ open import real-numbers.similarity-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
+open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 ```

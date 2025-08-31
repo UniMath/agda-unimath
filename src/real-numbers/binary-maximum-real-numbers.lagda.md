@@ -126,6 +126,7 @@ module _
 
   opaque
     unfolding max-ℝ
+    unfolding leq-ℝ-Prop
 
     is-least-binary-upper-bound-max-ℝ :
       is-least-binary-upper-bound-Large-Poset
@@ -183,6 +184,7 @@ module _
 
   opaque
     unfolding sim-ℝ
+    unfolding leq-ℝ-Prop
 
     commutative-max-ℝ : max-ℝ x y ＝ max-ℝ y x
     commutative-max-ℝ =

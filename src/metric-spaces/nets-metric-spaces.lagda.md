@@ -9,6 +9,8 @@ module metric-spaces.nets-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -50,4 +52,40 @@ net-Metric-Space :
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 net-Metric-Space l3 X ε =
   type-subtype (is-net-prop-Metric-Space {l3 = l3} X ε)
+
+module _
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (ε : ℚ⁺)
+  (N : net-Metric-Space l3 X ε)
+  where
+
+  finitely-enumerable-subset-net-Metric-Space :
+    finitely-enumerable-subtype l3 (type-Metric-Space X)
+  finitely-enumerable-subset-net-Metric-Space = pr1 N
+
+  subset-net-Metric-Space : subtype l3 (type-Metric-Space X)
+  subset-net-Metric-Space =
+    subtype-finitely-enumerable-subtype
+      ( finitely-enumerable-subset-net-Metric-Space)
+
+  is-approximation-net-Metric-Space :
+    is-approximation-Metric-Space X ε subset-net-Metric-Space
+  is-approximation-net-Metric-Space = pr2 N
+```
+
+### If a metric space is inhabited, so is any net
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
+  where
+
+  abstract
+    is-inhabited-net-inhabited-Metric-Space :
+      is-inhabited-finitely-enumerable-subtype (pr1 S)
+    is-inhabited-net-inhabited-Metric-Space =
+      is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
+        ( subset-net-Metric-Space X ε S)
+        ( is-approximation-net-Metric-Space X ε S)
 ```

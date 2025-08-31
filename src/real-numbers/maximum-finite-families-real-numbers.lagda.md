@@ -207,6 +207,12 @@ abstract
     is-upper-bound-max-fin-sequence-ℝ n x
   pr2 (is-supremum-max-fin-sequence-ℝ n x) =
     is-approximated-below-max-fin-sequence-ℝ n x
+
+has-supremum-fin-sequence-ℝ :
+  {l : Level} (n : ℕ) (x : fin-sequence (ℝ l) (succ-ℕ n)) →
+  has-supremum-family-ℝ x l
+has-supremum-fin-sequence-ℝ n x =
+  (max-fin-sequence-ℝ n x , is-supremum-max-fin-sequence-ℝ n x)
 ```
 
 ### The maximum of a counted family is its supremum

@@ -11,6 +11,9 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.full-subtypes
+open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unions-subtypes
@@ -72,6 +75,27 @@ module _
   type-approximation-Metric-Space : UU (l1 ⊔ l3)
   type-approximation-Metric-Space =
     type-subtype subset-approximation-Metric-Space
+```
+
+### If a metric space is inhabited, so is any approximation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : subset-Metric-Space l3 X)
+  where
+
+  abstract
+    is-inhabited-is-approximation-inhabited-Metric-Space :
+      is-approximation-Metric-Space X ε S →
+      is-inhabited-subtype S
+    is-inhabited-is-approximation-inhabited-Metric-Space is-approx =
+      let open do-syntax-trunc-Prop (is-inhabited-subtype-Prop S)
+      in do
+        x ← |X|
+        (s , Nεsx) ← is-approx x
+        unit-trunc-Prop s
 ```
 
 ## References

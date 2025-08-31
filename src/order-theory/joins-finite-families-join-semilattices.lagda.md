@@ -157,6 +157,19 @@ module _
               ( max-x≤y)
               ( leq-left-join-Order-Theoretic-Join-Semilattice X _ _))
             ( i)
+
+  has-least-upper-bound-join-fin-sequence-type-Order-Theoretic-Join-Semilattice :
+    (n : ℕ) →
+    (x : fin-sequence (type-Order-Theoretic-Join-Semilattice X) (succ-ℕ n)) →
+    has-least-upper-bound-family-of-elements-Poset
+      ( poset-Order-Theoretic-Join-Semilattice X)
+      ( x)
+  has-least-upper-bound-join-fin-sequence-type-Order-Theoretic-Join-Semilattice
+    n x =
+      ( join-fin-sequence-type-Order-Theoretic-Join-Semilattice X n x ,
+        is-least-upper-bound-join-fin-sequence-type-Order-Theoretic-Join-Semilattice
+          ( n)
+          ( x))
 ```
 
 ### The join of a counted family of elements is its least upper bound

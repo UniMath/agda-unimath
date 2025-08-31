@@ -18,6 +18,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -27,6 +28,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -91,6 +93,17 @@ module _
 ```
 
 ## Properties
+
+### Types with zero elements in their finite enumeration are empty
+
+```agda
+abstract
+  is-empty-is-zero-finite-enumeration :
+    {l : Level} {X : UU l} → (eX : finite-enumeration X) → (pr1 eX ＝ zero-ℕ) →
+    is-empty X
+  is-empty-is-zero-finite-enumeration (_ , Fin-0↠X) refl =
+    is-empty-surjection-is-empty id Fin-0↠X
+```
 
 ### Finitely enumerable types are closed under equivalences
 

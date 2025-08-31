@@ -169,7 +169,9 @@ module _
         ( leq-zero-not-in-cut-upper-real-dist-Metric-Space M x y B zero-ℚ
           ( refl-leq-ℚ zero-ℚ)))
 
-  abstract
+  opaque
+    unfolding leq-ℝ-Prop'
+
     leq-real-dist-Metric-Space :
       (ε : ℚ⁺) →
       leq-ℝ real-dist-located-Metric-Space (real-ℚ (rational-ℚ⁺ ε)) ↔

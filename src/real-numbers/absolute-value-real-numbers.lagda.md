@@ -25,9 +25,9 @@ open import foundation.universe-levels
 open import metric-spaces.short-functions-metric-spaces
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.maximum-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -42,7 +42,7 @@ open import real-numbers.similarity-real-numbers
 The
 {{#concept "absolute value" Disambiguation="of a real number" Agda=abs-ℝ WD="absolute value" WDID=Q120812}}
 of a [real number](real-numbers.dedekind-real-numbers.md) is the
-[maximum](real-numbers.maximum-real-numbers.md) of it and its
+[binary maximum](real-numbers.binary-maximum-real-numbers.md) of it and its
 [negation](real-numbers.negation-real-numbers.md). The absolute value is a
 [short function](metric-spaces.short-functions-metric-spaces.md) of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
@@ -75,6 +75,7 @@ opaque
   unfolding abs-ℝ
   unfolding neg-ℚ
   unfolding max-ℝ
+  unfolding leq-ℝ-Prop
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
   is-nonnegative-abs-ℝ x q q<0 =
