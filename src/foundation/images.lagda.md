@@ -259,17 +259,29 @@ module _
           { map-inv-fiber-unit-im-emb (map-unit-im (map-emb f) a)}
           { a , refl})
 
+<<<<<<< Updated upstream
     is-equiv-im-emb : is-equiv map-unit-im-emb
     is-equiv-im-emb =
+=======
+    is-equiv-unit-im-emb : is-equiv map-equiv-map-unit-im-emb
+    is-equiv-unit-im-emb =
+>>>>>>> Stashed changes
       is-equiv-is-invertible
         ( map-inv-unit-im-emb)
         ( is-section-map-inv-unit-im-emb)
         ( is-retraction-map-inv-unit-im-emb)
 
+<<<<<<< Updated upstream
   equiv-im-emb : A ≃ im (map-emb f)
   equiv-im-emb =
     ( map-unit-im-emb ,
       is-equiv-im-emb)
+=======
+  equiv-map-unit-im-emb : A ≃ im (map-emb f)
+  equiv-map-unit-im-emb =
+    ( map-equiv-map-unit-im-emb ,
+      is-equiv-unit-im-emb)
+>>>>>>> Stashed changes
 ```
 
 ## External links
