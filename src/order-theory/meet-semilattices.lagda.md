@@ -34,7 +34,7 @@ open import order-theory.preorders
 A
 {{#concept "meet-semilattice" WDID=Q29018102 WD="lower semilattice" Agda=Meet-Semilattice}}
 is a [poset](order-theory.posets.md) in which every pair of elements has a
-[greatest binary lower bound](order-theory.greatest-lower-bounds.md).
+[greatest binary lower bound](order-theory.greatest-lower-bounds-posets.md).
 Alternatively, meet-semilattices can be defined algebraically as a set `X`
 equipped with a binary operation `∧ : X → X → X` satisfying
 
