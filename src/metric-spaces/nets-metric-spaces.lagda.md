@@ -77,14 +77,14 @@ module _
     subtype-finitely-enumerable-subtype
       ( finitely-enumerable-subset-net-Metric-Space)
 
-  is-approximation-net-Metric-Space :
+  is-approximation-subset-net-Metric-Space :
     is-approximation-Metric-Space X ε subset-net-Metric-Space
-  is-approximation-net-Metric-Space = pr2 N
+  is-approximation-subset-net-Metric-Space = pr2 N
 
   approximation-net-Metric-Space : approximation-Metric-Space l3 X ε
   approximation-net-Metric-Space =
     ( subset-net-Metric-Space ,
-      is-approximation-net-Metric-Space)
+      is-approximation-subset-net-Metric-Space)
 ```
 
 ### If a metric space is inhabited, so is any net
