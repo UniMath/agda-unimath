@@ -12,11 +12,15 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.dependent-pair-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.images-metric-spaces
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
@@ -88,4 +92,24 @@ module _
       is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
         ( subset-net-Metric-Space X ε S)
         ( is-approximation-net-Metric-Space X ε S)
+```
+
+## Properties
+
+### If `μ` is a modulus of uniform continuity for `f : X → Y` and `A` is a `(μ ε)`-net of `X`, then `im f A` is an `ε`-net of `im f X`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
+  (is-modulus-ucont-f-μ :
+    is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ)
+  (ε : ℚ⁺) (A : net-Metric-Space l5 X (μ ε))
+  where
+
+  net-im-uniformly-continuous-function-net-Metric-Space :
+    net-Metric-Space (l1 ⊔ l3 ⊔ l5) (im-Metric-Space X Y f) ε
+  net-im-uniformly-continuous-function-net-Metric-Space =
+    ( ? ,
+      ?)
 ```

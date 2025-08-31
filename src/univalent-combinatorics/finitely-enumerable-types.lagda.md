@@ -12,6 +12,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
+open import foundation.images
+open import logic.functoriality-existential-quantification
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -102,7 +104,7 @@ abstract
     {l : Level} {X : UU l} → (eX : finite-enumeration X) → (pr1 eX ＝ zero-ℕ) →
     is-empty X
   is-empty-is-zero-finite-enumeration (_ , Fin-0↠X) refl =
-    is-empty-surjection id Fin-0↠X
+    is-empty-surjection Fin-0↠X id
 ```
 
 ### Finitely enumerable types are closed under equivalences
@@ -388,6 +390,30 @@ module _
       ( dedekind-finite-type-Finitely-Enumerable-Type X)
       ( dedekind-finite-type-Finitely-Enumerable-Type Y)
 ```
+
+### The image of a finitely enumerable type under a map is finitely enumerable
+
+```agda
+module _
+  {l1 l2 : Level} (X : Finitely-Enumerable-Type l1) {Y : UU l2}
+  (f : type-Finitely-Enumerable-Type X → Y)
+  where
+
+  abstract
+    is-finitely-enumerable-im-Finitely-Enumerable-Type :
+      is-finitely-enumerable (im f)
+    is-finitely-enumerable-im-Finitely-Enumerable-Type =
+      map-tot-exists
+        ( λ n Fin-n↠X →
+          comp-surjection (map-unit-im f , is-surjective-map-unit-im f) Fin-n↠X)
+        ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
+
+  im-Finitely-Enumerable-Type : Finitely-Enumerable-Type (l1 ⊔ l2)
+  im-Finitely-Enumerable-Type =
+    ( im f ,
+      is-finitely-enumerable-im-Finitely-Enumerable-Type)
+```
+
 
 ## See also
 
