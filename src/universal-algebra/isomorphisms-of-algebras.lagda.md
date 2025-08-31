@@ -39,6 +39,7 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras-of-theories
+open import universal-algebra.equivalences-of-models-of-signatures
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.precategory-of-algebras-of-theories
@@ -185,19 +186,11 @@ module _
         ( id-hom-Algebra σ T A)
         ( q))
 
-  is-iso-is-equiv-hom-Algebra :
-    (f : hom-Algebra σ T A B) →
-    is-equiv-hom-Algebra σ T A B f →
-    is-iso-Algebra f
-  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
-    hom-inv-is-equiv-hom-Algebra σ T A B f eq
-  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
-    eq-htpy-hom-Algebra σ T B B
-    ( comp-hom-Algebra σ T B A B f
-      ( hom-inv-is-equiv-hom-Algebra σ T A B f eq))
-    ( id-hom-Algebra σ T B)
-    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
-  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+  is-split-epi-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) (eq : is-equiv-hom-Algebra σ T A B f) →
+    comp-hom-Algebra σ T A B A (hom-inv-is-equiv-hom-Algebra σ T A B f eq) f ＝
+    id-hom-Algebra σ T A
+  is-split-epi-is-equiv-hom-Algebra f eq =
     eq-htpy-hom-Algebra σ T A A
       ( comp-hom-Algebra σ T A B A
         ( hom-inv-is-equiv-hom-Algebra σ T A B f eq)
@@ -216,6 +209,28 @@ module _
           ( map-hom-Algebra σ T A B f , eq)
           ( retraction-is-equiv eq)
           ( map-hom-Algebra σ T A B f x)
+
+  is-split-mono-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) (eq : is-equiv-hom-Algebra σ T A B f) →
+    comp-hom-Algebra σ T B A B f (hom-inv-is-equiv-hom-Algebra σ T A B f eq) ＝
+    id-hom-Algebra σ T B
+  is-split-mono-is-equiv-hom-Algebra f eq =
+    eq-htpy-hom-Algebra σ T B B
+    ( comp-hom-Algebra σ T B A B f
+      ( hom-inv-is-equiv-hom-Algebra σ T A B f eq))
+    ( id-hom-Algebra σ T B)
+    ( is-section-map-section-map-equiv ((map-hom-Algebra σ T A B f) , eq))
+
+  is-iso-is-equiv-hom-Algebra :
+    (f : hom-Algebra σ T A B) →
+    is-equiv-hom-Algebra σ T A B f →
+    is-iso-Algebra f
+  pr1 (is-iso-is-equiv-hom-Algebra f eq) =
+    hom-inv-is-equiv-hom-Algebra σ T A B f eq
+  pr1 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    is-split-mono-is-equiv-hom-Algebra f eq
+  pr2 (pr2 (is-iso-is-equiv-hom-Algebra f eq)) =
+    is-split-epi-is-equiv-hom-Algebra f eq
 
   equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
