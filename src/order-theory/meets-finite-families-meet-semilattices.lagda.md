@@ -44,7 +44,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In a [meet semilattice](order-theory.meet-semilattices.md), the meet of any
+In a [meet-semilattice](order-theory.meet-semilattices.md), the meet of any
 family of elements indexed by an
 [inhabited finite type](univalent-combinatorics.inhabited-finite-types.md) is
 their [greatest lower bound](order-theory.greatest-lower-bounds-posets.md).
