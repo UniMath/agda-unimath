@@ -33,7 +33,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 ## Idea
 
 An **equivalence of sequential diagrams** `(A, a)` and `(B, b)` is a
-[sequence](foundation.dependent-sequences.md) of
+[sequence](lists.dependent-sequences.md) of
 [equivalences](foundation.equivalences.md) `eₙ : Aₙ ≃ Bₙ` such that their
 underlying maps form a
 [morphism of sequential diagrams](synthetic-homotopy-theory.morphisms-sequential-diagrams.md).

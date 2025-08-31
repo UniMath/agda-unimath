@@ -37,8 +37,7 @@ abstract
   is-section-map-universal-property-bool :
     {l : Level} {A : UU l} →
     ((ev-true-false A) ∘ map-universal-property-bool) ~ id
-  is-section-map-universal-property-bool (pair x y) =
-    eq-pair refl refl
+  is-section-map-universal-property-bool (pair x y) = refl
 
 abstract
   is-retraction-map-universal-property-bool' :

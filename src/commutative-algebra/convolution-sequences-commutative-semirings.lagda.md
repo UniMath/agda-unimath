@@ -22,13 +22,14 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.semigroups
+
+open import lists.sequences
 
 open import ring-theory.semirings
 
@@ -42,7 +43,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "convolution" WD="convolution" Disambiguation="of sequences in commutative semirings" Agda=convolution-sequence-Commutative-Semiring WDID=Q210857}}
-of two [sequences](foundation.sequences.md) `aₙ` and `bₙ` of elements in a
+of two [sequences](lists.sequences.md) `aₙ` and `bₙ` of elements in a
 [commutative semiring](commutative-algebra.commutative-semirings.md) is the new
 sequence
 
