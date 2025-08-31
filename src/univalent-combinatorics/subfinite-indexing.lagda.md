@@ -46,7 +46,8 @@ open import univalent-combinatorics.subcounting
 
 A {{#concept "subfinite indexing" Agda=subfinite-indexing}} of a type `X` is the
 data of a type `D` [equipped](foundation.structure.md) with a
-[subcounting](univalent-combinatorics.subcounting.md) `D ↪ Fin n` and a
+[subcounting](univalent-combinatorics.subcounting.md), i.e., an
+[embedding](foundation-core.embeddings.md) `D ↪ Fin n`, and a
 [surjection](foundation.surjective-maps.md) `D ↠ X`.
 
 Note that the subcounting of `D` is _proof-relevant_, and hence having a
@@ -287,28 +288,32 @@ factorization system is stable, so are the surjections. ■
 
 > This remains to be formalized.
 
-### Types equipped with subfinite indexings are Dedekind finite
+### Types equipped with subfinite indexings are Dedekind finite {#MO433318}
 
 We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
 answer: <https://mathoverflow.net/a/433318>.
 
-**Proof.** Let $X$ be a subfinitely enumerable type, witnessed by
-$Fin n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$ is Dedekind
-finite, so let $f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
-equivalence it suffices to prove $f$ is surjective, so assume given an arbitrary
-$x : X$ where we want to show there exists $z : X$ such that $f(z) ＝ x$.
+**Proof.** Let $X$ be a subfinitely indexed type, witnessed by
+$\operatorname{Fin}n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$
+is [Dedekind finite](univalent-combinatorics.dedekind-finite-types.md), so let
+$f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
+[equivalence](foundation-core.equivalences.md) it suffices to prove $f$ is
+surjective, so we want to show that given an arbitrary $x : X$ there exists a
+$z : X$ such that $x = f(z)$.
 
-The mapping $i ↦ fⁱ(x)$ defines a sequence of elements of $X$. By surjectivity
-of $h$ each $fⁱ(x)$ merely has a representative in $D$, so by
-[finite choice](univalent-combinatorics.finite-choice.md) there exists a
-sequence $x₋ :  D^{\operatorname{Fin}n}$ lifting $x,f(x),…,f^{n-1}(x)$.
+The mapping $i ↦ fⁱ(x)$ defines a [sequence](lists.sequences.md) of elements of
+$X$. By surjectivity of $h$ each $fⁱ(x)$ merely has a representative in $D$, so
+by [finite choice](univalent-combinatorics.finite-choice.md) there exists a
+[finite sequence](lists.finite-sequences.md) $y₋ : \operatorname{Fin}n → D$
+lifting $x,f(x),…,f^{n-1}(x)$.
 
-Now, the standard pigeonhole principle applies to $\operatorname{Fin}n$, so
-there has to be $i < j$ in $\operatorname{Fin}n$ such that $xᵢ = xⱼ$, and in
-particular $h(xᵢ) = h(xⱼ)$, i.e., $fⁱ(x) = fʲ(x)$. By injectivity of $f$ we can
-cancel $i$ applications to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$
-is the desired preimage. ∎
+Now, the [pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
+applies to $\operatorname{Fin}n$, so there has to be $i < j$ in
+$\operatorname{Fin}n$ such that $yᵢ = yⱼ$, and in particular $h(yᵢ) = h(yⱼ)$,
+i.e., $fⁱ(x) = fʲ(x)$. By [injectivity](foundation-core.injective-maps.md) of
+$f$ we can cancel $i$ applications to obtain $x = f(fʲ⁻ⁱ⁻¹(x))$, and so
+$fʲ⁻ⁱ⁻¹(x)$ is the desired preimage. ∎
 
 ```agda
 module _
@@ -428,7 +433,7 @@ module _
 
 ## References
 
-{{#bibliograhy}}
+{{#bibliography}}
 
 ## See also
 

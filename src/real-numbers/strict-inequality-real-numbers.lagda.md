@@ -353,6 +353,33 @@ module _
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
+### The rational numbers are dense in the real numbers
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    dense-rational-le-ℝ :
+      le-ℝ x y →
+      exists ℚ (λ z → le-ℝ-Prop x (real-ℚ z) ∧ le-ℝ-Prop (real-ℚ z) y)
+    dense-rational-le-ℝ x<y =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ℚ (λ z → le-ℝ-Prop x (real-ℚ z) ∧ le-ℝ-Prop (real-ℚ z) y))
+      in do
+        ( q , x<q , q<y) ← x<y
+        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
+        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
+        intro-exists
+          ( q)
+          ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+```
+
 ### Strict inequality on the real numbers is dense
 
 ```agda
@@ -366,17 +393,11 @@ module _
     dense-le-ℝ :
       le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
     dense-le-ℝ x<y =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
-      in do
-        ( q , x<q , q<y) ← x<y
-        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
-        intro-exists
-          ( real-ℚ q)
-          ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+      map-exists
+        ( _)
+        ( real-ℚ)
+        ( λ _ → id)
+        ( dense-rational-le-ℝ x y x<y)
 ```
 
 ### Strict inequality on the real numbers is cotransitive
@@ -559,6 +580,16 @@ module _
   where
 
   abstract
+    le-transpose-left-add-ℝ' : le-ℝ (x +ℝ y) z → le-ℝ y (z -ℝ x)
+    le-transpose-left-add-ℝ' x+y<z =
+      le-transpose-left-add-ℝ y x z
+        ( tr (λ w → le-ℝ w z) (commutative-add-ℝ _ _) x+y<z)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
     le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
     le-transpose-right-diff-ℝ x<y-z =
       preserves-le-right-sim-ℝ
@@ -567,6 +598,13 @@ module _
         ( y)
         ( cancel-right-diff-add-ℝ y z)
         ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
+
+    le-transpose-right-diff-ℝ' : le-ℝ x (y -ℝ z) → le-ℝ (z +ℝ x) y
+    le-transpose-right-diff-ℝ' x<y-z =
+      tr
+        ( λ w → le-ℝ w y)
+        ( commutative-add-ℝ _ _)
+        ( le-transpose-right-diff-ℝ x<y-z)
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
@@ -598,6 +636,15 @@ module _
   abstract
     le-transpose-right-add-ℝ : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ z) y
     le-transpose-right-add-ℝ = backward-implication (iff-add-right-le-ℝ x z y)
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    le-transpose-right-add-ℝ' : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ y) z
+    le-transpose-right-add-ℝ' x<y+z =
+      le-transpose-right-add-ℝ x z y (tr (le-ℝ x) (commutative-add-ℝ _ _) x<y+z)
 ```
 
 ## References
