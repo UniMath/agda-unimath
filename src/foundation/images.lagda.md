@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation-core.propositional-maps
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
 open import foundation.retractions
@@ -29,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
