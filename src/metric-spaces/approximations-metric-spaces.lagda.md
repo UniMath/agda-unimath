@@ -224,7 +224,7 @@ module _
           ( tr
             ( neighborhood-Metric-Space Y ε
               ( map-isometric-equiv-Metric-Space X Y f a))
-            ( is-section-map-inv-equiv-Metric-Space X Y f y)
+            ( is-section-map-inv-isometric-equiv-Metric-Space X Y f y)
             ( forward-implication
               ( is-isometry-map-isometric-equiv-Metric-Space X Y f ε _ _)
               ( Nεax)))
