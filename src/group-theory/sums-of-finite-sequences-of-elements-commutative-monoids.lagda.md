@@ -60,7 +60,7 @@ sum-fin-sequence-type-Commutative-Monoid M =
 
 ## Properties
 
-#### Sums in a commutative monoid equal sums in the corresponding commutative semigroup
+#### Nontrivial sums in a commutative monoid equal sums in the underlying commutative semigroup
 
 ```agda
 module _

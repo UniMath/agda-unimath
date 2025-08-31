@@ -56,8 +56,7 @@ The
 extends the binary operation on a
 [commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
 family of elements of `G` indexed by an
-[inhabited](foundation.inhabited-types.md)
-[finite type](univalent-combinatorics.finite-types.md).
+[inhabited finite type](univalent-combinatorics.inhabited-finite-types.md).
 
 We use additive terminology consistently with the linear algebra definition of
 [finite sequences in commutative semigroups](linear-algebra.finite-sequences-in-commutative-semigroups.md)

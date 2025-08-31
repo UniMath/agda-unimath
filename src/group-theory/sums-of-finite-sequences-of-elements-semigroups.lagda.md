@@ -34,7 +34,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "sum operation" Disambiguation="of a finite sequence in a semigroup" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Semigroup}}
-operation extends the binary operation on a
+extends the binary operation on a
 [semigroup](group-theory.semigroups.md) `G` to any nonempty
 [finite sequence](lists.finite-sequences.md) of elements of `G`.
 
