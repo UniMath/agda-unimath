@@ -12,8 +12,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
-open import foundation.images
-open import logic.functoriality-existential-quantification
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -30,6 +28,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.images
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -41,6 +40,8 @@ open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -413,7 +414,6 @@ module _
     ( im f ,
       is-finitely-enumerable-im-Finitely-Enumerable-Type)
 ```
-
 
 ## See also
 

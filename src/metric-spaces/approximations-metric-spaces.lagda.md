@@ -203,14 +203,14 @@ module _
   where
 
   abstract
-    is-approximation-im-isometric-equiv-Metric-Space :
+    is-approximation-im-isometric-equiv-approximation-Metric-Space :
       is-approximation-Metric-Space
         ( Y)
         ( ε)
         ( im-subtype
           ( map-isometric-equiv-Metric-Space X Y f)
           ( subset-approximation-Metric-Space X ε A))
-    is-approximation-im-isometric-equiv-Metric-Space y =
+    is-approximation-im-isometric-equiv-approximation-Metric-Space y =
       let
         open
           do-syntax-trunc-Prop
@@ -231,13 +231,13 @@ module _
               ( is-isometry-map-isometric-equiv-Metric-Space X Y f ε _ _)
               ( Nεax)))
 
-  approximation-im-isometric-equiv-Metric-Space :
+  approximation-im-isometric-equiv-approximation-Metric-Space :
     approximation-Metric-Space (l1 ⊔ l3 ⊔ l5) Y ε
-  approximation-im-isometric-equiv-Metric-Space =
+  approximation-im-isometric-equiv-approximation-Metric-Space =
     ( im-subtype
         ( map-isometric-equiv-Metric-Space X Y f)
         ( subset-approximation-Metric-Space X ε A) ,
-      is-approximation-im-isometric-equiv-Metric-Space)
+      is-approximation-im-isometric-equiv-approximation-Metric-Space)
 ```
 
 ### If a metric space is inhabited, so is any approximation
