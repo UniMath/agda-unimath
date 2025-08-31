@@ -7,20 +7,19 @@ module foundation.images-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functoriality-propositional-truncation
 open import foundation.images
-open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.action-on-identifications-functions
 open import foundation.pullbacks-subtypes
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -28,6 +27,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 
 open import order-theory.galois-connections-large-posets

@@ -10,10 +10,8 @@ module metric-spaces.nets-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.inhabited-types
-open import foundation.propositions
-open import foundation.dependent-pair-types
 open import foundation.images
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

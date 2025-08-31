@@ -15,13 +15,9 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.involutions
-open import foundation.images-subtypes
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
-open import metric-spaces.isometries-metric-spaces
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -29,32 +25,30 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import metric-spaces.metric-spaces
+
 open import metric-spaces.approximations-metric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.metric-spaces
 open import metric-spaces.nets-metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 
 open import order-theory.upper-bounds-large-posets
 
-open import metric-spaces.equality-of-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.finitely-enumerable-subsets-real-numbers
 open import real-numbers.inequality-real-numbers
-open import foundation.functoriality-dependent-pair-types
+open import real-numbers.infima-families-real-numbers
+open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-open import metric-spaces.images-metric-spaces
-open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.infima-families-real-numbers
-open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.images-isometries-metric-spaces
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 
@@ -304,7 +298,9 @@ module _
                           ( is-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ
                             ( net ε')
                             ( is-inhabited-net ε')
-                            ( map-unit-im (pr1 ∘ pr1) ((y , y∈S) , y∈net-ε'))))))
+                            ( map-unit-im
+                              ( pr1 ∘ pr1)
+                              ( (y , y∈S) , y∈net-ε'))))))
                     ( preserves-le-left-add-ℝ sup _ _
                       ( preserves-le-real-ℚ _ _ ε'+ε'<ε))))))
 

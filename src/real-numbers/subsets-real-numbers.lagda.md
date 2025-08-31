@@ -7,35 +7,33 @@ module real-numbers.subsets-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
-open import foundation.action-on-identifications-functions
-open import foundation.inhabited-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.logical-equivalences
 open import foundation.involutions
-open import logic.functoriality-existential-quantification
-open import foundation.propositional-truncations
-open import foundation.identity-types
-open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.sets
-open import foundation.equivalences
 open import foundation.subtypes
-open import foundation.function-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.function-extensionality
 
-open import metric-spaces.metric-spaces
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.subspaces-metric-spaces
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
-open import real-numbers.isometry-negation-real-numbers
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.subspaces-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.negation-real-numbers
+open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.negation-real-numbers
 ```
 
 </details>
