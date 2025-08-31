@@ -349,7 +349,7 @@ module _
     is-prop-type-Prop (is-least-upper-bound-subset-prop-Poset x)
 ```
 
-### The proposition that a subset of elements a least upper bound
+### The proposition that a subset of elements have a least upper bound
 
 ```agda
 module _
