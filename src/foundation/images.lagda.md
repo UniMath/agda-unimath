@@ -261,10 +261,13 @@ module _
 
     is-equiv-im-emb : is-equiv map-unit-im-emb
     is-equiv-im-emb =
-      is-equiv-is-invertible
-        ( map-inv-unit-im-emb)
-        ( is-section-map-inv-unit-im-emb)
-        ( is-retraction-map-inv-unit-im-emb)
+      is-equiv-is-emb-is-surjective
+        ( is-surjective-map-unit-im (map-emb f))
+        ( is-emb-right-factor
+          ( inclusion-im (map-emb f))
+          ( map-unit-im (map-emb f))
+          ( is-emb-inclusion-im (map-emb f))
+          ( is-emb-map-emb f))
 
   equiv-im-emb : A ≃ im (map-emb f)
   equiv-im-emb =
