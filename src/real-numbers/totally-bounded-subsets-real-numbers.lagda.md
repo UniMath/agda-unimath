@@ -317,7 +317,6 @@ module _
 
 module _
   {l1 l2 : Level}
-  {l1 l2 : Level}
   (S : totally-bounded-subset-ℝ l1 l2)
   (|S| : is-inhabited-totally-bounded-subset-ℝ S)
   where
