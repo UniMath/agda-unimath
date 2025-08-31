@@ -235,8 +235,8 @@ module _
   map-unit-im-emb = map-unit-im (map-emb f)
 
   abstract
-    is-equiv-im-emb : is-equiv map-unit-im-emb
-    is-equiv-im-emb =
+    is-equiv-unit-im-emb : is-equiv map-unit-im-emb
+    is-equiv-unit-im-emb =
       is-equiv-is-emb-is-surjective
         ( is-surjective-map-unit-im (map-emb f))
         ( is-emb-right-factor
@@ -246,9 +246,7 @@ module _
           ( is-emb-map-emb f))
 
   equiv-im-emb : A ≃ im (map-emb f)
-  equiv-im-emb =
-    ( map-unit-im-emb ,
-      is-equiv-im-emb)
+  equiv-im-emb = (map-unit-im-emb , is-equiv-unit-im-emb)
 ```
 
 ## External links
