@@ -100,19 +100,17 @@ module _
         ( poset-Order-Theoretic-Join-Semilattice X)
         ( subtype-finitely-enumerable-subtype S)
     has-least-upper-bound-inhabited-finitely-enumerable-subtype-Order-Theoretic-Join-Semilattice =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( has-least-upper-bound-subset-prop-Poset
-              ( poset-Order-Theoretic-Join-Semilattice X)
-              ( subtype-finitely-enumerable-subtype S))
-      in do
-        eS ← is-finitely-enumerable-subtype-finitely-enumerable-subtype S
-        has-least-upper-bound-inhabited-finite-enumeration-subtype-Order-Theoretic-Join-Semilattice
-          ( X)
-          ( subtype-finitely-enumerable-subtype S)
-          ( eS)
-          ( |S|)
+      rec-trunc-Prop
+        ( has-least-upper-bound-subset-prop-Poset
+          ( poset-Order-Theoretic-Join-Semilattice X)
+          ( subtype-finitely-enumerable-subtype S))
+        ( λ eS →
+          has-least-upper-bound-inhabited-finite-enumeration-subtype-Order-Theoretic-Join-Semilattice
+            ( X)
+            ( subtype-finitely-enumerable-subtype S)
+            ( eS)
+            ( |S|))
+          ( is-finitely-enumerable-subtype-finitely-enumerable-subtype S)
 
     join-inhabited-finitely-enumerable-subtype-Order-Theoretic-Join-Semilattice :
       type-Order-Theoretic-Join-Semilattice X
