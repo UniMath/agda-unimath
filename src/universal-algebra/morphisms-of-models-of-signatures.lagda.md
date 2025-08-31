@@ -7,23 +7,26 @@ module universal-algebra.morphisms-of-models-of-signatures where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.torsorial-type-families
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.sets
-open import universal-algebra.signatures
-open import universal-algebra.models-of-signatures
-open import foundation-core.function-types
-open import lists.tuples
-open import foundation-core.propositions
 open import foundation.subtype-identity-principle
-open import lists.functoriality-tuples
-open import foundation.action-on-identifications-functions
-open import foundation.function-extensionality
-open import foundation-core.homotopies
+open import foundation.torsorial-type-families
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
+
+open import lists.functoriality-tuples
+open import lists.tuples
+
+open import universal-algebra.models-of-signatures
+open import universal-algebra.signatures
 ```
 
 </details>

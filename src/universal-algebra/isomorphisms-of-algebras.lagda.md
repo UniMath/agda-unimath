@@ -19,9 +19,9 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.injective-maps
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.injective-maps
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.unit-type

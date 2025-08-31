@@ -7,28 +7,32 @@ module universal-algebra.equivalences-of-models-of-signatures where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation.torsorial-type-families
-open import universal-algebra.models-of-signatures
-open import universal-algebra.signatures
-open import universal-algebra.morphisms-of-models-of-signatures
-open import foundation.dependent-pair-types
-open import foundation.structure-identity-principle
-open import foundation.binary-homotopies
-open import foundation-core.identity-types
-open import foundation-core.cartesian-product-types
-open import foundation.sets
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.function-extensionality
 open import foundation.action-on-identifications-functions
+open import foundation.binary-homotopies
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation-core.propositions
-open import lists.tuples
-open import foundation-core.subtypes
-open import lists.functoriality-tuples
-open import foundation-core.function-types
+open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
+open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtypes
+
+open import lists.functoriality-tuples
+open import lists.tuples
+
+open import universal-algebra.models-of-signatures
+open import universal-algebra.morphisms-of-models-of-signatures
+open import universal-algebra.signatures
 ```
 
 </details>
@@ -50,6 +54,10 @@ module _
     (f g : is-model-signature σ X) → UU (l1 ⊔ l2)
   htpy-id-Model-Signature f g =
     preserves-operations-Model-Signature σ (X , f) (X , g) id
+
+  htpy-id-Model-Signature' :
+    (f g : is-model-signature σ X) → UU (l1 ⊔ l2)
+  htpy-id-Model-Signature' f g = (op : operation-signature σ) → {! f op ~ g op  !}
 
   is-prop-htpy-id-Model-Signature :
     (f g : is-model-signature σ X) → is-prop (htpy-id-Model-Signature f g)
@@ -77,8 +85,7 @@ module _
 
   is-torsorial-htpy-id-Model-Signature :
     (f : is-model-signature σ X) → is-torsorial (htpy-id-Model-Signature f)
-  is-torsorial-htpy-id-Model-Signature f =
-    is-torsorial-Eq-Π (λ op → {! is-torsorial-htpy  !})
+  is-torsorial-htpy-id-Model-Signature f = {!   !}
 
   is-equiv-htpy-eq-id-Model-Signature :
     (f g : is-model-signature σ X) →
