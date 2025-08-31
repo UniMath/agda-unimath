@@ -234,31 +234,7 @@ module _
   map-unit-im-emb : A → im (map-emb f)
   map-unit-im-emb = map-unit-im (map-emb f)
 
-  map-inv-fiber-unit-im-emb :
-    (bim : im (map-emb f)) → fiber (map-emb f) (inclusion-im (map-emb f) bim)
-  map-inv-fiber-unit-im-emb (b , ∃a:fa=b) =
-    rec-trunc-Prop (fiber-emb-Prop f b) id ∃a:fa=b
-
-  map-inv-unit-im-emb : im (map-emb f) → A
-  map-inv-unit-im-emb bim = pr1 (map-inv-fiber-unit-im-emb bim)
-
   abstract
-    is-section-map-inv-unit-im-emb :
-      is-section map-unit-im-emb map-inv-unit-im-emb
-    is-section-map-inv-unit-im-emb bim =
-      eq-type-subtype
-        ( subtype-im (map-emb f))
-        ( pr2 (map-inv-fiber-unit-im-emb bim))
-
-    is-retraction-map-inv-unit-im-emb :
-      is-retraction map-unit-im-emb map-inv-unit-im-emb
-    is-retraction-map-inv-unit-im-emb a =
-      ap pr1
-        ( eq-type-Prop
-          ( fiber-emb-Prop f (map-emb f a))
-          { map-inv-fiber-unit-im-emb (map-unit-im (map-emb f) a)}
-          { a , refl})
-
     is-equiv-im-emb : is-equiv map-unit-im-emb
     is-equiv-im-emb =
       is-equiv-is-emb-is-surjective
