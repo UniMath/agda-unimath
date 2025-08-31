@@ -72,6 +72,12 @@ module _
   type-finitely-enumerable-subtype =
     type-subtype subtype-finitely-enumerable-subtype
 
+  finitely-enumerable-type-finitely-enumerable-subtype :
+    Finitely-Enumerable-Type (l1 ⊔ l2)
+  finitely-enumerable-type-finitely-enumerable-subtype =
+    ( type-finitely-enumerable-subtype ,
+      is-finitely-enumerable-subtype-finitely-enumerable-subtype)
+
   inclusion-finitely-enumerable-subtype : type-finitely-enumerable-subtype → X
   inclusion-finitely-enumerable-subtype = pr1
 ```
@@ -110,28 +116,9 @@ module _
     is-finitely-enumerable-im-finitely-enumerable-subtype :
       is-finitely-enumerable-subtype im-finitely-enumerable-subtype
     is-finitely-enumerable-im-finitely-enumerable-subtype =
-      rec-trunc-Prop
-        ( is-finitely-enumerable-prop-subtype im-finitely-enumerable-subtype)
-        ( λ (n , Fin-n->>S) →
-          intro-exists
-            ( n)
-            ( ( λ i → map-unit-im (f ∘ pr1) (map-surjection Fin-n->>S i)) ,
-              ( λ yim@(y , y∈im<f∘pr1∘Fin-n->>S>) →
-                let
-                  open
-                    do-syntax-trunc-Prop
-                      ( subtype-im
-                        ( λ i →
-                          map-unit-im (f ∘ pr1) (map-surjection Fin-n->>S i))
-                        ( yim))
-                in do
-                  (s , fs=y) ← y∈im<f∘pr1∘Fin-n->>S>
-                  (i , fini=s) ← is-surjective-map-surjection Fin-n->>S s
-                  intro-exists i
-                    ( eq-type-subtype
-                      ( im-finitely-enumerable-subtype)
-                      ( ap (f ∘ pr1) fini=s ∙ fs=y)))))
-        ( is-finitely-enumerable-subtype-finitely-enumerable-subtype S)
+      is-finitely-enumerable-im-Finitely-Enumerable-Type
+        ( finitely-enumerable-type-finitely-enumerable-subtype S)
+        ( f ∘ inclusion-finitely-enumerable-subtype S)
 
   finitely-enumerable-subtype-im-finitely-enumerable-subtype :
     finitely-enumerable-subtype (l1 ⊔ l2 ⊔ l3) Y
