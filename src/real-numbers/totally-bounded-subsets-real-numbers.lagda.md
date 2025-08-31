@@ -15,9 +15,13 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.involutions
+open import foundation.images-subtypes
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
+open import metric-spaces.isometries-metric-spaces
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -25,25 +29,32 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
+open import metric-spaces.metric-spaces
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.nets-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 
 open import order-theory.upper-bounds-large-posets
 
+open import metric-spaces.equality-of-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.finitely-enumerable-subsets-real-numbers
 open import real-numbers.inequality-real-numbers
+open import foundation.functoriality-dependent-pair-types
 open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import metric-spaces.images-metric-spaces
+open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.infima-families-real-numbers
+open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.images-isometries-metric-spaces
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 
@@ -64,33 +75,37 @@ if it is [totally bounded](metric-spaces.totally-bounded-metric-spaces.md) as a
 
 ```agda
 module _
-  {l1 l2 : Level} (S : subset-ℝ l1 l2)
+  {l1 l2 : Level} (l3 : Level) (S : subset-ℝ l1 l2)
   where
 
-  modulus-of-total-boundedness-subset-ℝ : UU (lsuc l1 ⊔ lsuc (lsuc l2))
+  modulus-of-total-boundedness-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   modulus-of-total-boundedness-subset-ℝ =
-    modulus-of-total-boundedness-Metric-Space (metric-space-subset-ℝ S)
+    modulus-of-total-boundedness-Metric-Space l3 (metric-space-subset-ℝ S)
 
-  is-totally-bounded-prop-subset-ℝ : Prop (lsuc l1 ⊔ lsuc (lsuc l2))
+  is-totally-bounded-prop-subset-ℝ : Prop (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   is-totally-bounded-prop-subset-ℝ =
-    is-totally-bounded-prop-Metric-Space (metric-space-subset-ℝ S)
+    is-totally-bounded-prop-Metric-Space l3 (metric-space-subset-ℝ S)
 
-  is-totally-bounded-subset-ℝ : UU (lsuc l1 ⊔ lsuc (lsuc l2))
+  is-totally-bounded-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   is-totally-bounded-subset-ℝ = type-Prop is-totally-bounded-prop-subset-ℝ
 
-totally-bounded-subset-ℝ : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc (lsuc l2))
-totally-bounded-subset-ℝ l1 l2 =
-  type-subtype (is-totally-bounded-prop-subset-ℝ {l1} {l2})
+totally-bounded-subset-ℝ : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+totally-bounded-subset-ℝ l1 l2 l3 =
+  type-subtype (is-totally-bounded-prop-subset-ℝ {l1} {l2} l3)
 
 module _
-  {l1 l2 : Level} (S : totally-bounded-subset-ℝ l1 l2)
+  {l1 l2 l3 : Level} (S : totally-bounded-subset-ℝ l1 l2 l3)
   where
 
   subset-totally-bounded-subset-ℝ : subset-ℝ l1 l2
   subset-totally-bounded-subset-ℝ = pr1 S
 
+  metric-space-totally-bounded-subset-ℝ : Metric-Space (l1 ⊔ lsuc l2) l2
+  metric-space-totally-bounded-subset-ℝ =
+    metric-space-subset-ℝ subset-totally-bounded-subset-ℝ
+
   is-totally-bounded-totally-bounded-subset-ℝ :
-    is-totally-bounded-subset-ℝ subset-totally-bounded-subset-ℝ
+    is-totally-bounded-subset-ℝ l3 subset-totally-bounded-subset-ℝ
   is-totally-bounded-totally-bounded-subset-ℝ = pr2 S
 
   is-inhabited-totally-bounded-subset-ℝ : UU (l1 ⊔ lsuc l2)
@@ -100,18 +115,54 @@ module _
 
 ## Properties
 
-### Inhabited, totally bounded subsets of `ℝ` have a supremum
+### The negation of a totally bounded subset of ℝ is totally bounded
+
+```agda
+module _
+  {l1 l2 l3 : Level} (S : totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    is-totally-bounded-neg-totally-bounded-subset-ℝ :
+      is-totally-bounded-subset-ℝ
+        ( l1 ⊔ lsuc l2 ⊔ l3)
+        ( neg-subset-ℝ (subset-totally-bounded-subset-ℝ S))
+    is-totally-bounded-neg-totally-bounded-subset-ℝ =
+      preserves-is-totally-bounded-isometric-equiv-Metric-Space _ _
+        ( is-totally-bounded-im-isometry-is-totally-bounded-Metric-Space
+          ( metric-space-totally-bounded-subset-ℝ S)
+          ( metric-space-ℝ l2)
+          ( is-totally-bounded-totally-bounded-subset-ℝ S)
+          ( comp-isometry-Metric-Space
+            ( metric-space-totally-bounded-subset-ℝ S)
+            ( metric-space-ℝ l2)
+            ( metric-space-ℝ l2)
+            ( isometry-neg-ℝ)
+            ( isometry-inclusion-subspace-Metric-Space
+              ( metric-space-ℝ l2)
+              ( subset-totally-bounded-subset-ℝ S))))
+        ( isometric-equiv-neg-subset-im-neg-subset-ℝ
+          ( subset-totally-bounded-subset-ℝ S))
+
+  neg-totally-bounded-subset-ℝ :
+    totally-bounded-subset-ℝ l1 l2 (l1 ⊔ lsuc l2 ⊔ l3)
+  neg-totally-bounded-subset-ℝ =
+    ( neg-subset-ℝ (subset-totally-bounded-subset-ℝ S) ,
+      is-totally-bounded-neg-totally-bounded-subset-ℝ)
+```
+
+### Inhabited, totally bounded subsets of ℝ have a supremum
 
 This proof is adapted from Theorem 11.5.7 of {{#cite UF13}}.
 
 ```agda
 module _
-  {l1 l2 : Level} (S : subset-ℝ l1 l2) (|S| : is-inhabited-subtype S)
-  (M : modulus-of-total-boundedness-subset-ℝ S)
+  {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) (|S| : is-inhabited-subtype S)
+  (M : modulus-of-total-boundedness-subset-ℝ l3 S)
   where
 
   private
-    net : ℚ⁺ → finitely-enumerable-subset-ℝ (l1 ⊔ lsuc l2) l2
+    net : ℚ⁺ → finitely-enumerable-subset-ℝ (l1 ⊔ lsuc l2 ⊔ l3) l2
     net δ =
       finitely-enumerable-subtype-im-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
@@ -316,8 +367,8 @@ module _
         is-supremum-sup-modulated-totally-bounded-subset-ℝ)
 
 module _
-  {l1 l2 : Level}
-  (S : totally-bounded-subset-ℝ l1 l2)
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
   (|S| : is-inhabited-totally-bounded-subset-ℝ S)
   where
 
@@ -342,6 +393,44 @@ module _
         ( sup-inhabited-totally-bounded-subset-ℝ)
     is-supremum-sup-inhabited-totally-bounded-subset-ℝ =
       pr2 has-supremum-inhabited-totally-bounded-subset-ℝ
+```
+
+### Inhabited, totally bounded subsets of ℝ have an infimum
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
+  (|S| : is-inhabited-totally-bounded-subset-ℝ S)
+  where
+
+  abstract
+    inf-inhabited-totally-bounded-subset-ℝ : ℝ l2
+    inf-inhabited-totally-bounded-subset-ℝ =
+      neg-ℝ
+        ( sup-inhabited-totally-bounded-subset-ℝ
+          ( neg-totally-bounded-subset-ℝ S)
+          ( neg-is-inhabited-subset-ℝ (subset-totally-bounded-subset-ℝ S) |S|))
+
+    is-infimum-inf-inhabited-totally-bounded-subset-ℝ :
+      is-infimum-subset-ℝ
+        ( subset-totally-bounded-subset-ℝ S)
+        ( inf-inhabited-totally-bounded-subset-ℝ)
+    is-infimum-inf-inhabited-totally-bounded-subset-ℝ =
+      is-infimum-neg-supremum-neg-subset-ℝ
+        ( subset-totally-bounded-subset-ℝ S)
+        ( sup-inhabited-totally-bounded-subset-ℝ
+          ( neg-totally-bounded-subset-ℝ S)
+          ( neg-is-inhabited-subset-ℝ (pr1 S) |S|))
+        ( is-supremum-sup-inhabited-totally-bounded-subset-ℝ
+          ( neg-totally-bounded-subset-ℝ S)
+          ( neg-is-inhabited-subset-ℝ (subset-totally-bounded-subset-ℝ S) |S|))
+
+    has-infimum-inhabited-totally-bounded-subset-ℝ :
+      has-infimum-subset-ℝ (subset-totally-bounded-subset-ℝ S) l2
+    has-infimum-inhabited-totally-bounded-subset-ℝ =
+      ( inf-inhabited-totally-bounded-subset-ℝ ,
+        is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
 ```
 
 ## References
