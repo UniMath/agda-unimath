@@ -28,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
@@ -230,44 +231,45 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B)
   where
 
-  map-equiv-map-unit-im-emb : A → im (map-emb f)
-  map-equiv-map-unit-im-emb = map-unit-im (map-emb f)
+  map-unit-im-emb : A → im (map-emb f)
+  map-unit-im-emb = map-unit-im (map-emb f)
 
-  map-inv-fiber-map-unit-im-emb :
+  map-inv-fiber-unit-im-emb :
     (bim : im (map-emb f)) → fiber (map-emb f) (inclusion-im (map-emb f) bim)
-  map-inv-fiber-map-unit-im-emb (b , ∃a:fa=b) =
-    rec-trunc-Prop (fiber-prop-map-emb f b) id ∃a:fa=b
+  map-inv-fiber-unit-im-emb (b , ∃a:fa=b) =
+    rec-trunc-Prop (fiber-emb-Prop f b) id ∃a:fa=b
 
-  map-inv-equiv-map-unit-im-emb : im (map-emb f) → A
-  map-inv-equiv-map-unit-im-emb bim = pr1 (map-inv-fiber-map-unit-im-emb bim)
+  map-inv-unit-im-emb : im (map-emb f) → A
+  map-inv-unit-im-emb bim = pr1 (map-inv-fiber-unit-im-emb bim)
 
   abstract
-    is-section-map-inv-equiv-map-unit-im-emb :
-      is-section map-equiv-map-unit-im-emb map-inv-equiv-map-unit-im-emb
-    is-section-map-inv-equiv-map-unit-im-emb bim =
+    is-section-map-inv-unit-im-emb :
+      is-section map-unit-im-emb map-inv-unit-im-emb
+    is-section-map-inv-unit-im-emb bim =
       eq-type-subtype
         ( subtype-im (map-emb f))
-        ( pr2 (map-inv-fiber-map-unit-im-emb bim))
+        ( pr2 (map-inv-fiber-unit-im-emb bim))
 
-    is-retraction-map-inv-equiv-map-unit-im-emb :
-      is-retraction map-equiv-map-unit-im-emb map-inv-equiv-map-unit-im-emb
-    is-retraction-map-inv-equiv-map-unit-im-emb a =
+    is-retraction-map-inv-unit-im-emb :
+      is-retraction map-unit-im-emb map-inv-unit-im-emb
+    is-retraction-map-inv-unit-im-emb a =
       ap pr1
-        ( all-elements-equal-fiber-map-emb f (map-emb f a)
-          ( map-inv-fiber-map-unit-im-emb (map-unit-im (map-emb f) a))
-          ( a , refl))
+        ( eq-type-Prop
+          ( fiber-emb-Prop f (map-emb f a))
+          { map-inv-fiber-unit-im-emb (map-unit-im (map-emb f) a)}
+          { a , refl})
 
-    is-equiv-map-equiv-map-unit-im-emb : is-equiv map-equiv-map-unit-im-emb
-    is-equiv-map-equiv-map-unit-im-emb =
+    is-equiv-im-emb : is-equiv map-unit-im-emb
+    is-equiv-im-emb =
       is-equiv-is-invertible
-        ( map-inv-equiv-map-unit-im-emb)
-        ( is-section-map-inv-equiv-map-unit-im-emb)
-        ( is-retraction-map-inv-equiv-map-unit-im-emb)
+        ( map-inv-unit-im-emb)
+        ( is-section-map-inv-unit-im-emb)
+        ( is-retraction-map-inv-unit-im-emb)
 
-  equiv-map-unit-im-emb : A ≃ im (map-emb f)
-  equiv-map-unit-im-emb =
-    ( map-equiv-map-unit-im-emb ,
-      is-equiv-map-equiv-map-unit-im-emb)
+  equiv-im-emb : A ≃ im (map-emb f)
+  equiv-im-emb =
+    ( map-unit-im-emb ,
+      is-equiv-im-emb)
 ```
 
 ## External links

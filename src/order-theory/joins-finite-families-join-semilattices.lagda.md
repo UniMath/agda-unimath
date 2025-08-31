@@ -44,7 +44,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In a [join semilattice](order-theory.join-semilattices.md), the join of any
+In a [join-semilattice](order-theory.join-semilattices.md), the join of any
 family of elements indexed by an
 [inhabited finite type](univalent-combinatorics.inhabited-finite-types.md) is
 their [least upper bound](order-theory.least-upper-bounds-posets.md).

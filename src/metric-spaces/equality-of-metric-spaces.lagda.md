@@ -99,20 +99,20 @@ module _
   map-inv-isometric-equiv-Metric-Space e =
     map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
 
-  is-section-map-inv-equiv-Metric-Space :
+  is-section-map-inv-isometric-equiv-Metric-Space :
     (e : isometric-equiv-Metric-Space) →
     is-section
       ( map-isometric-equiv-Metric-Space e)
       ( map-inv-isometric-equiv-Metric-Space e)
-  is-section-map-inv-equiv-Metric-Space e =
+  is-section-map-inv-isometric-equiv-Metric-Space e =
     is-section-map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
 
-  is-retraction-map-inv-equiv-Metric-Space :
+  is-retraction-map-inv-isometric-equiv-Metric-Space :
     (e : isometric-equiv-Metric-Space) →
     is-retraction
       ( map-isometric-equiv-Metric-Space e)
       ( map-inv-isometric-equiv-Metric-Space e)
-  is-retraction-map-inv-equiv-Metric-Space e =
+  is-retraction-map-inv-isometric-equiv-Metric-Space e =
     is-retraction-map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
 
   is-isometry-map-isometric-equiv-Metric-Space :

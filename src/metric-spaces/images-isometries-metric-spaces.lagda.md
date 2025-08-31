@@ -46,7 +46,7 @@ module _
   equiv-unit-im-isometry-Metric-Space :
     type-Metric-Space X ≃ type-im-isometry-Metric-Space
   equiv-unit-im-isometry-Metric-Space =
-    equiv-map-unit-im-emb (emb-map-isometry-Metric-Space X Y f)
+    equiv-im-emb (emb-map-isometry-Metric-Space X Y f)
 
   map-unit-im-isometry-Metric-Space :
     type-Metric-Space X → type-im-isometry-Metric-Space
