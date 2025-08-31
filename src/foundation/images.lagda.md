@@ -7,20 +7,20 @@ module foundation.images where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.sections
-open import foundation.propositional-truncations
-open import foundation.slice
 open import foundation.action-on-identifications-functions
-open import foundation.subtype-identity-principle
-open import foundation.transport-along-identifications
-open import foundation.retractions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.propositional-truncations
+open import foundation.retractions
+open import foundation.sections
+open import foundation.slice
+open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation.embeddings
 open import foundation-core.1-types
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
@@ -227,7 +227,7 @@ im-1-Type X f = im-Truncated-Type zero-𝕋 X f
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (f : A ↪ B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B)
   where
 
   map-equiv-map-unit-im-emb : A → im (map-emb f)

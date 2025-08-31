@@ -18,6 +18,8 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -82,6 +84,41 @@ module _
     isometric-equiv-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
+
+  equiv-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space → type-Metric-Space A ≃ type-Metric-Space B
+  equiv-isometric-equiv-Metric-Space = pr1
+
+  map-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space → type-Metric-Space A → type-Metric-Space B
+  map-isometric-equiv-Metric-Space e =
+    map-equiv (equiv-isometric-equiv-Metric-Space e)
+
+  map-inv-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space → type-Metric-Space B → type-Metric-Space A
+  map-inv-isometric-equiv-Metric-Space e =
+    map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
+
+  is-section-map-inv-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    is-section
+      ( map-isometric-equiv-Metric-Space e)
+      ( map-inv-isometric-equiv-Metric-Space e)
+  is-section-map-inv-equiv-Metric-Space e =
+    is-section-map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
+
+  is-retraction-map-inv-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    is-retraction
+      ( map-isometric-equiv-Metric-Space e)
+      ( map-inv-isometric-equiv-Metric-Space e)
+  is-retraction-map-inv-equiv-Metric-Space e =
+    is-retraction-map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
+
+  is-isometry-map-isometric-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    is-isometry-Metric-Space A B (map-isometric-equiv-Metric-Space e)
+  is-isometry-map-isometric-equiv-Metric-Space = pr2
 ```
 
 ### Isometric equivalences between metric spaces

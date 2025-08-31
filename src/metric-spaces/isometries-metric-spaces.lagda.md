@@ -9,11 +9,11 @@ module metric-spaces.isometries-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.fibers-of-maps
-open import foundation.dependent-pair-types
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -368,22 +368,28 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  is-injective-map-isometry-Metric-Space :
-    is-injective (map-isometry-Metric-Space A B f)
-  is-injective-map-isometry-Metric-Space H =
-    eq-sim-Metric-Space
-      ( A)
-      ( _)
-      ( _)
-      ( λ d →
-        backward-implication
-          ( is-isometry-map-isometry-Metric-Space A B f d _ _)
-          ( sim-eq-Metric-Space B _ _ H d))
+  abstract
+    is-injective-map-isometry-Metric-Space :
+      is-injective (map-isometry-Metric-Space A B f)
+    is-injective-map-isometry-Metric-Space H =
+      eq-sim-Metric-Space
+        ( A)
+        ( _)
+        ( _)
+        ( λ d →
+          backward-implication
+            ( is-isometry-map-isometry-Metric-Space A B f d _ _)
+            ( sim-eq-Metric-Space B _ _ H d))
 
-  is-emb-map-isometry-Metric-Space :
-    is-emb (map-isometry-Metric-Space A B f)
-  is-emb-map-isometry-Metric-Space =
-    is-emb-is-injective
-      ( is-set-type-Metric-Space B)
-      ( is-injective-map-isometry-Metric-Space)
+    is-emb-map-isometry-Metric-Space :
+      is-emb (map-isometry-Metric-Space A B f)
+    is-emb-map-isometry-Metric-Space =
+      is-emb-is-injective
+        ( is-set-type-Metric-Space B)
+        ( is-injective-map-isometry-Metric-Space)
+
+  emb-map-isometry-Metric-Space : type-Metric-Space A ↪ type-Metric-Space B
+  emb-map-isometry-Metric-Space =
+    ( map-isometry-Metric-Space A B f ,
+      is-emb-map-isometry-Metric-Space)
 ```

@@ -41,18 +41,29 @@ module _
     type-function-Metric-Space X im-short-function-Metric-Space
   map-unit-im-short-function-Metric-Space =
     map-unit-im (map-short-function-Metric-Space X Y f)
+```
+
+## Properties
+
+### The unit map of the image of a short function is short
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (f : short-function-Metric-Space X Y)
+  where
 
   is-short-map-unit-im-short-function-Metric-Space :
     is-short-function-Metric-Space
       ( X)
-      ( im-short-function-Metric-Space)
-      ( map-unit-im-short-function-Metric-Space)
+      ( im-short-function-Metric-Space X Y f)
+      ( map-unit-im-short-function-Metric-Space X Y f)
   is-short-map-unit-im-short-function-Metric-Space =
     is-short-map-short-function-Metric-Space X Y f
 
   short-map-unit-im-short-function-Metric-Space :
-    short-function-Metric-Space X im-short-function-Metric-Space
+    short-function-Metric-Space X (im-short-function-Metric-Space X Y f)
   short-map-unit-im-short-function-Metric-Space =
-    ( map-unit-im-short-function-Metric-Space ,
+    ( map-unit-im-short-function-Metric-Space X Y f ,
       is-short-map-unit-im-short-function-Metric-Space)
 ```
