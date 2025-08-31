@@ -10,7 +10,6 @@ module universal-algebra.equivalences-of-models-of-signatures where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -28,7 +27,6 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
 
 open import lists.functoriality-tuples
 open import lists.tuples

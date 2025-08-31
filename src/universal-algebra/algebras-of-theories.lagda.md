@@ -22,8 +22,8 @@ open import foundation-core.equivalences
 
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
-open import universal-algebra.models-of-signatures
 open import universal-algebra.equivalences-of-models-of-signatures
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
