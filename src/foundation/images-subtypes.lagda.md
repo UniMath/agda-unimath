@@ -7,19 +7,15 @@ module foundation.images-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functoriality-propositional-truncation
 open import foundation.images
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.pullbacks-subtypes
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -27,7 +23,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 
 open import order-theory.galois-connections-large-posets
@@ -274,43 +269,4 @@ module _
           ( subtype-im f)
           ( compute-im-full-subtype f)
           ( x)
-```
-
-### The image of a subtype under an equivalence has the same elements as the subtype precomposed with the inverse equivalence
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (S : subtype l3 X)
-  where
-
-  abstract
-    has-same-elements-im-subtype-equiv-precomp-inv-equiv :
-      has-same-elements-subtype
-        ( im-subtype (map-equiv e) S)
-        ( S ∘ map-inv-equiv e)
-    pr1 (has-same-elements-im-subtype-equiv-precomp-inv-equiv y) =
-      rec-trunc-Prop
-        ( S (map-inv-equiv e y))
-        ( λ ((x , x∈S) , fx=y) →
-          inv-tr
-            ( type-Prop ∘ S)
-            ( ap (map-inv-equiv e) (inv fx=y) ∙ is-retraction-map-inv-equiv e x)
-            ( x∈S))
-    pr2 (has-same-elements-im-subtype-equiv-precomp-inv-equiv y) e⁻¹y∈S =
-      intro-exists
-        ( map-inv-equiv e y , e⁻¹y∈S)
-        ( is-section-map-inv-equiv e y)
-```
-
-### Two subtypes that have the same elements are equivalent
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X)
-  (H : has-same-elements-subtype S T)
-  where
-
-  equiv-has-same-elements-type-subtype : type-subtype S ≃ type-subtype T
-  equiv-has-same-elements-type-subtype =
-    equiv-tot ( λ x → equiv-iff' (S x) (T x) (H x))
 ```
