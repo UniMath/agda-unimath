@@ -242,9 +242,9 @@ surjection-retract R =
 
 ```agda
 abstract
-  is-empty-surjection-is-empty :
+  is-empty-surjection :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-empty A → is-empty B
-  is-empty-surjection-is-empty ¬A A↠B b =
+  is-empty-surjection ¬A A↠B b =
     rec-trunc-Prop empty-Prop (¬A ∘ pr1) (is-surjective-map-surjection A↠B b)
 ```
 

@@ -102,7 +102,7 @@ abstract
     {l : Level} {X : UU l} → (eX : finite-enumeration X) → (pr1 eX ＝ zero-ℕ) →
     is-empty X
   is-empty-is-zero-finite-enumeration (_ , Fin-0↠X) refl =
-    is-empty-surjection-is-empty id Fin-0↠X
+    is-empty-surjection id Fin-0↠X
 ```
 
 ### Finitely enumerable types are closed under equivalences
