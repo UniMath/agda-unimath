@@ -109,7 +109,7 @@ module _
   where
 
   opaque
-    unfolding min-ℝ
+    unfolding leq-ℝ-Prop min-ℝ
 
     is-greatest-binary-lower-bound-min-ℝ :
       is-greatest-binary-lower-bound-Large-Poset

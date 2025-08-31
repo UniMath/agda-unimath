@@ -251,7 +251,7 @@ opaque
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop
+  unfolding leq-ℝ-Prop real-ℚ
 
   preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
   preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
@@ -271,8 +271,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop'
-    unfolding leq-ℝ-Prop
+    unfolding leq-ℝ-Prop leq-ℝ-Prop' neg-ℝ
 
     neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
     neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)

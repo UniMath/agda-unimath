@@ -266,27 +266,28 @@ module _
   {l : Level}
   where
 
-  lower-neighborhood-real-bound-leq-ℝ :
-    (d : ℚ⁺) (x y : ℝ l) →
-    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    lower-neighborhood-ℝ d x y
-  lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
-    is-in-lower-cut-le-real-ℚ
-      ( q)
-      ( x)
-      ( concatenate-le-leq-ℝ
-        ( real-ℚ q)
-        ( y -ℝ real-ℚ d)
+  abstract
+    lower-neighborhood-real-bound-leq-ℝ :
+      (d : ℚ⁺) (x y : ℝ l) →
+      leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+      lower-neighborhood-ℝ d x y
+    lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
+      is-in-lower-cut-le-real-ℚ
+        ( q)
         ( x)
-        ( le-transpose-left-add-ℝ
+        ( concatenate-le-leq-ℝ
           ( real-ℚ q)
-          ( real-ℚ d)
-          ( y)
-          ( inv-tr
-            ( λ z → le-ℝ z y)
-            ( add-real-ℚ q d)
-            ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
-        ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
+          ( y -ℝ real-ℚ d)
+          ( x)
+          ( le-transpose-left-add-ℝ
+            ( real-ℚ q)
+            ( real-ℚ d)
+            ( y)
+            ( inv-tr
+              ( λ z → le-ℝ z y)
+              ( add-real-ℚ q d)
+              ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+          ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
   opaque
     unfolding leq-ℝ-Prop
@@ -375,7 +376,7 @@ module _
 
 ```agda
 opaque
-  unfolding neighborhood-prop-ℝ
+  unfolding neighborhood-prop-ℝ real-ℚ
 
   is-isometry-metric-space-real-ℚ :
     is-isometry-Metric-Space
@@ -406,29 +407,30 @@ module _
   {l0 : Level} (l : Level)
   where
 
-  is-isometry-metric-space-raise-ℝ :
-    is-isometry-Metric-Space
-      ( metric-space-ℝ l0)
-      ( metric-space-ℝ (l0 ⊔ l))
-      ( raise-ℝ l)
-  pr1 (is-isometry-metric-space-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( x)
-      ( y)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( sim-raise-ℝ l x)
-      ( sim-raise-ℝ l y)
-  pr2 (is-isometry-metric-space-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( x)
-      ( y)
-      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
-      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+  abstract
+    is-isometry-metric-space-raise-ℝ :
+      is-isometry-Metric-Space
+        ( metric-space-ℝ l0)
+        ( metric-space-ℝ (l0 ⊔ l))
+        ( raise-ℝ l)
+    pr1 (is-isometry-metric-space-raise-ℝ d x y) =
+      preserves-neighborhood-sim-ℝ
+        ( d)
+        ( x)
+        ( y)
+        ( raise-ℝ l x)
+        ( raise-ℝ l y)
+        ( sim-raise-ℝ l x)
+        ( sim-raise-ℝ l y)
+    pr2 (is-isometry-metric-space-raise-ℝ d x y) =
+      preserves-neighborhood-sim-ℝ
+        ( d)
+        ( raise-ℝ l x)
+        ( raise-ℝ l y)
+        ( x)
+        ( y)
+        ( symmetric-sim-ℝ (sim-raise-ℝ l x))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l y))
 
   isometry-metric-space-raise-ℝ :
     isometry-Metric-Space
@@ -457,16 +459,17 @@ module _
       ( isometry-metric-space-raise-ℝ l)
       ( isometry-metric-space-real-ℚ)
 
-  is-isometry-metric-space-raise-real-ℚ :
-    is-isometry-Metric-Space
-      ( metric-space-ℚ)
-      ( metric-space-ℝ l)
-      ( raise-real-ℚ l)
-  is-isometry-metric-space-raise-real-ℚ =
-    is-isometry-map-isometry-Metric-Space
-      ( metric-space-ℚ)
-      ( metric-space-ℝ l)
-      ( isometry-metric-space-raise-real-ℚ)
+  abstract
+    is-isometry-metric-space-raise-real-ℚ :
+      is-isometry-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℝ l)
+        ( raise-real-ℚ l)
+    is-isometry-metric-space-raise-real-ℚ =
+      is-isometry-map-isometry-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℝ l)
+        ( isometry-metric-space-raise-real-ℚ)
 ```
 
 ## References

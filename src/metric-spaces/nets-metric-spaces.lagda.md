@@ -102,7 +102,7 @@ module _
     is-inhabited-net-inhabited-Metric-Space =
       is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
         ( subset-net-Metric-Space X ε S)
-        ( is-approximation-net-Metric-Space X ε S)
+        ( is-approximation-subset-net-Metric-Space X ε S)
 ```
 
 ## Properties

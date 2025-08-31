@@ -72,10 +72,7 @@ opaque
 
 ```agda
 opaque
-  unfolding abs-ℝ
-  unfolding neg-ℚ
-  unfolding max-ℝ
-  unfolding leq-ℝ-Prop
+  unfolding abs-ℝ leq-ℝ-Prop max-ℝ neg-ℚ neg-ℝ real-ℚ
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
   is-nonnegative-abs-ℝ x q q<0 =

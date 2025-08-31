@@ -180,7 +180,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop real-ℚ
 
     preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
     preserves-le-real-ℚ x<y =
@@ -210,9 +210,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
-    unfolding leq-ℝ-Prop
-    unfolding leq-ℝ-Prop'
+    unfolding le-ℝ-Prop leq-ℝ-Prop leq-ℝ-Prop'
 
     concatenate-le-leq-ℝ : le-ℝ x y → leq-ℝ y z → le-ℝ x z
     concatenate-le-leq-ℝ x<y y≤z =
@@ -232,7 +230,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop real-ℚ
 
     le-real-iff-lower-cut-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
     le-real-iff-lower-cut-ℚ = is-rounded-lower-cut-ℝ x q
@@ -253,7 +251,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop real-ℚ
 
     le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
     le-iff-upper-cut-real-ℚ =
@@ -304,7 +302,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop neg-ℝ
 
     neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
     neg-le-ℝ x<y =
@@ -395,7 +393,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop real-ℚ
 
     dense-rational-le-ℝ :
       le-ℝ x y →

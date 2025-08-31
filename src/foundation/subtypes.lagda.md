@@ -17,6 +17,7 @@ open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -112,6 +113,19 @@ module _
     (Q : subtype l2 A) → has-same-elements-subtype Q → P ＝ Q
   eq-has-same-elements-subtype Q =
     map-inv-equiv (extensionality-subtype Q)
+```
+
+### Subtypes with the same elements are equivalent
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X)
+  where
+
+  equiv-has-same-elements-type-subtype :
+    has-same-elements-subtype S T → type-subtype S ≃ type-subtype T
+  equiv-has-same-elements-type-subtype H =
+    equiv-tot (λ x → equiv-iff' (S x) (T x) (H x))
 ```
 
 ### The containment relation is antisymmetric

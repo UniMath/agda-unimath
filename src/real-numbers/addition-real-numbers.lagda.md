@@ -196,7 +196,7 @@ module _
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ real-ℚ
 
   left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
   left-unit-law-add-ℝ x =
@@ -217,7 +217,7 @@ opaque
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
     {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
@@ -248,6 +248,7 @@ opaque
                 ( -q<x) ,
                 x<p)))
 
+abstract
   left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
   left-inverse-law-add-ℝ x =
     tr
@@ -265,8 +266,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
-    unfolding add-ℝ
+    unfolding add-ℝ sim-ℝ
 
     preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
     pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
@@ -380,7 +380,7 @@ module _
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ real-ℚ
 
   add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
   add-real-ℚ p q =

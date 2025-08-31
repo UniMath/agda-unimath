@@ -99,7 +99,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
+    unfolding le-ℝ-Prop real-ℚ
 
     exists-ℚ⁺-in-lower-cut-is-positive-ℝ :
       is-positive-ℝ x → exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
@@ -197,7 +197,7 @@ is-positive-real-positive-ℚ q pos-q =
   preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ q pos-q)
 
 opaque
-  unfolding le-ℝ-Prop
+  unfolding le-ℝ-Prop real-ℚ
 
   is-positive-rational-positive-real-ℚ :
     (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
