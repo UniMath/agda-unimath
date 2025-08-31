@@ -72,7 +72,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (X : Order-Theoretic-Meet-Semilattice l1 l2)
-  {l3 : Level} (I : UU l3) (|I| : is-inhabited I) (cI : count I)
+  {l3 : Level} {I : UU l3} (|I| : is-inhabited I) (cI : count I)
   where
 
   meet-counted-family-type-Order-Theoretic-Meet-Semilattice :
@@ -164,20 +164,20 @@ module _
 abstract
   is-greatest-lower-bound-meet-counted-family-type-Order-Theoretic-Meet-Semilattice :
     {l1 l2 : Level} (X : Order-Theoretic-Meet-Semilattice l1 l2) →
-    {l3 : Level} (I : UU l3) (|I| : is-inhabited I) (cI : count I) →
+    {l3 : Level} {I : UU l3} (|I| : is-inhabited I) (cI : count I) →
     (f : I → type-Order-Theoretic-Meet-Semilattice X) →
     is-greatest-lower-bound-family-of-elements-Poset
       ( poset-Order-Theoretic-Meet-Semilattice X)
       ( f)
-      ( meet-counted-family-type-Order-Theoretic-Meet-Semilattice X I |I| cI f)
+      ( meet-counted-family-type-Order-Theoretic-Meet-Semilattice X |I| cI f)
   is-greatest-lower-bound-meet-counted-family-type-Order-Theoretic-Meet-Semilattice
-    X I |I| cI@(zero-ℕ , _) _ =
+    X |I| cI@(zero-ℕ , _) _ =
       ex-falso
         ( is-nonempty-is-inhabited
           ( |I|)
           ( is-empty-is-zero-number-of-elements-count cI refl))
   is-greatest-lower-bound-meet-counted-family-type-Order-Theoretic-Meet-Semilattice
-    X I |I| cI@(succ-ℕ n , Fin-sn≃I) f y =
+    X |I| cI@(succ-ℕ n , Fin-sn≃I) f y =
       is-greatest-lower-bound-meet-fin-sequence-type-Order-Theoretic-Meet-Semilattice
         ( X)
         ( n)
@@ -191,6 +191,31 @@ abstract
               ( ap
                 ( λ j → leq-Order-Theoretic-Meet-Semilattice X y (f j))
                 ( inv (is-section-map-inv-equiv Fin-sn≃I i)))))
+```
+
+### The meet of an inhabited finite family of elements is its meet over any count for that family
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : Order-Theoretic-Meet-Semilattice l1 l2)
+  (I : Inhabited-Finite-Type l3) (cI : count (type-Inhabited-Finite-Type I))
+  (f : type-Inhabited-Finite-Type I → type-Order-Theoretic-Meet-Semilattice X)
+  where
+
+  abstract
+    eq-meet-inhabited-finite-family-meet-counted-family-Order-Theoretic-Meet-Semilattice :
+      meet-inhabited-finite-family-Order-Theoretic-Meet-Semilattice X I f ＝
+      meet-counted-family-type-Order-Theoretic-Meet-Semilattice
+        ( X)
+        ( is-inhabited-type-Inhabited-Finite-Type I)
+        ( cI)
+        ( f)
+    eq-meet-inhabited-finite-family-meet-counted-family-Order-Theoretic-Meet-Semilattice =
+      eq-sum-finite-sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
+        ( I)
+        ( cI)
+        ( f)
 ```
 
 ### The meet of an inhabited finite family of elements is its least upper bound
@@ -222,14 +247,13 @@ module _
               ( is-greatest-lower-bound-family-of-elements-Poset
                 ( poset-Order-Theoretic-Meet-Semilattice X)
                 ( f))
-              ( eq-sum-finite-sum-count-Commutative-Semigroup
-                ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
+              ( eq-meet-inhabited-finite-family-meet-counted-family-Order-Theoretic-Meet-Semilattice
+                ( X)
                 ( I)
                 ( cI)
                 ( f))
               ( is-greatest-lower-bound-meet-counted-family-type-Order-Theoretic-Meet-Semilattice
                 ( X)
-                ( type-Inhabited-Finite-Type I)
                 ( is-inhabited-type-Inhabited-Finite-Type I)
                 ( cI)
                 ( f)))
