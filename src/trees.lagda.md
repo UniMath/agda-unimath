@@ -42,6 +42,7 @@ open import trees.morphisms-algebras-polynomial-endofunctors public
 open import trees.morphisms-coalgebras-polynomial-endofunctors public
 open import trees.morphisms-directed-trees public
 open import trees.morphisms-enriched-directed-trees public
+open import trees.morphisms-polynomial-endofunctors public
 open import trees.multiset-indexed-dependent-products-of-types public
 open import trees.multisets public
 open import trees.multivariable-polynomial-functors public
