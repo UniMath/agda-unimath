@@ -18,6 +18,8 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 
+open import linear-algebra.finite-sequences-in-semigroups
+
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
 ```
@@ -90,16 +92,12 @@ module _
       ( add-fin-sequence-type-Monoid n v1 v2)
       ( v3)) ＝
     ( add-fin-sequence-type-Monoid n v1 (add-fin-sequence-type-Monoid n v2 v3))
-  associative-add-fin-sequence-type-Monoid n v1 v2 v3 =
-    eq-htpy (λ i → associative-mul-Monoid M (v1 i) (v2 i) (v3 i))
+  associative-add-fin-sequence-type-Monoid =
+    associative-add-fin-sequence-type-Semigroup (semigroup-Monoid M)
 
   semigroup-fin-sequence-type-Monoid : ℕ → Semigroup l
-  pr1 (semigroup-fin-sequence-type-Monoid n) =
-    fin-sequence-Set (set-Monoid M) n
-  pr1 (pr2 (semigroup-fin-sequence-type-Monoid n)) =
-    add-fin-sequence-type-Monoid n
-  pr2 (pr2 (semigroup-fin-sequence-type-Monoid n)) =
-    associative-add-fin-sequence-type-Monoid n
+  semigroup-fin-sequence-type-Monoid =
+    semigroup-fin-sequence-type-Semigroup (semigroup-Monoid M)
 
   left-unit-law-add-fin-sequence-type-Monoid :
     (n : ℕ) (v : fin-sequence-type-Monoid M n) →
