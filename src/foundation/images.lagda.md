@@ -9,15 +9,20 @@ module foundation.images where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.sections
 open import foundation.propositional-truncations
 open import foundation.slice
+open import foundation.action-on-identifications-functions
 open import foundation.subtype-identity-principle
+open import foundation.transport-along-identifications
+open import foundation.retractions
+open import foundation.contractible-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
+open import foundation.embeddings
 open import foundation-core.1-types
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -216,6 +221,53 @@ im-1-Type :
   {l1 l2 : Level} (X : 1-Type l1) {A : UU l2}
   (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
 im-1-Type X f = im-Truncated-Type zero-𝕋 X f
+```
+
+### The unit map of the image of an embedding is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) (f : A ↪ B)
+  where
+
+  map-equiv-map-unit-im-emb : A → im (map-emb f)
+  map-equiv-map-unit-im-emb = map-unit-im (map-emb f)
+
+  map-inv-fiber-map-unit-im-emb :
+    (bim : im (map-emb f)) → fiber (map-emb f) (inclusion-im (map-emb f) bim)
+  map-inv-fiber-map-unit-im-emb (b , ∃a:fa=b) =
+    rec-trunc-Prop (fiber-prop-map-emb f b) id ∃a:fa=b
+
+  map-inv-equiv-map-unit-im-emb : im (map-emb f) → A
+  map-inv-equiv-map-unit-im-emb bim = pr1 (map-inv-fiber-map-unit-im-emb bim)
+
+  abstract
+    is-section-map-inv-equiv-map-unit-im-emb :
+      is-section map-equiv-map-unit-im-emb map-inv-equiv-map-unit-im-emb
+    is-section-map-inv-equiv-map-unit-im-emb bim =
+      eq-type-subtype
+        ( subtype-im (map-emb f))
+        ( pr2 (map-inv-fiber-map-unit-im-emb bim))
+
+    is-retraction-map-inv-equiv-map-unit-im-emb :
+      is-retraction map-equiv-map-unit-im-emb map-inv-equiv-map-unit-im-emb
+    is-retraction-map-inv-equiv-map-unit-im-emb a =
+      ap pr1
+        ( all-elements-equal-fiber-map-emb f (map-emb f a)
+          ( map-inv-fiber-map-unit-im-emb (map-unit-im (map-emb f) a))
+          ( a , refl))
+
+    is-equiv-map-equiv-map-unit-im-emb : is-equiv map-equiv-map-unit-im-emb
+    is-equiv-map-equiv-map-unit-im-emb =
+      is-equiv-is-invertible
+        ( map-inv-equiv-map-unit-im-emb)
+        ( is-section-map-inv-equiv-map-unit-im-emb)
+        ( is-retraction-map-inv-equiv-map-unit-im-emb)
+
+  equiv-map-unit-im-emb : A ≃ im (map-emb f)
+  equiv-map-unit-im-emb =
+    ( map-equiv-map-unit-im-emb ,
+      is-equiv-map-equiv-map-unit-im-emb)
 ```
 
 ## External links

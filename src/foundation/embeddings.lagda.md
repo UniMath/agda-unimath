@@ -457,4 +457,25 @@ module _
       ( fiber' f (f a))
       ( equiv-fiber f (f a))
       ( is-contr-fibers-values-is-emb' e a)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B)
+  where
+
+  all-elements-equal-fiber-map-emb :
+    (b : B) → all-elements-equal (fiber (map-emb f) b)
+  all-elements-equal-fiber-map-emb b (a , fa=b) (a' , fa'=b) =
+    eq-is-contr
+      ( tr
+        ( is-contr ∘ fiber (map-emb f))
+        ( fa=b)
+        ( is-contr-fibers-values-is-emb (map-emb f) (is-emb-map-emb f) a))
+
+  is-prop-fiber-map-emb : (b : B) → is-prop (fiber (map-emb f) b)
+  is-prop-fiber-map-emb b =
+    is-prop-all-elements-equal (all-elements-equal-fiber-map-emb b)
+
+  fiber-prop-map-emb : (b : B) → Prop (l1 ⊔ l2)
+  pr1 (fiber-prop-map-emb b) = fiber (map-emb f) b
+  pr2 (fiber-prop-map-emb b) = is-prop-fiber-map-emb b
 ```

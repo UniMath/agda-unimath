@@ -9,7 +9,9 @@ module metric-spaces.isometries-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.fibers-of-maps
 open import foundation.dependent-pair-types
+open import foundation.binary-transport
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types

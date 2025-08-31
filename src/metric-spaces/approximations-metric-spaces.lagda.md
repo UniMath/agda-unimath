@@ -11,11 +11,14 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.full-subtypes
+open import foundation.images
+open import foundation.images-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
@@ -72,6 +75,31 @@ module _
   type-approximation-Metric-Space : UU (l1 ⊔ l3)
   type-approximation-Metric-Space =
     type-subtype subset-approximation-Metric-Space
+
+  is-approximation-approximation-Metric-Space :
+    is-approximation-Metric-Space X ε subset-approximation-Metric-Space
+  is-approximation-approximation-Metric-Space = pr2 S
+```
+
+## Properties
+
+### If `A` is an `ε`-approximation to `X`, and `i` is an isometry `X → Y`, then `im i A` is an `ε`-approximation to `im i X`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (i : isometry-Metric-Space X Y) (ε : ℚ⁺)
+  (A : approximation-Metric-Space l5 X ε)
+  where
+
+  subset-map-isometry-approximation-Metric-Space :
+    subset-Metric-Space (l1 ⊔ l3 ⊔ l5) Y
+  subset-map-isometry-approximation-Metric-Space =
+    im-subtype
+      ( map-isometry-Metric-Space X Y i)
+      ( subset-approximation-Metric-Space X ε A)
+
+  -- is-approximation-map-isometry-approximation-Metric-Space
 ```
 
 ## References
