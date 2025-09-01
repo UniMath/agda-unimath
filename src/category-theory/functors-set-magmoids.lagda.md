@@ -234,13 +234,7 @@ module _
         ( emb-subtype
           ( preserves-comp-hom-prop-map-Set-Magmoid A B))
         ( emb-equiv
-          ( inv-associative-Σ
-            ( obj-Set-Magmoid A → obj-Set-Magmoid B)
-            ( λ F₀ →
-              { x y : obj-Set-Magmoid A} →
-              hom-Set-Magmoid A x y →
-              hom-Set-Magmoid B (F₀ x) (F₀ y))
-            ( preserves-comp-hom-map-Set-Magmoid A B))))
+          ( inv-associative-Σ)))
 
   eq-map-eq-functor-Set-Magmoid :
     F ＝ G → map-functor-Set-Magmoid A B F ＝ map-functor-Set-Magmoid A B G

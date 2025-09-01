@@ -73,27 +73,27 @@ module _
   where
 
   map-associative-product : (A × B) × C → A × (B × C)
-  map-associative-product = map-associative-Σ A (λ _ → B) (λ _ → C)
+  map-associative-product = map-associative-Σ
 
   map-inv-associative-product : A × (B × C) → (A × B) × C
-  map-inv-associative-product = map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+  map-inv-associative-product = map-inv-associative-Σ
 
   is-section-map-inv-associative-product :
     (map-associative-product ∘ map-inv-associative-product) ~ id
   is-section-map-inv-associative-product =
-    is-section-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+    is-section-map-inv-associative-Σ
 
   is-retraction-map-inv-associative-product :
     (map-inv-associative-product ∘ map-associative-product) ~ id
   is-retraction-map-inv-associative-product =
-    is-retraction-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+    is-retraction-map-inv-associative-Σ
 
   is-equiv-map-associative-product : is-equiv map-associative-product
   is-equiv-map-associative-product =
-    is-equiv-map-associative-Σ A (λ _ → B) (λ _ → C)
+    is-equiv-map-associative-Σ
 
   associative-product : ((A × B) × C) ≃ (A × (B × C))
-  associative-product = associative-Σ A (λ _ → B) (λ _ → C)
+  associative-product = associative-Σ
 ```
 
 ### The unit laws of cartesian product types with respect to contractible types

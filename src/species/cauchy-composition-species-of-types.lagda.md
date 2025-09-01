@@ -78,7 +78,7 @@ left-unit-law-cauchy-composition-species-types {l1} F A =
     ( is-contr-type-trivial-Relaxed-Σ-Decomposition)
     ( trivial-Relaxed-Σ-Decomposition l1 A ,
       is-trivial-trivial-Relaxed-Σ-Decomposition {l1} {l1} {A})) ∘e
-  ( ( inv-associative-Σ _ _ _) ∘e
+  ( ( inv-associative-Σ) ∘e
     ( ( equiv-tot
         ( λ D → equiv-tot (λ C → left-unit-law-Π-is-contr C (center C))))))
 
@@ -91,7 +91,7 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
     ( is-contr-type-discrete-Relaxed-Σ-Decomposition)
     ( ( discrete-Relaxed-Σ-Decomposition l1 A) ,
       is-discrete-discrete-Relaxed-Σ-Decomposition)) ∘e
-  ( inv-associative-Σ _ _ _) ∘e
+  ( inv-associative-Σ) ∘e
   ( equiv-tot (λ _ → commutative-product))
 ```
 
@@ -121,7 +121,7 @@ module _
         ( inv-equiv right-distributive-product-Σ) ∘e
         ( equiv-tot
           ( λ D2 →
-            ( inv-associative-Σ _ _ _))) ∘e
+            ( inv-associative-Σ))) ∘e
         ( equiv-tot
           ( λ D2 →
             ( equiv-product-right
@@ -134,10 +134,10 @@ module _
                       ( λ x → U (cotype-Relaxed-Σ-Decomposition D1 x)))) ∘e
                     ( equiv-ind-Σ))) ∘e
                 ( distributive-Π-Σ))))))) ∘e
-    ( associative-Σ _ _ _) ∘e
+    ( associative-Σ) ∘e
     ( equiv-Σ-equiv-base _
       ( inv-equiv equiv-displayed-fibered-Relaxed-Σ-Decomposition)) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot
       ( λ D →
         left-distributive-product-Σ ∘e equiv-product-right distributive-Π-Σ))

@@ -77,7 +77,7 @@ split-Decidable-Prop :
   ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
 split-Decidable-Prop {l} =
   ( left-distributive-Σ-coproduct (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
-  ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+  ( inv-associative-Σ)
 ```
 
 ### The type of decidable propositions in universe level `l` is equivalent to the type of booleans

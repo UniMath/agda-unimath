@@ -55,10 +55,7 @@ module _
       ( action-stabilizer-action-Concrete-Group x)
   is-transitive-action-stabilizer-action-Concrete-Group x =
     is-0-connected-equiv'
-      ( associative-Σ
-        ( classifying-type-Concrete-Group G)
-        ( type-Set ∘ X)
-        ( mere-eq (shape-Concrete-Group G , x)))
+      ( associative-Σ)
       ( is-0-connected-mere-eq
         ( ( shape-Concrete-Group G , x) ,
           ( refl-mere-eq (shape-Concrete-Group G , x)))

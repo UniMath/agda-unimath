@@ -53,7 +53,7 @@ equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
         Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))
       ( equiv-postcomp
         ( type-Finite-Type B)
-        ( inv-associative-Σ ( UU l) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
+        ( inv-associative-Σ) ∘e
           equiv-Σ
             ( λ z → is-finite z × is-inhabited z)
             ( id-equiv)
@@ -67,10 +67,7 @@ equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
           ( structure-map (λ x → is-inhabited x × is-finite x))
           ( id-equiv)
           ( λ _ → inv-equiv distributive-Π-Σ)) ∘e
-        ( ( associative-Σ
-            ( type-Finite-Type A → type-Finite-Type B)
-            ( structure-map is-inhabited)
-            ( _)) ∘e
+        ( ( associative-Σ) ∘e
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
                 ( λ f →
@@ -96,7 +93,7 @@ equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
   ( ( equiv-Π
       ( λ _ → Inhabited-Finite-Type _)
       ( id-equiv)
-      ( λ a → inv-associative-Σ _ _ _) ∘e
+      ( λ a → inv-associative-Σ) ∘e
       ( ( equiv-Fiber-structure
           ( l)
           ( λ X → is-finite X × is-inhabited X) (type-Finite-Type A)))) ∘e
@@ -117,5 +114,5 @@ equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
           ( _)
           ( id-equiv)
           ( λ _ → equiv-left-swap-Σ)) ∘e
-        ( associative-Σ (UU (l ⊔ l1)) (is-finite) _)))))
+        ( associative-Σ)))))
 ```

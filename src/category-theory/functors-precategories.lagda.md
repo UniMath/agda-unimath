@@ -278,14 +278,7 @@ module _
     equiv-ap-emb
       ( comp-emb
         ( emb-subtype (is-functor-prop-map-Precategory C D))
-        ( emb-equiv
-          ( inv-associative-Σ
-            ( obj-Precategory C → obj-Precategory D)
-            ( λ F₀ →
-              { x y : obj-Precategory C} →
-              hom-Precategory C x y →
-              hom-Precategory D (F₀ x) (F₀ y))
-            ( pr1 ∘ is-functor-prop-map-Precategory C D))))
+        ( emb-equiv (inv-associative-Σ)))
 
   eq-map-eq-functor-Precategory :
     (F ＝ G) → (map-functor-Precategory C D F ＝ map-functor-Precategory C D G)

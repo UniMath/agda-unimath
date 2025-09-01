@@ -118,10 +118,7 @@ module _
       ( Σ ( Σ ( block-partition P)
               ( λ B → is-in-block-partition P B x))
           ( λ B → is-in-block-partition P (pr1 B) y))
-      ( associative-Σ
-        ( block-partition P)
-        ( λ U → is-in-block-partition P U x)
-        ( λ U → is-in-block-partition P (pr1 U) y))
+      ( associative-Σ)
       ( is-contr-Σ
         ( is-contr-block-containing-element-partition P x)
         ( Q , p)
@@ -291,10 +288,7 @@ module _
                     ( ( left-unit-law-Σ-is-contr
                         ( is-contr-block-containing-element-partition P a)
                         ( center-block-containing-element-partition P a)) ∘e
-                      ( inv-associative-Σ
-                        ( block-partition P)
-                        ( λ B → is-in-block-partition P B a)
-                        ( λ B → is-in-block-partition P (pr1 B) x)))) ∘iff
+                      ( inv-associative-Σ))) ∘iff
                   ( K x))))
             ( is-block-class-partition P a))
 
@@ -322,10 +316,7 @@ module _
                         ( is-contr-block-containing-element-partition P a)
                         ( ( make-block-partition P Q H) ,
                           ( make-is-in-block-partition P Q H a q))) ∘e
-                      ( inv-associative-Σ
-                        ( block-partition P)
-                        ( λ B → is-in-block-partition P B a)
-                        ( λ B → is-in-block-partition P (pr1 B) x)))) ∘e
+                      ( inv-associative-Σ))) ∘e
                   ( compute-is-in-block-partition P Q H x)))))
 
   has-same-elements-partition-equivalence-relation-partition :

@@ -187,12 +187,7 @@ equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type {l1} A =
     ( λ X → (type-Finite-Type A) ↠ (type-Finite-Type X))
     ( equiv-tot
       ( λ X → inv-equiv is-finite-iff-∃-surjection-has-decidable-equality))) ∘e
-  ( inv-associative-Σ
-    ( UU l1)
-    ( λ X →
-        has-decidable-equality X ×
-        type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-    ( λ X → type-Finite-Type A ↠ pr1 X)) ∘e
+  ( inv-associative-Σ) ∘e
   ( equiv-tot
     ( λ X →
       ( ( inv-equiv

@@ -172,12 +172,9 @@ compute-binomial-type-Level l {l1} {l2} A B =
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
               ( inv-equiv (equiv-total-fiber (pr1 (pr2 e)))) B))) ∘e
-      ( inv-associative-Σ
-        ( UU (l1 ⊔ l))
-        ( λ X → X ↪ᵈ A)
-        ( λ X → mere-equiv B (pr1 X)))) ∘e
+      ( inv-associative-Σ)) ∘e
     ( equiv-tot (λ X → commutative-product))) ∘e
-  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
+  ( associative-Σ)
 
 compute-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
@@ -313,14 +310,7 @@ abstract
                         ( _)
                         ( λ q → id-equiv)
                         ( λ q → id-equiv)))))))) ∘e
-      ( associative-Σ
-        ( A → Decidable-Prop _)
-        ( λ a → Decidable-Prop _)
-        ( λ t →
-          mere-equiv
-            ( Maybe B)
-            ( ( Σ A (λ a → type-Decidable-Prop (pr1 t a))) +
-              ( type-Decidable-Prop (pr2 t)))))) ∘e
+      ( associative-Σ)) ∘e
     ( equiv-Σ
       ( λ p →
         mere-equiv
