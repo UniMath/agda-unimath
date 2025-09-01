@@ -58,13 +58,13 @@ abstract
             ( eS)
             ( refl)))
   has-least-upper-bound-inhabited-finite-enumeration-subtype-Order-Theoretic-Join-Semilattice
-    X S eS@(succ-ℕ n , Fin-sn->>S) |S| =
+    X S eS@(succ-ℕ n , Fin-sn↠S) |S| =
       let
         (lub , is-lub-sequence) =
           has-least-upper-bound-join-fin-sequence-type-Order-Theoretic-Join-Semilattice
             ( X)
             ( n)
-            ( pr1 ∘ map-surjection Fin-sn->>S)
+            ( pr1 ∘ map-surjection Fin-sn↠S)
         is-lub-subset :
           is-least-upper-bound-subset-Poset
             ( poset-Order-Theoretic-Join-Semilattice X)
@@ -74,14 +74,14 @@ abstract
           ( ( λ s≤z →
               forward-implication
                 ( is-lub-sequence z)
-                ( s≤z ∘ map-surjection Fin-sn->>S)) ,
+                ( s≤z ∘ map-surjection Fin-sn↠S)) ,
             ( λ lub≤z s →
               let
                 open
                   do-syntax-trunc-Prop
                     ( leq-Order-Theoretic-Join-Semilattice-Prop X (pr1 s) z)
                 in do
-                  (i , fi=s) ← is-surjective-map-surjection Fin-sn->>S s
+                  (i , fi=s) ← is-surjective-map-surjection Fin-sn↠S s
                   tr
                     ( λ w → leq-Order-Theoretic-Join-Semilattice X (pr1 w) z)
                     ( fi=s)

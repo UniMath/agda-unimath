@@ -63,8 +63,8 @@ abstract
           ( eS)
           ( refl)))
   max-is-inhabited-finite-enumeration-subset-ℝ
-    S eS@(succ-ℕ n , Fin-sn->>S) |S| =
-      max-fin-sequence-ℝ n (inclusion-subset-ℝ S ∘ map-surjection Fin-sn->>S)
+    S eS@(succ-ℕ n , Fin-sn↠S) |S| =
+      max-fin-sequence-ℝ n (inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
 
   is-upper-bound-max-is-inhabited-finite-enumeration-subset-ℝ :
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
@@ -82,7 +82,7 @@ abstract
             ( eS)
             ( refl)))
   is-upper-bound-max-is-inhabited-finite-enumeration-subset-ℝ
-    S eS@(succ-ℕ n , Fin-sn->>S) |S| (s , s∈S) =
+    S eS@(succ-ℕ n , Fin-sn↠S) |S| (s , s∈S) =
       let
         open
           do-syntax-trunc-Prop
@@ -90,7 +90,7 @@ abstract
               ( s)
               ( max-is-inhabited-finite-enumeration-subset-ℝ S eS |S|))
       in do
-        (i , fi=s) ← is-surjective-map-surjection Fin-sn->>S (s , s∈S)
+        (i , fi=s) ← is-surjective-map-surjection Fin-sn↠S (s , s∈S)
         tr
           ( λ x →
             leq-ℝ
@@ -99,7 +99,7 @@ abstract
           ( fi=s)
           ( is-upper-bound-max-fin-sequence-ℝ
             ( n)
-            ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn->>S)
+            ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
             ( i))
 
   is-approximated-below-max-is-inhabited-finite-enumeration-subset-ℝ :
@@ -117,13 +117,13 @@ abstract
             ( eS)
             ( refl)))
   is-approximated-below-max-is-inhabited-finite-enumeration-subset-ℝ
-    S (succ-ℕ n , Fin-sn->>S) |S| ε =
+    S (succ-ℕ n , Fin-sn↠S) |S| ε =
       map-exists _
-        ( map-surjection Fin-sn->>S)
+        ( map-surjection Fin-sn↠S)
         ( λ _ → id)
         ( is-approximated-below-max-fin-sequence-ℝ
           ( n)
-          ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn->>S)
+          ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
           ( ε))
 
   is-supremum-max-is-inhabited-finite-enumeration-subset-ℝ :
