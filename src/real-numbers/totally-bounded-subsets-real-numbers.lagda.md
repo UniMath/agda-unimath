@@ -321,13 +321,6 @@ module _
                   ( s)))
       in do
         (ε' , ε'+ε'<ε) ← double-le-ℚ⁺ ε
-        let
-          sup≤max-net-ε'+ε' : leq-ℝ sup (max-net ε' +ℝ real-ℚ⁺ ε')
-          sup≤max-net-ε'+ε' =
-            right-leq-real-bound-neighborhood-ℝ ε' _ _
-              ( saturated-is-limit-lim-cauchy-approximation-ℝ
-                ( cauchy-approximation-sup-modulated-totally-bounded-subset-ℝ)
-                ( ε'))
         ((x , x∈net-ε') , max-net-ε'-ε'<x) ←
           is-approximated-below-max-inhabited-finitely-enumerable-subset-ℝ
             ( net ε')
@@ -349,7 +342,11 @@ module _
                   ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)) ∙
                   ap-diff-ℝ refl (add-real-ℚ _ _))
                 ( preserves-leq-diff-ℝ (real-ℚ⁺ ε') _ _
-                  ( leq-transpose-right-add-ℝ _ _ _ sup≤max-net-ε'+ε')))))
+                  ( leq-transpose-right-add-ℝ _ _ _
+                    ( right-leq-real-bound-neighborhood-ℝ ε' _ _
+                      ( saturated-is-limit-lim-cauchy-approximation-ℝ
+                        ( cauchy-approximation-sup-modulated-totally-bounded-subset-ℝ)
+                        ( ε'))))))))
 
     is-supremum-sup-modulated-totally-bounded-subset-ℝ :
       is-supremum-subset-ℝ S sup-modulated-totally-bounded-subset-ℝ
