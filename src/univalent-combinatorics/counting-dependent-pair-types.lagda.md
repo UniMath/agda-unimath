@@ -67,7 +67,7 @@ count-Σ-Fin 0 f = count-is-empty pr1
 count-Σ-Fin (succ-ℕ k) {B} f =
   count-equiv'
     ( ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr))) ∘e
-      ( right-distributive-Σ-coproduct (Fin k) unit B))
+      ( right-distributive-Σ-coproduct B))
     ( count-coproduct (count-Σ-Fin k (f ∘ inl)) (f (inr star)))
 
 count-Σ' :

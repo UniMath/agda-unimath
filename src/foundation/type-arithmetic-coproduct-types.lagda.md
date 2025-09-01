@@ -124,7 +124,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : A + B → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3)
   where
 
   map-right-distributive-Σ-coproduct :
@@ -225,34 +225,34 @@ module _
 
   map-right-distributive-product-coproduct : (A + B) × C → (A × C) + (B × C)
   map-right-distributive-product-coproduct =
-    map-right-distributive-Σ-coproduct A B (λ _ → C)
+    map-right-distributive-Σ-coproduct (λ _ → C)
 
   map-inv-right-distributive-product-coproduct :
     (A × C) + (B × C) → (A + B) × C
   map-inv-right-distributive-product-coproduct =
-    map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   is-section-map-inv-right-distributive-product-coproduct :
     map-right-distributive-product-coproduct ∘
     map-inv-right-distributive-product-coproduct ~ id
   is-section-map-inv-right-distributive-product-coproduct =
-    is-section-map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    is-section-map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   is-retraction-map-inv-right-distributive-product-coproduct :
     map-inv-right-distributive-product-coproduct ∘
     map-right-distributive-product-coproduct ~ id
   is-retraction-map-inv-right-distributive-product-coproduct =
-    is-retraction-map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    is-retraction-map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   abstract
     is-equiv-map-right-distributive-product-coproduct :
       is-equiv map-right-distributive-product-coproduct
     is-equiv-map-right-distributive-product-coproduct =
-      is-equiv-map-right-distributive-Σ-coproduct A B (λ _ → C)
+      is-equiv-map-right-distributive-Σ-coproduct (λ _ → C)
 
   right-distributive-product-coproduct : ((A + B) × C) ≃ ((A × C) + (B × C))
   right-distributive-product-coproduct =
-    right-distributive-Σ-coproduct A B (λ _ → C)
+    right-distributive-Σ-coproduct (λ _ → C)
 ```
 
 ### Left distributivity of products over coproducts

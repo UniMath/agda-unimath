@@ -280,15 +280,11 @@ abstract
                     ( is-torsorial-false-Prop)
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
               ( right-distributive-Σ-coproduct
-                ( Σ (Prop _) type-Prop)
-                ( Σ (Prop _) (¬_ ∘ type-Prop))
                 ( ind-coproduct _
                   ( λ Q →
                     mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))
                   ( λ Q →
-                    mere-equiv
-                      ( Maybe B)
-                      ( (Σ A _) + (type-Prop (pr1 Q))))))) ∘e
+                    mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))))) ∘e
             ( equiv-Σ
               ( ind-coproduct _
                 ( λ Q →
@@ -324,7 +320,7 @@ abstract
             ( ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (λ y → type-Decidable-Prop (u (inr y))))) ∘e
-              ( right-distributive-Σ-coproduct A unit
+              ( right-distributive-Σ-coproduct
                 ( λ x → type-Decidable-Prop (u x))))
             ( Maybe B))))
 
