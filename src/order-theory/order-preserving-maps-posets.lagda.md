@@ -168,7 +168,7 @@ module _
 
   left-unit-law-comp-hom-Poset :
     (f : hom-Poset P Q) →
-     comp-hom-Poset P Q Q (id-hom-Poset Q) f ＝ f
+    comp-hom-Poset P Q Q (id-hom-Poset Q) f ＝ f
   left-unit-law-comp-hom-Poset =
     left-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 

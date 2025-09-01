@@ -187,7 +187,7 @@ module _
   abstract
     left-unit-law-mul-left-module-Ring :
       (x : type-left-module-Ring R M) →
-       mul-left-module-Ring R M (one-Ring R) x ＝ x
+      mul-left-module-Ring R M (one-Ring R) x ＝ x
     left-unit-law-mul-left-module-Ring =
       htpy-eq-hom-Ab
         ( ab-left-module-Ring R M)
@@ -305,7 +305,7 @@ module _
   abstract
     left-zero-law-mul-left-module-Ring :
       (x : type-left-module-Ring R M) →
-       mul-left-module-Ring R M (zero-Ring R) x ＝ zero-left-module-Ring R M
+      mul-left-module-Ring R M (zero-Ring R) x ＝ zero-left-module-Ring R M
     left-zero-law-mul-left-module-Ring =
       htpy-eq-hom-Ab
         ( ab-left-module-Ring R M)

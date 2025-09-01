@@ -387,7 +387,7 @@ module _
       (x : X) (p : is-in-2-Element-Decidable-Subtype Y x) →
       (h : Fin 2 ≃ type-2-Element-Decidable-Subtype Y) →
       (k1 k2 k3 : Fin 2) →
-       map-inv-equiv h (pair x p) ＝ k1 →
+      map-inv-equiv h (pair x p) ＝ k1 →
       Id
         ( map-inv-equiv h
           ( pair

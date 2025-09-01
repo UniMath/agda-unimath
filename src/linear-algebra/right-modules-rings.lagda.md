@@ -160,7 +160,7 @@ module _
 
   left-unit-law-mul-right-module-Ring :
     (x : type-right-module-Ring R M) →
-     mul-right-module-Ring R M (one-Ring R) x ＝ x
+    mul-right-module-Ring R M (one-Ring R) x ＝ x
   left-unit-law-mul-right-module-Ring =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring R M)
