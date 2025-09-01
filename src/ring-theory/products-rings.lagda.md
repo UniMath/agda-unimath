@@ -67,13 +67,13 @@ module _
 
   left-inverse-law-add-product-Ring :
     (x : type-product-Ring) →
-    Id (add-product-Ring (neg-product-Ring x) x) zero-product-Ring
+    add-product-Ring (neg-product-Ring x) x ＝ zero-product-Ring
   left-inverse-law-add-product-Ring (x , y) =
     eq-pair (left-inverse-law-add-Ring R1 x) (left-inverse-law-add-Ring R2 y)
 
   right-inverse-law-add-product-Ring :
     (x : type-product-Ring) →
-    Id (add-product-Ring x (neg-product-Ring x)) zero-product-Ring
+    add-product-Ring x (neg-product-Ring x) ＝ zero-product-Ring
   right-inverse-law-add-product-Ring (x , y) =
     eq-pair (right-inverse-law-add-Ring R1 x) (right-inverse-law-add-Ring R2 y)
 

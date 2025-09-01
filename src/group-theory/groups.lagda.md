@@ -183,11 +183,11 @@ module _
   inv-Group = pr1 has-inverses-Group
 
   left-inverse-law-mul-Group :
-    (x : type-Group) → Id (mul-Group (inv-Group x) x) unit-Group
+    (x : type-Group) → mul-Group (inv-Group x) x ＝ unit-Group
   left-inverse-law-mul-Group = pr1 (pr2 has-inverses-Group)
 
   right-inverse-law-mul-Group :
-    (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
+    (x : type-Group) → mul-Group x (inv-Group x) ＝ unit-Group
   right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
 
   is-invertible-element-Group :
@@ -439,7 +439,7 @@ module _
 
 ```agda
   inv-inv-Group :
-    (x : type-Group G) → Id (inv-Group G (inv-Group G x)) x
+    (x : type-Group G) → inv-Group G (inv-Group G x) ＝ x
   inv-inv-Group x =
     is-injective-mul-Group
       ( inv-Group G x)

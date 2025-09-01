@@ -124,12 +124,12 @@ module _
 left-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (comp-hom-species-types (id-hom-species-types G) f) f
+  comp-hom-species-types (id-hom-species-types G) f ＝ f
 left-unit-law-comp-hom-species-types f = refl
 
 right-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (comp-hom-species-types f (id-hom-species-types F)) f
+  comp-hom-species-types f (id-hom-species-types F) ＝ f
 right-unit-law-comp-hom-species-types f = refl
 ```

@@ -90,7 +90,7 @@ reverse-flatten-list (cons a x) =
 
 reverse-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (reverse-list (reverse-list x)) x
+  reverse-list (reverse-list x) ＝ x
 reverse-reverse-list nil = refl
 reverse-reverse-list (cons a x) =
   ( reverse-snoc-list (reverse-list x) a) ∙

@@ -138,12 +138,12 @@ module _
   inv-∞-Group = inv-Ω classifying-pointed-type-∞-Group
 
   left-inverse-law-mul-∞-Group :
-    (x : type-∞-Group) → Id (mul-∞-Group (inv-∞-Group x) x) unit-∞-Group
+    (x : type-∞-Group) → mul-∞-Group (inv-∞-Group x) x ＝ unit-∞-Group
   left-inverse-law-mul-∞-Group =
     left-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 
   right-inverse-law-mul-∞-Group :
-    (x : type-∞-Group) → Id (mul-∞-Group x (inv-∞-Group x)) unit-∞-Group
+    (x : type-∞-Group) → mul-∞-Group x (inv-∞-Group x) ＝ unit-∞-Group
   right-inverse-law-mul-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 ```

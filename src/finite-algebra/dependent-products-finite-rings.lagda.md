@@ -110,13 +110,13 @@ module _
 
   left-inverse-law-add-Π-Finite-Ring :
     (x : type-Π-Finite-Ring) →
-    Id (add-Π-Finite-Ring (neg-Π-Finite-Ring x) x) zero-Π-Finite-Ring
+    add-Π-Finite-Ring (neg-Π-Finite-Ring x) x ＝ zero-Π-Finite-Ring
   left-inverse-law-add-Π-Finite-Ring =
     left-inverse-law-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   right-inverse-law-add-Π-Finite-Ring :
     (x : type-Π-Finite-Ring) →
-    Id (add-Π-Finite-Ring x (neg-Π-Finite-Ring x)) zero-Π-Finite-Ring
+    add-Π-Finite-Ring x (neg-Π-Finite-Ring x) ＝ zero-Π-Finite-Ring
   right-inverse-law-add-Π-Finite-Ring =
     right-inverse-law-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 

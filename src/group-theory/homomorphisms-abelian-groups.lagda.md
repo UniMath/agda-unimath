@@ -185,13 +185,13 @@ associative-comp-hom-Ab A B C D =
 ```agda
 left-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
-  ( f : hom-Ab A B) → Id (comp-hom-Ab A B B (id-hom-Ab B) f) f
+  ( f : hom-Ab A B) → comp-hom-Ab A B B (id-hom-Ab B) f ＝ f
 left-unit-law-comp-hom-Ab A B =
   left-unit-law-comp-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
 right-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
-  ( f : hom-Ab A B) → Id (comp-hom-Ab A A B f (id-hom-Ab A)) f
+  ( f : hom-Ab A B) → comp-hom-Ab A A B f (id-hom-Ab A) ＝ f
 right-unit-law-comp-hom-Ab A B =
   right-unit-law-comp-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 ```

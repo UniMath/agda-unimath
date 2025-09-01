@@ -72,7 +72,7 @@ is-euclidean-valuation R v =
   ( is-nonzero-Integral-Domain R y) →
   Σ ( type-Integral-Domain R × type-Integral-Domain R)
     ( λ (q , r) →
-      ( Id x (add-Integral-Domain R (mul-Integral-Domain R q y) r)) ×
+      ( x ＝ add-Integral-Domain R (mul-Integral-Domain R q y) r) ×
         ( is-zero-Integral-Domain R r +
         ( v r <-ℕ v y)))
 ```

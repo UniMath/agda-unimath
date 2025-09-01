@@ -3451,7 +3451,7 @@ module _
               ( pair X (unit-trunc-Prop (equiv-count eX))))
             ( T)
             ( canonical-orientation-count))) →
-      Id (pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H)) T
+      pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H) ＝ T
     retraction-orientation T (inl H) =
       eq-effective-quotient'
         ( even-difference-orientation-Complete-Undirected-Graph

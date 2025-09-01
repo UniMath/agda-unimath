@@ -328,7 +328,7 @@ module _
   where
 
   left-unit-law-comp-equiv-Cyclic-Type :
-    Id (comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e) e
+    comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e ＝ e
   left-unit-law-comp-equiv-Cyclic-Type =
     eq-htpy-equiv-Cyclic-Type k X Y
       ( comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e)
@@ -336,7 +336,7 @@ module _
       ( refl-htpy)
 
   right-unit-law-comp-equiv-Cyclic-Type :
-    Id (comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X)) e
+    comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X) ＝ e
   right-unit-law-comp-equiv-Cyclic-Type =
     eq-htpy-equiv-Cyclic-Type k X Y
       ( comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X))

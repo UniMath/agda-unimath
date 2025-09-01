@@ -86,7 +86,7 @@ module _
   iso-iterative-groupoid-automorphism-Finite-Type :
     (x y : type-Finite-Type X) → UU l
   iso-iterative-groupoid-automorphism-Finite-Type x y =
-    Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
+    Σ ℕ (λ n → iterate n (map-equiv e) x ＝ y)
 
   natural-isomorphism-iterative-groupoid-automorphism-Finite-Type :
     (x y : type-Finite-Type X)
@@ -394,7 +394,7 @@ module _
 
   mult-has-finite-orbits-permutation :
     (k : ℕ) →
-    Id (iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f) a) a
+    iterate (k *ℕ (pr1 has-finite-orbits-permutation)) (map-equiv f) a ＝ a
   mult-has-finite-orbits-permutation zero-ℕ = refl
   mult-has-finite-orbits-permutation (succ-ℕ k) =
     ( iterate-add-ℕ
@@ -1688,7 +1688,7 @@ module _
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( T)
             ( b)) →
-        Id (h' (inv-h' T)) T
+        h' (inv-h' T) ＝ T
       retraction-h' T (inl Q) R =
         tr
           (λ w →
@@ -2002,7 +2002,7 @@ module _
                 ( b))
               ( refl)))
       section-h' :
-        (k : Fin (succ-ℕ (number-of-elements-count h))) → Id (inv-h' (h' k)) k
+        (k : Fin (succ-ℕ (number-of-elements-count h))) → inv-h' (h' k) ＝ k
       section-h' (inl k) =
         section-h'-inl k Q R
           ( is-decidable-is-in-equivalence-class-same-orbits-permutation

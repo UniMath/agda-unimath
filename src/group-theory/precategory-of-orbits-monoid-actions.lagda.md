@@ -53,7 +53,7 @@ module _
 
   eq-hom-orbit-action-Monoid :
     {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
-    Id (mul-action-Monoid M X (element-hom-orbit-action-Monoid f) x) y
+    mul-action-Monoid M X (element-hom-orbit-action-Monoid f) x ＝ y
   eq-hom-orbit-action-Monoid f = pr2 f
 
   htpy-hom-orbit-action-Monoid :
@@ -165,14 +165,14 @@ module _
 
   left-unit-law-comp-hom-orbit-action-Monoid :
     {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
-    Id (comp-hom-orbit-action-Monoid (id-hom-orbit-action-Monoid y) f) f
+    comp-hom-orbit-action-Monoid (id-hom-orbit-action-Monoid y) f ＝ f
   left-unit-law-comp-hom-orbit-action-Monoid f =
     eq-htpy-hom-orbit-action-Monoid
       ( left-unit-law-mul-Monoid M (element-hom-orbit-action-Monoid f))
 
   right-unit-law-comp-hom-orbit-action-Monoid :
     {x y : type-action-Monoid M X} (f : hom-orbit-action-Monoid x y) →
-    Id (comp-hom-orbit-action-Monoid f (id-hom-orbit-action-Monoid x)) f
+    comp-hom-orbit-action-Monoid f (id-hom-orbit-action-Monoid x) ＝ f
   right-unit-law-comp-hom-orbit-action-Monoid f =
     eq-htpy-hom-orbit-action-Monoid
       ( right-unit-law-mul-Monoid M (element-hom-orbit-action-Monoid f))

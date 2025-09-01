@@ -195,7 +195,7 @@ square-eq-Eq-list refl = refl
 
 is-section-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (e : Eq-list l l') →
-  Id (Eq-eq-list l l' (eq-Eq-list l l' e)) e
+  Eq-eq-list l l' (eq-Eq-list l l' e) ＝ e
 is-section-eq-Eq-list nil nil e = eq-is-contr is-contr-raise-unit
 is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
 is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
@@ -205,13 +205,13 @@ is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
-  Id (eq-Eq-list l l (refl-Eq-list l)) refl
+  eq-Eq-list l l (refl-Eq-list l) ＝ refl
 eq-Eq-refl-Eq-list nil = refl
 eq-Eq-refl-Eq-list (cons x l) = ap² (cons x) (eq-Eq-refl-Eq-list l)
 
 is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : l ＝ l') →
-  Id (eq-Eq-list l l' (Eq-eq-list l l' p)) p
+  eq-Eq-list l l' (Eq-eq-list l l' p) ＝ p
 is-retraction-eq-Eq-list nil .nil refl = refl
 is-retraction-eq-Eq-list (cons x l) .(cons x l) refl =
   eq-Eq-refl-Eq-list (cons x l)
@@ -273,7 +273,7 @@ list-Set A = pair (list (type-Set A)) (is-set-list (is-set-type-Set A))
 ```agda
 length-nil :
   {l1 : Level} {A : UU l1} →
-  Id (length-list {A = A} nil) zero-ℕ
+  length-list {A = A} nil ＝ zero-ℕ
 length-nil = refl
 
 is-nil-is-zero-length-list :

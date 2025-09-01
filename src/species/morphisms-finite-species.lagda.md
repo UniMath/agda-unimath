@@ -105,13 +105,13 @@ module _
 left-unit-law-comp-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f : hom-finite-species F G) →
-  Id (comp-hom-finite-species F G G (id-hom-finite-species G) f) f
+  comp-hom-finite-species F G G (id-hom-finite-species G) f ＝ f
 left-unit-law-comp-hom-finite-species F G f = refl
 
 right-unit-law-comp-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f : hom-finite-species F G) →
-  Id (comp-hom-finite-species F F G f (id-hom-finite-species F)) f
+  comp-hom-finite-species F F G f (id-hom-finite-species F) ＝ f
 right-unit-law-comp-hom-finite-species F G f = refl
 ```
 

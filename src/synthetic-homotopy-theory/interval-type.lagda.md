@@ -158,7 +158,7 @@ tr-value :
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
 is-retraction-inv-ev-𝕀 :
-  {l : Level} {P : 𝕀 → UU l} (f : (x : 𝕀) → P x) → Id (inv-ev-𝕀 (ev-𝕀 f)) f
+  {l : Level} {P : 𝕀 → UU l} (f : (x : 𝕀) → P x) → inv-ev-𝕀 (ev-𝕀 f) ＝ f
 is-retraction-inv-ev-𝕀 {l} {P} f =
   eq-htpy
     ( ind-𝕀

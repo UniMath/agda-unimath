@@ -187,7 +187,7 @@ module _
 
   left-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
+     comp-hom-Preorder P Q Q (id-hom-Preorder Q) f ＝ f
   left-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f)
@@ -196,7 +196,7 @@ module _
 
   right-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id (comp-hom-Preorder P P Q f (id-hom-Preorder P)) f
+    comp-hom-Preorder P P Q f (id-hom-Preorder P) ＝ f
   right-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P P Q f (id-hom-Preorder P))

@@ -142,13 +142,13 @@ module _
 
   left-unit-law-add-left-module-Ring :
     (x : type-left-module-Ring R M) →
-    Id (add-left-module-Ring R M (zero-left-module-Ring R M) x) x
+    add-left-module-Ring R M (zero-left-module-Ring R M) x ＝ x
   left-unit-law-add-left-module-Ring =
     left-unit-law-add-Ab (ab-left-module-Ring R M)
 
   right-unit-law-add-left-module-Ring :
     (x : type-left-module-Ring R M) →
-    Id (add-left-module-Ring R M x (zero-left-module-Ring R M)) x
+    add-left-module-Ring R M x (zero-left-module-Ring R M) ＝ x
   right-unit-law-add-left-module-Ring =
     right-unit-law-add-Ab (ab-left-module-Ring R M)
 ```
@@ -187,7 +187,7 @@ module _
   abstract
     left-unit-law-mul-left-module-Ring :
       (x : type-left-module-Ring R M) →
-      Id ( mul-left-module-Ring R M (one-Ring R) x) x
+       mul-left-module-Ring R M (one-Ring R) x ＝ x
     left-unit-law-mul-left-module-Ring =
       htpy-eq-hom-Ab
         ( ab-left-module-Ring R M)

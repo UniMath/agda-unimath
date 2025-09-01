@@ -115,7 +115,7 @@ module _
     (x : X) (d : is-decidable (is-in-2-Element-Decidable-Subtype P x))
     (d' : is-decidable
           ( is-in-2-Element-Decidable-Subtype P (map-transposition' x d))) →
-    Id (map-transposition' (map-transposition' x d) d') x
+    map-transposition' (map-transposition' x d) d' ＝ x
   is-involution-map-transposition' x (inl p) (inl p') =
     ( ap
       ( λ y → map-transposition' (map-transposition' x (inl p)) (inl y))

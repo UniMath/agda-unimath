@@ -86,12 +86,12 @@ module _
 
   left-inverse-law-add-product-Ab :
     (x : type-product-Ab) →
-    Id (add-product-Ab (neg-product-Ab x) x) zero-product-Ab
+    add-product-Ab (neg-product-Ab x) x ＝ zero-product-Ab
   left-inverse-law-add-product-Ab = left-inverse-law-mul-Group group-product-Ab
 
   right-inverse-law-add-product-Ab :
     (x : type-product-Ab) →
-    Id (add-product-Ab x (neg-product-Ab x)) zero-product-Ab
+    add-product-Ab x (neg-product-Ab x) ＝ zero-product-Ab
   right-inverse-law-add-product-Ab =
     right-inverse-law-mul-Group group-product-Ab
 

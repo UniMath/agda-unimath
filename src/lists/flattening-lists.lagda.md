@@ -40,7 +40,7 @@ flatten-list = fold-list nil concat-list
 ```agda
 flatten-unit-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (flatten-list (unit-list x)) x
+  flatten-list (unit-list x) ＝ x
 flatten-unit-list x = right-unit-law-concat-list x
 
 length-flatten-list :

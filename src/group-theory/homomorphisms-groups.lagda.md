@@ -199,7 +199,7 @@ module _
 ```agda
 left-unit-law-comp-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H) →
-  Id (comp-hom-Group G H H (id-hom-Group H) f) f
+  comp-hom-Group G H H (id-hom-Group H) f ＝ f
 left-unit-law-comp-hom-Group G H =
   left-unit-law-comp-hom-Semigroup
     ( semigroup-Group G)
@@ -207,7 +207,7 @@ left-unit-law-comp-hom-Group G H =
 
 right-unit-law-comp-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H) →
-  Id (comp-hom-Group G G H f (id-hom-Group G)) f
+  comp-hom-Group G G H f (id-hom-Group G) ＝ f
 right-unit-law-comp-hom-Group G H =
   right-unit-law-comp-hom-Semigroup
     ( semigroup-Group G)

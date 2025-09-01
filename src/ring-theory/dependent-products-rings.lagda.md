@@ -91,11 +91,11 @@ module _
   right-unit-law-add-Π-Ring = right-unit-law-add-Semiring semiring-Π-Ring
 
   left-inverse-law-add-Π-Ring :
-    (x : type-Π-Ring) → Id (add-Π-Ring (neg-Π-Ring x) x) zero-Π-Ring
+    (x : type-Π-Ring) → add-Π-Ring (neg-Π-Ring x) x ＝ zero-Π-Ring
   left-inverse-law-add-Π-Ring = left-inverse-law-add-Ab ab-Π-Ring
 
   right-inverse-law-add-Π-Ring :
-    (x : type-Π-Ring) → Id (add-Π-Ring x (neg-Π-Ring x)) zero-Π-Ring
+    (x : type-Π-Ring) → add-Π-Ring x (neg-Π-Ring x) ＝ zero-Π-Ring
   right-inverse-law-add-Π-Ring = right-inverse-law-add-Ab ab-Π-Ring
 
   commutative-add-Π-Ring :

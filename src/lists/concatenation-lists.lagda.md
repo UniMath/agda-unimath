@@ -104,13 +104,13 @@ length-concat-list (cons a x) y =
 ```agda
 eta-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (concat-list (head-list x) (tail-list x)) x
+  concat-list (head-list x) (tail-list x) ＝ x
 eta-list nil = refl
 eta-list (cons a x) = refl
 
 eta-list' :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (concat-list (remove-last-element-list x) (last-element-list x)) x
+  concat-list (remove-last-element-list x) (last-element-list x) ＝ x
 eta-list' nil = refl
 eta-list' (cons a nil) = refl
 eta-list' (cons a (cons b x)) = ap (cons a) (eta-list' (cons b x))

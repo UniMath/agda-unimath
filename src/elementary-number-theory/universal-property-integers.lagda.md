@@ -65,7 +65,7 @@ abstract
   compute-succ-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) (k : ℤ) →
-    Id (elim-ℤ P p0 pS (succ-ℤ k)) (map-equiv (pS k) (elim-ℤ P p0 pS k))
+    elim-ℤ P p0 pS (succ-ℤ k) ＝ map-equiv (pS k) (elim-ℤ P p0 pS k)
   compute-succ-elim-ℤ P p0 pS (inl zero-ℕ) =
     inv
       ( is-section-map-inv-is-equiv
@@ -86,7 +86,7 @@ ELIM-ℤ P p0 pS =
   Σ ( (k : ℤ) → P k)
     ( λ f →
       ( ( f zero-ℤ ＝ p0) ×
-        ( (k : ℤ) → Id (f (succ-ℤ k)) ((map-equiv (pS k)) (f k)))))
+        ( (k : ℤ) → f (succ-ℤ k) ＝ map-equiv (pS k) (f k))))
 
 Elim-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
@@ -157,15 +157,15 @@ abstract
       ( pair (pr1 s) refl-htpy)
       ( is-torsorial-Eq-structure
         ( is-contr-is-equiv'
-          ( Σ (pr1 s zero-ℤ ＝ p0) (λ α → Id α (pr1 (pr2 s))))
+          ( Σ (pr1 s zero-ℤ ＝ p0) (λ α → α ＝ pr1 (pr2 s)))
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-torsorial-Id' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
-          ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
-              ( λ β → β ~ (pr2 (pr2 s))))
+          ( Σ ( ( k : ℤ) → pr1 s (succ-ℤ k) ＝ pr1 (pS k) (pr1 s k))
+              ( λ β → β ~ pr2 (pr2 s)))
           ( tot (λ β → right-transpose-htpy-concat refl-htpy β (pr2 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ β →

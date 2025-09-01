@@ -115,12 +115,12 @@ module _
   where
 
   left-unit-law-add-tuple-Ring :
-    {n : ℕ} (v : tuple-Ring R n) → Id (add-tuple-Ring R (zero-tuple-Ring R) v) v
+    {n : ℕ} (v : tuple-Ring R n) → add-tuple-Ring R (zero-tuple-Ring R) v ＝ v
   left-unit-law-add-tuple-Ring =
     left-unit-law-add-tuple-Semiring (semiring-Ring R)
 
   right-unit-law-add-tuple-Ring :
-    {n : ℕ} (v : tuple-Ring R n) → Id (add-tuple-Ring R v (zero-tuple-Ring R)) v
+    {n : ℕ} (v : tuple-Ring R n) → add-tuple-Ring R v (zero-tuple-Ring R) ＝ v
   right-unit-law-add-tuple-Ring =
     right-unit-law-add-tuple-Semiring (semiring-Ring R)
 ```

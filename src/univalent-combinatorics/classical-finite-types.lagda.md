@@ -100,12 +100,12 @@ pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 ```agda
 is-section-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
-  Id (standard-classical-Fin k (classical-standard-Fin k x)) x
+  standard-classical-Fin k (classical-standard-Fin k x) ＝ x
 is-section-classical-standard-Fin {succ-ℕ k} x = is-section-nat-Fin k x
 
 is-retraction-classical-standard-Fin :
   {k : ℕ} (x : classical-Fin k) →
-  Id (classical-standard-Fin k (standard-classical-Fin k x)) x
+  classical-standard-Fin k (standard-classical-Fin k x) ＝ x
 is-retraction-classical-standard-Fin {succ-ℕ k} (pair x p) =
   eq-Eq-classical-Fin (succ-ℕ k)
     ( classical-standard-Fin

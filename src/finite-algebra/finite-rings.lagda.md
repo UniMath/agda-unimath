@@ -255,13 +255,13 @@ module _
 
   left-inverse-law-add-Finite-Ring :
     (x : type-Finite-Ring R) →
-    Id (add-Finite-Ring R (neg-Finite-Ring x) x) (zero-Finite-Ring R)
+    add-Finite-Ring R (neg-Finite-Ring x) x ＝ zero-Finite-Ring R
   left-inverse-law-add-Finite-Ring =
     left-inverse-law-add-Ring (ring-Finite-Ring R)
 
   right-inverse-law-add-Finite-Ring :
     (x : type-Finite-Ring R) →
-    Id (add-Finite-Ring R x (neg-Finite-Ring x)) (zero-Finite-Ring R)
+    add-Finite-Ring R x (neg-Finite-Ring x) ＝ zero-Finite-Ring R
   right-inverse-law-add-Finite-Ring =
     right-inverse-law-add-Ring (ring-Finite-Ring R)
 
@@ -361,13 +361,13 @@ module _
 
   left-zero-law-mul-Finite-Ring :
     (x : type-Finite-Ring R) →
-    Id (mul-Finite-Ring R (zero-Finite-Ring R) x) (zero-Finite-Ring R)
+    mul-Finite-Ring R (zero-Finite-Ring R) x ＝ zero-Finite-Ring R
   left-zero-law-mul-Finite-Ring =
     left-zero-law-mul-Ring (ring-Finite-Ring R)
 
   right-zero-law-mul-Finite-Ring :
     (x : type-Finite-Ring R) →
-    Id (mul-Finite-Ring R x (zero-Finite-Ring R)) (zero-Finite-Ring R)
+    mul-Finite-Ring R x (zero-Finite-Ring R) ＝ zero-Finite-Ring R
   right-zero-law-mul-Finite-Ring =
     right-zero-law-mul-Ring (ring-Finite-Ring R)
 ```

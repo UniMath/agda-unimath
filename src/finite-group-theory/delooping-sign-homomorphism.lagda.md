@@ -366,7 +366,7 @@ module _
       ( eX : mere-equiv (Fin (n +ℕ 2)) X)
       ( eY : mere-equiv (Fin (n +ℕ 2)) Y)
       ( p : X ＝ Y) →
-      ( Id (tr (mere-equiv (Fin (n +ℕ 2))) p eX) eY) →
+      ( tr (mere-equiv (Fin (n +ℕ 2))) p eX ＝ eY) →
       ( sX : is-set X)
       ( sY : is-set Y) →
       coherence-square-maps

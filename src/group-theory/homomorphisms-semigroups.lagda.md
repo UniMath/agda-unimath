@@ -224,7 +224,7 @@ module _
 left-unit-law-comp-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H H (id-hom-Semigroup H) f) f
+   comp-hom-Semigroup G H H (id-hom-Semigroup H) f ＝ f
 left-unit-law-comp-hom-Semigroup G
   (pair (pair H is-set-H) (pair μ-H associative-H)) (pair f μ-f) =
   eq-htpy-hom-Semigroup G
@@ -234,7 +234,7 @@ left-unit-law-comp-hom-Semigroup G
 right-unit-law-comp-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G G H f (id-hom-Semigroup G)) f
+   comp-hom-Semigroup G G H f (id-hom-Semigroup G) ＝ f
 right-unit-law-comp-hom-Semigroup
   (pair (pair G is-set-G) (pair μ-G associative-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup

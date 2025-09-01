@@ -126,14 +126,14 @@ module _
 
   left-unit-law-add-tuple-Euclidean-Domain :
     {n : ℕ} (v : tuple-Euclidean-Domain R n) →
-    Id (add-tuple-Euclidean-Domain R (zero-tuple-Euclidean-Domain R) v) v
+    add-tuple-Euclidean-Domain R (zero-tuple-Euclidean-Domain R) v ＝ v
   left-unit-law-add-tuple-Euclidean-Domain =
     left-unit-law-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
   right-unit-law-add-tuple-Euclidean-Domain :
     {n : ℕ} (v : tuple-Euclidean-Domain R n) →
-    Id (add-tuple-Euclidean-Domain R v (zero-tuple-Euclidean-Domain R)) v
+    add-tuple-Euclidean-Domain R v (zero-tuple-Euclidean-Domain R) ＝ v
   right-unit-law-add-tuple-Euclidean-Domain =
     right-unit-law-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)

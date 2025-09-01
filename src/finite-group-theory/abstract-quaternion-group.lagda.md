@@ -147,7 +147,7 @@ right-unit-law-mul-Q8 k-Q8 = refl
 right-unit-law-mul-Q8 -k-Q8 = refl
 
 associative-mul-Q8 :
-  (x y z : Q8) → Id (mul-Q8 (mul-Q8 x y) z) (mul-Q8 x (mul-Q8 y z))
+  (x y z : Q8) → mul-Q8 (mul-Q8 x y) z ＝ mul-Q8 x (mul-Q8 y z)
 associative-mul-Q8 e-Q8 e-Q8 e-Q8 = refl
 associative-mul-Q8 e-Q8 e-Q8 -e-Q8 = refl
 associative-mul-Q8 e-Q8 e-Q8 i-Q8 = refl
@@ -661,7 +661,7 @@ associative-mul-Q8 -k-Q8 -k-Q8 -j-Q8 = refl
 associative-mul-Q8 -k-Q8 -k-Q8 k-Q8 = refl
 associative-mul-Q8 -k-Q8 -k-Q8 -k-Q8 = refl
 
-left-inverse-law-mul-Q8 : (x : Q8) → Id (mul-Q8 (inv-Q8 x) x) e-Q8
+left-inverse-law-mul-Q8 : (x : Q8) → mul-Q8 (inv-Q8 x) x ＝ e-Q8
 left-inverse-law-mul-Q8 e-Q8 = refl
 left-inverse-law-mul-Q8 -e-Q8 = refl
 left-inverse-law-mul-Q8 i-Q8 = refl
@@ -671,7 +671,7 @@ left-inverse-law-mul-Q8 -j-Q8 = refl
 left-inverse-law-mul-Q8 k-Q8 = refl
 left-inverse-law-mul-Q8 -k-Q8 = refl
 
-right-inverse-law-mul-Q8 : (x : Q8) → Id (mul-Q8 x (inv-Q8 x)) e-Q8
+right-inverse-law-mul-Q8 : (x : Q8) → mul-Q8 x (inv-Q8 x) ＝ e-Q8
 right-inverse-law-mul-Q8 e-Q8 = refl
 right-inverse-law-mul-Q8 -e-Q8 = refl
 right-inverse-law-mul-Q8 i-Q8 = refl

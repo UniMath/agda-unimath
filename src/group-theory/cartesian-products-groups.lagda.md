@@ -81,13 +81,13 @@ module _
 
   left-inverse-law-product-Group :
     (x : type-product-Group) →
-    Id (mul-product-Group (inv-product-Group x) x) unit-product-Group
+    mul-product-Group (inv-product-Group x) x ＝ unit-product-Group
   left-inverse-law-product-Group (pair x y) =
     eq-pair (left-inverse-law-mul-Group G x) (left-inverse-law-mul-Group H y)
 
   right-inverse-law-product-Group :
     (x : type-product-Group) →
-    Id (mul-product-Group x (inv-product-Group x)) unit-product-Group
+    mul-product-Group x (inv-product-Group x) ＝ unit-product-Group
   right-inverse-law-product-Group (pair x y) =
     eq-pair (right-inverse-law-mul-Group G x) (right-inverse-law-mul-Group H y)
 

@@ -110,7 +110,7 @@ module _
 
   left-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
-    Id (add-matrix-Ring R (zero-matrix-Ring R) A) A
+    add-matrix-Ring R (zero-matrix-Ring R) A ＝ A
   left-unit-law-add-matrix-Ring empty-tuple = refl
   left-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_
@@ -127,7 +127,7 @@ module _
 
   right-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
-    Id (add-matrix-Ring R A (zero-matrix-Ring R)) A
+    add-matrix-Ring R A (zero-matrix-Ring R) ＝ A
   right-unit-law-add-matrix-Ring empty-tuple = refl
   right-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_
