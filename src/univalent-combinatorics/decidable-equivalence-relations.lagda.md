@@ -190,16 +190,9 @@ equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type {l1} A =
   ( inv-associative-Σ) ∘e
   ( equiv-tot
     ( λ X →
-      ( ( inv-equiv
-          ( associative-product
-            ( has-decidable-equality X)
-            ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-            ( type-Finite-Type A ↠ X))) ∘e
-        ( equiv-product id-equiv commutative-product) ∘e
-        ( associative-product
-          ( has-decidable-equality (map-equiv id-equiv X))
-          ( type-Finite-Type A ↠ X)
-          ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
+      ( ( inv-associative-product) ∘e
+        ( equiv-product-right commutative-product) ∘e
+        ( associative-product) ∘e
         ( equiv-product-left commutative-product) ∘e
         ( equiv-add-redundant-prop
           ( is-prop-type-trunc-Prop)
