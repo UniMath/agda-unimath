@@ -376,6 +376,6 @@ module _
                     is-contr-raise-unit)) ∘e
                 ( ( inv-associative-Σ) ∘e
                   ( ( equiv-tot (λ _ → commutative-product)) ∘e
-                    ( ( associative-Σ)))))))) ∘e
-        ( ( associative-Σ)))
+                    ( associative-Σ))))))) ∘e
+        ( associative-Σ))
 ```

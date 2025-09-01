@@ -302,7 +302,7 @@ module _
           equiv-postcomp-equiv
             ( commutative-coproduct)
             ( inclusion-subuniverse P X))) ∘e
-      ( ( inv-associative-Σ)))
+      ( inv-associative-Σ))
 ```
 
 ### Equivalence between iterated coproduct and ternary coproduct decomposition
@@ -499,7 +499,6 @@ module _
                   ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
           ( ( inv-associative-Σ) ∘e
-            ( ( equiv-tot (λ _ → commutative-product)) ∘e
-              ( ( associative-Σ))))))) ∘e
-    ( ( associative-Σ))
+            ( equiv-tot (λ _ → commutative-product) ∘e associative-Σ))))) ∘e
+    ( associative-Σ)
 ```
