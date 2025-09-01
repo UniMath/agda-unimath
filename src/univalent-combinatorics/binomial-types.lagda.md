@@ -247,10 +247,7 @@ abstract
     binomial-type' (Maybe A) (Maybe B) ≃
     (binomial-type' A B + binomial-type' A (Maybe B))
   recursion-binomial-type' A B =
-    ( ( ( left-distributive-Σ-coproduct
-          ( A → Decidable-Prop _)
-          ( λ P → mere-equiv B (Σ A _))
-          ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
+    ( ( ( left-distributive-Σ-coproduct) ∘e
         ( equiv-tot
           ( λ P →
             ( ( equiv-coproduct

@@ -194,8 +194,7 @@ count-base-count-Σ' {l1} {l2} {A} {B} e f g =
   count-base-count-Σ
     ( section-count-base-count-Σ' e f g)
     ( count-equiv'
-      ( left-distributive-Σ-coproduct A B
-        ( λ x → is-zero-ℕ (number-of-elements-count (f x))))
+      ( left-distributive-Σ-coproduct)
       ( count-coproduct e g))
     ( λ x →
       count-coproduct

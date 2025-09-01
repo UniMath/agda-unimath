@@ -173,7 +173,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : A → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   map-left-distributive-Σ-coproduct :
@@ -264,33 +264,33 @@ module _
 
   map-left-distributive-product-coproduct : A × (B + C) → (A × B) + (A × C)
   map-left-distributive-product-coproduct =
-    map-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    map-left-distributive-Σ-coproduct
 
   map-inv-left-distributive-product-coproduct :
     (A × B) + (A × C) → A × (B + C)
   map-inv-left-distributive-product-coproduct =
-    map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    map-inv-left-distributive-Σ-coproduct
 
   is-section-map-inv-left-distributive-product-coproduct :
     map-left-distributive-product-coproduct ∘
     map-inv-left-distributive-product-coproduct ~ id
   is-section-map-inv-left-distributive-product-coproduct =
-    is-section-map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-section-map-inv-left-distributive-Σ-coproduct
 
   is-retraction-map-inv-left-distributive-product-coproduct :
     map-inv-left-distributive-product-coproduct ∘
     map-left-distributive-product-coproduct ~ id
   is-retraction-map-inv-left-distributive-product-coproduct =
-    is-retraction-map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-retraction-map-inv-left-distributive-Σ-coproduct
 
   is-equiv-map-left-distributive-product-coproduct :
     is-equiv map-left-distributive-product-coproduct
   is-equiv-map-left-distributive-product-coproduct =
-    is-equiv-map-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-equiv-map-left-distributive-Σ-coproduct
 
   left-distributive-product-coproduct : (A × (B + C)) ≃ ((A × B) + (A × C))
   left-distributive-product-coproduct =
-    left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    left-distributive-Σ-coproduct
 ```
 
 ### If a coproduct is contractible then one summand is contractible and the other is empty
