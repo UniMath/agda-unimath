@@ -38,7 +38,7 @@ module _
   Ω³ A = iterated-loop-space 3 A
 
   type-Ω³ : {A : UU l} (a : A) → UU l
-  type-Ω³ a = Id (refl-Ω² {a = a}) (refl-Ω² {a = a})
+  type-Ω³ a = (refl-Ω² {a = a} ＝ refl-Ω² {a = a})
 
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
@@ -115,7 +115,7 @@ left-unit-law-z-concat-Ω³ α =
 super-naturality-right-unit :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {α β : p ＝ q} (γ : α ＝ β)
   (u : y ＝ z) →
-  Id (ap (λ ω → horizontal-concat-Id² ω (refl {x = u})) γ) {!!}
+  ap (λ ω → horizontal-concat-Id² ω (refl {x = u})) γ ＝ {!!}
 super-naturality-right-unit α = {!!}
 -}
 

@@ -27,7 +27,7 @@ Furstenberg-Group l =
       ( type-trunc-Prop (type-Set X)) ×
       ( Σ ( type-Set X → type-Set X → type-Set X)
           ( λ μ →
-            ( (x y z : type-Set X) → Id (μ (μ x z) (μ y z)) (μ x y)) ×
+            ( (x y z : type-Set X) → μ (μ x z) (μ y z) ＝ μ x y) ×
             ( Σ ( type-Set X → type-Set X → type-Set X)
                 ( λ δ → (x y : type-Set X) → μ x (δ x y) ＝ y)))))
 ```

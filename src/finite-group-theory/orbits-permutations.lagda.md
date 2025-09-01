@@ -240,8 +240,8 @@ module _
     is-lower-bound-min-reporting = pr2 (pr2 min-repeating)
 
     same-image-iterate-min-reporting :
-      Id ( iterate first-point-min-repeating (map-equiv f) a)
-        ( iterate second-point-min-repeating (map-equiv f) a)
+      iterate first-point-min-repeating (map-equiv f) a ＝
+      iterate second-point-min-repeating (map-equiv f) a
     same-image-iterate-min-reporting = pr2 (pr2 (pr1 (pr2 min-repeating)))
 
   leq-first-point-min-reporting-succ-number-elements :
@@ -752,8 +752,8 @@ module _
       induction-cases-equal-iterate-transposition (inl s) =
         tr
           ( λ k →
-            Id (iterate k (map-equiv (composition-transposition-a-b g)) x)
-            (iterate k (map-equiv g) x))
+            iterate k (map-equiv (composition-transposition-a-b g)) x ＝
+            iterate k (map-equiv g) x)
           ( inv s)
           ( refl)
       induction-cases-equal-iterate-transposition (inr s) =
@@ -1805,7 +1805,7 @@ module _
                 ( Q))))
       retraction-h' T (inr NQ) (inl R) =
         tr
-          (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
+          (λ w → h' (cases-inv-h' T (pr1 w) (pr2 w)) ＝ T)
           {x = pair (inr NQ) (inl R)}
           {y = pair
             (is-decidable-is-in-equivalence-class-same-orbits-permutation
@@ -1842,7 +1842,7 @@ module _
             ( R))
       retraction-h' T (inr NQ) (inr NR) =
         tr
-          (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
+          (λ w → h' (cases-inv-h' T (pr1 w) (pr2 w)) ＝ T)
           {x = pair (inr NQ) (inr NR)}
           {y = pair
             (is-decidable-is-in-equivalence-class-same-orbits-permutation

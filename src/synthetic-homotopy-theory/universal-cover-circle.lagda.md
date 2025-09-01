@@ -200,17 +200,15 @@ path-total-path-fiber B x q = eq-pair-eq-fiber (inv q)
 tr-path-total-path-fiber :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
   { y y' : B x} (q : y' ＝ y) (α : c ＝ pair x y') →
-  Id
-    ( tr (λ z → c ＝ pair x z) q α)
-    ( α ∙ (inv (path-total-path-fiber B x q)))
+  tr (λ z → c ＝ pair x z) q α ＝ α ∙ inv (path-total-path-fiber B x q)
 tr-path-total-path-fiber c x refl α = inv right-unit
 
 segment-Σ :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   { x x' : A} (p : x ＝ x')
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
-  ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) (y : F) →
-  Id (pair x (map-equiv e y)) (pair x' (map-equiv e' (map-equiv f y)))
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) (y : F) →
+  pair x (map-equiv e y) ＝ pair x' (map-equiv e' (map-equiv f y))
 segment-Σ refl f e e' H y = path-total-path-fiber _ _ (H y)
 
 contraction-total-space' :
@@ -242,9 +240,7 @@ tr-path-total-tr-coherence :
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x)
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ (map-equiv e)) →
   (y : F) (α : Id c (pair x (map-equiv e' (map-equiv f y)))) →
-  Id
-    ( tr (λ z → c ＝ pair x z) (H y) α)
-    ( α ∙ (inv (segment-Σ refl f e e' H y)))
+  tr (λ z → c ＝ pair x z) (H y) α ＝ α ∙ (inv (segment-Σ refl f e e' H y))
 tr-path-total-tr-coherence c x f e e' H y α =
   tr-path-total-path-fiber c x (H y) α
 
@@ -252,12 +248,12 @@ square-tr-contraction-total-space :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   { x x' : A} (p : x ＝ x')
   { F : UU l3} {F' : UU l4} (f : F ≃ F') (e : F ≃ B x) (e' : F' ≃ B x')
-  ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e)))
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e)
   (h : contraction-total-space c x) →
   ( map-equiv
     ( ( equiv-tr-contraction-total-space' c p f e e' H) ∘e
-      ( ( equiv-contraction-total-space c x' e') ∘e
-        ( equiv-tr (contraction-total-space c) p)))
+      ( equiv-contraction-total-space c x' e') ∘e
+      ( equiv-tr (contraction-total-space c) p))
     ( h)) ~
   ( map-equiv (equiv-contraction-total-space c x e) h)
 square-tr-contraction-total-space c refl f e e' H h y =
@@ -269,14 +265,13 @@ dependent-identification-contraction-total-space' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   {x x' : A} (p : x ＝ x') →
   {F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
-  (H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
+  (H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
   (h : (y : F) → c ＝ pair x (map-equiv e y)) →
   (h' : (y' : F') → c ＝ pair x' (map-equiv e' y')) →
   UU (l1 ⊔ l2 ⊔ l3)
 dependent-identification-contraction-total-space'
   c {x} {x'} p {F} {F'} f e e' H h h' =
-  ( map-Π
-    ( λ y → concat' c (segment-Σ p f e e' H y)) h) ~
+  ( map-Π (λ y → concat' c (segment-Σ p f e e' H y)) h) ~
   ( precomp-Π
     ( map-equiv f)
     ( λ y' → c ＝ pair x' (map-equiv e' y'))
@@ -286,7 +281,7 @@ map-dependent-identification-contraction-total-space' :
     { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
     { x x' : A} (p : x ＝ x') →
     { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
-    ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
+    ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
     ( h : contraction-total-space' c x e) →
     ( h' : contraction-total-space' c x' e') →
     ( dependent-identification-contraction-total-space' c p f e e' H h h') →
@@ -327,7 +322,7 @@ equiv-dependent-identification-contraction-total-space' :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   { x x' : A} (p : x ＝ x') →
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
-  ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
   ( h : contraction-total-space' c x e) →
   ( h' : contraction-total-space' c x' e') →
   ( dependent-identification (contraction-total-space c) p

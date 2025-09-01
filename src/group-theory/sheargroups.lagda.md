@@ -30,5 +30,5 @@ Sheargroup l =
               ( (x : type-Set X) → m e x ＝ x) ×
               ( ( (x : type-Set X) → m x x ＝ e) ×
                 ( (x y z : type-Set X) →
-                  Id (m x (m y z)) (m (m (m x (m y e)) e) z))))))
+                  m x (m y z) ＝ m (m (m x (m y e)) e) z)))))
 ```

@@ -336,8 +336,8 @@ htpy-elim-list-Wild-Monoid {X = X} M g h H =
           ( unit-list x)
           ( l))))
   β : (x y : pr1 (pr1 (list-Wild-Monoid X))) →
-      Id ( pr2 (pr1 g) x y ∙ ap-mul-Wild-Monoid M (α x) (α y))
-         ( α (concat-list x y) ∙ pr2 (pr1 h) x y)
+    pr2 (pr1 g) x y ∙ ap-mul-Wild-Monoid M (α x) (α y) ＝
+    α (concat-list x y) ∙ pr2 (pr1 h) x y
   β nil y = {!!}
   β (cons x x₁) y = {!!}
   γ : pr2 g ＝ α nil ∙ pr2 h

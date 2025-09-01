@@ -92,7 +92,7 @@ snoc-concat-unit (cons x xs) a = ap (cons x) (snoc-concat-unit xs a)
 ```agda
 length-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id (length-list (concat-list x y)) ((length-list x) +ℕ (length-list y))
+  length-list (concat-list x y) ＝ length-list x +ℕ length-list y
 length-concat-list nil y = inv (left-unit-law-add-ℕ (length-list y))
 length-concat-list (cons a x) y =
   ( ap succ-ℕ (length-concat-list x y)) ∙

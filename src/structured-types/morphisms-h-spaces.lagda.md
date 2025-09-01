@@ -317,5 +317,5 @@ preserves-mul-htpy :
   {f g : A → B} (μf : preserves-mul μA μB f) (μg : preserves-mul μA μB g) →
   (f ~ g) → UU (l1 ⊔ l2)
 preserves-mul-htpy {A = A} μA μB μf μg H =
-  (a b : A) → Id (μf ∙ ap-binary μB (H a) (H b)) (H (μA a b) ∙ μg)
+  (a b : A) → μf ∙ ap-binary μB (H a) (H b) ＝ H (μA a b) ∙ μg
 ```

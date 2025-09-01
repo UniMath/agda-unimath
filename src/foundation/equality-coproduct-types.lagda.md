@@ -133,11 +133,11 @@ module _
     pr1 compute-Eq-coproduct-inl-inl = map-compute-Eq-coproduct-inl-inl
     pr2 compute-Eq-coproduct-inl-inl = is-equiv-map-compute-Eq-coproduct-inl-inl
 
-    compute-eq-coproduct-inl-inl : Id {A = A + B} (inl x) (inl y) ≃ (x ＝ y)
+    compute-eq-coproduct-inl-inl : (inl x ＝ inl y) ≃ (x ＝ y)
     compute-eq-coproduct-inl-inl =
       compute-Eq-coproduct-inl-inl ∘e extensionality-coproduct (inl x) (inl y)
 
-    map-compute-eq-coproduct-inl-inl : Id {A = A + B} (inl x) (inl y) → x ＝ y
+    map-compute-eq-coproduct-inl-inl : (inl x ＝ inl y) → x ＝ y
     map-compute-eq-coproduct-inl-inl = map-equiv compute-eq-coproduct-inl-inl
 
     is-equiv-map-compute-eq-coproduct-inl-inl :
@@ -219,11 +219,11 @@ module _
     pr1 compute-Eq-coproduct-inr-inr = map-compute-Eq-coproduct-inr-inr
     pr2 compute-Eq-coproduct-inr-inr = is-equiv-map-compute-Eq-coproduct-inr-inr
 
-    compute-eq-coproduct-inr-inr : Id {A = A + B} (inr x) (inr y) ≃ (x ＝ y)
+    compute-eq-coproduct-inr-inr : (inr x ＝ inr y) ≃ (x ＝ y)
     compute-eq-coproduct-inr-inr =
       compute-Eq-coproduct-inr-inr ∘e extensionality-coproduct (inr x) (inr y)
 
-    map-compute-eq-coproduct-inr-inr : Id {A = A + B} (inr x) (inr y) → x ＝ y
+    map-compute-eq-coproduct-inr-inr : (inr x ＝ inr y) → x ＝ y
     map-compute-eq-coproduct-inr-inr = map-equiv compute-eq-coproduct-inr-inr
 
     is-equiv-map-compute-eq-coproduct-inr-inr :

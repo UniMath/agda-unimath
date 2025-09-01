@@ -61,9 +61,9 @@ has-mul-Ab A =
     ( λ μ →
       ( is-unital (pr1 μ)) ×
       ( ( (a b c : type-Ab A) →
-          Id (pr1 μ a (add-Ab A b c)) (add-Ab A (pr1 μ a b) (pr1 μ a c))) ×
+          pr1 μ a (add-Ab A b c) ＝ add-Ab A (pr1 μ a b) (pr1 μ a c)) ×
         ( (a b c : type-Ab A) →
-          Id (pr1 μ (add-Ab A a b) c) (add-Ab A (pr1 μ a c) (pr1 μ b c)))))
+          pr1 μ (add-Ab A a b) c ＝ add-Ab A (pr1 μ a c) (pr1 μ b c))))
 
 Ring : (l1 : Level) → UU (lsuc l1)
 Ring l1 = Σ (Ab l1) has-mul-Ab

@@ -343,7 +343,7 @@ We show that systems form a category.
     (q : C ＝ C')
     {q' : constant-fibered-system A C ＝ constant-fibered-system A C'}
     (β : ap (constant-fibered-system A) q ＝ q')
-    (r : Id (tr (λ t → t) (ap-binary hom-system p q) g) g')
+    (r : tr id (ap-binary hom-system p q) g ＝ g')
     {f : hom-system A B} {f' : hom-system A B'} →
     htpy-section-system' p' f f' →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f')
@@ -571,15 +571,16 @@ weakening structure.
     field
       type :
         (X : system.type A) →
-        Id ( tr
-              ( system.element (system.slice B (section-system.type h X)))
-              ( section-system.type
-                ( preserves-weakening.type Wh X)
-                ( X))
-              ( section-system.element
-                ( section-system.slice h X)
-                ( generic-element.type δA X)))
-            ( generic-element.type δB (section-system.type h X))
+        Id
+          ( tr
+            ( system.element (system.slice B (section-system.type h X)))
+            ( section-system.type
+              ( preserves-weakening.type Wh X)
+              ( X))
+            ( section-system.element
+              ( section-system.slice h X)
+              ( generic-element.type δA X)))
+          ( generic-element.type δB (section-system.type h X))
       slice :
         (X : system.type A) →
         preserves-generic-element

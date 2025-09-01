@@ -202,9 +202,9 @@ If chains with jumps are never used, we'd like to call the following chains.
 eq-path-elements-Finitely-Graded-Poset :
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   (x y : type-Finitely-Graded-Poset X) →
-  (p : Id (shape-Finitely-Graded-Poset X x)
-          (shape-Finitely-Graded-Poset X y)) →
-  path-elements-Finitely-Graded-Poset X x y → x ＝ y
+  shape-Finitely-Graded-Poset X x ＝ shape-Finitely-Graded-Poset X y →
+  path-elements-Finitely-Graded-Poset X x y →
+  x ＝ y
 eq-path-elements-Finitely-Graded-Poset {k} X (pair i1 x) (pair .i1 .x) p
   refl-path-faces-Finitely-Graded-Poset = refl
 eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
