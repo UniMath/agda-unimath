@@ -220,7 +220,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-right-distributive-product-coproduct : (A + B) × C → (A × C) + (B × C)

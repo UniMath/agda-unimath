@@ -56,7 +56,7 @@ product-Fin zero-ℕ l = left-absorption-product (Fin l)
 product-Fin (succ-ℕ k) l =
   ( ( compute-coproduct-Fin (k *ℕ l) l) ∘e
     ( equiv-coproduct (product-Fin k l) left-unit-law-product)) ∘e
-  ( right-distributive-product-coproduct (Fin k) unit (Fin l))
+  ( right-distributive-product-coproduct)
 
 Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
 Fin-mul-ℕ k l = inv-equiv (product-Fin k l)
