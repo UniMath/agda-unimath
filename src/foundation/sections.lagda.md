@@ -20,6 +20,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -187,4 +188,48 @@ is-injective-map-section-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   is-injective (map-section-family b)
 is-injective-map-section-family b = ap pr1
+
+injection-map-section-family :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+  injection A (Σ A B)
+pr1 (injection-map-section-family b) = map-section-family b
+pr2 (injection-map-section-family b) = is-injective-map-section-family b
+```
+
+### The space of sections of `f : A → B` is equivalent to the space of dependent maps `(b : B) → fiber f b`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  section-dependent-fiber : section f → (b : B) → fiber f b
+  pr1 (section-dependent-fiber (g , s) b) = g b
+  pr2 (section-dependent-fiber (g , s) b) = s b
+
+  dependent-fiber-section : ((b : B) → fiber f b) → section f
+  pr1 (dependent-fiber-section g) b = pr1 (g b)
+  pr2 (dependent-fiber-section g) b = pr2 (g b)
+
+  equiv-section-dependent-fiber :
+    section f ≃ ((b : B) → fiber f b)
+  pr1 equiv-section-dependent-fiber = section-dependent-fiber
+  pr1 (pr1 (pr2 equiv-section-dependent-fiber)) = dependent-fiber-section
+  pr2 (pr1 (pr2 equiv-section-dependent-fiber)) = refl-htpy
+  pr1 (pr2 (pr2 equiv-section-dependent-fiber)) = dependent-fiber-section
+  pr2 (pr2 (pr2 equiv-section-dependent-fiber)) = refl-htpy
+```
+
+### Sections are injective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-injective-is-section : (g : B → A) → is-section f g → is-injective g
+  is-injective-is-section g s {x} {y} eq = inv (s x) ∙ ap f eq ∙ s y
+
+  injection-section : section f → injection B A
+  injection-section (g , s) = (g , is-injective-is-section g s)
 ```
