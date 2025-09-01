@@ -193,6 +193,30 @@ comp-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 𝑅 (β , H) (α , K) =
 
 ## Properties
 
+### A computation of the type of cartesian morphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  where
+
+  cartesian-hom-polynomial-endofunctor' : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  cartesian-hom-polynomial-endofunctor' =
+    Σ ( shapes-polynomial-endofunctor 𝑃 → shapes-polynomial-endofunctor 𝑄)
+      ( λ α₀ →
+        ((a : shapes-polynomial-endofunctor 𝑃) →
+          positions-polynomial-endofunctor 𝑄 (α₀ a) ≃
+          positions-polynomial-endofunctor 𝑃 a))
+
+  reassociate-type-cartesian-hom-polynomial-endofunctor :
+    cartesian-hom-polynomial-endofunctor 𝑃 𝑄 ≃
+    cartesian-hom-polynomial-endofunctor'
+  reassociate-type-cartesian-hom-polynomial-endofunctor =
+    ( equiv-tot (λ _ → inv-distributive-Π-Σ)) ∘e (associative-Σ _ _ _)
+```
+
 ### Truncatedness of the type of morphisms
 
 If the shapes and positions of the codomain $𝑄$ are $k$-truncated, for $k ≥ -1$,
@@ -205,21 +229,32 @@ module _
   (𝑄 : polynomial-endofunctor l3 l4)
   where
 
+  is-trunc-succ-cartesian-hom-polynomial-endofunctor' :
+    (k : 𝕋) →
+    is-trunc (succ-𝕋 k) (shapes-polynomial-endofunctor 𝑄) →
+    ( (c : shapes-polynomial-endofunctor 𝑄) →
+      is-trunc (succ-𝕋 k) (positions-polynomial-endofunctor 𝑄 c)) →
+    is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor' 𝑃 𝑄)
+  is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ' =
+    is-trunc-Σ
+      ( is-trunc-function-type (succ-𝕋 k) hQ)
+      ( λ f →
+        is-trunc-Π
+          ( succ-𝕋 k)
+          ( λ e → is-trunc-equiv-is-trunc-domain k (hQ' (f e))))
+
   is-trunc-succ-cartesian-hom-polynomial-endofunctor :
     (k : 𝕋) →
     is-trunc (succ-𝕋 k) (shapes-polynomial-endofunctor 𝑄) →
     ( (c : shapes-polynomial-endofunctor 𝑄) →
       is-trunc (succ-𝕋 k) (positions-polynomial-endofunctor 𝑄 c)) →
     is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor 𝑃 𝑄)
-  is-trunc-succ-cartesian-hom-polynomial-endofunctor k hQ hP =
-    is-trunc-equiv (succ-𝕋 k) _
-      ( equiv-tot (λ _ → inv-distributive-Π-Σ) ∘e associative-Σ _ _ _)
-      ( is-trunc-Σ
-        ( is-trunc-function-type (succ-𝕋 k) hQ)
-        ( λ f →
-          is-trunc-Π
-            ( succ-𝕋 k)
-            ( λ e → is-trunc-equiv-is-trunc-domain k (hP (f e)))))
+  is-trunc-succ-cartesian-hom-polynomial-endofunctor k hQ hQ' =
+    is-trunc-equiv
+      ( succ-𝕋 k)
+      ( cartesian-hom-polynomial-endofunctor' 𝑃 𝑄)
+      ( reassociate-type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄)
+      ( is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ')
 ```
 
 ### Cartesian morphisms are cartesian natural transformations
