@@ -17,6 +17,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.commutative-semigroups
 open import group-theory.semigroups
 
 open import order-theory.least-upper-bounds-posets
@@ -29,10 +30,12 @@ open import order-theory.upper-bounds-posets
 
 ## Idea
 
-A **join-semilattice** is a poset in which every pair of elements has a least
-binary upper bound. Alternatively, join-semilattices can be defined
-algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
-satisfying
+A
+{{#concept "join-semilattice" WDID=Q29018101 WD="upper semilattice" Agda=Join-Semilattice}}
+is a [poset](order-theory.posets.md) in which every pair of elements has a
+[least binary upper bound](order-theory.least-upper-bounds-posets.md).
+Alternatively, join-semilattices can be defined algebraically as a set `X`
+equipped with a binary operation `∧ : X → X → X` satisfying
 
 1. Asociativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
@@ -46,56 +49,49 @@ requires only one universe level. This is necessary in order to consider the
 
 ## Definitions
 
-### The predicate on semigroups of being a join-semilattice
+### The predicate on commutative semigroups of being a join-semilattice
 
 ```agda
 module _
-  {l : Level} (X : Semigroup l)
+  {l : Level} (X : Commutative-Semigroup l)
   where
 
-  is-join-semilattice-prop-Semigroup : Prop l
-  is-join-semilattice-prop-Semigroup =
-    product-Prop
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Π-Prop
-            ( type-Semigroup X)
-            ( λ y →
-              Id-Prop
-                ( set-Semigroup X)
-                ( mul-Semigroup X x y)
-                ( mul-Semigroup X y x))))
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Id-Prop
-            ( set-Semigroup X)
-            ( mul-Semigroup X x x)
-            ( x)))
+  is-join-semilattice-prop-Commutative-Semigroup : Prop l
+  is-join-semilattice-prop-Commutative-Semigroup =
+    Π-Prop
+      ( type-Commutative-Semigroup X)
+      ( λ x →
+        Id-Prop
+          ( set-Commutative-Semigroup X)
+          ( mul-Commutative-Semigroup X x x)
+          ( x))
 
-  is-join-semilattice-Semigroup : UU l
-  is-join-semilattice-Semigroup =
-    type-Prop is-join-semilattice-prop-Semigroup
+  is-join-semilattice-Commutative-Semigroup : UU l
+  is-join-semilattice-Commutative-Semigroup =
+    type-Prop is-join-semilattice-prop-Commutative-Semigroup
 
-  is-prop-is-join-semilattice-Semigroup :
-    is-prop is-join-semilattice-Semigroup
-  is-prop-is-join-semilattice-Semigroup =
-    is-prop-type-Prop is-join-semilattice-prop-Semigroup
+  is-prop-is-join-semilattice-Commutative-Semigroup :
+    is-prop is-join-semilattice-Commutative-Semigroup
+  is-prop-is-join-semilattice-Commutative-Semigroup =
+    is-prop-type-Prop is-join-semilattice-prop-Commutative-Semigroup
 ```
 
 ### The algebraic definition of join-semilattices
 
 ```agda
 Join-Semilattice : (l : Level) → UU (lsuc l)
-Join-Semilattice l = type-subtype is-join-semilattice-prop-Semigroup
+Join-Semilattice l = type-subtype is-join-semilattice-prop-Commutative-Semigroup
 
 module _
   {l : Level} (X : Join-Semilattice l)
   where
 
+  commutative-semigroup-Join-Semilattice : Commutative-Semigroup l
+  commutative-semigroup-Join-Semilattice = pr1 X
+
   semigroup-Join-Semilattice : Semigroup l
-  semigroup-Join-Semilattice = pr1 X
+  semigroup-Join-Semilattice =
+    semigroup-Commutative-Semigroup commutative-semigroup-Join-Semilattice
 
   set-Join-Semilattice : Set l
   set-Join-Semilattice = set-Semigroup semigroup-Join-Semilattice
@@ -122,18 +118,20 @@ module _
     associative-mul-Semigroup semigroup-Join-Semilattice
 
   is-join-semilattice-Join-Semilattice :
-    is-join-semilattice-Semigroup semigroup-Join-Semilattice
+    is-join-semilattice-Commutative-Semigroup
+      ( commutative-semigroup-Join-Semilattice)
   is-join-semilattice-Join-Semilattice = pr2 X
 
   commutative-join-Join-Semilattice :
     (x y : type-Join-Semilattice) → (x ∨ y) ＝ (y ∨ x)
   commutative-join-Join-Semilattice =
-    pr1 is-join-semilattice-Join-Semilattice
+    commutative-mul-Commutative-Semigroup
+      ( commutative-semigroup-Join-Semilattice)
 
   idempotent-join-Join-Semilattice :
     (x : type-Join-Semilattice) → (x ∨ x) ＝ x
   idempotent-join-Join-Semilattice =
-    pr2 is-join-semilattice-Join-Semilattice
+    pr2 X
 
   leq-Join-Semilattice-Prop :
     (x y : type-Join-Semilattice) → Prop l
@@ -655,12 +653,17 @@ module _
   pr2 (pr2 semigroup-Order-Theoretic-Join-Semilattice) =
     associative-join-Order-Theoretic-Join-Semilattice A
 
+  commutative-semigroup-Order-Theoretic-Join-Semilattice :
+    Commutative-Semigroup l1
+  pr1 commutative-semigroup-Order-Theoretic-Join-Semilattice =
+    semigroup-Order-Theoretic-Join-Semilattice
+  pr2 commutative-semigroup-Order-Theoretic-Join-Semilattice =
+    commutative-join-Order-Theoretic-Join-Semilattice A
+
   join-semilattice-Order-Theoretic-Join-Semilattice :
     Join-Semilattice l1
   pr1 join-semilattice-Order-Theoretic-Join-Semilattice =
-    semigroup-Order-Theoretic-Join-Semilattice
-  pr1 (pr2 join-semilattice-Order-Theoretic-Join-Semilattice) =
-    commutative-join-Order-Theoretic-Join-Semilattice A
-  pr2 (pr2 join-semilattice-Order-Theoretic-Join-Semilattice) =
+    commutative-semigroup-Order-Theoretic-Join-Semilattice
+  pr2 join-semilattice-Order-Theoretic-Join-Semilattice =
     idempotent-join-Order-Theoretic-Join-Semilattice A
 ```
