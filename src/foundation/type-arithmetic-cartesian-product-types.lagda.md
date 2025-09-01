@@ -94,6 +94,9 @@ module _
 
   associative-product : ((A × B) × C) ≃ (A × (B × C))
   associative-product = associative-Σ
+
+  inv-associative-product : (A × (B × C)) ≃ ((A × B) × C)
+  inv-associative-product = inv-associative-Σ
 ```
 
 ### The unit laws of cartesian product types with respect to contractible types
