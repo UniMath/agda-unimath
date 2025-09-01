@@ -17,7 +17,7 @@ open import foundation.universe-levels using
   ( UU
   )
 open import foundation.identity-types using
-  ( -- ＝ "path"
+  ( Id -- "path"
   ; refl -- "constant path"
   ; inv -- "inverse path"
   ; concat -- "concatenation of paths"
