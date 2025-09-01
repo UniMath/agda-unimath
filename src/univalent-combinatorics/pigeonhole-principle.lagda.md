@@ -206,6 +206,11 @@ module _
     number-of-elements-count eA ≤-ℕ number-of-elements-count eB
   leq-is-injective-count H =
     leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
+
+  leq-injection-count :
+    (f : injection A B) →
+    number-of-elements-count eA ≤-ℕ number-of-elements-count eB
+  leq-injection-count (f , inj) = leq-is-injective-count inj
 ```
 
 #### There is no embedding `A ↪ B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
