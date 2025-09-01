@@ -18,7 +18,9 @@ else
 	AGDA_MIN_HEAP ?= 4G
 endif
 
-AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M6G -RTS
+# Temporarily raise maximum heap size; should compile with the previous 6G
+# before merging
+AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M14G -RTS
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 

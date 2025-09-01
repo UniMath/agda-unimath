@@ -24,6 +24,7 @@ open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
 open import synthetic-homotopy-theory.equifibered-sequential-diagrams
@@ -208,6 +209,40 @@ module _
       ( coherence-htpy-htpy-cocone-sequential-diagram K n)
 ```
 
+### Homotopies of homotopies of cocones under a sequential diagram
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c c' : cocone-sequential-diagram A X}
+  (H H' : htpy-cocone-sequential-diagram c c')
+  where
+
+  coherence-htpy²-cocone-sequential-diagram :
+    ((n : ℕ) →
+      htpy-htpy-cocone-sequential-diagram H n ~
+      htpy-htpy-cocone-sequential-diagram H' n) →
+    UU (l1 ⊔ l2)
+  coherence-htpy²-cocone-sequential-diagram α =
+    (n : ℕ) →
+      coherence-square-homotopies
+        ( left-whisker-concat-htpy
+          ( coherence-cocone-sequential-diagram c n)
+          ( α (succ-ℕ n) ·r map-sequential-diagram A n))
+        ( coherence-htpy-htpy-cocone-sequential-diagram H n)
+        ( coherence-htpy-htpy-cocone-sequential-diagram H' n)
+        ( right-whisker-concat-htpy
+          ( α n)
+          ( coherence-cocone-sequential-diagram c' n))
+
+  htpy²-cocone-sequential-diagram : UU (l1 ⊔ l2)
+  htpy²-cocone-sequential-diagram =
+    Σ ( (n : ℕ) →
+        htpy-htpy-cocone-sequential-diagram H n ~
+        htpy-htpy-cocone-sequential-diagram H' n)
+      ( coherence-htpy²-cocone-sequential-diagram)
+```
+
 ### Postcomposing cocones under a sequential diagram with a map
 
 Given a cocone `c` with vertex `X` under `(A, a)` and a map `f : X → Y`, we may
@@ -353,6 +388,60 @@ module _
     c ＝ c'
   eq-htpy-cocone-sequential-diagram c' =
     map-inv-equiv (extensionality-cocone-sequential-diagram c')
+```
+
+### Characterization of identity types of homotopies of cocones under sequential diagrams
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c c' : cocone-sequential-diagram A X}
+  (H : htpy-cocone-sequential-diagram c c')
+  where
+
+  refl-htpy²-cocone-sequential-diagram :
+    htpy²-cocone-sequential-diagram H H
+  pr1 refl-htpy²-cocone-sequential-diagram n = refl-htpy
+  pr2 refl-htpy²-cocone-sequential-diagram n = right-unit-htpy
+
+  htpy²-eq-cocone-sequential-diagram :
+    (H' : htpy-cocone-sequential-diagram c c') →
+    (H ＝ H') → htpy²-cocone-sequential-diagram H H'
+  htpy²-eq-cocone-sequential-diagram .H refl =
+    refl-htpy²-cocone-sequential-diagram
+
+  abstract
+    is-torsorial-htpy²-cocone-sequential-diagram :
+      is-torsorial (htpy²-cocone-sequential-diagram H)
+    is-torsorial-htpy²-cocone-sequential-diagram =
+      is-torsorial-Eq-structure
+        ( is-torsorial-binary-htpy (htpy-htpy-cocone-sequential-diagram H))
+        ( htpy-htpy-cocone-sequential-diagram H , refl-binary-htpy _)
+        ( is-torsorial-binary-htpy
+          ( λ n →
+            coherence-htpy-htpy-cocone-sequential-diagram H n ∙h refl-htpy))
+
+    is-equiv-htpy²-eq-cocone-sequential-diagram :
+      (H' : htpy-cocone-sequential-diagram c c') →
+      is-equiv (htpy²-eq-cocone-sequential-diagram H')
+    is-equiv-htpy²-eq-cocone-sequential-diagram =
+      fundamental-theorem-id
+        ( is-torsorial-htpy²-cocone-sequential-diagram)
+        ( htpy²-eq-cocone-sequential-diagram)
+
+  extensionality-htpy-eq-cocone-sequential-diagram :
+    (H' : htpy-cocone-sequential-diagram c c') →
+    (H ＝ H') ≃ htpy²-cocone-sequential-diagram H H'
+  pr1 (extensionality-htpy-eq-cocone-sequential-diagram H') =
+    htpy²-eq-cocone-sequential-diagram H'
+  pr2 (extensionality-htpy-eq-cocone-sequential-diagram H') =
+    is-equiv-htpy²-eq-cocone-sequential-diagram H'
+
+  eq-htpy²-cocone-sequential-diagram :
+    (H' : htpy-cocone-sequential-diagram c c') →
+    htpy²-cocone-sequential-diagram H H' → H ＝ H'
+  eq-htpy²-cocone-sequential-diagram H' =
+    map-inv-equiv (extensionality-htpy-eq-cocone-sequential-diagram H')
 ```
 
 ### Postcomposing a cocone under a sequential diagram by identity is the identity

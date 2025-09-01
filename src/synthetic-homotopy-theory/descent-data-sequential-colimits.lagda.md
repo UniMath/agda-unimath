@@ -183,6 +183,39 @@ module _
   id-equiv-descent-data-sequential-colimit =
     id-equiv-dependent-sequential-diagram
       ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : sequential-diagram l1}
+  (B : descent-data-sequential-colimit A l2)
+  (C : descent-data-sequential-colimit A l3)
+  (D : descent-data-sequential-colimit A l4)
+  (f : equiv-descent-data-sequential-colimit C D)
+  (e : equiv-descent-data-sequential-colimit B C)
+  where
+
+  comp-equiv-descent-data-sequential-colimit :
+    equiv-descent-data-sequential-colimit B D
+  comp-equiv-descent-data-sequential-colimit =
+    comp-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram D)
+      ( f)
+      ( e)
+
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  (B : descent-data-sequential-colimit A l2)
+  (C : descent-data-sequential-colimit A l3)
+  where
+
+  inv-equiv-descent-data-sequential-colimit :
+    equiv-descent-data-sequential-colimit B C →
+    equiv-descent-data-sequential-colimit C B
+  inv-equiv-descent-data-sequential-colimit e =
+    inv-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 ```
 
 ### Descent data induced by families over cocones under sequential diagrams

@@ -21,7 +21,6 @@ open import foundation.whiskering-homotopies-composition
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
-open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers
