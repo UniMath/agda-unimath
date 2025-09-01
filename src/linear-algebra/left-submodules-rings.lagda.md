@@ -113,16 +113,12 @@ module _
     map-inv-is-equiv (is-emb-inclusion-left-submodule-Ring x y)
 
   is-closed-under-addition-left-submodule-Ring :
-    is-closed-under-addition-subset-left-module-Ring
-      R
-      M
+    is-closed-under-addition-subset-left-module-Ring R M
       subset-left-submodule-Ring
   is-closed-under-addition-left-submodule-Ring = pr1 (pr2 (pr2 N))
 
   is-closed-under-multiplication-by-scalar-left-submodule-Ring :
-    is-closed-under-multiplication-by-scalar-subset-left-module-Ring
-      R
-      M
+    is-closed-under-multiplication-by-scalar-subset-left-module-Ring R M
       subset-left-submodule-Ring
   is-closed-under-multiplication-by-scalar-left-submodule-Ring =
     pr2 (pr2 (pr2 N))
@@ -146,18 +142,13 @@ is-closed-under-negation-left-submodule-Ring :
   (R : Ring l1)
   (M : left-module-Ring l2 R)
   (N : left-submodule-Ring l3 R M) →
-  is-closed-under-negation-subset-left-module-Ring
-    ( R)
-    ( M)
+  is-closed-under-negation-subset-left-module-Ring R M
     ( subset-left-submodule-Ring R M N)
 is-closed-under-negation-left-submodule-Ring R M N x x-in-subset =
   tr
     ( λ x' → pr1 (subset-left-submodule-Ring R M N x'))
     ( mul-neg-one-left-module-Ring R M x)
-    ( is-closed-under-multiplication-by-scalar-left-submodule-Ring
-      ( R)
-      ( M)
-      ( N)
+    ( is-closed-under-multiplication-by-scalar-left-submodule-Ring R M N
       ( neg-one-Ring R)
       ( x)
       ( x-in-subset))
@@ -174,7 +165,7 @@ module _
   subset-intersection-family-of-submodules :
     subset-left-module-Ring (l2 ⊔ l3) R M
   subset-intersection-family-of-submodules =
-    intersection-family-of-subtypes (λ i → subset-left-submodule-Ring R M (F i))
+    intersection-family-of-subtypes λ i → subset-left-submodule-Ring R M (F i)
 
   is-left-submodule-intersection-submodule-Ring :
     is-left-submodule-Ring R M subset-intersection-family-of-submodules
@@ -230,45 +221,45 @@ module _
 
   associative-add-left-submodule-Ring :
     (x y z : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring (add-left-submodule-Ring x y) z) ＝
-    (add-left-submodule-Ring x (add-left-submodule-Ring y z))
+    add-left-submodule-Ring (add-left-submodule-Ring x y) z ＝
+    add-left-submodule-Ring x (add-left-submodule-Ring y z)
   associative-add-left-submodule-Ring x y z =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( associative-add-left-module-Ring R M (pr1 x) (pr1 y) (pr1 z))
 
   left-unit-law-add-left-submodule-Ring :
     (x : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring (unit-left-submodule-Ring R M N) x) ＝ x
+    add-left-submodule-Ring (unit-left-submodule-Ring R M N) x ＝ x
   left-unit-law-add-left-submodule-Ring x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( left-unit-law-add-left-module-Ring R M (pr1 x))
 
   right-unit-law-add-left-submodule-Ring :
     (x : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring x (unit-left-submodule-Ring R M N)) ＝ x
+    add-left-submodule-Ring x (unit-left-submodule-Ring R M N) ＝ x
   right-unit-law-add-left-submodule-Ring x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( right-unit-law-add-left-module-Ring R M (pr1 x))
 
   left-inverse-law-add-left-submodule-Ring :
     (x : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring (neg-left-submodule-Ring x) x) ＝
-    (unit-left-submodule-Ring R M N)
+    add-left-submodule-Ring (neg-left-submodule-Ring x) x ＝
+    unit-left-submodule-Ring R M N
   left-inverse-law-add-left-submodule-Ring x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( left-inverse-law-add-left-module-Ring R M (pr1 x))
 
   right-inverse-law-add-left-submodule-Ring :
     (x : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring x (neg-left-submodule-Ring x)) ＝
-    (unit-left-submodule-Ring R M N)
+    add-left-submodule-Ring x (neg-left-submodule-Ring x) ＝
+    unit-left-submodule-Ring R M N
   right-inverse-law-add-left-submodule-Ring x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( right-inverse-law-add-left-module-Ring R M (pr1 x))
 
   add-commutative-left-submodule-Ring :
     (x y : type-left-submodule-Ring R M N) →
-    (add-left-submodule-Ring x y) ＝ (add-left-submodule-Ring y x)
+    add-left-submodule-Ring x y ＝ add-left-submodule-Ring y x
   add-commutative-left-submodule-Ring x y =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       (pr2 (pr1 M) (pr1 x) (pr1 y))
@@ -276,10 +267,10 @@ module _
   left-distributive-law-left-submodule-Ring :
     (r : type-Ring R)
     (x y : type-left-submodule-Ring R M N) →
-    (mul-left-submodule-Ring r (add-left-submodule-Ring x y)) ＝
-    (add-left-submodule-Ring
-      (mul-left-submodule-Ring r x)
-      (mul-left-submodule-Ring r y))
+    mul-left-submodule-Ring r (add-left-submodule-Ring x y) ＝
+    add-left-submodule-Ring
+      ( mul-left-submodule-Ring r x)
+      ( mul-left-submodule-Ring r y)
   left-distributive-law-left-submodule-Ring r x y =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( left-distributive-mul-add-left-module-Ring R M r (pr1 x) (pr1 y))
@@ -287,10 +278,10 @@ module _
   right-distributive-law-left-submodule-Ring :
     (r s : type-Ring R)
     (x : type-left-submodule-Ring R M N) →
-    (mul-left-submodule-Ring (add-Ring R r s) x) ＝
-    (add-left-submodule-Ring
-      (mul-left-submodule-Ring r x)
-      (mul-left-submodule-Ring s x))
+    mul-left-submodule-Ring (add-Ring R r s) x ＝
+    add-left-submodule-Ring
+      ( mul-left-submodule-Ring r x)
+      ( mul-left-submodule-Ring s x)
   right-distributive-law-left-submodule-Ring r s x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( right-distributive-mul-add-left-module-Ring R M r s (pr1 x))
@@ -298,22 +289,21 @@ module _
   associative-mul-left-submodule-Ring :
     (r s : type-Ring R)
     (x : type-left-submodule-Ring R M N) →
-    (mul-left-submodule-Ring (mul-Ring R r s) x) ＝
-    (mul-left-submodule-Ring r (mul-left-submodule-Ring s x))
+    mul-left-submodule-Ring (mul-Ring R r s) x ＝
+    mul-left-submodule-Ring r (mul-left-submodule-Ring s x)
   associative-mul-left-submodule-Ring r s x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( associative-mul-left-module-Ring R M r s (pr1 x))
 
   left-unit-law-mul-left-submodule-Ring :
     (x : type-left-submodule-Ring R M N) →
-    (mul-left-submodule-Ring (one-Ring R) x) ＝ x
+    mul-left-submodule-Ring (one-Ring R) x ＝ x
   left-unit-law-mul-left-submodule-Ring x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( left-unit-law-mul-left-module-Ring R M (pr1 x))
 
   set-left-module-Ring-left-submodule-Ring : Set (l2 ⊔ l3)
-  pr1 set-left-module-Ring-left-submodule-Ring =
-    type-left-submodule-Ring R M N
+  pr1 set-left-module-Ring-left-submodule-Ring = type-left-submodule-Ring R M N
   pr2 set-left-module-Ring-left-submodule-Ring =
     is-set-type-subtype
       ( subset-left-submodule-Ring R M N)
@@ -358,12 +348,12 @@ module _
     eq-htpy-hom-Ab
       ab-left-submodule-Ring
       ab-left-submodule-Ring
-      (right-distributive-law-left-submodule-Ring r s)
+      ( right-distributive-law-left-submodule-Ring r s)
   pr1 (pr2 mul-hom-left-submodule-Ring) {r} {s} =
     eq-htpy-hom-Ab
       ab-left-submodule-Ring
       ab-left-submodule-Ring
-      (associative-mul-left-submodule-Ring r s)
+      ( associative-mul-left-submodule-Ring r s)
   pr2 (pr2 mul-hom-left-submodule-Ring) =
     eq-htpy-hom-Ab
       ab-left-submodule-Ring
