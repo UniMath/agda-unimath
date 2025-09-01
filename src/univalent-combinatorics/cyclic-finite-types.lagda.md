@@ -427,7 +427,7 @@ preserves-pred-preserves-succ-map-ℤ-Mod k f H x =
 
 compute-map-preserves-succ-map-ℤ-Mod' :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) → (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) →
-  (x : ℤ) → Id (add-ℤ-Mod k (mod-ℤ k x) (f (zero-ℤ-Mod k))) (f (mod-ℤ k x))
+  (x : ℤ) → add-ℤ-Mod k (mod-ℤ k x) (f (zero-ℤ-Mod k)) ＝ f (mod-ℤ k x)
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inl zero-ℕ) =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (mod-neg-one-ℤ k)) ∙
   ( ( inv (is-left-add-neg-one-pred-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
@@ -470,7 +470,7 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) =
 
 compute-map-preserves-succ-map-ℤ-Mod :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) (H : (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f))
-  (x : ℤ-Mod k) → Id (add-ℤ-Mod k x (f (zero-ℤ-Mod k))) (f x)
+  (x : ℤ-Mod k) → add-ℤ-Mod k x (f (zero-ℤ-Mod k)) ＝ f x
 compute-map-preserves-succ-map-ℤ-Mod k f H x =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (inv (is-section-int-ℤ-Mod k x))) ∙
   ( ( compute-map-preserves-succ-map-ℤ-Mod' k f H (int-ℤ-Mod k x)) ∙

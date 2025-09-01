@@ -123,7 +123,7 @@ abstract
             ( pair y refl)) ∘e
           ( inv-associative-Σ A
             ( λ x → x ＝ y)
-            ( λ t → Id (tr B (pr2 t) (b (pr1 t))) z))) ∘e
+            ( λ t → tr B (pr2 t) (b (pr1 t)) ＝ z))) ∘e
         ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
       ( is-finite-eq (has-decidable-equality-is-finite (g y)))
 ```

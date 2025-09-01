@@ -1416,22 +1416,23 @@ We define what it means for a dependent type theory to have Π-types.
           (preserves-weakening.type
           (hom-dtt.W (function-types.sys Π (natural-numbers.N N))) ?) ?)!}
     {-
-    Id ( section-system.type
-         ( weakening.type (type-theory.W A) X)
-         ( section-system.type
-           ( hom-dtt.sys (function-types.sys Π (natural-numbers.N N)))
-           ( section-system.type
-             ( weakening.type (type-theory.W A) (natural-numbers.N N))
-             (natural-numbers.N N))))
-       ( section-system.type
-         ( hom-dtt.sys
-           ( function-types.sys (function-types.slice Π X)
-             ( natural-numbers.N (natural-numbers-slice A Π N X))))
-         ( section-system.type
-           ( weakening.type
-             ( type-theory.W (slice-dtt A X))
-             ( natural-numbers.N (natural-numbers-slice A Π N X)))
-           ( natural-numbers.N (natural-numbers-slice A Π N X))))
+    Id
+      ( section-system.type
+        ( weakening.type (type-theory.W A) X)
+        ( section-system.type
+          ( hom-dtt.sys (function-types.sys Π (natural-numbers.N N)))
+          ( section-system.type
+            ( weakening.type (type-theory.W A) (natural-numbers.N N))
+            (natural-numbers.N N))))
+      ( section-system.type
+        ( hom-dtt.sys
+          ( function-types.sys (function-types.slice Π X)
+            ( natural-numbers.N (natural-numbers-slice A Π N X))))
+        ( section-system.type
+          ( weakening.type
+            ( type-theory.W (slice-dtt A X))
+            ( natural-numbers.N (natural-numbers-slice A Π N X)))
+          ( natural-numbers.N (natural-numbers-slice A Π N X))))
   -}
        ( section-system.element
          ( weakening.type (type-theory.W A) X)

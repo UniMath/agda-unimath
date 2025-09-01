@@ -452,10 +452,10 @@ We specialize the above definitions to nonhomogenous homotopies.
       field
         element :
           {X : T} (x : system.element A X) →
-          Id ( section-system.element
-                ( substitution.element S x)
-                ( generic-element.element δ X))
-              ( x)
+          section-system.element
+            ( substitution.element S x)
+            ( generic-element.element δ X) ＝
+          x
         slice :
           (X : T) →
           generic-element-is-identity

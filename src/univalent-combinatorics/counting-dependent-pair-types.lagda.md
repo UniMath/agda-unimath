@@ -97,8 +97,8 @@ abstract
   number-of-elements-count-Σ' :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
-    Id ( number-of-elements-count (count-Σ' k e f))
-      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
+    number-of-elements-count (count-Σ' k e f) ＝
+    sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coproduct
@@ -112,8 +112,8 @@ abstract
   number-of-elements-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
     (f : (x : A) → count (B x)) →
-    Id ( number-of-elements-count (count-Σ e f))
-      ( sum-count-ℕ e (λ x → number-of-elements-count (f x)))
+    number-of-elements-count (count-Σ e f) ＝
+    sum-count-ℕ e (λ x → number-of-elements-count (f x))
   number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
 ```
 
@@ -150,7 +150,7 @@ count-fiber-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
             ( pair y refl)) ∘e
         ( inv-associative-Σ A
           ( λ x → x ＝ y)
-          ( λ t → Id (tr B (pr2 t) (b (pr1 t))) z))) ∘e
+          ( λ t → tr B (pr2 t) (b (pr1 t)) ＝ z))) ∘e
       ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
     ( count-eq (has-decidable-equality-count (f y)) (b y) z)
 

@@ -89,8 +89,8 @@ cases-number-of-elements-count-eq d (inr f) = refl
 abstract
   number-of-elements-count-eq :
     {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) →
-    Id ( number-of-elements-count (count-eq d x y))
-      ( number-of-elements-count-eq' d x y)
+    number-of-elements-count (count-eq d x y) ＝
+    number-of-elements-count-eq' d x y
   number-of-elements-count-eq d x y =
     cases-number-of-elements-count-eq d (d x y)
 ```

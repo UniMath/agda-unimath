@@ -619,19 +619,20 @@ generic elements to be equipped with generic elements.
       type :
         {X : system.type A} {Y : fibered-system.type B X}
         {x : system.element A X} (y : fibered-system.element B Y x) →
-        Id ( double-tr
-              ( λ α β γ → fibered-system.element B {X = α} β γ)
-              ( section-system.type
-                ( substitution-cancels-weakening.type S!WA x)
-                ( X))
-              ( section-fibered-system.type
-                ( fibered-substitution-cancels-weakening.type S!WB y)
-                ( Y))
-              ( generic-element-is-identity.type δidA x)
-              ( section-fibered-system.element
-                ( fibered-substitution.type SB y)
-                ( fibered-generic-element.type δB Y)))
-            ( y)
+        Id
+          ( double-tr
+            ( λ α β γ → fibered-system.element B {X = α} β γ)
+            ( section-system.type
+              ( substitution-cancels-weakening.type S!WA x)
+              ( X))
+            ( section-fibered-system.type
+              ( fibered-substitution-cancels-weakening.type S!WB y)
+              ( Y))
+            ( generic-element-is-identity.type δidA x)
+            ( section-fibered-system.element
+              ( fibered-substitution.type SB y)
+              ( fibered-generic-element.type δB Y)))
+          ( y)
       slice :
         {X : system.type A} (Y : fibered-system.type B X) →
         fibered-generic-element-is-identity

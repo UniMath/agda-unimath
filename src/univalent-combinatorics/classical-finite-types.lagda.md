@@ -60,7 +60,8 @@ Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
 Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
 
 eq-succ-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) → Id {A = classical-Fin k} x y →
+  (k : ℕ) (x y : classical-Fin k) →
+  x ＝ y →
   Id
     { A = classical-Fin (succ-ℕ k)}
     ( pair (succ-ℕ (pr1 x)) (pr2 x))
