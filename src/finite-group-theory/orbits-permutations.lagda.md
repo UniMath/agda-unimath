@@ -510,8 +510,8 @@ module _
         ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X)
         (a b : type-Type-With-Cardinality-ℕ n X) →
         is-decidable
-          ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
-        is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
+          ( Σ ℕ (λ m → (m ≤-ℕ n) × (iterate m (map-equiv f) a ＝ b))) →
+        is-decidable (Σ ℕ (λ m → iterate m (map-equiv f) a ＝ b))
       is-decidable-iterate-is-decidable-bounded h a b (inl p) =
         inl (pair (pr1 p) (pr2 (pr2 p)))
       is-decidable-iterate-is-decidable-bounded h a b (inr np) =
@@ -759,8 +759,8 @@ module _
       induction-cases-equal-iterate-transposition (inr s) =
         equal-iterate-transposition x g C F Ind k (inr (Ind k p s))
       cases-equal-iterate-transposition :
-        is-decidable (Id (iterate (succ-ℕ k) (map-equiv g) x) a) →
-        is-decidable (Id (iterate (succ-ℕ k) (map-equiv g) x) b) →
+        is-decidable (iterate (succ-ℕ k) (map-equiv g) x ＝ a) →
+        is-decidable (iterate (succ-ℕ k) (map-equiv g) x ＝ b) →
         Id
           ( iterate (succ-ℕ k) (map-equiv (composition-transposition-a-b g)) x)
           ( iterate (succ-ℕ k) (map-equiv g) x)
@@ -952,14 +952,13 @@ module _
         cases-equal-iterate-transposition-a (inl s) = inl s
         cases-equal-iterate-transposition-a (inr s) = inr (pair s ineq)
       lemma2 :
-        ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) →
-        is-decidable (Id (pr1 (minimal-element-iterate g a b pa)) zero-ℕ) →
-        Id
-          ( iterate
-            ( pr1 (minimal-element-iterate g a b pa))
-            ( map-equiv (composition-transposition-a-b g))
-            ( a))
-          ( a)
+        ( pa : Σ ℕ (λ k → iterate k (map-equiv g) a ＝ b)) →
+        is-decidable (pr1 (minimal-element-iterate g a b pa) ＝ zero-ℕ) →
+        iterate
+          ( pr1 (minimal-element-iterate g a b pa))
+          ( map-equiv (composition-transposition-a-b g))
+          ( a) ＝
+        a
       lemma2 pa (inl p) =
         ex-falso
           ( np
@@ -1231,7 +1230,7 @@ module _
           ( refl)
         where
         cases-lemma2 :
-          is-decidable (Id (pr1 (minimal-element-iterate-2-a-b g pa)) zero-ℕ) →
+          is-decidable (pr1 (minimal-element-iterate-2-a-b g pa) ＝ zero-ℕ) →
           (c :
             ( Id
               ( iterate
@@ -1245,7 +1244,7 @@ module _
                 ( map-equiv g)
                 ( x))
               ( b))) →
-          Id c (pr1 (pr2 (minimal-element-iterate-2-a-b g pa))) →
+          ( c ＝ pr1 (pr2 (minimal-element-iterate-2-a-b g pa))) →
           ( sim-equivalence-relation
             ( same-orbits-permutation-count
               ( composition-transposition-a-b g))

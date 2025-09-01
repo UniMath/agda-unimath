@@ -479,13 +479,13 @@ module _
       type-Decidable-Prop (pr1 Y x) →
       type-Decidable-Prop (pr1 Y y) →
       is-decidable (pr1 two-elements-transposition ＝ x) →
-      is-decidable (Id (pr1 (pr2 two-elements-transposition)) x) →
+      is-decidable (pr1 (pr2 two-elements-transposition) ＝ x) →
       is-decidable (pr1 two-elements-transposition ＝ y) →
-      is-decidable (Id (pr1 (pr2 two-elements-transposition)) y) →
+      is-decidable (pr1 (pr2 two-elements-transposition) ＝ y) →
       ( ( pr1 two-elements-transposition ＝ x) ×
-        ( Id (pr1 (pr2 two-elements-transposition)) y)) +
+        ( pr1 (pr2 two-elements-transposition) ＝ y)) +
       ( ( pr1 two-elements-transposition ＝ y) ×
-        ( Id (pr1 (pr2 two-elements-transposition)) x))
+        ( pr1 (pr2 two-elements-transposition) ＝ x))
     cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inl u) =
       inl (pair q u)
     cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inr nu) =

@@ -145,7 +145,7 @@ module _
         ( is-torsorial-Id y)
         ( pair y refl)
         ( is-contr-is-equiv'
-          ( Σ (Id (tr P (loop-free-loop α) y) y) (λ p' → p ＝ p'))
+          ( Σ (tr P (loop-free-loop α) y ＝ y) (λ p' → p ＝ p'))
           ( tot (λ p' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ p' → is-equiv-concat right-unit p'))

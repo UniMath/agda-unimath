@@ -778,7 +778,7 @@ module _
               ( Y))))) →
     is-decidable (pr1 two-elements ＝ i) →
     is-decidable (pr1 two-elements ＝ j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
     Σ X (λ z → type-Decidable-Prop (pr1 Y z))
   cases-orientation-two-elements-count
     i j Y (pair x (pair y (pair np' P))) (inl q) r s =
@@ -1455,8 +1455,8 @@ module _
                   ( np)))))) →
       (q : is-decidable (pr1 two-elements ＝ i)) →
       (r : is-decidable (pr1 two-elements ＝ j)) →
-      (s : is-decidable (Id (pr1 (pr2 two-elements)) i)) →
-      (t : is-decidable (Id (pr1 (pr2 two-elements)) j)) →
+      (s : is-decidable (pr1 (pr2 two-elements) ＝ i)) →
+      (t : is-decidable (pr1 (pr2 two-elements) ＝ j)) →
       Id
         ( pr1
           ( cases-orientation-two-elements-count i j
@@ -1594,8 +1594,8 @@ module _
     two-elements-transposition eX Y ＝ two-elements →
     is-decidable (pr1 two-elements ＝ i) →
     is-decidable (pr1 two-elements ＝ j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( orientation-aut-count
@@ -1829,8 +1829,8 @@ module _
     two-elements-transposition eX Y ＝ two-elements →
     is-decidable (pr1 two-elements ＝ i) →
     is-decidable (pr1 two-elements ＝ j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( orientation-aut-count
@@ -2256,8 +2256,8 @@ module _
     two-elements-transposition eX Y ＝ two-elements →
     is-decidable (pr1 two-elements ＝ i) →
     is-decidable (pr1 two-elements ＝ j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( map-orientation-complete-undirected-graph-equiv
@@ -2872,8 +2872,8 @@ module _
       Id two-elements (two-elements-transposition eX (pr1 T)) →
       is-decidable (pr1 two-elements ＝ i) →
       is-decidable (pr1 two-elements ＝ j) →
-      is-decidable (Id (pr1 (pr2 two-elements)) i) →
-      is-decidable (Id (pr1 (pr2 two-elements)) j) →
+      is-decidable (pr1 (pr2 two-elements) ＝ i) →
+      is-decidable (pr1 (pr2 two-elements) ＝ j) →
       Id
         ( standard-2-Element-Decidable-Subtype
           ( has-decidable-equality-count eX)
