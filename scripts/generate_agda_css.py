@@ -5,7 +5,7 @@ import re
 
 # In mdbook-catppuccin this is merged to catppuccin.css, so we'll need
 # to update this script accordingly
-CATPPUCCIN_HIGHLIGHT_FILE = 'theme/catppuccin.css'
+CATPPUCCIN_HIGHLIGHT_FILE = 'website/theme/catppuccin.css'
 AGDA_HIGHLIGHT_FILE = 'website/css/Agda-highlight.css'
 
 # First group -> theme name

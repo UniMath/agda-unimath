@@ -18,7 +18,7 @@ if (link) {
     'MAINTAINERS.md',
     'MIXFIX-OPERATORS.md',
     'README.md',
-    'STATEMENT-OF-INCLUSION.md',
+    'STATEMENT-OF-INCLUSIVITY.md',
     'SUMMARY.md',
     'PROJECTS.md',
     'VISUALIZATION.md',

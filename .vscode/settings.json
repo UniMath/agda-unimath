@@ -38,7 +38,7 @@
 
   // Autoformatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.configPath": ".prettierrc.json",
+  "prettier.configPath": "config/.prettierrc.json",
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
 
