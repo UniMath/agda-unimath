@@ -141,7 +141,7 @@ module _
 ```agda
   commutative-add-left-module-Ring :
     (x y : type-left-module-Ring) →
-    Id (add-left-module-Ring x y) (add-left-module-Ring y x)
+    add-left-module-Ring x y ＝ add-left-module-Ring y x
   commutative-add-left-module-Ring =
     commutative-add-Ab ab-left-module-Ring
 ```
