@@ -279,24 +279,24 @@ module _
         ( x)
         ( y)
         ( is-least-binary-upper-bound-max-ℝ x y)
-        ( (max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( (max-ℝ x z) +ℝ real-ℚ⁺ d)
         ( ( transitive-leq-ℝ
             ( x)
             ( max-ℝ x z)
-            ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( max-ℝ x z +ℝ real-ℚ⁺ d)
             ( leq-le-ℝ
               ( max-ℝ x z)
-              ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+              ( max-ℝ x z +ℝ real-ℚ⁺ d)
               ( le-left-add-real-ℝ⁺
                 ( max-ℝ x z)
                 ( positive-real-ℚ⁺ d)))
             ( leq-left-max-ℝ x z)) ,
           ( transitive-leq-ℝ
             ( y)
-            ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( z +ℝ real-ℚ⁺ d)
+            ( max-ℝ x z +ℝ real-ℚ⁺ d)
             ( preserves-leq-right-add-ℝ
-              ( real-ℚ (rational-ℚ⁺ d))
+              ( real-ℚ⁺ d)
               ( z)
               ( max-ℝ x z)
               ( leq-right-max-ℝ x z))
@@ -309,7 +309,7 @@ module _
         ( (max-ℝ z x) +ℝ real-ℚ⁺ d)
     preserves-lower-neighborhood-leq-right-max-ℝ z≤y+d =
       binary-tr
-        ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
+        ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
         ( commutative-max-ℝ x y)
         ( commutative-max-ℝ x z)
         ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)

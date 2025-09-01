@@ -187,23 +187,23 @@ module _
         ( abs-ℝ y)
         ( leq-abs-leq-leq-neg-ℝ
           ( x)
-          ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( abs-ℝ y +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( x)
-            ( y +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( y +ℝ real-ℚ⁺ d)
+            ( abs-ℝ y +ℝ real-ℚ⁺ d)
             ( preserves-leq-right-add-ℝ
-              ( real-ℚ (rational-ℚ⁺ d))
+              ( real-ℚ⁺ d)
               ( y)
               ( abs-ℝ y)
               ( leq-abs-ℝ y))
             ( left-leq-real-bound-neighborhood-ℝ d x y I))
           ( transitive-leq-ℝ
             ( neg-ℝ x)
-            ( neg-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( abs-ℝ y +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( neg-ℝ y +ℝ real-ℚ⁺ d)
+            ( abs-ℝ y +ℝ real-ℚ⁺ d)
             ( preserves-leq-right-add-ℝ
-              ( real-ℚ (rational-ℚ⁺ d))
+              ( real-ℚ⁺ d)
               ( neg-ℝ y)
               ( abs-ℝ y)
               ( neg-leq-abs-ℝ y))
@@ -214,23 +214,23 @@ module _
               ( right-leq-real-bound-neighborhood-ℝ d x y I))))
         ( leq-abs-leq-leq-neg-ℝ
           ( y)
-          ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+          ( abs-ℝ x +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( y)
-            ( x +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( x +ℝ real-ℚ⁺ d)
+            ( abs-ℝ x +ℝ real-ℚ⁺ d)
             ( preserves-leq-right-add-ℝ
-              ( real-ℚ (rational-ℚ⁺ d))
+              ( real-ℚ⁺ d)
               ( x)
               ( abs-ℝ x)
               ( leq-abs-ℝ x))
             ( right-leq-real-bound-neighborhood-ℝ d x y I))
           ( transitive-leq-ℝ
             ( neg-ℝ y)
-            ( neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( abs-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+            ( neg-ℝ x +ℝ real-ℚ⁺ d)
+            ( abs-ℝ x +ℝ real-ℚ⁺ d)
             ( preserves-leq-right-add-ℝ
-              ( real-ℚ (rational-ℚ⁺ d))
+              ( real-ℚ⁺ d)
               ( neg-ℝ x)
               ( abs-ℝ x)
               ( neg-leq-abs-ℝ x))

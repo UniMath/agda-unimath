@@ -96,8 +96,7 @@ module _
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
   opaque
-    unfolding leq-ℝ-Prop
-    unfolding leq-ℝ-Prop'
+    unfolding leq-ℝ-Prop leq-ℝ-Prop'
 
     leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
     leq'-leq-ℝ lx⊆ly q y<q =
@@ -154,8 +153,7 @@ opaque
   leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
 
 opaque
-  unfolding sim-ℝ
-  unfolding leq-ℝ-Prop
+  unfolding leq-ℝ-Prop sim-ℝ
 
   leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
@@ -165,8 +163,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
-  unfolding leq-ℝ-Prop
+  unfolding leq-ℝ-Prop sim-ℝ
 
   sim-antisymmetric-leq-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
@@ -218,8 +215,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 
 ```agda
 opaque
-  unfolding sim-ℝ
-  unfolding leq-ℝ-Prop
+  unfolding leq-ℝ-Prop sim-ℝ
 
   sim-sim-leq-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
@@ -285,8 +281,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
-    unfolding leq-ℝ-Prop
+    unfolding leq-ℝ-Prop sim-ℝ
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
     preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
@@ -318,8 +313,7 @@ module _
   where
 
   opaque
-    unfolding add-ℝ
-    unfolding leq-ℝ-Prop
+    unfolding add-ℝ leq-ℝ-Prop
 
     preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
     preserves-leq-right-add-ℝ x≤y _ =
@@ -456,32 +450,33 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  preserves-lower-neighborhood-leq-left-add-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( add-ℝ x y)
-      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
-    inv-tr
-      ( leq-ℝ (x +ℝ y))
-      ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
-      ( preserves-leq-left-add-ℝ
-        ( x)
-        ( y)
-        ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( z≤y+d))
+  abstract
+    preserves-lower-neighborhood-leq-left-add-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( add-ℝ x y)
+        ( (add-ℝ x z) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
+      inv-tr
+        ( leq-ℝ (x +ℝ y))
+        ( associative-add-ℝ x z (real-ℚ⁺ d))
+        ( preserves-leq-left-add-ℝ
+          ( x)
+          ( y)
+          ( z +ℝ real-ℚ⁺ d)
+          ( z≤y+d))
 
-  preserves-lower-neighborhood-leq-right-add-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( add-ℝ y x)
-      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
-    binary-tr
-      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
-      ( commutative-add-ℝ x y)
-      ( commutative-add-ℝ x z)
-      ( preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d)
+    preserves-lower-neighborhood-leq-right-add-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( add-ℝ y x)
+        ( (add-ℝ z x) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
+      binary-tr
+        ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
+        ( commutative-add-ℝ x y)
+        ( commutative-add-ℝ x z)
+        ( preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d)
 ```
 
 ### Addition of real numbers reflects lower neighborhoods
@@ -492,33 +487,34 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  reflects-lower-neighborhood-leq-left-add-ℝ :
-    leq-ℝ
-      ( add-ℝ x y)
-      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
-  reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
-    reflects-leq-left-add-ℝ
-      ( x)
-      ( y)
-      ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-      ( tr
-        ( leq-ℝ (x +ℝ y))
-        ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
-        ( x+y≤x+z+d))
+  abstract
+    reflects-lower-neighborhood-leq-left-add-ℝ :
+      leq-ℝ
+        ( add-ℝ x y)
+        ( (add-ℝ x z) +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (z +ℝ real-ℚ⁺ d)
+    reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
+      reflects-leq-left-add-ℝ
+        ( x)
+        ( y)
+        ( z +ℝ real-ℚ⁺ d)
+        ( tr
+          ( leq-ℝ (x +ℝ y))
+          ( associative-add-ℝ x z (real-ℚ⁺ d))
+          ( x+y≤x+z+d))
 
-  reflects-lower-neighborhood-leq-right-add-ℝ :
-    leq-ℝ
-      ( add-ℝ y x)
-      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
-  reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
-    reflects-lower-neighborhood-leq-left-add-ℝ
-      ( binary-tr
-        ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
-        ( commutative-add-ℝ y x)
-        ( commutative-add-ℝ z x)
-        ( y+x≤z+y+d))
+    reflects-lower-neighborhood-leq-right-add-ℝ :
+      leq-ℝ
+        ( add-ℝ y x)
+        ( (add-ℝ z x) +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (z +ℝ real-ℚ⁺ d)
+    reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
+      reflects-lower-neighborhood-leq-left-add-ℝ
+        ( binary-tr
+          ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
+          ( commutative-add-ℝ y x)
+          ( commutative-add-ℝ z x)
+          ( y+x≤z+y+d))
 ```
 
 ### Negation of real numbers reverses lower neighborhoods
@@ -530,20 +526,20 @@ module _
   where
 
   reverses-lower-neighborhood-neg-ℝ :
-    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+    leq-ℝ x (y +ℝ real-ℚ⁺ d) →
+    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ⁺ d)
   reverses-lower-neighborhood-neg-ℝ x≤y+d =
     tr
       ( leq-ℝ (neg-ℝ y))
       ( ( distributive-neg-add-ℝ x ((neg-ℝ ∘ real-ℚ ∘ rational-ℚ⁺) d)) ∙
-        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ (rational-ℚ⁺ d)))))
+        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ⁺ d))))
       ( neg-leq-ℝ
-        ( x -ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x -ℝ real-ℚ⁺ d)
         ( y)
         ( leq-transpose-right-add-ℝ
           ( x)
           ( y)
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( x≤y+d)))
 ```
 

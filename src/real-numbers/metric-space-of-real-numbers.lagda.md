@@ -269,7 +269,7 @@ module _
   abstract
     lower-neighborhood-real-bound-leq-ℝ :
       (d : ℚ⁺) (x y : ℝ l) →
-      leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+      leq-ℝ y (x +ℝ real-ℚ⁺ d) →
       lower-neighborhood-ℝ d x y
     lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
       is-in-lower-cut-le-real-ℚ
@@ -295,7 +295,7 @@ module _
     real-bound-leq-lower-neighborhood-ℝ :
       (d : ℚ⁺) (x y : ℝ l) →
       lower-neighborhood-ℝ d x y →
-      leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+      leq-ℝ y (x +ℝ real-ℚ⁺ d)
     real-bound-leq-lower-neighborhood-ℝ (d , _) x y H r =
       ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
       ( H (r -ℚ d)) ∘
@@ -313,20 +313,20 @@ module _
     unfolding neighborhood-prop-ℝ
 
     neighborhood-real-bound-each-leq-ℝ :
-      leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-      leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
+      leq-ℝ x (y +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (x +ℝ real-ℚ⁺ d) →
       neighborhood-ℝ l d x y
     neighborhood-real-bound-each-leq-ℝ x≤y+d y≤x+d =
       ( lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d) ,
       ( lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
 
     left-leq-real-bound-neighborhood-ℝ :
-      neighborhood-ℝ l d x y → leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
+      neighborhood-ℝ l d x y → leq-ℝ x (y +ℝ real-ℚ⁺ d)
     left-leq-real-bound-neighborhood-ℝ (_ , K) =
       real-bound-leq-lower-neighborhood-ℝ d y x K
 
     right-leq-real-bound-neighborhood-ℝ :
-      neighborhood-ℝ l d x y → leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
+      neighborhood-ℝ l d x y → leq-ℝ y (x +ℝ real-ℚ⁺ d)
     right-leq-real-bound-neighborhood-ℝ (H , _) =
       real-bound-leq-lower-neighborhood-ℝ d x y H
 ```
@@ -349,11 +349,11 @@ module _
       ( preserves-leq-sim-ℝ
         ( x)
         ( x')
-        ( y +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( y' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y +ℝ real-ℚ⁺ d)
+        ( y' +ℝ real-ℚ⁺ d)
         ( x~x')
         ( preserves-sim-right-add-ℝ
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( y)
           ( y')
           ( y~y'))
@@ -361,11 +361,11 @@ module _
       ( preserves-leq-sim-ℝ
         ( y)
         ( y')
-        ( x +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( x' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x +ℝ real-ℚ⁺ d)
+        ( x' +ℝ real-ℚ⁺ d)
         ( y~y')
         ( preserves-sim-right-add-ℝ
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( x)
           ( x')
           ( x~x'))
