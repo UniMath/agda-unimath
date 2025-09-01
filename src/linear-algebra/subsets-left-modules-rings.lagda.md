@@ -21,9 +21,11 @@ open import ring-theory.rings
 
 ## Idea
 
-A subset of a [left module](./left-modules-rings.lagda.md) `M` over a
-[ring](../ring-theory/rings.lagda.md) `R` is a
-[subset](../foundation/subtypes.lagda.md) of the underlying type of `M`.
+A
+{{#concept "subset" Disambiguation="of a left module of a ring" Agda=subset-left-module-Ring}}
+of a [left module](linear-algebra.left-modules-rings.md) `M` over a
+[ring](ring-theory.rings.md) `R` is a [subset](foundation.subtypes.md) of the
+underlying type of `M`.
 
 ## Definitions
 
