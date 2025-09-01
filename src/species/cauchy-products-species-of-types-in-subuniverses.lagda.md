@@ -168,7 +168,7 @@ module _
             ( associative-product ∘e commutative-product)
             ( λ x →
               equiv-postcomp-equiv
-                ( associative-coproduct ∘e commutative-coproduct _ _)
+                ( associative-coproduct ∘e commutative-coproduct)
                 ( inclusion-subuniverse P X))) ∘e
             ( equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))

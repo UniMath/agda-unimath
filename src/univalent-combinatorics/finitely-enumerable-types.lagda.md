@@ -238,7 +238,7 @@ abstract
     finite-enumeration (X + Y) → finite-enumeration Y
   finite-enumeration-right-summand eX+Y =
     finite-enumeration-left-summand
-      ( finite-enumeration-equiv eX+Y (commutative-coproduct _ _))
+      ( finite-enumeration-equiv eX+Y (commutative-coproduct))
 
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →

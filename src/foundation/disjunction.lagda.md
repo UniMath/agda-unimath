@@ -346,7 +346,7 @@ module _
   where
 
   swap-disjunction : disjunction-type A B → disjunction-type B A
-  swap-disjunction = map-trunc-Prop (map-commutative-coproduct A B)
+  swap-disjunction = map-trunc-Prop map-commutative-coproduct
 ```
 
 ## See also

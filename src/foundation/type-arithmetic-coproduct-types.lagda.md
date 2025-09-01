@@ -34,7 +34,7 @@ themselves, cartesian products, and dependent pair types.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   map-commutative-coproduct : A + B → B + A

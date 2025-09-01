@@ -300,10 +300,8 @@ module _
         ( commutative-product)
         ( λ x →
           equiv-postcomp-equiv
-            ( commutative-coproduct
-              ( inclusion-subuniverse P (pr1 x))
-              ( inclusion-subuniverse P (pr2 x)))
-            (inclusion-subuniverse P X))) ∘e
+            ( commutative-coproduct)
+            ( inclusion-subuniverse P X))) ∘e
       ( ( inv-associative-Σ)))
 ```
 
@@ -378,7 +376,7 @@ module _
     ( equiv-tot
       ( λ x →
         ( ( equiv-postcomp-equiv
-            ( commutative-coproduct _ _)
+            ( commutative-coproduct)
             ( inclusion-subuniverse P X)) ∘e
         ( ( left-unit-law-Σ-is-contr
             ( is-torsorial-equiv-subuniverse' P
