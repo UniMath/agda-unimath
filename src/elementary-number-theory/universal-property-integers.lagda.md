@@ -99,7 +99,7 @@ equiv-comparison-map-Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
   ( s t : ELIM-ℤ P p0 pS) (k : ℤ) →
-  Id ((pr1 s) k) ((pr1 t) k) ≃ Id ((pr1 s) (succ-ℤ k)) ((pr1 t) (succ-ℤ k))
+  (pr1 s k ＝ pr1 t k) ≃ (pr1 s (succ-ℤ k) ＝ pr1 t (succ-ℤ k))
 equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k =
   ( ( equiv-concat (pr2 (pr2 s) k) (pr1 t (succ-ℤ k))) ∘e
     ( equiv-concat' (map-equiv (pS k) (pr1 s k)) (inv (pr2 (pr2 t) k)))) ∘e

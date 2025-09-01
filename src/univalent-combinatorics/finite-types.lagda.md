@@ -756,7 +756,8 @@ abstract
 ```agda
   equiv-has-cardinality-id-number-of-elements-is-finite :
     {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
-    ( has-cardinality-ℕ n X ≃ Id (number-of-elements-is-finite H) n)
+    has-cardinality-ℕ n X ≃
+    ( number-of-elements-is-finite H ＝ n)
   pr1 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) Q =
     ap
       ( number-of-elements-has-finite-cardinality)
