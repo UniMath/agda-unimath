@@ -42,7 +42,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-[Propositional truncations](foundation.propositional-truncations.md) distributes
+[Propositional truncations](foundation.propositional-truncations.md) distribute
 over finite products.
 
 ## Theorems
