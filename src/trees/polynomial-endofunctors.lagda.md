@@ -35,7 +35,7 @@ Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
 `𝑃 A B` is defined by
 
 ```text
-  X ↦ Σ (x : A), (B x → X)
+  X ↦ Σ (x : A), (B x → X).
 ```
 
 Polynomial endofunctors are important in the study of

@@ -14,6 +14,7 @@ open import trees.bases-directed-trees public
 open import trees.bases-enriched-directed-trees public
 open import trees.binary-w-types public
 open import trees.bounded-multisets public
+open import trees.cartesian-morphisms-polynomial-endofunctors public
 open import trees.cartesian-natural-transformations-polynomial-endofunctors public
 open import trees.coalgebra-of-directed-trees public
 open import trees.coalgebra-of-enriched-directed-trees public
@@ -51,6 +52,7 @@ open import trees.natural-transformations-polynomial-endofunctors public
 open import trees.planar-binary-trees public
 open import trees.plane-trees public
 open import trees.polynomial-endofunctors public
+open import trees.polynomial-endofunctors-from-subuniverses public
 open import trees.raising-universe-levels-directed-trees public
 open import trees.ranks-of-elements-w-types public
 open import trees.rooted-morphisms-directed-trees public
