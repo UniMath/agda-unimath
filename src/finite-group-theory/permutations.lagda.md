@@ -192,8 +192,8 @@ module _
                     ( Σ ( type-Type-With-Cardinality-ℕ n X)
                         ( type-Decidable-Prop ∘ P)))))
             ( λ li →
-              Id k (mod-two-ℕ (length-list li)) ×
-              f ＝ permutation-list-transpositions li)))
+              ( k ＝ mod-two-ℕ (length-list li)) ×
+              ( f ＝ permutation-list-transpositions li))))
 
   abstract
     is-contr-parity-transposition-permutation :

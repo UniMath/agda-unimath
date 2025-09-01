@@ -168,7 +168,7 @@ Eq-list : {l1 : Level} {A : UU l1} → list A → list A → UU l1
 Eq-list {l1} nil nil = raise-unit l1
 Eq-list {l1} nil (cons x l') = raise-empty l1
 Eq-list {l1} (cons x l) nil = raise-empty l1
-Eq-list {l1} (cons x l) (cons x' l') = (Id x x') × Eq-list l l'
+Eq-list {l1} (cons x l) (cons x' l') = (x ＝ x') × Eq-list l l'
 
 refl-Eq-list : {l1 : Level} {A : UU l1} (l : list A) → Eq-list l l
 refl-Eq-list nil = raise-star

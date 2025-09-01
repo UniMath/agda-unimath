@@ -55,7 +55,7 @@ count-type-Decidable-Prop P (inr f) = count-is-empty f
 ```agda
 cases-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (e : is-decidable (Id x y)) → count (Id x y)
+  (e : is-decidable (x ＝ y)) → count (x ＝ y)
 cases-count-eq d {x} {y} (inl p) =
   count-is-contr
     ( is-proof-irrelevant-is-prop (is-set-has-decidable-equality d x y) p)
@@ -63,12 +63,12 @@ cases-count-eq d (inr f) =
   count-is-empty f
 
 count-eq :
-  {l : Level} {X : UU l} → has-decidable-equality X → (x y : X) → count (Id x y)
+  {l : Level} {X : UU l} → has-decidable-equality X → (x y : X) → count (x ＝ y)
 count-eq d x y = cases-count-eq d (d x y)
 
 cases-number-of-elements-count-eq' :
   {l : Level} {X : UU l} {x y : X} →
-  is-decidable (Id x y) → ℕ
+  is-decidable (x ＝ y) → ℕ
 cases-number-of-elements-count-eq' (inl p) = 1
 cases-number-of-elements-count-eq' (inr f) = 0
 
@@ -79,7 +79,7 @@ number-of-elements-count-eq' d x y =
 
 cases-number-of-elements-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (e : is-decidable (Id x y)) →
+  (e : is-decidable (x ＝ y)) →
   Id
     ( number-of-elements-count (cases-count-eq d e))
     ( cases-number-of-elements-count-eq' e)

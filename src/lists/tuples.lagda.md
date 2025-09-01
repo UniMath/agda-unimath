@@ -109,7 +109,7 @@ module _
 
   Eq-tuple : (n : ℕ) → tuple A n → tuple A n → UU l
   Eq-tuple zero-ℕ empty-tuple empty-tuple = raise-unit l
-  Eq-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (Id x y) × (Eq-tuple n xs ys)
+  Eq-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (x ＝ y) × (Eq-tuple n xs ys)
 
   refl-Eq-tuple : (n : ℕ) → (u : tuple A n) → Eq-tuple n u u
   refl-Eq-tuple zero-ℕ empty-tuple = map-raise star

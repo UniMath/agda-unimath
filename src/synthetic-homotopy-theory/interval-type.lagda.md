@@ -153,8 +153,8 @@ is-section-inv-ev-𝕀 (pair u (pair v q)) =
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
   (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
-  Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) →
-  Id (tr (λ x → f x ＝ g x) p q) r
+  apd f p ∙ r ＝ ap (tr B p) q ∙ apd g p →
+  tr (λ x → f x ＝ g x) p q ＝ r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
 is-retraction-inv-ev-𝕀 :

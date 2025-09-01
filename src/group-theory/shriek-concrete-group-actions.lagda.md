@@ -38,5 +38,5 @@ module _
     trunc-Set
       ( Σ ( classifying-type-Concrete-Group G)
           ( λ x →
-            type-Set (X x) × classifying-map-hom-Concrete-Group G H f x ＝ y))
+            type-Set (X x) × (classifying-map-hom-Concrete-Group G H f x ＝ y)))
 ```

@@ -90,7 +90,7 @@ is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-decidable-empty
 is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
 
 has-decidable-equality-Fin :
-  (k : ℕ) (x y : Fin k) → is-decidable (Id x y)
+  (k : ℕ) (x y : Fin k) → is-decidable (x ＝ y)
 has-decidable-equality-Fin k x y =
   map-coproduct
     ( eq-Eq-Fin k)

@@ -81,7 +81,7 @@ module _
 
   Eq-free-loop : (α α' : free-loop X) → UU l1
   Eq-free-loop (pair x α) α' =
-    Σ (Id x (base-free-loop α')) (λ p → Id (α ∙ p) (p ∙ (loop-free-loop α')))
+    Σ (x ＝ base-free-loop α') (λ p → α ∙ p ＝ p ∙ (loop-free-loop α'))
 
   refl-Eq-free-loop : (α : free-loop X) → Eq-free-loop α α
   pr1 (refl-Eq-free-loop (pair x α)) = refl
@@ -98,7 +98,7 @@ module _
         ( is-torsorial-Id x)
         ( pair x refl)
         ( is-contr-is-equiv'
-          ( Σ (Id x x) (λ α' → α ＝ α'))
+          ( Σ (x ＝ x) (λ α' → α ＝ α'))
           ( tot (λ α' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α' → is-equiv-concat right-unit α'))

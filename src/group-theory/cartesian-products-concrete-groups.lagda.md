@@ -110,14 +110,14 @@ module _
         ( mere-eq-classifying-type-product-Concrete-Group
             shape-product-Concrete-Group
             X)
-        ( is-set-Prop (Id X Y))
+        ( is-set-Prop (X ＝ Y))
         ( λ where
           refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-product-Concrete-Group
                   shape-product-Concrete-Group
                   Y)
-              ( is-set-Prop (Id shape-product-Concrete-Group Y))
+              ( is-set-Prop (shape-product-Concrete-Group ＝ Y))
               ( λ where refl → is-set-type-product-Concrete-Group))
 
   classifying-1-type-product-Concrete-Group : Truncated-Type (l1 ⊔ l2) one-𝕋

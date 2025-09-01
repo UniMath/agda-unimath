@@ -166,7 +166,7 @@ module _
 
   eq-tr-type-Ω :
     (p : x ＝ y) (q : type-Ω (pair A x)) →
-    Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
+    tr-type-Ω p q ＝ inv p ∙ (q ∙ p)
   eq-tr-type-Ω refl q = inv right-unit
 ```
 

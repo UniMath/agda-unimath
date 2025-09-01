@@ -223,8 +223,8 @@ module _
           eq-pair-Σ
             ( eq-equiv
               ( pair
-                ( map-commutative-coproduct (Id x z) (Id y z))
-                ( is-equiv-map-commutative-coproduct (Id x z) (Id y z))))
+                ( map-commutative-coproduct (x ＝ z) (y ＝ z))
+                ( is-equiv-map-commutative-coproduct (x ＝ z) (y ＝ z))))
             ( eq-pair-Σ
               ( eq-is-prop
                 ( is-prop-is-prop
