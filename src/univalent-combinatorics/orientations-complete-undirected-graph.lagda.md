@@ -734,7 +734,7 @@ module _
                 ( np))
               ( Y))))) →
     is-decidable
-      ( Id (map-equiv e (pr1 two-elements)) (pr1 two-elements)) →
+      ( map-equiv e (pr1 two-elements) ＝ pr1 two-elements) →
     is-decidable
       ( Id (map-equiv e (pr1 (pr2 two-elements))) (pr1 (pr2 two-elements))) →
     Σ X (λ z → type-Decidable-Prop (pr1 Y z))
@@ -870,9 +870,9 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ i) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
@@ -953,9 +953,9 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ i) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1
@@ -1144,9 +1144,9 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ j) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
@@ -1253,9 +1253,9 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
+      ( ( pr1 (two-elements-transposition eX Y) ＝ j) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1
@@ -2869,7 +2869,7 @@ module _
                   ( has-decidable-equality-count eX)
                   ( np'))
                 ( pr1 T))))) →
-      Id two-elements (two-elements-transposition eX (pr1 T)) →
+      two-elements ＝ two-elements-transposition eX (pr1 T) →
       is-decidable (pr1 two-elements ＝ i) →
       is-decidable (pr1 two-elements ＝ j) →
       is-decidable (pr1 (pr2 two-elements) ＝ i) →

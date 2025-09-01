@@ -275,7 +275,7 @@ module _
 
   left-zero-law-mul-right-module-Ring :
     (x : type-right-module-Ring R M) →
-    Id (mul-right-module-Ring R M (zero-Ring R) x) (zero-right-module-Ring R M)
+    mul-right-module-Ring R M (zero-Ring R) x ＝ zero-right-module-Ring R M
   left-zero-law-mul-right-module-Ring =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring R M)

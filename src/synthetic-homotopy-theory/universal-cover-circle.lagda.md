@@ -217,7 +217,7 @@ contraction-total-space' :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ l2 ⊔ l3)
 contraction-total-space' c x {F} e =
-  ( y : F) → Id c (pair x (map-equiv e y))
+  ( y : F) → c ＝ pair x (map-equiv e y)
 
 equiv-tr-contraction-total-space' :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
@@ -270,8 +270,8 @@ dependent-identification-contraction-total-space' :
   {x x' : A} (p : x ＝ x') →
   {F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
   (H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
-  (h : (y : F) → Id c (pair x (map-equiv e y))) →
-  (h' : (y' : F') → Id c (pair x' (map-equiv e' y'))) →
+  (h : (y : F) → c ＝ pair x (map-equiv e y)) →
+  (h' : (y' : F') → c ＝ pair x' (map-equiv e' y')) →
   UU (l1 ⊔ l2 ⊔ l3)
 dependent-identification-contraction-total-space'
   c {x} {x'} p {F} {F'} f e e' H h h' =
@@ -279,7 +279,7 @@ dependent-identification-contraction-total-space'
     ( λ y → concat' c (segment-Σ p f e e' H y)) h) ~
   ( precomp-Π
     ( map-equiv f)
-    ( λ y' → Id c (pair x' (map-equiv e' y')))
+    ( λ y' → c ＝ pair x' (map-equiv e' y'))
     ( h'))
 
 map-dependent-identification-contraction-total-space' :
@@ -312,7 +312,7 @@ map-dependent-identification-contraction-total-space'
             ( segment-Σ refl f e e' H)
             ( precomp-Π
               ( map-equiv f)
-              ( λ y' → Id c (pair x (map-equiv e' y')))
+              ( λ y' → c ＝ pair x (map-equiv e' y'))
               ( h'))
             ( α))) ∙
         ( inv
@@ -341,7 +341,7 @@ equiv-dependent-identification-contraction-total-space'
       ( segment-Σ refl f e e' H)
       ( precomp-Π
         ( map-equiv f)
-        ( λ y' → Id c (pair x (map-equiv e' y')))
+        ( λ y' → c ＝ pair x (map-equiv e' y'))
         ( h')))) ∘e
   ( ( equiv-funext) ∘e
     ( ( equiv-concat' h

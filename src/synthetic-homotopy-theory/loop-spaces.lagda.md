@@ -102,11 +102,11 @@ module _
   inv-Ω = inv
 
   left-inverse-law-mul-Ω :
-    (x : type-Ω A) → Id (mul-Ω A (inv-Ω x) x) (refl-Ω A)
+    (x : type-Ω A) → mul-Ω A (inv-Ω x) x ＝ refl-Ω A
   left-inverse-law-mul-Ω x = left-inv x
 
   right-inverse-law-mul-Ω :
-    (x : type-Ω A) → Id (mul-Ω A x (inv-Ω x)) (refl-Ω A)
+    (x : type-Ω A) → mul-Ω A x (inv-Ω x) ＝ refl-Ω A
   right-inverse-law-mul-Ω x = right-inv x
 
   Ω-Wild-Quasigroup : Wild-Quasigroup l
@@ -123,7 +123,7 @@ module _
 
   associative-mul-Ω :
     (x y z : type-Ω A) →
-    Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
+    mul-Ω A (mul-Ω A x y) z ＝ mul-Ω A x (mul-Ω A y z)
   associative-mul-Ω x y z = assoc x y z
 ```
 

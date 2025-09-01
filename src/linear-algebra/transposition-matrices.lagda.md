@@ -44,7 +44,7 @@ transpose-matrix {n = succ-ℕ n} x =
 ```agda
 is-involution-transpose-matrix :
   {l : Level} → {A : UU l} → {m n : ℕ} →
-  (x : matrix A m n) → Id x (transpose-matrix (transpose-matrix x))
+  (x : matrix A m n) → x ＝ transpose-matrix (transpose-matrix x)
 is-involution-transpose-matrix {m = zero-ℕ} empty-tuple = refl
 is-involution-transpose-matrix {m = succ-ℕ m} (r ∷ rs) =
   ( ap (_∷_ r) (is-involution-transpose-matrix rs)) ∙

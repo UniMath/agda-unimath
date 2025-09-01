@@ -35,8 +35,8 @@ is-inverse-Semigroup S =
   is-contr
     ( Σ ( type-Semigroup S)
         ( λ y →
-          Id (mul-Semigroup S (mul-Semigroup S x y) x) x ×
-          Id (mul-Semigroup S (mul-Semigroup S y x) y) y))
+          ( mul-Semigroup S (mul-Semigroup S x y) x ＝ x) ×
+          ( mul-Semigroup S (mul-Semigroup S y x) y ＝ y)))
 
 Inverse-Semigroup : (l : Level) → UU (lsuc l)
 Inverse-Semigroup l = Σ (Semigroup l) is-inverse-Semigroup

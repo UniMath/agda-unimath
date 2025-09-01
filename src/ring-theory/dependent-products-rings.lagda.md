@@ -79,7 +79,7 @@ module _
 
   associative-add-Π-Ring :
     (x y z : type-Π-Ring) →
-    Id (add-Π-Ring (add-Π-Ring x y) z) (add-Π-Ring x (add-Π-Ring y z))
+    add-Π-Ring (add-Π-Ring x y) z ＝ add-Π-Ring x (add-Π-Ring y z)
   associative-add-Π-Ring = associative-add-Semiring semiring-Π-Ring
 
   left-unit-law-add-Π-Ring :
@@ -110,7 +110,7 @@ module _
 
   associative-mul-Π-Ring :
     (x y z : type-Π-Ring) →
-    Id (mul-Π-Ring (mul-Π-Ring x y) z) (mul-Π-Ring x (mul-Π-Ring y z))
+    mul-Π-Ring (mul-Π-Ring x y) z ＝ mul-Π-Ring x (mul-Π-Ring y z)
   associative-mul-Π-Ring =
     associative-mul-Semiring semiring-Π-Ring
 

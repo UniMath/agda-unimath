@@ -151,7 +151,7 @@ module _
 
   left-inverse-law-add-tuple-Ring :
     {n : ℕ} (v : tuple-Ring R n) →
-    Id (add-tuple-Ring R (neg-tuple-Ring R v) v) (zero-tuple-Ring R)
+    add-tuple-Ring R (neg-tuple-Ring R v) v ＝ zero-tuple-Ring R
   left-inverse-law-add-tuple-Ring empty-tuple = refl
   left-inverse-law-add-tuple-Ring (x ∷ v) =
     ap-binary _∷_
@@ -160,7 +160,7 @@ module _
 
   right-inverse-law-add-tuple-Ring :
     {n : ℕ} (v : tuple-Ring R n) →
-    Id (add-tuple-Ring R v (neg-tuple-Ring R v)) (zero-tuple-Ring R)
+    add-tuple-Ring R v (neg-tuple-Ring R v) ＝ zero-tuple-Ring R
   right-inverse-law-add-tuple-Ring empty-tuple = refl
   right-inverse-law-add-tuple-Ring (x ∷ v) =
     ap-binary _∷_

@@ -371,7 +371,7 @@ module _
     type-t-coproduct-id :
       (x : X) →
       ( pr1 two-elements-transposition ＝ x) +
-      ( Id (pr1 (pr2 two-elements-transposition)) x) →
+      ( pr1 (pr2 two-elements-transposition) ＝ x) →
       type-Decidable-Prop (pr1 Y x)
     type-t-coproduct-id x (inl Q) =
       tr
@@ -387,7 +387,7 @@ module _
       (x : X) (p : is-in-2-Element-Decidable-Subtype Y x) →
       (h : Fin 2 ≃ type-2-Element-Decidable-Subtype Y) →
       (k1 k2 k3 : Fin 2) →
-      Id ( map-inv-equiv h (pair x p)) k1 →
+       map-inv-equiv h (pair x p) ＝ k1 →
       Id
         ( map-inv-equiv h
           ( pair
@@ -401,7 +401,7 @@ module _
             ( type-decidable-prop-pr1-pr2-two-elements-transposition)))
         ( k3) →
       ( pr1 two-elements-transposition ＝ x) +
-      ( Id (pr1 (pr2 two-elements-transposition)) x)
+      ( pr1 (pr2 two-elements-transposition) ＝ x)
     cases-coproduct-id-type-t
       x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-equiv (inv-equiv h) (K2 ∙ inv K1)))
@@ -430,7 +430,7 @@ module _
     coproduct-id-type-t :
       (x : X) → type-Decidable-Prop (pr1 Y x) →
       ( pr1 two-elements-transposition ＝ x) +
-      ( Id (pr1 (pr2 two-elements-transposition)) x)
+      ( pr1 (pr2 two-elements-transposition) ＝ x)
     coproduct-id-type-t x p =
       apply-universal-property-trunc-Prop (pr2 Y)
         ( coproduct-Prop
@@ -561,9 +561,9 @@ module _
       type-Decidable-Prop (pr1 Y x) →
       type-Decidable-Prop (pr1 Y y) →
       ( ( pr1 two-elements-transposition ＝ x) ×
-        ( Id (pr1 (pr2 two-elements-transposition)) y)) +
+        ( pr1 (pr2 two-elements-transposition) ＝ y)) +
       ( ( pr1 two-elements-transposition ＝ y) ×
-        ( Id (pr1 (pr2 two-elements-transposition)) x))
+        ( pr1 (pr2 two-elements-transposition) ＝ x))
     eq-two-elements-transposition x y np p1 p2 =
       cases-eq-two-elements-transposition x y np p1 p2
         ( has-decidable-equality-count eX (pr1 two-elements-transposition) x)

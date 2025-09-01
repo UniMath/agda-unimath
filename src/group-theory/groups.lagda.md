@@ -66,9 +66,9 @@ is-group-is-unital-Semigroup G is-unital-Semigroup-G =
   Σ ( type-Semigroup G → type-Semigroup G)
     ( λ i →
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G (i x) x) (pr1 is-unital-Semigroup-G)) ×
+        mul-Semigroup G (i x) x ＝ pr1 is-unital-Semigroup-G) ×
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G x (i x)) (pr1 is-unital-Semigroup-G)))
+        mul-Semigroup G x (i x) ＝ pr1 is-unital-Semigroup-G))
 
 is-group-Semigroup :
   {l : Level} (G : Semigroup l) → UU l
@@ -115,7 +115,7 @@ module _
 
   associative-mul-Group :
     (x y z : type-Group) →
-    Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
+    mul-Group (mul-Group x y) z ＝ mul-Group x (mul-Group y z)
   associative-mul-Group = pr2 has-associative-mul-Group
 
   is-group-Group : is-group-Semigroup semigroup-Group

@@ -67,7 +67,7 @@ is-unital-magma-Unital-Magma M = pr2 M
 is-semigroup-Magma : {l : Level} → Magma l → UU l
 is-semigroup-Magma M =
   (x y z : type-Magma M) →
-  Id (mul-Magma M (mul-Magma M x y) z) (mul-Magma M x (mul-Magma M y z))
+  mul-Magma M (mul-Magma M x y) z ＝ mul-Magma M x (mul-Magma M y z)
 ```
 
 ### Commutative magmas

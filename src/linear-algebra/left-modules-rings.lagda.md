@@ -305,7 +305,7 @@ module _
   abstract
     left-zero-law-mul-left-module-Ring :
       (x : type-left-module-Ring R M) →
-      Id ( mul-left-module-Ring R M (zero-Ring R) x) (zero-left-module-Ring R M)
+       mul-left-module-Ring R M (zero-Ring R) x ＝ zero-left-module-Ring R M
     left-zero-law-mul-left-module-Ring =
       htpy-eq-hom-Ab
         ( ab-left-module-Ring R M)

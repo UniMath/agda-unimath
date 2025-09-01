@@ -45,7 +45,7 @@ concatenation.
 ```agda
 associative-concat-list :
   {l1 : Level} {A : UU l1} (x y z : list A) →
-  Id (concat-list (concat-list x y) z) (concat-list x (concat-list y z))
+  concat-list (concat-list x y) z ＝ concat-list x (concat-list y z)
 associative-concat-list nil y z = refl
 associative-concat-list (cons a x) y z =
   ap (cons a) (associative-concat-list x y z)

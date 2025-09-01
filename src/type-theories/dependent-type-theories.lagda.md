@@ -339,10 +339,10 @@ We show that systems form a category.
     {C C' : system l5 l6} {g : hom-system B C} {g' : hom-system B' C'}
     (p : B ＝ B')
     {p' : constant-fibered-system A B ＝ constant-fibered-system A B'}
-    (α : Id (ap (constant-fibered-system A) p) p')
+    (α : ap (constant-fibered-system A) p ＝ p')
     (q : C ＝ C')
     {q' : constant-fibered-system A C ＝ constant-fibered-system A C'}
-    (β : Id (ap (constant-fibered-system A) q) q')
+    (β : ap (constant-fibered-system A) q ＝ q')
     (r : Id (tr (λ t → t) (ap-binary hom-system p q) g) g')
     {f : hom-system A B} {f' : hom-system A B'} →
     htpy-section-system' p' f f' →
@@ -408,9 +408,9 @@ We show that systems form a category.
     {C C' : system l5 l6} (p : C ＝ C') {g : hom-system B C}
     {g' : hom-system B C'}
     {p' : constant-fibered-system B C ＝ constant-fibered-system B C'}
-    (α : Id (ap (constant-fibered-system B) p) p')
+    (α : ap (constant-fibered-system B) p ＝ p')
     {q' : constant-fibered-system A C ＝ constant-fibered-system A C'}
-    (β : Id (ap (constant-fibered-system A) p) q')
+    (β : ap (constant-fibered-system A) p ＝ q')
     (H : htpy-section-system' p' g g') →
     (f : hom-system A B) →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f)

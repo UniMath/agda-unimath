@@ -120,7 +120,7 @@ module _
 
   associative-add-Ring :
     (x y z : type-Ring R) →
-    Id (add-Ring (add-Ring x y) z) (add-Ring x (add-Ring y z))
+    add-Ring (add-Ring x y) z ＝ add-Ring x (add-Ring y z)
   associative-add-Ring = associative-add-Ab (ab-Ring R)
 
   is-group-additive-semigroup-Ring :
@@ -298,11 +298,11 @@ module _
   neg-Ring = neg-Ab (ab-Ring R)
 
   left-inverse-law-add-Ring :
-    (x : type-Ring R) → Id (add-Ring R (neg-Ring x) x) (zero-Ring R)
+    (x : type-Ring R) → add-Ring R (neg-Ring x) x ＝ zero-Ring R
   left-inverse-law-add-Ring = left-inverse-law-add-Ab (ab-Ring R)
 
   right-inverse-law-add-Ring :
-    (x : type-Ring R) → Id (add-Ring R x (neg-Ring x)) (zero-Ring R)
+    (x : type-Ring R) → add-Ring R x (neg-Ring x) ＝ zero-Ring R
   right-inverse-law-add-Ring = right-inverse-law-add-Ab (ab-Ring R)
 
   neg-neg-Ring : (x : type-Ring R) → neg-Ring (neg-Ring x) ＝ x
@@ -373,7 +373,7 @@ module _
 
   associative-mul-Ring :
     (x y z : type-Ring R) →
-    Id (mul-Ring (mul-Ring x y) z) (mul-Ring x (mul-Ring y z))
+    mul-Ring (mul-Ring x y) z ＝ mul-Ring x (mul-Ring y z)
   associative-mul-Ring = pr2 has-associative-mul-Ring
 
   multiplicative-semigroup-Ring : Semigroup l
@@ -425,7 +425,7 @@ module _
   where
 
   left-zero-law-mul-Ring :
-    (x : type-Ring R) → Id (mul-Ring R (zero-Ring R) x) (zero-Ring R)
+    (x : type-Ring R) → mul-Ring R (zero-Ring R) x ＝ zero-Ring R
   left-zero-law-mul-Ring x =
     is-zero-is-idempotent-Ab
       ( ab-Ring R)
@@ -434,7 +434,7 @@ module _
         ( ap (mul-Ring' R x) (left-unit-law-add-Ring R (zero-Ring R))))
 
   right-zero-law-mul-Ring :
-    (x : type-Ring R) → Id (mul-Ring R x (zero-Ring R)) (zero-Ring R)
+    (x : type-Ring R) → mul-Ring R x (zero-Ring R) ＝ zero-Ring R
   right-zero-law-mul-Ring x =
     is-zero-is-idempotent-Ab
       ( ab-Ring R)

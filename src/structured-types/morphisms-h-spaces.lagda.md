@@ -150,7 +150,7 @@ module _
 
   preserves-left-unit-law-mul :
     ((x : type-Pointed-Type A) → μ (point-Pointed-Type A) x ＝ x) →
-    ((y : type-Pointed-Type B) → Id (ν (point-Pointed-Type B) y) y) →
+    ((y : type-Pointed-Type B) → ν (point-Pointed-Type B) y ＝ y) →
     UU (l1 ⊔ l2)
   preserves-left-unit-law-mul lA lB =
     (x : type-Pointed-Type A) →

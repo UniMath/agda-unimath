@@ -124,7 +124,7 @@ module _
 
   refl-extensionality-necklace :
     (N : necklace l m n) →
-    Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m n N)
+    map-equiv (extensionality-necklace N N) refl ＝ id-equiv-necklace m n N
   refl-extensionality-necklace N = refl
 ```
 

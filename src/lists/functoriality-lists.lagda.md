@@ -50,7 +50,7 @@ map-list f = fold-list nil (λ a → cons (f a))
 ```agda
 length-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (l : list A) →
-  Id (length-list (map-list f l)) (length-list l)
+  length-list (map-list f l) ＝ length-list l
 length-map-list f nil = refl
 length-map-list f (cons x l) =
   ap succ-ℕ (length-map-list f l)

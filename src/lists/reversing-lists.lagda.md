@@ -40,7 +40,7 @@ reverse-list (cons a l) = snoc (reverse-list l) a
 ```agda
 reverse-unit-list :
   {l1 : Level} {A : UU l1} (a : A) →
-  Id (reverse-list (unit-list a)) (unit-list a)
+  reverse-list (unit-list a) ＝ unit-list a
 reverse-unit-list a = refl
 
 length-snoc-list :
@@ -51,7 +51,7 @@ length-snoc-list (cons b x) a = ap succ-ℕ (length-snoc-list x a)
 
 length-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (length-list (reverse-list x)) (length-list x)
+  length-list (reverse-list x) ＝ length-list x
 length-reverse-list nil = refl
 length-reverse-list (cons a x) =
   ( length-snoc-list (reverse-list x) a) ∙
@@ -109,14 +109,14 @@ head-reverse-list (cons a (cons b x)) =
 
 last-element-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (last-element-list (reverse-list x)) (head-list x)
+  last-element-list (reverse-list x) ＝ head-list x
 last-element-reverse-list x =
   ( inv (head-reverse-list (reverse-list x))) ∙
   ( ap head-list (reverse-reverse-list x))
 
 tail-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (tail-list (reverse-list x)) (reverse-list (remove-last-element-list x))
+  tail-list (reverse-list x) ＝ reverse-list (remove-last-element-list x)
 tail-reverse-list nil = refl
 tail-reverse-list (cons a nil) = refl
 tail-reverse-list (cons a (cons b x)) =
@@ -125,7 +125,7 @@ tail-reverse-list (cons a (cons b x)) =
 
 remove-last-element-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (remove-last-element-list (reverse-list x)) (reverse-list (tail-list x))
+  remove-last-element-list (reverse-list x) ＝ reverse-list (tail-list x)
 remove-last-element-reverse-list x =
   ( inv (reverse-reverse-list (remove-last-element-list (reverse-list x)))) ∙
   ( ( inv (ap reverse-list (tail-reverse-list (reverse-list x)))) ∙

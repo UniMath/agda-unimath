@@ -260,7 +260,7 @@ module _
   preserves-inverses-Group :
     (type-Group G → type-Group H) → UU (l1 ⊔ l2)
   preserves-inverses-Group f =
-    {x : type-Group G} → Id (f (inv-Group G x)) (inv-Group H (f x))
+    {x : type-Group G} → f (inv-Group G x) ＝ inv-Group H (f x)
 
   abstract
     preserves-inv-hom-Group :

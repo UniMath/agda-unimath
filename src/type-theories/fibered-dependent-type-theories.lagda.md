@@ -117,7 +117,7 @@ module fibered where
     (D : bifibered-system l7 l8 B C) {X : system.type A}
     (Y : fibered-system.type B X) {Z Z' : fibered-system.type C X}
     {d : bifibered-system.type D Y Z} {d' : bifibered-system.type D Y Z'}
-    (p : Z ＝ Z') (q : Id (tr (bifibered-system.type D Y) p d) d') →
+    (p : Z ＝ Z') (q : tr (bifibered-system.type D Y) p d ＝ d') →
     Id
       ( tr
         ( bifibered-system l7 l8 (fibered-system.slice B Y))
@@ -130,7 +130,7 @@ module fibered where
     {l1 l2 l3 l4 l5 l6 l7 l8 : Level} {A : system l1 l2}
     {B : fibered-system l3 l4 A} {C C' : fibered-system l5 l6 A}
     (D : bifibered-system l7 l8 B C) (D' : bifibered-system l7 l8 B C')
-    (α : C ＝ C') (β : Id (tr (bifibered-system l7 l8 B) α D) D')
+    (α : C ＝ C') (β : tr (bifibered-system l7 l8 B) α D ＝ D')
     (f : section-system C) (f' : section-system C')
     (g : section-fibered-system f D) (g' : section-fibered-system f' D') →
     bifibered-system l7 l8 B (Eq-fibered-system' α f f')
@@ -167,7 +167,7 @@ module fibered where
     {B : fibered-system l3 l4 A} {C C' : fibered-system l5 l6 A}
     {D : bifibered-system l7 l8 B C} {D' : bifibered-system l7 l8 B C'}
     {f : section-system C} {f' : section-system C'}
-    {α : C ＝ C'} (β : Id (tr (bifibered-system l7 l8 B) α D) D')
+    {α : C ＝ C'} (β : tr (bifibered-system l7 l8 B) α D ＝ D')
     (H : htpy-section-system' α f f')
     (g : section-fibered-system f D) (h : section-fibered-system f' D') →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l7 ⊔ l8)

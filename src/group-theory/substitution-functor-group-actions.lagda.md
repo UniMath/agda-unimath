@@ -138,7 +138,7 @@ module _
     exists-structure-Prop
       ( type-Group G)
       ( λ g →
-        ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
+        ( mul-Group H (map-hom-Group G H f g) h ＝ h') ×
         ( mul-action-Group G X g x ＝ x'))
   pr1
     ( pr2 (equivalence-relation-obj-left-adjoint-subst-action-Group X))

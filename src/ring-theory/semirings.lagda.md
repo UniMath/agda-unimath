@@ -225,7 +225,7 @@ module _
 
   associative-mul-Semiring :
     (x y z : type-Semiring R) →
-    Id (mul-Semiring (mul-Semiring x y) z) (mul-Semiring x (mul-Semiring y z))
+    mul-Semiring (mul-Semiring x y) z ＝ mul-Semiring x (mul-Semiring y z)
   associative-mul-Semiring = pr2 has-associative-mul-Semiring
 
   multiplicative-semigroup-Semiring : Semigroup l

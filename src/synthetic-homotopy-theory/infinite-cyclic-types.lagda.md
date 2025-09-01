@@ -164,7 +164,7 @@ module _
                       ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
                   ( ( equiv-right-swap-Σ) ∘e
                     ( equiv-Σ
-                      ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
+                      ( λ e → map-equiv (pr1 e) zero-ℤ ＝ zero-ℤ)
                       ( equiv-Σ
                         ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
                         ( equiv-postcomp-equiv (equiv-left-add-ℤ (neg-ℤ x)) ℤ)

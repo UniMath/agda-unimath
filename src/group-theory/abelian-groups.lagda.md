@@ -439,22 +439,22 @@ module _
 
   transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    add-Ab A x y ＝ z → Id x (add-Ab A z (neg-Ab A y))
+    add-Ab A x y ＝ z → x ＝ add-Ab A z (neg-Ab A y)
   transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
 
   inv-transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id x (add-Ab A z (neg-Ab A y)) → add-Ab A x y ＝ z
+    x ＝ add-Ab A z (neg-Ab A y) → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab = inv-transpose-eq-mul-Group (group-Ab A)
 
   transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    add-Ab A x y ＝ z → Id y (add-Ab A (neg-Ab A x) z)
+    add-Ab A x y ＝ z → y ＝ add-Ab A (neg-Ab A x) z
   transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
 
   inv-transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id y (add-Ab A (neg-Ab A x) z) → add-Ab A x y ＝ z
+    y ＝ add-Ab A (neg-Ab A x) z → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
 
   double-transpose-eq-add-Ab :

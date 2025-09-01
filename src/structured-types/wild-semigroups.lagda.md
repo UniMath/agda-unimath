@@ -28,7 +28,7 @@ Wild-Semigroup l =
   Σ ( Magma l)
     ( λ M →
       (x y z : type-Magma M) →
-      Id (mul-Magma M (mul-Magma M x y) z) (mul-Magma M x (mul-Magma M y z)))
+      mul-Magma M (mul-Magma M x y) z ＝ mul-Magma M x (mul-Magma M y z))
 
 module _
   {l : Level} (G : Wild-Semigroup l)

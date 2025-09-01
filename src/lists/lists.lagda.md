@@ -363,7 +363,7 @@ tail-snoc-snoc-list (cons c x) a b = refl
 
 last-element-snoc :
   {l1 : Level} {A : UU l1} (x : list A) (a : A) →
-  Id (last-element-list (snoc x a)) (unit-list a)
+  last-element-list (snoc x a) ＝ unit-list a
 last-element-snoc nil a = refl
 last-element-snoc (cons b nil) a = refl
 last-element-snoc (cons b (cons c x)) a =
