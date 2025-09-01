@@ -42,15 +42,17 @@ open import univalent-combinatorics.finitely-enumerable-types
 ## Idea
 
 The
-{{#concept "maximum" Disambiguation="finitely enumerable subset of Dedekind real numbers" Agda=max-finite-family-ℝ WD="maximum" WDID=Q10578722}}
+{{#concept "maximum" Disambiguation="finitely enumerable subset of Dedekind real numbers" Agda=max-inhabited-finitely-enumerable-subset-ℝ WD="maximum" WDID=Q10578722}}
 of a
 [finitely enumerable subset of the real numbers](real-numbers.finitely-enumerable-subsets-real-numbers.md)
 is their [supremum](real-numbers.suprema-families-real-numbers.md).
 
-## Definition
+## Subsets with finite enumerations
+
+### Definition
 
 ```agda
-abstract
+opaque
   max-is-inhabited-finite-enumeration-subset-ℝ :
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
     finite-enumeration-subtype S → is-inhabited-subtype S →
@@ -65,6 +67,15 @@ abstract
   max-is-inhabited-finite-enumeration-subset-ℝ
     S eS@(succ-ℕ n , Fin-sn↠S) |S| =
       max-fin-sequence-ℝ n (inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
+```
+
+### Properties
+
+#### The maximum is an upper bound
+
+```agda
+opaque
+  unfolding max-is-inhabited-finite-enumeration-subset-ℝ
 
   is-upper-bound-max-is-inhabited-finite-enumeration-subset-ℝ :
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
@@ -101,6 +112,13 @@ abstract
             ( n)
             ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
             ( i))
+```
+
+#### The maximum is approximated below
+
+```agda
+opaque
+  unfolding max-is-inhabited-finite-enumeration-subset-ℝ
 
   is-approximated-below-max-is-inhabited-finite-enumeration-subset-ℝ :
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
@@ -125,7 +143,12 @@ abstract
           ( n)
           ( inclusion-subset-ℝ S ∘ map-surjection Fin-sn↠S)
           ( ε))
+```
 
+#### The maximum is a supremum
+
+```agda
+abstract
   is-supremum-max-is-inhabited-finite-enumeration-subset-ℝ :
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
     (eS : finite-enumeration-subtype S) (|S| : is-inhabited-subtype S) →
@@ -138,15 +161,25 @@ abstract
         ( S)
         ( eS)
         ( |S|))
+```
 
-  has-supremum-is-inhabited-finite-enumeration-subset-ℝ :
-    {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
-    (eS : finite-enumeration-subtype S) (|S| : is-inhabited-subtype S) →
-    has-supremum-subset-ℝ S l2
-  has-supremum-is-inhabited-finite-enumeration-subset-ℝ S eS |S| =
-    ( max-is-inhabited-finite-enumeration-subset-ℝ S eS |S| ,
-      is-supremum-max-is-inhabited-finite-enumeration-subset-ℝ S eS |S|)
+#### Inhabited subsets of ℝ with finite enumerations have a supremum
 
+```agda
+has-supremum-is-inhabited-finite-enumeration-subset-ℝ :
+  {l1 l2 : Level} → (S : subset-ℝ l1 l2) →
+  (eS : finite-enumeration-subtype S) (|S| : is-inhabited-subtype S) →
+  has-supremum-subset-ℝ S l2
+has-supremum-is-inhabited-finite-enumeration-subset-ℝ S eS |S| =
+  ( max-is-inhabited-finite-enumeration-subset-ℝ S eS |S| ,
+    is-supremum-max-is-inhabited-finite-enumeration-subset-ℝ S eS |S|)
+```
+
+## Finitely enumerable subsets of ℝ
+
+### Definition
+
+```agda
 module _
   {l1 l2 : Level} (S : finitely-enumerable-subset-ℝ l1 l2)
   (|S| : is-inhabited-finitely-enumerable-subset-ℝ S)
@@ -165,46 +198,91 @@ module _
             ( |S|))
         ( is-finitely-enumerable-finitely-enumerable-subset-ℝ S)
 
+  opaque
     max-inhabited-finitely-enumerable-subset-ℝ : ℝ l2
     max-inhabited-finitely-enumerable-subset-ℝ =
       pr1 has-supremum-inhabited-finitely-enumerable-subset-ℝ
+```
+
+### Properties
+
+#### The maximum is a supremum
+
+```agda
+module _
+  {l1 l2 : Level} (S : finitely-enumerable-subset-ℝ l1 l2)
+  (|S| : is-inhabited-finitely-enumerable-subset-ℝ S)
+  where
+
+  opaque
+    unfolding max-inhabited-finitely-enumerable-subset-ℝ
 
     is-supremum-max-inhabited-finitely-enumerable-subset-ℝ :
       is-supremum-subset-ℝ
         ( subset-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
     is-supremum-max-inhabited-finitely-enumerable-subset-ℝ =
-      pr2 has-supremum-inhabited-finitely-enumerable-subset-ℝ
+      pr2 (has-supremum-inhabited-finitely-enumerable-subset-ℝ S |S|)
+```
 
+#### The maximum is a least upper bound
+
+```agda
+module _
+  {l1 l2 : Level} (S : finitely-enumerable-subset-ℝ l1 l2)
+  (|S| : is-inhabited-finitely-enumerable-subset-ℝ S)
+  where
+
+  abstract
     is-least-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ :
       is-least-upper-bound-family-of-elements-Large-Poset
         ( ℝ-Large-Poset)
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
     is-least-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ =
       is-least-upper-bound-is-supremum-family-ℝ
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
-        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
+        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ S |S|)
+```
 
+#### The maximum is approximated below
+
+```agda
+module _
+  {l1 l2 : Level} (S : finitely-enumerable-subset-ℝ l1 l2)
+  (|S| : is-inhabited-finitely-enumerable-subset-ℝ S)
+  where
+
+  abstract
     is-approximated-below-max-inhabited-finitely-enumerable-subset-ℝ :
       is-approximated-below-family-ℝ
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
     is-approximated-below-max-inhabited-finitely-enumerable-subset-ℝ =
       is-approximated-below-is-supremum-family-ℝ
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
-        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
+        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ S |S|)
+```
 
+#### The maximum is an upper bound
+
+```agda
+module _
+  {l1 l2 : Level} (S : finitely-enumerable-subset-ℝ l1 l2)
+  (|S| : is-inhabited-finitely-enumerable-subset-ℝ S)
+  where
+
+  abstract
     is-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ :
       is-upper-bound-family-of-elements-Large-Poset
         ( ℝ-Large-Poset)
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
     is-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ =
       is-upper-bound-is-supremum-family-ℝ
         ( inclusion-finitely-enumerable-subset-ℝ S)
-        ( max-inhabited-finitely-enumerable-subset-ℝ)
-        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ)
+        ( max-inhabited-finitely-enumerable-subset-ℝ S |S|)
+        ( is-supremum-max-inhabited-finitely-enumerable-subset-ℝ S |S|)
 ```

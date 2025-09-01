@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.sets
@@ -95,10 +96,9 @@ abstract
     {l1 l2 : Level} → (S : subset-ℝ l1 l2) → is-inhabited-subset-ℝ S →
     is-inhabited-subset-ℝ (neg-subset-ℝ S)
   neg-is-inhabited-subset-ℝ S =
-    map-exists
-      ( is-in-subtype (neg-subset-ℝ S))
-      ( neg-ℝ)
-      ( λ s → inv-tr (is-in-subtype S) (neg-neg-ℝ s))
+    map-is-inhabited
+      ( map-equiv
+        ( equiv-precomp-equiv-type-subtype (equiv-is-involution neg-neg-ℝ) S))
 ```
 
 ### The negation of the negation of a subset of real numbers is the original subset

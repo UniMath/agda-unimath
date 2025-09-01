@@ -31,6 +31,7 @@ open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public
+open import real-numbers.minimum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
@@ -49,5 +50,6 @@ open import real-numbers.subsets-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
+open import real-numbers.uniformly-continuous-functions-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 ```

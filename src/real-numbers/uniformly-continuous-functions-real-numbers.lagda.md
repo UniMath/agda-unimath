@@ -9,14 +9,17 @@ module real-numbers.uniformly-continuous-functions-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.universe-levels
+
 open import metric-spaces.metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
+
 </details>
 
 ## Idea

@@ -7,13 +7,17 @@ module real-numbers.finitely-enumerable-subsets-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.involutions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.subsets-real-numbers
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
+open import univalent-combinatorics.finitely-enumerable-types
 ```
 
 </details>
@@ -64,4 +68,17 @@ is-inhabited-finitely-enumerable-subset-ℝ :
   {l1 l2 : Level} → finitely-enumerable-subset-ℝ l1 l2 → UU (l1 ⊔ lsuc l2)
 is-inhabited-finitely-enumerable-subset-ℝ =
   is-inhabited-finitely-enumerable-subtype
+```
+
+### The negation of a finitely enumerable subset of real numbers
+
+```agda
+neg-finitely-enumerable-subset-ℝ :
+  {l1 l2 : Level} →
+  finitely-enumerable-subset-ℝ l1 l2 → finitely-enumerable-subset-ℝ l1 l2
+neg-finitely-enumerable-subset-ℝ (S , is-finitely-enumerable-S) =
+  ( neg-subset-ℝ S ,
+    is-finitely-enumerable-equiv
+      ( is-finitely-enumerable-S)
+      ( equiv-precomp-equiv-type-subtype (equiv-is-involution neg-neg-ℝ) S))
 ```
