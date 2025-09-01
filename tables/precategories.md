@@ -1,7 +1,6 @@
 | Precategory                               | File                                                                                                                                              |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Algebras of a monad on a precategory      | [`category-theory.precategory-of-algebras-monads-on-precategories`](category-theory.precategory-of-algebras-monads-on-precategories.md)           |
-| Algebras over an equational theory        | [`universal-algebra.precategory-of-algebras-of-theories`](universal-algebra.precategory-of-algebras-of-theories.md)                               |
 | Augmented simplex precategory             | [`category-theory.augmented-simplex-category`](category-theory.augmented-simplex-category.md)                                                     |
 | Commutative monoids                       | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md)                                           |
 | Commutative semirings                     | [`commutative-algebra.precategory-of-commutative-semirings`](commutative-algebra.precategory-of-commutative-semirings.md)                         |

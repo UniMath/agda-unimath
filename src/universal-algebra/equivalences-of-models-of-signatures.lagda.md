@@ -44,6 +44,8 @@ We characterize [equivalences](foundation-core.equivalences.md) of
 [models](universal-algebra.models-of-signatures.md) of
 [signatures](universal-algebra.signatures.md).
 
+## Properties
+
 ### Characterizing the identity type of model structures over a fixed set
 
 ```agda
@@ -75,9 +77,7 @@ module _
   is-prop-htpy-id-Model-Signature' :
     (f g : is-model-signature σ X) → is-prop (htpy-id-Model-Signature' f g)
   is-prop-htpy-id-Model-Signature' f g =
-    is-prop-Π
-      ( λ op → is-prop-Π
-        ( λ v → is-set-type-Set X (f op v) (g op v)))
+    is-prop-Π (λ op → is-prop-Π (λ v → is-set-type-Set X (f op v) (g op v)))
 
   htpy-id-prop-Model-Signature' :
     (f g : is-model-signature σ X) → Prop (l1 ⊔ l2)
@@ -154,11 +154,7 @@ module _
     Eq-Model-Signature X Y ≃
     Σ ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
       ( λ f → is-equiv f × preserves-operations-Model-Signature σ X Y f)
-  pr1 (equiv-Eq-Model-Signature' X Y) ((f , eq) , p) = (f , eq , p)
-  pr1 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = ((f , eq) , p)
-  pr2 (pr1 (pr2 (equiv-Eq-Model-Signature' X Y))) _ = refl
-  pr1 (pr2 (pr2 (equiv-Eq-Model-Signature' X Y))) (f , eq , p) = ((f , eq) , p)
-  pr2 (pr2 (pr2 (equiv-Eq-Model-Signature' X Y))) _ = refl
+  equiv-Eq-Model-Signature' X Y = associative-Σ _ _ _
 
   refl-Eq-Model-Signature :
     {l2 : Level} (X : Model-Signature σ l2) → Eq-Model-Signature X X

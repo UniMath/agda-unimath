@@ -114,15 +114,15 @@ module _
             ( inv
               ( preserves-operations-hom-Algebra σ T A B f op
                 ( map-tuple (map-inv-is-equiv eq) v)))))
-                  where
-                  eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
-                    Eq-tuple n w (map-tuple
-                      (map-hom-Algebra σ T A B f)
-                      (map-tuple (map-inv-is-equiv eq) w))
-                  eq2 zero-ℕ empty-tuple = map-raise star
-                  pr1 (eq2 (succ-ℕ n) (x ∷ w)) =
-                    inv (is-section-map-section-is-equiv eq x)
-                  pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
+    where
+    eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
+      Eq-tuple n w
+        ( map-tuple
+          ( map-hom-Algebra σ T A B f)
+          ( map-tuple (map-inv-is-equiv eq) w))
+    eq2 zero-ℕ empty-tuple = map-raise star
+    pr1 (eq2 (succ-ℕ n) (x ∷ w)) = inv (is-section-map-section-is-equiv eq x)
+    pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
 
   hom-inv-is-equiv-hom-Algebra : hom-Algebra σ T B A
   pr1 hom-inv-is-equiv-hom-Algebra =
@@ -141,14 +141,11 @@ module _
   where
 
   equiv-equiv-hom-Algebra' :
-    (B : Algebra σ T l3) → equiv-hom-Algebra σ T A B ≃
-    Σ (hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
-      (λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
-  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = (f , eq , p)
-  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
-  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
-  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
-  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
+    (B : Algebra σ T l3) →
+    equiv-hom-Algebra σ T A B ≃
+    Σ ( hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
+      ( λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
+  equiv-equiv-hom-Algebra' B = associative-Σ _ _ _
 ```
 
 ### Characterizing isomorphisms of algebras
@@ -234,13 +231,13 @@ module _
 
   equiv-iso-Eq-Algebra : Eq-Algebra σ T A B ≃ iso-Algebra
   equiv-iso-Eq-Algebra =
-    equiv-type-subtype
+    ( equiv-type-subtype
       ( is-prop-is-equiv-hom-Algebra σ T A B)
       ( is-prop-is-iso-Algebra)
       ( is-iso-is-equiv-hom-Algebra)
-      ( is-equiv-hom-is-iso-Algebra) ∘e
-      ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
-      ( equiv-Eq-Model-Signature' σ (model-Algebra σ T A) (model-Algebra σ T B))
+      ( is-equiv-hom-is-iso-Algebra)) ∘e
+    ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
+    ( equiv-Eq-Model-Signature' σ (model-Algebra σ T A) (model-Algebra σ T B))
 
   iso-Eq-Algebra : Eq-Algebra σ T A B → iso-Algebra
   iso-Eq-Algebra = map-equiv equiv-iso-Eq-Algebra

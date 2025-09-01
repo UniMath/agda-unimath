@@ -46,12 +46,12 @@ module _
 
   is-algebra : {l3 : Level} → Model-Signature σ l3 → UU (l2 ⊔ l3)
   is-algebra M =
-    ( e : index-Theory σ T) →
-    ( assign : assignment σ (type-Model-Signature σ M)) →
+    (e : index-Theory σ T) →
+    (assign : assignment σ (type-Model-Signature σ M)) →
     eval-term σ (is-model-set-Model-Signature σ M) assign
       ( lhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e)) ＝
-      eval-term σ (is-model-set-Model-Signature σ M) assign
-        ( rhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e))
+    eval-term σ (is-model-set-Model-Signature σ M) assign
+      ( rhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e))
 
   Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =

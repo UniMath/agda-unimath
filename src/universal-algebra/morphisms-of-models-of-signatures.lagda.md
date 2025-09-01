@@ -33,6 +33,10 @@ open import universal-algebra.signatures
 
 ## Idea
 
+## Definitions
+
+### The predicate on maps of models of preserving operations
+
 ```agda
 module _
   {l1 : Level} (σ : signature l1)
@@ -69,7 +73,11 @@ module _
     preserves-operations-Model-Signature X Y f
   pr2 (prop-preserves-operations-Model-Signature X Y f) =
     is-prop-preserves-operations-Model-Signature X Y f
+```
 
+### The type of morphisms of models of a signature
+
+```agda
   hom-Model-Signature :
     {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3) →
     UU (l1 ⊔ l2 ⊔ l3)
@@ -111,7 +119,7 @@ pr1 (id-hom-Model-Signature σ X) = id
 pr2 (id-hom-Model-Signature σ X) = preserves-operations-id-Model-Signature σ X
 ```
 
-### Characterizing the identity type of morphisms of model structures
+### Characterizing the identity type of morphisms of models
 
 ```agda
 module _
