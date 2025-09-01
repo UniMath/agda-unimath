@@ -1,7 +1,7 @@
 # Subsequences
 
 ```agda
-module foundation.subsequences where
+module lists.subsequences where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +16,9 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.sequences
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import order-theory.strict-order-preserving-maps
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
@@ -27,8 +28,8 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 ## Idea
 
-A {{concept "subsequence" Agda=subsequence}} of a
-[sequence](foundation.sequences.md) `u : ℕ → A` is a sequence `u ∘ f` for some
+A {{concept "subsequence" Agda=subsequence}} of a [sequence](lists.sequences.md)
+`u : ℕ → A` is a sequence `u ∘ f` for some
 [strictly increasing](order-theory.strict-order-preserving-maps.md) sequence
 `f : ℕ → ℕ`.
 

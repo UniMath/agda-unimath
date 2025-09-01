@@ -17,6 +17,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.commutative-semigroups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.semigroups
 
@@ -30,10 +31,12 @@ open import order-theory.preorders
 
 ## Idea
 
-A **meet-semilattice** is a poset in which every pair of elements has a greatest
-binary-lower bound. Alternatively, meet-semilattices can be defined
-algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
-satisfying
+A
+{{#concept "meet-semilattice" WDID=Q29018102 WD="lower semilattice" Agda=Meet-Semilattice}}
+is a [poset](order-theory.posets.md) in which every pair of elements has a
+[greatest binary lower bound](order-theory.greatest-lower-bounds-posets.md).
+Alternatively, meet-semilattices can be defined algebraically as a set `X`
+equipped with a binary operation `∧ : X → X → X` satisfying
 
 1. Associativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
@@ -46,56 +49,49 @@ of meet-semilattices.
 
 ## Definitions
 
-### The predicate on semigroups of being a meet-semilattice
+### The predicate on commutative semigroups of being a meet-semilattice
 
 ```agda
 module _
-  {l : Level} (X : Semigroup l)
+  {l : Level} (X : Commutative-Semigroup l)
   where
 
-  is-meet-semilattice-prop-Semigroup : Prop l
-  is-meet-semilattice-prop-Semigroup =
-    product-Prop
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Π-Prop
-            ( type-Semigroup X)
-            ( λ y →
-              Id-Prop
-                ( set-Semigroup X)
-                ( mul-Semigroup X x y)
-                ( mul-Semigroup X y x))))
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Id-Prop
-            ( set-Semigroup X)
-            ( mul-Semigroup X x x)
-            ( x)))
+  is-meet-semilattice-prop-Commutative-Semigroup : Prop l
+  is-meet-semilattice-prop-Commutative-Semigroup =
+    Π-Prop
+      ( type-Commutative-Semigroup X)
+      ( λ x →
+        Id-Prop
+          ( set-Commutative-Semigroup X)
+          ( mul-Commutative-Semigroup X x x)
+          ( x))
 
-  is-meet-semilattice-Semigroup : UU l
-  is-meet-semilattice-Semigroup =
-    type-Prop is-meet-semilattice-prop-Semigroup
+  is-meet-semilattice-Commutative-Semigroup : UU l
+  is-meet-semilattice-Commutative-Semigroup =
+    type-Prop is-meet-semilattice-prop-Commutative-Semigroup
 
-  is-prop-is-meet-semilattice-Semigroup :
-    is-prop is-meet-semilattice-Semigroup
-  is-prop-is-meet-semilattice-Semigroup =
-    is-prop-type-Prop is-meet-semilattice-prop-Semigroup
+  is-prop-is-meet-semilattice-Commutative-Semigroup :
+    is-prop is-meet-semilattice-Commutative-Semigroup
+  is-prop-is-meet-semilattice-Commutative-Semigroup =
+    is-prop-type-Prop is-meet-semilattice-prop-Commutative-Semigroup
 ```
 
 ### The algebraic definition of meet-semilattices
 
 ```agda
 Meet-Semilattice : (l : Level) → UU (lsuc l)
-Meet-Semilattice l = type-subtype is-meet-semilattice-prop-Semigroup
+Meet-Semilattice l = type-subtype is-meet-semilattice-prop-Commutative-Semigroup
 
 module _
   {l : Level} (X : Meet-Semilattice l)
   where
 
+  commutative-semigroup-Meet-Semilattice : Commutative-Semigroup l
+  commutative-semigroup-Meet-Semilattice = pr1 X
+
   semigroup-Meet-Semilattice : Semigroup l
-  semigroup-Meet-Semilattice = pr1 X
+  semigroup-Meet-Semilattice =
+    semigroup-Commutative-Semigroup commutative-semigroup-Meet-Semilattice
 
   set-Meet-Semilattice : Set l
   set-Meet-Semilattice = set-Semigroup semigroup-Meet-Semilattice
@@ -122,18 +118,19 @@ module _
     associative-mul-Semigroup semigroup-Meet-Semilattice
 
   is-meet-semilattice-Meet-Semilattice :
-    is-meet-semilattice-Semigroup semigroup-Meet-Semilattice
+    is-meet-semilattice-Commutative-Semigroup
+      ( commutative-semigroup-Meet-Semilattice)
   is-meet-semilattice-Meet-Semilattice = pr2 X
 
   commutative-meet-Meet-Semilattice :
     (x y : type-Meet-Semilattice) → (x ∧ y) ＝ (y ∧ x)
   commutative-meet-Meet-Semilattice =
-    pr1 is-meet-semilattice-Meet-Semilattice
+    commutative-mul-Commutative-Semigroup commutative-semigroup-Meet-Semilattice
 
   idempotent-meet-Meet-Semilattice :
     (x : type-Meet-Semilattice) → (x ∧ x) ＝ x
   idempotent-meet-Meet-Semilattice =
-    pr2 is-meet-semilattice-Meet-Semilattice
+    is-meet-semilattice-Meet-Semilattice
 
   leq-Meet-Semilattice-Prop :
     (x y : type-Meet-Semilattice) → Prop l
@@ -301,7 +298,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-greatest-binary-lower-bound-Poset-Prop P x))
+          ( has-greatest-binary-lower-bound-prop-Poset P x))
 
   is-meet-semilattice-Poset : UU (l1 ⊔ l2)
   is-meet-semilattice-Poset = type-Prop is-meet-semilattice-Poset-Prop
@@ -666,13 +663,18 @@ module _
   pr2 (pr2 semigroup-Order-Theoretic-Meet-Semilattice) =
     associative-meet-Order-Theoretic-Meet-Semilattice A
 
+  commutative-semigroup-Order-Theoretic-Meet-Semilattice :
+    Commutative-Semigroup l1
+  pr1 commutative-semigroup-Order-Theoretic-Meet-Semilattice =
+    semigroup-Order-Theoretic-Meet-Semilattice
+  pr2 commutative-semigroup-Order-Theoretic-Meet-Semilattice =
+    commutative-meet-Order-Theoretic-Meet-Semilattice A
+
   meet-semilattice-Order-Theoretic-Meet-Semilattice :
     Meet-Semilattice l1
   pr1 meet-semilattice-Order-Theoretic-Meet-Semilattice =
-    semigroup-Order-Theoretic-Meet-Semilattice
-  pr1 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
-    commutative-meet-Order-Theoretic-Meet-Semilattice A
-  pr2 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
+    commutative-semigroup-Order-Theoretic-Meet-Semilattice
+  pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice =
     idempotent-meet-Order-Theoretic-Meet-Semilattice A
 ```
 

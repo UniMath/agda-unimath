@@ -19,10 +19,13 @@ open import species.species-of-types
 
 ## Idea
 
-The Cauchy product of two species of types `S` and `T` on `X` is defined as
+The
+{{#concept "Cauchy product" Disambiguation="of species of types" Agda=cauchy-product-species-types}}
+of two [species of types](species.species-of-types.md) `S` and `T` on `X` is
+defined as
 
 ```text
-  Σ (k : UU) (Σ (k' : UU) (Σ (e : k + k' ≃ X) S(k) × T(k')))
+  Σ (k : UU) (Σ (k' : UU) (Σ (e : k + k' ≃ X) S(k) × T(k'))).
 ```
 
 ## Definition

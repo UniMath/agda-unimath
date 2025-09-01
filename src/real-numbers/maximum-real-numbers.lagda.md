@@ -17,6 +17,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -28,6 +29,7 @@ open import order-theory.least-upper-bounds-large-posets
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
@@ -101,13 +103,14 @@ module _
           cut-lower-ℝ lower-real-max-ℝ p ∨
           cut-upper-ℝ upper-real-max-ℝ q
 
-  max-ℝ : ℝ (l1 ⊔ l2)
-  max-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-max-ℝ)
-      ( upper-real-max-ℝ)
-      ( is-disjoint-lower-upper-max-ℝ)
-      ( is-located-lower-upper-max-ℝ)
+  opaque
+    max-ℝ : ℝ (l1 ⊔ l2)
+    max-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-max-ℝ)
+        ( upper-real-max-ℝ)
+        ( is-disjoint-lower-upper-max-ℝ)
+        ( is-located-lower-upper-max-ℝ)
 ```
 
 ## Properties
@@ -120,7 +123,9 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  abstract
+  opaque
+    unfolding max-ℝ
+
     is-least-binary-upper-bound-max-ℝ :
       is-least-binary-upper-bound-Large-Poset
         ( ℝ-Large-Poset)
@@ -361,4 +366,64 @@ module _
         ( metric-space-ℝ (l1 ⊔ l2)))
   short-max-ℝ =
     (short-left-max-ℝ , is-short-function-short-left-max-ℝ)
+```
+
+### For any `ε : ℚ⁺`, `(max-ℝ x y - ε < x) ∨ (max-ℝ x y - ε < y)`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  approximate-below-max-ℝ :
+    (ε : ℚ⁺) →
+    type-disjunction-Prop
+      ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
+      ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
+  approximate-below-max-ℝ ε⁺@(ε , _) =
+    let
+      motive =
+        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) x) ∨
+        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+      open do-syntax-trunc-Prop motive
+    in do
+      (q , max-ε<q , q<max) ←
+        dense-rational-le-ℝ
+          ( max-ℝ x y -ℝ real-ℚ ε)
+          ( max-ℝ x y)
+          ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
+      (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
+      let q<r = reflects-le-real-ℚ q r q-<ℝ-r
+      elim-disjunction motive
+        ( λ q<x →
+          inl-disjunction
+            ( transitive-le-ℝ
+              ( max-ℝ x y -ℝ real-ℚ ε)
+              ( real-ℚ q)
+              ( x)
+              ( le-real-is-in-lower-cut-ℚ q x q<x)
+              ( max-ε<q)))
+        ( λ x<r →
+          elim-disjunction motive
+            ( λ q<y →
+              inr-disjunction
+                ( transitive-le-ℝ
+                  ( max-ℝ x y -ℝ real-ℚ ε)
+                  ( real-ℚ q)
+                  ( y)
+                  ( le-real-is-in-lower-cut-ℚ q y q<y)
+                  ( max-ε<q)))
+            ( λ y<r →
+              ex-falso
+                ( irreflexive-le-ℝ
+                  ( max-ℝ x y)
+                  ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
+                    ( leq-max-leq-leq-ℝ x y (real-ℚ r)
+                      ( leq-le-ℝ x (real-ℚ r)
+                        ( le-real-is-in-upper-cut-ℚ r x x<r))
+                      ( leq-le-ℝ y (real-ℚ r)
+                        ( le-real-is-in-upper-cut-ℚ r y y<r)))
+                    ( r<max))))
+            ( is-located-lower-upper-cut-ℝ y q r q<r))
+        ( is-located-lower-upper-cut-ℝ x q r q<r)
 ```
