@@ -136,6 +136,16 @@ module _
     associative-add-Ab ab-left-module-Ring
 ```
 
+### Commutativity of addition
+
+```agda
+  commutative-add-left-module-Ring :
+    (x y : type-left-module-Ring) →
+    Id (add-left-module-Ring x y) (add-left-module-Ring y x)
+  commutative-add-left-module-Ring =
+    commutative-add-Ab ab-left-module-Ring
+```
+
 ### Unit laws for addition
 
 ```agda
