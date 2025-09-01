@@ -227,7 +227,7 @@ module _
   {l : Level} (G : Group l)
   where
 
-  iso-eq-Group : (H : Group l) → Id G H → iso-Group G H
+  iso-eq-Group : (H : Group l) → G ＝ H → iso-Group G H
   iso-eq-Group = iso-eq-Large-Precategory Group-Large-Precategory G
 
   abstract

@@ -122,7 +122,7 @@ module _
   refl-htpy-hom-Semigroup f = refl-htpy
 
   htpy-eq-hom-Semigroup :
-    (f g : hom-Semigroup) → Id f g → htpy-hom-Semigroup f g
+    (f g : hom-Semigroup) → f ＝ g → htpy-hom-Semigroup f g
   htpy-eq-hom-Semigroup f .f refl = refl-htpy-hom-Semigroup f
 
   abstract
@@ -145,7 +145,7 @@ module _
         ( htpy-eq-hom-Semigroup f)
 
   eq-htpy-hom-Semigroup :
-    {f g : hom-Semigroup} → htpy-hom-Semigroup f g → Id f g
+    {f g : hom-Semigroup} → htpy-hom-Semigroup f g → f ＝ g
   eq-htpy-hom-Semigroup {f} {g} =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Semigroup f g)
 

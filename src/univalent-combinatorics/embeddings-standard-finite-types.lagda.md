@@ -76,7 +76,7 @@ abstract
     Id
       ( cases-map-reduce-emb-Fin k l f d x e)
       ( cases-map-reduce-emb-Fin k l f d x' e') →
-    Id x x'
+    x ＝ x'
   is-injective-cases-map-reduce-emb-Fin k l f (inl (pair t q)) x e x' e' p =
     is-injective-inl
       ( is-injective-is-emb

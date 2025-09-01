@@ -161,7 +161,7 @@ In this composite, the injectivity of `equiv-eq` is used in the third step.
 ```agda
 module _
   {l : Level} (A : UU l)
-  (L : (a x y : A) → is-injective (equiv-eq {A = Id x y} {B = Id a y}))
+  (L : (a x y : A) → is-injective (equiv-eq {A = x ＝ y} {B = a ＝ y}))
   where
 
   injection-Id-is-injective-equiv-eq-Id :

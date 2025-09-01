@@ -41,7 +41,7 @@ module _
     type-Subpreorder P (subtype-decidable-subtype S)
 
   eq-type-Decidable-Subpreorder :
-    (x y : type-Decidable-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Decidable-Subpreorder) → Id (pr1 x) (pr1 y) → x ＝ y
   eq-type-Decidable-Subpreorder =
     eq-type-Subpreorder P (subtype-decidable-subtype S)
 

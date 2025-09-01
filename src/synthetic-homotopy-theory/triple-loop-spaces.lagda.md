@@ -61,17 +61,17 @@ z-concat-Ω³ = z-concat-Id³
 
 ap-x-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} {α α' β β' : type-Ω³ a}
-  (s : Id α α') (t : Id β β') → Id (x-concat-Ω³ α β) (x-concat-Ω³ α' β')
+  (s : α ＝ α') (t : β ＝ β') → Id (x-concat-Ω³ α β) (x-concat-Ω³ α' β')
 ap-x-concat-Ω³ s t = ap-binary x-concat-Ω³ s t
 
 ap-y-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} {α α' β β' : type-Ω³ a}
-  (s : Id α α') (t : Id β β') → Id (y-concat-Ω³ α β) (y-concat-Ω³ α' β')
+  (s : α ＝ α') (t : β ＝ β') → Id (y-concat-Ω³ α β) (y-concat-Ω³ α' β')
 ap-y-concat-Ω³ s t = j-concat-Id⁴ s t
 
 ap-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} {α α' β β' : type-Ω³ a}
-  (s : Id α α') (t : Id β β') → Id (z-concat-Ω³ α β) (z-concat-Ω³ α' β')
+  (s : α ＝ α') (t : β ＝ β') → Id (z-concat-Ω³ α β) (z-concat-Ω³ α' β')
 ap-z-concat-Ω³ s t = k-concat-Id⁴ s t
 ```
 
@@ -113,8 +113,8 @@ left-unit-law-z-concat-Ω³ α =
 
 {-
 super-naturality-right-unit :
-  {l : Level} {A : UU l} {x y z : A} {p q : Id x y} {α β : Id p q} (γ : Id α β)
-  (u : Id y z) →
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {α β : p ＝ q} (γ : α ＝ β)
+  (u : y ＝ z) →
   Id (ap (λ ω → horizontal-concat-Id² ω (refl {x = u})) γ) {!!}
 super-naturality-right-unit α = {!!}
 -}

@@ -138,7 +138,7 @@ If chains with jumps are never used, we'd like to call the following chains.
           path-faces-Finitely-Graded-Poset z
 
   tr-refl-path-faces-Finitely-Graded-Poset :
-    {i j : Fin (succ-ℕ k)} (p : Id j i) (x : face-Finitely-Graded-Poset j) →
+    {i j : Fin (succ-ℕ k)} (p : j ＝ i) (x : face-Finitely-Graded-Poset j) →
     path-faces-Finitely-Graded-Poset
       ( tr face-Finitely-Graded-Poset p x)
       ( x)
@@ -204,7 +204,7 @@ eq-path-elements-Finitely-Graded-Poset :
   (x y : type-Finitely-Graded-Poset X) →
   (p : Id (shape-Finitely-Graded-Poset X x)
           (shape-Finitely-Graded-Poset X y)) →
-  path-elements-Finitely-Graded-Poset X x y → Id x y
+  path-elements-Finitely-Graded-Poset X x y → x ＝ y
 eq-path-elements-Finitely-Graded-Poset {k} X (pair i1 x) (pair .i1 .x) p
   refl-path-faces-Finitely-Graded-Poset = refl
 eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
@@ -243,7 +243,7 @@ module _
   abstract
     eq-path-faces-Finitely-Graded-Poset :
       {i : Fin (succ-ℕ k)} (x y : face-Finitely-Graded-Poset X i) →
-      path-faces-Finitely-Graded-Poset X x y → Id x y
+      path-faces-Finitely-Graded-Poset X x y → x ＝ y
     eq-path-faces-Finitely-Graded-Poset {i} x y H =
       map-left-unit-law-Σ-is-contr
         ( is-proof-irrelevant-is-prop
@@ -261,7 +261,7 @@ module _
     (x y : type-Finitely-Graded-Poset X) →
     path-elements-Finitely-Graded-Poset X x y →
     path-elements-Finitely-Graded-Poset X y x →
-    Id x y
+    x ＝ y
   antisymmetric-path-elements-Finitely-Graded-Poset (pair i x) (pair j y) H K =
     eq-path-elements-Finitely-Graded-Poset X (pair i x) (pair j y)
       ( antisymmetric-leq-Fin (succ-ℕ k)
@@ -490,7 +490,7 @@ module _
       is-set-type-Set face-set-Finitely-Graded-Subposet
 
     eq-face-Finitely-Graded-Subposet :
-      (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+      (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → x ＝ y
     eq-face-Finitely-Graded-Subposet x y = eq-type-subtype S
 
     emb-face-Finitely-Graded-Subposet :
@@ -594,7 +594,7 @@ module _
 
   antisymmetric-leq-Finitely-Graded-Subposet :
     (x y : type-Finitely-Graded-Subposet) →
-    leq-Finitely-Graded-Subposet x y → leq-Finitely-Graded-Subposet y x → Id x y
+    leq-Finitely-Graded-Subposet x y → leq-Finitely-Graded-Subposet y x → x ＝ y
   antisymmetric-leq-Finitely-Graded-Subposet x y H K =
     is-injective-map-emb-type-Finitely-Graded-Subposet
       ( antisymmetric-leq-Finitely-Graded-Poset X

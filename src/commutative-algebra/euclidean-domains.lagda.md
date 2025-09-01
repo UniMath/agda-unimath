@@ -334,7 +334,7 @@ module _
     mul-Integral-Domain' integral-domain-Euclidean-Domain
 
   ap-mul-Euclidean-Domain :
-    {x x' y y' : type-Euclidean-Domain} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Euclidean-Domain} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Euclidean-Domain x y) (mul-Euclidean-Domain x' y')
   ap-mul-Euclidean-Domain p q = ap-binary mul-Euclidean-Domain p q
 

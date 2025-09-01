@@ -102,7 +102,7 @@ module _
   map-hom-inv-symmetric-group-loop-group-Set X Y f = inv (eq-equiv f)
 
   commutative-inv-map-hom-symmetric-group-loop-group-Set :
-    (X Y : UU l) (p : Id X Y) (sX : is-set X) (sY : is-set Y) →
+    (X Y : UU l) (p : X ＝ Y) (sX : is-set X) (sY : is-set Y) →
     Id
       ( map-hom-symmetric-group-loop-group-Set (Y , sY) (X , sX) (inv p))
       ( inv-equiv

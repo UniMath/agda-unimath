@@ -107,7 +107,7 @@ module _
   mul-H-Space' x y = mul-H-Space y x
 
   ap-mul-H-Space :
-    {a b c d : type-H-Space} → Id a b → Id c d →
+    {a b c d : type-H-Space} → a ＝ b → c ＝ d →
     Id (mul-H-Space a c) (mul-H-Space b d)
   ap-mul-H-Space p q = ap-binary mul-H-Space p q
 

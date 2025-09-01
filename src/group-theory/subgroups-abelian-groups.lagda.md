@@ -186,7 +186,7 @@ module _
   eq-subgroup-ab-eq-ab :
     {x y : type-ab-Subgroup-Ab} →
     Id (map-inclusion-Subgroup-Ab x) (map-inclusion-Subgroup-Ab y) →
-    Id x y
+    x ＝ y
   eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
   set-ab-Subgroup-Ab : Set (l1 ⊔ l2)

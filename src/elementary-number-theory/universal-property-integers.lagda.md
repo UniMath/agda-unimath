@@ -143,7 +143,7 @@ pr2 (pr2 (reflexive-Eq-ELIM-ℤ P p0 pS (f , p , H))) = inv ∘ (right-inv ∘ H
 Eq-ELIM-ℤ-eq :
   { l1 : Level} (P : ℤ → UU l1) →
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-  ( s t : ELIM-ℤ P p0 pS) → Id s t → Eq-ELIM-ℤ P p0 pS s t
+  ( s t : ELIM-ℤ P p0 pS) → s ＝ t → Eq-ELIM-ℤ P p0 pS s t
 Eq-ELIM-ℤ-eq P p0 pS s .s refl = reflexive-Eq-ELIM-ℤ P p0 pS s
 
 abstract
@@ -185,7 +185,7 @@ abstract
 eq-Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1) →
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-  ( s t : ELIM-ℤ P p0 pS) → Eq-ELIM-ℤ P p0 pS s t → Id s t
+  ( s t : ELIM-ℤ P p0 pS) → Eq-ELIM-ℤ P p0 pS s t → s ＝ t
 eq-Eq-ELIM-ℤ P p0 pS s t = map-inv-is-equiv (is-equiv-Eq-ELIM-ℤ-eq P p0 pS s t)
 
 abstract

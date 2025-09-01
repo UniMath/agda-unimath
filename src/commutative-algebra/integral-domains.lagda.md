@@ -303,7 +303,7 @@ module _
     mul-Commutative-Ring' commutative-ring-Integral-Domain
 
   ap-mul-Integral-Domain :
-    {x x' y y' : type-Integral-Domain} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Integral-Domain} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Integral-Domain x y) (mul-Integral-Domain x' y')
   ap-mul-Integral-Domain p q = ap-binary mul-Integral-Domain p q
 

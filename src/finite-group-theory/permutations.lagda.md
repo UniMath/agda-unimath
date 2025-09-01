@@ -314,7 +314,7 @@ module _
         Id
           ( iterate (nat-Fin 2 k) (succ-Fin 2) x)
           ( iterate (nat-Fin 2 k') (succ-Fin 2) x) →
-        Id k k'
+        k ＝ k'
       is-injective-iterate-involution
         (inl (inr star)) (inl (inr star)) x p =
         refl

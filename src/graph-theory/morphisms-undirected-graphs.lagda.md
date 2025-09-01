@@ -132,7 +132,7 @@ module _
         ( vertex-hom-Undirected-Graph G H f) p)
 
   htpy-eq-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → Id f g → htpy-hom-Undirected-Graph f g
+    (f g : hom-Undirected-Graph G H) → f ＝ g → htpy-hom-Undirected-Graph f g
   htpy-eq-hom-Undirected-Graph f .f refl = refl-htpy-hom-Undirected-Graph f
 
   abstract
@@ -180,7 +180,7 @@ module _
     is-equiv-htpy-eq-hom-Undirected-Graph f g
 
   eq-htpy-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → htpy-hom-Undirected-Graph f g → Id f g
+    (f g : hom-Undirected-Graph G H) → htpy-hom-Undirected-Graph f g → f ＝ g
   eq-htpy-hom-Undirected-Graph f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Undirected-Graph f g)
 ```

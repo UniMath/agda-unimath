@@ -134,38 +134,38 @@ module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
 
-  equiv-tr-Ω : Id x y → Ω (pair A x) ≃∗ Ω (pair A y)
+  equiv-tr-Ω : x ＝ y → Ω (pair A x) ≃∗ Ω (pair A y)
   equiv-tr-Ω refl = pair id-equiv refl
 
-  equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
+  equiv-tr-type-Ω : x ＝ y → type-Ω (pair A x) ≃ type-Ω (pair A y)
   equiv-tr-type-Ω p =
     equiv-pointed-equiv (equiv-tr-Ω p)
 
-  tr-type-Ω : Id x y → type-Ω (pair A x) → type-Ω (pair A y)
+  tr-type-Ω : x ＝ y → type-Ω (pair A x) → type-Ω (pair A y)
   tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
 
-  is-equiv-tr-type-Ω : (p : Id x y) → is-equiv (tr-type-Ω p)
+  is-equiv-tr-type-Ω : (p : x ＝ y) → is-equiv (tr-type-Ω p)
   is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
 
-  preserves-refl-tr-Ω : (p : Id x y) → Id (tr-type-Ω p refl) refl
+  preserves-refl-tr-Ω : (p : x ＝ y) → Id (tr-type-Ω p refl) refl
   preserves-refl-tr-Ω refl = refl
 
   preserves-mul-tr-Ω :
-    (p : Id x y) (u v : type-Ω (pair A x)) →
+    (p : x ＝ y) (u v : type-Ω (pair A x)) →
     Id
       ( tr-type-Ω p (mul-Ω (pair A x) u v))
       ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
   preserves-mul-tr-Ω refl u v = refl
 
   preserves-inv-tr-Ω :
-    (p : Id x y) (u : type-Ω (pair A x)) →
+    (p : x ＝ y) (u : type-Ω (pair A x)) →
     Id
       ( tr-type-Ω p (inv-Ω (pair A x) u))
       ( inv-Ω (pair A y) (tr-type-Ω p u))
   preserves-inv-tr-Ω refl u = refl
 
   eq-tr-type-Ω :
-    (p : Id x y) (q : type-Ω (pair A x)) →
+    (p : x ＝ y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
 ```

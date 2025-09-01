@@ -94,7 +94,7 @@ module _
       decidable-subtype-2-Element-Decidable-Subtype
 
   eq-is-in-2-Element-Decidable-Subtype :
-    {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → Id y z
+    {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → y ＝ z
   eq-is-in-2-Element-Decidable-Subtype {x} =
     eq-is-prop (is-prop-is-in-2-Element-Decidable-Subtype x)
 

@@ -185,7 +185,7 @@ module _
   id-equiv-Cyclic-Type = id-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X)
 
   equiv-eq-Cyclic-Type :
-    (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
+    (Y : Cyclic-Type l k) → X ＝ Y → equiv-Cyclic-Type k X Y
   equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
 
 is-torsorial-equiv-Cyclic-Type :
@@ -216,7 +216,7 @@ module _
   pr2 (extensionality-Cyclic-Type Y) = is-equiv-equiv-eq-Cyclic-Type Y
 
   eq-equiv-Cyclic-Type :
-    (Y : Cyclic-Type l k) → equiv-Cyclic-Type k X Y → Id X Y
+    (Y : Cyclic-Type l k) → equiv-Cyclic-Type k X Y → X ＝ Y
   eq-equiv-Cyclic-Type Y = map-inv-is-equiv (is-equiv-equiv-eq-Cyclic-Type Y)
 ```
 
@@ -236,7 +236,7 @@ module _
   refl-htpy-equiv-Cyclic-Type e = refl-htpy
 
   htpy-eq-equiv-Cyclic-Type :
-    (e f : equiv-Cyclic-Type k X Y) → Id e f → htpy-equiv-Cyclic-Type e f
+    (e f : equiv-Cyclic-Type k X Y) → e ＝ f → htpy-equiv-Cyclic-Type e f
   htpy-eq-equiv-Cyclic-Type e .e refl = refl-htpy-equiv-Cyclic-Type e
 
   is-torsorial-htpy-equiv-Cyclic-Type :
@@ -521,7 +521,7 @@ map-equiv-compute-Ω-Cyclic-Type :
 map-equiv-compute-Ω-Cyclic-Type k = map-equiv (equiv-compute-Ω-Cyclic-Type k)
 
 preserves-concat-equiv-eq-Cyclic-Type :
-  (k : ℕ) (X Y Z : Cyclic-Type lzero k) (p : Id X Y) (q : Id Y Z) →
+  (k : ℕ) (X Y Z : Cyclic-Type lzero k) (p : X ＝ Y) (q : Y ＝ Z) →
   Id
     ( equiv-eq-Cyclic-Type k X Z (p ∙ q))
     ( comp-equiv-Cyclic-Type k X Y Z

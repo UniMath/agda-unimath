@@ -69,7 +69,7 @@ functor-free-dependent-loop l {P} {Q} f =
 
 coherence-square-functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
-  ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y)
+  ( f : (x : X) → P x → Q x) {x y : X} (α : x ＝ y)
   ( h : (x : X) → P x) →
   Id
     ( inv ( preserves-tr f α (h x)) ∙
@@ -194,12 +194,12 @@ contraction-total-space {B = B} center x =
 
 path-total-path-fiber :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) →
-  { y y' : B x} (q : Id y' y) → Id {A = Σ A B} (pair x y) (pair x y')
+  { y y' : B x} (q : y' ＝ y) → Id {A = Σ A B} (pair x y) (pair x y')
 path-total-path-fiber B x q = eq-pair-eq-fiber (inv q)
 
 tr-path-total-path-fiber :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
-  { y y' : B x} (q : Id y' y) (α : Id c (pair x y')) →
+  { y y' : B x} (q : y' ＝ y) (α : Id c (pair x y')) →
   Id
     ( tr (λ z → Id c (pair x z)) q α)
     ( α ∙ (inv (path-total-path-fiber B x q)))
@@ -207,7 +207,7 @@ tr-path-total-path-fiber c x refl α = inv right-unit
 
 segment-Σ :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
-  { x x' : A} (p : Id x x')
+  { x x' : A} (p : x ＝ x')
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) (y : F) →
   Id (pair x (map-equiv e y)) (pair x' (map-equiv e' (map-equiv f y)))
@@ -221,7 +221,7 @@ contraction-total-space' c x {F} e =
 
 equiv-tr-contraction-total-space' :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  { x x' : A} (p : Id x x') →
+  { x x' : A} (p : x ＝ x') →
   { F : UU l3} {F' : UU l4} (f : F ≃ F') (e : F ≃ B x) (e' : F' ≃ B x') →
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   ( contraction-total-space' c x' e') ≃ (contraction-total-space' c x e)
@@ -250,7 +250,7 @@ tr-path-total-tr-coherence c x f e e' H y α =
 
 square-tr-contraction-total-space :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  { x x' : A} (p : Id x x')
+  { x x' : A} (p : x ＝ x')
   { F : UU l3} {F' : UU l4} (f : F ≃ F') (e : F ≃ B x) (e' : F' ≃ B x')
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e)))
   (h : contraction-total-space c x) →
@@ -267,7 +267,7 @@ square-tr-contraction-total-space c refl f e e' H h y =
 
 dependent-identification-contraction-total-space' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  {x x' : A} (p : Id x x') →
+  {x x' : A} (p : x ＝ x') →
   {F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
   (H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   (h : (y : F) → Id c (pair x (map-equiv e y))) →
@@ -284,7 +284,7 @@ dependent-identification-contraction-total-space'
 
 map-dependent-identification-contraction-total-space' :
     { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-    { x x' : A} (p : Id x x') →
+    { x x' : A} (p : x ＝ x') →
     { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
     ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
     ( h : contraction-total-space' c x e) →
@@ -325,7 +325,7 @@ map-dependent-identification-contraction-total-space'
 
 equiv-dependent-identification-contraction-total-space' :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  { x x' : A} (p : Id x x') →
+  { x x' : A} (p : x ＝ x') →
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   ( h : contraction-total-space' c x e) →

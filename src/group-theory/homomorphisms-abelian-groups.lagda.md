@@ -121,7 +121,7 @@ module _
   refl-htpy-hom-Ab : (f : hom-Ab A B) → htpy-hom-Ab f f
   refl-htpy-hom-Ab f = refl-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
-  htpy-eq-hom-Ab : (f g : hom-Ab A B) → Id f g → htpy-hom-Ab f g
+  htpy-eq-hom-Ab : (f g : hom-Ab A B) → f ＝ g → htpy-hom-Ab f g
   htpy-eq-hom-Ab f g = htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
   abstract
@@ -136,7 +136,7 @@ module _
     is-equiv-htpy-eq-hom-Ab f g =
       is-equiv-htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
-  eq-htpy-hom-Ab : {f g : hom-Ab A B} → htpy-hom-Ab f g → Id f g
+  eq-htpy-hom-Ab : {f g : hom-Ab A B} → htpy-hom-Ab f g → f ＝ g
   eq-htpy-hom-Ab = eq-htpy-hom-Group (group-Ab A) (group-Ab B)
 
   is-set-hom-Ab : is-set (hom-Ab A B)

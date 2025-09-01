@@ -40,7 +40,7 @@ postulate
 
   target-𝕀 : 𝕀
 
-  path-𝕀 : Id source-𝕀 target-𝕀
+  path-𝕀 : source-𝕀 ＝ target-𝕀
 
   ind-𝕀 :
     {l : Level} (P : 𝕀 → UU l) (u : P source-𝕀) (v : P target-𝕀)
@@ -118,10 +118,10 @@ module _
   refl-Eq-Data-𝕀 : (x : Data-𝕀 P) → Eq-Data-𝕀 x x
   refl-Eq-Data-𝕀 x = triple refl refl right-unit
 
-  Eq-eq-Data-𝕀 : {x y : Data-𝕀 P} → Id x y → Eq-Data-𝕀 x y
+  Eq-eq-Data-𝕀 : {x y : Data-𝕀 P} → x ＝ y → Eq-Data-𝕀 x y
   Eq-eq-Data-𝕀 {x = x} refl = refl-Eq-Data-𝕀 x
 
-  eq-Eq-Data-𝕀' : {x y : Data-𝕀 P} → Eq-Data-𝕀 x y → Id x y
+  eq-Eq-Data-𝕀' : {x y : Data-𝕀 P} → Eq-Data-𝕀 x y → x ＝ y
   eq-Eq-Data-𝕀' {x} {y} = map-inv-equiv (extensionality-Data-𝕀 x y)
 
   eq-Eq-Data-𝕀 :
@@ -152,7 +152,7 @@ is-section-inv-ev-𝕀 (pair u (pair v q)) =
 
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
-  (p : Id x y) (q : Id (f x) (g x)) (r : Id (f y) (g y)) →
+  (p : x ＝ y) (q : Id (f x) (g x)) (r : Id (f y) (g y)) →
   Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) →
   Id (tr (λ x → Id (f x) (g x)) p q) r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
@@ -179,7 +179,7 @@ abstract
   is-equiv-ev-𝕀 P =
     is-equiv-is-invertible inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
 
-contraction-𝕀 : (x : 𝕀) → Id source-𝕀 x
+contraction-𝕀 : (x : 𝕀) → source-𝕀 ＝ x
 contraction-𝕀 =
   ind-𝕀
     ( Id source-𝕀)

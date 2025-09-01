@@ -71,7 +71,7 @@ module _
 
   htpy-eq-hom-orbit-action-Monoid :
     {x y : type-action-Monoid M X} (f g : hom-orbit-action-Monoid x y) →
-    Id f g → htpy-hom-orbit-action-Monoid f g
+    f ＝ g → htpy-hom-orbit-action-Monoid f g
   htpy-eq-hom-orbit-action-Monoid f .f refl =
     refl-htpy-hom-orbit-action-Monoid f
 
@@ -105,7 +105,7 @@ module _
 
   eq-htpy-hom-orbit-action-Monoid :
     {x y : type-action-Monoid M X} {f g : hom-orbit-action-Monoid x y} →
-    htpy-hom-orbit-action-Monoid f g → Id f g
+    htpy-hom-orbit-action-Monoid f g → f ＝ g
   eq-htpy-hom-orbit-action-Monoid {x} {y} {f} {g} =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-orbit-action-Monoid f g)
 

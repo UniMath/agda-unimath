@@ -115,7 +115,7 @@ module _
 
   ap-add-Ring :
     {x y x' y' : type-Ring R} →
-    Id x x' → Id y y' → Id (add-Ring x y) (add-Ring x' y')
+    x ＝ x' → y ＝ y' → Id (add-Ring x y) (add-Ring x' y')
   ap-add-Ring = ap-add-Ab (ab-Ring R)
 
   associative-add-Ring :
@@ -265,7 +265,7 @@ module _
   zero-Ring = zero-Ab (ab-Ring R)
 
   is-zero-Ring : type-Ring R → UU l
-  is-zero-Ring x = Id x zero-Ring
+  is-zero-Ring x = x ＝ zero-Ring
 
   is-nonzero-Ring : type-Ring R → UU l
   is-nonzero-Ring x = ¬ (is-zero-Ring x)
@@ -367,7 +367,7 @@ module _
   mul-Ring' x y = mul-Ring y x
 
   ap-mul-Ring :
-    {x x' y y' : type-Ring R} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Ring R} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Ring x y) (mul-Ring x' y')
   ap-mul-Ring p q = ap-binary mul-Ring p q
 

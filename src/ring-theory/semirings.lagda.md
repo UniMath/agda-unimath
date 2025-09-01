@@ -181,7 +181,7 @@ module _
     unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   is-zero-Semiring : type-Semiring R → UU l
-  is-zero-Semiring x = Id x zero-Semiring
+  is-zero-Semiring x = x ＝ zero-Semiring
 
   is-nonzero-Semiring : type-Semiring R → UU l
   is-nonzero-Semiring x = ¬ (is-zero-Semiring x)
@@ -219,7 +219,7 @@ module _
   mul-Semiring' x y = mul-Semiring y x
 
   ap-mul-Semiring :
-    {x x' y y' : type-Semiring R} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Semiring R} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Semiring x y) (mul-Semiring x' y')
   ap-mul-Semiring p q = ap-binary mul-Semiring p q
 

@@ -79,6 +79,6 @@ is-finite-eq-Finite-Type X =
 
 Id-Finite-Type :
   {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
-pr1 (Id-Finite-Type X x y) = Id x y
+pr1 (Id-Finite-Type X x y) = x ＝ y
 pr2 (Id-Finite-Type X x y) = is-finite-eq-Finite-Type X
 ```

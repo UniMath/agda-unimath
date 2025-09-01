@@ -757,10 +757,10 @@ refl-Eq-Q8 -j-Q8 = star
 refl-Eq-Q8 k-Q8 = star
 refl-Eq-Q8 -k-Q8 = star
 
-Eq-eq-Q8 : {x y : Q8} → Id x y → Eq-Q8 x y
+Eq-eq-Q8 : {x y : Q8} → x ＝ y → Eq-Q8 x y
 Eq-eq-Q8 {x} refl = refl-Eq-Q8 x
 
-eq-Eq-Q8 : (x y : Q8) → Eq-Q8 x y → Id x y
+eq-Eq-Q8 : (x y : Q8) → Eq-Q8 x y → x ＝ y
 eq-Eq-Q8 e-Q8 e-Q8 e = refl
 eq-Eq-Q8 -e-Q8 -e-Q8 e = refl
 eq-Eq-Q8 i-Q8 i-Q8 e = refl

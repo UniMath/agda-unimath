@@ -134,7 +134,7 @@ module _
 
   ap-add-Finite-Ring :
     {x y x' y' : type-Finite-Ring R} →
-    Id x x' → Id y y' → Id (add-Finite-Ring x y) (add-Finite-Ring x' y')
+    x ＝ x' → y ＝ y' → Id (add-Finite-Ring x y) (add-Finite-Ring x' y')
   ap-add-Finite-Ring = ap-add-Ring (ring-Finite-Ring R)
 
   associative-add-Finite-Ring :
@@ -296,7 +296,7 @@ module _
   mul-Finite-Ring' = mul-Ring' (ring-Finite-Ring R)
 
   ap-mul-Finite-Ring :
-    {x x' y y' : type-Finite-Ring R} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Finite-Ring R} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Finite-Ring x y) (mul-Finite-Ring x' y')
   ap-mul-Finite-Ring = ap-mul-Ring (ring-Finite-Ring R)
 

@@ -61,7 +61,7 @@ module _
   mul-Wild-Loop' = mul-H-Space' h-space-Wild-Loop
 
   ap-mul-Wild-Loop :
-    {a b c d : type-Wild-Loop} → Id a b → Id c d →
+    {a b c d : type-Wild-Loop} → a ＝ b → c ＝ d →
     Id (mul-Wild-Loop a c) (mul-Wild-Loop b d)
   ap-mul-Wild-Loop = ap-mul-H-Space h-space-Wild-Loop
 

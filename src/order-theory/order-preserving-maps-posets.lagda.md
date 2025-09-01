@@ -85,7 +85,7 @@ module _
     refl-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   htpy-eq-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g → htpy-hom-Poset f g
+    (f g : hom-Poset P Q) → f ＝ g → htpy-hom-Poset f g
   htpy-eq-hom-Poset = htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-torsorial-htpy-hom-Poset :
@@ -104,7 +104,7 @@ module _
     extensionality-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   eq-htpy-hom-Poset :
-    (f g : hom-Poset P Q) → htpy-hom-Poset f g → Id f g
+    (f g : hom-Poset P Q) → htpy-hom-Poset f g → f ＝ g
   eq-htpy-hom-Poset = eq-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-prop-htpy-hom-Poset :

@@ -101,7 +101,7 @@ module _
   id-equiv-Infinite-Cyclic-Type = id-equiv-Cyclic-Type zero-ℕ X
 
   equiv-eq-Infinite-Cyclic-Type :
-    (Y : Infinite-Cyclic-Type l1) → Id X Y → equiv-Infinite-Cyclic-Type Y
+    (Y : Infinite-Cyclic-Type l1) → X ＝ Y → equiv-Infinite-Cyclic-Type Y
   equiv-eq-Infinite-Cyclic-Type = equiv-eq-Cyclic-Type zero-ℕ X
 
   is-torsorial-equiv-Infinite-Cyclic-Type :

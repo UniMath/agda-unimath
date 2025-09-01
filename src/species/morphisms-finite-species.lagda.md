@@ -121,7 +121,7 @@ right-unit-law-comp-hom-finite-species F G f = refl
 htpy-eq-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f g : hom-finite-species F G) →
-  Id f g → htpy-hom-finite-species F G f g
+  f ＝ g → htpy-hom-finite-species F G f g
 htpy-eq-hom-finite-species F G f g refl X y = refl
 
 is-torsorial-htpy-hom-finite-species :

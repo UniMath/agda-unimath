@@ -106,7 +106,7 @@ module _
   mul-Group = pr1 has-associative-mul-Group
 
   ap-mul-Group :
-    {x x' y y' : type-Group} (p : Id x x') (q : Id y y') →
+    {x x' y y' : type-Group} (p : x ＝ x') (q : y ＝ y') →
     Id (mul-Group x y) (mul-Group x' y')
   ap-mul-Group p q = ap-binary mul-Group p q
 
