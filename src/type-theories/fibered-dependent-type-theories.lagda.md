@@ -107,8 +107,8 @@ module fibered where
   double-tr :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
     (D : (x : A) → B x → C x → UU l4) {x y : A} (p : x ＝ y)
-    {u : B x} {u' : B y} (q : Id (tr B p u) u') {v : C x} {v' : C y}
-    (r : Id (tr C p v) v') → D x u v → D y u' v'
+    {u : B x} {u' : B y} (q : tr B p u ＝ u') {v : C x} {v' : C y}
+    (r : tr C p v ＝ v') → D x u v → D y u' v'
   double-tr D refl refl refl d = d
 
   tr-bifibered-system-slice :

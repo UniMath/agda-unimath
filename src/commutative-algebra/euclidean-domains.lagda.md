@@ -178,7 +178,7 @@ module _
 
   commutative-add-Euclidean-Domain :
     (x y : type-Euclidean-Domain) →
-    Id (add-Euclidean-Domain x y) (add-Euclidean-Domain y x)
+    add-Euclidean-Domain x y ＝ add-Euclidean-Domain y x
   commutative-add-Euclidean-Domain = commutative-add-Ab ab-Euclidean-Domain
 
   interchange-add-add-Euclidean-Domain :
@@ -335,7 +335,7 @@ module _
 
   ap-mul-Euclidean-Domain :
     {x x' y y' : type-Euclidean-Domain} (p : x ＝ x') (q : y ＝ y') →
-    Id (mul-Euclidean-Domain x y) (mul-Euclidean-Domain x' y')
+    mul-Euclidean-Domain x y ＝ mul-Euclidean-Domain x' y'
   ap-mul-Euclidean-Domain p q = ap-binary mul-Euclidean-Domain p q
 
   associative-mul-Euclidean-Domain :

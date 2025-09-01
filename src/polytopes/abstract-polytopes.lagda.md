@@ -264,7 +264,7 @@ module _
 
   eq-path-elements-Prepolytope :
     (x y : type-Prepolytope)
-    (p : Id (shape-Prepolytope x) (shape-Prepolytope y)) →
+    (p : shape-Prepolytope x ＝ shape-Prepolytope y) →
     path-elements-Prepolytope x y → x ＝ y
   eq-path-elements-Prepolytope =
     eq-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope

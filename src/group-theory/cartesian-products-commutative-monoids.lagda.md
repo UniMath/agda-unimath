@@ -70,13 +70,13 @@ module _
 
   left-unit-law-mul-product-Commutative-Monoid :
     (x : type-product-Commutative-Monoid) →
-    Id (mul-product-Commutative-Monoid unit-product-Commutative-Monoid x) x
+    mul-product-Commutative-Monoid unit-product-Commutative-Monoid x ＝ x
   left-unit-law-mul-product-Commutative-Monoid =
     left-unit-law-mul-Monoid monoid-product-Commutative-Monoid
 
   right-unit-law-mul-product-Commutative-Monoid :
     (x : type-product-Commutative-Monoid) →
-    Id (mul-product-Commutative-Monoid x unit-product-Commutative-Monoid) x
+    mul-product-Commutative-Monoid x unit-product-Commutative-Monoid ＝ x
   right-unit-law-mul-product-Commutative-Monoid =
     right-unit-law-mul-Monoid monoid-product-Commutative-Monoid
 

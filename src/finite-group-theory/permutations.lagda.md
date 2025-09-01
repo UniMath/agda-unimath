@@ -193,7 +193,7 @@ module _
                         ( type-Decidable-Prop ∘ P)))))
             ( λ li →
               Id k (mod-two-ℕ (length-list li)) ×
-              Id f (permutation-list-transpositions li))))
+              f ＝ permutation-list-transpositions li)))
 
   abstract
     is-contr-parity-transposition-permutation :

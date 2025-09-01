@@ -126,7 +126,7 @@ inv-Q8 -j-Q8 = j-Q8
 inv-Q8 k-Q8 = -k-Q8
 inv-Q8 -k-Q8 = k-Q8
 
-left-unit-law-mul-Q8 : (x : Q8) → Id (mul-Q8 e-Q8 x) x
+left-unit-law-mul-Q8 : (x : Q8) → mul-Q8 e-Q8 x ＝ x
 left-unit-law-mul-Q8 e-Q8 = refl
 left-unit-law-mul-Q8 -e-Q8 = refl
 left-unit-law-mul-Q8 i-Q8 = refl
@@ -136,7 +136,7 @@ left-unit-law-mul-Q8 -j-Q8 = refl
 left-unit-law-mul-Q8 k-Q8 = refl
 left-unit-law-mul-Q8 -k-Q8 = refl
 
-right-unit-law-mul-Q8 : (x : Q8) → Id (mul-Q8 x e-Q8) x
+right-unit-law-mul-Q8 : (x : Q8) → mul-Q8 x e-Q8 ＝ x
 right-unit-law-mul-Q8 e-Q8 = refl
 right-unit-law-mul-Q8 -e-Q8 = refl
 right-unit-law-mul-Q8 i-Q8 = refl
@@ -862,7 +862,7 @@ Q8-Group =
       ( pair inv-Q8 (pair left-inverse-law-mul-Q8 right-inverse-law-mul-Q8)))
 
 is-noncommutative-mul-Q8 :
-  ¬ ((x y : Q8) → Id (mul-Q8 x y) (mul-Q8 y x))
+  ¬ ((x y : Q8) → mul-Q8 x y ＝ mul-Q8 y x)
 is-noncommutative-mul-Q8 f = Eq-eq-Q8 (f i-Q8 j-Q8)
 
 map-equiv-count-Q8 : Fin 8 → Q8

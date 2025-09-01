@@ -151,7 +151,7 @@ module _
               ( λ gE →
                 (p : unordered-pair-vertices-Undirected-Graph G) →
                 (e : edge-Undirected-Graph G p) →
-                Id (edge-hom-Undirected-Graph G H f p e) (gE p e)))
+                edge-hom-Undirected-Graph G H f p e ＝ gE p e))
           ( equiv-tot
             ( λ gE →
               equiv-Π-equiv-family

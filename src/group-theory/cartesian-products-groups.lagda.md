@@ -66,12 +66,12 @@ module _
   unit-product-Group = unit-Monoid monoid-product-Group
 
   left-unit-law-mul-product-Group :
-    (x : type-product-Group) → Id (mul-product-Group unit-product-Group x) x
+    (x : type-product-Group) → mul-product-Group unit-product-Group x ＝ x
   left-unit-law-mul-product-Group =
     left-unit-law-mul-Monoid monoid-product-Group
 
   right-unit-law-mul-product-Group :
-    (x : type-product-Group) → Id (mul-product-Group x unit-product-Group) x
+    (x : type-product-Group) → mul-product-Group x unit-product-Group ＝ x
   right-unit-law-mul-product-Group =
     right-unit-law-mul-Monoid monoid-product-Group
 

@@ -59,7 +59,7 @@ abstract
   compute-zero-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-    Id (elim-ℤ P p0 pS zero-ℤ) p0
+    elim-ℤ P p0 pS zero-ℤ ＝ p0
   compute-zero-elim-ℤ P p0 pS = refl
 
   compute-succ-elim-ℤ :
@@ -85,7 +85,7 @@ ELIM-ℤ :
 ELIM-ℤ P p0 pS =
   Σ ( (k : ℤ) → P k)
     ( λ f →
-      ( ( Id (f zero-ℤ) p0) ×
+      ( ( f zero-ℤ ＝ p0) ×
         ( (k : ℤ) → Id (f (succ-ℤ k)) ((map-equiv (pS k)) (f k)))))
 
 Elim-ℤ :
@@ -128,7 +128,7 @@ Eq-ELIM-ℤ :
   ( s t : ELIM-ℤ P p0 pS) → UU l1
 Eq-ELIM-ℤ P p0 pS s t =
   ELIM-ℤ
-    ( λ k → Id (pr1 s k) (pr1 t k))
+    ( λ k → pr1 s k ＝ pr1 t k)
     ( (pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
     ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)
 
@@ -197,7 +197,7 @@ abstract
     is-prop-all-elements-equal
       ( λ s t → eq-Eq-ELIM-ℤ P p0 pS s t
         ( Elim-ℤ
-          ( λ k → Id (pr1 s k) (pr1 t k))
+          ( λ k → pr1 s k ＝ pr1 t k)
           ( (pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
           ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)))
 ```

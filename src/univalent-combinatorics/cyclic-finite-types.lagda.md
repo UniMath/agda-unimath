@@ -582,7 +582,7 @@ preserves-concat-equiv-compute-Ω-Cyclic-Type k {p} {q} =
     ( equiv-eq-Cyclic-Type k ( ℤ-Mod-Cyclic-Type k) ( ℤ-Mod-Cyclic-Type k) q))
 
 type-Ω-Cyclic-Type : (k : ℕ) → UU (lsuc lzero)
-type-Ω-Cyclic-Type k = Id (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)
+type-Ω-Cyclic-Type k = ℤ-Mod-Cyclic-Type k ＝ ℤ-Mod-Cyclic-Type k
 
 is-set-type-Ω-Cyclic-Type : (k : ℕ) → is-set (type-Ω-Cyclic-Type k)
 is-set-type-Ω-Cyclic-Type k =

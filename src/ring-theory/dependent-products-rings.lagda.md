@@ -83,11 +83,11 @@ module _
   associative-add-Π-Ring = associative-add-Semiring semiring-Π-Ring
 
   left-unit-law-add-Π-Ring :
-    (x : type-Π-Ring) → Id (add-Π-Ring zero-Π-Ring x) x
+    (x : type-Π-Ring) → add-Π-Ring zero-Π-Ring x ＝ x
   left-unit-law-add-Π-Ring = left-unit-law-add-Semiring semiring-Π-Ring
 
   right-unit-law-add-Π-Ring :
-    (x : type-Π-Ring) → Id (add-Π-Ring x zero-Π-Ring) x
+    (x : type-Π-Ring) → add-Π-Ring x zero-Π-Ring ＝ x
   right-unit-law-add-Π-Ring = right-unit-law-add-Semiring semiring-Π-Ring
 
   left-inverse-law-add-Π-Ring :
@@ -99,7 +99,7 @@ module _
   right-inverse-law-add-Π-Ring = right-inverse-law-add-Ab ab-Π-Ring
 
   commutative-add-Π-Ring :
-    (x y : type-Π-Ring) → Id (add-Π-Ring x y) (add-Π-Ring y x)
+    (x y : type-Π-Ring) → add-Π-Ring x y ＝ add-Π-Ring y x
   commutative-add-Π-Ring = commutative-add-Semiring semiring-Π-Ring
 
   mul-Π-Ring : type-Π-Ring → type-Π-Ring → type-Π-Ring
@@ -115,12 +115,12 @@ module _
     associative-mul-Semiring semiring-Π-Ring
 
   left-unit-law-mul-Π-Ring :
-    (x : type-Π-Ring) → Id (mul-Π-Ring one-Π-Ring x) x
+    (x : type-Π-Ring) → mul-Π-Ring one-Π-Ring x ＝ x
   left-unit-law-mul-Π-Ring =
     left-unit-law-mul-Semiring semiring-Π-Ring
 
   right-unit-law-mul-Π-Ring :
-    (x : type-Π-Ring) → Id (mul-Π-Ring x one-Π-Ring) x
+    (x : type-Π-Ring) → mul-Π-Ring x one-Π-Ring ＝ x
   right-unit-law-mul-Π-Ring =
     right-unit-law-mul-Semiring semiring-Π-Ring
 

@@ -250,13 +250,13 @@ module _
 
   left-unit-law-mul-Decidable-Subgroup :
     (x : type-group-Decidable-Subgroup) →
-    Id (mul-Decidable-Subgroup unit-Decidable-Subgroup x) x
+    mul-Decidable-Subgroup unit-Decidable-Subgroup x ＝ x
   left-unit-law-mul-Decidable-Subgroup =
     left-unit-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   right-unit-law-mul-Decidable-Subgroup :
     (x : type-group-Decidable-Subgroup) →
-    Id (mul-Decidable-Subgroup x unit-Decidable-Subgroup) x
+    mul-Decidable-Subgroup x unit-Decidable-Subgroup ＝ x
   right-unit-law-mul-Decidable-Subgroup =
     right-unit-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
 

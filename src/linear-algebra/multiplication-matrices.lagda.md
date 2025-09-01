@@ -43,7 +43,7 @@ mul-Mat mulK addK zero (v ∷ vs) m =
 mul-transpose :
   {l : Level} → {K : UU l} → {m n p : ℕ} →
   {addK : K → K → K} {mulK : K → K → K} {zero : K} →
-  ((x y : K) → Id (mulK x y) (mulK y x)) →
+  ((x y : K) → mulK x y ＝ mulK y x) →
   (a : Mat K m n) → (b : Mat K n p) →
   Id
     (transpose (mul-Mat mulK addK zero a b))
@@ -74,7 +74,7 @@ module _
     ({l : ℕ} →  Id (diagonal-product {n = l} zero)
     (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
+    ((x y : K) → addK x y ＝ addK y x) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
     (a : tuple K n) (b : Mat K n m) (c : Mat K n m) →
     Id (mul-tuple-matrix mulK addK zero a (add-Mat addK b c))
@@ -123,7 +123,7 @@ module _
         (diagonal-product {n = l} zero)
         (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
+    ((x y : K) → addK x y ＝ addK y x) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
     (a : Mat K m n) (b : Mat K n p) (c : Mat K n p) →
     Id (mul-Mat mulK addK zero a (add-Mat addK b c))
@@ -148,7 +148,7 @@ module _
         (diagonal-product {n = l} zero)
         (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK (addK x y) z) (addK (mulK x z) (mulK y z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
+    ((x y : K) → addK x y ＝ addK y x) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
     (b : Mat K n p) (c : Mat K n p) (d : Mat K p m) →
     Id (mul-Mat mulK addK zero (add-Mat addK b c) d)

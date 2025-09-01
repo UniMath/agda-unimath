@@ -294,7 +294,7 @@ module _
 
   compute-swap-2-Element-Decidable-Subtype :
     (x y : type-2-Element-Decidable-Subtype P) → x ≠ y →
-    Id (map-swap-2-Element-Decidable-Subtype x) y
+    map-swap-2-Element-Decidable-Subtype x ＝ y
   compute-swap-2-Element-Decidable-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 

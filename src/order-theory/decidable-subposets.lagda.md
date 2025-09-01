@@ -41,7 +41,7 @@ module _
     type-Subposet P (subtype-decidable-subtype S)
 
   eq-type-Decidable-Subposet :
-    (x y : type-Decidable-Subposet) → Id (pr1 x) (pr1 y) → x ＝ y
+    (x y : type-Decidable-Subposet) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Decidable-Subposet =
     eq-type-Subposet P (subtype-decidable-subtype S)
 

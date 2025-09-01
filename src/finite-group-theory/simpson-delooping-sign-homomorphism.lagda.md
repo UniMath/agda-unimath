@@ -633,7 +633,7 @@ module _
   abstract
     preserves-id-equiv-simpson-comp-equiv :
       (X : Type-With-Cardinality-ℕ l n) →
-      Id (simpson-comp-equiv X X id-equiv) id-equiv
+      simpson-comp-equiv X X id-equiv ＝ id-equiv
     preserves-id-equiv-simpson-comp-equiv X =
       eq-htpy-equiv left-unit-law-equiv
 

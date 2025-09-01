@@ -388,7 +388,7 @@ module _
   abstract
     compute-number-of-elements-is-finite :
       (e : count X) (f : is-finite X) →
-      Id (number-of-elements-count e) (number-of-elements-is-finite f)
+      number-of-elements-count e ＝ number-of-elements-is-finite f
     compute-number-of-elements-is-finite e f =
       ind-trunc-Prop
         ( λ g →

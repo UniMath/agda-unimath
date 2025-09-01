@@ -62,19 +62,19 @@ module _
 
   ap-mul-Wild-Loop :
     {a b c d : type-Wild-Loop} → a ＝ b → c ＝ d →
-    Id (mul-Wild-Loop a c) (mul-Wild-Loop b d)
+    mul-Wild-Loop a c ＝ mul-Wild-Loop b d
   ap-mul-Wild-Loop = ap-mul-H-Space h-space-Wild-Loop
 
   magma-Wild-Loop : Magma l
   magma-Wild-Loop = magma-H-Space h-space-Wild-Loop
 
   left-unit-law-mul-Wild-Loop :
-    (x : type-Wild-Loop) → Id (mul-Wild-Loop unit-Wild-Loop x) x
+    (x : type-Wild-Loop) → mul-Wild-Loop unit-Wild-Loop x ＝ x
   left-unit-law-mul-Wild-Loop =
     left-unit-law-mul-H-Space h-space-Wild-Loop
 
   right-unit-law-mul-Wild-Loop :
-    (x : type-Wild-Loop) → Id (mul-Wild-Loop x unit-Wild-Loop) x
+    (x : type-Wild-Loop) → mul-Wild-Loop x unit-Wild-Loop ＝ x
   right-unit-law-mul-Wild-Loop =
     right-unit-law-mul-H-Space h-space-Wild-Loop
 

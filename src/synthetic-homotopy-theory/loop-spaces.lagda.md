@@ -42,7 +42,7 @@ module _
   where
 
   type-Ω : UU l
-  type-Ω = Id (point-Pointed-Type A) (point-Pointed-Type A)
+  type-Ω = point-Pointed-Type A ＝ point-Pointed-Type A
 
   refl-Ω : type-Ω
   refl-Ω = refl
@@ -147,7 +147,7 @@ module _
   is-equiv-tr-type-Ω : (p : x ＝ y) → is-equiv (tr-type-Ω p)
   is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
 
-  preserves-refl-tr-Ω : (p : x ＝ y) → Id (tr-type-Ω p refl) refl
+  preserves-refl-tr-Ω : (p : x ＝ y) → tr-type-Ω p refl ＝ refl
   preserves-refl-tr-Ω refl = refl
 
   preserves-mul-tr-Ω :

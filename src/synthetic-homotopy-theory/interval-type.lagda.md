@@ -48,11 +48,11 @@ postulate
 
   compute-source-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
-    (q : dependent-identification P path-𝕀 u v) → Id (ind-𝕀 P u v q source-𝕀) u
+    (q : dependent-identification P path-𝕀 u v) → ind-𝕀 P u v q source-𝕀 ＝ u
 
   compute-target-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
-    (q : dependent-identification P path-𝕀 u v) → Id (ind-𝕀 P u v q target-𝕀) v
+    (q : dependent-identification P path-𝕀 u v) → ind-𝕀 P u v q target-𝕀 ＝ v
 
   compute-path-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
@@ -109,7 +109,7 @@ module _
       ( pair refl right-unit)
       ( λ u' → id-equiv)
       ( extensionality-Σ
-        ( λ {v'} α' q → Id (α ∙ q) α')
+        ( λ {v'} α' q → α ∙ q ＝ α')
         ( refl)
         ( right-unit)
         ( λ v' → id-equiv)
@@ -152,9 +152,9 @@ is-section-inv-ev-𝕀 (pair u (pair v q)) =
 
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
-  (p : x ＝ y) (q : Id (f x) (g x)) (r : Id (f y) (g y)) →
+  (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
   Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) →
-  Id (tr (λ x → Id (f x) (g x)) p q) r
+  Id (tr (λ x → f x ＝ g x) p q) r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
 is-retraction-inv-ev-𝕀 :

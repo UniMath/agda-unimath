@@ -283,12 +283,12 @@ module _
   pr2 unit-Subgroup = contains-unit-Subgroup G H
 
   left-unit-law-mul-Subgroup :
-    (x : type-group-Subgroup) → Id (mul-Subgroup unit-Subgroup x) x
+    (x : type-group-Subgroup) → mul-Subgroup unit-Subgroup x ＝ x
   left-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-unit-law-mul-Group G (pr1 x))
 
   right-unit-law-mul-Subgroup :
-    (x : type-group-Subgroup) → Id (mul-Subgroup x unit-Subgroup) x
+    (x : type-group-Subgroup) → mul-Subgroup x unit-Subgroup ＝ x
   right-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-unit-law-mul-Group G (pr1 x))
 

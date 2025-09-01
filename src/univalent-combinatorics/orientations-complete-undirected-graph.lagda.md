@@ -525,7 +525,7 @@ module _
   abstract
     preserves-id-equiv-orientation-complete-undirected-graph-equiv :
       (X : Type-With-Cardinality-ℕ l n) →
-      Id (orientation-complete-undirected-graph-equiv X X id-equiv) id-equiv
+      orientation-complete-undirected-graph-equiv X X id-equiv ＝ id-equiv
     preserves-id-equiv-orientation-complete-undirected-graph-equiv X =
       eq-htpy-equiv
         ( λ d →
@@ -1591,7 +1591,7 @@ module _
                 ( has-decidable-equality-count eX)
                 ( np'))
               ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
+    two-elements-transposition eX Y ＝ two-elements →
     is-decidable (Id (pr1 two-elements) i) →
     is-decidable (Id (pr1 two-elements) j) →
     is-decidable (Id (pr1 (pr2 two-elements)) i) →
@@ -1826,7 +1826,7 @@ module _
                 ( has-decidable-equality-count eX)
                 ( np'))
               ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
+    two-elements-transposition eX Y ＝ two-elements →
     is-decidable (Id (pr1 two-elements) i) →
     is-decidable (Id (pr1 two-elements) j) →
     is-decidable (Id (pr1 (pr2 two-elements)) i) →
@@ -2253,7 +2253,7 @@ module _
                   ( has-decidable-equality-count eX)
                   ( np'))
                 ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
+    two-elements-transposition eX Y ＝ two-elements →
     is-decidable (Id (pr1 two-elements) i) →
     is-decidable (Id (pr1 two-elements) j) →
     is-decidable (Id (pr1 (pr2 two-elements)) i) →

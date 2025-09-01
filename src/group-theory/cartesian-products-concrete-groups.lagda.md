@@ -151,13 +151,13 @@ module _
 
   left-unit-law-mul-product-Concrete-Group :
     (x : type-product-Concrete-Group) →
-    Id (mul-product-Concrete-Group unit-product-Concrete-Group x) x
+    mul-product-Concrete-Group unit-product-Concrete-Group x ＝ x
   left-unit-law-mul-product-Concrete-Group =
     left-unit-law-mul-∞-Group ∞-group-product-Concrete-Group
 
   right-unit-law-mul-product-Concrete-Group :
     (y : type-product-Concrete-Group) →
-    Id (mul-product-Concrete-Group y unit-product-Concrete-Group) y
+    mul-product-Concrete-Group y unit-product-Concrete-Group ＝ y
   right-unit-law-mul-product-Concrete-Group =
     right-unit-law-mul-∞-Group ∞-group-product-Concrete-Group
 

@@ -115,7 +115,7 @@ module _
 
   ap-add-Ring :
     {x y x' y' : type-Ring R} →
-    x ＝ x' → y ＝ y' → Id (add-Ring x y) (add-Ring x' y')
+    x ＝ x' → y ＝ y' → add-Ring x y ＝ add-Ring x' y'
   ap-add-Ring = ap-add-Ab (ab-Ring R)
 
   associative-add-Ring :
@@ -127,7 +127,7 @@ module _
     is-group-Semigroup (additive-semigroup-Ring R)
   is-group-additive-semigroup-Ring = is-group-Ab (ab-Ring R)
 
-  commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
+  commutative-add-Ring : (x y : type-Ring R) → add-Ring x y ＝ add-Ring y x
   commutative-add-Ring = commutative-add-Ab (ab-Ring R)
 
   interchange-add-add-Ring :
@@ -276,10 +276,10 @@ module _
   is-nonzero-ring-Prop : type-Ring R → Prop l
   is-nonzero-ring-Prop x = neg-Prop (is-zero-ring-Prop x)
 
-  left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
+  left-unit-law-add-Ring : (x : type-Ring R) → add-Ring R zero-Ring x ＝ x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
 
-  right-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R x zero-Ring) x
+  right-unit-law-add-Ring : (x : type-Ring R) → add-Ring R x zero-Ring ＝ x
   right-unit-law-add-Ring = right-unit-law-add-Ab (ab-Ring R)
 ```
 
@@ -368,7 +368,7 @@ module _
 
   ap-mul-Ring :
     {x x' y y' : type-Ring R} (p : x ＝ x') (q : y ＝ y') →
-    Id (mul-Ring x y) (mul-Ring x' y')
+    mul-Ring x y ＝ mul-Ring x' y'
   ap-mul-Ring p q = ap-binary mul-Ring p q
 
   associative-mul-Ring :
@@ -410,10 +410,10 @@ module _
   one-Ring : type-Ring R
   one-Ring = unit-Monoid multiplicative-monoid-Ring
 
-  left-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R one-Ring x) x
+  left-unit-law-mul-Ring : (x : type-Ring R) → mul-Ring R one-Ring x ＝ x
   left-unit-law-mul-Ring = left-unit-law-mul-Monoid multiplicative-monoid-Ring
 
-  right-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R x one-Ring) x
+  right-unit-law-mul-Ring : (x : type-Ring R) → mul-Ring R x one-Ring ＝ x
   right-unit-law-mul-Ring = right-unit-law-mul-Monoid multiplicative-monoid-Ring
 ```
 

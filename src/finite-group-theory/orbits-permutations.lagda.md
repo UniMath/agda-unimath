@@ -312,14 +312,14 @@ module _
               le-min-reporting)
       pred-first : ℕ
       pred-first = pr1 is-successor-first-point-min-repeating
-      equality-pred-first : Id first-point-min-repeating (succ-ℕ pred-first)
+      equality-pred-first : first-point-min-repeating ＝ succ-ℕ pred-first
       equality-pred-first = pr2 is-successor-first-point-min-repeating
       is-successor-second-point-min-repeating :
         is-successor-ℕ second-point-min-repeating
       is-successor-second-point-min-repeating = is-successor-is-nonzero-ℕ np
       pred-second : ℕ
       pred-second = pr1 is-successor-second-point-min-repeating
-      equality-pred-second : Id second-point-min-repeating (succ-ℕ pred-second)
+      equality-pred-second : second-point-min-repeating ＝ succ-ℕ pred-second
       equality-pred-second = pr2 is-successor-second-point-min-repeating
 
   has-finite-orbits-permutation' :
@@ -352,14 +352,14 @@ module _
             le-min-reporting)
     pred-first : ℕ
     pred-first = pr1 is-successor-first-point-min-repeating
-    equality-pred-first : Id first-point-min-repeating (succ-ℕ pred-first)
+    equality-pred-first : first-point-min-repeating ＝ succ-ℕ pred-first
     equality-pred-first = pr2 is-successor-first-point-min-repeating
     is-successor-second-point-min-repeating :
       is-successor-ℕ second-point-min-repeating
     is-successor-second-point-min-repeating = is-successor-is-nonzero-ℕ np
     pred-second : ℕ
     pred-second = pr1 is-successor-second-point-min-repeating
-    equality-pred-second : Id second-point-min-repeating (succ-ℕ pred-second)
+    equality-pred-second : second-point-min-repeating ＝ succ-ℕ pred-second
     equality-pred-second = pr2 is-successor-second-point-min-repeating
 
   has-finite-orbits-permutation :
@@ -621,7 +621,7 @@ module _
       cases-decidable-equality :
         (T1 T2 : equivalence-class same-orbits-permutation)
         (t1 : type-Type-With-Cardinality-ℕ n X) →
-        Id T1 (class same-orbits-permutation t1) →
+        T1 ＝ class same-orbits-permutation t1 →
         is-decidable
           ( is-in-equivalence-class same-orbits-permutation T2 t1) →
         is-decidable (Id T1 T2)
@@ -1409,7 +1409,7 @@ module _
       h'-inl :
         ( k : Fin (number-of-elements-count h))
         ( T : equivalence-class (same-orbits-permutation-count g)) →
-        Id (map-equiv-count h k) T →
+        map-equiv-count h k ＝ T →
         is-decidable
           ( is-in-equivalence-class (same-orbits-permutation-count g) T a) →
         is-decidable

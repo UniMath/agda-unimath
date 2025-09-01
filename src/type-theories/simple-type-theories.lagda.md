@@ -70,7 +70,7 @@ homotopies of sections of fibered systems.
     {l1 l2 l3 l4 : Level} {T : UU l1} {A : system l2 T} {S : T → UU l3}
     {B B' : fibered-system l4 S A} (α : B ＝ B') {f f' : (X : T) → S X}
     (g : section-system B f) (g' : section-system B' f') →
-    fibered-system l4 (λ t → Id (f t) (f' t)) A
+    fibered-system l4 (λ t → f t ＝ f' t) A
   fibered-system.element (Eq-fibered-system' {B = B} refl {f} g g') {X} p x =
     Id
       ( tr
@@ -96,7 +96,7 @@ homotopies of sections of fibered systems.
     {l1 l2 l3 l4 : Level}
     {T : UU l1} {A : system l2 T} {S : T → UU l3}
     {B B' B'' : fibered-system l4 S A} {α : B ＝ B'} {β : B' ＝ B''}
-    (γ : B ＝ B'') (δ : Id (α ∙ β) γ) {f f' f'' : (X : T) → S X}
+    (γ : B ＝ B'') (δ : α ∙ β ＝ γ) {f f' f'' : (X : T) → S X}
     {H : f ~ f'} {H' : f' ~ f''} {g : section-system B f}
     {g' : section-system B' f'} {g'' : section-system B'' f''}
     (K : htpy-section-system' α H g g')
@@ -129,7 +129,7 @@ homotopies of sections of fibered systems.
     {l1 l2 l3 l4 : Level}
     {T : UU l1} {A : system l2 T} {S : T → UU l3}
     {B B' : fibered-system l4 S A}
-    {α : B ＝ B'} (β : B' ＝ B) (γ : Id (inv α) β)
+    {α : B ＝ B'} (β : B' ＝ B) (γ : inv α ＝ β)
     {f f' : (X : T) → S X} {g : section-system B f}
     {g' : section-system B' f'} {H : f ~ f'} →
     htpy-section-system' α H g g' → htpy-section-system' β (inv-htpy H) g' g

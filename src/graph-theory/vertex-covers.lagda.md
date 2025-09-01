@@ -40,7 +40,7 @@ vertex-cover G =
       edge-Undirected-Graph G p →
         type-trunc-Prop
           ( Σ (vertex-Undirected-Graph G)
-            ( λ x → is-in-unordered-pair p x × Id (c x) (inr star))))
+            ( λ x → is-in-unordered-pair p x × c x ＝ inr star)))
 ```
 
 ## External links

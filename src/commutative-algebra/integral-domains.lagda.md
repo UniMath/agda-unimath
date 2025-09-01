@@ -147,7 +147,7 @@ module _
 
   commutative-add-Integral-Domain :
     (x y : type-Integral-Domain) →
-    Id (add-Integral-Domain x y) (add-Integral-Domain y x)
+    add-Integral-Domain x y ＝ add-Integral-Domain y x
   commutative-add-Integral-Domain = commutative-add-Ab ab-Integral-Domain
 
   interchange-add-add-Integral-Domain :
@@ -304,7 +304,7 @@ module _
 
   ap-mul-Integral-Domain :
     {x x' y y' : type-Integral-Domain} (p : x ＝ x') (q : y ＝ y') →
-    Id (mul-Integral-Domain x y) (mul-Integral-Domain x' y')
+    mul-Integral-Domain x y ＝ mul-Integral-Domain x' y'
   ap-mul-Integral-Domain p q = ap-binary mul-Integral-Domain p q
 
   associative-mul-Integral-Domain :

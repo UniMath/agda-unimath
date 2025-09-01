@@ -135,7 +135,7 @@ module _
 
   commutative-add-Finite-Field :
     (x y : type-Finite-Field) →
-    Id (add-Finite-Field x y) (add-Finite-Field y x)
+    add-Finite-Field x y ＝ add-Finite-Field y x
   commutative-add-Finite-Field = commutative-add-Ab ab-Finite-Field
 
   interchange-add-add-Finite-Field :
@@ -283,7 +283,7 @@ module _
 
   ap-mul-Finite-Field :
     {x x' y y' : type-Finite-Field} (p : x ＝ x') (q : y ＝ y') →
-    Id (mul-Finite-Field x y) (mul-Finite-Field x' y')
+    mul-Finite-Field x y ＝ mul-Finite-Field x' y'
   ap-mul-Finite-Field p q = ap-binary mul-Finite-Field p q
 
   associative-mul-Finite-Field :

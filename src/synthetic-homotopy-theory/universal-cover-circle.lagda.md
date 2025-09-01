@@ -99,7 +99,7 @@ abstract
   is-equiv-functor-free-dependent-loop-is-fiberwise-equiv
     (pair x l) {P} {Q} {f} is-equiv-f =
     is-equiv-map-Σ
-      ( λ q₀ → Id (tr Q l q₀) q₀)
+      ( λ q₀ → tr Q l q₀ ＝ q₀)
       ( is-equiv-f x)
       ( λ p₀ →
         is-equiv-comp
@@ -190,7 +190,7 @@ contraction-total-space :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (center : Σ A B) →
   ( x : A) → UU (l1 ⊔ l2)
 contraction-total-space {B = B} center x =
-  ( y : B x) → Id center (pair x y)
+  ( y : B x) → center ＝ pair x y
 
 path-total-path-fiber :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) →
@@ -199,9 +199,9 @@ path-total-path-fiber B x q = eq-pair-eq-fiber (inv q)
 
 tr-path-total-path-fiber :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
-  { y y' : B x} (q : y' ＝ y) (α : Id c (pair x y')) →
+  { y y' : B x} (q : y' ＝ y) (α : c ＝ pair x y') →
   Id
-    ( tr (λ z → Id c (pair x z)) q α)
+    ( tr (λ z → c ＝ pair x z) q α)
     ( α ∙ (inv (path-total-path-fiber B x q)))
 tr-path-total-path-fiber c x refl α = inv right-unit
 
@@ -235,7 +235,7 @@ equiv-contraction-total-space :
   ( x : A) → {F : UU l3} (e : F ≃ B x) →
   ( contraction-total-space c x) ≃ (contraction-total-space' c x e)
 equiv-contraction-total-space c x e =
-  equiv-precomp-Π e (λ y → Id c (pair x y))
+  equiv-precomp-Π e (λ y → c ＝ pair x y)
 
 tr-path-total-tr-coherence :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
@@ -243,7 +243,7 @@ tr-path-total-tr-coherence :
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ (map-equiv e)) →
   (y : F) (α : Id c (pair x (map-equiv e' (map-equiv f y)))) →
   Id
-    ( tr (λ z → Id c (pair x z)) (H y) α)
+    ( tr (λ z → c ＝ pair x z) (H y) α)
     ( α ∙ (inv (segment-Σ refl f e e' H y)))
 tr-path-total-tr-coherence c x f e e' H y α =
   tr-path-total-path-fiber c x (H y) α
@@ -320,7 +320,7 @@ map-dependent-identification-contraction-total-space'
             ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
             ( is-section-map-inv-is-equiv
               ( is-equiv-map-equiv
-                ( equiv-precomp-Π e' (λ y' → Id c (pair x y'))))
+                ( equiv-precomp-Π e' (λ y' → c ＝ pair x y')))
               ( h'))))))
 
 equiv-dependent-identification-contraction-total-space' :
@@ -349,7 +349,7 @@ equiv-dependent-identification-contraction-total-space'
           ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
           ( is-section-map-inv-is-equiv
             ( is-equiv-map-equiv
-              ( equiv-precomp-Π e' (λ y' → Id c (pair x y'))))
+              ( equiv-precomp-Π e' (λ y' → c ＝ pair x y')))
             ( h')))) ∘e
       ( ( equiv-concat
           ( inv
@@ -449,7 +449,7 @@ contraction-total-universal-cover-circle-data :
       ( h)
       ( h)) →
   ( t : Σ X (universal-cover-circle l dup-circle)) →
-  Id (center-total-universal-cover-circle l dup-circle) t
+  center-total-universal-cover-circle l dup-circle ＝ t
 contraction-total-universal-cover-circle-data
   {l1} l dup-circle h p (pair x y) =
   map-inv-is-equiv
@@ -577,7 +577,7 @@ point-universal-cover-circle l dup-circle =
 universal-cover-circle-eq :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : dependent-universal-property-circle l) →
-  ( x : X) → Id (base-free-loop l) x → universal-cover-circle l dup-circle x
+  ( x : X) → base-free-loop l ＝ x → universal-cover-circle l dup-circle x
 universal-cover-circle-eq l dup-circle .(base-free-loop l) refl =
   point-universal-cover-circle l dup-circle
 
@@ -595,7 +595,7 @@ equiv-universal-cover-circle :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : dependent-universal-property-circle l) →
   ( x : X) →
-  ( Id (base-free-loop l) x) ≃ (universal-cover-circle l dup-circle x)
+  ( base-free-loop l ＝ x) ≃ (universal-cover-circle l dup-circle x)
 equiv-universal-cover-circle l dup-circle x =
   pair
     ( universal-cover-circle-eq l dup-circle x)

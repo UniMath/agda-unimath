@@ -93,7 +93,7 @@ module _
 
   commutative-add-matrix-Ring :
     {m n : ℕ} (A B : matrix-Ring R m n) →
-    Id (add-matrix-Ring R A B) (add-matrix-Ring R B A)
+    add-matrix-Ring R A B ＝ add-matrix-Ring R B A
   commutative-add-matrix-Ring empty-tuple empty-tuple = refl
   commutative-add-matrix-Ring (v ∷ A) (w ∷ B) =
     ap-binary _∷_

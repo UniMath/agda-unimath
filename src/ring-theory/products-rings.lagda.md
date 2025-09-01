@@ -56,12 +56,12 @@ module _
   pr2 (neg-product-Ring (x , y)) = neg-Ring R2 y
 
   left-unit-law-add-product-Ring :
-    (x : type-product-Ring) → Id (add-product-Ring zero-product-Ring x) x
+    (x : type-product-Ring) → add-product-Ring zero-product-Ring x ＝ x
   left-unit-law-add-product-Ring (x , y) =
     eq-pair (left-unit-law-add-Ring R1 x) (left-unit-law-add-Ring R2 y)
 
   right-unit-law-add-product-Ring :
-    (x : type-product-Ring) → Id (add-product-Ring x zero-product-Ring) x
+    (x : type-product-Ring) → add-product-Ring x zero-product-Ring ＝ x
   right-unit-law-add-product-Ring (x , y) =
     eq-pair (right-unit-law-add-Ring R1 x) (right-unit-law-add-Ring R2 y)
 
@@ -88,7 +88,7 @@ module _
       ( associative-add-Ring R2 y1 y2 y3)
 
   commutative-add-product-Ring :
-    (x y : type-product-Ring) → Id (add-product-Ring x y) (add-product-Ring y x)
+    (x y : type-product-Ring) → add-product-Ring x y ＝ add-product-Ring y x
   commutative-add-product-Ring (x1 , y1) (x2 , y2) =
     eq-pair
       ( commutative-add-Ring R1 x1 x2)
@@ -113,12 +113,12 @@ module _
       ( associative-mul-Ring R2 y1 y2 y3)
 
   left-unit-law-mul-product-Ring :
-    (x : type-product-Ring) → Id (mul-product-Ring one-product-Ring x) x
+    (x : type-product-Ring) → mul-product-Ring one-product-Ring x ＝ x
   left-unit-law-mul-product-Ring (x , y) =
     eq-pair (left-unit-law-mul-Ring R1 x) (left-unit-law-mul-Ring R2 y)
 
   right-unit-law-mul-product-Ring :
-    (x : type-product-Ring) → Id (mul-product-Ring x one-product-Ring) x
+    (x : type-product-Ring) → mul-product-Ring x one-product-Ring ＝ x
   right-unit-law-mul-product-Ring (x , y) =
     eq-pair (right-unit-law-mul-Ring R1 x) (right-unit-law-mul-Ring R2 y)
 

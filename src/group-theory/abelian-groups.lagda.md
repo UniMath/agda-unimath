@@ -168,7 +168,7 @@ module _
     (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
   right-inverse-law-add-Ab = right-inverse-law-mul-Group group-Ab
 
-  commutative-add-Ab : (x y : type-Ab) → Id (add-Ab x y) (add-Ab y x)
+  commutative-add-Ab : (x y : type-Ab) → add-Ab x y ＝ add-Ab y x
   commutative-add-Ab = pr2 A
 
   interchange-add-add-Ab :
@@ -439,7 +439,7 @@ module _
 
   transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+    add-Ab A x y ＝ z → Id x (add-Ab A z (neg-Ab A y))
   transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
 
   inv-transpose-eq-add-Ab :
@@ -449,12 +449,12 @@ module _
 
   transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+    add-Ab A x y ＝ z → Id y (add-Ab A (neg-Ab A x) z)
   transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
 
   inv-transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id y (add-Ab A (neg-Ab A x) z) → Id (add-Ab A x y) z
+    Id y (add-Ab A (neg-Ab A x) z) → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
 
   double-transpose-eq-add-Ab :

@@ -169,7 +169,7 @@ is-lower-bound-pisano-period k =
 
 cases-is-repetition-of-zero-pisano-period :
   (k x y : ℕ) → Id (pr1 (is-ordered-repetition-pisano-period k)) x →
-  Id (pisano-period k) y → is-zero-ℕ x
+  pisano-period k ＝ y → is-zero-ℕ x
 cases-is-repetition-of-zero-pisano-period k zero-ℕ y p q = refl
 cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) zero-ℕ p q =
   ex-falso

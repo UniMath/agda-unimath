@@ -158,7 +158,7 @@ module _
               ( ( equiv-right-swap-Σ) ∘e
                 ( ( associative-Σ
                     ( ℤ ≃ ℤ)
-                    ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
+                    ( λ e → map-equiv e zero-ℤ ＝ zero-ℤ)
                     ( λ e →
                       ( map-equiv (pr1 e) ∘ succ-ℤ) ~
                       ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e

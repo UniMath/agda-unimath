@@ -99,12 +99,12 @@ module _
     associative-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   left-unit-law-add-Π-Finite-Ring :
-    (x : type-Π-Finite-Ring) → Id (add-Π-Finite-Ring zero-Π-Finite-Ring x) x
+    (x : type-Π-Finite-Ring) → add-Π-Finite-Ring zero-Π-Finite-Ring x ＝ x
   left-unit-law-add-Π-Finite-Ring =
     left-unit-law-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   right-unit-law-add-Π-Finite-Ring :
-    (x : type-Π-Finite-Ring) → Id (add-Π-Finite-Ring x zero-Π-Finite-Ring) x
+    (x : type-Π-Finite-Ring) → add-Π-Finite-Ring x zero-Π-Finite-Ring ＝ x
   right-unit-law-add-Π-Finite-Ring =
     right-unit-law-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
@@ -122,7 +122,7 @@ module _
 
   commutative-add-Π-Finite-Ring :
     (x y : type-Π-Finite-Ring) →
-    Id (add-Π-Finite-Ring x y) (add-Π-Finite-Ring y x)
+    add-Π-Finite-Ring x y ＝ add-Π-Finite-Ring y x
   commutative-add-Π-Finite-Ring =
     commutative-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
@@ -142,12 +142,12 @@ module _
     associative-mul-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   left-unit-law-mul-Π-Finite-Ring :
-    (x : type-Π-Finite-Ring) → Id (mul-Π-Finite-Ring one-Π-Finite-Ring x) x
+    (x : type-Π-Finite-Ring) → mul-Π-Finite-Ring one-Π-Finite-Ring x ＝ x
   left-unit-law-mul-Π-Finite-Ring =
     left-unit-law-mul-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   right-unit-law-mul-Π-Finite-Ring :
-    (x : type-Π-Finite-Ring) → Id (mul-Π-Finite-Ring x one-Π-Finite-Ring) x
+    (x : type-Π-Finite-Ring) → mul-Π-Finite-Ring x one-Π-Finite-Ring ＝ x
   right-unit-law-mul-Π-Finite-Ring =
     right-unit-law-mul-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 

@@ -185,7 +185,7 @@ module _
 
   eq-subgroup-ab-eq-ab :
     {x y : type-ab-Subgroup-Ab} →
-    Id (map-inclusion-Subgroup-Ab x) (map-inclusion-Subgroup-Ab y) →
+    map-inclusion-Subgroup-Ab x ＝ map-inclusion-Subgroup-Ab y →
     x ＝ y
   eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
@@ -211,13 +211,13 @@ module _
 
   left-unit-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id (add-ab-Subgroup-Ab zero-ab-Subgroup-Ab x) x
+    add-ab-Subgroup-Ab zero-ab-Subgroup-Ab x ＝ x
   left-unit-law-add-Subgroup-Ab =
     left-unit-law-mul-Subgroup (group-Ab A) B
 
   right-unit-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id (add-ab-Subgroup-Ab x zero-ab-Subgroup-Ab) x
+    add-ab-Subgroup-Ab x zero-ab-Subgroup-Ab ＝ x
   right-unit-law-add-Subgroup-Ab =
     right-unit-law-mul-Subgroup (group-Ab A) B
 
@@ -239,7 +239,7 @@ module _
 
   commutative-add-Subgroup-Ab :
     ( x y : type-ab-Subgroup-Ab) →
-    Id ( add-ab-Subgroup-Ab x y) (add-ab-Subgroup-Ab y x)
+    add-ab-Subgroup-Ab x y ＝ add-ab-Subgroup-Ab y x
   commutative-add-Subgroup-Ab x y =
     eq-subgroup-ab-eq-ab (commutative-add-Ab A (pr1 x) (pr1 y))
 

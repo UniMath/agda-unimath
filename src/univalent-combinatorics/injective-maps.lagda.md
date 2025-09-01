@@ -29,7 +29,7 @@ Injectiveness in the context of finite types enjoys further properties.
 ```agda
 is-decidable-is-injective-is-finite' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-finite A → is-finite B → is-decidable ((x y : A) → Id (f x) (f y) → x ＝ y)
+  is-finite A → is-finite B → is-decidable ((x y : A) → f x ＝ f y → x ＝ y)
 is-decidable-is-injective-is-finite' f HA HB =
   is-decidable-Π-is-finite HA
     ( λ x →

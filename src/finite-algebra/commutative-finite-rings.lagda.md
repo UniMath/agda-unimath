@@ -168,7 +168,7 @@ module _
 
   commutative-add-Finite-Commutative-Ring :
     (x y : type-Finite-Commutative-Ring) →
-    Id (add-Finite-Commutative-Ring x y) (add-Finite-Commutative-Ring y x)
+    add-Finite-Commutative-Ring x y ＝ add-Finite-Commutative-Ring y x
   commutative-add-Finite-Commutative-Ring =
     commutative-add-Ab ab-Finite-Commutative-Ring
 
@@ -348,7 +348,7 @@ module _
 
   ap-mul-Finite-Commutative-Ring :
     {x x' y y' : type-Finite-Commutative-Ring} (p : x ＝ x') (q : y ＝ y') →
-    Id (mul-Finite-Commutative-Ring x y) (mul-Finite-Commutative-Ring x' y')
+    mul-Finite-Commutative-Ring x y ＝ mul-Finite-Commutative-Ring x' y'
   ap-mul-Finite-Commutative-Ring p q = ap-binary mul-Finite-Commutative-Ring p q
 
   associative-mul-Finite-Commutative-Ring :

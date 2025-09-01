@@ -100,13 +100,13 @@ module _
 
   left-unit-law-mul-product-∞-Group :
     (x : type-product-∞-Group) →
-    Id (mul-product-∞-Group unit-product-∞-Group x) x
+    mul-product-∞-Group unit-product-∞-Group x ＝ x
   left-unit-law-mul-product-∞-Group =
     left-unit-law-mul-Ω classifying-pointed-type-product-∞-Group
 
   right-unit-law-mul-product-∞-Group :
     (y : type-product-∞-Group) →
-    Id (mul-product-∞-Group y unit-product-∞-Group) y
+    mul-product-∞-Group y unit-product-∞-Group ＝ y
   right-unit-law-mul-product-∞-Group =
     right-unit-law-mul-Ω classifying-pointed-type-product-∞-Group
 

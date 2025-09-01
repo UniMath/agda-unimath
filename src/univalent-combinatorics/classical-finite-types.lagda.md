@@ -57,7 +57,7 @@ nat-classical-Fin k = pr1
 
 ```agda
 Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
-Eq-classical-Fin k x y = Id (nat-classical-Fin k x) (nat-classical-Fin k y)
+Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
 
 eq-succ-classical-Fin :
   (k : ℕ) (x y : classical-Fin k) → Id {A = classical-Fin k} x y →

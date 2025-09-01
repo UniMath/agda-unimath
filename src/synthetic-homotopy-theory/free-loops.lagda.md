@@ -122,7 +122,7 @@ module _
 
   Eq-free-dependent-loop : (p p' : free-dependent-loop α P) → UU l2
   Eq-free-dependent-loop (pair y p) p' =
-    Σ ( Id y (base-free-dependent-loop α P p'))
+    Σ ( y ＝ base-free-dependent-loop α P p')
       ( λ q →
         ( p ∙ q) ＝
         ( ( ap (tr P (loop-free-loop α)) q) ∙

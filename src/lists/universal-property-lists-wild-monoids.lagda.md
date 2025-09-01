@@ -144,7 +144,7 @@ module _
     mul-Wild-Monoid M (f u) (map-elim-list-Wild-Monoid x)
 
   preserves-unit-map-elim-list-Wild-Monoid :
-    Id (map-elim-list-Wild-Monoid nil) (unit-Wild-Monoid M)
+    map-elim-list-Wild-Monoid nil ＝ unit-Wild-Monoid M
   preserves-unit-map-elim-list-Wild-Monoid = refl
 
   pointed-map-elim-list-Wild-Monoid :
@@ -340,7 +340,7 @@ htpy-elim-list-Wild-Monoid {X = X} M g h H =
          ( α (concat-list x y) ∙ pr2 (pr1 h) x y)
   β nil y = {!!}
   β (cons x x₁) y = {!!}
-  γ : Id (pr2 g) (α nil ∙ pr2 h)
+  γ : pr2 g ＝ α nil ∙ pr2 h
   γ =
     ( inv right-unit) ∙
     ( ( left-whisker-concat (pr2 g) (inv (left-inv (pr2 h)))) ∙

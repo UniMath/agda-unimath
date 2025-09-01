@@ -117,7 +117,7 @@ module _
 
   commutative-add-product-Commutative-Ring :
     (x y : type-product-Commutative-Ring) →
-    Id (add-product-Commutative-Ring x y) (add-product-Commutative-Ring y x)
+    add-product-Commutative-Ring x y ＝ add-product-Commutative-Ring y x
   commutative-add-product-Commutative-Ring =
     commutative-add-product-Ring
       ( ring-Commutative-Ring R1)
@@ -150,7 +150,7 @@ module _
 
   left-unit-law-mul-product-Commutative-Ring :
     (x : type-product-Commutative-Ring) →
-    Id (mul-product-Commutative-Ring one-product-Commutative-Ring x) x
+    mul-product-Commutative-Ring one-product-Commutative-Ring x ＝ x
   left-unit-law-mul-product-Commutative-Ring =
     left-unit-law-mul-product-Ring
       ( ring-Commutative-Ring R1)
@@ -158,7 +158,7 @@ module _
 
   right-unit-law-mul-product-Commutative-Ring :
     (x : type-product-Commutative-Ring) →
-    Id (mul-product-Commutative-Ring x one-product-Commutative-Ring) x
+    mul-product-Commutative-Ring x one-product-Commutative-Ring ＝ x
   right-unit-law-mul-product-Commutative-Ring =
     right-unit-law-mul-product-Ring
       ( ring-Commutative-Ring R1)

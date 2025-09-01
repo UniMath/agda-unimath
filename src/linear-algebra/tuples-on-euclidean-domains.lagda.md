@@ -148,7 +148,7 @@ module _
 
   commutative-add-tuple-Euclidean-Domain :
     {n : ℕ} (v w : tuple-Euclidean-Domain R n) →
-    Id (add-tuple-Euclidean-Domain R v w) (add-tuple-Euclidean-Domain R w v)
+    add-tuple-Euclidean-Domain R v w ＝ add-tuple-Euclidean-Domain R w v
   commutative-add-tuple-Euclidean-Domain =
     commutative-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)

@@ -134,7 +134,7 @@ module _
 
   commutative-add-tuple-Ring :
     {n : ℕ} (v w : tuple-Ring R n) →
-    Id (add-tuple-Ring R v w) (add-tuple-Ring R w v)
+    add-tuple-Ring R v w ＝ add-tuple-Ring R w v
   commutative-add-tuple-Ring empty-tuple empty-tuple = refl
   commutative-add-tuple-Ring (x ∷ v) (y ∷ w) =
     ap-binary _∷_

@@ -52,12 +52,12 @@ associative-concat-list (cons a x) y z =
 
 left-unit-law-concat-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (concat-list nil x) x
+  concat-list nil x ＝ x
 left-unit-law-concat-list x = refl
 
 right-unit-law-concat-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (concat-list x nil) x
+  concat-list x nil ＝ x
 right-unit-law-concat-list nil = refl
 right-unit-law-concat-list (cons a x) =
   ap (cons a) (right-unit-law-concat-list x)

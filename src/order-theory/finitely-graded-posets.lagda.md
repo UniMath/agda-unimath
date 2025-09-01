@@ -490,7 +490,7 @@ module _
       is-set-type-Set face-set-Finitely-Graded-Subposet
 
     eq-face-Finitely-Graded-Subposet :
-      (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → x ＝ y
+      (x y : face-Finitely-Graded-Subposet) → pr1 x ＝ pr1 y → x ＝ y
     eq-face-Finitely-Graded-Subposet x y = eq-type-subtype S
 
     emb-face-Finitely-Graded-Subposet :

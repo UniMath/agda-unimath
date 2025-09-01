@@ -174,7 +174,7 @@ module _
 
     preserves-id-equiv-invertible-action-D-equiv :
       (n : ℕ) (X : Type-With-Cardinality-ℕ l1 n) →
-      Id (invertible-action-D-equiv n X X id-equiv) id-equiv
+      invertible-action-D-equiv n X X id-equiv ＝ id-equiv
     preserves-id-equiv-invertible-action-D-equiv n =
       compute-id-equiv-action-equiv-family-over-subuniverse
         ( mere-equiv-Prop (Fin n))
