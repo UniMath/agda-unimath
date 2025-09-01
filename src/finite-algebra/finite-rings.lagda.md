@@ -139,8 +139,8 @@ module _
 
   associative-add-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    ( add-Finite-Ring (add-Finite-Ring x y) z) ＝
-    ( add-Finite-Ring x (add-Finite-Ring y z))
+    add-Finite-Ring (add-Finite-Ring x y) z ＝
+    add-Finite-Ring x (add-Finite-Ring y z)
   associative-add-Finite-Ring = associative-add-Ring (ring-Finite-Ring R)
 
   is-group-additive-semigroup-Finite-Ring :

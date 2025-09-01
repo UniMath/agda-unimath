@@ -152,8 +152,8 @@ module _
 
   associative-add-Finite-Commutative-Ring :
     (x y z : type-Finite-Commutative-Ring) →
-    ( add-Finite-Commutative-Ring (add-Finite-Commutative-Ring x y) z) ＝
-    ( add-Finite-Commutative-Ring x (add-Finite-Commutative-Ring y z))
+    add-Finite-Commutative-Ring (add-Finite-Commutative-Ring x y) z ＝
+    add-Finite-Commutative-Ring x (add-Finite-Commutative-Ring y z)
   associative-add-Finite-Commutative-Ring =
     associative-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
@@ -366,19 +366,19 @@ module _
 
   left-distributive-mul-add-Finite-Commutative-Ring :
     (x y z : type-Finite-Commutative-Ring) →
-    ( mul-Finite-Commutative-Ring x (add-Finite-Commutative-Ring y z)) ＝
-    ( add-Finite-Commutative-Ring
+    mul-Finite-Commutative-Ring x (add-Finite-Commutative-Ring y z) ＝
+    add-Finite-Commutative-Ring
       ( mul-Finite-Commutative-Ring x y)
-      ( mul-Finite-Commutative-Ring x z))
+      ( mul-Finite-Commutative-Ring x z)
   left-distributive-mul-add-Finite-Commutative-Ring =
     left-distributive-mul-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   right-distributive-mul-add-Finite-Commutative-Ring :
     (x y z : type-Finite-Commutative-Ring) →
-    ( mul-Finite-Commutative-Ring (add-Finite-Commutative-Ring x y) z) ＝
-    ( add-Finite-Commutative-Ring
+    mul-Finite-Commutative-Ring (add-Finite-Commutative-Ring x y) z ＝
+    add-Finite-Commutative-Ring
       ( mul-Finite-Commutative-Ring x z)
-      ( mul-Finite-Commutative-Ring y z))
+      ( mul-Finite-Commutative-Ring y z)
   right-distributive-mul-add-Finite-Commutative-Ring =
     right-distributive-mul-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 

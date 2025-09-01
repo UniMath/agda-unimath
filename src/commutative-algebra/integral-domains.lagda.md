@@ -321,20 +321,16 @@ module _
 
   left-distributive-mul-add-Integral-Domain :
     (x y z : type-Integral-Domain) →
-    ( mul-Integral-Domain x (add-Integral-Domain y z)) ＝
-    ( add-Integral-Domain
-      ( mul-Integral-Domain x y)
-      ( mul-Integral-Domain x z))
+    mul-Integral-Domain x (add-Integral-Domain y z) ＝
+    add-Integral-Domain (mul-Integral-Domain x y) (mul-Integral-Domain x z)
   left-distributive-mul-add-Integral-Domain =
     left-distributive-mul-add-Commutative-Ring
       commutative-ring-Integral-Domain
 
   right-distributive-mul-add-Integral-Domain :
     (x y z : type-Integral-Domain) →
-    ( mul-Integral-Domain (add-Integral-Domain x y) z) ＝
-    ( add-Integral-Domain
-      ( mul-Integral-Domain x z)
-      ( mul-Integral-Domain y z))
+    mul-Integral-Domain (add-Integral-Domain x y) z ＝
+    add-Integral-Domain (mul-Integral-Domain x z) (mul-Integral-Domain y z)
   right-distributive-mul-add-Integral-Domain =
     right-distributive-mul-add-Commutative-Ring
       commutative-ring-Integral-Domain

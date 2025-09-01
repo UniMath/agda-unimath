@@ -120,16 +120,12 @@ module _
 
   associative-add-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Euclidean-Domain R n) →
-    ( add-fin-sequence-type-Euclidean-Domain
-      ( R)
-      ( n)
+    add-fin-sequence-type-Euclidean-Domain R n
       ( add-fin-sequence-type-Euclidean-Domain R n v1 v2)
-      ( v3)) ＝
-    ( add-fin-sequence-type-Euclidean-Domain
-      ( R)
-      ( n)
+      ( v3) ＝
+    add-fin-sequence-type-Euclidean-Domain R n
       ( v1)
-      ( add-fin-sequence-type-Euclidean-Domain R n v2 v3))
+      ( add-fin-sequence-type-Euclidean-Domain R n v2 v3)
   associative-add-fin-sequence-type-Euclidean-Domain =
     associative-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)

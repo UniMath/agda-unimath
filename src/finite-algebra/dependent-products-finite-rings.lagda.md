@@ -92,8 +92,8 @@ module _
 
   associative-add-Π-Finite-Ring :
     (x y z : type-Π-Finite-Ring) →
-    ( add-Π-Finite-Ring (add-Π-Finite-Ring x y) z) ＝
-    ( add-Π-Finite-Ring x (add-Π-Finite-Ring y z))
+    add-Π-Finite-Ring (add-Π-Finite-Ring x y) z ＝
+    add-Π-Finite-Ring x (add-Π-Finite-Ring y z)
   associative-add-Π-Finite-Ring =
     associative-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
@@ -160,8 +160,8 @@ module _
 
   right-distributive-mul-add-Π-Finite-Ring :
     (f g h : type-Π-Finite-Ring) →
-    ( mul-Π-Finite-Ring (add-Π-Finite-Ring f g) h) ＝
-    ( add-Π-Finite-Ring (mul-Π-Finite-Ring f h) (mul-Π-Finite-Ring g h))
+    mul-Π-Finite-Ring (add-Π-Finite-Ring f g) h ＝
+    add-Π-Finite-Ring (mul-Π-Finite-Ring f h) (mul-Π-Finite-Ring g h)
   right-distributive-mul-add-Π-Finite-Ring =
     right-distributive-mul-add-Π-Ring
       ( type-Finite-Type I)

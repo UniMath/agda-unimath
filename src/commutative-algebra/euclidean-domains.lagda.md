@@ -352,20 +352,16 @@ module _
 
   left-distributive-mul-add-Euclidean-Domain :
     (x y z : type-Euclidean-Domain) →
-    ( mul-Euclidean-Domain x (add-Euclidean-Domain y z)) ＝
-    ( add-Euclidean-Domain
-      ( mul-Euclidean-Domain x y)
-      ( mul-Euclidean-Domain x z))
+    mul-Euclidean-Domain x (add-Euclidean-Domain y z) ＝
+    add-Euclidean-Domain (mul-Euclidean-Domain x y) (mul-Euclidean-Domain x z)
   left-distributive-mul-add-Euclidean-Domain =
     left-distributive-mul-add-Integral-Domain
       integral-domain-Euclidean-Domain
 
   right-distributive-mul-add-Euclidean-Domain :
     (x y z : type-Euclidean-Domain) →
-    ( mul-Euclidean-Domain (add-Euclidean-Domain x y) z) ＝
-    ( add-Euclidean-Domain
-      ( mul-Euclidean-Domain x z)
-      ( mul-Euclidean-Domain y z))
+    mul-Euclidean-Domain (add-Euclidean-Domain x y) z ＝
+    add-Euclidean-Domain (mul-Euclidean-Domain x z) (mul-Euclidean-Domain y z)
   right-distributive-mul-add-Euclidean-Domain =
     right-distributive-mul-add-Integral-Domain
       integral-domain-Euclidean-Domain

@@ -151,10 +151,10 @@ module _
 
   left-distributive-mul-add-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    ( mul-product-Finite-Ring x (add-product-Finite-Ring y z)) ＝
-    ( add-product-Finite-Ring
+    mul-product-Finite-Ring x (add-product-Finite-Ring y z) ＝
+    add-product-Finite-Ring
       ( mul-product-Finite-Ring x y)
-      ( mul-product-Finite-Ring x z))
+      ( mul-product-Finite-Ring x z)
   left-distributive-mul-add-product-Finite-Ring =
     left-distributive-mul-add-product-Ring
       ( ring-Finite-Ring R1)
@@ -162,10 +162,10 @@ module _
 
   right-distributive-mul-add-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    ( mul-product-Finite-Ring (add-product-Finite-Ring x y) z) ＝
-    ( add-product-Finite-Ring
+    mul-product-Finite-Ring (add-product-Finite-Ring x y) z ＝
+    add-product-Finite-Ring
       ( mul-product-Finite-Ring x z)
-      ( mul-product-Finite-Ring y z))
+      ( mul-product-Finite-Ring y z)
   right-distributive-mul-add-product-Finite-Ring =
     right-distributive-mul-add-product-Ring
       ( ring-Finite-Ring R1)

@@ -120,8 +120,8 @@ module _
 
   associative-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( add-Finite-Field (add-Finite-Field x y) z) ＝
-    ( add-Finite-Field x (add-Finite-Field y z))
+    add-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field x (add-Finite-Field y z)
   associative-add-Finite-Field =
     associative-add-Finite-Ring finite-ring-Finite-Field
 
@@ -300,19 +300,15 @@ module _
 
   left-distributive-mul-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( mul-Finite-Field x (add-Finite-Field y z)) ＝
-    ( add-Finite-Field
-      ( mul-Finite-Field x y)
-      ( mul-Finite-Field x z))
+    mul-Finite-Field x (add-Finite-Field y z) ＝
+    add-Finite-Field (mul-Finite-Field x y) (mul-Finite-Field x z)
   left-distributive-mul-add-Finite-Field =
     left-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 
   right-distributive-mul-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( mul-Finite-Field (add-Finite-Field x y) z) ＝
-    ( add-Finite-Field
-      ( mul-Finite-Field x z)
-      ( mul-Finite-Field y z))
+    mul-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field (mul-Finite-Field x z) (mul-Finite-Field y z)
   right-distributive-mul-add-Finite-Field =
     right-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 

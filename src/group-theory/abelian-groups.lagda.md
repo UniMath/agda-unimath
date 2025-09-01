@@ -195,8 +195,7 @@ module _
     ( associative-add-Ab b a c)
 
   distributive-neg-add-Ab :
-    (x y : type-Ab) →
-    neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
+    (x y : type-Ab) → neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
   distributive-neg-add-Ab x y =
     ( distributive-inv-mul-Group group-Ab) ∙
     ( commutative-add-Ab (neg-Ab y) (neg-Ab x))

@@ -162,10 +162,10 @@ module _
 
   left-distributive-mul-add-product-Commutative-Ring :
     (x y z : type-product-Commutative-Ring) →
-    ( mul-product-Commutative-Ring x (add-product-Commutative-Ring y z)) ＝
-    ( add-product-Commutative-Ring
+    mul-product-Commutative-Ring x (add-product-Commutative-Ring y z) ＝
+    add-product-Commutative-Ring
       ( mul-product-Commutative-Ring x y)
-      ( mul-product-Commutative-Ring x z))
+      ( mul-product-Commutative-Ring x z)
   left-distributive-mul-add-product-Commutative-Ring =
     left-distributive-mul-add-product-Ring
       ( ring-Commutative-Ring R1)
@@ -173,10 +173,10 @@ module _
 
   right-distributive-mul-add-product-Commutative-Ring :
     (x y z : type-product-Commutative-Ring) →
-    ( mul-product-Commutative-Ring (add-product-Commutative-Ring x y) z) ＝
-    ( add-product-Commutative-Ring
+    mul-product-Commutative-Ring (add-product-Commutative-Ring x y) z ＝
+    add-product-Commutative-Ring
       ( mul-product-Commutative-Ring x z)
-      ( mul-product-Commutative-Ring y z))
+      ( mul-product-Commutative-Ring y z)
   right-distributive-mul-add-product-Commutative-Ring =
     right-distributive-mul-add-product-Ring
       ( ring-Commutative-Ring R1)
