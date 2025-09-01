@@ -225,7 +225,7 @@ is-equiv-Eq-eq-list l l' =
     ( is-retraction-eq-Eq-list l l')
 
 equiv-Eq-list :
-  {l1 : Level} {A : UU l1} (l l' : list A) → Id l l' ≃ Eq-list l l'
+  {l1 : Level} {A : UU l1} (l l' : list A) → (l ＝ l') ≃ Eq-list l l'
 equiv-Eq-list l l' =
   pair (Eq-eq-list l l') (is-equiv-Eq-eq-list l l')
 

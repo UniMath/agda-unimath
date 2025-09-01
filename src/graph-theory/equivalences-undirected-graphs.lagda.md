@@ -231,7 +231,7 @@ module _
 
   extensionality-equiv-Undirected-Graph :
     (f g : equiv-Undirected-Graph G H) →
-    Id f g ≃ htpy-equiv-Undirected-Graph f g
+    (f ＝ g) ≃ htpy-equiv-Undirected-Graph f g
   pr1 (extensionality-equiv-Undirected-Graph f g) =
     htpy-eq-equiv-Undirected-Graph f g
   pr2 (extensionality-equiv-Undirected-Graph f g) =
@@ -272,7 +272,7 @@ module _
       ( equiv-eq-Undirected-Graph)
 
   extensionality-Undirected-Graph :
-    (H : Undirected-Graph l1 l2) → Id G H ≃ equiv-Undirected-Graph G H
+    (H : Undirected-Graph l1 l2) → (G ＝ H) ≃ equiv-Undirected-Graph G H
   pr1 (extensionality-Undirected-Graph H) = equiv-eq-Undirected-Graph H
   pr2 (extensionality-Undirected-Graph H) = is-equiv-equiv-eq-Undirected-Graph H
 

@@ -40,7 +40,7 @@ is-large-category-Semigroup G =
   fundamental-theorem-id (is-torsorial-iso-Semigroup G) (iso-eq-Semigroup G)
 
 extensionality-Semigroup :
-  {l : Level} (G H : Semigroup l) → Id G H ≃ iso-Semigroup G H
+  {l : Level} (G H : Semigroup l) → (G ＝ H) ≃ iso-Semigroup G H
 pr1 (extensionality-Semigroup G H) = iso-eq-Semigroup G H
 pr2 (extensionality-Semigroup G H) = is-large-category-Semigroup G H
 

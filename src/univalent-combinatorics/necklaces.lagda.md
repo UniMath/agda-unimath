@@ -111,7 +111,7 @@ module _
   where
 
   extensionality-necklace :
-    (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
+    (N1 N2 : necklace l m n) → (N1 ＝ N2) ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =
     extensionality-Σ
       ( λ {X} f e →

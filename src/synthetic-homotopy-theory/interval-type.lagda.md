@@ -94,7 +94,7 @@ module _
               ( pr2 (pr2 y))
               ( β)))
 
-  extensionality-Data-𝕀 : (x y : Data-𝕀 P) → Id x y ≃ Eq-Data-𝕀 x y
+  extensionality-Data-𝕀 : (x y : Data-𝕀 P) → (x ＝ y) ≃ Eq-Data-𝕀 x y
   extensionality-Data-𝕀 (pair u (pair v α)) =
     extensionality-Σ
       ( λ {u'} vα' p →

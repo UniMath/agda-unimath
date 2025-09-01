@@ -211,7 +211,7 @@ module _
       ( equiv-eq-Cyclic-Type k X)
 
   extensionality-Cyclic-Type :
-    (Y : Cyclic-Type l k) → Id X Y ≃ equiv-Cyclic-Type k X Y
+    (Y : Cyclic-Type l k) → (X ＝ Y) ≃ equiv-Cyclic-Type k X Y
   pr1 (extensionality-Cyclic-Type Y) = equiv-eq-Cyclic-Type k X Y
   pr2 (extensionality-Cyclic-Type Y) = is-equiv-equiv-eq-Cyclic-Type Y
 

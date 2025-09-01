@@ -154,7 +154,7 @@ module _
       ( is-section-eq-Eq-tuple n u v)
       ( is-retraction-eq-Eq-tuple n u v)
 
-  extensionality-tuple : (n : ℕ) → (u v : tuple A n) → Id u v ≃ Eq-tuple n u v
+  extensionality-tuple : (n : ℕ) → (u v : tuple A n) → (u ＝ v) ≃ Eq-tuple n u v
   extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
 ```
 

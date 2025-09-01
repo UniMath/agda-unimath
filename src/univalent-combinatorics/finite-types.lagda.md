@@ -621,7 +621,7 @@ id-equiv-Finite-Type : {l : Level} (X : Finite-Type l) → equiv-Finite-Type X X
 id-equiv-Finite-Type X = id-equiv
 
 extensionality-Finite-Type :
-  {l : Level} (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
+  {l : Level} (X Y : Finite-Type l) → (X ＝ Y) ≃ equiv-Finite-Type X Y
 extensionality-Finite-Type = extensionality-subuniverse is-finite-Prop
 
 is-torsorial-equiv-Finite-Type :
@@ -657,7 +657,7 @@ id-equiv-fam-Finite-Type Y x = id-equiv
 
 extensionality-fam-Finite-Type :
   {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) →
-  Id Y Z ≃ equiv-fam-Finite-Type Y Z
+  (Y ＝ Z) ≃ equiv-fam-Finite-Type Y Z
 extensionality-fam-Finite-Type = extensionality-fam-subuniverse is-finite-Prop
 ```
 
@@ -706,7 +706,7 @@ eq-equiv-Type-With-Cardinality-ℕ k X Y =
 
 equiv-equiv-eq-Type-With-Cardinality-ℕ :
   {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
-  Id X Y ≃ equiv-Type-With-Cardinality-ℕ k X Y
+  (X ＝ Y) ≃ equiv-Type-With-Cardinality-ℕ k X Y
 pr1 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
   equiv-eq-Type-With-Cardinality-ℕ k
 pr2 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =

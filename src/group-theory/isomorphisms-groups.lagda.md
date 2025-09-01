@@ -231,7 +231,7 @@ module _
   iso-eq-Group = iso-eq-Large-Precategory Group-Large-Precategory G
 
   abstract
-    extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
+    extensionality-Group' : (H : Group l) → (G ＝ H) ≃ iso-Group G H
     extensionality-Group' H =
       ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
       ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})

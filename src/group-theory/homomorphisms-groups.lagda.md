@@ -157,7 +157,7 @@ module _
         ( semigroup-Group H)
 
   extensionality-hom-Group :
-    (f g : hom-Group G H) → Id f g ≃ htpy-hom-Group f g
+    (f g : hom-Group G H) → (f ＝ g) ≃ htpy-hom-Group f g
   pr1 (extensionality-hom-Group f g) = htpy-eq-hom-Group f g
   pr2 (extensionality-hom-Group f g) = is-equiv-htpy-eq-hom-Group f g
 

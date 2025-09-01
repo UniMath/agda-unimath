@@ -128,7 +128,7 @@ module _
       ( f)
 
   extensionality-hom-Concrete-Group :
-    (g : hom-Concrete-Group G H) → Id f g ≃ htpy-hom-Concrete-Group g
+    (g : hom-Concrete-Group G H) → (f ＝ g) ≃ htpy-hom-Concrete-Group g
   extensionality-hom-Concrete-Group =
     extensionality-hom-∞-Group
       ( ∞-group-Concrete-Group G)

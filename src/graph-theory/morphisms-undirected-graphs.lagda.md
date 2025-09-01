@@ -173,7 +173,7 @@ module _
       ( htpy-eq-hom-Undirected-Graph f)
 
   extensionality-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → Id f g ≃ htpy-hom-Undirected-Graph f g
+    (f g : hom-Undirected-Graph G H) → (f ＝ g) ≃ htpy-hom-Undirected-Graph f g
   pr1 (extensionality-hom-Undirected-Graph f g) =
     htpy-eq-hom-Undirected-Graph f g
   pr2 (extensionality-hom-Undirected-Graph f g) =

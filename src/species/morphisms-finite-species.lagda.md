@@ -142,7 +142,7 @@ is-equiv-htpy-eq-hom-finite-species F G f =
 extensionality-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f g : hom-finite-species F G) →
-  Id f g ≃ htpy-hom-finite-species F G f g
+  (f ＝ g) ≃ htpy-hom-finite-species F G f g
 pr1 (extensionality-hom-finite-species F G f g) =
   htpy-eq-hom-finite-species F G f g
 pr2 (extensionality-hom-finite-species F G f g) =

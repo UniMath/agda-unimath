@@ -99,7 +99,7 @@ module _
     is-equiv-htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   extensionality-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g ≃ htpy-hom-Poset f g
+    (f g : hom-Poset P Q) → (f ＝ g) ≃ htpy-hom-Poset f g
   extensionality-hom-Poset =
     extensionality-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
