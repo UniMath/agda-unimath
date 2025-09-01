@@ -20,6 +20,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
@@ -33,8 +34,11 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.injective-maps
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.sections
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-booleans
@@ -51,7 +55,9 @@ open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.dedekind-finite-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.subfinitely-enumerable-types
 open import univalent-combinatorics.surjective-maps
 ```
@@ -83,6 +89,18 @@ module _
 
   cardinality-finite-enumeration : finite-enumeration → ℕ
   cardinality-finite-enumeration (n , _) = n
+
+  surjection-finite-enumeration :
+    (f : finite-enumeration) → Fin (cardinality-finite-enumeration f) ↠ X
+  surjection-finite-enumeration (n , f) = f
+
+  map-finite-enumeration :
+    (f : finite-enumeration) → Fin (cardinality-finite-enumeration f) → X
+  map-finite-enumeration f = map-surjection (surjection-finite-enumeration f)
+
+  is-surjective-finite-enumeration :
+    (f : finite-enumeration) → is-surjective (map-finite-enumeration f)
+  is-surjective-finite-enumeration (n , f) = is-surjective-map-surjection f
 
 Finitely-Enumerable-Type : (l : Level) → UU (lsuc l)
 Finitely-Enumerable-Type l = type-subtype (is-finitely-enumerable-prop {l})
@@ -134,6 +152,31 @@ by `n`. This is a dual
 [pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md).
 
 ```agda
+has-section-has-decidable-equality-finite-enumeration :
+  {l : Level} (X : UU l) (eq : has-decidable-equality X)
+  (f : finite-enumeration X) →
+  is-inhabited ((x : X) → fiber (map-finite-enumeration X f) x)
+has-section-has-decidable-equality-finite-enumeration X eq f =
+  finite-choice
+    ( is-finite-is-finitely-enumerable-discrete eq (unit-trunc-Prop f))
+    ( is-surjective-finite-enumeration X f)
+
+has-injective-map-is-upper-bound-finite-enumeration :
+  {l : Level} (X : UU l) (eq : has-decidable-equality X)
+  (f : finite-enumeration X) →
+  exists
+    (X → Fin (cardinality-finite-enumeration X f))
+    (is-injective-Prop (is-set-has-decidable-equality eq))
+has-injective-map-is-upper-bound-finite-enumeration X eq f =
+  rec-trunc-Prop
+    ( ∃
+      ( X → Fin (cardinality-finite-enumeration X f))
+      ( is-injective-Prop (is-set-has-decidable-equality eq)))
+    ( λ g → unit-trunc-Prop
+      ( ( λ x → inclusion-fiber (map-finite-enumeration X f) (g x)) ,
+        ( {! is-injective-is-section  !})))
+    ( has-section-has-decidable-equality-finite-enumeration X eq f)
+
 is-upper-bound-finite-enumeration :
   {l : Level} (X : UU l) →
   (eq : has-decidable-equality X) →
@@ -141,7 +184,15 @@ is-upper-bound-finite-enumeration :
   leq-ℕ
     (number-of-elements-count (count-finite-enumeration-discrete eq f))
     (cardinality-finite-enumeration X f)
-is-upper-bound-finite-enumeration X eq f = {!   !}
+is-upper-bound-finite-enumeration X eq f =
+  rec-trunc-Prop
+    ( leq-ℕ-Prop
+      ( number-of-elements-count (count-finite-enumeration-discrete eq f))
+      ( cardinality-finite-enumeration X f))
+    ( leq-injection-count
+      ( count-finite-enumeration-discrete eq f)
+      ( count-Fin (cardinality-finite-enumeration X f)))
+    ( has-injective-map-is-upper-bound-finite-enumeration X eq f)
 ```
 
 ### Finite types are finitely enumerable
