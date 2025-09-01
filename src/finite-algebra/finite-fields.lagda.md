@@ -539,11 +539,10 @@ module _
 
   preserves-concat-add-list-Finite-Field :
     (l1 l2 : list type-Finite-Field) →
-    Id
-      ( add-list-Finite-Field (concat-list l1 l2))
-      ( add-Finite-Field
-        ( add-list-Finite-Field l1)
-        ( add-list-Finite-Field l2))
+    ( add-list-Finite-Field (concat-list l1 l2)) ＝
+    ( add-Finite-Field
+      ( add-list-Finite-Field l1)
+      ( add-list-Finite-Field l2))
   preserves-concat-add-list-Finite-Field =
     preserves-concat-add-list-Finite-Ring finite-ring-Finite-Field
 ```

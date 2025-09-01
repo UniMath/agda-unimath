@@ -45,9 +45,7 @@ flatten-unit-list x = right-unit-law-concat-list x
 
 length-flatten-list :
   {l1 : Level} {A : UU l1} (x : list (list A)) →
-  Id
-    ( length-list (flatten-list x))
-    ( sum-list-ℕ (map-list length-list x))
+  length-list (flatten-list x) ＝ sum-list-ℕ (map-list length-list x)
 length-flatten-list nil = refl
 length-flatten-list (cons a x) =
   ( length-concat-list a (flatten-list x)) ∙
@@ -55,9 +53,7 @@ length-flatten-list (cons a x) =
 
 flatten-concat-list :
   {l1 : Level} {A : UU l1} (x y : list (list A)) →
-  Id
-    ( flatten-list (concat-list x y))
-    ( concat-list (flatten-list x) (flatten-list y))
+  flatten-list (concat-list x y) ＝ concat-list (flatten-list x) (flatten-list y)
 flatten-concat-list nil y = refl
 flatten-concat-list (cons a x) y =
   ( ap (concat-list a) (flatten-concat-list x y)) ∙
@@ -65,9 +61,7 @@ flatten-concat-list (cons a x) y =
 
 flatten-flatten-list :
   {l1 : Level} {A : UU l1} (x : list (list (list A))) →
-  Id
-    ( flatten-list (flatten-list x))
-    ( flatten-list (map-list flatten-list x))
+  flatten-list (flatten-list x) ＝ flatten-list (map-list flatten-list x)
 flatten-flatten-list nil = refl
 flatten-flatten-list (cons a x) =
   ( flatten-concat-list a (flatten-list x)) ∙

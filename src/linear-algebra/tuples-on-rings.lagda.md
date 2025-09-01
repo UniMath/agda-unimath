@@ -101,9 +101,8 @@ module _
 
   associative-add-tuple-Ring :
     {n : ℕ} (v1 v2 v3 : tuple-Ring R n) →
-    Id
-      ( add-tuple-Ring R (add-tuple-Ring R v1 v2) v3)
-      ( add-tuple-Ring R v1 (add-tuple-Ring R v2 v3))
+    add-tuple-Ring R (add-tuple-Ring R v1 v2) v3 ＝
+    add-tuple-Ring R v1 (add-tuple-Ring R v2 v3)
   associative-add-tuple-Ring = associative-add-tuple-Semiring (semiring-Ring R)
 ```
 

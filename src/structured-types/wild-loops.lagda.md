@@ -79,9 +79,8 @@ module _
     right-unit-law-mul-H-Space h-space-Wild-Loop
 
   coh-unit-laws-mul-Wild-Loop :
-    Id
-      ( left-unit-law-mul-Wild-Loop unit-Wild-Loop)
-      ( right-unit-law-mul-Wild-Loop unit-Wild-Loop)
+    left-unit-law-mul-Wild-Loop unit-Wild-Loop ＝
+    right-unit-law-mul-Wild-Loop unit-Wild-Loop
   coh-unit-laws-mul-Wild-Loop =
     coh-unit-laws-mul-H-Space h-space-Wild-Loop
 

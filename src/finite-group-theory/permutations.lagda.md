@@ -311,9 +311,8 @@ module _
           ( f)
       is-injective-iterate-involution :
         (k k' x : Fin 2) →
-        Id
-          ( iterate (nat-Fin 2 k) (succ-Fin 2) x)
-          ( iterate (nat-Fin 2 k') (succ-Fin 2) x) →
+        ( iterate (nat-Fin 2 k) (succ-Fin 2) x ＝
+          iterate (nat-Fin 2 k') (succ-Fin 2) x) →
         k ＝ k'
       is-injective-iterate-involution
         (inl (inr star)) (inl (inr star)) x p =

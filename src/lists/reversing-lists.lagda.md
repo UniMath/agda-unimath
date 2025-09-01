@@ -59,9 +59,7 @@ length-reverse-list (cons a x) =
 
 reverse-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id
-    ( reverse-list (concat-list x y))
-    ( concat-list (reverse-list y) (reverse-list x))
+  reverse-list (concat-list x y) ＝ concat-list (reverse-list y) (reverse-list x)
 reverse-concat-list nil y =
   inv (right-unit-law-concat-list (reverse-list y))
 reverse-concat-list (cons a x) y =
@@ -76,9 +74,8 @@ reverse-snoc-list (cons b x) a = ap (λ t → snoc t b) (reverse-snoc-list x a)
 
 reverse-flatten-list :
   {l1 : Level} {A : UU l1} (x : list (list A)) →
-  Id
-    ( reverse-list (flatten-list x))
-    ( flatten-list (reverse-list (map-list reverse-list x)))
+  reverse-list (flatten-list x) ＝
+  flatten-list (reverse-list (map-list reverse-list x))
 reverse-flatten-list nil = refl
 reverse-flatten-list (cons a x) =
   ( reverse-concat-list a (flatten-list x)) ∙

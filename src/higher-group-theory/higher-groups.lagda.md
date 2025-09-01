@@ -113,9 +113,8 @@ module _
 
   associative-mul-∞-Group :
     (x y z : type-∞-Group) →
-    Id
-      ( mul-∞-Group (mul-∞-Group x y) z)
-      ( mul-∞-Group x (mul-∞-Group y z))
+    mul-∞-Group (mul-∞-Group x y) z ＝
+    mul-∞-Group x (mul-∞-Group y z)
   associative-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
 
   left-unit-law-mul-∞-Group :

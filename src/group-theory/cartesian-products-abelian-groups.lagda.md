@@ -71,9 +71,8 @@ module _
 
   associative-add-product-Ab :
     (x y z : type-product-Ab) →
-    Id
-      ( add-product-Ab (add-product-Ab x y) z)
-      ( add-product-Ab x (add-product-Ab y z))
+    add-product-Ab (add-product-Ab x y) z ＝
+    add-product-Ab x (add-product-Ab y z)
   associative-add-product-Ab = associative-mul-Group group-product-Ab
 
   left-unit-law-add-product-Ab :

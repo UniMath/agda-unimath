@@ -133,9 +133,7 @@ module _
 
   right-distributive-mul-add-Π-Ring :
     (f g h : type-Π-Ring) →
-    Id
-      ( mul-Π-Ring (add-Π-Ring f g) h)
-      ( add-Π-Ring (mul-Π-Ring f h) (mul-Π-Ring g h))
+    mul-Π-Ring (add-Π-Ring f g) h ＝ add-Π-Ring (mul-Π-Ring f h) (mul-Π-Ring g h)
   right-distributive-mul-add-Π-Ring =
     right-distributive-mul-add-Semiring semiring-Π-Ring
 

@@ -48,8 +48,7 @@ module _
 
   associative-mul-Wild-Semigroup :
     (x y z : type-Wild-Semigroup) →
-    Id
-      ( mul-Wild-Semigroup (mul-Wild-Semigroup x y) z)
-      ( mul-Wild-Semigroup x (mul-Wild-Semigroup y z))
+    mul-Wild-Semigroup (mul-Wild-Semigroup x y) z ＝
+    mul-Wild-Semigroup x (mul-Wild-Semigroup y z)
   associative-mul-Wild-Semigroup = pr2 G
 ```

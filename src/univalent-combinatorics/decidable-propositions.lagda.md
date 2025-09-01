@@ -80,9 +80,8 @@ number-of-elements-count-eq' d x y =
 cases-number-of-elements-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
   (e : is-decidable (x ＝ y)) →
-  Id
-    ( number-of-elements-count (cases-count-eq d e))
-    ( cases-number-of-elements-count-eq' e)
+  number-of-elements-count (cases-count-eq d e) ＝
+  cases-number-of-elements-count-eq' e
 cases-number-of-elements-count-eq d (inl p) = refl
 cases-number-of-elements-count-eq d (inr f) = refl
 

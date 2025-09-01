@@ -203,9 +203,8 @@ module _
 
   associative-add-Subgroup-Ab :
     ( x y z : type-ab-Subgroup-Ab) →
-    Id
-      ( add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z)
-      ( add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z))
+    add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z ＝
+    add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z)
   associative-add-Subgroup-Ab =
     associative-mul-Subgroup (group-Ab A) B
 
@@ -223,17 +222,13 @@ module _
 
   left-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id
-      ( add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x)
-      ( zero-ab-Subgroup-Ab)
+    add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x ＝ zero-ab-Subgroup-Ab
   left-inverse-law-add-Subgroup-Ab =
     left-inverse-law-mul-Subgroup (group-Ab A) B
 
   right-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id
-      ( add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x))
-      ( zero-ab-Subgroup-Ab)
+    add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x) ＝ zero-ab-Subgroup-Ab
   right-inverse-law-add-Subgroup-Ab =
     right-inverse-law-mul-Subgroup (group-Ab A) B
 

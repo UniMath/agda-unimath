@@ -68,9 +68,8 @@ module _
 
   associative-mul-Inverse-Semigroup :
     (x y z : type-Inverse-Semigroup) →
-    Id
-      ( mul-Inverse-Semigroup (mul-Inverse-Semigroup x y) z)
-      ( mul-Inverse-Semigroup x (mul-Inverse-Semigroup y z))
+    mul-Inverse-Semigroup (mul-Inverse-Semigroup x y) z ＝
+    mul-Inverse-Semigroup x (mul-Inverse-Semigroup y z)
   associative-mul-Inverse-Semigroup =
     associative-mul-Semigroup semigroup-Inverse-Semigroup
 
@@ -84,21 +83,19 @@ module _
 
   inner-inverse-law-mul-Inverse-Semigroup :
     (x : type-Inverse-Semigroup) →
-    Id
-      ( mul-Inverse-Semigroup
-        ( mul-Inverse-Semigroup x (inv-Inverse-Semigroup x))
-        ( x))
-      ( x)
+    mul-Inverse-Semigroup
+      ( mul-Inverse-Semigroup x (inv-Inverse-Semigroup x))
+      ( x) ＝
+    x
   inner-inverse-law-mul-Inverse-Semigroup x =
     pr1 (pr2 (center (is-inverse-semigroup-Inverse-Semigroup x)))
 
   outer-inverse-law-mul-Inverse-Semigroup :
     (x : type-Inverse-Semigroup) →
-    Id
-      ( mul-Inverse-Semigroup
-        ( mul-Inverse-Semigroup (inv-Inverse-Semigroup x) x)
-        ( inv-Inverse-Semigroup x))
-      ( inv-Inverse-Semigroup x)
+    mul-Inverse-Semigroup
+      ( mul-Inverse-Semigroup (inv-Inverse-Semigroup x) x)
+      ( inv-Inverse-Semigroup x) ＝
+    inv-Inverse-Semigroup x
   outer-inverse-law-mul-Inverse-Semigroup x =
     pr2 (pr2 (center (is-inverse-semigroup-Inverse-Semigroup x)))
 ```

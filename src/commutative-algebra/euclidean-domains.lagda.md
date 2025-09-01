@@ -635,11 +635,10 @@ module _
 
   preserves-concat-add-list-Euclidean-Domain :
     (l1 l2 : list type-Euclidean-Domain) →
-    Id
-      ( add-list-Euclidean-Domain (concat-list l1 l2))
-      ( add-Euclidean-Domain
-        ( add-list-Euclidean-Domain l1)
-        ( add-list-Euclidean-Domain l2))
+    add-list-Euclidean-Domain (concat-list l1 l2) ＝
+    add-Euclidean-Domain
+      ( add-list-Euclidean-Domain l1)
+      ( add-list-Euclidean-Domain l2)
   preserves-concat-add-list-Euclidean-Domain =
     preserves-concat-add-list-Integral-Domain
       integral-domain-Euclidean-Domain
@@ -677,13 +676,12 @@ module _
   equation-euclidean-division-Euclidean-Domain :
     ( x y : type-Euclidean-Domain) →
     ( p : is-nonzero-Euclidean-Domain y) →
-    ( Id
-      ( x)
-      ( add-Euclidean-Domain
-        ( mul-Euclidean-Domain
-          ( quotient-euclidean-division-Euclidean-Domain x y p)
-          ( y))
-        ( remainder-euclidean-division-Euclidean-Domain x y p)))
+    x ＝
+    add-Euclidean-Domain
+      ( mul-Euclidean-Domain
+        ( quotient-euclidean-division-Euclidean-Domain x y p)
+        ( y))
+      ( remainder-euclidean-division-Euclidean-Domain x y p)
   equation-euclidean-division-Euclidean-Domain x y p =
     pr1 (pr2 (pr2 is-euclidean-domain-Euclidean-Domain x y p))
 

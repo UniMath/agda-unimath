@@ -139,9 +139,8 @@ module _
 
   associative-add-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    Id
-      ( add-Finite-Ring (add-Finite-Ring x y) z)
-      ( add-Finite-Ring x (add-Finite-Ring y z))
+    ( add-Finite-Ring (add-Finite-Ring x y) z) ＝
+    ( add-Finite-Ring x (add-Finite-Ring y z))
   associative-add-Finite-Ring = associative-add-Ring (ring-Finite-Ring R)
 
   is-group-additive-semigroup-Finite-Ring :
@@ -302,9 +301,8 @@ module _
 
   associative-mul-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    Id
-      ( mul-Finite-Ring (mul-Finite-Ring x y) z)
-      ( mul-Finite-Ring x (mul-Finite-Ring y z))
+    ( mul-Finite-Ring (mul-Finite-Ring x y) z) ＝
+    ( mul-Finite-Ring x (mul-Finite-Ring y z))
   associative-mul-Finite-Ring = associative-mul-Ring (ring-Finite-Ring R)
 
   multiplicative-semigroup-Finite-Ring : Semigroup l
@@ -533,9 +531,8 @@ module _
 
   preserves-concat-add-list-Finite-Ring :
     (l1 l2 : list (type-Finite-Ring R)) →
-    Id
-      ( add-list-Finite-Ring (concat-list l1 l2))
-      ( add-Finite-Ring R (add-list-Finite-Ring l1) (add-list-Finite-Ring l2))
+    ( add-list-Finite-Ring (concat-list l1 l2)) ＝
+    ( add-Finite-Ring R (add-list-Finite-Ring l1) (add-list-Finite-Ring l2))
   preserves-concat-add-list-Finite-Ring =
     preserves-concat-add-list-Ring (ring-Finite-Ring R)
 ```

@@ -219,9 +219,7 @@ module _
 
   preserves-concat-map-list :
     (l k : list A) →
-    Id
-      ( map-list f (concat-list l k))
-      ( concat-list (map-list f l) (map-list f k))
+    map-list f (concat-list l k) ＝ concat-list (map-list f l) (map-list f k)
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)

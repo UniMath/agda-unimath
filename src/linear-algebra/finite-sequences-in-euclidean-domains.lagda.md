@@ -192,23 +192,20 @@ module _
 
   left-inverse-law-add-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
-    Id
-      ( add-fin-sequence-type-Euclidean-Domain
-        R n ( neg-fin-sequence-type-Euclidean-Domain R n v) v)
-      ( zero-fin-sequence-type-Euclidean-Domain R n)
+    add-fin-sequence-type-Euclidean-Domain R n
+      ( neg-fin-sequence-type-Euclidean-Domain R n v)
+      ( v) ＝
+    zero-fin-sequence-type-Euclidean-Domain R n
   left-inverse-law-add-fin-sequence-type-Euclidean-Domain =
     left-inverse-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
   right-inverse-law-add-fin-sequence-type-Euclidean-Domain :
     (n : ℕ) (v : fin-sequence-type-Euclidean-Domain R n) →
-    Id
-      ( add-fin-sequence-type-Euclidean-Domain
-        ( R)
-        ( n)
-        ( v)
-        ( neg-fin-sequence-type-Euclidean-Domain R n v))
-      ( zero-fin-sequence-type-Euclidean-Domain R n)
+    add-fin-sequence-type-Euclidean-Domain R n
+      ( v)
+      ( neg-fin-sequence-type-Euclidean-Domain R n v) ＝
+    zero-fin-sequence-type-Euclidean-Domain R n
   right-inverse-law-add-fin-sequence-type-Euclidean-Domain =
     right-inverse-law-add-fin-sequence-type-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)

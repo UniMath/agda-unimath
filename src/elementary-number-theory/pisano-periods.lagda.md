@@ -60,10 +60,9 @@ inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 is-section-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id
-    ( generating-map-fibonacci-pair-Fin k
-      ( inv-generating-map-fibonacci-pair-Fin k p))
-    ( p)
+  generating-map-fibonacci-pair-Fin k
+    ( inv-generating-map-fibonacci-pair-Fin k p) ＝
+  p
 is-section-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair refl
     ( ( commutative-add-Fin
@@ -76,10 +75,9 @@ is-section-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 is-retraction-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id
-    ( inv-generating-map-fibonacci-pair-Fin k
-      ( generating-map-fibonacci-pair-Fin k p))
-    ( p)
+  inv-generating-map-fibonacci-pair-Fin k
+    ( generating-map-fibonacci-pair-Fin k p) ＝
+  p
 is-retraction-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair
     ( ( commutative-add-Fin
@@ -107,9 +105,8 @@ fibonacci-pair-Fin k (succ-ℕ n) =
 
 compute-fibonacci-pair-Fin :
   (k : ℕ) (n : ℕ) →
-  Id
-    ( fibonacci-pair-Fin k n)
-    ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
+  fibonacci-pair-Fin k n ＝
+  ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
 compute-fibonacci-pair-Fin k zero-ℕ = refl
 compute-fibonacci-pair-Fin k (succ-ℕ zero-ℕ) =
   ap-binary pair refl (right-unit-law-add-Fin k (one-Fin k))

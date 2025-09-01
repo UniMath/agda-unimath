@@ -314,9 +314,8 @@ module _
     ( eX : mere-equiv (Fin (n +ℕ 2)) X) →
     ( eY : mere-equiv (Fin (n +ℕ 2)) Y) →
     X ＝ Y →
-    Id
-      ( equivalence-class (R (n +ℕ 2) (X , eX)))
-      ( equivalence-class (R (n +ℕ 2) (Y , eY)))
+    equivalence-class (R (n +ℕ 2) (X , eX)) ＝
+    equivalence-class (R (n +ℕ 2) (Y , eY))
   map-quotient-delooping-sign-loop n X Y eX eY p =
     ap
       ( equivalence-class ∘ R (n +ℕ 2))

@@ -686,9 +686,8 @@ module _
 
   preserves-concat-add-list-Ring :
     (l1 l2 : list (type-Ring R)) →
-    Id
-      ( add-list-Ring (concat-list l1 l2))
-      ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
+    add-list-Ring (concat-list l1 l2) ＝
+    add-Ring R (add-list-Ring l1) (add-list-Ring l2)
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
 ```
 

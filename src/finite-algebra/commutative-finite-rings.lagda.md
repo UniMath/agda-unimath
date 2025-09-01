@@ -632,11 +632,10 @@ module _
 
   preserves-concat-add-list-Finite-Commutative-Ring :
     (l1 l2 : list type-Finite-Commutative-Ring) →
-    Id
-      ( add-list-Finite-Commutative-Ring (concat-list l1 l2))
-      ( add-Finite-Commutative-Ring
-        ( add-list-Finite-Commutative-Ring l1)
-        ( add-list-Finite-Commutative-Ring l2))
+    ( add-list-Finite-Commutative-Ring (concat-list l1 l2)) ＝
+    ( add-Finite-Commutative-Ring
+      ( add-list-Finite-Commutative-Ring l1)
+      ( add-list-Finite-Commutative-Ring l2))
   preserves-concat-add-list-Finite-Commutative-Ring =
     preserves-concat-add-list-Finite-Ring finite-ring-Finite-Commutative-Ring
 ```

@@ -236,10 +236,9 @@ module _
   -- !! Why not a homotopy?
   eq-concat-permutation-list-transpositions :
     (l l' : list (2-Element-Decidable-Subtype l2 X)) →
-    Id
-      ( ( permutation-list-transpositions l) ∘e
-        ( permutation-list-transpositions l'))
-      ( permutation-list-transpositions (concat-list l l'))
+    ( permutation-list-transpositions l) ∘e
+    ( permutation-list-transpositions l') ＝
+    ( permutation-list-transpositions (concat-list l l'))
   eq-concat-permutation-list-transpositions nil l' = eq-htpy-equiv refl-htpy
   eq-concat-permutation-list-transpositions (cons P l) l' =
     eq-htpy-equiv
@@ -606,12 +605,7 @@ module _
             Σ ( Fin n)
               ( λ y →
                 Σ ( x ≠ y)
-                  ( λ np →
-                    Id
-                      ( standard-2-Element-Decidable-Subtype
-                        ( p)
-                        ( np))
-                      ( Y)))))
+                  ( λ np → standard-2-Element-Decidable-Subtype p np ＝ Y))))
       ( eq-is-prop (is-prop-has-decidable-equality))
       ( two-elements-transposition (count-Fin n) Y)
 
@@ -1047,11 +1041,10 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype :
   {l : Level} {X : UU l} (H : has-decidable-equality X) →
   {x y z w : X} (np : x ≠ y) (np' : z ≠ w) →
   x ≠ z → x ≠ w → y ≠ z → y ≠ w →
-  Id
-    ( precomp-equiv-2-Element-Decidable-Subtype
-      ( standard-transposition H np)
-      ( standard-2-Element-Decidable-Subtype H np'))
-    ( standard-2-Element-Decidable-Subtype H np')
+  precomp-equiv-2-Element-Decidable-Subtype
+    ( standard-transposition H np)
+    ( standard-2-Element-Decidable-Subtype H np') ＝
+  standard-2-Element-Decidable-Subtype H np'
 eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
   {l} {X} H {x} {y} {z} {w} np np' nq1 nq2 nq3 nq4 =
   eq-pair-Σ
@@ -1126,11 +1119,10 @@ module _
   cases-eq-equiv-universes-transposition :
     ( P : 2-Element-Decidable-Subtype l X) (x : X) →
     ( d : is-decidable (is-in-2-Element-Decidable-Subtype P x)) →
-    Id
-      ( map-transposition' P x d)
-      ( map-transposition
-        ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P)
-        ( x))
+    map-transposition' P x d ＝
+    map-transposition
+      ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P)
+      ( x)
   cases-eq-equiv-universes-transposition P x (inl p) =
     ( ap pr1
       ( inv
@@ -1185,10 +1177,9 @@ module _
 
   eq-equiv-universes-transposition :
     ( P : 2-Element-Decidable-Subtype l X) →
-    Id
-      ( transposition P)
-      ( transposition
-        ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P))
+    transposition P ＝
+    transposition
+      ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P)
   eq-equiv-universes-transposition P =
     eq-htpy-equiv
       ( λ x →
@@ -1197,12 +1188,11 @@ module _
 
   eq-equiv-universes-transposition-list :
     ( li : list (2-Element-Decidable-Subtype l X)) →
-    Id
-      ( permutation-list-transpositions li)
-      ( permutation-list-transpositions
-        ( map-list
-          ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l'))
-          ( li)))
+    permutation-list-transpositions li ＝
+    permutation-list-transpositions
+      ( map-list
+        ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l'))
+        ( li))
   eq-equiv-universes-transposition-list nil = refl
   eq-equiv-universes-transposition-list (cons P li) =
     ap-binary

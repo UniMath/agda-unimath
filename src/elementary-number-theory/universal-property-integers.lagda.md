@@ -118,9 +118,8 @@ succ-Eq-ELIM-ℤ :
   ( s t : ELIM-ℤ P p0 pS) (H : (pr1 s) ~ (pr1 t)) → UU l1
 succ-Eq-ELIM-ℤ P p0 pS s t H =
   ( k : ℤ) →
-  Id
-    ( H (succ-ℤ k))
-    ( map-equiv (equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k) (H k))
+  H (succ-ℤ k) ＝
+  map-equiv (equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k) (H k)
 
 Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)

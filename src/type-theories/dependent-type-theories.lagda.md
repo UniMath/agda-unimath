@@ -88,10 +88,8 @@ homotopies of sections of fibered systems.
   tr-fibered-system-slice :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
     (α : B ＝ B') (f : section-system B) (X : system.type A) →
-    Id
-      ( fibered-system.slice B (section-system.type f X))
-      ( fibered-system.slice B'
-        ( section-system.type (tr section-system α f) X))
+    fibered-system.slice B (section-system.type f X) ＝
+    fibered-system.slice B' (section-system.type (tr section-system α f) X)
   tr-fibered-system-slice refl f X = refl
 
   Eq-fibered-system' :

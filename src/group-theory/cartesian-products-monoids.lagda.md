@@ -54,9 +54,8 @@ module _
 
   associative-mul-product-Monoid :
     (x y z : type-product-Monoid) →
-    Id
-      ( mul-product-Monoid (mul-product-Monoid x y) z)
-      ( mul-product-Monoid x (mul-product-Monoid y z))
+    mul-product-Monoid (mul-product-Monoid x y) z ＝
+    mul-product-Monoid x (mul-product-Monoid y z)
   associative-mul-product-Monoid =
     associative-mul-Semigroup semigroup-product-Monoid
 

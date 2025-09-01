@@ -79,9 +79,8 @@ module _
 
   associative-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( add-product-Ring (add-product-Ring x y) z)
-      ( add-product-Ring x (add-product-Ring y z))
+    add-product-Ring (add-product-Ring x y) z ＝
+    add-product-Ring x (add-product-Ring y z)
   associative-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( associative-add-Ring R1 x1 x2 x3)
@@ -104,9 +103,8 @@ module _
 
   associative-mul-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring (mul-product-Ring x y) z)
-      ( mul-product-Ring x (mul-product-Ring y z))
+    mul-product-Ring (mul-product-Ring x y) z ＝
+    mul-product-Ring x (mul-product-Ring y z)
   associative-mul-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( associative-mul-Ring R1 x1 x2 x3)
@@ -124,9 +122,8 @@ module _
 
   left-distributive-mul-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring x (add-product-Ring y z))
-      ( add-product-Ring (mul-product-Ring x y) (mul-product-Ring x z))
+    mul-product-Ring x (add-product-Ring y z) ＝
+    add-product-Ring (mul-product-Ring x y) (mul-product-Ring x z)
   left-distributive-mul-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( left-distributive-mul-add-Ring R1 x1 x2 x3)
@@ -134,9 +131,8 @@ module _
 
   right-distributive-mul-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring (add-product-Ring x y) z)
-      ( add-product-Ring (mul-product-Ring x z) (mul-product-Ring y z))
+    mul-product-Ring (add-product-Ring x y) z ＝
+    add-product-Ring (mul-product-Ring x z) (mul-product-Ring y z)
   right-distributive-mul-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( right-distributive-mul-add-Ring R1 x1 x2 x3)

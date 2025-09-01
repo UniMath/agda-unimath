@@ -109,9 +109,8 @@ module _
 
   associative-add-tuple-Euclidean-Domain :
     {n : ℕ} (v1 v2 v3 : tuple-Euclidean-Domain R n) →
-    Id
-      ( add-tuple-Euclidean-Domain R (add-tuple-Euclidean-Domain R v1 v2) v3)
-      ( add-tuple-Euclidean-Domain R v1 (add-tuple-Euclidean-Domain R v2 v3))
+    add-tuple-Euclidean-Domain R (add-tuple-Euclidean-Domain R v1 v2) v3 ＝
+    add-tuple-Euclidean-Domain R v1 (add-tuple-Euclidean-Domain R v2 v3)
   associative-add-tuple-Euclidean-Domain =
     associative-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
@@ -163,18 +162,16 @@ module _
 
   left-inverse-law-add-tuple-Euclidean-Domain :
     {n : ℕ} (v : tuple-Euclidean-Domain R n) →
-    Id
-      ( add-tuple-Euclidean-Domain R (neg-tuple-Euclidean-Domain R v) v)
-      ( zero-tuple-Euclidean-Domain R)
+    add-tuple-Euclidean-Domain R (neg-tuple-Euclidean-Domain R v) v ＝
+    zero-tuple-Euclidean-Domain R
   left-inverse-law-add-tuple-Euclidean-Domain =
     left-inverse-law-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
   right-inverse-law-add-tuple-Euclidean-Domain :
     {n : ℕ} (v : tuple-Euclidean-Domain R n) →
-    Id
-      ( add-tuple-Euclidean-Domain R v (neg-tuple-Euclidean-Domain R v))
-      ( zero-tuple-Euclidean-Domain R)
+    add-tuple-Euclidean-Domain R v (neg-tuple-Euclidean-Domain R v) ＝
+    zero-tuple-Euclidean-Domain R
   right-inverse-law-add-tuple-Euclidean-Domain =
     right-inverse-law-add-tuple-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
