@@ -14,6 +14,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
+open import foundation.functoriality-disjunction
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -73,10 +74,9 @@ cotransitive-apart-ℝ x y z =
   elim-disjunction
     ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
     ( λ x<y →
-      elim-disjunction
-        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
-        ( inl-disjunction ∘ inl-disjunction)
-        ( inr-disjunction ∘ inl-disjunction)
+      map-disjunction
+        ( inl-disjunction)
+        ( inl-disjunction)
         ( cotransitive-le-ℝ x y z x<y))
     ( λ y<x →
       elim-disjunction

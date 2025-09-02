@@ -254,10 +254,9 @@ module _
   is-located-le-ℝ :
     type-disjunction-Prop (le-ℝ-Prop (real-ℚ p) x) (le-ℝ-Prop x (real-ℚ q))
   is-located-le-ℝ =
-    elim-disjunction
-      ( (le-ℝ-Prop (real-ℚ p) x) ∨ (le-ℝ-Prop x (real-ℚ q)))
-      ( λ p<x → inl-disjunction (le-real-is-in-lower-cut-ℚ p x p<x))
-      ( λ x<q → inr-disjunction (le-real-is-in-upper-cut-ℚ q x x<q))
+    map-disjunction
+      ( le-real-is-in-lower-cut-ℚ p x)
+      ( le-real-is-in-upper-cut-ℚ q x)
       ( is-located-lower-upper-cut-ℝ x p q p<q)
 ```
 

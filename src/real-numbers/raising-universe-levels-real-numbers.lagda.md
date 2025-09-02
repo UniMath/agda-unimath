@@ -13,6 +13,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.functoriality-disjunction
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -150,10 +151,9 @@ module _
         ( cut-lower-ℝ lower-real-raise-ℝ p)
         ( cut-upper-ℝ upper-real-raise-ℝ q)
     is-located-lower-upper-cut-raise-ℝ p q p<q =
-      elim-disjunction
-        ( cut-lower-ℝ lower-real-raise-ℝ p ∨ cut-upper-ℝ upper-real-raise-ℝ q)
-        ( inl-disjunction ∘ map-raise)
-        ( inr-disjunction ∘ map-raise)
+      map-disjunction
+        ( map-raise)
+        ( map-raise)
         ( is-located-lower-upper-cut-ℝ x p q p<q)
 
   raise-ℝ : ℝ (l0 ⊔ l)

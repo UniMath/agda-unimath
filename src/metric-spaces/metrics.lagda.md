@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.functoriality-disjunction
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.negation
@@ -314,21 +315,13 @@ module _
     is-located-metric-space-Metric :
       is-located-Metric-Space (metric-space-Metric X μ)
     is-located-metric-space-Metric x y δ ε δ<ε =
-      elim-disjunction
-        ( ( ¬' leq-ℝ⁰⁺-Prop (dist-Metric X μ x y) (nonnegative-real-ℚ⁺ δ)) ∨
-          ( leq-ℝ⁰⁺-Prop (dist-Metric X μ x y) (nonnegative-real-ℚ⁺ ε)))
-        ( λ δ<d →
-          inl-disjunction
-            ( not-leq-le-ℝ
-              ( real-ℚ⁺ δ)
-              ( real-ℝ⁰⁺ (dist-Metric X μ x y))
-              ( δ<d)))
-        ( λ d<ε →
-          inr-disjunction
-            ( leq-le-ℝ
-              ( real-ℝ⁰⁺ (dist-Metric X μ x y))
-              ( real-ℚ⁺ ε)
-              ( d<ε)))
+      map-disjunction
+        ( not-leq-le-ℝ
+          ( real-ℚ⁺ δ)
+          ( real-ℝ⁰⁺ (dist-Metric X μ x y)))
+        ( leq-le-ℝ
+          ( real-ℝ⁰⁺ (dist-Metric X μ x y))
+          ( real-ℚ⁺ ε))
         ( is-located-le-ℝ
           ( real-ℝ⁰⁺ (dist-Metric X μ x y))
           ( rational-ℚ⁺ δ)

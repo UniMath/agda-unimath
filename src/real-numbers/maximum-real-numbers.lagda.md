@@ -30,6 +30,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import foundation.functoriality-disjunction
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
@@ -91,10 +92,9 @@ module _
         ( claim)
         ( λ p<x → inl-disjunction (inl-disjunction p<x))
         ( λ x<q →
-          elim-disjunction
-            ( claim)
-            ( λ p<y → inl-disjunction (inr-disjunction p<y))
-            ( λ y<q → inr-disjunction (x<q , y<q))
+          map-disjunction
+            ( λ p<y → inr-disjunction p<y)
+            ( x<q ,_)
             ( is-located-lower-upper-cut-ℝ y p q p<q))
         ( is-located-lower-upper-cut-ℝ x p q p<q)
       where
@@ -394,25 +394,24 @@ module _
           ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
       (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
       let q<r = reflects-le-real-ℚ q r q-<ℝ-r
-      elim-disjunction motive
+      map-disjunction
         ( λ q<x →
-          inl-disjunction
-            ( transitive-le-ℝ
-              ( max-ℝ x y -ℝ real-ℚ ε)
-              ( real-ℚ q)
-              ( x)
-              ( le-real-is-in-lower-cut-ℚ q x q<x)
-              ( max-ε<q)))
+          transitive-le-ℝ
+            ( max-ℝ x y -ℝ real-ℚ ε)
+            ( real-ℚ q)
+            ( x)
+            ( le-real-is-in-lower-cut-ℚ q x q<x)
+            ( max-ε<q))
         ( λ x<r →
-          elim-disjunction motive
+          elim-disjunction
+            ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
             ( λ q<y →
-              inr-disjunction
-                ( transitive-le-ℝ
-                  ( max-ℝ x y -ℝ real-ℚ ε)
-                  ( real-ℚ q)
-                  ( y)
-                  ( le-real-is-in-lower-cut-ℚ q y q<y)
-                  ( max-ε<q)))
+              transitive-le-ℝ
+                ( max-ℝ x y -ℝ real-ℚ ε)
+                ( real-ℚ q)
+                ( y)
+                ( le-real-is-in-lower-cut-ℚ q y q<y)
+                ( max-ε<q))
             ( λ y<r →
               ex-falso
                 ( irreflexive-le-ℝ

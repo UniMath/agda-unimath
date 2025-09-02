@@ -15,6 +15,7 @@ open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.propositional-truncations
+open import foundation.functoriality-disjunction
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -46,14 +47,11 @@ open import univalent-combinatorics.standard-finite-types
     elim-disjunction
       ( motive)
       ( λ Πi<n:A →
-        elim-disjunction
-          ( motive)
-          ( λ An →
-            inl-disjunction
-              ( λ where
-                (inl i) → Πi<n:A i
-                (inr _) → An))
-          ( inr-disjunction ∘ intro-exists (neg-one-Fin n))
+        map-disjunction
+          ( λ where
+              _ (inl i) → Πi<n:A i
+              An (inr _) → An)
+          ( intro-exists (neg-one-Fin n))
           ( f (neg-one-Fin n)))
       ( inr-disjunction ∘ map-exists (type-Prop ∘ B) inl (λ _ Bi → Bi))
       ( Π-disjunction-Fin n (A ∘ inl) (B ∘ inl) (f ∘ inl))
@@ -68,17 +66,13 @@ open import univalent-combinatorics.standard-finite-types
   ((x : X) → type-disjunction-Prop (A x) (B x)) →
   type-disjunction-Prop (∀' X A) (∃ X B)
 Π-disjunction-finite-enumeration {X = X} (n , Fin-n↠X) A B f =
-  elim-disjunction
-    ( (∀' X A) ∨ (∃ X B))
-    ( λ ∀iA →
-      inl-disjunction
-        ( λ x →
-          rec-trunc-Prop
-            ( A x)
-            ( λ (i , Fi=x) → tr (type-Prop ∘ A) Fi=x (∀iA i))
-            ( is-surjective-map-surjection Fin-n↠X x)))
-    ( inr-disjunction ∘
-      map-exists (type-Prop ∘ B) (map-surjection Fin-n↠X) (λ _ → id))
+  map-disjunction
+    ( λ ∀iA x →
+      rec-trunc-Prop
+        ( A x)
+        ( λ (i , Fi=x) → tr (type-Prop ∘ A) Fi=x (∀iA i))
+        ( is-surjective-map-surjection Fin-n↠X x))
+    ( map-exists (type-Prop ∘ B) (map-surjection Fin-n↠X) (λ _ → id))
     ( Π-disjunction-Fin
       ( n)
       ( A ∘ map-surjection Fin-n↠X)
