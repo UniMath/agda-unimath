@@ -88,12 +88,12 @@ module _
         case :
           {l : Level} (w : ℝ l) → leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) →
           leq-ℝ z w
-        case w w≤max =
+        case w -w≤max =
           transitive-leq-ℝ z (min-ℝ x y) w
             ( tr
               ( leq-ℝ (min-ℝ x y))
               ( neg-neg-ℝ _)
-              ( neg-leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) w≤max))
+              ( neg-leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) -w≤max))
             ( z≤min)
       in (case x (leq-left-max-ℝ _ _) , case y (leq-right-max-ℝ _ _))
 
