@@ -595,21 +595,27 @@ module _
   pr1 dependent-suspension-structure-eq-type-trunc-set-suspension =
     ap
       ( suspension-trunc-prop-trunc-set-suspension)
-      ( {!   !}) ∙
-    {!   !} ∙
-    ap
-      ( unit-trunc-Set)
-      ( compute-north-cogap-suspension
-        ( suspension-structure-suspension X))
+      ( triangle-universal-property-trunc-Set
+        ( suspension-set-Prop (trunc-Prop X))
+        ( cogap-suspension
+          suspension-structure-trunc-set-suspension-suspension-trunc-prop)
+        ( north-suspension) ∙
+        ( compute-north-cogap-suspension
+          ( suspension-structure-trunc-set-suspension-suspension-trunc-prop))) ∙
+    compute-north-cogap-suspension
+      ( suspension-structure-suspension-trunc-prop-trunc-set-suspension)
   pr1 (pr2 dependent-suspension-structure-eq-type-trunc-set-suspension) =
     ap
       ( suspension-trunc-prop-trunc-set-suspension)
-      ( {!   !}) ∙
-    {!   !} ∙
-    ap
-      ( unit-trunc-Set)
-      ( compute-south-cogap-suspension
-        ( suspension-structure-suspension X))
+      ( triangle-universal-property-trunc-Set
+        ( suspension-set-Prop (trunc-Prop X))
+        ( cogap-suspension
+          suspension-structure-trunc-set-suspension-suspension-trunc-prop)
+        ( south-suspension) ∙
+        ( compute-south-cogap-suspension
+          ( suspension-structure-trunc-set-suspension-suspension-trunc-prop))) ∙
+    compute-south-cogap-suspension
+      ( suspension-structure-suspension-trunc-prop-trunc-set-suspension)
   pr2 (pr2 dependent-suspension-structure-eq-type-trunc-set-suspension) x =
     eq-is-prop
       ( is-set-type-trunc-Set
