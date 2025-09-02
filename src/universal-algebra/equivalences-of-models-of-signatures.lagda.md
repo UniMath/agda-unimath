@@ -94,9 +94,9 @@ module _
       ( λ op → equiv-Π-equiv-family
         ( λ v → equiv-concat'
           ( f op v)
-            ( ap
-              ( g op)
-              ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
+          ( ap
+            ( g op)
+            ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
 
   refl-htpy-id-Model-Signature :
     (f : is-model-signature σ X) →
