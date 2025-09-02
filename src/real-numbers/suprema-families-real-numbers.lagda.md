@@ -187,6 +187,17 @@ module _
   has-supremum-prop-family-ℝ : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   has-supremum-prop-family-ℝ =
     ( has-supremum-family-ℝ , is-prop-has-supremum-family-ℝ)
+
+module _
+  {l1 l2 : Level} (S : subset-ℝ l1 l2) (l3 : Level)
+  where
+
+  has-supremum-prop-subset-ℝ : Prop (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-supremum-prop-subset-ℝ =
+    has-supremum-prop-family-ℝ (inclusion-subset-ℝ S) l3
+
+  has-supremum-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-supremum-subset-ℝ = type-Prop has-supremum-prop-subset-ℝ
 ```
 
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`
