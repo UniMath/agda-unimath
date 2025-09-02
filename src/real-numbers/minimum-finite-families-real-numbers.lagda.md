@@ -8,6 +8,7 @@ module real-numbers.minimum-finite-families-real-numbers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+
 open import foundation.function-types
 open import foundation.universe-levels
 
