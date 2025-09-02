@@ -11,12 +11,13 @@ module real-numbers.minimum-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -24,14 +25,12 @@ open import order-theory.large-meet-semilattices
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.minimum-lower-dedekind-real-numbers
-open import real-numbers.minimum-upper-dedekind-real-numbers
-open import real-numbers.positive-real-numbers
+open import real-numbers.maximum-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -41,8 +40,8 @@ open import real-numbers.upper-dedekind-real-numbers
 The
 {{#concept "minimum" Disambiguation="binary, Dedekind real numbers" Agda=min-ℝ WD="minimum" WDID=Q10585806}}
 of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
-`y` is a Dedekind real number with lower cut equal to the intersection of `x`
-and `y`'s lower cuts, and upper cut equal to the union of their upper cuts.
+`y` is their
+[greatest lower bound](order-theory.greatest-lower-bounds-large-posets.md).
 
 ## Definition
 
@@ -52,49 +51,9 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  lower-real-min-ℝ : lower-ℝ (l1 ⊔ l2)
-  lower-real-min-ℝ = binary-min-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
-
-  upper-real-min-ℝ : upper-ℝ (l1 ⊔ l2)
-  upper-real-min-ℝ = binary-min-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
-
-  abstract
-    is-disjoint-lower-upper-min-ℝ :
-      is-disjoint-lower-upper-ℝ lower-real-min-ℝ upper-real-min-ℝ
-    is-disjoint-lower-upper-min-ℝ q ((q<x , q<y) , q∈U) =
-      elim-disjunction
-        ( empty-Prop)
-        ( λ x<q → is-disjoint-cut-ℝ x q (q<x , x<q))
-        ( λ y<q → is-disjoint-cut-ℝ y q (q<y , y<q))
-        q∈U
-
-    is-located-lower-upper-min-ℝ :
-      is-located-lower-upper-ℝ lower-real-min-ℝ upper-real-min-ℝ
-    is-located-lower-upper-min-ℝ p q p<q =
-      elim-disjunction
-        ( claim)
-        ( λ p<x →
-          elim-disjunction
-            ( claim)
-            ( λ p<y → inl-disjunction (p<x , p<y))
-            ( λ y<q → inr-disjunction (inr-disjunction y<q))
-            ( is-located-lower-upper-cut-ℝ y p q p<q))
-        ( λ x<q → inr-disjunction (inl-disjunction x<q))
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
-      where
-        claim : Prop (l1 ⊔ l2)
-        claim =
-          cut-lower-ℝ lower-real-min-ℝ p ∨
-          cut-upper-ℝ upper-real-min-ℝ q
-
   opaque
     min-ℝ : ℝ (l1 ⊔ l2)
-    min-ℝ =
-      real-lower-upper-ℝ
-        ( lower-real-min-ℝ)
-        ( upper-real-min-ℝ)
-        ( is-disjoint-lower-upper-min-ℝ)
-        ( is-located-lower-upper-min-ℝ)
+    min-ℝ = neg-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y))
 ```
 
 ## Properties
@@ -116,11 +75,30 @@ module _
         ( x)
         ( y)
         ( min-ℝ x y)
-    is-greatest-binary-lower-bound-min-ℝ z =
-      is-greatest-binary-lower-bound-binary-min-lower-ℝ
-        ( lower-real-ℝ x)
-        ( lower-real-ℝ y)
-        ( lower-real-ℝ z)
+    pr1 (is-greatest-binary-lower-bound-min-ℝ z) (z≤x , z≤y) =
+      tr
+        ( λ w → leq-ℝ w (min-ℝ x y))
+        ( neg-neg-ℝ z)
+        ( neg-leq-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y)) (neg-ℝ z)
+          ( forward-implication
+            ( is-least-binary-upper-bound-max-ℝ (neg-ℝ x) (neg-ℝ y) (neg-ℝ z))
+            ( neg-leq-ℝ z x z≤x , neg-leq-ℝ z y z≤y)))
+    pr1 (pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min) =
+      transitive-leq-ℝ z (min-ℝ x y) x
+        ( tr
+          ( leq-ℝ (min-ℝ x y))
+          ( neg-neg-ℝ _)
+          ( neg-leq-ℝ (neg-ℝ x) (max-ℝ (neg-ℝ x) (neg-ℝ y))
+            ( leq-left-max-ℝ (neg-ℝ x) (neg-ℝ y))))
+        ( z≤min)
+    pr2 (pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min) =
+      transitive-leq-ℝ z (min-ℝ x y) y
+        ( tr
+          ( leq-ℝ (min-ℝ x y))
+          ( neg-neg-ℝ _)
+          ( neg-leq-ℝ (neg-ℝ y) (max-ℝ (neg-ℝ x) (neg-ℝ y))
+            ( leq-right-max-ℝ (neg-ℝ x) (neg-ℝ y))))
+        ( z≤min)
 
   abstract
     leq-min-leq-leq-ℝ :
@@ -145,49 +123,35 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  abstract
+  opaque
+    unfolding min-ℝ
+
     approximate-above-min-ℝ :
       (ε : ℚ⁺) →
       type-disjunction-Prop
         ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε))
         ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε))
-    approximate-above-min-ℝ ε⁺@(ε , _) =
-      let
-        motive =
-          ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ ε)) ∨
-          ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ ε))
-        open do-syntax-trunc-Prop motive
-      in do
-        (r , min<r , r<min+ε) ←
-          dense-rational-le-ℝ (min-ℝ x y) (min-ℝ x y +ℝ real-ℚ ε)
-            ( le-left-add-real-ℝ⁺ (min-ℝ x y) (positive-real-ℚ⁺ ε⁺))
-        (q , min<q , q-<ℝ-r) ← dense-rational-le-ℝ (min-ℝ x y) (real-ℚ r) min<r
-        let q<r = reflects-le-real-ℚ q r q-<ℝ-r
-        elim-disjunction
-          ( motive)
-          ( λ q<x →
-            elim-disjunction
-              ( motive)
-              ( λ q<y →
-                ex-falso
-                  ( irreflexive-le-ℝ (min-ℝ x y)
-                    ( concatenate-le-leq-ℝ (min-ℝ x y) (real-ℚ q) (min-ℝ x y)
-                      ( min<q)
-                      ( leq-min-leq-leq-ℝ x y (real-ℚ q)
-                        ( leq-le-ℝ (real-ℚ q) x
-                          ( le-real-is-in-lower-cut-ℚ q x q<x))
-                        ( leq-le-ℝ (real-ℚ q) y
-                          ( le-real-is-in-lower-cut-ℚ q y q<y))))))
-              ( λ y<r →
-                inr-disjunction
-                  ( transitive-le-ℝ y (real-ℚ r) (min-ℝ x y +ℝ real-ℚ ε)
-                    ( r<min+ε)
-                    ( le-real-is-in-upper-cut-ℚ r y y<r)))
-              ( is-located-lower-upper-cut-ℝ y q r q<r))
-          ( λ x<r →
-            inl-disjunction
-              ( transitive-le-ℝ x (real-ℚ r) (min-ℝ x y +ℝ real-ℚ ε)
-                ( r<min+ε)
-                ( le-real-is-in-upper-cut-ℚ r x x<r)))
-          ( is-located-lower-upper-cut-ℝ x q r q<r)
+    approximate-above-min-ℝ ε =
+      elim-disjunction
+        ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
+          (le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
+        ( λ max-ε<-x →
+          inl-disjunction
+            ( binary-tr le-ℝ
+              ( neg-neg-ℝ x)
+              ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
+              ( neg-le-ℝ
+                ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
+                ( neg-ℝ x)
+                ( max-ε<-x))))
+        ( λ max-ε<-y →
+          inr-disjunction
+            ( binary-tr le-ℝ
+              ( neg-neg-ℝ y)
+              ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
+              ( neg-le-ℝ
+                ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
+                ( neg-ℝ y)
+                ( max-ε<-y))))
+        ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
 ```
