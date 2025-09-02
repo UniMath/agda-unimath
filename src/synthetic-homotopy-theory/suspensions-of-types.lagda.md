@@ -795,6 +795,9 @@ In fact, the following are logically equivalent:
 - `X` is [inhabited or empty](logic.propositionally-decidable-types.md)
 - `trunc-Set (Σ X)` is [finite](univalent-combinatorics.finite-types.md)
 
+Note the relationship with this and
+[Diaconescu's theorem](foundation.diaconescus-theorem.md).
+
 **Proof.**
 
 (->): When `X` is empty, its suspension is the set `Fin 2`. When `X` is
@@ -859,20 +862,27 @@ module _
 
   is-inhabited-or-empty-is-finite-suspension :
     is-finite (type-trunc-Set (suspension X)) → is-inhabited-or-empty X
-  is-inhabited-or-empty-is-finite-suspension p with number-of-elements-is-finite p
+  is-inhabited-or-empty-is-finite-suspension p with number-of-elements-is-finite p in eq
   ... | 0 =
     ex-falso
       ( is-nonempty-is-inhabited
         ( is-inhabited-suspension X)
         ( is-empty-set-truncation-is-empty
-          ( is-empty-is-zero-number-of-elements-is-finite p {! refl  !})))
+          ( is-empty-is-zero-number-of-elements-is-finite p eq)))
   ... | 1 =
     inl
       ( is-inhabited-suspension-is-0-connected
         ( X)
-        ( is-contr-is-one-number-of-elements-is-finite p {! refl  !}))
-  ... | 2 = inr (is-empty-trunc-suspension-has-two-elements {!   !})
-  ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {!   !}
+        ( is-contr-is-one-number-of-elements-is-finite p eq))
+  ... | 2 =
+    inr
+      ( is-empty-trunc-suspension-has-two-elements
+        ( map-inv-equiv-has-cardinality-id-number-of-elements-is-finite
+          ( type-trunc-Set (suspension X))
+          ( p)
+          ( 2)
+          ( eq)))
+  ... | succ-ℕ (succ-ℕ (succ-ℕ n)) = ex-falso {! is-upper-bound-finite-enumeration  !}
 ```
 
 ## See also

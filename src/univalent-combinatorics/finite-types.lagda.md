@@ -772,6 +772,18 @@ abstract
           ( λ m → has-cardinality-ℕ m X)
           ( p)
           ( pr2 (has-finite-cardinality-is-finite H)))
+
+  map-equiv-has-cardinality-id-number-of-elements-is-finite :
+    {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
+    has-cardinality-ℕ n X → Id (number-of-elements-is-finite H) n
+  map-equiv-has-cardinality-id-number-of-elements-is-finite X H n =
+    map-equiv (equiv-has-cardinality-id-number-of-elements-is-finite X H n)
+
+  map-inv-equiv-has-cardinality-id-number-of-elements-is-finite :
+    {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
+    Id (number-of-elements-is-finite H) n → has-cardinality-ℕ n X
+  map-inv-equiv-has-cardinality-id-number-of-elements-is-finite X H n =
+    map-inv-equiv (equiv-has-cardinality-id-number-of-elements-is-finite X H n)
 ```
 
 ## External links

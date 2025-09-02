@@ -174,7 +174,7 @@ has-injective-map-is-upper-bound-finite-enumeration X eq f =
       ( is-injective-Prop (is-set-has-decidable-equality eq)))
     ( λ g → unit-trunc-Prop
       ( ( λ x → inclusion-fiber (map-finite-enumeration X f) (g x)) ,
-        ( is-injective-is-section {!   !} {!   !} {!   !})))
+        ( {!   !})))
     ( has-section-has-decidable-equality-finite-enumeration X eq f)
 
 is-upper-bound-finite-enumeration :
