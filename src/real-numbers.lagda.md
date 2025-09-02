@@ -11,6 +11,8 @@ open import real-numbers.addition-real-numbers public
 open import real-numbers.addition-upper-dedekind-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
+open import real-numbers.binary-maximum-real-numbers public
+open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -25,13 +27,11 @@ open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
-open import real-numbers.maximum-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public
 open import real-numbers.minimum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
-open import real-numbers.minimum-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public

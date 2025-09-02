@@ -301,7 +301,9 @@ module _
     is-inhabited-upper-cut-lim-cauchy-approximation-ℝ ,
     is-rounded-upper-cut-lim-cauchy-approximation-ℝ
 
-  abstract
+  opaque
+    unfolding neighborhood-prop-ℝ
+
     is-disjoint-cut-lim-cauchy-approximation-ℝ :
       (q : ℚ) →
       ¬ ( is-in-subtype lower-cut-lim-cauchy-approximation-ℝ q ×
@@ -406,13 +408,14 @@ module _
                       ( 2ε⁺<ε'⁺)
                       ( 2ε⁺<ε'⁺)))))))
 
-  lim-cauchy-approximation-ℝ : ℝ l
-  lim-cauchy-approximation-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-lim-cauchy-approximation-ℝ)
-      ( upper-real-lim-cauchy-approximation-ℝ)
-      ( is-disjoint-cut-lim-cauchy-approximation-ℝ)
-      ( is-located-lower-upper-cut-lim-cauchy-approximation-ℝ)
+  opaque
+    lim-cauchy-approximation-ℝ : ℝ l
+    lim-cauchy-approximation-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-lim-cauchy-approximation-ℝ)
+        ( upper-real-lim-cauchy-approximation-ℝ)
+        ( is-disjoint-cut-lim-cauchy-approximation-ℝ)
+        ( is-located-lower-upper-cut-lim-cauchy-approximation-ℝ)
 ```
 
 ### The limit satisfies the definition of a limit of a Cauchy approximation
@@ -422,93 +425,110 @@ module _
   {l : Level} (x : cauchy-approximation-ℝ l)
   where
 
-  is-limit-lim-cauchy-approximation-ℝ :
-    is-limit-cauchy-approximation-Metric-Space
-      ( metric-space-ℝ l)
-      ( x)
-      ( lim-cauchy-approximation-ℝ x)
-  is-limit-lim-cauchy-approximation-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( neighborhood-prop-ℝ
-            ( l)
-            ( ε⁺ +ℚ⁺ θ⁺)
-            ( map-cauchy-approximation-ℝ x ε⁺)
-            ( lim-cauchy-approximation-ℝ x))
-      lim = lim-cauchy-approximation-ℝ x
-      xε = map-cauchy-approximation-ℝ x ε⁺
-      θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
-      θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
-      ε+θ'+θ''=ε+θ =
-        associative-add-ℚ _ _ _ ∙
-        ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
-      ε+θ = real-ℚ (ε +ℚ θ)
-      ε+θ' = real-ℚ (ε +ℚ θ')
-    in do
-      ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
-        tr
-          ( le-ℝ (xε +ℝ ε+θ'))
-          ( associative-add-ℝ _ _ _ ∙
-            ap ( xε +ℝ_) (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ))
-          ( le-left-add-real-ℝ⁺
-            ( xε +ℝ ε+θ')
-            ( positive-real-ℚ⁺ θ''⁺))
-      ( q , xε-ε-θ<q , q<xε-ε-θ') ←
-        tr
-          ( λ y → le-ℝ y (xε -ℝ ε+θ'))
-          ( associative-add-ℝ _ _ _ ∙
-            ap
-              ( xε +ℝ_)
-              ( inv (distributive-neg-add-ℝ _ _) ∙
-                ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
-          ( le-diff-real-ℝ⁺ (xε -ℝ ε+θ') (positive-real-ℚ⁺ θ''⁺))
-      neighborhood-dist-ℝ
-        ( ε⁺ +ℚ⁺ θ⁺)
-        ( xε)
-        ( lim)
-        ( leq-dist-leq-diff-ℝ
-          ( _)
-          ( _)
-          ( ε+θ)
-          ( swap-right-diff-leq-ℝ
-            ( xε)
+  opaque
+    unfolding le-ℝ-Prop
+    unfolding lim-cauchy-approximation-ℝ
+
+    is-limit-lim-cauchy-approximation-ℝ :
+      is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-ℝ l)
+        ( x)
+        ( lim-cauchy-approximation-ℝ x)
+    is-limit-lim-cauchy-approximation-ℝ ε⁺@(ε , _) θ⁺@(θ , _) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( neighborhood-prop-ℝ
+              ( l)
+              ( ε⁺ +ℚ⁺ θ⁺)
+              ( map-cauchy-approximation-ℝ x ε⁺)
+              ( lim-cauchy-approximation-ℝ x))
+        lim = lim-cauchy-approximation-ℝ x
+        xε = map-cauchy-approximation-ℝ x ε⁺
+        θ'⁺@(θ' , _) = left-summand-split-ℚ⁺ θ⁺
+        θ''⁺@(θ'' , _) = right-summand-split-ℚ⁺ θ⁺
+        ε+θ'+θ''=ε+θ =
+          associative-add-ℚ _ _ _ ∙
+          ap (ε +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ θ⁺))
+        ε+θ = real-ℚ (ε +ℚ θ)
+        ε+θ' = real-ℚ (ε +ℚ θ')
+      in do
+        ( r , xε+ε+θ'<r , r<xε+ε+θ) ←
+          tr
+            ( le-ℝ (xε +ℝ ε+θ'))
+            ( associative-add-ℝ _ _ _ ∙
+              ap ( xε +ℝ_) (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ))
+            ( le-left-add-real-ℝ⁺
+              ( xε +ℝ ε+θ')
+              ( positive-real-ℚ⁺ θ''⁺))
+        ( q , xε-ε-θ<q , q<xε-ε-θ') ←
+          tr
+            ( λ y → le-ℝ y (xε -ℝ ε+θ'))
+            ( associative-add-ℝ _ _ _ ∙
+              ap
+                ( xε +ℝ_)
+                ( inv (distributive-neg-add-ℝ _ _) ∙
+                  ap neg-ℝ (add-real-ℚ _ _ ∙ ap real-ℚ ε+θ'+θ''=ε+θ)))
+            ( le-diff-real-ℝ⁺ (xε -ℝ ε+θ') (positive-real-ℚ⁺ θ''⁺))
+        neighborhood-dist-ℝ
+          ( ε⁺ +ℚ⁺ θ⁺)
+          ( xε)
+          ( lim)
+          ( leq-dist-leq-diff-ℝ
+            ( _)
+            ( _)
             ( ε+θ)
-            ( lim)
-            ( leq-le-ℝ
-              ( xε -ℝ ε+θ)
-              ( lim)
-              ( intro-exists
-                ( q)
-                ( xε-ε-θ<q ,
-                  intro-exists
-                    ( ε⁺ , θ'⁺)
-                    ( transpose-is-in-lower-cut-diff-ℝ
-                      ( xε)
-                      ( ε +ℚ θ')
-                      ( q)
-                      ( q<xε-ε-θ'))))))
-          ( swap-right-diff-leq-ℝ
-            ( lim)
-            ( real-ℚ (ε +ℚ θ))
-            ( xε)
-            ( leq-transpose-right-add-ℝ
-              ( lim)
+            ( swap-right-diff-leq-ℝ
               ( xε)
               ( ε+θ)
+              ( lim)
               ( leq-le-ℝ
+                ( xε -ℝ ε+θ)
                 ( lim)
-                ( xε +ℝ ε+θ)
                 ( intro-exists
-                  ( r)
+                  ( q)
+                  ( xε-ε-θ<q ,
+                    intro-exists
+                      ( ε⁺ , θ'⁺)
+                      ( transpose-is-in-lower-cut-diff-ℝ
+                        ( xε)
+                        ( ε +ℚ θ')
+                        ( q)
+                        ( q<xε-ε-θ'))))))
+            ( swap-right-diff-leq-ℝ
+              ( lim)
+              ( real-ℚ (ε +ℚ θ))
+              ( xε)
+              ( leq-transpose-right-add-ℝ
+                ( lim)
+                ( xε)
+                ( ε+θ)
+                ( leq-le-ℝ
+                  ( lim)
+                  ( xε +ℝ ε+θ)
                   ( intro-exists
-                    ( ε⁺ , θ'⁺)
-                    ( transpose-is-in-upper-cut-add-ℝ
-                      ( xε)
-                      ( ε +ℚ θ')
-                      ( r)
-                      ( xε+ε+θ'<r)) ,
-                    r<xε+ε+θ))))))
+                    ( r)
+                    ( intro-exists
+                      ( ε⁺ , θ'⁺)
+                      ( transpose-is-in-upper-cut-add-ℝ
+                        ( xε)
+                        ( ε +ℚ θ')
+                        ( r)
+                        ( xε+ε+θ'<r)) ,
+                      r<xε+ε+θ))))))
+
+  abstract
+    saturated-is-limit-lim-cauchy-approximation-ℝ :
+      (ε : ℚ⁺) →
+      neighborhood-ℝ l ε
+        ( map-cauchy-approximation-ℝ x ε)
+        ( lim-cauchy-approximation-ℝ x)
+    saturated-is-limit-lim-cauchy-approximation-ℝ =
+      saturated-is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-ℝ l)
+        ( x)
+        ( _)
+        ( is-limit-lim-cauchy-approximation-ℝ)
 
   is-convergent-cauchy-approximation-ℝ :
     is-convergent-cauchy-approximation-Metric-Space
