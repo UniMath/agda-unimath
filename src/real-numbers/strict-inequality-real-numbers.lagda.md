@@ -288,7 +288,7 @@ module _
   where
 
   abstract
-    le-some-rational-ℝ : exists ℚ (λ q → le-ℝ-Prop x (real-ℚ q))
+    le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
     le-some-rational-ℝ =
       map-tot-exists
         ( λ q → le-real-is-in-upper-cut-ℚ q x)
@@ -353,8 +353,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ
-    unfolding leq-ℝ
+    unfolding le-ℝ leq-ℝ
 
     not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
     not-leq-le-ℝ x<y y≤x =
@@ -372,8 +371,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ
-    unfolding leq-ℝ
+    unfolding le-ℝ leq-ℝ
 
     leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
     leq-not-le-ℝ x≮y p p<y =
@@ -488,8 +486,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
-    unfolding le-ℝ
+    unfolding le-ℝ sim-ℝ
 
     preserves-le-left-sim-ℝ : le-ℝ x z → le-ℝ y z
     preserves-le-left-sim-ℝ =
