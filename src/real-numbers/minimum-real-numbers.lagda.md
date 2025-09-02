@@ -83,22 +83,19 @@ module _
           ( forward-implication
             ( is-least-binary-upper-bound-max-ℝ (neg-ℝ x) (neg-ℝ y) (neg-ℝ z))
             ( neg-leq-ℝ z x z≤x , neg-leq-ℝ z y z≤y)))
-    pr1 (pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min) =
-      transitive-leq-ℝ z (min-ℝ x y) x
-        ( tr
-          ( leq-ℝ (min-ℝ x y))
-          ( neg-neg-ℝ _)
-          ( neg-leq-ℝ (neg-ℝ x) (max-ℝ (neg-ℝ x) (neg-ℝ y))
-            ( leq-left-max-ℝ (neg-ℝ x) (neg-ℝ y))))
-        ( z≤min)
-    pr2 (pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min) =
-      transitive-leq-ℝ z (min-ℝ x y) y
-        ( tr
-          ( leq-ℝ (min-ℝ x y))
-          ( neg-neg-ℝ _)
-          ( neg-leq-ℝ (neg-ℝ y) (max-ℝ (neg-ℝ x) (neg-ℝ y))
-            ( leq-right-max-ℝ (neg-ℝ x) (neg-ℝ y))))
-        ( z≤min)
+    pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min =
+      let
+        case :
+          {l : Level} (w : ℝ l) → leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) →
+          leq-ℝ z w
+        case w w≤max =
+          transitive-leq-ℝ z (min-ℝ x y) w
+            ( tr
+              ( leq-ℝ (min-ℝ x y))
+              ( neg-neg-ℝ _)
+              ( neg-leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) w≤max))
+            ( z≤min)
+      in (case x (leq-left-max-ℝ _ _) , case y (leq-right-max-ℝ _ _))
 
   abstract
     leq-min-leq-leq-ℝ :
