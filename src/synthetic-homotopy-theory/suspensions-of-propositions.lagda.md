@@ -547,9 +547,29 @@ module _
         ＝ z)
       ( suspension-structure-suspension (type-trunc-Prop X))
   pr1 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension =
-    ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
+    ap
+      ( trunc-set-suspension-suspension-trunc-prop)
+      ( compute-north-cogap-suspension
+        ( suspension-structure-suspension-trunc-prop-trunc-set-suspension)) ∙
+    triangle-universal-property-trunc-Set
+      ( suspension-set-Prop (trunc-Prop X))
+      ( cogap-suspension
+        ( suspension-structure-trunc-set-suspension-suspension-trunc-prop))
+      ( north-suspension) ∙
+    compute-north-cogap-suspension
+      ( suspension-structure-trunc-set-suspension-suspension-trunc-prop)
   pr1 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) =
-    ap trunc-set-suspension-suspension-trunc-prop {!   !} ∙ {!   !}
+    ap
+      ( trunc-set-suspension-suspension-trunc-prop)
+      ( compute-south-cogap-suspension
+        ( suspension-structure-suspension-trunc-prop-trunc-set-suspension)) ∙
+    triangle-universal-property-trunc-Set
+      ( suspension-set-Prop (trunc-Prop X))
+      ( cogap-suspension
+        ( suspension-structure-trunc-set-suspension-suspension-trunc-prop))
+      ( south-suspension) ∙
+    compute-south-cogap-suspension
+      ( suspension-structure-trunc-set-suspension-suspension-trunc-prop)
   pr2 (pr2 dependent-suspension-structure-suspension-trunc-prop-trunc-set-suspension) _ =
     eq-is-prop
       ( is-set-suspension-Prop
@@ -559,6 +579,67 @@ module _
           ( south-suspension))
         ( south-suspension))
 
+  dependent-suspension-structure-eq-type-trunc-set-suspension :
+    dependent-suspension-structure
+      (λ z → type-Set
+        (set-Prop
+          (Id-Prop
+            (trunc-Set (suspension X))
+            ( (suspension-trunc-prop-trunc-set-suspension ∘
+              trunc-set-suspension-suspension-trunc-prop)
+              (unit-trunc-Set z))
+            (unit-trunc-Set z))))
+      (suspension-structure-suspension X)
+  pr1 dependent-suspension-structure-eq-type-trunc-set-suspension =
+    ap
+      ( suspension-trunc-prop-trunc-set-suspension)
+      ( {!   !}) ∙
+    {!   !} ∙
+    ap
+      ( unit-trunc-Set)
+      ( compute-north-cogap-suspension
+        ( suspension-structure-suspension X))
+  pr1 (pr2 dependent-suspension-structure-eq-type-trunc-set-suspension) =
+    ap
+      ( suspension-trunc-prop-trunc-set-suspension)
+      ( {!   !}) ∙
+    {!   !} ∙
+    ap
+      ( unit-trunc-Set)
+      ( compute-south-cogap-suspension
+        ( suspension-structure-suspension X))
+  pr2 (pr2 dependent-suspension-structure-eq-type-trunc-set-suspension) x =
+    eq-is-prop
+      ( is-set-type-trunc-Set
+        ( ( suspension-trunc-prop-trunc-set-suspension ∘
+            trunc-set-suspension-suspension-trunc-prop)
+          ( unit-trunc-Set
+      ( south-suspension-structure
+        ( suspension-structure-suspension X))))
+        ( unit-trunc-Set
+          ( south-suspension-structure
+            ( suspension-structure-suspension X))))
+
+  eq-type-trunc-set-suspension :
+    (x : type-trunc-Set (suspension X)) →
+    ( suspension-trunc-prop-trunc-set-suspension ∘
+      trunc-set-suspension-suspension-trunc-prop)
+      x ＝
+    x
+  eq-type-trunc-set-suspension x =
+    function-dependent-universal-property-trunc-Set
+      ( λ y →
+        set-Prop
+          ( Id-Prop
+            ( trunc-Set (suspension X))
+            ( ( suspension-trunc-prop-trunc-set-suspension ∘
+                trunc-set-suspension-suspension-trunc-prop)
+              ( y))
+            ( y)))
+      ( dependent-cogap-suspension _
+        ( dependent-suspension-structure-eq-type-trunc-set-suspension))
+      ( x)
+
   suspension-structure-eq-trunc-set-suspension :
     (x : type-trunc-Set (suspension X)) →
     suspension-structure
@@ -567,8 +648,10 @@ module _
         trunc-set-suspension-suspension-trunc-prop)
         x ＝
       x)
-  pr1 (suspension-structure-eq-trunc-set-suspension x) = {!   !}
-  pr1 (pr2 (suspension-structure-eq-trunc-set-suspension x)) = {!   !}
+  pr1 (suspension-structure-eq-trunc-set-suspension x) =
+    eq-type-trunc-set-suspension x
+  pr1 (pr2 (suspension-structure-eq-trunc-set-suspension x)) =
+    eq-type-trunc-set-suspension x
   pr2 (pr2 (suspension-structure-eq-trunc-set-suspension x)) _ =
     eq-is-prop
       ( is-set-type-trunc-Set

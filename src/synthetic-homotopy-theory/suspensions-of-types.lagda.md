@@ -806,10 +806,10 @@ contractible and hence are `Fin 1`.
 
 (<-): Such a cardinality can only be 1 or 2 - suspensions are inhabited, say, by
 `north`, and the cardinality of a type finitely enumerated by `Fin 2 ＝ bool`
-can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)` is 0-connected
-and hence contractible, well, this is the definition of 0-connectedness of
-`Σ X`, and therefore `X` is inhabited. When it's 2, i.e. when there are no
-identifications `north ＝ south` in `Σ X`, then `X` better have been empty. ∎
+can be no more than 2. When it's 1, i.e. when `trunc-Set (Σ X)` is contractible,
+well, this is the definition of 0-connectedness of `Σ X`, and therefore `X` is
+inhabited. When it's 2, i.e. when there are no identifications `north ＝ south`
+in `Σ X`, then `X` better have been empty. ∎
 
 ```agda
 module _
