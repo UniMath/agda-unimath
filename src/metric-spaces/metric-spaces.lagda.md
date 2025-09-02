@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -32,6 +33,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.short-functions-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
@@ -336,6 +338,53 @@ module _
     x ＝ y
   eq-sim-Metric-Space x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space x y)
+```
+
+### Short maps from a pseudometric space to a metric space reflect similarity
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
+  where
+
+  reflects-sim-map-short-function-metric-space-Pseudometric-Space :
+    {x y : type-Pseudometric-Space A} →
+    sim-Pseudometric-Space A x y →
+    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f x ＝
+    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f y
+  reflects-sim-map-short-function-metric-space-Pseudometric-Space {x} {y} x~y =
+    eq-sim-Metric-Space B
+      ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( x))
+      ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( y))
+      ( preserves-sim-map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)
+        ( x)
+        ( y)
+        ( x~y))
+
+  reflecting-map-short-function-metric-space-Pseudometric-Space :
+    reflecting-map-equivalence-relation
+      ( equivalence-relation-sim-Pseudometric-Space A)
+      ( type-Metric-Space B)
+  reflecting-map-short-function-metric-space-Pseudometric-Space =
+    ( ( map-short-function-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f)) ,
+      ( reflects-sim-map-short-function-metric-space-Pseudometric-Space))
 ```
 
 ## External links
