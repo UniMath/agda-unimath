@@ -18,8 +18,8 @@ open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.inhabited-types
 open import foundation.functoriality-disjunction
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations

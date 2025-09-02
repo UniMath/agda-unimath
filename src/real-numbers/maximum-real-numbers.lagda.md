@@ -15,6 +15,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -30,7 +31,6 @@ open import order-theory.least-upper-bounds-large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import foundation.functoriality-disjunction
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers

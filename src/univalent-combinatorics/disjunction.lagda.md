@@ -14,8 +14,8 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.propositional-truncations
 open import foundation.functoriality-disjunction
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications

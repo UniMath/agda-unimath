@@ -13,11 +13,11 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.functoriality-disjunction
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences

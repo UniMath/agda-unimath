@@ -12,8 +12,8 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.functoriality-disjunction
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions

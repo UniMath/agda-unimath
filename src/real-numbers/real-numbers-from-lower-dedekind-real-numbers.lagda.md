@@ -21,13 +21,13 @@ open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.functoriality-disjunction
 open import foundation.propositions
-open import foundation.function-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
