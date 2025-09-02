@@ -132,26 +132,24 @@ module _
         ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε))
         ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε))
     approximate-above-min-ℝ ε =
-      elim-disjunction
-        ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
-          (le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
-        ( λ max-ε<-x →
-          inl-disjunction
-            ( binary-tr le-ℝ
-              ( neg-neg-ℝ x)
-              ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-              ( neg-le-ℝ
-                ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
-                ( neg-ℝ x)
-                ( max-ε<-x))))
-        ( λ max-ε<-y →
-          inr-disjunction
-            ( binary-tr le-ℝ
-              ( neg-neg-ℝ y)
-              ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-              ( neg-le-ℝ
-                ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
-                ( neg-ℝ y)
-                ( max-ε<-y))))
-        ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
+      let
+        case :
+          {l : Level} → (w : ℝ l) →
+          le-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε) (neg-ℝ w) →
+          le-ℝ w (min-ℝ x y +ℝ real-ℚ⁺ ε)
+        case w max-ε<-w =
+          binary-tr le-ℝ
+            ( neg-neg-ℝ w)
+            ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
+            ( neg-le-ℝ
+              ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
+              ( neg-ℝ w)
+              ( max-ε<-w))
+      in
+        elim-disjunction
+          ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
+            (le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
+          ( λ max-ε<-x → inl-disjunction (case x max-ε<-x))
+          ( λ max-ε<-y → inr-disjunction (case y max-ε<-y))
+          ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
 ```
