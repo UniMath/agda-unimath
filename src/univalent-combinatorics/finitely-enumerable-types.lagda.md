@@ -120,10 +120,10 @@ finite-enumeration-equiv (n , Fin-n↠X) X≃Y =
     is-surjective-left-comp-equiv X≃Y (is-surjective-map-surjection Fin-n↠X))
 
 is-finitely-enumerable-equiv :
-  {l1 : Level} {X : UU l1} → is-finitely-enumerable X →
-  {l2 : Level} {Y : UU l2} → X ≃ Y → is-finitely-enumerable Y
-is-finitely-enumerable-equiv feX X≃Y =
-  map-is-inhabited (λ eX → finite-enumeration-equiv eX X≃Y) feX
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
+  is-finitely-enumerable X → is-finitely-enumerable Y
+is-finitely-enumerable-equiv X≃Y =
+  map-is-inhabited (λ eX → finite-enumeration-equiv eX X≃Y)
 ```
 
 ### Finitely enumerable types with decidable equality are finite

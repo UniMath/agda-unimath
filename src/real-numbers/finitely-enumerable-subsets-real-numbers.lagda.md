@@ -79,6 +79,6 @@ neg-finitely-enumerable-subset-ℝ :
 neg-finitely-enumerable-subset-ℝ (S , is-finitely-enumerable-S) =
   ( neg-subset-ℝ S ,
     is-finitely-enumerable-equiv
-      ( is-finitely-enumerable-S)
-      ( equiv-precomp-equiv-type-subtype (equiv-is-involution neg-neg-ℝ) S))
+      ( equiv-precomp-equiv-type-subtype (equiv-is-involution neg-neg-ℝ) S)
+      ( is-finitely-enumerable-S))
 ```
