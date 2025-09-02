@@ -262,7 +262,7 @@ module _
           ( ε<q)
 
     leq-zero-upper-real-dist-Metric-Space :
-      leq-upper-ℝ (upper-real-ℚ zero-ℚ) upper-real-dist-Metric-Space
+      leq-upper-ℝ zero-upper-ℝ upper-real-dist-Metric-Space
     leq-zero-upper-real-dist-Metric-Space q =
       rec-trunc-Prop
         ( le-ℚ-Prop zero-ℚ q)
