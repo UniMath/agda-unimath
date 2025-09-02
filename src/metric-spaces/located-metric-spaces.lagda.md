@@ -170,7 +170,7 @@ module _
           ( refl-leq-ℚ zero-ℚ)))
 
   opaque
-    unfolding leq-ℝ-Prop' real-ℚ
+    unfolding leq-ℝ' real-ℚ
 
     leq-real-dist-Metric-Space :
       (ε : ℚ⁺) →

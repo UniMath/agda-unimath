@@ -125,7 +125,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop max-ℝ
+    unfolding leq-ℝ max-ℝ
 
     is-least-binary-upper-bound-max-ℝ :
       is-least-binary-upper-bound-Large-Poset
@@ -182,7 +182,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop sim-ℝ
+    unfolding leq-ℝ sim-ℝ
 
     commutative-max-ℝ : max-ℝ x y ＝ max-ℝ y x
     commutative-max-ℝ =
@@ -392,13 +392,13 @@ module _
     approximate-below-max-ℝ :
       (ε : ℚ⁺) →
       type-disjunction-Prop
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
+        ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
+        ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
     approximate-below-max-ℝ ε⁺@(ε , _) =
       let
         motive =
-          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) x) ∨
-          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+          ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) x) ∨
+          ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) y)
         open do-syntax-trunc-Prop motive
       in do
         (q , max-ε<q , q<max) ←

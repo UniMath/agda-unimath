@@ -302,7 +302,7 @@ module _
     is-rounded-upper-cut-lim-cauchy-approximation-ℝ
 
   opaque
-    unfolding neighborhood-prop-ℝ
+    unfolding neighborhood-ℝ
 
     is-disjoint-cut-lim-cauchy-approximation-ℝ :
       (q : ℚ) →
@@ -426,8 +426,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop
-    unfolding lim-cauchy-approximation-ℝ
+    unfolding le-ℝ lim-cauchy-approximation-ℝ
 
     is-limit-lim-cauchy-approximation-ℝ :
       is-limit-cauchy-approximation-Metric-Space

@@ -76,7 +76,7 @@ module _
   is-approximated-above-prop-family-ℝ x =
     Π-Prop
       ( ℚ⁺)
-      ( λ ε → ∃ I (λ i → le-ℝ-Prop (y i) (x +ℝ real-ℚ⁺ ε)))
+      ( λ ε → ∃ I (λ i → le-prop-ℝ (y i) (x +ℝ real-ℚ⁺ ε)))
 
   is-approximated-above-family-ℝ : {l3 : Level} → ℝ l3 → UU (l1 ⊔ l2 ⊔ l3)
   is-approximated-above-family-ℝ x =
@@ -226,9 +226,9 @@ module _
       ( is-lower-bound-is-infimum-family-ℝ y x is-infimum-x-yᵢ i)
 
   le-element-le-infimum-family-ℝ :
-    {l4 : Level} → (z : ℝ l4) → le-ℝ x z → exists I (λ i → le-ℝ-Prop (y i) z)
+    {l4 : Level} → (z : ℝ l4) → le-ℝ x z → exists I (λ i → le-prop-ℝ (y i) z)
   le-element-le-infimum-family-ℝ z x<z =
-    let open do-syntax-trunc-Prop (∃ I (λ i → le-ℝ-Prop (y i) z))
+    let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ (y i) z))
     in do
       (ε⁺@(ε , _) , ε<z-x) ←
         exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
@@ -243,11 +243,11 @@ module _
 
   le-infimum-iff-le-element-family-ℝ :
     {l4 : Level} → (z : ℝ l4) →
-    (le-ℝ x z) ↔ (exists I (λ i → le-ℝ-Prop (y i) z))
+    (le-ℝ x z) ↔ (exists I (λ i → le-prop-ℝ (y i) z))
   pr1 (le-infimum-iff-le-element-family-ℝ z) =
     le-element-le-infimum-family-ℝ z
   pr2 (le-infimum-iff-le-element-family-ℝ z) =
-    elim-exists (le-ℝ-Prop x z) (le-infimum-le-element-family-ℝ z)
+    elim-exists (le-prop-ℝ x z) (le-infimum-le-element-family-ℝ z)
 ```
 
 ### The infimum of a family of real numbers is the negation of the supremum of the negation of the family
