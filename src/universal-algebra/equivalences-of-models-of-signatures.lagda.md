@@ -8,12 +8,14 @@ module universal-algebra.equivalences-of-models-of-signatures where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.structure-identity-principle
@@ -24,8 +26,8 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
 
 open import lists.functoriality-tuples
@@ -88,20 +90,13 @@ module _
     (f g : is-model-signature σ X) →
     htpy-id-Model-Signature' f g ≃ htpy-id-Model-Signature f g
   equiv-htpy-id-htpy-id'-Model-Signature f g =
-    equiv-iff
-      ( htpy-id-prop-Model-Signature' f g)
-      ( htpy-id-prop-Model-Signature f g)
-      ( λ h op v →
-        h op v ∙
-        ap
-          ( g op)
-          ( preserves-id-map-tuple (arity-operation-signature σ op) v))
-      ( λ h op v →
-        h op v ∙
-        inv
-          ( ap
-            ( g op)
-            ( preserves-id-map-tuple (arity-operation-signature σ op) v)))
+    equiv-Π-equiv-family
+      ( λ op → equiv-Π-equiv-family
+        ( λ v → equiv-concat'
+          ( f op v)
+            ( ap
+              ( g op)
+              ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
 
   refl-htpy-id-Model-Signature :
     (f : is-model-signature σ X) →
