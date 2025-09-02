@@ -251,8 +251,7 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ) (p<q : le-ℚ p q)
   where
 
-  is-located-le-ℝ :
-    type-disjunction-Prop (le-ℝ-Prop (real-ℚ p) x) (le-ℝ-Prop x (real-ℚ q))
+  is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
   is-located-le-ℝ =
     map-disjunction
       ( le-real-is-in-lower-cut-ℚ p x)
