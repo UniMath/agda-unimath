@@ -49,7 +49,7 @@ is-nonnegative-ℝ : {l : Level} → ℝ l → UU l
 is-nonnegative-ℝ = leq-ℝ zero-ℝ
 
 is-nonnegative-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-nonnegative-prop-ℝ = leq-ℝ-Prop zero-ℝ
+is-nonnegative-prop-ℝ = leq-prop-ℝ zero-ℝ
 
 nonnegative-ℝ : (l : Level) → UU (lsuc l)
 nonnegative-ℝ l = type-subtype (is-nonnegative-prop-ℝ {l})

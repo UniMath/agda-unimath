@@ -41,7 +41,7 @@ module _
   where
 
   apart-ℝ-Prop : Prop (l1 ⊔ l2)
-  apart-ℝ-Prop = le-ℝ-Prop x y ∨ le-ℝ-Prop y x
+  apart-ℝ-Prop = le-prop-ℝ x y ∨ le-prop-ℝ y x
 
   apart-ℝ : UU (l1 ⊔ l2)
   apart-ℝ = type-Prop apart-ℝ-Prop

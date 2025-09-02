@@ -1,9 +1,9 @@
-# The maximum of real numbers
+# The binary maximum of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.maximum-real-numbers where
+module real-numbers.binary-maximum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 
+open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
@@ -124,7 +125,7 @@ module _
   where
 
   opaque
-    unfolding max-ℝ
+    unfolding leq-ℝ max-ℝ
 
     is-least-binary-upper-bound-max-ℝ :
       is-least-binary-upper-bound-Large-Poset
@@ -181,7 +182,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
+    unfolding leq-ℝ sim-ℝ
 
     commutative-max-ℝ : max-ℝ x y ＝ max-ℝ y x
     commutative-max-ℝ =
@@ -206,6 +207,15 @@ has-joins-ℝ-Large-Poset : has-joins-Large-Poset ℝ-Large-Poset
 join-has-joins-Large-Poset has-joins-ℝ-Large-Poset = max-ℝ
 is-least-binary-upper-bound-join-has-joins-Large-Poset
   has-joins-ℝ-Large-Poset = is-least-binary-upper-bound-max-ℝ
+```
+
+### The real numbers at a specific universe level are a join semilattice
+
+```agda
+ℝ-Order-Theoretic-Join-Semilattice :
+  (l : Level) → Order-Theoretic-Join-Semilattice (lsuc l) l
+ℝ-Order-Theoretic-Join-Semilattice l =
+  ( ℝ-Poset l , λ x y → (max-ℝ x y , is-least-binary-upper-bound-max-ℝ x y))
 ```
 
 ### The binary maximum preserves similarity
@@ -257,51 +267,52 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  preserves-lower-neighborhood-leq-left-max-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( max-ℝ x y)
-      ( (max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d =
-    leq-is-least-binary-upper-bound-Large-Poset
-      ( ℝ-Large-Poset)
-      ( x)
-      ( y)
-      ( is-least-binary-upper-bound-max-ℝ x y)
-      ( (max-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
-      ( ( transitive-leq-ℝ
-          ( x)
-          ( max-ℝ x z)
-          ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( leq-le-ℝ
+  abstract
+    preserves-lower-neighborhood-leq-left-max-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( max-ℝ x y)
+        ( (max-ℝ x z) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d =
+      leq-is-least-binary-upper-bound-Large-Poset
+        ( ℝ-Large-Poset)
+        ( x)
+        ( y)
+        ( is-least-binary-upper-bound-max-ℝ x y)
+        ( (max-ℝ x z) +ℝ real-ℚ⁺ d)
+        ( ( transitive-leq-ℝ
+            ( x)
             ( max-ℝ x z)
-            ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
-            ( le-left-add-real-ℝ⁺
+            ( max-ℝ x z +ℝ real-ℚ⁺ d)
+            ( leq-le-ℝ
               ( max-ℝ x z)
-              ( positive-real-ℚ⁺ d)))
-          ( leq-left-max-ℝ x z)) ,
-        ( transitive-leq-ℝ
-          ( y)
-          ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( max-ℝ x z +ℝ real-ℚ (rational-ℚ⁺ d))
-          ( preserves-leq-right-add-ℝ
-            ( real-ℚ (rational-ℚ⁺ d))
-            ( z)
-            ( max-ℝ x z)
-            ( leq-right-max-ℝ x z))
-          ( z≤y+d)))
+              ( max-ℝ x z +ℝ real-ℚ⁺ d)
+              ( le-left-add-real-ℝ⁺
+                ( max-ℝ x z)
+                ( positive-real-ℚ⁺ d)))
+            ( leq-left-max-ℝ x z)) ,
+          ( transitive-leq-ℝ
+            ( y)
+            ( z +ℝ real-ℚ⁺ d)
+            ( max-ℝ x z +ℝ real-ℚ⁺ d)
+            ( preserves-leq-right-add-ℝ
+              ( real-ℚ⁺ d)
+              ( z)
+              ( max-ℝ x z)
+              ( leq-right-max-ℝ x z))
+            ( z≤y+d)))
 
-  preserves-lower-neighborhood-leq-right-max-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( max-ℝ y x)
-      ( (max-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-right-max-ℝ z≤y+d =
-    binary-tr
-      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
-      ( commutative-max-ℝ x y)
-      ( commutative-max-ℝ x z)
-      ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
+    preserves-lower-neighborhood-leq-right-max-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( max-ℝ y x)
+        ( (max-ℝ z x) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-right-max-ℝ z≤y+d =
+      binary-tr
+        ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
+        ( commutative-max-ℝ x y)
+        ( commutative-max-ℝ x z)
+        ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
 ```
 
 ### The maximum with a real number is a short function `ℝ → ℝ`
@@ -311,20 +322,21 @@ module _
   {l1 l2 : Level} (x : ℝ l1)
   where
 
-  is-short-function-left-max-ℝ :
-    is-short-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
-      ( max-ℝ x)
-  is-short-function-left-max-ℝ d y z Nyz =
-    neighborhood-real-bound-each-leq-ℝ
-      ( d)
-      ( max-ℝ x y)
-      ( max-ℝ x z)
-      ( preserves-lower-neighborhood-leq-left-max-ℝ d x y z
-        ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
-      ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
-        ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
+  abstract
+    is-short-function-left-max-ℝ :
+      is-short-function-Metric-Space
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2))
+        ( max-ℝ x)
+    is-short-function-left-max-ℝ d y z Nyz =
+      neighborhood-real-bound-each-leq-ℝ
+        ( d)
+        ( max-ℝ x y)
+        ( max-ℝ x z)
+        ( preserves-lower-neighborhood-leq-left-max-ℝ d x y z
+          ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
+        ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
+          ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
 
   short-left-max-ℝ :
     short-function-Metric-Space
@@ -341,22 +353,23 @@ module _
   {l1 l2 : Level}
   where
 
-  is-short-function-short-left-max-ℝ :
-    is-short-function-Metric-Space
-      ( metric-space-ℝ l1)
-      ( metric-space-of-short-functions-Metric-Space
-        ( metric-space-ℝ l2)
-        ( metric-space-ℝ (l1 ⊔ l2)))
-      ( short-left-max-ℝ)
-  is-short-function-short-left-max-ℝ d x y Nxy z =
-    neighborhood-real-bound-each-leq-ℝ
-      ( d)
-      ( max-ℝ x z)
-      ( max-ℝ y z)
-      ( preserves-lower-neighborhood-leq-right-max-ℝ d z x y
-        ( left-leq-real-bound-neighborhood-ℝ d x y Nxy))
-      ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
-        ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
+  abstract
+    is-short-function-short-left-max-ℝ :
+      is-short-function-Metric-Space
+        ( metric-space-ℝ l1)
+        ( metric-space-of-short-functions-Metric-Space
+          ( metric-space-ℝ l2)
+          ( metric-space-ℝ (l1 ⊔ l2)))
+        ( short-left-max-ℝ)
+    is-short-function-short-left-max-ℝ d x y Nxy z =
+      neighborhood-real-bound-each-leq-ℝ
+        ( d)
+        ( max-ℝ x z)
+        ( max-ℝ y z)
+        ( preserves-lower-neighborhood-leq-right-max-ℝ d z x y
+          ( left-leq-real-bound-neighborhood-ℝ d x y Nxy))
+        ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
+          ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
 
   short-max-ℝ :
     short-function-Metric-Space
@@ -375,54 +388,55 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  approximate-below-max-ℝ :
-    (ε : ℚ⁺) →
-    type-disjunction-Prop
-      ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
-      ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
-  approximate-below-max-ℝ ε⁺@(ε , _) =
-    let
-      motive =
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) x) ∨
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
-      open do-syntax-trunc-Prop motive
-    in do
-      (q , max-ε<q , q<max) ←
-        dense-rational-le-ℝ
-          ( max-ℝ x y -ℝ real-ℚ ε)
-          ( max-ℝ x y)
-          ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
-      (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
-      let q<r = reflects-le-real-ℚ q r q-<ℝ-r
-      map-disjunction
-        ( λ q<x →
-          transitive-le-ℝ
+  abstract
+    approximate-below-max-ℝ :
+      (ε : ℚ⁺) →
+      type-disjunction-Prop
+        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
+        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
+    approximate-below-max-ℝ ε⁺@(ε , _) =
+      let
+        motive =
+          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) x) ∨
+          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+        open do-syntax-trunc-Prop motive
+      in do
+        (q , max-ε<q , q<max) ←
+          dense-rational-le-ℝ
             ( max-ℝ x y -ℝ real-ℚ ε)
-            ( real-ℚ q)
-            ( x)
-            ( le-real-is-in-lower-cut-ℚ q x q<x)
-            ( max-ε<q))
-        ( λ x<r →
-          elim-disjunction
-            ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
-            ( λ q<y →
-              transitive-le-ℝ
-                ( max-ℝ x y -ℝ real-ℚ ε)
-                ( real-ℚ q)
-                ( y)
-                ( le-real-is-in-lower-cut-ℚ q y q<y)
-                ( max-ε<q))
-            ( λ y<r →
-              ex-falso
-                ( irreflexive-le-ℝ
-                  ( max-ℝ x y)
-                  ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
-                    ( leq-max-leq-leq-ℝ x y (real-ℚ r)
-                      ( leq-le-ℝ x (real-ℚ r)
-                        ( le-real-is-in-upper-cut-ℚ r x x<r))
-                      ( leq-le-ℝ y (real-ℚ r)
-                        ( le-real-is-in-upper-cut-ℚ r y y<r)))
-                    ( r<max))))
-            ( is-located-lower-upper-cut-ℝ y q r q<r))
-        ( is-located-lower-upper-cut-ℝ x q r q<r)
+            ( max-ℝ x y)
+            ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
+        (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
+        let q<r = reflects-le-real-ℚ q r q-<ℝ-r
+        map-disjunction
+          ( λ q<x →
+            transitive-le-ℝ
+              ( max-ℝ x y -ℝ real-ℚ ε)
+              ( real-ℚ q)
+              ( x)
+              ( le-real-is-in-lower-cut-ℚ q x q<x)
+              ( max-ε<q))
+          ( λ x<r →
+            elim-disjunction
+              ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+              ( λ q<y →
+                transitive-le-ℝ
+                  ( max-ℝ x y -ℝ real-ℚ ε)
+                  ( real-ℚ q)
+                  ( y)
+                  ( le-real-is-in-lower-cut-ℚ q y q<y)
+                  ( max-ε<q))
+              ( λ y<r →
+                ex-falso
+                  ( irreflexive-le-ℝ
+                    ( max-ℝ x y)
+                    ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
+                      ( leq-max-leq-leq-ℝ x y (real-ℚ r)
+                        ( leq-le-ℝ x (real-ℚ r)
+                          ( le-real-is-in-upper-cut-ℚ r x x<r))
+                        ( leq-le-ℝ y (real-ℚ r)
+                          ( le-real-is-in-upper-cut-ℚ r y y<r)))
+                      ( r<max))))
+              ( is-located-lower-upper-cut-ℝ y q r q<r))
+          ( is-located-lower-upper-cut-ℝ x q r q<r)
 ```
