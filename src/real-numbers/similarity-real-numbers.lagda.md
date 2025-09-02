@@ -44,8 +44,8 @@ opaque
   sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
   sim-prop-ℝ x y = sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 
-  sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-  sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
+sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
+sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
 
 infix 6 _~ℝ_
 _~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
@@ -62,7 +62,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
+    unfolding sim-prop-ℝ
 
     sim-lower-cut-iff-sim-ℝ :
       sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ (x ~ℝ y)
@@ -77,7 +77,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
+    unfolding sim-prop-ℝ
 
     sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ~ℝ y)
     sim-sim-upper-cut-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
@@ -94,7 +94,7 @@ module _
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ~ℝ x
   refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
@@ -107,7 +107,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   symmetric-sim-ℝ :
     {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
@@ -119,7 +119,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   transitive-sim-ℝ :
     {l1 l2 l3 : Level} →
@@ -133,7 +133,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
   eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
@@ -155,7 +155,7 @@ infixl 1 similarity-reasoning-ℝ_
 infixl 0 step-similarity-reasoning-ℝ
 
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   similarity-reasoning-ℝ_ :
     {l : Level} → (x : ℝ l) → sim-ℝ x x

@@ -338,6 +338,11 @@ module _
     map-inv-equiv (equiv-sim-eq-Metric-Space x y)
 ```
 
+## See also
+
+- Metric spaces that _are_ defined by a distance function are defined in
+  [Metrics](metric-spaces.metrics.md).
+
 ## External links
 
 - [`MetricSpaces.Type`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)

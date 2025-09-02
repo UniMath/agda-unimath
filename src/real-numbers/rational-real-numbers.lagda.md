@@ -10,6 +10,7 @@ module real-numbers.rational-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -80,6 +81,9 @@ real-ℚ x = (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real
 
 real-ℚ⁺ : ℚ⁺ → ℝ lzero
 real-ℚ⁺ q = real-ℚ (rational-ℚ⁺ q)
+
+real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ lzero
+real-ℚ⁰⁺ q = real-ℚ (rational-ℚ⁰⁺ q)
 ```
 
 ### Zero as a real number
@@ -198,7 +202,7 @@ is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   sim-rational-ℝ :
     {l : Level} →

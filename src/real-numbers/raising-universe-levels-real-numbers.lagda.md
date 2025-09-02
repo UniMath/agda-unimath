@@ -171,7 +171,7 @@ module _
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
   pr1 (sim-raise-ℝ l x) _ = map-raise

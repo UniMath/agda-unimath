@@ -145,7 +145,7 @@ abstract
   leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
 
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
@@ -155,7 +155,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   sim-antisymmetric-leq-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
@@ -204,7 +204,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding sim-prop-ℝ
 
   sim-sim-leq-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
@@ -264,7 +264,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
+    unfolding sim-prop-ℝ
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
     preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)

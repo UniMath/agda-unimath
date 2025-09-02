@@ -260,4 +260,17 @@ module _
             ( q≤0)
             ( le-zero-is-positive-ℚ ε is-pos-ε))
           ( ε<q)
+
+    leq-zero-upper-real-dist-Metric-Space :
+      leq-upper-ℝ (upper-real-ℚ zero-ℚ) upper-real-dist-Metric-Space
+    leq-zero-upper-real-dist-Metric-Space q =
+      rec-trunc-Prop
+        ( le-ℚ-Prop zero-ℚ q)
+        ( λ ((ε , Nεxy) , ε<q) →
+          transitive-le-ℚ
+            ( zero-ℚ)
+            ( rational-ℚ⁺ ε)
+            ( q)
+            ( ε<q)
+            ( le-zero-is-positive-ℚ (pr1 ε) (pr2 ε)))
 ```
