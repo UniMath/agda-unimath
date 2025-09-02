@@ -17,10 +17,12 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonzero-rational-numbers
@@ -144,6 +146,13 @@ nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
 nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ q H)
 ```
 
+### The images of natural numbers in the rationals are nonnegative
+
+```agda
+nonnegative-rational-ℕ : ℕ → ℚ⁰⁺
+nonnegative-rational-ℕ n = (rational-ℕ n , is-nonnegative-int-ℕ n)
+```
+
 ### The rational image of a nonnegative integer is nonnegative
 
 ```agda
@@ -173,6 +182,16 @@ opaque
       ( sim-reduced-fraction-ℤ x)
 ```
 
+### Inequality on nonnegative rational numbers
+
+```agda
+leq-ℚ⁰⁺-Prop : ℚ⁰⁺ → ℚ⁰⁺ → Prop lzero
+leq-ℚ⁰⁺-Prop (p , _) (q , _) = leq-ℚ-Prop p q
+
+leq-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → UU lzero
+leq-ℚ⁰⁺ (p , _) (q , _) = leq-ℚ p q
+```
+
 ### A rational number `x` is nonnegative if and only if `0 ≤ x`
 
 ```agda
@@ -195,6 +214,10 @@ module _
     is-nonnegative-iff-leq-zero-ℚ =
       ( leq-zero-is-nonnegative-ℚ ,
         is-nonnegative-leq-zero-ℚ)
+
+abstract
+  leq-zero-ℚ⁰⁺ : (x : ℚ⁰⁺) → leq-ℚ⁰⁺ zero-ℚ⁰⁺ x
+  leq-zero-ℚ⁰⁺ = ind-Σ leq-zero-is-nonnegative-ℚ
 ```
 
 ### The successor of a nonnegative rational number is positive
@@ -233,46 +256,6 @@ opaque
         { fraction-ℚ y}
         ( P)
         ( Q))
-```
-
-### Multiplication by a nonnegative rational number preserves inequality
-
-```agda
-opaque
-  unfolding leq-ℚ-Prop
-  unfolding mul-ℚ
-
-  preserves-leq-right-mul-ℚ⁰⁺ :
-    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
-    leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
-  preserves-leq-right-mul-ℚ⁰⁺
-    p⁺@((p@(np , dp , pos-dp) , _) , nonneg-np)
-    (q@(nq , dq , _) , _)
-    (r@(nr , dr , _) , _)
-    q≤r =
-      preserves-leq-rational-fraction-ℤ
-        ( mul-fraction-ℤ q p)
-        ( mul-fraction-ℤ r p)
-        ( binary-tr
-          ( leq-ℤ)
-          ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( preserves-leq-left-mul-nonnegative-ℤ
-            ( np *ℤ dp ,
-              is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
-            ( nq *ℤ dr)
-            ( nr *ℤ dq)
-            ( q≤r)))
-
-  preserves-leq-left-mul-ℚ⁰⁺ :
-    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
-    leq-ℚ (rational-ℚ⁰⁺ p *ℚ q) (rational-ℚ⁰⁺ p *ℚ r)
-  preserves-leq-left-mul-ℚ⁰⁺ p q r q≤r =
-    binary-tr
-      ( leq-ℚ)
-      ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
-      ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
-      ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
 ```
 
 ### Addition on nonnegative rational numbers
@@ -331,16 +314,6 @@ abstract
   commutative-mul-ℚ⁰⁺ (p , _) (q , _) = eq-ℚ⁰⁺ (commutative-mul-ℚ p q)
 ```
 
-### Inequality on nonnegative rational numbers
-
-```agda
-leq-ℚ⁰⁺-Prop : ℚ⁰⁺ → ℚ⁰⁺ → Prop lzero
-leq-ℚ⁰⁺-Prop (p , _) (q , _) = leq-ℚ-Prop p q
-
-leq-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → UU lzero
-leq-ℚ⁰⁺ (p , _) (q , _) = leq-ℚ p q
-```
-
 ### Addition of a nonnegative rational number is an increasing map
 
 ```agda
@@ -386,4 +359,75 @@ abstract
 
 nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
 nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
+```
+
+### The maximum of two nonnegative rational numbers is nonnegative
+
+```agda
+abstract
+  is-nonnegative-max-ℚ⁰⁺ :
+    (x y : ℚ⁰⁺) → is-nonnegative-ℚ (max-ℚ (rational-ℚ⁰⁺ x) (rational-ℚ⁰⁺ y))
+  is-nonnegative-max-ℚ⁰⁺ (x , nonneg-x) (y , nonneg-y) =
+    is-nonnegative-leq-zero-ℚ
+      ( max-ℚ x y)
+      ( tr
+        ( λ q → leq-ℚ q (max-ℚ x y))
+        ( idempotent-max-ℚ zero-ℚ)
+        ( max-leq-leq-ℚ zero-ℚ x zero-ℚ y
+          ( leq-zero-is-nonnegative-ℚ x nonneg-x)
+          ( leq-zero-is-nonnegative-ℚ y nonneg-y)))
+
+max-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
+max-ℚ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) = max-ℚ x y , is-nonnegative-max-ℚ⁰⁺ x⁰⁺ y⁰⁺
+```
+
+### Multiplication by a nonnegative rational number preserves inequality
+
+```agda
+opaque
+  unfolding leq-ℚ-Prop
+  unfolding mul-ℚ
+
+  preserves-leq-right-mul-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
+  preserves-leq-right-mul-ℚ⁰⁺
+    p⁺@((p@(np , dp , pos-dp) , _) , nonneg-np)
+    (q@(nq , dq , _) , _)
+    (r@(nr , dr , _) , _)
+    q≤r =
+      preserves-leq-rational-fraction-ℤ
+        ( mul-fraction-ℤ q p)
+        ( mul-fraction-ℤ r p)
+        ( binary-tr
+          ( leq-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-leq-left-mul-nonnegative-ℤ
+            ( np *ℤ dp ,
+              is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
+            ( nq *ℤ dr)
+            ( nr *ℤ dq)
+            ( q≤r)))
+
+  preserves-leq-left-mul-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (rational-ℚ⁰⁺ p *ℚ q) (rational-ℚ⁰⁺ p *ℚ r)
+  preserves-leq-left-mul-ℚ⁰⁺ p q r q≤r =
+    binary-tr
+      ( leq-ℚ)
+      ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
+      ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
+      ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
+
+abstract
+  preserves-leq-mul-ℚ⁰⁺ :
+    (p q r s : ℚ⁰⁺) → leq-ℚ⁰⁺ p q → leq-ℚ⁰⁺ r s → leq-ℚ⁰⁺ (p *ℚ⁰⁺ r) (q *ℚ⁰⁺ s)
+  preserves-leq-mul-ℚ⁰⁺ p q r s p≤q r≤s =
+    transitive-leq-ℚ
+      ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ r))
+      ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ s))
+      ( rational-ℚ⁰⁺ (q *ℚ⁰⁺ s))
+      ( preserves-leq-right-mul-ℚ⁰⁺ s _ _ p≤q)
+      ( preserves-leq-left-mul-ℚ⁰⁺ p _ _ r≤s)
 ```
