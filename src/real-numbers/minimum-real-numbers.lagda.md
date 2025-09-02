@@ -80,9 +80,9 @@ module _
         ( λ w → leq-ℝ w (min-ℝ x y))
         ( neg-neg-ℝ z)
         ( neg-leq-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y)) (neg-ℝ z)
-          ( forward-implication
-            ( is-least-binary-upper-bound-max-ℝ (neg-ℝ x) (neg-ℝ y) (neg-ℝ z))
-            ( neg-leq-ℝ z x z≤x , neg-leq-ℝ z y z≤y)))
+          ( leq-max-leq-leq-ℝ _ _ (neg-ℝ z)
+            ( neg-leq-ℝ z x z≤x)
+            ( neg-leq-ℝ z y z≤y)))
     pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min =
       let
         case :
