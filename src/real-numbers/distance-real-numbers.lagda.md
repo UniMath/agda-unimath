@@ -80,7 +80,7 @@ only if their distance is at most `ε`.
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop neighborhood-prop-ℝ
+  unfolding leq-ℝ neighborhood-ℝ
 
   diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
@@ -144,7 +144,7 @@ abstract
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
 opaque
-  unfolding neighborhood-prop-ℝ
+  unfolding neighborhood-ℝ
 
   neighborhood-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →

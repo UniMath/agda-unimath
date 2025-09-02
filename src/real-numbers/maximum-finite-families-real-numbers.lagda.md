@@ -151,17 +151,9 @@ abstract
           ( λ i →
             le-ℝ-Prop (max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε) (x i))
       max-ε₁-ε₂=max-ε =
-        equational-reasoning
-          max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε₁ -ℝ real-ℚ⁺ ε₂
-          ＝
-            max-fin-sequence-ℝ (succ-ℕ n) x +ℝ
-            (neg-ℝ (real-ℚ⁺ ε₁) -ℝ real-ℚ⁺ ε₂)
-            by associative-add-ℝ _ _ _
-          ＝
-            max-fin-sequence-ℝ (succ-ℕ n) x -ℝ (real-ℚ⁺ ε₁ +ℝ real-ℚ⁺ ε₂)
-            by ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _))
-          ＝ max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε
-            by ap-diff-ℝ refl (add-real-ℚ _ _ ∙ ap real-ℚ⁺ ε₁+ε₂=ε)
+        associative-add-ℝ _ _ _ ∙
+        ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)) ∙
+        ap-diff-ℝ refl (add-real-ℚ _ _ ∙ ap real-ℚ⁺ ε₁+ε₂=ε)
     in
       elim-disjunction
         ( motive)

@@ -69,11 +69,14 @@ module _
   where
 
   opaque
-    leq-ℝ-Prop : Prop (l1 ⊔ l2)
-    leq-ℝ-Prop = leq-lower-ℝ-Prop (lower-real-ℝ x) (lower-real-ℝ y)
+    leq-ℝ : UU (l1 ⊔ l2)
+    leq-ℝ = leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
 
-  leq-ℝ : UU (l1 ⊔ l2)
-  leq-ℝ = type-Prop leq-ℝ-Prop
+    is-prop-leq-ℝ : is-prop leq-ℝ
+    is-prop-leq-ℝ = is-prop-leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
+
+  leq-prop-ℝ : Prop (l1 ⊔ l2)
+  leq-prop-ℝ = (leq-ℝ , is-prop-leq-ℝ)
 
 infix 30 _≤-ℝ_
 _≤-ℝ_ = leq-ℝ
@@ -89,14 +92,17 @@ module _
   where
 
   opaque
-    leq-ℝ-Prop' : Prop (l1 ⊔ l2)
-    leq-ℝ-Prop' = leq-upper-ℝ-Prop (upper-real-ℝ x) (upper-real-ℝ y)
+    leq-ℝ' : UU (l1 ⊔ l2)
+    leq-ℝ' = leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
 
-  leq-ℝ' : UU (l1 ⊔ l2)
-  leq-ℝ' = type-Prop leq-ℝ-Prop'
+    is-prop-leq-ℝ' : is-prop leq-ℝ'
+    is-prop-leq-ℝ' = is-prop-leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
+
+  leq-prop-ℝ' : Prop (l1 ⊔ l2)
+  leq-prop-ℝ' = (leq-ℝ' , is-prop-leq-ℝ')
 
   opaque
-    unfolding leq-ℝ-Prop leq-ℝ-Prop'
+    unfolding leq-ℝ leq-ℝ'
 
     leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
     leq'-leq-ℝ lx⊆ly q y<q =
@@ -144,7 +150,7 @@ module _
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop
+  unfolding leq-ℝ
 
   refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
   refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
@@ -153,7 +159,7 @@ opaque
   leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
 
 opaque
-  unfolding leq-ℝ-Prop sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
@@ -163,7 +169,7 @@ opaque
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   sim-antisymmetric-leq-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
@@ -186,7 +192,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop
+    unfolding leq-ℝ
 
     transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
     transitive-leq-ℝ =
@@ -198,7 +204,7 @@ module _
 ```agda
 ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder ℝ-Large-Preorder = ℝ
-leq-prop-Large-Preorder ℝ-Large-Preorder = leq-ℝ-Prop
+leq-prop-Large-Preorder ℝ-Large-Preorder = leq-prop-ℝ
 refl-leq-Large-Preorder ℝ-Large-Preorder = refl-leq-ℝ
 transitive-leq-Large-Preorder ℝ-Large-Preorder = transitive-leq-ℝ
 ```
@@ -215,7 +221,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   sim-sim-leq-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
@@ -247,7 +253,7 @@ opaque
 
 ```agda
 opaque
-  unfolding leq-ℝ-Prop real-ℚ
+  unfolding leq-ℝ real-ℚ
 
   preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
   preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
@@ -267,7 +273,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop leq-ℝ-Prop' neg-ℝ
+    unfolding leq-ℝ leq-ℝ' neg-ℝ
 
     neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
     neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
@@ -281,7 +287,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop sim-ℝ
+    unfolding leq-ℝ sim-ℝ
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
     preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
@@ -313,7 +319,7 @@ module _
   where
 
   opaque
-    unfolding add-ℝ leq-ℝ-Prop
+    unfolding add-ℝ leq-ℝ
 
     preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
     preserves-leq-right-add-ℝ x≤y _ =

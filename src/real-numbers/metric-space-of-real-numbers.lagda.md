@@ -16,6 +16,7 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.existential-quantification
@@ -86,15 +87,24 @@ module _
   lower-neighborhood-ℝ =
     type-Prop lower-neighborhood-prop-ℝ
 
-opaque
-  neighborhood-prop-ℝ : (l : Level) → Rational-Neighborhood-Relation l (ℝ l)
-  neighborhood-prop-ℝ l d x y =
-    product-Prop
-      ( lower-neighborhood-prop-ℝ d x y)
-      ( lower-neighborhood-prop-ℝ d y x)
+  is-prop-lower-neighborhood-ℝ : is-prop lower-neighborhood-ℝ
+  is-prop-lower-neighborhood-ℝ = is-prop-type-Prop lower-neighborhood-prop-ℝ
 
-neighborhood-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
-neighborhood-ℝ l d x y = type-Prop (neighborhood-prop-ℝ l d x y)
+opaque
+  neighborhood-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
+  neighborhood-ℝ l d x y =
+    lower-neighborhood-ℝ d x y × lower-neighborhood-ℝ d y x
+
+  is-prop-neighborhood-ℝ :
+    (l : Level) → (ε : ℚ⁺) (x y : ℝ l) → is-prop (neighborhood-ℝ l ε x y)
+  is-prop-neighborhood-ℝ l ε x y =
+    is-prop-product
+      ( is-prop-lower-neighborhood-ℝ ε x y)
+      ( is-prop-lower-neighborhood-ℝ ε y x)
+
+neighborhood-prop-ℝ : (l : Level) → Rational-Neighborhood-Relation l (ℝ l)
+neighborhood-prop-ℝ l d x y =
+  ( neighborhood-ℝ l d x y , is-prop-neighborhood-ℝ l d x y)
 ```
 
 ## Properties
@@ -111,7 +121,7 @@ module _
   where
 
   opaque
-    unfolding neighborhood-prop-ℝ
+    unfolding neighborhood-ℝ
 
     is-reflexive-neighborhood-ℝ :
       is-reflexive-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
@@ -194,7 +204,7 @@ module _
   where
 
   opaque
-    unfolding neighborhood-prop-ℝ
+    unfolding neighborhood-ℝ
 
     is-tight-pseudometric-space-ℝ :
       is-tight-Pseudometric-Space (pseudometric-space-ℝ l)
@@ -290,7 +300,7 @@ module _
           ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
   opaque
-    unfolding leq-ℝ-Prop
+    unfolding leq-ℝ
 
     real-bound-leq-lower-neighborhood-ℝ :
       (d : ℚ⁺) (x y : ℝ l) →
@@ -310,7 +320,7 @@ module _
   where
 
   opaque
-    unfolding neighborhood-prop-ℝ
+    unfolding neighborhood-ℝ
 
     neighborhood-real-bound-each-leq-ℝ :
       leq-ℝ x (y +ℝ real-ℚ⁺ d) →
@@ -376,7 +386,7 @@ module _
 
 ```agda
 opaque
-  unfolding neighborhood-prop-ℝ real-ℚ
+  unfolding neighborhood-ℝ real-ℚ
 
   is-isometry-metric-space-real-ℚ :
     is-isometry-Metric-Space
