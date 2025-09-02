@@ -138,10 +138,7 @@ module _
           binary-tr le-ℝ
             ( neg-neg-ℝ w)
             ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ
-              ( max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε)
-              ( neg-ℝ w)
-              ( max-ε<-w))
+            ( neg-le-ℝ _ (neg-ℝ w) max-ε<-w)
       in
         elim-disjunction
           ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
