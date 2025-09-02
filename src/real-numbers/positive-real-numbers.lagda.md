@@ -54,7 +54,7 @@ is [strictly less than](real-numbers.strict-inequality-real-numbers.md) it.
 
 ```agda
 is-positive-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-positive-prop-ℝ = le-ℝ-Prop zero-ℝ
+is-positive-prop-ℝ = le-prop-ℝ zero-ℝ
 
 is-positive-ℝ : {l : Level} → ℝ l → UU l
 is-positive-ℝ x = type-Prop (is-positive-prop-ℝ x)
@@ -99,7 +99,7 @@ module _
   where
 
   opaque
-    unfolding le-ℝ-Prop real-ℚ
+    unfolding le-ℝ real-ℚ
 
     exists-ℚ⁺-in-lower-cut-is-positive-ℝ :
       is-positive-ℝ x → exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
@@ -134,7 +134,7 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positiv
 ```agda
 opaque
   unfolding add-ℝ
-  unfolding le-ℝ-Prop
+  unfolding le-ℝ
 
   le-left-add-real-ℝ⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
@@ -197,11 +197,11 @@ is-positive-real-positive-ℚ q pos-q =
   preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ q pos-q)
 
 opaque
-  unfolding le-ℝ-Prop real-ℚ
+  unfolding le-ℝ real-ℚ
 
-  is-positive-rational-positive-real-ℚ :
+  is-positive-rational-is-positive-real-ℚ :
     (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
-  is-positive-rational-positive-real-ℚ q =
+  is-positive-rational-is-positive-real-ℚ q =
     elim-exists
       ( is-positive-prop-ℚ q)
       ( λ r (0<r , r<q) →

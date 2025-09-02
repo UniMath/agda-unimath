@@ -25,10 +25,10 @@ open import order-theory.large-meet-semilattices
 open import order-theory.meet-semilattices
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.maximum-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -68,7 +68,7 @@ module _
   where
 
   opaque
-    unfolding leq-ℝ-Prop min-ℝ
+    unfolding leq-ℝ min-ℝ
 
     is-greatest-binary-lower-bound-min-ℝ :
       is-greatest-binary-lower-bound-Large-Poset
@@ -164,8 +164,8 @@ module _
     approximate-above-min-ℝ :
       (ε : ℚ⁺) →
       type-disjunction-Prop
-        ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε))
-        ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε))
+        ( le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε))
+        ( le-prop-ℝ y (min-ℝ x y +ℝ real-ℚ⁺ ε))
     approximate-above-min-ℝ ε =
       let
         case :
@@ -179,8 +179,8 @@ module _
             ( neg-le-ℝ _ (neg-ℝ w) max-ε<-w)
       in
         elim-disjunction
-          ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
-            (le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
+          ( (le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
+            (le-prop-ℝ y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
           ( λ max-ε<-x → inl-disjunction (case x max-ε<-x))
           ( λ max-ε<-y → inr-disjunction (case y max-ε<-y))
           ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
