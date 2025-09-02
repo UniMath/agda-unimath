@@ -11,16 +11,9 @@ module real-numbers.binary-minimum-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
