@@ -33,6 +33,16 @@ open import universal-algebra.signatures
 
 ## Idea
 
+A **morphism of [`σ`-models](universal-algebra.models-of-signatures.md)** `A`
+and `B` is a function `f : A → B` between their underlying sets that preserves
+the operations of `σ`, in the sense that for `op ∈ σ` an abstract operation with
+arity `n ∈ ℕ`, and `assign-A assign-B` the semantics of `σ` in `A B` resp., and
+for a `v ∈ tuple A n`, we have
+
+```text
+f (assign-A op v) = assign-B op (f v)
+```
+
 ## Definitions
 
 ### The predicate on maps of models of preserving operations
