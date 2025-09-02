@@ -1,6 +1,8 @@
 # Suspensions of propositions
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module synthetic-homotopy-theory.suspensions-of-propositions where
 ```
 
