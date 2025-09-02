@@ -22,10 +22,14 @@ open import real-numbers.infima-families-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
+open import real-numbers.maximum-finite-families-real-numbers public
+open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
+open import real-numbers.minimum-finite-families-real-numbers public
+open import real-numbers.minimum-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
