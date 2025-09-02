@@ -258,7 +258,7 @@ module _
   where
 
   opaque
-    unfolding sim-prop-ℝ
+    unfolding sim-ℝ
     unfolding add-ℝ
 
     preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)

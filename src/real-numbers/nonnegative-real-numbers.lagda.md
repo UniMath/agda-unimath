@@ -149,11 +149,11 @@ module _
   {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
   where
 
-  leq-ℝ⁰⁺-Prop : Prop (l1 ⊔ l2)
-  leq-ℝ⁰⁺-Prop = leq-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+  leq-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
+  leq-prop-ℝ⁰⁺ = leq-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
 
   leq-ℝ⁰⁺ : UU (l1 ⊔ l2)
-  leq-ℝ⁰⁺ = type-Prop leq-ℝ⁰⁺-Prop
+  leq-ℝ⁰⁺ = type-Prop leq-prop-ℝ⁰⁺
 ```
 
 ### Zero is less than or equal to every nonnegative real number
@@ -194,11 +194,11 @@ module _
   {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
   where
 
-  le-ℝ⁰⁺-Prop : Prop (l1 ⊔ l2)
-  le-ℝ⁰⁺-Prop = le-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+  le-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
+  le-prop-ℝ⁰⁺ = le-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
 
   le-ℝ⁰⁺ : UU (l1 ⊔ l2)
-  le-ℝ⁰⁺ = type-Prop le-ℝ⁰⁺-Prop
+  le-ℝ⁰⁺ = type-Prop le-prop-ℝ⁰⁺
 ```
 
 ### The canonical embedding of nonnegative rational numbers to nonnegative reals preserves strict inequality
@@ -246,12 +246,12 @@ module _
 
   abstract
     le-some-positive-rational-ℝ⁰⁺ :
-      exists ℚ⁺ (λ q → le-ℝ⁰⁺-Prop x (nonnegative-real-ℚ⁺ q))
+      exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q))
     le-some-positive-rational-ℝ⁰⁺ =
       let
         open
           do-syntax-trunc-Prop
-            ( ∃ ℚ⁺ (λ q → le-ℝ⁰⁺-Prop x (nonnegative-real-ℚ⁺ q)))
+            ( ∃ ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q)))
       in do
         (q , x<q) ← le-some-rational-ℝ (real-ℝ⁰⁺ x)
         intro-exists

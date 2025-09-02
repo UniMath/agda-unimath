@@ -93,7 +93,7 @@ module _
           ( λ y →
             Π-Prop
               ( type-Set X)
-              ( λ z → leq-ℝ⁰⁺-Prop (d x z) (d x y +ℝ⁰⁺ d y z))))
+              ( λ z → leq-prop-ℝ⁰⁺ (d x z) (d x y +ℝ⁰⁺ d y z))))
 
   is-extensional-prop-distance-function : Prop (l1 ⊔ l2)
   is-extensional-prop-distance-function =
@@ -151,7 +151,7 @@ module _
   neighborhood-prop-Metric :
     Rational-Neighborhood-Relation l2 (type-Set X)
   neighborhood-prop-Metric ε x y =
-    leq-ℝ⁰⁺-Prop (dist-Metric X μ x y) (nonnegative-real-ℚ⁺ ε)
+    leq-prop-ℝ⁰⁺ (dist-Metric X μ x y) (nonnegative-real-ℚ⁺ ε)
 ```
 
 #### The rational neighborhood relation induced by a metric is reflexive

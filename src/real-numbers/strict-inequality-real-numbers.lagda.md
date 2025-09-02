@@ -456,7 +456,7 @@ module _
   where
 
   opaque
-    unfolding sim-prop-ℝ
+    unfolding sim-ℝ
 
     preserves-le-left-sim-ℝ : le-ℝ x z → le-ℝ y z
     preserves-le-left-sim-ℝ =

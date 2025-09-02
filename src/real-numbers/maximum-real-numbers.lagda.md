@@ -181,7 +181,7 @@ module _
   where
 
   opaque
-    unfolding sim-prop-ℝ
+    unfolding sim-ℝ
 
     commutative-max-ℝ : max-ℝ x y ＝ max-ℝ y x
     commutative-max-ℝ =

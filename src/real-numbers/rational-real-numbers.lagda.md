@@ -202,7 +202,7 @@ is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 
 ```agda
 opaque
-  unfolding sim-prop-ℝ
+  unfolding sim-ℝ
 
   sim-rational-ℝ :
     {l : Level} →
