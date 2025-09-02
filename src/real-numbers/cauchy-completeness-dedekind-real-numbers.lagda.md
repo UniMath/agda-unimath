@@ -376,10 +376,6 @@ module _
         xε = map-cauchy-approximation-ℝ x ε⁺
       in
         map-disjunction
-          ( lower-cut-ℝ xε (p +ℚ 2ε))
-          ( lower-cut-lim-cauchy-approximation-ℝ p)
-          ( upper-cut-ℝ xε (q -ℚ 2ε))
-          ( upper-cut-lim-cauchy-approximation-ℝ q)
           ( intro-exists (ε⁺ , ε⁺))
           ( intro-exists (ε⁺ , ε⁺))
           ( is-located-lower-upper-cut-ℝ

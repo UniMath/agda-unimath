@@ -13,6 +13,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
+open import foundation.functoriality-disjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -99,18 +100,15 @@ module _
       elim-exists
         ( cut-binary-max-lower-ℝ q)
         ( λ r (q<r , r<max) →
-          elim-disjunction
-            ( cut-binary-max-lower-ℝ q)
+          map-disjunction
             ( λ r<x →
-              inl-disjunction
-                ( backward-implication
-                  ( is-rounded-cut-lower-ℝ x q)
-                  ( intro-exists r (q<r , r<x))))
+              backward-implication
+                ( is-rounded-cut-lower-ℝ x q)
+                ( intro-exists r (q<r , r<x)))
             ( λ r<y →
-              inr-disjunction
-                ( backward-implication
-                  ( is-rounded-cut-lower-ℝ y q)
-                  ( intro-exists r (q<r , r<y))))
+              backward-implication
+                ( is-rounded-cut-lower-ℝ y q)
+                ( intro-exists r (q<r , r<y)))
             ( r<max))
 
     is-rounded-cut-binary-max-lower-ℝ :

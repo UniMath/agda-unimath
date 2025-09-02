@@ -444,10 +444,6 @@ abstract
       ( q , x<q , q<y) ← x<y
       ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       map-disjunction
-        ( lower-cut-ℝ z p)
-        ( le-ℝ-Prop x z)
-        ( upper-cut-ℝ z q)
-        ( le-ℝ-Prop z y)
         ( λ p<z → intro-exists p (x<p , p<z))
         ( λ z<q → intro-exists q (z<q , q<y))
         ( is-located-lower-upper-cut-ℝ z p q p<q)

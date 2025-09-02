@@ -143,10 +143,6 @@ module _
                 is-positive-le-zero-ℚ r (transitive-le-ℚ zero-ℚ p r p<r 0<p))
           in
             map-disjunction
-              ( ¬' (neighborhood-prop-Metric-Space M p⁺ x y))
-              ( ¬' (cut-upper-ℝ (upper-real-dist-Metric-Space M x y B) p))
-              ( neighborhood-prop-Metric-Space M r⁺ x y)
-              ( cut-upper-ℝ (upper-real-dist-Metric-Space M x y B) q)
               ( λ ¬Npxy p∈U →
                 let open do-syntax-trunc-Prop empty-Prop
                 in do
