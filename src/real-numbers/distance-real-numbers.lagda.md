@@ -79,11 +79,13 @@ Two real numbers `x` and `y` are in an `ε`-neighborhood of each other if and
 only if their distance is at most `ε`.
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℝ-Prop neighborhood-prop-ℝ
+
   diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     neighborhood-ℝ l d x y →
-    x -ℝ y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
+    x -ℝ y ≤-ℝ real-ℚ⁺ d
   diff-bound-neighborhood-ℝ d⁺@(d , _) x y (H , K) =
     leq-transpose-right-add-ℝ
       ( x)
@@ -101,17 +103,18 @@ abstract
               ( q -ℚ d)
               ( inv-tr (is-in-lower-cut-ℝ x) (is-section-diff-ℚ d q) q<x))))
 
+abstract
   reversed-diff-bound-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     neighborhood-ℝ l d x y →
-    y -ℝ x ≤-ℝ real-ℚ (rational-ℚ⁺ d)
+    y -ℝ x ≤-ℝ real-ℚ⁺ d
   reversed-diff-bound-neighborhood-ℝ d x y H =
     diff-bound-neighborhood-ℝ d y x (is-symmetric-neighborhood-ℝ d x y H)
 
   leq-dist-neighborhood-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     neighborhood-ℝ l d x y →
-    dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
+    dist-ℝ x y ≤-ℝ real-ℚ⁺ d
   leq-dist-neighborhood-ℝ d⁺@(d , _) x y H =
     leq-abs-leq-leq-neg-ℝ
       ( x -ℝ y)
@@ -124,7 +127,7 @@ abstract
 
   lower-neighborhood-diff-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    x -ℝ y ≤-ℝ real-ℚ (rational-ℚ⁺ d) →
+    x -ℝ y ≤-ℝ real-ℚ⁺ d →
     lower-neighborhood-ℝ d y x
   lower-neighborhood-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
     is-in-lower-cut-le-real-ℚ
@@ -140,9 +143,12 @@ abstract
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
+opaque
+  unfolding neighborhood-prop-ℝ
+
   neighborhood-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-    dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d) →
+    dist-ℝ x y ≤-ℝ real-ℚ⁺ d →
     neighborhood-ℝ l d x y
   neighborhood-dist-ℝ d⁺@(d , _) x y |x-y|≤d =
     ( lower-neighborhood-diff-ℝ
@@ -169,10 +175,11 @@ abstract
         ( |x-y|≤d)
         ( leq-abs-ℝ _)))
 
+abstract
   neighborhood-iff-leq-dist-ℝ :
     {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
     neighborhood-ℝ l d x y ↔
-    dist-ℝ x y ≤-ℝ real-ℚ (rational-ℚ⁺ d)
+    dist-ℝ x y ≤-ℝ real-ℚ⁺ d
   neighborhood-iff-leq-dist-ℝ d x y =
     ( leq-dist-neighborhood-ℝ d x y ,
       neighborhood-dist-ℝ d x y)
