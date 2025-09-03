@@ -109,7 +109,7 @@ module _
 
 ## Properties
 
-### The negation of a totally bounded subset of ℝ is totally bounded
+### The elementwise negation of a totally bounded subset of ℝ is totally bounded
 
 ```agda
 module _
@@ -337,7 +337,8 @@ module _
               ( sup -ℝ real-ℚ⁺ (ε' +ℚ⁺ ε'))
               ( max-net ε' -ℝ real-ℚ⁺ ε')
               ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ _ _ ε'+ε'<ε))
-              ( tr (λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
+              ( tr
+                ( λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
                 ( associative-add-ℝ _ _ _ ∙
                   ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)) ∙
                   ap-diff-ℝ refl (add-real-ℚ _ _))

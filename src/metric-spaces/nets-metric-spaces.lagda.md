@@ -87,7 +87,7 @@ module _
       is-approximation-subset-net-Metric-Space)
 ```
 
-### If a metric space is inhabited, so is any net
+### If a metric space is inhabited, so is any net on it
 
 ```agda
 module _
