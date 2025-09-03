@@ -9,7 +9,6 @@ module analysis.convergent-series-metric-abelian-groups where
 ```agda
 open import analysis.metric-abelian-groups
 open import analysis.series-metric-abelian-groups
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes

@@ -20,6 +20,7 @@ open import group-theory.abelian-groups
 
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -32,7 +33,8 @@ open import metric-spaces.rational-neighborhood-relations
 A {{#concept "metric abelian group" Agda=Metric-Ab}} is an
 [abelian group](group-theory.abelian-groups.md) endowed with the structure of a
 [metric space](metric-spaces.metric-spaces.md) such that the addition operation
-is an [isometry](metric-spaces.isometries-metric-spaces.md).
+and negation operation are
+[isometries](metric-spaces.isometries-metric-spaces.md).
 
 ## Definition
 
@@ -46,6 +48,7 @@ Metric-Ab l1 l2 =
           let MS = (type-Ab G , M)
           in
             is-extensional-Pseudometric-Space MS ×
+            is-isometry-Pseudometric-Space MS MS (neg-Ab G) ×
             ( (x : type-Ab G) →
               is-isometry-Pseudometric-Space MS MS (add-Ab G x))))
 
@@ -73,6 +76,9 @@ module _
   add-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
   add-Metric-Ab = add-Ab (ab-Metric-Ab MG)
 
+  add-Metric-Ab' : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
+  add-Metric-Ab' = add-Ab' (ab-Metric-Ab MG)
+
   ap-add-Metric-Ab :
     {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
     add-Metric-Ab x y ＝ add-Metric-Ab x' y'
@@ -88,6 +94,10 @@ module _
     {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
     diff-Metric-Ab x y ＝ diff-Metric-Ab x' y'
   ap-diff-Metric-Ab = ap-right-subtraction-Ab (ab-Metric-Ab MG)
+
+  commutative-add-Metric-Ab :
+    (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
+  commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
 ```
 
 ### Metric properties of metric abelian groups
@@ -117,4 +127,32 @@ module _
 
   neighborhood-Metric-Ab : ℚ⁺ → Relation l2 (type-Metric-Ab MG)
   neighborhood-Metric-Ab = neighborhood-Metric-Space metric-space-Metric-Ab
+
+  is-isometry-add-Metric-Ab :
+    (x : type-Metric-Ab MG) →
+    is-isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+      ( add-Metric-Ab MG x)
+  is-isometry-add-Metric-Ab = pr2 (pr2 (pr2 (pr2 MG)))
+
+  isometry-add-Metric-Ab :
+    (x : type-Metric-Ab MG) →
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-add-Metric-Ab x = (add-Metric-Ab MG x , is-isometry-add-Metric-Ab x)
+
+  is-isometry-neg-Metric-Ab :
+    is-isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+      ( neg-Metric-Ab MG)
+  is-isometry-neg-Metric-Ab = pr1 (pr2 (pr2 (pr2 MG)))
+
+  isometry-neg-Metric-Ab :
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-neg-Metric-Ab = (neg-Metric-Ab MG , is-isometry-neg-Metric-Ab)
 ```
