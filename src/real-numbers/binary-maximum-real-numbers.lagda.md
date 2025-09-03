@@ -391,14 +391,14 @@ module _
   abstract
     approximate-below-max-ℝ :
       (ε : ℚ⁺) →
-      type-disjunction-Prop
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
-        ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
+      disjunction-type
+        ( le-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
+        ( le-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
     approximate-below-max-ℝ ε⁺@(ε , _) =
       let
         motive =
-          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) x) ∨
-          ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+          ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) x) ∨
+          ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) y)
         open do-syntax-trunc-Prop motive
       in do
         (q , max-ε<q , q<max) ←
@@ -418,7 +418,7 @@ module _
               ( max-ε<q))
           ( λ x<r →
             elim-disjunction
-              ( le-ℝ-Prop (max-ℝ x y -ℝ real-ℚ ε) y)
+              ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) y)
               ( λ q<y →
                 transitive-le-ℝ
                   ( max-ℝ x y -ℝ real-ℚ ε)

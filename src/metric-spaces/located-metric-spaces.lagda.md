@@ -168,7 +168,7 @@ module _
             ( refl-leq-ℚ zero-ℚ)))
 
   opaque
-    unfolding leq-ℝ' real-ℚ
+    unfolding leq-ℝ' real-dist-located-Metric-Space real-ℚ
 
     leq-real-dist-Metric-Space :
       (ε : ℚ⁺) →
@@ -177,9 +177,6 @@ module _
     leq-real-dist-Metric-Space ε =
       leq-upper-real-dist-Metric-Space M x y B ε ∘iff
       leq-iff-ℝ' real-dist-located-Metric-Space (real-ℚ⁺ ε)
-
-  opaque
-    unfolding real-dist-located-Metric-Space
 
     is-nonnegative-real-dist-located-Metric-Space :
       is-nonnegative-ℝ real-dist-located-Metric-Space

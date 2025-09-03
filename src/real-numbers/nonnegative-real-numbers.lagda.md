@@ -150,7 +150,7 @@ module _
   where
 
   leq-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
-  leq-prop-ℝ⁰⁺ = leq-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+  leq-prop-ℝ⁰⁺ = leq-prop-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
 
   leq-ℝ⁰⁺ : UU (l1 ⊔ l2)
   leq-ℝ⁰⁺ = type-Prop leq-prop-ℝ⁰⁺
@@ -195,7 +195,7 @@ module _
   where
 
   le-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
-  le-prop-ℝ⁰⁺ = le-ℝ-Prop (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+  le-prop-ℝ⁰⁺ = le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
 
   le-ℝ⁰⁺ : UU (l1 ⊔ l2)
   le-ℝ⁰⁺ = type-Prop le-prop-ℝ⁰⁺
