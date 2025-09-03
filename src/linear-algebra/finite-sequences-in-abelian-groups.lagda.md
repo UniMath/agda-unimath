@@ -1,4 +1,4 @@
-# Finite sequences in abelian-groups
+# Finite sequences in abelian groups
 
 ```agda
 module linear-algebra.finite-sequences-in-abelian-groups where
