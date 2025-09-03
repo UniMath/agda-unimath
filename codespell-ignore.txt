@@ -5,6 +5,7 @@ hom
 homs
 iff
 intensional
+intensionality
 intensionally
 lets
 master
