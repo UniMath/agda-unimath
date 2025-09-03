@@ -97,7 +97,7 @@ opaque
       let
         open
           do-syntax-trunc-Prop
-            ( leq-ℝ-Prop
+            ( leq-prop-ℝ
               ( s)
               ( max-is-inhabited-finite-enumeration-subset-ℝ S eS |S|))
       in do
