@@ -37,7 +37,7 @@ open import univalent-combinatorics.standard-finite-types
 A
 {{#concept "series" WD="series" WDID=Q170198 disambiguation="in an abelian group" Agda=series-Metric-Ab}}
 in a [metric abelian group](analysis.metric-abelian-groups.md) `G` is a sum over
-an infinite [sequence](lists.sequences.md) of elements of `G`.
+a countably infinite [sequence](lists.sequences.md) of elements of `G`.
 
 Series are defined with a record to make them intensionally distinct from the
 sequence of their terms.
