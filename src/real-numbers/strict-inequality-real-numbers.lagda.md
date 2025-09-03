@@ -775,6 +775,30 @@ module _
               ( transitive-le-ℝ x (y +ℝ real-ℚ⁺ ε) x y+ε<x (H ε)))
 ```
 
+### Two real numbers are similar if they are less than the same rational numbers
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    sim-le-same-rational-ℝ :
+      ((q : ℚ) → le-ℝ x (real-ℚ q) ↔ le-ℝ y (real-ℚ q)) → sim-ℝ x y
+    sim-le-same-rational-ℝ H =
+      sim-sim-upper-cut-ℝ x y
+        ( ( λ q x<q →
+            is-in-upper-cut-le-real-ℚ q y
+              ( forward-implication
+                ( H q)
+                ( le-real-is-in-upper-cut-ℚ q x x<q))) ,
+          ( λ q y<q →
+            is-in-upper-cut-le-real-ℚ q x
+              ( backward-implication
+                ( H q)
+                ( le-real-is-in-upper-cut-ℚ q y y<q))))
+```
+
 ## References
 
 {{#bibliography}}

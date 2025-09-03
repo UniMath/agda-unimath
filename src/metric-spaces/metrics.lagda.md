@@ -74,6 +74,9 @@ module _
   is-reflexive-prop-distance-function =
     Π-Prop (type-Set X) (λ x → sim-zero-prop-ℝ⁰⁺ (d x x))
 
+  is-reflexive-distance-function : UU (l1 ⊔ l2)
+  is-reflexive-distance-function = type-Prop is-reflexive-prop-distance-function
+
   is-symmetric-prop-distance-function : Prop (l1 ⊔ lsuc l2)
   is-symmetric-prop-distance-function =
     Π-Prop
@@ -82,6 +85,9 @@ module _
         Π-Prop
           ( type-Set X)
           ( λ y → Id-Prop (ℝ⁰⁺-Set l2) (d x y) (d y x)))
+
+  is-symmetric-distance-function : UU (l1 ⊔ lsuc l2)
+  is-symmetric-distance-function = type-Prop is-symmetric-prop-distance-function
 
   is-triangular-prop-distance-function : Prop (l1 ⊔ l2)
   is-triangular-prop-distance-function =
@@ -95,6 +101,10 @@ module _
               ( type-Set X)
               ( λ z → leq-prop-ℝ⁰⁺ (d x z) (d x y +ℝ⁰⁺ d y z))))
 
+  is-triangular-distance-function : UU (l1 ⊔ l2)
+  is-triangular-distance-function =
+    type-Prop is-triangular-prop-distance-function
+
   is-extensional-prop-distance-function : Prop (l1 ⊔ l2)
   is-extensional-prop-distance-function =
     Π-Prop
@@ -104,6 +114,10 @@ module _
           ( type-Set X)
           ( λ y →
             hom-Prop (sim-zero-prop-ℝ⁰⁺ (d x y)) (Id-Prop X x y)))
+
+  is-extensional-distance-function : UU (l1 ⊔ l2)
+  is-extensional-distance-function =
+    type-Prop is-extensional-prop-distance-function
 
   is-metric-prop-distance-function : Prop (l1 ⊔ lsuc l2)
   is-metric-prop-distance-function =
