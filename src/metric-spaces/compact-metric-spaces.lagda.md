@@ -30,17 +30,17 @@ if it is [totally bounded](metric-spaces.totally-bounded-metric-spaces.md) and
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Metric-Space l1 l2)
+  {l1 l2 : Level} (l3 : Level) (X : Metric-Space l1 l2)
   where
 
-  is-compact-prop-Metric-Space : Prop (lsuc l1 ⊔ lsuc l2)
+  is-compact-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-compact-prop-Metric-Space =
-    is-totally-bounded-prop-Metric-Space X ∧ is-complete-prop-Metric-Space X
+    is-totally-bounded-prop-Metric-Space l3 X ∧ is-complete-prop-Metric-Space X
 
-  is-compact-Metric-Space : UU (lsuc l1 ⊔ lsuc l2)
+  is-compact-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-compact-Metric-Space = type-Prop is-compact-prop-Metric-Space
 
-Compact-Metric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Compact-Metric-Space l1 l2 =
-  type-subtype (is-compact-prop-Metric-Space {l1} {l2})
+Compact-Metric-Space : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Compact-Metric-Space l1 l2 l3 =
+  type-subtype (is-compact-prop-Metric-Space {l1} {l2} l3)
 ```

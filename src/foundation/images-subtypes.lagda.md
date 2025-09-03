@@ -78,6 +78,9 @@ module _
   im-subtype : subtype (l1 ⊔ l2 ⊔ l3) B
   im-subtype y = subtype-im (f ∘ inclusion-subtype S) y
 
+  type-im-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  type-im-subtype = type-subtype im-subtype
+
   is-in-im-subtype : B → UU (l1 ⊔ l2 ⊔ l3)
   is-in-im-subtype = is-in-subtype im-subtype
 ```
