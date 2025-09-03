@@ -65,6 +65,12 @@ module _
     is-inhabited type-inhabited-finitely-enumerable-subtype
   is-inhabited-type-inhabited-finitely-enumerable-subtype = pr2 S
 
+  is-finitely-enumerable-type-inhabited-finitely-enumerable-subtype :
+    is-finitely-enumerable type-inhabited-finitely-enumerable-subtype
+  is-finitely-enumerable-type-inhabited-finitely-enumerable-subtype =
+    is-finitely-enumerable-subtype-finitely-enumerable-subtype
+      ( finitely-enumerable-subtype-inhabited-finitely-enumerable-subtype)
+
   finitely-enumerable-type-inhabited-finitely-enumerable-subtype :
     Finitely-Enumerable-Type (l1 ⊔ l2)
   finitely-enumerable-type-inhabited-finitely-enumerable-subtype =
