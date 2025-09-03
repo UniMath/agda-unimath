@@ -214,7 +214,7 @@ module _
               let
                 open
                   do-syntax-trunc-Prop
-                    ( leq-ℝ-Prop z (max-net η +ℝ real-ℚ⁺ η))
+                    ( leq-prop-ℝ z (max-net η +ℝ real-ℚ⁺ η))
               in do
                 (((y , y∈S) , y∈net-η) , Nηyz) ←
                   is-net η (z , net⊆S ε z z∈net-ε)
@@ -316,7 +316,7 @@ module _
             ( ∃
               ( type-subtype S)
               ( λ (s , s∈S) →
-                le-ℝ-Prop
+                le-prop-ℝ
                   ( sup-modulated-totally-bounded-subset-ℝ -ℝ real-ℚ⁺ ε)
                   ( s)))
       in do
