@@ -5,6 +5,7 @@ hom
 homs
 iff
 intensional
+intensionally
 lets
 master
 whitelist
