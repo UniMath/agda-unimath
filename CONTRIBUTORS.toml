@@ -35,7 +35,7 @@ homotopy type theory and higher category theory.
 [[contributors]]
 displayName = "Elisabeth Stenholm"
 maintainer = true
-usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier" ]
+usernames = [ "Elisabeth Stenholm", "Elisabeth Bonnevier", "elisabethstenholm" ]
 homepage = "https://elisabeth.stenholm.one"
 github = "elisabethstenholm"
 bio = '''
@@ -281,3 +281,25 @@ displayName = "Šimon Brandner"
 usernames = ["Šimon Brandner"]
 github = "SimonBrandner"
 homepage = "https://simonbrandner.cz/"
+
+[[contributors]]
+displayName = "Viktor Yudov"
+usernames = ["Viktor Yudov", "spcfox"]
+github = "spcfox"
+
+[[contributors]]
+displayName = "Pietro Monticone"
+usernames = ["Pietro Monticone"]
+github = "pitmonticone"
+
+[[contributors]]
+displayName = "Lîm Tsú-thuàn"
+usernames = ["Lîm Tsú-thuàn"]
+github = "dannypsnl"
+homepage = "https://dannypsnl.srht.site/"
+
+
+[[contributors]]
+displayName = "Bjarki"
+usernames = ["Bjarki"]
+github = "bjarki781"
