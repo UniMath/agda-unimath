@@ -24,9 +24,11 @@ open import real-numbers.infima-families-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
+open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
+open import real-numbers.minimum-finite-families-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
@@ -39,6 +41,7 @@ open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
+open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
