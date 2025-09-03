@@ -81,14 +81,14 @@ metric-space-subset-ℝ :
 metric-space-subset-ℝ {l1} {l2} = subspace-Metric-Space (metric-space-ℝ l2)
 ```
 
-### The negation of a subset of real numbers
+### The elementwise negation of a subset of real numbers
 
 ```agda
 neg-subset-ℝ : {l1 l2 : Level} → subset-ℝ l1 l2 → subset-ℝ l1 l2
 neg-subset-ℝ S = S ∘ neg-ℝ
 ```
 
-### If a subset of real numbers is inhabited, so is its negation
+### If a subset of real numbers is inhabited, so is its elementwise negation
 
 ```agda
 abstract
@@ -101,7 +101,7 @@ abstract
         ( equiv-precomp-equiv-type-subtype (equiv-is-involution neg-neg-ℝ) S))
 ```
 
-### The negation of the negation of a subset of real numbers is the original subset
+### The elementwise negation of the elementwise negation of a subset of real numbers is the original subset
 
 ```agda
 abstract
@@ -110,7 +110,7 @@ abstract
   neg-neg-subset-ℝ S = eq-htpy (λ x → ap S (neg-neg-ℝ x))
 ```
 
-### The negation of a subset of real numbers is isometrically equivalent to the image of the subset under negation
+### The elementwise negation of a subset of real numbers is isometrically equivalent to the image of the subset under elementwise negation
 
 ```agda
 module _

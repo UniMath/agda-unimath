@@ -70,7 +70,7 @@ is-inhabited-finitely-enumerable-subset-ℝ =
   is-inhabited-finitely-enumerable-subtype
 ```
 
-### The negation of a finitely enumerable subset of real numbers
+### The elementwise negation of a finitely enumerable subset of real numbers
 
 ```agda
 neg-finitely-enumerable-subset-ℝ :
