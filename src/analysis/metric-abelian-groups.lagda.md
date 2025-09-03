@@ -19,8 +19,8 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
