@@ -154,7 +154,7 @@ module _
     leq-prop-ℝ⁰⁺ (dist-Metric X μ x y) (nonnegative-real-ℚ⁺ ε)
 ```
 
-#### The rational neighborhood relation induced by a metric is reflexive
+### The rational neighborhood relation induced by a metric is reflexive
 
 ```agda
 module _
