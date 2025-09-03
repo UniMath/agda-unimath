@@ -492,11 +492,7 @@ module _
         ( surjection-equiv equiv-bool-Fin-2))
 ```
 
-### Suspensions _almost_ commute with propositional truncations
-
-The problem is that empty types suspend to a two-element set. This is easily
-fixed by adjusting the truncation level, and we do have that
-`Σ (trunc-Prop X) = trunc-Set (Σ X)`.
+### The suspension of the propositional truncation is the set-truncation of the suspension
 
 ```agda
 module _
