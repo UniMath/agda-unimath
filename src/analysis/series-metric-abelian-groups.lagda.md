@@ -39,6 +39,9 @@ A
 in a [metric abelian group](analysis.metric-abelian-groups.md) `G` is a sum over
 an infinite [sequence](lists.sequences.md) of elements of `G`.
 
+Series are defined with a record to make them intensionally distinct from the
+sequence of their terms.
+
 ## Definition
 
 ```agda
