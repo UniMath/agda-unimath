@@ -15,6 +15,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -92,10 +93,9 @@ module _
         ( claim)
         ( λ p<x → inl-disjunction (inl-disjunction p<x))
         ( λ x<q →
-          elim-disjunction
-            ( claim)
-            ( λ p<y → inl-disjunction (inr-disjunction p<y))
-            ( λ y<q → inr-disjunction (x<q , y<q))
+          map-disjunction
+            ( λ p<y → inr-disjunction p<y)
+            ( x<q ,_)
             ( is-located-lower-upper-cut-ℝ y p q p<q))
         ( is-located-lower-upper-cut-ℝ x p q p<q)
       where
@@ -391,9 +391,9 @@ module _
   abstract
     approximate-below-max-ℝ :
       (ε : ℚ⁺) →
-      type-disjunction-Prop
-        ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
-        ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
+      disjunction-type
+        ( le-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) x)
+        ( le-ℝ (max-ℝ x y -ℝ real-ℚ⁺ ε) y)
     approximate-below-max-ℝ ε⁺@(ε , _) =
       let
         motive =
@@ -408,25 +408,24 @@ module _
             ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
         (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
         let q<r = reflects-le-real-ℚ q r q-<ℝ-r
-        elim-disjunction motive
+        map-disjunction
           ( λ q<x →
-            inl-disjunction
-              ( transitive-le-ℝ
-                ( max-ℝ x y -ℝ real-ℚ ε)
-                ( real-ℚ q)
-                ( x)
-                ( le-real-is-in-lower-cut-ℚ q x q<x)
-                ( max-ε<q)))
+            transitive-le-ℝ
+              ( max-ℝ x y -ℝ real-ℚ ε)
+              ( real-ℚ q)
+              ( x)
+              ( le-real-is-in-lower-cut-ℚ q x q<x)
+              ( max-ε<q))
           ( λ x<r →
-            elim-disjunction motive
+            elim-disjunction
+              ( le-prop-ℝ (max-ℝ x y -ℝ real-ℚ ε) y)
               ( λ q<y →
-                inr-disjunction
-                  ( transitive-le-ℝ
-                    ( max-ℝ x y -ℝ real-ℚ ε)
-                    ( real-ℚ q)
-                    ( y)
-                    ( le-real-is-in-lower-cut-ℚ q y q<y)
-                    ( max-ε<q)))
+                transitive-le-ℝ
+                  ( max-ℝ x y -ℝ real-ℚ ε)
+                  ( real-ℚ q)
+                  ( y)
+                  ( le-real-is-in-lower-cut-ℚ q y q<y)
+                  ( max-ε<q))
               ( λ y<r →
                 ex-falso
                   ( irreflexive-le-ℝ
