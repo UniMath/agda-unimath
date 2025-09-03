@@ -336,7 +336,7 @@ module _
         is-approximated-below-neg-infimum-neg-family-ℝ)
 ```
 
-### The infimum of a subset of the real numbers is the negation of the supremum of the negation of the subset
+### The infimum of a subset of the real numbers is the negation of the supremum of the elementwise negation of the subset
 
 ```agda
 module _
