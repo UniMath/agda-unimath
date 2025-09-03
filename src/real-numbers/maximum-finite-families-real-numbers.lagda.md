@@ -63,7 +63,7 @@ their [least upper bound](order-theory.least-upper-bounds-large-posets.md).
 
 ## Definition
 
-### The maximum of a nonempty sequence of real numbers
+### The maximum of a nonempty finite sequence of real numbers
 
 ```agda
 module _
@@ -113,7 +113,7 @@ module _
 
 ## Properties
 
-### The maximum of a sequence is its supremum
+### The maximum of a finite sequence is its supremum
 
 ```agda
 abstract
@@ -149,7 +149,7 @@ abstract
         ∃
           ( Fin (succ-ℕ (succ-ℕ n)))
           ( λ i →
-            le-ℝ-Prop (max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε) (x i))
+            le-prop-ℝ (max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε) (x i))
       max-ε₁-ε₂=max-ε =
         associative-add-ℝ _ _ _ ∙
         ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)) ∙
@@ -244,9 +244,8 @@ abstract
         ( |I|)
         ( is-empty-is-zero-number-of-elements-count cI refl))
   is-approximated-below-max-counted-family-ℝ |I| cI@(succ-ℕ n , Fin-sn≃I) x ε =
-    map-exists _
+    map-exists-map-base _
       ( map-equiv Fin-sn≃I)
-      ( λ i → id)
       ( is-approximated-below-max-fin-sequence-ℝ n (x ∘ map-equiv Fin-sn≃I) ε)
 
   is-supremum-max-counted-family-ℝ :

@@ -265,6 +265,36 @@ module _
     is-in-upper-cut-le-real-ℚ = backward-implication le-iff-upper-cut-real-ℚ
 ```
 
+### The real numbers are located
+
+```agda
+module _
+  {l : Level} (x : ℝ l) (p q : ℚ) (p<q : le-ℚ p q)
+  where
+
+  is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
+  is-located-le-ℝ =
+    map-disjunction
+      ( le-real-is-in-lower-cut-ℚ p x)
+      ( le-real-is-in-upper-cut-ℚ q x)
+      ( is-located-lower-upper-cut-ℝ x p q p<q)
+```
+
+### Every real is less than a rational number
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
+    le-some-rational-ℝ =
+      map-tot-exists
+        ( λ q → le-real-is-in-upper-cut-ℚ q x)
+        ( is-inhabited-upper-cut-ℝ x)
+```
+
 ### The reals have no lower or upper bound
 
 ```agda
@@ -443,10 +473,6 @@ opaque
       ( q , x<q , q<y) ← x<y
       ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       map-disjunction
-        ( lower-cut-ℝ z p)
-        ( le-prop-ℝ x z)
-        ( upper-cut-ℝ z q)
-        ( le-prop-ℝ z y)
         ( λ p<z → intro-exists p (x<p , p<z))
         ( λ z<q → intro-exists q (z<q , q<y))
         ( is-located-lower-upper-cut-ℝ z p q p<q)
@@ -599,6 +625,18 @@ module _
   iff-translate-left-le-ℝ : le-ℝ x y ↔ le-ℝ (z +ℝ x) (z +ℝ y)
   pr1 iff-translate-left-le-ℝ = preserves-le-left-add-ℝ z x y
   pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
+
+abstract
+  preserves-le-add-ℝ :
+    {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4) →
+    le-ℝ a b → le-ℝ c d → le-ℝ (a +ℝ c) (b +ℝ d)
+  preserves-le-add-ℝ a b c d a≤b c≤d =
+    transitive-le-ℝ
+      ( a +ℝ c)
+      ( a +ℝ d)
+      ( b +ℝ d)
+      ( preserves-le-right-add-ℝ d a b a≤b)
+      ( preserves-le-left-add-ℝ a c d c≤d)
 ```
 
 ### `x + y < z` if and only if `x < z - y`
@@ -714,6 +752,27 @@ module _
         intro-exists
           ( q , is-positive-le-zero-ℚ q (reflects-le-real-ℚ _ _ 0<q))
           ( le-transpose-right-diff-ℝ' _ _ _ q<y-x)
+```
+
+### If `x < y + ε` for every positive rational `ε`, then `x ≤ y`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    saturated-le-ℝ : ((ε : ℚ⁺) → le-ℝ x (y +ℝ real-ℚ⁺ ε)) → leq-ℝ x y
+    saturated-le-ℝ H =
+      leq-not-le-ℝ y x
+        ( λ y<x →
+          let open do-syntax-trunc-Prop empty-Prop
+          in do
+            (ε , y+ε<x) ←
+              exists-positive-rational-separation-le-ℝ {x = y} {y = x} y<x
+            irreflexive-le-ℝ
+              ( x)
+              ( transitive-le-ℝ x (y +ℝ real-ℚ⁺ ε) x y+ε<x (H ε)))
 ```
 
 ## References

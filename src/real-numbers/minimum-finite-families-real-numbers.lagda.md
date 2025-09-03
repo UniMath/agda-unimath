@@ -14,7 +14,10 @@ open import foundation.universe-levels
 
 open import lists.finite-sequences
 
+open import order-theory.greatest-lower-bounds-large-posets
+
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-families-real-numbers
 open import real-numbers.maximum-finite-families-real-numbers
 open import real-numbers.negation-real-numbers
@@ -36,7 +39,7 @@ their
 
 ## Definition
 
-### The minimum of a nonempty sequence of real numbers
+### The minimum of a nonempty finite sequence of real numbers
 
 ```agda
 module _
@@ -63,7 +66,7 @@ module _
 
 ## Properties
 
-### The minimum of a sequence is its infimum
+### The minimum of a finite sequence is its infimum
 
 ```agda
 opaque
@@ -97,4 +100,25 @@ module _
         ( x)
         ( max-finite-family-ℝ I (neg-ℝ ∘ x))
         ( is-supremum-max-finite-family-ℝ I (neg-ℝ ∘ x))
+```
+
+### The minimum of a finite family is its greatest lower bound
+
+```agda
+module _
+  {l1 l2 : Level} (I : Inhabited-Finite-Type l1)
+  (x : type-Inhabited-Finite-Type I → ℝ l2)
+  where
+
+  abstract
+    is-greatest-lower-bound-min-finite-family-ℝ :
+      is-greatest-lower-bound-family-of-elements-Large-Poset
+        ( ℝ-Large-Poset)
+        ( x)
+        ( min-finite-family-ℝ I x)
+    is-greatest-lower-bound-min-finite-family-ℝ =
+      is-greatest-lower-bound-is-infimum-family-ℝ
+        ( x)
+        ( min-finite-family-ℝ I x)
+        ( is-infimum-min-finite-family-ℝ I x)
 ```
