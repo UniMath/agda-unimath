@@ -133,8 +133,7 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positiv
 
 ```agda
 opaque
-  unfolding add-ℝ
-  unfolding le-ℝ
+  unfolding add-ℝ le-ℝ
 
   le-left-add-real-ℝ⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)

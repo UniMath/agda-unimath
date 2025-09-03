@@ -524,8 +524,7 @@ module _
   where
 
   opaque
-    unfolding add-ℝ
-    unfolding le-ℝ
+    unfolding add-ℝ le-ℝ
 
     preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
     preserves-le-right-add-ℝ x<y =
