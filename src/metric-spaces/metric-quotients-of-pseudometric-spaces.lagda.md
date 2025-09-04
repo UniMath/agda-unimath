@@ -35,6 +35,7 @@ open import foundation.sections
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -360,6 +361,16 @@ module _
   map-metric-quotient-Pseudometric-Space =
     quotient-map (equivalence-relation-sim-Pseudometric-Space M)
 
+  is-in-class-map-quotient-Pseudometric-Space :
+    (x : type-Pseudometric-Space M) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( M)
+      ( map-metric-quotient-Pseudometric-Space x)
+      ( x)
+  is-in-class-map-quotient-Pseudometric-Space =
+    is-in-equivalence-class-quotient-map-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space M)
+
   map-subtype-metric-quotient-Pseudometric-Space :
     (x : type-Pseudometric-Space M) →
     type-subtype-metric-quotient-Pseudometric-Space M
@@ -404,8 +415,13 @@ module _
             ( y≈y')
 
       in
-        preserves-neighborhood-sim-Pseudometric-Space' M y~y' d x'
-          ( preserves-neighborhood-sim-Pseudometric-Space M x~x' d y d⟨x,y⟩)
+        preserves-neighborhood-right-sim-Pseudometric-Space M y~y' d x'
+          ( preserves-neighborhood-left-sim-Pseudometric-Space
+            ( M)
+            ( x~x')
+            ( d)
+            ( y)
+            ( d⟨x,y⟩))
 
     reflects-neighborhood-map-metric-quotient-Pseudometric-Space :
       (d : ℚ⁺) (x y : type-Pseudometric-Space M) →
@@ -438,11 +454,11 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  isometry-map-metric-quotient-Pseudometric-Space :
+  isometry-metric-quotient-Pseudometric-Space :
     isometry-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
-  isometry-map-metric-quotient-Pseudometric-Space =
+  isometry-metric-quotient-Pseudometric-Space =
     ( map-metric-quotient-Pseudometric-Space M ,
       is-isometry-map-metric-quotient-Pseudometric-Space M)
 ```
@@ -462,7 +478,7 @@ module _
     short-isometry-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
-      ( isometry-map-metric-quotient-Pseudometric-Space M)
+      ( isometry-metric-quotient-Pseudometric-Space M)
 ```
 
 ### The isometric equivalence between a metric space and the quotient metric space of its pseudometric space
@@ -589,7 +605,7 @@ module _
       ( short-isometry-Pseudometric-Space
         ( M)
         ( pseudometric-metric-quotient-Pseudometric-Space M)
-        ( isometry-map-metric-quotient-Pseudometric-Space M))
+        ( isometry-metric-quotient-Pseudometric-Space M))
 ```
 
 ### The pointwise quotient of Cauchy approximations in the quotient metric space preserves limits
@@ -630,17 +646,12 @@ module _
           ( x)
           ( x∈uε)
     in
-      preserves-neighborhood-sim-Pseudometric-Space'
+      preserves-neighborhood-sim-Pseudometric-Space
         ( M)
+        ( uε~x)
         ( lim~y)
         ( ε +ℚ⁺ δ)
-        ( x)
-        ( preserves-neighborhood-sim-Pseudometric-Space
-          ( M)
-          ( uε~x)
-          ( ε +ℚ⁺ δ)
-          ( lim)
-          ( is-lim ε δ))
+        ( is-lim ε δ)
 ```
 
 ### Lifts of Cauchy approximations in the quotient metric space up to similarity
@@ -870,6 +881,27 @@ module _
       ( set-Metric-Space B)
       ( reflecting-map-short-function-metric-space-Pseudometric-Space A B f)
 
+  compute-map-short-function-metric-quotient-Pseudometric-Space :
+    (X : type-metric-quotient-Pseudometric-Space A) →
+    (x : type-Pseudometric-Space A) →
+    is-in-class-metric-quotient-Pseudometric-Space A X x →
+    map-short-function-metric-quotient-Pseudometric-space X ＝
+    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f x
+  compute-map-short-function-metric-quotient-Pseudometric-Space X x x∈X =
+    tr
+      ( λ Y →
+        map-short-function-metric-quotient-Pseudometric-space Y ＝
+        map-short-function-Pseudometric-Space
+          ( A)
+          ( pseudometric-Metric-Space B)
+          ( f)
+          ( x))
+      ( eq-set-quotient-equivalence-class-set-quotient
+        ( equivalence-relation-sim-Pseudometric-Space A)
+        ( X)
+        ( x∈X))
+      ( htpy-map-short-function-metric-quotient-Pseudometric-Space x)
+
   abstract
     is-short-map-short-function-metric-quotient-Pseudometric-Space :
       is-short-function-Metric-Space
@@ -962,6 +994,82 @@ module _
   short-function-metric-quotient-Pseudometric-Space =
     ( map-short-function-metric-quotient-Pseudometric-space ,
       is-short-map-short-function-metric-quotient-Pseudometric-Space)
+```
+
+### Induced isometry from the quotient metric space into a metric space
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  (f : isometry-Pseudometric-Space A (pseudometric-Metric-Space B))
+  where
+
+  map-isometry-metric-quotient-Pseudometric-Space :
+    type-function-Metric-Space
+      ( metric-quotient-Pseudometric-Space A)
+      ( B)
+  map-isometry-metric-quotient-Pseudometric-Space =
+    map-short-function-metric-quotient-Pseudometric-space
+      ( A)
+      ( B)
+      ( short-isometry-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f))
+
+  htpy-map-isometry-metric-quotient-Pseudometric-Space :
+    ( ( map-isometry-metric-quotient-Pseudometric-Space) ∘
+      ( map-metric-quotient-Pseudometric-Space A)) ~
+    ( map-isometry-Pseudometric-Space A (pseudometric-Metric-Space B) f)
+  htpy-map-isometry-metric-quotient-Pseudometric-Space =
+    htpy-map-short-function-metric-quotient-Pseudometric-Space
+      ( A)
+      ( B)
+      ( short-isometry-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f))
+
+  preserves-neighborhood-map-isometry-metric-quotient-Pseudometric-Space :
+    (d : ℚ⁺) →
+    (x y : type-metric-quotient-Pseudometric-Space A) →
+    neighborhood-metric-quotient-Pseudometric-Space
+      ( A)
+      ( d)
+      ( x)
+      ( y) →
+    neighborhood-Metric-Space
+      ( B)
+      ( d)
+      ( map-isometry-metric-quotient-Pseudometric-Space x)
+      ( map-isometry-metric-quotient-Pseudometric-Space y)
+  preserves-neighborhood-map-isometry-metric-quotient-Pseudometric-Space =
+    is-short-map-short-function-metric-quotient-Pseudometric-Space
+      ( A)
+      ( B)
+      ( short-isometry-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space B)
+        ( f))
+
+  -- reflects-neighborhood-map-isometry-metric-quotient-Pseudometric-Space :
+  --   (d : ℚ⁺) →
+  --   (x y : type-metric-quotient-Pseudometric-Space A) →
+  --   neighborhood-Metric-Space
+  --     ( B)
+  --     ( d)
+  --     ( map-isometry-metric-quotient-Pseudometric-Space x)
+  --     ( map-isometry-metric-quotient-Pseudometric-Space y) →
+  --   neighborhood-metric-quotient-Pseudometric-Space
+  --     ( A)
+  --     ( d)
+  --     ( x)
+  --     ( y)
+  -- reflects-neighborhood-map-isometry-metric-quotient-Pseudometric-Space
+  --   d x y N⟨f[x],f[y]⟩ =
+  --   {!!}
 ```
 
 ## External links
