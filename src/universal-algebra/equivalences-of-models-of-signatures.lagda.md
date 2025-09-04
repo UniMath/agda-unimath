@@ -8,7 +8,6 @@ module universal-algebra.equivalences-of-models-of-signatures where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -20,6 +19,7 @@ open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
