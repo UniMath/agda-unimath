@@ -10,6 +10,7 @@ open import lists.concatenation-lists public
 open import lists.dependent-sequences public
 open import lists.equivalence-tuples-finite-sequences public
 open import lists.finite-sequences public
+open import lists.flattening-free-magmas-lists public
 open import lists.flattening-lists public
 open import lists.functoriality-finite-sequences public
 open import lists.functoriality-lists public
