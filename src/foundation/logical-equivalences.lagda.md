@@ -234,9 +234,9 @@ compute-fiber-iff-equiv :
 compute-fiber-iff-equiv {A = A} {B} (f , g) =
   ( equiv-tot (λ _ → equiv-funext)) ∘e
   ( left-unit-law-Σ-is-contr (is-torsorial-Id' f) (f , refl)) ∘e
-  ( inv-associative-Σ (A → B) (_＝ f) _) ∘e
+  ( inv-associative-Σ) ∘e
   ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
-  ( associative-Σ (A → B) _ _) ∘e
+  ( associative-Σ) ∘e
   ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
 ```
 

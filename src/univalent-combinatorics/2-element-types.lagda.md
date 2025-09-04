@@ -784,7 +784,7 @@ is-coproduct-Σ-Fin-2 P =
   ( equiv-coproduct
     ( left-unit-law-Σ-is-contr is-contr-Fin-1 (zero-Fin 0))
     ( left-unit-law-Σ (P ∘ inr))) ∘e
-  ( right-distributive-Σ-coproduct (Fin 1) unit P)
+  ( right-distributive-Σ-coproduct P)
 ```
 
 ### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`

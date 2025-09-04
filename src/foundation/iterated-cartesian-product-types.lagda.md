@@ -131,13 +131,8 @@ equiv-product-iterated-product-lists :
 equiv-product-iterated-product-lists nil q =
   left-unit-law-product-is-contr (is-contr-raise-unit)
 equiv-product-iterated-product-lists (cons x p) q =
-  ( ( equiv-product
-      ( id-equiv)
-      ( equiv-product-iterated-product-lists p q)) ∘e
-    ( associative-product
-      ( x)
-      ( iterated-product-lists p)
-      ( iterated-product-lists q)))
+  ( equiv-product-right (equiv-product-iterated-product-lists p q)) ∘e
+  ( associative-product)
 ```
 
 ### Iterated cartesian product is closed under permutations

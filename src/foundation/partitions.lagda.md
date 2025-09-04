@@ -651,10 +651,7 @@ module _
                       ( refl)))) ∘e
                 ( equiv-right-swap-Σ)) ∘e
               ( equiv-tot (λ ie → pr2 ie a)))) ∘e
-          ( associative-Σ
-            ( inhabited-subtype l2 A)
-            ( is-block-partition-Set-Indexed-Σ-Decomposition)
-            ( λ B → is-in-inhabited-subtype (pr1 B) a)))
+          ( associative-Σ))
         ( is-torsorial-has-same-elements-inhabited-subtype
           ( pair
             ( λ x →

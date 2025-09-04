@@ -513,8 +513,8 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
             ( is-set-has-decidable-equality)) ∘e
           ( commutative-product)) ∘e
         ( equiv-left-swap-Σ)))) ∘e
-  ( associative-Σ _ _ _) ∘e
-  ( associative-Σ _ _ _) ∘e
+  ( associative-Σ) ∘e
+  ( associative-Σ) ∘e
   ( equiv-type-subtype
     ( λ surj →
       is-prop-Π

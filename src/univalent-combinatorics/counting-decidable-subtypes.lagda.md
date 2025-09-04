@@ -55,10 +55,7 @@ abstract
     with is-decidable-decidable-subtype P (inr star)
   ... | inl p =
     count-equiv'
-      ( right-distributive-Σ-coproduct
-        ( Fin k)
-        ( unit)
-        ( is-in-decidable-subtype P))
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
       ( pair
         ( succ-ℕ
           ( number-of-elements-count (count-decidable-subtype-Fin k (P ∘ inl))))
@@ -70,10 +67,7 @@ abstract
               ( is-proof-irrelevant-is-in-decidable-subtype P (inr star) p)))))
   ... | inr f =
     count-equiv'
-      ( right-distributive-Σ-coproduct
-        ( Fin k)
-        ( unit)
-        ( is-in-decidable-subtype P))
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
       ( count-equiv'
         ( right-unit-law-coproduct-is-empty
           ( Σ (Fin k) (is-in-decidable-subtype P ∘ inl))

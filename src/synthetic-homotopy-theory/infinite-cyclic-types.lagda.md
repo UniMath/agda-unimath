@@ -156,12 +156,7 @@ module _
                               ℤ-Pointed-Type-With-Aut))))
                       ( is-equiv-id)))) ∘e
               ( ( equiv-right-swap-Σ) ∘e
-                ( ( associative-Σ
-                    ( ℤ ≃ ℤ)
-                    ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
-                    ( λ e →
-                      ( map-equiv (pr1 e) ∘ succ-ℤ) ~
-                      ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
+                ( ( associative-Σ) ∘e
                   ( ( equiv-right-swap-Σ) ∘e
                     ( equiv-Σ
                       ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
