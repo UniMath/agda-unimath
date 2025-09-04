@@ -55,79 +55,81 @@ module _
   {l1 l2 : Level} (σ : signature l1) (X : Set l2)
   where
 
-  htpy-id-Model-Signature :
+  htpy-is-model-signature :
     (f g : is-model-signature σ X) → UU (l1 ⊔ l2)
-  htpy-id-Model-Signature f g =
+  htpy-is-model-signature f g =
     preserves-operations-Model-Signature σ (X , f) (X , g) id
 
-  is-prop-htpy-id-Model-Signature :
-    (f g : is-model-signature σ X) → is-prop (htpy-id-Model-Signature f g)
-  is-prop-htpy-id-Model-Signature f g =
+  is-prop-htpy-is-model-signature :
+    (f g : is-model-signature σ X) → is-prop (htpy-is-model-signature f g)
+  is-prop-htpy-is-model-signature f g =
     is-prop-Π
       ( λ op → is-prop-Π
         ( λ v → is-set-type-Set X (f op v) (g op (map-tuple id v))))
 
   htpy-id-prop-Model-Signature :
     (f g : is-model-signature σ X) → Prop (l1 ⊔ l2)
-  pr1 (htpy-id-prop-Model-Signature f g) = htpy-id-Model-Signature f g
-  pr2 (htpy-id-prop-Model-Signature f g) = is-prop-htpy-id-Model-Signature f g
+  pr1 (htpy-id-prop-Model-Signature f g) = htpy-is-model-signature f g
+  pr2 (htpy-id-prop-Model-Signature f g) = is-prop-htpy-is-model-signature f g
 
-  htpy-id-Model-Signature' :
+  htpy-is-model-signature' :
     (f g : is-model-signature σ X) → UU (l1 ⊔ l2)
-  htpy-id-Model-Signature' f g = (op : operation-signature σ) → f op ~ g op
+  htpy-is-model-signature' f g = (op : operation-signature σ) → f op ~ g op
 
-  is-prop-htpy-id-Model-Signature' :
-    (f g : is-model-signature σ X) → is-prop (htpy-id-Model-Signature' f g)
-  is-prop-htpy-id-Model-Signature' f g =
+  is-prop-htpy-is-model-signature' :
+    (f g : is-model-signature σ X) → is-prop (htpy-is-model-signature' f g)
+  is-prop-htpy-is-model-signature' f g =
     is-prop-Π (λ op → is-prop-Π (λ v → is-set-type-Set X (f op v) (g op v)))
 
   htpy-id-prop-Model-Signature' :
     (f g : is-model-signature σ X) → Prop (l1 ⊔ l2)
-  pr1 (htpy-id-prop-Model-Signature' f g) = htpy-id-Model-Signature' f g
-  pr2 (htpy-id-prop-Model-Signature' f g) = is-prop-htpy-id-Model-Signature' f g
+  pr1 (htpy-id-prop-Model-Signature' f g) = htpy-is-model-signature' f g
+  pr2 (htpy-id-prop-Model-Signature' f g) = is-prop-htpy-is-model-signature' f g
 
   equiv-htpy-id-htpy-id'-Model-Signature :
     (f g : is-model-signature σ X) →
-    htpy-id-Model-Signature' f g ≃ htpy-id-Model-Signature f g
+    htpy-is-model-signature' f g ≃ htpy-is-model-signature f g
   equiv-htpy-id-htpy-id'-Model-Signature f g =
     equiv-Π-equiv-family
-      ( λ op → equiv-Π-equiv-family
-        ( λ v → equiv-concat'
-          ( f op v)
-          ( ap
-            ( g op)
-            ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
+      ( λ op →
+        equiv-Π-equiv-family
+          ( λ v →
+            equiv-concat'
+              ( f op v)
+              ( ap
+                ( g op)
+                ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
 
-  refl-htpy-id-Model-Signature :
+  refl-htpy-is-model-signature :
     (f : is-model-signature σ X) →
-    htpy-id-Model-Signature f f
-  refl-htpy-id-Model-Signature f op v =
+    htpy-is-model-signature f f
+  refl-htpy-is-model-signature f op v =
     ap (f op) (preserves-id-map-tuple (arity-operation-signature σ op) v)
 
   htpy-eq-id-Model-Signature :
     (f g : is-model-signature σ X) →
-    f ＝ g → htpy-id-Model-Signature f g
+    f ＝ g → htpy-is-model-signature f g
   htpy-eq-id-Model-Signature f .f refl op v =
     ap (f op) (preserves-id-map-tuple (arity-operation-signature σ op) v)
 
-  is-torsorial-htpy-id-Model-Signature' :
-    (f : is-model-signature σ X) → is-torsorial (htpy-id-Model-Signature' f)
-  is-torsorial-htpy-id-Model-Signature' f = is-torsorial-binary-htpy f
+  is-torsorial-htpy-is-model-signature' :
+    (f : is-model-signature σ X) → is-torsorial (htpy-is-model-signature' f)
+  is-torsorial-htpy-is-model-signature' f = is-torsorial-binary-htpy f
 
-  is-torsorial-htpy-id-Model-Signature :
-    (f : is-model-signature σ X) → is-torsorial (htpy-id-Model-Signature f)
-  is-torsorial-htpy-id-Model-Signature f =
+  is-torsorial-htpy-is-model-signature :
+    (f : is-model-signature σ X) → is-torsorial (htpy-is-model-signature f)
+  is-torsorial-htpy-is-model-signature f =
     is-contr-equiv'
-      ( Σ (is-model-signature σ X) (htpy-id-Model-Signature' f))
+      ( Σ (is-model-signature σ X) (htpy-is-model-signature' f))
       ( equiv-tot (equiv-htpy-id-htpy-id'-Model-Signature f))
-      ( is-torsorial-htpy-id-Model-Signature' f)
+      ( is-torsorial-htpy-is-model-signature' f)
 
   is-equiv-htpy-eq-id-Model-Signature :
     (f g : is-model-signature σ X) →
     is-equiv (htpy-eq-id-Model-Signature f g)
   is-equiv-htpy-eq-id-Model-Signature f =
     fundamental-theorem-id
-      ( is-torsorial-htpy-id-Model-Signature f)
+      ( is-torsorial-htpy-is-model-signature f)
       ( htpy-eq-id-Model-Signature f)
 ```
 

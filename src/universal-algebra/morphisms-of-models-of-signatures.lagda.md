@@ -33,14 +33,16 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A **morphism of [`σ`-models](universal-algebra.models-of-signatures.md)** `A`
-and `B` is a function `f : A → B` between their underlying sets that preserves
-the operations of `σ`, in the sense that for `op ∈ σ` an abstract operation with
-arity `n ∈ ℕ`, and `assign-A assign-B` the semantics of `σ` in `A B` resp., and
-for a `v ∈ tuple A n`, we have
+A
+{{#concept "morphism" Disambiguation="of models over a signature" Agda=hom-Model-Signature}}
+of [`σ`-models](universal-algebra.models-of-signatures.md) `A` and `B` is a
+function `f : A → B` between their underlying sets that preserves the operations
+of `σ`, in the sense that for `op ∈ σ` an abstract operation with arity `n ∈ ℕ`,
+and `assign-A` and `assign-B` the semantics of `σ` in `A` and `B` respectively,
+and for a `v ∈ tuple A n`, we have
 
 ```text
-f (assign-A op v) = assign-B op (f v)
+  f (assign-A op v) = assign-B op (f v).
 ```
 
 ## Definitions
@@ -92,8 +94,7 @@ module _
     {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3) →
     UU (l1 ⊔ l2 ⊔ l3)
   hom-Model-Signature X Y =
-    Σ
-      ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
+    Σ ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
       ( preserves-operations-Model-Signature X Y)
 
   map-hom-Model-Signature :
