@@ -24,6 +24,7 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -141,11 +142,16 @@ module _
   where
 
   equiv-equiv-hom-Algebra' :
-    (B : Algebra σ T l3) →
+    {l4 : Level}
+    (B : Algebra σ T l4) →
     equiv-hom-Algebra σ T A B ≃
     Σ ( hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
       ( λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
-  equiv-equiv-hom-Algebra' B = associative-Σ _ _ _
+  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
+  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
+  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```
 
 ### Characterizing isomorphisms of algebras
