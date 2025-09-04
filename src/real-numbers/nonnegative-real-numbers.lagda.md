@@ -11,14 +11,21 @@ module real-numbers.nonnegative-real-numbers where
 ```agda
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import foundation.coproduct-types
+open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.logical-equivalences
 open import foundation.sets
+open import foundation.negation
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -396,4 +403,77 @@ abstract
     nonnegative-real-ℚ⁺ (p +ℚ⁺ q)
   add-nonnegative-real-ℚ⁺ p q =
     eq-ℝ⁰⁺ _ _ (add-real-ℚ (rational-ℚ⁺ p) (rational-ℚ⁺ q))
+```
+
+### Negative rational numbers are not less than or equal to nonnegative real numbers
+
+```agda
+module _
+  {l : Level} (x : ℝ⁰⁺ l) (q : ℚ)
+  where
+
+  abstract
+    not-le-leq-zero-rational-ℝ⁰⁺ :
+      leq-ℚ q zero-ℚ → ¬ (le-ℝ (real-ℝ⁰⁺ x) (real-ℚ q))
+    not-le-leq-zero-rational-ℝ⁰⁺ q≤0 x<q =
+      irreflexive-le-ℝ
+        ( real-ℝ⁰⁺ x)
+        ( concatenate-le-leq-ℝ _ (real-ℚ q) _
+          ( x<q)
+          ( transitive-leq-ℝ (real-ℚ q) zero-ℝ (real-ℝ⁰⁺ x)
+            ( is-nonnegative-real-ℝ⁰⁺ x)
+            ( preserves-leq-real-ℚ _ _ q≤0)))
+
+```
+
+### If `x` is less than or equal to all the positive rational numbers `y` is less than or equal to, then `x ≤ y`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
+  where
+
+  abstract
+    leq-leq-positive-rational-ℝ⁰⁺ :
+      ( (q : ℚ⁺) → leq-ℝ (real-ℝ⁰⁺ y) (real-ℚ⁺ q) →
+        leq-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q)) →
+      leq-ℝ⁰⁺ x y
+    leq-leq-positive-rational-ℝ⁰⁺ H =
+      leq-le-rational-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+        ( λ q y<q →
+          rec-coproduct
+            ( λ 0<q →
+              let open do-syntax-trunc-Prop (le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ q))
+              in do
+                (p , y<p , p<q) ← dense-rational-le-ℝ _ _  y<q
+                concatenate-leq-le-ℝ _ (real-ℚ p) _
+                  ( H
+                    ( p ,
+                      is-positive-le-zero-ℚ p
+                        ( reflects-le-real-ℚ _ _
+                          (concatenate-leq-le-ℝ _ _ _
+                            ( is-nonnegative-real-ℝ⁰⁺ y)
+                            ( y<p))))
+                    ( leq-le-ℝ _ _ y<p))
+                  ( p<q))
+            ( λ q≤0 → ex-falso (not-le-leq-zero-rational-ℝ⁰⁺ y q q≤0 y<q))
+            ( decide-le-leq-ℚ zero-ℚ q))
+```
+
+### If `x` is less than or equal to the same positive rational numbers `y` is less than or equal to, then `x` and `y` are similar
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
+  where
+
+  abstract
+    sim-leq-same-positive-rational-ℝ⁰⁺ :
+      ( (q : ℚ⁺) →
+        leq-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q) ↔ leq-ℝ (real-ℝ⁰⁺ y) (real-ℚ⁺ q)) →
+      sim-ℝ⁰⁺ x y
+    sim-leq-same-positive-rational-ℝ⁰⁺ H =
+      sim-sim-leq-ℝ
+        ( leq-leq-positive-rational-ℝ⁰⁺ x y (backward-implication ∘ H) ,
+          leq-leq-positive-rational-ℝ⁰⁺ y x (forward-implication ∘ H))
 ```
