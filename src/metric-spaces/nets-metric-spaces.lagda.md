@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.images
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -84,6 +85,24 @@ module _
   approximation-net-Metric-Space =
     ( subset-net-Metric-Space ,
       is-approximation-subset-net-Metric-Space)
+```
+
+### If a metric space is inhabited, so is any net on it
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
+  where
+
+  abstract
+    is-inhabited-net-inhabited-Metric-Space :
+      is-inhabited-finitely-enumerable-subtype (pr1 S)
+    is-inhabited-net-inhabited-Metric-Space =
+      is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
+        ( subset-net-Metric-Space X ε S)
+        ( is-approximation-subset-net-Metric-Space X ε S)
 ```
 
 ## Properties
