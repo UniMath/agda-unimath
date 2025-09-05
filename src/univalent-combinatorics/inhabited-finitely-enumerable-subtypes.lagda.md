@@ -91,8 +91,8 @@ module _
 ```agda
 im-inhabited-finitely-enumerable-subtype :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → (X → Y) →
-  inhabited-finitely-enumerable-subtype l2 X →
-  inhabited-finitely-enumerable-subtype (l1 ⊔ l2) Y
+  inhabited-finitely-enumerable-subtype l3 X →
+  inhabited-finitely-enumerable-subtype (l1 ⊔ l2 ⊔ l3) Y
 im-inhabited-finitely-enumerable-subtype f (S , |S|) =
   ( im-finitely-enumerable-subtype f S ,
     map-is-inhabited
