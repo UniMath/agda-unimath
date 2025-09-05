@@ -326,7 +326,7 @@ module _
             ( net ε')
             ( is-inhabited-net ε') ε'
         intro-exists
-          (x , net⊆S ε' x x∈net-ε')
+          ( x , net⊆S ε' x x∈net-ε')
           ( transitive-le-ℝ
             ( sup -ℝ real-ℚ⁺ ε)
             ( max-net ε' -ℝ real-ℚ⁺ ε')
