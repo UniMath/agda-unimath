@@ -16,6 +16,10 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.empty-types
+open import elementary-number-theory.strict-inequality-natural-numbers
+
+open import foundation.propositional-truncations
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -24,6 +28,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import elementary-number-theory.maximum-natural-numbers
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universal-property-propositional-truncation-into-sets
@@ -95,6 +100,21 @@ module _
           ( λ n N≤n →
             let (m , m+N=n) = subtraction-leq-ℕ N n N≤n
             in tr (is-zero-Commutative-Semiring R ∘ p) m+N=n (H m)))
+
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  (p : polynomial-Commutative-Semiring R)
+  where
+
+  formal-power-series-polynomial-Commutative-Semiring :
+    formal-power-series-Commutative-Semiring R
+  formal-power-series-polynomial-Commutative-Semiring = pr1 p
+
+  is-polynomial-formal-power-series-polynomial-Commutative-Semiring :
+    is-polynomial-formal-power-series-Commutative-Semiring
+      ( R)
+      ( formal-power-series-polynomial-Commutative-Semiring)
+  is-polynomial-formal-power-series-polynomial-Commutative-Semiring = pr2 p
 ```
 
 ## Properties
@@ -315,4 +335,90 @@ module _
       ( ev-degree-bound-formal-power-series-Commutative-Semiring p x)
       ( eq-ev-degree-bound-formal-power-series-Commutative-Semiring p x)
       ( deg-bound-p)
+```
+
+### Truncation of a formal power series into a polynomial
+
+```agda
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  where
+
+  truncate-formal-power-series-Commutative-Semiring :
+    (n : ℕ) → formal-power-series-Commutative-Semiring R →
+    polynomial-Commutative-Semiring R
+  truncate-formal-power-series-Commutative-Semiring
+    ( n)
+    ( formal-power-series-coefficients-Commutative-Semiring c)
+    =
+      let
+        d : (k : ℕ) → (le-ℕ k n + leq-ℕ n k) → type-Commutative-Semiring R
+        d = λ where
+          k (inl k<n) → c k
+          k (inr n≤k) → zero-Commutative-Semiring R
+        deg-bound-d : (k : ℕ) → (H : le-ℕ k n + leq-ℕ n k) → leq-ℕ n k →
+          is-zero-Commutative-Semiring R (d k H)
+        deg-bound-d = λ where
+          k (inl k<n) n≤k → ex-falso (contradiction-le-ℕ k n k<n n≤k)
+          k (inr _) _ → refl
+      in
+        ( formal-power-series-coefficients-Commutative-Semiring
+          ( λ k → d k (decide-le-leq-ℕ k n)) ,
+          intro-exists n (λ k n≤k → deg-bound-d k (decide-le-leq-ℕ k n) n≤k))
+```
+
+### Addition of polynomials
+
+```agda
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  where
+
+  abstract
+    is-polynomial-add-polynomial-Commutative-Semiring :
+      (p q : polynomial-Commutative-Semiring R) →
+      is-polynomial-formal-power-series-Commutative-Semiring
+        ( R)
+        ( add-formal-power-series-Commutative-Semiring R
+          ( formal-power-series-polynomial-Commutative-Semiring p)
+          ( formal-power-series-polynomial-Commutative-Semiring q))
+    is-polynomial-add-polynomial-Commutative-Semiring
+      (p , is-poly-p) (q , is-poly-q)
+      =
+        let
+          open
+            do-syntax-trunc-Prop
+              ( is-polynomial-prop-formal-power-series-Commutative-Semiring R _)
+        in do
+          (Np , Hp) ← is-poly-p
+          (Nq , Hq) ← is-poly-q
+          intro-exists
+            ( max-ℕ Np Nq)
+            ( λ n max≤n →
+              ap-add-Commutative-Semiring R
+                ( Hp n
+                  ( transitive-leq-ℕ
+                    ( Np)
+                    ( max-ℕ Np Nq)
+                    ( n)
+                    ( max≤n)
+                    ( left-leq-max-ℕ Np Nq)))
+                ( Hq n
+                  ( transitive-leq-ℕ
+                    ( Nq)
+                    ( max-ℕ Np Nq)
+                    ( n)
+                    ( max≤n)
+                    ( right-leq-max-ℕ Np Nq))) ∙
+              left-unit-law-add-Commutative-Semiring R _)
+
+  add-polynomial-Commutative-Semiring :
+    polynomial-Commutative-Semiring R →
+    polynomial-Commutative-Semiring R →
+    polynomial-Commutative-Semiring R
+  add-polynomial-Commutative-Semiring (p , is-poly-p) (q , is-poly-q) =
+    ( add-formal-power-series-Commutative-Semiring R p q ,
+      is-polynomial-add-polynomial-Commutative-Semiring
+        ( p , is-poly-p)
+        ( q , is-poly-q))
 ```
