@@ -64,7 +64,7 @@ module _
 
 ## Properties
 
-### The elementwise negation of a finitely enumerable subset of real numbers
+### The elementwise negation of an inhabited finitely enumerable subset of real numbers
 
 ```agda
 neg-inhabited-finitely-enumerable-subset-ℝ :

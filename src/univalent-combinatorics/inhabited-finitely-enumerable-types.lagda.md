@@ -33,8 +33,8 @@ open import univalent-combinatorics.standard-finite-types
 
 An
 {{#concept "inhabited finitely enumerable type" Agda=Inhabited-Finitely-Enumerable-Type}}
-is an [inhabited](foundation.inhabited-types.md)
-[finitely enumerable type](univalent-combinatorics.finitely-enumerable-types.md).
+is a
+[finitely enumerable type](univalent-combinatorics.finitely-enumerable-types.md) that is [inhabited](foundation.inhabited-types.md).
 
 ## Definition
 
@@ -58,7 +58,9 @@ module _
       ( finitely-enumerable-type-Inhabited-Finitely-Enumerable-Type)
 ```
 
-### The image of a finitely enumerable type under a map is finitely enumerable
+## Properties
+
+### The image of an inhabited finitely enumerable type under a map is inhabited finitely enumerable
 
 ```agda
 im-Inhabited-Finitely-Enumerable-Type :

@@ -86,7 +86,7 @@ module _
 
 ## Properties
 
-### The image of a finitely enumerable subtype under a map is finitely enumerable
+### The image of an inhabited finitely enumerable subtype under a map is inhabited finitely enumerable
 
 ```agda
 im-inhabited-finitely-enumerable-subtype :
