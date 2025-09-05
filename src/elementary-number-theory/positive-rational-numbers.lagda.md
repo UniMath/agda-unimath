@@ -1032,6 +1032,12 @@ abstract
       ( le-ℚ x)
       ( commutative-add-ℚ x (rational-ℚ⁺ d))
       ( le-left-add-rational-ℚ⁺ x d)
+
+  leq-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (rational-ℚ⁺ d +ℚ x)
+  leq-left-add-rational-ℚ⁺ x d = leq-le-ℚ (le-left-add-rational-ℚ⁺ x d)
+
+  leq-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (x +ℚ rational-ℚ⁺ d)
+  leq-right-add-rational-ℚ⁺ x d = leq-le-ℚ (le-right-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map
