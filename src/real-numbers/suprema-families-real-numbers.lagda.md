@@ -66,7 +66,7 @@ module _
   is-approximated-below-prop-family-ℝ x =
     Π-Prop
       ( ℚ⁺)
-      ( λ ε → ∃ I (λ i → le-ℝ-Prop (x -ℝ real-ℚ⁺ ε) (y i)))
+      ( λ ε → ∃ I (λ i → le-prop-ℝ (x -ℝ real-ℚ⁺ ε) (y i)))
 
   is-approximated-below-family-ℝ : {l3 : Level} → ℝ l3 → UU (l1 ⊔ l2 ⊔ l3)
   is-approximated-below-family-ℝ x =
@@ -187,6 +187,17 @@ module _
   has-supremum-prop-family-ℝ : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   has-supremum-prop-family-ℝ =
     ( has-supremum-family-ℝ , is-prop-has-supremum-family-ℝ)
+
+module _
+  {l1 l2 : Level} (S : subset-ℝ l1 l2) (l3 : Level)
+  where
+
+  has-supremum-prop-subset-ℝ : Prop (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-supremum-prop-subset-ℝ =
+    has-supremum-prop-family-ℝ (inclusion-subset-ℝ S) l3
+
+  has-supremum-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-supremum-subset-ℝ = type-Prop has-supremum-prop-subset-ℝ
 ```
 
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`
@@ -204,9 +215,9 @@ module _
       concatenate-le-leq-ℝ z (y i) x z<yᵢ (pr1 is-supremum-x-yᵢ i)
 
     le-element-le-supremum-family-ℝ :
-      {l4 : Level} → (z : ℝ l4) → le-ℝ z x → exists I (λ i → le-ℝ-Prop z (y i))
+      {l4 : Level} → (z : ℝ l4) → le-ℝ z x → exists I (λ i → le-prop-ℝ z (y i))
     le-element-le-supremum-family-ℝ z z<x =
-      let open do-syntax-trunc-Prop (∃ I (λ i → le-ℝ-Prop z (y i)))
+      let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ z (y i)))
       in do
         (ε⁺@(ε , _) , ε<x-z) ←
           exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ z x z<x)
@@ -222,11 +233,11 @@ module _
 
     le-supremum-iff-le-element-family-ℝ :
       {l4 : Level} → (z : ℝ l4) →
-      (le-ℝ z x) ↔ (exists I (λ i → le-ℝ-Prop z (y i)))
+      (le-ℝ z x) ↔ (exists I (λ i → le-prop-ℝ z (y i)))
     pr1 (le-supremum-iff-le-element-family-ℝ z) =
       le-element-le-supremum-family-ℝ z
     pr2 (le-supremum-iff-le-element-family-ℝ z) =
-      elim-exists (le-ℝ-Prop z x) (le-supremum-le-element-family-ℝ z)
+      elim-exists (le-prop-ℝ z x) (le-supremum-le-element-family-ℝ z)
 ```
 
 ## See also

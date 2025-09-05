@@ -41,11 +41,15 @@ differing universe levels.
 
 ```agda
 opaque
-  sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
-  sim-prop-ℝ x y = sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
-
   sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-  sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
+  sim-ℝ x y = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+
+  is-prop-sim-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-prop (sim-ℝ x y)
+  is-prop-sim-ℝ x y =
+    is-prop-type-Prop (sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y))
+
+sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
+sim-prop-ℝ x y = (sim-ℝ x y , is-prop-sim-ℝ x y)
 
 infix 6 _~ℝ_
 _~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)

@@ -11,6 +11,7 @@ open import foundation.apartness-relations
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
@@ -40,7 +41,7 @@ module _
   where
 
   apart-ℝ-Prop : Prop (l1 ⊔ l2)
-  apart-ℝ-Prop = le-ℝ-Prop x y ∨ le-ℝ-Prop y x
+  apart-ℝ-Prop = le-prop-ℝ x y ∨ le-prop-ℝ y x
 
   apart-ℝ : UU (l1 ⊔ l2)
   apart-ℝ = type-Prop apart-ℝ-Prop
@@ -73,10 +74,9 @@ cotransitive-apart-ℝ x y z =
   elim-disjunction
     ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
     ( λ x<y →
-      elim-disjunction
-        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
-        ( inl-disjunction ∘ inl-disjunction)
-        ( inr-disjunction ∘ inl-disjunction)
+      map-disjunction
+        ( inl-disjunction)
+        ( inl-disjunction)
         ( cotransitive-le-ℝ x y z x<y))
     ( λ y<x →
       elim-disjunction
