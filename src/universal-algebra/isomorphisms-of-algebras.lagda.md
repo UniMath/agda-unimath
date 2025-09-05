@@ -147,10 +147,10 @@ module _
     equiv-hom-Algebra σ T A B ≃
     Σ ( hom-Set (set-Algebra σ T A) (set-Algebra σ T B))
       ( λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
-  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = f , eq , p
-  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = (f , eq , p)
+  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
   pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
-  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = (f , p) , eq
+  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
   pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```
 
