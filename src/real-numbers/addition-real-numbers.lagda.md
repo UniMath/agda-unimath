@@ -275,12 +275,12 @@ module _
       map-tot-exists (λ (qy , _) → map-product (ly⊆lx qy) id)
 
     preserves-sim-left-add-ℝ : sim-ℝ x y → sim-ℝ (z +ℝ x) (z +ℝ y)
-    preserves-sim-left-add-ℝ x≈y =
+    preserves-sim-left-add-ℝ x≍y =
       binary-tr
         ( sim-ℝ)
         ( commutative-add-ℝ x z)
         ( commutative-add-ℝ y z)
-        ( preserves-sim-right-add-ℝ x≈y)
+        ( preserves-sim-right-add-ℝ x≍y)
 ```
 
 ### Swapping laws for addition on real numbers
@@ -347,11 +347,11 @@ module _
     reflects-sim-right-add-ℝ x+z≈y+z =
       similarity-reasoning-ℝ
         x
-        ~ℝ (x +ℝ z) +ℝ neg-ℝ z
+        ≍ℝ (x +ℝ z) +ℝ neg-ℝ z
           by symmetric-sim-ℝ (cancel-right-add-diff-ℝ x z)
-        ~ℝ (y +ℝ z) +ℝ neg-ℝ z
+        ≍ℝ (y +ℝ z) +ℝ neg-ℝ z
           by preserves-sim-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≈y+z
-        ~ℝ y by cancel-right-add-diff-ℝ y z
+        ≍ℝ y by cancel-right-add-diff-ℝ y z
 
     reflects-sim-left-add-ℝ : sim-ℝ (z +ℝ x) (z +ℝ y) → sim-ℝ x y
     reflects-sim-left-add-ℝ z+x≈z+y =
@@ -448,19 +448,19 @@ module _
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
           neg-ℝ (x +ℝ y)
-          ~ℝ neg-ℝ (x +ℝ y) +ℝ x +ℝ neg-ℝ x
+          ≍ℝ neg-ℝ (x +ℝ y) +ℝ x +ℝ neg-ℝ x
             by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ x)
-          ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ neg-ℝ x) +ℝ y) +ℝ neg-ℝ y
+          ≍ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ neg-ℝ x) +ℝ y) +ℝ neg-ℝ y
             by symmetric-sim-ℝ (cancel-right-add-diff-ℝ _ y)
-          ~ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ y) +ℝ neg-ℝ x) +ℝ neg-ℝ y
+          ≍ℝ (((neg-ℝ (x +ℝ y) +ℝ x) +ℝ y) +ℝ neg-ℝ x) +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (right-swap-add-ℝ _ (neg-ℝ x) y))
-          ~ℝ ((neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ neg-ℝ x) +ℝ neg-ℝ y
+          ≍ℝ ((neg-ℝ (x +ℝ y) +ℝ (x +ℝ y)) +ℝ neg-ℝ x) +ℝ neg-ℝ y
             by
               sim-eq-ℝ
                 ( ap
                   ( _+ℝ neg-ℝ y)
                   ( ap (_+ℝ neg-ℝ x) (associative-add-ℝ _ _ _)))
-          ~ℝ (zero-ℝ +ℝ neg-ℝ x) +ℝ neg-ℝ y
+          ≍ℝ (zero-ℝ +ℝ neg-ℝ x) +ℝ neg-ℝ y
             by
               preserves-sim-right-add-ℝ
                 ( neg-ℝ y)
@@ -471,7 +471,7 @@ module _
                   ( _)
                   ( _)
                   ( left-inverse-law-add-ℝ _))
-          ~ℝ neg-ℝ x +ℝ neg-ℝ y
+          ≍ℝ neg-ℝ x +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (left-unit-law-add-ℝ _)))
 ```
 
