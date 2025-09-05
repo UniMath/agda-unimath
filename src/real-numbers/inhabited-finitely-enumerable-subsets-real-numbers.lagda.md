@@ -26,6 +26,14 @@ open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 
 </details>
 
+## Idea
+
+An
+{{#concept "inhabited finitely enumerable subset" Agda=inhabited-finitely-enumerable-subtype}}
+of the [real numbers](real-numbers.dedekind-real-numbers.md)
+is a [subtype](foundation.subtypes.md) of `ℝ` that is
+[inhabited and finitely enumerable](univalent-combinatorics.inhabited-finitely-enumerable-subtypes.md).
+
 ## Definition
 
 ```agda
