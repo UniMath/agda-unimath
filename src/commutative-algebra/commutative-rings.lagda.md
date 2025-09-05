@@ -654,7 +654,7 @@ module _
     (l1 l2 : list type-Commutative-Ring) →
     add-list-Commutative-Ring (concat-list l1 l2) ＝
     add-Commutative-Ring
-      (add-list-Commutative-Ring l1)
+      ( add-list-Commutative-Ring l1)
       ( add-list-Commutative-Ring l2)
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
