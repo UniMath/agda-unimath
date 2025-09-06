@@ -39,11 +39,11 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.finitely-enumerable-subsets-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-families-real-numbers
+open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.isometry-negation-real-numbers
-open import real-numbers.maximum-finitely-enumerable-subsets-real-numbers
+open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
@@ -52,7 +52,7 @@ open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 
-open import univalent-combinatorics.finitely-enumerable-subtypes
+open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ```
 
 </details>
@@ -156,47 +156,30 @@ module _
   where
 
   private
-    net : ℚ⁺ → finitely-enumerable-subset-ℝ (l1 ⊔ lsuc l2 ⊔ l3) l2
+    net : ℚ⁺ → inhabited-finitely-enumerable-subset-ℝ (l1 ⊔ lsuc l2 ⊔ l3) l2
     net δ =
-      finitely-enumerable-subtype-im-finitely-enumerable-subtype
+      im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( finitely-enumerable-subset-net-Metric-Space
-          ( metric-space-subset-ℝ S)
-          ( δ)
-          ( M δ))
+        ( inhabited-finitely-enumerable-subtype-net-Metric-Space
+          ( metric-space-subset-ℝ S) |S| δ (M δ))
 
     is-net :
       (δ : ℚ⁺) →
       is-approximation-Metric-Space
         ( metric-space-subset-ℝ S)
         ( δ)
-        ( subtype-finitely-enumerable-subtype (pr1 (M δ)))
+        ( subset-net-Metric-Space (metric-space-subset-ℝ S) δ (M δ))
     is-net δ = pr2 (M δ)
 
     net⊆S :
-      (δ : ℚ⁺) → (subset-finitely-enumerable-subset-ℝ (net δ)) ⊆ S
+      (δ : ℚ⁺) → (subset-inhabited-finitely-enumerable-subset-ℝ (net δ)) ⊆ S
     net⊆S δ n =
       rec-trunc-Prop
         ( S n)
         ( λ z → tr (type-Prop ∘ S) (pr2 z) (pr2 (pr1 (pr1 z))))
 
-    is-inhabited-net :
-      (δ : ℚ⁺) →
-      is-inhabited-finitely-enumerable-subset-ℝ (net δ)
-    is-inhabited-net δ =
-      map-is-inhabited
-        ( map-unit-im (pr1 ∘ pr1))
-        ( is-inhabited-net-inhabited-Metric-Space
-          ( metric-space-subset-ℝ S)
-          ( |S|)
-          ( δ)
-          ( M δ))
-
     max-net : ℚ⁺ → ℝ l2
-    max-net δ =
-      max-inhabited-finitely-enumerable-subset-ℝ
-        ( net δ)
-        ( is-inhabited-net δ)
+    max-net δ = max-inhabited-finitely-enumerable-subset-ℝ (net δ)
 
   abstract
     cauchy-approximation-sup-modulated-totally-bounded-subset-ℝ :
@@ -208,7 +191,6 @@ module _
           forward-implication
             ( is-least-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ
               ( net ε)
-              ( is-inhabited-net ε)
               ( max-net η +ℝ real-ℚ⁺ η))
             ( λ (z , z∈net-ε) →
               let
@@ -228,8 +210,7 @@ module _
                     ( max-net η)
                     ( is-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ
                       ( net η)
-                      ( is-inhabited-net η)
-                      ( map-unit-im (pr1 ∘ pr1) ((y , y∈S) , y∈net-η))))
+                      ( map-unit-im (pr1 ∘ pr1) (((y , y∈S) , y∈net-η)))))
                   ( right-leq-real-bound-neighborhood-ℝ η _ _ Nηyz))
       in
         ( max-net ,
@@ -297,7 +278,6 @@ module _
                               ( ε')))
                           ( is-upper-bound-max-inhabited-finitely-enumerable-subset-ℝ
                             ( net ε')
-                            ( is-inhabited-net ε')
                             ( map-unit-im
                               ( pr1 ∘ pr1)
                               ( (y , y∈S) , y∈net-ε'))))))
@@ -324,7 +304,7 @@ module _
         ((x , x∈net-ε') , max-net-ε'-ε'<x) ←
           is-approximated-below-max-inhabited-finitely-enumerable-subset-ℝ
             ( net ε')
-            ( is-inhabited-net ε') ε'
+            ( ε')
         intro-exists
           ( x , net⊆S ε' x x∈net-ε')
           ( transitive-le-ℝ
