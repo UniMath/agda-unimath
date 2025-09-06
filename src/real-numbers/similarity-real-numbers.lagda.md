@@ -9,6 +9,7 @@ module real-numbers.similarity-real-numbers where
 ```agda
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types

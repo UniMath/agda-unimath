@@ -34,6 +34,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
@@ -773,6 +774,71 @@ module _
             irreflexive-le-ℝ
               ( x)
               ( transitive-le-ℝ x (y +ℝ real-ℚ⁺ ε) x y+ε<x (H ε)))
+```
+
+### If `x` is less than each rational number `y` is less than, then `x ≤ y`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  opaque
+    unfolding leq-ℝ'
+
+    leq-le-rational-ℝ :
+      ((q : ℚ) → le-ℝ y (real-ℚ q) → le-ℝ x (real-ℚ q)) → leq-ℝ x y
+    leq-le-rational-ℝ H =
+      leq-leq'-ℝ _ _
+        ( λ q y<q →
+          is-in-upper-cut-le-real-ℚ q x
+            ( H q (le-real-is-in-upper-cut-ℚ q y y<q)))
+```
+
+### Two real numbers are similar if they are less than the same rational numbers
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    sim-le-same-rational-ℝ :
+      ((q : ℚ) → le-ℝ x (real-ℚ q) ↔ le-ℝ y (real-ℚ q)) → sim-ℝ x y
+    sim-le-same-rational-ℝ H =
+      sim-sim-leq-ℝ
+        ( leq-le-rational-ℝ x y (backward-implication ∘ H) ,
+          leq-le-rational-ℝ y x (forward-implication ∘ H))
+```
+
+### If `x + y < p` for some rational `p`, then there exist `q r : ℚ` such that `p = q + r`, `x < q`, `y < r`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (p : ℚ)
+  where
+
+  opaque
+    unfolding add-ℝ
+
+    le-split-add-rational-ℝ :
+      le-ℝ (x +ℝ y) (real-ℚ p) →
+      exists
+        ( ℚ × ℚ)
+        ( λ (q , r) →
+          Id-Prop ℚ-Set p (q +ℚ r) ∧
+          le-prop-ℝ x (real-ℚ q) ∧
+          le-prop-ℝ y (real-ℚ r))
+    le-split-add-rational-ℝ x+y<p =
+      let open do-syntax-trunc-Prop (∃ _ _)
+      in do
+        ((q , r) , x<q , y<r , p=q+r) ←
+          is-in-upper-cut-le-real-ℚ p (x +ℝ y) x+y<p
+        intro-exists
+          ( q , r)
+          ( p=q+r ,
+            le-real-is-in-upper-cut-ℚ q x x<q ,
+            le-real-is-in-upper-cut-ℚ r y y<r)
 ```
 
 ## References
