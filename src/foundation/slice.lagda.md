@@ -52,7 +52,7 @@ definitions for types.
 
 ```agda
 Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
-Slice l = type-polynomial-endofunctor (UU l) (λ X → X)
+Slice l = type-polynomial-endofunctor' (UU l) (λ X → X)
 ```
 
 ### The morphisms in the slice category of types
