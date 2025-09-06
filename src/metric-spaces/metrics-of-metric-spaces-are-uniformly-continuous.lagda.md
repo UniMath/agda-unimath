@@ -50,29 +50,6 @@ from the
 ## Proof
 
 ```agda
-module inequality-reasoning-Large-Poset
-  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
-  where
-
-  infixl 1 chain-of-inequalities_
-  infixl 0 step-calculate-in-Large-Poset
-
-  chain-of-inequalities_ :
-    {l : Level} (x : type-Large-Poset P l) → leq-Large-Poset P x x
-  chain-of-inequalities_ = refl-leq-Large-Poset P
-
-  step-calculate-in-Large-Poset :
-    {l1 l2 : Level} {x : type-Large-Poset P l1} {y : type-Large-Poset P l2} →
-    leq-Large-Poset P x y →
-    {l3 : Level} (z : type-Large-Poset P l3) →
-    leq-Large-Poset P y z → leq-Large-Poset P x z
-  step-calculate-in-Large-Poset {x = x} {y = y} u z v =
-    transitive-leq-Large-Poset P x y z v u
-
-  syntax step-calculate-in-Large-Poset u z v = u ≤ z by v
-```
-
-```agda
 module _
   {l1 l2 l3 : Level} (M : Metric-Space l1 l2)
   (ρ : distance-function l3 (set-Metric-Space M))
