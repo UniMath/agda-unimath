@@ -52,9 +52,8 @@ mediant-fraction-ℤ (a , b) (c , d) = (add-ℤ a c , add-positive-ℤ b d)
 ```agda
 cross-mul-diff-left-mediant-fraction-ℤ :
   (x y : fraction-ℤ) →
-  Id
-    ( cross-mul-diff-fraction-ℤ x y)
-    ( cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y))
+  cross-mul-diff-fraction-ℤ x y ＝
+  cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y)
 cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
   equational-reasoning
   (ny *ℤ dx -ℤ nx *ℤ dy)
@@ -71,9 +70,8 @@ cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
 
 cross-mul-diff-right-mediant-fraction-ℤ :
   (x y : fraction-ℤ) →
-  Id
-    ( cross-mul-diff-fraction-ℤ x y)
-    ( cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y)
+  cross-mul-diff-fraction-ℤ x y ＝
+  cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y
 cross-mul-diff-right-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
   equational-reasoning
   (ny *ℤ dx -ℤ nx *ℤ dy)

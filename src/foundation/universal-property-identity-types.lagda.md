@@ -161,7 +161,7 @@ In this composite, the injectivity of `equiv-eq` is used in the third step.
 ```agda
 module _
   {l : Level} (A : UU l)
-  (L : (a x y : A) → is-injective (equiv-eq {A = Id x y} {B = Id a y}))
+  (L : (a x y : A) → is-injective (equiv-eq {A = x ＝ y} {B = a ＝ y}))
   where
 
   injection-Id-is-injective-equiv-eq-Id :
@@ -206,7 +206,7 @@ is a proper embedding.
 ```agda
 module _
   {l : Level} (A : UU l)
-  (L : (a x y : A) → instance-preunivalence (Id x y) (Id a y))
+  (L : (a x y : A) → instance-preunivalence (x ＝ y) (a ＝ y))
   where
 
   emb-Id-is-injective-equiv-eq-Id : (a x : A) → (Id a ＝ Id x) ↪ (a ＝ x)
@@ -235,7 +235,7 @@ module _
   is-emb-Id-preunivalence-axiom : is-emb (Id {A = A})
   is-emb-Id-preunivalence-axiom =
     is-emb-Id-is-injective-equiv-eq-Id A
-      ( λ a x y → is-injective-is-emb (L (Id x y) (Id a y)))
+      ( λ a x y → is-injective-is-emb (L (x ＝ y) (a ＝ y)))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding

@@ -48,7 +48,7 @@ refl-leq-count e x =
 
 antisymmetric-leq-count :
   {l : Level} {X : UU l} (e : count X) {x y : X} →
-  leq-count e x y → leq-count e y x → Id x y
+  leq-count e x y → leq-count e y x → x ＝ y
 antisymmetric-leq-count e H K =
   is-injective-map-inv-equiv
     ( equiv-count e)
