@@ -10,38 +10,37 @@ module real-numbers.suprema-families-real-numbers where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
-open import foundation.action-on-identifications-functions
 
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.identity-types
 open import foundation.disjunction
-open import foundation.transport-along-identifications
+open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
-open import real-numbers.positive-real-numbers
-open import real-numbers.negation-real-numbers
-open import real-numbers.binary-maximum-real-numbers
 ```
 
 </details>
