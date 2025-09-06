@@ -41,12 +41,12 @@ formalization, we are using de Bruijn variables.
 
 ```agda
 module _
-  {l1 : Level} (Sg : signature l1)
+  {l1 : Level} (σ : signature l1)
   where
 
   data Term : UU l1 where
     var-Term : ℕ → Term
-    op-Term : is-model Sg Term
+    op-Term : is-model σ Term
 
   de-bruijn-variables-term : Term → list ℕ
 
@@ -84,11 +84,11 @@ evaluated to a concrete element of the type `A`.
 ```agda
   eval-term :
     {l2 : Level} → {A : UU l2} →
-    is-model Sg A → assignment A → Term → A
+    is-model σ A → assignment A → Term → A
 
   eval-tuple :
-    { l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model Sg A → assignment A → tuple Term n → tuple A n
+    {l2 : Level} → {A : UU l2} {n : ℕ} →
+    is-model σ A → assignment A → tuple Term n → tuple A n
 
   eval-term m assign (var-Term n) = assign n
   eval-term m assign (op-Term f x) = m f (eval-tuple m assign x)
@@ -98,8 +98,8 @@ evaluated to a concrete element of the type `A`.
     eval-term m assign x ∷ (eval-tuple m assign v)
 
   eval-tuple-map-tuple-eval-term :
-    { l2 : Level} {A : UU l2} {n : ℕ} →
-    (m : is-model Sg A) → (assign : assignment A) → (v : tuple Term n) →
+    {l2 : Level} {A : UU l2} {n : ℕ} →
+    (m : is-model σ A) → (assign : assignment A) → (v : tuple Term n) →
     eval-tuple m assign v ＝ map-tuple (eval-term m assign) v
   eval-tuple-map-tuple-eval-term m assign empty-tuple = refl
   eval-tuple-map-tuple-eval-term m assign (x ∷ v) =
@@ -113,17 +113,17 @@ element of `A`.
 
 ```agda
   eval-constant-term :
-    { l2 : Level} {A : UU l2} →
-    ( is-model Sg A) →
-    ( t : Term) →
+    {l2 : Level} {A : UU l2} →
+    (is-model σ A) →
+    (t : Term) →
     (de-bruijn-variables-term t ＝ nil) →
     A
 
   eval-constant-term-tuple :
-    { l2 : Level} {A : UU l2} {n : ℕ} →
-    ( is-model Sg A) →
-    ( v : tuple Term n) →
-    ( all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
+    {l2 : Level} {A : UU l2} {n : ℕ} →
+    (is-model σ A) →
+    (v : tuple Term n) →
+    (all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
     tuple A n
 
   eval-constant-term m (op-Term f x) p =
@@ -167,7 +167,7 @@ element of `A`.
 
   induced-function-term :
     {l2 : Level} → {A : UU l2} →
-    is-model Sg A → (t : Term) →
+    is-model σ A → (t : Term) →
     tuple A (arity-term t) → A
   induced-function-term {l2} {A} m t v with
     ( has-decidable-equality-list
@@ -198,29 +198,29 @@ element of `A`.
 
 ```agda
 translation-term :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  is-extension-signature Sg1 Sg2 →
-  Term Sg2 → Term Sg1
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  is-extension-signature σ τ →
+  Term τ → Term σ
 
 translation-tuple :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  { n : ℕ} →
-  is-extension-signature Sg1 Sg2 →
-  tuple (Term Sg2) n → tuple (Term Sg1) n
+  {l1 l2 : Level} →
+  (σ : signature l1) →
+  (τ : signature l2) →
+  {n : ℕ} →
+  is-extension-signature σ τ →
+  tuple (Term τ) n → tuple (Term σ) n
 
-translation-term Sg1 Sg2 ext (var-Term x) = var-Term x
-translation-term Sg1 Sg2 ext (op-Term f v) =
-  op-Term (emb-extension-signature Sg1 Sg2 ext f)
-    ( tr (tuple (Term Sg1))
-      ( arity-preserved-extension-signature Sg1 Sg2 ext f)
-      ( translation-tuple Sg1 Sg2 ext v))
+translation-term σ τ ext (var-Term x) = var-Term x
+translation-term σ τ ext (op-Term f v) =
+  op-Term (emb-extension-signature σ τ ext f)
+    ( tr (tuple (Term σ))
+      ( arity-preserved-extension-signature σ τ ext f)
+      ( translation-tuple σ τ ext v))
 
-translation-tuple Sg1 Sg2 ext empty-tuple = empty-tuple
-translation-tuple Sg1 Sg2 ext (x ∷ v) =
-  ( translation-term Sg1 Sg2 ext x) ∷
-    ( translation-tuple Sg1 Sg2 ext v)
+translation-tuple σ τ ext empty-tuple = empty-tuple
+translation-tuple σ τ ext (x ∷ v) =
+  ( translation-term σ τ ext x) ∷
+    ( translation-tuple σ τ ext v)
 ```
