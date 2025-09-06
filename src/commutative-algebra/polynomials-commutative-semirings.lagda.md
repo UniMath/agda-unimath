@@ -26,13 +26,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import univalent-combinatorics.finite-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -42,10 +41,11 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

@@ -64,7 +64,7 @@ open formal-power-series-Commutative-Semiring public
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   term-ev-formal-power-series-Commutative-Semiring :
@@ -169,7 +169,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   add-formal-power-series-Commutative-Semiring :
@@ -190,18 +190,18 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     associative-add-formal-power-series-Commutative-Semiring :
       (x y z : formal-power-series-Commutative-Semiring R) →
-      add-formal-power-series-Commutative-Semiring R
-        ( add-formal-power-series-Commutative-Semiring R x y)
+      add-formal-power-series-Commutative-Semiring
+        ( add-formal-power-series-Commutative-Semiring x y)
         ( z) ＝
-      add-formal-power-series-Commutative-Semiring R
+      add-formal-power-series-Commutative-Semiring
         ( x)
-        ( add-formal-power-series-Commutative-Semiring R y z)
+        ( add-formal-power-series-Commutative-Semiring y z)
     associative-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
@@ -219,14 +219,14 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     commutative-add-formal-power-series-Commutative-Semiring :
       (x y : formal-power-series-Commutative-Semiring R) →
-      add-formal-power-series-Commutative-Semiring R x y ＝
-      add-formal-power-series-Commutative-Semiring R y x
+      add-formal-power-series-Commutative-Semiring x y ＝
+      add-formal-power-series-Commutative-Semiring y x
     commutative-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y) =
@@ -242,13 +242,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     left-unit-law-add-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      add-formal-power-series-Commutative-Semiring R
+      add-formal-power-series-Commutative-Semiring
         ( zero-formal-power-series-Commutative-Semiring R)
         ( x) ＝
       x
@@ -262,7 +262,7 @@ module _
 
     right-unit-law-add-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      add-formal-power-series-Commutative-Semiring R
+      add-formal-power-series-Commutative-Semiring
         ( x)
         ( zero-formal-power-series-Commutative-Semiring R) ＝
       x
@@ -279,7 +279,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   mul-formal-power-series-Commutative-Semiring :
@@ -300,18 +300,18 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     associative-mul-formal-power-series-Commutative-Semiring :
       (x y z : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
-        ( mul-formal-power-series-Commutative-Semiring R x y)
+      mul-formal-power-series-Commutative-Semiring
+        ( mul-formal-power-series-Commutative-Semiring x y)
         ( z) ＝
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( x)
-        ( mul-formal-power-series-Commutative-Semiring R y z)
+        ( mul-formal-power-series-Commutative-Semiring y z)
     associative-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
@@ -329,14 +329,14 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     commutative-mul-formal-power-series-Commutative-Semiring :
       (x y : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R x y ＝
-      mul-formal-power-series-Commutative-Semiring R y x
+      mul-formal-power-series-Commutative-Semiring x y ＝
+      mul-formal-power-series-Commutative-Semiring y x
     commutative-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y) =
@@ -352,13 +352,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     left-unit-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( one-formal-power-series-Commutative-Semiring R)
         ( x) ＝
       x
@@ -372,7 +372,7 @@ module _
 
     right-unit-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( x)
         ( one-formal-power-series-Commutative-Semiring R) ＝
       x
@@ -389,13 +389,13 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     left-zero-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( zero-formal-power-series-Commutative-Semiring R)
         ( x) ＝
       zero-formal-power-series-Commutative-Semiring R
@@ -409,7 +409,7 @@ module _
 
     right-zero-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( x)
         ( zero-formal-power-series-Commutative-Semiring R) ＝
       zero-formal-power-series-Commutative-Semiring R
@@ -426,18 +426,18 @@ module _
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} {R : Commutative-Semiring l}
   where
 
   abstract
     left-distributive-mul-add-formal-power-series-Commutative-Semiring :
       (x y z : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
+      mul-formal-power-series-Commutative-Semiring
         ( x)
-        ( add-formal-power-series-Commutative-Semiring R y z) ＝
-      add-formal-power-series-Commutative-Semiring R
-        ( mul-formal-power-series-Commutative-Semiring R x y)
-        ( mul-formal-power-series-Commutative-Semiring R x z)
+        ( add-formal-power-series-Commutative-Semiring y z) ＝
+      add-formal-power-series-Commutative-Semiring
+        ( mul-formal-power-series-Commutative-Semiring x y)
+        ( mul-formal-power-series-Commutative-Semiring x z)
     left-distributive-mul-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
@@ -452,12 +452,12 @@ module _
 
     right-distributive-mul-add-formal-power-series-Commutative-Semiring :
       (x y z : formal-power-series-Commutative-Semiring R) →
-      mul-formal-power-series-Commutative-Semiring R
-        ( add-formal-power-series-Commutative-Semiring R x y)
+      mul-formal-power-series-Commutative-Semiring
+        ( add-formal-power-series-Commutative-Semiring x y)
         ( z) ＝
-      add-formal-power-series-Commutative-Semiring R
-        ( mul-formal-power-series-Commutative-Semiring R x z)
-        ( mul-formal-power-series-Commutative-Semiring R y z)
+      add-formal-power-series-Commutative-Semiring
+        ( mul-formal-power-series-Commutative-Semiring x z)
+        ( mul-formal-power-series-Commutative-Semiring y z)
     right-distributive-mul-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
@@ -481,38 +481,38 @@ module _
   additive-semigroup-formal-power-series-Commutative-Semiring : Semigroup l
   additive-semigroup-formal-power-series-Commutative-Semiring =
     ( set-formal-power-series-Commutative-Semiring R ,
-      add-formal-power-series-Commutative-Semiring R ,
-      associative-add-formal-power-series-Commutative-Semiring R)
+      add-formal-power-series-Commutative-Semiring ,
+      associative-add-formal-power-series-Commutative-Semiring)
 
   additive-monoid-formal-power-series-Commutative-Semiring : Monoid l
   additive-monoid-formal-power-series-Commutative-Semiring =
     ( additive-semigroup-formal-power-series-Commutative-Semiring ,
       zero-formal-power-series-Commutative-Semiring R ,
-      left-unit-law-add-formal-power-series-Commutative-Semiring R ,
-      right-unit-law-add-formal-power-series-Commutative-Semiring R)
+      left-unit-law-add-formal-power-series-Commutative-Semiring ,
+      right-unit-law-add-formal-power-series-Commutative-Semiring)
 
   additive-commutative-monoid-formal-power-series-Commutative-Semiring :
     Commutative-Monoid l
   additive-commutative-monoid-formal-power-series-Commutative-Semiring =
     ( additive-monoid-formal-power-series-Commutative-Semiring ,
-      commutative-add-formal-power-series-Commutative-Semiring R)
+      commutative-add-formal-power-series-Commutative-Semiring)
 
   semiring-formal-power-series-Commutative-Semiring : Semiring l
   semiring-formal-power-series-Commutative-Semiring =
     ( additive-commutative-monoid-formal-power-series-Commutative-Semiring ,
-      ( ( mul-formal-power-series-Commutative-Semiring R ,
-          associative-mul-formal-power-series-Commutative-Semiring R) ,
+      ( ( mul-formal-power-series-Commutative-Semiring ,
+          associative-mul-formal-power-series-Commutative-Semiring) ,
         ( one-formal-power-series-Commutative-Semiring R ,
-          left-unit-law-mul-formal-power-series-Commutative-Semiring R ,
-          right-unit-law-mul-formal-power-series-Commutative-Semiring R) ,
-        left-distributive-mul-add-formal-power-series-Commutative-Semiring R ,
-        right-distributive-mul-add-formal-power-series-Commutative-Semiring R) ,
-      left-zero-law-mul-formal-power-series-Commutative-Semiring R ,
-      right-zero-law-mul-formal-power-series-Commutative-Semiring R)
+          left-unit-law-mul-formal-power-series-Commutative-Semiring ,
+          right-unit-law-mul-formal-power-series-Commutative-Semiring) ,
+        left-distributive-mul-add-formal-power-series-Commutative-Semiring ,
+        right-distributive-mul-add-formal-power-series-Commutative-Semiring) ,
+      left-zero-law-mul-formal-power-series-Commutative-Semiring ,
+      right-zero-law-mul-formal-power-series-Commutative-Semiring)
 
   commutative-semiring-formal-power-series-Commutative-Semiring :
     Commutative-Semiring l
   commutative-semiring-formal-power-series-Commutative-Semiring =
     ( semiring-formal-power-series-Commutative-Semiring ,
-      commutative-mul-formal-power-series-Commutative-Semiring R)
+      commutative-mul-formal-power-series-Commutative-Semiring)
 ```
