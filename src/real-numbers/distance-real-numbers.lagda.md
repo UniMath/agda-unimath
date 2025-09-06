@@ -22,6 +22,8 @@ open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.metrics-of-metric-spaces
+
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -71,6 +73,10 @@ abstract
   is-nonnegative-dist-ℝ :
     {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → is-nonnegative-ℝ (dist-ℝ x y)
   is-nonnegative-dist-ℝ _ _ = is-nonnegative-abs-ℝ _
+
+nonnegative-dist-ℝ :
+  {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → ℝ⁰⁺ (l1 ⊔ l2)
+nonnegative-dist-ℝ x y = (dist-ℝ x y , is-nonnegative-dist-ℝ x y)
 ```
 
 ### Relationship to the metric space of real numbers
@@ -183,6 +189,18 @@ abstract
   neighborhood-iff-leq-dist-ℝ d x y =
     ( leq-dist-neighborhood-ℝ d x y ,
       neighborhood-dist-ℝ d x y)
+```
+
+### The distance function on two real numbers is a metric on the metric space of real numbers
+
+```agda
+abstract
+  dist-is-metric-of-metric-space-ℝ :
+    (l : Level) →
+    is-metric-of-Metric-Space
+      ( metric-space-ℝ l)
+      ( nonnegative-dist-ℝ)
+  dist-is-metric-of-metric-space-ℝ _ = neighborhood-iff-leq-dist-ℝ
 ```
 
 ### Triangle inequality
