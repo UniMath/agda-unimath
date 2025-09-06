@@ -385,8 +385,7 @@ module _
     polynomial-Commutative-Semiring R
   truncate-formal-power-series-Commutative-Semiring
     ( n)
-    ( formal-power-series-coefficients-Commutative-Semiring c)
-    =
+    ( formal-power-series-coefficients-Commutative-Semiring c) =
       let
         d : (k : ℕ) → (le-ℕ k n + leq-ℕ n k) → type-Commutative-Semiring R
         d = λ where
@@ -426,8 +425,7 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring p)
       ( formal-power-series-coefficients-Commutative-Semiring q)
       ( Np , Hp)
-      ( Nq , Hq)
-      =
+      ( Nq , Hq) =
         let
           N = max-ℕ Np Nq
           case r Nr Hr Nr≤N n N≤n = Hr n (transitive-leq-ℕ Nr N n N≤n Nr≤N)
@@ -448,8 +446,7 @@ module _
           ( formal-power-series-polynomial-Commutative-Semiring p)
           ( formal-power-series-polynomial-Commutative-Semiring q))
     is-polynomial-add-polynomial-Commutative-Semiring
-      (p , is-poly-p) (q , is-poly-q)
-      =
+      (p , is-poly-p) (q , is-poly-q) =
         let
           open
             do-syntax-trunc-Prop
@@ -495,8 +492,7 @@ module _
         ( ev-polynomial-Commutative-Semiring p x)
         ( ev-polynomial-Commutative-Semiring q x)
     interchange-ev-add-polynomial-Commutative-Semiring
-      pp@(p , is-poly-p) qq@(q , is-poly-q) x
-      =
+      pp@(p , is-poly-p) qq@(q , is-poly-q) x =
         let
           open
             do-syntax-trunc-Prop
@@ -591,8 +587,7 @@ module _
     ( formal-power-series-coefficients-Commutative-Semiring p)
     ( formal-power-series-coefficients-Commutative-Semiring q)
     ( Np , Hp)
-    ( Nq , Hq)
-    =
+    ( Nq , Hq) =
       ( Nq +ℕ Np ,
         λ n Nq+Np≤n →
           equational-reasoning
@@ -639,8 +634,7 @@ module _
           ( formal-power-series-polynomial-Commutative-Semiring p)
           ( formal-power-series-polynomial-Commutative-Semiring q))
     is-polynomial-mul-polynomial-Commutative-Semiring
-      (p , is-poly-p) (q , is-poly-q)
-      =
+      (p , is-poly-p) (q , is-poly-q) =
         let
           open
             do-syntax-trunc-Prop
