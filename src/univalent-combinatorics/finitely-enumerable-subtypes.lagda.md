@@ -108,21 +108,21 @@ module _
   (S : finitely-enumerable-subtype l3 X)
   where
 
-  im-finitely-enumerable-subtype : subtype (l1 ⊔ l2 ⊔ l3) Y
-  im-finitely-enumerable-subtype =
+  subtype-im-finitely-enumerable-subtype : subtype (l1 ⊔ l2 ⊔ l3) Y
+  subtype-im-finitely-enumerable-subtype =
     im-subtype f (subtype-finitely-enumerable-subtype S)
 
   abstract
-    is-finitely-enumerable-im-finitely-enumerable-subtype :
-      is-finitely-enumerable-subtype im-finitely-enumerable-subtype
-    is-finitely-enumerable-im-finitely-enumerable-subtype =
+    is-finitely-enumerable-subtype-im-finitely-enumerable-subtype :
+      is-finitely-enumerable-subtype subtype-im-finitely-enumerable-subtype
+    is-finitely-enumerable-subtype-im-finitely-enumerable-subtype =
       is-finitely-enumerable-im-Finitely-Enumerable-Type
         ( finitely-enumerable-type-finitely-enumerable-subtype S)
         ( f ∘ inclusion-finitely-enumerable-subtype S)
 
-  finitely-enumerable-subtype-im-finitely-enumerable-subtype :
+  im-finitely-enumerable-subtype :
     finitely-enumerable-subtype (l1 ⊔ l2 ⊔ l3) Y
-  finitely-enumerable-subtype-im-finitely-enumerable-subtype =
-    ( im-finitely-enumerable-subtype ,
-      is-finitely-enumerable-im-finitely-enumerable-subtype)
+  im-finitely-enumerable-subtype =
+    ( subtype-im-finitely-enumerable-subtype ,
+      is-finitely-enumerable-subtype-im-finitely-enumerable-subtype)
 ```

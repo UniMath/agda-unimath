@@ -30,6 +30,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ```
 
 </details>
@@ -103,6 +104,12 @@ module _
       is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
         ( subset-net-Metric-Space X ε S)
         ( is-approximation-subset-net-Metric-Space X ε S)
+
+  inhabited-finitely-enumerable-subtype-net-Metric-Space :
+    inhabited-finitely-enumerable-subtype l3 (type-Metric-Space X)
+  inhabited-finitely-enumerable-subtype-net-Metric-Space =
+    ( finitely-enumerable-subset-net-Metric-Space X ε S ,
+      is-inhabited-net-inhabited-Metric-Space)
 ```
 
 ## Properties
@@ -121,7 +128,7 @@ module _
   net-im-uniformly-continuous-function-net-Metric-Space :
     net-Metric-Space (l1 ⊔ l3 ⊔ l5) (im-Metric-Space X Y f) ε
   net-im-uniformly-continuous-function-net-Metric-Space =
-    ( finitely-enumerable-subtype-im-finitely-enumerable-subtype
+    ( im-finitely-enumerable-subtype
       ( map-unit-im f)
       ( finitely-enumerable-subset-net-Metric-Space X (μ ε) N) ,
       is-approximation-im-uniformly-continuous-function-approximation-Metric-Space
@@ -193,7 +200,7 @@ module _
 
   net-im-isometric-equiv-net-Metric-Space : net-Metric-Space (l1 ⊔ l3 ⊔ l5) Y ε
   net-im-isometric-equiv-net-Metric-Space =
-    ( finitely-enumerable-subtype-im-finitely-enumerable-subtype
+    ( im-finitely-enumerable-subtype
         ( map-isometric-equiv-Metric-Space X Y f)
         ( finitely-enumerable-subset-net-Metric-Space X ε N) ,
       is-approximation-im-isometric-equiv-approximation-Metric-Space X Y f ε
