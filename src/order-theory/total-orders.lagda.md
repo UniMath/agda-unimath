@@ -556,10 +556,6 @@ module _
         ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) y)
     eq-one-min-Total-Order x y =
       map-disjunction
-        ( leq-prop-Total-Order T x y)
-        ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) x)
-        ( leq-prop-Total-Order T y x)
-        ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) y)
         ( left-leq-right-min-Total-Order T x y)
         ( right-leq-left-min-Total-Order T x y)
         ( is-total-Total-Order T x y)
@@ -573,38 +569,20 @@ module _
             ( min-Total-Order T (min-Total-Order T x y) (min-Total-Order T z w))
       in type-disjunction-Prop (min= x ∨ min= y) (min= z ∨ min= w)
     eq-one-of-four-min-Total-Order x y z w =
-      let
-        min=_ =
-          Id-Prop
-            ( set-Total-Order T)
-            ( min-Total-Order T (min-Total-Order T x y) (min-Total-Order T z w))
-      in
-        map-disjunction
-          ( min= min-Total-Order T x y)
-          ( min= x ∨ min= y)
-          ( min= min-Total-Order T z w)
-          ( min= z ∨ min= w)
-          ( λ min=minxy →
-            map-disjunction
-              ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) x)
-              ( min= x)
-              ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) y)
-              ( min= y)
-              ( min=minxy ∙_)
-              ( min=minxy ∙_)
-              ( eq-one-min-Total-Order x y))
-          ( λ min=minzw →
-            map-disjunction
-              ( Id-Prop (set-Total-Order T) (min-Total-Order T z w) z)
-              ( min= z)
-              ( Id-Prop (set-Total-Order T) (min-Total-Order T z w) w)
-              ( min= w)
-              ( min=minzw ∙_)
-              ( min=minzw ∙_)
-              ( eq-one-min-Total-Order z w))
-          ( eq-one-min-Total-Order
-            ( min-Total-Order T x y)
-            ( min-Total-Order T z w))
+      map-disjunction
+        ( λ min=minxy →
+          map-disjunction
+            ( min=minxy ∙_)
+            ( min=minxy ∙_)
+            ( eq-one-min-Total-Order x y))
+        ( λ min=minzw →
+          map-disjunction
+            ( min=minzw ∙_)
+            ( min=minzw ∙_)
+            ( eq-one-min-Total-Order z w))
+        ( eq-one-min-Total-Order
+          ( min-Total-Order T x y)
+          ( min-Total-Order T z w))
 ```
 
 ### The maximum of two values is equal to one of them
@@ -622,10 +600,6 @@ module _
         ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) y)
     eq-one-max-Total-Order x y =
       map-disjunction
-        ( leq-prop-Total-Order T y x)
-        ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) x)
-        ( leq-prop-Total-Order T x y)
-        ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) y)
         ( right-leq-left-max-Total-Order T x y)
         ( left-leq-right-max-Total-Order T x y)
         ( is-total-Total-Order T y x)
@@ -639,38 +613,20 @@ module _
             ( max-Total-Order T (max-Total-Order T x y) (max-Total-Order T z w))
       in type-disjunction-Prop (max= x ∨ max= y) (max= z ∨ max= w)
     eq-one-of-four-max-Total-Order x y z w =
-      let
-        max=_ =
-          Id-Prop
-            ( set-Total-Order T)
-            ( max-Total-Order T (max-Total-Order T x y) (max-Total-Order T z w))
-      in
-        map-disjunction
-          ( max= max-Total-Order T x y)
-          ( max= x ∨ max= y)
-          ( max= max-Total-Order T z w)
-          ( max= z ∨ max= w)
-          ( λ max=maxxy →
-            map-disjunction
-              ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) x)
-              ( max= x)
-              ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) y)
-              ( max= y)
-              ( max=maxxy ∙_)
-              ( max=maxxy ∙_)
-              ( eq-one-max-Total-Order x y))
-          ( λ max=maxzw →
-            map-disjunction
-              ( Id-Prop (set-Total-Order T) (max-Total-Order T z w) z)
-              ( max= z)
-              ( Id-Prop (set-Total-Order T) (max-Total-Order T z w) w)
-              ( max= w)
-              ( max=maxzw ∙_)
-              ( max=maxzw ∙_)
-              ( eq-one-max-Total-Order z w))
-          ( eq-one-max-Total-Order
-            ( max-Total-Order T x y)
-            ( max-Total-Order T z w))
+      map-disjunction
+        ( λ max=maxxy →
+          map-disjunction
+            ( max=maxxy ∙_)
+            ( max=maxxy ∙_)
+            ( eq-one-max-Total-Order x y))
+        ( λ max=maxzw →
+          map-disjunction
+            ( max=maxzw ∙_)
+            ( max=maxzw ∙_)
+            ( eq-one-max-Total-Order z w))
+        ( eq-one-max-Total-Order
+          ( max-Total-Order T x y)
+          ( max-Total-Order T z w))
 ```
 
 ## External links

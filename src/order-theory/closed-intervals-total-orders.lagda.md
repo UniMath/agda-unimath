@@ -216,10 +216,6 @@ module _
       ( has-same-elements-divide-subtype-closed-interval-Total-Order
         [a,b]@((a , b) , a≤b) (c , a≤c , c≤b) x) (a≤x , x≤b) =
           map-disjunction
-            ( leq-prop-Total-Order X x c)
-            ( subtype-closed-interval-Total-Order X ((a , c) , a≤c) x)
-            ( leq-prop-Total-Order X c x)
-            ( subtype-closed-interval-Total-Order X ((c , b) , c≤b) x)
             ( λ x≤c → (a≤x , x≤c))
             ( λ c≤x → (c≤x , x≤b))
             ( is-total-Total-Order X x c)
@@ -280,9 +276,9 @@ module _
           ( closed-interval-2-Total-Order X a c)))
       ( union-subtype
         ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X b c))
+          ( closed-interval-2-Total-Order X b d))
         ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X b d)))
+          ( closed-interval-2-Total-Order X c d)))
   cover-closed-interval-4-Total-Order x x∈closed-4 =
     let
       motive =
@@ -294,9 +290,9 @@ module _
               ( closed-interval-2-Total-Order X a c)))
           ( union-subtype
             ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X b c))
+              ( closed-interval-2-Total-Order X b d))
             ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X b d)))
+              ( closed-interval-2-Total-Order X c d)))
           ( x)
     in
       {!   !}
