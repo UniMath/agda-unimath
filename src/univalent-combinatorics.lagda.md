@@ -78,6 +78,8 @@ open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.inhabited-finite-types public
+open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes public
+open import univalent-combinatorics.inhabited-finitely-enumerable-types public
 open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
