@@ -186,8 +186,8 @@ module _
   is-nonzero-Semiring : type-Semiring R → UU l
   is-nonzero-Semiring x = ¬ (is-zero-Semiring x)
 
-  is-zero-semiring-Prop : type-Semiring R → Prop l
-  is-zero-semiring-Prop x = Id-Prop (set-Semiring R) x zero-Semiring
+  is-zero-prop-Semiring : type-Semiring R → Prop l
+  is-zero-prop-Semiring x = Id-Prop (set-Semiring R) x zero-Semiring
 
   left-unit-law-add-Semiring :
     (x : type-Semiring R) → Id (add-Semiring R zero-Semiring x) x
