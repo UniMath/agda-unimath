@@ -41,7 +41,7 @@ of `M` if for all
 `M` [if and only if](foundation.logical-equivalences.md) `ρ x y ≤ real-ℚ⁺ d`.
 
 It follows that `ρ` is a [metric](metric-spaces.metrics.md) on the
-[set](foundation.sets.md) of elements of `M`, and and that `M` is
+[set](foundation.sets.md) of elements of `M`, and that `M` is
 [isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to the
 metric space induced by `ρ`.
 
