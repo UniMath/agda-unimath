@@ -140,7 +140,7 @@ module _
 
 ## Properties
 
-### The zero polynomial
+### The constant zero polynomial
 
 ```agda
 module _
@@ -155,7 +155,7 @@ module _
       ( λ _ → refl)
 ```
 
-### The one polynomial
+### The constant one polynomial
 
 ```agda
 module _

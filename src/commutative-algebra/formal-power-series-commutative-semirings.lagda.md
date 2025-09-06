@@ -74,8 +74,8 @@ module _
   term-ev-formal-power-series-Commutative-Semiring
     ( formal-power-series-coefficients-Commutative-Semiring a)
     ( x)
-    ( n)
-      = mul-Commutative-Semiring R (a n) (power-Commutative-Semiring R n x)
+    ( n) =
+    mul-Commutative-Semiring R (a n) (power-Commutative-Semiring R n x)
 ```
 
 ### Equivalence to sequences in the commutative semiring
@@ -118,7 +118,7 @@ module _
       is-set-formal-power-series-Commutative-Semiring)
 ```
 
-### The zero formal power series
+### The constant zero formal power series
 
 ```agda
 module _
@@ -133,7 +133,7 @@ module _
         ( commutative-semiring-convolution-sequence-Commutative-Semiring R))
 ```
 
-### The one formal power series
+### The constant one formal power series
 
 ```agda
 module _
@@ -384,8 +384,7 @@ module _
         ( one-formal-power-series-Commutative-Semiring R) ＝
       x
     right-unit-law-mul-formal-power-series-Commutative-Semiring
-      ( formal-power-series-coefficients-Commutative-Semiring x)
-      =
+      ( formal-power-series-coefficients-Commutative-Semiring x) =
         ap
           ( formal-power-series-coefficients-Commutative-Semiring)
           ( right-unit-law-mul-Commutative-Semiring
@@ -408,8 +407,7 @@ module _
         ( x) ＝
       zero-formal-power-series-Commutative-Semiring R
     left-zero-law-mul-formal-power-series-Commutative-Semiring
-      ( formal-power-series-coefficients-Commutative-Semiring x)
-      =
+      ( formal-power-series-coefficients-Commutative-Semiring x) =
         ap
           ( formal-power-series-coefficients-Commutative-Semiring)
           ( left-zero-law-mul-Commutative-Semiring
