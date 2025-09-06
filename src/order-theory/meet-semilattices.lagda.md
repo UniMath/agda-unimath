@@ -503,30 +503,30 @@ module _
   leq-left-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ x
   leq-left-triple-meet-Order-Theoretic-Meet-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ x
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ y
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ y
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ z
@@ -541,30 +541,30 @@ module _
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ y
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ z
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-associative-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ (x ∧ (y ∧ z))
