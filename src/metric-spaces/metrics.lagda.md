@@ -126,6 +126,9 @@ module _
     is-triangular-prop-distance-function ∧
     is-extensional-prop-distance-function
 
+  is-metric-distance-function : UU (l1 ⊔ lsuc l2)
+  is-metric-distance-function = type-Prop is-metric-prop-distance-function
+
 Metric : {l1 : Level} (l2 : Level) (X : Set l1) → UU (l1 ⊔ lsuc l2)
 Metric l2 X = type-subtype (is-metric-prop-distance-function {l2 = l2} X)
 

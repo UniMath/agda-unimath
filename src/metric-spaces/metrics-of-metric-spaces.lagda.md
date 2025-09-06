@@ -9,16 +9,23 @@ module metric-spaces.metrics-of-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -36,8 +43,8 @@ of `M` if for all
 
 It follows that `ρ` is a [metric](metric-spaces.metrics.md) on the
 [set](foundation.sets.md) of elements of `M`, and and that `M` is
-[isometrically equivalent](metric-spaces.equality-of-metric-spaces.md)
-to the metric space induced by `ρ`.
+[isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to the
+metric space induced by `ρ`.
 
 ## Definition
 
@@ -114,9 +121,107 @@ module _
     is-triangular-is-metric-of-Metric-Space :
       is-triangular-distance-function (set-Metric-Space M) ρ
     is-triangular-is-metric-of-Metric-Space x y z =
-      leq-leq-positive-rational-ℝ⁰⁺ (ρ x z) (ρ x y +ℝ⁰⁺ ρ y z)
-        ( λ d ρxy+ρyz≤d →
-          forward-implication
-            ( is-metric-M-ρ d x z)
-            {!   !})
+      leq-le-positive-rational-ℝ⁰⁺ (ρ x z) (ρ x y +ℝ⁰⁺ ρ y z)
+        ( λ d ρxy+ρyz<d →
+          let
+            open
+              do-syntax-trunc-Prop (le-prop-ℝ⁰⁺ (ρ x z) (nonnegative-real-ℚ⁺ d))
+          in do
+            (d' , ρxy+ρyz<d' , d'<d) ← dense-rational-le-ℝ _ _ ρxy+ρyz<d
+            ((q , r) , d'=q+r , ρxy<q , ρyz<r) ←
+              le-split-add-rational-ℝ
+                ( real-ℝ⁰⁺ (ρ x y))
+                ( real-ℝ⁰⁺ (ρ y z))
+                ( d')
+                ( ρxy+ρyz<d')
+            let
+              d'⁺ =
+                ( d' ,
+                    is-positive-le-nonnegative-real-ℚ
+                      ( ρ x y +ℝ⁰⁺ ρ y z)
+                      ( d')
+                      ( ρxy+ρyz<d'))
+              q⁺ = (q , is-positive-le-nonnegative-real-ℚ (ρ x y) q ρxy<q)
+              r⁺ = (r , is-positive-le-nonnegative-real-ℚ (ρ y z) r ρyz<r)
+            concatenate-leq-le-ℝ _ _ _
+              ( forward-implication
+                ( is-metric-M-ρ d'⁺ x z)
+                ( inv-tr
+                  ( λ dd → neighborhood-Metric-Space M dd x z)
+                  ( eq-ℚ⁺ d'=q+r)
+                  ( triangular-neighborhood-Metric-Space M x y z
+                    ( q⁺)
+                    ( r⁺)
+                    ( backward-implication
+                      ( is-metric-M-ρ r⁺ y z)
+                      ( leq-le-ℝ _ _ ρyz<r))
+                    ( backward-implication
+                      ( is-metric-M-ρ q⁺ x y)
+                      ( leq-le-ℝ _ _ ρxy<q)))))
+              ( d'<d))
+
+    is-extensional-is-metric-of-Metric-Space :
+      is-extensional-distance-function (set-Metric-Space M) ρ
+    is-extensional-is-metric-of-Metric-Space x y ρxy~0 =
+      eq-sim-Metric-Space M x y
+        ( λ ε →
+          backward-implication
+            ( is-metric-M-ρ ε x y)
+            ( preserves-leq-left-sim-ℝ⁰⁺
+              ( nonnegative-real-ℚ⁺ ε)
+              ( zero-ℝ⁰⁺)
+              ( ρ x y)
+              ( ρxy~0)
+              ( leq-zero-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))))
+
+  is-metric-is-metric-of-Metric-Space :
+    is-metric-distance-function (set-Metric-Space M) ρ
+  is-metric-is-metric-of-Metric-Space =
+    ( is-reflexive-is-metric-of-Metric-Space ,
+      is-symmetric-is-metric-of-Metric-Space ,
+      is-triangular-is-metric-of-Metric-Space ,
+      is-extensional-is-metric-of-Metric-Space)
+
+  metric-is-metric-of-Metric-Space : Metric l3 (set-Metric-Space M)
+  metric-is-metric-of-Metric-Space =
+    ( ρ ,
+      is-metric-is-metric-of-Metric-Space)
+```
+
+### If `ρ` is a metric for a metric space `M`, then `M` is isometrically equivalent to the metric space induced by `ρ`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Metric-Space l1 l2)
+  (ρ : distance-function l3 (set-Metric-Space M))
+  (is-metric-M-ρ : is-metric-of-Metric-Space M ρ)
+  where
+
+  isometric-equiv-metric-is-metric-of-Metric-Space :
+    isometric-equiv-Metric-Space
+      ( M)
+      ( metric-space-Metric
+        ( set-Metric-Space M)
+        ( metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ))
+  isometric-equiv-metric-is-metric-of-Metric-Space = (id-equiv , is-metric-M-ρ)
+```
+
+### If `ρ` is a metric for a metric space `M` at the appropriate universe level, then `M` is equal to the metric space induced by `ρ`
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (ρ : distance-function l2 (set-Metric-Space M))
+  (is-metric-M-ρ : is-metric-of-Metric-Space M ρ)
+  where
+
+  abstract
+    eq-metric-is-metric-of-Metric-Space :
+      M ＝
+      metric-space-Metric
+        ( set-Metric-Space M)
+        ( metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
+    eq-metric-is-metric-of-Metric-Space =
+      eq-isometric-equiv-Metric-Space _ _
+        ( isometric-equiv-metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
 ```
