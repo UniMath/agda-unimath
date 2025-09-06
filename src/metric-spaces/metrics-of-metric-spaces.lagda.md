@@ -38,14 +38,14 @@ open import real-numbers.strict-inequality-real-numbers
 A function `ρ` from two elements of a
 [metric space](metric-spaces.metric-spaces.md) `M` to the
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is a
-{{#concept "metric" disambiguation="of a metric space" Agda=is-metric-Metric-Space}}
+{{#concept "metric" disambiguation="of a metric space" WD="metric function" WDID=Q865746 Agda=is-metric-Metric-Space}}
 of `M` if for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `d` and all `x y : M`, `x` and `y` are in a `d`-neighborhood of each other in
 `M` [if and only if](foundation.logical-equivalences.md) `ρ x y ≤ real-ℚ⁺ d`.
 
 It follows that `ρ` is a [metric](metric-spaces.metrics.md) on the
-[set](foundation.sets.md) of elements of `M`, and and that `M` is
+[set](foundation.sets.md) of elements of `M`, and that `M` is
 [isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to the
 metric space induced by `ρ`.
 
