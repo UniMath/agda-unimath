@@ -8,6 +8,7 @@ module foundation.images-subtypes where
 
 ```agda
 open import foundation.conjunction
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.full-subtypes
@@ -27,6 +28,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 
 open import order-theory.galois-connections-large-posets
@@ -93,6 +95,9 @@ module _
 
   im-subtype : subtype (l1 ⊔ l2 ⊔ l3) B
   im-subtype y = subtype-im (f ∘ inclusion-subtype S) y
+
+  type-im-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  type-im-subtype = type-subtype im-subtype
 
   is-in-im-subtype : B → UU (l1 ⊔ l2 ⊔ l3)
   is-in-im-subtype = is-in-subtype im-subtype
@@ -312,4 +317,30 @@ module _
           ( subtype-im f)
           ( compute-im-full-subtype f)
           ( x)
+```
+
+### The image of a subtype under an equivalence has the same elements as the subtype precomposed with the inverse equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (S : subtype l3 X)
+  where
+
+  abstract
+    has-same-elements-im-subtype-equiv-precomp-inv-equiv :
+      has-same-elements-subtype
+        ( im-subtype (map-equiv e) S)
+        ( S ∘ map-inv-equiv e)
+    pr1 (has-same-elements-im-subtype-equiv-precomp-inv-equiv y) =
+      rec-trunc-Prop
+        ( S (map-inv-equiv e y))
+        ( λ ((x , x∈S) , fx=y) →
+          inv-tr
+            ( type-Prop ∘ S)
+            ( ap (map-inv-equiv e) (inv fx=y) ∙ is-retraction-map-inv-equiv e x)
+            ( x∈S))
+    pr2 (has-same-elements-im-subtype-equiv-precomp-inv-equiv y) e⁻¹y∈S =
+      intro-exists
+        ( map-inv-equiv e y , e⁻¹y∈S)
+        ( is-section-map-inv-equiv e y)
 ```

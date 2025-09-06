@@ -139,8 +139,7 @@ module _
     has-least-binary-upper-bound-Total-Order =
       elim-disjunction
         ( has-least-binary-upper-bound-prop-Poset (poset-Total-Order X) x y)
-        ( λ x≤y →
-          has-least-binary-upper-bound-leq-Poset (poset-Total-Order X) x y x≤y)
+        ( has-least-binary-upper-bound-leq-Poset (poset-Total-Order X) x y)
         ( λ y≤x →
           symmetric-has-least-binary-upper-bound-Poset
             ( poset-Total-Order X)
@@ -176,12 +175,10 @@ module _
     has-greatest-binary-lower-bound-Total-Order =
       elim-disjunction
         ( has-greatest-binary-lower-bound-prop-Poset (poset-Total-Order X) x y)
-        ( λ x≤y →
-          has-greatest-binary-lower-bound-leq-Poset
+        ( has-greatest-binary-lower-bound-leq-Poset
             ( poset-Total-Order X)
             ( x)
-            ( y)
-            ( x≤y))
+            ( y))
         ( λ y≤x →
           symmetric-has-greatest-binary-lower-bound-Poset
             ( poset-Total-Order X)
@@ -297,7 +294,7 @@ module _
     poset-Total-Order T , is-meet-semilattice-Total-Order
 ```
 
-### Decidable total orders are join semilattices
+### Total orders are join semilattices
 
 ```agda
 module _

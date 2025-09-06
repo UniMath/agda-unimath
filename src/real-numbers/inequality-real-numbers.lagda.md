@@ -1,6 +1,8 @@
 # Inequality on the real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.inequality-real-numbers where
 ```
 
@@ -66,11 +68,15 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  leq-ℝ-Prop : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop = leq-lower-ℝ-Prop (lower-real-ℝ x) (lower-real-ℝ y)
+  opaque
+    leq-ℝ : UU (l1 ⊔ l2)
+    leq-ℝ = leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
 
-  leq-ℝ : UU (l1 ⊔ l2)
-  leq-ℝ = type-Prop leq-ℝ-Prop
+    is-prop-leq-ℝ : is-prop leq-ℝ
+    is-prop-leq-ℝ = is-prop-leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y)
+
+  leq-prop-ℝ : Prop (l1 ⊔ l2)
+  leq-prop-ℝ = (leq-ℝ , is-prop-leq-ℝ)
 
 infix 30 _≤-ℝ_
 _≤-ℝ_ = leq-ℝ
@@ -85,13 +91,19 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  leq-ℝ-Prop' : Prop (l1 ⊔ l2)
-  leq-ℝ-Prop' = leq-upper-ℝ-Prop (upper-real-ℝ x) (upper-real-ℝ y)
+  opaque
+    leq-ℝ' : UU (l1 ⊔ l2)
+    leq-ℝ' = leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
 
-  leq-ℝ' : UU (l1 ⊔ l2)
-  leq-ℝ' = type-Prop leq-ℝ-Prop'
+    is-prop-leq-ℝ' : is-prop leq-ℝ'
+    is-prop-leq-ℝ' = is-prop-leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
 
-  abstract
+  leq-prop-ℝ' : Prop (l1 ⊔ l2)
+  leq-prop-ℝ' = (leq-ℝ' , is-prop-leq-ℝ')
+
+  opaque
+    unfolding leq-ℝ leq-ℝ'
+
     leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
     leq'-leq-ℝ lx⊆ly q y<q =
       elim-exists
@@ -137,7 +149,9 @@ module _
 ### Inequality on the real numbers is reflexive
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℝ
+
   refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
   refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
 
@@ -145,7 +159,7 @@ abstract
   leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
 
 opaque
-  unfolding sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
@@ -155,7 +169,7 @@ opaque
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   sim-antisymmetric-leq-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → leq-ℝ x y → leq-ℝ y x → sim-ℝ x y
@@ -177,9 +191,12 @@ module _
   (z : ℝ l3)
   where
 
-  transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
-  transitive-leq-ℝ =
-    transitive-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
+  opaque
+    unfolding leq-ℝ
+
+    transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
+    transitive-leq-ℝ =
+      transitive-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
 ### The large preorder of real numbers
@@ -187,7 +204,7 @@ module _
 ```agda
 ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder ℝ-Large-Preorder = ℝ
-leq-prop-Large-Preorder ℝ-Large-Preorder = leq-ℝ-Prop
+leq-prop-Large-Preorder ℝ-Large-Preorder = leq-prop-ℝ
 refl-leq-Large-Preorder ℝ-Large-Preorder = refl-leq-ℝ
 transitive-leq-Large-Preorder ℝ-Large-Preorder = transitive-leq-ℝ
 ```
@@ -204,7 +221,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding leq-ℝ sim-ℝ
 
   sim-sim-leq-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
@@ -235,14 +252,17 @@ opaque
 ### The canonical map from rational numbers to the reals preserves and reflects inequality
 
 ```agda
-preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
-preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
+opaque
+  unfolding leq-ℝ real-ℚ
 
-reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
-reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
+  preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
+  preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ
 
-iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
-iff-leq-real-ℚ = iff-leq-lower-real-ℚ
+  reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
+  reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ
+
+  iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
+  iff-leq-real-ℚ = iff-leq-lower-real-ℚ
 ```
 
 ### Negation reverses inequality on the real numbers
@@ -252,8 +272,11 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
-  neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
+  opaque
+    unfolding leq-ℝ leq-ℝ' neg-ℝ
+
+    neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
+    neg-leq-ℝ x≤y = leq-leq'-ℝ (neg-ℝ y) (neg-ℝ x) (x≤y ∘ neg-ℚ)
 ```
 
 ### Inequality on the real numbers is invariant under similarity
@@ -264,7 +287,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
+    unfolding leq-ℝ sim-ℝ
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
     preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
@@ -296,7 +319,7 @@ module _
   where
 
   opaque
-    unfolding add-ℝ
+    unfolding add-ℝ leq-ℝ
 
     preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
     preserves-leq-right-add-ℝ x≤y _ =
@@ -305,6 +328,12 @@ module _
     preserves-leq-left-add-ℝ : leq-ℝ x y → leq-ℝ (z +ℝ x) (z +ℝ y)
     preserves-leq-left-add-ℝ x≤y _ =
       map-tot-exists (λ (_ , qx) → map-product id (map-product (x≤y qx) id))
+
+abstract
+  preserves-leq-diff-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
+    leq-ℝ x y → leq-ℝ (x -ℝ z) (y -ℝ z)
+  preserves-leq-diff-ℝ z = preserves-leq-right-add-ℝ (neg-ℝ z)
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
@@ -427,32 +456,33 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  preserves-lower-neighborhood-leq-left-add-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( add-ℝ x y)
-      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
-    inv-tr
-      ( leq-ℝ (x +ℝ y))
-      ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
-      ( preserves-leq-left-add-ℝ
-        ( x)
-        ( y)
-        ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( z≤y+d))
+  abstract
+    preserves-lower-neighborhood-leq-left-add-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( add-ℝ x y)
+        ( (add-ℝ x z) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
+      inv-tr
+        ( leq-ℝ (x +ℝ y))
+        ( associative-add-ℝ x z (real-ℚ⁺ d))
+        ( preserves-leq-left-add-ℝ
+          ( x)
+          ( y)
+          ( z +ℝ real-ℚ⁺ d)
+          ( z≤y+d))
 
-  preserves-lower-neighborhood-leq-right-add-ℝ :
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ
-      ( add-ℝ y x)
-      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d))
-  preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
-    binary-tr
-      ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
-      ( commutative-add-ℝ x y)
-      ( commutative-add-ℝ x z)
-      ( preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d)
+    preserves-lower-neighborhood-leq-right-add-ℝ :
+      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
+      leq-ℝ
+        ( add-ℝ y x)
+        ( (add-ℝ z x) +ℝ real-ℚ⁺ d)
+    preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
+      binary-tr
+        ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
+        ( commutative-add-ℝ x y)
+        ( commutative-add-ℝ x z)
+        ( preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d)
 ```
 
 ### Addition of real numbers reflects lower neighborhoods
@@ -463,33 +493,34 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  reflects-lower-neighborhood-leq-left-add-ℝ :
-    leq-ℝ
-      ( add-ℝ x y)
-      ( (add-ℝ x z) +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
-  reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
-    reflects-leq-left-add-ℝ
-      ( x)
-      ( y)
-      ( z +ℝ real-ℚ (rational-ℚ⁺ d))
-      ( tr
-        ( leq-ℝ (x +ℝ y))
-        ( associative-add-ℝ x z (real-ℚ (rational-ℚ⁺ d)))
-        ( x+y≤x+z+d))
+  abstract
+    reflects-lower-neighborhood-leq-left-add-ℝ :
+      leq-ℝ
+        ( add-ℝ x y)
+        ( (add-ℝ x z) +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (z +ℝ real-ℚ⁺ d)
+    reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
+      reflects-leq-left-add-ℝ
+        ( x)
+        ( y)
+        ( z +ℝ real-ℚ⁺ d)
+        ( tr
+          ( leq-ℝ (x +ℝ y))
+          ( associative-add-ℝ x z (real-ℚ⁺ d))
+          ( x+y≤x+z+d))
 
-  reflects-lower-neighborhood-leq-right-add-ℝ :
-    leq-ℝ
-      ( add-ℝ y x)
-      ( (add-ℝ z x) +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ y (z +ℝ real-ℚ (rational-ℚ⁺ d))
-  reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
-    reflects-lower-neighborhood-leq-left-add-ℝ
-      ( binary-tr
-        ( λ u v → leq-ℝ u (v +ℝ real-ℚ (rational-ℚ⁺ d)))
-        ( commutative-add-ℝ y x)
-        ( commutative-add-ℝ z x)
-        ( y+x≤z+y+d))
+    reflects-lower-neighborhood-leq-right-add-ℝ :
+      leq-ℝ
+        ( add-ℝ y x)
+        ( (add-ℝ z x) +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (z +ℝ real-ℚ⁺ d)
+    reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
+      reflects-lower-neighborhood-leq-left-add-ℝ
+        ( binary-tr
+          ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
+          ( commutative-add-ℝ y x)
+          ( commutative-add-ℝ z x)
+          ( y+x≤z+y+d))
 ```
 
 ### Negation of real numbers reverses lower neighborhoods
@@ -501,20 +532,20 @@ module _
   where
 
   reverses-lower-neighborhood-neg-ℝ :
-    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ (rational-ℚ⁺ d))
+    leq-ℝ x (y +ℝ real-ℚ⁺ d) →
+    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ⁺ d)
   reverses-lower-neighborhood-neg-ℝ x≤y+d =
     tr
       ( leq-ℝ (neg-ℝ y))
       ( ( distributive-neg-add-ℝ x ((neg-ℝ ∘ real-ℚ ∘ rational-ℚ⁺) d)) ∙
-        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ (rational-ℚ⁺ d)))))
+        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ⁺ d))))
       ( neg-leq-ℝ
-        ( x -ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x -ℝ real-ℚ⁺ d)
         ( y)
         ( leq-transpose-right-add-ℝ
           ( x)
           ( y)
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( x≤y+d)))
 ```
 

@@ -55,6 +55,9 @@ module _
 
   leq-upper-ℝ : UU (l1 ⊔ l2)
   leq-upper-ℝ = type-Prop leq-upper-ℝ-Prop
+
+  is-prop-leq-upper-ℝ : is-prop leq-upper-ℝ
+  is-prop-leq-upper-ℝ = is-prop-type-Prop leq-upper-ℝ-Prop
 ```
 
 ## Properties
