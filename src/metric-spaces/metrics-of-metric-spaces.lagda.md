@@ -10,8 +10,8 @@ module metric-spaces.metrics-of-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -20,15 +20,15 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 ```
 
 </details>

@@ -19,6 +19,7 @@ open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.large-preorders
@@ -194,3 +195,23 @@ module _
   is-large-poset-large-category-Large-Poset =
     is-prop-leq-Large-Poset P
 ```
+
+## Reasoning with inequalities in large posets
+
+Inequalities in large posets can be constructed by equational reasoning as
+follows:
+
+```text
+let open inequality-reasoning-Poset X
+in
+  chain-of-inequalities
+  x ≤ y
+      by ineq-1
+    ≤ z
+      by ineq-2
+    ≤ v
+      by ineq-3
+```
+
+Note, however, that in our setup of equational reasoning with inequalities it is
+not possible to mix inequalities with equalities or strict inequalities.

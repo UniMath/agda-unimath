@@ -36,6 +36,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.cartesian-products-metric-spaces
 ```
 
 </details>
