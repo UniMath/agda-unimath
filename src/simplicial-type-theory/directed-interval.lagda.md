@@ -26,6 +26,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.mere-equality
@@ -169,16 +170,10 @@ is-surjective-map-bool-boundary-directed-interval =
 
 is-surjective-map-boundary-directed-interval-bool :
   is-surjective map-boundary-directed-interval-bool
-is-surjective-map-boundary-directed-interval-bool (t , inl |p|) =
-  rec-trunc-Prop
-    ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inl |p|)))
-    ( λ t=0 → unit-trunc-Prop (false , eq-type-subtype subtype-∂Δ¹' (inv t=0)))
-    ( |p|)
-is-surjective-map-boundary-directed-interval-bool (t , inr |p|) =
-  rec-trunc-Prop
-    ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inr |p|)))
-    ( λ t=1 → unit-trunc-Prop (true , eq-type-subtype subtype-∂Δ¹' (inv t=1)))
-    ( |p|)
+is-surjective-map-boundary-directed-interval-bool (t , inl |t=0|) =
+  map-trunc-Prop (λ p → (false , eq-type-subtype subtype-∂Δ¹' (inv p))) |t=0|
+is-surjective-map-boundary-directed-interval-bool (t , inr |t=1|) =
+  map-trunc-Prop (λ p → (true , eq-type-subtype subtype-∂Δ¹' (inv p))) |t=1|
 
 map-directed-interval-bool : bool → Δ¹
 map-directed-interval-bool true = 1▵
