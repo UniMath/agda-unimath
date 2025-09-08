@@ -38,6 +38,8 @@ if for every `ε : ℚ⁺`, it has an `ε`-[net](metric-spaces.nets-metric-space
 
 ## Definition
 
+### The property of a space being totally bounded
+
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (X : Metric-Space l1 l2)
@@ -54,6 +56,27 @@ module _
   is-totally-bounded-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-totally-bounded-Metric-Space =
     type-Prop is-totally-bounded-prop-Metric-Space
+```
+
+### Totally bounded metric spaces
+
+```agda
+totally-bounded-Metric-Space :
+  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+totally-bounded-Metric-Space l1 l2 l3 =
+  Σ (Metric-Space l1 l2) (is-totally-bounded-Metric-Space l3)
+
+module _
+  {l1 l2 l3 : Level} (M : totally-bounded-Metric-Space l1 l2 l3)
+  where
+
+  metric-space-totally-bounded-Metric-Space : Metric-Space l1 l2
+  metric-space-totally-bounded-Metric-Space = pr1 M
+
+  is-totally-bounded-metric-space-totally-bounded-Metric-Space :
+    is-totally-bounded-Metric-Space l3 metric-space-totally-bounded-Metric-Space
+  is-totally-bounded-metric-space-totally-bounded-Metric-Space =
+    pr2 M
 ```
 
 ## Properties
