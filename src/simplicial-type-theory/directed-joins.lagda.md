@@ -81,7 +81,7 @@ edges `a →▵ b` for every `a : A` and `b : B`.
 This construction satisfies the laws
 
 - $Δ¹ ≃ 1 *▵ 1$
-- $Δⁿ⁺¹ ≃ Δⁿ⁺¹ *▵ 1 ≃ 1 *▵ Δⁿ⁺¹$
+- $Δⁿ⁺¹ ≃ Δⁿ *▵ 1 ≃ 1 *▵ Δⁿ$
 - $Λ²₀ ≃ 1 *▵ bool$
 - $Λ²₂ ≃ bool *▵ 1$
 - $1 *▵ (-)$ is the directed cone
