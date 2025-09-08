@@ -15,6 +15,8 @@ open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.images
 open import foundation.images-subtypes
+open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -236,6 +238,27 @@ module _
         ( map-isometric-equiv-Metric-Space X Y f)
         ( subset-approximation-Metric-Space X ε A) ,
       is-approximation-im-isometric-equiv-approximation-Metric-Space)
+```
+
+### If a metric space is inhabited, so is any approximation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : subset-Metric-Space l3 X)
+  where
+
+  abstract
+    is-inhabited-is-approximation-inhabited-Metric-Space :
+      is-approximation-Metric-Space X ε S →
+      is-inhabited-subtype S
+    is-inhabited-is-approximation-inhabited-Metric-Space is-approx =
+      let open do-syntax-trunc-Prop (is-inhabited-subtype-Prop S)
+      in do
+        x ← |X|
+        (s , Nεsx) ← is-approx x
+        unit-trunc-Prop s
 ```
 
 ## References

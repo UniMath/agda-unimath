@@ -12,6 +12,7 @@ module real-numbers.difference-real-numbers where
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -40,6 +41,12 @@ diff-ℝ x y = add-ℝ x (neg-ℝ y)
 
 infixl 36 _-ℝ_
 _-ℝ_ = diff-ℝ
+
+ap-diff-ℝ :
+  {l1 : Level} {x x' : ℝ l1} → (x ＝ x') →
+  {l2 : Level} {y y' : ℝ l2} → (y ＝ y') →
+  (x -ℝ y) ＝ (x' -ℝ y')
+ap-diff-ℝ x=x' y=y' = ap-binary diff-ℝ x=x' y=y'
 ```
 
 ## Properties

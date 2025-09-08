@@ -1,9 +1,9 @@
-# The minimum of real numbers
+# The binary minimum of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.minimum-real-numbers where
+module real-numbers.binary-minimum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,6 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
@@ -22,12 +21,13 @@ open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
+open import order-theory.meet-semilattices
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.maximum-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -67,7 +67,7 @@ module _
   where
 
   opaque
-    unfolding min-ℝ
+    unfolding leq-ℝ min-ℝ
 
     is-greatest-binary-lower-bound-min-ℝ :
       is-greatest-binary-lower-bound-Large-Poset
@@ -104,6 +104,34 @@ module _
       forward-implication (is-greatest-binary-lower-bound-min-ℝ z) (x≤z , y≤z)
 ```
 
+### The binary minimum is a binary lower bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    leq-left-min-ℝ : leq-ℝ (min-ℝ x y) x
+    leq-left-min-ℝ =
+      pr1
+        ( is-binary-lower-bound-is-greatest-binary-lower-bound-Large-Poset
+          ( ℝ-Large-Poset)
+          ( x)
+          ( y)
+          ( is-greatest-binary-lower-bound-min-ℝ x y))
+
+    leq-right-min-ℝ : leq-ℝ (min-ℝ x y) y
+    leq-right-min-ℝ =
+      pr2
+        ( is-binary-lower-bound-is-greatest-binary-lower-bound-Large-Poset
+          ( ℝ-Large-Poset)
+          ( x)
+          ( y)
+          ( is-greatest-binary-lower-bound-min-ℝ x y))
+```
+
 ### The large poset of real numbers has meets
 
 ```agda
@@ -111,6 +139,15 @@ has-meets-ℝ-Large-Poset : has-meets-Large-Poset ℝ-Large-Poset
 meet-has-meets-Large-Poset has-meets-ℝ-Large-Poset = min-ℝ
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
   has-meets-ℝ-Large-Poset = is-greatest-binary-lower-bound-min-ℝ
+```
+
+### The real numbers at a specific universe level are a meet semilattice
+
+```agda
+ℝ-Order-Theoretic-Meet-Semilattice :
+  (l : Level) → Order-Theoretic-Meet-Semilattice (lsuc l) l
+ℝ-Order-Theoretic-Meet-Semilattice l =
+  ( ℝ-Poset l , λ x y → (min-ℝ x y , is-greatest-binary-lower-bound-min-ℝ x y))
 ```
 
 ### For any `ε : ℚ⁺`, `(x < min-ℝ x y + ε) ∨ (y < min-ℝ x y + ε)`
@@ -126,8 +163,8 @@ module _
     approximate-above-min-ℝ :
       (ε : ℚ⁺) →
       type-disjunction-Prop
-        ( le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε))
-        ( le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε))
+        ( le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε))
+        ( le-prop-ℝ y (min-ℝ x y +ℝ real-ℚ⁺ ε))
     approximate-above-min-ℝ ε =
       let
         case :
@@ -141,8 +178,8 @@ module _
             ( neg-le-ℝ _ (neg-ℝ w) max-ε<-w)
       in
         elim-disjunction
-          ( (le-ℝ-Prop x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
-            (le-ℝ-Prop y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
+          ( (le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
+            (le-prop-ℝ y (min-ℝ x y +ℝ real-ℚ⁺ ε)))
           ( λ max-ε<-x → inl-disjunction (case x max-ε<-x))
           ( λ max-ε<-y → inr-disjunction (case y max-ε<-y))
           ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
