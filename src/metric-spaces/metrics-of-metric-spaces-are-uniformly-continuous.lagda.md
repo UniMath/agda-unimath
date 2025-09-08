@@ -39,7 +39,7 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
-If `ρ` [is a metric](metric-spaces.metrics-of-metric-spaces.md) of the
+If `ρ` is a [metric](metric-spaces.metrics-of-metric-spaces.md) of the
 [metric space](metric-spaces.metric-spaces.md) `M`, then it is a
 [uniformly continuous map](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
 from the
@@ -122,8 +122,10 @@ module _
                     preserves-leq-add-ℝ _ _ _ _
                       ( forward-implication (H ε' y y') Nε'yy')
                       ( forward-implication (H ε' x x') Nε'xx')
-                ≤ real-ℚ⁺ (ε' +ℚ⁺ ε') by leq-eq-ℝ _ _ (add-real-ℚ _ _)
-                ≤ real-ℚ⁺ ε by preserves-leq-real-ℚ _ _ (leq-le-ℚ 2ε'<ε)))
+                ≤ real-ℚ⁺ (ε' +ℚ⁺ ε')
+                  by leq-eq-ℝ _ _ (add-real-ℚ _ _)
+                ≤ real-ℚ⁺ ε
+                  by preserves-leq-real-ℚ _ _ (leq-le-ℚ 2ε'<ε)))
 
   uniformly-continuous-metric-of-Metric-Space :
     uniformly-continuous-function-Metric-Space
