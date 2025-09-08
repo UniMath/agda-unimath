@@ -156,7 +156,7 @@ module _
       ( pseudometric-metric-pseudocompletion-Pseudometric-Space P)
       ( isometry-metric-quotient-Pseudometric-Space
         ( pseudometric-completion-Pseudometric-Space P))
-      ( isometry-lim-cauchy-appsoximation-pseudometric-completion-Pseudometric-Space
+      ( isometry-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space
         ( P))
 
   short-map-metric-pseudocompletion-pseudometric-completion²-Pseudometric-Space :

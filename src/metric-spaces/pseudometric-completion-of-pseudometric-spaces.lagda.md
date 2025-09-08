@@ -527,18 +527,20 @@ module _
   ( A : Pseudometric-Space l1 l2)
   ( C : Complete-Metric-Space l1' l2')
   ( f :
-    short-function-Pseudometric-Space A (pseudometric-Complete-Metric-Space C))
+    short-function-Pseudometric-Space
+      ( A)
+      ( pseudometric-space-Complete-Metric-Space C))
   where
 
   map-short-function-complete-pseudometric-completion-Pseudometric-Space :
     type-function-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space A)
-      ( pseudometric-Complete-Metric-Space C)
+      ( pseudometric-space-Complete-Metric-Space C)
   map-short-function-complete-pseudometric-completion-Pseudometric-Space =
     ( limit-cauchy-approximation-Complete-Metric-Space C) ∘
     ( map-short-function-cauchy-approximation-Pseudometric-Space
       ( A)
-      ( pseudometric-Complete-Metric-Space C)
+      ( pseudometric-space-Complete-Metric-Space C)
       ( f))
 
   htpy-comp-map-short-function-complete-pseudometric-completion-Pseudometric-Space :
@@ -546,43 +548,43 @@ module _
       map-pseudometric-completion-Pseudometric-Space A) ~
     ( map-short-function-Pseudometric-Space
       ( A)
-      ( pseudometric-Complete-Metric-Space C)
+      ( pseudometric-space-Complete-Metric-Space C)
       ( f))
   htpy-comp-map-short-function-complete-pseudometric-completion-Pseudometric-Space
     x =
     all-eq-is-limit-cauchy-approximation-Metric-Space
-      ( metric-Complete-Metric-Space C)
+      ( metric-space-Complete-Metric-Space C)
       ( map-short-function-cauchy-approximation-Pseudometric-Space
         ( A)
-        ( pseudometric-Complete-Metric-Space C)
+        ( pseudometric-space-Complete-Metric-Space C)
         ( f)
         ( const-cauchy-approximation-Pseudometric-Space A x))
       ( map-short-function-complete-pseudometric-completion-Pseudometric-Space
         ( map-pseudometric-completion-Pseudometric-Space A x))
       ( map-short-function-Pseudometric-Space
         ( A)
-        ( pseudometric-Complete-Metric-Space C)
+        ( pseudometric-space-Complete-Metric-Space C)
         ( f)
         ( x))
       ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
         ( C)
         ( map-short-function-cauchy-approximation-Pseudometric-Space
           ( A)
-          ( pseudometric-Complete-Metric-Space C)
+          ( pseudometric-space-Complete-Metric-Space C)
           ( f)
           ( const-cauchy-approximation-Pseudometric-Space A x)))
       ( is-limit-const-cauchy-approximation-Metric-Space
-        ( metric-Complete-Metric-Space C)
+        ( metric-space-Complete-Metric-Space C)
         ( map-short-function-Pseudometric-Space
           ( A)
-          ( pseudometric-Complete-Metric-Space C)
+          ( pseudometric-space-Complete-Metric-Space C)
           ( f)
           ( x)))
 
   -- is-short-map-short-function-complete-pseudometric-completion-Pseudometric-Space :
   --   is-short-function-Pseudometric-Space
   --     ( pseudometric-completion-Pseudometric-Space A)
-  --     ( pseudometric-Complete-Metric-Space C)
+  --     ( pseudometric-space-Complete-Metric-Space C)
   --     ( map-short-function-complete-pseudometric-completion-Pseudometric-Space)
   -- is-short-map-short-function-complete-pseudometric-completion-Pseudometric-Space
   --   d x y Nxy =
@@ -662,7 +664,7 @@ module _
         ( u))
 ```
 
-### The map from a Cacuhy approximation in the pseudometric completion to its limit is an isometry
+### The map from a Cauchy approximation in the pseudometric completion to its limit is an isometry
 
 ```agda
 module _
@@ -837,12 +839,12 @@ module _
         ( x)
         ( y)))
 
-  isometry-lim-cauchy-appsoximation-pseudometric-completion-Pseudometric-Space :
+  isometry-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space :
     isometry-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space
         ( pseudometric-completion-Pseudometric-Space M))
       ( pseudometric-completion-Pseudometric-Space M)
-  isometry-lim-cauchy-appsoximation-pseudometric-completion-Pseudometric-Space =
+  isometry-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space =
     ( lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space M ,
       is-isometry-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space)
 ```
