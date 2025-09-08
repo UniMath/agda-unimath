@@ -329,7 +329,7 @@ module _
       ( pseudometric-Metric-Space M)
 ```
 
-### Any complete metric space is a retract of its pseudometric completion
+### Any complete metric space is a short retract of its pseudometric completion
 
 ```agda
 module _
@@ -355,13 +355,86 @@ module _
     is-limit-limit-cauchy-approximation-Complete-Metric-Space
       ( M , is-complete-M)
 
-  -- is-short-map-lim-pseudometric-completion-is-complete-Metric-Space :
-  --   is-short-function-Pseudometric-Space
-  --     ( pseudometric-completion-Metric-Space M)
-  --     ( pseudometric-Metric-Space M)
-  --     ( map-lim-pseudometric-completion-is-complete-Metric-Space)
-  -- is-short-map-lim-pseudometric-completion-is-complete-Metric-Space d x y Nxy =
-  --   {!!}
+  sim-const-map-lim-pseudometric-completion-is-complete-Metric-Space :
+    (u : cauchy-approximation-Metric-Space M) →
+    sim-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( u)
+      ( const-cauchy-approximation-Metric-Space
+        ( M)
+        ( map-lim-pseudometric-completion-is-complete-Metric-Space u))
+  sim-const-map-lim-pseudometric-completion-is-complete-Metric-Space u =
+    sim-const-is-limit-cauchy-approximation-Metric-Space
+      ( M)
+      ( u)
+      ( map-lim-pseudometric-completion-is-complete-Metric-Space u)
+      ( is-limit-map-lim-pseudometric-completion-is-complete-Metric-Space u)
+
+  is-short-map-lim-pseudometric-completion-is-complete-Metric-Space :
+    is-short-function-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( pseudometric-Metric-Space M)
+      ( map-lim-pseudometric-completion-is-complete-Metric-Space)
+  is-short-map-lim-pseudometric-completion-is-complete-Metric-Space d x y Nxy =
+    saturated-neighborhood-Metric-Space
+      ( M)
+      ( d)
+      ( map-lim-pseudometric-completion-is-complete-Metric-Space x)
+      ( map-lim-pseudometric-completion-is-complete-Metric-Space y)
+      ( lemma-saturated-neighborhood-map-lim)
+    where
+
+      neighborhood-const-lim-x-y :
+        neighborhood-Pseudometric-Space
+          ( pseudometric-completion-Metric-Space M)
+          ( d)
+          ( const-cauchy-approximation-Metric-Space M
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space x))
+          ( const-cauchy-approximation-Metric-Space M
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space y))
+      neighborhood-const-lim-x-y =
+        preserves-neighborhood-sim-Pseudometric-Space
+          ( pseudometric-completion-Metric-Space M)
+          { x}
+          { const-cauchy-approximation-Metric-Space
+            ( M)
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space x)}
+          { y}
+          { const-cauchy-approximation-Metric-Space
+            ( M)
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space y)}
+          ( sim-const-map-lim-pseudometric-completion-is-complete-Metric-Space
+            ( x))
+          ( sim-const-map-lim-pseudometric-completion-is-complete-Metric-Space
+            ( y))
+          ( d)
+          ( Nxy)
+
+      lemma-saturated-neighborhood-map-lim :
+        (δ : ℚ⁺) →
+        neighborhood-Metric-Space
+          ( M)
+          ( d +ℚ⁺ δ)
+          ( map-lim-pseudometric-completion-is-complete-Metric-Space x)
+          ( map-lim-pseudometric-completion-is-complete-Metric-Space y)
+      lemma-saturated-neighborhood-map-lim δ =
+        tr
+          ( is-upper-bound-dist-Metric-Space
+            ( M)
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space x)
+            ( map-lim-pseudometric-completion-is-complete-Metric-Space y))
+          ( ap (add-ℚ⁺' d) (eq-add-split-ℚ⁺ δ) ∙ commutative-add-ℚ⁺ δ d)
+          ( neighborhood-const-lim-x-y
+            ( left-summand-split-ℚ⁺ δ)
+            ( right-summand-split-ℚ⁺ δ))
+
+  short-map-lim-pseudometric-completion-is-complete-Metric-Space :
+    short-function-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( pseudometric-Metric-Space M)
+  short-map-lim-pseudometric-completion-is-complete-Metric-Space =
+    ( map-lim-pseudometric-completion-is-complete-Metric-Space ,
+      is-short-map-lim-pseudometric-completion-is-complete-Metric-Space)
 
   is-retraction-map-pseudometric-completion-is-complete-Metric-Space :
     ( map-lim-pseudometric-completion-is-complete-Metric-Space ∘

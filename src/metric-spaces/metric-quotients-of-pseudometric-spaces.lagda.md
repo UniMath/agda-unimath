@@ -987,11 +987,11 @@ module _
               ( y)
               ( N⟨X,Y⟩ (x , x∈X) (y , y∈Y)))
 
-  short-function-metric-quotient-Pseudometric-Space :
+  short-map-short-function-metric-quotient-Pseudometric-Space :
     short-function-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
-  short-function-metric-quotient-Pseudometric-Space =
+  short-map-short-function-metric-quotient-Pseudometric-Space =
     ( map-short-function-metric-quotient-Pseudometric-space ,
       is-short-map-short-function-metric-quotient-Pseudometric-Space)
 ```

@@ -184,7 +184,7 @@ module _
       ( metric-pseudocompletion-pseudometric-completion-Pseudometric-Space P)
       ( metric-pseudocompletion-Pseudometric-Space P)
   short-map-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space =
-    short-function-metric-quotient-Pseudometric-Space
+    short-map-short-function-metric-quotient-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space
         ( pseudometric-completion-Pseudometric-Space P))
       ( metric-pseudocompletion-Pseudometric-Space P)
@@ -233,7 +233,7 @@ module _
       ( metric-pseudocompletion-Pseudometric-Space P)
       ( metric-pseudocompletion-pseudometric-completion-Pseudometric-Space P)
   short-map-inv-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space =
-    short-function-metric-quotient-Pseudometric-Space
+    short-map-short-function-metric-quotient-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space P)
       ( metric-pseudocompletion-pseudometric-completion-Pseudometric-Space P)
       ( short-isometry-Pseudometric-Space
