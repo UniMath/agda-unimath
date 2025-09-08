@@ -206,13 +206,13 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
       ( formal-power-series-coefficients-Commutative-Semiring z) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( associative-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y)
-            ( z))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( associative-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y)
+          ( z))
 ```
 
 #### Commutativity
@@ -230,12 +230,12 @@ module _
     commutative-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( commutative-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( commutative-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y))
 ```
 
 #### Unit laws
@@ -254,11 +254,11 @@ module _
       x
     left-unit-law-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( left-unit-law-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( left-unit-law-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 
     right-unit-law-add-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
@@ -268,11 +268,11 @@ module _
       x
     right-unit-law-add-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( right-unit-law-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( right-unit-law-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 ```
 
 ### Multiplication
@@ -287,8 +287,8 @@ module _
     formal-power-series-Commutative-Semiring R →
     formal-power-series-Commutative-Semiring R
   mul-formal-power-series-Commutative-Semiring
-    (formal-power-series-coefficients-Commutative-Semiring x)
-    (formal-power-series-coefficients-Commutative-Semiring y) =
+    ( formal-power-series-coefficients-Commutative-Semiring x)
+    ( formal-power-series-coefficients-Commutative-Semiring y) =
     formal-power-series-coefficients-Commutative-Semiring
       ( mul-Commutative-Semiring
         ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
@@ -316,13 +316,13 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
       ( formal-power-series-coefficients-Commutative-Semiring z) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( associative-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y)
-            ( z))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( associative-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y)
+          ( z))
 ```
 
 #### Commutativity
@@ -340,12 +340,12 @@ module _
     commutative-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( commutative-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( commutative-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y))
 ```
 
 #### Unit laws
@@ -364,11 +364,11 @@ module _
       x
     left-unit-law-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( left-unit-law-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( left-unit-law-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 
     right-unit-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
@@ -378,11 +378,11 @@ module _
       x
     right-unit-law-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( right-unit-law-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( right-unit-law-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 ```
 
 #### Zero laws
@@ -401,11 +401,11 @@ module _
       zero-formal-power-series-Commutative-Semiring R
     left-zero-law-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( left-zero-law-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( left-zero-law-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 
     right-zero-law-mul-formal-power-series-Commutative-Semiring :
       (x : formal-power-series-Commutative-Semiring R) →
@@ -415,11 +415,11 @@ module _
       zero-formal-power-series-Commutative-Semiring R
     right-zero-law-mul-formal-power-series-Commutative-Semiring
       ( formal-power-series-coefficients-Commutative-Semiring x) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( right-zero-law-mul-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( right-zero-law-mul-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x))
 ```
 
 ### Distributive laws
@@ -442,13 +442,13 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
       ( formal-power-series-coefficients-Commutative-Semiring z) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( left-distributive-mul-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y)
-            ( z))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( left-distributive-mul-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y)
+          ( z))
 
     right-distributive-mul-add-formal-power-series-Commutative-Semiring :
       (x y z : formal-power-series-Commutative-Semiring R) →
@@ -462,13 +462,13 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring x)
       ( formal-power-series-coefficients-Commutative-Semiring y)
       ( formal-power-series-coefficients-Commutative-Semiring z) =
-        ap
-          ( formal-power-series-coefficients-Commutative-Semiring)
-          ( right-distributive-mul-add-Commutative-Semiring
-            ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
-            ( x)
-            ( y)
-            ( z))
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( right-distributive-mul-add-Commutative-Semiring
+          ( commutative-semiring-convolution-sequence-Commutative-Semiring R)
+          ( x)
+          ( y)
+          ( z))
 ```
 
 ### The commutative semiring of formal power series

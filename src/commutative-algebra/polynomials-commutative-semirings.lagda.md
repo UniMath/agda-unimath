@@ -70,10 +70,10 @@ module _
   is-degree-bound-prop-formal-power-series-Commutative-Semiring
     ( formal-power-series-coefficients-Commutative-Semiring a)
     ( N) =
-      Π-Prop
-        ( ℕ)
-        ( λ n →
-          hom-Prop (leq-ℕ-Prop N n) (is-zero-prop-Commutative-Semiring R (a n)))
+    Π-Prop
+      ( ℕ)
+      ( λ n →
+        hom-Prop (leq-ℕ-Prop N n) (is-zero-prop-Commutative-Semiring R (a n)))
 
   is-degree-bound-formal-power-series-Commutative-Semiring :
     formal-power-series-Commutative-Semiring R → ℕ → UU l
@@ -84,7 +84,7 @@ module _
   is-polynomial-prop-formal-power-series-Commutative-Semiring :
     formal-power-series-Commutative-Semiring R → Prop l
   is-polynomial-prop-formal-power-series-Commutative-Semiring a =
-      ∃ ℕ (is-degree-bound-prop-formal-power-series-Commutative-Semiring a)
+    ∃ ℕ (is-degree-bound-prop-formal-power-series-Commutative-Semiring a)
 
   is-polynomial-formal-power-series-Commutative-Semiring :
     formal-power-series-Commutative-Semiring R → UU l
@@ -110,12 +110,12 @@ module _
     polynomial-Commutative-Semiring R
   polynomial-add-degree-formal-power-series-Commutative-Semiring
     ( formal-power-series-coefficients-Commutative-Semiring p) N H =
-      ( formal-power-series-coefficients-Commutative-Semiring p ,
-        intro-exists
-          ( N)
-          ( λ n N≤n →
-            let (m , m+N=n) = subtraction-leq-ℕ N n N≤n
-            in tr (is-zero-Commutative-Semiring R ∘ p) m+N=n (H m)))
+    ( formal-power-series-coefficients-Commutative-Semiring p ,
+      intro-exists
+        ( N)
+        ( λ n N≤n →
+          let (m , m+N=n) = subtraction-leq-ℕ N n N≤n
+          in tr (is-zero-Commutative-Semiring R ∘ p) m+N=n (H m)))
 
 module _
   {l : Level} {R : Commutative-Semiring l}
@@ -226,10 +226,10 @@ module _
     eq-ev-degree-bound-formal-power-series-Commutative-Semiring
       p@(formal-power-series-coefficients-Commutative-Semiring c) x
       (N₁ , N₁≤n→pn=0) (N₂ , N₂≤n→pn=0) =
-        rec-coproduct
-          ( λ N₁≤N₂ → inv (case N₁ N₁≤n→pn=0 N₂ N₂≤n→pn=0 N₁≤N₂))
-          ( λ N₂≤N₁ → case N₂ N₂≤n→pn=0 N₁ N₁≤n→pn=0 N₂≤N₁)
-          ( linear-leq-ℕ N₁ N₂)
+      rec-coproduct
+        ( λ N₁≤N₂ → inv (case N₁ N₁≤n→pn=0 N₂ N₂≤n→pn=0 N₁≤N₂))
+        ( λ N₂≤N₁ → case N₂ N₂≤n→pn=0 N₁ N₁≤n→pn=0 N₂≤N₁)
+        ( linear-leq-ℕ N₁ N₂)
       where
         case :
           (Na : ℕ)
@@ -386,20 +386,20 @@ module _
   truncate-formal-power-series-Commutative-Semiring
     ( n)
     ( formal-power-series-coefficients-Commutative-Semiring c) =
-      let
-        d : (k : ℕ) → (le-ℕ k n + leq-ℕ n k) → type-Commutative-Semiring R
-        d = λ where
-          k (inl k<n) → c k
-          k (inr n≤k) → zero-Commutative-Semiring R
-        deg-bound-d : (k : ℕ) → (H : le-ℕ k n + leq-ℕ n k) → leq-ℕ n k →
-          is-zero-Commutative-Semiring R (d k H)
-        deg-bound-d = λ where
-          k (inl k<n) n≤k → ex-falso (contradiction-le-ℕ k n k<n n≤k)
-          k (inr _) _ → refl
-      in
-        ( formal-power-series-coefficients-Commutative-Semiring
-          ( λ k → d k (decide-le-leq-ℕ k n)) ,
-          intro-exists n (λ k n≤k → deg-bound-d k (decide-le-leq-ℕ k n) n≤k))
+    let
+      d : (k : ℕ) → (le-ℕ k n + leq-ℕ n k) → type-Commutative-Semiring R
+      d = λ where
+        k (inl k<n) → c k
+        k (inr n≤k) → zero-Commutative-Semiring R
+      deg-bound-d : (k : ℕ) → (H : le-ℕ k n + leq-ℕ n k) → leq-ℕ n k →
+        is-zero-Commutative-Semiring R (d k H)
+      deg-bound-d = λ where
+        k (inl k<n) n≤k → ex-falso (contradiction-le-ℕ k n k<n n≤k)
+        k (inr _) _ → refl
+    in
+      ( formal-power-series-coefficients-Commutative-Semiring
+        ( λ k → d k (decide-le-leq-ℕ k n)) ,
+        intro-exists n (λ k n≤k → deg-bound-d k (decide-le-leq-ℕ k n) n≤k))
 ```
 
 ### Addition of polynomials
@@ -426,18 +426,18 @@ module _
       ( formal-power-series-coefficients-Commutative-Semiring q)
       ( Np , Hp)
       ( Nq , Hq) =
-        let
-          N = max-ℕ Np Nq
-          case r Nr Hr Nr≤N n N≤n = Hr n (transitive-leq-ℕ Nr N n N≤n Nr≤N)
-        in
-          ( N ,
-            case p Np Hp (left-leq-max-ℕ Np Nq) ,
-            case q Nq Hq (right-leq-max-ℕ Np Nq) ,
-            λ n N≤n →
-              ap-add-Commutative-Semiring R
-                ( case p Np Hp (left-leq-max-ℕ Np Nq) n N≤n)
-                ( case q Nq Hq (right-leq-max-ℕ Np Nq) n N≤n) ∙
-              left-unit-law-add-Commutative-Semiring R _)
+      let
+        N = max-ℕ Np Nq
+        case r Nr Hr Nr≤N n N≤n = Hr n (transitive-leq-ℕ Nr N n N≤n Nr≤N)
+      in
+        ( N ,
+          case p Np Hp (left-leq-max-ℕ Np Nq) ,
+          case q Nq Hq (right-leq-max-ℕ Np Nq) ,
+          λ n N≤n →
+            ap-add-Commutative-Semiring R
+              ( case p Np Hp (left-leq-max-ℕ Np Nq) n N≤n)
+              ( case q Nq Hq (right-leq-max-ℕ Np Nq) n N≤n) ∙
+            left-unit-law-add-Commutative-Semiring R _)
 
     is-polynomial-add-polynomial-Commutative-Semiring :
       (p q : polynomial-Commutative-Semiring R) →
@@ -447,21 +447,21 @@ module _
           ( formal-power-series-polynomial-Commutative-Semiring q))
     is-polynomial-add-polynomial-Commutative-Semiring
       (p , is-poly-p) (q , is-poly-q) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-polynomial-prop-formal-power-series-Commutative-Semiring _)
+      in do
+        (Np , Hp) ← is-poly-p
+        (Nq , Hq) ← is-poly-q
         let
-          open
-            do-syntax-trunc-Prop
-              ( is-polynomial-prop-formal-power-series-Commutative-Semiring _)
-        in do
-          (Np , Hp) ← is-poly-p
-          (Nq , Hq) ← is-poly-q
-          let
-            (N , _ , _ , H) =
-              degree-bound-add-formal-power-series-Commutative-Semiring
-                ( p)
-                ( q)
-                ( Np , Hp)
-                ( Nq , Hq)
-          intro-exists N H
+          (N , _ , _ , H) =
+            degree-bound-add-formal-power-series-Commutative-Semiring
+              ( p)
+              ( q)
+              ( Np , Hp)
+              ( Nq , Hq)
+        intro-exists N H
 
   add-polynomial-Commutative-Semiring :
     polynomial-Commutative-Semiring R →
@@ -493,80 +493,80 @@ module _
         ( ev-polynomial-Commutative-Semiring q x)
     interchange-ev-add-polynomial-Commutative-Semiring
       pp@(p , is-poly-p) qq@(q , is-poly-q) x =
-        let
-          open
-            do-syntax-trunc-Prop
-              ( Id-Prop
-                ( set-Commutative-Semiring R)
-                ( ev-polynomial-Commutative-Semiring
-                  ( add-polynomial-Commutative-Semiring pp qq)
-                  ( x))
-                ( add-Commutative-Semiring R
-                  ( ev-polynomial-Commutative-Semiring pp x)
-                  ( ev-polynomial-Commutative-Semiring qq x)))
-        in do
-          (Np , Hp) ← is-poly-p
-          (Nq , Hq) ← is-poly-q
-          let
-            (N , Hp' , Hq' , H) =
-              degree-bound-add-formal-power-series-Commutative-Semiring
-                ( p)
-                ( q)
-                ( Np , Hp)
-                ( Nq , Hq)
-          equational-reasoning
-            ev-polynomial-Commutative-Semiring
-              ( add-polynomial-Commutative-Semiring pp qq)
-              ( x)
-            ＝
-              ev-degree-bound-formal-power-series-Commutative-Semiring
-                ( add-formal-power-series-Commutative-Semiring p q)
-                ( x)
-                ( N , H)
-              by
-                eq-ev-polynomial-degree-bound-Commutative-Semiring _ x N H
-            ＝
-              sum-fin-sequence-type-Commutative-Semiring R N
-                ( λ i → add-Commutative-Semiring R _ _)
-              by
-                htpy-sum-fin-sequence-type-Commutative-Semiring R N
-                  ( λ i →
-                    right-distributive-mul-add-Commutative-Semiring R _ _ _)
-            ＝
-              add-Commutative-Semiring R
-                ( ev-degree-bound-formal-power-series-Commutative-Semiring
-                  ( p)
-                  ( x)
-                  ( N , Hp'))
-                ( ev-degree-bound-formal-power-series-Commutative-Semiring
-                  ( q)
-                  ( x)
-                  ( N , Hq'))
-              by
-                inv
-                  ( interchange-add-sum-fin-sequence-type-Commutative-Semiring
-                    ( R)
-                    ( N)
-                    ( _)
-                    ( _))
-            ＝
-              add-Commutative-Semiring R
+      let
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Semiring R)
+              ( ev-polynomial-Commutative-Semiring
+                ( add-polynomial-Commutative-Semiring pp qq)
+                ( x))
+              ( add-Commutative-Semiring R
                 ( ev-polynomial-Commutative-Semiring pp x)
-                ( ev-polynomial-Commutative-Semiring qq x)
-              by
-                ap-add-Commutative-Semiring R
-                  ( inv
-                    ( eq-ev-polynomial-degree-bound-Commutative-Semiring
-                      ( pp)
-                      ( x)
-                      ( N)
-                      ( Hp')))
-                  ( inv
-                    ( eq-ev-polynomial-degree-bound-Commutative-Semiring
-                      ( qq)
-                      ( x)
-                      ( N)
-                      ( Hq')))
+                ( ev-polynomial-Commutative-Semiring qq x)))
+      in do
+        (Np , Hp) ← is-poly-p
+        (Nq , Hq) ← is-poly-q
+        let
+          (N , Hp' , Hq' , H) =
+            degree-bound-add-formal-power-series-Commutative-Semiring
+              ( p)
+              ( q)
+              ( Np , Hp)
+              ( Nq , Hq)
+        equational-reasoning
+          ev-polynomial-Commutative-Semiring
+            ( add-polynomial-Commutative-Semiring pp qq)
+            ( x)
+          ＝
+            ev-degree-bound-formal-power-series-Commutative-Semiring
+              ( add-formal-power-series-Commutative-Semiring p q)
+              ( x)
+              ( N , H)
+            by
+              eq-ev-polynomial-degree-bound-Commutative-Semiring _ x N H
+          ＝
+            sum-fin-sequence-type-Commutative-Semiring R N
+              ( λ i → add-Commutative-Semiring R _ _)
+            by
+              htpy-sum-fin-sequence-type-Commutative-Semiring R N
+                ( λ i →
+                  right-distributive-mul-add-Commutative-Semiring R _ _ _)
+          ＝
+            add-Commutative-Semiring R
+              ( ev-degree-bound-formal-power-series-Commutative-Semiring
+                ( p)
+                ( x)
+                ( N , Hp'))
+              ( ev-degree-bound-formal-power-series-Commutative-Semiring
+                ( q)
+                ( x)
+                ( N , Hq'))
+            by
+              inv
+                ( interchange-add-sum-fin-sequence-type-Commutative-Semiring
+                  ( R)
+                  ( N)
+                  ( _)
+                  ( _))
+          ＝
+            add-Commutative-Semiring R
+              ( ev-polynomial-Commutative-Semiring pp x)
+              ( ev-polynomial-Commutative-Semiring qq x)
+            by
+              ap-add-Commutative-Semiring R
+                ( inv
+                  ( eq-ev-polynomial-degree-bound-Commutative-Semiring
+                    ( pp)
+                    ( x)
+                    ( N)
+                    ( Hp')))
+                ( inv
+                  ( eq-ev-polynomial-degree-bound-Commutative-Semiring
+                    ( qq)
+                    ( x)
+                    ( N)
+                    ( Hq')))
 ```
 
 ### Multiplication of polynomials
@@ -588,43 +588,43 @@ module _
     ( formal-power-series-coefficients-Commutative-Semiring q)
     ( Np , Hp)
     ( Nq , Hq) =
-      ( Nq +ℕ Np ,
-        λ n Nq+Np≤n →
-          equational-reasoning
+    ( Nq +ℕ Np ,
+      λ n Nq+Np≤n →
+        equational-reasoning
+          sum-finite-Commutative-Semiring R
+            ( finite-type-binary-sum-decomposition-ℕ n)
+            ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (p i) (q j))
+          ＝
             sum-finite-Commutative-Semiring R
               ( finite-type-binary-sum-decomposition-ℕ n)
-              ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (p i) (q j))
-            ＝
-              sum-finite-Commutative-Semiring R
-                ( finite-type-binary-sum-decomposition-ℕ n)
-                ( λ _ → zero-Commutative-Semiring R)
-                by
-                  htpy-sum-finite-Commutative-Semiring R _
-                    ( λ (i , j , j+i=n) →
+              ( λ _ → zero-Commutative-Semiring R)
+            by
+              htpy-sum-finite-Commutative-Semiring R _
+                ( λ (i , j , j+i=n) →
+                  rec-coproduct
+                    ( λ i<Np →
                       rec-coproduct
-                        ( λ i<Np →
-                          rec-coproduct
-                            ( λ j<Nq →
-                              ex-falso
-                                ( anti-reflexive-le-ℕ
-                                  ( n)
-                                  ( tr
-                                    ( λ m → le-ℕ m n)
-                                    ( j+i=n)
-                                    ( concatenate-le-leq-ℕ
-                                      ( preserves-le-add-ℕ j<Nq i<Np)
-                                      ( Nq+Np≤n)))))
-                            ( λ Nq≤j →
-                              ap-mul-Commutative-Semiring R refl (Hq j Nq≤j) ∙
-                              right-zero-law-mul-Commutative-Semiring R _)
-                            ( decide-le-leq-ℕ j Nq))
-                        ( λ Np≤i →
-                          ap-mul-Commutative-Semiring R (Hp i Np≤i) refl ∙
-                          left-zero-law-mul-Commutative-Semiring R _)
-                        ( decide-le-leq-ℕ i Np))
-            ＝
-              zero-Commutative-Semiring R
-              by sum-zero-finite-Commutative-Semiring R _)
+                        ( λ j<Nq →
+                          ex-falso
+                            ( anti-reflexive-le-ℕ
+                              ( n)
+                              ( tr
+                                ( λ m → le-ℕ m n)
+                                ( j+i=n)
+                                ( concatenate-le-leq-ℕ
+                                  ( preserves-le-add-ℕ j<Nq i<Np)
+                                  ( Nq+Np≤n)))))
+                        ( λ Nq≤j →
+                          ap-mul-Commutative-Semiring R refl (Hq j Nq≤j) ∙
+                          right-zero-law-mul-Commutative-Semiring R _)
+                        ( decide-le-leq-ℕ j Nq))
+                    ( λ Np≤i →
+                      ap-mul-Commutative-Semiring R (Hp i Np≤i) refl ∙
+                      left-zero-law-mul-Commutative-Semiring R _)
+                    ( decide-le-leq-ℕ i Np))
+          ＝
+            zero-Commutative-Semiring R
+            by sum-zero-finite-Commutative-Semiring R _)
 
   abstract
     is-polynomial-mul-polynomial-Commutative-Semiring :
@@ -635,20 +635,20 @@ module _
           ( formal-power-series-polynomial-Commutative-Semiring q))
     is-polynomial-mul-polynomial-Commutative-Semiring
       (p , is-poly-p) (q , is-poly-q) =
-        let
-          open
-            do-syntax-trunc-Prop
-              ( is-polynomial-prop-formal-power-series-Commutative-Semiring
-                ( mul-formal-power-series-Commutative-Semiring p q))
-        in do
-          (Np , Hp) ← is-poly-p
-          (Nq , Hq) ← is-poly-q
-          unit-trunc-Prop
-            ( degree-bound-mul-formal-power-series-Commutative-Semiring
-              ( p)
-              ( q)
-              ( Np , Hp)
-              ( Nq , Hq))
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-polynomial-prop-formal-power-series-Commutative-Semiring
+              ( mul-formal-power-series-Commutative-Semiring p q))
+      in do
+        (Np , Hp) ← is-poly-p
+        (Nq , Hq) ← is-poly-q
+        unit-trunc-Prop
+          ( degree-bound-mul-formal-power-series-Commutative-Semiring
+            ( p)
+            ( q)
+            ( Np , Hp)
+            ( Nq , Hq))
 
   mul-polynomial-Commutative-Semiring :
     polynomial-Commutative-Semiring R →
