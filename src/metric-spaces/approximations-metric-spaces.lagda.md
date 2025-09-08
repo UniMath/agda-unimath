@@ -25,6 +25,7 @@ open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
@@ -36,7 +37,6 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 ```
 
 </details>
