@@ -85,6 +85,51 @@ module _
             by is-triangular-is-metric-of-Metric-Space M ρ H x y y'
           ≤ ρ' y y' +ℝ ρ' x y by leq-eq-ℝ _ _ (commutative-add-ℝ _ _))
 
+    modulus-of-uniform-continuity-metric-of-Metric-Space : ℚ⁺ → ℚ⁺
+    modulus-of-uniform-continuity-metric-of-Metric-Space =
+      modulus-le-double-le-ℚ⁺
+
+    is-modulus-of-uniform-continuity-modulus-of-uniform-continuity-Metric-Space :
+      is-modulus-of-uniform-continuity-function-Metric-Space
+        ( product-Metric-Space M M)
+        ( metric-space-ℝ⁰⁺ l3)
+        ( ind-Σ ρ)
+        ( modulus-of-uniform-continuity-metric-of-Metric-Space)
+    is-modulus-of-uniform-continuity-modulus-of-uniform-continuity-Metric-Space
+      (x , y) ε (x' , y') (Nε'xx' , Nε'yy') =
+      let
+        ε' = modulus-le-double-le-ℚ⁺ ε
+        2ε'<ε = le-double-le-modulus-le-double-le-ℚ⁺ ε
+      in
+        neighborhood-dist-ℝ ε (ρ' x y) (ρ' x' y')
+          ( chain-of-inequalities
+            dist-ℝ (ρ' x y) (ρ' x' y')
+            ≤ dist-ℝ (ρ' x y) (ρ' x y') +ℝ dist-ℝ (ρ' x y') (ρ' x' y')
+              by triangle-inequality-dist-ℝ _ _ _
+            ≤ dist-ℝ (ρ' x y) (ρ' x y') +ℝ dist-ℝ (ρ' y' x) (ρ' y' x')
+              by
+                leq-eq-ℝ _ _
+                  ( ap-add-ℝ
+                    ( refl)
+                    ( ap-binary
+                      ( dist-ℝ)
+                      ( commutative-ρ' x y')
+                      ( commutative-ρ' x' y')))
+            ≤ ρ' y y' +ℝ ρ' x x'
+              by
+                preserves-leq-add-ℝ _ _ _ _
+                  ( dist-metric-leq-metric-of-Metric-Space x y y')
+                  ( dist-metric-leq-metric-of-Metric-Space y' x x')
+            ≤ real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε'
+              by
+                preserves-leq-add-ℝ _ _ _ _
+                  ( forward-implication (H ε' y y') Nε'yy')
+                  ( forward-implication (H ε' x x') Nε'xx')
+            ≤ real-ℚ⁺ (ε' +ℚ⁺ ε')
+              by leq-eq-ℝ _ _ (add-real-ℚ _ _)
+            ≤ real-ℚ⁺ ε
+              by preserves-leq-real-ℚ _ _ (leq-le-ℚ 2ε'<ε))
+
     is-uniformly-continuous-metric-of-Metric-Space :
       is-uniformly-continuous-function-Metric-Space
         ( product-Metric-Space M M)
@@ -92,40 +137,8 @@ module _
         ( ind-Σ ρ)
     is-uniformly-continuous-metric-of-Metric-Space =
       intro-exists
-        ( modulus-le-double-le-ℚ⁺)
-        ( λ (x , y) ε (x' , y') (Nε'xx' , Nε'yy') →
-          let
-            ε' = modulus-le-double-le-ℚ⁺ ε
-            2ε'<ε = le-double-le-modulus-le-double-le-ℚ⁺ ε
-          in
-            neighborhood-dist-ℝ ε (ρ' x y) (ρ' x' y')
-              ( chain-of-inequalities
-                dist-ℝ (ρ' x y) (ρ' x' y')
-                ≤ dist-ℝ (ρ' x y) (ρ' x y') +ℝ dist-ℝ (ρ' x y') (ρ' x' y')
-                  by triangle-inequality-dist-ℝ _ _ _
-                ≤ dist-ℝ (ρ' x y) (ρ' x y') +ℝ dist-ℝ (ρ' y' x) (ρ' y' x')
-                  by
-                    leq-eq-ℝ _ _
-                      ( ap-add-ℝ
-                        ( refl)
-                        ( ap-binary
-                          ( dist-ℝ)
-                          ( commutative-ρ' x y')
-                          ( commutative-ρ' x' y')))
-                ≤ ρ' y y' +ℝ ρ' x x'
-                  by
-                    preserves-leq-add-ℝ _ _ _ _
-                      ( dist-metric-leq-metric-of-Metric-Space x y y')
-                      ( dist-metric-leq-metric-of-Metric-Space y' x x')
-                ≤ real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε'
-                  by
-                    preserves-leq-add-ℝ _ _ _ _
-                      ( forward-implication (H ε' y y') Nε'yy')
-                      ( forward-implication (H ε' x x') Nε'xx')
-                ≤ real-ℚ⁺ (ε' +ℚ⁺ ε')
-                  by leq-eq-ℝ _ _ (add-real-ℚ _ _)
-                ≤ real-ℚ⁺ ε
-                  by preserves-leq-real-ℚ _ _ (leq-le-ℚ 2ε'<ε)))
+        ( modulus-of-uniform-continuity-metric-of-Metric-Space)
+        ( is-modulus-of-uniform-continuity-modulus-of-uniform-continuity-Metric-Space)
 
   uniformly-continuous-metric-of-Metric-Space :
     uniformly-continuous-function-Metric-Space
