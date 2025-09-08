@@ -36,6 +36,14 @@ subset-left-module-Ring :
   {l1 l2 : Level}
   (l : Level) (R : Ring l1) (M : left-module-Ring l2 R) → UU (l2 ⊔ lsuc l)
 subset-left-module-Ring l R M = subtype l (type-left-module-Ring R M)
+
+type-subset-left-module-Ring :
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (S : subset-left-module-Ring l3 R M) →
+  UU (l2 ⊔ l3)
+type-subset-left-module-Ring R M S = type-subtype S
 ```
 
 ### The condition that a subset is closed under addition

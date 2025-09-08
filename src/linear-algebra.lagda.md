@@ -23,7 +23,9 @@ open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-rings public
+open import linear-algebra.linear-combinations public
 open import linear-algebra.linear-maps-left-modules-rings public
+open import linear-algebra.linear-spans public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
