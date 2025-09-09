@@ -32,6 +32,8 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.metric-spaces
+
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -39,6 +41,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.subsets-real-numbers
 ```
 
 </details>
@@ -530,4 +533,11 @@ module _
       sim-sim-leq-ℝ
         ( leq-le-positive-rational-ℝ⁰⁺ x y (backward-implication ∘ H) ,
           leq-le-positive-rational-ℝ⁰⁺ y x (forward-implication ∘ H))
+```
+
+### The metric space of nonnegative real numbers
+
+```agda
+metric-space-ℝ⁰⁺ : (l : Level) → Metric-Space (lsuc l) l
+metric-space-ℝ⁰⁺ l = metric-space-subset-ℝ (is-nonnegative-prop-ℝ {l})
 ```
