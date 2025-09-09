@@ -76,14 +76,16 @@ module _
           ρ' x y
           ≤ ρ' x y' +ℝ ρ' y' y
             by is-triangular-is-metric-of-Metric-Space M ρ H x y' y
-          ≤ ρ' y' y +ℝ ρ' x y' by leq-eq-ℝ _ _ (commutative-add-ℝ _ _)
+          ≤ ρ' y' y +ℝ ρ' x y'
+            by leq-eq-ℝ _ _ (commutative-add-ℝ _ _)
           ≤ ρ' y y' +ℝ ρ' x y'
             by leq-eq-ℝ _ _ (ap-add-ℝ (commutative-ρ' y' y) refl))
         ( chain-of-inequalities
           ρ' x y'
           ≤ ρ' x y +ℝ ρ' y y'
             by is-triangular-is-metric-of-Metric-Space M ρ H x y y'
-          ≤ ρ' y y' +ℝ ρ' x y by leq-eq-ℝ _ _ (commutative-add-ℝ _ _))
+          ≤ ρ' y y' +ℝ ρ' x y
+            by leq-eq-ℝ _ _ (commutative-add-ℝ _ _))
 
     modulus-of-uniform-continuity-metric-of-Metric-Space : ℚ⁺ → ℚ⁺
     modulus-of-uniform-continuity-metric-of-Metric-Space =
