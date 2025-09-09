@@ -98,6 +98,10 @@ module _
   is-zero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-zero-Commutative-Semiring = is-zero-Semiring semiring-Commutative-Semiring
 
+  is-zero-prop-Commutative-Semiring : type-Commutative-Semiring → Prop l
+  is-zero-prop-Commutative-Semiring =
+    is-zero-prop-Semiring semiring-Commutative-Semiring
+
   is-nonzero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-nonzero-Commutative-Semiring =
     is-nonzero-Semiring semiring-Commutative-Semiring
@@ -175,6 +179,12 @@ module _
   mul-Commutative-Semiring' :
     (x y : type-Commutative-Semiring) → type-Commutative-Semiring
   mul-Commutative-Semiring' = mul-Semiring' semiring-Commutative-Semiring
+
+  ap-mul-Commutative-Semiring :
+    {x x' y y' : type-Commutative-Semiring} →
+    (x ＝ x') → (y ＝ y') →
+    mul-Commutative-Semiring x y ＝ mul-Commutative-Semiring x' y'
+  ap-mul-Commutative-Semiring = ap-mul-Semiring semiring-Commutative-Semiring
 
   one-Commutative-Semiring : type-Commutative-Semiring
   one-Commutative-Semiring = one-Semiring semiring-Commutative-Semiring
