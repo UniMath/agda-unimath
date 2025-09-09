@@ -16,6 +16,7 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.subtypes

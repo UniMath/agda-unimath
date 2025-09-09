@@ -7,8 +7,12 @@ module order-theory.closed-intervals-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -16,6 +20,7 @@ open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -265,35 +270,273 @@ module _
           ( min-leq-max-Total-Order X _ _))
         ( min-leq-max-Total-Order X _ _))
 
-  cover-closed-interval-4-Total-Order :
-    subtype-closed-interval-Total-Order X
-      ( closed-interval-4-Total-Order) ⊆
-    union-subtype
-      ( union-subtype
-        ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X a b))
-        ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X a c)))
-      ( union-subtype
+  abstract
+    cover-closed-interval-4-first-smallest-Total-Order :
+      leq-Total-Order X a b → leq-Total-Order X a c → leq-Total-Order X a d →
+      subtype-closed-interval-Total-Order X
+        ( closed-interval-4-Total-Order) ⊆
+      union-subtype
+        ( union-subtype
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X a b))
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X a c)))
         ( subtype-closed-interval-Total-Order X
           ( closed-interval-2-Total-Order X b d))
-        ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X c d)))
-  cover-closed-interval-4-Total-Order x x∈closed-4 =
-    let
-      motive =
-        union-subtype
-          ( union-subtype
-            ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X a b))
-            ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X a c)))
-          ( union-subtype
+    cover-closed-interval-4-first-smallest-Total-Order
+      a≤b a≤c a≤d x (min≤x , x≤max) =
+      let
+        motive =
+          union-subtype
+            ( union-subtype
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X a b))
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X a c)))
             ( subtype-closed-interval-Total-Order X
               ( closed-interval-2-Total-Order X b d))
-            ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X c d)))
-          ( x)
-    in
-      {!   !}
+            ( x)
+        minab≤x =
+          tr
+            ( λ y → leq-Total-Order X y x)
+            ( left-leq-right-min-Total-Order X _ _
+              ( inv-tr
+                ( λ z → leq-Total-Order X z (min-Total-Order X c d))
+                ( left-leq-right-min-Total-Order X a b a≤b)
+                ( leq-min-leq-both-Total-Order X a c d a≤c a≤d)))
+            ( min≤x)
+        minac≤x =
+          tr
+            ( λ y → leq-Total-Order X y x)
+            ( left-leq-right-min-Total-Order X a b a≤b ∙
+              inv (left-leq-right-min-Total-Order X a c a≤c))
+            ( minab≤x)
+      in
+        elim-disjunction
+          ( motive)
+          ( elim-disjunction
+            ( motive)
+            ( λ max=a →
+              inl-disjunction
+                ( inl-disjunction
+                  ( minab≤x ,
+                    transitive-leq-Total-Order X x a (max-Total-Order X a b)
+                      ( leq-left-max-Total-Order X _ _)
+                      ( tr (leq-Total-Order X x) max=a x≤max))))
+            ( λ max=b →
+              inl-disjunction
+                ( inl-disjunction
+                  ( minab≤x ,
+                    tr
+                      ( leq-Total-Order X x)
+                      ( max=b ∙ inv (left-leq-right-max-Total-Order X a b a≤b))
+                      ( x≤max)))))
+          ( elim-disjunction
+            ( motive)
+            ( λ max=c →
+              inl-disjunction
+                ( inr-disjunction
+                  ( minac≤x ,
+                    tr
+                      ( leq-Total-Order X x)
+                      ( max=c ∙ inv (left-leq-right-max-Total-Order X a c a≤c))
+                      ( x≤max))))
+            ( λ max=d →
+              elim-disjunction motive
+                ( λ b≤x →
+                  inr-disjunction
+                    ( transitive-leq-Total-Order X (min-Total-Order X b d) b x
+                        ( b≤x)
+                        ( leq-left-min-Total-Order X b d) ,
+                      transitive-leq-Total-Order X x d (max-Total-Order X b d)
+                        ( leq-right-max-Total-Order X b d)
+                        ( tr (leq-Total-Order X x) max=d x≤max)))
+                ( λ x≤b →
+                  inl-disjunction
+                    ( inl-disjunction
+                      ( minab≤x ,
+                        inv-tr
+                          ( leq-Total-Order X x)
+                          ( left-leq-right-max-Total-Order X a b a≤b)
+                          ( x≤b))))
+                ( is-total-Total-Order X b x)))
+          ( eq-one-of-four-max-Total-Order X a b c d)
+
+module _
+  {l1 l2 : Level} (X : Total-Order l1 l2) (a b c d : type-Total-Order X)
+  where
+
+  abstract
+    cover-closed-interval-4-Total-Order :
+      subtype-closed-interval-Total-Order X
+        ( closed-interval-4-Total-Order X a b c d) ⊆
+      union-subtype
+        ( union-subtype
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X a b))
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X a c)))
+        ( union-subtype
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X b d))
+          ( subtype-closed-interval-Total-Order X
+            ( closed-interval-2-Total-Order X c d)))
+    cover-closed-interval-4-Total-Order x x∈closed-4@(min≤x , x≤max) =
+      let
+        _≤_ = leq-Total-Order X
+        commutative-min = commutative-min-Total-Order X
+        commutative-max = commutative-max-Total-Order X
+        min = min-Total-Order X
+        max = max-Total-Order X
+        motive =
+          union-subtype
+            ( union-subtype
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X a b))
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X a c)))
+            ( union-subtype
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X b d))
+              ( subtype-closed-interval-Total-Order X
+                ( closed-interval-2-Total-Order X c d)))
+            ( x)
+        min≤a =
+          transitive-leq-Total-Order X
+            ( min (min a b) (min c d))
+            ( min a b)
+            ( a)
+            ( leq-left-min-Total-Order X _ _)
+            ( leq-left-min-Total-Order X _ _)
+        min≤b =
+          transitive-leq-Total-Order X
+            ( min (min a b) (min c d))
+            ( min a b)
+            ( b)
+            ( leq-right-min-Total-Order X _ _)
+            ( leq-left-min-Total-Order X _ _)
+        min≤c =
+          transitive-leq-Total-Order X
+            ( min (min a b) (min c d))
+            ( min c d)
+            ( c)
+            ( leq-left-min-Total-Order X _ _)
+            ( leq-right-min-Total-Order X _ _)
+        min≤d =
+          transitive-leq-Total-Order X
+            ( min (min a b) (min c d))
+            ( min c d)
+            ( d)
+            ( leq-right-min-Total-Order X _ _)
+            ( leq-right-min-Total-Order X _ _)
+      in
+        elim-disjunction motive
+          ( elim-disjunction motive
+            ( λ min=a →
+              map-disjunction
+                ( id)
+                ( inl-disjunction)
+                ( cover-closed-interval-4-first-smallest-Total-Order X a b c d
+                  ( tr (_≤ b) min=a min≤b)
+                  ( tr (_≤ c) min=a min≤c)
+                  ( tr (_≤ d) min=a min≤d)
+                  ( x)
+                  ( x∈closed-4)))
+            ( λ min=b →
+              elim-disjunction motive
+                ( elim-disjunction motive
+                  ( λ (minba≤x , x≤maxba) →
+                    inl-disjunction
+                      ( inl-disjunction
+                        ( tr (_≤ x) (commutative-min b a) minba≤x ,
+                          tr (x ≤_) (commutative-max b a) x≤maxba)))
+                  ( inr-disjunction ∘ inl-disjunction))
+                ( inl-disjunction ∘ inr-disjunction)
+                ( cover-closed-interval-4-first-smallest-Total-Order X b a d c
+                  ( tr (_≤ a) min=b min≤a)
+                  ( tr (_≤ d) min=b min≤d)
+                  ( tr (_≤ c) min=b min≤c)
+                  ( x)
+                  ( transitive-leq-Total-Order X _ b x
+                    ( tr (_≤ x) min=b min≤x)
+                    ( transitive-leq-Total-Order X
+                      ( min (min b a) (min d c)) (min b a) b
+                        ( leq-left-min-Total-Order X _ _)
+                        ( leq-left-min-Total-Order X _ _)) ,
+                    tr
+                      ( x ≤_)
+                      ( ap-binary max
+                        ( commutative-max _ _)
+                        ( commutative-max _ _))
+                      ( x≤max)))))
+          ( elim-disjunction motive
+            ( λ min=c →
+              elim-disjunction motive
+                ( elim-disjunction motive
+                  ( λ (minca≤x , x≤maxca) →
+                    inl-disjunction
+                      ( inr-disjunction
+                        ( tr (_≤ x) (commutative-min c a) minca≤x ,
+                          tr (x ≤_) (commutative-max c a) x≤maxca)))
+                  ( inr-disjunction ∘ inr-disjunction))
+                ( inl-disjunction ∘ inl-disjunction)
+                ( cover-closed-interval-4-first-smallest-Total-Order X c a d b
+                  ( tr (_≤ a) min=c min≤a)
+                  ( tr (_≤ d) min=c min≤d)
+                  ( tr (_≤ b) min=c min≤b)
+                  ( x)
+                  ( tr
+                      ( _≤ x)
+                      ( interchange-law-min-Total-Order X a b c d ∙
+                        ap-binary min
+                          ( commutative-min _ _)
+                          ( commutative-min _ _))
+                      ( min≤x) ,
+                    tr
+                      ( x ≤_)
+                      ( interchange-law-max-Total-Order X a b c d ∙
+                        ap-binary max
+                          ( commutative-max _ _)
+                          ( commutative-max _ _))
+                      ( x≤max))))
+            ( λ min=d →
+              elim-disjunction motive
+                ( elim-disjunction motive
+                  ( λ (mindb≤x , x≤maxdb) →
+                    inr-disjunction
+                      ( inl-disjunction
+                        ( tr (_≤ x) (commutative-min _ _) mindb≤x ,
+                          tr (x ≤_) (commutative-max _ _) x≤maxdb)))
+                  ( λ (mindc≤x , x≤maxdc) →
+                    inr-disjunction
+                      ( inr-disjunction
+                        ( tr (_≤ x) (commutative-min _ _) mindc≤x ,
+                          tr (x ≤_) (commutative-max _ _) x≤maxdc))))
+                ( λ (minba≤x , x≤maxba) →
+                  inl-disjunction
+                    ( inl-disjunction
+                      ( tr (_≤ x) (commutative-min _ _) minba≤x ,
+                        tr (x ≤_) (commutative-max _ _) x≤maxba)))
+                ( cover-closed-interval-4-first-smallest-Total-Order X d b c a
+                  ( tr (_≤ b) min=d min≤b)
+                  ( tr (_≤ c) min=d min≤c)
+                  ( tr (_≤ a) min=d min≤a)
+                  ( x)
+                  ( tr
+                      ( _≤ x)
+                      ( interchange-law-min-Total-Order X a b c d ∙
+                        ap-binary min
+                          ( commutative-min _ _)
+                          ( commutative-min _ _) ∙
+                        commutative-min _ _)
+                      ( min≤x) ,
+                    tr
+                      ( x ≤_)
+                      ( interchange-law-max-Total-Order X a b c d ∙
+                        ap-binary max
+                          ( commutative-max _ _)
+                          ( commutative-max _ _) ∙
+                        commutative-max _ _)
+                      ( x≤max)))))
+          ( eq-one-of-four-min-Total-Order X a b c d)
 ```

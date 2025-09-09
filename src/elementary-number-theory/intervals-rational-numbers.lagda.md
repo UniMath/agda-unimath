@@ -17,6 +17,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -69,6 +70,11 @@ nonnegative-width-interval-ℚ ((a , b) , a≤b) = nonnegative-diff-leq-ℚ a b 
 
 width-interval-ℚ : interval-ℚ → ℚ
 width-interval-ℚ [a,b] = rational-ℚ⁰⁺ (nonnegative-width-interval-ℚ [a,b])
+
+is-injective-subtype-interval-ℚ :
+  is-injective subtype-interval-ℚ
+is-injective-subtype-interval-ℚ =
+  is-injective-subtype-closed-interval-Poset ℚ-Poset
 ```
 
 ### Important ranges

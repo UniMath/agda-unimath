@@ -13,8 +13,10 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-posets
@@ -379,6 +381,44 @@ module _
       ( order-theoretic-join-semilattice-Total-Order T)
 ```
 
+### Interchange on the binary minimum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-min-Total-Order :
+      (a b c d : type-Total-Order T) →
+      min-Total-Order T (min-Total-Order T a b) (min-Total-Order T c d) ＝
+      min-Total-Order T (min-Total-Order T a c) (min-Total-Order T b d)
+    interchange-law-min-Total-Order =
+      interchange-law-commutative-and-associative
+        ( min-Total-Order T)
+        ( commutative-min-Total-Order T)
+        ( associative-min-Total-Order T)
+```
+
+### Interchange on the binary maximum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-max-Total-Order :
+      (a b c d : type-Total-Order T) →
+      max-Total-Order T (max-Total-Order T a b) (max-Total-Order T c d) ＝
+      max-Total-Order T (max-Total-Order T a c) (max-Total-Order T b d)
+    interchange-law-max-Total-Order =
+      interchange-law-commutative-and-associative
+        ( max-Total-Order T)
+        ( commutative-max-Total-Order T)
+        ( associative-max-Total-Order T)
+```
+
 ### The binary minimum operation is idempotent
 
 ```agda
@@ -438,7 +478,7 @@ module _
             ( x≤y)})
 ```
 
-### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `x`
+### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `y`
 
 ```agda
 module _
@@ -518,6 +558,25 @@ module _
     min-leq-leq-Total-Order =
       meet-leq-leq-Order-Theoretic-Meet-Semilattice
         ( order-theoretic-meet-semilattice-Total-Order T)
+```
+
+### If `a ≤ b` and `a ≤ c`, then `a ≤ min b c`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-min-leq-both-Total-Order :
+      (a b c : type-Total-Order T) →
+      leq-Total-Order T a b → leq-Total-Order T a c →
+      leq-Total-Order T a (min-Total-Order T b c)
+    leq-min-leq-both-Total-Order a b c a≤b a≤c =
+      tr
+        ( λ d → leq-Total-Order T d (min-Total-Order T b c))
+        ( idempotent-min-Total-Order T a)
+        ( min-leq-leq-Total-Order T a b a c a≤b a≤c)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`

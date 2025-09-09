@@ -7,8 +7,8 @@ module foundation.images-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
 open import foundation.action-on-identifications-functions
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.full-subtypes

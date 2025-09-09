@@ -7,6 +7,7 @@ module elementary-number-theory.multiplication-intervals-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-intervals-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
@@ -47,6 +48,7 @@ open import group-theory.semigroups
 
 open import order-theory.closed-intervals-total-orders
 open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 ```
 
 </details>
@@ -458,33 +460,228 @@ abstract
         ( subtype-interval-ℚ [c,d]))
       ( q)
   image-mul-elements-intervals-ℚ
-    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q
-    (min-ac-ad-bc-bd≤q , q≤max-ac-ad-bc-bd) =
+    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) x x∈range =
+    let
+      motive =
+        minkowski-mul-Commutative-Monoid
+          ( commutative-monoid-mul-ℚ)
+          ( subtype-interval-ℚ [a,b])
+          ( subtype-interval-ℚ [c,d])
+          ( x)
+      open do-syntax-trunc-Prop motive
+      case-[ac,ad] x∈[ac,ad] =
+        do
+          ((q , c≤q , q≤d) , aq=x) ←
+            image-right-mul-element-interval-ℚ [c,d] a x x∈[ac,ad]
+          intro-exists
+            ( a , q)
+            ( (refl-leq-ℚ a , a≤b) , (c≤q , q≤d) , inv aq=x)
+      case-[ac,bc] x∈[ac,bc] =
+        do
+          ((p , a≤p , p≤b) , pc=x) ←
+            image-left-mul-element-interval-ℚ [a,b] c x x∈[ac,bc]
+          intro-exists
+            ( p , c)
+            ( (a≤p , p≤b) , (refl-leq-ℚ c , c≤d) , inv pc=x)
+      case-[bc,bd] x∈[bc,bd] =
+        do
+          ((q , c≤q , q≤d) , bq=x) ←
+            image-right-mul-element-interval-ℚ [c,d] b x x∈[bc,bd]
+          intro-exists
+            ( b , q)
+            ( (a≤b , refl-leq-ℚ b) , (c≤q , q≤d) , inv bq=x)
+      case-[ad,bd] x∈[ad,bd] =
+        do
+          ((p , a≤p , p≤b) , pd=x) ←
+            image-left-mul-element-interval-ℚ [a,b] d x x∈[ad,bd]
+          intro-exists
+            ( p , d)
+            ( (a≤p , p≤b) , (c≤d , refl-leq-ℚ d) , inv pd=x)
+    in
+      elim-disjunction motive
+        ( elim-disjunction motive case-[ac,ad] case-[ac,bc])
+        ( elim-disjunction motive case-[ad,bd] case-[bc,bd])
+        ( cover-closed-interval-4-Total-Order ℚ-Total-Order
+          ( a *ℚ c)
+          ( a *ℚ d)
+          ( b *ℚ c)
+          ( b *ℚ d)
+          ( x)
+          ( x∈range))
+```
+
+### Agreement with the Minkowski product
+
+```agda
+abstract
+  has-same-elements-minkowski-mul-interval-ℚ :
+    ([a,b] [c,d] : interval-ℚ) →
+    has-same-elements-subtype
+      ( minkowski-mul-Commutative-Monoid
+        ( commutative-monoid-mul-ℚ)
+        ( subtype-interval-ℚ [a,b])
+        ( subtype-interval-ℚ [c,d]))
+      ( subtype-interval-ℚ (mul-interval-ℚ [a,b] [c,d]))
+  pr1 (has-same-elements-minkowski-mul-interval-ℚ [a,b] [c,d] x) =
+    rec-trunc-Prop
+      ( subtype-interval-ℚ (mul-interval-ℚ [a,b] [c,d]) x)
+      ( λ ((p , q) , p∈[a,b] , q∈[c,d] , x=pq) →
+        inv-tr
+          ( is-in-interval-ℚ (mul-interval-ℚ [a,b] [c,d]))
+          ( x=pq)
+          ( mul-elements-intervals-ℚ [a,b] [c,d] p q p∈[a,b] q∈[c,d]))
+  pr2 (has-same-elements-minkowski-mul-interval-ℚ [a,b] [c,d] x) =
+    image-mul-elements-intervals-ℚ [a,b] [c,d] x
+
+  eq-minkowski-mul-interval-ℚ :
+    ([a,b] [c,d] : interval-ℚ) →
+    minkowski-mul-Commutative-Monoid
+      ( commutative-monoid-mul-ℚ)
+      ( subtype-interval-ℚ [a,b])
+      ( subtype-interval-ℚ [c,d]) ＝
+    subtype-interval-ℚ (mul-interval-ℚ [a,b] [c,d])
+  eq-minkowski-mul-interval-ℚ [a,b] [c,d] =
+    eq-has-same-elements-subtype _ _
+      ( has-same-elements-minkowski-mul-interval-ℚ [a,b] [c,d])
+```
+
+### Associativity of multiplication of intervals
+
+```agda
+module _
+  ([a,b] [c,d] [e,f] : interval-ℚ)
+  where
+
+  abstract
+    has-same-elements-associative-mul-interval-ℚ :
+      has-same-elements-subtype
+        ( subtype-interval-ℚ
+          ( mul-interval-ℚ (mul-interval-ℚ [a,b] [c,d]) [e,f]))
+        ( subtype-interval-ℚ
+          ( mul-interval-ℚ [a,b] (mul-interval-ℚ [c,d] [e,f])))
+    pr1 (has-same-elements-associative-mul-interval-ℚ x) x∈<[a,b][c,d]>[e,f] =
       let
-        motive =
-          minkowski-mul-Commutative-Monoid
-            ( commutative-monoid-mul-ℚ)
-            ( subtype-interval-ℚ [a,b])
-            ( subtype-interval-ℚ [c,d])
-            ( q)
-        from-[a,b] :
-          (x : ℚ) → is-in-interval-ℚ [a,b] x →
-          is-in-im-subtype (mul-ℚ x) (subtype-interval-ℚ [c,d]) q →
-          type-Prop motive
-        from-[a,b] x x∈[a,b] q∈p[c,d] =
-          let open do-syntax-trunc-Prop motive
-          in do
-            ((y , y∈[c,d]) , xy=q) ← q∈p[c,d]
-            intro-exists (x , y) (x∈[a,b] , y∈[c,d] , inv xy=q)
-        from-[c,d] :
-          (y : ℚ) → is-in-interval-ℚ [c,d] y →
-          is-in-im-subtype (mul-ℚ' y) (subtype-interval-ℚ [a,b]) q →
-          type-Prop motive
-        from-[c,d] y y∈[c,d] q∈[a,b]y =
-          let open do-syntax-trunc-Prop motive
-          in do
-            ((x , x∈[a,b]) , xy=q) ← q∈[a,b]y
-            intro-exists (x , y) (x∈[a,b] , y∈[c,d] , inv xy=q)
-      in
-        {!   !}
+        open
+          do-syntax-trunc-Prop
+            ( subtype-interval-ℚ
+              ( mul-interval-ℚ [a,b] (mul-interval-ℚ [c,d] [e,f]))
+              ( x))
+      in do
+        ((p , q) , p∈[a,b][c,d] , q∈[e,f] , x=pq) ←
+          image-mul-elements-intervals-ℚ
+            ( mul-interval-ℚ [a,b] [c,d])
+            ( [e,f])
+            ( x)
+            ( x∈<[a,b][c,d]>[e,f])
+        ((r , s) , r∈[a,b] , s∈[c,d] , p=rs) ←
+          image-mul-elements-intervals-ℚ [a,b] [c,d] p p∈[a,b][c,d]
+        inv-tr
+          ( is-in-interval-ℚ
+            ( mul-interval-ℚ [a,b] (mul-interval-ℚ [c,d] [e,f])))
+          ( x=pq ∙ ap-mul-ℚ p=rs refl ∙ associative-mul-ℚ _ _ _)
+          ( mul-elements-intervals-ℚ
+            ( [a,b])
+            ( mul-interval-ℚ [c,d] [e,f])
+            ( r)
+            ( s *ℚ q)
+            ( r∈[a,b])
+            ( mul-elements-intervals-ℚ [c,d] [e,f] s q s∈[c,d] q∈[e,f]))
+    pr2 (has-same-elements-associative-mul-interval-ℚ x) x∈[a,b]<[c,d][e,f]> =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( subtype-interval-ℚ
+              ( mul-interval-ℚ (mul-interval-ℚ [a,b] [c,d]) [e,f])
+              ( x))
+      in do
+        ((p , q) , p∈[a,b] , q∈[c,d][e,f] , x=pq) ←
+          image-mul-elements-intervals-ℚ
+            ( [a,b])
+            ( mul-interval-ℚ [c,d] [e,f])
+            ( x)
+            ( x∈[a,b]<[c,d][e,f]>)
+        ((r , s) , r∈[c,d] , s∈[e,f] , q=rs) ←
+          image-mul-elements-intervals-ℚ [c,d] [e,f] q q∈[c,d][e,f]
+        inv-tr
+          ( is-in-interval-ℚ
+            ( mul-interval-ℚ (mul-interval-ℚ [a,b] [c,d]) [e,f]))
+          ( x=pq ∙ ap-mul-ℚ refl q=rs ∙ inv (associative-mul-ℚ _ _ _))
+          ( mul-elements-intervals-ℚ
+            ( mul-interval-ℚ [a,b] [c,d])
+            ( [e,f])
+            ( p *ℚ r)
+            ( s)
+            ( mul-elements-intervals-ℚ [a,b] [c,d] p r p∈[a,b] r∈[c,d])
+            ( s∈[e,f]))
+
+    associative-mul-interval-ℚ :
+      mul-interval-ℚ (mul-interval-ℚ [a,b] [c,d]) [e,f] ＝
+      mul-interval-ℚ [a,b] (mul-interval-ℚ [c,d] [e,f])
+    associative-mul-interval-ℚ =
+      is-injective-subtype-interval-ℚ
+        ( eq-has-same-elements-subtype _ _
+          ( has-same-elements-associative-mul-interval-ℚ))
+```
+
+### Commutativity of multiplication of intervals
+
+```agda
+abstract
+  commutative-mul-interval-ℚ :
+    ([a,b] [c,d] : interval-ℚ) →
+    mul-interval-ℚ [a,b] [c,d] ＝ mul-interval-ℚ [c,d] [a,b]
+  commutative-mul-interval-ℚ ((a , b) , a≤b) ((c , d) , c≤d) =
+    eq-interval-ℚ _ _
+      ( interchange-law-min-Total-Order ℚ-Total-Order _ _ _ _ ∙
+        ap-min-ℚ
+          ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
+          ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _)))
+      ( interchange-law-max-Total-Order ℚ-Total-Order _ _ _ _ ∙
+        ap-max-ℚ
+          ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
+          ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _)))
+```
+
+### Unit laws of multiplication of intervals
+
+```agda
+abstract
+  left-unit-law-mul-interval-ℚ :
+    ([a,b] : interval-ℚ) → mul-interval-ℚ one-one-interval-ℚ [a,b] ＝ [a,b]
+  left-unit-law-mul-interval-ℚ ((a , b) , a≤b) =
+    eq-interval-ℚ _ _
+      ( idempotent-min-ℚ _ ∙
+        ap-min-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b) ∙
+        left-leq-right-min-ℚ _ _ a≤b)
+      ( idempotent-max-ℚ _ ∙
+        ap-max-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b) ∙
+        left-leq-right-max-ℚ _ _ a≤b)
+
+  right-unit-law-mul-interval-ℚ :
+    ([a,b] : interval-ℚ) → mul-interval-ℚ [a,b] one-one-interval-ℚ ＝ [a,b]
+  right-unit-law-mul-interval-ℚ [a,b] =
+    commutative-mul-interval-ℚ [a,b] one-one-interval-ℚ ∙
+    left-unit-law-mul-interval-ℚ [a,b]
+```
+
+### The commutative monoid of multiplication of rational intervals
+
+```agda
+semigroup-mul-interval-ℚ : Semigroup lzero
+semigroup-mul-interval-ℚ =
+  ( set-interval-ℚ ,
+    mul-interval-ℚ ,
+    associative-mul-interval-ℚ)
+
+monoid-mul-interval-ℚ : Monoid lzero
+monoid-mul-interval-ℚ =
+  ( semigroup-mul-interval-ℚ ,
+    one-one-interval-ℚ ,
+    left-unit-law-mul-interval-ℚ ,
+    right-unit-law-mul-interval-ℚ)
+
+commutative-monoid-mul-interval-ℚ : Commutative-Monoid lzero
+commutative-monoid-mul-interval-ℚ =
+  ( monoid-mul-interval-ℚ ,
+    commutative-mul-interval-ℚ)
 ```
