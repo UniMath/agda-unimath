@@ -104,6 +104,16 @@ module _
   isometry-metric-pseudocompletion-pseudometric-completion-Metric-Space =
     isometry-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
+
+  map-metric-pseudocompletion-pseudometric-completion-Metric-Space :
+    type-function-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( pseudometric-metric-pseudocompletion-Metric-Space M)
+  map-metric-pseudocompletion-pseudometric-completion-Metric-Space =
+    map-isometry-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( pseudometric-metric-pseudocompletion-Metric-Space M)
+      ( isometry-metric-pseudocompletion-pseudometric-completion-Metric-Space)
 ```
 
 ### The isometry from a metric space into its metric pseudocompletion
@@ -306,4 +316,47 @@ module _
     ( map-metric-pseudocompletion-Metric-Space M ,
       is-equiv-map-metric-pseudocompletion-is-complete-Metric-Space ,
       is-isometry-map-metric-pseudocompletion-Metric-Space M)
+```
+
+### If the mapping from a metric space into its metric pseudocompletion is an equivalence, the metric space is complete
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  is-complete-is-equiv-map-metric-pseudocompletion-Metric-Space :
+    is-equiv (map-metric-pseudocompletion-Metric-Space M) →
+    is-complete-Metric-Space M
+  is-complete-is-equiv-map-metric-pseudocompletion-Metric-Space H u =
+    (lim-u , is-limit-lim-u)
+    where
+
+    lim-u : type-Metric-Space M
+    lim-u =
+      map-inv-is-equiv
+        ( H)
+        ( map-metric-pseudocompletion-pseudometric-completion-Metric-Space
+          ( M)
+          ( u))
+
+    is-limit-lim-u :
+      is-limit-cauchy-approximation-Metric-Space
+        ( M)
+        ( u)
+        ( lim-u)
+    is-limit-lim-u =
+      is-limit-sim-const-cauchy-approximation-Metric-Space
+        ( M)
+        ( u)
+        ( lim-u)
+        ( apply-effectiveness-quotient-map
+          ( equivalence-relation-sim-Pseudometric-Space
+            ( pseudometric-completion-Metric-Space M))
+          ( inv
+            ( is-section-map-section-is-equiv
+              ( H)
+              ( map-metric-pseudocompletion-pseudometric-completion-Metric-Space
+                ( M)
+                ( u)))))
 ```
