@@ -24,8 +24,10 @@ open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.left-modules-commutative-rings public
 open import linear-algebra.left-modules-rings public
+open import linear-algebra.left-modules-with-ordered-bases-rings public
 open import linear-algebra.left-submodules-rings public
 open import linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings public
+open import linear-algebra.linear-independence-left-modules-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public

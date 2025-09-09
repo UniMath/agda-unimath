@@ -7,6 +7,7 @@ module linear-algebra.left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
 
 open import foundation.action-on-identifications-functions
@@ -25,6 +26,8 @@ open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-semigroups
+
+open import lists.tuples
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.opposite-rings
@@ -120,6 +123,11 @@ module _
         ( endomorphism-ring-Ab ab-left-module-Ring)
         ( mul-hom-left-module-Ring)
         ( x))
+
+  trivial-tuple-left-module-Ring : (n : ℕ) → tuple (type-Ring R) n
+  trivial-tuple-left-module-Ring zero-ℕ = empty-tuple
+  trivial-tuple-left-module-Ring (succ-ℕ n) =
+    zero-Ring R ∷ trivial-tuple-left-module-Ring n
 ```
 
 ## Properties
