@@ -1,7 +1,7 @@
 # Linear spans
 
 ```agda
-module linear-algebra.linear-spans where
+module linear-algebra.linear-spans-left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -38,10 +38,11 @@ open import ring-theory.rings
 ## Idea
 
 Let `M` be a [left module](linear-algebra.left-modules-rings.md) over a
-[ring](ring-theory.rings.md) `R` and `G` be a subset of `M`. A
+[ring](ring-theory.rings.md) `R` and `G` be a subset of `M`. The
 {{#concept "linear span" Agda=is-linear-span-subset-left-module-prop-Ring Agda=linear-span-left-module-Ring}}
-of `G` is a subset of `M` which contains all linear combinations of the elements
-of `G`.
+of `G` is the subset of `M` which contains all
+[linear combinations](linear-algebra.linear-combinations.md) of the elements of
+`G`.
 
 ## Definitions
 
