@@ -170,7 +170,7 @@ module _
 
 ## Properties
 
-### The function commutative ring is a left module over the commutative ring
+### The function commutative ring is a left module over the coefficient commutative ring
 
 ```agda
 module _
