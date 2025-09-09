@@ -143,7 +143,7 @@ module _
       ( isometry-metric-pseudocompletion-Metric-Space)
 ```
 
-### A complete metric space is isometrically equivalent to its metric pseudocompletion
+### The mapping from a complete metric space into its metric pseudocompletion is an isometric equivalence
 
 ```agda
 module _
@@ -289,12 +289,21 @@ module _
       ( M , is-complete-M)
       ( x))
 
-  is-equiv-map-metric-pseudocmpletion-is-complete-Metric-Space :
+  is-equiv-map-metric-pseudocompletion-is-complete-Metric-Space :
     is-equiv
       ( map-metric-pseudocompletion-Metric-Space M)
-  is-equiv-map-metric-pseudocmpletion-is-complete-Metric-Space =
+  is-equiv-map-metric-pseudocompletion-is-complete-Metric-Space =
     is-equiv-is-invertible
       ( map-lim-metric-pseudocompletion-is-complete-Metric-Space)
       ( is-section-map-metric-pseudocompletion-is-complete-Metric-Space)
       ( is-retraction-map-metric-pseudocompletion-is-complete-Metric-Space)
+
+  isometric-equiv-metric-pseudocompletion-is-complete-Metric-Space' :
+    isometric-equiv-Metric-Space'
+      ( M)
+      ( metric-pseudocompletion-Metric-Space M)
+  isometric-equiv-metric-pseudocompletion-is-complete-Metric-Space' =
+    ( map-metric-pseudocompletion-Metric-Space M ,
+      is-equiv-map-metric-pseudocompletion-is-complete-Metric-Space ,
+      is-isometry-map-metric-pseudocompletion-Metric-Space M)
 ```
