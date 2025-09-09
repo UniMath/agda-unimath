@@ -8,6 +8,7 @@ module foundation.decidable-subtypes where
 
 ```agda
 open import foundation.1-types
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
@@ -17,12 +18,14 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
+open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
+open import foundation.maybe
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.propositional-maps
@@ -30,7 +33,9 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.structured-type-duality
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -483,4 +488,51 @@ is-decidable-is-true true = inl refl
 is-true-decidable-subtype : decidable-subtype lzero bool
 is-true-decidable-subtype x =
   ( is-true x , is-prop-is-true x , is-decidable-is-true x)
+```
+
+### Given a decidable subtype `S ⊆ X`, there is an equivalence `X ≃ Σ X (λ x → is-decidable (x ∈ S))`
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (S : decidable-subtype l2 X)
+  where
+
+  equiv-Σ-decide-is-in-decidable-subtype :
+    X ≃ Σ X (is-decidable ∘ is-in-decidable-subtype S)
+  equiv-Σ-decide-is-in-decidable-subtype =
+    inv-equiv
+      ( equiv-inclusion-is-full-subtype
+        ( λ x → is-decidable-Prop (subtype-decidable-subtype S x))
+        ( is-decidable-decidable-subtype S))
+```
+
+### Given a decidable subtype `S ⊆ X`, there is a surjective map from `Maybe X` to `Maybe S`
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (S : decidable-subtype l2 X)
+  where
+
+  map-maybe-decidable-subtype :
+    Σ X (is-decidable ∘ is-in-decidable-subtype S) →
+    Maybe (type-decidable-subtype S)
+  map-maybe-decidable-subtype (x , inl x∈S) = unit-Maybe (x , x∈S)
+  map-maybe-decidable-subtype (x , inr x∉S) = exception-Maybe
+
+  abstract
+    is-surjective-extend-map-maybe-decidable-subtype :
+      is-surjective (extend-Maybe map-maybe-decidable-subtype)
+    is-surjective-extend-map-maybe-decidable-subtype (inr star) =
+      intro-exists exception-Maybe refl
+    is-surjective-extend-map-maybe-decidable-subtype (inl (x , x∈S)) =
+      intro-exists (unit-Maybe (x , inl x∈S)) refl
+
+  surjection-maybe-decidable-subtype :
+    Maybe X ↠ Maybe (type-decidable-subtype S)
+  surjection-maybe-decidable-subtype =
+    comp-surjection
+      ( extend-Maybe map-maybe-decidable-subtype ,
+        is-surjective-extend-map-maybe-decidable-subtype)
+      ( surjection-map-surjection-Maybe
+        ( surjection-equiv (equiv-Σ-decide-is-in-decidable-subtype S)))
 ```

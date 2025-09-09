@@ -224,3 +224,7 @@ module _
       eq-isometric-equiv-Metric-Space _ _
         ( isometric-equiv-metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
 ```
+
+## See also
+
+- [Metrics of metric spaces are uniformly continuous](metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous.md)
