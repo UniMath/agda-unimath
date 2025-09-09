@@ -11,6 +11,7 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-rings
@@ -51,6 +52,11 @@ module _
   inclusion-subset-left-module-Ring :
     type-subset-left-module-Ring → type-left-module-Ring R M
   inclusion-subset-left-module-Ring = pr1
+
+whole-subset-left-module-Ring :
+  {l1 l2 l3 : Level}
+  (R : Ring l1) (M : left-module-Ring l2 R) → subset-left-module-Ring l3 R M
+whole-subset-left-module-Ring R M _ = raise-unit-Prop _
 ```
 
 ### The condition that a subset is closed under addition
