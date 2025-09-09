@@ -805,4 +805,10 @@ module _
         right-distributive-mul-add-polynomial-Commutative-Semiring) ,
       left-zero-law-mul-polynomial-Commutative-Semiring ,
       right-zero-law-mul-polynomial-Commutative-Semiring)
+
+  commutative-semiring-polynomial-Commutative-Semiring : Commutative-Semiring l
+  commutative-semiring-polynomial-Commutative-Semiring =
+    ( semiring-polynomial-Commutative-Semiring ,
+      commutative-mul-Commutative-Monoid
+        ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring R))
 ```

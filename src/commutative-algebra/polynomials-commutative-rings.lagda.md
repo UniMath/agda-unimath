@@ -24,11 +24,14 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
 open import group-theory.subgroups-abelian-groups
 
 open import lists.sequences
 
 open import logic.functoriality-existential-quantification
+
+open import ring-theory.rings
 ```
 
 </details>
@@ -239,3 +242,30 @@ module _
 ```
 
 ### Multiplication
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  mul-polynomial-Commutative-Ring :
+    polynomial-Commutative-Ring R → polynomial-Commutative-Ring R →
+    polynomial-Commutative-Ring R
+  mul-polynomial-Commutative-Ring = mul-polynomial-Commutative-Semiring
+```
+
+### The commutative ring of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  ring-polynomial-Commutative-Ring : Ring l
+  ring-polynomial-Commutative-Ring =
+    ( ab-polynomial-Commutative-Ring R ,
+      pr1
+        ( pr2
+          ( semiring-polynomial-Commutative-Semiring
+            ( commutative-semiring-Commutative-Ring R))))
+```
