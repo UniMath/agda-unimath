@@ -9,6 +9,7 @@ module metric-spaces.totally-bounded-subspaces-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.images-subtypes
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
@@ -44,6 +45,15 @@ module _
 
   subset-totally-bounded-subspace-Metric-Space : subset-Metric-Space l3 X
   subset-totally-bounded-subspace-Metric-Space = pr1 S
+
+  type-totally-bounded-subspace-Metric-Space : UU (l1 ⊔ l3)
+  type-totally-bounded-subspace-Metric-Space =
+    type-subtype subset-totally-bounded-subspace-Metric-Space
+
+  inclusion-totally-bounded-subspace-Metric-Space :
+    type-totally-bounded-subspace-Metric-Space → type-Metric-Space X
+  inclusion-totally-bounded-subspace-Metric-Space =
+    inclusion-subtype subset-totally-bounded-subspace-Metric-Space
 
   subspace-totally-bounded-subspace-Metric-Space : Metric-Space (l1 ⊔ l3) l2
   subspace-totally-bounded-subspace-Metric-Space =

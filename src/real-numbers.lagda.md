@@ -23,6 +23,7 @@ open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
+open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
