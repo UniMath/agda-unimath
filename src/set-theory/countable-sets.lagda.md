@@ -28,6 +28,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
@@ -500,6 +501,21 @@ is-countable-Fin-Set zero-ℕ = is-countable-empty
 is-countable-Fin-Set (succ-ℕ n) =
   is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
+```
+
+### Decidable subsets of countable sets are countable
+
+```agda
+module _
+  {l1 l2 : Level} (X : Set l1) (S : decidable-subtype l2 (type-Set X))
+  where
+
+  abstract
+    is-countable-decidable-subset-is-countable :
+      is-countable X → is-countable (set-subset X (subtype-decidable-subtype S))
+    is-countable-decidable-subset-is-countable =
+      map-trunc-Prop
+        ( comp-surjection (surjection-maybe-decidable-subtype S))
 ```
 
 ### For any countable set `X` with decidable equality, there exists an embedding `X ↪ ℕ`

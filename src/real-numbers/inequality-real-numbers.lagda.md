@@ -25,6 +25,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -547,6 +548,83 @@ module _
           ( y)
           ( real-ℚ⁺ d)
           ( x≤y+d)))
+```
+
+### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
+
+```agda
+module _
+  {l : Level} (x : ℝ l) (q : ℚ)
+  where
+
+  opaque
+    unfolding leq-ℝ leq-ℝ' real-ℚ
+
+    not-in-lower-cut-leq-ℝ : leq-ℝ x (real-ℚ q) → ¬ (is-in-lower-cut-ℝ x q)
+    not-in-lower-cut-leq-ℝ x≤q q<x =
+      let open do-syntax-trunc-Prop empty-Prop
+      in do
+        (r , q<r , r<x) ← forward-implication (is-rounded-lower-cut-ℝ x q) q<x
+        is-disjoint-cut-ℝ x r (r<x , leq'-leq-ℝ x (real-ℚ q) x≤q r q<r)
+
+    leq-not-in-lower-cut-ℝ : ¬ (is-in-lower-cut-ℝ x q) → leq-ℝ x (real-ℚ q)
+    leq-not-in-lower-cut-ℝ q≮x r r<x =
+      trichotomy-le-ℚ q r
+        ( λ q<r →
+          ex-falso
+            ( q≮x
+              ( backward-implication
+                ( is-rounded-lower-cut-ℝ x q)
+                ( intro-exists r (q<r , r<x)))))
+        ( λ q=r → ex-falso (q≮x (inv-tr (is-in-lower-cut-ℝ x) q=r r<x)))
+        ( λ r<q → r<q)
+
+  leq-iff-not-in-lower-cut-ℝ : leq-ℝ x (real-ℚ q) ↔ ¬ (is-in-lower-cut-ℝ x q)
+  leq-iff-not-in-lower-cut-ℝ = (not-in-lower-cut-leq-ℝ , leq-not-in-lower-cut-ℝ)
+```
+
+### If `y ≤ q ⇒ x ≤ q` for every rational `q`, then `x ≤ y`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  opaque
+    unfolding leq-ℝ'
+
+    leq-leq-rational-ℝ :
+      ((q : ℚ) → leq-ℝ y (real-ℚ q) → leq-ℝ x (real-ℚ q)) → x ≤-ℝ y
+    leq-leq-rational-ℝ H =
+      leq-leq'-ℝ x y
+        ( λ q y<q →
+          let open do-syntax-trunc-Prop (upper-cut-ℝ x q)
+          in do
+            (p , p<q , p≮y) ←
+              subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q
+            subset-upper-cut-upper-complement-lower-cut-ℝ x q
+              ( intro-exists
+                ( p)
+                ( p<q ,
+                  not-in-lower-cut-leq-ℝ x p
+                    ( H p (leq-not-in-lower-cut-ℝ y p p≮y)))))
+```
+
+### If `x` and `y` are less than or equal to the same rational numbers, they are similar
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    sim-leq-same-rational-ℝ :
+      ((q : ℚ) → leq-ℝ x (real-ℚ q) ↔ leq-ℝ y (real-ℚ q)) →
+      sim-ℝ x y
+    sim-leq-same-rational-ℝ H =
+      sim-sim-leq-ℝ
+        ( leq-leq-rational-ℝ x y (λ q → backward-implication (H q)) ,
+          leq-leq-rational-ℝ y x (λ q → forward-implication (H q)))
 ```
 
 ## References
