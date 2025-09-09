@@ -22,7 +22,7 @@ open import lists.tuples
 
 ## Idea
 
-Two tuples can be concatenated to form a single tuple.
+Two [tuples](lists.tuples.md) can be {{#concept "concatenated" Disambiguation="pairs of tuples" Agda=concat-tuple}} to form a single tuple.
 
 ## Definition
 
