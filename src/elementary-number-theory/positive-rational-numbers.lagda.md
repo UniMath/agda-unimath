@@ -42,6 +42,7 @@ open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -72,6 +73,8 @@ open import order-theory.preorders
 open import order-theory.strict-preorders
 open import order-theory.strictly-preordered-sets
 open import order-theory.total-orders
+
+open import set-theory.countable-sets
 ```
 
 </details>
@@ -107,6 +110,10 @@ module _
   is-positive-prop-ℚ : Prop lzero
   pr1 is-positive-prop-ℚ = is-positive-ℚ
   pr2 is-positive-prop-ℚ = is-prop-is-positive-ℚ
+
+decidable-subtype-positive-ℚ : decidable-subtype lzero ℚ
+decidable-subtype-positive-ℚ x =
+  decidable-subtype-positive-fraction-ℤ (fraction-ℚ x)
 ```
 
 ### The type of positive rational numbers
@@ -161,6 +168,18 @@ set-ℚ⁺ = set-subset ℚ-Set is-positive-prop-ℚ
 
 is-set-ℚ⁺ : is-set ℚ⁺
 is-set-ℚ⁺ = is-set-type-Set set-ℚ⁺
+```
+
+### The set of positive rational numbers is countable
+
+```agda
+abstract
+  is-countable-set-ℚ⁺ : is-countable set-ℚ⁺
+  is-countable-set-ℚ⁺ =
+    is-countable-decidable-subset-is-countable
+      ( ℚ-Set)
+      ( decidable-subtype-positive-ℚ)
+      ( is-countable-ℚ)
 ```
 
 ### The rational image of a positive integer is positive
