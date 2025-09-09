@@ -590,41 +590,41 @@ module _
     ( Nq , Hq) =
     ( Nq +ℕ Np ,
       λ n Nq+Np≤n →
-        equational-reasoning
+      equational-reasoning
+        sum-finite-Commutative-Semiring R
+          ( finite-type-binary-sum-decomposition-ℕ n)
+          ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (p i) (q j))
+        ＝
           sum-finite-Commutative-Semiring R
             ( finite-type-binary-sum-decomposition-ℕ n)
-            ( λ (i , j , j+i=n) → mul-Commutative-Semiring R (p i) (q j))
-          ＝
-            sum-finite-Commutative-Semiring R
-              ( finite-type-binary-sum-decomposition-ℕ n)
-              ( λ _ → zero-Commutative-Semiring R)
-            by
-              htpy-sum-finite-Commutative-Semiring R _
-                ( λ (i , j , j+i=n) →
-                  rec-coproduct
-                    ( λ i<Np →
-                      rec-coproduct
-                        ( λ j<Nq →
-                          ex-falso
-                            ( anti-reflexive-le-ℕ
-                              ( n)
-                              ( tr
-                                ( λ m → le-ℕ m n)
-                                ( j+i=n)
-                                ( concatenate-le-leq-ℕ
-                                  ( preserves-le-add-ℕ j<Nq i<Np)
-                                  ( Nq+Np≤n)))))
-                        ( λ Nq≤j →
-                          ap-mul-Commutative-Semiring R refl (Hq j Nq≤j) ∙
-                          right-zero-law-mul-Commutative-Semiring R _)
-                        ( decide-le-leq-ℕ j Nq))
-                    ( λ Np≤i →
-                      ap-mul-Commutative-Semiring R (Hp i Np≤i) refl ∙
-                      left-zero-law-mul-Commutative-Semiring R _)
-                    ( decide-le-leq-ℕ i Np))
-          ＝
-            zero-Commutative-Semiring R
-            by sum-zero-finite-Commutative-Semiring R _)
+            ( λ _ → zero-Commutative-Semiring R)
+          by
+            htpy-sum-finite-Commutative-Semiring R _
+              ( λ (i , j , j+i=n) →
+                rec-coproduct
+                  ( λ i<Np →
+                    rec-coproduct
+                      ( λ j<Nq →
+                        ex-falso
+                          ( anti-reflexive-le-ℕ
+                            ( n)
+                            ( tr
+                              ( λ m → le-ℕ m n)
+                              ( j+i=n)
+                              ( concatenate-le-leq-ℕ
+                                ( preserves-le-add-ℕ j<Nq i<Np)
+                                ( Nq+Np≤n)))))
+                      ( λ Nq≤j →
+                        ap-mul-Commutative-Semiring R refl (Hq j Nq≤j) ∙
+                        right-zero-law-mul-Commutative-Semiring R _)
+                      ( decide-le-leq-ℕ j Nq))
+                  ( λ Np≤i →
+                    ap-mul-Commutative-Semiring R (Hp i Np≤i) refl ∙
+                    left-zero-law-mul-Commutative-Semiring R _)
+                  ( decide-le-leq-ℕ i Np))
+        ＝
+          zero-Commutative-Semiring R
+          by sum-zero-finite-Commutative-Semiring R _)
 
   abstract
     is-polynomial-mul-polynomial-Commutative-Semiring :
