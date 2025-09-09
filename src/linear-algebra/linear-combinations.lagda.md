@@ -206,7 +206,7 @@ concatenation-is-addition-linear-combination-left-module-Ring
               ( vectors-b)))
           ( mul-left-module-Ring R M r x)
         by ap
-          (λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
+          ( λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
           ( concatenation-is-addition-linear-combination-left-module-Ring R M
             ( scalars-a)
             ( vectors-a)
