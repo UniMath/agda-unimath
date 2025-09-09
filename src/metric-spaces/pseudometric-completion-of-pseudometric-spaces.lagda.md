@@ -1,6 +1,8 @@
 # The pseudometric completion of a pseudometric space
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.pseudometric-completion-of-pseudometric-spaces where
 ```
 
