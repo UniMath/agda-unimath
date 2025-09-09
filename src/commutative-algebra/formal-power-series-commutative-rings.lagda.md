@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.convolution-sequences-commutative-rings
 open import commutative-algebra.formal-power-series-commutative-semirings
 open import commutative-algebra.function-commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 
 open import elementary-number-theory.natural-numbers
@@ -126,6 +127,47 @@ module _
     formal-power-series-Commutative-Ring R
   id-formal-power-series-Commutative-Ring =
     id-formal-power-series-Commutative-Semiring _
+```
+
+### Constant power series
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-formal-power-series-Commutative-Ring :
+    type-Commutative-Ring R → formal-power-series-Commutative-Ring R
+  constant-formal-power-series-Commutative-Ring =
+    constant-formal-power-series-Commutative-Semiring _
+```
+
+### The zero power series is the constant zero power series
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-zero-formal-power-series-Commutative-Ring :
+    constant-formal-power-series-Commutative-Ring R (zero-Commutative-Ring R) ＝
+    zero-formal-power-series-Commutative-Ring R
+  constant-zero-formal-power-series-Commutative-Ring =
+    constant-zero-formal-power-series-Commutative-Semiring _
+```
+
+### The one power series is the constant one power series
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-one-formal-power-series-Commutative-Ring :
+    constant-formal-power-series-Commutative-Ring R (one-Commutative-Ring R) ＝
+    one-formal-power-series-Commutative-Ring R
+  constant-one-formal-power-series-Commutative-Ring =
+    constant-one-formal-power-series-Commutative-Semiring _
 ```
 
 ### Addition
@@ -424,4 +466,22 @@ module _
   commutative-ring-formal-power-series-Commutative-Ring =
     ( ring-formal-power-series-Commutative-Ring ,
       commutative-mul-formal-power-series-Commutative-Ring R)
+```
+
+### The constant power series operation is a commutative ring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  hom-constant-formal-power-series-Commutative-Ring :
+    hom-Commutative-Ring
+      ( R)
+      ( commutative-ring-formal-power-series-Commutative-Ring R)
+  hom-constant-formal-power-series-Commutative-Ring =
+    ( ( constant-formal-power-series-Commutative-Ring R ,
+        preserves-add-constant-formal-power-series-Commutative-Semiring _) ,
+      preserves-mul-constant-formal-power-series-Commutative-Semiring _ ,
+      constant-one-formal-power-series-Commutative-Ring R)
 ```
