@@ -55,9 +55,8 @@ module _
 
   preserves-point-classifying-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) →
-    Id
-      ( classifying-map-hom-Concrete-Group f (shape-Concrete-Group G))
-      ( shape-Concrete-Group H)
+    classifying-map-hom-Concrete-Group f (shape-Concrete-Group G) ＝
+    shape-Concrete-Group H
   preserves-point-classifying-map-hom-Concrete-Group =
     preserves-point-classifying-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -72,9 +71,7 @@ module _
 
   preserves-unit-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) →
-    Id
-      ( map-hom-Concrete-Group f (unit-Concrete-Group G))
-      ( unit-Concrete-Group H)
+    map-hom-Concrete-Group f (unit-Concrete-Group G) ＝ unit-Concrete-Group H
   preserves-unit-map-hom-Concrete-Group =
     preserves-unit-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -82,11 +79,10 @@ module _
 
   preserves-mul-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) {x y : type-Concrete-Group G} →
-    Id
-      ( map-hom-Concrete-Group f (mul-Concrete-Group G x y))
-      ( mul-Concrete-Group H
-        ( map-hom-Concrete-Group f x)
-        ( map-hom-Concrete-Group f y))
+    ( map-hom-Concrete-Group f (mul-Concrete-Group G x y)) ＝
+    ( mul-Concrete-Group H
+      ( map-hom-Concrete-Group f x)
+      ( map-hom-Concrete-Group f y))
   preserves-mul-map-hom-Concrete-Group =
     preserves-mul-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -94,9 +90,8 @@ module _
 
   preserves-inv-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) (x : type-Concrete-Group G) →
-    Id
-      ( map-hom-Concrete-Group f (inv-Concrete-Group G x))
-      ( inv-Concrete-Group H (map-hom-Concrete-Group f x))
+    map-hom-Concrete-Group f (inv-Concrete-Group G x) ＝
+    inv-Concrete-Group H (map-hom-Concrete-Group f x)
   preserves-inv-map-hom-Concrete-Group =
     preserves-inv-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -128,7 +123,7 @@ module _
       ( f)
 
   extensionality-hom-Concrete-Group :
-    (g : hom-Concrete-Group G H) → Id f g ≃ htpy-hom-Concrete-Group g
+    (g : hom-Concrete-Group G H) → (f ＝ g) ≃ htpy-hom-Concrete-Group g
   extensionality-hom-Concrete-Group =
     extensionality-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -136,7 +131,7 @@ module _
       ( f)
 
   eq-htpy-hom-Concrete-Group :
-    (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → Id f g
+    (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → f ＝ g
   eq-htpy-hom-Concrete-Group g =
     map-inv-equiv (extensionality-hom-Concrete-Group g)
 ```

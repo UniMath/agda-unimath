@@ -51,9 +51,7 @@ cross-mul-diff-fraction-ℤ x y =
 abstract
   skew-commutative-cross-mul-diff-fraction-ℤ :
     (x y : fraction-ℤ) →
-    Id
-      ( neg-ℤ (cross-mul-diff-fraction-ℤ x y))
-      ( cross-mul-diff-fraction-ℤ y x)
+    neg-ℤ (cross-mul-diff-fraction-ℤ x y) ＝ cross-mul-diff-fraction-ℤ y x
   skew-commutative-cross-mul-diff-fraction-ℤ x y =
     distributive-neg-diff-ℤ
       ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
@@ -84,9 +82,8 @@ module _
 
   abstract
     cross-mul-diff-one-fraction-ℤ :
-      Id
-        ( cross-mul-diff-fraction-ℤ one-fraction-ℤ x)
-        ( (numerator-fraction-ℤ x) -ℤ (denominator-fraction-ℤ x))
+      cross-mul-diff-fraction-ℤ one-fraction-ℤ x ＝
+      (numerator-fraction-ℤ x) -ℤ (denominator-fraction-ℤ x)
     cross-mul-diff-one-fraction-ℤ =
       ap-diff-ℤ
         ( right-unit-law-mul-ℤ (numerator-fraction-ℤ x))
@@ -126,11 +123,10 @@ differences satisfy a transitive-additive property:
 abstract
   lemma-add-cross-mul-diff-fraction-ℤ :
     (p q r : fraction-ℤ) →
-    Id
-      ( add-ℤ
-        ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
-        ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q))
-      ( denominator-fraction-ℤ q *ℤ cross-mul-diff-fraction-ℤ p r)
+    ( add-ℤ
+      ( denominator-fraction-ℤ p *ℤ cross-mul-diff-fraction-ℤ q r)
+      ( denominator-fraction-ℤ r *ℤ cross-mul-diff-fraction-ℤ p q)) ＝
+    ( denominator-fraction-ℤ q *ℤ cross-mul-diff-fraction-ℤ p r)
   lemma-add-cross-mul-diff-fraction-ℤ
     (np , dp , hp)
     (nq , dq , hq)
@@ -191,9 +187,8 @@ abstract
   lemma-left-sim-cross-mul-diff-fraction-ℤ :
     (a a' b : fraction-ℤ) →
     sim-fraction-ℤ a a' →
-    Id
-      ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b)
-      ( denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b)
+    denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b ＝
+    denominator-fraction-ℤ a' *ℤ cross-mul-diff-fraction-ℤ a b
   lemma-left-sim-cross-mul-diff-fraction-ℤ a a' b H =
     equational-reasoning
     ( denominator-fraction-ℤ a *ℤ cross-mul-diff-fraction-ℤ a' b)
@@ -223,9 +218,8 @@ abstract
   lemma-right-sim-cross-mul-diff-fraction-ℤ :
     (a b b' : fraction-ℤ) →
     sim-fraction-ℤ b b' →
-    Id
-      ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b')
-      ( denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b)
+    denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b' ＝
+    denominator-fraction-ℤ b' *ℤ cross-mul-diff-fraction-ℤ a b
   lemma-right-sim-cross-mul-diff-fraction-ℤ a b b' H =
     equational-reasoning
     ( denominator-fraction-ℤ b *ℤ cross-mul-diff-fraction-ℤ a b')

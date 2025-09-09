@@ -79,12 +79,12 @@ abstract
 
 equiv-left-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (y : Y) →
-  (Σ (X × Y) (λ t → Id (pr2 t) y)) ≃ X
+  (Σ (X × Y) (λ t → pr2 t ＝ y)) ≃ X
 equiv-left-factor {l1} {l2} {X} {Y} y =
   ( ( right-unit-law-product) ∘e
     ( equiv-tot
       ( λ x → equiv-is-contr (is-torsorial-Id' y) is-contr-unit))) ∘e
-  ( associative-Σ X (λ x → Y) (λ t → Id (pr2 t) y))
+  ( associative-Σ X (λ x → Y) (λ t → pr2 t ＝ y))
 
 count-left-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → Y → count X
@@ -111,10 +111,9 @@ abstract
   product-number-of-elements-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
     (a : A) (b : B) →
-    Id
-      ( ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
-        ( number-of-elements-count (count-right-factor count-AB a)))
-      ( number-of-elements-count count-AB)
+    ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
+    ( number-of-elements-count (count-right-factor count-AB a)) ＝
+    ( number-of-elements-count count-AB)
   product-number-of-elements-product count-AB a b =
     ( inv
       ( number-of-elements-count-product

@@ -216,8 +216,8 @@ abstract
   distributive-neg-add-fraction-ℤ :
     (x y : fraction-ℤ) →
     sim-fraction-ℤ
-      (neg-fraction-ℤ (x +fraction-ℤ y))
-      (neg-fraction-ℤ x +fraction-ℤ neg-fraction-ℤ y)
+      ( neg-fraction-ℤ (x +fraction-ℤ y))
+      ( neg-fraction-ℤ x +fraction-ℤ neg-fraction-ℤ y)
   distributive-neg-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
     ap
       ( _*ℤ (dx *ℤ dy))

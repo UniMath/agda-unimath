@@ -497,7 +497,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( Prop-Set _)
                 ( λ ω → trunc-Prop (dependent-identification B ω y y'))
 
-            P : type-trunc-Set (Id a a) → Prop _
+            P : type-trunc-Set (a ＝ a) → Prop _
             P = pr1 (center ℙ)
 
             compute-P :
@@ -521,7 +521,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                         ( unit-trunc-Set y'))))
 
             f : type-hom-Prop
-                ( trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P)))
+                ( trunc-Prop (Σ (type-trunc-Set (a ＝ a)) (type-Prop ∘ P)))
                 ( mere-eq-Prop {A = Σ A B} (a , y) (a , y'))
             f t =
               apply-universal-property-trunc-Prop t
@@ -542,7 +542,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     ( v)
             e :
               mere-eq {A = Σ A B} (a , y) (a , y') ≃
-              type-trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P))
+              type-trunc-Prop (Σ (type-trunc-Set (a ＝ a)) (type-Prop ∘ P))
             e =
               equiv-iff
                 ( mere-eq-Prop (a , y) (a , y'))

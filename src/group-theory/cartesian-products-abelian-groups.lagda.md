@@ -71,32 +71,31 @@ module _
 
   associative-add-product-Ab :
     (x y z : type-product-Ab) →
-    Id
-      ( add-product-Ab (add-product-Ab x y) z)
-      ( add-product-Ab x (add-product-Ab y z))
+    add-product-Ab (add-product-Ab x y) z ＝
+    add-product-Ab x (add-product-Ab y z)
   associative-add-product-Ab = associative-mul-Group group-product-Ab
 
   left-unit-law-add-product-Ab :
-    (x : type-product-Ab) → Id (add-product-Ab zero-product-Ab x) x
+    (x : type-product-Ab) → add-product-Ab zero-product-Ab x ＝ x
   left-unit-law-add-product-Ab = left-unit-law-mul-Group group-product-Ab
 
   right-unit-law-add-product-Ab :
-    (x : type-product-Ab) → Id (add-product-Ab x zero-product-Ab) x
+    (x : type-product-Ab) → add-product-Ab x zero-product-Ab ＝ x
   right-unit-law-add-product-Ab = right-unit-law-mul-Group group-product-Ab
 
   left-inverse-law-add-product-Ab :
     (x : type-product-Ab) →
-    Id (add-product-Ab (neg-product-Ab x) x) zero-product-Ab
+    add-product-Ab (neg-product-Ab x) x ＝ zero-product-Ab
   left-inverse-law-add-product-Ab = left-inverse-law-mul-Group group-product-Ab
 
   right-inverse-law-add-product-Ab :
     (x : type-product-Ab) →
-    Id (add-product-Ab x (neg-product-Ab x)) zero-product-Ab
+    add-product-Ab x (neg-product-Ab x) ＝ zero-product-Ab
   right-inverse-law-add-product-Ab =
     right-inverse-law-mul-Group group-product-Ab
 
   commutative-add-product-Ab :
-    (x y : type-product-Ab) → Id (add-product-Ab x y) (add-product-Ab y x)
+    (x y : type-product-Ab) → add-product-Ab x y ＝ add-product-Ab y x
   commutative-add-product-Ab (pair x1 y1) (pair x2 y2) =
     eq-pair (commutative-add-Ab A x1 x2) (commutative-add-Ab B y1 y2)
 

@@ -58,9 +58,8 @@ module _
 
   associative-mul-product-Commutative-Monoid :
     (x y z : type-product-Commutative-Monoid) →
-    Id
-      ( mul-product-Commutative-Monoid (mul-product-Commutative-Monoid x y) z)
-      ( mul-product-Commutative-Monoid x (mul-product-Commutative-Monoid y z))
+    ( mul-product-Commutative-Monoid (mul-product-Commutative-Monoid x y) z) ＝
+    ( mul-product-Commutative-Monoid x (mul-product-Commutative-Monoid y z))
   associative-mul-product-Commutative-Monoid =
     associative-mul-Monoid monoid-product-Commutative-Monoid
 
@@ -70,21 +69,20 @@ module _
 
   left-unit-law-mul-product-Commutative-Monoid :
     (x : type-product-Commutative-Monoid) →
-    Id (mul-product-Commutative-Monoid unit-product-Commutative-Monoid x) x
+    mul-product-Commutative-Monoid unit-product-Commutative-Monoid x ＝ x
   left-unit-law-mul-product-Commutative-Monoid =
     left-unit-law-mul-Monoid monoid-product-Commutative-Monoid
 
   right-unit-law-mul-product-Commutative-Monoid :
     (x : type-product-Commutative-Monoid) →
-    Id (mul-product-Commutative-Monoid x unit-product-Commutative-Monoid) x
+    mul-product-Commutative-Monoid x unit-product-Commutative-Monoid ＝ x
   right-unit-law-mul-product-Commutative-Monoid =
     right-unit-law-mul-Monoid monoid-product-Commutative-Monoid
 
   commutative-mul-product-Commutative-Monoid :
     (x y : type-product-Commutative-Monoid) →
-    Id
-      ( mul-product-Commutative-Monoid x y)
-      ( mul-product-Commutative-Monoid y x)
+    mul-product-Commutative-Monoid x y ＝
+    mul-product-Commutative-Monoid y x
   commutative-mul-product-Commutative-Monoid _ _ =
     eq-pair
       ( commutative-mul-Commutative-Monoid M _ _)

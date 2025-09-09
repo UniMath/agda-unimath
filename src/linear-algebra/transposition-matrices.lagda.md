@@ -44,7 +44,7 @@ transpose-matrix {n = succ-ℕ n} x =
 ```agda
 is-involution-transpose-matrix :
   {l : Level} → {A : UU l} → {m n : ℕ} →
-  (x : matrix A m n) → Id x (transpose-matrix (transpose-matrix x))
+  (x : matrix A m n) → x ＝ transpose-matrix (transpose-matrix x)
 is-involution-transpose-matrix {m = zero-ℕ} empty-tuple = refl
 is-involution-transpose-matrix {m = succ-ℕ m} (r ∷ rs) =
   ( ap (_∷_ r) (is-involution-transpose-matrix rs)) ∙
@@ -54,7 +54,7 @@ is-involution-transpose-matrix {m = succ-ℕ m} (r ∷ rs) =
   lemma-first-row :
     {l : Level} → {A : UU l} → {m n : ℕ} → (x : tuple A n) →
     (xs : matrix A m n) →
-    Id x (map-tuple head-tuple (transpose-matrix (x ∷ xs)))
+    x ＝ map-tuple head-tuple (transpose-matrix (x ∷ xs))
   lemma-first-row {n = zero-ℕ} empty-tuple _ = refl
   lemma-first-row {n = succ-ℕ m} (k ∷ ks) xs =
     ap (_∷_ k) (lemma-first-row ks (map-tuple tail-tuple xs))
@@ -62,7 +62,7 @@ is-involution-transpose-matrix {m = succ-ℕ m} (r ∷ rs) =
   lemma-rest :
     {l : Level} → {A : UU l} → {m n : ℕ} → (x : tuple A n) →
     (xs : matrix A m n) →
-    Id (transpose-matrix xs) (map-tuple tail-tuple (transpose-matrix (x ∷ xs)))
+    transpose-matrix xs ＝ map-tuple tail-tuple (transpose-matrix (x ∷ xs))
   lemma-rest {n = zero-ℕ} empty-tuple xs = refl
   lemma-rest {n = succ-ℕ n} (k ∷ ks) xs =
     ap
