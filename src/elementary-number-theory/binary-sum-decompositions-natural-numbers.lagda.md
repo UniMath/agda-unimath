@@ -317,3 +317,15 @@ module _
       ( is-section-map-inv-equiv-permute-components-triple-with-sum-pr2)
       ( is-retraction-map-inv-equiv-permute-components-triple-with-sum-pr2)
 ```
+
+### The binary sum decomposition of 0 is contractible
+
+```agda
+is-contr-binary-sum-decomposition-zero-ℕ :
+  is-contr (binary-sum-decomposition-ℕ zero-ℕ)
+is-contr-binary-sum-decomposition-zero-ℕ =
+  ( (zero-ℕ , zero-ℕ , refl) ,
+    λ (i , j , j+i=0) →
+      eq-Eq-binary-sum-decomposition-ℕ zero-ℕ _ _
+        ( inv (is-zero-right-is-zero-add-ℕ j i j+i=0)))
+```

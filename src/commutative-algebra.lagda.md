@@ -18,6 +18,7 @@ open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
 open import commutative-algebra.eisenstein-integers public
 open import commutative-algebra.euclidean-domains public
+open import commutative-algebra.formal-power-series-commutative-rings public
 open import commutative-algebra.formal-power-series-commutative-semirings public
 open import commutative-algebra.full-ideals-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
