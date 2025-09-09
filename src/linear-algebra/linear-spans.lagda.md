@@ -126,8 +126,7 @@ linear-span-left-module-Ring :
   (M : left-module-Ring l2 R) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
 linear-span-left-module-Ring l R M =
-  Σ
-    ( (subset-left-module-Ring l R M) × (subset-left-module-Ring l R M))
+  Σ ( (subset-left-module-Ring l R M) × (subset-left-module-Ring l R M))
     ( λ (S , G) → is-linear-span-subset-left-module-Ring R M S G)
 
 module _
