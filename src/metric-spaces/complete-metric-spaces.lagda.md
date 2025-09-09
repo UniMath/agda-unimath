@@ -187,31 +187,32 @@ module _
   {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
   where
 
-  is-retraction-limit-cauchy-approximation-Complete-Metric-Space :
-    ( limit-cauchy-approximation-Complete-Metric-Space A ∘
-      const-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)) ~
-    ( id)
-  is-retraction-limit-cauchy-approximation-Complete-Metric-Space x =
-    all-eq-is-limit-cauchy-approximation-Metric-Space
-      ( metric-space-Complete-Metric-Space A)
-      ( const-cauchy-approximation-Metric-Space
+  abstract
+    is-retraction-limit-cauchy-approximation-Complete-Metric-Space :
+      ( limit-cauchy-approximation-Complete-Metric-Space A ∘
+        const-cauchy-approximation-Metric-Space
+          ( metric-space-Complete-Metric-Space A)) ~
+      ( id)
+    is-retraction-limit-cauchy-approximation-Complete-Metric-Space x =
+      all-eq-is-limit-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
-        ( x))
-      ( limit-cauchy-approximation-Complete-Metric-Space
-        ( A)
         ( const-cauchy-approximation-Metric-Space
           ( metric-space-Complete-Metric-Space A)
-          ( x)))
-      ( x)
-      ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
-        ( A)
-        ( const-cauchy-approximation-Metric-Space
+          ( x))
+        ( limit-cauchy-approximation-Complete-Metric-Space
+          ( A)
+          ( const-cauchy-approximation-Metric-Space
+            ( metric-space-Complete-Metric-Space A)
+            ( x)))
+        ( x)
+        ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
+          ( A)
+          ( const-cauchy-approximation-Metric-Space
+            ( metric-space-Complete-Metric-Space A)
+            ( x)))
+        ( is-limit-const-cauchy-approximation-Metric-Space
           ( metric-space-Complete-Metric-Space A)
-          ( x)))
-      ( is-limit-const-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
-        ( x))
+          ( x))
 
   retract-limit-cauchy-approximation-Complete-Metric-Space :
     retract

@@ -174,11 +174,12 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-retraction-convergent-cauchy-approximation-Metric-Space :
-    ( limit-convergent-cauchy-approximation-Metric-Space A ∘
-      convergent-const-cauchy-approximation-Metric-Space A) ~
-    ( id)
-  is-retraction-convergent-cauchy-approximation-Metric-Space x = refl
+  abstract
+    is-retraction-convergent-cauchy-approximation-Metric-Space :
+      ( limit-convergent-cauchy-approximation-Metric-Space A ∘
+        convergent-const-cauchy-approximation-Metric-Space A) ~
+      ( id)
+    is-retraction-convergent-cauchy-approximation-Metric-Space x = refl
 
   retract-convergent-cauchy-approximation-Metric-Space :
     retract

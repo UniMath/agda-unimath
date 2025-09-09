@@ -350,30 +350,40 @@ module _
   (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
   where
 
-  reflects-sim-map-short-function-metric-space-Pseudometric-Space :
-    {x y : type-Pseudometric-Space A} →
-    sim-Pseudometric-Space A x y →
-    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f x ＝
-    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f y
-  reflects-sim-map-short-function-metric-space-Pseudometric-Space {x} {y} x~y =
-    eq-sim-Metric-Space B
-      ( map-short-function-Pseudometric-Space
+  abstract
+    reflects-sim-map-short-function-metric-space-Pseudometric-Space :
+      {x y : type-Pseudometric-Space A} →
+      sim-Pseudometric-Space A x y →
+      map-short-function-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)
-        ( x))
-      ( map-short-function-Pseudometric-Space
+        ( x) ＝
+      map-short-function-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)
-        ( y))
-      ( preserves-sim-map-short-function-Pseudometric-Space
-        ( A)
-        ( pseudometric-Metric-Space B)
-        ( f)
-        ( x)
         ( y)
-        ( x~y))
+    reflects-sim-map-short-function-metric-space-Pseudometric-Space
+      {x} {y} x~y =
+      eq-sim-Metric-Space B
+        ( map-short-function-Pseudometric-Space
+          ( A)
+          ( pseudometric-Metric-Space B)
+          ( f)
+          ( x))
+        ( map-short-function-Pseudometric-Space
+          ( A)
+          ( pseudometric-Metric-Space B)
+          ( f)
+          ( y))
+        ( preserves-sim-map-short-function-Pseudometric-Space
+          ( A)
+          ( pseudometric-Metric-Space B)
+          ( f)
+          ( x)
+          ( y)
+          ( x~y))
 
   reflecting-map-short-function-metric-space-Pseudometric-Space :
     reflecting-map-equivalence-relation
