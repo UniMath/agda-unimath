@@ -7,6 +7,7 @@ module linear-algebra where
 
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
+open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.finite-sequences-in-abelian-groups public
@@ -21,6 +22,7 @@ open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
+open import linear-algebra.left-modules-commutative-rings public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
