@@ -68,8 +68,7 @@ module _
             Π-Prop
               ( tuple (type-subset-left-module-Ring R M G) n)
               ( λ vectors →
-                S
-                  ( linear-combination-left-module-Ring R M
+                S ( linear-combination-left-module-Ring R M
                     ( scalars)
                     ( map-tuple pr1 vectors)))))
 
