@@ -91,13 +91,13 @@ module _
     modulus-of-uniform-continuity-metric-of-Metric-Space =
       modulus-le-double-le-ℚ⁺
 
-    is-modulus-of-uniform-continuity-metric-of-Metric-Space :
+    is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space :
       is-modulus-of-uniform-continuity-function-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
         ( ind-Σ ρ)
         ( modulus-of-uniform-continuity-metric-of-Metric-Space)
-    is-modulus-of-uniform-continuity-metric-of-Metric-Space
+    is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space
       (x , y) ε (x' , y') (Nε'xx' , Nε'yy') =
       let
         ε' = modulus-le-double-le-ℚ⁺ ε
@@ -140,7 +140,7 @@ module _
     is-uniformly-continuous-metric-of-Metric-Space =
       intro-exists
         ( modulus-of-uniform-continuity-metric-of-Metric-Space)
-        ( is-modulus-of-uniform-continuity-metric-of-Metric-Space)
+        ( is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space)
 
   uniformly-continuous-metric-of-Metric-Space :
     uniformly-continuous-function-Metric-Space
