@@ -116,7 +116,7 @@ module _
     type-Prop is-linear-span-subset-left-module-prop-Ring
 ```
 
-### Linear spans
+### The type of linear spans
 
 ```agda
 linear-span-left-module-Ring :
