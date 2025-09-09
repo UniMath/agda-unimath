@@ -17,6 +17,9 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 
+open import linear-algebra.dependent-products-left-modules-commutative-rings
+open import linear-algebra.left-modules-commutative-rings
+
 open import ring-theory.rings
 ```
 
@@ -24,8 +27,10 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a commutative ring `A` and a type `X`, the type `A^X` of functions from
-`X` into the underlying type of `A` is again a commutative ring.
+Given a [commutative ring](commutative-algebra.commutative-rings.md) `A` and a
+type `X`, the type `A^X` of functions from `X` into the underlying type of `A`
+is a commutative ring, and a
+[left module](linear-algebra.left-modules-rings.md).
 
 ## Definition
 
@@ -161,4 +166,20 @@ module _
     mul-function-Commutative-Ring f g ＝ mul-function-Commutative-Ring g f
   commutative-mul-function-Commutative-Ring =
     commutative-mul-Commutative-Ring function-Commutative-Ring
+```
+
+## Properties
+
+### The function commutative ring is a left module over the commutative ring
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Ring l1) (X : UU l2)
+  where
+
+  left-module-function-Commutative-Ring :
+    left-module-Commutative-Ring (l1 ⊔ l2) R
+  left-module-function-Commutative-Ring =
+    Π-left-module-Commutative-Ring R X
+      ( λ _ → left-module-commutative-ring-Commutative-Ring R)
 ```
