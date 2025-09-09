@@ -142,7 +142,7 @@ module _
     constant-formal-power-series-Commutative-Semiring _
 ```
 
-### The zero power series is the constant zero power series
+### The constant zero formal power series is the constant formal power series with value zero
 
 ```agda
 module _
@@ -156,7 +156,7 @@ module _
     constant-zero-formal-power-series-Commutative-Semiring _
 ```
 
-### The one power series is the constant one power series
+### The constant one formal power series is the constant formal power series with value one
 
 ```agda
 module _

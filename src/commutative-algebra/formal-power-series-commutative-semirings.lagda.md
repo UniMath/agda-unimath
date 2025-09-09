@@ -186,7 +186,7 @@ module _
           (succ-ℕ _) → zero-Commutative-Semiring R)
 ```
 
-### The zero formal power series is the constant zero formal power series
+### The constant zero formal power series is the constant formal power series with value zero
 
 ```agda
 module _
@@ -207,7 +207,7 @@ module _
             (succ-ℕ _) → refl))
 ```
 
-### The one formal power series is the constant one formal power series
+### The constant zero formal power series is the constant formal power series with value one
 
 ```agda
 module _
@@ -554,7 +554,7 @@ module _
       commutative-mul-formal-power-series-Commutative-Semiring)
 ```
 
-### The constant formal power series is a ring homomorphism
+### The constant formal power series operation is a ring homomorphism
 
 ```agda
 module _

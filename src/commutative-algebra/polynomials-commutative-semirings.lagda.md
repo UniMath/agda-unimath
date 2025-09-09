@@ -11,6 +11,7 @@ module commutative-algebra.polynomials-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.formal-power-series-commutative-semirings
+open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
@@ -176,6 +177,22 @@ module _
       ( λ _ → refl)
 ```
 
+### Constant polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-polynomial-Commutative-Semiring :
+    type-Commutative-Semiring R → polynomial-Commutative-Semiring R
+  constant-polynomial-Commutative-Semiring c =
+    polynomial-add-degree-formal-power-series-Commutative-Semiring
+      ( constant-formal-power-series-Commutative-Semiring R c)
+      ( 1)
+      ( λ _ → refl)
+```
+
 ### The identity polynomial
 
 ```agda
@@ -219,6 +236,36 @@ module _
     p ＝ q
   eq-polynomial-Commutative-Semiring =
     eq-type-subtype is-polynomial-prop-formal-power-series-Commutative-Semiring
+```
+
+### The constant zero polynomial is the constant polynomial with value zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-zero-polynomial-Commutative-Semiring :
+    constant-polynomial-Commutative-Semiring R (zero-Commutative-Semiring R) ＝
+    zero-polynomial-Commutative-Semiring R
+  constant-zero-polynomial-Commutative-Semiring =
+    eq-polynomial-Commutative-Semiring R
+      ( constant-zero-formal-power-series-Commutative-Semiring R)
+```
+
+### The constant one polynomial is the constant polynomial with value one
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-one-polynomial-Commutative-Semiring :
+    constant-polynomial-Commutative-Semiring R (one-Commutative-Semiring R) ＝
+    one-polynomial-Commutative-Semiring R
+  constant-one-polynomial-Commutative-Semiring =
+    eq-polynomial-Commutative-Semiring R
+      ( constant-one-formal-power-series-Commutative-Semiring R)
 ```
 
 ### Evaluation of polynomials
@@ -811,4 +858,46 @@ module _
     ( semiring-polynomial-Commutative-Semiring ,
       commutative-mul-Commutative-Monoid
         ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring R))
+```
+
+### The constant polynomial operation is a commutative semiring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  abstract
+    preserves-mul-constant-polynomial-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-polynomial-Commutative-Semiring R
+        ( mul-Commutative-Semiring R x y) ＝
+      mul-polynomial-Commutative-Semiring
+        ( constant-polynomial-Commutative-Semiring R x)
+        ( constant-polynomial-Commutative-Semiring R y)
+    preserves-mul-constant-polynomial-Commutative-Semiring =
+      eq-polynomial-Commutative-Semiring R
+        ( preserves-mul-constant-formal-power-series-Commutative-Semiring R)
+
+    preserves-add-constant-polynomial-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-polynomial-Commutative-Semiring R
+        ( add-Commutative-Semiring R x y) ＝
+      add-polynomial-Commutative-Semiring
+        ( constant-polynomial-Commutative-Semiring R x)
+        ( constant-polynomial-Commutative-Semiring R y)
+    preserves-add-constant-polynomial-Commutative-Semiring =
+      eq-polynomial-Commutative-Semiring R
+        ( preserves-add-constant-formal-power-series-Commutative-Semiring R)
+
+  constant-polynomial-hom-Commutative-Semiring :
+    hom-Commutative-Semiring
+      ( R)
+      ( commutative-semiring-polynomial-Commutative-Semiring R)
+  constant-polynomial-hom-Commutative-Semiring =
+    ( ( ( constant-polynomial-Commutative-Semiring R ,
+          preserves-add-constant-polynomial-Commutative-Semiring) ,
+        constant-zero-polynomial-Commutative-Semiring R) ,
+      preserves-mul-constant-polynomial-Commutative-Semiring ,
+      constant-one-polynomial-Commutative-Semiring R)
 ```

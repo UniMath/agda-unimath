@@ -10,7 +10,9 @@ module commutative-algebra.polynomials-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-semirings
 open import commutative-algebra.formal-power-series-commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.polynomials-commutative-semirings
 
 open import elementary-number-theory.natural-numbers
@@ -119,6 +121,20 @@ module _
   id-polynomial-Commutative-Ring = id-polynomial-Commutative-Semiring _
 ```
 
+### Constant polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-polynomial-Commutative-Ring :
+    type-Commutative-Ring R → polynomial-Commutative-Ring R
+  constant-polynomial-Commutative-Ring =
+    constant-polynomial-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+```
+
 ### The set of polynomials
 
 ```agda
@@ -130,6 +146,49 @@ module _
   set-polynomial-Commutative-Ring =
     set-polynomial-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring R)
+```
+
+### Equality of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  eq-polynomial-Commutative-Ring :
+    {p q : polynomial-Commutative-Ring R} →
+    ( formal-power-series-polynomial-Commutative-Ring R p ＝
+      formal-power-series-polynomial-Commutative-Ring R q) →
+    p ＝ q
+  eq-polynomial-Commutative-Ring = eq-polynomial-Commutative-Semiring _
+```
+
+### The constant zero polynomial is the constant polynomial with value zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-zero-polynomial-Commutative-Ring :
+    constant-polynomial-Commutative-Ring R (zero-Commutative-Ring R) ＝
+    zero-polynomial-Commutative-Ring R
+  constant-zero-polynomial-Commutative-Ring =
+    constant-zero-polynomial-Commutative-Semiring _
+```
+
+### The constant zero polynomial is the constant polynomial with value one
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  constant-one-polynomial-Commutative-Ring :
+    constant-polynomial-Commutative-Ring R (one-Commutative-Ring R) ＝
+    one-polynomial-Commutative-Ring R
+  constant-one-polynomial-Commutative-Ring =
+    constant-one-polynomial-Commutative-Semiring _
 ```
 
 ### Evaluation of polynomials
@@ -268,4 +327,50 @@ module _
         ( pr2
           ( semiring-polynomial-Commutative-Semiring
             ( commutative-semiring-Commutative-Ring R))))
+
+  commutative-ring-polynomial-Commutative-Ring : Commutative-Ring l
+  commutative-ring-polynomial-Commutative-Ring =
+    ( ring-polynomial-Commutative-Ring ,
+      commutative-mul-Commutative-Semiring
+        ( commutative-semiring-polynomial-Commutative-Semiring
+          ( commutative-semiring-Commutative-Ring R)))
+```
+
+### The constant polynomial operation is a commutative ring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  abstract
+    preserves-mul-constant-polynomial-Commutative-Ring :
+      {x y : type-Commutative-Ring R} →
+      constant-polynomial-Commutative-Ring R
+        ( mul-Commutative-Ring R x y) ＝
+      mul-polynomial-Commutative-Ring R
+        ( constant-polynomial-Commutative-Ring R x)
+        ( constant-polynomial-Commutative-Ring R y)
+    preserves-mul-constant-polynomial-Commutative-Ring =
+      preserves-mul-constant-polynomial-Commutative-Semiring _
+
+    preserves-add-constant-polynomial-Commutative-Ring :
+      {x y : type-Commutative-Ring R} →
+      constant-polynomial-Commutative-Ring R
+        ( add-Commutative-Ring R x y) ＝
+      add-polynomial-Commutative-Ring R
+        ( constant-polynomial-Commutative-Ring R x)
+        ( constant-polynomial-Commutative-Ring R y)
+    preserves-add-constant-polynomial-Commutative-Ring =
+      preserves-add-constant-polynomial-Commutative-Semiring _
+
+  constant-polynomial-hom-Commutative-Ring :
+    hom-Commutative-Ring
+      ( R)
+      ( commutative-ring-polynomial-Commutative-Ring R)
+  constant-polynomial-hom-Commutative-Ring =
+    ( ( constant-polynomial-Commutative-Ring R ,
+        preserves-add-constant-polynomial-Commutative-Ring) ,
+      preserves-mul-constant-polynomial-Commutative-Ring ,
+      constant-one-polynomial-Commutative-Ring R)
 ```
