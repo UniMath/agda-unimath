@@ -43,6 +43,7 @@ open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.multiples-of-elements-commutative-rings public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
+open import commutative-algebra.polynomials-commutative-rings public
 open import commutative-algebra.polynomials-commutative-semirings public
 open import commutative-algebra.poset-of-ideals-commutative-rings public
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings public

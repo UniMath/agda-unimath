@@ -475,13 +475,33 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
+  preserves-mul-constant-formal-power-series-Commutative-Ring :
+    {x y : type-Commutative-Ring R} →
+      constant-formal-power-series-Commutative-Ring R
+        ( mul-Commutative-Ring R x y) ＝
+      mul-formal-power-series-Commutative-Ring R
+        ( constant-formal-power-series-Commutative-Ring R x)
+        ( constant-formal-power-series-Commutative-Ring R y)
+  preserves-mul-constant-formal-power-series-Commutative-Ring =
+    preserves-mul-constant-formal-power-series-Commutative-Semiring _
+
+  preserves-add-constant-formal-power-series-Commutative-Ring :
+    {x y : type-Commutative-Ring R} →
+      constant-formal-power-series-Commutative-Ring R
+        ( add-Commutative-Ring R x y) ＝
+      add-formal-power-series-Commutative-Ring R
+        ( constant-formal-power-series-Commutative-Ring R x)
+        ( constant-formal-power-series-Commutative-Ring R y)
+  preserves-add-constant-formal-power-series-Commutative-Ring =
+    preserves-add-constant-formal-power-series-Commutative-Semiring _
+
   hom-constant-formal-power-series-Commutative-Ring :
     hom-Commutative-Ring
       ( R)
       ( commutative-ring-formal-power-series-Commutative-Ring R)
   hom-constant-formal-power-series-Commutative-Ring =
     ( ( constant-formal-power-series-Commutative-Ring R ,
-        preserves-add-constant-formal-power-series-Commutative-Semiring _) ,
-      preserves-mul-constant-formal-power-series-Commutative-Semiring _ ,
+        preserves-add-constant-formal-power-series-Commutative-Ring) ,
+      preserves-mul-constant-formal-power-series-Commutative-Ring ,
       constant-one-formal-power-series-Commutative-Ring R)
 ```

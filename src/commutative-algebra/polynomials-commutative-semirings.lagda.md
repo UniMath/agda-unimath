@@ -36,10 +36,16 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.unital-binary-operations
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
+open import group-theory.submonoids-commutative-monoids
+
 open import lists.sequences
+
+open import ring-theory.semirings
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -197,6 +203,22 @@ module _
     set-subset
       ( set-formal-power-series-Commutative-Semiring R)
       ( is-polynomial-prop-formal-power-series-Commutative-Semiring)
+```
+
+### Equality of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  eq-polynomial-Commutative-Semiring :
+    {p q : polynomial-Commutative-Semiring R} →
+    ( formal-power-series-polynomial-Commutative-Semiring p ＝
+      formal-power-series-polynomial-Commutative-Semiring q) →
+    p ＝ q
+  eq-polynomial-Commutative-Semiring =
+    eq-type-subtype is-polynomial-prop-formal-power-series-Commutative-Semiring
 ```
 
 ### Evaluation of polynomials
@@ -569,6 +591,27 @@ module _
                     ( Hq')))
 ```
 
+#### The commutative monoid of addition of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  additive-commutative-monoid-polynomial-Commutative-Semiring :
+    Commutative-Monoid l
+  additive-commutative-monoid-polynomial-Commutative-Semiring =
+    commutative-monoid-Commutative-Submonoid
+      ( additive-commutative-monoid-formal-power-series-Commutative-Semiring R)
+      ( is-polynomial-prop-formal-power-series-Commutative-Semiring ,
+        is-polynomial-formal-power-series-polynomial-Commutative-Semiring
+          ( zero-polynomial-Commutative-Semiring R) ,
+        ( λ p q is-poly-p is-poly-q →
+          is-polynomial-add-polynomial-Commutative-Semiring
+            ( p , is-poly-p)
+            ( q , is-poly-q)))
+```
+
 ### Multiplication of polynomials
 
 ```agda
@@ -657,4 +700,109 @@ module _
   mul-polynomial-Commutative-Semiring pp@(p , is-poly-p) qq@(q , is-poly-q) =
     ( mul-formal-power-series-Commutative-Semiring p q ,
       is-polynomial-mul-polynomial-Commutative-Semiring pp qq)
+```
+
+#### Commutative monoid laws of multiplication of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  multiplicative-commutative-monoid-polynomial-Commutative-Semiring :
+    Commutative-Monoid l
+  multiplicative-commutative-monoid-polynomial-Commutative-Semiring =
+    commutative-monoid-Commutative-Submonoid
+      ( multiplicative-commutative-monoid-Commutative-Semiring
+        ( commutative-semiring-formal-power-series-Commutative-Semiring R))
+      ( is-polynomial-prop-formal-power-series-Commutative-Semiring ,
+        is-polynomial-formal-power-series-polynomial-Commutative-Semiring
+          ( one-polynomial-Commutative-Semiring R) ,
+        ( λ p q is-poly-p is-poly-q →
+          is-polynomial-mul-polynomial-Commutative-Semiring
+            ( p , is-poly-p)
+            ( q , is-poly-q)))
+```
+
+### The commutative semiring of multiplication of polynomials
+
+```agda
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  where
+
+  abstract
+    left-distributive-mul-add-polynomial-Commutative-Semiring :
+      (x y z : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring x
+        ( add-polynomial-Commutative-Semiring y z) ＝
+      add-polynomial-Commutative-Semiring
+        ( mul-polynomial-Commutative-Semiring x y)
+        ( mul-polynomial-Commutative-Semiring x z)
+    left-distributive-mul-add-polynomial-Commutative-Semiring
+      (x , _) (y , _) (z , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( left-distributive-mul-add-formal-power-series-Commutative-Semiring
+          ( x)
+          ( y)
+          ( z))
+
+    right-distributive-mul-add-polynomial-Commutative-Semiring :
+      (x y z : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( add-polynomial-Commutative-Semiring x y)
+        ( z) ＝
+      add-polynomial-Commutative-Semiring
+        ( mul-polynomial-Commutative-Semiring x z)
+        ( mul-polynomial-Commutative-Semiring y z)
+    right-distributive-mul-add-polynomial-Commutative-Semiring
+      (x , _) (y , _) (z , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( right-distributive-mul-add-formal-power-series-Commutative-Semiring
+          ( x)
+          ( y)
+          ( z))
+
+    left-zero-law-mul-polynomial-Commutative-Semiring :
+      (x : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( zero-polynomial-Commutative-Semiring R)
+        ( x) ＝
+      zero-polynomial-Commutative-Semiring R
+    left-zero-law-mul-polynomial-Commutative-Semiring (x , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( left-zero-law-mul-formal-power-series-Commutative-Semiring x)
+
+    right-zero-law-mul-polynomial-Commutative-Semiring :
+      (x : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( x)
+        ( zero-polynomial-Commutative-Semiring R) ＝
+      zero-polynomial-Commutative-Semiring R
+    right-zero-law-mul-polynomial-Commutative-Semiring (x , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( right-zero-law-mul-formal-power-series-Commutative-Semiring x)
+
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  has-unit-mul-polynomial-Commutative-Semiring :
+    is-unital (mul-polynomial-Commutative-Semiring {R = R})
+  has-unit-mul-polynomial-Commutative-Semiring =
+    has-unit-Commutative-Monoid
+      ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring R)
+
+  semiring-polynomial-Commutative-Semiring : Semiring l
+  semiring-polynomial-Commutative-Semiring =
+    ( additive-commutative-monoid-polynomial-Commutative-Semiring R ,
+      ( ( mul-polynomial-Commutative-Semiring ,
+          associative-mul-Commutative-Monoid
+            ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring
+              ( R))) ,
+        has-unit-mul-polynomial-Commutative-Semiring ,
+        left-distributive-mul-add-polynomial-Commutative-Semiring ,
+        right-distributive-mul-add-polynomial-Commutative-Semiring) ,
+      left-zero-law-mul-polynomial-Commutative-Semiring ,
+      right-zero-law-mul-polynomial-Commutative-Semiring)
 ```
