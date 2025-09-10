@@ -206,26 +206,25 @@ module _
               linear-combination-left-module-Ring R M
                 ( concat-tuple x-scalars y-scalars)
                 ( map-tuple pr1 (concat-tuple x-vectors y-vectors))
-              ＝
-                linear-combination-left-module-Ring R M
+              ＝linear-combination-left-module-Ring R M
                   ( concat-tuple x-scalars y-scalars)
                   ( concat-tuple
                     ( map-tuple pr1 x-vectors)
                     ( map-tuple pr1 y-vectors))
-                by ap
-                  ( λ z →
-                    ( linear-combination-left-module-Ring R M
-                      ( concat-tuple x-scalars y-scalars)
-                      ( z)))
-                  ( distributive-map-concat-tuple pr1 x-vectors y-vectors)
-              ＝
-                add-left-module-Ring R M
+                by
+                  ap
+                    ( λ z →
+                      ( linear-combination-left-module-Ring R M
+                        ( concat-tuple x-scalars y-scalars)
+                        ( z)))
+                    ( distributive-map-concat-tuple pr1 x-vectors y-vectors)
+              ＝ add-left-module-Ring R M
                   ( linear-combination-left-module-Ring R M
                     ( x-scalars)
-                    ( (map-tuple pr1 x-vectors)))
+                    ( map-tuple pr1 x-vectors))
                   ( linear-combination-left-module-Ring R M
                     ( y-scalars)
-                    ( (map-tuple pr1 y-vectors)))
+                    ( map-tuple pr1 y-vectors))
                 by
                   concatenation-is-addition-linear-combination-left-module-Ring
                     ( R)
@@ -240,18 +239,19 @@ module _
                   ( linear-combination-left-module-Ring R M
                     ( y-scalars)
                     ( map-tuple pr1 y-vectors))
-                by ap
-                  ( λ z → add-left-module-Ring R M
-                    ( z)
-                    ( linear-combination-left-module-Ring R M
-                      ( y-scalars)
-                      ( map-tuple pr1 y-vectors)))
-                  ( inv x-identity)
-              ＝
-                add-left-module-Ring R M x y
-                by ap
-                  ( λ z → add-left-module-Ring R M x z)
-                  ( inv y-identity))
+                by
+                  ap
+                    ( λ z → add-left-module-Ring R M
+                      ( z)
+                      ( linear-combination-left-module-Ring R M
+                        ( y-scalars)
+                        ( map-tuple pr1 y-vectors)))
+                    ( inv x-identity)
+              ＝ add-left-module-Ring R M x y
+                by
+                  ap
+                    ( add-left-module-Ring R M x)
+                    ( inv y-identity))
             ( contains-all-linear-combinations-linear-span-left-module-Ring
               ( R)
               ( M)
