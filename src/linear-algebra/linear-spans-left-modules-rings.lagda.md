@@ -282,24 +282,24 @@ module _
             linear-combination-left-module-Ring R M
               ( map-tuple (mul-Ring R r) scalars)
               ( map-tuple pr1 vectors)
-            ＝
-              mul-left-module-Ring R M
+            ＝ mul-left-module-Ring R M
                 ( r)
                 ( linear-combination-left-module-Ring R M
                   ( scalars)
                   ( map-tuple pr1 vectors))
-              by inv
-                ( left-distributive-law-mul-linear-combination-left-module-Ring
-                  ( R)
-                  ( M)
-                  ( r)
-                  ( scalars)
-                  ( map-tuple pr1 vectors))
-            ＝
-              mul-left-module-Ring R M r x
-              by ap
-                ( λ y → mul-left-module-Ring R M r y)
-                ( inv identity))
+              by 
+                inv
+                  ( left-distributive-law-mul-linear-combination-left-module-Ring
+                    ( R)
+                    ( M)
+                    ( r)
+                    ( scalars)
+                    ( map-tuple pr1 vectors))
+            ＝ mul-left-module-Ring R M r x
+              by
+                ap
+                  ( mul-left-module-Ring R M r)
+                  ( inv identity))
           ( contains-all-linear-combinations-linear-span-left-module-Ring R M S
             ( n)
             ( map-tuple (mul-Ring R r) scalars)
