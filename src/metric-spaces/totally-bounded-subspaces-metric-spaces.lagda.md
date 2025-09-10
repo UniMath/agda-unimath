@@ -7,10 +7,15 @@ module metric-spaces.totally-bounded-subspaces-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
+open import foundation.equivalences
 open import foundation.images-subtypes
+open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
@@ -44,6 +49,15 @@ module _
 
   subset-totally-bounded-subspace-Metric-Space : subset-Metric-Space l3 X
   subset-totally-bounded-subspace-Metric-Space = pr1 S
+
+  type-totally-bounded-subspace-Metric-Space : UU (l1 ⊔ l3)
+  type-totally-bounded-subspace-Metric-Space =
+    type-subtype subset-totally-bounded-subspace-Metric-Space
+
+  inclusion-totally-bounded-subspace-Metric-Space :
+    type-totally-bounded-subspace-Metric-Space → type-Metric-Space X
+  inclusion-totally-bounded-subspace-Metric-Space =
+    inclusion-subtype subset-totally-bounded-subspace-Metric-Space
 
   subspace-totally-bounded-subspace-Metric-Space : Metric-Space (l1 ⊔ l3) l2
   subspace-totally-bounded-subspace-Metric-Space =
@@ -81,4 +95,29 @@ im-uniformly-continuous-function-totally-bounded-subspace-Metric-Space
           ( Y)
           ( f)
           ( uniformly-continuous-inclusion-subspace-Metric-Space X S)))
+```
+
+### Totally bounded subspaces of metric spaces are closed under Cartesian products
+
+```agda
+product-totally-bounded-subspace-Metric-Space :
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level} →
+  (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
+  (S : totally-bounded-subspace-Metric-Space l5 l6 X) →
+  (T : totally-bounded-subspace-Metric-Space l7 l8 Y) →
+  totally-bounded-subspace-Metric-Space
+    ( l5 ⊔ l7)
+    ( l1 ⊔ l3 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
+    ( product-Metric-Space X Y)
+product-totally-bounded-subspace-Metric-Space X Y (S , tbS) (T , tbT) =
+  ( product-subtype S T ,
+    preserves-is-totally-bounded-isometric-equiv-Metric-Space
+      ( product-Metric-Space
+        ( subspace-Metric-Space X S)
+        ( subspace-Metric-Space Y T))
+      ( subspace-Metric-Space (product-Metric-Space X Y) (product-subtype S T))
+      ( is-totally-bounded-product-totally-bounded-Metric-Space
+        ( subspace-Metric-Space X S , tbS)
+        ( subspace-Metric-Space Y T , tbT))
+      ( inv-equiv (equiv-product-subtype S T) , λ _ _ _ → id-iff))
 ```

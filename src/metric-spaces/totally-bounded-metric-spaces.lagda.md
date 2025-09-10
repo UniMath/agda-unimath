@@ -15,6 +15,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
@@ -197,4 +198,39 @@ module _
       map-is-inhabited
         ( λ μX ε → net-im-isometric-equiv-net-Metric-Space X Y f ε (μX ε))
         ( tbX)
+```
+
+### Totally bounded metric spaces are closed under Cartesian products
+
+```agda
+abstract
+  is-totally-bounded-product-totally-bounded-Metric-Space :
+    {l1 l2 l3 l4 l5 l6 : Level} →
+    (X : totally-bounded-Metric-Space l1 l2 l3) →
+    (Y : totally-bounded-Metric-Space l4 l5 l6) →
+    is-totally-bounded-Metric-Space
+      ( l3 ⊔ l6)
+      ( product-Metric-Space
+        ( metric-space-totally-bounded-Metric-Space X)
+        ( metric-space-totally-bounded-Metric-Space Y))
+  is-totally-bounded-product-totally-bounded-Metric-Space (X , tbX) (Y , tbY) =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-totally-bounded-prop-Metric-Space
+            _
+            ( product-Metric-Space X Y))
+    in do
+      mX ← tbX
+      mY ← tbY
+      unit-trunc-Prop ( λ ε → product-net-Metric-Space X Y ε (mX ε) (mY ε))
+
+product-totally-bounded-Metric-Space :
+  {l1 l2 l3 l4 l5 l6 : Level} →
+  (X : totally-bounded-Metric-Space l1 l2 l3) →
+  (Y : totally-bounded-Metric-Space l4 l5 l6) →
+  totally-bounded-Metric-Space (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
+product-totally-bounded-Metric-Space (X , tbX) (Y , tbY) =
+  ( product-Metric-Space X Y ,
+    is-totally-bounded-product-totally-bounded-Metric-Space (X , tbX) (Y , tbY))
 ```

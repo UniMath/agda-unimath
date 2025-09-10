@@ -497,28 +497,28 @@ module _
   leq-left-triple-join-Order-Theoretic-Join-Semilattice :
     x ≤ ((x ∨ y) ∨ z)
   leq-left-triple-join-Order-Theoretic-Join-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         x ≤ x ∨ y
             by leq-left-join-Order-Theoretic-Join-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ (x ∨ y) ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A (x ∨ y) z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-center-triple-join-Order-Theoretic-Join-Semilattice :
     y ≤ ((x ∨ y) ∨ z)
   leq-center-triple-join-Order-Theoretic-Join-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         y ≤ x ∨ y
             by leq-right-join-Order-Theoretic-Join-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ (x ∨ y) ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A (x ∨ y) z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-right-triple-join-Order-Theoretic-Join-Semilattice :
     z ≤ ((x ∨ y) ∨ z)
@@ -533,28 +533,28 @@ module _
   leq-center-triple-join-Order-Theoretic-Join-Semilattice' :
     y ≤ (x ∨ (y ∨ z))
   leq-center-triple-join-Order-Theoretic-Join-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         y ≤ y ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ x ∨ (y ∨ z)
             by leq-right-join-Order-Theoretic-Join-Semilattice A x (y ∨ z)
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-right-triple-join-Order-Theoretic-Join-Semilattice' :
     z ≤ (x ∨ (y ∨ z))
   leq-right-triple-join-Order-Theoretic-Join-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         z ≤ y ∨ z
             by leq-right-join-Order-Theoretic-Join-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ x ∨ (y ∨ z)
             by leq-right-join-Order-Theoretic-Join-Semilattice A x (y ∨ z)
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-associative-join-Order-Theoretic-Join-Semilattice :
     ((x ∨ y) ∨ z) ≤ (x ∨ (y ∨ z))

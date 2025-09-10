@@ -243,6 +243,16 @@ abstract
       ( z)
       ( x-y≤z)
       ( inv-tr (λ w → leq-ℝ w z) (distributive-neg-diff-ℝ _ _) y-x≤z)
+
+  leq-dist-leq-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    x ≤-ℝ z +ℝ y →
+    y ≤-ℝ z +ℝ x →
+    dist-ℝ x y ≤-ℝ z
+  leq-dist-leq-add-ℝ x y z x≤z+y y≤z+x =
+    leq-dist-leq-diff-ℝ x y z
+      ( leq-transpose-right-add-ℝ _ _ _ x≤z+y)
+      ( leq-transpose-right-add-ℝ _ _ _ y≤z+x)
 ```
 
 ### Addition preserves distance between real numbers
