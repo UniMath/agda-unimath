@@ -9,9 +9,9 @@ module metric-spaces.totally-bounded-subspaces-metric-spaces where
 ```agda
 open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
-open import foundation.logical-equivalences
 open import foundation.equivalences
 open import foundation.images-subtypes
+open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
