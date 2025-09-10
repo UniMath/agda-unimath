@@ -181,69 +181,67 @@ concatenation-is-addition-linear-combination-left-module-Ring
         by refl
 concatenation-is-addition-linear-combination-left-module-Ring
   R M (r ∷ scalars-a) (x ∷ vectors-a) scalars-b vectors-b =
-    equational-reasoning
-      linear-combination-left-module-Ring R M
-        ( concat-tuple (r ∷ scalars-a) scalars-b)
-        ( concat-tuple (x ∷ vectors-a) vectors-b)
-      ＝
-        linear-combination-left-module-Ring R M
-          ( r ∷ (concat-tuple scalars-a scalars-b))
-          ( x ∷ (concat-tuple vectors-a vectors-b))
-        by refl
-      ＝
-        add-left-module-Ring R M
+  equational-reasoning
+    linear-combination-left-module-Ring R M
+      ( concat-tuple (r ∷ scalars-a) scalars-b)
+      ( concat-tuple (x ∷ vectors-a) vectors-b)
+    ＝ linear-combination-left-module-Ring R M
+        ( r ∷ (concat-tuple scalars-a scalars-b))
+        ( x ∷ (concat-tuple vectors-a vectors-b))
+      by refl
+    ＝ add-left-module-Ring R M
+        ( linear-combination-left-module-Ring R M
+          ( concat-tuple scalars-a scalars-b)
+          ( concat-tuple vectors-a vectors-b))
+        ( mul-left-module-Ring R M r x)
+      by refl
+    ＝ add-left-module-Ring R M
+        ( add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
-            ( concat-tuple scalars-a scalars-b)
-            ( concat-tuple vectors-a vectors-b))
-          ( mul-left-module-Ring R M r x)
-        by refl
-      ＝
-        add-left-module-Ring R M
-          ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
-            ( linear-combination-left-module-Ring R M
-              ( scalars-b)
-              ( vectors-b)))
-          ( mul-left-module-Ring R M r x)
-        by ap
+            ( scalars-a)
+            ( vectors-a))
+          ( linear-combination-left-module-Ring R M
+            ( scalars-b)
+            ( vectors-b)))
+        ( mul-left-module-Ring R M r x)
+      by
+        ap
           ( λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
           ( concatenation-is-addition-linear-combination-left-module-Ring R M
             ( scalars-a)
             ( vectors-a)
             ( scalars-b)
             ( vectors-b))
-      ＝
-        add-left-module-Ring R M
-          ( mul-left-module-Ring R M r x)
-          ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
-            ( linear-combination-left-module-Ring R M
-              ( scalars-b)
-              ( vectors-b)))
-        by commutative-add-left-module-Ring R M
-          ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
-            ( linear-combination-left-module-Ring R M
-              ( scalars-b)
-              ( vectors-b)))
-          ( mul-left-module-Ring R M r x)
-      ＝
-        add-left-module-Ring R M
-          ( add-left-module-Ring R M
-            ( mul-left-module-Ring R M r x)
-            ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a)))
+    ＝ add-left-module-Ring R M
+        ( mul-left-module-Ring R M r x)
+        ( add-left-module-Ring R M
+          ( linear-combination-left-module-Ring R M
+            ( scalars-a)
+            ( vectors-a))
           ( linear-combination-left-module-Ring R M
             ( scalars-b)
-            ( vectors-b))
-        by inv
+            ( vectors-b)))
+      by
+        commutative-add-left-module-Ring R M
+          ( add-left-module-Ring R M
+            ( linear-combination-left-module-Ring R M
+              ( scalars-a)
+              ( vectors-a))
+            ( linear-combination-left-module-Ring R M
+              ( scalars-b)
+              ( vectors-b)))
+          ( mul-left-module-Ring R M r x)
+    ＝ add-left-module-Ring R M
+        ( add-left-module-Ring R M
+          ( mul-left-module-Ring R M r x)
+          ( linear-combination-left-module-Ring R M
+            ( scalars-a)
+            ( vectors-a)))
+        ( linear-combination-left-module-Ring R M
+          ( scalars-b)
+          ( vectors-b))
+      by
+        inv
           ( associative-add-left-module-Ring R M
             ( mul-left-module-Ring R M r x)
             ( linear-combination-left-module-Ring R M
@@ -252,17 +250,17 @@ concatenation-is-addition-linear-combination-left-module-Ring
             ( linear-combination-left-module-Ring R M
               ( scalars-b)
               ( vectors-b)))
-      ＝
-        add-left-module-Ring R M
-          ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
-            ( mul-left-module-Ring R M r x))
+    ＝ add-left-module-Ring R M
+        ( add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
-            ( scalars-b)
-            ( vectors-b))
-        by ap
+            ( scalars-a)
+            ( vectors-a))
+          ( mul-left-module-Ring R M r x))
+        ( linear-combination-left-module-Ring R M
+          ( scalars-b)
+          ( vectors-b))
+      by
+        ap
           ( λ y → add-left-module-Ring R M y
             ( linear-combination-left-module-Ring R M
               ( scalars-b)
@@ -272,13 +270,12 @@ concatenation-is-addition-linear-combination-left-module-Ring
             ( linear-combination-left-module-Ring R M
               ( scalars-a)
               ( vectors-a)))
-      ＝
-        add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M
-            ( r ∷ scalars-a)
-            ( x ∷ vectors-a))
-          ( linear-combination-left-module-Ring R M
-            ( scalars-b)
-            ( vectors-b))
-        by refl
+    ＝ add-left-module-Ring R M
+        ( linear-combination-left-module-Ring R M
+          ( r ∷ scalars-a)
+          ( x ∷ vectors-a))
+        ( linear-combination-left-module-Ring R M
+          ( scalars-b)
+          ( vectors-b))
+      by refl
 ```
