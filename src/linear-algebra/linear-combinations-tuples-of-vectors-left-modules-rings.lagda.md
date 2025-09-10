@@ -160,25 +160,23 @@ concatenation-is-addition-linear-combination-left-module-Ring :
     ( linear-combination-left-module-Ring R M scalars-b vectors-b)
 concatenation-is-addition-linear-combination-left-module-Ring
   R M empty-tuple empty-tuple scalars-b vectors-b =
-    equational-reasoning
-      linear-combination-left-module-Ring R M
-        ( concat-tuple empty-tuple scalars-b)
-        ( concat-tuple empty-tuple vectors-b)
-      ＝
-        linear-combination-left-module-Ring R M scalars-b vectors-b
-        by refl
-      ＝
-        add-left-module-Ring R M
-          ( zero-left-module-Ring R M)
-          ( linear-combination-left-module-Ring R M scalars-b vectors-b)
-        by inv
+  equational-reasoning
+    linear-combination-left-module-Ring R M
+      ( concat-tuple empty-tuple scalars-b)
+      ( concat-tuple empty-tuple vectors-b)
+    ＝ linear-combination-left-module-Ring R M scalars-b vectors-b
+      by refl
+    ＝ add-left-module-Ring R M
+        ( zero-left-module-Ring R M)
+        ( linear-combination-left-module-Ring R M scalars-b vectors-b)
+      by
+        inv
           ( left-unit-law-add-left-module-Ring R M
             ( linear-combination-left-module-Ring R M scalars-b vectors-b))
-      ＝
-        add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
-          ( linear-combination-left-module-Ring R M scalars-b vectors-b)
-        by refl
+    ＝ add-left-module-Ring R M
+        ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
+        ( linear-combination-left-module-Ring R M scalars-b vectors-b)
+      by refl
 concatenation-is-addition-linear-combination-left-module-Ring
   R M (r ∷ scalars-a) (x ∷ vectors-a) scalars-b vectors-b =
   equational-reasoning
