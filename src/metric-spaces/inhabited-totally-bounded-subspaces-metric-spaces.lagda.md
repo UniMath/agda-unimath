@@ -9,8 +9,11 @@ module metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-types
+<<<<<<< HEAD
 open import foundation.equivalences
 open import foundation.cartesian-products-subtypes
+=======
+>>>>>>> inhabited-totally-bounded
 open import foundation.images
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
@@ -18,7 +21,10 @@ open import foundation.inhabited-types
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+<<<<<<< HEAD
 open import metric-spaces.cartesian-products-metric-spaces
+=======
+>>>>>>> inhabited-totally-bounded
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 open import metric-spaces.totally-bounded-subspaces-metric-spaces
