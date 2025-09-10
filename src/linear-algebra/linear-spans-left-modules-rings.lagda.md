@@ -1,4 +1,4 @@
-# Linear spans
+# Linear spans in left modules over rings
 
 ```agda
 module linear-algebra.linear-spans-left-modules-rings where
