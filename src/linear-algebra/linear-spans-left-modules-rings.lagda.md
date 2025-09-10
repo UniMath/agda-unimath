@@ -287,7 +287,7 @@ module _
                 ( linear-combination-left-module-Ring R M
                   ( scalars)
                   ( map-tuple pr1 vectors))
-              by 
+              by
                 inv
                   ( left-distributive-law-mul-linear-combination-left-module-Ring
                     ( R)

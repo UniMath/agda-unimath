@@ -128,7 +128,8 @@ left-distributive-law-mul-linear-combination-left-module-Ring
               add-left-module-Ring R M
                 ( y)
                 ( mul-left-module-Ring R M (mul-Ring R r s) x))
-            ( left-distributive-law-mul-linear-combination-left-module-Ring R M r
+            ( left-distributive-law-mul-linear-combination-left-module-Ring R M
+              ( r)
               ( scalars)
               ( vectors))
       ＝ linear-combination-left-module-Ring R M
