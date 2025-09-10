@@ -1,4 +1,4 @@
-# Linear combinations of tuples of vectors in a left modules over rings
+# Linear combinations of tuples of vectors in left modules over rings
 
 ```agda
 module linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings where
