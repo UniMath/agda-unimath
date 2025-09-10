@@ -23,7 +23,7 @@ open import foundation-core.cartesian-product-types
 
 open import linear-algebra.left-modules-rings
 open import linear-algebra.left-submodules-rings
-open import linear-algebra.linear-combinations
+open import linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings
 open import linear-algebra.subsets-left-modules-rings
 
 open import lists.concatenation-tuples

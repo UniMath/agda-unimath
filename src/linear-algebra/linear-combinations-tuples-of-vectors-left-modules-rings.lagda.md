@@ -1,7 +1,7 @@
-# Linear combinations
+# Linear combinations of tuples of vectors in a left modules over rings
 
 ```agda
-module linear-algebra.linear-combinations where
+module linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -27,14 +27,18 @@ open import ring-theory.rings
 ## Idea
 
 Let `M` be a [left module](linear-algebra.left-modules-rings.md) over a
-[ring](ring-theory.rings.md) `R`. Given a tuple `(r_1, ..., r_n)` of elements of
-`R` and a tuple `(x_1, ..., x_n)` of elements of `M`, a
-{{#concept "linear combination" Agda=linear-combination-left-module-Ring}} of
-these tuples is the sum `r_1 * x_1 + ... + r_n * x_n`.
+[ring](ring-theory.rings.md) `R`. For any `n`-tuple of vectors (elements of `M`)
+`(x_1, ..., x_n)` and any `n`-tuple of coefficients (elements of `R`)
+`(r_1, ..., r_n)`, we may form the
+{{#concept "linear combination" Agda=linear-combination-left-module-Ring}}
+`r_1 * x_1 + ... + r_n * x_n`.
+
+The proposition of being a linear combination is formalised as being an element
+of a [linear span](linear-algebra.linear-spans-left-modules-rings.md).
 
 ## Definitions
 
-### Linear combinations in a left module over a ring
+### Linear combinations of tuples of vectors in a left module over a ring
 
 ```agda
 linear-combination-left-module-Ring :
