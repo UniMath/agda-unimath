@@ -95,48 +95,46 @@ left-distributive-law-mul-linear-combination-left-module-Ring
     equational-reasoning
       mul-left-module-Ring R M r
         ( linear-combination-left-module-Ring R M (s ∷ scalars) (x ∷ vectors))
-      ＝
-        mul-left-module-Ring R M r
+      ＝ mul-left-module-Ring R M r
           ( add-left-module-Ring R M
             ( linear-combination-left-module-Ring R M scalars vectors)
             ( mul-left-module-Ring R M s x))
         by refl
-      ＝
-        add-left-module-Ring R M
+      ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
             ( linear-combination-left-module-Ring R M scalars vectors))
           ( mul-left-module-Ring R M r (mul-left-module-Ring R M s x))
-        by left-distributive-mul-add-left-module-Ring R M r
-          ( linear-combination-left-module-Ring R M scalars vectors)
-          ( mul-left-module-Ring R M s x)
-      ＝
-        add-left-module-Ring R M
+        by
+          left-distributive-mul-add-left-module-Ring R M r
+            ( linear-combination-left-module-Ring R M scalars vectors)
+            ( mul-left-module-Ring R M s x)
+      ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
             ( linear-combination-left-module-Ring R M scalars vectors))
           ( mul-left-module-Ring R M (mul-Ring R r s) x)
-        by ap
-          ( λ y →
-            add-left-module-Ring R M
-              ( mul-left-module-Ring R M r
-                ( linear-combination-left-module-Ring R M scalars vectors))
-              ( y))
-          (inv (associative-mul-left-module-Ring R M r s x))
-      ＝
-        add-left-module-Ring R M
+        by
+          ap
+            ( λ y →
+              add-left-module-Ring R M
+                ( mul-left-module-Ring R M r
+                  ( linear-combination-left-module-Ring R M scalars vectors))
+                ( y))
+            ( inv (associative-mul-left-module-Ring R M r s x))
+      ＝ add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
             ( map-tuple (mul-Ring R r) scalars)
             ( vectors))
           ( mul-left-module-Ring R M (mul-Ring R r s) x)
-        by ap
-          ( λ y →
-            add-left-module-Ring R M
-              ( y)
-              ( mul-left-module-Ring R M (mul-Ring R r s) x))
-          ( left-distributive-law-mul-linear-combination-left-module-Ring R M r
-            ( scalars)
-            ( vectors))
-      ＝
-        linear-combination-left-module-Ring R M
+        by
+          ap
+            ( λ y →
+              add-left-module-Ring R M
+                ( y)
+                ( mul-left-module-Ring R M (mul-Ring R r s) x))
+            ( left-distributive-law-mul-linear-combination-left-module-Ring R M r
+              ( scalars)
+              ( vectors))
+      ＝ linear-combination-left-module-Ring R M
           ( map-tuple (mul-Ring R r) (s ∷ scalars))
           ( x ∷ vectors)
         by refl
