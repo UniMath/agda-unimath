@@ -7,18 +7,18 @@ module metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.equivalences
 open import foundation.cartesian-products-subtypes
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.images
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.universe-levels
 
-open import metric-spaces.metric-spaces
 open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 open import metric-spaces.totally-bounded-subspaces-metric-spaces
