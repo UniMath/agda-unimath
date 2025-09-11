@@ -59,7 +59,8 @@ open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ## Idea
 
 A [subset of the real numbers](real-numbers.subsets-real-numbers.md) is
-{{#concept "inhabited and totally bounded" Disambiguation="subset of the real numbers" Agda=inhabited-totally-bounded-subset-ℝ}} if it is an
+{{#concept "inhabited and totally bounded" Disambiguation="subset of the real numbers" Agda=inhabited-totally-bounded-subset-ℝ}}
+if it is an
 [inhabited, totally bounded subspace](metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces.md)
 of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
