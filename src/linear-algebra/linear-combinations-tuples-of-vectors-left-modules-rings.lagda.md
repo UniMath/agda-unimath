@@ -33,7 +33,7 @@ Let `M` be a [left module](linear-algebra.left-modules-rings.md) over a
 {{#concept "linear combination" Agda=linear-combination-left-module-Ring}}
 `r_1 * x_1 + ... + r_n * x_n`.
 
-The proposition of being a linear combination is formalized as being an element
+The proposition of _being_ a linear combination is formalized as being an element
 of a [linear span](linear-algebra.linear-spans-left-modules-rings.md).
 
 ## Definitions
