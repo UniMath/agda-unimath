@@ -62,21 +62,21 @@ module _
 ### Totally bounded metric spaces
 
 ```agda
-totally-bounded-Metric-Space :
+Totally-Bounded-Metric-Space :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-totally-bounded-Metric-Space l1 l2 l3 =
+Totally-Bounded-Metric-Space l1 l2 l3 =
   Σ (Metric-Space l1 l2) (is-totally-bounded-Metric-Space l3)
 
 module _
-  {l1 l2 l3 : Level} (M : totally-bounded-Metric-Space l1 l2 l3)
+  {l1 l2 l3 : Level} (M : Totally-Bounded-Metric-Space l1 l2 l3)
   where
 
-  metric-space-totally-bounded-Metric-Space : Metric-Space l1 l2
-  metric-space-totally-bounded-Metric-Space = pr1 M
+  metric-space-Totally-Bounded-Metric-Space : Metric-Space l1 l2
+  metric-space-Totally-Bounded-Metric-Space = pr1 M
 
-  is-totally-bounded-metric-space-totally-bounded-Metric-Space :
-    is-totally-bounded-Metric-Space l3 metric-space-totally-bounded-Metric-Space
-  is-totally-bounded-metric-space-totally-bounded-Metric-Space =
+  is-totally-bounded-metric-space-Totally-Bounded-Metric-Space :
+    is-totally-bounded-Metric-Space l3 metric-space-Totally-Bounded-Metric-Space
+  is-totally-bounded-metric-space-Totally-Bounded-Metric-Space =
     pr2 M
 ```
 
@@ -204,16 +204,16 @@ module _
 
 ```agda
 abstract
-  is-totally-bounded-product-totally-bounded-Metric-Space :
+  is-totally-bounded-product-Totally-Bounded-Metric-Space :
     {l1 l2 l3 l4 l5 l6 : Level} →
-    (X : totally-bounded-Metric-Space l1 l2 l3) →
-    (Y : totally-bounded-Metric-Space l4 l5 l6) →
+    (X : Totally-Bounded-Metric-Space l1 l2 l3) →
+    (Y : Totally-Bounded-Metric-Space l4 l5 l6) →
     is-totally-bounded-Metric-Space
       ( l3 ⊔ l6)
       ( product-Metric-Space
-        ( metric-space-totally-bounded-Metric-Space X)
-        ( metric-space-totally-bounded-Metric-Space Y))
-  is-totally-bounded-product-totally-bounded-Metric-Space (X , tbX) (Y , tbY) =
+        ( metric-space-Totally-Bounded-Metric-Space X)
+        ( metric-space-Totally-Bounded-Metric-Space Y))
+  is-totally-bounded-product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY) =
     let
       open
         do-syntax-trunc-Prop
@@ -225,12 +225,12 @@ abstract
       mY ← tbY
       unit-trunc-Prop ( λ ε → product-net-Metric-Space X Y ε (mX ε) (mY ε))
 
-product-totally-bounded-Metric-Space :
+product-Totally-Bounded-Metric-Space :
   {l1 l2 l3 l4 l5 l6 : Level} →
-  (X : totally-bounded-Metric-Space l1 l2 l3) →
-  (Y : totally-bounded-Metric-Space l4 l5 l6) →
-  totally-bounded-Metric-Space (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
-product-totally-bounded-Metric-Space (X , tbX) (Y , tbY) =
+  (X : Totally-Bounded-Metric-Space l1 l2 l3) →
+  (Y : Totally-Bounded-Metric-Space l4 l5 l6) →
+  Totally-Bounded-Metric-Space (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
+product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY) =
   ( product-Metric-Space X Y ,
-    is-totally-bounded-product-totally-bounded-Metric-Space (X , tbX) (Y , tbY))
+    is-totally-bounded-product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY))
 ```

@@ -116,7 +116,7 @@ product-totally-bounded-subspace-Metric-Space X Y (S , tbS) (T , tbT) =
         ( subspace-Metric-Space X S)
         ( subspace-Metric-Space Y T))
       ( subspace-Metric-Space (product-Metric-Space X Y) (product-subtype S T))
-      ( is-totally-bounded-product-totally-bounded-Metric-Space
+      ( is-totally-bounded-product-Totally-Bounded-Metric-Space
         ( subspace-Metric-Space X S , tbS)
         ( subspace-Metric-Space Y T , tbT))
       ( inv-equiv (equiv-product-subtype S T) , (λ _ _ _ → id-iff)))
