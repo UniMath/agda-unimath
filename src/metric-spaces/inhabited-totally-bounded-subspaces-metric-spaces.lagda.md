@@ -29,8 +29,9 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 ## Idea
 
-An inhabited, totally bounded subspace of a
-[metric space](metric-spaces.metric-spaces.md) `X` is a
+An
+{{#concept "inhabited, totally bounded subspace" Disambiguation="of a metric space" Agda=inhabited-totally-bounded-subspace-Metric-Space}}
+of a [metric space](metric-spaces.metric-spaces.md) `X` is a
 [subspace](metric-spaces.subspaces-metric-spaces.md) `S ⊆ X` that is
 [totally bounded](metric-spaces.totally-bounded-subspaces-metric-spaces.md) and
 [inhabited](foundation.inhabited-subtypes.md).
