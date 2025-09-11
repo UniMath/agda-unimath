@@ -130,7 +130,7 @@ linear-span-left-module-Ring l R M =
     ( λ (S , G) → is-linear-span-subset-left-module-Ring R M S G)
 
 module _
-  {l1 l2 l3}
+  {l1 l2 l3 : Level}
   (R : Ring l1)
   (M : left-module-Ring l2 R)
   (S : linear-span-left-module-Ring l3 R M)
