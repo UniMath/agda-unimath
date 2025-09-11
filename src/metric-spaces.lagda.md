@@ -79,6 +79,7 @@ open import metric-spaces.images-metric-spaces public
 open import metric-spaces.images-short-functions-metric-spaces public
 open import metric-spaces.images-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
+open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
@@ -126,6 +127,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-rational-neighborhood-relations public
 open import metric-spaces.totally-bounded-metric-spaces public
+open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 ```
