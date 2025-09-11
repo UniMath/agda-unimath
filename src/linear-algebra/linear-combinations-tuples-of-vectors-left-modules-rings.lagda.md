@@ -78,15 +78,15 @@ left-distributive-law-mul-linear-combination-left-module-Ring :
     ( vectors)
 left-distributive-law-mul-linear-combination-left-module-Ring
   R M r empty-tuple empty-tuple =
-    equational-reasoning
-      mul-left-module-Ring R M r
-        ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
-      ＝ mul-left-module-Ring R M r (zero-left-module-Ring R M)
-        by refl
-      ＝ zero-left-module-Ring R M
-        by right-zero-law-mul-left-module-Ring R M r
-      ＝ linear-combination-left-module-Ring R M empty-tuple empty-tuple
-        by refl
+  equational-reasoning
+    mul-left-module-Ring R M r
+      ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
+    ＝ mul-left-module-Ring R M r (zero-left-module-Ring R M)
+      by refl
+    ＝ zero-left-module-Ring R M
+      by right-zero-law-mul-left-module-Ring R M r
+    ＝ linear-combination-left-module-Ring R M empty-tuple empty-tuple
+      by refl
 left-distributive-law-mul-linear-combination-left-module-Ring
   R M r (s ∷ scalars) (x ∷ vectors) =
     equational-reasoning
