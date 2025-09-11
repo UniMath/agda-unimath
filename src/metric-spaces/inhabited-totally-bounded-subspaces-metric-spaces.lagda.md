@@ -87,7 +87,7 @@ module _
 
 ## Properties
 
-### The image of an inhabited, totally bounded subspace of a metric space under a uniformly continuous function is an inhabited, totally bounded subspace
+### The image of an inhabited totally bounded subspace of a metric space under a uniformly continuous function is an inhabited totally bounded subspace
 
 ```agda
 im-uniformly-continuous-function-inhabited-totally-bounded-subspace-Metric-Space :
