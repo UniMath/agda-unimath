@@ -86,7 +86,7 @@ module _
 
 ## Properties
 
-### The image of an inhabited, totally bounded subspace of a metric space is an inhabited, totally bounded subspace
+### The image of an inhabited, totally bounded subspace of a metric space under a uniformly continuous function is an inhabited, totally bounded subspace
 
 ```agda
 im-uniformly-continuous-function-inhabited-totally-bounded-subspace-Metric-Space :
@@ -112,7 +112,7 @@ im-uniformly-continuous-function-inhabited-totally-bounded-subspace-Metric-Space
         ( |S|))
 ```
 
-### Inhabited, totally bounded subspaces of metric spaces are closed under Cartesian products
+### Inhabited, totally bounded subspaces of metric spaces are closed under cartesian products
 
 ```agda
 product-inhabited-totally-bounded-subspace-Metric-Space :

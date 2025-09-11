@@ -28,8 +28,8 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 A
 {{#concept "totally bounded" disambiguation="subspace of a metric space" WDID=Q1362228 WD="totally bounded space" Agda=is-totally-bounded-subset-Metric-Space}}
-subspace of a [metric space](metric-spaces.metric-spaces.md) is a
-[subspace](metric-spaces.subspaces-metric-spaces.md) that is
+[subspace](metric-spaces.subspaces-metric-spaces.md) of a [metric space](metric-spaces.metric-spaces.md) is a
+subspace that is
 [totally bounded](metric-spaces.totally-bounded-metric-spaces.md).
 
 ## Definition
@@ -119,5 +119,5 @@ product-totally-bounded-subspace-Metric-Space X Y (S , tbS) (T , tbT) =
       ( is-totally-bounded-product-totally-bounded-Metric-Space
         ( subspace-Metric-Space X S , tbS)
         ( subspace-Metric-Space Y T , tbT))
-      ( inv-equiv (equiv-product-subtype S T) , λ _ _ _ → id-iff))
+      ( inv-equiv (equiv-product-subtype S T) , (λ _ _ _ → id-iff)))
 ```

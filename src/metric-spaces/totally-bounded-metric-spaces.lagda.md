@@ -200,7 +200,7 @@ module _
         ( tbX)
 ```
 
-### Totally bounded metric spaces are closed under Cartesian products
+### Totally bounded metric spaces are closed under cartesian products
 
 ```agda
 abstract
