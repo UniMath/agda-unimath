@@ -182,8 +182,8 @@ module _
   constant-formal-power-series-Commutative-Semiring c =
     formal-power-series-coefficients-Commutative-Semiring
       ( λ where
-          zero-ℕ → c
-          (succ-ℕ _) → zero-Commutative-Semiring R)
+        zero-ℕ → c
+        (succ-ℕ _) → zero-Commutative-Semiring R)
 ```
 
 ### The constant zero formal power series is the constant formal power series with value zero
@@ -207,7 +207,7 @@ module _
             (succ-ℕ _) → refl))
 ```
 
-### The constant zero formal power series is the constant formal power series with value one
+### The constant one formal power series is the constant formal power series with value one
 
 ```agda
 module _

@@ -221,8 +221,9 @@ module _
     interchange-sum-neg-finite-Ab f =
       unique-right-inv-Ab G
         ( equational-reasoning
-          add-Ab G (sum-finite-Ab G A f)
-            (sum-finite-Ab G A (λ a → neg-Ab G (f a)))
+          add-Ab G
+            ( sum-finite-Ab G A f)
+            ( sum-finite-Ab G A (λ a → neg-Ab G (f a)))
           ＝ sum-finite-Ab G A (λ a → add-Ab G (f a) (neg-Ab G (f a)))
             by inv (interchange-sum-add-finite-Ab G A _ _)
           ＝ sum-finite-Ab G A (λ _ → zero-Ab G)

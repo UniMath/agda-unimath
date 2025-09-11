@@ -318,7 +318,7 @@ module _
       ( is-retraction-map-inv-equiv-permute-components-triple-with-sum-pr2)
 ```
 
-### The binary sum decomposition of 0 is contractible
+### There is a unique binary sum decomposition of 0
 
 ```agda
 is-contr-binary-sum-decomposition-zero-ℕ :
