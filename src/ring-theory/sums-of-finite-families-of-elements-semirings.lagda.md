@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-cartesian-product-types
@@ -25,8 +26,10 @@ open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
 open import ring-theory.semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -296,4 +299,68 @@ module _
     interchange-sum-mul-finite-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
       ( A)
+```
+
+### Decomposing sums via decidable subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    decompose-sum-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      sum-finite-Semiring R A f ＝
+      add-Semiring R
+        ( sum-finite-Semiring R
+          ( finite-type-subset-Finite-Type A P)
+          ( f ∘ inclusion-subset-Finite-Type A P))
+        ( sum-finite-Semiring R
+          ( finite-type-complement-subset-Finite-Type A P)
+          ( f ∘ inclusion-complement-subset-Finite-Type A P))
+    decompose-sum-decidable-subset-finite-Semiring =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( A)
+        ( P)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-zero-Semiring R (f a)) →
+      sum-finite-Semiring R A f ＝
+      sum-finite-Semiring R
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Semiring =
+      vanish-sum-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( A)
+        ( P)
+
+    vanish-sum-complement-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-zero-Semiring R (f a)) →
+      sum-finite-Semiring R A f ＝
+      sum-finite-Semiring R
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Semiring =
+      vanish-sum-complement-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( A)
+        ( P)
 ```
