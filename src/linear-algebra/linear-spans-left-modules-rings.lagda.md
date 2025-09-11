@@ -163,7 +163,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3}
+  {l1 l2 l3 : Level}
   (R : Ring l1)
   (M : left-module-Ring l2 R)
   (S : linear-span-left-module-Ring l3 R M)
