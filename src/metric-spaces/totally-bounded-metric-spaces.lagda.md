@@ -37,7 +37,7 @@ A [metric space](metric-spaces.metric-spaces.md) is
 {{#concept "totally bounded" disambiguation="metric space" WDID=Q1362228 WD="totally bounded space" Agda=is-totally-bounded-Metric-Space}}
 if for every `ε : ℚ⁺`, it has an `ε`-[net](metric-spaces.nets-metric-spaces.md).
 
-## Definition
+## Definitions
 
 ### The property of a space being totally bounded
 
