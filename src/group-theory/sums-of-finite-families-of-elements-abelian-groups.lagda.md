@@ -206,3 +206,27 @@ module _
   interchange-sum-add-finite-Ab =
     interchange-sum-mul-finite-Commutative-Monoid (commutative-monoid-Ab G) A
 ```
+
+### Interchange law of sums and negation
+
+```agda
+module _
+  {l1 l2 : Level} (G : Ab l1) (A : Finite-Type l2)
+  where
+
+  abstract
+    interchange-sum-neg-finite-Ab :
+      (f : type-Finite-Type A → type-Ab G) →
+      sum-finite-Ab G A (λ a → neg-Ab G (f a)) ＝ neg-Ab G (sum-finite-Ab G A f)
+    interchange-sum-neg-finite-Ab f =
+      unique-right-inv-Ab G
+        ( equational-reasoning
+          add-Ab G
+            ( sum-finite-Ab G A f)
+            ( sum-finite-Ab G A (λ a → neg-Ab G (f a)))
+          ＝ sum-finite-Ab G A (λ a → add-Ab G (f a) (neg-Ab G (f a)))
+            by inv (interchange-sum-add-finite-Ab G A _ _)
+          ＝ sum-finite-Ab G A (λ _ → zero-Ab G)
+            by htpy-sum-finite-Ab G A (λ a → right-inverse-law-add-Ab G _)
+          ＝ zero-Ab G by sum-zero-finite-Ab G A)
+```
