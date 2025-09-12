@@ -42,7 +42,9 @@ open import ring-theory.semirings
 
 A
 {{#concept "formal power series" WD="formal power series" WDID=Q1003025 disambiguation="in a commutative ring" Agda=formal-power-series-Commutative-Ring}}
-is a formal sum of the form `Σₙ aₙxⁿ`, where `n` ranges over the [natural numbers](elementary-number-theory.natural-numbers.md), without any notion of convergence.
+is a formal sum of the form `Σₙ aₙxⁿ`, where `n` ranges over the
+[natural numbers](elementary-number-theory.natural-numbers.md), without any
+notion of convergence.
 
 ## Definition
 
