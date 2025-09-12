@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -709,7 +710,30 @@ module _
         ＝ f star by compute-sum-one-element-Commutative-Monoid M _
 ```
 
-### Interchange law of sums and addition
+#### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Commutative-Monoid :
+      (f : type-Finite-Type I → type-Commutative-Monoid M) →
+      sum-finite-Commutative-Monoid M I f ＝ f i
+    sum-finite-is-contr-Commutative-Monoid f =
+      sum-equiv-finite-Commutative-Monoid M
+        ( I)
+        ( unit-Finite-Type)
+        ( equiv-unit-is-contr is-contr-I)
+        ( f) ∙
+      sum-finite-unit-type-Commutative-Monoid M _ ∙
+      ap f (eq-is-contr is-contr-I)
+```
+
+#### Interchange law of sums and addition
 
 ```agda
 module _

@@ -8,6 +8,7 @@ module ring-theory.sums-of-finite-families-of-elements-semirings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -76,6 +77,27 @@ module _
   sum-unit-finite-Semiring =
     sum-finite-unit-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
+```
+
+### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Semiring :
+      (f : type-Finite-Type I → type-Semiring R) →
+      sum-finite-Semiring R I f ＝ f i
+    sum-finite-is-contr-Semiring =
+      sum-finite-is-contr-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( I)
+        ( is-contr-I)
+        ( i)
 ```
 
 ### Sums are homotopy invariant
