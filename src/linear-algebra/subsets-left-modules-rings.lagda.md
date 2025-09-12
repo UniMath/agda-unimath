@@ -49,7 +49,7 @@ module _
   type-subset-left-module-Ring = type-subtype S
 
   inclusion-subset-left-module-Ring :
-    (type-subset-left-module-Ring) → (type-left-module-Ring R M)
+    type-subset-left-module-Ring → type-left-module-Ring R M
   inclusion-subset-left-module-Ring = pr1
 ```
 
