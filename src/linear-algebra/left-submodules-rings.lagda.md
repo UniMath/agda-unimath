@@ -265,25 +265,25 @@ module _
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( commutative-add-left-module-Ring R M (pr1 x) (pr1 y))
 
-  left-distributive-law-mul-add-left-submodule-Ring :
+  left-distributive-mul-add-left-submodule-Ring :
     (r : type-Ring R)
     (x y : type-left-submodule-Ring R M N) →
     mul-left-submodule-Ring r (add-left-submodule-Ring x y) ＝
     add-left-submodule-Ring
       ( mul-left-submodule-Ring r x)
       ( mul-left-submodule-Ring r y)
-  left-distributive-law-mul-add-left-submodule-Ring r x y =
+  left-distributive-mul-add-left-submodule-Ring r x y =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( left-distributive-mul-add-left-module-Ring R M r (pr1 x) (pr1 y))
 
-  right-distributive-law-mul-add-left-submodule-Ring :
+  right-distributive-mul-add-left-submodule-Ring :
     (r s : type-Ring R)
     (x : type-left-submodule-Ring R M N) →
     mul-left-submodule-Ring (add-Ring R r s) x ＝
     add-left-submodule-Ring
       ( mul-left-submodule-Ring r x)
       ( mul-left-submodule-Ring s x)
-  right-distributive-law-mul-add-left-submodule-Ring r s x =
+  right-distributive-mul-add-left-submodule-Ring r s x =
     eq-left-submodule-Ring-eq-left-module-Ring R M N
       ( right-distributive-mul-add-left-module-Ring R M r s (pr1 x))
 
@@ -340,7 +340,7 @@ module _
     (r : type-Ring R) → hom-Ab ab-left-submodule-Ring ab-left-submodule-Ring
   pr1 (map-hom-left-submodule-Ring r) = mul-left-submodule-Ring r
   pr2 (map-hom-left-submodule-Ring r) {x} {y} =
-    left-distributive-law-mul-add-left-submodule-Ring r x y
+    left-distributive-mul-add-left-submodule-Ring r x y
 
   mul-hom-left-submodule-Ring :
     hom-Ring R endomorphism-ring-left-submodule-Ring
@@ -349,7 +349,7 @@ module _
     eq-htpy-hom-Ab
       ab-left-submodule-Ring
       ab-left-submodule-Ring
-      ( right-distributive-law-mul-add-left-submodule-Ring r s)
+      ( right-distributive-mul-add-left-submodule-Ring r s)
   pr1 (pr2 mul-hom-left-submodule-Ring) {r} {s} =
     eq-htpy-hom-Ab
       ab-left-submodule-Ring
