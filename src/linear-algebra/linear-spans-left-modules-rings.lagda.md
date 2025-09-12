@@ -288,7 +288,7 @@ module _
                   ( map-tuple pr1 v))
               by
                 inv
-                  ( left-distributive-law-mul-linear-combination-left-module-Ring
+                  ( left-distributive-mul-linear-combination-tuple-left-module-Ring
                     ( R)
                     ( M)
                     ( r)

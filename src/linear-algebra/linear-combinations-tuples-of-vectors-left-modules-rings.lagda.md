@@ -71,7 +71,7 @@ module _
   (M : left-module-Ring l2 R)
   where
 
-  left-distributive-law-mul-linear-combination-left-module-Ring :
+  left-distributive-mul-linear-combination-tuple-left-module-Ring :
     {n : ℕ}
     (r : type-Ring R) →
     (s : tuple (type-Ring R) n) →
@@ -82,7 +82,7 @@ module _
     linear-combination-tuple-left-module-Ring R M
       ( map-tuple (mul-Ring R r) s)
       ( v)
-  left-distributive-law-mul-linear-combination-left-module-Ring
+  left-distributive-mul-linear-combination-tuple-left-module-Ring
     r empty-tuple empty-tuple =
     equational-reasoning
       mul-left-module-Ring R M r
@@ -93,7 +93,7 @@ module _
         by right-zero-law-mul-left-module-Ring R M r
       ＝ linear-combination-tuple-left-module-Ring R M empty-tuple empty-tuple
         by refl
-  left-distributive-law-mul-linear-combination-left-module-Ring
+  left-distributive-mul-linear-combination-tuple-left-module-Ring
     r (s₀ ∷ s) (x₀ ∷ v) =
     equational-reasoning
       mul-left-module-Ring R M r
@@ -134,7 +134,7 @@ module _
               add-left-module-Ring R M
                 ( y)
                 ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀))
-            ( left-distributive-law-mul-linear-combination-left-module-Ring r
+            ( left-distributive-mul-linear-combination-tuple-left-module-Ring r
               ( s)
               ( v))
       ＝ linear-combination-tuple-left-module-Ring R M
