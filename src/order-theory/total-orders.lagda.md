@@ -11,9 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-posets
@@ -88,8 +91,8 @@ module _
   type-Total-Order : UU l1
   type-Total-Order = type-Poset poset-Total-Order
 
-  leq-Total-Order-Prop : (x y : type-Total-Order) → Prop l2
-  leq-Total-Order-Prop = leq-prop-Poset poset-Total-Order
+  leq-prop-Total-Order : (x y : type-Total-Order) → Prop l2
+  leq-prop-Total-Order = leq-prop-Poset poset-Total-Order
 
   leq-Total-Order : (x y : type-Total-Order) → UU l2
   leq-Total-Order = leq-Poset poset-Total-Order
@@ -253,6 +256,27 @@ module _
       ( max-is-least-binary-upper-bound-Total-Order T x y)
 ```
 
+### The minimum of two values is less than or equal to their maximum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  (x y : type-Total-Order T)
+  where
+
+  abstract
+    min-leq-max-Total-Order :
+      leq-Total-Order T (min-Total-Order T x y) (max-Total-Order T x y)
+    min-leq-max-Total-Order =
+      transitive-leq-Total-Order T
+        ( min-Total-Order T x y)
+        ( x)
+        ( max-Total-Order T x y)
+        ( leq-left-max-Total-Order T x y)
+        ( leq-left-min-Total-Order T x y)
+```
+
 ### Total orders are meet semilattices
 
 ```agda
@@ -357,6 +381,44 @@ module _
       ( order-theoretic-join-semilattice-Total-Order T)
 ```
 
+### Interchange on the binary minimum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-min-Total-Order :
+      (a b c d : type-Total-Order T) →
+      min-Total-Order T (min-Total-Order T a b) (min-Total-Order T c d) ＝
+      min-Total-Order T (min-Total-Order T a c) (min-Total-Order T b d)
+    interchange-law-min-Total-Order =
+      interchange-law-commutative-and-associative
+        ( min-Total-Order T)
+        ( commutative-min-Total-Order T)
+        ( associative-min-Total-Order T)
+```
+
+### Interchange on the binary maximum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-max-Total-Order :
+      (a b c d : type-Total-Order T) →
+      max-Total-Order T (max-Total-Order T a b) (max-Total-Order T c d) ＝
+      max-Total-Order T (max-Total-Order T a c) (max-Total-Order T b d)
+    interchange-law-max-Total-Order =
+      interchange-law-commutative-and-associative
+        ( max-Total-Order T)
+        ( commutative-max-Total-Order T)
+        ( associative-max-Total-Order T)
+```
+
 ### The binary minimum operation is idempotent
 
 ```agda
@@ -416,7 +478,7 @@ module _
             ( x≤y)})
 ```
 
-### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `x`
+### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `y`
 
 ```agda
 module _
@@ -498,6 +560,25 @@ module _
         ( order-theoretic-meet-semilattice-Total-Order T)
 ```
 
+### If `a ≤ b` and `a ≤ c`, then `a ≤ min b c`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-min-leq-both-Total-Order :
+      (a b c : type-Total-Order T) →
+      leq-Total-Order T a b → leq-Total-Order T a c →
+      leq-Total-Order T a (min-Total-Order T b c)
+    leq-min-leq-both-Total-Order a b c a≤b a≤c =
+      tr
+        ( λ d → leq-Total-Order T d (min-Total-Order T b c))
+        ( idempotent-min-Total-Order T a)
+        ( min-leq-leq-Total-Order T a b a c a≤b a≤c)
+```
+
 ### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
 
 ```agda
@@ -517,6 +598,94 @@ module _
     max-leq-leq-Total-Order =
       join-leq-leq-Order-Theoretic-Join-Semilattice
         ( order-theoretic-join-semilattice-Total-Order T)
+```
+
+### The minimum of two values is equal to one of them
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    eq-one-min-Total-Order :
+      (x y : type-Total-Order T) →
+      type-disjunction-Prop
+        ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) x)
+        ( Id-Prop (set-Total-Order T) (min-Total-Order T x y) y)
+    eq-one-min-Total-Order x y =
+      map-disjunction
+        ( left-leq-right-min-Total-Order T x y)
+        ( right-leq-left-min-Total-Order T x y)
+        ( is-total-Total-Order T x y)
+
+    eq-one-of-four-min-Total-Order :
+      (x y z w : type-Total-Order T) →
+      let
+        min=_ =
+          Id-Prop
+            ( set-Total-Order T)
+            ( min-Total-Order T (min-Total-Order T x y) (min-Total-Order T z w))
+      in type-disjunction-Prop (min= x ∨ min= y) (min= z ∨ min= w)
+    eq-one-of-four-min-Total-Order x y z w =
+      map-disjunction
+        ( λ min=minxy →
+          map-disjunction
+            ( min=minxy ∙_)
+            ( min=minxy ∙_)
+            ( eq-one-min-Total-Order x y))
+        ( λ min=minzw →
+          map-disjunction
+            ( min=minzw ∙_)
+            ( min=minzw ∙_)
+            ( eq-one-min-Total-Order z w))
+        ( eq-one-min-Total-Order
+          ( min-Total-Order T x y)
+          ( min-Total-Order T z w))
+```
+
+### The maximum of two values is equal to one of them
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    eq-one-max-Total-Order :
+      (x y : type-Total-Order T) →
+      type-disjunction-Prop
+        ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) x)
+        ( Id-Prop (set-Total-Order T) (max-Total-Order T x y) y)
+    eq-one-max-Total-Order x y =
+      map-disjunction
+        ( right-leq-left-max-Total-Order T x y)
+        ( left-leq-right-max-Total-Order T x y)
+        ( is-total-Total-Order T y x)
+
+    eq-one-of-four-max-Total-Order :
+      (x y z w : type-Total-Order T) →
+      let
+        max=_ =
+          Id-Prop
+            ( set-Total-Order T)
+            ( max-Total-Order T (max-Total-Order T x y) (max-Total-Order T z w))
+      in type-disjunction-Prop (max= x ∨ max= y) (max= z ∨ max= w)
+    eq-one-of-four-max-Total-Order x y z w =
+      map-disjunction
+        ( λ max=maxxy →
+          map-disjunction
+            ( max=maxxy ∙_)
+            ( max=maxxy ∙_)
+            ( eq-one-max-Total-Order x y))
+        ( λ max=maxzw →
+          map-disjunction
+            ( max=maxzw ∙_)
+            ( max=maxzw ∙_)
+            ( eq-one-max-Total-Order z w))
+        ( eq-one-max-Total-Order
+          ( max-Total-Order T x y)
+          ( max-Total-Order T z w))
 ```
 
 ## External links

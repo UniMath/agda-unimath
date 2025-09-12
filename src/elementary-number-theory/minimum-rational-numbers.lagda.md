@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -37,6 +38,10 @@ the
 ```agda
 min-ℚ : ℚ → ℚ → ℚ
 min-ℚ = min-Decidable-Total-Order ℚ-Decidable-Total-Order
+
+ap-min-ℚ :
+  {p p' : ℚ} → (p ＝ p') → {q q' : ℚ} → (q ＝ q') → min-ℚ p q ＝ min-ℚ p' q'
+ap-min-ℚ = ap-binary min-ℚ
 ```
 
 ## Properties
