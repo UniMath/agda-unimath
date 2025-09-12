@@ -139,8 +139,8 @@ module _
   generators-linear-span-left-module-Ring = pr2 (pr1 S)
 
   inclusion-generators-linear-span-left-module-Ring :
-    (type-subset-left-module-Ring R M generators-linear-span-left-module-Ring) →
-    (type-left-module-Ring R M)
+    type-subset-left-module-Ring R M generators-linear-span-left-module-Ring →
+    type-left-module-Ring R M
   inclusion-generators-linear-span-left-module-Ring = pr1
 
   contains-all-linear-combinations-linear-span-left-module-Ring :
