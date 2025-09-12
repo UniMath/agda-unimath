@@ -143,6 +143,10 @@ module _
     type-left-module-Ring R M
   inclusion-generators-linear-span-left-module-Ring = pr1
 
+  is-in-linear-span-left-module-Ring : type-left-module-Ring R M → UU l3
+  is-in-linear-span-left-module-Ring x =
+    type-Prop (subset-linear-span-left-module-Ring x)
+
   contains-all-linear-combinations-linear-span-left-module-Ring :
     contains-all-linear-combinations-subset-left-module-Ring R M
       subset-linear-span-left-module-Ring
@@ -198,7 +202,7 @@ module _
             contains-only-linear-combinations-linear-span-left-module-Ring R M S
               ( y , y-in-span)
           tr
-            ( λ z → type-Prop (subset-linear-span-left-module-Ring R M S z))
+            ( λ z → is-in-linear-span-left-module-Ring R M S z)
             ( equational-reasoning
               linear-combination-tuple-left-module-Ring R M
                 ( concat-tuple x-scalars y-scalars)
@@ -295,7 +299,7 @@ module _
           ( contains-only-linear-combinations-linear-span-left-module-Ring R M S
             ( x , x-in-span))
         ( tr
-          ( λ y → type-Prop (subset-linear-span-left-module-Ring R M S y))
+          ( λ y → is-in-linear-span-left-module-Ring R M S y)
           ( equational-reasoning
             linear-combination-tuple-left-module-Ring R M
               ( map-tuple (mul-Ring R r) scalars)
