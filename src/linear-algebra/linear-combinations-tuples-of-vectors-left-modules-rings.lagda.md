@@ -180,7 +180,9 @@ module _
             ( left-unit-law-add-left-module-Ring R M
               ( linear-combination-tuple-left-module-Ring R M s-b v-b))
       ＝ add-left-module-Ring R M
-          ( linear-combination-tuple-left-module-Ring R M empty-tuple empty-tuple)
+          ( linear-combination-tuple-left-module-Ring R M
+            ( empty-tuple)
+            ( empty-tuple))
           ( linear-combination-tuple-left-module-Ring R M s-b v-b)
         by refl
   add-concat-linear-combination-tuple-left-module-Ring
