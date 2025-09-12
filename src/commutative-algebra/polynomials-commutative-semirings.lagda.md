@@ -857,7 +857,7 @@ module _
                               ( λ (i , j , _) → decidable-subtype-le-ℕ Nq j))
                             ( λ ((i , j , _) , _) →
                               decidable-subtype-le-ℕ Np i))
-                          ( λ (((i , j , _) , _) , _) → cp i *R cq j)
+                          ( λ (((i , j , _) , j<Nq) , i<Np) → cp i *R cq j)
                         by
                           vanish-sum-complement-decidable-subset-finite-Commutative-Semiring
                             ( R)
@@ -869,17 +869,12 @@ module _
                               left-zero-law-mul-Commutative-Semiring R _)
                       ＝
                         sum-finite-Commutative-Semiring R _
-                          ( λ ((i , j , _) , _ , _) → cp i *R cq j)
+                          ( λ ((i , j , _) , j<Nq , i<Np) → cp i *R cq j)
                         by
                           sum-equiv-finite-Commutative-Semiring R
                             ( _)
-                            ( finite-type-subset-Finite-Type
-                              ( finite-type-binary-sum-decomposition-ℕ n)
-                              ( λ (i , j , _) →
-                                conjunction-Decidable-Prop
-                                  ( decidable-subtype-le-ℕ Nq j)
-                                  ( decidable-subtype-le-ℕ Np i)))
-                            ( associative-Σ (binary-sum-decomposition-ℕ n) _ _)
+                            ( _)
+                            ( associative-Σ _ _ _)
                             ( _))
                     ( refl))
           ＝
