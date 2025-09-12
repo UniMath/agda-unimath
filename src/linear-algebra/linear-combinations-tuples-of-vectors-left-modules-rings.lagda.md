@@ -41,20 +41,23 @@ element of a [linear span](linear-algebra.linear-spans-left-modules-rings.md).
 ### Linear combinations of tuples of vectors in a left module over a ring
 
 ```agda
-linear-combination-left-module-Ring :
+module _
   {l1 l2 : Level}
-  {n : ℕ} →
   (R : Ring l1)
-  (M : left-module-Ring l2 R) →
-  tuple (type-Ring R) n →
-  tuple (type-left-module-Ring R M) n →
-  type-left-module-Ring R M
-linear-combination-left-module-Ring R M empty-tuple empty-tuple =
-  zero-left-module-Ring R M
-linear-combination-left-module-Ring R M (r ∷ s) (x ∷ v) =
-  add-left-module-Ring R M
-    ( linear-combination-left-module-Ring R M s v)
-    ( mul-left-module-Ring R M r x)
+  (M : left-module-Ring l2 R)
+  where
+
+  linear-combination-left-module-Ring :
+    {n : ℕ} →
+    tuple (type-Ring R) n →
+    tuple (type-left-module-Ring R M) n →
+    type-left-module-Ring R M
+  linear-combination-left-module-Ring empty-tuple empty-tuple =
+    zero-left-module-Ring R M
+  linear-combination-left-module-Ring (r ∷ s) (x ∷ v) =
+    add-left-module-Ring R M
+      ( linear-combination-left-module-Ring s v)
+      ( mul-left-module-Ring R M r x)
 ```
 
 ## Properties
