@@ -247,7 +247,7 @@ module _
     ( equiv-tot
       ( equiv-is-iso-is-iso-base-is-replete-Subprecategory
           C P is-replete-P {x} {y})) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot
       ( λ f →
         ( commutative-product) ∘e

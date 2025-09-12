@@ -183,18 +183,17 @@ module _
                   d))))
         ( equiv-Σ
             ( _)
-            ( associative-product _ _ _ ∘e commutative-product)
+            ( associative-product ∘e commutative-product)
             ( λ x →
               equiv-postcomp-equiv
-                ( ( associative-product _ _ _ ∘e
-                  ( commutative-product)))
+                ( associative-product ∘e commutative-product)
                 ( inclusion-subuniverse P X)) ∘e
             equiv-ternary-left-iterated-product-Decomposition-Subuniverse
               P
               X
               C2)
-        ( λ d → associative-product _ _ _)) ∘e
-      ( inv-associative-Σ _ _ _) ∘e
+        ( λ d → associative-product)) ∘e
+      ( inv-associative-Σ) ∘e
       ( equiv-tot (λ d → right-distributive-product-Σ))
 
     equiv-right-iterated-dirichlet-product-species-subuniverse :
@@ -232,7 +231,7 @@ module _
           P
           X
           C2)) ∘e
-      ( inv-associative-Σ _ _ _) ∘e
+      ( inv-associative-Σ) ∘e
         ( ( equiv-tot (λ d → left-distributive-product-Σ)))
 
     equiv-associative-dirichlet-product-species-subuniverse :
@@ -357,7 +356,7 @@ module _
         P
         X
         C2)) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ _ → commutative-product))
 
   equiv-left-unit-law-dirichlet-product-species-subuniverse :

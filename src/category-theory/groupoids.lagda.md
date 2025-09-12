@@ -151,20 +151,7 @@ module _
             ( λ (y , p) →
               Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
                 ( λ (q , l) → p ∙ q ＝ refl)))
-        ( ( equiv-tot
-            ( λ y →
-              equiv-tot
-                ( λ p →
-                  associative-Σ
-                    ( y ＝ x)
-                    ( λ q → q ∙ p ＝ refl)
-                    ( λ (q , r) → p ∙ q ＝ refl)))) ∘e
-          ( associative-Σ
-            ( type-1-Type X)
-            ( λ y → x ＝ y)
-            ( λ (y , p) →
-              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
-                ( λ (q , l) → p ∙ q ＝ refl))))
+        ( equiv-tot (λ y → equiv-tot (λ p → associative-Σ)) ∘e associative-Σ)
         ( is-contr-iterated-Σ 2
           ( is-torsorial-Id x ,
             ( x , refl) ,

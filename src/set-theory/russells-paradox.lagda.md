@@ -134,7 +134,7 @@ paradox-Russell {l} H =
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
             ( is-torsorial-Id' R')
             ( pair R' refl)) ∘e
-          ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
+          ( ( inv-associative-Σ) ∘e
             ( ( equiv-tot
                 ( λ t →
                   ( commutative-product) ∘e
@@ -146,14 +146,7 @@ paradox-Russell {l} H =
                         ( eq-resize-𝕍
                           ( is-small-multiset-𝕍 is-small-lsuc t)
                           ( is-small-R'))))))) ∘e
-              ( associative-Σ
-                ( 𝕍 l)
-                ( λ t → t ∉-𝕍 t)
-                ( λ t →
-                  ( resize-𝕍
-                    ( pr1 t)
-                    ( is-small-multiset-𝕍 is-small-lsuc (pr1 t))) ＝
-                  ( R))))))
+              ( associative-Σ))))
 ```
 
 ### There can be no surjective map `f : A → 𝒰` for any `A : 𝒰`

@@ -221,10 +221,7 @@ module _
       ( eq-htpy
         (λ z →
           eq-pair-Σ
-            ( eq-equiv
-              ( pair
-                ( map-commutative-coproduct (Id x z) (Id y z))
-                ( is-equiv-map-commutative-coproduct (Id x z) (Id y z))))
+            ( eq-equiv commutative-coproduct)
             ( eq-pair-Σ
               ( eq-is-prop
                 ( is-prop-is-prop
