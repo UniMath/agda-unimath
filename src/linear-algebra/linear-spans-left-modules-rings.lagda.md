@@ -69,7 +69,7 @@ module _
             Π-Prop
               ( tuple (type-subset-left-module-Ring R M G) n)
               ( λ v →
-                S ( linear-combination-left-module-Ring R M
+                S ( linear-combination-tuple-left-module-Ring R M
                     ( s)
                     ( map-tuple pr1 v)))))
 
@@ -95,7 +95,7 @@ module _
                   ( tuple (type-subset-left-module-Ring R M G) n)
                   ( λ v →
                     pr1 x ＝
-                    linear-combination-left-module-Ring R M
+                    linear-combination-tuple-left-module-Ring R M
                       ( s)
                       ( map-tuple pr1 v)))))
 
@@ -203,10 +203,10 @@ module _
           tr
             ( λ z → pr1 (subset-linear-span-left-module-Ring R M S z))
             ( equational-reasoning
-              linear-combination-left-module-Ring R M
+              linear-combination-tuple-left-module-Ring R M
                 ( concat-tuple x-s y-s)
                 ( map-tuple pr1 (concat-tuple x-v y-v))
-              ＝ linear-combination-left-module-Ring R M
+              ＝ linear-combination-tuple-left-module-Ring R M
                   ( concat-tuple x-s y-s)
                   ( concat-tuple
                     ( map-tuple pr1 x-v)
@@ -214,19 +214,19 @@ module _
                 by
                   ap
                     ( λ z →
-                      ( linear-combination-left-module-Ring R M
+                      ( linear-combination-tuple-left-module-Ring R M
                         ( concat-tuple x-s y-s)
                         ( z)))
                     ( distributive-map-concat-tuple pr1 x-v y-v)
               ＝ add-left-module-Ring R M
-                  ( linear-combination-left-module-Ring R M
+                  ( linear-combination-tuple-left-module-Ring R M
                     ( x-s)
                     ( map-tuple pr1 x-v))
-                  ( linear-combination-left-module-Ring R M
+                  ( linear-combination-tuple-left-module-Ring R M
                     ( y-s)
                     ( map-tuple pr1 y-v))
                 by
-                  add-concat-linear-combination-left-module-Ring
+                  add-concat-linear-combination-tuple-left-module-Ring
                     ( R)
                     ( M)
                     ( x-s)
@@ -235,14 +235,14 @@ module _
                     ( map-tuple pr1 y-v)
               ＝ add-left-module-Ring R M
                   ( x)
-                  ( linear-combination-left-module-Ring R M
+                  ( linear-combination-tuple-left-module-Ring R M
                     ( y-s)
                     ( map-tuple pr1 y-v))
                 by
                   ap
                     ( λ z → add-left-module-Ring R M
                       ( z)
-                      ( linear-combination-left-module-Ring R M
+                      ( linear-combination-tuple-left-module-Ring R M
                         ( y-s)
                         ( map-tuple pr1 y-v)))
                     ( inv x-identity)
@@ -278,12 +278,12 @@ module _
         ( tr
           ( λ y → pr1 (subset-linear-span-left-module-Ring R M S y))
           ( equational-reasoning
-            linear-combination-left-module-Ring R M
+            linear-combination-tuple-left-module-Ring R M
               ( map-tuple (mul-Ring R r) s)
               ( map-tuple pr1 v)
             ＝ mul-left-module-Ring R M
                 ( r)
-                ( linear-combination-left-module-Ring R M
+                ( linear-combination-tuple-left-module-Ring R M
                   ( s)
                   ( map-tuple pr1 v))
               by

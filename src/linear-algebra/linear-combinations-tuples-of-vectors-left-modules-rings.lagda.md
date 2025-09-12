@@ -47,16 +47,16 @@ module _
   (M : left-module-Ring l2 R)
   where
 
-  linear-combination-left-module-Ring :
+  linear-combination-tuple-left-module-Ring :
     {n : ℕ} →
     tuple (type-Ring R) n →
     tuple (type-left-module-Ring R M) n →
     type-left-module-Ring R M
-  linear-combination-left-module-Ring empty-tuple empty-tuple =
+  linear-combination-tuple-left-module-Ring empty-tuple empty-tuple =
     zero-left-module-Ring R M
-  linear-combination-left-module-Ring (r ∷ s) (x ∷ v) =
+  linear-combination-tuple-left-module-Ring (r ∷ s) (x ∷ v) =
     add-left-module-Ring R M
-      ( linear-combination-left-module-Ring s v)
+      ( linear-combination-tuple-left-module-Ring s v)
       ( mul-left-module-Ring R M r x)
 ```
 
@@ -78,53 +78,53 @@ module _
     (v : tuple (type-left-module-Ring R M) n) →
     mul-left-module-Ring R M
       ( r)
-      ( linear-combination-left-module-Ring R M s v) ＝
-    linear-combination-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M s v) ＝
+    linear-combination-tuple-left-module-Ring R M
       ( map-tuple (mul-Ring R r) s)
       ( v)
   left-distributive-law-mul-linear-combination-left-module-Ring
     r empty-tuple empty-tuple =
     equational-reasoning
       mul-left-module-Ring R M r
-        ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
+        ( linear-combination-tuple-left-module-Ring R M empty-tuple empty-tuple)
       ＝ mul-left-module-Ring R M r (zero-left-module-Ring R M)
         by refl
       ＝ zero-left-module-Ring R M
         by right-zero-law-mul-left-module-Ring R M r
-      ＝ linear-combination-left-module-Ring R M empty-tuple empty-tuple
+      ＝ linear-combination-tuple-left-module-Ring R M empty-tuple empty-tuple
         by refl
   left-distributive-law-mul-linear-combination-left-module-Ring
     r (s₀ ∷ s) (x₀ ∷ v) =
     equational-reasoning
       mul-left-module-Ring R M r
-        ( linear-combination-left-module-Ring R M (s₀ ∷ s) (x₀ ∷ v))
+        ( linear-combination-tuple-left-module-Ring R M (s₀ ∷ s) (x₀ ∷ v))
       ＝ mul-left-module-Ring R M r
           ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M s v)
+            ( linear-combination-tuple-left-module-Ring R M s v)
             ( mul-left-module-Ring R M s₀ x₀))
         by refl
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M s v))
+            ( linear-combination-tuple-left-module-Ring R M s v))
           ( mul-left-module-Ring R M r (mul-left-module-Ring R M s₀ x₀))
         by
           left-distributive-mul-add-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M s v)
+            ( linear-combination-tuple-left-module-Ring R M s v)
             ( mul-left-module-Ring R M s₀ x₀)
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M s v))
+            ( linear-combination-tuple-left-module-Ring R M s v))
           ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀)
         by
           ap
             ( λ y →
               add-left-module-Ring R M
                 ( mul-left-module-Ring R M r
-                  ( linear-combination-left-module-Ring R M s v))
+                  ( linear-combination-tuple-left-module-Ring R M s v))
                 ( y))
             ( inv (associative-mul-left-module-Ring R M r s₀ x₀))
       ＝ add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( map-tuple (mul-Ring R r) s)
             ( v))
           ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀)
@@ -137,7 +137,7 @@ module _
             ( left-distributive-law-mul-linear-combination-left-module-Ring r
               ( s)
               ( v))
-      ＝ linear-combination-left-module-Ring R M
+      ＝ linear-combination-tuple-left-module-Ring R M
           ( map-tuple (mul-Ring R r) (s₀ ∷ s))
           ( x₀ ∷ v)
         by refl
@@ -152,66 +152,66 @@ module _
   (M : left-module-Ring l2 R)
   where
 
-  add-concat-linear-combination-left-module-Ring :
+  add-concat-linear-combination-tuple-left-module-Ring :
     {n m : ℕ} →
     (s-a : tuple (type-Ring R) n) →
     (v-a : tuple (type-left-module-Ring R M) n) →
     (s-b : tuple (type-Ring R) m) →
     (v-b : tuple (type-left-module-Ring R M) m) →
-    linear-combination-left-module-Ring R M
+    linear-combination-tuple-left-module-Ring R M
       ( concat-tuple s-a s-b)
       ( concat-tuple v-a v-b) ＝
     add-left-module-Ring R M
-      ( linear-combination-left-module-Ring R M s-a v-a)
-      ( linear-combination-left-module-Ring R M s-b v-b)
-  add-concat-linear-combination-left-module-Ring
+      ( linear-combination-tuple-left-module-Ring R M s-a v-a)
+      ( linear-combination-tuple-left-module-Ring R M s-b v-b)
+  add-concat-linear-combination-tuple-left-module-Ring
     empty-tuple empty-tuple s-b v-b =
     equational-reasoning
-      linear-combination-left-module-Ring R M
+      linear-combination-tuple-left-module-Ring R M
         ( concat-tuple empty-tuple s-b)
         ( concat-tuple empty-tuple v-b)
-      ＝ linear-combination-left-module-Ring R M s-b v-b
+      ＝ linear-combination-tuple-left-module-Ring R M s-b v-b
         by refl
       ＝ add-left-module-Ring R M
           ( zero-left-module-Ring R M)
-          ( linear-combination-left-module-Ring R M s-b v-b)
+          ( linear-combination-tuple-left-module-Ring R M s-b v-b)
         by
           inv
             ( left-unit-law-add-left-module-Ring R M
-              ( linear-combination-left-module-Ring R M s-b v-b))
+              ( linear-combination-tuple-left-module-Ring R M s-b v-b))
       ＝ add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
-          ( linear-combination-left-module-Ring R M s-b v-b)
+          ( linear-combination-tuple-left-module-Ring R M empty-tuple empty-tuple)
+          ( linear-combination-tuple-left-module-Ring R M s-b v-b)
         by refl
-  add-concat-linear-combination-left-module-Ring
+  add-concat-linear-combination-tuple-left-module-Ring
     (r ∷ s-a) (x ∷ v-a) s-b v-b =
     equational-reasoning
-      linear-combination-left-module-Ring R M
+      linear-combination-tuple-left-module-Ring R M
         ( concat-tuple (r ∷ s-a) s-b)
         ( concat-tuple (x ∷ v-a) v-b)
-      ＝ linear-combination-left-module-Ring R M
+      ＝ linear-combination-tuple-left-module-Ring R M
           ( r ∷ (concat-tuple s-a s-b))
           ( x ∷ (concat-tuple v-a v-b))
         by refl
       ＝ add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( concat-tuple s-a s-b)
             ( concat-tuple v-a v-b))
           ( mul-left-module-Ring R M r x)
         by refl
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-a)
               ( v-a))
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-b)
               ( v-b)))
           ( mul-left-module-Ring R M r x)
         by
           ap
             ( λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
-            ( add-concat-linear-combination-left-module-Ring
+            ( add-concat-linear-combination-tuple-left-module-Ring
               ( s-a)
               ( v-a)
               ( s-b)
@@ -219,66 +219,66 @@ module _
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r x)
           ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-a)
               ( v-a))
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-b)
               ( v-b)))
         by
           commutative-add-left-module-Ring R M
             ( add-left-module-Ring R M
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-a)
                 ( v-a))
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-b)
                 ( v-b)))
             ( mul-left-module-Ring R M r x)
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
             ( mul-left-module-Ring R M r x)
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-a)
               ( v-a)))
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( s-b)
             ( v-b))
         by
           inv
             ( associative-add-left-module-Ring R M
               ( mul-left-module-Ring R M r x)
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-a)
                 ( v-a))
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-b)
                 ( v-b)))
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
               ( s-a)
               ( v-a))
             ( mul-left-module-Ring R M r x))
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( s-b)
             ( v-b))
         by
           ap
             ( λ y → add-left-module-Ring R M y
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-b)
                 ( v-b)))
             ( commutative-add-left-module-Ring R M
               ( mul-left-module-Ring R M r x)
-              ( linear-combination-left-module-Ring R M
+              ( linear-combination-tuple-left-module-Ring R M
                 ( s-a)
                 ( v-a)))
       ＝ add-left-module-Ring R M
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( r ∷ s-a)
             ( x ∷ v-a))
-          ( linear-combination-left-module-Ring R M
+          ( linear-combination-tuple-left-module-Ring R M
             ( s-b)
             ( v-b))
         by refl
