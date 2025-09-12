@@ -313,6 +313,27 @@ module _
   mul-polynomial-Commutative-Ring = mul-polynomial-Commutative-Semiring
 ```
 
+#### The product of two polynomials, evaluated at `x`, is equal to the product of each polynomial evaluated at `x`
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  abstract
+    interchange-ev-mul-polynomial-Commutative-Ring :
+      (p q : polynomial-Commutative-Ring R) →
+      (x : type-Commutative-Ring R) →
+      ev-polynomial-Commutative-Ring R
+        ( mul-polynomial-Commutative-Ring R p q)
+        ( x) ＝
+      mul-Commutative-Ring R
+        ( ev-polynomial-Commutative-Ring R p x)
+        ( ev-polynomial-Commutative-Ring R q x)
+    interchange-ev-mul-polynomial-Commutative-Ring =
+      interchange-ev-mul-polynomial-Commutative-Semiring
+```
+
 ### The commutative ring of polynomials
 
 ```agda
