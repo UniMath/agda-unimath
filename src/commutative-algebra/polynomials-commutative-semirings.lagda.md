@@ -757,7 +757,7 @@ module _
       is-polynomial-mul-polynomial-Commutative-Semiring pp qq)
 ```
 
-#### The product of two polynomials, evaluated at `x`, is equal to the sum of each polynomial evaluated at `x`
+#### The product of two polynomials, evaluated at `x`, is equal to the scalar multiplication of each polynomial evaluated at `x`
 
 ```agda
 module _
