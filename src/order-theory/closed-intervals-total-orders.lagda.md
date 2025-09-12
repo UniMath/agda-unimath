@@ -34,10 +34,15 @@ open import order-theory.total-orders
 ## Idea
 
 A
-{{#concept "closed interval" disambiguation="in a total order" Agda=closed-interval-Total-Order}}
-in a [total order](order-theory.total-orders.md) `T` is a
-[closed interval](order-theory.closed-intervals-posets.md) in the underlying
-[poset](order-theory.posets.md).
+{{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
+in a [total order](order-theory.total-orders.md) `X` consists of a
+[pair](foundation.cartesian-product-types.md) of elements `x` and `y` in `X`
+with `x ≤ y`. A closed interval notably induces a
+[subtype](foundation.subtypes.md) of `X` spanned by elements `z` such that
+`x ≤ z ≤ y`.
+
+Equivalently, it is a [closed interval](order-theory.closed-intervals-posets.md)
+in the underlying [poset](order-theory.posets.md).
 
 ## Definition
 
@@ -150,32 +155,6 @@ module _
       is-injective-subtype-closed-interval-Poset (poset-Total-Order X)
 ```
 
-### The property of a map of taking a closed interval to a closed interval
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (X : Total-Order l1 l2) (Y : Total-Order l3 l4)
-  (f : type-Total-Order X → type-Total-Order Y)
-  where
-
-  is-closed-interval-map-prop-Total-Order :
-    ([a,b] : closed-interval-Total-Order X) →
-    ([c,d] : closed-interval-Total-Order Y) →
-    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-closed-interval-map-prop-Total-Order =
-    is-closed-interval-map-prop-Poset
-      ( poset-Total-Order X)
-      ( poset-Total-Order Y)
-      ( f)
-
-  is-closed-interval-map-Total-Order :
-    ([a,b] : closed-interval-Total-Order X) →
-    ([c,d] : closed-interval-Total-Order Y) →
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-closed-interval-map-Total-Order [a,b] [c,d] =
-    type-Prop (is-closed-interval-map-prop-Total-Order [a,b] [c,d])
-```
-
 ### Total orders can be divided along an element
 
 ```agda
@@ -246,8 +225,9 @@ module _
   {l1 l2 : Level} (X : Total-Order l1 l2) (a b : type-Total-Order X)
   where
 
-  closed-interval-2-Total-Order : closed-interval-Total-Order X
-  closed-interval-2-Total-Order =
+  minimal-closed-interval-cover-of-two-elements-Total-Order :
+    closed-interval-Total-Order X
+  minimal-closed-interval-cover-of-two-elements-Total-Order =
     ( ( min-Total-Order X a b ,
         max-Total-Order X a b) ,
       min-leq-max-Total-Order X a b)
@@ -260,8 +240,9 @@ module _
   {l1 l2 : Level} (X : Total-Order l1 l2) (a b c d : type-Total-Order X)
   where
 
-  closed-interval-4-Total-Order : closed-interval-Total-Order X
-  closed-interval-4-Total-Order =
+  minimal-closed-interval-cover-of-four-elements-Total-Order :
+    closed-interval-Total-Order X
+  minimal-closed-interval-cover-of-four-elements-Total-Order =
     ( ( min-Total-Order X (min-Total-Order X a b) (min-Total-Order X c d) ,
         max-Total-Order X (max-Total-Order X a b) (max-Total-Order X c d)) ,
       transitive-leq-Total-Order X _ _ _
@@ -274,15 +255,15 @@ module _
     cover-closed-interval-4-first-smallest-Total-Order :
       leq-Total-Order X a b → leq-Total-Order X a c → leq-Total-Order X a d →
       subtype-closed-interval-Total-Order X
-        ( closed-interval-4-Total-Order) ⊆
+        ( minimal-closed-interval-cover-of-four-elements-Total-Order) ⊆
       union-subtype
         ( union-subtype
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X a b))
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X a b))
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X a c)))
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X a c)))
         ( subtype-closed-interval-Total-Order X
-          ( closed-interval-2-Total-Order X b d))
+          ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
     cover-closed-interval-4-first-smallest-Total-Order
       a≤b a≤c a≤d x (min≤x , x≤max) =
       let
@@ -290,11 +271,17 @@ module _
           union-subtype
             ( union-subtype
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X a b))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( a)
+                  ( b)))
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X a c)))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( a)
+                  ( c))))
             ( subtype-closed-interval-Total-Order X
-              ( closed-interval-2-Total-Order X b d))
+              ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
             ( x)
         minab≤x =
           tr
@@ -367,21 +354,26 @@ module _
   where
 
   abstract
-    cover-closed-interval-4-Total-Order :
+    cover-minimal-closed-interval-cover-of-four-elements-Total-Order :
       subtype-closed-interval-Total-Order X
-        ( closed-interval-4-Total-Order X a b c d) ⊆
+        ( minimal-closed-interval-cover-of-four-elements-Total-Order X
+          ( a)
+          ( b)
+          ( c)
+          ( d)) ⊆
       union-subtype
         ( union-subtype
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X a b))
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X a b))
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X a c)))
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X a c)))
         ( union-subtype
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X b d))
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
           ( subtype-closed-interval-Total-Order X
-            ( closed-interval-2-Total-Order X c d)))
-    cover-closed-interval-4-Total-Order x x∈closed-4@(min≤x , x≤max) =
+            ( minimal-closed-interval-cover-of-two-elements-Total-Order X c d)))
+    cover-minimal-closed-interval-cover-of-four-elements-Total-Order
+      x x∈closed-4@(min≤x , x≤max) =
       let
         _≤_ = leq-Total-Order X
         commutative-min = commutative-min-Total-Order X
@@ -392,14 +384,26 @@ module _
           union-subtype
             ( union-subtype
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X a b))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( a)
+                  ( b)))
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X a c)))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( a)
+                  ( c))))
             ( union-subtype
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X b d))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( b)
+                  ( d)))
               ( subtype-closed-interval-Total-Order X
-                ( closed-interval-2-Total-Order X c d)))
+                ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                  ( X)
+                  ( c)
+                  ( d))))
             ( x)
         min≤a =
           transitive-leq-Total-Order X

@@ -32,8 +32,11 @@ open import order-theory.posets
 
 A
 {{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
-in a [poset](order-theory.posets.md) `P` consists of a pair of elements `x` and
-`y` in `P` with `x ≤ y`.
+in a [poset](order-theory.posets.md) `P` consists of a
+[pair](foundation.cartesian-product-types.md) of elements `x` and `y` in `P`
+with `x ≤ y`. A closed interval notably induces a
+[subtype](foundation.subtypes.md) of `P` spanned by elements `z` such that
+`x ≤ z ≤ y`.
 
 ## Definition
 
@@ -163,29 +166,4 @@ module _
               ( backward-implication
                 ( has-same-elements-eq-subtype _ _ [a,b]=[c,d] d)
                 ( c≤d , refl-leq-Poset X d))))
-```
-
-### The property of a map of taking a closed interval to a closed interval
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (X : Poset l1 l2) (Y : Poset l3 l4)
-  (f : type-Poset X → type-Poset Y)
-  where
-
-  is-closed-interval-map-prop-Poset :
-    ([a,b] : closed-interval-Poset X) →
-    ([c,d] : closed-interval-Poset Y) →
-    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-closed-interval-map-prop-Poset [a,b] [c,d] =
-    is-image-map-subtype-prop f
-      ( subtype-closed-interval-Poset X [a,b])
-      ( subtype-closed-interval-Poset Y [c,d])
-
-  is-closed-interval-map-Poset :
-    ([a,b] : closed-interval-Poset X) →
-    ([c,d] : closed-interval-Poset Y) →
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-closed-interval-map-Poset [a,b] [c,d] =
-    type-Prop (is-closed-interval-map-prop-Poset [a,b] [c,d])
 ```

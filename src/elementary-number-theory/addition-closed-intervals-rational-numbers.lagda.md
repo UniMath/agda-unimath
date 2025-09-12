@@ -1,7 +1,7 @@
-# Addition on intervals in the rational numbers
+# Addition on closed intervals in the rational numbers
 
 ```agda
-module elementary-number-theory.addition-intervals-rational-numbers where
+module elementary-number-theory.addition-closed-intervals-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -9,9 +9,9 @@ module elementary-number-theory.addition-intervals-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.coproduct-types
@@ -35,17 +35,19 @@ open import order-theory.closed-intervals-posets
 
 ## Idea
 
-Given two [intervals](elementary-number-theory.intervals-rational-numbers.md)
+Given two
+[closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
 [Minkowski sum](group-theory.minkowski-multiplications-commutative-monoids.md)
 of those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
-agrees with the interval `[a +ℚ c, b +ℚ d]`.
+agrees with the interval `[a + c, b + d]`.
 
 ## Definition
 
 ```agda
-add-interval-ℚ : interval-ℚ → interval-ℚ → interval-ℚ
+add-interval-ℚ :
+  interval-ℚ → interval-ℚ → interval-ℚ
 add-interval-ℚ ((a , b) , a≤b) ((c , d) , c≤d) =
   ((a +ℚ c , b +ℚ d) , preserves-leq-add-ℚ a≤b c≤d)
 ```
@@ -56,55 +58,78 @@ add-interval-ℚ ((a , b) , a≤b) ((c , d) , c≤d) =
 
 ```agda
 abstract
-  has-same-elements-minkowski-add-interval-ℚ :
+  is-in-minkowski-sum-is-in-add-interval-ℚ :
     ([a,b] [c,d] : interval-ℚ) →
-    has-same-elements-subtype
+    (q : ℚ) → is-in-interval-ℚ (add-interval-ℚ [a,b] [c,d]) q →
+    is-in-subtype
       ( minkowski-mul-Commutative-Monoid
         ( commutative-monoid-add-ℚ)
         ( subtype-interval-ℚ [a,b])
         ( subtype-interval-ℚ [c,d]))
-      ( subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d]))
-  pr1
-    ( has-same-elements-minkowski-add-interval-ℚ
-      [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q) q∈[a,b]+[c,d] =
-        let
-          open
-            do-syntax-trunc-Prop
-              ( subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d]) q)
-        in do
-          ((s , t) , (a≤s , s≤b) , (c≤t , t≤d) , q=s+t) ← q∈[a,b]+[c,d]
-          ( inv-tr (leq-ℚ (a +ℚ c)) q=s+t (preserves-leq-add-ℚ a≤s c≤t) ,
-            inv-tr (λ r → leq-ℚ r (b +ℚ d)) q=s+t (preserves-leq-add-ℚ s≤b t≤d))
-  pr2
-    ( has-same-elements-minkowski-add-interval-ℚ
-      [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q) (a+c≤q , q≤b+d) =
-        rec-coproduct
-          ( λ q≤a+d →
-            intro-exists
-              ( a , q -ℚ a)
-              ( ( refl-leq-ℚ a , a≤b) ,
-                ( leq-transpose-left-add-ℚ' _ _ _ a+c≤q ,
-                  leq-transpose-right-add-ℚ' _ _ _ q≤a+d) ,
-                inv (is-identity-right-conjugation-add-ℚ _ _)))
-          ( λ a+d≤q →
-            intro-exists
-              ( q -ℚ d , d)
-              ( ( leq-transpose-left-add-ℚ _ _ _ a+d≤q ,
-                  leq-transpose-right-add-ℚ _ _ _ q≤b+d) ,
-                ( c≤d , refl-leq-ℚ d) ,
-                inv (is-section-diff-ℚ _ _)))
-          ( linear-leq-ℚ q (a +ℚ d))
+      ( q)
+  is-in-minkowski-sum-is-in-add-interval-ℚ
+    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q (a+c≤q , q≤b+d) =
+      rec-coproduct
+        ( λ q≤a+d →
+          intro-exists
+            ( a , q -ℚ a)
+            ( ( refl-leq-ℚ a , a≤b) ,
+              ( leq-transpose-left-add-ℚ' _ _ _ a+c≤q ,
+                leq-transpose-right-add-ℚ' _ _ _ q≤a+d) ,
+              inv (is-identity-right-conjugation-add-ℚ _ _)))
+        ( λ a+d≤q →
+          intro-exists
+            ( q -ℚ d , d)
+            ( ( leq-transpose-left-add-ℚ _ _ _ a+d≤q ,
+                leq-transpose-right-add-ℚ _ _ _ q≤b+d) ,
+              ( c≤d , refl-leq-ℚ d) ,
+              inv (is-section-diff-ℚ _ _)))
+        ( linear-leq-ℚ q (a +ℚ d))
 
-  eq-minkowski-add-interval-ℚ :
+  is-in-add-interval-is-in-minkowski-sum-ℚ :
     ([a,b] [c,d] : interval-ℚ) →
-    minkowski-mul-Commutative-Monoid
+    (q : ℚ) →
+    is-in-subtype
+      ( minkowski-mul-Commutative-Monoid
+        ( commutative-monoid-add-ℚ)
+        ( subtype-interval-ℚ [a,b])
+        ( subtype-interval-ℚ [c,d]))
+      ( q) →
+    is-in-interval-ℚ (add-interval-ℚ [a,b] [c,d]) q
+  is-in-add-interval-is-in-minkowski-sum-ℚ
+    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q q∈[a,b]+[c,d] =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d]) q)
+      in do
+        ((s , t) , (a≤s , s≤b) , (c≤t , t≤d) , q=s+t) ← q∈[a,b]+[c,d]
+        ( inv-tr (leq-ℚ (a +ℚ c)) q=s+t (preserves-leq-add-ℚ a≤s c≤t) ,
+          inv-tr (λ r → leq-ℚ r (b +ℚ d)) q=s+t (preserves-leq-add-ℚ s≤b t≤d))
+
+has-same-elements-minkowski-add-interval-ℚ :
+  ([a,b] [c,d] : interval-ℚ) →
+  has-same-elements-subtype
+    ( minkowski-mul-Commutative-Monoid
       ( commutative-monoid-add-ℚ)
       ( subtype-interval-ℚ [a,b])
-      ( subtype-interval-ℚ [c,d]) ＝
-    subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d])
-  eq-minkowski-add-interval-ℚ [a,b] [c,d] =
-    eq-has-same-elements-subtype _ _
-      ( has-same-elements-minkowski-add-interval-ℚ [a,b] [c,d])
+      ( subtype-interval-ℚ [c,d]))
+    ( subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d]))
+pr1 (has-same-elements-minkowski-add-interval-ℚ [a,b] [c,d] q) =
+  is-in-add-interval-is-in-minkowski-sum-ℚ [a,b] [c,d] q
+pr2 (has-same-elements-minkowski-add-interval-ℚ [a,b] [c,d] q) =
+  is-in-minkowski-sum-is-in-add-interval-ℚ [a,b] [c,d] q
+
+eq-minkowski-add-interval-ℚ :
+  ([a,b] [c,d] : interval-ℚ) →
+  minkowski-mul-Commutative-Monoid
+    ( commutative-monoid-add-ℚ)
+    ( subtype-interval-ℚ [a,b])
+    ( subtype-interval-ℚ [c,d]) ＝
+  subtype-interval-ℚ (add-interval-ℚ [a,b] [c,d])
+eq-minkowski-add-interval-ℚ [a,b] [c,d] =
+  eq-has-same-elements-subtype _ _
+    ( has-same-elements-minkowski-add-interval-ℚ [a,b] [c,d])
 ```
 
 ### Associativity
