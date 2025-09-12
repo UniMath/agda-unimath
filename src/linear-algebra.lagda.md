@@ -25,7 +25,9 @@ open import linear-algebra.functoriality-matrices public
 open import linear-algebra.left-modules-commutative-rings public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-rings public
+open import linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
+open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
