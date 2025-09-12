@@ -420,10 +420,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
-  is-equiv-comp :
-    (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-  pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
-  pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
+  abstract
+    is-equiv-comp :
+      (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
 
   comp-equiv : B ≃ X → A ≃ B → A ≃ X
   pr1 (comp-equiv g h) = map-equiv g ∘ map-equiv h
