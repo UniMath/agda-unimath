@@ -85,17 +85,15 @@ module _
     Π-Prop
       ( type-subset-left-module-Ring R M S)
       ( λ x →
-        exists-Prop
-          ( ℕ)
+        exists-structure-Prop ℕ
           ( λ n →
-            exists-Prop
+            Σ
               ( tuple (type-Ring R) n)
               ( λ scalars →
-                exists-structure-Prop
+                Σ
                   ( tuple (type-subset-left-module-Ring R M G) n)
                   ( λ vectors →
-                    pr1 x ＝
-                    linear-combination-tuple-left-module-Ring R M
+                    pr1 x ＝ linear-combination-tuple-left-module-Ring R M
                       ( scalars)
                       ( map-tuple pr1 vectors)))))
 
@@ -190,16 +188,12 @@ module _
               ( add-left-module-Ring R M x y))
       in
         do
-          ( x-n , x-scalars-vectors-identity) ←
+          ( x-n , x-scalars , x-vectors , x-identity) ←
             contains-only-linear-combinations-linear-span-left-module-Ring R M S
               ( x , x-in-span)
-          ( x-scalars , x-vectors-identity) ← x-scalars-vectors-identity
-          ( x-vectors , x-identity) ← x-vectors-identity
-          ( y-n , y-scalars-vectors-identity) ←
+          ( y-n , y-scalars , y-vectors , y-identity) ←
             contains-only-linear-combinations-linear-span-left-module-Ring R M S
               ( y , y-in-span)
-          ( y-scalars , y-vectors-identity) ← y-scalars-vectors-identity
-          ( y-vectors , y-identity) ← y-vectors-identity
           tr
             ( λ z → pr1 (subset-linear-span-left-module-Ring R M S z))
             ( equational-reasoning
@@ -270,11 +264,9 @@ module _
             ( subset-linear-span-left-module-Ring R M S
               ( mul-left-module-Ring R M r x))
       in do
-        ( n , scalars-vectors-identity) ←
+        ( n , scalars , vectors , identity) ←
           ( contains-only-linear-combinations-linear-span-left-module-Ring R M S
             ( x , x-in-span))
-        ( scalars , scalars-vectors) ← scalars-vectors-identity
-        ( vectors , identity) ← scalars-vectors
         ( tr
           ( λ y → pr1 (subset-linear-span-left-module-Ring R M S y))
           ( equational-reasoning
