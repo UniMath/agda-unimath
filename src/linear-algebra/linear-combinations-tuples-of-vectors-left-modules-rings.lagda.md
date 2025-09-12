@@ -152,7 +152,7 @@ module _
   (M : left-module-Ring l2 R)
   where
 
-  concatenation-is-addition-linear-combination-left-module-Ring :
+  add-concat-linear-combination-left-module-Ring :
     {n m : ℕ} →
     (s-a : tuple (type-Ring R) n) →
     (v-a : tuple (type-left-module-Ring R M) n) →
@@ -164,7 +164,7 @@ module _
     add-left-module-Ring R M
       ( linear-combination-left-module-Ring R M s-a v-a)
       ( linear-combination-left-module-Ring R M s-b v-b)
-  concatenation-is-addition-linear-combination-left-module-Ring
+  add-concat-linear-combination-left-module-Ring
     empty-tuple empty-tuple s-b v-b =
     equational-reasoning
       linear-combination-left-module-Ring R M
@@ -183,7 +183,7 @@ module _
           ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
           ( linear-combination-left-module-Ring R M s-b v-b)
         by refl
-  concatenation-is-addition-linear-combination-left-module-Ring
+  add-concat-linear-combination-left-module-Ring
     (r ∷ s-a) (x ∷ v-a) s-b v-b =
     equational-reasoning
       linear-combination-left-module-Ring R M
@@ -211,7 +211,7 @@ module _
         by
           ap
             ( λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
-            ( concatenation-is-addition-linear-combination-left-module-Ring
+            ( add-concat-linear-combination-left-module-Ring
               ( s-a)
               ( v-a)
               ( s-b)

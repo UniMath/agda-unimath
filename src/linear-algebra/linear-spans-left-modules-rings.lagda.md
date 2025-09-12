@@ -226,7 +226,7 @@ module _
                     ( y-s)
                     ( map-tuple pr1 y-v))
                 by
-                  concatenation-is-addition-linear-combination-left-module-Ring
+                  add-concat-linear-combination-left-module-Ring
                     ( R)
                     ( M)
                     ( x-s)
