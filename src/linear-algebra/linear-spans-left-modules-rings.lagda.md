@@ -65,13 +65,13 @@ module _
       ( λ n →
         Π-Prop
           ( tuple (type-Ring R) n)
-          ( λ scalars →
+          ( λ s →
             Π-Prop
               ( tuple (type-subset-left-module-Ring R M G) n)
-              ( λ vectors →
+              ( λ v →
                 S ( linear-combination-left-module-Ring R M
-                    ( scalars)
-                    ( map-tuple pr1 vectors)))))
+                    ( s)
+                    ( map-tuple pr1 v)))))
 
   contains-all-linear-combinations-subset-left-module-Ring :
     UU (l1 ⊔ l2 ⊔ l3)
@@ -90,14 +90,14 @@ module _
           ( λ n →
             exists-Prop
               ( tuple (type-Ring R) n)
-              ( λ scalars →
+              ( λ s →
                 exists-structure-Prop
                   ( tuple (type-subset-left-module-Ring R M G) n)
-                  ( λ vectors →
+                  ( λ v →
                     pr1 x ＝
                     linear-combination-left-module-Ring R M
-                      ( scalars)
-                      ( map-tuple pr1 vectors)))))
+                      ( s)
+                      ( map-tuple pr1 v)))))
 
   contains-only-linear-combinations-subset-left-module-Ring :
     UU (l1 ⊔ l2 ⊔ l3)
@@ -190,62 +190,61 @@ module _
               ( add-left-module-Ring R M x y))
       in
         do
-          ( x-n , x-scalars-vectors-identity) ←
+          ( x-n , x-s-v-identity) ←
             contains-only-linear-combinations-linear-span-left-module-Ring R M S
               ( x , x-in-span)
-          ( x-scalars , x-vectors-identity) ← x-scalars-vectors-identity
-          ( x-vectors , x-identity) ← x-vectors-identity
-          ( y-n , y-scalars-vectors-identity) ←
+          ( x-s , x-v-identity) ← x-s-v-identity
+          ( x-v , x-identity) ← x-v-identity
+          ( y-n , y-s-v-identity) ←
             contains-only-linear-combinations-linear-span-left-module-Ring R M S
               ( y , y-in-span)
-          ( y-scalars , y-vectors-identity) ← y-scalars-vectors-identity
-          ( y-vectors , y-identity) ← y-vectors-identity
+          ( y-s , y-v-identity) ← y-s-v-identity
+          ( y-v , y-identity) ← y-v-identity
           tr
             ( λ z → pr1 (subset-linear-span-left-module-Ring R M S z))
             ( equational-reasoning
               linear-combination-left-module-Ring R M
-                ( concat-tuple x-scalars y-scalars)
-                ( map-tuple pr1 (concat-tuple x-vectors y-vectors))
-              ＝linear-combination-left-module-Ring R M
-                  ( concat-tuple x-scalars y-scalars)
+                ( concat-tuple x-s y-s)
+                ( map-tuple pr1 (concat-tuple x-v y-v))
+              ＝ linear-combination-left-module-Ring R M
+                  ( concat-tuple x-s y-s)
                   ( concat-tuple
-                    ( map-tuple pr1 x-vectors)
-                    ( map-tuple pr1 y-vectors))
+                    ( map-tuple pr1 x-v)
+                    ( map-tuple pr1 y-v))
                 by
                   ap
                     ( λ z →
                       ( linear-combination-left-module-Ring R M
-                        ( concat-tuple x-scalars y-scalars)
+                        ( concat-tuple x-s y-s)
                         ( z)))
-                    ( distributive-map-concat-tuple pr1 x-vectors y-vectors)
+                    ( distributive-map-concat-tuple pr1 x-v y-v)
               ＝ add-left-module-Ring R M
                   ( linear-combination-left-module-Ring R M
-                    ( x-scalars)
-                    ( map-tuple pr1 x-vectors))
+                    ( x-s)
+                    ( map-tuple pr1 x-v))
                   ( linear-combination-left-module-Ring R M
-                    ( y-scalars)
-                    ( map-tuple pr1 y-vectors))
+                    ( y-s)
+                    ( map-tuple pr1 y-v))
                 by
                   concatenation-is-addition-linear-combination-left-module-Ring
                     ( R)
                     ( M)
-                    ( x-scalars)
-                    ( map-tuple pr1 x-vectors)
-                    ( y-scalars)
-                    ( map-tuple pr1 y-vectors)
-              ＝
-                add-left-module-Ring R M
+                    ( x-s)
+                    ( map-tuple pr1 x-v)
+                    ( y-s)
+                    ( map-tuple pr1 y-v)
+              ＝ add-left-module-Ring R M
                   ( x)
                   ( linear-combination-left-module-Ring R M
-                    ( y-scalars)
-                    ( map-tuple pr1 y-vectors))
+                    ( y-s)
+                    ( map-tuple pr1 y-v))
                 by
                   ap
                     ( λ z → add-left-module-Ring R M
                       ( z)
                       ( linear-combination-left-module-Ring R M
-                        ( y-scalars)
-                        ( map-tuple pr1 y-vectors)))
+                        ( y-s)
+                        ( map-tuple pr1 y-v)))
                     ( inv x-identity)
               ＝ add-left-module-Ring R M x y
                 by
@@ -257,8 +256,8 @@ module _
               ( M)
               ( S)
               ( y-n +ℕ x-n)
-              ( concat-tuple x-scalars y-scalars)
-              ( concat-tuple x-vectors y-vectors))
+              ( concat-tuple x-s y-s)
+              ( concat-tuple x-v y-v))
 
   is-closed-under-multiplication-by-scalar-linear-span-left-module-Ring :
     is-closed-under-multiplication-by-scalar-subset-left-module-Ring R M
@@ -271,30 +270,30 @@ module _
             ( subset-linear-span-left-module-Ring R M S
               ( mul-left-module-Ring R M r x))
       in do
-        ( n , scalars-vectors-identity) ←
+        ( n , s-v-identity) ←
           ( contains-only-linear-combinations-linear-span-left-module-Ring R M S
             ( x , x-in-span))
-        ( scalars , scalars-vectors) ← scalars-vectors-identity
-        ( vectors , identity) ← scalars-vectors
+        ( s , s-v) ← s-v-identity
+        ( v , identity) ← s-v
         ( tr
           ( λ y → pr1 (subset-linear-span-left-module-Ring R M S y))
           ( equational-reasoning
             linear-combination-left-module-Ring R M
-              ( map-tuple (mul-Ring R r) scalars)
-              ( map-tuple pr1 vectors)
+              ( map-tuple (mul-Ring R r) s)
+              ( map-tuple pr1 v)
             ＝ mul-left-module-Ring R M
                 ( r)
                 ( linear-combination-left-module-Ring R M
-                  ( scalars)
-                  ( map-tuple pr1 vectors))
+                  ( s)
+                  ( map-tuple pr1 v))
               by
                 inv
                   ( left-distributive-law-mul-linear-combination-left-module-Ring
                     ( R)
                     ( M)
                     ( r)
-                    ( scalars)
-                    ( map-tuple pr1 vectors))
+                    ( s)
+                    ( map-tuple pr1 v))
             ＝ mul-left-module-Ring R M r x
               by
                 ap
@@ -302,8 +301,8 @@ module _
                   ( inv identity))
           ( contains-all-linear-combinations-linear-span-left-module-Ring R M S
             ( n)
-            ( map-tuple (mul-Ring R r) scalars)
-            ( vectors)))
+            ( map-tuple (mul-Ring R r) s)
+            ( v)))
 
   left-submodule-linear-span-left-module-Ring : left-submodule-Ring l3 R M
   pr1 left-submodule-linear-span-left-module-Ring =

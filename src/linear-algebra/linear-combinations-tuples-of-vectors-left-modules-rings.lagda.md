@@ -51,9 +51,9 @@ linear-combination-left-module-Ring :
   type-left-module-Ring R M
 linear-combination-left-module-Ring R M empty-tuple empty-tuple =
   zero-left-module-Ring R M
-linear-combination-left-module-Ring R M (r ∷ scalars) (x ∷ vectors) =
+linear-combination-left-module-Ring R M (r ∷ s) (x ∷ v) =
   add-left-module-Ring R M
-    ( linear-combination-left-module-Ring R M scalars vectors)
+    ( linear-combination-left-module-Ring R M s v)
     ( mul-left-module-Ring R M r x)
 ```
 
@@ -71,14 +71,14 @@ module _
   left-distributive-law-mul-linear-combination-left-module-Ring :
     {n : ℕ}
     (r : type-Ring R) →
-    (scalars : tuple (type-Ring R) n) →
-    (vectors : tuple (type-left-module-Ring R M) n) →
+    (s : tuple (type-Ring R) n) →
+    (v : tuple (type-left-module-Ring R M) n) →
     mul-left-module-Ring R M
       ( r)
-      ( linear-combination-left-module-Ring R M scalars vectors) ＝
+      ( linear-combination-left-module-Ring R M s v) ＝
     linear-combination-left-module-Ring R M
-      ( map-tuple (mul-Ring R r) scalars)
-      ( vectors)
+      ( map-tuple (mul-Ring R r) s)
+      ( v)
   left-distributive-law-mul-linear-combination-left-module-Ring
     r empty-tuple empty-tuple =
     equational-reasoning
@@ -91,52 +91,52 @@ module _
       ＝ linear-combination-left-module-Ring R M empty-tuple empty-tuple
         by refl
   left-distributive-law-mul-linear-combination-left-module-Ring
-    r (s ∷ scalars) (x ∷ vectors) =
+    r (s₀ ∷ s) (x₀ ∷ v) =
     equational-reasoning
       mul-left-module-Ring R M r
-        ( linear-combination-left-module-Ring R M (s ∷ scalars) (x ∷ vectors))
+        ( linear-combination-left-module-Ring R M (s₀ ∷ s) (x₀ ∷ v))
       ＝ mul-left-module-Ring R M r
           ( add-left-module-Ring R M
-            ( linear-combination-left-module-Ring R M scalars vectors)
-            ( mul-left-module-Ring R M s x))
+            ( linear-combination-left-module-Ring R M s v)
+            ( mul-left-module-Ring R M s₀ x₀))
         by refl
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M scalars vectors))
-          ( mul-left-module-Ring R M r (mul-left-module-Ring R M s x))
+            ( linear-combination-left-module-Ring R M s v))
+          ( mul-left-module-Ring R M r (mul-left-module-Ring R M s₀ x₀))
         by
           left-distributive-mul-add-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M scalars vectors)
-            ( mul-left-module-Ring R M s x)
+            ( linear-combination-left-module-Ring R M s v)
+            ( mul-left-module-Ring R M s₀ x₀)
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r
-            ( linear-combination-left-module-Ring R M scalars vectors))
-          ( mul-left-module-Ring R M (mul-Ring R r s) x)
+            ( linear-combination-left-module-Ring R M s v))
+          ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀)
         by
           ap
             ( λ y →
               add-left-module-Ring R M
                 ( mul-left-module-Ring R M r
-                  ( linear-combination-left-module-Ring R M scalars vectors))
+                  ( linear-combination-left-module-Ring R M s v))
                 ( y))
-            ( inv (associative-mul-left-module-Ring R M r s x))
+            ( inv (associative-mul-left-module-Ring R M r s₀ x₀))
       ＝ add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
-            ( map-tuple (mul-Ring R r) scalars)
-            ( vectors))
-          ( mul-left-module-Ring R M (mul-Ring R r s) x)
+            ( map-tuple (mul-Ring R r) s)
+            ( v))
+          ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀)
         by
           ap
             ( λ y →
               add-left-module-Ring R M
                 ( y)
-                ( mul-left-module-Ring R M (mul-Ring R r s) x))
+                ( mul-left-module-Ring R M (mul-Ring R r s₀) x₀))
             ( left-distributive-law-mul-linear-combination-left-module-Ring r
-              ( scalars)
-              ( vectors))
+              ( s)
+              ( v))
       ＝ linear-combination-left-module-Ring R M
-          ( map-tuple (mul-Ring R r) (s ∷ scalars))
-          ( x ∷ vectors)
+          ( map-tuple (mul-Ring R r) (s₀ ∷ s))
+          ( x₀ ∷ v)
         by refl
 ```
 
@@ -151,132 +151,132 @@ module _
 
   concatenation-is-addition-linear-combination-left-module-Ring :
     {n m : ℕ} →
-    (scalars-a : tuple (type-Ring R) n) →
-    (vectors-a : tuple (type-left-module-Ring R M) n) →
-    (scalars-b : tuple (type-Ring R) m) →
-    (vectors-b : tuple (type-left-module-Ring R M) m) →
+    (s-a : tuple (type-Ring R) n) →
+    (v-a : tuple (type-left-module-Ring R M) n) →
+    (s-b : tuple (type-Ring R) m) →
+    (v-b : tuple (type-left-module-Ring R M) m) →
     linear-combination-left-module-Ring R M
-      ( concat-tuple scalars-a scalars-b)
-      ( concat-tuple vectors-a vectors-b) ＝
+      ( concat-tuple s-a s-b)
+      ( concat-tuple v-a v-b) ＝
     add-left-module-Ring R M
-      ( linear-combination-left-module-Ring R M scalars-a vectors-a)
-      ( linear-combination-left-module-Ring R M scalars-b vectors-b)
+      ( linear-combination-left-module-Ring R M s-a v-a)
+      ( linear-combination-left-module-Ring R M s-b v-b)
   concatenation-is-addition-linear-combination-left-module-Ring
-    empty-tuple empty-tuple scalars-b vectors-b =
+    empty-tuple empty-tuple s-b v-b =
     equational-reasoning
       linear-combination-left-module-Ring R M
-        ( concat-tuple empty-tuple scalars-b)
-        ( concat-tuple empty-tuple vectors-b)
-      ＝ linear-combination-left-module-Ring R M scalars-b vectors-b
+        ( concat-tuple empty-tuple s-b)
+        ( concat-tuple empty-tuple v-b)
+      ＝ linear-combination-left-module-Ring R M s-b v-b
         by refl
       ＝ add-left-module-Ring R M
           ( zero-left-module-Ring R M)
-          ( linear-combination-left-module-Ring R M scalars-b vectors-b)
+          ( linear-combination-left-module-Ring R M s-b v-b)
         by
           inv
             ( left-unit-law-add-left-module-Ring R M
-              ( linear-combination-left-module-Ring R M scalars-b vectors-b))
+              ( linear-combination-left-module-Ring R M s-b v-b))
       ＝ add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M empty-tuple empty-tuple)
-          ( linear-combination-left-module-Ring R M scalars-b vectors-b)
+          ( linear-combination-left-module-Ring R M s-b v-b)
         by refl
   concatenation-is-addition-linear-combination-left-module-Ring
-    (r ∷ scalars-a) (x ∷ vectors-a) scalars-b vectors-b =
+    (r ∷ s-a) (x ∷ v-a) s-b v-b =
     equational-reasoning
       linear-combination-left-module-Ring R M
-        ( concat-tuple (r ∷ scalars-a) scalars-b)
-        ( concat-tuple (x ∷ vectors-a) vectors-b)
+        ( concat-tuple (r ∷ s-a) s-b)
+        ( concat-tuple (x ∷ v-a) v-b)
       ＝ linear-combination-left-module-Ring R M
-          ( r ∷ (concat-tuple scalars-a scalars-b))
-          ( x ∷ (concat-tuple vectors-a vectors-b))
+          ( r ∷ (concat-tuple s-a s-b))
+          ( x ∷ (concat-tuple v-a v-b))
         by refl
       ＝ add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
-            ( concat-tuple scalars-a scalars-b)
-            ( concat-tuple vectors-a vectors-b))
+            ( concat-tuple s-a s-b)
+            ( concat-tuple v-a v-b))
           ( mul-left-module-Ring R M r x)
         by refl
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
             ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
+              ( s-a)
+              ( v-a))
             ( linear-combination-left-module-Ring R M
-              ( scalars-b)
-              ( vectors-b)))
+              ( s-b)
+              ( v-b)))
           ( mul-left-module-Ring R M r x)
         by
           ap
             ( λ z → add-left-module-Ring R M z (mul-left-module-Ring R M r x))
             ( concatenation-is-addition-linear-combination-left-module-Ring
-              ( scalars-a)
-              ( vectors-a)
-              ( scalars-b)
-              ( vectors-b))
+              ( s-a)
+              ( v-a)
+              ( s-b)
+              ( v-b))
       ＝ add-left-module-Ring R M
           ( mul-left-module-Ring R M r x)
           ( add-left-module-Ring R M
             ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
+              ( s-a)
+              ( v-a))
             ( linear-combination-left-module-Ring R M
-              ( scalars-b)
-              ( vectors-b)))
+              ( s-b)
+              ( v-b)))
         by
           commutative-add-left-module-Ring R M
             ( add-left-module-Ring R M
               ( linear-combination-left-module-Ring R M
-                ( scalars-a)
-                ( vectors-a))
+                ( s-a)
+                ( v-a))
               ( linear-combination-left-module-Ring R M
-                ( scalars-b)
-                ( vectors-b)))
+                ( s-b)
+                ( v-b)))
             ( mul-left-module-Ring R M r x)
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
             ( mul-left-module-Ring R M r x)
             ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a)))
+              ( s-a)
+              ( v-a)))
           ( linear-combination-left-module-Ring R M
-            ( scalars-b)
-            ( vectors-b))
+            ( s-b)
+            ( v-b))
         by
           inv
             ( associative-add-left-module-Ring R M
               ( mul-left-module-Ring R M r x)
               ( linear-combination-left-module-Ring R M
-                ( scalars-a)
-                ( vectors-a))
+                ( s-a)
+                ( v-a))
               ( linear-combination-left-module-Ring R M
-                ( scalars-b)
-                ( vectors-b)))
+                ( s-b)
+                ( v-b)))
       ＝ add-left-module-Ring R M
           ( add-left-module-Ring R M
             ( linear-combination-left-module-Ring R M
-              ( scalars-a)
-              ( vectors-a))
+              ( s-a)
+              ( v-a))
             ( mul-left-module-Ring R M r x))
           ( linear-combination-left-module-Ring R M
-            ( scalars-b)
-            ( vectors-b))
+            ( s-b)
+            ( v-b))
         by
           ap
             ( λ y → add-left-module-Ring R M y
               ( linear-combination-left-module-Ring R M
-                ( scalars-b)
-                ( vectors-b)))
+                ( s-b)
+                ( v-b)))
             ( commutative-add-left-module-Ring R M
               ( mul-left-module-Ring R M r x)
               ( linear-combination-left-module-Ring R M
-                ( scalars-a)
-                ( vectors-a)))
+                ( s-a)
+                ( v-a)))
       ＝ add-left-module-Ring R M
           ( linear-combination-left-module-Ring R M
-            ( r ∷ scalars-a)
-            ( x ∷ vectors-a))
+            ( r ∷ s-a)
+            ( x ∷ v-a))
           ( linear-combination-left-module-Ring R M
-            ( scalars-b)
-            ( vectors-b))
+            ( s-b)
+            ( v-b))
         by refl
 ```
