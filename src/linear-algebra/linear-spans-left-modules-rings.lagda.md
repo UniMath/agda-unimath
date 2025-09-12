@@ -41,8 +41,8 @@ Let `M` be a [left module](linear-algebra.left-modules-rings.md) over a
 [ring](ring-theory.rings.md) `R` and `G` be a subset of `M`. The
 {{#concept "linear span" Agda=is-linear-span-subset-left-module-prop-Ring Agda=linear-span-left-module-Ring}}
 of `G` is the subset of `M` which contains all
-[linear combinations](linear-algebra.linear-combinations.md) of the elements of
-`G`.
+[linear combinations](linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings.md)
+of the elements of `G`.
 
 ## Definitions
 
@@ -87,11 +87,9 @@ module _
       ( λ x →
         exists-structure-Prop ℕ
           ( λ n →
-            Σ
-              ( tuple (type-Ring R) n)
+            Σ ( tuple (type-Ring R) n)
               ( λ scalars →
-                Σ
-                  ( tuple (type-subset-left-module-Ring R M G) n)
+                Σ ( tuple (type-subset-left-module-Ring R M G) n)
                   ( λ vectors →
                     pr1 x ＝ linear-combination-tuple-left-module-Ring R M
                       ( scalars)

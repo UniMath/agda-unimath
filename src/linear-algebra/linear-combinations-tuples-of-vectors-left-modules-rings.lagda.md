@@ -97,7 +97,9 @@ module _
     r (s ∷ scalars) (x ∷ vectors) =
     equational-reasoning
       mul-left-module-Ring R M r
-        ( linear-combination-tuple-left-module-Ring R M (s ∷ scalars) (x ∷ vectors))
+        ( linear-combination-tuple-left-module-Ring R M
+          ( s ∷ scalars)
+          ( x ∷ vectors))
       ＝ mul-left-module-Ring R M r
           ( add-left-module-Ring R M
             ( linear-combination-tuple-left-module-Ring R M scalars vectors)
@@ -120,7 +122,9 @@ module _
             ( λ y →
               add-left-module-Ring R M
                 ( mul-left-module-Ring R M r
-                  ( linear-combination-tuple-left-module-Ring R M scalars vectors))
+                  ( linear-combination-tuple-left-module-Ring R M
+                    ( scalars)
+                    ( vectors)))
                 ( y))
             ( inv (associative-mul-left-module-Ring R M r s x))
       ＝ add-left-module-Ring R M
@@ -178,7 +182,9 @@ module _
         by
           inv
             ( left-unit-law-add-left-module-Ring R M
-              ( linear-combination-tuple-left-module-Ring R M scalars-b vectors-b))
+              ( linear-combination-tuple-left-module-Ring R M
+                ( scalars-b)
+                ( vectors-b)))
       ＝ add-left-module-Ring R M
           ( linear-combination-tuple-left-module-Ring R M
             ( empty-tuple)
