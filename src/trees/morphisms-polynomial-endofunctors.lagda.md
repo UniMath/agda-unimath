@@ -308,7 +308,7 @@ module _
 
   compute-fiber-type-hom-polynomial-endofunctor :
     (c : 𝑄₀) (x : 𝑄₁ c → X) →
-    fiber (type-hom-polynomial-endofunctor 𝑃 𝑄 α {X = X}) (c , x) ≃
+    fiber (type-hom-polynomial-endofunctor 𝑃 𝑄 α) (c , x) ≃
     fiber-type-hom-polynomial-endofunctor c x
   compute-fiber-type-hom-polynomial-endofunctor c x =
     equivalence-reasoning
@@ -353,7 +353,7 @@ module _
                       ( ap (λ q → x ∘ tr 𝑄₁ q) (inv-inv p)))))
 ```
 
-### Equivalence between morphisms and natural transformations
+### Comparison betwen morphisms and natural transformations
 
 ```agda
 module _
@@ -382,29 +382,8 @@ module _
         ( a , id))
 ```
 
-Finally, we need to show the following equality:
+To show these notions are equivalent, we need to show the following equality:
 
 $$
-  α₁ (f ∘ x) (a , id) = ap (𝑄 f) (α₁ x (a , id)) ∙ α₁ f (a , x)
+  α₁ (f ∘ x) (a , id) = ap (𝑄 f) (α₁ x (a , id)) ∙ α₁ f (a , x).
 $$
-
-```text
-module _
-  {l : Level}
-  (𝑃 : polynomial-endofunctor l l)
-  (𝑄 : polynomial-endofunctor l l)
-  where
-
-  is-section-is-set-positions-hom-natural-transformation-polynomial-endofunctor :
-    is-section
-      ( λ α → natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄 α {l})
-      ( hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄)
-  is-section-is-set-positions-hom-natural-transformation-polynomial-endofunctor α =
-    eq-htpy-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄
-        ( hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α))
-      ( α)
-      ( ( is-section-type-hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-          ( α)) ,
-        ?)
-```

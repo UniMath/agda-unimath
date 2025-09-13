@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.fundamental-theorem-of-identity-types
@@ -227,9 +228,10 @@ comp-cartesian-hom-polynomial-endofunctor :
   cartesian-hom-polynomial-endofunctor 𝑄 𝑅 →
   cartesian-hom-polynomial-endofunctor 𝑃 𝑄 →
   cartesian-hom-polynomial-endofunctor 𝑃 𝑅
-comp-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 𝑅 (β , H) (α , K) =
-  ( comp-hom-polynomial-endofunctor 𝑃 𝑄 𝑅 β α ,
-    λ a → is-equiv-comp (pr2 α a) (pr2 β (pr1 α a)) (H (pr1 α a)) (K a))
+comp-cartesian-hom-polynomial-endofunctor
+  𝑃 𝑄 𝑅 ((β₀ , β₁) , H) ((α₀ , α₁) , K) =
+  ( ( comp-hom-polynomial-endofunctor 𝑃 𝑄 𝑅 (β₀ , β₁) (α₀ , α₁)) ,
+    ( λ a → is-equiv-comp (α₁ a) (β₁ (α₀ a)) (H (α₀ a)) (K a)))
 ```
 
 ## Properties
@@ -380,59 +382,40 @@ module _
 
 ### Cartesian natural transformations define cartesian morphisms
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (𝑃 : polynomial-endofunctor l1 l2)
   (𝑄 : polynomial-endofunctor l3 l4)
-  (α : natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
+  (α : cartesian-natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
+  (let 𝑃₀ = shapes-polynomial-endofunctor 𝑃)
+  (let 𝑃₁ = positions-polynomial-endofunctor 𝑃)
+  (let α₀ = type-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
   where
 
-  shapes-natural-transformation-polynomial-endofunctor :
+  shapes-cartesian-natural-transformation-polynomial-endofunctor :
     shapes-polynomial-endofunctor 𝑃 → shapes-polynomial-endofunctor 𝑄
-  shapes-natural-transformation-polynomial-endofunctor a =
-    pr1 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
+  shapes-cartesian-natural-transformation-polynomial-endofunctor =
+    shapes-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
 
-  positions-natural-transformation-polynomial-endofunctor :
+  positions-cartesian-natural-transformation-polynomial-endofunctor :
     (a : shapes-polynomial-endofunctor 𝑃) →
     positions-polynomial-endofunctor 𝑄
-      ( shapes-natural-transformation-polynomial-endofunctor a) →
+      ( shapes-cartesian-natural-transformation-polynomial-endofunctor a) →
     positions-polynomial-endofunctor 𝑃 a
-  positions-natural-transformation-polynomial-endofunctor a =
-    pr2 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
+  positions-cartesian-natural-transformation-polynomial-endofunctor =
+    positions-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
 
-  hom-natural-transformation-polynomial-endofunctor :
+  hom-cartesian-natural-transformation-polynomial-endofunctor :
     hom-polynomial-endofunctor 𝑃 𝑄
-  hom-natural-transformation-polynomial-endofunctor =
-    ( shapes-natural-transformation-polynomial-endofunctor ,
-      positions-natural-transformation-polynomial-endofunctor)
+  hom-cartesian-natural-transformation-polynomial-endofunctor =
+    hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
 ```
 
-### Equivalence between cartesian morphisms and cartesian natural transformations
-
-```text
-module _
-  {l1 l2 l3 l4 : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  where
-
-  is-retraction-hom-natural-transformation-polynomial-endofunctor :
-    is-retraction
-      ( λ α → natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄 α {l2})
-      ( hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄)
-  is-retraction-hom-natural-transformation-polynomial-endofunctor α = refl
-
-  is-section-type-hom-natural-transformation-polynomial-endofunctor :
-    (α : natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
-    (X : UU l2) →
-    type-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄
-        ( hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)) ~
-    type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α {X}
-  is-section-type-hom-natural-transformation-polynomial-endofunctor
-    α X (a , x) =
-    inv
-      ( naturality-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α x
-        ( a , id))
-```
+> TODO

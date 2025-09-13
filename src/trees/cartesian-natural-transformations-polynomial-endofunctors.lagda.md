@@ -13,6 +13,7 @@ open import foundation.binary-homotopies
 open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -172,6 +173,15 @@ module _
     hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
   hom-arrow-cartesian-natural-transformation-polynomial-endofunctor =
     hom-arrow-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α'
+
+  cone-cartesian-natural-transformation-polynomial-endofunctor :
+    {X Y : UU l5} (f : X → Y) →
+    cone
+      ( type-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( type-polynomial-endofunctor 𝑃 X)
+  cone-cartesian-natural-transformation-polynomial-endofunctor =
+    cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α'
 
   cartesian-hom-arrow-cartesian-natural-transformation-polynomial-endofunctor :
     {X Y : UU l5} (f : X → Y) →

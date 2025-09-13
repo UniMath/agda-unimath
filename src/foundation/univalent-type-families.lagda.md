@@ -17,11 +17,11 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-subuniverses
-open import foundation.retractions
 open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
 open import foundation.monomorphisms
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.subtype-identity-principle
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
