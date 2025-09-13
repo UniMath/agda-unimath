@@ -116,6 +116,8 @@ module _
     is-prop-is-essentially-in-subuniverse X
 ```
 
+- See also [univalent type families](foundation.univalent-type-families.md).
+
 ## Properties
 
 ### Subuniverses are closed under equivalences
