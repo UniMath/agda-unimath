@@ -11,8 +11,15 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.monomorphisms
+open import foundation.embeddings
+open import foundation.subtype-identity-principle
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
+open import foundation.identity-systems
+open import foundation.contractible-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fibers-of-maps
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subuniverses
@@ -102,7 +109,7 @@ is-univalent-UU l = univalence
 ```
 
 where the right edge is an equivalence by the univalence axiom. Hence, the top
-map is an equivalence if and only if the left map is.
+map is an equivalence if and only if the left map is. ∎
 
 ```agda
 module _
@@ -167,6 +174,42 @@ module _
   is-univalent-inclusion-subuniverse : is-univalent (inclusion-subuniverse S)
   is-univalent-inclusion-subuniverse =
     is-univalent-is-emb (is-emb-inclusion-subuniverse S)
+```
+
+### The underlying subuniverse of a univalent type family
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} ((B , H) : univalent-type-family l2 A)
+  where
+
+  emb-univalent-type-family : A ↪ UU l2
+  emb-univalent-type-family = (B , is-emb-is-univalent H)
+
+  is-in-subuniverse-univalent-family : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
+  is-in-subuniverse-univalent-family X = Σ A (λ a → (B a ≃ X))
+
+  abstract
+    is-prop-is-in-subuniverse-univalent-family :
+      {l3 : Level} {X : UU l3} → is-prop (is-in-subuniverse-univalent-family X)
+    is-prop-is-in-subuniverse-univalent-family {X = X} =
+      is-prop-emb
+        ( emb-Σ-emb-base emb-univalent-type-family (λ Y → Y ≃ X))
+        ( is-prop-is-proof-irrelevant
+          ( λ (Y , e) →
+            is-contr-equiv'
+              ( Σ (UU l2) (λ Y' → Y' ≃ Y))
+              ( equiv-tot (equiv-postcomp-equiv e))
+              ( is-torsorial-equiv' Y)))
+
+  is-in-subuniverse-prop-univalent-family :
+    {l3 : Level} → UU l3 → Prop (l1 ⊔ l2 ⊔ l3)
+  is-in-subuniverse-prop-univalent-family X =
+    ( is-in-subuniverse-univalent-family X ,
+      is-prop-is-in-subuniverse-univalent-family)
+
+  subuniverse-univalent-family : (l3 : Level) → subuniverse l3 (l1 ⊔ l2 ⊔ l3)
+  subuniverse-univalent-family l3 = is-in-subuniverse-prop-univalent-family
 ```
 
 ## See also
