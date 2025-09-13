@@ -11,9 +11,9 @@ open import foundation.images-subtypes
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import order-theory.closed-interval-preserving-maps-posets
 open import order-theory.closed-intervals-total-orders
 open import order-theory.total-orders
-open import order-theory.closed-interval-preserving-maps-posets
 ```
 
 </details>
