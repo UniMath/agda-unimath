@@ -10,12 +10,14 @@ module trees.polynomial-endofunctors where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -190,6 +192,31 @@ coh-refl-htpy-polynomial-endofunctor :
   htpy-polynomial-endofunctor 𝑃 (refl-htpy' f) ~ refl-htpy
 coh-refl-htpy-polynomial-endofunctor (A , B) =
   coh-refl-htpy-polynomial-endofunctor' A B
+```
+
+### Computing the fiber of the action on maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {X : UU l3} {Y : UU l4} (f : X → Y)
+  where
+
+  compute-fiber-map-polynomial-endofunctor :
+    (a : shapes-polynomial-endofunctor 𝑃)
+    (y : positions-polynomial-endofunctor 𝑃 a → Y) →
+    fiber (map-polynomial-endofunctor 𝑃 f) (a , y) ≃
+    ( (b : positions-polynomial-endofunctor 𝑃 a) → fiber f (y b))
+  compute-fiber-map-polynomial-endofunctor a y =
+    equivalence-reasoning
+    fiber (map-polynomial-endofunctor 𝑃 f) (a , y)
+    ≃ fiber (postcomp (positions-polynomial-endofunctor 𝑃 a) f) y
+      by
+        compute-fiber-tot
+          ( λ a → postcomp (positions-polynomial-endofunctor 𝑃 a) f)
+          ( a , y)
+    ≃ ((b : positions-polynomial-endofunctor 𝑃 a) → fiber f (y b))
+      by inv-compute-Π-fiber-postcomp (positions-polynomial-endofunctor 𝑃 a) f y
 ```
 
 ## See also

@@ -11,10 +11,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -22,6 +25,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.implicit-function-types
+open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.sections
 open import foundation.structure-identity-principle
@@ -229,6 +233,26 @@ module _
   natural-transformation-hom-polynomial-endofunctor =
     ( type-hom-polynomial-endofunctor 𝑃 𝑄 α ,
       naturality-hom-polynomial-endofunctor)
+
+  hom-arrow-hom-polynomial-endofunctor :
+    {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
+    hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
+  hom-arrow-hom-polynomial-endofunctor f =
+    ( type-hom-polynomial-endofunctor 𝑃 𝑄 α ,
+      type-hom-polynomial-endofunctor 𝑃 𝑄 α ,
+      naturality-hom-polynomial-endofunctor f)
+
+  cone-hom-polynomial-endofunctor :
+    {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
+    cone
+      ( type-hom-polynomial-endofunctor 𝑃 𝑄 α)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( type-polynomial-endofunctor 𝑃 X)
+  cone-hom-polynomial-endofunctor f =
+    cone-hom-arrow
+      ( map-polynomial-endofunctor 𝑃 f)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( hom-arrow-hom-polynomial-endofunctor f)
 ```
 
 ### Natural transformations define morphisms
@@ -259,6 +283,74 @@ module _
   hom-natural-transformation-polynomial-endofunctor =
     ( shapes-natural-transformation-polynomial-endofunctor ,
       positions-natural-transformation-polynomial-endofunctor)
+```
+
+### Computing the fibers of the induced natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α@(α₀ , α₁) : hom-polynomial-endofunctor 𝑃 𝑄)
+  (let 𝑃₁ = positions-polynomial-endofunctor 𝑃)
+  (let 𝑄₀ = shapes-polynomial-endofunctor 𝑄)
+  (let 𝑄₁ = positions-polynomial-endofunctor 𝑄)
+  {X : UU l5}
+  where
+
+  fiber-type-hom-polynomial-endofunctor :
+    (c : 𝑄₀) (x : 𝑄₁ c → X) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  fiber-type-hom-polynomial-endofunctor c x =
+    Σ ( fiber α₀ c)
+      ( λ (a , p) →
+        Σ (𝑃₁ a → X) (λ x' → coherence-square-maps (tr 𝑄₁ p) (α₁ a) x x'))
+
+  compute-fiber-type-hom-polynomial-endofunctor :
+    (c : 𝑄₀) (x : 𝑄₁ c → X) →
+    fiber (type-hom-polynomial-endofunctor 𝑃 𝑄 α {X = X}) (c , x) ≃
+    fiber-type-hom-polynomial-endofunctor c x
+  compute-fiber-type-hom-polynomial-endofunctor c x =
+    equivalence-reasoning
+      fiber (type-hom-polynomial-endofunctor 𝑃 𝑄 α {X = X}) (c , x)
+      ≃ Σ ( fiber α₀ c)
+          ( λ (a , p) →
+            fiber
+              ( precomp (α₁ a) X)
+              ( inv-tr (λ c' → pr2 𝑄 c' → X) p x))
+        by
+          compute-fiber-map-Σ
+            ( λ c → positions-polynomial-endofunctor 𝑄 c → X)
+            ( α₀)
+            ( λ a → precomp (α₁ a) X)
+            ( c , x)
+      ≃ Σ ( fiber α₀ c)
+          ( λ (a , p) →
+            Σ (𝑃₁ a → X)
+              (λ x' →
+                coherence-triangle-maps'
+                  ( inv-tr (λ c' → 𝑄₁ c' → X) p x)
+                  ( x')
+                  ( α₁ a)))
+        by
+          equiv-tot
+            ( λ (a , p) →
+              compute-coherence-triangle-fiber-precomp'
+                ( α₁ a)
+                ( X)
+                ( inv-tr (λ c' → pr2 𝑄 c' → X) p x))
+      ≃ Σ ( fiber α₀ c)
+          ( λ (a , p) →
+            Σ (𝑃₁ a → X) (λ x' → coherence-square-maps (tr 𝑄₁ p) (α₁ a) x x'))
+        by
+          equiv-tot
+            ( λ (a , p) →
+              equiv-tot
+                ( λ x' →
+                  equiv-tr
+                    ( λ u → coherence-triangle-maps' u x' (α₁ a))
+                    ( ( tr-function-type-fixed-codomain 𝑄₁ X (inv p) x) ∙
+                      ( ap (λ q → x ∘ tr 𝑄₁ q) (inv-inv p)))))
 ```
 
 ### Equivalence between morphisms and natural transformations
