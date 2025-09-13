@@ -17,6 +17,7 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-subuniverses
+open import foundation.retractions
 open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
 open import foundation.monomorphisms
@@ -77,29 +78,29 @@ module _
 ### Univalent type families
 
 ```agda
-univalent-type-family :
+univalent-family :
   {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
-univalent-type-family l2 A = Σ (A → UU l2) is-univalent
+univalent-family l2 A = Σ (A → UU l2) is-univalent
 
 module _
-  {l1 l2 : Level} {A : UU l1} (ℬ : univalent-type-family l2 A)
+  {l1 l2 : Level} {A : UU l1} (ℬ : univalent-family l2 A)
   where
 
-  type-family-univalent-type-family : A → UU l2
-  type-family-univalent-type-family = pr1 ℬ
+  type-family-univalent-family : A → UU l2
+  type-family-univalent-family = pr1 ℬ
 
-  is-univalent-univalent-type-family :
-    is-univalent type-family-univalent-type-family
-  is-univalent-univalent-type-family =
+  is-univalent-univalent-family :
+    is-univalent type-family-univalent-family
+  is-univalent-univalent-family =
     pr2 ℬ
 
-  equiv-equiv-tr-univalent-type-family :
+  equiv-equiv-tr-univalent-family :
     {x y : A} →
     ( x ＝ y) ≃
-    ( type-family-univalent-type-family x ≃ type-family-univalent-type-family y)
-  equiv-equiv-tr-univalent-type-family {x} {y} =
-    ( equiv-tr type-family-univalent-type-family ,
-      is-univalent-univalent-type-family x y)
+    ( type-family-univalent-family x ≃ type-family-univalent-family y)
+  equiv-equiv-tr-univalent-family {x} {y} =
+    ( equiv-tr type-family-univalent-family ,
+      is-univalent-univalent-family x y)
 ```
 
 ## Properties
@@ -157,6 +158,10 @@ module _
         ( λ where refl → refl)
         ( is-emb-B x y)
         ( univalence (B x) (B y))
+
+emb-univalent-family :
+  {l1 l2 : Level} {A : UU l1} → univalent-family l2 A → A ↪ UU l2
+emb-univalent-family (B , H) = (B , is-emb-is-univalent H)
 ```
 
 ### Univalent type families satisfy equivalence induction
@@ -199,11 +204,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} ((B , H) : univalent-type-family l2 A)
+  {l1 l2 : Level} {A : UU l1} ((B , H) : univalent-family l2 A)
   where
-
-  emb-univalent-type-family : A ↪ UU l2
-  emb-univalent-type-family = (B , is-emb-is-univalent H)
 
   is-in-subuniverse-univalent-family : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   is-in-subuniverse-univalent-family X = Σ A (λ a → (B a ≃ X))
@@ -213,7 +215,7 @@ module _
       {l3 : Level} {X : UU l3} → is-prop (is-in-subuniverse-univalent-family X)
     is-prop-is-in-subuniverse-univalent-family {X = X} =
       is-prop-emb
-        ( emb-Σ-emb-base emb-univalent-type-family (λ Y → Y ≃ X))
+        ( emb-Σ-emb-base (emb-univalent-family (B , H)) (λ Y → Y ≃ X))
         ( is-prop-is-proof-irrelevant
           ( λ (Y , e) →
             is-contr-equiv'
@@ -245,6 +247,64 @@ module _
         subuniverse-univalent-family
       .is-closed-under-equiv-global-subuniverse →
         is-closed-under-equiv-subuniverse-univalent-family
+```
+
+### The indexing type of a univalent type family is equivalent to the subuniverse
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (ℬ : univalent-family l2 A)
+  where
+
+  map-equiv-type-subuniverse-univalent-family :
+    A → type-subuniverse (subuniverse-univalent-family ℬ l2)
+  map-equiv-type-subuniverse-univalent-family a =
+    (type-family-univalent-family ℬ a , a , id-equiv)
+
+  map-inv-equiv-type-subuniverse-univalent-family :
+     type-subuniverse (subuniverse-univalent-family ℬ l2) → A
+  map-inv-equiv-type-subuniverse-univalent-family (X , a , e) = a
+
+  is-retraction-map-inv-equiv-type-subuniverse-univalent-family :
+    is-retraction
+      map-equiv-type-subuniverse-univalent-family
+      map-inv-equiv-type-subuniverse-univalent-family
+  is-retraction-map-inv-equiv-type-subuniverse-univalent-family a = refl
+
+  is-section-map-inv-equiv-type-subuniverse-univalent-family :
+    is-section
+      map-equiv-type-subuniverse-univalent-family
+      map-inv-equiv-type-subuniverse-univalent-family
+  is-section-map-inv-equiv-type-subuniverse-univalent-family (X , a , e) =
+    eq-equiv-subuniverse (subuniverse-univalent-family ℬ l2) e
+
+  is-equiv-map-equiv-type-subuniverse-univalent-family :
+    is-equiv map-equiv-type-subuniverse-univalent-family
+  is-equiv-map-equiv-type-subuniverse-univalent-family =
+    is-equiv-is-invertible
+      map-inv-equiv-type-subuniverse-univalent-family
+      is-section-map-inv-equiv-type-subuniverse-univalent-family
+      is-retraction-map-inv-equiv-type-subuniverse-univalent-family
+
+  is-equiv-map-inv-equiv-type-subuniverse-univalent-family :
+    is-equiv map-inv-equiv-type-subuniverse-univalent-family
+  is-equiv-map-inv-equiv-type-subuniverse-univalent-family =
+    is-equiv-is-invertible
+      map-equiv-type-subuniverse-univalent-family
+      is-retraction-map-inv-equiv-type-subuniverse-univalent-family
+      is-section-map-inv-equiv-type-subuniverse-univalent-family
+
+  equiv-type-subuniverse-univalent-family :
+    A ≃ type-subuniverse (subuniverse-univalent-family ℬ l2)
+  equiv-type-subuniverse-univalent-family =
+    ( map-equiv-type-subuniverse-univalent-family ,
+      is-equiv-map-equiv-type-subuniverse-univalent-family)
+
+  inv-equiv-type-subuniverse-univalent-family :
+    type-subuniverse (subuniverse-univalent-family ℬ l2) ≃ A
+  inv-equiv-type-subuniverse-univalent-family =
+    ( map-inv-equiv-type-subuniverse-univalent-family ,
+      is-equiv-map-inv-equiv-type-subuniverse-univalent-family)
 ```
 
 ## See also
