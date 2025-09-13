@@ -11,19 +11,26 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospan-diagrams
+open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.equivalences-arrows
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.implicit-function-types
+open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.subtypes
@@ -32,6 +39,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -162,6 +170,39 @@ module _
   equiv-positions-cartesian-hom-polynomial-endofunctor a =
     ( positions-cartesian-hom-polynomial-endofunctor a ,
       is-cartesian-cartesian-hom-polynomial-endofunctor a)
+
+  naturality-cartesian-hom-polynomial-endofunctor :
+    {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
+    coherence-square-maps
+      ( map-polynomial-endofunctor 𝑃 f)
+      ( type-cartesian-hom-polynomial-endofunctor)
+      ( type-cartesian-hom-polynomial-endofunctor)
+      ( map-polynomial-endofunctor 𝑄 f)
+  naturality-cartesian-hom-polynomial-endofunctor =
+    naturality-hom-polynomial-endofunctor 𝑃 𝑄
+      hom-cartesian-hom-polynomial-endofunctor
+
+  natural-transformation-cartesian-hom-polynomial-endofunctor :
+    {l : Level} → natural-transformation-polynomial-endofunctor l 𝑃 𝑄
+  natural-transformation-cartesian-hom-polynomial-endofunctor =
+    natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄
+      hom-cartesian-hom-polynomial-endofunctor
+
+  hom-arrow-cartesian-hom-polynomial-endofunctor :
+    {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
+    hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
+  hom-arrow-cartesian-hom-polynomial-endofunctor =
+    hom-arrow-hom-polynomial-endofunctor 𝑃 𝑄
+      hom-cartesian-hom-polynomial-endofunctor
+
+  cone-cartesian-hom-polynomial-endofunctor :
+    {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
+    cone
+      ( type-cartesian-hom-polynomial-endofunctor)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( type-polynomial-endofunctor 𝑃 X)
+  cone-cartesian-hom-polynomial-endofunctor =
+    cone-hom-polynomial-endofunctor 𝑃 𝑄 hom-cartesian-hom-polynomial-endofunctor
 ```
 
 ### The identity cartesian morphism
@@ -172,7 +213,7 @@ id-cartesian-hom-polynomial-endofunctor :
   (𝑃 : polynomial-endofunctor l1 l2) →
   cartesian-hom-polynomial-endofunctor 𝑃 𝑃
 id-cartesian-hom-polynomial-endofunctor 𝑃 =
-   (id-hom-polynomial-endofunctor 𝑃 , (λ a → is-equiv-id))
+  ( id-hom-polynomial-endofunctor 𝑃 , (λ a → is-equiv-id))
 ```
 
 ### Composition of cartesian morphisms
@@ -217,7 +258,7 @@ module _
     ( equiv-tot (λ _ → inv-distributive-Π-Σ)) ∘e (associative-Σ _ _ _)
 ```
 
-### Truncatedness of the type of morphisms
+### Truncatedness of the type of cartesian morphisms
 
 If the shapes and positions of the codomain $𝑄$ are $k$-truncated, for $k ≥ -1$,
 then the type of cartesian morphisms $𝑃 → 𝑄$ is $k$-truncated.
@@ -257,22 +298,84 @@ module _
       ( is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ')
 ```
 
+### Computing the fibers of the induced natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α : cartesian-hom-polynomial-endofunctor 𝑃 𝑄)
+  (let α₀ = shapes-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+  (let α₁ = positions-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+  {X : UU l5}
+  where
+
+  compute-fiber-type-cartesian-hom-polynomial-endofunctor :
+    (c : shapes-polynomial-endofunctor 𝑄)
+    (x : positions-polynomial-endofunctor 𝑄 c → X) →
+    fiber (type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α {X = X}) (c , x) ≃
+    fiber α₀ c
+  compute-fiber-type-cartesian-hom-polynomial-endofunctor c x =
+    equivalence-reasoning
+      fiber (type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α {X = X}) (c , x)
+      ≃ Σ ( fiber α₀ c)
+          ( λ (a , p) →
+            fiber
+              ( precomp (α₁ a) X)
+              ( inv-tr (λ c → positions-polynomial-endofunctor 𝑄 c → X) p x))
+        by
+          compute-fiber-map-Σ
+            ( λ c → positions-polynomial-endofunctor 𝑄 c → X)
+            ( α₀)
+            ( λ a → precomp (α₁ a) X)
+            ( c , x)
+      ≃ fiber α₀ c
+        by
+          right-unit-law-Σ-is-contr
+            ( λ (a , p) →
+              is-contr-map-is-equiv
+                ( is-equiv-precomp-is-equiv
+                  ( α₁ a)
+                  ( is-cartesian-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α a)
+                  ( X))
+                ( inv-tr (λ c → positions-polynomial-endofunctor 𝑄 c → X) p x))
+```
+
 ### Cartesian morphisms are cartesian natural transformations
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (𝑃 : polynomial-endofunctor l1 l2)
   (𝑄 : polynomial-endofunctor l3 l4)
-  (α : hom-polynomial-endofunctor 𝑃 𝑄)
+  (α : cartesian-hom-polynomial-endofunctor 𝑃 𝑄)
   where
 
-  is-cartesian-natural-transformation-hom-polynomial-endofunctor :
-    {l : Level} →
-    is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄 α {l})
-  is-cartesian-natural-transformation-hom-polynomial-endofunctor f =
-    {!   !}
+  abstract
+    is-cartesian-natural-transformation-cartesian-hom-polynomial-endofunctor :
+      {l : Level} →
+      is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+        ( natural-transformation-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α {l})
+    is-cartesian-natural-transformation-cartesian-hom-polynomial-endofunctor f =
+      is-pullback-is-fiberwise-equiv-map-fiber-horizontal-map-cone
+        ( type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+        ( map-polynomial-endofunctor 𝑄 f)
+        ( cone-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α f)
+        ( λ (a , y) →
+          is-equiv-source-is-equiv-target-equiv-arrow
+            ( map-fiber-horizontal-map-cone
+              ( type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+              ( map-polynomial-endofunctor 𝑄 f)
+              ( cone-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α f)
+              ( a , y))
+            ( id)
+            ( ( compute-fiber-type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α a
+                ( y)) ,
+              ( compute-fiber-type-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α a
+                ( f ∘ y)) ,
+              ( λ where (u , refl) → refl))
+            ( is-equiv-id))
 ```
 
 ### Cartesian natural transformations define cartesian morphisms

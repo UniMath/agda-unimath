@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -26,6 +27,7 @@ open import foundation.identity-types
 open import foundation.implicit-function-types
 open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
+open import foundation.pullbacks
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
@@ -115,15 +117,26 @@ module _
 ### The associated family of morphisms of arrows
 
 ```agda
-hom-arrow-natural-transformation-polynomial-endofunctor :
+module _
   {l1 l2 l3 l4 l5 : Level}
   (𝑃 : polynomial-endofunctor l1 l2)
   (𝑄 : polynomial-endofunctor l3 l4)
-  (α : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄)
-  {X Y : UU l5} (f : X → Y) →
-  hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
-hom-arrow-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α@(α₀ , α₁) f =
-  ( α₀ , α₀ , α₁ f)
+  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄)
+  {X Y : UU l5} (f : X → Y)
+  where
+
+  hom-arrow-natural-transformation-polynomial-endofunctor :
+    hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
+  hom-arrow-natural-transformation-polynomial-endofunctor =
+    ( α₀ , α₀ , α₁ f)
+
+  cone-natural-transformation-polynomial-endofunctor :
+    cone α₀ (map-polynomial-endofunctor 𝑄 f) (type-polynomial-endofunctor 𝑃 X)
+  cone-natural-transformation-polynomial-endofunctor =
+    cone-hom-arrow
+      ( map-polynomial-endofunctor 𝑃 f)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( hom-arrow-natural-transformation-polynomial-endofunctor)
 ```
 
 ### The identity natural transformation
