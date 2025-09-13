@@ -105,7 +105,7 @@ module _
   is-univalent-univalent-polynomial-endofunctor = pr2 𝑃
 
   univalent-family-univalent-polynomial-endofunctor :
-    univalent-type-family l2 shapes-univalent-polynomial-endofunctor
+    univalent-family l2 shapes-univalent-polynomial-endofunctor
   univalent-family-univalent-polynomial-endofunctor =
     ( positions-univalent-polynomial-endofunctor ,
       is-univalent-univalent-polynomial-endofunctor)
@@ -116,7 +116,7 @@ module _
     ( positions-univalent-polynomial-endofunctor x ≃
       positions-univalent-polynomial-endofunctor y)
   equiv-equiv-tr-univalent-polynomial-endofunctor =
-    equiv-equiv-tr-univalent-type-family
+    equiv-equiv-tr-univalent-family
       univalent-family-univalent-polynomial-endofunctor
 
 make-univalent-polynomial-endofunctor :
@@ -137,6 +137,11 @@ module _
   subuniverse-univalent-polynomial-endofunctor =
     subuniverse-univalent-family
       ( univalent-family-univalent-polynomial-endofunctor 𝑃)
+
+  is-in-subuniverse-univalent-polynomial-endofunctor :
+    {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
+  is-in-subuniverse-univalent-polynomial-endofunctor {l3} =
+    is-in-subuniverse (subuniverse-univalent-polynomial-endofunctor l3)
 
   global-subuniverse-univalent-polynomial-endofunctor :
     global-subuniverse (λ l3 → l1 ⊔ l2 ⊔ l3)
