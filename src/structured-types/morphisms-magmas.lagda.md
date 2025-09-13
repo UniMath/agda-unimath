@@ -30,7 +30,7 @@ module _
 
   preserves-mul-Magma : (type-Magma M → type-Magma N) → UU (l1 ⊔ l2)
   preserves-mul-Magma f =
-    (x y : type-Magma M) → Id (f (mul-Magma M x y)) (mul-Magma N (f x) (f y))
+    (x y : type-Magma M) → f (mul-Magma M x y) ＝ mul-Magma N (f x) (f y)
 
   hom-Magma : UU (l1 ⊔ l2)
   hom-Magma = Σ (type-Magma M → type-Magma N) preserves-mul-Magma

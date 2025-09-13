@@ -74,9 +74,8 @@ module _
 
   associative-add-matrix-Ring :
     {m n : ℕ} (A B C : matrix-Ring R m n) →
-    Id
-      ( add-matrix-Ring R (add-matrix-Ring R A B) C)
-      ( add-matrix-Ring R A (add-matrix-Ring R B C))
+    add-matrix-Ring R (add-matrix-Ring R A B) C ＝
+    add-matrix-Ring R A (add-matrix-Ring R B C)
   associative-add-matrix-Ring empty-tuple empty-tuple empty-tuple = refl
   associative-add-matrix-Ring (v ∷ A) (w ∷ B) (z ∷ C) =
     ap-binary _∷_
@@ -93,7 +92,7 @@ module _
 
   commutative-add-matrix-Ring :
     {m n : ℕ} (A B : matrix-Ring R m n) →
-    Id (add-matrix-Ring R A B) (add-matrix-Ring R B A)
+    add-matrix-Ring R A B ＝ add-matrix-Ring R B A
   commutative-add-matrix-Ring empty-tuple empty-tuple = refl
   commutative-add-matrix-Ring (v ∷ A) (w ∷ B) =
     ap-binary _∷_
@@ -110,7 +109,7 @@ module _
 
   left-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
-    Id (add-matrix-Ring R (zero-matrix-Ring R) A) A
+    add-matrix-Ring R (zero-matrix-Ring R) A ＝ A
   left-unit-law-add-matrix-Ring empty-tuple = refl
   left-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_
@@ -127,7 +126,7 @@ module _
 
   right-unit-law-add-matrix-Ring :
     {m n : ℕ} (A : matrix-Ring R m n) →
-    Id (add-matrix-Ring R A (zero-matrix-Ring R)) A
+    add-matrix-Ring R A (zero-matrix-Ring R) ＝ A
   right-unit-law-add-matrix-Ring empty-tuple = refl
   right-unit-law-add-matrix-Ring (v ∷ A) =
     ap-binary _∷_

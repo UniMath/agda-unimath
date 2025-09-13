@@ -60,10 +60,9 @@ abstract
   sum-number-of-elements-count-fiber :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     (count-A : count A) (count-B : count B) →
-    Id
-      ( sum-count-ℕ count-B
-        ( λ x → number-of-elements-count (count-fiber f count-A count-B x)))
-      ( number-of-elements-count count-A)
+    sum-count-ℕ count-B
+      ( λ x → number-of-elements-count (count-fiber f count-A count-B x)) ＝
+    number-of-elements-count count-A
   sum-number-of-elements-count-fiber f count-A count-B =
     sum-number-of-elements-count-fiber-count-Σ count-B
       ( count-equiv' (equiv-total-fiber f) count-A)
@@ -72,9 +71,8 @@ abstract
   double-counting-fiber :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (count-A : count A) →
     (count-B : count B) (count-fiber-f : (y : B) → count (fiber f y)) (y : B) →
-    Id
-      ( number-of-elements-count (count-fiber-f y))
-      ( number-of-elements-count (count-fiber f count-A count-B y))
+    number-of-elements-count (count-fiber-f y) ＝
+    number-of-elements-count (count-fiber f count-A count-B y)
   double-counting-fiber f count-A count-B count-fiber-f y =
     double-counting (count-fiber-f y) (count-fiber f count-A count-B y)
 ```
@@ -122,8 +120,8 @@ abstract
             ( is-torsorial-Id' y)
             ( pair y refl)) ∘e
           ( inv-associative-Σ A
-            ( λ x → Id x y)
-            ( λ t → Id (tr B (pr2 t) (b (pr1 t))) z))) ∘e
+            ( λ x → x ＝ y)
+            ( λ t → tr B (pr2 t) (b (pr1 t)) ＝ z))) ∘e
         ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
       ( is-finite-eq (has-decidable-equality-is-finite (g y)))
 ```

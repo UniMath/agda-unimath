@@ -59,13 +59,13 @@ abstract
   compute-zero-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-    Id (elim-ℤ P p0 pS zero-ℤ) p0
+    elim-ℤ P p0 pS zero-ℤ ＝ p0
   compute-zero-elim-ℤ P p0 pS = refl
 
   compute-succ-elim-ℤ :
     { l1 : Level} (P : ℤ → UU l1)
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) (k : ℤ) →
-    Id (elim-ℤ P p0 pS (succ-ℤ k)) (map-equiv (pS k) (elim-ℤ P p0 pS k))
+    elim-ℤ P p0 pS (succ-ℤ k) ＝ map-equiv (pS k) (elim-ℤ P p0 pS k)
   compute-succ-elim-ℤ P p0 pS (inl zero-ℕ) =
     inv
       ( is-section-map-inv-is-equiv
@@ -85,8 +85,8 @@ ELIM-ℤ :
 ELIM-ℤ P p0 pS =
   Σ ( (k : ℤ) → P k)
     ( λ f →
-      ( ( Id (f zero-ℤ) p0) ×
-        ( (k : ℤ) → Id (f (succ-ℤ k)) ((map-equiv (pS k)) (f k)))))
+      ( ( f zero-ℤ ＝ p0) ×
+        ( (k : ℤ) → f (succ-ℤ k) ＝ map-equiv (pS k) (f k))))
 
 Elim-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
@@ -99,7 +99,7 @@ equiv-comparison-map-Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
   ( s t : ELIM-ℤ P p0 pS) (k : ℤ) →
-  Id ((pr1 s) k) ((pr1 t) k) ≃ Id ((pr1 s) (succ-ℤ k)) ((pr1 t) (succ-ℤ k))
+  (pr1 s k ＝ pr1 t k) ≃ (pr1 s (succ-ℤ k) ＝ pr1 t (succ-ℤ k))
 equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k =
   ( ( equiv-concat (pr2 (pr2 s) k) (pr1 t (succ-ℤ k))) ∘e
     ( equiv-concat' (map-equiv (pS k) (pr1 s k)) (inv (pr2 (pr2 t) k)))) ∘e
@@ -110,7 +110,7 @@ zero-Eq-ELIM-ℤ :
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
   ( s t : ELIM-ℤ P p0 pS) (H : (pr1 s) ~ (pr1 t)) → UU l1
 zero-Eq-ELIM-ℤ P p0 pS s t H =
-  Id (H zero-ℤ) ((pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
+  (H zero-ℤ ＝ pr1 (pr2 s) ∙ inv (pr1 (pr2 t)))
 
 succ-Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
@@ -118,9 +118,8 @@ succ-Eq-ELIM-ℤ :
   ( s t : ELIM-ℤ P p0 pS) (H : (pr1 s) ~ (pr1 t)) → UU l1
 succ-Eq-ELIM-ℤ P p0 pS s t H =
   ( k : ℤ) →
-  Id
-    ( H (succ-ℤ k))
-    ( map-equiv (equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k) (H k))
+  H (succ-ℤ k) ＝
+  map-equiv (equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t k) (H k)
 
 Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
@@ -128,7 +127,7 @@ Eq-ELIM-ℤ :
   ( s t : ELIM-ℤ P p0 pS) → UU l1
 Eq-ELIM-ℤ P p0 pS s t =
   ELIM-ℤ
-    ( λ k → Id (pr1 s k) (pr1 t k))
+    ( λ k → pr1 s k ＝ pr1 t k)
     ( (pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
     ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)
 
@@ -143,7 +142,7 @@ pr2 (pr2 (reflexive-Eq-ELIM-ℤ P p0 pS (f , p , H))) = inv ∘ (right-inv ∘ H
 Eq-ELIM-ℤ-eq :
   { l1 : Level} (P : ℤ → UU l1) →
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-  ( s t : ELIM-ℤ P p0 pS) → Id s t → Eq-ELIM-ℤ P p0 pS s t
+  ( s t : ELIM-ℤ P p0 pS) → s ＝ t → Eq-ELIM-ℤ P p0 pS s t
 Eq-ELIM-ℤ-eq P p0 pS s .s refl = reflexive-Eq-ELIM-ℤ P p0 pS s
 
 abstract
@@ -157,15 +156,15 @@ abstract
       ( pair (pr1 s) refl-htpy)
       ( is-torsorial-Eq-structure
         ( is-contr-is-equiv'
-          ( Σ (Id (pr1 s zero-ℤ) p0) (λ α → Id α (pr1 (pr2 s))))
+          ( Σ (pr1 s zero-ℤ ＝ p0) (λ α → α ＝ pr1 (pr2 s)))
           ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-torsorial-Id' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
-          ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
-              ( λ β → β ~ (pr2 (pr2 s))))
+          ( Σ ( ( k : ℤ) → pr1 s (succ-ℤ k) ＝ pr1 (pS k) (pr1 s k))
+              ( λ β → β ~ pr2 (pr2 s)))
           ( tot (λ β → right-transpose-htpy-concat refl-htpy β (pr2 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ β →
@@ -185,7 +184,7 @@ abstract
 eq-Eq-ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1) →
   ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-  ( s t : ELIM-ℤ P p0 pS) → Eq-ELIM-ℤ P p0 pS s t → Id s t
+  ( s t : ELIM-ℤ P p0 pS) → Eq-ELIM-ℤ P p0 pS s t → s ＝ t
 eq-Eq-ELIM-ℤ P p0 pS s t = map-inv-is-equiv (is-equiv-Eq-ELIM-ℤ-eq P p0 pS s t)
 
 abstract
@@ -197,7 +196,7 @@ abstract
     is-prop-all-elements-equal
       ( λ s t → eq-Eq-ELIM-ℤ P p0 pS s t
         ( Elim-ℤ
-          ( λ k → Id (pr1 s k) (pr1 t k))
+          ( λ k → pr1 s k ＝ pr1 t k)
           ( (pr1 (pr2 s)) ∙ (inv (pr1 (pr2 t))))
           ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)))
 ```

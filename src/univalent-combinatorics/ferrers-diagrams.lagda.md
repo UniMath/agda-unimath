@@ -168,7 +168,7 @@ module _
   pr2 id-equiv-ferrers-diagram x = id-equiv
 
   equiv-eq-ferrers-diagram :
-    (E : ferrers-diagram l2 l3 A) → Id D E → equiv-ferrers-diagram E
+    (E : ferrers-diagram l2 l3 A) → D ＝ E → equiv-ferrers-diagram E
   equiv-eq-ferrers-diagram .D refl = id-equiv-ferrers-diagram
 
   is-torsorial-equiv-ferrers-diagram :
@@ -197,7 +197,7 @@ module _
       equiv-eq-ferrers-diagram
 
   eq-equiv-ferrers-diagram :
-    (E : ferrers-diagram l2 l3 A) → equiv-ferrers-diagram E → Id D E
+    (E : ferrers-diagram l2 l3 A) → equiv-ferrers-diagram E → D ＝ E
   eq-equiv-ferrers-diagram E =
     map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram E)
 ```
@@ -224,7 +224,7 @@ module _
 
   equiv-eq-ferrers-diagram-Finite-Type :
     (E : ferrers-diagram-Finite-Type l2 l3 A) →
-    Id D E → equiv-ferrers-diagram-Finite-Type E
+    D ＝ E → equiv-ferrers-diagram-Finite-Type E
   equiv-eq-ferrers-diagram-Finite-Type .D refl =
     id-equiv-ferrers-diagram-Finite-Type
 
@@ -268,7 +268,7 @@ module _
 
   eq-equiv-ferrers-diagram-Finite-Type :
     (E : ferrers-diagram-Finite-Type l2 l3 A) →
-    equiv-ferrers-diagram-Finite-Type E → Id D E
+    equiv-ferrers-diagram-Finite-Type E → D ＝ E
   eq-equiv-ferrers-diagram-Finite-Type E =
     map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-Finite-Type E)
 ```
