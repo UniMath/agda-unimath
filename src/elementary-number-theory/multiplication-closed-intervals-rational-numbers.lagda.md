@@ -509,7 +509,8 @@ abstract
       elim-disjunction motive
         ( elim-disjunction motive case-[ac,ad] case-[ac,bc])
         ( elim-disjunction motive case-[ad,bd] case-[bc,bd])
-        ( cover-minimal-closed-interval-cover-of-four-elements-Total-Order ℚ-Total-Order
+        ( cover-minimal-closed-interval-cover-of-four-elements-Total-Order
+          ( ℚ-Total-Order)
           ( a *ℚ c)
           ( a *ℚ d)
           ( b *ℚ c)

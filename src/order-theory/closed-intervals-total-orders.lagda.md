@@ -252,7 +252,7 @@ module _
         ( min-leq-max-Total-Order X _ _))
 
   abstract
-    cover-closed-interval-4-first-smallest-Total-Order :
+    cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order :
       leq-Total-Order X a b → leq-Total-Order X a c → leq-Total-Order X a d →
       subtype-closed-interval-Total-Order X
         ( minimal-closed-interval-cover-of-four-elements-Total-Order) ⊆
@@ -264,7 +264,7 @@ module _
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X a c)))
         ( subtype-closed-interval-Total-Order X
           ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
-    cover-closed-interval-4-first-smallest-Total-Order
+    cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order
       a≤b a≤c a≤d x (min≤x , x≤max) =
       let
         motive =
@@ -281,7 +281,10 @@ module _
                   ( a)
                   ( c))))
             ( subtype-closed-interval-Total-Order X
-              ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
+              ( minimal-closed-interval-cover-of-two-elements-Total-Order
+                ( X)
+                ( b)
+                ( d)))
             ( x)
         minab≤x =
           tr
@@ -440,7 +443,7 @@ module _
               map-disjunction
                 ( id)
                 ( inl-disjunction)
-                ( cover-closed-interval-4-first-smallest-Total-Order X a b c d
+                ( cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order X a b c d
                   ( tr (_≤ b) min=a min≤b)
                   ( tr (_≤ c) min=a min≤c)
                   ( tr (_≤ d) min=a min≤d)
@@ -456,7 +459,7 @@ module _
                           tr (x ≤_) (commutative-max b a) x≤maxba)))
                   ( inr-disjunction ∘ inl-disjunction))
                 ( inl-disjunction ∘ inr-disjunction)
-                ( cover-closed-interval-4-first-smallest-Total-Order X b a d c
+                ( cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order X b a d c
                   ( tr (_≤ a) min=b min≤a)
                   ( tr (_≤ d) min=b min≤d)
                   ( tr (_≤ c) min=b min≤c)
@@ -484,7 +487,7 @@ module _
                           tr (x ≤_) (commutative-max c a) x≤maxca)))
                   ( inr-disjunction ∘ inr-disjunction))
                 ( inl-disjunction ∘ inl-disjunction)
-                ( cover-closed-interval-4-first-smallest-Total-Order X c a d b
+                ( cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order X c a d b
                   ( tr (_≤ a) min=c min≤a)
                   ( tr (_≤ d) min=c min≤d)
                   ( tr (_≤ b) min=c min≤b)
@@ -521,7 +524,7 @@ module _
                     ( inl-disjunction
                       ( tr (_≤ x) (commutative-min _ _) minba≤x ,
                         tr (x ≤_) (commutative-max _ _) x≤maxba)))
-                ( cover-closed-interval-4-first-smallest-Total-Order X d b c a
+                ( cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order X d b c a
                   ( tr (_≤ b) min=d min≤b)
                   ( tr (_≤ c) min=d min≤c)
                   ( tr (_≤ a) min=d min≤a)
