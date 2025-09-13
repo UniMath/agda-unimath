@@ -8,27 +8,26 @@ module foundation.univalent-type-families where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.monomorphisms
-open import foundation.embeddings
-open import foundation.subtype-identity-principle
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-systems
-open import foundation.identity-systems
-open import foundation.contractible-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fibers-of-maps
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.global-subuniverses
+open import foundation.identity-systems
 open import foundation.iterated-dependent-product-types
+open import foundation.monomorphisms
 open import foundation.propositions
+open import foundation.subtype-identity-principle
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
-open import foundation-core.embeddings
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.sections
@@ -81,6 +80,26 @@ module _
 univalent-type-family :
   {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
 univalent-type-family l2 A = Σ (A → UU l2) is-univalent
+
+module _
+  {l1 l2 : Level} {A : UU l1} (ℬ : univalent-type-family l2 A)
+  where
+
+  type-family-univalent-type-family : A → UU l2
+  type-family-univalent-type-family = pr1 ℬ
+
+  is-univalent-univalent-type-family :
+    is-univalent type-family-univalent-type-family
+  is-univalent-univalent-type-family =
+    pr2 ℬ
+
+  equiv-equiv-tr-univalent-type-family :
+    {x y : A} →
+    ( x ＝ y) ≃
+    ( type-family-univalent-type-family x ≃ type-family-univalent-type-family y)
+  equiv-equiv-tr-univalent-type-family {x} {y} =
+    ( equiv-tr type-family-univalent-type-family ,
+      is-univalent-univalent-type-family x y)
 ```
 
 ## Properties
@@ -176,7 +195,7 @@ module _
     is-univalent-is-emb (is-emb-inclusion-subuniverse S)
 ```
 
-### The underlying subuniverse of a univalent type family
+### The underlying global subuniverse of a univalent type family
 
 ```agda
 module _
@@ -210,6 +229,22 @@ module _
 
   subuniverse-univalent-family : (l3 : Level) → subuniverse l3 (l1 ⊔ l2 ⊔ l3)
   subuniverse-univalent-family l3 = is-in-subuniverse-prop-univalent-family
+
+  is-closed-under-equiv-subuniverse-univalent-family :
+    {l3 l4 : Level} →
+    is-closed-under-equiv-subuniverses
+      (λ l → l1 ⊔ l2 ⊔ l) subuniverse-univalent-family l3 l4
+  is-closed-under-equiv-subuniverse-univalent-family X Y f (a , e) =
+    ( a , f ∘e e)
+
+  global-subuniverse-univalent-family :
+    global-subuniverse (λ l → l1 ⊔ l2 ⊔ l)
+  global-subuniverse-univalent-family =
+    λ where
+      .subuniverse-global-subuniverse →
+        subuniverse-univalent-family
+      .is-closed-under-equiv-global-subuniverse →
+        is-closed-under-equiv-subuniverse-univalent-family
 ```
 
 ## See also

@@ -33,7 +33,8 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
-`A`, the {{#concept "polynomial endofunctor" Agda=polynomial-endofunctor}}
+`A`, the
+{{#concept "polynomial endofunctor" WD="polynomial functor" WDID=Q48842893 Agda=polynomial-endofunctor}}
 `𝑃 A B` is defined by
 
 ```text
@@ -80,7 +81,25 @@ type-polynomial-endofunctor :
 type-polynomial-endofunctor (A , B) = type-polynomial-endofunctor' A B
 ```
 
-### The identity type of `type-polynomial-endofunctor`
+### The action on maps of the polynomial endofunctor
+
+```agda
+map-polynomial-endofunctor' :
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {X : UU l3} {Y : UU l4}
+  (f : X → Y) →
+  type-polynomial-endofunctor' A B X → type-polynomial-endofunctor' A B Y
+map-polynomial-endofunctor' A B f = tot (λ x α → f ∘ α)
+
+map-polynomial-endofunctor :
+  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {X : UU l3} {Y : UU l4} (f : X → Y) →
+  type-polynomial-endofunctor 𝑃 X → type-polynomial-endofunctor 𝑃 Y
+map-polynomial-endofunctor (A , B) = map-polynomial-endofunctor' A B
+```
+
+## Properties
+
+### Characterizing identity in the image of polynomial endofunctors
 
 ```agda
 module _
@@ -143,22 +162,6 @@ module _
     is-retraction-eq-Eq-type-polynomial-endofunctor x x refl
 ```
 
-### The action on maps of the polynomial endofunctor
-
-```agda
-map-polynomial-endofunctor' :
-  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2) {X : UU l3} {Y : UU l4}
-  (f : X → Y) →
-  type-polynomial-endofunctor' A B X → type-polynomial-endofunctor' A B Y
-map-polynomial-endofunctor' A B f = tot (λ x α → f ∘ α)
-
-map-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
-  {X : UU l3} {Y : UU l4} (f : X → Y) →
-  type-polynomial-endofunctor 𝑃 X → type-polynomial-endofunctor 𝑃 Y
-map-polynomial-endofunctor (A , B) = map-polynomial-endofunctor' A B
-```
-
 ### The action on homotopies of the polynomial endofunctor
 
 ```agda
@@ -194,7 +197,7 @@ coh-refl-htpy-polynomial-endofunctor (A , B) =
   coh-refl-htpy-polynomial-endofunctor' A B
 ```
 
-### Computing the fiber of the action on maps
+### Computing the fibers of the action on maps
 
 ```agda
 module _
