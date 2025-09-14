@@ -18,14 +18,18 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
+
+open import foundation-core.empty-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -96,6 +100,9 @@ module _
   eq-component-tuple-index-in-tuple
     (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
     eq-component-tuple-index-in-tuple n a v I
+
+  subset-tuple : {n : ℕ} (v : tuple A n) → subtype l A
+  subset-tuple v a = trunc-Prop (a ∈-tuple v)
 ```
 
 ## Properties
