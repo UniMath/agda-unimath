@@ -737,29 +737,6 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (I : Finite-Type l2)
-  (is-contr-I : is-contr (type-Finite-Type I))
-  (i : type-Finite-Type I)
-  where
-
-  abstract
-    sum-finite-is-contr-Commutative-Monoid :
-      (f : type-Finite-Type I → type-Commutative-Monoid M) →
-      sum-finite-Commutative-Monoid M I f ＝ f i
-    sum-finite-is-contr-Commutative-Monoid f =
-      sum-equiv-finite-Commutative-Monoid M
-        ( I)
-        ( unit-Finite-Type)
-        ( equiv-unit-is-contr is-contr-I)
-        ( f) ∙
-      sum-finite-unit-type-Commutative-Monoid M _ ∙
-      ap f (eq-is-contr is-contr-I)
-```
-
-#### Interchange law of sums and addition
-
-```agda
-module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
   where
 
@@ -854,7 +831,9 @@ module _
   (P : subset-Finite-Type l3 A)
   where
 
-  abstract
+  opaque
+    unfolding is-equiv-comp
+
     decompose-sum-decidable-subset-finite-Commutative-Monoid :
       (f : type-Finite-Type A → type-Commutative-Monoid M) →
       sum-finite-Commutative-Monoid M A f ＝

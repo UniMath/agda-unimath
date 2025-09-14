@@ -420,7 +420,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
-  abstract
+  opaque
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
     pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
