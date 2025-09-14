@@ -11,7 +11,6 @@ module elementary-number-theory.nonnegative-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
@@ -23,9 +22,7 @@ open import elementary-number-theory.multiplication-positive-and-negative-intege
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -220,24 +217,6 @@ positive-succ-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁺
 positive-succ-ℚ⁰⁺ (q , H) = (succ-ℚ q , is-positive-succ-is-nonnegative-ℚ q H)
 ```
 
-### The product of two nonnegative rational numbers is nonnegative
-
-```agda
-opaque
-  unfolding mul-ℚ
-
-  is-nonnegative-mul-nonnegative-ℚ :
-    {x y : ℚ} → is-nonnegative-ℚ x → is-nonnegative-ℚ y →
-    is-nonnegative-ℚ (x *ℚ y)
-  is-nonnegative-mul-nonnegative-ℚ {x} {y} P Q =
-    is-nonnegative-rational-fraction-ℤ
-      ( is-nonnegative-mul-nonnegative-fraction-ℤ
-        { fraction-ℚ x}
-        { fraction-ℚ y}
-        ( P)
-        ( Q))
-```
-
 ### Multiplication by a nonnegative rational number preserves inequality
 
 ```agda
@@ -276,72 +255,6 @@ opaque
       ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
       ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
       ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
-```
-
-### Addition on nonnegative rational numbers
-
-```agda
-opaque
-  unfolding add-ℚ
-
-  is-nonnegative-add-ℚ :
-    (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
-    is-nonnegative-ℚ (p +ℚ q)
-  is-nonnegative-add-ℚ p q nonneg-p nonneg-q =
-    is-nonnegative-rational-fraction-ℤ
-      ( is-nonnegative-add-fraction-ℤ
-        { fraction-ℚ p}
-        { fraction-ℚ q}
-        ( nonneg-p)
-        ( nonneg-q))
-
-add-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
-add-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
-  ( p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q)
-
-infixl 35 _+ℚ⁰⁺_
-_+ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
-_+ℚ⁰⁺_ = add-ℚ⁰⁺
-```
-
-### Multiplication on nonnegative rational numbers
-
-```agda
-opaque
-  unfolding mul-ℚ
-
-  is-nonnegative-mul-ℚ :
-    (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
-    is-nonnegative-ℚ (p *ℚ q)
-  is-nonnegative-mul-ℚ p q nonneg-p nonneg-q =
-    is-nonnegative-rational-fraction-ℤ
-      ( is-nonnegative-mul-nonnegative-fraction-ℤ
-        { fraction-ℚ p}
-        { fraction-ℚ q}
-        ( nonneg-p)
-        ( nonneg-q))
-
-mul-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
-mul-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
-  ( p *ℚ q , is-nonnegative-mul-ℚ p q nonneg-p nonneg-q)
-
-infixl 35 _*ℚ⁰⁺_
-_*ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
-_*ℚ⁰⁺_ = mul-ℚ⁰⁺
-
-abstract
-  commutative-mul-ℚ⁰⁺ : (p q : ℚ⁰⁺) → p *ℚ⁰⁺ q ＝ q *ℚ⁰⁺ p
-  commutative-mul-ℚ⁰⁺ (p , _) (q , _) = eq-ℚ⁰⁺ (commutative-mul-ℚ p q)
-```
-
-### Inequality on nonnegative rational numbers
-
-```agda
-leq-ℚ⁰⁺-Prop : ℚ⁰⁺ → ℚ⁰⁺ → Prop lzero
-leq-ℚ⁰⁺-Prop (p , _) (q , _) = leq-ℚ-Prop p q
-
-leq-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → UU lzero
-leq-ℚ⁰⁺ (p , _) (q , _) = leq-ℚ p q
 ```
 
 ### Addition of a nonnegative rational number is an increasing map
@@ -389,22 +302,4 @@ abstract
 
 nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
 nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
-```
-
-### Strict inequality on nonnegative rational numbers
-
-```agda
-le-ℚ⁰⁺-Prop : (p q : ℚ⁰⁺) → Prop lzero
-le-ℚ⁰⁺-Prop p q = le-ℚ-Prop (rational-ℚ⁰⁺ p) (rational-ℚ⁰⁺ q)
-
-le-ℚ⁰⁺ : (p q : ℚ⁰⁺) → UU lzero
-le-ℚ⁰⁺ p q = type-Prop (le-ℚ⁰⁺-Prop p q)
-```
-
-### Zero is less than positive rational numbers as nonnegative rational numbers
-
-```agda
-abstract
-  le-zero-nonnegative-ℚ⁰⁺ : (q : ℚ⁺) → le-ℚ⁰⁺ zero-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
-  le-zero-nonnegative-ℚ⁰⁺ (q , pos-q) = le-zero-is-positive-ℚ q pos-q
 ```
