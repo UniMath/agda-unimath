@@ -114,33 +114,33 @@ mul-interval-ℚ [a,b] [c,d] =
 
 ## Properties
 
-### Right multiplication of an interval by a rational number
+### Mulltiplication of an interval by a rational number
 
-#### Right multiplication of an interval by a negative rational number
+#### Multiplication of an interval by a negative rational number
 
 ```agda
-right-mul-ℚ⁻-interval-ℚ : interval-ℚ → ℚ⁻ → interval-ℚ
-right-mul-ℚ⁻-interval-ℚ ((p , q) , p≤q) s⁻@(s , _) =
+mul-interval-ℚ-ℚ⁻ : interval-ℚ → ℚ⁻ → interval-ℚ
+mul-interval-ℚ-ℚ⁻ ((p , q) , p≤q) s⁻@(s , _) =
   ((q *ℚ s , p *ℚ s) , reverses-leq-right-mul-ℚ⁻ s⁻ _ _ p≤q)
 
 abstract
-  right-mul-ℚ⁻-is-in-interval-ℚ :
+  mul-is-in-interval-ℚ-ℚ⁻ :
     ([p,q] : interval-ℚ) → (r : ℚ⁻) → (s : ℚ) → is-in-interval-ℚ [p,q] s →
     is-in-interval-ℚ
-      ( right-mul-ℚ⁻-interval-ℚ [p,q] r)
+      ( mul-interval-ℚ-ℚ⁻ [p,q] r)
       ( s *ℚ rational-ℚ⁻ r)
-  right-mul-ℚ⁻-is-in-interval-ℚ
+  mul-is-in-interval-ℚ-ℚ⁻
     ((p , q) , p≤q) r s (p≤s , s≤q) =
       ( reverses-leq-right-mul-ℚ⁻ r _ _ s≤q ,
         reverses-leq-right-mul-ℚ⁻ r _ _ p≤s)
 
-  is-in-im-right-mul-ℚ⁻-is-in-right-mul-ℚ⁻-interval-ℚ :
+  is-in-im-mul-interval-ℚ-ℚ⁻-is-in-mul-interval-ℚ-ℚ⁻ :
     ([p,q] : interval-ℚ) → (r : ℚ⁻) → (s : ℚ) →
     is-in-interval-ℚ
-      ( right-mul-ℚ⁻-interval-ℚ [p,q] r)
+      ( mul-interval-ℚ-ℚ⁻ [p,q] r)
       ( s) →
     is-in-im-subtype (mul-ℚ' (rational-ℚ⁻ r)) (subtype-interval-ℚ [p,q]) s
-  is-in-im-right-mul-ℚ⁻-is-in-right-mul-ℚ⁻-interval-ℚ
+  is-in-im-mul-interval-ℚ-ℚ⁻-is-in-mul-interval-ℚ-ℚ⁻
     ((p , q) , p≤q) r⁻@(r , _) s (qr≤s , s≤pr) =
       let r⁻¹ = inv-ℚ⁻ r⁻
       in
@@ -167,13 +167,13 @@ abstract
     is-interval-map-ℚ
       ( mul-ℚ' (rational-ℚ⁻ q))
       ( [a,b])
-      ( right-mul-ℚ⁻-interval-ℚ [a,b] q)
+      ( mul-interval-ℚ-ℚ⁻ [a,b] q)
   is-interval-map-left-mul-ℚ⁻ q [a,b] =
-    ( ind-Σ (right-mul-ℚ⁻-is-in-interval-ℚ [a,b] q) ,
-      ind-Σ (is-in-im-right-mul-ℚ⁻-is-in-right-mul-ℚ⁻-interval-ℚ [a,b] q))
+    ( ind-Σ (mul-is-in-interval-ℚ-ℚ⁻ [a,b] q) ,
+      ind-Σ (is-in-im-mul-interval-ℚ-ℚ⁻-is-in-mul-interval-ℚ-ℚ⁻ [a,b] q))
 ```
 
-#### Right multiplication of an interval by a positive rational number
+#### Multiplication of an interval by a positive rational number
 
 ```agda
 right-mul-ℚ⁺-interval-ℚ : interval-ℚ → ℚ⁺ → interval-ℚ
@@ -273,7 +273,7 @@ abstract
   right-mul-ℚ-interval-ℚ-is-negative-ℚ :
     ([p,q] : interval-ℚ) (r : ℚ) (neg-r : is-negative-ℚ r) →
     right-mul-ℚ-interval-ℚ [p,q] r ＝
-    right-mul-ℚ⁻-interval-ℚ [p,q] (r , neg-r)
+    mul-interval-ℚ-ℚ⁻ [p,q] (r , neg-r)
   right-mul-ℚ-interval-ℚ-is-negative-ℚ [p,q]@((p , q) , p≤q) r neg-r =
     unordered-closed-interval-leq-ℚ' _ _
       ( reverses-leq-right-mul-ℚ⁻ (r , neg-r) _ _ p≤q)
@@ -311,7 +311,7 @@ abstract
         inv-tr
           ( λ [x,y] → is-in-interval-ℚ [x,y] (s *ℚ r))
           ( right-mul-ℚ-interval-ℚ-is-negative-ℚ [p,q] r neg-r)
-          ( right-mul-ℚ⁻-is-in-interval-ℚ [p,q] (r , neg-r) s s∈[p,q]))
+          ( mul-is-in-interval-ℚ-ℚ⁻ [p,q] (r , neg-r) s s∈[p,q]))
       ( λ r=0 →
         binary-tr
           ( is-in-interval-ℚ)
@@ -333,7 +333,7 @@ abstract
   image-right-mul-ℚ-is-in-interval-ℚ [p,q] r s s∈[min-pr-qr,max-pr-qr] =
       trichotomy-sign-ℚ r
         ( λ neg-r →
-          is-in-im-right-mul-ℚ⁻-is-in-right-mul-ℚ⁻-interval-ℚ
+          is-in-im-mul-interval-ℚ-ℚ⁻-is-in-mul-interval-ℚ-ℚ⁻
             ( [p,q])
             ( r , neg-r)
             ( s)
@@ -370,19 +370,19 @@ abstract
       ind-Σ (image-right-mul-ℚ-is-in-interval-ℚ [a,b] q))
 ```
 
-### Right multiplication by an interval
+### Left multiplication of a rational number and an interval
 
 ```agda
-right-mul-interval-ℚ : ℚ → interval-ℚ → interval-ℚ
-right-mul-interval-ℚ a ((b , c) , b≤c) =
+left-mul-ℚ-interval-ℚ : ℚ → interval-ℚ → interval-ℚ
+left-mul-ℚ-interval-ℚ a ((b , c) , b≤c) =
   ( (min-ℚ (a *ℚ b) (a *ℚ c) , max-ℚ (a *ℚ b) (a *ℚ c)) ,
     min-leq-max-Decidable-Total-Order ℚ-Decidable-Total-Order _ _)
 
 abstract
-  commute-left-right-mul-interval-ℚ :
+  commute-left-left-mul-ℚ-interval-ℚ :
     ([p,q] : interval-ℚ) (r : ℚ) →
-    right-mul-ℚ-interval-ℚ [p,q] r ＝ right-mul-interval-ℚ r [p,q]
-  commute-left-right-mul-interval-ℚ [p,q] r =
+    right-mul-ℚ-interval-ℚ [p,q] r ＝ left-mul-ℚ-interval-ℚ r [p,q]
+  commute-left-left-mul-ℚ-interval-ℚ [p,q] r =
     eq-interval-ℚ _ _
       ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
       ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
@@ -390,19 +390,19 @@ abstract
   right-mul-element-interval-ℚ :
     ([p,q] : interval-ℚ) → (r s : ℚ) → is-in-interval-ℚ [p,q] s →
     is-in-interval-ℚ
-      ( right-mul-interval-ℚ r [p,q])
+      ( left-mul-ℚ-interval-ℚ r [p,q])
       ( r *ℚ s)
   right-mul-element-interval-ℚ [p,q] r s s∈[p,q] =
     binary-tr
       ( is-in-interval-ℚ)
-      ( commute-left-right-mul-interval-ℚ [p,q] r)
+      ( commute-left-left-mul-ℚ-interval-ℚ [p,q] r)
       ( commutative-mul-ℚ s r)
       ( right-mul-ℚ-is-in-interval-ℚ [p,q] r s s∈[p,q])
 
   image-right-mul-element-interval-ℚ :
     ([p,q] : interval-ℚ) (r s : ℚ) →
     is-in-interval-ℚ
-      ( right-mul-interval-ℚ r [p,q])
+      ( left-mul-ℚ-interval-ℚ r [p,q])
       ( s) →
     is-in-im-subtype (mul-ℚ r) (subtype-interval-ℚ [p,q]) s
   image-right-mul-element-interval-ℚ [p,q] r s s∈[min-rp-rq,max-rp-rq] =
@@ -412,17 +412,17 @@ abstract
       ( image-right-mul-ℚ-is-in-interval-ℚ [p,q] r s
         ( inv-tr
           ( λ [x,y] → is-in-interval-ℚ [x,y] s)
-          ( commute-left-right-mul-interval-ℚ [p,q] r)
+          ( commute-left-left-mul-ℚ-interval-ℚ [p,q] r)
           ( s∈[min-rp-rq,max-rp-rq])))
 
   is-interval-map-right-mul-ℚ :
     (q : ℚ) ([a,b] : interval-ℚ) →
-    is-interval-map-ℚ (mul-ℚ q) [a,b] (right-mul-interval-ℚ q [a,b])
+    is-interval-map-ℚ (mul-ℚ q) [a,b] (left-mul-ℚ-interval-ℚ q [a,b])
   is-interval-map-right-mul-ℚ q [a,b] =
     binary-tr
       ( λ f i → is-interval-map-ℚ f [a,b] i)
       ( eq-htpy (λ _ → commutative-mul-ℚ _ _))
-      ( commute-left-right-mul-interval-ℚ [a,b] q)
+      ( commute-left-left-mul-ℚ-interval-ℚ [a,b] q)
       ( is-interval-map-left-mul-ℚ q [a,b])
 ```
 
