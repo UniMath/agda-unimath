@@ -232,8 +232,8 @@ module _
 
   abstract
     is-pullback-htpy :
-      {c : cone f g C} (c' : cone f' g' C)
-      (Hc : htpy-parallel-cone Hf Hg c c') →
+      {c : cone f g C} (c' : cone f' g' C) →
+      htpy-parallel-cone Hf Hg c c' →
       is-pullback f' g' c' → is-pullback f g c
     is-pullback-htpy {c} c' H pb-c' =
       is-equiv-left-map-triangle
@@ -246,8 +246,8 @@ module _
 
   abstract
     is-pullback-htpy' :
-      (c : cone f g C) {c' : cone f' g' C}
-      (Hc : htpy-parallel-cone Hf Hg c c') →
+      (c : cone f g C) {c' : cone f' g' C} →
+      htpy-parallel-cone Hf Hg c c' →
       is-pullback f g c → is-pullback f' g' c'
     is-pullback-htpy' c {c'} H =
       is-equiv-top-map-triangle
@@ -533,74 +533,74 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (i : X → Y) (j : Y → Z) (h : C → Z)
-  (c : cone j h B) (d : cone i (vertical-map-cone j h c) A)
+  (right : cone j h B) (left : cone i (vertical-map-cone j h right) A)
   where
 
   abstract
     is-pullback-rectangle-is-pullback-left-square :
-      is-pullback j h c → is-pullback i (vertical-map-cone j h c) d →
-      is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
+      is-pullback j h right → is-pullback i (vertical-map-cone j h right) left →
+      is-pullback (j ∘ i) h (pasting-horizontal-cone i j h right left)
     is-pullback-rectangle-is-pullback-left-square pb-c pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone (j ∘ i) h
-        ( pasting-horizontal-cone i j h c d)
+        ( pasting-horizontal-cone i j h right left)
         ( λ x →
           is-equiv-left-map-triangle
             ( map-fiber-vertical-map-cone
-              ( j ∘ i) h (pasting-horizontal-cone i j h c d) x)
-            ( map-fiber-vertical-map-cone j h c (i x))
-            ( map-fiber-vertical-map-cone i (vertical-map-cone j h c) d x)
+              ( j ∘ i) h (pasting-horizontal-cone i j h right left) x)
+            ( map-fiber-vertical-map-cone j h right (i x))
+            ( map-fiber-vertical-map-cone i (vertical-map-cone j h right) left x)
             ( preserves-pasting-horizontal-map-fiber-vertical-map-cone
               ( i)
               ( j)
               ( h)
-              ( c)
-              ( d)
+              ( right)
+              ( left)
               ( x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( i)
-              ( vertical-map-cone j h c)
-              ( d)
+              ( vertical-map-cone j h right)
+              ( left)
               ( pb-d)
               ( x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( j)
               ( h)
-              ( c)
+              ( right)
               ( pb-c)
               ( i x)))
 
   abstract
     is-pullback-left-square-is-pullback-rectangle :
-      is-pullback j h c →
-      is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d) →
-      is-pullback i (vertical-map-cone j h c) d
+      is-pullback j h right →
+      is-pullback (j ∘ i) h (pasting-horizontal-cone i j h right left) →
+      is-pullback i (vertical-map-cone j h right) left
     is-pullback-left-square-is-pullback-rectangle pb-c pb-rect =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone i
-        ( vertical-map-cone j h c)
-        ( d)
+        ( vertical-map-cone j h right)
+        ( left)
         ( λ x →
           is-equiv-top-map-triangle
             ( map-fiber-vertical-map-cone
-              ( j ∘ i) h (pasting-horizontal-cone i j h c d) x)
-            ( map-fiber-vertical-map-cone j h c (i x))
-            ( map-fiber-vertical-map-cone i (vertical-map-cone j h c) d x)
+              ( j ∘ i) h (pasting-horizontal-cone i j h right left) x)
+            ( map-fiber-vertical-map-cone j h right (i x))
+            ( map-fiber-vertical-map-cone i (vertical-map-cone j h right) left x)
             ( preserves-pasting-horizontal-map-fiber-vertical-map-cone
               ( i)
               ( j)
               ( h)
-              ( c)
-              ( d)
+              ( right)
+              ( left)
               ( x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( j)
               ( h)
-              ( c)
+              ( right)
               ( pb-c)
               ( i x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( j ∘ i)
               ( h)
-              ( pasting-horizontal-cone i j h c d)
+              ( pasting-horizontal-cone i j h right left)
               ( pb-rect)
               ( x)))
 ```
@@ -628,107 +628,115 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (f : C → Z) (g : Y → Z) (h : X → Y)
-  (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A)
+  (lower : cone f g B)
+  (upper : cone (horizontal-map-cone f g lower) h A)
   where
 
   abstract
     is-pullback-top-square-is-pullback-rectangle :
-      is-pullback f g c →
-      is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
-      is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-square-is-pullback-rectangle pb-c pb-dc =
+      is-pullback f g lower →
+      is-pullback f (g ∘ h) (pasting-vertical-cone f g h lower upper) →
+      is-pullback (horizontal-map-cone f g lower) h upper
+    is-pullback-top-square-is-pullback-rectangle pb-lower pb-rect =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
-        ( horizontal-map-cone f g c)
+        ( horizontal-map-cone f g lower)
         ( h)
-        ( d)
+        ( upper)
         ( λ x →
           is-fiberwise-equiv-is-equiv-map-Σ
             ( λ t → fiber h (pr1 t))
-            ( map-fiber-vertical-map-cone f g c (vertical-map-cone f g c x))
+            ( map-fiber-vertical-map-cone f g
+              ( lower)
+              ( vertical-map-cone f g lower x))
             ( λ t →
               map-fiber-vertical-map-cone
-                ( horizontal-map-cone f g c)
+                ( horizontal-map-cone f g lower)
                 ( h)
-                ( d)
+                ( upper)
                 ( pr1 t))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( f)
               ( g)
-              ( c)
-              ( pb-c)
-              ( vertical-map-cone f g c x))
+              ( lower)
+              ( pb-lower)
+              ( vertical-map-cone f g lower x))
             ( is-equiv-top-is-equiv-bottom-square
               ( map-inv-compute-fiber-comp
-                ( vertical-map-cone f g c)
-                ( vertical-map-cone (horizontal-map-cone f g c) h d)
-                ( vertical-map-cone f g c x))
-              ( map-inv-compute-fiber-comp g h (f (vertical-map-cone f g c x)))
+                ( vertical-map-cone f g lower)
+                ( vertical-map-cone (horizontal-map-cone f g lower) h upper)
+                ( vertical-map-cone f g lower x))
+              ( map-inv-compute-fiber-comp g h
+                ( f (vertical-map-cone f g lower x)))
               ( map-Σ
                 ( λ t → fiber h (pr1 t))
-                ( map-fiber-vertical-map-cone f g c (vertical-map-cone f g c x))
+                ( map-fiber-vertical-map-cone f g
+                  ( lower)
+                  ( vertical-map-cone f g lower x))
                 ( λ t →
                   map-fiber-vertical-map-cone
-                    ( horizontal-map-cone f g c) h d (pr1 t)))
+                    ( horizontal-map-cone f g lower) h upper (pr1 t)))
               ( map-fiber-vertical-map-cone f
                 ( g ∘ h)
-                ( pasting-vertical-cone f g h c d)
-                ( vertical-map-cone f g c x))
-              ( preserves-pasting-vertical-map-fiber-vertical-map-cone f g h c d
-                ( vertical-map-cone f g c x))
+                ( pasting-vertical-cone f g h lower upper)
+                ( vertical-map-cone f g lower x))
+              ( preserves-pasting-vertical-map-fiber-vertical-map-cone f g h
+                ( lower)
+                ( upper)
+                ( vertical-map-cone f g lower x))
               ( is-equiv-map-inv-compute-fiber-comp
-                ( vertical-map-cone f g c)
-                ( vertical-map-cone (horizontal-map-cone f g c) h d)
-                ( vertical-map-cone f g c x))
+                ( vertical-map-cone f g lower)
+                ( vertical-map-cone (horizontal-map-cone f g lower) h upper)
+                ( vertical-map-cone f g lower x))
               ( is-equiv-map-inv-compute-fiber-comp g h
-                ( f (vertical-map-cone f g c x)))
+                ( f (vertical-map-cone f g lower x)))
               ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f
                 ( g ∘ h)
-                ( pasting-vertical-cone f g h c d)
-                ( pb-dc)
-                ( vertical-map-cone f g c x)))
+                ( pasting-vertical-cone f g h lower upper)
+                ( pb-rect)
+                ( vertical-map-cone f g lower x)))
             ( x , refl))
 
   abstract
     is-pullback-rectangle-is-pullback-top-square :
-      is-pullback f g c →
-      is-pullback (horizontal-map-cone f g c) h d →
-      is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    is-pullback-rectangle-is-pullback-top-square pb-c pb-d =
+      is-pullback f g lower →
+      is-pullback (horizontal-map-cone f g lower) h upper →
+      is-pullback f (g ∘ h) (pasting-vertical-cone f g h lower upper)
+    is-pullback-rectangle-is-pullback-top-square pb-lower pb-upper =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( f)
         ( g ∘ h)
-        ( pasting-vertical-cone f g h c d)
+        ( pasting-vertical-cone f g h lower upper)
         ( λ x →
           is-equiv-bottom-is-equiv-top-square
             ( map-inv-compute-fiber-comp
-              ( vertical-map-cone f g c)
-              ( vertical-map-cone (horizontal-map-cone f g c) h d)
+              ( vertical-map-cone f g lower)
+              ( vertical-map-cone (horizontal-map-cone f g lower) h upper)
               ( x))
             ( map-inv-compute-fiber-comp g h (f x))
             ( map-Σ
               ( λ t → fiber h (pr1 t))
-              ( map-fiber-vertical-map-cone f g c x)
+              ( map-fiber-vertical-map-cone f g lower x)
               ( λ t →
                 map-fiber-vertical-map-cone
-                  ( horizontal-map-cone f g c)
+                  ( horizontal-map-cone f g lower)
                   ( h)
-                  ( d)
+                  ( upper)
                   ( pr1 t)))
             ( map-fiber-vertical-map-cone
               ( f)
               ( g ∘ h)
-              ( pasting-vertical-cone f g h c d)
+              ( pasting-vertical-cone f g h lower upper)
               ( x))
             ( preserves-pasting-vertical-map-fiber-vertical-map-cone
               ( f)
               ( g)
               ( h)
-              ( c)
-              ( d)
+              ( lower)
+              ( upper)
               ( x))
             ( is-equiv-map-inv-compute-fiber-comp
-              ( vertical-map-cone f g c)
-              ( vertical-map-cone (horizontal-map-cone f g c) h d)
+              ( vertical-map-cone f g lower)
+              ( vertical-map-cone (horizontal-map-cone f g lower) h upper)
               ( x))
             ( is-equiv-map-inv-compute-fiber-comp g h (f x))
             ( is-equiv-map-Σ
@@ -736,16 +744,236 @@ module _
               ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
                 ( f)
                 ( g)
-                ( c)
-                ( pb-c)
+                ( lower)
+                ( pb-lower)
                 ( x))
               ( λ t →
                 is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
-                  ( horizontal-map-cone f g c)
+                  ( horizontal-map-cone f g lower)
                   ( h)
-                  ( d)
-                  ( pb-d)
+                  ( upper)
+                  ( pb-upper)
                   ( pr1 t))))
+```
+
+### Triangles of pullback squares
+
+Given a triangle of squares where the back right square is a pullback,
+
+```text
+          •
+        ∧ | \
+       /  |  \
+      /   |   ∨
+    • --------> •
+    |     |     |
+    |     ∨     |
+    |     •     |
+    |   ∧   \   |
+    |  /     \  |
+    ∨ /       ∨ ∨
+    • --------> •
+```
+
+then the back left square is a pullback if and only if the front square is.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (i : X → Y) (j : Y → Z) (h : C → Z) (k : X → Z)
+  (back-right : cone j h B)
+  (back-left : cone i (vertical-map-cone j h back-right) A)
+  (front : cone k h A)
+  (K : j ∘ i ~ k)
+  (H :
+    htpy-parallel-cone
+      ( K)
+      ( refl-htpy' h)
+      ( pasting-horizontal-cone i j h back-right back-left)
+      ( front))
+  where
+
+  abstract
+    is-pullback-left-square-horizontal-triangle :
+      is-pullback j h back-right →
+      is-pullback i (vertical-map-cone j h back-right) back-left →
+      is-pullback k h front
+    is-pullback-left-square-horizontal-triangle pb-back-right pb-back-left =
+      is-pullback-htpy'
+        ( K)
+        ( refl-htpy' h)
+        ( pasting-horizontal-cone i j h back-right back-left)
+        ( H)
+        ( is-pullback-rectangle-is-pullback-left-square i j h
+          ( back-right)
+          ( back-left)
+          ( pb-back-right)
+          ( pb-back-left))
+
+  abstract
+    is-pullback-front-square-horizontal-triangle :
+      is-pullback j h back-right →
+      is-pullback k h front →
+      is-pullback i (vertical-map-cone j h back-right) back-left
+    is-pullback-front-square-horizontal-triangle pb-back-right pb-front =
+      is-pullback-left-square-is-pullback-rectangle i j h back-right back-left
+        ( pb-back-right)
+        ( is-pullback-htpy K (refl-htpy' h) front H pb-front)
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (i : X → Y) (j : Y → Z) (h : C → Z) (k : X → Z)
+  (back-right : cone j h B)
+  (back-left : cone i (vertical-map-cone j h back-right) A)
+  (front : cone k h A)
+  (K : k ~ j ∘ i)
+  (H :
+    htpy-parallel-cone
+      ( K)
+      ( refl-htpy' h)
+      ( front)
+      ( pasting-horizontal-cone i j h back-right back-left))
+  where
+
+  abstract
+    is-pullback-left-square-horizontal-triangle' :
+      is-pullback j h back-right →
+      is-pullback i (vertical-map-cone j h back-right) back-left →
+      is-pullback k h front
+    is-pullback-left-square-horizontal-triangle' pb-back-right pb-back-left =
+      is-pullback-htpy
+        ( K)
+        ( refl-htpy' h)
+        ( pasting-horizontal-cone i j h back-right back-left)
+        ( H)
+        ( is-pullback-rectangle-is-pullback-left-square i j h
+          ( back-right)
+          ( back-left)
+          ( pb-back-right)
+          ( pb-back-left))
+
+  abstract
+    is-pullback-front-square-horizontal-triangle' :
+      is-pullback j h back-right →
+      is-pullback k h front →
+      is-pullback i (vertical-map-cone j h back-right) back-left
+    is-pullback-front-square-horizontal-triangle' pb-back-right pb-front =
+      is-pullback-left-square-is-pullback-rectangle i j h
+        ( back-right)
+        ( back-left)
+        ( pb-back-right)
+        ( is-pullback-htpy' K (refl-htpy' h) front H pb-front)
+```
+
+We can also glue along horizontal maps.
+
+Given a triangle of squares where the right square is a pullback,
+
+```text
+         αX
+  • -----------> •
+   \  ⟍           \   ⟍
+    \    ↘          \    ↘
+     \     • ------- \ --> •
+      \   / ⌟         \   /
+       ∨ ∨             ∨ ∨
+        • ------------> •
+```
+
+then the left square is a pullback if and only if the top square is.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : C → Z) (g : Y → Z) (h : X → Y) (k : X → Z)
+  (right : cone f g B) (top : cone (horizontal-map-cone f g right) h A)
+  (left : cone f k A)
+  (K : g ∘ h ~ k)
+  (H :
+    htpy-parallel-cone
+      ( refl-htpy' f)
+      ( K)
+      ( pasting-vertical-cone f g h right top)
+      ( left))
+  where
+
+  abstract
+    is-pullback-left-square-vertical-triangle :
+      is-pullback f g right →
+      is-pullback (horizontal-map-cone f g right) h top →
+      is-pullback f k left
+    is-pullback-left-square-vertical-triangle pb-right pb-top =
+      is-pullback-htpy'
+        ( refl-htpy' f)
+        ( K)
+        ( pasting-vertical-cone f g h right top)
+        ( H)
+        ( is-pullback-rectangle-is-pullback-top-square f g h right top
+          ( pb-right)
+          ( pb-top))
+
+  abstract
+    is-pullback-top-square-vertical-triangle :
+      is-pullback f g right →
+      is-pullback f k left →
+      is-pullback (horizontal-map-cone f g right) h top
+    is-pullback-top-square-vertical-triangle pb-right pb-left =
+      is-pullback-top-square-is-pullback-rectangle f g h right top
+        ( pb-right)
+        ( is-pullback-htpy
+          ( refl-htpy' f)
+          ( K)
+          ( left)
+          ( H)
+          ( pb-left))
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : C → Z) (g : Y → Z) (h : X → Y) (k : X → Z)
+  (right : cone f g B) (top : cone (horizontal-map-cone f g right) h A)
+  (left : cone f k A)
+  (K : k ~ g ∘ h)
+  (H :
+    htpy-parallel-cone
+      ( refl-htpy' f)
+      ( K)
+      ( left)
+      ( pasting-vertical-cone f g h right top))
+  where
+
+  abstract
+    is-pullback-left-square-vertical-triangle' :
+      is-pullback f g right →
+      is-pullback (horizontal-map-cone f g right) h top →
+      is-pullback f k left
+    is-pullback-left-square-vertical-triangle' pb-right pb-top =
+      is-pullback-htpy
+        ( refl-htpy' f)
+        ( K)
+        ( pasting-vertical-cone f g h right top)
+        ( H)
+        ( is-pullback-rectangle-is-pullback-top-square f g h right top
+          ( pb-right)
+          ( pb-top))
+
+  abstract
+    is-pullback-top-square-vertical-triangle' :
+      is-pullback f g right →
+      is-pullback f k left →
+      is-pullback (horizontal-map-cone f g right) h top
+    is-pullback-top-square-vertical-triangle' pb-right pb-left =
+      is-pullback-top-square-is-pullback-rectangle f g h right top
+        ( pb-right)
+        ( is-pullback-htpy'
+          ( refl-htpy' f)
+          ( K)
+          ( left)
+          ( H)
+          ( pb-left))
 ```
 
 ### Pullbacks are associative
