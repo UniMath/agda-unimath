@@ -15,9 +15,14 @@ open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
+open import foundation.transport-along-identifications
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fibers-of-maps
+open import foundation.contractible-types
+open import foundation.torsorial-type-families
+open import foundation.homotopies
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -718,7 +723,7 @@ module _
       ( is-cartesian-coproduct-cartesian-hom-arrow))
 ```
 
-### Cartesian morphisms of arrows are preserved under exponentiation
+### Cartesian morphisms of arrows are preserved under postcomposition exponentiation
 
 ```agda
 module _
@@ -777,9 +782,9 @@ is cartesian if and only if either of the folded morphisms
              Δ                             Δ
 ```
 
-is.
+is cartesian.
 
-It remains to formalize the right-hand version.
+> It remains to formalize the right-hand version.
 
 ```agda
 module _
@@ -906,7 +911,7 @@ if `α` is.
 
 **Proof.** The unique existence of `γ` and the homotopy follows from the
 pullback property of `β`. The rest is a reiteration of the 3-for-2 property of
-cartesian morphisms.
+cartesian morphisms. ∎
 
 We begin by constructing the commuting triangle of morphisms of arrows:
 
@@ -1043,6 +1048,103 @@ module _
       ( inv-coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow)
 ```
 
+This lift is unique.
+
+<!-- The following uniqueness proof also constructs an explicit lift, making the entire formalization above almost entirely useless -->
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
+  (f : A → A') (g : B → B') (h : C → C')
+  (β : cartesian-hom-arrow g h)
+  (α : hom-arrow f h)
+  (i : A' → B')
+  (H :
+    coherence-triangle-maps'
+      ( map-codomain-hom-arrow f h α)
+      ( map-codomain-cartesian-hom-arrow g h β)
+      ( i))
+  where
+
+  abstract
+    uniqueness-lift-map-codomain-cartesian-hom-arrow :
+      is-torsorial
+        ( λ (j : A → B) →
+          Σ ( coherence-hom-arrow f g j i)
+            ( λ J →
+              Σ ( coherence-triangle-maps'
+                  ( map-domain-hom-arrow f h α)
+                  ( map-domain-cartesian-hom-arrow g h β)
+                  ( j))
+                ( λ K →
+                  coherence-htpy-hom-arrow f h
+                    ( comp-hom-arrow f g h
+                      ( hom-arrow-cartesian-hom-arrow g h β)
+                      ( j , i , J))
+                    ( α)
+                    ( K)
+                    ( H))))
+    uniqueness-lift-map-codomain-cartesian-hom-arrow =
+      is-contr-equiv _
+        ( equiv-tot
+          ( λ j →
+            equiv-Σ _
+              ( equiv-inv-htpy (i ∘ f) (g ∘ j))
+              ( λ J →
+                equiv-tot
+                  ( λ K →
+                    equivalence-reasoning
+                    ( ( map-codomain-cartesian-hom-arrow g h β ·l J) ∙h
+                      ( coh-cartesian-hom-arrow g h β ·r j) ∙h
+                      ( h ·l K) ~
+                      ( H ·r f) ∙h
+                      ( coh-hom-arrow f h α))
+                    ≃ ( ( map-codomain-cartesian-hom-arrow g h β ·l J) ∙h
+                        ( ( coh-cartesian-hom-arrow g h β ·r j) ∙h
+                          ( h ·l K)) ~
+                        ( H ·r f) ∙h
+                        ( coh-hom-arrow f h α))
+                      by
+                        equiv-tr
+                          ( λ Q → Q ~ ( H ·r f) ∙h ( coh-hom-arrow f h α))
+                          ( eq-htpy
+                            ( assoc-htpy
+                              ( map-codomain-cartesian-hom-arrow g h β ·l J)
+                              ( coh-cartesian-hom-arrow g h β ·r j)
+                              ( h ·l K)))
+                    ≃ ( ( coh-cartesian-hom-arrow g h β ·r j) ∙h (h ·l K) ~
+                        ( inv-htpy
+                          ( map-codomain-cartesian-hom-arrow g h β ·l J)) ∙h
+                        ( ( H ·r f) ∙h (coh-hom-arrow f h α)))
+                      by
+                        equiv-left-transpose-htpy-concat
+                          ( map-codomain-cartesian-hom-arrow g h β ·l J)
+                          ( ( coh-cartesian-hom-arrow g h β ·r j) ∙h (h ·l K))
+                          ( ( H ·r f) ∙h (coh-hom-arrow f h α))
+                    ≃ ( ( coh-cartesian-hom-arrow g h β ·r j) ∙h (h ·l K) ~
+                        ( ( map-codomain-cartesian-hom-arrow g h β) ·l
+                          ( inv-htpy J)) ∙h
+                        ( ( H ·r f) ∙h (coh-hom-arrow f h α)))
+                      by
+                        equiv-tr
+                          ( λ Q →
+                            (coh-cartesian-hom-arrow g h β ·r j) ∙h (h ·l K) ~
+                            Q ∙h ((H ·r f) ∙h (coh-hom-arrow f h α)))
+                          ( inv
+                            ( eq-htpy
+                              ( left-whisker-inv-htpy
+                                ( map-codomain-cartesian-hom-arrow g h β)
+                                ( J))))))))
+        ( uniqueness-universal-property-pullback
+          ( map-codomain-cartesian-hom-arrow g h β)
+          ( h)
+          ( cone-cartesian-hom-arrow g h β)
+          ( universal-property-cartesian-hom-arrow g h β)
+          ( A)
+          ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow f g h β α i H))
+```
+
 Now, if `α` was cartesian to begin with, the lift is also.
 
 ```agda
@@ -1070,8 +1172,11 @@ module _
           ( H))
     is-cartesian-cartesian-hom-arrow-lift-map-codomain-cartesian-hom-arrow =
       is-cartesian-top-cartesian-hom-arrow-triangle' f g h
-        ( hom-arrow-lift-map-codomain-cartesian-hom-arrow
-          ( f) g h β (hom-arrow-cartesian-hom-arrow f h α) i H)
+        ( hom-arrow-lift-map-codomain-cartesian-hom-arrow f g h
+          ( β)
+          ( hom-arrow-cartesian-hom-arrow f h α)
+          ( i)
+          ( H))
         ( α)
         ( β)
         ( inv-coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow

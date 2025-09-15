@@ -82,7 +82,7 @@ coherence-natural-transformation-polynomial-endofunctor {l = l} 𝑃 𝑄 α₀ 
     ( α₀)
     ( map-polynomial-endofunctor 𝑃 f)
     ( map-polynomial-endofunctor 𝑄 f)
-  ( α₀)
+    ( α₀)
 
 natural-transformation-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} (l : Level) →
