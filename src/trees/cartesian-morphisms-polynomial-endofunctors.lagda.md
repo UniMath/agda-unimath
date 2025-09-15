@@ -344,7 +344,7 @@ module _
                 ( inv-tr (λ c → positions-polynomial-endofunctor 𝑄 c → X) p x))
 ```
 
-### Cartesian morphisms are cartesian natural transformations
+### The associated natural transformation of a cartesian morphism is cartesian
 
 ```agda
 module _
@@ -380,7 +380,7 @@ module _
             ( is-equiv-id))
 ```
 
-### Cartesian natural transformations define cartesian morphisms
+### The associated morphism of a cartesian natural transformation is cartesian
 
 ```agda
 module _
@@ -419,3 +419,12 @@ module _
 ```
 
 > TODO
+
+### Equivalence between cartesian morphisms and cartesian natural transformations
+
+This is proved in a slightly different setting as part of Lemma 2.3.3 in
+{{#cite GHK22}}.
+
+## References
+
+{{#bibliography}}
