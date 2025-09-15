@@ -130,6 +130,14 @@ module _
   hom-arrow-natural-transformation-polynomial-endofunctor =
     ( α₀ , α₀ , α₁ f)
 
+  transpose-hom-arrow-natural-transformation-polynomial-endofunctor :
+    hom-arrow (α₀ {X}) (α₀ {Y})
+  transpose-hom-arrow-natural-transformation-polynomial-endofunctor =
+    transpose-hom-arrow
+      ( map-polynomial-endofunctor 𝑃 f)
+      ( map-polynomial-endofunctor 𝑄 f)
+      ( hom-arrow-natural-transformation-polynomial-endofunctor)
+
   cone-natural-transformation-polynomial-endofunctor :
     cone α₀ (map-polynomial-endofunctor 𝑄 f) (type-polynomial-endofunctor 𝑃 X)
   cone-natural-transformation-polynomial-endofunctor =

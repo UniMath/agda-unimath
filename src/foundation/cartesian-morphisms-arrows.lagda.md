@@ -253,6 +253,27 @@ module _
       is-cartesian-transpose-cartesian-hom-arrow)
 ```
 
+### If the transpose is cartesian then so is the original
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  is-cartesian-is-cartesian-transpose-cartesian-hom-arrow :
+    is-cartesian-hom-arrow
+      ( map-domain-hom-arrow f g α)
+      ( map-codomain-hom-arrow f g α)
+      ( transpose-hom-arrow f g α) →
+    is-cartesian-hom-arrow f g α
+  is-cartesian-is-cartesian-transpose-cartesian-hom-arrow =
+    is-pullback-swap-cone'
+      ( map-codomain-hom-arrow f g α)
+      ( g)
+      ( cone-hom-arrow f g α)
+```
+
 ### If the target of a cartesian morphism is an equivalence then so is the source
 
 ```agda

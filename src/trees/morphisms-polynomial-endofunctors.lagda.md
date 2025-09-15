@@ -353,7 +353,7 @@ module _
                       ( ap (λ q → x ∘ tr 𝑄₁ q) (inv-inv p)))))
 ```
 
-### Comparison betwen morphisms and natural transformations
+### Comparison between morphisms and natural transformations
 
 ```agda
 module _
