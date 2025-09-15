@@ -90,7 +90,8 @@ module _
     Σ (type-subuniverse P) (λ Y → inclusion-subuniverse P Y ≃ X)
 
   is-proof-irrelevant-is-essentially-in-subuniverse :
-    {l3 : Level} (X : UU l3) → is-proof-irrelevant (is-essentially-in-subuniverse X)
+    {l3 : Level} (X : UU l3) →
+    is-proof-irrelevant (is-essentially-in-subuniverse X)
   is-proof-irrelevant-is-essentially-in-subuniverse X ((X' , p) , e) =
     is-torsorial-Eq-subtype
       ( is-contr-equiv'

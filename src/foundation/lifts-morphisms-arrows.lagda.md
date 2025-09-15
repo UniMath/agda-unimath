@@ -7,12 +7,12 @@ module foundation.lifts-morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-triangles-of-maps
 open import foundation.commuting-triangles-of-morphisms-arrows
 open import foundation.dependent-pair-types
-open import foundation.morphisms-arrows
 open import foundation.homotopies-morphisms-arrows
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
-open import foundation.commuting-triangles-of-maps
 ```
 
 </details>

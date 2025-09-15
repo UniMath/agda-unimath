@@ -29,9 +29,11 @@ open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.raising-universe-levels
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -158,6 +160,45 @@ module _
   is-cartesian-cartesian-natural-transformation-polynomial-endofunctor = pr2 α
 ```
 
+### The criterion of being cartesian at terminal maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α : natural-transformation-polynomial-endofunctor l 𝑃 𝑄)
+  where
+
+  is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor =
+    {X : UU l} →
+    is-cartesian-hom-arrow
+      ( map-polynomial-endofunctor 𝑃 (raise-terminal-map X))
+      ( map-polynomial-endofunctor 𝑄 (raise-terminal-map X))
+      ( hom-arrow-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+        ( raise-terminal-map X))
+
+  is-prop-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor :
+    is-prop
+      is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
+  is-prop-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor =
+    is-prop-implicit-Π
+      ( λ X →
+        is-prop-is-cartesian-hom-arrow
+          ( map-polynomial-endofunctor 𝑃 (raise-terminal-map X))
+          ( map-polynomial-endofunctor 𝑄 (raise-terminal-map X))
+          ( hom-arrow-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+            ( raise-terminal-map X)))
+
+  is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor-Prop :
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor-Prop =
+    ( is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor ,
+      is-prop-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor)
+```
+
 ### The associated family of cartesian morphisms of arrows
 
 ```agda
@@ -236,3 +277,82 @@ module _
     ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑅 β' α' ,
       is-cartesian-comp-cartesian-natural-transformation-polynomial-endofunctor)
 ```
+
+### A natural transformation is cartesian if and only if it is cartesian at terminal maps
+
+**Proof.** One direction is trivial. For the other direction, given a natural
+transformation of polynomial endofunctors $α : 𝑃 ⇒ 𝑄$ and an arbitrary function
+$f : X → Y$, we have a morphism of arrows in the slice above $α_{*}$:
+
+```text
+         αX
+  𝑃X -----------> 𝑄X   →
+   \ ⌟ →   𝑃Y ---- \ ----> 𝑄Y
+    \     / ⌟   αY  \     /
+     \   /           \   /
+      ∨ ∨             ∨ ∨
+       𝑃* -----------> 𝑄*
+              α*
+```
+
+and so by the right-cancellation property of cartesian squares the naturality
+square at $f$ is cartesian. ∎
+
+```agda
+module _
+  {l1 l2 l3 l4 l : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α : natural-transformation-polynomial-endofunctor l 𝑃 𝑄)
+  (let α₀ = type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
+  where
+
+  is-cartesian-at-terminal-map-is-cartesian-natural-transformation-polynomial-endofunctor :
+    is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α →
+    is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
+      𝑃 𝑄 α
+  is-cartesian-at-terminal-map-is-cartesian-natural-transformation-polynomial-endofunctor
+    H {X} =
+    H (raise-terminal-map X)
+
+  abstract
+    is-cartesian-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor :
+      is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
+        𝑃 𝑄 α →
+      is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+    is-cartesian-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
+      H {X} {Y} f =
+      is-pullback-top-square-vertical-triangle
+        α₀
+        ( map-polynomial-endofunctor 𝑄 (raise-terminal-map Y))
+        ( map-polynomial-endofunctor 𝑄 f)
+        ( map-polynomial-endofunctor 𝑄 (raise-terminal-map X))
+        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+          ( raise-terminal-map Y))
+        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+          ( f))
+        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+          ( raise-terminal-map X))
+        ( refl-htpy)
+        ( refl-htpy ,
+          refl-htpy ,
+          ( λ (a , h) →
+            equational-reasoning
+            pr2 α (raise-terminal-map Y) (a , f ∘ h) ∙ ap (tot (λ x₁ f₁ a → map-raise star)) (pr2 α f (a , h)) ∙ refl
+            ＝
+              pr2 α (raise-terminal-map Y) (a , f ∘ h) ∙
+              ap (λ z → pair (pr1 z) (λ z₁ → map-raise star)) (pr2 α f (a , h))
+              by right-unit
+            ＝ {!   !} by {!   !}
+            ＝ pr2 α (raise-terminal-map X) (a , h) by {!   !})) -- these are two equalities in the type (Σ 𝑄₀ , 1), so they only need to be equal on first components.
+        ( H {Y})
+        ( H {X})
+```
+
+<!-- TODO: use uniqueness of cartesian lifts -->
+
+This is mentioned as Remark 2.1.4 in {{#cite GHK22}}.
+
+## References
+
+{{#bibliography}}

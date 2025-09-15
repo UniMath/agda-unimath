@@ -548,7 +548,11 @@ module _
             ( map-fiber-vertical-map-cone
               ( j ∘ i) h (pasting-horizontal-cone i j h right left) x)
             ( map-fiber-vertical-map-cone j h right (i x))
-            ( map-fiber-vertical-map-cone i (vertical-map-cone j h right) left x)
+            ( map-fiber-vertical-map-cone
+              ( i)
+              ( vertical-map-cone j h right)
+              ( left)
+              ( x))
             ( preserves-pasting-horizontal-map-fiber-vertical-map-cone
               ( i)
               ( j)
@@ -583,7 +587,11 @@ module _
             ( map-fiber-vertical-map-cone
               ( j ∘ i) h (pasting-horizontal-cone i j h right left) x)
             ( map-fiber-vertical-map-cone j h right (i x))
-            ( map-fiber-vertical-map-cone i (vertical-map-cone j h right) left x)
+            ( map-fiber-vertical-map-cone
+              ( i)
+              ( vertical-map-cone j h right)
+              ( left)
+              ( x))
             ( preserves-pasting-horizontal-map-fiber-vertical-map-cone
               ( i)
               ( j)
