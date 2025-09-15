@@ -382,8 +382,12 @@ module _
         ( a , id))
 ```
 
-To show these notions are equivalent, we need to show the following equality:
+**Comment.** If we were to show these notions are equivalent, we would have
+needed natural transformations to satisfy the following equality:
 
 $$
-  α₁ (f ∘ x) (a , id) = ap (𝑄 f) (α₁ x (a , id)) ∙ α₁ f (a , x).
+  α₁ (f ∘ x) (a , id) = ap (𝑄 f) (α₁ x (a , id)) ∙ α₁ f (a , x),
 $$
+
+which is an unfolding of the condition that the naturality square of a composite
+map is given by pasting of squares.
