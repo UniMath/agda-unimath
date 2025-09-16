@@ -90,13 +90,13 @@ module _
 
   shapes-univalent-polynomial-endofunctor : UU l1
   shapes-univalent-polynomial-endofunctor =
-    shapes-polynomial-endofunctor
+    shape-polynomial-endofunctor
       polynomial-endofunctor-univalent-polynomial-endofunctor
 
   positions-univalent-polynomial-endofunctor :
     shapes-univalent-polynomial-endofunctor → UU l2
   positions-univalent-polynomial-endofunctor =
-    positions-polynomial-endofunctor
+    position-polynomial-endofunctor
       polynomial-endofunctor-univalent-polynomial-endofunctor
 
   is-univalent-univalent-polynomial-endofunctor :

@@ -73,13 +73,13 @@ module _
   where
 
   shapes-hom-polynomial-endofunctor :
-    shapes-polynomial-endofunctor 𝑃 → shapes-polynomial-endofunctor 𝑄
+    shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
   shapes-hom-polynomial-endofunctor = pr1 α
 
   positions-hom-polynomial-endofunctor :
-    (a : shapes-polynomial-endofunctor 𝑃) →
-    positions-polynomial-endofunctor 𝑄 (shapes-hom-polynomial-endofunctor a) →
-    positions-polynomial-endofunctor 𝑃 a
+    (a : shape-polynomial-endofunctor 𝑃) →
+    position-polynomial-endofunctor 𝑄 (shapes-hom-polynomial-endofunctor a) →
+    position-polynomial-endofunctor 𝑃 a
   positions-hom-polynomial-endofunctor = pr2 α
 
   type-hom-polynomial-endofunctor :
@@ -88,7 +88,7 @@ module _
     type-polynomial-endofunctor 𝑄 X
   type-hom-polynomial-endofunctor {X = X} =
     map-Σ
-      ( λ c → positions-polynomial-endofunctor 𝑄 c → X)
+      ( λ c → position-polynomial-endofunctor 𝑄 c → X)
       ( shapes-hom-polynomial-endofunctor)
       ( λ a → precomp (positions-hom-polynomial-endofunctor a) X)
 ```
@@ -135,13 +135,13 @@ module _
     Σ ( shapes-hom-polynomial-endofunctor 𝑃 𝑄 α ~
         shapes-hom-polynomial-endofunctor 𝑃 𝑄 β)
       ( λ H →
-        (a : shapes-polynomial-endofunctor 𝑃)
+        (a : shape-polynomial-endofunctor 𝑃)
         (d :
-          positions-polynomial-endofunctor 𝑄
+          position-polynomial-endofunctor 𝑄
             ( shapes-hom-polynomial-endofunctor 𝑃 𝑄 α a)) →
         positions-hom-polynomial-endofunctor 𝑃 𝑄 α a d ＝
         positions-hom-polynomial-endofunctor 𝑃 𝑄 β a
-          ( tr (positions-polynomial-endofunctor 𝑄) (H a) d))
+          ( tr (position-polynomial-endofunctor 𝑄) (H a) d))
 
   refl-htpy-hom-polynomial-endofunctor :
     (α : hom-polynomial-endofunctor 𝑃 𝑄) → htpy-hom-polynomial-endofunctor α α
@@ -199,9 +199,9 @@ module _
 
   is-trunc-hom-polynomial-endofunctor :
     (k : 𝕋) →
-    is-trunc k (shapes-polynomial-endofunctor 𝑄) →
-    ( (a : shapes-polynomial-endofunctor 𝑃) →
-      is-trunc k (positions-polynomial-endofunctor 𝑃 a)) →
+    is-trunc k (shape-polynomial-endofunctor 𝑄) →
+    ( (a : shape-polynomial-endofunctor 𝑃) →
+      is-trunc k (position-polynomial-endofunctor 𝑃 a)) →
     is-trunc k (hom-polynomial-endofunctor 𝑃 𝑄)
   is-trunc-hom-polynomial-endofunctor k hQ hP =
     is-trunc-Σ
@@ -266,15 +266,15 @@ module _
   where
 
   shapes-natural-transformation-polynomial-endofunctor :
-    shapes-polynomial-endofunctor 𝑃 → shapes-polynomial-endofunctor 𝑄
+    shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
   shapes-natural-transformation-polynomial-endofunctor a =
     pr1 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
 
   positions-natural-transformation-polynomial-endofunctor :
-    (a : shapes-polynomial-endofunctor 𝑃) →
-    positions-polynomial-endofunctor 𝑄
+    (a : shape-polynomial-endofunctor 𝑃) →
+    position-polynomial-endofunctor 𝑄
       ( shapes-natural-transformation-polynomial-endofunctor a) →
-    positions-polynomial-endofunctor 𝑃 a
+    position-polynomial-endofunctor 𝑃 a
   positions-natural-transformation-polynomial-endofunctor a =
     pr2 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
 
@@ -293,9 +293,9 @@ module _
   (𝑃 : polynomial-endofunctor l1 l2)
   (𝑄 : polynomial-endofunctor l3 l4)
   (α@(α₀ , α₁) : hom-polynomial-endofunctor 𝑃 𝑄)
-  (let 𝑃₁ = positions-polynomial-endofunctor 𝑃)
-  (let 𝑄₀ = shapes-polynomial-endofunctor 𝑄)
-  (let 𝑄₁ = positions-polynomial-endofunctor 𝑄)
+  (let 𝑃₁ = position-polynomial-endofunctor 𝑃)
+  (let 𝑄₀ = shape-polynomial-endofunctor 𝑄)
+  (let 𝑄₁ = position-polynomial-endofunctor 𝑄)
   {X : UU l5}
   where
 
@@ -320,7 +320,7 @@ module _
               ( inv-tr (λ c' → pr2 𝑄 c' → X) p x))
         by
           compute-fiber-map-Σ
-            ( λ c → positions-polynomial-endofunctor 𝑄 c → X)
+            ( λ c → position-polynomial-endofunctor 𝑄 c → X)
             ( α₀)
             ( λ a → precomp (α₁ a) X)
             ( c , x)

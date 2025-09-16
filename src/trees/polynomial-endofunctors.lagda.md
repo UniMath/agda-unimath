@@ -57,11 +57,11 @@ module _
   {l1 l2 : Level} (𝑃 : polynomial-endofunctor l1 l2)
   where
 
-  shapes-polynomial-endofunctor : UU l1
-  shapes-polynomial-endofunctor = pr1 𝑃
+  shape-polynomial-endofunctor : UU l1
+  shape-polynomial-endofunctor = pr1 𝑃
 
-  positions-polynomial-endofunctor : shapes-polynomial-endofunctor → UU l2
-  positions-polynomial-endofunctor = pr2 𝑃
+  position-polynomial-endofunctor : shape-polynomial-endofunctor → UU l2
+  position-polynomial-endofunctor = pr2 𝑃
 
 make-polynomial-endofunctor :
   {l1 l2 : Level} {A : UU l1} → (A → UU l2) → polynomial-endofunctor l1 l2
@@ -206,20 +206,20 @@ module _
   where
 
   compute-fiber-map-polynomial-endofunctor :
-    (a : shapes-polynomial-endofunctor 𝑃)
-    (y : positions-polynomial-endofunctor 𝑃 a → Y) →
+    (a : shape-polynomial-endofunctor 𝑃)
+    (y : position-polynomial-endofunctor 𝑃 a → Y) →
     fiber (map-polynomial-endofunctor 𝑃 f) (a , y) ≃
-    ( (b : positions-polynomial-endofunctor 𝑃 a) → fiber f (y b))
+    ( (b : position-polynomial-endofunctor 𝑃 a) → fiber f (y b))
   compute-fiber-map-polynomial-endofunctor a y =
     equivalence-reasoning
     fiber (map-polynomial-endofunctor 𝑃 f) (a , y)
-    ≃ fiber (postcomp (positions-polynomial-endofunctor 𝑃 a) f) y
+    ≃ fiber (postcomp (position-polynomial-endofunctor 𝑃 a) f) y
       by
         compute-fiber-tot
-          ( λ a → postcomp (positions-polynomial-endofunctor 𝑃 a) f)
+          ( λ a → postcomp (position-polynomial-endofunctor 𝑃 a) f)
           ( a , y)
-    ≃ ((b : positions-polynomial-endofunctor 𝑃 a) → fiber f (y b))
-      by inv-compute-Π-fiber-postcomp (positions-polynomial-endofunctor 𝑃 a) f y
+    ≃ ((b : position-polynomial-endofunctor 𝑃 a) → fiber f (y b))
+      by inv-compute-Π-fiber-postcomp (position-polynomial-endofunctor 𝑃 a) f y
 ```
 
 ## See also
