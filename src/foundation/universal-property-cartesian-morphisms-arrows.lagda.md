@@ -148,11 +148,11 @@ module _
   (α : hom-arrow f h) (β : hom-arrow g h)
   where
 
-  family-fiber-lift-codomain-lift-hom-arrow :
+  is-lift-hom-arrow-of-lift-codomain-hom-arrow :
     lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
     (A → B) → UU (l1 ⊔ l4 ⊔ l5 ⊔ l6)
-  family-fiber-lift-codomain-lift-hom-arrow (i , I) j =
-    Σ (coherence-hom-arrow f g j i)
+  is-lift-hom-arrow-of-lift-codomain-hom-arrow (i , I) j =
+    Σ ( coherence-hom-arrow f g j i)
       ( λ H →
         Σ ( coherence-triangle-maps
             ( map-domain-hom-arrow f h α)
@@ -163,21 +163,14 @@ module _
               ( comp-hom-arrow f g h β (j , i , H))
               ( J)
               ( I)))
-
-  fiber-lift-codomain-lift-hom-arrow :
-    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
-    UU (l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
-  fiber-lift-codomain-lift-hom-arrow i =
-    Σ (A → B) (family-fiber-lift-codomain-lift-hom-arrow i)
 ```
 
 > The explicit equivalence remains to be written out.
 
 ### Uniqueness of lifts of cartesian morphisms
 
-Given a cartesian morphism of arrows, then lifts are unique.
-
-<!-- The following equivalence uses function extensionality in many places it does not need to -->
+Given a cartesian morphism of arrows, then lifts along lifts in the codomain are
+unique.
 
 ```agda
 module _
@@ -185,122 +178,96 @@ module _
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
   (α : hom-arrow f h) (β : hom-arrow g h)
+  (let β₁ = map-codomain-hom-arrow g h β)
+  (let Hβ = coh-hom-arrow g h β)
+  (let Hα = coh-hom-arrow f h α)
   ((i , I) : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
   where
 
-  abstract
-    equiv-htpy-cone-family-fiber-lift-codomain-lift-hom-arrow :
-      (j : A → B) →
-      family-fiber-lift-codomain-lift-hom-arrow f g h α β (i , I) j ≃
-      htpy-cone (map-codomain-hom-arrow g h β) h
-        ( g ∘ j ,
-          map-domain-hom-arrow g h β ∘ j ,
-          coh-hom-arrow g h β ·r j)
-        ( i ∘ f ,
-          map-domain-hom-arrow f h α ,
-          inv-htpy I ·r f ∙h coh-hom-arrow f h α)
-    equiv-htpy-cone-family-fiber-lift-codomain-lift-hom-arrow j =
-      equiv-Σ _
-        ( equiv-inv-htpy (i ∘ f) (g ∘ j))
-        ( λ H →
-          equiv-Σ _
-            ( equiv-inv-htpy (pr1 α) (pr1 β ∘ j))
-            ( λ J →
-              equivalence-reasoning
-              ( ( coh-hom-arrow f h α ∙h h ·l J) ~
-                ( I ·r f) ∙h
-                ( ( map-codomain-hom-arrow g h β ·l H) ∙h
-                  ( coh-hom-arrow g h β ·r j)))
-              ≃ ( ( I ·r f) ∙h
-                  ( ( map-codomain-hom-arrow g h β ·l H) ∙h
-                    ( coh-hom-arrow g h β ·r j)) ~
-                  ( coh-hom-arrow f h α ∙h h ·l J))
-                by equiv-inv-htpy _ _
-              ≃ ( ( map-codomain-hom-arrow g h β ·l H) ∙h
-                  ( coh-hom-arrow g h β ·r j) ~
-                  ( inv-htpy I ·r f) ∙h (coh-hom-arrow f h α ∙h h ·l J))
-                by
-                  equiv-left-transpose-htpy-concat
-                    ( I ·r f)
-                    ( ( map-codomain-hom-arrow g h β ·l H) ∙h
-                      ( coh-hom-arrow g h β ·r j))
-                    ( coh-hom-arrow f h α ∙h h ·l J)
-              ≃ ( ( coh-hom-arrow g h β ·r j) ~
-                  ( inv-htpy (map-codomain-hom-arrow g h β ·l H)) ∙h
-                  ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α ∙h h ·l J)))
-                by
-                  equiv-left-transpose-htpy-concat
-                    ( map-codomain-hom-arrow g h β ·l H)
-                    ( coh-hom-arrow g h β ·r j)
-                    ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α ∙h h ·l J))
-              ≃ ( ( coh-hom-arrow g h β ·r j) ~
-                  ( map-codomain-hom-arrow g h β ·l (inv-htpy H)) ∙h
-                  ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α ∙h h ·l J)))
-                by
-                  equiv-tr
-                    ( λ Q →
-                      coh-hom-arrow g h β ·r j ~
-                      Q ∙h (inv-htpy I ·r f ∙h (coh-hom-arrow f h α ∙h h ·l J)))
-                    ( inv
+  equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow :
+    (j : A → B) →
+    is-lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (i , I) j ≃
+    htpy-cone β₁ h
+      ( g ∘ j , map-domain-hom-arrow g h β ∘ j , Hβ ·r j)
+      ( i ∘ f , map-domain-hom-arrow f h α , inv-htpy I ·r f ∙h Hα)
+  equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow j =
+    equiv-Σ _
+      ( equiv-inv-htpy (i ∘ f) (g ∘ j))
+      ( λ H →
+        equiv-Σ _
+          ( equiv-inv-htpy
+            ( map-domain-hom-arrow f h α)
+            ( map-domain-hom-arrow g h β ∘ j))
+          ( λ J →
+            equivalence-reasoning
+            ( Hα ∙h h ·l J ~ I ·r f ∙h (β₁ ·l H ∙h Hβ ·r j))
+            ≃ ( I ·r f ∙h (β₁ ·l H ∙h Hβ ·r j) ~ Hα ∙h h ·l J)
+              by equiv-inv-htpy (Hα ∙h h ·l J) (I ·r f ∙h (β₁ ·l H ∙h Hβ ·r j))
+            ≃ ( β₁ ·l H ∙h Hβ ·r j ~ inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
+              by
+                equiv-left-transpose-htpy-concat
+                  ( I ·r f)
+                  ( β₁ ·l H ∙h Hβ ·r j)
+                  ( Hα ∙h h ·l J)
+            ≃ ( Hβ ·r j ~
+                inv-htpy (β₁ ·l H) ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
+              by
+                equiv-left-transpose-htpy-concat
+                  ( β₁ ·l H)
+                  ( Hβ ·r j)
+                  ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
+            ≃ ( Hβ ·r j ~
+                β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
+              by
+                equiv-tr
+                  ( λ Q → Hβ ·r j ~ Q ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
+                  ( inv (eq-htpy (left-whisker-inv-htpy β₁ H)))
+            ≃ ( Hβ ·r j ~
+                ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα)) ∙h h ·l J)
+              by
+                equiv-tr
+                  ( Hβ ·r j ~_)
+                  ( ( ap
+                      ( β₁ ·l (inv-htpy H) ∙h_)
                       ( eq-htpy
-                        ( left-whisker-inv-htpy
-                          ( map-codomain-hom-arrow g h β) H)))
-              ≃ ( ( coh-hom-arrow g h β ·r j) ~
-                  ( ( map-codomain-hom-arrow g h β ·l (inv-htpy H)) ∙h
-                    ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α))) ∙h
-                  ( h ·l J))
-                by
-                  equiv-tr
-                    ( coh-hom-arrow g h β ·r j ~_)
-                    ( ( ap
-                        ( map-codomain-hom-arrow g h β ·l (inv-htpy H) ∙h_)
-                        ( eq-htpy
-                          ( inv-htpy-assoc-htpy
-                            ( inv-htpy I ·r f)
-                            ( coh-hom-arrow f h α)
-                            ( h ·l J)))) ∙
-                      ( eq-htpy
-                        ( inv-htpy-assoc-htpy
-                          ( map-codomain-hom-arrow g h β ·l (inv-htpy H))
-                          ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α))
-                          ( h ·l J))))
-              ≃ ( ( coh-hom-arrow g h β ·r j) ∙h (inv-htpy (h ·l J)) ~
-                  ( map-codomain-hom-arrow g h β ·l (inv-htpy H)) ∙h
-                  ( (inv-htpy I ·r f) ∙h (coh-hom-arrow f h α)))
-                by
-                  equiv-right-transpose-htpy-concat'
-                    ( coh-hom-arrow g h β ·r j)
-                    ( ( map-codomain-hom-arrow g h β ·l (inv-htpy H)) ∙h
-                      ( inv-htpy I ·r f ∙h (coh-hom-arrow f h α)))
-                    ( h ·l J)
-              ≃ ( ( coh-hom-arrow g h β ·r j) ∙h (h ·l inv-htpy J) ~
-                  ( map-codomain-hom-arrow g h β ·l inv-htpy H) ∙h
-                  ( ( inv-htpy I ·r f) ∙h (coh-hom-arrow f h α)))
-                by
-                  equiv-tr
-                    ( λ Q →
-                      ( coh-hom-arrow g h β ·r j) ∙h Q ~
-                      ( map-codomain-hom-arrow g h β ·l inv-htpy H) ∙h
-                      ( ( inv-htpy I ·r f) ∙h (coh-hom-arrow f h α)))
-                    ( inv (eq-htpy (left-whisker-inv-htpy h J)))))
+                        ( inv-htpy-assoc-htpy (inv-htpy I ·r f) Hα (h ·l J)))) ∙
+                    ( eq-htpy
+                      ( inv-htpy-assoc-htpy
+                        ( β₁ ·l (inv-htpy H))
+                        ( inv-htpy I ·r f ∙h Hα)
+                        ( h ·l J))))
+            ≃ ( Hβ ·r j ∙h inv-htpy (h ·l J) ~
+                β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
+              by
+                equiv-right-transpose-htpy-concat'
+                  ( Hβ ·r j)
+                  ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
+                  ( h ·l J)
+            ≃ ( Hβ ·r j ∙h h ·l inv-htpy J ~
+                β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
+              by
+                equiv-tr
+                  ( λ Q →
+                    Hβ ·r j ∙h Q ~ β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
+                  ( inv (eq-htpy (left-whisker-inv-htpy h J)))))
 
   abstract
     uniqueness-lift-map-codomain-is-cartesian-hom-arrow :
       is-cartesian-hom-arrow g h β →
-      is-torsorial (family-fiber-lift-codomain-lift-hom-arrow f g h α β (i , I))
+      is-torsorial
+        ( is-lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (i , I))
     uniqueness-lift-map-codomain-is-cartesian-hom-arrow H =
       is-contr-equiv _
-        ( equiv-tot equiv-htpy-cone-family-fiber-lift-codomain-lift-hom-arrow)
-        ( uniqueness-universal-property-pullback
-          ( map-codomain-hom-arrow g h β)
-          ( h)
+        ( equiv-tot
+          ( equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow))
+        ( uniqueness-universal-property-pullback β₁ h
           ( cone-hom-arrow g h β)
           ( up-pullback-cartesian-hom-arrow g h (β , H))
           ( A)
-          ( _))
+          ( i ∘ f , map-domain-hom-arrow f h α , inv-htpy I ·r f ∙h Hα))
 ```
 
-<!-- Theis uniqueness proof also constructs an explicit lift, making the entire next section entirely useless -->
+<!-- This uniqueness proof also constructs an explicit lift, making the entire next section purposeless -->
 
 > What follows is another computation of the same. Should be deleted.
 
@@ -338,7 +305,7 @@ module _
                     ( K)
                     ( H))))
     uniqueness-lift-map-codomain-cartesian-hom-arrow' =
-      is-contr-equiv ((Σ (A → B) λ j → htpy-cone (map-codomain-cartesian-hom-arrow g h β) h ((λ z → g (j z)) , (λ z → pr1 (pr1 β) (j z)) , (λ x → pr2 (pr2 (pr1 β)) (j x))) ((λ z → i (f z)) , pr1 α , H ·r f ∙h coh-hom-arrow f h α)))
+      is-contr-equiv _
         ( equiv-tot
           ( λ j →
             equiv-Σ _
@@ -394,7 +361,7 @@ module _
           ( cone-cartesian-hom-arrow g h β)
           ( up-pullback-cartesian-hom-arrow g h β)
           ( A)
-          ( cone-hom-arrow-lift-map-codomain-cartesian-hom-arrow f g h β α i H))
+          ( i ∘ f , pr1 α , H ·r f ∙h coh-hom-arrow f h α))
 ```
 
 ### Lifting cartesian morphisms along lifts of the codomain
