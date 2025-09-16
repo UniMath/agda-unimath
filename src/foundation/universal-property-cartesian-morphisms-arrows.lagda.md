@@ -245,7 +245,7 @@ module _
         ( has-unique-lifts-up-cartesian-hom-arrow g h β H)
 ```
 
-### Lifting cartesian morphisms along lifts of the codomain
+### Explicit construction of lifts along cartesian morphisms
 
 > The following computation is obsoleted by the formalizations above, but are
 > preserved for potential instructive value.
@@ -281,7 +281,7 @@ if `α` is.
 pullback property of `β`. The rest is a reiteration of the 3-for-2 property of
 cartesian morphisms. ∎
 
-We begin by constructing the commuting triangle of morphisms of arrows:
+We construct the commuting triangle of morphisms of arrows:
 
 ```agda
 module _
@@ -416,7 +416,7 @@ module _
       ( inv-coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow)
 ```
 
-Now, if `α` was cartesian to begin with, the lift is also.
+If `α` was cartesian to begin with, the lift is also.
 
 ```agda
 module _
