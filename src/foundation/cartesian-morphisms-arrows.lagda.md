@@ -265,13 +265,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  is-cartesian-is-cartesian-transpose-cartesian-hom-arrow :
+  is-cartesian-is-cartesian-transpose-hom-arrow :
     is-cartesian-hom-arrow
       ( map-domain-hom-arrow f g α)
       ( map-codomain-hom-arrow f g α)
       ( transpose-hom-arrow f g α) →
     is-cartesian-hom-arrow f g α
-  is-cartesian-is-cartesian-transpose-cartesian-hom-arrow =
+  is-cartesian-is-cartesian-transpose-hom-arrow =
     is-pullback-swap-cone'
       ( map-codomain-hom-arrow f g α)
       ( g)
@@ -881,6 +881,7 @@ module _
 
 ## See also
 
+- [The universal property of cartesian morphisms of arrows](foundation.universal-property-cartesian-morphisms-arrows.md)
 - [Cocartesian morphisms of arrows](synthetic-homotopy-theory.cocartesian-morphisms-arrows.md)
   for the dual.
 - [Diagonals of morphisms of arrows](foundation.diagonals-of-morphisms-arrows.md)

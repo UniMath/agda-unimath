@@ -11,12 +11,15 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.cartesian-morphisms-arrows
+open import foundation.homotopies-morphisms-arrows
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
+open import foundation.lifts-morphisms-arrows
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.universal-property-cartesian-morphisms-arrows
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -297,59 +300,6 @@ $f : X → Y$, we have a morphism of arrows in the slice above $α_{*}$:
 
 and so by the right-cancellation property of cartesian squares the naturality
 square at $f$ is cartesian. ∎
-
-```agda
-module _
-  {l1 l2 l3 l4 l : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (α : natural-transformation-polynomial-endofunctor l 𝑃 𝑄)
-  (let α₀ = type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
-  where
-
-  is-cartesian-at-terminal-map-is-cartesian-natural-transformation-polynomial-endofunctor :
-    is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α →
-    is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
-      𝑃 𝑄 α
-  is-cartesian-at-terminal-map-is-cartesian-natural-transformation-polynomial-endofunctor
-    H {X} =
-    H (raise-terminal-map X)
-
-  abstract
-    is-cartesian-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor :
-      is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
-        𝑃 𝑄 α →
-      is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
-    is-cartesian-is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
-      H {X} {Y} f =
-      is-pullback-top-square-vertical-triangle
-        α₀
-        ( map-polynomial-endofunctor 𝑄 (raise-terminal-map Y))
-        ( map-polynomial-endofunctor 𝑄 f)
-        ( map-polynomial-endofunctor 𝑄 (raise-terminal-map X))
-        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
-          ( raise-terminal-map Y))
-        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
-          ( f))
-        ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
-          ( raise-terminal-map X))
-        ( refl-htpy)
-        ( refl-htpy ,
-          refl-htpy ,
-          ( λ (a , h) →
-            equational-reasoning
-            pr2 α (raise-terminal-map Y) (a , f ∘ h) ∙ ap (tot (λ x₁ f₁ a → map-raise star)) (pr2 α f (a , h)) ∙ refl
-            ＝
-              pr2 α (raise-terminal-map Y) (a , f ∘ h) ∙
-              ap (λ z → pair (pr1 z) (λ z₁ → map-raise star)) (pr2 α f (a , h))
-              by right-unit
-            ＝ {!   !} by {!   !}
-            ＝ pr2 α (raise-terminal-map X) (a , h) by {!   !})) -- these are two equalities in the type (Σ 𝑄₀ , 1), so they only need to be equal on first components.
-        ( H {Y})
-        ( H {X})
-```
-
-<!-- TODO: use uniqueness of cartesian lifts -->
 
 This is mentioned as Remark 2.1.4 in {{#cite GHK22}}.
 
