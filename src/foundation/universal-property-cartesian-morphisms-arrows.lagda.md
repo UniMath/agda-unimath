@@ -15,10 +15,12 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equivalences
+open import foundation.homotopy-induction
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -146,6 +148,7 @@ module _
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
   (α : hom-arrow f h) (β : hom-arrow g h)
+  ( let β₁ = map-codomain-hom-arrow g h β)
   where
 
   is-lift-hom-arrow-of-lift-codomain-hom-arrow :
@@ -163,9 +166,86 @@ module _
               ( comp-hom-arrow f g h β (j , i , H))
               ( J)
               ( I)))
-```
 
-> The explicit equivalence remains to be written out.
+  lift-hom-arrow-of-lift-codomain-hom-arrow :
+    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
+    UU (l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  lift-hom-arrow-of-lift-codomain-hom-arrow i =
+    Σ (A → B) (is-lift-hom-arrow-of-lift-codomain-hom-arrow i)
+
+  compute-fiber-lift-codomain-lift-hom-arrow :
+    (δ : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
+    fiber (lift-codomain-lift-hom-arrow f g h α β) δ ≃
+    lift-hom-arrow-of-lift-codomain-hom-arrow δ
+  compute-fiber-lift-codomain-lift-hom-arrow (δ , Hδ) =
+    equivalence-reasoning
+    Σ ( lift-hom-arrow f g h α β)
+      ( λ γ → lift-codomain-lift-hom-arrow f g h α β γ ＝ (δ , Hδ))
+    ≃ Σ ( lift-hom-arrow f g h α β)
+        ( λ γ →
+          Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
+            ( λ Hi → coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ))
+      by
+        equiv-tot
+          ( λ γ →
+            extensionality-lift
+              ( map-codomain-hom-arrow g h β)
+              ( map-codomain-hom-arrow f h α)
+              ( lift-codomain-lift-hom-arrow f g h α β γ)
+              ( δ , Hδ))
+    ≃ Σ ( Σ (A' → B') (_~ δ))
+        ( λ (i , Hi) →
+          Σ ( Σ ( coherence-triangle-maps
+                  ( map-codomain-hom-arrow f h α)
+                  ( map-codomain-hom-arrow g h β)
+                  ( i))
+                ( λ I → I ∙h β₁ ·l Hi ~ Hδ))
+            ( λ (I , HI) → lift-hom-arrow-of-lift-codomain-hom-arrow (i , I)))
+      by reassociate
+    ≃ Σ ( Σ ( coherence-triangle-maps
+              ( map-codomain-hom-arrow f h α)
+              ( map-codomain-hom-arrow g h β)
+              ( δ))
+            ( λ I → I ∙h β₁ ·l refl-htpy ~ Hδ))
+        ( λ (I , HI) → lift-hom-arrow-of-lift-codomain-hom-arrow (δ , I))
+      by left-unit-law-Σ-is-contr (is-torsorial-htpy' δ) (δ , refl-htpy)
+    ≃ Σ ( Σ ( coherence-triangle-maps
+              ( map-codomain-hom-arrow f h α)
+              ( map-codomain-hom-arrow g h β)
+              ( δ))
+            ( _~ Hδ))
+        ( λ (I , HI) → lift-hom-arrow-of-lift-codomain-hom-arrow (δ , I))
+      by
+        equiv-Σ-equiv-base
+          ( λ (I , HI) → lift-hom-arrow-of-lift-codomain-hom-arrow (δ , I))
+          ( equiv-tot (λ I → equiv-concat-htpy inv-htpy-right-unit-htpy Hδ))
+    ≃ lift-hom-arrow-of-lift-codomain-hom-arrow (δ , Hδ)
+      by left-unit-law-Σ-is-contr (is-torsorial-htpy' Hδ) (Hδ , refl-htpy)
+    where
+      reassociate :
+        Σ ( lift-hom-arrow f g h α β)
+        ( λ γ →
+          Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
+            ( λ Hi →
+              coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ)) ≃
+        Σ ( Σ (A' → B') (_~ δ))
+          ( λ (i , Hi) →
+            Σ ( Σ ( coherence-triangle-maps
+                    ( map-codomain-hom-arrow f h α)
+                    ( map-codomain-hom-arrow g h β)
+                    ( i))
+                  ( λ I → I ∙h β₁ ·l Hi ~ Hδ))
+                ( λ (I , HI) →
+                  lift-hom-arrow-of-lift-codomain-hom-arrow (i , I)))
+      reassociate =
+        ( ( λ (((γ₀ , γ₁ , Hγ) , (Γ₀ , Γ₁ , HΓ)) , (Hi , HI)) →
+            ( (γ₁ , Hi) , (Γ₁ , HI) , γ₀ , Hγ , Γ₀ , HΓ)) ,
+          ( is-equiv-is-invertible
+            ( λ ((γ₁ , Hi) , (Γ₁ , HI) , γ₀ , Hγ , Γ₀ , HΓ) →
+              ((γ₀ , γ₁ , Hγ) , (Γ₀ , Γ₁ , HΓ)) , (Hi , HI))
+            ( refl-htpy)
+            ( refl-htpy)))
+```
 
 ### Uniqueness of lifts of cartesian morphisms
 
