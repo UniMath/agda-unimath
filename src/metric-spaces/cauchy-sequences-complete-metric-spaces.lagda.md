@@ -90,8 +90,8 @@ module _
       ( metric-space-Complete-Metric-Space M)
       ( x)
   has-limit-cauchy-sequence-Complete-Metric-Space =
-    limit-cauchy-sequence-Complete-Metric-Space ,
-    is-limit-limit-cauchy-sequence-Complete-Metric-Space
+    ( limit-cauchy-sequence-Complete-Metric-Space ,
+      is-limit-limit-cauchy-sequence-Complete-Metric-Space)
 ```
 
 ### If every Cauchy sequence has a limit in a metric space, the metric space is complete
@@ -123,5 +123,5 @@ module _
   complete-metric-space-cauchy-sequences-have-limits-Metric-Space :
     Complete-Metric-Space l1 l2
   complete-metric-space-cauchy-sequences-have-limits-Metric-Space =
-    M , is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space
+    ( M , is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space)
 ```
