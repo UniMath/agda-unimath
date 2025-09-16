@@ -26,6 +26,7 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import orthogonal-factorization-systems.lifts-maps
 ```
@@ -284,25 +285,20 @@ module _
                   ( Hβ ·r j)
                   ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
             ≃ ( Hβ ·r j ~
-                β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
-              by
-                equiv-tr
-                  ( λ Q → Hβ ·r j ~ Q ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
-                  ( inv (eq-htpy (left-whisker-inv-htpy β₁ H)))
-            ≃ ( Hβ ·r j ~
                 ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα)) ∙h h ·l J)
               by
-                equiv-tr
-                  ( Hβ ·r j ~_)
-                  ( ( ap
-                      ( β₁ ·l (inv-htpy H) ∙h_)
-                      ( eq-htpy
-                        ( inv-htpy-assoc-htpy (inv-htpy I ·r f) Hα (h ·l J)))) ∙
-                    ( eq-htpy
-                      ( inv-htpy-assoc-htpy
-                        ( β₁ ·l (inv-htpy H))
-                        ( inv-htpy I ·r f ∙h Hα)
-                        ( h ·l J))))
+                equiv-concat-htpy'
+                  ( Hβ ·r j)
+                  ( ( right-whisker-concat-htpy
+                      ( inv-htpy (left-whisker-inv-htpy β₁ H))
+                      ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))) ∙h
+                    ( left-whisker-concat-htpy
+                      ( β₁ ·l (inv-htpy H))
+                      ( inv-htpy-assoc-htpy (inv-htpy I ·r f) Hα (h ·l J))) ∙h
+                    ( inv-htpy-assoc-htpy
+                      ( β₁ ·l (inv-htpy H))
+                      ( inv-htpy I ·r f ∙h Hα)
+                      ( h ·l J)))
             ≃ ( Hβ ·r j ∙h inv-htpy (h ·l J) ~
                 β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
               by
@@ -313,8 +309,9 @@ module _
             ≃ ( Hβ ·r j ∙h h ·l inv-htpy J ~
                 β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
               by
-                equiv-tr
-                  ( λ Q →
-                    Hβ ·r j ∙h Q ~ β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
-                  ( inv (eq-htpy (left-whisker-inv-htpy h J)))))
+                equiv-concat-htpy
+                  ( left-whisker-concat-htpy
+                    ( Hβ ·r j)
+                    ( left-whisker-inv-htpy h J))
+                  ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))))
 ```
