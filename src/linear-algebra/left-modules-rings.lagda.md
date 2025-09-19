@@ -36,7 +36,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "left module" WD="left module" WDID="Q120721996" Agda=left-module-Ring}}
+{{#concept "left module" WD="left module" WDID=Q120721996 Agda=left-module-Ring}}
 `M` over a [ring](ring-theory.rings.md) `R` consists of an
 [abelian group](group-theory.abelian-groups.md) `M` equipped with an action
 `R → M → M` such that
