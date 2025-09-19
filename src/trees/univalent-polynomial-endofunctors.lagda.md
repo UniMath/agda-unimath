@@ -246,8 +246,9 @@ module _
 
   coh-refl-eq-Eq-type-univalent-polynomial-endofunctor :
     (x : type-univalent-polynomial-endofunctor 𝑃 X) →
-    ( eq-Eq-type-univalent-polynomial-endofunctor x x
-      ( refl-Eq-type-univalent-polynomial-endofunctor x)) ＝ refl
+    eq-Eq-type-univalent-polynomial-endofunctor x x
+      ( refl-Eq-type-univalent-polynomial-endofunctor x) ＝
+    refl
   coh-refl-eq-Eq-type-univalent-polynomial-endofunctor x =
     is-retraction-eq-Eq-type-univalent-polynomial-endofunctor x x refl
 ```

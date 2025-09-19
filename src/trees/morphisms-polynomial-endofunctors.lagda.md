@@ -27,6 +27,7 @@ open import foundation.identity-types
 open import foundation.implicit-function-types
 open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
@@ -355,6 +356,9 @@ module _
 
 ### Comparison between morphisms and natural transformations
 
+Morphisms of polynomial endofunctors form a retract of natural transformations,
+and this map is a section on shapes.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -380,14 +384,22 @@ module _
     inv
       ( naturality-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α x
         ( a , id))
+
+  retract-hom-natural-transformation-polynomial-endofunctor :
+    ( hom-polynomial-endofunctor 𝑃 𝑄) retract-of
+    ( natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
+  retract-hom-natural-transformation-polynomial-endofunctor =
+    ( λ f → natural-transformation-hom-polynomial-endofunctor 𝑃 𝑄 f {l2}) ,
+    ( hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄) ,
+    ( is-retraction-hom-natural-transformation-polynomial-endofunctor)
 ```
 
-**Comment.** If we were to show these notions are equivalent, we would have
-needed natural transformations to satisfy the following equality:
+**Comment.** If these notions were to be equivalent we would have needed natural
+transformations to satisfy the following equality:
 
 $$
   α₁ (f ∘ x) (a , id) = ap (𝑄 f) (α₁ x (a , id)) ∙ α₁ f (a , x),
 $$
 
-which is an unfolding of the condition that the naturality square of a composite
-map is given by pasting of squares.
+which is an instance of the unfolded condition that the naturality square of a
+composite map is given by pasting of squares.

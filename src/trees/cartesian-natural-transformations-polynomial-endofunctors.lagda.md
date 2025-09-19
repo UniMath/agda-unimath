@@ -11,23 +11,22 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.cartesian-morphisms-arrows
-open import foundation.homotopies-morphisms-arrows
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
-open import foundation.lifts-morphisms-arrows
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
-open import foundation.universal-property-cartesian-morphisms-arrows
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopies-morphisms-arrows
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.implicit-function-types
+open import foundation.lifts-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -37,6 +36,7 @@ open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.unit-type
+open import foundation.universal-property-cartesian-morphisms-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
