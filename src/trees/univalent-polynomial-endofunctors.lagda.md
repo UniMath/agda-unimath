@@ -88,14 +88,14 @@ module _
     polynomial-endofunctor l1 l2
   polynomial-endofunctor-univalent-polynomial-endofunctor = pr1 𝑃
 
-  shapes-univalent-polynomial-endofunctor : UU l1
-  shapes-univalent-polynomial-endofunctor =
+  shape-univalent-polynomial-endofunctor : UU l1
+  shape-univalent-polynomial-endofunctor =
     shape-polynomial-endofunctor
       polynomial-endofunctor-univalent-polynomial-endofunctor
 
-  positions-univalent-polynomial-endofunctor :
-    shapes-univalent-polynomial-endofunctor → UU l2
-  positions-univalent-polynomial-endofunctor =
+  position-univalent-polynomial-endofunctor :
+    shape-univalent-polynomial-endofunctor → UU l2
+  position-univalent-polynomial-endofunctor =
     position-polynomial-endofunctor
       polynomial-endofunctor-univalent-polynomial-endofunctor
 
@@ -105,16 +105,16 @@ module _
   is-univalent-univalent-polynomial-endofunctor = pr2 𝑃
 
   univalent-family-univalent-polynomial-endofunctor :
-    univalent-family l2 shapes-univalent-polynomial-endofunctor
+    univalent-family l2 shape-univalent-polynomial-endofunctor
   univalent-family-univalent-polynomial-endofunctor =
-    ( positions-univalent-polynomial-endofunctor ,
+    ( position-univalent-polynomial-endofunctor ,
       is-univalent-univalent-polynomial-endofunctor)
 
   equiv-equiv-tr-univalent-polynomial-endofunctor :
-    {x y : shapes-univalent-polynomial-endofunctor} →
+    {x y : shape-univalent-polynomial-endofunctor} →
     ( x ＝ y) ≃
-    ( positions-univalent-polynomial-endofunctor x ≃
-      positions-univalent-polynomial-endofunctor y)
+    ( position-univalent-polynomial-endofunctor x ≃
+      position-univalent-polynomial-endofunctor y)
   equiv-equiv-tr-univalent-polynomial-endofunctor =
     equiv-equiv-tr-univalent-family
       univalent-family-univalent-polynomial-endofunctor
@@ -185,8 +185,8 @@ module _
   Eq-type-univalent-polynomial-endofunctor :
     (x y : type-univalent-polynomial-endofunctor 𝑃 X) → UU (l2 ⊔ l3)
   Eq-type-univalent-polynomial-endofunctor x y =
-    Σ ( positions-univalent-polynomial-endofunctor 𝑃 (pr1 x) ≃
-        positions-univalent-polynomial-endofunctor 𝑃 (pr1 y))
+    Σ ( position-univalent-polynomial-endofunctor 𝑃 (pr1 x) ≃
+        position-univalent-polynomial-endofunctor 𝑃 (pr1 y))
       ( λ e → coherence-triangle-maps (pr2 x) (pr2 y) (map-equiv e))
 
   refl-Eq-type-univalent-polynomial-endofunctor :
@@ -207,7 +207,7 @@ module _
     is-torsorial-Eq-type-univalent-polynomial-endofunctor (x , α) =
       is-torsorial-Eq-structure
         ( is-contr-equiv'
-          ( Σ (shapes-univalent-polynomial-endofunctor 𝑃) (x ＝_))
+          ( Σ (shape-univalent-polynomial-endofunctor 𝑃) (x ＝_))
           ( equiv-tot
             ( λ y → equiv-equiv-tr-univalent-polynomial-endofunctor 𝑃 {x} {y}))
           ( is-torsorial-Id x))

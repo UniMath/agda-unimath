@@ -83,14 +83,14 @@ module _
   is-cartesian-hom-polynomial-endofunctor : UU (l1 ⊔ l2 ⊔ l4)
   is-cartesian-hom-polynomial-endofunctor =
     (a : shape-polynomial-endofunctor 𝑃) →
-    is-equiv (positions-hom-polynomial-endofunctor 𝑃 𝑄 α a)
+    is-equiv (position-hom-polynomial-endofunctor 𝑃 𝑄 α a)
 
   is-prop-is-cartesian-hom-polynomial-endofunctor :
     is-prop is-cartesian-hom-polynomial-endofunctor
   is-prop-is-cartesian-hom-polynomial-endofunctor =
     is-prop-Π
       ( λ a →
-        is-property-is-equiv (positions-hom-polynomial-endofunctor 𝑃 𝑄 α a))
+        is-property-is-equiv (position-hom-polynomial-endofunctor 𝑃 𝑄 α a))
 
   is-cartesian-hom-polynomial-endofunctor-Prop : Prop (l1 ⊔ l2 ⊔ l4)
   is-cartesian-hom-polynomial-endofunctor-Prop =
@@ -132,21 +132,21 @@ module _
   hom-cartesian-hom-polynomial-endofunctor : hom-polynomial-endofunctor 𝑃 𝑄
   hom-cartesian-hom-polynomial-endofunctor = pr1 α
 
-  shapes-cartesian-hom-polynomial-endofunctor :
+  shape-cartesian-hom-polynomial-endofunctor :
     shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
-  shapes-cartesian-hom-polynomial-endofunctor =
-    shapes-hom-polynomial-endofunctor 𝑃 𝑄
+  shape-cartesian-hom-polynomial-endofunctor =
+    shape-hom-polynomial-endofunctor 𝑃 𝑄
       hom-cartesian-hom-polynomial-endofunctor
 
-  positions-cartesian-hom-polynomial-endofunctor :
+  position-cartesian-hom-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor 𝑃) →
     position-polynomial-endofunctor 𝑄
-      ( shapes-hom-polynomial-endofunctor 𝑃 𝑄
+      ( shape-hom-polynomial-endofunctor 𝑃 𝑄
         ( hom-cartesian-hom-polynomial-endofunctor)
         ( a)) →
     position-polynomial-endofunctor 𝑃 a
-  positions-cartesian-hom-polynomial-endofunctor =
-    positions-hom-polynomial-endofunctor 𝑃 𝑄
+  position-cartesian-hom-polynomial-endofunctor =
+    position-hom-polynomial-endofunctor 𝑃 𝑄
       hom-cartesian-hom-polynomial-endofunctor
 
   type-cartesian-hom-polynomial-endofunctor :
@@ -161,15 +161,15 @@ module _
       hom-cartesian-hom-polynomial-endofunctor
   is-cartesian-cartesian-hom-polynomial-endofunctor = pr2 α
 
-  equiv-positions-cartesian-hom-polynomial-endofunctor :
+  equiv-position-cartesian-hom-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor 𝑃) →
     position-polynomial-endofunctor 𝑄
-      ( shapes-hom-polynomial-endofunctor 𝑃 𝑄
+      ( shape-hom-polynomial-endofunctor 𝑃 𝑄
         ( hom-cartesian-hom-polynomial-endofunctor)
         ( a)) ≃
     position-polynomial-endofunctor 𝑃 a
-  equiv-positions-cartesian-hom-polynomial-endofunctor a =
-    ( positions-cartesian-hom-polynomial-endofunctor a ,
+  equiv-position-cartesian-hom-polynomial-endofunctor a =
+    ( position-cartesian-hom-polynomial-endofunctor a ,
       is-cartesian-cartesian-hom-polynomial-endofunctor a)
 
   naturality-cartesian-hom-polynomial-endofunctor :
@@ -308,8 +308,8 @@ module _
   (𝑃 : polynomial-endofunctor l1 l2)
   (𝑄 : polynomial-endofunctor l3 l4)
   (α : cartesian-hom-polynomial-endofunctor 𝑃 𝑄)
-  (let α₀ = shapes-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
-  (let α₁ = positions-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+  (let α₀ = shape-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
+  (let α₁ = position-cartesian-hom-polynomial-endofunctor 𝑃 𝑄 α)
   {X : UU l5}
   where
 
@@ -393,20 +393,20 @@ module _
   (let α₀ = type-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
   where
 
-  shapes-cartesian-natural-transformation-polynomial-endofunctor :
+  shape-cartesian-natural-transformation-polynomial-endofunctor :
     shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
-  shapes-cartesian-natural-transformation-polynomial-endofunctor =
-    shapes-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+  shape-cartesian-natural-transformation-polynomial-endofunctor =
+    shape-natural-transformation-polynomial-endofunctor 𝑃 𝑄
       ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
           𝑃 𝑄 α)
 
-  positions-cartesian-natural-transformation-polynomial-endofunctor :
+  position-cartesian-natural-transformation-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor 𝑃) →
     position-polynomial-endofunctor 𝑄
-      ( shapes-cartesian-natural-transformation-polynomial-endofunctor a) →
+      ( shape-cartesian-natural-transformation-polynomial-endofunctor a) →
     position-polynomial-endofunctor 𝑃 a
-  positions-cartesian-natural-transformation-polynomial-endofunctor =
-    positions-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+  position-cartesian-natural-transformation-polynomial-endofunctor =
+    position-natural-transformation-polynomial-endofunctor 𝑃 𝑄
       ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
           𝑃 𝑄 α)
 

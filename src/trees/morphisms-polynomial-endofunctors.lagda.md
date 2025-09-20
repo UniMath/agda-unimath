@@ -73,15 +73,15 @@ module _
   (α : hom-polynomial-endofunctor 𝑃 𝑄)
   where
 
-  shapes-hom-polynomial-endofunctor :
+  shape-hom-polynomial-endofunctor :
     shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
-  shapes-hom-polynomial-endofunctor = pr1 α
+  shape-hom-polynomial-endofunctor = pr1 α
 
-  positions-hom-polynomial-endofunctor :
+  position-hom-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor 𝑃) →
-    position-polynomial-endofunctor 𝑄 (shapes-hom-polynomial-endofunctor a) →
+    position-polynomial-endofunctor 𝑄 (shape-hom-polynomial-endofunctor a) →
     position-polynomial-endofunctor 𝑃 a
-  positions-hom-polynomial-endofunctor = pr2 α
+  position-hom-polynomial-endofunctor = pr2 α
 
   type-hom-polynomial-endofunctor :
     {l3 : Level} {X : UU l3} →
@@ -90,8 +90,8 @@ module _
   type-hom-polynomial-endofunctor {X = X} =
     map-Σ
       ( λ c → position-polynomial-endofunctor 𝑄 c → X)
-      ( shapes-hom-polynomial-endofunctor)
-      ( λ a → precomp (positions-hom-polynomial-endofunctor a) X)
+      ( shape-hom-polynomial-endofunctor)
+      ( λ a → precomp (position-hom-polynomial-endofunctor a) X)
 ```
 
 ### The identity morphism
@@ -133,15 +133,15 @@ module _
   htpy-hom-polynomial-endofunctor :
     (α β : hom-polynomial-endofunctor 𝑃 𝑄) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-hom-polynomial-endofunctor α β =
-    Σ ( shapes-hom-polynomial-endofunctor 𝑃 𝑄 α ~
-        shapes-hom-polynomial-endofunctor 𝑃 𝑄 β)
+    Σ ( shape-hom-polynomial-endofunctor 𝑃 𝑄 α ~
+        shape-hom-polynomial-endofunctor 𝑃 𝑄 β)
       ( λ H →
         (a : shape-polynomial-endofunctor 𝑃)
         (d :
           position-polynomial-endofunctor 𝑄
-            ( shapes-hom-polynomial-endofunctor 𝑃 𝑄 α a)) →
-        positions-hom-polynomial-endofunctor 𝑃 𝑄 α a d ＝
-        positions-hom-polynomial-endofunctor 𝑃 𝑄 β a
+            ( shape-hom-polynomial-endofunctor 𝑃 𝑄 α a)) →
+        position-hom-polynomial-endofunctor 𝑃 𝑄 α a d ＝
+        position-hom-polynomial-endofunctor 𝑃 𝑄 β a
           ( tr (position-polynomial-endofunctor 𝑄) (H a) d))
 
   refl-htpy-hom-polynomial-endofunctor :
@@ -159,9 +159,9 @@ module _
     is-torsorial (htpy-hom-polynomial-endofunctor α)
   is-torsorial-htpy-hom-polynomial-endofunctor α =
     is-torsorial-Eq-structure
-      ( is-torsorial-htpy (shapes-hom-polynomial-endofunctor 𝑃 𝑄 α))
-      ( shapes-hom-polynomial-endofunctor 𝑃 𝑄 α , refl-htpy)
-      ( is-torsorial-binary-htpy (positions-hom-polynomial-endofunctor 𝑃 𝑄 α))
+      ( is-torsorial-htpy (shape-hom-polynomial-endofunctor 𝑃 𝑄 α))
+      ( shape-hom-polynomial-endofunctor 𝑃 𝑄 α , refl-htpy)
+      ( is-torsorial-binary-htpy (position-hom-polynomial-endofunctor 𝑃 𝑄 α))
 
   is-equiv-htpy-eq-hom-polynomial-endofunctor :
     (α β : hom-polynomial-endofunctor 𝑃 𝑄) →
@@ -266,24 +266,24 @@ module _
   (α : natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
   where
 
-  shapes-natural-transformation-polynomial-endofunctor :
+  shape-natural-transformation-polynomial-endofunctor :
     shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
-  shapes-natural-transformation-polynomial-endofunctor a =
+  shape-natural-transformation-polynomial-endofunctor a =
     pr1 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
 
-  positions-natural-transformation-polynomial-endofunctor :
+  position-natural-transformation-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor 𝑃) →
     position-polynomial-endofunctor 𝑄
-      ( shapes-natural-transformation-polynomial-endofunctor a) →
+      ( shape-natural-transformation-polynomial-endofunctor a) →
     position-polynomial-endofunctor 𝑃 a
-  positions-natural-transformation-polynomial-endofunctor a =
+  position-natural-transformation-polynomial-endofunctor a =
     pr2 (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α (a , id))
 
   hom-natural-transformation-polynomial-endofunctor :
     hom-polynomial-endofunctor 𝑃 𝑄
   hom-natural-transformation-polynomial-endofunctor =
-    ( shapes-natural-transformation-polynomial-endofunctor ,
-      positions-natural-transformation-polynomial-endofunctor)
+    ( shape-natural-transformation-polynomial-endofunctor ,
+      position-natural-transformation-polynomial-endofunctor)
 ```
 
 ### Computing the fibers of the induced natural transformation
