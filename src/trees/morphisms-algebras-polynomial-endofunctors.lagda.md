@@ -61,7 +61,7 @@ hom-algebra-polynomial-endofunctor {A = A} {B} X Y =
     ( λ f →
       ( f ∘ (structure-algebra-polynomial-endofunctor X)) ~
       ( ( structure-algebra-polynomial-endofunctor Y) ∘
-        ( map-polynomial-endofunctor A B f)))
+        ( map-polynomial-endofunctor' A B f)))
 
 map-hom-algebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
@@ -80,7 +80,7 @@ structure-hom-algebra-polynomial-endofunctor :
   ( ( map-hom-algebra-polynomial-endofunctor X Y f) ∘
     ( structure-algebra-polynomial-endofunctor X)) ~
   ( ( structure-algebra-polynomial-endofunctor Y) ∘
-    ( map-polynomial-endofunctor A B
+    ( map-polynomial-endofunctor' A B
       ( map-hom-algebra-polynomial-endofunctor X Y f)))
 structure-hom-algebra-polynomial-endofunctor X Y f = pr2 f
 ```
@@ -105,7 +105,7 @@ module _
       ( λ H →
         ( ( structure-hom-algebra-polynomial-endofunctor X Y f) ∙h
           ( ( structure-algebra-polynomial-endofunctor Y) ·l
-            ( htpy-polynomial-endofunctor A B H))) ~
+            ( htpy-polynomial-endofunctor' A B H))) ~
         ( ( H ·r structure-algebra-polynomial-endofunctor X) ∙h
           ( structure-hom-algebra-polynomial-endofunctor X Y g)))
 
@@ -118,10 +118,10 @@ module _
         concat
           ( structure-hom-algebra-polynomial-endofunctor X Y f z)
           ( structure-algebra-polynomial-endofunctor Y
-            ( map-polynomial-endofunctor A B
+            ( map-polynomial-endofunctor' A B
               ( map-hom-algebra-polynomial-endofunctor X Y f) z))
           ( ap (structure-algebra-polynomial-endofunctor Y) t))
-      ( coh-refl-htpy-polynomial-endofunctor A B
+      ( coh-refl-htpy-polynomial-endofunctor' A B
         ( map-hom-algebra-polynomial-endofunctor X Y f) z)) ∙
     ( right-unit)
 
@@ -139,7 +139,7 @@ module _
       ( pair (map-hom-algebra-polynomial-endofunctor X Y f) refl-htpy)
       ( is-contr-equiv'
         ( Σ ( ( (pr1 f) ∘ pr2 X) ~
-              ( pr2 Y ∘ map-polynomial-endofunctor A B (pr1 f)))
+              ( pr2 Y ∘ map-polynomial-endofunctor' A B (pr1 f)))
             ( λ H → (pr2 f) ~ H))
         ( equiv-tot
           ( λ H →
@@ -149,10 +149,10 @@ module _
                   ( concat
                     ( pr2 f x)
                     ( structure-algebra-polynomial-endofunctor Y
-                      ( map-polynomial-endofunctor A B (pr1 f) x)))
+                      ( map-polynomial-endofunctor' A B (pr1 f) x)))
                   ( ap
                     ( ap (pr2 Y))
-                    ( coh-refl-htpy-polynomial-endofunctor A B (pr1 f) x)))
+                    ( coh-refl-htpy-polynomial-endofunctor' A B (pr1 f) x)))
               ( H)) ∘e
             ( equiv-concat-htpy right-unit-htpy H)))
         ( is-torsorial-htpy (pr2 f)))

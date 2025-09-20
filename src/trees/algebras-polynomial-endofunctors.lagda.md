@@ -29,7 +29,7 @@ algebra-polynomial-endofunctor :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
   UU (lsuc l ⊔ l1 ⊔ l2)
 algebra-polynomial-endofunctor l A B =
-  Σ (UU l) (λ X → type-polynomial-endofunctor A B X → X)
+  Σ (UU l) (λ X → type-polynomial-endofunctor' A B X → X)
 
 type-algebra-polynomial-endofunctor :
   {l l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -39,7 +39,7 @@ type-algebra-polynomial-endofunctor X = pr1 X
 structure-algebra-polynomial-endofunctor :
   {l l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (X : algebra-polynomial-endofunctor l A B) →
-  type-polynomial-endofunctor A B (type-algebra-polynomial-endofunctor X) →
+  type-polynomial-endofunctor' A B (type-algebra-polynomial-endofunctor X) →
   type-algebra-polynomial-endofunctor X
 structure-algebra-polynomial-endofunctor X = pr2 X
 ```

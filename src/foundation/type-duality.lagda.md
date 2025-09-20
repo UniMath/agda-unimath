@@ -73,7 +73,7 @@ type-polynomial-endofunctor-UU l = Slice l
 map-polynomial-endofunctor-UU :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   type-polynomial-endofunctor-UU l A → type-polynomial-endofunctor-UU l B
-map-polynomial-endofunctor-UU l = map-polynomial-endofunctor (UU l) (λ X → X)
+map-polynomial-endofunctor-UU l = map-polynomial-endofunctor' (UU l) (λ X → X)
 ```
 
 ### Type families
@@ -90,7 +90,7 @@ map-exp-UU l f P = P ∘ f
 
 ## Properties
 
-### If `A` is locally `l`-small, then we can construct an embedding `type-polynomial-endofunctor l A ↪ type-exp-UU A`
+### If `A` is locally `l`-small, then we can construct an embedding `type-polynomial-endofunctor' l A ↪ type-exp-UU A`
 
 ```agda
 map-type-duality :
