@@ -29,6 +29,8 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
+
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
@@ -37,8 +39,11 @@ open import group-theory.semigroups
 
 open import lists.concatenation-lists
 open import lists.lists
+open import lists.tuples
 
 open import ring-theory.semirings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -410,6 +415,18 @@ module _
   one-Ring : type-Ring R
   one-Ring = unit-Monoid multiplicative-monoid-Ring
 
+  zero-is-one-prop-Ring : Prop l
+  zero-is-one-prop-Ring = Id-Prop (set-Ring R) (zero-Ring R) one-Ring
+
+  zero-is-one-Ring : UU l
+  zero-is-one-Ring = type-Prop zero-is-one-prop-Ring
+
+  zero-is-not-one-prop-Ring : Prop l
+  zero-is-not-one-prop-Ring = neg-Prop zero-is-one-prop-Ring
+
+  zero-is-not-one-Ring : UU l
+  zero-is-not-one-Ring = type-Prop zero-is-not-one-prop-Ring
+
   left-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R one-Ring x) x
   left-unit-law-mul-Ring = left-unit-law-mul-Monoid multiplicative-monoid-Ring
 
@@ -705,4 +722,30 @@ ring-structure-ring :
   {l1 : Level} → (X : UU l1) → structure-ring X → Ring l1
 pr1 (ring-structure-ring X (p , q)) = abelian-group-structure-abelian-group X p
 pr2 (ring-structure-ring X (p , q)) = q
+```
+
+### Trivial tuple
+
+```agda
+trivial-tuple-Ring :
+  {l : Level} → (R : Ring l) → (n : ℕ) → tuple (type-Ring R) n
+trivial-tuple-Ring R zero-ℕ = empty-tuple
+trivial-tuple-Ring R (succ-ℕ n) =
+  zero-Ring R ∷ trivial-tuple-Ring R n
+```
+
+## Properties
+
+### Any component of the trivial tuple is the zero element
+
+```agda
+zero-component-trivial-tuple :
+  {l : Level} →
+  {R : Ring l}
+  (n : ℕ) →
+  (i : Fin n) →
+  zero-Ring R ＝ component-tuple n (trivial-tuple-Ring R n) i
+zero-component-trivial-tuple (succ-ℕ n) (inr _) = refl
+zero-component-trivial-tuple (succ-ℕ n) (inl i) =
+  zero-component-trivial-tuple n i
 ```
