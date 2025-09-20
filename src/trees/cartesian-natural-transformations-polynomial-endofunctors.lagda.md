@@ -14,7 +14,6 @@ open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
-open import foundation.sets
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -34,6 +33,7 @@ open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.sections
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.unit-type

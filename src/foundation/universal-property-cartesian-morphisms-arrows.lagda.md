@@ -185,7 +185,9 @@ module _
         ( equiv-tot
           ( equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow
             f g h α β (i , I)))
-        ( uniqueness-universal-property-pullback (map-codomain-hom-arrow g h β) h
+        ( uniqueness-universal-property-pullback
+          ( map-codomain-hom-arrow g h β)
+          ( h)
           ( cone-hom-arrow g h β)
           ( up-pullback-cartesian-hom-arrow g h (β , H))
           ( A)
