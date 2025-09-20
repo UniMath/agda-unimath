@@ -76,7 +76,7 @@ module _
   is-approximated-above-prop-family-ℝ x =
     Π-Prop
       ( ℚ⁺)
-      ( λ ε → ∃ I (λ i → le-ℝ-Prop (y i) (x +ℝ real-ℚ⁺ ε)))
+      ( λ ε → ∃ I (λ i → le-prop-ℝ (y i) (x +ℝ real-ℚ⁺ ε)))
 
   is-approximated-above-family-ℝ : {l3 : Level} → ℝ l3 → UU (l1 ⊔ l2 ⊔ l3)
   is-approximated-above-family-ℝ x =
@@ -198,6 +198,17 @@ module _
   has-infimum-prop-family-ℝ : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   has-infimum-prop-family-ℝ =
     ( has-infimum-family-ℝ , is-prop-has-infimum-family-ℝ)
+
+module _
+  {l1 l2 : Level} (S : subset-ℝ l1 l2) (l3 : Level)
+  where
+
+  has-infimum-prop-subset-ℝ : Prop (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-infimum-prop-subset-ℝ =
+    has-infimum-prop-family-ℝ (inclusion-subset-ℝ S) l3
+
+  has-infimum-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  has-infimum-subset-ℝ = type-Prop has-infimum-prop-subset-ℝ
 ```
 
 ### A real number `r` is greater than the infimum of the `yᵢ` if and only if it is greater than some `yᵢ`
@@ -215,9 +226,9 @@ module _
       ( is-lower-bound-is-infimum-family-ℝ y x is-infimum-x-yᵢ i)
 
   le-element-le-infimum-family-ℝ :
-    {l4 : Level} → (z : ℝ l4) → le-ℝ x z → exists I (λ i → le-ℝ-Prop (y i) z)
+    {l4 : Level} → (z : ℝ l4) → le-ℝ x z → exists I (λ i → le-prop-ℝ (y i) z)
   le-element-le-infimum-family-ℝ z x<z =
-    let open do-syntax-trunc-Prop (∃ I (λ i → le-ℝ-Prop (y i) z))
+    let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ (y i) z))
     in do
       (ε⁺@(ε , _) , ε<z-x) ←
         exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
@@ -232,11 +243,11 @@ module _
 
   le-infimum-iff-le-element-family-ℝ :
     {l4 : Level} → (z : ℝ l4) →
-    (le-ℝ x z) ↔ (exists I (λ i → le-ℝ-Prop (y i) z))
+    (le-ℝ x z) ↔ (exists I (λ i → le-prop-ℝ (y i) z))
   pr1 (le-infimum-iff-le-element-family-ℝ z) =
     le-element-le-infimum-family-ℝ z
   pr2 (le-infimum-iff-le-element-family-ℝ z) =
-    elim-exists (le-ℝ-Prop x z) (le-infimum-le-element-family-ℝ z)
+    elim-exists (le-prop-ℝ x z) (le-infimum-le-element-family-ℝ z)
 ```
 
 ### The infimum of a family of real numbers is the negation of the supremum of the negation of the family
@@ -323,6 +334,56 @@ module _
     is-supremum-neg-infimum-neg-family-ℝ =
       ( is-upper-bound-neg-infimum-neg-family-ℝ ,
         is-approximated-below-neg-infimum-neg-family-ℝ)
+```
+
+### The infimum of a subset of the real numbers is the negation of the supremum of the elementwise negation of the subset
+
+```agda
+module _
+  {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) (x : ℝ l3)
+  (is-sup-neg-S-x : is-supremum-subset-ℝ (neg-subset-ℝ S) x)
+  where
+
+  abstract
+    is-lower-bound-neg-supremum-neg-subset-ℝ :
+      is-lower-bound-family-of-elements-Large-Poset
+        ( ℝ-Large-Poset)
+        ( inclusion-subset-ℝ S)
+        ( neg-ℝ x)
+    is-lower-bound-neg-supremum-neg-subset-ℝ (s , s∈S) =
+      tr
+        ( leq-ℝ (neg-ℝ x))
+        ( neg-neg-ℝ s)
+        ( neg-leq-ℝ _ _
+          ( is-upper-bound-is-supremum-family-ℝ
+            ( inclusion-subset-ℝ (neg-subset-ℝ S))
+            ( x)
+            ( is-sup-neg-S-x)
+            ( neg-ℝ s , inv-tr (is-in-subtype S) (neg-neg-ℝ s) s∈S)))
+
+    is-approximated-above-neg-supremum-neg-subset-ℝ :
+      is-approximated-above-family-ℝ (inclusion-subset-ℝ S) (neg-ℝ x)
+    is-approximated-above-neg-supremum-neg-subset-ℝ ε =
+      let open do-syntax-trunc-Prop (∃ _ _)
+      in do
+        ((s , -s∈S) , x-ε<s) ←
+          is-approximated-below-is-supremum-family-ℝ
+            ( inclusion-subset-ℝ (neg-subset-ℝ S))
+            ( x)
+            ( is-sup-neg-S-x)
+            ( ε)
+        intro-exists
+          ( neg-ℝ s , -s∈S)
+          ( binary-tr
+            ( le-ℝ)
+            ( refl)
+            ( distributive-neg-diff-ℝ x (real-ℚ⁺ ε) ∙ commutative-add-ℝ _ _)
+            ( neg-le-ℝ _ _ x-ε<s))
+
+    is-infimum-neg-supremum-neg-subset-ℝ : is-infimum-subset-ℝ S (neg-ℝ x)
+    is-infimum-neg-supremum-neg-subset-ℝ =
+      ( is-lower-bound-neg-supremum-neg-subset-ℝ ,
+        is-approximated-above-neg-supremum-neg-subset-ℝ)
 ```
 
 ## See also

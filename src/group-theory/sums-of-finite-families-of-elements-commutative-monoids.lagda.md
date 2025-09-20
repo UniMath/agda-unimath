@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -26,6 +27,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
@@ -703,4 +705,117 @@ module _
               ( count-unit)
               ( f)
         ＝ f star by compute-sum-one-element-Commutative-Monoid M _
+```
+
+#### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Commutative-Monoid :
+      (f : type-Finite-Type I → type-Commutative-Monoid M) →
+      sum-finite-Commutative-Monoid M I f ＝ f i
+    sum-finite-is-contr-Commutative-Monoid f =
+      sum-equiv-finite-Commutative-Monoid M
+        ( I)
+        ( unit-Finite-Type)
+        ( equiv-unit-is-contr is-contr-I)
+        ( f) ∙
+      sum-finite-unit-type-Commutative-Monoid M _ ∙
+      ap f (eq-is-contr is-contr-I)
+```
+
+#### Interchange law of sums and addition
+
+```agda
+module _
+  {l1 l2 : Level} (G : Commutative-Monoid l1) (A : Finite-Type l2)
+  where
+
+  interchange-sum-mul-finite-Commutative-Monoid :
+    (f g : type-Finite-Type A → type-Commutative-Monoid G) →
+    sum-finite-Commutative-Monoid G A
+      (λ a → mul-Commutative-Monoid G (f a) (g a)) ＝
+    mul-Commutative-Monoid G
+      (sum-finite-Commutative-Monoid G A f)
+      (sum-finite-Commutative-Monoid G A g)
+  interchange-sum-mul-finite-Commutative-Monoid f g =
+    equational-reasoning
+    sum-finite-Commutative-Monoid G A
+      ( λ a → mul-Commutative-Monoid G (f a) (g a))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( G)
+        ( A)
+        ( λ a → sum-fin-sequence-type-Commutative-Monoid G 2 (h a))
+        by
+          htpy-sum-finite-Commutative-Monoid
+            ( G)
+            ( A)
+            ( λ a → inv (compute-sum-two-elements-Commutative-Monoid G (h a)))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( G)
+        ( A)
+        ( λ a →
+          sum-finite-Commutative-Monoid G (Fin-Finite-Type 2) (h a))
+      by
+        htpy-sum-finite-Commutative-Monoid G A
+          ( λ a →
+            inv
+              ( eq-sum-finite-sum-count-Commutative-Monoid
+                ( G)
+                ( Fin-Finite-Type 2)
+                ( count-Fin 2)
+                ( h a)))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( G)
+        ( Σ-Finite-Type A (λ _ → Fin-Finite-Type 2))
+        ( ind-Σ h)
+      by inv (sum-Σ-finite-Commutative-Monoid G A (λ _ → Fin-Finite-Type 2) h)
+    ＝
+      sum-finite-Commutative-Monoid
+        ( G)
+        ( Σ-Finite-Type (Fin-Finite-Type 2) (λ _ → A))
+        ( λ (i , a) → h a i)
+      by
+        sum-equiv-finite-Commutative-Monoid G _ _
+          ( commutative-product)
+          ( ind-Σ h)
+    ＝
+      sum-finite-Commutative-Monoid
+        ( G)
+        ( Fin-Finite-Type 2)
+        ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
+      by sum-Σ-finite-Commutative-Monoid G _ _ _
+    ＝
+      sum-fin-sequence-type-Commutative-Monoid
+        ( G)
+        ( 2)
+        ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
+      by
+        eq-sum-finite-sum-count-Commutative-Monoid
+          ( G)
+          ( Fin-Finite-Type 2)
+          ( count-Fin 2)
+          ( _)
+    ＝
+      mul-Commutative-Monoid
+        ( G)
+        ( sum-finite-Commutative-Monoid G A f)
+        ( sum-finite-Commutative-Monoid G A g)
+      by
+        compute-sum-two-elements-Commutative-Monoid
+          ( G)
+          ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
+    where
+      h : type-Finite-Type A → Fin 2 → type-Commutative-Monoid G
+      h a (inl (inr _)) = f a
+      h a (inr _) = g a
 ```
