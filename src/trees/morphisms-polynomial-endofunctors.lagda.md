@@ -258,6 +258,10 @@ module _
 
 ### Natural transformations define morphisms
 
+Given a natural transformation `α : 𝑃 ⇒ 𝑄` then we have an associated morphism
+given on shapes by `a ↦ pr1 (α₀ {𝑃₁ a} (a , id)) : 𝑃₀ → 𝑄₀` and on positions by
+`a ↦ pr2 (α₀ {𝑃₁ a} (a , id)) : (a : 𝑃₀) → 𝑄₁ _ → 𝑃₁ a`.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}

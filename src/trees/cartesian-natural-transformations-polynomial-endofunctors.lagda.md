@@ -47,6 +47,7 @@ open import foundation-core.torsorial-type-families
 
 open import trees.natural-transformations-polynomial-endofunctors
 open import trees.polynomial-endofunctors
+open import trees.morphisms-polynomial-endofunctors
 ```
 
 </details>
@@ -236,6 +237,44 @@ module _
   cartesian-hom-arrow-cartesian-natural-transformation-polynomial-endofunctor
     f =
     ( hom-arrow-cartesian-natural-transformation-polynomial-endofunctor f , H f)
+```
+
+### The associated morphism of polynomial endofunctors
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α : cartesian-natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
+  (let 𝑃₀ = shape-polynomial-endofunctor 𝑃)
+  (let 𝑃₁ = position-polynomial-endofunctor 𝑃)
+  (let α₀ = type-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
+  where
+
+  shape-cartesian-natural-transformation-polynomial-endofunctor :
+    shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
+  shape-cartesian-natural-transformation-polynomial-endofunctor =
+    shape-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
+
+  position-cartesian-natural-transformation-polynomial-endofunctor :
+    (a : shape-polynomial-endofunctor 𝑃) →
+    position-polynomial-endofunctor 𝑄
+      ( shape-cartesian-natural-transformation-polynomial-endofunctor a) →
+    position-polynomial-endofunctor 𝑃 a
+  position-cartesian-natural-transformation-polynomial-endofunctor =
+    position-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
+
+  hom-cartesian-natural-transformation-polynomial-endofunctor :
+    hom-polynomial-endofunctor 𝑃 𝑄
+  hom-cartesian-natural-transformation-polynomial-endofunctor =
+    hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+          𝑃 𝑄 α)
 ```
 
 ### The identity cartesian natural transformation

@@ -262,7 +262,7 @@ module _
     (type-family-univalent-family ℬ a , a , id-equiv)
 
   map-inv-equiv-type-subuniverse-univalent-family :
-     type-subuniverse (subuniverse-univalent-family ℬ l2) → A
+    type-subuniverse (subuniverse-univalent-family ℬ l2) → A
   map-inv-equiv-type-subuniverse-univalent-family (X , a , e) = a
 
   is-retraction-map-inv-equiv-type-subuniverse-univalent-family :

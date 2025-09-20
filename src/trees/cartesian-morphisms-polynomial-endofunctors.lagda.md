@@ -11,6 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
+open import foundation.raising-universe-levels
+open import foundation.unit-type
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -379,46 +381,6 @@ module _
               ( λ where (u , refl) → refl))
             ( is-equiv-id))
 ```
-
-### The associated morphism of a cartesian natural transformation is cartesian
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (α : cartesian-natural-transformation-polynomial-endofunctor l2 𝑃 𝑄)
-  (let 𝑃₀ = shape-polynomial-endofunctor 𝑃)
-  (let 𝑃₁ = position-polynomial-endofunctor 𝑃)
-  (let α₀ = type-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
-  where
-
-  shape-cartesian-natural-transformation-polynomial-endofunctor :
-    shape-polynomial-endofunctor 𝑃 → shape-polynomial-endofunctor 𝑄
-  shape-cartesian-natural-transformation-polynomial-endofunctor =
-    shape-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
-          𝑃 𝑄 α)
-
-  position-cartesian-natural-transformation-polynomial-endofunctor :
-    (a : shape-polynomial-endofunctor 𝑃) →
-    position-polynomial-endofunctor 𝑄
-      ( shape-cartesian-natural-transformation-polynomial-endofunctor a) →
-    position-polynomial-endofunctor 𝑃 a
-  position-cartesian-natural-transformation-polynomial-endofunctor =
-    position-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
-          𝑃 𝑄 α)
-
-  hom-cartesian-natural-transformation-polynomial-endofunctor :
-    hom-polynomial-endofunctor 𝑃 𝑄
-  hom-cartesian-natural-transformation-polynomial-endofunctor =
-    hom-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
-          𝑃 𝑄 α)
-```
-
-> TODO
 
 ### Equivalence between cartesian morphisms and cartesian natural transformations
 
