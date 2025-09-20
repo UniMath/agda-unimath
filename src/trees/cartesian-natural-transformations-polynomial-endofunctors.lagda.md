@@ -14,6 +14,7 @@ open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
+open import foundation.sets
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -281,11 +282,12 @@ module _
       is-cartesian-comp-cartesian-natural-transformation-polynomial-endofunctor)
 ```
 
-### A natural transformation is cartesian if and only if it is cartesian at terminal maps
+### A natural transformation into a polynomial endofunctor with a set of shapes is cartesian if and only if it is cartesian at terminal maps
 
 **Proof.** One direction is trivial. For the other direction, given a natural
 transformation of polynomial endofunctors $α : 𝑃 ⇒ 𝑄$ and an arbitrary function
-$f : X → Y$, we have a morphism of arrows in the slice above $α_{*}$:
+$f : X → Y$, since the type of shapes of $𝑄$ is a set, the following prism
+commutes and we have a morphism of arrows in the slice above $α_{*}$:
 
 ```text
          αX
@@ -301,7 +303,43 @@ $f : X → Y$, we have a morphism of arrows in the slice above $α_{*}$:
 and so by the right-cancellation property of cartesian squares the naturality
 square at $f$ is cartesian. ∎
 
-This is mentioned as Remark 2.1.4 in {{#cite GHK22}}.
+This holds more generally for coherent natural transformations between arbitrary
+polynomial functors, as mentioned in Remark 2.1.4 in {{#cite GHK22}}.
+
+```agda
+module _
+  {l1 l2 l3 l4 l : Level}
+  (𝑃 : polynomial-endofunctor l1 l2)
+  (𝑄 : polynomial-endofunctor l3 l4)
+  (α : natural-transformation-polynomial-endofunctor l 𝑃 𝑄)
+  where
+
+  is-cartesian-is-cartesian-at-terminal-map-natural-transformation-is-set-shape-polynomial-endofunctor :
+    is-set (shape-polynomial-endofunctor 𝑄) →
+    is-cartesian-at-terminal-map-natural-transformation-polynomial-endofunctor
+      𝑃 𝑄 α →
+    is-cartesian-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+  is-cartesian-is-cartesian-at-terminal-map-natural-transformation-is-set-shape-polynomial-endofunctor
+    H𝑄 Hα {X} {Y} f =
+    is-pullback-top-square-vertical-triangle
+      (type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)
+      (map-polynomial-endofunctor 𝑄 (raise-terminal-map Y))
+      (map-polynomial-endofunctor 𝑄 f)
+      (map-polynomial-endofunctor 𝑄 (raise-terminal-map X))
+      ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+        ( raise-terminal-map Y))
+      ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α f)
+      ( cone-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α
+        ( raise-terminal-map X))
+      ( refl-htpy)
+      ( refl-htpy ,
+        refl-htpy ,
+        λ x →
+        eq-is-prop
+          ( is-set-Σ H𝑄 (λ _ → is-set-function-type is-set-raise-unit) _ _))
+      ( Hα {Y})
+      ( Hα {X})
+```
 
 ## References
 
