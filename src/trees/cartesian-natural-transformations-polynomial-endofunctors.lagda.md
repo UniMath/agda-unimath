@@ -45,9 +45,9 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.retractions
 open import foundation-core.torsorial-type-families
 
+open import trees.morphisms-polynomial-endofunctors
 open import trees.natural-transformations-polynomial-endofunctors
 open import trees.polynomial-endofunctors
-open import trees.morphisms-polynomial-endofunctors
 ```
 
 </details>
