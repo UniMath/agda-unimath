@@ -105,9 +105,6 @@ module _
   eq-component-tuple-index-in-tuple
     (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
     eq-component-tuple-index-in-tuple n a v I
-
-  subset-tuple : {n : ℕ} (v : tuple A n) → subtype l A
-  subset-tuple v a = trunc-Prop (a ∈-tuple v)
 ```
 
 ## Properties
