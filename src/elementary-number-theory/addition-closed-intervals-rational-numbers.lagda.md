@@ -39,8 +39,8 @@ Given two
 [closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
-[Minkowski sum](group-theory.minkowski-multiplications-commutative-monoids.md)
-of those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
+[Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
+those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
 agrees with the interval `[a + c, b + d]`.
 
 ## Definition

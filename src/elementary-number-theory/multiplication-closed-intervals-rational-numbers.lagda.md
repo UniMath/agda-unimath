@@ -55,7 +55,8 @@ open import order-theory.total-orders
 
 ## Idea
 
-Given two [intervals](elementary-number-theory.intervals-rational-numbers.md)
+Given two
+[intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
 [Minkowski product](group-theory.minkowski-multiplication-commutative-monoids.md)
