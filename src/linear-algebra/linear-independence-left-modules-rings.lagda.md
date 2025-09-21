@@ -68,7 +68,7 @@ module _
   is-linearly-independent-tuple-left-module-prop-Ring =
     Π-Prop
       ( tuple (type-Ring R) n)
-      λ scalars →
+      ( λ scalars →
         hom-Prop
           ( Id-Prop
             ( set-left-module-Ring R M)
@@ -77,8 +77,7 @@ module _
           ( Id-Prop
             ( tuple-Set (set-Ring R) n)
             ( scalars)
-            ( trivial-tuple-Ring R n))
-
+            ( trivial-tuple-Ring R n)))
   is-linearly-independent-tuple-left-module-Ring : UU (l1 ⊔ l2)
   is-linearly-independent-tuple-left-module-Ring =
     type-Prop is-linearly-independent-tuple-left-module-prop-Ring
