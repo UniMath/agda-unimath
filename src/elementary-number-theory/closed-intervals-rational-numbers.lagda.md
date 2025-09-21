@@ -32,7 +32,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-A closed interval in the rational numbers is a
+A
+{{#concept "closed interval" Disambiguation="in the rational numbers" Agda=interval-ℚ}}
+in the rational numbers is a
 [closed interval](order-theory.closed-intervals-posets.md) in the
 [poset](elementary-number-theory.inequality-rational-numbers.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md).
