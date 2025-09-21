@@ -84,7 +84,7 @@ module _
     type-Prop is-linearly-independent-tuple-left-module-prop-Ring
 ```
 
-### Linearly independent tuple in a left-module over a ring
+### Linearly independent tuple in a left module over a ring
 
 ```agda
 linearly-independent-tuple-left-module-Ring :
