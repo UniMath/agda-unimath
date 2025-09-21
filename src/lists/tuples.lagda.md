@@ -166,14 +166,14 @@ module _
   extensionality-tuple : (n : ℕ) → (u v : tuple A n) → Id u v ≃ Eq-tuple n u v
   extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
 
-  elements-equal-tuple :
+  eq-component-eq-tuple :
     (n : ℕ) →
     (i : Fin n) →
     (u : tuple A n) →
     (v : tuple A n) →
     u ＝ v →
     component-tuple n u i ＝ component-tuple n v i
-  elements-equal-tuple n i u v refl = refl
+  eq-component-eq-tuple n i u v refl = refl
 ```
 
 ### The type of tuples of elements in a truncated type is truncated

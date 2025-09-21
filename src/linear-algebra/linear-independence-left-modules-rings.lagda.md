@@ -210,7 +210,7 @@ module _
               ( j))
             ( i)
           by
-            elements-equal-tuple
+            eq-component-eq-tuple
               ( n)
               ( i)
               ( trivial-tuple-Ring R n)
