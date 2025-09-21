@@ -415,18 +415,6 @@ module _
   one-Ring : type-Ring R
   one-Ring = unit-Monoid multiplicative-monoid-Ring
 
-  zero-is-one-prop-Ring : Prop l
-  zero-is-one-prop-Ring = Id-Prop (set-Ring R) (zero-Ring R) one-Ring
-
-  zero-is-one-Ring : UU l
-  zero-is-one-Ring = type-Prop zero-is-one-prop-Ring
-
-  zero-is-not-one-prop-Ring : Prop l
-  zero-is-not-one-prop-Ring = neg-Prop zero-is-one-prop-Ring
-
-  zero-is-not-one-Ring : UU l
-  zero-is-not-one-Ring = type-Prop zero-is-not-one-prop-Ring
-
   left-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R one-Ring x) x
   left-unit-law-mul-Ring = left-unit-law-mul-Monoid multiplicative-monoid-Ring
 

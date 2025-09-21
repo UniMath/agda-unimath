@@ -32,6 +32,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import ring-theory.rings
+open import ring-theory.trivial-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -189,7 +190,7 @@ module _
     {! !}
 
   linearly-dependent-repeated-element-tuple-left-module-Ring :
-    (zero-is-not-one-Ring R) →
+    (is-nontrivial-Ring R) →
     (n : ℕ) →
     (vectors : tuple (type-left-module-Ring R M) n) →
     (i j : Fin n) →
