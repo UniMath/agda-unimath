@@ -711,29 +711,3 @@ ring-structure-ring :
 pr1 (ring-structure-ring X (p , q)) = abelian-group-structure-abelian-group X p
 pr2 (ring-structure-ring X (p , q)) = q
 ```
-
-### Trivial tuple
-
-```agda
-trivial-tuple-Ring :
-  {l : Level} → (R : Ring l) → (n : ℕ) → tuple (type-Ring R) n
-trivial-tuple-Ring R zero-ℕ = empty-tuple
-trivial-tuple-Ring R (succ-ℕ n) =
-  zero-Ring R ∷ trivial-tuple-Ring R n
-```
-
-## Properties
-
-### Any component of the trivial tuple is the zero element
-
-```agda
-zero-component-trivial-tuple :
-  {l : Level} →
-  {R : Ring l}
-  (n : ℕ) →
-  (i : Fin n) →
-  zero-Ring R ＝ component-tuple n (trivial-tuple-Ring R n) i
-zero-component-trivial-tuple (succ-ℕ n) (inr _) = refl
-zero-component-trivial-tuple (succ-ℕ n) (inl i) =
-  zero-component-trivial-tuple n i
-```

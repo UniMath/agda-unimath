@@ -33,6 +33,7 @@ open import lists.tuples
 
 open import ring-theory.rings
 open import ring-theory.trivial-rings
+open import ring-theory.tuples-in-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -78,7 +79,7 @@ module _
           ( Id-Prop
             ( tuple-Set (set-Ring R) n)
             ( scalars)
-            ( trivial-tuple-Ring R n)))
+            ( zero-tuple-type-Ring R n)))
   is-linearly-independent-tuple-left-module-Ring : UU (l1 ⊔ l2)
   is-linearly-independent-tuple-left-module-Ring =
     type-Prop is-linearly-independent-tuple-left-module-prop-Ring
@@ -170,7 +171,7 @@ module _
     n i j =
     ( with-value-tuple i
       ( one-Ring R)
-      ( with-value-tuple j (neg-one-Ring R) (trivial-tuple-Ring R n)))
+      ( with-value-tuple j (neg-one-Ring R) (zero-tuple-type-Ring R n)))
 
   gives-zero-linearly-dependent-repeated-element-tuple :
     (n : ℕ) →
@@ -202,8 +203,8 @@ module _
     zero-is-not-one
       ( equational-reasoning
         zero-Ring R
-        ＝ component-tuple n (trivial-tuple-Ring R n) i
-          by zero-component-trivial-tuple n i
+        ＝ component-tuple n (zero-tuple-type-Ring R n) i
+          by zero-component-zero-tuple-type-Ring n i
         ＝ component-tuple n
             ( non-trivial-tuple-linearly-dependent-repeated-element-tuple-left-module-Ring
               ( n)
@@ -214,7 +215,7 @@ module _
             eq-component-eq-tuple
               ( n)
               ( i)
-              ( trivial-tuple-Ring R n)
+              ( zero-tuple-type-Ring R n)
               ( non-trivial-tuple-linearly-dependent-repeated-element-tuple-left-module-Ring
                 ( n)
                 ( i)
@@ -234,13 +235,13 @@ module _
                     ( identity))))
         ＝ component-tuple n
           ( with-value-tuple i (one-Ring R)
-            ( with-value-tuple j (neg-one-Ring R) (trivial-tuple-Ring R n)))
+            ( with-value-tuple j (neg-one-Ring R) (zero-tuple-type-Ring R n)))
           ( i)
           by refl
         ＝ one-Ring R
           by
             component-tuple-with-value-identity-tuple
-              ( with-value-tuple j (neg-one-Ring R) (trivial-tuple-Ring R n))
+              ( with-value-tuple j (neg-one-Ring R) (zero-tuple-type-Ring R n))
               ( i)
               ( one-Ring R))
 ```

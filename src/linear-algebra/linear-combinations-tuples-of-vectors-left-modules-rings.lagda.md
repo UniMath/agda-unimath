@@ -21,6 +21,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import ring-theory.rings
+open import ring-theory.tuples-in-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -308,7 +309,7 @@ module _
     (n : ℕ) →
     (vectors : tuple (type-left-module-Ring R M) n) →
     linear-combination-tuple-left-module-Ring R M
-      ( trivial-tuple-Ring R n)
+      ( zero-tuple-type-Ring R n)
       ( vectors) ＝
     zero-left-module-Ring R M
   zero-trivial-tuple-linear-combination-tuple-left-module-Ring n empty-tuple =
@@ -317,24 +318,24 @@ module _
     (succ-ℕ n) (x ∷ vectors) =
     equational-reasoning
     linear-combination-tuple-left-module-Ring R M
-      ( zero-Ring R ∷ trivial-tuple-Ring R n)
+      ( zero-Ring R ∷ zero-tuple-type-Ring R n)
       ( x ∷ vectors)
     ＝ add-left-module-Ring R M
       ( linear-combination-tuple-left-module-Ring R M
-        ( trivial-tuple-Ring R n)
+        ( zero-tuple-type-Ring R n)
         ( vectors))
       ( mul-left-module-Ring R M (zero-Ring R) x)
       by refl
     ＝ add-left-module-Ring R M
       ( linear-combination-tuple-left-module-Ring R M
-        ( trivial-tuple-Ring R n)
+        ( zero-tuple-type-Ring R n)
         ( vectors))
       ( zero-left-module-Ring R M)
       by
         ap
           ( λ y → add-left-module-Ring R M
             ( linear-combination-tuple-left-module-Ring R M
-              ( trivial-tuple-Ring R n)
+              ( zero-tuple-type-Ring R n)
               ( vectors))
             ( y))
           (left-zero-law-mul-left-module-Ring R M x)
@@ -365,22 +366,22 @@ module _
     (vectors : tuple (type-left-module-Ring R M) n) →
     (i : Fin n) →
     linear-combination-tuple-left-module-Ring R M
-      ( with-value-tuple i r (trivial-tuple-Ring R n))
+      ( with-value-tuple i r (zero-tuple-type-Ring R n))
       ( vectors) ＝
     mul-left-module-Ring R M r (component-tuple n vectors i)
   component-with-value-tuple-trivial-tuple-linear-combination-tuple-left-module-Ring
     (succ-ℕ n) r (x ∷ vectors) (inr _) =
     equational-reasoning
     linear-combination-tuple-left-module-Ring R M
-      ( with-value-tuple (inr _) r (trivial-tuple-Ring R (succ-ℕ n)))
+      ( with-value-tuple (inr _) r (zero-tuple-type-Ring R (succ-ℕ n)))
       ( x ∷ vectors)
     ＝ linear-combination-tuple-left-module-Ring R M
-      ( r ∷ (trivial-tuple-Ring R n))
+      ( r ∷ (zero-tuple-type-Ring R n))
       ( x ∷ vectors)
       by refl
     ＝ add-left-module-Ring R M
       ( linear-combination-tuple-left-module-Ring R M
-        ( trivial-tuple-Ring R n)
+        ( zero-tuple-type-Ring R n)
         ( vectors))
       ( mul-left-module-Ring R M r x)
       by refl
@@ -401,37 +402,37 @@ module _
     (succ-ℕ n) r (x ∷ vectors) (inl i) =
     equational-reasoning
     linear-combination-tuple-left-module-Ring R M
-      ( with-value-tuple (inl i) r (trivial-tuple-Ring R (succ-ℕ n)))
+      ( with-value-tuple (inl i) r (zero-tuple-type-Ring R (succ-ℕ n)))
       ( x ∷ vectors)
     ＝ linear-combination-tuple-left-module-Ring R M
-      ( zero-Ring R ∷ (with-value-tuple i r (trivial-tuple-Ring R n)))
+      ( zero-Ring R ∷ (with-value-tuple i r (zero-tuple-type-Ring R n)))
       ( x ∷ vectors)
       by refl
     ＝ add-left-module-Ring R M
       ( linear-combination-tuple-left-module-Ring R M
-        ( with-value-tuple i r (trivial-tuple-Ring R n))
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
         ( vectors))
       ( mul-left-module-Ring R M (zero-Ring R) x)
       by refl
     ＝ add-left-module-Ring R M
       ( linear-combination-tuple-left-module-Ring R M
-        ( with-value-tuple i r (trivial-tuple-Ring R n))
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
         ( vectors))
       ( zero-left-module-Ring R M)
       by
         ap
           ( λ y → add-left-module-Ring R M
             ( linear-combination-tuple-left-module-Ring R M
-              ( with-value-tuple i r (trivial-tuple-Ring R n))
+              ( with-value-tuple i r (zero-tuple-type-Ring R n))
               ( vectors))
             ( y))
           ( left-zero-law-mul-left-module-Ring R M x)
     ＝ linear-combination-tuple-left-module-Ring R M
-        ( with-value-tuple i r (trivial-tuple-Ring R n))
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
         ( vectors)
       by right-unit-law-add-left-module-Ring R M
         ( linear-combination-tuple-left-module-Ring R M
-          ( with-value-tuple i r (trivial-tuple-Ring R n))
+          ( with-value-tuple i r (zero-tuple-type-Ring R n))
           ( vectors))
     ＝ mul-left-module-Ring R M r
       ( component-tuple (succ-ℕ n) (x ∷ vectors) (inl i))
