@@ -106,7 +106,7 @@ module _
   tuple-linearly-independent-tuple = pr1 vectors
 ```
 
-### The condition of a subset being linearly independent
+### The condition on a subset of being linearly independent
 
 ```agda
 module _
