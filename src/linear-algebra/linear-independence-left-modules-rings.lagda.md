@@ -131,7 +131,7 @@ module _
     type-Prop is-linearly-independent-subset-left-module-prop-Ring
 ```
 
-### Linearly independent subset of a left module over a ring
+### Linearly independent subsets of a left module over a ring
 
 ```agda
 linearly-independent-subset-left-module-Ring :
