@@ -58,7 +58,7 @@ open import order-theory.total-orders
 Given two [intervals](elementary-number-theory.intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
-[Minkowski product](group-theory.minkowski-multiplications-commutative-monoids.md)
+[Minkowski product](group-theory.minkowski-multiplication-commutative-monoids.md)
 of those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
 agrees with the interval `[min(ac, ad, bc, bd), max(ac, ad, bc, bd)]`.
 
