@@ -30,6 +30,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.precomposition-functions
+open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
@@ -262,6 +263,22 @@ module _
   is-truncation-equivalence-map-section k (s , h) =
     is-truncation-equivalence-right-factor f s
       ( is-truncation-equivalence-is-equiv (f ∘ s) (is-equiv-htpy-id h))
+```
+
+### Retractions of `k`-equivalences are `k`-equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-truncation-equivalence-map-retraction :
+    (k : 𝕋) (r : retraction f) →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k (map-retraction f r)
+  is-truncation-equivalence-map-retraction k (r , h) =
+    is-truncation-equivalence-left-factor r f
+      ( is-truncation-equivalence-is-equiv (r ∘ f) (is-equiv-htpy-id h))
 ```
 
 ### Composing `k`-equivalences with equivalences
