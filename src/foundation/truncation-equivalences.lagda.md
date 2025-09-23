@@ -123,7 +123,7 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
         ( H _ X))
 ```
 
-### An equivalence is a `k`-equivalence for all `k`
+### Equivalences are `k`-equivalences for all `k`
 
 ```agda
 module _
@@ -133,6 +133,32 @@ module _
   is-truncation-equivalence-is-equiv :
     is-equiv f → is-truncation-equivalence k f
   is-truncation-equivalence-is-equiv e = is-equiv-map-equiv-trunc k (f , e)
+```
+
+### The identity map is a `k`-equivalence for all `k`
+
+```agda
+is-truncation-equivalence-id :
+  {l : Level} {k : 𝕋} {A : UU l} → is-truncation-equivalence k (id' A)
+is-truncation-equivalence-id = is-truncation-equivalence-is-equiv id is-equiv-id
+```
+
+### The `k`-equivalences are closed under homotopies
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f g : A → B}
+  where
+
+  is-truncation-equivalence-htpy :
+    f ~ g → is-truncation-equivalence k g → is-truncation-equivalence k f
+  is-truncation-equivalence-htpy H =
+    is-equiv-htpy (map-trunc k g) (htpy-trunc H)
+
+  is-truncation-equivalence-htpy' :
+    f ~ g → is-truncation-equivalence k f → is-truncation-equivalence k g
+  is-truncation-equivalence-htpy' H =
+    is-equiv-htpy' (map-trunc k f) (htpy-trunc H)
 ```
 
 ### Every `k`-connected map is a `k`-equivalence
@@ -164,7 +190,7 @@ module _
   is-truncation-equivalence-comp g f ef eg =
     is-equiv-htpy
       ( map-trunc k g ∘ map-trunc k f)
-        ( preserves-comp-map-trunc k g f)
+      ( preserves-comp-map-trunc k g f)
       ( is-equiv-comp (map-trunc k g) (map-trunc k f) ef eg)
 
   truncation-equivalence-comp :
@@ -191,14 +217,14 @@ module _
 
   is-truncation-equivalence-left-factor :
     is-truncation-equivalence k f → is-truncation-equivalence k g
-  is-truncation-equivalence-left-factor ef =
+  is-truncation-equivalence-left-factor =
     is-equiv-left-factor
       ( map-trunc k g)
       ( map-trunc k f)
-      ( is-equiv-htpy
+      ( is-equiv-htpy'
         ( map-trunc k (g ∘ f))
-        ( inv-htpy (preserves-comp-map-trunc k g f)) e)
-      ( ef)
+        ( preserves-comp-map-trunc k g f)
+        ( e))
 
   is-truncation-equivalence-right-factor :
     is-truncation-equivalence k g → is-truncation-equivalence k f
@@ -207,9 +233,9 @@ module _
       ( map-trunc k g)
       ( map-trunc k f)
       ( eg)
-      ( is-equiv-htpy
+      ( is-equiv-htpy'
         ( map-trunc k (g ∘ f))
-        ( inv-htpy (preserves-comp-map-trunc k g f))
+        ( preserves-comp-map-trunc k g f)
         ( e))
 ```
 
