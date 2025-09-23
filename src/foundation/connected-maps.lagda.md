@@ -204,6 +204,24 @@ module _
   is-neg-two-connected-map b = is-neg-two-connected (fiber f b)
 ```
 
+### Connected maps are closed under homotopies
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f g : A → B}
+  where
+
+  is-connected-map-htpy :
+    (f ~ g) → is-connected-map k g → is-connected-map k f
+  is-connected-map-htpy H G x =
+    is-connected-equiv' (equiv-fiber-htpy H x) (G x)
+
+  is-connected-map-htpy' :
+    (f ~ g) → is-connected-map k f → is-connected-map k g
+  is-connected-map-htpy' H F x =
+    is-connected-equiv (equiv-fiber-htpy H x) (F x)
+```
+
 ### Equivalences are `k`-connected for any `k`
 
 ```agda
@@ -225,6 +243,22 @@ module _
     (A ≃ B) → connected-map k A B
   pr1 (connected-map-equiv e) = map-equiv e
   pr2 (connected-map-equiv e) = is-connected-map-equiv e
+```
+
+### The identity map is `k`-connected for every `k`
+
+```agda
+is-connected-map-id :
+  {l : Level} {k : 𝕋} {A : UU l} → is-connected-map k (id' A)
+is-connected-map-id = is-connected-map-equiv id-equiv
+
+is-connected-map-htpy-id :
+  {l : Level} {k : 𝕋} {A : UU l} {f : A → A} → f ~ id → is-connected-map k f
+is-connected-map-htpy-id H = is-connected-map-htpy _ H is-connected-map-id
+
+is-connected-map-htpy-id' :
+  {l : Level} {k : 𝕋} {A : UU l} {f : A → A} → id ~ f → is-connected-map k f
+is-connected-map-htpy-id' H = is-connected-map-htpy' _ H is-connected-map-id
 ```
 
 ### A `(k+1)`-connected map is `k`-connected

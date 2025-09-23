@@ -213,6 +213,22 @@ module _
         ( e))
 ```
 
+### Sections of `k`-equivalences are `k`-equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-truncation-equivalence-map-section :
+    (k : 𝕋) (s : section f) →
+    is-truncation-equivalence k f →
+    is-truncation-equivalence k (map-section f s)
+  is-truncation-equivalence-map-section k (s , h) =
+    is-truncation-equivalence-right-factor f s
+      ( is-truncation-equivalence-is-equiv (f ∘ s) (is-equiv-htpy-id h))
+```
+
 ### Composing `k`-equivalences with equivalences
 
 ```agda
@@ -452,6 +468,20 @@ module _
 
 This is an instance of Proposition 2.31 in {{#cite CORS20}}.
 
+**Proof.** Assume $f$ is $k$-connected. We want to show that the fibers of $g$
+are $k+1$-connected, so let $c$ be an element of the codomain of $g$. The fibers
+of the composite $g ∘ f$ compute as
+
+$$
+  \operatorname{fiber}_{g\circ f}(c) ≃
+  \sum_{(b , p) : \operatorname{fiber}_{g}(c)}{\operatorname{fiber}_{f}(b)}.
+$$
+
+By the previous lemma, since $\operatorname{fiber}_{g\circ f}(c)$ is
+$k+1$-connected, $\operatorname{fiber}_{g}(c)$ is $k+1$-connected if the first
+projection map of this type is $k$-connected, and its fibers compute to the
+fibers of $f$ so we are done. ∎
+
 ```agda
 module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -480,10 +510,35 @@ module _
 
 ### A `k`-equivalence with a section is `k`-connected
 
+**Proof.** If $k ≐ -2$ notice that every map is $-2$-connected. So let
+$k ≐ n + 1$ for some truncation level $n$ and let $f$ be our $k$-equivalence
+with a section. By assumption, we have a commuting triangle of maps
+
+```text
+        A
+      ∧   \
+   s /     \ f
+    /       ∨
+  B ======== B.
+```
+
+By the previous lemma, since the identity map is $k$-connected, it thus suffices
+to show that $s$ is $n$-connected. But by the cancellation property of
+$n+1$-equivalences $s$ is a $n+1$-equivalence and $n+1$-equivalences are in
+particular $n$-connected. ∎
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
+
+  is-connected-map-section-is-truncation-equivalence-succ :
+    (k : 𝕋) (s : section f) →
+    is-truncation-equivalence (succ-𝕋 k) f →
+    is-connected-map k (map-section f s)
+  is-connected-map-section-is-truncation-equivalence-succ k (s , h) e =
+    is-connected-map-is-succ-truncation-equivalence s
+    ( is-truncation-equivalence-map-section (succ-𝕋 k) (s , h) e)
 
   is-connected-map-is-truncation-equivalence-section :
     (k : 𝕋) →
@@ -492,13 +547,8 @@ module _
     is-neg-two-connected-map f
   is-connected-map-is-truncation-equivalence-section (succ-𝕋 k) (s , h) e =
     is-connected-map-right-factor-is-succ-connected-map-right-factor f s
-      ( is-connected-map-is-equiv (is-equiv-htpy id h is-equiv-id))
-      ( is-connected-map-is-succ-truncation-equivalence s
-        ( is-truncation-equivalence-right-factor f s
-          ( is-truncation-equivalence-is-equiv
-            ( f ∘ s)
-            ( is-equiv-htpy id h is-equiv-id))
-          ( e)))
+      ( is-connected-map-htpy-id h)
+      ( is-connected-map-section-is-truncation-equivalence-succ k (s , h) e)
 ```
 
 ## References
