@@ -1,7 +1,7 @@
 # Shifting sequences
 
 ```agda
-module foundation.shifting-sequences where
+module lists.shifting-sequences where
 ```
 
 <details><summary>Imports</summary>

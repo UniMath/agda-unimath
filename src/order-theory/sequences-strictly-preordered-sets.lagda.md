@@ -7,8 +7,9 @@ module order-theory.sequences-strictly-preordered-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.sequences
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import order-theory.strictly-preordered-sets
 ```
@@ -20,7 +21,7 @@ open import order-theory.strictly-preordered-sets
 A
 {{#concept "sequence" Disambiguation="in a strictly preordered set" Agda=type-sequence-Strictly-Preordered-Set}}
 in a [strictly preordered set](order-theory.strictly-preordered-sets.md) is a
-[sequence](foundation.sequences.md) in its underlying type.
+[sequence](lists.sequences.md) in its underlying type.
 
 ## Definition
 

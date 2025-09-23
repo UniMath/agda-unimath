@@ -29,7 +29,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A homomorphism between two finite species is a pointwise family of maps.
+A
+{{#concept "homomorphism" Disambiguation="between finite species" Agda=hom-finite-species}}
+between two [finite species](species.species-of-finite-types.md) is a pointwise
+family of maps.
 
 ## Definitions
 
@@ -48,7 +51,7 @@ hom-finite-species {l1} F G =
 ```agda
 id-hom-finite-species :
   {l1 l2 : Level} (F : finite-species l1 l2) → hom-finite-species F F
-id-hom-finite-species F = λ X x → x
+id-hom-finite-species F X = id
 ```
 
 ### Composition of morphisms of finite species
@@ -58,7 +61,7 @@ comp-hom-finite-species :
   {l1 l2 l3 l4 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (H : finite-species l1 l4) → hom-finite-species G H →
   hom-finite-species F G → hom-finite-species F H
-comp-hom-finite-species F G H f g X = (f X) ∘ (g X)
+comp-hom-finite-species F G H f g X = f X ∘ g X
 ```
 
 ### Homotopies of morphisms of finite species
@@ -68,7 +71,7 @@ htpy-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →
   (hom-finite-species F G) → (hom-finite-species F G) →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-htpy-hom-finite-species {l1} F G f g = (X : Finite-Type l1) → (f X) ~ (g X)
+htpy-hom-finite-species {l1} F G f g = (X : Finite-Type l1) → f X ~ g X
 
 refl-htpy-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →

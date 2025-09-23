@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-propositional-truncation
@@ -235,6 +236,16 @@ surjection-retract :
   A retract-of B → B ↠ A
 surjection-retract R =
   ( map-retraction-retract R , is-surjective-has-section (section-retract R))
+```
+
+### If an empty type has a surjection into another type, that type is empty
+
+```agda
+abstract
+  is-empty-surjection :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-empty A → is-empty B
+  is-empty-surjection A↠B ¬A b =
+    rec-trunc-Prop empty-Prop (¬A ∘ pr1) (is-surjective-map-surjection A↠B b)
 ```
 
 ### Any split surjective map is surjective
@@ -604,9 +615,7 @@ is-trunc-map-precomp-Π-is-surjective :
 is-trunc-map-precomp-Π-is-surjective k H =
   is-trunc-map-precomp-Π-is-connected-map
     ( neg-one-𝕋)
-    ( succ-𝕋 k)
     ( k)
-    ( refl)
     ( is-neg-one-connected-map-is-surjective H)
 ```
 

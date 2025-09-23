@@ -148,7 +148,7 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     """Render the dependency graph using Graphviz."""
     # Fetch GitHub labels and colors
     label_colors = fetch_github_labels(repo)
-    eprint("Label colors:", label_colors)
+    # eprint("Label colors:", label_colors)
 
     dot = graphviz.Digraph(engine="sfdp", format=format)
     dot.attr(splines="false", overlap="prism10000", bgcolor="#FFFFFF00", K="0.3", repulsiveforce="0.3") #sfdp

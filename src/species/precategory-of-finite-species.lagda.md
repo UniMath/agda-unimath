@@ -8,6 +8,7 @@ module species.precategory-of-finite-species where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
@@ -24,7 +25,9 @@ The
 consists of [finite species](species.species-of-finite-types.md) and
 [homomorphisms of finite species](species.morphisms-finite-species.md).
 
-## Definition
+## Definitions
+
+### The large precategories of finite species
 
 ```agda
 finite-species-Large-Precategory :
@@ -40,4 +43,13 @@ finite-species-Large-Precategory l =
       associative-comp-hom-finite-species F G H K)
     ( λ {l1} {l2} {F} {G} → left-unit-law-comp-hom-finite-species F G)
     ( λ {l1} {l2} {F} {G} → right-unit-law-comp-hom-finite-species F G)
+```
+
+### The small precategories of finite species
+
+```agda
+finite-species-Precategory :
+  (l1 l2 : Level) → Precategory (lsuc l1 ⊔ lsuc l2) (lsuc l1 ⊔ l2)
+finite-species-Precategory l1 =
+  precategory-Large-Precategory (finite-species-Large-Precategory l1)
 ```

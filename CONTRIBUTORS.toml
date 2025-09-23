@@ -275,3 +275,9 @@ github = "arnoudvanderleer"
 displayName = "Ben Connors"
 usernames = [ "Ben Connors" ]
 github = "ben-connors"
+
+[[contributors]]
+displayName = "Šimon Brandner"
+usernames = ["Šimon Brandner"]
+github = "SimonBrandner"
+homepage = "https://simonbrandner.cz/"

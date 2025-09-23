@@ -176,6 +176,11 @@ is-effective-cardinality :
 is-effective-cardinality X Y =
   ( equiv-trunc-Prop (extensionality-Set X Y)) ∘e
   ( is-effective-unit-trunc-Set (Set _) X Y)
+
+eq-mere-equiv-cardinality :
+  {l : Level} (X Y : Set l) →
+  mere-equiv (type-Set X) (type-Set Y) → cardinality X ＝ cardinality Y
+eq-mere-equiv-cardinality X Y = map-inv-equiv (is-effective-cardinality X Y)
 ```
 
 ### Assuming excluded middle we can show that `leq-cardinality` is a partial order
@@ -206,10 +211,10 @@ antisymmetric-leq-cardinality {l1} X Y lem =
             ( leq-cardinality v (cardinality a))
             ( Id-Prop (cardinal-Set l1) (cardinality a) v))))
     ( λ b a<b b<a →
-      map-inv-equiv (is-effective-cardinality a b)
-        (antisymmetric-mere-emb lem
-        (inv-unit-leq-cardinality _ _ a<b)
-        (inv-unit-leq-cardinality _ _ b<a)))
+      eq-mere-equiv-cardinality a b
+        ( antisymmetric-mere-emb lem
+          ( inv-unit-leq-cardinality _ _ a<b)
+          ( inv-unit-leq-cardinality _ _ b<a)))
     ( Y))
   ( X)
 ```

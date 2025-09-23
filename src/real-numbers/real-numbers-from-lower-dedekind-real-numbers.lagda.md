@@ -21,6 +21,8 @@ open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -127,13 +129,9 @@ module _
       let
         r = mediant-ℚ p q
       in
-        elim-disjunction
-          ( cut-lower-ℝ x p ∨
-            upper-cut-real-lower-ℝ q)
-          ( inl-disjunction)
-          ( λ r∉L →
-            inr-disjunction
-              ( intro-exists r ( le-right-mediant-ℚ p q p<q , r∉L)))
+        map-disjunction
+          ( id)
+          ( λ r∉L → intro-exists r ( le-right-mediant-ℚ p q p<q , r∉L))
           ( L p r (le-left-mediant-ℚ p q p<q))
 
   real-lower-ℝ : ℝ l

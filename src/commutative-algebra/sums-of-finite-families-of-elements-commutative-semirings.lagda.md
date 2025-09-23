@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.automorphisms
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -78,6 +79,27 @@ module _
     sum-finite-Commutative-Semiring A unit-Finite-Type f ＝ f star
   sum-unit-finite-Commutative-Semiring =
     sum-unit-finite-Semiring (semiring-Commutative-Semiring A)
+```
+
+### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Commutative-Semiring :
+      (f : type-Finite-Type I → type-Commutative-Semiring A) →
+      sum-finite-Commutative-Semiring A I f ＝ f i
+    sum-finite-is-contr-Commutative-Semiring =
+      sum-finite-is-contr-Semiring
+        ( semiring-Commutative-Semiring A)
+        ( I)
+        ( is-contr-I)
+        ( i)
 ```
 
 ### Sums are homotopy invariant

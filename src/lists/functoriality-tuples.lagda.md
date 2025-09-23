@@ -62,3 +62,40 @@ module _
   binary-map-tuple f empty-tuple empty-tuple = empty-tuple
   binary-map-tuple f (x ∷ v) (y ∷ w) = f x y ∷ binary-map-tuple f v w
 ```
+
+## Properties
+
+### The action on maps of tuples preserves identity maps
+
+```agda
+preserves-id-map-tuple :
+  {l : Level} (n : ℕ) {A : UU l} (x : tuple A n) → x ＝ map-tuple id x
+preserves-id-map-tuple zero-ℕ empty-tuple = refl
+preserves-id-map-tuple (succ-ℕ n) (x ∷ xs) =
+  eq-Eq-tuple
+    ( succ-ℕ n)
+    ( x ∷ xs)
+    ( map-tuple id (x ∷ xs))
+    ( refl ,
+      Eq-eq-tuple n xs (map-tuple id xs) (preserves-id-map-tuple n xs))
+```
+
+### The action on maps of tuples preserves composition
+
+```agda
+preserves-comp-map-tuple :
+  {l1 l2 l3 : Level} (n : ℕ) {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) (g : B → C) (x : tuple A n) →
+  map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
+preserves-comp-map-tuple zero-ℕ f g empty-tuple = refl
+preserves-comp-map-tuple (succ-ℕ n) f g (x ∷ xs) =
+  eq-Eq-tuple
+    ( succ-ℕ n)
+    ( map-tuple g (map-tuple f (x ∷ xs)))
+    ( map-tuple (g ∘ f) (x ∷ xs))
+    ( refl ,
+      Eq-eq-tuple n
+        ( map-tuple g (map-tuple f xs))
+        ( map-tuple (g ∘ f) xs)
+        ( preserves-comp-map-tuple n f g xs))
+```

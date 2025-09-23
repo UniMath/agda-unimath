@@ -16,6 +16,7 @@ open import elementary-number-theory.multiplication-positive-and-negative-intege
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.decidable-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -46,6 +47,10 @@ module _
   is-prop-is-positive-fraction-ℤ : is-prop is-positive-fraction-ℤ
   is-prop-is-positive-fraction-ℤ =
     is-prop-is-positive-ℤ (numerator-fraction-ℤ x)
+
+decidable-subtype-positive-fraction-ℤ : decidable-subtype lzero fraction-ℤ
+decidable-subtype-positive-fraction-ℤ x =
+  decidable-subtype-positive-ℤ (numerator-fraction-ℤ x)
 ```
 
 ## Properties

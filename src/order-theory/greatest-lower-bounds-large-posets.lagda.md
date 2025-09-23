@@ -7,12 +7,14 @@ module order-theory.greatest-lower-bounds-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-posets
 open import order-theory.large-posets
 open import order-theory.lower-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>
@@ -174,4 +176,47 @@ module _
       ↔ leq-Π-Large-Poset P y x
         by
         iff-Π-iff-family (λ i → H i (y i))
+```
+
+### Greatest lower bounds of families of elements are lower bounds
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} {I : UU l1} {x : I → type-Large-Poset P l2}
+  where
+
+  is-lower-bound-is-greatest-lower-bound-family-of-elements-Large-Poset :
+    {l3 : Level} {y : type-Large-Poset P l3} →
+    is-greatest-lower-bound-family-of-elements-Large-Poset P x y →
+    is-lower-bound-family-of-elements-Large-Poset P x y
+  is-lower-bound-is-greatest-lower-bound-family-of-elements-Large-Poset H =
+    backward-implication (H _) (refl-leq-Large-Poset P _)
+```
+
+### Greatest lower bounds of families of elements are unique up to similarity of elements
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} {I : UU l1} {x : I → type-Large-Poset P l2}
+  where
+
+  sim-is-greatest-lower-bound-family-of-elements-Large-Poset :
+    {l3 l4 : Level} {y : type-Large-Poset P l3} {z : type-Large-Poset P l4} →
+    is-greatest-lower-bound-family-of-elements-Large-Poset P x y →
+    is-greatest-lower-bound-family-of-elements-Large-Poset P x z →
+    sim-Large-Poset P y z
+  pr1 (sim-is-greatest-lower-bound-family-of-elements-Large-Poset H K) =
+    forward-implication
+      ( K _)
+      ( is-lower-bound-is-greatest-lower-bound-family-of-elements-Large-Poset
+        P H)
+  pr2 (sim-is-greatest-lower-bound-family-of-elements-Large-Poset H K) =
+    forward-implication
+      ( H _)
+      ( is-lower-bound-is-greatest-lower-bound-family-of-elements-Large-Poset
+        P K)
 ```

@@ -45,7 +45,7 @@ abstract
 abstract
   is-retraction-map-universal-property-bool' :
     {l : Level} {A : UU l} (f : bool → A) →
-    (map-universal-property-bool (ev-true-false A f)) ~ f
+    is-retraction (ev-true-false A) (map-universal-property-bool)
   is-retraction-map-universal-property-bool' f true = refl
   is-retraction-map-universal-property-bool' f false = refl
 

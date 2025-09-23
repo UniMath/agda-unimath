@@ -15,12 +15,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.semigroups
+
+open import lists.sequences
 
 open import ring-theory.rings
 
@@ -34,7 +35,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "convolution" WD="convolution" Disambiguation="of sequences in commutative rings" Agda=convolution-sequence-Commutative-Ring WDID=Q210857}}
-of two [sequences](foundation.sequences.md) `aₙ` and `bₙ` of elements in a
+of two [sequences](lists.sequences.md) `aₙ` and `bₙ` of elements in a
 [commutative ring](commutative-algebra.commutative-rings.md) is the new sequence
 
 ```text

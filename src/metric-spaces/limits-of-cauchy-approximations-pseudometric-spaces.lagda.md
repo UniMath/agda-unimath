@@ -68,6 +68,26 @@ module _
 
 ## Properties
 
+### Saturation of the limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (f : cauchy-approximation-Pseudometric-Space A)
+  (x : type-Pseudometric-Space A)
+  where
+
+  abstract
+    saturated-is-limit-cauchy-approximation-Pseudometric-Space :
+      is-limit-cauchy-approximation-Pseudometric-Space A f x →
+      (ε : ℚ⁺) →
+      neighborhood-Pseudometric-Space A ε
+        ( map-cauchy-approximation-Pseudometric-Space A f ε)
+        ( x)
+    saturated-is-limit-cauchy-approximation-Pseudometric-Space is-lim ε =
+      saturated-neighborhood-Pseudometric-Space A ε _ _ (is-lim ε)
+```
+
 ### Limits of a Cauchy approximations in a pseudometric space are similar
 
 ```agda

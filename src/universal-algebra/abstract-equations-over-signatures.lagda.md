@@ -19,9 +19,9 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-An **abstract equation** over a signature `Sg` is a statement of a form "`x`
-equals `y`", where `x` and `y` are terms over `Sg`. Thus, the data of an
-abstract equation is simply two terms over a common signature.
+An **abstract equation** over a signature `σ` is a statement of a form "`x`
+equals `y`", where `x` and `y` are terms over `σ`. Thus, the data of an abstract
+equation is simply two terms over a common signature.
 
 ## Definitions
 
@@ -29,15 +29,15 @@ abstract equation is simply two terms over a common signature.
 
 ```agda
 module _
-  {l1 : Level} (Sg : signature l1)
+  {l1 : Level} (σ : signature l1)
   where
 
   Abstract-Equation : UU l1
-  Abstract-Equation = Term Sg × Term Sg
+  Abstract-Equation = Term σ × Term σ
 
-  lhs-Abstract-Equation : Abstract-Equation → Term Sg
+  lhs-Abstract-Equation : Abstract-Equation → Term σ
   lhs-Abstract-Equation = pr1
 
-  rhs-Abstract-Equation : Abstract-Equation → Term Sg
+  rhs-Abstract-Equation : Abstract-Equation → Term σ
   rhs-Abstract-Equation = pr2
 ```

@@ -122,6 +122,9 @@ abstract
 
 zero-ℚ⁰⁺ : ℚ⁰⁺
 zero-ℚ⁰⁺ = zero-ℚ , _
+
+one-ℚ⁰⁺ : ℚ⁰⁺
+one-ℚ⁰⁺ = one-ℚ , _
 ```
 
 ## Properties
@@ -386,4 +389,22 @@ abstract
 
 nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
 nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
+```
+
+### Strict inequality on nonnegative rational numbers
+
+```agda
+le-ℚ⁰⁺-Prop : (p q : ℚ⁰⁺) → Prop lzero
+le-ℚ⁰⁺-Prop p q = le-ℚ-Prop (rational-ℚ⁰⁺ p) (rational-ℚ⁰⁺ q)
+
+le-ℚ⁰⁺ : (p q : ℚ⁰⁺) → UU lzero
+le-ℚ⁰⁺ p q = type-Prop (le-ℚ⁰⁺-Prop p q)
+```
+
+### Zero is less than positive rational numbers as nonnegative rational numbers
+
+```agda
+abstract
+  le-zero-nonnegative-ℚ⁰⁺ : (q : ℚ⁺) → le-ℚ⁰⁺ zero-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
+  le-zero-nonnegative-ℚ⁰⁺ (q , pos-q) = le-zero-is-positive-ℚ q pos-q
 ```

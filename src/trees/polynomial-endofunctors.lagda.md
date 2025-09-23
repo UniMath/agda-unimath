@@ -30,8 +30,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-Given a type `A` equipped with a type family `B` over `A`, the
-{{#concept "polynomial endofunctor"}} `𝑃 A B` is defined by
+Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
+`A`, the {{#concept "polynomial endofunctor"}} `𝑃 A B` is defined by
 
 ```text
   X ↦ Σ (x : A), (B x → X)
@@ -115,7 +115,7 @@ module _
     is-retraction-eq-Eq-type-polynomial-endofunctor x x refl
 ```
 
-### The action on morphisms of the polynomial endofunctor
+### The action on maps of the polynomial endofunctor
 
 ```agda
 map-polynomial-endofunctor :
@@ -151,3 +151,11 @@ coh-refl-htpy-polynomial-endofunctor A B f (x , α) =
 
 - [Multivariable polynomial functors](trees.multivariable-polynomial-functors.md)
   for the generalization of polynomial endofunctors to type families.
+- [Cauchy series of species of types](species.cauchy-series-species-of-types.md)
+  are polynomial endofunctors of the form
+  ```text
+    X ↦ Σ (U : Type), S(U) × (U → X)
+  ```
+  In other words, given a [species of types](species.species-of-types.md) `S`,
+  the shapes are types equipped with `S`-structure, and the positions are
+  points.

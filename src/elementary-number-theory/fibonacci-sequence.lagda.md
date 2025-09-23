@@ -26,7 +26,7 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "Fibonacci sequence" WD="Fibonacci sequence" WDID=Q23835349 Agda=Fibonacci-ℕ}}
-is a recursively defined [sequence](foundation.sequences.md) of
+is a recursively defined [sequence](lists.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md) given by the
 equations
 

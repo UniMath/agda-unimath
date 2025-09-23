@@ -17,8 +17,11 @@ open import species.species-of-types
 
 ## Idea
 
-A pointing of a species of types `F` is the species of types `F*` given by
-`F* X := X × (F X)`. In other words, it is the species of pointed `F`-structures
+A
+{{#concept "pointing" Disambiguation="of species of types" Agda=pointing-species-types}}
+of a [species of types](species.species-of-types.md) `F` is the species of types
+`F∗` given by `F∗ X := X × F X`. In other words, it is the species of points and
+`F`-[structures](foundation.structure.md).
 
 ## Definition
 

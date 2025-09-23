@@ -146,6 +146,16 @@ pr2 (equiv-add-redundant-prop is-prop-B f) =
     ( pr1)
     ( λ p → eq-pair refl (eq-is-prop is-prop-B))
     ( refl-htpy)
+
+equiv-remove-redundant-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop B → (f : A → B) → A × B ≃ A
+pr1 (equiv-remove-redundant-prop is-prop-B f) = pr1
+pr2 (equiv-remove-redundant-prop is-prop-B f) =
+  is-equiv-is-invertible
+    ( λ a → (a , f a))
+    ( refl-htpy)
+    ( λ p → eq-pair refl (eq-is-prop is-prop-B))
 ```
 
 ## See also

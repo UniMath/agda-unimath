@@ -1,7 +1,7 @@
 # Partial sequences
 
 ```agda
-module foundation.partial-sequences where
+module lists.partial-sequences where
 ```
 
 <details><summary>Imports</summary>

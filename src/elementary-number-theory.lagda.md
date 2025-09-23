@@ -46,6 +46,7 @@ open import elementary-number-theory.conatural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions public
+open import elementary-number-theory.cross-multiplication-difference-rational-numbers public
 open import elementary-number-theory.cubes-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-total-order-integers public

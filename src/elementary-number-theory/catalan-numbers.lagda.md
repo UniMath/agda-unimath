@@ -24,7 +24,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "Catalan numbers" WD="Catalan number" WDID=Q270513 OEIS=A000108 Agda=catalan-numbers}}
-$C_n$ is a [sequence](foundation.sequences.md) of
+$C_n$ is a [sequence](lists.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md) that occur in
 several combinatorics problems. The sequence starts
 

@@ -18,9 +18,10 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations

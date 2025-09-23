@@ -30,15 +30,20 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The product of two Dirichlet series is the pointwise product.
+The
+{{#concept "product" Disambiguation="of Caucy series of species of types in subuniverses" Agda=product-dirichlet-series-species-subuniverse}}
+of two
+[Dirichlet series](species.dirichlet-series-species-of-types-in-subuniverses.md)
+of
+[species of types in subuniverses](species.species-of-types-in-subuniverses.md)
+is just the pointwise [product](foundation.cartesian-product-types.md).
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 l6 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-products-subuniverse P)
   (H : species-subuniverse-domain l5 P)
   (C2 : preserves-product-species-subuniverse-domain P C1 H)
@@ -74,9 +79,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (C1 : is-closed-under-products-subuniverse P)
   (H : species-subuniverse-domain l5 P)
   (C2 : preserves-product-species-subuniverse-domain P C1 H)
@@ -87,7 +91,39 @@ module _
   (X : UU l5)
   where
 
-  private
+  equiv-dirichlet-series-dirichlet-product-species-subuniverse :
+    dirichlet-series-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+      ( C1)
+      ( H)
+      ( C2)
+      ( dirichlet-product-species-subuniverse P Q C3 S T)
+      ( X) ≃
+    product-dirichlet-series-species-subuniverse P Q C1 H C2 S T X
+  equiv-dirichlet-series-dirichlet-product-species-subuniverse =
+    ( reassociate') ∘e
+    ( equiv-tot
+      ( λ A →
+        equiv-tot
+          ( λ B →
+            ( equiv-product-right
+              ( equiv-up-product ∘e equiv-postcomp X (C2 A B))) ∘e
+            ( left-unit-law-Σ-is-contr
+              ( is-torsorial-equiv-subuniverse'
+                ( P)
+                ( inclusion-subuniverse P A ×
+                  inclusion-subuniverse P B ,
+                  C1
+                    ( is-in-subuniverse-inclusion-subuniverse P A)
+                    ( is-in-subuniverse-inclusion-subuniverse P B)))
+              ( ( inclusion-subuniverse P A × inclusion-subuniverse P B ,
+                  C1
+                    ( is-in-subuniverse-inclusion-subuniverse P A)
+                    ( is-in-subuniverse-inclusion-subuniverse P B)) ,
+                ( id-equiv)))))) ∘e
+    ( reassociate)
+    where
     reassociate :
       dirichlet-series-species-subuniverse
         ( P)
@@ -139,38 +175,4 @@ module _
           (A , B , (s , t) , (fs , ft)))
         ( refl-htpy)
         ( refl-htpy)
-
-  equiv-dirichlet-series-dirichlet-product-species-subuniverse :
-    dirichlet-series-species-subuniverse
-      ( P)
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
-      ( C1)
-      ( H)
-      ( C2)
-      ( dirichlet-product-species-subuniverse P Q C3 S T)
-      ( X) ≃
-    product-dirichlet-series-species-subuniverse P Q C1 H C2 S T X
-  equiv-dirichlet-series-dirichlet-product-species-subuniverse =
-    ( reassociate') ∘e
-    ( ( equiv-tot
-        ( λ A →
-          equiv-tot
-            ( λ B →
-              ( equiv-product
-                ( id-equiv)
-                ( equiv-up-product ∘e equiv-postcomp X (C2 A B))) ∘e
-              left-unit-law-Σ-is-contr
-                ( is-torsorial-equiv-subuniverse'
-                  ( P)
-                  ( inclusion-subuniverse P A ×
-                    inclusion-subuniverse P B ,
-                    C1
-                      ( is-in-subuniverse-inclusion-subuniverse P A)
-                      ( is-in-subuniverse-inclusion-subuniverse P B)))
-                ( ( inclusion-subuniverse P A × inclusion-subuniverse P B ,
-                    C1
-                      ( is-in-subuniverse-inclusion-subuniverse P A)
-                      ( is-in-subuniverse-inclusion-subuniverse P B)) ,
-                  id-equiv)))) ∘e
-      ( reassociate))
 ```

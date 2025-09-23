@@ -68,6 +68,29 @@ module _
 
 ## Properties
 
+### Saturation of the limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f : cauchy-approximation-Metric-Space A)
+  (x : type-Metric-Space A)
+  where
+
+  abstract
+    saturated-is-limit-cauchy-approximation-Metric-Space :
+      is-limit-cauchy-approximation-Metric-Space A f x →
+      (ε : ℚ⁺) →
+      neighborhood-Metric-Space A ε
+        ( map-cauchy-approximation-Metric-Space A f ε)
+        ( x)
+    saturated-is-limit-cauchy-approximation-Metric-Space =
+      saturated-is-limit-cauchy-approximation-Pseudometric-Space
+        ( pseudometric-Metric-Space A)
+        ( f)
+        ( x)
+```
+
 ### Limits in a metric space are unique
 
 ```agda

@@ -36,7 +36,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "left module" WD="left module" WDID="Q120721996" Agda=left-module-Ring}}
+{{#concept "left module" WD="left module" WDID="Q120721996" disambiguation="over a ring" Agda=left-module-Ring}}
 `M` over a [ring](ring-theory.rings.md) `R` consists of an
 [abelian group](group-theory.abelian-groups.md) `M` equipped with an action
 `R → M → M` such that
@@ -82,6 +82,9 @@ module _
 
   type-left-module-Ring : UU l2
   type-left-module-Ring = type-Ab ab-left-module-Ring
+
+  is-set-type-left-module-Ring : is-set type-left-module-Ring
+  is-set-type-left-module-Ring = pr2 set-left-module-Ring
 
   add-left-module-Ring :
     (x y : type-left-module-Ring) → type-left-module-Ring
@@ -131,6 +134,16 @@ module _
       ( add-left-module-Ring x (add-left-module-Ring y z))
   associative-add-left-module-Ring =
     associative-add-Ab ab-left-module-Ring
+```
+
+### Commutativity of addition
+
+```agda
+  commutative-add-left-module-Ring :
+    (x y : type-left-module-Ring) →
+    add-left-module-Ring x y ＝ add-left-module-Ring y x
+  commutative-add-left-module-Ring =
+    commutative-add-Ab ab-left-module-Ring
 ```
 
 ### Unit laws for addition

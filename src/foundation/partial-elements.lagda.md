@@ -86,5 +86,5 @@ This remains to be shown.
 
 - [Copartial elements](foundation.copartial-elements.md)
 - [Partial functions](foundation.partial-functions.md)
-- [Partial sequences](foundation.partial-sequences.md)
+- [Partial sequences](lists.partial-sequences.md)
 - [Total partial functions](foundation.total-partial-functions.md)
