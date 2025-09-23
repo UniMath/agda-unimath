@@ -334,6 +334,24 @@ module _
     is-connected-equiv (inv-compute-fiber-tot f (x , y)) (H (x , y))
 ```
 
+### A map is an equivalence if it is `k`-connected and `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-contr-map-is-connected-map-is-trunc-map :
+    is-trunc-map k f → is-connected-map k f → is-contr-map f
+  is-contr-map-is-connected-map-is-trunc-map H K x =
+    is-contr-is-connected-is-trunc (H x) (K x)
+
+  is-equiv-is-connected-map-is-trunc-map :
+    is-trunc-map k f → is-connected-map k f → is-equiv f
+  is-equiv-is-connected-map-is-trunc-map H K =
+    is-equiv-is-contr-map (is-contr-map-is-connected-map-is-trunc-map H K)
+```
+
 ### Dependent universal property for connected maps
 
 ```agda
@@ -453,7 +471,7 @@ module _
       contraction-is-connected-map-dependent-universal-property-connected-map b
 ```
 
-### The map `unit-trunc {k}` is `k`-connected
+### The unit map of the `k`-truncation is `k`-connected
 
 ```agda
 module _

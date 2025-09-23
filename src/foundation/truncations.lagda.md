@@ -322,23 +322,24 @@ module _
     is-retraction unit-trunc map-inv-unit-trunc
   is-retraction-map-inv-unit-trunc = triangle-universal-property-trunc A id
 
-  is-section-map-inv-unit-trunc :
-    is-section unit-trunc map-inv-unit-trunc
-  is-section-map-inv-unit-trunc =
-    htpy-eq
-      ( pr1
-        ( pair-eq-Σ
-          ( eq-is-prop'
-            ( is-trunc-succ-is-trunc
-              ( neg-two-𝕋)
-              ( universal-property-trunc
-                ( k)
-                ( type-Truncated-Type A)
-                ( trunc k (type-Truncated-Type A))
-                ( unit-trunc)))
-            ( unit-trunc ∘ map-inv-unit-trunc ,
-              unit-trunc ·l is-retraction-map-inv-unit-trunc)
-            ( id , refl-htpy))))
+  abstract
+    is-section-map-inv-unit-trunc :
+      is-section unit-trunc map-inv-unit-trunc
+    is-section-map-inv-unit-trunc =
+      htpy-eq
+        ( pr1
+          ( pair-eq-Σ
+            ( eq-is-prop'
+              ( is-trunc-succ-is-trunc
+                ( neg-two-𝕋)
+                ( universal-property-trunc
+                  ( k)
+                  ( type-Truncated-Type A)
+                  ( trunc k (type-Truncated-Type A))
+                  ( unit-trunc)))
+              ( unit-trunc ∘ map-inv-unit-trunc ,
+                unit-trunc ·l is-retraction-map-inv-unit-trunc)
+              ( id , refl-htpy))))
 
   is-equiv-unit-trunc : is-equiv unit-trunc
   is-equiv-unit-trunc =
@@ -349,8 +350,18 @@ module _
 
   equiv-unit-trunc :
     type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
-  pr1 equiv-unit-trunc = unit-trunc
-  pr2 equiv-unit-trunc = is-equiv-unit-trunc
+  equiv-unit-trunc = (unit-trunc , is-equiv-unit-trunc)
+
+  is-equiv-map-inv-unit-trunc : is-equiv map-inv-unit-trunc
+  is-equiv-map-inv-unit-trunc =
+    is-equiv-is-invertible
+      unit-trunc
+      is-retraction-map-inv-unit-trunc
+      is-section-map-inv-unit-trunc
+
+  inv-equiv-unit-trunc :
+    type-trunc k (type-Truncated-Type A) ≃ type-Truncated-Type A
+  inv-equiv-unit-trunc = (map-inv-unit-trunc , is-equiv-map-inv-unit-trunc)
 ```
 
 ### A contractible type is equivalent to its `k`-truncation

@@ -32,6 +32,7 @@ open import foundation-core.homotopies
 open import foundation-core.precomposition-functions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -377,28 +378,29 @@ module _
         ( map-effectiveness-trunc k (f a) b) ∘
         ( unit-trunc)))
 
-  is-truncation-equivalence-fiber-map-trunc-fiber :
-    is-truncation-equivalence k fiber-map-trunc-fiber
-  is-truncation-equivalence-fiber-map-trunc-fiber =
-    is-truncation-equivalence-comp
-      ( map-Σ-map-base-unit-trunc
-        ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
-      ( tot
-        ( λ a →
-          ( concat (naturality-unit-trunc (succ-𝕋 k) f a) (unit-trunc b)) ∘
-          ( map-effectiveness-trunc k (f a) b) ∘
-          ( unit-trunc)))
-      ( is-truncation-equivalence-is-truncation-equivalence-equiv
-        ( equiv-tot
+  abstract
+    is-truncation-equivalence-fiber-map-trunc-fiber :
+      is-truncation-equivalence k fiber-map-trunc-fiber
+    is-truncation-equivalence-fiber-map-trunc-fiber =
+      is-truncation-equivalence-comp
+        ( map-Σ-map-base-unit-trunc
+          ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
+        ( tot
           ( λ a →
-            ( equiv-concat
-              ( naturality-unit-trunc (succ-𝕋 k) f a)
-              ( unit-trunc b)) ∘e
-            ( effectiveness-trunc k (f a) b)))
-        ( λ (a , p) → a , unit-trunc p)
-        ( is-equiv-map-equiv (equiv-trunc-Σ k)))
-      ( is-truncation-equivalence-map-Σ-map-base-unit-trunc
-        ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
+            ( concat (naturality-unit-trunc (succ-𝕋 k) f a) (unit-trunc b)) ∘
+            ( map-effectiveness-trunc k (f a) b) ∘
+            ( unit-trunc)))
+        ( is-truncation-equivalence-is-truncation-equivalence-equiv
+          ( equiv-tot
+            ( λ a →
+              ( equiv-concat
+                ( naturality-unit-trunc (succ-𝕋 k) f a)
+                ( unit-trunc b)) ∘e
+              ( effectiveness-trunc k (f a) b)))
+          ( λ (a , p) → a , unit-trunc p)
+          ( is-equiv-map-equiv (equiv-trunc-Σ k)))
+        ( is-truncation-equivalence-map-Σ-map-base-unit-trunc
+          ( λ t → map-trunc (succ-𝕋 k) f t ＝ unit-trunc b))
 
   truncation-equivalence-fiber-map-trunc-fiber :
     truncation-equivalence k
@@ -408,6 +410,13 @@ module _
     fiber-map-trunc-fiber
   pr2 truncation-equivalence-fiber-map-trunc-fiber =
     is-truncation-equivalence-fiber-map-trunc-fiber
+
+  equiv-trunc-fiber-map-trunc-fiber :
+    type-trunc k (fiber f b) ≃
+    type-trunc k (fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
+  equiv-trunc-fiber-map-trunc-fiber =
+    equiv-trunc-truncation-equivalence k
+      ( truncation-equivalence-fiber-map-trunc-fiber)
 ```
 
 ### Being `k`-connected is invariant under `k`-equivalences
@@ -423,10 +432,23 @@ module _
   is-connected-is-truncation-equivalence-is-connected f e =
     is-contr-equiv (type-trunc k B) (map-trunc k f , e)
 
+  is-connected-is-truncation-equivalence-is-connected' :
+    (f : A → B) → is-truncation-equivalence k f →
+    is-connected k A → is-connected k B
+  is-connected-is-truncation-equivalence-is-connected' f e =
+    is-contr-equiv' (type-trunc k A) (map-trunc k f , e)
+
   is-connected-truncation-equivalence-is-connected :
     truncation-equivalence k A B → is-connected k B → is-connected k A
   is-connected-truncation-equivalence-is-connected f =
     is-connected-is-truncation-equivalence-is-connected
+      ( map-truncation-equivalence k f)
+      ( is-truncation-equivalence-truncation-equivalence k f)
+
+  is-connected-truncation-equivalence-is-connected' :
+    truncation-equivalence k A B → is-connected k A → is-connected k B
+  is-connected-truncation-equivalence-is-connected' f =
+    is-connected-is-truncation-equivalence-is-connected'
       ( map-truncation-equivalence k f)
       ( is-truncation-equivalence-truncation-equivalence k f)
 ```
@@ -445,7 +467,38 @@ module _
   is-connected-map-is-succ-truncation-equivalence e b =
     is-connected-truncation-equivalence-is-connected
       ( truncation-equivalence-fiber-map-trunc-fiber f b)
-      ( is-connected-is-contr k (is-contr-map-is-equiv e (unit-trunc b)))
+      ( is-connected-map-is-equiv e (unit-trunc b))
+```
+
+### A map is `k`-connected if and only if its `k+1`-truncation is
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-connected-map-trunc-succ-is-succ-connected-domain :
+    is-connected-map k f →
+    is-connected-map k (map-trunc (succ-𝕋 k) f)
+  is-connected-map-trunc-succ-is-succ-connected-domain cf t =
+    apply-universal-property-trunc-Prop
+      ( is-surjective-unit-trunc-succ t)
+      ( is-connected-Prop k (fiber (map-trunc (succ-𝕋 k) f) t))
+      ( λ (b , p) →
+        tr
+          ( λ s → is-connected k (fiber (map-trunc (succ-𝕋 k) f) s))
+          ( p)
+          ( is-connected-truncation-equivalence-is-connected'
+            ( truncation-equivalence-fiber-map-trunc-fiber f b)
+            ( cf b)))
+
+  is-connected-map-is-connected-map-trunc-succ :
+    is-connected-map k (map-trunc (succ-𝕋 k) f) →
+    is-connected-map k f
+  is-connected-map-is-connected-map-trunc-succ cf' b =
+    is-connected-truncation-equivalence-is-connected
+      ( truncation-equivalence-fiber-map-trunc-fiber f b)
+      ( cf' (unit-trunc b))
 ```
 
 ### The codomain of a `k`-connected map is `(k+1)`-connected if its domain is `(k+1)`-connected
@@ -453,53 +506,36 @@ module _
 This follows part of the proof of Proposition 2.31 in {{#cite CORS20}}.
 
 **Proof.** Let $f : A → B$ be a $k$-connected map on a domain that is
-$k+1$-connected. We must show that the truncation of the codomain is
-contractible.
+$k+1$-connected. To show that $B$ is $k+1$-connected it is enough to show that
+$f$ is a $k+1$-equivalence, in other words, that $║f║ₖ₊₁$ is an equivalence. By
+previous computations we know that $║f║ₖ₊₁$ is $k$-truncated since the domain is
+$k+1$-connected, and that $║f║ₖ₊₁$ is $k$-connected since $f$ is $k$-connected,
+so we are done. ∎
 
 ```agda
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-trunc-fiber-map-trunc-is-succ-connected :
-    is-connected (succ-𝕋 k) A →
-    (b : B) →
-    is-trunc k (fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
-  is-trunc-fiber-map-trunc-is-succ-connected c b =
-    is-trunc-equiv k
-      ( map-trunc (succ-𝕋 k) f (center c) ＝ unit-trunc b)
-      ( left-unit-law-Σ-is-contr c (center c))
-      ( is-trunc-type-trunc (map-trunc (succ-𝕋 k) f (center c)) (unit-trunc b))
-
-  is-succ-connected-is-connected-map-is-succ-connected :
-    is-connected (succ-𝕋 k) A →
+  is-truncation-equivalence-succ-is-succ-connected-domain-is-connected-map :
     is-connected-map k f →
+    is-connected (succ-𝕋 k) A →
+    is-truncation-equivalence (succ-𝕋 k) f
+  is-truncation-equivalence-succ-is-succ-connected-domain-is-connected-map
+    cf cA =
+    is-equiv-is-connected-map-is-trunc-map
+      ( is-trunc-map-trunc-succ-is-succ-connected-domain f cA)
+      ( is-connected-map-trunc-succ-is-succ-connected-domain cf)
+
+  is-succ-connected-codomain-is-succ-connected-domain-is-connected-map :
+    is-connected-map k f →
+    is-connected (succ-𝕋 k) A →
     is-connected (succ-𝕋 k) B
-  is-succ-connected-is-connected-map-is-succ-connected cA cf =
-    is-contr-is-equiv'
-      ( type-trunc (succ-𝕋 k) A)
-      ( map-trunc (succ-𝕋 k) f)
-      ( is-equiv-is-contr-map
-        ( λ t →
-          apply-universal-property-trunc-Prop
-            ( is-surjective-is-truncation
-              ( trunc (succ-𝕋 k) B)
-              ( is-truncation-trunc)
-              ( t))
-            ( is-contr-Prop (fiber (map-trunc (succ-𝕋 k) f) t))
-            ( λ (b , p) →
-              tr
-                ( λ s → is-contr (fiber (map-trunc (succ-𝕋 k) f) s))
-                ( p)
-                ( is-contr-equiv'
-                  ( type-trunc k (fiber f b))
-                  ( ( inv-equiv
-                      ( equiv-unit-trunc
-                        ( fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b) ,
-                          is-trunc-fiber-map-trunc-is-succ-connected cA b))) ∘e
-                    ( equiv-trunc-truncation-equivalence k
-                      ( truncation-equivalence-fiber-map-trunc-fiber f b)))
-                  ( cf b)))))
+  is-succ-connected-codomain-is-succ-connected-domain-is-connected-map cf cA =
+    is-connected-is-truncation-equivalence-is-connected' f
+      ( is-truncation-equivalence-succ-is-succ-connected-domain-is-connected-map
+        ( cf)
+        ( cA))
       ( cA)
 ```
 
@@ -538,13 +574,13 @@ module _
   is-connected-map-right-factor-is-succ-connected-map-right-factor :
     is-connected-map k f → is-connected-map (succ-𝕋 k) g
   is-connected-map-right-factor-is-succ-connected-map-right-factor cf c =
-    is-succ-connected-is-connected-map-is-succ-connected
+    is-succ-connected-codomain-is-succ-connected-domain-is-connected-map
       ( pr1)
-      ( is-connected-equiv' (compute-fiber-comp g f c) (cgf c))
       ( λ p →
         is-connected-equiv
           ( equiv-fiber-pr1 (fiber f ∘ pr1) p)
           ( cf (pr1 p)))
+      ( is-connected-equiv' (compute-fiber-comp g f c) (cgf c))
 ```
 
 ### A `k`-equivalence with a section is `k`-connected
