@@ -522,10 +522,10 @@ module _
 
 This follows part of the proof of Proposition 2.31 in {{#cite CORS20}}.
 
-**Proof.** Let $f : A → B$ be a $k$-connected map on a domain that is
-$k+1$-connected. To show that $B$ is $k+1$-connected it is enough to show that
-$f$ is a $k+1$-equivalence, in other words, that $║f║ₖ₊₁$ is an equivalence. By
-previous computations we know that $║f║ₖ₊₁$ is $k$-truncated since the domain is
+**Proof.** Let $f : A → B$ be a $k$-connected map on a $k+1$-connected domain.
+To show that the codomain is $k+1$-connected it is enough to show that $f$ is a
+$k+1$-equivalence, in other words, that $║f║ₖ₊₁$ is an equivalence. By previous
+computations we know that $║f║ₖ₊₁$ is $k$-truncated since the domain is
 $k+1$-connected, and that $║f║ₖ₊₁$ is $k$-connected since $f$ is $k$-connected,
 so we are done. ∎
 
