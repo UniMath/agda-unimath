@@ -214,7 +214,7 @@ module _
   is-connected-map-htpy :
     (f ~ g) → is-connected-map k g → is-connected-map k f
   is-connected-map-htpy H G x =
-    is-connected-equiv' (equiv-fiber-htpy H x) (G x)
+    is-connected-equiv (inv-equiv-fiber-htpy H x) (G x)
 
   is-connected-map-htpy' :
     (f ~ g) → is-connected-map k f → is-connected-map k g
