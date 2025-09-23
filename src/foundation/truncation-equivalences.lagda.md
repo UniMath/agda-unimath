@@ -67,6 +67,14 @@ module _
   is-truncation-equivalence-truncation-equivalence :
     is-truncation-equivalence k map-truncation-equivalence
   is-truncation-equivalence-truncation-equivalence = pr2 f
+
+  map-trunc-truncation-equivalence : type-trunc k A → type-trunc k B
+  map-trunc-truncation-equivalence = map-trunc k map-truncation-equivalence
+
+  equiv-trunc-truncation-equivalence : type-trunc k A ≃ type-trunc k B
+  equiv-trunc-truncation-equivalence =
+    ( map-trunc-truncation-equivalence ,
+      is-truncation-equivalence-truncation-equivalence)
 ```
 
 ## Properties
@@ -336,7 +344,7 @@ module _
                     ( is-trunc-type-Truncated-Type X)))))))
 ```
 
-### There is an `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
+### There is a `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
 
 This is an instance of Corollary 2.29 in {{#cite CORS20}}.
 
@@ -396,7 +404,8 @@ module _
     truncation-equivalence k
       ( fiber f b)
       ( fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
-  pr1 truncation-equivalence-fiber-map-trunc-fiber = fiber-map-trunc-fiber
+  pr1 truncation-equivalence-fiber-map-trunc-fiber =
+    fiber-map-trunc-fiber
   pr2 truncation-equivalence-fiber-map-trunc-fiber =
     is-truncation-equivalence-fiber-map-trunc-fiber
 ```
@@ -443,6 +452,10 @@ module _
 
 This follows part of the proof of Proposition 2.31 in {{#cite CORS20}}.
 
+**Proof.** Let $f : A → B$ be a $k$-connected map on a domain that is
+$k+1$-connected. We must show that the truncation of the codomain is
+contractible.
+
 ```agda
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
@@ -484,8 +497,8 @@ module _
                       ( equiv-unit-trunc
                         ( fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b) ,
                           is-trunc-fiber-map-trunc-is-succ-connected cA b))) ∘e
-                    ( map-trunc k (fiber-map-trunc-fiber f b) ,
-                      is-truncation-equivalence-fiber-map-trunc-fiber f b))
+                    ( equiv-trunc-truncation-equivalence k
+                      ( truncation-equivalence-fiber-map-trunc-fiber f b)))
                   ( cf b)))))
       ( cA)
 ```

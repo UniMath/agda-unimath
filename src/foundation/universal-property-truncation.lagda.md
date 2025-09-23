@@ -60,14 +60,14 @@ module _
           ( Σ (type-Truncated-Type C) (λ z → g x ＝ z))
           ( equiv-tot
             ( λ z →
-              ( ( equiv-ev-refl' x) ∘e
-                ( equiv-Π-equiv-family
-                  ( λ x' →
-                    equiv-is-truncation
-                      ( Id-Truncated-Type B (f x') (f x))
-                      ( ap f)
-                      ( K x' x)
-                      ( Id-Truncated-Type C (g x') z)))) ∘e
+              ( equiv-ev-refl' x) ∘e
+              ( equiv-Π-equiv-family
+                ( λ x' →
+                  equiv-is-truncation
+                    ( Id-Truncated-Type B (f x') (f x))
+                    ( ap f)
+                    ( K x' x)
+                    ( Id-Truncated-Type C (g x') z))) ∘e
               ( equiv-ev-pair)))
           ( is-torsorial-Id (g x)))
 
@@ -82,11 +82,10 @@ module _
               ( λ z → (t : fiber f y) → (g (pr1 t) ＝ z)))
           ( ( equiv-tot
               ( λ h →
-                ( ( ( inv-equiv (equiv-funext)) ∘e
-                    ( equiv-Π-equiv-family
-                      ( λ x →
-                        equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x)))) ∘e
-                  ( equiv-swap-Π)) ∘e
+                ( equiv-eq-htpy) ∘e
+                ( equiv-Π-equiv-family
+                  ( λ x → equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x))) ∘e
+                ( equiv-swap-Π) ∘e
                 ( equiv-Π-equiv-family (λ x → equiv-ev-pair)))) ∘e
             ( distributive-Π-Σ))
           ( is-contr-Π

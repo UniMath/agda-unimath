@@ -27,6 +27,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
@@ -317,11 +319,11 @@ module _
   map-inv-unit-trunc = map-universal-property-trunc A id
 
   is-retraction-map-inv-unit-trunc :
-    ( map-inv-unit-trunc ∘ unit-trunc) ~ id
+    is-retraction unit-trunc map-inv-unit-trunc
   is-retraction-map-inv-unit-trunc = triangle-universal-property-trunc A id
 
   is-section-map-inv-unit-trunc :
-    ( unit-trunc ∘ map-inv-unit-trunc) ~ id
+    is-section unit-trunc map-inv-unit-trunc
   is-section-map-inv-unit-trunc =
     htpy-eq
       ( pr1
