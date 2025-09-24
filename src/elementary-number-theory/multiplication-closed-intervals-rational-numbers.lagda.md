@@ -55,10 +55,11 @@ open import order-theory.total-orders
 
 ## Idea
 
-Given two [intervals](elementary-number-theory.intervals-rational-numbers.md)
+Given two
+[intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
-[Minkowski product](group-theory.minkowski-multiplications-commutative-monoids.md)
+[Minkowski product](group-theory.minkowski-multiplication-commutative-monoids.md)
 of those intervals (interpreted as [subtypes](foundation.subtypes.md) of `ℚ`)
 agrees with the interval `[min(ac, ad, bc, bd), max(ac, ad, bc, bd)]`.
 
@@ -163,28 +164,28 @@ abstract
 #### Multiplication of an interval by a positive rational number
 
 ```agda
-mul-interval-ℚ-ℚ⁺ : interval-ℚ → ℚ⁺ → interval-ℚ
-mul-interval-ℚ-ℚ⁺ ((p , q) , p≤q) s⁺@(s , _) =
+mul-ℚ⁺-interval-ℚ : interval-ℚ → ℚ⁺ → interval-ℚ
+mul-ℚ⁺-interval-ℚ ((p , q) , p≤q) s⁺@(s , _) =
   ((p *ℚ s , q *ℚ s) , preserves-leq-right-mul-ℚ⁺ s⁺ _ _ p≤q)
 
 abstract
   mul-is-in-interval-ℚ-ℚ⁺ :
     ([p,q] : interval-ℚ) → (r : ℚ⁺) → (s : ℚ) → is-in-interval-ℚ [p,q] s →
     is-in-interval-ℚ
-      ( mul-interval-ℚ-ℚ⁺ [p,q] r)
+      ( mul-ℚ⁺-interval-ℚ [p,q] r)
       ( s *ℚ rational-ℚ⁺ r)
   mul-is-in-interval-ℚ-ℚ⁺
     ((p , q) , p≤q) r s (p≤s , s≤q) =
       ( preserves-leq-right-mul-ℚ⁺ r _ _ p≤s ,
         preserves-leq-right-mul-ℚ⁺ r _ _ s≤q)
 
-  is-in-im-is-in-mul-interval-ℚ-ℚ⁺ :
+  is-in-im-is-in-mul-ℚ⁺-interval-ℚ :
     ([p,q] : interval-ℚ) → (r : ℚ⁺) → (s : ℚ) →
     is-in-interval-ℚ
-      ( mul-interval-ℚ-ℚ⁺ [p,q] r)
+      ( mul-ℚ⁺-interval-ℚ [p,q] r)
       ( s) →
     is-in-im-subtype (mul-ℚ' (rational-ℚ⁺ r)) (subtype-interval-ℚ [p,q]) s
-  is-in-im-is-in-mul-interval-ℚ-ℚ⁺
+  is-in-im-is-in-mul-ℚ⁺-interval-ℚ
     ((p , q) , p≤q) r⁺@(r , _) s (pr≤s , s≤qr) =
       let r⁻¹ = inv-ℚ⁺ r⁺
       in
@@ -211,10 +212,10 @@ abstract
     is-interval-map-ℚ
       ( mul-ℚ' (rational-ℚ⁺ q))
       ( [a,b])
-      ( mul-interval-ℚ-ℚ⁺ [a,b] q)
+      ( mul-ℚ⁺-interval-ℚ [a,b] q)
   is-interval-map-left-mul-ℚ⁺ q [a,b] =
     ( ind-Σ (mul-is-in-interval-ℚ-ℚ⁺ [a,b] q) ,
-      ind-Σ (is-in-im-is-in-mul-interval-ℚ-ℚ⁺ [a,b] q))
+      ind-Σ (is-in-im-is-in-mul-ℚ⁺-interval-ℚ [a,b] q))
 ```
 
 #### Multiplication of an interval by zero
@@ -252,26 +253,26 @@ abstract
 
 ```agda
 abstract
-  mul-ℚ-interval-ℚ-is-negative-ℚ :
+  mul-is-negative-ℚ-interval-ℚ :
     ([p,q] : interval-ℚ) (r : ℚ) (neg-r : is-negative-ℚ r) →
     mul-ℚ-interval-ℚ [p,q] r ＝
     mul-interval-ℚ-ℚ⁻ [p,q] (r , neg-r)
-  mul-ℚ-interval-ℚ-is-negative-ℚ [p,q]@((p , q) , p≤q) r neg-r =
+  mul-is-negative-ℚ-interval-ℚ [p,q]@((p , q) , p≤q) r neg-r =
     unordered-closed-interval-leq-ℚ' _ _
       ( reverses-leq-right-mul-ℚ⁻ (r , neg-r) _ _ p≤q)
 
-  mul-ℚ-interval-ℚ-is-positive-ℚ :
+  mul-is-positive-ℚ-interval-ℚ :
     ([p,q] : interval-ℚ) (r : ℚ) (pos-r : is-positive-ℚ r) →
     mul-ℚ-interval-ℚ [p,q] r ＝
-    mul-interval-ℚ-ℚ⁺ [p,q] (r , pos-r)
-  mul-ℚ-interval-ℚ-is-positive-ℚ [p,q]@((p , q) , p≤q) r pos-r =
+    mul-ℚ⁺-interval-ℚ [p,q] (r , pos-r)
+  mul-is-positive-ℚ-interval-ℚ [p,q]@((p , q) , p≤q) r pos-r =
     unordered-closed-interval-leq-ℚ _ _
       ( preserves-leq-right-mul-ℚ⁺ (r , pos-r) _ _ p≤q)
 
-  mul-ℚ-interval-ℚ-is-zero-ℚ :
+  mul-is-zero-ℚ-interval-ℚ :
     ([p,q] : interval-ℚ) (r : ℚ) (is-zero-r : is-zero-ℚ r) →
     mul-ℚ-interval-ℚ [p,q] r ＝ zero-zero-interval-ℚ
-  mul-ℚ-interval-ℚ-is-zero-ℚ ((p , q) , p≤q) _ refl =
+  mul-is-zero-ℚ-interval-ℚ ((p , q) , p≤q) _ refl =
     eq-interval-ℚ _ _
       ( ap-min-ℚ
         ( right-zero-law-mul-ℚ _)
@@ -292,57 +293,55 @@ abstract
       ( λ neg-r →
         inv-tr
           ( λ [x,y] → is-in-interval-ℚ [x,y] (s *ℚ r))
-          ( mul-ℚ-interval-ℚ-is-negative-ℚ [p,q] r neg-r)
+          ( mul-is-negative-ℚ-interval-ℚ [p,q] r neg-r)
           ( mul-is-in-interval-ℚ-ℚ⁻ [p,q] (r , neg-r) s s∈[p,q]))
       ( λ r=0 →
         binary-tr
           ( is-in-interval-ℚ)
-          ( inv (mul-ℚ-interval-ℚ-is-zero-ℚ [p,q] r r=0))
+          ( inv (mul-is-zero-ℚ-interval-ℚ [p,q] r r=0))
           ( inv (ap-mul-ℚ refl r=0 ∙ right-zero-law-mul-ℚ s))
           ( refl-leq-ℚ zero-ℚ , refl-leq-ℚ zero-ℚ))
       ( λ pos-r →
         inv-tr
           ( λ [x,y] → is-in-interval-ℚ [x,y] (s *ℚ r))
-          ( mul-ℚ-interval-ℚ-is-positive-ℚ [p,q] r pos-r)
+          ( mul-is-positive-ℚ-interval-ℚ [p,q] r pos-r)
           ( mul-is-in-interval-ℚ-ℚ⁺ [p,q] (r , pos-r) s s∈[p,q]))
 
   is-in-im-mul-is-in-interval-ℚ-ℚ :
     ([p,q] : interval-ℚ) (r s : ℚ) →
-    is-in-interval-ℚ
-      ( mul-ℚ-interval-ℚ [p,q] r)
-      ( s) →
+    is-in-interval-ℚ (mul-ℚ-interval-ℚ [p,q] r) s →
     is-in-im-subtype (mul-ℚ' r) (subtype-interval-ℚ [p,q]) s
   is-in-im-mul-is-in-interval-ℚ-ℚ [p,q] r s s∈[min-pr-qr,max-pr-qr] =
-      trichotomy-sign-ℚ r
-        ( λ neg-r →
-          is-in-im-is-in-mul-interval-ℚ-ℚ⁻
+    trichotomy-sign-ℚ r
+      ( λ neg-r →
+        is-in-im-is-in-mul-interval-ℚ-ℚ⁻
+          ( [p,q])
+          ( r , neg-r)
+          ( s)
+          ( tr
+            ( λ [x,y] → is-in-interval-ℚ [x,y] s)
+            ( mul-is-negative-ℚ-interval-ℚ [p,q] r neg-r)
+            ( s∈[min-pr-qr,max-pr-qr])))
+      ( λ r=0 →
+        inv-tr
+          ( λ t → is-in-im-subtype (mul-ℚ' t) (subtype-interval-ℚ [p,q]) s)
+          ( r=0)
+          ( is-in-im-mul-is-in-zero-zero-interval-ℚ
             ( [p,q])
-            ( r , neg-r)
             ( s)
             ( tr
               ( λ [x,y] → is-in-interval-ℚ [x,y] s)
-              ( mul-ℚ-interval-ℚ-is-negative-ℚ [p,q] r neg-r)
-              ( s∈[min-pr-qr,max-pr-qr])))
-        ( λ r=0 →
-          inv-tr
-            ( λ t → is-in-im-subtype (mul-ℚ' t) (subtype-interval-ℚ [p,q]) s)
-            ( r=0)
-            ( is-in-im-mul-is-in-zero-zero-interval-ℚ
-              ( [p,q])
-              ( s)
-              ( tr
-                ( λ [x,y] → is-in-interval-ℚ [x,y] s)
-                ( mul-ℚ-interval-ℚ-is-zero-ℚ [p,q] r r=0)
-                ( s∈[min-pr-qr,max-pr-qr]))))
-        ( λ pos-r →
-          is-in-im-is-in-mul-interval-ℚ-ℚ⁺
-            ( [p,q])
-            ( r , pos-r)
-            ( s)
-            ( tr
-              ( λ [x,y] → is-in-interval-ℚ [x,y] s)
-              ( mul-ℚ-interval-ℚ-is-positive-ℚ [p,q] r pos-r)
-              ( s∈[min-pr-qr,max-pr-qr])))
+              ( mul-is-zero-ℚ-interval-ℚ [p,q] r r=0)
+              ( s∈[min-pr-qr,max-pr-qr]))))
+      ( λ pos-r →
+        is-in-im-is-in-mul-ℚ⁺-interval-ℚ
+          ( [p,q])
+          ( r , pos-r)
+          ( s)
+          ( tr
+            ( λ [x,y] → is-in-interval-ℚ [x,y] s)
+            ( mul-is-positive-ℚ-interval-ℚ [p,q] r pos-r)
+            ( s∈[min-pr-qr,max-pr-qr])))
 
   is-interval-map-mul-ℚ-interval-ℚ :
     (q : ℚ) ([a,b] : interval-ℚ) →
