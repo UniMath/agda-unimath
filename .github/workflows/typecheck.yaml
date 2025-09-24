@@ -1,4 +1,4 @@
-name: Agda typechecking
+name: Typecheck with Agda
 on:
   # To run this workflow manually
   workflow_dispatch:
