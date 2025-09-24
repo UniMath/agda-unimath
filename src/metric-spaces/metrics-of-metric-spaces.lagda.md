@@ -34,7 +34,7 @@ open import real-numbers.strict-inequality-real-numbers
 A function `ρ` from two elements of a
 [metric space](metric-spaces.metric-spaces.md) `M` to the
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is a
-{{#concept "metric" disambiguation="of a metric space" WD="metric function" WDID=Q865746 Agda=is-metric-Metric-Space}}
+{{#concept "metric" disambiguation="of a metric space" WD="metric function" WDID=Q865746 Agda=is-metric-of-Metric-Space}}
 of `M` if for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `d` and all `x y : M`, `x` and `y` are in a `d`-neighborhood of each other in
