@@ -8,8 +8,10 @@ module metric-spaces.metric-spaces where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-relations
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -215,6 +217,14 @@ module _
   monotonic-neighborhood-Metric-Space =
     monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
+  weakly-monotonic-neighborhood-Metric-Space :
+    (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    leq-ℚ⁺ d₁ d₂ →
+    neighborhood-Metric-Space d₁ x y →
+    neighborhood-Metric-Space d₂ x y
+  weakly-monotonic-neighborhood-Metric-Space =
+    weakly-monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
+
   saturated-neighborhood-Metric-Space :
     (ε : ℚ⁺) (x y : type-Metric-Space) →
     ((δ : ℚ⁺) → neighborhood-Metric-Space (ε +ℚ⁺ δ) x y) →
@@ -327,6 +337,11 @@ module _
   eq-sim-Metric-Space x y =
     map-inv-equiv (equiv-sim-eq-Metric-Space x y)
 ```
+
+## See also
+
+- Metric spaces that _are_ defined by a distance function are defined in
+  [Metrics](metric-spaces.metrics.md).
 
 ## External links
 

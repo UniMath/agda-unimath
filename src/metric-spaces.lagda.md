@@ -45,16 +45,25 @@ property of **indistinguishability of identicals**
 ```agda
 module metric-spaces where
 
+open import metric-spaces.approximations-located-metric-spaces public
+open import metric-spaces.approximations-metric-spaces public
+open import metric-spaces.bounded-distance-decompositions-of-metric-spaces public
+open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
+open import metric-spaces.closed-subsets-located-metric-spaces public
+open import metric-spaces.closed-subsets-metric-spaces public
+open import metric-spaces.closure-subsets-metric-spaces public
+open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
+open import metric-spaces.dense-subsets-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
@@ -65,7 +74,13 @@ open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.images-isometries-metric-spaces public
+open import metric-spaces.images-metric-spaces public
+open import metric-spaces.images-short-functions-metric-spaces public
+open import metric-spaces.images-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
+open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
+open import metric-spaces.interior-subsets-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
@@ -74,6 +89,7 @@ open import metric-spaces.limits-of-functions-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
+open import metric-spaces.located-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
@@ -84,7 +100,14 @@ open import metric-spaces.metric-space-of-lipschitz-functions-metric-spaces publ
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-short-functions-metric-spaces public
 open import metric-spaces.metric-spaces public
+open import metric-spaces.metrics public
+open import metric-spaces.metrics-of-metric-spaces public
+open import metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
+open import metric-spaces.nets-located-metric-spaces public
+open import metric-spaces.nets-metric-spaces public
+open import metric-spaces.open-subsets-located-metric-spaces public
+open import metric-spaces.open-subsets-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
@@ -103,6 +126,8 @@ open import metric-spaces.short-functions-pseudometric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
 open import metric-spaces.symmetric-rational-neighborhood-relations public
+open import metric-spaces.totally-bounded-metric-spaces public
+open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 ```

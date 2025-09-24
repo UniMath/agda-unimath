@@ -32,6 +32,7 @@ open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
 open import group-theory.characteristic-subgroups public
 open import group-theory.commutative-monoids public
+open import group-theory.commutative-semigroups public
 open import group-theory.commutator-subgroups public
 open import group-theory.commutators-of-elements-groups public
 open import group-theory.commuting-elements-groups public
@@ -189,9 +190,15 @@ open import group-theory.subsets-monoids public
 open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
+open import group-theory.sums-of-finite-families-of-elements-abelian-groups public
 open import group-theory.sums-of-finite-families-of-elements-commutative-monoids public
+open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups public
+open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups public
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids public
+open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups public
+open import group-theory.sums-of-finite-sequences-of-elements-groups public
 open import group-theory.sums-of-finite-sequences-of-elements-monoids public
+open import group-theory.sums-of-finite-sequences-of-elements-semigroups public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public

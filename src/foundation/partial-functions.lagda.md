@@ -128,4 +128,4 @@ module _
 
 - [Copartial functions](foundation.copartial-functions.md)
 - [Partial elements](foundation.partial-elements.md)
-- [Partial sequences](foundation.partial-sequences.md)
+- [Partial sequences](lists.partial-sequences.md)
