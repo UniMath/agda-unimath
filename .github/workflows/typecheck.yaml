@@ -26,8 +26,8 @@ jobs:
   typecheck:
     if:
       ${{ github.event_name == 'workflow_dispatch' || (github.event_name ==
-      'push' && github.ref_name == 'master') || (github.event_name ==
-      'pull_request' && github.event.pull_request.draft == false) }}
+      'push') || (github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false) }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
