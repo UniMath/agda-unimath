@@ -34,8 +34,8 @@ An
 {{#concept "inhabited closed interval" disambiguation="in a poset" Agda=inhabited-closed-interval-Poset}}
 in a [poset](order-theory.posets.md) `P` is a [subtype](foundation.subtypes.md)
 of `P` with elements `x` and `y` with `x ≤ y` such that the subtype contains
-every element `z` such that `x ≤ z ∧ z ≤ y`.  Any pair `x y` with `x ≤ y`
-induces a unique inhabited closed interval, so we can equivalently characterize
+every element `z` such that `x ≤ z ∧ z ≤ y`. Any pair `x y` with `x ≤ y` induces
+a unique inhabited closed interval, so we can equivalently characterize
 inhabited closed intervals in terms of such pairs.
 
 ## Definition

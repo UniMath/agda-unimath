@@ -37,9 +37,9 @@ An
 {{#concept "inhabited closed interval" disambiguation="in a total order" Agda=inhabited-inhabited-closed-interval-Total-Order}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
-such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`.
-Any pair `x y` with `x ≤ y` induces a unique inhabited closed interval, so we
-can equivalently characterize inhabited closed intervals in terms of such pairs.
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. Any
+pair `x y` with `x ≤ y` induces a unique inhabited closed interval, so we can
+equivalently characterize inhabited closed intervals in terms of such pairs.
 
 Equivalently, an inhabited closed interval is a total order is an
 [inhabited closed interval](order-theory.inhabited-closed-intervals-posets.md)
@@ -69,7 +69,8 @@ module _
   subtype-inhabited-closed-interval-Total-Order =
     subtype-inhabited-closed-interval-Poset (poset-Total-Order X)
 
-  type-inhabited-closed-interval-Total-Order : inhabited-closed-interval-Total-Order → UU (l1 ⊔ l2)
+  type-inhabited-closed-interval-Total-Order :
+    inhabited-closed-interval-Total-Order → UU (l1 ⊔ l2)
   type-inhabited-closed-interval-Total-Order =
     type-inhabited-closed-interval-Poset (poset-Total-Order X)
 
@@ -114,7 +115,8 @@ module _
 
   abstract
     is-inhabited-inhabited-closed-interval-Total-Order :
-      is-inhabited-subtype (subtype-inhabited-closed-interval-Total-Order X [x,y])
+      is-inhabited-subtype
+        ( subtype-inhabited-closed-interval-Total-Order X [x,y])
     is-inhabited-inhabited-closed-interval-Total-Order =
       is-inhabited-inhabited-closed-interval-Poset (poset-Total-Order X) [x,y]
 ```
@@ -167,14 +169,16 @@ module _
     ([a,b] : inhabited-closed-interval-Total-Order X) →
     (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
     inhabited-closed-interval-Total-Order X
-  divide-below-inhabited-closed-interval-Total-Order ((a , b) , a≤b) (c , a≤c , c≤b) =
+  divide-below-inhabited-closed-interval-Total-Order
+    ((a , b) , a≤b) (c , a≤c , c≤b) =
     ((a , c) , a≤c)
 
   divide-above-inhabited-closed-interval-Total-Order :
     ([a,b] : inhabited-closed-interval-Total-Order X) →
     (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
     inhabited-closed-interval-Total-Order X
-  divide-above-inhabited-closed-interval-Total-Order ((a , b) , a≤b) (c , a≤c , c≤b) =
+  divide-above-inhabited-closed-interval-Total-Order
+    ((a , b) , a≤b) (c , a≤c , c≤b) =
     ((c , b) , c≤b)
 
   abstract
@@ -216,7 +220,9 @@ module _
       subtype-inhabited-closed-interval-Total-Order X [a,b]
     eq-divide-subtype-inhabited-closed-interval-Total-Order [a,b] c =
       eq-has-same-elements-subtype _ _
-        ( has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order [a,b] c)
+        ( has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order
+          ( [a,b])
+          ( c))
 ```
 
 ### The minimal interval covering two elements

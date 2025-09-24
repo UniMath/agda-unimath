@@ -12,7 +12,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.closed-interval-preserving-maps-posets
-open import order-theory.closed-intervals-total-orders
+open import order-theory.inhabited-closed-intervals-total-orders
 open import order-theory.total-orders
 ```
 
@@ -24,7 +24,7 @@ A map between [total orders](order-theory.total-orders.md) `f : X → Y` is
 {{#concept "closed interval preserving" Agda=is-closed-interval-map-Total-Order disambiguation="map between total orders"}}
 if the [image](foundation.images-subtypes.md) of an
 [inhabited closed interval](order-theory.inhabited-closed-intervals-total-orders.md)
-in  `X` is always an inhabited closed interval in `Y`. Equivalently, it is a
+in `X` is always an inhabited closed interval in `Y`. Equivalently, it is a
 [closed interval preserving map](order-theory.closed-interval-preserving-maps-posets.md)
 on the underlying [posets](order-theory.posets.md).
 

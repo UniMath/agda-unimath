@@ -11,7 +11,7 @@ open import foundation.images-subtypes
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.closed-intervals-posets
+open import order-theory.inhabited-closed-intervals-posets
 open import order-theory.posets
 ```
 
