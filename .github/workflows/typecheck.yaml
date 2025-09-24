@@ -1,0 +1,68 @@
+name: Agda typechecking
+on:
+  # To run this workflow manually
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: the repository ref to build
+        required: true
+        default: master
+
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+# Cancel previous runs of the same branch
+concurrency:
+  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    if:
+      ${{ github.event_name == 'workflow_dispatch' || (github.event_name ==
+      'push' && github.ref_name == 'master') || (github.event_name ==
+      'pull_request' && github.event.pull_request.draft == false) }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        agda: ['2.7.0']
+    steps:
+      - name: Checkout our repository
+        uses: actions/checkout@v4
+        with:
+          path: master
+      - name: Setup Agda
+        uses: wenkokke/setup-agda@v2.5.0
+        with:
+          agda-version: ${{ matrix.agda }}
+
+      - uses: actions/cache/restore@v4
+        id: cache-agda-formalization
+        name: Restore Agda formalization cache
+        with:
+          path: master/_build
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('master/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
+
+      - name: Typecheck library
+        run: |
+          cd master
+          agda --version
+          make check
+
+      - name: Save Agda build cache
+        uses: actions/cache/save@v4
+        with:
+          path: master/_build
+          key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
