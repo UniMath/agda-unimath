@@ -36,7 +36,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a abelian group" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Ab}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a abelian group" WD="sum" WDID=Q218005 Agda=sum-finite-Ab}}
 extends the binary addition operation on a
 [abelian group](ring-theory.semirings.md) `G` to any family of elements of `G`
 indexed by a [finite type](univalent-combinatorics.finite-types.md).

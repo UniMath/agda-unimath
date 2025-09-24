@@ -27,7 +27,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ## Idea
 
 A
-{{#concept "totally bounded" disambiguation="subspace of a metric space" WDID=Q1362228 WD="totally bounded space" Agda=is-totally-bounded-subset-Metric-Space}}
+{{#concept "totally bounded" disambiguation="subspace of a metric space" WDID=Q1362228 WD="totally bounded space" Agda=totally-bounded-subspace-Metric-Space}}
 [subspace](metric-spaces.subspaces-metric-spaces.md) of a
 [metric space](metric-spaces.metric-spaces.md) is a subspace that is
 [totally bounded](metric-spaces.totally-bounded-metric-spaces.md).
