@@ -32,11 +32,11 @@ open import order-theory.inhabited-closed-intervals-posets
 
 ## Idea
 
-A
-{{#concept "closed interval" Disambiguation="in the rational numbers" Agda=inhabited-closed-interval-ℚ}}
-in the rational numbers is a
-[closed interval](order-theory.closed-intervals-posets.md) in the
-[poset](elementary-number-theory.inequality-rational-numbers.md) of
+An
+{{#concept "inhabited closed interval" Disambiguation="in the rational numbers" Agda=inhabited-closed-interval-ℚ}}
+in the rational numbers is an
+[inhabited closed interval](order-theory.inhabited-closed-intervals-posets.md)
+in the [poset](elementary-number-theory.inequality-rational-numbers.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md).
 
 ## Definition
