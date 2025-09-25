@@ -12,11 +12,11 @@ AGDAVERBOSE ?= -v1
 # when building the website
 SKIPAGDA ?=
 
-# use "$ export SKIPAUX=1" or "make SKIPAUX=1 ..." to skip generating
-# the Agda dependency graph SVG when building the website
+# use "$ export SKIPAUX=1" or "make SKIPAUX=1 ..." to skip generating auxiliary
+# files, i.e., the Agda dependency graph SVG when building the website
 SKIPAUX ?=
 
-# When SKIPAUX=1 we don't require the dependency graph files.
+# When SKIPAUX=1 we don't require the auxiliary files.
 ifeq ($(SKIPAUX),1)
 DEPGRAPH_TARGETS :=
 else
