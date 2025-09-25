@@ -2,8 +2,8 @@
   description = "agda-unimath";
 
   inputs = {
-    # Stable 24.11 has Agda 2.7.0.1
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # Unstable has Agda 2.8.0
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     # We aim to support Python 3.8 as long as Ubuntu 20.24 has LTS,
     # since it ships with that version. Python 3.8 itself is already
