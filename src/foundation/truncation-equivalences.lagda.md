@@ -586,7 +586,8 @@ module _
 
   is-succ-truncation-equivalence-right-factor-is-succ-connected-map-left-factor :
     is-connected-map (succ-𝕋 k) g → is-truncation-equivalence (succ-𝕋 k) f
-  is-succ-truncation-equivalence-right-factor-is-succ-connected-map-left-factor cg =
+  is-succ-truncation-equivalence-right-factor-is-succ-connected-map-left-factor
+    cg =
     is-truncation-equivalence-right-factor g f
       ( is-truncation-equivalence-is-connected-map (g ∘ f) cgf)
       ( is-truncation-equivalence-is-connected-map g cg)
@@ -616,7 +617,8 @@ $k$-connected, then $f$ is a $k+1$-equivalence.
 ```agda
   is-succ-truncation-equiv-is-succ-connected-comp :
     is-connected-map k f → is-truncation-equivalence (succ-𝕋 k) f
-  is-succ-truncation-equiv-is-succ-connected-comp cf = is-succ-truncation-equivalence-right-factor-is-succ-connected-map-left-factor
+  is-succ-truncation-equiv-is-succ-connected-comp cf =
+    is-succ-truncation-equivalence-right-factor-is-succ-connected-map-left-factor
     ( is-connected-map-right-factor-is-succ-connected-map-right-factor cf)
 ```
 
