@@ -11,11 +11,15 @@ concurrency:
 
 jobs:
   typecheck-clean:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        agda: ['2.8.0']
+        config:
+          - {
+              os: ubuntu-latest,
+              agda: 2.8.0,
+              agda-binary-url: https://github.com/agda/agda/releases/download/v2.8.0/Agda-v2.8.0-linux.tar.xz,
+            }
 
     steps:
       - name: Checkout our repository
@@ -23,10 +27,16 @@ jobs:
         with:
           path: repo
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Fetch Agda ${{ matrix.config.agda }} (prebuilt)
+        uses: engineerd/configurator@v0.0.10
         with:
-          agda-version: ${{ matrix.agda }}
+          name: agda
+          url: ${{ matrix.config.agda-binary-url }}
+          pathInArchive: agda
+      - name: Setup Agda ${{ matrix.config.agda }} (prebuilt)
+        run: |
+          agda --version
+          agda --setup
 
       - name: Typecheck library with profiling
         run: |

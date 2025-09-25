@@ -22,7 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: ['2.8.0']
+        config:
+          - {
+              agda: 2.8.0,
+              agda-binary-url: https://github.com/agda/agda/releases/download/v2.8.0/Agda-v2.8.0-linux.tar.xz,
+            }
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,10 +42,16 @@ jobs:
           # We need the entire history for contributor information
           fetch-depth: 0
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Fetch Agda ${{ matrix.config.agda }} (prebuilt)
+        uses: engineerd/configurator@v0.0.10
         with:
-          agda-version: ${{ matrix.agda }}
+          name: agda
+          url: ${{ matrix.config.agda-binary-url }}
+          pathInArchive: agda
+      - name: Setup Agda ${{ matrix.config.agda }} (prebuilt)
+        run: |
+          agda --version
+          agda --setup
 
       - uses: actions/cache/restore@v4
         id: cache-agda-formalization
@@ -49,10 +59,10 @@ jobs:
         with:
           path: master/_build
           key:
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('master/src/**') }}
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.config.agda
+            }}-${{ hashFiles('master/src/**') }}
           restore-keys: |
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.config.agda }}-
 
       # Keep versions in sync with the Makefile
       - name: MDBook setup
