@@ -44,7 +44,7 @@
       "detail": "Check website links and bibtex references",
       "type": "shell",
       "command": "make",
-      "args": ["SKIPAGDA=1", "website"],
+      "args": ["SKIPAGDA=1", "SKIPAUX=1", "website"],
       "problemMatcher": [],
       "group": {
         "kind": "test"
