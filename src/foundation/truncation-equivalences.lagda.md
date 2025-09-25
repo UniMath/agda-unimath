@@ -616,7 +616,7 @@ with a section. By assumption, we have a commuting triangle of maps
 
 By the previous lemma, since the identity map is $k$-connected, it thus suffices
 to show that $s$ is $n$-connected. But by the cancellation property of
-$n+1$-equivalences $s$ is a $n+1$-equivalence and $n+1$-equivalences are in
+$n+1$-equivalences $s$ is an $n+1$-equivalence and $n+1$-equivalences are in
 particular $n$-connected. ∎
 
 ```agda
@@ -630,7 +630,7 @@ module _
     is-connected-map k (map-section f s)
   is-connected-map-section-is-truncation-equivalence-succ k (s , h) e =
     is-connected-map-is-succ-truncation-equivalence s
-    ( is-truncation-equivalence-map-section (succ-𝕋 k) (s , h) e)
+      ( is-truncation-equivalence-map-section (succ-𝕋 k) (s , h) e)
 
   is-connected-map-is-truncation-equivalence-section :
     (k : 𝕋) →
@@ -646,9 +646,10 @@ module _
 ## References
 
 - The notion of `k`-equivalence is a special case of the notion of
-  `L`-equivalence, where `L` is a reflective subuniverse. They were studied in
-  the paper {{#cite CORS20}}.
-- The class of `k`-equivalences is left orthogonal to the class of `k`-étale
-  maps. This was shown in {{#cite CR21}}.
+  `L`-equivalence, where `L` is a reflective subuniverse. These were studied in
+  {{#cite CORS20}}.
+- The class of `k`-equivalences is
+  [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to the
+  class of `k`-étale maps. This was shown in {{#cite CR21}}.
 
 {{#bibliography}}

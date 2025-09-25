@@ -285,7 +285,7 @@ module _
                 ( center (K a x)))))
 ```
 
-### If the domain of a map `f` is `k+1`-connected, then the `k+1`-truncation of `f` is `k`-truncated
+### If the domain of `f` is `k+1`-connected, then the `k+1`-truncation of `f` is `k`-truncated
 
 ```agda
 module _
