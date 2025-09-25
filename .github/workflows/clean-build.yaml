@@ -1,4 +1,4 @@
-name: Profile Library Typechecking
+name: Clean build and profiling of library
 
 on:
   push:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  typecheck-performance:
+  typecheck-clean:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
