@@ -7,6 +7,7 @@ module linear-algebra.left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
 
 open import foundation.action-on-identifications-functions
