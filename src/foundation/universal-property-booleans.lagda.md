@@ -14,10 +14,13 @@ open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -36,27 +39,27 @@ map-universal-property-bool (pair x y) false = y
 abstract
   is-section-map-universal-property-bool :
     {l : Level} {A : UU l} →
-    ((ev-true-false A) ∘ map-universal-property-bool) ~ id
+    is-section (ev-true-false A) (map-universal-property-bool)
   is-section-map-universal-property-bool (pair x y) = refl
 
 abstract
   is-retraction-map-universal-property-bool' :
     {l : Level} {A : UU l} (f : bool → A) →
-    (map-universal-property-bool (ev-true-false A f)) ~ f
+    is-retraction (ev-true-false A) (map-universal-property-bool)
   is-retraction-map-universal-property-bool' f true = refl
   is-retraction-map-universal-property-bool' f false = refl
 
 abstract
   is-retraction-map-universal-property-bool :
     {l : Level} {A : UU l} →
-    (map-universal-property-bool ∘ (ev-true-false A)) ~ id
+    is-retraction (ev-true-false A) (map-universal-property-bool)
   is-retraction-map-universal-property-bool f =
     eq-htpy (is-retraction-map-universal-property-bool' f)
 
 abstract
   universal-property-bool :
     {l : Level} (A : UU l) →
-    is-equiv (λ (f : bool → A) → pair (f true) (f false))
+    is-equiv (λ (f : bool → A) → (f true , f false))
   universal-property-bool A =
     is-equiv-is-invertible
       map-universal-property-bool
@@ -76,7 +79,7 @@ triangle-ev-true A = refl-htpy
 aut-bool-bool :
   bool → (bool ≃ bool)
 aut-bool-bool true = id-equiv
-aut-bool-bool false = equiv-neg-𝟚
+aut-bool-bool false = equiv-neg-bool
 
 bool-aut-bool :
   (bool ≃ bool) → bool
@@ -97,8 +100,8 @@ eq-true :
 eq-true true p = refl
 eq-true false p = ind-empty (p refl)
 
-Eq-𝟚-eq : (x y : bool) → x ＝ y → Eq-𝟚 x y
-Eq-𝟚-eq x .x refl = reflexive-Eq-𝟚 x
+Eq-eq-bool : (x y : bool) → x ＝ y → Eq-bool x y
+Eq-eq-bool x .x refl = reflexive-Eq-bool x
 
 eq-false-equiv' :
   (e : bool ≃ bool) → map-equiv e true ＝ true →
@@ -106,11 +109,23 @@ eq-false-equiv' :
 eq-false-equiv' e p (inl q) = q
 eq-false-equiv' e p (inr x) =
   ind-empty
-    ( Eq-𝟚-eq true false
+    ( Eq-eq-bool true false
       ( ap pr1
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-map-equiv e) true)
           ( pair true p)
           ( pair false (eq-true (map-equiv e false) x)))))
 -}
+```
+
+### The canonical projection from a coproduct to the booleans
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  projection-bool-coproduct : A + B → bool
+  projection-bool-coproduct (inl _) = true
+  projection-bool-coproduct (inr _) = false
 ```
