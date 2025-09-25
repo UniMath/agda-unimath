@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: [2.8.0]
+        agda: ['2.8.0']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
