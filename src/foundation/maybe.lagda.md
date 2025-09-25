@@ -291,6 +291,10 @@ module _
       ( λ x p → intro-exists (inl x) (ap inl p))
       ( F y)
   is-surjective-map-is-surjective-Maybe F (inr *) = intro-exists (inr *) refl
+
+  surjection-map-surjection-Maybe : (f : A ↠ B) → Maybe A ↠ Maybe B
+  surjection-map-surjection-Maybe (f , is-surjective-f) =
+    ( map-Maybe f , is-surjective-map-is-surjective-Maybe is-surjective-f)
 ```
 
 ### There is a surjection from `Maybe A + Maybe B` to `Maybe (A + B)`

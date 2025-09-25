@@ -7,6 +7,7 @@ module lists where
 
 open import lists.arrays public
 open import lists.concatenation-lists public
+open import lists.concatenation-tuples public
 open import lists.dependent-sequences public
 open import lists.equivalence-tuples-finite-sequences public
 open import lists.finite-sequences public

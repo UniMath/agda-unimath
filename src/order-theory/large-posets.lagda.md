@@ -19,6 +19,7 @@ open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.large-preorders
@@ -193,4 +194,47 @@ module _
     is-large-poset-Large-Category large-category-Large-Poset
   is-large-poset-large-category-Large-Poset =
     is-prop-leq-Large-Poset P
+```
+
+## Reasoning with inequalities in large posets
+
+Inequalities in large posets can be constructed by equational reasoning as
+follows:
+
+```text
+let open inequality-reasoning-Poset X
+in
+  chain-of-inequalities
+  x ≤ y
+      by ineq-1
+    ≤ z
+      by ineq-2
+    ≤ v
+      by ineq-3
+```
+
+Note, however, that in our setup of equational reasoning with inequalities it is
+not possible to mix inequalities with equalities or strict inequalities.
+
+```agda
+module inequality-reasoning-Large-Poset
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
+  where
+
+  infixl 1 chain-of-inequalities_
+  infixl 0 step-calculate-in-Large-Poset
+
+  chain-of-inequalities_ :
+    {l : Level} (x : type-Large-Poset P l) → leq-Large-Poset P x x
+  chain-of-inequalities_ = refl-leq-Large-Poset P
+
+  step-calculate-in-Large-Poset :
+    {l1 l2 : Level} {x : type-Large-Poset P l1} {y : type-Large-Poset P l2} →
+    leq-Large-Poset P x y →
+    {l3 : Level} (z : type-Large-Poset P l3) →
+    leq-Large-Poset P y z → leq-Large-Poset P x z
+  step-calculate-in-Large-Poset {x = x} {y = y} u z v =
+    transitive-leq-Large-Poset P x y z v u
+
+  syntax step-calculate-in-Large-Poset u z v = u ≤ z by v
 ```
