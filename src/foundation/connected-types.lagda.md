@@ -153,9 +153,7 @@ module _
   where
 
   is-connected-retract-of :
-    A retract-of B →
-    is-connected k B →
-    is-connected k A
+    A retract-of B → is-connected k B → is-connected k A
   is-connected-retract-of R =
     is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```
@@ -220,7 +218,7 @@ is-connected-Σ k H K =
                     ≃ ║A║ₖ                  by the right unit law of Σ
 ```
 
-and so, in particular, if the total space is `k`-connected so is the base. □
+and so, in particular, if the total space is `k`-connected so is the base. ∎
 
 ```agda
 is-connected-base :

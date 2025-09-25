@@ -572,7 +572,7 @@ $$
 By the previous lemma, since $\operatorname{fiber}_{g\circ f}(c)$ is
 $k+1$-connected, $\operatorname{fiber}_{g}(c)$ is $k+1$-connected if the first
 projection map of this type is $k$-connected, and its fibers compute to the
-fibers of $f$ so we are done. ∎
+fibers of $f$. ∎
 
 ```agda
 module _
