@@ -44,6 +44,10 @@ open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
+
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -378,4 +382,24 @@ module _
     equiv-Subuniverse-Connected-Map K f g → f ＝ g
   eq-equiv-Subuniverse-Connected-Map g =
     map-inv-equiv (extensionality-Subuniverse-Connected-Map g)
+```
+
+### `K`-connected maps are closed under cobase change
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l5 l6)
+  {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  is-subuniverse-connected-map-cobase-change :
+    dependent-pullback-property-pushout f g c →
+    is-subuniverse-connected-map K g →
+    is-subuniverse-connected-map K (horizontal-map-cocone f g c)
+  is-subuniverse-connected-map-cobase-change H G U =
+    is-equiv-vertical-map-is-pullback _ _
+      ( cone-dependent-pullback-property-pushout f g c (pr1 ∘ U))
+      ( G (U ∘ vertical-map-cocone f g c))
+      ( H (pr1 ∘ U))
 ```
