@@ -8,10 +8,6 @@ on:
         required: true
         default: master
 
-  push:
-    branches:
-      - master
-
   pull_request:
     branches:
       - master
