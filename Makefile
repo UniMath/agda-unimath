@@ -18,9 +18,9 @@ SKIPAUX ?=
 
 # When SKIPAUX=1 we don't require the auxiliary files.
 ifeq ($(SKIPAUX),1)
-DEPGRAPH_TARGETS :=
+AUX_TARGETS :=
 else
-DEPGRAPH_TARGETS := ./website/images/agda_dependency_graph.svg ./website/images/agda_dependency_graph_legend.html
+AUX_TARGETS := ./website/images/agda_dependency_graph.svg ./website/images/agda_dependency_graph_legend.html
 endif
 
 ifeq ($(CI),)
@@ -169,7 +169,7 @@ website/images/agda_dependency_graph.svg website/images/agda_dependency_graph_le
 
 .PHONY: website-prepare
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
-								 ./website/css/Agda-highlight.css $(DEPGRAPH_TARGETS)
+								 ./website/css/Agda-highlight.css $(AUX_TARGETS)
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
 	@cp -r ./website/images ./docs/website/
