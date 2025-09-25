@@ -23,6 +23,50 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  typecheck:
+    if:
+      ${{ github.event_name == 'workflow_dispatch' || github.event_name ==
+      'push' || (github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false) }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        agda: ['2.7.0']
+    steps:
+      - name: Checkout our repository
+        uses: actions/checkout@v4
+        with:
+          path: master
+      - name: Setup Agda
+        uses: wenkokke/setup-agda@v2.5.0
+        with:
+          agda-version: ${{ matrix.agda }}
+
+      - uses: actions/cache/restore@v4
+        id: cache-agda-formalization
+        name: Restore Agda formalization cache
+        with:
+          path: master/_build
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('master/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
+
+      - name: Typecheck library
+        run: |
+          cd master
+          agda --version
+          make check
+
+      - name: Save Agda build cache
+        uses: actions/cache/save@v4
+        with:
+          path: master/_build
+          key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
+
   # We're only running the linkcheck renderer, so we don't need to install
   # any other packages; that gives a warning during building, but doesn't
   # fail the build.
