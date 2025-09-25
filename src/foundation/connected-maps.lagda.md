@@ -41,9 +41,12 @@ open import foundation-core.truncated-maps
 
 ## Idea
 
-A map is said to be **`k`-connected** if its
-[fibers](foundation-core.fibers-of-maps.md) are
-[`k`-connected types](foundation.connected-types.md).
+A map is said to be
+{{#concept "`k`-connected" Disambiguation="map of types" Agda=is-connected-map Agda=connected-map}}
+if its [fibers](foundation-core.fibers-of-maps.md) are
+`k`-[connected types](foundation.connected-types.md). In other words, if their
+`k`-[truncations](foundation.truncations.md) are
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 
@@ -85,43 +88,6 @@ module _
 
   emb-inclusion-connected-map : connected-map k A B ↪ (A → B)
   emb-inclusion-connected-map = emb-subtype (is-connected-map-Prop k)
-
-  htpy-connected-map : (f g : connected-map k A B) → UU (l1 ⊔ l2)
-  htpy-connected-map f g = (map-connected-map f) ~ (map-connected-map g)
-
-  refl-htpy-connected-map : (f : connected-map k A B) → htpy-connected-map f f
-  refl-htpy-connected-map f = refl-htpy
-
-  is-torsorial-htpy-connected-map :
-    (f : connected-map k A B) → is-torsorial (htpy-connected-map f)
-  is-torsorial-htpy-connected-map f =
-    is-torsorial-Eq-subtype
-      ( is-torsorial-htpy (map-connected-map f))
-      ( is-prop-is-connected-map k)
-      ( map-connected-map f)
-      ( refl-htpy-connected-map f)
-      ( is-connected-map-connected-map f)
-
-  htpy-eq-connected-map :
-    (f g : connected-map k A B) → f ＝ g → htpy-connected-map f g
-  htpy-eq-connected-map f .f refl = refl-htpy-connected-map f
-
-  is-equiv-htpy-eq-connected-map :
-    (f g : connected-map k A B) → is-equiv (htpy-eq-connected-map f g)
-  is-equiv-htpy-eq-connected-map f =
-    fundamental-theorem-id
-      ( is-torsorial-htpy-connected-map f)
-      ( htpy-eq-connected-map f)
-
-  extensionality-connected-map :
-    (f g : connected-map k A B) → (f ＝ g) ≃ htpy-connected-map f g
-  pr1 (extensionality-connected-map f g) = htpy-eq-connected-map f g
-  pr2 (extensionality-connected-map f g) = is-equiv-htpy-eq-connected-map f g
-
-  eq-htpy-connected-map :
-    (f g : connected-map k A B) → htpy-connected-map f g → (f ＝ g)
-  eq-htpy-connected-map f g =
-    map-inv-equiv (extensionality-connected-map f g)
 ```
 
 ### The type of connected maps into a type
@@ -192,6 +158,51 @@ module _
 ```
 
 ## Properties
+
+### Characterizing equality of `k`-connected maps
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  htpy-connected-map : (f g : connected-map k A B) → UU (l1 ⊔ l2)
+  htpy-connected-map f g = (map-connected-map f) ~ (map-connected-map g)
+
+  refl-htpy-connected-map : (f : connected-map k A B) → htpy-connected-map f f
+  refl-htpy-connected-map f = refl-htpy
+
+  is-torsorial-htpy-connected-map :
+    (f : connected-map k A B) → is-torsorial (htpy-connected-map f)
+  is-torsorial-htpy-connected-map f =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-connected-map f))
+      ( is-prop-is-connected-map k)
+      ( map-connected-map f)
+      ( refl-htpy-connected-map f)
+      ( is-connected-map-connected-map f)
+
+  htpy-eq-connected-map :
+    (f g : connected-map k A B) → f ＝ g → htpy-connected-map f g
+  htpy-eq-connected-map f .f refl = refl-htpy-connected-map f
+
+  is-equiv-htpy-eq-connected-map :
+    (f g : connected-map k A B) → is-equiv (htpy-eq-connected-map f g)
+  is-equiv-htpy-eq-connected-map f =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-connected-map f)
+      ( htpy-eq-connected-map f)
+
+  extensionality-connected-map :
+    (f g : connected-map k A B) → (f ＝ g) ≃ htpy-connected-map f g
+  pr1 (extensionality-connected-map f g) = htpy-eq-connected-map f g
+  pr2 (extensionality-connected-map f g) = is-equiv-htpy-eq-connected-map f g
+
+  eq-htpy-connected-map :
+    (f g : connected-map k A B) → htpy-connected-map f g → (f ＝ g)
+  eq-htpy-connected-map f g =
+    map-inv-equiv (extensionality-connected-map f g)
+```
 
 ### All maps are `(-2)`-connected
 
