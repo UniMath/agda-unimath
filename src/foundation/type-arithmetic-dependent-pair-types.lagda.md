@@ -168,7 +168,7 @@ formalize both ways.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : Σ A B → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
   map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (x , y)))
@@ -410,7 +410,7 @@ right-distributive-product-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
   ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
 right-distributive-product-Σ {A} =
-  associative-Σ _ _ _
+  associative-Σ
 ```
 
 ## See also

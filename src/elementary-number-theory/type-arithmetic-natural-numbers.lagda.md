@@ -206,12 +206,12 @@ equiv-coproduct-Fin-ℕ (succ-ℕ n) =
 equiv-product-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
 equiv-product-Fin-ℕ zero-ℕ =
   ( left-unit-law-coproduct ℕ) ∘e
-    ( ( equiv-coproduct (left-absorption-product ℕ) left-unit-law-product) ∘e
-      ( right-distributive-product-coproduct empty unit ℕ))
+  ( ( equiv-coproduct (left-absorption-product ℕ) left-unit-law-product) ∘e
+    ( right-distributive-product-coproduct))
 equiv-product-Fin-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( ( equiv-coproduct (equiv-product-Fin-ℕ n) left-unit-law-product) ∘e
-      ( right-distributive-product-coproduct (Fin (succ-ℕ n)) unit ℕ))
+  ( ( equiv-coproduct (equiv-product-Fin-ℕ n) left-unit-law-product) ∘e
+    ( right-distributive-product-coproduct))
 ```
 
 ### The integers `ℤ` is equivalent to `ℕ`

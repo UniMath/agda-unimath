@@ -34,7 +34,7 @@ themselves, cartesian products, and dependent pair types.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   map-commutative-coproduct : A + B → B + A
@@ -124,7 +124,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : A + B → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3)
   where
 
   map-right-distributive-Σ-coproduct :
@@ -173,7 +173,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : A → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   map-left-distributive-Σ-coproduct :
@@ -220,77 +220,77 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-right-distributive-product-coproduct : (A + B) × C → (A × C) + (B × C)
   map-right-distributive-product-coproduct =
-    map-right-distributive-Σ-coproduct A B (λ _ → C)
+    map-right-distributive-Σ-coproduct (λ _ → C)
 
   map-inv-right-distributive-product-coproduct :
     (A × C) + (B × C) → (A + B) × C
   map-inv-right-distributive-product-coproduct =
-    map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   is-section-map-inv-right-distributive-product-coproduct :
     map-right-distributive-product-coproduct ∘
     map-inv-right-distributive-product-coproduct ~ id
   is-section-map-inv-right-distributive-product-coproduct =
-    is-section-map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    is-section-map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   is-retraction-map-inv-right-distributive-product-coproduct :
     map-inv-right-distributive-product-coproduct ∘
     map-right-distributive-product-coproduct ~ id
   is-retraction-map-inv-right-distributive-product-coproduct =
-    is-retraction-map-inv-right-distributive-Σ-coproduct A B (λ _ → C)
+    is-retraction-map-inv-right-distributive-Σ-coproduct (λ _ → C)
 
   abstract
     is-equiv-map-right-distributive-product-coproduct :
       is-equiv map-right-distributive-product-coproduct
     is-equiv-map-right-distributive-product-coproduct =
-      is-equiv-map-right-distributive-Σ-coproduct A B (λ _ → C)
+      is-equiv-map-right-distributive-Σ-coproduct (λ _ → C)
 
   right-distributive-product-coproduct : ((A + B) × C) ≃ ((A × C) + (B × C))
   right-distributive-product-coproduct =
-    right-distributive-Σ-coproduct A B (λ _ → C)
+    right-distributive-Σ-coproduct (λ _ → C)
 ```
 
 ### Left distributivity of products over coproducts
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-left-distributive-product-coproduct : A × (B + C) → (A × B) + (A × C)
   map-left-distributive-product-coproduct =
-    map-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    map-left-distributive-Σ-coproduct
 
   map-inv-left-distributive-product-coproduct :
     (A × B) + (A × C) → A × (B + C)
   map-inv-left-distributive-product-coproduct =
-    map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    map-inv-left-distributive-Σ-coproduct
 
   is-section-map-inv-left-distributive-product-coproduct :
     map-left-distributive-product-coproduct ∘
     map-inv-left-distributive-product-coproduct ~ id
   is-section-map-inv-left-distributive-product-coproduct =
-    is-section-map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-section-map-inv-left-distributive-Σ-coproduct
 
   is-retraction-map-inv-left-distributive-product-coproduct :
     map-inv-left-distributive-product-coproduct ∘
     map-left-distributive-product-coproduct ~ id
   is-retraction-map-inv-left-distributive-product-coproduct =
-    is-retraction-map-inv-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-retraction-map-inv-left-distributive-Σ-coproduct
 
   is-equiv-map-left-distributive-product-coproduct :
     is-equiv map-left-distributive-product-coproduct
   is-equiv-map-left-distributive-product-coproduct =
-    is-equiv-map-left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    is-equiv-map-left-distributive-Σ-coproduct
 
   left-distributive-product-coproduct : (A × (B + C)) ≃ ((A × B) + (A × C))
   left-distributive-product-coproduct =
-    left-distributive-Σ-coproduct A (λ _ → B) (λ _ → C)
+    left-distributive-Σ-coproduct
 ```
 
 ### If a coproduct is contractible then one summand is contractible and the other is empty

@@ -99,7 +99,7 @@ module _
                     ( compute-right-equiv-binary-product-Decomposition-Π-Decomposition
                       ( D)
                       ( b')))))))) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ d → distributive-Π-coproduct-binary-coproduct-Decomposition))
     where
     reassociate :
