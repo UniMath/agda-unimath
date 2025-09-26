@@ -403,3 +403,37 @@ module _
       ( G (U ∘ vertical-map-cocone f g c))
       ( H (pr1 ∘ U))
 ```
+
+### `K`-connected maps are closed under retracts of maps
+
+**Proof.** Given a retract of maps
+
+```text
+          i         r
+    A' ------> A ------> A'
+    |          |         |
+  f'|     I    f    R    | f'
+    ∨          ∨         ∨
+    B' ------> B ------> B'
+          i'        r'
+```
+
+with higher coherence `α`, and a `K`-valued family `U` over `B'` there is an
+induced retract of dependent precomposition maps
+
+```text
+     Π(A'),(U∘f') <--- Π(A'),(U∘r'∘i'∘f) <--- Π(A),(U∘r'∘f) <--- Π(A'),(U∘f')
+          ∧                                         ∧                 ∧
+          |            α* □ Π(I),(U∘r')             |      Π(R),U     |
+  Π(f'),U |                                    Π(f),(U∘r')            | Π(f'),U
+          |                                         |                 |
+     Π(B'),U <--------- Π(B'),(U∘r'∘i') <----- Π(B),(U∘r') <--- Π(B'),(U),
+```
+
+and since equivalences are closed under retracts of maps, if `f` is
+`K`-connected then so is `f'`. ∎
+
+Note that, since equivalences are already closed under noncoherent retracts of
+maps, we are not obligated to produce the higher coherence of this retract.
+
+> This remains to be formalized.
