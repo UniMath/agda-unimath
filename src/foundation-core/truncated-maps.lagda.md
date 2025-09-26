@@ -10,10 +10,12 @@ module foundation-core.truncated-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -297,4 +299,22 @@ module _
       ( is-trunc-map-is-equiv k L)
       ( is-trunc-map-comp k i g M
         ( is-trunc-map-is-equiv k K))
+```
+
+### If the domain is contractible and the codomain is `k+1`-truncated then the map is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-trunc-map-is-trunc-succ-codomain-is-contr-domain :
+    is-contr A →
+    is-trunc (succ-𝕋 k) B →
+    is-trunc-map k f
+  is-trunc-map-is-trunc-succ-codomain-is-contr-domain c tB u =
+    is-trunc-equiv k
+      ( f (center c) ＝ u)
+      ( left-unit-law-Σ-is-contr c (center c))
+      ( tB (f (center c)) u)
 ```
