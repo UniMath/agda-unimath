@@ -41,7 +41,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a semiring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Semiring}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a semiring" WD="sum" WDID=Q218005 Agda=sum-finite-Semiring}}
 extends the binary addition operation on a [semiring](ring-theory.semirings.md)
 `R` to any family of elements of `R` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
