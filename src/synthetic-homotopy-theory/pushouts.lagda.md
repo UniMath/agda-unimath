@@ -34,6 +34,7 @@ open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
 open import synthetic-homotopy-theory.pullback-property-pushouts
+open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -460,7 +461,7 @@ module _
       ( up-pushout f g)
 ```
 
-### Pushout cocones satisfy the pullback property of the pushout
+### Cocones satisfy the pullback property of the pushout if and only if they are pushouts
 
 ```agda
 module _
@@ -481,6 +482,29 @@ module _
     is-pushout-pullback-property-pushout pb =
       is-pushout-universal-property-pushout f g c
         ( universal-property-pushout-pullback-property-pushout f g c pb)
+```
+
+### Cocones satisfy the dependent pullback property of the pushout if and only if they are pushouts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  abstract
+    dependent-pullback-property-pushout-is-pushout :
+      is-pushout f g c → dependent-pullback-property-pushout f g c
+    dependent-pullback-property-pushout-is-pushout po =
+      dependent-pullback-property-pullback-property-pushout f g c
+        ( pullback-property-pushout-is-pushout f g c po)
+
+  abstract
+    is-pushout-dependent-pullback-property-pushout :
+      dependent-pullback-property-pushout f g c → is-pushout f g c
+    is-pushout-dependent-pullback-property-pushout pb =
+      is-pushout-pullback-property-pushout f g c
+        ( pullback-property-dependent-pullback-property-pushout f g c pb)
 ```
 
 ### Fibers of the cogap map
