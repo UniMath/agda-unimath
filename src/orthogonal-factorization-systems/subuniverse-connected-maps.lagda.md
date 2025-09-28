@@ -12,8 +12,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
+open import foundation.coproduct-types
+open import orthogonal-factorization-systems.orthogonal-maps
 open import foundation.equivalences-arrows
 open import foundation.function-extensionality
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.universal-property-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
@@ -69,6 +74,10 @@ For every `K`-valued family `U` over `B`, the
 ```
 
 is an equivalence.
+
+Equivalently, a `K`-connected map `f : A → B` is a map that is
+[left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to maps
+`h : C → B` whose fibers are in `K`.
 
 ## Definitions
 
@@ -299,34 +308,6 @@ is-subuniverse-connected-map-left-factor K {g = g} {h} H GH U =
     ( GH U)
 ```
 
-### The total map induced by a family of maps is `K`-connected if and only if all maps in the family are `K`-connected
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  (f : (x : A) → B x → C x)
-  where
-
-  is-subuniverse-connected-map-tot-is-fiberwise-subuniverse-connected-map :
-    ((x : A) → is-subuniverse-connected-map K (f x)) →
-    is-subuniverse-connected-map K (tot f)
-  is-subuniverse-connected-map-tot-is-fiberwise-subuniverse-connected-map H U =
-    is-equiv-source-is-equiv-target-equiv-arrow
-      ( precomp-Π (tot f) (pr1 ∘ U))
-      ( map-Π (λ i → precomp-Π (f i) (pr1 ∘ U ∘ (i ,_))))
-      ( equiv-ev-pair , equiv-ev-pair , refl-htpy)
-      ( is-equiv-map-Π-is-fiberwise-equiv (λ i → H i (U ∘ (i ,_))))
-
-  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot :
-  --   is-subuniverse-connected-map K (tot f) →
-  --   (x : A) → is-subuniverse-connected-map K (f x)
-  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot H = {!   !}
-  --   -- is-subuniverse-connected-equiv (inv-compute-fiber-tot f (x , y)) (H (x , y))
-```
-
-<!-- TODO: for the converse we need the fiberwise characterization -->
-
 ### Characterization of the identity type of `Subuniverse-Connected-Map l2 K A`
 
 ```agda
@@ -393,15 +374,23 @@ module _
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   where
 
-  is-subuniverse-connected-map-cobase-change :
+  is-subuniverse-connected-map-cobase-change' :
     dependent-pullback-property-pushout f g c →
     is-subuniverse-connected-map K g →
     is-subuniverse-connected-map K (horizontal-map-cocone f g c)
-  is-subuniverse-connected-map-cobase-change H G U =
+  is-subuniverse-connected-map-cobase-change' H G U =
     is-equiv-vertical-map-is-pullback _ _
       ( cone-dependent-pullback-property-pushout f g c (pr1 ∘ U))
       ( G (U ∘ vertical-map-cocone f g c))
       ( H (pr1 ∘ U))
+
+  is-subuniverse-connected-map-cobase-change :
+    is-pushout f g c →
+    is-subuniverse-connected-map K g →
+    is-subuniverse-connected-map K (horizontal-map-cocone f g c)
+  is-subuniverse-connected-map-cobase-change H =
+    is-subuniverse-connected-map-cobase-change'
+      ( dependent-pullback-property-pushout-is-pushout f g c H)
 ```
 
 ### `K`-connected maps are closed under retracts of maps
@@ -437,3 +426,55 @@ Note that, since equivalences are already closed under noncoherent retracts of
 maps, we are not obligated to produce the higher coherence of this retract.
 
 > This remains to be formalized.
+
+### The total map induced by a family of maps is `K`-connected if and only if all maps in the family are `K`-connected
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
+  {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (f : (x : A) → B x → C x)
+  where
+
+  is-subuniverse-connected-map-tot-is-fiberwise-subuniverse-connected-map :
+    ((x : A) → is-subuniverse-connected-map K (f x)) →
+    is-subuniverse-connected-map K (tot f)
+  is-subuniverse-connected-map-tot-is-fiberwise-subuniverse-connected-map H U =
+    is-equiv-source-is-equiv-target-equiv-arrow
+      ( precomp-Π (tot f) (pr1 ∘ U))
+      ( map-Π (λ i → precomp-Π (f i) (pr1 ∘ U ∘ (i ,_))))
+      ( equiv-ev-pair , equiv-ev-pair , refl-htpy)
+      ( is-equiv-map-Π-is-fiberwise-equiv (λ i → H i (U ∘ (i ,_))))
+
+  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot :
+  --   is-subuniverse-connected-map K (tot f) →
+  --   (x : A) → is-subuniverse-connected-map K (f x)
+  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot H = {!   !}
+  --   -- is-subuniverse-connected-equiv (inv-compute-fiber-tot f (x , y)) (H (x , y))
+```
+
+### Coproducts of `K`-connected maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l5 l6)
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
+  {f : A → B} {f' : A' → B'}
+  where
+
+  is-subuniverse-connected-map-coproduct :
+    is-subuniverse-connected-map K f →
+    is-subuniverse-connected-map K f' →
+    is-subuniverse-connected-map K (map-coproduct f f')
+  is-subuniverse-connected-map-coproduct F F' U =
+    is-equiv-source-is-equiv-target-equiv-arrow
+      ( precomp-Π (map-coproduct f f') (pr1 ∘ U))
+      ( map-product
+        ( precomp-Π f (pr1 ∘ U ∘ inl))
+        ( precomp-Π f' (pr1 ∘ U ∘ inr)))
+      ( equiv-dependent-universal-property-coproduct (pr1 ∘ U) ,
+        equiv-dependent-universal-property-coproduct
+          ( pr1 ∘ U ∘ map-coproduct f f') ,
+        refl-htpy)
+      ( is-equiv-map-product _ _ (F (U ∘ inl)) (F' (U ∘ inr)))
+```
