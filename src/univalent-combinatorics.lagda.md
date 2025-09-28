@@ -32,6 +32,7 @@ open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types public
+open import univalent-combinatorics.complements-decidable-subtypes public
 open import univalent-combinatorics.complements-isolated-elements public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.coproducts-inhabited-finite-types public
