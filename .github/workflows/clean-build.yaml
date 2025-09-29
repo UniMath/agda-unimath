@@ -22,7 +22,7 @@ jobs:
           path: repo
 
       - name: Setup Agda ${{ matrix.agda }} (prebuilt)
-        uses: ./master/.github/actions/setup-agda
+        uses: ./repo/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 
