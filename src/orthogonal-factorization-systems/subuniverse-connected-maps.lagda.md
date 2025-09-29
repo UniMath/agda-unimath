@@ -407,8 +407,8 @@ module _
           i'        r'
 ```
 
-with higher coherence `α`, and a `K`-valued family `U` over `B'` there is an
-induced retract of dependent precomposition maps
+with higher coherence `α`, and a `K`-valued family `U` over `B'` there is by
+functoriality an induced retract of dependent precomposition maps
 
 ```text
      Π(A'),(U∘f') <--- Π(A'),(U∘r'∘i'∘f) <--- Π(A),(U∘r'∘f) <--- Π(A'),(U∘f')
@@ -472,7 +472,8 @@ module _
       ( map-product
         ( precomp-Π f (pr1 ∘ U ∘ inl))
         ( precomp-Π f' (pr1 ∘ U ∘ inr)))
-      ( equiv-dependent-universal-property-coproduct (pr1 ∘ U) ,
+      ( equiv-dependent-universal-property-coproduct
+        ( pr1 ∘ U) ,
         equiv-dependent-universal-property-coproduct
           ( pr1 ∘ U ∘ map-coproduct f f') ,
         refl-htpy)
