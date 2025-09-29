@@ -38,18 +38,10 @@ jobs:
           # We need the entire history for contributor information
           fetch-depth: 0
 
-      - name: Fetch Agda ${{ matrix.agda }} (prebuilt)
-        uses: engineerd/configurator@v0.0.10
-        with:
-          name: agda
-          url:
-            https://github.com/agda/agda/releases/download/v${{ matrix.agda
-            }}/Agda-v${{ matrix.agda }}-linux.tar.xz
-          pathInArchive: agda
       - name: Setup Agda ${{ matrix.agda }} (prebuilt)
-        run: |
-          agda --version
-          agda --setup
+        uses: ./master/.github/actions/setup-agda
+        with:
+          agda-version: ${{ matrix.agda }}
 
       - uses: actions/cache/restore@v4
         id: cache-agda-formalization
