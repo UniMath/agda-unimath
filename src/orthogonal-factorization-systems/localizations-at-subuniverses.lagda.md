@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.subuniverse-equivalences
 open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
@@ -32,6 +33,16 @@ every `Z` in `P`, the [precomposition map](foundation-core.function-types.md)
 is an [equivalence](foundation-core.equivalences.md).
 
 ## Definition
+
+### The predicate on a map of being a localization at a subuniverse
+
+```agda
+is-subuniverse-localization-map :
+  {l1 l2 lP : Level} (P : subuniverse l1 lP) {A : UU l2} {PA : UU l1}
+  (η : A → PA) → UU (lsuc l1 ⊔ l2 ⊔ lP)
+is-subuniverse-localization-map P {A} {PA} η =
+  is-in-subuniverse P PA × is-subuniverse-equiv P η
+```
 
 ### The predicate of being a localization at a subuniverse
 
