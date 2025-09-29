@@ -10,6 +10,17 @@ everythingOpts := --guardedness --cohesion --flat-split --rewriting
 # when building the website
 SKIPAGDA ?=
 
+# use "$ export SKIPAUX=1" or "make SKIPAUX=1 ..." to skip generating auxiliary
+# files, i.e., the Agda dependency graph SVG when building the website
+SKIPAUX ?=
+
+# When SKIPAUX=1 we don't require the auxiliary files.
+ifeq ($(SKIPAUX),1)
+AUX_TARGETS :=
+else
+AUX_TARGETS := ./website/images/agda_dependency_graph.svg ./website/images/agda_dependency_graph_legend.html
+endif
+
 ifeq ($(CI),)
 	AGDA_MIN_HEAP ?= 2G
 else
@@ -156,8 +167,7 @@ website/images/agda_dependency_graph.svg website/images/agda_dependency_graph_le
 
 .PHONY: website-prepare
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
-								 ./website/css/Agda-highlight.css ./website/images/agda_dependency_graph.svg \
-								 ./website/images/agda_dependency_graph_legend.html
+								 ./website/css/Agda-highlight.css $(AUX_TARGETS)
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
 	@cp -r ./website/images ./docs/website/

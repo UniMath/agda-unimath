@@ -101,7 +101,7 @@ jobs:
           MDBOOK_OUTPUT: '{"linkcheck":{}}'
         run: |
           cd repo
-          make SKIPAGDA=1 website
+          make SKIPAGDA=1 SKIPAUX=1 website
 
   pre-commit:
     runs-on: ubuntu-latest
