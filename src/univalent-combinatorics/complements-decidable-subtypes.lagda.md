@@ -22,7 +22,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The
-{{#concept "complement" Disambiguation="of a decidable subset of a finite type" Agda=complement-decidable-subset-Finite-Type}}
+{{#concept "complement" Disambiguation="of a decidable subset of a finite type" Agda=complement-subset-Finite-Type}}
 of a
 [decidable subtype of a finite type](univalent-combinatorics.decidable-subtypes.md)
 is its [complement](logic.complements-decidable-subtypes.md) as a
