@@ -412,8 +412,8 @@ module _
           ( λ x → is-emb-is-equiv G (i x) (j (f x))))
 
   equiv-postcomp-extension :
-     (f : A → B) (i : A → X) (g : X ≃ Y) →
-     extension f i ≃ extension f (map-equiv g ∘ i)
+    (f : A → B) (i : A → X) (g : X ≃ Y) →
+    extension f i ≃ extension f (map-equiv g ∘ i)
   equiv-postcomp-extension f i (g , G) =
     ( postcomp-extension f i g , is-equiv-postcomp-extension f i g G)
 ```
@@ -438,8 +438,8 @@ module _
             ( λ x → H (i x) (j (f x)))))
 
   emb-postcomp-extension :
-     (f : A → B) (i : A → X) (g : X ↪ Y) →
-     extension f i ↪ extension f (map-emb g ∘ i)
+    (f : A → B) (i : A → X) (g : X ↪ Y) →
+    extension f i ↪ extension f (map-emb g ∘ i)
   emb-postcomp-extension f i (g , G) =
     postcomp-extension f i g , is-emb-postcomp-extension f i g G
 ```
