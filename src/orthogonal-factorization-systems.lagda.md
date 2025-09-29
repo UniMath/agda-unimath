@@ -45,6 +45,8 @@ open import orthogonal-factorization-systems.localizations-at-global-subuniverse
 open import orthogonal-factorization-systems.localizations-at-maps public
 open import orthogonal-factorization-systems.localizations-at-subuniverses public
 open import orthogonal-factorization-systems.locally-small-modal-operators public
+open import orthogonal-factorization-systems.map-separated-types-global-subuniverses public
+open import orthogonal-factorization-systems.map-separated-types-subuniverses public
 open import orthogonal-factorization-systems.maps-local-at-maps public
 open import orthogonal-factorization-systems.mere-lifting-properties public
 open import orthogonal-factorization-systems.modal-induction public
