@@ -5,8 +5,6 @@
 # modules that include the modules that have them enabled), then they need to be
 # added to the everything file as well.
 everythingOpts := --guardedness --cohesion --flat-split --rewriting
-# use "$ export AGDAVERBOSE=-v20" if you want to see all
-AGDAVERBOSE ?= -v1
 
 # use "$ export SKIPAGDA=1" or "make SKIPAGDA=1 ..." to skip Agda processing
 # when building the website
@@ -43,7 +41,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # the agda-unimath chrome.
 AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=docs --css=website/css/Agda.css --only-scope-checking
 AGDAPROFILEFLAGS ?= --profile=modules +RTS -s -RTS
-AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
+AGDA ?= agda $(AGDARTS)
 TIME ?= time
 
 METAFILES := \
