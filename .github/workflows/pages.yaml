@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: ['2.7.0']
+        agda: ['2.8.0']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,8 +38,8 @@ jobs:
           # We need the entire history for contributor information
           fetch-depth: 0
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./master/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 

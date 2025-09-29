@@ -11,20 +11,18 @@ concurrency:
 
 jobs:
   typecheck-clean:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        agda: ['2.7.0']
-
+        agda: ['2.8.0']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v4
         with:
           path: repo
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./master/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 
