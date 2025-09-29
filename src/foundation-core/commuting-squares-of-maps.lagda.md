@@ -82,6 +82,14 @@ module _
   pasting-horizontal-coherence-square-maps sq-left sq-right =
     (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 
+  pasting-horizontal-coherence-square-maps' :
+    coherence-square-maps' top-left left mid bottom-left →
+    coherence-square-maps' top-right mid right bottom-right →
+    coherence-square-maps'
+      (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
+  pasting-horizontal-coherence-square-maps' sq-left sq-right =
+     (sq-right ·r top-left) ∙h (bottom-right ·l sq-left)
+
   pasting-horizontal-up-to-htpy-coherence-square-maps :
     {top : A → C} (H : coherence-triangle-maps top top-right top-left)
     {bottom : X → Z}

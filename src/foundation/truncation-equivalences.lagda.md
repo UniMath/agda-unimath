@@ -29,6 +29,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -312,27 +313,44 @@ module _
     (g : B → C) (f : A ≃ B) →
     is-truncation-equivalence k g →
     is-truncation-equivalence k (g ∘ map-equiv f)
-  is-truncation-equivalence-equiv-is-truncation-equivalence g f eg =
-    is-truncation-equivalence-is-equiv-is-truncation-equivalence g
-      ( map-equiv f)
-      ( eg)
-      ( is-equiv-map-equiv f)
+  is-truncation-equivalence-equiv-is-truncation-equivalence g (f , ef) eg =
+    is-truncation-equivalence-is-equiv-is-truncation-equivalence g f eg ef
 
   is-truncation-equivalence-is-truncation-equivalence-equiv :
     (g : B ≃ C) (f : A → B) →
     is-truncation-equivalence k f →
     is-truncation-equivalence k (map-equiv g ∘ f)
-  is-truncation-equivalence-is-truncation-equivalence-equiv g f ef =
-    is-truncation-equivalence-is-truncation-equivalence-is-equiv
-      ( map-equiv g)
-      ( f)
-      ( is-equiv-map-equiv g)
-      ( ef)
+  is-truncation-equivalence-is-truncation-equivalence-equiv (g , eg) f ef =
+    is-truncation-equivalence-is-truncation-equivalence-is-equiv g f eg ef
 ```
 
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
-This is an instance of Lemma 2.27 in {{#cite CORS20}} listed below.
+This is an instance of Lemma 2.27 in {{#cite CORS20}}.
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋}
+  {X : UU l1} (P : type-trunc k X → UU l2)
+  where
+
+  map-Σ-map-base-unit-trunc' :
+    Σ X (P ∘ unit-trunc) → Σ (type-trunc k X) P
+  map-Σ-map-base-unit-trunc' = map-Σ-map-base unit-trunc P
+
+  is-truncation-equivalence-map-Σ-map-base-unit-trunc' :
+    is-truncation-equivalence k map-Σ-map-base-unit-trunc'
+  is-truncation-equivalence-map-Σ-map-base-unit-trunc' =
+    is-truncation-equivalence-is-equiv-precomp k
+      ( map-Σ-map-base-unit-trunc')
+      ( λ l (Y , TY) →
+        is-equiv-equiv
+          ( equiv-ev-pair)
+          ( equiv-ev-pair)
+          ( refl-htpy)
+          ( dependent-universal-property-trunc
+            ( λ t → ((P t → Y) , is-trunc-function-type k TY))))
+```
 
 ```agda
 module _
@@ -349,17 +367,18 @@ module _
   is-truncation-equivalence-map-Σ-map-base-unit-trunc =
     is-truncation-equivalence-is-equiv-precomp k
       ( map-Σ-map-base-unit-trunc)
-      ( λ l X →
+      ( λ l (Y , TY) →
         is-equiv-equiv
+          {f = precomp (λ x → unit-trunc (pr1 x) , pr2 x) Y}
+          {g = precomp-Π unit-trunc (λ |x| → (b : P |x|) → Y)}
           ( equiv-ev-pair)
           ( equiv-ev-pair)
           ( refl-htpy)
           ( dependent-universal-property-trunc
             ( λ t →
-              ( ( P t → type-Truncated-Type X) ,
+              ( ( P t → Y) ,
                 ( is-trunc-succ-is-trunc k
-                  ( is-trunc-function-type k
-                    ( is-trunc-type-Truncated-Type X)))))))
+                  ( is-trunc-function-type k TY))))))
 ```
 
 ### There is a `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation

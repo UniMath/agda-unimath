@@ -10,9 +10,13 @@ open import foundation-core.precomposition-dependent-functions public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-homotopies
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
+open import foundation.transport-along-homotopies
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -29,6 +33,40 @@ open import foundation-core.type-theoretic-principle-of-choice
 </details>
 
 ## Properties
+
+### The action of dependent precomposition on homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : f ~ g) (C : B → UU l3) (h : (y : B) → C y)
+  where
+
+  eq-htpy-precomp-Π : (λ x → tr C (H x) (precomp-Π f C h x)) ＝ precomp-Π g C h
+  eq-htpy-precomp-Π = eq-htpy (htpy-htpy-precomp-Π H C h)
+
+  htpy-precomp-Π :
+    dependent-identification
+      ( λ v → (a : A) → C (v a))
+      ( eq-htpy H)
+      ( precomp-Π f C h)
+      ( precomp-Π g C h)
+  htpy-precomp-Π =
+    compute-tr-htpy (λ _ → C) H (precomp-Π f C h) ∙ eq-htpy-precomp-Π
+
+  eq-htpy-precomp-Π' :
+    precomp-Π f C h ＝ (λ x → inv-tr C (H x) (precomp-Π g C h x))
+  eq-htpy-precomp-Π' = eq-htpy (htpy-htpy-precomp-Π' H C h)
+
+  htpy-precomp-Π' :
+    dependent-identification'
+      ( λ v → (a : A) → C (v a))
+      ( eq-htpy H)
+      ( precomp-Π f C h)
+      ( precomp-Π g C h)
+  htpy-precomp-Π' =
+    eq-htpy-precomp-Π' ∙ inv (compute-inv-tr-htpy (λ _ → C) H (precomp-Π g C h))
+```
 
 ### Equivalences induce an equivalence from the type of homotopies between two dependent functions to the type of homotopies between their precomposites
 
