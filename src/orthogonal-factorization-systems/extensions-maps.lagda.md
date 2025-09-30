@@ -311,7 +311,7 @@ module _
     ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
     (g : (x : B) → P x) → is-trunc k (is-extension i f g)
   is-trunc-is-extension-dependent-type f is-trunc-P g =
-    is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
+    is-trunc-Π k (λ x → is-trunc-P x (f x) (g (i x)))
 
   is-trunc-extension-dependent-type :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
@@ -341,7 +341,7 @@ module _
     ((x : A) → is-prop (P (i x))) →
     (g : (x : B) → P x) → is-contr (is-extension i f g)
   is-contr-is-extension f is-prop-P g =
-    is-contr-Π λ x → is-prop-P x (f x) (g (i x))
+    is-contr-Π (λ x → is-prop-P x (f x) (g (i x)))
 
   is-prop-is-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
@@ -364,7 +364,7 @@ module _
   is-extension-self = refl-htpy
 
   extension-self : extension-dependent-type id P f
-  extension-self = f , is-extension-self
+  extension-self = (f , is-extension-self)
 ```
 
 ### The identity is an extension of every map along themselves
@@ -378,7 +378,7 @@ module _
   is-extension-along-self = refl-htpy
 
   extension-along-self : extension f f
-  extension-along-self = id , is-extension-along-self
+  extension-along-self = (id , is-extension-along-self)
 ```
 
 ## See also
