@@ -1,7 +1,7 @@
 # Inhabited closed intervals in total orders
 
 ```agda
-module order-theory.inhabited-closed-intervals-total-orders where
+module order-theory.closed-intervals-total-orders where
 ```
 
 <details><summary>Imports</summary>
@@ -24,7 +24,7 @@ open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
-open import order-theory.inhabited-closed-intervals-posets
+open import order-theory.closed-intervals-posets
 open import order-theory.posets
 open import order-theory.total-orders
 ```
@@ -33,16 +33,16 @@ open import order-theory.total-orders
 
 ## Idea
 
-An
-{{#concept "inhabited closed interval" disambiguation="in a total order" Agda=inhabited-inhabited-closed-interval-Total-Order}}
+A
+{{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
-such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. Any
-pair `x y` with `x ≤ y` induces a unique inhabited closed interval, so we can
-equivalently characterize inhabited closed intervals in terms of such pairs.
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`.  (We
+choose the convention of not considering the empty subtype to be a closed
+interval.)
 
-Equivalently, an inhabited closed interval is a total order is an
-[inhabited closed interval](order-theory.inhabited-closed-intervals-posets.md)
+Equivalently, a closed interval is a total order is a
+[closed interval](order-theory.closed-intervals-posets.md)
 in the underlying [poset](order-theory.posets.md).
 
 ## Definition
@@ -52,32 +52,32 @@ module _
   {l1 l2 : Level} (X : Total-Order l1 l2)
   where
 
-  inhabited-closed-interval-Total-Order : UU (l1 ⊔ l2)
-  inhabited-closed-interval-Total-Order =
-    inhabited-closed-interval-Poset (poset-Total-Order X)
+  closed-interval-Total-Order : UU (l1 ⊔ l2)
+  closed-interval-Total-Order =
+    closed-interval-Poset (poset-Total-Order X)
 
-  lower-bound-inhabited-closed-interval-Total-Order :
-    inhabited-closed-interval-Total-Order → type-Total-Order X
-  lower-bound-inhabited-closed-interval-Total-Order ((x , _) , _) = x
+  lower-bound-closed-interval-Total-Order :
+    closed-interval-Total-Order → type-Total-Order X
+  lower-bound-closed-interval-Total-Order ((x , _) , _) = x
 
-  upper-bound-inhabited-closed-interval-Total-Order :
-    inhabited-closed-interval-Total-Order → type-Total-Order X
-  upper-bound-inhabited-closed-interval-Total-Order ((_ , y) , _) = y
+  upper-bound-closed-interval-Total-Order :
+    closed-interval-Total-Order → type-Total-Order X
+  upper-bound-closed-interval-Total-Order ((_ , y) , _) = y
 
-  subtype-inhabited-closed-interval-Total-Order :
-    inhabited-closed-interval-Total-Order → subtype l2 (type-Total-Order X)
-  subtype-inhabited-closed-interval-Total-Order =
-    subtype-inhabited-closed-interval-Poset (poset-Total-Order X)
+  subtype-closed-interval-Total-Order :
+    closed-interval-Total-Order → subtype l2 (type-Total-Order X)
+  subtype-closed-interval-Total-Order =
+    subtype-closed-interval-Poset (poset-Total-Order X)
 
-  type-inhabited-closed-interval-Total-Order :
-    inhabited-closed-interval-Total-Order → UU (l1 ⊔ l2)
-  type-inhabited-closed-interval-Total-Order =
-    type-inhabited-closed-interval-Poset (poset-Total-Order X)
+  type-closed-interval-Total-Order :
+    closed-interval-Total-Order → UU (l1 ⊔ l2)
+  type-closed-interval-Total-Order =
+    type-closed-interval-Poset (poset-Total-Order X)
 
-  is-in-inhabited-closed-interval-Total-Order :
-    inhabited-closed-interval-Total-Order → type-Total-Order X → UU l2
-  is-in-inhabited-closed-interval-Total-Order =
-    is-in-inhabited-closed-interval-Poset (poset-Total-Order X)
+  is-in-closed-interval-Total-Order :
+    closed-interval-Total-Order → type-Total-Order X → UU l2
+  is-in-closed-interval-Total-Order =
+    is-in-closed-interval-Poset (poset-Total-Order X)
 ```
 
 ## Properties
@@ -90,19 +90,19 @@ module _
   where
 
   abstract
-    lower-bound-is-in-inhabited-closed-interval-Total-Order :
-      ([a,b] : inhabited-closed-interval-Total-Order X) →
-      is-in-inhabited-closed-interval-Total-Order X [a,b]
-        ( lower-bound-inhabited-closed-interval-Total-Order X [a,b])
-    lower-bound-is-in-inhabited-closed-interval-Total-Order =
-      lower-bound-is-in-inhabited-closed-interval-Poset (poset-Total-Order X)
+    lower-bound-is-in-closed-interval-Total-Order :
+      ([a,b] : closed-interval-Total-Order X) →
+      is-in-closed-interval-Total-Order X [a,b]
+        ( lower-bound-closed-interval-Total-Order X [a,b])
+    lower-bound-is-in-closed-interval-Total-Order =
+      lower-bound-is-in-closed-interval-Poset (poset-Total-Order X)
 
-    upper-bound-is-in-inhabited-closed-interval-Total-Order :
-      ([a,b] : inhabited-closed-interval-Total-Order X) →
-      is-in-inhabited-closed-interval-Total-Order X [a,b]
-        ( upper-bound-inhabited-closed-interval-Total-Order X [a,b])
-    upper-bound-is-in-inhabited-closed-interval-Total-Order =
-      upper-bound-is-in-inhabited-closed-interval-Poset (poset-Total-Order X)
+    upper-bound-is-in-closed-interval-Total-Order :
+      ([a,b] : closed-interval-Total-Order X) →
+      is-in-closed-interval-Total-Order X [a,b]
+        ( upper-bound-closed-interval-Total-Order X [a,b])
+    upper-bound-is-in-closed-interval-Total-Order =
+      upper-bound-is-in-closed-interval-Poset (poset-Total-Order X)
 ```
 
 ### Closed intervals are inhabited
@@ -110,15 +110,15 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (X : Total-Order l1 l2)
-  ([x,y] : inhabited-closed-interval-Total-Order X)
+  ([x,y] : closed-interval-Total-Order X)
   where
 
   abstract
-    is-inhabited-inhabited-closed-interval-Total-Order :
+    is-inhabited-closed-interval-Total-Order :
       is-inhabited-subtype
-        ( subtype-inhabited-closed-interval-Total-Order X [x,y])
-    is-inhabited-inhabited-closed-interval-Total-Order =
-      is-inhabited-inhabited-closed-interval-Poset (poset-Total-Order X) [x,y]
+        ( subtype-closed-interval-Total-Order X [x,y])
+    is-inhabited-closed-interval-Total-Order =
+      is-inhabited-closed-interval-Poset (poset-Total-Order X) [x,y]
 ```
 
 ### Characterization of equality
@@ -129,19 +129,19 @@ module _
   where
 
   abstract
-    eq-inhabited-closed-interval-Total-Order :
-      ( [a,b] [c,d] : inhabited-closed-interval-Total-Order X) →
-      ( lower-bound-inhabited-closed-interval-Total-Order X [a,b] ＝
-        lower-bound-inhabited-closed-interval-Total-Order X [c,d]) →
-      ( upper-bound-inhabited-closed-interval-Total-Order X [a,b] ＝
-        upper-bound-inhabited-closed-interval-Total-Order X [c,d]) →
+    eq-closed-interval-Total-Order :
+      ( [a,b] [c,d] : closed-interval-Total-Order X) →
+      ( lower-bound-closed-interval-Total-Order X [a,b] ＝
+        lower-bound-closed-interval-Total-Order X [c,d]) →
+      ( upper-bound-closed-interval-Total-Order X [a,b] ＝
+        upper-bound-closed-interval-Total-Order X [c,d]) →
       [a,b] ＝ [c,d]
-    eq-inhabited-closed-interval-Total-Order =
-      eq-inhabited-closed-interval-Poset (poset-Total-Order X)
+    eq-closed-interval-Total-Order =
+      eq-closed-interval-Poset (poset-Total-Order X)
 
-  set-inhabited-closed-interval-Total-Order : Set (l1 ⊔ l2)
-  set-inhabited-closed-interval-Total-Order =
-    set-inhabited-closed-interval-Poset (poset-Total-Order X)
+  set-closed-interval-Total-Order : Set (l1 ⊔ l2)
+  set-closed-interval-Total-Order =
+    set-closed-interval-Poset (poset-Total-Order X)
 ```
 
 ### The map from closed intervals to subtypes is injective
@@ -152,10 +152,10 @@ module _
   where
 
   abstract
-    is-injective-subtype-inhabited-closed-interval-Total-Order :
-      is-injective (subtype-inhabited-closed-interval-Total-Order X)
-    is-injective-subtype-inhabited-closed-interval-Total-Order =
-      is-injective-subtype-inhabited-closed-interval-Poset (poset-Total-Order X)
+    is-injective-subtype-closed-interval-Total-Order :
+      is-injective (subtype-closed-interval-Total-Order X)
+    is-injective-subtype-closed-interval-Total-Order =
+      is-injective-subtype-closed-interval-Poset (poset-Total-Order X)
 ```
 
 ### Total orders can be divided along an element
@@ -165,62 +165,62 @@ module _
   {l1 l2 : Level} (X : Total-Order l1 l2)
   where
 
-  divide-below-inhabited-closed-interval-Total-Order :
-    ([a,b] : inhabited-closed-interval-Total-Order X) →
-    (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
-    inhabited-closed-interval-Total-Order X
-  divide-below-inhabited-closed-interval-Total-Order
+  divide-below-closed-interval-Total-Order :
+    ([a,b] : closed-interval-Total-Order X) →
+    (c : type-closed-interval-Total-Order X [a,b]) →
+    closed-interval-Total-Order X
+  divide-below-closed-interval-Total-Order
     ((a , b) , a≤b) (c , a≤c , c≤b) =
     ((a , c) , a≤c)
 
-  divide-above-inhabited-closed-interval-Total-Order :
-    ([a,b] : inhabited-closed-interval-Total-Order X) →
-    (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
-    inhabited-closed-interval-Total-Order X
-  divide-above-inhabited-closed-interval-Total-Order
+  divide-above-closed-interval-Total-Order :
+    ([a,b] : closed-interval-Total-Order X) →
+    (c : type-closed-interval-Total-Order X [a,b]) →
+    closed-interval-Total-Order X
+  divide-above-closed-interval-Total-Order
     ((a , b) , a≤b) (c , a≤c , c≤b) =
     ((c , b) , c≤b)
 
   abstract
-    has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order :
-      ([a,b] : inhabited-closed-interval-Total-Order X) →
-      (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
+    has-same-elements-divide-subtype-closed-interval-Total-Order :
+      ([a,b] : closed-interval-Total-Order X) →
+      (c : type-closed-interval-Total-Order X [a,b]) →
       has-same-elements-subtype
         ( union-subtype
-          ( subtype-inhabited-closed-interval-Total-Order X
-            ( divide-below-inhabited-closed-interval-Total-Order [a,b] c))
-          ( subtype-inhabited-closed-interval-Total-Order X
-            ( divide-above-inhabited-closed-interval-Total-Order [a,b] c)))
-        ( subtype-inhabited-closed-interval-Total-Order X [a,b])
+          ( subtype-closed-interval-Total-Order X
+            ( divide-below-closed-interval-Total-Order [a,b] c))
+          ( subtype-closed-interval-Total-Order X
+            ( divide-above-closed-interval-Total-Order [a,b] c)))
+        ( subtype-closed-interval-Total-Order X [a,b])
     pr1
-      ( has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order
+      ( has-same-elements-divide-subtype-closed-interval-Total-Order
         [a,b]@((a , b) , a≤b) (c , a≤c , c≤b) x) =
           elim-disjunction
-            ( subtype-inhabited-closed-interval-Total-Order X [a,b] x)
+            ( subtype-closed-interval-Total-Order X [a,b] x)
             ( λ (a≤x , x≤c) →
               ( a≤x , transitive-leq-Total-Order X x c b c≤b x≤c))
             ( λ (c≤x , x≤b) →
               ( transitive-leq-Total-Order X a c x c≤x a≤c , x≤b))
     pr2
-      ( has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order
+      ( has-same-elements-divide-subtype-closed-interval-Total-Order
         [a,b]@((a , b) , a≤b) (c , a≤c , c≤b) x) (a≤x , x≤b) =
           map-disjunction
             ( λ x≤c → (a≤x , x≤c))
             ( λ c≤x → (c≤x , x≤b))
             ( is-total-Total-Order X x c)
 
-    eq-divide-subtype-inhabited-closed-interval-Total-Order :
-      ([a,b] : inhabited-closed-interval-Total-Order X) →
-      (c : type-inhabited-closed-interval-Total-Order X [a,b]) →
+    eq-divide-subtype-closed-interval-Total-Order :
+      ([a,b] : closed-interval-Total-Order X) →
+      (c : type-closed-interval-Total-Order X [a,b]) →
       union-subtype
-        ( subtype-inhabited-closed-interval-Total-Order X
-          ( divide-below-inhabited-closed-interval-Total-Order [a,b] c))
-        ( subtype-inhabited-closed-interval-Total-Order X
-          ( divide-above-inhabited-closed-interval-Total-Order [a,b] c)) ＝
-      subtype-inhabited-closed-interval-Total-Order X [a,b]
-    eq-divide-subtype-inhabited-closed-interval-Total-Order [a,b] c =
+        ( subtype-closed-interval-Total-Order X
+          ( divide-below-closed-interval-Total-Order [a,b] c))
+        ( subtype-closed-interval-Total-Order X
+          ( divide-above-closed-interval-Total-Order [a,b] c)) ＝
+      subtype-closed-interval-Total-Order X [a,b]
+    eq-divide-subtype-closed-interval-Total-Order [a,b] c =
       eq-has-same-elements-subtype _ _
-        ( has-same-elements-divide-subtype-inhabited-closed-interval-Total-Order
+        ( has-same-elements-divide-subtype-closed-interval-Total-Order
           ( [a,b])
           ( c))
 ```
@@ -233,7 +233,7 @@ module _
   where
 
   minimal-closed-interval-cover-of-two-elements-Total-Order :
-    inhabited-closed-interval-Total-Order X
+    closed-interval-Total-Order X
   minimal-closed-interval-cover-of-two-elements-Total-Order =
     ( ( min-Total-Order X a b ,
         max-Total-Order X a b) ,
@@ -248,7 +248,7 @@ module _
   where
 
   minimal-closed-interval-cover-of-four-elements-Total-Order :
-    inhabited-closed-interval-Total-Order X
+    closed-interval-Total-Order X
   minimal-closed-interval-cover-of-four-elements-Total-Order =
     ( ( min-Total-Order X (min-Total-Order X a b) (min-Total-Order X c d) ,
         max-Total-Order X (max-Total-Order X a b) (max-Total-Order X c d)) ,
@@ -261,15 +261,15 @@ module _
   abstract
     cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order :
       leq-Total-Order X a b → leq-Total-Order X a c → leq-Total-Order X a d →
-      subtype-inhabited-closed-interval-Total-Order X
+      subtype-closed-interval-Total-Order X
         ( minimal-closed-interval-cover-of-four-elements-Total-Order) ⊆
       union-subtype
         ( union-subtype
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X a b))
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X a c)))
-        ( subtype-inhabited-closed-interval-Total-Order X
+        ( subtype-closed-interval-Total-Order X
           ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
     cover-closed-interval-cover-of-four-elements-first-is-smallest-Total-Order
       a≤b a≤c a≤d x (min≤x , x≤max) =
@@ -277,17 +277,17 @@ module _
         motive =
           union-subtype
             ( union-subtype
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( a)
                   ( b)))
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( a)
                   ( c))))
-            ( subtype-inhabited-closed-interval-Total-Order X
+            ( subtype-closed-interval-Total-Order X
               ( minimal-closed-interval-cover-of-two-elements-Total-Order
                 ( X)
                 ( b)
@@ -365,7 +365,7 @@ module _
 
   abstract
     cover-minimal-closed-interval-cover-of-four-elements-Total-Order :
-      subtype-inhabited-closed-interval-Total-Order X
+      subtype-closed-interval-Total-Order X
         ( minimal-closed-interval-cover-of-four-elements-Total-Order X
           ( a)
           ( b)
@@ -373,14 +373,14 @@ module _
           ( d)) ⊆
       union-subtype
         ( union-subtype
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X a b))
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X a c)))
         ( union-subtype
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X b d))
-          ( subtype-inhabited-closed-interval-Total-Order X
+          ( subtype-closed-interval-Total-Order X
             ( minimal-closed-interval-cover-of-two-elements-Total-Order X c d)))
     cover-minimal-closed-interval-cover-of-four-elements-Total-Order
       x x∈closed-4@(min≤x , x≤max) =
@@ -393,23 +393,23 @@ module _
         motive =
           union-subtype
             ( union-subtype
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( a)
                   ( b)))
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( a)
                   ( c))))
             ( union-subtype
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( b)
                   ( d)))
-              ( subtype-inhabited-closed-interval-Total-Order X
+              ( subtype-closed-interval-Total-Order X
                 ( minimal-closed-interval-cover-of-two-elements-Total-Order
                   ( X)
                   ( c)

@@ -12,7 +12,6 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.absolute-value-rational-numbers public
 open import elementary-number-theory.ackermann-function public
-open import elementary-number-theory.addition-inhabited-closed-intervals-rational-numbers public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
@@ -98,7 +97,6 @@ open import elementary-number-theory.inequality-rational-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinite-conatural-numbers public
 open import elementary-number-theory.infinitude-of-primes public
-open import elementary-number-theory.inhabited-closed-intervals-rational-numbers public
 open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
@@ -119,7 +117,6 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
-open import elementary-number-theory.multiplication-inhabited-closed-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public

@@ -60,8 +60,6 @@ open import order-theory.inflationary-maps-preorders public
 open import order-theory.inflattices public
 open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public
-open import order-theory.inhabited-closed-intervals-posets public
-open import order-theory.inhabited-closed-intervals-total-orders public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-preserving-maps-posets public
