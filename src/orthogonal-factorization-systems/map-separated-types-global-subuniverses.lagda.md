@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.global-subuniverses
 open import foundation.universe-levels
+open import orthogonal-factorization-systems.postcomposition-extensions-maps
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
