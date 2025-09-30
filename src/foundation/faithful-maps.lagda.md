@@ -237,7 +237,7 @@ module _
         is-faithful f → is-faithful (map-Σ-map-base f C)
       is-faithful-map-Σ-map-base H =
         is-faithful-is-0-map
-          ( is-0-map-map-Σ-map-base C (is-0-map-is-faithful H))
+          ( is-0-map-Σ-map-base C (is-0-map-is-faithful H))
 
   faithful-map-Σ-faithful-map-base :
     (f : faithful-map A B) (C : B → UU l3) →
@@ -256,7 +256,7 @@ module _
     is-faithful f → ((x : A) → is-faithful (g x)) → is-faithful (map-Σ D f g)
   is-faithful-map-Σ H K =
     is-faithful-is-0-map
-      ( is-0-map-map-Σ D
+      ( is-0-map-Σ D
         ( is-0-map-is-faithful H)
         ( λ x → is-0-map-is-faithful (K x)))
 ```

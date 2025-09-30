@@ -141,10 +141,10 @@ module _
   where
 
   abstract
-    is-trunc-map-map-Π :
+    is-trunc-map-Π :
       (k : 𝕋) (f : (i : I) → A i → B i) →
       ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
-    is-trunc-map-map-Π k f H h =
+    is-trunc-map-Π k f H h =
       is-trunc-equiv' k
         ( (i : I) → fiber (f i) (h i))
         ( compute-fiber-map-Π f h)
@@ -155,7 +155,7 @@ module _
       {f : (i : I) → A i → B i} → ((i : I) → is-emb (f i)) → is-emb (map-Π f)
     is-emb-map-Π {f} H =
       is-emb-is-prop-map
-        ( is-trunc-map-map-Π neg-one-𝕋 f (λ i → is-prop-map-is-emb (H i)))
+        ( is-trunc-map-Π neg-one-𝕋 f (λ i → is-prop-map-is-emb (H i)))
 
   emb-Π : ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
   emb-Π f = (map-Π (map-emb ∘ f) , is-emb-map-Π (is-emb-map-emb ∘ f))
@@ -164,22 +164,22 @@ module _
 ### A family of truncated maps over any map induces a truncated map on dependent function types
 
 ```agda
-is-trunc-map-map-Π-is-trunc-map' :
+is-trunc-map-Π-is-trunc-map' :
   (k : 𝕋) {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) (f : (i : I) → A i → B i) →
   ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π' α f)
-is-trunc-map-map-Π-is-trunc-map' k {J = J} α f H h =
+is-trunc-map-Π-is-trunc-map' k {J = J} α f H h =
   is-trunc-equiv' k
     ( (j : J) → fiber (f (α j)) (h j))
     ( compute-fiber-map-Π' α f h)
     ( is-trunc-Π k (λ j → H (α j) (h j)))
 
-is-trunc-map-is-trunc-map-map-Π' :
+is-trunc-map-is-trunc-map-Π' :
   (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) →
   ({l : Level} {J : UU l} (α : J → I) → is-trunc-map k (map-Π' α f)) →
   (i : I) → is-trunc-map k (f i)
-is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
+is-trunc-map-is-trunc-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
     ( fiber (map-Π (λ _ → f i)) (point b))
     ( equiv-Σ
@@ -197,7 +197,7 @@ is-emb-map-Π-is-emb' :
   ((i : I) → is-emb (f i)) → is-emb (map-Π' α f)
 is-emb-map-Π-is-emb' α f H =
   is-emb-is-prop-map
-    ( is-trunc-map-map-Π-is-trunc-map' neg-one-𝕋 α f
+    ( is-trunc-map-Π-is-trunc-map' neg-one-𝕋 α f
       ( λ i → is-prop-map-is-emb (H i)))
 ```
 

@@ -165,7 +165,7 @@ module _
     fiber (map-double-negation-stable-emb f) y
   pr2 (double-negation-stable-subtype-double-negation-stable-emb y) =
     is-double-negation-stable-prop-map-is-double-negation-stable-emb
-      ( is-double-negation-stable-emb-map-double-negation-stable-emb f)
+      ( is-double-negation-stable-emb-double-negation-stable-emb f)
       ( y)
 
   compute-type-double-negation-stable-type-double-negation-stable-emb :

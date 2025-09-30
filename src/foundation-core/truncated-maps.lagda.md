@@ -53,9 +53,9 @@ module _
   map-trunc-map = pr1
 
   abstract
-    is-trunc-map-map-trunc-map :
+    is-trunc-trunc-map :
       (f : trunc-map k A B) → is-trunc-map k (map-trunc-map f)
-    is-trunc-map-map-trunc-map = pr2
+    is-trunc-trunc-map = pr2
 ```
 
 ## Properties

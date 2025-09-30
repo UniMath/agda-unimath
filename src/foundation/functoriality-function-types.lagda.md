@@ -71,7 +71,7 @@ module _
     is-trunc-map k f →
     {l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)
   is-trunc-map-postcomp-is-trunc-map is-trunc-f A =
-    is-trunc-map-map-Π-is-trunc-map' k
+    is-trunc-map-Π-is-trunc-map' k
       ( terminal-map A)
       ( point f)
       ( point is-trunc-f)
@@ -80,7 +80,7 @@ module _
     ({l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)) →
     is-trunc-map k f
   is-trunc-map-is-trunc-map-postcomp is-trunc-postcomp-f =
-    is-trunc-map-is-trunc-map-map-Π' k
+    is-trunc-map-is-trunc-map-Π' k
       ( point f)
       ( λ {l} {J} α → is-trunc-postcomp-f {l} J)
       ( star)

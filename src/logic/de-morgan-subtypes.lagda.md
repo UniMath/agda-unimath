@@ -161,7 +161,7 @@ module _
     fiber (map-de-morgan-emb f) y
   pr2 (de-morgan-subtype-de-morgan-emb y) =
     is-de-morgan-prop-map-is-de-morgan-emb
-      ( is-de-morgan-emb-map-de-morgan-emb f)
+      ( is-de-morgan-emb-de-morgan-emb f)
       ( y)
 
   compute-type-de-morgan-type-de-morgan-emb :
