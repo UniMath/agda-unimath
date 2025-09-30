@@ -1,4 +1,4 @@
-name: Profile Library Typechecking
+name: Clean build and profiling of library
 
 on:
   push:
@@ -10,21 +10,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  typecheck-performance:
-    runs-on: ${{ matrix.os }}
+  typecheck-clean:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        agda: ['2.7.0']
-
+        agda: ['2.8.0']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v4
         with:
           path: repo
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./repo/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 
@@ -34,6 +32,14 @@ jobs:
           agda --version
           mkdir -p temp
           make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
+
+      - name: Save Agda build cache
+        uses: actions/cache/save@v4
+        with:
+          path: repo/_build
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('repo/src/**') }}
 
       - name: Download previous typechecking profile
         run: |

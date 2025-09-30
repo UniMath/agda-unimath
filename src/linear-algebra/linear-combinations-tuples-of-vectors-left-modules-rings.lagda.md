@@ -30,7 +30,7 @@ Let `M` be a [left module](linear-algebra.left-modules-rings.md) over a
 [ring](ring-theory.rings.md) `R`. For any `n`-tuple of vectors (elements of `M`)
 `(x_1, ..., x_n)` and any `n`-tuple of coefficients (elements of `R`)
 `(r_1, ..., r_n)`, we may form the
-{{#concept "linear combination" Agda=linear-combination-left-module-Ring}}
+{{#concept "linear combination" Agda=linear-combination-tuple-left-module-Ring}}
 `r_1 * x_1 + ... + r_n * x_n`.
 
 The proposition of _being_ a linear combination is formalized as being an

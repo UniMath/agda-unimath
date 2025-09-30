@@ -89,6 +89,18 @@ is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
 ```
 
+#### The decidable subtype of natural numbers less than `n`
+
+For circular dependency reasons, we cannot give this the type of a decidable
+subtype or proposition.
+
+```agda
+decidable-subtype-le-ℕ :
+  (n m : ℕ) → Σ (UU lzero) (λ m<n → is-prop m<n × is-decidable m<n)
+decidable-subtype-le-ℕ n m =
+  (le-ℕ m n , is-prop-le-ℕ m n , is-decidable-le-ℕ m n)
+```
+
 ### If `m < n` then `n` must be nonzero
 
 ```agda
