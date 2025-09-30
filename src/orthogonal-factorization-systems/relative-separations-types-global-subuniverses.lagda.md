@@ -1,7 +1,7 @@
-# Map-separated types at global subuniverses
+# Relative separations of types at global subuniverses
 
 ```agda
-module orthogonal-factorization-systems.map-separated-types-global-subuniverses where
+module orthogonal-factorization-systems.relative-separations-types-global-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -11,13 +11,13 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.global-subuniverses
 open import foundation.universe-levels
-open import orthogonal-factorization-systems.postcomposition-extensions-maps
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
 open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.postcomposition-extensions-maps
 ```
 
 </details>

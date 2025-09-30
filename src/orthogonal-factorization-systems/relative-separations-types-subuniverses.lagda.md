@@ -1,7 +1,7 @@
-# Map-separated types at subuniverses
+# Relative separations of types at subuniverses
 
 ```agda
-module orthogonal-factorization-systems.map-separated-types-subuniverses where
+module orthogonal-factorization-systems.relative-separations-types-subuniverses where
 ```
 
 <details><summary>Imports</summary>
