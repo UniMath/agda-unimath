@@ -126,6 +126,20 @@ module _
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
 ```
 
+### The action on identifications of a `k`-truncated map is also `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-trunc-map-ap-is-trunc-map :
+      is-trunc-map k f → (x y : A) → is-trunc-map k (ap f {x} {y})
+    is-trunc-map-ap-is-trunc-map H =
+      is-trunc-map-ap-is-trunc-map-succ k f (is-trunc-map-succ-is-trunc-map k H)
+```
+
 ### The domain of any `k`-truncated map into a `k+1`-truncated type is `k+1`-truncated
 
 ```agda

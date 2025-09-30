@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -26,6 +27,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
+open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -442,6 +444,32 @@ module _
     extension f i ↪ extension f (map-emb g ∘ i)
   emb-postcomp-extension f i (g , G) =
     postcomp-extension f i g , is-emb-postcomp-extension f i g G
+```
+
+### Postcomposition of extensions by a `k`-truncated map is `k`-truncated
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  is-trunc-map-postcomp-extension :
+    (f : A → B) (i : A → X) (g : X → Y) → is-trunc-map k g →
+    is-trunc-map k (postcomp-extension f i g)
+  is-trunc-map-postcomp-extension f i g G =
+    is-trunc-map-Σ k
+      ( is-extension f (g ∘ i))
+      ( is-trunc-map-postcomp-is-trunc-map k g G B)
+      ( λ j →
+        is-trunc-map-Π k
+          ( λ a → ap g)
+          ( λ a → is-trunc-map-ap-is-trunc-map k g G (i a) (j (f a))))
+
+  trunc-map-postcomp-extension :
+    (f : A → B) (i : A → X) (g : trunc-map k X Y) →
+    trunc-map k (extension f i) (extension f (map-trunc-map g ∘ i))
+  trunc-map-postcomp-extension f i (g , G) =
+    ( postcomp-extension f i g , is-trunc-map-postcomp-extension f i g G)
 ```
 
 ## See also
