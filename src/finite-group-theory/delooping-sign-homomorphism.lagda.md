@@ -174,7 +174,7 @@ module _
 
     preserves-id-equiv-invertible-action-D-equiv :
       (n : ℕ) (X : Type-With-Cardinality-ℕ l1 n) →
-      Id (invertible-action-D-equiv n X X id-equiv) id-equiv
+      invertible-action-D-equiv n X X id-equiv ＝ id-equiv
     preserves-id-equiv-invertible-action-D-equiv n =
       compute-id-equiv-action-equiv-family-over-subuniverse
         ( mere-equiv-Prop (Fin n))
@@ -313,10 +313,9 @@ module _
     ( X Y : UU l1) →
     ( eX : mere-equiv (Fin (n +ℕ 2)) X) →
     ( eY : mere-equiv (Fin (n +ℕ 2)) Y) →
-    Id X Y →
-    Id
-      ( equivalence-class (R (n +ℕ 2) (X , eX)))
-      ( equivalence-class (R (n +ℕ 2) (Y , eY)))
+    X ＝ Y →
+    equivalence-class (R (n +ℕ 2) (X , eX)) ＝
+    equivalence-class (R (n +ℕ 2) (Y , eY))
   map-quotient-delooping-sign-loop n X Y eX eY p =
     ap
       ( equivalence-class ∘ R (n +ℕ 2))
@@ -365,8 +364,8 @@ module _
       ( X Y : UU l1)
       ( eX : mere-equiv (Fin (n +ℕ 2)) X)
       ( eY : mere-equiv (Fin (n +ℕ 2)) Y)
-      ( p : Id X Y) →
-      ( Id (tr (mere-equiv (Fin (n +ℕ 2))) p eX) eY) →
+      ( p : X ＝ Y) →
+      ( tr (mere-equiv (Fin (n +ℕ 2))) p eX ＝ eY) →
       ( sX : is-set X)
       ( sY : is-set Y) →
       coherence-square-maps

@@ -573,17 +573,10 @@ module _
 
   preserves-mul-equiv-Eq-equiv-Torsor-Group :
     { p q : principal-Torsor-Group G ＝ principal-Torsor-Group G} →
-    Id
-      ( map-equiv
-        ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-        ( p ∙ q))
-      ( mul-Group G
-        ( map-equiv
-          ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-          ( p))
-        ( map-equiv
-          ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-          ( q)))
+    map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) (p ∙ q) ＝
+    mul-Group G
+      ( map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) p)
+      ( map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) q)
   preserves-mul-equiv-Eq-equiv-Torsor-Group {p} {q} =
     ( ap
       ( Eq-equiv-Torsor-Group (principal-Torsor-Group G))

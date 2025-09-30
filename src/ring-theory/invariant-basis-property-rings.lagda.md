@@ -34,5 +34,5 @@ invariant-basis-property-Ring :
 invariant-basis-property-Ring R =
   (m n : ℕ) →
   iso-Ring (Π-Ring (Fin m) (λ i → R)) (Π-Ring (Fin n) (λ i → R)) →
-  Id m n
+  m ＝ n
 ```

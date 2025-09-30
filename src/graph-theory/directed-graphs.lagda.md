@@ -130,7 +130,7 @@ module equiv {l1 l2 : Level} where
     Directed-Graph' l1 l2 -> Directed-Graph l1 (l1 ⊔ l2)
   pr1 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) = V
   pr2 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) x y =
-    Σ E (λ e → (Id (st e) x) × (Id (tg e) y))
+    Σ E (λ e → (st e ＝ x) × (tg e ＝ y))
 ```
 
 ## See also

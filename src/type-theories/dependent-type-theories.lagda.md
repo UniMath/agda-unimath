@@ -87,16 +87,14 @@ homotopies of sections of fibered systems.
 ```agda
   tr-fibered-system-slice :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
-    (α : Id B B') (f : section-system B) (X : system.type A) →
-    Id
-      ( fibered-system.slice B (section-system.type f X))
-      ( fibered-system.slice B'
-        ( section-system.type (tr section-system α f) X))
+    (α : B ＝ B') (f : section-system B) (X : system.type A) →
+    fibered-system.slice B (section-system.type f X) ＝
+    fibered-system.slice B' (section-system.type (tr section-system α f) X)
   tr-fibered-system-slice refl f X = refl
 
   Eq-fibered-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
-    (α : Id B B') (f : section-system B) (g : section-system B') →
+    (α : B ＝ B') (f : section-system B) (g : section-system B') →
     fibered-system l3 l4 A
   fibered-system.type (Eq-fibered-system' {A = A} α f g) X =
     Id
@@ -117,14 +115,14 @@ homotopies of sections of fibered systems.
 
   htpy-section-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
-    (α : Id B B') (f : section-system B) (g : section-system B') →
+    (α : B ＝ B') (f : section-system B) (g : section-system B') →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-section-system' {A = A} α f g =
     section-system (Eq-fibered-system' α f g)
 
   concat-htpy-section-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' B'' : fibered-system l3 l4 A}
-    {α : Id B B'} {β : Id B' B''} (γ : Id B B'') (δ : Id (α ∙ β) γ)
+    {α : B ＝ B'} {β : B' ＝ B''} (γ : B ＝ B'') (δ : α ∙ β ＝ γ)
     {f : section-system B} {g : section-system B'}
     {h : section-system B''}
     (G : htpy-section-system' α f g) (H : htpy-section-system' β g h) →
@@ -162,7 +160,7 @@ homotopies of sections of fibered systems.
 
   inv-htpy-section-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
-    {α : Id B B'} (β : Id B' B) (γ : Id (inv α) β)
+    {α : B ＝ B'} (β : B' ＝ B) (γ : inv α ＝ β)
     {f : section-system B} {g : section-system B'} →
     htpy-section-system' α f g → htpy-section-system' β g f
   section-system.type (inv-htpy-section-system' {α = refl} .refl refl H) X =
@@ -337,13 +335,13 @@ We show that systems form a category.
   left-whisker-comp-hom-system' :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B B' : system l3 l4}
     {C C' : system l5 l6} {g : hom-system B C} {g' : hom-system B' C'}
-    (p : Id B B')
-    {p' : Id (constant-fibered-system A B) (constant-fibered-system A B')}
-    (α : Id (ap (constant-fibered-system A) p) p')
-    (q : Id C C')
-    {q' : Id (constant-fibered-system A C) (constant-fibered-system A C')}
-    (β : Id (ap (constant-fibered-system A) q) q')
-    (r : Id (tr (λ t → t) (ap-binary hom-system p q) g) g')
+    (p : B ＝ B')
+    {p' : constant-fibered-system A B ＝ constant-fibered-system A B'}
+    (α : ap (constant-fibered-system A) p ＝ p')
+    (q : C ＝ C')
+    {q' : constant-fibered-system A C ＝ constant-fibered-system A C'}
+    (β : ap (constant-fibered-system A) q ＝ q')
+    (r : tr id (ap-binary hom-system p q) g ＝ g')
     {f : hom-system A B} {f' : hom-system A B'} →
     htpy-section-system' p' f f' →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f')
@@ -384,7 +382,7 @@ We show that systems form a category.
       ( γ (section-system.type H X))
       ( section-system.slice H X)
       where
-      γ : {Y Y' : system.type B} (p : Id Y Y') →
+      γ : {Y Y' : system.type B} (p : Y ＝ Y') →
           Id
             ( tr
               ( λ t → t)
@@ -405,12 +403,12 @@ We show that systems form a category.
 
   right-whisker-comp-hom-system' :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B : system l3 l4}
-    {C C' : system l5 l6} (p : Id C C') {g : hom-system B C}
+    {C C' : system l5 l6} (p : C ＝ C') {g : hom-system B C}
     {g' : hom-system B C'}
-    {p' : Id (constant-fibered-system B C) (constant-fibered-system B C')}
-    (α : Id (ap (constant-fibered-system B) p) p')
-    {q' : Id (constant-fibered-system A C) (constant-fibered-system A C')}
-    (β : Id (ap (constant-fibered-system A) p) q')
+    {p' : constant-fibered-system B C ＝ constant-fibered-system B C'}
+    (α : ap (constant-fibered-system B) p ＝ p')
+    {q' : constant-fibered-system A C ＝ constant-fibered-system A C'}
+    (β : ap (constant-fibered-system A) p ＝ q')
     (H : htpy-section-system' p' g g') →
     (f : hom-system A B) →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f)
@@ -571,15 +569,16 @@ weakening structure.
     field
       type :
         (X : system.type A) →
-        Id ( tr
-              ( system.element (system.slice B (section-system.type h X)))
-              ( section-system.type
-                ( preserves-weakening.type Wh X)
-                ( X))
-              ( section-system.element
-                ( section-system.slice h X)
-                ( generic-element.type δA X)))
-            ( generic-element.type δB (section-system.type h X))
+        Id
+          ( tr
+            ( system.element (system.slice B (section-system.type h X)))
+            ( section-system.type
+              ( preserves-weakening.type Wh X)
+              ( X))
+            ( section-system.element
+              ( section-system.slice h X)
+              ( generic-element.type δA X)))
+          ( generic-element.type δB (section-system.type h X))
       slice :
         (X : system.type A) →
         preserves-generic-element
@@ -1415,22 +1414,23 @@ We define what it means for a dependent type theory to have Π-types.
           (preserves-weakening.type
           (hom-dtt.W (function-types.sys Π (natural-numbers.N N))) ?) ?)!}
     {-
-    Id ( section-system.type
-         ( weakening.type (type-theory.W A) X)
-         ( section-system.type
-           ( hom-dtt.sys (function-types.sys Π (natural-numbers.N N)))
-           ( section-system.type
-             ( weakening.type (type-theory.W A) (natural-numbers.N N))
-             (natural-numbers.N N))))
-       ( section-system.type
-         ( hom-dtt.sys
-           ( function-types.sys (function-types.slice Π X)
-             ( natural-numbers.N (natural-numbers-slice A Π N X))))
-         ( section-system.type
-           ( weakening.type
-             ( type-theory.W (slice-dtt A X))
-             ( natural-numbers.N (natural-numbers-slice A Π N X)))
-           ( natural-numbers.N (natural-numbers-slice A Π N X))))
+    Id
+      ( section-system.type
+        ( weakening.type (type-theory.W A) X)
+        ( section-system.type
+          ( hom-dtt.sys (function-types.sys Π (natural-numbers.N N)))
+          ( section-system.type
+            ( weakening.type (type-theory.W A) (natural-numbers.N N))
+            (natural-numbers.N N))))
+      ( section-system.type
+        ( hom-dtt.sys
+          ( function-types.sys (function-types.slice Π X)
+            ( natural-numbers.N (natural-numbers-slice A Π N X))))
+        ( section-system.type
+          ( weakening.type
+            ( type-theory.W (slice-dtt A X))
+            ( natural-numbers.N (natural-numbers-slice A Π N X)))
+          ( natural-numbers.N (natural-numbers-slice A Π N X))))
   -}
        ( section-system.element
          ( weakening.type (type-theory.W A) X)
@@ -1449,7 +1449,7 @@ We define what it means for a dependent type theory to have Π-types.
   {-
   concat-htpy-hom-system' :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' B'' : system l3 l4}
-    (p : Id B B') (q : Id B' B'') {f : hom-system A B} {g : hom-system A B'}
+    (p : B ＝ B') (q : B' ＝ B'') {f : hom-system A B} {g : hom-system A B'}
     {h : hom-system A B''} → htpy-hom-system' p f g → htpy-hom-system' q g h →
     htpy-hom-system' (p ∙ q) f h
   htpy-hom-system'.type (concat-htpy-hom-system' refl refl H K) =

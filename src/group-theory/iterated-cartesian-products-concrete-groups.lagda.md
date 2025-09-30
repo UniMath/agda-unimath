@@ -121,14 +121,14 @@ module _
         ( mere-eq-classifying-type-iterated-product-Concrete-Group
             shape-iterated-product-Concrete-Group
             X)
-        ( is-set-Prop (Id X Y))
+        ( is-set-Prop (X ＝ Y))
         ( λ where
           refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-iterated-product-Concrete-Group
                   shape-iterated-product-Concrete-Group
                   Y)
-              ( is-set-Prop (Id shape-iterated-product-Concrete-Group Y))
+              ( is-set-Prop (shape-iterated-product-Concrete-Group ＝ Y))
               ( λ where refl → is-set-type-iterated-product-Concrete-Group))
 
   classifying-1-type-iterated-product-Concrete-Group : Truncated-Type l one-𝕋
@@ -160,42 +160,34 @@ module _
 
   associative-mul-iterated-product-Concrete-Group :
     (x y z : type-iterated-product-Concrete-Group) →
-    Id
-      ( mul-iterated-product-Concrete-Group
-        ( mul-iterated-product-Concrete-Group x y)
-        ( z))
-      ( mul-iterated-product-Concrete-Group
-        ( x)
-        ( mul-iterated-product-Concrete-Group y z))
+    mul-iterated-product-Concrete-Group
+      ( mul-iterated-product-Concrete-Group x y)
+      ( z) ＝
+    mul-iterated-product-Concrete-Group
+      ( x)
+      ( mul-iterated-product-Concrete-Group y z)
   associative-mul-iterated-product-Concrete-Group =
     associative-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   left-unit-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id
-      ( mul-iterated-product-Concrete-Group
-        ( unit-iterated-product-Concrete-Group)
-        ( x))
-      ( x)
+    mul-iterated-product-Concrete-Group unit-iterated-product-Concrete-Group x ＝
+    x
   left-unit-law-mul-iterated-product-Concrete-Group =
     left-unit-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   right-unit-law-mul-iterated-product-Concrete-Group :
     (y : type-iterated-product-Concrete-Group) →
-    Id
-      ( mul-iterated-product-Concrete-Group
-        ( y)
-        ( unit-iterated-product-Concrete-Group))
-      ( y)
+    mul-iterated-product-Concrete-Group y unit-iterated-product-Concrete-Group ＝
+    y
   right-unit-law-mul-iterated-product-Concrete-Group =
     right-unit-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   coherence-unit-laws-mul-iterated-product-Concrete-Group :
-    Id
-      ( left-unit-law-mul-iterated-product-Concrete-Group
-          unit-iterated-product-Concrete-Group)
-      ( right-unit-law-mul-iterated-product-Concrete-Group
-          unit-iterated-product-Concrete-Group)
+    ( left-unit-law-mul-iterated-product-Concrete-Group
+        unit-iterated-product-Concrete-Group) ＝
+    ( right-unit-law-mul-iterated-product-Concrete-Group
+        unit-iterated-product-Concrete-Group)
   coherence-unit-laws-mul-iterated-product-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
@@ -206,21 +198,19 @@ module _
 
   left-inverse-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id
-      ( mul-iterated-product-Concrete-Group
-        ( inv-iterated-product-Concrete-Group x)
-        ( x))
-      ( unit-iterated-product-Concrete-Group)
+    mul-iterated-product-Concrete-Group
+      ( inv-iterated-product-Concrete-Group x)
+      ( x) ＝
+    unit-iterated-product-Concrete-Group
   left-inverse-law-mul-iterated-product-Concrete-Group =
     left-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   right-inverse-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id
-      ( mul-iterated-product-Concrete-Group
-        ( x)
-        ( inv-iterated-product-Concrete-Group x))
-      ( unit-iterated-product-Concrete-Group)
+    mul-iterated-product-Concrete-Group
+      ( x)
+      ( inv-iterated-product-Concrete-Group x) ＝
+    unit-iterated-product-Concrete-Group
   right-inverse-law-mul-iterated-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
@@ -278,8 +268,7 @@ equiv-type-Concrete-group-iterated-product-Concrete-Group zero-ℕ G =
         ( is-set-is-contr is-contr-raise-unit raise-star raise-star) refl)
     is-contr-raise-unit
 equiv-type-Concrete-group-iterated-product-Concrete-Group (succ-ℕ n) G =
-  equiv-product
-    ( id-equiv)
+  equiv-product-right
     ( equiv-type-Concrete-group-iterated-product-Concrete-Group n (G ∘ inl)) ∘e
   equiv-type-Concrete-Group-product-Concrete-Group
     ( G (inr star))

@@ -525,7 +525,7 @@ module _
   abstract
     preserves-id-equiv-orientation-complete-undirected-graph-equiv :
       (X : Type-With-Cardinality-ℕ l n) →
-      Id (orientation-complete-undirected-graph-equiv X X id-equiv) id-equiv
+      orientation-complete-undirected-graph-equiv X X id-equiv ＝ id-equiv
     preserves-id-equiv-orientation-complete-undirected-graph-equiv X =
       eq-htpy-equiv
         ( λ d →
@@ -734,9 +734,9 @@ module _
                 ( np))
               ( Y))))) →
     is-decidable
-      ( Id (map-equiv e (pr1 two-elements)) (pr1 two-elements)) →
+      ( map-equiv e (pr1 two-elements) ＝ pr1 two-elements) →
     is-decidable
-      ( Id (map-equiv e (pr1 (pr2 two-elements))) (pr1 (pr2 two-elements))) →
+      ( map-equiv e (pr1 (pr2 two-elements)) ＝ pr1 (pr2 two-elements)) →
     Σ X (λ z → type-Decidable-Prop (pr1 Y z))
   cases-orientation-aut-count
     e Y (pair x (pair y (pair np P))) (inl q) r =
@@ -776,9 +776,9 @@ module _
                 ( has-decidable-equality-count eX)
                 ( np'))
               ( Y))))) →
-    is-decidable (Id (pr1 two-elements) i) →
-    is-decidable (Id (pr1 two-elements) j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
+    is-decidable (pr1 two-elements ＝ i) →
+    is-decidable (pr1 two-elements ＝ j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
     Σ X (λ z → type-Decidable-Prop (pr1 Y z))
   cases-orientation-two-elements-count
     i j Y (pair x (pair y (pair np' P))) (inl q) r s =
@@ -870,10 +870,10 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ i)) +
+      ( ( pr1 (two-elements-transposition eX Y) ＝ i) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -953,10 +953,10 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ i)) +
+      ( ( pr1 (two-elements-transposition eX Y) ＝ i) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ x)) →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1144,10 +1144,10 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ j)) +
+      ( ( pr1 (two-elements-transposition eX Y) ＝ j) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -1253,10 +1253,10 @@ module _
       (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       x ≠ i → x ≠ j →
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
-      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( pr1 (two-elements-transposition eX Y) ＝ x) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ j)) +
+      ( ( pr1 (two-elements-transposition eX Y) ＝ j) ×
+        ( pr1 (pr2 (two-elements-transposition eX Y)) ＝ x)) →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1453,10 +1453,10 @@ module _
                 ( standard-2-Element-Decidable-Subtype
                   ( has-decidable-equality-count eX)
                   ( np)))))) →
-      (q : is-decidable (Id (pr1 two-elements) i)) →
-      (r : is-decidable (Id (pr1 two-elements) j)) →
-      (s : is-decidable (Id (pr1 (pr2 two-elements)) i)) →
-      (t : is-decidable (Id (pr1 (pr2 two-elements)) j)) →
+      (q : is-decidable (pr1 two-elements ＝ i)) →
+      (r : is-decidable (pr1 two-elements ＝ j)) →
+      (s : is-decidable (pr1 (pr2 two-elements) ＝ i)) →
+      (t : is-decidable (pr1 (pr2 two-elements) ＝ j)) →
       Id
         ( pr1
           ( cases-orientation-two-elements-count i j
@@ -1591,11 +1591,11 @@ module _
                 ( has-decidable-equality-count eX)
                 ( np'))
               ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
-    is-decidable (Id (pr1 two-elements) i) →
-    is-decidable (Id (pr1 two-elements) j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    two-elements-transposition eX Y ＝ two-elements →
+    is-decidable (pr1 two-elements ＝ i) →
+    is-decidable (pr1 two-elements ＝ j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( orientation-aut-count
@@ -1826,11 +1826,11 @@ module _
                 ( has-decidable-equality-count eX)
                 ( np'))
               ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
-    is-decidable (Id (pr1 two-elements) i) →
-    is-decidable (Id (pr1 two-elements) j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    two-elements-transposition eX Y ＝ two-elements →
+    is-decidable (pr1 two-elements ＝ i) →
+    is-decidable (pr1 two-elements ＝ j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( orientation-aut-count
@@ -2253,11 +2253,11 @@ module _
                   ( has-decidable-equality-count eX)
                   ( np'))
                 ( Y))))) →
-    Id (two-elements-transposition eX Y) two-elements →
-    is-decidable (Id (pr1 two-elements) i) →
-    is-decidable (Id (pr1 two-elements) j) →
-    is-decidable (Id (pr1 (pr2 two-elements)) i) →
-    is-decidable (Id (pr1 (pr2 two-elements)) j) →
+    two-elements-transposition eX Y ＝ two-elements →
+    is-decidable (pr1 two-elements ＝ i) →
+    is-decidable (pr1 two-elements ＝ j) →
+    is-decidable (pr1 (pr2 two-elements) ＝ i) →
+    is-decidable (pr1 (pr2 two-elements) ＝ j) →
     Id
       ( pr1
         ( map-orientation-complete-undirected-graph-equiv
@@ -2869,11 +2869,11 @@ module _
                   ( has-decidable-equality-count eX)
                   ( np'))
                 ( pr1 T))))) →
-      Id two-elements (two-elements-transposition eX (pr1 T)) →
-      is-decidable (Id (pr1 two-elements) i) →
-      is-decidable (Id (pr1 two-elements) j) →
-      is-decidable (Id (pr1 (pr2 two-elements)) i) →
-      is-decidable (Id (pr1 (pr2 two-elements)) j) →
+      two-elements ＝ two-elements-transposition eX (pr1 T) →
+      is-decidable (pr1 two-elements ＝ i) →
+      is-decidable (pr1 two-elements ＝ j) →
+      is-decidable (pr1 (pr2 two-elements) ＝ i) →
+      is-decidable (pr1 (pr2 two-elements) ＝ j) →
       Id
         ( standard-2-Element-Decidable-Subtype
           ( has-decidable-equality-count eX)
@@ -3451,7 +3451,7 @@ module _
               ( pair X (unit-trunc-Prop (equiv-count eX))))
             ( T)
             ( canonical-orientation-count))) →
-      Id (pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H)) T
+      pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H) ＝ T
     retraction-orientation T (inl H) =
       eq-effective-quotient'
         ( even-difference-orientation-Complete-Undirected-Graph

@@ -64,9 +64,8 @@ module _
 
   preserves-id-subst-action-Group :
     {l3 : Level} (X : action-Group H l3) →
-    Id
-      ( hom-subst-action-Group X X (id-hom-action-Group H X))
-      ( id-hom-action-Group G (obj-subst-action-Group X))
+    ( hom-subst-action-Group X X (id-hom-action-Group H X)) ＝
+    ( id-hom-action-Group G (obj-subst-action-Group X))
   preserves-id-subst-action-Group X = refl
 
   preserves-comp-subst-action-Group :
@@ -74,15 +73,13 @@ module _
     (Y : action-Group H l4) (Z : action-Group H l5)
     (g : hom-action-Group H Y Z)
     (f : hom-action-Group H X Y) →
-    Id
-      ( hom-subst-action-Group X Z
-        ( comp-hom-action-Group H X Y Z g f))
-      ( comp-hom-action-Group G
-        ( obj-subst-action-Group X)
-        ( obj-subst-action-Group Y)
-        ( obj-subst-action-Group Z)
-        ( hom-subst-action-Group Y Z g)
-        ( hom-subst-action-Group X Y f))
+    hom-subst-action-Group X Z (comp-hom-action-Group H X Y Z g f) ＝
+    comp-hom-action-Group G
+      ( obj-subst-action-Group X)
+      ( obj-subst-action-Group Y)
+      ( obj-subst-action-Group Z)
+      ( hom-subst-action-Group Y Z g)
+      ( hom-subst-action-Group X Y f)
   preserves-comp-subst-action-Group X Y Z g f = refl
 
   subst-action-Group :
@@ -138,8 +135,8 @@ module _
     exists-structure-Prop
       ( type-Group G)
       ( λ g →
-        ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
-        ( Id (mul-action-Group G X g x) x'))
+        ( mul-Group H (map-hom-Group G H f g) h ＝ h') ×
+        ( mul-action-Group G X g x ＝ x'))
   pr1
     ( pr2 (equivalence-relation-obj-left-adjoint-subst-action-Group X))
     ( h , x) =

@@ -130,7 +130,7 @@ minimal-element-repetition-of-values-sequence-Fin :
   minimal-element-ℕ (λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
 minimal-element-repetition-of-values-sequence-Fin k f =
   well-ordering-principle-ℕ
-    ( λ x → Σ ℕ (λ y → (le-ℕ y x) × (Id (f y) (f x))))
+    ( λ x → Σ ℕ (λ y → (le-ℕ y x) × (f y ＝ f x)))
     ( λ x →
       is-decidable-strictly-bounded-Σ-ℕ' x
         ( λ y → f y ＝ f x)

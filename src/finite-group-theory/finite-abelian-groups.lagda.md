@@ -98,7 +98,7 @@ module _
   add-Finite-Ab' = mul-Group' group-Finite-Ab
 
   commutative-add-Finite-Ab :
-    (x y : type-Finite-Ab) → Id (add-Finite-Ab x y) (add-Finite-Ab y x)
+    (x y : type-Finite-Ab) → add-Finite-Ab x y ＝ add-Finite-Ab y x
   commutative-add-Finite-Ab = pr2 A
 
   ab-Finite-Ab : Ab l

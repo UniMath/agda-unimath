@@ -109,8 +109,8 @@ abstract
                   ( equiv-tot
                     ( λ x → equiv-eq-pair-Σ (map-section-family b x) t)) ∘e
                   ( ( associative-Σ A
-                      ( λ (x : A) → Id x (pr1 t))
-                      ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
+                      ( λ (x : A) → x ＝ pr1 t)
+                      ( λ s → tr B (pr2 s) (b (pr1 s)) ＝ pr2 t)) ∘e
                     ( inv-left-unit-law-Σ-is-contr
                       ( is-torsorial-Id' (pr1 t))
                       ( pair (pr1 t) refl))))))

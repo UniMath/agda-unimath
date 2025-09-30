@@ -119,10 +119,12 @@ module _
 
   associative-add-fin-sequence-type-Commutative-Ring :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Commutative-Ring R n) →
-    ( add-fin-sequence-type-Commutative-Ring R n
-      ( add-fin-sequence-type-Commutative-Ring R n v1 v2) v3) ＝
-    ( add-fin-sequence-type-Commutative-Ring R n v1
-      ( add-fin-sequence-type-Commutative-Ring R n v2 v3))
+    add-fin-sequence-type-Commutative-Ring R n
+      ( add-fin-sequence-type-Commutative-Ring R n v1 v2)
+      ( v3) ＝
+    add-fin-sequence-type-Commutative-Ring R n
+      ( v1)
+      ( add-fin-sequence-type-Commutative-Ring R n v2 v3)
   associative-add-fin-sequence-type-Commutative-Ring =
     associative-add-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
