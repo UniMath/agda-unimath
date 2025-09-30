@@ -213,20 +213,6 @@ module _
   is-extension-right-whisker F h = F ∘ h
 ```
 
-### Postcomposition of extensions
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  postcomp-extension :
-    (f : A → B) (i : A → X) (g : X → Y) →
-    extension f i → extension f (g ∘ i)
-  postcomp-extension f i g =
-    map-Σ (is-extension f (g ∘ i)) (postcomp B g) (λ j H → g ·l H)
-```
-
 ## Properties
 
 ### Characterizing identifications of extensions of maps
@@ -393,83 +379,6 @@ module _
 
   extension-along-self : extension f f
   extension-along-self = id , is-extension-along-self
-```
-
-### Postcomposition of extensions by an equivalence is an equivalence
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  is-equiv-postcomp-extension :
-    (f : A → B) (i : A → X) (g : X → Y) → is-equiv g →
-    is-equiv (postcomp-extension f i g)
-  is-equiv-postcomp-extension f i g G =
-    is-equiv-map-Σ
-      ( is-extension f (g ∘ i))
-      ( is-equiv-postcomp-is-equiv g G B)
-      ( λ j →
-        is-equiv-map-Π-is-fiberwise-equiv
-          ( λ x → is-emb-is-equiv G (i x) (j (f x))))
-
-  equiv-postcomp-extension :
-    (f : A → B) (i : A → X) (g : X ≃ Y) →
-    extension f i ≃ extension f (map-equiv g ∘ i)
-  equiv-postcomp-extension f i (g , G) =
-    ( postcomp-extension f i g , is-equiv-postcomp-extension f i g G)
-```
-
-### Postcomposition of extensions by an embedding is an embedding
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  is-emb-postcomp-extension :
-    (f : A → B) (i : A → X) (g : X → Y) → is-emb g →
-    is-emb (postcomp-extension f i g)
-  is-emb-postcomp-extension f i g H =
-    is-emb-map-Σ
-      ( is-extension f (g ∘ i))
-      ( is-mono-is-emb g H B)
-      ( λ j →
-        is-emb-is-equiv
-          ( is-equiv-map-Π-is-fiberwise-equiv
-            ( λ x → H (i x) (j (f x)))))
-
-  emb-postcomp-extension :
-    (f : A → B) (i : A → X) (g : X ↪ Y) →
-    extension f i ↪ extension f (map-emb g ∘ i)
-  emb-postcomp-extension f i (g , G) =
-    postcomp-extension f i g , is-emb-postcomp-extension f i g G
-```
-
-### Postcomposition of extensions by a `k`-truncated map is `k`-truncated
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  where
-
-  is-trunc-map-postcomp-extension :
-    (f : A → B) (i : A → X) (g : X → Y) → is-trunc-map k g →
-    is-trunc-map k (postcomp-extension f i g)
-  is-trunc-map-postcomp-extension f i g G =
-    is-trunc-map-Σ k
-      ( is-extension f (g ∘ i))
-      ( is-trunc-map-postcomp-is-trunc-map k g G B)
-      ( λ j →
-        is-trunc-map-Π k
-          ( λ a → ap g)
-          ( λ a → is-trunc-map-ap-is-trunc-map k g G (i a) (j (f a))))
-
-  trunc-map-postcomp-extension :
-    (f : A → B) (i : A → X) (g : trunc-map k X Y) →
-    trunc-map k (extension f i) (extension f (map-trunc-map g ∘ i))
-  trunc-map-postcomp-extension f i (g , G) =
-    ( postcomp-extension f i g , is-trunc-map-postcomp-extension f i g G)
 ```
 
 ## See also
