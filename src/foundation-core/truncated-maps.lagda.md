@@ -107,18 +107,18 @@ module _
   where
 
   abstract
-    is-trunc-map-is-trunc-map-ap :
+    is-trunc-map-succ-is-trunc-map-ap :
       ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
-    is-trunc-map-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
+    is-trunc-map-succ-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
       is-trunc-equiv k
         ( fiber (ap f) (p ∙ (inv p')))
         ( equiv-fiber-ap-eq-fiber f (pair x p) (pair x' p'))
         ( is-trunc-map-ap-f x x' (p ∙ (inv p')))
 
   abstract
-    is-trunc-map-ap-is-trunc-map :
+    is-trunc-map-ap-is-trunc-map-succ :
       is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
-    is-trunc-map-ap-is-trunc-map is-trunc-map-f x y p =
+    is-trunc-map-ap-is-trunc-map-succ is-trunc-map-f x y p =
       is-trunc-is-equiv' k
         ( pair x p ＝ pair y refl)
         ( eq-fiber-fiber-ap f x y p)
@@ -141,7 +141,7 @@ is-trunc-is-trunc-map-into-is-trunc
     ( k)
     ( ap f)
     ( is-trunc-B (f a) (f a'))
-    ( is-trunc-map-ap-is-trunc-map k f is-trunc-map-f a a')
+    ( is-trunc-map-ap-is-trunc-map-succ k f is-trunc-map-f a a')
 ```
 
 ### A family of types is a family of `k`-truncated types if and only of the projection map is `k`-truncated

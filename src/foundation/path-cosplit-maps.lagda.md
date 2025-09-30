@@ -170,7 +170,7 @@ is-path-cosplit-is-trunc :
 is-path-cosplit-is-trunc neg-two-𝕋 is-trunc-f =
   retraction-is-contr-map is-trunc-f
 is-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
-  is-path-cosplit-is-trunc k (is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
+  is-path-cosplit-is-trunc k (is-trunc-map-ap-is-trunc-map-succ k f is-trunc-f x y)
 ```
 
 ### If a map is `k`-path-cosplit then it is `k+1`-path-cosplit
