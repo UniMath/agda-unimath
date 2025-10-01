@@ -22,7 +22,7 @@ if __name__ == '__main__':
         sys.exit(STATUS_FLAG_GIT_ERROR)
 
     try:
-      outDir.mkdir(parents=True, exist_ok=True)
+        outDir.mkdir(parents=True, exist_ok=True)
     except FileExistsError:
         utils.eprint('Output path exists and is not a directory')
         sys.exit(STATUS_OUT_NOT_DIR)

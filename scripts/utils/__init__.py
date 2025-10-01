@@ -221,6 +221,7 @@ def get_git_tracked_files():
     git_tracked_files = map(pathlib.Path, git_output.strip().split('\0')[:-1])
     return git_tracked_files
 
+
 def get_git_last_modified(file_path):
     try:
         # Get the last commit date for the file
@@ -238,9 +239,11 @@ def get_git_last_modified(file_path):
         # If the git command fails, fall back to filesystem modification time
         return os.path.getmtime(file_path)
 
+
 def is_file_modified(file_path):
     try:
-        subprocess.check_output(['git', 'diff', '--quiet', file_path], stderr=subprocess.DEVNULL)
+        subprocess.check_output(
+            ['git', 'diff', '--quiet', file_path], stderr=subprocess.DEVNULL)
         return False
     except subprocess.CalledProcessError:
         return True
@@ -255,6 +258,7 @@ def parse_agda_imports(agda_file: str) -> Set[str]:
             if match:
                 imports.add(match.group(1))
     return imports
+
 
 def count_lines_in_file(file_path: str) -> int:
     """Count lines of code in a file."""
