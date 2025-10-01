@@ -1,4 +1,4 @@
-# Multiplication on inhabited closed intervals in the rational numbers
+# Multiplication on closed intervals in the rational numbers
 
 ```agda
 module elementary-number-theory.multiplication-closed-intervals-rational-numbers where
@@ -57,7 +57,7 @@ open import order-theory.total-orders
 ## Idea
 
 Given two
-[inhabited closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
+[closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
 [Minkowski product](group-theory.minkowski-multiplication-commutative-monoids.md)

@@ -1,4 +1,4 @@
-# Inhabited closed intervals in total orders
+# Closed intervals in total orders
 
 ```agda
 module order-theory.closed-intervals-total-orders where
@@ -37,7 +37,9 @@ A
 {{#concept "closed interval" disambiguation="in a total order" Agda=closed-interval-Total-Order}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
-such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. Note, in particular, that we thus consider closed intervals to be inhabited by convention.
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`.
+Note, in particular, that we thus consider closed intervals to be inhabited by
+convention.
 
 Equivalently, a closed interval is a total order is a
 [closed interval](order-theory.closed-intervals-posets.md) in the underlying
