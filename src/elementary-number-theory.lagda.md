@@ -12,6 +12,7 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.absolute-value-rational-numbers public
 open import elementary-number-theory.ackermann-function public
+open import elementary-number-theory.addition-closed-intervals-rational-numbers public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
@@ -37,6 +38,7 @@ open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
 open import elementary-number-theory.bounded-sums-arithmetic-functions public
 open import elementary-number-theory.catalan-numbers public
+open import elementary-number-theory.closed-intervals-rational-numbers public
 open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
@@ -117,6 +119,7 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
+open import elementary-number-theory.multiplication-closed-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public

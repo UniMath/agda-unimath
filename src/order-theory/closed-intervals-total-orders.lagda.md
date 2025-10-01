@@ -37,13 +37,13 @@ A
 {{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
-such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`.  (We
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. (We
 choose the convention of not considering the empty subtype to be a closed
 interval.)
 
 Equivalently, a closed interval is a total order is a
-[closed interval](order-theory.closed-intervals-posets.md)
-in the underlying [poset](order-theory.posets.md).
+[closed interval](order-theory.closed-intervals-posets.md) in the underlying
+[poset](order-theory.posets.md).
 
 ## Definition
 

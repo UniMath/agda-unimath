@@ -24,8 +24,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.closed-interval-preserving-maps-posets
-open import order-theory.decidable-total-orders
 open import order-theory.closed-intervals-posets
+open import order-theory.decidable-total-orders
 ```
 
 </details>

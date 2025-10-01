@@ -10,10 +10,10 @@ module elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.addition-closed-intervals-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -47,8 +47,8 @@ open import group-theory.minkowski-multiplication-commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import order-theory.decidable-total-orders
 open import order-theory.closed-intervals-total-orders
+open import order-theory.decidable-total-orders
 open import order-theory.total-orders
 ```
 

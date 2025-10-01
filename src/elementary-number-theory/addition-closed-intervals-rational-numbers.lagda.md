@@ -9,9 +9,9 @@ module elementary-number-theory.addition-closed-intervals-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.coproduct-types
