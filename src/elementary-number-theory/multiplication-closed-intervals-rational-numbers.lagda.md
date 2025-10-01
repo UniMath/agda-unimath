@@ -297,14 +297,14 @@ abstract
     zero-zero-closed-interval-ℚ
   mul-is-zero-ℚ-closed-interval-ℚ ((p , q) , p≤q) _ refl =
     eq-closed-interval-ℚ _ _
-      ( ap-min-ℚ
-        ( right-zero-law-mul-ℚ _)
-        ( right-zero-law-mul-ℚ _) ∙
-        idempotent-min-ℚ zero-ℚ)
-      ( ap-max-ℚ
-        ( right-zero-law-mul-ℚ _)
-        ( right-zero-law-mul-ℚ _) ∙
-        idempotent-max-ℚ zero-ℚ)
+      ( ( ap-min-ℚ
+          ( right-zero-law-mul-ℚ _)
+          ( right-zero-law-mul-ℚ _)) ∙
+        ( idempotent-min-ℚ zero-ℚ))
+      ( ( ap-max-ℚ
+          ( right-zero-law-mul-ℚ _)
+          ( right-zero-law-mul-ℚ _)) ∙
+        ( idempotent-max-ℚ zero-ℚ))
 
   mul-is-in-closed-interval-ℚ-ℚ :
     ([p,q] : closed-interval-ℚ) (r s : ℚ) →
