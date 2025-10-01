@@ -126,7 +126,7 @@ if __name__ == '__main__':
         agda_files.extend(get_agda_files(path))
 
     if not agda_files:
-        utils.multithread.thread_safe_print("No Agda files found in the specified paths.")
+        utils.multithread.thread_safe_print('No Agda files found in the specified paths.')
         sys.exit(1)
 
     # Sort the files by Git modification status and last commit date

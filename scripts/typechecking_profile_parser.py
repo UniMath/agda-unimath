@@ -9,11 +9,11 @@ def parse_memory_profiling_data(filepath):
 
     # Define patterns to match each line and their corresponding unit
     patterns = {
-        "memory_allocated_in_heap": (r"(\d+(?:,\d+)*) bytes allocated in the heap", "B"),
-        "memory_copied_during_GC": (r"(\d+(?:,\d+)*) bytes copied during GC", "B"),
-        "maximum_residency": (r"(\d+(?:,\d+)*) bytes maximum residency", "B"),
-        "memory_maximum_slop": (r"(\d+(?:,\d+)*) bytes maximum slop", "B"),
-        "total_memory_in_use": (r"(\d+) MiB total memory in use", "MiB")
+        'memory_allocated_in_heap': (r'(\d+(?:,\d+)*) bytes allocated in the heap', 'B'),
+        'memory_copied_during_GC': (r'(\d+(?:,\d+)*) bytes copied during GC', 'B'),
+        'maximum_residency': (r'(\d+(?:,\d+)*) bytes maximum residency', 'B'),
+        'memory_maximum_slop': (r'(\d+(?:,\d+)*) bytes maximum slop', 'B'),
+        'total_memory_in_use': (r'(\d+) MiB total memory in use', 'MiB')
     }
 
     with open(filepath, 'r') as file:
@@ -21,14 +21,14 @@ def parse_memory_profiling_data(filepath):
             for key, (pattern, unit) in patterns.items():
                 match = re.search(pattern, line)
                 if match:
-                    value = int(match.group(1).replace(",", ""))
-                    if key == "memory_maximum_slop":  # Convert maximum slo to KiB and truncate
+                    value = int(match.group(1).replace(',', ''))
+                    if key == 'memory_maximum_slop':  # Convert maximum slo to KiB and truncate
                         value //= 1024
-                        unit = "KiB"
-                    elif unit == "B":  # Convert bytes to MiB and truncate
+                        unit = 'KiB'
+                    elif unit == 'B':  # Convert bytes to MiB and truncate
                         value //= 1024 * 1024
-                        unit = "MiB"
-                    results[key] = {"value": value, "unit": unit}
+                        unit = 'MiB'
+                    results[key] = {'value': value, 'unit': unit}
 
     return results
 
@@ -91,7 +91,7 @@ def update_csv_data(data_dict, benchmarks, memory_stats, commit_hash):
 def write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash):
     def custom_sort(item):
         # Sort all items that do not have unit "ms" first, then sort based on whether the name is capitalized, and then based on worst newest benchmark
-        is_not_ms_unit = item['unit'] != "ms"
+        is_not_ms_unit = item['unit'] != 'ms'
 
         if is_not_ms_unit:
             # If the unit is not `ms`, preserve order
@@ -115,7 +115,7 @@ def save_as_csv(benchmarks, memory_stats, csv_path, commit_hash):
     update_csv_data(data_dict, benchmarks, memory_stats, commit_hash)
     write_csv_from_dict(csv_path, data_dict, fieldnames, commit_hash)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # Set up argument parsing
     parser = argparse.ArgumentParser(description='Convert benchmark results to JSON format.')
     parser.add_argument('input_times_path', help='Path to the input file containing typechecking times.')
@@ -131,5 +131,5 @@ if __name__ == "__main__":
     benchmarks = parse_benchmark_results(args.input_times_path)
     memory_stats = parse_memory_profiling_data(args.input_memory_path)
 
-    save_github_action_benchmark_json(args.output_json_path, benchmarks, memory_stats, ["Total",], ["total_memory_in_use",])
+    save_github_action_benchmark_json(args.output_json_path, benchmarks, memory_stats, ['Total',], ['total_memory_in_use',])
     save_as_csv(benchmarks, memory_stats, args.csv_path, args.commit_hash)

@@ -225,7 +225,7 @@ if __name__ == '__main__':
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
     metadata_config['contributors_file'] = metadata_config.get(
-        'contributors_file', "CONTRIBUTORS.toml")
+        'contributors_file', 'CONTRIBUTORS.toml')
 
     # Load the contributors data
     contributors_data = parse_contributors_file(metadata_config['contributors_file'])
