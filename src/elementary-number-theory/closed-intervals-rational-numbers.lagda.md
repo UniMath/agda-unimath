@@ -1,4 +1,4 @@
-# Inhabited closed intervals in the rational numbers
+# Closed intervals in the rational numbers
 
 ```agda
 module elementary-number-theory.closed-intervals-rational-numbers where
@@ -34,11 +34,13 @@ open import order-theory.decidable-total-orders
 ## Idea
 
 An
-{{#concept "inhabited closed interval" Disambiguation="in the rational numbers" Agda=closed-interval-ℚ}}
+{{#concept "closed interval" Disambiguation="in the rational numbers" Agda=closed-interval-ℚ}}
 in the rational numbers is a
 [closed interval](order-theory.closed-intervals-posets.md) in the
 [poset](elementary-number-theory.inequality-rational-numbers.md) of
-[rational numbers](elementary-number-theory.rational-numbers.md).
+[rational numbers](elementary-number-theory.rational-numbers.md). Note, in
+particular, that we thus consider closed intervals to be inhabited by
+convention.
 
 ## Definition
 

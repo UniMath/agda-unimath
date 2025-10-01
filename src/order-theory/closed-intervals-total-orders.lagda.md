@@ -34,12 +34,12 @@ open import order-theory.total-orders
 ## Idea
 
 A
-{{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
-in a [total order](order-theory.total-orders.md) `X` consists of a
-[pair](foundation.cartesian-product-types.md) of elements `x` and `y` in `X`
-with `x ≤ y`. A closed interval notably induces a
-[subtype](foundation.subtypes.md) of `X` spanned by elements `z` such that
-`x ≤ z ≤ y`.
+{{#concept "closed interval" disambiguation="in a total order" Agda=closed-interval-Total-Order}}
+in a [total order](order-theory.total-orders.md) `X` is a
+[subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`.
+Note, in particular, that we thus consider closed intervals to be inhabited by
+convention.
 
 Equivalently, it is a [closed interval](order-theory.closed-intervals-posets.md)
 in the underlying [poset](order-theory.posets.md).
