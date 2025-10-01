@@ -34,7 +34,7 @@ open import order-theory.total-orders
 ## Idea
 
 A
-{{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
+{{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Total-Order}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
 such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. (We
