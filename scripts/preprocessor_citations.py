@@ -173,7 +173,7 @@ def insert_bibliography_at_correct_location(content, bibliography_section):
             lambda _: bibliography_section, content)
     else:
         # If the placeholder isn't found, append the bibliography at the end of the content, with a `## References` header
-        new_content = content + "\n\n## References\n\n" + bibliography_section
+        new_content = content + '\n\n## References\n\n' + bibliography_section
 
     return new_content
 
@@ -210,7 +210,7 @@ def process_citations_root_section(
 
 
 def does_support_backend(backend):
-    return backend == 'html' or backend == "linkcheck"
+    return backend == 'html' or backend == 'linkcheck'
 
 
 if __name__ == '__main__':
@@ -268,13 +268,13 @@ if __name__ == '__main__':
     json.dump(book, sys.stdout)
 
     if unmatched_cite_keys:
-        eprint("The following unmatched bibliography keys were found while processing citations: ", ", ".join(sorted(unmatched_cite_keys)))
+        eprint('The following unmatched bibliography keys were found while processing citations: ', ', '.join(sorted(unmatched_cite_keys)))
 
         if citations_config.get('error-on-unmatched-keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
             sys.exit(1)
 
     if empty_bibliography_invocations:
-        eprint("The following files have #bibliography macro invocations with empty bibliographies: ", ", ".join(sorted(empty_bibliography_invocations)))
+        eprint('The following files have #bibliography macro invocations with empty bibliographies: ', ', '.join(sorted(empty_bibliography_invocations)))
 
         if citations_config.get('error-on-empty-bibliography', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY):
             sys.exit(2)

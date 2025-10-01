@@ -249,9 +249,9 @@ def is_file_modified(file_path):
 def parse_agda_imports(agda_file: str) -> Set[str]:
     """Extract import statements from an Agda file."""
     imports = set()
-    with open(agda_file, "r", encoding="utf-8") as f:
+    with open(agda_file, 'r', encoding='utf-8') as f:
         for line in f:
-            match = re.match(r"^\s*open\s+import\s+([A-Za-z0-9\-.]+)", line)
+            match = re.match(r'^\s*open\s+import\s+([A-Za-z0-9\-.]+)', line)
             if match:
                 imports.add(match.group(1))
     return imports
@@ -259,7 +259,7 @@ def parse_agda_imports(agda_file: str) -> Set[str]:
 def count_lines_in_file(file_path: str) -> int:
     """Count lines of code in a file."""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             return sum(1 for _ in f)
     except Exception:
         return 0

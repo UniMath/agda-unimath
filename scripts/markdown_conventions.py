@@ -136,7 +136,7 @@ if __name__ == '__main__':
         # Check for unmatched backticks outside of Agda code blocks
         backtick_lines = check_unclosed_inline_code_guard(lines)
         if backtick_lines:
-            line_list = ", ".join(str(line) for line in backtick_lines)
+            line_list = ', '.join(str(line) for line in backtick_lines)
             print(
                 f"Error! File '{fpath}' line(s) {line_list} contain backticks (`) for guarding inline code blocks that don't have matching closing or opening guards. Please add the matching backtick(s).")
             status |= STATUS_UNCLOSED_BACKTICK

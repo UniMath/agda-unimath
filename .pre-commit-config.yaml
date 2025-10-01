@@ -8,7 +8,7 @@ repos:
         exclude: \.patch$
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      # - id: double-quote-string-fixer
+      - id: double-quote-string-fixer
       - id: check-ast
       - id: check-yaml
       # - id: check-json # Doesn't accept json with comments
