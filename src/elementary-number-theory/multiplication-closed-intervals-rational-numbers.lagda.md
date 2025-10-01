@@ -693,14 +693,14 @@ abstract
     mul-closed-interval-ℚ [c,d] [a,b]
   commutative-mul-closed-interval-ℚ ((a , b) , a≤b) ((c , d) , c≤d) =
     eq-closed-interval-ℚ _ _
-      ( interchange-law-min-Total-Order ℚ-Total-Order _ _ _ _ ∙
-        ap-min-ℚ
+      ( ( interchange-law-min-Total-Order ℚ-Total-Order _ _ _ _) ∙
+        ( ap-min-ℚ
           ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
-          ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _)))
-      ( interchange-law-max-Total-Order ℚ-Total-Order _ _ _ _ ∙
-        ap-max-ℚ
+          ( ap-min-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))))
+      ( ( interchange-law-max-Total-Order ℚ-Total-Order _ _ _ _) ∙
+        ( ap-max-ℚ
           ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))
-          ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _)))
+          ( ap-max-ℚ (commutative-mul-ℚ _ _) (commutative-mul-ℚ _ _))))
 ```
 
 ### Unit laws of multiplication of intervals
@@ -713,22 +713,22 @@ abstract
     [a,b]
   left-unit-law-mul-closed-interval-ℚ ((a , b) , a≤b) =
     eq-closed-interval-ℚ _ _
-      ( idempotent-min-ℚ _ ∙
-        ap-min-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b) ∙
-        left-leq-right-min-ℚ _ _ a≤b)
-      ( idempotent-max-ℚ _ ∙
-        ap-max-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b) ∙
-        left-leq-right-max-ℚ _ _ a≤b)
+      ( ( idempotent-min-ℚ _) ∙
+        ( ap-min-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b)) ∙
+        ( left-leq-right-min-ℚ _ _ a≤b))
+      ( ( idempotent-max-ℚ _) ∙
+        ( ap-max-ℚ (left-unit-law-mul-ℚ a) (left-unit-law-mul-ℚ b)) ∙
+        ( left-leq-right-max-ℚ _ _ a≤b))
 
   right-unit-law-mul-closed-interval-ℚ :
     ([a,b] : closed-interval-ℚ) →
     mul-closed-interval-ℚ [a,b] one-one-closed-interval-ℚ ＝
     [a,b]
   right-unit-law-mul-closed-interval-ℚ [a,b] =
-    commutative-mul-closed-interval-ℚ
+    ( commutative-mul-closed-interval-ℚ
       ( [a,b])
-      ( one-one-closed-interval-ℚ) ∙
-    left-unit-law-mul-closed-interval-ℚ [a,b]
+      ( one-one-closed-interval-ℚ)) ∙
+    ( left-unit-law-mul-closed-interval-ℚ [a,b])
 ```
 
 ### The commutative monoid of multiplication of rational intervals
