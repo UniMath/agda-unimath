@@ -9,11 +9,17 @@ module elementary-number-theory.multiplication-nonnegative-rational-numbers wher
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
@@ -64,4 +70,44 @@ _*ℚ⁰⁺_ = mul-ℚ⁰⁺
 abstract
   commutative-mul-ℚ⁰⁺ : (p q : ℚ⁰⁺) → p *ℚ⁰⁺ q ＝ q *ℚ⁰⁺ p
   commutative-mul-ℚ⁰⁺ (p , _) (q , _) = eq-ℚ⁰⁺ (commutative-mul-ℚ p q)
+```
+
+### Multiplication by a nonnegative rational number preserves inequality
+
+```agda
+opaque
+  unfolding leq-ℚ-Prop
+  unfolding mul-ℚ
+
+  preserves-leq-right-mul-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
+  preserves-leq-right-mul-ℚ⁰⁺
+    p⁺@((p@(np , dp , pos-dp) , _) , nonneg-np)
+    (q@(nq , dq , _) , _)
+    (r@(nr , dr , _) , _)
+    q≤r =
+      preserves-leq-rational-fraction-ℤ
+        ( mul-fraction-ℤ q p)
+        ( mul-fraction-ℤ r p)
+        ( binary-tr
+          ( leq-ℤ)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( interchange-law-mul-mul-ℤ _ _ _ _)
+          ( preserves-leq-left-mul-nonnegative-ℤ
+            ( np *ℤ dp ,
+              is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
+            ( nq *ℤ dr)
+            ( nr *ℤ dq)
+            ( q≤r)))
+
+  preserves-leq-left-mul-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
+    leq-ℚ (rational-ℚ⁰⁺ p *ℚ q) (rational-ℚ⁰⁺ p *ℚ r)
+  preserves-leq-left-mul-ℚ⁰⁺ p q r q≤r =
+    binary-tr
+      ( leq-ℚ)
+      ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
+      ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
+      ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
 ```
