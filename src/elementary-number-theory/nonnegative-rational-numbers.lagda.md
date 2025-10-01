@@ -408,3 +408,15 @@ abstract
   le-zero-nonnegative-ℚ⁰⁺ : (q : ℚ⁺) → le-ℚ⁰⁺ zero-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
   le-zero-nonnegative-ℚ⁰⁺ (q , pos-q) = le-zero-is-positive-ℚ q pos-q
 ```
+
+### If `p < q` and `p` is nonnegative, `q` is positive
+
+```agda
+abstract
+  is-positive-le-nonnegative-ℚ :
+    (p : ℚ⁰⁺) (q : ℚ) → le-ℚ (rational-ℚ⁰⁺ p) q → is-positive-ℚ q
+  is-positive-le-nonnegative-ℚ (p , nonneg-p) q p<q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( concatenate-leq-le-ℚ _ _ _ (leq-zero-is-nonnegative-ℚ p nonneg-p) p<q)
+```
