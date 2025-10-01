@@ -802,5 +802,5 @@ abstract
   le-lower-bound-mul-interior-closed-interval-ℚ
     ((a , b) , _) ((c , d) , _) ((a' , b') , _) ((c' , d') , _)
     (a<a' , b'<b) (c<c' , d'<d) a'<b' c'<d' =
-    ?
+    {!   !}
 ```
