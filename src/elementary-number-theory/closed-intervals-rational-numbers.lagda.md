@@ -37,7 +37,9 @@ An
 in the rational numbers is a
 [closed interval](order-theory.closed-intervals-posets.md) in the
 [poset](elementary-number-theory.inequality-rational-numbers.md) of
-[rational numbers](elementary-number-theory.rational-numbers.md). Note, in particular, that we thus consider closed intervals to be inhabited by convention.
+[rational numbers](elementary-number-theory.rational-numbers.md). Note, in
+particular, that we thus consider closed intervals to be inhabited by
+convention.
 
 ## Definition
 

@@ -34,7 +34,8 @@ A
 {{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
 in a [poset](order-theory.posets.md) `P` is a [subtype](foundation.subtypes.md)
 of `P` with elements `x` and `y` with `x ≤ y` such that the subtype contains
-every element `z` such that `x ≤ z ∧ z ≤ y`. Note, in particular, that we thus consider closed intervals to be inhabited by convention.
+every element `z` such that `x ≤ z ∧ z ≤ y`. Note, in particular, that we thus
+consider closed intervals to be inhabited by convention.
 
 Any pair `x y` with `x ≤ y` induces a unique closed interval, so we can
 equivalently characterize closed intervals in terms of such pairs.

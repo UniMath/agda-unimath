@@ -22,8 +22,8 @@ open import order-theory.posets
 A map between [posets](order-theory.posets.md) `f : X → Y` is
 {{#concept "closed interval preserving" Agda=is-closed-interval-map-Poset disambiguation="map between posets"}}
 if the [image](foundation.images-subtypes.md) of a
-[closed interval](order-theory.closed-intervals-posets.md) in `X` is
-always a closed interval in `Y`.
+[closed interval](order-theory.closed-intervals-posets.md) in `X` is always a
+closed interval in `Y`.
 
 ## Definition
 
