@@ -36,7 +36,7 @@ open import order-theory.closed-intervals-posets
 ## Idea
 
 Given two
-[inhabited closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
+[closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
 `[a, b]` and `[c, d]` in the
 [rational numbers](elementary-number-theory.rational-numbers.md), the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of

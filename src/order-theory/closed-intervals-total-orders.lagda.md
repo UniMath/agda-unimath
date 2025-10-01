@@ -37,9 +37,7 @@ A
 {{#concept "closed interval" disambiguation="in a total order" Agda=closed-interval-Total-Order}}
 in a [total order](order-theory.total-orders.md) `X` is a
 [subtype](foundation.subtypes.md) of `X` with elements `x` and `y` with `x ≤ y`
-such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. (We
-choose the convention of not considering the empty subtype to be a closed
-interval.)
+such that the subtype contains every element `z` such that `x ≤ z ∧ z ≤ y`. Note, in particular, that we thus consider closed intervals to be inhabited by convention.
 
 Equivalently, a closed interval is a total order is a
 [closed interval](order-theory.closed-intervals-posets.md) in the underlying
@@ -558,19 +556,19 @@ module _
                   ( x)
                   ( tr
                       ( _≤ x)
-                      ( interchange-law-min-Total-Order X a b c d ∙
-                        ap-binary min
+                      ( ( interchange-law-min-Total-Order X a b c d) ∙
+                        ( ap-binary min
                           ( commutative-min _ _)
-                          ( commutative-min _ _) ∙
-                        commutative-min _ _)
+                          ( commutative-min _ _)) ∙
+                        ( commutative-min _ _))
                       ( min≤x) ,
                     tr
                       ( x ≤_)
-                      ( interchange-law-max-Total-Order X a b c d ∙
-                        ap-binary max
+                      ( ( interchange-law-max-Total-Order X a b c d) ∙
+                        ( ap-binary max
                           ( commutative-max _ _)
-                          ( commutative-max _ _) ∙
-                        commutative-max _ _)
+                          ( commutative-max _ _)) ∙
+                        ( commutative-max _ _))
                       ( x≤max)))))
           ( eq-one-of-four-min-Total-Order X a b c d)
 ```

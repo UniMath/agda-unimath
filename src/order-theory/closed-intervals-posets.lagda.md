@@ -34,8 +34,7 @@ A
 {{#concept "closed interval" disambiguation="in a poset" Agda=closed-interval-Poset}}
 in a [poset](order-theory.posets.md) `P` is a [subtype](foundation.subtypes.md)
 of `P` with elements `x` and `y` with `x ≤ y` such that the subtype contains
-every element `z` such that `x ≤ z ∧ z ≤ y`. (We choose the convention of not
-considering the empty subtype to be a closed interval.)
+every element `z` such that `x ≤ z ∧ z ≤ y`. Note, in particular, that we thus consider closed intervals to be inhabited by convention.
 
 Any pair `x y` with `x ≤ y` induces a unique closed interval, so we can
 equivalently characterize closed intervals in terms of such pairs.
@@ -77,7 +76,7 @@ module _
 
 ## Properties
 
-### The endpoints of an inhabited closed interval are in the interval
+### The endpoints of a closed interval are in the interval
 
 ```agda
 module _
@@ -100,7 +99,7 @@ module _
       ( a≤b , refl-leq-Poset X b)
 ```
 
-### Inhabited closed intervals are inhabited
+### Closed intervals are inhabited
 
 ```agda
 module _
@@ -141,7 +140,7 @@ module _
       ( ind-Σ (leq-prop-Poset X))
 ```
 
-### The map from inhabited closed intervals to subtypes is injective
+### The map from closed intervals to subtypes is injective
 
 ```agda
 module _
