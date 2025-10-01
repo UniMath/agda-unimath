@@ -853,7 +853,7 @@ abstract
               ( c'<d')
               ( min=a'c')
           is-pos-d' = is-positive-le-nonnegative-ℚ (c' , is-nonneg-c') d' c'<d'
-          is-pos-d = ?
+          is-pos-d = {!   !}
         in
           rec-coproduct
             {!   !}
