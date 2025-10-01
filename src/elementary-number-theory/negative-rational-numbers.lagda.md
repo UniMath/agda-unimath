@@ -288,6 +288,14 @@ module _
           ( neg-ℚ r)
           ( neg-ℚ q)
           ( neg-le-ℚ q r H))
+
+    reverses-le-left-mul-ℚ⁻ : le-ℚ (rational-ℚ⁻ p *ℚ r) (rational-ℚ⁻ p *ℚ q)
+    reverses-le-left-mul-ℚ⁻ =
+      binary-tr
+        ( le-ℚ)
+        ( commutative-mul-ℚ _ _)
+        ( commutative-mul-ℚ _ _)
+        ( reverses-le-right-mul-ℚ⁻)
 ```
 
 ### The negative rational numbers are invertible elements of the multiplicative monoid of rational numbers

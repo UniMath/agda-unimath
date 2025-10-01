@@ -21,16 +21,21 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.function-types
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -751,4 +756,51 @@ commutative-monoid-mul-closed-interval-ℚ : Commutative-Monoid lzero
 commutative-monoid-mul-closed-interval-ℚ =
   ( monoid-mul-closed-interval-ℚ ,
     commutative-mul-closed-interval-ℚ)
+```
+
+### The sign of interval boundaries
+
+```agda
+abstract
+  is-nonnegative-left-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    (a<b : is-nontrivial-closed-interval-ℚ [a,b]) →
+    (c<d : is-nontrivial-closed-interval-ℚ [c,d]) →
+    ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d] ＝
+      lower-bound-closed-interval-ℚ [a,b] *ℚ lower-bound-closed-interval-ℚ [c,d]) →
+    is-nonnegative-ℚ (lower-bound-closed-interval-ℚ [a,b])
+  is-nonnegative-left-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ
+    ((a , b) , _) ((c , d) , _) a<b c<d min=ac =
+    rec-coproduct
+      ( λ is-neg-a →
+        ex-falso
+          ( not-leq-le-ℚ
+            ( a *ℚ d)
+            ( a *ℚ c)
+            ( reverses-le-left-mul-ℚ⁻ (a , is-neg-a) c d c<d)
+            ( tr
+              ( λ q → leq-ℚ q (a *ℚ d))
+              ( min=ac)
+              ( transitive-leq-ℚ _ _ _ (leq-right-min-ℚ _ _) (leq-left-min-ℚ _ _)))))
+      ( id)
+      ( decide-is-negative-is-nonnegative-ℚ a)
+```
+
+### Multiplication of interior intervals
+
+```agda
+abstract
+  le-lower-bound-mul-interior-closed-interval-ℚ :
+    ([a,b] [c,d] [a',b'] [c',d'] : closed-interval-ℚ) →
+    is-interior-closed-interval-ℚ [a,b] [a',b'] →
+    is-interior-closed-interval-ℚ [c,d] [c',d'] →
+    is-nontrivial-closed-interval-ℚ [a',b'] →
+    is-nontrivial-closed-interval-ℚ [c',d'] →
+    is-interior-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+  le-lower-bound-mul-interior-closed-interval-ℚ
+    ((a , b) , _) ((c , d) , _) ((a' , b') , _) ((c' , d') , _)
+    (a<a' , b'<b) (c<c' , d'<d) a'<b' c'<d' =
+    ?
 ```
