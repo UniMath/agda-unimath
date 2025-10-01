@@ -27,7 +27,7 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 
 A [series](analysis.series-metric-abelian-groups.md) in a
 [metric abelian group](analysis.metric-abelian-groups.md) is
-{{#concept "convergent" Disambiguation="series in a metric abelian group" Agda=converges-series-Metric-Ab WDID=Q1211057 WD="convergent series"}}
+{{#concept "convergent" Disambiguation="series in a metric abelian group" Agda=is-convergent-series-Metric-Ab Agda=convergent-series-Metric-Ab WDID=Q1211057 WD="convergent series"}}
 if its [sequence](lists.sequences.md) of partial sums
 [converges](metric-spaces.convergent-sequences-metric-spaces.md) in the
 associated [metric space](metric-spaces.metric-spaces.md).
