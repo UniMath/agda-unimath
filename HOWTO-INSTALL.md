@@ -392,7 +392,6 @@ This issue can arise if the `pre-commit` executable gets placed in the
    `ls ~/.local/bin | grep pre-commit` to see if the executable is present.
 
 2. **Update your `PATH`**:
-
    - If you're using the bash terminal, open your `.bashrc` file with a text
      editor like `nano`:
 
@@ -409,7 +408,6 @@ This issue can arise if the `pre-commit` executable gets placed in the
    - Save the file and close the editor.
 
 3. **Reload your `.bashrc`**:
-
    - Run the following command to apply the changes:
 
      ```bash
