@@ -21,9 +21,18 @@
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           pkgs-mdbook = nixpkgs-mdbook.legacyPackages."${system}";
+          python-overrides = self: super: {
+            certifi = super.certifi.overridePythonAttrs(old: {
+              # The patch in nixpkgs broke Python 3.10,
+              # see https://nixpk.gs/pr-tracker.html?pr=447787
+              patches = [ ./env.patch ];
+            });
+          };
           # We aim to support Python 3.10 as long as Ubuntu 22.24 has LTS,
           # since it ships with that version
-          python = pkgs.python310.withPackages (p: with p; [
+          python = (pkgs.python310.override {
+            packageOverrides = python-overrides;
+          }).withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
             pybtex

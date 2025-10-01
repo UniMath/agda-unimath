@@ -5,6 +5,7 @@ repos:
     rev: v3.2.0
     hooks:
       - id: trailing-whitespace
+        exclude: \.patch$
       - id: end-of-file-fixer
       - id: mixed-line-ending
       # - id: double-quote-string-fixer
