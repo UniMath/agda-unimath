@@ -16,6 +16,8 @@ open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.binary-transport
+open import elementary-number-theory.rational-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
