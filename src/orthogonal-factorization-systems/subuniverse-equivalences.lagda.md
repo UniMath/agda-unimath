@@ -159,7 +159,7 @@ module _
       ( is-subuniverse-equiv-subuniverse-equiv K g)
 ```
 
-### The class of `K`-equivalences has the 3-for-2 property
+### The class of `K`-equivalences has the left and right cancellation property
 
 ```agda
 module _
@@ -177,6 +177,40 @@ module _
     is-subuniverse-equiv K g → is-subuniverse-equiv K f
   is-subuniverse-equiv-right-factor G U =
     is-equiv-left-factor (precomp f (pr1 U)) (precomp g (pr1 U)) (GF U) (G U)
+```
+
+### The class of `K`-equivalences satisfies the 3-for-2 property
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
+  {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (p : f ~ g ∘ h)
+  where
+
+  is-subuniverse-equiv-top-map-triangle :
+      is-subuniverse-equiv K g →
+      is-subuniverse-equiv K f →
+      is-subuniverse-equiv K h
+  is-subuniverse-equiv-top-map-triangle G F =
+    is-subuniverse-equiv-right-factor K g h
+      ( is-subuniverse-equiv-htpy' K p F)
+      ( G)
+
+  is-subuniverse-equiv-right-map-triangle :
+    is-subuniverse-equiv K f →
+    is-subuniverse-equiv K h →
+    is-subuniverse-equiv K g
+  is-subuniverse-equiv-right-map-triangle F =
+    is-subuniverse-equiv-left-factor K g h (is-subuniverse-equiv-htpy' K p F)
+
+
+  is-subuniverse-equiv-left-map-triangle :
+    is-subuniverse-equiv K h →
+    is-subuniverse-equiv K g →
+    is-subuniverse-equiv K f
+  is-subuniverse-equiv-left-map-triangle H G =
+    is-subuniverse-equiv-htpy K p (is-subuniverse-equiv-comp K g h H G)
 ```
 
 ### Sections of `K`-equivalences are `K`-equivalences
