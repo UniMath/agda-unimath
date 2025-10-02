@@ -28,9 +28,7 @@ open import foundation.identity-types
 
 ## Idea
 
-The
-{{#concept "product" WDID=Q40276 WD="multiplication" Disambiguation="of nonnegative rational numbers" Agda=mul-ℚ⁰⁺}}
-of two
+The product of two
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is their [product](elementary-number-theory.multiplication-rational-numbers.md)
 as [rational numbers](elementary-number-theory.rational-numbers.md), and is
