@@ -419,7 +419,7 @@ module _
         ( family-fiber-Π-precomp-Π' f
           ( type-subuniverse-localization K ∘ Kfib)
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
-          ( b)))  →
+          ( b))) →
     (b : B) → is-subuniverse-equiv K (terminal-map (fiber f b))
   is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π
     s b =

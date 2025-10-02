@@ -204,7 +204,6 @@ module _
   is-subuniverse-equiv-right-map-triangle F =
     is-subuniverse-equiv-left-factor K g h (is-subuniverse-equiv-htpy' K p F)
 
-
   is-subuniverse-equiv-left-map-triangle :
     is-subuniverse-equiv K h →
     is-subuniverse-equiv K g →
