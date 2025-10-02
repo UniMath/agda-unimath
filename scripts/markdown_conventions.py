@@ -170,7 +170,7 @@ if __name__ == '__main__':
             status |= STATUS_INVALID_HEADING
             for line in invalid_heading_lines:
                 print(
-                    f"{line}:\t{lines[line-1]}")
+                    f'{line}:\t{lines[line-1]}')
 
         # Remove empty code blocks
         output = empty_block_pattern.sub('', output)

@@ -65,7 +65,7 @@ LABEL_COLORS_FALLBACK = {
 
 def fetch_github_labels(repo):
     """Fetch labels and their colors from a GitHub repository."""
-    url = f"https://api.github.com/repos/{repo}/labels"
+    url = f'https://api.github.com/repos/{repo}/labels'
     labels = {}
     try:
         while url:
@@ -77,7 +77,7 @@ def fetch_github_labels(repo):
             # Check if there is a next page
             url = response.links.get('next', {}).get('url')
     except requests.RequestException as e:
-        eprint(f"Failed to fetch GitHub labels: {e}")
+        eprint(f'Failed to fetch GitHub labels: {e}')
         # Fallback to preloaded values
         return LABEL_COLORS_FALLBACK
     return labels
@@ -87,7 +87,7 @@ def module_based_color(module_name, label_colors):
     """Generate a color based on the module name using GitHub labels."""
     for label, color in label_colors.items():
         if label == module_name or (label == 'foundation' and module_name == 'foundation-core'):
-            return f"#{color}"
+            return f'#{color}'
 
     # Fallback to random color generation if no label matches
     base_color = (91, 155, 213)
@@ -133,7 +133,7 @@ def build_dependency_graph(root_dir, most_imported_drop_count=20):
 
     eprint('Excluding modules:')
     for i, m in enumerate(_top_imports):
-        eprint(f"{i+1:>3} ({import_counts[m]:>4} imports) {m}")
+        eprint(f'{i+1:>3} ({import_counts[m]:>4} imports) {m}')
 
     # Remove top modules from the graph
     for module in top_imports:
@@ -195,7 +195,7 @@ def render_graph(graph, file_sizes, output_file, format, repo):
     html_legend_output_file = output_file + '_legend.html'
     generate_html_legend(label_colors, used_labels,
                          html_legend_output_file, label_counts)
-    eprint(f"HTML Legend saved as {html_legend_output_file}")
+    eprint(f'HTML Legend saved as {html_legend_output_file}')
 
     dot.render(output_file, format=format, cleanup=True)
 
@@ -217,4 +217,4 @@ if __name__ == '__main__':
         root_dir, most_imported_drop_count=most_imported_drop_count)
     render_graph(graph, file_sizes, args.output_file,
                  format=args.format, repo=GITHUB_REPO)
-    eprint(f"Graph saved as {args.output_file}.{args.format}")
+    eprint(f'Graph saved as {args.output_file}.{args.format}')
