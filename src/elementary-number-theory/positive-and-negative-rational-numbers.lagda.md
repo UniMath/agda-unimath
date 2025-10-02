@@ -15,6 +15,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -67,4 +68,18 @@ abstract
       ( λ x<0 → neg (is-negative-le-zero-ℚ x x<0))
       ( zero)
       ( λ 0<x → pos (is-positive-le-zero-ℚ x 0<x))
+```
+
+### Inequalities
+
+#### A negative rational number is less than a nonnegative rational number
+
+```agda
+abstract
+  le-negative-nonnegative-ℚ :
+    (p : ℚ⁻) (q : ℚ⁰⁺) → le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁰⁺ q)
+  le-negative-nonnegative-ℚ (p , neg-p) (q , nonneg-q) =
+    concatenate-le-leq-ℚ p zero-ℚ q
+      ( le-zero-is-negative-ℚ p neg-p)
+      ( leq-zero-is-nonnegative-ℚ q nonneg-q)
 ```

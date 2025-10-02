@@ -821,17 +821,17 @@ abstract
     is-interior-closed-interval-ℚ [c,d] [c',d'] →
     is-nontrivial-closed-interval-ℚ [a',b'] →
     is-nontrivial-closed-interval-ℚ [c',d'] →
-    is-interior-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+    le-ℚ
+      ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+      ( lower-bound-mul-closed-interval-ℚ [a',b'] [c',d'])
   le-lower-bound-mul-interior-closed-interval-ℚ
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) [a',b']@((a' , b') , _) [c',d']@((c' , d') , _)
     (a<a' , b'<b) (c<c' , d'<d) a'<b' c'<d' =
     eq-one-of-four-min-Total-Order
       ( ℚ-Total-Order)
-      ( is-interior-prop-closed-interval-ℚ
-        ( mul-closed-interval-ℚ [a,b] [c,d])
-        ( mul-closed-interval-ℚ [a',b'] [c',d']))
+      ( le-ℚ-Prop
+        ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+        ( lower-bound-mul-closed-interval-ℚ [a',b'] [c',d']))
       ( a' *ℚ c')
       ( a' *ℚ d')
       ( b' *ℚ c')
@@ -853,10 +853,11 @@ abstract
               ( c'<d')
               ( min=a'c')
           is-pos-d' = is-positive-le-nonnegative-ℚ (c' , is-nonneg-c') d' c'<d'
-          is-pos-d = {!   !}
+          is-pos-d = is-positive-le-positive-ℚ (d' , is-pos-d') d d'<d
         in
           rec-coproduct
-            {!   !}
+            ( λ is-neg-a →
+              {! concatenate-le-leq-ℚ  !})
             {!   !}
             ( decide-is-negative-is-nonnegative-ℚ a))
       {!   !}
