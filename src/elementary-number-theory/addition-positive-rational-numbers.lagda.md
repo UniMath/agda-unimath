@@ -43,9 +43,7 @@ open import group-theory.subsemigroups
 
 ## Idea
 
-The
-{{#concept "sum" WDID=Q32043 WD="addition" Disambiguation="positive rational numbers" Agda=add-ℚ⁺}}
-of two
+The sum of two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is their [sum](elementary-number-theory.addition-rational-numbers.md) as
 [rational numbers](elementary-number-theory.rational-numbers.md), and is itself
