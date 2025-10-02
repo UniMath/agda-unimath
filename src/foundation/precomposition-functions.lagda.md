@@ -134,22 +134,22 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  compute-coherence-triangle-fiber-precomp' :
+  compute-extension-fiber-precomp' :
     (g : A → X) →
     fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps' g h f)
-  compute-coherence-triangle-fiber-precomp' g = equiv-tot (λ _ → equiv-funext)
+  compute-extension-fiber-precomp' g = equiv-tot (λ _ → equiv-funext)
 
-  compute-coherence-triangle-fiber-precomp :
+  compute-extension-fiber-precomp :
     (g : A → X) →
     fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps g h f)
-  compute-coherence-triangle-fiber-precomp g =
+  compute-extension-fiber-precomp g =
     equiv-tot (λ _ → equiv-funext) ∘e equiv-fiber (precomp f X) g
 
   compute-fiber-precomp :
     (g : B → X) →
     fiber (precomp f X) (g ∘ f) ≃
     Σ (B → X) (λ h → coherence-square-maps f f h g)
-  compute-fiber-precomp g = compute-coherence-triangle-fiber-precomp (g ∘ f)
+  compute-fiber-precomp g = compute-extension-fiber-precomp (g ∘ f)
 
   compute-total-fiber-precomp :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃

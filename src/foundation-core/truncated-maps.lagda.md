@@ -109,21 +109,21 @@ module _
   abstract
     is-trunc-map-succ-is-trunc-map-ap :
       ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
-    is-trunc-map-succ-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
+    is-trunc-map-succ-is-trunc-map-ap is-trunc-map-ap-f b (x , p) (x' , p') =
       is-trunc-equiv k
-        ( fiber (ap f) (p ∙ (inv p')))
-        ( equiv-fiber-ap-eq-fiber f (pair x p) (pair x' p'))
-        ( is-trunc-map-ap-f x x' (p ∙ (inv p')))
+        ( fiber (ap f) (p ∙ inv p'))
+        ( equiv-fiber-ap-eq-fiber f (x , p) (x' , p'))
+        ( is-trunc-map-ap-f x x' (p ∙ inv p'))
 
   abstract
     is-trunc-map-ap-is-trunc-map-succ :
       is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
     is-trunc-map-ap-is-trunc-map-succ is-trunc-map-f x y p =
       is-trunc-is-equiv' k
-        ( pair x p ＝ pair y refl)
+        ( (x , p) ＝ (y , refl))
         ( eq-fiber-fiber-ap f x y p)
         ( is-equiv-eq-fiber-fiber-ap f x y p)
-        ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+        ( is-trunc-map-f (f y) (x , p) (y , refl))
 ```
 
 ### The action on identifications of a `k`-truncated map is also `k`-truncated
@@ -283,7 +283,7 @@ abstract
         ( map-compute-fiber-comp g h (g b))
         ( is-equiv-map-compute-fiber-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
-      ( pair b refl)
+      ( b , refl)
 ```
 
 ### If a composite `g ∘ h` and its left factor `g` are truncated maps, then its right factor `h` is a truncated map

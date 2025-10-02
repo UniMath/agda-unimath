@@ -388,12 +388,12 @@ This is an instance of Corollary 2.29 in {{#cite CORS20}}.
 We consider the following composition of maps
 
 ```text
-   fiber f b = Σ A (λ a → f a = b)
-             → Σ A (λ a → ║f a ＝ b║)
-             ≃ Σ A (λ a → |f a| = |b|)
-             ≃ Σ A (λ a → ║f║ |a| = |b|)
-             → Σ ║A║ (λ t → ║f║ t = |b|)
-             = fiber ║f║ |b|
+  fiber f b = Σ A (λ a → f a = b)
+            → Σ A (λ a → ║f a ＝ b║)
+            ≃ Σ A (λ a → |f a| = |b|)
+            ≃ Σ A (λ a → ║f║ |a| = |b|)
+            → Σ ║A║ (λ t → ║f║ t = |b|)
+            = fiber ║f║ |b|
 ```
 
 where the first and last maps are `k`-equivalences.

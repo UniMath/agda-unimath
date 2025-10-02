@@ -21,16 +21,17 @@ open import orthogonal-factorization-systems.types-local-at-maps
 ## Idea
 
 Let `P` be a [subuniverse](foundation.subuniverses.md). Given a type `X`, its
-**localization** at `P`, or **`P`-localization**, is a type `Y` in `P` and a map
-`η : X → Y` such that every type in `P` is
-`η`[-local](orthogonal-factorization-systems.types-local-at-maps.md). I.e., for
-every `Z` in `P`, the [precomposition map](foundation-core.function-types.md)
+{{#concept "localization" Disambiguation="of a type at a subuniverse" Agda=subuniverse-localization}}
+at `P`, or **`P`-localization**, is a type `Y` in `P` and a `P`-equivalence
+`η : X → Y`, i.e., a map such that for every `Z` in `P` the
+[precomposition map](foundation-core.function-types.md)
 
 ```text
   - ∘ η : (Y → Z) → (X → Z)
 ```
 
-is an [equivalence](foundation-core.equivalences.md).
+is an [equivalence](foundation-core.equivalences.md). In other words, every type
+in `P` is `η`[-local](orthogonal-factorization-systems.types-local-at-maps.md).
 
 ## Definition
 
@@ -51,9 +52,7 @@ is-subuniverse-localization :
   {l1 l2 lP : Level} (P : subuniverse l1 lP) →
   UU l2 → UU l1 → UU (lsuc l1 ⊔ l2 ⊔ lP)
 is-subuniverse-localization {l1} {l2} P X Y =
-  ( is-in-subuniverse P Y) ×
-  ( Σ ( X → Y)
-      ( λ η → (Z : UU l1) → is-in-subuniverse P Z → is-local η Z))
+  (is-in-subuniverse P Y) × (subuniverse-equiv P X Y)
 ```
 
 ```agda
@@ -69,8 +68,7 @@ module _
   unit-is-subuniverse-localization = pr1 (pr2 is-localization-Y)
 
   is-local-at-unit-is-in-subuniverse-is-subuniverse-localization :
-    (Z : UU l1) → is-in-subuniverse P Z →
-    is-local unit-is-subuniverse-localization Z
+    (Z : type-subuniverse P) → is-local unit-is-subuniverse-localization (pr1 Z)
   is-local-at-unit-is-in-subuniverse-is-subuniverse-localization =
     pr2 (pr2 is-localization-Y)
 ```
@@ -102,15 +100,19 @@ module _
     is-in-subuniverse-is-subuniverse-localization P
       ( is-subuniverse-localization-subuniverse-localization)
 
+  type-subuniverse-subuniverse-localization : type-subuniverse P
+  type-subuniverse-subuniverse-localization =
+    ( type-subuniverse-localization ,
+      is-in-subuniverse-subuniverse-localization)
+
   unit-subuniverse-localization : X → type-subuniverse-localization
   unit-subuniverse-localization =
     unit-is-subuniverse-localization P
       ( is-subuniverse-localization-subuniverse-localization)
 
-  is-local-at-unit-is-in-subuniverse-subuniverse-localization :
-    (Z : UU l1) →
-    is-in-subuniverse P Z → is-local unit-subuniverse-localization Z
-  is-local-at-unit-is-in-subuniverse-subuniverse-localization =
+  is-subuniverse-equiv-unit-subuniverse-localization :
+    is-subuniverse-equiv P unit-subuniverse-localization
+  is-subuniverse-equiv-unit-subuniverse-localization =
     is-local-at-unit-is-in-subuniverse-is-subuniverse-localization P
       ( is-subuniverse-localization-subuniverse-localization)
 ```

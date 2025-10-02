@@ -186,7 +186,7 @@ module _
     is-in-subuniverse-subuniverse-localization 𝒫 (L A)
   pr2 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse))
     A B is-in-subuniverse-A =
-    is-local-at-unit-is-in-subuniverse-subuniverse-localization
+    is-subuniverse-equiv-unit-subuniverse-localization
       𝒫 (L B) A is-in-subuniverse-A
 ```
 
