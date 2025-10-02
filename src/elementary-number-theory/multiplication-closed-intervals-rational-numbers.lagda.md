@@ -14,6 +14,7 @@ open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -833,40 +834,102 @@ abstract
   le-lower-bound-mul-interior-closed-interval-ℚ
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) [a',b']@((a' , b') , _) [c',d']@((c' , d') , _)
     (a<a' , b'<b) (c<c' , d'<d) a'<b' c'<d' =
-    eq-one-of-four-min-Total-Order
-      ( ℚ-Total-Order)
-      ( le-ℚ-Prop
-        ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
-        ( lower-bound-mul-closed-interval-ℚ [a',b'] [c',d']))
-      ( a' *ℚ c')
-      ( a' *ℚ d')
-      ( b' *ℚ c')
-      ( b' *ℚ d')
-      ( λ min=a'c' →
-        let
-          is-nonneg-a' =
-            is-nonnegative-left-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ
-              ( [a',b'])
-              ( [c',d'])
-              ( a'<b')
-              ( c'<d')
-              ( min=a'c')
-          is-nonneg-c' =
-            is-nonnegative-right-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ
-              ( [a',b'])
-              ( [c',d'])
-              ( a'<b')
-              ( c'<d')
-              ( min=a'c')
-          is-pos-d' = is-positive-le-nonnegative-ℚ (c' , is-nonneg-c') d' c'<d'
-          is-pos-d = is-positive-le-positive-ℚ (d' , is-pos-d') d d'<d
-        in
-          rec-coproduct
-            ( λ is-neg-a →
-              {! concatenate-le-leq-ℚ  !})
-            {!   !}
-            ( decide-is-negative-is-nonnegative-ℚ a))
-      {!   !}
-      {!   !}
-      {!   !}
+    let
+      min' = lower-bound-mul-closed-interval-ℚ [a',b'] [c',d']
+      min = lower-bound-mul-closed-interval-ℚ [a,b] [c,d]
+      min≤ac : leq-ℚ min (a *ℚ c)
+      min≤ac = transitive-leq-ℚ _ _ _ (leq-left-min-ℚ _ _) (leq-left-min-ℚ _ _)
+      min≤ad : leq-ℚ min (a *ℚ d)
+      min≤ad = transitive-leq-ℚ _ _ _ (leq-right-min-ℚ _ _) (leq-left-min-ℚ _ _)
+      min≤bc : leq-ℚ min (b *ℚ c)
+      min≤bc = transitive-leq-ℚ _ _ _ (leq-left-min-ℚ _ _) (leq-right-min-ℚ _ _)
+    in
+      eq-one-of-four-min-Total-Order
+        ( ℚ-Total-Order)
+        ( le-ℚ-Prop min min')
+        ( a' *ℚ c')
+        ( a' *ℚ d')
+        ( b' *ℚ c')
+        ( b' *ℚ d')
+        ( λ min'=a'c' →
+          let
+            is-nonneg-a' =
+              is-nonnegative-left-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ
+                ( [a',b'])
+                ( [c',d'])
+                ( a'<b')
+                ( c'<d')
+                ( min'=a'c')
+            is-nonneg-c' =
+              is-nonnegative-right-lower-bound-eq-lower-bound-mul-interval-mul-lower-bound-nontrivial-closed-interval-ℚ
+                ( [a',b'])
+                ( [c',d'])
+                ( a'<b')
+                ( c'<d')
+                ( min'=a'c')
+            is-pos-b' = is-positive-le-nonnegative-ℚ (a' , is-nonneg-a') b' a'<b'
+            is-pos-b = is-positive-le-positive-ℚ (b' , is-pos-b') b b'<b
+            is-pos-d' = is-positive-le-nonnegative-ℚ (c' , is-nonneg-c') d' c'<d'
+            is-pos-d = is-positive-le-positive-ℚ (d' , is-pos-d') d d'<d
+            is-nonneg-min' =
+              inv-tr
+                ( is-nonnegative-ℚ)
+                ( min'=a'c')
+                ( is-nonnegative-mul-nonnegative-ℚ
+                  ( is-nonneg-a')
+                  ( is-nonneg-c'))
+          in
+            rec-coproduct
+              ( λ is-neg-a →
+                concatenate-leq-le-ℚ
+                  ( min)
+                  ( a *ℚ d)
+                  ( min')
+                  ( min≤ad)
+                  ( le-negative-nonnegative-ℚ
+                    ( mul-negative-positive-ℚ (a , is-neg-a) (d , is-pos-d))
+                    ( min' , is-nonneg-min')))
+              ( λ is-nonneg-a →
+                rec-coproduct
+                  ( λ is-neg-c →
+                    concatenate-leq-le-ℚ
+                      ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+                      ( b *ℚ c)
+                      ( lower-bound-mul-closed-interval-ℚ [a',b'] [c',d'])
+                      ( min≤bc)
+                      ( le-negative-nonnegative-ℚ
+                        ( mul-positive-negative-ℚ (b , is-pos-b) (c , is-neg-c))
+                        ( min' , is-nonneg-min')))
+                  ( λ is-nonneg-c →
+                    concatenate-leq-le-ℚ
+                      ( min)
+                      ( a *ℚ c')
+                      ( min')
+                      ( transitive-leq-ℚ
+                        ( min)
+                        ( a *ℚ c)
+                        ( a *ℚ c')
+                        ( preserves-leq-left-mul-ℚ⁰⁺
+                          ( a , is-nonneg-a)
+                          ( c)
+                          ( c')
+                          ( leq-le-ℚ c<c'))
+                        ( min≤ac))
+                      ( inv-tr
+                        ( le-ℚ (a *ℚ c'))
+                        ( min'=a'c')
+                        ( preserves-le-right-mul-ℚ⁺
+                          ( c' ,
+                            is-positive-le-nonnegative-ℚ
+                              ( c , is-nonneg-c)
+                              ( c')
+                              ( c<c'))
+                          ( a)
+                          ( a')
+                          ( a<a'))))
+                  ( decide-is-negative-is-nonnegative-ℚ c))
+              ( decide-is-negative-is-nonnegative-ℚ a))
+        {!   !}
+        {!   !}
+        {!   !}
 ```
