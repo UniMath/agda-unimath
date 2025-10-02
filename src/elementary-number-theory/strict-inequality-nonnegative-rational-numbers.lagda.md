@@ -20,9 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The
-{{#concept "standard strict ordering" Disambiguation="nonnegative rational numbers" Agda=le-ℚ⁰⁺}}
-on the
+The standard strict ordering on the
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is inherited from the
 [standard strict ordering](elementary-number-theory.strict-inequality-rational-numbers.md)
