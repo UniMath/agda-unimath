@@ -249,51 +249,41 @@ module _
 A map is `K`-connected if and only if its dependent precomposition maps admit
 sections and the fibers have `K`-localizations.
 
-In fact, the following conditions suffice:
-
-There is a family `Kfib` together with a map `η : (b : B) → fiber f b → Kfib b`
-such that the precomposition map of `η b` at `Kfib b` is injective, so a weak
-kind of `Kfib b`-[epimorphism](foundation.epimorphisms.md), and the fiber of the
-dependent precomposition map of `f` along `Kfib` over `λ a → η (f a) (a , refl)`
-is inhabited.
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+    (Kfib : B → UU l3) (η : (b : B) → fiber f b → Kfib b)
+    ( is-htpy-injective-precomp-η-Kfib :
+        (b : B) {g h : Kfib b → Kfib b} →
+        precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
   where
 
   is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' :
-    (Kfib : B → UU l3) →
-    (η : (b : B) → fiber f b → Kfib b) →
-    ( (b : B) {g h : Kfib b → Kfib b} →
-      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h) →
     ( fiber-Π-precomp-Π' f Kfib (λ a → η (f a) (a , refl))) →
     ((b : B) → is-contr (Kfib b))
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π''
-    Kfib η is-htpy-injective-precomp-η-Kfib Fη b =
+  is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' Fη b =
       ( pr1 (Fη b) ,
         is-htpy-injective-precomp-η-Kfib b
           ( λ where (a , refl) → pr2 (Fη b) (a , refl)))
 
   is-contr-subuniverse-localization-fiber-has-section-precomp-Π' :
-    (Kfib : B → UU l3) →
-    (η : (b : B) → fiber f b → Kfib b) →
-    ( (b : B) {g h : Kfib b → Kfib b} →
-      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h) →
     fiber (precomp-Π f Kfib) (λ a → η (f a) (a , refl)) →
     ((b : B) → is-contr (Kfib b))
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π'
-    Kfib η is-htpy-injective-precomp-η-Kfib (s , H) b =
+  is-contr-subuniverse-localization-fiber-has-section-precomp-Π' (s , H) b =
     ( s b ,
       is-htpy-injective-precomp-η-Kfib b (λ where (a , refl) → htpy-eq H a))
 
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l4 : Level} (K : subuniverse l3 l4)
+  (Kfib : (b : B) → subuniverse-localization K (fiber f b))
+  (s : (U : B → type-subuniverse K) → section (precomp-Π f (pr1 ∘ U)))
+  where
+
   is-contr-subuniverse-localization-fiber-has-section-precomp-Π :
-    {l4 : Level} (K : subuniverse l3 l4)
-    (Kfib : (b : B) → subuniverse-localization K (fiber f b)) →
-    ((U : B → type-subuniverse K) → section (precomp-Π f (pr1 ∘ U))) →
     ((b : B) → is-contr (pr1 (Kfib b)))
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π K Kfib s =
-    is-contr-subuniverse-localization-fiber-has-section-precomp-Π'
+  is-contr-subuniverse-localization-fiber-has-section-precomp-Π =
+    is-contr-subuniverse-localization-fiber-has-section-precomp-Π' f
       ( type-subuniverse-localization K ∘ Kfib)
       ( unit-subuniverse-localization K ∘ Kfib)
       ( λ b H →
@@ -308,11 +298,8 @@ module _
         ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl)))
 
   is-subuniverse-equiv-terminal-map-fibers-has-section-precomp-Π :
-    {l4 : Level} (K : subuniverse l3 l4)
-    (Kfib : (b : B) → subuniverse-localization K (fiber f b)) →
-    ((U : B → type-subuniverse K) → section (precomp-Π f (pr1 ∘ U))) →
     (b : B) → is-subuniverse-equiv K (terminal-map (fiber f b))
-  is-subuniverse-equiv-terminal-map-fibers-has-section-precomp-Π K Kfib s b =
+  is-subuniverse-equiv-terminal-map-fibers-has-section-precomp-Π b =
     is-subuniverse-equiv-comp K
       ( terminal-map (type-subuniverse-localization K (Kfib b)))
       ( unit-subuniverse-localization K (Kfib b))
@@ -320,8 +307,13 @@ module _
       ( is-subuniverse-equiv-is-equiv K
         ( terminal-map (type-subuniverse-localization K (Kfib b)))
         ( is-equiv-terminal-map-is-contr
-          ( is-contr-subuniverse-localization-fiber-has-section-precomp-Π
-            K Kfib s b)))
+          ( is-contr-subuniverse-localization-fiber-has-section-precomp-Π b)))
+
+  is-subuniverse-connected-map-has-section-precomp-Π :
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-has-section-precomp-Π =
+    is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
+      ( is-subuniverse-equiv-terminal-map-fibers-has-section-precomp-Π)
 ```
 
 #### Surjection condition
@@ -329,7 +321,7 @@ module _
 A map is `K`-connected if and only if its dependent precomposition maps are
 surjective and the fibers have `K`-localizations.
 
-In fact, it suffices that the family
+In fact, it suffices that the fibers have `K`-localizations and the family
 
 ```text
   b ↦
@@ -344,20 +336,21 @@ fiber of `precomp-Π f` over the map `a ↦ η (f a) (a , refl)`.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (Kfib : B → UU l3)
+  (η : (b : B) → fiber f b → Kfib b)
+  ( is-htpy-injective-precomp-η-Kfib :
+      (b : B) {g h : Kfib b → Kfib b} →
+      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
   where
 
   abstract
     is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π' :
-      (Kfib : B → UU l3) →
-      (η : (b : B) → fiber f b → Kfib b) →
-      ( (b : B) {g h : Kfib b → Kfib b} →
-        precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h) →
       ( (b : B) →
         is-inhabited
           ( family-fiber-Π-precomp-Π' f Kfib (λ a → η (f a) (a , refl)) b)) →
       ((b : B) → is-contr (Kfib b))
     is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π'
-      Kfib η is-htpy-injective-precomp-η-Kfib Fη b =
+      Fη b =
       rec-trunc-Prop
         ( is-contr-Prop (Kfib b))
         ( λ (sb , Hb) →
@@ -366,9 +359,25 @@ module _
               ( λ where (a , refl) → Hb (a , refl))))
         ( Fη b)
 
+  is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π :
+    is-inhabited (fiber (precomp-Π f Kfib) (λ a → η (f a) (a , refl))) →
+    ((b : B) → is-contr (Kfib b))
+  is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π
+    s b =
+    rec-trunc-Prop
+      ( is-contr-Prop (Kfib b))
+      ( λ s →
+        is-contr-subuniverse-localization-fiber-has-section-precomp-Π'
+          f Kfib η is-htpy-injective-precomp-η-Kfib s b)
+      ( s)
+
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  (Kfib : (b : B) → subuniverse-localization K (fiber f b))
+  where
+
   is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π :
-    {l4 : Level} (K : subuniverse l3 l4)
-    (Kfib : (b : B) → subuniverse-localization K (fiber f b)) →
     ( (b : B) →
       is-inhabited
         ( family-fiber-Π-precomp-Π' f
@@ -376,9 +385,9 @@ module _
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
           ( b))) →
     ((b : B) → is-contr (type-subuniverse-localization K (Kfib b)))
-  is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π
-    K Kfib =
+  is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π =
     is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π'
+      ( f)
       ( type-subuniverse-localization K ∘ Kfib)
       ( unit-subuniverse-localization K ∘ Kfib)
       ( λ b H →
@@ -388,29 +397,11 @@ module _
               ( type-subuniverse-subuniverse-localization K (Kfib b)))
             ( eq-htpy H)))
 
-  is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π :
-    (Kfib : (b : B) → UU l3) →
-    (η : (b : B) → fiber f b → Kfib b) →
-    ( (b : B) {g h : Kfib b → Kfib b} →
-      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h) →
-    is-inhabited (fiber (precomp-Π f Kfib) (λ a → η (f a) (a , refl))) →
-    ((b : B) → is-contr (Kfib b))
-  is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π
-    Kfib η is-htpy-injective-precomp-η-Kfib s b =
-    rec-trunc-Prop
-      ( is-contr-Prop (Kfib b))
-      ( λ s →
-        is-contr-subuniverse-localization-fiber-has-section-precomp-Π'
-          f Kfib η is-htpy-injective-precomp-η-Kfib s b)
-      ( s)
-
   is-contr-subuniverse-localization-fiber-is-surjective-precomp-Π :
-    {l4 : Level} (K : subuniverse l3 l4)
-    (Kfib : (b : B) → subuniverse-localization K (fiber f b)) →
     ((U : B → type-subuniverse K) → is-surjective (precomp-Π f (pr1 ∘ U))) →
     ((b : B) → is-contr (pr1 (Kfib b)))
-  is-contr-subuniverse-localization-fiber-is-surjective-precomp-Π K Kfib s =
-    is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π
+  is-contr-subuniverse-localization-fiber-is-surjective-precomp-Π s =
+    is-contr-subuniverse-localization-fiber-is-inhabited-fiber-precomp-Π f
       ( type-subuniverse-localization K ∘ Kfib)
       ( unit-subuniverse-localization K ∘ Kfib)
       ( λ b H →
@@ -423,8 +414,6 @@ module _
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl)))
 
   is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π :
-    {l4 : Level} (K : subuniverse l3 l4)
-    (Kfib : (b : B) → subuniverse-localization K (fiber f b)) →
     ( (b : B) →
       is-inhabited
         ( family-fiber-Π-precomp-Π' f
@@ -433,7 +422,7 @@ module _
           ( b)))  →
     (b : B) → is-subuniverse-equiv K (terminal-map (fiber f b))
   is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π
-    K Kfib s b =
+    s b =
     is-subuniverse-equiv-comp K
       ( terminal-map (type-subuniverse-localization K (Kfib b)))
       ( unit-subuniverse-localization K (Kfib b))
@@ -442,7 +431,20 @@ module _
         ( terminal-map (type-subuniverse-localization K (Kfib b)))
         ( is-equiv-terminal-map-is-contr
           ( is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π
-            K Kfib s b)))
+            s b)))
+
+  is-subuniverse-connected-map-is-inhabited-family-fiber-Π-precomp-Π :
+    ( (b : B) →
+      is-inhabited
+        ( family-fiber-Π-precomp-Π' f
+          ( type-subuniverse-localization K ∘ Kfib)
+          ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
+          ( b))) →
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-is-inhabited-family-fiber-Π-precomp-Π Fη =
+    is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
+      ( is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π
+        ( Fη))
 ```
 
 ### Characterizing equality of `K`-connected maps
