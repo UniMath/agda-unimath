@@ -13,8 +13,10 @@ open import foundation.diagonal-maps-of-types
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -519,21 +521,32 @@ module _
 
 ### Computing the fibers of precomposition dependent functions as dependent products
 
+We give four equivalences for the fibers of precomposition dependent functions
+as dependent products:
+
+```text
+  fiber (precomp-Π f U) g
+    ≃ (b : B) → Σ (u : U b), ((a , p) : fiber  f b) → g a ＝ₚᵁ u
+    ≃ (b : B) → Σ (u : U b), ((a , p) : fiber' f b) → u ＝ₚᵁ g a
+    ≃ (b : B) → Σ (u : U b), (a : A) (p : f a ＝ b) → g a ＝ₚᵁ u
+    ≃ (b : B) → Σ (u : U b), (a : A) (p : b ＝ f a) → u ＝ₚᵁ g a
+```
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (U : B → UU l3)
+  (g : (a : A) → U (f a))
   where
 
-  family-fiber-Π-precomp-Π : ((a : A) → U (f a)) → B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp-Π g b =
+  family-fiber-Π-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-precomp-Π b =
     Σ (U b) (λ u → ((a , p) : fiber f b) → dependent-identification U p (g a) u)
 
-  fiber-Π-precomp-Π : (g : (a : A) → U (f a)) → UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp-Π g = (b : B) → family-fiber-Π-precomp-Π g b
+  fiber-Π-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-precomp-Π = (b : B) → family-fiber-Π-precomp-Π b
 
-  compute-fiber-Π-precomp-Π :
-    (g : (a : A) → U (f a)) → fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π g
-  compute-fiber-Π-precomp-Π g =
+  compute-fiber-Π-precomp-Π : fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π
+  compute-fiber-Π-precomp-Π =
     equivalence-reasoning
       fiber (precomp-Π f U) g
       ≃ Σ ((b : B) → U b) (λ h → (a : A) → g a ＝ (h ∘ f) a)
@@ -552,17 +565,30 @@ module _
               ((a , p) : fiber f b) → dependent-identification U p (g a) u))
         by inv-distributive-Π-Σ
 
-  family-fiber-Π-precomp-Π' : ((a : A) → U (f a)) → B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp-Π' g b =
+  family-fiber-Π-curry-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-curry-precomp-Π b =
+    Σ ( U b)
+      ( λ u → (a : A) (p : f a ＝ b) → dependent-identification U p (g a) u)
+
+  fiber-Π-curry-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-curry-precomp-Π = (b : B) → family-fiber-Π-curry-precomp-Π b
+
+  compute-fiber-Π-curry-precomp-Π :
+    fiber (precomp-Π f U) g ≃ fiber-Π-curry-precomp-Π
+  compute-fiber-Π-curry-precomp-Π =
+    ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
+    ( compute-fiber-Π-precomp-Π)
+
+  family-fiber-Π-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-precomp-Π' b =
     Σ ( U b)
       ( λ u → ((a , p) : fiber' f b) → dependent-identification U p u (g a))
 
-  fiber-Π-precomp-Π' : (g : (a : A) → U (f a)) → UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp-Π' g = (b : B) → family-fiber-Π-precomp-Π' g b
+  fiber-Π-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-precomp-Π' = (b : B) → family-fiber-Π-precomp-Π' b
 
-  compute-fiber-Π-precomp-Π' :
-    (g : (a : A) → U (f a)) → fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π' g
-  compute-fiber-Π-precomp-Π' g =
+  compute-fiber-Π-precomp-Π' : fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π'
+  compute-fiber-Π-precomp-Π' =
     equivalence-reasoning
       fiber (precomp-Π f U) g
       ≃ Σ ((b : B) → U b) (λ h → (a : A) → (h ∘ f) a ＝ g a)
@@ -580,4 +606,95 @@ module _
             ( λ u →
               ((a , p) : fiber' f b) → dependent-identification U p u (g a)))
         by inv-distributive-Π-Σ
+
+  family-fiber-Π-curry-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-curry-precomp-Π' b =
+    Σ (U b) (λ u → (a : A) (p : b ＝ f a) → dependent-identification U p u (g a))
+
+  fiber-Π-curry-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-curry-precomp-Π' = (b : B) → family-fiber-Π-curry-precomp-Π' b
+
+  compute-fiber-Π-curry-precomp-Π' :
+    fiber (precomp-Π f U) g ≃ fiber-Π-curry-precomp-Π'
+  compute-fiber-Π-curry-precomp-Π' =
+    ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
+    ( compute-fiber-Π-precomp-Π')
+```
+
+### Computing the fibers of precomposition functions as dependent products
+
+We give four equivalences for the fibers of precomposition functions as
+dependent products:
+
+```text
+  fiber (precomp f U) g
+    ≃ (b : B) → Σ (u : U), ((a , p) : fiber  f b) → g a ＝ u
+    ≃ (b : B) → Σ (u : U), ((a , p) : fiber' f b) → u ＝ g a
+    ≃ (b : B) → Σ (u : U), (a : A) → f a ＝ b → g a ＝ u
+    ≃ (b : B) → Σ (u : U), (a : A) → b ＝ f a → u ＝ g a
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (U : UU l3)
+  (g : A → U)
+  where
+
+  family-fiber-Π-precomp : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-precomp b =
+    Σ U (λ u → ((a , _) : fiber f b) → g a ＝ u)
+
+  fiber-Π-precomp : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-precomp = (b : B) → family-fiber-Π-precomp b
+
+  compute-fiber-Π-precomp : fiber (precomp f U) g ≃ fiber-Π-precomp
+  compute-fiber-Π-precomp =
+    equivalence-reasoning
+      fiber (precomp f U) g
+      ≃ Σ (B → U) (λ h → (a : A) → g a ＝ (h ∘ f) a)
+        by compute-extension-fiber-precomp f U g
+      ≃ Σ ( B → U)
+          ( λ h → (b : B) ((a , _) : fiber f b) → g a ＝ h b)
+        by
+          equiv-tot
+            ( λ h →
+              inv-equiv-dependent-universal-property-family-of-fibers f
+                ( λ y (a , _) → (g a ＝ h y)))
+      ≃ ( (b : B) → Σ U (λ u → ((a , _) : fiber f b) → g a ＝ u))
+        by inv-distributive-Π-Σ
+
+  compute-fiber-Π-curry-precomp :
+    fiber (precomp f U) g ≃ ((b : B) → Σ U (λ u → (a : A) → f a ＝ b → g a ＝ u))
+  compute-fiber-Π-curry-precomp =
+    ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
+    ( compute-fiber-Π-precomp)
+
+  family-fiber-Π-precomp' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-Π-precomp' b =
+    Σ U (λ u → ((a , _) : fiber' f b) → u ＝ g a)
+
+  fiber-Π-precomp' : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-Π-precomp' = (b : B) → family-fiber-Π-precomp' b
+
+  compute-fiber-Π-precomp' : fiber (precomp f U) g ≃ fiber-Π-precomp'
+  compute-fiber-Π-precomp' =
+    equivalence-reasoning
+      fiber (precomp f U) g
+      ≃ Σ (B → U) (λ h → (h ∘ f) ~ g)
+        by compute-extension-fiber-precomp' f U g
+      ≃ Σ ( B → U)
+          ( λ h → (b : B) ((a , _) : fiber' f b) → h b ＝ g a)
+        by
+          equiv-tot
+            ( λ h →
+              inv-equiv-dependent-universal-property-family-of-fibers' f
+                ( λ y (a , _) → (h y ＝ g a)))
+      ≃ ( (b : B) → Σ U (λ u → ((a , _) : fiber' f b) → u ＝ g a))
+        by inv-distributive-Π-Σ
+
+  compute-fiber-Π-curry-precomp' :
+    fiber (precomp f U) g ≃ ((b : B) → Σ U (λ u → (a : A) → b ＝ f a → u ＝ g a))
+  compute-fiber-Π-curry-precomp' =
+    ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
+    ( compute-fiber-Π-precomp')
 ```
