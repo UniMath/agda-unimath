@@ -1,13 +1,20 @@
-import os
 import graphviz
-import random
+import json
 import math
-import requests
+import os
+import random
+import re
+from urllib import request
+from urllib.error import URLError
 from collections import defaultdict
 from utils import *
 import argparse
 
 primes_hash_str = (19, 2, 1, 7, 5, 3, 11, 13, 17)
+
+# This format is guaranteed by the GitHub documentation
+# "The URL for the next page is followed by `rel="next"`"
+NEXT_LINK_REGEX = re.compile(r'<([^>]+)> *; *rel="next"')
 
 
 def hash_str(s):
@@ -69,14 +76,17 @@ def fetch_github_labels(repo):
     labels = {}
     try:
         while url:
-            response = requests.get(url)
-            response.raise_for_status()
-            page_labels = response.json()
+            response = request.urlopen(url)
+            page_labels = json.loads(response.read())
             labels.update({label['name']: label['color']
                           for label in page_labels})
+            url = None
+            next_link_match = re.search(
+                NEXT_LINK_REGEX, response.headers.get('link', ''))
             # Check if there is a next page
-            url = response.links.get('next', {}).get('url')
-    except requests.RequestException as e:
+            if next_link_match is not None:
+                url = next_link_match.group(1)
+    except URLError as e:
         eprint(f'Failed to fetch GitHub labels: {e}')
         # Fallback to preloaded values
         return LABEL_COLORS_FALLBACK

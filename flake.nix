@@ -27,10 +27,13 @@
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
             pybtex
-            requests
             tomli
             graphviz
           ]);
+          # Make sure pre-commit also uses Python 3.10
+          pre-commit = pkgs.pre-commit.override {
+            python3Packages = pkgs.python310Packages;
+          };
 
           agda-unimath-package = { lib, mkDerivation, time }: mkDerivation {
             pname = "agda-unimath";
@@ -77,7 +80,7 @@
               # maintenance scripts
               python
               # pre-commit checks
-              pkgs.pre-commit
+              pre-commit
               pkgs.nodejs
             ] ++ (with pkgs-mdbook; [
               # working on the website
