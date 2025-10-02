@@ -12,6 +12,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.propositions

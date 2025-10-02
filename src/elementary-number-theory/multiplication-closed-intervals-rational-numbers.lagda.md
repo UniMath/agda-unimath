@@ -31,6 +31,12 @@ open import foundation.cartesian-product-types
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.function-types
+open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
