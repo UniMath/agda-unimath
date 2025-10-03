@@ -7,11 +7,14 @@ module elementary-number-theory.multiplication-positive-and-negative-rational-nu
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.nonpositive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
 ```
@@ -60,4 +63,18 @@ abstract
 mul-negative-positive-ℚ : ℚ⁻ → ℚ⁺ → ℚ⁻
 mul-negative-positive-ℚ (p , neg-p) (q , pos-q) =
   ( p *ℚ q , is-negative-mul-negative-positive-ℚ neg-p pos-q)
+```
+
+#### The product of two nonpositive rational numbers is nonnegative
+
+```agda
+abstract
+  is-nonnegative-mul-nonpositive-ℚ :
+    {x y : ℚ} → is-nonpositive-ℚ x → is-nonpositive-ℚ y →
+    is-nonnegative-ℚ (x *ℚ y)
+  is-nonnegative-mul-nonpositive-ℚ {x} {y} nonpos-x nonpos-y =
+    tr
+      ( is-nonnegative-ℚ)
+      ( negative-law-mul-ℚ x y)
+      ( is-nonnegative-mul-ℚ _ _ nonpos-x nonpos-y)
 ```

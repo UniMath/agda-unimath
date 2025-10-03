@@ -116,10 +116,6 @@ module _
   is-positive-denominator-ℚ⁰⁺ : is-positive-ℤ denominator-ℚ⁰⁺
   is-positive-denominator-ℚ⁰⁺ = is-positive-denominator-ℚ rational-ℚ⁰⁺
 
-abstract
-  eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
-  eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
-
 zero-ℚ⁰⁺ : ℚ⁰⁺
 zero-ℚ⁰⁺ = zero-ℚ , _
 
@@ -128,6 +124,14 @@ one-ℚ⁰⁺ = one-ℚ , _
 ```
 
 ## Properties
+
+### Equality on nonnegative rational numbers
+
+```agda
+abstract
+  eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
+  eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
+```
 
 ### The nonnegative rational numbers form a set
 

@@ -97,7 +97,8 @@ is-nontrivial-prop-closed-interval-ℚ : closed-interval-ℚ → Prop lzero
 is-nontrivial-prop-closed-interval-ℚ ((a , b) , _) = le-ℚ-Prop a b
 
 is-nontrivial-closed-interval-ℚ : closed-interval-ℚ → UU lzero
-is-nontrivial-closed-interval-ℚ [a,b] = type-Prop (is-nontrivial-prop-closed-interval-ℚ [a,b])
+is-nontrivial-closed-interval-ℚ [a,b] =
+  type-Prop (is-nontrivial-prop-closed-interval-ℚ [a,b])
 ```
 
 ### Important ranges
@@ -179,10 +180,14 @@ is-interior-closed-interval-ℚ [x,y] [x',y'] =
 
 ```agda
 lower-bound-is-in-closed-interval-ℚ :
-  ([a,b] : closed-interval-ℚ) → is-in-closed-interval-ℚ [a,b] (lower-bound-closed-interval-ℚ [a,b])
-lower-bound-is-in-closed-interval-ℚ = lower-bound-is-in-closed-interval-Poset ℚ-Poset
+  ([a,b] : closed-interval-ℚ) →
+  is-in-closed-interval-ℚ [a,b] (lower-bound-closed-interval-ℚ [a,b])
+lower-bound-is-in-closed-interval-ℚ =
+  lower-bound-is-in-closed-interval-Poset ℚ-Poset
 
 upper-bound-is-in-closed-interval-ℚ :
-  ([a,b] : closed-interval-ℚ) → is-in-closed-interval-ℚ [a,b] (upper-bound-closed-interval-ℚ [a,b])
-upper-bound-is-in-closed-interval-ℚ = upper-bound-is-in-closed-interval-Poset ℚ-Poset
+  ([a,b] : closed-interval-ℚ) →
+  is-in-closed-interval-ℚ [a,b] (upper-bound-closed-interval-ℚ [a,b])
+upper-bound-is-in-closed-interval-ℚ =
+  upper-bound-is-in-closed-interval-Poset ℚ-Poset
 ```

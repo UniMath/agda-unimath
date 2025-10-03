@@ -363,3 +363,19 @@ opaque
         ( neg-ℚ⁻ p)
         ( neg-le-ℚ _ _ p<q))
 ```
+
+### If `p ≤ q` for negative `q`, then `p` is negative
+
+```agda
+abstract
+  is-negative-leq-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-leq-ℚ⁻ (q , neg-q) p p≤q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-leq-le-ℚ p q zero-ℚ p≤q (le-zero-is-negative-ℚ q neg-q))
+
+  is-negative-le-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
+```

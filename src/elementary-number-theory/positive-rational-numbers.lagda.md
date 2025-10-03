@@ -1183,21 +1183,19 @@ module _
       ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
 ```
 
-### If `p ≤ q` for positive rational `p` and arbitrary rational `q`, then `q` is positive
+### If `p ≤ q` for positive `p`, then `q` is positive
 
 ```agda
 abstract
-  is-positive-leq-positive-ℚ :
+  is-positive-leq-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-leq-positive-ℚ (p , pos-p) q p≤q =
+  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
     is-positive-le-zero-ℚ
       ( q)
-      ( concatenate-le-leq-ℚ _ _ _
-        ( le-zero-is-positive-ℚ p pos-p)
-        ( p≤q))
+      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
 
-  is-positive-le-positive-ℚ :
+  is-positive-le-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-le-positive-ℚ p q p<q =
-    is-positive-leq-positive-ℚ p q (leq-le-ℚ p<q)
+  is-positive-le-ℚ⁺ p q p<q =
+    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
 ```
