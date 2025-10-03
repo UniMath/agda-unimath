@@ -12,8 +12,8 @@ open import elementary-number-theory.decidable-total-order-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.logical-equivalences
-open import foundation.universe-levels
 open import foundation.subtypes
+open import foundation.universe-levels
 
 open import order-theory.closed-intervals-total-orders
 open import order-theory.poset-closed-intervals-total-orders

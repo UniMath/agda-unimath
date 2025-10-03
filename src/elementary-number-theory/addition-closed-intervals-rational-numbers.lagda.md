@@ -90,6 +90,15 @@ abstract
               inv (is-section-diff-ℚ _ _)))
         ( linear-leq-ℚ q (a +ℚ d))
 
+  is-in-add-interval-add-is-in-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) (s t : ℚ) →
+    is-in-closed-interval-ℚ [a,b] s → is-in-closed-interval-ℚ [c,d] t →
+    is-in-closed-interval-ℚ (add-closed-interval-ℚ [a,b] [c,d]) (s +ℚ t)
+  is-in-add-interval-add-is-in-closed-interval-ℚ
+    ((a , b) , _) ((c , d) , _) s t (a≤s , s≤b) (c≤t , t≤d) =
+    ( preserves-leq-add-ℚ a≤s c≤t ,
+      preserves-leq-add-ℚ s≤b t≤d)
+
   is-in-add-interval-is-in-minkowski-sum-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →
     (q : ℚ) →
@@ -103,17 +112,19 @@ abstract
       ( add-closed-interval-ℚ [a,b] [c,d])
       ( q)
   is-in-add-interval-is-in-minkowski-sum-ℚ
-    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) q q∈[a,b]+[c,d] =
+    [a,b] [c,d] q q∈[a,b]+[c,d] =
       let
         open
           do-syntax-trunc-Prop
-            ( subtype-closed-interval-ℚ
-              ( add-closed-interval-ℚ [a,b] [c,d])
-              ( q))
+            ( subtype-closed-interval-ℚ (add-closed-interval-ℚ [a,b] [c,d]) q)
       in do
-        ((s , t) , (a≤s , s≤b) , (c≤t , t≤d) , q=s+t) ← q∈[a,b]+[c,d]
-        ( inv-tr (leq-ℚ (a +ℚ c)) q=s+t (preserves-leq-add-ℚ a≤s c≤t) ,
-          inv-tr (λ r → leq-ℚ r (b +ℚ d)) q=s+t (preserves-leq-add-ℚ s≤b t≤d))
+        ((s , t) , s∈[a,b] , t∈[c,d] , q=s+t) ← q∈[a,b]+[c,d]
+        inv-tr
+          ( is-in-closed-interval-ℚ (add-closed-interval-ℚ [a,b] [c,d]))
+          ( q=s+t)
+          ( is-in-add-interval-add-is-in-closed-interval-ℚ [a,b] [c,d] s t
+            ( s∈[a,b])
+            ( t∈[c,d]))
 
 has-same-elements-minkowski-add-closed-interval-ℚ :
   ([a,b] [c,d] : closed-interval-ℚ) →
