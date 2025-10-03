@@ -23,7 +23,7 @@ open import order-theory.inflationary-maps-posets
 
 ## Idea
 
-The sum of two
+The {{#concept "sum" Disambiguation="of two nonnegative rational numbers" Agda=add-ℚ⁰⁺}} of two
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is their [sum](elementary-number-theory.addition-rational-numbers.md) as
 [rational numbers](elementary-number-theory.rational-numbers.md), and is itself

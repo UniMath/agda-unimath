@@ -28,7 +28,7 @@ open import foundation.identity-types
 
 ## Idea
 
-The product of two
+The {{#concept "product" Disambiguation="of pairs of nonnegative rational numbers" Agda=mul-ℚ⁰⁺}} of two
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is their [product](elementary-number-theory.multiplication-rational-numbers.md)
 as [rational numbers](elementary-number-theory.rational-numbers.md), and is
@@ -85,19 +85,19 @@ opaque
     (q@(nq , dq , _) , _)
     (r@(nr , dr , _) , _)
     q≤r =
-      preserves-leq-rational-fraction-ℤ
-        ( mul-fraction-ℤ q p)
-        ( mul-fraction-ℤ r p)
-        ( binary-tr
-          ( leq-ℤ)
-          ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( preserves-leq-left-mul-nonnegative-ℤ
-            ( np *ℤ dp ,
-              is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
-            ( nq *ℤ dr)
-            ( nr *ℤ dq)
-            ( q≤r)))
+    preserves-leq-rational-fraction-ℤ
+      ( mul-fraction-ℤ q p)
+      ( mul-fraction-ℤ r p)
+      ( binary-tr
+        ( leq-ℤ)
+        ( interchange-law-mul-mul-ℤ _ _ _ _)
+        ( interchange-law-mul-mul-ℤ _ _ _ _)
+        ( preserves-leq-left-mul-nonnegative-ℤ
+          ( np *ℤ dp ,
+            is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
+          ( nq *ℤ dr)
+          ( nr *ℤ dq)
+          ( q≤r)))
 
   preserves-leq-left-mul-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
