@@ -117,6 +117,7 @@ open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
+open import elementary-number-theory.minima-and-maxima-rational-numbers public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-positive-rational-numbers public
 open import elementary-number-theory.minimum-rational-numbers public
@@ -145,6 +146,7 @@ open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.negation-closed-intervals-rational-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public
