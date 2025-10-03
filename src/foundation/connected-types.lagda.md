@@ -35,7 +35,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be **`k`-connected** if its `k`-truncation is contractible.
+A type is said to be
+{{#concept "`k`-connected" Disambiguation="type" Agda=is-connected}} if its
+`k`-[truncation](foundation.truncations.md) is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definition
 
