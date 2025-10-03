@@ -13,7 +13,9 @@ open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -231,4 +233,60 @@ commutative-monoid-add-closed-interval-ℚ : Commutative-Monoid lzero
 commutative-monoid-add-closed-interval-ℚ =
   ( monoid-add-closed-interval-ℚ ,
     commutative-add-closed-interval-ℚ)
+```
+
+### Containment on rational intervals is preserved by addition
+
+```agda
+abstract
+  preserves-leq-left-add-closed-interval-ℚ :
+    ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] →
+    leq-closed-interval-ℚ
+      ( add-closed-interval-ℚ [a,b] [c,d])
+      ( add-closed-interval-ℚ [a',b'] [c,d])
+  preserves-leq-left-add-closed-interval-ℚ
+    ((c , d) , _) ((a , b) , _) ((a' , b') , _) (a'≤a , b≤b') =
+    ( preserves-leq-left-add-ℚ c a' a a'≤a ,
+      preserves-leq-left-add-ℚ d b b' b≤b')
+
+  preserves-leq-right-add-closed-interval-ℚ :
+    ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( add-closed-interval-ℚ [a,b] [c,d])
+      ( add-closed-interval-ℚ [a,b] [c',d'])
+  preserves-leq-right-add-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
+    binary-tr
+      ( leq-closed-interval-ℚ)
+      ( commutative-add-closed-interval-ℚ [c,d] [a,b])
+      ( commutative-add-closed-interval-ℚ [c',d'] [a,b])
+      ( preserves-leq-left-add-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
+
+  preserves-leq-add-closed-interval-ℚ :
+    ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( add-closed-interval-ℚ [a,b] [c,d])
+      ( add-closed-interval-ℚ [a',b'] [c',d'])
+  preserves-leq-add-closed-interval-ℚ
+    [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
+    transitive-leq-closed-interval-ℚ
+      ( add-closed-interval-ℚ [a,b] [c,d])
+      ( add-closed-interval-ℚ [a,b] [c',d'])
+      ( add-closed-interval-ℚ [a',b'] [c',d'])
+      ( preserves-leq-left-add-closed-interval-ℚ
+        ( [c',d'])
+        ( [a,b])
+        ( [a',b'])
+        ( [a,b]⊆[a',b']))
+      ( preserves-leq-right-add-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
 ```
