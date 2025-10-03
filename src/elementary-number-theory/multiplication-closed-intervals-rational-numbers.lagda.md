@@ -1475,10 +1475,10 @@ abstract
           ≤ rational-dist-ℚ a b *ℚ rational-abs-ℚ q
             by
               leq-eq-ℚ _ _
-                ( ap
-                  ( rational-abs-ℚ)
-                  ( inv (right-distributive-mul-diff-ℚ _ _ _)) ∙
-                  rational-abs-mul-ℚ _ _)
+                ( ( ap
+                    ( rational-abs-ℚ)
+                    ( inv (right-distributive-mul-diff-ℚ _ _ _))) ∙
+                  ( rational-abs-mul-ℚ _ _))
           ≤ rational-dist-ℚ a b *ℚ rational-max-abs-closed-interval-ℚ [c,d]
             by
               preserves-leq-left-mul-ℚ⁰⁺
@@ -1502,11 +1502,11 @@ abstract
           ≤ rational-dist-ℚ c d *ℚ rational-abs-ℚ p
             by
               leq-eq-ℚ _ _
-                ( ap
-                  ( rational-abs-ℚ)
-                  ( inv (left-distributive-mul-diff-ℚ _ _ _)) ∙
-                  rational-abs-mul-ℚ _ _ ∙
-                  commutative-mul-ℚ _ _)
+                ( ( ap
+                    ( rational-abs-ℚ)
+                    ( inv (left-distributive-mul-diff-ℚ _ _ _))) ∙
+                  ( rational-abs-mul-ℚ _ _) ∙
+                  ( commutative-mul-ℚ _ _))
           ≤ rational-dist-ℚ c d *ℚ rational-max-abs-closed-interval-ℚ [a,b]
             by
               preserves-leq-left-mul-ℚ⁰⁺
