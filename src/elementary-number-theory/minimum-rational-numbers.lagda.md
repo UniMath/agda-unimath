@@ -23,8 +23,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The {{#concept "minimum" Disambiguation="of pairs of rational numbers" Agda=min-ℚ}} of two
-[rational numbers](elementary-number-theory.rational-numbers.md) is the
+The
+{{#concept "minimum" Disambiguation="of pairs of rational numbers" Agda=min-ℚ}}
+of two [rational numbers](elementary-number-theory.rational-numbers.md) is the
 [smallest](elementary-number-theory.inequality-rational-numbers.md) rational
 number of the two. This is the
 [binary greatest lower bound](order-theory.greatest-lower-bounds-posets.md) in
