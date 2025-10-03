@@ -18,8 +18,8 @@ open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
+open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
@@ -35,6 +35,7 @@ open import elementary-number-theory.negation-closed-intervals-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -1665,4 +1666,72 @@ abstract
             ( case-2 min=bd under-bound-|ad-bd|)
             ( case-2 min=bd under-bound-|bc-bd|)
             ( case-eq min=bd))
+```
+
+### Multiplication of closed intervals is subdistributive
+
+```agda
+abstract
+  left-subdistributive-mul-add-closed-interval-ℚ :
+    ([a,b] [c,d] [e,f] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
+      ( add-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( mul-closed-interval-ℚ [a,b] [e,f]))
+  left-subdistributive-mul-add-closed-interval-ℚ [a,b] [c,d] [e,f] =
+    leq-closed-interval-leq-subtype-ℚ
+      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
+      ( add-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( mul-closed-interval-ℚ [a,b] [e,f]))
+      ( λ q q∈[a,b]⟨[c,d]+[e,f]⟩ →
+        let
+          open
+            do-syntax-trunc-Prop
+              ( subtype-closed-interval-ℚ
+                ( add-closed-interval-ℚ
+                  ( mul-closed-interval-ℚ [a,b] [c,d])
+                  ( mul-closed-interval-ℚ [a,b] [e,f]))
+                ( q))
+        in do
+          ((qab , qcdef) , qab∈[a,b] , qcdef∈[c,d]+[e,f] , q=qab*qcdef) ←
+            is-in-minkowski-product-is-in-mul-closed-interval-ℚ
+              ( [a,b])
+              ( add-closed-interval-ℚ [c,d] [e,f])
+              ( q)
+              ( q∈[a,b]⟨[c,d]+[e,f]⟩)
+          ((qcd , qef) , qcd∈[c,d] , qef∈[e,f] , qcdef=qcd+qef) ←
+            is-in-minkowski-sum-is-in-add-closed-interval-ℚ
+              ( [c,d])
+              ( [e,f])
+              ( qcdef)
+              ( qcdef∈[c,d]+[e,f])
+          inv-tr
+            ( is-in-closed-interval-ℚ
+              ( add-closed-interval-ℚ
+                ( mul-closed-interval-ℚ [a,b] [c,d])
+                ( mul-closed-interval-ℚ [a,b] [e,f])))
+            ( ( q=qab*qcdef) ∙
+              ( ap-mul-ℚ refl qcdef=qcd+qef) ∙
+              ( left-distributive-mul-add-ℚ qab qcd qef))
+            ( is-in-add-interval-add-is-in-closed-interval-ℚ
+              ( mul-closed-interval-ℚ [a,b] [c,d])
+              ( mul-closed-interval-ℚ [a,b] [e,f])
+              ( qab *ℚ qcd)
+              ( qab *ℚ qef)
+              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                  ( [a,b])
+                  ( [c,d])
+                  ( qab)
+                  ( qcd)
+                  ( qab∈[a,b])
+                  ( qcd∈[c,d]))
+              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                  ( [a,b])
+                  ( [e,f])
+                  ( qab)
+                  ( qef)
+                  ( qab∈[a,b])
+                  ( qef∈[e,f]))))
 ```
