@@ -10,6 +10,7 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 
 ```agda
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
