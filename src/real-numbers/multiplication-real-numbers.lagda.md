@@ -63,6 +63,7 @@ open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -595,6 +596,76 @@ abstract
   commutative-mul-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ y ＝ y *ℝ x
   commutative-mul-ℝ x y =
     antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
+```
+
+### Associativity of multiplication
+
+### Unit laws
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  opaque
+    unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
+
+    leq-right-unit-law-mul-ℝ : leq-ℝ (x *ℝ one-ℝ) x
+    leq-right-unit-law-mul-ℝ q q<x1 =
+      let open do-syntax-trunc-Prop (lower-cut-ℝ x q)
+      in do
+        ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
+            a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
+          q<[ax,bx][a₁,b₁]) ← q<x1
+        le-lower-cut-ℝ x q ax
+          ( concatenate-le-leq-ℚ _ _ _
+            ( q<[ax,bx][a₁,b₁])
+            ( tr
+              ( leq-ℚ _)
+              ( right-unit-law-mul-ℚ ax)
+              ( pr1
+                ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                  ( [ax,bx])
+                  ( [a₁,b₁])
+                  ( ax)
+                  ( one-ℚ)
+                  ( lower-bound-is-in-closed-interval-ℚ [ax,bx])
+                  ( leq-le-ℚ a₁<1 , leq-le-ℚ 1<b₁)))))
+          ( ax<x)
+
+    leq-right-unit-law-mul-ℝ' : leq-ℝ x (x *ℝ one-ℝ)
+    leq-right-unit-law-mul-ℝ' =
+      leq-leq'-ℝ x (x *ℝ one-ℝ)
+        ( λ q x1<q →
+          let open do-syntax-trunc-Prop (upper-cut-ℝ x q)
+          in do
+            ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
+                a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
+              [ax,bx][a₁,b₁]<q) ← x1<q
+            le-upper-cut-ℝ x bx q
+              ( concatenate-leq-le-ℚ _ _ _
+                ( tr
+                  ( λ p →
+                    leq-ℚ p (upper-bound-mul-closed-interval-ℚ [ax,bx] [a₁,b₁]))
+                  ( right-unit-law-mul-ℚ bx)
+                  ( pr2
+                    ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                      ( [ax,bx])
+                      ( [a₁,b₁])
+                      ( bx)
+                      ( one-ℚ)
+                      ( upper-bound-is-in-closed-interval-ℚ [ax,bx])
+                      ( leq-le-ℚ a₁<1 , leq-le-ℚ 1<b₁))))
+                ( [ax,bx][a₁,b₁]<q))
+              ( x<bx))
+
+  abstract
+    right-unit-law-mul-ℝ : x *ℝ one-ℝ ＝ x
+    right-unit-law-mul-ℝ =
+      antisymmetric-leq-ℝ _ _ leq-right-unit-law-mul-ℝ leq-right-unit-law-mul-ℝ'
+
+    left-unit-law-mul-ℝ : one-ℝ *ℝ x ＝ x
+    left-unit-law-mul-ℝ = commutative-mul-ℝ one-ℝ x ∙ right-unit-law-mul-ℝ
 ```
 
 ### Distributivity of multiplication over addition
