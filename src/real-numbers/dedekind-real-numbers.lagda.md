@@ -9,6 +9,7 @@ module real-numbers.dedekind-real-numbers where
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 

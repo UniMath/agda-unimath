@@ -62,6 +62,7 @@ open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.addition-real-numbers
 ```
 
 </details>
@@ -594,8 +595,26 @@ abstract
     antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
 ```
 
-### Associativity
+### Distributivity
 
 ```agda
+opaque
+  unfolding leq-ℝ mul-ℝ add-ℝ
 
+  leq-left-distributive-mul-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ (x *ℝ (y +ℝ z)) ((x *ℝ y) +ℝ (x *ℝ z))
+  leq-left-distributive-mul-add-ℝ x y z q q<x⟨y+z⟩ =
+    let
+      open do-syntax-trunc-Prop (lower-cut-ℝ ((x *ℝ y) +ℝ (x *ℝ z)) q)
+    in do
+      ( (ax<x<bx , ayz<y+z<byz@(((ayz , byz) , _) , ayz<y+z , y+z<byz)) ,
+        q<[ax,bx][ayz,byz]) ← q<x⟨y+z⟩
+      ((ay , az) , ay<y , az<z , ayz=ay+ax) ← ayz<y+z
+      ((by , bz) , y<by , z<bz , byz=by+bz) ← y+z<byz
+      let
+        ay≤by = leq-lower-upper-cut-ℝ y ay by ay<y y<by
+        az≤bz = leq-lower-upper-cut-ℝ z az bz az<z z<bz
+      is-in-lower-cut-le-real-ℚ q ((x *ℝ y) +ℝ (x *ℝ z))
+        {!   !}
 ```
