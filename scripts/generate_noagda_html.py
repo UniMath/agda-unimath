@@ -22,7 +22,7 @@ if __name__ == '__main__':
         sys.exit(STATUS_FLAG_GIT_ERROR)
 
     try:
-      outDir.mkdir(parents=True, exist_ok=True)
+        outDir.mkdir(parents=True, exist_ok=True)
     except FileExistsError:
         utils.eprint('Output path exists and is not a directory')
         sys.exit(STATUS_OUT_NOT_DIR)
@@ -31,7 +31,7 @@ if __name__ == '__main__':
         if fpath.parts[0] != root or not utils.is_agda_file(fpath):
             continue
         module_name = utils.get_agda_module_name(str(fpath), root)
-        dest = outDir / (module_name + ".md")
+        dest = outDir / (module_name + '.md')
 
         # Ideally we would try symlinks, but linkcheck always follows them and
         # then complains about links outside of the root directory

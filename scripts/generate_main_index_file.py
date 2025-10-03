@@ -32,11 +32,13 @@ def generate_namespace_entry_list(root_path, namespace):
     relevant_files = tuple(
         f for f in git_tracked_files if namespace_path in f.parents)
 
-    lagda_file_paths = tuple(f for f in relevant_files if utils.is_agda_file(f))
+    lagda_file_paths = tuple(
+        f for f in relevant_files if utils.is_agda_file(f))
     modules = tuple(p.name for p in lagda_file_paths)
     module_titles = tuple(utils.get_lagda_md_file_title(f)
-                     for f in lagda_file_paths)
-    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m) for m in modules)
+                          for f in lagda_file_paths)
+    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m)
+                           for m in modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):
@@ -64,7 +66,8 @@ def generate_namespace_entry_list(root_path, namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_md_file_title(str(namespace_path.with_suffix('.lagda.md')))
+    namespace_title = utils.get_lagda_md_file_title(
+        str(namespace_path.with_suffix('.lagda.md')))
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + '.md')
 
@@ -84,7 +87,8 @@ def generate_index(root_path):
         entry_lists.append(entry_list)
         status |= s
 
-    literature_index, lit_status = generate_namespace_entry_list(root_path, LITERATURE_MODULE)
+    literature_index, lit_status = generate_namespace_entry_list(
+        root_path, LITERATURE_MODULE)
     status |= lit_status
 
     index = '\n\n'.join(entry_lists) + '\n'

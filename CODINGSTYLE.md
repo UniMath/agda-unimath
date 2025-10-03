@@ -110,7 +110,6 @@ agda-unimath project.
   definition. This contradicts our objective of organizing the library into
   compact, reusable components. If a `where` block is deemed necessary, follow
   these conventions:
-
   - Opt for `where` blocks over `let` expressions.
   - Indent the `where` keyword by two spaces and align their content with the
     `where` keyword.
@@ -136,7 +135,6 @@ agda-unimath project.
 
   There are multiple syntaxes for writing lambda expressions in Agda. Generally,
   you have the following options:
-
   1. Regular lambda expressions without pattern matching:
 
      ```agda
@@ -402,7 +400,6 @@ library:
 - In order to improve the readability on the agda-unimath website, we use a
   standard line length of 80 characters. There are only a few exceptions that
   enable us to have names that are more than 80 characters long:
-
   - Named `module` declarations
   - `open import` statements
   - Lines consisting of a single, possibly parenthesized (`(){}`), token that is
