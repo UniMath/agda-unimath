@@ -432,6 +432,10 @@ abstract
       ( y)
       ( x≤y+z)
 
+  leq-transpose-right-add-ℚ' : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ y ≤-ℚ z
+  leq-transpose-right-add-ℚ' x y z x≤y+z =
+    leq-transpose-right-add-ℚ x z y (tr (leq-ℚ x) (commutative-add-ℚ _ _) x≤y+z)
+
   leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
   leq-transpose-left-add-ℚ x y z x+y≤z =
     leq-transpose-is-retraction-hom-Poset
@@ -443,6 +447,11 @@ abstract
       ( x)
       ( z)
       ( x+y≤z)
+
+  leq-transpose-left-add-ℚ' : (x y z : ℚ) → x +ℚ y ≤-ℚ z → y ≤-ℚ z -ℚ x
+  leq-transpose-left-add-ℚ' x y z x+y≤z =
+    leq-transpose-left-add-ℚ y x z
+      ( tr (λ w → leq-ℚ w z) (commutative-add-ℚ _ _) x+y≤z)
 
   leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
   leq-transpose-left-diff-ℚ x y z x-y≤z =
