@@ -193,7 +193,7 @@ graph: $(MDBOOK_SRC)/dependency.dot
 
 .PHONY: clean
 clean:
-	@rm -Rf ./$(MDBOOK_DIR)/ ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/
+	@rm -Rf ./$(MDBOOK_DIR)/ ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/ ./$(SOURCE_DIR)/everything.lagda.md
 
 .PHONY: pre-commit
 pre-commit:
