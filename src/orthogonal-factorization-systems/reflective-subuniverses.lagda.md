@@ -167,7 +167,7 @@ module _
   pr1 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A))) =
     unit-is-reflective-subuniverse 𝒫 is-reflective-𝒫
   pr2 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A)))
-    ( X , is-in-subuniverse-X)  =
+    ( X , is-in-subuniverse-X) =
       is-local-is-in-subuniverse-is-reflective-subuniverse
         𝒫 is-reflective-𝒫 X A is-in-subuniverse-X
 
