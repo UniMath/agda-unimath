@@ -5,12 +5,21 @@
 # modules that include the modules that have them enabled), then they need to be
 # added to the everything file as well.
 everythingOpts := --guardedness --cohesion --flat-split --rewriting
-# use "$ export AGDAVERBOSE=-v20" if you want to see all
-AGDAVERBOSE ?= -v1
 
 # use "$ export SKIPAGDA=1" or "make SKIPAGDA=1 ..." to skip Agda processing
 # when building the website
 SKIPAGDA ?=
+
+# use "$ export SKIPAUX=1" or "make SKIPAUX=1 ..." to skip generating auxiliary
+# files, i.e., the Agda dependency graph SVG when building the website
+SKIPAUX ?=
+
+# When SKIPAUX=1 we don't require the auxiliary files.
+ifeq ($(SKIPAUX),1)
+AUX_TARGETS :=
+else
+AUX_TARGETS := ./website/images/agda_dependency_graph.svg ./website/images/agda_dependency_graph_legend.html
+endif
 
 ifeq ($(CI),)
 	AGDA_MIN_HEAP ?= 2G
@@ -32,7 +41,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # the agda-unimath chrome.
 AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=docs --css=website/css/Agda.css --only-scope-checking
 AGDAPROFILEFLAGS ?= --profile=modules +RTS -s -RTS
-AGDA ?= agda $(AGDAVERBOSE) $(AGDARTS)
+AGDA ?= agda $(AGDARTS)
 TIME ?= time
 
 METAFILES := \
@@ -158,8 +167,7 @@ website/images/agda_dependency_graph.svg website/images/agda_dependency_graph_le
 
 .PHONY: website-prepare
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md \
-								 ./website/css/Agda-highlight.css ./website/images/agda_dependency_graph.svg \
-								 ./website/images/agda_dependency_graph_legend.html
+								 ./website/css/Agda-highlight.css $(AUX_TARGETS)
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
 	@cp -r ./website/images ./docs/website/

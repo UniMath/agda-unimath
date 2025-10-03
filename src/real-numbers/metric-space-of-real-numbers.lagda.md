@@ -16,6 +16,7 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.existential-quantification
@@ -28,18 +29,16 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.premetric-spaces
-open import metric-spaces.premetric-structures
-open import metric-spaces.pseudometric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.saturated-metric-spaces
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -56,28 +55,27 @@ open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-n
 
 ## Idea
 
-The type of [real numbers](real-numbers.dedekind-real-numbers.md) equipped with
-the [premetric](metric-spaces.premetric-structures.md) where `x y : ℝ` are
-`d`-neighbors when for any `r : ℚ` the following two conditions hold:
+The {{#concept "standard metric space of real numbers" Agda=metric-space-ℝ}} is
+the [metric space](metric-spaces.metric-spaces.md) with carrier type
+[`ℝ`](real-numbers.dedekind-real-numbers.md) and the
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+where `x y : ℝ` are `d`-neighbors when for any `r : ℚ` the following two
+conditions hold:
 
 - if `r + d` is in the lower cut of `y`, `r` is in the lower cut of `x`
 - if `r + d` is in the lower cut of `x`, `r` is in the lower cut of `y`
 
-is a [saturated metric space](metric-spaces.saturated-metric-spaces.md). It is
-the
-{{#concept "standard metric space of real numbers" Agda=metric-space-leq-ℝ}}.
-
 ## Definitions
 
-### The standard premetric on the real numbers
+### The standard neighborhood relation on the real numbers
 
 ```agda
 module _
   {l : Level} (d : ℚ⁺) (x y : ℝ l)
   where
 
-  is-in-lower-neighborhood-leq-prop-ℝ : Prop l
-  is-in-lower-neighborhood-leq-prop-ℝ =
+  lower-neighborhood-prop-ℝ : Prop l
+  lower-neighborhood-prop-ℝ =
     Π-Prop
       ( ℚ)
       ( λ r →
@@ -85,232 +83,262 @@ module _
           ( lower-cut-ℝ y (r +ℚ (rational-ℚ⁺ d)))
             ( lower-cut-ℝ x r))
 
-  is-in-lower-neighborhood-leq-ℝ : UU l
-  is-in-lower-neighborhood-leq-ℝ =
-    type-Prop is-in-lower-neighborhood-leq-prop-ℝ
+  lower-neighborhood-ℝ : UU l
+  lower-neighborhood-ℝ =
+    type-Prop lower-neighborhood-prop-ℝ
 
-premetric-leq-ℝ : (l : Level) → Premetric l (ℝ l)
-premetric-leq-ℝ l d x y =
-  product-Prop
-    ( is-in-lower-neighborhood-leq-prop-ℝ d x y)
-    ( is-in-lower-neighborhood-leq-prop-ℝ d y x)
+  is-prop-lower-neighborhood-ℝ : is-prop lower-neighborhood-ℝ
+  is-prop-lower-neighborhood-ℝ = is-prop-type-Prop lower-neighborhood-prop-ℝ
 
-is-in-neighborhood-leq-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
-is-in-neighborhood-leq-ℝ l d x y = type-Prop (premetric-leq-ℝ l d x y)
+opaque
+  neighborhood-ℝ : (l : Level) → ℚ⁺ → Relation l (ℝ l)
+  neighborhood-ℝ l d x y =
+    lower-neighborhood-ℝ d x y × lower-neighborhood-ℝ d y x
+
+  is-prop-neighborhood-ℝ :
+    (l : Level) → (ε : ℚ⁺) (x y : ℝ l) → is-prop (neighborhood-ℝ l ε x y)
+  is-prop-neighborhood-ℝ l ε x y =
+    is-prop-product
+      ( is-prop-lower-neighborhood-ℝ ε x y)
+      ( is-prop-lower-neighborhood-ℝ ε y x)
+
+neighborhood-prop-ℝ : (l : Level) → Rational-Neighborhood-Relation l (ℝ l)
+neighborhood-prop-ℝ l d x y =
+  ( neighborhood-ℝ l d x y , is-prop-neighborhood-ℝ l d x y)
 ```
 
 ## Properties
 
-### The standard premetric on the real numbers is a metric structure
+### The standard rational neighborhood relation on the real numbers is a metric structure
 
 The triangle inequality is the [91st](literature.100-theorems.md#91) theorem on
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
-is-reflexive-premetric-leq-ℝ :
-  {l : Level} → is-reflexive-Premetric (premetric-leq-ℝ l)
-is-reflexive-premetric-leq-ℝ d x =
-  diagonal-product
-    ( (r : ℚ) →
-      is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
-    ( λ r →
-      le-lower-cut-ℝ x r (r +ℚ rational-ℚ⁺ d) (le-right-add-rational-ℚ⁺ r d))
+module _
+  {l : Level}
+  where
 
-is-symmetric-premetric-leq-ℝ :
-  {l : Level} → is-symmetric-Premetric (premetric-leq-ℝ l)
-is-symmetric-premetric-leq-ℝ d x y (H , K) = (K , H)
+  opaque
+    unfolding neighborhood-ℝ
 
-is-tight-premetric-leq-ℝ : {l : Level} → is-tight-Premetric (premetric-leq-ℝ l)
-is-tight-premetric-leq-ℝ x y H =
-  eq-eq-lower-cut-ℝ
-    ( x)
-    ( y)
-    ( antisymmetric-leq-subtype
-      ( lower-cut-ℝ x)
-      ( lower-cut-ℝ y)
-      ( λ r Lxr →
-        elim-exists
-          ( lower-cut-ℝ y r)
-          ( λ s (r<s , Lxs) →
-            pr2
-              ( H (positive-diff-le-ℚ r s r<s))
-              ( r)
-              ( inv-tr
-                ( λ u → is-in-lower-cut-ℝ x u)
-                ( right-law-positive-diff-le-ℚ r s r<s)
-                ( Lxs)))
-          ( forward-implication (is-rounded-lower-cut-ℝ x r) Lxr))
-      ( λ r Lyr →
+    is-reflexive-neighborhood-ℝ :
+      is-reflexive-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
+    is-reflexive-neighborhood-ℝ d x =
+      diagonal-product
+        ( (r : ℚ) →
+          is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
+        ( λ r →
+          le-lower-cut-ℝ x r
+            ( r +ℚ rational-ℚ⁺ d)
+            ( le-right-add-rational-ℚ⁺ r d))
+
+    is-symmetric-neighborhood-ℝ :
+      is-symmetric-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
+    is-symmetric-neighborhood-ℝ d x y (H , K) = (K , H)
+
+    is-triangular-neighborhood-ℝ :
+      is-triangular-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
+    pr1 (is-triangular-neighborhood-ℝ x y z dxy dyz Hyz Hxy) r =
+      pr1 Hxy r ∘
+      pr1 Hyz (r +ℚ rational-ℚ⁺ dxy) ∘
+      inv-tr
+        ( is-in-lower-cut-ℝ z)
+        ( associative-add-ℚ r (rational-ℚ⁺ dxy) (rational-ℚ⁺ dyz))
+    pr2 (is-triangular-neighborhood-ℝ x y z dxy dyz Hyz Hxy) r =
+      pr2 Hyz r ∘
+      pr2 Hxy (r +ℚ rational-ℚ⁺ dyz) ∘
+      inv-tr
+        ( is-in-lower-cut-ℝ x)
+        ( associative-add-ℚ r (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy) ∙
+          ap (add-ℚ r) (commutative-add-ℚ (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy)))
+
+    is-saturated-neighborhood-ℝ :
+      is-saturated-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
+    is-saturated-neighborhood-ℝ ε x y H =
+      ( is-closed-lower-neighborhood-ℝ x y ε (pr1 ∘ H) ,
+        is-closed-lower-neighborhood-ℝ y x ε (pr2 ∘ H))
+      where
+
+      is-closed-lower-neighborhood-ℝ :
+        (x y : ℝ l) (ε : ℚ⁺) →
+        ((δ : ℚ⁺) → lower-neighborhood-ℝ (ε +ℚ⁺ δ) x y) →
+        lower-neighborhood-ℝ ε x y
+      is-closed-lower-neighborhood-ℝ x y ε H r I =
         elim-exists
           ( lower-cut-ℝ x r)
-          ( λ s (r<s , Lys) →
-            pr1
-              ( H (positive-diff-le-ℚ r s r<s))
+          ( λ r' (K , I') →
+            H ( positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' K)
               ( r)
-              ( inv-tr
-                ( λ u → is-in-lower-cut-ℝ y u)
-                ( right-law-positive-diff-le-ℚ r s r<s)
-                ( Lys)))
-          ( forward-implication (is-rounded-lower-cut-ℝ y r) Lyr)))
+              ( tr
+                ( is-in-lower-cut-ℝ y)
+                ( ( inv
+                    ( right-law-positive-diff-le-ℚ
+                      ( r +ℚ rational-ℚ⁺ ε)
+                      ( r')
+                      ( K))) ∙
+                  ( associative-add-ℚ
+                    ( r)
+                    ( rational-ℚ⁺ ε)
+                        ( r' -ℚ (r +ℚ rational-ℚ⁺ ε))))
+                ( I')))
+          ( forward-implication
+            ( is-rounded-lower-cut-ℝ y (r +ℚ rational-ℚ⁺ ε)) I)
 
-is-local-premetric-leq-ℝ : {l : Level} → is-local-Premetric (premetric-leq-ℝ l)
-is-local-premetric-leq-ℝ {l} =
-  is-local-is-tight-Premetric
-    ( premetric-leq-ℝ l)
-    ( is-tight-premetric-leq-ℝ)
+module _
+  (l : Level)
+  where
 
-is-triangular-premetric-leq-ℝ :
-  {l : Level} → is-triangular-Premetric (premetric-leq-ℝ l)
-pr1 (is-triangular-premetric-leq-ℝ x y z dxy dyz Hyz Hxy) r =
-  pr1 Hxy r ∘
-  pr1 Hyz (r +ℚ rational-ℚ⁺ dxy) ∘
-  inv-tr
-    ( is-in-lower-cut-ℝ z)
-    ( associative-add-ℚ r (rational-ℚ⁺ dxy) (rational-ℚ⁺ dyz))
-pr2 (is-triangular-premetric-leq-ℝ x y z dxy dyz Hyz Hxy) r =
-  pr2 Hyz r ∘
-  pr2 Hxy (r +ℚ rational-ℚ⁺ dyz) ∘
-  inv-tr
-    ( is-in-lower-cut-ℝ x)
-    ( associative-add-ℚ r (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy) ∙
-      ap (add-ℚ r) (commutative-add-ℚ (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy)))
+  pseudometric-space-ℝ : Pseudometric-Space (lsuc l) l
+  pseudometric-space-ℝ =
+    ( ℝ l ,
+      neighborhood-prop-ℝ l ,
+      is-reflexive-neighborhood-ℝ ,
+      is-symmetric-neighborhood-ℝ ,
+      is-triangular-neighborhood-ℝ ,
+      is-saturated-neighborhood-ℝ)
 
-is-pseudometric-premetric-leq-ℝ :
-  {l : Level} → is-pseudometric-Premetric (premetric-leq-ℝ l)
-is-pseudometric-premetric-leq-ℝ =
-  is-reflexive-premetric-leq-ℝ ,
-  is-symmetric-premetric-leq-ℝ ,
-  is-triangular-premetric-leq-ℝ
+module _
+  {l : Level}
+  where
 
-is-metric-premetric-leq-ℝ :
-  {l : Level} → is-metric-Premetric (premetric-leq-ℝ l)
-pr1 is-metric-premetric-leq-ℝ = is-pseudometric-premetric-leq-ℝ
-pr2 is-metric-premetric-leq-ℝ = is-local-premetric-leq-ℝ
+  opaque
+    unfolding neighborhood-ℝ
+
+    is-tight-pseudometric-space-ℝ :
+      is-tight-Pseudometric-Space (pseudometric-space-ℝ l)
+    is-tight-pseudometric-space-ℝ x y H =
+      eq-eq-lower-cut-ℝ
+        ( x)
+        ( y)
+        ( antisymmetric-leq-subtype
+          ( lower-cut-ℝ x)
+          ( lower-cut-ℝ y)
+          ( λ r Lxr →
+            elim-exists
+              ( lower-cut-ℝ y r)
+              ( λ s (r<s , Lxs) →
+                pr2
+                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( r)
+                  ( inv-tr
+                    ( λ u → is-in-lower-cut-ℝ x u)
+                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( Lxs)))
+              ( forward-implication (is-rounded-lower-cut-ℝ x r) Lxr))
+          ( λ r Lyr →
+            elim-exists
+              ( lower-cut-ℝ x r)
+              ( λ s (r<s , Lys) →
+                pr1
+                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( r)
+                  ( inv-tr
+                    ( λ u → is-in-lower-cut-ℝ y u)
+                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( Lys)))
+              ( forward-implication (is-rounded-lower-cut-ℝ y r) Lyr)))
+
+  is-extensional-pseudometric-space-ℝ :
+    is-extensional-Pseudometric-Space (pseudometric-space-ℝ l)
+  is-extensional-pseudometric-space-ℝ =
+    is-extensional-is-tight-Pseudometric-Space
+      (pseudometric-space-ℝ l)
+      (is-tight-pseudometric-space-ℝ)
 ```
 
-### The standard saturated metric space of real numbers
+### The standard metric space of real numbers
 
 ```agda
 module _
   (l : Level)
   where
 
-  premetric-space-leq-ℝ : Premetric-Space (lsuc l) l
-  premetric-space-leq-ℝ = ℝ l , premetric-leq-ℝ l
-
-  metric-space-leq-ℝ : Metric-Space (lsuc l) l
-  pr1 metric-space-leq-ℝ = premetric-space-leq-ℝ
-  pr2 metric-space-leq-ℝ = is-metric-premetric-leq-ℝ
+  metric-space-ℝ : Metric-Space (lsuc l) l
+  metric-space-ℝ =
+    make-Metric-Space
+      ( ℝ l)
+      ( neighborhood-prop-ℝ l)
+      ( is-reflexive-neighborhood-ℝ)
+      ( is-symmetric-neighborhood-ℝ)
+      ( is-triangular-neighborhood-ℝ)
+      ( is-saturated-neighborhood-ℝ)
+      ( is-extensional-pseudometric-space-ℝ)
 ```
 
 ## Properties
 
-### The standard metric space of real numbers is saturated
-
-```agda
-module _
-  {l : Level} (x y : ℝ l) (ε : ℚ⁺)
-  (H : (δ : ℚ⁺) → is-in-lower-neighborhood-leq-ℝ (ε +ℚ⁺ δ) x y)
-  where
-
-  is-closed-lower-neighborhood-leq-ℝ :
-    is-in-lower-neighborhood-leq-ℝ ε x y
-  is-closed-lower-neighborhood-leq-ℝ r I =
-    elim-exists
-      ( lower-cut-ℝ x r)
-      ( λ r' (K , I') →
-        H ( positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' K)
-          ( r)
-          ( tr
-            ( is-in-lower-cut-ℝ y)
-            ( ( inv
-                ( right-law-positive-diff-le-ℚ
-                  ( r +ℚ rational-ℚ⁺ ε)
-                  ( r')
-                  ( K))) ∙
-              ( associative-add-ℚ
-                ( r)
-                ( rational-ℚ⁺ ε)
-                    ( r' -ℚ (r +ℚ rational-ℚ⁺ ε))))
-            ( I')))
-      ( forward-implication
-        ( is-rounded-lower-cut-ℝ y (r +ℚ rational-ℚ⁺ ε)) I)
-```
+### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
 
 ```agda
 module _
   {l : Level}
   where
 
-  is-saturated-metric-space-leq-ℝ :
-    is-saturated-Metric-Space (metric-space-leq-ℝ l)
-  is-saturated-metric-space-leq-ℝ ε x y H =
-    ( is-closed-lower-neighborhood-leq-ℝ x y ε (pr1 ∘ H)) ,
-    ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
-```
+  abstract
+    lower-neighborhood-real-bound-leq-ℝ :
+      (d : ℚ⁺) (x y : ℝ l) →
+      leq-ℝ y (x +ℝ real-ℚ⁺ d) →
+      lower-neighborhood-ℝ d x y
+    lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
+      is-in-lower-cut-le-real-ℚ
+        ( q)
+        ( x)
+        ( concatenate-le-leq-ℝ
+          ( real-ℚ q)
+          ( y -ℝ real-ℚ d)
+          ( x)
+          ( le-transpose-left-add-ℝ
+            ( real-ℚ q)
+            ( real-ℚ d)
+            ( y)
+            ( inv-tr
+              ( λ z → le-ℝ z y)
+              ( add-real-ℚ q d)
+              ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+          ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
-### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
+  opaque
+    unfolding leq-ℝ
 
-```agda
-is-in-lower-neighborhood-real-bound-leq-ℝ :
-  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-  is-in-lower-neighborhood-leq-ℝ d x y
-is-in-lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
-  is-in-lower-cut-le-real-ℚ
-    ( q)
-    ( x)
-    ( concatenate-le-leq-ℝ
-      ( real-ℚ q)
-      ( y -ℝ real-ℚ d)
-      ( x)
-      ( le-transpose-left-add-ℝ
-        ( real-ℚ q)
-        ( real-ℚ d)
-        ( y)
-        ( inv-tr
-          ( λ z → le-ℝ z y)
-          ( add-real-ℚ q d)
-          ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
-      ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
-
-real-bound-is-in-lower-neighborhood-leq-ℝ :
-  {l : Level} → (d : ℚ⁺) (x y : ℝ l) →
-  is-in-lower-neighborhood-leq-ℝ d x y →
-  leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
-real-bound-is-in-lower-neighborhood-leq-ℝ (d , _) x y H r =
-  ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
-  ( H (r -ℚ d)) ∘
-  ( inv-tr
-    ( is-in-lower-cut-ℝ y)
-    ( ( associative-add-ℚ r (neg-ℚ d) d) ∙
-      ( ap (add-ℚ r) (left-inverse-law-add-ℚ d)) ∙
-      ( right-unit-law-add-ℚ r)))
+    real-bound-leq-lower-neighborhood-ℝ :
+      (d : ℚ⁺) (x y : ℝ l) →
+      lower-neighborhood-ℝ d x y →
+      leq-ℝ y (x +ℝ real-ℚ⁺ d)
+    real-bound-leq-lower-neighborhood-ℝ (d , _) x y H r =
+      ( transpose-diff-is-in-lower-cut-ℝ x r d) ∘
+      ( H (r -ℚ d)) ∘
+      ( inv-tr
+        ( is-in-lower-cut-ℝ y)
+        ( ( associative-add-ℚ r (neg-ℚ d) d) ∙
+          ( ap (add-ℚ r) (left-inverse-law-add-ℚ d)) ∙
+          ( right-unit-law-add-ℚ r)))
 
 module _
   {l : Level} (d : ℚ⁺) (x y : ℝ l)
   where
 
-  neighborhood-real-bound-each-leq-ℝ :
-    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d)) →
-    is-in-neighborhood-leq-ℝ l d x y
-  neighborhood-real-bound-each-leq-ℝ x≤y+d y≤x+d =
-    ( is-in-lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d ,
-      is-in-lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
+  opaque
+    unfolding neighborhood-ℝ
 
-  left-real-bound-neighborhood-leq-ℝ :
-    is-in-neighborhood-leq-ℝ l d x y →
-    leq-ℝ x (y +ℝ real-ℚ (rational-ℚ⁺ d))
-  left-real-bound-neighborhood-leq-ℝ (_ , K) =
-    real-bound-is-in-lower-neighborhood-leq-ℝ d y x K
+    neighborhood-real-bound-each-leq-ℝ :
+      leq-ℝ x (y +ℝ real-ℚ⁺ d) →
+      leq-ℝ y (x +ℝ real-ℚ⁺ d) →
+      neighborhood-ℝ l d x y
+    neighborhood-real-bound-each-leq-ℝ x≤y+d y≤x+d =
+      ( lower-neighborhood-real-bound-leq-ℝ d x y y≤x+d) ,
+      ( lower-neighborhood-real-bound-leq-ℝ d y x x≤y+d)
 
-  right-real-bound-neighborhood-leq-ℝ :
-    is-in-neighborhood-leq-ℝ l d x y →
-    leq-ℝ y (x +ℝ real-ℚ (rational-ℚ⁺ d))
-  right-real-bound-neighborhood-leq-ℝ (H , _) =
-    real-bound-is-in-lower-neighborhood-leq-ℝ d x y H
+    left-leq-real-bound-neighborhood-ℝ :
+      neighborhood-ℝ l d x y → leq-ℝ x (y +ℝ real-ℚ⁺ d)
+    left-leq-real-bound-neighborhood-ℝ (_ , K) =
+      real-bound-leq-lower-neighborhood-ℝ d y x K
+
+    right-leq-real-bound-neighborhood-ℝ :
+      neighborhood-ℝ l d x y → leq-ℝ y (x +ℝ real-ℚ⁺ d)
+    right-leq-real-bound-neighborhood-ℝ (H , _) =
+      real-bound-leq-lower-neighborhood-ℝ d x y H
 ```
 
 ### Similarity of real numbers preserves neighborhoods
@@ -322,7 +350,7 @@ module _
   where
 
   preserves-neighborhood-sim-ℝ :
-    is-in-neighborhood-leq-ℝ l1 d x y → is-in-neighborhood-leq-ℝ l2 d x' y'
+    neighborhood-ℝ l1 d x y → neighborhood-ℝ l2 d x' y'
   preserves-neighborhood-sim-ℝ H =
     neighborhood-real-bound-each-leq-ℝ
       ( d)
@@ -331,52 +359,55 @@ module _
       ( preserves-leq-sim-ℝ
         ( x)
         ( x')
-        ( y +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( y' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( y +ℝ real-ℚ⁺ d)
+        ( y' +ℝ real-ℚ⁺ d)
         ( x~x')
         ( preserves-sim-right-add-ℝ
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( y)
           ( y')
           ( y~y'))
-        ( left-real-bound-neighborhood-leq-ℝ d x y H))
+        ( left-leq-real-bound-neighborhood-ℝ d x y H))
       ( preserves-leq-sim-ℝ
         ( y)
         ( y')
-        ( x +ℝ real-ℚ (rational-ℚ⁺ d))
-        ( x' +ℝ real-ℚ (rational-ℚ⁺ d))
+        ( x +ℝ real-ℚ⁺ d)
+        ( x' +ℝ real-ℚ⁺ d)
         ( y~y')
         ( preserves-sim-right-add-ℝ
-          ( real-ℚ (rational-ℚ⁺ d))
+          ( real-ℚ⁺ d)
           ( x)
           ( x')
           ( x~x'))
-        ( right-real-bound-neighborhood-leq-ℝ d x y H))
+        ( right-leq-real-bound-neighborhood-ℝ d x y H))
 ```
 
 ### The canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
-is-isometry-metric-space-leq-real-ℚ :
-  is-isometry-Metric-Space
-    ( metric-space-leq-ℚ)
-    ( metric-space-leq-ℝ lzero)
-    ( real-ℚ)
-is-isometry-metric-space-leq-real-ℚ d x y =
-  pair
-    ( map-product
-      ( le-le-add-positive-leq-add-positive-ℚ x y d)
-      ( le-le-add-positive-leq-add-positive-ℚ y x d))
-    ( map-product
-      ( leq-add-positive-le-le-add-positive-ℚ x y d)
-      ( leq-add-positive-le-le-add-positive-ℚ y x d))
+opaque
+  unfolding neighborhood-ℝ real-ℚ
 
-isometry-metric-space-leq-real-ℚ :
+  is-isometry-metric-space-real-ℚ :
+    is-isometry-Metric-Space
+      ( metric-space-ℚ)
+      ( metric-space-ℝ lzero)
+      ( real-ℚ)
+  is-isometry-metric-space-real-ℚ d x y =
+    pair
+      ( map-product
+        ( le-le-add-positive-leq-add-positive-ℚ x y d)
+        ( le-le-add-positive-leq-add-positive-ℚ y x d))
+      ( map-product
+        ( leq-add-positive-le-le-add-positive-ℚ x y d)
+        ( leq-add-positive-le-le-add-positive-ℚ y x d))
+
+isometry-metric-space-real-ℚ :
   isometry-Metric-Space
-    ( metric-space-leq-ℚ)
-    ( metric-space-leq-ℝ lzero)
-isometry-metric-space-leq-real-ℚ =
-  ( real-ℚ , is-isometry-metric-space-leq-real-ℚ)
+    ( metric-space-ℚ)
+    ( metric-space-ℝ lzero)
+isometry-metric-space-real-ℚ =
+  ( real-ℚ , is-isometry-metric-space-real-ℚ)
 ```
 
 ### Raising real numbers is an isometry
@@ -386,36 +417,37 @@ module _
   {l0 : Level} (l : Level)
   where
 
-  is-isometry-metric-space-leq-raise-ℝ :
-    is-isometry-Metric-Space
-      ( metric-space-leq-ℝ l0)
-      ( metric-space-leq-ℝ (l0 ⊔ l))
-      ( raise-ℝ l)
-  pr1 (is-isometry-metric-space-leq-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( x)
-      ( y)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( sim-raise-ℝ l x)
-      ( sim-raise-ℝ l y)
-  pr2 (is-isometry-metric-space-leq-raise-ℝ d x y) =
-    preserves-neighborhood-sim-ℝ
-      ( d)
-      ( raise-ℝ l x)
-      ( raise-ℝ l y)
-      ( x)
-      ( y)
-      ( symmetric-sim-ℝ (sim-raise-ℝ l x))
-      ( symmetric-sim-ℝ (sim-raise-ℝ l y))
+  abstract
+    is-isometry-metric-space-raise-ℝ :
+      is-isometry-Metric-Space
+        ( metric-space-ℝ l0)
+        ( metric-space-ℝ (l0 ⊔ l))
+        ( raise-ℝ l)
+    pr1 (is-isometry-metric-space-raise-ℝ d x y) =
+      preserves-neighborhood-sim-ℝ
+        ( d)
+        ( x)
+        ( y)
+        ( raise-ℝ l x)
+        ( raise-ℝ l y)
+        ( sim-raise-ℝ l x)
+        ( sim-raise-ℝ l y)
+    pr2 (is-isometry-metric-space-raise-ℝ d x y) =
+      preserves-neighborhood-sim-ℝ
+        ( d)
+        ( raise-ℝ l x)
+        ( raise-ℝ l y)
+        ( x)
+        ( y)
+        ( symmetric-sim-ℝ (sim-raise-ℝ l x))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l y))
 
-  isometry-metric-space-leq-raise-ℝ :
+  isometry-metric-space-raise-ℝ :
     isometry-Metric-Space
-      ( metric-space-leq-ℝ l0)
-      ( metric-space-leq-ℝ (l0 ⊔ l))
-  isometry-metric-space-leq-raise-ℝ =
-    ( raise-ℝ l , is-isometry-metric-space-leq-raise-ℝ)
+      ( metric-space-ℝ l0)
+      ( metric-space-ℝ (l0 ⊔ l))
+  isometry-metric-space-raise-ℝ =
+    ( raise-ℝ l , is-isometry-metric-space-raise-ℝ)
 ```
 
 ### Raising rational numbers to real numbers is an isometry
@@ -425,28 +457,29 @@ module _
   (l : Level)
   where
 
-  isometry-metric-space-leq-raise-real-ℚ :
+  isometry-metric-space-raise-real-ℚ :
     isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-  isometry-metric-space-leq-raise-real-ℚ =
+      ( metric-space-ℚ)
+      ( metric-space-ℝ l)
+  isometry-metric-space-raise-real-ℚ =
     comp-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ lzero)
-      ( metric-space-leq-ℝ l)
-      ( isometry-metric-space-leq-raise-ℝ l)
-      ( isometry-metric-space-leq-real-ℚ)
+      ( metric-space-ℚ)
+      ( metric-space-ℝ lzero)
+      ( metric-space-ℝ l)
+      ( isometry-metric-space-raise-ℝ l)
+      ( isometry-metric-space-real-ℚ)
 
-  is-isometry-metric-space-leq-raise-real-ℚ :
-    is-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-      ( raise-real-ℚ l)
-  is-isometry-metric-space-leq-raise-real-ℚ =
-    is-isometry-map-isometry-Metric-Space
-      ( metric-space-leq-ℚ)
-      ( metric-space-leq-ℝ l)
-      ( isometry-metric-space-leq-raise-real-ℚ)
+  abstract
+    is-isometry-metric-space-raise-real-ℚ :
+      is-isometry-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℝ l)
+        ( raise-real-ℚ l)
+    is-isometry-metric-space-raise-real-ℚ =
+      is-isometry-map-isometry-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℝ l)
+        ( isometry-metric-space-raise-real-ℚ)
 ```
 
 ## References

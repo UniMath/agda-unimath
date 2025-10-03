@@ -32,8 +32,10 @@ open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types public
+open import univalent-combinatorics.complements-decidable-subtypes public
 open import univalent-combinatorics.complements-isolated-elements public
 open import univalent-combinatorics.coproduct-types public
+open import univalent-combinatorics.coproducts-inhabited-finite-types public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-pair-types public
@@ -77,6 +79,8 @@ open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.inhabited-finite-types public
+open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes public
+open import univalent-combinatorics.inhabited-finitely-enumerable-types public
 open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
@@ -118,6 +122,7 @@ open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
 open import univalent-combinatorics.trivial-sigma-decompositions public
+open import univalent-combinatorics.truncated-pi-finite-types public
 open import univalent-combinatorics.type-duality public
 open import univalent-combinatorics.unbounded-pi-finite-types public
 open import univalent-combinatorics.unions-subtypes public

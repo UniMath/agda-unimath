@@ -8,9 +8,12 @@ module metric-spaces.metric-spaces where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-relations
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -18,19 +21,20 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.metric-structures
-open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-spaces
-open import metric-spaces.premetric-structures
+open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.pseudometric-structures
-open import metric-spaces.reflexive-premetric-structures
-open import metric-spaces.symmetric-premetric-structures
-open import metric-spaces.triangular-premetric-structures
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -47,7 +51,8 @@ distance function as in the classical approach. Thus, a metric space `A` is
 defined by a family of _neighborhood_
 [relations](foundation.binary-relations.md) on it indexed by the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`ℚ⁺`,
+`ℚ⁺`, a
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md):
 
 ```text
   N : ℚ⁺ → A → A → Prop l
@@ -58,238 +63,285 @@ saying that _`d` is an upper bound on the distance from `x` to `y`_.
 
 The neighborhood relation on a metric space must satisfy the following axioms:
 
-- **Reflexivity.** Every positive rational `d` is an upper bound on the distance
-  from `x` to itself.
-- **Symmetry.** If `d` is an upper bound on the distance from `x` to `y`, then
-  `d` is an upper bound on the distance from `y` to `x`.
-- **Triangularity.** If `d` is an upper bound on the distance from `x` to `y`,
-  and `d'` is an upper bound on the distance from `y` to `z`, then `d + d'` is
-  an upper bound on the distance from `x` to `z`.
+- [**Reflexivity.**](metric-spaces.reflexive-rational-neighborhood-relations.md)
+  Every positive rational `d` is an upper bound on the distance from `x` to
+  itself.
+- [**Symmetry.**](metric-spaces.symmetric-rational-neighborhood-relations.md)
+  Any upper bound on the distance from `x` to `y` is an upper bound on the
+  distance from `y` to `x`.
+- [**Triangularity.**](metric-spaces.triangular-rational-neighborhood-relations.md)
+  If `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
+  bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
+  distance from `x` to `z`.
+- [**Saturation.**](metric-spaces.saturated-rational-neighborhood-relations.md):
+  any neighborhood `N d x y` contains the intersection of all `N d' x y` for
+  `d < d'`.
 
-Finally, we ask that our metric spaces are **extensional**, which amounts to the
-property of **indistinguishability of identicals**
+This gives `A` the structure of a
+[**pseudometric space**](metric-spaces.pseudometric-spaces.md); finally, we ask
+that our metric spaces are
+[**extensional**](metric-spaces.extensionality-pseudometric-spaces.md):
+[similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) elements
+are [equal](foundation-core.identity-types.md):
 
 - If every positive rational `d` is an upper bound on the distance from `x` to
-  `y`, then `x` and `y` are [equal](foundation-core.identity-types.md).
+  `y`, then `x ＝ y`.
 
-Put concisely, a metric space is a
-[premetric space](metric-spaces.premetric-spaces.md) whose
-[premetric](metric-spaces.premetric-structures.md) is
-[reflexive](metric-spaces.reflexive-premetric-structures.md),
-[symmetric](metric-spaces.symmetric-premetric-structures.md),
-[triangular](metric-spaces.triangular-premetric-structures.md), and
-[extensional](metric-spaces.extensional-premetric-structures.md): a
-[metric structure](metric-spaces.metric-structures.md). Equivalently, it is a
-[pseudometric space](metric-spaces.pseudometric-spaces.md) whose premetric is
-extensional.
+Similarity of elements in a metric space characterizes their equality so any
+metric space is a [set](foundation.sets.md).
+
+NB: When working with actual distance functions, the _saturation_ condition
+always holds, defining `N d x y` as `dist(x , y) ≤ d`. Since we're working with
+_upper bounds on distances_, we add this axiom to ensure that the subsets of
+upper bounds on distances between elements is closed on the left.
 
 ## Definitions
-
-### The property of being a metric premetric space
-
-```agda
-module _
-  {l1 l2 : Level} (A : Premetric-Space l1 l2)
-  where
-
-  is-metric-prop-Premetric-Space : Prop (l1 ⊔ l2)
-  is-metric-prop-Premetric-Space =
-    is-metric-prop-Premetric (structure-Premetric-Space A)
-
-  is-metric-Premetric-Space : UU (l1 ⊔ l2)
-  is-metric-Premetric-Space =
-    type-Prop is-metric-prop-Premetric-Space
-
-  is-prop-is-metric-Premetric-Space :
-    is-prop is-metric-Premetric-Space
-  is-prop-is-metric-Premetric-Space =
-    is-prop-type-Prop is-metric-prop-Premetric-Space
-```
 
 ### The type of metric spaces
 
 ```agda
 Metric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Space l1 l2 =
-  type-subtype (is-metric-prop-Premetric-Space {l1} {l2})
+  Σ (Pseudometric-Space l1 l2) (is-extensional-Pseudometric-Space)
+
+module _
+  {l1 l2 : Level}
+  ( A : UU l1)
+  ( N : Rational-Neighborhood-Relation l2 A)
+  ( refl-N : is-reflexive-Rational-Neighborhood-Relation N)
+  ( symmetric-N : is-symmetric-Rational-Neighborhood-Relation N)
+  ( triangular-N : is-triangular-Rational-Neighborhood-Relation N)
+  ( saturated-N : is-saturated-Rational-Neighborhood-Relation N)
+  ( extensional-N :
+    is-extensional-Pseudometric-Space
+      ( A , N , refl-N , symmetric-N , triangular-N , saturated-N))
+  where
+
+  make-Metric-Space : Metric-Space l1 l2
+  pr1 make-Metric-Space =
+    (A , N , refl-N , symmetric-N , triangular-N , saturated-N)
+  pr2 make-Metric-Space = extensional-N
 
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  premetric-Metric-Space : Premetric-Space l1 l2
-  premetric-Metric-Space = pr1 M
+  pseudometric-Metric-Space : Pseudometric-Space l1 l2
+  pseudometric-Metric-Space = pr1 M
 
   type-Metric-Space : UU l1
   type-Metric-Space =
-    type-Premetric-Space premetric-Metric-Space
+    type-Pseudometric-Space pseudometric-Metric-Space
 
-  structure-Metric-Space : Premetric l2 type-Metric-Space
-  structure-Metric-Space =
-    structure-Premetric-Space premetric-Metric-Space
+  is-extensional-pseudometric-Metric-Space :
+    is-extensional-Pseudometric-Space pseudometric-Metric-Space
+  is-extensional-pseudometric-Metric-Space = pr2 M
 
-  is-metric-structure-Metric-Space :
-    is-metric-Premetric structure-Metric-Space
-  is-metric-structure-Metric-Space = pr2 M
+  pseudometric-structure-Metric-Space :
+    Pseudometric-Structure l2 type-Metric-Space
+  pseudometric-structure-Metric-Space =
+    structure-Pseudometric-Space pseudometric-Metric-Space
 
-  is-pseudometric-structure-Metric-Space :
-    is-pseudometric-Premetric structure-Metric-Space
-  is-pseudometric-structure-Metric-Space =
-    is-pseudometric-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
-
-  pseudometric-Metric-Space : Pseudometric-Space l1 l2
-  pseudometric-Metric-Space =
-    premetric-Metric-Space , is-pseudometric-structure-Metric-Space
+  neighborhood-prop-Metric-Space :
+    ℚ⁺ → Relation-Prop l2 type-Metric-Space
+  neighborhood-prop-Metric-Space =
+    neighborhood-prop-Pseudometric-Space pseudometric-Metric-Space
 
   neighborhood-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
   neighborhood-Metric-Space =
-    neighborhood-Premetric-Space premetric-Metric-Space
+    neighborhood-Pseudometric-Space pseudometric-Metric-Space
+
+  is-prop-neighborhood-Metric-Space :
+    (d : ℚ⁺) (x y : type-Metric-Space) →
+    is-prop (neighborhood-Metric-Space d x y)
+  is-prop-neighborhood-Metric-Space =
+    is-prop-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
   is-upper-bound-dist-prop-Metric-Space :
     (x y : type-Metric-Space) → ℚ⁺ → Prop l2
   is-upper-bound-dist-prop-Metric-Space x y d =
-    structure-Metric-Space d x y
+    neighborhood-prop-Metric-Space d x y
 
   is-upper-bound-dist-Metric-Space :
     (x y : type-Metric-Space) → ℚ⁺ → UU l2
-  is-upper-bound-dist-Metric-Space =
-    is-upper-bound-dist-Premetric-Space premetric-Metric-Space
+  is-upper-bound-dist-Metric-Space x y d =
+    neighborhood-Metric-Space d x y
 
-  is-reflexive-structure-Metric-Space :
-    is-reflexive-Premetric structure-Metric-Space
-  is-reflexive-structure-Metric-Space =
-    is-reflexive-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
+  is-prop-is-upper-bound-dist-Metric-Space :
+    (x y : type-Metric-Space) (d : ℚ⁺) →
+    is-prop (is-upper-bound-dist-Metric-Space x y d)
+  is-prop-is-upper-bound-dist-Metric-Space x y d =
+    is-prop-neighborhood-Metric-Space d x y
 
-  refl-structure-Metric-Space :
-    is-reflexive-Premetric structure-Metric-Space
-  refl-structure-Metric-Space =
-    is-reflexive-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
+  is-pseudometric-neighborhood-Metric-Space :
+    is-pseudometric-Rational-Neighborhood-Relation
+      type-Metric-Space
+      neighborhood-prop-Metric-Space
+  is-pseudometric-neighborhood-Metric-Space =
+    is-pseudometric-neighborhood-Pseudometric-Space
+      pseudometric-Metric-Space
 
-  is-symmetric-structure-Metric-Space :
-    is-symmetric-Premetric structure-Metric-Space
-  is-symmetric-structure-Metric-Space =
-    is-symmetric-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
+  refl-neighborhood-Metric-Space :
+    (d : ℚ⁺) (x : type-Metric-Space) →
+    neighborhood-Metric-Space d x x
+  refl-neighborhood-Metric-Space =
+    refl-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-local-structure-Metric-Space :
-    is-local-Premetric structure-Metric-Space
-  is-local-structure-Metric-Space =
-    is-local-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
+  symmetric-neighborhood-Metric-Space :
+    (d : ℚ⁺) (x y : type-Metric-Space) →
+    neighborhood-Metric-Space d x y →
+    neighborhood-Metric-Space d y x
+  symmetric-neighborhood-Metric-Space =
+    symmetric-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-triangular-structure-Metric-Space :
-    is-triangular-Premetric structure-Metric-Space
-  is-triangular-structure-Metric-Space =
-    is-triangular-is-metric-Premetric
-      structure-Metric-Space
-      is-metric-structure-Metric-Space
+  inv-neighborhood-Metric-Space :
+    {d : ℚ⁺} {x y : type-Metric-Space} →
+    neighborhood-Metric-Space d x y →
+    neighborhood-Metric-Space d y x
+  inv-neighborhood-Metric-Space =
+    inv-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-extensional-structure-Metric-Space :
-    is-extensional-Premetric structure-Metric-Space
-  is-extensional-structure-Metric-Space =
-    is-reflexive-structure-Metric-Space ,
-    is-local-structure-Metric-Space
+  triangular-neighborhood-Metric-Space :
+    (x y z : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    neighborhood-Metric-Space d₂ y z →
+    neighborhood-Metric-Space d₁ x y →
+    neighborhood-Metric-Space (d₁ +ℚ⁺ d₂) x z
+  triangular-neighborhood-Metric-Space =
+    triangular-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-tight-structure-Metric-Space :
-    is-tight-Premetric structure-Metric-Space
-  is-tight-structure-Metric-Space =
-    is-tight-is-extensional-Premetric
-      structure-Metric-Space
-      is-extensional-structure-Metric-Space
+  monotonic-neighborhood-Metric-Space :
+    (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    le-ℚ⁺ d₁ d₂ →
+    neighborhood-Metric-Space d₁ x y →
+    neighborhood-Metric-Space d₂ x y
+  monotonic-neighborhood-Metric-Space =
+    monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-monotonic-structure-Metric-Space :
-    is-monotonic-Premetric structure-Metric-Space
-  is-monotonic-structure-Metric-Space =
-    is-monotonic-is-reflexive-triangular-Premetric
-      structure-Metric-Space
-      is-reflexive-structure-Metric-Space
-      is-triangular-structure-Metric-Space
+  weakly-monotonic-neighborhood-Metric-Space :
+    (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    leq-ℚ⁺ d₁ d₂ →
+    neighborhood-Metric-Space d₁ x y →
+    neighborhood-Metric-Space d₂ x y
+  weakly-monotonic-neighborhood-Metric-Space =
+    weakly-monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  is-set-type-Metric-Space : is-set type-Metric-Space
-  is-set-type-Metric-Space =
-    is-set-has-extensional-Premetric
-      structure-Metric-Space
-      is-extensional-structure-Metric-Space
+  saturated-neighborhood-Metric-Space :
+    (ε : ℚ⁺) (x y : type-Metric-Space) →
+    ((δ : ℚ⁺) → neighborhood-Metric-Space (ε +ℚ⁺ δ) x y) →
+    neighborhood-Metric-Space ε x y
+  saturated-neighborhood-Metric-Space =
+    saturated-neighborhood-Pseudometric-Space pseudometric-Metric-Space
+```
 
-  set-Metric-Space : Set l1
-  set-Metric-Space = (type-Metric-Space , is-set-type-Metric-Space)
+### Similarity of elements in a metric space
 
-  is-indistinguishable-prop-Metric-Space : Relation-Prop l2 type-Metric-Space
-  is-indistinguishable-prop-Metric-Space =
-    is-indistinguishable-prop-Premetric-Space premetric-Metric-Space
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
 
-  is-indistinguishable-Metric-Space : Relation l2 type-Metric-Space
-  is-indistinguishable-Metric-Space =
-    is-indistinguishable-Premetric-Space premetric-Metric-Space
+  sim-prop-Metric-Space : Relation-Prop l2 (type-Metric-Space A)
+  sim-prop-Metric-Space =
+    sim-prop-Pseudometric-Space (pseudometric-Metric-Space A)
 
-  is-prop-is-indistinguishable-Metric-Space :
-    (x y : type-Metric-Space) →
-    is-prop (is-indistinguishable-Metric-Space x y)
-  is-prop-is-indistinguishable-Metric-Space =
-    is-prop-is-indistinguishable-Premetric-Space premetric-Metric-Space
+  sim-Metric-Space : Relation l2 (type-Metric-Space A)
+  sim-Metric-Space =
+    sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  is-prop-sim-Metric-Space :
+    (x y : type-Metric-Space A) →
+    is-prop (sim-Metric-Space x y)
+  is-prop-sim-Metric-Space =
+    is-prop-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  refl-sim-Metric-Space :
+    (x : type-Metric-Space A) →
+    sim-Metric-Space x x
+  refl-sim-Metric-Space =
+    refl-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  sim-eq-Metric-Space :
+    (x y : type-Metric-Space A) →
+    x ＝ y →
+    sim-Metric-Space x y
+  sim-eq-Metric-Space =
+    sim-eq-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  symmetric-sim-Metric-Space :
+    (x y : type-Metric-Space A) →
+    sim-Metric-Space x y →
+    sim-Metric-Space y x
+  symmetric-sim-Metric-Space =
+    symmetric-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  inv-sim-Metric-Space :
+    {x y : type-Metric-Space A} →
+    sim-Metric-Space x y →
+    sim-Metric-Space y x
+  inv-sim-Metric-Space {x} {y} =
+    inv-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  transitive-sim-Metric-Space :
+    (x y z : type-Metric-Space A) →
+    sim-Metric-Space y z →
+    sim-Metric-Space x y →
+    sim-Metric-Space x z
+  transitive-sim-Metric-Space =
+    transitive-sim-Pseudometric-Space (pseudometric-Metric-Space A)
+
+  equivalence-relation-sim-Metric-Space :
+    equivalence-relation l2 (type-Metric-Space A)
+  equivalence-relation-sim-Metric-Space =
+    equivalence-relation-sim-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
 ## Properties
 
-### Indistiguishability in a metric space is equivalent to equality
+### The carrier type of a metric space is a set
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (x y : type-Metric-Space M)
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  equiv-indistinguishable-eq-Metric-Space :
-    (x ＝ y) ≃ is-indistinguishable-Metric-Space M x y
-  equiv-indistinguishable-eq-Metric-Space =
-    equiv-eq-is-indistinguishable-is-extensional-Premetric
-      ( structure-Metric-Space M)
-      ( is-extensional-structure-Metric-Space M)
+  is-set-type-Metric-Space : is-set (type-Metric-Space A)
+  is-set-type-Metric-Space =
+    is-set-type-is-extensional-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( is-extensional-pseudometric-Metric-Space A)
 
-  indistinguishable-eq-Metric-Space :
-    x ＝ y → is-indistinguishable-Metric-Space M x y
-  indistinguishable-eq-Metric-Space =
-    map-equiv equiv-indistinguishable-eq-Metric-Space
-
-  eq-indistinguishable-Metric-Space :
-    is-indistinguishable-Metric-Space M x y → x ＝ y
-  eq-indistinguishable-Metric-Space =
-    map-inv-equiv equiv-indistinguishable-eq-Metric-Space
+  set-Metric-Space : Set l1
+  set-Metric-Space =
+    (type-Metric-Space A , is-set-type-Metric-Space)
 ```
 
-### The type of metric spaces is equivalent to the type of extensional pseudometric spaces
-
-#### The subtype of extensional pseudometric spaces
+### Similarity of elements in a metric space is equivalent to equality
 
 ```agda
 module _
-  (l1 l2 : Level)
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-extensional-prop-Pseudometric-Space :
-    subtype (l1 ⊔ l2) (Pseudometric-Space l1 l2)
-  is-extensional-prop-Pseudometric-Space =
-    is-local-prop-Premetric ∘ structure-Pseudometric-Space
+  equiv-sim-eq-Metric-Space :
+    (x y : type-Metric-Space A) →
+    (x ＝ y) ≃ sim-Metric-Space A x y
+  equiv-sim-eq-Metric-Space =
+    equiv-sim-eq-is-extensional-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( is-extensional-pseudometric-Metric-Space A)
 
-  is-extensional-Pseudometric-Space :
-    Pseudometric-Space l1 l2 → UU (l1 ⊔ l2)
-  is-extensional-Pseudometric-Space =
-    type-Prop ∘ is-extensional-prop-Pseudometric-Space
-
-  is-prop-is-extensional-Pseudometric-Space :
-    (M : Pseudometric-Space l1 l2) →
-    is-prop (is-extensional-Pseudometric-Space M)
-  is-prop-is-extensional-Pseudometric-Space =
-    is-prop-type-Prop ∘ is-extensional-prop-Pseudometric-Space
+  eq-sim-Metric-Space :
+    (x y : type-Metric-Space A) →
+    sim-Metric-Space A x y →
+    x ＝ y
+  eq-sim-Metric-Space x y =
+    map-inv-equiv (equiv-sim-eq-Metric-Space x y)
 ```
+
+## See also
+
+- Metric spaces that _are_ defined by a distance function are defined in
+  [Metrics](metric-spaces.metrics.md).
 
 ## External links
 

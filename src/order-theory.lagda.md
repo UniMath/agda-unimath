@@ -11,6 +11,10 @@ open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
+open import order-theory.closed-interval-preserving-maps-posets public
+open import order-theory.closed-interval-preserving-maps-total-orders public
+open import order-theory.closed-intervals-posets public
+open import order-theory.closed-intervals-total-orders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
@@ -62,6 +66,7 @@ open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
+open import order-theory.joins-finite-families-join-semilattices public
 open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-inflattices public
@@ -92,6 +97,7 @@ open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
+open import order-theory.meets-finite-families-meet-semilattices public
 open import order-theory.nuclei-large-locales public
 open import order-theory.opposite-large-posets public
 open import order-theory.opposite-large-preorders public

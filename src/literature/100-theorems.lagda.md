@@ -1,9 +1,9 @@
-# Freek Wiedijk's 100 Theorems
+# Wiedijk's 100 Theorems
 
 This file records formalized results from
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s
-[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/).
-{{#cite 100theorems}}
+[_Formalizing 100 Theorems_](https://www.cs.ru.nl/~freek/100/)
+{{#cite 100theorems}}.
 
 ```agda
 module literature.100-theorems where
@@ -106,6 +106,17 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
+### 68. Sum of an arithmetic series {#68}
+
+**Author:** [malarbol](http://www.github.com/malarbol)
+
+```agda
+open import elementary-number-theory.triangular-numbers using
+  ( compute-triangular-number-ℕ)
+open import ring-theory.arithmetic-series-semirings using
+  ( compute-sum-add-mul-nat-Semiring)
+```
+
 ### 69. Greatest common divisor algorithm {#69}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
@@ -140,15 +151,22 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 
 ```agda
 open import real-numbers.metric-space-of-real-numbers using
-  ( is-triangular-premetric-leq-ℝ)
+  ( is-triangular-neighborhood-ℝ)
+```
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.absolute-value-real-numbers using
+  ( triangle-inequality-abs-ℝ)
+
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```
 
 ## See also
 
-- The spiritual successor to _Formalizing 100 Theorems_ is
-  [_1000+ theorems_](literature.1000plus-theorems.md), also due to Freek Wiedijk
+- The spiritual successor to _Formalizing 100 Theorems_ is _1000+ theorems_
   {{#cite 1000+theorems}}.
 
 ## References

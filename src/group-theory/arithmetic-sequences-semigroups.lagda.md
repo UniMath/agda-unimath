@@ -16,18 +16,19 @@ open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.semigroups
+
+open import lists.sequences
 ```
 
 </details>
 
 ## Ideas
 
-A [sequence](foundation.sequences.md) `u` in a
+A [sequence](lists.sequences.md) `u` in a
 [semigroup](group-theory.semigroups.md) `G` is called
 {{#concept "arithmetic" Disambiguation="sequence in a semigroup" Agda=arithmetic-sequence-Semigroup WD="arithmetic progression" WDID=Q170008}}
 with common difference `d : type-Semigroup G` if the successor term of `u` is
@@ -163,7 +164,7 @@ module _
         ( eq-common-difference))
 ```
 
-### Any arithmetic sequence in a semigroup is standard
+### Any arithmetic sequence in a semigroup is homotopic to a standard arithmetic sequence
 
 ```agda
 module _

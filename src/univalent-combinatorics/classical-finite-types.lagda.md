@@ -25,6 +25,8 @@ open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -185,6 +187,18 @@ pr2 (equiv-classical-standard-Fin-reverse n) =
     ( standard-classical-Fin-reverse n)
     ( is-section-classical-standard-Fin-reverse n)
     ( is-retraction-classical-standard-Fin-reverse n)
+```
+
+### Counting the classical finite types
+
+```agda
+count-classical-Fin : (n : ℕ) → count (classical-Fin n)
+count-classical-Fin n = (n , equiv-classical-standard-Fin n)
+
+finite-type-classical-Fin : (n : ℕ) → Finite-Type lzero
+finite-type-classical-Fin n =
+  ( classical-Fin n ,
+    is-finite-count (count-classical-Fin n))
 ```
 
 ## See also

@@ -43,24 +43,25 @@ module _
   {l1 : Level}
   where
 
-  neg-neighborhood-leq-ℝ : (d : ℚ⁺) (x y : ℝ l1) →
-    is-in-neighborhood-leq-ℝ l1 d x y →
-    is-in-neighborhood-leq-ℝ l1 d (neg-ℝ x) (neg-ℝ y)
-  neg-neighborhood-leq-ℝ d x y H =
-    neighborhood-real-bound-each-leq-ℝ
-      ( d)
-      ( neg-ℝ x)
-      ( neg-ℝ y)
-      ( reverses-lower-neighborhood-leq-neg-ℝ
+  abstract
+    neg-neighborhood-ℝ : (d : ℚ⁺) (x y : ℝ l1) →
+      neighborhood-ℝ l1 d x y →
+      neighborhood-ℝ l1 d (neg-ℝ x) (neg-ℝ y)
+    neg-neighborhood-ℝ d x y H =
+      neighborhood-real-bound-each-leq-ℝ
         ( d)
-        ( y)
-        ( x)
-        ( right-real-bound-neighborhood-leq-ℝ d x y H))
-      ( reverses-lower-neighborhood-leq-neg-ℝ
-        ( d)
-        ( x)
-        ( y)
-        ( left-real-bound-neighborhood-leq-ℝ d x y H))
+        ( neg-ℝ x)
+        ( neg-ℝ y)
+        ( reverses-lower-neighborhood-neg-ℝ
+          ( d)
+          ( y)
+          ( x)
+          ( right-leq-real-bound-neighborhood-ℝ d x y H))
+        ( reverses-lower-neighborhood-neg-ℝ
+          ( d)
+          ( x)
+          ( y)
+          ( left-leq-real-bound-neighborhood-ℝ d x y H))
 ```
 
 ### Negation on the real numbers is an isometry
@@ -70,25 +71,26 @@ module _
   {l1 : Level}
   where
 
-  is-isometry-neg-ℝ :
-    is-isometry-Metric-Space
-      ( metric-space-leq-ℝ l1)
-      ( metric-space-leq-ℝ l1)
-      ( neg-ℝ)
-  is-isometry-neg-ℝ d x y =
-    ( neg-neighborhood-leq-ℝ d x y) ,
-    ( ( binary-tr
-        ( is-in-neighborhood-leq-ℝ l1 d)
-        ( neg-neg-ℝ x)
-        ( neg-neg-ℝ y)) ∘
-      ( neg-neighborhood-leq-ℝ
-        ( d)
-        ( neg-ℝ x)
-        ( neg-ℝ y)))
+  abstract
+    is-isometry-neg-ℝ :
+      is-isometry-Metric-Space
+        ( metric-space-ℝ l1)
+        ( metric-space-ℝ l1)
+        ( neg-ℝ)
+    is-isometry-neg-ℝ d x y =
+      ( neg-neighborhood-ℝ d x y) ,
+      ( ( binary-tr
+          ( neighborhood-ℝ l1 d)
+          ( neg-neg-ℝ x)
+          ( neg-neg-ℝ y)) ∘
+        ( neg-neighborhood-ℝ
+          ( d)
+          ( neg-ℝ x)
+          ( neg-ℝ y)))
 
   isometry-neg-ℝ :
     isometry-Metric-Space
-      ( metric-space-leq-ℝ l1)
-      ( metric-space-leq-ℝ l1)
+      ( metric-space-ℝ l1)
+      ( metric-space-ℝ l1)
   isometry-neg-ℝ = (neg-ℝ , is-isometry-neg-ℝ)
 ```

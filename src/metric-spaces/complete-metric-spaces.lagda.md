@@ -9,6 +9,7 @@ module metric-spaces.complete-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -85,6 +87,11 @@ module _
   is-complete-metric-space-Complete-Metric-Space :
     is-complete-Metric-Space metric-space-Complete-Metric-Space
   is-complete-metric-space-Complete-Metric-Space = pr2 A
+
+  neighborhood-Complete-Metric-Space :
+    ℚ⁺ → Relation l2 type-Complete-Metric-Space
+  neighborhood-Complete-Metric-Space =
+    neighborhood-Metric-Space metric-space-Complete-Metric-Space
 ```
 
 ### The equivalence between Cauchy approximations and convergent Cauchy approximations in a complete metric space
@@ -163,6 +170,32 @@ module _
     is-limit-limit-convergent-cauchy-approximation-Metric-Space
       ( metric-space-Complete-Metric-Space A)
       ( convergent-cauchy-approximation-Complete-Metric-Space A u)
+```
+
+### Saturation of the limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
+  (f : cauchy-approximation-Metric-Space (metric-space-Complete-Metric-Space A))
+  where
+
+  abstract
+    saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space :
+      (ε : ℚ⁺) →
+      neighborhood-Complete-Metric-Space A
+        ( ε)
+        ( map-cauchy-approximation-Metric-Space
+          ( metric-space-Complete-Metric-Space A)
+          ( f)
+          ( ε))
+        ( limit-cauchy-approximation-Complete-Metric-Space A f)
+    saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space =
+      saturated-is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A)
+        ( f)
+        ( limit-cauchy-approximation-Complete-Metric-Space A f)
+        ( is-limit-limit-cauchy-approximation-Complete-Metric-Space A f)
 ```
 
 ## External links

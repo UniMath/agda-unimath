@@ -9,13 +9,12 @@ module metric-spaces.convergent-sequences-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.sequences
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.limits-of-sequences-metric-spaces
-open import metric-spaces.limits-of-sequences-premetric-spaces
-open import metric-spaces.limits-of-sequences-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
@@ -102,9 +101,9 @@ module _
   has-limit-seq-short-map-convergent-sequence-Metric-Space =
     ( map-short-function-Metric-Space A B f
       ( limit-convergent-sequence-Metric-Space A u)) ,
-    ( short-map-limit-sequence-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( premetric-Metric-Space B)
+    ( short-map-limit-sequence-Metric-Space
+      ( A)
+      ( B)
       ( f)
       ( seq-convergent-sequence-Metric-Space A u)
       ( limit-convergent-sequence-Metric-Space A u)

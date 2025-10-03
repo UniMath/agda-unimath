@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: ['2.7.0']
+        agda: ['2.8.0']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -34,12 +34,12 @@ jobs:
       - name: Checkout our repository
         uses: actions/checkout@v4
         with:
-          path: master
+          path: repo
           # We need the entire history for contributor information
           fetch-depth: 0
 
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./repo/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 
@@ -47,10 +47,10 @@ jobs:
         id: cache-agda-formalization
         name: Restore Agda formalization cache
         with:
-          path: master/_build
+          path: repo/_build
           key:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('master/src/**') }}
+            hashFiles('repo/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
@@ -93,13 +93,13 @@ jobs:
           check-latest: true
           cache: 'pip'
 
-      - run: python3 -m pip install -r master/scripts/requirements.txt
+      - run: python3 -m pip install -r repo/scripts/requirements.txt
 
       - name: Generate book
         env:
           MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE: 'true'
         run: |
-          cd master
+          cd repo
           make website
 
       - name: Setup Pages
@@ -114,7 +114,7 @@ jobs:
           github.ref == 'refs/heads/master' || github.event_name ==
           'workflow_dispatch'
         with:
-          path: master/book/html
+          path: repo/book/html
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

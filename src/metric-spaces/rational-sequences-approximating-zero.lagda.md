@@ -32,14 +32,15 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-premetric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
@@ -52,7 +53,7 @@ open import metric-spaces.sequences-metric-spaces
 
 ## Idea
 
-A [sequence](foundation.sequences.md) of
+A [sequence](lists.sequences.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md) is an
 {{#concept "approximation of zero" Disambiguation="sequence of rational numbers" Agda=zero-limit-sequence-ℚ}}
 if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to 0 in
@@ -65,7 +66,7 @@ the
 is-zero-limit-prop-sequence-ℚ : sequence ℚ → Prop lzero
 is-zero-limit-prop-sequence-ℚ u =
   is-limit-prop-sequence-Metric-Space
-    metric-space-leq-ℚ
+    metric-space-ℚ
     u
     zero-ℚ
 
@@ -86,7 +87,7 @@ module _
 
   is-zero-limit-seq-zero-limit-sequence-ℚ :
     is-limit-sequence-Metric-Space
-      ( metric-space-leq-ℚ)
+      ( metric-space-ℚ)
       ( seq-zero-limit-sequence-ℚ)
       ( zero-ℚ)
   is-zero-limit-seq-zero-limit-sequence-ℚ = pr2 u
@@ -138,12 +139,12 @@ abstract
 
     is-zero-limit-modulus-reciprocal-rational-succ-ℕ :
       is-limit-modulus-sequence-Metric-Space
-        ( metric-space-leq-ℚ)
+        ( metric-space-ℚ)
         ( reciprocal-rational-succ-ℕ)
         ( zero-ℚ)
         ( modulus-reciprocal-rational-succ-ℕ)
     is-zero-limit-modulus-reciprocal-rational-succ-ℕ ε n H =
-      neighborhood-leq-leq-dist-ℚ
+      neighborhood-leq-dist-ℚ
         ( ε)
         ( reciprocal-rational-succ-ℕ n)
         ( zero-ℚ)
@@ -180,17 +181,17 @@ module _
     tr-is-modulus-leq-abs-zero-limit-sequence-ℚ :
       (m : ℚ⁺ → ℕ) →
       is-limit-modulus-sequence-Metric-Space
-        ( metric-space-leq-ℚ)
+        ( metric-space-ℚ)
         ( seq-zero-limit-sequence-ℚ v)
         ( zero-ℚ)
         ( m) →
       is-limit-modulus-sequence-Metric-Space
-        ( metric-space-leq-ℚ)
+        ( metric-space-ℚ)
         ( u)
         ( zero-ℚ)
         ( m)
     tr-is-modulus-leq-abs-zero-limit-sequence-ℚ m H ε n K =
-      neighborhood-leq-leq-dist-ℚ
+      neighborhood-leq-dist-ℚ
         ( ε)
         ( u n)
         ( zero-ℚ)

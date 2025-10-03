@@ -24,36 +24,39 @@ open import univalent-combinatorics.inhabited-finite-types
 
 ## Idea
 
-In classical mathematics, the Dirichlet series of a species of finite inhabited
-types `T` is the formal series in `s` :
+In classical mathematics, the _Dirichlet series_ of a
+[species of finite inhabited types](species.species-of-finite-inhabited-types.md)
+`T` is the formal series in `s`:
 
 ```text
-Σ (n : ℕ∖{0}) (|T({1,...,n}| n^(-s) / n!))
+  Σ (n : ℕ∖{0}) (|T({1,...,n})| n^(-s) / n!).
 ```
 
-If `s` is a negative integer, the categorified version of this formula is
+If `s` is a [negative integer](elementary-number-theory.negative-integers.md),
+the categorified version of this formula is
 
 ```text
-Σ (F : Finite-Type ∖ {∅}), T (F) × (S → F)
+  Σ (F : Finite-Type∖{∅}), T(F) × (S → F).
 ```
 
-We can generalize it to species of types as
+We can generalize it to [species of types](species.species-of-types.md) as
 
 ```text
-Σ (U : UU) (T (U) × (S → U))
+  Σ (X : UU) (T(X) × (S → X)).
 ```
 
 The interesting case is when `s` is a positive number. The categorified version
 of this formula then becomes
 
 ```text
-Σ ( n : ℕ ∖ {0}),
-  ( Σ (F : Type-With-Cardinality-ℕ n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
+  Σ ( n : ℕ∖{0}),
+    ( Σ ( F : Type-With-Cardinality-ℕ n) ,
+        ( T(F) × (S → cycle-prime-decomposition-ℕ n)).
 ```
 
-We have picked the concrete group `cycle-prime-decomposition-ℕ (n)` because it
-is closed under cartesian product and also because its groupoid cardinality is
-equal to `1/n`.
+We have picked the [concrete group](group-theory.concrete-groups.md)
+`cycle-prime-decomposition-ℕ n` because it is closed under cartesian product and
+also because its groupoid cardinality is `1/n`.
 
 ## Definition
 
@@ -66,11 +69,11 @@ dirichlet-series-species-Inhabited-Finite-Type {l1} T S =
     ( λ n →
       Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ n))
         ( λ F →
-          type-Finite-Type
+          ( type-Finite-Type
             ( T
               ( type-Type-With-Cardinality-ℕ (succ-ℕ n) F ,
                 is-finite-and-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ
                   n
-                  F)) ×
-          S → cycle-prime-decomposition-ℕ (succ-ℕ n) _))
+                  F))) ×
+          ( S → cycle-prime-decomposition-ℕ (succ-ℕ n) _)))
 ```
