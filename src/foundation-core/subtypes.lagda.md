@@ -226,7 +226,7 @@ module _
   pr1 (trunc-map-into-subtype f p) x = (map-trunc-map f x , p x)
   pr2 (trunc-map-into-subtype f p) =
     is-trunc-map-into-subtype
-      ( is-trunc-trunc-map f)
+      ( is-trunc-map-trunc-map f)
       ( p)
 ```
 
