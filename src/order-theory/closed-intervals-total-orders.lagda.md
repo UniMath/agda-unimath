@@ -305,8 +305,8 @@ module _
         minac≤x =
           tr
             ( λ y → leq-Total-Order X y x)
-            ( left-leq-right-min-Total-Order X a b a≤b ∙
-              inv (left-leq-right-min-Total-Order X a c a≤c))
+            ( ( left-leq-right-min-Total-Order X a b a≤b) ∙
+              ( inv (left-leq-right-min-Total-Order X a c a≤c)))
             ( minab≤x)
       in
         eq-one-of-four-max-Total-Order X motive a b c d
@@ -508,17 +508,17 @@ module _
                 ( x)
                 ( tr
                     ( _≤ x)
-                    ( interchange-law-min-Total-Order X a b c d ∙
-                      ap-binary min
+                    ( ( interchange-law-min-Total-Order X a b c d) ∙
+                      ( ap-binary min
                         ( commutative-min _ _)
-                        ( commutative-min _ _))
+                        ( commutative-min _ _)))
                     ( min≤x) ,
                   tr
                     ( x ≤_)
-                    ( interchange-law-max-Total-Order X a b c d ∙
-                      ap-binary max
+                    ( ( interchange-law-max-Total-Order X a b c d) ∙
+                      ( ap-binary max
                         ( commutative-max _ _)
-                        ( commutative-max _ _))
+                        ( commutative-max _ _)))
                     ( x≤max))))
           ( λ min=d →
             elim-disjunction motive
@@ -550,18 +550,18 @@ module _
                 ( x)
                 ( tr
                     ( _≤ x)
-                    ( interchange-law-min-Total-Order X a b c d ∙
-                      ap-binary min
+                    ( ( interchange-law-min-Total-Order X a b c d) ∙
+                      ( ap-binary min
                         ( commutative-min _ _)
-                        ( commutative-min _ _) ∙
-                      commutative-min _ _)
+                        ( commutative-min _ _)) ∙
+                      ( commutative-min _ _))
                     ( min≤x) ,
                   tr
                     ( x ≤_)
-                    ( interchange-law-max-Total-Order X a b c d ∙
-                      ap-binary max
+                    ( ( interchange-law-max-Total-Order X a b c d) ∙
+                      ( ap-binary max
                         ( commutative-max _ _)
-                        ( commutative-max _ _) ∙
-                      commutative-max _ _)
+                        ( commutative-max _ _)) ∙
+                      ( commutative-max _ _))
                     ( x≤max))))
 ```
