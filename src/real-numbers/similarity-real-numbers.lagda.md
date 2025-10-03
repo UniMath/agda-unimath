@@ -52,9 +52,9 @@ opaque
 sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
 sim-prop-ℝ x y = (sim-ℝ x y , is-prop-sim-ℝ x y)
 
-infix 6 _~ℝ_
-_~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-_~ℝ_ = sim-ℝ
+infix 6 _≍ℝ_
+_≍ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
+_≍ℝ_ = sim-ℝ
 ```
 
 ## Properties
@@ -70,7 +70,7 @@ module _
     unfolding sim-ℝ
 
     sim-lower-cut-iff-sim-ℝ :
-      sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ (x ~ℝ y)
+      sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ↔ (x ≍ℝ y)
     sim-lower-cut-iff-sim-ℝ = id-iff
 ```
 
@@ -84,14 +84,14 @@ module _
   opaque
     unfolding sim-ℝ
 
-    sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ~ℝ y)
+    sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ≍ℝ y)
     sim-sim-upper-cut-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
 
-    sim-upper-cut-sim-ℝ : (x ~ℝ y) → sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
+    sim-upper-cut-sim-ℝ : (x ≍ℝ y) → sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
     sim-upper-cut-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
 
   sim-upper-cut-iff-sim-ℝ :
-    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ~ℝ y)
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ≍ℝ y)
   sim-upper-cut-iff-sim-ℝ = (sim-sim-upper-cut-ℝ , sim-upper-cut-sim-ℝ)
 ```
 
@@ -101,10 +101,10 @@ module _
 opaque
   unfolding sim-ℝ
 
-  refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ~ℝ x
+  refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ≍ℝ x
   refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
 
-  sim-eq-ℝ : {l : Level} → {x y : ℝ l} → x ＝ y → x ~ℝ y
+  sim-eq-ℝ : {l : Level} → {x y : ℝ l} → x ＝ y → x ≍ℝ y
   sim-eq-ℝ {_} {x} {y} x=y = tr (sim-ℝ x) x=y (refl-sim-ℝ x)
 ```
 
@@ -115,7 +115,7 @@ opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
-    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
+    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ≍ℝ y → y ≍ℝ x
   symmetric-sim-ℝ {x = x} {y = y} =
     symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 ```
@@ -129,7 +129,7 @@ opaque
   transitive-sim-ℝ :
     {l1 l2 l3 : Level} →
     (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
-    y ~ℝ z → x ~ℝ y → x ~ℝ z
+    y ≍ℝ z → x ≍ℝ y → x ≍ℝ z
   transitive-sim-ℝ x y z =
     transitive-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
@@ -140,7 +140,7 @@ opaque
 opaque
   unfolding sim-ℝ
 
-  eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
+  eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ≍ℝ y → x ＝ y
   eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
 ```
 
@@ -151,8 +151,8 @@ the following way:
 
 ```text
 similarity-reasoning-ℝ
-  x ~ℝ y by sim-1
-    ~ℝ z by sim-2
+  x ≍ℝ y by sim-1
+    ≍ℝ z by sim-2
 ```
 
 ```agda
@@ -171,5 +171,5 @@ opaque
     sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
   step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
 
-  syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q
+  syntax step-similarity-reasoning-ℝ p u q = p ≍ℝ u by q
 ```

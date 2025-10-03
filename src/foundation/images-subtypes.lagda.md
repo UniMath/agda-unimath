@@ -256,7 +256,7 @@ module _
 **Proof:** The asserted similarity follows at once from the similarity
 
 ```text
-  pullback-subtype (g ∘ f) ≈ pullback-subtype g ∘ pullback-subtype f
+  pullback-subtype (g ∘ f) ≍ pullback-subtype g ∘ pullback-subtype f
 ```
 
 via the image-pullback Galois connection.

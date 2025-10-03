@@ -218,8 +218,8 @@ abstract
       ( preserves-sim-abs-ℝ
         ( similarity-reasoning-ℝ
           x -ℝ y +ℝ y -ℝ z
-          ~ℝ (x -ℝ y +ℝ y) -ℝ z by sim-eq-ℝ (inv (associative-add-ℝ _ _ _))
-          ~ℝ x -ℝ z by
+          ≍ℝ (x -ℝ y +ℝ y) -ℝ z by sim-eq-ℝ (inv (associative-add-ℝ _ _ _))
+          ≍ℝ x -ℝ z by
             preserves-sim-right-add-ℝ
               ( neg-ℝ z)
               ( x -ℝ y +ℝ y)

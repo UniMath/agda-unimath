@@ -454,8 +454,8 @@ module _
 ### A homotopy between lower adjoints of a Galois connection induces a homotopy between upper adjoints, and vice versa
 
 **Proof:** Consider two Galois connections `LG ⊣ UG` and `LH ⊣ UH` between `P`
-and `Q`, and suppose that `LG ~ LH`. Then there is a similarity `LG ≈ LH`, and
-this induces a similarity `UG ≈ UH`. In other words, we obtain that
+and `Q`, and suppose that `LG ~ LH`. Then there is a similarity `LG ≍ LH`, and
+this induces a similarity `UG ≍ UH`. In other words, we obtain that
 
 ```text
   UG y ~ UH y
