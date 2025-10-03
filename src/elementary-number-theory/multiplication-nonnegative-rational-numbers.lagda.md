@@ -28,7 +28,9 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "product" Disambiguation="of pairs of nonnegative rational numbers" Agda=mul-ℚ⁰⁺}} of two
+The
+{{#concept "product" Disambiguation="of pairs of nonnegative rational numbers" Agda=mul-ℚ⁰⁺}}
+of two
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is their [product](elementary-number-theory.multiplication-rational-numbers.md)
 as [rational numbers](elementary-number-theory.rational-numbers.md), and is
