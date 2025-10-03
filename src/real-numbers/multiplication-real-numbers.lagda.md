@@ -591,5 +591,11 @@ opaque
 abstract
   commutative-mul-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ y ＝ y *ℝ x
   commutative-mul-ℝ x y =
-    {! antisymmetric-leq-ℝ _ _ ? ?   !}
+    antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
+```
+
+### Associativity
+
+```agda
+
 ```
