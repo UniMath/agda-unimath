@@ -12,6 +12,7 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.absolute-value-closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
@@ -1420,4 +1421,237 @@ abstract
         ( c<c'≤d'<d)
         ( a'<b')
         ( c'<d'))
+```
+
+### Bounds on the width of the product of intervals
+
+We can bound the width of the interval $[a,b] ∙ [c,d]$:
+
+$$
+\max(a · c, a · d, b · c, b · d) - \min(a · c, a · d, b · c, b · d) ≤
+  (b - a) ·
+  \max(\left\lvert c\right\rvert , \left\lvert d\right\rvert ) +
+  (d - c) · \max(\left\lvert a\right\rvert , \left\lvert b\right\rvert )
+$$
+
+```agda
+abstract
+  bound-width-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    leq-ℚ
+      ( width-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]))
+      ( ( width-closed-interval-ℚ [a,b] *ℚ rational-max-abs-closed-interval-ℚ [c,d]) +ℚ
+        ( width-closed-interval-ℚ [c,d] *ℚ rational-max-abs-closed-interval-ℚ [a,b]))
+  bound-width-mul-closed-interval-ℚ [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) =
+    let
+      open inequality-reasoning-Poset ℚ-Poset
+      <b-a><max|c||d|>⁰⁺ =
+        mul-ℚ⁰⁺
+          ( nonnegative-diff-leq-ℚ a b a≤b)
+          ( max-ℚ⁰⁺ (abs-ℚ c) (abs-ℚ d))
+      <b-a><max|c||d|> = rational-ℚ⁰⁺ <b-a><max|c||d|>⁰⁺
+      <d-c><max|a||b|>⁰⁺ =
+        mul-ℚ⁰⁺
+          ( nonnegative-diff-leq-ℚ c d c≤d)
+          ( max-ℚ⁰⁺ (abs-ℚ a) (abs-ℚ b))
+      <d-c><max|a||b|> = rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺
+      under-bound : ℚ → UU lzero
+      under-bound q = leq-ℚ q (<b-a><max|c||d|> +ℚ <d-c><max|a||b|>)
+      |aq-bq|≤<b-a>max|c||d| :
+        (q : ℚ) → is-in-closed-interval-ℚ [c,d] q →
+        leq-ℚ (rational-dist-ℚ (a *ℚ q) (b *ℚ q)) <b-a><max|c||d|>
+      |aq-bq|≤<b-a>max|c||d| q q∈[c,d] =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ q) (b *ℚ q)
+          ≤ rational-dist-ℚ a b *ℚ rational-abs-ℚ q
+            by
+              leq-eq-ℚ _ _
+                ( ap
+                  ( rational-abs-ℚ)
+                  ( inv (right-distributive-mul-diff-ℚ _ _ _)) ∙
+                  rational-abs-mul-ℚ _ _)
+          ≤ rational-dist-ℚ a b *ℚ rational-max-abs-closed-interval-ℚ [c,d]
+            by
+              preserves-leq-left-mul-ℚ⁰⁺
+                ( dist-ℚ a b)
+                ( _)
+                ( _)
+                ( leq-max-abs-is-in-closed-interval-ℚ [c,d] q q∈[c,d])
+          ≤ width-closed-interval-ℚ [a,b] *ℚ rational-max-abs-closed-interval-ℚ [c,d]
+            by
+              leq-eq-ℚ _ _
+                ( ap-mul-ℚ
+                  ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [a,b])
+                  ( refl))
+      |pc-pd|≤<d-c>max|a||b| :
+        (p : ℚ) → is-in-closed-interval-ℚ [a,b] p →
+        leq-ℚ (rational-dist-ℚ (p *ℚ c) (p *ℚ d)) <d-c><max|a||b|>
+      |pc-pd|≤<d-c>max|a||b| p p∈[a,b] =
+        chain-of-inequalities
+          rational-dist-ℚ (p *ℚ c) (p *ℚ d)
+          ≤ rational-dist-ℚ c d *ℚ rational-abs-ℚ p
+            by
+              leq-eq-ℚ _ _
+                ( ap
+                  ( rational-abs-ℚ)
+                  ( inv (left-distributive-mul-diff-ℚ _ _ _)) ∙
+                  rational-abs-mul-ℚ _ _ ∙
+                  commutative-mul-ℚ _ _)
+          ≤ rational-dist-ℚ c d *ℚ rational-max-abs-closed-interval-ℚ [a,b]
+            by
+              preserves-leq-left-mul-ℚ⁰⁺
+                ( dist-ℚ c d)
+                ( _)
+                ( _)
+                ( leq-max-abs-is-in-closed-interval-ℚ [a,b] p p∈[a,b])
+          ≤ _
+            by
+              leq-eq-ℚ _ _
+                ( ap-mul-ℚ
+                  ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [c,d])
+                  ( refl))
+      |ac-bc|≤<b-a>max|c||d| =
+        |aq-bq|≤<b-a>max|c||d| c (lower-bound-is-in-closed-interval-ℚ [c,d])
+      |ad-bd|≤<b-a>max|c||d| =
+        |aq-bq|≤<b-a>max|c||d| d (upper-bound-is-in-closed-interval-ℚ [c,d])
+      |ac-ad|≤<d-c>max|a||b| =
+        |pc-pd|≤<d-c>max|a||b| a (lower-bound-is-in-closed-interval-ℚ [a,b])
+      |bc-bd|≤<d-c>max|a||b| =
+        |pc-pd|≤<d-c>max|a||b| b (upper-bound-is-in-closed-interval-ℚ [a,b])
+      under-bound-|ac-bd| =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ c) (b *ℚ d)
+          ≤ rational-abs-ℚ ((a *ℚ c -ℚ b *ℚ c) +ℚ (b *ℚ c -ℚ b *ℚ d))
+            by
+              leq-eq-ℚ _ _
+                ( ap
+                  ( rational-abs-ℚ)
+                  ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
+          ≤ _ +ℚ _
+            by triangle-inequality-abs-ℚ _ _
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by preserves-leq-add-ℚ |ac-bc|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
+      under-bound-|ad-bc| =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ d) (b *ℚ c)
+          ≤ rational-abs-ℚ ((a *ℚ d -ℚ b *ℚ d) +ℚ (b *ℚ d -ℚ b *ℚ c))
+            by
+              leq-eq-ℚ _ _
+                ( ap
+                  ( rational-abs-ℚ)
+                  ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
+          ≤ rational-dist-ℚ (a *ℚ d) (b *ℚ d) +ℚ
+            rational-dist-ℚ (b *ℚ d) (b *ℚ c)
+            by triangle-inequality-abs-ℚ _ _
+          ≤ rational-dist-ℚ (a *ℚ d) (b *ℚ d) +ℚ
+            rational-dist-ℚ (b *ℚ c) (b *ℚ d)
+            by
+              leq-eq-ℚ _ _
+                ( ap-add-ℚ refl (ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _)))
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by preserves-leq-add-ℚ |ad-bd|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
+      under-bound-|ac-bc| =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ c) (b *ℚ c)
+          ≤ <b-a><max|c||d|>
+            by |ac-bc|≤<b-a>max|c||d|
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by is-inflationary-map-right-add-rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺ _
+      under-bound-|ad-bd| =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ d) (b *ℚ d)
+          ≤ <b-a><max|c||d|>
+            by |ad-bd|≤<b-a>max|c||d|
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by is-inflationary-map-right-add-rational-ℚ⁰⁺ <d-c><max|a||b|>⁰⁺ _
+      under-bound-|ac-ad| =
+        chain-of-inequalities
+          rational-dist-ℚ (a *ℚ c) (a *ℚ d)
+          ≤ <d-c><max|a||b|>
+            by |ac-ad|≤<d-c>max|a||b|
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by is-inflationary-map-left-add-rational-ℚ⁰⁺ <b-a><max|c||d|>⁰⁺ _
+      under-bound-|bc-bd| =
+        chain-of-inequalities
+          rational-dist-ℚ (b *ℚ c) (b *ℚ d)
+          ≤ <d-c><max|a||b|>
+            by |bc-bd|≤<d-c>max|a||b|
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by is-inflationary-map-left-add-rational-ℚ⁰⁺ <b-a><max|c||d|>⁰⁺ _
+      under-bound-|q-q| q =
+        chain-of-inequalities
+          rational-dist-ℚ q q
+          ≤ zero-ℚ
+            by leq-eq-ℚ _ _ (rational-dist-self-ℚ q)
+          ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
+            by
+              leq-zero-rational-ℚ⁰⁺ (<b-a><max|c||d|>⁰⁺ +ℚ⁰⁺ <d-c><max|a||b|>⁰⁺)
+      [a,b][c,d]@((min , max) , _) = mul-closed-interval-ℚ [a,b] [c,d]
+      case-1 :
+        {p q : ℚ} → (min ＝ p) → under-bound (rational-dist-ℚ p q) →
+        (max ＝ q) → under-bound (width-closed-interval-ℚ [a,b][c,d])
+      case-1 min=p bound-|p-q| max=q =
+        tr
+          ( under-bound)
+          ( ap-binary rational-dist-ℚ (inv min=p) (inv max=q) ∙
+            eq-width-dist-lower-upper-bounds-closed-interval-ℚ [a,b][c,d])
+          ( bound-|p-q|)
+      case-2 :
+        {p q : ℚ} → (min ＝ p) → under-bound (rational-dist-ℚ q p) →
+        (max ＝ q) → under-bound (width-closed-interval-ℚ [a,b][c,d])
+      case-2 min=p bound-|q-p| =
+        case-1
+          ( min=p)
+          ( tr
+            ( under-bound)
+            ( ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _))
+            ( bound-|q-p|))
+      case-eq :
+        {p : ℚ} → (min ＝ p) → (max ＝ p) →
+        under-bound (width-closed-interval-ℚ [a,b][c,d])
+      case-eq min=p = case-1 min=p (under-bound-|q-q| _)
+      motive =
+        leq-ℚ-Prop
+          ( width-closed-interval-ℚ [a,b][c,d])
+          ( <b-a><max|c||d|> +ℚ <d-c><max|a||b|>)
+      case-max =
+        eq-one-of-four-max-Total-Order
+          ( ℚ-Total-Order)
+          ( motive)
+          ( a *ℚ c)
+          ( a *ℚ d)
+          ( b *ℚ c)
+          ( b *ℚ d)
+    in
+      eq-one-of-four-min-Total-Order
+        ( ℚ-Total-Order)
+        ( motive)
+        ( a *ℚ c)
+        ( a *ℚ d)
+        ( b *ℚ c)
+        ( b *ℚ d)
+        ( λ min=ac →
+          case-max
+            ( case-eq min=ac)
+            ( case-1 min=ac under-bound-|ac-ad|)
+            ( case-1 min=ac under-bound-|ac-bc|)
+            ( case-1 min=ac under-bound-|ac-bd|))
+        ( λ min=ad →
+          case-max
+            ( case-2 min=ad under-bound-|ac-ad|)
+            ( case-eq min=ad)
+            ( case-1 min=ad under-bound-|ad-bc|)
+            ( case-1 min=ad under-bound-|ad-bd|))
+        ( λ min=bc →
+          case-max
+            ( case-2 min=bc under-bound-|ac-bc|)
+            ( case-2 min=bc under-bound-|ad-bc|)
+            ( case-eq min=bc)
+            ( case-1 min=bc under-bound-|bc-bd|))
+        ( λ min=bd →
+          case-max
+            ( case-2 min=bd under-bound-|ac-bd|)
+            ( case-2 min=bd under-bound-|ad-bd|)
+            ( case-2 min=bd under-bound-|bc-bd|)
+            ( case-eq min=bd))
 ```

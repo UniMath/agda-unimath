@@ -13,3 +13,7 @@ module real-numbers.multiplication-real-numbers where
 </details>
 
 ## Idea
+
+We introduce
+{{#concept "multiplication" WDID=Q40276 WD="multiplication" disambiguation="on real numbers" Agda=mul-ℝ}}
+on the [Dedekind real numbers](real-numbers.dedekind-real-numbers.md).
