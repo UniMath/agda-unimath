@@ -9,6 +9,7 @@ module elementary-number-theory.negation-closed-intervals-rational-numbers where
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -52,7 +53,7 @@ abstract
 ```agda
 abstract
   is-nontrivial-neg-closed-interval-ℚ :
-    ([a,b] : closed-interval-ℚ) → is-nontrivial-closed-interval-ℚ [a,b] →
-    is-nontrivial-closed-interval-ℚ (neg-closed-interval-ℚ [a,b])
+    ([a,b] : closed-interval-ℚ) → is-proper-closed-interval-ℚ [a,b] →
+    is-proper-closed-interval-ℚ (neg-closed-interval-ℚ [a,b])
   is-nontrivial-neg-closed-interval-ℚ ((a , b) , _) a<b = neg-le-ℚ a b a<b
 ```
