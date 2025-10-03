@@ -617,4 +617,15 @@ opaque
         az≤bz = leq-lower-upper-cut-ℝ z az bz az<z z<bz
       is-in-lower-cut-le-real-ℚ q ((x *ℝ y) +ℝ (x *ℝ z))
         {!   !}
+
+  leq-left-distributive-mul-add-ℝ' :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ ((x *ℝ y) +ℝ (x *ℝ z)) (x *ℝ (y +ℝ z))
+  leq-left-distributive-mul-add-ℝ' x y z q q<xy+xz =
+    let open do-syntax-trunc-Prop (lower-cut-mul-ℝ x (y +ℝ z) q)
+    in do
+      ((qxy , qxz) , qxy<xy , qxz<xz , q=qxy+qxz) ← q<xy+xz
+      ((ax<x<bx , ay<y<by) , qxy<[ax,bx][ay,by]) ← qxy<xy
+      ((ax'<x<bx' , az<z<bz) , qxz<[ax',bx'][az,bz]) ← qxz<xz
+      {!   !}
 ```

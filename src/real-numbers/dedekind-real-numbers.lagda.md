@@ -10,11 +10,14 @@ module real-numbers.dedekind-real-numbers where
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
+open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.conjunction
@@ -592,6 +595,73 @@ module _
         intro-exists
           ( (a' , b') , leq-lower-upper-cut-ℝ x a' b' a'<x x<b')
           ( ( a'<x , x<b') , (a<a' , b'<b))
+```
+
+### Any two rational enclosing intervals around a real number intersect
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-in-lower-cut-max-ℚ :
+      (p q : ℚ) → is-in-lower-cut-ℝ x p → is-in-lower-cut-ℝ x q →
+      is-in-lower-cut-ℝ x (max-ℚ p q)
+    is-in-lower-cut-max-ℚ p q p<x q<x =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-lower-cut-ℝ x) (left-leq-right-max-ℚ p q p≤q) q<x)
+        ( λ q≤p →
+          inv-tr (is-in-lower-cut-ℝ x) (right-leq-left-max-ℚ p q q≤p) p<x)
+        ( linear-leq-ℚ p q)
+
+    is-in-upper-cut-min-ℚ :
+      (p q : ℚ) → is-in-upper-cut-ℝ x p → is-in-upper-cut-ℝ x q →
+      is-in-upper-cut-ℝ x (min-ℚ p q)
+    is-in-upper-cut-min-ℚ p q x<p x<q =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-upper-cut-ℝ x) (left-leq-right-min-ℚ p q p≤q) x<p)
+        ( λ q≤p →
+          inv-tr (is-in-upper-cut-ℝ x) (right-leq-left-min-ℚ p q q≤p) x<q)
+        ( linear-leq-ℚ p q)
+
+    intersect-enclosing-closed-rational-interval-ℝ :
+      ([a,b] [c,d] : closed-interval-ℚ) →
+      is-enclosing-closed-rational-interval-ℝ x [a,b] →
+      is-enclosing-closed-rational-interval-ℝ x [c,d] →
+      intersect-closed-interval-ℚ [a,b] [c,d]
+    intersect-enclosing-closed-rational-interval-ℝ
+      [a,b]@((a , b) , _)  [c,d]@((c , d) , _) (a<x , x<b) (c<x , x<d) =
+      ( leq-lower-upper-cut-ℝ x a d a<x x<d ,
+        leq-lower-upper-cut-ℝ x c b c<x x<b)
+
+    is-enclosing-intersection-enclosing-closed-rational-interval-ℝ :
+      ([a,b] [c,d] : closed-interval-ℚ) →
+      (H : is-enclosing-closed-rational-interval-ℝ x [a,b]) →
+      (K : is-enclosing-closed-rational-interval-ℝ x [c,d]) →
+      is-enclosing-closed-rational-interval-ℝ
+        ( x)
+        ( intersection-closed-interval-ℚ [a,b] [c,d]
+          ( intersect-enclosing-closed-rational-interval-ℝ [a,b] [c,d] H K))
+    is-enclosing-intersection-enclosing-closed-rational-interval-ℝ
+      ( (a , b) , _) ((c , d) , _) (a<x , x<b) (c<x , x<d) =
+      ( is-in-lower-cut-max-ℚ a c a<x c<x , is-in-upper-cut-min-ℚ b d x<b x<d)
+
+  intersection-type-enclosing-closed-rational-interval-ℝ :
+    type-enclosing-closed-rational-interval-ℝ x →
+    type-enclosing-closed-rational-interval-ℝ x →
+    type-enclosing-closed-rational-interval-ℝ x
+  intersection-type-enclosing-closed-rational-interval-ℝ
+    ( [a,b] , H) ([c,d] , K) =
+    ( intersection-closed-interval-ℚ [a,b] [c,d]
+        ( intersect-enclosing-closed-rational-interval-ℝ [a,b] [c,d] H K) ,
+      is-enclosing-intersection-enclosing-closed-rational-interval-ℝ
+        ( [a,b])
+        ( [c,d])
+        ( H)
+        ( K))
 ```
 
 ## References
