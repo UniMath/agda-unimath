@@ -52,4 +52,4 @@ module _
 
 ## See also
 
-- [Map-separated types at global subuniverses](orthogonal-factorization-systems.rel-separated-types-global-subuniverses.md)
+- [Relative separations of types at global subuniverses](orthogonal-factorization-systems.relative-separations-types-global-subuniverses.md)

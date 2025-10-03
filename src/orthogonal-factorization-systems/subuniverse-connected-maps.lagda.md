@@ -397,7 +397,6 @@ module _
               ( type-subuniverse-subuniverse-localization K (Kfib b)))
             ( eq-htpy H)))
 
-
   is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π :
     ( (b : B) →
       is-inhabited
@@ -446,7 +445,6 @@ module _
             ( eq-htpy H)))
       ( H ( type-subuniverse-subuniverse-localization K ∘ Kfib)
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl)))
-
 
   is-subuniverse-equiv-terminal-map-fibers-is-surjective-precomp-Π :
     ((U : B → type-subuniverse K) → is-surjective (precomp-Π f (pr1 ∘ U))) →
