@@ -17,6 +17,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
@@ -751,4 +752,19 @@ commutative-monoid-mul-closed-interval-ℚ : Commutative-Monoid lzero
 commutative-monoid-mul-closed-interval-ℚ =
   ( monoid-mul-closed-interval-ℚ ,
     commutative-mul-closed-interval-ℚ)
+```
+
+### Multiplication of closed intervals is subdistributive
+
+```agda
+abstract
+  left-subdistributive-mul-add-closed-interval-ℚ :
+    ([a,b] [c,d] [e,f] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
+      ( add-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( mul-closed-interval-ℚ [a,b] [e,f]))
+  left-subdistributive-mul-add-closed-interval-ℚ =
+    ?
 ```
