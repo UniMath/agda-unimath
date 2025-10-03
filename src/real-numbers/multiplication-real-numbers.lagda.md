@@ -10,12 +10,14 @@ module real-numbers.multiplication-real-numbers where
 
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-closed-intervals-rational-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
@@ -569,7 +571,7 @@ _*ℝ_ = mul-ℝ
 
 ## Properties
 
-### Commutativity
+### Commutativity of multiplication
 
 ```agda
 opaque
@@ -595,28 +597,77 @@ abstract
     antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
 ```
 
-### Distributivity
+### Distributivity of multiplication over addition
 
 ```agda
 opaque
-  unfolding leq-ℝ mul-ℝ add-ℝ
+  unfolding leq-ℝ leq-ℝ' mul-ℝ add-ℝ
 
   leq-left-distributive-mul-add-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     leq-ℝ (x *ℝ (y +ℝ z)) ((x *ℝ y) +ℝ (x *ℝ z))
-  leq-left-distributive-mul-add-ℝ x y z q q<x⟨y+z⟩ =
-    let
-      open do-syntax-trunc-Prop (lower-cut-ℝ ((x *ℝ y) +ℝ (x *ℝ z)) q)
-    in do
-      ( (ax<x<bx , ayz<y+z<byz@(((ayz , byz) , _) , ayz<y+z , y+z<byz)) ,
-        q<[ax,bx][ayz,byz]) ← q<x⟨y+z⟩
-      ((ay , az) , ay<y , az<z , ayz=ay+ax) ← ayz<y+z
-      ((by , bz) , y<by , z<bz , byz=by+bz) ← y+z<byz
-      let
-        ay≤by = leq-lower-upper-cut-ℝ y ay by ay<y y<by
-        az≤bz = leq-lower-upper-cut-ℝ z az bz az<z z<bz
-      is-in-lower-cut-le-real-ℚ q ((x *ℝ y) +ℝ (x *ℝ z))
-        {!   !}
+  leq-left-distributive-mul-add-ℝ x y z =
+    leq-leq'-ℝ (x *ℝ (y +ℝ z)) (x *ℝ y +ℝ x *ℝ z)
+      ( λ q xy+xz<q →
+        let open do-syntax-trunc-Prop (upper-cut-mul-ℝ x (y +ℝ z) q)
+        in do
+          ( (qxy , qxz) , xy<qxy , xz<qxz , q=qxy+qxz) ← xy+xz<q
+          ( ( ax<x<bx@([ax,bx] , x∈⟨ax,bx⟩) ,
+              ay<y<by@([ay,by]@((ay , by) , _) , ay<y , y<by)) ,
+            [ax,bx][ay,by]<qxy) ← xy<qxy
+          ( ( ax'<x<bx'@([ax',bx'] , x∈⟨ax',bx'⟩) ,
+              az<z<bz@([az,bz]@((az , bz) , _) , az<z , z<bz)) ,
+            [ax',bx'][az,bz]<qxz) ← xz<qxz
+          let
+            ax''<x<bx''@([ax'',bx''] , _) =
+              intersection-type-enclosing-closed-rational-interval-ℝ
+                ( x)
+                ( ax<x<bx)
+                ( ax'<x<bx')
+            [ax,bx]∩[ax',bx'] =
+              intersect-enclosing-closed-rational-interval-ℝ
+                ( x)
+                ( [ax,bx])
+                ( [ax',bx'])
+                ( x∈⟨ax,bx⟩)
+                ( x∈⟨ax',bx'⟩)
+          intro-exists
+            ( ax''<x<bx'' ,
+              ( add-closed-interval-ℚ [ay,by] [az,bz] ,
+                intro-exists (ay , az) (ay<y , az<z , refl) ,
+                intro-exists (by , bz) (y<by , z<bz , refl)))
+            ( concatenate-leq-le-ℚ _ _ _
+              ( pr2
+                ( left-subdistributive-mul-add-closed-interval-ℚ
+                  ( [ax'',bx''])
+                  ( [ay,by])
+                  ( [az,bz])))
+              ( inv-tr
+                ( le-ℚ _)
+                ( q=qxy+qxz)
+                ( preserves-le-add-ℚ
+                  ( concatenate-leq-le-ℚ _ _ _
+                    ( pr2
+                      ( preserves-leq-left-mul-closed-interval-ℚ
+                        ( [ay,by])
+                        ( [ax'',bx''])
+                        ( [ax,bx])
+                        ( leq-left-intersection-closed-interval-ℚ
+                          ( [ax,bx])
+                          ( [ax',bx'])
+                          ( [ax,bx]∩[ax',bx']))))
+                    ( [ax,bx][ay,by]<qxy))
+                  ( concatenate-leq-le-ℚ _ _ _
+                    ( pr2
+                      ( preserves-leq-left-mul-closed-interval-ℚ
+                        ( [az,bz])
+                        ( [ax'',bx''])
+                        ( [ax',bx'])
+                        ( leq-right-intersection-closed-interval-ℚ
+                          ( [ax,bx])
+                          ( [ax',bx'])
+                          ( [ax,bx]∩[ax',bx']))))
+                    ( [ax',bx'][az,bz]<qxz))))))
 
   leq-left-distributive-mul-add-ℝ' :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
@@ -624,8 +675,76 @@ opaque
   leq-left-distributive-mul-add-ℝ' x y z q q<xy+xz =
     let open do-syntax-trunc-Prop (lower-cut-mul-ℝ x (y +ℝ z) q)
     in do
-      ((qxy , qxz) , qxy<xy , qxz<xz , q=qxy+qxz) ← q<xy+xz
-      ((ax<x<bx , ay<y<by) , qxy<[ax,bx][ay,by]) ← qxy<xy
-      ((ax'<x<bx' , az<z<bz) , qxz<[ax',bx'][az,bz]) ← qxz<xz
-      {!   !}
+      ( (qxy , qxz) , qxy<xy , qxz<xz , q=qxy+qxz) ← q<xy+xz
+      ( ( ax<x<bx@([ax,bx] , x∈⟨ax,bx⟩) ,
+          ay<y<by@([ay,by]@((ay , by) , _) , ay<y , y<by)) ,
+        qxy<[ax,bx][ay,by]) ← qxy<xy
+      ( ( ax'<x<bx'@([ax',bx'] , x∈⟨ax',bx'⟩) ,
+          az<z<bz@([az,bz]@((az , bz) , _) , az<z , z<bz)) ,
+        qxz<[ax',bx'][az,bz]) ← qxz<xz
+      let
+        ax''<x<bx''@([ax'',bx''] , _) =
+          intersection-type-enclosing-closed-rational-interval-ℝ
+            ( x)
+            ( ax<x<bx)
+            ( ax'<x<bx')
+        [ax,bx]∩[ax',bx'] =
+          intersect-enclosing-closed-rational-interval-ℝ
+            ( x)
+            ( [ax,bx])
+            ( [ax',bx'])
+            ( x∈⟨ax,bx⟩)
+            ( x∈⟨ax',bx'⟩)
+      intro-exists
+        ( ax''<x<bx'' ,
+          ( add-closed-interval-ℚ [ay,by] [az,bz] ,
+            intro-exists (ay , az) (ay<y , az<z , refl) ,
+            intro-exists (by , bz) (y<by , z<bz , refl)))
+        ( concatenate-le-leq-ℚ
+          ( q)
+          ( lower-bound-mul-closed-interval-ℚ [ax'',bx''] [ay,by] +ℚ
+            lower-bound-mul-closed-interval-ℚ [ax'',bx''] [az,bz])
+          ( lower-bound-mul-closed-interval-ℚ
+            ( [ax'',bx''])
+            ( add-closed-interval-ℚ [ay,by] [az,bz]))
+          ( inv-tr
+              ( λ p → le-ℚ p _)
+              ( q=qxy+qxz)
+              ( preserves-le-add-ℚ
+                ( concatenate-le-leq-ℚ _ _ _
+                  ( qxy<[ax,bx][ay,by])
+                  ( pr1
+                    ( preserves-leq-left-mul-closed-interval-ℚ
+                      ( [ay,by])
+                      ( [ax'',bx''])
+                      ( [ax,bx])
+                      ( leq-left-intersection-closed-interval-ℚ
+                        ( [ax,bx])
+                        ( [ax',bx'])
+                        ( [ax,bx]∩[ax',bx'])))))
+                ( concatenate-le-leq-ℚ _ _ _
+                  ( qxz<[ax',bx'][az,bz])
+                  ( pr1
+                    ( preserves-leq-left-mul-closed-interval-ℚ
+                      ( [az,bz])
+                      ( [ax'',bx''])
+                      ( [ax',bx'])
+                      ( leq-right-intersection-closed-interval-ℚ
+                        ( [ax,bx])
+                        ( [ax',bx'])
+                        ( [ax,bx]∩[ax',bx'])))))))
+          ( pr1
+            ( left-subdistributive-mul-add-closed-interval-ℚ
+              ( [ax'',bx''])
+              ( [ay,by])
+              ( [az,bz]))))
+
+abstract
+  left-distributive-mul-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    x *ℝ (y +ℝ z) ＝ x *ℝ y +ℝ x *ℝ z
+  left-distributive-mul-add-ℝ x y z =
+    antisymmetric-leq-ℝ _ _
+      ( leq-left-distributive-mul-add-ℝ x y z)
+      ( leq-left-distributive-mul-add-ℝ' x y z)
 ```

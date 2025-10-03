@@ -11,13 +11,13 @@ open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import elementary-number-theory.maximum-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.conjunction
@@ -633,7 +633,7 @@ module _
       is-enclosing-closed-rational-interval-ℝ x [c,d] →
       intersect-closed-interval-ℚ [a,b] [c,d]
     intersect-enclosing-closed-rational-interval-ℝ
-      [a,b]@((a , b) , _)  [c,d]@((c , d) , _) (a<x , x<b) (c<x , x<d) =
+      [a,b]@((a , b) , _) [c,d]@((c , d) , _) (a<x , x<b) (c<x , x<d) =
       ( leq-lower-upper-cut-ℝ x a d a<x x<d ,
         leq-lower-upper-cut-ℝ x c b c<x x<b)
 
