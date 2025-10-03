@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/generate_mdbook_summary.py book/src/SUMMARY.md
+# $ ./scripts/generate_mdbook_summary.py book/SUMMARY.md
 
 import argparse
 import sys
@@ -11,6 +11,7 @@ import subprocess
 STATUS_FLAG_GIT_ERROR = 1
 STATUS_FLAG_NO_TITLE = 2
 STATUS_FLAG_DUPLICATE_TITLE = 4
+STATUS_FAILED_OVERWRITE = 8
 
 entry_template = '- [{title}]({mdfile})'
 
@@ -148,7 +149,20 @@ if __name__ == '__main__':
             literature_index=literature_index,
             module_index=module_index
         )
-        with open(summary_path, 'w') as summary_file:
-            summary_file.write(summary_contents)
-        print(f'Wrote mdbook summary content to {summary_path}.')
+        summary_file_path = pathlib.Path(summary_path)
+        try:
+            if summary_file_path.exists():
+                existing = summary_file_path.read_text()
+                if existing == summary_contents:
+                    print(f'No changes to {summary_file_path}.')
+                else:
+                    summary_file_path.write_text(summary_contents)
+                    print(f'Updated mdbook summary content at {summary_file_path}.')
+            else:
+                summary_file_path.parent.mkdir(parents=True, exist_ok=True)
+                summary_file_path.write_text(summary_contents)
+                print(f'Wrote mdbook summary content to {summary_file_path}.')
+        except Exception as e:
+            utils.eprint(f'Failed to write summary file {summary_file_path}: {e}')
+            status |= STATUS_FAILED_OVERWRITE
     sys.exit(status)
