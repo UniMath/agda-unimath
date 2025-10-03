@@ -193,6 +193,11 @@ module _
     is-nonnegative-iff-leq-zero-ℚ =
       ( leq-zero-is-nonnegative-ℚ ,
         is-nonnegative-leq-zero-ℚ)
+
+abstract
+  leq-zero-rational-ℚ⁰⁺ : (p : ℚ⁰⁺) → leq-ℚ zero-ℚ (rational-ℚ⁰⁺ p)
+  leq-zero-rational-ℚ⁰⁺ (p , is-nonneg-p) =
+    leq-zero-is-nonnegative-ℚ p is-nonneg-p
 ```
 
 ### The successor of a nonnegative rational number is positive

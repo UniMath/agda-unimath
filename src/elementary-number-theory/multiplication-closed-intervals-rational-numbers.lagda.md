@@ -7,14 +7,18 @@ module elementary-number-theory.multiplication-closed-intervals-rational-numbers
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-closed-intervals-rational-numbers
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-closed-intervals-rational-numbers
+open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
-open import elementary-number-theory.absolute-value-closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
@@ -56,12 +60,14 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
 open import order-theory.closed-intervals-total-orders
 open import order-theory.decidable-total-orders
+open import order-theory.posets
 open import order-theory.total-orders
 ```
 
@@ -1440,9 +1446,12 @@ abstract
     ([a,b] [c,d] : closed-interval-ℚ) →
     leq-ℚ
       ( width-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]))
-      ( ( width-closed-interval-ℚ [a,b] *ℚ rational-max-abs-closed-interval-ℚ [c,d]) +ℚ
-        ( width-closed-interval-ℚ [c,d] *ℚ rational-max-abs-closed-interval-ℚ [a,b]))
-  bound-width-mul-closed-interval-ℚ [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) =
+      ( ( width-closed-interval-ℚ [a,b] *ℚ
+          rational-max-abs-closed-interval-ℚ [c,d]) +ℚ
+        ( width-closed-interval-ℚ [c,d] *ℚ
+          rational-max-abs-closed-interval-ℚ [a,b]))
+  bound-width-mul-closed-interval-ℚ
+    [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) =
     let
       open inequality-reasoning-Poset ℚ-Poset
       <b-a><max|c||d|>⁰⁺ =
@@ -1477,7 +1486,8 @@ abstract
                 ( _)
                 ( _)
                 ( leq-max-abs-is-in-closed-interval-ℚ [c,d] q q∈[c,d])
-          ≤ width-closed-interval-ℚ [a,b] *ℚ rational-max-abs-closed-interval-ℚ [c,d]
+          ≤ width-closed-interval-ℚ [a,b] *ℚ
+            rational-max-abs-closed-interval-ℚ [c,d]
             by
               leq-eq-ℚ _ _
                 ( ap-mul-ℚ

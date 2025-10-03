@@ -11,9 +11,9 @@ module elementary-number-theory.archimedean-property-positive-rational-numbers w
 ```agda
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
-open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers

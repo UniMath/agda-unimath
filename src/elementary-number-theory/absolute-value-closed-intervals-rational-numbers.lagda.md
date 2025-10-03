@@ -9,10 +9,11 @@ module elementary-number-theory.absolute-value-closed-intervals-rational-numbers
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.binary-transport
