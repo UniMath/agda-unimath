@@ -10,12 +10,15 @@ module elementary-number-theory.distance-rational-numbers where
 
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers

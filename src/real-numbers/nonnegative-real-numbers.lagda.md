@@ -9,10 +9,12 @@ module real-numbers.nonnegative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
