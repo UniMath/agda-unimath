@@ -125,18 +125,18 @@ abstract
 ### For any family of equivalences `e` over `f`, if `f` is truncated then `map-𝕎 f e` is truncated
 
 ```agda
-is-trunc-map-map-𝕎 :
+is-trunc-map-𝕎 :
   {l1 l2 l3 l4 : Level} (k : 𝕋)
   {A : UU l1} {B : A → UU l2} {C : UU l3} (D : C → UU l4)
   (f : A → C) (e : (x : A) → B x ≃ D (f x)) →
   is-trunc-map k f → is-trunc-map k (map-𝕎 D f e)
-is-trunc-map-map-𝕎 k D f e H (tree-𝕎 c γ) =
+is-trunc-map-𝕎 k D f e H (tree-𝕎 c γ) =
   is-trunc-equiv k
     ( fiber-map-𝕎 D f e (tree-𝕎 c γ))
     ( equiv-fiber-map-𝕎 D f e (tree-𝕎 c γ))
     ( is-trunc-Σ
       ( H c)
-      ( λ t → is-trunc-Π k (λ d → is-trunc-map-map-𝕎 k D f e H (γ d))))
+      ( λ t → is-trunc-Π k (λ d → is-trunc-map-𝕎 k D f e H (γ d))))
 ```
 
 ### For any family of equivalences `e` over `f`, if `f` is an equivalence then `map-𝕎 f e` is an equivalence
@@ -148,7 +148,7 @@ is-equiv-map-𝕎 :
   is-equiv f → is-equiv (map-𝕎 D f e)
 is-equiv-map-𝕎 D f e H =
   is-equiv-is-contr-map
-    ( is-trunc-map-map-𝕎 neg-two-𝕋 D f e (is-contr-map-is-equiv H))
+    ( is-trunc-map-𝕎 neg-two-𝕋 D f e (is-contr-map-is-equiv H))
 
 equiv-𝕎 :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} (D : C → UU l4)
@@ -169,7 +169,7 @@ is-emb-map-𝕎 :
   is-emb f → is-emb (map-𝕎 D f e)
 is-emb-map-𝕎 D f e H =
   is-emb-is-prop-map
-    (is-trunc-map-map-𝕎 neg-one-𝕋 D f e (is-prop-map-is-emb H))
+    (is-trunc-map-𝕎 neg-one-𝕋 D f e (is-prop-map-is-emb H))
 
 emb-𝕎 :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} (D : C → UU l4)

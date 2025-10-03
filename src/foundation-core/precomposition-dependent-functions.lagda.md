@@ -50,7 +50,11 @@ module _
   {f g : A → B} (H : f ~ g) (C : B → UU l3) (h : (y : B) → C y)
   where
 
-  htpy-precomp-Π :
+  htpy-htpy-precomp-Π :
     dependent-homotopy (λ _ → C) H (precomp-Π f C h) (precomp-Π g C h)
-  htpy-precomp-Π x = apd h (H x)
+  htpy-htpy-precomp-Π x = apd h (H x)
+
+  htpy-htpy-precomp-Π' :
+    dependent-homotopy' (λ _ → C) H (precomp-Π f C h) (precomp-Π g C h)
+  htpy-htpy-precomp-Π' x = apd' h (H x)
 ```

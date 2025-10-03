@@ -181,37 +181,37 @@ module _
   where
 
   abstract
-    is-trunc-map-map-Σ-map-base :
+    is-trunc-map-Σ-map-base :
       (k : 𝕋) {f : A → B} (C : B → UU l3) →
       is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
-    is-trunc-map-map-Σ-map-base k {f} C H y =
+    is-trunc-map-Σ-map-base k {f} C H y =
       is-trunc-equiv' k
         ( fiber f (pr1 y))
         ( compute-fiber-map-Σ-map-base f C y)
         ( H (pr1 y))
 
   abstract
-    is-prop-map-map-Σ-map-base :
+    is-prop-map-Σ-map-base :
       {f : A → B} (C : B → UU l3) →
       is-prop-map f → is-prop-map (map-Σ-map-base f C)
-    is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
+    is-prop-map-Σ-map-base C = is-trunc-map-Σ-map-base neg-one-𝕋 C
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
 
   abstract
-    is-trunc-map-map-Σ :
+    is-trunc-map-Σ :
       (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
       is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
       is-trunc-map k (map-Σ D f g)
-    is-trunc-map-map-Σ k D {f} {g} H K =
+    is-trunc-map-Σ k D {f} {g} H K =
       is-trunc-map-left-map-triangle k
         ( map-Σ D f g)
         ( map-Σ-map-base f D)
         ( tot g)
         ( triangle-map-Σ D f g)
-        ( is-trunc-map-map-Σ-map-base k D H)
+        ( is-trunc-map-Σ-map-base k D H)
         ( is-trunc-map-tot k K)
 
   module _
@@ -219,16 +219,16 @@ module _
     where
 
     abstract
-      is-contr-map-map-Σ :
+      is-contr-map-Σ :
         is-contr-map f → ((x : A) → is-contr-map (g x)) →
         is-contr-map (map-Σ D f g)
-      is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
+      is-contr-map-Σ = is-trunc-map-Σ neg-two-𝕋 D
 
     abstract
-      is-prop-map-map-Σ :
+      is-prop-map-Σ :
         is-prop-map f → ((x : A) → is-prop-map (g x)) →
         is-prop-map (map-Σ D f g)
-      is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
+      is-prop-map-Σ = is-trunc-map-Σ neg-one-𝕋 D
 ```
 
 ### Commuting squares of maps on total spaces

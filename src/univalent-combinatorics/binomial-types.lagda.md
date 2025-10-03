@@ -97,7 +97,7 @@ module _
     is-emb-map-emb-binomial-type-Level :
       is-emb map-decidable-emb-binomial-type-Level
     is-emb-map-emb-binomial-type-Level =
-      is-emb-map-decidable-emb decidable-emb-binomial-type-Level
+      is-emb-decidable-emb decidable-emb-binomial-type-Level
 ```
 
 ### The standard binomial types
@@ -127,7 +127,7 @@ module _
   abstract
     is-emb-map-emb-binomial-type : is-emb map-decidable-emb-binomial-type
     is-emb-map-emb-binomial-type =
-      is-emb-map-decidable-emb decidable-emb-binomial-type
+      is-emb-decidable-emb decidable-emb-binomial-type
 ```
 
 ### The type of decidable subtypes of `A` such that the total space is merely equivalent to a given finite type

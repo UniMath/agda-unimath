@@ -43,9 +43,9 @@ module _
   map-0-map : {A : UU l1} {B : UU l2} → 0-map A B → A → B
   map-0-map = pr1
 
-  is-0-map-map-0-map :
+  is-0-map-0-map :
     {A : UU l1} {B : UU l2} (f : 0-map A B) → is-0-map (map-0-map f)
-  is-0-map-map-0-map = pr2
+  is-0-map-0-map = pr2
 ```
 
 ## Properties
@@ -140,8 +140,8 @@ module _
   where
 
   abstract
-    is-0-map-map-Σ-map-base : is-0-map f → is-0-map (map-Σ-map-base f C)
-    is-0-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base zero-𝕋 C
+    is-0-map-Σ-map-base : is-0-map f → is-0-map (map-Σ-map-base f C)
+    is-0-map-Σ-map-base = is-trunc-map-Σ-map-base zero-𝕋 C
 ```
 
 ### The functorial action of `Σ` preserves `0`-maps
@@ -152,7 +152,7 @@ module _
   (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
   where
 
-  is-0-map-map-Σ :
+  is-0-map-Σ :
     is-0-map f → ((x : A) → is-0-map (g x)) → is-0-map (map-Σ D f g)
-  is-0-map-map-Σ = is-trunc-map-map-Σ zero-𝕋 D
+  is-0-map-Σ = is-trunc-map-Σ zero-𝕋 D
 ```

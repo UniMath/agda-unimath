@@ -28,11 +28,11 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  is-map-separated-family : (X → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  is-map-separated-family A = (x : X) (y z : A x) → is-local f (y ＝ z)
+  is-rel-separated-family : (X → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  is-rel-separated-family A = (x : X) (y z : A x) → is-local f (y ＝ z)
 
-  is-map-separated : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
-  is-map-separated A = is-map-separated-family (λ _ → A)
+  is-rel-separated : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
+  is-rel-separated A = is-rel-separated-family (λ _ → A)
 ```
 
 ## References
