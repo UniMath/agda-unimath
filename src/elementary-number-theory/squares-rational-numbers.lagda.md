@@ -11,6 +11,7 @@ module elementary-number-theory.squares-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
@@ -57,7 +58,7 @@ is-nonnegative-square-ℚ a =
       is-nonnegative-is-positive-ℚ
         ( a *ℚ a)
         ( is-positive-mul-negative-ℚ {a} {a} H H))
-    ( λ H → is-nonnegative-mul-nonnegative-ℚ {a} {a} H H)
+    ( λ H → is-nonnegative-mul-ℚ a a H H)
     ( decide-is-negative-is-nonnegative-ℚ a)
 ```
 
