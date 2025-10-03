@@ -7,6 +7,7 @@ module real-numbers.dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -28,6 +29,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
@@ -188,6 +190,18 @@ module _
 
   is-in-cut-ℝ : ℚ → UU l
   is-in-cut-ℝ = is-in-subtype cut-ℝ
+
+  enclosing-closed-rational-interval-ℝ : subtype l closed-interval-ℚ
+  enclosing-closed-rational-interval-ℝ ((p , q) , _) =
+    lower-cut-ℝ p ∧ upper-cut-ℝ q
+
+  is-enclosing-closed-rational-interval-ℝ : closed-interval-ℚ → UU l
+  is-enclosing-closed-rational-interval-ℝ [p,q] =
+    type-Prop (enclosing-closed-rational-interval-ℝ [p,q])
+
+  type-enclosing-closed-rational-interval-ℝ : UU l
+  type-enclosing-closed-rational-interval-ℝ =
+    type-subtype enclosing-closed-rational-interval-ℝ
 ```
 
 ## Properties
@@ -253,18 +267,25 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ)
   where
 
-  le-lower-upper-cut-ℝ :
-    is-in-lower-cut-ℝ x p →
-    is-in-upper-cut-ℝ x q →
-    le-ℚ p q
-  le-lower-upper-cut-ℝ H H' =
-    rec-coproduct
-      ( id)
-      ( λ I →
-        ex-falso
-          ( is-disjoint-cut-ℝ x p
-              ( H , leq-upper-cut-ℝ x q p I H')))
-      ( decide-le-leq-ℚ p q)
+  abstract
+    le-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      le-ℚ p q
+    le-lower-upper-cut-ℝ H H' =
+      rec-coproduct
+        ( id)
+        ( λ I →
+          ex-falso
+            ( is-disjoint-cut-ℝ x p
+                ( H , leq-upper-cut-ℝ x q p I H')))
+        ( decide-le-leq-ℚ p q)
+
+    leq-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      leq-ℚ p q
+    leq-lower-upper-cut-ℝ H H' = leq-le-ℚ (le-lower-upper-cut-ℝ H H')
 ```
 
 ### Characterization of each cut by the other
@@ -511,6 +532,65 @@ module _
 
   eq-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
   eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
+```
+
+### There exists a rational enclosing interval around each real number
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-inhabited-type-enclosing-closed-rational-interval-ℝ :
+      is-inhabited (type-enclosing-closed-rational-interval-ℝ x)
+    is-inhabited-type-enclosing-closed-rational-interval-ℝ =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-inhabited-Prop (type-enclosing-closed-rational-interval-ℝ x))
+      in do
+        (p , p<x) ← is-inhabited-lower-cut-ℝ x
+        (q , x<q) ← is-inhabited-upper-cut-ℝ x
+        intro-exists
+          ( (p , q) , leq-lower-upper-cut-ℝ x p q p<x x<q)
+          ( p<x , x<q)
+```
+
+### For any rational enclosing interval around a real number, there exists an interior enclosing interval
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    exists-interior-enclosing-closed-rational-interval-ℝ :
+      ([a,b] : closed-interval-ℚ) →
+      is-enclosing-closed-rational-interval-ℝ x [a,b] →
+      exists
+        ( closed-interval-ℚ)
+        ( λ [c,d] →
+          enclosing-closed-rational-interval-ℝ x [c,d] ∧
+          is-interior-prop-closed-interval-ℚ [a,b] [c,d])
+    exists-interior-enclosing-closed-rational-interval-ℝ
+      [a,b]@((a , b) , _) (a<x , x<b) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( closed-interval-ℚ)
+              ( λ [c,d] →
+                enclosing-closed-rational-interval-ℝ x [c,d] ∧
+                is-interior-prop-closed-interval-ℚ [a,b] [c,d]))
+      in do
+        (a' , a<a' , a'<x) ←
+          forward-implication (is-rounded-lower-cut-ℝ x a) a<x
+        (b' , b'<b , x<b') ←
+          forward-implication (is-rounded-upper-cut-ℝ x b) x<b
+        intro-exists
+          ( (a' , b') , leq-lower-upper-cut-ℝ x a' b' a'<x x<b')
+          ( ( a'<x , x<b') , (a<a' , b'<b))
 ```
 
 ## References

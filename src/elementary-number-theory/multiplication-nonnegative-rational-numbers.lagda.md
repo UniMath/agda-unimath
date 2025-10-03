@@ -10,6 +10,7 @@ module elementary-number-theory.multiplication-nonnegative-rational-numbers wher
 
 ```agda
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
@@ -108,4 +109,15 @@ opaque
       ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
       ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
       ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
+
+abstract
+  preserves-leq-mul-ℚ⁰⁺ :
+    (p q r s : ℚ⁰⁺) → leq-ℚ⁰⁺ p q → leq-ℚ⁰⁺ r s → leq-ℚ⁰⁺ (p *ℚ⁰⁺ r) (q *ℚ⁰⁺ s)
+  preserves-leq-mul-ℚ⁰⁺ p q r s p≤q r≤s =
+    transitive-leq-ℚ
+      ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ r))
+      ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ s))
+      ( rational-ℚ⁰⁺ (q *ℚ⁰⁺ s))
+      ( preserves-leq-right-mul-ℚ⁰⁺ s _ _ p≤q)
+      ( preserves-leq-left-mul-ℚ⁰⁺ p _ _ r≤s)
 ```

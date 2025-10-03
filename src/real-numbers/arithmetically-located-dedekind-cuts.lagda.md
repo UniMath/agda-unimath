@@ -9,6 +9,8 @@ module real-numbers.arithmetically-located-dedekind-cuts where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
@@ -16,6 +18,7 @@ open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -40,6 +43,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+
+open import order-theory.posets
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
@@ -84,6 +89,10 @@ module _
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
     type-Prop is-arithmetically-located-prop-lower-upper-ℝ
+
+close-bounds-ℝ : {l : Level} (x : ℝ l) → ℚ⁺ → subtype l (ℚ × ℚ)
+close-bounds-ℝ x =
+  close-bounds-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
 ```
 
 ## Properties
@@ -232,6 +241,138 @@ module _
           ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
             r<x ,
             x<r+2ε')
+```
+
+### For any real number `x` and any `ε : ℚ⁺`, there exists `n : ℕ` such that if `q < x < q + ε`, then `|q| < n` and `|q +ℚ ε| < n`
+
+```agda
+abstract
+  natural-bound-location-ℝ :
+    {l : Level} → (x : ℝ l) (ε : ℚ⁺) →
+    exists
+      ( ℕ)
+      ( λ n →
+        Π-Prop
+          ( type-subtype (close-bounds-ℝ x ε))
+          ( λ ((q , q') , _) →
+            le-ℚ-Prop
+              ( max-ℚ (rational-abs-ℚ q) (rational-abs-ℚ q'))
+              ( rational-ℕ n)))
+  natural-bound-location-ℝ x ε⁺@(ε , _) =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( ∃
+            ( ℕ)
+            ( λ n →
+              Π-Prop
+                ( type-subtype (close-bounds-ℝ x ε⁺))
+                ( λ ((q , q') , _) →
+                  le-ℚ-Prop
+                    ( max-ℚ (rational-abs-ℚ q) (rational-abs-ℚ q'))
+                    ( rational-ℕ n))))
+      open inequality-reasoning-Poset ℚ-Poset
+    in do
+      (p , p<x) ← is-inhabited-lower-cut-ℝ x
+      (q , x<q) ← is-inhabited-upper-cut-ℝ x
+      (n , max|p||q|<n) ←
+        exists-greater-natural-ℚ (max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q))
+      (m , ε<m) ← exists-greater-natural-ℚ ε
+      intro-exists
+        ( m +ℕ n +ℕ m)
+        ( λ ((a , b) , b<a+ε , a<x , x<b) →
+          let
+            |a|≤m+n =
+              leq-abs-leq-leq-neg-ℚ
+                ( a)
+                ( rational-ℕ (m +ℕ n))
+                ( chain-of-inequalities
+                    a
+                    ≤ q
+                      by leq-lower-upper-cut-ℝ x a q a<x x<q
+                    ≤ rational-abs-ℚ q
+                      by leq-abs-ℚ q
+                    ≤ ε +ℚ rational-abs-ℚ q
+                      by leq-left-add-rational-ℚ⁺ _ ε⁺
+                    ≤ rational-ℕ m +ℚ
+                      max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
+                      by
+                        preserves-leq-add-ℚ
+                          ( leq-le-ℚ ε<m)
+                          ( leq-right-max-ℚ _ _)
+                    ≤ rational-ℕ m +ℚ rational-ℕ n
+                      by preserves-leq-right-add-ℚ _ _ _ (leq-le-ℚ max|p||q|<n)
+                    ≤ rational-ℕ (m +ℕ n)
+                      by leq-eq-ℚ _ _ (add-rational-ℕ _ _))
+                ( chain-of-inequalities
+                    neg-ℚ a
+                    ≤ neg-ℚ (b -ℚ ε)
+                      by
+                        neg-leq-ℚ _ _
+                          ( leq-transpose-right-add-ℚ _ _ _ (leq-le-ℚ b<a+ε))
+                    ≤ ε -ℚ b
+                      by leq-eq-ℚ _ _ (distributive-neg-diff-ℚ _ _)
+                    ≤ ε -ℚ p
+                      by
+                        preserves-leq-right-add-ℚ ε
+                          ( neg-ℚ b)
+                          ( neg-ℚ p)
+                          ( neg-leq-ℚ _ _
+                            ( leq-lower-upper-cut-ℝ x p b p<x x<b))
+                    ≤ rational-abs-ℚ (ε -ℚ p)
+                      by leq-abs-ℚ _
+                    ≤ rational-abs-ℚ ε +ℚ rational-abs-ℚ p
+                      by triangle-inequality-abs-diff-ℚ ε p
+                    ≤ ε +ℚ max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
+                      by
+                        preserves-leq-add-ℚ
+                          ( leq-eq-ℚ _ _ (rational-abs-rational-ℚ⁺ ε⁺))
+                          ( leq-left-max-ℚ _ _)
+                    ≤ rational-ℕ m +ℚ rational-ℕ n
+                      by
+                        preserves-leq-add-ℚ
+                          ( leq-le-ℚ ε<m)
+                          ( leq-le-ℚ max|p||q|<n)
+                    ≤ rational-ℕ (m +ℕ n)
+                      by leq-eq-ℚ _ _ (add-rational-ℕ _ _))
+            |b|≤|a|+ε =
+              leq-abs-leq-leq-neg-ℚ b (rational-abs-ℚ a +ℚ ε)
+                ( chain-of-inequalities
+                    b
+                    ≤ a +ℚ ε
+                      by leq-le-ℚ b<a+ε
+                    ≤ rational-abs-ℚ (a +ℚ ε)
+                      by leq-abs-ℚ _
+                    ≤ rational-abs-ℚ a +ℚ rational-abs-ℚ ε
+                      by triangle-inequality-abs-ℚ _ _
+                    ≤ rational-abs-ℚ a +ℚ ε
+                      by
+                        leq-eq-ℚ _ _
+                          ( ap-add-ℚ refl (rational-abs-rational-ℚ⁺ ε⁺)))
+                ( chain-of-inequalities
+                    neg-ℚ b
+                    ≤ neg-ℚ a
+                      by neg-leq-ℚ _ _ (leq-lower-upper-cut-ℝ x a b a<x x<b)
+                    ≤ rational-abs-ℚ a
+                      by neg-leq-abs-ℚ a
+                    ≤ rational-abs-ℚ a +ℚ ε
+                      by leq-right-add-rational-ℚ⁺ _ ε⁺)
+          in
+            concatenate-leq-le-ℚ
+              ( max-ℚ (rational-abs-ℚ a) (rational-abs-ℚ b))
+              ( rational-ℕ (m +ℕ n) +ℚ ε)
+              ( rational-ℕ (m +ℕ n +ℕ m))
+              ( leq-max-leq-both-ℚ _ _ _
+                ( transitive-leq-ℚ _ (rational-ℕ (m +ℕ n)) _
+                  ( leq-right-add-rational-ℚ⁺ _ ε⁺)
+                  ( |a|≤m+n))
+                ( transitive-leq-ℚ _ (rational-abs-ℚ a +ℚ ε) _
+                  ( preserves-leq-left-add-ℚ _ _ _ |a|≤m+n)
+                  ( |b|≤|a|+ε)))
+              ( tr
+                ( le-ℚ (rational-ℕ (m +ℕ n) +ℚ ε))
+                ( add-rational-ℕ _ _)
+                ( preserves-le-right-add-ℚ _ _ _ ε<m)))
 ```
 
 ## References

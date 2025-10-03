@@ -17,6 +17,7 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers
@@ -153,6 +154,13 @@ abstract
 nonnegative-rational-nonnegative-ℤ : nonnegative-ℤ → ℚ⁰⁺
 nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
   ( rational-ℤ x , is-nonnegative-rational-ℤ x x-is-neg)
+```
+
+### The images of natural numbers in the rationals are nonnegative
+
+```agda
+nonnegative-rational-ℕ : ℕ → ℚ⁰⁺
+nonnegative-rational-ℕ n = (rational-ℕ n , is-nonnegative-int-ℕ n)
 ```
 
 ### The rational image of a nonnegative integer fraction is nonnegative

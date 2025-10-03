@@ -77,13 +77,20 @@ is-closed-interval-map-prop-ℚ :
 is-closed-interval-map-prop-ℚ =
   is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
 
-is-below-prop-closed-interval-ℚ :
-  closed-interval-ℚ → subtype lzero ℚ
+is-below-prop-closed-interval-ℚ : closed-interval-ℚ → subtype lzero ℚ
 is-below-prop-closed-interval-ℚ ((a , _) , _) b = le-ℚ-Prop b a
+
+is-below-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-below-closed-interval-ℚ [a,b] q =
+  type-Prop (is-below-prop-closed-interval-ℚ [a,b] q)
 
 is-above-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-above-prop-closed-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
+
+is-above-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-above-closed-interval-ℚ [a,b] q =
+  type-Prop (is-above-prop-closed-interval-ℚ [a,b] q)
 
 nonnegative-width-closed-interval-ℚ :
   closed-interval-ℚ → ℚ⁰⁺
