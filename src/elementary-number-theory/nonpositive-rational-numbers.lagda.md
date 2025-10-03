@@ -12,15 +12,12 @@ module elementary-number-theory.nonpositive-rational-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -135,20 +132,4 @@ abstract
       ( concatenate-le-leq-ℚ p q zero-ℚ
         ( p<q)
         ( leq-zero-is-nonpositive-ℚ q nonpos-q))
-```
-
-### Multiplication by a nonpositive rational number reverses inequality
-
-```agda
-abstract
-  reverses-leq-right-mul-ℚ⁰⁻ :
-    (p : ℚ⁰⁻) (q r : ℚ) → leq-ℚ q r →
-    leq-ℚ (r *ℚ rational-ℚ⁰⁻ p) (q *ℚ rational-ℚ⁰⁻ p)
-  reverses-leq-right-mul-ℚ⁰⁻ (p , nonpos-p) q r q≤r =
-    binary-tr
-      ( leq-ℚ)
-      ( ap neg-ℚ (right-negative-law-mul-ℚ r p) ∙ neg-neg-ℚ _)
-      ( ap neg-ℚ (right-negative-law-mul-ℚ q p) ∙ neg-neg-ℚ _)
-      ( neg-leq-ℚ _ _
-        ( preserves-leq-right-mul-ℚ⁰⁺ (neg-ℚ p , nonpos-p) q r q≤r))
 ```

@@ -16,7 +16,10 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-nonpositive-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
@@ -1036,9 +1039,7 @@ abstract
               inv-tr
                 ( is-nonnegative-ℚ)
                 ( min'=a'c')
-                ( is-nonnegative-mul-nonnegative-ℚ
-                  ( is-nonneg-a')
-                  ( is-nonneg-c'))
+                ( is-nonnegative-mul-ℚ _ _ is-nonneg-a' is-nonneg-c')
           in
             rec-coproduct
               ( λ is-neg-a →

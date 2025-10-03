@@ -64,17 +64,3 @@ mul-negative-positive-ℚ : ℚ⁻ → ℚ⁺ → ℚ⁻
 mul-negative-positive-ℚ (p , neg-p) (q , pos-q) =
   ( p *ℚ q , is-negative-mul-negative-positive-ℚ neg-p pos-q)
 ```
-
-#### The product of two nonpositive rational numbers is nonnegative
-
-```agda
-abstract
-  is-nonnegative-mul-nonpositive-ℚ :
-    {x y : ℚ} → is-nonpositive-ℚ x → is-nonpositive-ℚ y →
-    is-nonnegative-ℚ (x *ℚ y)
-  is-nonnegative-mul-nonpositive-ℚ {x} {y} nonpos-x nonpos-y =
-    tr
-      ( is-nonnegative-ℚ)
-      ( negative-law-mul-ℚ x y)
-      ( is-nonnegative-mul-ℚ _ _ nonpos-x nonpos-y)
-```

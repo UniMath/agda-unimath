@@ -131,6 +131,7 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers public
+open import elementary-number-theory.multiplication-nonpositive-rational-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers public
 open import elementary-number-theory.multiplication-positive-rational-numbers public
