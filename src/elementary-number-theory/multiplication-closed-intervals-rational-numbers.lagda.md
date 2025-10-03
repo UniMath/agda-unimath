@@ -1735,3 +1735,69 @@ abstract
                   ( qab∈[a,b])
                   ( qef∈[e,f]))))
 ```
+
+### Containment of intervals is preserved by multiplication
+
+```agda
+abstract
+  preserves-leq-left-mul-closed-interval-ℚ :
+    ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c,d])
+  preserves-leq-left-mul-closed-interval-ℚ [c,d] [a,b] [a',b'] [a,b]⊆[a',b'] =
+    leq-closed-interval-leq-subtype-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c,d])
+      ( binary-tr
+        ( _⊆_)
+        ( eq-minkowski-mul-closed-interval-ℚ [a,b] [c,d])
+        ( eq-minkowski-mul-closed-interval-ℚ [a',b'] [c,d])
+        ( preserves-leq-left-minkowski-mul-Commutative-Monoid
+          ( commutative-monoid-mul-ℚ)
+          ( subtype-closed-interval-ℚ [c,d])
+          ( subtype-closed-interval-ℚ [a,b])
+          ( subtype-closed-interval-ℚ [a',b'])
+          ( leq-subtype-leq-closed-interval-ℚ [a,b] [a',b'] [a,b]⊆[a',b'])))
+
+  preserves-leq-right-mul-closed-interval-ℚ :
+    ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a,b] [c',d'])
+  preserves-leq-right-mul-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
+    binary-tr
+      ( leq-closed-interval-ℚ)
+      ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
+      ( commutative-mul-closed-interval-ℚ [c',d'] [a,b])
+      ( preserves-leq-left-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
+
+  preserves-leq-mul-closed-interval-ℚ :
+    ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+  preserves-leq-mul-closed-interval-ℚ
+    [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
+    transitive-leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a,b] [c',d'])
+      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+      ( preserves-leq-left-mul-closed-interval-ℚ
+        ( [c',d'])
+        ( [a,b])
+        ( [a',b'])
+        ( [a,b]⊆[a',b']))
+      ( preserves-leq-right-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
+```

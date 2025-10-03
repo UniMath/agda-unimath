@@ -176,3 +176,34 @@ module _
             ( leq-right-min-Total-Order T b d)
             ( f≤minbd)))
 ```
+
+### The intersection of two closed intervals is contained in both
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-left-intersection-closed-interval-Total-Order :
+      ([a,b] [c,d] : closed-interval-Total-Order T) →
+      (H : intersect-closed-interval-Total-Order T [a,b] [c,d]) →
+      leq-closed-interval-Total-Order T
+        ( intersection-closed-interval-Total-Order T [a,b] [c,d] H)
+        ( [a,b])
+    leq-left-intersection-closed-interval-Total-Order
+      ((a , b) , _) ((c , d) , _) H =
+      ( leq-left-max-Total-Order T a c ,
+        leq-left-min-Total-Order T b d)
+
+    leq-right-intersection-closed-interval-Total-Order :
+      ([a,b] [c,d] : closed-interval-Total-Order T) →
+      (H : intersect-closed-interval-Total-Order T [a,b] [c,d]) →
+      leq-closed-interval-Total-Order T
+        ( intersection-closed-interval-Total-Order T [a,b] [c,d] H)
+        ( [c,d])
+    leq-right-intersection-closed-interval-Total-Order
+      ((a , b) , _) ((c , d) , _) H =
+      ( leq-right-max-Total-Order T a c ,
+        leq-right-min-Total-Order T b d)
+```
