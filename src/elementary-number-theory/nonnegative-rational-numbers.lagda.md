@@ -413,7 +413,7 @@ abstract
   le-zero-nonnegative-ℚ⁰⁺ (q , pos-q) = le-zero-is-positive-ℚ q pos-q
 ```
 
-### If `p < q` and `p` is nonnegative, `q` is positive
+### If `p < q` and `p` is nonnegative, then `q` is positive
 
 ```agda
 abstract

@@ -123,7 +123,7 @@ module _
         is-nonpositive-leq-zero-ℚ)
 ```
 
-### If `p < q` and `q` is nonpositive, `p` is negative
+### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda
 abstract
