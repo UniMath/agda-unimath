@@ -25,7 +25,7 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The maximum of two
+The {{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}} of two
 [rational numbers](elementary-number-theory.rational-numbers.md) is the
 [greatest](elementary-number-theory.inequality-rational-numbers.md) rational
 number of the two. This is the
