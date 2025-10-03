@@ -160,7 +160,12 @@ a.concept {
   background-color: var(--fg);
 }
 
-:is(nav.pagetoc a, a:has(> img), a.concept[href^='http'])::after {
+:is(
+    nav.pagetoc a,
+    a:has(> img),
+    a.concept[href^='http'],
+    .hide-external-link
+  )::after {
   display: none !important;
 }
 .content img,

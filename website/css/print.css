@@ -47,8 +47,7 @@ a:hover {
   text-decoration: none;
 }
 
-a[href^='http']::after,
-a[href^='https']::after {
+a[href^='http']::after {
   display: none !important;
 }
 
