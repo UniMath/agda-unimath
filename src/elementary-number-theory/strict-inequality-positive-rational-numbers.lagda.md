@@ -26,7 +26,9 @@ open import order-theory.strictly-preordered-sets
 
 ## Idea
 
-The standard strict ordering on the
+The
+{{#concept "standard strict ordering" Disambiguation="on the positive rational numbers" Agda=le-ℚ⁺}}
+on the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is inherited from the
 [standard strict ordering](elementary-number-theory.strict-inequality-rational-numbers.md)

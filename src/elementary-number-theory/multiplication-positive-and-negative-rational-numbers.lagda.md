@@ -7,6 +7,7 @@ module elementary-number-theory.multiplication-positive-and-negative-rational-nu
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers

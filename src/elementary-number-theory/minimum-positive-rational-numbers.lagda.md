@@ -21,7 +21,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The minimum of two
+The
+{{#concept "minimum" Disambiguation="of positive rational numbers" Agda=min-ℚ⁺}}
+of two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is the
 [smallest](elementary-number-theory.inequality-positive-rational-numbers.md) of

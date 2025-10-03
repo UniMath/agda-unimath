@@ -45,7 +45,9 @@ open import group-theory.submonoids-commutative-monoids
 
 ## Idea
 
-The product of two
+The
+{{#concept "product" Disambiguation="of pairs of positive rational numbers" Agda=mul-ℚ⁺}}
+of two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is their [product](elementary-number-theory.multiplication-rational-numbers.md)
 as [rational numbers](elementary-number-theory.rational-numbers.md), and is

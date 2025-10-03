@@ -21,7 +21,6 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -61,7 +60,13 @@ lower-bound-closed-interval-ℚ =
 upper-bound-closed-interval-ℚ : closed-interval-ℚ → ℚ
 upper-bound-closed-interval-ℚ =
   upper-bound-closed-interval-Poset ℚ-Poset
+```
 
+## Properties
+
+### The subtype associated with a closed interval
+
+```agda
 subtype-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 subtype-closed-interval-ℚ =
@@ -70,14 +75,23 @@ subtype-closed-interval-ℚ =
 is-in-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
 is-in-closed-interval-ℚ [a,b] =
   is-in-subtype (subtype-closed-interval-ℚ [a,b])
+```
 
+### The property of a function `ℚ → ℚ` of mapping a closed interval to a closed interval
+
+```agda
 is-closed-interval-map-prop-ℚ :
   (ℚ → ℚ) → closed-interval-ℚ → closed-interval-ℚ →
   Prop lzero
 is-closed-interval-map-prop-ℚ =
   is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
+```
 
-is-below-prop-closed-interval-ℚ : closed-interval-ℚ → subtype lzero ℚ
+### The property of being above or below a closed interval
+
+```agda
+is-below-prop-closed-interval-ℚ :
+  closed-interval-ℚ → subtype lzero ℚ
 is-below-prop-closed-interval-ℚ ((a , _) , _) b = le-ℚ-Prop b a
 
 is-below-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
@@ -91,7 +105,11 @@ is-above-prop-closed-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
 is-above-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
 is-above-closed-interval-ℚ [a,b] q =
   type-Prop (is-above-prop-closed-interval-ℚ [a,b] q)
+```
 
+### The width of a closed interval
+
+```agda
 nonnegative-width-closed-interval-ℚ :
   closed-interval-ℚ → ℚ⁰⁺
 nonnegative-width-closed-interval-ℚ ((a , b) , a≤b) =
@@ -100,18 +118,17 @@ nonnegative-width-closed-interval-ℚ ((a , b) , a≤b) =
 width-closed-interval-ℚ : closed-interval-ℚ → ℚ
 width-closed-interval-ℚ [a,b] =
   rational-ℚ⁰⁺ (nonnegative-width-closed-interval-ℚ [a,b])
+```
 
-is-injective-subtype-closed-interval-ℚ :
-  is-injective subtype-closed-interval-ℚ
-is-injective-subtype-closed-interval-ℚ =
-  is-injective-subtype-closed-interval-Poset ℚ-Poset
+### The property of a closed interval of being proper
 
-is-nontrivial-prop-closed-interval-ℚ : closed-interval-ℚ → Prop lzero
-is-nontrivial-prop-closed-interval-ℚ ((a , b) , _) = le-ℚ-Prop a b
+```agda
+is-proper-prop-closed-interval-ℚ : closed-interval-ℚ → Prop lzero
+is-proper-prop-closed-interval-ℚ ((a , b) , _) = le-ℚ-Prop a b
 
-is-nontrivial-closed-interval-ℚ : closed-interval-ℚ → UU lzero
-is-nontrivial-closed-interval-ℚ [a,b] =
-  type-Prop (is-nontrivial-prop-closed-interval-ℚ [a,b])
+is-proper-closed-interval-ℚ : closed-interval-ℚ → UU lzero
+is-proper-closed-interval-ℚ [a,b] =
+  type-Prop (is-proper-prop-closed-interval-ℚ [a,b])
 ```
 
 ### Important ranges
@@ -124,7 +141,14 @@ one-one-closed-interval-ℚ : closed-interval-ℚ
 one-one-closed-interval-ℚ = ((one-ℚ , one-ℚ) , refl-leq-ℚ one-ℚ)
 ```
 
-## Properties
+### The map from closed intervals to their subtypes is injective
+
+```agda
+is-injective-subtype-closed-interval-ℚ :
+  is-injective subtype-closed-interval-ℚ
+is-injective-subtype-closed-interval-ℚ =
+  is-injective-subtype-closed-interval-Poset ℚ-Poset
+```
 
 ### Characterization of equality
 
@@ -174,19 +198,6 @@ abstract
 is-closed-interval-map-ℚ :
   (ℚ → ℚ) → ([a,b] [c,d] : closed-interval-ℚ) → UU lzero
 is-closed-interval-map-ℚ = is-closed-interval-map-Poset ℚ-Poset ℚ-Poset
-```
-
-### Interior intervals
-
-```agda
-is-interior-prop-closed-interval-ℚ :
-  closed-interval-ℚ → closed-interval-ℚ → Prop lzero
-is-interior-prop-closed-interval-ℚ ((x , y) , _) ((x' , y') , _) =
-  le-ℚ-Prop x x' ∧ le-ℚ-Prop y' y
-
-is-interior-closed-interval-ℚ : closed-interval-ℚ → closed-interval-ℚ → UU lzero
-is-interior-closed-interval-ℚ [x,y] [x',y'] =
-  type-Prop (is-interior-prop-closed-interval-ℚ [x,y] [x',y'])
 ```
 
 ### The bounds of a closed interval are elements
