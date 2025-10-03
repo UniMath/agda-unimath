@@ -100,3 +100,22 @@ is-greatest-binary-lower-bound-intersection-closed-interval-ℚ =
   is-greatest-binary-lower-bound-intersection-closed-interval-Total-Order
     ( ℚ-Total-Order)
 ```
+
+### If two closed intervals intersect, their intersection is contained in both
+
+```agda
+abstract
+  leq-left-intersection-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    (H : intersect-closed-interval-ℚ [a,b] [c,d]) →
+    leq-closed-interval-ℚ (intersection-closed-interval-ℚ [a,b] [c,d] H) [a,b]
+  leq-left-intersection-closed-interval-ℚ =
+    leq-left-intersection-closed-interval-Total-Order ℚ-Total-Order
+
+  leq-right-intersection-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    (H : intersect-closed-interval-ℚ [a,b] [c,d]) →
+    leq-closed-interval-ℚ (intersection-closed-interval-ℚ [a,b] [c,d] H) [c,d]
+  leq-right-intersection-closed-interval-ℚ =
+    leq-right-intersection-closed-interval-Total-Order ℚ-Total-Order
+```
