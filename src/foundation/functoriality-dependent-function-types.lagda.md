@@ -92,9 +92,15 @@ module _
 #### Computing `map-equiv-Π`
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
+  (e : A' ≃ A) (f : (a' : A') → B' a' ≃ B (map-equiv e a'))
+  where
+
   compute-map-equiv-Π :
     (h : (a' : A') → B' a') (a' : A') →
-    map-equiv-Π h (map-equiv e a') ＝ map-equiv (f a') (h a')
+    map-equiv-Π B e f h (map-equiv e a') ＝ map-equiv (f a') (h a')
   compute-map-equiv-Π h a' =
     ( ap
       ( λ t →
@@ -187,10 +193,11 @@ module _
       ( equiv-Σ
         ( λ a → f i a ＝ b)
         ( equiv-universal-property-unit (A i))
-        ( λ h → equiv-ap
-          ( equiv-universal-property-unit (B i))
-          ( map-Π (λ _ → f i) h)
-          ( point b)))
+        ( λ h →
+          equiv-ap
+            ( equiv-universal-property-unit (B i))
+            ( map-Π (λ _ → f i) h)
+            ( point b)))
       ( H (λ _ → i) (point b))
 
   is-emb-map-Π-is-emb' :
