@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import order-theory.closed-intervals-total-orders
 open import order-theory.greatest-lower-bounds-posets
+open import order-theory.join-semilattices
 open import order-theory.least-upper-bounds-posets
 open import order-theory.poset-closed-intervals-posets
 open import order-theory.posets
@@ -309,4 +310,26 @@ module _
           transitive-leq-Total-Order T d _ f
             ( maxbd≤f)
             ( leq-right-max-Total-Order T b d)))
+```
+
+### The join semilattice of closed intervals
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  is-join-semilattice-closed-interval-Total-Order :
+    is-join-semilattice-Poset (poset-closed-interval-Total-Order T)
+  is-join-semilattice-closed-interval-Total-Order [a,b] [c,d] =
+    ( span-closed-interval-Total-Order T [a,b] [c,d] ,
+      is-least-binary-upper-bound-span-closed-interval-Total-Order T
+        ( [a,b])
+        ( [c,d]))
+
+  order-theoretic-join-semilattice-closed-interval-Total-Order :
+    Order-Theoretic-Join-Semilattice (l1 ⊔ l2) l2
+  order-theoretic-join-semilattice-closed-interval-Total-Order =
+    ( poset-closed-interval-Total-Order T ,
+      is-join-semilattice-closed-interval-Total-Order)
 ```
