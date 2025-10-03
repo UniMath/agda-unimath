@@ -147,9 +147,7 @@ a.concept {
 }
 
 /* External link indicator using inline SVG */
-.content a[href^="http"]::after,
-.content a[href^="https://"]::after
-{
+.content a[href^='http']::after {
   content: '';
   width: 11px;
   height: 11px;
@@ -162,10 +160,7 @@ a.concept {
   background-color: var(--fg);
 }
 
-nav.pagetoc a::after,
-a:has(> img)::after,
-a.concept[href^='http']::after,
-a.concept[href^='https']::after {
+:is(nav.pagetoc a, a:has(> img), a.concept[href^='http'])::after {
   display: none !important;
 }
 .content img,
