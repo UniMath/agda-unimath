@@ -27,7 +27,9 @@ open import order-theory.total-orders
 
 ## Idea
 
-The standard ordering on the
+The
+{{#concept "standard ordering" Disambiguation="on the positive rational numbers" Agda=leq-ℚ⁺}}
+on the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is inherited from the
 [standard ordering](elementary-number-theory.inequality-rational-numbers.md) on

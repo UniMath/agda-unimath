@@ -112,7 +112,7 @@ def slugify_markdown(md):
 def sup_link_reference(href, content, brackets=True, new_tab=False):
     # f-strings can't contain backslashes, so we can't escape the quotes
     link_target = new_tab * ' target="_blank"'
-    return f'<sup>{brackets * "["}<a href="{href}"{link_target}>{content}</a>{brackets * "]"}</sup>'
+    return f'<sup>{brackets * "["}<a href="{href}"{link_target} class="concept">{content}</a>{brackets * "]"}</sup>'
 
 
 def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initial_content):

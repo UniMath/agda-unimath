@@ -19,7 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The standard ordering on the
+The
+{{#concept "standard ordering" Disambiguation="on the nonnegative rational numbers" Agda=leq-ℚ⁰⁺}}
+on the
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is inherited from the
 [standard ordering](elementary-number-theory.inequality-rational-numbers.md) on

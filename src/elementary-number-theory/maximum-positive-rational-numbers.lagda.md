@@ -19,7 +19,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The maximum of two
+The
+{{#concept "maximum" Disambiguation="of positive rational numbers" Agda=max-ℚ⁺}}
+of two
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 is the
 [greatest](elementary-number-theory.inequality-positive-rational-numbers.md)

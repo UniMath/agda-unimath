@@ -26,8 +26,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-The maximum of two
-[rational numbers](elementary-number-theory.rational-numbers.md) is the
+The
+{{#concept "maximum" Disambiguation="of pairs of rational numbers" Agda=max-ℚ}}
+of two [rational numbers](elementary-number-theory.rational-numbers.md) is the
 [greatest](elementary-number-theory.inequality-rational-numbers.md) rational
 number of the two. This is the
 [binary least upper bound](order-theory.least-upper-bounds-posets.md) in the
