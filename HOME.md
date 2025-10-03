@@ -4,7 +4,7 @@ Welcome to the agda-unimath project. This is a community-driven effort aimed at
 formalizing mathematics from a univalent point of view using the dependently
 typed programming language [Agda](https://github.com/agda/agda).
 
-<a href="https://github.com/unimath/agda-unimath">
+<a href="https://github.com/unimath/agda-unimath" class="hide-external-link">
 <img class="invertible-image" align="right" width="300" alt="agda-unimath" src="website/images/agda-unimath-logo.svg" />
 </a>
 

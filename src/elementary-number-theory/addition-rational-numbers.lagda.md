@@ -33,9 +33,9 @@ open import foundation.sections
 ## Idea
 
 We introduce
-{{#concept "addition" Disambiguation="rational numbers" Agda=add-ℚ}} on the
-[rational numbers](elementary-number-theory.rational-numbers.md) and derive its
-basic properties.
+{{#concept "addition" WDID=Q32043 WD="addition" Disambiguation="rational numbers" Agda=add-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) and
+derive its basic properties.
 
 ## Definition
 
