@@ -106,16 +106,12 @@ opaque
   unfolding inv-ℚ⁺
   unfolding leq-ℚ-Prop
 
-  inv-leq-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → leq-ℚ⁺ y x
+  inv-leq-ℚ⁺ : (x y : ℚ⁺) → leq-ℚ⁺ x y → leq-ℚ⁺ (inv-ℚ⁺ y) (inv-ℚ⁺ x)
   inv-leq-ℚ⁺ x y =
     binary-tr
       ( leq-ℤ)
-      ( commutative-mul-ℤ
-        ( denominator-ℚ⁺ x)
-        ( numerator-ℚ⁺ y))
-      ( commutative-mul-ℤ
-        ( denominator-ℚ⁺ y)
-        ( numerator-ℚ⁺ x))
+      ( commutative-mul-ℤ _ _)
+      ( commutative-mul-ℤ _ _)
 ```
 
 ### Inversion reverses strict inequality on the positive rational numbers
@@ -125,29 +121,19 @@ opaque
   unfolding inv-ℚ⁺
   unfolding le-ℚ-Prop
 
-  inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
+  inv-le-ℚ⁺ : (x y : ℚ⁺) → le-ℚ⁺ x y → le-ℚ⁺ (inv-ℚ⁺ y) (inv-ℚ⁺ x)
   inv-le-ℚ⁺ x y =
     binary-tr
       ( le-ℤ)
-      ( commutative-mul-ℤ
-        ( denominator-ℚ⁺ x)
-        ( numerator-ℚ⁺ y))
-      ( commutative-mul-ℤ
-        ( denominator-ℚ⁺ y)
-        ( numerator-ℚ⁺ x))
+      ( commutative-mul-ℤ _ _)
+      ( commutative-mul-ℤ _ _)
 
-  inv-le-ℚ⁺' : (x y : ℚ⁺) → le-ℚ⁺ x y → le-ℚ⁺ (inv-ℚ⁺ y) (inv-ℚ⁺ x)
+  inv-le-ℚ⁺' : (x y : ℚ⁺) → le-ℚ⁺ (inv-ℚ⁺ x) (inv-ℚ⁺ y) → le-ℚ⁺ y x
   inv-le-ℚ⁺' x y =
     binary-tr
       ( le-ℤ)
-      ( inv
-        ( commutative-mul-ℤ
-          ( denominator-ℚ⁺ y)
-          ( numerator-ℚ⁺ x)))
-      ( inv
-        ( commutative-mul-ℤ
-          ( denominator-ℚ⁺ x)
-          ( numerator-ℚ⁺ y)))
+      ( commutative-mul-ℤ _ _)
+      ( commutative-mul-ℤ _ _)
 ```
 
 ### Inversion of positive rational numbers distributes over multiplication
