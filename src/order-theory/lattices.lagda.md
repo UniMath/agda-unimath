@@ -22,8 +22,10 @@ open import order-theory.posets
 
 ## Idea
 
-A **lattice** is a poset in which every pair of elements has a meet (a greatest
-lower bound) and a join (a least upper bound).
+A {{#concept "lattice" WDID=Q595364 WD="lattice" Agda=Lattice}} is a
+[poset](order-theory.posets.md) in which every pair of elements has a meet (a
+[greatest lower bound](order-theory.greatest-lower-bounds-posets.md)) and a join
+(a [least upper bound](order-theory.least-upper-bounds-posets.md)).
 
 Note that we don't require that meets distribute over joins. Such lattices are
 called [distributive lattices](order-theory.distributive-lattices.md).
