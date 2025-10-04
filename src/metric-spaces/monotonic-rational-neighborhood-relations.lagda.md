@@ -8,6 +8,7 @@ module metric-spaces.monotonic-rational-neighborhood-relations where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.propositions
 open import foundation.universe-levels
