@@ -10,6 +10,7 @@ module elementary-number-theory.negation-closed-intervals-rational-numbers where
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
+open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
