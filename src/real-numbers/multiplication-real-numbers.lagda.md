@@ -31,13 +31,16 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -56,6 +59,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import order-theory.large-posets
 open import order-theory.posets
 
 open import real-numbers.addition-real-numbers
@@ -64,6 +68,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -568,9 +573,120 @@ module _
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _*ℝ_ = mul-ℝ
+
+ap-mul-ℝ :
+  {l1 : Level} {x x' : ℝ l1} → (x ＝ x') →
+  {l2 : Level} {y y' : ℝ l2} → (y ＝ y') →
+  (x *ℝ y) ＝ (x' *ℝ y')
+ap-mul-ℝ x=x' y=y' = ap-binary mul-ℝ x=x' y=y'
 ```
 
 ## Properties
+
+### If `[a,b]` is an enclosing rational range of `xy`, then there are `ax < x < bx` and `ay < y < by` such that `a` is below `[ax, bx][ay, by]` and `b` is above it
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  opaque
+    unfolding mul-ℝ
+
+    enclosing-rational-range-mul-ℝ :
+      ([a,b] : closed-interval-ℚ) →
+      is-enclosing-closed-rational-interval-ℝ (x *ℝ y) [a,b] →
+      exists
+        ( type-enclosing-closed-rational-interval-ℝ x ×
+          type-enclosing-closed-rational-interval-ℝ y)
+        ( λ (([ax,bx] , _) , ([ay,by] , _)) →
+          is-below-prop-closed-interval-ℚ
+            ( mul-closed-interval-ℚ [ax,bx] [ay,by])
+            ( lower-bound-closed-interval-ℚ [a,b]) ∧
+          is-above-prop-closed-interval-ℚ
+            ( mul-closed-interval-ℚ [ax,bx] [ay,by])
+            ( upper-bound-closed-interval-ℚ [a,b]))
+    enclosing-rational-range-mul-ℝ ((a , b) , _) (a<xy , xy<b) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( type-enclosing-closed-rational-interval-ℝ x ×
+                type-enclosing-closed-rational-interval-ℝ y)
+              ( λ (([ax,bx] , _) , ([ay,by] , _)) →
+                is-below-prop-closed-interval-ℚ
+                  ( mul-closed-interval-ℚ [ax,bx] [ay,by])
+                  ( a) ∧
+                is-above-prop-closed-interval-ℚ
+                  ( mul-closed-interval-ℚ [ax,bx] [ay,by])
+                  ( b)))
+      in do
+        ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , x∈⟨ax,bx⟩) ,
+            ay<y<by@([ay,by]@((ay , by) , _) , y∈⟨ay,by⟩)) ,
+          a<[ax,bx][ay,by]) ← a<xy
+        ( ( ax'<x<bx'@([ax',bx']@((ax' , bx') , _) , x∈⟨ax',bx'⟩) ,
+            ay'<y<by'@([ay',by']@((ay' , by') , _) , y∈⟨ay',by'⟩)) ,
+          [ax',bx'][ay',by']<b) ← xy<b
+        let
+          ax''<x<bx''@([ax'',bx''] , _) =
+            intersection-type-enclosing-closed-rational-interval-ℝ x
+              ( ax<x<bx)
+              ( ax'<x<bx')
+          ay''<y<by''@([ay'',by''] , _) =
+            intersection-type-enclosing-closed-rational-interval-ℝ y
+              ( ay<y<by)
+              ( ay'<y<by')
+          [ax,bx]∩[ax',bx'] =
+            intersect-enclosing-closed-rational-interval-ℝ
+              ( x)
+              ( [ax,bx])
+              ( [ax',bx'])
+              ( x∈⟨ax,bx⟩)
+              ( x∈⟨ax',bx'⟩)
+          [ay,by]∩[ay',by'] =
+            intersect-enclosing-closed-rational-interval-ℝ
+              ( y)
+              ( [ay,by])
+              ( [ay',by'])
+              ( y∈⟨ay,by⟩)
+              ( y∈⟨ay',by'⟩)
+          [ax'',bx''][ay'',by'']⊆[ax,bx][ay,by] =
+            preserves-leq-mul-closed-interval-ℚ
+              ( [ax'',bx''])
+              ( [ax,bx])
+              ( [ay'',by''])
+              ( [ay,by])
+              ( leq-left-intersection-closed-interval-ℚ
+                ( [ax,bx])
+                ( [ax',bx'])
+                ( [ax,bx]∩[ax',bx']))
+              ( leq-left-intersection-closed-interval-ℚ
+                ( [ay,by])
+                ( [ay',by'])
+                ( [ay,by]∩[ay',by']))
+          [ax'',bx''][ay'',by'']⊆[ax',bx'][ay',by'] =
+            preserves-leq-mul-closed-interval-ℚ
+              ( [ax'',bx''])
+              ( [ax',bx'])
+              ( [ay'',by''])
+              ( [ay',by'])
+              ( leq-right-intersection-closed-interval-ℚ
+                ( [ax,bx])
+                ( [ax',bx'])
+                ( [ax,bx]∩[ax',bx']))
+              ( leq-right-intersection-closed-interval-ℚ
+                ( [ay,by])
+                ( [ay',by'])
+                ( [ay,by]∩[ay',by']))
+        intro-exists
+          ( ax''<x<bx'' , ay''<y<by'')
+          ( concatenate-le-leq-ℚ _ _ _
+              ( a<[ax,bx][ay,by])
+              ( pr1 [ax'',bx''][ay'',by'']⊆[ax,bx][ay,by]) ,
+            concatenate-leq-le-ℚ _ _ _
+              ( pr2 [ax'',bx''][ay'',by'']⊆[ax',bx'][ay',by'])
+              ( [ax',bx'][ay',by']<b))
+```
 
 ### Commutativity of multiplication
 
@@ -599,6 +715,70 @@ abstract
 ```
 
 ### Associativity of multiplication
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  opaque
+    unfolding leq-ℝ mul-ℝ
+
+    leq-associative-mul-ℝ : leq-ℝ ((x *ℝ y) *ℝ z) (x *ℝ (y *ℝ z))
+    leq-associative-mul-ℝ q q<⟨xy⟩z =
+      let open do-syntax-trunc-Prop (lower-cut-mul-ℝ x (y *ℝ z) q)
+      in do
+        ( ( axy<xy<bxy@([axy,bxy]@((axy , bxy) , _) , axy<xy , xy<bxy) ,
+            az<z<bz@([az,bz]@((az , bz) , _) , z∈⟨az,bz⟩)) ,
+          q<[axy,bxy][az,bz]) ← q<⟨xy⟩z
+        ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , x∈⟨ax,bx⟩) ,
+            ay<y<by@([ay,by]@((ay , by) , _) , y∈⟨ay,by⟩)) ,
+          axy<[ax,bx][ay,by] , [ax,bx][ay,by]<bxy) ←
+          enclosing-rational-range-mul-ℝ x y [axy,bxy] (axy<xy , xy<bxy)
+        intro-exists
+          ( ax<x<bx ,
+            ( mul-closed-interval-ℚ [ay,by] [az,bz] ,
+              leq-lower-cut-mul-ℝ'-lower-cut-mul-ℝ y z
+                ( lower-bound-mul-closed-interval-ℚ [ay,by] [az,bz])
+                ( intro-exists (ay<y<by , az<z<bz) (refl-leq-ℚ _)) ,
+              leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ y z
+                ( upper-bound-mul-closed-interval-ℚ [ay,by] [az,bz])
+                ( intro-exists (ay<y<by , az<z<bz) (refl-leq-ℚ _))))
+          ( concatenate-le-leq-ℚ q _ _
+            ( q<[axy,bxy][az,bz])
+            ( pr1
+              ( tr
+                ( λ z →
+                  leq-closed-interval-ℚ
+                    ( z)
+                    ( mul-closed-interval-ℚ [axy,bxy] [az,bz]))
+                ( associative-mul-closed-interval-ℚ [ax,bx] [ay,by] [az,bz])
+                ( preserves-leq-left-mul-closed-interval-ℚ
+                  ( [az,bz])
+                  ( mul-closed-interval-ℚ [ax,bx] [ay,by])
+                  ( [axy,bxy])
+                  ( leq-le-ℚ axy<[ax,bx][ay,by] ,
+                    leq-le-ℚ [ax,bx][ay,by]<bxy)))))
+
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    associative-mul-ℝ : (x *ℝ y) *ℝ z ＝ x *ℝ (y *ℝ z)
+    associative-mul-ℝ =
+      let open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in
+        antisymmetric-leq-ℝ _ _
+          ( leq-associative-mul-ℝ x y z)
+          ( binary-tr
+            ( leq-ℝ)
+            ( ( commutative-mul-ℝ (z *ℝ y) x) ∙
+              ( ap-mul-ℝ refl (commutative-mul-ℝ z y)))
+            ( ( commutative-mul-ℝ z (y *ℝ x)) ∙
+              ( ap-mul-ℝ (commutative-mul-ℝ y x) refl))
+            ( leq-associative-mul-ℝ z y x))
+```
 
 ### Unit laws
 
@@ -818,4 +998,134 @@ abstract
     antisymmetric-leq-ℝ _ _
       ( leq-left-distributive-mul-add-ℝ x y z)
       ( leq-left-distributive-mul-add-ℝ' x y z)
+
+  right-distributive-mul-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x +ℝ y) *ℝ z ＝ x *ℝ z +ℝ y *ℝ z
+  right-distributive-mul-add-ℝ x y z =
+    equational-reasoning
+      (x +ℝ y) *ℝ z
+      ＝ z *ℝ (x +ℝ y)
+        by commutative-mul-ℝ _ _
+      ＝ z *ℝ x +ℝ z *ℝ y
+        by left-distributive-mul-add-ℝ z x y
+      ＝ x *ℝ z +ℝ y *ℝ z
+        by ap-add-ℝ (commutative-mul-ℝ z x) (commutative-mul-ℝ z y)
+```
+
+### Zero laws
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  opaque
+    unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
+
+    leq-left-zero-law-mul-ℝ : leq-ℝ (zero-ℝ *ℝ x) zero-ℝ
+    leq-left-zero-law-mul-ℝ q q<0x =
+      let open do-syntax-trunc-Prop (le-ℚ-Prop q zero-ℚ)
+      in do
+        ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
+          q<[a₀,b₀][ax,bx]) ← q<0x
+        concatenate-le-leq-ℚ
+          ( q)
+          ( lower-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
+          ( zero-ℚ)
+          ( q<[a₀,b₀][ax,bx])
+          ( tr
+            ( leq-ℚ _)
+            ( left-zero-law-mul-ℚ ax)
+            ( pr1
+              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                ( [a₀,b₀])
+                ( [ax,bx])
+                ( zero-ℚ)
+                ( ax)
+                ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
+                ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
+
+    leq-left-zero-law-mul-ℝ' : leq-ℝ zero-ℝ (zero-ℝ *ℝ x)
+    leq-left-zero-law-mul-ℝ' =
+      leq-leq'-ℝ zero-ℝ (zero-ℝ *ℝ x)
+        ( λ q 0x<q →
+          let open do-syntax-trunc-Prop (le-ℚ-Prop zero-ℚ q)
+          in do
+            ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
+              [a₀,b₀][ax,bx]<q) ← 0x<q
+            concatenate-leq-le-ℚ
+              ( zero-ℚ)
+              ( upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
+              ( q)
+              ( tr
+                ( λ p →
+                  leq-ℚ p (upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx]))
+                ( left-zero-law-mul-ℚ ax)
+                ( pr2
+                  ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                    ( [a₀,b₀])
+                    ( [ax,bx])
+                    ( zero-ℚ)
+                    ( ax)
+                    ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
+                    ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
+              ( [a₀,b₀][ax,bx]<q))
+
+  abstract
+    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
+    left-zero-law-mul-ℝ =
+      sim-sim-leq-ℝ (leq-left-zero-law-mul-ℝ , leq-left-zero-law-mul-ℝ')
+
+    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
+    right-zero-law-mul-ℝ =
+      tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
+```
+
+### The inclusion of rational numbers preserves multiplication
+
+```agda
+opaque
+  unfolding mul-ℝ real-ℚ
+
+  mul-real-ℚ : (p q : ℚ) → real-ℚ p *ℝ real-ℚ q ＝ real-ℚ (p *ℚ q)
+  mul-real-ℚ p q =
+    let open do-syntax-trunc-Prop empty-Prop
+    in
+      eq-sim-ℝ
+        ( sim-rational-ℝ
+          ( real-ℚ p *ℝ real-ℚ q ,
+            p *ℚ q ,
+            ( λ pq<pℝqℝ →
+                do
+                  ( (([a,b] , a<p , p<b) , ([c,d] , c<q , q<d)) ,
+                    pq<[a,b][c,d]) ← pq<pℝqℝ
+                  irreflexive-le-ℚ
+                    ( p *ℚ q)
+                    ( concatenate-le-leq-ℚ _ _ _
+                      ( pq<[a,b][c,d])
+                      ( pr1
+                        ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                          ( [a,b])
+                          ( [c,d])
+                          ( p)
+                          ( q)
+                          ( leq-le-ℚ a<p , leq-le-ℚ p<b)
+                          ( leq-le-ℚ c<q , leq-le-ℚ q<d))))) ,
+            ( λ pℝqℝ<pq →
+              do
+                ( (([a,b] , a<p , p<b) , ([c,d] , c<q , q<d)) ,
+                    [a,b][c,d]<pq) ← pℝqℝ<pq
+                irreflexive-le-ℚ
+                  ( p *ℚ q)
+                  ( concatenate-leq-le-ℚ _ _ _
+                    ( pr2
+                      ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                        ( [a,b])
+                        ( [c,d])
+                        ( p)
+                        ( q)
+                        ( leq-le-ℚ a<p , leq-le-ℚ p<b)
+                        ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
+                    ( [a,b][c,d]<pq)))))
 ```
