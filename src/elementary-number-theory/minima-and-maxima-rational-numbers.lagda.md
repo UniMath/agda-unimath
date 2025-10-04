@@ -21,7 +21,7 @@ open import foundation.identity-types
 
 ## Idea
 
-In this file, we outline basic relations between
+On this page, we outline basic relations between
 [minima](elementary-number-theory.minimum-rational-numbers.md) and
 [maxima](elementary-number-theory.maximum-rational-numbers.md) of
 [rational numbers](elementary-number-theory.rational-numbers.md).

@@ -20,7 +20,7 @@ open import foundation.dependent-pair-types
 
 ## Idea
 
-The negation of a
+The {{#concept "negation" Disambiguation="closed interval of rational numbers" Agda=neg-closed-interval-ℚ}} of a
 [closed interval of rational numbers](elementary-number-theory.closed-intervals-rational-numbers.md)
 [a, b] is [-b, -a].
 
