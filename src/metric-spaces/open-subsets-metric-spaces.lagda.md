@@ -7,6 +7,7 @@ module metric-spaces.open-subsets-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
