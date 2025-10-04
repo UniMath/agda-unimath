@@ -9,6 +9,7 @@ module real-numbers.arithmetically-located-dedekind-cuts where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers

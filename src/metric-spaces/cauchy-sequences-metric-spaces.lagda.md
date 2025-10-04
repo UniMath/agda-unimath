@@ -9,6 +9,7 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -18,6 +19,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
