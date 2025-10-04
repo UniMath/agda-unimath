@@ -111,17 +111,6 @@ width-closed-interval-ℚ [a,b] =
   rational-ℚ⁰⁺ (nonnegative-width-closed-interval-ℚ [a,b])
 ```
 
-### The property of a closed interval of being proper
-
-```agda
-is-proper-prop-closed-interval-ℚ : closed-interval-ℚ → Prop lzero
-is-proper-prop-closed-interval-ℚ ((a , b) , _) = le-ℚ-Prop a b
-
-is-proper-closed-interval-ℚ : closed-interval-ℚ → UU lzero
-is-proper-closed-interval-ℚ [a,b] =
-  type-Prop (is-proper-prop-closed-interval-ℚ [a,b])
-```
-
 ### Important ranges
 
 ```agda
@@ -181,14 +170,6 @@ abstract
     eq-closed-interval-ℚ _ _
       ( right-leq-left-min-ℚ p q q≤p)
       ( right-leq-left-max-ℚ p q q≤p)
-```
-
-### Maps from rational intervals to rational intervals
-
-```agda
-is-closed-interval-map-ℚ :
-  (ℚ → ℚ) → ([a,b] [c,d] : closed-interval-ℚ) → UU lzero
-is-closed-interval-map-ℚ = is-closed-interval-map-Poset ℚ-Poset ℚ-Poset
 ```
 
 ### The bounds of a closed interval are elements
