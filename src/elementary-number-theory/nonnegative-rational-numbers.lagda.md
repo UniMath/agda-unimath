@@ -9,6 +9,7 @@ module elementary-number-theory.nonnegative-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
@@ -16,6 +17,7 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integer-fractions
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers
@@ -106,10 +108,6 @@ module _
   is-positive-denominator-ℚ⁰⁺ : is-positive-ℤ denominator-ℚ⁰⁺
   is-positive-denominator-ℚ⁰⁺ = is-positive-denominator-ℚ rational-ℚ⁰⁺
 
-abstract
-  eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
-  eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
-
 zero-ℚ⁰⁺ : ℚ⁰⁺
 zero-ℚ⁰⁺ = zero-ℚ , _
 
@@ -118,6 +116,14 @@ one-ℚ⁰⁺ = one-ℚ , _
 ```
 
 ## Properties
+
+### Equality on nonnegative rational numbers
+
+```agda
+abstract
+  eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
+  eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
+```
 
 ### The nonnegative rational numbers form a set
 
@@ -148,6 +154,13 @@ abstract
 nonnegative-rational-nonnegative-ℤ : nonnegative-ℤ → ℚ⁰⁺
 nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
   ( rational-ℤ x , is-nonnegative-rational-ℤ x x-is-neg)
+```
+
+### The images of natural numbers in the rationals are nonnegative
+
+```agda
+nonnegative-rational-ℕ : ℕ → ℚ⁰⁺
+nonnegative-rational-ℕ n = (rational-ℕ n , is-nonnegative-int-ℕ n)
 ```
 
 ### The rational image of a nonnegative integer fraction is nonnegative
@@ -188,6 +201,11 @@ module _
     is-nonnegative-iff-leq-zero-ℚ =
       ( leq-zero-is-nonnegative-ℚ ,
         is-nonnegative-leq-zero-ℚ)
+
+abstract
+  leq-zero-rational-ℚ⁰⁺ : (p : ℚ⁰⁺) → leq-ℚ zero-ℚ (rational-ℚ⁰⁺ p)
+  leq-zero-rational-ℚ⁰⁺ (p , is-nonneg-p) =
+    leq-zero-is-nonnegative-ℚ p is-nonneg-p
 ```
 
 ### The successor of a nonnegative rational number is positive

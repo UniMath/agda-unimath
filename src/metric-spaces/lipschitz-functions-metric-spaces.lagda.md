@@ -9,6 +9,7 @@ module metric-spaces.lipschitz-functions-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 

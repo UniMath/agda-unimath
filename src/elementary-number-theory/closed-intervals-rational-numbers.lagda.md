@@ -8,10 +8,16 @@ module elementary-number-theory.closed-intervals-rational-numbers where
 
 ```agda
 open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -54,7 +60,13 @@ lower-bound-closed-interval-ℚ =
 upper-bound-closed-interval-ℚ : closed-interval-ℚ → ℚ
 upper-bound-closed-interval-ℚ =
   upper-bound-closed-interval-Poset ℚ-Poset
+```
 
+## Properties
+
+### The subtype associated with a closed interval
+
+```agda
 subtype-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 subtype-closed-interval-ℚ =
@@ -63,21 +75,41 @@ subtype-closed-interval-ℚ =
 is-in-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
 is-in-closed-interval-ℚ [a,b] =
   is-in-subtype (subtype-closed-interval-ℚ [a,b])
+```
 
+### The property of a function `ℚ → ℚ` of mapping a closed interval to a closed interval
+
+```agda
 is-closed-interval-map-prop-ℚ :
   (ℚ → ℚ) → closed-interval-ℚ → closed-interval-ℚ →
   Prop lzero
 is-closed-interval-map-prop-ℚ =
   is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
+```
 
+### The property of being above or below a closed interval
+
+```agda
 is-below-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-below-prop-closed-interval-ℚ ((a , _) , _) b = le-ℚ-Prop b a
+
+is-below-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-below-closed-interval-ℚ [a,b] q =
+  type-Prop (is-below-prop-closed-interval-ℚ [a,b] q)
 
 is-above-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-above-prop-closed-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
 
+is-above-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-above-closed-interval-ℚ [a,b] q =
+  type-Prop (is-above-prop-closed-interval-ℚ [a,b] q)
+```
+
+### The width of a closed interval
+
+```agda
 nonnegative-width-closed-interval-ℚ :
   closed-interval-ℚ → ℚ⁰⁺
 nonnegative-width-closed-interval-ℚ ((a , b) , a≤b) =
@@ -86,11 +118,17 @@ nonnegative-width-closed-interval-ℚ ((a , b) , a≤b) =
 width-closed-interval-ℚ : closed-interval-ℚ → ℚ
 width-closed-interval-ℚ [a,b] =
   rational-ℚ⁰⁺ (nonnegative-width-closed-interval-ℚ [a,b])
+```
 
-is-injective-subtype-closed-interval-ℚ :
-  is-injective subtype-closed-interval-ℚ
-is-injective-subtype-closed-interval-ℚ =
-  is-injective-subtype-closed-interval-Poset ℚ-Poset
+### The property of a closed interval of being proper
+
+```agda
+is-proper-prop-closed-interval-ℚ : closed-interval-ℚ → Prop lzero
+is-proper-prop-closed-interval-ℚ ((a , b) , _) = le-ℚ-Prop a b
+
+is-proper-closed-interval-ℚ : closed-interval-ℚ → UU lzero
+is-proper-closed-interval-ℚ [a,b] =
+  type-Prop (is-proper-prop-closed-interval-ℚ [a,b])
 ```
 
 ### Important ranges
@@ -103,7 +141,14 @@ one-one-closed-interval-ℚ : closed-interval-ℚ
 one-one-closed-interval-ℚ = ((one-ℚ , one-ℚ) , refl-leq-ℚ one-ℚ)
 ```
 
-## Properties
+### The map from closed intervals to their subtypes is injective
+
+```agda
+is-injective-subtype-closed-interval-ℚ :
+  is-injective subtype-closed-interval-ℚ
+is-injective-subtype-closed-interval-ℚ =
+  is-injective-subtype-closed-interval-Poset ℚ-Poset
+```
 
 ### Characterization of equality
 
@@ -153,4 +198,43 @@ abstract
 is-closed-interval-map-ℚ :
   (ℚ → ℚ) → ([a,b] [c,d] : closed-interval-ℚ) → UU lzero
 is-closed-interval-map-ℚ = is-closed-interval-map-Poset ℚ-Poset ℚ-Poset
+```
+
+### The bounds of a closed interval are elements
+
+```agda
+lower-bound-is-in-closed-interval-ℚ :
+  ([a,b] : closed-interval-ℚ) →
+  is-in-closed-interval-ℚ [a,b] (lower-bound-closed-interval-ℚ [a,b])
+lower-bound-is-in-closed-interval-ℚ =
+  lower-bound-is-in-closed-interval-Poset ℚ-Poset
+
+upper-bound-is-in-closed-interval-ℚ :
+  ([a,b] : closed-interval-ℚ) →
+  is-in-closed-interval-ℚ [a,b] (upper-bound-closed-interval-ℚ [a,b])
+upper-bound-is-in-closed-interval-ℚ =
+  upper-bound-is-in-closed-interval-Poset ℚ-Poset
+```
+
+### The distance between the lower and upper bounds of a closed interval is its width
+
+```agda
+abstract
+  eq-width-dist-lower-upper-bounds-closed-interval-ℚ :
+    ([a,b] : closed-interval-ℚ) →
+    rational-dist-ℚ
+      ( lower-bound-closed-interval-ℚ [a,b])
+      ( upper-bound-closed-interval-ℚ [a,b]) ＝
+    width-closed-interval-ℚ [a,b]
+  eq-width-dist-lower-upper-bounds-closed-interval-ℚ ((a , b) , a≤b) =
+    eq-dist-diff-leq-ℚ a b a≤b
+
+  eq-width-dist-upper-lower-bounds-closed-interval-ℚ :
+    ([a,b] : closed-interval-ℚ) →
+    rational-dist-ℚ
+      ( upper-bound-closed-interval-ℚ [a,b])
+      ( lower-bound-closed-interval-ℚ [a,b]) ＝
+    width-closed-interval-ℚ [a,b]
+  eq-width-dist-upper-lower-bounds-closed-interval-ℚ ((a , b) , a≤b) =
+    eq-dist-diff-leq-ℚ' b a a≤b
 ```

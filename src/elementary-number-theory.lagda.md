@@ -9,6 +9,7 @@
 ```agda
 module elementary-number-theory where
 
+open import elementary-number-theory.absolute-value-closed-intervals-rational-numbers public
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.absolute-value-rational-numbers public
 open import elementary-number-theory.ackermann-function public
@@ -18,6 +19,7 @@ open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-nonnegative-rational-numbers public
 open import elementary-number-theory.addition-positive-and-negative-integers public
+open import elementary-number-theory.addition-positive-rational-numbers public
 open import elementary-number-theory.addition-rational-numbers public
 open import elementary-number-theory.additive-group-of-rational-numbers public
 open import elementary-number-theory.archimedean-property-integer-fractions public
@@ -97,6 +99,7 @@ open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-nonnegative-rational-numbers public
+open import elementary-number-theory.inequality-positive-rational-numbers public
 open import elementary-number-theory.inequality-rational-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
 open import elementary-number-theory.infinite-conatural-numbers public
@@ -105,16 +108,22 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.interior-closed-intervals-rational-numbers public
+open import elementary-number-theory.intersections-closed-intervals-rational-numbers public
 open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
+open import elementary-number-theory.maximum-nonnegative-rational-numbers public
+open import elementary-number-theory.maximum-positive-rational-numbers public
 open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
+open import elementary-number-theory.minima-and-maxima-rational-numbers public
 open import elementary-number-theory.minimum-natural-numbers public
+open import elementary-number-theory.minimum-positive-rational-numbers public
 open import elementary-number-theory.minimum-rational-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
@@ -127,7 +136,10 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers public
+open import elementary-number-theory.multiplication-nonpositive-rational-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers public
+open import elementary-number-theory.multiplication-positive-rational-numbers public
 open import elementary-number-theory.multiplication-rational-numbers public
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers public
 open import elementary-number-theory.multiplicative-group-of-rational-numbers public
@@ -138,6 +150,7 @@ open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.negation-closed-intervals-rational-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public
@@ -145,6 +158,7 @@ open import elementary-number-theory.nonnegative-integer-fractions public
 open import elementary-number-theory.nonnegative-integers public
 open import elementary-number-theory.nonnegative-rational-numbers public
 open import elementary-number-theory.nonpositive-integers public
+open import elementary-number-theory.nonpositive-rational-numbers public
 open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.nonzero-rational-numbers public
@@ -152,6 +166,7 @@ open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
+open import elementary-number-theory.poset-closed-intervals-rational-numbers public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
 open import elementary-number-theory.positive-and-negative-rational-numbers public
@@ -187,6 +202,7 @@ open import elementary-number-theory.strict-inequality-integer-fractions public
 open import elementary-number-theory.strict-inequality-integers public
 open import elementary-number-theory.strict-inequality-natural-numbers public
 open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers public
+open import elementary-number-theory.strict-inequality-positive-rational-numbers public
 open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strict-inequality-standard-finite-types public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public

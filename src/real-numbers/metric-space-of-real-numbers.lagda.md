@@ -9,6 +9,7 @@ module real-numbers.metric-space-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -269,7 +270,7 @@ module _
 
 ## Properties
 
-### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y  ≤ x + d`
+### The element `x` is in a `d`-neighborhood of `y` if and only if `x ≤ y + d` and `y ≤ x + d`
 
 ```agda
 module _

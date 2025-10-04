@@ -7,6 +7,7 @@ module metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 

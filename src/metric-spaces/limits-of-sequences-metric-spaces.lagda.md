@@ -7,6 +7,7 @@ module metric-spaces.limits-of-sequences-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers

@@ -10,6 +10,7 @@ module real-numbers.saturation-inequality-real-numbers where
 
 ```agda
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.universe-levels
 

@@ -10,13 +10,16 @@ module elementary-number-theory.multiplicative-group-of-positive-rational-number
 
 ```agda
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
@@ -166,4 +169,12 @@ module _
       denominator-ℚ⁺ (inv-ℚ⁺ x) ＝ numerator-ℚ⁺ x
     eq-denominator-inv-numerator-ℚ⁺ =
       ind-Σ eq-denominator-inv-numerator-is-positive-ℚ x
+```
+
+### Group laws on the positive rational numbers
+
+```agda
+abstract
+  is-section-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
+  is-section-right-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
 ```

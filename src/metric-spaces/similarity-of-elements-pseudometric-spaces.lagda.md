@@ -9,6 +9,7 @@ module metric-spaces.similarity-of-elements-pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations

@@ -36,9 +36,9 @@ open import foundation.interchange-law
 
 ## Idea
 
-**Multiplication** on the
-[rational numbers](elementary-number-theory.rational-numbers.md) is defined by
-extending
+{{#concept "Multiplication" WDID=Q40276 WD="multiplication" Disambiguation="of rational numbers" Agda=mul-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) is
+defined by extending
 [multiplication](elementary-number-theory.multiplication-integer-fractions.md)
 on [integer fractions](elementary-number-theory.integer-fractions.md) to the
 rational numbers.
