@@ -24,8 +24,7 @@ concurrency:
 
 jobs:
   typecheck:
-    if:
-      ${{ github.event_name == 'workflow_dispatch' || github.event_name ==
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name ==
       'push' || (github.event_name == 'pull_request' &&
       github.event.pull_request.draft == false) }}
     runs-on: ubuntu-latest
@@ -48,8 +47,7 @@ jobs:
         name: Restore Agda formalization cache
         with:
           path: repo/_build
-          key:
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
             hashFiles('repo/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
