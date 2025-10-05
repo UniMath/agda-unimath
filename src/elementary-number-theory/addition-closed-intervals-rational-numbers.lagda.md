@@ -12,8 +12,8 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.binary-transport
 open import foundation.coproduct-types
