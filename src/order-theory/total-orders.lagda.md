@@ -601,6 +601,25 @@ module _
         ( order-theoretic-join-semilattice-Total-Order T)
 ```
 
+### If `a ≤ c` and `b ≤ c`, then `max a b ≤ c`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-max-leq-both-Total-Order :
+      (a b c : type-Total-Order T) →
+      leq-Total-Order T a c → leq-Total-Order T b c →
+      leq-Total-Order T (max-Total-Order T a b) c
+    leq-max-leq-both-Total-Order a b c a≤c b≤c =
+      tr
+        ( leq-Total-Order T (max-Total-Order T a b))
+        ( idempotent-max-Total-Order T c)
+        ( max-leq-leq-Total-Order T a c b c a≤c b≤c)
+```
+
 ### The minimum of two values is equal to one of them
 
 ```agda
