@@ -75,3 +75,9 @@ Filter-Poset :
   {l1 l2 : Level} → (l : Level) → Poset l1 l2 → UU (l1 ⊔ l2 ⊔ lsuc l)
 Filter-Poset l P = type-subtype (is-filter-prop-Subposet {l3 = l} P)
 ```
+
+## External links
+
+- [Filter (mathematics)](<https://en.wikipedia.org/wiki/Filter_(mathematics)>)
+  at Wikipedia
+- [filter] at $n$Lab
