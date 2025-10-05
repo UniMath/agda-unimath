@@ -221,13 +221,13 @@ abstract
   is-one-is-proper-divisor-two-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) (pair f H) =
     ex-falso (leq-div-succ-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) 1 H)
 
-  is-prime-easy-two-ℕ : is-prime-easy-ℕ 2
-  pr1 is-prime-easy-two-ℕ = Eq-eq-ℕ
-  pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ
+is-prime-easy-two-ℕ : is-prime-easy-ℕ 2
+pr1 is-prime-easy-two-ℕ = Eq-eq-ℕ
+pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ
 
-  is-prime-two-ℕ : is-prime-ℕ 2
-  is-prime-two-ℕ =
-    is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
+is-prime-two-ℕ : is-prime-ℕ 2
+is-prime-two-ℕ =
+  is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
 ```
 
 ### If a prime number `p` divides a nonzero number `x`, then `x/p < x`
