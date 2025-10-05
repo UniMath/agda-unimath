@@ -215,8 +215,7 @@ module _
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding mul-ℚ
+  unfolding le-ℚ-Prop mul-ℚ
 
   preserves-le-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
