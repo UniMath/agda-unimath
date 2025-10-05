@@ -157,17 +157,16 @@ abstract
 Note that the divisibility relation on the integers is not antisymmetric.
 
 ```agda
-abstract
-  refl-div-ℤ : is-reflexive div-ℤ
-  pr1 (refl-div-ℤ x) = one-ℤ
-  pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
+refl-div-ℤ : is-reflexive div-ℤ
+pr1 (refl-div-ℤ x) = one-ℤ
+pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
 
-  transitive-div-ℤ : is-transitive div-ℤ
-  pr1 (transitive-div-ℤ x y z (pair e q) (pair d p)) = e *ℤ d
-  pr2 (transitive-div-ℤ x y z (pair e q) (pair d p)) =
-    ( associative-mul-ℤ e d x) ∙
-      ( ( ap (e *ℤ_) p) ∙
-        ( q))
+transitive-div-ℤ : is-transitive div-ℤ
+pr1 (transitive-div-ℤ x y z (pair e q) (pair d p)) = e *ℤ d
+pr2 (transitive-div-ℤ x y z (pair e q) (pair d p)) =
+  ( associative-mul-ℤ e d x) ∙
+    ( ( ap (e *ℤ_) p) ∙
+      ( q))
 ```
 
 ### Every integer is divisible by `1`
@@ -222,63 +221,58 @@ abstract
 ### If `x` divides both `y` and `z`, then it divides `y + z`
 
 ```agda
-abstract
-  div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
-  pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = d +ℤ e
-  pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
-    ( right-distributive-mul-add-ℤ d e x) ∙
-    ( ap-add-ℤ p q)
+div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
+pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = d +ℤ e
+pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
+  ( right-distributive-mul-add-ℤ d e x) ∙
+  ( ap-add-ℤ p q)
 ```
 
 ### If `x` divides `y` then `x` divides any multiple of `y`
 
 ```agda
-abstract
-  div-mul-ℤ :
-    (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
-  div-mul-ℤ k x y = transitive-div-ℤ x y (k *ℤ y) (k , refl)
+div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
+div-mul-ℤ k x y = transitive-div-ℤ x y (k *ℤ y) (k , refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`
 
 ```agda
-abstract
-  div-neg-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ x (neg-ℤ y)
-  pr1 (div-neg-ℤ x y (pair d p)) = neg-ℤ d
-  pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ p
+div-neg-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ x (neg-ℤ y)
+pr1 (div-neg-ℤ x y (pair d p)) = neg-ℤ d
+pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ p
 ```
 
 ### If `x` divides `y` then `-x` divides `y`
 
 ```agda
-abstract
-  neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
-  pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
-  pr2 (neg-div-ℤ x y (pair d p)) =
-    equational-reasoning
-      (neg-ℤ d) *ℤ (neg-ℤ x)
-      ＝ neg-ℤ (d *ℤ (neg-ℤ x))
-        by left-negative-law-mul-ℤ d (neg-ℤ x)
-      ＝ neg-ℤ (neg-ℤ (d *ℤ x))
-        by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-      ＝ (d *ℤ x)
-        by neg-neg-ℤ (d *ℤ x)
-      ＝ y
-        by p
+neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
+pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
+pr2 (neg-div-ℤ x y (pair d p)) =
+  equational-reasoning
+    (neg-ℤ d) *ℤ (neg-ℤ x)
+    ＝ neg-ℤ (d *ℤ (neg-ℤ x))
+      by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (d *ℤ x))
+      by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (d *ℤ x)
+      by neg-neg-ℤ (d *ℤ x)
+    ＝ y
+      by p
 ```
 
 ### Multiplication preserves divisibility
 
 ```agda
-abstract
-  preserves-div-mul-ℤ :
-    (k x y : ℤ) → div-ℤ x y → div-ℤ (k *ℤ x) (k *ℤ y)
-  pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
-  pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
-    ( inv (associative-mul-ℤ q k x)) ∙
-      ( ( ap (_*ℤ x) (commutative-mul-ℤ q k)) ∙
-        ( ( associative-mul-ℤ k q x) ∙
-          ( ap (k *ℤ_) p)))
+preserves-div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (k *ℤ x) (k *ℤ y)
+pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
+pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
+  ( inv (associative-mul-ℤ q k x)) ∙
+  ( ap (_*ℤ x) (commutative-mul-ℤ q k)) ∙
+  ( associative-mul-ℤ k q x) ∙
+  ( ap (k *ℤ_) p)
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
@@ -291,63 +285,61 @@ abstract
   pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
     is-injective-left-mul-ℤ k H
       ( ( inv (associative-mul-ℤ k q x)) ∙
-        ( ( ap (_*ℤ x) (commutative-mul-ℤ k q)) ∙
-          ( ( associative-mul-ℤ q k x) ∙
-            ( p))))
+        ( ap (_*ℤ x) (commutative-mul-ℤ k q)) ∙
+        ( associative-mul-ℤ q k x) ∙
+        ( p))
 ```
 
 ### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
 
 ```agda
-abstract
-  div-quotient-div-div-ℤ :
-    (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
-    div-ℤ (d *ℤ x) y → div-ℤ x (quotient-div-ℤ d y H)
-  div-quotient-div-div-ℤ x y d H f K =
-    reflects-div-mul-ℤ d x
-      ( quotient-div-ℤ d y H)
-      ( f)
-      ( tr (div-ℤ (d *ℤ x)) (inv (eq-quotient-div-ℤ' d y H)) K)
+div-quotient-div-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
+  div-ℤ (d *ℤ x) y → div-ℤ x (quotient-div-ℤ d y H)
+div-quotient-div-div-ℤ x y d H f K =
+  reflects-div-mul-ℤ d x
+    ( quotient-div-ℤ d y H)
+    ( f)
+    ( tr (div-ℤ (d *ℤ x)) (inv (eq-quotient-div-ℤ' d y H)) K)
 
-  div-div-quotient-div-ℤ :
-    (x y d : ℤ) (H : div-ℤ d y) →
-    div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (d *ℤ x) y
-  div-div-quotient-div-ℤ x y d H K =
-    tr
-      ( div-ℤ (d *ℤ x))
-      ( eq-quotient-div-ℤ' d y H)
-      ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
+div-div-quotient-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) →
+  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (d *ℤ x) y
+div-div-quotient-div-ℤ x y d H K =
+  tr
+    ( div-ℤ (d *ℤ x))
+    ( eq-quotient-div-ℤ' d y H)
+    ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
-### Comparison of divisibility on `ℕ` and on `ℤ`
+### The canonical embedding of natural numbers preserves and reflects divisibility
 
 ```agda
-abstract
-  div-int-div-ℕ :
-    {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
-  pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
-  pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
+div-int-div-ℕ :
+  {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
+pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
+pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
 
-  div-div-int-ℕ :
-    {x y : ℕ} → div-ℤ (int-ℕ x) (int-ℕ y) → div-ℕ x y
-  div-div-int-ℕ {zero-ℕ} {y} (pair d p) =
-    div-eq-ℕ zero-ℕ y
-      ( inv (is-injective-int-ℕ (is-zero-div-zero-ℤ (int-ℕ y) (pair d p))))
-  pr1 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) = abs-ℤ d
-  pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
-    is-injective-int-ℕ
-      ( ( inv (mul-int-ℕ (abs-ℤ d) (succ-ℕ x))) ∙
-        ( ( ap
-            ( _*ℤ (inr (inr x)))
-            { int-abs-ℤ d}
-            { d}
-            ( int-abs-is-nonnegative-ℤ d
-              ( is-nonnegative-left-factor-mul-ℤ
-                { d}
-                { inr (inr x)}
-                ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
-                ( star)))) ∙
-          ( p)))
+div-div-int-ℕ :
+  {x y : ℕ} → div-ℤ (int-ℕ x) (int-ℕ y) → div-ℕ x y
+div-div-int-ℕ {zero-ℕ} {y} (pair d p) =
+  div-eq-ℕ zero-ℕ y
+    ( inv (is-injective-int-ℕ (is-zero-div-zero-ℤ (int-ℕ y) (pair d p))))
+pr1 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) = abs-ℤ d
+pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
+  is-injective-int-ℕ
+    ( ( inv (mul-int-ℕ (abs-ℤ d) (succ-ℕ x))) ∙
+      ( ( ap
+          ( _*ℤ (inr (inr x)))
+          { int-abs-ℤ d}
+          { d}
+          ( int-abs-is-nonnegative-ℤ d
+            ( is-nonnegative-left-factor-mul-ℤ
+              { d}
+              { inr (inr x)}
+              ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
+              ( star)))) ∙
+        ( p)))
 ```
 
 ### An integer is a unit if and only if it is `1` or `-1`

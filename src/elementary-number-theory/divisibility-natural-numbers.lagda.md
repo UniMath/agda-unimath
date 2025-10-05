@@ -281,57 +281,55 @@ abstract
 ### If `x` divides `y` then `x` divides any multiple of `y`
 
 ```agda
-abstract
-  div-mul-ℕ :
-    (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
-  div-mul-ℕ k x y H =
-    transitive-div-ℕ x y (k *ℕ y) (pair k refl) H
+div-mul-ℕ :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
+div-mul-ℕ k x y H =
+  transitive-div-ℕ x y (k *ℕ y) (pair k refl) H
 
-  div-mul-ℕ' :
-    (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
-  div-mul-ℕ' k x y H =
-    tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
+div-mul-ℕ' :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
+div-mul-ℕ' k x y H =
+  tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
 ```
 
 ### A 3-for-2 property of division with respect to addition
 
 ```agda
-abstract
-  div-add-ℕ :
-    (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
-  pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = n +ℕ m
-  pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
-    ( right-distributive-mul-add-ℕ n m d) ∙
-    ( ap-add-ℕ p q)
+div-add-ℕ :
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
+pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = n +ℕ m
+pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
+  ( right-distributive-mul-add-ℕ n m d) ∙
+  ( ap-add-ℕ p q)
 
-  div-left-summand-ℕ :
-    (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
-  div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
-    pair zero-ℕ
-      ( ( inv (right-zero-law-mul-ℕ n)) ∙
-        ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
-  pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
-  pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
-    is-injective-right-add-ℕ (m *ℕ (succ-ℕ d))
-      ( ( inv
-          ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
-            ( commutative-add-ℕ
-              ( m *ℕ (succ-ℕ d))
-              ( (dist-ℕ m n) *ℕ (succ-ℕ d))))) ∙
-        ( ( ap
-            ( _*ℕ (succ-ℕ d))
-            ( is-additive-right-inverse-dist-ℕ m n
-              ( reflects-order-mul-ℕ d m n
-                ( concatenate-eq-leq-eq-ℕ q
-                  ( leq-add-ℕ' y x)
-                  ( inv p))))) ∙
-          ( p ∙ (ap (x +ℕ_) (inv q)))))
+div-left-summand-ℕ :
+  (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
+div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
+  pair zero-ℕ
+    ( ( inv (right-zero-law-mul-ℕ n)) ∙
+      ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
+pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
+pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
+  is-injective-right-add-ℕ (m *ℕ (succ-ℕ d))
+    ( ( inv
+        ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
+          ( commutative-add-ℕ
+            ( m *ℕ (succ-ℕ d))
+            ( (dist-ℕ m n) *ℕ (succ-ℕ d))))) ∙
+      ( ( ap
+          ( _*ℕ (succ-ℕ d))
+          ( is-additive-right-inverse-dist-ℕ m n
+            ( reflects-order-mul-ℕ d m n
+              ( concatenate-eq-leq-eq-ℕ q
+                ( leq-add-ℕ' y x)
+                ( inv p))))) ∙
+        ( p ∙ (ap (x +ℕ_) (inv q)))))
 
-  div-right-summand-ℕ :
-    (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y
-  div-right-summand-ℕ d x y H1 H2 =
-    div-left-summand-ℕ d y x H1
-      ( concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
+div-right-summand-ℕ :
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y
+div-right-summand-ℕ d x y H1 H2 =
+  div-left-summand-ℕ d y x H1
+    ( concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
 ```
 
 ### If `d` divides both `x` and `x + 1`, then `d ＝ 1`
