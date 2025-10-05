@@ -39,7 +39,7 @@ open import ring-theory.trivial-rings
 The type of [integers](elementary-number-theory.integers.md) equipped with
 [addition](elementary-number-theory.addition-integers.md) and
 [multiplication](elementary-number-theory.multiplication-integers.md) is a
-[commutative ring](commutative-algebra.commutative-ring.md).
+[commutative ring](commutative-algebra.commutative-rings.md).
 
 The {{#concept "ring of integers" Agda=ℤ-Ring}} is the **initial**
 [ring](ring-theory.rings.md): for any ring `R`, there's a unique
