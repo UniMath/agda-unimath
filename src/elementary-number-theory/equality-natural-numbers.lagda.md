@@ -33,6 +33,13 @@ open import foundation-core.torsorial-type-families
 
 </details>
 
+## Idea
+
+We define equality on the
+[natural numbers](elementary-number-theory.natural-numbers.md) by pattern
+matching, and show that this characterizes the
+[identity type](foundation.identity-types.md) on the natural numbers.
+
 ## Definitions
 
 ### Observational equality on the natural numbers
@@ -86,8 +93,9 @@ pr2 ℕ-Set = is-set-ℕ
 ### The property of being zero
 
 ```agda
-is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
-is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
+abstract
+  is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
+  is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
 
 is-zero-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-zero-ℕ-Prop n) = is-zero-ℕ n
@@ -97,8 +105,9 @@ pr2 (is-zero-ℕ-Prop n) = is-prop-is-zero-ℕ n
 ### The property of being one
 
 ```agda
-is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
-is-prop-is-one-ℕ n = is-set-ℕ n 1
+abstract
+  is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
+  is-prop-is-one-ℕ n = is-set-ℕ n 1
 
 is-one-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-one-ℕ-Prop n) = is-one-ℕ n

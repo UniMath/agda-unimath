@@ -44,7 +44,6 @@ open import elementary-number-theory.closed-intervals-rational-numbers public
 open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
-open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.conatural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
@@ -181,6 +180,7 @@ open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.ring-extension-rational-numbers-of-rational-numbers public
 open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
+open import elementary-number-theory.semiring-of-natural-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public

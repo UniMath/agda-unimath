@@ -30,7 +30,8 @@ open import order-theory.preorders
 
 ## Idea
 
-The **poset of natural numbers ordered by divisibility** consists of the
+The **[poset](order-theory.posets.md) of natural numbers ordered by
+divisibility** consists of the
 [natural numbers](elementary-number-theory.natural-numbers.md) and its ordering
 is defined by `m ≤ n := m | n`, i.e., by
 [divisibility](elementary-number-theory.divisibility-natural-numbers.md).

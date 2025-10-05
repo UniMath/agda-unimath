@@ -61,7 +61,7 @@ is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
 ```agda
 le-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 le-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
-  le-ℤ-Prop (m *ℤ n') (m' *ℤ n)
+  le-prop-ℤ (m *ℤ n') (m' *ℤ n)
 
 le-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 le-fraction-ℤ x y = type-Prop (le-fraction-ℤ-Prop x y)

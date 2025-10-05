@@ -995,7 +995,7 @@ open import elementary-number-theory.strict-inequality-natural-numbers using
 
 -- (a)
 open import elementary-number-theory.strict-inequality-natural-numbers using
-  ( anti-reflexive-le-ℕ
+  ( irreflexive-le-ℕ
   ; antisymmetric-le-ℕ
   ; transitive-le-ℕ)
 
@@ -1029,7 +1029,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-eq-ℕ
   ; eq-dist-ℕ
-  ; symmetric-dist-ℕ -- dist m n = dist n m
+  ; commutative-dist-ℕ -- dist m n = dist n m
   ; triangle-inequality-dist-ℕ -- dist m n ≤ dist m k + dist k n
   )
 
