@@ -76,16 +76,6 @@ is-in-closed-interval-ℚ [a,b] =
   is-in-subtype (subtype-closed-interval-ℚ [a,b])
 ```
 
-### The property of a function `ℚ → ℚ` of mapping a closed interval to a closed interval
-
-```agda
-is-closed-interval-map-prop-ℚ :
-  (ℚ → ℚ) → closed-interval-ℚ → closed-interval-ℚ →
-  Prop lzero
-is-closed-interval-map-prop-ℚ =
-  is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
-```
-
 ### The property of being above or below a closed interval
 
 ```agda

@@ -1,4 +1,4 @@
-# Closed interval preserving maps between total orders
+# Closed interval preserving endomaps on the rational numbers
 
 ```agda
 module elementary-number-theory.closed-interval-preserving-maps-rational-numbers where
@@ -36,4 +36,10 @@ on the
 is-closed-interval-map-ℚ :
   (ℚ → ℚ) → ([a,b] [c,d] : closed-interval-ℚ) → UU lzero
 is-closed-interval-map-ℚ = is-closed-interval-map-Poset ℚ-Poset ℚ-Poset
+
+is-closed-interval-map-prop-ℚ :
+  (ℚ → ℚ) → closed-interval-ℚ → closed-interval-ℚ →
+  Prop lzero
+is-closed-interval-map-prop-ℚ =
+  is-closed-interval-map-prop-Poset ℚ-Poset ℚ-Poset
 ```

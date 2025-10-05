@@ -22,7 +22,7 @@ open import foundation.universe-levels
 A
 [closed interval](elementary-number-theory.closed-intervals-rational-numbers.md)
 of [rational numbers](elementary-number-theory.rational-numbers.md) is said to
-be {{#concept "proper" Agda=is-proper-closed-interval-ℚ}} if its lower bound is
+be {{#concept "proper" Disambiguation="closed interval of rational numbers" Agda=is-proper-closed-interval-ℚ}} if its lower bound is
 [strictly less than](elementary-number-theory.strict-inequality-rational-numbers.md)
 its upper bound, or equivalently, it contains more than one element.
 
