@@ -31,9 +31,10 @@ rational number of the two.
 
 ```agda
 abstract
-  is-nonnegative-max-ℚ⁰⁺ :
-    (p q : ℚ⁰⁺) → is-nonnegative-ℚ (max-ℚ (rational-ℚ⁰⁺ p) (rational-ℚ⁰⁺ q))
-  is-nonnegative-max-ℚ⁰⁺ (p , is-nonneg-p) (q , is-nonneg-q) =
+  is-nonnegative-max-ℚ :
+    {p q : ℚ} → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
+    is-nonnegative-ℚ (max-ℚ p q)
+  is-nonnegative-max-ℚ {p} {q} is-nonneg-p _ =
     is-nonnegative-leq-zero-ℚ _
       ( transitive-leq-ℚ
         ( zero-ℚ)
@@ -43,7 +44,8 @@ abstract
         ( leq-zero-is-nonnegative-ℚ p is-nonneg-p))
 
 max-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
-max-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) = (max-ℚ p q , is-nonnegative-max-ℚ⁰⁺ p⁰⁺ q⁰⁺)
+max-ℚ⁰⁺ (p , is-nonneg-p) q⁰⁺@(q , is-nonneg-q) =
+  (max-ℚ p q , is-nonnegative-max-ℚ is-nonneg-p is-nonneg-q)
 ```
 
 ## Properties
