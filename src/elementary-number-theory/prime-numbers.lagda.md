@@ -183,29 +183,28 @@ abstract
 ### Being a prime is decidable
 
 ```agda
-abstract
-  is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
-  is-decidable-is-prime-easy-ℕ zero-ℕ =
-    inr
-      ( λ H →
-        is-not-one-two-ℕ (pr2 H 2 (is-proper-divisor-zero-succ-ℕ 1)))
-  is-decidable-is-prime-easy-ℕ (succ-ℕ n) =
-    is-decidable-product
-      ( is-decidable-neg (is-decidable-is-one-ℕ (succ-ℕ n)))
-      ( is-decidable-bounded-Π-ℕ
-        ( is-proper-divisor-ℕ (succ-ℕ n))
-        ( is-one-ℕ)
-        ( is-decidable-is-proper-divisor-ℕ (succ-ℕ n))
-        ( is-decidable-is-one-ℕ)
-        ( succ-ℕ n)
-        ( λ x H → leq-div-succ-ℕ x n (pr2 H)))
+is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
+is-decidable-is-prime-easy-ℕ zero-ℕ =
+  inr
+    ( λ H →
+      is-not-one-two-ℕ (pr2 H 2 (is-proper-divisor-zero-succ-ℕ 1)))
+is-decidable-is-prime-easy-ℕ (succ-ℕ n) =
+  is-decidable-product
+    ( is-decidable-neg (is-decidable-is-one-ℕ (succ-ℕ n)))
+    ( is-decidable-bounded-Π-ℕ
+      ( is-proper-divisor-ℕ (succ-ℕ n))
+      ( is-one-ℕ)
+      ( is-decidable-is-proper-divisor-ℕ (succ-ℕ n))
+      ( is-decidable-is-one-ℕ)
+      ( succ-ℕ n)
+      ( λ x H → leq-div-succ-ℕ x n (pr2 H)))
 
-  is-decidable-is-prime-ℕ : (n : ℕ) → is-decidable (is-prime-ℕ n)
-  is-decidable-is-prime-ℕ n =
-    is-decidable-iff
-      ( is-prime-is-prime-easy-ℕ n)
-      ( is-prime-easy-is-prime-ℕ n)
-      ( is-decidable-is-prime-easy-ℕ n)
+is-decidable-is-prime-ℕ : (n : ℕ) → is-decidable (is-prime-ℕ n)
+is-decidable-is-prime-ℕ n =
+  is-decidable-iff
+    ( is-prime-is-prime-easy-ℕ n)
+    ( is-prime-easy-is-prime-ℕ n)
+    ( is-decidable-is-prime-easy-ℕ n)
 ```
 
 ### The number `2` is a prime

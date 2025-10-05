@@ -971,12 +971,12 @@ _ =
 -- (d)
 open import elementary-number-theory.inequality-natural-numbers using
   ( preserves-leq-left-mul-ℕ
-  ; reflects-order-mul-ℕ)
+  ; reflects-leq-mul-ℕ)
 
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m *ℕ (succ-ℕ k) ≤-ℕ n *ℕ (succ-ℕ k))
 _ =
   λ m n k →
-    (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
+    (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-leq-mul-ℕ k m n)
 
 -- (e)
 open import elementary-number-theory.minimum-natural-numbers using

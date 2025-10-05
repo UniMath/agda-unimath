@@ -423,28 +423,28 @@ abstract
 
 ```agda
 abstract
-  reflects-order-mul-ℕ :
+  reflects-leq-mul-ℕ :
     (k m n : ℕ) → (m *ℕ (succ-ℕ k)) ≤-ℕ (n *ℕ (succ-ℕ k)) → m ≤-ℕ n
-  reflects-order-mul-ℕ k zero-ℕ n p = star
-  reflects-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
-    reflects-order-mul-ℕ k m n
+  reflects-leq-mul-ℕ k zero-ℕ n p = star
+  reflects-leq-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
+    reflects-leq-mul-ℕ k m n
       ( reflects-leq-left-add-ℕ
         ( succ-ℕ k)
         ( m *ℕ (succ-ℕ k))
         ( n *ℕ (succ-ℕ k))
         ( p))
 
-  reflects-order-mul-ℕ' :
+  reflects-leq-mul-ℕ' :
     (k m n : ℕ) → ((succ-ℕ k) *ℕ m) ≤-ℕ ((succ-ℕ k) *ℕ n) → m ≤-ℕ n
-  reflects-order-mul-ℕ' k m n H =
-    reflects-order-mul-ℕ k m n
+  reflects-leq-mul-ℕ' k m n H =
+    reflects-leq-mul-ℕ k m n
       ( concatenate-eq-leq-eq-ℕ
         ( commutative-mul-ℕ m (succ-ℕ k))
         ( H)
         ( commutative-mul-ℕ (succ-ℕ k) n))
 ```
 
-### Any number `x` is less than or equal to a nonzero multiple of itself
+### Any number `x` is less than or equal to any nonzero multiple of itself
 
 ```agda
 abstract

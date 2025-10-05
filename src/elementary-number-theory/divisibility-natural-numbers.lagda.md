@@ -319,7 +319,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
       ( ( ap
           ( _*ℕ (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
-            ( reflects-order-mul-ℕ d m n
+            ( reflects-leq-mul-ℕ d m n
               ( concatenate-eq-leq-eq-ℕ q
                 ( leq-add-ℕ' y x)
                 ( inv p))))) ∙
