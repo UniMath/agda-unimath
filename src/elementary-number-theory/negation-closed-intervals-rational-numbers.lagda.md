@@ -10,6 +10,7 @@ module elementary-number-theory.negation-closed-intervals-rational-numbers where
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
+open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -20,7 +21,9 @@ open import foundation.dependent-pair-types
 
 ## Idea
 
-The negation of a
+The
+{{#concept "negation" Disambiguation="closed interval of rational numbers" Agda=neg-closed-interval-ℚ}}
+of a
 [closed interval of rational numbers](elementary-number-theory.closed-intervals-rational-numbers.md)
 [a, b] is [-b, -a].
 
