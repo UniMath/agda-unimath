@@ -24,7 +24,7 @@ open import order-theory.posets
 
 ## Idea
 
-L {{#concept "lattice" WDID=Q595364 WD="lattice" Agda=Lattice}} is a
+A {{#concept "lattice" WDID=Q595364 WD="lattice" Agda=Lattice}} is a
 [poset](order-theory.posets.md) in which every pair of elements has a meet (a
 [greatest lower bound](order-theory.greatest-lower-bounds-posets.md)) and a join
 (a [least upper bound](order-theory.least-upper-bounds-posets.md)).
