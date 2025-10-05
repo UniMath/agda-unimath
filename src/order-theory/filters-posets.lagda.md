@@ -80,4 +80,4 @@ Filter-Poset l P = type-subtype (is-filter-prop-Subposet {l3 = l} P)
 
 - [Filter (mathematics)](<https://en.wikipedia.org/wiki/Filter_(mathematics)>)
   at Wikipedia
-- [filter] at $n$Lab
+- [filter](https://ncatlab.org/nlab/show/filter) at $n$Lab
