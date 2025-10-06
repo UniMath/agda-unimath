@@ -119,9 +119,9 @@ abstract
 
 ```agda
 abstract
-  is-positive-le-nonnegative-ℚ :
+  is-positive-le-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q : ℚ) → le-ℚ (rational-ℚ⁰⁺ p) q → is-positive-ℚ q
-  is-positive-le-nonnegative-ℚ (p , nonneg-p) q p<q =
+  is-positive-le-ℚ⁰⁺ (p , nonneg-p) q p<q =
     is-positive-le-zero-ℚ
       ( q)
       ( concatenate-leq-le-ℚ _ _ _ (leq-zero-is-nonnegative-ℚ p nonneg-p) p<q)
@@ -150,4 +150,32 @@ abstract
     (q : ℚ) → is-nonpositive-ℚ q ↔ (¬ (is-positive-ℚ q))
   is-nonpositive-iff-not-is-positive-ℚ _ =
     ( not-is-positive-is-nonpositive-ℚ , is-nonpositive-not-is-positive-ℚ)
+```
+
+### If `p < q` and `q` is nonpositive, then `p` is negative
+
+```agda
+abstract
+  is-negative-le-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁰⁻ (q , nonpos-q) p p<q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-le-leq-ℚ p q zero-ℚ
+        ( p<q)
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q))
+```
+
+### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+
+```agda
+abstract
+  is-nonpositive-leq-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
+  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
+    is-nonpositive-leq-zero-ℚ
+      ( p)
+      ( transitive-leq-ℚ p q zero-ℚ
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q)
+        ( p≤q))
 ```
