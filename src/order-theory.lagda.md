@@ -36,6 +36,7 @@ open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
 open import order-theory.dependent-products-large-suplattices public
 open import order-theory.distributive-lattices public
+open import order-theory.filters-posets public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
