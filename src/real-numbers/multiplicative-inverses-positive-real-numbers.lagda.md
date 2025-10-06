@@ -49,12 +49,14 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -698,4 +700,60 @@ opaque
         map-tot-exists
           ( λ (r , _) (y<r , qr<1) → (leq'-leq-ℝ x y Lx⊆Ly r y<r , qr<1))
           ( q<y⁻¹ is-pos-q))
+```
+
+### The multiplicative inverse operation reverses strict inequality
+
+```agda
+opaque
+  unfolding le-ℝ real-inv-ℝ⁺
+
+  inv-le-ℝ⁺ :
+    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → le-ℝ⁺ x y →
+    le-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
+  inv-le-ℝ⁺ x y x<y =
+    let open do-syntax-trunc-Prop (le-prop-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x))
+    in do
+      (q , x<q , q<y) ← x<y
+      let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x q x<q)
+      intro-exists
+        ( rational-inv-ℚ⁺ q⁺)
+        ( leq-upper-cut-inv-ℝ⁺'-upper-cut-inv-ℝ⁺
+          ( y)
+          ( rational-inv-ℚ⁺ q⁺)
+          ( is-positive-rational-inv-ℚ⁺ q⁺ ,
+            inv-tr
+              ( is-in-lower-cut-ℝ⁺ y)
+              ( rational-inv-inv-ℚ⁺ q⁺)
+              ( q<y)) ,
+          leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
+            ( x)
+            ( rational-inv-ℚ⁺ q⁺)
+            ( λ _ →
+              inv-tr
+                ( is-in-upper-cut-ℝ⁺ x)
+                ( ( ap
+                    ( rational-inv-ℚ⁺)
+                    ( eq-type-subtype is-positive-prop-ℚ refl)) ∙
+                  ( ap rational-ℚ⁺ (inv-inv-ℚ⁺ q⁺)))
+                ( x<q)))
+```
+
+### The multiplicative inverse reverses inequality
+
+```agda
+opaque
+  unfolding leq-ℝ leq-ℝ' real-inv-ℝ⁺
+
+  inv-leq-ℝ⁺ :
+    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → leq-ℝ⁺ x y →
+    leq-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
+  inv-leq-ℝ⁺ x⁺@(x , _) y⁺@(y , _) x≤y q q<y⁻¹ =
+    leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
+      ( x⁺)
+      ( q)
+      ( λ is-pos-q →
+        leq'-leq-ℝ x y x≤y
+          ( rational-inv-ℚ⁺ (q , is-pos-q))
+          ( leq-lower-cut-inv-ℝ⁺-lower-cut-inv-ℝ⁺' y⁺ q q<y⁻¹ is-pos-q))
 ```

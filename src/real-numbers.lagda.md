@@ -19,6 +19,7 @@ open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
+open import real-numbers.inequality-positive-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
 open import real-numbers.infima-families-real-numbers public
@@ -51,6 +52,7 @@ open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.similarity-real-numbers public
+open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
