@@ -24,6 +24,7 @@ open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
