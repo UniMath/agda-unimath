@@ -128,9 +128,9 @@ abstract
 
 ```agda
 abstract
-  is-negative-le-nonpositive-ℚ :
+  is-negative-le-ℚ⁰⁻ :
     (q : ℚ⁰⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
-  is-negative-le-nonpositive-ℚ (q , nonpos-q) p p<q =
+  is-negative-le-ℚ⁰⁻ (q , nonpos-q) p p<q =
     is-negative-le-zero-ℚ
       ( p)
       ( concatenate-le-leq-ℚ p q zero-ℚ
