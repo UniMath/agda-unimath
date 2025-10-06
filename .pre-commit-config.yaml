@@ -22,7 +22,7 @@ repos:
         args:
           [
             '--config',
-            'config/.codespellrc',
+            'config/codespellrc',
             '--builtin',
             'clear,rare,informal,usage,code,names,en-GB_to_en-US',
             '--dictionary',

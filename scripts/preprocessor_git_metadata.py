@@ -161,7 +161,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     header_info_element, footer_info_element = get_author_element_for_file(
         source_file_name,
         any((source_file_name.endswith(ext)
-            for ext in config['attribute-file-extensions'])),
+            for ext in config['attribute_file_extensions'])),
         contributors,
         config['contributors_file'])
     # Assumption: The title is the first header in the file

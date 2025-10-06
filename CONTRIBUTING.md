@@ -43,11 +43,11 @@ Below is a summary of the tasks this tool performs:
   permissible spellchecker that only reports known misspellings, rather than
   words it does not recognize. I.e., it is a blacklist based spellchecker. We
   maintain an additional library-defined dictionary of misspellings at:
-  [`config/codespell-dictionary.txt`](https://github.com/UniMath/agda-unimath/blob/master/codespell-dictionary.txt).
+  [`config/codespell-dictionary.txt`](https://github.com/UniMath/agda-unimath/blob/master/config/codespell-dictionary.txt).
   If you find a misspelled word in the library, it is good practice to add it to
   this dictionary in addition to correcting the mistake. If codespell
   erroneously reports a word as misspelled, please add it to
-  [`config/codespell-ignore.txt`](https://github.com/UniMath/agda-unimath/blob/master/codespell-ignore.txt).
+  [`config/codespell-ignore.txt`](https://github.com/UniMath/agda-unimath/blob/master/config/codespell-ignore.txt).
 
 - **Sort codespell dictionary and ignore files**: Sorts and formats the
   associated codespell dictionary and ignore files.
