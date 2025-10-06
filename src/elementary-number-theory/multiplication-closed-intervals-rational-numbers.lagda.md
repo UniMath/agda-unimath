@@ -22,6 +22,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -752,4 +753,138 @@ commutative-monoid-mul-closed-interval-ℚ : Commutative-Monoid lzero
 commutative-monoid-mul-closed-interval-ℚ =
   ( monoid-mul-closed-interval-ℚ ,
     commutative-mul-closed-interval-ℚ)
+```
+
+### Multiplication of closed intervals is subdistributive
+
+```agda
+abstract
+  left-subdistributive-mul-add-closed-interval-ℚ :
+    ([a,b] [c,d] [e,f] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
+      ( add-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( mul-closed-interval-ℚ [a,b] [e,f]))
+  left-subdistributive-mul-add-closed-interval-ℚ [a,b] [c,d] [e,f] =
+    leq-closed-interval-leq-subtype-ℚ
+      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
+      ( add-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( mul-closed-interval-ℚ [a,b] [e,f]))
+      ( λ q q∈[a,b]⟨[c,d]+[e,f]⟩ →
+        let
+          open
+            do-syntax-trunc-Prop
+              ( subtype-closed-interval-ℚ
+                ( add-closed-interval-ℚ
+                  ( mul-closed-interval-ℚ [a,b] [c,d])
+                  ( mul-closed-interval-ℚ [a,b] [e,f]))
+                ( q))
+        in do
+          ((qab , qcdef) , qab∈[a,b] , qcdef∈[c,d]+[e,f] , q=qab*qcdef) ←
+            is-in-minkowski-product-is-in-mul-closed-interval-ℚ
+              ( [a,b])
+              ( add-closed-interval-ℚ [c,d] [e,f])
+              ( q)
+              ( q∈[a,b]⟨[c,d]+[e,f]⟩)
+          ((qcd , qef) , qcd∈[c,d] , qef∈[e,f] , qcdef=qcd+qef) ←
+            is-in-minkowski-sum-is-in-add-closed-interval-ℚ
+              ( [c,d])
+              ( [e,f])
+              ( qcdef)
+              ( qcdef∈[c,d]+[e,f])
+          inv-tr
+            ( is-in-closed-interval-ℚ
+              ( add-closed-interval-ℚ
+                ( mul-closed-interval-ℚ [a,b] [c,d])
+                ( mul-closed-interval-ℚ [a,b] [e,f])))
+            ( ( q=qab*qcdef) ∙
+              ( ap-mul-ℚ refl qcdef=qcd+qef) ∙
+              ( left-distributive-mul-add-ℚ qab qcd qef))
+            ( is-in-add-interval-add-is-in-closed-interval-ℚ
+              ( mul-closed-interval-ℚ [a,b] [c,d])
+              ( mul-closed-interval-ℚ [a,b] [e,f])
+              ( qab *ℚ qcd)
+              ( qab *ℚ qef)
+              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                  ( [a,b])
+                  ( [c,d])
+                  ( qab)
+                  ( qcd)
+                  ( qab∈[a,b])
+                  ( qcd∈[c,d]))
+              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+                  ( [a,b])
+                  ( [e,f])
+                  ( qab)
+                  ( qef)
+                  ( qab∈[a,b])
+                  ( qef∈[e,f]))))
+```
+
+### Containment of intervals is preserved by multiplication
+
+```agda
+abstract
+  preserves-leq-left-mul-closed-interval-ℚ :
+    ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c,d])
+  preserves-leq-left-mul-closed-interval-ℚ [c,d] [a,b] [a',b'] [a,b]⊆[a',b'] =
+    leq-closed-interval-leq-subtype-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c,d])
+      ( binary-tr
+        ( _⊆_)
+        ( eq-minkowski-mul-closed-interval-ℚ [a,b] [c,d])
+        ( eq-minkowski-mul-closed-interval-ℚ [a',b'] [c,d])
+        ( preserves-leq-left-minkowski-mul-Commutative-Monoid
+          ( commutative-monoid-mul-ℚ)
+          ( subtype-closed-interval-ℚ [c,d])
+          ( subtype-closed-interval-ℚ [a,b])
+          ( subtype-closed-interval-ℚ [a',b'])
+          ( leq-subtype-leq-closed-interval-ℚ [a,b] [a',b'] [a,b]⊆[a',b'])))
+
+  preserves-leq-right-mul-closed-interval-ℚ :
+    ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a,b] [c',d'])
+  preserves-leq-right-mul-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
+    binary-tr
+      ( leq-closed-interval-ℚ)
+      ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
+      ( commutative-mul-closed-interval-ℚ [c',d'] [a,b])
+      ( preserves-leq-left-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
+
+  preserves-leq-mul-closed-interval-ℚ :
+    ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
+    leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
+    leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+  preserves-leq-mul-closed-interval-ℚ
+    [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
+    transitive-leq-closed-interval-ℚ
+      ( mul-closed-interval-ℚ [a,b] [c,d])
+      ( mul-closed-interval-ℚ [a,b] [c',d'])
+      ( mul-closed-interval-ℚ [a',b'] [c',d'])
+      ( preserves-leq-left-mul-closed-interval-ℚ
+        ( [c',d'])
+        ( [a,b])
+        ( [a',b'])
+        ( [a,b]⊆[a',b']))
+      ( preserves-leq-right-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( [c',d'])
+        ( [c,d]⊆[c',d']))
 ```
