@@ -36,7 +36,7 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 everythingOpts := --guardedness --cohesion --flat-split --rewriting
 
 # Figure out which OS we are running
-UNAME_S := $(strip $(shell uname -s))
+UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
 	OS := mac
@@ -193,7 +193,7 @@ website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTO
 		cp -r ./$(WEBSITE_CSS)/. ./$(MDBOOK_SRC)/website/; \
 		cp -r ./$(WEBSITE_JS)/. ./$(MDBOOK_SRC)/website/; \
 	elif [ "$(OS)" = "mac" ]; then \
-		cp -r ./$(DOCS_DIR) ./$(MDBOOK_SRC); \
+		cp -r ./$(DOCS_DIR)/ ./$(MDBOOK_SRC); \
 		cp -r ./$(WEBSITE_IMAGES) ./$(MDBOOK_SRC)/website/; \
 		cp -r ./$(WEBSITE_CSS) ./$(MDBOOK_SRC)/website/; \
 		cp -r ./$(WEBSITE_JS) ./$(MDBOOK_SRC)/website/; \
