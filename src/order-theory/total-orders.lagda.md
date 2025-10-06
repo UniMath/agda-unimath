@@ -22,6 +22,7 @@ open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.join-semilattices
+open import order-theory.lattices
 open import order-theory.least-upper-bounds-posets
 open import order-theory.meet-semilattices
 open import order-theory.posets
@@ -208,6 +209,22 @@ module _
 ```
 
 ## Properties
+
+### Total orders are lattices
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  is-lattice-Total-Order : is-lattice-Poset (poset-Total-Order T)
+  is-lattice-Total-Order =
+    ( has-greatest-binary-lower-bound-Total-Order T ,
+      has-least-binary-upper-bound-Total-Order T)
+
+  lattice-Total-Order : Lattice l1 l2
+  lattice-Total-Order = (poset-Total-Order T , is-lattice-Total-Order)
+```
 
 ### The minimum of two values is a lower bound
 
@@ -464,19 +481,8 @@ module _
     left-leq-right-min-Total-Order :
       (x y : type-Total-Order T) →
       leq-Total-Order T x y → min-Total-Order T x y ＝ x
-    left-leq-right-min-Total-Order x y x≤y =
-      ap pr1
-        ( eq-type-Prop
-          ( has-greatest-binary-lower-bound-prop-Poset
-            ( poset-Total-Order T)
-            ( x)
-            ( y))
-          { has-greatest-binary-lower-bound-Total-Order T x y}
-          { has-greatest-binary-lower-bound-leq-Poset
-            ( poset-Total-Order T)
-            ( x)
-            ( y)
-            ( x≤y)})
+    left-leq-right-min-Total-Order =
+      left-leq-right-meet-Lattice (lattice-Total-Order T)
 ```
 
 ### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `y`
@@ -491,9 +497,8 @@ module _
     right-leq-left-min-Total-Order :
       (x y : type-Total-Order T) →
       leq-Total-Order T y x → min-Total-Order T x y ＝ y
-    right-leq-left-min-Total-Order x y y≤x =
-      commutative-min-Total-Order T x y ∙
-      left-leq-right-min-Total-Order T y x y≤x
+    right-leq-left-min-Total-Order =
+      right-leq-left-meet-Lattice (lattice-Total-Order T)
 ```
 
 ### If `x` is less than or equal to `y`, the maximum of `x` and `y` is `y`
@@ -508,19 +513,8 @@ module _
     left-leq-right-max-Total-Order :
       (x y : type-Total-Order T) →
       leq-Total-Order T x y → max-Total-Order T x y ＝ y
-    left-leq-right-max-Total-Order x y x≤y =
-      ap pr1
-        ( eq-type-Prop
-          ( has-least-binary-upper-bound-prop-Poset
-            ( poset-Total-Order T)
-            ( x)
-            ( y))
-          { has-least-binary-upper-bound-Total-Order T x y}
-          { has-least-binary-upper-bound-leq-Poset
-            ( poset-Total-Order T)
-            ( x)
-            ( y)
-            ( x≤y)})
+    left-leq-right-max-Total-Order =
+      left-leq-right-join-Lattice (lattice-Total-Order T)
 ```
 
 ### If `y` is less than or equal to `x`, the maximum of `x` and `y` is `x`
@@ -535,9 +529,8 @@ module _
     right-leq-left-max-Total-Order :
       (x y : type-Total-Order T) →
       leq-Total-Order T y x → max-Total-Order T x y ＝ x
-    right-leq-left-max-Total-Order x y y≤x =
-      commutative-max-Total-Order T x y ∙
-      left-leq-right-max-Total-Order T y x y≤x
+    right-leq-left-max-Total-Order =
+      right-leq-left-join-Lattice (lattice-Total-Order T)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`
@@ -573,11 +566,8 @@ module _
       (a b c : type-Total-Order T) →
       leq-Total-Order T a b → leq-Total-Order T a c →
       leq-Total-Order T a (min-Total-Order T b c)
-    leq-min-leq-both-Total-Order a b c a≤b a≤c =
-      tr
-        ( λ d → leq-Total-Order T d (min-Total-Order T b c))
-        ( idempotent-min-Total-Order T a)
-        ( min-leq-leq-Total-Order T a b a c a≤b a≤c)
+    leq-min-leq-both-Total-Order =
+      leq-meet-leq-both-Lattice (lattice-Total-Order T)
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
@@ -613,11 +603,8 @@ module _
       (a b c : type-Total-Order T) →
       leq-Total-Order T a c → leq-Total-Order T b c →
       leq-Total-Order T (max-Total-Order T a b) c
-    leq-max-leq-both-Total-Order a b c a≤c b≤c =
-      tr
-        ( leq-Total-Order T (max-Total-Order T a b))
-        ( idempotent-max-Total-Order T c)
-        ( max-leq-leq-Total-Order T a c b c a≤c b≤c)
+    leq-max-leq-both-Total-Order =
+      leq-join-leq-both-Lattice (lattice-Total-Order T)
 ```
 
 ### The minimum of two values is equal to one of them
