@@ -132,6 +132,7 @@ open import elementary-number-theory.monoid-of-natural-numbers-with-maximum publ
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
+open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers public
