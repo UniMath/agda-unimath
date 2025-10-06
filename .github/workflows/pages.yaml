@@ -48,7 +48,8 @@ jobs:
         name: Restore Agda formalization cache
         with:
           path: repo/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
             hashFiles('repo/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-

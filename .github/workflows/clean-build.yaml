@@ -37,7 +37,8 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: repo/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
             hashFiles('repo/src/**') }}
 
       - name: Download previous typechecking profile

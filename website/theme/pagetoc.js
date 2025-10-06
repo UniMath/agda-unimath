@@ -7,11 +7,11 @@ Array.prototype.forEach.call(
         document.getElementsByClassName('pagetoc')[0].children,
         function (el) {
           el.classList.remove('active');
-        },
+        }
       );
       el.classList.add('active');
     });
-  },
+  }
 );
 
 var updateFunction = function () {
@@ -27,7 +27,7 @@ var updateFunction = function () {
     document.getElementsByClassName('pagetoc')[0].children,
     function (el) {
       el.classList.remove('active');
-    },
+    }
   );
   if (!id) return;
   Array.prototype.forEach.call(
@@ -36,7 +36,7 @@ var updateFunction = function () {
       if (id.href.localeCompare(el.href) == 0) {
         el.classList.add('active');
       }
-    },
+    }
   );
 };
 

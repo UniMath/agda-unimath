@@ -133,6 +133,7 @@ repos:
       - id: prettier
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting
         types_or: [css, javascript, yaml, markdown]
+        args: ['--config', 'config/prettierrc.json']
 
   - repo: https://github.com/FlamingTempura/bibtex-tidy
     rev: v1.14.0
