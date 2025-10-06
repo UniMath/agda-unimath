@@ -9,7 +9,13 @@ module real-numbers.negative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.rational-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -54,4 +60,36 @@ real-ℝ⁻ = inclusion-subtype is-negative-prop-ℝ
 abstract
   eq-ℝ⁻ : {l : Level} → (x y : ℝ⁻ l) → (real-ℝ⁻ x ＝ real-ℝ⁻ y) → x ＝ y
   eq-ℝ⁻ _ _ = eq-type-subtype is-negative-prop-ℝ
+```
+
+### A real number is negative if and only if a negative rational number is in its upper cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  opaque
+    unfolding le-ℝ real-ℚ
+
+    exists-ℚ⁻-in-upper-cut-is-negative-ℝ :
+      is-negative-ℝ x → exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p))
+    exists-ℚ⁻-in-upper-cut-is-negative-ℝ =
+      elim-exists
+        ( ∃ ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)))
+        ( λ p (x<p , p<0) → intro-exists (p , is-negative-le-zero-ℚ p p<0) x<p)
+
+    is-negative-exists-ℚ⁻-in-upper-cut-ℝ :
+      exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)) → is-negative-ℝ x
+    is-negative-exists-ℚ⁻-in-upper-cut-ℝ =
+      elim-exists
+        ( is-negative-prop-ℝ x)
+        ( λ (p , is-neg-p) x<p →
+          intro-exists p (x<p , le-zero-is-negative-ℚ p is-neg-p))
+
+    is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ :
+      is-negative-ℝ x ↔ exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p))
+    is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ =
+      ( exists-ℚ⁻-in-upper-cut-is-negative-ℝ ,
+        is-negative-exists-ℚ⁻-in-upper-cut-ℝ)
 ```

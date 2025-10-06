@@ -269,23 +269,6 @@ opaque
         ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
-### A rational and its negative are not both positive
-
-```agda
-opaque
-  unfolding neg-ℚ
-
-  not-is-negative-is-positive-ℚ :
-    (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
-  not-is-negative-is-positive-ℚ x (N , P) =
-    is-not-negative-and-positive-ℤ
-      ( numerator-ℚ x)
-      ( ( is-negative-eq-ℤ
-          (neg-neg-ℤ (numerator-ℚ x))
-          (is-negative-neg-is-positive-ℤ {numerator-ℚ (neg-ℚ x)} N)) ,
-        ( P))
-```
-
 ### Positive rational numbers are nonzero
 
 ```agda

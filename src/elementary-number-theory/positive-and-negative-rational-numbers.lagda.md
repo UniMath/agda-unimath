@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -66,6 +67,18 @@ abstract
       ( is-positive-le-zero-ℚ q)
       ( is-nonpositive-leq-zero-ℚ q)
       ( decide-le-leq-ℚ zero-ℚ q)
+```
+
+#### A rational number is not both positive and negative
+
+```agda
+abstract
+  is-not-negative-and-positive-ℚ :
+    (q : ℚ) → ¬ (is-negative-ℚ q × is-positive-ℚ q)
+  is-not-negative-and-positive-ℚ q (is-neg-q , is-pos-q) =
+    not-leq-le-ℚ q zero-ℚ
+      ( le-zero-is-negative-ℚ q is-neg-q)
+      ( leq-le-ℚ (le-zero-is-positive-ℚ q is-pos-q))
 ```
 
 ### Trichotomies
