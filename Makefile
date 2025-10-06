@@ -154,10 +154,10 @@ agda-html: ./$(SOURCE_DIR)/everything.lagda.md
 	@python3 ./$(SCRIPTS_DIR)/generate_mdbook_summary.py $@
 
 ./$(MDBOOK_SRC)/MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_maintainers.py
-	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/MAINTAINERS.md
+	@python3 ./$(SCRIPTS_DIR)/generate_maintainers.py ${CONTRIBUTORS_FILE} $@
 
 ./$(MDBOOK_SRC)/CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./$(SCRIPTS_DIR)/generate_contributors.py
-	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} ./$(MDBOOK_SRC)/CONTRIBUTORS.md
+	@python3 ./$(SCRIPTS_DIR)/generate_contributors.py ${CONTRIBUTORS_FILE} $@
 
 $(WEBSITE_CSS)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(WEBSITE_THEME)/catppuccin.css
 	@python3 ./$(SCRIPTS_DIR)/generate_agda_css.py
