@@ -15,6 +15,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.commutative-semigroups
@@ -711,4 +712,75 @@ module _
           ( order-theoretic-meet-semilattice-Meet-Semilattice)))
   compute-order-theoretic-meet-semilattice-Meet-Semilattice =
     id-iso-Semigroup (semigroup-Meet-Semilattice A)
+```
+
+### If `a ≤ b` and `a ≤ c`, then `a` is less than or equal to the meet of `b` and `c`
+
+```agda
+module _
+  {l1 l2 : Level} (L : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    leq-meet-leq-both-Order-Theoretic-Meet-Semilattice :
+      (a b c : type-Order-Theoretic-Meet-Semilattice L) →
+      leq-Order-Theoretic-Meet-Semilattice L a b →
+      leq-Order-Theoretic-Meet-Semilattice L a c →
+      leq-Order-Theoretic-Meet-Semilattice L
+        ( a)
+        ( meet-Order-Theoretic-Meet-Semilattice L b c)
+    leq-meet-leq-both-Order-Theoretic-Meet-Semilattice a b c a≤b a≤c =
+      tr
+        ( λ d →
+          leq-Order-Theoretic-Meet-Semilattice L
+            ( d)
+            ( meet-Order-Theoretic-Meet-Semilattice L b c))
+        ( idempotent-meet-Order-Theoretic-Meet-Semilattice L a)
+        ( meet-leq-leq-Order-Theoretic-Meet-Semilattice L a b a c a≤b a≤c)
+```
+
+### If `x` is less than or equal to `y`, the meet of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    left-leq-right-meet-Order-Theoretic-Meet-Semilattice :
+      (x y : type-Order-Theoretic-Meet-Semilattice A) →
+      leq-Order-Theoretic-Meet-Semilattice A x y →
+      meet-Order-Theoretic-Meet-Semilattice A x y ＝ x
+    left-leq-right-meet-Order-Theoretic-Meet-Semilattice x y x≤y =
+      ap pr1
+        ( eq-type-Prop
+          ( has-greatest-binary-lower-bound-prop-Poset
+            ( poset-Order-Theoretic-Meet-Semilattice A)
+            ( x)
+            ( y))
+          { is-meet-semilattice-Order-Theoretic-Meet-Semilattice A x y}
+          { has-greatest-binary-lower-bound-leq-Poset
+            ( poset-Order-Theoretic-Meet-Semilattice A)
+            ( x)
+            ( y)
+            ( x≤y)})
+```
+
+### If `y` is less than or equal to `x`, the meet of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    right-leq-left-meet-Order-Theoretic-Meet-Semilattice :
+      (x y : type-Order-Theoretic-Meet-Semilattice A) →
+      leq-Order-Theoretic-Meet-Semilattice A y x →
+      meet-Order-Theoretic-Meet-Semilattice A x y ＝ y
+    right-leq-left-meet-Order-Theoretic-Meet-Semilattice x y y≤x =
+      ( commutative-meet-Order-Theoretic-Meet-Semilattice A x y) ∙
+      ( left-leq-right-meet-Order-Theoretic-Meet-Semilattice A y x y≤x)
 ```
