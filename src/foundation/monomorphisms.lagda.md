@@ -65,7 +65,7 @@ module _
   (p : is-mono l3 f) {X : UU l3} (g h : X → A)
   where
 
-  equiv-postcomp-is-mono : (g ＝ h) ≃ ((f ∘ g) ＝ (f ∘ h))
+  equiv-postcomp-is-mono : (g ＝ h) ≃ (f ∘ g ＝ f ∘ h)
   pr1 equiv-postcomp-is-mono = ap (f ∘_)
   pr2 equiv-postcomp-is-mono = p X g h
 
@@ -92,6 +92,18 @@ module _
     is-emb-is-prop-map
       ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
         ( λ X → is-prop-map-is-emb (is-mono-f X)))
+
+  equiv-postcomp-is-emb :
+    is-emb f →
+    {l3 : Level} {X : UU l3} (g h : X → A) → (g ＝ h) ≃ (f ∘ g ＝ f ∘ h)
+  equiv-postcomp-is-emb H {l3} = equiv-postcomp-is-mono l3 f (is-mono-is-emb H)
+
+equiv-postcomp-emb :
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A ↪ B) (g h : X → A) →
+  (g ＝ h) ≃ (map-emb f ∘ g ＝ map-emb f ∘ h)
+equiv-postcomp-emb (f , H) = equiv-postcomp-is-emb f H
 ```
 
 We construct an explicit equivalence for postcomposition for homotopies between
@@ -122,7 +134,7 @@ module _
       is-retraction-map-inv-is-equiv (pr2 f (g x) (h x)) (H x))
 
   equiv-htpy-postcomp-is-emb :
-    (g ~ h) ≃ ((pr1 f ∘ g) ~ (pr1 f ∘ h))
+    (g ~ h) ≃ (pr1 f ∘ g ~ pr1 f ∘ h)
   pr1 equiv-htpy-postcomp-is-emb = pr1 f ·l_
   pr2 equiv-htpy-postcomp-is-emb =
     is-equiv-is-invertible

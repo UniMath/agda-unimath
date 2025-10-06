@@ -46,9 +46,9 @@ given in {{#cite Shu17}}:
 ```
 
 **Terminology.** Our definition of a _coherently idempotent map_ corresponds to
-the definition of a _(fully coherent) idempotent map_ in {{#reference Shu17}}
-and {{#reference Shu14SplittingIdempotents}}. Our definition of an _idempotent
-map_ corresponds in their terminology to a _pre-idempotent map_.
+the definition of a _(fully coherent) idempotent map_ in {{#cite Shu17}} and
+{{#cite Shu14SplittingIdempotents}}. Our definition of an _idempotent map_
+corresponds in their terminology to a _pre-idempotent map_.
 
 ## Definitions
 

@@ -33,7 +33,7 @@ module _
 
   coalgebra-polynomial-endofunctor : UU (l1 ⊔ l2 ⊔ lsuc l)
   coalgebra-polynomial-endofunctor =
-    Σ (UU l) (λ X → X → type-polynomial-endofunctor A B X)
+    Σ (UU l) (λ X → X → type-polynomial-endofunctor' A B X)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
@@ -45,7 +45,7 @@ module _
 
   structure-coalgebra-polynomial-endofunctor :
     type-coalgebra-polynomial-endofunctor →
-    type-polynomial-endofunctor A B type-coalgebra-polynomial-endofunctor
+    type-polynomial-endofunctor' A B type-coalgebra-polynomial-endofunctor
   structure-coalgebra-polynomial-endofunctor = pr2 X
 
   shape-coalgebra-polynomial-endofunctor :
