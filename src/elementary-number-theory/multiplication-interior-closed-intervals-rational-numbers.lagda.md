@@ -402,7 +402,7 @@ abstract
                 ( c'<d')
                 ( min'=a'd')
             is-neg-a =
-              is-positive-le-ℚ⁰⁺ (a' , is-nonpos-a') a a<a'
+              is-negative-le-ℚ⁰⁻ (a' , is-nonpos-a') a a<a'
             is-pos-d =
               is-positive-le-ℚ⁰⁺ (d' , is-nonneg-d') d d'<d
           in
@@ -480,10 +480,10 @@ abstract
                 ( c'<d')
                 ( min'=b'd')
             is-neg-a' =
-              is-positive-le-ℚ⁰⁺ (b' , is-nonpos-b') a' a'<b'
+              is-negative-le-ℚ⁰⁻ (b' , is-nonpos-b') a' a'<b'
             is-neg-a = is-negative-le-ℚ⁻ (a' , is-neg-a') a a<a'
             is-neg-c' =
-              is-positive-le-ℚ⁰⁺ (d' , is-nonpos-d') c' c'<d'
+              is-negative-le-ℚ⁰⁻ (d' , is-nonpos-d') c' c'<d'
             is-neg-c = is-negative-le-ℚ⁻ (c' , is-neg-c') c c<c'
             is-nonneg-min' =
               inv-tr
@@ -532,7 +532,7 @@ abstract
                           ( min'=b'd')
                           ( reverses-le-left-mul-ℚ⁻
                             ( b' ,
-                              is-positive-le-ℚ⁰⁺
+                              is-negative-le-ℚ⁰⁻
                                 ( b , is-nonpos-b)
                                 ( b')
                                 ( b'<b))
