@@ -22,8 +22,9 @@ open import order-theory.subpreorders
 
 ## Idea
 
-A **subposet** of a poset `P` is a subtype of `P`. By restriction of the
-ordering on `P`, subposets have again the structure of a poset.
+A {{#concept "subposet" Agda=Subposet}} of a [poset](order-theory.posets.md) `P`
+is a [subtype](foundation.subtypes.md) of `P`. By restriction of the ordering on
+`P`, subposets have again the structure of a poset.
 
 ## Definitions
 
