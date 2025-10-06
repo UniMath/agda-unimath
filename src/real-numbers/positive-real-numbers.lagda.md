@@ -115,6 +115,13 @@ le-lower-upper-cut-ℝ⁺ :
 le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ```
 
+### Equality of positive real numbers
+
+```agda
+eq-ℝ⁺ : {l : Level} → (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) → x ＝ y
+eq-ℝ⁺ _ _ = eq-type-subtype is-positive-prop-ℝ
+```
+
 ### A real number is positive if and only if zero is in its lower cut
 
 ```agda
@@ -127,6 +134,11 @@ module _
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
     is-positive-iff-zero-in-lower-cut-ℝ =
       inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
+
+    is-positive-zero-in-lower-cut-ℝ :
+      is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
+    is-positive-zero-in-lower-cut-ℝ =
+      backward-implication is-positive-iff-zero-in-lower-cut-ℝ
 
 abstract
   zero-in-lower-cut-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → is-in-lower-cut-ℝ⁺ x zero-ℚ
@@ -250,6 +262,9 @@ opaque
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
 positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , is-positive-real-positive-ℚ q pos-q)
+
+one-ℝ⁺ : ℝ⁺ lzero
+one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
 ```
 
 ### Any rational number in the upper cut of a positive real number is positive
@@ -262,4 +277,14 @@ abstract
     is-positive-le-zero-ℚ
       ( q)
       ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
+```
+
+### Similarity of positive real numbers
+
+```agda
+sim-prop-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → Prop (l1 ⊔ l2)
+sim-prop-ℝ⁺ (x , _) (y , _) = sim-prop-ℝ x y
+
+sim-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → UU (l1 ⊔ l2)
+sim-ℝ⁺ (x , _) (y , _) = sim-ℝ x y
 ```

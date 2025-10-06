@@ -85,3 +85,15 @@ infixl 40 _*ℝ⁺_
 _*ℝ⁺_ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → ℝ⁺ (l1 ⊔ l2)
 _*ℝ⁺_ = mul-ℝ⁺
 ```
+
+## Properties
+
+### Commutativity of multiplication of positive real numbers
+
+```agda
+abstract
+  commutative-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → (x *ℝ⁺ y ＝ y *ℝ⁺ x)
+  commutative-mul-ℝ⁺ x⁺@(x , _) y⁺@(y , _) =
+    eq-ℝ⁺ (x⁺ *ℝ⁺ y⁺) (y⁺ *ℝ⁺ x⁺) (commutative-mul-ℝ x y)
+```

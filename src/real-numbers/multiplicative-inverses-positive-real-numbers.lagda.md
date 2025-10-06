@@ -9,7 +9,14 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-positive-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-positive-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
@@ -42,9 +49,12 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -194,9 +204,9 @@ module _
         ( leq-upper-cut-inv-ℝ⁺'-upper-cut-inv-ℝ⁺)
 
   abstract
-    exists-positive-ℚ-lower-cut-inv-ℝ⁺ :
+    exists-ℚ⁺-in-lower-cut-inv-ℝ⁺ :
       exists ℚ⁺ (lower-cut-inv-ℝ⁺ ∘ rational-ℚ⁺)
-    exists-positive-ℚ-lower-cut-inv-ℝ⁺ =
+    exists-ℚ⁺-in-lower-cut-inv-ℝ⁺ =
       let open do-syntax-trunc-Prop (∃ ℚ⁺ (lower-cut-inv-ℝ⁺ ∘ rational-ℚ⁺))
       in do
         (q , x<q) ← is-inhabited-upper-cut-ℝ⁺ x
@@ -220,7 +230,7 @@ module _
         ( is-in-subtype lower-cut-inv-ℝ⁺)
         ( rational-ℚ⁺)
         ( λ _ → id)
-        ( exists-positive-ℚ-lower-cut-inv-ℝ⁺)
+        ( exists-ℚ⁺-in-lower-cut-inv-ℝ⁺)
 
     is-inhabited-upper-cut-inv-ℝ⁺ : is-inhabited-subtype upper-cut-inv-ℝ⁺
     is-inhabited-upper-cut-inv-ℝ⁺ =
@@ -283,7 +293,7 @@ module _
                         ( x<r'))))
           ( λ is-nonpos-q →
             do
-              (r⁺@(r , _) , r∈L) ← exists-positive-ℚ-lower-cut-inv-ℝ⁺
+              (r⁺@(r , _) , r∈L) ← exists-ℚ⁺-in-lower-cut-inv-ℝ⁺
               intro-exists
                 ( r)
                 ( le-nonpositive-positive-ℚ (q , is-nonpos-q) r⁺ , r∈L))
@@ -443,4 +453,249 @@ module _
           is-rounded-upper-cut-inv-ℝ⁺) ,
         is-disjoint-lower-upper-cut-inv-ℝ⁺ ,
         is-located-lower-upper-cut-inv-ℝ⁺)
+```
+
+## Properties
+
+### The multiplicative inverse of a positive real number is positive
+
+```agda
+module _
+  {l : Level} (x : ℝ⁺ l)
+  where
+
+  opaque
+    unfolding real-inv-ℝ⁺
+
+    is-positive-inv-ℝ⁺ : is-positive-ℝ (real-inv-ℝ⁺ x)
+    is-positive-inv-ℝ⁺ =
+      is-positive-zero-in-lower-cut-ℝ
+        ( real-inv-ℝ⁺ x)
+        ( ex-falso ∘ is-not-positive-zero-ℚ)
+
+  inv-ℝ⁺ : ℝ⁺ l
+  inv-ℝ⁺ = (real-inv-ℝ⁺ x , is-positive-inv-ℝ⁺)
+```
+
+### The multiplicative inverse is a multiplicative inverse
+
+```agda
+module _
+  {l : Level} (x : ℝ⁺ l)
+  where
+
+  opaque
+    unfolding leq-ℝ leq-ℝ' mul-ℝ real-inv-ℝ⁺ real-ℚ
+
+    one-is-in-interval-right-inverse-law-mul-ℝ⁺ :
+      ([a,b] [c,d] : closed-interval-ℚ) →
+      is-enclosing-closed-rational-interval-ℝ (real-ℝ⁺ x) [a,b] →
+      is-enclosing-closed-rational-interval-ℝ (real-inv-ℝ⁺ x) [c,d] →
+      is-positive-ℚ (lower-bound-closed-interval-ℚ [a,b]) →
+      is-positive-ℚ (lower-bound-closed-interval-ℚ [c,d]) →
+      is-in-closed-interval-ℚ
+        ( mul-closed-interval-ℚ [a,b] [c,d])
+        ( one-ℚ)
+    one-is-in-interval-right-inverse-law-mul-ℝ⁺
+      [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) (a<x , x<b) (c<x⁻¹ , x⁻¹<d)
+      is-pos-a is-pos-c =
+      let
+        is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+        (is-pos-d , d⁻¹<x) =
+          leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
+        d⁺ = (d , is-pos-d)
+        a' = max-ℚ a (rational-inv-ℚ⁺ d⁺)
+        a'<x =
+          is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a (rational-inv-ℚ⁺ d⁺) a<x d⁻¹<x
+        is-pos-a' =
+          is-positive-leq-ℚ⁺ (inv-ℚ⁺ d⁺) a' (leq-right-max-ℚ _ _)
+        a'⁺ = (a' , is-pos-a')
+        c⁺ = (c , is-pos-c)
+        x<c⁻¹ : is-in-upper-cut-ℝ⁺ x (rational-inv-ℚ⁺ c⁺)
+        x<c⁻¹ =
+          leq-lower-cut-inv-ℝ⁺-lower-cut-inv-ℝ⁺' x c c<x⁻¹ is-pos-c
+        a'⁻¹≤d =
+          tr
+            ( leq-ℚ (rational-inv-ℚ⁺ a'⁺))
+            ( rational-inv-inv-ℚ⁺ d⁺)
+            ( inv-leq-ℚ⁺ (inv-ℚ⁺ d⁺) a'⁺ (leq-right-max-ℚ _ _))
+        c≤a'⁻¹ =
+          tr
+            ( λ r → leq-ℚ r (rational-inv-ℚ⁺ a'⁺))
+            ( rational-inv-inv-ℚ⁺ c⁺)
+            ( inv-leq-ℚ⁺
+              ( a'⁺)
+              ( inv-ℚ⁺ c⁺)
+              ( leq-lower-upper-cut-ℝ
+                ( real-ℝ⁺ x)
+                ( a')
+                ( rational-inv-ℚ⁺ c⁺)
+                ( a'<x)
+                ( x<c⁻¹)))
+      in
+        tr
+          ( is-in-closed-interval-ℚ
+            ( mul-closed-interval-ℚ [a,b] [c,d]))
+          ( ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ a'⁺))
+          ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
+            ( [a,b])
+            ( [c,d])
+            ( a')
+            ( rational-inv-ℚ⁺ a'⁺)
+            ( leq-left-max-ℚ _ _ ,
+              leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a' b a'<x x<b)
+            ( c≤a'⁻¹ , a'⁻¹≤d))
+
+    leq-real-right-inverse-law-mul-ℝ⁺ :
+      leq-ℝ (real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x) one-ℝ
+    leq-real-right-inverse-law-mul-ℝ⁺ q q<xx⁻¹ =
+      let open do-syntax-trunc-Prop (le-ℚ-Prop q one-ℚ)
+      in do
+        ( ( ([a,b]@((a , b) , a≤b) , a<x , x<b) ,
+            ([c,d]@((c , d) , c≤d) , c<x⁻¹ , x⁻¹<d)) ,
+          q<[a,b][c,d]) ← q<xx⁻¹
+        let
+          is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+          (is-pos-d , d⁻¹<x) =
+            leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
+          case-is-nonpos-a is-nonpos-a =
+            le-nonpositive-positive-ℚ
+              ( q ,
+                is-nonpositive-leq-ℚ⁰⁻
+                  ( mul-nonpositive-positive-ℚ (a , is-nonpos-a) (d , is-pos-d))
+                  ( q)
+                  ( transitive-leq-ℚ
+                    ( q)
+                    ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+                    ( a *ℚ d)
+                    ( transitive-leq-ℚ _ _ _
+                      ( leq-right-min-ℚ _ _)
+                      ( leq-left-min-ℚ _ _))
+                    ( leq-le-ℚ q<[a,b][c,d])))
+              ( one-ℚ⁺)
+          case-is-nonpos-c is-nonpos-c =
+            le-nonpositive-positive-ℚ
+              ( q ,
+                is-nonpositive-leq-ℚ⁰⁻
+                  ( mul-positive-nonpositive-ℚ
+                    ( b , is-pos-b)
+                    ( c , is-nonpos-c))
+                  ( q)
+                  ( transitive-leq-ℚ
+                    ( q)
+                    ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+                    ( b *ℚ c)
+                    ( transitive-leq-ℚ _ _ _
+                      ( leq-left-min-ℚ _ _)
+                      ( leq-right-min-ℚ _ _))
+                    ( leq-le-ℚ q<[a,b][c,d])))
+              ( one-ℚ⁺)
+          case-is-pos-a-c : is-positive-ℚ a → is-positive-ℚ c → le-ℚ q one-ℚ
+          case-is-pos-a-c is-pos-a is-pos-c =
+            concatenate-le-leq-ℚ
+              ( q)
+              ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+              ( one-ℚ)
+              ( q<[a,b][c,d])
+              ( pr1
+                ( one-is-in-interval-right-inverse-law-mul-ℝ⁺
+                  ( [a,b])
+                  ( [c,d])
+                  ( a<x , x<b)
+                  ( c<x⁻¹ , x⁻¹<d)
+                  ( is-pos-a)
+                  ( is-pos-c)))
+        rec-coproduct
+          ( λ is-pos-a →
+            rec-coproduct
+              ( case-is-pos-a-c is-pos-a)
+              ( case-is-nonpos-c)
+              ( decide-is-positive-is-nonpositive-ℚ c))
+          ( case-is-nonpos-a)
+          ( decide-is-positive-is-nonpositive-ℚ a)
+
+    leq-real-right-inverse-law-mul-ℝ⁺' :
+      leq-ℝ one-ℝ (real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x)
+    leq-real-right-inverse-law-mul-ℝ⁺' =
+      leq-leq'-ℝ one-ℝ (real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x)
+        ( λ q xx⁻¹<q →
+          let
+            open do-syntax-trunc-Prop (le-ℚ-Prop one-ℚ q)
+          in do
+            ( ( ([a,b]@((a , b) , a≤b) , a<x , x<b) ,
+                ([c,d]@((c , d) , c≤d) , c<x⁻¹ , x⁻¹<d)) ,
+              [a,b][c,d]<q) ← xx⁻¹<q
+            (a'⁺@(a' , is-pos-a') , a'<x) ← exists-ℚ⁺-in-lower-cut-ℝ⁺ x
+            (c'⁺@(c' , is-pos-c') , c'<x⁻¹) ← exists-ℚ⁺-in-lower-cut-inv-ℝ⁺ x
+            let
+              a'' = max-ℚ a a'
+              is-pos-a'' = is-positive-leq-ℚ⁺ a'⁺ a'' (leq-right-max-ℚ _ _)
+              a''<x = is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a a' a<x a'<x
+              c'' = max-ℚ c c'
+              is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ c'' (leq-right-max-ℚ _ _)
+              c''<x⁻¹ = is-in-lower-cut-max-ℚ (real-inv-ℝ⁺ x) c c' c<x⁻¹ c'<x⁻¹
+              [a'',b] =
+                ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'' b a''<x x<b)
+              [c'',d] =
+                ( (c'' , d) ,
+                  leq-lower-upper-cut-ℝ (real-inv-ℝ⁺ x) c'' d c''<x⁻¹ x⁻¹<d)
+            concatenate-leq-le-ℚ
+              ( one-ℚ)
+              ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
+              ( q)
+              ( transitive-leq-ℚ
+                ( one-ℚ)
+                ( upper-bound-mul-closed-interval-ℚ [a'',b] [c'',d])
+                ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
+                ( pr2
+                  ( preserves-leq-mul-closed-interval-ℚ
+                    ( [a'',b])
+                    ( [a,b])
+                    ( [c'',d])
+                    ( [c,d])
+                    ( leq-left-max-ℚ _ _ , refl-leq-ℚ b)
+                    ( leq-left-max-ℚ _ _ , refl-leq-ℚ d)))
+                ( pr2
+                  ( one-is-in-interval-right-inverse-law-mul-ℝ⁺
+                    ( [a'',b])
+                    ( [c'',d])
+                    ( a''<x , x<b)
+                    ( c''<x⁻¹ , x⁻¹<d)
+                    ( is-pos-a'')
+                    ( is-pos-c''))))
+              ( [a,b][c,d]<q))
+
+  abstract
+    right-inverse-law-mul-ℝ⁺ : sim-ℝ⁺ (x *ℝ⁺ inv-ℝ⁺ x) one-ℝ⁺
+    right-inverse-law-mul-ℝ⁺ =
+      sim-sim-leq-ℝ
+        ( leq-real-right-inverse-law-mul-ℝ⁺ ,
+          leq-real-right-inverse-law-mul-ℝ⁺')
+
+    left-inverse-law-mul-ℝ⁺ : sim-ℝ⁺ (inv-ℝ⁺ x *ℝ⁺ x) one-ℝ⁺
+    left-inverse-law-mul-ℝ⁺ =
+      tr
+        ( λ y → sim-ℝ⁺ y one-ℝ⁺)
+        ( commutative-mul-ℝ⁺ _ _)
+        ( right-inverse-law-mul-ℝ⁺)
+```
+
+### The multiplicative inverse operation preserves similarity
+
+```agda
+opaque
+  unfolding leq-ℝ leq-ℝ' real-inv-ℝ⁺ sim-ℝ
+
+  preserves-sim-inv-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → sim-ℝ⁺ x y →
+    sim-ℝ⁺ (inv-ℝ⁺ x) (inv-ℝ⁺ y)
+  preserves-sim-inv-ℝ⁺ (x , _) (y , _) (Lx⊆Ly , Ly⊆Lx) =
+    ( ( λ q q<x⁻¹ is-pos-q →
+        map-tot-exists
+          ( λ (r , _) (x<r , qr<1) → (leq'-leq-ℝ y x Ly⊆Lx r x<r , qr<1))
+          ( q<x⁻¹ is-pos-q)) ,
+      λ q q<y⁻¹ is-pos-q →
+        map-tot-exists
+          ( λ (r , _) (y<r , qr<1) → (leq'-leq-ℝ x y Lx⊆Ly r y<r , qr<1))
+          ( q<y⁻¹ is-pos-q))
 ```
