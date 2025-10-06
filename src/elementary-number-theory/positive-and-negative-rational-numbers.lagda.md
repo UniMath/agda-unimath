@@ -151,3 +151,31 @@ abstract
   is-nonpositive-iff-not-is-positive-ℚ _ =
     ( not-is-positive-is-nonpositive-ℚ , is-nonpositive-not-is-positive-ℚ)
 ```
+
+### If `p < q` and `q` is nonpositive, then `p` is negative
+
+```agda
+abstract
+  is-negative-le-nonpositive-ℚ :
+    (q : ℚ⁰⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
+  is-negative-le-nonpositive-ℚ (q , nonpos-q) p p<q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-le-leq-ℚ p q zero-ℚ
+        ( p<q)
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q))
+```
+
+### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+
+```agda
+abstract
+  is-nonpositive-leq-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
+  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
+    is-nonpositive-leq-zero-ℚ
+      ( p)
+      ( transitive-leq-ℚ p q zero-ℚ
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q)
+        ( p≤q))
+```
