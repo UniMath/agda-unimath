@@ -67,6 +67,7 @@ open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -1219,4 +1220,40 @@ module _
         ＝ x *ℝ (y *ℝ (z *ℝ w)) by associative-mul-ℝ _ _ _
         ＝ x *ℝ (z *ℝ (y *ℝ w)) by ap (x *ℝ_) (left-swap-mul-ℝ y z w)
         ＝ (x *ℝ z) *ℝ (y *ℝ w) by inv (associative-mul-ℝ x z (y *ℝ w))
+```
+
+### Negative laws
+
+```agda
+abstract
+  left-negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ y ＝ neg-ℝ (x *ℝ y)
+  left-negative-law-mul-ℝ x y =
+    eq-sim-ℝ
+      (unique-right-inverse-add-ℝ _ _
+        ( similarity-reasoning-ℝ
+          (x *ℝ y) +ℝ (neg-ℝ x *ℝ y)
+          ~ℝ (x +ℝ neg-ℝ x) *ℝ y
+            by sim-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+          ~ℝ zero-ℝ *ℝ y
+            by preserves-sim-right-mul-ℝ _ _ _ (right-inverse-law-add-ℝ x)
+          ~ℝ zero-ℝ by left-zero-law-mul-ℝ y))
+
+  right-negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ neg-ℝ y ＝ neg-ℝ (x *ℝ y)
+  right-negative-law-mul-ℝ x y =
+    equational-reasoning
+      x *ℝ neg-ℝ y
+      ＝ neg-ℝ y *ℝ x by commutative-mul-ℝ _ _
+      ＝ neg-ℝ (y *ℝ x) by left-negative-law-mul-ℝ y x
+      ＝ neg-ℝ (x *ℝ y) by ap neg-ℝ (commutative-mul-ℝ y x)
+
+  negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ neg-ℝ y ＝ x *ℝ y
+  negative-law-mul-ℝ x y =
+    equational-reasoning
+      neg-ℝ x *ℝ neg-ℝ y
+      ＝ neg-ℝ (x *ℝ neg-ℝ y) by left-negative-law-mul-ℝ _ _
+      ＝ neg-ℝ (neg-ℝ (x *ℝ y)) by ap neg-ℝ (right-negative-law-mul-ℝ _ _)
+      ＝ x *ℝ y by neg-neg-ℝ _
 ```
