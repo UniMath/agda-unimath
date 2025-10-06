@@ -324,10 +324,10 @@ abstract
                 ( c'<d')
                 ( min'=a'c')
             is-pos-b' =
-              is-positive-le-nonnegative-ℚ (a' , is-nonneg-a') b' a'<b'
+              is-positive-le-ℚ⁰⁺ (a' , is-nonneg-a') b' a'<b'
             is-pos-b = is-positive-le-ℚ⁺ (b' , is-pos-b') b b'<b
             is-pos-d' =
-              is-positive-le-nonnegative-ℚ (c' , is-nonneg-c') d' c'<d'
+              is-positive-le-ℚ⁰⁺ (c' , is-nonneg-c') d' c'<d'
             is-pos-d = is-positive-le-ℚ⁺ (d' , is-pos-d') d d'<d
             is-nonneg-min' =
               inv-tr
@@ -376,7 +376,7 @@ abstract
                         ( min'=a'c')
                         ( preserves-le-right-mul-ℚ⁺
                           ( c' ,
-                            is-positive-le-nonnegative-ℚ
+                            is-positive-le-ℚ⁰⁺
                               ( c , is-nonneg-c)
                               ( c')
                               ( c<c'))
@@ -404,7 +404,7 @@ abstract
             is-neg-a =
               is-negative-le-nonpositive-ℚ (a' , is-nonpos-a') a a<a'
             is-pos-d =
-              is-positive-le-nonnegative-ℚ (d' , is-nonneg-d') d d'<d
+              is-positive-le-ℚ⁰⁺ (d' , is-nonneg-d') d d'<d
           in
             concatenate-leq-le-ℚ
               ( min)
@@ -442,7 +442,7 @@ abstract
                 ( a'<b')
                 ( c'<d')
                 ( min'=b'c')
-            is-pos-b = is-positive-le-nonnegative-ℚ (b' , is-nonneg-b') b b'<b
+            is-pos-b = is-positive-le-ℚ⁰⁺ (b' , is-nonneg-b') b b'<b
             is-neg-c = is-negative-le-nonpositive-ℚ (c' , is-nonpos-c') c c<c'
           in
             concatenate-le-leq-ℚ
