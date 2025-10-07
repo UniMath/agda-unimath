@@ -186,20 +186,10 @@ website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTO
 
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/
 
-	@bash -c '\
-	if [ "$(OS)" = "linux" ]; then \
-		cp -r ./$(DOCS_DIR)/. ./$(MDBOOK_SRC); \
-		cp -r ./$(WEBSITE_IMAGES)/. ./$(MDBOOK_SRC)/website/; \
-		cp -r ./$(WEBSITE_CSS)/. ./$(MDBOOK_SRC)/website/; \
-		cp -r ./$(WEBSITE_JS)/. ./$(MDBOOK_SRC)/website/; \
-	elif [ "$(OS)" = "mac" ]; then \
-		cp -r ./$(DOCS_DIR)/ ./$(MDBOOK_SRC); \
-		cp -r ./$(WEBSITE_IMAGES) ./$(MDBOOK_SRC)/website/; \
-		cp -r ./$(WEBSITE_CSS) ./$(MDBOOK_SRC)/website/; \
-		cp -r ./$(WEBSITE_JS) ./$(MDBOOK_SRC)/website/; \
-	else \
-		echo "Unsupported operating system: $(UNAME_S)" >&2; exit 1; \
-	fi'
+	@cp -r ./$(DOCS_DIR)/* ./$(MDBOOK_SRC)
+	@cp -r ./$(WEBSITE_IMAGES)/. ./$(MDBOOK_SRC)/website/
+	@cp -r ./$(WEBSITE_CSS)/. ./$(MDBOOK_SRC)/website/
+	@cp -r ./$(WEBSITE_JS)/. ./$(MDBOOK_SRC)/website/
 
 .PHONY: website
 website: website-prepare
