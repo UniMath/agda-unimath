@@ -174,6 +174,8 @@ website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTO
 
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/
 
+	# The cp command works differently between BSD(MacOS) and GNU(Linux), but the following command works for both
+	# https://dev.to/ackshaey/macos-vs-linux-the-cp-command-will-trip-you-up-2p00
 	@cp -r ./$(DOCS_DIR)/. ./$(MDBOOK_SRC)
 	@cp -r ./$(WEBSITE_IMAGES) ./$(MDBOOK_SRC)/website
 	@cp -r ./$(WEBSITE_CSS) ./$(MDBOOK_SRC)/website
