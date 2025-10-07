@@ -66,6 +66,7 @@ open import order-theory.posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
