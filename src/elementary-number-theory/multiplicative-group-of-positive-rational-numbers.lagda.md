@@ -55,6 +55,9 @@ opaque
   inv-ℚ⁺ : ℚ⁺ → ℚ⁺
   pr1 (inv-ℚ⁺ (x , P)) = inv-is-positive-ℚ x P
   pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
+
+rational-inv-ℚ⁺ : ℚ⁺ → ℚ
+rational-inv-ℚ⁺ q = rational-ℚ⁺ (inv-ℚ⁺ q)
 ```
 
 ### Inverse laws in the multiplicative group of positive rational numbers
@@ -177,4 +180,11 @@ module _
 abstract
   is-section-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
   is-section-right-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
+
+  is-section-left-mul-ℚ⁺ : (p q : ℚ⁺) → p *ℚ⁺ (inv-ℚ⁺ p *ℚ⁺ q) ＝ q
+  is-section-left-mul-ℚ⁺ = is-section-left-div-Group group-mul-ℚ⁺
+
+  is-retraction-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ p) *ℚ⁺ inv-ℚ⁺ p ＝ q
+  is-retraction-right-mul-ℚ⁺ p q =
+    is-retraction-right-div-Group group-mul-ℚ⁺ p q
 ```
