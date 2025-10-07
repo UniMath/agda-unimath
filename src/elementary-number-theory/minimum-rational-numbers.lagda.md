@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 
 open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 ```
 
 </details>
@@ -118,6 +119,14 @@ abstract
       ( right-leq-left-min-Decidable-Total-Order
           ℚ-Decidable-Total-Order x y y≤x)
       ( z<y)
+```
+
+### If `z` is less or equal to than both `x` and `y`, it is less than or equal to their minimum
+
+```agda
+abstract
+  leq-min-leq-both-ℚ : (z x y : ℚ) → leq-ℚ z x → leq-ℚ z y → leq-ℚ z (min-ℚ x y)
+  leq-min-leq-both-ℚ = leq-min-leq-both-Total-Order ℚ-Total-Order
 ```
 
 ### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`

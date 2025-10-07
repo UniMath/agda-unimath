@@ -129,6 +129,22 @@ abstract
       ( le-zero-is-positive-ℚ q pos-q)
 ```
 
+#### A negative rational number is less than a positive rational number
+
+```agda
+abstract
+  le-negative-positive-ℚ :
+    (p : ℚ⁻) (q : ℚ⁺) → le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁺ q)
+  le-negative-positive-ℚ (p , neg-p) (q , pos-q) =
+    transitive-le-ℚ p zero-ℚ q
+      ( le-zero-is-positive-ℚ q pos-q)
+      ( le-zero-is-negative-ℚ p neg-p)
+
+  leq-negative-positive-ℚ :
+    (p : ℚ⁻) (q : ℚ⁺) → leq-ℚ (rational-ℚ⁻ p) (rational-ℚ⁺ q)
+  leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
+```
+
 ### If `p ≤ q` for positive `p`, then `q` is positive
 
 ```agda

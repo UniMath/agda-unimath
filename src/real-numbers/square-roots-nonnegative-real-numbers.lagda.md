@@ -13,6 +13,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -48,6 +49,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -481,4 +483,85 @@ module _
           ( real-ℝ⁰⁺ x)
           ( real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x)
           ( leq-square-sqrt-ℝ⁰⁺'))
+```
+
+### Square roots of nonnegative real numbers are unique
+
+```agda
+opaque
+  unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ real-sqrt-ℝ⁰⁺
+
+  leq-unique-sqrt-ℝ⁰⁺ :
+    {l1 l2 : Level} → (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    sim-ℝ (real-ℝ⁰⁺ y *ℝ real-ℝ⁰⁺ y) (real-ℝ⁰⁺ x) →
+    leq-ℝ (real-ℝ⁰⁺ y) (real-sqrt-ℝ⁰⁺ x)
+  leq-unique-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) (y²≤x , _) q q<y is-nonneg-q =
+    let
+      open do-syntax-trunc-Prop (lower-cut-ℝ x (q *ℚ q))
+    in do
+      (r , y<r) ← is-inhabited-upper-cut-ℝ y
+      let
+        q≤r = leq-lower-upper-cut-ℝ y q r q<y y<r
+        [q,r] = ((q , r) , q≤r)
+        q⁰⁺ = (q , is-nonneg-q)
+        r⁰⁺ = (r , is-nonnegative-leq-ℚ⁰⁺ q⁰⁺ r q≤r)
+      y²≤x
+        ( q *ℚ q)
+        ( leq-lower-cut-mul-ℝ'-lower-cut-mul-ℝ
+          ( y)
+          ( y)
+          ( q *ℚ q)
+          ( intro-exists
+            ( ([q,r] , q<y , y<r) , ([q,r] , q<y , y<r))
+            ( leq-min-leq-both-ℚ (q *ℚ q) _ _
+            ( leq-min-leq-both-ℚ _ _ _
+                ( refl-leq-ℚ _)
+                ( preserves-leq-left-mul-ℚ⁰⁺ q⁰⁺ q r q≤r))
+              ( leq-min-leq-both-ℚ _ _ _
+                ( preserves-leq-right-mul-ℚ⁰⁺ q⁰⁺ q r q≤r)
+                ( preserves-leq-mul-ℚ⁰⁺ q⁰⁺ r⁰⁺ q⁰⁺ r⁰⁺ q≤r q≤r)))))
+
+  leq-unique-sqrt-ℝ⁰⁺' :
+    {l1 l2 : Level} → (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    sim-ℝ (real-ℝ⁰⁺ y *ℝ real-ℝ⁰⁺ y) (real-ℝ⁰⁺ x) →
+    leq-ℝ' (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
+  leq-unique-sqrt-ℝ⁰⁺' x⁰⁺@(x , _) y⁰⁺@(y , is-nonneg-y) (_ , x≤y²) q y<q =
+    let
+      is-pos-q = is-positive-is-in-upper-cut-ℝ⁰⁺ y⁰⁺ q y<q
+      q⁺ = (q , is-pos-q)
+      p⁻@(p , is-neg-p) = neg-ℚ⁺ q⁺
+      p≤q = leq-negative-positive-ℚ p⁻ q⁺
+      [p,q] = ((p , q) , p≤q)
+      p<y = leq-negative-lower-cut-is-nonnegative-ℝ y is-nonneg-y p is-neg-p
+    in
+      ( is-pos-q ,
+        leq'-leq-ℝ
+          ( x)
+          ( y *ℝ y)
+          ( x≤y²)
+          ( q *ℚ q)
+          ( leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ
+            ( y)
+            ( y)
+            ( q *ℚ q)
+            ( intro-exists
+              ( ([p,q] , p<y , y<q) , ([p,q] , p<y , y<q))
+              ( leq-max-leq-both-ℚ _ _ _
+                ( leq-max-leq-both-ℚ _ _ _
+                  ( leq-eq-ℚ _ _ (negative-law-mul-ℚ q q))
+                  ( leq-negative-positive-ℚ
+                    ( mul-negative-positive-ℚ p⁻ q⁺)
+                    ( q⁺ *ℚ⁺ q⁺)))
+                ( leq-max-leq-both-ℚ _ _ _
+                  ( leq-negative-positive-ℚ
+                    ( mul-positive-negative-ℚ q⁺ p⁻)
+                    ( q⁺ *ℚ⁺ q⁺))
+                  ( refl-leq-ℚ _))))))
+
+  unique-sqrt-ℝ⁰⁺ : {l1 l2 : Level} → (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    sim-ℝ (real-ℝ⁰⁺ y *ℝ real-ℝ⁰⁺ y) (real-ℝ⁰⁺ x) →
+    sim-ℝ (real-ℝ⁰⁺ y) (real-sqrt-ℝ⁰⁺ x)
+  unique-sqrt-ℝ⁰⁺ x y y²=x =
+    ( leq-unique-sqrt-ℝ⁰⁺ x y y²=x ,
+      leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
 ```
