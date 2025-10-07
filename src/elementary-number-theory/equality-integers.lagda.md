@@ -33,9 +33,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-We define {{#concept "equality" Disambiguation="of integers" Agda=Eq-ℤ}} on the [integers](elementary-number-theory.integers.md) by
-pattern matching, and show that this characterizes the
-[identity type](foundation.identity-types.md) on the integers.
+We define {{#concept "equality" Disambiguation="of integers" Agda=Eq-ℤ}} on the
+[integers](elementary-number-theory.integers.md) by pattern matching, and show
+that this characterizes the [identity type](foundation.identity-types.md) on the
+integers.
 
 ## Definition
 

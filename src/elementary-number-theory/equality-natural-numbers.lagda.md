@@ -35,8 +35,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-We define {{#concept "equality" Disambiguation="of natural numbers" Agda=Eq-ℕ}} on the
-[natural numbers](elementary-number-theory.natural-numbers.md) by pattern
+We define {{#concept "equality" Disambiguation="of natural numbers" Agda=Eq-ℕ}}
+on the [natural numbers](elementary-number-theory.natural-numbers.md) by pattern
 matching, and show that this characterizes the
 [identity type](foundation.identity-types.md) on the natural numbers.
 
