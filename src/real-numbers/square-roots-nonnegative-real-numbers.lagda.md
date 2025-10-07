@@ -584,3 +584,20 @@ abstract
             ( sim-eq-ℝ
               ( mul-real-ℚ p p ∙ ap real-ℚ (ap rational-ℚ⁰⁺ p²=q))))))
 ```
+
+### The square root operation preserves similarity
+
+```agda
+abstract
+  preserves-sim-sqrt-ℝ⁰⁺ :
+    {l1 l2 : Level} → (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → sim-ℝ⁰⁺ x y →
+    sim-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) (sqrt-ℝ⁰⁺ y)
+  preserves-sim-sqrt-ℝ⁰⁺ x y x~y =
+    unique-sqrt-ℝ⁰⁺
+      ( y)
+      ( sqrt-ℝ⁰⁺ x)
+      ( similarity-reasoning-ℝ
+        real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x
+        ~ℝ real-ℝ⁰⁺ x by sim-eq-ℝ (eq-real-square-sqrt-ℝ⁰⁺ x)
+        ~ℝ real-ℝ⁰⁺ y by x~y)
+```
