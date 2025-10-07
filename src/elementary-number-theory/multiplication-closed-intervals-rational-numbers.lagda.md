@@ -39,7 +39,6 @@ open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -1117,132 +1116,103 @@ abstract
 
 ```agda
 abstract
-  left-subdistributive-mul-add-closed-interval-ℚ :
-    ([a,b] [c,d] [e,f] : closed-interval-ℚ) →
-    leq-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
-      ( add-closed-interval-ℚ
-        ( mul-closed-interval-ℚ [a,b] [c,d])
-        ( mul-closed-interval-ℚ [a,b] [e,f]))
-  left-subdistributive-mul-add-closed-interval-ℚ [a,b] [c,d] [e,f] =
-    leq-closed-interval-leq-subtype-ℚ
-      ( mul-closed-interval-ℚ [a,b] (add-closed-interval-ℚ [c,d] [e,f]))
-      ( add-closed-interval-ℚ
-        ( mul-closed-interval-ℚ [a,b] [c,d])
-        ( mul-closed-interval-ℚ [a,b] [e,f]))
-      ( λ q q∈[a,b]⟨[c,d]+[e,f]⟩ →
-        let
-          open
-            do-syntax-trunc-Prop
-              ( subtype-closed-interval-ℚ
-                ( add-closed-interval-ℚ
-                  ( mul-closed-interval-ℚ [a,b] [c,d])
-                  ( mul-closed-interval-ℚ [a,b] [e,f]))
-                ( q))
-        in do
-          ((qab , qcdef) , qab∈[a,b] , qcdef∈[c,d]+[e,f] , q=qab*qcdef) ←
-            is-in-minkowski-product-is-in-mul-closed-interval-ℚ
-              ( [a,b])
-              ( add-closed-interval-ℚ [c,d] [e,f])
-              ( q)
-              ( q∈[a,b]⟨[c,d]+[e,f]⟩)
-          ((qcd , qef) , qcd∈[c,d] , qef∈[e,f] , qcdef=qcd+qef) ←
-            is-in-minkowski-sum-is-in-add-closed-interval-ℚ
-              ( [c,d])
-              ( [e,f])
-              ( qcdef)
-              ( qcdef∈[c,d]+[e,f])
-          inv-tr
-            ( is-in-closed-interval-ℚ
-              ( add-closed-interval-ℚ
-                ( mul-closed-interval-ℚ [a,b] [c,d])
-                ( mul-closed-interval-ℚ [a,b] [e,f])))
-            ( ( q=qab*qcdef) ∙
-              ( ap-mul-ℚ refl qcdef=qcd+qef) ∙
-              ( left-distributive-mul-add-ℚ qab qcd qef))
-            ( is-in-add-interval-add-is-in-closed-interval-ℚ
-              ( mul-closed-interval-ℚ [a,b] [c,d])
-              ( mul-closed-interval-ℚ [a,b] [e,f])
-              ( qab *ℚ qcd)
-              ( qab *ℚ qef)
-              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                  ( [a,b])
-                  ( [c,d])
-                  ( qab)
-                  ( qcd)
-                  ( qab∈[a,b])
-                  ( qcd∈[c,d]))
-              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                  ( [a,b])
-                  ( [e,f])
-                  ( qab)
-                  ( qef)
-                  ( qab∈[a,b])
-                  ( qef∈[e,f]))))
-```
+  right-negative-law-lower-bound-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    lower-bound-mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-ℚ (upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-lower-bound-mul-closed-interval-ℚ
+    ((a , b) , a≤b) ((c , d) , c≤d) =
+    equational-reasoning
+      min-ℚ
+        ( min-ℚ (a *ℚ neg-ℚ d) (a *ℚ neg-ℚ c))
+        ( min-ℚ (b *ℚ neg-ℚ d) (b *ℚ neg-ℚ c))
+      ＝
+        min-ℚ
+          ( min-ℚ (a *ℚ neg-ℚ c) (a *ℚ neg-ℚ d))
+          ( min-ℚ (b *ℚ neg-ℚ c) (b *ℚ neg-ℚ d))
+        by ap-min-ℚ (commutative-min-ℚ _ _) (commutative-min-ℚ _ _)
+      ＝
+        min-ℚ
+          ( min-ℚ (neg-ℚ (a *ℚ c)) (neg-ℚ (a *ℚ d)))
+          ( min-ℚ (neg-ℚ (b *ℚ c)) (neg-ℚ (b *ℚ d)))
+        by
+          ap-min-ℚ
+            ( ap-min-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+            ( ap-min-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+      ＝
+        min-ℚ
+          ( neg-ℚ (max-ℚ (a *ℚ c) (a *ℚ d)))
+          ( neg-ℚ (max-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (ap-min-ℚ (neg-max-ℚ _ _) (neg-max-ℚ _ _))
+      ＝
+        neg-ℚ
+          ( max-ℚ
+            ( max-ℚ (a *ℚ c) (a *ℚ d))
+            ( max-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (neg-max-ℚ _ _)
 
-### Containment of intervals is preserved by multiplication
+  right-negative-law-upper-bound-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    upper-bound-mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-ℚ (lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-upper-bound-mul-closed-interval-ℚ
+    ((a , b) , a≤b) ((c , d) , c≤d) =
+    equational-reasoning
+      max-ℚ
+        ( max-ℚ (a *ℚ neg-ℚ d) (a *ℚ neg-ℚ c))
+        ( max-ℚ (b *ℚ neg-ℚ d) (b *ℚ neg-ℚ c))
+      ＝
+        max-ℚ
+          ( max-ℚ (a *ℚ neg-ℚ c) (a *ℚ neg-ℚ d))
+          ( max-ℚ (b *ℚ neg-ℚ c) (b *ℚ neg-ℚ d))
+        by ap-max-ℚ (commutative-max-ℚ _ _) (commutative-max-ℚ _ _)
+      ＝
+        max-ℚ
+          ( max-ℚ (neg-ℚ (a *ℚ c)) (neg-ℚ (a *ℚ d)))
+          ( max-ℚ (neg-ℚ (b *ℚ c)) (neg-ℚ (b *ℚ d)))
+        by
+          ap-max-ℚ
+            ( ap-max-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+            ( ap-max-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+      ＝
+        max-ℚ
+          ( neg-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)))
+          ( neg-ℚ (min-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (ap-max-ℚ (neg-min-ℚ _ _) (neg-min-ℚ _ _))
+      ＝ neg-ℚ (min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (neg-min-ℚ _ _)
 
-```agda
-abstract
-  preserves-leq-left-mul-closed-interval-ℚ :
-    ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
-    leq-closed-interval-ℚ [a,b] [a',b'] →
-    leq-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a',b'] [c,d])
-  preserves-leq-left-mul-closed-interval-ℚ [c,d] [a,b] [a',b'] [a,b]⊆[a',b'] =
-    leq-closed-interval-leq-subtype-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a',b'] [c,d])
-      ( binary-tr
-        ( _⊆_)
-        ( eq-minkowski-mul-closed-interval-ℚ [a,b] [c,d])
-        ( eq-minkowski-mul-closed-interval-ℚ [a',b'] [c,d])
-        ( preserves-leq-left-minkowski-mul-Commutative-Monoid
-          ( commutative-monoid-mul-ℚ)
-          ( subtype-closed-interval-ℚ [c,d])
-          ( subtype-closed-interval-ℚ [a,b])
-          ( subtype-closed-interval-ℚ [a',b'])
-          ( leq-subtype-leq-closed-interval-ℚ [a,b] [a',b'] [a,b]⊆[a',b'])))
+  right-negative-law-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-mul-closed-interval-ℚ [a,b] [c,d] =
+    eq-closed-interval-ℚ _ _
+      ( right-negative-law-lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+      ( right-negative-law-upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
 
-  preserves-leq-right-mul-closed-interval-ℚ :
-    ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
-    leq-closed-interval-ℚ [c,d] [c',d'] →
-    leq-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a,b] [c',d'])
-  preserves-leq-right-mul-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
-    binary-tr
-      ( leq-closed-interval-ℚ)
-      ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
-      ( commutative-mul-closed-interval-ℚ [c',d'] [a,b])
-      ( preserves-leq-left-mul-closed-interval-ℚ
-        ( [a,b])
-        ( [c,d])
-        ( [c',d'])
-        ( [c,d]⊆[c',d']))
-
-  preserves-leq-mul-closed-interval-ℚ :
-    ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
-    leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
-    leq-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a',b'] [c',d'])
-  preserves-leq-mul-closed-interval-ℚ
-    [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
-    transitive-leq-closed-interval-ℚ
-      ( mul-closed-interval-ℚ [a,b] [c,d])
-      ( mul-closed-interval-ℚ [a,b] [c',d'])
-      ( mul-closed-interval-ℚ [a',b'] [c',d'])
-      ( preserves-leq-left-mul-closed-interval-ℚ
-        ( [c',d'])
-        ( [a,b])
-        ( [a',b'])
-        ( [a,b]⊆[a',b']))
-      ( preserves-leq-right-mul-closed-interval-ℚ
-        ( [a,b])
-        ( [c,d])
-        ( [c',d'])
-        ( [c,d]⊆[c',d']))
+  left-negative-law-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d] ＝
+    neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+  left-negative-law-mul-closed-interval-ℚ [a,b] [c,d] =
+    equational-reasoning
+      mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d]
+      ＝ mul-closed-interval-ℚ [c,d] (neg-closed-interval-ℚ [a,b])
+        by commutative-mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d]
+      ＝ neg-closed-interval-ℚ (mul-closed-interval-ℚ [c,d] [a,b])
+        by right-negative-law-mul-closed-interval-ℚ [c,d] [a,b]
+      ＝ neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+        by
+          ap
+            ( neg-closed-interval-ℚ)
+            ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
 ```
