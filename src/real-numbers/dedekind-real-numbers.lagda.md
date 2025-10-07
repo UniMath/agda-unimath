@@ -8,6 +8,8 @@ module real-numbers.dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -28,6 +30,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
@@ -253,18 +256,25 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ)
   where
 
-  le-lower-upper-cut-ℝ :
-    is-in-lower-cut-ℝ x p →
-    is-in-upper-cut-ℝ x q →
-    le-ℚ p q
-  le-lower-upper-cut-ℝ H H' =
-    rec-coproduct
-      ( id)
-      ( λ I →
-        ex-falso
-          ( is-disjoint-cut-ℝ x p
-              ( H , leq-upper-cut-ℝ x q p I H')))
-      ( decide-le-leq-ℚ p q)
+  abstract
+    le-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      le-ℚ p q
+    le-lower-upper-cut-ℝ H H' =
+      rec-coproduct
+        ( id)
+        ( λ I →
+          ex-falso
+            ( is-disjoint-cut-ℝ x p
+                ( H , leq-upper-cut-ℝ x q p I H')))
+        ( decide-le-leq-ℚ p q)
+
+    leq-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      leq-ℚ p q
+    leq-lower-upper-cut-ℝ H H' = leq-le-ℚ (le-lower-upper-cut-ℝ H H')
 ```
 
 ### Characterization of each cut by the other
@@ -511,6 +521,46 @@ module _
 
   eq-eq-upper-cut-ℝ : upper-cut-ℝ x ＝ upper-cut-ℝ y → x ＝ y
   eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
+```
+
+### The maximum of two elements of a lower cut of a real number is in the lower cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-in-lower-cut-max-ℚ :
+      (p q : ℚ) → is-in-lower-cut-ℝ x p → is-in-lower-cut-ℝ x q →
+      is-in-lower-cut-ℝ x (max-ℚ p q)
+    is-in-lower-cut-max-ℚ p q p<x q<x =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-lower-cut-ℝ x) (left-leq-right-max-ℚ p q p≤q) q<x)
+        ( λ q≤p →
+          inv-tr (is-in-lower-cut-ℝ x) (right-leq-left-max-ℚ p q q≤p) p<x)
+        ( linear-leq-ℚ p q)
+```
+
+### The minimum of two elements of a upper cut of a real number is in the upper cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-in-upper-cut-min-ℚ :
+      (p q : ℚ) → is-in-upper-cut-ℝ x p → is-in-upper-cut-ℝ x q →
+      is-in-upper-cut-ℝ x (min-ℚ p q)
+    is-in-upper-cut-min-ℚ p q x<p x<q =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-upper-cut-ℝ x) (left-leq-right-min-ℚ p q p≤q) x<p)
+        ( λ q≤p →
+          inv-tr (is-in-upper-cut-ℝ x) (right-leq-left-min-ℚ p q q≤p) x<q)
+        ( linear-leq-ℚ p q)
 ```
 
 ## References

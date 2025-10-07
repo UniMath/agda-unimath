@@ -8,6 +8,7 @@ module elementary-number-theory.closed-intervals-rational-numbers where
 
 ```agda
 open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
@@ -83,9 +84,17 @@ is-below-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-below-prop-closed-interval-ℚ ((a , _) , _) b = le-ℚ-Prop b a
 
+is-below-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-below-closed-interval-ℚ [a,b] q =
+  type-Prop (is-below-prop-closed-interval-ℚ [a,b] q)
+
 is-above-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-above-prop-closed-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
+
+is-above-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
+is-above-closed-interval-ℚ [a,b] q =
+  type-Prop (is-above-prop-closed-interval-ℚ [a,b] q)
 ```
 
 ### The width of a closed interval
@@ -176,4 +185,27 @@ upper-bound-is-in-closed-interval-ℚ :
   is-in-closed-interval-ℚ [a,b] (upper-bound-closed-interval-ℚ [a,b])
 upper-bound-is-in-closed-interval-ℚ =
   upper-bound-is-in-closed-interval-Poset ℚ-Poset
+```
+
+### The distance between the lower and upper bounds of a closed interval is its width
+
+```agda
+abstract
+  eq-width-dist-lower-upper-bounds-closed-interval-ℚ :
+    ([a,b] : closed-interval-ℚ) →
+    rational-dist-ℚ
+      ( lower-bound-closed-interval-ℚ [a,b])
+      ( upper-bound-closed-interval-ℚ [a,b]) ＝
+    width-closed-interval-ℚ [a,b]
+  eq-width-dist-lower-upper-bounds-closed-interval-ℚ ((a , b) , a≤b) =
+    eq-dist-diff-leq-ℚ a b a≤b
+
+  eq-width-dist-upper-lower-bounds-closed-interval-ℚ :
+    ([a,b] : closed-interval-ℚ) →
+    rational-dist-ℚ
+      ( upper-bound-closed-interval-ℚ [a,b])
+      ( lower-bound-closed-interval-ℚ [a,b]) ＝
+    width-closed-interval-ℚ [a,b]
+  eq-width-dist-upper-lower-bounds-closed-interval-ℚ ((a , b) , a≤b) =
+    eq-dist-diff-leq-ℚ' b a a≤b
 ```

@@ -64,6 +64,18 @@ abstract
     inv (abs-neg-ℚ _) ∙ ap abs-ℚ (distributive-neg-diff-ℚ _ _)
 ```
 
+### A rational number's distance from itself is zero
+
+```agda
+abstract
+  dist-self-ℚ : (q : ℚ) → dist-ℚ q q ＝ zero-ℚ⁰⁺
+  dist-self-ℚ q =
+    ap abs-ℚ (right-inverse-law-add-ℚ q) ∙ abs-rational-ℚ⁰⁺ zero-ℚ⁰⁺
+
+  rational-dist-self-ℚ : (q : ℚ) → rational-dist-ℚ q q ＝ zero-ℚ
+  rational-dist-self-ℚ q = ap rational-ℚ⁰⁺ (dist-self-ℚ q)
+```
+
 ### The differences of the arguments are less than or equal to their distance
 
 ```agda
@@ -224,6 +236,11 @@ abstract
           rational-abs-zero-leq-ℚ
             ( q -ℚ p)
             ( backward-implication (iff-translate-diff-leq-zero-ℚ p q) p≤q)
+
+  eq-dist-diff-leq-ℚ' : (p q : ℚ) → leq-ℚ q p → rational-dist-ℚ p q ＝ p -ℚ q
+  eq-dist-diff-leq-ℚ' p q q≤p =
+    ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _) ∙
+    eq-dist-diff-leq-ℚ q p q≤p
 
   eq-dist-diff-max-min-ℚ :
     (p q : ℚ) → rational-dist-ℚ p q ＝ max-ℚ p q -ℚ min-ℚ p q

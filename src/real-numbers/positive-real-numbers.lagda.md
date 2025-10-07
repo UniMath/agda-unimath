@@ -17,9 +17,11 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -78,6 +80,48 @@ is-positive-real-ℝ⁺ = pr2
 
 ## Properties
 
+### Dedekind cuts of positive real numbers
+
+```agda
+lower-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → subtype l ℚ
+lower-cut-ℝ⁺ (x , _) = lower-cut-ℝ x
+
+is-in-lower-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → ℚ → UU l
+is-in-lower-cut-ℝ⁺ (x , _) = is-in-lower-cut-ℝ x
+
+is-rounded-lower-cut-ℝ⁺ :
+  {l : Level} → (x : ℝ⁺ l) (q : ℚ) →
+  is-in-lower-cut-ℝ⁺ x q ↔ exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-ℝ⁺ x r))
+is-rounded-lower-cut-ℝ⁺ (x , _) = is-rounded-lower-cut-ℝ x
+
+upper-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → subtype l ℚ
+upper-cut-ℝ⁺ (x , _) = upper-cut-ℝ x
+
+is-in-upper-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → ℚ → UU l
+is-in-upper-cut-ℝ⁺ (x , _) = is-in-upper-cut-ℝ x
+
+is-inhabited-upper-cut-ℝ⁺ :
+  {l : Level} → (x : ℝ⁺ l) → is-inhabited-subtype (upper-cut-ℝ⁺ x)
+is-inhabited-upper-cut-ℝ⁺ (x , _) = is-inhabited-upper-cut-ℝ x
+
+is-rounded-upper-cut-ℝ⁺ :
+  {l : Level} → (x : ℝ⁺ l) (r : ℚ) →
+  is-in-upper-cut-ℝ⁺ x r ↔ exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ⁺ x q))
+is-rounded-upper-cut-ℝ⁺ (x , _) = is-rounded-upper-cut-ℝ x
+
+le-lower-upper-cut-ℝ⁺ :
+  {l : Level} → (x : ℝ⁺ l) (p q : ℚ) →
+  is-in-lower-cut-ℝ⁺ x p → is-in-upper-cut-ℝ⁺ x q → le-ℚ p q
+le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
+```
+
+### Equality of positive real numbers
+
+```agda
+eq-ℝ⁺ : {l : Level} → (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) → x ＝ y
+eq-ℝ⁺ _ _ = eq-type-subtype is-positive-prop-ℝ
+```
+
 ### A real number is positive if and only if zero is in its lower cut
 
 ```agda
@@ -85,10 +129,21 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  is-positive-iff-zero-in-lower-cut-ℝ :
-    is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-  is-positive-iff-zero-in-lower-cut-ℝ =
-    inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
+  abstract
+    is-positive-iff-zero-in-lower-cut-ℝ :
+      is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
+    is-positive-iff-zero-in-lower-cut-ℝ =
+      inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
+
+    is-positive-zero-in-lower-cut-ℝ :
+      is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
+    is-positive-zero-in-lower-cut-ℝ =
+      backward-implication is-positive-iff-zero-in-lower-cut-ℝ
+
+abstract
+  zero-in-lower-cut-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → is-in-lower-cut-ℝ⁺ x zero-ℚ
+  zero-in-lower-cut-ℝ⁺ (x , is-pos-x) =
+    forward-implication (is-positive-iff-zero-in-lower-cut-ℝ x) is-pos-x
 ```
 
 ### A real number is positive if and only if there is a positive rational number in its lower cut
@@ -124,8 +179,7 @@ module _
       is-positive-exists-ℚ⁺-in-lower-cut-ℝ)
 
 exists-ℚ⁺-in-lower-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) →
-  exists ℚ⁺ (λ p → lower-cut-ℝ (real-ℝ⁺ x) (rational-ℚ⁺ p))
+  {l : Level} → (x : ℝ⁺ l) → exists ℚ⁺ (λ p → lower-cut-ℝ⁺ x (rational-ℚ⁺ p))
 exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 
@@ -208,4 +262,29 @@ opaque
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
 positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , is-positive-real-positive-ℚ q pos-q)
+
+one-ℝ⁺ : ℝ⁺ lzero
+one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+```
+
+### Any rational number in the upper cut of a positive real number is positive
+
+```agda
+abstract
+  is-positive-is-in-upper-cut-ℝ⁺ :
+    {l : Level} (x : ℝ⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
+  is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) q x<q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
+```
+
+### Similarity of positive real numbers
+
+```agda
+sim-prop-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → Prop (l1 ⊔ l2)
+sim-prop-ℝ⁺ (x , _) (y , _) = sim-prop-ℝ x y
+
+sim-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → UU (l1 ⊔ l2)
+sim-ℝ⁺ (x , _) (y , _) = sim-ℝ x y
 ```

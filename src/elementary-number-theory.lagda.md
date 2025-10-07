@@ -9,6 +9,7 @@
 ```agda
 module elementary-number-theory where
 
+open import elementary-number-theory.absolute-value-closed-intervals-rational-numbers public
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.absolute-value-rational-numbers public
 open import elementary-number-theory.ackermann-function public
@@ -115,6 +116,7 @@ open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
+open import elementary-number-theory.maximum-nonnegative-rational-numbers public
 open import elementary-number-theory.maximum-positive-rational-numbers public
 open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
