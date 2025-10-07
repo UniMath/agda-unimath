@@ -289,6 +289,14 @@ module _
           ( neg-ℚ r)
           ( neg-ℚ q)
           ( neg-le-ℚ q r H))
+
+    reverses-le-left-mul-ℚ⁻ : le-ℚ (rational-ℚ⁻ p *ℚ r) (rational-ℚ⁻ p *ℚ q)
+    reverses-le-left-mul-ℚ⁻ =
+      binary-tr
+        ( le-ℚ)
+        ( commutative-mul-ℚ _ _)
+        ( commutative-mul-ℚ _ _)
+        ( reverses-le-right-mul-ℚ⁻)
 ```
 
 ### The negative rational numbers are invertible elements of the multiplicative monoid of rational numbers
@@ -355,4 +363,20 @@ opaque
         ( neg-ℚ⁻ q)
         ( neg-ℚ⁻ p)
         ( neg-le-ℚ _ _ p<q))
+```
+
+### If `p ≤ q` for negative `q`, then `p` is negative
+
+```agda
+abstract
+  is-negative-leq-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-leq-ℚ⁻ (q , neg-q) p p≤q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-leq-le-ℚ p q zero-ℚ p≤q (le-zero-is-negative-ℚ q neg-q))
+
+  is-negative-le-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
 ```

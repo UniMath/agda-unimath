@@ -7,33 +7,39 @@ module elementary-number-theory.multiplication-closed-intervals-rational-numbers
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-closed-intervals-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-interval-preserving-maps-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.negation-closed-intervals-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.coproduct-types
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images-subtypes
 open import foundation.logical-equivalences
@@ -752,4 +758,109 @@ commutative-monoid-mul-closed-interval-ℚ : Commutative-Monoid lzero
 commutative-monoid-mul-closed-interval-ℚ =
   ( monoid-mul-closed-interval-ℚ ,
     commutative-mul-closed-interval-ℚ)
+```
+
+### Negative laws for interval multiplication
+
+```agda
+abstract
+  right-negative-law-lower-bound-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    lower-bound-mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-ℚ (upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-lower-bound-mul-closed-interval-ℚ
+    ((a , b) , a≤b) ((c , d) , c≤d) =
+    equational-reasoning
+      min-ℚ
+        ( min-ℚ (a *ℚ neg-ℚ d) (a *ℚ neg-ℚ c))
+        ( min-ℚ (b *ℚ neg-ℚ d) (b *ℚ neg-ℚ c))
+      ＝
+        min-ℚ
+          ( min-ℚ (a *ℚ neg-ℚ c) (a *ℚ neg-ℚ d))
+          ( min-ℚ (b *ℚ neg-ℚ c) (b *ℚ neg-ℚ d))
+        by ap-min-ℚ (commutative-min-ℚ _ _) (commutative-min-ℚ _ _)
+      ＝
+        min-ℚ
+          ( min-ℚ (neg-ℚ (a *ℚ c)) (neg-ℚ (a *ℚ d)))
+          ( min-ℚ (neg-ℚ (b *ℚ c)) (neg-ℚ (b *ℚ d)))
+        by
+          ap-min-ℚ
+            ( ap-min-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+            ( ap-min-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+      ＝
+        min-ℚ
+          ( neg-ℚ (max-ℚ (a *ℚ c) (a *ℚ d)))
+          ( neg-ℚ (max-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (ap-min-ℚ (neg-max-ℚ _ _) (neg-max-ℚ _ _))
+      ＝
+        neg-ℚ
+          ( max-ℚ
+            ( max-ℚ (a *ℚ c) (a *ℚ d))
+            ( max-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (neg-max-ℚ _ _)
+
+  right-negative-law-upper-bound-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    upper-bound-mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-ℚ (lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-upper-bound-mul-closed-interval-ℚ
+    ((a , b) , a≤b) ((c , d) , c≤d) =
+    equational-reasoning
+      max-ℚ
+        ( max-ℚ (a *ℚ neg-ℚ d) (a *ℚ neg-ℚ c))
+        ( max-ℚ (b *ℚ neg-ℚ d) (b *ℚ neg-ℚ c))
+      ＝
+        max-ℚ
+          ( max-ℚ (a *ℚ neg-ℚ c) (a *ℚ neg-ℚ d))
+          ( max-ℚ (b *ℚ neg-ℚ c) (b *ℚ neg-ℚ d))
+        by ap-max-ℚ (commutative-max-ℚ _ _) (commutative-max-ℚ _ _)
+      ＝
+        max-ℚ
+          ( max-ℚ (neg-ℚ (a *ℚ c)) (neg-ℚ (a *ℚ d)))
+          ( max-ℚ (neg-ℚ (b *ℚ c)) (neg-ℚ (b *ℚ d)))
+        by
+          ap-max-ℚ
+            ( ap-max-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+            ( ap-max-ℚ
+              ( right-negative-law-mul-ℚ _ _)
+              ( right-negative-law-mul-ℚ _ _))
+      ＝
+        max-ℚ
+          ( neg-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)))
+          ( neg-ℚ (min-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (ap-max-ℚ (neg-min-ℚ _ _) (neg-min-ℚ _ _))
+      ＝ neg-ℚ (min-ℚ (min-ℚ (a *ℚ c) (a *ℚ d)) (min-ℚ (b *ℚ c) (b *ℚ d)))
+        by inv (neg-min-ℚ _ _)
+
+  right-negative-law-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    mul-closed-interval-ℚ [a,b] (neg-closed-interval-ℚ [c,d]) ＝
+    neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+  right-negative-law-mul-closed-interval-ℚ [a,b] [c,d] =
+    eq-closed-interval-ℚ _ _
+      ( right-negative-law-lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
+      ( right-negative-law-upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
+
+  left-negative-law-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d] ＝
+    neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+  left-negative-law-mul-closed-interval-ℚ [a,b] [c,d] =
+    equational-reasoning
+      mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d]
+      ＝ mul-closed-interval-ℚ [c,d] (neg-closed-interval-ℚ [a,b])
+        by commutative-mul-closed-interval-ℚ (neg-closed-interval-ℚ [a,b]) [c,d]
+      ＝ neg-closed-interval-ℚ (mul-closed-interval-ℚ [c,d] [a,b])
+        by right-negative-law-mul-closed-interval-ℚ [c,d] [a,b]
+      ＝ neg-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d])
+        by
+          ap
+            ( neg-closed-interval-ℚ)
+            ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
 ```
