@@ -10,11 +10,13 @@ module elementary-number-theory.positive-and-negative-rational-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.nonpositive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -26,8 +28,9 @@ open import foundation.universe-levels
 
 In this file, we outline basic relations between
 [negative](elementary-number-theory.negative-rational-numbers.md),
-[nonnegative](elementary-number-theory.nonnegative-rational-numbers.md), and
-[positive](elementary-number-theory.positive-rational-numbers.md)
+[nonnegative](elementary-number-theory.nonnegative-rational-numbers.md),
+[positive](elementary-number-theory.positive-rational-numbers.md), and
+[nonpositive](elementary-number-theory.nonpositive-rational-numbers.md)
 [rational numbers](elementary-number-theory.rational-numbers.md).
 
 ## Properties
@@ -46,6 +49,20 @@ abstract
       ( is-negative-le-zero-ℚ q)
       ( is-nonnegative-leq-zero-ℚ q)
       ( decide-le-leq-ℚ q zero-ℚ)
+```
+
+#### A rational number is either positive or nonpositive
+
+```agda
+abstract
+  decide-is-positive-is-nonpositive-ℚ :
+    (q : ℚ) →
+    is-positive-ℚ q + is-nonpositive-ℚ q
+  decide-is-positive-is-nonpositive-ℚ q =
+    map-coproduct
+      ( is-positive-le-zero-ℚ q)
+      ( is-nonpositive-leq-zero-ℚ q)
+      ( decide-le-leq-ℚ zero-ℚ q)
 ```
 
 ### Trichotomies
@@ -67,4 +84,56 @@ abstract
       ( λ x<0 → neg (is-negative-le-zero-ℚ x x<0))
       ( zero)
       ( λ 0<x → pos (is-positive-le-zero-ℚ x 0<x))
+```
+
+### Inequalities
+
+#### A negative rational number is less than a nonnegative rational number
+
+```agda
+abstract
+  le-negative-nonnegative-ℚ :
+    (p : ℚ⁻) (q : ℚ⁰⁺) → le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁰⁺ q)
+  le-negative-nonnegative-ℚ (p , neg-p) (q , nonneg-q) =
+    concatenate-le-leq-ℚ p zero-ℚ q
+      ( le-zero-is-negative-ℚ p neg-p)
+      ( leq-zero-is-nonnegative-ℚ q nonneg-q)
+```
+
+#### A nonpositive rational number is less than a positive rational number
+
+```agda
+abstract
+  le-nonpositive-positive-ℚ :
+    (p : ℚ⁰⁻) (q : ℚ⁺) → le-ℚ (rational-ℚ⁰⁻ p) (rational-ℚ⁺ q)
+  le-nonpositive-positive-ℚ (p , nonpos-p) (q , pos-q) =
+    concatenate-leq-le-ℚ p zero-ℚ q
+      ( leq-zero-is-nonpositive-ℚ p nonpos-p)
+      ( le-zero-is-positive-ℚ q pos-q)
+```
+
+### If `p < q` and `p` is nonnegative, then `q` is positive
+
+```agda
+abstract
+  is-positive-le-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q : ℚ) → le-ℚ (rational-ℚ⁰⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁰⁺ (p , nonneg-p) q p<q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( concatenate-leq-le-ℚ _ _ _ (leq-zero-is-nonnegative-ℚ p nonneg-p) p<q)
+```
+
+### If `p < q` and `q` is nonpositive, then `p` is negative
+
+```agda
+abstract
+  is-negative-le-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁰⁻ (q , nonpos-q) p p<q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-le-leq-ℚ p q zero-ℚ
+        ( p<q)
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q))
 ```

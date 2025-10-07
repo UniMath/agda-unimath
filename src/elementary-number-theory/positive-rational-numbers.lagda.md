@@ -12,6 +12,7 @@ module elementary-number-theory.positive-rational-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.negative-integers
@@ -298,4 +299,21 @@ abstract
 
 nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
+```
+
+### If `p ≤ q` for positive `p`, then `q` is positive
+
+```agda
+abstract
+  is-positive-leq-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
+
+  is-positive-le-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁺ p q p<q =
+    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
 ```
