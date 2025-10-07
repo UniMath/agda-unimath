@@ -13,13 +13,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import real-numbers.raising-universe-levels-real-numbers
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 

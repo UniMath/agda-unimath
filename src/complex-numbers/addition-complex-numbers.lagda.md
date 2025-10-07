@@ -10,6 +10,7 @@ module complex-numbers.addition-complex-numbers where
 open import complex-numbers.complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -35,6 +36,12 @@ add-ℂ (a , b) (c , d) = (a +ℝ c , b +ℝ d)
 infixl 35 _+ℂ_
 _+ℂ_ : {l1 l2 : Level} → ℂ l1 → ℂ l2 → ℂ (l1 ⊔ l2)
 _+ℂ_ = add-ℂ
+
+ap-add-ℂ :
+  {l1 l2 : Level} →
+  {x x' : ℂ l1} → x ＝ x' → {y y' : ℂ l2} → y ＝ y' →
+  x +ℂ y ＝ x' +ℂ y'
+ap-add-ℂ = ap-binary add-ℂ
 ```
 
 ## Properties

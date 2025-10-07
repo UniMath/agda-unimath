@@ -66,13 +66,13 @@ open import order-theory.posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.difference-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -1262,3 +1262,24 @@ abstract
 ```
 
 ### Distributive laws of multiplication over subtraction
+
+```agda
+abstract
+  left-distributive-mul-diff-ℝ :
+    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    x *ℝ (y -ℝ z) ＝ x *ℝ y -ℝ x *ℝ z
+  left-distributive-mul-diff-ℝ x y z =
+    equational-reasoning
+      x *ℝ (y -ℝ z)
+      ＝ x *ℝ y +ℝ x *ℝ neg-ℝ z by left-distributive-mul-add-ℝ _ _ _
+      ＝ x *ℝ y -ℝ x *ℝ z by ap (x *ℝ y +ℝ_) (right-negative-law-mul-ℝ x z)
+
+  right-distributive-mul-diff-ℝ :
+    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x -ℝ y) *ℝ z ＝ x *ℝ z -ℝ y *ℝ z
+  right-distributive-mul-diff-ℝ x y z =
+    equational-reasoning
+      (x -ℝ y) *ℝ z
+      ＝ x *ℝ z +ℝ neg-ℝ y *ℝ z by right-distributive-mul-add-ℝ _ _ _
+      ＝ x *ℝ z -ℝ y *ℝ z by ap (x *ℝ z +ℝ_) (left-negative-law-mul-ℝ y z)
+```
