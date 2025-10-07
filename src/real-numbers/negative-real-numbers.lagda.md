@@ -30,7 +30,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 A [real number](real-numbers.dedekind-real-numbers.md) is
-{{#concept "negative" Disambiguation="real number" Agda=is-positive-ℝ}} if it is
+{{#concept "negative" Disambiguation="real number" Agda=is-negative-ℝ}} if it is
 [strictly less than](real-numbers.strict-inequality-real-numbers.md) zero.
 
 ## Definition
