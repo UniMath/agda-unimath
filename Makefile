@@ -35,17 +35,6 @@ CONTRIBUTORS_FILE := CONTRIBUTORS.toml
 # added to the everything file as well.
 everythingOpts := --guardedness --cohesion --flat-split --rewriting
 
-# Figure out which OS we are running
-UNAME_S := $(shell uname -s)
-
-ifeq ($(UNAME_S),Darwin)
-	OS := mac
-else ifeq ($(UNAME_S),Linux)
-	OS := linux
-else
-	OS := unknown
-endif
-
 # use "$ export SKIPAGDA=1" or "make SKIPAGDA=1 ..." to skip Agda processing
 # when building the website
 SKIPAGDA ?=
