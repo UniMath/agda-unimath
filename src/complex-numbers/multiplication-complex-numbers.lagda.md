@@ -11,6 +11,9 @@ open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
+open import elementary-number-theory.rational-numbers
+
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -219,4 +222,36 @@ abstract
       ( λ w → sim-ℂ w zero-ℂ)
       ( commutative-mul-ℂ _ _)
       ( left-zero-law-mul-ℂ z)
+```
+
+### `i² = -1`
+
+```agda
+opaque
+  unfolding neg-ℚ
+
+  eq-neg-one-i²-ℂ : i-ℂ *ℂ i-ℂ ＝ neg-one-ℂ
+  eq-neg-one-i²-ℂ =
+    eq-ℂ
+      ( equational-reasoning
+        zero-ℝ *ℝ zero-ℝ -ℝ one-ℝ *ℝ one-ℝ
+        ＝ zero-ℝ -ℝ one-ℝ
+          by
+            ap-diff-ℝ
+              ( eq-sim-ℝ (left-zero-law-mul-ℝ zero-ℝ))
+              ( left-unit-law-mul-ℝ one-ℝ)
+        ＝ neg-ℝ one-ℝ
+          by left-unit-law-add-ℝ _
+        ＝ real-ℚ neg-one-ℚ
+          by eq-neg-one-ℝ)
+      ( equational-reasoning
+        zero-ℝ *ℝ one-ℝ +ℝ one-ℝ *ℝ zero-ℝ
+        ＝ zero-ℝ +ℝ zero-ℝ
+          by
+            eq-sim-ℝ
+              ( preserves-sim-add-ℝ
+                ( left-zero-law-mul-ℝ _)
+                ( right-zero-law-mul-ℝ _))
+        ＝ zero-ℝ
+          by left-unit-law-add-ℝ zero-ℝ)
 ```

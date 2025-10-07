@@ -110,6 +110,13 @@ one-ℝ : ℝ lzero
 one-ℝ = real-ℚ one-ℚ
 ```
 
+### Negative one as a real number
+
+```agda
+neg-one-ℝ : ℝ lzero
+neg-one-ℝ = real-ℚ neg-one-ℚ
+```
+
 ### The canonical map from `ℚ` to `ℝ l`
 
 ```agda

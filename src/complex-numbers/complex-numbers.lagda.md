@@ -95,6 +95,9 @@ zero-ℂ = (zero-ℝ , zero-ℝ)
 one-ℂ : ℂ lzero
 one-ℂ = (one-ℝ , zero-ℝ)
 
+neg-one-ℂ : ℂ lzero
+neg-one-ℂ = (neg-one-ℝ , zero-ℝ)
+
 i-ℂ : ℂ lzero
 i-ℂ = (zero-ℝ , one-ℝ)
 ```
