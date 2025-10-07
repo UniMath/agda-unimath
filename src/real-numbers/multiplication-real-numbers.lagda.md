@@ -69,8 +69,10 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -415,7 +417,9 @@ module _
               ( rational-ℚ⁺ εx)
               ( one-ℚ)
               ( q-p<εx)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( ε-max-min-x *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -426,7 +430,9 @@ module _
               ( rational-ℚ⁺ εy)
               ( one-ℚ)
               ( s-r<εy)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( ε-max-min-y *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
@@ -529,8 +535,14 @@ module _
                               ( _)
                               ( _)
                               ( preserves-leq-add-ℚ
-                                ( leq-right-min-ℚ⁺ _ _)
-                                ( leq-right-min-ℚ⁺ _ _))
+                                ( leq-right-min-ℚ⁺
+                                  ( one-ℚ⁺)
+                                  ( ε-max-min-x *ℚ⁺
+                                    positive-reciprocal-rational-succ-ℕ N))
+                                ( leq-right-min-ℚ⁺
+                                  ( one-ℚ⁺)
+                                  ( ε-max-min-y *ℚ⁺
+                                    positive-reciprocal-rational-succ-ℕ N)))
                         ≤ rational-ℚ⁺ ε-max-min
                           by
                             leq-eq-ℚ _ _
@@ -1131,3 +1143,122 @@ opaque
                         ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
                     ( [a,b][c,d]<pq)))))
 ```
+
+### Multiplication on the real numbers preserves similarity
+
+```agda
+opaque
+  unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ
+
+  leq-sim-right-mul-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) → sim-ℝ x y →
+    leq-ℝ (x *ℝ z) (y *ℝ z)
+  leq-sim-right-mul-ℝ z x y (Lx⊆Ly , Ly⊆Lx) q q<xz =
+    let open do-syntax-trunc-Prop (lower-cut-mul-ℝ y z q)
+    in do
+      ( ( ([a,b]@((a , b) , _) , a<x , x<b) , c<z<d) , q<[a,b][c,d]) ← q<xz
+      intro-exists
+        ( ([a,b] , Lx⊆Ly a a<x , leq'-leq-ℝ y x Ly⊆Lx b x<b) , c<z<d)
+        ( q<[a,b][c,d])
+
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  abstract
+    leq-sim-right-mul-ℝ' : sim-ℝ x y → leq-ℝ (y *ℝ z) (x *ℝ z)
+    leq-sim-right-mul-ℝ' x~y =
+      leq-sim-right-mul-ℝ z y x (symmetric-sim-ℝ x~y)
+
+    preserves-sim-right-mul-ℝ : sim-ℝ x y → sim-ℝ (x *ℝ z) (y *ℝ z)
+    preserves-sim-right-mul-ℝ x~y =
+      sim-sim-leq-ℝ (leq-sim-right-mul-ℝ z x y x~y , leq-sim-right-mul-ℝ' x~y)
+
+    preserves-sim-left-mul-ℝ : sim-ℝ x y → sim-ℝ (z *ℝ x) (z *ℝ y)
+    preserves-sim-left-mul-ℝ x~y =
+      binary-tr
+        ( sim-ℝ)
+        ( commutative-mul-ℝ x z)
+        ( commutative-mul-ℝ y z)
+        ( preserves-sim-right-mul-ℝ x~y)
+```
+
+### Swapping laws for multiplication on real numbers
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    right-swap-mul-ℝ : (x *ℝ y) *ℝ z ＝ (x *ℝ z) *ℝ y
+    right-swap-mul-ℝ =
+      equational-reasoning
+        (x *ℝ y) *ℝ z
+        ＝ x *ℝ (y *ℝ z) by associative-mul-ℝ x y z
+        ＝ x *ℝ (z *ℝ y) by ap (x *ℝ_) (commutative-mul-ℝ y z)
+        ＝ (x *ℝ z) *ℝ y by inv (associative-mul-ℝ x z y)
+
+    left-swap-mul-ℝ : x *ℝ (y *ℝ z) ＝ y *ℝ (x *ℝ z)
+    left-swap-mul-ℝ =
+      equational-reasoning
+        x *ℝ (y *ℝ z)
+        ＝ (x *ℝ y) *ℝ z by inv (associative-mul-ℝ x y z)
+        ＝ (y *ℝ x) *ℝ z by ap (_*ℝ z) (commutative-mul-ℝ x y)
+        ＝ y *ℝ (x *ℝ z) by associative-mul-ℝ y x z
+```
+
+### Interchange laws for multiplication on real numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4)
+  where
+
+  abstract
+    interchange-law-mul-mul-ℝ : (x *ℝ y) *ℝ (z *ℝ w) ＝ (x *ℝ z) *ℝ (y *ℝ w)
+    interchange-law-mul-mul-ℝ =
+      equational-reasoning
+        (x *ℝ y) *ℝ (z *ℝ w)
+        ＝ x *ℝ (y *ℝ (z *ℝ w)) by associative-mul-ℝ _ _ _
+        ＝ x *ℝ (z *ℝ (y *ℝ w)) by ap (x *ℝ_) (left-swap-mul-ℝ y z w)
+        ＝ (x *ℝ z) *ℝ (y *ℝ w) by inv (associative-mul-ℝ x z (y *ℝ w))
+```
+
+### Negative laws
+
+```agda
+abstract
+  left-negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ y ＝ neg-ℝ (x *ℝ y)
+  left-negative-law-mul-ℝ x y =
+    eq-sim-ℝ
+      (unique-right-inverse-add-ℝ _ _
+        ( similarity-reasoning-ℝ
+          (x *ℝ y) +ℝ (neg-ℝ x *ℝ y)
+          ~ℝ (x +ℝ neg-ℝ x) *ℝ y
+            by sim-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+          ~ℝ zero-ℝ *ℝ y
+            by preserves-sim-right-mul-ℝ _ _ _ (right-inverse-law-add-ℝ x)
+          ~ℝ zero-ℝ by left-zero-law-mul-ℝ y))
+
+  right-negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ neg-ℝ y ＝ neg-ℝ (x *ℝ y)
+  right-negative-law-mul-ℝ x y =
+    equational-reasoning
+      x *ℝ neg-ℝ y
+      ＝ neg-ℝ y *ℝ x by commutative-mul-ℝ _ _
+      ＝ neg-ℝ (y *ℝ x) by left-negative-law-mul-ℝ y x
+      ＝ neg-ℝ (x *ℝ y) by ap neg-ℝ (commutative-mul-ℝ y x)
+
+  negative-law-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ neg-ℝ y ＝ x *ℝ y
+  negative-law-mul-ℝ x y =
+    equational-reasoning
+      neg-ℝ x *ℝ neg-ℝ y
+      ＝ neg-ℝ (x *ℝ neg-ℝ y) by left-negative-law-mul-ℝ _ _
+      ＝ neg-ℝ (neg-ℝ (x *ℝ y)) by ap neg-ℝ (right-negative-law-mul-ℝ _ _)
+      ＝ x *ℝ y by neg-neg-ℝ _
+```
+
+### Distributive laws of multiplication over subtraction

@@ -1,7 +1,7 @@
 # The Gaussian integers
 
 ```agda
-module commutative-algebra.gaussian-integers where
+module complex-numbers.gaussian-integers where
 ```
 
 <details><summary>Imports</summary>
@@ -33,8 +33,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **Gaussian integers** are the complex numbers of the form `a + bi`, where
-`a` and `b` are integers.
+The
+{{#concept "Gaussian integers" WDID=Q724975 WD="Gaussian integer" Agda=ℤ[i]}}
+are the complex numbers of the form `a + bi`, where `a` and `b` are
+[integers](elementary-number-theory.integers.md).
 
 ## Definition
 
