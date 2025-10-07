@@ -26,6 +26,7 @@ open import elementary-number-theory.square-roots-positive-rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -564,4 +565,22 @@ opaque
   unique-sqrt-ℝ⁰⁺ x y y²=x =
     ( leq-unique-sqrt-ℝ⁰⁺ x y y²=x ,
       leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
+```
+
+### If `p² = q` for rational `p` and `q`, then the square root of `q` as a real number is `p` as a real number
+
+```agda
+abstract
+  sqrt-real-ℚ⁰⁺ :
+    (p : ℚ⁰⁺) (q : ℚ⁰⁺) → (p *ℚ⁰⁺ p ＝ q) →
+    sqrt-ℝ⁰⁺ (nonnegative-real-ℚ⁰⁺ q) ＝ nonnegative-real-ℚ⁰⁺ p
+  sqrt-real-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p²=q =
+    eq-ℝ⁰⁺ _ _
+      ( inv
+        ( eq-sim-ℝ
+          ( unique-sqrt-ℝ⁰⁺
+            ( nonnegative-real-ℚ⁰⁺ q⁰⁺)
+            ( nonnegative-real-ℚ⁰⁺ p⁰⁺)
+            ( sim-eq-ℝ
+              ( mul-real-ℚ p p ∙ ap real-ℚ (ap rational-ℚ⁰⁺ p²=q))))))
 ```
