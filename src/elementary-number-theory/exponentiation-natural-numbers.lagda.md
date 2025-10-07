@@ -23,9 +23,9 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$
-of two [natural numbers](elementary-number-theory.natural-numbers.md) is the
-number obtained by multiplying $m$ with itself $n$ times.
+The {{#concept "exponent" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$ of
+two [natural numbers](elementary-number-theory.natural-numbers.md) is the number
+obtained by multiplying $m$ with itself $n$ times.
 
 ## Definition
 
@@ -44,6 +44,9 @@ power-ℕ = power-Commutative-Semiring ℕ-Commutative-Semiring
 ```
 
 ## Properties
+
+These properties are the axioms associated with
+[Tarski's high school algebra problem](https://en.wikipedia.org/wiki/Tarski%27s_high_school_algebra_problem).
 
 ### 1^n = 1 for all n
 
