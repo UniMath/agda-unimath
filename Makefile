@@ -204,12 +204,12 @@ website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTO
 .PHONY: website
 website: website-prepare
 	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
-	  mdbook build
+		mdbook build
 
 .PHONY: serve-website
 serve-website: website-prepare
 	@MDBOOK_PREPROCESSOR__CONCEPTS__SKIP_AGDA=$(SKIPAGDA) \
-	  mdbook serve -p 8080 --open -d ./$(MDBOOK_DIR)/html
+		mdbook serve -p 8080 --open -d ./$(MDBOOK_DIR)/html
 
 $(MDBOOK_SRC)/dependency.dot : ./$(SOURCE_DIR)/everything.lagda.md ${AGDAFILES}
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=$@ $<
@@ -217,9 +217,13 @@ $(MDBOOK_SRC)/dependency.dot : ./$(SOURCE_DIR)/everything.lagda.md ${AGDAFILES}
 .PHONY: graph
 graph: $(MDBOOK_SRC)/dependency.dot
 
+.PHONY: clean-website
+clean-website:
+	@rm -Rf ./$(MDBOOK_DIR)/ ./docs/CONTRIBUTORS.md ./docs/MAINTAINERS.md ./docs/SUMMARY.md
+
 .PHONY: clean
-clean:
-	@rm -Rf ./$(MDBOOK_DIR)/ ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/ ./$(SOURCE_DIR)/everything.lagda.md  ./$(SCRIPTS_DIR)/__pycache__ ./docs/CONTRIBUTORS.md ./docs/MAINTAINERS.md ./docs/SUMMARY.md
+clean: clean-website
+	@rm -Rf ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/ ./$(SOURCE_DIR)/everything.lagda.md ./$(SCRIPTS_DIR)/__pycache__
 
 .PHONY: pre-commit
 pre-commit:
