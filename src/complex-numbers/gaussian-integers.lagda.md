@@ -34,7 +34,7 @@ open import ring-theory.rings
 ## Idea
 
 The
-{{#concept "Gaussian integers" WDID=Q724975 WD="Gaussian integer" Agda=ℤ[i]}}
+{{#concept "Gaussian integers" WDID=Q724975 WD="Gaussian integer" Agda="ℤ[i]"}}
 are the [complex numbers](complex-numbers.complex-numbers.md) of the form
 `a + bi`, where `a` and `b` are
 [integers](elementary-number-theory.integers.md).
