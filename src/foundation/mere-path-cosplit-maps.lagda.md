@@ -134,7 +134,7 @@ is-trunc-domain-is-mere-path-cosplit-is-trunc-codomain neg-two-𝕋
   {A} {B} {f} is-trunc-B =
   rec-trunc-Prop
     ( is-trunc-Prop neg-two-𝕋 A)
-    ( λ r → is-trunc-retract-of (f , r) is-trunc-B)
+    ( λ r → is-trunc-retract-of neg-two-𝕋 (f , r) is-trunc-B)
 is-trunc-domain-is-mere-path-cosplit-is-trunc-codomain
   (succ-𝕋 k) {A} {B} {f} is-trunc-B is-cosplit-f x y =
   is-trunc-domain-is-mere-path-cosplit-is-trunc-codomain k

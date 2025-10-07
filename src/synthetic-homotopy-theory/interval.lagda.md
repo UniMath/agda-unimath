@@ -1,7 +1,7 @@
 # The interval
 
 ```agda
-module synthetic-homotopy-theory.interval-type where
+module synthetic-homotopy-theory.interval where
 ```
 
 <details><summary>Imports</summary>
