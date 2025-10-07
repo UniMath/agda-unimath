@@ -33,12 +33,6 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
-
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.addition-lower-dedekind-real-numbers
@@ -474,41 +468,6 @@ module _
                   ( left-inverse-law-add-ℝ _))
           ~ℝ neg-ℝ x +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (left-unit-law-add-ℝ _)))
-```
-
-### The Abelian group of real numbers at `lzero` under addition
-
-```agda
-semigroup-add-ℝ-lzero : Semigroup (lsuc lzero)
-semigroup-add-ℝ-lzero =
-  ( ℝ-Set lzero ,
-    add-ℝ ,
-    associative-add-ℝ)
-
-monoid-add-ℝ-lzero : Monoid (lsuc lzero)
-monoid-add-ℝ-lzero =
-  ( semigroup-add-ℝ-lzero ,
-    zero-ℝ ,
-    left-unit-law-add-ℝ ,
-    right-unit-law-add-ℝ)
-
-commutative-monoid-add-ℝ-lzero : Commutative-Monoid (lsuc lzero)
-commutative-monoid-add-ℝ-lzero =
-  ( monoid-add-ℝ-lzero ,
-    commutative-add-ℝ)
-
-group-add-ℝ-lzero : Group (lsuc lzero)
-group-add-ℝ-lzero =
-  ( ( semigroup-add-ℝ-lzero) ,
-    ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
-    ( neg-ℝ ,
-      eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
-      eq-sim-ℝ ∘ right-inverse-law-add-ℝ))
-
-abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
-abelian-group-add-ℝ-lzero =
-  ( group-add-ℝ-lzero ,
-    commutative-add-ℝ)
 ```
 
 ## See also
