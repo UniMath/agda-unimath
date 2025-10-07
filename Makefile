@@ -186,7 +186,7 @@ website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTO
 
 	@cp $(METAFILES) ./$(MDBOOK_SRC)/
 
-	@cp -r ./$(DOCS_DIR)/* ./$(MDBOOK_SRC)
+	@cp -r ./$(DOCS_DIR)/. ./$(MDBOOK_SRC)
 	@cp -r ./$(WEBSITE_IMAGES) ./$(MDBOOK_SRC)/website
 	@cp -r ./$(WEBSITE_CSS) ./$(MDBOOK_SRC)/website
 	@cp -r ./$(WEBSITE_JS) ./$(MDBOOK_SRC)/website
