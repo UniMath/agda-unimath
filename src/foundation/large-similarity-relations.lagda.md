@@ -1,0 +1,97 @@
+# Large similarity relations
+
+```agda
+module foundation.large-similarity-relations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.large-binary-relations
+open import foundation.large-equivalence-relations
+open import foundation.propositions
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+A {{#concept "large similarity relation" Agda=Large-Similarity-Relation}} is a
+[large equivalence relation](foundation.large-equivalence-relations.md) that is
+[antisymmetric](foundation.large-binary-relations.md), or equivalently, where
+similarity at the same [universe level](foundation.universe-levels.md) implies
+[equality](foundation.identity-types.md).
+
+## Definition
+
+```agda
+record
+  Large-Similarity-Relation
+    (α : Level → Level) (β : Level → Level → Level) : UUω
+  where
+
+  constructor
+    make-Large-Similarity-Relation
+
+  field
+    large-equivalence-relation-Large-Similarity-Relation :
+      Large-Equivalence-Relation α β
+
+  type-Large-Similarity-Relation : (l : Level) → UU (α l)
+  type-Large-Similarity-Relation =
+    type-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+  prop-Large-Similarity-Relation :
+    Large-Relation-Prop β type-Large-Similarity-Relation
+  prop-Large-Similarity-Relation =
+    prop-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+  sim-Large-Similarity-Relation :
+    Large-Relation β type-Large-Similarity-Relation
+  sim-Large-Similarity-Relation x y =
+    type-Prop (prop-Large-Similarity-Relation x y)
+
+  field
+    eq-sim-Large-Similarity-Relation :
+      {l : Level} → (x y : type-Large-Similarity-Relation l) →
+      sim-Large-Similarity-Relation x y →
+      x ＝ y
+
+  sim-eq-Large-Similarity-Relation :
+    {l : Level} {x y : type-Large-Similarity-Relation l} →
+    x ＝ y → sim-Large-Similarity-Relation x y
+  sim-eq-Large-Similarity-Relation =
+    sim-eq-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+  refl-sim-Large-Similarity-Relation :
+    is-reflexive-Large-Relation
+      ( type-Large-Similarity-Relation)
+      ( sim-Large-Similarity-Relation)
+  refl-sim-Large-Similarity-Relation =
+    refl-sim-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+  symmetric-sim-Large-Similarity-Relation :
+    is-symmetric-Large-Relation
+      ( type-Large-Similarity-Relation)
+      ( sim-Large-Similarity-Relation)
+  symmetric-sim-Large-Similarity-Relation =
+    symmetric-sim-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+  transitive-sim-Large-Similarity-Relation :
+    is-transitive-Large-Relation
+      ( type-Large-Similarity-Relation)
+      ( sim-Large-Similarity-Relation)
+  transitive-sim-Large-Similarity-Relation =
+    transitive-sim-Large-Equivalence-Relation
+      ( large-equivalence-relation-Large-Similarity-Relation)
+
+open Large-Similarity-Relation public
+```
