@@ -91,13 +91,11 @@ is-below-closed-interval-ℚ [a,b] q =
 is-above-prop-closed-interval-ℚ :
   closed-interval-ℚ → subtype lzero ℚ
 is-above-prop-closed-interval-ℚ ((_ , a) , _) b = le-ℚ-Prop a b
-```
 
 is-above-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
-is-above-closed-interval-ℚ [a,b] q = type-Prop (is-above-prop-closed-interval-ℚ
-[a,b] q)
-
-````
+is-above-closed-interval-ℚ [a,b] q =
+  type-Prop (is-above-prop-closed-interval-ℚ [a,b] q)
+```
 
 ### The width of a closed interval
 
@@ -110,7 +108,7 @@ nonnegative-width-closed-interval-ℚ ((a , b) , a≤b) =
 width-closed-interval-ℚ : closed-interval-ℚ → ℚ
 width-closed-interval-ℚ [a,b] =
   rational-ℚ⁰⁺ (nonnegative-width-closed-interval-ℚ [a,b])
-````
+```
 
 ### Important ranges
 

@@ -72,6 +72,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 ```
 
 </details>
