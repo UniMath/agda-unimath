@@ -90,8 +90,8 @@ abstract
   exp-mul-ℕ x zero-ℕ z = inv (annihilation-law-exp-ℕ z)
   exp-mul-ℕ x (succ-ℕ y) z =
     ( left-distributive-exp-add-ℕ x (y *ℕ z) z) ∙
-    ( ( ap (_*ℕ (x ^ℕ z)) (exp-mul-ℕ x y z)) ∙
-      ( inv (right-distributive-exp-mul-ℕ (x ^ℕ y) x z)))
+    ( ap (_*ℕ (x ^ℕ z)) (exp-mul-ℕ x y z)) ∙
+    ( inv (right-distributive-exp-mul-ℕ (x ^ℕ y) x z))
 ```
 
 ### If `m` is nonzero, `mⁿ` is nonzero
