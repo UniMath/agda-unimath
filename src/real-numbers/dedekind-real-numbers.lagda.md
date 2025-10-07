@@ -7,10 +7,7 @@ module real-numbers.dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.interior-closed-intervals-rational-numbers
-open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -194,18 +191,6 @@ module _
 
   is-in-cut-ℝ : ℚ → UU l
   is-in-cut-ℝ = is-in-subtype cut-ℝ
-
-  enclosing-closed-rational-interval-ℝ : subtype l closed-interval-ℚ
-  enclosing-closed-rational-interval-ℝ ((p , q) , _) =
-    lower-cut-ℝ p ∧ upper-cut-ℝ q
-
-  is-enclosing-closed-rational-interval-ℝ : closed-interval-ℚ → UU l
-  is-enclosing-closed-rational-interval-ℝ [p,q] =
-    type-Prop (enclosing-closed-rational-interval-ℝ [p,q])
-
-  type-enclosing-closed-rational-interval-ℝ : UU l
-  type-enclosing-closed-rational-interval-ℝ =
-    type-subtype enclosing-closed-rational-interval-ℝ
 ```
 
 ## Properties
@@ -538,66 +523,7 @@ module _
   eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
 ```
 
-### There exists a rational enclosing interval around each real number
-
-```agda
-module _
-  {l : Level} (x : ℝ l)
-  where
-
-  abstract
-    is-inhabited-type-enclosing-closed-rational-interval-ℝ :
-      is-inhabited (type-enclosing-closed-rational-interval-ℝ x)
-    is-inhabited-type-enclosing-closed-rational-interval-ℝ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-inhabited-Prop (type-enclosing-closed-rational-interval-ℝ x))
-      in do
-        (p , p<x) ← is-inhabited-lower-cut-ℝ x
-        (q , x<q) ← is-inhabited-upper-cut-ℝ x
-        intro-exists
-          ( (p , q) , leq-lower-upper-cut-ℝ x p q p<x x<q)
-          ( p<x , x<q)
-```
-
-### For any rational enclosing interval around a real number, there exists an interior enclosing interval
-
-```agda
-module _
-  {l : Level} (x : ℝ l)
-  where
-
-  abstract
-    exists-interior-enclosing-closed-rational-interval-ℝ :
-      ([a,b] : closed-interval-ℚ) →
-      is-enclosing-closed-rational-interval-ℝ x [a,b] →
-      exists
-        ( closed-interval-ℚ)
-        ( λ [c,d] →
-          enclosing-closed-rational-interval-ℝ x [c,d] ∧
-          is-interior-prop-closed-interval-ℚ [a,b] [c,d])
-    exists-interior-enclosing-closed-rational-interval-ℝ
-      [a,b]@((a , b) , _) (a<x , x<b) =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃
-              ( closed-interval-ℚ)
-              ( λ [c,d] →
-                enclosing-closed-rational-interval-ℝ x [c,d] ∧
-                is-interior-prop-closed-interval-ℚ [a,b] [c,d]))
-      in do
-        (a' , a<a' , a'<x) ←
-          forward-implication (is-rounded-lower-cut-ℝ x a) a<x
-        (b' , b'<b , x<b') ←
-          forward-implication (is-rounded-upper-cut-ℝ x b) x<b
-        intro-exists
-          ( (a' , b') , leq-lower-upper-cut-ℝ x a' b' a'<x x<b')
-          ( ( a'<x , x<b') , (a<a' , b'<b))
-```
-
-### Any two rational enclosing intervals around a real number intersect
+### The maximum of two elements of a lower cut of a real number is in the lower cut
 
 ```agda
 module _
@@ -615,7 +541,16 @@ module _
         ( λ q≤p →
           inv-tr (is-in-lower-cut-ℝ x) (right-leq-left-max-ℚ p q q≤p) p<x)
         ( linear-leq-ℚ p q)
+```
 
+### The minimum of two elements of a upper cut of a real number is in the upper cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
     is-in-upper-cut-min-ℚ :
       (p q : ℚ) → is-in-upper-cut-ℝ x p → is-in-upper-cut-ℝ x q →
       is-in-upper-cut-ℝ x (min-ℚ p q)
@@ -626,42 +561,6 @@ module _
         ( λ q≤p →
           inv-tr (is-in-upper-cut-ℝ x) (right-leq-left-min-ℚ p q q≤p) x<q)
         ( linear-leq-ℚ p q)
-
-    intersect-enclosing-closed-rational-interval-ℝ :
-      ([a,b] [c,d] : closed-interval-ℚ) →
-      is-enclosing-closed-rational-interval-ℝ x [a,b] →
-      is-enclosing-closed-rational-interval-ℝ x [c,d] →
-      intersect-closed-interval-ℚ [a,b] [c,d]
-    intersect-enclosing-closed-rational-interval-ℝ
-      [a,b]@((a , b) , _) [c,d]@((c , d) , _) (a<x , x<b) (c<x , x<d) =
-      ( leq-lower-upper-cut-ℝ x a d a<x x<d ,
-        leq-lower-upper-cut-ℝ x c b c<x x<b)
-
-    is-enclosing-intersection-enclosing-closed-rational-interval-ℝ :
-      ([a,b] [c,d] : closed-interval-ℚ) →
-      (H : is-enclosing-closed-rational-interval-ℝ x [a,b]) →
-      (K : is-enclosing-closed-rational-interval-ℝ x [c,d]) →
-      is-enclosing-closed-rational-interval-ℝ
-        ( x)
-        ( intersection-closed-interval-ℚ [a,b] [c,d]
-          ( intersect-enclosing-closed-rational-interval-ℝ [a,b] [c,d] H K))
-    is-enclosing-intersection-enclosing-closed-rational-interval-ℝ
-      ( (a , b) , _) ((c , d) , _) (a<x , x<b) (c<x , x<d) =
-      ( is-in-lower-cut-max-ℚ a c a<x c<x , is-in-upper-cut-min-ℚ b d x<b x<d)
-
-  intersection-type-enclosing-closed-rational-interval-ℝ :
-    type-enclosing-closed-rational-interval-ℝ x →
-    type-enclosing-closed-rational-interval-ℝ x →
-    type-enclosing-closed-rational-interval-ℝ x
-  intersection-type-enclosing-closed-rational-interval-ℝ
-    ( [a,b] , H) ([c,d] , K) =
-    ( intersection-closed-interval-ℚ [a,b] [c,d]
-        ( intersect-enclosing-closed-rational-interval-ℝ [a,b] [c,d] H K) ,
-      is-enclosing-intersection-enclosing-closed-rational-interval-ℝ
-        ( [a,b])
-        ( [c,d])
-        ( H)
-        ( K))
 ```
 
 ## References
