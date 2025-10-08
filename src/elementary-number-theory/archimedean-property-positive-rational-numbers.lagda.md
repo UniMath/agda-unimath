@@ -36,9 +36,9 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "Archimedean property" Disambiguation="positive rational numbers" Agda=archimedean-property-ℚ⁺}}
-of `ℚ⁺` is that for any two
+of the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`x y : ℚ⁺`, there is a
+is that for any `x y : ℚ⁺`, there is a
 [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md)
 `n` such that `y` is
 [less than](elementary-number-theory.strict-inequality-rational-numbers.md) `n`
