@@ -122,7 +122,7 @@ is-decidable-count-subtype P e f x =
       ( count-decidable-subtype
         ( λ y →
           pair
-            ( Id (pr1 y) x)
+            ( pr1 y ＝ x)
             ( pair
               ( is-set-count e (pr1 y) x)
               ( has-decidable-equality-count e (pr1 y) x)))

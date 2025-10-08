@@ -142,7 +142,7 @@ module _
 
   commutative-add-Commutative-Ring :
     (x y : type-Commutative-Ring) →
-    Id (add-Commutative-Ring x y) (add-Commutative-Ring y x)
+    add-Commutative-Ring x y ＝ add-Commutative-Ring y x
   commutative-add-Commutative-Ring = commutative-add-Ab ab-Commutative-Ring
 
   interchange-add-add-Commutative-Ring :
@@ -335,8 +335,8 @@ module _
   mul-Commutative-Ring' = mul-Ring' ring-Commutative-Ring
 
   ap-mul-Commutative-Ring :
-    {x x' y y' : type-Commutative-Ring} (p : Id x x') (q : Id y y') →
-    Id (mul-Commutative-Ring x y) (mul-Commutative-Ring x' y')
+    {x x' y y' : type-Commutative-Ring} (p : x ＝ x') (q : y ＝ y') →
+    mul-Commutative-Ring x y ＝ mul-Commutative-Ring x' y'
   ap-mul-Commutative-Ring p q = ap-binary mul-Commutative-Ring p q
 
   associative-mul-Commutative-Ring :
@@ -353,19 +353,15 @@ module _
 
   left-distributive-mul-add-Commutative-Ring :
     (x y z : type-Commutative-Ring) →
-    ( mul-Commutative-Ring x (add-Commutative-Ring y z)) ＝
-    ( add-Commutative-Ring
-      ( mul-Commutative-Ring x y)
-      ( mul-Commutative-Ring x z))
+    mul-Commutative-Ring x (add-Commutative-Ring y z) ＝
+    add-Commutative-Ring (mul-Commutative-Ring x y) (mul-Commutative-Ring x z)
   left-distributive-mul-add-Commutative-Ring =
     left-distributive-mul-add-Ring ring-Commutative-Ring
 
   right-distributive-mul-add-Commutative-Ring :
     (x y z : type-Commutative-Ring) →
-    ( mul-Commutative-Ring (add-Commutative-Ring x y) z) ＝
-    ( add-Commutative-Ring
-      ( mul-Commutative-Ring x z)
-      ( mul-Commutative-Ring y z))
+    mul-Commutative-Ring (add-Commutative-Ring x y) z ＝
+    add-Commutative-Ring (mul-Commutative-Ring x z) (mul-Commutative-Ring y z)
   right-distributive-mul-add-Commutative-Ring =
     right-distributive-mul-add-Ring ring-Commutative-Ring
 
@@ -656,11 +652,10 @@ module _
 
   preserves-concat-add-list-Commutative-Ring :
     (l1 l2 : list type-Commutative-Ring) →
-    Id
-      ( add-list-Commutative-Ring (concat-list l1 l2))
-      ( add-Commutative-Ring
-        ( add-list-Commutative-Ring l1)
-        ( add-list-Commutative-Ring l2))
+    add-list-Commutative-Ring (concat-list l1 l2) ＝
+    add-Commutative-Ring
+      ( add-list-Commutative-Ring l1)
+      ( add-list-Commutative-Ring l2)
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
 ```

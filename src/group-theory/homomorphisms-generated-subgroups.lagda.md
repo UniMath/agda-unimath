@@ -317,9 +317,8 @@ module _
 
   eq-map-restriction-generating-subset-Group :
     ( f : hom-Group G G') (x : type-subtype S) →
-    Id
-      ( map-emb restriction-generating-subset-Group f x)
-      ( map-hom-Group G G' f (pr1 x))
+    map-emb restriction-generating-subset-Group f x ＝
+      map-hom-Group G G' f (pr1 x)
   eq-map-restriction-generating-subset-Group f x =
     ap
       ( map-hom-Group G G' f)

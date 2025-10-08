@@ -211,19 +211,19 @@ module _
 
   left-distributive-mul-add-Commutative-Semiring :
     (x y z : type-Commutative-Semiring) →
-    ( mul-Commutative-Semiring x (add-Commutative-Semiring y z)) ＝
-    ( add-Commutative-Semiring
+    mul-Commutative-Semiring x (add-Commutative-Semiring y z) ＝
+    add-Commutative-Semiring
       ( mul-Commutative-Semiring x y)
-      ( mul-Commutative-Semiring x z))
+      ( mul-Commutative-Semiring x z)
   left-distributive-mul-add-Commutative-Semiring =
     left-distributive-mul-add-Semiring semiring-Commutative-Semiring
 
   right-distributive-mul-add-Commutative-Semiring :
     (x y z : type-Commutative-Semiring) →
-    ( mul-Commutative-Semiring (add-Commutative-Semiring x y) z) ＝
-    ( add-Commutative-Semiring
+    mul-Commutative-Semiring (add-Commutative-Semiring x y) z ＝
+    add-Commutative-Semiring
       ( mul-Commutative-Semiring x z)
-      ( mul-Commutative-Semiring y z))
+      ( mul-Commutative-Semiring y z)
   right-distributive-mul-add-Commutative-Semiring =
     right-distributive-mul-add-Semiring semiring-Commutative-Semiring
 

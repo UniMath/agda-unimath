@@ -37,7 +37,7 @@ data Inductive-Fin : ℕ → UU lzero where
   zero-Inductive-Fin : {n : ℕ} → Inductive-Fin (succ-ℕ n)
   succ-Inductive-Fin : {n : ℕ} → Inductive-Fin n → Inductive-Fin (succ-ℕ n)
 
-finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (Id a b)
+finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (a ＝ b)
 finEq zero-Inductive-Fin zero-Inductive-Fin = inl refl
 finEq zero-Inductive-Fin (succ-Inductive-Fin b) = inr (λ ())
 finEq (succ-Inductive-Fin a) zero-Inductive-Fin = inr (λ ())

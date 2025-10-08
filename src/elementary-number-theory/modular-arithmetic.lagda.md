@@ -390,16 +390,16 @@ right-unit-law-mul-ℤ-Mod (succ-ℕ k) = right-unit-law-mul-Fin k
 
 left-distributive-mul-add-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
-  ( mul-ℤ-Mod k x (add-ℤ-Mod k y z)) ＝
-  ( add-ℤ-Mod k (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x z))
+  mul-ℤ-Mod k x (add-ℤ-Mod k y z) ＝
+  add-ℤ-Mod k (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x z)
 left-distributive-mul-add-ℤ-Mod zero-ℕ = left-distributive-mul-add-ℤ
 left-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
   left-distributive-mul-add-Fin (succ-ℕ k)
 
 right-distributive-mul-add-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
-  ( mul-ℤ-Mod k (add-ℤ-Mod k x y) z) ＝
-  ( add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z))
+  mul-ℤ-Mod k (add-ℤ-Mod k x y) z ＝
+  add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z)
 right-distributive-mul-add-ℤ-Mod zero-ℕ = right-distributive-mul-add-ℤ
 right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
   right-distributive-mul-add-Fin (succ-ℕ k)

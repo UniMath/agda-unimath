@@ -26,7 +26,7 @@ equipped with a
 {{#concept "reflexivity element" Disambiguation="identity type" Agda=refl}}
 
 ```text
-  refl : (x : A) → Id x x.
+  refl : (x : A) → x ＝ x.
 ```
 
 In other words, the identity type is a reflexive
@@ -79,7 +79,7 @@ introducing types equipped with induction principles. The only constructor of
 the identity type `Id x : A → 𝒰` is the reflexivity identification
 
 ```text
-  refl : Id x x.
+  refl : x ＝ x.
 ```
 
 ```agda

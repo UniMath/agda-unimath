@@ -314,6 +314,6 @@ module _
   id-iso-Semigroup =
     id-iso-Large-Precategory Semigroup-Large-Precategory {X = G}
 
-  iso-eq-Semigroup : (H : Semigroup l) → Id G H → iso-Semigroup G H
+  iso-eq-Semigroup : (H : Semigroup l) → G ＝ H → iso-Semigroup G H
   iso-eq-Semigroup = iso-eq-Large-Precategory Semigroup-Large-Precategory G
 ```

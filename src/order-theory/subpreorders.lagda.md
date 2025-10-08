@@ -42,7 +42,7 @@ module _
   type-Subpreorder = type-subtype S
 
   eq-type-Subpreorder :
-    (x y : type-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Subpreorder) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Subpreorder x y = eq-type-subtype S
 
   leq-Subpreorder-Prop : (x y : type-Subpreorder) → Prop l2
