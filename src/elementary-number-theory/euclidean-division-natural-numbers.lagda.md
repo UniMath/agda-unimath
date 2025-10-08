@@ -131,7 +131,7 @@ eq-euclidean-division-ℕ (succ-ℕ k) x =
   ( ap
     ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
     ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
-      ( symmetric-dist-ℕ x
+      ( commutative-dist-ℕ x
         ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
   ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
     ( leq-nat-mod-succ-ℕ k x))

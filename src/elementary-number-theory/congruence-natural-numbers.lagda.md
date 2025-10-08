@@ -80,7 +80,7 @@ cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
 symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
 pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
-pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
+pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (commutative-dist-ℕ x y)
 
 cong-zero-ℕ' : (k : ℕ) → cong-ℕ k zero-ℕ k
 cong-zero-ℕ' k =

@@ -66,10 +66,11 @@ is-positive-ℤ (inl x) = empty
 is-positive-ℤ (inr (inl x)) = empty
 is-positive-ℤ (inr (inr x)) = unit
 
-is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
-is-prop-is-positive-ℤ (inl x) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
+abstract
+  is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
+  is-prop-is-positive-ℤ (inl x) = is-prop-empty
+  is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
+  is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
 
 subtype-positive-ℤ : subtype lzero ℤ
 subtype-positive-ℤ x = (is-positive-ℤ x , is-prop-is-positive-ℤ x)
@@ -142,9 +143,10 @@ positive-ℤ-Set = positive-ℤ , is-set-positive-ℤ
 ### The successor of a positive integer is positive
 
 ```agda
-is-positive-succ-is-positive-ℤ :
-  {x : ℤ} → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
-is-positive-succ-is-positive-ℤ {inr (inr x)} H = H
+abstract
+  is-positive-succ-is-positive-ℤ :
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
+  is-positive-succ-is-positive-ℤ {inr (inr x)} H = H
 
 succ-positive-ℤ : positive-ℤ → positive-ℤ
 succ-positive-ℤ (x , H) = (succ-ℤ x , is-positive-succ-is-positive-ℤ H)
@@ -153,10 +155,11 @@ succ-positive-ℤ (x , H) = (succ-ℤ x , is-positive-succ-is-positive-ℤ H)
 ### The integer image of a nonzero natural number is positive
 
 ```agda
-is-positive-int-is-nonzero-ℕ :
-  (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
-is-positive-int-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
-is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
+abstract
+  is-positive-int-is-nonzero-ℕ :
+    (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
+  is-positive-int-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
+  is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
 
 positive-int-ℕ⁺ : ℕ⁺ → positive-ℤ
 positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n≠0
@@ -197,24 +200,26 @@ eq-nat-positive-succ-positive-ℤ :
   nat-positive-ℤ (succ-positive-ℤ x) ＝ succ-ℕ (nat-positive-ℤ x)
 eq-nat-positive-succ-positive-ℤ (inr (inr x) , H) = refl
 
-is-section-nat-positive-ℤ :
-  (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
-is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
-is-section-nat-positive-ℤ (inr (inr (succ-ℕ x)) , H) =
-  ap succ-positive-ℤ (is-section-nat-positive-ℤ ( inr (inr x) , H))
+abstract
+  is-section-nat-positive-ℤ :
+    (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
+  is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
+  is-section-nat-positive-ℤ (inr (inr (succ-ℕ x)) , H) =
+    ap succ-positive-ℤ (is-section-nat-positive-ℤ ( inr (inr x) , H))
 
-is-retraction-nat-positive-ℤ :
-  (n : ℕ) → nat-positive-ℤ (positive-int-ℕ n) ＝ n
-is-retraction-nat-positive-ℤ zero-ℕ = refl
-is-retraction-nat-positive-ℤ (succ-ℕ n) =
-  eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
-  ap succ-ℕ (is-retraction-nat-positive-ℤ n)
+  is-retraction-nat-positive-ℤ :
+    (n : ℕ) → nat-positive-ℤ (positive-int-ℕ n) ＝ n
+  is-retraction-nat-positive-ℤ zero-ℕ = refl
+  is-retraction-nat-positive-ℤ (succ-ℕ n) =
+    eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
+    ap succ-ℕ (is-retraction-nat-positive-ℤ n)
 
-is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
-pr1 (pr1 is-equiv-positive-int-ℕ) = nat-positive-ℤ
-pr2 (pr1 is-equiv-positive-int-ℕ) = is-section-nat-positive-ℤ
-pr1 (pr2 is-equiv-positive-int-ℕ) = nat-positive-ℤ
-pr2 (pr2 is-equiv-positive-int-ℕ) = is-retraction-nat-positive-ℤ
+  is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
+  is-equiv-positive-int-ℕ =
+    is-equiv-is-invertible
+      ( nat-positive-ℤ)
+      ( is-section-nat-positive-ℤ)
+      ( is-retraction-nat-positive-ℤ)
 
 equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
 pr1 equiv-positive-int-ℕ = positive-int-ℕ

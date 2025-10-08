@@ -48,8 +48,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The standard finite types inherit a well-ordering principle from the natural
-numbers.
+The [standard finite types](univalent-combinatorics.standard-finite-types.md)
+inherit the
+{{#concept "well-ordering principle" Disambiguation="of the standard finite types" Agda=well-ordering-principle-∃-Fin}}
+from the
+[natural numbers](elementary-number-theory.well-ordering-principle-natural-numbers.md).
 
 ## Properties
 

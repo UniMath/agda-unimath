@@ -92,7 +92,7 @@ is-distance-between-multiples-sym-ℕ :
   (x y z : ℕ) → is-distance-between-multiples-ℕ x y z →
   is-distance-between-multiples-ℕ y x z
 is-distance-between-multiples-sym-ℕ x y z (pair k (pair l eqn)) =
-  pair l (pair k (symmetric-dist-ℕ (l *ℕ y) (k *ℕ x) ∙ eqn))
+  pair l (pair k (commutative-dist-ℕ (l *ℕ y) (k *ℕ x) ∙ eqn))
 ```
 
 ## Lemmas
@@ -600,7 +600,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         dist-ℕ ((abs-ℤ a) *ℕ (succ-ℕ x)) ((nat-Fin (succ-ℕ x) u) *ℕ y)
         ＝ dist-ℕ ((nat-Fin (succ-ℕ x) u) *ℕ y) ((abs-ℤ a) *ℕ (succ-ℕ x))
           by
-          symmetric-dist-ℕ
+          commutative-dist-ℕ
             ( (abs-ℤ a) *ℕ (succ-ℕ x))
             ( (nat-Fin (succ-ℕ x) u) *ℕ y)
         ＝ dist-ℤ
@@ -1304,7 +1304,7 @@ remainder-min-dist-succ-x-is-distance x y =
         ( s *ℕ (succ-ℕ x))
         ( tysx)
         ( inv (dist-sx-ty-eq-d) ∙
-          symmetric-dist-ℕ (s *ℕ (succ-ℕ x)) (t *ℕ y))
+          commutative-dist-ℕ (s *ℕ (succ-ℕ x)) (t *ℕ y))
 
     quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ q
     quotient-min-dist-succ-x-nonzero iszero =
@@ -1708,7 +1708,7 @@ remainder-min-dist-succ-x-is-distance x y =
           ((abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))) *ℕ
             (succ-ℕ x))
             ((q *ℕ t) *ℕ y)
-          by symmetric-dist-ℕ
+          by commutative-dist-ℕ
             ((q *ℕ t) *ℕ y)
             (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q)
               (int-ℕ s)) (neg-ℤ one-ℤ)))
@@ -1914,7 +1914,7 @@ gcd-ℕ-div-dist-between-mult x y z dist =
     rewrite-dist =
       rewrite-right-dist-add-ℕ (t *ℕ y) z (s *ℕ x) tysx
         ( inv (is-distance-between-multiples-eqn-ℕ dist) ∙
-          symmetric-dist-ℕ (s *ℕ x) (t *ℕ y))
+          commutative-dist-ℕ (s *ℕ x) (t *ℕ y))
 
     div-gcd-x : div-ℕ (gcd-ℕ x y) (s *ℕ x)
     div-gcd-x = div-mul-ℕ s (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))

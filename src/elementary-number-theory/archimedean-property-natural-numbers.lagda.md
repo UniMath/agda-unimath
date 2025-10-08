@@ -45,7 +45,7 @@ abstract
         ( strict-upper-bound-remainder-euclidean-division-ℕ x y nonzero-x))
 
   archimedean-property-ℕ :
-    (x y : ℕ) → is-nonzero-ℕ x → exists ℕ (λ n → le-ℕ-Prop y (n *ℕ x))
+    (x y : ℕ) → is-nonzero-ℕ x → exists ℕ (λ n → le-prop-ℕ y (n *ℕ x))
   archimedean-property-ℕ x y nonzero-x =
     unit-trunc-Prop (bound-archimedean-property-ℕ x y nonzero-x)
 ```

@@ -21,8 +21,10 @@ open import foundation.identity-types
 
 ## Idea
 
-The power operation on the integers is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times.
+The
+{{#concept "power operation" WDID=Q33456 WD="exponentiation" Disambiguation="on the integers" Agda=power-ℤ}}
+on the [integers](elementary-number-theory.integers.md) is the map `n x ↦ xⁿ`,
+which is defined by iteratively multiplying `x` with itself `n` times.
 
 ## Definition
 

@@ -1,7 +1,7 @@
-# The commutative semiring of natural numbers
+# The semiring of natural numbers
 
 ```agda
-module elementary-number-theory.commutative-semiring-of-natural-numbers where
+module elementary-number-theory.semiring-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>

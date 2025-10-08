@@ -7,8 +7,8 @@ module ring-theory.arithmetic-series-semirings where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.semiring-of-natural-numbers
 open import elementary-number-theory.triangular-numbers
 
 open import foundation.action-on-identifications-binary-functions

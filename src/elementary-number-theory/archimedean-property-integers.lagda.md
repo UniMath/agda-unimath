@@ -59,7 +59,7 @@ abstract
           ( le-ℤ)
           ( ap pr1 (is-section-nat-nonnegative-ℤ (y , nonneg-y)))
           ( inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
-          ( le-natural-le-ℤ
+          ( preserves-le-int-ℕ
             ( nat-nonnegative-ℤ (y , nonneg-y))
             ( n *ℕ nx)
             ( ny<n*nx))
@@ -71,7 +71,7 @@ abstract
       pos-ℤ-to-ℕ (inr (inr n)) H = succ-ℕ n , (λ ()) , refl
 
   archimedean-property-ℤ :
-    (x y : ℤ) → is-positive-ℤ x → exists ℕ (λ n → le-ℤ-Prop y (int-ℕ n *ℤ x))
+    (x y : ℤ) → is-positive-ℤ x → exists ℕ (λ n → le-prop-ℤ y (int-ℕ n *ℤ x))
   archimedean-property-ℤ x y pos-x =
     unit-trunc-Prop (bound-archimedean-property-ℤ x y pos-x)
 ```
