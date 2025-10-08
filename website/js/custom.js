@@ -3,14 +3,8 @@ const link = document.querySelector('.href-git-edit-button');
 if (link) {
   // console.log(link);
   var filename = link.getAttribute('href');
-  const excludeList = [
-    'SUMMARY.md',
-  ];
-  const rootFileList = [
-    'CONTRIBUTING.md',
-    'LICENSE.md',
-    'README.md',
-  ];
+  const excludeList = ['SUMMARY.md'];
+  const rootFileList = ['CONTRIBUTING.md', 'LICENSE.md', 'README.md'];
   const docsFileList = [
     'ART.md',
     'CITE-THIS-LIBRARY.md',
@@ -31,22 +25,21 @@ if (link) {
   if (excludeList.includes(filename)) {
     // Default to the main GitHub page for excluded pages
     link.setAttribute('href', 'https://github.com/UniMath/agda-unimath');
-  }
-  else {
+  } else {
     // Generate the correct file path on the repo side
     var path = '';
     if (filename === 'index.md') {
       path = 'docs/HOME.md';
-    } else if (filename === 'CONTRIBUTORS.md' || filename === 'MAINTAINERS.md') {
-      path = 'CONTRIBUTORS.toml'
-    }
-    else if (rootFileList.includes(filename)) {
-      path = filename
-    }
-    else if (docsFileList.includes(filename)) {
-      path = "docs/" + filename
-    }
-    else {
+    } else if (
+      filename === 'CONTRIBUTORS.md' ||
+      filename === 'MAINTAINERS.md'
+    ) {
+      path = 'CONTRIBUTORS.toml';
+    } else if (rootFileList.includes(filename)) {
+      path = filename;
+    } else if (docsFileList.includes(filename)) {
+      path = 'docs/' + filename;
+    } else {
       const dotIndex = filename.lastIndexOf('.');
       let name = filename.slice(0, dotIndex);
       // const extension = filename.slice(dotIndex + 1);
