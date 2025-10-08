@@ -227,7 +227,7 @@ if __name__ == '__main__':
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
             book['sections'] = p.starmap(add_author_info_to_root_section, [
-                (['src', ''], section, contributors_data, metadata_config)
+                (['src', '',  'docs'], section, contributors_data, metadata_config)
                 for section in book['sections']
             ])
     else:
