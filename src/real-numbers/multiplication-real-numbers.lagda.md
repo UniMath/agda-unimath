@@ -775,17 +775,15 @@ module _
   abstract
     associative-mul-ℝ : (x *ℝ y) *ℝ z ＝ x *ℝ (y *ℝ z)
     associative-mul-ℝ =
-      let open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in
-        antisymmetric-leq-ℝ _ _
-          ( leq-associative-mul-ℝ x y z)
-          ( binary-tr
-            ( leq-ℝ)
-            ( ( commutative-mul-ℝ (z *ℝ y) x) ∙
-              ( ap-mul-ℝ refl (commutative-mul-ℝ z y)))
-            ( ( commutative-mul-ℝ z (y *ℝ x)) ∙
-              ( ap-mul-ℝ (commutative-mul-ℝ y x) refl))
-            ( leq-associative-mul-ℝ z y x))
+      antisymmetric-leq-ℝ _ _
+        ( leq-associative-mul-ℝ x y z)
+        ( binary-tr
+          ( leq-ℝ)
+          ( ( commutative-mul-ℝ (z *ℝ y) x) ∙
+            ( ap-mul-ℝ refl (commutative-mul-ℝ z y)))
+          ( ( commutative-mul-ℝ z (y *ℝ x)) ∙
+            ( ap-mul-ℝ (commutative-mul-ℝ y x) refl))
+          ( leq-associative-mul-ℝ z y x))
 ```
 
 ### Unit laws
