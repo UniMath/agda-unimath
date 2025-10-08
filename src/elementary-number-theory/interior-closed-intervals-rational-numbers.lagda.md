@@ -22,9 +22,9 @@ open import foundation.universe-levels
 
 Given two
 [closed intervals of rational numbers](elementary-number-theory.closed-intervals-rational-numbers.md)
-[a, b] and [c, d], then [c, d] is said to be
+`[a, b]` and `[c, d]`, then `[c, d]` is said to be
 {{#concept "interior" Disambiguation="closed intervals of rational numbers" Agda=is-interior-closed-interval-ℚ}}
-to [a, b] if `a < c` and `d < b`.
+to `[a, b]` if `a < c` and `d < b`.
 
 ## Definition
 
