@@ -23,6 +23,7 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
@@ -34,6 +35,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -43,6 +45,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+
+open import logic.functoriality-existential-quantification
 
 open import order-theory.posets
 
@@ -82,13 +86,27 @@ module _
     cut-lower-ℝ x p ∧
     cut-upper-ℝ y q
 
+  weak-close-bounds-lower-upper-ℝ : ℚ⁺ → subtype (l1 ⊔ l2) (ℚ × ℚ)
+  weak-close-bounds-lower-upper-ℝ ε⁺ (p , q) =
+    leq-ℚ-Prop q (p +ℚ (rational-ℚ⁺ ε⁺)) ∧
+    cut-lower-ℝ x p ∧
+    cut-upper-ℝ y q
+
   is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-arithmetically-located-prop-lower-upper-ℝ =
     Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
 
+  is-weakly-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-weakly-arithmetically-located-prop-lower-upper-ℝ =
+    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (weak-close-bounds-lower-upper-ℝ ε⁺))
+
   is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-arithmetically-located-lower-upper-ℝ =
     type-Prop is-arithmetically-located-prop-lower-upper-ℝ
+
+  is-weakly-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-weakly-arithmetically-located-lower-upper-ℝ =
+    type-Prop is-weakly-arithmetically-located-prop-lower-upper-ℝ
 
 close-bounds-ℝ : {l : Level} (x : ℝ l) → ℚ⁺ → subtype l (ℚ × ℚ)
 close-bounds-ℝ x =
@@ -96,6 +114,44 @@ close-bounds-ℝ x =
 ```
 
 ## Properties
+
+### A cut is weakly arithmetically located if and only if it is arithmetically located
+
+```agda
+module _
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
+  where
+
+  abstract
+    is-arithmetically-located-is-weakly-arithmetically-located-lower-upper-ℝ :
+      is-weakly-arithmetically-located-lower-upper-ℝ x y →
+      is-arithmetically-located-lower-upper-ℝ x y
+    is-arithmetically-located-is-weakly-arithmetically-located-lower-upper-ℝ
+      W ε =
+      let
+        ε' = mediant-zero-ℚ⁺ ε
+      in
+        map-tot-exists
+          ( λ (p , q) (q≤p+ε' , p<x , y<q) →
+            ( concatenate-leq-le-ℚ
+              ( q)
+              ( p +ℚ rational-ℚ⁺ ε')
+              ( p +ℚ rational-ℚ⁺ ε)
+              ( q≤p+ε')
+              ( preserves-le-right-add-ℚ p _ _ (le-mediant-zero-ℚ⁺ ε)) ,
+              p<x ,
+              y<q))
+          ( W ε')
+
+    is-weakly-arithmetically-located-is-arithmetically-located-lower-upper-ℝ :
+      is-arithmetically-located-lower-upper-ℝ x y →
+      is-weakly-arithmetically-located-lower-upper-ℝ x y
+    is-weakly-arithmetically-located-is-arithmetically-located-lower-upper-ℝ
+      H ε =
+      map-tot-exists
+        ( λ (p , q) (q<p+ε , p<x , y<q) → (leq-le-ℚ q<p+ε , p<x , y<q))
+        ( H ε)
+```
 
 ### Arithmetically located cuts are located
 
@@ -141,6 +197,15 @@ module _
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p q p<q))
+
+    is-located-is-weakly-arithmetically-located-lower-upper-ℝ :
+      is-weakly-arithmetically-located-lower-upper-ℝ x y →
+      is-located-lower-upper-ℝ x y
+    is-located-is-weakly-arithmetically-located-lower-upper-ℝ =
+      is-located-is-arithmetically-located-lower-upper-ℝ ∘
+      is-arithmetically-located-is-weakly-arithmetically-located-lower-upper-ℝ
+        ( x)
+        ( y)
 ```
 
 ### The cuts of Dedekind real numbers are arithmetically located

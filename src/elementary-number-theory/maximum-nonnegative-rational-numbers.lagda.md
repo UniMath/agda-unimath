@@ -21,7 +21,9 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "maximum" Disambiguation="of two nonnegative rational numbers" Agda=max-ℚ⁰⁺}} of two
+The
+{{#concept "maximum" Disambiguation="of two nonnegative rational numbers" Agda=max-ℚ⁰⁺}}
+of two
 [nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is the
 [greatest](elementary-number-theory.inequality-nonnegative-rational-numbers.md)

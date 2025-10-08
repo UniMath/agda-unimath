@@ -370,36 +370,60 @@ module _
     ( upper-cut-mul-ℝ ,
       is-inhabited-upper-cut-mul-ℝ ,
       is-rounded-upper-cut-mul-ℝ)
+```
+
+To show the product of two real numbers is (weakly) arithmetically located, we
+use that the bound of the width of the interval product `[a, b] ∙ [c, d]` is at
+most
+
+$$
+(b - a) ·
+\max(\left\lvert c\right\rvert , \left\lvert d\right\rvert ) +
+(d - c) · \max(\left\lvert a\right\rvert , \left\lvert b\right\rvert )
+$$
+
+It suffices to exhibit intervals `[a, b]` around `x` and `[c, d]` around `y`
+such that this width is at most `ε`. We pick natural `Nx` such that if `[a, b]`
+is an interval around `x` and `b - a < 1`, then `|a| ≤ Nx` and `|b| ≤ Nx`, and
+analogously for `Ny`. Then using arithmetic locatedness of `x` and `y`, we pick
+appropriately small `εx` and `εy` such that `εx Nx + εy Ny ≤ ε`, `εx ≤ 1`, and
+`εy ≤ 1`, choose `a < x < b < a + εx` and `c < y < d < c + εy`, and get the
+desired bound.
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
 
   abstract
-    is-arithmetically-located-mul-ℝ :
-      is-arithmetically-located-lower-upper-ℝ lower-real-mul-ℝ upper-real-mul-ℝ
-    is-arithmetically-located-mul-ℝ ε =
+    is-weakly-arithmetically-located-mul-ℝ :
+      is-weakly-arithmetically-located-lower-upper-ℝ
+        ( lower-real-mul-ℝ x y)
+        ( upper-real-mul-ℝ x y)
+    is-weakly-arithmetically-located-mul-ℝ ε =
       let
         open
           do-syntax-trunc-Prop
             ( ∃
               ( ℚ × ℚ)
-              ( close-bounds-lower-upper-ℝ lower-real-mul-ℝ upper-real-mul-ℝ ε))
+              ( weak-close-bounds-lower-upper-ℝ
+                ( lower-real-mul-ℝ x y)
+                ( upper-real-mul-ℝ x y)
+                ( ε)))
       in do
         (Nx , bound-Nx) ← natural-bound-location-ℝ x one-ℚ⁺
         (Ny , bound-Ny) ← natural-bound-location-ℝ y one-ℚ⁺
         let
           N = max-ℕ Nx Ny
-          -- To make sure we have values strictly < and > the min and max
-          -- whose difference is strictly less than ε, we need to split
-          -- out the epsilons a bunch to give ourselves wiggle room.
-          (ε-max-min , ε-wiggle , ε-max-min+ε-wiggle=ε) = split-ℚ⁺ ε
-          (ε-max-min-x , ε-max-min-y , ε-max-min-split) = split-ℚ⁺ ε-max-min
+          (εx₀ , εy₀ , εx₀+εy₀=ε) = split-ℚ⁺ ε
           εx =
             min-ℚ⁺
               ( one-ℚ⁺)
-              ( ε-max-min-x *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)
+              ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)
           εy =
             min-ℚ⁺
               ( one-ℚ⁺)
-              ( ε-max-min-y *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)
-          (δ⁺@(δ , _) , δ+δ<ε-wiggle) = bound-double-le-ℚ⁺ ε-wiggle
+              ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)
         ((p , q) , q<p+εx , p<x , x<q) ← is-arithmetically-located-ℝ x εx
         ((r , s) , s<r+εy , r<y , y<s) ← is-arithmetically-located-ℝ y εy
         let
@@ -464,112 +488,94 @@ module _
                 by preserves-leq-rational-ℕ _ _ (left-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
                 by preserves-leq-rational-ℕ _ _ (succ-leq-ℕ N)
-          a = min-ℚ (min-ℚ (p *ℚ r) (p *ℚ s)) (min-ℚ (q *ℚ r) (q *ℚ s))
-          b = max-ℚ (max-ℚ (p *ℚ r) (p *ℚ s)) (max-ℚ (q *ℚ r) (q *ℚ s))
+          [p,q] = ((p , q) , p≤q)
+          [r,s] = ((r , s) , r≤s)
+          a = lower-bound-mul-closed-interval-ℚ [p,q] [r,s]
+          b = upper-bound-mul-closed-interval-ℚ [p,q] [r,s]
+          b-a≤ε =
+            chain-of-inequalities
+              b -ℚ a
+              ≤ ( (q -ℚ p) *ℚ
+                  max-ℚ (rational-abs-ℚ r) (rational-abs-ℚ s)) +ℚ
+                ( (s -ℚ r) *ℚ
+                  max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q))
+                by bound-width-mul-closed-interval-ℚ [p,q] [r,s]
+              ≤ ( rational-ℚ⁺ εx *ℚ rational-ℕ (succ-ℕ N)) +ℚ
+                ( rational-ℚ⁺ εy *ℚ rational-ℕ (succ-ℕ N))
+                by
+                  preserves-leq-add-ℚ
+                    ( preserves-leq-mul-ℚ⁰⁺
+                      ( nonnegative-diff-leq-ℚ _ _ p≤q)
+                      ( nonnegative-ℚ⁺ εx)
+                      ( max-ℚ⁰⁺ (abs-ℚ r) (abs-ℚ s))
+                      ( nonnegative-rational-ℕ (succ-ℕ N))
+                      ( leq-le-ℚ q-p<εx)
+                      ( max|r||s|≤sN))
+                    ( preserves-leq-mul-ℚ⁰⁺
+                      ( nonnegative-diff-leq-ℚ _ _ r≤s)
+                      ( nonnegative-ℚ⁺ εy)
+                      ( max-ℚ⁰⁺ (abs-ℚ p) (abs-ℚ q))
+                      ( nonnegative-rational-ℕ (succ-ℕ N))
+                      ( leq-le-ℚ s-r<εy)
+                      ( max|p||q|≤sN))
+              ≤ ( rational-ℚ⁺ εx +ℚ rational-ℚ⁺ εy) *ℚ
+                rational-ℕ (succ-ℕ N)
+                by
+                  leq-eq-ℚ _ _
+                    ( inv (right-distributive-mul-add-ℚ _ _ _))
+              ≤ rational-ℚ⁺
+                  ( ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N) +ℚ⁺
+                    ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)) *ℚ
+                  ( rational-ℕ (succ-ℕ N))
+                by
+                  preserves-leq-right-mul-ℚ⁰⁺
+                    ( nonnegative-rational-ℕ (succ-ℕ N))
+                    ( _)
+                    ( _)
+                    ( preserves-leq-add-ℚ
+                      ( leq-right-min-ℚ⁺ _ _)
+                      ( leq-right-min-ℚ⁺ _ _))
+              ≤ rational-ℚ⁺ ε
+                by
+                  leq-eq-ℚ _ _
+                    ( ap-mul-ℚ
+                      ( inv (right-distributive-mul-add-ℚ _ _ _))
+                      ( refl) ∙
+                      ap
+                        ( rational-ℚ⁺)
+                        ( is-section-right-mul-ℚ⁺
+                          ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
+                          ( εx₀ +ℚ⁺ εy₀) ∙
+                          εx₀+εy₀=ε))
         intro-exists
-          ( a -ℚ δ , b +ℚ δ)
+          ( a , b)
           ( tr
-            ( le-ℚ (b +ℚ δ))
-            ( commutative-add-ℚ _ _)
-            ( le-transpose-left-diff-ℚ _ _ _
-              ( concatenate-leq-le-ℚ
-                ( (b +ℚ δ) -ℚ (a -ℚ δ))
-                ( rational-ℚ⁺ ε-max-min +ℚ (δ +ℚ δ))
-                ( rational-ℚ⁺ ε)
-                ( inv-tr
-                  ( λ η → leq-ℚ η ( rational-ℚ⁺ ε-max-min +ℚ (δ +ℚ δ)))
-                  ( ap-add-ℚ
-                      ( refl)
-                      ( distributive-neg-diff-ℚ _ _ ∙
-                        commutative-add-ℚ _ _) ∙
-                    interchange-law-add-add-ℚ _ _ _ _)
-                  ( preserves-leq-left-add-ℚ _ _ _
-                    ( chain-of-inequalities
-                        b -ℚ a
-                        ≤ ( (q -ℚ p) *ℚ
-                            max-ℚ (rational-abs-ℚ r) (rational-abs-ℚ s)) +ℚ
-                          ( (s -ℚ r) *ℚ
-                            max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q))
-                          by
-                            bound-width-mul-closed-interval-ℚ
-                              ( (p , q) , p≤q)
-                              ( (r , s) , r≤s)
-                        ≤ ( rational-ℚ⁺ εx *ℚ rational-ℕ (succ-ℕ N)) +ℚ
-                          ( rational-ℚ⁺ εy *ℚ rational-ℕ (succ-ℕ N))
-                          by
-                            preserves-leq-add-ℚ
-                              ( preserves-leq-mul-ℚ⁰⁺
-                                ( nonnegative-diff-leq-ℚ _ _ p≤q)
-                                ( nonnegative-ℚ⁺ εx)
-                                ( max-ℚ⁰⁺ (abs-ℚ r) (abs-ℚ s))
-                                ( nonnegative-rational-ℕ (succ-ℕ N))
-                                ( leq-le-ℚ q-p<εx)
-                                ( max|r||s|≤sN))
-                              ( preserves-leq-mul-ℚ⁰⁺
-                                ( nonnegative-diff-leq-ℚ _ _ r≤s)
-                                ( nonnegative-ℚ⁺ εy)
-                                ( max-ℚ⁰⁺ (abs-ℚ p) (abs-ℚ q))
-                                ( nonnegative-rational-ℕ (succ-ℕ N))
-                                ( leq-le-ℚ s-r<εy)
-                                ( max|p||q|≤sN))
-                        ≤ ( rational-ℚ⁺ εx +ℚ rational-ℚ⁺ εy) *ℚ
-                          rational-ℕ (succ-ℕ N)
-                          by
-                            leq-eq-ℚ _ _
-                              ( inv (right-distributive-mul-add-ℚ _ _ _))
-                        ≤ rational-ℚ⁺
-                            ( ( ε-max-min-x *ℚ⁺
-                                positive-reciprocal-rational-succ-ℕ N) +ℚ⁺
-                              ( ε-max-min-y *ℚ⁺
-                                positive-reciprocal-rational-succ-ℕ N)) *ℚ
-                          rational-ℕ (succ-ℕ N)
-                          by
-                            preserves-leq-right-mul-ℚ⁰⁺
-                              ( nonnegative-rational-ℕ (succ-ℕ N))
-                              ( _)
-                              ( _)
-                              ( preserves-leq-add-ℚ
-                                ( leq-right-min-ℚ⁺ _ _)
-                                ( leq-right-min-ℚ⁺ _ _))
-                        ≤ rational-ℚ⁺ ε-max-min
-                          by
-                            leq-eq-ℚ _ _
-                              ( ap-mul-ℚ
-                                ( inv (right-distributive-mul-add-ℚ _ _ _))
-                                ( refl) ∙
-                                ap
-                                  ( rational-ℚ⁺)
-                                  ( is-section-right-mul-ℚ⁺
-                                    ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
-                                    ( ε-max-min-x +ℚ⁺ ε-max-min-y) ∙
-                                    ε-max-min-split)))))
-                ( tr
-                  ( le-ℚ⁺ (ε-max-min +ℚ⁺ (δ⁺ +ℚ⁺ δ⁺)))
-                  ( ε-max-min+ε-wiggle=ε)
-                  ( preserves-le-right-add-ℚ _ _ _ δ+δ<ε-wiggle)))) ,
-            intro-exists
-              ( (((p , q) , p≤q) , p<x , x<q) ,
-                (((r , s) , r≤s) , r<y , y<s))
-              ( le-diff-rational-ℚ⁺ a δ⁺) ,
-            intro-exists
-              ( (((p , q) , p≤q) , p<x , x<q) ,
-                (((r , s) , r≤s) , r<y , y<s))
-              ( le-right-add-rational-ℚ⁺ b δ⁺))
+              ( leq-ℚ b)
+              ( commutative-add-ℚ _ _)
+              ( leq-transpose-left-diff-ℚ _ _ _ b-a≤ε) ,
+            leq-lower-cut-mul-ℝ'-lower-cut-mul-ℝ x y a
+              ( intro-exists
+                ( (([p,q] , p<x , x<q)) , ([r,s] , r<y , y<s))
+                ( refl-leq-ℚ _)) ,
+            leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ x y b
+              ( intro-exists
+                ( (([p,q] , p<x , x<q)) , ([r,s] , r<y , y<s))
+                ( refl-leq-ℚ _)))
 
   abstract
     is-located-mul-ℝ :
-      is-located-lower-upper-ℝ lower-real-mul-ℝ upper-real-mul-ℝ
+      is-located-lower-upper-ℝ (lower-real-mul-ℝ x y) (upper-real-mul-ℝ x y)
     is-located-mul-ℝ =
-      is-located-is-arithmetically-located-lower-upper-ℝ _ _
-        ( is-arithmetically-located-mul-ℝ)
+      is-located-is-weakly-arithmetically-located-lower-upper-ℝ _ _
+        ( is-weakly-arithmetically-located-mul-ℝ)
 
   opaque
     mul-ℝ : ℝ (l1 ⊔ l2)
     mul-ℝ =
       real-lower-upper-ℝ
-        ( lower-real-mul-ℝ)
-        ( upper-real-mul-ℝ)
-        ( is-disjoint-lower-upper-cut-mul-ℝ)
+        ( lower-real-mul-ℝ x y)
+        ( upper-real-mul-ℝ x y)
+        ( is-disjoint-lower-upper-cut-mul-ℝ x y)
         ( is-located-mul-ℝ)
 
 infixl 40 _*ℝ_
