@@ -26,12 +26,13 @@ open import order-theory.intersections-closed-intervals-total-orders
 
 Two
 [closed intervals](elementary-number-theory.closed-intervals-rational-numbers.md)
-[a, b] and [c, d] of
+`[a, b]` and `[c, d]` of
 [rational numbers](elementary-number-theory.rational-numbers.md)
 {{#concept "intersect" Disambiguation="closed intervals of rational numbers"}}
 if `a ≤ d` and `c ≤ b`.
 
-If [a, b] and [c, d] intersect, their intersection is itself a closed interval.
+If `[a, b]` and `[c, d]` intersect, their intersection is itself a closed
+interval.
 
 ## Definition
 

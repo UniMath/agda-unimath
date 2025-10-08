@@ -27,12 +27,13 @@ open import order-theory.total-orders
 ## Idea
 
 In a [total order](order-theory.total-orders.md) `T`, two
-[closed intervals](order-theory.closed-intervals-total-orders.md) in `T` [a, b]
-and [c, d]
+[closed intervals](order-theory.closed-intervals-total-orders.md) in `T`
+`[a, b]` and `[c, d]`
 {{#concept "intersect" Disambiguation="closed intervals in a total order" Agda=intersect-closed-interval-Total-Order}}
 if `a ≤ d` and `c ≤ b`.
 
-If [a, b] and [c, d] intersect, their intersection is itself a closed interval.
+If `[a, b]` and `[c, d]` intersect, their intersection is itself a closed
+interval.
 
 ## Definition
 
