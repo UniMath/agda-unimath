@@ -100,10 +100,9 @@ check: ./$(SOURCE_DIR)/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 .PHONY: check-profile
-# `clean` is specified second so that the $< variable stores the everything file.
-# We don't mind, because the `clean` target busts the typechecking and website cache,
-# but doesn't touch the everything file.
-check-profile: ./$(SOURCE_DIR)/everything.lagda.md clean
+check-profile: $(SOURCE_DIR)/everything.lagda.md
+	@# Remove cached data
+	@rm -Rf ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/
 	${AGDA} ${AGDAPROFILEFLAGS} $<
 
 # Convert module path to directory path (replace dots with slashes)
