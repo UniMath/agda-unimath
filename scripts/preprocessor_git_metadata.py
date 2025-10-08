@@ -10,7 +10,7 @@ import os
 import subprocess
 import sys
 from utils import github_page_for_commit, eprint
-from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
+from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributors_warning
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
@@ -67,6 +67,8 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     # but alas I haven't found anything to that effect
 
     attribution_text = ''
+    skipped_authors = set()
+
     if include_contributors:
         # Arguments mostly copied from the 1lab pipeline
         raw_authors_git_output = subprocess.run([
@@ -84,9 +86,11 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
         # If all commits to a file are chore commits, then there are no authors
         if raw_authors_git_output:
           # Collect authors and sort by number of commits
+          sorted_authors, __skipped_authors = sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
+          skipped_authors.update(__skipped_authors)
           author_names = [
               author['displayName']
-              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors, contributors_file)
+              for author in sorted_authors
           ]
           attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
@@ -121,7 +125,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
                 continue
             author_index = get_real_author_index(raw_author, contributors)
             if author_index is None:
-                print_skipping_contributor_warning(raw_author,contributors_file)
+                skipped_authors.add(raw_author)
                 continue
             author_indices.append(author_index)
         if len(author_indices) == 0:
@@ -130,6 +134,9 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
             contributors[author_index]['displayName'] for author_index in author_indices
         ])
         recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+
+    if skipped_authors:
+        print_skipping_contributors_warning(skipped_authors, contributors_file)
 
     return (
         f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{nobreak_span("Last modified on " + modified_date)}.</i></p>',

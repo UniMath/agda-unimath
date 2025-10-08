@@ -7,7 +7,7 @@ import argparse
 import os
 import sys
 from utils import github_page_for_contributor
-from utils.contributors import parse_contributors_file, sorted_authors_from_raw_shortlog_lines
+from utils.contributors import parse_contributors_file, sorted_authors_from_raw_shortlog_lines, print_skipping_contributors_warning
 
 
 template = """\
@@ -58,8 +58,12 @@ if __name__ == '__main__':
         'HEAD'
     ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-    sorted_authors = sorted_authors_from_raw_shortlog_lines(
-        git_log_output, contributors_data, args.contributors_file)
+    sorted_authors, skipped_authors = sorted_authors_from_raw_shortlog_lines(
+        git_log_output, contributors_data)
+
+    if skipped_authors:
+        print_skipping_contributors_warning(skipped_authors, args.contributors_file)
+
     output = template.format(
         names='\n'.join((format_contributor(c) for c in sorted_authors)),
         CONTRIBUTORS_FILE=args.contributors_file
