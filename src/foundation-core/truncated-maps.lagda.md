@@ -10,10 +10,12 @@ module foundation-core.truncated-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -51,9 +53,9 @@ module _
   map-trunc-map = pr1
 
   abstract
-    is-trunc-map-map-trunc-map :
+    is-trunc-map-trunc-map :
       (f : trunc-map k A B) → is-trunc-map k (map-trunc-map f)
-    is-trunc-map-map-trunc-map = pr2
+    is-trunc-map-trunc-map = pr2
 ```
 
 ## Properties
@@ -105,23 +107,37 @@ module _
   where
 
   abstract
-    is-trunc-map-is-trunc-map-ap :
+    is-trunc-map-succ-is-trunc-map-ap :
       ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
-    is-trunc-map-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
+    is-trunc-map-succ-is-trunc-map-ap is-trunc-map-ap-f b (x , p) (x' , p') =
       is-trunc-equiv k
-        ( fiber (ap f) (p ∙ (inv p')))
-        ( equiv-fiber-ap-eq-fiber f (pair x p) (pair x' p'))
-        ( is-trunc-map-ap-f x x' (p ∙ (inv p')))
+        ( fiber (ap f) (p ∙ inv p'))
+        ( equiv-fiber-ap-eq-fiber f (x , p) (x' , p'))
+        ( is-trunc-map-ap-f x x' (p ∙ inv p'))
+
+  abstract
+    is-trunc-map-ap-is-trunc-map-succ :
+      is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
+    is-trunc-map-ap-is-trunc-map-succ is-trunc-map-f x y p =
+      is-trunc-is-equiv' k
+        ( (x , p) ＝ (y , refl))
+        ( eq-fiber-fiber-ap f x y p)
+        ( is-equiv-eq-fiber-fiber-ap f x y p)
+        ( is-trunc-map-f (f y) (x , p) (y , refl))
+```
+
+### The action on identifications of a `k`-truncated map is also `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
   abstract
     is-trunc-map-ap-is-trunc-map :
-      is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
-    is-trunc-map-ap-is-trunc-map is-trunc-map-f x y p =
-      is-trunc-is-equiv' k
-        ( pair x p ＝ pair y refl)
-        ( eq-fiber-fiber-ap f x y p)
-        ( is-equiv-eq-fiber-fiber-ap f x y p)
-        ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+      is-trunc-map k f → (x y : A) → is-trunc-map k (ap f {x} {y})
+    is-trunc-map-ap-is-trunc-map H =
+      is-trunc-map-ap-is-trunc-map-succ k f (is-trunc-map-succ-is-trunc-map k H)
 ```
 
 ### The domain of any `k`-truncated map into a `k+1`-truncated type is `k+1`-truncated
@@ -139,7 +155,7 @@ is-trunc-is-trunc-map-into-is-trunc
     ( k)
     ( ap f)
     ( is-trunc-B (f a) (f a'))
-    ( is-trunc-map-ap-is-trunc-map k f is-trunc-map-f a a')
+    ( is-trunc-map-ap-is-trunc-map-succ k f is-trunc-map-f a a')
 ```
 
 ### A family of types is a family of `k`-truncated types if and only of the projection map is `k`-truncated
@@ -267,7 +283,7 @@ abstract
         ( map-compute-fiber-comp g h (g b))
         ( is-equiv-map-compute-fiber-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
-      ( pair b refl)
+      ( b , refl)
 ```
 
 ### If a composite `g ∘ h` and its left factor `g` are truncated maps, then its right factor `h` is a truncated map
@@ -297,4 +313,22 @@ module _
       ( is-trunc-map-is-equiv k L)
       ( is-trunc-map-comp k i g M
         ( is-trunc-map-is-equiv k K))
+```
+
+### If the domain is contractible and the codomain is `k+1`-truncated then the map is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-trunc-map-is-trunc-succ-codomain-is-contr-domain :
+    is-contr A →
+    is-trunc (succ-𝕋 k) B →
+    is-trunc-map k f
+  is-trunc-map-is-trunc-succ-codomain-is-contr-domain c tB u =
+    is-trunc-equiv k
+      ( f (center c) ＝ u)
+      ( left-unit-law-Σ-is-contr c (center c))
+      ( tB (f (center c)) u)
 ```

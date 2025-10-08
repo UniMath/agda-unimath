@@ -26,17 +26,17 @@ open import foundation-core.truncated-types
 
 A type `X` is said to be {{#concept "set-projective" Agda=is-set-projective}} if
 for every [surjective map](foundation.surjective-maps.md) `f : A ↠ B` onto a
-[set](foundation-core.sets.md) `B` the [postcomposition
-function[(foundation-core.postcomposition-functions.md)
+[set](foundation-core.sets.md) `B` the
+[postcomposition function](foundation-core.postcomposition-functions.md)
 
 ```text
   (X → A) → (X → B)
 ```
 
 is surjective. This is [equivalent](foundation.logical-equivalences.md) to the
-condition that for every [equivalence
-relation[(foundation-core.equivalence-relations.md) `R` on a type `A` the
-natural map
+condition that for every
+[equivalence relation](foundation-core.equivalence-relations.md) `R` on a type
+`A` the natural map
 
 ```text
   (X → A)/~ → (X → A/R)

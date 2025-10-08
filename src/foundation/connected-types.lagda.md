@@ -27,6 +27,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.retracts-of-types
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -152,9 +153,7 @@ module _
   where
 
   is-connected-retract-of :
-    A retract-of B →
-    is-connected k B →
-    is-connected k A
+    A retract-of B → is-connected k B → is-connected k A
   is-connected-retract-of R =
     is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```
@@ -170,6 +169,18 @@ module _
   is-connected-is-contr H =
     is-connected-is-equiv-diagonal-exponential
       ( λ B → is-equiv-diagonal-exponential-is-contr H (type-Truncated-Type B))
+```
+
+### A type that is `k`-connected and `k`-truncated is contractible
+
+```agda
+module _
+  {l1 : Level} {k : 𝕋} {A : UU l1}
+  where
+
+  is-contr-is-connected-is-trunc : is-trunc k A → is-connected k A → is-contr A
+  is-contr-is-connected-is-trunc H =
+    is-contr-equiv (type-trunc k A) (equiv-unit-trunc (A , H))
 ```
 
 ### A type that is `(k+1)`-connected is `k`-connected
@@ -207,7 +218,7 @@ is-connected-Σ k H K =
                     ≃ ║A║ₖ                  by the right unit law of Σ
 ```
 
-and so, in particular, if the total space is `k`-connected so is the base. □
+and so, in particular, if the total space is `k`-connected so is the base. ∎
 
 ```agda
 is-connected-base :
@@ -270,4 +281,17 @@ module _
                   ( unit-trunc x))
                 ( λ where refl → refl)
                 ( center (K a x)))))
+```
+
+### If the domain of `f` is `k+1`-connected, then the `k+1`-truncation of `f` is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-trunc-map-trunc-succ-is-succ-connected-domain :
+    is-connected (succ-𝕋 k) A → is-trunc-map k (map-trunc (succ-𝕋 k) f)
+  is-trunc-map-trunc-succ-is-succ-connected-domain c =
+    is-trunc-map-is-trunc-succ-codomain-is-contr-domain c is-trunc-type-trunc
 ```
