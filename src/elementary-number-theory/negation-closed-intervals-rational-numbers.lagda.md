@@ -25,7 +25,7 @@ The
 {{#concept "negation" Disambiguation="closed interval of rational numbers" Agda=neg-closed-interval-ℚ}}
 of a
 [closed interval of rational numbers](elementary-number-theory.closed-intervals-rational-numbers.md)
-[a, b] is [-b, -a].
+`[a, b]` is `[-b, -a]`.
 
 ## Definition
 

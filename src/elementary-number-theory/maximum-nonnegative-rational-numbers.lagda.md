@@ -21,10 +21,12 @@ open import foundation.identity-types
 
 ## Idea
 
-The maximum of two
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+The
+{{#concept "maximum" Disambiguation="of two nonnegative rational numbers" Agda=max-ℚ⁰⁺}}
+of two
+[nonnegative rational numbers](elementary-number-theory.nonnegative-rational-numbers.md)
 is the
-[greatest](elementary-number-theory.inequality-positive-rational-numbers.md)
+[greatest](elementary-number-theory.inequality-nonnegative-rational-numbers.md)
 rational number of the two.
 
 ## Definition

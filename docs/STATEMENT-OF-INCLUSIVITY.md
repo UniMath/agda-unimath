@@ -1,4 +1,4 @@
-# Statement of inclusion
+# Statement of inclusivity
 
 There are many reasons to contribute something to a library of formalized
 mathematics. Some do it just for fun, some do it for their research, some do it
