@@ -32,7 +32,7 @@ inline-delimiter = {left = "$", right = "$"}
 macros = "config/latex-macros.txt"
 
 [preprocessor.catppuccin]
-assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+assets_version = "1.2.0" # ! DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
@@ -106,7 +106,7 @@ enable = false
 
 [output.html.fold]
 enable = true    # whether or not to enable section folding
-level = 0         # the depth to start folding
+level = 0        # the depth to start folding
 
 [output.html.search]
 enable = true            # enables the search feature
