@@ -131,7 +131,7 @@ explanatory text within a section when necessary.
 
 If you want to include a table in your file, for example listing examples of a
 relevant construction or files with related concepts, we suggest adding the
-table as its own Markdown file in the `tables` directory, using
+table as its own Markdown file in the `docs/tables` directory, using
 [Markdown syntax for tables](https://www.markdownguide.org/extended-syntax/#tables).
 This isn't a strict rule, and there are valid reasons for only having a table in
 a file directly, but for the two example cases outlined above, we recommend
