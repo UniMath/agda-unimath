@@ -94,7 +94,8 @@
 
   "[makefile]": {
     "editor.insertSpaces": false,
-    "editor.detectIndentation": true
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "boundary"
   },
 
   "[markdown]": {

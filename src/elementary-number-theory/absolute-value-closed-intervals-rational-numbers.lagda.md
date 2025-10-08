@@ -30,7 +30,7 @@ The
 [absolute value](elementary-number-theory.absolute-value-rational-numbers.md) of
 an element of a
 [closed interval](elementary-number-theory.closed-intervals-rational-numbers.md)
-[a, b] of [rational numbers](elementary-number-theory.rational-numbers.md) is
+`[a, b]` of [rational numbers](elementary-number-theory.rational-numbers.md) is
 bounded by `max(|a|, |b|)`.
 
 ## Definition
