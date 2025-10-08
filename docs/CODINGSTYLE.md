@@ -212,7 +212,6 @@ module _
   (I : radical-ideal-Commutative-Ring l2 A)
   {U : UU l3} (J : U → radical-ideal-Commutative-Ring l4 A)
   where
-```
 ````
 
 The use of descriptive section headers, coupled with comprehensive markdown
