@@ -17,6 +17,9 @@ def print_skipping_contributor_warning(contributor, contributors_file):
     print(f'Warning: not attributing changes to {contributor}. If you want your work to be attributed to you, add yourself to {contributors_file}.',
           file=sys.stderr)
 
+def print_skipping_contributors_warning(contributors, contributors_file):
+    for contributor in sorted(contributors):
+        print_skipping_contributor_warning(contributor, contributors_file)
 
 def print_skipping_contributors_warning(contributors, contributors_file):
     for contributor in sorted(contributors):
