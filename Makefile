@@ -163,6 +163,7 @@ $(WEBSITE_CSS)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(WEB
 	@python3 ./$(SCRIPTS_DIR)/generate_agda_css.py
 
 $(WEBSITE_IMAGES)/agda_dependency_graph.svg $(WEBSITE_IMAGES)/agda_dependency_graph_legend.html &: ${AGDAFILES}
+	@echo Generating dependency graph art by Fredrik
 	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || true
 
 .PHONY: website-prepare
@@ -214,6 +215,8 @@ pre-commit:
 
 # Keep versions in sync with .github/workflows/pages.yaml
 install-website-dev:
+	@echo
+	@echo Installing website dependencies
 	@cargo install mdbook@0.4.34
 	@cargo install mdbook-linkcheck@0.7.7
 	@cargo install mdbook-katex@0.5.7
@@ -222,5 +225,9 @@ install-website-dev:
 
 .PHONY: unused-imports
 unused-imports:
-	python3 ./$(SCRIPTS_DIR)/remove_unused_imports.py
-	python3 ./$(SCRIPTS_DIR)/demote_foundation_imports.py
+	@echo
+	@echo Removing unused imports
+	@python3 ./$(SCRIPTS_DIR)/remove_unused_imports.py
+	@echo
+	@echo Demoting foundation imports
+	@python3 ./$(SCRIPTS_DIR)/demote_foundation_imports.py
