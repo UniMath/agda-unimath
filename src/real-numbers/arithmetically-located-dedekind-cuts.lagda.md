@@ -86,31 +86,39 @@ module _
     cut-lower-ℝ x p ∧
     cut-upper-ℝ y q
 
+  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
+  is-arithmetically-located-prop-lower-upper-ℝ =
+    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
+
+  is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
+  is-arithmetically-located-lower-upper-ℝ =
+    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
+
+close-bounds-ℝ : {l : Level} (x : ℝ l) → ℚ⁺ → subtype l (ℚ × ℚ)
+close-bounds-ℝ x =
+  close-bounds-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
+```
+
+### The predicate of being weakly arithmetically located
+
+```agda
+module _
+  {l1 l2 : Level} (x : lower-ℝ l1) (y : upper-ℝ l2)
+  where
+
   weak-close-bounds-lower-upper-ℝ : ℚ⁺ → subtype (l1 ⊔ l2) (ℚ × ℚ)
   weak-close-bounds-lower-upper-ℝ ε⁺ (p , q) =
     leq-ℚ-Prop q (p +ℚ (rational-ℚ⁺ ε⁺)) ∧
     cut-lower-ℝ x p ∧
     cut-upper-ℝ y q
 
-  is-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
-  is-arithmetically-located-prop-lower-upper-ℝ =
-    Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (close-bounds-lower-upper-ℝ ε⁺))
-
   is-weakly-arithmetically-located-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-weakly-arithmetically-located-prop-lower-upper-ℝ =
     Π-Prop ℚ⁺ (λ ε⁺ → ∃ (ℚ × ℚ) (weak-close-bounds-lower-upper-ℝ ε⁺))
 
-  is-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
-  is-arithmetically-located-lower-upper-ℝ =
-    type-Prop is-arithmetically-located-prop-lower-upper-ℝ
-
   is-weakly-arithmetically-located-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-weakly-arithmetically-located-lower-upper-ℝ =
     type-Prop is-weakly-arithmetically-located-prop-lower-upper-ℝ
-
-close-bounds-ℝ : {l : Level} (x : ℝ l) → ℚ⁺ → subtype l (ℚ × ℚ)
-close-bounds-ℝ x =
-  close-bounds-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
 ```
 
 ## Properties
