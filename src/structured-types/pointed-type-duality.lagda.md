@@ -15,10 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-duality
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.homotopies
 open import foundation-core.retractions

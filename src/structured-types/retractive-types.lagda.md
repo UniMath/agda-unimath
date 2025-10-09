@@ -8,17 +8,12 @@ module structured-types.retractive-types where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fibers-of-maps
-open import foundation.function-types
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
-
-open import structured-types.pointed-types
 ```
 
 </details>
