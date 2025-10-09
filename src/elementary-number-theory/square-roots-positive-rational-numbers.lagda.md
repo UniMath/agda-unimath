@@ -195,7 +195,7 @@ abstract
                     ( refl)
                     ( ap
                       ( rational-ℚ⁺)
-                      ( is-section-right-mul-ℚ⁺
+                      ( is-section-right-div-ℚ⁺
                         ( p⁺)
                         ( positive-diff-le-ℚ _ _ p²<q)))
               ＝ q
@@ -229,7 +229,7 @@ abstract
             ( p)
             ( tr
               ( le-ℚ _)
-              ( ap rational-ℚ⁺ (is-retraction-right-mul-ℚ⁺ p⁺ p⁺))
+              ( ap rational-ℚ⁺ (is-retraction-right-div-ℚ⁺ p⁺ p⁺))
               ( preserves-le-right-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _
                 ( le-diff-rational-ℚ⁺ (p *ℚ p) q⁺)))
             ( δ+δ<⟨p²-q⟩/p))
@@ -265,7 +265,7 @@ abstract
                   ( le-ℚ _)
                   ( ap
                     ( rational-ℚ⁺)
-                    ( is-section-right-mul-ℚ⁺ p⁺ (positive-diff-le-ℚ _ _ q<p²)))
+                    ( is-section-right-div-ℚ⁺ p⁺ (positive-diff-le-ℚ _ _ q<p²)))
                   ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
 
   rounded-above-square-le-ℚ⁺ :
