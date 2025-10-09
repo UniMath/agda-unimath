@@ -17,6 +17,7 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-real-numbers public
@@ -36,6 +37,7 @@ open import real-numbers.minimum-finite-families-real-numbers public
 open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
+open import real-numbers.multiplication-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
