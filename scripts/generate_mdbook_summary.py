@@ -33,11 +33,13 @@ def generate_namespace_entry_list(root_path, namespace):
     relevant_files = tuple(
         f for f in git_tracked_files if namespace_path in f.parents)
 
-    lagda_file_paths = tuple(f for f in relevant_files if utils.is_agda_file(f))
+    lagda_file_paths = tuple(
+        f for f in relevant_files if utils.is_agda_file(f))
     modules = tuple(p.name for p in lagda_file_paths)
     module_titles = tuple(utils.get_lagda_md_file_title(f)
-                     for f in lagda_file_paths)
-    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m) for m in modules)
+                          for f in lagda_file_paths)
+    module_mdfiles = tuple(utils.get_module_mdfile(namespace, m)
+                           for m in modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):
@@ -65,7 +67,8 @@ def generate_namespace_entry_list(root_path, namespace):
     entry_list = ('  ' + entry_template.format(title=t, mdfile=md)
                   for t, md in module_titles_and_mdfiles)
 
-    namespace_title = utils.get_lagda_md_file_title(str(namespace_path.with_suffix('.lagda.md')))
+    namespace_title = utils.get_lagda_md_file_title(
+        str(namespace_path.with_suffix('.lagda.md')))
     namespace_entry = entry_template.format(
         title=namespace_title, mdfile=namespace + '.md')
 
@@ -85,7 +88,8 @@ def generate_index(root_path):
         entry_lists.append(entry_list)
         status |= s
 
-    literature_index, lit_status = generate_namespace_entry_list(root_path, LITERATURE_MODULE)
+    literature_index, lit_status = generate_namespace_entry_list(
+        root_path, LITERATURE_MODULE)
     status |= lit_status
 
     index = '\n\n'.join(entry_lists) + '\n'
@@ -133,8 +137,10 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
         description='Generate mdbook SUMMARY file. Usage: generate_mdbook_summary.py <OUTPUT_FILE>')
-    parser.add_argument('output_file', help='Output file path to write the generated SUMMARY markdown content to.')
-    parser.add_argument('--root', help='Root path to source.', default='src', required=False)
+    parser.add_argument(
+        'output_file', help='Output file path to write the generated SUMMARY markdown content to.')
+    parser.add_argument('--root', help='Root path to source.',
+                        default='src', required=False)
 
     args = parser.parse_args()
 
@@ -157,12 +163,14 @@ if __name__ == '__main__':
                     print(f'No changes to {summary_file_path}.')
                 else:
                     summary_file_path.write_text(summary_contents)
-                    print(f'Updated mdbook summary content at {summary_file_path}.')
+                    print(
+                        f'Updated mdbook summary content at {summary_file_path}.')
             else:
                 summary_file_path.parent.mkdir(parents=True, exist_ok=True)
                 summary_file_path.write_text(summary_contents)
                 print(f'Wrote mdbook summary content to {summary_file_path}.')
         except Exception as e:
-            utils.eprint(f'Failed to write summary file {summary_file_path}: {e}')
+            utils.eprint(
+                f'Failed to write summary file {summary_file_path}: {e}')
             status |= STATUS_FAILED_OVERWRITE
     sys.exit(status)

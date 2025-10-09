@@ -82,6 +82,7 @@ def check_unclosed_inline_code_guard(lines):
 
     return problematic_lines
 
+
 def find_invalid_headings(lines):
     """
     Finds headings which contain links.
@@ -97,6 +98,7 @@ def find_invalid_headings(lines):
             invalid_heading_lines.append(i)
 
     return invalid_heading_lines
+
 
 if __name__ == '__main__':
 
@@ -121,7 +123,8 @@ if __name__ == '__main__':
         output = inputText
         lines = output.split('\n')
 
-        offender_line_number, offender_is_closing = find_ill_formed_block(lines)
+        offender_line_number, offender_is_closing = find_ill_formed_block(
+            lines)
 
         if offender_line_number is not None:
             if offender_is_closing:
