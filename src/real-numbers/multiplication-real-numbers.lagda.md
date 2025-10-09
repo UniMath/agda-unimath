@@ -439,7 +439,9 @@ module _
               ( rational-ℚ⁺ εx)
               ( one-ℚ)
               ( q-p<εx)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -450,7 +452,9 @@ module _
               ( rational-ℚ⁺ εy)
               ( one-ℚ)
               ( s-r<εy)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
@@ -533,8 +537,12 @@ module _
                     ( _)
                     ( _)
                     ( preserves-leq-add-ℚ
-                      ( leq-right-min-ℚ⁺ _ _)
-                      ( leq-right-min-ℚ⁺ _ _))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
                   leq-eq-ℚ _ _
