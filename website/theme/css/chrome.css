@@ -158,13 +158,17 @@ a > .hljs {
   align-content: center;
   flex-direction: column;
 
-  transition: color 0.5s, background-color 0.5s;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
 }
 
 .nav-chapters:hover {
   text-decoration: none;
   background-color: var(--theme-hover);
-  transition: background-color 0.15s, color 0.15s;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
 }
 
 .nav-wrapper {
@@ -240,7 +244,9 @@ pre > .buttons {
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.1s linear, opacity 0.1s linear;
+  transition:
+    visibility 0.1s linear,
+    opacity 0.1s linear;
 }
 pre:hover > .buttons {
   visibility: visible;

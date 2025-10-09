@@ -85,14 +85,15 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
 
         # If all commits to a file are chore commits, then there are no authors
         if raw_authors_git_output:
-          # Collect authors and sort by number of commits
-          sorted_authors, __skipped_authors = sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
-          skipped_authors.update(__skipped_authors)
-          author_names = [
-              author['displayName']
-              for author in sorted_authors
-          ]
-          attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
+            # Collect authors and sort by number of commits
+            sorted_authors, __skipped_authors = sorted_authors_from_raw_shortlog_lines(
+                raw_authors_git_output, contributors)
+            skipped_authors.update(__skipped_authors)
+            author_names = [
+                author['displayName']
+                for author in sorted_authors
+            ]
+            attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -225,10 +226,11 @@ if __name__ == '__main__':
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
     metadata_config['contributors_file'] = metadata_config.get(
-        'contributors_file', "CONTRIBUTORS.toml")
+        'contributors_file', 'CONTRIBUTORS.toml')
 
     # Load the contributors data
-    contributors_data = parse_contributors_file(metadata_config['contributors_file'])
+    contributors_data = parse_contributors_file(
+        metadata_config['contributors_file'])
 
     if bool(metadata_config.get('enable')):
         # Split the work between PROCESS_COUNT processes

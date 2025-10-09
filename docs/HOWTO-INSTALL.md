@@ -20,9 +20,9 @@ In order to contribute to the agda-unimath library you will additionally need:
 
 1. `git`
 2. `make`
-3. `python` version 3.8 or newer
-4. The python libraries `pre-commit`, `pybtex`, `requests`, `tomli`, and
-   `graphviz`. These can be installed by running
+3. `python` version 3.10 or newer
+4. The python libraries `pre-commit`, `pybtex`, `tomli`, and `graphviz`. These
+   can be installed by running
    ```shell
    python3 -m pip install -r scripts/requirements.txt
    ```
@@ -316,7 +316,7 @@ will need to install the `pre-commit` tool and the hooks' Python dependencies.
 The easiest way to accomplish this is by using the Python package manager `pip`.
 
 First, make sure that you have the latest version of Python and pip installed on
-your computer; the hooks require Python 3.8 or newer. Then run the following
+your computer; the hooks require Python 3.10 or newer. Then run the following
 command from the repository's main folder:
 
 ```shell
@@ -392,7 +392,6 @@ This issue can arise if the `pre-commit` executable gets placed in the
    `ls ~/.local/bin | grep pre-commit` to see if the executable is present.
 
 2. **Update your `PATH`**:
-
    - If you're using the bash terminal, open your `.bashrc` file with a text
      editor like `nano`:
 
@@ -409,7 +408,6 @@ This issue can arise if the `pre-commit` executable gets placed in the
    - Save the file and close the editor.
 
 3. **Reload your `.bashrc`**:
-
    - Run the following command to apply the changes:
 
      ```bash

@@ -44,8 +44,10 @@ def format_contributor(contributor):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generate contributors markdown content. Usage: generate_contributors.py <CONTRIBUTORS_FILE> <OUTPUT_FILE>')
-    parser.add_argument('contributors_file', help='Path to the CONTRIBUTORS.toml file.')
-    parser.add_argument('output_file', help='Output file path to write the generated contributors markdown content to.')
+    parser.add_argument('contributors_file',
+                        help='Path to the CONTRIBUTORS.toml file.')
+    parser.add_argument(
+        'output_file', help='Output file path to write the generated contributors markdown content to.')
     args = parser.parse_args()
 
     contributors_data = parse_contributors_file(args.contributors_file)
@@ -62,7 +64,8 @@ if __name__ == '__main__':
         git_log_output, contributors_data)
 
     if skipped_authors:
-        print_skipping_contributors_warning(skipped_authors, args.contributors_file)
+        print_skipping_contributors_warning(
+            skipped_authors, args.contributors_file)
 
     output = template.format(
         names='\n'.join((format_contributor(c) for c in sorted_authors)),
@@ -71,7 +74,8 @@ if __name__ == '__main__':
 
     out_path = args.output_file
     if os.path.isdir(out_path):
-        print(f'Error: {out_path!r} is a directory; please provide a path including the filename.', file=sys.stderr)
+        print(
+            f'Error: {out_path!r} is a directory; please provide a path including the filename.', file=sys.stderr)
         sys.exit(2)
     parent = os.path.dirname(out_path)
     if parent:
