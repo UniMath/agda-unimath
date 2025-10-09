@@ -29,15 +29,15 @@ it is a pair of maps
   X ----> A ----> X
 ```
 
-such that the composite `r ∘ a` is the identity. We refer to `a` as the
+such that the composite `p ∘ a` is the identity. We refer to `a` as the
 _inclusion_, or _section_, of `A` and `p` as the _retraction_, or _projection_.
 
 Retractive types are also known as **ex-spaces**, and form the basic objects in
 the study of parametrized homotopy theory {{#cite MS04}}. Observe that under
 [type duality](foundation.type-duality.md) retractive types correspond precisely
 to families of [pointed types](structured-types.pointed-types.md), hence the
-study of retractive types is the study of pointed types parametrized over the
-base type `X`.
+study of retractive types is the study of pointed types parametrized over a base
+type `X`.
 
 `X`-Retractive types live naturally in the [coslice](foundation.coslice.md) of
 `X`, which is why we use the preposition _under_, rather than _over_.
