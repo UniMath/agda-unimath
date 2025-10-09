@@ -38,7 +38,7 @@ such that the composite `r ∘ a` is the identity. We refer to `a` as the
 _inclusion_, or _section_, of `A` and `p` as the _retraction_, or _projection_.
 
 Retractive types are also known as **ex-spaces**, and form the basic objects in
-the study of parametrized homotopy theory. Observe that under
+the study of parametrized homotopy theory {{#cite MS04}}. Observe that under
 [type duality](foundation.type-duality.md) retractive types correspond precisely
 to families of [pointed types](structured-types.pointed-types.md), hence the
 study of retractive types is the study of pointed types parametrized over the
@@ -112,3 +112,7 @@ ev-Retractive-Type A {B} f x =
 - In [pointed type duality](structured-types.pointed-type-duality.md) we show
   that retractive types under `X` are equivalent to families of
   [pointed types](structured-types.pointed-types.md) over `X`.
+
+## References
+
+{{#bibliography}}
