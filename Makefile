@@ -15,8 +15,8 @@ MDBOOK_SRC := $(MDBOOK_DIR)/src
 # Base directory where Agda interface files are stored
 AGDA_BUILD := _build
 # Agda profiling directory
-AGDA_PROFILING_TEMP := temp
-AGDA_PROFILING_OUTPUT := $(AGDA_PROFILING_TEMP)/typecheck_output.txt
+TEMP_DIR := temp
+AGDA_PROFILING_OUTPUT := $(TEMP_DIR)/typecheck_output.txt
 # Docs
 DOCS_DIR := docs
 TABLES_DIR := $(DOCS_DIR)/tables
@@ -101,8 +101,8 @@ check: ./$(SOURCE_DIR)/everything.lagda.md
 
 .PHONY: check-profile
 check-profile: $(SOURCE_DIR)/everything.lagda.md
-	@# Remove cached data
-	@rm -Rf ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/
+	@# Remove cached build data
+	@rm -Rf ./$(AGDA_BUILD)/
 	${AGDA} ${AGDAPROFILEFLAGS} $<
 
 # Convert module path to directory path (replace dots with slashes)
@@ -124,7 +124,7 @@ profile-module:
 	@find ./$(AGDA_BUILD) -type f -path "*/agda/$(SOURCE_DIR)/$(MODULE_DIR).agdai" -exec rm -f {} \+ 2>/dev/null || \
 		echo "\033[0;31m$(AGDA_BUILD) directory does not exist, skipping deletion of interface files.\033[0m"
 	@# Ensure the temporary directory exists
-	@mkdir -p ./$(AGDA_PROFILING_TEMP)
+	@mkdir -p ./$(TEMP_DIR)
 	@# Profile typechecking the module and capture the output in the temp directory, also display on terminal
 	@echo "\033[0;32mProfiling typechecking of $(MODULE)\033[0m"
 	@$(AGDA) $(PROFILE_MODULE_AGDA_ARGS) $(SOURCE_DIR)/$(MODULE_DIR).lagda.md 2>&1 | tee ./$(AGDA_PROFILING_OUTPUT)
@@ -203,7 +203,7 @@ clean-website:
 
 .PHONY: clean
 clean: clean-website
-	@rm -Rf ./$(AGDA_BUILD)/ ./$(AGDA_PROFILING_TEMP)/ ./$(SOURCE_DIR)/everything.lagda.md ./$(SCRIPTS_DIR)/__pycache__
+	@rm -Rf ./$(AGDA_BUILD)/ ./$(TEMP_DIR)/ ./$(SOURCE_DIR)/everything.lagda.md ./$(SCRIPTS_DIR)/__pycache__
 
 .PHONY: pre-commit
 pre-commit:
