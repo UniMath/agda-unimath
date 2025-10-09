@@ -80,7 +80,9 @@ module _
           ( F)) ＝
       id-natural-transformation-Precategory C D F
     compute-unit-codensity-monad-Precategory =
-      is-section-map-inv-is-equiv (KR _) _
+      is-section-map-inv-is-equiv
+        ( KR (id-functor-Precategory D))
+        ( id-natural-transformation-Precategory C D F)
 
   mul-codensity-monad-Precategory :
     natural-transformation-Precategory D D
@@ -110,7 +112,10 @@ module _
           ( R)
           ( α))
     compute-mul-codensity-monad-Precategory =
-      is-section-map-inv-is-equiv (KR _) _
+      is-section-map-inv-is-equiv (KR RR)
+        ( pr2
+          ( square-right-extension-Precategory C D F
+            ( right-extension-right-kan-extension-Precategory C D D F F Rk)))
 ```
 
 ## Monad laws
@@ -157,9 +162,15 @@ module _
   precomp-left-unit-law-mul-codensity-monad-Precategory =
     ( inv
       ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
+        ( right-whisker-natural-transformation-Precategory D D C R RR
+          ( left-whisker-natural-transformation-Precategory D D D
+              ( id-functor-Precategory D)
+              ( R)
+              ( R)
+              ( unit-codensity-monad-Precategory C D F Rk))
+          ( F))
         ( _)
-        ( _)
-        ( _))) ∙
+        ( α))) ∙
     ( ap
       ( λ x →
         comp-natural-transformation-Precategory C D RF RRF F
@@ -173,9 +184,15 @@ module _
             ( F)))
       ( compute-mul-codensity-monad-Precategory C D F Rk)) ∙
     ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
+      ( right-whisker-natural-transformation-Precategory D D C R RR
+        ( left-whisker-natural-transformation-Precategory D D D
+            ( id-functor-Precategory D)
+            ( R)
+            ( R)
+            ( unit-codensity-monad-Precategory C D F Rk))
+        ( F))
       ( _)
-      ( _)
-      ( _)) ∙
+      ( α)) ∙
     ( ap
       ( comp-natural-transformation-Precategory C D RF RF F α)
       ( inv
@@ -220,7 +237,15 @@ module _
           ( unit-codensity-monad-Precategory C D F Rk)) ＝
       id-natural-transformation-Precategory D D R
     left-unit-law-mul-codensity-monad-Precategory =
-      ( inv (is-retraction-map-inv-is-equiv (KR R) _)) ∙
+      ( inv
+        ( is-retraction-map-inv-is-equiv (KR R)
+          ( comp-natural-transformation-Precategory D D R RR R
+            ( mul-codensity-monad-Precategory C D F Rk)
+            ( left-whisker-natural-transformation-Precategory D D D
+              ( id-functor-Precategory D)
+              ( R)
+              ( R)
+              ( unit-codensity-monad-Precategory C D F Rk))))) ∙
       ( ap
         ( map-inv-is-equiv (KR R))
         ( ( precomp-left-unit-law-mul-codensity-monad-Precategory) ∙
@@ -229,7 +254,9 @@ module _
               ( RF)
               ( F)
               ( α))))) ∙
-      ( is-retraction-map-inv-is-equiv (KR R) _)
+      ( is-retraction-map-inv-is-equiv
+        ( KR R)
+        ( id-natural-transformation-Precategory D D R))
 ```
 
 ### Right unit law
@@ -278,12 +305,20 @@ module _
   precomp-right-unit-law-mul-codensity-monad-Precategory =
     ( inv
       ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
-        ( _)
-        ( _)
-        ( _))) ∙
+        ( right-whisker-natural-transformation-Precategory D D C R RR
+          ( right-whisker-natural-transformation-Precategory D D D
+            ( id-functor-Precategory D)
+            ( R)
+            ( unit-codensity-monad-Precategory C D F Rk)
+            ( R))
+          ( F))
+        ( right-whisker-natural-transformation-Precategory D D C RR R
+          ( mul-codensity-monad-Precategory C D F Rk)
+          ( F))
+        ( α))) ∙
     ( ap
       ( λ x →
-        ( comp-natural-transformation-Precategory C D RF RRF F
+        comp-natural-transformation-Precategory C D RF RRF F
           ( x)
           ( right-whisker-natural-transformation-Precategory D D C R RR
             ( right-whisker-natural-transformation-Precategory D D D
@@ -291,27 +326,38 @@ module _
               ( R)
               ( unit-codensity-monad-Precategory C D F Rk)
               ( R))
-            ( F))))
+            ( F)))
       ( is-section-map-inv-is-equiv
-        ( KR (comp-functor-Precategory D D D R R)) _)) ∙
+        ( KR (comp-functor-Precategory D D D R R))
+        ( pr2 (square-right-extension-Precategory C D F (pr1 Rk))))) ∙
     ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
-      ( _)
-      ( _)
-      ( _)) ∙
+      ( right-whisker-natural-transformation-Precategory D D C R RR
+        ( right-whisker-natural-transformation-Precategory D D D
+          ( id-functor-Precategory D)
+          ( R)
+          ( unit-codensity-monad-Precategory C D F Rk)
+          ( R))
+        ( F))
+      ( left-whisker-natural-transformation-Precategory C D D RF F R α)
+      ( α)) ∙
     ( ap
       ( comp-natural-transformation-Precategory C D RF RF F α)
       ( eq-htpy-hom-family-natural-transformation-Precategory C D RF RF _ _
         ( λ x →
           ( naturality-natural-transformation-Precategory D D
-            (id-functor-Precategory D)
+            ( id-functor-Precategory D)
             ( R)
             ( unit-codensity-monad-Precategory C D F Rk)
-            ( _))))) ∙
+            ( pr1 α x))))) ∙
     ( inv
       ( associative-comp-natural-transformation-Precategory C D RF F RF F
-        ( _)
-        ( _)
-        ( _))) ∙
+        ( α)
+        ( right-whisker-natural-transformation-Precategory D D C
+          ( id-functor-Precategory D)
+          ( R)
+          ( unit-codensity-monad-Precategory C D F Rk)
+          ( F))
+        ( α))) ∙
     ( ap
       ( λ x →
         ( comp-natural-transformation-Precategory C D RF F F x α))
@@ -330,7 +376,14 @@ module _
           ( R)) ＝
       id-natural-transformation-Precategory D D R
     right-unit-law-mul-codensity-monad-Precategory =
-      ( inv (is-retraction-map-inv-is-equiv (KR R) _)) ∙
+      ( inv
+        ( is-retraction-map-inv-is-equiv
+          ( KR R)
+          ( comp-natural-transformation-Precategory D D R RR R
+            ( mul-codensity-monad-Precategory C D F Rk)
+            ( right-whisker-natural-transformation-Precategory D D D
+              ( id-functor-Precategory D) R
+              ( unit-codensity-monad-Precategory C D F Rk) R)))) ∙
       ( ap
         ( map-inv-is-equiv (KR R))
         ( ( precomp-right-unit-law-mul-codensity-monad-Precategory) ∙
@@ -339,7 +392,9 @@ module _
               ( RF)
               ( F)
               ( α))))) ∙
-      ( is-retraction-map-inv-is-equiv (KR R) _)
+      ( is-retraction-map-inv-is-equiv
+        ( KR R)
+        ( id-natural-transformation-Precategory D D R))
 ```
 
 ### Multiplication is associative
@@ -401,9 +456,17 @@ module _
         ( F))) ∙
     ( inv
       ( associative-comp-natural-transformation-Precategory C D RRRF RRF RF F
-        ( _)
-        ( _)
-        ( _))) ∙
+        ( right-whisker-natural-transformation-Precategory D D C
+          ( RRR)
+          ( RR)
+          ( left-whisker-natural-transformation-Precategory D D D RR R
+            ( R)
+            ( mul-codensity-monad-Precategory C D F Rk))
+          ( F))
+        ( right-whisker-natural-transformation-Precategory D D C RR R
+          ( mul-codensity-monad-Precategory C D F Rk)
+          ( F))
+        ( α))) ∙
     ( ap
       ( λ x →
         ( comp-natural-transformation-Precategory C D RRRF RRF F
@@ -421,9 +484,15 @@ module _
       ( RRF)
       ( RF)
       ( F)
+      ( right-whisker-natural-transformation-Precategory D D C
+        ( RRR)
+        ( RR)
+        ( left-whisker-natural-transformation-Precategory D D D RR R
+          ( R)
+          ( mul-codensity-monad-Precategory C D F Rk))
+        ( F))
       ( _)
-      ( _)
-      ( _)) ∙
+      ( α)) ∙
     ( ap
       ( comp-natural-transformation-Precategory C D RRRF RF F α)
       ( inv
