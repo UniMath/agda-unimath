@@ -49,6 +49,7 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
