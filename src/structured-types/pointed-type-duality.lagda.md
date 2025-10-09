@@ -134,7 +134,8 @@ module _
               ( retractive-type-Fam-Pointed-Type X A)
               ( x))
             ( A x)
-            ( fam-pointed-equiv-is-section-retractive-type-Fam-Pointed-Type A x))
+            ( fam-pointed-equiv-is-section-retractive-type-Fam-Pointed-Type A
+              ( x)))
 
   is-retraction-retractive-type-Fam-Pointed-Type :
     is-retraction
