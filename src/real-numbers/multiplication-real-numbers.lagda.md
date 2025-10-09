@@ -71,6 +71,9 @@ open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -441,9 +444,7 @@ module _
               ( rational-ℚ⁺ εx)
               ( one-ℚ)
               ( q-p<εx)
-              ( leq-left-min-ℚ⁺
-                ( one-ℚ⁺)
-                ( ε-max-min-x *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+              ( leq-left-min-ℚ⁺ _ _)
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -454,9 +455,7 @@ module _
               ( rational-ℚ⁺ εy)
               ( one-ℚ)
               ( s-r<εy)
-              ( leq-left-min-ℚ⁺
-                ( one-ℚ⁺)
-                ( ε-max-min-y *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+              ( leq-left-min-ℚ⁺ _ _)
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
