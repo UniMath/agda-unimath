@@ -104,6 +104,19 @@ module _
 ### Retractive types under `X` are equivalent to families of pointed types over `X`
 
 ```agda
+fam-pointed-equiv-is-section-retractive-type-Fam-Pointed-Type :
+  {l1 l2 : Level} {X : UU l1} (A : (x : X) → Pointed-Type l2) →
+  (x : X) →
+  fam-pointed-type-Retractive-Type X (retractive-type-Fam-Pointed-Type X A) x ≃∗
+  A x
+fam-pointed-equiv-is-section-retractive-type-Fam-Pointed-Type A x =
+  ( ( ( λ ((x' , a) , p) → tr (type-Pointed-Type ∘ A) p a) ,
+      ( is-equiv-is-invertible
+        ( λ a → (x , a) , refl)
+        ( refl-htpy)
+        ( λ where ((x' , a) , refl) → refl))) ,
+    ( refl))
+
 module _
   {l1 l2 : Level} {X : UU l1}
   where
@@ -121,12 +134,7 @@ module _
               ( retractive-type-Fam-Pointed-Type X A)
               ( x))
             ( A x)
-            ( ( ( λ ((x' , a) , p) → tr (type-Pointed-Type ∘ A) p a) ,
-                ( is-equiv-is-invertible
-                  ( λ a → (x , a) , refl)
-                  ( refl-htpy)
-                  ( λ where ((x' , a) , refl) → refl))) ,
-                ( refl)))
+            ( fam-pointed-equiv-is-section-retractive-type-Fam-Pointed-Type A x))
 
   is-retraction-retractive-type-Fam-Pointed-Type :
     is-retraction
