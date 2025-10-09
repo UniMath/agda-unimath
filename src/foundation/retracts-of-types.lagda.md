@@ -183,3 +183,4 @@ iff-retract' = inv-iff ∘ iff-retract
 ## See also
 
 - [Retracts of maps](foundation.retracts-of-maps.md)
+- [Retractive types](structured-types.retractive-types.md)
