@@ -178,13 +178,13 @@ module _
 
 ```agda
 abstract
-  is-section-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
-  is-section-right-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
+  is-section-right-div-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
+  is-section-right-div-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
 
-  is-section-left-mul-ℚ⁺ : (p q : ℚ⁺) → p *ℚ⁺ (inv-ℚ⁺ p *ℚ⁺ q) ＝ q
-  is-section-left-mul-ℚ⁺ = is-section-left-div-Group group-mul-ℚ⁺
+  is-section-left-div-ℚ⁺ : (p q : ℚ⁺) → p *ℚ⁺ (inv-ℚ⁺ p *ℚ⁺ q) ＝ q
+  is-section-left-div-ℚ⁺ = is-section-left-div-Group group-mul-ℚ⁺
 
-  is-retraction-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ p) *ℚ⁺ inv-ℚ⁺ p ＝ q
-  is-retraction-right-mul-ℚ⁺ p q =
+  is-retraction-right-div-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ p) *ℚ⁺ inv-ℚ⁺ p ＝ q
+  is-retraction-right-div-ℚ⁺ p q =
     is-retraction-right-div-Group group-mul-ℚ⁺ p q
 ```
