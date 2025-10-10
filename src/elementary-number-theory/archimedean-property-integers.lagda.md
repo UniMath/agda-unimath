@@ -59,7 +59,7 @@ abstract
           ( le-ℤ)
           ( ap pr1 (is-section-nat-nonnegative-ℤ (y , nonneg-y)))
           ( inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
-          ( le-natural-le-ℤ
+          ( preserves-le-int-ℕ
             ( nat-nonnegative-ℤ (y , nonneg-y))
             ( n *ℕ nx)
             ( ny<n*nx))

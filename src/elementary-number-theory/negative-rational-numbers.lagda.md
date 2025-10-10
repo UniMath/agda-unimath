@@ -150,6 +150,9 @@ opaque
 negative-rational-negative-ℤ : negative-ℤ → ℚ⁻
 negative-rational-negative-ℤ (x , x-is-neg) =
   rational-ℤ x , is-negative-rational-ℤ x x-is-neg
+
+neg-one-ℚ⁻ : ℚ⁻
+neg-one-ℚ⁻ = (neg-one-ℚ , is-negative-rational-ℤ _ _)
 ```
 
 ### The rational image of a negative integer fraction is negative
@@ -379,4 +382,23 @@ abstract
   is-negative-le-ℚ⁻ :
     (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
   is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
+```
+
+### There is no greatest negative rational number
+
+```agda
+opaque
+  mediant-zero-ℚ⁻ : ℚ⁻ → ℚ⁻
+  mediant-zero-ℚ⁻ (q , is-neg-q) =
+    ( mediant-ℚ q zero-ℚ ,
+      is-negative-le-zero-ℚ _
+        ( le-right-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)))
+
+  le-mediant-zero-ℚ⁻ :
+    (q : ℚ⁻) → le-ℚ (rational-ℚ⁻ q) (rational-ℚ⁻ (mediant-zero-ℚ⁻ q))
+  le-mediant-zero-ℚ⁻ (q , is-neg-q) =
+    le-left-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)
+
+rational-mediant-zero-ℚ⁻ : ℚ⁻ → ℚ
+rational-mediant-zero-ℚ⁻ q = rational-ℚ⁻ (mediant-zero-ℚ⁻ q)
 ```

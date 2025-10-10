@@ -245,6 +245,19 @@ abstract
       associative-mul-ℚ
 ```
 
+### Swapping laws for multiplication
+
+```agda
+abstract
+  left-swap-mul-ℚ : (x y z : ℚ) → x *ℚ (y *ℚ z) ＝ y *ℚ (x *ℚ z)
+  left-swap-mul-ℚ x y z =
+    equational-reasoning
+      x *ℚ (y *ℚ z)
+      ＝ (x *ℚ y) *ℚ z by inv (associative-mul-ℚ x y z)
+      ＝ (y *ℚ x) *ℚ z by ap-mul-ℚ (commutative-mul-ℚ x y) refl
+      ＝ y *ℚ (x *ℚ z) by associative-mul-ℚ y x z
+```
+
 ### Negative laws for multiplication on rational numbers
 
 ```agda
