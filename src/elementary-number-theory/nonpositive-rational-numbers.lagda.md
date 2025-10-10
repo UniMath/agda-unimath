@@ -12,14 +12,12 @@ module elementary-number-theory.nonpositive-rational-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.multiplication-nonnegative-rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -48,10 +46,10 @@ module _
   (q : ℚ)
   where
 
-  is-nonpositive-ℚ : UU lzero
-  is-nonpositive-ℚ = is-nonnegative-ℚ (neg-ℚ q)
+  opaque
+    is-nonpositive-ℚ : UU lzero
+    is-nonpositive-ℚ = is-nonnegative-ℚ (neg-ℚ q)
 
-  abstract
     is-prop-is-nonpositive-ℚ : is-prop is-nonpositive-ℚ
     is-prop-is-nonpositive-ℚ = is-prop-is-nonnegative-ℚ (neg-ℚ q)
 
@@ -98,26 +96,27 @@ abstract
 ### A rational number is nonpositive if and only if it is less than or equal to zero
 
 ```agda
-module _
-  (q : ℚ)
-  where
+opaque
+  unfolding is-nonpositive-ℚ
 
-  opaque
-    unfolding neg-ℚ
+  leq-zero-is-nonpositive-ℚ : {q : ℚ} → is-nonpositive-ℚ q → leq-ℚ q zero-ℚ
+  leq-zero-is-nonpositive-ℚ {q} is-nonpos-q =
+    binary-tr
+      ( leq-ℚ)
+      ( neg-neg-ℚ q)
+      ( neg-zero-ℚ)
+      ( neg-leq-ℚ (leq-zero-is-nonnegative-ℚ is-nonpos-q))
 
-    leq-zero-is-nonpositive-ℚ : is-nonpositive-ℚ q → leq-ℚ q zero-ℚ
-    leq-zero-is-nonpositive-ℚ is-nonpos-q =
-      tr
-        ( λ p → leq-ℚ p zero-ℚ)
-        ( neg-neg-ℚ q)
-        ( neg-leq-ℚ _ _ (leq-zero-is-nonnegative-ℚ (neg-ℚ q) is-nonpos-q))
+  is-nonpositive-leq-zero-ℚ : {q : ℚ} → leq-ℚ q zero-ℚ → is-nonpositive-ℚ q
+  is-nonpositive-leq-zero-ℚ {q} q≤0 =
+    is-nonnegative-leq-zero-ℚ
+      ( tr
+        ( λ y → leq-ℚ y (neg-ℚ q))
+        ( neg-zero-ℚ)
+        ( neg-leq-ℚ q≤0))
 
-    is-nonpositive-leq-zero-ℚ : leq-ℚ q zero-ℚ → is-nonpositive-ℚ q
-    is-nonpositive-leq-zero-ℚ q≤0 =
-      is-nonnegative-leq-zero-ℚ (neg-ℚ q) (neg-leq-ℚ _ _ q≤0)
-
-    is-nonpositive-iff-leq-zero-ℚ : is-nonpositive-ℚ q ↔ leq-ℚ q zero-ℚ
-    is-nonpositive-iff-leq-zero-ℚ =
-      ( leq-zero-is-nonpositive-ℚ ,
-        is-nonpositive-leq-zero-ℚ)
+is-nonpositive-iff-leq-zero-ℚ : (q : ℚ) → is-nonpositive-ℚ q ↔ leq-ℚ q zero-ℚ
+is-nonpositive-iff-leq-zero-ℚ q =
+  ( leq-zero-is-nonpositive-ℚ ,
+    is-nonpositive-leq-zero-ℚ)
 ```

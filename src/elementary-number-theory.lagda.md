@@ -93,6 +93,7 @@ open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers public
 open import elementary-number-theory.inequality-arithmetic-geometric-means-integers public
 open import elementary-number-theory.inequality-arithmetic-geometric-means-rational-numbers public
 open import elementary-number-theory.inequality-conatural-numbers public
@@ -137,6 +138,7 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
+open import elementary-number-theory.multiplication-negative-rational-numbers public
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers public
 open import elementary-number-theory.multiplication-nonpositive-rational-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
