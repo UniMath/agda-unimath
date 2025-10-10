@@ -149,6 +149,16 @@ opaque
   pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
 ```
 
+### The negation of zero is zero
+
+```agda
+opaque
+  unfolding neg-ℚ
+
+  neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
+  neg-zero-ℚ = refl
+```
+
 ### The mediant of two rationals
 
 ```agda
