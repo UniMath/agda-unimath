@@ -43,7 +43,7 @@ sim-ℂ a+bi c+di = type-Prop (sim-prop-ℂ a+bi c+di)
 
 ```agda
 abstract
-  refl-sim-ℂ : {l : Level} → (z : ℂ l) → sim-ℂ z z
+  refl-sim-ℂ : {l : Level} (z : ℂ l) → sim-ℂ z z
   refl-sim-ℂ (a , b) = (refl-sim-ℝ a , refl-sim-ℝ b)
 ```
 
@@ -52,7 +52,7 @@ abstract
 ```agda
 abstract
   symmetric-sim-ℂ :
-    {l1 l2 : Level} → {x : ℂ l1} {y : ℂ l2} → sim-ℂ x y → sim-ℂ y x
+    {l1 l2 : Level} {x : ℂ l1} {y : ℂ l2} → sim-ℂ x y → sim-ℂ y x
   symmetric-sim-ℂ (a~c , b~d) = (symmetric-sim-ℝ a~c , symmetric-sim-ℝ b~d)
 ```
 
@@ -61,7 +61,7 @@ abstract
 ```agda
 abstract
   transitive-sim-ℂ :
-    {l1 l2 l3 : Level} → (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
+    {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
     sim-ℂ y z → sim-ℂ x y → sim-ℂ x z
   transitive-sim-ℂ (a , b) (c , d) (e , f) (c~e , d~f) (a~c , b~d) =
     ( transitive-sim-ℝ a c e c~e a~c , transitive-sim-ℝ b d f d~f b~d)
@@ -71,6 +71,6 @@ abstract
 
 ```agda
 abstract
-  eq-sim-ℂ : {l : Level} → {x y : ℂ l} → sim-ℂ x y → x ＝ y
+  eq-sim-ℂ : {l : Level} {x y : ℂ l} → sim-ℂ x y → x ＝ y
   eq-sim-ℂ (a~c , b~d) = eq-ℂ (eq-sim-ℝ a~c) (eq-sim-ℝ b~d)
 ```

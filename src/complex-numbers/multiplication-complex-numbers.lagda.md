@@ -53,7 +53,7 @@ _*ℂ_ = mul-ℂ
 
 ```agda
 abstract
-  commutative-mul-ℂ : {l1 l2 : Level} → (x : ℂ l1) (y : ℂ l2) → x *ℂ y ＝ y *ℂ x
+  commutative-mul-ℂ : {l1 l2 : Level} (x : ℂ l1) (y : ℂ l2) → x *ℂ y ＝ y *ℂ x
   commutative-mul-ℂ (a , b) (c , d) =
     eq-ℂ
       ( ap-diff-ℝ (commutative-mul-ℝ a c) (commutative-mul-ℝ b d))
@@ -66,7 +66,7 @@ abstract
 ```agda
 abstract
   associative-mul-ℂ :
-    {l1 l2 l3 : Level} → (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
+    {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
     (x *ℂ y) *ℂ z ＝ x *ℂ (y *ℂ z)
   associative-mul-ℂ (a , b) (c , d) (e , f) =
     eq-ℂ
@@ -121,7 +121,7 @@ abstract
 
 ```agda
 abstract
-  left-unit-law-mul-ℂ : {l : Level} → (z : ℂ l) → mul-ℂ one-ℂ z ＝ z
+  left-unit-law-mul-ℂ : {l : Level} (z : ℂ l) → mul-ℂ one-ℂ z ＝ z
   left-unit-law-mul-ℂ (a , b) =
     eq-ℂ
       ( equational-reasoning
@@ -145,7 +145,7 @@ abstract
         ＝ b
           by right-unit-law-add-ℝ b)
 
-  right-unit-law-mul-ℂ : {l : Level} → (z : ℂ l) → mul-ℂ z one-ℂ ＝ z
+  right-unit-law-mul-ℂ : {l : Level} (z : ℂ l) → mul-ℂ z one-ℂ ＝ z
   right-unit-law-mul-ℂ z = commutative-mul-ℂ _ _ ∙ left-unit-law-mul-ℂ z
 ```
 
@@ -195,7 +195,7 @@ abstract
 
 ```agda
 abstract
-  left-zero-law-mul-ℂ : {l : Level} → (z : ℂ l) → sim-ℂ (zero-ℂ *ℂ z) zero-ℂ
+  left-zero-law-mul-ℂ : {l : Level} (z : ℂ l) → sim-ℂ (zero-ℂ *ℂ z) zero-ℂ
   left-zero-law-mul-ℂ (a , b) =
     ( ( similarity-reasoning-ℝ
           zero-ℝ *ℝ a -ℝ zero-ℝ *ℝ b
@@ -216,7 +216,7 @@ abstract
           ~ℝ zero-ℝ
             by sim-eq-ℝ (right-unit-law-add-ℝ zero-ℝ)))
 
-  right-zero-law-mul-ℂ : {l : Level} → (z : ℂ l) → sim-ℂ (z *ℂ zero-ℂ) zero-ℂ
+  right-zero-law-mul-ℂ : {l : Level} (z : ℂ l) → sim-ℂ (z *ℂ zero-ℂ) zero-ℂ
   right-zero-law-mul-ℂ z =
     tr
       ( λ w → sim-ℂ w zero-ℂ)

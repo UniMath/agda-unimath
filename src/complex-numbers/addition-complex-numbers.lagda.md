@@ -59,7 +59,7 @@ abstract
 ```agda
 abstract
   associative-add-ℂ :
-    {l1 l2 l3 : Level} → (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
+    {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
     (x +ℂ y) +ℂ z ＝ x +ℂ (y +ℂ z)
   associative-add-ℂ _ _ _ =
     eq-ℂ (associative-add-ℝ _ _ _) (associative-add-ℝ _ _ _)
@@ -69,11 +69,11 @@ abstract
 
 ```agda
 abstract
-  left-unit-law-add-ℂ : {l : Level} → (x : ℂ l) → zero-ℂ +ℂ x ＝ x
+  left-unit-law-add-ℂ : {l : Level} (x : ℂ l) → zero-ℂ +ℂ x ＝ x
   left-unit-law-add-ℂ (a , b) =
     eq-ℂ (left-unit-law-add-ℝ a) (left-unit-law-add-ℝ b)
 
-  right-unit-law-add-ℂ : {l : Level} → (x : ℂ l) → x +ℂ zero-ℂ ＝ x
+  right-unit-law-add-ℂ : {l : Level} (x : ℂ l) → x +ℂ zero-ℂ ＝ x
   right-unit-law-add-ℂ (a , b) =
     eq-ℂ (right-unit-law-add-ℝ a) (right-unit-law-add-ℝ b)
 ```
@@ -82,12 +82,12 @@ abstract
 
 ```agda
 abstract
-  left-inverse-law-add-ℂ : {l : Level} → (x : ℂ l) → sim-ℂ (neg-ℂ x +ℂ x) zero-ℂ
+  left-inverse-law-add-ℂ : {l : Level} (x : ℂ l) → sim-ℂ (neg-ℂ x +ℂ x) zero-ℂ
   left-inverse-law-add-ℂ (a , b) =
     ( left-inverse-law-add-ℝ a , left-inverse-law-add-ℝ b)
 
   right-inverse-law-add-ℂ :
-    {l : Level} → (x : ℂ l) → sim-ℂ (x +ℂ neg-ℂ x) zero-ℂ
+    {l : Level} (x : ℂ l) → sim-ℂ (x +ℂ neg-ℂ x) zero-ℂ
   right-inverse-law-add-ℂ (a , b) =
     ( right-inverse-law-add-ℝ a , right-inverse-law-add-ℝ b)
 ```

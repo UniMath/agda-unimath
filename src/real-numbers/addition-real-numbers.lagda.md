@@ -285,7 +285,7 @@ module _
 
 abstract
   preserves-sim-add-ℝ :
-    {l1 l2 l3 l4 : Level} → {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
     sim-ℝ x x' → sim-ℝ y y' → sim-ℝ (x +ℝ y) (x' +ℝ y')
   preserves-sim-add-ℝ x~x' y~y' =
     transitive-sim-ℝ _ _ _
@@ -525,7 +525,7 @@ abelian-group-add-ℝ-lzero =
 ```agda
 abstract
   unique-right-inverse-add-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
     sim-ℝ y (neg-ℝ x)
   unique-right-inverse-add-ℝ x y x+y~0 =
     similarity-reasoning-ℝ
@@ -544,7 +544,7 @@ abstract
         by cancel-right-diff-add-ℝ _ _
 
   unique-left-inverse-add-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
     sim-ℝ x (neg-ℝ y)
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x

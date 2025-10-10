@@ -1260,7 +1260,7 @@ abstract
 ```agda
 abstract
   left-distributive-mul-diff-ℝ :
-    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     x *ℝ (y -ℝ z) ＝ x *ℝ y -ℝ x *ℝ z
   left-distributive-mul-diff-ℝ x y z =
     equational-reasoning
@@ -1269,7 +1269,7 @@ abstract
       ＝ x *ℝ y -ℝ x *ℝ z by ap (x *ℝ y +ℝ_) (right-negative-law-mul-ℝ x z)
 
   right-distributive-mul-diff-ℝ :
-    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     (x -ℝ y) *ℝ z ＝ x *ℝ z -ℝ y *ℝ z
   right-distributive-mul-diff-ℝ x y z =
     equational-reasoning
