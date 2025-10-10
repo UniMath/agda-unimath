@@ -10,6 +10,7 @@ module real-numbers.rational-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -88,6 +89,13 @@ real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ lzero
 real-ℚ⁰⁺ q = real-ℚ (rational-ℚ⁰⁺ q)
 ```
 
+### The canonical map from `ℤ` to `ℝ lzero`
+
+```agda
+real-ℤ : ℤ → ℝ lzero
+real-ℤ x = real-ℚ (rational-ℤ x)
+```
+
 ### Zero as a real number
 
 ```agda
@@ -100,6 +108,13 @@ zero-ℝ = real-ℚ zero-ℚ
 ```agda
 one-ℝ : ℝ lzero
 one-ℝ = real-ℚ one-ℚ
+```
+
+### Negative one as a real number
+
+```agda
+neg-one-ℝ : ℝ lzero
+neg-one-ℝ = real-ℚ neg-one-ℚ
 ```
 
 ### The canonical map from `ℚ` to `ℝ l`

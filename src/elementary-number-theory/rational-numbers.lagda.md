@@ -149,6 +149,16 @@ opaque
   pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
 ```
 
+### The negation of zero is zero
+
+```agda
+opaque
+  unfolding neg-ℚ
+
+  neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
+  neg-zero-ℚ = refl
+```
+
 ### The mediant of two rationals
 
 ```agda
@@ -291,6 +301,15 @@ opaque
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
   preserves-neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
+```
+
+### The negation of one is negative one
+
+```agda
+abstract
+  eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
+  eq-neg-one-ℚ =
+    inv (preserves-neg-rational-ℤ one-ℤ)
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction

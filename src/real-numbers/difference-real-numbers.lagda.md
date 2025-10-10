@@ -90,3 +90,23 @@ module _
       ( ap ((a +ℝ b) +ℝ_) (distributive-neg-add-ℝ c d)) ∙
       ( interchange-law-add-add-ℝ _ _ _ _)
 ```
+
+### The right unit law of subtraction
+
+```agda
+abstract
+  right-unit-law-diff-ℝ : {l : Level} (x : ℝ l) → x -ℝ zero-ℝ ＝ x
+  right-unit-law-diff-ℝ x =
+    ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ x
+```
+
+### Subtraction preserves similarity on real numbers
+
+```agda
+abstract
+  preserves-sim-diff-ℝ :
+    {l1 l2 l3 l4 : Level} {a : ℝ l1} {a' : ℝ l2} {b : ℝ l3} {b' : ℝ l4} →
+    sim-ℝ a a' → sim-ℝ b b' → sim-ℝ (a -ℝ b) (a' -ℝ b')
+  preserves-sim-diff-ℝ a~a' b~b' =
+    preserves-sim-add-ℝ a~a' (preserves-sim-neg-ℝ b~b')
+```
