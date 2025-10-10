@@ -241,6 +241,19 @@ module _
   positive-diff-le-ℝ = (y -ℝ x , is-positive-diff-le-ℝ)
 ```
 
+### If `y - x` is positive, then `x < y`
+
+```agda
+abstract
+  le-is-positive-diff-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-positive-ℝ (y -ℝ x) → le-ℝ x y
+  le-is-positive-diff-ℝ {x = x} {y = y} 0<y-x =
+    tr
+      ( λ z → le-ℝ z y)
+      ( left-unit-law-add-ℝ x)
+      ( le-transpose-right-diff-ℝ zero-ℝ y x 0<y-x)
+```
+
 ### Positive rational numbers are positive real numbers
 
 ```agda

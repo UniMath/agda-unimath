@@ -16,6 +16,7 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import group-theory.groups
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
@@ -26,6 +27,7 @@ open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import real-numbers.difference-real-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
@@ -551,10 +553,11 @@ module _
                       ( refl) ∙
                       ap
                         ( rational-ℚ⁺)
-                        ( is-section-right-div-ℚ⁺
-                          ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
-                          ( εx₀ +ℚ⁺ εy₀) ∙
-                          εx₀+εy₀=ε))
+                        ( ( is-section-right-div-Group
+                            ( group-mul-ℚ⁺)
+                            ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
+                            ( εx₀ +ℚ⁺ εy₀)) ∙
+                          ( εx₀+εy₀=ε)))
         intro-exists
           ( a , b)
           ( tr

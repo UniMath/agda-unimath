@@ -226,31 +226,6 @@ abstract
     ( not-is-negative-is-nonnegative-ℚ , is-nonnegative-not-is-negative-ℚ)
 ```
 
-### Nonpositivity is negated positivity
-
-```agda
-abstract
-  not-is-positive-is-nonpositive-ℚ :
-    {q : ℚ} → is-nonpositive-ℚ q → ¬ (is-positive-ℚ q)
-  not-is-positive-is-nonpositive-ℚ {q} is-nonpos-q is-pos-q =
-    not-leq-le-ℚ zero-ℚ q
-      ( le-zero-is-positive-ℚ q is-pos-q)
-      ( leq-zero-is-nonpositive-ℚ q is-nonpos-q)
-
-  is-nonpositive-not-is-positive-ℚ :
-    {q : ℚ} → ¬ (is-positive-ℚ q) → is-nonpositive-ℚ q
-  is-nonpositive-not-is-positive-ℚ {q} ¬is-pos-q =
-    rec-coproduct
-      ( λ 0<q → ex-falso (¬is-pos-q (is-positive-le-zero-ℚ q 0<q)))
-      ( is-nonpositive-leq-zero-ℚ q)
-      ( decide-le-leq-ℚ zero-ℚ q)
-
-  is-nonpositive-iff-not-is-positive-ℚ :
-    (q : ℚ) → is-nonpositive-ℚ q ↔ (¬ (is-positive-ℚ q))
-  is-nonpositive-iff-not-is-positive-ℚ _ =
-    ( not-is-positive-is-nonpositive-ℚ , is-nonpositive-not-is-positive-ℚ)
-```
-
 ### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda

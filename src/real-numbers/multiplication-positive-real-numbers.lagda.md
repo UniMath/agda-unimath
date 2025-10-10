@@ -16,7 +16,9 @@ open import elementary-number-theory.multiplication-closed-intervals-rational-nu
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import real-numbers.strict-inequality-real-numbers
 
+open import foundation.transport-along-identifications
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -96,4 +98,19 @@ abstract
     {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → (x *ℝ⁺ y ＝ y *ℝ⁺ x)
   commutative-mul-ℝ⁺ x⁺@(x , _) y⁺@(y , _) =
     eq-ℝ⁺ (x⁺ *ℝ⁺ y⁺) (y⁺ *ℝ⁺ x⁺) (commutative-mul-ℝ x y)
+```
+
+### Multiplication by a positive real number preserves and reflects inequality
+
+```agda
+abstract
+  preserves-le-left-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → le-ℝ y z →
+    le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
+  preserves-le-left-mul-ℝ⁺ x⁺@(x , 0<x) y z y<z =
+    le-is-positive-diff-ℝ
+      ( tr
+        ( is-positive-ℝ)
+        {! left-distributive-mul-diff-ℝ  !}
+        ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y z y<z)))
 ```
