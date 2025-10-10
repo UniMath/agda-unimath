@@ -111,6 +111,10 @@ abstract
     le-is-positive-diff-ℝ
       ( tr
         ( is-positive-ℝ)
-        {! left-distributive-mul-diff-ℝ  !}
+        ( left-distributive-mul-diff-ℝ x z y)
         ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y z y<z)))
+
+  reflects-le-left-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → le-ℝ y z
 ```
