@@ -129,7 +129,7 @@ abstract
       ( le-zero-is-positive-ℚ q pos-q)
 ```
 
-#### A negative rational number is less than a positive rational number
+#### Negative rational numbers are less than all positive rational numbers
 
 ```agda
 abstract

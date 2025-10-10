@@ -121,7 +121,7 @@ abstract
       ( z<y)
 ```
 
-### If `z` is less or equal to than both `x` and `y`, it is less than or equal to their minimum
+### If `z` is less than or equal to both `x` and `y`, it is less than or equal to their minimum
 
 ```agda
 abstract
