@@ -15,7 +15,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.natural-numbers
--- open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 

@@ -23,7 +23,7 @@ open import foundation.dependent-pair-types
 ## Idea
 
 This page describes
-[inequalities](elementary-number-theory.inequalities-rational-numbers.md) and
+[inequalities](elementary-number-theory.inequality-rational-numbers.md) and
 [strict inequalities](elementary-number-theory.strict-inequality-rational-numbers.md)
 between [positive](elementary-number-theory.positive-rational-numbers.md),
 [negative](elementary-number-theory.negative-rational-numbers.md),
