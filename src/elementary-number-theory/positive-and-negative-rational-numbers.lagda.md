@@ -17,8 +17,11 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.universe-levels
 ```
 
@@ -124,6 +127,31 @@ abstract
       ( concatenate-leq-le-ℚ _ _ _ (leq-zero-is-nonnegative-ℚ p nonneg-p) p<q)
 ```
 
+### Nonpositivity is negated positivity
+
+```agda
+abstract
+  not-is-positive-is-nonpositive-ℚ :
+    {q : ℚ} → is-nonpositive-ℚ q → ¬ (is-positive-ℚ q)
+  not-is-positive-is-nonpositive-ℚ {q} is-nonpos-q is-pos-q =
+    not-leq-le-ℚ zero-ℚ q
+      ( le-zero-is-positive-ℚ q is-pos-q)
+      ( leq-zero-is-nonpositive-ℚ q is-nonpos-q)
+
+  is-nonpositive-not-is-positive-ℚ :
+    {q : ℚ} → ¬ (is-positive-ℚ q) → is-nonpositive-ℚ q
+  is-nonpositive-not-is-positive-ℚ {q} ¬is-pos-q =
+    rec-coproduct
+      ( λ 0<q → ex-falso (¬is-pos-q (is-positive-le-zero-ℚ q 0<q)))
+      ( is-nonpositive-leq-zero-ℚ q)
+      ( decide-le-leq-ℚ zero-ℚ q)
+
+  is-nonpositive-iff-not-is-positive-ℚ :
+    (q : ℚ) → is-nonpositive-ℚ q ↔ (¬ (is-positive-ℚ q))
+  is-nonpositive-iff-not-is-positive-ℚ _ =
+    ( not-is-positive-is-nonpositive-ℚ , is-nonpositive-not-is-positive-ℚ)
+```
+
 ### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda
@@ -136,4 +164,18 @@ abstract
       ( concatenate-le-leq-ℚ p q zero-ℚ
         ( p<q)
         ( leq-zero-is-nonpositive-ℚ q nonpos-q))
+```
+
+### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+
+```agda
+abstract
+  is-nonpositive-leq-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
+  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
+    is-nonpositive-leq-zero-ℚ
+      ( p)
+      ( transitive-leq-ℚ p q zero-ℚ
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q)
+        ( p≤q))
 ```
