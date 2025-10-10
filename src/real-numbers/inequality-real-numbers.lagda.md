@@ -16,6 +16,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -59,10 +60,19 @@ open import real-numbers.upper-dedekind-real-numbers
 
 The {{#concept "standard ordering" Disambiguation="real numbers" Agda=leq-ℝ}} on
 the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
-lower cut of one being a subset of the lower cut of the other. This is the
-definition used in {{#cite UF13}}, section 11.2.1.
+[lower cut](real-numbers.lower-dedekind-real-numbers.md) of one being a
+[subset](foundation-core.subtypes.md) of the lower cut of the other. I.e.,
+`x ≤ y` if `lower-cut x ⊆ lower-cut y `. This is the definition used in
+{{#cite UF13}}, section 11.2.1.
 
-## Definition
+Inequality of the real numbers is equivalently described by the _upper_ cut of
+one being a subset of the upper cut of the other, i.e., `x ≤ y` iff
+`upper-cut x ≤ upper-cut y`. This is easily seen by the fact that the complement
+of the lower cut determines the upper cut of a disjoint pair of rounded cuts.
+
+## Definitions
+
+### Inequality in terms of lower cuts
 
 ```agda
 module _
@@ -83,9 +93,7 @@ infix 30 _≤-ℝ_
 _≤-ℝ_ = leq-ℝ
 ```
 
-## Properties
-
-### Equivalence with inequality on upper cuts
+### Inequality in terms of upper cuts
 
 ```agda
 module _
@@ -101,11 +109,43 @@ module _
 
   leq-prop-ℝ' : Prop (l1 ⊔ l2)
   leq-prop-ℝ' = (leq-ℝ' , is-prop-leq-ℝ')
+```
+
+### Inequality in terms of both lower and upper cuts
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  leq-ℝ'' : UU (l1 ⊔ l2)
+  leq-ℝ'' =
+    leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y) ×
+    leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
+
+  is-prop-leq-ℝ'' : is-prop leq-ℝ''
+  is-prop-leq-ℝ'' =
+    is-prop-product
+      ( is-prop-leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
+      ( is-prop-leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y))
+
+  leq-prop-ℝ'' : Prop (l1 ⊔ l2)
+  leq-prop-ℝ'' = (leq-ℝ'' , is-prop-leq-ℝ'')
+```
+
+## Properties
+
+### Equivalence with inequality on upper cuts
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
 
   opaque
     unfolding leq-ℝ leq-ℝ'
 
-    leq'-leq-ℝ : leq-ℝ x y → leq-ℝ'
+    leq'-leq-ℝ : leq-ℝ x y → leq-ℝ' x y
     leq'-leq-ℝ lx⊆ly q y<q =
       elim-exists
         ( upper-cut-ℝ x q)
@@ -124,7 +164,7 @@ module _
                   ( p≮y))))
         ( subset-upper-complement-lower-cut-upper-cut-ℝ y q y<q)
 
-    leq-leq'-ℝ : leq-ℝ' → leq-ℝ x y
+    leq-leq'-ℝ : leq-ℝ' x y → leq-ℝ x y
     leq-leq'-ℝ uy⊆ux p p<x =
       elim-exists
         ( lower-cut-ℝ y p)
@@ -143,7 +183,7 @@ module _
                   ( x≮q))))
         ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p<x)
 
-    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
+    leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ' x y
     leq-iff-ℝ' = (leq'-leq-ℝ , leq-leq'-ℝ)
 ```
 
