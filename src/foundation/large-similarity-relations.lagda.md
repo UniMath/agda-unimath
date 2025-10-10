@@ -20,6 +20,7 @@ open import foundation.universe-levels
 ## Idea
 
 A {{#concept "large similarity relation" Agda=Large-Similarity-Relation}} is a
+[propositionally](foundation.propositions.md) valued
 [large equivalence relation](foundation.large-equivalence-relations.md) that is
 [antisymmetric](foundation.large-binary-relations.md), or equivalently, where
 similarity at the same [universe level](foundation.universe-levels.md) implies
