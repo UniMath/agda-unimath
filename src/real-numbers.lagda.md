@@ -20,6 +20,7 @@ open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
+open import real-numbers.inequality-positive-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
 open import real-numbers.infima-families-real-numbers public
@@ -38,7 +39,9 @@ open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numb
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
+open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
+open import real-numbers.multiplicative-inverses-positive-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
@@ -53,6 +56,7 @@ open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public
 open import real-numbers.squares-real-numbers public
+open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.suprema-families-real-numbers public

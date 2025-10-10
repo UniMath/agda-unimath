@@ -439,7 +439,9 @@ module _
               ( rational-ℚ⁺ εx)
               ( one-ℚ)
               ( q-p<εx)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -450,7 +452,9 @@ module _
               ( rational-ℚ⁺ εy)
               ( one-ℚ)
               ( s-r<εy)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
@@ -533,8 +537,12 @@ module _
                     ( _)
                     ( _)
                     ( preserves-leq-add-ℚ
-                      ( leq-right-min-ℚ⁺ _ _)
-                      ( leq-right-min-ℚ⁺ _ _))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
                   leq-eq-ℚ _ _
@@ -1136,35 +1144,83 @@ opaque
                     ( [a,b][c,d]<pq)))))
 ```
 
-### Swapping laws of multiplication
+### Multiplication on the real numbers preserves similarity
 
 ```agda
-abstract
-  left-swap-mul-ℝ :
-    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
-    x *ℝ (y *ℝ z) ＝ y *ℝ (x *ℝ z)
-  left-swap-mul-ℝ x y z =
-    equational-reasoning
-      x *ℝ (y *ℝ z)
-      ＝ (x *ℝ y) *ℝ z by inv (associative-mul-ℝ x y z)
-      ＝ (y *ℝ x) *ℝ z by ap-mul-ℝ (commutative-mul-ℝ x y) refl
-      ＝ y *ℝ (x *ℝ z) by associative-mul-ℝ y x z
+opaque
+  unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ
+
+  leq-sim-right-mul-ℝ :
+    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) → sim-ℝ x y →
+    leq-ℝ (x *ℝ z) (y *ℝ z)
+  leq-sim-right-mul-ℝ z x y (Lx⊆Ly , Ly⊆Lx) q q<xz =
+    let open do-syntax-trunc-Prop (lower-cut-mul-ℝ y z q)
+    in do
+      ( ( ([a,b]@((a , b) , _) , a<x , x<b) , c<z<d) , q<[a,b][c,d]) ← q<xz
+      intro-exists
+        ( ([a,b] , Lx⊆Ly a a<x , leq'-leq-ℝ y x Ly⊆Lx b x<b) , c<z<d)
+        ( q<[a,b][c,d])
+
+module _
+  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
+  where
+
+  abstract
+    leq-sim-right-mul-ℝ' : sim-ℝ x y → leq-ℝ (y *ℝ z) (x *ℝ z)
+    leq-sim-right-mul-ℝ' x~y =
+      leq-sim-right-mul-ℝ z y x (symmetric-sim-ℝ x~y)
+
+    preserves-sim-right-mul-ℝ : sim-ℝ x y → sim-ℝ (x *ℝ z) (y *ℝ z)
+    preserves-sim-right-mul-ℝ x~y =
+      sim-sim-leq-ℝ (leq-sim-right-mul-ℝ z x y x~y , leq-sim-right-mul-ℝ' x~y)
+
+    preserves-sim-left-mul-ℝ : sim-ℝ x y → sim-ℝ (z *ℝ x) (z *ℝ y)
+    preserves-sim-left-mul-ℝ x~y =
+      binary-tr
+        ( sim-ℝ)
+        ( commutative-mul-ℝ x z)
+        ( commutative-mul-ℝ y z)
+        ( preserves-sim-right-mul-ℝ x~y)
 ```
 
-### Interchange law of multiplication
+### Swapping laws for multiplication on real numbers
 
 ```agda
-abstract
-  interchange-law-mul-mul-ℝ :
-    {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4) →
-    (x *ℝ y) *ℝ (z *ℝ w) ＝ (x *ℝ z) *ℝ (y *ℝ w)
-  interchange-law-mul-mul-ℝ x y z w =
-    equational-reasoning
-      (x *ℝ y) *ℝ (z *ℝ w)
-      ＝ x *ℝ (y *ℝ (z *ℝ w))
-        by associative-mul-ℝ _ _ _
-      ＝ x *ℝ (z *ℝ (y *ℝ w))
-        by ap-mul-ℝ refl (left-swap-mul-ℝ y z w)
-      ＝ (x *ℝ z) *ℝ (y *ℝ w)
-        by inv (associative-mul-ℝ x z (y *ℝ w))
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    right-swap-mul-ℝ : (x *ℝ y) *ℝ z ＝ (x *ℝ z) *ℝ y
+    right-swap-mul-ℝ =
+      equational-reasoning
+        (x *ℝ y) *ℝ z
+        ＝ x *ℝ (y *ℝ z) by associative-mul-ℝ x y z
+        ＝ x *ℝ (z *ℝ y) by ap (x *ℝ_) (commutative-mul-ℝ y z)
+        ＝ (x *ℝ z) *ℝ y by inv (associative-mul-ℝ x z y)
+
+    left-swap-mul-ℝ : x *ℝ (y *ℝ z) ＝ y *ℝ (x *ℝ z)
+    left-swap-mul-ℝ =
+      equational-reasoning
+        x *ℝ (y *ℝ z)
+        ＝ (x *ℝ y) *ℝ z by inv (associative-mul-ℝ x y z)
+        ＝ (y *ℝ x) *ℝ z by ap (_*ℝ z) (commutative-mul-ℝ x y)
+        ＝ y *ℝ (x *ℝ z) by associative-mul-ℝ y x z
+```
+
+### Interchange laws for multiplication on real numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4)
+  where
+
+  abstract
+    interchange-law-mul-mul-ℝ : (x *ℝ y) *ℝ (z *ℝ w) ＝ (x *ℝ z) *ℝ (y *ℝ w)
+    interchange-law-mul-mul-ℝ =
+      equational-reasoning
+        (x *ℝ y) *ℝ (z *ℝ w)
+        ＝ x *ℝ (y *ℝ (z *ℝ w)) by associative-mul-ℝ _ _ _
+        ＝ x *ℝ (z *ℝ (y *ℝ w)) by ap (x *ℝ_) (left-swap-mul-ℝ y z w)
+        ＝ (x *ℝ z) *ℝ (y *ℝ w) by inv (associative-mul-ℝ x z (y *ℝ w))
 ```
