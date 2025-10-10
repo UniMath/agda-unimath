@@ -227,24 +227,6 @@ nonzero-ℚ⁻ : ℚ⁻ → nonzero-ℚ
 nonzero-ℚ⁻ (x , N) = (x , is-nonzero-is-negative-ℚ N)
 ```
 
-### The product of two negative rational numbers is positive
-
-```agda
-opaque
-  unfolding mul-ℚ
-  unfolding rational-fraction-ℤ
-
-  is-positive-mul-negative-ℚ :
-    {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)
-  is-positive-mul-negative-ℚ {x} {y} P Q =
-    is-positive-reduce-fraction-ℤ
-      ( is-positive-mul-negative-fraction-ℤ
-        { fraction-ℚ x}
-        { fraction-ℚ y}
-        ( is-negative-fraction-ℚ⁻ (x , P))
-        ( is-negative-fraction-ℚ⁻ (y , Q)))
-```
-
 ### Multiplication by a negative rational number reverses inequality
 
 ```agda
