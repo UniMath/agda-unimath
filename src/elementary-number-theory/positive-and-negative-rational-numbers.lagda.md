@@ -129,7 +129,7 @@ abstract
       ( le-zero-is-positive-ℚ q pos-q)
 ```
 
-#### A negative rational number is less than a positive rational number
+#### Negative rational numbers are less than all positive rational numbers
 
 ```agda
 abstract
@@ -145,7 +145,7 @@ abstract
   leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
 ```
 
-### If `p ≤ q` for positive `p`, then `q` is positive
+### If `p ≤ q` and `p` is positive, then `q` is positive
 
 ```agda
 abstract
