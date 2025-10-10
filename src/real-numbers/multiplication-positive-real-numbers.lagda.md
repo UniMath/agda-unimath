@@ -16,19 +16,23 @@ open import elementary-number-theory.multiplication-closed-intervals-rational-nu
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
-open import real-numbers.multiplicative-inverses-positive-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 
-open import foundation.transport-along-identifications
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -113,7 +117,7 @@ abstract
       ( tr
         ( is-positive-ℝ)
         ( left-distributive-mul-diff-ℝ x z y)
-        ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y z y<z)))
+        ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y<z)))
 
   reflects-le-left-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
@@ -123,10 +127,61 @@ abstract
       ( cancel-left-div-mul-ℝ⁺ x y)
       ( cancel-left-div-mul-ℝ⁺ x z)
       ( preserves-le-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy<xz)
+
+  preserves-le-right-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → le-ℝ y z →
+    le-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
+  preserves-le-right-mul-ℝ⁺ x y z y<z =
+    binary-tr
+      ( le-ℝ)
+      ( commutative-mul-ℝ _ _)
+      ( commutative-mul-ℝ _ _)
+      ( preserves-le-left-mul-ℝ⁺ x y z y<z)
+
+  reflects-le-right-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    le-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x) → le-ℝ y z
+  reflects-le-right-mul-ℝ⁺ x y z yx<zx =
+    reflects-le-left-mul-ℝ⁺ x y z
+      ( binary-tr
+        ( le-ℝ)
+        ( commutative-mul-ℝ _ _)
+        ( commutative-mul-ℝ _ _)
+        ( yx<zx))
 ```
 
 ### Multiplication by a positive real number preserves and reflects inequality
 
 ```agda
+abstract
+  preserves-leq-left-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
+  preserves-leq-left-mul-ℝ⁺ x⁺ = preserves-leq-left-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
 
+  preserves-leq-right-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
+  preserves-leq-right-mul-ℝ⁺ x⁺ =
+    preserves-leq-right-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
+
+  reflects-leq-left-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → leq-ℝ y z
+  reflects-leq-left-mul-ℝ⁺ x y z xy≤xz =
+    preserves-leq-sim-ℝ _ _ _ _
+      ( cancel-left-div-mul-ℝ⁺ x y)
+      ( cancel-left-div-mul-ℝ⁺ x z)
+      ( preserves-leq-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy≤xz)
+
+  reflects-leq-right-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x) → leq-ℝ y z
+  reflects-leq-right-mul-ℝ⁺ x y z yx≤zx =
+    reflects-leq-left-mul-ℝ⁺ x y z
+      ( binary-tr
+        ( leq-ℝ)
+        ( commutative-mul-ℝ _ _)
+        ( commutative-mul-ℝ _ _)
+        ( yx≤zx))
 ```

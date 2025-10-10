@@ -18,12 +18,16 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 ```
@@ -83,4 +87,35 @@ ap-mul-ℝ⁰⁺ :
   {l1 l2 : Level} → {x x' : ℝ⁰⁺ l1} → x ＝ x' → {y y' : ℝ⁰⁺ l2} → y ＝ y' →
   x *ℝ⁰⁺ y ＝ x' *ℝ⁰⁺ y'
 ap-mul-ℝ⁰⁺ = ap-binary mul-ℝ⁰⁺
+```
+
+## Properties
+
+### Multiplication by a nonnegative real number preserves inequality
+
+```agda
+abstract
+  preserves-leq-left-mul-ℝ⁰⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    leq-ℝ (real-ℝ⁰⁺ x *ℝ y) (real-ℝ⁰⁺ x *ℝ z)
+  preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺@(x , 0≤x) y z y≤z =
+    leq-is-nonnegative-diff-ℝ
+      ( x *ℝ y)
+      ( x *ℝ z)
+      ( tr
+        ( is-nonnegative-ℝ)
+        ( left-distributive-mul-diff-ℝ x z y)
+        ( is-nonnegative-mul-ℝ
+          ( 0≤x)
+          ( is-nonnegative-diff-leq-ℝ y≤z)))
+
+  preserves-leq-right-mul-ℝ⁰⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    leq-ℝ (y *ℝ real-ℝ⁰⁺ x) (z *ℝ real-ℝ⁰⁺ x)
+  preserves-leq-right-mul-ℝ⁰⁺ x y z y≤z =
+    binary-tr
+      ( leq-ℝ)
+      ( commutative-mul-ℝ _ _)
+      ( commutative-mul-ℝ _ _)
+      ( preserves-leq-left-mul-ℝ⁰⁺ x y z y≤z)
 ```

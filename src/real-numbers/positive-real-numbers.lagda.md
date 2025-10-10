@@ -221,29 +221,26 @@ abstract
       ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
 ```
 
-### The difference of a real number with a lesser real number is positive
+### `x < y` if and only if `y - x` is positive
 
 ```agda
 module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (H : le-ℝ x y)
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} (H : le-ℝ x y)
   where
 
-  is-positive-diff-le-ℝ : is-positive-ℝ (y -ℝ x)
-  is-positive-diff-le-ℝ =
-    preserves-le-left-sim-ℝ
-      ( y -ℝ x)
-      ( x -ℝ x)
-      ( zero-ℝ)
-      ( right-inverse-law-add-ℝ x)
-      ( preserves-le-right-add-ℝ (neg-ℝ x) x y H)
+  abstract
+    is-positive-diff-le-ℝ : is-positive-ℝ (y -ℝ x)
+    is-positive-diff-le-ℝ =
+      preserves-le-left-sim-ℝ
+        ( y -ℝ x)
+        ( x -ℝ x)
+        ( zero-ℝ)
+        ( right-inverse-law-add-ℝ x)
+        ( preserves-le-right-add-ℝ (neg-ℝ x) x y H)
 
   positive-diff-le-ℝ : ℝ⁺ (l1 ⊔ l2)
   positive-diff-le-ℝ = (y -ℝ x , is-positive-diff-le-ℝ)
-```
 
-### If `y - x` is positive, then `x < y`
-
-```agda
 abstract
   le-is-positive-diff-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-positive-ℝ (y -ℝ x) → le-ℝ x y
