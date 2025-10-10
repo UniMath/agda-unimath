@@ -165,7 +165,7 @@ abstract
     triangle-inequality-dist-ℕ m n k
 ```
 
-### `dist-ℕ x y` is a solution in `z` to `x + z ＝ y`
+### `dist-ℕ x y` is a solution in `z` to `x + z ＝ y` when `x ≤ y`
 
 ```agda
 abstract

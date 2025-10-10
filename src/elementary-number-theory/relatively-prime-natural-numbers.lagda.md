@@ -30,8 +30,8 @@ open import foundation.universe-levels
 
 Two [natural numbers](elementary-number-theory.natural-numbers.md) `x` and `y`
 are said to be
-{{#concept "relatively prime" WDID=Q104752 WD="coprime" Disambiguation="natural numbers" Agda=is-relatively-prime-ℕ}}
-if their
+{{#concept "relatively prime" WDID=Q104752 WD="coprime" Disambiguation="natural numbers" Agda=is-relatively-prime-ℕ}},
+or **coprime**, if their
 [greatest common divisor](elementary-number-theory.greatest-common-divisor-natural-numbers.md)
 is `1`.
 

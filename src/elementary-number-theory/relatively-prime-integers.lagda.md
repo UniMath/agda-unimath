@@ -22,8 +22,8 @@ open import foundation.universe-levels
 ## Idea
 
 Two [integers](elementary-number-theory.integers.md) `x` and `y` are said to be
-{{#concept "relatively prime" Disambiguation="integers" Agda=is-relatively-prime-ℤ}}
-if their
+{{#concept "relatively prime" Disambiguation="integers" WDID=Q104752 WD="coprime" Agda=is-relatively-prime-ℤ}},
+or **coprime**, if their
 [greatest common divisor](elementary-number-theory.greatest-common-divisor-integers.md)
 is `1`.
 

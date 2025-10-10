@@ -189,7 +189,7 @@ abstract
     leq-quotient-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
 ```
 
-### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`
+### If `x` is nonzero, `d | x`, and `d ≠ x`, then `d < x`
 
 ```agda
 abstract
