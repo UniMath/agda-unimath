@@ -47,6 +47,7 @@ open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
+open import real-numbers.difference-real-numbers
 ```
 
 </details>

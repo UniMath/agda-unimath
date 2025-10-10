@@ -16,6 +16,7 @@ open import elementary-number-theory.multiplication-closed-intervals-rational-nu
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 
 open import foundation.transport-along-identifications
@@ -100,7 +101,7 @@ abstract
     eq-ℝ⁺ (x⁺ *ℝ⁺ y⁺) (y⁺ *ℝ⁺ x⁺) (commutative-mul-ℝ x y)
 ```
 
-### Multiplication by a positive real number preserves and reflects inequality
+### Multiplication by a positive real number preserves and reflects strict inequality
 
 ```agda
 abstract
@@ -117,4 +118,15 @@ abstract
   reflects-le-left-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → le-ℝ y z
+  reflects-le-left-mul-ℝ⁺ x y z xy<xz =
+    preserves-le-sim-ℝ _ _ _ _
+      ( cancel-left-div-mul-ℝ⁺ x y)
+      ( cancel-left-div-mul-ℝ⁺ x z)
+      ( preserves-le-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy<xz)
+```
+
+### Multiplication by a positive real number preserves and reflects inequality
+
+```agda
+
 ```
