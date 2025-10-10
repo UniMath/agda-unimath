@@ -1135,3 +1135,36 @@ opaque
                         ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
                     ( [a,b][c,d]<pq)))))
 ```
+
+### Swapping laws of multiplication
+
+```agda
+abstract
+  left-swap-mul-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    x *ℝ (y *ℝ z) ＝ y *ℝ (x *ℝ z)
+  left-swap-mul-ℝ x y z =
+    equational-reasoning
+      x *ℝ (y *ℝ z)
+      ＝ (x *ℝ y) *ℝ z by inv (associative-mul-ℝ x y z)
+      ＝ (y *ℝ x) *ℝ z by ap-mul-ℝ (commutative-mul-ℝ x y) refl
+      ＝ y *ℝ (x *ℝ z) by associative-mul-ℝ y x z
+```
+
+### Interchange law of multiplication
+
+```agda
+abstract
+  interchange-law-mul-mul-ℝ :
+    {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) (w : ℝ l4) →
+    (x *ℝ y) *ℝ (z *ℝ w) ＝ (x *ℝ z) *ℝ (y *ℝ w)
+  interchange-law-mul-mul-ℝ x y z w =
+    equational-reasoning
+      (x *ℝ y) *ℝ (z *ℝ w)
+      ＝ x *ℝ (y *ℝ (z *ℝ w))
+        by associative-mul-ℝ _ _ _
+      ＝ x *ℝ (z *ℝ (y *ℝ w))
+        by ap-mul-ℝ refl (left-swap-mul-ℝ y z w)
+      ＝ (x *ℝ z) *ℝ (y *ℝ w)
+        by inv (associative-mul-ℝ x z (y *ℝ w))
+```

@@ -22,6 +22,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -130,4 +131,19 @@ opaque
 
 nonnegative-square-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
 nonnegative-square-ℝ x = (square-ℝ x , is-nonnegative-square-ℝ x)
+
+square-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → ℝ⁰⁺ l
+square-ℝ⁰⁺ x = nonnegative-square-ℝ (real-ℝ⁰⁺ x)
+```
+
+## Properties
+
+### Squaring distributes over multiplication
+
+```agda
+abstract
+  distributive-square-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    square-ℝ (x *ℝ y) ＝ square-ℝ x *ℝ square-ℝ y
+  distributive-square-mul-ℝ x y = interchange-law-mul-mul-ℝ x y x y
 ```
