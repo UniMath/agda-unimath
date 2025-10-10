@@ -22,6 +22,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -55,6 +56,12 @@ opaque
   inv-ℚ⁺ : ℚ⁺ → ℚ⁺
   pr1 (inv-ℚ⁺ (x , P)) = inv-is-positive-ℚ x P
   pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
+
+rational-inv-ℚ⁺ : ℚ⁺ → ℚ
+rational-inv-ℚ⁺ q = rational-ℚ⁺ (inv-ℚ⁺ q)
+
+is-positive-rational-inv-ℚ⁺ : (q : ℚ⁺) → is-positive-ℚ (rational-inv-ℚ⁺ q)
+is-positive-rational-inv-ℚ⁺ q = is-positive-rational-ℚ⁺ (inv-ℚ⁺ q)
 ```
 
 ### Inverse laws in the multiplicative group of positive rational numbers
@@ -112,6 +119,17 @@ opaque
       ( leq-ℤ)
       ( commutative-mul-ℤ _ _)
       ( commutative-mul-ℤ _ _)
+```
+
+### Inversion is an involution
+
+```agda
+abstract
+  inv-inv-ℚ⁺ : (q : ℚ⁺) → inv-ℚ⁺ (inv-ℚ⁺ q) ＝ q
+  inv-inv-ℚ⁺ = inv-inv-Group group-mul-ℚ⁺
+
+  rational-inv-inv-ℚ⁺ : (q : ℚ⁺) → rational-inv-ℚ⁺ (inv-ℚ⁺ q) ＝ rational-ℚ⁺ q
+  rational-inv-inv-ℚ⁺ q = ap rational-ℚ⁺ (inv-inv-ℚ⁺ q)
 ```
 
 ### Inversion reverses strict inequality on the positive rational numbers
@@ -175,6 +193,55 @@ module _
 
 ```agda
 abstract
-  is-section-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
-  is-section-right-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
+  is-section-right-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → (q *ℚ rational-inv-ℚ⁺ p) *ℚ rational-ℚ⁺ p ＝ q
+  is-section-right-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      (q *ℚ rational-inv-ℚ⁺ p⁺) *ℚ p
+      ＝ q *ℚ rational-ℚ⁺ (inv-ℚ⁺ p⁺ *ℚ⁺ p⁺)
+        by associative-mul-ℚ _ _ _
+      ＝ q *ℚ one-ℚ
+        by ap-mul-ℚ refl (ap rational-ℚ⁺ (left-inverse-law-mul-ℚ⁺ p⁺))
+      ＝ q
+        by right-unit-law-mul-ℚ q
+
+  is-retraction-left-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ (inv-ℚ⁺ p) *ℚ (rational-ℚ⁺ p *ℚ q) ＝ q
+  is-retraction-left-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      rational-ℚ⁺ (inv-ℚ⁺ p⁺) *ℚ (p *ℚ q)
+      ＝ rational-ℚ⁺ (inv-ℚ⁺ p⁺ *ℚ⁺ p⁺) *ℚ q
+        by inv (associative-mul-ℚ _ _ _)
+      ＝ rational-ℚ⁺ one-ℚ⁺ *ℚ q
+        by ap (λ r → rational-ℚ⁺ r *ℚ q) (left-inverse-law-mul-ℚ⁺ p⁺)
+      ＝ q
+        by left-unit-law-mul-ℚ q
+
+  is-retraction-right-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → (q *ℚ rational-ℚ⁺ p) *ℚ rational-ℚ⁺ (inv-ℚ⁺ p) ＝ q
+  is-retraction-right-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      (q *ℚ p) *ℚ rational-ℚ⁺ (inv-ℚ⁺ p⁺)
+      ＝ q *ℚ rational-ℚ⁺ (p⁺ *ℚ⁺ inv-ℚ⁺ p⁺)
+        by associative-mul-ℚ _ _ _
+      ＝ q *ℚ rational-ℚ⁺ one-ℚ⁺
+        by ap (λ r → q *ℚ rational-ℚ⁺ r) (right-inverse-law-mul-ℚ⁺ p⁺)
+      ＝ q
+        by right-unit-law-mul-ℚ q
+```
+
+### Multiplication by a positive rational number reflects strict inequality
+
+```agda
+abstract
+  reflects-le-left-mul-ℚ⁺ :
+    (p : ℚ⁺) (q r : ℚ) →
+    le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r) →
+    le-ℚ q r
+  reflects-le-left-mul-ℚ⁺ p⁺@(p , _) q r pq<pr =
+    binary-tr
+      ( le-ℚ)
+      ( is-retraction-left-div-ℚ⁺ p⁺ q)
+      ( is-retraction-left-div-ℚ⁺ p⁺ r)
+      ( preserves-le-left-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _ pq<pr)
 ```

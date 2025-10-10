@@ -150,6 +150,9 @@ opaque
 negative-rational-negative-ℤ : negative-ℤ → ℚ⁻
 negative-rational-negative-ℤ (x , x-is-neg) =
   rational-ℤ x , is-negative-rational-ℤ x x-is-neg
+
+neg-one-ℚ⁻ : ℚ⁻
+neg-one-ℚ⁻ = (neg-one-ℚ , is-negative-rational-ℤ _ _)
 ```
 
 ### The rational image of a negative integer fraction is negative
@@ -225,24 +228,6 @@ abstract
 
 nonzero-ℚ⁻ : ℚ⁻ → nonzero-ℚ
 nonzero-ℚ⁻ (x , N) = (x , is-nonzero-is-negative-ℚ N)
-```
-
-### The product of two negative rational numbers is positive
-
-```agda
-opaque
-  unfolding mul-ℚ
-  unfolding rational-fraction-ℤ
-
-  is-positive-mul-negative-ℚ :
-    {x y : ℚ} → is-negative-ℚ x → is-negative-ℚ y → is-positive-ℚ (x *ℚ y)
-  is-positive-mul-negative-ℚ {x} {y} P Q =
-    is-positive-reduce-fraction-ℤ
-      ( is-positive-mul-negative-fraction-ℤ
-        { fraction-ℚ x}
-        { fraction-ℚ y}
-        ( is-negative-fraction-ℚ⁻ (x , P))
-        ( is-negative-fraction-ℚ⁻ (y , Q)))
 ```
 
 ### Multiplication by a negative rational number reverses inequality
@@ -379,4 +364,23 @@ abstract
   is-negative-le-ℚ⁻ :
     (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
   is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
+```
+
+### There is no greatest negative rational number
+
+```agda
+opaque
+  mediant-zero-ℚ⁻ : ℚ⁻ → ℚ⁻
+  mediant-zero-ℚ⁻ (q , is-neg-q) =
+    ( mediant-ℚ q zero-ℚ ,
+      is-negative-le-zero-ℚ _
+        ( le-right-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)))
+
+  le-mediant-zero-ℚ⁻ :
+    (q : ℚ⁻) → le-ℚ (rational-ℚ⁻ q) (rational-ℚ⁻ (mediant-zero-ℚ⁻ q))
+  le-mediant-zero-ℚ⁻ (q , is-neg-q) =
+    le-left-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)
+
+rational-mediant-zero-ℚ⁻ : ℚ⁻ → ℚ
+rational-mediant-zero-ℚ⁻ q = rational-ℚ⁻ (mediant-zero-ℚ⁻ q)
 ```
