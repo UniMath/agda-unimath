@@ -18,8 +18,6 @@ open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
-open import foundation.automorphisms
-open import foundation.equivalences
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
@@ -29,6 +27,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -36,6 +35,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types

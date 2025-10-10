@@ -16,7 +16,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
-open import group-theory.groups
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
@@ -27,7 +26,6 @@ open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
-open import real-numbers.difference-real-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
@@ -60,6 +58,8 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import group-theory.groups
+
 open import logic.functoriality-existential-quantification
 
 open import order-theory.large-posets
@@ -68,6 +68,7 @@ open import order-theory.posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
