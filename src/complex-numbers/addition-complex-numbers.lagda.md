@@ -50,7 +50,7 @@ ap-add-ℂ = ap-binary add-ℂ
 
 ```agda
 abstract
-  commutative-add-ℂ : {l1 l2 : Level} → (x : ℂ l1) (y : ℂ l2) → x +ℂ y ＝ y +ℂ x
+  commutative-add-ℂ : {l1 l2 : Level} (x : ℂ l1) (y : ℂ l2) → x +ℂ y ＝ y +ℂ x
   commutative-add-ℂ _ _ = eq-ℂ (commutative-add-ℝ _ _) (commutative-add-ℝ _ _)
 ```
 
