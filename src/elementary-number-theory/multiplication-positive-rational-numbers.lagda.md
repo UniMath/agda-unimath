@@ -1,4 +1,4 @@
-# Multiplication of positive rational numbers
+# Multiplication by positive rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -59,7 +59,7 @@ itself positive.
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ mul-ℚ
 
   is-positive-mul-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
@@ -147,7 +147,7 @@ module _
   where
 
   opaque
-    unfolding mul-ℚ
+    unfolding is-positive-ℚ mul-ℚ
 
     inv-is-positive-ℚ : ℚ
     pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
@@ -215,8 +215,7 @@ module _
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ le-ℚ-Prop mul-ℚ
 
   preserves-le-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
@@ -256,8 +255,7 @@ opaque
 
 ```agda
 opaque
-  unfolding leq-ℚ-Prop
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ leq-ℚ-Prop mul-ℚ
 
   preserves-leq-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →

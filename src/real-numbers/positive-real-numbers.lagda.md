@@ -106,7 +106,7 @@ module _
     exists-ℚ⁺-in-lower-cut-is-positive-ℝ =
       elim-exists
         ( ∃ ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)))
-        ( λ p (0<p , p<x) → intro-exists (p , is-positive-le-zero-ℚ p 0<p) p<x)
+        ( λ p (0<p , p<x) → intro-exists (p , is-positive-le-zero-ℚ 0<p) p<x)
 
     is-positive-exists-ℚ⁺-in-lower-cut-ℝ :
       exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p)) →
@@ -115,7 +115,7 @@ module _
       elim-exists
         ( is-positive-prop-ℝ x)
         ( λ (p , pos-p) p<x →
-          intro-exists p (le-zero-is-positive-ℚ p pos-p , p<x))
+          intro-exists p (le-zero-is-positive-ℚ pos-p , p<x))
 
   is-positive-iff-exists-ℚ⁺-in-lower-cut-ℝ :
     is-positive-ℝ x ↔ exists ℚ⁺ (λ p → lower-cut-ℝ x (rational-ℚ⁺ p))
@@ -187,13 +187,13 @@ module _
   positive-diff-le-ℝ = (y -ℝ x , is-positive-diff-le-ℝ)
 ```
 
-### Positive rational numbers are positive real numbers
+### The canonical embedding of rational numbers preserves positivity
 
 ```agda
-is-positive-real-positive-ℚ :
+preserves-is-positive-real-ℚ :
   (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
-is-positive-real-positive-ℚ q pos-q =
-  preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ q pos-q)
+preserves-is-positive-real-ℚ q pos-q =
+  preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ pos-q)
 
 opaque
   unfolding le-ℝ real-ℚ
@@ -204,8 +204,8 @@ opaque
     elim-exists
       ( is-positive-prop-ℚ q)
       ( λ r (0<r , r<q) →
-        is-positive-le-zero-ℚ q (transitive-le-ℚ zero-ℚ r q r<q 0<r))
+        is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ r q r<q 0<r))
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
-positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , is-positive-real-positive-ℚ q pos-q)
+positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ q pos-q)
 ```

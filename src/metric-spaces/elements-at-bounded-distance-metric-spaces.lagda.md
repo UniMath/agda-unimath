@@ -259,7 +259,7 @@ module _
           ( ε)
           ( concatenate-leq-le-ℚ q zero-ℚ ε
             ( q≤0)
-            ( le-zero-is-positive-ℚ ε is-pos-ε))
+            ( le-zero-is-positive-ℚ is-pos-ε))
           ( ε<q)
 
     leq-zero-upper-real-dist-Metric-Space :
@@ -267,11 +267,11 @@ module _
     leq-zero-upper-real-dist-Metric-Space q =
       rec-trunc-Prop
         ( le-ℚ-Prop zero-ℚ q)
-        ( λ ((ε , Nεxy) , ε<q) →
+        ( λ (((ε , is-pos-ε) , Nεxy) , ε<q) →
           transitive-le-ℚ
             ( zero-ℚ)
-            ( rational-ℚ⁺ ε)
+            ( ε)
             ( q)
             ( ε<q)
-            ( le-zero-is-positive-ℚ (pr1 ε) (pr2 ε)))
+            ( le-zero-is-positive-ℚ is-pos-ε))
 ```

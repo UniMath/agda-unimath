@@ -1,4 +1,4 @@
-# Multiplication of positive, negative, and nonnegative rational numbers
+# Multiplication by positive, negative, and nonnegative rational numbers
 
 ```agda
 module elementary-number-theory.multiplication-positive-and-negative-rational-numbers where
@@ -25,8 +25,9 @@ open import foundation.transport-along-identifications
 ## Idea
 
 When we have information about the sign of the factors of a
-[rational product](elementary-number-theory.multiplication-rational-numbers.md),
-we can deduce the sign of their product too.
+[rational](elementary-number-theory.rational-numbers.md)
+[product](elementary-number-theory.multiplication-rational-numbers.md), we can
+deduce the sign of their product too.
 
 ## Lemmas
 
@@ -34,7 +35,7 @@ we can deduce the sign of their product too.
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ mul-ℚ
 
   is-negative-mul-positive-negative-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-negative-ℚ y → is-negative-ℚ (x *ℚ y)

@@ -9,10 +9,12 @@ module elementary-number-theory.multiplication-interior-closed-intervals-rationa
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-nonpositive-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
@@ -333,7 +335,7 @@ abstract
               inv-tr
                 ( is-nonnegative-ℚ)
                 ( min'=a'c')
-                ( is-nonnegative-mul-ℚ a' c' is-nonneg-a' is-nonneg-c')
+                ( is-nonnegative-mul-ℚ is-nonneg-a' is-nonneg-c')
           in
             rec-coproduct
               ( λ is-neg-a →
@@ -567,7 +569,7 @@ abstract
           ( neg-ℚ)
           ( right-negative-law-lower-bound-mul-closed-interval-ℚ [a,b] [c,d])) ∙
         ( neg-neg-ℚ _))
-      ( neg-le-ℚ _ _
+      ( neg-le-ℚ
         ( le-lower-bound-mul-interior-closed-interval-ℚ
           ( [a,b])
           ( neg-closed-interval-ℚ [c,d])

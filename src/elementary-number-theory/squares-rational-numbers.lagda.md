@@ -11,7 +11,9 @@ module elementary-number-theory.squares-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-nonpositive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
@@ -52,15 +54,14 @@ square-root-ℚ _ (root , _) = root
 ### Squares in ℚ are nonnegative
 
 ```agda
-is-nonnegative-square-ℚ : (a : ℚ) → is-nonnegative-ℚ (square-ℚ a)
-is-nonnegative-square-ℚ a =
-  rec-coproduct
-    ( λ H →
-      is-nonnegative-is-positive-ℚ
-        ( a *ℚ a)
-        ( is-positive-mul-negative-ℚ {a} {a} H H))
-    ( λ H → is-nonnegative-mul-ℚ a a H H)
-    ( decide-is-negative-is-nonnegative-ℚ a)
+abstract
+  is-nonnegative-square-ℚ : (q : ℚ) → is-nonnegative-ℚ (square-ℚ q)
+  is-nonnegative-square-ℚ q =
+    rec-coproduct
+      ( λ is-nonpos-q →
+        is-nonnegative-mul-nonpositive-ℚ is-nonpos-q is-nonpos-q)
+      ( λ is-nonneg-q → is-nonnegative-mul-ℚ is-nonneg-q is-nonneg-q)
+      ( is-nonpositive-or-nonnegative-ℚ q)
 ```
 
 ### The square of the negation of `x` is the square of `x`

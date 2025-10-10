@@ -13,7 +13,6 @@ open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -22,7 +21,6 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -57,7 +55,7 @@ abstract
         asymmetric-le-ℚ
           ( zero-ℚ)
           ( y)
-          ( le-zero-is-positive-ℚ y pos-y)
+          ( le-zero-is-positive-ℚ pos-y)
           ( tr
             ( le-ℚ y)
             ( equational-reasoning

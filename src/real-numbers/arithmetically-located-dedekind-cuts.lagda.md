@@ -381,7 +381,7 @@ abstract
                     neg-ℚ a
                     ≤ neg-ℚ (b -ℚ ε)
                       by
-                        neg-leq-ℚ _ _
+                        neg-leq-ℚ
                           ( leq-transpose-right-add-ℚ _ _ _ (leq-le-ℚ b<a+ε))
                     ≤ ε -ℚ b
                       by leq-eq-ℚ _ _ (distributive-neg-diff-ℚ _ _)
@@ -390,7 +390,7 @@ abstract
                         preserves-leq-right-add-ℚ ε
                           ( neg-ℚ b)
                           ( neg-ℚ p)
-                          ( neg-leq-ℚ _ _
+                          ( neg-leq-ℚ
                             ( leq-lower-upper-cut-ℝ x p b p<x x<b))
                     ≤ rational-abs-ℚ (ε -ℚ p)
                       by leq-abs-ℚ _
@@ -425,7 +425,7 @@ abstract
                 ( chain-of-inequalities
                     neg-ℚ b
                     ≤ neg-ℚ a
-                      by neg-leq-ℚ _ _ (leq-lower-upper-cut-ℝ x a b a<x x<b)
+                      by neg-leq-ℚ (leq-lower-upper-cut-ℝ x a b a<x x<b)
                     ≤ rational-abs-ℚ a
                       by neg-leq-abs-ℚ a
                     ≤ rational-abs-ℚ a +ℚ ε

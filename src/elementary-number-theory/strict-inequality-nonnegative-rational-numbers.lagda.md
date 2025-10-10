@@ -37,13 +37,3 @@ le-prop-ℚ⁰⁺ p q = le-ℚ-Prop (rational-ℚ⁰⁺ p) (rational-ℚ⁰⁺ q
 le-ℚ⁰⁺ : (p q : ℚ⁰⁺) → UU lzero
 le-ℚ⁰⁺ p q = type-Prop (le-prop-ℚ⁰⁺ p q)
 ```
-
-## Properties
-
-### Zero is less than positive rational numbers as nonnegative rational numbers
-
-```agda
-abstract
-  le-zero-nonnegative-ℚ⁰⁺ : (q : ℚ⁺) → le-ℚ⁰⁺ zero-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
-  le-zero-nonnegative-ℚ⁰⁺ (q , pos-q) = le-zero-is-positive-ℚ q pos-q
-```

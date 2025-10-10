@@ -154,8 +154,7 @@ abstract
 
 ```agda
 opaque
-  unfolding add-ℚ
-  unfolding neg-ℚ
+  unfolding add-ℚ neg-ℚ
 
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
@@ -199,7 +198,7 @@ opaque
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
-    ( inv (preserves-neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
+    ( inv (neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ (x +fraction-ℤ y))
       ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))

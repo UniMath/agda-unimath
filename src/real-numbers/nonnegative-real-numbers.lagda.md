@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
@@ -100,7 +101,7 @@ eq-ℝ⁰⁺ _ _ = eq-type-subtype is-nonnegative-prop-ℝ
 abstract
   is-nonnegative-real-ℚ⁰⁺ : (q : ℚ⁰⁺) → is-nonnegative-ℝ (real-ℚ⁰⁺ q)
   is-nonnegative-real-ℚ⁰⁺ (q , nonneg-q) =
-    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q)
+    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ nonneg-q)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ q = (real-ℚ⁰⁺ q , is-nonnegative-real-ℚ⁰⁺ q)
@@ -270,7 +271,6 @@ module _
         intro-exists
           ( q ,
             is-positive-le-zero-ℚ
-              ( q)
               ( reflects-le-real-ℚ zero-ℚ q
                 ( concatenate-leq-le-ℝ
                   ( zero-ℝ)
@@ -443,7 +443,6 @@ module _
       le-ℝ (real-ℝ⁰⁺ x) (real-ℚ q) → is-positive-ℚ q
     is-positive-le-nonnegative-real-ℚ x<q =
       is-positive-le-zero-ℚ
-        ( q)
         ( reflects-le-real-ℚ _ _
           ( concatenate-leq-le-ℝ _ _ _ (is-nonnegative-real-ℝ⁰⁺ x) x<q))
 ```

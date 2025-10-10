@@ -751,7 +751,7 @@ module _
               ( right-inverse-law-add-ℝ x)
               ( preserves-le-right-add-ℝ (neg-ℝ x) x y x<y))
         intro-exists
-          ( q , is-positive-le-zero-ℚ q (reflects-le-real-ℚ _ _ 0<q))
+          ( q , is-positive-le-zero-ℚ (reflects-le-real-ℚ _ _ 0<q))
           ( le-transpose-right-diff-ℝ' _ _ _ q<y-x)
 ```
 

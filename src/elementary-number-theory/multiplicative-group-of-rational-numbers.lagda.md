@@ -138,7 +138,9 @@ module _
       ( H)
       ( inv K)
 
-  abstract
+  opaque
+    unfolding is-negative-ℚ
+
     is-invertible-element-ring-is-nonzero-ℚ :
       is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
     is-invertible-element-ring-is-nonzero-ℚ H =

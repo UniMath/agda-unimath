@@ -57,7 +57,7 @@ positive.
 
 ```agda
 opaque
-  unfolding add-ℚ
+  unfolding add-ℚ is-positive-ℚ
 
   is-positive-add-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
@@ -147,9 +147,7 @@ module _
         ( rational-ℚ⁺ x)
         ( zero-ℚ)
         ( rational-ℚ⁺ y)
-        ( le-zero-is-positive-ℚ
-          ( rational-ℚ⁺ y)
-          ( is-positive-rational-ℚ⁺ y)))
+        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ y)))
 
   le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
   le-right-add-ℚ⁺ =
@@ -160,9 +158,7 @@ module _
         ( rational-ℚ⁺ y)
         ( zero-ℚ)
         ( rational-ℚ⁺ x)
-        ( le-zero-is-positive-ℚ
-          ( rational-ℚ⁺ x)
-          ( is-positive-rational-ℚ⁺ x)))
+        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ x)))
 ```
 
 ### The positive difference of strictly inequal positive rational numbers
@@ -268,9 +264,7 @@ abstract
         ( x)
         ( zero-ℚ)
         ( rational-ℚ⁺ d)
-        ( le-zero-is-positive-ℚ
-          ( rational-ℚ⁺ d)
-          ( is-positive-rational-ℚ⁺ d)))
+        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ d)))
 
   le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
   le-right-add-rational-ℚ⁺ x d =

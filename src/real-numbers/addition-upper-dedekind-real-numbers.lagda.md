@@ -140,7 +140,7 @@ module _
                   ( q -ℚ px)
                   ( neg-ℚ (q -ℚ p))
                   ( neg-ℚ ε)
-                  ( neg-le-ℚ ε (q -ℚ p) (le-mediant-zero-ℚ⁺ q-p⁺))))
+                  ( neg-le-ℚ (le-mediant-zero-ℚ⁺ q-p⁺))))
               ( y<py) ,
             inv ( is-identity-right-conjugation-add-ℚ (px +ℚ ε) q))
       where open do-syntax-trunc-Prop (cut-add-upper-ℝ q)
@@ -224,7 +224,7 @@ module _
                   ( is-in-cut-add-rational-ℚ⁺-upper-ℝ
                     ( x)
                     ( p)
-                    ( q , is-positive-le-zero-ℚ q 0<q)
+                    ( q , is-positive-le-zero-ℚ 0<q)
                     ( x<p)))) ,
           ( λ q x<q →
             elim-exists

@@ -42,7 +42,9 @@ of `ℚ` is that for any two
 an `n : ℕ` such that `y` is less than `n` as a rational number times `x`.
 
 ```agda
-abstract
+opaque
+  unfolding is-positive-ℚ
+
   bound-archimedean-property-ℚ :
     (x y : ℚ) →
     is-positive-ℚ x →
@@ -90,5 +92,5 @@ abstract
   exists-greater-natural-ℚ q =
     map-tot-exists
       ( λ _ → tr (le-ℚ q) (right-unit-law-mul-ℚ _))
-      ( archimedean-property-ℚ one-ℚ q _)
+      ( archimedean-property-ℚ one-ℚ q (is-positive-rational-ℚ⁺ one-ℚ⁺))
 ```
