@@ -44,7 +44,7 @@ record
   type-Large-Equivalence-Relation =
     type-Large-Preorder large-preorder-Large-Equivalence-Relation
 
-  prop-Large-Equivalence-Relation :
+  sim-prop-Large-Equivalence-Relation :
     {l1 l2 : Level} →
     type-Large-Equivalence-Relation l1 → type-Large-Equivalence-Relation l2 →
     Prop (β l1 l2)

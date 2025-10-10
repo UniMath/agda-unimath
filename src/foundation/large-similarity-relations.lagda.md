@@ -46,7 +46,7 @@ record
     type-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
-  prop-Large-Similarity-Relation :
+  sim-prop-Large-Similarity-Relation :
     Large-Relation-Prop β type-Large-Similarity-Relation
   prop-Large-Similarity-Relation =
     prop-Large-Equivalence-Relation
