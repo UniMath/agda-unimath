@@ -93,6 +93,22 @@ record Large-Monoid (α : Level → Level) (β : Level → Level → Level) : UU
       {l1 : Level} (l2 : Level) (x : type-Large-Monoid l1) →
       sim-Large-Monoid x (raise-Large-Monoid l2 x)
 
+  raise-raise-Large-Monoid :
+    {l1 l2 l3 : Level} → (x : type-Large-Monoid l1) →
+    raise-Large-Monoid l2 (raise-Large-Monoid l3 x) ＝
+    raise-Large-Monoid (l2 ⊔ l3) x
+  raise-raise-Large-Monoid {l1} {l2} {l3} x =
+    inv
+      ( eq-sim-Large-Monoid _ _
+        ( transitive-sim-Large-Monoid
+          ( raise-Large-Monoid (l2 ⊔ l3) x)
+          ( x)
+          ( raise-Large-Monoid l2 (raise-Large-Monoid l3 x))
+          ( transitive-sim-Large-Monoid _ _ _
+            ( sim-raise-Large-Monoid _ _)
+            ( sim-raise-Large-Monoid _ _))
+          ( symmetric-sim-Large-Monoid _ _ (sim-raise-Large-Monoid _ _))))
+
   mul-Large-Monoid :
     {l1 l2 : Level} → type-Large-Monoid l1 → type-Large-Monoid l2 →
     type-Large-Monoid (l1 ⊔ l2)
@@ -189,6 +205,53 @@ module _
       preserves-sim-mul-Large-Monoid M x x (refl-sim-Large-Monoid M x)
 ```
 
+### Floating raised universe levels out of multiplication
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (M : Large-Monoid α β)
+  where
+
+  abstract
+    raise-right-mul-Large-Monoid :
+      {l1 l2 l3 : Level} →
+      (x : type-Large-Monoid M l1) (y : type-Large-Monoid M l2) →
+      mul-Large-Monoid M x (raise-Large-Monoid M l3 y) ＝
+      raise-Large-Monoid M l3 (mul-Large-Monoid M x y)
+    raise-right-mul-Large-Monoid {l3 = l3} x y =
+      let open similarity-reasoning-Large-Monoid M
+      in
+        eq-sim-Large-Monoid M _ _
+          ( similarity-reasoning
+            mul-Large-Monoid M x (raise-Large-Monoid M l3 y)
+            ~ mul-Large-Monoid M x y
+              by
+                preserves-sim-right-mul-Large-Monoid M x _ _
+                  ( symmetric-sim-Large-Monoid M _ _
+                    ( sim-raise-Large-Monoid M _ _))
+            ~ raise-Large-Monoid M l3 (mul-Large-Monoid M x y)
+              by sim-raise-Large-Monoid M _ _)
+
+    raise-left-mul-Large-Monoid :
+      {l1 l2 l3 : Level} →
+      (x : type-Large-Monoid M l1) (y : type-Large-Monoid M l2) →
+      mul-Large-Monoid M (raise-Large-Monoid M l3 x) y ＝
+      raise-Large-Monoid M l3 (mul-Large-Monoid M x y)
+    raise-left-mul-Large-Monoid {l3 = l3} x y =
+      let open similarity-reasoning-Large-Monoid M
+      in
+        eq-sim-Large-Monoid M _ _
+          ( similarity-reasoning
+            mul-Large-Monoid M (raise-Large-Monoid M l3 x) y
+            ~ mul-Large-Monoid M x y
+              by
+                preserves-sim-left-mul-Large-Monoid M y _ _
+                  ( symmetric-sim-Large-Monoid M _ _
+                    ( sim-raise-Large-Monoid M _ _))
+            ~ raise-Large-Monoid M l3 (mul-Large-Monoid M x y)
+              by sim-raise-Large-Monoid M _ _)
+```
+
 ### Raised unit laws
 
 ```agda
@@ -222,6 +285,26 @@ module _
         ( preserves-sim-right-mul-Large-Monoid M x _ _
           ( symmetric-sim-Large-Monoid M _ _
             ( sim-raise-Large-Monoid M _ (unit-Large-Monoid M))))
+
+    raise-left-unit-law-Large-Monoid' :
+      {l1 l2 : Level} (x : type-Large-Monoid M l1) →
+      mul-Large-Monoid M (raise-unit-Large-Monoid M l2) x ＝
+      raise-Large-Monoid M l2 x
+    raise-left-unit-law-Large-Monoid' x =
+      eq-sim-Large-Monoid M _ _
+        ( transitive-sim-Large-Monoid M _ _ _
+          ( sim-raise-Large-Monoid M _ x)
+          ( raise-left-unit-law-Large-Monoid x))
+
+    raise-right-unit-law-Large-Monoid' :
+      {l1 l2 : Level} (x : type-Large-Monoid M l1) →
+      mul-Large-Monoid M x (raise-unit-Large-Monoid M l2) ＝
+      raise-Large-Monoid M l2 x
+    raise-right-unit-law-Large-Monoid' x =
+      eq-sim-Large-Monoid M _ _
+        ( transitive-sim-Large-Monoid M _ _ _
+          ( sim-raise-Large-Monoid M _ x)
+          ( raise-right-unit-law-Large-Monoid x))
 ```
 
 ### Small monoids from large monoids
