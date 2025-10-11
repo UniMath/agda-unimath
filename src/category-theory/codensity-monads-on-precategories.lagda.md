@@ -91,9 +91,8 @@ module _
   mul-codensity-monad-Precategory =
     map-inv-is-equiv
       ( KR (comp-functor-Precategory D D D R R))
-      ( pr2
-        ( square-right-extension-Precategory C D F
-          ( right-extension-right-kan-extension-Precategory C D D F F Rk)))
+      ( natural-transformation-square-right-extension-Precategory C D F
+        ( right-extension-right-kan-extension-Precategory C D D F F Rk))
 
   abstract
     compute-mul-codensity-monad-Precategory :
@@ -113,9 +112,8 @@ module _
           ( α))
     compute-mul-codensity-monad-Precategory =
       is-section-map-inv-is-equiv (KR RR)
-        ( pr2
-          ( square-right-extension-Precategory C D F
-            ( right-extension-right-kan-extension-Precategory C D D F F Rk)))
+        ( natural-transformation-square-right-extension-Precategory C D F
+            ( right-extension-right-kan-extension-Precategory C D D F F Rk))
 ```
 
 ## Monad laws
@@ -329,10 +327,9 @@ module _
             ( F)))
       ( is-section-map-inv-is-equiv
         ( KR (comp-functor-Precategory D D D R R))
-        ( pr2
-          ( square-right-extension-Precategory C D F
-            ( right-extension-right-kan-extension-Precategory C D D F F
-              ( Rk)))))) ∙
+        ( natural-transformation-square-right-extension-Precategory C D F
+          ( right-extension-right-kan-extension-Precategory C D D F F
+            ( Rk))))) ∙
     ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
       ( right-whisker-natural-transformation-Precategory D D C R RR
         ( right-whisker-natural-transformation-Precategory D D D
