@@ -81,3 +81,44 @@ record
 
 open Large-Similarity-Relation public
 ```
+
+## Properties
+
+### Similarity reasoning
+
+Large similarity relations can be equationally reasoned in the following way:
+
+```text
+let
+  open similarity-reasoning-Large-Similarity-Relation S
+in
+  similarity-reasoning
+    x ~ y by sim-1
+      ~ z by sim-2
+```
+
+```agda
+module
+  similarity-reasoning-Large-Similarity-Relation
+    {α : Level → Level} {β : Level → Level → Level} {X : (l : Level) → UU (α l)}
+    (S : Large-Similarity-Relation β X)
+  where
+
+  infixl 1 similarity-reasoning_
+  infixl 0 step-similarity-reasoning
+
+  abstract
+    similarity-reasoning_ :
+      {l : Level} → (x : X l) → sim-Large-Similarity-Relation S x x
+    similarity-reasoning x = refl-sim-Large-Similarity-Relation S x
+
+    step-similarity-reasoning :
+      {l1 l2 : Level} {x : X l1} {y : X l2} →
+      sim-Large-Similarity-Relation S x y →
+      {l3 : Level} → (u : X l3) → sim-Large-Similarity-Relation S y u →
+      sim-Large-Similarity-Relation S x u
+    step-similarity-reasoning {x = x} {y = y} p u q =
+      transitive-sim-Large-Similarity-Relation S x y u q p
+
+  syntax step-similarity-reasoning p u q = p ~ u by q
+```
