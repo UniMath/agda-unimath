@@ -31,7 +31,8 @@ similarity at the same [universe level](foundation.universe-levels.md) implies
 ```agda
 record
   Large-Similarity-Relation
-    (α : Level → Level) (β : Level → Level → Level) : UUω
+    {α : Level → Level} (β : Level → Level → Level)
+    (X : (l : Level) → UU (α l)) : UUω
   where
 
   constructor
@@ -39,57 +40,41 @@ record
 
   field
     large-equivalence-relation-Large-Similarity-Relation :
-      Large-Equivalence-Relation α β
+      Large-Equivalence-Relation β X
 
-  type-Large-Similarity-Relation : (l : Level) → UU (α l)
-  type-Large-Similarity-Relation =
-    type-Large-Equivalence-Relation
-      ( large-equivalence-relation-Large-Similarity-Relation)
-
-  sim-prop-Large-Similarity-Relation :
-    Large-Relation-Prop β type-Large-Similarity-Relation
+  sim-prop-Large-Similarity-Relation : Large-Relation-Prop β X
   sim-prop-Large-Similarity-Relation =
     sim-prop-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
-  sim-Large-Similarity-Relation :
-    Large-Relation β type-Large-Similarity-Relation
+  sim-Large-Similarity-Relation : Large-Relation β X
   sim-Large-Similarity-Relation x y =
     type-Prop (sim-prop-Large-Similarity-Relation x y)
 
   field
     eq-sim-Large-Similarity-Relation :
-      {l : Level} → (x y : type-Large-Similarity-Relation l) →
-      sim-Large-Similarity-Relation x y →
-      x ＝ y
+      {l : Level} → (x y : X l) → sim-Large-Similarity-Relation x y → x ＝ y
 
   sim-eq-Large-Similarity-Relation :
-    {l : Level} {x y : type-Large-Similarity-Relation l} →
-    x ＝ y → sim-Large-Similarity-Relation x y
+    {l : Level} {x y : X l} → x ＝ y → sim-Large-Similarity-Relation x y
   sim-eq-Large-Similarity-Relation =
     sim-eq-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
   refl-sim-Large-Similarity-Relation :
-    is-reflexive-Large-Relation
-      ( type-Large-Similarity-Relation)
-      ( sim-Large-Similarity-Relation)
+    is-reflexive-Large-Relation-Prop X sim-prop-Large-Similarity-Relation
   refl-sim-Large-Similarity-Relation =
     refl-sim-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
   symmetric-sim-Large-Similarity-Relation :
-    is-symmetric-Large-Relation
-      ( type-Large-Similarity-Relation)
-      ( sim-Large-Similarity-Relation)
+    is-symmetric-Large-Relation-Prop X sim-prop-Large-Similarity-Relation
   symmetric-sim-Large-Similarity-Relation =
     symmetric-sim-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
   transitive-sim-Large-Similarity-Relation :
-    is-transitive-Large-Relation
-      ( type-Large-Similarity-Relation)
-      ( sim-Large-Similarity-Relation)
+    is-transitive-Large-Relation-Prop X sim-prop-Large-Similarity-Relation
   transitive-sim-Large-Similarity-Relation =
     transitive-sim-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
