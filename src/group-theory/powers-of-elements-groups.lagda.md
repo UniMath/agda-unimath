@@ -25,10 +25,12 @@ open import group-theory.powers-of-elements-monoids
 
 ## Idea
 
-The power operation on a group is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times. We define this operation
-where `n` ranges over the natural numbers, as well as where `n` ranges over the
-integers.
+The
+{{#concept "power operation" Disambiguation="raising an element of a group to a natural number power" Agda=power-Group}}
+on a [group](group-theory.groups.md) is the map `n x ↦ xⁿ`, which is defined by
+[iteratively](foundation.iterating-functions.md) multiplying `x` with itself `n`
+times. This file describes the case where `n` is a
+[natural number](elementary-number-theory.natural-numbers.md).
 
 ## Definition
 
@@ -190,3 +192,7 @@ module _
       ( monoid-Group H)
       ( hom-monoid-hom-Group G H f)
 ```
+
+## See also
+
+- [Integer powers of elements in groups](group-theory.integer-powers-of-elements-groups.md)
