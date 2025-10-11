@@ -178,14 +178,20 @@ module _
   where
 
   large-equivalence-relation-sim-Large-Poset :
-    Large-Equivalence-Relation α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+    Large-Equivalence-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Poset P)
   large-equivalence-relation-sim-Large-Poset =
     make-Large-Equivalence-Relation
-      ( large-preorder-sim-Large-Preorder (large-preorder-Large-Poset P))
+      ( sim-prop-Large-Poset P)
+      ( refl-sim-Large-Poset P)
       ( symmetric-sim-Large-Poset P)
+      ( transitive-sim-Large-Poset P)
 
   large-similarity-relation-sim-Large-Poset :
-    Large-Similarity-Relation α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+    Large-Similarity-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Poset P)
   large-similarity-relation-sim-Large-Poset =
     make-Large-Similarity-Relation
       ( large-equivalence-relation-sim-Large-Poset)

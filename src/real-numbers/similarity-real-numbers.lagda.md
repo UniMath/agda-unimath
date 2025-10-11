@@ -154,11 +154,15 @@ large-preorder-sim-ℝ : Large-Preorder lsuc _⊔_
 large-preorder-sim-ℝ =
   make-Large-Preorder ℝ sim-prop-ℝ refl-sim-ℝ transitive-sim-ℝ
 
-large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation lsuc _⊔_
+large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation _⊔_ ℝ
 large-equivalence-relation-sim-ℝ =
-  make-Large-Equivalence-Relation large-preorder-sim-ℝ (λ x y → symmetric-sim-ℝ)
+  make-Large-Equivalence-Relation
+    ( sim-prop-ℝ)
+    ( refl-sim-ℝ)
+    ( λ _ _ → symmetric-sim-ℝ)
+    ( transitive-sim-ℝ)
 
-large-similarity-relation-sim-ℝ : Large-Similarity-Relation lsuc _⊔_
+large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
 large-similarity-relation-sim-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
