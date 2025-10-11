@@ -8,38 +8,14 @@ module foundation.similarity-subtypes where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.large-locale-of-propositions
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.sets
-
-open import order-theory.bottom-elements-large-posets
-open import order-theory.bottom-elements-posets
-open import order-theory.dependent-products-large-meet-semilattices
-open import order-theory.dependent-products-large-posets
-open import order-theory.dependent-products-large-preorders
-open import order-theory.dependent-products-large-suplattices
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.meet-semilattices
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.posets
-open import order-theory.preorders
 open import order-theory.similarity-of-elements-large-posets
-open import order-theory.suplattices
-open import order-theory.top-elements-large-posets
-open import order-theory.top-elements-posets
 ```
 
 </details>
