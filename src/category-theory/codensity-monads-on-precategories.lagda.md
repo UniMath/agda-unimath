@@ -67,7 +67,7 @@ module _
   unit-codensity-monad-Precategory =
     map-inv-is-equiv
       ( KR (id-functor-Precategory D))
-      ( pr2 (id-right-extension-Precategory C D F))
+      ( id-natural-transformation-Precategory C D F)
 
   abstract
     compute-unit-codensity-monad-Precategory :
@@ -329,7 +329,10 @@ module _
             ( F)))
       ( is-section-map-inv-is-equiv
         ( KR (comp-functor-Precategory D D D R R))
-        ( pr2 (square-right-extension-Precategory C D F (pr1 Rk))))) ∙
+        ( pr2
+          ( square-right-extension-Precategory C D F
+            ( right-extension-right-kan-extension-Precategory C D D F F
+              ( Rk)))))) ∙
     ( associative-comp-natural-transformation-Precategory C D RF RRF RF F
       ( right-whisker-natural-transformation-Precategory D D C R RR
         ( right-whisker-natural-transformation-Precategory D D D
@@ -348,7 +351,7 @@ module _
             ( id-functor-Precategory D)
             ( R)
             ( unit-codensity-monad-Precategory C D F Rk)
-            ( pr1 α x))))) ∙
+            ( hom-family-natural-transformation-Precategory C D RF F α x))))) ∙
     ( inv
       ( associative-comp-natural-transformation-Precategory C D RF F RF F
         ( α)

@@ -326,22 +326,25 @@ module _
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
   left-whisker-natural-transformation-Precategory F G H α =
-    ( λ x → (pr1 (pr2 H)) ((pr1 α) x)) ,
-    ( λ {x} {y} → λ f →
+    ( λ x →
+      hom-functor-Precategory D E H (hom-family-natural-transformation-Precategory C D F G α x)) ,
+    ( λ {x} {y} f →
       inv
         ( preserves-comp-functor-Precategory
           ( D)
           ( E)
           ( H)
-          ( (pr1 (pr2 G)) f)
-          ( (pr1 α) x)) ∙
-      ( ap (pr1 (pr2 H)) ((pr2 α) f)) ∙
+          ( hom-functor-Precategory C D G f)
+          ( hom-family-natural-transformation-Precategory C D F G α x)) ∙
+      ( ap
+        ( hom-functor-Precategory D E H)
+        ( naturality-natural-transformation-Precategory C D F G α f)) ∙
       ( preserves-comp-functor-Precategory
         ( D)
         ( E)
         ( H)
-        ( (pr1 α) y)
-        ( (pr1 (pr2 F)) f)))
+        ( hom-family-natural-transformation-Precategory C D F G α y)
+        ( hom-functor-Precategory C D F f)))
 
   preserves-comp-left-whisker-natural-transformation-Precategory :
     (F G H : functor-Precategory C D)
