@@ -24,7 +24,7 @@ open import order-theory.similarity-of-elements-large-posets
 
 two [subtypes](foundation-core.subtypes.md) `P` and `Q` are said to be
 {{#concept "similar" Disambiguation="subtypes" Agda=sim-subtype}} if they
-contain the same elements. In other words, if `x ∈ P ⇔ x ∈ Q`.
+contain the same elements. In other words, if `P ⊆ Q` and `Q ⊆ P`.
 
 ## Definition
 
@@ -55,49 +55,42 @@ module _
 #### Similarity is reflexive
 
 ```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  refl-sim-subtype : {l2 : Level} → (P : subtype l2 A) → sim-subtype P P
-  refl-sim-subtype = refl-sim-Large-Poset (powerset-Large-Poset A)
+refl-sim-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A) → sim-subtype P P
+refl-sim-subtype {A = A} = refl-sim-Large-Poset (powerset-Large-Poset A)
 ```
 
 #### Similarity is symmetric
 
 ```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  symmetric-sim-subtype :
-    {l2 l3 : Level} →
-    (P : subtype l2 A) (Q : subtype l3 A) →
-    sim-subtype P Q → sim-subtype Q P
-  symmetric-sim-subtype = symmetric-sim-Large-Poset (powerset-Large-Poset A)
+symmetric-sim-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  (P : subtype l2 A) (Q : subtype l3 A) →
+  sim-subtype P Q → sim-subtype Q P
+symmetric-sim-subtype {A = A} =
+  symmetric-sim-Large-Poset (powerset-Large-Poset A)
 ```
 
 #### Similarity is transitive
 
 ```agda
-  transitive-sim-subtype :
-    {l2 l3 l4 : Level} →
-    (P : subtype l2 A) →
-    (Q : subtype l3 A) →
-    (R : subtype l4 A) →
-    sim-subtype Q R →
-    sim-subtype P Q →
-    sim-subtype P R
-  transitive-sim-subtype = transitive-sim-Large-Poset (powerset-Large-Poset A)
+transitive-sim-subtype :
+  {l1 l2 l3 l4 : Level} {A : UU l1} →
+  (P : subtype l2 A) →
+  (Q : subtype l3 A) →
+  (R : subtype l4 A) →
+  sim-subtype Q R →
+  sim-subtype P Q →
+  sim-subtype P R
+transitive-sim-subtype {A = A} =
+  transitive-sim-Large-Poset (powerset-Large-Poset A)
 ```
 
 #### Similarity is antisymmetric at the same universe level
 
 ```agda
-  eq-sim-subtype :
-    {l2 : Level} →
-    (P Q : subtype l2 A) →
-    sim-subtype P Q →
-    P ＝ Q
-  eq-sim-subtype = eq-sim-Large-Poset (powerset-Large-Poset A)
+eq-sim-subtype :
+  {l1 l2 : Level} {A : UU l1} (P Q : subtype l2 A) →
+  sim-subtype P Q → P ＝ Q
+eq-sim-subtype {A = A} = eq-sim-Large-Poset (powerset-Large-Poset A)
 ```
