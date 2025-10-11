@@ -10,6 +10,7 @@ module group-theory.large-monoids where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.sets
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.propositions
@@ -42,6 +43,9 @@ record Large-Monoid (α : Level → Level) (β : Level → Level → Level) : UU
 
   type-Large-Monoid : (l : Level) → UU (α l)
   type-Large-Monoid = type-Large-Semigroup large-semigroup-Large-Monoid
+
+  set-Large-Monoid : (l : Level) → Set (α l)
+  set-Large-Monoid = set-Large-Semigroup large-semigroup-Large-Monoid
 
   field
     large-similarity-relation-Large-Monoid :
@@ -113,10 +117,10 @@ record Large-Monoid (α : Level → Level) (β : Level → Level → Level) : UU
 
   field
     unit-Large-Monoid : type-Large-Monoid lzero
-    left-unit-law-Large-Monoid :
+    left-unit-law-mul-Large-Monoid :
       {l : Level} (x : type-Large-Monoid l) →
       mul-Large-Monoid unit-Large-Monoid x ＝ x
-    right-unit-law-Large-Monoid :
+    right-unit-law-mul-Large-Monoid :
       {l : Level} (x : type-Large-Monoid l) →
       mul-Large-Monoid x unit-Large-Monoid ＝ x
 
@@ -201,7 +205,7 @@ module _
         ( mul-Large-Monoid M (raise-unit-Large-Monoid M _) x)
         ( mul-Large-Monoid M (unit-Large-Monoid M) x)
         ( x)
-        ( sim-eq-Large-Monoid M (left-unit-law-Large-Monoid M x))
+        ( sim-eq-Large-Monoid M (left-unit-law-mul-Large-Monoid M x))
         ( preserves-sim-left-mul-Large-Monoid M x _ _
           ( symmetric-sim-Large-Monoid M _ _
             ( sim-raise-Large-Monoid M _ (unit-Large-Monoid M))))
@@ -214,7 +218,7 @@ module _
         ( mul-Large-Monoid M x (raise-unit-Large-Monoid M _))
         ( mul-Large-Monoid M x (unit-Large-Monoid M))
         ( x)
-        ( sim-eq-Large-Monoid M (right-unit-law-Large-Monoid M x))
+        ( sim-eq-Large-Monoid M (right-unit-law-mul-Large-Monoid M x))
         ( preserves-sim-right-mul-Large-Monoid M x _ _
           ( symmetric-sim-Large-Monoid M _ _
             ( sim-raise-Large-Monoid M _ (unit-Large-Monoid M))))
