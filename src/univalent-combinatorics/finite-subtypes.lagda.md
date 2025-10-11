@@ -28,7 +28,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 A [subtype](foundation.subtypes.md) is
-{{#concept "finite" Disambiguation="subtype" Agda=is-finite WD="finite set" WDID=Q272404 Agda=is-finite-subtype}}
+{{#concept "finite" Disambiguation="subtype" Agda=is-finite-subtype WD="finite set" WDID=Q272404 Agda=is-finite-subtype}}
 if its type is [finite](univalent-combinatorics.finite-types.md).
 
 ## Definition

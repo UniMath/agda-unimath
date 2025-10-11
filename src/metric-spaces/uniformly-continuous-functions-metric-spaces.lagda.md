@@ -14,6 +14,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -63,6 +64,11 @@ module _
           f
           x
           m)
+
+  is-modulus-of-uniform-continuity-function-Metric-Space :
+    (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)
+  is-modulus-of-uniform-continuity-function-Metric-Space m =
+    type-Prop (is-modulus-of-uniform-continuity-prop-function-Metric-Space m)
 
   modulus-of-uniform-continuity-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   modulus-of-uniform-continuity-function-Metric-Space =
@@ -189,6 +195,34 @@ module _
         ( X)
         ( Y)
         ( f)))
+```
+
+### A function is short if and only if the identity is a modulus of uniform continuity for it
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (f : type-function-Metric-Space A B)
+  where
+
+  is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space :
+    is-modulus-of-uniform-continuity-function-Metric-Space A B f id →
+    is-short-function-Metric-Space A B f
+  is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space H ε x =
+    H x ε
+
+  id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space :
+    is-short-function-Metric-Space A B f →
+    is-modulus-of-uniform-continuity-function-Metric-Space A B f id
+  id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space H x ε =
+    H ε x
+
+  is-short-iff-id-is-modulus-of-uniform-continuity-function-Metric-Space :
+    is-short-function-Metric-Space A B f ↔
+    is-modulus-of-uniform-continuity-function-Metric-Space A B f id
+  is-short-iff-id-is-modulus-of-uniform-continuity-function-Metric-Space =
+    ( id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space ,
+      is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space)
 ```
 
 ### Short maps are uniformly continuous

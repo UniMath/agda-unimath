@@ -13,7 +13,9 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.negative-integer-fractions
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonzero-rational-numbers
@@ -24,6 +26,8 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -218,6 +222,9 @@ abstract
       ( is-nonzero-ℚ)
       ( neg-neg-ℚ x)
       ( is-nonzero-neg-ℚ (is-nonzero-is-positive-ℚ H))
+
+nonzero-ℚ⁻ : ℚ⁻ → nonzero-ℚ
+nonzero-ℚ⁻ (x , N) = (x , is-nonzero-is-negative-ℚ N)
 ```
 
 ### The product of two negative rational numbers is positive
@@ -282,4 +289,94 @@ module _
           ( neg-ℚ r)
           ( neg-ℚ q)
           ( neg-le-ℚ q r H))
+
+    reverses-le-left-mul-ℚ⁻ : le-ℚ (rational-ℚ⁻ p *ℚ r) (rational-ℚ⁻ p *ℚ q)
+    reverses-le-left-mul-ℚ⁻ =
+      binary-tr
+        ( le-ℚ)
+        ( commutative-mul-ℚ _ _)
+        ( commutative-mul-ℚ _ _)
+        ( reverses-le-right-mul-ℚ⁻)
+```
+
+### The negative rational numbers are invertible elements of the multiplicative monoid of rational numbers
+
+```agda
+opaque
+  inv-ℚ⁻ : ℚ⁻ → ℚ⁻
+  inv-ℚ⁻ q = neg-ℚ⁺ (inv-ℚ⁺ (neg-ℚ⁻ q))
+
+  left-inverse-law-mul-ℚ⁻ :
+    (q : ℚ⁻) → rational-ℚ⁻ (inv-ℚ⁻ q) *ℚ rational-ℚ⁻ q ＝ one-ℚ
+  left-inverse-law-mul-ℚ⁻ q =
+    inv (swap-neg-mul-ℚ _ _) ∙
+    ap rational-ℚ⁺ (left-inverse-law-mul-ℚ⁺ (neg-ℚ⁻ q))
+
+  right-inverse-law-mul-ℚ⁻ :
+    (q : ℚ⁻) → rational-ℚ⁻ q *ℚ rational-ℚ⁻ (inv-ℚ⁻ q) ＝ one-ℚ
+  right-inverse-law-mul-ℚ⁻ q =
+    swap-neg-mul-ℚ _ _ ∙
+    ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ (neg-ℚ⁻ q))
+```
+
+### Inequality on negative rational numbers
+
+```agda
+leq-ℚ⁻ : Relation lzero ℚ⁻
+leq-ℚ⁻ p q = leq-ℚ (rational-ℚ⁻ p) (rational-ℚ⁻ q)
+
+le-ℚ⁻ : Relation lzero ℚ⁻
+le-ℚ⁻ p q = le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁻ q)
+```
+
+### Inversion reverses inequality on negative rational numbers
+
+```agda
+opaque
+  unfolding inv-ℚ⁻
+
+  reverses-leq-inv-ℚ⁻ :
+    (p q : ℚ⁻) → leq-ℚ⁻ p q → leq-ℚ⁻ (inv-ℚ⁻ q) (inv-ℚ⁻ p)
+  reverses-leq-inv-ℚ⁻ p q p≤q =
+    neg-leq-ℚ
+      ( rational-ℚ⁺ (inv-ℚ⁺ (neg-ℚ⁻ p)))
+      ( rational-ℚ⁺ (inv-ℚ⁺ (neg-ℚ⁻ q)))
+      ( inv-leq-ℚ⁺
+        ( neg-ℚ⁻ q)
+        ( neg-ℚ⁻ p)
+        ( neg-leq-ℚ _ _ p≤q))
+```
+
+### Inversion reverses strict inequality on negative rational numbers
+
+```agda
+opaque
+  unfolding inv-ℚ⁻
+
+  reverses-le-inv-ℚ⁻ :
+    (p q : ℚ⁻) → le-ℚ⁻ p q → le-ℚ⁻ (inv-ℚ⁻ q) (inv-ℚ⁻ p)
+  reverses-le-inv-ℚ⁻ p q p<q =
+    neg-le-ℚ
+      ( rational-ℚ⁺ (inv-ℚ⁺ (neg-ℚ⁻ p)))
+      ( rational-ℚ⁺ (inv-ℚ⁺ (neg-ℚ⁻ q)))
+      ( inv-le-ℚ⁺
+        ( neg-ℚ⁻ q)
+        ( neg-ℚ⁻ p)
+        ( neg-le-ℚ _ _ p<q))
+```
+
+### If `p ≤ q` for negative `q`, then `p` is negative
+
+```agda
+abstract
+  is-negative-leq-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-leq-ℚ⁻ (q , neg-q) p p≤q =
+    is-negative-le-zero-ℚ
+      ( p)
+      ( concatenate-leq-le-ℚ p q zero-ℚ p≤q (le-zero-is-negative-ℚ q neg-q))
+
+  is-negative-le-ℚ⁻ :
+    (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
 ```

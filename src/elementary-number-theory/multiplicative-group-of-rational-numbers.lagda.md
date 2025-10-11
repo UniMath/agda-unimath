@@ -9,17 +9,25 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -62,6 +70,9 @@ group-mul-ℚˣ = group-of-units-Ring ring-ℚ
 
 one-ℚˣ : ℚˣ
 one-ℚˣ = unit-group-of-units-Ring ring-ℚ
+
+rational-ℚˣ : ℚˣ → ℚ
+rational-ℚˣ = pr1
 ```
 
 ### Operations of the multiplicative group of rational numbers
@@ -127,14 +138,15 @@ module _
       ( H)
       ( inv K)
 
-  is-invertible-element-ring-is-nonzero-ℚ :
-    is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
-  is-invertible-element-ring-is-nonzero-ℚ H =
-    rec-coproduct
-      ( ( is-invertible-element-neg-Ring' ring-ℚ x) ∘
-        ( is-mul-invertible-is-positive-ℚ (neg-ℚ x)))
-      ( is-mul-invertible-is-positive-ℚ x)
-      ( decide-is-negative-is-positive-is-nonzero-ℚ H)
+  abstract
+    is-invertible-element-ring-is-nonzero-ℚ :
+      is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
+    is-invertible-element-ring-is-nonzero-ℚ H =
+      rec-coproduct
+        ( ( is-invertible-element-neg-Ring' ring-ℚ x) ∘
+          ( is-mul-invertible-is-positive-ℚ (neg-ℚ x)))
+        ( is-mul-invertible-is-positive-ℚ x)
+        ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
 eq-is-invertible-element-prop-is-nonzero-prop-ℚ :
   is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ring-ℚ
@@ -144,4 +156,14 @@ eq-is-invertible-element-prop-is-nonzero-prop-ℚ =
     ( is-invertible-element-prop-Ring ring-ℚ)
     ( is-invertible-element-ring-is-nonzero-ℚ)
     ( is-nonzero-is-invertible-element-ring-ℚ)
+
+invertible-nonzero-ℚ : nonzero-ℚ → ℚˣ
+invertible-nonzero-ℚ (q , q≠0) =
+  (q , is-invertible-element-ring-is-nonzero-ℚ q q≠0)
+
+invertible-ℚ⁺ : ℚ⁺ → ℚˣ
+invertible-ℚ⁺ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁺
+
+invertible-ℚ⁻ : ℚ⁻ → ℚˣ
+invertible-ℚ⁻ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁻
 ```

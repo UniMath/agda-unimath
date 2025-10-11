@@ -56,6 +56,9 @@ module _
 
   leq-lower-ℝ : UU (l1 ⊔ l2)
   leq-lower-ℝ = type-Prop leq-lower-ℝ-Prop
+
+  is-prop-leq-lower-ℝ : is-prop leq-lower-ℝ
+  is-prop-leq-lower-ℝ = is-prop-type-Prop leq-lower-ℝ-Prop
 ```
 
 ## Properties

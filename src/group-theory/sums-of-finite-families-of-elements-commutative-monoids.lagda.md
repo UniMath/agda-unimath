@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -23,8 +24,11 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
@@ -33,11 +37,14 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
@@ -55,6 +62,11 @@ extends the binary operation on a
 elements of `M` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
 
+We use additive terminology consistently with the linear algebra definition of
+[finite sequences in commutative monoids](linear-algebra.finite-sequences-in-commutative-monoids.md)
+despite the use of multiplicative terminology for commutative monoids in
+general.
+
 ## Sums over counted types
 
 ### Definition
@@ -68,6 +80,38 @@ sum-count-Commutative-Monoid M A (n , Fin-n≃A) f =
 ```
 
 ### Properties
+
+#### Sums for counts in a commutative monoid equal sums in the corresponding commutative semigroup
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
+  (|A| : is-inhabited A)
+  where
+
+  abstract
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid :
+      (cA : count A) (f : A → type-Commutative-Monoid M) →
+      sum-count-Commutative-Monoid M A cA f ＝
+      sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Commutative-Monoid M)
+        ( A)
+        ( |A|)
+        ( cA)
+        ( f)
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid cA@(zero-ℕ , _) _
+      =
+        ex-falso
+          ( is-nonempty-is-inhabited
+            ( |A|)
+            ( is-empty-is-zero-number-of-elements-count cA refl))
+    eq-sum-commutative-semigroup-sum-count-Commutative-Monoid
+      cA@(succ-ℕ n , Fin-sn≃A) f =
+        eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( f ∘ map-equiv Fin-sn≃A)
+```
 
 #### Sums for a counted type are homotopy invariant
 
@@ -93,42 +137,32 @@ module _
   where
 
   abstract
-    eq-sum-count-equiv-Commutative-Monoid :
-      (n : ℕ) → (equiv1 equiv2 : Fin n ≃ A) →
-      (f : A → type-Commutative-Monoid M) →
-      sum-count-Commutative-Monoid M A (n , equiv1) f ＝
-      sum-count-Commutative-Monoid M A (n , equiv2) f
-    eq-sum-count-equiv-Commutative-Monoid n equiv1 equiv2 f =
-      equational-reasoning
-      sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv1)
-      ＝
-        sum-fin-sequence-type-Commutative-Monoid
-          ( M)
-          ( n)
-          ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
-        by
-          preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
-            ( M)
-            ( n)
-            ( inv-equiv equiv1 ∘e equiv2)
-            ( f ∘ map-equiv equiv1)
-      ＝ sum-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv equiv2)
-        by
-          ap
-            ( λ g →
-              sum-fin-sequence-type-Commutative-Monoid
-                ( M)
-                ( n)
-                ( f ∘ (g ∘ map-equiv equiv2)))
-            ( eq-htpy (is-section-map-inv-equiv equiv1))
-
     eq-sum-count-Commutative-Monoid :
       (f : A → type-Commutative-Monoid M) (c1 c2 : count A) →
       sum-count-Commutative-Monoid M A c1 f ＝
       sum-count-Commutative-Monoid M A c2 f
-    eq-sum-count-Commutative-Monoid f c1@(n , e1) c2@(_ , e2)
+    eq-sum-count-Commutative-Monoid f c1@(zero-ℕ , _) c2@(_ , e2)
       with double-counting c1 c2
-    ... | refl = eq-sum-count-equiv-Commutative-Monoid n e1 e2 f
+    ... | refl = refl
+    eq-sum-count-Commutative-Monoid f c1@(succ-ℕ n , e1) c2@(_ , e2)
+      with double-counting c1 c2
+    ... | refl =
+      eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+        ( M)
+        ( n)
+        ( f ∘ map-equiv e1) ∙
+      eq-sum-count-Commutative-Semigroup
+        ( commutative-semigroup-Commutative-Monoid M)
+        ( A)
+        ( unit-trunc-Prop (map-equiv e1 (inr star)))
+        ( f)
+        ( c1)
+        ( c2) ∙
+      inv
+        ( eq-sum-commutative-semigroup-sum-fin-sequence-type-Commutative-Monoid
+          ( M)
+          ( n)
+          ( f ∘ map-equiv e2))
 ```
 
 #### Sums of counted families indexed by equivalent types are equal
@@ -674,4 +708,194 @@ module _
               ( count-unit)
               ( f)
         ＝ f star by compute-sum-one-element-Commutative-Monoid M _
+```
+
+#### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Commutative-Monoid :
+      (f : type-Finite-Type I → type-Commutative-Monoid M) →
+      sum-finite-Commutative-Monoid M I f ＝ f i
+    sum-finite-is-contr-Commutative-Monoid f =
+      sum-equiv-finite-Commutative-Monoid M
+        ( I)
+        ( unit-Finite-Type)
+        ( equiv-unit-is-contr is-contr-I)
+        ( f) ∙
+      sum-finite-unit-type-Commutative-Monoid M _ ∙
+      ap f (eq-is-contr is-contr-I)
+```
+
+#### Interchange law of sums and addition
+
+```agda
+module _
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  where
+
+  interchange-sum-mul-finite-Commutative-Monoid :
+    (f g : type-Finite-Type A → type-Commutative-Monoid M) →
+    sum-finite-Commutative-Monoid M A
+      (λ a → mul-Commutative-Monoid M (f a) (g a)) ＝
+    mul-Commutative-Monoid M
+      (sum-finite-Commutative-Monoid M A f)
+      (sum-finite-Commutative-Monoid M A g)
+  interchange-sum-mul-finite-Commutative-Monoid f g =
+    equational-reasoning
+    sum-finite-Commutative-Monoid M A
+      ( λ a → mul-Commutative-Monoid M (f a) (g a))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( M)
+        ( A)
+        ( λ a → sum-fin-sequence-type-Commutative-Monoid M 2 (h a))
+        by
+          htpy-sum-finite-Commutative-Monoid
+            ( M)
+            ( A)
+            ( λ a → inv (compute-sum-two-elements-Commutative-Monoid M (h a)))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( M)
+        ( A)
+        ( λ a →
+          sum-finite-Commutative-Monoid M (Fin-Finite-Type 2) (h a))
+      by
+        htpy-sum-finite-Commutative-Monoid M A
+          ( λ a →
+            inv
+              ( eq-sum-finite-sum-count-Commutative-Monoid
+                ( M)
+                ( Fin-Finite-Type 2)
+                ( count-Fin 2)
+                ( h a)))
+    ＝
+      sum-finite-Commutative-Monoid
+        ( M)
+        ( Σ-Finite-Type A (λ _ → Fin-Finite-Type 2))
+        ( ind-Σ h)
+      by inv (sum-Σ-finite-Commutative-Monoid M A (λ _ → Fin-Finite-Type 2) h)
+    ＝
+      sum-finite-Commutative-Monoid
+        ( M)
+        ( Σ-Finite-Type (Fin-Finite-Type 2) (λ _ → A))
+        ( λ (i , a) → h a i)
+      by
+        sum-equiv-finite-Commutative-Monoid M _ _
+          ( commutative-product)
+          ( ind-Σ h)
+    ＝
+      sum-finite-Commutative-Monoid
+        ( M)
+        ( Fin-Finite-Type 2)
+        ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
+      by sum-Σ-finite-Commutative-Monoid M _ _ _
+    ＝
+      sum-fin-sequence-type-Commutative-Monoid
+        ( M)
+        ( 2)
+        ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
+      by
+        eq-sum-finite-sum-count-Commutative-Monoid
+          ( M)
+          ( Fin-Finite-Type 2)
+          ( count-Fin 2)
+          ( _)
+    ＝
+      mul-Commutative-Monoid
+        ( M)
+        ( sum-finite-Commutative-Monoid M A f)
+        ( sum-finite-Commutative-Monoid M A g)
+      by
+        compute-sum-two-elements-Commutative-Monoid
+          ( M)
+          ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
+    where
+      h : type-Finite-Type A → Fin 2 → type-Commutative-Monoid M
+      h a (inl (inr _)) = f a
+      h a (inr _) = g a
+```
+
+### Decomposing sums via decidable subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  opaque
+    unfolding is-equiv-comp
+
+    decompose-sum-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      sum-finite-Commutative-Monoid M A f ＝
+      mul-Commutative-Monoid M
+        ( sum-finite-Commutative-Monoid M
+          ( finite-type-subset-Finite-Type A P)
+          ( f ∘ inclusion-subset-Finite-Type A P))
+        ( sum-finite-Commutative-Monoid M
+          ( finite-type-complement-subset-Finite-Type A P)
+          ( f ∘ inclusion-complement-subset-Finite-Type A P))
+    decompose-sum-decidable-subset-finite-Commutative-Monoid f =
+      sum-equiv-finite-Commutative-Monoid M
+        ( A)
+        ( coproduct-Finite-Type
+          ( finite-type-subset-Finite-Type A P)
+          ( finite-type-complement-subset-Finite-Type A P))
+        ( equiv-coproduct-decomposition-subset-Finite-Type A P)
+        ( f) ∙
+      distributive-distributive-sum-coproduct-finite-Commutative-Monoid M
+        ( _)
+        ( _)
+        ( _)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-unit-Commutative-Monoid M (f a)) →
+      sum-finite-Commutative-Monoid M A f ＝
+      sum-finite-Commutative-Monoid M
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Commutative-Monoid f H =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid M A P f ∙
+      ap-mul-Commutative-Monoid M
+        ( htpy-sum-finite-Commutative-Monoid M _ (ind-Σ H) ∙
+          sum-zero-finite-Commutative-Monoid M _)
+        ( refl) ∙
+      left-unit-law-mul-Commutative-Monoid M _
+
+    vanish-sum-complement-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-unit-Commutative-Monoid M (f a)) →
+      sum-finite-Commutative-Monoid M A f ＝
+      sum-finite-Commutative-Monoid M
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Commutative-Monoid f H =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid M A P f ∙
+      ap-mul-Commutative-Monoid M
+        ( refl)
+        ( htpy-sum-finite-Commutative-Monoid M _ (ind-Σ H) ∙
+          sum-zero-finite-Commutative-Monoid M _) ∙
+      right-unit-law-mul-Commutative-Monoid M _
 ```

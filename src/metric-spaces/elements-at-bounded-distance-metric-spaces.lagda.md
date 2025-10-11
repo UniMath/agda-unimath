@@ -7,6 +7,7 @@ module metric-spaces.elements-at-bounded-distance-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -260,4 +261,17 @@ module _
             ( q≤0)
             ( le-zero-is-positive-ℚ ε is-pos-ε))
           ( ε<q)
+
+    leq-zero-upper-real-dist-Metric-Space :
+      leq-upper-ℝ zero-upper-ℝ upper-real-dist-Metric-Space
+    leq-zero-upper-real-dist-Metric-Space q =
+      rec-trunc-Prop
+        ( le-ℚ-Prop zero-ℚ q)
+        ( λ ((ε , Nεxy) , ε<q) →
+          transitive-le-ℚ
+            ( zero-ℚ)
+            ( rational-ℚ⁺ ε)
+            ( q)
+            ( ε<q)
+            ( le-zero-is-positive-ℚ (pr1 ε) (pr2 ε)))
 ```

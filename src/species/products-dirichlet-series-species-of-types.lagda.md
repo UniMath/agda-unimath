@@ -29,7 +29,7 @@ open import species.species-of-types
 ## Idea
 
 The
-{{#concept "product" Disambiguation="of Caucy series of species of types" Agda=product-dirichlet-series-species-subuniverse}}
+{{#concept "product" Disambiguation="of Caucy series of species of types" Agda=product-dirichlet-series-species-types}}
 of two [Dirichlet series](species.dirichlet-series-species-of-types.md) of
 [species of types in subuniverses](species.species-of-types.md) is just the
 pointwise [product](foundation.cartesian-product-types.md).

@@ -18,6 +18,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -27,6 +28,8 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.images
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -37,6 +40,8 @@ open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -92,6 +97,17 @@ module _
 
 ## Properties
 
+### Types with zero elements in their finite enumeration are empty
+
+```agda
+abstract
+  is-empty-is-zero-finite-enumeration :
+    {l : Level} {X : UU l} → (eX : finite-enumeration X) → (pr1 eX ＝ zero-ℕ) →
+    is-empty X
+  is-empty-is-zero-finite-enumeration (_ , Fin-0↠X) refl =
+    is-empty-surjection Fin-0↠X id
+```
+
 ### Finitely enumerable types are closed under equivalences
 
 ```agda
@@ -102,6 +118,12 @@ finite-enumeration-equiv (n , Fin-n↠X) X≃Y =
   ( n ,
     map-equiv X≃Y ∘ map-surjection Fin-n↠X ,
     is-surjective-left-comp-equiv X≃Y (is-surjective-map-surjection Fin-n↠X))
+
+is-finitely-enumerable-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
+  is-finitely-enumerable X → is-finitely-enumerable Y
+is-finitely-enumerable-equiv X≃Y =
+  map-is-inhabited (λ eX → finite-enumeration-equiv eX X≃Y)
 ```
 
 ### Finitely enumerable types with decidable equality are finite
@@ -374,6 +396,29 @@ module _
     Cantor-Schröder-Bernstein-Dedekind-Finite-Type
       ( dedekind-finite-type-Finitely-Enumerable-Type X)
       ( dedekind-finite-type-Finitely-Enumerable-Type Y)
+```
+
+### The image of a finitely enumerable type under a map is finitely enumerable
+
+```agda
+module _
+  {l1 l2 : Level} (X : Finitely-Enumerable-Type l1) {Y : UU l2}
+  (f : type-Finitely-Enumerable-Type X → Y)
+  where
+
+  abstract
+    is-finitely-enumerable-im-Finitely-Enumerable-Type :
+      is-finitely-enumerable (im f)
+    is-finitely-enumerable-im-Finitely-Enumerable-Type =
+      map-tot-exists
+        ( λ n Fin-n↠X →
+          comp-surjection (map-unit-im f , is-surjective-map-unit-im f) Fin-n↠X)
+        ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
+
+  im-Finitely-Enumerable-Type : Finitely-Enumerable-Type (l1 ⊔ l2)
+  im-Finitely-Enumerable-Type =
+    ( im f ,
+      is-finitely-enumerable-im-Finitely-Enumerable-Type)
 ```
 
 ## See also

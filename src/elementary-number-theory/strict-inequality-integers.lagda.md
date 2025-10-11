@@ -49,7 +49,7 @@ An [integer](elementary-number-theory.integers.md) `x` is _strictly less than_
 the integer `y` if the
 [difference](elementary-number-theory.difference-integers.md) `y - x` is
 [positive](elementary-number-theory.positive-integers.md). This relation defines
-the {{#concept "standard strict ordering" Disambiguation="integers" Agda=leq-ℤ}}
+the {{#concept "standard strict ordering" Disambiguation="integers" Agda=le-ℤ}}
 on the integers.
 
 ## Definition

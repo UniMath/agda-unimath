@@ -10,10 +10,13 @@ module metric-spaces.metric-space-of-rational-numbers where
 
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
