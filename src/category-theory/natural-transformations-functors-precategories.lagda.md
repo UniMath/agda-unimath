@@ -327,7 +327,8 @@ module _
       ( comp-functor-Precategory C D E H G)
   left-whisker-natural-transformation-Precategory F G H α =
     ( λ x →
-      hom-functor-Precategory D E H (hom-family-natural-transformation-Precategory C D F G α x)) ,
+      hom-functor-Precategory D E H (hom-family-natural-transformation-Precategory
+        C D F G α x)) ,
     ( λ {x} {y} f →
       inv
         ( preserves-comp-functor-Precategory
