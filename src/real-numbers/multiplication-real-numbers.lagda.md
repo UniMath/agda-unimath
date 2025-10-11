@@ -545,7 +545,7 @@ module _
                       ( refl) ∙
                       ap
                         ( rational-ℚ⁺)
-                        ( is-section-right-mul-ℚ⁺
+                        ( is-section-right-div-ℚ⁺
                           ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
                           ( εx₀ +ℚ⁺ εy₀) ∙
                           εx₀+εy₀=ε))

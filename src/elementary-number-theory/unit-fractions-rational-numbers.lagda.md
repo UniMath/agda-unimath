@@ -151,7 +151,7 @@ opaque
       ( le-ℤ)
       ( left-unit-law-mul-ℤ (int-ℕ m))
       ( left-unit-law-mul-ℤ (int-ℕ n))
-      ( le-natural-le-ℤ m n m<n)
+      ( preserves-le-int-ℕ m n m<n)
 ```
 
 ### For every positive rational number, there is a smaller unit fraction
