@@ -48,14 +48,14 @@ record
 
   sim-prop-Large-Similarity-Relation :
     Large-Relation-Prop β type-Large-Similarity-Relation
-  prop-Large-Similarity-Relation =
-    prop-Large-Equivalence-Relation
+  sim-prop-Large-Similarity-Relation =
+    sim-prop-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
   sim-Large-Similarity-Relation :
     Large-Relation β type-Large-Similarity-Relation
   sim-Large-Similarity-Relation x y =
-    type-Prop (prop-Large-Similarity-Relation x y)
+    type-Prop (sim-prop-Large-Similarity-Relation x y)
 
   field
     eq-sim-Large-Similarity-Relation :

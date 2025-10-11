@@ -48,7 +48,7 @@ record
     {l1 l2 : Level} →
     type-Large-Equivalence-Relation l1 → type-Large-Equivalence-Relation l2 →
     Prop (β l1 l2)
-  prop-Large-Equivalence-Relation =
+  sim-prop-Large-Equivalence-Relation =
     leq-prop-Large-Preorder large-preorder-Large-Equivalence-Relation
 
   sim-Large-Equivalence-Relation :
@@ -56,7 +56,7 @@ record
     type-Large-Equivalence-Relation l1 → type-Large-Equivalence-Relation l2 →
     UU (β l1 l2)
   sim-Large-Equivalence-Relation x y =
-    type-Prop (prop-Large-Equivalence-Relation x y)
+    type-Prop (sim-prop-Large-Equivalence-Relation x y)
 
   field
     symmetric-sim-Large-Equivalence-Relation :
@@ -88,7 +88,7 @@ record
     (l : Level) →
     equivalence-relation (β l l) (type-Large-Equivalence-Relation l)
   equivalence-relation-Large-Equivalence-Relation l =
-    ( prop-Large-Equivalence-Relation ,
+    ( sim-prop-Large-Equivalence-Relation ,
       refl-sim-Large-Equivalence-Relation ,
       symmetric-sim-Large-Equivalence-Relation ,
       transitive-sim-Large-Equivalence-Relation)
