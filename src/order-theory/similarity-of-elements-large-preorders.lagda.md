@@ -111,3 +111,20 @@ module _
     x ＝ y → sim-Large-Preorder P x y
   sim-eq-Large-Preorder refl = refl-sim-Large-Preorder P _
 ```
+
+### Similarity in a large preorder is itself a large preorder
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Preorder α β)
+  where
+
+  large-preorder-sim-Large-Preorder :
+    Large-Preorder α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+  large-preorder-sim-Large-Preorder =
+    make-Large-Preorder
+      ( type-Large-Preorder P)
+      ( sim-prop-Large-Preorder P)
+      ( refl-sim-Large-Preorder P)
+      ( transitive-sim-Large-Preorder P)
+```

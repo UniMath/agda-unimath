@@ -12,6 +12,8 @@ open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-equivalence-relations
+open import foundation.large-similarity-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.torsorial-type-families
@@ -166,4 +168,32 @@ module _
     {l1 : Level} (x y : type-Large-Poset P l1) →
     sim-Large-Poset P x y → x ＝ y
   eq-sim-Large-Poset x y = map-inv-is-equiv (is-equiv-sim-eq-Large-Poset x y)
+```
+
+### Similarity in a large poset is a large similarity relation
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
+  where
+
+  large-equivalence-relation-sim-Large-Poset :
+    Large-Equivalence-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Poset P)
+  large-equivalence-relation-sim-Large-Poset =
+    make-Large-Equivalence-Relation
+      ( sim-prop-Large-Poset P)
+      ( refl-sim-Large-Poset P)
+      ( symmetric-sim-Large-Poset P)
+      ( transitive-sim-Large-Poset P)
+
+  large-similarity-relation-sim-Large-Poset :
+    Large-Similarity-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Poset P)
+  large-similarity-relation-sim-Large-Poset =
+    make-Large-Similarity-Relation
+      ( large-equivalence-relation-sim-Large-Poset)
+      ( eq-sim-Large-Poset P)
 ```
