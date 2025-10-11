@@ -51,7 +51,7 @@ over it.
 
 ## Definitions
 
-### Decidable subtypes
+### Double negation stable subtypes
 
 ```agda
 is-double-negation-stable-subtype-Prop :
@@ -73,6 +73,13 @@ is-prop-is-double-negation-stable-subtype P =
 double-negation-stable-subtype :
   {l1 : Level} (l : Level) (X : UU l1) → UU (l1 ⊔ lsuc l)
 double-negation-stable-subtype l X = X → Double-Negation-Stable-Prop l
+
+make-double-negation-stable-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A) →
+  is-double-negation-stable-subtype P →
+  double-negation-stable-subtype l2 A
+make-double-negation-stable-subtype P p x =
+  ( is-in-subtype P x , is-prop-is-in-subtype P x , p x)
 ```
 
 ### The underlying subtype of a double negation stable subtype

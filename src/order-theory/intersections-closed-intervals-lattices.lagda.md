@@ -14,6 +14,7 @@ open import foundation.identity-types
 open import foundation.intersections-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.similarity-subtypes
 open import foundation.universe-levels
 
 open import order-theory.closed-intervals-lattices

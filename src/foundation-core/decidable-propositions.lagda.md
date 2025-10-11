@@ -20,10 +20,12 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.small-types
 open import foundation-core.subtypes
 ```
 
@@ -327,4 +329,35 @@ module _
   ( is-decidable-prop-Π
     ( is-decidable-prop-type-Decidable-Prop P)
     ( is-decidable-prop-type-Decidable-Prop ∘ Q))
+```
+
+### Decidable propositions are either equivalent to the unit type or the empty type
+
+```agda
+decide-equiv-is-decidable-prop :
+  {l : Level} {P : UU l} → is-decidable-prop P → (P ≃ unit) + (P ≃ empty)
+decide-equiv-is-decidable-prop (H , inl p) =
+  inl (equiv-unit-is-contr (is-proof-irrelevant-is-prop H p))
+decide-equiv-is-decidable-prop (_ , inr np) =
+  inr (np , is-equiv-is-empty' np)
+
+decide-equiv-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) →
+  (type-Decidable-Prop P ≃ unit) + (type-Decidable-Prop P ≃ empty)
+decide-equiv-Decidable-Prop (P , H) = decide-equiv-is-decidable-prop H
+```
+
+### Decidable propositions are small
+
+```agda
+is-small-is-decidable-prop :
+  {l : Level} {P : UU l} → is-decidable-prop P → is-small lzero P
+is-small-is-decidable-prop (H , inl p) =
+  ( unit , equiv-unit-is-contr (is-proof-irrelevant-is-prop H p))
+is-small-is-decidable-prop (H , inr np) =
+  ( empty , equiv-is-empty' np)
+
+is-small-type-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) → is-small lzero (type-Decidable-Prop P)
+is-small-type-Decidable-Prop (P , H) = is-small-is-decidable-prop H
 ```

@@ -22,6 +22,7 @@ open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.retractions
 open import foundation.sections
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

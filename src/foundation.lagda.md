@@ -399,6 +399,7 @@ open import foundation.sets public
 open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
+open import foundation.similarity-subtypes public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
 open import foundation.slice public
