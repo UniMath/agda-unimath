@@ -392,7 +392,7 @@ module _
       ( pr1 (is-rounded-upper-cut-ℝ x q) H)
 
   sim-upper-cut-upper-complement-lower-cut-ℝ :
-   sim-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
+    sim-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
   sim-upper-cut-upper-complement-lower-cut-ℝ =
     ( subset-upper-cut-upper-complement-lower-cut-ℝ ,
       subset-upper-complement-lower-cut-upper-cut-ℝ)
