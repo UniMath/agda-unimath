@@ -154,6 +154,12 @@ module _
   sim-raise-Large-Commutative-Monoid' =
     sim-raise-Large-Monoid' (large-monoid-Large-Commutative-Monoid M)
 
+  eq-raise-Large-Commutative-Monoid :
+    (l1 : Level) {l2 : Level} (x : type-Large-Commutative-Monoid M (l1 ⊔ l2)) →
+    raise-Large-Commutative-Monoid l2 x ＝ x
+  eq-raise-Large-Commutative-Monoid =
+    eq-raise-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
+
   raise-raise-Large-Commutative-Monoid :
     {l1 l2 l3 : Level} → (x : type-Large-Commutative-Monoid M l1) →
     raise-Large-Commutative-Monoid l2 (raise-Large-Commutative-Monoid l3 x) ＝
@@ -228,4 +234,75 @@ module _
     mul-Large-Commutative-Monoid M x (unit-Large-Commutative-Monoid M) ＝ x
   right-unit-law-mul-Large-Commutative-Monoid =
     right-unit-law-mul-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
+```
+
+### Similarity reasoning in large commutative monoids
+
+```agda
+module
+  similarity-reasoning-Large-Commutative-Monoid
+    {α : Level → Level} {β : Level → Level → Level}
+    (M : Large-Commutative-Monoid α β)
+  where
+
+  open similarity-reasoning-Large-Monoid
+    ( large-monoid-Large-Commutative-Monoid M) public
+```
+
+### The raise operation characterizes the similarity relation
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (M : Large-Commutative-Monoid α β)
+  where
+
+  sim-iff-eq-raise-Large-Commutative-Monoid :
+    {l1 l2 : Level} →
+    (x : type-Large-Commutative-Monoid M l1) →
+    (y : type-Large-Commutative-Monoid M l2) →
+    ( sim-Large-Commutative-Monoid M x y) ↔
+    ( raise-Large-Commutative-Monoid M l2 x ＝
+      raise-Large-Commutative-Monoid M l1 y)
+  sim-iff-eq-raise-Large-Commutative-Monoid =
+    sim-iff-eq-raise-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
+
+  sim-eq-raise-Large-Commutative-Monoid :
+    {l1 l2 : Level} →
+    (x : type-Large-Commutative-Monoid M l1) →
+    (y : type-Large-Commutative-Monoid M l2) →
+    ( raise-Large-Commutative-Monoid M l2 x ＝
+      raise-Large-Commutative-Monoid M l1 y) →
+    sim-Large-Commutative-Monoid M x y
+  sim-eq-raise-Large-Commutative-Monoid x y =
+    backward-implication (sim-iff-eq-raise-Large-Commutative-Monoid x y)
+
+  eq-raise-sim-Large-Commutative-Monoid :
+    {l1 l2 : Level} →
+    (x : type-Large-Commutative-Monoid M l1) →
+    (y : type-Large-Commutative-Monoid M l2) →
+    sim-Large-Commutative-Monoid M x y →
+    raise-Large-Commutative-Monoid M l2 x ＝
+    raise-Large-Commutative-Monoid M l1 y
+  eq-raise-sim-Large-Commutative-Monoid x y =
+    forward-implication (sim-iff-eq-raise-Large-Commutative-Monoid x y)
+```
+
+### Small commutative monoids from large commutative monoids
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (M : Large-Commutative-Monoid α β)
+  where
+
+  monoid-Large-Commutative-Monoid : (l : Level) → Monoid (α l)
+  monoid-Large-Commutative-Monoid =
+    monoid-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
+
+  commutative-monoid-Large-Commutative-Monoid :
+    (l : Level) → Commutative-Monoid (α l)
+  commutative-monoid-Large-Commutative-Monoid l =
+    ( monoid-Large-Commutative-Monoid l ,
+      commutative-mul-Large-Commutative-Monoid M)
 ```
