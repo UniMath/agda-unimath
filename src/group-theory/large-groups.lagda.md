@@ -7,17 +7,26 @@ module group-theory.large-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
-open import foundation.universe-levels
-open import group-theory.groups
-open import foundation.large-binary-relations
-open import foundation.dependent-pair-types
-open import foundation.involutions
-open import foundation.automorphisms
-open import foundation.equivalences
 open import foundation.action-on-identifications-functions
-open import group-theory.large-monoids
+open import foundation.automorphisms
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.involutions
+open import foundation.large-binary-relations
+open import foundation.logical-equivalences
+open import foundation.propositional-maps
+open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.large-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>
@@ -48,6 +57,11 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     {l1 l2 : Level} → type-Large-Group l1 → type-Large-Group l2 →
     type-Large-Group (l1 ⊔ l2)
   mul-Large-Group = mul-Large-Monoid large-monoid-Large-Group
+
+  mul-Large-Group' :
+    {l1 l2 : Level} → type-Large-Group l1 → type-Large-Group l2 →
+    type-Large-Group (l1 ⊔ l2)
+  mul-Large-Group' x y = mul-Large-Group y x
 
   ap-mul-Large-Group :
     {l1 l2 : Level} →
@@ -215,7 +229,6 @@ module _
     raise-unit-Large-Group G lzero ＝ unit-Large-Group G
   raise-unit-lzero-Large-Group =
     raise-unit-lzero-Large-Monoid (large-monoid-Large-Group G)
-
 ```
 
 ### Similarity reasoning on large groups
@@ -312,9 +325,10 @@ module _
       in
         similarity-reasoning
           x
+          ~ raise-Large-Group G l2 x
+            by sim-raise-Large-Group G l2 x
           ~ x * raise-unit-Large-Group G l2
-            by
-              {!   !}
+            by sim-eq-Large-Group G (inv (raise-right-unit-law-Large-Group G x))
           ~ x * (y * inv-Large-Group G y)
             by
               sim-eq-Large-Group G
@@ -327,8 +341,10 @@ module _
           ~ raise-unit-Large-Group G (l1 ⊔ l2) * inv-Large-Group G y
             by
               sim-eq-Large-Group G (ap-mul-Large-Group G xy=1 refl)
+          ~ raise-Large-Group G (l1 ⊔ l2) (inv-Large-Group G y)
+            by sim-eq-Large-Group G (raise-left-unit-law-Large-Group G _)
           ~ inv-Large-Group G y
-            by {!   !}
+            by sim-raise-Large-Group' G _ _
 ```
 
 ### Distributivity of inverses over multiplication
@@ -404,4 +420,283 @@ module _
   aut-inv-Large-Group l =
     ( inv-Large-Group G ,
       is-equiv-is-involution inv-inv-Large-Group)
+```
+
+### The raise operation characterizes the similarity relation
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  sim-iff-eq-raise-Large-Group :
+    {l1 l2 : Level} →
+    (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+    ( sim-Large-Group G x y) ↔
+    ( raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y)
+  sim-iff-eq-raise-Large-Group =
+    sim-iff-eq-raise-Large-Monoid (large-monoid-Large-Group G)
+
+  sim-eq-raise-Large-Group :
+    {l1 l2 : Level} →
+    (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+    (raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y) →
+    sim-Large-Group G x y
+  sim-eq-raise-Large-Group x y =
+    backward-implication (sim-iff-eq-raise-Large-Group x y)
+
+  eq-raise-sim-Large-Group :
+    {l1 l2 : Level} →
+    (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+    sim-Large-Group G x y →
+    raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y
+  eq-raise-sim-Large-Group x y =
+    forward-implication (sim-iff-eq-raise-Large-Group x y)
+```
+
+### Small groups from large groups
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  semigroup-Large-Group : (l : Level) → Semigroup (α l)
+  semigroup-Large-Group =
+    semigroup-Large-Monoid (large-monoid-Large-Group G)
+
+  monoid-Large-Group : (l : Level) → Monoid (α l)
+  monoid-Large-Group =
+    monoid-Large-Monoid (large-monoid-Large-Group G)
+
+  group-Large-Group : (l : Level) → Group (α l)
+  group-Large-Group l =
+    ( semigroup-Large-Group l ,
+      ( raise-unit-Large-Group G l ,
+        left-unit-law-mul-Monoid (monoid-Large-Group l) ,
+        right-unit-law-mul-Monoid (monoid-Large-Group l)) ,
+      inv-Large-Group G ,
+      left-inverse-law-mul-Large-Group G ,
+      right-inverse-law-mul-Large-Group G)
+```
+
+### Cancellations in a large group
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  open similarity-reasoning-Large-Group G
+
+  private
+    _*_ = mul-Large-Group G
+    neg = inv-Large-Group G
+
+  abstract
+    cancel-left-div-mul-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      mul-Large-Group G
+        ( inv-Large-Group G x)
+        ( mul-Large-Group G x y) ＝
+      raise-Large-Group G l1 y
+    cancel-left-div-mul-Large-Group {l1} {l2} x y =
+      equational-reasoning
+        neg x * (x * y)
+        ＝ (neg x * x) * y
+          by inv (associative-mul-Large-Group G _ _ _)
+        ＝ raise-unit-Large-Group G l1 * y
+          by ap-mul-Large-Group G (left-inverse-law-mul-Large-Group G x) refl
+        ＝ raise-Large-Group G l1 y
+          by raise-left-unit-law-Large-Group G y
+
+    sim-cancel-left-div-mul-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      sim-Large-Group G
+        ( mul-Large-Group G (inv-Large-Group G x) (mul-Large-Group G x y))
+        ( y)
+    sim-cancel-left-div-mul-Large-Group {l1} x y =
+      similarity-reasoning
+        neg x * (x * y)
+        ~ raise-Large-Group G l1 y
+          by sim-eq-Large-Group G (cancel-left-div-mul-Large-Group x y)
+        ~ y
+          by sim-raise-Large-Group' G l1 y
+
+    cancel-left-mul-div-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      mul-Large-Group G
+        ( x)
+        ( mul-Large-Group G (inv-Large-Group G x) y) ＝
+      raise-Large-Group G l1 y
+    cancel-left-mul-div-Large-Group {l1} x y =
+      equational-reasoning
+        x * (neg x * y)
+        ＝ neg (neg x) * (neg x * y)
+          by ap-mul-Large-Group G (inv (inv-inv-Large-Group G x)) refl
+        ＝ raise-Large-Group G l1 y
+          by cancel-left-div-mul-Large-Group (neg x) y
+
+    sim-cancel-left-mul-div-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      sim-Large-Group G
+        ( mul-Large-Group G x (mul-Large-Group G (inv-Large-Group G x) y))
+        ( y)
+    sim-cancel-left-mul-div-Large-Group x y =
+      tr
+        ( λ z → sim-Large-Group G (z * (neg x * y)) y)
+        ( inv-inv-Large-Group G x)
+        ( sim-cancel-left-div-mul-Large-Group (neg x) y)
+
+    cancel-right-mul-div-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      mul-Large-Group G (mul-Large-Group G y x) (inv-Large-Group G x) ＝
+      raise-Large-Group G l1 y
+    cancel-right-mul-div-Large-Group {l1} x y =
+      equational-reasoning
+        (y * x) * neg x
+        ＝ y * (x * neg x)
+          by associative-mul-Large-Group G _ _ _
+        ＝ y * raise-unit-Large-Group G l1
+          by ap-mul-Large-Group G refl (right-inverse-law-mul-Large-Group G x)
+        ＝ raise-Large-Group G l1 y
+          by raise-right-unit-law-Large-Group G y
+
+    sim-cancel-right-mul-div-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      sim-Large-Group G
+        ( mul-Large-Group G (mul-Large-Group G y x) (inv-Large-Group G x))
+        ( y)
+    sim-cancel-right-mul-div-Large-Group {l1} x y =
+      similarity-reasoning
+        mul-Large-Group G (mul-Large-Group G y x) (inv-Large-Group G x)
+        ~ raise-Large-Group G l1 y
+          by sim-eq-Large-Group G (cancel-right-mul-div-Large-Group x y)
+        ~ y
+          by sim-raise-Large-Group' G l1 y
+
+    cancel-right-div-mul-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      mul-Large-Group G (mul-Large-Group G y (inv-Large-Group G x)) x ＝
+      raise-Large-Group G l1 y
+    cancel-right-div-mul-Large-Group {l1} x y =
+      equational-reasoning
+        (y * neg x) * x
+        ＝ (y * neg x) * neg (neg x)
+          by ap-mul-Large-Group G refl (inv (inv-inv-Large-Group G x))
+        ＝ raise-Large-Group G l1 y
+          by cancel-right-mul-div-Large-Group (neg x) y
+
+    sim-cancel-right-div-mul-Large-Group :
+      {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+      sim-Large-Group G
+        ( mul-Large-Group G (mul-Large-Group G y (inv-Large-Group G x)) x)
+        ( y)
+    sim-cancel-right-div-mul-Large-Group x y =
+      tr
+        ( λ z → sim-Large-Group G ((y * neg x) * z) y)
+        ( inv-inv-Large-Group G x)
+        ( sim-cancel-right-mul-div-Large-Group (neg x) y)
+```
+
+### Left multiplication by an element of a large group is an embedding
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  {l1 : Level} (l2 : Level) (x : type-Large-Group G l1)
+  where
+
+  abstract
+    is-prop-map-left-mul-Large-Group :
+      is-prop-map (mul-Large-Group G {l2 = l2} x)
+    is-prop-map-left-mul-Large-Group y =
+      let
+        open similarity-reasoning-Large-Group G
+        _*_ = mul-Large-Group G
+        neg = inv-Large-Group G
+      in
+        is-prop-all-elements-equal
+          ( λ (z , xz=y) (z' , xz'=y) →
+            eq-type-subtype
+              ( λ zz →
+                Id-Prop
+                  ( set-Large-Group G (l1 ⊔ l2))
+                  ( mul-Large-Group G x zz)
+                  ( y))
+              ( eq-sim-Large-Group G _ _
+                ( similarity-reasoning
+                  z
+                  ~ neg x * (x * z)
+                    by
+                      symmetric-sim-Large-Group G _ _
+                        ( sim-cancel-left-div-mul-Large-Group G x z)
+                  ~ neg x * (x * z')
+                    by
+                      sim-eq-Large-Group G
+                        ( ap-mul-Large-Group G
+                          ( refl)
+                          ( xz=y ∙ inv xz'=y))
+                  ~ z'
+                    by sim-cancel-left-div-mul-Large-Group G x z')))
+
+    is-emb-left-mul-Large-Group : is-emb (mul-Large-Group G {l2 = l2} x)
+    is-emb-left-mul-Large-Group =
+      is-emb-is-prop-map is-prop-map-left-mul-Large-Group
+
+  emb-left-mul-Large-Group :
+    type-Large-Group G l2 ↪ type-Large-Group G (l1 ⊔ l2)
+  emb-left-mul-Large-Group =
+    ( mul-Large-Group G x , is-emb-left-mul-Large-Group)
+```
+
+### Right multiplication by an element of a large group is an embedding
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  {l1 : Level} (l2 : Level) (x : type-Large-Group G l1)
+  where
+
+  abstract
+    is-prop-map-right-mul-Large-Group :
+      is-prop-map (mul-Large-Group' G {l2 = l2} x)
+    is-prop-map-right-mul-Large-Group y =
+      let
+        open similarity-reasoning-Large-Group G
+        _*_ = mul-Large-Group G
+        neg = inv-Large-Group G
+      in
+        is-prop-all-elements-equal
+          ( λ (z , zx=y) (z' , z'x=y) →
+            eq-type-subtype
+              ( λ zz →
+                Id-Prop
+                  ( set-Large-Group G (l1 ⊔ l2))
+                  ( mul-Large-Group G zz x)
+                  ( y))
+              ( eq-sim-Large-Group G _ _
+                ( similarity-reasoning
+                  z
+                  ~ (z * x) * neg x
+                    by
+                      symmetric-sim-Large-Group G _ _
+                        ( sim-cancel-right-mul-div-Large-Group G x z)
+                  ~ (z' * x) * neg x
+                    by
+                      sim-eq-Large-Group G
+                        ( ap-mul-Large-Group G
+                          ( zx=y ∙ inv z'x=y)
+                          ( refl))
+                  ~ z'
+                    by sim-cancel-right-mul-div-Large-Group G x z')))
+
+    is-emb-right-mul-Large-Group : is-emb (mul-Large-Group' G {l2 = l2} x)
+    is-emb-right-mul-Large-Group =
+      is-emb-is-prop-map is-prop-map-right-mul-Large-Group
+
+  emb-right-mul-Large-Group :
+    type-Large-Group G l2 ↪ type-Large-Group G (l1 ⊔ l2)
+  emb-right-mul-Large-Group =
+    ( mul-Large-Group' G x , is-emb-right-mul-Large-Group)
 ```

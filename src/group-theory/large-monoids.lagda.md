@@ -72,22 +72,6 @@ record Large-Monoid (α : Level → Level) (β : Level → Level → Level) : UU
       {l1 : Level} (l2 : Level) (x : type-Large-Monoid l1) →
       sim-Large-Monoid x (raise-Large-Monoid l2 x)
 
-  raise-raise-Large-Monoid :
-    {l1 l2 l3 : Level} → (x : type-Large-Monoid l1) →
-    raise-Large-Monoid l2 (raise-Large-Monoid l3 x) ＝
-    raise-Large-Monoid (l2 ⊔ l3) x
-  raise-raise-Large-Monoid {l1} {l2} {l3} x =
-    inv
-      ( eq-sim-Large-Monoid _ _
-        ( transitive-sim-Large-Monoid
-          ( raise-Large-Monoid (l2 ⊔ l3) x)
-          ( x)
-          ( raise-Large-Monoid l2 (raise-Large-Monoid l3 x))
-          ( transitive-sim-Large-Monoid _ _ _
-            ( sim-raise-Large-Monoid _ _)
-            ( sim-raise-Large-Monoid _ _))
-          ( symmetric-sim-Large-Monoid _ _ (sim-raise-Large-Monoid _ _))))
-
   mul-Large-Monoid :
     {l1 l2 : Level} → type-Large-Monoid l1 → type-Large-Monoid l2 →
     type-Large-Monoid (l1 ⊔ l2)
