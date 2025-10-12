@@ -21,9 +21,6 @@ open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.large-monoids
-open import group-theory.large-semigroups
-
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes
 open import logic.double-negation-stable-subtypes
@@ -181,32 +178,4 @@ abstract
   preserves-sim-union-subtype _ _ (S⊆T , T⊆S) _ _ (U⊆V , V⊆U) =
     ( ( λ x → map-disjunction (S⊆T x) (U⊆V x)) ,
       ( λ x → map-disjunction (T⊆S x) (V⊆U x)))
-```
-
-### The large monoid of subtypes under unions
-
-```agda
-module _
-  {l : Level} (X : UU l)
-  where
-
-  large-semigroup-union-subtype : Large-Semigroup (λ l2 → l ⊔ lsuc l2)
-  large-semigroup-union-subtype =
-    make-Large-Semigroup
-      ( powerset-Set X)
-      ( union-subtype)
-      ( associative-union-subtype)
-
-  large-monoid-union-subtype :
-    Large-Monoid (λ l2 → l ⊔ lsuc l2) (λ l1 l2 → l ⊔ l1 ⊔ l2)
-  large-monoid-union-subtype =
-    make-Large-Monoid
-      ( large-semigroup-union-subtype)
-      ( large-similarity-relation-sim-subtype X)
-      ( λ l2 → raise-subtype l2)
-      ( sim-raise-subtype)
-      ( preserves-sim-union-subtype)
-      ( empty-subtype lzero X)
-      ( left-unit-law-union-subtype)
-      ( right-unit-law-union-subtype)
 ```
