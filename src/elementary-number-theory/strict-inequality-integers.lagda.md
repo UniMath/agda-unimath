@@ -278,7 +278,7 @@ module _
           ( I))
 ```
 
-### The inclusion of natural numbers preserves strict inequality
+### The inclusion of natural numbers preserves and reflects strict inequality
 
 ```agda
 abstract
@@ -297,6 +297,25 @@ abstract
         ( int-ℕ m)
         ( int-ℕ n)
         ( preserves-le-int-ℕ m n m<n))
+
+  reflects-le-int-ℕ : (m n : ℕ) → le-ℤ (int-ℕ m) (int-ℕ n) → le-ℕ m n
+  reflects-le-int-ℕ zero-ℕ (succ-ℕ _) _ = star
+  reflects-le-int-ℕ (succ-ℕ m) (succ-ℕ n) H =
+    reflects-le-int-ℕ
+      ( m)
+      ( n)
+      ( reflects-le-left-add-ℤ
+        ( one-ℤ)
+        ( int-ℕ m)
+        ( int-ℕ n)
+        ( binary-tr
+          ( le-ℤ)
+          ( inv (succ-int-ℕ m) ∙ is-right-add-one-succ-ℤ (int-ℕ m))
+          ( inv (succ-int-ℕ n) ∙ is-right-add-one-succ-ℤ (int-ℕ n))
+          ( H)))
+
+  iff-le-int-ℕ : (m n : ℕ) → le-ℕ m n ↔ le-ℤ (int-ℕ m) (int-ℕ n)
+  iff-le-int-ℕ m n = (preserves-le-int-ℕ m n , reflects-le-int-ℕ m n)
 ```
 
 ### Negation reverses the order of strict inequality of integers

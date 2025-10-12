@@ -37,6 +37,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -244,6 +245,20 @@ module _
       ( concatenate-le-sim-fraction-ℤ p q q' I K)
 ```
 
+### The similarity of integer fractions reflects strict inequality
+
+```agda
+module _
+  (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
+  where
+
+  reflects-le-sim-fraction-ℤ : le-fraction-ℤ p' q' → le-fraction-ℤ p q
+  reflects-le-sim-fraction-ℤ =
+    preserves-le-sim-fraction-ℤ p' q' p q
+      ( symmetric-sim-fraction-ℤ p p' H)
+      ( symmetric-sim-fraction-ℤ q q' K)
+```
+
 ### Fractions with equal denominator compare the same as their numerators
 
 ```agda
@@ -354,4 +369,24 @@ neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
     ( inv (left-negative-law-mul-ℤ m' n))
     ( inv (left-negative-law-mul-ℤ m n'))
     ( neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
+```
+
+### The canonical embedding of integers preserves and reflects strict inequality
+
+```agda
+abstract
+  preserves-le-in-fraction-ℤ :
+    (x y : ℤ) → le-ℤ x y → le-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
+  preserves-le-in-fraction-ℤ x y =
+    binary-tr le-ℤ (inv (right-unit-law-mul-ℤ x)) (inv (right-unit-law-mul-ℤ y))
+
+  reflects-le-in-fraction-ℤ :
+    (x y : ℤ) → le-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y) → le-ℤ x y
+  reflects-le-in-fraction-ℤ x y =
+    binary-tr le-ℤ (right-unit-law-mul-ℤ x) (right-unit-law-mul-ℤ y)
+
+  iff-le-in-fraction-ℤ :
+    (x y : ℤ) → le-ℤ x y ↔ le-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
+  iff-le-in-fraction-ℤ x y =
+    ( preserves-le-in-fraction-ℤ x y , reflects-le-in-fraction-ℤ x y)
 ```
