@@ -51,6 +51,8 @@ negative whole numbers.
 ℤ = ℕ + (unit + ℕ)
 
 {-# BUILTIN INTEGER ℤ #-}
+
+{-# DISPLAY _+_ ℕ (_+_ unit ℕ) = ℤ #-}
 ```
 
 ### Inclusion of the negative integers

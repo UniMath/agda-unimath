@@ -102,6 +102,7 @@ open import group-theory.homotopy-automorphism-groups public
 open import group-theory.images-of-group-homomorphisms public
 open import group-theory.images-of-semigroup-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
+open import group-theory.integer-multiples-of-elements-large-abelian-groups public
 open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.integer-powers-of-elements-large-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
@@ -118,6 +119,7 @@ open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels-homomorphisms-abelian-groups public
 open import group-theory.kernels-homomorphisms-concrete-groups public
 open import group-theory.kernels-homomorphisms-groups public
+open import group-theory.large-abelian-groups public
 open import group-theory.large-commutative-monoids public
 open import group-theory.large-groups public
 open import group-theory.large-monoids public
@@ -133,6 +135,7 @@ open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.multiples-of-elements-abelian-groups public
+open import group-theory.multiples-of-elements-large-abelian-groups public
 open import group-theory.nontrivial-groups public
 open import group-theory.normal-closures-subgroups public
 open import group-theory.normal-cores-subgroups public
