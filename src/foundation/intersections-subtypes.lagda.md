@@ -26,9 +26,6 @@ open import foundation.universe-levels
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
 
-open import group-theory.large-monoids
-open import group-theory.large-semigroups
-
 open import order-theory.greatest-lower-bounds-large-posets
 ```
 
@@ -183,32 +180,4 @@ abstract
   preserves-sim-intersection-subtype _ _ (S⊆T , T⊆S) _ _ (U⊆V , V⊆U) =
     ( ( λ x → map-product (S⊆T x) (U⊆V x)) ,
       ( λ x → map-product (T⊆S x) (V⊆U x)))
-```
-
-### The large monoid of subtypes under intersection
-
-```agda
-module _
-  {l : Level} (X : UU l)
-  where
-
-  large-semigroup-intersection-subtype : Large-Semigroup (λ l2 → l ⊔ lsuc l2)
-  large-semigroup-intersection-subtype =
-    make-Large-Semigroup
-      ( powerset-Set X)
-      ( intersection-subtype)
-      ( associative-intersection-subtype)
-
-  large-monoid-intersection-subtype :
-    Large-Monoid (λ l2 → l ⊔ lsuc l2) (λ l1 l2 → l ⊔ l1 ⊔ l2)
-  large-monoid-intersection-subtype =
-    make-Large-Monoid
-      ( large-semigroup-intersection-subtype)
-      ( large-similarity-relation-sim-subtype X)
-      ( λ l → raise-subtype l)
-      ( sim-raise-subtype)
-      ( preserves-sim-intersection-subtype)
-      ( full-subtype lzero X)
-      ( left-unit-law-intersection-subtype)
-      ( right-unit-law-intersection-subtype)
 ```
