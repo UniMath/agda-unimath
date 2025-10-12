@@ -32,10 +32,11 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 
 ## Idea
 
-The **integer power operation** on a [group](group-theory.groups.md) is the map
-`k x ↦ xᵏ`, which is defined by
+The [integer](elementary-number-theory.integers.md)
+{{#concept "power operation" Disambiguation="raising an element of a group to an integer power" Agda=integer-power-Group}}
+on a [group](group-theory.groups.md) is the map `k x ↦ xᵏ`, which is defined by
 [iteratively](foundation.iterating-automorphisms.md) multiplying `x` with itself
-an [integer](elementary-number-theory.integers.md) `k` times.
+`k` times, where `k` is an integer.
 
 ## Definitions
 
@@ -626,3 +627,7 @@ module _
     ( ap (integer-power-Group H k) p) ∙
     ( inv (preserves-integer-powers-hom-Group G H g k x))
 ```
+
+## See also
+
+- [Natural powers of elements of groups](group-theory.powers-of-elements-groups.md)
