@@ -174,7 +174,7 @@ module _
     symmetric-sim-Large-Monoid _ _ (sim-raise-Large-Monoid M l2 x)
 ```
 
-### Raising an element of a large monoid by two universe levels is equivalent to raising it by the lub of the universe levels
+### Raising an element of a large monoid by two universe levels is equivalent to raising it by the least upper bound of the universe levels
 
 ```agda
 module _
