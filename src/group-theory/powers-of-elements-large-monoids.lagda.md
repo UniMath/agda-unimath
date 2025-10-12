@@ -170,16 +170,13 @@ module _
       ( mul-Large-Monoid M x y ＝ mul-Large-Monoid M y x) →
       ( mul-Large-Monoid M (power-Large-Monoid M n x) y) ＝
       ( mul-Large-Monoid M y (power-Large-Monoid M n x))
-    commute-powers-Large-Monoid' 0 {x} {y} H =
-      eq-sim-Large-Monoid M _ _
-        ( similarity-reasoning
-          raise-unit-Large-Monoid M _ * y
-          ~ y
-            by raise-left-unit-law-Large-Monoid M y
-          ~ y * raise-unit-Large-Monoid M _
-            by
-              symmetric-sim-Large-Monoid M _ _
-                ( raise-right-unit-law-Large-Monoid M y))
+    commute-powers-Large-Monoid' {l1} {l2} 0 {x} {y} H =
+      equational-reasoning
+        raise-unit-Large-Monoid M l1 * y
+        ＝ raise-Large-Monoid M l1 y
+          by raise-left-unit-law-Large-Monoid M y
+        ＝ y * raise-unit-Large-Monoid M l1
+          by inv (raise-right-unit-law-Large-Monoid M y)
     commute-powers-Large-Monoid' 1 H = H
     commute-powers-Large-Monoid' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -205,16 +202,13 @@ module _
       ( mul-Large-Monoid M x y ＝ mul-Large-Monoid M y x) →
       ( mul-Large-Monoid M x (power-Large-Monoid M n y)) ＝
       ( mul-Large-Monoid M (power-Large-Monoid M n y) x)
-    commute-powers-Large-Monoid'' 0 {x} {y} H =
-      eq-sim-Large-Monoid M _ _
-        ( similarity-reasoning
-          x * raise-unit-Large-Monoid M _
-          ~ x
-            by raise-right-unit-law-Large-Monoid M x
-          ~ raise-unit-Large-Monoid M _ * x
-            by
-              symmetric-sim-Large-Monoid M _ _
-                ( raise-left-unit-law-Large-Monoid M x))
+    commute-powers-Large-Monoid'' {l1} {l2} 0 {x} {y} H =
+      equational-reasoning
+        x * raise-unit-Large-Monoid M l2
+        ＝ raise-Large-Monoid M l2 x
+          by raise-right-unit-law-Large-Monoid M x
+        ＝ raise-unit-Large-Monoid M l2 * x
+          by inv (raise-left-unit-law-Large-Monoid M x)
     commute-powers-Large-Monoid'' 1 H = H
     commute-powers-Large-Monoid'' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -270,17 +264,13 @@ module _
       power-Large-Monoid M n (mul-Large-Monoid M x y) ＝
       mul-Large-Monoid M (power-Large-Monoid M n x) (power-Large-Monoid M n y)
     distributive-power-mul-Large-Monoid {l1} {l2} 0 _ =
-      eq-sim-Large-Monoid M _ _
-        ( similarity-reasoning
-          raise-unit-Large-Monoid M (l1 ⊔ l2)
-          ~ unit-Large-Monoid M
-            by symmetric-sim-Large-Monoid M _ _ (sim-raise-Large-Monoid M _ _)
-          ~ raise-unit-Large-Monoid M l2
-            by sim-raise-Large-Monoid M _ _
-          ~ raise-unit-Large-Monoid M l1 * raise-unit-Large-Monoid M l2
-            by
-              symmetric-sim-Large-Monoid M _ _
-                ( raise-left-unit-law-Large-Monoid M _))
+      inv
+        ( equational-reasoning
+            raise-unit-Large-Monoid M l1 * raise-unit-Large-Monoid M l2
+            ＝ raise-Large-Monoid M l1 (raise-unit-Large-Monoid M l2)
+              by raise-left-unit-law-Large-Monoid M _
+            ＝ raise-unit-Large-Monoid M (l1 ⊔ l2)
+              by raise-raise-Large-Monoid M _)
     distributive-power-mul-Large-Monoid 1 _ = refl
     distributive-power-mul-Large-Monoid (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
