@@ -496,13 +496,10 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  (let _*_ = mul-Large-Group G) (let neg = inv-Large-Group G)
   where
 
   open similarity-reasoning-Large-Group G
-
-  private
-    _*_ = mul-Large-Group G
-    neg = inv-Large-Group G
 
   abstract
     cancel-left-div-mul-Large-Group :
