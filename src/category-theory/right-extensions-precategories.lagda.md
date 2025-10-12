@@ -269,14 +269,22 @@ module _
   pr2 id-right-extension-Precategory =
     id-natural-transformation-Precategory C D F
 
-  square-right-extension-Precategory :
+  extension-square-right-extension-Precategory :
     (R : right-extension-Precategory C D D F F) →
-    right-extension-Precategory C D D F F
-  pr1 (square-right-extension-Precategory R) =
+    functor-Precategory D D
+  extension-square-right-extension-Precategory R =
     comp-functor-Precategory D D D
       ( extension-right-extension-Precategory C D D F F R)
       ( extension-right-extension-Precategory C D D F F R)
-  pr2 (square-right-extension-Precategory R) =
+
+  natural-transformation-square-right-extension-Precategory :
+    (R : right-extension-Precategory C D D F F) →
+    natural-transformation-Precategory C D
+      ( comp-functor-Precategory C D D
+        ( extension-square-right-extension-Precategory R)
+        ( F))
+      ( F)
+  natural-transformation-square-right-extension-Precategory R =
     comp-natural-transformation-Precategory C D
       ( comp-functor-Precategory C D D
         ( comp-functor-Precategory D D D
@@ -295,6 +303,13 @@ module _
         ( F)
         ( extension-right-extension-Precategory C D D F F R)
         ( natural-transformation-right-extension-Precategory C D D F F R))
+
+  square-right-extension-Precategory :
+    (R : right-extension-Precategory C D D F F) →
+    right-extension-Precategory C D D F F
+  square-right-extension-Precategory R =
+    ( extension-square-right-extension-Precategory R ,
+      natural-transformation-square-right-extension-Precategory R)
 ```
 
 ## See also

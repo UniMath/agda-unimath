@@ -196,6 +196,7 @@ open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
+open import elementary-number-theory.square-roots-positive-rational-numbers public
 open import elementary-number-theory.squares-integers public
 open import elementary-number-theory.squares-modular-arithmetic public
 open import elementary-number-theory.squares-natural-numbers public

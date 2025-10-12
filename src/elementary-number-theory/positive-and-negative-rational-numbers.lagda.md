@@ -224,3 +224,17 @@ abstract
       ( le-zero-is-positive-ℚ P)
       ( leq-zero-is-negative-ℚ N)
 ```
+
+### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+
+```agda
+abstract
+  is-nonpositive-leq-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
+  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
+    is-nonpositive-leq-zero-ℚ
+      ( p)
+      ( transitive-leq-ℚ p q zero-ℚ
+        ( leq-zero-is-nonpositive-ℚ q nonpos-q)
+        ( p≤q))
+```
