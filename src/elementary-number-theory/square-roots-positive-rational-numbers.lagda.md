@@ -14,6 +14,7 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import group-theory.groups
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
@@ -195,7 +196,8 @@ abstract
                     ( refl)
                     ( ap
                       ( rational-ℚ⁺)
-                      ( is-section-right-div-ℚ⁺
+                      ( is-section-right-div-Group
+                        ( group-mul-ℚ⁺)
                         ( p⁺)
                         ( positive-diff-le-ℚ _ _ p²<q)))
               ＝ q
@@ -229,7 +231,7 @@ abstract
             ( p)
             ( tr
               ( le-ℚ _)
-              ( ap rational-ℚ⁺ (is-retraction-right-div-ℚ⁺ p⁺ p⁺))
+              ( is-retraction-right-div-ℚ⁺ p⁺ p)
               ( preserves-le-right-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _
                 ( le-diff-rational-ℚ⁺ (p *ℚ p) q⁺)))
             ( δ+δ<⟨p²-q⟩/p))
@@ -265,7 +267,10 @@ abstract
                   ( le-ℚ _)
                   ( ap
                     ( rational-ℚ⁺)
-                    ( is-section-right-div-ℚ⁺ p⁺ (positive-diff-le-ℚ _ _ q<p²)))
+                    ( is-section-right-div-Group
+                      ( group-mul-ℚ⁺)
+                      ( p⁺)
+                      ( positive-diff-le-ℚ _ _ q<p²)))
                   ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
 
   rounded-above-square-le-ℚ⁺ :

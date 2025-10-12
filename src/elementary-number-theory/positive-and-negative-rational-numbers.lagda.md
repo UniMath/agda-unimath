@@ -18,6 +18,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.empty-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -144,23 +145,6 @@ abstract
   leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
 ```
 
-### If `p ≤ q` and `p` is positive, then `q` is positive
-
-```agda
-abstract
-  is-positive-leq-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
-    is-positive-le-zero-ℚ
-      ( q)
-      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
-
-  is-positive-le-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-le-ℚ⁺ p q p<q =
-    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
-```
-
 ### If `p < q` and `p` is nonnegative, then `q` is positive
 
 ```agda
@@ -240,31 +224,6 @@ abstract
     (q : ℚ) → is-nonnegative-ℚ q ↔ (¬ (is-negative-ℚ q))
   is-nonnegative-iff-not-is-negative-ℚ _ =
     ( not-is-negative-is-nonnegative-ℚ , is-nonnegative-not-is-negative-ℚ)
-```
-
-### Nonpositivity is negated positivity
-
-```agda
-abstract
-  not-is-positive-is-nonpositive-ℚ :
-    {q : ℚ} → is-nonpositive-ℚ q → ¬ (is-positive-ℚ q)
-  not-is-positive-is-nonpositive-ℚ {q} is-nonpos-q is-pos-q =
-    not-leq-le-ℚ zero-ℚ q
-      ( le-zero-is-positive-ℚ q is-pos-q)
-      ( leq-zero-is-nonpositive-ℚ q is-nonpos-q)
-
-  is-nonpositive-not-is-positive-ℚ :
-    {q : ℚ} → ¬ (is-positive-ℚ q) → is-nonpositive-ℚ q
-  is-nonpositive-not-is-positive-ℚ {q} ¬is-pos-q =
-    rec-coproduct
-      ( λ 0<q → ex-falso (¬is-pos-q (is-positive-le-zero-ℚ q 0<q)))
-      ( is-nonpositive-leq-zero-ℚ q)
-      ( decide-le-leq-ℚ zero-ℚ q)
-
-  is-nonpositive-iff-not-is-positive-ℚ :
-    (q : ℚ) → is-nonpositive-ℚ q ↔ (¬ (is-positive-ℚ q))
-  is-nonpositive-iff-not-is-positive-ℚ _ =
-    ( not-is-positive-is-nonpositive-ℚ , is-nonpositive-not-is-positive-ℚ)
 ```
 
 ### If `p < q` and `q` is nonpositive, then `p` is negative
