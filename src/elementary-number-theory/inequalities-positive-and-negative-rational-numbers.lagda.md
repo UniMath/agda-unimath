@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -53,6 +54,20 @@ abstract
   leq-negative-nonnegative-ℚ :
     (p : ℚ⁻) (q : ℚ⁰⁺) → leq-ℚ (rational-ℚ⁻ p) (rational-ℚ⁰⁺ q)
   leq-negative-nonnegative-ℚ p q = leq-le-ℚ (le-negative-nonnegative-ℚ p q)
+```
+
+#### Any negative rational number is less than any positive rational number
+
+```agda
+abstract
+  le-negative-positive-ℚ :
+    (p : ℚ⁻) (q : ℚ⁺) → le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁺ q)
+  le-negative-positive-ℚ p q =
+    le-negative-nonnegative-ℚ p (nonnegative-ℚ⁺ q)
+
+  leq-negative-positive-ℚ :
+    (p : ℚ⁻) (q : ℚ⁺) → leq-ℚ (rational-ℚ⁻ p) (rational-ℚ⁺ q)
+  leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
 ```
 
 #### A nonpositive rational number is less than a positive rational number

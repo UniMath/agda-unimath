@@ -264,13 +264,13 @@ opaque
   mediant-zero-ℚ⁻ : ℚ⁻ → ℚ⁻
   mediant-zero-ℚ⁻ (q , is-neg-q) =
     ( mediant-ℚ q zero-ℚ ,
-      is-negative-le-zero-ℚ _
-        ( le-right-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)))
+      is-negative-le-zero-ℚ
+      ( le-right-mediant-ℚ _ _ (le-zero-is-negative-ℚ is-neg-q)))
 
   le-mediant-zero-ℚ⁻ :
     (q : ℚ⁻) → le-ℚ (rational-ℚ⁻ q) (rational-ℚ⁻ (mediant-zero-ℚ⁻ q))
   le-mediant-zero-ℚ⁻ (q , is-neg-q) =
-    le-left-mediant-ℚ _ _ (le-zero-is-negative-ℚ q is-neg-q)
+    le-left-mediant-ℚ _ _ (le-zero-is-negative-ℚ is-neg-q)
 
 rational-mediant-zero-ℚ⁻ : ℚ⁻ → ℚ
 rational-mediant-zero-ℚ⁻ q = rational-ℚ⁻ (mediant-zero-ℚ⁻ q)

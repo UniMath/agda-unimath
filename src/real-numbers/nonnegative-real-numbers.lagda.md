@@ -288,7 +288,6 @@ abstract
     is-positive-ℚ q
   is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) q x<q =
     is-positive-le-zero-ℚ
-      ( q)
       ( reflects-le-real-ℚ
         ( zero-ℚ)
         ( q)
@@ -303,7 +302,7 @@ opaque
     {l : Level} → (x : ℝ l) → (upper-cut-ℝ x ⊆ is-positive-prop-ℚ) →
     is-nonnegative-ℝ x
   is-nonnegative-is-positive-upper-cut-ℝ x Uₓ⊆ℚ⁺ =
-    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ q (Uₓ⊆ℚ⁺ q q∈Uₓ))
+    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ (Uₓ⊆ℚ⁺ q q∈Uₓ))
 ```
 
 ### A real number is nonnegative if and only if every negative rational number is in its lower cut
@@ -316,13 +315,13 @@ opaque
     {l : Level} (x : ℝ l) → (is-negative-prop-ℚ ⊆ lower-cut-ℝ x) →
     is-nonnegative-ℝ x
   is-nonnegative-leq-negative-lower-cut-ℝ x ℚ⁻⊆Lₓ q q<0 =
-    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q q<0)
+    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q<0)
 
   leq-negative-lower-cut-is-nonnegative-ℝ :
     {l : Level} (x : ℝ l) → is-nonnegative-ℝ x →
     (is-negative-prop-ℚ ⊆ lower-cut-ℝ x)
   leq-negative-lower-cut-is-nonnegative-ℝ x 0≤x q is-neg-q =
-    0≤x q (le-zero-is-negative-ℚ q is-neg-q)
+    0≤x q (le-zero-is-negative-ℚ is-neg-q)
 ```
 
 ### Every nonnegative real number has a positive rational number in its upper cut

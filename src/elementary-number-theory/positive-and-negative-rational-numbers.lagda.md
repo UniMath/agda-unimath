@@ -211,7 +211,7 @@ neg-ℚ⁰⁻ (q , is-nonpos-q) =
 
 ### Exclusive cases
 
-#### A rational is not both negative and positive
+#### A rational number is not both negative and positive
 
 ```agda
 abstract
@@ -225,16 +225,16 @@ abstract
       ( leq-zero-is-negative-ℚ N)
 ```
 
-### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+#### A rational number is not both negative and nonnegative
 
 ```agda
 abstract
-  is-nonpositive-leq-ℚ⁰⁻ :
-    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
-  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
-    is-nonpositive-leq-zero-ℚ
-      ( p)
-      ( transitive-leq-ℚ p q zero-ℚ
-        ( leq-zero-is-nonpositive-ℚ q nonpos-q)
-        ( p≤q))
+  not-is-negative-is-nonnegative-ℚ :
+    {x : ℚ} → ¬ (is-negative-ℚ x × is-nonnegative-ℚ x)
+  not-is-negative-is-nonnegative-ℚ {x} (N , NN) =
+    not-leq-le-ℚ
+      ( x)
+      ( zero-ℚ)
+      ( le-zero-is-negative-ℚ N)
+      ( leq-zero-is-nonnegative-ℚ NN)
 ```

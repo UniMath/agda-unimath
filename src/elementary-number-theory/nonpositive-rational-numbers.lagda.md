@@ -120,3 +120,16 @@ is-nonpositive-iff-leq-zero-ℚ q =
   ( leq-zero-is-nonpositive-ℚ ,
     is-nonpositive-leq-zero-ℚ)
 ```
+
+### If `p ≤ q` and `q` is nonpositive, then `p` is nonpositive
+
+```agda
+abstract
+  is-nonpositive-leq-ℚ⁰⁻ :
+    (q : ℚ⁰⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁰⁻ q) → is-nonpositive-ℚ p
+  is-nonpositive-leq-ℚ⁰⁻ (q , nonpos-q) p p≤q =
+    is-nonpositive-leq-zero-ℚ
+      ( transitive-leq-ℚ p q zero-ℚ
+        ( leq-zero-is-nonpositive-ℚ nonpos-q)
+        ( p≤q))
+```

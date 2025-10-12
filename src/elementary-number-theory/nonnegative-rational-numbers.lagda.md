@@ -249,3 +249,28 @@ abstract
 nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
 nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
 ```
+
+### If `x ≤ y` and `x` is nonnegative, then `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-leq-ℚ⁰⁺ :
+    (x : ℚ⁰⁺) (y : ℚ) → leq-ℚ (rational-ℚ⁰⁺ x) y →
+    is-nonnegative-ℚ y
+  is-nonnegative-leq-ℚ⁰⁺ (x , is-nonneg-x) y x≤y =
+    is-nonnegative-leq-zero-ℚ
+      ( transitive-leq-ℚ zero-ℚ x y
+        ( x≤y)
+        ( leq-zero-is-nonnegative-ℚ is-nonneg-x))
+```
+
+### If `x < y` and `x` is nonnegative, then `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-le-ℚ⁰⁺ :
+    (x : ℚ⁰⁺) (y : ℚ) → le-ℚ (rational-ℚ⁰⁺ x) y →
+    is-nonnegative-ℚ y
+  is-nonnegative-le-ℚ⁰⁺ x y x<y =
+    is-nonnegative-leq-ℚ⁰⁺ x y (leq-le-ℚ x<y)
+```
