@@ -157,11 +157,6 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
   where
 
-  open similarity-reasoning-Large-Group G
-
-  private
-    _*_ = mul-Large-Group G
-
   abstract
     distributive-power-mul-Large-Group :
       {l1 l2 : Level} (n : ℕ) →
