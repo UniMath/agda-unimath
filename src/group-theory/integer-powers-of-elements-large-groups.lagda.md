@@ -210,14 +210,12 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
-  where
-
-  private
+  (let _*_ = mul-Large-Group G)
+  (let mul-inv = inv-Large-Group G)
+  (let
     _^_ : {l : Level} → type-Large-Group G l → ℤ → type-Large-Group G l
-    x ^ k = int-power-Large-Group G k x
-
-    _*_ = mul-Large-Group G
-    mul-inv = inv-Large-Group G
+    x ^ k = int-power-Large-Group G k x)
+  where
 
   abstract
     commute-int-powers-Large-Group' :
