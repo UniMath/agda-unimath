@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
+open import foundation.subtypes
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -436,4 +437,29 @@ module _
     ( ( raise-Large-Monoid M l2 ,
         inv (raise-mul-Large-Monoid M _ _)) ,
       raise-raise-Large-Monoid M _)
+```
+
+### Having a similar element at a universe level is a proposition
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (M : Large-Monoid α β)
+  where
+
+  open similarity-reasoning-Large-Monoid M
+
+  abstract
+    is-prop-sim-Large-Monoid :
+      {l1 : Level} (l2 : Level) (x : type-Large-Monoid M l1) →
+      is-prop (Σ (type-Large-Monoid M l2) (sim-Large-Monoid M x))
+    is-prop-sim-Large-Monoid l2 x =
+      is-prop-all-elements-equal
+        ( λ (y , x~y) (y' , x~y') →
+          eq-type-subtype
+            ( sim-prop-Large-Monoid M x)
+            ( eq-sim-Large-Monoid M _ _
+              ( similarity-reasoning
+                y
+                ~ x by symmetric-sim-Large-Monoid M _ _ x~y
+                ~ y' by x~y')))
 ```
