@@ -10,13 +10,15 @@ module group-theory.large-monoids where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
-open import foundation.subtypes
 open import foundation.logical-equivalences
+open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
@@ -462,4 +464,44 @@ module _
                 y
                 ~ x by symmetric-sim-Large-Monoid M _ _ x~y
                 ~ y' by x~y')))
+```
+
+### Raising universe levels is an embedding
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (M : Large-Monoid α β)
+  (l1 l2 : Level)
+  where
+
+  open similarity-reasoning-Large-Monoid M
+
+  abstract
+    is-prop-map-raise-Large-Monoid : is-prop-map (raise-Large-Monoid M {l1} l2)
+    is-prop-map-raise-Large-Monoid x =
+      is-prop-all-elements-equal
+        ( λ (y , ry=x) (y' , ry'=x) →
+          eq-type-subtype
+            ( λ z →
+              Id-Prop (set-Large-Monoid M _) (raise-Large-Monoid M l2 z) x)
+            ( eq-sim-Large-Monoid M _ _
+              ( similarity-reasoning
+                y
+                ~ raise-Large-Monoid M l2 y
+                  by sim-raise-Large-Monoid M l2 y
+                ~ x
+                  by sim-eq-Large-Monoid M ry=x
+                ~ raise-Large-Monoid M l2 y'
+                  by sim-eq-Large-Monoid M (inv ry'=x)
+                ~ y'
+                  by sim-raise-Large-Monoid' M l2 y')))
+
+    is-emb-raise-Large-Monoid : is-emb (raise-Large-Monoid M {l1} l2)
+    is-emb-raise-Large-Monoid =
+      is-emb-is-prop-map is-prop-map-raise-Large-Monoid
+
+  emb-raise-Large-Monoid :
+    type-Large-Monoid M l1 ↪ type-Large-Monoid M (l1 ⊔ l2)
+  emb-raise-Large-Monoid =
+    ( raise-Large-Monoid M l2 , is-emb-raise-Large-Monoid)
 ```
