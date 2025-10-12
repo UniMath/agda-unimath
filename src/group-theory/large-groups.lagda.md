@@ -24,6 +24,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.large-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -224,6 +225,16 @@ module _
     raise-Large-Group G l3 (mul-Large-Group G x y)
   raise-right-mul-Large-Group =
     raise-right-mul-Large-Monoid (large-monoid-Large-Group G)
+
+  raise-mul-Large-Group :
+    {l1 l2 l3 l4 : Level} →
+    (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
+    mul-Large-Group G
+      ( raise-Large-Group G l3 x)
+      ( raise-Large-Group G l4 y) ＝
+    raise-Large-Group G (l3 ⊔ l4) (mul-Large-Group G x y)
+  raise-mul-Large-Group =
+    raise-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-left-unit-law-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
@@ -714,4 +725,34 @@ module _
     type-Large-Group G l2 ↪ type-Large-Group G (l1 ⊔ l2)
   emb-right-mul-Large-Group =
     ( mul-Large-Group' G x , is-emb-right-mul-Large-Group)
+```
+
+### The raise operation is a group homomorphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  (l1 l2 : Level)
+  where
+
+  hom-raise-Large-Group :
+    hom-Group
+      ( group-Large-Group G l1)
+      ( group-Large-Group G (l1 ⊔ l2))
+  hom-raise-Large-Group =
+    ( raise-Large-Group G l2 , inv (raise-mul-Large-Group G _ _))
+```
+
+### Raising universe levels is an embedding
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  (l1 l2 : Level)
+  where
+
+  emb-raise-Large-Group :
+    type-Large-Group G l1 ↪ type-Large-Group G (l1 ⊔ l2)
+  emb-raise-Large-Group =
+    emb-raise-Large-Monoid (large-monoid-Large-Group G) l1 l2
 ```
