@@ -375,32 +375,32 @@ module _
         ( let
             open similarity-reasoning-Large-Group G
             _*_ = mul-Large-Group G
-            neg = inv-Large-Group G
+            mul-inv = inv-Large-Group G
           in
             eq-sim-Large-Group G _ _
               ( unique-right-inv-Large-Group G _ _
                 ( equational-reasoning
-                  (x * y) * (neg y * neg x)
-                  ＝ x * (y * (neg y * neg x))
+                  (x * y) * (mul-inv y * mul-inv x)
+                  ＝ x * (y * (mul-inv y * mul-inv x))
                     by associative-mul-Large-Group G _ _ _
-                  ＝ x * ((y * neg y) * neg x)
+                  ＝ x * ((y * mul-inv y) * mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( inv (associative-mul-Large-Group G _ _ _))
-                  ＝ x * (raise-unit-Large-Group G l2 * neg x)
+                  ＝ x * (raise-unit-Large-Group G l2 * mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( ap-mul-Large-Group G
                           ( right-inverse-law-mul-Large-Group G y)
                           ( refl))
-                  ＝ x * raise-Large-Group G l2 (neg x)
+                  ＝ x * raise-Large-Group G l2 (mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( raise-left-unit-law-Large-Group G _)
-                  ＝ raise-Large-Group G l2 (x * neg x)
+                  ＝ raise-Large-Group G l2 (x * mul-inv x)
                     by raise-right-mul-Large-Group G _ _
                   ＝ raise-Large-Group G l2 (raise-unit-Large-Group G l1)
                     by
@@ -496,7 +496,7 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
-  (let _*_ = mul-Large-Group G) (let neg = inv-Large-Group G)
+  (let _*_ = mul-Large-Group G) (let mul-inv = inv-Large-Group G)
   where
 
   open similarity-reasoning-Large-Group G
@@ -510,8 +510,8 @@ module _
       raise-Large-Group G l1 y
     cancel-left-div-mul-Large-Group {l1} {l2} x y =
       equational-reasoning
-        neg x * (x * y)
-        ＝ (neg x * x) * y
+        mul-inv x * (x * y)
+        ＝ (mul-inv x * x) * y
           by inv (associative-mul-Large-Group G _ _ _)
         ＝ raise-unit-Large-Group G l1 * y
           by ap-mul-Large-Group G (left-inverse-law-mul-Large-Group G x) refl
@@ -525,7 +525,7 @@ module _
         ( y)
     sim-cancel-left-div-mul-Large-Group {l1} x y =
       similarity-reasoning
-        neg x * (x * y)
+        mul-inv x * (x * y)
         ~ raise-Large-Group G l1 y
           by sim-eq-Large-Group G (cancel-left-div-mul-Large-Group x y)
         ~ y
@@ -539,11 +539,11 @@ module _
       raise-Large-Group G l1 y
     cancel-left-mul-div-Large-Group {l1} x y =
       equational-reasoning
-        x * (neg x * y)
-        ＝ neg (neg x) * (neg x * y)
+        x * (mul-inv x * y)
+        ＝ mul-inv (mul-inv x) * (mul-inv x * y)
           by ap-mul-Large-Group G (inv (inv-inv-Large-Group G x)) refl
         ＝ raise-Large-Group G l1 y
-          by cancel-left-div-mul-Large-Group (neg x) y
+          by cancel-left-div-mul-Large-Group (mul-inv x) y
 
     sim-cancel-left-mul-div-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -552,9 +552,9 @@ module _
         ( y)
     sim-cancel-left-mul-div-Large-Group x y =
       tr
-        ( λ z → sim-Large-Group G (z * (neg x * y)) y)
+        ( λ z → sim-Large-Group G (z * (mul-inv x * y)) y)
         ( inv-inv-Large-Group G x)
-        ( sim-cancel-left-div-mul-Large-Group (neg x) y)
+        ( sim-cancel-left-div-mul-Large-Group (mul-inv x) y)
 
     cancel-right-mul-div-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -562,8 +562,8 @@ module _
       raise-Large-Group G l1 y
     cancel-right-mul-div-Large-Group {l1} x y =
       equational-reasoning
-        (y * x) * neg x
-        ＝ y * (x * neg x)
+        (y * x) * mul-inv x
+        ＝ y * (x * mul-inv x)
           by associative-mul-Large-Group G _ _ _
         ＝ y * raise-unit-Large-Group G l1
           by ap-mul-Large-Group G refl (right-inverse-law-mul-Large-Group G x)
@@ -589,11 +589,11 @@ module _
       raise-Large-Group G l1 y
     cancel-right-div-mul-Large-Group {l1} x y =
       equational-reasoning
-        (y * neg x) * x
-        ＝ (y * neg x) * neg (neg x)
+        (y * mul-inv x) * x
+        ＝ (y * mul-inv x) * mul-inv (mul-inv x)
           by ap-mul-Large-Group G refl (inv (inv-inv-Large-Group G x))
         ＝ raise-Large-Group G l1 y
-          by cancel-right-mul-div-Large-Group (neg x) y
+          by cancel-right-mul-div-Large-Group (mul-inv x) y
 
     sim-cancel-right-div-mul-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -602,9 +602,9 @@ module _
         ( y)
     sim-cancel-right-div-mul-Large-Group x y =
       tr
-        ( λ z → sim-Large-Group G ((y * neg x) * z) y)
+        ( λ z → sim-Large-Group G ((y * mul-inv x) * z) y)
         ( inv-inv-Large-Group G x)
-        ( sim-cancel-right-mul-div-Large-Group (neg x) y)
+        ( sim-cancel-right-mul-div-Large-Group (mul-inv x) y)
 ```
 
 ### Left multiplication by an element of a large group is an embedding
@@ -622,7 +622,7 @@ module _
       let
         open similarity-reasoning-Large-Group G
         _*_ = mul-Large-Group G
-        neg = inv-Large-Group G
+        mul-inv = inv-Large-Group G
       in
         is-prop-all-elements-equal
           ( λ (z , xz=y) (z' , xz'=y) →
@@ -635,11 +635,11 @@ module _
               ( eq-sim-Large-Group G _ _
                 ( similarity-reasoning
                   z
-                  ~ neg x * (x * z)
+                  ~ mul-inv x * (x * z)
                     by
                       symmetric-sim-Large-Group G _ _
                         ( sim-cancel-left-div-mul-Large-Group G x z)
-                  ~ neg x * (x * z')
+                  ~ mul-inv x * (x * z')
                     by
                       sim-eq-Large-Group G
                         ( ap-mul-Large-Group G
@@ -673,7 +673,7 @@ module _
       let
         open similarity-reasoning-Large-Group G
         _*_ = mul-Large-Group G
-        neg = inv-Large-Group G
+        mul-inv = inv-Large-Group G
       in
         is-prop-all-elements-equal
           ( λ (z , zx=y) (z' , z'x=y) →
@@ -686,11 +686,11 @@ module _
               ( eq-sim-Large-Group G _ _
                 ( similarity-reasoning
                   z
-                  ~ (z * x) * neg x
+                  ~ (z * x) * mul-inv x
                     by
                       symmetric-sim-Large-Group G _ _
                         ( sim-cancel-right-mul-div-Large-Group G x z)
-                  ~ (z' * x) * neg x
+                  ~ (z' * x) * mul-inv x
                     by
                       sim-eq-Large-Group G
                         ( ap-mul-Large-Group G
