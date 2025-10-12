@@ -118,6 +118,7 @@ open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels-homomorphisms-abelian-groups public
 open import group-theory.kernels-homomorphisms-concrete-groups public
 open import group-theory.kernels-homomorphisms-groups public
+open import group-theory.large-commutative-monoids public
 open import group-theory.large-groups public
 open import group-theory.large-monoids public
 open import group-theory.large-semigroups public
