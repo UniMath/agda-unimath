@@ -535,7 +535,7 @@ abstract
         by cancel-right-diff-add-ℝ _ _
 
   unique-left-inverse-add-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
     sim-ℝ x (neg-ℝ y)
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x

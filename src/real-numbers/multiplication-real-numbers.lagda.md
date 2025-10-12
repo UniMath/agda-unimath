@@ -1238,7 +1238,7 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ y ＝ neg-ℝ (x *ℝ y)
   left-negative-law-mul-ℝ x y =
     eq-sim-ℝ
-      (unique-right-inverse-add-ℝ _ _
+      ( unique-right-inverse-add-ℝ _ _
         ( similarity-reasoning-ℝ
           (x *ℝ y) +ℝ (neg-ℝ x *ℝ y)
           ~ℝ (x +ℝ neg-ℝ x) *ℝ y
