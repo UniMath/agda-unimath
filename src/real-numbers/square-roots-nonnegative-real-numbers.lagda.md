@@ -346,7 +346,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-a →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( a *ℚ d)
                         ( is-negative-mul-negative-positive-ℚ
                             ( is-neg-a)
@@ -362,7 +362,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-c →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( b *ℚ c)
                         ( is-negative-mul-positive-negative-ℚ
                             ( is-pos-b)
