@@ -226,6 +226,16 @@ abstract
     ( not-is-negative-is-nonnegative-ℚ , is-nonnegative-not-is-negative-ℚ)
 ```
 
+### A rational number cannot be negative and positive
+
+```agda
+abstract
+  not-is-negative-is-positive-ℚ :
+    {q : ℚ} → is-positive-ℚ q → ¬ (is-negative-ℚ q)
+  not-is-negative-is-positive-ℚ {q} is-pos-q =
+    not-is-negative-is-nonnegative-ℚ (is-nonnegative-is-positive-ℚ q is-pos-q)
+```
+
 ### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda
