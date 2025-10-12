@@ -282,6 +282,15 @@ module _
         ( commutative-add-ℝ x z)
         ( commutative-add-ℝ y z)
         ( preserves-sim-right-add-ℝ x≈y)
+
+abstract
+  preserves-sim-add-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
+    sim-ℝ x x' → sim-ℝ y y' → sim-ℝ (x +ℝ y) (x' +ℝ y')
+  preserves-sim-add-ℝ x~x' y~y' =
+    transitive-sim-ℝ _ _ _
+      ( preserves-sim-right-add-ℝ _ _ _ x~x')
+      ( preserves-sim-left-add-ℝ _ _ _ y~y')
 ```
 
 ### Swapping laws for addition on real numbers
@@ -516,7 +525,7 @@ abelian-group-add-ℝ-lzero =
 ```agda
 abstract
   unique-right-inverse-add-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
     sim-ℝ y (neg-ℝ x)
   unique-right-inverse-add-ℝ x y x+y~0 =
     similarity-reasoning-ℝ

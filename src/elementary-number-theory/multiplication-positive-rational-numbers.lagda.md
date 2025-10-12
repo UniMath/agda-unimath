@@ -11,6 +11,7 @@ module elementary-number-theory.multiplication-positive-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.multiplication-integer-fractions
@@ -29,6 +30,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -311,4 +313,38 @@ abstract
       ( λ r → le-ℚ⁺ r q)
       ( commutative-mul-ℚ⁺ p q)
       ( le-left-mul-less-than-one-ℚ⁺ p p<1 q)
+```
+
+### Multiplication of a positive rational by another positive rational greater than 1 is a strictly inflationary map
+
+```agda
+abstract
+  le-left-mul-greater-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ one-ℚ⁺ p → (q : ℚ⁺) → le-ℚ⁺ q (p *ℚ⁺ q)
+  le-left-mul-greater-than-one-ℚ⁺ p 1<p q =
+    tr
+      ( λ r → le-ℚ⁺ r (p *ℚ⁺ q))
+      ( left-unit-law-mul-ℚ⁺ q)
+      ( preserves-le-right-mul-ℚ⁺ q one-ℚ (rational-ℚ⁺ p) 1<p)
+
+  le-right-mul-greater-than-one-ℚ⁺ :
+    (p : ℚ⁺) → le-ℚ⁺ one-ℚ⁺ p → (q : ℚ⁺) → le-ℚ⁺ q (q *ℚ⁺ p)
+  le-right-mul-greater-than-one-ℚ⁺ p 1<p q =
+    tr
+      ( le-ℚ⁺ q)
+      ( commutative-mul-ℚ⁺ p q)
+      ( le-left-mul-greater-than-one-ℚ⁺ p 1<p q)
+```
+
+### Multiplication of a positive rational number by a positive rational less than or equal to 1 is a deflationary map
+
+```agda
+abstract
+  leq-left-mul-leq-one-ℚ⁺ :
+    (p : ℚ⁺) → leq-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → leq-ℚ⁺ (p *ℚ⁺ q) q
+  leq-left-mul-leq-one-ℚ⁺ p⁺@(p , _) p≤1 q⁺@(q , _) =
+    trichotomy-le-ℚ p one-ℚ
+      ( λ p<1 → leq-le-ℚ (le-left-mul-less-than-one-ℚ⁺ p⁺ p<1 q⁺))
+      ( λ p=1 → leq-eq-ℚ _ _ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
+      ( λ 1<p → ex-falso (not-leq-le-ℚ one-ℚ p 1<p p≤1))
 ```

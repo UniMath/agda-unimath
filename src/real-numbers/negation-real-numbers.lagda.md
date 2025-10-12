@@ -135,6 +135,9 @@ opaque
 abstract
   neg-zero-ℝ : neg-ℝ zero-ℝ ＝ zero-ℝ
   neg-zero-ℝ = neg-real-ℚ zero-ℚ ∙ ap real-ℚ neg-zero-ℚ
+
+  eq-neg-one-ℝ : neg-ℝ one-ℝ ＝ neg-one-ℝ
+  eq-neg-one-ℝ = neg-real-ℚ one-ℚ ∙ ap real-ℚ eq-neg-one-ℚ
 ```
 
 ### Negation preserves similarity
