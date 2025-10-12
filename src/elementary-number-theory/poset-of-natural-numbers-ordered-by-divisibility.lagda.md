@@ -30,9 +30,10 @@ open import order-theory.preorders
 
 ## Idea
 
-The {{#concept "poset of natural numbers ordered by divisibility" Agda=ℕ-Div-Poset}} consists of the
-[natural numbers](elementary-number-theory.natural-numbers.md) and its ordering
-is defined by `m ≤ n := m | n`, i.e., by
+The
+{{#concept "poset of natural numbers ordered by divisibility" Agda=ℕ-Div-Poset}}
+consists of the [natural numbers](elementary-number-theory.natural-numbers.md)
+and its ordering is defined by `m ≤ n := m | n`, i.e., by
 [divisibility](elementary-number-theory.divisibility-natural-numbers.md).
 
 The divisibility relation `m | n` on the natural numbers, however, is only

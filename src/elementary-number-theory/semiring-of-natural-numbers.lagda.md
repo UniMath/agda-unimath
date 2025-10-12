@@ -45,7 +45,7 @@ i.e., the type of semiring homomorphisms `hom-Semiring ℕ-Semiring R` is
 
 ## Definition
 
-### The commutative semiring of natural numbers
+### The semiring of natural numbers
 
 ```agda
 has-mul-ℕ-Commutative-Monoid :
@@ -63,7 +63,11 @@ pr1 ℕ-Semiring = ℕ-Commutative-Monoid
 pr1 (pr2 ℕ-Semiring) = has-mul-ℕ-Commutative-Monoid
 pr1 (pr2 (pr2 ℕ-Semiring)) = left-zero-law-mul-ℕ
 pr2 (pr2 (pr2 ℕ-Semiring)) = right-zero-law-mul-ℕ
+```
 
+### The commutative semiring of natural numbers
+
+```agda
 ℕ-Commutative-Semiring : Commutative-Semiring lzero
 pr1 ℕ-Commutative-Semiring = ℕ-Semiring
 pr2 ℕ-Commutative-Semiring = commutative-mul-ℕ
