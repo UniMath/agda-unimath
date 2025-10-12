@@ -58,6 +58,8 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import group-theory.groups
+
 open import logic.functoriality-existential-quantification
 
 open import order-theory.large-posets
@@ -66,6 +68,7 @@ open import order-theory.posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
@@ -442,7 +445,7 @@ module _
               ( q-p<εx)
               ( leq-left-min-ℚ⁺
                 ( one-ℚ⁺)
-                ( ε-max-min-x *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -455,7 +458,7 @@ module _
               ( s-r<εy)
               ( leq-left-min-ℚ⁺
                 ( one-ℚ⁺)
-                ( ε-max-min-y *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
@@ -538,8 +541,12 @@ module _
                     ( _)
                     ( _)
                     ( preserves-leq-add-ℚ
-                      ( leq-right-min-ℚ⁺ _ _)
-                      ( leq-right-min-ℚ⁺ _ _))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
                   leq-eq-ℚ _ _
@@ -548,10 +555,11 @@ module _
                       ( refl) ∙
                       ap
                         ( rational-ℚ⁺)
-                        ( is-section-right-mul-ℚ⁺
-                          ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
-                          ( εx₀ +ℚ⁺ εy₀) ∙
-                          εx₀+εy₀=ε))
+                        ( ( is-section-right-div-Group
+                            ( group-mul-ℚ⁺)
+                            ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
+                            ( εx₀ +ℚ⁺ εy₀)) ∙
+                          ( εx₀+εy₀=ε)))
         intro-exists
           ( a , b)
           ( tr
@@ -1230,7 +1238,7 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ y ＝ neg-ℝ (x *ℝ y)
   left-negative-law-mul-ℝ x y =
     eq-sim-ℝ
-      (unique-right-inverse-add-ℝ _ _
+      ( unique-right-inverse-add-ℝ _ _
         ( similarity-reasoning-ℝ
           (x *ℝ y) +ℝ (neg-ℝ x *ℝ y)
           ~ℝ (x +ℝ neg-ℝ x) *ℝ y
@@ -1256,4 +1264,27 @@ abstract
       ＝ neg-ℝ (x *ℝ neg-ℝ y) by left-negative-law-mul-ℝ _ _
       ＝ neg-ℝ (neg-ℝ (x *ℝ y)) by ap neg-ℝ (right-negative-law-mul-ℝ _ _)
       ＝ x *ℝ y by neg-neg-ℝ _
+```
+
+### Distributive laws of multiplication over subtraction
+
+```agda
+abstract
+  left-distributive-mul-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    x *ℝ (y -ℝ z) ＝ x *ℝ y -ℝ x *ℝ z
+  left-distributive-mul-diff-ℝ x y z =
+    equational-reasoning
+      x *ℝ (y -ℝ z)
+      ＝ x *ℝ y +ℝ x *ℝ neg-ℝ z by left-distributive-mul-add-ℝ _ _ _
+      ＝ x *ℝ y -ℝ x *ℝ z by ap (x *ℝ y +ℝ_) (right-negative-law-mul-ℝ x z)
+
+  right-distributive-mul-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x -ℝ y) *ℝ z ＝ x *ℝ z -ℝ y *ℝ z
+  right-distributive-mul-diff-ℝ x y z =
+    equational-reasoning
+      (x -ℝ y) *ℝ z
+      ＝ x *ℝ z +ℝ neg-ℝ y *ℝ z by right-distributive-mul-add-ℝ _ _ _
+      ＝ x *ℝ z -ℝ y *ℝ z by ap (x *ℝ z +ℝ_) (left-negative-law-mul-ℝ y z)
 ```

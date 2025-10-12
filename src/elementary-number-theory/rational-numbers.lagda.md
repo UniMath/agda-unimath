@@ -303,6 +303,15 @@ opaque
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
+### The negation of one is negative one
+
+```agda
+abstract
+  eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
+  eq-neg-one-ℚ =
+    inv (preserves-neg-rational-ℤ one-ℤ)
+```
+
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda

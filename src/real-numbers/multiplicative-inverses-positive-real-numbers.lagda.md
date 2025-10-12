@@ -27,6 +27,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -34,6 +35,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -49,9 +51,9 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
@@ -325,8 +327,8 @@ module _
 
     is-rounded-lower-cut-inv-ℝ⁺ :
       (q : ℚ) →
-      ( is-in-subtype lower-cut-inv-ℝ⁺ q ↔
-        exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-inv-ℝ⁺ r)))
+      is-in-subtype lower-cut-inv-ℝ⁺ q ↔
+      exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-inv-ℝ⁺ r))
     is-rounded-lower-cut-inv-ℝ⁺ q =
       ( forward-implication-is-rounded-lower-cut-inv-ℝ⁺ q ,
         backward-implication-is-rounded-lower-cut-inv-ℝ⁺ q)
@@ -668,17 +670,17 @@ module _
               ( [a,b][c,d]<q))
 
   abstract
-    right-inverse-law-mul-ℝ⁺ : sim-ℝ⁺ (x *ℝ⁺ inv-ℝ⁺ x) one-ℝ⁺
+    right-inverse-law-mul-ℝ⁺ : sim-ℝ (real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x) one-ℝ
     right-inverse-law-mul-ℝ⁺ =
       sim-sim-leq-ℝ
         ( leq-real-right-inverse-law-mul-ℝ⁺ ,
           leq-real-right-inverse-law-mul-ℝ⁺')
 
-    left-inverse-law-mul-ℝ⁺ : sim-ℝ⁺ (inv-ℝ⁺ x *ℝ⁺ x) one-ℝ⁺
+    left-inverse-law-mul-ℝ⁺ : sim-ℝ (real-inv-ℝ⁺ x *ℝ real-ℝ⁺ x) one-ℝ
     left-inverse-law-mul-ℝ⁺ =
       tr
-        ( λ y → sim-ℝ⁺ y one-ℝ⁺)
-        ( commutative-mul-ℝ⁺ _ _)
+        ( λ y → sim-ℝ y one-ℝ)
+        ( commutative-mul-ℝ _ _)
         ( right-inverse-law-mul-ℝ⁺)
 ```
 
@@ -709,7 +711,7 @@ opaque
   unfolding le-ℝ real-inv-ℝ⁺
 
   inv-le-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → le-ℝ⁺ x y →
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → le-ℝ⁺ x y →
     le-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
   inv-le-ℝ⁺ x y x<y =
     let open do-syntax-trunc-Prop (le-prop-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x))
@@ -746,7 +748,7 @@ opaque
   unfolding leq-ℝ leq-ℝ' real-inv-ℝ⁺
 
   inv-leq-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → leq-ℝ⁺ x y →
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → leq-ℝ⁺ x y →
     leq-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
   inv-leq-ℝ⁺ x⁺@(x , _) y⁺@(y , _) x≤y q q<y⁻¹ =
     leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
@@ -756,4 +758,46 @@ opaque
         leq'-leq-ℝ x y x≤y
           ( rational-inv-ℚ⁺ (q , is-pos-q))
           ( leq-lower-cut-inv-ℝ⁺-lower-cut-inv-ℝ⁺' y⁺ q q<y⁻¹ is-pos-q))
+```
+
+### Multiplication by a positive real number is an automorphism of the real numbers
+
+```agda
+abstract
+  cancel-left-div-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) →
+    sim-ℝ (real-inv-ℝ⁺ x *ℝ (real-ℝ⁺ x *ℝ y)) y
+  cancel-left-div-mul-ℝ⁺ x⁺@(x , _) y =
+    similarity-reasoning-ℝ
+      real-inv-ℝ⁺ x⁺ *ℝ (x *ℝ y)
+      ~ℝ (real-inv-ℝ⁺ x⁺ *ℝ x) *ℝ y
+        by sim-eq-ℝ (inv (associative-mul-ℝ _ _ _))
+      ~ℝ one-ℝ *ℝ y
+        by preserves-sim-right-mul-ℝ y _ _ (left-inverse-law-mul-ℝ⁺ x⁺)
+      ~ℝ y
+        by sim-eq-ℝ (left-unit-law-mul-ℝ y)
+
+  cancel-left-mul-div-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) →
+    sim-ℝ (real-ℝ⁺ x *ℝ (real-inv-ℝ⁺ x *ℝ y)) y
+  cancel-left-mul-div-ℝ⁺ x⁺@(x , _) y =
+    similarity-reasoning-ℝ
+      x *ℝ (real-inv-ℝ⁺ x⁺ *ℝ y)
+      ~ℝ (x *ℝ real-inv-ℝ⁺ x⁺) *ℝ y
+        by sim-eq-ℝ (inv (associative-mul-ℝ _ _ _))
+      ~ℝ one-ℝ *ℝ y
+        by preserves-sim-right-mul-ℝ y _ _ (right-inverse-law-mul-ℝ⁺ x⁺)
+      ~ℝ y
+        by sim-eq-ℝ (left-unit-law-mul-ℝ y)
+
+is-equiv-left-mul-ℝ⁺ :
+  {l : Level} (x : ℝ⁺ l) → is-equiv (λ (y : ℝ l) → real-ℝ⁺ x *ℝ y)
+is-equiv-left-mul-ℝ⁺ x =
+  is-equiv-is-invertible
+    ( real-inv-ℝ⁺ x *ℝ_)
+    ( λ y → eq-sim-ℝ (cancel-left-mul-div-ℝ⁺ x y))
+    ( λ y → eq-sim-ℝ (cancel-left-div-mul-ℝ⁺ x y))
+
+aut-left-mul-ℝ⁺ : (l : Level) → ℝ⁺ l → Aut (ℝ l)
+aut-left-mul-ℝ⁺ l x = (real-ℝ⁺ x *ℝ_ , is-equiv-left-mul-ℝ⁺ x)
 ```
