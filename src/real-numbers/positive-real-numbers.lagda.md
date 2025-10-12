@@ -90,7 +90,7 @@ is-in-lower-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → ℚ → UU l
 is-in-lower-cut-ℝ⁺ (x , _) = is-in-lower-cut-ℝ x
 
 is-rounded-lower-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) (q : ℚ) →
+  {l : Level} (x : ℝ⁺ l) (q : ℚ) →
   is-in-lower-cut-ℝ⁺ x q ↔ exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-ℝ⁺ x r))
 is-rounded-lower-cut-ℝ⁺ (x , _) = is-rounded-lower-cut-ℝ x
 
@@ -101,16 +101,16 @@ is-in-upper-cut-ℝ⁺ : {l : Level} → ℝ⁺ l → ℚ → UU l
 is-in-upper-cut-ℝ⁺ (x , _) = is-in-upper-cut-ℝ x
 
 is-inhabited-upper-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) → is-inhabited-subtype (upper-cut-ℝ⁺ x)
+  {l : Level} (x : ℝ⁺ l) → is-inhabited-subtype (upper-cut-ℝ⁺ x)
 is-inhabited-upper-cut-ℝ⁺ (x , _) = is-inhabited-upper-cut-ℝ x
 
 is-rounded-upper-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) (r : ℚ) →
+  {l : Level} (x : ℝ⁺ l) (r : ℚ) →
   is-in-upper-cut-ℝ⁺ x r ↔ exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ⁺ x q))
 is-rounded-upper-cut-ℝ⁺ (x , _) = is-rounded-upper-cut-ℝ x
 
 le-lower-upper-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) (p q : ℚ) →
+  {l : Level} (x : ℝ⁺ l) (p q : ℚ) →
   is-in-lower-cut-ℝ⁺ x p → is-in-upper-cut-ℝ⁺ x q → le-ℚ p q
 le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ```
@@ -118,7 +118,7 @@ le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ### Equality of positive real numbers
 
 ```agda
-eq-ℝ⁺ : {l : Level} → (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) → x ＝ y
+eq-ℝ⁺ : {l : Level} (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) → x ＝ y
 eq-ℝ⁺ _ _ = eq-type-subtype is-positive-prop-ℝ
 ```
 
@@ -179,7 +179,7 @@ module _
       is-positive-exists-ℚ⁺-in-lower-cut-ℝ)
 
 exists-ℚ⁺-in-lower-cut-ℝ⁺ :
-  {l : Level} → (x : ℝ⁺ l) → exists ℚ⁺ (λ p → lower-cut-ℝ⁺ x (rational-ℚ⁺ p))
+  {l : Level} (x : ℝ⁺ l) → exists ℚ⁺ (λ p → lower-cut-ℝ⁺ x (rational-ℚ⁺ p))
 exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 

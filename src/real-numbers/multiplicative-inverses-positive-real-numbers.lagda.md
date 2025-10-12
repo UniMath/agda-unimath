@@ -327,8 +327,8 @@ module _
 
     is-rounded-lower-cut-inv-ℝ⁺ :
       (q : ℚ) →
-      ( is-in-subtype lower-cut-inv-ℝ⁺ q ↔
-        exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-inv-ℝ⁺ r)))
+      is-in-subtype lower-cut-inv-ℝ⁺ q ↔
+      exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-inv-ℝ⁺ r))
     is-rounded-lower-cut-inv-ℝ⁺ q =
       ( forward-implication-is-rounded-lower-cut-inv-ℝ⁺ q ,
         backward-implication-is-rounded-lower-cut-inv-ℝ⁺ q)
@@ -711,7 +711,7 @@ opaque
   unfolding le-ℝ real-inv-ℝ⁺
 
   inv-le-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → le-ℝ⁺ x y →
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → le-ℝ⁺ x y →
     le-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
   inv-le-ℝ⁺ x y x<y =
     let open do-syntax-trunc-Prop (le-prop-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x))
@@ -748,7 +748,7 @@ opaque
   unfolding leq-ℝ leq-ℝ' real-inv-ℝ⁺
 
   inv-leq-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ⁺ l1) (y : ℝ⁺ l2) → leq-ℝ⁺ x y →
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) → leq-ℝ⁺ x y →
     leq-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x)
   inv-leq-ℝ⁺ x⁺@(x , _) y⁺@(y , _) x≤y q q<y⁻¹ =
     leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
