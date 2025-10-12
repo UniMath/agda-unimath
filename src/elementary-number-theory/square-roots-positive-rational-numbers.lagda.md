@@ -14,7 +14,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import group-theory.groups
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
@@ -35,6 +34,8 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
+
+open import group-theory.groups
 
 open import order-theory.posets
 ```
