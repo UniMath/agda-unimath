@@ -349,6 +349,32 @@ module _
   swap-disjunction = map-trunc-Prop (map-commutative-coproduct A B)
 ```
 
+### Associativity of the disjunction
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  left-associate-disjunction :
+    disjunction-type A (disjunction-type B C) →
+    disjunction-type (disjunction-type A B) C
+  left-associate-disjunction =
+    elim-disjunction
+      ( disjunction-type-Prop (disjunction-type A B) C)
+      ( inl-disjunction ∘ inl-disjunction)
+      ( map-trunc-Prop (map-coproduct inr-disjunction id))
+
+  right-associate-disjunction :
+    disjunction-type (disjunction-type A B) C →
+    disjunction-type A (disjunction-type B C)
+  right-associate-disjunction =
+    elim-disjunction
+      ( disjunction-type-Prop A (disjunction-type B C))
+      ( map-trunc-Prop (map-coproduct id inl-disjunction))
+      ( inr-disjunction ∘ inr-disjunction)
+```
+
 ## See also
 
 - The indexed counterpart to disjunction is
