@@ -12,8 +12,10 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.large-locale-of-propositions
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -254,6 +256,26 @@ module _
     sim-subtype P Q →
     P ＝ Q
   eq-sim-subtype = eq-sim-Large-Poset (powerset-Large-Poset A)
+```
+
+### Similarity is a large similarity relation
+
+```agda
+large-similarity-relation-sim-subtype :
+  {l : Level} (X : UU l) →
+  Large-Similarity-Relation (λ l1 l2 → l ⊔ l1 ⊔ l2) (λ l → subtype l X)
+large-similarity-relation-sim-subtype X =
+  large-similarity-relation-sim-Large-Poset (powerset-Large-Poset X)
+```
+
+### A subtype is similar to itself raised to a universe level
+
+```agda
+abstract
+  sim-raise-subtype :
+    {l1 l2 : Level} {X : UU l1} (l3 : Level) (S : subtype l2 X) →
+    sim-subtype S (raise-subtype l3 S)
+  sim-raise-subtype _ _ = ( (λ _ → map-raise) , (λ _ → map-inv-raise))
 ```
 
 ## See also
