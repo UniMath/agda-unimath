@@ -253,6 +253,43 @@ module
   open similarity-reasoning-Large-Monoid (large-monoid-Large-Group G) public
 ```
 
+### Inverse laws in terms of similarity
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  open similarity-reasoning-Large-Group G
+
+  abstract
+    sim-left-inverse-law-mul-Large-Group :
+      {l : Level} (x : type-Large-Group G l) →
+      sim-Large-Group G
+        ( mul-Large-Group G (inv-Large-Group G x) x)
+        ( unit-Large-Group G)
+    sim-left-inverse-law-mul-Large-Group {l} x =
+      similarity-reasoning
+        mul-Large-Group G (inv-Large-Group G x) x
+        ~ raise-unit-Large-Group G l
+          by sim-eq-Large-Group G (left-inverse-law-mul-Large-Group G x)
+        ~ unit-Large-Group G
+          by sim-raise-Large-Group' G _ _
+
+    sim-right-inverse-law-mul-Large-Group :
+      {l : Level} (x : type-Large-Group G l) →
+      sim-Large-Group G
+        ( mul-Large-Group G x (inv-Large-Group G x))
+        ( unit-Large-Group G)
+    sim-right-inverse-law-mul-Large-Group {l} x =
+      similarity-reasoning
+        mul-Large-Group G x (inv-Large-Group G x)
+        ~ raise-unit-Large-Group G l
+          by sim-eq-Large-Group G (right-inverse-law-mul-Large-Group G x)
+        ~ unit-Large-Group G
+          by sim-raise-Large-Group' G _ _
+```
+
 ### The inverse of the identity is the identity
 
 ```agda
