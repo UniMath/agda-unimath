@@ -45,10 +45,14 @@ open import ring-theory.semirings
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the
-integers. A ring consists of a set equipped with addition and multiplication,
-where the addition operation gives the ring the structure of an abelian group,
-and the multiplication is associative, unital, and distributive over addition.
+The concept of {{#concept "ring" WDID=Q161172 WD="ring" Agda=Ring}} generalizes
+the arithmetical structure on the
+[integers](elementary-number-theory.integers.md). A ring consists of a
+[set](foundation.sets.md) equipped with addition and multiplication, where the
+addition operation gives the ring the structure of an
+[abelian group](group-theory.groups.md), and the multiplication is associative,
+unital, and distributive over addition, forming the structure of a
+[monoid](group-theory.monoids.md).
 
 ## Definitions
 

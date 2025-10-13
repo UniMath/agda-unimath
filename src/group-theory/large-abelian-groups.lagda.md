@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
@@ -76,6 +77,11 @@ open Large-Ab public
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   where
+
+  large-similarity-relation-Large-Ab :
+    Large-Similarity-Relation β (type-Large-Ab G)
+  large-similarity-relation-Large-Ab =
+    large-similarity-relation-Large-Group (large-group-Large-Ab G)
 
   sim-prop-Large-Ab : Large-Relation-Prop β (type-Large-Ab G)
   sim-prop-Large-Ab = sim-prop-Large-Group (large-group-Large-Ab G)
@@ -167,6 +173,36 @@ module _
     raise-zero-Large-Ab lzero ＝ zero-Large-Ab G
   raise-unit-lzero-Large-Ab =
     raise-unit-lzero-Large-Group (large-group-Large-Ab G)
+```
+
+### Group properties of large abelian groups
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  associative-add-Large-Ab :
+    {l1 l2 l3 : Level} →
+    (a : type-Large-Ab G l1) →
+    (b : type-Large-Ab G l2) →
+    (c : type-Large-Ab G l3) →
+    add-Large-Ab G (add-Large-Ab G a b) c ＝
+    add-Large-Ab G a (add-Large-Ab G b c)
+  associative-add-Large-Ab =
+    associative-mul-Large-Group (large-group-Large-Ab G)
+
+  left-unit-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G (zero-Large-Ab G) x ＝ x
+  left-unit-law-add-Large-Ab =
+    left-unit-law-mul-Large-Group (large-group-Large-Ab G)
+
+  right-unit-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G x (zero-Large-Ab G) ＝ x
+  right-unit-law-add-Large-Ab =
+    right-unit-law-mul-Large-Group (large-group-Large-Ab G)
 ```
 
 ### The inverse of the identity is the identity
