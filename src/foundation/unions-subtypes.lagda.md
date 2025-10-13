@@ -10,12 +10,16 @@ module foundation.unions-subtypes where
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-subtypes
+open import foundation.function-types
+open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.subtypes
 open import foundation.universe-levels
-
-open import foundation-core.subtypes
 
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes
@@ -100,4 +104,78 @@ module _
     apply-universal-property-trunc-Prop p
       ( union-family-of-subtypes B x)
       ( λ (i , q) → unit-trunc-Prop (i , H i x q))
+```
+
+### The union operation is associative
+
+```agda
+abstract
+  associative-union-subtype :
+    {l1 l2 l3 l4 : Level} {X : UU l1}
+    (S : subtype l2 X) (T : subtype l3 X) (U : subtype l4 X) →
+    union-subtype (union-subtype S T) U ＝ union-subtype S (union-subtype T U)
+  associative-union-subtype S T U =
+    eq-has-same-elements-subtype _ _
+      ( λ x → (right-associate-disjunction , left-associate-disjunction))
+```
+
+### The union operation is commutative
+
+```agda
+abstract
+  commutative-union-subtype :
+    {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X) →
+    union-subtype S T ＝ union-subtype T S
+  commutative-union-subtype S T =
+    eq-has-same-elements-subtype _ _
+      ( λ s → (swap-disjunction , swap-disjunction))
+```
+
+### The union operation is idempotent
+
+```agda
+abstract
+  idempotent-union-subtype :
+    {l1 l2 : Level} {X : UU l1} (S : subtype l2 X) → union-subtype S S ＝ S
+  idempotent-union-subtype S =
+    eq-has-same-elements-subtype _ _
+      ( λ x → (elim-disjunction (S x) id id , inl-disjunction))
+```
+
+### The empty subtype is an identity for the union operation
+
+```agda
+abstract
+  left-unit-law-union-subtype :
+    {l1 l2 : Level} {X : UU l1} (S : subtype l2 X) →
+    union-subtype (empty-subtype lzero X) S ＝ S
+  left-unit-law-union-subtype {X = X} S =
+    eq-has-same-elements-subtype _ _
+      ( λ s →
+        ( map-left-unit-law-disjunction-is-empty-Prop
+            ( empty-subtype _ X s)
+            ( S s)
+            ( is-empty-subtype-empty-subtype X s) ,
+          inr-disjunction))
+
+  right-unit-law-union-subtype :
+    {l1 l2 : Level} {X : UU l1} (S : subtype l2 X) →
+    union-subtype S (empty-subtype lzero X) ＝ S
+  right-unit-law-union-subtype S =
+    ( commutative-union-subtype S (empty-subtype lzero _)) ∙
+    ( left-unit-law-union-subtype S)
+```
+
+### The union operation preserves similarity of subtypes
+
+```agda
+abstract
+  preserves-sim-union-subtype :
+    {l1 l2 l3 l4 l5 : Level} {X : UU l1} →
+    (S : subtype l2 X) (T : subtype l3 X) → sim-subtype S T →
+    (U : subtype l4 X) (V : subtype l5 X) → sim-subtype U V →
+    sim-subtype (union-subtype S U) (union-subtype T V)
+  preserves-sim-union-subtype _ _ (S⊆T , T⊆S) _ _ (U⊆V , V⊆U) =
+    ( ( λ x → map-disjunction (S⊆T x) (U⊆V x)) ,
+      ( λ x → map-disjunction (T⊆S x) (V⊆U x)))
 ```
