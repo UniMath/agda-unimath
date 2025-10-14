@@ -67,8 +67,9 @@ the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
 
 Inequality of the real numbers is equivalently described by the _upper_ cut of
 one being a subset of the upper cut of the other, i.e., `x ≤ y` iff
-`upper-cut x ≤ upper-cut y`. This is easily seen by the fact that the complement
-of the lower cut determines the upper cut of a disjoint pair of rounded cuts.
+`upper-cut y ⊆ upper-cut x`. This is easily seen by the fact that the complement
+of the lower cut determines the upper cut of a disjoint pair of rounded cuts,
+and vice versa.
 
 ## Definitions
 
@@ -119,15 +120,11 @@ module _
   where
 
   leq-ℝ'' : UU (l1 ⊔ l2)
-  leq-ℝ'' =
-    leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y) ×
-    leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y)
+  leq-ℝ'' = leq-ℝ x y × leq-ℝ' x y
 
   is-prop-leq-ℝ'' : is-prop leq-ℝ''
   is-prop-leq-ℝ'' =
-    is-prop-product
-      ( is-prop-leq-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
-      ( is-prop-leq-upper-ℝ (upper-real-ℝ x) (upper-real-ℝ y))
+    is-prop-product (is-prop-leq-ℝ x y) (is-prop-leq-ℝ' x y)
 
   leq-prop-ℝ'' : Prop (l1 ⊔ l2)
   leq-prop-ℝ'' = (leq-ℝ'' , is-prop-leq-ℝ'')
@@ -193,16 +190,16 @@ module _
 opaque
   unfolding leq-ℝ
 
-  refl-leq-ℝ : {l : Level} → (x : ℝ l) → leq-ℝ x x
+  refl-leq-ℝ : {l : Level} (x : ℝ l) → leq-ℝ x x
   refl-leq-ℝ x = refl-leq-Large-Preorder lower-ℝ-Large-Preorder (lower-real-ℝ x)
 
-  leq-eq-ℝ : {l : Level} → (x y : ℝ l) → x ＝ y → leq-ℝ x y
+  leq-eq-ℝ : {l : Level} (x y : ℝ l) → x ＝ y → leq-ℝ x y
   leq-eq-ℝ x y x=y = tr (leq-ℝ x) x=y (refl-leq-ℝ x)
 
 opaque
   unfolding leq-ℝ sim-ℝ
 
-  leq-sim-ℝ : {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
+  leq-sim-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ _ _ = pr1
 ```
 
@@ -227,9 +224,7 @@ opaque
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  (z : ℝ l3)
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
   opaque
@@ -500,9 +495,7 @@ module _
   abstract
     preserves-lower-neighborhood-leq-left-add-ℝ :
       leq-ℝ y (z +ℝ real-ℚ⁺ d) →
-      leq-ℝ
-        ( add-ℝ x y)
-        ( (add-ℝ x z) +ℝ real-ℚ⁺ d)
+      leq-ℝ (x +ℝ y) ((x +ℝ z) +ℝ real-ℚ⁺ d)
     preserves-lower-neighborhood-leq-left-add-ℝ z≤y+d =
       inv-tr
         ( leq-ℝ (x +ℝ y))
@@ -515,9 +508,7 @@ module _
 
     preserves-lower-neighborhood-leq-right-add-ℝ :
       leq-ℝ y (z +ℝ real-ℚ⁺ d) →
-      leq-ℝ
-        ( add-ℝ y x)
-        ( (add-ℝ z x) +ℝ real-ℚ⁺ d)
+      leq-ℝ (y +ℝ x) ((z +ℝ x) +ℝ real-ℚ⁺ d)
     preserves-lower-neighborhood-leq-right-add-ℝ z≤y+d =
       binary-tr
         ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
@@ -536,9 +527,7 @@ module _
 
   abstract
     reflects-lower-neighborhood-leq-left-add-ℝ :
-      leq-ℝ
-        ( add-ℝ x y)
-        ( (add-ℝ x z) +ℝ real-ℚ⁺ d) →
+      leq-ℝ (x +ℝ y) ((x +ℝ z) +ℝ real-ℚ⁺ d) →
       leq-ℝ y (z +ℝ real-ℚ⁺ d)
     reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
       reflects-leq-left-add-ℝ
@@ -551,9 +540,7 @@ module _
           ( x+y≤x+z+d))
 
     reflects-lower-neighborhood-leq-right-add-ℝ :
-      leq-ℝ
-        ( add-ℝ y x)
-        ( (add-ℝ z x) +ℝ real-ℚ⁺ d) →
+      leq-ℝ (y +ℝ x) ((z +ℝ x) +ℝ real-ℚ⁺ d) →
       leq-ℝ y (z +ℝ real-ℚ⁺ d)
     reflects-lower-neighborhood-leq-right-add-ℝ y+x≤z+y+d =
       reflects-lower-neighborhood-leq-left-add-ℝ

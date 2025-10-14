@@ -22,7 +22,7 @@ open import order-theory.similarity-of-elements-large-posets
 
 ## Idea
 
-two [subtypes](foundation-core.subtypes.md) `P` and `Q` are said to be
+Two [subtypes](foundation-core.subtypes.md) `P` and `Q` are said to be
 {{#concept "similar" Disambiguation="subtypes" Agda=sim-subtype}} if they
 contain the same elements. In other words, if `P ⊆ Q` and `Q ⊆ P`.
 
