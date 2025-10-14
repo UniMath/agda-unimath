@@ -19,6 +19,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks-subtypes
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
