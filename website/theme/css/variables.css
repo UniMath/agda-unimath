@@ -5,9 +5,9 @@
   --page-padding: 5px;
   --content-max-width: 75%;
   --menu-bar-height: 40px;
-  --mono-font: Menlo, Source Code Pro, Consolas, Monaco, Lucida Console,
-    Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
-    monospace;
+  --mono-font:
+    Menlo, Source Code Pro, Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
   --code-font-size: 1.3rem;
   --pagetoc-fontsize: 0.85em;
 }

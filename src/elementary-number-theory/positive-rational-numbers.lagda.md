@@ -301,7 +301,7 @@ nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ```
 
-### If `p ≤ q` for positive `p`, then `q` is positive
+### If `p ≤ q` and `p` is positive, then `q` is positive
 
 ```agda
 abstract

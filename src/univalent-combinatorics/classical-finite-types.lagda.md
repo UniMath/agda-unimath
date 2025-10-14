@@ -165,7 +165,7 @@ is-section-classical-standard-Fin-reverse (succ-ℕ n) (zero-ℕ , k<n) = refl
 is-section-classical-standard-Fin-reverse (succ-ℕ n) (succ-ℕ k , k<n) =
   eq-pair-Σ
     ( ap (succ-ℕ ∘ pr1) (is-section-classical-standard-Fin-reverse n (k , k<n)))
-    ( eq-type-Prop (le-ℕ-Prop k n))
+    ( eq-type-Prop (le-prop-ℕ k n))
 
 is-retraction-classical-standard-Fin-reverse :
   (n : ℕ) →
