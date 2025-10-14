@@ -149,31 +149,32 @@ module _
   {l : Level} (G : Group l)
   where
 
-  integer-power-int-Group :
-    (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (int-ℕ n) g ＝ power-Group G n g
-  integer-power-int-Group zero-ℕ g = refl
-  integer-power-int-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
-  integer-power-int-Group (succ-ℕ (succ-ℕ n)) g =
-    ( ap (mul-Group G g) (integer-power-int-Group (succ-ℕ n) g)) ∙
-    ( inv (power-succ-Group' G (succ-ℕ n) g))
+  abstract
+    integer-power-int-Group :
+      (n : ℕ) (g : type-Group G) →
+      integer-power-Group G (int-ℕ n) g ＝ power-Group G n g
+    integer-power-int-Group zero-ℕ g = refl
+    integer-power-int-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
+    integer-power-int-Group (succ-ℕ (succ-ℕ n)) g =
+      ( ap (mul-Group G g) (integer-power-int-Group (succ-ℕ n) g)) ∙
+      ( inv (power-succ-Group' G (succ-ℕ n) g))
 
-  integer-power-in-pos-Group :
-    (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (in-pos-ℤ n) g ＝
-    power-Group G (succ-ℕ n) g
-  integer-power-in-pos-Group n g = integer-power-int-Group (succ-ℕ n) g
+    integer-power-in-pos-Group :
+      (n : ℕ) (g : type-Group G) →
+      integer-power-Group G (in-pos-ℤ n) g ＝
+      power-Group G (succ-ℕ n) g
+    integer-power-in-pos-Group n g = integer-power-int-Group (succ-ℕ n) g
 
-  integer-power-in-neg-Group :
-    (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (in-neg-ℤ n) g ＝
-    inv-Group G (power-Group G (succ-ℕ n) g)
-  integer-power-in-neg-Group zero-ℕ g =
-    right-unit-law-mul-Group G (inv-Group G g)
-  integer-power-in-neg-Group (succ-ℕ n) g =
-    ( ap (mul-Group G (inv-Group G g)) (integer-power-in-neg-Group n g)) ∙
-    ( inv (distributive-inv-mul-Group G)) ∙
-    ( ap (inv-Group G) (power-succ-Group G (succ-ℕ n) g))
+    integer-power-in-neg-Group :
+      (n : ℕ) (g : type-Group G) →
+      integer-power-Group G (in-neg-ℤ n) g ＝
+      inv-Group G (power-Group G (succ-ℕ n) g)
+    integer-power-in-neg-Group zero-ℕ g =
+      right-unit-law-mul-Group G (inv-Group G g)
+    integer-power-in-neg-Group (succ-ℕ n) g =
+      ( ap (mul-Group G (inv-Group G g)) (integer-power-in-neg-Group n g)) ∙
+      ( inv (distributive-inv-mul-Group G)) ∙
+      ( ap (inv-Group G) (power-succ-Group G (succ-ℕ n) g))
 ```
 
 ### The integer power `x⁰` is the unit of the group
@@ -183,11 +184,12 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  integer-power-zero-Group :
-    integer-power-Group G zero-ℤ g ＝ unit-Group G
-  integer-power-zero-Group =
-    preserves-point-map-ℤ-Pointed-Type-With-Aut
-      ( pointed-type-with-aut-Group G g)
+  abstract
+    integer-power-zero-Group :
+      integer-power-Group G zero-ℤ g ＝ unit-Group G
+    integer-power-zero-Group =
+      preserves-point-map-ℤ-Pointed-Type-With-Aut
+        ( pointed-type-with-aut-Group G g)
 ```
 
 ### `x¹ ＝ x`
@@ -197,9 +199,10 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  integer-power-one-Group :
-    integer-power-Group G one-ℤ g ＝ g
-  integer-power-one-Group = right-unit-law-mul-Group G g
+  abstract
+    integer-power-one-Group :
+      integer-power-Group G one-ℤ g ＝ g
+    integer-power-one-Group = right-unit-law-mul-Group G g
 ```
 
 ### The integer power `x⁻¹` is the inverse of `x`
@@ -209,9 +212,10 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  integer-power-neg-one-Group :
-    integer-power-Group G neg-one-ℤ g ＝ inv-Group G g
-  integer-power-neg-one-Group = right-unit-law-mul-Group G (inv-Group G g)
+  abstract
+    integer-power-neg-one-Group :
+      integer-power-Group G neg-one-ℤ g ＝ inv-Group G g
+    integer-power-neg-one-Group = right-unit-law-mul-Group G (inv-Group G g)
 ```
 
 ### The integer power `gˣ⁺ʸ` computes to `gˣgʸ`
@@ -221,20 +225,21 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  distributive-integer-power-add-Group :
-    (x y : ℤ) →
-    integer-power-Group G (x +ℤ y) g ＝
-    mul-Group G
-      ( integer-power-Group G x g)
-      ( integer-power-Group G y g)
-  distributive-integer-power-add-Group x y =
-    ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
-    ( ap
-      ( iterative-multiplication-by-element-Group G g x)
-      ( inv (left-unit-law-mul-Group G (integer-power-Group G y g)))) ∙
-    ( associative-iterative-multiplication-by-element-Group G g x
-      ( unit-Group G)
-      ( integer-power-Group G y g))
+  abstract
+    distributive-integer-power-add-Group :
+      (x y : ℤ) →
+      integer-power-Group G (x +ℤ y) g ＝
+      mul-Group G
+        ( integer-power-Group G x g)
+        ( integer-power-Group G y g)
+    distributive-integer-power-add-Group x y =
+      ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
+      ( ap
+        ( iterative-multiplication-by-element-Group G g x)
+        ( inv (left-unit-law-mul-Group G (integer-power-Group G y g)))) ∙
+      ( associative-iterative-multiplication-by-element-Group G g x
+        ( unit-Group G)
+        ( integer-power-Group G y g))
 ```
 
 ### The integer power `x⁻ᵏ` is the inverse of the integer power `xᵏ`
@@ -244,18 +249,20 @@ module _
   {l : Level} (G : Group l)
   where
 
-  integer-power-neg-Group :
-    (k : ℤ) (x : type-Group G) →
-    integer-power-Group G (neg-ℤ k) x ＝ inv-Group G (integer-power-Group G k x)
-  integer-power-neg-Group (inl k) x =
-    transpose-eq-inv-Group G
-      ( ( ap (inv-Group G) (integer-power-in-pos-Group G k x)) ∙
-        ( inv (integer-power-in-neg-Group G k x)))
-  integer-power-neg-Group (inr (inl _)) x =
-    integer-power-zero-Group G x ∙ inv (inv-unit-Group G)
-  integer-power-neg-Group (inr (inr k)) x =
-    ( integer-power-in-neg-Group G k x) ∙
-    ( ap (inv-Group G) (inv (integer-power-in-pos-Group G k x)))
+  abstract
+    integer-power-neg-Group :
+      (k : ℤ) (x : type-Group G) →
+      integer-power-Group G (neg-ℤ k) x ＝
+      inv-Group G (integer-power-Group G k x)
+    integer-power-neg-Group (inl k) x =
+      transpose-eq-inv-Group G
+        ( ( ap (inv-Group G) (integer-power-in-pos-Group G k x)) ∙
+          ( inv (integer-power-in-neg-Group G k x)))
+    integer-power-neg-Group (inr (inl _)) x =
+      integer-power-zero-Group G x ∙ inv (inv-unit-Group G)
+    integer-power-neg-Group (inr (inr k)) x =
+      ( integer-power-in-neg-Group G k x) ∙
+      ( ap (inv-Group G) (inv (integer-power-in-pos-Group G k x)))
 ```
 
 ### `xᵏ⁺¹ = xᵏx` and `xᵏ⁺¹ = xxᵏ`
@@ -527,58 +534,59 @@ module _
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
 
-  integer-power-mul-Group :
-    (k l : ℤ) (x : type-Group G) → x ^ (k * l) ＝ (x ^ k) ^ l
-  integer-power-mul-Group k (inl zero-ℕ) x =
-    ( ap (x ^_) (right-neg-unit-law-mul-ℤ k)) ∙
-    ( integer-power-neg-Group G k x) ∙
-    ( inv (integer-power-neg-one-Group G _))
-  integer-power-mul-Group k (inl (succ-ℕ l)) x =
-    equational-reasoning
-      (x ^ (k * inl (succ-ℕ l)))
-      ＝ x ^ (neg-ℤ k +ℤ (k *ℤ inl l))
-        by ap (x ^_) (right-predecessor-law-mul-ℤ k (inl l))
-      ＝ mul-Group G (x ^ neg-ℤ k) (x ^ (k * (inl l)))
-        by distributive-integer-power-add-Group G x (neg-ℤ k) _
-      ＝ mul-Group G ((x ^ k) ^ neg-one-ℤ) ((x ^ k) ^ (inl l))
-        by
-        ap-mul-Group G
-          ( ( integer-power-neg-Group G k x) ∙
-            ( inv (integer-power-neg-one-Group G (x ^ k))))
-          ( integer-power-mul-Group k (inl l) x)
-      ＝ (x ^ k) ^ (neg-one-ℤ +ℤ (inl l))
-        by
-        inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
-      ＝ (x ^ k) ^ (inl (succ-ℕ l))
-        by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
-  integer-power-mul-Group k (inr (inl _)) x =
-    ap (x ^_) (right-zero-law-mul-ℤ k)
-  integer-power-mul-Group k (inr (inr zero-ℕ)) x =
-    ( ap (x ^_) (right-unit-law-mul-ℤ k)) ∙
-    ( inv (integer-power-one-Group G _))
-  integer-power-mul-Group k (inr (inr (succ-ℕ l))) x =
-    equational-reasoning
-      (x ^ (k * succ-ℤ (in-pos-ℤ l)))
-      ＝ x ^ (k +ℤ k * (in-pos-ℤ l))
-        by ap (x ^_) (right-successor-law-mul-ℤ k (in-pos-ℤ l))
-      ＝ mul-Group G (x ^ k) (x ^ (k * in-pos-ℤ l))
-        by
-        distributive-integer-power-add-Group G x k (k * in-pos-ℤ l)
-      ＝ mul-Group G (x ^ k) ((x ^ k) ^ (in-pos-ℤ l))
-        by
-        ap (mul-Group G _) (integer-power-mul-Group k (inr (inr l)) x)
-      ＝ (x ^ k) ^ (succ-ℤ (in-pos-ℤ l))
-        by
-        inv (integer-power-succ-Group' G (in-pos-ℤ l) (x ^ k))
+  abstract
+    integer-power-mul-Group :
+      (k l : ℤ) (x : type-Group G) → x ^ (k * l) ＝ (x ^ k) ^ l
+    integer-power-mul-Group k (inl zero-ℕ) x =
+      ( ap (x ^_) (right-neg-unit-law-mul-ℤ k)) ∙
+      ( integer-power-neg-Group G k x) ∙
+      ( inv (integer-power-neg-one-Group G _))
+    integer-power-mul-Group k (inl (succ-ℕ l)) x =
+      equational-reasoning
+        (x ^ (k * inl (succ-ℕ l)))
+        ＝ x ^ (neg-ℤ k +ℤ (k *ℤ inl l))
+          by ap (x ^_) (right-predecessor-law-mul-ℤ k (inl l))
+        ＝ mul-Group G (x ^ neg-ℤ k) (x ^ (k * (inl l)))
+          by distributive-integer-power-add-Group G x (neg-ℤ k) _
+        ＝ mul-Group G ((x ^ k) ^ neg-one-ℤ) ((x ^ k) ^ (inl l))
+          by
+          ap-mul-Group G
+            ( ( integer-power-neg-Group G k x) ∙
+              ( inv (integer-power-neg-one-Group G (x ^ k))))
+            ( integer-power-mul-Group k (inl l) x)
+        ＝ (x ^ k) ^ (neg-one-ℤ +ℤ (inl l))
+          by
+          inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
+        ＝ (x ^ k) ^ (inl (succ-ℕ l))
+          by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
+    integer-power-mul-Group k (inr (inl _)) x =
+      ap (x ^_) (right-zero-law-mul-ℤ k)
+    integer-power-mul-Group k (inr (inr zero-ℕ)) x =
+      ( ap (x ^_) (right-unit-law-mul-ℤ k)) ∙
+      ( inv (integer-power-one-Group G _))
+    integer-power-mul-Group k (inr (inr (succ-ℕ l))) x =
+      equational-reasoning
+        (x ^ (k * succ-ℤ (in-pos-ℤ l)))
+        ＝ x ^ (k +ℤ k * (in-pos-ℤ l))
+          by ap (x ^_) (right-successor-law-mul-ℤ k (in-pos-ℤ l))
+        ＝ mul-Group G (x ^ k) (x ^ (k * in-pos-ℤ l))
+          by
+          distributive-integer-power-add-Group G x k (k * in-pos-ℤ l)
+        ＝ mul-Group G (x ^ k) ((x ^ k) ^ (in-pos-ℤ l))
+          by
+          ap (mul-Group G _) (integer-power-mul-Group k (inr (inr l)) x)
+        ＝ (x ^ k) ^ (succ-ℤ (in-pos-ℤ l))
+          by
+          inv (integer-power-succ-Group' G (in-pos-ℤ l) (x ^ k))
 
-  swap-integer-power-Group :
-    (k l : ℤ) (x : type-Group G) →
-    integer-power-Group G k (integer-power-Group G l x) ＝
-    integer-power-Group G l (integer-power-Group G k x)
-  swap-integer-power-Group k l x =
-    ( inv (integer-power-mul-Group l k x)) ∙
-    ( ap (λ t → integer-power-Group G t x) (commutative-mul-ℤ l k)) ∙
-    ( integer-power-mul-Group k l x)
+    swap-integer-power-Group :
+      (k l : ℤ) (x : type-Group G) →
+      integer-power-Group G k (integer-power-Group G l x) ＝
+      integer-power-Group G l (integer-power-Group G k x)
+    swap-integer-power-Group k l x =
+      ( inv (integer-power-mul-Group l k x)) ∙
+      ( ap (λ t → integer-power-Group G t x) (commutative-mul-ℤ l k)) ∙
+      ( integer-power-mul-Group k l x)
 ```
 
 ### Group homomorphisms preserve integer powers

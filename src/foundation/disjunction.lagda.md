@@ -373,6 +373,12 @@ module _
       ( disjunction-type-Prop A (disjunction-type B C))
       ( map-trunc-Prop (map-coproduct id inl-disjunction))
       ( inr-disjunction ∘ inr-disjunction)
+
+  associative-disjunction :
+    disjunction-type (disjunction-type A B) C ↔
+    disjunction-type A (disjunction-type B C)
+  associative-disjunction =
+    ( right-associate-disjunction , left-associate-disjunction)
 ```
 
 ## See also
