@@ -9,6 +9,7 @@ module real-numbers.square-roots-nonnegative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
@@ -88,8 +89,7 @@ module _
         ( λ is-nonneg-neg-one-ℚ →
           ex-falso
             ( not-is-negative-is-nonnegative-ℚ
-              ( is-nonneg-neg-one-ℚ)
-              ( is-negative-rational-ℚ⁻ neg-one-ℚ⁻)))
+              ( is-negative-rational-ℚ⁻ neg-one-ℚ⁻ , is-nonneg-neg-one-ℚ)))
 
     is-inhabited-upper-cut-sqrt-ℝ⁰⁺ : is-inhabited-subtype upper-cut-sqrt-ℝ⁰⁺
     is-inhabited-upper-cut-sqrt-ℝ⁰⁺ =
@@ -122,8 +122,8 @@ module _
                   λ is-nonneg-q' →
                     ex-falso
                       ( not-is-negative-is-nonnegative-ℚ
-                        ( is-nonneg-q')
-                        ( is-negative-rational-ℚ⁻ (mediant-zero-ℚ⁻ q⁻)))))
+                        ( is-negative-rational-ℚ⁻ (mediant-zero-ℚ⁻ q⁻) ,
+                          is-nonneg-q'))))
           ( λ q=0 →
             do
               ( q' , 0<q' , q'<x) ←
@@ -132,9 +132,13 @@ module _
                   ( tr
                     ( is-in-lower-cut-ℝ⁰⁺ x)
                     ( ap-mul-ℚ q=0 q=0 ∙ right-zero-law-mul-ℚ zero-ℚ)
-                    ( q²<x (inv-tr is-nonnegative-ℚ q=0 _)))
+                    ( q²<x
+                      ( inv-tr
+                        ( is-nonnegative-ℚ)
+                        ( q=0)
+                        ( is-nonnegative-rational-ℚ⁰⁺ zero-ℚ⁰⁺))))
               let
-                is-pos-q' = is-positive-le-zero-ℚ q' 0<q'
+                is-pos-q' = is-positive-le-zero-ℚ 0<q'
                 q'⁺ = (q' , is-pos-q')
               ( p⁺@(p , is-pos-p) , p²<q') ← square-le-ℚ⁺ q'⁺
               intro-exists
@@ -142,7 +146,7 @@ module _
                 ( inv-tr
                     ( λ r → le-ℚ r p)
                     ( q=0)
-                    ( le-zero-is-positive-ℚ p is-pos-p) ,
+                    ( le-zero-is-positive-ℚ is-pos-p) ,
                   λ _ →
                     le-lower-cut-ℝ (real-ℝ⁰⁺ x) (p *ℚ p) q' p²<q' q'<x))
           ( λ is-pos-q →
@@ -150,7 +154,7 @@ module _
               (p , q²<p , p<x) ←
                 forward-implication
                   ( is-rounded-lower-cut-ℝ⁰⁺ x (q *ℚ q))
-                  ( q²<x (is-nonnegative-is-positive-ℚ q is-pos-q))
+                  ( q²<x (is-nonnegative-is-positive-ℚ is-pos-q))
               let
                 is-pos-p =
                   is-positive-le-ℚ⁺
@@ -194,7 +198,6 @@ module _
         let
           is-nonneg-r =
             is-nonnegative-is-positive-ℚ
-              ( r)
               ( is-positive-le-ℚ⁰⁺ (q , is-nonneg-q) r q<r)
         le-lower-cut-ℝ
           ( real-ℝ⁰⁺ x)
@@ -217,8 +220,8 @@ module _
             ( q *ℚ q)
             ( r *ℚ r)
             ( preserves-le-square-ℚ⁰⁺
-              ( q , is-nonnegative-is-positive-ℚ q is-pos-q)
-              ( r , is-nonnegative-is-positive-ℚ r is-pos-r)
+              ( q , is-nonnegative-is-positive-ℚ is-pos-q)
+              ( r , is-nonnegative-is-positive-ℚ is-pos-r)
               q<r)
             ( x<q²))
 
@@ -244,7 +247,7 @@ module _
       is-disjoint-cut-ℝ
         ( real-ℝ⁰⁺ x)
         ( q *ℚ q)
-        ( q<√x (is-nonnegative-is-positive-ℚ q is-pos-q) ,
+        ( q<√x (is-nonnegative-is-positive-ℚ is-pos-q) ,
           x<q²)
 
     is-located-lower-upper-cut-sqrt-ℝ⁰⁺ :
@@ -252,10 +255,11 @@ module _
       type-disjunction-Prop (lower-cut-sqrt-ℝ⁰⁺ p) (upper-cut-sqrt-ℝ⁰⁺ q)
     is-located-lower-upper-cut-sqrt-ℝ⁰⁺ p q p<q =
       rec-coproduct
-        ( λ p<0 →
+        ( λ is-neg-p →
           inl-disjunction
             ( λ is-nonneg-p →
-              ex-falso (not-is-negative-is-nonnegative-ℚ is-nonneg-p p<0)))
+              ex-falso
+                ( not-is-negative-is-nonnegative-ℚ (is-neg-p , is-nonneg-p))))
         ( λ is-nonneg-p →
           map-disjunction
             ( λ p²<x _ → p²<x)
@@ -343,7 +347,6 @@ module _
                   ( λ is-neg-a →
                     ex-falso
                       ( not-is-negative-is-positive-ℚ
-                        ( a *ℚ d)
                         ( is-negative-mul-negative-positive-ℚ
                             ( is-neg-a)
                             ( is-pos-d) ,
@@ -359,7 +362,6 @@ module _
                   ( λ is-neg-c →
                     ex-falso
                       ( not-is-negative-is-positive-ℚ
-                        ( b *ℚ c)
                         ( is-negative-mul-positive-negative-ℚ
                             ( is-pos-b)
                             ( is-neg-c) ,

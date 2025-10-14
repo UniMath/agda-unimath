@@ -25,8 +25,10 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two posets is said to be
-**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two
+[posets](order-theory.posets.md) is said to be
+{{#concept "order preserving" Agda=hom-Poset Disambiguation="map between posets"}}
+if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 

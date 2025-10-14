@@ -23,6 +23,7 @@ open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers

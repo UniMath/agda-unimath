@@ -37,13 +37,13 @@ abstract
     {p q : ℚ} → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (max-ℚ p q)
   is-nonnegative-max-ℚ {p} {q} is-nonneg-p _ =
-    is-nonnegative-leq-zero-ℚ _
+    is-nonnegative-leq-zero-ℚ
       ( transitive-leq-ℚ
         ( zero-ℚ)
         ( p)
         ( max-ℚ p q)
         ( leq-left-max-ℚ p q)
-        ( leq-zero-is-nonnegative-ℚ p is-nonneg-p))
+        ( leq-zero-is-nonnegative-ℚ is-nonneg-p))
 
 max-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 max-ℚ⁰⁺ (p , is-nonneg-p) q⁰⁺@(q , is-nonneg-q) =

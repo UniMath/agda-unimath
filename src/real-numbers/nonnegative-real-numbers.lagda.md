@@ -14,6 +14,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
@@ -128,7 +129,7 @@ eq-ℝ⁰⁺ _ _ = eq-type-subtype is-nonnegative-prop-ℝ
 abstract
   is-nonnegative-real-ℚ⁰⁺ : (q : ℚ⁰⁺) → is-nonnegative-ℝ (real-ℚ⁰⁺ q)
   is-nonnegative-real-ℚ⁰⁺ (q , nonneg-q) =
-    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q)
+    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ nonneg-q)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ q = (real-ℚ⁰⁺ q , is-nonnegative-real-ℚ⁰⁺ q)
@@ -287,7 +288,6 @@ abstract
     is-positive-ℚ q
   is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) q x<q =
     is-positive-le-zero-ℚ
-      ( q)
       ( reflects-le-real-ℚ
         ( zero-ℚ)
         ( q)
@@ -302,7 +302,7 @@ opaque
     {l : Level} → (x : ℝ l) → (upper-cut-ℝ x ⊆ is-positive-prop-ℚ) →
     is-nonnegative-ℝ x
   is-nonnegative-is-positive-upper-cut-ℝ x Uₓ⊆ℚ⁺ =
-    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ q (Uₓ⊆ℚ⁺ q q∈Uₓ))
+    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ (Uₓ⊆ℚ⁺ q q∈Uₓ))
 ```
 
 ### A real number is nonnegative if and only if every negative rational number is in its lower cut
@@ -315,13 +315,13 @@ opaque
     {l : Level} (x : ℝ l) → (is-negative-prop-ℚ ⊆ lower-cut-ℝ x) →
     is-nonnegative-ℝ x
   is-nonnegative-leq-negative-lower-cut-ℝ x ℚ⁻⊆Lₓ q q<0 =
-    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q q<0)
+    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q<0)
 
   leq-negative-lower-cut-is-nonnegative-ℝ :
     {l : Level} (x : ℝ l) → is-nonnegative-ℝ x →
     (is-negative-prop-ℚ ⊆ lower-cut-ℝ x)
   leq-negative-lower-cut-is-nonnegative-ℝ x 0≤x q is-neg-q =
-    0≤x q (le-zero-is-negative-ℚ q is-neg-q)
+    0≤x q (le-zero-is-negative-ℚ is-neg-q)
 ```
 
 ### Every nonnegative real number has a positive rational number in its upper cut
@@ -516,7 +516,6 @@ module _
       le-ℝ (real-ℝ⁰⁺ x) (real-ℚ q) → is-positive-ℚ q
     is-positive-le-nonnegative-real-ℚ x<q =
       is-positive-le-zero-ℚ
-        ( q)
         ( reflects-le-real-ℚ _ _
           ( concatenate-leq-le-ℝ _ _ _ (is-nonnegative-real-ℝ⁰⁺ x) x<q))
 ```

@@ -297,9 +297,9 @@ module _
 opaque
   unfolding neg-ℚ
 
-  preserves-neg-rational-ℤ :
+  neg-rational-ℤ :
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-  preserves-neg-rational-ℤ k =
+  neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
@@ -308,21 +308,19 @@ opaque
 ```agda
 abstract
   eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
-  eq-neg-one-ℚ =
-    inv (preserves-neg-rational-ℤ one-ℤ)
+  eq-neg-one-ℚ = inv (neg-rational-ℤ one-ℤ)
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
 opaque
-  unfolding neg-ℚ
-  unfolding rational-fraction-ℤ
+  unfolding neg-ℚ rational-fraction-ℤ
 
-  preserves-neg-rational-fraction-ℤ :
+  neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-  preserves-neg-rational-fraction-ℤ x =
+  neg-rational-fraction-ℤ x =
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
