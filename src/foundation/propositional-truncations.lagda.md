@@ -499,8 +499,8 @@ in do
 
 We can read the line `p ← witness-truncated-prop-P` as "given
 `witness-truncated-prop-P : type-trunc-Prop P`, assume an element `p : P`," and
-we can then use `p` freely on further lines in the `do` block. The final line in the
-`do` block must be a value of `type-Prop motive`.
+we can then use `p` freely on further lines in the `do` block. The final line in
+the `do` block must be a value of `type-Prop motive`.
 
 This syntax is particularly useful when we must assume elements from multiple
 propositional truncations, especially dependent ones, e.g.
