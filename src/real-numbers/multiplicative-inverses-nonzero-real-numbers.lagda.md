@@ -66,7 +66,7 @@ has-nonzero-inv-ℝ {l} x =
 
 abstract
   is-prop-has-nonzero-inv-ℝ :
-    {l : Level} → (x : ℝ l) → is-prop (has-nonzero-inv-ℝ x)
+    {l : Level} (x : ℝ l) → is-prop (has-nonzero-inv-ℝ x)
   is-prop-has-nonzero-inv-ℝ x =
     is-prop-all-elements-equal
       ( λ ((y , _) , xy=1) ((z , _) , xz=1) →
@@ -140,7 +140,7 @@ opaque
   unfolding leq-ℝ mul-ℝ real-ℚ sim-ℝ
 
   is-nonzero-has-right-inverse-mul-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
     is-nonzero-ℝ x
   is-nonzero-has-right-inverse-mul-ℝ x y (_ , L1⊆Lxy) =
     let open do-syntax-trunc-Prop (is-nonzero-prop-ℝ x)
@@ -192,7 +192,7 @@ opaque
           ( is-positive-mul a c (leq-left-min-ℚ _ _) (leq-left-min-ℚ _ _)))
 
   is-nonzero-has-left-inverse-mul-ℝ :
-    {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
     is-nonzero-ℝ y
   is-nonzero-has-left-inverse-mul-ℝ x y xy=1 =
     is-nonzero-has-right-inverse-mul-ℝ y x
@@ -204,7 +204,7 @@ opaque
 ```agda
 abstract
   unique-right-inv-nonzero-ℝ :
-    {l1 l2 : Level} → (x : nonzero-ℝ l1) (y : nonzero-ℝ l2) →
+    {l1 l2 : Level} (x : nonzero-ℝ l1) (y : nonzero-ℝ l2) →
     sim-ℝ (real-nonzero-ℝ x *ℝ real-nonzero-ℝ y) one-ℝ →
     sim-ℝ (real-nonzero-ℝ y) (real-inv-nonzero-ℝ x)
   unique-right-inv-nonzero-ℝ xnz@(x , _) ynz@(y , _) xy=1 =
@@ -224,7 +224,7 @@ abstract
         by sim-eq-ℝ (left-unit-law-mul-ℝ _)
 
   unique-left-inv-nonzero-ℝ :
-    {l1 l2 : Level} → (x : nonzero-ℝ l1) (y : nonzero-ℝ l2) →
+    {l1 l2 : Level} (x : nonzero-ℝ l1) (y : nonzero-ℝ l2) →
     sim-ℝ (real-nonzero-ℝ x *ℝ real-nonzero-ℝ y) one-ℝ →
     sim-ℝ (real-nonzero-ℝ x) (real-inv-nonzero-ℝ y)
   unique-left-inv-nonzero-ℝ x y xy=1 =

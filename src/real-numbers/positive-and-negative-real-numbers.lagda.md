@@ -27,7 +27,7 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-In this file, we outline basic relations between
+On this page, we outline basic relations between
 [negative](real-numbers.negative-real-numbers.md),
 [nonnegative](real-numbers.nonnegative-real-numbers.md), and
 [positive](real-numbers.positive-real-numbers.md)
@@ -56,7 +56,7 @@ neg-ℝ⁺ (x , is-pos-x) = (neg-ℝ x , neg-is-positive-ℝ x is-pos-x)
 ```agda
 abstract
   neg-is-negative-ℝ :
-    {l : Level} → (x : ℝ l) → is-negative-ℝ x → is-positive-ℝ (neg-ℝ x)
+    {l : Level} (x : ℝ l) → is-negative-ℝ x → is-positive-ℝ (neg-ℝ x)
   neg-is-negative-ℝ x x<0 =
     tr
       ( λ z → le-ℝ z (neg-ℝ x))
