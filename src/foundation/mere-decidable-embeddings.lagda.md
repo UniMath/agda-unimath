@@ -24,8 +24,7 @@ open import order-theory.large-preorders
 
 ## Idea
 
-A type `A`
-{{#concept "merely decidably embeds" Agda=mere-decidable-decidable-emb}} into a
+A type `A` {{#concept "merely decidably embeds" Agda=mere-decidable-emb}} into a
 type `B` if there [merely exists](foundation.propositional-truncations.md) a
 [decidable embedding](logic.decidable-embeddings.md) of `A` into `B`.
 
