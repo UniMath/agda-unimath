@@ -66,7 +66,7 @@ refl-sim-subtype {A = A} = refl-sim-Large-Poset (powerset-Large-Poset A)
 
 ```agda
 symmetric-sim-subtype :
-  {l1 l2 l3 : Level} {A : UU l1} →
+  {l1 l2 l3 : Level} {A : UU l1}
   (P : subtype l2 A) (Q : subtype l3 A) →
   sim-subtype P Q → sim-subtype Q P
 symmetric-sim-subtype {A = A} =
@@ -77,9 +77,9 @@ symmetric-sim-subtype {A = A} =
 
 ```agda
 transitive-sim-subtype :
-  {l1 l2 l3 l4 : Level} {A : UU l1} →
-  (P : subtype l2 A) →
-  (Q : subtype l3 A) →
+  {l1 l2 l3 l4 : Level} {A : UU l1}
+  (P : subtype l2 A)
+  (Q : subtype l3 A)
   (R : subtype l4 A) →
   sim-subtype Q R →
   sim-subtype P Q →
@@ -94,7 +94,8 @@ transitive-sim-subtype {A = A} =
 eq-sim-subtype :
   {l1 l2 : Level} {A : UU l1} (P Q : subtype l2 A) →
   sim-subtype P Q → P ＝ Q
-eq-sim-subtype {A = A} = eq-sim-Large-Poset (powerset-Large-Poset A)
+eq-sim-subtype {A = A} =
+  eq-sim-Large-Poset (powerset-Large-Poset A)
 ```
 
 ### Similarity is a large similarity relation
@@ -112,7 +113,8 @@ large-similarity-relation-sim-subtype X =
 ```agda
 abstract
   sim-raise-subtype :
-    {l1 l2 : Level} {X : UU l1} (l3 : Level) (S : subtype l2 X) →
+    {l1 l2 : Level} {X : UU l1}
+    (l3 : Level) (S : subtype l2 X) →
     sim-subtype S (raise-subtype l3 S)
   sim-raise-subtype _ _ = ( (λ _ → map-raise) , (λ _ → map-inv-raise))
 ```
