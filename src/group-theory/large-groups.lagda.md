@@ -65,7 +65,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   mul-Large-Group' x y = mul-Large-Group y x
 
   ap-mul-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     {x x' : type-Large-Group l1} → x ＝ x' →
     {y y' : type-Large-Group l2} → y ＝ y' →
     mul-Large-Group x y ＝ mul-Large-Group x' y'
@@ -99,7 +99,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     symmetric-sim-Large-Monoid large-monoid-Large-Group
 
   preserves-sim-left-mul-Large-Group :
-    {l1 l2 l3 : Level} (y : type-Large-Group l1) →
+    {l1 l2 l3 : Level} (y : type-Large-Group l1)
     (x : type-Large-Group l2) (x' : type-Large-Group l3) →
     sim-Large-Group x x' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x' y)
@@ -107,7 +107,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     preserves-sim-left-mul-Large-Monoid large-monoid-Large-Group
 
   preserves-sim-right-mul-Large-Group :
-    {l1 l2 l3 : Level} (x : type-Large-Group l1) →
+    {l1 l2 l3 : Level} (x : type-Large-Group l1)
     (y : type-Large-Group l2) (y' : type-Large-Group l3) →
     sim-Large-Group y y' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x y')
@@ -190,14 +190,14 @@ module _
   sim-raise-Large-Group' = sim-raise-Large-Monoid' (large-monoid-Large-Group G)
 
   raise-raise-Large-Group :
-    {l1 l2 l3 : Level} → (x : type-Large-Group G l1) →
+    {l1 l2 l3 : Level} (x : type-Large-Group G l1) →
     raise-Large-Group G l2 (raise-Large-Group G l3 x) ＝
     raise-Large-Group G (l2 ⊔ l3) x
   raise-raise-Large-Group =
     raise-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-left-mul-Large-Group :
-    {l1 l2 l3 : Level} →
+    {l1 l2 l3 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G (raise-Large-Group G l3 x) y ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
@@ -205,7 +205,7 @@ module _
     raise-left-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-right-mul-Large-Group :
-    {l1 l2 l3 : Level} →
+    {l1 l2 l3 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G x (raise-Large-Group G l3 y) ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
@@ -213,7 +213,7 @@ module _
     raise-right-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-mul-Large-Group :
-    {l1 l2 l3 l4 : Level} →
+    {l1 l2 l3 l4 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G
       ( raise-Large-Group G l3 x)
@@ -478,7 +478,7 @@ module _
   where
 
   sim-iff-eq-raise-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     ( sim-Large-Group G x y) ↔
     ( raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y)
@@ -486,7 +486,7 @@ module _
     sim-iff-eq-raise-Large-Monoid (large-monoid-Large-Group G)
 
   sim-eq-raise-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     (raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y) →
     sim-Large-Group G x y
@@ -494,7 +494,7 @@ module _
     backward-implication (sim-iff-eq-raise-Large-Group x y)
 
   eq-raise-sim-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     sim-Large-Group G x y →
     raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y
