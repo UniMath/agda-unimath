@@ -10,6 +10,7 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-positive-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
@@ -19,7 +20,6 @@ open import elementary-number-theory.multiplication-closed-intervals-rational-nu
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
