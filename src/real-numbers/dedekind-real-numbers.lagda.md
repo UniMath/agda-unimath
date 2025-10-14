@@ -37,6 +37,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -293,6 +294,10 @@ module _
   lower-complement-upper-cut-ℝ : subtype l ℚ
   lower-complement-upper-cut-ℝ p =
     ∃ ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
+
+  is-in-lower-complement-upper-cut-ℝ : ℚ → UU l
+  is-in-lower-complement-upper-cut-ℝ =
+    is-in-subtype lower-complement-upper-cut-ℝ
 ```
 
 ```agda
@@ -319,14 +324,27 @@ module _
       ( λ q → map-product id (λ L U → is-disjoint-cut-ℝ x q (L , U)))
       ( pr1 (is-rounded-lower-cut-ℝ x p) H)
 
+  sim-lower-cut-lower-complement-upper-cut-ℝ :
+    sim-subtype (lower-complement-upper-cut-ℝ x) (lower-cut-ℝ x)
+  sim-lower-cut-lower-complement-upper-cut-ℝ =
+    ( subset-lower-cut-lower-complement-upper-cut-ℝ ,
+      subset-lower-complement-upper-cut-lower-cut-ℝ)
+
+  has-same-elements-lower-complement-upper-cut-lower-cut-ℝ :
+    has-same-elements-subtype (lower-complement-upper-cut-ℝ x) (lower-cut-ℝ x)
+  has-same-elements-lower-complement-upper-cut-lower-cut-ℝ =
+    has-same-elements-sim-subtype
+      ( lower-complement-upper-cut-ℝ x)
+      ( lower-cut-ℝ x)
+      ( sim-lower-cut-lower-complement-upper-cut-ℝ)
+
   eq-lower-cut-lower-complement-upper-cut-ℝ :
     lower-complement-upper-cut-ℝ x ＝ lower-cut-ℝ x
   eq-lower-cut-lower-complement-upper-cut-ℝ =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( lower-complement-upper-cut-ℝ x)
       ( lower-cut-ℝ x)
-      ( subset-lower-cut-lower-complement-upper-cut-ℝ)
-      ( subset-lower-complement-upper-cut-lower-cut-ℝ)
+      ( sim-lower-cut-lower-complement-upper-cut-ℝ)
 ```
 
 #### The upper cut is the subtype of rationals bounded below by some element of the complement of the lower cut
@@ -343,6 +361,10 @@ module _
   upper-complement-lower-cut-ℝ : subtype l ℚ
   upper-complement-lower-cut-ℝ q =
     ∃ ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
+
+  is-in-upper-complement-lower-cut-ℝ : ℚ → UU l
+  is-in-upper-complement-lower-cut-ℝ =
+    is-in-subtype upper-complement-lower-cut-ℝ
 ```
 
 ```agda
@@ -360,7 +382,7 @@ module _
           ( lower-cut-ℝ x p)
           ( upper-cut-ℝ x q)
           ( pr2 I)
-          ( is-located-lower-upper-cut-ℝ x p q ( pr1 I)))
+          ( is-located-lower-upper-cut-ℝ x p q (pr1 I)))
 
   subset-upper-complement-lower-cut-upper-cut-ℝ :
     upper-cut-ℝ x ⊆ upper-complement-lower-cut-ℝ x
@@ -369,14 +391,27 @@ module _
       ( λ p → map-product id (λ U L → is-disjoint-cut-ℝ x p (L , U)))
       ( pr1 (is-rounded-upper-cut-ℝ x q) H)
 
+  sim-upper-cut-upper-complement-lower-cut-ℝ :
+    sim-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
+  sim-upper-cut-upper-complement-lower-cut-ℝ =
+    ( subset-upper-cut-upper-complement-lower-cut-ℝ ,
+      subset-upper-complement-lower-cut-upper-cut-ℝ)
+
+  has-same-elements-upper-complement-lower-cut-upper-cut-ℝ :
+    has-same-elements-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
+  has-same-elements-upper-complement-lower-cut-upper-cut-ℝ =
+    has-same-elements-sim-subtype
+      ( upper-complement-lower-cut-ℝ x)
+      ( upper-cut-ℝ x)
+      ( sim-upper-cut-upper-complement-lower-cut-ℝ)
+
   eq-upper-cut-upper-complement-lower-cut-ℝ :
     upper-complement-lower-cut-ℝ x ＝ upper-cut-ℝ x
   eq-upper-cut-upper-complement-lower-cut-ℝ =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( upper-complement-lower-cut-ℝ x)
       ( upper-cut-ℝ x)
-      ( subset-upper-cut-upper-complement-lower-cut-ℝ)
-      ( subset-upper-complement-lower-cut-upper-cut-ℝ)
+      ( sim-upper-cut-upper-complement-lower-cut-ℝ)
 ```
 
 ### The lower/upper cut of a real determines the other
