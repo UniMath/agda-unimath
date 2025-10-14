@@ -140,6 +140,32 @@ module _
       apply-dependent-universal-property-trunc-Set'
         ( C (unit-trunc-Set x))
         ( f x))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : type-trunc-Set A → UU l2}
+  {C : (a : type-trunc-Set A) → type-trunc-Set (B a) → UU l3}
+  (D :
+    (a : type-trunc-Set A) (b : type-trunc-Set (B a)) → type-trunc-Set (C a b) →
+    Set l4)
+  (f :
+    (x : A)
+    (y : B (unit-trunc-Set x))
+    (z : C (unit-trunc-Set x) (unit-trunc-Set y)) →
+    type-Set (D (unit-trunc-Set x) (unit-trunc-Set y) (unit-trunc-Set z)))
+  where
+
+  apply-thrice-dependent-universal-property-trunc-Set' :
+    (a : type-trunc-Set A)
+    (b : type-trunc-Set (B a))
+    (c : type-trunc-Set (C a b)) →
+    type-Set (D a b c)
+  apply-thrice-dependent-universal-property-trunc-Set' =
+    apply-twice-dependent-universal-property-trunc-Set'
+      ( λ x y → Π-Set (trunc-Set (C x y)) (D x y))
+      ( λ x y →
+        apply-dependent-universal-property-trunc-Set'
+          ( D (unit-trunc-Set x) (unit-trunc-Set y))
+          ( f x y))
 ```
 
 ### The universal property of set truncations
