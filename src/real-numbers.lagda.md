@@ -43,6 +43,8 @@ open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
 open import real-numbers.multiplicative-inverses-negative-real-numbers public
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers public
+open import real-numbers.multiplication-positive-real-numbers public
+open import real-numbers.multiplication-real-numbers public
 open import real-numbers.multiplicative-inverses-positive-real-numbers public
 open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public

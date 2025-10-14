@@ -353,7 +353,7 @@ module _
               ( cong-add-ℕ k1 k2))))) ∙
       ( ap
         ( mod-two-ℕ)
-        ( ( symmetric-dist-ℕ (k1 +ℕ k2) (2 *ℕ k')) ∙
+        ( ( commutative-dist-ℕ (k1 +ℕ k2) (2 *ℕ k')) ∙
           ( inv
             ( rewrite-left-add-dist-ℕ
               ( k)

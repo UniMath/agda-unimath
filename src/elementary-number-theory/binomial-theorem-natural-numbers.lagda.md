@@ -10,11 +10,11 @@ module elementary-number-theory.binomial-theorem-natural-numbers where
 open import commutative-algebra.binomial-theorem-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.semiring-of-natural-numbers
 
 open import foundation.homotopies
 open import foundation.identity-types
