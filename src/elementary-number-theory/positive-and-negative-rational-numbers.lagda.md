@@ -145,23 +145,6 @@ abstract
   leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
 ```
 
-### If `p ≤ q` and `p` is positive, then `q` is positive
-
-```agda
-abstract
-  is-positive-leq-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
-    is-positive-le-zero-ℚ
-      ( q)
-      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
-
-  is-positive-le-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-le-ℚ⁺ p q p<q =
-    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
-```
-
 ### If `p < q` and `p` is nonnegative, then `q` is positive
 
 ```agda
