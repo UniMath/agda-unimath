@@ -1,7 +1,7 @@
 # The Eisenstein integers
 
 ```agda
-module commutative-algebra.eisenstein-integers where
+module complex-numbers.eisenstein-integers where
 ```
 
 <details><summary>Imports</summary>
@@ -32,9 +32,11 @@ open import ring-theory.rings
 
 ## Idea
 
-The **Eisenstein integers** are the complex numbers of the form `a + bω`, where
-`ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution
-to the equation `ω² + ω + 1 = 0`.
+The {{#concept "Eisenstein integers" WDID=Q262370 WD="Eisenstein integer"}} are
+the [complex numbers](complex-numbers.complex-numbers.md) of the form `a + bω`,
+where `ω = -½ + ½√3i`, and where `a` and `b` are
+[integers](elementary-number-theory.integers.md). Note that `ω` is a solution to
+the equation `ω² + ω + 1 = 0`.
 
 ## Definition
 

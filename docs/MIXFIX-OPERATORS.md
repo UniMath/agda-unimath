@@ -59,7 +59,7 @@ nonparametric operators are
 [difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
 [strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
-[multiplication of Eisenstein integers `_*ℤ[ω]_`](commutative-algebra.eisenstein-integers.md).
+[multiplication of Eisenstein integers `_*ℤ[ω]_`](complex-numbers.eisenstein-integers.md).
 
 Within these two classes, we make a further distinction between _relational_,
 _additive_, _multiplicative_, _exponentiative_, and _unary_ operators, each with
