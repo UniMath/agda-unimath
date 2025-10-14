@@ -122,6 +122,24 @@ module _
     (x : type-trunc-Set A) → type-Set (B x)
   apply-dependent-universal-property-trunc-Set' =
     map-inv-equiv (equiv-dependent-universal-property-trunc-Set B) f
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : type-trunc-Set A → UU l2}
+  (C : (a : type-trunc-Set A) → type-trunc-Set (B a) → Set l3)
+  (f :
+    (x : A) (y : B (unit-trunc-Set x)) →
+    type-Set (C (unit-trunc-Set x) (unit-trunc-Set y)))
+  where
+
+  apply-twice-dependent-universal-property-trunc-Set' :
+    (a : type-trunc-Set A) (b : type-trunc-Set (B a)) → type-Set (C a b)
+  apply-twice-dependent-universal-property-trunc-Set' =
+    apply-dependent-universal-property-trunc-Set'
+    ( λ x → Π-Set (trunc-Set (B x)) (C x))
+    ( λ x →
+      apply-dependent-universal-property-trunc-Set'
+        ( C (unit-trunc-Set x))
+        ( f x))
 ```
 
 ### The universal property of set truncations
