@@ -9,6 +9,7 @@ module metric-spaces.lipschitz-functions-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
@@ -27,11 +28,12 @@ open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 

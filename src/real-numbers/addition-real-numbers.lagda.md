@@ -9,12 +9,14 @@ module real-numbers.addition-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -140,6 +142,12 @@ module _
 
 infixl 35 _+ℝ_
 _+ℝ_ = add-ℝ
+
+ap-add-ℝ :
+  {l1 : Level} {x x' : ℝ l1} → (x ＝ x') →
+  {l2 : Level} {y y' : ℝ l2} → (y ＝ y') →
+  (x +ℝ y) ＝ (x' +ℝ y')
+ap-add-ℝ x=x' y=y' = ap-binary add-ℝ x=x' y=y'
 ```
 
 ## Properties
@@ -189,7 +197,7 @@ module _
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ real-ℚ
 
   left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
   left-unit-law-add-ℝ x =
@@ -210,7 +218,7 @@ opaque
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
     {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
@@ -241,6 +249,7 @@ opaque
                 ( -q<x) ,
                 x<p)))
 
+abstract
   left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
   left-inverse-law-add-ℝ x =
     tr
@@ -258,8 +267,7 @@ module _
   where
 
   opaque
-    unfolding sim-ℝ
-    unfolding add-ℝ
+    unfolding add-ℝ sim-ℝ
 
     preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
     pr1 (preserves-sim-right-add-ℝ (lx⊆ly , _)) q =
@@ -274,6 +282,15 @@ module _
         ( commutative-add-ℝ x z)
         ( commutative-add-ℝ y z)
         ( preserves-sim-right-add-ℝ x≈y)
+
+abstract
+  preserves-sim-add-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
+    sim-ℝ x x' → sim-ℝ y y' → sim-ℝ (x +ℝ y) (x' +ℝ y')
+  preserves-sim-add-ℝ x~x' y~y' =
+    transitive-sim-ℝ _ _ _
+      ( preserves-sim-right-add-ℝ _ _ _ x~x')
+      ( preserves-sim-left-add-ℝ _ _ _ y~y')
 ```
 
 ### Swapping laws for addition on real numbers
@@ -373,7 +390,7 @@ module _
 
 ```agda
 opaque
-  unfolding add-ℝ
+  unfolding add-ℝ real-ℚ
 
   add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
   add-real-ℚ p q =
@@ -501,6 +518,37 @@ abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
 abelian-group-add-ℝ-lzero =
   ( group-add-ℝ-lzero ,
     commutative-add-ℝ)
+```
+
+### If `x + y` is similar to `0`, then `y` is similar to `-x` and `x` is similar to `-y`
+
+```agda
+abstract
+  unique-right-inverse-add-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    sim-ℝ y (neg-ℝ x)
+  unique-right-inverse-add-ℝ x y x+y~0 =
+    similarity-reasoning-ℝ
+      y
+      ~ℝ y +ℝ neg-ℝ zero-ℝ
+        by sim-eq-ℝ (inv (ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ y))
+      ~ℝ y +ℝ neg-ℝ (x +ℝ y)
+        by
+          preserves-sim-left-add-ℝ y _ _
+            ( preserves-sim-neg-ℝ (symmetric-sim-ℝ x+y~0))
+      ~ℝ y +ℝ (neg-ℝ x +ℝ neg-ℝ y)
+        by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ x y))
+      ~ℝ (neg-ℝ x +ℝ neg-ℝ y) +ℝ y
+        by sim-eq-ℝ (commutative-add-ℝ _ _)
+      ~ℝ neg-ℝ x
+        by cancel-right-diff-add-ℝ _ _
+
+  unique-left-inverse-add-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ y) zero-ℝ →
+    sim-ℝ x (neg-ℝ y)
+  unique-left-inverse-add-ℝ x y x+y~0 =
+    unique-right-inverse-add-ℝ y x
+      ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
 ```
 
 ## See also

@@ -47,7 +47,8 @@ class CustomHtmlBackend(pybtex.backends.html.Backend):
         self.output('</dl>\n\n')
 
     def write_entry(self, key, label, text):
-        self.output(f'<dt class="reference-entry"><a name="reference-{label}">&#91;{label}&#93;</a></dt>\n')
+        self.output(
+            f'<dt class="reference-entry"><a name="reference-{label}">&#91;{label}&#93;</a></dt>\n')
         self.output(f'<dd>{text}</dd>\n')
 
 
@@ -106,7 +107,8 @@ def format_citation(
 
         return f'&#91;<a class="citation-link" href="#reference-{formatted_label}">{formatted_label}</a>&#93;'
     else:
-        eprint(f"Error! Citation key '{cite_key}' used in #cite macro was not found in bibliography. File: '{chapter['path']}'")
+        eprint(
+            f"Error! Citation key '{cite_key}' used in #cite macro was not found in bibliography. File: '{chapter['path']}'")
         unmatched_cite_keys.add(cite_key)
         # If the cite_key is not recognized, we make the following guess about how to format the citation instead of failing completely
         return f'&#91;{cite_key}&#93;'
@@ -139,7 +141,8 @@ def process_citations_chapter_rec_mut(
             cited_keys.add(cite_key)
             return ''
         else:
-            eprint(f"Error! Citation key '{cite_key}' used in #reference macro was not found in bibliography. File: '{chapter['path']}'")
+            eprint(
+                f"Error! Citation key '{cite_key}' used in #reference macro was not found in bibliography. File: '{chapter['path']}'")
             unmatched_cite_keys.add(cite_key)
             return ''
 
@@ -153,7 +156,8 @@ def process_citations_chapter_rec_mut(
                 new_content, bibliography_section)
 
     elif BIBLIOGRAPHY_REGEX.search(new_content):
-        eprint(f"Error! A #bibliography macro was found, but there are no references. File: '{chapter['path']}'.")
+        eprint(
+            f"Error! A #bibliography macro was found, but there are no references. File: '{chapter['path']}'.")
         empty_bibliography_invocations.add(chapter['path'])
 
     chapter['content'] = new_content
@@ -173,7 +177,7 @@ def insert_bibliography_at_correct_location(content, bibliography_section):
             lambda _: bibliography_section, content)
     else:
         # If the placeholder isn't found, append the bibliography at the end of the content, with a `## References` header
-        new_content = content + "\n\n## References\n\n" + bibliography_section
+        new_content = content + '\n\n## References\n\n' + bibliography_section
 
     return new_content
 
@@ -210,7 +214,7 @@ def process_citations_root_section(
 
 
 def does_support_backend(backend):
-    return backend == 'html' or backend == "linkcheck"
+    return backend == 'html' or backend == 'linkcheck'
 
 
 if __name__ == '__main__':
@@ -268,13 +272,15 @@ if __name__ == '__main__':
     json.dump(book, sys.stdout)
 
     if unmatched_cite_keys:
-        eprint("The following unmatched bibliography keys were found while processing citations: ", ", ".join(sorted(unmatched_cite_keys)))
+        eprint('The following unmatched bibliography keys were found while processing citations: ',
+               ', '.join(sorted(unmatched_cite_keys)))
 
         if citations_config.get('error-on-unmatched-keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
             sys.exit(1)
 
     if empty_bibliography_invocations:
-        eprint("The following files have #bibliography macro invocations with empty bibliographies: ", ", ".join(sorted(empty_bibliography_invocations)))
+        eprint('The following files have #bibliography macro invocations with empty bibliographies: ',
+               ', '.join(sorted(empty_bibliography_invocations)))
 
         if citations_config.get('error-on-empty-bibliography', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY):
             sys.exit(2)

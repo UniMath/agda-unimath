@@ -37,7 +37,7 @@ The
 {{#concept "Baire space" Disambiguation="as a type" Agda=baire-space WD="Baire space" WDID=Q803936}}
 is the [set](foundation-core.sets.md) of
 [functions](foundation-core.function-types.md) `ℕ → ℕ`. In other words, it is
-the set of infinite [sequences](foundation.sequences.md) of
+the set of infinite [sequences](lists.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition

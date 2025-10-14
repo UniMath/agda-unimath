@@ -27,8 +27,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **preorder** is a type equipped with a reflexive, transitive relation that is
-valued in propositions.
+A {{#concept "preorder" WDID=Q1425985 WD="preorder" Agda=Preorder}} is a type
+equipped with a reflexive, transitive [relation](foundation.binary-relations.md)
+that is valued in propositions.
 
 ## Definitions
 

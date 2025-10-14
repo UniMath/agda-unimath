@@ -10,11 +10,11 @@ module elementary-number-theory.binomial-coefficients where
 open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.semiring-of-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions

@@ -8,12 +8,14 @@ module ring-theory.sums-of-finite-families-of-elements-semirings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-cartesian-product-types
@@ -25,8 +27,10 @@ open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
 open import ring-theory.semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -37,7 +41,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a semiring" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Semiring}}
+{{#concept "sum operation" Disambiguation="of a finite family of elements of a semiring" WD="sum" WDID=Q218005 Agda=sum-finite-Semiring}}
 extends the binary addition operation on a [semiring](ring-theory.semirings.md)
 `R` to any family of elements of `R` indexed by a
 [finite type](univalent-combinatorics.finite-types.md).
@@ -73,6 +77,27 @@ module _
   sum-unit-finite-Semiring =
     sum-finite-unit-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
+```
+
+### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Semiring :
+      (f : type-Finite-Type I → type-Semiring R) →
+      sum-finite-Semiring R I f ＝ f i
+    sum-finite-is-contr-Semiring =
+      sum-finite-is-contr-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( I)
+        ( is-contr-I)
+        ( i)
 ```
 
 ### Sums are homotopy invariant
@@ -291,80 +316,73 @@ module _
     (f g : type-Finite-Type A → type-Semiring R) →
     sum-finite-Semiring R A
       (λ a → add-Semiring R (f a) (g a)) ＝
-    add-Semiring R
-      (sum-finite-Semiring R A f)
-      (sum-finite-Semiring R A g)
-  interchange-sum-add-finite-Semiring f g = equational-reasoning
-    sum-finite-Semiring R A
-      ( λ a → add-Semiring R (f a) (g a))
-    ＝
-      sum-finite-Semiring
-        ( R)
+    add-Semiring R (sum-finite-Semiring R A f) (sum-finite-Semiring R A g)
+  interchange-sum-add-finite-Semiring =
+    interchange-sum-mul-finite-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+      ( A)
+```
+
+### Decomposing sums via decidable subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    decompose-sum-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      sum-finite-Semiring R A f ＝
+      add-Semiring R
+        ( sum-finite-Semiring R
+          ( finite-type-subset-Finite-Type A P)
+          ( f ∘ inclusion-subset-Finite-Type A P))
+        ( sum-finite-Semiring R
+          ( finite-type-complement-subset-Finite-Type A P)
+          ( f ∘ inclusion-complement-subset-Finite-Type A P))
+    decompose-sum-decidable-subset-finite-Semiring =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
         ( A)
-        ( λ a → sum-fin-sequence-type-Semiring R 2 (h a))
-        by
-          htpy-sum-finite-Semiring
-            ( R)
-            ( A)
-            ( λ a → inv (compute-sum-two-elements-Semiring R (h a)))
-    ＝
-      sum-finite-Semiring
-        ( R)
+        ( P)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-zero-Semiring R (f a)) →
+      sum-finite-Semiring R A f ＝
+      sum-finite-Semiring R
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Semiring =
+      vanish-sum-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
         ( A)
-        ( λ a →
-          sum-finite-Semiring R (Fin-Finite-Type 2) (h a))
-      by
-        htpy-sum-finite-Semiring R A
-          ( λ a →
-            inv
-              ( eq-sum-finite-sum-count-Semiring
-                ( R)
-                ( Fin-Finite-Type 2)
-                ( count-Fin 2)
-                ( h a)))
-    ＝
-      sum-finite-Semiring
-        ( R)
-        ( Σ-Finite-Type A (λ _ → Fin-Finite-Type 2))
-        ( ind-Σ h)
-      by inv (sum-Σ-finite-Semiring R A (λ _ → Fin-Finite-Type 2) h)
-    ＝
-      sum-finite-Semiring
-        ( R)
-        ( Σ-Finite-Type (Fin-Finite-Type 2) (λ _ → A))
-        ( λ (i , a) → h a i)
-      by
-        sum-equiv-finite-Semiring R _ _
-          ( commutative-product)
-          ( ind-Σ h)
-    ＝
-      sum-finite-Semiring
-        ( R)
-        ( Fin-Finite-Type 2)
-        ( λ i → sum-finite-Semiring R A (λ a → h a i))
-      by sum-Σ-finite-Semiring R _ _ _
-    ＝
-      sum-fin-sequence-type-Semiring
-        ( R)
-        ( 2)
-        ( λ i → sum-finite-Semiring R A (λ a → h a i))
-      by
-        eq-sum-finite-sum-count-Semiring
-          ( R)
-          ( Fin-Finite-Type 2)
-          ( count-Fin 2)
-          ( _)
-    ＝
-      add-Semiring
-        ( R)
-        ( sum-finite-Semiring R A f)
-        ( sum-finite-Semiring R A g)
-      by
-        compute-sum-two-elements-Semiring
-          ( R)
-          ( λ i → sum-finite-Semiring R A (λ a → h a i))
-    where
-      h : type-Finite-Type A → Fin 2 → type-Semiring R
-      h a (inl (inr _)) = f a
-      h a (inr _) = g a
+        ( P)
+
+    vanish-sum-complement-decidable-subset-finite-Semiring :
+      (f : type-Finite-Type A → type-Semiring R) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-zero-Semiring R (f a)) →
+      sum-finite-Semiring R A f ＝
+      sum-finite-Semiring R
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Semiring =
+      vanish-sum-complement-decidable-subset-finite-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
+        ( A)
+        ( P)
 ```

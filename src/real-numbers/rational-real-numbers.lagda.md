@@ -10,6 +10,9 @@ module real-numbers.rational-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -74,8 +77,23 @@ is-dedekind-lower-upper-real-ℚ x =
 ### The canonical map from `ℚ` to `ℝ lzero`
 
 ```agda
-real-ℚ : ℚ → ℝ lzero
-real-ℚ x = (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+opaque
+  real-ℚ : ℚ → ℝ lzero
+  real-ℚ x =
+    (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+
+real-ℚ⁺ : ℚ⁺ → ℝ lzero
+real-ℚ⁺ q = real-ℚ (rational-ℚ⁺ q)
+
+real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ lzero
+real-ℚ⁰⁺ q = real-ℚ (rational-ℚ⁰⁺ q)
+```
+
+### The canonical map from `ℤ` to `ℝ lzero`
+
+```agda
+real-ℤ : ℤ → ℝ lzero
+real-ℤ x = real-ℚ (rational-ℤ x)
 ```
 
 ### Zero as a real number
@@ -90,6 +108,13 @@ zero-ℝ = real-ℚ zero-ℚ
 ```agda
 one-ℝ : ℝ lzero
 one-ℝ = real-ℚ one-ℚ
+```
+
+### Negative one as a real number
+
+```agda
+neg-one-ℝ : ℝ lzero
+neg-one-ℝ = real-ℚ neg-one-ℚ
 ```
 
 ### The canonical map from `ℚ` to `ℝ l`
@@ -186,15 +211,18 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
-is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
+opaque
+  unfolding real-ℚ
+
+  is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
+  is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
 
 ```agda
 opaque
-  unfolding sim-ℝ
+  unfolding real-ℚ sim-ℝ
 
   sim-rational-ℝ :
     {l : Level} →

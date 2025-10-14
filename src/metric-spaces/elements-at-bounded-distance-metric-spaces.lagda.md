@@ -7,13 +7,21 @@ module metric-spaces.elements-at-bounded-distance-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -21,9 +29,15 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 
 open import order-theory.preorders
+
+open import real-numbers.inequality-upper-dedekind-real-numbers
+open import real-numbers.minimum-upper-dedekind-real-numbers
+open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -175,4 +189,89 @@ module _
     ( refl-bounded-dist-Metric-Space A) ,
     ( symmetric-bounded-dist-Metric-Space A) ,
     ( transitive-bounded-dist-Metric A)
+```
+
+### All the values of a Cauchy approximation in a metric space are at bounded distance
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f : cauchy-approximation-Metric-Space A)
+  where
+
+  bounded-dist-map-cauchy-approximation-Metric-Space :
+    (ε δ : ℚ⁺) →
+    bounded-dist-Metric-Space
+      ( A)
+      ( map-cauchy-approximation-Metric-Space A f ε)
+      ( map-cauchy-approximation-Metric-Space A f δ)
+  bounded-dist-map-cauchy-approximation-Metric-Space ε δ =
+    unit-trunc-Prop
+      ( ( ε +ℚ⁺ δ) ,
+        ( is-cauchy-approximation-map-cauchy-approximation-Metric-Space
+          ( A)
+          ( f)
+          ( ε)
+          ( δ)))
+```
+
+### Elements at bounded distance can be assigned an upper real distance
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x y : type-Metric-Space M) (B : bounded-dist-Metric-Space M x y)
+  where
+
+  upper-real-dist-Metric-Space : upper-ℝ l2
+  upper-real-dist-Metric-Space =
+    min-upper-ℝ
+      ( type-subtype (λ ε → neighborhood-prop-Metric-Space M ε x y))
+      ( B)
+      ( upper-real-ℚ ∘ rational-ℚ⁺ ∘ pr1)
+
+  abstract
+    leq-upper-real-dist-Metric-Space :
+      (ε : ℚ⁺) →
+      leq-upper-ℝ upper-real-dist-Metric-Space (upper-real-ℚ (rational-ℚ⁺ ε)) ↔
+      neighborhood-Metric-Space M ε x y
+    pr1 (leq-upper-real-dist-Metric-Space ε⁺@(ε , _)) d≤ε =
+      saturated-neighborhood-Metric-Space M ε⁺ x y
+        ( λ δ⁺@(δ , _) →
+          let
+            open
+              do-syntax-trunc-Prop
+                ( neighborhood-prop-Metric-Space M (ε⁺ +ℚ⁺ δ⁺) x y)
+          in do
+            ((θ , Nθxy) , θ<ε+δ) ← d≤ε (ε +ℚ δ) (le-right-add-rational-ℚ⁺ ε δ⁺)
+            monotonic-neighborhood-Metric-Space M x y θ (ε⁺ +ℚ⁺ δ⁺) θ<ε+δ Nθxy)
+    pr2 (leq-upper-real-dist-Metric-Space ε⁺) Nεxy _ = intro-exists (ε⁺ , Nεxy)
+
+    leq-zero-not-in-cut-upper-real-dist-Metric-Space :
+      (q : ℚ) → leq-ℚ q zero-ℚ →
+      ¬ (is-in-cut-upper-ℝ upper-real-dist-Metric-Space q)
+    leq-zero-not-in-cut-upper-real-dist-Metric-Space q q≤0 q∈U =
+      let open do-syntax-trunc-Prop empty-Prop
+      in do
+        ((ε⁺@(ε , is-pos-ε) , Nεxy) , ε<q) ← q∈U
+        asymmetric-le-ℚ
+          ( q)
+          ( ε)
+          ( concatenate-leq-le-ℚ q zero-ℚ ε
+            ( q≤0)
+            ( le-zero-is-positive-ℚ ε is-pos-ε))
+          ( ε<q)
+
+    leq-zero-upper-real-dist-Metric-Space :
+      leq-upper-ℝ zero-upper-ℝ upper-real-dist-Metric-Space
+    leq-zero-upper-real-dist-Metric-Space q =
+      rec-trunc-Prop
+        ( le-ℚ-Prop zero-ℚ q)
+        ( λ ((ε , Nεxy) , ε<q) →
+          transitive-le-ℚ
+            ( zero-ℚ)
+            ( rational-ℚ⁺ ε)
+            ( q)
+            ( ε<q)
+            ( le-zero-is-positive-ℚ (pr1 ε) (pr2 ε)))
 ```

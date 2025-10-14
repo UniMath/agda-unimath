@@ -32,8 +32,9 @@ if all elements of `X` are
 
 Well-founded relations satisfy an induction principle: In order to construct an
 element of `P x` for all `x : X` it suffices to construct an element of `P y`
-for all elements `y ∈ x`. More precisely, the **well-founded induction
-principle** is a function
+for all elements `y ∈ x`. More precisely, the
+{{#concept "well-founded induction principle" WDID=Q14402036 WD="well-founded induction" Agda=ind-Well-Founded-Relation}}
+is a function
 
 ```text
   (x : X) → ((y : X) → (y ∈ x) → P y) → P x.

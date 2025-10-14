@@ -28,9 +28,8 @@ open import set-theory.uncountable-sets
 The
 {{#concept "Cantor space" Disambiguation="as a type" Agda=cantor-space WD="Cantor space" WDID=Q616653}}
 is the [set](foundation-core.sets.md) of
-[functions](foundation-core.function-types.md) `ℕ → bool`. In other words, it is
-the set of [binary](foundation.booleans.md)
-[sequences](foundation.sequences.md).
+[functions](foundation-core.function-types.md) `ℕ → bool`. In other words, it
+is the set of [binary](foundation.booleans.md) [sequences](lists.sequences.md).
 
 ## Definition
 

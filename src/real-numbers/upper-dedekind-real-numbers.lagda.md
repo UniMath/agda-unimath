@@ -9,6 +9,7 @@ module real-numbers.upper-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
@@ -26,6 +27,7 @@ open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types

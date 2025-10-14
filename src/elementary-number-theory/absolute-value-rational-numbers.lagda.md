@@ -9,11 +9,16 @@ module elementary-number-theory.absolute-value-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -124,6 +129,16 @@ opaque
         ( q≤0))
 ```
 
+### The absolute value of a positive rational number is the number itself
+
+```agda
+abstract
+  rational-abs-rational-ℚ⁺ :
+    (q : ℚ⁺) → rational-abs-ℚ (rational-ℚ⁺ q) ＝ rational-ℚ⁺ q
+  rational-abs-rational-ℚ⁺ q =
+    ap rational-ℚ⁰⁺ (abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ q))
+```
+
 ### The absolute value of the negation of `q` is the absolute value of `q`
 
 ```agda
@@ -208,6 +223,14 @@ abstract
           { rational-abs-ℚ q}
           ( neg-leq-abs-ℚ p)
           ( neg-leq-abs-ℚ q)))
+
+  triangle-inequality-abs-diff-ℚ :
+    (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ (p -ℚ q)) (abs-ℚ p +ℚ⁰⁺ abs-ℚ q)
+  triangle-inequality-abs-diff-ℚ p q =
+    tr
+      ( leq-ℚ⁰⁺ (abs-ℚ (p -ℚ q)))
+      ( ap-binary add-ℚ⁰⁺ (refl {x = abs-ℚ p}) (abs-neg-ℚ q))
+      ( triangle-inequality-abs-ℚ p (neg-ℚ q))
 ```
 
 ### `|ab| = |a||b|`
@@ -285,4 +308,9 @@ opaque
                   is-nonnegative-leq-zero-ℚ (neg-ℚ p) (neg-leq-ℚ p zero-ℚ p≤0)))
         ＝ rational-abs-ℚ p *ℚ rational-abs-ℚ q
           by ap (_*ℚ rational-abs-ℚ q) (inv (rational-abs-leq-zero-ℚ p p≤0)))
+
+abstract
+  rational-abs-mul-ℚ :
+    (p q : ℚ) → rational-abs-ℚ (p *ℚ q) ＝ rational-abs-ℚ p *ℚ rational-abs-ℚ q
+  rational-abs-mul-ℚ p q = ap rational-ℚ⁰⁺ (abs-mul-ℚ p q)
 ```

@@ -281,6 +281,24 @@ module _
       ( additive-commutative-monoid-Semiring R)
 ```
 
+### The sum of a constant finite sequence in a semiring is scalar multiplication by the length of the sequence
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (x : type-Semiring R)
+  where
+
+  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring :
+    (n : ℕ) →
+    sum-fin-sequence-type-Semiring R n (λ _ → x) ＝
+    mul-nat-scalar-Semiring R n x
+  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring zero-ℕ = refl
+  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring (succ-ℕ n) =
+    ap
+      ( add-Semiring' R x)
+      ( eq-mul-nat-scalar-sum-const-fin-sequence-Semiring n)
+```
+
 ## See also
 
 - [Sums of finite families of elements in semirings](ring-theory.sums-of-finite-families-of-elements-semirings.md)

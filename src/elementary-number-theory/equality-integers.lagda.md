@@ -33,8 +33,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-An equality predicate is defined by pattern matching on the integers. Then we
-show that this predicate characterizes the identit type of the integers
+We define {{#concept "equality" Disambiguation="of integers" Agda=Eq-ℤ}} on the
+[integers](elementary-number-theory.integers.md) by pattern matching, and show
+that this characterizes the [identity type](foundation.identity-types.md) on the
+integers.
 
 ## Definition
 

@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
@@ -98,6 +99,10 @@ module _
   is-zero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-zero-Commutative-Semiring = is-zero-Semiring semiring-Commutative-Semiring
 
+  is-zero-prop-Commutative-Semiring : type-Commutative-Semiring → Prop l
+  is-zero-prop-Commutative-Semiring =
+    is-zero-prop-Semiring semiring-Commutative-Semiring
+
   is-nonzero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-nonzero-Commutative-Semiring =
     is-nonzero-Semiring semiring-Commutative-Semiring
@@ -175,6 +180,12 @@ module _
   mul-Commutative-Semiring' :
     (x y : type-Commutative-Semiring) → type-Commutative-Semiring
   mul-Commutative-Semiring' = mul-Semiring' semiring-Commutative-Semiring
+
+  ap-mul-Commutative-Semiring :
+    {x x' y y' : type-Commutative-Semiring} →
+    (x ＝ x') → (y ＝ y') →
+    mul-Commutative-Semiring x y ＝ mul-Commutative-Semiring x' y'
+  ap-mul-Commutative-Semiring = ap-mul-Semiring semiring-Commutative-Semiring
 
   one-Commutative-Semiring : type-Commutative-Semiring
   one-Commutative-Semiring = one-Semiring semiring-Commutative-Semiring
@@ -257,6 +268,20 @@ module _
   left-swap-mul-Commutative-Semiring =
     left-swap-mul-Commutative-Monoid
       multiplicative-commutative-monoid-Commutative-Semiring
+
+  interchange-mul-mul-Commutative-Semiring :
+    (x y x' y' : type-Commutative-Semiring) →
+    ( mul-Commutative-Semiring
+      ( mul-Commutative-Semiring x y)
+      ( mul-Commutative-Semiring x' y')) ＝
+    ( mul-Commutative-Semiring
+      ( mul-Commutative-Semiring x x')
+      ( mul-Commutative-Semiring y y'))
+  interchange-mul-mul-Commutative-Semiring =
+    interchange-law-commutative-and-associative
+      ( mul-Commutative-Semiring)
+      ( commutative-mul-Commutative-Semiring)
+      ( associative-mul-Commutative-Semiring)
 ```
 
 ## Operations

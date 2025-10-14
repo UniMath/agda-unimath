@@ -9,18 +9,23 @@ module real-numbers.similarity-real-numbers where
 ```agda
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-equivalence-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
+open import foundation.similarity-subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
@@ -41,11 +46,15 @@ differing universe levels.
 
 ```agda
 opaque
-  sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
-  sim-prop-ℝ x y = sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
-
   sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-  sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
+  sim-ℝ x y = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+
+  is-prop-sim-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-prop (sim-ℝ x y)
+  is-prop-sim-ℝ x y =
+    is-prop-type-Prop (sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y))
+
+sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
+sim-prop-ℝ x y = (sim-ℝ x y , is-prop-sim-ℝ x y)
 
 infix 6 _~ℝ_
 _~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
@@ -137,6 +146,28 @@ opaque
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
   eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
+```
+
+### Similarity is a large similarity relation
+
+```agda
+large-preorder-sim-ℝ : Large-Preorder lsuc _⊔_
+large-preorder-sim-ℝ =
+  make-Large-Preorder ℝ sim-prop-ℝ refl-sim-ℝ transitive-sim-ℝ
+
+large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation _⊔_ ℝ
+large-equivalence-relation-sim-ℝ =
+  make-Large-Equivalence-Relation
+    ( sim-prop-ℝ)
+    ( refl-sim-ℝ)
+    ( λ _ _ → symmetric-sim-ℝ)
+    ( transitive-sim-ℝ)
+
+large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-sim-ℝ =
+  make-Large-Similarity-Relation
+    ( large-equivalence-relation-sim-ℝ)
+    ( λ _ _ → eq-sim-ℝ)
 ```
 
 ### Similarity reasoning

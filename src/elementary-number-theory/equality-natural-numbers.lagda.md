@@ -33,6 +33,13 @@ open import foundation-core.torsorial-type-families
 
 </details>
 
+## Idea
+
+We define {{#concept "equality" Disambiguation="of natural numbers" Agda=Eq-ℕ}}
+on the [natural numbers](elementary-number-theory.natural-numbers.md) by pattern
+matching, and show that this characterizes the
+[identity type](foundation.identity-types.md) on the natural numbers.
+
 ## Definitions
 
 ### Observational equality on the natural numbers
@@ -86,8 +93,9 @@ pr2 ℕ-Set = is-set-ℕ
 ### The property of being zero
 
 ```agda
-is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
-is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
+abstract
+  is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
+  is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
 
 is-zero-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-zero-ℕ-Prop n) = is-zero-ℕ n
@@ -97,8 +105,9 @@ pr2 (is-zero-ℕ-Prop n) = is-prop-is-zero-ℕ n
 ### The property of being one
 
 ```agda
-is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
-is-prop-is-one-ℕ n = is-set-ℕ n 1
+abstract
+  is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
+  is-prop-is-one-ℕ n = is-set-ℕ n 1
 
 is-one-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-one-ℕ-Prop n) = is-one-ℕ n
@@ -161,8 +170,8 @@ is-torsorial-Eq-ℕ :
   (m : ℕ) → is-torsorial (Eq-ℕ m)
 pr1 (pr1 (is-torsorial-Eq-ℕ m)) = m
 pr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m
-pr2 (is-torsorial-Eq-ℕ zero-ℕ) (pair zero-ℕ star) = refl
-pr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
+pr2 (is-torsorial-Eq-ℕ zero-ℕ) (zero-ℕ , _) = refl
+pr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (succ-ℕ n , e) =
   ap (map-total-Eq-ℕ m) (pr2 (is-torsorial-Eq-ℕ m) (pair n e))
 
 is-equiv-Eq-eq-ℕ :

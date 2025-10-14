@@ -36,9 +36,9 @@ open import foundation.interchange-law
 
 ## Idea
 
-**Multiplication** on the
-[rational numbers](elementary-number-theory.rational-numbers.md) is defined by
-extending
+{{#concept "Multiplication" WDID=Q40276 WD="multiplication" Disambiguation="of rational numbers" Agda=mul-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) is
+defined by extending
 [multiplication](elementary-number-theory.multiplication-integer-fractions.md)
 on [integer fractions](elementary-number-theory.integer-fractions.md) to the
 rational numbers.
@@ -243,6 +243,19 @@ abstract
       mul-ℚ
       commutative-mul-ℚ
       associative-mul-ℚ
+```
+
+### Swapping laws for multiplication
+
+```agda
+abstract
+  left-swap-mul-ℚ : (x y z : ℚ) → x *ℚ (y *ℚ z) ＝ y *ℚ (x *ℚ z)
+  left-swap-mul-ℚ x y z =
+    equational-reasoning
+      x *ℚ (y *ℚ z)
+      ＝ (x *ℚ y) *ℚ z by inv (associative-mul-ℚ x y z)
+      ＝ (y *ℚ x) *ℚ z by ap-mul-ℚ (commutative-mul-ℚ x y) refl
+      ＝ y *ℚ (x *ℚ z) by associative-mul-ℚ y x z
 ```
 
 ### Negative laws for multiplication on rational numbers
