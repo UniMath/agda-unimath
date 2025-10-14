@@ -138,10 +138,10 @@ closed-subset-closed-interval-ℝ l [a,b] =
   ( subtype-closed-interval-ℝ l [a,b] ,
     is-closed-subset-closed-interval-ℝ [a,b])
 
-metric-space-closed-interval-ℚ :
+metric-space-closed-interval-ℝ :
   {l1 : Level} (l : Level) → closed-interval-ℝ l1 →
   Metric-Space (l1 ⊔ lsuc l) l
-metric-space-closed-interval-ℚ l [a,b] =
+metric-space-closed-interval-ℝ l [a,b] =
   subspace-closed-subset-Metric-Space
     ( metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
@@ -154,9 +154,9 @@ complete-metric-space-closed-interval-ℝ l [a,b] =
     ( complete-metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
 
-metric-space-unit-interval-ℝ :
+metric-space-unit-closed-interval-ℝ :
   (l : Level) → Metric-Space (lsuc l) l
-metric-space-unit-interval-ℝ l =
+metric-space-unit-closed-interval-ℝ l =
   metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
 
 complete-metric-space-unit-interval-ℝ :
