@@ -153,4 +153,14 @@ complete-metric-space-closed-interval-ℝ l [a,b] =
   complete-closed-subspace-Complete-Metric-Space
     ( complete-metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
+
+metric-space-unit-interval-ℝ :
+  (l : Level) → Metric-Space (lsuc l) l
+metric-space-unit-interval-ℝ l =
+  metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
+
+complete-metric-space-unit-interval-ℝ :
+  (l : Level) → Complete-Metric-Space (lsuc l) l
+complete-metric-space-unit-interval-ℝ l =
+  complete-metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
 ```
