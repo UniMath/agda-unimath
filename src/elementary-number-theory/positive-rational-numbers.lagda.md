@@ -300,3 +300,20 @@ abstract
 nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ```
+
+### If `p ≤ q` and `p` is positive, then `q` is positive
+
+```agda
+abstract
+  is-positive-leq-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
+
+  is-positive-le-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁺ p q p<q =
+    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
+```
