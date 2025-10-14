@@ -17,9 +17,11 @@ def print_skipping_contributor_warning(contributor, contributors_file):
     print(f'Warning: not attributing changes to {contributor}. If you want your work to be attributed to you, add yourself to {contributors_file}.',
           file=sys.stderr)
 
+
 def print_skipping_contributors_warning(contributors, contributors_file):
     for contributor in sorted(contributors):
         print_skipping_contributor_warning(contributor, contributors_file)
+
 
 def get_real_author_index(raw_username, contributors):
     return next((index for (index, c) in enumerate(contributors) if raw_username in c['usernames']), None)
@@ -40,4 +42,4 @@ def sorted_authors_from_raw_shortlog_lines(shortlog, contributors):
     #     print_skipping_contributor_warning(raw_author, contributors_file)
     sorted_author_indices = sorted(
         author_commits, key=author_commits.get, reverse=True)
-    return [contributors[author_index] for author_index in sorted_author_indices] , skipped_authors
+    return [contributors[author_index] for author_index in sorted_author_indices], skipped_authors

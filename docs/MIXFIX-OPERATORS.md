@@ -59,7 +59,7 @@ nonparametric operators are
 [difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
 [strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
-[multiplication of Eisenstein integers `_*ℤ[ω]_`](commutative-algebra.eisenstein-integers.md).
+[multiplication of Eisenstein integers `_*ℤ[ω]_`](complex-numbers.eisenstein-integers.md).
 
 Within these two classes, we make a further distinction between _relational_,
 _additive_, _multiplicative_, _exponentiative_, and _unary_ operators, each with
@@ -177,8 +177,8 @@ Below, we outline a list of general rules when assigning associativities.
 | 16               | Right homotopy whiskering `_·r_`                                                                                                                                                                   |
 | 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, `_*_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, concatenation operators like `_∙_` and `_∙h_` |
 | 10               | Parametric additive operators like `_+_`, `_∨_`, `_∨∗_`, list concatenation, monadic bind operators for the type checking monad                                                                    |
-| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, `_⇔_`, and `_↔_`, elementhood relations, subtype relations                                                                              |
-| 5                | Directed function type-like formation operators, e.g. `_⇒_`, `_↪_`, `_→∗_`, `_↠_`, `_↪ᵈ_`, and `_⊆_`                                                                                               |
+| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, `_⇔_`, and `_↔_`, elementhood relations, subtype relations                                                                             |
+| 5                | Directed function type-like formation operators, e.g. `_⇒_`, `_↪_`, `_→∗_`, `_↠_`, `_↪ᵈ_`, and `_⊆_`                                                                                             |
 | 3                | The pairing operators `_,_` and `_,ω_`                                                                                                                                                             |
 | 0-1              | Reasoning syntaxes                                                                                                                                                                                 |
 | -∞               | Function type formation `_→_`                                                                                                                                                                      |

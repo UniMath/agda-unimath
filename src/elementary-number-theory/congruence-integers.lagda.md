@@ -28,6 +28,14 @@ open import foundation.universe-levels
 
 </details>
 
+## Idea
+
+Two [integers](elementary-number-theory.integers.md) are
+{{#concept "congruent" WDID=Q3773677 WD="congruence of integers" Agda=cong-ℤ}}
+mod an integer `k` if their
+[difference](elementary-number-theory.difference-integers.md) is
+[divisible](elementary-number-theory.divisibility-integers.md) by `k`.
+
 ## Definitions
 
 ```agda
@@ -40,6 +48,8 @@ is-cong-zero-ℤ k x = cong-ℤ k x zero-ℤ
 
 ## Properties
 
+### `k | x` if and only if `x` is congruent to zero mod `k`
+
 ```agda
 is-cong-zero-div-ℤ : (k x : ℤ) → div-ℤ k x → is-cong-zero-ℤ k x
 pr1 (is-cong-zero-div-ℤ k x (pair d p)) = d
@@ -48,33 +58,55 @@ pr2 (is-cong-zero-div-ℤ k x (pair d p)) = p ∙ inv (right-unit-law-add-ℤ x)
 div-is-cong-zero-ℤ : (k x : ℤ) → is-cong-zero-ℤ k x → div-ℤ k x
 pr1 (div-is-cong-zero-ℤ k x (pair d p)) = d
 pr2 (div-is-cong-zero-ℤ k x (pair d p)) = p ∙ right-unit-law-add-ℤ x
+```
 
+### If `k` is a unit, all integers are congruent mod `k`
+
+```agda
 is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
 is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (x -ℤ y) H
+```
 
+### If `k` is zero and `x` and `y` are congruent mod `k`, `x = y`
+
+```agda
 is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → x ＝ y
 is-discrete-cong-ℤ .zero-ℤ refl x y K =
   eq-diff-ℤ (is-zero-div-zero-ℤ (x -ℤ y) K)
+```
 
-is-unit-cong-succ-ℤ : (k x : ℤ) → cong-ℤ k x (succ-ℤ x) → is-unit-ℤ k
-pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
-pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
-  ( left-negative-law-mul-ℤ y k) ∙
-  ( is-injective-neg-ℤ
-    ( ( neg-neg-ℤ (y *ℤ k)) ∙
-      ( ( p) ∙
-        ( ( ap (x +ℤ_) (neg-succ-ℤ x)) ∙
-          ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
-            ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
+### If `x` and `succ-ℤ x` are congruent mod `k`, `k` is a unit
 
-is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-ℤ k
-pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
-pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
-  ( p) ∙
-  ( ( ap (x +ℤ_) (neg-pred-ℤ x)) ∙
-    ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
-      ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
+```agda
+abstract
+  is-unit-cong-succ-ℤ : (k x : ℤ) → cong-ℤ k x (succ-ℤ x) → is-unit-ℤ k
+  pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
+  pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
+    ( left-negative-law-mul-ℤ y k) ∙
+    ( is-injective-neg-ℤ
+      ( ( neg-neg-ℤ (y *ℤ k)) ∙
+        ( ( p) ∙
+          ( ( ap (x +ℤ_) (neg-succ-ℤ x)) ∙
+            ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
+              ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
+```
 
+### If `x` and `pred-ℤ x` are congruent mod `k`, `k` is a unit
+
+```agda
+abstract
+  is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-ℤ k
+  pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
+  pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
+    ( p) ∙
+    ( ( ap (x +ℤ_) (neg-pred-ℤ x)) ∙
+      ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
+        ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
+```
+
+### Congruence mod `k` is an equivalence relation
+
+```agda
 refl-cong-ℤ : (k : ℤ) → is-reflexive (cong-ℤ k)
 pr1 (refl-cong-ℤ k x) = zero-ℤ
 pr2 (refl-cong-ℤ k x) = left-zero-law-mul-ℤ k ∙ inv (is-zero-diff-ℤ' x)
@@ -92,7 +124,11 @@ pr2 (transitive-cong-ℤ k x y z (pair e q) (pair d p)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙
     ( triangle-diff-ℤ x y z))
+```
 
+### Concatenating congruence and equality
+
+```agda
 concatenate-eq-cong-ℤ :
   (k x x' y : ℤ) → x ＝ x' → cong-ℤ k x' y → cong-ℤ k x y
 concatenate-eq-cong-ℤ k x .x y refl = id
@@ -114,7 +150,11 @@ concatenate-cong-cong-cong-ℤ :
   (k x y z w : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k z w → cong-ℤ k x w
 concatenate-cong-cong-cong-ℤ k x y z w H K L =
   transitive-cong-ℤ k x y w (transitive-cong-ℤ k y z w L K) H
+```
 
+### If `-x` and `-y` are congruent mod `k`, so are `x` and `y`
+
+```agda
 cong-cong-neg-ℤ : (k x y : ℤ) → cong-ℤ k (neg-ℤ x) (neg-ℤ y) → cong-ℤ k x y
 pr1 (cong-cong-neg-ℤ k x y (pair d p)) = neg-ℤ d
 pr2 (cong-cong-neg-ℤ k x y (pair d p)) =
@@ -130,6 +170,8 @@ pr2 (cong-neg-cong-ℤ k x y (pair d p)) =
   ( ( ap neg-ℤ p) ∙
     ( distributive-neg-add-ℤ x (neg-ℤ y)))
 ```
+
+### The canonical embedding of natural numbers preserves and reflects congruence
 
 ```agda
 cong-int-cong-ℕ :

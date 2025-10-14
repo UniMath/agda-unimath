@@ -12,8 +12,10 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.large-locale-of-propositions
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
