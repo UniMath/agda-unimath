@@ -82,7 +82,7 @@ nonzero-ℝ⁻ (x , is-neg-x) = (x , inl-disjunction is-neg-x)
 
 ```agda
 eq-nonzero-ℝ :
-  {l : Level} → (x y : nonzero-ℝ l) → (real-nonzero-ℝ x ＝ real-nonzero-ℝ y) →
+  {l : Level} (x y : nonzero-ℝ l) → (real-nonzero-ℝ x ＝ real-nonzero-ℝ y) →
   x ＝ y
 eq-nonzero-ℝ _ _ = eq-type-subtype is-nonzero-prop-ℝ
 ```
