@@ -38,7 +38,18 @@ between two [retractive types](structured-types.retractive-types.md) `A` and `B`
 under `X` is a
 [morphism of retractive types](structured-types.morphisms-retractive-types.md)
 whose underlying map is an [equivalence](foundation-core.equivalences.md) of
-types.
+types, i.e., it is an equivalence `f : A ≃ B` such that the following
+[tetrahedron](foundation.commuting-tetrahedra-of-maps.md) commutes
+
+```text
+    X ----------> B
+    | \\       ∧  |
+    |   \\   /    |
+    |      /      |
+    |   f/  \\    |
+    ∨  /      \\  ∨
+    A ----------> X.
+```
 
 ## Definition
 
