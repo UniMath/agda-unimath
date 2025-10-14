@@ -213,8 +213,8 @@ is-decidable-emb-id :
   {l : Level} {A : UU l} → is-decidable-emb (id {A = A})
 is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
 
-decidable-emb-id : {l : Level} {A : UU l} → A ↪ᵈ A
-decidable-emb-id = (id , is-decidable-emb-id)
+id-decidable-emb : {l : Level} {A : UU l} → A ↪ᵈ A
+id-decidable-emb = (id , is-decidable-emb-id)
 
 is-decidable-prop-map-id :
   {l : Level} {A : UU l} → is-decidable-prop-map (id {A = A})
