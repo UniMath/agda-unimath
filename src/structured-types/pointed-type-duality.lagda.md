@@ -167,9 +167,15 @@ module _
         ( is-retraction-retractive-type-Fam-Pointed-Type)
         ( is-section-retractive-type-Fam-Pointed-Type)
 
-  pointed-type-duality :
+  equiv-retractive-type-Fam-Pointed-Type :
     (X → Pointed-Type (l1 ⊔ l2)) ≃ Retractive-Type (l1 ⊔ l2) X
-  pointed-type-duality =
+  equiv-retractive-type-Fam-Pointed-Type =
     ( retractive-type-Fam-Pointed-Type X ,
       is-equiv-retractive-type-Fam-Pointed-Type)
+
+  equiv-fam-pointed-type-Retractive-Type :
+    Retractive-Type (l1 ⊔ l2) X ≃ (X → Pointed-Type (l1 ⊔ l2))
+  equiv-fam-pointed-type-Retractive-Type =
+    ( fam-pointed-type-Retractive-Type X ,
+      is-equiv-fam-pointed-type-Retractive-Type)
 ```
