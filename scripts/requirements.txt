@@ -1,6 +1,5 @@
 # * Keep in sync with the `flake.nix` file
+graphviz
 pre-commit
 pybtex
-requests
 tomli
-graphviz

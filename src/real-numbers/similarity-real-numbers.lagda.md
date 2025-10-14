@@ -20,6 +20,7 @@ open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositions
+open import foundation.similarity-subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
