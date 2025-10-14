@@ -23,6 +23,7 @@ open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import set-theory.cardinalities
+open import set-theory.inequality-cardinalities
 
 open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dedekind-finite-types
@@ -177,11 +178,11 @@ module _
 
   antisymmetric-leq-cardinality-Kuratowski-Finite-Set :
     leq-cardinality
-      ( cardinality-Kuratowski-Finite-Set X)
-      ( cardinality-Kuratowski-Finite-Set Y) →
+      ( set-Kuratowski-Finite-Set X)
+      ( set-Kuratowski-Finite-Set Y) →
     leq-cardinality
-      ( cardinality-Kuratowski-Finite-Set Y)
-      ( cardinality-Kuratowski-Finite-Set X) →
+      ( set-Kuratowski-Finite-Set Y)
+      ( set-Kuratowski-Finite-Set X) →
     cardinality-Kuratowski-Finite-Set X ＝
     cardinality-Kuratowski-Finite-Set Y
   antisymmetric-leq-cardinality-Kuratowski-Finite-Set p q =

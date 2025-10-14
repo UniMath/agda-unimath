@@ -9,6 +9,7 @@ module foundation.mere-embeddings where
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.embeddings
+open import foundation.functoriality-propositional-truncation
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -20,6 +21,12 @@ open import order-theory.large-preorders
 ```
 
 </details>
+
+## Idea
+
+A type `A` {{#concept "merely embeds" Agda=mere-emb}} into a type `B` if there
+[merely exists](foundation.propositional-truncations.md) an
+[embedding](foundation-core.embeddings.md) of `A` into `B`.
 
 ## Definition
 
@@ -46,13 +53,7 @@ refl-mere-emb X = unit-trunc-Prop id-emb
 transitive-mere-emb :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} →
   mere-emb Y Z → mere-emb X Y → mere-emb X Z
-transitive-mere-emb g f =
-  apply-universal-property-trunc-Prop g
-    ( mere-emb-Prop _ _)
-    ( λ g' →
-      apply-universal-property-trunc-Prop f
-        ( mere-emb-Prop _ _)
-        ( λ f' → unit-trunc-Prop (comp-emb g' f')))
+transitive-mere-emb = map-binary-trunc-Prop comp-emb
 
 mere-emb-Large-Preorder : Large-Preorder lsuc (_⊔_)
 type-Large-Preorder mere-emb-Large-Preorder l = UU l
@@ -68,11 +69,6 @@ transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
 antisymmetric-mere-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
-antisymmetric-mere-emb lem f g =
-  apply-universal-property-trunc-Prop f
-    ( mere-equiv-Prop _ _)
-    ( λ f' →
-      apply-universal-property-trunc-Prop g
-        ( mere-equiv-Prop _ _)
-        ( λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')))
+antisymmetric-mere-emb lem =
+  map-binary-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem)
 ```
