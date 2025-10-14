@@ -19,6 +19,7 @@ open import elementary-number-theory.multiplication-closed-intervals-rational-nu
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
@@ -443,7 +444,9 @@ module _
                 ( inv-le-ℚ⁺ p⁺ q⁺ p<q)))
         ( λ is-nonpos-p →
           inl-disjunction
-            ( ex-falso ∘ not-is-positive-is-nonpositive-ℚ is-nonpos-p))
+            ( λ is-pos-p →
+              ex-falso
+                ( not-is-positive-is-nonpositive-ℚ (is-pos-p , is-nonpos-p))))
         ( decide-is-positive-is-nonpositive-ℚ p)
 
   opaque

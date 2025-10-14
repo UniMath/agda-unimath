@@ -71,7 +71,7 @@ mul-negative-positive-ℚ (p , neg-p) (q , pos-q) =
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-nonnegative-ℚ is-positive-ℚ mul-ℚ
 
   is-nonnegative-mul-nonnegative-positive-ℚ :
     {x y : ℚ} → is-nonnegative-ℚ x → is-positive-ℚ y → is-nonnegative-ℚ (x *ℚ y)
@@ -83,7 +83,9 @@ opaque
 ### The product of a nonpositive and a positive rational number is nonpositive
 
 ```agda
-abstract
+opaque
+  unfolding is-nonpositive-ℚ
+
   is-nonpositive-mul-nonpositive-positive-ℚ :
     {x y : ℚ} → is-nonpositive-ℚ x → is-positive-ℚ y → is-nonpositive-ℚ (x *ℚ y)
   is-nonpositive-mul-nonpositive-positive-ℚ is-nonneg-neg-x is-pos-y =

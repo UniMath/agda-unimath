@@ -238,3 +238,17 @@ abstract
       ( le-zero-is-negative-ℚ N)
       ( leq-zero-is-nonnegative-ℚ NN)
 ```
+
+### A rational number is not both positive and nonpositive
+
+```agda
+abstract
+  not-is-positive-is-nonpositive-ℚ :
+    {x : ℚ} → ¬ (is-positive-ℚ x × is-nonpositive-ℚ x)
+  not-is-positive-is-nonpositive-ℚ {x} (P , NP) =
+    not-leq-le-ℚ
+      ( zero-ℚ)
+      ( x)
+      ( le-zero-is-positive-ℚ P)
+      ( leq-zero-is-nonpositive-ℚ NP)
+```

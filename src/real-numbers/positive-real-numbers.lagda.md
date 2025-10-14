@@ -275,7 +275,6 @@ abstract
     {l : Level} (x : ℝ⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
   is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) q x<q =
     is-positive-le-zero-ℚ
-      ( q)
       ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
 ```
 
