@@ -8,10 +8,7 @@ module foundation.mere-decidable-embeddings where
 
 ```agda
 open import foundation.decidable-embeddings
-open import foundation.embeddings
 open import foundation.functoriality-propositional-truncation
-open import foundation.law-of-excluded-middle
-open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -26,7 +23,7 @@ open import order-theory.large-preorders
 
 A type `A` {{#concept "merely decidably embeds" Agda=mere-decidable-emb}} into a
 type `B` if there [merely exists](foundation.propositional-truncations.md) a
-[decidable embedding](logic.decidable-embeddings.md) of `A` into `B`.
+[decidable embedding](foundation.decidable-embeddings.md) of `A` into `B`.
 
 ## Definition
 

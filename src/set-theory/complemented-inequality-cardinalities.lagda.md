@@ -8,7 +8,6 @@ module set-theory.complemented-inequality-cardinalities where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-embeddings
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -21,7 +20,6 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.weak-limited-principle-of-omniscience
 
 open import set-theory.cardinalities
 ```
