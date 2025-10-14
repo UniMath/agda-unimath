@@ -95,10 +95,6 @@ map-exp-UU l f P = P ∘ f
 
 ### Characterizing equality in `type-polynomial-endofunctor-UU` over locally small `A`
 
-We characterize equality in `type-polynomial-endofunctor-UU` over locally small
-`A` in terms of the fibers of `map-type-duality`, as will be defined in the next
-section.
-
 ```agda
 module _
   {l l1 : Level} {A : UU l1} (H : is-locally-small l A)
