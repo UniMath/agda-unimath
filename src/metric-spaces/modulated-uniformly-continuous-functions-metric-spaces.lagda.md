@@ -11,17 +11,20 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.functoriality-cartesian-product-types
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+open import elementary-number-theory.minimum-positive-rational-numbers
 
 open import metric-spaces.continuous-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.cartesian-products-metric-spaces
 ```
 
 </details>
@@ -253,6 +256,76 @@ module _
   modulated-ucont-map-isometry-Metric-Space f =
     modulated-ucont-map-short-function-Metric-Space A B
       ( short-isometry-Metric-Space A B f)
+```
+
+### The Cartesian product of modulated uniformly continuous functions on metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (C : Metric-Space l5 l6) (D : Metric-Space l7 l8)
+  (f : modulated-ucont-map-Metric-Space A B)
+  (g : modulated-ucont-map-Metric-Space C D)
+  where
+
+  map-product-modulated-ucont-map-Metric-Space :
+    type-function-Metric-Space
+      ( product-Metric-Space A C)
+      ( product-Metric-Space B D)
+  map-product-modulated-ucont-map-Metric-Space =
+    map-product
+      ( map-modulated-ucont-map-Metric-Space A B f)
+      ( map-modulated-ucont-map-Metric-Space C D g)
+
+  abstract
+    modulus-product-modulated-ucont-map-Metric-Space : ℚ⁺ → ℚ⁺
+    modulus-product-modulated-ucont-map-Metric-Space ε =
+      min-ℚ⁺
+        ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+        ( modulus-modulated-ucont-map-Metric-Space C D g ε)
+
+    is-modulus-product-modulated-ucont-map-Metric-Space :
+      is-modulus-of-uniform-continuity-function-Metric-Space
+        ( product-Metric-Space A C)
+        ( product-Metric-Space B D)
+        ( map-product-modulated-ucont-map-Metric-Space)
+        ( modulus-product-modulated-ucont-map-Metric-Space)
+    is-modulus-product-modulated-ucont-map-Metric-Space
+      (a , c) ε (a' , c') (Nε'aa' , Nε'cc') =
+      ( is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+          ( A)
+          ( B)
+          ( f)
+          ( a)
+          ( ε)
+          ( a')
+          ( weakly-monotonic-neighborhood-Metric-Space A a a' _ _
+            ( leq-left-min-ℚ⁺
+              ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+              ( modulus-modulated-ucont-map-Metric-Space C D g ε))
+            ( Nε'aa')) ,
+        is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+          ( C)
+          ( D)
+          ( g)
+          ( c)
+          ( ε)
+          ( c')
+          ( weakly-monotonic-neighborhood-Metric-Space C c c' _ _
+            ( leq-right-min-ℚ⁺
+              ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+              ( modulus-modulated-ucont-map-Metric-Space C D g ε))
+            ( Nε'cc')))
+
+  product-modulated-ucont-map-Metric-Space :
+    modulated-ucont-map-Metric-Space
+      ( product-Metric-Space A C)
+      ( product-Metric-Space B D)
+  product-modulated-ucont-map-Metric-Space =
+    ( map-product-modulated-ucont-map-Metric-Space ,
+      modulus-product-modulated-ucont-map-Metric-Space ,
+      is-modulus-product-modulated-ucont-map-Metric-Space)
 ```
 
 ## See also

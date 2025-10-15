@@ -38,6 +38,7 @@ open import lists.sequences
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
@@ -674,6 +675,54 @@ module _
     map-modulated-ucont-map-cauchy-sequence-Metric-Space A B
       ( modulated-ucont-map-short-function-Metric-Space A B f)
       ( u)
+```
+
+### Cartesian products of Cauchy sequences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (u : cauchy-sequence-Metric-Space A) (v : cauchy-sequence-Metric-Space B)
+  where
+
+  seq-product-cauchy-sequence-Metric-Space :
+    sequence-type-Metric-Space (product-Metric-Space A B)
+  seq-product-cauchy-sequence-Metric-Space n =
+    ( map-cauchy-sequence-Metric-Space A u n ,
+      map-cauchy-sequence-Metric-Space B v n)
+
+  abstract
+    is-cauchy-seq-product-cauchy-sequence-Metric-Space :
+      is-cauchy-sequence-Metric-Space
+        ( product-Metric-Space A B)
+        ( seq-product-cauchy-sequence-Metric-Space)
+    is-cauchy-seq-product-cauchy-sequence-Metric-Space ε =
+      ( max-ℕ
+        ( modulus-of-convergence-cauchy-sequence-Metric-Space A u ε)
+        ( modulus-of-convergence-cauchy-sequence-Metric-Space B v ε) ,
+        λ m n N≤m N≤n →
+          ( neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+              ( A)
+              ( u)
+              ( ε)
+              ( m)
+              ( n)
+              ( transitive-leq-ℕ _ _ _ N≤m (left-leq-max-ℕ _ _))
+              ( transitive-leq-ℕ _ _ _ N≤n (left-leq-max-ℕ _ _)) ,
+            neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+              ( B)
+              ( v)
+              ( ε)
+              ( m)
+              ( n)
+              ( transitive-leq-ℕ _ _ _ N≤m (right-leq-max-ℕ _ _))
+              ( transitive-leq-ℕ _ _ _ N≤n (right-leq-max-ℕ _ _))))
+
+  product-cauchy-sequence-Metric-Space :
+    cauchy-sequence-Metric-Space (product-Metric-Space A B)
+  product-cauchy-sequence-Metric-Space =
+    ( seq-product-cauchy-sequence-Metric-Space ,
+      is-cauchy-seq-product-cauchy-sequence-Metric-Space)
 ```
 
 ## See also
