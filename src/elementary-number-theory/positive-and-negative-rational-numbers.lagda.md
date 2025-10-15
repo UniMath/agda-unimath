@@ -239,7 +239,7 @@ abstract
       ( leq-zero-is-nonnegative-ℚ NN)
 ```
 
-### A rational number is not both positive and nonpositive
+### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda
 abstract

@@ -13,10 +13,15 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 ```
 
@@ -114,4 +119,53 @@ abstract
 mul-positive-nonpositive-ℚ : ℚ⁺ → ℚ⁰⁻ → ℚ⁰⁻
 mul-positive-nonpositive-ℚ (p , is-pos-p) (q , is-nonpos-q) =
   ( p *ℚ q , is-nonpositive-mul-positive-nonpositive-ℚ is-pos-p is-nonpos-q)
+```
+
+### If `xy` is positive, `x` and `y` are either both negative or both positive
+
+```agda
+abstract
+  same-sign-is-positive-mul-ℚ :
+    {x y : ℚ} → is-positive-ℚ (x *ℚ y) →
+    ( ( is-negative-ℚ x × is-negative-ℚ y) +
+      ( is-positive-ℚ x × is-positive-ℚ y))
+  same-sign-is-positive-mul-ℚ {x} {y} is-pos-xy =
+    let
+      y≠0 y=0 =
+        ex-falso
+          ( is-not-positive-zero-ℚ
+            ( tr
+              ( is-positive-ℚ)
+              ( ap-mul-ℚ refl y=0 ∙ right-zero-law-mul-ℚ x)
+              ( is-pos-xy)))
+    in
+      trichotomy-sign-ℚ
+        ( x)
+        ( λ is-neg-x →
+          trichotomy-sign-ℚ
+            ( y)
+            ( λ is-neg-y → inl (is-neg-x , is-neg-y))
+            ( y≠0)
+            ( λ is-pos-y →
+              ex-falso
+                ( not-is-negative-is-positive-ℚ
+                  ( is-negative-mul-negative-positive-ℚ is-neg-x is-pos-y ,
+                    is-pos-xy))))
+        ( λ x=0 →
+          ex-falso
+            ( is-not-positive-zero-ℚ
+              ( tr
+                ( is-positive-ℚ)
+                ( ap-mul-ℚ x=0 refl ∙ left-zero-law-mul-ℚ y)
+                ( is-pos-xy))))
+        ( λ is-pos-x →
+          trichotomy-sign-ℚ
+            ( y)
+            ( λ is-neg-y →
+              ex-falso
+                ( not-is-negative-is-positive-ℚ
+                  ( is-negative-mul-positive-negative-ℚ is-pos-x is-neg-y ,
+                    is-pos-xy)))
+            ( y≠0)
+            ( λ is-pos-y → inr (is-pos-x , is-pos-y)))
 ```
