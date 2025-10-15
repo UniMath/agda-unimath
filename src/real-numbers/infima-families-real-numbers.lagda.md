@@ -141,7 +141,7 @@ module _
           let open do-syntax-trunc-Prop empty-Prop
           in do
             (ε⁺@(ε , _) , ε<z-x) ←
-              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
             (i , yᵢ<x+ε) ←
               is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
             not-leq-le-ℝ (y i) z
@@ -231,7 +231,7 @@ module _
     let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ (y i) z))
     in do
       (ε⁺@(ε , _) , ε<z-x) ←
-        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
       (i , yᵢ<x+ε) ←
         is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
       intro-exists
