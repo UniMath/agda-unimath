@@ -27,7 +27,7 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-In this file, we outline basic relations between
+On this page, we outline basic relations between
 [negative](real-numbers.negative-real-numbers.md),
 [nonnegative](real-numbers.nonnegative-real-numbers.md), and
 [positive](real-numbers.positive-real-numbers.md)
