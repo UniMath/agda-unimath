@@ -41,6 +41,7 @@ open import metric-spaces.metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
@@ -616,4 +617,37 @@ module _
 ```agda
 metric-space-ℝ⁰⁺ : (l : Level) → Metric-Space (lsuc l) l
 metric-space-ℝ⁰⁺ l = metric-space-subset-ℝ (is-nonnegative-prop-ℝ {l})
+```
+
+### `x ≤ y` if and only if `y - x` is nonnegative
+
+```agda
+module _
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} (H : leq-ℝ x y)
+  where
+
+  abstract
+    is-nonnegative-diff-leq-ℝ : is-nonnegative-ℝ (y -ℝ x)
+    is-nonnegative-diff-leq-ℝ =
+      leq-transpose-left-add-ℝ
+        ( zero-ℝ)
+        ( x)
+        ( y)
+        ( inv-tr
+          ( λ z → leq-ℝ z y)
+          ( left-unit-law-add-ℝ x)
+          ( H))
+
+  nonnegative-diff-leq-ℝ : ℝ⁰⁺ (l1 ⊔ l2)
+  nonnegative-diff-leq-ℝ = (y -ℝ x , is-nonnegative-diff-leq-ℝ)
+
+abstract
+  leq-is-nonnegative-diff-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-nonnegative-ℝ (y -ℝ x) →
+    leq-ℝ x y
+  leq-is-nonnegative-diff-ℝ x y 0≤y-x =
+    tr
+      ( λ z → leq-ℝ z y)
+      ( left-unit-law-add-ℝ x)
+      ( leq-transpose-right-diff-ℝ _ _ _ 0≤y-x)
 ```
