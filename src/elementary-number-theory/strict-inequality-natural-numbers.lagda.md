@@ -31,6 +31,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -40,21 +41,28 @@ open import order-theory.strictly-preordered-sets
 
 </details>
 
+## Idea
+
+We define the
+{{#concept "standard strict ordering" Disambiguation="natural numbers" Agda=le-ℕ}}
+on the [natural numbers](elementary-number-theory.natural-numbers.md) and prove
+its basic properties.
+
 ## Definition
 
 ### The standard strict inequality on the natural numbers
 
 ```agda
-le-ℕ-Prop : ℕ → ℕ → Prop lzero
-le-ℕ-Prop m zero-ℕ = empty-Prop
-le-ℕ-Prop zero-ℕ (succ-ℕ m) = unit-Prop
-le-ℕ-Prop (succ-ℕ n) (succ-ℕ m) = le-ℕ-Prop n m
+le-prop-ℕ : ℕ → ℕ → Prop lzero
+le-prop-ℕ m zero-ℕ = empty-Prop
+le-prop-ℕ zero-ℕ (succ-ℕ m) = unit-Prop
+le-prop-ℕ (succ-ℕ n) (succ-ℕ m) = le-prop-ℕ n m
 
 le-ℕ : ℕ → ℕ → UU lzero
-le-ℕ n m = type-Prop (le-ℕ-Prop n m)
+le-ℕ n m = type-Prop (le-prop-ℕ n m)
 
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
-is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
+is-prop-le-ℕ n m = is-prop-type-Prop (le-prop-ℕ n m)
 
 infix 30 _<-ℕ_
 _<-ℕ_ = le-ℕ
@@ -111,60 +119,66 @@ is-nonzero-le-ℕ m .zero-ℕ () refl
 ### Any nonzero natural number is strictly greater than `0`
 
 ```agda
-le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
-le-is-nonzero-ℕ zero-ℕ H = H refl
-le-is-nonzero-ℕ (succ-ℕ n) H = star
+abstract
+  le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
+  le-is-nonzero-ℕ zero-ℕ H = H refl
+  le-is-nonzero-ℕ (succ-ℕ n) H = star
 ```
 
 ### No natural number is strictly less than zero
 
 ```agda
-contradiction-le-zero-ℕ :
-  (m : ℕ) → (le-ℕ m zero-ℕ) → empty
-contradiction-le-zero-ℕ zero-ℕ ()
-contradiction-le-zero-ℕ (succ-ℕ m) ()
+abstract
+  contradiction-le-zero-ℕ :
+    (m : ℕ) → (le-ℕ m zero-ℕ) → empty
+  contradiction-le-zero-ℕ zero-ℕ ()
+  contradiction-le-zero-ℕ (succ-ℕ m) ()
 ```
 
 ### No successor is strictly less than one
 
 ```agda
-contradiction-le-one-ℕ :
-  (n : ℕ) → le-ℕ (succ-ℕ n) 1 → empty
-contradiction-le-one-ℕ zero-ℕ ()
-contradiction-le-one-ℕ (succ-ℕ n) ()
+abstract
+  contradiction-le-one-ℕ :
+    (n : ℕ) → le-ℕ (succ-ℕ n) 1 → empty
+  contradiction-le-one-ℕ zero-ℕ ()
+  contradiction-le-one-ℕ (succ-ℕ n) ()
 ```
 
-### The strict inequality on the natural numbers is anti-reflexive
+### The strict inequality on the natural numbers is irreflexive
 
 ```agda
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
-anti-reflexive-le-ℕ zero-ℕ ()
-anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
+abstract
+  irreflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
+  irreflexive-le-ℕ zero-ℕ ()
+  irreflexive-le-ℕ (succ-ℕ n) = irreflexive-le-ℕ n
 ```
 
 ### If `x < y` then `x ≠ y`
 
 ```agda
-neq-le-ℕ : {x y : ℕ} → le-ℕ x y → x ≠ y
-neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
-neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
+abstract
+  neq-le-ℕ : {x y : ℕ} → le-ℕ x y → x ≠ y
+  neq-le-ℕ {x} H refl = irreflexive-le-ℕ x H
 ```
 
 ### The strict inequality on the natural numbers is antisymmetric
 
 ```agda
-antisymmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
-antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
-  ap succ-ℕ (antisymmetric-le-ℕ m n p q)
+abstract
+  antisymmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
+  antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
+    ap succ-ℕ (antisymmetric-le-ℕ m n p q)
 ```
 
 ### The strict inequality on the natural numbers is transitive
 
 ```agda
-transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
-transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
-transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
-  transitive-le-ℕ n m l p q
+abstract
+  transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
+  transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
+  transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
+    transitive-le-ℕ n m l p q
 ```
 
 ### The strictly preordered set of natural numbers ordered by strict inequality
@@ -173,23 +187,24 @@ transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
 strictly-preordered-set-ℕ : Strictly-Preordered-Set lzero lzero
 pr1 strictly-preordered-set-ℕ = ℕ-Set
 pr2 strictly-preordered-set-ℕ =
-  le-ℕ-Prop , anti-reflexive-le-ℕ , λ n m l I J → transitive-le-ℕ n m l J I
+  le-prop-ℕ , irreflexive-le-ℕ , λ n m l I J → transitive-le-ℕ n m l J I
 ```
 
 ### A sharper variant of transitivity
 
 ```agda
-transitive-le-ℕ' :
-  (k l m : ℕ) → (le-ℕ k l) → (le-ℕ l (succ-ℕ m)) → le-ℕ k m
-transitive-le-ℕ' zero-ℕ zero-ℕ m () s
-transitive-le-ℕ' (succ-ℕ k) zero-ℕ m () s
-transitive-le-ℕ' zero-ℕ (succ-ℕ l) zero-ℕ star s =
-  ex-falso (contradiction-le-one-ℕ l s)
-transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) zero-ℕ t s =
-  ex-falso (contradiction-le-one-ℕ l s)
-transitive-le-ℕ' zero-ℕ (succ-ℕ l) (succ-ℕ m) star s = star
-transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
-  transitive-le-ℕ' k l m t s
+abstract
+  transitive-le-ℕ' :
+    (k l m : ℕ) → (le-ℕ k l) → (le-ℕ l (succ-ℕ m)) → le-ℕ k m
+  transitive-le-ℕ' zero-ℕ zero-ℕ m () s
+  transitive-le-ℕ' (succ-ℕ k) zero-ℕ m () s
+  transitive-le-ℕ' zero-ℕ (succ-ℕ l) zero-ℕ star s =
+    ex-falso (contradiction-le-one-ℕ l s)
+  transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) zero-ℕ t s =
+    ex-falso (contradiction-le-one-ℕ l s)
+  transitive-le-ℕ' zero-ℕ (succ-ℕ l) (succ-ℕ m) star s = star
+  transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
+    transitive-le-ℕ' k l m t s
 ```
 
 ### The strict inequality on the natural numbers is linear
@@ -215,125 +230,138 @@ subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
   P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (l' +ℕ n ＝ m))
   P = subtraction-le-ℕ n m p
 
-le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → l +ℕ n ＝ m → le-ℕ n m
-le-subtraction-ℕ zero-ℕ m l q p =
-  tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
-le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =
-  le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
+abstract
+  le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → l +ℕ n ＝ m → le-ℕ n m
+  le-subtraction-ℕ zero-ℕ m l q p =
+    tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
+  le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =
+    le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```
 
 ### Any natural number is strictly less than its successor
 
 ```agda
-succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
-succ-le-ℕ zero-ℕ = star
-succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n
+abstract
+  succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
+  succ-le-ℕ zero-ℕ = star
+  succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n
 ```
 
 ### The successor function preserves strict inequality on the right
 
 ```agda
-preserves-le-succ-ℕ :
-  (m n : ℕ) → le-ℕ m n → le-ℕ m (succ-ℕ n)
-preserves-le-succ-ℕ m n H =
-  transitive-le-ℕ m n (succ-ℕ n) H (succ-le-ℕ n)
+abstract
+  preserves-le-succ-ℕ :
+    (m n : ℕ) → le-ℕ m n → le-ℕ m (succ-ℕ n)
+  preserves-le-succ-ℕ m n H =
+    transitive-le-ℕ m n (succ-ℕ n) H (succ-le-ℕ n)
 ```
 
 ### Concatenating strict and nonstrict inequalities
 
 ```agda
-concatenate-leq-le-ℕ :
-  {x y z : ℕ} → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
-concatenate-leq-le-ℕ {zero-ℕ} {zero-ℕ} {succ-ℕ z} H K = star
-concatenate-leq-le-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
-concatenate-leq-le-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
-  concatenate-leq-le-ℕ {x} {y} {z} H K
+abstract
+  concatenate-leq-le-ℕ :
+    {x y z : ℕ} → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
+  concatenate-leq-le-ℕ {zero-ℕ} {zero-ℕ} {succ-ℕ z} H K = star
+  concatenate-leq-le-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
+  concatenate-leq-le-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
+    concatenate-leq-le-ℕ {x} {y} {z} H K
 
-concatenate-le-leq-ℕ :
-  {x y z : ℕ} → le-ℕ x y → y ≤-ℕ z → le-ℕ x z
-concatenate-le-leq-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
-concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
-  concatenate-le-leq-ℕ {x} {y} {z} H K
+  concatenate-le-leq-ℕ :
+    {x y z : ℕ} → le-ℕ x y → y ≤-ℕ z → le-ℕ x z
+  concatenate-le-leq-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
+  concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
+    concatenate-le-leq-ℕ {x} {y} {z} H K
 ```
 
 ### If `m < n` then `n ≰ m`
 
 ```agda
-contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
-contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K
-contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
+abstract
+  contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
+  contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K
+  contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
 ```
 
 ### If `n ≤ m` then `m ≮ n`
 
 ```agda
-contradiction-le-ℕ' : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
-contradiction-le-ℕ' m n K H = contradiction-le-ℕ m n H K
+abstract
+  contradiction-le-ℕ' : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
+  contradiction-le-ℕ' m n K H = contradiction-le-ℕ m n H K
 ```
 
 ### If `m ≮ n` then `n ≤ m`
 
 ```agda
-leq-not-le-ℕ : (m n : ℕ) → ¬ (le-ℕ m n) → n ≤-ℕ m
-leq-not-le-ℕ zero-ℕ zero-ℕ H = star
-leq-not-le-ℕ zero-ℕ (succ-ℕ n) H = ex-falso (H star)
-leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
-leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
+abstract
+  leq-not-le-ℕ : (m n : ℕ) → ¬ (le-ℕ m n) → n ≤-ℕ m
+  leq-not-le-ℕ zero-ℕ zero-ℕ H = star
+  leq-not-le-ℕ zero-ℕ (succ-ℕ n) H = ex-falso (H star)
+  leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
+  leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 ```
 
 ### If `n ≰ m` then `m < n`
 
 ```agda
-le-not-leq-ℕ : (m n : ℕ) → ¬ (n ≤-ℕ m) → le-ℕ m n
-le-not-leq-ℕ zero-ℕ zero-ℕ H = ex-falso (H star)
-le-not-leq-ℕ zero-ℕ (succ-ℕ n) H = star
-le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = ex-falso (H star)
-le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
+abstract
+  le-not-leq-ℕ : (m n : ℕ) → ¬ (n ≤-ℕ m) → le-ℕ m n
+  le-not-leq-ℕ zero-ℕ zero-ℕ H = ex-falso (H star)
+  le-not-leq-ℕ zero-ℕ (succ-ℕ n) H = star
+  le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = ex-falso (H star)
+  le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
 ```
 
 ### If `x < y` then `x ≤ y`
 
 ```agda
-leq-le-ℕ :
-  (x y : ℕ) → le-ℕ x y → x ≤-ℕ y
-leq-le-ℕ zero-ℕ (succ-ℕ y) H = star
-leq-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-ℕ x y H
+abstract
+  leq-le-ℕ :
+    (x y : ℕ) → le-ℕ x y → x ≤-ℕ y
+  leq-le-ℕ zero-ℕ (succ-ℕ y) H = star
+  leq-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-ℕ x y H
 ```
 
 ### If `x < y + 1` then `x ≤ y`
 
 ```agda
-leq-le-succ-ℕ :
-  (x y : ℕ) → le-ℕ x (succ-ℕ y) → x ≤-ℕ y
-leq-le-succ-ℕ zero-ℕ y H = star
-leq-le-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-succ-ℕ x y H
+abstract
+  leq-le-succ-ℕ :
+    (x y : ℕ) → le-ℕ x (succ-ℕ y) → x ≤-ℕ y
+  leq-le-succ-ℕ zero-ℕ y H = star
+  leq-le-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-succ-ℕ x y H
 ```
 
 ### If `x < y` then `x + 1 ≤ y`
 
 ```agda
-leq-succ-le-ℕ :
-  (x y : ℕ) → le-ℕ x y → leq-ℕ (succ-ℕ x) y
-leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
-leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
+abstract
+  leq-succ-le-ℕ :
+    (x y : ℕ) → le-ℕ x y → leq-ℕ (succ-ℕ x) y
+  leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
+  leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
 ```
 
 ### If `x + 1 ≤ y` then `x < y`
 
 ```agda
-le-leq-succ-ℕ :
-  (x y : ℕ) → leq-ℕ (succ-ℕ x) y → le-ℕ x y
-le-leq-succ-ℕ zero-ℕ (succ-ℕ y) H = star
-le-leq-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = le-leq-succ-ℕ x y H
+abstract
+  le-leq-succ-ℕ :
+    (x y : ℕ) → leq-ℕ (succ-ℕ x) y → le-ℕ x y
+  le-leq-succ-ℕ zero-ℕ (succ-ℕ y) H = star
+  le-leq-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = le-leq-succ-ℕ x y H
 ```
 
 ### If `x ≤ y` then `x < y + 1`
 
 ```agda
-le-succ-leq-ℕ :
-  (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
-le-succ-leq-ℕ zero-ℕ y H = star
-le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
+abstract
+  le-succ-leq-ℕ :
+    (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
+  le-succ-leq-ℕ zero-ℕ y H = star
+  le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
 
 ### `x ≤ y` if and only if `(x ＝ y) + (x < y)`
@@ -350,20 +378,20 @@ eq-or-le-leq-ℕ' :
   (x y : ℕ) → leq-ℕ x y → ((y ＝ x) + (le-ℕ x y))
 eq-or-le-leq-ℕ' x y H = map-coproduct inv id (eq-or-le-leq-ℕ x y H)
 
-leq-eq-or-le-ℕ :
-  (x y : ℕ) → ((x ＝ y) + (le-ℕ x y)) → leq-ℕ x y
-leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
-leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
+abstract
+  leq-eq-or-le-ℕ :
+    (x y : ℕ) → ((x ＝ y) + (le-ℕ x y)) → leq-ℕ x y
+  leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
+  leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ```
 
 ### If `x ≤ y` and `x ≠ y` then `x < y`
 
 ```agda
-le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
-le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
-le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
-le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
-  le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
+abstract
+  le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
+  le-leq-neq-ℕ {x} {y} x≤y x≠y =
+    rec-coproduct (ex-falso ∘ x≠y) id (eq-or-le-leq-ℕ x y x≤y)
 ```
 
 ### For any two natural numbers `x` and `y`, either `x < y` or `y ≤ x`
@@ -378,8 +406,9 @@ decide-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) = decide-le-leq-ℕ x y
 ### If `1 < x` and `1 < y`, then `1 < xy`
 
 ```agda
-le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
-le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
+abstract
+  le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
+  le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
 ```
 
 ### Strict inequality on the natural numbers is invariant by translation
@@ -398,27 +427,28 @@ eq-translate-left-le-ℕ z x y =
 ### Addition on the natural numbers preserves strict inequality
 
 ```agda
-preserves-le-right-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (x +ℕ z) (y +ℕ z)
-preserves-le-right-add-ℕ zero-ℕ x y I = I
-preserves-le-right-add-ℕ (succ-ℕ z) x y I = preserves-le-right-add-ℕ z x y I
+abstract
+  preserves-le-right-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (x +ℕ z) (y +ℕ z)
+  preserves-le-right-add-ℕ zero-ℕ x y I = I
+  preserves-le-right-add-ℕ (succ-ℕ z) x y I = preserves-le-right-add-ℕ z x y I
 
-preserves-le-left-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (z +ℕ x) (z +ℕ y)
-preserves-le-left-add-ℕ z x y I =
-  binary-tr
-    le-ℕ
-    (commutative-add-ℕ x z)
-    (commutative-add-ℕ y z)
-    (preserves-le-right-add-ℕ z x y I)
+  preserves-le-left-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (z +ℕ x) (z +ℕ y)
+  preserves-le-left-add-ℕ z x y I =
+    binary-tr
+      ( le-ℕ)
+      ( commutative-add-ℕ x z)
+      ( commutative-add-ℕ y z)
+      ( preserves-le-right-add-ℕ z x y I)
 
-preserves-le-add-ℕ :
-  {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
-preserves-le-add-ℕ {a} {b} {c} {d} H K =
-  transitive-le-ℕ
-    (a +ℕ c)
-    (b +ℕ c)
-    (b +ℕ d)
-    (preserves-le-right-add-ℕ c a b H)
-    (preserves-le-left-add-ℕ b c d K)
+  preserves-le-add-ℕ :
+    {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
+  preserves-le-add-ℕ {a} {b} {c} {d} H K =
+    transitive-le-ℕ
+      ( a +ℕ c)
+      ( b +ℕ c)
+      ( b +ℕ d)
+      ( preserves-le-right-add-ℕ c a b H)
+      ( preserves-le-left-add-ℕ b c d K)
 ```
 
 ### There is an equivalence between natural numbers less than `succ-ℕ n` and natural numbers less than or equal to `n`
@@ -426,10 +456,9 @@ preserves-le-add-ℕ {a} {b} {c} {d} H K =
 ```agda
 equiv-le-succ-ℕ-leq-ℕ :
   (n : ℕ) → Σ ℕ (λ k → le-ℕ k (succ-ℕ n)) ≃ Σ ℕ (λ k → leq-ℕ k n)
-pr1 (equiv-le-succ-ℕ-leq-ℕ n) (k , k<sn) = (k , leq-le-succ-ℕ k n k<sn)
-pr2 (equiv-le-succ-ℕ-leq-ℕ n) =
-  is-equiv-is-invertible
-    ( λ (k , k≤n) → k , le-succ-leq-ℕ k n k≤n)
-    ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
-    ( λ (k , k<sn) → eq-pair-eq-fiber (eq-type-Prop (le-ℕ-Prop k (succ-ℕ n))))
+equiv-le-succ-ℕ-leq-ℕ n =
+  equiv-has-same-elements-type-subtype
+    ( λ k → le-prop-ℕ k (succ-ℕ n))
+    ( λ k → leq-ℕ-Prop k n)
+    ( λ k → (leq-le-succ-ℕ k n , le-succ-leq-ℕ k n))
 ```

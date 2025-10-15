@@ -58,7 +58,7 @@ real-ℝ⁻ = inclusion-subtype is-negative-prop-ℝ
 
 ```agda
 abstract
-  eq-ℝ⁻ : {l : Level} → (x y : ℝ⁻ l) → (real-ℝ⁻ x ＝ real-ℝ⁻ y) → x ＝ y
+  eq-ℝ⁻ : {l : Level} (x y : ℝ⁻ l) → (real-ℝ⁻ x ＝ real-ℝ⁻ y) → x ＝ y
   eq-ℝ⁻ _ _ = eq-type-subtype is-negative-prop-ℝ
 ```
 

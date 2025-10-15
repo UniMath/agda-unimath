@@ -346,32 +346,30 @@ module _
                 rec-coproduct
                   ( λ is-neg-a →
                     ex-falso
-                      ( is-not-negative-and-positive-ℚ
-                        ( a *ℚ d)
-                        ( is-negative-mul-negative-positive-ℚ
-                            ( is-neg-a)
-                            ( is-pos-d) ,
-                          is-pos-xy
+                      ( not-is-negative-is-positive-ℚ
+                        ( is-pos-xy
                             ( a)
                             ( d)
                             ( leq-right-min-ℚ _ _)
-                            ( leq-left-min-ℚ _ _))))
+                            ( leq-left-min-ℚ _ _))
+                        ( is-negative-mul-negative-positive-ℚ
+                            ( is-neg-a)
+                            ( is-pos-d))))
                   ( id)
                   ( decide-is-negative-is-nonnegative-ℚ a)
               is-nonneg-c =
                 rec-coproduct
                   ( λ is-neg-c →
                     ex-falso
-                      ( is-not-negative-and-positive-ℚ
-                        ( b *ℚ c)
-                        ( is-negative-mul-positive-negative-ℚ
-                            ( is-pos-b)
-                            ( is-neg-c) ,
-                          is-pos-xy
+                      ( not-is-negative-is-positive-ℚ
+                        ( is-pos-xy
                             ( b)
                             ( c)
                             ( leq-left-min-ℚ _ _)
-                            ( leq-right-min-ℚ _ _))))
+                            ( leq-right-min-ℚ _ _))
+                        ( is-negative-mul-positive-negative-ℚ
+                            ( is-pos-b)
+                            ( is-neg-c))))
                   ( id)
                   ( decide-is-negative-is-nonnegative-ℚ c)
               a' = max-ℚ a c

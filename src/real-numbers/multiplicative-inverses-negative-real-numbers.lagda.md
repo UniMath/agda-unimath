@@ -51,7 +51,7 @@ real-inv-ℝ⁻ x = real-ℝ⁻ (inv-ℝ⁻ x)
 ```agda
 abstract
   left-inverse-law-mul-ℝ⁻ :
-    {l : Level} → (x : ℝ⁻ l) → sim-ℝ (real-inv-ℝ⁻ x *ℝ real-ℝ⁻ x) one-ℝ
+    {l : Level} (x : ℝ⁻ l) → sim-ℝ (real-inv-ℝ⁻ x *ℝ real-ℝ⁻ x) one-ℝ
   left-inverse-law-mul-ℝ⁻ x⁻@(x , _) =
     inv-tr
       ( λ y → sim-ℝ y one-ℝ)
@@ -59,7 +59,7 @@ abstract
       ( left-inverse-law-mul-ℝ⁺ (neg-ℝ⁻ x⁻))
 
   right-inverse-law-mul-ℝ⁻ :
-    {l : Level} → (x : ℝ⁻ l) → sim-ℝ (real-ℝ⁻ x *ℝ real-inv-ℝ⁻ x) one-ℝ
+    {l : Level} (x : ℝ⁻ l) → sim-ℝ (real-ℝ⁻ x *ℝ real-inv-ℝ⁻ x) one-ℝ
   right-inverse-law-mul-ℝ⁻ x =
     tr
       ( λ y → sim-ℝ y one-ℝ)
