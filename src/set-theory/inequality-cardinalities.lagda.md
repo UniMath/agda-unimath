@@ -30,7 +30,7 @@ open import set-theory.cardinalities
 ## Idea
 
 We say a [cardinal of sets](set-theory.cardinalities.md) `X` is
-{{#concept "less than or equal to" Agda=leq-cardinal}} a cardinal `Y` if any
+{{#concept "less than or equal to" Agda=leq-Cardinal}} a Cardinal `Y` if any
 [set](foundation-core.sets.md) in the isomorphism class represented by `X`
 embeds into any set in the isomorphism class represented by `Y`. This defines
 the {{#concept "standard ordering" Disambiguation="on cardinalities of sets"}}
@@ -50,17 +50,17 @@ module _
   {l1 l2 : Level} (X : Set l1)
   where
 
-  leq-prop-cardinal' : cardinal l2 → Prop (l1 ⊔ l2)
-  leq-prop-cardinal' =
+  leq-prop-Cardinal' : Cardinal l2 → Prop (l1 ⊔ l2)
+  leq-prop-Cardinal' =
     map-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ l2))
       ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
 
-  compute-leq-prop-cardinal' :
+  compute-leq-prop-Cardinal' :
     (Y : Set l2) →
-    leq-prop-cardinal' (cardinality Y) ＝
+    leq-prop-Cardinal' (cardinality Y) ＝
     mere-emb-Prop (type-Set X) (type-Set Y)
-  compute-leq-prop-cardinal' =
+  compute-leq-prop-Cardinal' =
     triangle-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ l2))
       ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
@@ -73,18 +73,18 @@ module _
   {l1 l2 : Level}
   where
 
-  leq-prop-cardinal : cardinal l1 → cardinal l2 → Prop (l1 ⊔ l2)
-  leq-prop-cardinal =
+  leq-prop-Cardinal : Cardinal l1 → Cardinal l2 → Prop (l1 ⊔ l2)
+  leq-prop-Cardinal =
     map-universal-property-trunc-Set
-      ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-      ( leq-prop-cardinal')
+      ( hom-set-Set (Cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+      ( leq-prop-Cardinal')
 
-  leq-cardinal : cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
-  leq-cardinal X Y = type-Prop (leq-prop-cardinal X Y)
+  leq-Cardinal : Cardinal l1 → Cardinal l2 → UU (l1 ⊔ l2)
+  leq-Cardinal X Y = type-Prop (leq-prop-Cardinal X Y)
 
-  is-prop-leq-cardinal :
-    {X : cardinal l1} {Y : cardinal l2} → is-prop (leq-cardinal X Y)
-  is-prop-leq-cardinal {X} {Y} = is-prop-type-Prop (leq-prop-cardinal X Y)
+  is-prop-leq-Cardinal :
+    {X : Cardinal l1} {Y : Cardinal l2} → is-prop (leq-Cardinal X Y)
+  is-prop-leq-Cardinal {X} {Y} = is-prop-type-Prop (leq-prop-Cardinal X Y)
 ```
 
 ### Inequality of cardinalities
@@ -95,22 +95,22 @@ module _
   where
 
   leq-prop-cardinality : Prop (l1 ⊔ l2)
-  leq-prop-cardinality = leq-prop-cardinal (cardinality X) (cardinality Y)
+  leq-prop-cardinality = leq-prop-Cardinal (cardinality X) (cardinality Y)
 
   leq-cardinality : UU (l1 ⊔ l2)
-  leq-cardinality = leq-cardinal (cardinality X) (cardinality Y)
+  leq-cardinality = leq-Cardinal (cardinality X) (cardinality Y)
 
   is-prop-leq-cardinality : is-prop leq-cardinality
-  is-prop-leq-cardinality = is-prop-leq-cardinal
+  is-prop-leq-cardinality = is-prop-leq-Cardinal
 
   eq-compute-leq-prop-cardinality :
     leq-prop-cardinality ＝ mere-emb-Prop (type-Set X) (type-Set Y)
   eq-compute-leq-prop-cardinality =
     ( htpy-eq
       ( triangle-universal-property-trunc-Set
-        ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-        ( leq-prop-cardinal') X) (cardinality Y)) ∙
-    ( compute-leq-prop-cardinal' X Y)
+        ( hom-set-Set (Cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+        ( leq-prop-Cardinal') X) (cardinality Y)) ∙
+    ( compute-leq-prop-Cardinal' X Y)
 
   eq-compute-leq-cardinality :
     leq-cardinality ＝ mere-emb (type-Set X) (type-Set Y)
@@ -136,10 +136,10 @@ module _
 refl-leq-cardinality : is-reflexive-Large-Relation Set leq-cardinality
 refl-leq-cardinality A = unit-leq-cardinality A A (refl-mere-emb (type-Set A))
 
-refl-leq-cardinal : is-reflexive-Large-Relation cardinal leq-cardinal
-refl-leq-cardinal =
+refl-leq-Cardinal : is-reflexive-Large-Relation Cardinal leq-Cardinal
+refl-leq-Cardinal =
   apply-dependent-universal-property-trunc-Set'
-    ( λ X → set-Prop (leq-prop-cardinal X X))
+    ( λ X → set-Prop (leq-prop-Cardinal X X))
     ( refl-leq-cardinality)
 ```
 
@@ -159,16 +159,16 @@ module _
         ( inv-unit-leq-cardinality Y Z Y≤Z)
         ( inv-unit-leq-cardinality X Y X≤Y))
 
-  transitive-leq-cardinal :
-    (X : cardinal l1) (Y : cardinal l2) (Z : cardinal l3) →
-    leq-cardinal Y Z → leq-cardinal X Y → leq-cardinal X Z
-  transitive-leq-cardinal =
+  transitive-leq-Cardinal :
+    (X : Cardinal l1) (Y : Cardinal l2) (Z : Cardinal l3) →
+    leq-Cardinal Y Z → leq-Cardinal X Y → leq-Cardinal X Z
+  transitive-leq-Cardinal =
     apply-thrice-dependent-universal-property-trunc-Set'
       ( λ X Y Z →
-        ( leq-cardinal Y Z → leq-cardinal X Y → leq-cardinal X Z) ,
+        ( leq-Cardinal Y Z → leq-Cardinal X Y → leq-Cardinal X Z) ,
         ( is-set-function-type
           ( is-set-function-type
-            ( is-set-is-prop is-prop-leq-cardinal))))
+            ( is-set-is-prop is-prop-leq-Cardinal))))
       ( transitive-leq-cardinality)
 ```
 
@@ -177,7 +177,7 @@ module _
 ### Assuming excluded middle, then inequality is antisymmetric
 
 Using the previous result and assuming excluded middle, we can conclude
-`leq-cardinal` is a partial order by showing that it is antisymmetric.
+`leq-Cardinal` is a partial order by showing that it is antisymmetric.
 
 ```agda
 module _
@@ -196,16 +196,16 @@ module _
         ( inv-unit-leq-cardinality X Y X≤Y)
         ( inv-unit-leq-cardinality Y X Y≤X))
 
-  antisymmetric-leq-cardinal :
-    (X Y : cardinal l) →
-    leq-cardinal X Y → leq-cardinal Y X → X ＝ Y
-  antisymmetric-leq-cardinal =
+  antisymmetric-leq-Cardinal :
+    (X Y : Cardinal l) →
+    leq-Cardinal X Y → leq-Cardinal Y X → X ＝ Y
+  antisymmetric-leq-Cardinal =
     apply-twice-dependent-universal-property-trunc-Set'
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( leq-cardinal X Y)
-            ( function-Prop (leq-cardinal Y X) (Id-Prop (cardinal-Set l) X Y))))
+            ( leq-Cardinal X Y)
+            ( function-Prop (leq-Cardinal Y X) (Id-Prop (Cardinal-Set l) X Y))))
       ( antisymmetric-leq-cardinality)
 ```
 

@@ -168,7 +168,7 @@ module _
 
 ```agda
 cardinality-Kuratowski-Finite-Set :
-  {l : Level} → Kuratowski-Finite-Set l → cardinal l
+  {l : Level} → Kuratowski-Finite-Set l → Cardinal l
 cardinality-Kuratowski-Finite-Set X =
   cardinality (set-Kuratowski-Finite-Set X)
 

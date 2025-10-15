@@ -53,17 +53,17 @@ module _
   {l1 l2 : Level} (X : Set l1)
   where
 
-  leq-complemented-prop-cardinal' : cardinal l2 → Prop (l1 ⊔ l2)
-  leq-complemented-prop-cardinal' =
+  leq-complemented-prop-Cardinal' : Cardinal l2 → Prop (l1 ⊔ l2)
+  leq-complemented-prop-Cardinal' =
     map-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ l2))
       ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
 
-  compute-leq-complemented-prop-cardinal' :
+  compute-leq-complemented-prop-Cardinal' :
     (Y : Set l2) →
-    leq-complemented-prop-cardinal' (cardinality Y) ＝
+    leq-complemented-prop-Cardinal' (cardinality Y) ＝
     mere-decidable-emb-Prop (type-Set X) (type-Set Y)
-  compute-leq-complemented-prop-cardinal' =
+  compute-leq-complemented-prop-Cardinal' =
     triangle-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ l2))
       ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
@@ -76,23 +76,23 @@ module _
   {l1 l2 : Level}
   where
 
-  leq-complemented-prop-cardinal :
-    cardinal l1 → cardinal l2 → Prop (l1 ⊔ l2)
-  leq-complemented-prop-cardinal =
+  leq-complemented-prop-Cardinal :
+    Cardinal l1 → Cardinal l2 → Prop (l1 ⊔ l2)
+  leq-complemented-prop-Cardinal =
     map-universal-property-trunc-Set
-      ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-      ( leq-complemented-prop-cardinal')
+      ( hom-set-Set (Cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+      ( leq-complemented-prop-Cardinal')
 
-  leq-complemented-cardinal :
-    cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
-  leq-complemented-cardinal X Y =
-    type-Prop (leq-complemented-prop-cardinal X Y)
+  leq-complemented-Cardinal :
+    Cardinal l1 → Cardinal l2 → UU (l1 ⊔ l2)
+  leq-complemented-Cardinal X Y =
+    type-Prop (leq-complemented-prop-Cardinal X Y)
 
-  is-prop-leq-complemented-cardinal :
-    {X : cardinal l1} {Y : cardinal l2} →
-    is-prop (leq-complemented-cardinal X Y)
-  is-prop-leq-complemented-cardinal {X} {Y} =
-    is-prop-type-Prop (leq-complemented-prop-cardinal X Y)
+  is-prop-leq-complemented-Cardinal :
+    {X : Cardinal l1} {Y : Cardinal l2} →
+    is-prop (leq-complemented-Cardinal X Y)
+  is-prop-leq-complemented-Cardinal {X} {Y} =
+    is-prop-type-Prop (leq-complemented-prop-Cardinal X Y)
 ```
 
 ### Complemented inequality of cardinalities
@@ -104,16 +104,16 @@ module _
 
   leq-complemented-prop-cardinality : Prop (l1 ⊔ l2)
   leq-complemented-prop-cardinality =
-    leq-complemented-prop-cardinal (cardinality X) (cardinality Y)
+    leq-complemented-prop-Cardinal (cardinality X) (cardinality Y)
 
   leq-complemented-cardinality : UU (l1 ⊔ l2)
   leq-complemented-cardinality =
-    leq-complemented-cardinal (cardinality X) (cardinality Y)
+    leq-complemented-Cardinal (cardinality X) (cardinality Y)
 
   is-prop-leq-complemented-cardinality :
     is-prop leq-complemented-cardinality
   is-prop-leq-complemented-cardinality =
-    is-prop-leq-complemented-cardinal
+    is-prop-leq-complemented-Cardinal
 
   compute-leq-complemented-prop-cardinality' :
     leq-complemented-prop-cardinality ＝
@@ -121,9 +121,9 @@ module _
   compute-leq-complemented-prop-cardinality' =
     ( htpy-eq
       ( triangle-universal-property-trunc-Set
-        ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-        ( leq-complemented-prop-cardinal') X) (cardinality Y)) ∙
-    ( compute-leq-complemented-prop-cardinal' X Y)
+        ( hom-set-Set (Cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+        ( leq-complemented-prop-Cardinal') X) (cardinality Y)) ∙
+    ( compute-leq-complemented-prop-Cardinal' X Y)
 
   compute-leq-complemented-cardinality' :
     leq-complemented-cardinality ＝
@@ -159,11 +159,11 @@ refl-leq-complemented-cardinality A =
   unit-leq-complemented-cardinality A A
     ( refl-mere-decidable-emb (type-Set A))
 
-refl-leq-complemented-cardinal :
-  is-reflexive-Large-Relation cardinal leq-complemented-cardinal
-refl-leq-complemented-cardinal =
+refl-leq-complemented-Cardinal :
+  is-reflexive-Large-Relation Cardinal leq-complemented-Cardinal
+refl-leq-complemented-Cardinal =
   apply-dependent-universal-property-trunc-Set'
-    ( λ X → set-Prop (leq-complemented-prop-cardinal X X))
+    ( λ X → set-Prop (leq-complemented-prop-Cardinal X X))
     ( refl-leq-complemented-cardinality)
 ```
 
@@ -185,20 +185,20 @@ module _
         ( inv-unit-leq-complemented-cardinality Y Z Y≤Z)
         ( inv-unit-leq-complemented-cardinality X Y X≤Y))
 
-  transitive-leq-complemented-cardinal :
-    (X : cardinal l1) (Y : cardinal l2) (Z : cardinal l3) →
-    leq-complemented-cardinal Y Z →
-    leq-complemented-cardinal X Y →
-    leq-complemented-cardinal X Z
-  transitive-leq-complemented-cardinal =
+  transitive-leq-complemented-Cardinal :
+    (X : Cardinal l1) (Y : Cardinal l2) (Z : Cardinal l3) →
+    leq-complemented-Cardinal Y Z →
+    leq-complemented-Cardinal X Y →
+    leq-complemented-Cardinal X Z
+  transitive-leq-complemented-Cardinal =
     apply-thrice-dependent-universal-property-trunc-Set'
       ( λ X Y Z →
-        ( leq-complemented-cardinal Y Z →
-          leq-complemented-cardinal X Y →
-          leq-complemented-cardinal X Z) ,
+        ( leq-complemented-Cardinal Y Z →
+          leq-complemented-Cardinal X Y →
+          leq-complemented-Cardinal X Z) ,
         ( is-set-function-type
           ( is-set-function-type
-            ( is-set-is-prop is-prop-leq-complemented-cardinal))))
+            ( is-set-is-prop is-prop-leq-complemented-Cardinal))))
       ( transitive-leq-complemented-cardinality)
 ```
 
@@ -207,7 +207,7 @@ module _
 ### Assuming the weak limited principle of omniscience, then complemented inequality is antisymmetric
 
 Using the previous result and assuming the weak limited principle of
-omniscience, we can conclude `leq-complemented-cardinal` is a partial order by
+omniscience, we can conclude `leq-complemented-Cardinal` is a partial order by
 showing that it is antisymmetric.
 
 > This remains to be formalized.
@@ -229,17 +229,17 @@ module _
         ( inv-unit-leq-complemented-cardinality X Y X≤Y)
         ( inv-unit-leq-complemented-cardinality Y X Y≤X))
 
-  antisymmetric-leq-complemented-cardinal :
-    (X Y : cardinal l) →
-    leq-complemented-cardinal X Y → leq-complemented-cardinal Y X → X ＝ Y
-  antisymmetric-leq-complemented-cardinal =
+  antisymmetric-leq-complemented-Cardinal :
+    (X Y : Cardinal l) →
+    leq-complemented-Cardinal X Y → leq-complemented-Cardinal Y X → X ＝ Y
+  antisymmetric-leq-complemented-Cardinal =
     apply-twice-dependent-universal-property-trunc-Set'
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( leq-complemented-cardinal X Y)
+            ( leq-complemented-Cardinal X Y)
             ( function-Prop
-              ( leq-complemented-cardinal Y X)
-              ( Id-Prop (cardinal-Set l) X Y))))
+              ( leq-complemented-Cardinal Y X)
+              ( Id-Prop (Cardinal-Set l) X Y))))
       ( antisymmetric-leq-complemented-cardinality)
 ```

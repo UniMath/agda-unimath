@@ -37,20 +37,20 @@ element in the set truncation of the universe of all sets.
 ### Cardinals
 
 ```agda
-cardinal-Set : (l : Level) → Set (lsuc l)
-cardinal-Set l = trunc-Set (Set l)
+Cardinal-Set : (l : Level) → Set (lsuc l)
+Cardinal-Set l = trunc-Set (Set l)
 
-cardinal : (l : Level) → UU (lsuc l)
-cardinal l = type-Set (cardinal-Set l)
+Cardinal : (l : Level) → UU (lsuc l)
+Cardinal l = type-Set (Cardinal-Set l)
 
-is-set-cardinal : {l : Level} → is-set (cardinal l)
-is-set-cardinal {l} = is-set-type-Set (cardinal-Set l)
+is-set-Cardinal : {l : Level} → is-set (Cardinal l)
+is-set-Cardinal {l} = is-set-type-Set (Cardinal-Set l)
 ```
 
 ### The cardinality of a set
 
 ```agda
-cardinality : {l : Level} → Set l → cardinal l
+cardinality : {l : Level} → Set l → Cardinal l
 cardinality A = unit-trunc-Set A
 ```
 
