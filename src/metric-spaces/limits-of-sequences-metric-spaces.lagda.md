@@ -28,8 +28,10 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -231,6 +233,92 @@ module _
     is-prop-has-limit-sequence-Metric-Space
 ```
 
+### Modulated uniformly continuous maps between metric spaces preserve limits
+
+```agda
+module _
+  {la la' lb lb' : Level}
+  (A : Metric-Space la la')
+  (B : Metric-Space lb lb')
+  (f : modulated-ucont-map-Metric-Space A B)
+  (u : sequence-type-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where
+
+  abstract
+    modulated-ucont-map-limit-modulus-sequence-Metric-Space :
+      limit-modulus-sequence-Metric-Space A u lim →
+      limit-modulus-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-modulated-ucont-map-Metric-Space A B f)
+          ( u))
+        ( map-modulated-ucont-map-Metric-Space A B f lim)
+    modulated-ucont-map-limit-modulus-sequence-Metric-Space (m , is-mod-m) =
+      ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
+        λ ε n N≤n →
+          is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+            ( A)
+            ( B)
+            ( f)
+            ( u n)
+            ( ε)
+            ( lim)
+            ( is-mod-m
+              ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+              ( n)
+              ( N≤n)))
+
+    modulated-ucont-map-limit-sequence-Metric-Space :
+      is-limit-sequence-Metric-Space A u lim →
+      is-limit-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-modulated-ucont-map-Metric-Space A B f)
+          ( u))
+        ( map-modulated-ucont-map-Metric-Space A B f lim)
+    modulated-ucont-map-limit-sequence-Metric-Space =
+      map-is-inhabited modulated-ucont-map-limit-modulus-sequence-Metric-Space
+```
+
+### Uniformly continuous maps between metric spaces preserve limits
+
+```agda
+module _
+  {la la' lb lb' : Level}
+  (A : Metric-Space la la')
+  (B : Metric-Space lb lb')
+  (f : uniformly-continuous-function-Metric-Space A B)
+  (u : sequence-type-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where
+
+  abstract
+    uniformly-continuous-map-limit-sequence-Metric-Space :
+      is-limit-sequence-Metric-Space A u lim →
+      is-limit-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-uniformly-continuous-function-Metric-Space A B f)
+          ( u))
+        ( map-uniformly-continuous-function-Metric-Space A B f lim)
+    uniformly-continuous-map-limit-sequence-Metric-Space is-limit-lim =
+      rec-trunc-Prop
+        ( is-limit-prop-sequence-Metric-Space B _ _)
+        ( λ m →
+          modulated-ucont-map-limit-sequence-Metric-Space
+            ( A)
+            ( B)
+            ( map-uniformly-continuous-function-Metric-Space A B f , m)
+            ( u)
+            ( lim)
+            ( is-limit-lim))
+        ( is-uniformly-continuous-map-uniformly-continuous-function-Metric-Space
+          ( A)
+          ( B)
+          ( f))
+```
+
 ### Short maps between metric spaces preserve limits
 
 ```agda
@@ -252,10 +340,12 @@ module _
         ( u))
       ( map-short-function-Metric-Space A B f lim)
   short-map-limit-modulus-sequence-Metric-Space =
-    tot
-      ( λ m H ε n →
-        is-short-map-short-function-Metric-Space A B f ε (u n) lim ∘
-        H ε n)
+    modulated-ucont-map-limit-modulus-sequence-Metric-Space
+      ( A)
+      ( B)
+      ( modulated-ucont-map-short-function-Metric-Space A B f)
+      ( u)
+      ( lim)
 
   short-map-limit-sequence-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
