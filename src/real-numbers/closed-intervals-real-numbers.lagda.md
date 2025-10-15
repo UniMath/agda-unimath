@@ -51,7 +51,7 @@ the [real numbers](real-numbers.dedekind-real-numbers.md) is a
 
 ```agda
 closed-interval-ℝ : (l : Level) → UU (lsuc l)
-closed-interval-ℝ = closed-interval-Large-Poset ℝ-Large-Poset
+closed-interval-ℝ l = closed-interval-Large-Poset ℝ-Large-Poset l l
 
 is-in-closed-interval-prop-ℝ :
   {l1 l2 : Level} → closed-interval-ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)

@@ -36,34 +36,34 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
   where
 
-  closed-interval-Large-Poset : (l : Level) → UU (α l ⊔ β l l)
-  closed-interval-Large-Poset l =
-    Σ ( type-Large-Poset P l × type-Large-Poset P l)
+  closed-interval-Large-Poset : (l1 l2 : Level) → UU (α l1 ⊔ α l2 ⊔ β l1 l2)
+  closed-interval-Large-Poset l1 l2 =
+    Σ ( type-Large-Poset P l1 × type-Large-Poset P l2)
       ( λ (x , y) → leq-Large-Poset P x y)
 
   is-in-closed-interval-prop-Large-Poset :
-    {l1 l2 : Level} → closed-interval-Large-Poset l1 → type-Large-Poset P l2 →
-    Prop (β l1 l2 ⊔ β l2 l1)
+    {l1 l2 l3 : Level} → closed-interval-Large-Poset l1 l2 →
+    type-Large-Poset P l3 → Prop (β l1 l3 ⊔ β l3 l2)
   is-in-closed-interval-prop-Large-Poset ((a , b) , _) x =
     leq-prop-Large-Poset P a x ∧ leq-prop-Large-Poset P x b
 
   is-in-closed-interval-Large-Poset :
-    {l1 l2 : Level} → closed-interval-Large-Poset l1 → type-Large-Poset P l2 →
-    UU (β l1 l2 ⊔ β l2 l1)
+    {l1 l2 l3 : Level} → closed-interval-Large-Poset l1 l2 →
+    type-Large-Poset P l3 → UU (β l1 l3 ⊔ β l3 l2)
   is-in-closed-interval-Large-Poset [a,b] x =
     type-Prop (is-in-closed-interval-prop-Large-Poset [a,b] x)
 
   subtype-closed-interval-Large-Poset :
-    {l1 : Level} (l2 : Level) → closed-interval-Large-Poset l1 →
-    subtype (β l1 l2 ⊔ β l2 l1) (type-Large-Poset P l2)
+    {l1 l2 : Level} (l3 : Level) → closed-interval-Large-Poset l1 l2 →
+    subtype (β l1 l3 ⊔ β l3 l2) (type-Large-Poset P l3)
   subtype-closed-interval-Large-Poset _ [a,b] =
     is-in-closed-interval-prop-Large-Poset [a,b]
 
   lower-bound-closed-interval-Large-Poset :
-    {l : Level} → closed-interval-Large-Poset l → type-Large-Poset P l
+    {l1 l2 : Level} → closed-interval-Large-Poset l1 l2 → type-Large-Poset P l1
   lower-bound-closed-interval-Large-Poset ((a , b) , _) = a
 
   upper-bound-closed-interval-Large-Poset :
-    {l : Level} → closed-interval-Large-Poset l → type-Large-Poset P l
+    {l1 l2 : Level} → closed-interval-Large-Poset l1 l2 → type-Large-Poset P l2
   upper-bound-closed-interval-Large-Poset ((a , b) , _) = b
 ```
