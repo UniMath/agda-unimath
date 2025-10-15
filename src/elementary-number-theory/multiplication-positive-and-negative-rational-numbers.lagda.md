@@ -148,8 +148,7 @@ abstract
             ( y≠0)
             ( λ is-pos-y →
               ex-falso
-                ( is-not-negative-and-positive-ℚ
-                  ( x *ℚ y)
+                ( not-is-negative-is-positive-ℚ
                   ( is-negative-mul-negative-positive-ℚ is-neg-x is-pos-y ,
                     is-pos-xy))))
         ( λ x=0 →
@@ -164,8 +163,7 @@ abstract
             ( y)
             ( λ is-neg-y →
               ex-falso
-                ( is-not-negative-and-positive-ℚ
-                  ( x *ℚ y)
+                ( not-is-negative-is-positive-ℚ
                   ( is-negative-mul-positive-negative-ℚ is-pos-x is-neg-y ,
                     is-pos-xy)))
             ( y≠0)

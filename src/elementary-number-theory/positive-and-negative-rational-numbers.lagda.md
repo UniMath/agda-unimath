@@ -239,16 +239,6 @@ abstract
       ( leq-zero-is-nonnegative-ℚ NN)
 ```
 
-### A positive rational number is not negative
-
-```agda
-abstract
-  not-is-negative-is-positive-ℚ :
-    {q : ℚ} → is-positive-ℚ q → ¬ (is-negative-ℚ q)
-  not-is-negative-is-positive-ℚ {q} is-pos-q =
-    not-is-negative-is-nonnegative-ℚ (is-nonnegative-is-positive-ℚ q is-pos-q)
-```
-
 ### If `p < q` and `q` is nonpositive, then `p` is negative
 
 ```agda

@@ -354,10 +354,7 @@ module _
                             ( a)
                             ( d)
                             ( leq-right-min-ℚ _ _)
-                            ( leq-left-min-ℚ _ _))
-                        ( is-negative-mul-negative-positive-ℚ
-                            ( is-neg-a)
-                            ( is-pos-d))))
+                            ( leq-left-min-ℚ _ _))))
                   ( id)
                   ( decide-is-negative-is-nonnegative-ℚ a)
               is-nonneg-c =
@@ -372,10 +369,7 @@ module _
                             ( b)
                             ( c)
                             ( leq-left-min-ℚ _ _)
-                            ( leq-right-min-ℚ _ _))
-                        ( is-negative-mul-positive-negative-ℚ
-                            ( is-pos-b)
-                            ( is-neg-c))))
+                            ( leq-right-min-ℚ _ _))))
                   ( id)
                   ( decide-is-negative-is-nonnegative-ℚ c)
               a' = max-ℚ a c
