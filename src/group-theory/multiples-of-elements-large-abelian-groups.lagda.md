@@ -24,9 +24,9 @@ open import group-theory.powers-of-elements-large-groups
 ## Idea
 
 The
-{{#concept "multiplication" Disambiguation="natural multiple of elements of abelian groups" Agda=multiple-Ab}}
-operation on an [abelian group](group-theory.abelian-groups.md) is the map
-`n x ↦ n · x`, which is defined by
+{{#concept "multiplication" Disambiguation="natural multiple of elements of large abelian groups" Agda=multiple-Large-Ab}}
+operation on a [large abelian group](group-theory.large-abelian-groups.md) is
+the map `n x ↦ n · x`, which is defined by
 [iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
 times. This file describes this operation where `n` ranges over the
 [natural numbers](elementary-number-theory.natural-numbers.md).
