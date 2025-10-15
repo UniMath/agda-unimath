@@ -18,6 +18,7 @@ open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
