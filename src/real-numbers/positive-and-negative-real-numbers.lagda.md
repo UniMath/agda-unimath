@@ -18,6 +18,7 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -34,6 +35,18 @@ In this file, we outline basic relations between
 [real numbers](real-numbers.dedekind-real-numbers.md).
 
 ## Properties
+
+### Positive real numbers are nonnegative
+
+```agda
+abstract
+  is-nonnegative-is-positive-ℝ :
+    {l : Level} {x : ℝ l} → is-positive-ℝ x → is-nonnegative-ℝ x
+  is-nonnegative-is-positive-ℝ = leq-le-ℝ _ _
+
+nonnegative-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁰⁺ l
+nonnegative-ℝ⁺ (x , is-pos-x) = (x , is-nonnegative-is-positive-ℝ is-pos-x)
+```
 
 ### The negation of a positive real number is negative
 
