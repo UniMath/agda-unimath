@@ -21,12 +21,14 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
+open import metric-spaces.sequences-metric-spaces
 
 open import metric-spaces.continuous-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.cauchy-sequences-metric-spaces
 ```
 
 </details>
@@ -84,6 +86,39 @@ module _
     type-Prop is-uniformly-continuous-prop-function-Metric-Space
 ```
 
+### The type of modulated uniformly continuous maps between metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  where
+
+  modulated-ucont-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  modulated-ucont-map-Metric-Space =
+    Σ ( type-function-Metric-Space X Y)
+      ( λ f →
+        Σ ( ℚ⁺ → ℚ⁺)
+          ( is-modulus-of-uniform-continuity-function-Metric-Space X Y f))
+
+  map-modulated-ucont-map-Metric-Space :
+    modulated-ucont-map-Metric-Space → type-function-Metric-Space X Y
+  map-modulated-ucont-map-Metric-Space = pr1
+
+  modulus-modulated-ucont-map-Metric-Space :
+    modulated-ucont-map-Metric-Space → ℚ⁺ → ℚ⁺
+  modulus-modulated-ucont-map-Metric-Space = pr1 ∘ pr2
+
+  is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space :
+    (f : modulated-ucont-map-Metric-Space) →
+    is-modulus-of-uniform-continuity-function-Metric-Space
+      ( X)
+      ( Y)
+      ( map-modulated-ucont-map-Metric-Space f)
+      ( modulus-modulated-ucont-map-Metric-Space f)
+  is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space =
+    pr2 ∘ pr2
+```
+
 ### The type of uniformly continuous functions between metric spaces
 
 ```agda
@@ -108,6 +143,12 @@ module _
       ( map-uniformly-continuous-function-Metric-Space f)
   is-uniformly-continuous-map-uniformly-continuous-function-Metric-Space =
     pr2
+
+  uniformly-continuous-function-modulated-ucont-map-Metric-Space :
+    modulated-ucont-map-Metric-Space X Y →
+    uniformly-continuous-function-Metric-Space
+  uniformly-continuous-function-modulated-ucont-map-Metric-Space (f , m) =
+    (f , unit-trunc-Prop m)
 ```
 
 ## Properties
