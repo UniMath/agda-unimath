@@ -23,6 +23,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.negative-integer-fractions
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-integer-fractions
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+
+open import foundation.dependent-pair-types
 ```
 
 </details>
