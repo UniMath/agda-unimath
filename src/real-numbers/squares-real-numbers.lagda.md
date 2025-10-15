@@ -98,7 +98,7 @@ opaque
             ( is-positive-prop-ℚ q)
             ( λ a'<0 →
               let
-                a'⁻ = (a' , is-negative-le-zero-ℚ a' a'<0)
+                a'⁻ = (a' , is-negative-le-zero-ℚ a'<0)
               in
                 is-positive-le-ℚ⁺
                   ( a'⁻ *ℚ⁻ a'⁻)
@@ -113,7 +113,7 @@ opaque
                     ( [a',b'][a',b']<q)))
             ( λ 0<b' →
               let
-                b'⁺ = (b' , is-positive-le-zero-ℚ b' 0<b')
+                b'⁺ = (b' , is-positive-le-zero-ℚ 0<b')
               in
                 is-positive-le-ℚ⁺
                   ( b'⁺ *ℚ⁺ b'⁺)

@@ -21,18 +21,9 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
-open import elementary-number-theory.multiplication-positive-rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.negative-integer-fractions
-open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
-open import elementary-number-theory.positive-integer-fractions
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-
-open import foundation.dependent-pair-types
 ```
 
 </details>
@@ -60,6 +51,14 @@ opaque
       ( is-positive-ℚ)
       ( negative-law-mul-ℚ x y)
       ( is-positive-mul-ℚ P Q)
+
+mul-ℚ⁻ : ℚ⁻ → ℚ⁻ → ℚ⁺
+mul-ℚ⁻ (p , is-neg-p) (q , is-neg-q) =
+  (p *ℚ q , is-positive-mul-negative-ℚ is-neg-p is-neg-q)
+
+infixl 40 _*ℚ⁻_
+_*ℚ⁻_ : ℚ⁻ → ℚ⁻ → ℚ⁺
+_*ℚ⁻_ = mul-ℚ⁻
 ```
 
 ### Multiplication by a negative rational number reverses inequality
