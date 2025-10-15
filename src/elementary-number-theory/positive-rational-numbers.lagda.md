@@ -269,23 +269,6 @@ opaque
         ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
-### A rational and its negative are not both positive
-
-```agda
-opaque
-  unfolding neg-ℚ
-
-  not-is-negative-is-positive-ℚ :
-    (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
-  not-is-negative-is-positive-ℚ x (N , P) =
-    is-not-negative-and-positive-ℤ
-      ( numerator-ℚ x)
-      ( ( is-negative-eq-ℤ
-          (neg-neg-ℤ (numerator-ℚ x))
-          (is-negative-neg-is-positive-ℤ {numerator-ℚ (neg-ℚ x)} N)) ,
-        ( P))
-```
-
 ### Positive rational numbers are nonzero
 
 ```agda
@@ -299,4 +282,21 @@ abstract
 
 nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
+```
+
+### If `p ≤ q` and `p` is positive, then `q` is positive
+
+```agda
+abstract
+  is-positive-leq-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
+    is-positive-le-zero-ℚ
+      ( q)
+      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
+
+  is-positive-le-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁺ p q p<q =
+    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
 ```

@@ -53,10 +53,13 @@ open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import group-theory.groups
 
 open import logic.functoriality-existential-quantification
 
@@ -441,7 +444,9 @@ module _
               ( rational-ℚ⁺ εx)
               ( one-ℚ)
               ( q-p<εx)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           s-r<εy : le-ℚ (s -ℚ r) (rational-ℚ⁺ εy)
           s-r<εy =
             le-transpose-right-add-ℚ _ _ _
@@ -452,7 +457,9 @@ module _
               ( rational-ℚ⁺ εy)
               ( one-ℚ)
               ( s-r<εy)
-              ( leq-left-min-ℚ⁺ _ _)
+              ( leq-left-min-ℚ⁺
+                ( one-ℚ⁺)
+                ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
           open inequality-reasoning-Poset ℚ-Poset
           max|r||s|≤sN =
             chain-of-inequalities
@@ -535,8 +542,12 @@ module _
                     ( _)
                     ( _)
                     ( preserves-leq-add-ℚ
-                      ( leq-right-min-ℚ⁺ _ _)
-                      ( leq-right-min-ℚ⁺ _ _))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
+                      ( leq-right-min-ℚ⁺
+                        ( one-ℚ⁺)
+                        ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
                   leq-eq-ℚ _ _
@@ -545,10 +556,11 @@ module _
                       ( refl) ∙
                       ap
                         ( rational-ℚ⁺)
-                        ( is-section-right-div-ℚ⁺
-                          ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
-                          ( εx₀ +ℚ⁺ εy₀) ∙
-                          εx₀+εy₀=ε))
+                        ( ( is-section-right-div-Group
+                            ( group-mul-ℚ⁺)
+                            ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' N))
+                            ( εx₀ +ℚ⁺ εy₀)) ∙
+                          ( εx₀+εy₀=ε)))
         intro-exists
           ( a , b)
           ( tr
@@ -1227,7 +1239,7 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → neg-ℝ x *ℝ y ＝ neg-ℝ (x *ℝ y)
   left-negative-law-mul-ℝ x y =
     eq-sim-ℝ
-      (unique-right-inverse-add-ℝ _ _
+      ( unique-right-inverse-add-ℝ _ _
         ( similarity-reasoning-ℝ
           (x *ℝ y) +ℝ (neg-ℝ x *ℝ y)
           ~ℝ (x +ℝ neg-ℝ x) *ℝ y

@@ -71,7 +71,7 @@ abstract
       pos-ℤ-to-ℕ (inr (inr n)) H = succ-ℕ n , (λ ()) , refl
 
   archimedean-property-ℤ :
-    (x y : ℤ) → is-positive-ℤ x → exists ℕ (λ n → le-ℤ-Prop y (int-ℕ n *ℤ x))
+    (x y : ℤ) → is-positive-ℤ x → exists ℕ (λ n → le-prop-ℤ y (int-ℕ n *ℤ x))
   archimedean-property-ℤ x y pos-x =
     unit-trunc-Prop (bound-archimedean-property-ℤ x y pos-x)
 ```
