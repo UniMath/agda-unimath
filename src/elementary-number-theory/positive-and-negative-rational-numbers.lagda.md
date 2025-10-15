@@ -226,7 +226,7 @@ abstract
     ( not-is-negative-is-nonnegative-ℚ , is-nonnegative-not-is-negative-ℚ)
 ```
 
-### A rational number cannot be negative and positive
+### A positive rational number is not negative
 
 ```agda
 abstract

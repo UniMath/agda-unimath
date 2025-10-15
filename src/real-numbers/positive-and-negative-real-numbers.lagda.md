@@ -56,7 +56,7 @@ neg-ℝ⁺ (x , is-pos-x) = (neg-ℝ x , neg-is-positive-ℝ x is-pos-x)
 ```agda
 abstract
   neg-is-negative-ℝ :
-    {l : Level} → (x : ℝ l) → is-negative-ℝ x → is-positive-ℝ (neg-ℝ x)
+    {l : Level} (x : ℝ l) → is-negative-ℝ x → is-positive-ℝ (neg-ℝ x)
   neg-is-negative-ℝ x x<0 =
     tr
       ( λ z → le-ℝ z (neg-ℝ x))

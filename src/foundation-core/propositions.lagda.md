@@ -417,7 +417,7 @@ $n$-[types](foundation-core.truncated-types.md).
 | [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ-Prop`                          |
 | [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π-Prop`                          |
 | [Functions](foundation-core.function-types.md)              | `→`               | `⇒`                               |
-| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `⇔`                               |
+| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`              | `⇔`                               |
 | [Product](foundation-core.cartesian-product-types.md)       | `×`               | `product-Prop`                    |
 | [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `join-Prop`                       |
 | [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`              |
