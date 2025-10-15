@@ -49,21 +49,24 @@ this relation is antisymmetric and hence defines a
 ### Complemented boundedness of the cardinality of a set
 
 ```agda
-leq-complemented-prop-cardinal' :
-  {l1 l2 : Level} → Set l1 → cardinal l2 → Prop (l1 ⊔ l2)
-leq-complemented-prop-cardinal' {l1} {l2} X =
-  map-universal-property-trunc-Set
-    ( Prop-Set (l1 ⊔ l2))
-    ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
+module _
+  {l1 l2 : Level} (X : Set l1)
+  where
 
-compute-leq-complemented-prop-cardinal' :
-  {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
-  ( leq-complemented-prop-cardinal' X (cardinality Y)) ＝
-  ( mere-decidable-emb-Prop (type-Set X) (type-Set Y))
-compute-leq-complemented-prop-cardinal' {l1} {l2} X =
-  triangle-universal-property-trunc-Set
-    ( Prop-Set (l1 ⊔ l2))
-    ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
+  leq-complemented-prop-cardinal' : cardinal l2 → Prop (l1 ⊔ l2)
+  leq-complemented-prop-cardinal' =
+    map-universal-property-trunc-Set
+      ( Prop-Set (l1 ⊔ l2))
+      ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
+
+  compute-leq-complemented-prop-cardinal' :
+    (Y : Set l2) →
+    leq-complemented-prop-cardinal' (cardinality Y) ＝
+    mere-decidable-emb-Prop (type-Set X) (type-Set Y)
+  compute-leq-complemented-prop-cardinal' =
+    triangle-universal-property-trunc-Set
+      ( Prop-Set (l1 ⊔ l2))
+      ( λ Y' → mere-decidable-emb-Prop (type-Set X) (type-Set Y'))
 ```
 
 ### Complemented inequality of cardinals
@@ -112,17 +115,21 @@ module _
   is-prop-leq-complemented-cardinality =
     is-prop-leq-complemented-cardinal
 
+  compute-leq-complemented-prop-cardinality' :
+    leq-complemented-prop-cardinality ＝
+    mere-decidable-emb-Prop (type-Set X) (type-Set Y)
+  compute-leq-complemented-prop-cardinality' =
+    ( htpy-eq
+      ( triangle-universal-property-trunc-Set
+        ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+        ( leq-complemented-prop-cardinal') X) (cardinality Y)) ∙
+    ( compute-leq-complemented-prop-cardinal' X Y)
+
   compute-leq-complemented-cardinality' :
     leq-complemented-cardinality ＝
     mere-decidable-emb (type-Set X) (type-Set Y)
   compute-leq-complemented-cardinality' =
-    ap
-      ( type-Prop)
-      ( ( htpy-eq
-          ( triangle-universal-property-trunc-Set
-            ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-            ( leq-complemented-prop-cardinal') X) (cardinality Y)) ∙
-        ( compute-leq-complemented-prop-cardinal' X Y))
+    ap type-Prop compute-leq-complemented-prop-cardinality'
 
   compute-leq-complemented-cardinality :
     leq-complemented-cardinality ≃

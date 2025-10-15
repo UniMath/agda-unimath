@@ -46,21 +46,24 @@ cardinalites.
 ### Boundedness of the cardinality of a set
 
 ```agda
-leq-prop-cardinal' :
-  {l1 l2 : Level} → Set l1 → cardinal l2 → Prop (l1 ⊔ l2)
-leq-prop-cardinal' {l1} {l2} X =
-  map-universal-property-trunc-Set
-    ( Prop-Set (l1 ⊔ l2))
-    ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
+module _
+  {l1 l2 : Level} (X : Set l1)
+  where
 
-compute-leq-prop-cardinal' :
-  {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
-  ( leq-prop-cardinal' X (cardinality Y)) ＝
-  ( mere-emb-Prop (type-Set X) (type-Set Y))
-compute-leq-prop-cardinal' {l1} {l2} X =
-  triangle-universal-property-trunc-Set
-    ( Prop-Set (l1 ⊔ l2))
-    ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
+  leq-prop-cardinal' : cardinal l2 → Prop (l1 ⊔ l2)
+  leq-prop-cardinal' =
+    map-universal-property-trunc-Set
+      ( Prop-Set (l1 ⊔ l2))
+      ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
+
+  compute-leq-prop-cardinal' :
+    (Y : Set l2) →
+    leq-prop-cardinal' (cardinality Y) ＝
+    mere-emb-Prop (type-Set X) (type-Set Y)
+  compute-leq-prop-cardinal' =
+    triangle-universal-property-trunc-Set
+      ( Prop-Set (l1 ⊔ l2))
+      ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
 ```
 
 ### Inequality of cardinals
@@ -100,20 +103,23 @@ module _
   is-prop-leq-cardinality : is-prop leq-cardinality
   is-prop-leq-cardinality = is-prop-leq-cardinal
 
-  compute-leq-cardinality' :
+  eq-compute-leq-prop-cardinality :
+    leq-prop-cardinality ＝ mere-emb-Prop (type-Set X) (type-Set Y)
+  eq-compute-leq-prop-cardinality =
+    ( htpy-eq
+      ( triangle-universal-property-trunc-Set
+        ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
+        ( leq-prop-cardinal') X) (cardinality Y)) ∙
+    ( compute-leq-prop-cardinal' X Y)
+
+  eq-compute-leq-cardinality :
     leq-cardinality ＝ mere-emb (type-Set X) (type-Set Y)
-  compute-leq-cardinality' =
-    ap
-      ( type-Prop)
-      ( ( htpy-eq
-          ( triangle-universal-property-trunc-Set
-            ( hom-set-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
-            ( leq-prop-cardinal') X) (cardinality Y)) ∙
-        ( compute-leq-prop-cardinal' X Y))
+  eq-compute-leq-cardinality =
+    ap type-Prop eq-compute-leq-prop-cardinality
 
   compute-leq-cardinality :
     leq-cardinality ≃ mere-emb (type-Set X) (type-Set Y)
-  compute-leq-cardinality = equiv-eq compute-leq-cardinality'
+  compute-leq-cardinality = equiv-eq eq-compute-leq-cardinality
 
   unit-leq-cardinality :
     mere-emb (type-Set X) (type-Set Y) → leq-cardinality
