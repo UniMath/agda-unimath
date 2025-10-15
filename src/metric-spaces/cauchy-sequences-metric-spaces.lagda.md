@@ -36,9 +36,9 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
@@ -677,7 +677,7 @@ module _
       ( u)
 ```
 
-### Cartesian products of Cauchy sequences
+### The zip of Cauchy sequences
 
 ```agda
 module _
@@ -687,9 +687,10 @@ module _
 
   seq-product-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space (product-Metric-Space A B)
-  seq-product-cauchy-sequence-Metric-Space n =
-    ( map-cauchy-sequence-Metric-Space A u n ,
-      map-cauchy-sequence-Metric-Space B v n)
+  seq-product-cauchy-sequence-Metric-Space =
+    zip-sequence
+      ( map-cauchy-sequence-Metric-Space A u)
+      ( map-cauchy-sequence-Metric-Space B v)
 
   abstract
     is-cauchy-seq-product-cauchy-sequence-Metric-Space :

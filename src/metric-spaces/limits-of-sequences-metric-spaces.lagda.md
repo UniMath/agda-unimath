@@ -13,6 +13,7 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -27,6 +28,7 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.sequences-metric-spaces
@@ -357,6 +359,85 @@ module _
       ( map-short-function-Metric-Space A B f lim)
   short-map-limit-sequence-Metric-Space =
     map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
+```
+
+### If two sequences have limits in metric spaces, their zip has a limit in the product space
+
+The converse has yet to be proved.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (u : sequence-type-Metric-Space A)
+  (lim-u : type-Metric-Space A)
+  (mod-lim-u : limit-modulus-sequence-Metric-Space A u lim-u)
+  (v : sequence-type-Metric-Space B)
+  (lim-v : type-Metric-Space B)
+  (mod-lim-v : limit-modulus-sequence-Metric-Space B v lim-v)
+  where
+
+  abstract
+    limit-modulus-zip-sequence-Metric-Space :
+      limit-modulus-sequence-Metric-Space
+        ( product-Metric-Space A B)
+        ( zip-sequence u v)
+        ( lim-u , lim-v)
+    limit-modulus-zip-sequence-Metric-Space =
+      let
+        (mu , is-mod-mu) = mod-lim-u
+        (mv , is-mod-mv) = mod-lim-v
+      in
+        ( ( λ ε → max-ℕ (mu ε) (mv ε)) ,
+          ( λ ε n N≤n →
+            ( is-mod-mu ε n
+                ( transitive-leq-ℕ
+                  ( mu ε)
+                  ( max-ℕ (mu ε) (mv ε))
+                  ( n)
+                  ( N≤n)
+                  ( left-leq-max-ℕ (mu ε) (mv ε))) ,
+              is-mod-mv ε n
+                ( transitive-leq-ℕ
+                  ( mv ε)
+                  ( max-ℕ (mu ε) (mv ε))
+                  ( n)
+                  ( N≤n)
+                  ( right-leq-max-ℕ (mu ε) (mv ε))))))
+
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (u : sequence-type-Metric-Space A)
+  (lim-u : type-Metric-Space A)
+  (is-lim-u : is-limit-sequence-Metric-Space A u lim-u)
+  (v : sequence-type-Metric-Space B)
+  (lim-v : type-Metric-Space B)
+  (is-lim-v : is-limit-sequence-Metric-Space B v lim-v)
+  where
+
+  is-limit-zip-sequence-Metric-Space :
+    is-limit-sequence-Metric-Space
+      ( product-Metric-Space A B)
+      ( zip-sequence u v)
+      ( lim-u , lim-v)
+  is-limit-zip-sequence-Metric-Space =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-limit-prop-sequence-Metric-Space
+            ( product-Metric-Space A B)
+            ( zip-sequence u v)
+            ( lim-u , lim-v))
+    in do
+      mod-u ← is-lim-u
+      mod-v ← is-lim-v
+      unit-trunc-Prop
+        ( limit-modulus-zip-sequence-Metric-Space A B
+          ( u)
+          ( lim-u)
+          ( mod-u)
+          ( v)
+          ( lim-v)
+          ( mod-v))
 ```
 
 ## See also

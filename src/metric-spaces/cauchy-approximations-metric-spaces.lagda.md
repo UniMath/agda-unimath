@@ -20,10 +20,10 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 ```
 
 </details>

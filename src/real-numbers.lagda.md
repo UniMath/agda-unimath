@@ -14,6 +14,7 @@ open import real-numbers.arithmetically-located-dedekind-cuts public
 open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
+open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
@@ -28,6 +29,7 @@ open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers publ
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
+open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
