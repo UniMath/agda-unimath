@@ -44,18 +44,25 @@ theory, and [Russell's paradox](set-theory.russells-paradox.md).
 ```agda
 module set-theory where
 
+open import set-theory.addition-cardinalities public
 open import set-theory.baire-space public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinalities public
+open import set-theory.cardinality-projective-sets public
 open import set-theory.complemented-inequality-cardinalities public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
+open import set-theory.dependent-products-cardinals public
+open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinalities public
 open import set-theory.inequality-cardinalities public
 open import set-theory.infinite-sets public
 open import set-theory.russells-paradox public
+open import set-theory.strict-complemented-boundedness-cardinalities public
+open import set-theory.strict-complemented-inequality-cardinalities public
 open import set-theory.uncountable-sets public
+open import set-theory.zero-cardinal public
 ```
 
 ## References

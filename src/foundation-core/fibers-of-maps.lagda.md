@@ -386,6 +386,9 @@ module _
   pr1 (map-inv-compute-fiber-comp t) = pr1 (pr2 t)
   pr2 (map-inv-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
+  inclusion-fiber-comp : (t : fiber g x) → fiber h (pr1 t) → fiber (g ∘ h) x
+  inclusion-fiber-comp t s = map-inv-compute-fiber-comp (t , s)
+
   is-section-map-inv-compute-fiber-comp :
     is-section map-compute-fiber-comp map-inv-compute-fiber-comp
   is-section-map-inv-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
