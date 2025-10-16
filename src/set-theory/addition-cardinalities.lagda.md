@@ -1,4 +1,4 @@
-# Coproducts of cardinalities
+# Addition of cardinalities
 
 ```agda
 module set-theory.addition-cardinalities where
@@ -51,8 +51,8 @@ open import set-theory.zero-cardinal
 
 ## Idea
 
-Given two [cardinals](set-theory.cardinalities.lagda.md) `A` and `B`, we may
-form their {{#concept "sum" Disambiguation="cardinal"  Agda=add-Cardinal}}, or
+Given two [cardinals](set-theory.cardinalities.md) `A` and `B`, we may form
+their {{#concept "sum" Disambiguation="cardinal"  Agda=add-Cardinal}}, or
 **coproduct** cardinal, `A + B`. It is defined on isomorphism classes as
 [coproducts](foundation-core.coproduct-types.md) of
 [sets](foundation-core.sets.md).

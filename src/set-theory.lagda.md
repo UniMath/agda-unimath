@@ -58,6 +58,7 @@ open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinalities public
 open import set-theory.inequality-cardinalities public
 open import set-theory.infinite-sets public
+open import set-theory.inhabited-cardinals public
 open import set-theory.russells-paradox public
 open import set-theory.strict-complemented-boundedness-cardinalities public
 open import set-theory.strict-complemented-inequality-cardinalities public

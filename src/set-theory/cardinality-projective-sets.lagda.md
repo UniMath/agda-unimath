@@ -29,8 +29,8 @@ open import set-theory.cardinalities
 For every type $X$ there is a map $║ X → Set ║₀ → (X → Cardinal)$. We call sets
 $X$ for which this map has a section
 {{#concept "cardinality-projective" Disamibguation="sets"}}. Over such types we
-may form [dependent sum](set-theory.dependent-sums-cardinalities.md) and
-[dependent product](set-theory.dependent-products-cardinalities.md) cardinals.
+may form [dependent sum](set-theory.dependent-sums-cardinals.md) and
+[dependent product](set-theory.dependent-products-cardinals.md) cardinals.
 
 Note that classically, the universe of sets is itself a set, and so trivially
 $║ X → Set ║₀ → (X → ║ Set ║₀)$ is an equivalence. However, with univalence,
