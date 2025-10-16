@@ -23,6 +23,7 @@ open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import set-theory.cardinalities
+open import set-theory.equality-cardinalities
 open import set-theory.inequality-cardinalities
 
 open import univalent-combinatorics.dedekind-finite-sets
