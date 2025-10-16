@@ -63,6 +63,24 @@ module _
 
 ## Properties
 
+### Fibers of compositions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (g : B → X) (h : A → B) {x : X}
+  where
+
+  inclusion-fiber-comp : (t : fiber g x) → fiber h (pr1 t) → fiber (g ∘ h) x
+  inclusion-fiber-comp (b , q) (a , p) = (a , ap g p ∙ q)
+
+  left-fiber-comp : fiber (g ∘ h) x → fiber g x
+  left-fiber-comp (a , r) = (h a , r)
+
+  right-fiber-comp : (q : fiber (g ∘ h) x) → fiber h (pr1 (left-fiber-comp q))
+  right-fiber-comp (a , r) = (a , refl)
+```
+
 ### Characterization of the identity types of the fibers of a map
 
 #### The case of `fiber`
@@ -376,18 +394,11 @@ module _
 
   map-compute-fiber-comp :
     fiber (g ∘ h) x → Σ (fiber g x) (λ t → fiber h (pr1 t))
-  pr1 (pr1 (map-compute-fiber-comp (a , p))) = h a
-  pr2 (pr1 (map-compute-fiber-comp (a , p))) = p
-  pr1 (pr2 (map-compute-fiber-comp (a , p))) = a
-  pr2 (pr2 (map-compute-fiber-comp (a , p))) = refl
+  map-compute-fiber-comp t = (left-fiber-comp g h t , right-fiber-comp g h t)
 
   map-inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) → fiber (g ∘ h) x
-  pr1 (map-inv-compute-fiber-comp t) = pr1 (pr2 t)
-  pr2 (map-inv-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
-
-  inclusion-fiber-comp : (t : fiber g x) → fiber h (pr1 t) → fiber (g ∘ h) x
-  inclusion-fiber-comp t s = map-inv-compute-fiber-comp (t , s)
+  map-inv-compute-fiber-comp (t , s) = inclusion-fiber-comp g h t s
 
   is-section-map-inv-compute-fiber-comp :
     is-section map-compute-fiber-comp map-inv-compute-fiber-comp
