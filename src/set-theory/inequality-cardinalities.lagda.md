@@ -177,8 +177,9 @@ module _
 
 ### Assuming excluded middle, then inequality is antisymmetric
 
-Using the previous result and assuming excluded middle, we can conclude
-`leq-Cardinal` is a partial order by showing that it is antisymmetric.
+Using that mere equivalence characterizes equality of cardinals we can conclude
+by the Cantor–Schröder–Bernstein theorem, assuming the law of excluded middle,
+that `leq-Cardinal` is antisymmetric and hence a partial order.
 
 ```agda
 module _
