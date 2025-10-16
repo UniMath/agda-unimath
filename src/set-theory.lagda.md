@@ -51,6 +51,7 @@ open import set-theory.cardinalities public
 open import set-theory.complemented-inequality-cardinalities public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
+open import set-theory.equality-cardinalities public
 open import set-theory.inequality-cardinalities public
 open import set-theory.infinite-sets public
 open import set-theory.russells-paradox public

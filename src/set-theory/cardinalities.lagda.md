@@ -54,24 +54,6 @@ cardinality : {l : Level} → Set l → Cardinal l
 cardinality A = unit-trunc-Set A
 ```
 
-## Properties
-
-### Equality of cardinalities is equivalent to mere equivalence
-
-```agda
-is-effective-cardinality :
-  {l : Level} (X Y : Set l) →
-  (cardinality X ＝ cardinality Y) ≃ mere-equiv (type-Set X) (type-Set Y)
-is-effective-cardinality X Y =
-  ( equiv-trunc-Prop (extensionality-Set X Y)) ∘e
-  ( is-effective-unit-trunc-Set (Set _) X Y)
-
-eq-mere-equiv-cardinality :
-  {l : Level} (X Y : Set l) →
-  mere-equiv (type-Set X) (type-Set Y) → cardinality X ＝ cardinality Y
-eq-mere-equiv-cardinality X Y = map-inv-equiv (is-effective-cardinality X Y)
-```
-
 ## External links
 
 - [Cardinality](https://en.wikipedia.org/wiki/Cardinality) at Wikipedia
