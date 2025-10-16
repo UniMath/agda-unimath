@@ -74,7 +74,7 @@ module _
   is-small-map-Prop = is-small-map l f , is-prop-is-small-map
 ```
 
-### Small maps are closed under retracts
+### Small maps are closed under retracts of maps
 
 ```agda
 module _

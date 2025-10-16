@@ -18,6 +18,7 @@ open import foundation.large-locale-of-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.raising-universe-levels
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type

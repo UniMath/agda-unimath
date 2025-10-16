@@ -26,16 +26,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-A lower bound for a type family `P` over the natural numbers is a natural number
-`n` such that `P x → n ≤ x` for all `x : ℕ`.
+A
+{{#concept "lower bound" Disambiguation="for a type family over ℕ" Agda=is-lower-bound-ℕ}}
+for a type family `P` over the
+[natural numbers](elementary-number-theory.natural-numbers.md) is a natural
+number `n` such that `P x → n ≤ x` for all `x : ℕ`.
 
 ## Definition
 
 ```agda
 is-lower-bound-ℕ :
   {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
-is-lower-bound-ℕ P n =
-  (m : ℕ) → P m → leq-ℕ n m
+is-lower-bound-ℕ P n = (m : ℕ) → P m → leq-ℕ n m
 ```
 
 ## Properties
