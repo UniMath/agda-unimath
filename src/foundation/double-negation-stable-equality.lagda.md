@@ -25,10 +25,9 @@ open import logic.double-negation-dense-subtypes
 ## Idea
 
 A type `A` is said to have
-{{#concept "double negation stable equality" Disambiguation="type" Agda=has-double-negation-stable-equality}}
-if `x ＝ y` has
-[double negation elimination](logic.double-negation-elimination.md) for every
-`x y : A`. By the
+{{#concept "double negation stable equality" Disambiguation="type"}} if `x ＝ y`
+has [double negation elimination](logic.double-negation-elimination.md) for
+every `x y : A`. By the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
 types with double negation stable equality are [sets](foundation-core.sets.md).
 
