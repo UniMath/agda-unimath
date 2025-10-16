@@ -23,6 +23,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import set-theory.cardinalities
+open import set-theory.equality-cardinalities
 ```
 
 </details>

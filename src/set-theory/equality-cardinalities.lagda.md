@@ -34,7 +34,8 @@ Two [cardinals of sets](set-theory.cardinalities.md) `X` and `Y` are
 {{#concept "similar" Disambiguation="cardinals" Agda=sim-Cardinal}} if there
 [merely](foundation.inhabited-types.md) is an
 [equivalence](foundation-core.equivalences.md) between any two representing two
-types.
+types. This characterizes [equality](foundation-core.identity-types.md) of
+cardinals.
 
 ## Definition
 
@@ -195,16 +196,27 @@ eq-mere-equiv-cardinality X Y = map-inv-equiv (is-effective-cardinality X Y)
 ### Similarity of cardinals is reflexive
 
 ```agda
+refl-sim-cardinality : {l : Level} (X : Set l) → sim-cardinality X X
+refl-sim-cardinality X = unit-sim-cardinality X X (refl-mere-equiv (type-Set X))
+
 refl-sim-Cardinal : {l : Level} (X : Cardinal l) → sim-Cardinal X X
 refl-sim-Cardinal =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → sim-set-Cardinal X X)
-    ( λ X → unit-sim-cardinality X X (refl-mere-equiv (type-Set X)))
+    ( refl-sim-cardinality)
 ```
 
 ### Similarity of cardinals is symmetric
 
 ```agda
+symmetric-sim-cardinality :
+  {l1 l2 : Level}
+  (X : Set l1) (Y : Set l2) →
+  sim-cardinality X Y → sim-cardinality Y X
+symmetric-sim-cardinality X Y p =
+  unit-sim-cardinality Y X
+    ( symmetric-sim-cardinality' X Y (inv-unit-sim-cardinality X Y p))
+
 abstract
   symmetric-sim-Cardinal :
     {l1 l2 : Level}
@@ -213,14 +225,22 @@ abstract
   symmetric-sim-Cardinal =
     apply-twice-dependent-universal-property-trunc-Set'
       ( λ X Y → hom-set-Set (sim-set-Cardinal X Y) (sim-set-Cardinal Y X))
-      ( λ X Y p →
-        unit-sim-cardinality Y X
-          ( symmetric-sim-cardinality' X Y (inv-unit-sim-cardinality X Y p)))
+      ( symmetric-sim-cardinality)
 ```
 
 ### Similarity of cardinals is transitive
 
 ```agda
+transitive-sim-cardinality :
+  {l1 l2 l3 : Level}
+  (X : Set l1) (Y : Set l2) (Z : Set l3) →
+  sim-cardinality Y Z → sim-cardinality X Y → sim-cardinality X Z
+transitive-sim-cardinality X Y Z p q =
+  unit-sim-cardinality X Z
+    ( transitive-sim-cardinality' X Y Z
+      ( inv-unit-sim-cardinality Y Z p)
+      ( inv-unit-sim-cardinality X Y q))
+
 abstract
   transitive-sim-Cardinal :
     {l1 l2 l3 : Level}
@@ -232,11 +252,7 @@ abstract
         hom-set-Set
           ( sim-set-Cardinal Y Z)
           ( hom-set-Set (sim-set-Cardinal X Y) (sim-set-Cardinal X Z)))
-      ( λ X Y Z p q →
-        unit-sim-cardinality X Z
-          ( transitive-sim-cardinality' X Y Z
-            ( inv-unit-sim-cardinality Y Z p)
-            ( inv-unit-sim-cardinality X Y q)))
+      ( transitive-sim-cardinality)
 ```
 
 ### Similarity of cardinals is extensional
@@ -250,6 +266,15 @@ module _
       (X Y : Cardinal l) → X ＝ Y → sim-Cardinal X Y
   sim-eq-Cardinal X .X refl = refl-sim-Cardinal X
 
+  sim-eq-cardinality :
+      (X Y : Set l) → cardinality X ＝ cardinality Y → sim-cardinality X Y
+  sim-eq-cardinality X Y = sim-eq-Cardinal (cardinality X) (cardinality Y)
+
+  eq-sim-cardinality :
+    (X Y : Set l) → sim-cardinality X Y → cardinality X ＝ cardinality Y
+  eq-sim-cardinality X Y p =
+    eq-mere-equiv-cardinality X Y (inv-unit-sim-cardinality X Y p)
+
   abstract
     eq-sim-Cardinal :
       (X Y : Cardinal l) → sim-Cardinal X Y → X ＝ Y
@@ -259,8 +284,7 @@ module _
           hom-set-Set
             ( sim-set-Cardinal X Y)
             ( set-Prop (Id-Prop (Cardinal-Set l) X Y)))
-        ( λ X Y p →
-          eq-mere-equiv-cardinality X Y (inv-unit-sim-cardinality X Y p))
+        ( eq-sim-cardinality)
 
   abstract
     antisymmetric-sim-Cardinal :
