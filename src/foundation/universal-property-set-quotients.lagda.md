@@ -214,7 +214,8 @@ module _
     is-surjective-and-effective R q → is-locally-small l2 (type-Set B)
   is-locally-small-is-surjective-and-effective e x y =
     apply-twice-universal-property-trunc-Prop
-      ( pr1 e x) ( pr1 e y)
+      ( pr1 e x)
+      ( pr1 e y)
       ( is-small-Prop l2 (x ＝ y))
       ( α)
     where
