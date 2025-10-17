@@ -10,6 +10,7 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-positive-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
@@ -443,7 +444,9 @@ module _
                 ( inv-le-ℚ⁺ p⁺ q⁺ p<q)))
         ( λ is-nonpos-p →
           inl-disjunction
-            ( ex-falso ∘ not-is-positive-is-nonpositive-ℚ is-nonpos-p))
+            ( λ is-pos-p →
+              ex-falso
+                ( is-not-positive-and-nonpositive-ℚ (is-pos-p , is-nonpos-p))))
         ( decide-is-positive-is-nonpositive-ℚ p)
 
   opaque

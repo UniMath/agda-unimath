@@ -32,7 +32,7 @@ of a
 ```agda
 neg-closed-interval-ℚ : closed-interval-ℚ → closed-interval-ℚ
 neg-closed-interval-ℚ ((a , b) , a≤b) =
-  ((neg-ℚ b , neg-ℚ a) , neg-leq-ℚ a b a≤b)
+  ((neg-ℚ b , neg-ℚ a) , neg-leq-ℚ a≤b)
 ```
 
 ## Properties
@@ -48,7 +48,7 @@ abstract
       ( neg-closed-interval-ℚ [a,b])
       ( neg-closed-interval-ℚ [c,d])
   is-interior-neg-closed-interval-ℚ ((a , b) , _) ((c , d) , _) (a<c , d<b) =
-    ( neg-le-ℚ d b d<b , neg-le-ℚ a c a<c)
+    ( neg-le-ℚ d<b , neg-le-ℚ a<c)
 ```
 
 ### Negation preserves nontriviality
@@ -58,5 +58,5 @@ abstract
   is-nontrivial-neg-closed-interval-ℚ :
     ([a,b] : closed-interval-ℚ) → is-proper-closed-interval-ℚ [a,b] →
     is-proper-closed-interval-ℚ (neg-closed-interval-ℚ [a,b])
-  is-nontrivial-neg-closed-interval-ℚ ((a , b) , _) a<b = neg-le-ℚ a b a<b
+  is-nontrivial-neg-closed-interval-ℚ ((a , b) , _) a<b = neg-le-ℚ a<b
 ```

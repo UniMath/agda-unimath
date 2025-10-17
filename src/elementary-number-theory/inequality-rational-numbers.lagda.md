@@ -340,9 +340,7 @@ module _
   where
 
   opaque
-    unfolding add-ℚ
-    unfolding leq-ℚ-Prop
-    unfolding neg-ℚ
+    unfolding add-ℚ leq-ℚ-Prop neg-ℚ
 
     iff-translate-diff-leq-zero-ℚ : leq-ℚ zero-ℚ (y -ℚ x) ↔ leq-ℚ x y
     iff-translate-diff-leq-zero-ℚ =
@@ -445,11 +443,10 @@ abstract
 
 ```agda
 opaque
-  unfolding leq-ℚ-Prop
-  unfolding neg-ℚ
+  unfolding leq-ℚ-Prop neg-ℚ
 
-  neg-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
-  neg-leq-ℚ x y = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+  neg-leq-ℚ : {x y : ℚ} → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+  neg-leq-ℚ {x} {y} = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ### Transposing additions on inequalities of rational numbers

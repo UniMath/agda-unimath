@@ -39,10 +39,10 @@ abstract
   is-positive-min-ℚ :
     {p q : ℚ} → is-positive-ℚ p → is-positive-ℚ q → is-positive-ℚ (min-ℚ p q)
   is-positive-min-ℚ {p} {q} is-pos-p is-pos-q =
-    is-positive-le-zero-ℚ _
+    is-positive-le-zero-ℚ
       ( le-min-le-both-ℚ zero-ℚ p q
-        ( le-zero-is-positive-ℚ p is-pos-p)
-        ( le-zero-is-positive-ℚ q is-pos-q))
+        ( le-zero-is-positive-ℚ is-pos-p)
+        ( le-zero-is-positive-ℚ is-pos-q))
 
 min-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
 min-ℚ⁺ (p , is-pos-p) (q , is-pos-q) =
