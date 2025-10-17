@@ -1,0 +1,12 @@
+blacklist
+couldn
+crate
+hom
+homs
+iff
+intensional
+intensionality
+intensionally
+lets
+master
+whitelist

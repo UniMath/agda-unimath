@@ -118,6 +118,12 @@ finite-enumeration-equiv (n , Fin-n↠X) X≃Y =
   ( n ,
     map-equiv X≃Y ∘ map-surjection Fin-n↠X ,
     is-surjective-left-comp-equiv X≃Y (is-surjective-map-surjection Fin-n↠X))
+
+is-finitely-enumerable-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
+  is-finitely-enumerable X → is-finitely-enumerable Y
+is-finitely-enumerable-equiv X≃Y =
+  map-is-inhabited (λ eX → finite-enumeration-equiv eX X≃Y)
 ```
 
 ### Finitely enumerable types with decidable equality are finite
@@ -238,7 +244,7 @@ abstract
     finite-enumeration (X + Y) → finite-enumeration Y
   finite-enumeration-right-summand eX+Y =
     finite-enumeration-left-summand
-      ( finite-enumeration-equiv eX+Y (commutative-coproduct _ _))
+      ( finite-enumeration-equiv eX+Y commutative-coproduct)
 
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →

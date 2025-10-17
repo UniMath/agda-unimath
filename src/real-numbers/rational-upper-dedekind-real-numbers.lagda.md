@@ -60,4 +60,7 @@ module _
   pr1 upper-real-ℚ = cut-upper-real-ℚ
   pr1 (pr2 upper-real-ℚ) = is-inhabited-cut-upper-real-ℚ
   pr2 (pr2 upper-real-ℚ) = is-rounded-cut-upper-real-ℚ
+
+zero-upper-ℝ : upper-ℝ lzero
+zero-upper-ℝ = upper-real-ℚ zero-ℚ
 ```

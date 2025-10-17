@@ -17,9 +17,11 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
@@ -28,6 +30,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -284,6 +287,51 @@ module _
   pr2 iff-leq-left-rational-fraction-ℤ = reflects-leq-left-rational-fraction-ℤ
 ```
 
+### The canonical map from integers to the rational numbers preserves and reflects inequality
+
+```agda
+opaque
+  unfolding leq-ℚ-Prop
+
+  preserves-leq-rational-ℤ :
+    (x y : ℤ) → leq-ℤ x y → leq-ℚ (rational-ℤ x) (rational-ℤ y)
+  preserves-leq-rational-ℤ x y =
+    binary-tr leq-ℤ
+      ( inv (right-unit-law-mul-ℤ x))
+      ( inv (right-unit-law-mul-ℤ y))
+
+  reflects-leq-rational-ℤ :
+    (x y : ℤ) → leq-ℚ (rational-ℤ x) (rational-ℤ y) → leq-ℤ x y
+  reflects-leq-rational-ℤ x y =
+    binary-tr leq-ℤ
+      ( right-unit-law-mul-ℤ x)
+      ( right-unit-law-mul-ℤ y)
+
+  iff-leq-rational-ℤ :
+    (x y : ℤ) → leq-ℤ x y ↔ leq-ℚ (rational-ℤ x) (rational-ℤ y)
+  pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ x y
+  pr2 (iff-leq-rational-ℤ x y) = reflects-leq-rational-ℤ x y
+```
+
+### The canonical map from natural numbers to the rational numbers preserves and reflects inequality
+
+```agda
+abstract
+  iff-leq-rational-ℕ :
+    (x y : ℕ) → leq-ℕ x y ↔ leq-ℚ (rational-ℕ x) (rational-ℕ y)
+  iff-leq-rational-ℕ x y =
+    iff-leq-rational-ℤ (int-ℕ x) (int-ℕ y) ∘iff
+    iff-leq-int-ℕ x y
+
+  preserves-leq-rational-ℕ :
+    (x y : ℕ) → leq-ℕ x y → leq-ℚ (rational-ℕ x) (rational-ℕ y)
+  preserves-leq-rational-ℕ x y = forward-implication (iff-leq-rational-ℕ x y)
+
+  reflects-leq-rational-ℕ :
+    (x y : ℕ) → leq-ℚ (rational-ℕ x) (rational-ℕ y) → leq-ℕ x y
+  reflects-leq-rational-ℕ x y = backward-implication (iff-leq-rational-ℕ x y)
+```
+
 ### `x ≤ y` if and only if `0 ≤ y - x`
 
 ```agda
@@ -432,6 +480,10 @@ abstract
       ( y)
       ( x≤y+z)
 
+  leq-transpose-right-add-ℚ' : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ y ≤-ℚ z
+  leq-transpose-right-add-ℚ' x y z x≤y+z =
+    leq-transpose-right-add-ℚ x z y (tr (leq-ℚ x) (commutative-add-ℚ _ _) x≤y+z)
+
   leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
   leq-transpose-left-add-ℚ x y z x+y≤z =
     leq-transpose-is-retraction-hom-Poset
@@ -443,6 +495,11 @@ abstract
       ( x)
       ( z)
       ( x+y≤z)
+
+  leq-transpose-left-add-ℚ' : (x y z : ℚ) → x +ℚ y ≤-ℚ z → y ≤-ℚ z -ℚ x
+  leq-transpose-left-add-ℚ' x y z x+y≤z =
+    leq-transpose-left-add-ℚ y x z
+      ( tr (λ w → leq-ℚ w z) (commutative-add-ℚ _ _) x+y≤z)
 
   leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
   leq-transpose-left-diff-ℚ x y z x-y≤z =

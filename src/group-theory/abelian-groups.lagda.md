@@ -539,6 +539,18 @@ module _
     is-unit-right-div-eq-Group (group-Ab A)
 ```
 
+### If `x + y = 0`, then `y = -x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  unique-right-inv-Ab :
+    {x y : type-Ab A} → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+  unique-right-inv-Ab {x} {y} = unique-right-inv-Group (group-Ab A) x y
+```
+
 ### The negative of `-x + y` is `-y + x`
 
 ```agda

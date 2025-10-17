@@ -193,5 +193,5 @@ module _
           ( equiv-funext)
           ( λ _ →
             equiv-tot (λ _ → inv-equiv (equiv-right-whisker-concat refl))))) ∘e
-    ( associative-Σ _ _ _)
+    ( associative-Σ)
 ```

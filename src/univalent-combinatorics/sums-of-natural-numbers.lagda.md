@@ -50,7 +50,7 @@ abstract
     ( ( double-counting-equiv
         ( count-Σ count-A (λ x → count-Σ (count-B x) (λ y → count-Fin (f x y))))
         ( count-Σ (count-Σ count-A count-B) (λ x → count-Fin (ind-Σ f x)))
-        ( inv-associative-Σ A B (λ x → Fin (ind-Σ f x)))) ∙
+        ( inv-associative-Σ)) ∙
       ( number-of-elements-count-Σ
         ( count-Σ count-A count-B)
         ( λ x → (count-Fin (ind-Σ f x)))))

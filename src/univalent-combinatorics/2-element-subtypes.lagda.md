@@ -126,7 +126,7 @@ module _
     Fin 2 ≃ type-standard-2-Element-Subtype
   equiv-type-standard-2-Element-Subtype =
     ( inv-equiv
-      ( left-distributive-Σ-coproduct (type-Set X) (Id x) (Id y))) ∘e
+      ( left-distributive-Σ-coproduct)) ∘e
     ( equiv-coproduct
       ( equiv-is-contr
         ( is-contr-Fin-1)

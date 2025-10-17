@@ -11,12 +11,14 @@ module elementary-number-theory.archimedean-property-positive-rational-numbers w
 ```agda
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
@@ -34,9 +36,9 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "Archimedean property" Disambiguation="positive rational numbers" Agda=archimedean-property-ℚ⁺}}
-of `ℚ⁺` is that for any two
+of the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`x y : ℚ⁺`, there is a
+is that for any `x y : ℚ⁺`, there is a
 [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md)
 `n` such that `y` is
 [less than](elementary-number-theory.strict-inequality-rational-numbers.md) `n`

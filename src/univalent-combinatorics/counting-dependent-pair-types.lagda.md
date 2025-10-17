@@ -67,7 +67,7 @@ count-Σ-Fin 0 f = count-is-empty pr1
 count-Σ-Fin (succ-ℕ k) {B} f =
   count-equiv'
     ( ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr))) ∘e
-      ( right-distributive-Σ-coproduct (Fin k) unit B))
+      ( right-distributive-Σ-coproduct B))
     ( count-coproduct (count-Σ-Fin k (f ∘ inl)) (f (inr star)))
 
 count-Σ' :
@@ -148,9 +148,7 @@ count-fiber-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
     ( ( ( left-unit-law-Σ-is-contr
             ( is-torsorial-Id' y)
             ( pair y refl)) ∘e
-        ( inv-associative-Σ A
-          ( λ x → x ＝ y)
-          ( λ t → tr B (pr2 t) (b (pr1 t)) ＝ z))) ∘e
+        ( inv-associative-Σ)) ∘e
       ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
     ( count-eq (has-decidable-equality-count (f y)) (b y) z)
 
@@ -196,8 +194,7 @@ count-base-count-Σ' {l1} {l2} {A} {B} e f g =
   count-base-count-Σ
     ( section-count-base-count-Σ' e f g)
     ( count-equiv'
-      ( left-distributive-Σ-coproduct A B
-        ( λ x → is-zero-ℕ (number-of-elements-count (f x))))
+      ( left-distributive-Σ-coproduct)
       ( count-coproduct e g))
     ( λ x →
       count-coproduct

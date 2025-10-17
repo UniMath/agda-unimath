@@ -10,14 +10,22 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.full-subtypes
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.large-locale-of-subtypes
+open import foundation.logical-equivalences
 open import foundation.powersets
+open import foundation.raising-universe-levels
+open import foundation.similarity-subtypes
+open import foundation.subtypes
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
-open import foundation-core.subtypes
 
 open import order-theory.greatest-lower-bounds-large-posets
 ```
@@ -93,7 +101,7 @@ module _
   intersection-family-of-subtypes {I} P x = Π-Prop I (λ i → P i x)
 ```
 
-### Whether two subtypes intersect
+### The proposition that two subtypes intersect
 
 ```agda
 module _
@@ -105,4 +113,72 @@ module _
 
   intersect-subtype : UU (l1 ⊔ l2 ⊔ l3)
   intersect-subtype = type-Prop intersect-prop-subtype
+```
+
+### The intersection operation is commutative
+
+```agda
+abstract
+  commutative-intersection-subtype :
+    {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X) →
+    intersection-subtype P Q ＝ intersection-subtype Q P
+  commutative-intersection-subtype P Q =
+    eq-has-same-elements-subtype _ _ (λ _ → iff-equiv commutative-product)
+```
+
+### The intersection operation is associative
+
+```agda
+abstract
+  associative-intersection-subtype :
+    {l1 l2 l3 l4 : Level} {X : UU l1} →
+    (P : subtype l2 X) (Q : subtype l3 X) (R : subtype l4 X) →
+    intersection-subtype (intersection-subtype P Q) R ＝
+    intersection-subtype P (intersection-subtype Q R)
+  associative-intersection-subtype P Q R =
+    eq-has-same-elements-subtype _ _
+      ( λ _ → iff-equiv associative-product)
+```
+
+### The intersection operation is idempotent
+
+```agda
+abstract
+  idempotent-intersection-subtype :
+    {l1 l2 : Level} {X : UU l1} (S : subtype l2 X) →
+    intersection-subtype S S ＝ S
+  idempotent-intersection-subtype S =
+    eq-has-same-elements-subtype _ _ (λ x → (pr1 , λ x∈S → (x∈S , x∈S)))
+```
+
+### The full subtype is the identity for the intersection operation
+
+```agda
+abstract
+  left-unit-law-intersection-subtype :
+    {l1 l2 : Level} {X : UU l1} (P : subtype l2 X) →
+    intersection-subtype (full-subtype lzero X) P ＝ P
+  left-unit-law-intersection-subtype P =
+    eq-has-same-elements-subtype _ _
+      ( λ x → iff-equiv (left-unit-law-product-is-contr is-contr-raise-unit))
+
+  right-unit-law-intersection-subtype :
+    {l1 l2 : Level} {X : UU l1} (P : subtype l2 X) →
+    intersection-subtype P (full-subtype lzero X) ＝ P
+  right-unit-law-intersection-subtype P =
+    commutative-intersection-subtype P _ ∙ left-unit-law-intersection-subtype P
+```
+
+### Intersection of subtypes preserves similarity
+
+```agda
+abstract
+  preserves-sim-intersection-subtype :
+    {l1 l2 l3 l4 l5 : Level} {X : UU l1} →
+    (S : subtype l2 X) (T : subtype l3 X) → sim-subtype S T →
+    (U : subtype l4 X) (V : subtype l5 X) → sim-subtype U V →
+    sim-subtype (intersection-subtype S U) (intersection-subtype T V)
+  preserves-sim-intersection-subtype _ _ (S⊆T , T⊆S) _ _ (U⊆V , V⊆U) =
+    ( ( λ x → map-product (S⊆T x) (U⊆V x)) ,
+      ( λ x → map-product (T⊆S x) (V⊆U x)))
 ```

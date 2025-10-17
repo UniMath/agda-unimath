@@ -9,12 +9,15 @@ module metric-spaces.approximations-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.images
 open import foundation.images-subtypes
+open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -23,6 +26,7 @@ open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
@@ -236,6 +240,73 @@ module _
         ( map-isometric-equiv-Metric-Space X Y f)
         ( subset-approximation-Metric-Space X ε A) ,
       is-approximation-im-isometric-equiv-approximation-Metric-Space)
+```
+
+### If a metric space is inhabited, so is any approximation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : subset-Metric-Space l3 X)
+  where
+
+  abstract
+    is-inhabited-is-approximation-inhabited-Metric-Space :
+      is-approximation-Metric-Space X ε S →
+      is-inhabited-subtype S
+    is-inhabited-is-approximation-inhabited-Metric-Space is-approx =
+      let open do-syntax-trunc-Prop (is-inhabited-subtype-Prop S)
+      in do
+        x ← |X|
+        (s , Nεsx) ← is-approx x
+        unit-trunc-Prop s
+```
+
+### Cartesian products of approximations
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (ε : ℚ⁺)
+  (A : approximation-Metric-Space l5 X ε)
+  (B : approximation-Metric-Space l6 Y ε)
+  where
+
+  abstract
+    is-approximation-product-approximation-Metric-Space :
+      is-approximation-Metric-Space
+        ( product-Metric-Space X Y)
+        ( ε)
+        ( product-subtype
+          ( subset-approximation-Metric-Space X ε A)
+          ( subset-approximation-Metric-Space Y ε B))
+    is-approximation-product-approximation-Metric-Space (x , y) =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( type-product-subtype
+                ( subset-approximation-Metric-Space X ε A)
+                ( subset-approximation-Metric-Space Y ε B))
+              ( λ (ab , _) →
+                neighborhood-prop-Metric-Space
+                  ( product-Metric-Space X Y)
+                  ( ε)
+                  ( ab)
+                  ( x , y)))
+      in do
+        ((a , a∈A) , Nεax) ← is-approximation-approximation-Metric-Space X ε A x
+        ((b , b∈B) , Nεby) ← is-approximation-approximation-Metric-Space Y ε B y
+        intro-exists (((a , b) , a∈A , b∈B)) (Nεax , Nεby)
+
+  product-approximation-Metric-Space :
+    approximation-Metric-Space (l5 ⊔ l6) (product-Metric-Space X Y) ε
+  product-approximation-Metric-Space =
+    ( product-subtype
+        ( subset-approximation-Metric-Space X ε A)
+        ( subset-approximation-Metric-Space Y ε B) ,
+      is-approximation-product-approximation-Metric-Space)
 ```
 
 ## References

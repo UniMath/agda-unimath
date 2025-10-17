@@ -8,7 +8,10 @@ module univalent-combinatorics.finitely-enumerable-subtypes where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
@@ -108,21 +111,45 @@ module _
   (S : finitely-enumerable-subtype l3 X)
   where
 
-  im-finitely-enumerable-subtype : subtype (l1 ⊔ l2 ⊔ l3) Y
-  im-finitely-enumerable-subtype =
+  subtype-im-finitely-enumerable-subtype : subtype (l1 ⊔ l2 ⊔ l3) Y
+  subtype-im-finitely-enumerable-subtype =
     im-subtype f (subtype-finitely-enumerable-subtype S)
 
   abstract
-    is-finitely-enumerable-im-finitely-enumerable-subtype :
-      is-finitely-enumerable-subtype im-finitely-enumerable-subtype
-    is-finitely-enumerable-im-finitely-enumerable-subtype =
+    is-finitely-enumerable-subtype-im-finitely-enumerable-subtype :
+      is-finitely-enumerable-subtype subtype-im-finitely-enumerable-subtype
+    is-finitely-enumerable-subtype-im-finitely-enumerable-subtype =
       is-finitely-enumerable-im-Finitely-Enumerable-Type
         ( finitely-enumerable-type-finitely-enumerable-subtype S)
         ( f ∘ inclusion-finitely-enumerable-subtype S)
 
-  finitely-enumerable-subtype-im-finitely-enumerable-subtype :
+  im-finitely-enumerable-subtype :
     finitely-enumerable-subtype (l1 ⊔ l2 ⊔ l3) Y
-  finitely-enumerable-subtype-im-finitely-enumerable-subtype =
-    ( im-finitely-enumerable-subtype ,
-      is-finitely-enumerable-im-finitely-enumerable-subtype)
+  im-finitely-enumerable-subtype =
+    ( subtype-im-finitely-enumerable-subtype ,
+      is-finitely-enumerable-subtype-im-finitely-enumerable-subtype)
+```
+
+### Cartesian products of finitely enumerable subtypes
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2}
+  (S : finitely-enumerable-subtype l3 X)
+  (T : finitely-enumerable-subtype l4 Y)
+  where
+
+  product-finitely-enumerable-subtype :
+    finitely-enumerable-subtype (l3 ⊔ l4) (X × Y)
+  product-finitely-enumerable-subtype =
+    let
+      subS = subtype-finitely-enumerable-subtype S
+      subT = subtype-finitely-enumerable-subtype T
+    in
+      ( product-subtype subS subT ,
+        is-finitely-enumerable-equiv
+          ( inv-equiv ( equiv-product-subtype subS subT))
+          ( is-finitely-enumerable-product
+            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype S)
+            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype T)))
 ```

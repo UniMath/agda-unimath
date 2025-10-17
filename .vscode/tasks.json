@@ -13,19 +13,6 @@
       "dependsOrder": "parallel"
     },
     {
-      "label": "typecheck",
-      "detail": "Typecheck the library",
-      "type": "shell",
-      "command": "make",
-      "args": ["check"],
-      "problemMatcher": [],
-      "group": { "kind": "build" },
-      "presentation": {
-        "panel": "dedicated",
-        "clear": true
-      }
-    },
-    {
       "label": "typecheck-after-pre-commit",
       "detail": "Typecheck the library after running pre-commit",
       "type": "shell",
@@ -39,6 +26,19 @@
         "clear": true
       },
       "hide": true
+    },
+    {
+      "label": "typecheck",
+      "detail": "Typecheck the library",
+      "type": "shell",
+      "command": "make",
+      "args": ["check"],
+      "problemMatcher": [],
+      "group": { "kind": "build" },
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
     },
     {
       "label": "pre-commit",
@@ -58,7 +58,7 @@
       "detail": "Check website links and bibtex references",
       "type": "shell",
       "command": "make",
-      "args": ["SKIPAGDA=1", "website"],
+      "args": ["SKIPAGDA=1", "SKIPAUX=1", "website"],
       "problemMatcher": [],
       "group": {
         "kind": "test"

@@ -11,6 +11,7 @@ open import foundation.apartness-relations
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
@@ -39,11 +40,11 @@ module _
   (y : ℝ l2)
   where
 
-  apart-ℝ-Prop : Prop (l1 ⊔ l2)
-  apart-ℝ-Prop = le-ℝ-Prop x y ∨ le-ℝ-Prop y x
+  apart-prop-ℝ : Prop (l1 ⊔ l2)
+  apart-prop-ℝ = le-prop-ℝ x y ∨ le-prop-ℝ y x
 
   apart-ℝ : UU (l1 ⊔ l2)
-  apart-ℝ = type-Prop apart-ℝ-Prop
+  apart-ℝ = type-Prop apart-prop-ℝ
 ```
 
 ## Properties
@@ -62,25 +63,24 @@ antireflexive-apart-ℝ x =
 symmetric-apart-ℝ :
   {l1 l2 : Level} → (x : ℝ l1) (y : ℝ l2) → apart-ℝ x y → apart-ℝ y x
 symmetric-apart-ℝ x y =
-  elim-disjunction (apart-ℝ-Prop y x) inr-disjunction inl-disjunction
+  elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
 ```
 
 ### Apartness is cotransitive
 
 ```agda
-cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-ℝ-Prop
+cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
 cotransitive-apart-ℝ x y z =
   elim-disjunction
-    ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
+    ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
     ( λ x<y →
-      elim-disjunction
-        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
-        ( inl-disjunction ∘ inl-disjunction)
-        ( inr-disjunction ∘ inl-disjunction)
+      map-disjunction
+        ( inl-disjunction)
+        ( inl-disjunction)
         ( cotransitive-le-ℝ x y z x<y))
     ( λ y<x →
       elim-disjunction
-        ( apart-ℝ-Prop x z ∨ apart-ℝ-Prop z y)
+        ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
         ( inr-disjunction ∘ inr-disjunction)
         ( inl-disjunction ∘ inr-disjunction)
         ( cotransitive-le-ℝ y x z y<x))
@@ -91,7 +91,7 @@ cotransitive-apart-ℝ x y z =
 ```agda
 large-apartness-relation-ℝ : Large-Apartness-Relation _⊔_ ℝ
 apart-prop-Large-Apartness-Relation large-apartness-relation-ℝ =
-  apart-ℝ-Prop
+  apart-prop-ℝ
 antirefl-Large-Apartness-Relation large-apartness-relation-ℝ =
   antireflexive-apart-ℝ
 symmetric-Large-Apartness-Relation large-apartness-relation-ℝ =

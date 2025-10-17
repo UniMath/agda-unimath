@@ -15,6 +15,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.commutative-semigroups
@@ -497,28 +498,28 @@ module _
   leq-left-triple-join-Order-Theoretic-Join-Semilattice :
     x ≤ ((x ∨ y) ∨ z)
   leq-left-triple-join-Order-Theoretic-Join-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         x ≤ x ∨ y
             by leq-left-join-Order-Theoretic-Join-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ (x ∨ y) ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A (x ∨ y) z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-center-triple-join-Order-Theoretic-Join-Semilattice :
     y ≤ ((x ∨ y) ∨ z)
   leq-center-triple-join-Order-Theoretic-Join-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         y ≤ x ∨ y
             by leq-right-join-Order-Theoretic-Join-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ (x ∨ y) ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A (x ∨ y) z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-right-triple-join-Order-Theoretic-Join-Semilattice :
     z ≤ ((x ∨ y) ∨ z)
@@ -533,28 +534,28 @@ module _
   leq-center-triple-join-Order-Theoretic-Join-Semilattice' :
     y ≤ (x ∨ (y ∨ z))
   leq-center-triple-join-Order-Theoretic-Join-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         y ≤ y ∨ z
             by leq-left-join-Order-Theoretic-Join-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ x ∨ (y ∨ z)
             by leq-right-join-Order-Theoretic-Join-Semilattice A x (y ∨ z)
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-right-triple-join-Order-Theoretic-Join-Semilattice' :
     z ≤ (x ∨ (y ∨ z))
   leq-right-triple-join-Order-Theoretic-Join-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Join-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Join-Semilattice A)
+    in
       chain-of-inequalities
         z ≤ y ∨ z
             by leq-right-join-Order-Theoretic-Join-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
           ≤ x ∨ (y ∨ z)
             by leq-right-join-Order-Theoretic-Join-Semilattice A x (y ∨ z)
-            in-Poset poset-Order-Theoretic-Join-Semilattice A
 
   leq-associative-join-Order-Theoretic-Join-Semilattice :
     ((x ∨ y) ∨ z) ≤ (x ∨ (y ∨ z))
@@ -666,4 +667,73 @@ module _
     commutative-semigroup-Order-Theoretic-Join-Semilattice
   pr2 join-semilattice-Order-Theoretic-Join-Semilattice =
     idempotent-join-Order-Theoretic-Join-Semilattice A
+```
+
+### If `a ≤ c` and `b ≤ c`, then the join of `a` and `b` is less than or equal to `c`
+
+```agda
+module _
+  {l1 l2 : Level} (A : Order-Theoretic-Join-Semilattice l1 l2)
+  where
+
+  abstract
+    leq-join-leq-both-Order-Theoretic-Join-Semilattice :
+      (a b c : type-Order-Theoretic-Join-Semilattice A) →
+      leq-Order-Theoretic-Join-Semilattice A a c →
+      leq-Order-Theoretic-Join-Semilattice A b c →
+      leq-Order-Theoretic-Join-Semilattice A
+        ( join-Order-Theoretic-Join-Semilattice A a b)
+        ( c)
+    leq-join-leq-both-Order-Theoretic-Join-Semilattice a b c a≤c b≤c =
+      tr
+        ( leq-Order-Theoretic-Join-Semilattice A
+          ( join-Order-Theoretic-Join-Semilattice A a b))
+        ( idempotent-join-Order-Theoretic-Join-Semilattice A c)
+        ( join-leq-leq-Order-Theoretic-Join-Semilattice A a c b c a≤c b≤c)
+```
+
+### If `x` is less than or equal to `y`, the join of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Join-Semilattice l1 l2)
+  where
+
+  abstract
+    left-leq-right-join-Order-Theoretic-Join-Semilattice :
+      (x y : type-Order-Theoretic-Join-Semilattice A) →
+      leq-Order-Theoretic-Join-Semilattice A x y →
+      join-Order-Theoretic-Join-Semilattice A x y ＝ y
+    left-leq-right-join-Order-Theoretic-Join-Semilattice x y x≤y =
+      ap pr1
+        ( eq-type-Prop
+          ( has-least-binary-upper-bound-prop-Poset
+            ( poset-Order-Theoretic-Join-Semilattice A)
+            ( x)
+            ( y))
+          { is-join-semilattice-Order-Theoretic-Join-Semilattice A x y}
+          { has-least-binary-upper-bound-leq-Poset
+            ( poset-Order-Theoretic-Join-Semilattice A)
+            ( x)
+            ( y)
+            ( x≤y)})
+```
+
+### If `y` is less than or equal to `x`, the join of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Join-Semilattice l1 l2)
+  where
+
+  abstract
+    right-leq-left-join-Order-Theoretic-Join-Semilattice :
+      (x y : type-Order-Theoretic-Join-Semilattice A) →
+      leq-Order-Theoretic-Join-Semilattice A y x →
+      join-Order-Theoretic-Join-Semilattice A x y ＝ x
+    right-leq-left-join-Order-Theoretic-Join-Semilattice x y y≤x =
+      ( commutative-join-Order-Theoretic-Join-Semilattice A x y) ∙
+      ( left-leq-right-join-Order-Theoretic-Join-Semilattice A y x y≤x)
 ```

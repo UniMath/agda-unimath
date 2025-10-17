@@ -1,0 +1,9 @@
+[codespell]
+skip = *.css,*.bib
+ignore-words = config/codespell-ignore.txt
+
+# Ignore all words with a capital letter after the first character
+ignore-regex = ```.*?```|\b\S+[A-Z]\S*\b
+
+# Check file names as well
+check-filenames = true

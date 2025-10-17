@@ -199,7 +199,7 @@ count-Σ-coproduct :
   count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
 pr1 (count-Σ-coproduct count-P count-Q) = pr1 (count-coproduct count-P count-Q)
 pr2 (count-Σ-coproduct count-P count-Q) =
-  ( inv-equiv (left-distributive-Σ-coproduct _ _ _)) ∘e
+  ( inv-left-distributive-Σ-coproduct) ∘e
   ( pr2 (count-coproduct count-P count-Q))
 ```
 

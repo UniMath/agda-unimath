@@ -48,7 +48,7 @@ coprime.
 ```agda
 is-reduced-fraction-ℤ : fraction-ℤ → UU lzero
 is-reduced-fraction-ℤ x =
-  is-relative-prime-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+  is-relatively-prime-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
 ```
 
 ## Properties and constructions
@@ -59,7 +59,7 @@ is-reduced-fraction-ℤ x =
 is-prop-is-reduced-fraction-ℤ :
   (x : fraction-ℤ) → is-prop (is-reduced-fraction-ℤ x)
 is-prop-is-reduced-fraction-ℤ x =
-  is-prop-is-relative-prime-ℤ
+  is-prop-is-relatively-prime-ℤ
     ( numerator-fraction-ℤ x)
     ( denominator-fraction-ℤ x)
 ```

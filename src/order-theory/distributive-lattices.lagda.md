@@ -73,7 +73,7 @@ module _
   type-Distributive-Lattice = type-Lattice lattice-Distributive-Lattice
 
   leq-Distributive-Lattice-Prop : (x y : type-Distributive-Lattice) → Prop l2
-  leq-Distributive-Lattice-Prop = leq-lattice-Prop lattice-Distributive-Lattice
+  leq-Distributive-Lattice-Prop = leq-prop-Lattice lattice-Distributive-Lattice
 
   leq-Distributive-Lattice : (x y : type-Distributive-Lattice) → UU l2
   leq-Distributive-Lattice = leq-Lattice lattice-Distributive-Lattice
