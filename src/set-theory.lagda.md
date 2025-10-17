@@ -55,6 +55,7 @@ open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
 open import set-theory.dependent-products-cardinals public
 open import set-theory.dependent-sums-cardinals public
+open import set-theory.equality-cardinals public
 open import set-theory.inequality-cardinals public
 open import set-theory.infinite-sets public
 open import set-theory.inhabited-cardinals public
