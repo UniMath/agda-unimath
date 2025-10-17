@@ -144,17 +144,25 @@ is-decidable-fiber-Fin {k} {l} f y =
 ### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of `f` are finite
 
 ```agda
-equiv-is-finite-domain-is-finite-fiber :
-  {l1 l2 : Level} {A : UU l1} →
-  (B : Finite-Type l2) (f : A → (type-Finite-Type B)) →
-  ((b : type-Finite-Type B) → is-finite (fiber f b)) ≃ is-finite A
-equiv-is-finite-domain-is-finite-fiber {A = A} B f =
-  equiv-iff-is-prop
-    ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
-    ( is-prop-is-finite A)
-    ( λ P →
-      is-finite-equiv
-        ( equiv-total-fiber f)
-        ( is-finite-Σ (is-finite-type-Finite-Type B) P))
-    ( λ P → is-finite-fiber f P (is-finite-type-Finite-Type B))
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (B : Finite-Type l2) (f : A → (type-Finite-Type B))
+  where
+
+  equiv-is-finite-domain-is-finite-fiber :
+    ((b : type-Finite-Type B) → is-finite (fiber f b)) ≃ is-finite A
+  equiv-is-finite-domain-is-finite-fiber =
+    equiv-iff-is-prop
+      ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
+      ( is-prop-is-finite A)
+      ( λ P →
+        is-finite-equiv
+          ( equiv-total-fiber f)
+          ( is-finite-Σ (is-finite-type-Finite-Type B) P))
+      ( λ P → is-finite-fiber f P (is-finite-type-Finite-Type B))
+
+  inv-equiv-is-finite-domain-is-finite-fiber :
+    is-finite A ≃ ((b : type-Finite-Type B) → is-finite (fiber f b))
+  inv-equiv-is-finite-domain-is-finite-fiber =
+    inv-equiv equiv-is-finite-domain-is-finite-fiber
 ```

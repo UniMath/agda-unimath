@@ -93,10 +93,9 @@ module _
   equiv-block-equivalence-class =
     ( compute-block-partition partition-equivalence-relation) ∘e
     ( ( equiv-right-swap-Σ) ∘e
-      ( inv-equiv
-        ( equiv-inclusion-is-full-subtype
-          ( is-inhabited-subtype-Prop ∘ subtype-equivalence-class R)
-          ( is-inhabited-subtype-equivalence-class R))))
+      ( inv-equiv-inclusion-is-full-subtype
+        ( is-inhabited-subtype-Prop ∘ subtype-equivalence-class R)
+        ( is-inhabited-subtype-equivalence-class R)))
 ```
 
 #### The equivalence relation obtained from a partition
