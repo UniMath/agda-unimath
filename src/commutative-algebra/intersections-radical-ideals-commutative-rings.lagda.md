@@ -23,7 +23,7 @@ open import elementary-number-theory.addition-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.functoriality-propositional-truncations
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
