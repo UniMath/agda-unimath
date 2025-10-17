@@ -152,9 +152,7 @@ finite-enumeration-count (n , Fin-n≃X) = (n , surjection-equiv Fin-n≃X)
 is-finitely-enumerable-is-finite :
   {l : Level} {X : UU l} → is-finite X → is-finitely-enumerable X
 is-finitely-enumerable-is-finite {X = X} =
-  rec-trunc-Prop
-    ( is-finitely-enumerable-prop X)
-    ( unit-trunc-Prop ∘ finite-enumeration-count)
+  map-trunc-Prop finite-enumeration-count
 
 is-finitely-enumerable-type-Finite-Type :
   {l : Level} (X : Finite-Type l) → is-finitely-enumerable (type-Finite-Type X)
@@ -244,7 +242,7 @@ abstract
     finite-enumeration (X + Y) → finite-enumeration Y
   finite-enumeration-right-summand eX+Y =
     finite-enumeration-left-summand
-      ( finite-enumeration-equiv eX+Y (commutative-coproduct _ _))
+      ( finite-enumeration-equiv eX+Y commutative-coproduct)
 
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →

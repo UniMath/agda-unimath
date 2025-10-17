@@ -512,7 +512,7 @@ abstract
   trichotomy-le-ℚ :
     {l : Level} {A : UU l} (x y : ℚ) →
     ( le-ℚ x y → A) →
-    ( Id x y → A) →
+    ( x ＝ y → A) →
     ( le-ℚ y x → A) →
     A
   trichotomy-le-ℚ x y left eq right

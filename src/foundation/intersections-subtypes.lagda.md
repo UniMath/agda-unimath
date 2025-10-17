@@ -137,7 +137,7 @@ abstract
     intersection-subtype P (intersection-subtype Q R)
   associative-intersection-subtype P Q R =
     eq-has-same-elements-subtype _ _
-      ( λ _ → iff-equiv (associative-product _ _ _))
+      ( λ _ → iff-equiv associative-product)
 ```
 
 ### The intersection operation is idempotent

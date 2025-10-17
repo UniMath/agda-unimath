@@ -165,21 +165,15 @@ module _
     binary-product-Decomposition-Subuniverse P X ≃
     binary-product-Decomposition-Subuniverse P X
   equiv-commutative-binary-product-Decomposition-Subuniverse =
-    ( ( associative-Σ
-        ( type-subuniverse P)
-        ( λ _ → type-subuniverse P)
-        ( _)) ∘e
-      ( ( equiv-Σ
-          ( _)
-          ( commutative-product)
-          ( λ x →
-            equiv-postcomp-equiv
-              ( commutative-product)
-              (inclusion-subuniverse P X))) ∘e
-        ( ( inv-associative-Σ
-            ( type-subuniverse P)
-            ( λ _ → type-subuniverse P)
-            ( _)))))
+    ( associative-Σ) ∘e
+    ( ( equiv-Σ
+        ( _)
+        ( commutative-product)
+        ( λ x →
+          equiv-postcomp-equiv
+            ( commutative-product)
+            ( inclusion-subuniverse P X))) ∘e
+      ( inv-associative-Σ))
 ```
 
 ### Equivalence between iterated product and ternary product decomposition
@@ -380,8 +374,8 @@ module _
                         ( eq-is-prop is-property-is-contr)))
                   ( ( raise-unit l1 , C1) ,
                     is-contr-raise-unit)) ∘e
-                ( ( inv-associative-Σ _ _ _) ∘e
+                ( ( inv-associative-Σ) ∘e
                   ( ( equiv-tot (λ _ → commutative-product)) ∘e
-                    ( ( associative-Σ _ _ _)))))))) ∘e
-        ( ( associative-Σ _ _ _)))
+                    ( associative-Σ))))))) ∘e
+        ( associative-Σ))
 ```
