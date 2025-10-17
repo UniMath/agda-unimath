@@ -9,6 +9,7 @@ open import order-theory.accessible-elements-relations public
 open import order-theory.bottom-elements-large-posets public
 open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
+open import order-theory.bounded-total-orders public
 open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closed-interval-preserving-maps-posets public
@@ -103,6 +104,7 @@ open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
 open import order-theory.meets-finite-families-meet-semilattices public
+open import order-theory.nontrivial-bounded-total-orders public
 open import order-theory.nuclei-large-locales public
 open import order-theory.opposite-large-posets public
 open import order-theory.opposite-large-preorders public

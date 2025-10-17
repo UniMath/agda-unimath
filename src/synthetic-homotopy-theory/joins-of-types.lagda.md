@@ -434,6 +434,18 @@ module _
       ( up-join)
 ```
 
+### The propositional recursor for joins of types
+
+```agda
+rec-join-Prop :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : Prop l3) →
+  (A → type-Prop R) → (B → type-Prop R) → A * B → type-Prop R
+rec-join-Prop R f g =
+  cogap-join
+    ( type-Prop R)
+    ( f , g , λ (t , s) → eq-is-prop' (is-prop-type-Prop R) (f t) (g s))
+```
+
 ## See also
 
 - [Joins of maps](synthetic-homotopy-theory.joins-of-maps.md)

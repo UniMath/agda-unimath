@@ -75,11 +75,11 @@ module _
 
 ```agda
 module _
-  {l : Level} {P : UU l}
+  {l : Level} {A : UU l}
   where
 
-  rec-bool : P → P → bool → P
-  rec-bool = ind-bool (λ _ → P)
+  rec-bool : A → A → bool → A
+  rec-bool = ind-bool (λ _ → A)
 ```
 
 ### The `if_then_else` function

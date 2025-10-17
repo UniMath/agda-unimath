@@ -381,6 +381,84 @@ module _
     ( right-associate-disjunction , left-associate-disjunction)
 ```
 
+### The disjunction of mutually exclusive types
+
+If two propositions are mutually exclusive, then their disjunction is equivalent
+to the coproduct of their underlying types
+
+```text
+  P ∨ Q = P + Q.
+```
+
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  (f : type-Prop P → ¬ (type-Prop Q))
+  where
+
+  map-compute-disjunction-mutually-exclusive :
+    type-disjunction-Prop P Q → type-Prop P + type-Prop Q
+  map-compute-disjunction-mutually-exclusive =
+    elim-disjunction (coproduct-Prop P Q f) inl inr
+
+  compute-disjunction-mutually-exclusive :
+    type-disjunction-Prop P Q ↔ type-Prop P + type-Prop Q
+  compute-disjunction-mutually-exclusive =
+    ( map-compute-disjunction-mutually-exclusive , unit-trunc-Prop)
+
+  inv-compute-disjunction-mutually-exclusive :
+    type-Prop P + type-Prop Q ↔ type-disjunction-Prop P Q
+  inv-compute-disjunction-mutually-exclusive =
+    inv-iff compute-disjunction-mutually-exclusive
+
+  equiv-compute-disjunction-mutually-exclusive :
+    type-disjunction-Prop P Q ≃ type-Prop P + type-Prop Q
+  equiv-compute-disjunction-mutually-exclusive =
+    equiv-iff'
+      ( disjunction-Prop P Q)
+      ( coproduct-Prop P Q f)
+      ( compute-disjunction-mutually-exclusive)
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  (f : ║ A ║₋₁ → ¬ ║ B ║₋₁)
+  where
+
+  map-compute-disjunction-type-mutually-exclusive :
+    disjunction-type A B → ║ A ║₋₁ + ║ B ║₋₁
+  map-compute-disjunction-type-mutually-exclusive =
+    elim-disjunction
+      ( coproduct-Prop (trunc-Prop A) (trunc-Prop B) f)
+      ( inl ∘ unit-trunc-Prop)
+      ( inr ∘ unit-trunc-Prop)
+
+  map-inv-compute-disjunction-type-mutually-exclusive :
+    ║ A ║₋₁ + ║ B ║₋₁ → disjunction-type A B
+  map-inv-compute-disjunction-type-mutually-exclusive (inl a) =
+    rec-trunc-Prop (disjunction-type-Prop A B) inl-disjunction a
+  map-inv-compute-disjunction-type-mutually-exclusive (inr b) =
+    rec-trunc-Prop (disjunction-type-Prop A B) inr-disjunction b
+
+  compute-disjunction-type-mutually-exclusive :
+    disjunction-type A B ↔ (║ A ║₋₁ + ║ B ║₋₁)
+  compute-disjunction-type-mutually-exclusive =
+    ( map-compute-disjunction-type-mutually-exclusive ,
+      map-inv-compute-disjunction-type-mutually-exclusive)
+
+  inv-compute-disjunction-type-mutually-exclusive :
+    (║ A ║₋₁ + ║ B ║₋₁) ↔ disjunction-type A B
+  inv-compute-disjunction-type-mutually-exclusive =
+    inv-iff compute-disjunction-type-mutually-exclusive
+
+  equiv-compute-disjunction-type-mutually-exclusive :
+    disjunction-type A B ≃ (║ A ║₋₁ + ║ B ║₋₁)
+  equiv-compute-disjunction-type-mutually-exclusive =
+    equiv-iff'
+      ( disjunction-type-Prop A B)
+      ( coproduct-Prop (trunc-Prop A) (trunc-Prop B) f)
+      ( compute-disjunction-type-mutually-exclusive)
+```
+
 ## See also
 
 - The indexed counterpart to disjunction is

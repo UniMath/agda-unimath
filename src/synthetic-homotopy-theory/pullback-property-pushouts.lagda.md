@@ -85,3 +85,8 @@ pullback-property-pushout f g c =
     ( precomp g Y)
     ( cone-pullback-property-pushout f g c Y)
 ```
+
+## See also
+
+- For the dual property for [pullbacks](foundation-core.pullbacks.md), see
+  [postcomposition of pullbacks](foundation.postcomposition-pullbacks.md).

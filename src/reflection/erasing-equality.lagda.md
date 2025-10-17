@@ -18,16 +18,16 @@ open import foundation-core.identity-types
 
 Agda's builtin primitive `primEraseEquality` is a special construct on
 [identifications](foundation-core.identity-types.md) that for every
-identification `x ＝ y` gives an identification `x ＝ y` with the following
-reduction behavior:
+identification `x ＝ y` gives another identification `x ＝ y` with the following
+reduction behaviour:
 
-- If the two end points `x ＝ y` normalize to the same term, `primEraseEquality`
-  reduces to `refl`.
+- If the two end points of `p : x ＝ y` normalize to the same term, then
+  `primEraseEquality p` reduces to `refl`.
 
 For example, `primEraseEquality` applied to the loop of the
 [circle](synthetic-homotopy-theory.circle.md) will compute to `refl`, while
-`primEraseEquality` applied to the nontrivial identification in the
-[interval](synthetic-homotopy-theory.interval-type.md) will not reduce.
+`primEraseEquality` applied to the generating identification in the
+[interval](synthetic-homotopy-theory.interval.md) will not reduce.
 
 This primitive is useful for [rewrite rules](reflection.rewriting.md), as it
 ensures that the identification used in defining the rewrite rule also computes
