@@ -1,7 +1,7 @@
 # Complemented inequality on cardinals
 
 ```agda
-module set-theory.complemented-inequality-cardinalities where
+module set-theory.complemented-inequality-cardinals where
 ```
 
 <details><summary>Imports</summary>
@@ -21,14 +21,14 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
+open import set-theory.cardinals
 ```
 
 </details>
 
 ## Idea
 
-We may say a [cardinal of sets](set-theory.cardinalities.md) `X` is
+We may say a [cardinal of sets](set-theory.cardinals.md) `X` is
 {{#concept "less than or equal to" Agda=leq-complemented-cardinality}} a
 cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class
 represented by `X` [embeds](foundation-core.embeddings.md) as a

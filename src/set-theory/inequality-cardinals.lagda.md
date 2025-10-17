@@ -1,7 +1,7 @@
 # Inequality on cardinals
 
 ```agda
-module set-theory.inequality-cardinalities where
+module set-theory.inequality-cardinals where
 ```
 
 <details><summary>Imports</summary>
@@ -22,15 +22,15 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
-open import set-theory.equality-cardinalities
+open import set-theory.cardinals
+open import set-theory.equality-cardinals
 ```
 
 </details>
 
 ## Idea
 
-We say a [cardinal of sets](set-theory.cardinalities.md) `X` is
+We say a [cardinal of sets](set-theory.cardinals.md) `X` is
 {{#concept "less than or equal to" Agda=leq-Cardinal}} a cardinal `Y` if any
 [set](foundation-core.sets.md) in the isomorphism class represented by `X`
 embeds into any set in the isomorphism class represented by `Y`. This defines

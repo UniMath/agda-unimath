@@ -1,7 +1,7 @@
-# Cardinalities of sets
+# Cardinals
 
 ```agda
-module set-theory.cardinalities where
+module set-theory.cardinals where
 ```
 
 <details><summary>Imports</summary>

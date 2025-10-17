@@ -34,7 +34,7 @@ structure. In fact, with univalence it is a proper
 In this module, we consider ideas historically related to the study of set
 theories both as foundations of set-level mathematics, but also as a study of
 hierarchies in mathematics. This includes ideas such as
-[cardinality](set-theory.cardinalities.md) and
+[cardinality](set-theory.cardinals.md) and
 [infinity](set-theory.infinite-sets.md), the
 [cumulative hierarchy](set-theory.cumulative-hierarchy.md) as a model of set
 theory, and [Russell's paradox](set-theory.russells-paradox.md).
@@ -47,12 +47,11 @@ module set-theory where
 open import set-theory.baire-space public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
-open import set-theory.cardinalities public
-open import set-theory.complemented-inequality-cardinalities public
+open import set-theory.cardinals public
+open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
-open import set-theory.equality-cardinalities public
-open import set-theory.inequality-cardinalities public
+open import set-theory.inequality-cardinals public
 open import set-theory.infinite-sets public
 open import set-theory.russells-paradox public
 open import set-theory.uncountable-sets public
