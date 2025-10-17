@@ -215,9 +215,9 @@ neg-ℚ⁰⁻ (q , is-nonpos-q) =
 
 ```agda
 abstract
-  not-is-negative-is-positive-ℚ :
+  is-not-negative-and-positive-ℚ :
     {x : ℚ} → ¬ (is-negative-ℚ x × is-positive-ℚ x)
-  not-is-negative-is-positive-ℚ {x} (N , P) =
+  is-not-negative-and-positive-ℚ {x} (N , P) =
     not-leq-le-ℚ
       ( zero-ℚ)
       ( x)
@@ -229,9 +229,9 @@ abstract
 
 ```agda
 abstract
-  not-is-negative-is-nonnegative-ℚ :
+  is-not-negative-and-nonnegativeℚ :
     {x : ℚ} → ¬ (is-negative-ℚ x × is-nonnegative-ℚ x)
-  not-is-negative-is-nonnegative-ℚ {x} (N , NN) =
+  is-not-negative-and-nonnegativeℚ {x} (N , NN) =
     not-leq-le-ℚ
       ( x)
       ( zero-ℚ)
@@ -239,13 +239,13 @@ abstract
       ( leq-zero-is-nonnegative-ℚ NN)
 ```
 
-### If `p < q` and `q` is nonpositive, then `p` is negative
+### A rational number is not both positive and nonpositive
 
 ```agda
 abstract
-  not-is-positive-is-nonpositive-ℚ :
+  is-not-positive-and-nonpositive-ℚ :
     {x : ℚ} → ¬ (is-positive-ℚ x × is-nonpositive-ℚ x)
-  not-is-positive-is-nonpositive-ℚ {x} (P , NP) =
+  is-not-positive-and-nonpositive-ℚ {x} (P , NP) =
     not-leq-le-ℚ
       ( zero-ℚ)
       ( x)

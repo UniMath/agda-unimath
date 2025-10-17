@@ -446,7 +446,7 @@ module _
           inl-disjunction
             ( λ is-pos-p →
               ex-falso
-                ( not-is-positive-is-nonpositive-ℚ (is-pos-p , is-nonpos-p))))
+                ( is-not-positive-and-nonpositive-ℚ (is-pos-p , is-nonpos-p))))
         ( decide-is-positive-is-nonpositive-ℚ p)
 
   opaque

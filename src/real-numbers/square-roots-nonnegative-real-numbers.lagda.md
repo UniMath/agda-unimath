@@ -92,7 +92,7 @@ module _
         ( neg-one-ℚ)
         ( λ is-nonneg-neg-one-ℚ →
           ex-falso
-            ( not-is-negative-is-nonnegative-ℚ
+            ( is-not-negative-and-nonnegativeℚ
               ( is-negative-rational-ℚ⁻ neg-one-ℚ⁻ , is-nonneg-neg-one-ℚ)))
 
     is-inhabited-upper-cut-sqrt-ℝ⁰⁺ : is-inhabited-subtype upper-cut-sqrt-ℝ⁰⁺
@@ -125,7 +125,7 @@ module _
                 ( le-mediant-zero-ℚ⁻ q⁻ ,
                   λ is-nonneg-q' →
                     ex-falso
-                      ( not-is-negative-is-nonnegative-ℚ
+                      ( is-not-negative-and-nonnegativeℚ
                         ( is-negative-rational-ℚ⁻ (mediant-zero-ℚ⁻ q⁻) ,
                           is-nonneg-q'))))
           ( λ q=0 →
@@ -263,7 +263,7 @@ module _
           inl-disjunction
             ( λ is-nonneg-p →
               ex-falso
-                ( not-is-negative-is-nonnegative-ℚ (is-neg-p , is-nonneg-p))))
+                ( is-not-negative-and-nonnegativeℚ (is-neg-p , is-nonneg-p))))
         ( λ is-nonneg-p →
           map-disjunction
             ( λ p²<x _ → p²<x)
@@ -350,7 +350,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-a →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( is-negative-mul-negative-positive-ℚ
                             ( is-neg-a)
                             ( is-pos-d) ,
@@ -365,7 +365,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-c →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( is-negative-mul-positive-negative-ℚ
                             ( is-pos-b)
                             ( is-neg-c) ,
