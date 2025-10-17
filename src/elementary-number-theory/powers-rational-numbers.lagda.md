@@ -7,9 +7,32 @@ module elementary-number-theory.powers-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import group-theory.powers-of-elements-monoids
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
+
+open import group-theory.powers-of-elements-commutative-monoids
+open import group-theory.powers-of-elements-monoids
 ```
 
 </details>
@@ -25,8 +48,8 @@ multiplying `x` with itself `n` times.
 ## Definition
 
 ```agda
-power-ℚ⁺ : ℕ → ℚ⁺ → ℚ⁺
-power-ℚ⁺ = power-Group group-mul-ℚ⁺
+power-ℚ : ℕ → ℚ → ℚ
+power-ℚ = power-Monoid monoid-mul-ℚ
 ```
 
 ## Properties
@@ -34,194 +57,162 @@ power-ℚ⁺ = power-Group group-mul-ℚ⁺
 ### `1ⁿ = 1`
 
 ```agda
-power-one-ℚ⁺ : (n : ℕ) → power-ℚ⁺ n one-ℚ⁺ ＝ one-ℚ⁺
-power-one-ℚ⁺ = power-unit-Group group-mul-ℚ⁺
+abstract
+  power-one-ℚ : (n : ℕ) → power-ℚ n one-ℚ ＝ one-ℚ
+  power-one-ℚ = power-unit-Monoid monoid-mul-ℚ
 ```
 
-### `qⁿ⁺¹ = qⁿq`
+### `qⁿ¹ = qⁿq`
 
 ```agda
-power-succ-ℚ⁺ : (n : ℕ) (q : ℚ⁺) → power-ℚ⁺ (succ-ℕ n) q ＝ power-ℚ⁺ n q *ℚ⁺ q
-power-succ-ℚ⁺ = power-succ-Group group-mul-ℚ⁺
+abstract
+  power-succ-ℚ : (n : ℕ) (q : ℚ) → power-ℚ (succ-ℕ n) q ＝ power-ℚ n q *ℚ q
+  power-succ-ℚ = power-succ-Monoid monoid-mul-ℚ
 ```
 
 ### `qⁿ = qqⁿ`
 
 ```agda
-power-succ-ℚ⁺' : (n : ℕ) (q : ℚ⁺) → power-ℚ⁺ (succ-ℕ n) q ＝ q *ℚ⁺ power-ℚ⁺ n q
-power-succ-ℚ⁺' = power-succ-Group' group-mul-ℚ⁺
+abstract
+  power-succ-ℚ' : (n : ℕ) (q : ℚ) → power-ℚ (succ-ℕ n) q ＝ q *ℚ power-ℚ n q
+  power-succ-ℚ' = power-succ-Monoid' monoid-mul-ℚ
 ```
 
-### `qᵐ⁺ⁿ = qᵐqⁿ`
+### `qᵐⁿ = qᵐqⁿ`
 
 ```agda
-distributive-power-add-ℚ⁺ :
-  (m n : ℕ) (q : ℚ⁺) → power-ℚ⁺ (m +ℕ n) q ＝ power-ℚ⁺ m q *ℚ⁺ power-ℚ⁺ n q
-distributive-power-add-ℚ⁺ m n _ = distributive-power-add-Group group-mul-ℚ⁺ m n
+abstract
+  distributive-power-add-ℚ :
+    (m n : ℕ) (q : ℚ) → power-ℚ (m +ℕ n) q ＝ power-ℚ m q *ℚ power-ℚ n q
+  distributive-power-add-ℚ m n _ =
+    distributive-power-add-Monoid monoid-mul-ℚ m n
 ```
 
 ### `(pq)ⁿ=pⁿqⁿ`
 
 ```agda
-left-distributive-power-mul-ℚ⁺ :
-  (n : ℕ) (p q : ℚ⁺) → power-ℚ⁺ n (p *ℚ⁺ q) ＝ power-ℚ⁺ n p *ℚ⁺ power-ℚ⁺ n q
-left-distributive-power-mul-ℚ⁺ n p q =
-  left-distributive-multiple-add-Ab abelian-group-mul-ℚ⁺ n
+abstract
+  left-distributive-power-mul-ℚ :
+    (n : ℕ) (p q : ℚ) → power-ℚ n (p *ℚ q) ＝ power-ℚ n p *ℚ power-ℚ n q
+  left-distributive-power-mul-ℚ n p q =
+    distributive-power-mul-Commutative-Monoid commutative-monoid-mul-ℚ n
 ```
 
 ### `pᵐⁿ = (pᵐ)ⁿ`
 
 ```agda
-power-mul-ℚ⁺ :
-  (m n : ℕ) (q : ℚ⁺) → power-ℚ⁺ (m *ℕ n) q ＝ power-ℚ⁺ n (power-ℚ⁺ m q)
-power-mul-ℚ⁺ m n q = power-mul-Group group-mul-ℚ⁺ m n
+abstract
+  power-mul-ℚ :
+    (m n : ℕ) (q : ℚ) → power-ℚ (m *ℕ n) q ＝ power-ℚ n (power-ℚ m q)
+  power-mul-ℚ m n q = power-mul-Monoid monoid-mul-ℚ m n
 ```
 
-### If `p` and `q` are positive rational numbers with `p < q` and `n` is nonzero, `pⁿ < qⁿ`
+### Even powers of rational numbers are nonnegative
 
 ```agda
 abstract
-  preserves-le-power-ℚ⁺ :
-    (n : ℕ) (p q : ℚ⁺) → le-ℚ⁺ p q → is-nonzero-ℕ n →
-    le-ℚ⁺ (power-ℚ⁺ n p) (power-ℚ⁺ n q)
-  preserves-le-power-ℚ⁺ 0 p q p<q H = ex-falso (H refl)
-  preserves-le-power-ℚ⁺ 1 p q p<q H = p<q
-  preserves-le-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q H =
-    transitive-le-ℚ⁺
-      ( power-ℚ⁺ (succ-ℕ n) p)
-      ( power-ℚ⁺ n p *ℚ⁺ q)
-      ( power-ℚ⁺ (succ-ℕ n) q)
-      ( preserves-le-right-mul-ℚ⁺ q _ _
-        ( preserves-le-power-ℚ⁺ n p q p<q (is-nonzero-succ-ℕ _)))
-      ( preserves-le-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p<q)
+  is-nonnegative-even-power-ℚ :
+    (n : ℕ) (q : ℚ) → is-even-ℕ n → is-nonnegative-ℚ (power-ℚ n q)
+  is-nonnegative-even-power-ℚ _ q (k , refl) =
+    inv-tr
+      ( is-nonnegative-ℚ)
+      ( power-mul-ℚ k 2 q)
+      ( is-nonnegative-square-ℚ (power-ℚ k q))
+
+nonnegative-even-power-ℚ :
+  (n : ℕ) (q : ℚ) → is-even-ℕ n → ℚ⁰⁺
+nonnegative-even-power-ℚ n q even-n =
+  ( power-ℚ n q , is-nonnegative-even-power-ℚ n q even-n)
 ```
 
-### If `p` and `q` are positive rational numbers with `p ≤ q`, `pⁿ ≤ qⁿ`
+### Powers of positive rational numbers are positive
 
 ```agda
 abstract
-  preserves-leq-power-ℚ⁺ :
-    (n : ℕ) (p q : ℚ⁺) → leq-ℚ⁺ p q → leq-ℚ⁺ (power-ℚ⁺ n p) (power-ℚ⁺ n q)
-  preserves-leq-power-ℚ⁺ 0 _ _ _ = refl-leq-ℚ one-ℚ
-  preserves-leq-power-ℚ⁺ 1 p q p≤q = p≤q
-  preserves-leq-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p≤q =
-    transitive-leq-ℚ⁺
-      ( power-ℚ⁺ (succ-ℕ n) p)
-      ( power-ℚ⁺ n p *ℚ⁺ q)
-      ( power-ℚ⁺ (succ-ℕ n) q)
-      ( preserves-leq-right-mul-ℚ⁺ q _ _ (preserves-leq-power-ℚ⁺ n p q p≤q))
-      ( preserves-leq-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p≤q)
+  is-positive-power-ℚ⁺ :
+    (n : ℕ) (q : ℚ⁺) → is-positive-ℚ (power-ℚ n (rational-ℚ⁺ q))
+  is-positive-power-ℚ⁺ 0 q = is-positive-rational-ℚ⁺ one-ℚ⁺
+  is-positive-power-ℚ⁺ (succ-ℕ n) q⁺@(q , is-pos-q) =
+    inv-tr
+      ( is-positive-ℚ)
+      ( power-succ-ℚ n q)
+      ( is-positive-mul-ℚ (is-positive-power-ℚ⁺ n q⁺) is-pos-q)
 ```
 
-### For any positive rational `ε`, `(1 + ε)ⁿ` grows without bound
+### Even powers of negative rational numbers are positive
 
 ```agda
 abstract
-  bound-unbounded-power-one-plus-ℚ⁺ :
-    (ε : ℚ⁺) (b : ℚ) →
-    Σ ℕ (λ n → le-ℚ b (rational-ℚ⁺ (power-ℚ⁺ n (one-ℚ⁺ +ℚ⁺ ε))))
-  bound-unbounded-power-one-plus-ℚ⁺ ε⁺@(ε , is-pos-ε) b =
+  is-positive-even-power-ℚ⁻ :
+    (n : ℕ) (q : ℚ⁻) → is-even-ℕ n → is-positive-ℚ (power-ℚ n (rational-ℚ⁻ q))
+  is-positive-even-power-ℚ⁻ _ q⁻@(q , is-neg-q) (k , refl) =
+    inv-tr
+      ( is-positive-ℚ)
+      ( equational-reasoning
+        power-ℚ (k *ℕ 2) q
+        ＝ power-ℚ (2 *ℕ k) q
+          by ap (λ m → power-ℚ m q) (commutative-mul-ℕ k 2)
+        ＝ power-ℚ k (square-ℚ q)
+          by power-mul-ℚ 2 k q)
+      ( is-positive-power-ℚ⁺ k (square-ℚ⁻ q⁻))
+```
+
+### Odd powers of negative rational numbers are negative
+
+```agda
+abstract
+  is-negative-odd-power-ℚ⁻ :
+    (n : ℕ) (q : ℚ⁻) → is-odd-ℕ n → is-negative-ℚ (power-ℚ n (rational-ℚ⁻ q))
+  is-negative-odd-power-ℚ⁻ n q⁻@(q , is-neg-q) odd-n =
     let
-      (n , b<nε) = bound-archimedean-property-ℚ ε b is-pos-ε
+      (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
-      ( n ,
-        transitive-le-ℚ _ _ _
-          ( concatenate-le-leq-ℚ _ _ _
-            ( le-left-add-rational-ℚ⁺ _ one-ℚ⁺)
-            ( binary-tr
-              ( leq-ℚ)
-              ( inv (compute-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ ε⁺ n))
-              ( ap
-                ( rational-ℚ⁺)
-                ( equational-reasoning
-                  seq-standard-geometric-sequence-ℚ⁺
-                      ( one-ℚ⁺)
-                      ( one-ℚ⁺ +ℚ⁺ ε⁺)
-                      ( n)
-                  ＝ one-ℚ⁺ *ℚ⁺ power-ℚ⁺ n (one-ℚ⁺ +ℚ⁺ ε⁺)
-                    by
-                      inv
-                        ( compute-standard-geometric-sequence-ℚ⁺
-                          ( one-ℚ⁺)
-                          ( one-ℚ⁺ +ℚ⁺ ε⁺)
-                          ( n))
-                  ＝ power-ℚ⁺ n (one-ℚ⁺ +ℚ⁺ ε⁺)
-                    by left-unit-law-mul-ℚ⁺ _))
-              ( bernoullis-inequality-ℚ⁺ ε⁺ n)))
-          ( b<nε))
-
-  unbounded-power-one-plus-ℚ⁺ :
-    (ε : ℚ⁺) (b : ℚ) →
-    exists ℕ (λ n → le-ℚ-Prop b (rational-ℚ⁺ (power-ℚ⁺ n (one-ℚ⁺ +ℚ⁺ ε))))
-  unbounded-power-one-plus-ℚ⁺ ε b =
-    unit-trunc-Prop (bound-unbounded-power-one-plus-ℚ⁺ ε b)
+      tr
+        ( is-negative-ℚ)
+        ( equational-reasoning
+          power-ℚ (k *ℕ 2) q *ℚ q
+          ＝ power-ℚ (succ-ℕ (k *ℕ 2)) q
+            by inv (power-succ-ℚ (k *ℕ 2) q)
+          ＝ power-ℚ n q
+            by ap (λ m → power-ℚ m q) k2+1=n)
+        ( is-negative-mul-positive-negative-ℚ
+          ( is-positive-even-power-ℚ⁻ (k *ℕ 2) q⁻ (k , refl))
+          ( is-neg-q))
 ```
 
-### If `1 < q`, `qⁿ` grows without bound
+### If `|p| ≤ |q|`, `|pⁿ| ≤ |qⁿ|`
 
 ```agda
 abstract
-  bound-unbounded-power-greater-than-one-ℚ⁺ :
-    (q : ℚ⁺) (b : ℚ) → le-ℚ⁺ one-ℚ⁺ q →
-    Σ ℕ (λ n → le-ℚ b (rational-ℚ⁺ (power-ℚ⁺ n q)))
-  bound-unbounded-power-greater-than-one-ℚ⁺ q⁺@(q , _) b 1<q =
-    let
-      q-1⁺ = positive-diff-le-ℚ one-ℚ q 1<q
-      (n , b<⟨1+q-1⟩ⁿ) = bound-unbounded-power-one-plus-ℚ⁺ q-1⁺ b
-    in
-      ( n ,
-        tr
-          ( le-ℚ b)
-          ( ap
-            ( rational-ℚ⁺ ∘ power-ℚ⁺ n)
-            ( eq-ℚ⁺ (is-identity-right-conjugation-add-ℚ one-ℚ q)))
-          ( b<⟨1+q-1⟩ⁿ))
-
-  unbounded-power-greater-than-one-ℚ⁺ :
-    (q : ℚ⁺) (b : ℚ) → le-ℚ⁺ one-ℚ⁺ q →
-    exists ℕ (λ n → le-ℚ-Prop b (rational-ℚ⁺ (power-ℚ⁺ n q)))
-  unbounded-power-greater-than-one-ℚ⁺ q b 1<q =
-    unit-trunc-Prop (bound-unbounded-power-greater-than-one-ℚ⁺ q b 1<q)
-```
-
-### If `ε` is a positive rational number less than one, `εⁿ` becomes arbitrarily small
-
-```agda
-abstract
-  bound-arbitrarily-small-power-le-one-ℚ⁺ :
-    (ε δ : ℚ⁺) → le-ℚ⁺ ε one-ℚ⁺ →
-    Σ ℕ (λ n → le-ℚ⁺ (power-ℚ⁺ n ε) δ)
-  bound-arbitrarily-small-power-le-one-ℚ⁺ ε δ ε<1 =
-    let
-      1/δ = inv-ℚ⁺ δ
-      1/ε = inv-ℚ⁺ ε
-      1<1/ε =
-        tr
-          ( λ q → le-ℚ⁺ q 1/ε)
-          ( inv-one-ℚ⁺)
-          ( inv-le-ℚ⁺ ε one-ℚ⁺ ε<1)
-      (n , 1/δ<⟨1/ε⟩ⁿ) =
-        bound-unbounded-power-greater-than-one-ℚ⁺ 1/ε (rational-ℚ⁺ 1/δ) 1<1/ε
-    in
-      ( n ,
-        binary-tr
-          ( le-ℚ⁺)
-          ( equational-reasoning
-            inv-ℚ⁺ (power-ℚ⁺ n 1/ε)
-            ＝ inv-ℚ⁺ (inv-ℚ⁺ (power-ℚ⁺ n ε))
-              by ap inv-ℚ⁺ (power-inv-Group group-mul-ℚ⁺ n ε)
-            ＝ power-ℚ⁺ n ε
-              by inv-inv-ℚ⁺ (power-ℚ⁺ n ε))
-          ( inv-inv-ℚ⁺ δ)
-          ( inv-le-ℚ⁺ 1/δ (power-ℚ⁺ n 1/ε) 1/δ<⟨1/ε⟩ⁿ))
-
-  arbitrarily-small-power-le-one-ℚ⁺ :
-    (ε δ : ℚ⁺) → le-ℚ⁺ ε one-ℚ⁺ →
-    exists ℕ (λ n → le-prop-ℚ⁺ (power-ℚ⁺ n ε) δ)
-  arbitrarily-small-power-le-one-ℚ⁺ ε δ 1<ε =
-    unit-trunc-Prop (bound-arbitrarily-small-power-le-one-ℚ⁺ ε δ 1<ε)
+  preserves-leq-abs-power-ℚ :
+    (n : ℕ) (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ p) (abs-ℚ q) →
+    leq-ℚ⁰⁺ (abs-ℚ (power-ℚ n p)) (abs-ℚ (power-ℚ n q))
+  preserves-leq-abs-power-ℚ 0 p q _ = refl-leq-ℚ _
+  preserves-leq-abs-power-ℚ (succ-ℕ n) p q |p|≤|q| =
+    binary-tr
+      ( leq-ℚ)
+      ( equational-reasoning
+        rational-abs-ℚ (power-ℚ n p) *ℚ rational-abs-ℚ p
+        ＝ rational-abs-ℚ (power-ℚ n p *ℚ p)
+          by inv (rational-abs-mul-ℚ (power-ℚ n p) p)
+        ＝ rational-abs-ℚ (power-ℚ (succ-ℕ n) p)
+          by ap rational-abs-ℚ (inv (power-succ-ℚ n p)))
+      ( equational-reasoning
+        rational-abs-ℚ (power-ℚ n q) *ℚ rational-abs-ℚ q
+        ＝ rational-abs-ℚ (power-ℚ n q *ℚ q)
+          by inv (rational-abs-mul-ℚ (power-ℚ n q) q)
+        ＝ rational-abs-ℚ (power-ℚ (succ-ℕ n) q)
+          by ap rational-abs-ℚ (inv (power-succ-ℚ n q)))
+      ( preserves-leq-mul-ℚ⁰⁺
+        ( abs-ℚ (power-ℚ n p))
+        ( abs-ℚ (power-ℚ n q))
+        ( abs-ℚ p)
+        ( abs-ℚ q)
+        ( preserves-leq-abs-power-ℚ n p q |p|≤|q|)
+        ( |p|≤|q|))
 ```
 
 ## See also
 
-- [Powers of elements of a group](group-theory.powers-of-elements-groups.md)
+- [Powers of elements of a monoid](group-theory.powers-of-elements-monoids.md)
+- [Powers of elements of a commutative monoid](group-theory.powers-of-elements-commutative-monoids.md)

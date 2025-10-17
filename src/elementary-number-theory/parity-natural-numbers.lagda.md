@@ -29,9 +29,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-Parity partitions the natural numbers into two classes: the even and the odd
-natural numbers. Even natural numbers are those that are divisible by two, and
-odd natural numbers are those that aren't.
+{{#concept "Parity" WDID=Q230967 WD="parity"}} partitions the
+[natural numbers](elementary-number-theory.natural-numbers.md) into two classes:
+the {{#concept "even" WDID=Q13366104 WD="even number" Agda=is-even-ℕ}} and the
+{{#concept "odd" WDID=Q13366129 WD="odd number" Agda=is-odd-ℕ}} natural numbers.
+Even natural numbers are those that are
+[divisible](elementary-number-theory.divisibility-natural-numbers.md) by two,
+and odd natural numbers are those that [aren't](foundation.negation.md).
 
 ## Definition
 

@@ -180,6 +180,7 @@ open import elementary-number-theory.positive-rational-numbers public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.powers-positive-rational-numbers public
+open import elementary-number-theory.powers-rational-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-closed-intervals-rational-numbers public
