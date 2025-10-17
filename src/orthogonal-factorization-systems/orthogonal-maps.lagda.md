@@ -1353,7 +1353,7 @@ module _
 Given an `f`-orthogonal map `g` and an arbitrary map `k`, then the pullback-hom
 `⟨k , g⟩` is also `f`-orthogonal. This is Corollary 3.1.13 of {{#cite BW23}}.
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Left orthogonality is preserved under pushout-products with arbitrary maps
 
@@ -1366,7 +1366,7 @@ pullback-hom:
   ⟨f □ k , g⟩ ~ ⟨f , ⟨k , g⟩⟩.
 ```
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Right orthogonality is preserved under sequential limits
 
@@ -1381,7 +1381,7 @@ of `f`-orthogonal maps
 then the [sequential limit](foundation.sequential-limits.md) `g∞ : X∞ → X₀` is
 also `f`-orthogonal. This is Proposition 3.1.14 of {{#cite BW23}}.
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### A type is `f`-local if and only if the terminal map is `f`-orthogonal
 

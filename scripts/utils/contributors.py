@@ -21,10 +21,6 @@ def print_skipping_contributors_warning(contributors, contributors_file):
     for contributor in sorted(contributors):
         print_skipping_contributor_warning(contributor, contributors_file)
 
-def print_skipping_contributors_warning(contributors, contributors_file):
-    for contributor in sorted(contributors):
-        print_skipping_contributor_warning(contributor, contributors_file)
-
 
 def get_real_author_index(raw_username, contributors):
     return next((index for (index, c) in enumerate(contributors) if raw_username in c['usernames']), None)
