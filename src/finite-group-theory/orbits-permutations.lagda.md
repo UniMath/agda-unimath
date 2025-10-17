@@ -421,25 +421,22 @@ module _
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → iterate k (map-equiv f) a ＝ b))
   pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
-  pr1 (pr2 (pr2 same-orbits-permutation)) a b P =
-    apply-twice-universal-property-trunc-Prop
-      ( P)
+  pr1 (pr2 (pr2 same-orbits-permutation)) a b =
+    map-binary-trunc-Prop
+      ( λ h (k , p) →
+        ( pr1 (lemma h k)) ,
+        ( ( ap (iterate (pr1 (lemma h k)) (map-equiv f)) (inv p)) ∙
+          ( inv (iterate-add-ℕ (pr1 (lemma h k)) k (map-equiv f) a)) ∙
+          ( ap
+            ( λ x → iterate x (map-equiv f) a)
+            ( pr2 (lemma h k))) ∙
+          ( mult-has-finite-orbits-permutation
+            ( type-Type-With-Cardinality-ℕ n X)
+            ( pair n h)
+            ( f)
+            ( a)
+            ( k))))
       ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
-      ( pr1 same-orbits-permutation b a)
-      ( λ (k , p) h →
-        intro-exists
-            ( pr1 (lemma h k))
-            ( ( ap (iterate (pr1 (lemma h k)) (map-equiv f)) (inv p)) ∙
-              ( ( inv (iterate-add-ℕ (pr1 (lemma h k)) k (map-equiv f) a)) ∙
-                ( ( ap
-                    ( λ x → iterate x (map-equiv f) a)
-                    ( pr2 (lemma h k))) ∙
-                  ( mult-has-finite-orbits-permutation
-                    ( type-Type-With-Cardinality-ℕ n X)
-                    ( pair n h)
-                    ( f)
-                    ( a)
-                    ( k))))))
     where
     has-finite-orbits-permutation-a :
       (h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
@@ -462,14 +459,12 @@ module _
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
           ( pr1 (pr2 (has-finite-orbits-permutation-a h))))
-  pr2 (pr2 (pr2 same-orbits-permutation)) a b c Q P =
-    apply-twice-universal-property-trunc-Prop P Q
-      ( pr1 same-orbits-permutation a c)
-      ( λ (k1 , p) (k2 , q) →
-        unit-trunc-Prop
-          ( ( k2 +ℕ k1) ,
-            ( ( iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
-              ( ap (iterate k2 (map-equiv f)) p ∙ q))))
+  pr2 (pr2 (pr2 same-orbits-permutation)) a b c =
+    map-binary-trunc-Prop
+      ( λ (k2 , q) (k1 , p) →
+        ( k2 +ℕ k1) ,
+        ( ( iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
+          ( ap (iterate k2 (map-equiv f)) p ∙ q)))
 
   abstract
     is-decidable-same-orbits-permutation :
@@ -824,26 +819,23 @@ module _
       ( same-orbits-permutation-count (composition-transposition-a-b g))
   pr1 (conserves-other-orbits-transposition-quotient g T nq nr) = pr1 T
   pr2 (conserves-other-orbits-transposition-quotient g (pair T1 T2) nq nr) =
-    apply-universal-property-trunc-Prop
-      ( T2)
-      ( is-equivalence-class-Prop
-        ( same-orbits-permutation-count (composition-transposition-a-b g))
-        ( T1))
+    map-trunc-Prop
       ( λ (pair x Q) →
-        unit-trunc-Prop
-          ( pair x
-            ( λ y →
-              iff-equiv
-                ( ( conserves-other-orbits-transposition g x y
-                    ( nq ∘ backward-implication (Q a))
-                    ( nr ∘ backward-implication (Q b))) ∘e
-                  ( equiv-iff'
-                    ( T1 y)
-                    ( prop-equivalence-relation
-                      ( same-orbits-permutation-count g)
-                      ( x)
-                      ( y))
-                    ( Q y))))))
+        pair
+          ( x)
+          ( λ y →
+            iff-equiv
+              ( ( conserves-other-orbits-transposition g x y
+                  ( nq ∘ backward-implication (Q a))
+                  ( nr ∘ backward-implication (Q b))) ∘e
+                ( equiv-iff'
+                  ( T1 y)
+                  ( prop-equivalence-relation
+                    ( same-orbits-permutation-count g)
+                    ( x)
+                    ( y))
+                  ( Q y)))))
+      ( T2)
 
   abstract
     not-same-orbits-transposition-same-orbits :
