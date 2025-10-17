@@ -176,7 +176,7 @@ module _
         ( mul-ℚ
           ( rational-ℕ n)
           ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) ＝
-        ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+      ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
     compute-arithmetic-sequence-ℚ⁺ n =
       ( compute-standard-arithmetic-sequence-ℚ⁺
         ( initial-term-arithmetic-sequence-ℚ⁺ u)
