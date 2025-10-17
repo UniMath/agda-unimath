@@ -45,7 +45,7 @@ open import group-theory.powers-of-elements-groups
 ## Idea
 
 The
-{{#concept "power operation" Disambiguation="raising a rational number to a natural number power" Agda=power-ℚ⁺}}
+{{#concept "power operation" Disambiguation="a positive rational number to a natural number power" Agda=power-ℚ⁺}}
 on the [positive](elementary-number-theory.positive-rational-numbers.md)
 [rational numbers](elementary-number-theory.rational-numbers.md) `n x ↦ xⁿ`,
 which is defined by [iteratively](foundation.iterating-functions.md) multiplying
