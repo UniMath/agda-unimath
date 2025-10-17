@@ -68,7 +68,7 @@ add-cauchy-sequence-ℝ {l1} {l2} u v =
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
     ( modulated-ucont-add-pair-ℝ l1 l2)
-    ( product-cauchy-sequence-Metric-Space
+    ( pair-cauchy-sequence-Metric-Space
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l2)
       ( u)

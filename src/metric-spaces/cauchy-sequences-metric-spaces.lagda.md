@@ -687,7 +687,7 @@ module _
 
   sequence-pair-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space (product-Metric-Space A B)
-  seq-product-cauchy-sequence-Metric-Space =
+  sequence-pair-cauchy-sequence-Metric-Space =
     pair-sequence
       ( map-cauchy-sequence-Metric-Space A u)
       ( map-cauchy-sequence-Metric-Space B v)
@@ -696,8 +696,8 @@ module _
     is-cauchy-sequence-pair-cauchy-sequence-Metric-Space :
       is-cauchy-sequence-Metric-Space
         ( product-Metric-Space A B)
-        ( seq-product-cauchy-sequence-Metric-Space)
-    is-cauchy-seq-product-cauchy-sequence-Metric-Space ε =
+        ( sequence-pair-cauchy-sequence-Metric-Space)
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space ε =
       ( max-ℕ
         ( modulus-of-convergence-cauchy-sequence-Metric-Space A u ε)
         ( modulus-of-convergence-cauchy-sequence-Metric-Space B v ε) ,
@@ -721,9 +721,9 @@ module _
 
   pair-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space (product-Metric-Space A B)
-  product-cauchy-sequence-Metric-Space =
-    ( seq-product-cauchy-sequence-Metric-Space ,
-      is-cauchy-seq-product-cauchy-sequence-Metric-Space)
+  pair-cauchy-sequence-Metric-Space =
+    ( sequence-pair-cauchy-sequence-Metric-Space ,
+      is-cauchy-sequence-pair-cauchy-sequence-Metric-Space)
 ```
 
 ## See also

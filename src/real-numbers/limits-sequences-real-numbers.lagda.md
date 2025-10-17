@@ -33,6 +33,13 @@ On this page, we describe properties of
 [limits of sequences](metric-spaces.limits-of-sequences-metric-spaces.md) in the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
+## Definition
+
+```agda
+is-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → UU l
+is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
+```
+
 ## Properties
 
 ### If two sequences have a limit, their sum has a limit equal to the sum of the limits
@@ -40,12 +47,12 @@ On this page, we describe properties of
 ```agda
 module _
   {l1 l2 : Level}
-  (u : sequence (ℝ l1))
-  (v : sequence (ℝ l2))
-  (lim-u : ℝ l1)
-  (lim-v : ℝ l2)
-  (Hu : is-limit-sequence-Metric-Space (metric-space-ℝ l1) u lim-u)
-  (Hv : is-limit-sequence-Metric-Space (metric-space-ℝ l2) v lim-v)
+  {u : sequence (ℝ l1)}
+  {v : sequence (ℝ l2)}
+  {lim-u : ℝ l1}
+  {lim-v : ℝ l2}
+  (Hu : is-limit-sequence-ℝ u lim-u)
+  (Hv : is-limit-sequence-ℝ v lim-v)
   where
 
   abstract
@@ -64,10 +71,6 @@ module _
         ( is-limit-pair-sequence-Metric-Space
           ( metric-space-ℝ l1)
           ( metric-space-ℝ l2)
-          ( u)
-          ( lim-u)
           ( Hu)
-          ( v)
-          ( lim-v)
           ( Hv))
 ```

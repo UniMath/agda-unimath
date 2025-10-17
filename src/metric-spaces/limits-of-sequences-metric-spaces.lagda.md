@@ -407,10 +407,10 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
-  (u : sequence-type-Metric-Space A)
-  (v : sequence-type-Metric-Space B)
-  (lim-u : type-Metric-Space A)
-  (lim-v : type-Metric-Space B)
+  {u : sequence-type-Metric-Space A}
+  {v : sequence-type-Metric-Space B}
+  {lim-u : type-Metric-Space A}
+  {lim-v : type-Metric-Space B}
   (is-lim-u : is-limit-sequence-Metric-Space A u lim-u)
   (is-lim-v : is-limit-sequence-Metric-Space B v lim-v)
   where
