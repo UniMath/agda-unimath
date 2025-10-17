@@ -23,14 +23,14 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
+open import set-theory.cardinals
 ```
 
 </details>
 
 ## Idea
 
-Two [cardinals of sets](set-theory.cardinalities.md) `X` and `Y` are
+Two [cardinals of sets](set-theory.cardinals.md) `X` and `Y` are
 {{#concept "similar" Disambiguation="cardinals" Agda=sim-Cardinal}} if there
 [merely](foundation.inhabited-types.md) is an
 [equivalence](foundation-core.equivalences.md) between any two representing two
