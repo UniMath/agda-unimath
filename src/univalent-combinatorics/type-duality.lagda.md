@@ -46,7 +46,7 @@ equiv-surjection-finite-type-family-finite-inhabited-type :
         ( λ Y →
           type-Finite-Type A ≃
           Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))))
-equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
+equiv-surjection-finite-type-family-finite-inhabited-type A B =
   ( equiv-Σ-equiv-base
     ( λ Y →
       type-Finite-Type A ≃
@@ -80,7 +80,7 @@ equiv-Fiber-trunc-prop-Finite-Type :
   (l : Level) {l1 : Level} (A : Finite-Type l1) →
   Slice-Surjection-Finite-Type (l1 ⊔ l) A ≃
   (type-Finite-Type A → Inhabited-Finite-Type (l1 ⊔ l))
-equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
+equiv-Fiber-trunc-prop-Finite-Type l A =
   ( equiv-Π-equiv-family (λ a → inv-associative-Σ)) ∘e
   ( equiv-Fiber-structure l
     ( λ X → is-finite X × is-inhabited X)
