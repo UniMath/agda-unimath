@@ -70,7 +70,7 @@ open Large-Ab public
 
 ## Properties
 
-### The similarity relation of a large commutative monoid
+### The similarity relation of a large abelian group
 
 ```agda
 module _
@@ -169,7 +169,7 @@ module _
     raise-unit-lzero-Large-Group (large-group-Large-Ab G)
 ```
 
-### The inverse of the identity is the identity
+### The negative of the identity is the identity
 
 ```agda
 module _
@@ -181,7 +181,7 @@ module _
     neg-zero-Large-Ab = inv-unit-Large-Group (large-group-Large-Ab G)
 ```
 
-### Uniqueness of right inverses
+### Uniqueness of additive right inverses
 
 ```agda
 module _
@@ -197,7 +197,7 @@ module _
       unique-right-inv-Large-Group (large-group-Large-Ab G)
 ```
 
-### Uniqueness of left inverses
+### Uniqueness of additive left inverses
 
 ```agda
 module _
@@ -312,7 +312,7 @@ module _
       ( commutative-add-Large-Ab G)
 ```
 
-### Cancellations in a large group
+### Cancellation laws in a large abelian group
 
 ```agda
 module _
@@ -381,7 +381,7 @@ module _
       sim-cancel-right-div-mul-Large-Group (large-group-Large-Ab G)
 ```
 
-### Addition of an element of a large abelian group is an embedding
+### Addition by an element of a large abelian group is an embedding
 
 ```agda
 module _
