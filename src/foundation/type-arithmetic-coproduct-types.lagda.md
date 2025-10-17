@@ -174,7 +174,7 @@ module _
       is-section-map-inv-right-distributive-Σ-coproduct
 
   inv-right-distributive-Σ-coproduct :
-     ((Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y)))) ≃ Σ (A + B) C
+    ((Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y)))) ≃ Σ (A + B) C
   inv-right-distributive-Σ-coproduct =
     ( map-inv-right-distributive-Σ-coproduct ,
       is-equiv-map-inv-right-distributive-Σ-coproduct)
