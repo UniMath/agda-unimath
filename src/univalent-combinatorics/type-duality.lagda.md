@@ -90,8 +90,9 @@ equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
       ( equiv-tot
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
-          ( equiv-Σ-equiv-base _
-            ( inv-equiv-is-finite-domain-is-finite-fiber A f)))))) ∘e
-  ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
+          ( equiv-Σ-equiv-base
+            ( λ _ → (x : type-Finite-Type A) → is-inhabited (fiber f x))
+            ( inv-equiv-is-finite-domain-is-finite-fiber A f)))) ∘e
+      ( equiv-left-swap-Σ))) ∘e
   ( associative-Σ)
 ```
