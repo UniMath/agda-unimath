@@ -31,7 +31,7 @@ open import real-numbers.metric-space-of-real-numbers
 
 A
 {{#concept "Cauchy sequence" Disambiguation="in the Dedekind real numbers" Agda=cauchy-sequence-ℝ}}
-is a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces) in the
+is a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in the
 [metric space](metric-spaces.metric-spaces.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md). Because the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)

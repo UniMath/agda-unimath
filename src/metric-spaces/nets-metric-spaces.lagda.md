@@ -25,6 +25,7 @@ open import metric-spaces.images-metric-spaces
 open import metric-spaces.images-short-functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
