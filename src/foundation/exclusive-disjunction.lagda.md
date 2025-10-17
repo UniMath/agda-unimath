@@ -162,8 +162,6 @@ module _
                     ( is-prop-type-Prop Q q q'))))) ∘e
           ( equiv-dependent-universal-property-coproduct (inr q ＝_))))) ∘e
     ( right-distributive-Σ-coproduct
-      ( type-Prop P)
-      ( type-Prop Q)
       ( λ x → (y : type-Prop P + type-Prop Q) → x ＝ y))
 ```
 

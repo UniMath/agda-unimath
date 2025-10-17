@@ -283,10 +283,10 @@ module unityped where
     field
       element :
         (x : system.element σ) →
-        Id ( hom-system.element
-              ( substitution.element S x)
-              ( generic-element.element δ))
-            ( x)
+        hom-system.element
+          ( substitution.element S x)
+          ( generic-element.element δ) ＝
+        x
       slice :
         generic-element-is-identity
           ( substitution.slice S)

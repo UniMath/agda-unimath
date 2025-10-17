@@ -245,6 +245,6 @@ abstract
                 ( Σ (Fin k) (B ∘ inl))
                 ( B (inr star)) f) ∘e
               ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr)))) ∘e
-            ( right-distributive-Σ-coproduct (Fin k) unit B))
+            ( right-distributive-Σ-coproduct B))
           ( y)))
 ```

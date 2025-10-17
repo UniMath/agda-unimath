@@ -174,13 +174,9 @@ is-inhabited-Σ :
   {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
   is-inhabited X → ((x : X) → is-inhabited (Y x)) → is-inhabited (Σ X Y)
 is-inhabited-Σ {l1} {l2} {X} {Y} H K =
-  apply-universal-property-trunc-Prop H
+  apply-twice-universal-property-trunc-Prop' H K
     ( is-inhabited-Prop (Σ X Y))
-    ( λ x →
-      apply-universal-property-trunc-Prop
-        ( K x)
-        ( is-inhabited-Prop (Σ X Y))
-        ( λ y → unit-trunc-Prop (x , y)))
+    ( λ x y → unit-trunc-Prop (x , y))
 
 Σ-Inhabited-Type :
   {l1 l2 : Level} (X : Inhabited-Type l1)

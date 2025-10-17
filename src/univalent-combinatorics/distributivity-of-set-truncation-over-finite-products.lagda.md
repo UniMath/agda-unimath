@@ -170,8 +170,9 @@ module _
               ( λ h →
                 ( ( inv-equiv equiv-funext) ∘e
                   ( equiv-precomp-Π e
-                    ( λ x → Id ((map-equiv f ∘ unit-trunc-Set) h x)
-                    ( map-Π (λ y → unit-trunc-Set) h x)))) ∘e
+                    ( λ x →
+                      map-equiv f (unit-trunc-Set h) x ＝
+                      map-Π (λ y → unit-trunc-Set) h x))) ∘e
                 ( equiv-funext))))
         ( is-contr-equiv'
           ( Σ ( ( type-trunc-Set ((x : Fin k) → B (map-equiv e x))) ≃

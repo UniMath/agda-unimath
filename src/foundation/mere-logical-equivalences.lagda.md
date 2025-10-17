@@ -9,6 +9,7 @@ module foundation.mere-logical-equivalences where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.mere-functions
@@ -74,14 +75,7 @@ module _
   where
 
   transitive-mere-iff : mere-iff B C → mere-iff A B → mere-iff A C
-  transitive-mere-iff |g| =
-    rec-trunc-Prop
-      ( prop-mere-iff A C)
-      ( λ f →
-        rec-trunc-Prop
-          ( prop-mere-iff A C)
-          ( λ g → unit-trunc-Prop (g ∘iff f))
-          ( |g|))
+  transitive-mere-iff = map-binary-trunc-Prop (_∘iff_)
 ```
 
 ### Mere logical equivalence is a symmetric relation
@@ -92,8 +86,7 @@ module _
   where
 
   symmetric-mere-iff : mere-iff A B → mere-iff B A
-  symmetric-mere-iff =
-    rec-trunc-Prop (prop-mere-iff B A) (unit-trunc-Prop ∘ inv-iff)
+  symmetric-mere-iff = map-trunc-Prop inv-iff
 ```
 
 ### Merely logically equivalent types are coinhabited
@@ -108,10 +101,7 @@ module _
 
   ev-forward-mere-iff' : mere-iff A B → A → is-inhabited B
   ev-forward-mere-iff' |f| a =
-    rec-trunc-Prop
-      ( trunc-Prop B)
-      ( λ f → unit-trunc-Prop (forward-implication f a))
-      ( |f|)
+    map-trunc-Prop (λ f → forward-implication f a) |f|
 
   ev-forward-mere-iff : mere-iff A B → is-inhabited A → is-inhabited B
   ev-forward-mere-iff |f| =
@@ -119,10 +109,7 @@ module _
 
   ev-backward-mere-iff' : mere-iff A B → B → is-inhabited A
   ev-backward-mere-iff' |f| b =
-    rec-trunc-Prop
-      ( trunc-Prop A)
-      ( λ f → unit-trunc-Prop (backward-implication f b))
-      ( |f|)
+    map-trunc-Prop (λ f → backward-implication f b) |f|
 
   ev-backward-mere-iff : mere-iff A B → is-inhabited B → is-inhabited A
   ev-backward-mere-iff |f| =
@@ -144,16 +131,10 @@ module _
   where
 
   forward-mere-function-mere-iff : mere-iff A B → mere-function A B
-  forward-mere-function-mere-iff =
-    rec-trunc-Prop
-      ( prop-mere-function A B)
-      ( unit-trunc-Prop ∘ forward-implication)
+  forward-mere-function-mere-iff = map-trunc-Prop forward-implication
 
   backward-mere-function-mere-iff : mere-iff A B → mere-function B A
-  backward-mere-function-mere-iff =
-    rec-trunc-Prop
-      ( prop-mere-function B A)
-      ( unit-trunc-Prop ∘ backward-implication)
+  backward-mere-function-mere-iff = map-trunc-Prop backward-implication
 ```
 
 ### Mere logical equivalence is equivalent to having bidirectional mere functions

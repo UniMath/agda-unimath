@@ -101,7 +101,7 @@ module _
   id-equiv-Infinite-Cyclic-Type = id-equiv-Cyclic-Type zero-ℕ X
 
   equiv-eq-Infinite-Cyclic-Type :
-    (Y : Infinite-Cyclic-Type l1) → Id X Y → equiv-Infinite-Cyclic-Type Y
+    (Y : Infinite-Cyclic-Type l1) → X ＝ Y → equiv-Infinite-Cyclic-Type Y
   equiv-eq-Infinite-Cyclic-Type = equiv-eq-Cyclic-Type zero-ℕ X
 
   is-torsorial-equiv-Infinite-Cyclic-Type :
@@ -115,7 +115,7 @@ module _
     is-equiv-equiv-eq-Cyclic-Type zero-ℕ X
 
   extensionality-Infinite-Cyclic-Type :
-    (Y : Infinite-Cyclic-Type l1) → Id X Y ≃ equiv-Infinite-Cyclic-Type Y
+    (Y : Infinite-Cyclic-Type l1) → (X ＝ Y) ≃ equiv-Infinite-Cyclic-Type Y
   extensionality-Infinite-Cyclic-Type = extensionality-Cyclic-Type zero-ℕ X
 
 module _
@@ -156,15 +156,10 @@ module _
                               ℤ-Pointed-Type-With-Aut))))
                       ( is-equiv-id)))) ∘e
               ( ( equiv-right-swap-Σ) ∘e
-                ( ( associative-Σ
-                    ( ℤ ≃ ℤ)
-                    ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
-                    ( λ e →
-                      ( map-equiv (pr1 e) ∘ succ-ℤ) ~
-                      ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
+                ( ( associative-Σ) ∘e
                   ( ( equiv-right-swap-Σ) ∘e
                     ( equiv-Σ
-                      ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
+                      ( λ e → map-equiv (pr1 e) zero-ℤ ＝ zero-ℤ)
                       ( equiv-Σ
                         ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
                         ( equiv-postcomp-equiv (equiv-left-add-ℤ (neg-ℤ x)) ℤ)
