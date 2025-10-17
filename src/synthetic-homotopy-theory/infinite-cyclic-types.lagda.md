@@ -145,7 +145,7 @@ module _
                 ( λ f →
                   is-proof-irrelevant-is-prop
                     ( is-property-is-equiv (pr1 f))
-                    ( is-equiv-htpy id
+                    ( is-equiv-htpy-id
                       ( htpy-eq
                         ( ap
                           ( pr1)
@@ -153,8 +153,7 @@ module _
                           { y = pair id (pair refl refl-htpy)}
                           ( eq-is-contr
                             ( is-initial-ℤ-Pointed-Type-With-Aut
-                              ℤ-Pointed-Type-With-Aut))))
-                      ( is-equiv-id)))) ∘e
+                              ℤ-Pointed-Type-With-Aut))))))) ∘e
               ( ( equiv-right-swap-Σ) ∘e
                 ( ( associative-Σ) ∘e
                   ( ( equiv-right-swap-Σ) ∘e

@@ -10,16 +10,17 @@ module foundation.morphisms-arrows where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 
@@ -74,6 +75,44 @@ module _
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  coherence-hom-arrow' : (A → X) → (B → Y) → UU (l1 ⊔ l4)
+  coherence-hom-arrow' i = coherence-square-maps' i f g
+
+  hom-arrow' : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-arrow' = Σ (A → X) (λ i → Σ (B → Y) (coherence-hom-arrow' i))
+
+  map-domain-hom-arrow' : hom-arrow' → A → X
+  map-domain-hom-arrow' = pr1
+
+  map-codomain-hom-arrow' : hom-arrow' → B → Y
+  map-codomain-hom-arrow' = pr1 ∘ pr2
+
+  coh-hom-arrow' :
+    (h : hom-arrow') →
+    coherence-hom-arrow' (map-domain-hom-arrow' h) (map-codomain-hom-arrow' h)
+  coh-hom-arrow' = pr2 ∘ pr2
+
+  equiv-hom-arrow-hom-arrow' : hom-arrow' ≃ hom-arrow f g
+  equiv-hom-arrow-hom-arrow' =
+    equiv-tot (λ i → equiv-tot (λ j → equiv-inv-htpy (g ∘ i) (j ∘ f)))
+
+  equiv-hom-arrow'-hom-arrow : hom-arrow f g ≃ hom-arrow'
+  equiv-hom-arrow'-hom-arrow =
+    equiv-tot (λ i → equiv-tot (λ j → equiv-inv-htpy (j ∘ f) (g ∘ i)))
+
+  hom-arrow-hom-arrow' : hom-arrow' → hom-arrow f g
+  hom-arrow-hom-arrow' = map-equiv equiv-hom-arrow-hom-arrow'
+
+  hom-arrow'-hom-arrow : hom-arrow f g → hom-arrow'
+  hom-arrow'-hom-arrow = map-equiv equiv-hom-arrow'-hom-arrow
+```
+
 ## Operations
 
 ### The identity morphism of arrows
@@ -94,11 +133,14 @@ where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  id-hom-arrow : hom-arrow f f
-  id-hom-arrow = (id , id , refl-htpy)
+  id-hom-arrow' : (f : A → B) → hom-arrow f f
+  id-hom-arrow' f = (id , id , refl-htpy)
+
+  id-hom-arrow : {f : A → B} → hom-arrow f f
+  id-hom-arrow {f} = id-hom-arrow' f
 ```
 
 ### Composition of morphisms of arrows
@@ -165,12 +207,48 @@ module _
       ( coh-hom-arrow g h b)
 
   comp-hom-arrow : hom-arrow f h
-  pr1 comp-hom-arrow =
-    map-domain-comp-hom-arrow
-  pr1 (pr2 comp-hom-arrow) =
-    map-codomain-comp-hom-arrow
-  pr2 (pr2 comp-hom-arrow) =
-    coh-comp-hom-arrow
+  comp-hom-arrow =
+    ( map-domain-comp-hom-arrow ,
+      map-codomain-comp-hom-arrow ,
+      coh-comp-hom-arrow)
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow' g h) (a : hom-arrow' f g)
+  where
+
+  map-domain-comp-hom-arrow' : A → U
+  map-domain-comp-hom-arrow' =
+    map-domain-hom-arrow' g h b ∘ map-domain-hom-arrow' f g a
+
+  map-codomain-comp-hom-arrow' : B → V
+  map-codomain-comp-hom-arrow' =
+    map-codomain-hom-arrow' g h b ∘ map-codomain-hom-arrow' f g a
+
+  coh-comp-hom-arrow' :
+    coherence-hom-arrow' f h
+      ( map-domain-comp-hom-arrow')
+      ( map-codomain-comp-hom-arrow')
+  coh-comp-hom-arrow' =
+    pasting-horizontal-coherence-square-maps'
+      ( map-domain-hom-arrow' f g a)
+      ( map-domain-hom-arrow' g h b)
+      ( f)
+      ( g)
+      ( h)
+      ( map-codomain-hom-arrow' f g a)
+      ( map-codomain-hom-arrow' g h b)
+      ( coh-hom-arrow' f g a)
+      ( coh-hom-arrow' g h b)
+
+  comp-hom-arrow' : hom-arrow' f h
+  comp-hom-arrow' =
+    ( map-domain-comp-hom-arrow' ,
+      map-codomain-comp-hom-arrow' ,
+      coh-comp-hom-arrow')
 ```
 
 ### Transposing morphisms of arrows
