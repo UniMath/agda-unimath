@@ -36,16 +36,18 @@ open import logic.propositionally-decidable-types
 A type `X`
 {{#concept "has decidable universal quantifications" Disambiguation="on type" Agda=has-decidable-∀}}
 if, for every [decidable subtype](foundation.decidable-subtypes.md) `P` of `X`,
-it is decidable if `P` is the full subtype. In other words, we have a witness of
-type
+it is [decidable](foundation.decidable-types.md) if `P` is the
+[full subtype](foundation.full-subtypes.md). In other words, we have a witness
+of type
 
 ```text
   (P : decidable-subtype X) → is-decidable (∀ x. x ∈ P).
 ```
 
-Having decidable universal quantifications is
-[logically equivalent](foundation.logical-equivalences.md) to having decidable
-Π-types, but the latter is not a [proposition](foundation-core.propositions.md).
+Note that having decidable universal quantifications is
+[logically equivalent](foundation.logical-equivalences.md) to having
+[decidable Π-types](foundation.types-with-decidable-dependent-product-types.md),
+but the latter is not a [proposition](foundation-core.propositions.md).
 
 **Terminology.** In the terminology of Martín Escardó, a type that has decidable
 universal quantifications is referred to as _weakly compact_, or _Π-compact_, or

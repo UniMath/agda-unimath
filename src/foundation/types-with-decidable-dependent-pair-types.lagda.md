@@ -26,7 +26,6 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.irrefutable-equality
 open import foundation.logical-operations-booleans
 open import foundation.negation
 open import foundation.retracts-of-types
@@ -240,14 +239,15 @@ has-decidable-Σ-pointed-has-decidable-Σ-has-element x₀ f P =
     ( f (neg-decidable-family P))
 ```
 
-### The two small predicate of pointedly having decidable Σ-types are equivalent
+### The two small predicates of pointedly having decidable Σ-types are equivalent
 
 ```agda
 flip-has-decidable-Σ-pointed-bool :
   {l : Level} {X : UU l} →
   has-decidable-Σ-pointed-bool' X →
   has-decidable-Σ-pointed-bool X
-pr1 (flip-has-decidable-Σ-pointed-bool H b) = pr1 (H (neg-bool ∘ b))
+pr1 (flip-has-decidable-Σ-pointed-bool H b) =
+  pr1 (H (neg-bool ∘ b))
 pr2 (flip-has-decidable-Σ-pointed-bool H b) p x =
   is-true-is-false-neg-bool
     ( pr2
@@ -321,22 +321,7 @@ abstract
 
 ### Types that pointedly have decidable Σ-types have decidable Σ-types
 
-```text
-is-decidable-Σ-is-this-other-thing :
-  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
-  ((x : X) → ¬ (Y x)) → ¬ (Σ X Y)
-is-decidable-Σ-is-this-other-thing f xp = f (pr1 xp) (pr2 xp)
-
-has-decidable-Σ-has-decidable-Σ-pointed :
-  {l : Level} {X : UU l} →
-  has-decidable-Σ-pointed X → has-decidable-Σ X
-has-decidable-Σ-has-decidable-Σ-pointed {X = X} f P =
-  map-coproduct
-    ( pair (pr1 (f P)))
-    ( λ np xp → np TODO)
-    ( is-decidable-decidable-family P (pr1 (f P)))
-  where postulate TODO : _ -- TODO
-```
+> This remains to be formalized.
 
 ### Having decidable Σ-types transfers along double negation dense maps
 
@@ -365,7 +350,8 @@ module _
 
 ```agda
 has-decidable-Σ-surjection :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↠ Y →
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  X ↠ Y →
   has-decidable-Σ X → has-decidable-Σ Y
 has-decidable-Σ-surjection h =
   has-decidable-Σ-double-negation-dense-map
@@ -424,7 +410,7 @@ has-decidable-Σ-type-decidable-subtype :
   has-decidable-Σ (type-decidable-subtype P)
 has-decidable-Σ-type-decidable-subtype {X = X} f P Q =
   is-decidable-equiv
-    ( associative-Σ X (is-in-decidable-subtype P) (family-decidable-family Q))
+    ( associative-Σ)
     ( f ( comp-decidable-family-decidable-subtype P
           ( base-change-decidable-family Q ∘ pair)))
 
@@ -511,9 +497,9 @@ module _
     has-decidable-Σ (Σ A B)
   has-decidable-Σ-Σ f g {l} P =
     is-decidable-equiv
-      ( associative-Σ A B (family-decidable-family P))
+      ( associative-Σ)
       ( f ( ( λ x → Σ (B x) (λ y → family-decidable-family P (x , y))) ,
-            ( λ x → g x (base-change-decidable-family P (λ b → (x , b))))))
+            ( λ x → g x (base-change-decidable-family P (x ,_)))))
 ```
 
 ### The total space of decidable families of types with double negation dense equality over types with decidable Σ-types have decidable Σ-types
@@ -610,21 +596,8 @@ has-decidable-Σ-bool' =
 
 ### The subuniverse of propositions has decidable Σ-types
 
-```agda
--- has-decidable-Σ-Prop : {l : Level} → has-decidable-Σ (Prop l)
--- has-decidable-Σ-Prop {l} P =
---   rec-coproduct
---     ( λ p → inl (raise-unit-Prop l , p))
---     ( λ np →
---       rec-coproduct
---         ( λ q → inl (raise-empty-Prop l , q))
---         ( λ nq → inr {!   !})
---         ( is-decidable-decidable-family P (raise-empty-Prop l)))
---     ( is-decidable-decidable-family P (raise-unit-Prop l))
-```
-
-> The above results depends on certain properties of the subuniverse of
-> propositions that are not formalized at the time of writing.
+> This result depends on certain properties of the subuniverse of propositions
+> that are not formalized at the time of writing.
 
 ## References
 

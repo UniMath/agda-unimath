@@ -24,7 +24,6 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.irrefutable-equality
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
