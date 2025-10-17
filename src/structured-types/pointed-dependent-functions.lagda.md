@@ -55,6 +55,6 @@ module _
 
   preserves-point-function-pointed-Π :
     (f : pointed-Π A B) →
-    Id (function-pointed-Π f (point-Pointed-Type A)) (point-Pointed-Fam A B)
+    function-pointed-Π f (point-Pointed-Type A) ＝ point-Pointed-Fam A B
   preserves-point-function-pointed-Π = pr2
 ```

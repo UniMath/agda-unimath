@@ -150,7 +150,8 @@ module _
   right-distributive-mul-add-function-Commutative-Semiring :
     (f g h : type-function-Commutative-Semiring) →
     mul-function-Commutative-Semiring
-      ( add-function-Commutative-Semiring f g) h ＝
+      ( add-function-Commutative-Semiring f g)
+      ( h) ＝
     add-function-Commutative-Semiring
       ( mul-function-Commutative-Semiring f h)
       ( mul-function-Commutative-Semiring g h)

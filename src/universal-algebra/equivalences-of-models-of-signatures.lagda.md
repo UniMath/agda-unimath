@@ -151,7 +151,7 @@ module _
     Eq-Model-Signature X Y ≃
     Σ ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
       ( λ f → is-equiv f × preserves-operations-Model-Signature σ X Y f)
-  equiv-Eq-Model-Signature' X Y = associative-Σ _ _ _
+  equiv-Eq-Model-Signature' X Y = associative-Σ
 
   refl-Eq-Model-Signature :
     {l2 : Level} (X : Model-Signature σ l2) → Eq-Model-Signature X X

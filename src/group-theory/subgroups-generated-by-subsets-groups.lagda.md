@@ -113,11 +113,10 @@ module _
 
   preserves-concat-ev-formal-combination-subset-Group :
     (u v : formal-combination-subset-Group) →
-    Id
-      ( ev-formal-combination-subset-Group (concat-list u v))
-      ( mul-Group G
-        ( ev-formal-combination-subset-Group u)
-        ( ev-formal-combination-subset-Group v))
+    ( ev-formal-combination-subset-Group (concat-list u v)) ＝
+    ( mul-Group G
+      ( ev-formal-combination-subset-Group u)
+      ( ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group nil v =
     inv (left-unit-law-mul-Group G (ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group
@@ -153,10 +152,9 @@ module _
 
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
-    Id
-      ( ev-formal-combination-subset-Group
-        ( inv-formal-combination-subset-Group u))
-      ( inv-Group G (ev-formal-combination-subset-Group u))
+    ev-formal-combination-subset-Group
+      ( inv-formal-combination-subset-Group u) ＝
+    inv-Group G (ev-formal-combination-subset-Group u)
   preserves-inv-ev-formal-combination-subset-Group nil =
     inv (inv-unit-Group G)
   preserves-inv-ev-formal-combination-subset-Group

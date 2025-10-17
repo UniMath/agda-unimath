@@ -325,13 +325,10 @@ abstract
   all-elements-equal-has-finite-cardinality {l1} {X} (pair k K) (pair l L) =
     eq-type-subtype
       ( λ k → mere-equiv-Prop (Fin k) X)
-      ( apply-universal-property-trunc-Prop K
+      ( apply-twice-universal-property-trunc-Prop K L
         ( Id-Prop ℕ-Set k l)
-        ( λ (e : Fin k ≃ X) →
-          apply-universal-property-trunc-Prop L
-            ( Id-Prop ℕ-Set k l)
-            ( λ (f : Fin l ≃ X) →
-              is-equivalence-injective-Fin (inv-equiv f ∘e e))))
+        ( λ (e : Fin k ≃ X) (f : Fin l ≃ X) →
+          is-equivalence-injective-Fin (inv-equiv f ∘e e)))
 
 abstract
   is-prop-has-finite-cardinality :
@@ -388,7 +385,7 @@ module _
   abstract
     compute-number-of-elements-is-finite :
       (e : count X) (f : is-finite X) →
-      Id (number-of-elements-count e) (number-of-elements-is-finite f)
+      number-of-elements-count e ＝ number-of-elements-is-finite f
     compute-number-of-elements-is-finite e f =
       ind-trunc-Prop
         ( λ g →
@@ -419,14 +416,11 @@ number-of-elements-Finite-Type X =
 ```agda
 eq-cardinality :
   {l1 : Level} {k l : ℕ} {A : UU l1} →
-  has-cardinality-ℕ k A → has-cardinality-ℕ l A → Id k l
+  has-cardinality-ℕ k A → has-cardinality-ℕ l A → k ＝ l
 eq-cardinality H K =
-  apply-universal-property-trunc-Prop H
+  apply-twice-universal-property-trunc-Prop H K
     ( Id-Prop ℕ-Set _ _)
-    ( λ e →
-      apply-universal-property-trunc-Prop K
-        ( Id-Prop ℕ-Set _ _)
-        ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
+    ( λ e f → is-equivalence-injective-Fin (inv-equiv f ∘e e))
 ```
 
 ### Equivalent finite types have the same cardinality
@@ -578,10 +572,7 @@ is-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ :
   {l1 : Level} (n : ℕ) (A : Type-With-Cardinality-ℕ l1 (succ-ℕ n)) →
   is-inhabited (type-Type-With-Cardinality-ℕ (succ-ℕ n) A)
 is-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ n A =
-  apply-universal-property-trunc-Prop
-    ( pr2 A)
-    ( is-inhabited-Prop (type-Type-With-Cardinality-ℕ (succ-ℕ n) A))
-    ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin n)))
+  map-trunc-Prop (λ e → map-equiv e (zero-Fin n)) (pr2 A)
 ```
 
 ### If `X` is finite, then its propositional truncation is decidable
@@ -621,7 +612,7 @@ id-equiv-Finite-Type : {l : Level} (X : Finite-Type l) → equiv-Finite-Type X X
 id-equiv-Finite-Type X = id-equiv
 
 extensionality-Finite-Type :
-  {l : Level} (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
+  {l : Level} (X Y : Finite-Type l) → (X ＝ Y) ≃ equiv-Finite-Type X Y
 extensionality-Finite-Type = extensionality-subuniverse is-finite-Prop
 
 is-torsorial-equiv-Finite-Type :
@@ -634,11 +625,11 @@ is-torsorial-equiv-Finite-Type {l} X =
     ( is-torsorial-Id X)
 
 equiv-eq-Finite-Type :
-  {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-Finite-Type X Y
+  {l : Level} → (X Y : Finite-Type l) → X ＝ Y → equiv-Finite-Type X Y
 equiv-eq-Finite-Type X Y = map-equiv (extensionality-Finite-Type X Y)
 
 eq-equiv-Finite-Type :
-  {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → Id X Y
+  {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → X ＝ Y
 eq-equiv-Finite-Type X Y = map-inv-equiv (extensionality-Finite-Type X Y)
 ```
 
@@ -657,7 +648,7 @@ id-equiv-fam-Finite-Type Y x = id-equiv
 
 extensionality-fam-Finite-Type :
   {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) →
-  Id Y Z ≃ equiv-fam-Finite-Type Y Z
+  (Y ＝ Z) ≃ equiv-fam-Finite-Type Y Z
 extensionality-fam-Finite-Type = extensionality-fam-subuniverse is-finite-Prop
 ```
 
@@ -679,7 +670,7 @@ id-equiv-Type-With-Cardinality-ℕ X = id-equiv-component-UU-Level X
 
 equiv-eq-Type-With-Cardinality-ℕ :
   {l : Level} (k : ℕ) {X Y : Type-With-Cardinality-ℕ l k} →
-  Id X Y → equiv-Type-With-Cardinality-ℕ k X Y
+  X ＝ Y → equiv-Type-With-Cardinality-ℕ k X Y
 equiv-eq-Type-With-Cardinality-ℕ k p = equiv-eq-component-UU-Level p
 
 abstract
@@ -700,13 +691,13 @@ abstract
 
 eq-equiv-Type-With-Cardinality-ℕ :
   {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
-  equiv-Type-With-Cardinality-ℕ k X Y → Id X Y
+  equiv-Type-With-Cardinality-ℕ k X Y → X ＝ Y
 eq-equiv-Type-With-Cardinality-ℕ k X Y =
   eq-equiv-component-UU-Level X Y
 
 equiv-equiv-eq-Type-With-Cardinality-ℕ :
   {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
-  Id X Y ≃ equiv-Type-With-Cardinality-ℕ k X Y
+  (X ＝ Y) ≃ equiv-Type-With-Cardinality-ℕ k X Y
 pr1 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
   equiv-eq-Type-With-Cardinality-ℕ k
 pr2 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
@@ -756,7 +747,8 @@ abstract
 ```agda
   equiv-has-cardinality-id-number-of-elements-is-finite :
     {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
-    ( has-cardinality-ℕ n X ≃ Id (number-of-elements-is-finite H) n)
+    has-cardinality-ℕ n X ≃
+    ( number-of-elements-is-finite H ＝ n)
   pr1 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) Q =
     ap
       ( number-of-elements-has-finite-cardinality)
