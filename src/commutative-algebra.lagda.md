@@ -16,12 +16,12 @@ open import commutative-algebra.convolution-sequences-commutative-semirings publ
 open import commutative-algebra.dependent-products-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
-open import commutative-algebra.eisenstein-integers public
 open import commutative-algebra.euclidean-domains public
+open import commutative-algebra.formal-power-series-commutative-rings public
+open import commutative-algebra.formal-power-series-commutative-semirings public
 open import commutative-algebra.full-ideals-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
-open import commutative-algebra.gaussian-integers public
 open import commutative-algebra.groups-of-units-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-semirings public
@@ -41,6 +41,8 @@ open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.multiples-of-elements-commutative-rings public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
+open import commutative-algebra.polynomials-commutative-rings public
+open import commutative-algebra.polynomials-commutative-semirings public
 open import commutative-algebra.poset-of-ideals-commutative-rings public
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-rings public

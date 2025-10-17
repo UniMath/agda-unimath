@@ -11,11 +11,13 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.images
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.approximations-metric-spaces
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
@@ -29,6 +31,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ```
 
 </details>
@@ -86,6 +89,30 @@ module _
       is-approximation-subset-net-Metric-Space)
 ```
 
+### If a metric space is inhabited, so is any net on it
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
+  (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
+  where
+
+  abstract
+    is-inhabited-net-inhabited-Metric-Space :
+      is-inhabited-finitely-enumerable-subtype (pr1 S)
+    is-inhabited-net-inhabited-Metric-Space =
+      is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
+        ( subset-net-Metric-Space X ε S)
+        ( is-approximation-subset-net-Metric-Space X ε S)
+
+  inhabited-finitely-enumerable-subtype-net-Metric-Space :
+    inhabited-finitely-enumerable-subtype l3 (type-Metric-Space X)
+  inhabited-finitely-enumerable-subtype-net-Metric-Space =
+    ( finitely-enumerable-subset-net-Metric-Space X ε S ,
+      is-inhabited-net-inhabited-Metric-Space)
+```
+
 ## Properties
 
 ### If `μ` is a modulus of uniform continuity for `f : X → Y` and `N` is a `(μ ε)`-net of `X`, then `im f N` is an `ε`-net of `im f X`
@@ -102,7 +129,7 @@ module _
   net-im-uniformly-continuous-function-net-Metric-Space :
     net-Metric-Space (l1 ⊔ l3 ⊔ l5) (im-Metric-Space X Y f) ε
   net-im-uniformly-continuous-function-net-Metric-Space =
-    ( finitely-enumerable-subtype-im-finitely-enumerable-subtype
+    ( im-finitely-enumerable-subtype
       ( map-unit-im f)
       ( finitely-enumerable-subset-net-Metric-Space X (μ ε) N) ,
       is-approximation-im-uniformly-continuous-function-approximation-Metric-Space
@@ -174,9 +201,28 @@ module _
 
   net-im-isometric-equiv-net-Metric-Space : net-Metric-Space (l1 ⊔ l3 ⊔ l5) Y ε
   net-im-isometric-equiv-net-Metric-Space =
-    ( finitely-enumerable-subtype-im-finitely-enumerable-subtype
+    ( im-finitely-enumerable-subtype
         ( map-isometric-equiv-Metric-Space X Y f)
         ( finitely-enumerable-subset-net-Metric-Space X ε N) ,
       is-approximation-im-isometric-equiv-approximation-Metric-Space X Y f ε
         ( approximation-net-Metric-Space X ε N))
+```
+
+### Cartesian products of nets of metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
+  (ε : ℚ⁺) (M : net-Metric-Space l5 X ε) (N : net-Metric-Space l6 Y ε)
+  where
+
+  product-net-Metric-Space :
+    net-Metric-Space (l5 ⊔ l6) (product-Metric-Space X Y) ε
+  product-net-Metric-Space =
+    ( product-finitely-enumerable-subtype
+        ( finitely-enumerable-subset-net-Metric-Space X ε M)
+        ( finitely-enumerable-subset-net-Metric-Space Y ε N) ,
+      is-approximation-product-approximation-Metric-Space X Y ε
+        ( approximation-net-Metric-Space X ε M)
+        ( approximation-net-Metric-Space Y ε N))
 ```

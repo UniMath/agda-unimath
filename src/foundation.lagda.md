@@ -283,10 +283,12 @@ open import foundation.kernel-span-diagrams-of-maps public
 open import foundation.large-apartness-relations public
 open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
+open import foundation.large-equivalence-relations public
 open import foundation.large-homotopies public
 open import foundation.large-identity-types public
 open import foundation.large-locale-of-propositions public
 open import foundation.large-locale-of-subtypes public
+open import foundation.large-similarity-relations public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
@@ -399,6 +401,7 @@ open import foundation.sets public
 open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
+open import foundation.similarity-subtypes public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
 open import foundation.slice public

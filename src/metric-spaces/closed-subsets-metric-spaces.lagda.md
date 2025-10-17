@@ -76,6 +76,10 @@ module _
   subset-closed-subset-Metric-Space : subset-Metric-Space l3 X
   subset-closed-subset-Metric-Space = pr1 S
 
+  subspace-closed-subset-Metric-Space : Metric-Space (l1 ⊔ l3) l2
+  subspace-closed-subset-Metric-Space =
+    subspace-Metric-Space X subset-closed-subset-Metric-Space
+
   is-closed-subset-closed-subset-Metric-Space :
     is-closed-subset-Metric-Space X subset-closed-subset-Metric-Space
   is-closed-subset-closed-subset-Metric-Space = pr2 S

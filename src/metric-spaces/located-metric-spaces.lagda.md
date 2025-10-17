@@ -10,6 +10,7 @@ module metric-spaces.located-metric-spaces where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.coproduct-types
@@ -33,6 +34,7 @@ open import metric-spaces.subspaces-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -142,10 +144,6 @@ module _
                 is-positive-le-zero-ℚ r (transitive-le-ℚ zero-ℚ p r p<r 0<p))
           in
             map-disjunction
-              ( ¬' (neighborhood-prop-Metric-Space M p⁺ x y))
-              ( ¬' (cut-upper-ℝ (upper-real-dist-Metric-Space M x y B) p))
-              ( neighborhood-prop-Metric-Space M r⁺ x y)
-              ( cut-upper-ℝ (upper-real-dist-Metric-Space M x y B) q)
               ( λ ¬Npxy p∈U →
                 let open do-syntax-trunc-Prop empty-Prop
                 in do
@@ -159,22 +157,38 @@ module _
             ( leq-zero-not-in-cut-upper-real-dist-Metric-Space M x y B p p≤0))
         ( decide-le-leq-ℚ zero-ℚ p)
 
-  real-dist-located-Metric-Space : ℝ l2
-  real-dist-located-Metric-Space =
-    real-upper-ℝ
-      ( upper-real-dist-Metric-Space M x y B)
-      ( is-located-dist-located-Metric-Space)
-      ( intro-exists
-        ( zero-ℚ)
-        ( leq-zero-not-in-cut-upper-real-dist-Metric-Space M x y B zero-ℚ
-          ( refl-leq-ℚ zero-ℚ)))
+  opaque
+    real-dist-located-Metric-Space : ℝ l2
+    real-dist-located-Metric-Space =
+      real-upper-ℝ
+        ( upper-real-dist-Metric-Space M x y B)
+        ( is-located-dist-located-Metric-Space)
+        ( intro-exists
+          ( zero-ℚ)
+          ( leq-zero-not-in-cut-upper-real-dist-Metric-Space M x y B zero-ℚ
+            ( refl-leq-ℚ zero-ℚ)))
 
-  abstract
+  opaque
+    unfolding leq-ℝ' real-dist-located-Metric-Space real-ℚ
+
     leq-real-dist-Metric-Space :
       (ε : ℚ⁺) →
-      leq-ℝ real-dist-located-Metric-Space (real-ℚ (rational-ℚ⁺ ε)) ↔
+      leq-ℝ real-dist-located-Metric-Space (real-ℚ⁺ ε) ↔
       neighborhood-Metric-Space M ε x y
     leq-real-dist-Metric-Space ε =
       leq-upper-real-dist-Metric-Space M x y B ε ∘iff
-      leq-iff-ℝ' real-dist-located-Metric-Space (real-ℚ (rational-ℚ⁺ ε))
+      leq-iff-ℝ' real-dist-located-Metric-Space (real-ℚ⁺ ε)
+
+    is-nonnegative-real-dist-located-Metric-Space :
+      is-nonnegative-ℝ real-dist-located-Metric-Space
+    is-nonnegative-real-dist-located-Metric-Space =
+      leq-leq'-ℝ
+        ( zero-ℝ)
+        ( real-dist-located-Metric-Space)
+        ( leq-zero-upper-real-dist-Metric-Space M x y B)
+
+  nonnegative-real-dist-Metric-Space : nonnegative-ℝ l2
+  nonnegative-real-dist-Metric-Space =
+    ( real-dist-located-Metric-Space ,
+      is-nonnegative-real-dist-located-Metric-Space)
 ```

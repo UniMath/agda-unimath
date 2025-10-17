@@ -15,6 +15,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
@@ -33,10 +34,12 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ## Idea
 
 A [metric space](metric-spaces.metric-spaces.md) is
-{{#concept "totally bounded" WDID=Q1362228 WD="totally bounded space" Agda=is-totally-bounded-Metric-Space}}
+{{#concept "totally bounded" disambiguation="metric space" WDID=Q1362228 WD="totally bounded space" Agda=is-totally-bounded-Metric-Space}}
 if for every `ε : ℚ⁺`, it has an `ε`-[net](metric-spaces.nets-metric-spaces.md).
 
-## Definition
+## Definitions
+
+### The property of a space being totally bounded
 
 ```agda
 module _
@@ -54,6 +57,27 @@ module _
   is-totally-bounded-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-totally-bounded-Metric-Space =
     type-Prop is-totally-bounded-prop-Metric-Space
+```
+
+### Totally bounded metric spaces
+
+```agda
+Totally-Bounded-Metric-Space :
+  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Totally-Bounded-Metric-Space l1 l2 l3 =
+  Σ (Metric-Space l1 l2) (is-totally-bounded-Metric-Space l3)
+
+module _
+  {l1 l2 l3 : Level} (M : Totally-Bounded-Metric-Space l1 l2 l3)
+  where
+
+  metric-space-Totally-Bounded-Metric-Space : Metric-Space l1 l2
+  metric-space-Totally-Bounded-Metric-Space = pr1 M
+
+  is-totally-bounded-metric-space-Totally-Bounded-Metric-Space :
+    is-totally-bounded-Metric-Space l3 metric-space-Totally-Bounded-Metric-Space
+  is-totally-bounded-metric-space-Totally-Bounded-Metric-Space =
+    pr2 M
 ```
 
 ## Properties
@@ -174,4 +198,39 @@ module _
       map-is-inhabited
         ( λ μX ε → net-im-isometric-equiv-net-Metric-Space X Y f ε (μX ε))
         ( tbX)
+```
+
+### Totally bounded metric spaces are closed under cartesian products
+
+```agda
+abstract
+  is-totally-bounded-product-Totally-Bounded-Metric-Space :
+    {l1 l2 l3 l4 l5 l6 : Level} →
+    (X : Totally-Bounded-Metric-Space l1 l2 l3) →
+    (Y : Totally-Bounded-Metric-Space l4 l5 l6) →
+    is-totally-bounded-Metric-Space
+      ( l3 ⊔ l6)
+      ( product-Metric-Space
+        ( metric-space-Totally-Bounded-Metric-Space X)
+        ( metric-space-Totally-Bounded-Metric-Space Y))
+  is-totally-bounded-product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY) =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-totally-bounded-prop-Metric-Space
+            _
+            ( product-Metric-Space X Y))
+    in do
+      mX ← tbX
+      mY ← tbY
+      unit-trunc-Prop ( λ ε → product-net-Metric-Space X Y ε (mX ε) (mY ε))
+
+product-Totally-Bounded-Metric-Space :
+  {l1 l2 l3 l4 l5 l6 : Level} →
+  (X : Totally-Bounded-Metric-Space l1 l2 l3) →
+  (Y : Totally-Bounded-Metric-Space l4 l5 l6) →
+  Totally-Bounded-Metric-Space (l1 ⊔ l4) (l2 ⊔ l5) (l3 ⊔ l6)
+product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY) =
+  ( product-Metric-Space X Y ,
+    is-totally-bounded-product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY))
 ```

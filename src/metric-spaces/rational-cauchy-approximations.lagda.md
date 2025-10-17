@@ -8,6 +8,7 @@ module metric-spaces.rational-cauchy-approximations where
 
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
