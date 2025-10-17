@@ -30,8 +30,7 @@ open import foundation.transport-along-identifications
 ## Idea
 
 When we have information about the sign of the factors of a
-[rational](elementary-number-theory.rational-numbers.md)
-[product](elementary-number-theory.multiplication-rational-numbers.md), we can
+[product](elementary-number-theory.multiplication-rational-numbers.md) of [rational numbers](elementary-number-theory.rational-numbers.md), we can
 deduce the sign of their product too.
 
 ## Lemmas
