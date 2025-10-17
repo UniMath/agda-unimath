@@ -38,6 +38,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.universal-property-pullbacks
 ```
 
@@ -1062,6 +1063,79 @@ module _
     ( hom-arrow-lift-map-codomain-cartesian-hom-arrow
       ( f) g h β (hom-arrow-cartesian-hom-arrow f h α) i H) ,
     ( is-cartesian-cartesian-hom-arrow-lift-map-codomain-cartesian-hom-arrow)
+```
+
+### Base change of sections
+
+Given a cartesian morphism of arrows
+
+```text
+    A ------> X
+    | ⌟       |
+  f |         | g
+    ∨         ∨
+    B ------> Y
+         j
+```
+
+then if `g` has a section so does `f`. More generally, for every map `s` such
+that `g ∘ s ∘ j ~ j`, there exists a section of `f`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y}
+  (α : cartesian-hom-arrow f g)
+  (s : Y → X)
+  (H :
+    map-codomain-cartesian-hom-arrow f g α ~
+    g ∘ s ∘ map-codomain-cartesian-hom-arrow f g α)
+  where
+
+  cone-section-base-change' :
+    cone (map-codomain-cartesian-hom-arrow f g α) g B
+  cone-section-base-change' =
+    ( id , s ∘ map-codomain-cartesian-hom-arrow f g α , H)
+
+  map-section-base-change' :
+    B → A
+  map-section-base-change' =
+    gap-is-pullback
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+      ( cone-section-base-change')
+
+  is-section-map-section-base-change' :
+    is-section f map-section-base-change'
+  is-section-map-section-base-change' =
+    htpy-vertical-map-gap-is-pullback
+      ( map-codomain-cartesian-hom-arrow f g α)
+      ( g)
+      ( cone-cartesian-hom-arrow f g α)
+      ( is-cartesian-cartesian-hom-arrow f g α)
+      ( cone-section-base-change')
+
+  section-base-change' : section f
+  section-base-change' =
+    ( map-section-base-change' , is-section-map-section-base-change')
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y}
+  (α : cartesian-hom-arrow f g)
+  (s : section g)
+  where
+
+  section-base-change : section f
+  section-base-change =
+    section-base-change' α
+      ( map-section g s)
+      ( ( inv-htpy (is-section-map-section g s)) ·r
+        ( map-codomain-cartesian-hom-arrow f g α))
 ```
 
 ## See also

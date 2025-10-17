@@ -311,7 +311,7 @@ module _
 abstract
   dependent-universal-property-trunc-Prop :
     {l : Level} {A : UU l} →
-      dependent-universal-property-propositional-truncation
+    dependent-universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
   dependent-universal-property-trunc-Prop {A = A} =

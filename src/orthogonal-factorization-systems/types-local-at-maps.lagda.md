@@ -24,10 +24,12 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-maps
@@ -379,7 +381,29 @@ module _
     is-local-dependent-type-is-prop (λ _ → A) (λ _ → is-prop-A)
 ```
 
-### All types are local at equivalences
+### Propositions are `f`-local if the domain of `f` is inhabited
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  where
+
+  is-local-has-element-domain-is-prop :
+    {l : Level} (A : UU l) →
+    is-prop A → X → is-local f A
+  is-local-has-element-domain-is-prop A is-prop-A x =
+    is-local-is-prop f A is-prop-A (λ h y → h x)
+
+  is-local-is-inhabited-domain-is-prop :
+    {l : Level} (A : UU l) →
+    is-prop A → is-inhabited X → is-local f A
+  is-local-is-inhabited-domain-is-prop A is-prop-A =
+    rec-trunc-Prop
+      ( is-local-Prop f A)
+      ( is-local-has-element-domain-is-prop A is-prop-A)
+```
+
+### All type families are local at equivalences
 
 ```agda
 module _
@@ -422,7 +446,7 @@ module _
 
 ```agda
 is-contr-is-local :
-  {l : Level} (A : UU l) → is-local (λ (_ : empty) → star) A → is-contr A
+  {l : Level} (A : UU l) → is-local (terminal-map empty) A → is-contr A
 is-contr-is-local A is-local-A =
   is-contr-equiv
     ( empty → A)
