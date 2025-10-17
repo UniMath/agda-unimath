@@ -195,19 +195,15 @@ module _
     is-cotransitive-apart-function-into-Type-With-Apartness :
       is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
     is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
-      apply-universal-property-trunc-Prop H
+      apply-twice-universal-property-trunc-Prop' H
+        ( λ (x , a) →
+          cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
         ( disjunction-Prop
           ( rel-apart-function-into-Type-With-Apartness X Y f h)
           ( rel-apart-function-into-Type-With-Apartness X Y g h))
-        ( λ (x , a) →
-          apply-universal-property-trunc-Prop
-            ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
-            ( disjunction-Prop
-              ( rel-apart-function-into-Type-With-Apartness X Y f h)
-              ( rel-apart-function-into-Type-With-Apartness X Y g h))
-            ( λ where
-              ( inl b) → inl-disjunction (intro-exists x b)
-              ( inr b) → inr-disjunction (intro-exists x b)))
+        ( λ where
+          (x , a) (inl b) → inl-disjunction (intro-exists x b)
+          (x , a) (inr b) → inr-disjunction (intro-exists x b))
 
   exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y

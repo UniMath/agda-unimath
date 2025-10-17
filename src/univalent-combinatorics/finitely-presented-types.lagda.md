@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.propositional-truncations
@@ -66,17 +67,12 @@ has-presentation-of-cardinality-has-cardinality-connected-components :
   has-cardinality-connected-components k A →
   has-presentation-of-cardinality k A
 has-presentation-of-cardinality-has-cardinality-connected-components k {A} H =
-  apply-universal-property-trunc-Prop H
+  apply-twice-universal-property-trunc-Prop' H P2
     ( has-presentation-of-cardinality-Prop k A)
-    ( λ e →
-      apply-universal-property-trunc-Prop
-        ( P2 e)
-        ( has-presentation-of-cardinality-Prop k A)
-        ( λ g →
-          unit-trunc-Prop
-            ( pair
-              ( λ x → pr1 (g x))
-              ( is-equiv-htpy-equiv e (λ x → pr2 (g x))))))
+    ( λ e g →
+      intro-exists
+        ( λ x → pr1 (g x))
+        ( is-equiv-htpy-equiv e (λ x → pr2 (g x))))
   where
   P1 :
     (e : Fin k ≃ type-trunc-Set A) (x : Fin k) →

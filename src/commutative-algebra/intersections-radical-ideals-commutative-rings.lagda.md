@@ -167,34 +167,29 @@ module _
       ( ideal-radical-of-ideal-Commutative-Ring A
         ( intersection-ideal-Commutative-Ring A I J))
   forward-inclusion-intersection-radical-of-ideal-Commutative-Ring x (H , K) =
-    apply-universal-property-trunc-Prop H
+    apply-twice-universal-property-trunc-Prop H K
       ( subset-radical-of-ideal-Commutative-Ring A
         ( intersection-ideal-Commutative-Ring A I J)
         ( x))
-      ( λ (n , H') →
-        apply-universal-property-trunc-Prop K
-          ( subset-radical-of-ideal-Commutative-Ring A
-            ( intersection-ideal-Commutative-Ring A I J)
-            ( x))
-          ( λ (m , K') →
-            intro-exists
-              ( add-ℕ n m)
-              ( ( is-closed-under-eq-ideal-Commutative-Ring A I
-                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
-                    ( A)
-                    ( I)
-                    ( power-Commutative-Ring A n x)
-                    ( power-Commutative-Ring A m x)
-                    ( H'))
-                  ( inv ( distributive-power-add-Commutative-Ring A n m))) ,
-                ( is-closed-under-eq-ideal-Commutative-Ring A J
-                  ( is-closed-under-left-multiplication-ideal-Commutative-Ring
-                    ( A)
-                    ( J)
-                    ( power-Commutative-Ring A n x)
-                    ( power-Commutative-Ring A m x)
-                    ( K'))
-                  ( inv ( distributive-power-add-Commutative-Ring A n m))))))
+      ( λ (n , H') (m , K') →
+        intro-exists
+          ( add-ℕ n m)
+          ( ( is-closed-under-eq-ideal-Commutative-Ring A I
+              ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                ( A)
+                ( I)
+                ( power-Commutative-Ring A n x)
+                ( power-Commutative-Ring A m x)
+                ( H'))
+              ( inv ( distributive-power-add-Commutative-Ring A n m))) ,
+            ( is-closed-under-eq-ideal-Commutative-Ring A J
+              ( is-closed-under-left-multiplication-ideal-Commutative-Ring
+                ( A)
+                ( J)
+                ( power-Commutative-Ring A n x)
+                ( power-Commutative-Ring A m x)
+                ( K'))
+              ( inv ( distributive-power-add-Commutative-Ring A n m)))))
 
   backward-inclusion-intersection-radical-of-ideal-Commutative-Ring :
     leq-ideal-Commutative-Ring A

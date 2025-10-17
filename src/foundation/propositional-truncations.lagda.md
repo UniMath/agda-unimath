@@ -211,13 +211,21 @@ abstract
     map-universal-property-trunc-Prop P f t
 
 abstract
+  apply-twice-universal-property-trunc-Prop' :
+    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (u : ║ A ║₋₁)
+    (v : (a : A) → ║ B a ║₋₁) (P : Prop l3) →
+    ((a : A) → B a → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop' u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop (v x) P (f x))
+
+abstract
   apply-twice-universal-property-trunc-Prop :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : ║ A ║₋₁)
     (v : ║ B ║₋₁) (P : Prop l3) →
     (A → B → type-Prop P) → type-Prop P
-  apply-twice-universal-property-trunc-Prop u v P f =
-    apply-universal-property-trunc-Prop u P
-      ( λ x → apply-universal-property-trunc-Prop v P (f x))
+  apply-twice-universal-property-trunc-Prop u v =
+    apply-twice-universal-property-trunc-Prop' u (λ _ → v)
 
 abstract
   apply-three-times-universal-property-trunc-Prop :

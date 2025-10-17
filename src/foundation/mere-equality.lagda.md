@@ -92,10 +92,8 @@ abstract
 abstract
   transitive-mere-eq :
     {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
-  transitive-mere-eq x y z p q =
-    apply-universal-property-trunc-Prop q
-      ( mere-eq-Prop x z)
-      ( λ p' → map-trunc-Prop (p' ∙_) p)
+  transitive-mere-eq x y z =
+    map-binary-trunc-Prop (λ p q → q ∙ p)
 ```
 
 ### Mere equality is an equivalence relation

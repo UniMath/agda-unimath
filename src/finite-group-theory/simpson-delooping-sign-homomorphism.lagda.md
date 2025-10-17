@@ -484,19 +484,12 @@ module _
         ( T)
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
-          ( pair
-            ( is-in-equivalence-class
-              ( sign-comp-equivalence-relation
-                ( number-of-elements-count eX)
-                ( X , unit-trunc-Prop (equiv-count eX)))
-              ( T)
-              ( equiv-count eX ∘e transposition-eX))
-            ( is-prop-is-in-equivalence-class
-              ( sign-comp-equivalence-relation
-                ( number-of-elements-count eX)
-                ( X , unit-trunc-Prop (equiv-count eX)))
-              ( T)
-              ( equiv-count eX ∘e transposition-eX)))
+          ( is-in-equivalence-class-Prop
+            ( sign-comp-equivalence-relation
+              ( number-of-elements-count eX)
+              ( X , unit-trunc-Prop (equiv-count eX)))
+            ( T)
+            ( equiv-count eX ∘e transposition-eX))
           ( λ (t , p) →
             cases-retraction-Fin-2-quotient-sign-comp-count T NP t
               ( inv

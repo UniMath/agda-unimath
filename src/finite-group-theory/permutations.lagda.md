@@ -27,6 +27,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
@@ -121,36 +122,31 @@ module _
       ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =
-    apply-universal-property-trunc-Prop
-      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
-      ( subset-subgroup-subset-Group
-        ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
-        ( is-transposition-permutation-Prop)
-        ( f))
+    map-trunc-Prop
       ( λ h →
-        unit-trunc-Prop
-          ( pair
-            ( map-list
-              ( λ x →
-                pair
-                  ( inr star)
-                  ( pair
-                    ( transposition x)
-                    ( unit-trunc-Prop (pair x refl))))
+        pair
+          ( map-list
+            ( λ x →
+              pair
+                ( inr star)
+                ( pair
+                  ( transposition x)
+                  ( unit-trunc-Prop (pair x refl))))
+            ( list-transpositions-permutation-count
+              ( type-Type-With-Cardinality-ℕ n X)
+              ( pair n h)
+              ( f)))
+          ( ( lemma
               ( list-transpositions-permutation-count
                 ( type-Type-With-Cardinality-ℕ n X)
                 ( pair n h)
-                ( f)))
-            ( ( lemma
-                ( list-transpositions-permutation-count
-                  ( type-Type-With-Cardinality-ℕ n X)
-                  ( pair n h)
-                  ( f))) ∙
-              ( eq-htpy-equiv
-                ( retraction-permutation-list-transpositions-count
-                  ( type-Type-With-Cardinality-ℕ n X)
-                  ( pair n h)
-                  ( f))))))
+                ( f))) ∙
+            ( eq-htpy-equiv
+              ( retraction-permutation-list-transpositions-count
+                ( type-Type-With-Cardinality-ℕ n X)
+                ( pair n h)
+                ( f)))))
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
     where
     lemma :
       (l :
