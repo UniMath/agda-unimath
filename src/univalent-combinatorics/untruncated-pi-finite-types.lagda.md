@@ -619,8 +619,8 @@ abstract
             ( unit-trunc-Set ∘ f , Eηf)
             ( refl-htpy))
           ( λ { (inl x) → id-equiv ; (inr x) → id-equiv})) ∘e
-        ( inv-equiv
-          ( right-distributive-Σ-coproduct (rec-coproduct (B ∘ pr1) (B ∘ pr1))))
+        ( inv-right-distributive-Σ-coproduct
+          ( rec-coproduct (B ∘ pr1) (B ∘ pr1)))
 
       i : Fin k → type-trunc-Set (im (f ∘ inl))
       i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)

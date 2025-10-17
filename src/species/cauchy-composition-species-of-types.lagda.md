@@ -118,7 +118,7 @@ module _
   equiv-associative-cauchy-composition-species-types A =
     ( equiv-tot
       ( λ D1 →
-        ( inv-equiv right-distributive-product-Σ) ∘e
+        ( inv-right-distributive-product-Σ) ∘e
         ( equiv-tot
           ( λ D2 →
             ( inv-associative-Σ))) ∘e

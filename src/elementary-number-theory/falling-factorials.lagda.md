@@ -70,7 +70,7 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
             ( is-decidable-Σ-Fin
               ( λ x →
                 has-decidable-equality-Fin (map-emb f x) (inr star))))) ∘e
-      ( ( inv-equiv left-distributive-Σ-coproduct) ∘e
+      ( ( inv-left-distributive-Σ-coproduct) ∘e
         {!!})) ∘e
     ( equiv-coproduct
       ( Fin-falling-factorial-ℕ n m)

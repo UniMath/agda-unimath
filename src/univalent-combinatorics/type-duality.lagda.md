@@ -66,7 +66,7 @@ equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
       ( ( equiv-Σ
           ( structure-map (λ x → is-inhabited x × is-finite x))
           ( id-equiv)
-          ( λ _ → inv-equiv distributive-Π-Σ)) ∘e
+          ( λ _ → inv-distributive-Π-Σ)) ∘e
         ( ( associative-Σ) ∘e
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
@@ -78,7 +78,7 @@ equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
                   is-finite-fiber
                     ( pr1 f)
                     ( is-finite-type-Finite-Type A)
-                    ( is-finite-type-Finite-Type B)))))))))
+                    ( is-finite-type-Finite-Type B))))))))
 
 Slice-Surjection-Finite-Type :
   (l : Level) {l1 : Level} (A : Finite-Type l1) → UU (lsuc l ⊔ l1)
@@ -105,7 +105,7 @@ equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
             ( _)
             ( id-equiv)
             ( λ f →
-              ( inv-equiv distributive-Π-Σ) ∘e
+              ( inv-distributive-Π-Σ) ∘e
               ( equiv-Σ-equiv-base
                 ( _)
                 ( inv-equiv

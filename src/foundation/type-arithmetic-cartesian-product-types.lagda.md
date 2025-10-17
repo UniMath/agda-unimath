@@ -122,7 +122,8 @@ module _
     left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
 
   inv-left-unit-law-product-is-contr : B ≃ A × B
-  inv-left-unit-law-product-is-contr = inv-equiv left-unit-law-product-is-contr
+  inv-left-unit-law-product-is-contr =
+    inv-left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
 
   is-equiv-pr2-product-is-contr : is-equiv (pr2 {B = λ _ → B})
   is-equiv-pr2-product-is-contr =

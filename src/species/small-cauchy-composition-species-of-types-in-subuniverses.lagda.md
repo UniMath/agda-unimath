@@ -116,8 +116,8 @@ module _
     ( equiv-tot
       ( λ D →
         ( equiv-product-right inv-distributive-Π-Σ) ∘e
-        ( inv-equiv right-distributive-product-Σ) ∘e
-        ( equiv-tot (λ _ → inv-equiv left-distributive-product-Σ)) ∘e
+        ( inv-right-distributive-product-Σ) ∘e
+        ( equiv-tot (λ _ → inv-left-distributive-product-Σ)) ∘e
         ( associative-Σ))) ∘e
     ( associative-Σ) ∘e
     ( equiv-Σ-equiv-base

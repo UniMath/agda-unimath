@@ -400,17 +400,25 @@ module _
 ### Distributive laws of cartesian products over Σ
 
 ```agda
-left-distributive-product-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
-  (A × (Σ B C)) ≃ Σ B (λ b → A × (C b))
-left-distributive-product-Σ =
-  equiv-left-swap-Σ
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  where
 
-right-distributive-product-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
-  ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
-right-distributive-product-Σ {A} =
-  associative-Σ
+  left-distributive-product-Σ : A × (Σ B C) ≃ Σ B (λ b → A × (C b))
+  left-distributive-product-Σ = equiv-left-swap-Σ
+
+  inv-left-distributive-product-Σ : Σ B (λ b → A × (C b)) ≃ A × (Σ B C)
+  inv-left-distributive-product-Σ = equiv-left-swap-Σ
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3}
+  where
+
+  right-distributive-product-Σ : (Σ A B) × C ≃ Σ A (λ a → B a × C)
+  right-distributive-product-Σ = associative-Σ
+
+  inv-right-distributive-product-Σ : Σ A (λ a → B a × C) ≃ (Σ A B) × C
+  inv-right-distributive-product-Σ = inv-associative-Σ
 ```
 
 ## See also

@@ -9,8 +9,23 @@
         "kind": "test",
         "isDefault": true
       },
-      "dependsOn": ["pre-commit", "link-check", "typecheck"],
+      "dependsOn": ["pre-commit", "link-check", "typecheck_"],
       "dependsOrder": "parallel"
+    },
+    {
+      "label": "typecheck_",
+      "detail": "Typecheck the library",
+      "type": "shell",
+      "command": "make",
+      "args": ["check"],
+      "problemMatcher": [],
+      "group": { "kind": "build" },
+      "dependsOn": "pre-commit",
+      "hide": true,
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
     },
     {
       "label": "typecheck",
@@ -20,7 +35,6 @@
       "args": ["check"],
       "problemMatcher": [],
       "group": { "kind": "build" },
-      "dependsOn": "pre-commit",
       "presentation": {
         "panel": "dedicated",
         "clear": true

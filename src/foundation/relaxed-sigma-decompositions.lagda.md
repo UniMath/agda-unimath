@@ -612,9 +612,9 @@ module _
   matching-correspondence-displayed-fibered-Relaxed-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ X Y by e
-      ≃ Σ ( Σ U V) (λ uv → Y ((map-inv-equiv f) uv))
-        by inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv f))
-      ≃ Σ U ( λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
+      ≃ Σ (Σ U V) (λ uv → Y ((map-inv-equiv f) uv))
+        by inv-equiv (equiv-Σ-equiv-base Y (inv-equiv f))
+      ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
         by associative-Σ
 
   map-displayed-fibered-Relaxed-Σ-Decomposition :
@@ -649,7 +649,7 @@ module _
     equivalence-reasoning
     A ≃ Σ M N by s
       ≃ Σ M (λ m → Σ (P m) (Q m))
-      by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
+      by equiv-tot t
       ≃ Σ (Σ M P) (λ (m , p) → Q m p)
       by inv-associative-Σ
 

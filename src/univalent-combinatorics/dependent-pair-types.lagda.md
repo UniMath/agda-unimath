@@ -160,7 +160,7 @@ abstract
             is-proof-irrelevant-is-prop
               ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
-        ( inv-equiv left-distributive-Σ-coproduct))
+        ( inv-left-distributive-Σ-coproduct))
       ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)
