@@ -31,7 +31,7 @@ is-large-category-Group :
 is-large-category-Group G =
   fundamental-theorem-id (is-torsorial-iso-Group G) (iso-eq-Group G)
 
-eq-iso-Group : {l : Level} (G H : Group l) → iso-Group G H → Id G H
+eq-iso-Group : {l : Level} (G H : Group l) → iso-Group G H → G ＝ H
 eq-iso-Group G H = map-inv-is-equiv (is-large-category-Group G H)
 
 Group-Large-Category : Large-Category lsuc (_⊔_)

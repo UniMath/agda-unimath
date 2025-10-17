@@ -78,7 +78,7 @@ vertically-empty-matrix = empty-tuple
 
 eq-vertically-empty-matrix :
   {l : Level} {n : ℕ} {A : UU l}
-  (x : matrix A 0 n) → Id vertically-empty-matrix x
+  (x : matrix A 0 n) → vertically-empty-matrix ＝ x
 eq-vertically-empty-matrix empty-tuple = refl
 
 is-contr-matrix-zero-ℕ :
@@ -98,7 +98,7 @@ horizontally-empty-matrix {m = succ-ℕ m} =
 
 eq-horizontally-empty-matrix :
   {l : Level} {m : ℕ} {A : UU l}
-  (x : matrix A m 0) → Id horizontally-empty-matrix x
+  (x : matrix A m 0) → horizontally-empty-matrix ＝ x
 eq-horizontally-empty-matrix {m = zero-ℕ} empty-tuple = refl
 eq-horizontally-empty-matrix {m = succ-ℕ m} (empty-tuple ∷ M) =
   ap-binary _∷_ refl (eq-horizontally-empty-matrix M)

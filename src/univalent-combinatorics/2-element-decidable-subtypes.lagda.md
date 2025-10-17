@@ -94,7 +94,7 @@ module _
       decidable-subtype-2-Element-Decidable-Subtype
 
   eq-is-in-2-Element-Decidable-Subtype :
-    {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → Id y z
+    {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → y ＝ z
   eq-is-in-2-Element-Decidable-Subtype {x} =
     eq-is-prop (is-prop-is-in-2-Element-Decidable-Subtype x)
 
@@ -213,9 +213,8 @@ module _
   where
 
   is-commutative-standard-2-Element-Decidable-Subtype :
-    Id
-      ( standard-2-Element-Decidable-Subtype d np)
-      ( standard-2-Element-Decidable-Subtype d (λ p → np (inv p)))
+    standard-2-Element-Decidable-Subtype d np ＝
+    standard-2-Element-Decidable-Subtype d (λ p → np (inv p))
   is-commutative-standard-2-Element-Decidable-Subtype =
     eq-pair-Σ
       ( eq-htpy
@@ -245,9 +244,8 @@ module _
   where
 
   eq-equal-elements-standard-2-Element-Decidable-Subtype :
-    Id
-      ( standard-2-Element-Decidable-Subtype d np)
-      ( standard-2-Element-Decidable-Subtype d nq)
+    standard-2-Element-Decidable-Subtype d np ＝
+    standard-2-Element-Decidable-Subtype d nq
   eq-equal-elements-standard-2-Element-Decidable-Subtype =
     eq-pair-Σ
       ( eq-htpy
@@ -291,7 +289,7 @@ module _
 
   compute-swap-2-Element-Decidable-Subtype :
     (x y : type-2-Element-Decidable-Subtype P) → x ≠ y →
-    Id (map-swap-2-Element-Decidable-Subtype x) y
+    map-swap-2-Element-Decidable-Subtype x ＝ y
   compute-swap-2-Element-Decidable-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 
@@ -362,10 +360,9 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
   { l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} (e : X ≃ Y) →
   ( f : Y ≃ Z) →
-  Id
-    ( precomp-equiv-2-Element-Decidable-Subtype {l3 = l4} (f ∘e e))
-    ( ( precomp-equiv-2-Element-Decidable-Subtype e) ∘
-      ( precomp-equiv-2-Element-Decidable-Subtype f))
+  precomp-equiv-2-Element-Decidable-Subtype {l3 = l4} (f ∘e e) ＝
+  precomp-equiv-2-Element-Decidable-Subtype e ∘
+  precomp-equiv-2-Element-Decidable-Subtype f
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f =
   eq-htpy
     ( λ (pair P H) →
@@ -417,11 +414,10 @@ module _
     pr2 other-element-subtype-2-element-decidable-subtype-Fin
 
   abstract
-    unequal-elements-2-element-decidable-subtype-Fin :
-      ¬ ( Id
-          ( element-2-element-decidable-subtype-Fin)
-          ( other-element-2-element-decidable-subtype-Fin))
-    unequal-elements-2-element-decidable-subtype-Fin p =
+    neq-elements-2-element-decidable-subtype-Fin :
+      element-2-element-decidable-subtype-Fin ≠
+      other-element-2-element-decidable-subtype-Fin
+    neq-elements-2-element-decidable-subtype-Fin p =
       has-no-fixed-points-swap-2-Element-Type
         ( 2-element-type-2-Element-Decidable-Subtype P)
         { element-subtype-2-element-decidable-subtype-Fin}

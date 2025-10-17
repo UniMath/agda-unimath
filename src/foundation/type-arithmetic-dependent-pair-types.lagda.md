@@ -62,16 +62,12 @@ module _
       ( ind-singleton a C
         ( λ x →
           ( y : B x) →
-            Id
-              ( ( map-inv-left-unit-law-Σ-is-contr ∘
-                  map-left-unit-law-Σ-is-contr)
-                ( x , y))
-              ( x , y))
+          map-inv-left-unit-law-Σ-is-contr
+            ( map-left-unit-law-Σ-is-contr (x , y)) ＝
+          ( x , y))
         ( λ y → ap
           ( map-inv-left-unit-law-Σ-is-contr)
-          ( ap
-            ( λ f → f y)
-            ( compute-ind-singleton a C (λ x → B x → B a) id))))
+          ( ap (λ f → f y) ( compute-ind-singleton a C (λ x → B x → B a) id))))
 
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr

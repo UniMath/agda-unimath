@@ -43,7 +43,7 @@ module _
   type-Subposet = type-Subpreorder (preorder-Poset X) S
 
   eq-type-Subposet :
-    (x y : type-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Subposet) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Subposet = eq-type-Subpreorder (preorder-Poset X) S
 
   leq-Subposet-Prop : (x y : type-Subposet) → Prop l2

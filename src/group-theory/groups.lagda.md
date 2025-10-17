@@ -66,9 +66,9 @@ is-group-is-unital-Semigroup G is-unital-Semigroup-G =
   Σ ( type-Semigroup G → type-Semigroup G)
     ( λ i →
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G (i x) x) (pr1 is-unital-Semigroup-G)) ×
+        mul-Semigroup G (i x) x ＝ pr1 is-unital-Semigroup-G) ×
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G x (i x)) (pr1 is-unital-Semigroup-G)))
+        mul-Semigroup G x (i x) ＝ pr1 is-unital-Semigroup-G))
 
 is-group-Semigroup :
   {l : Level} (G : Semigroup l) → UU l
@@ -106,8 +106,8 @@ module _
   mul-Group = pr1 has-associative-mul-Group
 
   ap-mul-Group :
-    {x x' y y' : type-Group} (p : Id x x') (q : Id y y') →
-    Id (mul-Group x y) (mul-Group x' y')
+    {x x' y y' : type-Group} (p : x ＝ x') (q : y ＝ y') →
+    mul-Group x y ＝ mul-Group x' y'
   ap-mul-Group p q = ap-binary mul-Group p q
 
   mul-Group' : type-Group → type-Group → type-Group
@@ -115,7 +115,7 @@ module _
 
   associative-mul-Group :
     (x y z : type-Group) →
-    Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
+    mul-Group (mul-Group x y) z ＝ mul-Group x (mul-Group y z)
   associative-mul-Group = pr2 has-associative-mul-Group
 
   is-group-Group : is-group-Semigroup semigroup-Group
@@ -152,11 +152,11 @@ module _
   pr2 (is-unit-prop-Group' x) = is-prop-is-unit-Group' x
 
   left-unit-law-mul-Group :
-    (x : type-Group) → Id (mul-Group unit-Group x) x
+    (x : type-Group) → mul-Group unit-Group x ＝ x
   left-unit-law-mul-Group = pr1 (pr2 is-unital-Group)
 
   right-unit-law-mul-Group :
-    (x : type-Group) → Id (mul-Group x unit-Group) x
+    (x : type-Group) → mul-Group x unit-Group ＝ x
   right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
 
   coherence-unit-laws-mul-Group :
@@ -183,11 +183,11 @@ module _
   inv-Group = pr1 has-inverses-Group
 
   left-inverse-law-mul-Group :
-    (x : type-Group) → Id (mul-Group (inv-Group x) x) unit-Group
+    (x : type-Group) → mul-Group (inv-Group x) x ＝ unit-Group
   left-inverse-law-mul-Group = pr1 (pr2 has-inverses-Group)
 
   right-inverse-law-mul-Group :
-    (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
+    (x : type-Group) → mul-Group x (inv-Group x) ＝ unit-Group
   right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
 
   is-invertible-element-Group :
@@ -197,7 +197,7 @@ module _
   pr2 (pr2 (is-invertible-element-Group x)) = left-inverse-law-mul-Group x
 
   inv-unit-Group :
-    Id (inv-Group unit-Group) unit-Group
+    inv-Group unit-Group ＝ unit-Group
   inv-unit-Group =
     ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
     ( right-inverse-law-mul-Group unit-Group)
@@ -439,7 +439,7 @@ module _
 
 ```agda
   inv-inv-Group :
-    (x : type-Group G) → Id (inv-Group G (inv-Group G x)) x
+    (x : type-Group G) → inv-Group G (inv-Group G x) ＝ x
   inv-inv-Group x =
     is-injective-mul-Group
       ( inv-Group G x)
@@ -643,7 +643,7 @@ module _
   where
 
   is-idempotent-Group : type-Group G → UU l
-  is-idempotent-Group x = Id (mul-Group G x x) x
+  is-idempotent-Group x = mul-Group G x x ＝ x
 
   is-unit-is-idempotent-Group :
     {x : type-Group G} → is-idempotent-Group x → is-unit-Group G x
@@ -663,9 +663,8 @@ module _
 
   preserves-concat-mul-list-Group :
     (l1 l2 : list (type-Group G)) →
-    Id
-      ( mul-list-Group (concat-list l1 l2))
-      ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+    mul-list-Group (concat-list l1 l2) ＝
+    mul-Group G (mul-list-Group l1) (mul-list-Group l2)
   preserves-concat-mul-list-Group =
     distributive-mul-concat-list-Monoid (monoid-Group G)
 ```

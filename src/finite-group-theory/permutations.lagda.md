@@ -192,8 +192,8 @@ module _
                     ( Σ ( type-Type-With-Cardinality-ℕ n X)
                         ( type-Decidable-Prop ∘ P)))))
             ( λ li →
-              Id k (mod-two-ℕ (length-list li)) ×
-              Id f (permutation-list-transpositions li))))
+              ( k ＝ mod-two-ℕ (length-list li)) ×
+              ( f ＝ permutation-list-transpositions li))))
 
   abstract
     is-contr-parity-transposition-permutation :
@@ -311,10 +311,9 @@ module _
           ( f)
       is-injective-iterate-involution :
         (k k' x : Fin 2) →
-        Id
-          ( iterate (nat-Fin 2 k) (succ-Fin 2) x)
-          ( iterate (nat-Fin 2 k') (succ-Fin 2) x) →
-        Id k k'
+        ( iterate (nat-Fin 2 k) (succ-Fin 2) x ＝
+          iterate (nat-Fin 2 k') (succ-Fin 2) x) →
+        k ＝ k'
       is-injective-iterate-involution
         (inl (inr star)) (inl (inr star)) x p =
         refl

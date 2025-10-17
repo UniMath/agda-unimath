@@ -97,8 +97,8 @@ abstract
   number-of-elements-count-Σ' :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
-    Id ( number-of-elements-count (count-Σ' k e f))
-      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x))))
+    number-of-elements-count (count-Σ' k e f) ＝
+    sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coproduct
@@ -112,8 +112,8 @@ abstract
   number-of-elements-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
     (f : (x : A) → count (B x)) →
-    Id ( number-of-elements-count (count-Σ e f))
-      ( sum-count-ℕ e (λ x → number-of-elements-count (f x)))
+    number-of-elements-count (count-Σ e f) ＝
+    sum-count-ℕ e (λ x → number-of-elements-count (f x))
   number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
 ```
 
@@ -219,9 +219,8 @@ abstract
   double-counting-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) →
-    Id
-      ( number-of-elements-count count-C)
-      ( sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x)))
+    number-of-elements-count count-C ＝
+    sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x))
   double-counting-Σ count-A count-B count-C =
     ( double-counting count-C (count-Σ count-A count-B)) ∙
     ( number-of-elements-count-Σ count-A count-B)
@@ -230,11 +229,9 @@ abstract
   sum-number-of-elements-count-fiber-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
     (f : count (Σ A B)) →
-    Id
-      ( sum-count-ℕ e
-        ( λ x → number-of-elements-count
-          (count-fiber-count-Σ-count-base e f x)))
-      ( number-of-elements-count f)
+    sum-count-ℕ e
+      ( λ x → number-of-elements-count (count-fiber-count-Σ-count-base e f x)) ＝
+    number-of-elements-count f
   sum-number-of-elements-count-fiber-count-Σ e f =
     ( inv
       ( number-of-elements-count-Σ e (count-fiber-count-Σ-count-base e f))) ∙
@@ -244,10 +241,8 @@ abstract
   double-counting-fiber-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) (x : A) →
-    Id
-      ( number-of-elements-count (count-B x))
-      ( number-of-elements-count
-        ( count-fiber-count-Σ-count-base count-A count-C x))
+    number-of-elements-count (count-B x) ＝
+    number-of-elements-count (count-fiber-count-Σ-count-base count-A count-C x)
   double-counting-fiber-count-Σ count-A count-B count-C x =
     double-counting
       ( count-B x)
@@ -257,11 +252,10 @@ abstract
   sum-number-of-elements-count-base-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     (count-ΣAB : count (Σ A B)) (count-B : (x : A) → count (B x)) →
-    Id
-      ( sum-count-ℕ
-        ( count-base-count-Σ b count-ΣAB count-B)
-        ( λ x → number-of-elements-count (count-B x)))
-      ( number-of-elements-count count-ΣAB)
+    sum-count-ℕ
+      ( count-base-count-Σ b count-ΣAB count-B)
+      ( λ x → number-of-elements-count (count-B x)) ＝
+    number-of-elements-count count-ΣAB
   sum-number-of-elements-count-base-count-Σ b count-ΣAB count-B =
     ( inv
       ( number-of-elements-count-Σ
@@ -276,9 +270,8 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     (count-A : count A) (count-B : (x : A) → count (B x))
     (count-ΣAB : count (Σ A B)) →
-    Id
-      ( number-of-elements-count (count-base-count-Σ b count-ΣAB count-B))
-      ( number-of-elements-count count-A)
+    number-of-elements-count (count-base-count-Σ b count-ΣAB count-B) ＝
+    number-of-elements-count count-A
   double-counting-base-count-Σ b count-A count-B count-ΣAB =
     double-counting (count-base-count-Σ b count-ΣAB count-B) count-A
 
@@ -288,11 +281,10 @@ abstract
     ( count-B : (x : A) → count (B x)) →
     ( count-nB :
       count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id
-      ( sum-count-ℕ
-        ( count-base-count-Σ' count-ΣAB count-B count-nB)
-        ( λ x → number-of-elements-count (count-B x)))
-      ( number-of-elements-count count-ΣAB)
+    sum-count-ℕ
+      ( count-base-count-Σ' count-ΣAB count-B count-nB)
+      ( λ x → number-of-elements-count (count-B x)) ＝
+    number-of-elements-count count-ΣAB
   sum-number-of-elements-count-base-count-Σ' count-ΣAB count-B count-nB =
     ( inv
       ( number-of-elements-count-Σ
@@ -310,10 +302,9 @@ abstract
     ( count-B : (x : A) → count (B x)) (count-ΣAB : count (Σ A B)) →
     ( count-nB :
       count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id
-      ( number-of-elements-count
-        ( count-base-count-Σ' count-ΣAB count-B count-nB))
-      ( number-of-elements-count count-A)
+    number-of-elements-count
+      ( count-base-count-Σ' count-ΣAB count-B count-nB) ＝
+    number-of-elements-count count-A
   double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
     double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
 ```

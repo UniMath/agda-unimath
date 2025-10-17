@@ -102,14 +102,14 @@ module _
 
   associative-add-fin-sequence-type-Semiring :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Semiring R n) →
-    ( add-fin-sequence-type-Semiring R
+    add-fin-sequence-type-Semiring R
       ( n)
       ( add-fin-sequence-type-Semiring R n v1 v2)
-      ( v3)) ＝
-    ( add-fin-sequence-type-Semiring R
+      ( v3) ＝
+    add-fin-sequence-type-Semiring R
       ( n)
       ( v1)
-      ( add-fin-sequence-type-Semiring R n v2 v3))
+      ( add-fin-sequence-type-Semiring R n v2 v3)
   associative-add-fin-sequence-type-Semiring =
     associative-add-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)

@@ -101,9 +101,8 @@ module _
 
   associative-add-tuple-Ring :
     {n : ℕ} (v1 v2 v3 : tuple-Ring R n) →
-    Id
-      ( add-tuple-Ring R (add-tuple-Ring R v1 v2) v3)
-      ( add-tuple-Ring R v1 (add-tuple-Ring R v2 v3))
+    add-tuple-Ring R (add-tuple-Ring R v1 v2) v3 ＝
+    add-tuple-Ring R v1 (add-tuple-Ring R v2 v3)
   associative-add-tuple-Ring = associative-add-tuple-Semiring (semiring-Ring R)
 ```
 
@@ -115,12 +114,12 @@ module _
   where
 
   left-unit-law-add-tuple-Ring :
-    {n : ℕ} (v : tuple-Ring R n) → Id (add-tuple-Ring R (zero-tuple-Ring R) v) v
+    {n : ℕ} (v : tuple-Ring R n) → add-tuple-Ring R (zero-tuple-Ring R) v ＝ v
   left-unit-law-add-tuple-Ring =
     left-unit-law-add-tuple-Semiring (semiring-Ring R)
 
   right-unit-law-add-tuple-Ring :
-    {n : ℕ} (v : tuple-Ring R n) → Id (add-tuple-Ring R v (zero-tuple-Ring R)) v
+    {n : ℕ} (v : tuple-Ring R n) → add-tuple-Ring R v (zero-tuple-Ring R) ＝ v
   right-unit-law-add-tuple-Ring =
     right-unit-law-add-tuple-Semiring (semiring-Ring R)
 ```
@@ -134,7 +133,7 @@ module _
 
   commutative-add-tuple-Ring :
     {n : ℕ} (v w : tuple-Ring R n) →
-    Id (add-tuple-Ring R v w) (add-tuple-Ring R w v)
+    add-tuple-Ring R v w ＝ add-tuple-Ring R w v
   commutative-add-tuple-Ring empty-tuple empty-tuple = refl
   commutative-add-tuple-Ring (x ∷ v) (y ∷ w) =
     ap-binary _∷_
@@ -151,7 +150,7 @@ module _
 
   left-inverse-law-add-tuple-Ring :
     {n : ℕ} (v : tuple-Ring R n) →
-    Id (add-tuple-Ring R (neg-tuple-Ring R v) v) (zero-tuple-Ring R)
+    add-tuple-Ring R (neg-tuple-Ring R v) v ＝ zero-tuple-Ring R
   left-inverse-law-add-tuple-Ring empty-tuple = refl
   left-inverse-law-add-tuple-Ring (x ∷ v) =
     ap-binary _∷_
@@ -160,7 +159,7 @@ module _
 
   right-inverse-law-add-tuple-Ring :
     {n : ℕ} (v : tuple-Ring R n) →
-    Id (add-tuple-Ring R v (neg-tuple-Ring R v)) (zero-tuple-Ring R)
+    add-tuple-Ring R v (neg-tuple-Ring R v) ＝ zero-tuple-Ring R
   right-inverse-law-add-tuple-Ring empty-tuple = refl
   right-inverse-law-add-tuple-Ring (x ∷ v) =
     ap-binary _∷_
