@@ -17,11 +17,10 @@ open import foundation.identity-types
 ## Idea
 
 The
-{{#concept "power operation" Disambiguation="raising a rational number to a natural number power" Agda=power-ℚ⁺}}
-on the [positive](elementary-number-theory.positive-rational-numbers.md)
-[rational numbers](elementary-number-theory.rational-numbers.md) `n x ↦ xⁿ`,
-which is defined by [iteratively](foundation.iterating-functions.md) multiplying
-`x` with itself `n` times.
+{{#concept "power operation" Disambiguation="raising a rational number to a natural number power" Agda=power-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md)
+`n x ↦ xⁿ`, is defined by [iteratively](foundation.iterating-functions.md)
+multiplying `x` with itself `n` times.
 
 ## Definition
 
