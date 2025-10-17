@@ -77,7 +77,7 @@ module _
     exists-ℚ⁻-in-upper-cut-is-negative-ℝ =
       elim-exists
         ( ∃ ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)))
-        ( λ p (x<p , p<0) → intro-exists (p , is-negative-le-zero-ℚ p p<0) x<p)
+        ( λ p (x<p , p<0) → intro-exists (p , is-negative-le-zero-ℚ p<0) x<p)
 
     is-negative-exists-ℚ⁻-in-upper-cut-ℝ :
       exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)) → is-negative-ℝ x
@@ -85,7 +85,7 @@ module _
       elim-exists
         ( is-negative-prop-ℝ x)
         ( λ (p , is-neg-p) x<p →
-          intro-exists p (x<p , le-zero-is-negative-ℚ p is-neg-p))
+          intro-exists p (x<p , le-zero-is-negative-ℚ is-neg-p))
 
     is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ :
       is-negative-ℝ x ↔ exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p))

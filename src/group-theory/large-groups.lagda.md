@@ -98,6 +98,15 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   symmetric-sim-Large-Group =
     symmetric-sim-Large-Monoid large-monoid-Large-Group
 
+  transitive-sim-Large-Group :
+    {l1 l2 l3 : Level}
+    (x : type-Large-Group l1)
+    (y : type-Large-Group l2)
+    (z : type-Large-Group l3) →
+    sim-Large-Group y z → sim-Large-Group x y → sim-Large-Group x z
+  transitive-sim-Large-Group =
+    transitive-sim-Large-Monoid large-monoid-Large-Group
+
   preserves-sim-left-mul-Large-Group :
     {l1 l2 l3 : Level} (y : type-Large-Group l1)
     (x : type-Large-Group l2) (x' : type-Large-Group l3) →
@@ -188,6 +197,11 @@ module _
     {l1 : Level} (l2 : Level) (x : type-Large-Group G l1) →
     sim-Large-Group G (raise-Large-Group G l2 x) x
   sim-raise-Large-Group' = sim-raise-Large-Monoid' (large-monoid-Large-Group G)
+
+  eq-raise-Large-Group :
+    (l1 : Level) {l2 : Level} (x : type-Large-Group G (l1 ⊔ l2)) →
+    raise-Large-Group G l2 x ＝ x
+  eq-raise-Large-Group = eq-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-raise-Large-Group :
     {l1 l2 l3 : Level} (x : type-Large-Group G l1) →
