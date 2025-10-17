@@ -211,7 +211,7 @@ module _
       ( u)
 ```
 
-### The nth term of an geometric sequence with initial term `a` and common ratio `r` is `a * rⁿ`
+### The nth term of a geometric sequence with initial term `a` and common ratio `r` is `a * rⁿ`
 
 ```agda
 module _
