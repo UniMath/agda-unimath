@@ -26,7 +26,7 @@ open import order-theory.total-orders
 
 A map `f : P → Q` between the underlying types of two
 [total orders](order-theory.total-orders.md) is said to be
-{{#concept "order preserving" Agda=hom-Total-Order Disambiguation="map between total orders"}}
+{{#concept "order preserving" WD="increasing function" WDID=Q3075182 Agda=hom-Total-Order Disambiguation="map between total orders"}}
 if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition

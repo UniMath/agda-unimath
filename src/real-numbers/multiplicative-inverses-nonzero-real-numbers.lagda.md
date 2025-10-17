@@ -172,7 +172,7 @@ opaque
                   ( intro-exists (b , is-neg-b) x<b)))
             ( λ (is-pos-b , is-pos-d) →
               ex-falso
-                ( not-is-negative-is-positive-ℚ
+                ( is-not-negative-and-positive-ℚ
                   ( is-negative-mul-negative-positive-ℚ is-neg-a is-pos-d ,
                     is-positive-mul a d
                       ( leq-right-min-ℚ _ _)

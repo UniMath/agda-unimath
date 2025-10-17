@@ -28,12 +28,14 @@ open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-disjunction
@@ -48,10 +50,12 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.squares-real-numbers
 ```
 
 </details>
@@ -88,7 +92,7 @@ module _
         ( neg-one-ℚ)
         ( λ is-nonneg-neg-one-ℚ →
           ex-falso
-            ( not-is-negative-is-nonnegative-ℚ
+            ( is-not-negative-and-nonnegativeℚ
               ( is-negative-rational-ℚ⁻ neg-one-ℚ⁻ , is-nonneg-neg-one-ℚ)))
 
     is-inhabited-upper-cut-sqrt-ℝ⁰⁺ : is-inhabited-subtype upper-cut-sqrt-ℝ⁰⁺
@@ -121,7 +125,7 @@ module _
                 ( le-mediant-zero-ℚ⁻ q⁻ ,
                   λ is-nonneg-q' →
                     ex-falso
-                      ( not-is-negative-is-nonnegative-ℚ
+                      ( is-not-negative-and-nonnegativeℚ
                         ( is-negative-rational-ℚ⁻ (mediant-zero-ℚ⁻ q⁻) ,
                           is-nonneg-q'))))
           ( λ q=0 →
@@ -259,7 +263,7 @@ module _
           inl-disjunction
             ( λ is-nonneg-p →
               ex-falso
-                ( not-is-negative-is-nonnegative-ℚ (is-neg-p , is-nonneg-p))))
+                ( is-not-negative-and-nonnegativeℚ (is-neg-p , is-nonneg-p))))
         ( λ is-nonneg-p →
           map-disjunction
             ( λ p²<x _ → p²<x)
@@ -318,7 +322,7 @@ module _
     unfolding mul-ℝ real-sqrt-ℝ⁰⁺ leq-ℝ leq-ℝ'
 
     leq-square-sqrt-ℝ⁰⁺ :
-      leq-ℝ (real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ x)
+      leq-ℝ (square-ℝ (real-sqrt-ℝ⁰⁺ x)) (real-ℝ⁰⁺ x)
     leq-square-sqrt-ℝ⁰⁺ q q<√x² =
       rec-coproduct
         ( leq-negative-lower-cut-is-nonnegative-ℝ
@@ -346,7 +350,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-a →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( is-negative-mul-negative-positive-ℚ
                             ( is-neg-a)
                             ( is-pos-d) ,
@@ -361,7 +365,7 @@ module _
                 rec-coproduct
                   ( λ is-neg-c →
                     ex-falso
-                      ( not-is-negative-is-positive-ℚ
+                      ( is-not-negative-and-positive-ℚ
                         ( is-negative-mul-positive-negative-ℚ
                             ( is-pos-b)
                             ( is-neg-c) ,
@@ -420,7 +424,7 @@ module _
         ( decide-is-negative-is-nonnegative-ℚ q)
 
     leq-square-sqrt-ℝ⁰⁺' :
-      leq-ℝ' (real-ℝ⁰⁺ x) (real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x)
+      leq-ℝ' (real-ℝ⁰⁺ x) (square-ℝ (real-sqrt-ℝ⁰⁺ x))
     leq-square-sqrt-ℝ⁰⁺' q √x²<q =
       let open do-syntax-trunc-Prop (upper-cut-ℝ⁰⁺ x q)
       in do
@@ -477,8 +481,7 @@ module _
             ( [a,b][c,d]<q))
           ( x<b'²)
 
-    eq-real-square-sqrt-ℝ⁰⁺ :
-      real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x ＝ real-ℝ⁰⁺ x
+    eq-real-square-sqrt-ℝ⁰⁺ : square-ℝ (real-sqrt-ℝ⁰⁺ x) ＝ real-ℝ⁰⁺ x
     eq-real-square-sqrt-ℝ⁰⁺ =
       antisymmetric-leq-ℝ _ _
         ( leq-square-sqrt-ℝ⁰⁺)
@@ -569,6 +572,33 @@ opaque
       leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
 ```
 
+### Squaring is an automorphism on the nonnegative real numbers
+
+```agda
+abstract
+  is-section-square-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) ＝ x
+  is-section-square-ℝ⁰⁺ x =
+    eq-ℝ⁰⁺ (square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x)) x (eq-real-square-sqrt-ℝ⁰⁺ x)
+
+  is-retraction-square-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ x) ＝ x
+  is-retraction-square-ℝ⁰⁺ x =
+    eq-ℝ⁰⁺
+      ( sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ x))
+      ( x)
+      ( inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ x) x (refl-sim-ℝ _))))
+
+is-equiv-square-ℝ⁰⁺ : (l : Level) → is-equiv (square-ℝ⁰⁺ {l})
+is-equiv-square-ℝ⁰⁺ l =
+  is-equiv-is-invertible
+    ( sqrt-ℝ⁰⁺)
+    ( is-section-square-ℝ⁰⁺)
+    ( is-retraction-square-ℝ⁰⁺)
+
+equiv-square-ℝ⁰⁺ : (l : Level) → Aut (ℝ⁰⁺ l)
+equiv-square-ℝ⁰⁺ l = (square-ℝ⁰⁺ , is-equiv-square-ℝ⁰⁺ l)
+```
+
 ### If `p² = q` for rational `p` and `q`, then the square root of `q` as a real number is `p` as a real number
 
 ```agda
@@ -602,4 +632,34 @@ abstract
         real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ x
         ~ℝ real-ℝ⁰⁺ x by sim-eq-ℝ (eq-real-square-sqrt-ℝ⁰⁺ x)
         ~ℝ real-ℝ⁰⁺ y by x~y)
+```
+
+### The square root operation distributes over multiplication of nonnegative real numbers
+
+```agda
+abstract
+  distributive-sqrt-mul-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    sqrt-ℝ⁰⁺ (x *ℝ⁰⁺ y) ＝ sqrt-ℝ⁰⁺ x *ℝ⁰⁺ sqrt-ℝ⁰⁺ y
+  distributive-sqrt-mul-ℝ⁰⁺ x y =
+    eq-ℝ⁰⁺
+      ( sqrt-ℝ⁰⁺ (x *ℝ⁰⁺ y))
+      ( sqrt-ℝ⁰⁺ x *ℝ⁰⁺ sqrt-ℝ⁰⁺ y)
+      ( inv
+        ( eq-sim-ℝ
+          ( unique-sqrt-ℝ⁰⁺
+            ( x *ℝ⁰⁺ y)
+            ( sqrt-ℝ⁰⁺ x *ℝ⁰⁺ sqrt-ℝ⁰⁺ y)
+            ( sim-eq-ℝ
+              ( equational-reasoning
+                square-ℝ (real-sqrt-ℝ⁰⁺ x *ℝ real-sqrt-ℝ⁰⁺ y)
+                ＝ square-ℝ (real-sqrt-ℝ⁰⁺ x) *ℝ square-ℝ (real-sqrt-ℝ⁰⁺ y)
+                  by distributive-square-mul-ℝ _ _
+                ＝ real-ℝ⁰⁺ (x *ℝ⁰⁺ y)
+                  by
+                    ap
+                      ( real-ℝ⁰⁺)
+                      ( ap-mul-ℝ⁰⁺
+                        ( is-section-square-ℝ⁰⁺ x)
+                        ( is-section-square-ℝ⁰⁺ y)))))))
 ```

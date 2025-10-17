@@ -36,8 +36,8 @@ between [positive](elementary-number-theory.positive-rational-numbers.md),
 
 ### Inequalities between rational numbers with different signs
 
-Some inequalities can be deduced directly from the sign of a rational number:
-for example, every negative rational number is less than every nonnegative
+Some inequalities can be deduced directly from the sign of a rational number.
+For example, every negative rational number is less than every nonnegative
 rational number.
 
 #### Any negative rational number is less than any nonnegative rational number
@@ -70,7 +70,7 @@ abstract
   leq-negative-positive-ℚ p q = leq-le-ℚ (le-negative-positive-ℚ p q)
 ```
 
-#### A nonpositive rational number is less than a positive rational number
+#### A nonpositive rational number is less than any positive rational number
 
 ```agda
 abstract
@@ -82,7 +82,7 @@ abstract
       ( le-zero-is-positive-ℚ pos-q)
 ```
 
-#### A nonpositive rational number is less than or equal to a nonnegative rational number
+#### A nonpositive rational number is less than or equal to any nonnegative rational number
 
 ```agda
 abstract
