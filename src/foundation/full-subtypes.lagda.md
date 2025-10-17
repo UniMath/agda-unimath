@@ -88,6 +88,11 @@ module _
   pr1 (equiv-inclusion-is-full-subtype H) = inclusion-subtype P
   pr2 (equiv-inclusion-is-full-subtype H) = is-equiv-inclusion-is-full-subtype H
 
+  inv-equiv-inclusion-is-full-subtype :
+    is-full-subtype P → A ≃ type-subtype P
+  inv-equiv-inclusion-is-full-subtype H =
+    inv-equiv (equiv-inclusion-is-full-subtype H)
+
   is-full-is-equiv-inclusion-subtype :
     is-equiv (inclusion-subtype P) → is-full-subtype P
   is-full-is-equiv-inclusion-subtype H x =

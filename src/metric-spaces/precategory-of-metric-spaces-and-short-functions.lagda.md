@@ -236,12 +236,9 @@ module _
     iso-Precategory precategory-short-function-Metric-Space A B ≃
     isometric-equiv-Metric-Space' A B
   equiv-isometric-equiv-iso-short-function-Metric-Space' =
-    equiv-tot
-      ( equiv-is-isometric-equiv-is-iso-short-function-Metric-Space A B) ∘e
-    associative-Σ
-      ( type-function-Metric-Space A B)
-      ( is-short-function-Metric-Space A B)
-      ( is-iso-Precategory precategory-short-function-Metric-Space {A} {B})
+    ( equiv-tot
+      ( equiv-is-isometric-equiv-is-iso-short-function-Metric-Space A B)) ∘e
+    ( associative-Σ)
 ```
 
 ## See also

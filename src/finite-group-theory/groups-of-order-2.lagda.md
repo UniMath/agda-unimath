@@ -109,7 +109,7 @@ module _
   where
 
   iso-eq-Group-of-Order-2 :
-    (H : Group-of-Order-2 l) → Id G H → iso-Group-of-Order-2 G H
+    (H : Group-of-Order-2 l) → G ＝ H → iso-Group-of-Order-2 G H
   iso-eq-Group-of-Order-2 H p =
     iso-eq-Group
       ( group-Group-of-Order-2 G)
@@ -134,7 +134,7 @@ module _
       ( iso-eq-Group-of-Order-2)
 
   eq-iso-Group-of-Order-2 :
-    (H : Group-of-Order-2 l) → iso-Group-of-Order-2 G H → Id G H
+    (H : Group-of-Order-2 l) → iso-Group-of-Order-2 G H → G ＝ H
   eq-iso-Group-of-Order-2 H =
     map-inv-is-equiv (is-equiv-iso-eq-Group-of-Order-2 H)
 ```
