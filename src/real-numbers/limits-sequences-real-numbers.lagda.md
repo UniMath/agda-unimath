@@ -29,7 +29,7 @@ open import real-numbers.metric-space-of-real-numbers
 
 ## Idea
 
-In this file, we describe properties of
+On this page, we describe properties of
 [limits of sequences](metric-spaces.limits-of-sequences-metric-spaces.md) in the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 

@@ -259,17 +259,17 @@ module _
     modulated-ucont-map-limit-modulus-sequence-Metric-Space (m , is-mod-m) =
       ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
         λ ε n N≤n →
-          is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
-            ( A)
-            ( B)
-            ( f)
-            ( u n)
-            ( ε)
-            ( lim)
-            ( is-mod-m
-              ( modulus-modulated-ucont-map-Metric-Space A B f ε)
-              ( n)
-              ( N≤n)))
+        is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+          ( A)
+          ( B)
+          ( f)
+          ( u n)
+          ( ε)
+          ( lim)
+          ( is-mod-m
+            ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+            ( n)
+            ( N≤n)))
 
     modulated-ucont-map-limit-sequence-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
@@ -361,7 +361,7 @@ module _
     map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
 ```
 
-### If two sequences have limits in metric spaces, their zip has a limit in the product space
+### If two sequences have limits in metric spaces, their pairing has a limit in the product space
 
 The converse has yet to be proved.
 
@@ -369,15 +369,15 @@ The converse has yet to be proved.
 module _
   {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
   (u : sequence-type-Metric-Space A)
-  (lim-u : type-Metric-Space A)
-  (mod-lim-u : limit-modulus-sequence-Metric-Space A u lim-u)
   (v : sequence-type-Metric-Space B)
+  (lim-u : type-Metric-Space A)
   (lim-v : type-Metric-Space B)
+  (mod-lim-u : limit-modulus-sequence-Metric-Space A u lim-u)
   (mod-lim-v : limit-modulus-sequence-Metric-Space B v lim-v)
   where
 
   abstract
-    limit-modulus-zip-sequence-Metric-Space :
+    limit-modulus-pair-sequence-Metric-Space :
       limit-modulus-sequence-Metric-Space
         ( product-Metric-Space A B)
         ( zip-sequence u v)
@@ -414,7 +414,7 @@ module _
   (is-lim-v : is-limit-sequence-Metric-Space B v lim-v)
   where
 
-  is-limit-zip-sequence-Metric-Space :
+  is-limit-pair-sequence-Metric-Space :
     is-limit-sequence-Metric-Space
       ( product-Metric-Space A B)
       ( zip-sequence u v)

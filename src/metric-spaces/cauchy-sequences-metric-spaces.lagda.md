@@ -677,7 +677,7 @@ module _
       ( u)
 ```
 
-### The zip of Cauchy sequences
+### Pairing of Cauchy sequences
 
 ```agda
 module _
@@ -685,7 +685,7 @@ module _
   (u : cauchy-sequence-Metric-Space A) (v : cauchy-sequence-Metric-Space B)
   where
 
-  seq-product-cauchy-sequence-Metric-Space :
+  sequence-pair-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space (product-Metric-Space A B)
   seq-product-cauchy-sequence-Metric-Space =
     zip-sequence
@@ -693,7 +693,7 @@ module _
       ( map-cauchy-sequence-Metric-Space B v)
 
   abstract
-    is-cauchy-seq-product-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space :
       is-cauchy-sequence-Metric-Space
         ( product-Metric-Space A B)
         ( seq-product-cauchy-sequence-Metric-Space)
@@ -719,7 +719,7 @@ module _
               ( transitive-leq-ℕ _ _ _ N≤m (right-leq-max-ℕ _ _))
               ( transitive-leq-ℕ _ _ _ N≤n (right-leq-max-ℕ _ _))))
 
-  product-cauchy-sequence-Metric-Space :
+  pair-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space (product-Metric-Space A B)
   product-cauchy-sequence-Metric-Space =
     ( seq-product-cauchy-sequence-Metric-Space ,
