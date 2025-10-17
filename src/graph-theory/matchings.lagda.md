@@ -44,7 +44,7 @@ module _
     Σ ( vertex-Undirected-Graph G)
       ( λ y →
         Σ ( edge-Undirected-Graph G (standard-unordered-pair x y))
-          ( λ e → Id (c (standard-unordered-pair x y) e) (inr star)))
+          ( λ e → c (standard-unordered-pair x y) e ＝ inr star))
 
   matching : Undirected-Graph l1 l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
   matching G =

@@ -113,18 +113,17 @@ module _
 
   associative-mul-∞-Group :
     (x y z : type-∞-Group) →
-    Id
-      ( mul-∞-Group (mul-∞-Group x y) z)
-      ( mul-∞-Group x (mul-∞-Group y z))
+    mul-∞-Group (mul-∞-Group x y) z ＝
+    mul-∞-Group x (mul-∞-Group y z)
   associative-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
 
   left-unit-law-mul-∞-Group :
-    (x : type-∞-Group) → Id (mul-∞-Group unit-∞-Group x) x
+    (x : type-∞-Group) → mul-∞-Group unit-∞-Group x ＝ x
   left-unit-law-mul-∞-Group =
     left-unit-law-mul-Ω classifying-pointed-type-∞-Group
 
   right-unit-law-mul-∞-Group :
-    (y : type-∞-Group) → Id (mul-∞-Group y unit-∞-Group) y
+    (y : type-∞-Group) → mul-∞-Group y unit-∞-Group ＝ y
   right-unit-law-mul-∞-Group =
     right-unit-law-mul-Ω classifying-pointed-type-∞-Group
 
@@ -138,12 +137,12 @@ module _
   inv-∞-Group = inv-Ω classifying-pointed-type-∞-Group
 
   left-inverse-law-mul-∞-Group :
-    (x : type-∞-Group) → Id (mul-∞-Group (inv-∞-Group x) x) unit-∞-Group
+    (x : type-∞-Group) → mul-∞-Group (inv-∞-Group x) x ＝ unit-∞-Group
   left-inverse-law-mul-∞-Group =
     left-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 
   right-inverse-law-mul-∞-Group :
-    (x : type-∞-Group) → Id (mul-∞-Group x (inv-∞-Group x)) unit-∞-Group
+    (x : type-∞-Group) → mul-∞-Group x (inv-∞-Group x) ＝ unit-∞-Group
   right-inverse-law-mul-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 ```

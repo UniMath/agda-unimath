@@ -591,9 +591,8 @@ module _
     exists-emb-ℕ-countable-discrete-Set :
       exists (type-Set X → ℕ) is-emb-Prop
     exists-emb-ℕ-countable-discrete-Set =
-      rec-trunc-Prop
-        ( ∃ (type-Set X → ℕ) is-emb-Prop)
-        ( λ e → unit-trunc-Prop (emb-ℕ-enumeration-discrete-Set X e K))
+      map-trunc-Prop
+        ( λ e → emb-ℕ-enumeration-discrete-Set X e K)
         ( H)
 ```
 

@@ -192,13 +192,12 @@ module _
   abstract
     compute-geometric-sequence-ℚ⁺ :
       (n : ℕ) →
-      Id
-        ( mul-ℚ⁺
-          ( initial-term-geometric-sequence-ℚ⁺ u)
-          ( power-Monoid monoid-mul-ℚ⁺
-            ( n)
-            ( common-ratio-geometric-sequence-ℚ⁺ u)))
-        ( seq-geometric-sequence-ℚ⁺ u n)
+      mul-ℚ⁺
+        ( initial-term-geometric-sequence-ℚ⁺ u)
+        ( power-Monoid monoid-mul-ℚ⁺
+          ( n)
+          ( common-ratio-geometric-sequence-ℚ⁺ u)) ＝
+      seq-geometric-sequence-ℚ⁺ u n
     compute-geometric-sequence-ℚ⁺ n =
       ( compute-standard-geometric-sequence-ℚ⁺
         ( initial-term-geometric-sequence-ℚ⁺ u)

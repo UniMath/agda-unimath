@@ -78,7 +78,7 @@ is-decidable-Σ-coproduct :
   is-decidable (Σ (A + B) C)
 is-decidable-Σ-coproduct {A = A} {B} C dA dB =
   is-decidable-equiv
-    ( right-distributive-Σ-coproduct A B C)
+    ( right-distributive-Σ-coproduct C)
     ( is-decidable-coproduct dA dB)
 ```
 

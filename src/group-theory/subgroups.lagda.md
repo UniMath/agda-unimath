@@ -271,9 +271,8 @@ module _
 
   associative-mul-Subgroup :
     (x y z : type-group-Subgroup) →
-    Id
-      ( mul-Subgroup (mul-Subgroup x y) z)
-      ( mul-Subgroup x (mul-Subgroup y z))
+    mul-Subgroup (mul-Subgroup x y) z ＝
+    mul-Subgroup x (mul-Subgroup y z)
   associative-mul-Subgroup x y z =
     eq-subgroup-eq-group
       ( associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
@@ -283,12 +282,12 @@ module _
   pr2 unit-Subgroup = contains-unit-Subgroup G H
 
   left-unit-law-mul-Subgroup :
-    (x : type-group-Subgroup) → Id (mul-Subgroup unit-Subgroup x) x
+    (x : type-group-Subgroup) → mul-Subgroup unit-Subgroup x ＝ x
   left-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-unit-law-mul-Group G (pr1 x))
 
   right-unit-law-mul-Subgroup :
-    (x : type-group-Subgroup) → Id (mul-Subgroup x unit-Subgroup) x
+    (x : type-group-Subgroup) → mul-Subgroup x unit-Subgroup ＝ x
   right-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-unit-law-mul-Group G (pr1 x))
 
@@ -299,17 +298,13 @@ module _
 
   left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
-    Id
-      ( mul-Subgroup (inv-Subgroup x) x)
-      ( unit-Subgroup)
+    mul-Subgroup (inv-Subgroup x) x ＝ unit-Subgroup
   left-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-inverse-law-mul-Group G (pr1 x))
 
   right-inverse-law-mul-Subgroup :
     (x : type-group-Subgroup) →
-    Id
-      ( mul-Subgroup x (inv-Subgroup x))
-      ( unit-Subgroup)
+    mul-Subgroup x (inv-Subgroup x) ＝ unit-Subgroup
   right-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-inverse-law-mul-Group G (pr1 x))
 

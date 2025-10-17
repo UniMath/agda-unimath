@@ -87,7 +87,7 @@ module _
     ( t : Σ ( has-associative-mul (type-Semigroup G))
             ( λ μ →
               preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)) →
-    Id center-total-preserves-mul-id-Semigroup t
+    center-total-preserves-mul-id-Semigroup ＝ t
   contraction-total-preserves-mul-id-Semigroup
     ( (μ-G' , associative-G') , μ-id) =
     eq-type-subtype
