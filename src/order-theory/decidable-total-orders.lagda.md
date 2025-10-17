@@ -175,7 +175,7 @@ module _
 
   antisymmetric-leq-Decidable-Total-Order :
     (x y : type-Decidable-Total-Order) →
-    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → Id x y
+    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → x ＝ y
   antisymmetric-leq-Decidable-Total-Order =
     antisymmetric-leq-Poset poset-Decidable-Total-Order
 

@@ -874,7 +874,7 @@ module _
                           sum-equiv-finite-Commutative-Semiring R
                             ( _)
                             ( _)
-                            ( associative-Σ _ _ _)
+                            ( associative-Σ)
                             ( _))
                     ( refl))
           ＝

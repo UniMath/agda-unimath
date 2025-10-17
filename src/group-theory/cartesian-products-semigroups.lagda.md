@@ -49,9 +49,8 @@ module _
 
   associative-mul-product-Semigroup :
     (x y z : type-product-Semigroup) →
-    Id
-      ( mul-product-Semigroup (mul-product-Semigroup x y) z)
-      ( mul-product-Semigroup x (mul-product-Semigroup y z))
+    mul-product-Semigroup (mul-product-Semigroup x y) z ＝
+    mul-product-Semigroup x (mul-product-Semigroup y z)
   associative-mul-product-Semigroup (pair x1 y1) (pair x2 y2) (pair x3 y3) =
     eq-pair
       ( associative-mul-Semigroup A x1 x2 x3)
