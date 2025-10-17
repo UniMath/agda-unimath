@@ -108,7 +108,7 @@ power-mul-ℚ⁺ :
 power-mul-ℚ⁺ m n q = power-mul-Group group-mul-ℚ⁺ m n
 ```
 
-### If `p` and `q` are positive rational numbers with `p < q` and `n` is nonzero, `pⁿ < qⁿ`
+### If `p` and `q` are positive rational numbers with `p < q` and `n` is nonzero, then `pⁿ < qⁿ`
 
 ```agda
 abstract
@@ -127,7 +127,7 @@ abstract
       ( preserves-le-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p<q)
 ```
 
-### If `p` and `q` are positive rational numbers with `p ≤ q`, `pⁿ ≤ qⁿ`
+### If `p` and `q` are positive rational numbers with `p ≤ q`, then `pⁿ ≤ qⁿ`
 
 ```agda
 abstract
@@ -188,7 +188,7 @@ abstract
     unit-trunc-Prop (bound-unbounded-power-one-plus-ℚ⁺ ε b)
 ```
 
-### If `1 < q`, `qⁿ` grows without bound
+### If `q` is greater than one, `qⁿ` grows without bound
 
 ```agda
 abstract
