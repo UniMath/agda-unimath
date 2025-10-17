@@ -99,9 +99,9 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
 
 This is a special case of the more general fact that a type has decidable sums
 if and only if its totally separated reflection does, and totally separated
-types have double negation stable equality.
+types have double negation stable equality
 [`TypeTopology.TotallySeparated`](http://martinescardo.github.io/TypeTopology/TypeTopology.TotallySeparated.html)
-{{#cite TypeTopology}}
+{{#cite TypeTopology}}.
 
 ```agda
 module _

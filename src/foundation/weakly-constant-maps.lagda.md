@@ -125,7 +125,7 @@ module _
     ( fixed-point f , is-prop-fixed-point-is-weakly-constant-map)
 ```
 
-### The action on identifications of a weakly constant map is weakly constant
+### The action on identifications of weakly constant maps is weakly constant
 
 This is Auxiliary Lemma 4.3 of {{#cite KECA17}}.
 

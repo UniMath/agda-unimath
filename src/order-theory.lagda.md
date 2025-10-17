@@ -139,6 +139,8 @@ open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-elements-large-strict-orders public
 open import order-theory.similarity-of-elements-large-strict-preorders public
+open import order-theory.similarity-of-elements-posets public
+open import order-theory.similarity-of-elements-preorders public
 open import order-theory.similarity-of-elements-strict-orders public
 open import order-theory.similarity-of-elements-strict-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public

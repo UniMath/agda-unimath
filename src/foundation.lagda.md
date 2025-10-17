@@ -121,6 +121,7 @@ open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-epimorphisms public
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types public
 open import foundation.dependent-function-types public
+open import foundation.dependent-function-types-with-apartness-relations public
 open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
@@ -212,6 +213,7 @@ open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
+open import foundation.function-types-with-apartness-relations public
 open import foundation.functional-correspondences public
 open import foundation.functoriality-action-on-identifications-functions public
 open import foundation.functoriality-cartesian-product-types public
@@ -478,6 +480,9 @@ open import foundation.type-arithmetic-standard-pullbacks public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.types-with-decidable-dependent-pair-types public
+open import foundation.types-with-decidable-dependent-product-types public
+open import foundation.types-with-decidable-universal-quantifications public
 open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
 open import foundation.uniqueness-image public
