@@ -302,6 +302,7 @@ open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public
 open import foundation.maybe public
+open import foundation.mere-decidable-embeddings public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
@@ -332,6 +333,7 @@ open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.noninjective-maps public
+open import foundation.nonsurjective-maps public
 open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public

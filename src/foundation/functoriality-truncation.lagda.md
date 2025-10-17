@@ -9,6 +9,7 @@ module foundation.functoriality-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.truncations
 open import foundation.universe-levels
@@ -179,4 +180,27 @@ module _
     retraction-map-trunc-retraction
       ( inclusion-retract R)
       ( retraction-retract R)
+```
+
+### The truncation of the evaluation map
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋)
+  where
+
+  map-trunc-ev :
+    {X : UU l1} {Y : X → UU l2} →
+    (x : X) → type-trunc k ((x : X) → Y x) → type-trunc k (Y x)
+  map-trunc-ev x = map-trunc k (ev x)
+
+  map-distributive-trunc-Π :
+    {X : UU l1} (Y : X → UU l2) →
+    type-trunc k ((x : X) → Y x) → (x : X) → type-trunc k (Y x)
+  map-distributive-trunc-Π Y f x = map-trunc-ev x f
+
+  map-distributive-trunc-function-type :
+    (X : UU l1) (Y : UU l2) → type-trunc k (X → Y) → X → type-trunc k Y
+  map-distributive-trunc-function-type X Y =
+    map-distributive-trunc-Π (λ _ → Y)
 ```
