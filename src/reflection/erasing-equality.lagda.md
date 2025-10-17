@@ -19,7 +19,7 @@ open import foundation-core.identity-types
 Agda's builtin primitive `primEraseEquality` is a special construct on
 [identifications](foundation-core.identity-types.md) that for every
 identification `x ＝ y` gives another identification `x ＝ y` with the following
-reduction behaviour:
+reduction behavior:
 
 - If the two end points of `p : x ＝ y` normalize to the same term, then
   `primEraseEquality p` reduces to `refl`.

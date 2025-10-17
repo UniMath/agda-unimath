@@ -26,9 +26,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 The _dependent pushout-product_ is a generalization of the
 [pushout-product](synthetic-homotopy-theory.pushout-products.md). Consider a map
 `f : A → B` and a family of maps `g : (x : X) → B x → Y x`. The
-{{#concept "dependent
-pushout-product" Disambiguation="of maps of types" Agda=dependent-pushout-product}}
-is the [cogap map](synthetic-homotopy-theory.pushouts.md) of the [commuting square](foundation-core.commuting-squares-of-maps.md)
+{{#concept "dependent pushout-product" Disambiguation="of maps of types" Agda=dependent-pushout-product}}
+is the [cogap map](synthetic-homotopy-theory.pushouts.md) of the
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                        Σ f id

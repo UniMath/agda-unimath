@@ -8,8 +8,8 @@ module orthogonal-factorization-systems.null-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
@@ -19,7 +19,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
