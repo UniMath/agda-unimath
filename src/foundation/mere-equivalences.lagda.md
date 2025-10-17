@@ -76,13 +76,8 @@ abstract
   transitive-mere-equiv :
     {l1 l2 l3 : Level} (X : UU l1) (Y : UU l2) (Z : UU l3) →
     mere-equiv Y Z → mere-equiv X Y → mere-equiv X Z
-  transitive-mere-equiv X Y Z f e =
-    apply-universal-property-trunc-Prop e
-      ( mere-equiv-Prop X Z)
-      ( λ e' →
-        apply-universal-property-trunc-Prop f
-          ( mere-equiv-Prop X Z)
-          ( λ f' → unit-trunc-Prop (f' ∘e e')))
+  transitive-mere-equiv X Y Z =
+    map-binary-trunc-Prop (_∘e_)
 ```
 
 ### Truncated types are closed under mere equivalence

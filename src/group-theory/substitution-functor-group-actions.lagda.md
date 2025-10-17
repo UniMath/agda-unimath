@@ -175,33 +175,26 @@ module _
     ( h'' , x'')
     ( d)
     ( e) =
-    apply-universal-property-trunc-Prop e
+    apply-twice-universal-property-trunc-Prop e d
       ( pr1
         ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
         ( h , x)
         ( h'' , x''))
-      ( λ (g , p , q) →
-        apply-universal-property-trunc-Prop d
-          ( pr1
-            ( equivalence-relation-obj-left-adjoint-subst-action-Group
-              ( X))
-            ( h , x)
-            ( h'' , x''))
-          ( λ (g' , p' , q') →
-            intro-exists
-              ( mul-Group G g' g)
-              ( ( ( ap
-                    ( mul-Group' H h)
-                    ( preserves-mul-hom-Group G H f)) ∙
-                  ( associative-mul-Group H
-                    ( map-hom-Group G H f g')
-                    ( map-hom-Group G H f g)
-                    ( h)) ∙
-                  ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
-                  ( p')) ,
-                ( ( preserves-mul-action-Group G X g' g x) ∙
-                  ( ap (mul-action-Group G X g') q) ∙
-                  ( q')))))
+      ( λ (g , p , q) (g' , p' , q') →
+        intro-exists
+          ( mul-Group G g' g)
+          ( ( ( ap
+                ( mul-Group' H h)
+                ( preserves-mul-hom-Group G H f)) ∙
+              ( associative-mul-Group H
+                ( map-hom-Group G H f g')
+                ( map-hom-Group G H f g)
+                ( h)) ∙
+              ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
+              ( p')) ,
+            ( ( preserves-mul-action-Group G X g' g x) ∙
+              ( ap (mul-action-Group G X g') q) ∙
+              ( q'))))
 
   set-left-adjoint-subst-action-Group :
     {l3 : Level} → action-Group G l3 →

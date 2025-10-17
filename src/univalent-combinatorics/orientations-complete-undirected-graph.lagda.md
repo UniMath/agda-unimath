@@ -272,16 +272,11 @@ module _
         ( has-finite-cardinality-is-finite
           ( is-finite-subtype-pointwise-difference d d'))
     pr2 has-finite-cardinality-d'-d =
-      apply-universal-property-trunc-Prop
+      map-trunc-Prop
+        ( h' ∘e_)
         ( pr2
           ( has-finite-cardinality-is-finite
             ( is-finite-subtype-pointwise-difference d d')))
-        ( trunc-Prop
-          ( ( Fin (pr1 has-finite-cardinality-d'-d)) ≃
-            ( Σ ( 2-Element-Decidable-Subtype l
-                  ( type-Type-With-Cardinality-ℕ n X))
-                ( λ Y → d' Y ≠ d Y))))
-        ( λ h → unit-trunc-Prop (h' ∘e h))
       where
       h' :
         Σ ( 2-Element-Decidable-Subtype l
@@ -3469,19 +3464,12 @@ module _
         ( T)
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
-          ( pair
-            ( is-in-equivalence-class
-              ( even-difference-orientation-Complete-Undirected-Graph
-                ( number-of-elements-count eX)
-                ( pair X (unit-trunc-Prop (equiv-count eX))))
-              ( T)
-              ( transitive-canonical-orientation-count))
-            ( is-prop-is-in-equivalence-class
-              ( even-difference-orientation-Complete-Undirected-Graph
-                ( number-of-elements-count eX)
-                ( pair X (unit-trunc-Prop (equiv-count eX))))
-              ( T)
-              ( transitive-canonical-orientation-count)))
+          ( is-in-equivalence-class-Prop
+            ( even-difference-orientation-Complete-Undirected-Graph
+              ( number-of-elements-count eX)
+              ( pair X (unit-trunc-Prop (equiv-count eX))))
+            ( T)
+            ( transitive-canonical-orientation-count))
           ( λ (pair t r) →
             cases-retraction-orientation
               ( T)

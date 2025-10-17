@@ -325,13 +325,10 @@ abstract
   all-elements-equal-has-finite-cardinality {l1} {X} (pair k K) (pair l L) =
     eq-type-subtype
       ( λ k → mere-equiv-Prop (Fin k) X)
-      ( apply-universal-property-trunc-Prop K
+      ( apply-twice-universal-property-trunc-Prop K L
         ( Id-Prop ℕ-Set k l)
-        ( λ (e : Fin k ≃ X) →
-          apply-universal-property-trunc-Prop L
-            ( Id-Prop ℕ-Set k l)
-            ( λ (f : Fin l ≃ X) →
-              is-equivalence-injective-Fin (inv-equiv f ∘e e))))
+        ( λ (e : Fin k ≃ X) (f : Fin l ≃ X) →
+          is-equivalence-injective-Fin (inv-equiv f ∘e e)))
 
 abstract
   is-prop-has-finite-cardinality :
@@ -421,12 +418,9 @@ eq-cardinality :
   {l1 : Level} {k l : ℕ} {A : UU l1} →
   has-cardinality-ℕ k A → has-cardinality-ℕ l A → k ＝ l
 eq-cardinality H K =
-  apply-universal-property-trunc-Prop H
+  apply-twice-universal-property-trunc-Prop H K
     ( Id-Prop ℕ-Set _ _)
-    ( λ e →
-      apply-universal-property-trunc-Prop K
-        ( Id-Prop ℕ-Set _ _)
-        ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
+    ( λ e f → is-equivalence-injective-Fin (inv-equiv f ∘e e))
 ```
 
 ### Equivalent finite types have the same cardinality
@@ -578,10 +572,7 @@ is-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ :
   {l1 : Level} (n : ℕ) (A : Type-With-Cardinality-ℕ l1 (succ-ℕ n)) →
   is-inhabited (type-Type-With-Cardinality-ℕ (succ-ℕ n) A)
 is-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ n A =
-  apply-universal-property-trunc-Prop
-    ( pr2 A)
-    ( is-inhabited-Prop (type-Type-With-Cardinality-ℕ (succ-ℕ n) A))
-    ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin n)))
+  map-trunc-Prop (λ e → map-equiv e (zero-Fin n)) (pr2 A)
 ```
 
 ### If `X` is finite, then its propositional truncation is decidable

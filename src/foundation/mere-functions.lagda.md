@@ -7,6 +7,8 @@ module foundation.mere-functions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.evaluation-functions
+open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -58,12 +60,11 @@ module _
   where
 
   ev-mere-function' : (mere-function A B) → A → ║ B ║₋₁
-  ev-mere-function' |f| a =
-    rec-trunc-Prop (trunc-Prop B) (λ f → unit-trunc-Prop (f a)) |f|
+  ev-mere-function' |f| a = map-trunc-Prop (ev a) |f|
 
   ev-mere-function : (mere-function A B) → ║ A ║₋₁ → ║ B ║₋₁
-  ev-mere-function |f| |a| =
-    rec-trunc-Prop (trunc-Prop B) (ev-mere-function' |f|) (|a|)
+  ev-mere-function |f| =
+    rec-trunc-Prop (trunc-Prop B) (ev-mere-function' |f|)
 ```
 
 ### Mere functions form a reflexive relation
@@ -86,14 +87,8 @@ module _
 
   transitive-mere-function :
     mere-function B C → mere-function A B → mere-function A C
-  transitive-mere-function |g| =
-    rec-trunc-Prop
-      ( prop-mere-function A C)
-      ( λ f →
-        rec-trunc-Prop
-          ( prop-mere-function A C)
-          ( λ g → unit-trunc-Prop (g ∘ f))
-          ( |g|))
+  transitive-mere-function =
+    map-binary-trunc-Prop (λ g f → g ∘ f)
 ```
 
 ## See also

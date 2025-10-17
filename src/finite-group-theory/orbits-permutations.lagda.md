@@ -38,7 +38,9 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
@@ -419,29 +421,22 @@ module _
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → iterate k (map-equiv f) a ＝ b))
   pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
-  pr1 (pr2 (pr2 same-orbits-permutation)) a b P =
-    apply-universal-property-trunc-Prop
-      ( P)
-      ( pr1 same-orbits-permutation b a)
-      ( λ (k , p) →
-        apply-universal-property-trunc-Prop
-          ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
-          ( pr1 same-orbits-permutation b a)
-          ( λ h →
-            unit-trunc-Prop
-              (pair
-                ( pr1 (lemma h k))
-                ( ( ap (iterate (pr1 (lemma h k)) (map-equiv f)) (inv p)) ∙
-                  ( ( inv (iterate-add-ℕ (pr1 (lemma h k)) k (map-equiv f) a)) ∙
-                    ( ( ap
-                        ( λ x → iterate x (map-equiv f) a)
-                        ( pr2 (lemma h k))) ∙
-                      ( mult-has-finite-orbits-permutation
-                        ( type-Type-With-Cardinality-ℕ n X)
-                        ( pair n h)
-                        ( f)
-                        ( a)
-                        ( k))))))))
+  pr1 (pr2 (pr2 same-orbits-permutation)) a b =
+    map-binary-trunc-Prop
+      ( λ h (k , p) →
+        ( pr1 (lemma h k)) ,
+        ( ( ap (iterate (pr1 (lemma h k)) (map-equiv f)) (inv p)) ∙
+          ( inv (iterate-add-ℕ (pr1 (lemma h k)) k (map-equiv f) a)) ∙
+          ( ap
+            ( λ x → iterate x (map-equiv f) a)
+            ( pr2 (lemma h k))) ∙
+          ( mult-has-finite-orbits-permutation
+            ( type-Type-With-Cardinality-ℕ n X)
+            ( pair n h)
+            ( f)
+            ( a)
+            ( k))))
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
     where
     has-finite-orbits-permutation-a :
       (h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
@@ -464,19 +459,12 @@ module _
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
           ( pr1 (pr2 (has-finite-orbits-permutation-a h))))
-  pr2 (pr2 (pr2 same-orbits-permutation)) a b c Q P =
-    apply-universal-property-trunc-Prop
-      ( P)
-      ( pr1 same-orbits-permutation a c)
-      ( λ (k1 , p) →
-        apply-universal-property-trunc-Prop
-          ( Q)
-          ( pr1 same-orbits-permutation a c)
-          ( λ (k2 , q) →
-            unit-trunc-Prop
-              ( ( k2 +ℕ k1) ,
-                ( ( iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
-                  ( ap (iterate k2 (map-equiv f)) p ∙ q)))))
+  pr2 (pr2 (pr2 same-orbits-permutation)) a b c =
+    map-binary-trunc-Prop
+      ( λ (k2 , q) (k1 , p) →
+        ( k2 +ℕ k1) ,
+        ( ( iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
+          ( ap (iterate k2 (map-equiv f)) p ∙ q)))
 
   abstract
     is-decidable-same-orbits-permutation :
@@ -596,23 +584,23 @@ module _
             ( has-decidable-equality
               ( equivalence-class same-orbits-permutation))
             ( is-prop-has-decidable-equality))
-        ( λ h T1 T2 →
-          apply-universal-property-trunc-Prop
-          ( pr2 T1)
-          ( is-decidable-Prop
-            ( Id-Prop (equivalence-class-Set same-orbits-permutation) T1 T2))
-          ( λ (pair t1 p1) →
-            cases-decidable-equality T1 T2 t1
-              ( eq-pair-Σ
-                ( ap
-                  ( subtype-equivalence-class
-                    same-orbits-permutation)
-                  ( eq-has-same-elements-equivalence-class
-                    same-orbits-permutation T1
-                      ( class same-orbits-permutation t1) p1))
-                ( all-elements-equal-type-trunc-Prop _ _))
-              ( is-decidable-is-in-equivalence-class-same-orbits-permutation
-                T2 t1))))
+          ( λ h T1 T2 →
+            apply-universal-property-trunc-Prop
+            ( pr2 T1)
+            ( is-decidable-Prop
+              ( Id-Prop (equivalence-class-Set same-orbits-permutation) T1 T2))
+            ( λ (pair t1 p1) →
+              cases-decidable-equality T1 T2 t1
+                ( eq-pair-Σ
+                  ( ap
+                    ( subtype-equivalence-class
+                      same-orbits-permutation)
+                    ( eq-has-same-elements-equivalence-class
+                      same-orbits-permutation T1
+                        ( class same-orbits-permutation t1) p1))
+                  ( all-elements-equal-type-trunc-Prop _ _))
+                ( is-decidable-is-in-equivalence-class-same-orbits-permutation
+                  T2 t1))))
       where
       cases-decidable-equality :
         (T1 T2 : equivalence-class same-orbits-permutation)
@@ -795,26 +783,20 @@ module _
           ( y)))
     conserves-other-orbits-transposition g x y NA NB =
       pair
-        ( λ P' → apply-universal-property-trunc-Prop P'
-          ( prop-equivalence-relation
-            ( same-orbits-permutation-count (composition-transposition-a-b g))
-            ( x)
-            ( y))
-          ( λ (pair k p) → unit-trunc-Prop
-            (pair k
-              ( (equal-iterate-transposition-other-orbits k) ∙
-                ( p)))))
+        ( map-trunc-Prop
+            ( λ (pair k p) →
+              pair
+                ( k)
+                ( (equal-iterate-transposition-other-orbits k) ∙
+                  ( p))))
         ( is-equiv-has-converse-is-prop
           ( is-prop-type-trunc-Prop)
           ( is-prop-type-trunc-Prop)
-          ( λ P' →
-            apply-universal-property-trunc-Prop P'
-              ( prop-equivalence-relation (same-orbits-permutation-count g) x y)
+          ( map-trunc-Prop
               ( λ (pair k p) →
-                unit-trunc-Prop
-                  ( ( k) ,
-                    ( (inv (equal-iterate-transposition-other-orbits k)) ∙
-                      ( p))))))
+                pair
+                  ( k)
+                  ( inv (equal-iterate-transposition-other-orbits k) ∙ p))))
       where
       equal-iterate-transposition-other-orbits :
         (k : ℕ) →
@@ -837,26 +819,23 @@ module _
       ( same-orbits-permutation-count (composition-transposition-a-b g))
   pr1 (conserves-other-orbits-transposition-quotient g T nq nr) = pr1 T
   pr2 (conserves-other-orbits-transposition-quotient g (pair T1 T2) nq nr) =
-    apply-universal-property-trunc-Prop
-      ( T2)
-      ( is-equivalence-class-Prop
-        ( same-orbits-permutation-count (composition-transposition-a-b g))
-        ( T1))
+    map-trunc-Prop
       ( λ (pair x Q) →
-        unit-trunc-Prop
-          ( pair x
-            ( λ y →
-              iff-equiv
-                ( ( conserves-other-orbits-transposition g x y
-                    ( nq ∘ backward-implication (Q a))
-                    ( nr ∘ backward-implication (Q b))) ∘e
-                  ( equiv-iff'
-                    ( T1 y)
-                    ( prop-equivalence-relation
-                      ( same-orbits-permutation-count g)
-                      ( x)
-                      ( y))
-                    ( Q y))))))
+        pair
+          ( x)
+          ( λ y →
+            iff-equiv
+              ( ( conserves-other-orbits-transposition g x y
+                  ( nq ∘ backward-implication (Q a))
+                  ( nr ∘ backward-implication (Q b))) ∘e
+                ( equiv-iff'
+                  ( T1 y)
+                  ( prop-equivalence-relation
+                    ( same-orbits-permutation-count g)
+                    ( x)
+                    ( y))
+                  ( Q y)))))
+      ( T2)
 
   abstract
     not-same-orbits-transposition-same-orbits :
@@ -874,10 +853,8 @@ module _
           ( a)
           ( b))
     not-same-orbits-transposition-same-orbits g P Q =
-      apply-universal-property-trunc-Prop Q empty-Prop
-        ( λ (pair k2 q) →
-          ( apply-universal-property-trunc-Prop P empty-Prop
-            ( λ p → lemma3 p k2 q)))
+      apply-twice-universal-property-trunc-Prop Q P empty-Prop
+        ( λ (pair k2 q) p → lemma3 p k2 q)
       where
       neq-iterate-nonzero-le-minimal-element :
         ( pa : Σ ℕ (λ k → iterate k (map-equiv g) a ＝ b))

@@ -793,7 +793,8 @@ module _
       ( eq-htpy
         ( λ (f , s) →
           apply-universal-property-trunc-Prop s
-            ( Id-Prop (set-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
+            ( Id-Prop
+              ( set-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
               ( map-emb
                 ( restriction-generating-subset-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))

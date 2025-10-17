@@ -531,8 +531,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     ( λ u' →
                       hom-set-Set
                         ( set-Prop (P u'))
-                        ( set-Prop
-                          ( mere-eq-Prop (a , y) (a , y'))))
+                        ( set-Prop (mere-eq-Prop (a , y) (a , y'))))
                     ( λ ω v' →
                       apply-universal-property-trunc-Prop
                         ( map-equiv (compute-P ω) v')

@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -439,25 +440,20 @@ module _
   mere-eq-Torsor-Group :
     (Y : Torsor-Group G l2) → mere-eq X Y
   mere-eq-Torsor-Group Y =
-    apply-universal-property-trunc-Prop
+    map-binary-trunc-Prop
+      ( λ e f →
+        eq-equiv-Torsor-Group G X Y
+          ( comp-equiv-Torsor-Group G
+            ( X)
+            ( principal-Torsor-Group G)
+            ( Y)
+            ( f)
+            ( inv-equiv-Torsor-Group G
+              ( principal-Torsor-Group G)
+              ( X)
+              ( e))))
       ( pr2 X)
-      ( mere-eq-Prop X Y)
-      ( λ e →
-        apply-universal-property-trunc-Prop
-          ( pr2 Y)
-          ( mere-eq-Prop X Y)
-          ( λ f →
-            unit-trunc-Prop
-              ( eq-equiv-Torsor-Group G X Y
-                ( comp-equiv-Torsor-Group G
-                  ( X)
-                  ( principal-Torsor-Group G)
-                  ( Y)
-                  ( f)
-                  ( inv-equiv-Torsor-Group G
-                    ( principal-Torsor-Group G)
-                    ( X)
-                    ( e))))))
+      ( pr2 Y)
 
 module _
   {l1 : Level} (G : Group l1)
