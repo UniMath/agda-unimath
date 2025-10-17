@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -54,6 +55,11 @@ module _
     arithmetic-sequence-Semigroup
       ( multiplicative-semigroup-Semiring R)
 
+  is-geometric-sequence-Semiring : sequence (type-Semiring R) → UU l
+  is-geometric-sequence-Semiring =
+    is-arithmetic-sequence-Semigroup
+      ( multiplicative-semigroup-Semiring R)
+
 module _
   {l : Level} (R : Semiring l)
   (u : geometric-sequence-Semiring R)
@@ -66,8 +72,8 @@ module _
       ( u)
 
   is-geometric-seq-geometric-sequence-Semiring :
-    is-arithmetic-sequence-Semigroup
-      ( multiplicative-semigroup-Semiring R)
+    is-geometric-sequence-Semiring
+      ( R)
       ( seq-geometric-sequence-Semiring)
   is-geometric-seq-geometric-sequence-Semiring =
     is-arithmetic-seq-arithmetic-sequence-Semigroup
@@ -265,6 +271,32 @@ module _
   pr1 geometric-const-sequence-Semiring _ = a
   pr2 geometric-const-sequence-Semiring =
     ( one-Semiring R , one-is-common-ratio-const-sequence-Semiring)
+```
+
+### The tail of a standard geometric sequence is another standard geometric sequence
+
+```agda
+module _
+  {l : Level} (R : Semiring l) (a r : type-Semiring R)
+  where
+
+  abstract
+    htpy-tail-standard-geometric-sequence-Semiring :
+      tail-sequence
+        ( seq-standard-geometric-sequence-Semiring R a r) ~
+      seq-standard-geometric-sequence-Semiring R (mul-Semiring R a r) r
+    htpy-tail-standard-geometric-sequence-Semiring =
+      htpy-tail-standard-arithmetric-sequence-Semigroup
+        ( multiplicative-semigroup-Semiring R)
+        ( a)
+        ( r)
+
+    eq-tail-standard-geometric-sequence-Semiring :
+      tail-sequence
+        ( seq-standard-geometric-sequence-Semiring R a r) ＝
+      seq-standard-geometric-sequence-Semiring R (mul-Semiring R a r) r
+    eq-tail-standard-geometric-sequence-Semiring =
+      eq-htpy htpy-tail-standard-geometric-sequence-Semiring
 ```
 
 ## External links
