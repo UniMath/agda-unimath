@@ -22,9 +22,9 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
-open import set-theory.equality-cardinalities
-open import set-theory.inequality-cardinalities
+open import set-theory.cardinals
+open import set-theory.equality-cardinals
+open import set-theory.inequality-cardinals
 
 open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dedekind-finite-types

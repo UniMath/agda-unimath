@@ -25,15 +25,15 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
-open import set-theory.inequality-cardinalities
+open import set-theory.cardinals
+open import set-theory.inequality-cardinals
 ```
 
 </details>
 
 ## Idea
 
-We say a [cardinal of sets](set-theory.cardinalities.md) `X` is
+We say a [cardinal of sets](set-theory.cardinals.md) `X` is
 {{#concept "strictly complemented bounded" Agda=strictly-complemented-bounded-Cardinal}}
 by a cardinal `Y` if every decidable embedding of a
 [set](foundation-core.sets.md) in the isomorphism class represented by `X` into

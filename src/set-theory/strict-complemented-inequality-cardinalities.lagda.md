@@ -24,9 +24,9 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
-open import set-theory.complemented-inequality-cardinalities
-open import set-theory.inequality-cardinalities
+open import set-theory.cardinals
+open import set-theory.complemented-inequality-cardinals
+open import set-theory.inequality-cardinals
 open import set-theory.strict-complemented-boundedness-cardinalities
 ```
 
@@ -34,7 +34,7 @@ open import set-theory.strict-complemented-boundedness-cardinalities
 
 ## Idea
 
-We may say a [cardinal of sets](set-theory.cardinalities.md) `X` is
+We may say a [cardinal of sets](set-theory.cardinals.md) `X` is
 {{#concept "less than" Agda=le-complemented-Cardinal}} a cardinal `Y` if any
 [set](foundation-core.sets.md) in the isomorphism class represented by `X`
 embeds as a complemented subset into any set in the isomorphism class

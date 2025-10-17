@@ -1,7 +1,7 @@
 # Inequality on cardinals
 
 ```agda
-module set-theory.inequality-cardinalities where
+module set-theory.inequality-cardinals where
 ```
 
 <details><summary>Imports</summary>
@@ -22,16 +22,16 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
-open import set-theory.equality-cardinalities
+open import set-theory.cardinals
+open import set-theory.equality-cardinals
 ```
 
 </details>
 
 ## Idea
 
-We say a [cardinal of sets](set-theory.cardinalities.md) `X` is
-{{#concept "less than or equal to" Agda=leq-Cardinal}} a Cardinal `Y` if any
+We say a [cardinal of sets](set-theory.cardinals.md) `X` is
+{{#concept "less than or equal to" Agda=leq-Cardinal}} a cardinal `Y` if any
 [set](foundation-core.sets.md) in the isomorphism class represented by `X`
 embeds into any set in the isomorphism class represented by `Y`. This defines
 the {{#concept "standard ordering" Disambiguation="on cardinalities of sets"}}
@@ -177,8 +177,9 @@ module _
 
 ### Assuming excluded middle, then inequality is antisymmetric
 
-Using the previous result and assuming excluded middle, we can conclude
-`leq-Cardinal` is a partial order by showing that it is antisymmetric.
+Using that mere equivalence characterizes equality of cardinals we can conclude
+by the Cantor–Schröder–Bernstein theorem, assuming the law of excluded middle,
+that `leq-Cardinal` is antisymmetric and hence a partial order.
 
 ```agda
 module _

@@ -20,17 +20,17 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
+open import set-theory.cardinals
 ```
 
 </details>
 
 ## Idea
 
-A [cardinal of sets](set-theory.cardinalities.lagda.md) `κ` is
+A [cardinal of sets](set-theory.cardinals.lagda.md) `κ` is
 {{#concept "inhabited" Disambiguation="cardinal"  Agda=is-inhabited-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class is
-[inhabited](foundation-core.inhabited.md).
+[inhabited](foundation-core.inhabited-types.md).
 
 ## Definitions
 

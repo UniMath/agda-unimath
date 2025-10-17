@@ -1,7 +1,7 @@
-# Addition of cardinalities
+# Addition of cardinals
 
 ```agda
-module set-theory.addition-cardinalities where
+module set-theory.addition-cardinals where
 ```
 
 <details><summary>Imports</summary>
@@ -40,10 +40,10 @@ open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 
-open import set-theory.cardinalities
 open import set-theory.cardinality-projective-sets
-open import set-theory.equality-cardinalities
-open import set-theory.inequality-cardinalities
+open import set-theory.cardinals
+open import set-theory.equality-cardinals
+open import set-theory.inequality-cardinals
 open import set-theory.zero-cardinal
 ```
 
@@ -51,8 +51,8 @@ open import set-theory.zero-cardinal
 
 ## Idea
 
-Given two [cardinals](set-theory.cardinalities.md) `A` and `B`, we may form
-their {{#concept "sum" Disambiguation="cardinal"  Agda=add-Cardinal}}, or
+Given two [cardinals](set-theory.cardinals.md) `A` and `B`, we may form their
+{{#concept "sum" Disambiguation="cardinal"  Agda=add-Cardinal}}, or
 **coproduct** cardinal, `A + B`. It is defined on isomorphism classes as
 [coproducts](foundation-core.coproduct-types.md) of
 [sets](foundation-core.sets.md).

@@ -19,7 +19,7 @@ open import foundation.sets
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import set-theory.cardinalities
+open import set-theory.cardinals
 ```
 
 </details>

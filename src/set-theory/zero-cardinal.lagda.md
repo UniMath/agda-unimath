@@ -40,9 +40,9 @@ open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 
-open import set-theory.cardinalities
 open import set-theory.cardinality-projective-sets
-open import set-theory.inequality-cardinalities
+open import set-theory.cardinals
+open import set-theory.inequality-cardinals
 ```
 
 </details>

@@ -39,8 +39,8 @@ open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 
-open import set-theory.cardinalities
 open import set-theory.cardinality-projective-sets
+open import set-theory.cardinals
 ```
 
 </details>
