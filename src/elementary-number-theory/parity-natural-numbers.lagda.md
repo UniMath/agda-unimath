@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
@@ -67,6 +68,14 @@ is-even-zero-ℕ = div-zero-ℕ 2
 
 is-odd-one-ℕ : is-odd-ℕ 1
 is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
+```
+
+### An odd natural number is nonzero
+
+```agda
+abstract
+  is-nonzero-is-odd-ℕ : {n : ℕ} → is-odd-ℕ n → is-nonzero-ℕ n
+  is-nonzero-is-odd-ℕ odd-n refl = odd-n is-even-zero-ℕ
 ```
 
 ### A natural number `x` is even if and only if `x + 2` is even
