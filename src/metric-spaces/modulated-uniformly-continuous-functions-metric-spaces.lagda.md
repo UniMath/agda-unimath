@@ -58,12 +58,7 @@ module _
     Π-Prop
       ( type-Metric-Space X)
       ( λ x →
-        is-modulus-of-continuity-at-point-prop-function-Metric-Space
-          X
-          Y
-          f
-          x
-          m)
+        is-modulus-of-continuity-at-point-prop-function-Metric-Space X Y f x m)
 
   is-modulus-of-uniform-continuity-function-Metric-Space :
     (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)

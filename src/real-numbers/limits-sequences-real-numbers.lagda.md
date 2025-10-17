@@ -41,10 +41,10 @@ On this page, we describe properties of
 module _
   {l1 l2 : Level}
   (u : sequence (ℝ l1))
-  (lim-u : ℝ l1)
-  (Hu : is-limit-sequence-Metric-Space (metric-space-ℝ l1) u lim-u)
   (v : sequence (ℝ l2))
+  (lim-u : ℝ l1)
   (lim-v : ℝ l2)
+  (Hu : is-limit-sequence-Metric-Space (metric-space-ℝ l1) u lim-u)
   (Hv : is-limit-sequence-Metric-Space (metric-space-ℝ l2) v lim-v)
   where
 
