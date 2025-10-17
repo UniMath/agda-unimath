@@ -585,10 +585,7 @@ module _
             map-coproduct
               ( id)
               ( map-left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘
-            map-right-distributive-Σ-coproduct
-              ( Fin n)
-              ( unit)
-              ( type-Finite-Type ∘ B))
+            map-right-distributive-Σ-coproduct (type-Finite-Type ∘ B))
         by
           sum-equiv-finite-Commutative-Monoid
             ( M)
@@ -600,10 +597,7 @@ module _
               ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘e
-                right-distributive-Σ-coproduct
-                  ( Fin n)
-                  ( unit)
-                  ( type-Finite-Type ∘ B)))
+                right-distributive-Σ-coproduct (type-Finite-Type ∘ B)))
             _
       ＝
         sum-finite-Commutative-Monoid

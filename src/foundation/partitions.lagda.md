@@ -15,6 +15,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
@@ -165,21 +166,20 @@ reduce the universe level of this type. Therefore we call this type of blocks
   is-surjective-large-block-element-partition :
     is-surjective large-block-element-partition
   is-surjective-large-block-element-partition B =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-subtype-block-partition-Large-Type B)
-      ( trunc-Prop (fiber large-block-element-partition B))
+    map-trunc-Prop
       ( λ (a , u) →
-        unit-trunc-Prop
-          ( pair a
-            ( eq-type-subtype
-              ( subtype-partition)
-              ( ap pr1
-                ( ap
-                  ( inclusion-subtype
-                    ( λ Q → subtype-inhabited-subtype (pr1 Q) a))
-                  ( contraction
-                    ( is-partition-subtype-partition a)
-                    ( pair B u)))))))
+        pair
+          ( a)
+          ( eq-type-subtype
+            ( subtype-partition)
+            ( ap pr1
+              ( ap
+                ( inclusion-subtype
+                  ( λ Q → subtype-inhabited-subtype (pr1 Q) a))
+                ( contraction
+                  ( is-partition-subtype-partition a)
+                  ( pair B u))))))
+      ( is-inhabited-subtype-block-partition-Large-Type B)
 
   is-locally-small-block-partition-Large-Type :
     is-locally-small (l1 ⊔ l2) block-partition-Large-Type
@@ -651,10 +651,7 @@ module _
                       ( refl)))) ∘e
                 ( equiv-right-swap-Σ)) ∘e
               ( equiv-tot (λ ie → pr2 ie a)))) ∘e
-          ( associative-Σ
-            ( inhabited-subtype l2 A)
-            ( is-block-partition-Set-Indexed-Σ-Decomposition)
-            ( λ B → is-in-inhabited-subtype (pr1 B) a)))
+          ( associative-Σ))
         ( is-torsorial-has-same-elements-inhabited-subtype
           ( pair
             ( λ x →

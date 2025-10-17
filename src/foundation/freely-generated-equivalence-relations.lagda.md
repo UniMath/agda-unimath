@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
+open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
@@ -125,15 +126,11 @@ module _
     rec-trunc-Prop
       ( path-Relation-Prop y x)
       ( unit-trunc-Prop ∘ (is-symmetric-path-Relation x y))
+
   is-transitive-path-Relation-Prop :
     is-transitive-Relation-Prop path-Relation-Prop
   is-transitive-path-Relation-Prop x y z =
-    rec-trunc-Prop
-      ( path-Relation-Prop x y ⇒ path-Relation-Prop x z)
-      ( λ q →
-        rec-trunc-Prop
-          ( path-Relation-Prop x z)
-          ( λ p → unit-trunc-Prop (is-transitive-path-Relation x y z q p)))
+    map-binary-trunc-Prop (is-transitive-path-Relation x y z)
 
   is-equivalence-relation-path-Relation-Prop :
     is-equivalence-relation path-Relation-Prop

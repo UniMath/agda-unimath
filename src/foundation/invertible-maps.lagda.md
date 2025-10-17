@@ -255,10 +255,7 @@ pr2 (pr2 (is-invertible-id-htpy-id-id A H)) = H
 triangle-is-invertible-id-htpy-id-id :
   {l : Level} (A : UU l) →
   ( is-invertible-id-htpy-id-id A) ~
-    ( ( map-associative-Σ
-        ( A → A)
-        ( λ g → (id ∘ g) ~ id)
-        ( λ s → (pr1 s ∘ id) ~ id)) ∘
+    ( ( map-associative-Σ) ∘
       ( map-inv-left-unit-law-Σ-is-contr
         { B = λ s → (pr1 s ∘ id) ~ id}
         ( is-contr-section-is-equiv (is-equiv-id {_} {A}))
@@ -271,10 +268,7 @@ abstract
   is-equiv-is-invertible-id-htpy-id-id A =
     is-equiv-left-map-triangle
       ( is-invertible-id-htpy-id-id A)
-      ( map-associative-Σ
-        ( A → A)
-        ( λ g → (id ∘ g) ~ id)
-        ( λ s → (pr1 s ∘ id) ~ id))
+      ( map-associative-Σ)
       ( map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
@@ -282,7 +276,7 @@ abstract
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
-      ( is-equiv-map-associative-Σ _ _ _)
+      ( is-equiv-map-associative-Σ)
 ```
 
 ### The type of invertible maps is equivalent to the type of free loops on equivalences
@@ -336,11 +330,7 @@ module _
   equiv-is-retraction-section-is-invertible :
     (f : A → B) →
     Σ (section f) (λ g → (map-section f g) ∘ f ~ id) ≃ is-invertible f
-  equiv-is-retraction-section-is-invertible f =
-    associative-Σ
-      ( B → A)
-      ( λ g → f ∘ g ~ id)
-      ( λ g → (map-section f g) ∘ f ~ id)
+  equiv-is-retraction-section-is-invertible f = associative-Σ
 
   equiv-free-loop-equivalence-invertible-equivalence :
     free-loop (A ≃ B) ≃ Σ (A ≃ B) (is-invertible ∘ map-equiv)
