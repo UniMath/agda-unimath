@@ -171,7 +171,7 @@ then it is the image of `n + 1`.
 abstract
   Eq-succ-criterion-ℕ∞↑ :
     {x : ℕ∞↑} {n : ℕ} →
-    n <-ℕ-ℕ∞↑ x → x ≤-ℕ∞↑-ℕ (succ-ℕ n) → Eq-ℕ∞↑ x (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
+    le-ℕ∞↑-ℕ n x → leq-ℕ-ℕ∞↑ x (succ-ℕ n) → Eq-ℕ∞↑ x (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s 0 = r
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s (succ-ℕ i) =
     leq-leq-zero-ℕ-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
@@ -182,7 +182,7 @@ abstract
 
 eq-succ-criterion-ℕ∞↑ :
   {x : ℕ∞↑} {n : ℕ} →
-  n <-ℕ-ℕ∞↑ x → x ≤-ℕ∞↑-ℕ (succ-ℕ n) → x ＝ inclusion-ℕ∞↑-ℕ (succ-ℕ n)
+  le-ℕ∞↑-ℕ n x → leq-ℕ-ℕ∞↑ x (succ-ℕ n) → x ＝ inclusion-ℕ∞↑-ℕ (succ-ℕ n)
 eq-succ-criterion-ℕ∞↑ {x} {n} r s =
   is-injective-sequence-ℕ∞↑ (eq-htpy (Eq-succ-criterion-ℕ∞↑ {x} {n} r s))
 ```
@@ -250,11 +250,11 @@ module _
 ### The tight bounds on the image of the natural numbers
 
 ```agda
-refl-leq-ℕ-ℕ∞↑ : (n : ℕ) → inclusion-ℕ∞↑-ℕ n ≤-ℕ∞↑-ℕ n
+refl-leq-ℕ-ℕ∞↑ : (n : ℕ) → leq-ℕ-ℕ∞↑ (inclusion-ℕ∞↑-ℕ n) n
 refl-leq-ℕ-ℕ∞↑ zero-ℕ = refl
 refl-leq-ℕ-ℕ∞↑ (succ-ℕ n) = refl-leq-ℕ-ℕ∞↑ n
 
-le-succ-ℕ-ℕ∞↑ : (n : ℕ) → n <-ℕ-ℕ∞↑ (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
+le-succ-ℕ-ℕ∞↑ : (n : ℕ) → le-ℕ∞↑-ℕ n (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
 le-succ-ℕ-ℕ∞↑ zero-ℕ = refl
 le-succ-ℕ-ℕ∞↑ (succ-ℕ n) = le-succ-ℕ-ℕ∞↑ n
 ```

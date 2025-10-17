@@ -50,10 +50,10 @@ open import set-theory.cantor-space
 
 The type of
 {{#concept "increasing binary sequences" WD="Extended natural numbers" WDID=Q105759800 Agda=ℕ∞↑}}
-is the [subset](foundation-core.subtypes.md) of the
+`ℕ∞↑` is the [subset](foundation-core.subtypes.md) of the
 [cantor set](set-theory.cantor-space.md) consisting of increasing sequences of
 binary numbers. This type is equivalent to the
-[conatural numbers](elementary-number-theory.conatural-numbers.md).
+[conatural numbers](elementary-number-theory.conatural-numbers.md) `ℕ∞`.
 
 Many of these formalizations mirror work from the TypeTopology library.
 {{#cite TypeTopology}}
