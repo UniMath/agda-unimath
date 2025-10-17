@@ -688,7 +688,7 @@ module _
   sequence-pair-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space (product-Metric-Space A B)
   seq-product-cauchy-sequence-Metric-Space =
-    zip-sequence
+    pair-sequence
       ( map-cauchy-sequence-Metric-Space A u)
       ( map-cauchy-sequence-Metric-Space B v)
 

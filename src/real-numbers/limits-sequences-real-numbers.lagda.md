@@ -59,9 +59,9 @@ module _
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-add-pair-ℝ l1 l2)
-        ( zip-sequence u v)
+        ( pair-sequence u v)
         ( lim-u , lim-v)
-        ( is-limit-zip-sequence-Metric-Space
+        ( is-limit-pair-sequence-Metric-Space
           ( metric-space-ℝ l1)
           ( metric-space-ℝ l2)
           ( u)

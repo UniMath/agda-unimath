@@ -55,13 +55,13 @@ binary-map-sequence :
 binary-map-sequence f a b n = f (a n) (b n)
 ```
 
-### Zipping two sequences
+### Pairing two sequences
 
 ```agda
-zip-sequence :
+pair-sequence :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → sequence A → sequence B →
   sequence (A × B)
-zip-sequence = binary-map-sequence pair
+pair-sequence = binary-map-sequence pair
 ```
 
 ## References
