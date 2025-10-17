@@ -57,7 +57,7 @@ abstract
 
 abstract
   map-ternary-trunc-Prop :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}  {D : UU l3} →
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l3} →
     (A → B → C → D) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁ → ║ D ║₋₁
   map-ternary-trunc-Prop {D = D} f |a| |b| |c| =
     rec-trunc-Prop

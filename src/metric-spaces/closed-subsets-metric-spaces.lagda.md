@@ -13,10 +13,10 @@ open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-subtypes
 open import foundation.disjunction
-open import foundation.functoriality-propositional-truncation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
