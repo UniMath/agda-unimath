@@ -93,7 +93,7 @@ abstract
   power-one-ℚ = power-unit-Monoid monoid-mul-ℚ
 ```
 
-### `qⁿ¹ = qⁿq`
+### `qⁿ⁺¹ = qⁿq`
 
 ```agda
 abstract
@@ -101,7 +101,7 @@ abstract
   power-succ-ℚ = power-succ-Monoid monoid-mul-ℚ
 ```
 
-### `qⁿ = qqⁿ`
+### `qⁿ⁺¹ = qqⁿ`
 
 ```agda
 abstract
