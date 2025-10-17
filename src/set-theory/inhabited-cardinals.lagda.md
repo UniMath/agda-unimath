@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.subtypes
 open import foundation.inhabited-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
@@ -106,6 +107,13 @@ module _
 ```agda
 Inhabited-Cardinal : (l : Level) → UU (lsuc l)
 Inhabited-Cardinal l = Σ (Cardinal l) is-inhabited-Cardinal
+
+is-set-Inhabited-Cardinal : {l : Level} → is-set (Inhabited-Cardinal l)
+is-set-Inhabited-Cardinal =
+  is-set-type-subtype is-inhabited-prop-Cardinal is-set-Cardinal
+
+Inhabited-Cardinal-Set : (l : Level) → Set (lsuc l)
+Inhabited-Cardinal-Set l = (Inhabited-Cardinal l , is-set-Inhabited-Cardinal)
 
 module _
   {l : Level} (κ : Inhabited-Cardinal l)
