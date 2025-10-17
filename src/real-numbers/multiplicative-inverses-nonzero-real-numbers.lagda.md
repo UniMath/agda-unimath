@@ -151,7 +151,6 @@ opaque
       let
         is-positive-mul p q {r} lb1 lb2 =
           is-positive-le-zero-ℚ
-            ( p *ℚ q)
             ( concatenate-le-leq-ℚ
               ( zero-ℚ)
               ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -174,7 +173,6 @@ opaque
             ( λ (is-pos-b , is-pos-d) →
               ex-falso
                 ( is-not-negative-and-positive-ℚ
-                  ( a *ℚ d)
                   ( is-negative-mul-negative-positive-ℚ is-neg-a is-pos-d ,
                     is-positive-mul a d
                       ( leq-right-min-ℚ _ _)

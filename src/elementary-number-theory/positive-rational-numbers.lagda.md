@@ -26,6 +26,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -66,11 +67,16 @@ module _
   (x : ℚ)
   where
 
-  is-positive-ℚ : UU lzero
-  is-positive-ℚ = is-positive-fraction-ℤ (fraction-ℚ x)
+  opaque
+    is-positive-ℚ : UU lzero
+    is-positive-ℚ = is-positive-fraction-ℤ (fraction-ℚ x)
 
-  is-prop-is-positive-ℚ : is-prop is-positive-ℚ
-  is-prop-is-positive-ℚ = is-prop-is-positive-fraction-ℤ (fraction-ℚ x)
+    is-prop-is-positive-ℚ : is-prop is-positive-ℚ
+    is-prop-is-positive-ℚ = is-prop-is-positive-fraction-ℤ (fraction-ℚ x)
+
+    is-decidable-prop-is-positive-ℚ : is-decidable-prop is-positive-ℚ
+    is-decidable-prop-is-positive-ℚ =
+      ( is-prop-is-positive-ℚ , is-decidable-is-positive-ℤ (numerator-ℚ x))
 
   is-positive-prop-ℚ : Prop lzero
   pr1 is-positive-prop-ℚ = is-positive-ℚ
@@ -78,7 +84,7 @@ module _
 
 decidable-subtype-positive-ℚ : decidable-subtype lzero ℚ
 decidable-subtype-positive-ℚ x =
-  decidable-subtype-positive-fraction-ℤ (fraction-ℚ x)
+  ( is-positive-ℚ x , is-decidable-prop-is-positive-ℚ x)
 ```
 
 ### The type of positive rational numbers
@@ -109,11 +115,14 @@ module _
   is-positive-rational-ℚ⁺ : is-positive-ℚ rational-ℚ⁺
   is-positive-rational-ℚ⁺ = pr2 x
 
-  is-positive-fraction-ℚ⁺ : is-positive-fraction-ℤ fraction-ℚ⁺
-  is-positive-fraction-ℚ⁺ = is-positive-rational-ℚ⁺
+  opaque
+    unfolding is-positive-ℚ
 
-  is-positive-numerator-ℚ⁺ : is-positive-ℤ numerator-ℚ⁺
-  is-positive-numerator-ℚ⁺ = is-positive-rational-ℚ⁺
+    is-positive-fraction-ℚ⁺ : is-positive-fraction-ℤ fraction-ℚ⁺
+    is-positive-fraction-ℚ⁺ = is-positive-rational-ℚ⁺
+
+    is-positive-numerator-ℚ⁺ : is-positive-ℤ numerator-ℚ⁺
+    is-positive-numerator-ℚ⁺ = is-positive-rational-ℚ⁺
 
   is-positive-denominator-ℚ⁺ : is-positive-ℤ denominator-ℚ⁺
   is-positive-denominator-ℚ⁺ = is-positive-denominator-ℚ rational-ℚ⁺
@@ -150,19 +159,22 @@ abstract
 ### The rational image of a positive integer is positive
 
 ```agda
-abstract
+opaque
+  unfolding is-positive-ℚ
+
   is-positive-rational-ℤ :
-    (x : ℤ) → is-positive-ℤ x → is-positive-ℚ (rational-ℤ x)
-  is-positive-rational-ℤ x P = P
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℚ (rational-ℤ x)
+  is-positive-rational-ℤ = id
 
 positive-rational-positive-ℤ : positive-ℤ → ℚ⁺
-positive-rational-positive-ℤ (z , pos-z) = rational-ℤ z , pos-z
+positive-rational-positive-ℤ (z , pos-z) =
+    ( rational-ℤ z , is-positive-rational-ℤ pos-z)
 
 positive-rational-ℤ⁺ : ℤ⁺ → ℚ⁺
 positive-rational-ℤ⁺ = positive-rational-positive-ℤ
 
 one-ℚ⁺ : ℚ⁺
-one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
+one-ℚ⁺ = positive-rational-ℤ⁺ one-ℤ⁺
 ```
 
 ### The type of positive rational numbers is inhabited
@@ -184,7 +196,7 @@ positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺
 
 ```agda
 opaque
-  unfolding rational-fraction-ℤ
+  unfolding is-positive-ℚ rational-fraction-ℤ
 
   is-positive-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
@@ -195,20 +207,16 @@ opaque
 ### A rational number `x` is positive if and only if `0 < x`
 
 ```agda
-module _
-  (x : ℚ)
-  where
+opaque
+  unfolding is-positive-ℚ le-ℚ-Prop
 
-  opaque
-    unfolding le-ℚ-Prop
+  le-zero-is-positive-ℚ : {x : ℚ} → is-positive-ℚ x → le-ℚ zero-ℚ x
+  le-zero-is-positive-ℚ {x} =
+    is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
 
-    le-zero-is-positive-ℚ : is-positive-ℚ x → le-ℚ zero-ℚ x
-    le-zero-is-positive-ℚ =
-      is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
-
-    is-positive-le-zero-ℚ : le-ℚ zero-ℚ x → is-positive-ℚ x
-    is-positive-le-zero-ℚ =
-      is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
+  is-positive-le-zero-ℚ : {x : ℚ} → le-ℚ zero-ℚ x → is-positive-ℚ x
+  is-positive-le-zero-ℚ {x} =
+    is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
 ```
 
 ### Zero is not a positive rational number
@@ -217,7 +225,7 @@ module _
 abstract
   is-not-positive-zero-ℚ : ¬ (is-positive-ℚ zero-ℚ)
   is-not-positive-zero-ℚ pos-0 =
-    irreflexive-le-ℚ zero-ℚ (le-zero-is-positive-ℚ zero-ℚ pos-0)
+    irreflexive-le-ℚ zero-ℚ (le-zero-is-positive-ℚ pos-0)
 ```
 
 ### The difference of a rational number with a lesser rational number is positive
@@ -231,7 +239,6 @@ module _
     is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
     is-positive-diff-le-ℚ =
       is-positive-le-zero-ℚ
-        ( y -ℚ x)
         ( backward-implication
           ( iff-translate-diff-le-zero-ℚ x y)
           ( H))
@@ -252,27 +259,12 @@ module _
     commutative-add-ℚ x (y -ℚ x) ∙ left-law-positive-diff-le-ℚ
 ```
 
-### A nonzero rational number or its negative is positive
-
-```agda
-opaque
-  unfolding neg-ℚ
-
-  decide-is-negative-is-positive-is-nonzero-ℚ :
-    {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
-  decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
-    rec-coproduct
-      ( inl ∘ is-positive-neg-is-negative-ℤ)
-      ( inr)
-      ( decide-sign-nonzero-ℤ
-        { numerator-ℚ x}
-        ( is-nonzero-numerator-is-nonzero-ℚ x H))
-```
-
 ### Positive rational numbers are nonzero
 
 ```agda
-abstract
+opaque
+  unfolding is-positive-ℚ
+
   is-nonzero-is-positive-ℚ : {x : ℚ} → is-positive-ℚ x → is-nonzero-ℚ x
   is-nonzero-is-positive-ℚ {x} H =
     is-nonzero-is-nonzero-numerator-ℚ x
@@ -292,8 +284,7 @@ abstract
     (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
   is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
     is-positive-le-zero-ℚ
-      ( q)
-      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ p pos-p) p≤q)
+      ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ pos-p) p≤q)
 
   is-positive-le-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
