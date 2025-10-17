@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
@@ -29,9 +30,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-Parity partitions the natural numbers into two classes: the even and the odd
-natural numbers. Even natural numbers are those that are divisible by two, and
-odd natural numbers are those that aren't.
+{{#concept "Parity" WDID=Q230967 WD="parity"}} partitions the
+[natural numbers](elementary-number-theory.natural-numbers.md) into two classes:
+the {{#concept "even" WDID=Q13366104 WD="even number" Agda=is-even-ℕ}} and the
+{{#concept "odd" WDID=Q13366129 WD="odd number" Agda=is-odd-ℕ}} natural numbers.
+Even natural numbers are those that are
+[divisible](elementary-number-theory.divisibility-natural-numbers.md) by two,
+and odd natural numbers are those that [aren't](foundation.negation.md).
 
 ## Definition
 
@@ -63,6 +68,14 @@ is-even-zero-ℕ = div-zero-ℕ 2
 
 is-odd-one-ℕ : is-odd-ℕ 1
 is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
+```
+
+### An odd natural number is nonzero
+
+```agda
+abstract
+  is-nonzero-is-odd-ℕ : {n : ℕ} → is-odd-ℕ n → is-nonzero-ℕ n
+  is-nonzero-is-odd-ℕ odd-n refl = odd-n is-even-zero-ℕ
 ```
 
 ### A natural number `x` is even if and only if `x + 2` is even

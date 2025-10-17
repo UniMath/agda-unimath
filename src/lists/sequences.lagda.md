@@ -7,6 +7,8 @@ module lists.sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -34,6 +36,13 @@ that are formalized in agda-unimath, see the page
 ```agda
 sequence : {l : Level} → UU l → UU l
 sequence A = dependent-sequence (λ _ → A)
+```
+
+### The tail of a sequence
+
+```agda
+tail-sequence : {l : Level} {A : UU l} → sequence A → sequence A
+tail-sequence u n = u (succ-ℕ n)
 ```
 
 ### Functorial action on maps of sequences
