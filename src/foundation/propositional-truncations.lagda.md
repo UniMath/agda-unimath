@@ -475,14 +475,14 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
 
-## `do` syntax for propositional truncation { #do-syntax }
+## The `do` syntax for propositional truncation { #do-syntax }
 
-To prove a [proposition](foundation.propositions.md) `P` from a witness of a
+To prove a [proposition](foundation.propositions.md) `P` from a witness of the
 propositional truncation `trunc-Prop X`, we may assume an element of `X`, as
 demonstrated in `rec-trunc-Prop`.
 
 On occasion, it is convenient to use
-[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
+[Agda's `do` notation](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
 to express this operation, with the module
 
 ```agda

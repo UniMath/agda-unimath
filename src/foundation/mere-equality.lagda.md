@@ -149,10 +149,7 @@ module _
   all-elements-merely-equal-retract-of :
     B retract-of A → all-elements-merely-equal A → all-elements-merely-equal B
   all-elements-merely-equal-retract-of (i , r , R) H x y =
-    rec-trunc-Prop
-      ( mere-eq-Prop x y)
-      ( λ p → unit-trunc-Prop (inv (R x) ∙ ap r p ∙ R y))
-      ( H (i x) (i y))
+    map-trunc-Prop (λ p → inv (R x) ∙ ap r p ∙ R y) (H (i x) (i y))
 
   all-elements-merely-equal-equiv :
     B ≃ A → all-elements-merely-equal A → all-elements-merely-equal B

@@ -292,27 +292,11 @@ module _
     is-lipschitz-function-Metric-Space B C g →
     is-lipschitz-function-Metric-Space A B f →
     is-lipschitz-function-Metric-Space A C (g ∘ f)
-  comp-is-lipschitz-function-Metric-Space g f Hg Hf =
-    rec-trunc-Prop
-      ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
-      ( λ (α , Lg) →
-        rec-trunc-Prop
-          ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
-          ( λ (β , Lf) →
-            unit-trunc-Prop
-              ( ( α *ℚ⁺ β) ,
-                ( mul-comp-lipschitz-constant-function-Metric-Space
-                  ( A)
-                  ( B)
-                  ( C)
-                  ( g)
-                  ( f)
-                  ( α)
-                  ( β)
-                  ( Lg)
-                  ( Lf))))
-          ( Hf))
-      ( Hg)
+  comp-is-lipschitz-function-Metric-Space g f =
+    map-binary-trunc-Prop
+      ( λ (α , Lg) (β , Lf) →
+        α *ℚ⁺ β ,
+        mul-comp-lipschitz-constant-function-Metric-Space A B C g f α β Lg Lf)
 ```
 
 ### Composition of Lipschitz functions
