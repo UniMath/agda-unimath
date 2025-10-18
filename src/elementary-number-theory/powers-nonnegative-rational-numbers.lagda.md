@@ -106,7 +106,7 @@ power-mul-ℚ⁰⁺ m n q =
   power-mul-Commutative-Monoid commutative-monoid-mul-ℚ⁰⁺ m n
 ```
 
-### If `p` and `q` are nonnegative rational numbers with `p < q` and `n` is nonzero, `pⁿ < qⁿ`
+### If `p` and `q` are nonnegative rational numbers with `p < q` and `n` is nonzero, then `pⁿ < qⁿ`
 
 ```agda
 abstract
@@ -128,7 +128,7 @@ abstract
         ( preserves-le-power-ℚ⁰⁺ n p q p<q (is-nonzero-succ-ℕ _)))
 ```
 
-### If `p` and `q` are nonnegative rational numbers with `p ≤ q`, `pⁿ ≤ qⁿ`
+### If `p` and `q` are nonnegative rational numbers with `p ≤ q`, then `pⁿ ≤ qⁿ`
 
 ```agda
 abstract
