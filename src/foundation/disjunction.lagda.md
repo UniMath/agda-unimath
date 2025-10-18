@@ -10,6 +10,8 @@ module foundation.disjunction where
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
+open import foundation.negation
+open import foundation.coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
