@@ -383,10 +383,10 @@ abstract
                 ( neg-le-ℚ
                   ( preserves-le-power-ℚ⁺
                     ( n)
-                    ( is-nonzero-is-odd-ℕ odd-n)
                     ( neg-ℚ⁻ q⁻)
                     ( neg-ℚ⁻ p⁻)
-                    ( neg-le-ℚ p<q))))
+                    ( neg-le-ℚ p<q)
+                    ( is-nonzero-is-odd-ℕ odd-n))))
           ( λ is-nonneg-q →
             inv-tr
               ( le-ℚ (power-ℚ n p))
@@ -404,7 +404,7 @@ abstract
             ( le-ℚ)
             ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-le-power-ℚ⁰⁺ n (is-nonzero-is-odd-ℕ odd-n) p⁰⁺ q⁰⁺ p<q))
+            ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
 ```
 
