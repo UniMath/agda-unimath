@@ -52,18 +52,6 @@ Subtype l2 l3 A =
 
 ## Properties
 
-### The inclusion of a subtype into the ambient type is injective
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
-  where
-
-  is-injective-inclusion-subtype : is-injective (inclusion-subtype B)
-  is-injective-inclusion-subtype =
-    is-injective-is-emb (is-emb-inclusion-subtype B)
-```
-
 ### Equality in the type of all subtypes
 
 ```agda
