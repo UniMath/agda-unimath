@@ -198,19 +198,19 @@ module _
   (f : type-function-Metric-Space A B)
   where
 
-  is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space :
+  is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space :
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id →
     is-short-function-Metric-Space A B f
   is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space H ε x =
     H x ε
 
-  id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space :
+  is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space :
     is-short-function-Metric-Space A B f →
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
   id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space H x ε =
     H ε x
 
-  is-short-iff-id-is-modulus-of-uniform-continuity-function-Metric-Space :
+  is-short-iff-is-modulus-of-uniform-continuity-id-function-Metric-Space :
     is-short-function-Metric-Space A B f ↔
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
   is-short-iff-id-is-modulus-of-uniform-continuity-function-Metric-Space =
