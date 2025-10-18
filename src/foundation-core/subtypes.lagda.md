@@ -193,14 +193,19 @@ module _
   pr1 emb-subtype = inclusion-subtype B
   pr2 emb-subtype = is-emb-inclusion-subtype
 
+  is-injective-inclusion-subtype : is-injective (inclusion-subtype B)
+  is-injective-inclusion-subtype =
+    is-injective-is-emb is-emb-inclusion-subtype
+
   injection-subtype : injection (type-subtype B) A
   injection-subtype = injection-emb emb-subtype
 
   equiv-ap-inclusion-subtype :
     {s t : type-subtype B} →
     (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
-  pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
-  pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
+  equiv-ap-inclusion-subtype {s} {t} =
+    ( ap-inclusion-subtype B s t ,
+      is-emb-inclusion-subtype s t)
 ```
 
 ### Restriction of a `k`-truncated map to a `k`-truncated map into a subtype
@@ -215,15 +220,17 @@ module _
       {f : X → A} → is-trunc-map k f →
       (p : (x : X) → is-in-subtype B (f x)) →
       is-trunc-map k {B = type-subtype B} (λ x → (f x , p x))
-    is-trunc-map-into-subtype H p (a , b) =
+    is-trunc-map-into-subtype {f} H p (a , b) =
       is-trunc-equiv k _
-        ( equiv-tot (λ x → extensionality-type-subtype' B _ _))
+        ( equiv-tot (λ x → extensionality-type-subtype' B (f x , p x) (a , b)))
         ( H a)
 
   trunc-map-into-subtype :
-    (f : trunc-map k X A) → ((x : X) → is-in-subtype B (map-trunc-map f x)) →
+    (f : trunc-map k X A) →
+    ((x : X) → is-in-subtype B (map-trunc-map f x)) →
     trunc-map k X (type-subtype B)
-  pr1 (trunc-map-into-subtype f p) x = (map-trunc-map f x , p x)
+  pr1 (trunc-map-into-subtype f p) x =
+    ( map-trunc-map f x , p x)
   pr2 (trunc-map-into-subtype f p) =
     is-trunc-map-into-subtype
       ( is-trunc-map-map-trunc-map f)
@@ -255,6 +262,27 @@ module _
   emb-into-subtype : X ↪ type-subtype B
   pr1 emb-into-subtype = map-emb-into-subtype
   pr2 emb-into-subtype = is-emb-map-emb-into-subtype
+```
+
+### If `A ⊆ B` as subtypes of `C`, then `A` embeds into `B`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {C : UU l1} (A : subtype l2 C) (B : subtype l3 C)
+  (H : A ⊆ B)
+  where
+
+  inclusion-leq-subtype : type-subtype A → type-subtype B
+  inclusion-leq-subtype = tot H
+
+  abstract
+    is-emb-inclusion-leq-subtype : is-emb inclusion-leq-subtype
+    is-emb-inclusion-leq-subtype =
+      is-emb-map-emb-into-subtype B (emb-subtype A) (λ (x , p) → H x p)
+
+  emb-leq-subtype : type-subtype A ↪ type-subtype B
+  emb-leq-subtype =
+    ( inclusion-leq-subtype , is-emb-inclusion-leq-subtype)
 ```
 
 ### If the projection map of a type family is an embedding, then the type family is a subtype

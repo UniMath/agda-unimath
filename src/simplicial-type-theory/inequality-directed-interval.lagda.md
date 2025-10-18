@@ -71,8 +71,8 @@ opaque
   is-prop-leq-Δ¹ : {x y : Δ¹} → is-prop (x ≤-Δ¹ y)
   is-prop-leq-Δ¹ {x} {y} = is-prop-leq-Nontrivial-Bounded-Total-Order I x y
 
-leq-Δ¹-Prop : (x y : Δ¹) → Prop I2
-leq-Δ¹-Prop x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
+leq-prop-Δ¹ : (x y : Δ¹) → Prop I2
+leq-prop-Δ¹ x y = (x ≤-Δ¹ y , is-prop-leq-Δ¹)
 
 leq-Δ¹ : Δ¹ → Δ¹ → UU I2
 leq-Δ¹ = _≤-Δ¹_
@@ -102,8 +102,8 @@ opaque
 total-leq-Δ¹' : {x y : Δ¹} → (x ≤-Δ¹ y) * (y ≤-Δ¹ x)
 total-leq-Δ¹' {x} {y} =
   map-join-disjunction-Prop
-    ( leq-Δ¹-Prop x y)
-    ( leq-Δ¹-Prop y x)
+    ( leq-prop-Δ¹ x y)
+    ( leq-prop-Δ¹ y x)
     ( is-total-leq-Δ¹ x y)
 ```
 
@@ -206,7 +206,7 @@ leq-inv-eq-Δ¹ = leq-eq-Δ¹ ∘ inv
 ```agda
 Δ¹-Preorder : Preorder I1 I2
 pr1 Δ¹-Preorder = Δ¹
-pr1 (pr2 Δ¹-Preorder) = leq-Δ¹-Prop
+pr1 (pr2 Δ¹-Preorder) = leq-prop-Δ¹
 pr1 (pr2 (pr2 Δ¹-Preorder)) x = refl-leq-Δ¹ {x}
 pr2 (pr2 (pr2 Δ¹-Preorder)) x y z = transitive-leq-Δ¹
 

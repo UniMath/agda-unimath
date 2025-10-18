@@ -57,8 +57,9 @@ a [total order](order-theory.total-orders.md) with `0▵` as a
 [bottom element](order-theory.bottom-elements-posets.md), and `1▵` as a
 [top element](order-theory.top-elements-posets.md).
 
-In this file, we define the directed interval type together with its distinct
-source and target elements. In the module
+In this file, we define the directed interval type together with its
+[distinct](foundation.pairs-of-distinct-elements.md) source and target elements.
+In the module
 [`inequality-directed-interval`](simplicial-type-theory.inequality-directed-interval.md),
 we postulate the existence of the directed relation on the directed interval
 type.
@@ -96,16 +97,12 @@ is-not-prop-Δ¹ : ¬ (is-prop Δ¹)
 is-not-prop-Δ¹ H = is-nontrivial-Δ¹ (eq-is-prop H)
 ```
 
-### The directed interval is not contractible
+### The directed interval is noncontractible
 
 ```agda
 is-not-contractible-Δ¹ : is-not-contractible Δ¹
 is-not-contractible-Δ¹ H = is-nontrivial-Δ¹ (eq-is-contr H)
-```
 
-### The directed interval is noncontractible
-
-```agda
 noncontractibility-Δ¹' : noncontractibility' Δ¹ 1
 noncontractibility-Δ¹' = (0▵ , 1▵ , is-nontrivial-Δ¹)
 
@@ -121,8 +118,8 @@ is-noncontractible-Δ¹ = unit-trunc-Prop noncontractibility-Δ¹
 ### The boundary of the directed interval
 
 ```agda
-subtype-∂Δ¹' : subtype I1 Δ¹
-subtype-∂Δ¹' t =
+subtype-∂Δ¹ : subtype I1 Δ¹
+subtype-∂Δ¹ t =
   coproduct-Prop
     ( mere-eq-Prop t 0▵)
     ( mere-eq-Prop t 1▵)
@@ -134,7 +131,7 @@ subtype-∂Δ¹' t =
             ( |t=0|)))
 
 ∂Δ¹ : UU I1
-∂Δ¹ = type-subtype subtype-∂Δ¹'
+∂Δ¹ = type-subtype subtype-∂Δ¹
 ```
 
 ### The canonical inclusion of the booleans into the directed interval
@@ -161,6 +158,12 @@ is-retraction-map-bool-boundary-directed-interval :
 is-retraction-map-bool-boundary-directed-interval true = refl
 is-retraction-map-bool-boundary-directed-interval false = refl
 
+retraction-map-boundary-directed-interval-bool :
+  retraction map-boundary-directed-interval-bool
+retraction-map-boundary-directed-interval-bool =
+  ( map-bool-boundary-directed-interval ,
+    is-retraction-map-bool-boundary-directed-interval)
+
 is-surjective-map-bool-boundary-directed-interval :
   is-surjective map-bool-boundary-directed-interval
 is-surjective-map-bool-boundary-directed-interval =
@@ -171,9 +174,9 @@ is-surjective-map-bool-boundary-directed-interval =
 is-surjective-map-boundary-directed-interval-bool :
   is-surjective map-boundary-directed-interval-bool
 is-surjective-map-boundary-directed-interval-bool (t , inl |t=0|) =
-  map-trunc-Prop (λ p → (false , eq-type-subtype subtype-∂Δ¹' (inv p))) |t=0|
+  map-trunc-Prop (λ p → (false , eq-type-subtype subtype-∂Δ¹ (inv p))) |t=0|
 is-surjective-map-boundary-directed-interval-bool (t , inr |t=1|) =
-  map-trunc-Prop (λ p → (true , eq-type-subtype subtype-∂Δ¹' (inv p))) |t=1|
+  map-trunc-Prop (λ p → (true , eq-type-subtype subtype-∂Δ¹ (inv p))) |t=1|
 
 map-directed-interval-bool : bool → Δ¹
 map-directed-interval-bool true = 1▵

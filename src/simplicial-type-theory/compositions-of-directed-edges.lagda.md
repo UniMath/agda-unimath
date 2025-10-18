@@ -13,6 +13,7 @@ module
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -30,6 +31,7 @@ open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
+open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -40,17 +42,18 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 
+open import simplicial-type-theory.2-simplices I
 open import simplicial-type-theory.arrows I
 open import simplicial-type-theory.directed-edges I
 open import simplicial-type-theory.directed-interval I
+open import simplicial-type-theory.inequality-directed-interval I
 open import simplicial-type-theory.inner-2-horn I
 open import simplicial-type-theory.standard-simplices I
+
+open import synthetic-homotopy-theory.joins-of-types
 ```
 
 </details>
-
-> This page is present for archiving purposes. It is out of date with the
-> library and is not being type checked.
 
 ## Idea
 
@@ -73,57 +76,34 @@ is a 2-simplex
 such that the restriction along the first axis is `f` and the restriction along
 the second axis is `g`.
 
-## Definition
-
-```text
-module _
-  {l : Level} {A : UU l} {x y z : A}
-  where
-
-  composition-hom▵ : hom▵ y z → hom▵ x y → UU {!   !}
-  composition-hom▵ g f = Σ (Δ 2 → A) (λ σ → {!   !})
-```
-
-A composition of two arrows `f : x → y` and `g: y → z` in a type `A` is a
-2-simplex that restricts on the boundary to `f` and `g` as follows.
-
-```md
-           z
-          ^^
-        /..|
-      /....g
-    /......|
-  x - f -> y
-```
-
-The diagonal arrow is then a composite of `g` after `f`.
-
 ## Definitions
 
 ### Compositions
 
-```text
+```agda
 dependent-composition-horn :
-  {l : Level} (A : Δ 2 → UU l) → ((u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u)) → UU l
-dependent-composition-horn A = extension-dependent-type inclusion-Δ²-Λ²₁ A
+  {l : Level} (A : Δ 2 → UU l) →
+  ((u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u)) → UU (I1 ⊔ I2 ⊔ l)
+dependent-composition-horn A =
+  extension-dependent-type inclusion-Δ²-Λ²₁ A
 
 module _
   {l : Level} {A : UU l}
   where
 
-  composition-horn : (Λ²₁ → A) → UU l
+  composition-horn : (Λ²₁ → A) → UU (I1 ⊔ I2 ⊔ l)
   composition-horn = dependent-composition-horn (λ _ → A)
 
-  composition-arrow : (f g : arrow▵ A) → f 1▵ ＝ g 0▵ → UU l
+  composition-arrow : (f g : arrow▵ A) → f 1▵ ＝ g 0▵ → UU (I1 ⊔ I2 ⊔ l)
   composition-arrow f g p = composition-horn (rec-arrow-Λ²₁ f g p)
 
-  composition : {x y z : A} → hom x y → hom y z → UU l
+  composition : {x y z : A} → hom▵ x y → hom▵ y z → UU (I1 ⊔ I2 ⊔ l)
   composition f g = composition-horn (rec-hom-Λ²₁ f g)
 ```
 
 ### Composition witnesses
 
-```text
+```agda
 module _
   {l : Level} {A : UU l}
   where
@@ -133,17 +113,17 @@ module _
   witness-composition-horn = pr1
 
   witness-composition-arrow :
-    {f g : arrow A} {p : f 1▵ ＝ g 0▵} → composition-arrow f g p → Δ 2 → A
+    {f g : arrow▵ A} {p : f 1▵ ＝ g 0▵} → composition-arrow f g p → Δ 2 → A
   witness-composition-arrow = pr1
 
   witness-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) → composition f g → Δ 2 → A
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) → composition f g → Δ 2 → A
   witness-composition f g = pr1
 ```
 
 ### Extension witnesses compositions
 
-```text
+```agda
 module _
   {l : Level} {A : UU l}
   where
@@ -154,35 +134,35 @@ module _
   htpy-composition-horn = pr2
 
   htpy-composition-arrow :
-    {f g : arrow A} {p : f 1▵ ＝ g 0▵} (c : composition-arrow f g p) →
+    {f g : arrow▵ A} {p : f 1▵ ＝ g 0▵} (c : composition-arrow f g p) →
     rec-arrow-Λ²₁ f g p ~ witness-composition-arrow c ∘ inclusion-Δ²-Λ²₁
   htpy-composition-arrow = pr2
 
   htpy-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) (c : composition f g) →
     rec-hom-Λ²₁ f g ~ witness-composition f g c ∘ inclusion-Δ²-Λ²₁
   htpy-composition f g = pr2
 ```
 
 ### Composites
 
-```text
+```agda
 module _
   {l : Level} {A : UU l}
   where
 
   arrow-composite-composition-horn :
-    (fg : Λ²₁ → A) → composition-horn fg → arrow A
+    (fg : Λ²₁ → A) → composition-horn fg → arrow▵ A
   arrow-composite-composition-horn fg c t =
-    witness-composition-horn c ((t , t) , refl-≤)
+    witness-composition-horn c ((t , t) , refl-leq-Δ¹)
 
   arrow-composite-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) → composition-arrow f g p → arrow A
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵) → composition-arrow f g p → arrow▵ A
   arrow-composite-composition-arrow f g p =
     arrow-composite-composition-horn (rec-arrow-Λ²₁ f g p)
 
   eq-source-arrow-composite-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
     arrow-composite-composition-arrow f g p c 0▵ ＝ f 0▵
   eq-source-arrow-composite-composition-arrow f g p c =
     ( ap (witness-composition-arrow c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
@@ -190,7 +170,7 @@ module _
     ( compute-inl-cogap-join _ refl)
 
   eq-target-arrow-composite-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
     arrow-composite-composition-arrow f g p c 1▵ ＝ g 1▵
   eq-target-arrow-composite-composition-arrow f g p c =
     ( ap (witness-composition-arrow c) (eq-type-subtype (subtype-Δ 2) refl)) ∙
@@ -198,52 +178,52 @@ module _
     ( compute-inr-cogap-join _ refl)
 
   composite-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) → composition-arrow f g p → hom (f 0▵) (g 1▵)
-  pr1 (composite-composition-arrow f g p c) =
-    arrow-composite-composition-arrow f g p c
-  pr1 (pr2 (composite-composition-arrow f g p c)) =
-    eq-source-arrow-composite-composition-arrow f g p c
-  pr2 (pr2 (composite-composition-arrow f g p c)) =
-    eq-target-arrow-composite-composition-arrow f g p c
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵) →
+    composition-arrow f g p → hom▵ (f 0▵) (g 1▵)
+  composite-composition-arrow f g p c =
+    ( arrow-composite-composition-arrow f g p c ,
+      eq-source-arrow-composite-composition-arrow f g p c ,
+      eq-target-arrow-composite-composition-arrow f g p c)
 ```
 
-```text
+```agda
   arrow-composite-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) → composition f g → arrow A
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) → composition f g → arrow▵ A
   arrow-composite-composition f g =
     arrow-composite-composition-horn (rec-hom-Λ²₁ f g)
 
   eq-source-arrow-composite-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) (c : composition f g) →
     arrow-composite-composition f g c 0▵ ＝ x
   eq-source-arrow-composite-composition f g c =
     ( eq-source-arrow-composite-composition-arrow
-      ( arrow-hom f) (arrow-hom g) (eq-source-target-hom f g) c) ∙
-    ( eq-source-hom f)
+      ( arrow-hom▵ f) (arrow-hom▵ g) (eq-source-target-hom▵ f g) c) ∙
+    ( eq-source-hom▵ f)
 
   eq-target-arrow-composite-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) (c : composition f g) →
     arrow-composite-composition f g c 1▵ ＝ z
   eq-target-arrow-composite-composition f g c =
     ( eq-target-arrow-composite-composition-arrow
-      ( arrow-hom f) (arrow-hom g) (eq-source-target-hom f g) c) ∙
-    ( eq-target-hom g)
+      ( arrow-hom▵ f)
+      ( arrow-hom▵ g)
+      ( eq-source-target-hom▵ f g)
+      ( c)) ∙
+    ( eq-target-hom▵ g)
 
   composite-composition :
-    {x y z : A} (f : hom x y) (g : hom y z) → composition f g → hom x z
-  pr1 (composite-composition f g c) =
-    arrow-composite-composition-horn (rec-hom-Λ²₁ f g) c
-  pr1 (pr2 (composite-composition f g c)) =
-    eq-source-arrow-composite-composition f g c
-  pr2 (pr2 (composite-composition f g c)) =
-    eq-target-arrow-composite-composition f g c
+    {x y z : A} (f : hom▵ x y) (g : hom▵ y z) → composition f g → hom▵ x z
+  composite-composition f g c =
+    ( arrow-composite-composition-horn (rec-hom-Λ²₁ f g) c ,
+      eq-source-arrow-composite-composition f g c ,
+      eq-target-arrow-composite-composition f g c)
 ```
 
 ## Computations
 
 ### Extensionality of compositions
 
-```text
+```agda
 module _
   {l : Level} {A : Δ 2 → UU l}
   where
@@ -258,7 +238,8 @@ module _
     (i : (u : Λ²₁) → A (inclusion-Δ²-Λ²₁ u))
     (c d : dependent-composition-horn A i)
     (H : map-extension c ~ map-extension d) →
-    coherence-htpy-extension inclusion-Δ²-Λ²₁ i c d H → c ＝ d
+    coherence-htpy-extension inclusion-Δ²-Λ²₁ i c d H →
+    c ＝ d
   eq-htpy-composition-horn = eq-htpy-extension inclusion-Δ²-Λ²₁
 
   htpy-eq-composition-horn :
@@ -270,63 +251,64 @@ module _
 
 ### Computing with composition witnesses
 
-```text
+```agda
 module _
   {l : Level} {A : UU l}
   where
 
   compute-first-witness-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
-    (t : Δ¹) {r : predicate-Δ 2 (t , 0▵)} →
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵)
+    (c : composition-arrow f g p) →
+    (t : Δ¹) {r : is-in-Δ 2 (t , 0▵)} →
     witness-composition-arrow c ((t , 0▵) , r) ＝ f t
   compute-first-witness-composition-arrow f g p c t =
     ( ap
       ( λ r → witness-composition-arrow c ((t , 0▵) , r))
       ( eq-is-in-subtype (subtype-Δ 2))) ∙
     ( inv (pr2 c ((t , 0▵) , inl-join refl))) ∙
-    ( compute-first-rec-arrow-Λ²₁ f g p t)
+    ( compute-inl-rec-arrow-Λ²₁ f g p t)
 
   compute-second-witness-composition-arrow :
-    (f g : arrow A) (p : f 1▵ ＝ g 0▵) (c : composition-arrow f g p) →
-    (t : Δ¹) {r : predicate-Δ 2 (1▵ , t)} →
+    (f g : arrow▵ A) (p : f 1▵ ＝ g 0▵)
+    (c : composition-arrow f g p) →
+    (t : Δ¹) {r : is-in-Δ 2 (1▵ , t)} →
     witness-composition-arrow c ((1▵ , t) , r) ＝ g t
   compute-second-witness-composition-arrow f g p c t =
     ( ap
       ( λ r → witness-composition-arrow c ((1▵ , t) , r))
       ( eq-is-in-subtype (subtype-Δ 2))) ∙
     ( inv (pr2 c ((1▵ , t) , inr-join refl))) ∙
-    ( compute-second-rec-arrow-Λ²₁ f g p t)
+    ( compute-inr-rec-arrow-Λ²₁ f g p t)
 
   compute-first-witness-composition :
-      {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-      (t : Δ¹) {r : predicate-Δ 2 (t , 0▵)} →
-      witness-composition f g c ((t , 0▵) , r) ＝ arrow-hom f t
+      {x y z : A} (f : hom▵ x y) (g : hom▵ y z)
+      (c : composition f g) →
+      (t : Δ¹) {r : is-in-Δ 2 (t , 0▵)} →
+      witness-composition f g c ((t , 0▵) , r) ＝ arrow-hom▵ f t
   compute-first-witness-composition f g =
     compute-first-witness-composition-arrow
-      (arrow-hom f) (arrow-hom g) (eq-source-target-hom f g)
+      (arrow-hom▵ f) (arrow-hom▵ g) (eq-source-target-hom▵ f g)
 
   compute-second-witness-composition :
-      {x y z : A} (f : hom x y) (g : hom y z) (c : composition f g) →
-      (t : Δ¹) {r : predicate-Δ 2 (1▵ , t)} →
-      witness-composition f g c ((1▵ , t) , r) ＝ arrow-hom g t
+      {x y z : A} (f : hom▵ x y) (g : hom▵ y z) (c : composition f g) →
+      (t : Δ¹) {r : is-in-Δ 2 (1▵ , t)} →
+      witness-composition f g c ((1▵ , t) , r) ＝ arrow-hom▵ g t
   compute-second-witness-composition f g =
     compute-second-witness-composition-arrow
-      (arrow-hom f) (arrow-hom g) (eq-source-target-hom f g)
+      (arrow-hom▵ f) (arrow-hom▵ g) (eq-source-target-hom▵ f g)
 ```
 
-TODO: move part below
-
-### The `is-composite` family
+### The `is-composite-hom` family
 
 An arrow `h` is the **composite** of `f` and `g` if there is a composition of
 `f` and `g` such that their composite is equal to `h`.
 
-```text
+```agda
 module _
   {l : Level} {A : UU l} (fg : Λ²₁ → A) (h : Δ¹ → A)
   where
 
-  is-composite-horn : UU l
+  is-composite-horn : UU (I1 ⊔ I2 ⊔ l)
   is-composite-horn =
     Σ (composition-horn fg) (λ c → arrow-composite-composition-horn fg c ＝ h)
 
@@ -343,35 +325,32 @@ module _
       ( ap (λ p → fg ((1▵ , 0▵) , p)) (glue-join (refl , refl)))
       ( h1)
 
-  is-composite-horn' : UU l
+  is-composite-horn' : UU (I1 ⊔ I2 ⊔ l)
   is-composite-horn' =
     Σ ( ( fg ((0▵ , 0▵) , inl-join refl) ＝ h 0▵) ×
         ( fg ((1▵ , 1▵) , inr-join refl) ＝ h 1▵))
-      ( λ (h0 , h1) → extension ∂Δ²→Δ² (triangle-horn h0 h1))
+      ( λ (h0 , h1) → extension inclusion-∂Δ² (triangle-horn h0 h1))
 
-hom² :
+hom▵² :
   {l : Level} {A : UU l} {x y z : A} →
-  hom x y → hom y z → hom x z → UU l
-hom² f g h = extension ∂Δ²→Δ² (rec-hom-∂Δ² f g h)
-
--- hom²-composition :
---   {l : Level} {A : UU l} {x y z : A}
---   (f : hom x y) (g : hom y z) (c : composition f g) → hom² f g (composite-composition f g c)
--- pr1 (hom²-composition f g c) = witness-composition f g c
--- pr2 (hom²-composition f g c) x = {!  !}
+  hom▵ x y → hom▵ y z → hom▵ x z → UU (I1 ⊔ I2 ⊔ l)
+hom▵² f g h = extension inclusion-∂Δ² (rec-hom-∂Δ² f g h)
 ```
 
-```text
+```agda
 is-composite-arrow :
-  {l : Level} {A : UU l} → (f g : arrow A) → f 1▵ ＝ g 0▵ → arrow A → UU l
+  {l : Level} {A : UU l} →
+  (f g : arrow▵ A) → f 1▵ ＝ g 0▵ → arrow▵ A → UU (I1 ⊔ I2 ⊔ l)
 is-composite-arrow f g p h = is-composite-horn (rec-arrow-Λ²₁ f g p) h
 ```
 
 These definitions are not compatible in the same way as the previous ones, as
 the second formulation also requires coherence at the end points.
 
-```text
-is-composite :
-  {l : Level} {A : UU l} {x y z : A} → hom x y → hom y z → hom x z → UU l
-is-composite f g h = Σ (composition f g) (λ c → composite-composition f g c ＝ h)
+```agda
+is-composite-hom :
+  {l : Level} {A : UU l} {x y z : A} →
+  hom▵ x y → hom▵ y z → hom▵ x z → UU (I1 ⊔ I2 ⊔ l)
+is-composite-hom f g h =
+  Σ (composition f g) (λ c → composite-composition f g c ＝ h)
 ```

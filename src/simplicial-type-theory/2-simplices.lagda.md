@@ -55,7 +55,7 @@ open import synthetic-homotopy-theory.pushouts
 
 ```agda
 subtype-lower-simplicial-triangle : subtype I2 (Δ¹ × Δ¹)
-subtype-lower-simplicial-triangle (t , s) = leq-Δ¹-Prop s t
+subtype-lower-simplicial-triangle (t , s) = leq-prop-Δ¹ s t
 
 lower-simplicial-triangle = type-subtype subtype-lower-simplicial-triangle
 
@@ -69,9 +69,9 @@ boundary-lower-simplicial-triangle =
   subtype-boundary-lower-simplicial-triangle ⊆ subtype-lower-simplicial-triangle
 ◿⊆◢ (x , y) =
   rec-join-Prop
-    ( leq-Δ¹-Prop y x)
+    ( leq-prop-Δ¹ y x)
     ( min-leq-eq-Δ¹ ∘ inv)
-    ( rec-join-Prop (leq-Δ¹-Prop y x) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
+    ( rec-join-Prop (leq-prop-Δ¹ y x) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
 
 inclusion-boundary-lower-simplicial-triangle :
   boundary-lower-simplicial-triangle → lower-simplicial-triangle
@@ -82,7 +82,7 @@ inclusion-boundary-lower-simplicial-triangle = tot ◿⊆◢
 
 ```agda
 subtype-◤ : subtype I2 (Δ¹ × Δ¹)
-subtype-◤ (t , s) = leq-Δ¹-Prop t s
+subtype-◤ (t , s) = leq-prop-Δ¹ t s
 
 ◤ = type-subtype subtype-◤
 
@@ -99,9 +99,9 @@ subtype-◸ (t , s) =
 ◸⊆◤ : subtype-◸ ⊆ subtype-◤
 ◸⊆◤ (x , y) =
   rec-join-Prop
-    ( leq-Δ¹-Prop x y)
+    ( leq-prop-Δ¹ x y)
     ( min-leq-eq-Δ¹ ∘ inv)
-    ( rec-join-Prop (leq-Δ¹-Prop x y) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
+    ( rec-join-Prop (leq-prop-Δ¹ x y) (leq-eq-Δ¹) (max-leq-eq-Δ¹))
 
 ◸→◤ : ◸ → ◤
 ◸→◤ = tot ◸⊆◤
@@ -131,20 +131,23 @@ eq-image-eq-point-is-prop is-prop-A f b x p = p ∙ ap f (eq-is-prop is-prop-A)
 subtype-∂Δ² : subtype I1 (Δ¹ × Δ¹)
 subtype-∂Δ² = subtype-boundary-lower-simplicial-triangle
 
+is-in-∂Δ² : Δ¹ × Δ¹ → UU I1
+is-in-∂Δ² = is-in-subtype subtype-∂Δ²
+
 ∂Δ² : UU I1
 ∂Δ² = boundary-lower-simplicial-triangle
 
 ∂Δ²⊆Δ² = ◿⊆◢
 inclusion-∂Δ² = inclusion-boundary-lower-simplicial-triangle
 
-rec-arrow▵-∂Δ² :
+rec-arrow-∂Δ² :
   {l : Level} {A : UU l}
   (f g h : arrow▵ A) →
   f 0▵ ＝ h 0▵ →
   f 1▵ ＝ g 0▵ →
   g 1▵ ＝ h 1▵ →
   ∂Δ² → A
-rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
+rec-arrow-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
   cogap-join A
     ( ( λ _ → f t) ,
       ( C) ,
@@ -176,13 +179,13 @@ rec-arrow▵-∂Δ² {A = A} f g h f0=h0 f1=g0 g1=h1 ((t , s) , u) =
             ( λ _ → g s) ,
             ( λ (s=t , t=1) → ap h t=1 ∙ inv (ap g (s=t ∙ t=1) ∙ g1=h1)))
 
-rec-hom▵-∂Δ² :
+rec-hom-∂Δ² :
   {l : Level} {A : UU l}
   {x y z : A} →
   hom▵ x y → hom▵ y z → hom▵ x z →
   ∂Δ² → A
-rec-hom▵-∂Δ² f g h =
-  rec-arrow▵-∂Δ²
+rec-hom-∂Δ² f g h =
+  rec-arrow-∂Δ²
     ( arrow-hom▵ f)
     ( arrow-hom▵ g)
     ( arrow-hom▵ h)

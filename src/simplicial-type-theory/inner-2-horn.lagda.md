@@ -21,6 +21,7 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -87,7 +88,7 @@ The inner 2-horn has multiple defining properties:
 
 ## Definitions
 
-### The inner 2-horn as a subtype of the directed square
+### $Λ²₁$ as a subtype of the directed square
 
 ```agda
 subtype-Λ²₁ : subtype I1 (Δ¹ × Δ¹)
@@ -107,23 +108,61 @@ inr-Λ²₁ : Δ¹ → Λ²₁
 inr-Λ²₁ s = ((1▵ , s) , inr-join refl)
 ```
 
-### The cogap map of the inner 2-horn as a subtype of the directed square
+### The cogap map of $Λ²₁$ as a subtype of the directed square
 
 ```agda
 module _
   {l : Level} {A : UU l} (f g : Δ¹ → A) (p : f 1▵ ＝ g 0▵)
   where
 
-  cogap-Λ²₁ : inner-two-horn → A
-  cogap-Λ²₁ ((x , y) , H) =
-    cogap-join A
-      ( ( λ y=0 → f x) ,
-        ( λ x=1 → g y) ,
-        ( λ (y=0 , x=1) → ap f x=1 ∙ p ∙ ap g (inv y=0)))
-      ( H)
+  cocone-join-Λ²₁ : (x y : Δ¹) → cocone pr1 pr2 A
+  cocone-join-Λ²₁ x y =
+    ( ( λ y=0 → f x) ,
+      ( λ x=1 → g y) ,
+      ( λ (y=0 , x=1) → ap f x=1 ∙ p ∙ ap g (inv y=0)))
+
+  rec-arrow-Λ²₁ : Λ²₁ → A
+  rec-arrow-Λ²₁ ((x , y) , H) = cogap-join A (cocone-join-Λ²₁ x y) H
+
+  compute-inl-rec-arrow-Λ²₁ : rec-arrow-Λ²₁ ∘ inl-Λ²₁ ~ f
+  compute-inl-rec-arrow-Λ²₁ x =
+    compute-inl-cogap-join (cocone-join-Λ²₁ x 0▵) refl
+
+  compute-inr-rec-arrow-Λ²₁ : rec-arrow-Λ²₁ ∘ inr-Λ²₁ ~ g
+  compute-inr-rec-arrow-Λ²₁ y =
+    compute-inr-cogap-join (cocone-join-Λ²₁ 1▵ y) refl
 ```
 
-### The inner 2-horn as a pushout
+### The cogap map of $Λ²₁$ in terms of pairs of directed edges
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} (f : x →▵ y) (g : y →▵ z)
+  where
+
+  rec-hom-Λ²₁ : Λ²₁ → A
+  rec-hom-Λ²₁ =
+    rec-arrow-Λ²₁
+      ( arrow-hom▵ f)
+      ( arrow-hom▵ g)
+      ( eq-target-hom▵ f ∙ inv (eq-source-hom▵ g))
+
+  compute-arrow-inl-rec-hom-Λ²₁ : rec-hom-Λ²₁ ∘ inl-Λ²₁ ~ arrow-hom▵ f
+  compute-arrow-inl-rec-hom-Λ²₁ =
+    compute-inl-rec-arrow-Λ²₁
+      ( arrow-hom▵ f)
+      ( arrow-hom▵ g)
+      ( eq-target-hom▵ f ∙ inv (eq-source-hom▵ g))
+
+  compute-inr-rec-hom-Λ²₁ : rec-hom-Λ²₁ ∘ inr-Λ²₁ ~ arrow-hom▵ g
+  compute-inr-rec-hom-Λ²₁ =
+    compute-inr-rec-arrow-Λ²₁
+      ( arrow-hom▵ f)
+      ( arrow-hom▵ g)
+      ( eq-target-hom▵ f ∙ inv (eq-source-hom▵ g))
+```
+
+### $Λ²₁$ as a pushout
 
 ```text
          0▵
@@ -147,7 +186,7 @@ inr-pushout-Λ²₁ = inr-pushout (point 1▵) (point 0▵)
 
 ## Properties
 
-### The inner 2-horn is a set
+### $Λ²₁$ is a set
 
 ```agda
 is-set-Λ²₁ : is-set Λ²₁
@@ -155,7 +194,7 @@ is-set-Λ²₁ =
   is-set-type-subtype subtype-Λ²₁ (is-set-product is-set-Δ¹ is-set-Δ¹)
 ```
 
-### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the directed square
+### The canonical map from $Λ²₁$ as a pushout to $Λ²₁$ as a subtype of the directed square
 
 ```agda
 map-inner-two-horn-pushout-Λ²₁ : pushout-Λ²₁ → Λ²₁
@@ -167,13 +206,13 @@ map-inner-two-horn-pushout-Λ²₁ =
 
 map-pushout-inner-two-horn-Λ²₁ : Λ²₁ → pushout-Λ²₁
 map-pushout-inner-two-horn-Λ²₁ =
-  cogap-Λ²₁
+  rec-arrow-Λ²₁
     ( inl-pushout-Λ²₁)
     ( inr-pushout-Λ²₁)
     ( glue-pushout (point 1▵) (point 0▵) star)
 ```
 
-### The inclusion of the 2-horn into the 2-simplex
+### The inclusion of $Λ²₁$ into $Δ²$
 
 ```agda
 leq-subtype-two-simplex-Λ²₁ : subtype-Λ²₁ ⊆ subtype-Δ²
@@ -184,4 +223,15 @@ leq-subtype-two-simplex-Λ²₁ (x , y) =
 
 inclusion-Δ²-Λ²₁ : Λ²₁ → Δ²
 inclusion-Δ²-Λ²₁ = tot leq-subtype-two-simplex-Λ²₁
+
+is-emb-inclusion-Δ²-Λ²₁ : is-emb inclusion-Δ²-Λ²₁
+is-emb-inclusion-Δ²-Λ²₁ =
+  is-emb-inclusion-leq-subtype
+    subtype-Λ²₁
+    subtype-Δ²
+    leq-subtype-two-simplex-Λ²₁
+
+emb-Δ²-Λ²₁ : Λ²₁ ↪ Δ²
+emb-Δ²-Λ²₁ =
+  emb-leq-subtype subtype-Λ²₁ subtype-Δ² leq-subtype-two-simplex-Λ²₁
 ```

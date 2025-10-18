@@ -69,23 +69,23 @@ definition may be subject to change in the future.
 $$x₁ ≥ x₂ ≥ … ≥ xₙ₋₁ ≥ xₙ$$ (in the right-associated cube)
 
 ```agda
-subtype-standard-simplex : (n : ℕ) → subtype I2 (directed-cube n)
-subtype-standard-simplex 0 _ =
+subtype-Δ : (n : ℕ) → subtype I2 (directed-cube n)
+subtype-Δ 0 _ =
   raise-unit-Prop I2
-subtype-standard-simplex 1 _ =
+subtype-Δ 1 _ =
   raise-unit-Prop I2
-subtype-standard-simplex 2 (x , y) =
-  leq-Δ¹-Prop y x
-subtype-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , y , u) =
+subtype-Δ 2 (x , y) =
+  leq-prop-Δ¹ y x
+subtype-Δ (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , y , u) =
   conjunction-Prop
-    ( subtype-standard-simplex 2 (x , y))
-    ( subtype-standard-simplex (succ-ℕ (succ-ℕ n)) (y , u))
+    ( subtype-Δ 2 (x , y))
+    ( subtype-Δ (succ-ℕ (succ-ℕ n)) (y , u))
 
-predicate-standard-simplex : (n : ℕ) → directed-cube n → UU I2
-predicate-standard-simplex = is-in-subtype ∘ subtype-standard-simplex
+is-in-Δ : (n : ℕ) → directed-cube n → UU I2
+is-in-Δ = is-in-subtype ∘ subtype-Δ
 
 standard-simplex : ℕ → UU (I1 ⊔ I2)
-standard-simplex = type-subtype ∘ subtype-standard-simplex
+standard-simplex = type-subtype ∘ subtype-Δ
 
 Δ : ℕ → UU (I1 ⊔ I2)
 Δ = standard-simplex

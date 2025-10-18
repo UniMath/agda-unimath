@@ -72,10 +72,10 @@ subtype-auxillary-face-standard-simplex 2 (succ-ℕ r) (x , y) =
 subtype-auxillary-face-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) 0 (x , y , u) =
   ( Id-Prop Δ¹-Set x y) ∧
-  ( subtype-standard-simplex (succ-ℕ (succ-ℕ n)) (y , u))
+  ( subtype-Δ (succ-ℕ (succ-ℕ n)) (y , u))
 subtype-auxillary-face-standard-simplex
   ( succ-ℕ (succ-ℕ (succ-ℕ n))) (succ-ℕ r) (x , y , u) =
-  ( leq-Δ¹-Prop y x) ∧
+  ( leq-prop-Δ¹ y x) ∧
   ( subtype-auxillary-face-standard-simplex (succ-ℕ (succ-ℕ n)) r (y , u))
 
 subtype-first-face-standard-simplex :
@@ -84,7 +84,7 @@ subtype-first-face-standard-simplex 0 _ = raise-empty-Prop I1
 subtype-first-face-standard-simplex 1 x = Id-Prop Δ¹-Set 1▵ x
 subtype-first-face-standard-simplex 2 (x , _) = Id-Prop Δ¹-Set 1▵ x
 subtype-first-face-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
-  Id-Prop Δ¹-Set 1▵ x ∧ subtype-standard-simplex (succ-ℕ (succ-ℕ n)) u
+  Id-Prop Δ¹-Set 1▵ x ∧ subtype-Δ (succ-ℕ (succ-ℕ n)) u
 
 subtype-face-standard-simplex : (n r : ℕ) → subtype I1 (directed-cube n)
 subtype-face-standard-simplex n 0 =
@@ -118,7 +118,7 @@ subtype-boundary-standard-simplex n = subtype-faces-up-to-standard-simplex n n
 ```text
 leq-subtype-auxillary-face-standard-simplex-standard-simplex :
   (n r : ℕ) →
-  subtype-auxillary-face-standard-simplex n r ⊆ subtype-standard-simplex n
+  subtype-auxillary-face-standard-simplex n r ⊆ subtype-Δ n
 leq-subtype-auxillary-face-standard-simplex-standard-simplex 1 0 _ _ =
   raise-star
 leq-subtype-auxillary-face-standard-simplex-standard-simplex 2 0 (x , y) =
@@ -135,7 +135,7 @@ leq-subtype-auxillary-face-standard-simplex-standard-simplex
       ( succ-ℕ (succ-ℕ n)) r u f)
 
 leq-subtype-face-standard-simplex-standard-simplex :
-  (n r : ℕ) → subtype-face-standard-simplex n r ⊆ subtype-standard-simplex n
+  (n r : ℕ) → subtype-face-standard-simplex n r ⊆ subtype-Δ n
 leq-subtype-face-standard-simplex-standard-simplex 1 0 _ _ =
   raise-star
 leq-subtype-face-standard-simplex-standard-simplex 1 (succ-ℕ r) _ _ =
@@ -155,17 +155,17 @@ leq-subtype-face-standard-simplex-standard-simplex
 
 leq-subtype-faces-up-to-standard-simplex-standard-simplex :
   (n k : ℕ) →
-  subtype-faces-up-to-standard-simplex n k ⊆ subtype-standard-simplex n
+  subtype-faces-up-to-standard-simplex n k ⊆ subtype-Δ n
 leq-subtype-faces-up-to-standard-simplex-standard-simplex n 0 =
   leq-subtype-face-standard-simplex-standard-simplex n 0
 leq-subtype-faces-up-to-standard-simplex-standard-simplex n (succ-ℕ k) x =
   elim-disjunction
-    ( subtype-standard-simplex n x)
+    ( subtype-Δ n x)
     ( leq-subtype-face-standard-simplex-standard-simplex n (succ-ℕ k) x)
     ( leq-subtype-faces-up-to-standard-simplex-standard-simplex n k x)
 
 leq-subtype-boundary-standard-simplex-standard-simplex :
-  (n : ℕ) → subtype-boundary-standard-simplex n ⊆ subtype-standard-simplex n
+  (n : ℕ) → subtype-boundary-standard-simplex n ⊆ subtype-Δ n
 leq-subtype-boundary-standard-simplex-standard-simplex n =
   leq-subtype-faces-up-to-standard-simplex-standard-simplex n n
 
