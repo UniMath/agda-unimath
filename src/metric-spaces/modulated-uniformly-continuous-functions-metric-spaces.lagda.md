@@ -201,21 +201,21 @@ module _
   is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space :
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id →
     is-short-function-Metric-Space A B f
-  is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space H ε x =
+  is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space H ε x =
     H x ε
 
   is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space :
     is-short-function-Metric-Space A B f →
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
-  id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space H x ε =
+  is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space H x ε =
     H ε x
 
   is-short-iff-is-modulus-of-uniform-continuity-id-function-Metric-Space :
     is-short-function-Metric-Space A B f ↔
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
-  is-short-iff-id-is-modulus-of-uniform-continuity-function-Metric-Space =
-    ( id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space ,
-      is-short-id-is-modulus-of-uniform-continuity-function-Metric-Space)
+  is-short-iff-is-modulus-of-uniform-continuity-id-function-Metric-Space =
+    ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space ,
+      is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space)
 ```
 
 ### Modulated uniformly continuous functions from short functions
@@ -233,7 +233,7 @@ module _
   modulated-ucont-map-short-function-Metric-Space (f , is-short-f) =
     ( f ,
       id ,
-      id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space
+      is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
         ( A)
         ( B)
         ( f)
@@ -417,14 +417,14 @@ module _
     modulated-ucont-binary-map-Metric-Space A B C f
       ( id)
       ( λ a →
-        id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space
+        is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
           ( B)
           ( C)
           ( f a)
           ( is-short-fa a))
       ( id)
       ( λ b →
-        id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space
+        is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
           ( A)
           ( C)
           ( λ a → f a b)
