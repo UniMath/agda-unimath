@@ -293,57 +293,58 @@ abstract
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
     leq-ℚ (power-ℚ n p) (power-ℚ n q)
   preserves-leq-odd-power-ℚ n p q odd-n p≤q =
-    rec-coproduct
-      ( λ is-neg-p →
-        rec-coproduct
-          ( λ is-neg-q →
-            let
-              p⁻ = (p , is-neg-p)
-              q⁻ = (q , is-neg-q)
-            in
-              binary-tr
-                ( leq-ℚ)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ p))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n p))
-                    by ap neg-ℚ (odd-power-neg-ℚ n p odd-n)
-                  ＝ power-ℚ n p
-                    by neg-neg-ℚ _)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ q))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n q))
-                    by ap neg-ℚ (odd-power-neg-ℚ n q odd-n)
-                  ＝ power-ℚ n q
-                    by neg-neg-ℚ _)
-                ( neg-leq-ℚ
-                  ( preserves-leq-power-ℚ⁺
-                    ( n)
-                    ( neg-ℚ⁻ q⁻)
-                    ( neg-ℚ⁻ p⁻)
-                    ( neg-leq-ℚ p≤q))))
-          ( λ is-nonneg-q →
-            inv-tr
-              ( leq-ℚ (power-ℚ n p))
-              ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
-              ( leq-negative-nonnegative-ℚ
-                ( power-ℚ n p , is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
-                ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
-          ( decide-is-negative-is-nonnegative-ℚ q))
-      ( λ is-nonneg-p →
+    let
+      neg-pow-n r⁻ =
         let
-          p⁰⁺ = (p , is-nonneg-p)
-          q⁰⁺ = (q , is-nonnegative-leq-ℚ⁰⁺ p⁰⁺ q p≤q)
+          r = rational-ℚ⁻ r⁻
         in
-          binary-tr
-            ( leq-ℚ)
-            ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
-            ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-leq-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p≤q))
-      ( decide-is-negative-is-nonnegative-ℚ p)
+          equational-reasoning
+            neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ r⁻)))
+            ＝ neg-ℚ (power-ℚ n (neg-ℚ r))
+              by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ r⁻)))
+            ＝ neg-ℚ (neg-ℚ (power-ℚ n r))
+              by ap neg-ℚ (odd-power-neg-ℚ n r odd-n)
+            ＝ power-ℚ n r
+              by neg-neg-ℚ _
+    in
+      rec-coproduct
+        ( λ is-neg-p →
+          rec-coproduct
+            ( λ is-neg-q →
+              let
+                p⁻ = (p , is-neg-p)
+                q⁻ = (q , is-neg-q)
+              in
+                binary-tr
+                  ( leq-ℚ)
+                  ( neg-pow-n p⁻)
+                  ( neg-pow-n q⁻)
+                  ( neg-leq-ℚ
+                    ( preserves-leq-power-ℚ⁺
+                      ( n)
+                      ( neg-ℚ⁻ q⁻)
+                      ( neg-ℚ⁻ p⁻)
+                      ( neg-leq-ℚ p≤q))))
+            ( λ is-nonneg-q →
+              inv-tr
+                ( leq-ℚ (power-ℚ n p))
+                ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
+                ( leq-negative-nonnegative-ℚ
+                  ( power-ℚ n p ,
+                    is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
+                  ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
+            ( decide-is-negative-is-nonnegative-ℚ q))
+        ( λ is-nonneg-p →
+          let
+            p⁰⁺ = (p , is-nonneg-p)
+            q⁰⁺ = (q , is-nonnegative-leq-ℚ⁰⁺ p⁰⁺ q p≤q)
+          in
+            binary-tr
+              ( leq-ℚ)
+              ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
+              ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
+              ( preserves-leq-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p≤q))
+        ( decide-is-negative-is-nonnegative-ℚ p)
 ```
 
 ### Odd powers of rational numbers preserve strict inequality
