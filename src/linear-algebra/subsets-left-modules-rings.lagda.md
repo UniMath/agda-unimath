@@ -8,6 +8,7 @@ module linear-algebra.subsets-left-modules-rings where
 
 ```agda
 open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -36,6 +37,20 @@ subset-left-module-Ring :
   {l1 l2 : Level}
   (l : Level) (R : Ring l1) (M : left-module-Ring l2 R) → UU (l2 ⊔ lsuc l)
 subset-left-module-Ring l R M = subtype l (type-left-module-Ring R M)
+
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (S : subset-left-module-Ring l3 R M)
+  where
+
+  type-subset-left-module-Ring : UU (l2 ⊔ l3)
+  type-subset-left-module-Ring = type-subtype S
+
+  inclusion-subset-left-module-Ring :
+    type-subset-left-module-Ring → type-left-module-Ring R M
+  inclusion-subset-left-module-Ring = pr1
 ```
 
 ### The condition that a subset is closed under addition

@@ -265,8 +265,8 @@ module _
 
   associative-add-quotient-Ab :
     (x y z : type-quotient-Ab) →
-    ( add-quotient-Ab (add-quotient-Ab x y) z) ＝
-    ( add-quotient-Ab x (add-quotient-Ab y z))
+    add-quotient-Ab (add-quotient-Ab x y) z ＝
+    add-quotient-Ab x (add-quotient-Ab y z)
   associative-add-quotient-Ab =
     associative-mul-quotient-Group
       ( group-Ab A)

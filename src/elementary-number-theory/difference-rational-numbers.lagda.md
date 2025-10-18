@@ -183,7 +183,7 @@ abstract
     equational-reasoning
       rational-ℤ x -ℚ rational-ℤ y
       ＝ rational-ℤ x +ℚ rational-ℤ (neg-ℤ y)
-        by ap (rational-ℤ x +ℚ_) (inv (preserves-neg-rational-ℤ y))
+        by ap (rational-ℤ x +ℚ_) (inv (neg-rational-ℤ y))
       ＝ rational-ℤ (x -ℤ y)
         by add-rational-ℤ x (neg-ℤ y)
 ```

@@ -11,6 +11,7 @@ module elementary-number-theory.addition-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -153,8 +154,7 @@ abstract
 
 ```agda
 opaque
-  unfolding add-ℚ
-  unfolding neg-ℚ
+  unfolding add-ℚ neg-ℚ
 
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
@@ -198,7 +198,7 @@ opaque
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
-    ( inv (preserves-neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
+    ( inv (neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ (x +fraction-ℤ y))
       ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))
@@ -302,6 +302,15 @@ abstract
         ( add-in-fraction-ℤ x y)
     ＝ rational-ℤ (x +ℤ y)
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
+```
+
+### The inclusion of natural numbers preserves addition
+
+```agda
+add-rational-ℕ :
+  (m n : ℕ) → rational-ℕ m +ℚ rational-ℕ n ＝ rational-ℕ (m +ℕ n)
+add-rational-ℕ m n =
+  add-rational-ℤ _ _ ∙ ap rational-ℤ (add-int-ℕ m n)
 ```
 
 ### The rational successor of an integer is the successor of the integer

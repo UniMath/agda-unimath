@@ -10,18 +10,23 @@ module commutative-algebra.formal-power-series-commutative-semirings where
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.convolution-sequences-commutative-semirings
 open import commutative-algebra.function-commutative-semirings
+open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
+open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings
 
+open import elementary-number-theory.binary-sum-decompositions-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 
@@ -163,6 +168,64 @@ module _
           zero-ℕ → zero-Commutative-Semiring R
           (succ-ℕ zero-ℕ) → one-Commutative-Semiring R
           (succ-ℕ (succ-ℕ _)) → zero-Commutative-Semiring R)
+```
+
+### Constant formal power series
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-formal-power-series-Commutative-Semiring :
+    type-Commutative-Semiring R → formal-power-series-Commutative-Semiring R
+  constant-formal-power-series-Commutative-Semiring c =
+    formal-power-series-coefficients-Commutative-Semiring
+      ( λ where
+        zero-ℕ → c
+        (succ-ℕ _) → zero-Commutative-Semiring R)
+```
+
+### The constant zero formal power series is the constant formal power series with value zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  abstract
+    constant-zero-formal-power-series-Commutative-Semiring :
+      constant-formal-power-series-Commutative-Semiring R
+        ( zero-Commutative-Semiring R) ＝
+      zero-formal-power-series-Commutative-Semiring R
+    constant-zero-formal-power-series-Commutative-Semiring =
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( eq-htpy
+          ( λ where
+            zero-ℕ → refl
+            (succ-ℕ _) → refl))
+```
+
+### The constant one formal power series is the constant formal power series with value one
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  abstract
+    constant-one-formal-power-series-Commutative-Semiring :
+      constant-formal-power-series-Commutative-Semiring R
+        ( one-Commutative-Semiring R) ＝
+      one-formal-power-series-Commutative-Semiring R
+    constant-one-formal-power-series-Commutative-Semiring =
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( eq-htpy
+          ( λ where
+            zero-ℕ → refl
+            (succ-ℕ _) → refl))
 ```
 
 ### Addition
@@ -489,4 +552,75 @@ module _
   commutative-semiring-formal-power-series-Commutative-Semiring =
     ( semiring-formal-power-series-Commutative-Semiring ,
       commutative-mul-formal-power-series-Commutative-Semiring)
+```
+
+### The constant formal power series operation is a ring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  abstract
+    preserves-mul-constant-formal-power-series-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-formal-power-series-Commutative-Semiring R
+        ( mul-Commutative-Semiring R x y) ＝
+      mul-formal-power-series-Commutative-Semiring
+        ( constant-formal-power-series-Commutative-Semiring R x)
+        ( constant-formal-power-series-Commutative-Semiring R y)
+    preserves-mul-constant-formal-power-series-Commutative-Semiring {x} {y} =
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( inv
+          ( eq-htpy
+            ( λ where
+              zero-ℕ →
+                sum-finite-is-contr-Commutative-Semiring R
+                  ( _)
+                  ( is-contr-binary-sum-decomposition-zero-ℕ)
+                  ( 0 , 0 , refl)
+                  ( _)
+              (succ-ℕ n) →
+                htpy-sum-finite-Commutative-Semiring R
+                  ( _)
+                  ( λ where
+                    (succ-ℕ m , _ , refl) →
+                      left-zero-law-mul-Commutative-Semiring R _
+                    (zero-ℕ , succ-ℕ n , refl) →
+                      right-zero-law-mul-Commutative-Semiring R _) ∙
+                sum-zero-finite-Commutative-Semiring R _)))
+
+    preserves-add-constant-formal-power-series-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-formal-power-series-Commutative-Semiring R
+        ( add-Commutative-Semiring R x y) ＝
+      add-formal-power-series-Commutative-Semiring
+        ( constant-formal-power-series-Commutative-Semiring R x)
+        ( constant-formal-power-series-Commutative-Semiring R y)
+    preserves-add-constant-formal-power-series-Commutative-Semiring =
+      ap
+        ( formal-power-series-coefficients-Commutative-Semiring)
+        ( eq-htpy
+          ( λ where
+              zero-ℕ → refl
+              (succ-ℕ n) → inv (left-unit-law-add-Commutative-Semiring R _)))
+
+  hom-additive-commutative-monoid-constant-formal-power-series-Commutative-Semiring :
+    hom-Commutative-Monoid
+      ( additive-commutative-monoid-Commutative-Semiring R)
+      ( additive-commutative-monoid-formal-power-series-Commutative-Semiring R)
+  hom-additive-commutative-monoid-constant-formal-power-series-Commutative-Semiring =
+    ( ( constant-formal-power-series-Commutative-Semiring R ,
+        preserves-add-constant-formal-power-series-Commutative-Semiring) ,
+      constant-zero-formal-power-series-Commutative-Semiring R)
+
+  hom-constant-formal-power-series-Commutative-Semiring :
+    hom-Commutative-Semiring
+      ( R)
+      ( commutative-semiring-formal-power-series-Commutative-Semiring R)
+  hom-constant-formal-power-series-Commutative-Semiring =
+    ( hom-additive-commutative-monoid-constant-formal-power-series-Commutative-Semiring ,
+      preserves-mul-constant-formal-power-series-Commutative-Semiring ,
+      constant-one-formal-power-series-Commutative-Semiring R)
 ```

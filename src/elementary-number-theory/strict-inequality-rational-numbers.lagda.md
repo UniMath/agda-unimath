@@ -22,6 +22,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
@@ -30,9 +31,11 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -186,7 +189,7 @@ module _
         ( fraction-ℚ z)
 ```
 
-### The canonical map from integer fractions to the rational numbers preserves strict inequality
+### The canonical map from integer fractions to the rational numbers preserves and reflects strict inequality
 
 ```agda
 module _
@@ -194,8 +197,7 @@ module _
   where
 
   opaque
-    unfolding le-ℚ-Prop
-    unfolding rational-fraction-ℤ
+    unfolding le-ℚ-Prop rational-fraction-ℤ
 
     preserves-le-rational-fraction-ℤ :
       le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
@@ -208,13 +210,30 @@ module _
         ( sim-reduced-fraction-ℤ p)
         ( sim-reduced-fraction-ℤ q)
 
+    reflects-le-rational-fraction-ℤ :
+      le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q) →
+      le-fraction-ℤ p q
+    reflects-le-rational-fraction-ℤ =
+      reflects-le-sim-fraction-ℤ
+        ( p)
+        ( q)
+        ( reduce-fraction-ℤ p)
+        ( reduce-fraction-ℤ q)
+        ( sim-reduced-fraction-ℤ p)
+        ( sim-reduced-fraction-ℤ q)
+
+  abstract
+    iff-le-rational-fraction-ℤ :
+      le-fraction-ℤ p q ↔ le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
+    iff-le-rational-fraction-ℤ =
+      ( preserves-le-rational-fraction-ℤ , reflects-le-rational-fraction-ℤ)
+
 module _
   (x : ℚ) (p : fraction-ℤ)
   where
 
   opaque
-    unfolding le-ℚ-Prop
-    unfolding rational-fraction-ℤ
+    unfolding le-ℚ-Prop rational-fraction-ℤ
 
     preserves-le-right-rational-fraction-ℤ :
       le-fraction-ℤ (fraction-ℚ x) p → le-ℚ x (rational-fraction-ℤ p)
@@ -245,8 +264,7 @@ module _
   pr2 iff-le-right-rational-fraction-ℤ = reflects-le-right-rational-fraction-ℤ
 
   opaque
-    unfolding le-ℚ-Prop
-    unfolding rational-fraction-ℤ
+    unfolding le-ℚ-Prop rational-fraction-ℤ
 
     preserves-le-left-rational-fraction-ℤ :
       le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x
@@ -273,6 +291,49 @@ module _
     le-fraction-ℤ p (fraction-ℚ x) ↔ le-ℚ (rational-fraction-ℤ p) x
   pr1 iff-le-left-rational-fraction-ℤ = preserves-le-left-rational-fraction-ℤ
   pr2 iff-le-left-rational-fraction-ℤ = reflects-le-left-rational-fraction-ℤ
+```
+
+### The canonical map from integers to the rational numbers preserves and reflects strict inequality
+
+```agda
+module _
+  (x y : ℤ)
+  where
+
+  opaque
+    unfolding le-ℚ-Prop
+
+    preserves-le-rational-ℤ : le-ℤ x y → le-ℚ (rational-ℤ x) (rational-ℤ y)
+    preserves-le-rational-ℤ =
+      binary-tr
+        ( le-ℤ)
+        ( inv (right-unit-law-mul-ℤ x))
+        ( inv (right-unit-law-mul-ℤ y))
+
+    reflects-le-rational-ℤ : le-ℚ (rational-ℤ x) (rational-ℤ y) → le-ℤ x y
+    reflects-le-rational-ℤ =
+      binary-tr le-ℤ (right-unit-law-mul-ℤ x) (right-unit-law-mul-ℤ y)
+
+    iff-le-rational-ℤ : le-ℤ x y ↔ le-ℚ (rational-ℤ x) (rational-ℤ y)
+    iff-le-rational-ℤ = (preserves-le-rational-ℤ , reflects-le-rational-ℤ)
+```
+
+### The canonical map from natural numbers to the rational numbers preserves and reflects strict inequality
+
+```agda
+module _
+  (m n : ℕ)
+  where
+
+  abstract
+    iff-le-rational-ℕ : le-ℕ m n ↔ le-ℚ (rational-ℕ m) (rational-ℕ n)
+    iff-le-rational-ℕ = iff-le-rational-ℤ _ _ ∘iff iff-le-int-ℕ m n
+
+    preserves-le-rational-ℕ : le-ℕ m n → le-ℚ (rational-ℕ m) (rational-ℕ n)
+    preserves-le-rational-ℕ = forward-implication iff-le-rational-ℕ
+
+    reflects-le-rational-ℕ : le-ℚ (rational-ℕ m) (rational-ℕ n) → le-ℕ m n
+    reflects-le-rational-ℕ = backward-implication iff-le-rational-ℕ
 ```
 
 ### `x < y` if and only if `0 < y - x`
@@ -451,7 +512,7 @@ abstract
   trichotomy-le-ℚ :
     {l : Level} {A : UU l} (x y : ℚ) →
     ( le-ℚ x y → A) →
-    ( Id x y → A) →
+    ( x ＝ y → A) →
     ( le-ℚ y x → A) →
     A
   trichotomy-le-ℚ x y left eq right
@@ -519,11 +580,10 @@ abstract
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding neg-ℚ
+  unfolding le-ℚ-Prop neg-ℚ
 
-  neg-le-ℚ : (x y : ℚ) → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
-  neg-le-ℚ x y = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+  neg-le-ℚ : {x y : ℚ} → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
+  neg-le-ℚ {x} {y} = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ### Transposing additions on strict inequalities of rational numbers

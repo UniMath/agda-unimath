@@ -130,8 +130,5 @@ module _
               ( is-prop-is-decidable (is-prop-is-in-decidable-subtype P x))
               ( is-decidable-decidable-subtype P x))
       ≃ type-decidable-subtype P + type-complement-decidable-subtype P
-        by
-        left-distributive-Σ-coproduct A
-          ( is-in-decidable-subtype P)
-          ( is-in-complement-decidable-subtype P)
+        by left-distributive-Σ-coproduct
 ```

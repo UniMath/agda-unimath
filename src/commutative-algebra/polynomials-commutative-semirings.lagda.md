@@ -11,12 +11,15 @@ module commutative-algebra.polynomials-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.formal-power-series-commutative-semirings
+open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binary-sum-decompositions-natural-numbers
+open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -24,9 +27,11 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -36,13 +41,23 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unital-binary-operations
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
+open import group-theory.submonoids-commutative-monoids
+
 open import lists.sequences
 
+open import ring-theory.semirings
+
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -170,6 +185,22 @@ module _
       ( λ _ → refl)
 ```
 
+### Constant polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-polynomial-Commutative-Semiring :
+    type-Commutative-Semiring R → polynomial-Commutative-Semiring R
+  constant-polynomial-Commutative-Semiring c =
+    polynomial-add-degree-formal-power-series-Commutative-Semiring
+      ( constant-formal-power-series-Commutative-Semiring R c)
+      ( 1)
+      ( λ _ → refl)
+```
+
 ### The identity polynomial
 
 ```agda
@@ -197,6 +228,52 @@ module _
     set-subset
       ( set-formal-power-series-Commutative-Semiring R)
       ( is-polynomial-prop-formal-power-series-Commutative-Semiring)
+```
+
+### Equality of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  eq-polynomial-Commutative-Semiring :
+    {p q : polynomial-Commutative-Semiring R} →
+    ( formal-power-series-polynomial-Commutative-Semiring p ＝
+      formal-power-series-polynomial-Commutative-Semiring q) →
+    p ＝ q
+  eq-polynomial-Commutative-Semiring =
+    eq-type-subtype is-polynomial-prop-formal-power-series-Commutative-Semiring
+```
+
+### The constant zero polynomial is the constant polynomial with value zero
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-zero-polynomial-Commutative-Semiring :
+    constant-polynomial-Commutative-Semiring R (zero-Commutative-Semiring R) ＝
+    zero-polynomial-Commutative-Semiring R
+  constant-zero-polynomial-Commutative-Semiring =
+    eq-polynomial-Commutative-Semiring R
+      ( constant-zero-formal-power-series-Commutative-Semiring R)
+```
+
+### The constant one polynomial is the constant polynomial with value one
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  constant-one-polynomial-Commutative-Semiring :
+    constant-polynomial-Commutative-Semiring R (one-Commutative-Semiring R) ＝
+    one-polynomial-Commutative-Semiring R
+  constant-one-polynomial-Commutative-Semiring =
+    eq-polynomial-Commutative-Semiring R
+      ( constant-one-formal-power-series-Commutative-Semiring R)
 ```
 
 ### Evaluation of polynomials
@@ -569,6 +646,27 @@ module _
                     ( Hq')))
 ```
 
+#### The commutative monoid of addition of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  additive-commutative-monoid-polynomial-Commutative-Semiring :
+    Commutative-Monoid l
+  additive-commutative-monoid-polynomial-Commutative-Semiring =
+    commutative-monoid-Commutative-Submonoid
+      ( additive-commutative-monoid-formal-power-series-Commutative-Semiring R)
+      ( is-polynomial-prop-formal-power-series-Commutative-Semiring ,
+        is-polynomial-formal-power-series-polynomial-Commutative-Semiring
+          ( zero-polynomial-Commutative-Semiring R) ,
+        ( λ p q is-poly-p is-poly-q →
+          is-polynomial-add-polynomial-Commutative-Semiring
+            ( p , is-poly-p)
+            ( q , is-poly-q)))
+```
+
 ### Multiplication of polynomials
 
 ```agda
@@ -606,7 +704,7 @@ module _
                     rec-coproduct
                       ( λ j<Nq →
                         ex-falso
-                          ( anti-reflexive-le-ℕ
+                          ( irreflexive-le-ℕ
                             ( n)
                             ( tr
                               ( λ m → le-ℕ m n)
@@ -657,4 +755,419 @@ module _
   mul-polynomial-Commutative-Semiring pp@(p , is-poly-p) qq@(q , is-poly-q) =
     ( mul-formal-power-series-Commutative-Semiring p q ,
       is-polynomial-mul-polynomial-Commutative-Semiring pp qq)
+```
+
+#### The product of two polynomials, evaluated at `x`, is equal to the scalar multiplication of each polynomial evaluated at `x`
+
+```agda
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  where
+
+  abstract
+    interchange-ev-mul-polynomial-Commutative-Semiring :
+      (p q : polynomial-Commutative-Semiring R) →
+      (x : type-Commutative-Semiring R) →
+      ev-polynomial-Commutative-Semiring
+        ( mul-polynomial-Commutative-Semiring p q)
+        ( x) ＝
+      mul-Commutative-Semiring R
+        ( ev-polynomial-Commutative-Semiring p x)
+        ( ev-polynomial-Commutative-Semiring q x)
+    interchange-ev-mul-polynomial-Commutative-Semiring
+      pp@(p , is-poly-p) qq@(q , is-poly-q) x =
+      let
+        ap-add-R = ap-add-Commutative-Semiring R
+        ap-mul-R = ap-mul-Commutative-Semiring R
+        0R = zero-Commutative-Semiring R
+        _+R_ = add-Commutative-Semiring R
+        _*R_ = mul-Commutative-Semiring R
+        cp = coefficient-formal-power-series-Commutative-Semiring p
+        cq = coefficient-formal-power-series-Commutative-Semiring q
+        power-R = power-Commutative-Semiring R
+        open
+          do-syntax-trunc-Prop
+            ( Id-Prop
+              ( set-Commutative-Semiring R)
+              ( ev-polynomial-Commutative-Semiring
+                ( mul-polynomial-Commutative-Semiring pp qq)
+                ( x))
+              ( mul-Commutative-Semiring R
+                ( ev-polynomial-Commutative-Semiring pp x)
+                ( ev-polynomial-Commutative-Semiring qq x)))
+      in do
+        (Np , Hp) ← is-poly-p
+        (Nq , Hq) ← is-poly-q
+        equational-reasoning
+          ev-polynomial-Commutative-Semiring _ x
+          ＝
+            sum-fin-sequence-type-Commutative-Semiring R (Nq +ℕ Np) _
+            by
+              ind-Σ
+                ( eq-ev-polynomial-degree-bound-Commutative-Semiring _ x)
+                ( degree-bound-mul-formal-power-series-Commutative-Semiring
+                  ( p)
+                  ( q)
+                  ( Np , Hp)
+                  ( Nq , Hq))
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin (Nq +ℕ Np))
+              ( λ (n , n<Nq+Np) →
+                ( sum-finite-Commutative-Semiring R
+                  ( finite-type-binary-sum-decomposition-ℕ n)
+                  ( λ (i , j , _) → cp i *R cq j)) *R
+                power-R n x)
+            by
+              inv
+                ( eq-sum-finite-sum-count-Commutative-Semiring R
+                  ( _)
+                  ( count-classical-Fin (Nq +ℕ Np))
+                  ( _))
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin (Nq +ℕ Np))
+              ( λ (n , n<Nq+Np) → _ *R power-R n x)
+            by
+              htpy-sum-finite-Commutative-Semiring R _
+                ( λ (n , n<Nq+Np) →
+                  ap-mul-R
+                    ( equational-reasoning
+                      _
+                      ＝
+                        sum-finite-Commutative-Semiring R
+                          ( finite-type-subset-Finite-Type
+                            ( finite-type-binary-sum-decomposition-ℕ n)
+                            ( λ (i , j , _) → decidable-subtype-le-ℕ Nq j))
+                          ( λ ((i , j , _) , j<Nq) → cp i *R cq j)
+                        by
+                          vanish-sum-complement-decidable-subset-finite-Commutative-Semiring
+                            ( R)
+                            ( _)
+                            ( λ (i , j , _) → decidable-subtype-le-ℕ Nq j)
+                            ( _)
+                            ( λ (i , j , _) j≮Nq →
+                              ap-mul-R refl (Hq j (leq-not-le-ℕ j Nq j≮Nq)) ∙
+                              right-zero-law-mul-Commutative-Semiring R _)
+                      ＝
+                        sum-finite-Commutative-Semiring R
+                          ( finite-type-subset-Finite-Type
+                            ( finite-type-subset-Finite-Type
+                              ( finite-type-binary-sum-decomposition-ℕ n)
+                              ( λ (i , j , _) → decidable-subtype-le-ℕ Nq j))
+                            ( λ ((i , j , _) , _) →
+                              decidable-subtype-le-ℕ Np i))
+                          ( λ (((i , j , _) , j<Nq) , i<Np) → cp i *R cq j)
+                        by
+                          vanish-sum-complement-decidable-subset-finite-Commutative-Semiring
+                            ( R)
+                            ( _)
+                            ( λ ((i , j , _) , _) → decidable-subtype-le-ℕ Np i)
+                            ( _)
+                            ( λ ((i , j , _) , _) i≮Np →
+                              ap-mul-R (Hp i (leq-not-le-ℕ i Np i≮Np)) refl ∙
+                              left-zero-law-mul-Commutative-Semiring R _)
+                      ＝
+                        sum-finite-Commutative-Semiring R _
+                          ( λ ((i , j , _) , j<Nq , i<Np) → cp i *R cq j)
+                        by
+                          sum-equiv-finite-Commutative-Semiring R
+                            ( _)
+                            ( _)
+                            ( associative-Σ)
+                            ( _))
+                    ( refl))
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin (Nq +ℕ Np))
+              ( λ (n , n<Nq+Np) →
+                sum-finite-Commutative-Semiring R
+                  ( finite-type-subset-Finite-Type
+                    ( finite-type-binary-sum-decomposition-ℕ n)
+                    ( λ (i , j , _) →
+                      conjunction-Decidable-Prop
+                        ( decidable-subtype-le-ℕ Nq j)
+                        ( decidable-subtype-le-ℕ Np i)))
+                  ( λ ((i , j , j+i=n) , _ , _) →
+                    (cp i *R power-R i x) *R (cq j *R power-R j x)))
+            by
+              htpy-sum-finite-Commutative-Semiring R _
+                ( λ (n , n<Nq+Np) →
+                  right-distributive-mul-sum-finite-Commutative-Semiring
+                    ( R)
+                    ( _)
+                    ( _)
+                    ( _) ∙
+                  htpy-sum-finite-Commutative-Semiring R _
+                    ( λ ((i , j , j+i=n) , _ , _) →
+                      ap-mul-R
+                        ( refl)
+                        ( ap (λ m → power-R m x) (inv j+i=n) ∙
+                          distributive-power-add-Commutative-Semiring
+                            ( R)
+                            ( _)
+                            ( _) ∙
+                          commutative-mul-Commutative-Semiring R _ _) ∙
+                        interchange-mul-mul-Commutative-Semiring R _ _ _ _))
+          ＝ sum-finite-Commutative-Semiring R _ _
+            by inv (sum-Σ-finite-Commutative-Semiring R _ _ _)
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( Σ-Finite-Type
+                ( finite-type-classical-Fin Np)
+                ( λ _ → finite-type-classical-Fin Nq))
+              ( λ ((i , i<Np) , (j , j<Nq)) →
+                ( cp i *R power-R i x) *R (cq j *R power-R j x))
+            by
+              sum-equiv-finite-Commutative-Semiring R _ _
+                ( ( λ ((n , n<Nq+Np) , (i , j , j+i=n) , j<Nq , i<Np) →
+                    ( (i , i<Np) , (j , j<Nq))) ,
+                  is-equiv-is-invertible
+                    ( λ ((i , i<Np) , (j , j<Nq)) →
+                      ( ( j +ℕ i , preserves-le-add-ℕ j<Nq i<Np) ,
+                        ( i , j , refl) ,
+                        j<Nq ,
+                        i<Np))
+                    ( λ _ → refl)
+                    ( let
+                        rearrange :
+                          Σ ( ℕ × ℕ × ℕ)
+                            ( λ (i , j , n) →
+                              le-ℕ i Np × le-ℕ j Nq × (j +ℕ i ＝ n) ×
+                              le-ℕ n (Nq +ℕ Np)) →
+                          Σ ( classical-Fin (Nq +ℕ Np))
+                            ( λ (n , _) →
+                              Σ ( binary-sum-decomposition-ℕ n)
+                                ( λ (i , j , _) → le-ℕ j Nq × le-ℕ i Np))
+                        rearrange = λ where
+                          ((i , j , n) , i<Np , j<Nq , j+i=n , n<Nq+Np) →
+                            ((n , n<Nq+Np) , (i , j , j+i=n) , j<Nq , i<Np)
+                      in λ where
+                        ((_ , j+i<Nq+Np) , (i , j , refl) , j<Nq , i<Np) →
+                          ap
+                            ( rearrange)
+                            ( eq-type-subtype
+                              ( λ (i , j , n) →
+                                ( ( le-prop-ℕ i Np) ∧
+                                  ( le-prop-ℕ j Nq) ∧
+                                  ( Id-Prop ℕ-Set (j +ℕ i) n) ∧
+                                  ( le-prop-ℕ n (Nq +ℕ Np))))
+                              refl)))
+                ( _)
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin Np)
+              ( λ (i , i<Np) →
+                sum-finite-Commutative-Semiring R
+                  ( finite-type-classical-Fin Nq)
+                  ( λ (j , j<Nq) →
+                    ( cp i *R power-R i x) *R (cq j *R power-R j x)))
+            by sum-Σ-finite-Commutative-Semiring R _ _ _
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin Np)
+              ( λ (i , i<Np) →
+                (cp i *R power-R i x) *R
+                ev-polynomial-Commutative-Semiring qq x)
+            by
+              htpy-sum-finite-Commutative-Semiring R _
+                ( λ (i , i<Np) →
+                  inv
+                    ( left-distributive-mul-sum-finite-Commutative-Semiring
+                      ( R)
+                      ( _)
+                      ( _)
+                      ( _)) ∙
+                  ap-mul-R
+                    ( refl)
+                    ( eq-sum-finite-sum-count-Commutative-Semiring R
+                        ( _)
+                        ( count-classical-Fin Nq)
+                        ( _) ∙
+                      inv
+                        ( eq-ev-polynomial-degree-bound-Commutative-Semiring
+                          ( qq)
+                          ( x)
+                          ( Nq)
+                          ( Hq))))
+          ＝
+            sum-finite-Commutative-Semiring R
+              ( finite-type-classical-Fin Np)
+              ( λ (i , i<Np) → (cp i *R power-R i x)) *R
+            ev-polynomial-Commutative-Semiring qq x
+            by
+              inv
+                ( right-distributive-mul-sum-finite-Commutative-Semiring R
+                  ( _)
+                  ( _)
+                  ( _))
+          ＝
+            ev-polynomial-Commutative-Semiring pp x *R
+            ev-polynomial-Commutative-Semiring qq x
+            by
+              ap-mul-R
+                ( eq-sum-finite-sum-count-Commutative-Semiring R
+                    ( _)
+                    ( count-classical-Fin Np)
+                    ( _) ∙
+                  inv
+                    ( eq-ev-polynomial-degree-bound-Commutative-Semiring
+                      ( pp)
+                      ( x)
+                      ( Np)
+                      ( Hp)))
+                ( refl)
+```
+
+#### Commutative monoid laws of multiplication of polynomials
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  multiplicative-commutative-monoid-polynomial-Commutative-Semiring :
+    Commutative-Monoid l
+  multiplicative-commutative-monoid-polynomial-Commutative-Semiring =
+    commutative-monoid-Commutative-Submonoid
+      ( multiplicative-commutative-monoid-Commutative-Semiring
+        ( commutative-semiring-formal-power-series-Commutative-Semiring R))
+      ( is-polynomial-prop-formal-power-series-Commutative-Semiring ,
+        is-polynomial-formal-power-series-polynomial-Commutative-Semiring
+          ( one-polynomial-Commutative-Semiring R) ,
+        ( λ p q is-poly-p is-poly-q →
+          is-polynomial-mul-polynomial-Commutative-Semiring
+            ( p , is-poly-p)
+            ( q , is-poly-q)))
+```
+
+### The commutative semiring of multiplication of polynomials
+
+```agda
+module _
+  {l : Level} {R : Commutative-Semiring l}
+  where
+
+  abstract
+    left-distributive-mul-add-polynomial-Commutative-Semiring :
+      (x y z : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring x
+        ( add-polynomial-Commutative-Semiring y z) ＝
+      add-polynomial-Commutative-Semiring
+        ( mul-polynomial-Commutative-Semiring x y)
+        ( mul-polynomial-Commutative-Semiring x z)
+    left-distributive-mul-add-polynomial-Commutative-Semiring
+      (x , _) (y , _) (z , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( left-distributive-mul-add-formal-power-series-Commutative-Semiring
+          ( x)
+          ( y)
+          ( z))
+
+    right-distributive-mul-add-polynomial-Commutative-Semiring :
+      (x y z : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( add-polynomial-Commutative-Semiring x y)
+        ( z) ＝
+      add-polynomial-Commutative-Semiring
+        ( mul-polynomial-Commutative-Semiring x z)
+        ( mul-polynomial-Commutative-Semiring y z)
+    right-distributive-mul-add-polynomial-Commutative-Semiring
+      (x , _) (y , _) (z , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( right-distributive-mul-add-formal-power-series-Commutative-Semiring
+          ( x)
+          ( y)
+          ( z))
+
+    left-zero-law-mul-polynomial-Commutative-Semiring :
+      (x : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( zero-polynomial-Commutative-Semiring R)
+        ( x) ＝
+      zero-polynomial-Commutative-Semiring R
+    left-zero-law-mul-polynomial-Commutative-Semiring (x , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( left-zero-law-mul-formal-power-series-Commutative-Semiring x)
+
+    right-zero-law-mul-polynomial-Commutative-Semiring :
+      (x : polynomial-Commutative-Semiring R) →
+      mul-polynomial-Commutative-Semiring
+        ( x)
+        ( zero-polynomial-Commutative-Semiring R) ＝
+      zero-polynomial-Commutative-Semiring R
+    right-zero-law-mul-polynomial-Commutative-Semiring (x , _) =
+      eq-polynomial-Commutative-Semiring R
+        ( right-zero-law-mul-formal-power-series-Commutative-Semiring x)
+
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  has-unit-mul-polynomial-Commutative-Semiring :
+    is-unital (mul-polynomial-Commutative-Semiring {R = R})
+  has-unit-mul-polynomial-Commutative-Semiring =
+    has-unit-Commutative-Monoid
+      ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring R)
+
+  semiring-polynomial-Commutative-Semiring : Semiring l
+  semiring-polynomial-Commutative-Semiring =
+    ( additive-commutative-monoid-polynomial-Commutative-Semiring R ,
+      ( ( mul-polynomial-Commutative-Semiring ,
+          associative-mul-Commutative-Monoid
+            ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring
+              ( R))) ,
+        has-unit-mul-polynomial-Commutative-Semiring ,
+        left-distributive-mul-add-polynomial-Commutative-Semiring ,
+        right-distributive-mul-add-polynomial-Commutative-Semiring) ,
+      left-zero-law-mul-polynomial-Commutative-Semiring ,
+      right-zero-law-mul-polynomial-Commutative-Semiring)
+
+  commutative-semiring-polynomial-Commutative-Semiring : Commutative-Semiring l
+  commutative-semiring-polynomial-Commutative-Semiring =
+    ( semiring-polynomial-Commutative-Semiring ,
+      commutative-mul-Commutative-Monoid
+        ( multiplicative-commutative-monoid-polynomial-Commutative-Semiring R))
+```
+
+### The constant polynomial operation is a commutative semiring homomorphism
+
+```agda
+module _
+  {l : Level} (R : Commutative-Semiring l)
+  where
+
+  abstract
+    preserves-mul-constant-polynomial-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-polynomial-Commutative-Semiring R
+        ( mul-Commutative-Semiring R x y) ＝
+      mul-polynomial-Commutative-Semiring
+        ( constant-polynomial-Commutative-Semiring R x)
+        ( constant-polynomial-Commutative-Semiring R y)
+    preserves-mul-constant-polynomial-Commutative-Semiring =
+      eq-polynomial-Commutative-Semiring R
+        ( preserves-mul-constant-formal-power-series-Commutative-Semiring R)
+
+    preserves-add-constant-polynomial-Commutative-Semiring :
+      {x y : type-Commutative-Semiring R} →
+      constant-polynomial-Commutative-Semiring R
+        ( add-Commutative-Semiring R x y) ＝
+      add-polynomial-Commutative-Semiring
+        ( constant-polynomial-Commutative-Semiring R x)
+        ( constant-polynomial-Commutative-Semiring R y)
+    preserves-add-constant-polynomial-Commutative-Semiring =
+      eq-polynomial-Commutative-Semiring R
+        ( preserves-add-constant-formal-power-series-Commutative-Semiring R)
+
+  constant-polynomial-hom-Commutative-Semiring :
+    hom-Commutative-Semiring
+      ( R)
+      ( commutative-semiring-polynomial-Commutative-Semiring R)
+  constant-polynomial-hom-Commutative-Semiring =
+    ( ( ( constant-polynomial-Commutative-Semiring R ,
+          preserves-add-constant-polynomial-Commutative-Semiring) ,
+        constant-zero-polynomial-Commutative-Semiring R) ,
+      preserves-mul-constant-polynomial-Commutative-Semiring ,
+      constant-one-polynomial-Commutative-Semiring R)
 ```

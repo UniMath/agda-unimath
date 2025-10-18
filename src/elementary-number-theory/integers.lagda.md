@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -51,6 +52,8 @@ negative whole numbers.
 ℤ = ℕ + (unit + ℕ)
 
 {-# BUILTIN INTEGER ℤ #-}
+
+{-# DISPLAY _+_ ℕ (_+_ unit ℕ) = ℤ #-}
 ```
 
 ### Inclusion of the negative integers
@@ -185,10 +188,8 @@ abstract
 
 abstract
   is-equiv-succ-ℤ : is-equiv succ-ℤ
-  pr1 (pr1 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr1 is-equiv-succ-ℤ) = is-section-pred-ℤ
-  pr1 (pr2 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr2 is-equiv-succ-ℤ) = is-retraction-pred-ℤ
+  is-equiv-succ-ℤ =
+    is-equiv-is-invertible pred-ℤ is-section-pred-ℤ is-retraction-pred-ℤ
 
 equiv-succ-ℤ : ℤ ≃ ℤ
 pr1 equiv-succ-ℤ = succ-ℤ
@@ -196,10 +197,8 @@ pr2 equiv-succ-ℤ = is-equiv-succ-ℤ
 
 abstract
   is-equiv-pred-ℤ : is-equiv pred-ℤ
-  pr1 (pr1 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr1 is-equiv-pred-ℤ) = is-retraction-pred-ℤ
-  pr1 (pr2 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr2 is-equiv-pred-ℤ) = is-section-pred-ℤ
+  is-equiv-pred-ℤ =
+    is-equiv-is-invertible succ-ℤ is-retraction-pred-ℤ is-section-pred-ℤ
 
 equiv-pred-ℤ : ℤ ≃ ℤ
 pr1 equiv-pred-ℤ = pred-ℤ
@@ -211,8 +210,7 @@ pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ```agda
 abstract
   is-injective-succ-ℤ : is-injective succ-ℤ
-  is-injective-succ-ℤ {x} {y} p =
-    inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
+  is-injective-succ-ℤ = is-injective-is-equiv is-equiv-succ-ℤ
 
   has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
   has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
@@ -220,7 +218,7 @@ abstract
   has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ```
 
-### The negative function is an involution
+### The negation function is an involution
 
 ```agda
 abstract
@@ -228,18 +226,23 @@ abstract
   neg-neg-ℤ (inl n) = refl
   neg-neg-ℤ (inr (inl star)) = refl
   neg-neg-ℤ (inr (inr n)) = refl
+```
 
+### The negation function is an equivalence
+
+```agda
 abstract
   is-equiv-neg-ℤ : is-equiv neg-ℤ
-  pr1 (pr1 is-equiv-neg-ℤ) = neg-ℤ
-  pr2 (pr1 is-equiv-neg-ℤ) = neg-neg-ℤ
-  pr1 (pr2 is-equiv-neg-ℤ) = neg-ℤ
-  pr2 (pr2 is-equiv-neg-ℤ) = neg-neg-ℤ
+  is-equiv-neg-ℤ = is-equiv-is-involution neg-neg-ℤ
 
 equiv-neg-ℤ : ℤ ≃ ℤ
 pr1 equiv-neg-ℤ = neg-ℤ
 pr2 equiv-neg-ℤ = is-equiv-neg-ℤ
+```
 
+### The negation function is an embedding
+
+```agda
 abstract
   is-emb-neg-ℤ : is-emb neg-ℤ
   is-emb-neg-ℤ = is-emb-is-equiv is-equiv-neg-ℤ
@@ -247,20 +250,34 @@ abstract
 emb-neg-ℤ : ℤ ↪ ℤ
 pr1 emb-neg-ℤ = neg-ℤ
 pr2 emb-neg-ℤ = is-emb-neg-ℤ
+```
 
+### The negation of the predecessor of `x` is the successor of the negation of `x`
+
+```agda
 abstract
   neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
   neg-pred-ℤ (inl x) = refl
   neg-pred-ℤ (inr (inl star)) = refl
   neg-pred-ℤ (inr (inr zero-ℕ)) = refl
   neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+```
 
+### The negation of the successor of `x` is the predecessor of the negation of `x`
+
+```agda
+abstract
   neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
   neg-succ-ℤ (inl zero-ℕ) = refl
   neg-succ-ℤ (inl (succ-ℕ x)) = refl
   neg-succ-ℤ (inr (inl star)) = refl
   neg-succ-ℤ (inr (inr x)) = refl
+```
 
+### The predecessor of the negation of `x` is the negation of the successor of `x`
+
+```agda
+abstract
   pred-neg-ℤ :
     (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
   pred-neg-ℤ (inl zero-ℕ) = refl
@@ -269,12 +286,12 @@ abstract
   pred-neg-ℤ (inr (inr x)) = refl
 ```
 
-### The negative function is injective
+### The negation function is injective
 
 ```agda
 abstract
   is-injective-neg-ℤ : is-injective neg-ℤ
-  is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
+  is-injective-neg-ℤ = is-injective-is-equiv is-equiv-neg-ℤ
 ```
 
 ### The integer successor of a natural number is the successor of the natural number

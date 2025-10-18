@@ -476,11 +476,7 @@ module _
               ( y , e))
         ≃ Σ ( Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x))
             ( λ p → walk-Directed-Graph G (pr1 p) r)
-          by
-          inv-associative-Σ
-            ( vertex-Directed-Graph G)
-            ( edge-Directed-Graph G x)
-            ( λ p → walk-Directed-Graph G (pr1 p) r)
+          by inv-associative-Σ
         ≃ walk-Directed-Graph G y r
           by
           left-unit-law-Σ-is-contr

@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -25,10 +26,12 @@ open import group-theory.powers-of-elements-monoids
 
 ## Idea
 
-The power operation on a group is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times. We define this operation
-where `n` ranges over the natural numbers, as well as where `n` ranges over the
-integers.
+The
+{{#concept "power operation" Disambiguation="raising an element of a group to a natural number power" Agda=power-Group}}
+on a [group](group-theory.groups.md) is the map `n x ↦ xⁿ`, which is defined by
+[iteratively](foundation.iterating-functions.md) multiplying `x` with itself `n`
+times. This file describes the case where `n` is a
+[natural number](elementary-number-theory.natural-numbers.md).
 
 ## Definition
 
@@ -173,6 +176,30 @@ module _
   power-mul-Group = power-mul-Monoid (monoid-Group G)
 ```
 
+### The inverse of `x`, raised to the power `n`, is the inverse of `x` raised to the power `n`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  abstract
+    power-inv-Group :
+      (n : ℕ) (x : type-Group G) →
+      power-Group G n (inv-Group G x) ＝ inv-Group G (power-Group G n x)
+    power-inv-Group 0 _ = inv (inv-unit-Group G)
+    power-inv-Group 1 _ = refl
+    power-inv-Group (succ-ℕ n@(succ-ℕ _)) x =
+      equational-reasoning
+        mul-Group G (power-Group G n (inv-Group G x)) (inv-Group G x)
+        ＝ mul-Group G (inv-Group G (power-Group G n x)) (inv-Group G x)
+          by ap-mul-Group G (power-inv-Group n x) refl
+        ＝ inv-Group G (mul-Group G x (power-Group G n x))
+          by inv (distributive-inv-mul-Group G)
+        ＝ inv-Group G (power-Group G (succ-ℕ n) x)
+          by ap (inv-Group G) (inv (power-succ-Group' G n x))
+```
+
 ### Group homomorphisms preserve powers
 
 ```agda
@@ -190,3 +217,7 @@ module _
       ( monoid-Group H)
       ( hom-monoid-hom-Group G H f)
 ```
+
+## See also
+
+- [Integer powers of elements in groups](group-theory.integer-powers-of-elements-groups.md)

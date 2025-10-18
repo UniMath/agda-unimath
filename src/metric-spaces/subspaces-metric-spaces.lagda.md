@@ -26,6 +26,7 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -191,6 +192,24 @@ module _
     short-function-Metric-Space (subspace-Metric-Space A S) A
   short-inclusion-subspace-Metric-Space =
     short-isometry-Metric-Space
+      ( subspace-Metric-Space A S)
+      ( A)
+      ( isometry-inclusion-subspace-Metric-Space A S)
+```
+
+### The inclusion of a subspace into its ambient space is uniformly continuous
+
+```agda
+module _
+  {l l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
+  where
+
+  uniformly-continuous-inclusion-subspace-Metric-Space :
+    uniformly-continuous-function-Metric-Space (subspace-Metric-Space A S) A
+  uniformly-continuous-inclusion-subspace-Metric-Space =
+    uniformly-continuous-isometry-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
       ( isometry-inclusion-subspace-Metric-Space A S)

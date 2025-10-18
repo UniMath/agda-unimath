@@ -168,7 +168,7 @@ module _
     (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
   right-inverse-law-add-Ab = right-inverse-law-mul-Group group-Ab
 
-  commutative-add-Ab : (x y : type-Ab) → Id (add-Ab x y) (add-Ab y x)
+  commutative-add-Ab : (x y : type-Ab) → add-Ab x y ＝ add-Ab y x
   commutative-add-Ab = pr2 A
 
   interchange-add-add-Ab :
@@ -195,8 +195,7 @@ module _
     ( associative-add-Ab b a c)
 
   distributive-neg-add-Ab :
-    (x y : type-Ab) →
-    neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
+    (x y : type-Ab) → neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
   distributive-neg-add-Ab x y =
     ( distributive-inv-mul-Group group-Ab) ∙
     ( commutative-add-Ab (neg-Ab y) (neg-Ab x))
@@ -439,22 +438,22 @@ module _
 
   transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+    add-Ab A x y ＝ z → x ＝ add-Ab A z (neg-Ab A y)
   transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
 
   inv-transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id x (add-Ab A z (neg-Ab A y)) → add-Ab A x y ＝ z
+    x ＝ add-Ab A z (neg-Ab A y) → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab = inv-transpose-eq-mul-Group (group-Ab A)
 
   transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+    add-Ab A x y ＝ z → y ＝ add-Ab A (neg-Ab A x) z
   transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
 
   inv-transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id y (add-Ab A (neg-Ab A x) z) → Id (add-Ab A x y) z
+    y ＝ add-Ab A (neg-Ab A x) z → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
 
   double-transpose-eq-add-Ab :
@@ -538,6 +537,18 @@ module _
     x ＝ y → is-zero-Ab A (right-subtraction-Ab A x y)
   is-zero-right-subtraction-eq-Ab =
     is-unit-right-div-eq-Group (group-Ab A)
+```
+
+### If `x + y = 0`, then `y = -x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  unique-right-inv-Ab :
+    {x y : type-Ab A} → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+  unique-right-inv-Ab {x} {y} = unique-right-inv-Group (group-Ab A) x y
 ```
 
 ### The negative of `-x + y` is `-y + x`
@@ -753,9 +764,8 @@ module _
 
   preserves-concat-add-list-Ab :
     (l1 l2 : list (type-Ab A)) →
-    Id
-      ( add-list-Ab (concat-list l1 l2))
-      ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+    add-list-Ab (concat-list l1 l2) ＝
+    add-Ab A (add-list-Ab l1) (add-list-Ab l2)
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
 ```
@@ -935,3 +945,8 @@ module _
           ( commutator-normal-subgroup-Group G))
       ( nullifies-commutator-normal-subgroup-hom-group-Ab)
 ```
+
+## See also
+
+- [Large abelian groups](group-theory.large-abelian-groups.md), which span
+  universe levels
