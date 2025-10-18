@@ -174,13 +174,15 @@ abstract
         ( neg-neg-ℚ q)
         ( neg-leq-ℚ (neg-leq-abs-ℚ q)))
 
+  rational-abs-zero-ℚ : rational-abs-ℚ zero-ℚ ＝ zero-ℚ
+  rational-abs-zero-ℚ =
+    equational-reasoning
+      max-ℚ zero-ℚ (neg-ℚ zero-ℚ)
+      ＝ max-ℚ zero-ℚ zero-ℚ by ap-max-ℚ refl neg-zero-ℚ
+      ＝ zero-ℚ by idempotent-max-ℚ zero-ℚ
+
   abs-zero-ℚ : abs-ℚ zero-ℚ ＝ zero-ℚ⁰⁺
-  abs-zero-ℚ =
-    eq-ℚ⁰⁺
-      ( equational-reasoning
-        max-ℚ zero-ℚ (neg-ℚ zero-ℚ)
-        ＝ max-ℚ zero-ℚ zero-ℚ by ap-max-ℚ refl neg-zero-ℚ
-        ＝ zero-ℚ by idempotent-max-ℚ zero-ℚ)
+  abs-zero-ℚ = eq-ℚ⁰⁺ rational-abs-zero-ℚ
 ```
 
 ### The triangle inequality

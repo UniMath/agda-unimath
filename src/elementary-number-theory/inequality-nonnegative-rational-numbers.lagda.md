@@ -51,3 +51,11 @@ decidable-total-order-ℚ⁰⁺ =
     ℚ-Decidable-Total-Order
     is-nonnegative-prop-ℚ
 ```
+
+### Inequality on the nonnegative rational numbers is transitive
+
+```agda
+abstract
+  transitive-leq-ℚ⁰⁺ : (p q r : ℚ⁰⁺) → leq-ℚ⁰⁺ q r → leq-ℚ⁰⁺ p q → leq-ℚ⁰⁺ p r
+  transitive-leq-ℚ⁰⁺ (p , _) (q , _) (r , _) = transitive-leq-ℚ p q r
+```
