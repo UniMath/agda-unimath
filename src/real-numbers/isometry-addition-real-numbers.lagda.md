@@ -10,12 +10,17 @@ module real-numbers.isometry-addition-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -46,33 +51,53 @@ module _
   {l1 l2 : Level} (x : ℝ l1)
   where
 
-  is-isometry-left-add-ℝ :
-    is-isometry-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
-      ( add-ℝ x)
-  is-isometry-left-add-ℝ d y z =
-    ( λ Nyz →
-      neighborhood-real-bound-each-leq-ℝ
-        ( d)
-        ( add-ℝ x y)
-        ( add-ℝ x z)
-        ( preserves-lower-neighborhood-leq-left-add-ℝ d x y z
-          ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
-        ( preserves-lower-neighborhood-leq-left-add-ℝ d x z y
-          ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))) ,
-    ( λ Nxyz →
-      neighborhood-real-bound-each-leq-ℝ d y z
-        ( reflects-lower-neighborhood-leq-left-add-ℝ d x y z
-          ( left-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
-        ( reflects-lower-neighborhood-leq-left-add-ℝ d x z y
-          ( right-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz)))
+  abstract
+    is-isometry-left-add-ℝ :
+      is-isometry-Metric-Space
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2))
+        ( add-ℝ x)
+    is-isometry-left-add-ℝ d y z =
+      ( λ Nyz →
+        neighborhood-real-bound-each-leq-ℝ
+          ( d)
+          ( add-ℝ x y)
+          ( add-ℝ x z)
+          ( preserves-lower-neighborhood-leq-left-add-ℝ d x y z
+            ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
+          ( preserves-lower-neighborhood-leq-left-add-ℝ d x z y
+            ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))) ,
+      ( λ Nxyz →
+        neighborhood-real-bound-each-leq-ℝ d y z
+          ( reflects-lower-neighborhood-leq-left-add-ℝ d x y z
+            ( left-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
+          ( reflects-lower-neighborhood-leq-left-add-ℝ d x z y
+            ( right-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz)))
+
+    is-isometry-right-add-ℝ :
+      is-isometry-Metric-Space
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2))
+        ( λ y → add-ℝ y x)
+    is-isometry-right-add-ℝ =
+      tr
+        ( is-isometry-Metric-Space
+          ( metric-space-ℝ l2)
+          ( metric-space-ℝ (l1 ⊔ l2)))
+        ( eq-htpy (commutative-add-ℝ x))
+        ( is-isometry-left-add-ℝ)
 
   isometry-left-add-ℝ :
     isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
   isometry-left-add-ℝ = (add-ℝ x , is-isometry-left-add-ℝ)
+
+  isometry-right-add-ℝ :
+    isometry-Metric-Space
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
+  isometry-right-add-ℝ = ( (λ y → add-ℝ y x) , is-isometry-right-add-ℝ)
 ```
 
 ### Addition is an isometry from `ℝ` to the metric space of isometries `ℝ → ℝ`
@@ -129,4 +154,22 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2)))
   isometry-add-ℝ = (isometry-left-add-ℝ , is-isometry-isometry-left-add-ℝ)
+```
+
+### Addition is a modulated uniformly continuous function on the product of the metric space of reals with itself
+
+```agda
+modulated-ucont-add-pair-ℝ :
+  (l1 l2 : Level) →
+  modulated-ucont-map-Metric-Space
+    ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
+    ( metric-space-ℝ (l1 ⊔ l2))
+modulated-ucont-add-pair-ℝ l1 l2 =
+  modulated-ucont-binary-isometry-Metric-Space
+    ( metric-space-ℝ l1)
+    ( metric-space-ℝ l2)
+    ( metric-space-ℝ (l1 ⊔ l2))
+    ( add-ℝ)
+    ( is-isometry-left-add-ℝ)
+    ( is-isometry-right-add-ℝ)
 ```
