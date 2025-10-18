@@ -161,7 +161,7 @@ module _
       ( X)
       ( Y)
       ( map-short-function-Metric-Space X Y f)
-      ( id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space
+      ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
         ( X)
         ( Y)
         ( map-short-function-Metric-Space X Y f)
