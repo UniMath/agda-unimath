@@ -259,9 +259,9 @@ is-discrete▵-family-is-discrete▵-Σ
 
 ### Simplicially discrete types are Segal
 
-> This remains to be formalized. The proof boils down to showing that `Λ²₁ ↪ Δ²`
-> is [anodyne](orthogonal-factorization-systems.anodyne-maps.md) with respect to
-> `Δ¹ → 1`.
+> This remains to be formalized. The proof boils down to showing that
+> `Λ²₁ ↪ Δ²` is [anodyne](orthogonal-factorization-systems.anodyne-maps.md)
+> with respect to `Δ¹ → 1`.
 
 ### A type is simplicially discrete if and only if it is pregroupoidal and Rezk complete
 

@@ -68,8 +68,8 @@ if one of the following equivalent conditions hold:
    Note that this is just a slight simplification of the previous condition.
 
 3. The type family is
-   [local](orthogonal-factorization-systems.local-type-families.md) at the left
-   end-point inclusion `0▵ : 1 ↪ Δ¹`.
+   [local](orthogonal-factorization-systems.families-of-types-local-at-maps.md)
+   at the left end-point inclusion `0▵ : 1 ↪ Δ¹`.
 
 4. The following square is a [pullback](foundation-core.pullbacks.md)
 
