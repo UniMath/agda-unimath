@@ -333,12 +333,12 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l3 l4) (C : Metric-Space l5 l6)
   (f : type-Metric-Space A → type-Metric-Space B → type-Metric-Space C)
   (mf₁ : ℚ⁺ → ℚ⁺)
+  (mf₂ : ℚ⁺ → ℚ⁺)
   (is-mod-mf₁ :
     (a : type-Metric-Space A) →
     is-modulus-of-uniform-continuity-function-Metric-Space B C
       ( f a)
       ( mf₁))
-  (mf₂ : ℚ⁺ → ℚ⁺)
   (is-mod-mf₂ :
     (b : type-Metric-Space B) →
     is-modulus-of-uniform-continuity-function-Metric-Space A C
@@ -416,13 +416,13 @@ module _
   modulated-ucont-short-binary-map-Metric-Space =
     modulated-ucont-binary-map-Metric-Space A B C f
       ( id)
+      ( id)
       ( λ a →
         is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
           ( B)
           ( C)
           ( f a)
           ( is-short-fa a))
-      ( id)
       ( λ b →
         is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
           ( A)
