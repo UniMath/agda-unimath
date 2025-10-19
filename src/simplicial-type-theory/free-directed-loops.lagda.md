@@ -321,6 +321,6 @@ module _
     ( equiv-tot
       ( λ α →
         ( left-unit-law-Σ-is-contr (is-torsorial-Id (α 0▵)) (α 0▵ , refl)) ∘e
-        ( inv-associative-Σ X (α 0▵ ＝_) (λ z → α 1▵ ＝ pr1 z)))) ∘e
+        ( inv-associative-Σ))) ∘e
     ( equiv-left-swap-Σ)
 ```
