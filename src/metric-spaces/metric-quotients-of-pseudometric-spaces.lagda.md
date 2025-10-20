@@ -76,11 +76,16 @@ neighborhoods of inhabitants of the quotient classes: two quotient classes `X`,
 `Y` are in a `d`-neighborhood if for all `x ∈ X` and `y ∈ Y`, `x` and `y` are
 `d`-neighbors in the pseudometric space.
 
-Any metric space is
-[isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to the
-metric quotient of its underlying pseudometric space.
+Any pseudometric space `M` has an
+[isometry](metric-spaces.isometries-pseudometric-spaces.md) into its metric
+quotient; if `M` is a metric space, this is an
+[isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
-## Definition
+Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
+[isometry](metric-spaces.isometries-pseudometric-spaces)) from a pseudometric
+space to a metric space factors through the metric quotient of its domain.
+
+## Definitions
 
 ```agda
 module _
@@ -586,49 +591,6 @@ module _
             ( metric-quotient-Pseudometric-Space M)))
         ( isometric-equiv-metric-quotient-Metric-Space'
           ( metric-quotient-Pseudometric-Space M)))
-```
-
-### Characterization of functions from the quotient metric space into metric spaces
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2)
-  (B : Metric-Space l1' l2')
-  where
-
-  precomp-map-metric-quotient-Pseudometric-Space :
-    type-function-Metric-Space
-      ( metric-quotient-Pseudometric-Space A)
-      ( B) →
-    reflecting-map-equivalence-relation
-      ( equivalence-relation-sim-Pseudometric-Space A)
-      ( type-Metric-Space B)
-  precomp-map-metric-quotient-Pseudometric-Space =
-    precomp-Set-Quotient
-      ( equivalence-relation-sim-Pseudometric-Space A)
-      ( set-metric-quotient-Pseudometric-Space A)
-      ( reflecting-map-quotient-map
-        ( equivalence-relation-sim-Pseudometric-Space A))
-      ( set-Metric-Space B)
-
-  is-equiv-precomp-map-metric-quotient-Pseudometric-Space :
-    is-equiv precomp-map-metric-quotient-Pseudometric-Space
-  is-equiv-precomp-map-metric-quotient-Pseudometric-Space =
-    is-set-quotient-set-quotient
-      ( equivalence-relation-sim-Pseudometric-Space A)
-      ( set-Metric-Space B)
-
-  equiv-type-function-metric-quotient-Pseudometric-Space :
-    type-function-Metric-Space
-      ( metric-quotient-Pseudometric-Space A)
-      ( B) ≃
-    reflecting-map-equivalence-relation
-      ( equivalence-relation-sim-Pseudometric-Space A)
-      ( type-Metric-Space B)
-  equiv-type-function-metric-quotient-Pseudometric-Space =
-    ( precomp-map-metric-quotient-Pseudometric-Space ,
-      is-equiv-precomp-map-metric-quotient-Pseudometric-Space)
 ```
 
 ### Induced short function from the quotient metric space into a metric space
