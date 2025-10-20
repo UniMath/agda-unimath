@@ -82,8 +82,8 @@ quotient; if `M` is a metric space, this is an
 [isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
 Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
-[isometry](metric-spaces.isometries-pseudometric-spaces)) from a pseudometric
-space to a metric space factors through the metric quotient of its domain.
+isometry) from a pseudometric space to a metric space factors through the metric
+quotient of its domain.
 
 ## Definitions
 
