@@ -200,50 +200,17 @@ module _
       ( pseudometric-completion-Metric-Space M)
       ( isometry-pseudometric-completion-Metric-Space)
 
-  is-isometry-map-pseudometric-completion-Metric-Space :
-    is-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space M)
-      ( pseudometric-completion-Metric-Space M)
-      ( map-pseudometric-completion-Metric-Space)
-  is-isometry-map-pseudometric-completion-Metric-Space =
-    is-isometry-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space M)
-      ( pseudometric-completion-Metric-Space M)
-      ( isometry-pseudometric-completion-Metric-Space)
-```
-
-### Any Cauchy approximation in the pseudometric completion of a metric space has a limit
-
-```agda
-module _
-  { l1 l2 : Level} (M : Metric-Space l1 l2)
-  ( U :
-    cauchy-approximation-Pseudometric-Space
-      ( pseudometric-completion-Metric-Space M))
-  where
-
-  has-limit-cauchy-approximation-pseudometric-completion-Metric-Space :
-    Σ ( cauchy-approximation-Metric-Space M)
-      ( is-limit-cauchy-approximation-Pseudometric-Space
+  abstract
+    is-isometry-map-pseudometric-completion-Metric-Space :
+      is-isometry-Pseudometric-Space
+        ( pseudometric-Metric-Space M)
         ( pseudometric-completion-Metric-Space M)
-        ( U))
-  has-limit-cauchy-approximation-pseudometric-completion-Metric-Space =
-    has-limit-cauchy-approximation-pseudometric-completion-Pseudometric-Space
-      ( pseudometric-Metric-Space M)
-      ( U)
-
-  lim-cauchy-approximation-pseudometric-completion-Metric-Space :
-    cauchy-approximation-Metric-Space M
-  lim-cauchy-approximation-pseudometric-completion-Metric-Space =
-    pr1 has-limit-cauchy-approximation-pseudometric-completion-Metric-Space
-
-  is-limit-lim-cauchy-approximation-pseudometric-completion-Metric-Space :
-    is-limit-cauchy-approximation-Pseudometric-Space
-      ( pseudometric-completion-Metric-Space M)
-      ( U)
-      ( lim-cauchy-approximation-pseudometric-completion-Metric-Space)
-  is-limit-lim-cauchy-approximation-pseudometric-completion-Metric-Space =
-    pr2 has-limit-cauchy-approximation-pseudometric-completion-Metric-Space
+        ( map-pseudometric-completion-Metric-Space)
+    is-isometry-map-pseudometric-completion-Metric-Space =
+      is-isometry-map-isometry-Pseudometric-Space
+        ( pseudometric-Metric-Space M)
+        ( pseudometric-completion-Metric-Space M)
+        ( isometry-pseudometric-completion-Metric-Space)
 ```
 
 ### Convergent Cauchy approximations are similar to constant Cauchy approximations in the pseudometric completion
@@ -287,30 +254,38 @@ module _
         ( λ d → H d α β)
 ```
 
-### Any Cauchy approximation in the pseudometric completion of a pseudometric space is similar to a constant Cauchy approximation
+### Any Cauchy approximation in the pseudometric completion of a metric space has a limit
 
 ```agda
 module _
   { l1 l2 : Level} (M : Metric-Space l1 l2)
-  ( u :
+  ( U :
     cauchy-approximation-Pseudometric-Space
       ( pseudometric-completion-Metric-Space M))
   where
 
-  sim-const-lim-cauchy-approximation-pseudometric-completion-Metric-Space :
-    sim-Pseudometric-Space
-      ( pseudometric-completion-Pseudometric-Space
-        ( pseudometric-completion-Metric-Space M))
-      ( u)
-      ( const-cauchy-approximation-Pseudometric-Space
+  has-limit-cauchy-approximation-pseudometric-completion-Metric-Space :
+    Σ ( cauchy-approximation-Metric-Space M)
+      ( is-limit-cauchy-approximation-Pseudometric-Space
         ( pseudometric-completion-Metric-Space M)
-        ( lim-cauchy-approximation-pseudometric-completion-Metric-Space
-          ( M)
-          ( u)))
-  sim-const-lim-cauchy-approximation-pseudometric-completion-Metric-Space =
-    sim-const-lim-cauchy-approximation-pseudometric-completion-Pseudometric-Space
+        ( U))
+  has-limit-cauchy-approximation-pseudometric-completion-Metric-Space =
+    has-limit-cauchy-approximation-pseudometric-completion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
-      ( u)
+      ( U)
+
+  lim-cauchy-approximation-pseudometric-completion-Metric-Space :
+    cauchy-approximation-Metric-Space M
+  lim-cauchy-approximation-pseudometric-completion-Metric-Space =
+    pr1 has-limit-cauchy-approximation-pseudometric-completion-Metric-Space
+
+  is-limit-lim-cauchy-approximation-pseudometric-completion-Metric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-completion-Metric-Space M)
+      ( U)
+      ( lim-cauchy-approximation-pseudometric-completion-Metric-Space)
+  is-limit-lim-cauchy-approximation-pseudometric-completion-Metric-Space =
+    pr2 has-limit-cauchy-approximation-pseudometric-completion-Metric-Space
 ```
 
 ### The isometry from a Cauchy approximation in the pseudometric completion to its limit
