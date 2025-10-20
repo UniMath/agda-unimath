@@ -62,7 +62,7 @@ is a [retract](foundation.retracts-of-types.md) of its pseudometric completion.
 
 ## Definition
 
-### The pseudometric completion of a metic space
+### The pseudometric completion of a metric space
 
 ```agda
 module _
