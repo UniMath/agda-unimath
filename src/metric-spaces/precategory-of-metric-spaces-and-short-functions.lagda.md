@@ -232,7 +232,6 @@ module _
   {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
   where
-
   equiv-isometric-equiv-iso-short-function-Metric-Space' :
     iso-Precategory precategory-short-function-Metric-Space A B ≃
     isometric-equiv-Metric-Space' A B
