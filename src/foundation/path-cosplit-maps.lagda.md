@@ -232,9 +232,9 @@ is-path-cosplit-id k = is-path-cosplit-retraction k (id , refl-htpy)
 is-trunc-domain-is-path-cosplit-is-trunc-codomain :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
   is-trunc k B → is-path-cosplit k f → is-trunc k A
-is-trunc-domain-is-path-cosplit-is-trunc-codomain neg-two-𝕋
-  {A} {B} {f} is-trunc-B is-cosplit-f =
-  is-trunc-retract-of (f , is-cosplit-f) is-trunc-B
+is-trunc-domain-is-path-cosplit-is-trunc-codomain
+  neg-two-𝕋 {A} {B} {f} is-trunc-B is-cosplit-f =
+  is-trunc-retract-of neg-two-𝕋 (f , is-cosplit-f) is-trunc-B
 is-trunc-domain-is-path-cosplit-is-trunc-codomain
   (succ-𝕋 k) {A} {B} {f} is-trunc-B is-cosplit-f x y =
   is-trunc-domain-is-path-cosplit-is-trunc-codomain k
