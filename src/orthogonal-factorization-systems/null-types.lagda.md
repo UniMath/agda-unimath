@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.null-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
@@ -16,13 +17,17 @@ open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-maps
@@ -235,16 +240,6 @@ module _
   is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
 ```
 
-### Contractible types are null at all types
-
-```agda
-is-null-is-contr :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
-is-null-is-contr {A = A} B is-contr-A =
-  is-null-is-local-terminal-map B A
-    ( is-local-is-contr (terminal-map B) A is-contr-A)
-```
-
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
@@ -270,3 +265,119 @@ module _
         ≃ (Y → Σ A B)
         by inv-distributive-Π-Σ)
 ```
+
+### Contractible types are null at all types
+
+```agda
+is-null-is-contr :
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
+is-null-is-contr {A = A} B is-contr-A =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-contr (terminal-map B) A is-contr-A)
+```
+
+### Propositions are null at inhabited types
+
+```agda
+module _
+  {l1 l2 : Level} {Y : UU l1}
+  where
+
+  is-null-is-prop-is-inhabited' :
+    {P : UU l2} → Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited' {P} y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → f y)
+
+  is-null-is-prop-is-inhabited :
+    {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited {P} is-inhabited-Y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → rec-trunc-Prop (P , is-prop-P) f is-inhabited-Y)
+
+  is-null-prop-is-inhabited :
+    is-inhabited Y → (P : Prop l2) → is-null Y (type-Prop P)
+  is-null-prop-is-inhabited is-inhabited-Y P =
+    is-null-is-prop-is-inhabited is-inhabited-Y (is-prop-type-Prop P)
+```
+
+### Null types are closed under dependent products
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {I : UU l2} {B : I → UU l3}
+  where
+
+  abstract
+    is-null-Π : ((i : I) → is-null Y (B i)) → is-null Y ((i : I) → B i)
+    is-null-Π is-null-B =
+      is-null-is-orthogonal-terminal-maps
+        ( is-orthogonal-right-comp
+          ( terminal-map Y)
+          ( postcomp-Π I (λ {i : I} → terminal-map (B i)))
+          ( terminal-map (I → unit))
+          ( is-orthogonal-is-equiv-right
+            ( terminal-map Y)
+            ( terminal-map (I → unit))
+            ( is-equiv-terminal-map-Π-unit))
+          ( is-orthogonal-right-Π
+            ( terminal-map Y)
+            ( λ i → terminal-map (B i))
+            ( λ i → (is-orthogonal-terminal-maps-is-null (is-null-B i)))))
+```
+
+### Null types are closed under exponentiation
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {I : UU l2} {B : UU l3}
+  where
+
+  is-null-function-type : is-null Y B → is-null Y (I → B)
+  is-null-function-type is-null-B = is-null-Π (λ _ → is-null-B)
+```
+
+### Null types are closed under cartesian products
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  abstract
+    is-null-product : is-null Y A → is-null Y B → is-null Y (A × B)
+    is-null-product is-null-A is-null-B =
+      is-null-is-orthogonal-terminal-maps
+        ( is-orthogonal-right-comp
+          ( terminal-map Y)
+          ( map-product (terminal-map A) (terminal-map B))
+          ( terminal-map (unit × unit))
+          ( is-orthogonal-is-equiv-right
+            ( terminal-map Y)
+            ( terminal-map (unit × unit))
+            ( is-equiv-map-right-unit-law-product))
+          ( is-orthogonal-right-product
+            ( terminal-map Y)
+            ( terminal-map A)
+            ( terminal-map B)
+            ( is-orthogonal-terminal-maps-is-null is-null-A)
+            ( is-orthogonal-terminal-maps-is-null is-null-B)))
+```
+
+### Null types are closed under identity types
+
+> This remains to be formalized.
+
+## See also
+
+- We show that null types are closed under dependent sums in
+  [`null-maps`](orthogonal-factorization-systems.null-maps.md).
+- In
+  [`coproducts-null-types`](orthogonal-factorization-systems.coproducts-null-types.md)
+  we show that `Y`-null types are closed under
+  [coproducts](foundation.coproduct-types.md) if and only if the
+  [booleans](foundation.booleans.md) are `Y`-null.

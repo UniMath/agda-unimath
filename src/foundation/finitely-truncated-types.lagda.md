@@ -105,7 +105,8 @@ module _
   is-finitely-trunc-retract-of :
     {A : UU l1} {B : UU l2} →
     A retract-of B → is-finitely-trunc B → is-finitely-trunc A
-  is-finitely-trunc-retract-of R = map-tot-exists (λ k → is-trunc-retract-of R)
+  is-finitely-trunc-retract-of R =
+    map-tot-exists (λ k → is-trunc-retract-of k R)
 ```
 
 ### Finitely truncated types are closed under equivalences

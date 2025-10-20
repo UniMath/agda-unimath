@@ -29,10 +29,11 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A function `f : A → B` is a monomorphism if whenever we have two functions
-`g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state
-this in Homotopy Type Theory is to say that postcomposition by `f` is an
-embedding.
+A function `f : A → B` is a
+{{#concept "monomorphism" Disambiguation="of types" Agda=is-mono}} if whenever
+we have two functions `g h : X → A` such that `f ∘ g = f ∘ h`, then in fact
+`g = h`. The way to state this in Homotopy Type Theory is to say that
+postcomposition by `f` is an embedding.
 
 ## Definition
 
@@ -43,7 +44,7 @@ module _
   where
 
   is-mono-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-mono-Prop = Π-Prop (UU l3) λ X → is-emb-Prop (postcomp X f)
+  is-mono-Prop = Π-Prop (UU l3) (λ X → is-emb-Prop (postcomp X f))
 
   is-mono : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono = type-Prop is-mono-Prop

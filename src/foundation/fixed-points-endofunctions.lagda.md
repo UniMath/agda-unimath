@@ -18,8 +18,13 @@ open import foundation-core.identity-types
 ## Idea
 
 Given an [endofunction](foundation-core.endomorphisms.md) `f : A → A`, the type
-of {{#concept "fixed points"}} is the type of elements `x : A` such that
-`f x ＝ x`.
+of
+{{#concept "fixed points" Disambiguation="of an endofunction" Agda=fixed-point}}
+is the type of elements `x : A` such that `f x ＝ x`
+
+```text
+  fixed-point f := Σ (x : A), (f x ＝ x).
+```
 
 ## Definitions
 

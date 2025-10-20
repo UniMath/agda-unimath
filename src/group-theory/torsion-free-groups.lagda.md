@@ -157,7 +157,10 @@ module _
       is-torsion-free-Group G → has-unique-torsion-element-Group G
     has-unique-torsion-element-is-torsion-free-Group H =
       fundamental-theorem-id'
-        ( λ where x refl → is-torsion-element-unit-Group G)
+        ( ind-Id
+          ( unit-Group G)
+          ( λ y _ → is-torsion-element-Group G y)
+          ( is-torsion-element-unit-Group G))
         ( λ x →
           is-equiv-has-converse-is-prop
             ( is-set-type-Group G (unit-Group G) x)
