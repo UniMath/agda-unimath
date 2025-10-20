@@ -259,7 +259,7 @@ module _
     cartesian-hom-polynomial-endofunctor 𝑃 𝑄 ≃
     cartesian-hom-polynomial-endofunctor'
   reassociate-type-cartesian-hom-polynomial-endofunctor =
-    ( equiv-tot (λ _ → inv-distributive-Π-Σ)) ∘e (associative-Σ _ _ _)
+    equiv-tot (λ _ → inv-distributive-Π-Σ) ∘e associative-Σ
 ```
 
 ### Truncatedness of the type of cartesian morphisms
