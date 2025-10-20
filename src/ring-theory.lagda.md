@@ -1,5 +1,9 @@
 # Ring theory
 
+## Examples of rings
+
+{{#include tables/rings.md}}
+
 ## Modules in the ring theory namespace
 
 ```agda

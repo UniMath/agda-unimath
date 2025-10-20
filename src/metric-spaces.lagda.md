@@ -36,6 +36,17 @@ property of **indistinguishability of identicals**
 - If every positive rational `d` is an upper bound on the distance from `x` to
   `y`, then `x` and `y` are [equal](foundation-core.identity-types.md).
 
+The relationship to a [real](real-numbers.dedekind-real-numbers.md)-valued
+distance function, called a [metric](metric-spaces.metrics.md), can be recovered
+[if and only if](foundation.logical-equivalences.md) every element of the metric
+space is at
+[bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
+from every other element, and the metric space is
+[located](metric-spaces.located-metric-spaces.md), that is, for every positive
+rational `d₁` and `d₂` with `d₁ < d₂`, and every element `x` and `y` of the
+metric space, `N d₂ x y` [or](foundation.disjunction.md)
+[not](foundation.negation.md) `N d₁ x y`.
+
 ## Instances of metric spaces
 
 {{#include tables/metric-spaces.md}}
@@ -106,6 +117,7 @@ open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public
 open import metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous public
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
 open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
