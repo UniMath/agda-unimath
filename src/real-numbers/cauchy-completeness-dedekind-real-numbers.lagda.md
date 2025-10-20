@@ -9,6 +9,7 @@ module real-numbers.cauchy-completeness-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
@@ -545,16 +546,4 @@ complete-metric-space-ℝ :
   (l : Level) → Complete-Metric-Space (lsuc l) l
 pr1 (complete-metric-space-ℝ l) = metric-space-ℝ l
 pr2 (complete-metric-space-ℝ l) = is-complete-metric-space-ℝ l
-```
-
-### Limits of Cauchy sequences in ℝ
-
-```agda
-cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
-cauchy-sequence-ℝ l =
-  cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
-
-lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
-lim-cauchy-sequence-ℝ {l} =
-  limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
 ```

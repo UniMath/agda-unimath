@@ -25,8 +25,10 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two posets is said to be
-**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two
+[posets](order-theory.posets.md) is said to be
+{{#concept "order preserving" WD="increasing function" WDID=Q3075182 Agda=hom-Poset Disambiguation="map between posets"}}
+if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
 
 ## Definition
 
@@ -85,7 +87,7 @@ module _
     refl-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   htpy-eq-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g → htpy-hom-Poset f g
+    (f g : hom-Poset P Q) → f ＝ g → htpy-hom-Poset f g
   htpy-eq-hom-Poset = htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-torsorial-htpy-hom-Poset :
@@ -99,12 +101,12 @@ module _
     is-equiv-htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   extensionality-hom-Poset :
-    (f g : hom-Poset P Q) → Id f g ≃ htpy-hom-Poset f g
+    (f g : hom-Poset P Q) → (f ＝ g) ≃ htpy-hom-Poset f g
   extensionality-hom-Poset =
     extensionality-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   eq-htpy-hom-Poset :
-    (f g : hom-Poset P Q) → htpy-hom-Poset f g → Id f g
+    (f g : hom-Poset P Q) → htpy-hom-Poset f g → f ＝ g
   eq-htpy-hom-Poset = eq-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-prop-htpy-hom-Poset :
@@ -168,13 +170,13 @@ module _
 
   left-unit-law-comp-hom-Poset :
     (f : hom-Poset P Q) →
-    Id ( comp-hom-Poset P Q Q (id-hom-Poset Q) f) f
+    comp-hom-Poset P Q Q (id-hom-Poset Q) f ＝ f
   left-unit-law-comp-hom-Poset =
     left-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   right-unit-law-comp-hom-Poset :
     (f : hom-Poset P Q) →
-    Id (comp-hom-Poset P P Q f (id-hom-Poset P)) f
+    comp-hom-Poset P P Q f (id-hom-Poset P) ＝ f
   right-unit-law-comp-hom-Poset =
     right-unit-law-comp-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 ```

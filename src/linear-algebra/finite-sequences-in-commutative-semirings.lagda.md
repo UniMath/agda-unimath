@@ -104,10 +104,12 @@ module _
 
   associative-add-fin-sequence-type-Commutative-Semiring :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Commutative-Semiring R n) →
-    ( add-fin-sequence-type-Commutative-Semiring R n
-      ( add-fin-sequence-type-Commutative-Semiring R n v1 v2) v3) ＝
-    ( add-fin-sequence-type-Commutative-Semiring R n v1
-      ( add-fin-sequence-type-Commutative-Semiring R n v2 v3))
+    add-fin-sequence-type-Commutative-Semiring R n
+      ( add-fin-sequence-type-Commutative-Semiring R n v1 v2)
+      ( v3) ＝
+    add-fin-sequence-type-Commutative-Semiring R n
+      ( v1)
+      ( add-fin-sequence-type-Commutative-Semiring R n v2 v3)
   associative-add-fin-sequence-type-Commutative-Semiring =
     associative-add-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```

@@ -175,7 +175,7 @@ module _
 
   antisymmetric-leq-Decidable-Total-Order :
     (x y : type-Decidable-Total-Order) →
-    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → Id x y
+    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → x ＝ y
   antisymmetric-leq-Decidable-Total-Order =
     antisymmetric-leq-Poset poset-Decidable-Total-Order
 
@@ -329,6 +329,24 @@ module _
       ( total-order-Decidable-Total-Order T)
       ( x)
       ( y)
+```
+
+### The minimum of two values is less than or equal to their maximum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  abstract
+    min-leq-max-Decidable-Total-Order :
+      leq-Decidable-Total-Order T
+        ( min-Decidable-Total-Order T x y)
+        ( max-Decidable-Total-Order T x y)
+    min-leq-max-Decidable-Total-Order =
+      min-leq-max-Total-Order (total-order-Decidable-Total-Order T) x y
 ```
 
 ### Decidable total orders are meet semilattices

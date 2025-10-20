@@ -9,12 +9,18 @@ module real-numbers.nonnegative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-nonnegative-rational-numbers
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -36,6 +42,7 @@ open import metric-spaces.metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
@@ -77,6 +84,32 @@ is-nonnegative-real-ℝ⁰⁺ = pr2
 
 ## Properties
 
+### Dedekind cuts of nonnegative real numbers
+
+```agda
+lower-cut-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → subtype l ℚ
+lower-cut-ℝ⁰⁺ (x , _) = lower-cut-ℝ x
+
+is-in-lower-cut-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → ℚ → UU l
+is-in-lower-cut-ℝ⁰⁺ (x , _) = is-in-lower-cut-ℝ x
+
+is-rounded-lower-cut-ℝ⁰⁺ :
+  {l : Level} → (x : ℝ⁰⁺ l) (q : ℚ) →
+  (is-in-lower-cut-ℝ⁰⁺ x q ↔ exists ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-ℝ⁰⁺ x r))
+is-rounded-lower-cut-ℝ⁰⁺ (x , _) = is-rounded-lower-cut-ℝ x
+
+upper-cut-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → subtype l ℚ
+upper-cut-ℝ⁰⁺ (x , _) = upper-cut-ℝ x
+
+is-in-upper-cut-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → ℚ → UU l
+is-in-upper-cut-ℝ⁰⁺ (x , _) = is-in-upper-cut-ℝ x
+
+is-rounded-upper-cut-ℝ⁰⁺ :
+  {l : Level} → (x : ℝ⁰⁺ l) (r : ℚ) →
+  (is-in-upper-cut-ℝ⁰⁺ x r ↔ exists ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-ℝ⁰⁺ x q))
+is-rounded-upper-cut-ℝ⁰⁺ (x , _) = is-rounded-upper-cut-ℝ x
+```
+
 ### The nonnegative real numbers form a set
 
 ```agda
@@ -97,7 +130,7 @@ eq-ℝ⁰⁺ _ _ = eq-type-subtype is-nonnegative-prop-ℝ
 abstract
   is-nonnegative-real-ℚ⁰⁺ : (q : ℚ⁰⁺) → is-nonnegative-ℝ (real-ℚ⁰⁺ q)
   is-nonnegative-real-ℚ⁰⁺ (q , nonneg-q) =
-    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q)
+    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ nonneg-q)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ q = (real-ℚ⁰⁺ q , is-nonnegative-real-ℚ⁰⁺ q)
@@ -247,6 +280,65 @@ module _
       concatenate-leq-le-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
 ```
 
+### A real number is nonnegative if and only if every element of its upper cut is positive
+
+```agda
+abstract
+  is-positive-is-in-upper-cut-ℝ⁰⁺ :
+    {l : Level} → (x : ℝ⁰⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁰⁺ x q →
+    is-positive-ℚ q
+  is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) q x<q =
+    is-positive-le-zero-ℚ
+      ( reflects-le-real-ℚ
+        ( zero-ℚ)
+        ( q)
+        ( concatenate-leq-le-ℝ zero-ℝ x _
+          ( 0≤x)
+          ( le-real-is-in-upper-cut-ℚ q x x<q)))
+
+opaque
+  unfolding leq-ℝ leq-ℝ' real-ℚ
+
+  is-nonnegative-is-positive-upper-cut-ℝ :
+    {l : Level} → (x : ℝ l) → (upper-cut-ℝ x ⊆ is-positive-prop-ℚ) →
+    is-nonnegative-ℝ x
+  is-nonnegative-is-positive-upper-cut-ℝ x Uₓ⊆ℚ⁺ =
+    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ (Uₓ⊆ℚ⁺ q q∈Uₓ))
+```
+
+### A real number is nonnegative if and only if every negative rational number is in its lower cut
+
+```agda
+opaque
+  unfolding leq-ℝ real-ℚ
+
+  is-nonnegative-leq-negative-lower-cut-ℝ :
+    {l : Level} (x : ℝ l) → (is-negative-prop-ℚ ⊆ lower-cut-ℝ x) →
+    is-nonnegative-ℝ x
+  is-nonnegative-leq-negative-lower-cut-ℝ x ℚ⁻⊆Lₓ q q<0 =
+    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q<0)
+
+  leq-negative-lower-cut-is-nonnegative-ℝ :
+    {l : Level} (x : ℝ l) → is-nonnegative-ℝ x →
+    (is-negative-prop-ℚ ⊆ lower-cut-ℝ x)
+  leq-negative-lower-cut-is-nonnegative-ℝ x 0≤x q is-neg-q =
+    0≤x q (le-zero-is-negative-ℚ is-neg-q)
+```
+
+### Every nonnegative real number has a positive rational number in its upper cut
+
+```agda
+abstract
+  exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ :
+    {l : Level} → (x : ℝ⁰⁺ l) →
+    exists ℚ⁺ (λ q → upper-cut-ℝ⁰⁺ x (rational-ℚ⁺ q))
+  exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x =
+    let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → upper-cut-ℝ⁰⁺ x (rational-ℚ⁺ q)))
+    in do
+      (q , x<q) ← is-inhabited-upper-cut-ℝ (real-ℝ⁰⁺ x)
+      intro-exists (q , is-positive-is-in-upper-cut-ℝ⁰⁺ x q x<q) x<q
+```
+
 ### Every nonnegative real number is less than some positive rational number
 
 ```agda
@@ -258,24 +350,9 @@ module _
     le-some-positive-rational-ℝ⁰⁺ :
       exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q))
     le-some-positive-rational-ℝ⁰⁺ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃ ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q)))
-      in do
-        (q , x<q) ← le-some-rational-ℝ (real-ℝ⁰⁺ x)
-        intro-exists
-          ( q ,
-            is-positive-le-zero-ℚ
-              ( q)
-              ( reflects-le-real-ℚ zero-ℚ q
-                ( concatenate-leq-le-ℝ
-                  ( zero-ℝ)
-                  ( real-ℝ⁰⁺ x)
-                  ( real-ℚ q)
-                  ( is-nonnegative-real-ℝ⁰⁺ x)
-                  ( x<q))))
-          ( x<q)
+      map-tot-exists
+        ( λ (q , _) x<q → le-real-is-in-upper-cut-ℚ q (real-ℝ⁰⁺ x) x<q)
+        ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Addition on nonnegative real numbers
@@ -440,7 +517,6 @@ module _
       le-ℝ (real-ℝ⁰⁺ x) (real-ℚ q) → is-positive-ℚ q
     is-positive-le-nonnegative-real-ℚ x<q =
       is-positive-le-zero-ℚ
-        ( q)
         ( reflects-le-real-ℚ _ _
           ( concatenate-leq-le-ℝ _ _ _ (is-nonnegative-real-ℝ⁰⁺ x) x<q))
 ```
@@ -540,4 +616,37 @@ module _
 ```agda
 metric-space-ℝ⁰⁺ : (l : Level) → Metric-Space (lsuc l) l
 metric-space-ℝ⁰⁺ l = metric-space-subset-ℝ (is-nonnegative-prop-ℝ {l})
+```
+
+### `x ≤ y` if and only if `y - x` is nonnegative
+
+```agda
+module _
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} (H : leq-ℝ x y)
+  where
+
+  abstract
+    is-nonnegative-diff-leq-ℝ : is-nonnegative-ℝ (y -ℝ x)
+    is-nonnegative-diff-leq-ℝ =
+      leq-transpose-left-add-ℝ
+        ( zero-ℝ)
+        ( x)
+        ( y)
+        ( inv-tr
+          ( λ z → leq-ℝ z y)
+          ( left-unit-law-add-ℝ x)
+          ( H))
+
+  nonnegative-diff-leq-ℝ : ℝ⁰⁺ (l1 ⊔ l2)
+  nonnegative-diff-leq-ℝ = (y -ℝ x , is-nonnegative-diff-leq-ℝ)
+
+abstract
+  leq-is-nonnegative-diff-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-nonnegative-ℝ (y -ℝ x) →
+    leq-ℝ x y
+  leq-is-nonnegative-diff-ℝ x y 0≤y-x =
+    tr
+      ( λ z → leq-ℝ z y)
+      ( left-unit-law-add-ℝ x)
+      ( leq-transpose-right-diff-ℝ _ _ _ 0≤y-x)
 ```

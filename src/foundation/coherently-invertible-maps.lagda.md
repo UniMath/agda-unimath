@@ -78,7 +78,7 @@ module _
     is-proof-irrelevant-is-coherently-invertible H =
       is-contr-equiv'
         ( _)
-        ( associative-Σ _ _ _)
+        ( associative-Σ)
         ( is-contr-Σ
           ( is-contr-section-is-coherently-invertible H)
           ( section-is-coherently-invertible H)

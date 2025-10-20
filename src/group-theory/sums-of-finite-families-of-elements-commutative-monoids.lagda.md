@@ -25,6 +25,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-cartesian-product-types
@@ -39,9 +40,11 @@ open import group-theory.commutative-monoids
 open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.finite-types
@@ -582,10 +585,7 @@ module _
             map-coproduct
               ( id)
               ( map-left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘
-            map-right-distributive-Σ-coproduct
-              ( Fin n)
-              ( unit)
-              ( type-Finite-Type ∘ B))
+            map-right-distributive-Σ-coproduct (type-Finite-Type ∘ B))
         by
           sum-equiv-finite-Commutative-Monoid
             ( M)
@@ -597,10 +597,7 @@ module _
               ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘e
-                right-distributive-Σ-coproduct
-                  ( Fin n)
-                  ( unit)
-                  ( type-Finite-Type ∘ B)))
+                right-distributive-Σ-coproduct (type-Finite-Type ∘ B)))
             _
       ＝
         sum-finite-Commutative-Monoid
@@ -734,88 +731,165 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Commutative-Monoid l1) (A : Finite-Type l2)
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
   where
 
   interchange-sum-mul-finite-Commutative-Monoid :
-    (f g : type-Finite-Type A → type-Commutative-Monoid G) →
-    sum-finite-Commutative-Monoid G A
-      (λ a → mul-Commutative-Monoid G (f a) (g a)) ＝
-    mul-Commutative-Monoid G
-      (sum-finite-Commutative-Monoid G A f)
-      (sum-finite-Commutative-Monoid G A g)
+    (f g : type-Finite-Type A → type-Commutative-Monoid M) →
+    sum-finite-Commutative-Monoid M A
+      (λ a → mul-Commutative-Monoid M (f a) (g a)) ＝
+    mul-Commutative-Monoid M
+      (sum-finite-Commutative-Monoid M A f)
+      (sum-finite-Commutative-Monoid M A g)
   interchange-sum-mul-finite-Commutative-Monoid f g =
     equational-reasoning
-    sum-finite-Commutative-Monoid G A
-      ( λ a → mul-Commutative-Monoid G (f a) (g a))
+    sum-finite-Commutative-Monoid M A
+      ( λ a → mul-Commutative-Monoid M (f a) (g a))
     ＝
       sum-finite-Commutative-Monoid
-        ( G)
+        ( M)
         ( A)
-        ( λ a → sum-fin-sequence-type-Commutative-Monoid G 2 (h a))
+        ( λ a → sum-fin-sequence-type-Commutative-Monoid M 2 (h a))
         by
           htpy-sum-finite-Commutative-Monoid
-            ( G)
+            ( M)
             ( A)
-            ( λ a → inv (compute-sum-two-elements-Commutative-Monoid G (h a)))
+            ( λ a → inv (compute-sum-two-elements-Commutative-Monoid M (h a)))
     ＝
       sum-finite-Commutative-Monoid
-        ( G)
+        ( M)
         ( A)
         ( λ a →
-          sum-finite-Commutative-Monoid G (Fin-Finite-Type 2) (h a))
+          sum-finite-Commutative-Monoid M (Fin-Finite-Type 2) (h a))
       by
-        htpy-sum-finite-Commutative-Monoid G A
+        htpy-sum-finite-Commutative-Monoid M A
           ( λ a →
             inv
               ( eq-sum-finite-sum-count-Commutative-Monoid
-                ( G)
+                ( M)
                 ( Fin-Finite-Type 2)
                 ( count-Fin 2)
                 ( h a)))
     ＝
       sum-finite-Commutative-Monoid
-        ( G)
+        ( M)
         ( Σ-Finite-Type A (λ _ → Fin-Finite-Type 2))
         ( ind-Σ h)
-      by inv (sum-Σ-finite-Commutative-Monoid G A (λ _ → Fin-Finite-Type 2) h)
+      by inv (sum-Σ-finite-Commutative-Monoid M A (λ _ → Fin-Finite-Type 2) h)
     ＝
       sum-finite-Commutative-Monoid
-        ( G)
+        ( M)
         ( Σ-Finite-Type (Fin-Finite-Type 2) (λ _ → A))
         ( λ (i , a) → h a i)
       by
-        sum-equiv-finite-Commutative-Monoid G _ _
+        sum-equiv-finite-Commutative-Monoid M _ _
           ( commutative-product)
           ( ind-Σ h)
     ＝
       sum-finite-Commutative-Monoid
-        ( G)
+        ( M)
         ( Fin-Finite-Type 2)
-        ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
-      by sum-Σ-finite-Commutative-Monoid G _ _ _
+        ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
+      by sum-Σ-finite-Commutative-Monoid M _ _ _
     ＝
       sum-fin-sequence-type-Commutative-Monoid
-        ( G)
+        ( M)
         ( 2)
-        ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
+        ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
       by
         eq-sum-finite-sum-count-Commutative-Monoid
-          ( G)
+          ( M)
           ( Fin-Finite-Type 2)
           ( count-Fin 2)
           ( _)
     ＝
       mul-Commutative-Monoid
-        ( G)
-        ( sum-finite-Commutative-Monoid G A f)
-        ( sum-finite-Commutative-Monoid G A g)
+        ( M)
+        ( sum-finite-Commutative-Monoid M A f)
+        ( sum-finite-Commutative-Monoid M A g)
       by
         compute-sum-two-elements-Commutative-Monoid
-          ( G)
-          ( λ i → sum-finite-Commutative-Monoid G A (λ a → h a i))
+          ( M)
+          ( λ i → sum-finite-Commutative-Monoid M A (λ a → h a i))
     where
-      h : type-Finite-Type A → Fin 2 → type-Commutative-Monoid G
+      h : type-Finite-Type A → Fin 2 → type-Commutative-Monoid M
       h a (inl (inr _)) = f a
       h a (inr _) = g a
+```
+
+### Decomposing sums via decidable subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  opaque
+    unfolding is-equiv-comp
+
+    decompose-sum-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      sum-finite-Commutative-Monoid M A f ＝
+      mul-Commutative-Monoid M
+        ( sum-finite-Commutative-Monoid M
+          ( finite-type-subset-Finite-Type A P)
+          ( f ∘ inclusion-subset-Finite-Type A P))
+        ( sum-finite-Commutative-Monoid M
+          ( finite-type-complement-subset-Finite-Type A P)
+          ( f ∘ inclusion-complement-subset-Finite-Type A P))
+    decompose-sum-decidable-subset-finite-Commutative-Monoid f =
+      sum-equiv-finite-Commutative-Monoid M
+        ( A)
+        ( coproduct-Finite-Type
+          ( finite-type-subset-Finite-Type A P)
+          ( finite-type-complement-subset-Finite-Type A P))
+        ( equiv-coproduct-decomposition-subset-Finite-Type A P)
+        ( f) ∙
+      distributive-distributive-sum-coproduct-finite-Commutative-Monoid M
+        ( _)
+        ( _)
+        ( _)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (M : Commutative-Monoid l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-unit-Commutative-Monoid M (f a)) →
+      sum-finite-Commutative-Monoid M A f ＝
+      sum-finite-Commutative-Monoid M
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Commutative-Monoid f H =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid M A P f ∙
+      ap-mul-Commutative-Monoid M
+        ( htpy-sum-finite-Commutative-Monoid M _ (ind-Σ H) ∙
+          sum-zero-finite-Commutative-Monoid M _)
+        ( refl) ∙
+      left-unit-law-mul-Commutative-Monoid M _
+
+    vanish-sum-complement-decidable-subset-finite-Commutative-Monoid :
+      (f : type-Finite-Type A → type-Commutative-Monoid M) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-unit-Commutative-Monoid M (f a)) →
+      sum-finite-Commutative-Monoid M A f ＝
+      sum-finite-Commutative-Monoid M
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Commutative-Monoid f H =
+      decompose-sum-decidable-subset-finite-Commutative-Monoid M A P f ∙
+      ap-mul-Commutative-Monoid M
+        ( refl)
+        ( htpy-sum-finite-Commutative-Monoid M _ (ind-Σ H) ∙
+          sum-zero-finite-Commutative-Monoid M _) ∙
+      right-unit-law-mul-Commutative-Monoid M _
 ```

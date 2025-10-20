@@ -13,11 +13,13 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -190,13 +192,12 @@ module _
   abstract
     compute-geometric-sequence-ℚ⁺ :
       (n : ℕ) →
-      Id
-        ( mul-ℚ⁺
-          ( initial-term-geometric-sequence-ℚ⁺ u)
-          ( power-Monoid monoid-mul-ℚ⁺
-            ( n)
-            ( common-ratio-geometric-sequence-ℚ⁺ u)))
-        ( seq-geometric-sequence-ℚ⁺ u n)
+      mul-ℚ⁺
+        ( initial-term-geometric-sequence-ℚ⁺ u)
+        ( power-Monoid monoid-mul-ℚ⁺
+          ( n)
+          ( common-ratio-geometric-sequence-ℚ⁺ u)) ＝
+      seq-geometric-sequence-ℚ⁺ u n
     compute-geometric-sequence-ℚ⁺ n =
       ( compute-standard-geometric-sequence-ℚ⁺
         ( initial-term-geometric-sequence-ℚ⁺ u)
