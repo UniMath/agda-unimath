@@ -9,6 +9,7 @@ module metric-spaces.metric-quotients-of-pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
