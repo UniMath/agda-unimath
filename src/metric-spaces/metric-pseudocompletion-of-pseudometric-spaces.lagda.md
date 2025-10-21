@@ -65,28 +65,28 @@ of `M` is the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 
 ```text
-[M] = C M / ~
+[C M] = C M / ~
 ```
 
 There are [isometries](metric-spaces.isometries-pseudometric-spaces.md)
 
 ```text
-M → C M → [M]
+M → C M → [C M]
 ```
 
 The metric pseudocompletion of the pseudometric completion of a pseudometric
 space is the metric pseudocompletion of the pseudometric space:
 
 ```text
-[C M] ＝ [M]
+[C (C M)] ＝ [C M]
 ```
 
 A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
-in `[M]`, `f : C [M]` is
+in `[C M]`, `f : C [C M]` is
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) if
 and only if it is
 [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) in
-`C [M]` to the
+`C [C M]` to the
 [pointwise quotient](metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces.md)
 of some
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)

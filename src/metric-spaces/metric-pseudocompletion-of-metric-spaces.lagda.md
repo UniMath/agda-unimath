@@ -60,9 +60,27 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-Metric pseudocompletion of metric spaces.
+The
+{{#concept "metric pseudocompletion" Disambiguation="of a metric space Agda=metric-pseudocompletion-Metric-Space}}
+of a [metric space](metric-spaces.metric-spaces.md) `M` is the
+[metric pseudocompletion](metric-spaces.metric-pseudocompletion-of-pseudometric-spaces.md)
+of its underlying [pseudometric space](metric-space.pseudometric-spaces.md);
+i.e. the
+[metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
+`[C M]` of its
+[pseudometric completion](metric-spaces.pseudometric-completion-of-metric-spaces.md)
+`C M`.
 
-## Definition
+The natural [isometry](metric-spaces.isometries-metric-spaces.md)
+
+```text
+M → [C M]
+```
+
+is an [equivalence](foundation.equivalences.md) if and only if `M` is
+[complete](metric-space.complete-metric-spaces.md).
+
+## Definitions
 
 ### The metric pseudocompletion of a metric space
 
@@ -87,8 +105,6 @@ module _
   type-metric-pseudocompletion-Metric-Space =
     type-Metric-Space metric-pseudocompletion-Metric-Space
 ```
-
-## Properties
 
 ### The isometry from the pseudometric completion of a metric space into its metric pseudocompletion
 
@@ -152,6 +168,8 @@ module _
       ( metric-pseudocompletion-Metric-Space M)
       ( isometry-metric-pseudocompletion-Metric-Space)
 ```
+
+## Properties
 
 ### The mapping from a complete metric space into its metric pseudocompletion is an isometric equivalence
 
