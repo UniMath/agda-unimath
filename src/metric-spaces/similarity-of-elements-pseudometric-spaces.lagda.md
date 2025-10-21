@@ -306,7 +306,7 @@ module _
       ( iff-same-neighbors-sim-Pseudometric-Space A)
 ```
 
-### Short maps between pseudometric spaces preserves similarity
+### Short maps between pseudometric spaces preserve similarity
 
 ```agda
 module _
