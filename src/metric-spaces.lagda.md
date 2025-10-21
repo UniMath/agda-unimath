@@ -62,6 +62,7 @@ open import metric-spaces.bounded-distance-decompositions-of-metric-spaces publi
 open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
+open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
@@ -101,6 +102,9 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
+open import metric-spaces.metric-pseudocompletion-of-metric-spaces public
+open import metric-spaces.metric-pseudocompletion-of-pseudometric-spaces public
+open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
@@ -125,6 +129,8 @@ open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.preimages-rational-neighborhood-relations public
+open import metric-spaces.pseudometric-completion-of-metric-spaces public
+open import metric-spaces.pseudometric-completion-of-pseudometric-spaces public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public

@@ -145,6 +145,23 @@ module _
         ( Nxy)
 ```
 
+### The value of a constant Cauchy approximation is its limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (x : type-Pseudometric-Space A)
+  where
+
+  is-limit-const-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( A)
+      ( const-cauchy-approximation-Pseudometric-Space A x)
+      ( x)
+  is-limit-const-cauchy-approximation-Pseudometric-Space ε δ =
+    refl-neighborhood-Pseudometric-Space A _ x
+```
+
 ## References
 
 Our definition of limit of Cauchy approximation follows Definition 11.2.10 of
