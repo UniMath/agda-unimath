@@ -246,13 +246,13 @@ module _
         ( inv-sim-Pseudometric-Space A x~x')
         ( inv-sim-Pseudometric-Space A y~y')
 
-    iff-same-neighbors-sim-Pseudometric-Space :
+    same-neighbors-iff-sim-Pseudometric-Space :
       { x y : type-Pseudometric-Space A} →
       ( sim-Pseudometric-Space A x y) ↔
       ( (d : ℚ⁺) (z : type-Pseudometric-Space A) →
         neighborhood-Pseudometric-Space A d x z ↔
         neighborhood-Pseudometric-Space A d y z)
-    iff-same-neighbors-sim-Pseudometric-Space =
+    same-neighbors-iff-sim-Pseudometric-Space =
       ( λ x≍y d z →
         ( preserves-neighborhood-left-sim-Pseudometric-Space x≍y d z) ,
         ( preserves-neighborhood-left-sim-Pseudometric-Space
@@ -282,7 +282,7 @@ module _
         ( neighborhood-prop-Pseudometric-Space A)
         ( x)
         ( y))
-    iff-same-neighbors-same-neighborhood-Pseudometric-Space =
+    same-neighbors-iff-same-neighborhood-Pseudometric-Space =
       ( λ H d z →
         ( H d z) ,
         ( inv-neighborhood-Pseudometric-Space A ∘
@@ -301,9 +301,9 @@ module _
         ( neighborhood-prop-Pseudometric-Space A)
         ( x)
         ( y))
-    iff-same-neighborhood-sim-Pseudometric-Space =
-      ( iff-same-neighbors-same-neighborhood-Pseudometric-Space) ∘iff
-      ( iff-same-neighbors-sim-Pseudometric-Space A)
+    same-neighborhood-iff-sim-Pseudometric-Space =
+      ( same-neighbors-iff-same-neighborhood-Pseudometric-Space) ∘iff
+      ( same-neighbors-iff-sim-Pseudometric-Space A)
 ```
 
 ### Short maps between pseudometric spaces preserve similarity
