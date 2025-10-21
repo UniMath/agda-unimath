@@ -64,7 +64,7 @@ The
 {{#concept "metric pseudocompletion" Disambiguation="of a metric space Agda=metric-pseudocompletion-Metric-Space}}
 of a [metric space](metric-spaces.metric-spaces.md) `M` is the
 [metric pseudocompletion](metric-spaces.metric-pseudocompletion-of-pseudometric-spaces.md)
-of its underlying [pseudometric space](metric-space.pseudometric-spaces.md);
+of its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md);
 i.e. the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 `[C M]` of its
@@ -78,7 +78,7 @@ M → [C M]
 ```
 
 is an [equivalence](foundation.equivalences.md) if and only if `M` is
-[complete](metric-space.complete-metric-spaces.md).
+[complete](metric-spaces.complete-metric-spaces.md).
 
 ## Definitions
 
