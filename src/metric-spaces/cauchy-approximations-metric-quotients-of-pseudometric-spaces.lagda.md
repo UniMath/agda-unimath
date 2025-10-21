@@ -83,7 +83,7 @@ of the metric quotient) to the pointwise quotient of
 pseudometric space.
 
 The pointwise quotient of Cauchy approximations preserves
-[limits](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces). The
+[limits](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md). The
 pointwise quotient of a Cauchy approximation has a lift. A Cauchy approximation
 that admits a
 [limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md)
