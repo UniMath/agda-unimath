@@ -253,40 +253,13 @@ opaque
     is-in-upper-cut-ℝ (square-ℝ x) (square-ℚ q)
   is-in-upper-cut-square-pos-neg-ℝ x q x<q -q<x =
     let
-      -- this lemma follows from the absolute value being nonnegative, but
-      -- for circular dependency reasons we need to prove it here
-      is-pos-q =
-        rec-coproduct
-          ( id)
-          ( λ is-nonpos-q →
-            ex-falso
-              ( is-disjoint-cut-ℝ
-                ( x)
-                ( zero-ℚ)
-                ( leq-lower-cut-ℝ
-                    ( x)
-                    ( zero-ℚ)
-                    ( neg-ℚ q)
-                    ( leq-zero-is-nonnegative-ℚ
-                      ( is-nonnegative-neg-is-nonpositive-ℚ is-nonpos-q))
-                    ( -q<x) ,
-                  leq-upper-cut-ℝ
-                    ( x)
-                    ( q)
-                    ( zero-ℚ)
-                    ( leq-zero-is-nonpositive-ℚ is-nonpos-q)
-                    ( x<q))))
-          ( decide-is-positive-is-nonpositive-ℚ q)
-      q⁺ = (q , is-pos-q)
-      [-q,q] = ((neg-ℚ q , q) , leq-negative-positive-ℚ (neg-ℚ⁺ q⁺) q⁺)
+      [-q,q] = ((neg-ℚ q , q) , leq-lower-upper-cut-ℝ x (neg-ℚ q) q -q<x x<q)
     in
       leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ x x (square-ℚ q)
         ( intro-exists
           ( ([-q,q] , -q<x , x<q) , ([-q,q] , -q<x , x<q))
           ( inv-tr
             ( λ r → leq-ℚ r (q *ℚ q))
-            ( upper-bound-square-even-interval-ℚ
-              ( (neg-ℚ q , q) , leq-lower-upper-cut-ℝ x (neg-ℚ q) q -q<x x<q)
-              ( refl))
+            ( upper-bound-square-even-interval-ℚ [-q,q] refl)
             ( refl-leq-ℚ (q *ℚ q))))
 ```
