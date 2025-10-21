@@ -64,6 +64,8 @@ open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
@@ -125,8 +127,6 @@ open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.preimages-rational-neighborhood-relations public
-open import metric-spaces.pseudometric-completion-of-metric-spaces public
-open import metric-spaces.pseudometric-completion-of-pseudometric-spaces public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public
