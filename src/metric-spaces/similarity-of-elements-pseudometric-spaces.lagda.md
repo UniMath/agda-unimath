@@ -294,7 +294,7 @@ module _
       ( iff-left-neighbor-sim-Rational-Neighborhood-Relation
         ( neighborhood-prop-Pseudometric-Space A))
 
-    iff-same-neighborhood-sim-Pseudometric-Space :
+    same-neighborhood-iff-sim-Pseudometric-Space :
       { x y : type-Pseudometric-Space A} →
       ( sim-Pseudometric-Space A x y) ↔
       ( sim-Rational-Neighborhood-Relation
