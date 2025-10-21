@@ -273,7 +273,7 @@ module _
   where
 
   abstract
-    iff-same-neighbors-same-neighborhood-Pseudometric-Space :
+    same-neighbors-iff-same-neighborhood-Pseudometric-Space :
       {x y : type-Pseudometric-Space A} →
       ( (d : ℚ⁺) (z : type-Pseudometric-Space A) →
         neighborhood-Pseudometric-Space A d x z ↔
