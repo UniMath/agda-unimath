@@ -56,7 +56,41 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-Metric pseudocompletion of pseudometric spaces.
+Let `M` be a [pseudometric space](metric-spaces.pseudometric-spaces.md) and
+`C M` denote its
+[pseudometric completion](metric-spaces.pseudometric-completion-of-pseudometric-spaces.md);
+the
+{{#concept "metric pseudocompletion" Disambiguation="of a pseudometric space" Agda=metric-pseudocompletion-Pseudometric-Space}}
+of `M` is the
+[metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
+
+```text
+[M] = C M / ~
+```
+
+There are [isometries](metric-spaces.isometries-pseudometric-spaces.md)
+
+```text
+M → C M → [M]
+```
+
+The metric pseudocompletion of the pseudometric completion of a pseudometric
+space is the metric pseudocompletion of the pseudometric space:
+
+```text
+[C M] ＝ [M]
+```
+
+A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
+in `[M]`, `f : C [M]` is
+[convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) if
+and only if it is
+[similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) in
+`C [M]` to the
+[pointwise quotient](metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces.md)
+of some
+[Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+`g : C (C M)`.
 
 ## Definition
 
@@ -173,7 +207,7 @@ module _
       ( isometry-metric-pseudocompletion-pseudometric-completion²-Pseudometric-Space)
 ```
 
-### The short map from the metric pseudocompletion of the pseudometric completion of a pseudometric space into its metric pseudocompletion
+### The short isomorphism from the metric pseudocompletion of the pseudometric completion of a pseudometric space into its metric pseudocompletion
 
 ```agda
 module _
@@ -237,21 +271,17 @@ module _
     short-map-short-function-metric-quotient-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space P)
       ( metric-pseudocompletion-pseudometric-completion-Pseudometric-Space P)
-      ( short-isometry-Pseudometric-Space
+      ( comp-short-function-Pseudometric-Space
         ( pseudometric-completion-Pseudometric-Space P)
+        ( pseudometric-completion-Pseudometric-Space
+          ( pseudometric-completion-Pseudometric-Space P))
         ( pseudometric-metric-pseudocompletion-Pseudometric-Space
           ( pseudometric-completion-Pseudometric-Space P))
-        ( comp-isometry-Pseudometric-Space
-          ( pseudometric-completion-Pseudometric-Space P)
+        ( short-map-metric-quotient-Pseudometric-Space
           ( pseudometric-completion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))
-          ( pseudometric-metric-pseudocompletion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))
-          ( isometry-metric-quotient-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space
-              ( pseudometric-completion-Pseudometric-Space P)))
-          ( isometry-pseudometric-completion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))))
+            ( pseudometric-completion-Pseudometric-Space P)))
+        ( short-map-pseudometric-completion-Pseudometric-Space
+          ( pseudometric-completion-Pseudometric-Space P)))
 
   map-inv-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space :
     type-function-Metric-Space
@@ -283,21 +313,17 @@ module _
     compute-map-short-function-metric-quotient-Pseudometric-Space
       ( pseudometric-completion-Pseudometric-Space P)
       ( metric-pseudocompletion-pseudometric-completion-Pseudometric-Space P)
-      ( short-isometry-Pseudometric-Space
+      ( comp-short-function-Pseudometric-Space
         ( pseudometric-completion-Pseudometric-Space P)
+        ( pseudometric-completion-Pseudometric-Space
+          ( pseudometric-completion-Pseudometric-Space P))
         ( pseudometric-metric-pseudocompletion-Pseudometric-Space
           ( pseudometric-completion-Pseudometric-Space P))
-        ( comp-isometry-Pseudometric-Space
-          ( pseudometric-completion-Pseudometric-Space P)
+        ( short-map-metric-quotient-Pseudometric-Space
           ( pseudometric-completion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))
-          ( pseudometric-metric-pseudocompletion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))
-          ( isometry-metric-quotient-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space
-              ( pseudometric-completion-Pseudometric-Space P)))
-          ( isometry-pseudometric-completion-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P))))
+            ( pseudometric-completion-Pseudometric-Space P)))
+        ( short-map-pseudometric-completion-Pseudometric-Space
+          ( pseudometric-completion-Pseudometric-Space P)))
 
   is-section-map-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space :
     ( map-metric-pseudocompletion-pseudometric-completion-Pseudometric-Space ∘
@@ -646,6 +672,8 @@ module _
           ( P)))
 ```
 
+### Cauchy approximations similar to pointwise quotient of Cauchy approximations in the pseudometric completion are convergent
+
 ```agda
 module _
   {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
@@ -770,35 +798,4 @@ module _
         ( pseudometric-completion-Pseudometric-Space P)
         ( u))
       ( is-convergent-has-lift-cauchy-approximation-metric-pseudocompletion-Pseudometric-Space)
-```
-
-TO BE REMOVED. JUST HERE FOR EXPOSITORY PURPOSE.
-
-```agda
-module _
-  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
-  where
-
-  lemma-is-convergent-cauchy-approximation-metric-pseudocompletion-Pseudometric-Space :
-    ( u :
-      cauchy-approximation-Metric-Space
-        ( metric-pseudocompletion-Pseudometric-Space P)) →
-    is-convergent-cauchy-approximation-Metric-Space
-      ( metric-pseudocompletion-Pseudometric-Space P)
-      ( u) ↔
-    exists
-      ( cauchy-approximation-Pseudometric-Space
-        ( pseudometric-completion-Pseudometric-Space P))
-      ( λ v →
-        sim-prop-Pseudometric-Space
-          ( pseudometric-completion-Pseudometric-Space
-            ( pseudometric-metric-pseudocompletion-Pseudometric-Space P))
-          ( u)
-          ( map-metric-quotient-cauchy-approximation-Pseudometric-Space
-            ( pseudometric-completion-Pseudometric-Space P)
-            ( v)))
-  lemma-is-convergent-cauchy-approximation-metric-pseudocompletion-Pseudometric-Space
-    =
-    iff-has-lift-is-convergent-cauchy-approximation-metric-pseudocompletion-Pseudometric-Space
-      ( P)
 ```

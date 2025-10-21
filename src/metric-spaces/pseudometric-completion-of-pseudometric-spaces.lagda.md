@@ -361,6 +361,16 @@ module _
   isometry-pseudometric-completion-Pseudometric-Space =
     ( map-pseudometric-completion-Pseudometric-Space ,
       is-isometry-map-pseudometric-completion-Pseudometric-Space)
+
+  short-map-pseudometric-completion-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( M)
+      ( pseudometric-completion-Pseudometric-Space M)
+  short-map-pseudometric-completion-Pseudometric-Space =
+    short-isometry-Pseudometric-Space
+      ( M)
+      ( pseudometric-completion-Pseudometric-Space M)
+      ( isometry-pseudometric-completion-Pseudometric-Space)
 ```
 
 ### Convergent Cauchy approximations are similar to constant Cauchy approximations in the pseudometric completion
