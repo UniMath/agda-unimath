@@ -56,9 +56,10 @@ def make_definition_regex(definition):
 
 
 def make_loose_definition_regex(definition):
+    escaped = re.escape(definition)
     return re.compile(
-        definition + r'\s+:(?=[\s({])|' +
-        r'(?:data|record|infix[lr]?(?:\s+\d+)?)\s+' + definition
+        escaped + r'\s+:(?=[\s({])|' +
+        r'(?:data|record|infix[lr]?(?:\s+\d+)?)\s+' + escaped
     )
 
 
