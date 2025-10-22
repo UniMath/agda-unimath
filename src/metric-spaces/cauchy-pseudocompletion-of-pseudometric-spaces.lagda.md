@@ -582,7 +582,7 @@ module _
   ( d : ℚ⁺)
   ( u v :
     cauchy-approximation-Pseudometric-Space
-    ( cauchy-pseudocompletion-Pseudometric-Space M))
+      ( cauchy-pseudocompletion-Pseudometric-Space M))
   where
 
   abstract
