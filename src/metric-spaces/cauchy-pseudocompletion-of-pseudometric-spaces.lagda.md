@@ -109,19 +109,17 @@ module _
       neighborhood-cauchy-pseudocompletion-Pseudometric-Space M d x x
     is-reflexive-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
       d x δ ε =
-      let
-        xδ = map-cauchy-approximation-Pseudometric-Space M x δ
-        xε = map-cauchy-approximation-Pseudometric-Space M x ε
-      in
-        monotonic-neighborhood-Pseudometric-Space M xδ xε
-          ( δ +ℚ⁺ ε)
-          ( δ +ℚ⁺ ε +ℚ⁺ d)
-          ( le-right-add-rational-ℚ⁺ _ d)
-          ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
-            ( M)
-            ( x)
-            ( δ)
-            ( ε))
+      monotonic-neighborhood-Pseudometric-Space M
+        ( map-cauchy-approximation-Pseudometric-Space M x δ)
+        ( map-cauchy-approximation-Pseudometric-Space M x ε)
+        ( δ +ℚ⁺ ε)
+        ( δ +ℚ⁺ ε +ℚ⁺ d)
+        ( le-right-add-rational-ℚ⁺ _ d)
+        ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+          ( M)
+          ( x)
+          ( δ)
+          ( ε))
 ```
 
 ### The neighborhood relation is symmetric
@@ -469,17 +467,10 @@ module _
       (ε₁ , ε₂ , ε₁+ε₂=ε) = split-ℚ⁺ ε
 
       lemma-δ+ε :
-        (δ₁ +ℚ⁺ ε₁ +ℚ⁺ (δ₂ +ℚ⁺ ε₂)) ＝ δ +ℚ⁺ ε
+        ((δ₁ +ℚ⁺ ε₁) +ℚ⁺ (δ₂ +ℚ⁺ ε₂)) ＝ δ +ℚ⁺ ε
       lemma-δ+ε =
-        ( interchange-law-add-add-ℚ⁺
-          ( δ₁)
-          ( ε₁)
-          ( δ₂)
-          ( ε₂)) ∙
-        ( ap-binary
-          ( add-ℚ⁺)
-          ( δ₁+δ₂=δ)
-          ( ε₁+ε₂=ε))
+        ( interchange-law-add-add-ℚ⁺ δ₁ ε₁ δ₂ ε₂) ∙
+        ( ap-binary add-ℚ⁺ δ₁+δ₂=δ ε₁+ε₂=ε)
     in
       tr
         ( is-upper-bound-dist-Pseudometric-Space
@@ -509,7 +500,7 @@ module _
       (θ₁ , θ₂ , θ₁+θ₂=θ) = split-ℚ⁺ θ
 
       lemma-η+θ+δ :
-        ( η +ℚ⁺ θ₁ +ℚ⁺ (δ +ℚ⁺ θ₂)) ＝ η +ℚ⁺ θ +ℚ⁺ δ
+        ((η +ℚ⁺ θ₁) +ℚ⁺ (δ +ℚ⁺ θ₂)) ＝ η +ℚ⁺ θ +ℚ⁺ δ
       lemma-η+θ+δ =
         ( interchange-law-add-add-ℚ⁺ η θ₁ δ θ₂) ∙
         ( ap
