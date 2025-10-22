@@ -693,7 +693,7 @@ module _
       ( d : ℚ⁺) →
       ( u v :
         cauchy-approximation-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space M)) →
+          ( cauchy-pseudocompletion-Pseudometric-Space M)) →
       neighborhood-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M)
         ( d)
