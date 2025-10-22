@@ -259,19 +259,19 @@ module _
       neighborhood-cauchy-pseudocompletion-Pseudometric-Space M ε x y
     is-saturated-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
       d x y H δ ε =
-        let
-          xδ = map-cauchy-approximation-Pseudometric-Space M x δ
-          yε = map-cauchy-approximation-Pseudometric-Space M y ε
-        in
-          saturated-neighborhood-Pseudometric-Space M
-            ( δ +ℚ⁺ ε +ℚ⁺ d)
-            ( xδ)
-            ( yε)
-            ( λ θ →
-              tr
-                ( λ η → neighborhood-Pseudometric-Space M η xδ yε)
-                ( inv (associative-add-ℚ⁺ _ _ _))
-                ( H θ δ ε))
+      let
+        xδ = map-cauchy-approximation-Pseudometric-Space M x δ
+        yε = map-cauchy-approximation-Pseudometric-Space M y ε
+      in
+        saturated-neighborhood-Pseudometric-Space M
+          ( δ +ℚ⁺ ε +ℚ⁺ d)
+          ( xδ)
+          ( yε)
+          ( λ θ →
+            tr
+              ( λ η → neighborhood-Pseudometric-Space M η xδ yε)
+              ( inv (associative-add-ℚ⁺ _ _ _))
+              ( H θ δ ε))
 ```
 
 ### The Cauchy pseudocompletion of a pseudometric space
