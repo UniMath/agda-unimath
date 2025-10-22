@@ -11,19 +11,19 @@ import time
 from utils import eprint
 
 CONCEPT_REGEX = re.compile(
-    r'\{\{#concept "([^=\n"]+)"(.*?)\}\}')
+    r'\{\{#concept "([^=\n"]*)"(.*?)\}\}')
 
 WIKIDATA_ID_REGEX = re.compile(
-    r'WDID=(\S+)')
+    r'WDID=(\S*)')
 
 WIKIDATA_LABEL_REGEX = re.compile(
-    r'WD="([^=\n"]+)"')
+    r'WD="([^=\n"]*)"')
 
 DISAMBIGUATION_REGEX = re.compile(
-    r'Disambiguation="([^=\n"]+)"')
+    r'Disambiguation="([^=\n"]*)"')
 
 AGDA_REGEX = re.compile(
-    r'Agda=(\S+)')
+    r'Agda=(\S*)')
 
 LINK_REGEX = re.compile(
     r'\[(.*?)\]\(.*\)')
@@ -117,12 +117,32 @@ def sup_link_reference(href, content, brackets=True, new_tab=False):
 
 
 def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initial_content):
+    """
+    Process a concept tag match `m` and return a rendered replacement.
+    """
+
     text = m.group(1)
+    if text == '':
+        eprint(f'Error: empty concept name')
+        mut_error_locations.add(path)
+        # Suppress further processing, this tag is malformed
+        return ''
+
+    def report_empty_match(value, description):
+        if value == '':
+            eprint(
+                f'Error: Specified but empty {description} for concept {text}')
+            mut_error_locations.add(path)
+
     metadata = m.group(2)
     wikidata_id = match_wikidata_id(metadata)
+    report_empty_match(wikidata_id, 'wikidata id')
     wikidata_label = match_wikidata_label(metadata)
+    report_empty_match(wikidata_label, 'wikidata label')
     disambiguation = match_disambiguation(metadata)
+    report_empty_match(disambiguation, 'disambiguation')
     agda_name = match_agda_name(metadata)
+    report_empty_match(agda_name, 'Agda name')
     plaintext = LINK_REGEX.sub(r'\1', text)
     url_path = path[:-2] + 'html'
     entry_name = plaintext
