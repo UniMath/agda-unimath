@@ -609,7 +609,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
   abstract
