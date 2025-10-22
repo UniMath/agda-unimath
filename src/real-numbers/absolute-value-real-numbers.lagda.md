@@ -296,6 +296,9 @@ module _
 
 ### Absolute values distribute over multiplication
 
+The proof from the square root is likely simplest, but this could also be proved
+directly.
+
 ```agda
 abstract
   abs-mul-ℝ :
