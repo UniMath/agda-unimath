@@ -141,7 +141,7 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     has_wikidata_label = wikidata_label is not None
 
     if '$' in text:
-        eprint('Warning: LaTeX fragments are not supported in concept tags:', text)
+        eprint('Error: LaTeX fragments are not supported in concept tags:', text)
         mut_error_locations.add(path)
 
     if has_wikidata_id:
@@ -151,13 +151,13 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         if has_wikidata_label:
             index_entry['__wikidata_label'] = wikidata_label
         else:
-            eprint('Warning: Wikidata identifier', wikidata_id,
+            eprint('Error: Wikidata identifier', wikidata_id,
                    'provided for "' + entry_name + '"',
                    'without a corresponding label in', path)
             mut_error_locations.add(path)
     else:
         if has_wikidata_label:
-            eprint('Warning: Wikidata label', wikidata_label,
+            eprint('Error: Wikidata label', wikidata_label,
                    'provided for "' + entry_name + '"',
                    'without a corresponding identifier in', path)
             mut_error_locations.add(path)
@@ -177,7 +177,7 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
                 index_entry['definition'] = destination
                 found_def = True
         if not found_def:
-            eprint('Warning: Concept definition not found:',
+            eprint('Error: Concept definition not found:',
                    plaintext, '; expected', agda_name, 'to exist in',
                    path)
             mut_error_locations.add(path)
@@ -202,7 +202,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations
     leftover_concepts = LEFTOVER_CONCEPT_REGEX.findall(chapter['content'])
     if len(leftover_concepts) != 0:
         eprint(
-            f'Warning: the following concept invocations were not recognized in {chapter["path"]}:')
+            f'Error: the following concept invocations were not recognized in {chapter["path"]}:')
         mut_error_locations.add(chapter['path'])
         for line in leftover_concepts:
             eprint('  ' + line)
