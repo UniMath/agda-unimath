@@ -45,6 +45,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -244,7 +245,7 @@ abstract
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ neg-ℝ
 
   is-in-upper-cut-square-pos-neg-ℝ :

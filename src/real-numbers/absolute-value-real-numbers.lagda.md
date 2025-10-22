@@ -260,7 +260,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding abs-ℝ leq-ℝ leq-ℝ' max-ℝ neg-ℝ real-sqrt-ℝ⁰⁺
 
     leq-abs-sqrt-square-ℝ :
