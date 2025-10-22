@@ -18,6 +18,7 @@ open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
@@ -38,6 +39,7 @@ open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -1246,4 +1248,42 @@ abstract
         ( [c,d])
         ( [c',d'])
         ( [c,d]⊆[c',d']))
+```
+
+### The upper bound of `[-q,q]²` is `q²`
+
+```agda
+abstract
+  upper-bound-square-even-interval-ℚ :
+    ([-q,q] : closed-interval-ℚ) →
+    ( lower-bound-closed-interval-ℚ [-q,q] ＝
+      neg-ℚ (upper-bound-closed-interval-ℚ [-q,q])) →
+    upper-bound-mul-closed-interval-ℚ [-q,q] [-q,q] ＝
+    square-ℚ (upper-bound-closed-interval-ℚ [-q,q])
+  upper-bound-square-even-interval-ℚ ((_ , q) , _) refl =
+    equational-reasoning
+      max-ℚ
+        ( max-ℚ (neg-ℚ q *ℚ neg-ℚ q) (neg-ℚ q *ℚ q))
+        ( max-ℚ (q *ℚ neg-ℚ q) (q *ℚ q))
+      ＝
+        max-ℚ
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+          ( max-ℚ (neg-ℚ (q *ℚ q)) (q *ℚ q))
+        by
+          ap-max-ℚ
+            ( ap-max-ℚ (square-neg-ℚ q) (left-negative-law-mul-ℚ q q))
+            ( ap-max-ℚ (right-negative-law-mul-ℚ q q) refl)
+      ＝
+        max-ℚ
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+        by ap-max-ℚ refl (commutative-max-ℚ _ _)
+      ＝ max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q))
+        by idempotent-max-ℚ _
+      ＝ q *ℚ q
+        by
+          right-leq-left-max-ℚ _ _
+            ( leq-nonpositive-nonnegative-ℚ
+              ( neg-ℚ⁰⁺ (nonnegative-square-ℚ q))
+              ( nonnegative-square-ℚ q))
 ```
