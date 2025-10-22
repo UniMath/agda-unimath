@@ -55,7 +55,7 @@ in `M` where two Cauchy approximations `x` and `y` are in a
 another if for all `δ ε : ℚ⁺`, `x δ` and `y ε` are in a
 `(δ + ε + d)`-neighborhood of one another in `M`.
 
-Any Cauchy approximation in the pseudometric completion has a
+Any Cauchy approximation in the Cauchy pseudocompletion has a
 [limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md).
 
 ## Definition
