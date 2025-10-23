@@ -35,6 +35,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
@@ -178,6 +179,29 @@ module _
     is-zero-leq-zero-abs-ℝ : x ＝ zero-ℝ
     is-zero-leq-zero-abs-ℝ =
       is-zero-is-zero-abs-ℝ x is-zero-abs-leq-zero-abs-ℝ
+```
+
+### If `|x| ≤ ε` for all `ε : ℚ⁺` then `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero)
+  (x-is-infinitesimal : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
+  where
+
+  abstract
+    is-zero-is-infinitesimal-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-infinitesimal-abs-ℝ =
+      is-zero-leq-zero-abs-ℝ
+        ( x)
+        ( saturated-leq-ℝ
+          ( abs-ℝ x)
+          ( zero-ℝ)
+          ( λ ε →
+            inv-tr
+              ( leq-ℝ (abs-ℝ x))
+              ( left-unit-law-add-ℝ (real-ℚ⁺ ε))
+              ( x-is-infinitesimal ε)))
 ```
 
 ### If `x ≤ y` and `-x ≤ y`, `|x| ≤ y`
