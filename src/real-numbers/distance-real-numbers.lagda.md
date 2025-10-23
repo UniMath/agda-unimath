@@ -30,6 +30,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
@@ -300,4 +301,31 @@ abstract
               ( right-inverse-law-add-ℝ z))
       ~ℝ dist-ℝ x y
         by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
+```
+
+## Distributivity laws
+
+```agda
+abstract
+  left-distributive-abs-mul-dist-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    abs-ℝ x *ℝ dist-ℝ y z ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
+  left-distributive-abs-mul-dist-ℝ x y z =
+    equational-reasoning
+      abs-ℝ x *ℝ abs-ℝ (y -ℝ z)
+      ＝ abs-ℝ (x *ℝ (y -ℝ z))
+        by inv (abs-mul-ℝ x (y -ℝ z))
+      ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
+        by ap abs-ℝ (left-distributive-mul-diff-ℝ x y z)
+
+  right-distributive-abs-mul-dist-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    dist-ℝ x y *ℝ abs-ℝ z ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
+  right-distributive-abs-mul-dist-ℝ x y z =
+    equational-reasoning
+      abs-ℝ (x -ℝ y) *ℝ abs-ℝ z
+      ＝ abs-ℝ ((x -ℝ y) *ℝ z)
+        by inv (abs-mul-ℝ (x -ℝ y) z)
+      ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
+        by ap abs-ℝ (right-distributive-mul-diff-ℝ x y z)
 ```

@@ -118,4 +118,13 @@ abstract
       ( commutative-mul-ℝ _ _)
       ( commutative-mul-ℝ _ _)
       ( preserves-leq-left-mul-ℝ⁰⁺ x y z y≤z)
+
+  preserves-leq-mul-ℝ⁰⁺ :
+    {l1 l2 l3 l4 : Level} →
+    (x : ℝ⁰⁺ l1) (x' : ℝ⁰⁺ l2) (y : ℝ⁰⁺ l3) (y' : ℝ⁰⁺ l4) →
+    leq-ℝ⁰⁺ x x' → leq-ℝ⁰⁺ y y' → leq-ℝ⁰⁺ (x *ℝ⁰⁺ y) (x' *ℝ⁰⁺ y')
+  preserves-leq-mul-ℝ⁰⁺ x x' y y' x≤x' y≤y' =
+    transitive-leq-ℝ _ _ _
+      ( preserves-leq-right-mul-ℝ⁰⁺ y' (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ x') x≤x')
+      ( preserves-leq-left-mul-ℝ⁰⁺ x (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ y') y≤y')
 ```
