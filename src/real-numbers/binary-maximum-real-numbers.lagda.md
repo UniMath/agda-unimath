@@ -173,41 +173,6 @@ module _
           ( is-least-binary-upper-bound-max-ℝ x y))
 ```
 
-### The binary maximum of a real number with itself is the identity
-
-```agda
-abstract
-  htpy-id-diag-max-ℝ : {l : Level} (x : ℝ l) → max-ℝ x x ＝ x
-  htpy-id-diag-max-ℝ x =
-    antisymmetric-leq-ℝ
-      ( max-ℝ x x)
-      ( x)
-      ( leq-max-leq-leq-ℝ x x x (refl-leq-ℝ x) (refl-leq-ℝ x))
-      ( leq-left-max-ℝ x x)
-```
-
-### The maximum with a real number is idempotent
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
-  where
-
-  abstract
-    is-idempotent-max-ℝ : max-ℝ x (max-ℝ x y) ＝ max-ℝ x y
-    is-idempotent-max-ℝ =
-      antisymmetric-leq-ℝ
-        ( max-ℝ x (max-ℝ x y))
-        ( max-ℝ x y)
-        ( leq-max-leq-leq-ℝ
-          ( x)
-          ( max-ℝ x y)
-          ( max-ℝ x y)
-          ( leq-left-max-ℝ x y)
-          ( refl-leq-ℝ (max-ℝ x y)))
-        ( leq-right-max-ℝ x (max-ℝ x y))
-```
-
 ### The binary maximum is commutative
 
 ```agda
@@ -251,6 +216,52 @@ is-least-binary-upper-bound-join-has-joins-Large-Poset
   (l : Level) → Order-Theoretic-Join-Semilattice (lsuc l) l
 ℝ-Order-Theoretic-Join-Semilattice l =
   ( ℝ-Poset l , λ x y → (max-ℝ x y , is-least-binary-upper-bound-max-ℝ x y))
+```
+
+### The binary maximum of real numbers is idempotent
+
+```agda
+abstract
+  is-idempotent-max-ℝ : {l : Level} (x : ℝ l) → max-ℝ x x ＝ x
+  is-idempotent-max-ℝ x =
+    idempotent-join-Order-Theoretic-Join-Semilattice
+      ( ℝ-Order-Theoretic-Join-Semilattice _)
+      ( x)
+```
+
+### The maximum with a real number is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    is-idempotent-left-max-ℝ : max-ℝ x (max-ℝ x y) ＝ max-ℝ x y
+    is-idempotent-left-max-ℝ =
+      antisymmetric-leq-ℝ
+        ( max-ℝ x (max-ℝ x y))
+        ( max-ℝ x y)
+        ( leq-max-leq-leq-ℝ
+          ( x)
+          ( max-ℝ x y)
+          ( max-ℝ x y)
+          ( leq-left-max-ℝ x y)
+          ( refl-leq-ℝ (max-ℝ x y)))
+        ( leq-right-max-ℝ x (max-ℝ x y))
+
+    is-idempotent-right-max-ℝ : max-ℝ (max-ℝ x y) y ＝ max-ℝ x y
+    is-idempotent-right-max-ℝ =
+      antisymmetric-leq-ℝ
+        ( max-ℝ (max-ℝ x y) y)
+        ( max-ℝ x y)
+        ( leq-max-leq-leq-ℝ
+          ( max-ℝ x y)
+          ( y)
+          ( max-ℝ x y)
+          ( refl-leq-ℝ (max-ℝ x y))
+          ( leq-right-max-ℝ x y))
+        ( leq-left-max-ℝ (max-ℝ x y) y)
 ```
 
 ### The binary maximum preserves similarity
