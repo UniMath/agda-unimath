@@ -60,6 +60,16 @@ opaque
 
 ## Properties
 
+### The absolute value of zero is zero
+
+```agda
+opaque
+  unfolding abs-ℝ
+
+  abs-zero-ℝ : abs-ℝ zero-ℝ ＝ zero-ℝ
+  abs-zero-ℝ = (ap (max-ℝ zero-ℝ) neg-zero-ℝ) ∙ (htpy-id-diag-max-ℝ zero-ℝ)
+```
+
 ### The absolute value preserves similarity
 
 ```agda
@@ -127,6 +137,33 @@ module _
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+```
+
+### If `|x| ≤ 0` then `x ＝ 0`
+
+```agda
+is-zero-leq-zero-abs-ℝ : (x : ℝ lzero) → leq-ℝ (abs-ℝ x) zero-ℝ → x ＝ zero-ℝ
+is-zero-leq-zero-abs-ℝ x |x|≤0 =
+  antisymmetric-leq-ℝ
+    ( x)
+    ( zero-ℝ)
+    ( transitive-leq-ℝ x (abs-ℝ x) zero-ℝ |x|≤0 (leq-abs-ℝ x))
+    ( transitive-leq-ℝ
+      ( zero-ℝ)
+      ( neg-ℝ (abs-ℝ x))
+      ( x)
+      ( leq-neg-abs-ℝ x)
+      ( tr
+        ( λ y → leq-ℝ y (neg-ℝ (abs-ℝ x)))
+        ( neg-zero-ℝ)
+        ( neg-leq-ℝ (abs-ℝ x) zero-ℝ |x|≤0)))
+```
+
+### If `|x| ＝ 0` then `x ＝ 0`
+
+```agda
+is-zero-is-zero-abs-ℝ : (x : ℝ lzero) → abs-ℝ x ＝ zero-ℝ → x ＝ zero-ℝ
+is-zero-is-zero-abs-ℝ x = is-zero-leq-zero-abs-ℝ x ∘ leq-eq-ℝ (abs-ℝ x) zero-ℝ
 ```
 
 ### If `x ≤ y` and `-x ≤ y`, `|x| ≤ y`

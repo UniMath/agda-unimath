@@ -173,6 +173,41 @@ module _
           ( is-least-binary-upper-bound-max-ℝ x y))
 ```
 
+### The binary maximum of a real number with itself is the identity
+
+```agda
+abstract
+  htpy-id-diag-max-ℝ : {l : Level} (x : ℝ l) → max-ℝ x x ＝ x
+  htpy-id-diag-max-ℝ x =
+    antisymmetric-leq-ℝ
+      ( max-ℝ x x)
+      ( x)
+      ( leq-max-leq-leq-ℝ x x x (refl-leq-ℝ x) (refl-leq-ℝ x))
+      ( leq-left-max-ℝ x x)
+```
+
+### The maximum with a real number is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    is-idempotent-max-ℝ : max-ℝ x (max-ℝ x y) ＝ max-ℝ x y
+    is-idempotent-max-ℝ =
+      antisymmetric-leq-ℝ
+        ( max-ℝ x (max-ℝ x y))
+        ( max-ℝ x y)
+        ( leq-max-leq-leq-ℝ
+          ( x)
+          ( max-ℝ x y)
+          ( max-ℝ x y)
+          ( leq-left-max-ℝ x y)
+          ( refl-leq-ℝ (max-ℝ x y)))
+        ( leq-right-max-ℝ x (max-ℝ x y))
+```
+
 ### The binary maximum is commutative
 
 ```agda
