@@ -7,6 +7,7 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.constant-maps
@@ -19,6 +20,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces

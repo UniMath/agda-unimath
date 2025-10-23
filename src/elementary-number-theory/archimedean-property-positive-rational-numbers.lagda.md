@@ -11,16 +11,16 @@ module elementary-number-theory.archimedean-property-positive-rational-numbers w
 ```agda
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -34,9 +34,9 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "Archimedean property" Disambiguation="positive rational numbers" Agda=archimedean-property-ℚ⁺}}
-of `ℚ⁺` is that for any two
+of the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`x y : ℚ⁺`, there is a
+is that for any `x y : ℚ⁺`, there is a
 [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md)
 `n` such that `y` is
 [less than](elementary-number-theory.strict-inequality-rational-numbers.md) `n`
@@ -55,7 +55,7 @@ abstract
         asymmetric-le-ℚ
           ( zero-ℚ)
           ( y)
-          ( le-zero-is-positive-ℚ y pos-y)
+          ( le-zero-is-positive-ℚ pos-y)
           ( tr
             ( le-ℚ y)
             ( equational-reasoning

@@ -211,13 +211,21 @@ abstract
     map-universal-property-trunc-Prop P f t
 
 abstract
+  apply-twice-universal-property-trunc-Prop' :
+    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (u : ║ A ║₋₁)
+    (v : (a : A) → ║ B a ║₋₁) (P : Prop l3) →
+    ((a : A) → B a → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop' u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop (v x) P (f x))
+
+abstract
   apply-twice-universal-property-trunc-Prop :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : ║ A ║₋₁)
     (v : ║ B ║₋₁) (P : Prop l3) →
     (A → B → type-Prop P) → type-Prop P
-  apply-twice-universal-property-trunc-Prop u v P f =
-    apply-universal-property-trunc-Prop u P
-      ( λ x → apply-universal-property-trunc-Prop v P (f x))
+  apply-twice-universal-property-trunc-Prop u v =
+    apply-twice-universal-property-trunc-Prop' u (λ _ → v)
 
 abstract
   apply-three-times-universal-property-trunc-Prop :
@@ -467,25 +475,15 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
 
-## `do` syntax for propositional truncation { #do-syntax }
+## The `do` syntax for propositional truncation { #do-syntax }
 
-Consider a case where you are trying to prove a proposition, `motive : Prop l`,
-from witnesses of propositional truncations of types `P` and `Q`:
+To prove a [proposition](foundation.propositions.md) `P` from a witness of the
+propositional truncation `trunc-Prop X`, we may assume an element of `X`, as
+demonstrated in `rec-trunc-Prop`.
 
-```text
-rec-trunc-Prop
-  ( motive)
-  ( λ (p : P) →
-    rec-trunc-Prop
-      ( motive)
-      ( λ (q : Q) → witness-motive-P-Q p q)
-      ( witness-truncated-prop-Q p))
-  ( witness-truncated-prop-P)
-```
-
-We can rewrite this using
-[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
-with the module
+On occasion, it is convenient to use
+[Agda's `do` notation](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
+to express this operation, with the module
 
 ```agda
 module do-syntax-trunc-Prop {l : Level} (motive : Prop l) where
@@ -493,18 +491,29 @@ module do-syntax-trunc-Prop {l : Level} (motive : Prop l) where
     {l : Level} {A : UU l} →
     type-trunc-Prop A → (A → type-Prop motive) →
     type-Prop motive
-  trunc-prop-a >>= k = rec-trunc-Prop motive k trunc-prop-a
+  witness-trunc-prop-a >>= k = rec-trunc-Prop motive k witness-trunc-prop-a
 ```
 
-This allows us to rewrite the nested chain above as
+This allows us to write, for example, the nested chain
 
 ```text
-do
+let
+  open do-syntax-trunc-Prop motive
+in do
   p ← witness-truncated-prop-P
   q ← witness-truncated-prop-Q p
-  witness-motive-P-Q p q
-where open do-syntax-trunc-Prop motive
+  motive-P-Q p q
 ```
+
+We can read the line `p ← witness-truncated-prop-P` as "given
+`witness-truncated-prop-P : type-trunc-Prop P`, assume an element `p : P`," and
+we can then use `p` freely on further lines in the `do` block. The final line in
+the `do` block must be a value of `type-Prop motive`.
+
+This syntax is particularly useful when we must assume elements from multiple
+propositional truncations, especially dependent ones, e.g.
+`witness-truncated-prop-Q p` above where the assumed element `p` was itself used
+to get a witness of `trunc-Prop Q`.
 
 ## Table of files about propositional logic
 

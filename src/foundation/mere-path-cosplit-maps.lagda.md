@@ -10,6 +10,7 @@ module foundation.mere-path-cosplit-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences-arrows
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
@@ -116,10 +117,7 @@ is-mere-path-cosplit-succ-is-mere-path-cosplit :
   is-mere-path-cosplit k f → is-mere-path-cosplit (succ-𝕋 k) f
 is-mere-path-cosplit-succ-is-mere-path-cosplit
   neg-two-𝕋 {f = f} is-cosplit-f x y =
-  rec-trunc-Prop
-    ( is-mere-path-cosplit-Prop neg-two-𝕋 (ap f))
-    ( λ r → unit-trunc-Prop (retraction-ap f r))
-    ( is-cosplit-f)
+  map-trunc-Prop (λ r → retraction-ap f r) is-cosplit-f
 is-mere-path-cosplit-succ-is-mere-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
   is-mere-path-cosplit-succ-is-mere-path-cosplit k (is-cosplit-f x y)
 ```

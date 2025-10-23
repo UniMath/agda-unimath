@@ -24,6 +24,7 @@ open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retracts-of-maps
+open import foundation.small-maps
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -640,6 +641,28 @@ module _
             ( is-prop-Σ (is-prop-type-Prop P) (is-prop-type-Prop ∘ Q) , H))
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
+```
+
+### Decidable embeddings are small
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-small-map-is-decidable-prop-map :
+    {f : A → B} → is-decidable-prop-map f → is-small-map lzero f
+  is-small-map-is-decidable-prop-map H x = is-small-is-decidable-prop (H x)
+
+  is-small-map-is-decidable-emb :
+    {f : A → B} → is-decidable-emb f → is-small-map lzero f
+  is-small-map-is-decidable-emb H =
+    is-small-map-is-decidable-prop-map
+      ( is-decidable-prop-map-is-decidable-emb H)
+
+  is-small-map-decidable-emb :
+    (f : A ↪ᵈ B) → is-small-map lzero (map-decidable-emb f)
+  is-small-map-decidable-emb (f , H) = is-small-map-is-decidable-emb H
 ```
 
 ## References

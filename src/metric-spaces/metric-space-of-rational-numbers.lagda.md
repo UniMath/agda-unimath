@@ -10,10 +10,13 @@ module metric-spaces.metric-space-of-rational-numbers where
 
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -404,8 +407,6 @@ is-cauchy-approximation-rational-ℚ⁺ :
     rational-ℚ⁺
 is-cauchy-approximation-rational-ℚ⁺ ε δ =
   ( leq-le-ℚ
-    { rational-ℚ⁺ δ}
-    { rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
     ( transitive-le-ℚ
       ( rational-ℚ⁺ δ)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
@@ -415,8 +416,6 @@ is-cauchy-approximation-rational-ℚ⁺ ε δ =
         ( ε +ℚ⁺ δ))
       ( le-right-add-ℚ⁺ ε δ))) ,
   ( leq-le-ℚ
-    { rational-ℚ⁺ ε}
-    { rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
     ( transitive-le-ℚ
       ( rational-ℚ⁺ ε)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
@@ -441,9 +440,7 @@ is-zero-limit-rational-ℚ⁺ ε δ =
     { zero-ℚ}
     { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
     ( le-zero-is-positive-ℚ
-      ( rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ)))
-      ( is-positive-rational-ℚ⁺
-        (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
+      ( is-positive-rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
   ( leq-le-ℚ
     { rational-ℚ⁺ ε}
     { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}

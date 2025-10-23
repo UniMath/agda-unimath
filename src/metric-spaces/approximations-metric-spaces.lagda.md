@@ -35,6 +35,7 @@ open import metric-spaces.images-short-functions-metric-spaces
 open import metric-spaces.images-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
@@ -165,7 +166,7 @@ module _
       ( X)
       ( Y)
       ( map-short-function-Metric-Space X Y f)
-      ( id-is-modulus-of-uniform-continuity-is-short-function-Metric-Space
+      ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
         ( X)
         ( Y)
         ( map-short-function-Metric-Space X Y f)

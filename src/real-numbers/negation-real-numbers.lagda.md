@@ -13,6 +13,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -82,7 +83,7 @@ module _
       ( disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r))
       ( inr-disjunction)
       ( inl-disjunction)
-      ( is-located-lower-upper-cut-ℝ x (neg-ℚ r) (neg-ℚ q) (neg-le-ℚ q r q<r))
+      ( is-located-lower-upper-cut-ℝ x (neg-ℚ r) (neg-ℚ q) (neg-le-ℚ q<r))
 
   opaque
     neg-ℝ : ℝ l
@@ -130,6 +131,13 @@ opaque
 
   neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
   neg-real-ℚ q = eq-sim-ℝ (sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
+
+abstract
+  neg-zero-ℝ : neg-ℝ zero-ℝ ＝ zero-ℝ
+  neg-zero-ℝ = neg-real-ℚ zero-ℚ ∙ ap real-ℚ neg-zero-ℚ
+
+  eq-neg-one-ℝ : neg-ℝ one-ℝ ＝ neg-one-ℝ
+  eq-neg-one-ℝ = neg-real-ℚ one-ℚ ∙ ap real-ℚ eq-neg-one-ℚ
 ```
 
 ### Negation preserves similarity

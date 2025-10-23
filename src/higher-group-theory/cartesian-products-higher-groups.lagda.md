@@ -92,28 +92,26 @@ module _
 
   assoc-mul-product-∞-Group :
     (x y z : type-product-∞-Group) →
-    Id
-      ( mul-product-∞-Group (mul-product-∞-Group x y) z)
-      ( mul-product-∞-Group x (mul-product-∞-Group y z))
+    mul-product-∞-Group (mul-product-∞-Group x y) z ＝
+    mul-product-∞-Group x (mul-product-∞-Group y z)
   assoc-mul-product-∞-Group =
     associative-mul-Ω classifying-pointed-type-product-∞-Group
 
   left-unit-law-mul-product-∞-Group :
     (x : type-product-∞-Group) →
-    Id (mul-product-∞-Group unit-product-∞-Group x) x
+    mul-product-∞-Group unit-product-∞-Group x ＝ x
   left-unit-law-mul-product-∞-Group =
     left-unit-law-mul-Ω classifying-pointed-type-product-∞-Group
 
   right-unit-law-mul-product-∞-Group :
     (y : type-product-∞-Group) →
-    Id (mul-product-∞-Group y unit-product-∞-Group) y
+    mul-product-∞-Group y unit-product-∞-Group ＝ y
   right-unit-law-mul-product-∞-Group =
     right-unit-law-mul-Ω classifying-pointed-type-product-∞-Group
 
   coherence-unit-laws-mul-product-∞-Group :
-    Id
-      ( left-unit-law-mul-product-∞-Group unit-product-∞-Group)
-      ( right-unit-law-mul-product-∞-Group unit-product-∞-Group)
+    left-unit-law-mul-product-∞-Group unit-product-∞-Group ＝
+    right-unit-law-mul-product-∞-Group unit-product-∞-Group
   coherence-unit-laws-mul-product-∞-Group = refl
 
   inv-product-∞-Group : type-product-∞-Group → type-product-∞-Group
@@ -121,13 +119,13 @@ module _
 
   left-inverse-law-mul-product-∞-Group :
     (x : type-product-∞-Group) →
-    Id (mul-product-∞-Group (inv-product-∞-Group x) x) unit-product-∞-Group
+    mul-product-∞-Group (inv-product-∞-Group x) x ＝ unit-product-∞-Group
   left-inverse-law-mul-product-∞-Group =
     left-inverse-law-mul-Ω classifying-pointed-type-product-∞-Group
 
   right-inverse-law-mul-product-∞-Group :
     (x : type-product-∞-Group) →
-    Id (mul-product-∞-Group x (inv-product-∞-Group x)) unit-product-∞-Group
+    mul-product-∞-Group x (inv-product-∞-Group x) ＝ unit-product-∞-Group
   right-inverse-law-mul-product-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-product-∞-Group
 ```

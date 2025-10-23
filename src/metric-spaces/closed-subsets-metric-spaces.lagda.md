@@ -16,6 +16,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -75,6 +76,10 @@ module _
 
   subset-closed-subset-Metric-Space : subset-Metric-Space l3 X
   subset-closed-subset-Metric-Space = pr1 S
+
+  subspace-closed-subset-Metric-Space : Metric-Space (l1 ⊔ l3) l2
+  subspace-closed-subset-Metric-Space =
+    subspace-Metric-Space X subset-closed-subset-Metric-Space
 
   is-closed-subset-closed-subset-Metric-Space :
     is-closed-subset-Metric-Space X subset-closed-subset-Metric-Space
@@ -223,19 +228,9 @@ module _
       ( Π-Metric-Space I X)
       ( subset-Π-closed-subset-Metric-Space)
   is-closed-subset-Π-closed-subset-Metric-Space f f∈ΠC i =
-    is-closed-subset-closed-subset-Metric-Space
-      ( X i)
-      ( C i)
-      ( f i)
+    is-closed-subset-closed-subset-Metric-Space (X i) (C i) (f i)
       ( λ ε →
-        rec-trunc-Prop
-          ( trunc-Prop
-            ( type-subtype
-              ( intersection-subtype
-                ( neighborhood-prop-Metric-Space (X i) ε (f i))
-                ( subset-closed-subset-Metric-Space (X i) (C i)))))
-          ( λ ( g , g∈Nεf , k) → unit-trunc-Prop (g i , g∈Nεf i , k i))
-          ( f∈ΠC ε))
+        map-trunc-Prop (λ (g , g∈Nεf , k) → (g i , g∈Nεf i , k i)) (f∈ΠC ε))
 ```
 
 ### A closed subset of a complete metric space is complete

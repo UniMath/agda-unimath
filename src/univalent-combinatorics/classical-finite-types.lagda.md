@@ -25,6 +25,8 @@ open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -57,10 +59,11 @@ nat-classical-Fin k = pr1
 
 ```agda
 Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
-Eq-classical-Fin k x y = Id (nat-classical-Fin k x) (nat-classical-Fin k y)
+Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
 
 eq-succ-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) → Id {A = classical-Fin k} x y →
+  (k : ℕ) (x y : classical-Fin k) →
+  x ＝ y →
   Id
     { A = classical-Fin (succ-ℕ k)}
     ( pair (succ-ℕ (pr1 x)) (pr2 x))
@@ -68,7 +71,7 @@ eq-succ-classical-Fin :
 eq-succ-classical-Fin k x .x refl = refl
 
 eq-Eq-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) → Eq-classical-Fin k x y → Id x y
+  (k : ℕ) (x y : classical-Fin k) → Eq-classical-Fin k x y → x ＝ y
 eq-Eq-classical-Fin (succ-ℕ k) (pair zero-ℕ _) (pair zero-ℕ _) e = refl
 eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
   eq-succ-classical-Fin k
@@ -100,12 +103,12 @@ pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 ```agda
 is-section-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
-  Id (standard-classical-Fin k (classical-standard-Fin k x)) x
+  standard-classical-Fin k (classical-standard-Fin k x) ＝ x
 is-section-classical-standard-Fin {succ-ℕ k} x = is-section-nat-Fin k x
 
 is-retraction-classical-standard-Fin :
   {k : ℕ} (x : classical-Fin k) →
-  Id (classical-standard-Fin k (standard-classical-Fin k x)) x
+  classical-standard-Fin k (standard-classical-Fin k x) ＝ x
 is-retraction-classical-standard-Fin {succ-ℕ k} (pair x p) =
   eq-Eq-classical-Fin (succ-ℕ k)
     ( classical-standard-Fin
@@ -163,7 +166,7 @@ is-section-classical-standard-Fin-reverse (succ-ℕ n) (zero-ℕ , k<n) = refl
 is-section-classical-standard-Fin-reverse (succ-ℕ n) (succ-ℕ k , k<n) =
   eq-pair-Σ
     ( ap (succ-ℕ ∘ pr1) (is-section-classical-standard-Fin-reverse n (k , k<n)))
-    ( eq-type-Prop (le-ℕ-Prop k n))
+    ( eq-type-Prop (le-prop-ℕ k n))
 
 is-retraction-classical-standard-Fin-reverse :
   (n : ℕ) →
@@ -185,6 +188,18 @@ pr2 (equiv-classical-standard-Fin-reverse n) =
     ( standard-classical-Fin-reverse n)
     ( is-section-classical-standard-Fin-reverse n)
     ( is-retraction-classical-standard-Fin-reverse n)
+```
+
+### Counting the classical finite types
+
+```agda
+count-classical-Fin : (n : ℕ) → count (classical-Fin n)
+count-classical-Fin n = (n , equiv-classical-standard-Fin n)
+
+finite-type-classical-Fin : (n : ℕ) → Finite-Type lzero
+finite-type-classical-Fin n =
+  ( classical-Fin n ,
+    is-finite-count (count-classical-Fin n))
 ```
 
 ## See also

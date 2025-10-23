@@ -12,9 +12,12 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -23,6 +26,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.pseudometric-spaces
 ```
 
 </details>
@@ -80,6 +84,10 @@ module _
   metric-space-Complete-Metric-Space : Metric-Space l1 l2
   metric-space-Complete-Metric-Space = pr1 A
 
+  pseudometric-space-Complete-Metric-Space : Pseudometric-Space l1 l2
+  pseudometric-space-Complete-Metric-Space =
+    pseudometric-Metric-Space metric-space-Complete-Metric-Space
+
   type-Complete-Metric-Space : UU l1
   type-Complete-Metric-Space =
     type-Metric-Space metric-space-Complete-Metric-Space
@@ -122,13 +130,13 @@ module _
         ( metric-space-Complete-Metric-Space A))
       ( refl)
 
-  is-retraction-convergent-cauchy-approximation-Metric-Space :
+  is-retraction-convergent-cauchy-approximation-Complete-Metric-Space :
     is-retraction
       ( convergent-cauchy-approximation-Complete-Metric-Space)
       ( inclusion-subtype
         ( is-convergent-prop-cauchy-approximation-Metric-Space
           ( metric-space-Complete-Metric-Space A)))
-  is-retraction-convergent-cauchy-approximation-Metric-Space u = refl
+  is-retraction-convergent-cauchy-approximation-Complete-Metric-Space u = refl
 
   is-equiv-convergent-cauchy-approximation-Complete-Metric-Space :
     is-equiv convergent-cauchy-approximation-Complete-Metric-Space
@@ -141,7 +149,7 @@ module _
     ( inclusion-subtype
       ( is-convergent-prop-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A))) ,
-    ( is-retraction-convergent-cauchy-approximation-Metric-Space)
+    ( is-retraction-convergent-cauchy-approximation-Complete-Metric-Space)
 ```
 
 ### The limit of a Cauchy approximation in a complete metric space
@@ -170,6 +178,52 @@ module _
     is-limit-limit-convergent-cauchy-approximation-Metric-Space
       ( metric-space-Complete-Metric-Space A)
       ( convergent-cauchy-approximation-Complete-Metric-Space A u)
+```
+
+### Any complete metric space is a retract of its type of Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
+  where
+
+  abstract
+    is-retraction-limit-cauchy-approximation-Complete-Metric-Space :
+      ( limit-cauchy-approximation-Complete-Metric-Space A ∘
+        const-cauchy-approximation-Metric-Space
+          ( metric-space-Complete-Metric-Space A)) ~
+      ( id)
+    is-retraction-limit-cauchy-approximation-Complete-Metric-Space x =
+      all-eq-is-limit-cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A)
+        ( const-cauchy-approximation-Metric-Space
+          ( metric-space-Complete-Metric-Space A)
+          ( x))
+        ( limit-cauchy-approximation-Complete-Metric-Space
+          ( A)
+          ( const-cauchy-approximation-Metric-Space
+            ( metric-space-Complete-Metric-Space A)
+            ( x)))
+        ( x)
+        ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
+          ( A)
+          ( const-cauchy-approximation-Metric-Space
+            ( metric-space-Complete-Metric-Space A)
+            ( x)))
+        ( is-limit-const-cauchy-approximation-Metric-Space
+          ( metric-space-Complete-Metric-Space A)
+          ( x))
+
+  retract-limit-cauchy-approximation-Complete-Metric-Space :
+    retract
+      ( cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( type-Complete-Metric-Space A)
+  retract-limit-cauchy-approximation-Complete-Metric-Space =
+    ( ( const-cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A)) ,
+      ( limit-cauchy-approximation-Complete-Metric-Space A) ,
+      ( is-retraction-limit-cauchy-approximation-Complete-Metric-Space))
 ```
 
 ### Saturation of the limit

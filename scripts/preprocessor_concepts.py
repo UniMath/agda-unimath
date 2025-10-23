@@ -11,19 +11,19 @@ import time
 from utils import eprint
 
 CONCEPT_REGEX = re.compile(
-    r'\{\{#concept "([^=\n"]+)"(.*?)\}\}')
+    r'\{\{#concept "([^=\n"]*)"(.*?)\}\}')
 
 WIKIDATA_ID_REGEX = re.compile(
-    r'WDID=(\S+)')
+    r'WDID=(\S*)')
 
 WIKIDATA_LABEL_REGEX = re.compile(
-    r'WD="([^=\n"]+)"')
+    r'WD="([^=\n"]*)"')
 
 DISAMBIGUATION_REGEX = re.compile(
-    r'Disambiguation="([^=\n"]+)"')
+    r'Disambiguation="([^=\n"]*)"')
 
 AGDA_REGEX = re.compile(
-    r'Agda=(\S+)')
+    r'Agda=(\S*)')
 
 LINK_REGEX = re.compile(
     r'\[(.*?)\]\(.*\)')
@@ -53,6 +53,14 @@ def agda_escape_html(string):
 def make_definition_regex(definition):
     return re.compile(
         r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(agda_escape_html(definition)) + r'</a>')
+
+
+def make_loose_definition_regex(definition):
+    escaped = re.escape(definition)
+    return re.compile(
+        escaped + r'\s+:(?=[\s({])|' +
+        r'(?:data|record|infix[lr]?(?:\s+\d+)?)\s+' + escaped
+    )
 
 
 def does_support(backend):
@@ -105,16 +113,36 @@ def slugify_markdown(md):
 def sup_link_reference(href, content, brackets=True, new_tab=False):
     # f-strings can't contain backslashes, so we can't escape the quotes
     link_target = new_tab * ' target="_blank"'
-    return f'<sup>{brackets * "["}<a href="{href}"{link_target}>{content}</a>{brackets * "]"}</sup>'
+    return f'<sup>{brackets * "["}<a href="{href}"{link_target} class="concept">{content}</a>{brackets * "]"}</sup>'
 
 
 def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initial_content):
+    """
+    Process a concept tag match `m` and return a rendered replacement.
+    """
+
     text = m.group(1)
+    if text == '':
+        eprint(f'Error: empty concept name')
+        mut_error_locations.add(path)
+        # Suppress further processing, this tag is malformed
+        return ''
+
+    def report_empty_match(value, description):
+        if value == '':
+            eprint(
+                f'Error: Specified but empty {description} for concept {text}')
+            mut_error_locations.add(path)
+
     metadata = m.group(2)
     wikidata_id = match_wikidata_id(metadata)
+    report_empty_match(wikidata_id, 'wikidata id')
     wikidata_label = match_wikidata_label(metadata)
+    report_empty_match(wikidata_label, 'wikidata label')
     disambiguation = match_disambiguation(metadata)
+    report_empty_match(disambiguation, 'disambiguation')
     agda_name = match_agda_name(metadata)
+    report_empty_match(agda_name, 'Agda name')
     plaintext = LINK_REGEX.sub(r'\1', text)
     url_path = path[:-2] + 'html'
     entry_name = plaintext
@@ -132,8 +160,8 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     has_wikidata_id = wikidata_id is not None and wikidata_id != 'NA'
     has_wikidata_label = wikidata_label is not None
 
-    if text.find('$') >= 0:
-        eprint('Warning: LaTeX fragments are not supported in concept tags:', text)
+    if '$' in text:
+        eprint('Error: LaTeX fragments are not supported in concept tags:', text)
         mut_error_locations.add(path)
 
     if has_wikidata_id:
@@ -143,24 +171,33 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         if has_wikidata_label:
             index_entry['__wikidata_label'] = wikidata_label
         else:
-            eprint('Warning: Wikidata identifier', wikidata_id,
+            eprint('Error: Wikidata identifier', wikidata_id,
                    'provided for "' + entry_name + '"',
                    'without a corresponding label in', path)
             mut_error_locations.add(path)
     else:
         if has_wikidata_label:
-            eprint('Warning: Wikidata label', wikidata_label,
+            eprint('Error: Wikidata label', wikidata_label,
                    'provided for "' + entry_name + '"',
                    'without a corresponding identifier in', path)
             mut_error_locations.add(path)
     if agda_name is not None:
-        target_id = f'concept-{agda_name}'
-        agda_id = get_definition_id(agda_name, initial_content)
-        if agda_id is not None:
-            destination = f'{url_path}#{agda_id}'
-            index_entry['definition'] = destination
-        elif not config.get('skip-agda', False):
-            eprint('Warning: Concept definition not found:',
+        found_def = False
+        if config.get('skip-agda', False):
+            # Agda is not preprocessed, look at the text for approximation
+            loose_regex = make_loose_definition_regex(agda_name)
+            m = loose_regex.search(initial_content)
+            if m is not None:
+                found_def = True
+        else:
+            target_id = f'concept-{agda_name}'
+            agda_id = get_definition_id(agda_name, initial_content)
+            if agda_id is not None:
+                destination = f'{url_path}#{agda_id}'
+                index_entry['definition'] = destination
+                found_def = True
+        if not found_def:
+            eprint('Error: Concept definition not found:',
                    plaintext, '; expected', agda_name, 'to exist in',
                    path)
             mut_error_locations.add(path)
@@ -185,7 +222,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations
     leftover_concepts = LEFTOVER_CONCEPT_REGEX.findall(chapter['content'])
     if len(leftover_concepts) != 0:
         eprint(
-            f'Warning: the following concept invocations were not recognized in {chapter["path"]}:')
+            f'Error: the following concept invocations were not recognized in {chapter["path"]}:')
         mut_error_locations.add(chapter['path'])
         for line in leftover_concepts:
             eprint('  ' + line)

@@ -29,7 +29,7 @@ open import foundation-core.identity-types
 ## Idea
 
 The
-{{#concept "inclusion of the nautural numbers into the conatural numbers" Agda=ℕ∞}}
+{{#concept "inclusion of the nautural numbers into the conatural numbers" Agda=conatural-ℕ}}
 is the inductively defined map
 
 ```text

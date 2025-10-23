@@ -7,6 +7,7 @@ module metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -23,6 +24,7 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets

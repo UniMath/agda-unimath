@@ -7,6 +7,8 @@ module metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
@@ -141,6 +143,23 @@ module _
         ( is-upper-bound-dist-Pseudometric-Space A x y)
         ( ε+δ=d)
         ( Nxy)
+```
+
+### The value of a constant Cauchy approximation is its limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (x : type-Pseudometric-Space A)
+  where
+
+  is-limit-const-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( A)
+      ( const-cauchy-approximation-Pseudometric-Space A x)
+      ( x)
+  is-limit-const-cauchy-approximation-Pseudometric-Space ε δ =
+    refl-neighborhood-Pseudometric-Space A _ x
 ```
 
 ## References

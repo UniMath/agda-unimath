@@ -7,6 +7,7 @@ module metric-spaces.metrics where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
@@ -38,6 +39,7 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 

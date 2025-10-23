@@ -22,8 +22,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-The type of integers, equipped with a zero-element, addition, and negatives,
-forms a group.
+The type of [integers](elementary-number-theory.integers.md), equipped with
+zero, [addition](elementary-number-theory.addition-integers.md), and negation,
+forms a [group](group-theory.groups.md).
 
 ## Definition
 
