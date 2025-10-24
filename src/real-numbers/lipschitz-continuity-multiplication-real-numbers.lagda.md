@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.lipschitz-multiplication-real-numbers where
+module real-numbers.lipschitz-continuity-multiplication-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -25,6 +25,8 @@ open import foundation.universe-levels
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.lipschitz-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
+
+open import order-theory.large-posets
 
 open import real-numbers.absolute-value-closed-intervals-real-numbers
 open import real-numbers.absolute-value-real-numbers
@@ -69,7 +71,7 @@ module _
         ( mul-ℝ c)
     is-lipschitz-right-mul-ℝ =
       let
-        open inequality-reasoning-ℝ
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
           do-syntax-trunc-Prop
             ( is-lipschitz-function-prop-Metric-Space
@@ -118,7 +120,18 @@ module _
         ( mul-ℝ' c)
         ( commutative-mul-ℝ c)
         ( is-lipschitz-right-mul-ℝ)
+```
 
+## Corollaries
+
+### Multiplication is uniformly continuous in each argument
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (c : ℝ l1)
+  where
+
+  abstract
     is-uniformly-continuous-right-mul-ℝ :
       is-uniformly-continuous-function-Metric-Space
         ( metric-space-ℝ l2)
@@ -129,7 +142,7 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-        ( is-lipschitz-right-mul-ℝ)
+        ( is-lipschitz-right-mul-ℝ l2 c)
 
     is-uniformly-continuous-left-mul-ℝ :
       is-uniformly-continuous-function-Metric-Space
@@ -141,7 +154,7 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-        ( is-lipschitz-left-mul-ℝ)
+        ( is-lipschitz-left-mul-ℝ l2 c)
 
   uniformly-continuous-right-mul-ℝ :
     uniformly-continuous-function-Metric-Space
@@ -183,7 +196,7 @@ module _
         ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ)
     is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
       let
-        open inequality-reasoning-ℝ
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
           do-syntax-trunc-Prop
             ( is-lipschitz-function-prop-Metric-Space

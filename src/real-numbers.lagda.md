@@ -33,7 +33,7 @@ open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
-open import real-numbers.lipschitz-multiplication-real-numbers public
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
