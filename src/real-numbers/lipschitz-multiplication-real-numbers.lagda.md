@@ -1,4 +1,4 @@
-# Multiplication of real numbers is Lipschitz
+# Multiplication of real numbers is Lipschitz continuous
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -240,7 +240,7 @@ module _
                 ≤ my *ℝ real-ℚ⁺ ε +ℝ mx *ℝ real-ℚ⁺ ε
                   by
                     leq-eq-ℝ _ _
-                      ( ( ap-add-ℝ (commutative-mul-ℝ _ _) refl))
+                      ( ap-add-ℝ (commutative-mul-ℝ _ _) refl)
                 ≤ (my +ℝ mx) *ℝ real-ℚ⁺ ε
                   by
                     leq-eq-ℝ _ _

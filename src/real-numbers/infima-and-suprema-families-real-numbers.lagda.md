@@ -70,7 +70,7 @@ abstract
     Σ ( closed-interval-ℝ l3 l4)
       ( λ [a,b] → S ⊆ subtype-closed-interval-ℝ l2 [a,b])
   subset-closed-interval-has-inf-has-sup-subset-ℝ
-    {l1} {l2} {l3} {l4} S (inf , is-inf) (sup , is-sup) =
+    S (inf , is-inf) (sup , is-sup) =
       ( ( (inf , sup) ,
           leq-inf-sup-subset-ℝ S inf is-inf sup is-sup) ,
         ( λ s s∈S →
