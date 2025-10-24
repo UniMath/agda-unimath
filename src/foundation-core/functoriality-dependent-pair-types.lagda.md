@@ -55,7 +55,8 @@ Any family of maps induces a map on the total spaces.
 
 ```agda
   tot : Σ A B → Σ A C
-  tot t = (pr1 t , f (pr1 t) (pr2 t))
+  pr1 (tot t) = pr1 t
+  pr2 (tot t) = f (pr1 t) (pr2 t)
 ```
 
 ### Any map `f : A → B` induces a map `Σ A (C ∘ f) → Σ B C`

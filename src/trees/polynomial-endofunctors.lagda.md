@@ -34,8 +34,8 @@ open import foundation-core.torsorial-type-families
 
 Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
 `A`, the
-{{#concept "polynomial endofunctor" WD="polynomial functor" WDID=Q48842893 Agda=polynomial-endofunctor}}
-`𝑃 A B` is defined by
+{{#concept "polynomial endofunctor" WD="polynomial functor" WDID=Q49000754 Agda=polynomial-endofunctor}}
+`P A B` is defined by
 
 ```text
   X ↦ Σ (x : A), (B x → X).
@@ -54,14 +54,14 @@ polynomial-endofunctor : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 polynomial-endofunctor l1 l2 = Σ (UU l1) (λ A → (A → UU l2))
 
 module _
-  {l1 l2 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {l1 l2 : Level} (P : polynomial-endofunctor l1 l2)
   where
 
   shape-polynomial-endofunctor : UU l1
-  shape-polynomial-endofunctor = pr1 𝑃
+  shape-polynomial-endofunctor = pr1 P
 
   position-polynomial-endofunctor : shape-polynomial-endofunctor → UU l2
-  position-polynomial-endofunctor = pr2 𝑃
+  position-polynomial-endofunctor = pr2 P
 
 make-polynomial-endofunctor :
   {l1 l2 : Level} {A : UU l1} → (A → UU l2) → polynomial-endofunctor l1 l2
@@ -91,9 +91,9 @@ map-polynomial-endofunctor' :
 map-polynomial-endofunctor' A B f = tot (λ x α → f ∘ α)
 
 map-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {l1 l2 l3 l4 : Level} (P : polynomial-endofunctor l1 l2)
   {X : UU l3} {Y : UU l4} (f : X → Y) →
-  type-polynomial-endofunctor 𝑃 X → type-polynomial-endofunctor 𝑃 Y
+  type-polynomial-endofunctor P X → type-polynomial-endofunctor P Y
 map-polynomial-endofunctor (A , B) = map-polynomial-endofunctor' A B
 ```
 
@@ -176,9 +176,9 @@ htpy-polynomial-endofunctor' A B {f = f} {g} H (x , α) =
     ( refl , H ·r α)
 
 htpy-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {l1 l2 l3 l4 : Level} (P : polynomial-endofunctor l1 l2)
   {X : UU l3} {Y : UU l4} {f g : X → Y} →
-  f ~ g → map-polynomial-endofunctor 𝑃 f ~ map-polynomial-endofunctor 𝑃 g
+  f ~ g → map-polynomial-endofunctor P f ~ map-polynomial-endofunctor P g
 htpy-polynomial-endofunctor (A , B) = htpy-polynomial-endofunctor' A B
 
 coh-refl-htpy-polynomial-endofunctor' :
@@ -190,9 +190,9 @@ coh-refl-htpy-polynomial-endofunctor' A B f (x , α) =
     ( map-polynomial-endofunctor' A B f (x , α))
 
 coh-refl-htpy-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {l1 l2 l3 l4 : Level} (P : polynomial-endofunctor l1 l2)
   {X : UU l3} {Y : UU l4} (f : X → Y) →
-  htpy-polynomial-endofunctor 𝑃 (refl-htpy' f) ~ refl-htpy
+  htpy-polynomial-endofunctor P (refl-htpy' f) ~ refl-htpy
 coh-refl-htpy-polynomial-endofunctor (A , B) =
   coh-refl-htpy-polynomial-endofunctor' A B
 ```
@@ -201,25 +201,25 @@ coh-refl-htpy-polynomial-endofunctor (A , B) =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (𝑃 : polynomial-endofunctor l1 l2)
+  {l1 l2 l3 l4 : Level} (P : polynomial-endofunctor l1 l2)
   {X : UU l3} {Y : UU l4} (f : X → Y)
   where
 
   compute-fiber-map-polynomial-endofunctor :
-    (a : shape-polynomial-endofunctor 𝑃)
-    (y : position-polynomial-endofunctor 𝑃 a → Y) →
-    fiber (map-polynomial-endofunctor 𝑃 f) (a , y) ≃
-    ( (b : position-polynomial-endofunctor 𝑃 a) → fiber f (y b))
-  compute-fiber-map-polynomial-endofunctor a y =
+    (p@(a , y) : type-polynomial-endofunctor P Y) →
+    fiber (map-polynomial-endofunctor P f) (a , y) ≃
+    ( (b : position-polynomial-endofunctor P a) → fiber f (y b))
+  compute-fiber-map-polynomial-endofunctor (a , y) =
     equivalence-reasoning
-    fiber (map-polynomial-endofunctor 𝑃 f) (a , y)
-    ≃ fiber (postcomp (position-polynomial-endofunctor 𝑃 a) f) y
-      by
-        compute-fiber-tot
-          ( λ a → postcomp (position-polynomial-endofunctor 𝑃 a) f)
-          ( a , y)
-    ≃ ((b : position-polynomial-endofunctor 𝑃 a) → fiber f (y b))
-      by inv-compute-Π-fiber-postcomp (position-polynomial-endofunctor 𝑃 a) f y
+      fiber (map-polynomial-endofunctor P f) (a , y)
+      ≃ fiber (postcomp (position-polynomial-endofunctor P a) f) y
+        by
+          compute-fiber-tot
+            ( λ a → postcomp (position-polynomial-endofunctor P a) f)
+            ( a , y)
+      ≃ ((b : position-polynomial-endofunctor P a) → fiber f (y b))
+        by
+          inv-compute-Π-fiber-postcomp (position-polynomial-endofunctor P a) f y
 ```
 
 ## See also
@@ -235,4 +235,9 @@ module _
   the shapes are types equipped with `S`-structure, and the positions are
   points.
 - Via [type duality](foundation.type-duality.md), polynomial endofunctors are
-  classified by maps of types.
+  classified by arrows of types.
+
+## External links
+
+- [Polynomial functor (type theory)](<https://en.wikipedia.org/wiki/Polynomial_functor_(type_theory)>)
+  on Wikipedia

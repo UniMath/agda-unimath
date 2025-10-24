@@ -38,10 +38,10 @@ generalization of the notion of
 [polynomial endofunctors](trees.polynomial-endofunctors.md) to the case of
 families of types (variables). Given a type family `A : J → Type` and a type
 family `B : I → {j : J} → A j → Type` over `A`, we have a multivariable
-polynomial functor `𝑃 A B` with action on type families given by
+polynomial functor `P A B` with action on type families given by
 
 ```text
-  𝑃 A B X j := Σ (a : A j), ((i : I) → B i a → X i).
+  P A B X j := Σ (a : A j), ((i : I) → B i a → X i).
 ```
 
 ## Definitions
@@ -57,15 +57,15 @@ polynomial-functor l3 l4 I J =
 
 module _
   {l1 l2 l3 l4 : Level} {I : UU l1} {J : UU l2}
-  (𝑃 : polynomial-functor l3 l4 I J)
+  (P : polynomial-functor l3 l4 I J)
   where
 
   shape-polynomial-functor : J → UU l3
-  shape-polynomial-functor = pr1 𝑃
+  shape-polynomial-functor = pr1 P
 
   position-polynomial-functor :
     I → {j : J} → shape-polynomial-functor j → UU l4
-  position-polynomial-functor = pr2 𝑃
+  position-polynomial-functor = pr2 P
 ```
 
 ### The action on type families of a multivariable polynomial functor
@@ -82,7 +82,7 @@ module _
     Σ (A j) (λ a → (i : I) → B i a → X i)
 
   type-polynomial-functor :
-    (𝑃 : polynomial-functor l3 l4 I J) →
+    (P : polynomial-functor l3 l4 I J) →
     (I → UU l5) → (J → UU (l1 ⊔ l3 ⊔ l4 ⊔ l5))
   type-polynomial-functor (A , B) =
     type-polynomial-functor' A B
@@ -94,12 +94,12 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   {I : UU l1} {J : UU l2}
-  {𝑃@(A , B) : polynomial-functor l3 l4 I J}
+  {P@(A , B) : polynomial-functor l3 l4 I J}
   {X : I → UU l5}
   where
 
   Eq-type-polynomial-functor :
-    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x y : (j : J) → type-polynomial-functor P X j) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   Eq-type-polynomial-functor x y =
     (j : J) →
@@ -109,19 +109,19 @@ module _
         coherence-triangle-maps (pr2 (x j) i) (pr2 (y j) i) (tr (B i {j}) p))
 
   refl-Eq-type-polynomial-functor :
-    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x : (j : J) → type-polynomial-functor P X j) →
     Eq-type-polynomial-functor x x
   refl-Eq-type-polynomial-functor x j = (refl , (λ i → refl-htpy))
 
   Eq-eq-type-polynomial-functor :
-    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x y : (j : J) → type-polynomial-functor P X j) →
     x ＝ y → Eq-type-polynomial-functor x y
   Eq-eq-type-polynomial-functor x .x refl =
     refl-Eq-type-polynomial-functor x
 
   abstract
     is-torsorial-Eq-type-polynomial-functor :
-      (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+      (x : (j : J) → type-polynomial-functor P X j) →
       is-torsorial (Eq-type-polynomial-functor x)
     is-torsorial-Eq-type-polynomial-functor x =
       is-torsorial-Eq-Π
@@ -137,7 +137,7 @@ module _
 
   abstract
     is-equiv-Eq-eq-type-polynomial-functor :
-      (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+      (x y : (j : J) → type-polynomial-functor P X j) →
       is-equiv (Eq-eq-type-polynomial-functor x y)
     is-equiv-Eq-eq-type-polynomial-functor x =
       fundamental-theorem-id
@@ -145,13 +145,13 @@ module _
         ( Eq-eq-type-polynomial-functor x)
 
   eq-Eq-type-polynomial-functor :
-    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x y : (j : J) → type-polynomial-functor P X j) →
     Eq-type-polynomial-functor x y → x ＝ y
   eq-Eq-type-polynomial-functor x y =
     map-inv-is-equiv (is-equiv-Eq-eq-type-polynomial-functor x y)
 
   is-retraction-eq-Eq-type-polynomial-functor :
-    (x y : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x y : (j : J) → type-polynomial-functor P X j) →
     is-retraction
       ( Eq-eq-type-polynomial-functor x y)
       ( eq-Eq-type-polynomial-functor x y)
@@ -160,7 +160,7 @@ module _
       ( is-equiv-Eq-eq-type-polynomial-functor x y)
 
   coh-refl-eq-Eq-type-polynomial-functor :
-    (x : (j : J) → type-polynomial-functor 𝑃 X j) →
+    (x : (j : J) → type-polynomial-functor P X j) →
     ( eq-Eq-type-polynomial-functor x x
       ( refl-Eq-type-polynomial-functor x)) ＝ refl
   coh-refl-eq-Eq-type-polynomial-functor x =
@@ -174,13 +174,13 @@ functions, since given a type family `Y` over a type family `X`, the
 construction gives only a dependent function of approximately type
 
 ```text
-  (x : 𝑃 X) → 𝑃 (Σ B Y x)
+  (x : P X) → P (Σ B Y x)
 ```
 
 rather than
 
 ```text
-  (x : 𝑃 X) → 𝑃 (Y x).
+  (x : P X) → P (Y x).
 ```
 
 ```agda
@@ -217,10 +217,10 @@ module _
   map-polynomial-functor' A B f j (a , x) = (a , (λ i b → f i (x i b)))
 
   map-polynomial-functor :
-    (𝑃 : polynomial-functor l3 l4 I J)
+    (P : polynomial-functor l3 l4 I J)
     {X : I → UU l5} {Y : I → UU l6}
     (f : (i : I) → X i → Y i) →
-    (j : J) → type-polynomial-functor 𝑃 X j → type-polynomial-functor 𝑃 Y j
+    (j : J) → type-polynomial-functor P X j → type-polynomial-functor P Y j
   map-polynomial-functor (A , B) = map-polynomial-functor' A B
 ```
 
@@ -240,10 +240,10 @@ module _
     eq-pair-eq-fiber (eq-binary-htpy _ _ (λ i → H i ∘ pr2 x i))
 
   binary-htpy-polynomial-functor :
-    (𝑃 : polynomial-functor l3 l4 I J)
+    (P : polynomial-functor l3 l4 I J)
     {X : I → UU l5} {Y : I → UU l6} {f g : (i : I) → X i → Y i} →
     binary-htpy f g →
-    binary-htpy (map-polynomial-functor 𝑃 f) (map-polynomial-functor 𝑃 g)
+    binary-htpy (map-polynomial-functor P f) (map-polynomial-functor P g)
   binary-htpy-polynomial-functor (A , B) = binary-htpy-polynomial-functor' A B
 ```
 
@@ -287,16 +287,16 @@ module _
 
 ### Composition of multivariable polynomial functors
 
-Given two multivariable polynomial functors `𝑃 A B : (I → Type) → (J → Type)`
-and `𝑃 C D : (J → Type) → (K → Type)`, then the composite functor
-`𝑃 C D ∘ 𝑃 A B` is again a polynomial functor.
+Given two multivariable polynomial functors `P A B : (I → Type) → (J → Type)`
+and `P C D : (J → Type) → (K → Type)`, then the composite functor
+`P C D ∘ P A B` is again a polynomial functor.
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {I : UU l1} {J : UU l2} {K : UU l3}
-  (𝑄@(C , D) : polynomial-functor l6 l7 J K)
-  (𝑃@(A , B) : polynomial-functor l4 l5 I J)
+  (Q@(C , D) : polynomial-functor l6 l7 J K)
+  (P@(A , B) : polynomial-functor l4 l5 I J)
   where
 
   shape-comp-polynomial-functor : K → UU (l2 ⊔ l4 ⊔ l6 ⊔ l7)
@@ -316,13 +316,13 @@ module _
   map-compute-type-comp-polynomial-functor :
     {l8 : Level} (X : I → UU l8) (k : K) →
     type-polynomial-functor comp-polynomial-functor X k →
-    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k
+    type-polynomial-functor Q (type-polynomial-functor P X) k
   map-compute-type-comp-polynomial-functor X k ((c , a) , x) =
     (c , (λ j d → (a j d , (λ i b → x i (j , d , b)))))
 
   map-inv-compute-type-comp-polynomial-functor :
     {l8 : Level} (X : I → UU l8) (k : K) →
-    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k →
+    type-polynomial-functor Q (type-polynomial-functor P X) k →
     type-polynomial-functor comp-polynomial-functor X k
   map-inv-compute-type-comp-polynomial-functor X k (c , q) =
     ((c , (λ j d → pr1 (q j d))) , (λ i (j , d , b) → pr2 (q j d) i b))
@@ -339,7 +339,7 @@ module _
   compute-type-comp-polynomial-functor :
     {l8 : Level} (X : I → UU l8) (k : K) →
     type-polynomial-functor comp-polynomial-functor X k ≃
-    type-polynomial-functor 𝑄 (type-polynomial-functor 𝑃 X) k
+    type-polynomial-functor Q (type-polynomial-functor P X) k
   compute-type-comp-polynomial-functor X k =
     ( map-compute-type-comp-polynomial-functor X k ,
       is-equiv-map-compute-type-comp-polynomial-functor X k)
@@ -350,7 +350,7 @@ module _
     coherence-square-maps
       ( map-compute-type-comp-polynomial-functor X k)
       ( map-polynomial-functor comp-polynomial-functor f k)
-      ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k)
+      ( map-polynomial-functor Q (map-polynomial-functor P f) k)
       ( map-compute-type-comp-polynomial-functor Y k)
   coh-map-comp-polynomial-functor f k x = refl
 
@@ -359,14 +359,14 @@ module _
     (f : (i : I) → X i → Y i) (k : K) →
     ( map-polynomial-functor comp-polynomial-functor f k) ~
     ( map-inv-compute-type-comp-polynomial-functor Y k ∘
-      map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k ∘
+      map-polynomial-functor Q (map-polynomial-functor P f) k ∘
       map-compute-type-comp-polynomial-functor X k)
   compute-map-comp-polynomial-functor f k x = refl
 
   compute-map-comp-polynomial-functor' :
     {l8 l9 : Level} {X : I → UU l8} {Y : I → UU l9}
     (f : (i : I) → X i → Y i) (k : K) →
-    ( map-polynomial-functor 𝑄 (map-polynomial-functor 𝑃 f) k) ~
+    ( map-polynomial-functor Q (map-polynomial-functor P f) k) ~
     ( map-compute-type-comp-polynomial-functor Y k ∘
       map-polynomial-functor comp-polynomial-functor f k ∘
       map-inv-compute-type-comp-polynomial-functor X k)

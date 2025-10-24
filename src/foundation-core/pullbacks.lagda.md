@@ -793,7 +793,7 @@ module _
   (back-right : cone j h B)
   (back-left : cone i (vertical-map-cone j h back-right) A)
   (front : cone k h A)
-  (K : j ∘ i ~ k)
+  (K : coherence-triangle-maps' k j i)
   (H :
     htpy-parallel-cone
       ( K)
@@ -803,11 +803,11 @@ module _
   where
 
   abstract
-    is-pullback-left-square-horizontal-triangle :
+    is-pullback-front-square-horizontal-triangle :
       is-pullback j h back-right →
       is-pullback i (vertical-map-cone j h back-right) back-left →
       is-pullback k h front
-    is-pullback-left-square-horizontal-triangle pb-back-right pb-back-left =
+    is-pullback-front-square-horizontal-triangle pb-back-right pb-back-left =
       is-pullback-htpy'
         ( K)
         ( refl-htpy' h)
@@ -820,11 +820,11 @@ module _
           ( pb-back-left))
 
   abstract
-    is-pullback-front-square-horizontal-triangle :
+    is-pullback-left-square-horizontal-triangle :
       is-pullback j h back-right →
       is-pullback k h front →
       is-pullback i (vertical-map-cone j h back-right) back-left
-    is-pullback-front-square-horizontal-triangle pb-back-right pb-front =
+    is-pullback-left-square-horizontal-triangle pb-back-right pb-front =
       is-pullback-left-square-is-pullback-rectangle i j h back-right back-left
         ( pb-back-right)
         ( is-pullback-htpy K (refl-htpy' h) front H pb-front)
@@ -846,11 +846,11 @@ module _
   where
 
   abstract
-    is-pullback-left-square-horizontal-triangle' :
+    is-pullback-front-square-horizontal-triangle' :
       is-pullback j h back-right →
       is-pullback i (vertical-map-cone j h back-right) back-left →
       is-pullback k h front
-    is-pullback-left-square-horizontal-triangle' pb-back-right pb-back-left =
+    is-pullback-front-square-horizontal-triangle' pb-back-right pb-back-left =
       is-pullback-htpy
         ( K)
         ( refl-htpy' h)
@@ -863,11 +863,11 @@ module _
           ( pb-back-left))
 
   abstract
-    is-pullback-front-square-horizontal-triangle' :
+    is-pullback-left-square-horizontal-triangle' :
       is-pullback j h back-right →
       is-pullback k h front →
       is-pullback i (vertical-map-cone j h back-right) back-left
-    is-pullback-front-square-horizontal-triangle' pb-back-right pb-front =
+    is-pullback-left-square-horizontal-triangle' pb-back-right pb-front =
       is-pullback-left-square-is-pullback-rectangle i j h
         ( back-right)
         ( back-left)

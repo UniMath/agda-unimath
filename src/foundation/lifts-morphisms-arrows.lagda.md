@@ -35,7 +35,7 @@ open import orthogonal-factorization-systems.lifts-maps
 
 ## Idea
 
-Given two [morphism of arrows](foundation.morphisms-arrows.md) `α : f ⇒ h` and
+Given two [morphisms of arrows](foundation.morphisms-arrows.md) `α : f ⇒ h` and
 `β : g ⇒ h`, then a
 {{#concept "lift" Disambiguation="morphisms of arrows" Agda=lift-hom-arrow}} of
 `α` along `β` is a morphism of arrows `γ : f ⇒ g` such that the triangle
@@ -78,8 +78,8 @@ module _
 
   coh-hom-arrow-lift-hom-arrow :
     coherence-hom-arrow f g
-      map-domain-lift-hom-arrow
-      map-codomain-lift-hom-arrow
+      ( map-domain-lift-hom-arrow)
+      ( map-codomain-lift-hom-arrow)
   coh-hom-arrow-lift-hom-arrow =
     coh-hom-arrow f g hom-arrow-lift-hom-arrow
 
@@ -121,7 +121,7 @@ module _
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
   (α : hom-arrow f h) (β : hom-arrow g h)
-  ( let β₁ = map-codomain-hom-arrow g h β)
+  (let β₁ = map-codomain-hom-arrow g h β)
   where
 
   is-lift-hom-arrow-of-lift-codomain-hom-arrow :
@@ -157,7 +157,7 @@ module _
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
   (α : hom-arrow f h) (β : hom-arrow g h)
-  ( let β₁ = map-codomain-hom-arrow g h β)
+  (let β₁ = map-codomain-hom-arrow g h β)
   where
 
   compute-fiber-lift-codomain-lift-hom-arrow :
@@ -238,7 +238,7 @@ module _
             ( refl-htpy)))
 ```
 
-### Computing the "is lift" predicate in terms of homotopies of cones
+### Computing the predicate of being a lift in terms of homotopies of cones
 
 ```agda
 module _
@@ -249,12 +249,13 @@ module _
   (let β₁ = map-codomain-hom-arrow g h β)
   (let Hβ = coh-hom-arrow g h β)
   (let Hα = coh-hom-arrow f h α)
-  ((i , I) : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
+  (iI : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
+  (let (i , I) = iI)
   where
 
   equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow :
     (j : A → B) →
-    is-lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (i , I) j ≃
+    is-lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β iI j ≃
     htpy-cone β₁ h
       ( g ∘ j , map-domain-hom-arrow g h β ∘ j , Hβ ·r j)
       ( i ∘ f , map-domain-hom-arrow f h α , inv-htpy I ·r f ∙h Hα)

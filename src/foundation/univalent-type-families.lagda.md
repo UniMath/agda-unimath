@@ -235,7 +235,10 @@ module _
   is-closed-under-equiv-subuniverse-univalent-family :
     {l3 l4 : Level} →
     is-closed-under-equiv-subuniverses
-      (λ l → l1 ⊔ l2 ⊔ l) subuniverse-univalent-family l3 l4
+      ( λ l → l1 ⊔ l2 ⊔ l)
+      ( subuniverse-univalent-family)
+      ( l3)
+      ( l4)
   is-closed-under-equiv-subuniverse-univalent-family X Y f (a , e) =
     ( a , f ∘e e)
 
@@ -259,7 +262,7 @@ module _
   map-equiv-type-subuniverse-univalent-family :
     A → type-subuniverse (subuniverse-univalent-family ℬ l2)
   map-equiv-type-subuniverse-univalent-family a =
-    (type-family-univalent-family ℬ a , a , id-equiv)
+    ( type-family-univalent-family ℬ a , a , id-equiv)
 
   map-inv-equiv-type-subuniverse-univalent-family :
     type-subuniverse (subuniverse-univalent-family ℬ l2) → A
@@ -267,14 +270,14 @@ module _
 
   is-retraction-map-inv-equiv-type-subuniverse-univalent-family :
     is-retraction
-      map-equiv-type-subuniverse-univalent-family
-      map-inv-equiv-type-subuniverse-univalent-family
+      ( map-equiv-type-subuniverse-univalent-family)
+      ( map-inv-equiv-type-subuniverse-univalent-family)
   is-retraction-map-inv-equiv-type-subuniverse-univalent-family a = refl
 
   is-section-map-inv-equiv-type-subuniverse-univalent-family :
     is-section
-      map-equiv-type-subuniverse-univalent-family
-      map-inv-equiv-type-subuniverse-univalent-family
+      ( map-equiv-type-subuniverse-univalent-family)
+      ( map-inv-equiv-type-subuniverse-univalent-family)
   is-section-map-inv-equiv-type-subuniverse-univalent-family (X , a , e) =
     eq-equiv-subuniverse (subuniverse-univalent-family ℬ l2) e
 

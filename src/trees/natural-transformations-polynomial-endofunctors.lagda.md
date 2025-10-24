@@ -46,20 +46,20 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$𝑃 ≐ (A ◃ B)$ and $𝑄 ≐ (C ◃ D)$, a
+$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, a
 {{#concept "natural transformation" Disambiguation="of polynomial endofunctors of types" Agda=natural-transformation-polynomial-endofunctor}}
-$α$ from $𝑃$ to $𝑄$ is a family of maps $α : (X : Type) → 𝑃(X) → 𝑄(X)$ such that
+$α$ from $P$ to $Q$ is a family of maps $α : (X : Type) → P(X) → Q(X)$ such that
 for every map of types $f : X → Y$, the following square commutes
 
 ```text
               α(X)
-     𝑃(X) -----------> 𝑄(X)
+     P(X) -----------> Q(X)
        |                |
        |                |
-  𝑃(f) |                | 𝑄(f)
+  P(f) |                | Q(f)
        |                |
        ∨                ∨
-     𝑃(Y) -----------> 𝑄(Y).
+     P(Y) -----------> Q(Y).
               α(Y)
 ```
 
@@ -70,46 +70,46 @@ for every map of types $f : X → Y$, the following square commutes
 ```agda
 coherence-natural-transformation-polynomial-endofunctor :
   {l1 l2 l3 l4 l : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4) →
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4) →
   ( {X : UU l} →
-    type-polynomial-endofunctor 𝑃 X →
-    type-polynomial-endofunctor 𝑄 X) →
+    type-polynomial-endofunctor P X →
+    type-polynomial-endofunctor Q X) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-coherence-natural-transformation-polynomial-endofunctor {l = l} 𝑃 𝑄 α₀ =
+coherence-natural-transformation-polynomial-endofunctor {l = l} P Q α₀ =
   {X Y : UU l} (f : X → Y) →
   coherence-square-maps
     ( α₀)
-    ( map-polynomial-endofunctor 𝑃 f)
-    ( map-polynomial-endofunctor 𝑄 f)
+    ( map-polynomial-endofunctor P f)
+    ( map-polynomial-endofunctor Q f)
     ( α₀)
 
 natural-transformation-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} (l : Level) →
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4) →
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-natural-transformation-polynomial-endofunctor l 𝑃 𝑄 =
+natural-transformation-polynomial-endofunctor l P Q =
   Σ ( {X : UU l} →
-      type-polynomial-endofunctor 𝑃 X →
-      type-polynomial-endofunctor 𝑄 X)
-    ( coherence-natural-transformation-polynomial-endofunctor 𝑃 𝑄)
+      type-polynomial-endofunctor P X →
+      type-polynomial-endofunctor Q X)
+    ( coherence-natural-transformation-polynomial-endofunctor P Q)
 
 module _
   {l1 l2 l3 l4 l5 : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (α : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄)
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4)
+  (α : natural-transformation-polynomial-endofunctor l5 P Q)
   where
 
   type-natural-transformation-polynomial-endofunctor :
     {X : UU l5} →
-    type-polynomial-endofunctor 𝑃 X →
-    type-polynomial-endofunctor 𝑄 X
+    type-polynomial-endofunctor P X →
+    type-polynomial-endofunctor Q X
   type-natural-transformation-polynomial-endofunctor = pr1 α
 
   naturality-natural-transformation-polynomial-endofunctor :
-    coherence-natural-transformation-polynomial-endofunctor 𝑃 𝑄
+    coherence-natural-transformation-polynomial-endofunctor P Q
       ( type-natural-transformation-polynomial-endofunctor)
   naturality-natural-transformation-polynomial-endofunctor = pr2 α
 ```
@@ -119,14 +119,14 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄)
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4)
+  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l5 P Q)
   {X Y : UU l5} (f : X → Y)
   where
 
   hom-arrow-natural-transformation-polynomial-endofunctor :
-    hom-arrow (map-polynomial-endofunctor 𝑃 f) (map-polynomial-endofunctor 𝑄 f)
+    hom-arrow (map-polynomial-endofunctor P f) (map-polynomial-endofunctor Q f)
   hom-arrow-natural-transformation-polynomial-endofunctor =
     ( α₀ , α₀ , α₁ f)
 
@@ -134,16 +134,16 @@ module _
     hom-arrow (α₀ {X}) (α₀ {Y})
   transpose-hom-arrow-natural-transformation-polynomial-endofunctor =
     transpose-hom-arrow
-      ( map-polynomial-endofunctor 𝑃 f)
-      ( map-polynomial-endofunctor 𝑄 f)
+      ( map-polynomial-endofunctor P f)
+      ( map-polynomial-endofunctor Q f)
       ( hom-arrow-natural-transformation-polynomial-endofunctor)
 
   cone-natural-transformation-polynomial-endofunctor :
-    cone α₀ (map-polynomial-endofunctor 𝑄 f) (type-polynomial-endofunctor 𝑃 X)
+    cone α₀ (map-polynomial-endofunctor Q f) (type-polynomial-endofunctor P X)
   cone-natural-transformation-polynomial-endofunctor =
     cone-hom-arrow
-      ( map-polynomial-endofunctor 𝑃 f)
-      ( map-polynomial-endofunctor 𝑄 f)
+      ( map-polynomial-endofunctor P f)
+      ( map-polynomial-endofunctor Q f)
       ( hom-arrow-natural-transformation-polynomial-endofunctor)
 ```
 
@@ -151,10 +151,10 @@ module _
 
 ```agda
 id-natural-transformation-polynomial-endofunctor :
-  {l1 l2 l3 : Level} (𝑃 : polynomial-endofunctor l1 l2) →
-  natural-transformation-polynomial-endofunctor l3 𝑃 𝑃
-pr1 (id-natural-transformation-polynomial-endofunctor 𝑃) = id
-pr2 (id-natural-transformation-polynomial-endofunctor 𝑃) f x = refl
+  {l1 l2 l3 : Level} (P : polynomial-endofunctor l1 l2) →
+  natural-transformation-polynomial-endofunctor l3 P P
+pr1 (id-natural-transformation-polynomial-endofunctor P) = id
+pr2 (id-natural-transformation-polynomial-endofunctor P) f x = refl
 ```
 
 ## Properties
@@ -164,47 +164,47 @@ pr2 (id-natural-transformation-polynomial-endofunctor 𝑃) f x = refl
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4)
   where
 
   htpy-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
   htpy-natural-transformation-polynomial-endofunctor α β =
     Σ ( (X : UU l5) →
-        type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α {X} ~
-        type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 β {X})
+        type-natural-transformation-polynomial-endofunctor P Q α {X} ~
+        type-natural-transformation-polynomial-endofunctor P Q β {X})
       ( λ H →
         (X Y : UU l5) (f : X → Y) →
         coherence-square-homotopies
-          ( naturality-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α f)
-          ( H Y ·r map-polynomial-endofunctor 𝑃 f)
-          ( map-polynomial-endofunctor 𝑄 f ·l H X)
-          ( naturality-natural-transformation-polynomial-endofunctor 𝑃 𝑄 β f))
+          ( naturality-natural-transformation-polynomial-endofunctor P Q α f)
+          ( H Y ·r map-polynomial-endofunctor P f)
+          ( map-polynomial-endofunctor Q f ·l H X)
+          ( naturality-natural-transformation-polynomial-endofunctor P Q β f))
 
   refl-htpy-natural-transformation-polynomial-endofunctor :
-    (α : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α : natural-transformation-polynomial-endofunctor l5 P Q) →
     htpy-natural-transformation-polynomial-endofunctor α α
   refl-htpy-natural-transformation-polynomial-endofunctor α =
     ( (λ X x → refl) , (λ X Y f x → inv right-unit))
 
   htpy-eq-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
     (α ＝ β) → htpy-natural-transformation-polynomial-endofunctor α β
   htpy-eq-natural-transformation-polynomial-endofunctor α .α refl =
     refl-htpy-natural-transformation-polynomial-endofunctor α
 
   is-torsorial-htpy-natural-transformation-polynomial-endofunctor :
-    (α : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α : natural-transformation-polynomial-endofunctor l5 P Q) →
     is-torsorial (htpy-natural-transformation-polynomial-endofunctor α)
   is-torsorial-htpy-natural-transformation-polynomial-endofunctor α =
     is-torsorial-Eq-structure
       ( is-torsorial-Eq-implicit-Π'
         ( λ X →
           is-torsorial-htpy
-            ( type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α)))
-      ( type-natural-transformation-polynomial-endofunctor 𝑃 𝑄 α ,
+            ( type-natural-transformation-polynomial-endofunctor P Q α)))
+      ( type-natural-transformation-polynomial-endofunctor P Q α ,
         ( λ _ _ → refl))
       ( is-torsorial-Eq-implicit-Π'
         ( λ X →
@@ -214,11 +214,11 @@ module _
                 ( λ f →
                   is-torsorial-htpy'
                     ( ( naturality-natural-transformation-polynomial-endofunctor
-                          𝑃 𝑄 α f) ∙h
+                          P Q α f) ∙h
                       ( refl-htpy))))))
 
   is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
     is-equiv (htpy-eq-natural-transformation-polynomial-endofunctor α β)
   is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor α =
     fundamental-theorem-id
@@ -226,14 +226,14 @@ module _
       ( htpy-eq-natural-transformation-polynomial-endofunctor α)
 
   equiv-htpy-eq-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
     (α ＝ β) ≃ htpy-natural-transformation-polynomial-endofunctor α β
   equiv-htpy-eq-natural-transformation-polynomial-endofunctor α β =
     ( htpy-eq-natural-transformation-polynomial-endofunctor α β ,
       is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor α β)
 
   eq-htpy-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 𝑃 𝑄) →
+    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
     htpy-natural-transformation-polynomial-endofunctor α β →
     α ＝ β
   eq-htpy-natural-transformation-polynomial-endofunctor α β =
@@ -246,21 +246,21 @@ module _
 ```agda
 comp-natural-transformation-polynomial-endofunctor :
   {l1 l2 l3 l4 l5 l6 l : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (𝑅 : polynomial-endofunctor l5 l6) →
-  natural-transformation-polynomial-endofunctor l 𝑄 𝑅 →
-  natural-transformation-polynomial-endofunctor l 𝑃 𝑄 →
-  natural-transformation-polynomial-endofunctor l 𝑃 𝑅
-comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑅 (β₀ , β₁) (α₀ , α₁) =
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4)
+  (R : polynomial-endofunctor l5 l6) →
+  natural-transformation-polynomial-endofunctor l Q R →
+  natural-transformation-polynomial-endofunctor l P Q →
+  natural-transformation-polynomial-endofunctor l P R
+comp-natural-transformation-polynomial-endofunctor P Q R (β₀ , β₁) (α₀ , α₁) =
   ( ( β₀ ∘ α₀) ,
     ( λ f →
       pasting-horizontal-coherence-square-maps
         ( α₀)
         ( β₀)
-        ( map-polynomial-endofunctor 𝑃 f)
-        ( map-polynomial-endofunctor 𝑄 f)
-        ( map-polynomial-endofunctor 𝑅 f)
+        ( map-polynomial-endofunctor P f)
+        ( map-polynomial-endofunctor Q f)
+        ( map-polynomial-endofunctor R f)
         ( α₀)
         ( β₀)
         ( α₁ f)
@@ -272,15 +272,15 @@ comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑅 (β₀ , β₁
 ```agda
 module _
   {l1 l2 l3 l4 l : Level}
-  (𝑃 : polynomial-endofunctor l1 l2)
-  (𝑄 : polynomial-endofunctor l3 l4)
-  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l 𝑃 𝑄)
+  (P : polynomial-endofunctor l1 l2)
+  (Q : polynomial-endofunctor l3 l4)
+  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l P Q)
   where
 
   htpy-left-unit-law-comp-natural-transformation-polynomial-endofunctor :
-    htpy-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑄
-        ( id-natural-transformation-polynomial-endofunctor 𝑄)
+    htpy-natural-transformation-polynomial-endofunctor P Q
+      ( comp-natural-transformation-polynomial-endofunctor P Q Q
+        ( id-natural-transformation-polynomial-endofunctor Q)
         ( α))
       ( α)
   htpy-left-unit-law-comp-natural-transformation-polynomial-endofunctor =
@@ -288,37 +288,37 @@ module _
         ( λ X Y f x → inv (right-unit ∙ right-unit ∙ ap-id (α₁ f x))))
 
   left-unit-law-comp-natural-transformation-polynomial-endofunctor :
-    ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑄
-      ( id-natural-transformation-polynomial-endofunctor 𝑄)
+    ( comp-natural-transformation-polynomial-endofunctor P Q Q
+      ( id-natural-transformation-polynomial-endofunctor Q)
       ( α)) ＝
     ( α)
   left-unit-law-comp-natural-transformation-polynomial-endofunctor =
-    eq-htpy-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑄 𝑄
-        ( id-natural-transformation-polynomial-endofunctor 𝑄)
+    eq-htpy-natural-transformation-polynomial-endofunctor P Q
+      ( comp-natural-transformation-polynomial-endofunctor P Q Q
+        ( id-natural-transformation-polynomial-endofunctor Q)
         ( α))
       ( α)
       ( htpy-left-unit-law-comp-natural-transformation-polynomial-endofunctor)
 
   htpy-right-unit-law-comp-natural-transformation-polynomial-endofunctor :
-    htpy-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑃 𝑄
+    htpy-natural-transformation-polynomial-endofunctor P Q
+      ( comp-natural-transformation-polynomial-endofunctor P P Q
         ( α)
-        ( id-natural-transformation-polynomial-endofunctor 𝑃))
+        ( id-natural-transformation-polynomial-endofunctor P))
       ( α)
   htpy-right-unit-law-comp-natural-transformation-polynomial-endofunctor =
       ( ( λ X x → refl) , (λ X Y f x → inv right-unit))
 
   right-unit-law-comp-natural-transformation-polynomial-endofunctor :
-    ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑃 𝑄
+    ( comp-natural-transformation-polynomial-endofunctor P P Q
       ( α)
-      ( id-natural-transformation-polynomial-endofunctor 𝑃)) ＝
+      ( id-natural-transformation-polynomial-endofunctor P)) ＝
     ( α)
   right-unit-law-comp-natural-transformation-polynomial-endofunctor =
-    eq-htpy-natural-transformation-polynomial-endofunctor 𝑃 𝑄
-      ( comp-natural-transformation-polynomial-endofunctor 𝑃 𝑃 𝑄
+    eq-htpy-natural-transformation-polynomial-endofunctor P Q
+      ( comp-natural-transformation-polynomial-endofunctor P P Q
         ( α)
-        ( id-natural-transformation-polynomial-endofunctor 𝑃))
+        ( id-natural-transformation-polynomial-endofunctor P))
       ( α)
       ( htpy-right-unit-law-comp-natural-transformation-polynomial-endofunctor)
 ```

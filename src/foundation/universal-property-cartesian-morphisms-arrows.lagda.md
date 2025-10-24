@@ -57,11 +57,12 @@ open import orthogonal-factorization-systems.lifts-maps
 ## Idea
 
 A [morphism of arrows](foundation.morphisms-arrows.md) `β : g ⇒ h`, is said to
-satisfy the
-{{#concept "universal property" Disambiguation="cartesian morphisms of arrows"}}
-of cartesian morphisms of arrows if the natural map that assigns to, given
-another morphism of arrows `α : f ⇒ h`, and a
-[lifting diagram](foundation.lifts-morphisms-arrows.md) of the form
+satisfy the VojtechStep14 hours ago Suggested change:
+
+{{#concept "universal property" Disambiguation="cartesian morphisms of arrows" Agda=universal-property-cartesian-hom-arrow}}
+of [cartesian morphisms](foundation.cartesian-morphisms-arrows.md) of arrows if
+the natural map that assigns to, given another morphism of arrows `α : f ⇒ h`,
+and a [lifting diagram](foundation.lifts-morphisms-arrows.md) of the form
 
 ```text
           B
@@ -70,7 +71,7 @@ another morphism of arrows `α : f ⇒ h`, and a
       /   g   ∨
     A --------> C
     |     |     |
-    |     ∨  H  |
+    |     ∨     |
   f |     B'    | h
     |   ∧   \   |
     |  /     \  |
