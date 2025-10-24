@@ -131,7 +131,7 @@ module _
   where
 
   abstract
-    decide-is-inhabited-or-empty-net-Metric-Space :
+    is-inhabited-or-empty-type-is-inhabited-or-empty-net-Metric-Space :
       is-inhabited-or-empty (type-Metric-Space X)
     decide-is-inhabited-or-empty-net-Metric-Space =
       is-inhabited-or-empty-is-coinhabited
