@@ -7,6 +7,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -42,6 +43,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
+open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types

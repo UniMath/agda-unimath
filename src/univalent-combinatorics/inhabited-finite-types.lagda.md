@@ -8,12 +8,18 @@ module univalent-combinatorics.inhabited-finite-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
+open import foundation.coproduct-types
+open import foundation.empty-types
+open import foundation.decidable-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.subuniverses
@@ -21,8 +27,11 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -179,4 +188,50 @@ pr1 (is-finite-and-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ n F) =
   is-finite-type-Type-With-Cardinality-ℕ (succ-ℕ n) F
 pr2 (is-finite-and-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ n F) =
   is-inhabited-type-Type-With-Cardinality-ℕ-succ-ℕ n F
+```
+
+### The standard finite type `Fin n` is inhabited if and only if `n` is nonzero
+
+```agda
+abstract
+  is-inhabited-is-nonzero-Fin :
+    (n : ℕ) → is-nonzero-ℕ n → is-inhabited (Fin n)
+  is-inhabited-is-nonzero-Fin zero-ℕ n≠0 = ex-falso (n≠0 refl)
+  is-inhabited-is-nonzero-Fin (succ-ℕ n) _ = unit-trunc-Prop (neg-one-Fin n)
+
+  is-nonzero-is-inhabited-Fin :
+    (n : ℕ) → is-inhabited (Fin n) → is-nonzero-ℕ n
+  is-nonzero-is-inhabited-Fin _ H refl = rec-trunc-Prop empty-Prop (λ ()) H
+
+is-empty-is-zero-Fin : (n : ℕ) → is-zero-ℕ n → is-empty (Fin n)
+is-empty-is-zero-Fin _ refl ()
+```
+
+### The standard finite types are decidable
+
+```agda
+is-decidable-Fin : (n : ℕ) → is-decidable (Fin n)
+is-decidable-Fin zero-ℕ = inr (λ ())
+is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
+
+is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
+is-inhabited-or-empty-Fin n =
+  is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
+```
+
+### The finite types are propositionally decidable
+
+```agda
+module _
+  {l : Level} (X : Finite-Type l)
+  where
+
+  is-inhabited-or-empty-type-Finite-Type :
+    is-inhabited-or-empty (type-Finite-Type X)
+  is-inhabited-or-empty-type-Finite-Type =
+    rec-trunc-Prop
+      ( is-inhabited-or-empty-Prop (type-Finite-Type X))
+      ( λ (n , Fin-n≃X) →
+        is-inhabited-or-empty-equiv' Fin-n≃X (is-inhabited-or-empty-Fin n))
+      ( is-finite-type-Finite-Type X)
 ```
