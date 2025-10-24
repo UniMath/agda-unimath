@@ -43,11 +43,13 @@ A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 [finite type](univalent-combinatorics.finite-types.md) equipped with a
 [probability distribution](finite-probability-theory.probability-distributions-on-finite-types.md).
 
-Our definitions follows {{#cite Babai00}} but the
+Any finite probability space is [inhabited](foundation.inhabited-types.md).
+
+Our definitions follows {{#cite Babai00}} except that
 [non-emptiness](foundation-core.empty-types.md) of the underlying type is
 actually a consequence of the condition of having
 [total measure](finite-probability-theory.positive-distributions-on-finite-types.md)
-equal to 1.
+equal to 1, rather than an hypothesis.
 
 ## Definitions
 
