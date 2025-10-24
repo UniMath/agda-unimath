@@ -13,7 +13,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
-open import foundation.injective-maps
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
@@ -22,6 +21,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.injective-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps

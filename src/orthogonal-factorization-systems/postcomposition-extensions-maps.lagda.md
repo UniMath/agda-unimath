@@ -142,3 +142,9 @@ module _
   trunc-map-postcomp-extension f i (g , G) =
     ( postcomp-extension f i g , is-trunc-map-postcomp-extension f i g G)
 ```
+
+## See also
+
+- In [`foundation.surjective-maps`](foundation.surjective-maps.md) it is shown
+  that postcomposition of extensions along surjective maps by an embedding is an
+  equivalence.
