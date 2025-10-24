@@ -27,6 +27,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
 open import metric-spaces.metric-spaces
@@ -89,6 +91,10 @@ module _
       ( metric-space-ℝ l2)
       ( S)
 
+  type-inhabited-totally-bounded-subset-ℝ : UU (l1 ⊔ lsuc l2)
+  type-inhabited-totally-bounded-subset-ℝ =
+    type-subtype subset-inhabited-totally-bounded-subset-ℝ
+
   subspace-inhabited-totally-bounded-subset-ℝ :
     Metric-Space (l1 ⊔ lsuc l2) l2
   subspace-inhabited-totally-bounded-subset-ℝ =
@@ -142,8 +148,13 @@ module _
     net δ =
       im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( inhabited-finitely-enumerable-subtype-net-Metric-Space
-          ( metric-space-subset-ℝ S) |S| δ (M δ))
+        ( finitely-enumerable-subset-net-Metric-Space
+            ( metric-space-subset-ℝ S)
+            ( δ)
+            ( M δ) ,
+          backward-implication
+            ( is-coinhabited-net-Metric-Space (metric-space-subset-ℝ S) δ (M δ))
+            ( |S|))
 
     is-net :
       (δ : ℚ⁺) →
@@ -384,6 +395,23 @@ module _
     has-infimum-inhabited-totally-bounded-subset-ℝ =
       ( inf-inhabited-totally-bounded-subset-ℝ ,
         is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
+```
+
+### It is decidable whether a totally bounded subset of `ℝ` is inhabited
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    decide-is-inhabited-or-empty-totally-bounded-subset-ℝ :
+      is-inhabited-or-empty (type-totally-bounded-subset-ℝ S)
+    decide-is-inhabited-or-empty-totally-bounded-subset-ℝ =
+      decide-is-inhabited-or-empty-totally-bounded-subspace-Metric-Space
+        ( metric-space-ℝ l2)
+        ( S)
 ```
 
 ## References

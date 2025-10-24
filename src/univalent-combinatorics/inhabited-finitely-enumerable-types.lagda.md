@@ -7,8 +7,10 @@ module univalent-combinatorics.inhabited-finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -23,7 +25,10 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import univalent-combinatorics.finitely-enumerable-types
+open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -91,4 +96,30 @@ abstract
               ( is-empty-is-zero-finite-enumeration eX refl))
         (succ-ℕ n , Fin-sn↠X) → (n , Fin-sn↠X))
       ( ∃eX)
+```
+
+### The finitely enumerable types are propositionally decidable
+
+```agda
+module _
+  {l : Level} (X : Finitely-Enumerable-Type l)
+  where
+
+  abstract
+    decide-is-inhabited-or-empty-Finitely-Enumerable-Type :
+      is-inhabited-or-empty (type-Finitely-Enumerable-Type X)
+    decide-is-inhabited-or-empty-Finitely-Enumerable-Type =
+      rec-trunc-Prop
+        ( is-inhabited-or-empty-Prop (type-Finitely-Enumerable-Type X))
+        ( λ (N , Fin-n↠X) →
+          rec-coproduct
+            ( λ N=0 →
+              inr (is-empty-surjection Fin-n↠X (is-empty-is-zero-Fin N N=0)))
+            ( λ N≠0 →
+              inl
+                ( map-is-inhabited
+                  ( map-surjection Fin-n↠X)
+                  ( is-inhabited-is-nonzero-Fin N N≠0)))
+            ( is-decidable-is-zero-ℕ N))
+        ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
 ```

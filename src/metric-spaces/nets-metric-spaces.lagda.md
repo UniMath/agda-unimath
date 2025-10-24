@@ -9,12 +9,15 @@ module metric-spaces.nets-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.coinhabited-pairs-of-types
 open import foundation.dependent-pair-types
 open import foundation.images
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.cartesian-products-metric-spaces
@@ -33,6 +36,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
 open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
+open import univalent-combinatorics.inhabited-finitely-enumerable-types
 ```
 
 </details>
@@ -80,6 +84,14 @@ module _
     subtype-finitely-enumerable-subtype
       ( finitely-enumerable-subset-net-Metric-Space)
 
+  type-net-Metric-Space : UU (l1 ⊔ l3)
+  type-net-Metric-Space = type-subtype subset-net-Metric-Space
+
+  finitely-enumerable-type-net-Metric-Space : Finitely-Enumerable-Type (l1 ⊔ l3)
+  finitely-enumerable-type-net-Metric-Space =
+    finitely-enumerable-type-finitely-enumerable-subtype
+      ( finitely-enumerable-subset-net-Metric-Space)
+
   is-approximation-subset-net-Metric-Space :
     is-approximation-Metric-Space X ε subset-net-Metric-Space
   is-approximation-subset-net-Metric-Space = pr2 N
@@ -90,28 +102,40 @@ module _
       is-approximation-subset-net-Metric-Space)
 ```
 
-### If a metric space is inhabited, so is any net on it
+### A metric space and any net for it are coinhabited
 
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
-  (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
+  (X : Metric-Space l1 l2) (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
   where
 
   abstract
-    is-inhabited-net-inhabited-Metric-Space :
-      is-inhabited-finitely-enumerable-subtype (pr1 S)
-    is-inhabited-net-inhabited-Metric-Space =
-      is-inhabited-is-approximation-inhabited-Metric-Space X |X| ε
-        ( subset-net-Metric-Space X ε S)
-        ( is-approximation-subset-net-Metric-Space X ε S)
+    is-coinhabited-net-Metric-Space :
+      is-coinhabited (type-net-Metric-Space X ε S) (type-Metric-Space X)
+    is-coinhabited-net-Metric-Space =
+      is-coinhabited-approximation-Metric-Space
+        ( X)
+        ( ε)
+        ( approximation-net-Metric-Space X ε S)
+```
 
-  inhabited-finitely-enumerable-subtype-net-Metric-Space :
-    inhabited-finitely-enumerable-subtype l3 (type-Metric-Space X)
-  inhabited-finitely-enumerable-subtype-net-Metric-Space =
-    ( finitely-enumerable-subset-net-Metric-Space X ε S ,
-      is-inhabited-net-inhabited-Metric-Space)
+### Given any net for a metric space `X`, it is propositionally decidable whether `X` is inhabited
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2) (ε : ℚ⁺) (S : net-Metric-Space l3 X ε)
+  where
+
+  abstract
+    decide-is-inhabited-or-empty-net-Metric-Space :
+      is-inhabited-or-empty (type-Metric-Space X)
+    decide-is-inhabited-or-empty-net-Metric-Space =
+      is-inhabited-or-empty-is-coinhabited
+        ( is-coinhabited-net-Metric-Space X ε S)
+        ( decide-is-inhabited-or-empty-Finitely-Enumerable-Type
+          ( finitely-enumerable-type-net-Metric-Space X ε S))
 ```
 
 ## Properties
