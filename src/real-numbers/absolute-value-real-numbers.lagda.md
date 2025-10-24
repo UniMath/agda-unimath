@@ -186,7 +186,7 @@ module _
 ```agda
 module _
   (x : ℝ lzero)
-  (x-is-infinitesimal : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
+  (is-infinitesimal-x : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
   where
 
   abstract
@@ -201,7 +201,7 @@ module _
             inv-tr
               ( leq-ℝ (abs-ℝ x))
               ( left-unit-law-add-ℝ (real-ℚ⁺ ε))
-              ( x-is-infinitesimal ε)))
+              ( is-infinitesimal-x ε)))
 ```
 
 ### If `x ≤ y` and `-x ≤ y`, `|x| ≤ y`
