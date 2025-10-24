@@ -9,8 +9,10 @@ module synthetic-homotopy-theory.loop-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.truncated-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.truncation-levels
 
 open import structured-types.h-spaces
 open import structured-types.magmas
@@ -23,10 +25,12 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-The **loop space** of a [pointed type](structured-types.pointed-types.md) `A` is
-the pointed type of self-[identifications](foundation-core.identity-types.md) of
-the base point of `A`. The loop space comes equipped with a group-like structure
-induced by the groupoidal-like structure on identifications.
+The
+{{#concept "loop space" Disambiguation="of a pointed type" Agda=Ω WD="loop space" WDID=Q2066070}}
+of a [pointed type](structured-types.pointed-types.md) `A` is the pointed type
+of self-[identifications](foundation-core.identity-types.md) of the base point
+of `A`. The loop space comes equipped with a group-like structure induced by the
+groupoidal-like structure on identifications.
 
 ## Table of files directly related to loop spaces
 
@@ -84,7 +88,7 @@ module _
   coherence-unit-laws-mul-Ω = refl
 
   Ω-H-Space : H-Space l
-  pr1 Ω-H-Space =
+  Ω-H-Space =
     ( Ω A ,
       mul-Ω A ,
       left-unit-law-mul-Ω ,
@@ -182,4 +186,15 @@ module _
     ( (point-Pointed-Type A ＝ x) , p) ≃∗ Ω A
   pointed-equiv-loop-pointed-identity =
     ( equiv-concat' (point-Pointed-Type A) (inv p) , right-inv p)
+```
+
+### The loop space of a (𝑘+1)-truncated type is 𝑘-truncated
+
+```agda
+module _
+  {l : Level} (k : 𝕋) (A : Pointed-Type l)
+  where
+
+  is-trunc-Ω : is-trunc (succ-𝕋 k) (type-Pointed-Type A) → is-trunc k (type-Ω A)
+  is-trunc-Ω H = H (point-Pointed-Type A) (point-Pointed-Type A)
 ```
