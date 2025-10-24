@@ -10,6 +10,7 @@ module finite-probability-theory.finite-probability-spaces where
 open import finite-probability-theory.positive-distributions-on-finite-types
 open import finite-probability-theory.probability-distributions-on-finite-types
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -31,6 +32,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
 ```
 
 </details>
@@ -118,4 +120,31 @@ module _
           ( distribution-Finite-Probability-Space Ω)
           ( H))) ∙
       ( eq-one-total-measure-distribution-Finite-Probability-Space Ω)
+```
+
+### A finite probability space is inhabited
+
+```agda
+module _
+  {l : Level} (Ω : Finite-Probability-Space l)
+  where
+
+  is-inhabited-type-Finite-Probability-Space :
+    is-inhabited (type-Finite-Probability-Space Ω)
+  is-inhabited-type-Finite-Probability-Space =
+    rec-coproduct
+      ( id)
+      ( ex-falso ∘ (is-nonempty-type-Finite-Probability-Space Ω))
+      ( is-inhabited-or-empty-is-finite
+        ( is-finite-type-Finite-Probability-Space Ω))
+
+  inhabited-type-Finite-Probability-Space : Inhabited-Type l
+  inhabited-type-Finite-Probability-Space =
+    ( type-Finite-Probability-Space Ω ,
+      is-inhabited-type-Finite-Probability-Space)
+
+  inhabited-finite-type-Finite-Probability-Space : Inhabited-Finite-Type l
+  inhabited-finite-type-Finite-Probability-Space =
+    ( finite-type-Finite-Probability-Space Ω ,
+      is-inhabited-type-Finite-Probability-Space)
 ```
