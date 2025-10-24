@@ -14,9 +14,9 @@ open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.truncation-levels
-open import foundation.truncated-maps
 open import foundation.identity-types
+open import foundation.truncated-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps

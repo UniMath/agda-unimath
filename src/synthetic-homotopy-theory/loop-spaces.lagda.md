@@ -9,10 +9,10 @@ module synthetic-homotopy-theory.loop-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.truncated-types
 open import foundation.identity-types
-open import foundation.universe-levels
+open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.universe-levels
 
 open import structured-types.h-spaces
 open import structured-types.magmas
