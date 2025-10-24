@@ -31,7 +31,7 @@ A
 on a [finite type](univalent-combinatorics.finite-types.md) is a function into
 the [positive real numbers](real-numbers.positive-real-numbers.md).
 
-THe **total measure** of a measure `μ` on a finite type `Ω` is the
+The **total measure** of a measure `μ` on a finite type `Ω` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
 \[ ∑\_{x ∈ Ω} μ(x). \]
