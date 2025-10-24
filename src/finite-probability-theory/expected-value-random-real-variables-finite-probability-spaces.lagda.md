@@ -1,12 +1,17 @@
 # Expected value of random real variables in finite probability spaces
 
 ```agda
-module probability-theory.expected-value-random-real-variables-finite-probability-spaces where
+module finite-probability-theory.expected-value-random-real-variables-finite-probability-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-probability-theory.finite-probability-spaces
+open import finite-probability-theory.measures-on-finite-types
+open import finite-probability-theory.probability-measures-on-finite-types
+open import finite-probability-theory.random-real-variables-finite-probability-spaces
+
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -19,11 +24,6 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups
-
-open import probability-theory.finite-probability-spaces
-open import probability-theory.measures-on-finite-types
-open import probability-theory.probability-measures-on-finite-types
-open import probability-theory.random-real-variables-finite-probability-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers

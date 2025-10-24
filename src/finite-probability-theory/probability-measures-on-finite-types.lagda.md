@@ -1,12 +1,14 @@
 # Probability measures on finite types
 
 ```agda
-module probability-theory.probability-measures-on-finite-types where
+module finite-probability-theory.probability-measures-on-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-probability-theory.measures-on-finite-types
+
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -17,8 +19,6 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups
-
-open import probability-theory.measures-on-finite-types
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers

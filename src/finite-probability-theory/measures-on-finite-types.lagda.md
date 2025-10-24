@@ -1,7 +1,7 @@
 # Measures on finite types
 
 ```agda
-module probability-theory.measures-on-finite-types where
+module finite-probability-theory.measures-on-finite-types where
 ```
 
 <details><summary>Imports</summary>
