@@ -35,7 +35,7 @@ open import univalent-combinatorics.finite-types
 A
 {{#concept "probability measure" Disambiguation="on a finite type" Agda=probability-measure-Finite-Type}}
 on a [finite type](univalent-combinatorics.finite-types.md) is a
-[measure](probability-theory.measures-on-finite-types.md) with **total measure**
+[measure](finite-probability-theory.measures-on-finite-types.md) with **total measure**
 equal to 1.
 
 ## Definition

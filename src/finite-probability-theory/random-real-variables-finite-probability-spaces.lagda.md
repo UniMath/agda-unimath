@@ -40,6 +40,8 @@ open import univalent-combinatorics.finite-types
 
 A
 {{#concept "random real variable" Disambiguation="in a finite probability space" Agda=random-real-variable-Finite-Probability-Space}}
+in a
+[finite probability space](finite-probability-theory.finite-probability-spaces.md)
 is a function from the underlying
 [finite type](univalent-combinatorics.finite-types.md) to
 [`ℝ`](real-numbers.dedekind-real-numbers.md).

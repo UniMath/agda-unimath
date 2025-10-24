@@ -38,7 +38,7 @@ open import univalent-combinatorics.finite-types
 
 A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 [finite type](univalent-combinatorics.finite-types.md) equipped with a
-[probability measure](probability-theory.probability-measures-on-finite-types.md).
+[probability measure](finite-probability-theory.probability-measures-on-finite-types.md).
 
 ## Definitions
 

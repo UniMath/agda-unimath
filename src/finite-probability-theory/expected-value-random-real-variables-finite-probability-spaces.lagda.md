@@ -42,9 +42,9 @@ open import univalent-combinatorics.finite-types
 The
 {{#concept "expected value" Disambiguation="of a random real variable in a finite probability space" Agda=expected-value-random-real-variable-Finite-Probability-Space}}
 of a
-[random real variable](probability-theory.random-real-variables-finite-probability-spaces.md)
+[random real variable](finite-probability-theory.random-real-variables-finite-probability-spaces.md)
 `X` in a
-[finite probability space](probability-theory.finite-probability-spaces.md)
+[finite probability space](finite-probability-theory.finite-probability-spaces.md)
 `(Ω , μ)` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
