@@ -57,3 +57,15 @@ module _
   random-real-variable-Finite-Probability-Space =
     type-Finite-Probability-Space Ω → ℝ lzero
 ```
+
+## Constant random variables in a finite probability space
+
+```agda
+module _
+  {l : Level} (Ω : Finite-Probability-Space l)
+  where
+
+  const-random-real-variable-Finite-Probablity-Space :
+    (x : ℝ lzero) → random-real-variable-Finite-Probability-Space Ω
+  const-random-real-variable-Finite-Probablity-Space x _ = x
+```
