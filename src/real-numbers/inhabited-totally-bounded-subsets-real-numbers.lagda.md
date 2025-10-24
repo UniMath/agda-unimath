@@ -406,7 +406,7 @@ module _
   where
 
   abstract
-    decide-is-inhabited-or-empty-totally-bounded-subset-ℝ :
+    is-inhabited-or-empty-totally-bounded-subset-ℝ :
       is-inhabited-or-empty (type-totally-bounded-subset-ℝ S)
     decide-is-inhabited-or-empty-totally-bounded-subset-ℝ =
       decide-is-inhabited-or-empty-totally-bounded-subspace-Metric-Space
