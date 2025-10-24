@@ -17,7 +17,6 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
@@ -35,8 +34,6 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import logic.functoriality-existential-quantification
 
 open import metric-spaces.metric-spaces
 
@@ -230,56 +227,6 @@ module _
   transitive-leq-ℝ⁰⁺ = transitive-leq-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
 ```
 
-### Strict inequality on nonnegative real numbers
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
-  where
-
-  le-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
-  le-prop-ℝ⁰⁺ = le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
-
-  le-ℝ⁰⁺ : UU (l1 ⊔ l2)
-  le-ℝ⁰⁺ = type-Prop le-prop-ℝ⁰⁺
-```
-
-### The canonical embedding of nonnegative rational numbers to nonnegative reals preserves strict inequality
-
-```agda
-abstract
-  preserves-le-nonnegative-real-ℚ⁰⁺ :
-    (p q : ℚ⁰⁺) →
-    le-ℚ⁰⁺ p q → le-ℝ⁰⁺ (nonnegative-real-ℚ⁰⁺ p) (nonnegative-real-ℚ⁰⁺ q)
-  preserves-le-nonnegative-real-ℚ⁰⁺ p q = preserves-le-real-ℚ _ _
-```
-
-### Similarity preserves strict inequality
-
-```agda
-module _
-  {l1 l2 l3 : Level} (z : ℝ⁰⁺ l1) (x : ℝ⁰⁺ l2) (y : ℝ⁰⁺ l3) (x~y : sim-ℝ⁰⁺ x y)
-  where
-
-  abstract
-    preserves-le-left-sim-ℝ⁰⁺ : le-ℝ⁰⁺ x z → le-ℝ⁰⁺ y z
-    preserves-le-left-sim-ℝ⁰⁺ =
-      preserves-le-left-sim-ℝ (real-ℝ⁰⁺ z) _ _ x~y
-```
-
-### Concatenation of inequality and strict inequality
-
-```agda
-module _
-  {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3)
-  where
-
-  abstract
-    concatenate-leq-le-ℝ⁰⁺ : leq-ℝ⁰⁺ x y → le-ℝ⁰⁺ y z → le-ℝ⁰⁺ x z
-    concatenate-leq-le-ℝ⁰⁺ =
-      concatenate-leq-le-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
-```
-
 ### A real number is nonnegative if and only if every element of its upper cut is positive
 
 ```agda
@@ -337,22 +284,6 @@ abstract
     in do
       (q , x<q) ← is-inhabited-upper-cut-ℝ (real-ℝ⁰⁺ x)
       intro-exists (q , is-positive-is-in-upper-cut-ℝ⁰⁺ x q x<q) x<q
-```
-
-### Every nonnegative real number is less than some positive rational number
-
-```agda
-module _
-  {l : Level} (x : ℝ⁰⁺ l)
-  where
-
-  abstract
-    le-some-positive-rational-ℝ⁰⁺ :
-      exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q))
-    le-some-positive-rational-ℝ⁰⁺ =
-      map-tot-exists
-        ( λ (q , _) x<q → le-real-is-in-upper-cut-ℚ q (real-ℝ⁰⁺ x) x<q)
-        ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Addition on nonnegative real numbers
@@ -445,20 +376,6 @@ sim-zero-le-positive-rational-ℝ⁰⁺ x H =
         ( x)
         ( zero-ℝ⁰⁺)
         ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)))
-```
-
-### Addition preserves strict inequality
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3) (w : ℝ⁰⁺ l4)
-  where
-
-  abstract
-    preserves-le-add-ℝ⁰⁺ :
-      le-ℝ⁰⁺ x y → le-ℝ⁰⁺ z w → le-ℝ⁰⁺ (x +ℝ⁰⁺ z) (y +ℝ⁰⁺ w)
-    preserves-le-add-ℝ⁰⁺ =
-      preserves-le-add-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z) (real-ℝ⁰⁺ w)
 ```
 
 ### The canonical embedding of nonnegative rational numbers to nonnegative real numbers preserves addition

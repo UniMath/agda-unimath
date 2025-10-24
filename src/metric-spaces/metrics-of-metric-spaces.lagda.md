@@ -24,6 +24,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
