@@ -450,7 +450,7 @@ module _
         ( s , s∈S))
 ```
 
-### There is an nonnegative upper bound on the absolute value of an element of an inhabited totally bounded subset of `ℝ`
+### There is a nonnegative upper bound on the absolute value of an element of an inhabited totally bounded subset of `ℝ`
 
 ```agda
 module _
