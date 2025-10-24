@@ -249,8 +249,8 @@ module _
   (let β₁ = map-codomain-hom-arrow g h β)
   (let Hβ = coh-hom-arrow g h β)
   (let Hα = coh-hom-arrow f h α)
-  (iI : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
-  (let (i , I) = iI)
+  (iI@(i , I) :
+    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
   where
 
   equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow :
