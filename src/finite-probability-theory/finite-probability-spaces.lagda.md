@@ -43,7 +43,7 @@ A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 Our definitions follows {{#cite Babai00}} but the
 [non-emptiness](foundation-core.empty-types.md) of the underlying type is
 actually a consequence of the condition of having
-[total measure](finite-probability-spaces.positive-distributions-on-finite-types.md)
+[total measure](finite-probability-theory.positive-distributions-on-finite-types.md)
 equal to 1.
 
 ## Definitions
