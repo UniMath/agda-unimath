@@ -104,6 +104,8 @@ module _
 
 ### A metric space and any net for it are coinhabited
 
+A metric space is inhabited if and only if any net for it is inhabited.
+
 ```agda
 module _
   {l1 l2 l3 : Level}
@@ -129,7 +131,7 @@ module _
   where
 
   abstract
-    decide-is-inhabited-or-empty-net-Metric-Space :
+    is-inhabited-or-empty-type-is-inhabited-or-empty-net-Metric-Space :
       is-inhabited-or-empty (type-Metric-Space X)
     decide-is-inhabited-or-empty-net-Metric-Space =
       is-inhabited-or-empty-is-coinhabited

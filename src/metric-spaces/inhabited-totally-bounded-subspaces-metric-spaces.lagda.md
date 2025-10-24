@@ -151,7 +151,7 @@ module _
   where
 
   abstract
-    decide-is-inhabited-or-empty-totally-bounded-subspace-Metric-Space :
+    is-inhabited-or-empty-totally-bounded-subspace-Metric-Space :
       is-inhabited-or-empty (type-totally-bounded-subspace-Metric-Space X S)
     decide-is-inhabited-or-empty-totally-bounded-subspace-Metric-Space =
       rec-trunc-Prop
