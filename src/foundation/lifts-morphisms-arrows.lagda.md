@@ -274,45 +274,45 @@ module _
               by equiv-inv-htpy (Hα ∙h h ·l J) (I ·r f ∙h (β₁ ·l H ∙h Hβ ·r j))
             ≃ ( β₁ ·l H ∙h Hβ ·r j ~ inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
               by
-                equiv-left-transpose-htpy-concat
-                  ( I ·r f)
-                  ( β₁ ·l H ∙h Hβ ·r j)
-                  ( Hα ∙h h ·l J)
+              equiv-left-transpose-htpy-concat
+                ( I ·r f)
+                ( β₁ ·l H ∙h Hβ ·r j)
+                ( Hα ∙h h ·l J)
             ≃ ( Hβ ·r j ~
                 inv-htpy (β₁ ·l H) ∙h (inv-htpy I ·r f ∙h (Hα ∙h h ·l J)))
               by
-                equiv-left-transpose-htpy-concat
-                  ( β₁ ·l H)
-                  ( Hβ ·r j)
-                  ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
+              equiv-left-transpose-htpy-concat
+                ( β₁ ·l H)
+                ( Hβ ·r j)
+                ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))
             ≃ ( Hβ ·r j ~
                 ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα)) ∙h h ·l J)
               by
-                equiv-concat-htpy'
-                  ( Hβ ·r j)
-                  ( ( right-whisker-concat-htpy
-                      ( inv-htpy (left-whisker-inv-htpy β₁ H))
-                      ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))) ∙h
-                    ( left-whisker-concat-htpy
-                      ( β₁ ·l (inv-htpy H))
-                      ( inv-htpy-assoc-htpy (inv-htpy I ·r f) Hα (h ·l J))) ∙h
-                    ( inv-htpy-assoc-htpy
-                      ( β₁ ·l (inv-htpy H))
-                      ( inv-htpy I ·r f ∙h Hα)
-                      ( h ·l J)))
+              equiv-concat-htpy'
+                ( Hβ ·r j)
+                ( ( right-whisker-concat-htpy
+                    ( inv-htpy (left-whisker-inv-htpy β₁ H))
+                    ( inv-htpy I ·r f ∙h (Hα ∙h h ·l J))) ∙h
+                  ( left-whisker-concat-htpy
+                    ( β₁ ·l (inv-htpy H))
+                    ( inv-htpy-assoc-htpy (inv-htpy I ·r f) Hα (h ·l J))) ∙h
+                  ( inv-htpy-assoc-htpy
+                    ( β₁ ·l (inv-htpy H))
+                    ( inv-htpy I ·r f ∙h Hα)
+                    ( h ·l J)))
             ≃ ( Hβ ·r j ∙h inv-htpy (h ·l J) ~
                 β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
               by
-                equiv-right-transpose-htpy-concat'
-                  ( Hβ ·r j)
-                  ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
-                  ( h ·l J)
+              equiv-right-transpose-htpy-concat'
+                ( Hβ ·r j)
+                ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
+                ( h ·l J)
             ≃ ( Hβ ·r j ∙h h ·l inv-htpy J ~
                 β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))
               by
-                equiv-concat-htpy
-                  ( left-whisker-concat-htpy
-                    ( Hβ ·r j)
-                    ( left-whisker-inv-htpy h J))
-                  ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))))
+              equiv-concat-htpy
+                ( left-whisker-concat-htpy
+                  ( Hβ ·r j)
+                  ( left-whisker-inv-htpy h J))
+                ( β₁ ·l inv-htpy H ∙h (inv-htpy I ·r f ∙h Hα))))
 ```
