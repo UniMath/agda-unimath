@@ -8,6 +8,7 @@ module real-numbers.apartness-real-numbers where
 
 ```agda
 open import foundation.apartness-relations
+open import foundation.coproduct-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
@@ -17,11 +18,13 @@ open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -106,4 +109,18 @@ cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
 nonequal-apart-ℝ : {l : Level} (x y : ℝ l) → apart-ℝ x y → x ≠ y
 nonequal-apart-ℝ x y =
   nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
+### Zero is apart from one
+
+```agda
+apart-zero-one-ℝ : apart-ℝ zero-ℝ one-ℝ
+apart-zero-one-ℝ = unit-trunc-Prop (inl le-zero-one-ℝ)
+```
+
+### Zero is not equal to one
+
+```agda
+zero-is-not-one-ℝ : zero-ℝ ≠ one-ℝ
+zero-is-not-one-ℝ = nonequal-apart-ℝ zero-ℝ one-ℝ apart-zero-one-ℝ
 ```

@@ -24,6 +24,7 @@ open import foundation.universe-levels
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
@@ -104,7 +105,7 @@ module _
   is-nonempty-type-Finite-Probability-Space :
     is-nonempty (type-Finite-Probability-Space Ω)
   is-nonempty-type-Finite-Probability-Space =
-    not-0＝1 ∘ absurd-is-empty-Finite-Probability-Space
+    zero-is-not-one-ℝ ∘ absurd-is-empty-Finite-Probability-Space
     where
 
     absurd-is-empty-Finite-Probability-Space :
@@ -117,13 +118,4 @@ module _
           ( distribution-Finite-Probability-Space Ω)
           ( H))) ∙
       ( eq-one-total-measure-distribution-Finite-Probability-Space Ω)
-
-    not-0＝1 : is-empty (zero-ℝ ＝ one-ℝ)
-    not-0＝1 H =
-      irreflexive-le-ℝ
-        ( zero-ℝ)
-        ( inv-tr
-          ( le-ℝ zero-ℝ)
-          ( H)
-          ( is-positive-real-ℝ⁺ one-ℝ⁺))
 ```
