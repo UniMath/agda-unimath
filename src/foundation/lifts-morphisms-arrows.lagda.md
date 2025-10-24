@@ -173,13 +173,13 @@ module _
           Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
             ( λ Hi → coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ))
       by
-        equiv-tot
-          ( λ γ →
-            extensionality-lift
-              ( map-codomain-hom-arrow g h β)
-              ( map-codomain-hom-arrow f h α)
-              ( lift-codomain-lift-hom-arrow f g h α β γ)
-              ( δ , Hδ))
+      equiv-tot
+        ( λ γ →
+          extensionality-lift
+            ( map-codomain-hom-arrow g h β)
+            ( map-codomain-hom-arrow f h α)
+            ( lift-codomain-lift-hom-arrow f g h α β γ)
+            ( δ , Hδ))
     ≃ Σ ( Σ (A' → B') (_~ δ))
         ( λ (i , Hi) →
           Σ ( Σ ( coherence-triangle-maps
@@ -206,19 +206,19 @@ module _
         ( λ (I , HI) →
           lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (δ , I))
       by
-        equiv-Σ-equiv-base
-          ( λ (I , HI) →
-            lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (δ , I))
-          ( equiv-tot (λ I → equiv-concat-htpy inv-htpy-right-unit-htpy Hδ))
+      equiv-Σ-equiv-base
+        ( λ (I , HI) →
+          lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (δ , I))
+        ( equiv-tot (λ I → equiv-concat-htpy inv-htpy-right-unit-htpy Hδ))
     ≃ lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β (δ , Hδ)
       by left-unit-law-Σ-is-contr (is-torsorial-htpy' Hδ) (Hδ , refl-htpy)
     where
       reassociate :
         Σ ( lift-hom-arrow f g h α β)
-        ( λ γ →
-          Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
-            ( λ Hi →
-              coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ)) ≃
+          ( λ γ →
+            Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
+              ( λ Hi →
+                coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ)) ≃
         Σ ( Σ (A' → B') (_~ δ))
           ( λ (i , Hi) →
             Σ ( Σ ( coherence-triangle-maps
