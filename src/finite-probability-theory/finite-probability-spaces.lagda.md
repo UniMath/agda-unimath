@@ -94,7 +94,7 @@ module _
       ( distribution-Finite-Probability-Space)) ＝
     one-ℝ
   eq-one-total-measure-distribution-Finite-Probability-Space =
-    pr2 (pr2 (Ω))
+    pr2 (pr2 Ω)
 ```
 
 ## Properties
