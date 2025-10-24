@@ -52,6 +52,8 @@ $$
   ∑_{x ∈ Ω} X(x)μ(x).
 $$
 
+Our definition follows Definition 2.2 of {{#cite Babai00}}.
+
 ## Definitions
 
 ### Expected value of a random real variable in a finite probability space

@@ -46,6 +46,8 @@ is a function from the underlying
 [finite type](univalent-combinatorics.finite-types.md) to
 [`ℝ`](real-numbers.dedekind-real-numbers.md).
 
+Our definition follows Definition 2.1 of {{#cite Babai00}}.
+
 ## Definitions
 
 ### Random real variables in a finite probability space
