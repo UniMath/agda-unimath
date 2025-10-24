@@ -134,7 +134,7 @@ module _
     decide-is-inhabited-or-empty-net-Metric-Space =
       is-inhabited-or-empty-is-coinhabited
         ( is-coinhabited-net-Metric-Space X ε S)
-        ( decide-is-inhabited-or-empty-Finitely-Enumerable-Type
+        ( is-inhabited-or-empty-type-Finitely-Enumerable-Type
           ( finitely-enumerable-type-net-Metric-Space X ε S))
 ```
 

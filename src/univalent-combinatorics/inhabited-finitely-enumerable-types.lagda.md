@@ -106,20 +106,14 @@ module _
   where
 
   abstract
-    decide-is-inhabited-or-empty-Finitely-Enumerable-Type :
+    is-inhabited-or-empty-type-Finitely-Enumerable-Type :
       is-inhabited-or-empty (type-Finitely-Enumerable-Type X)
-    decide-is-inhabited-or-empty-Finitely-Enumerable-Type =
+    is-inhabited-or-empty-type-Finitely-Enumerable-Type =
       rec-trunc-Prop
         ( is-inhabited-or-empty-Prop (type-Finitely-Enumerable-Type X))
         ( λ (N , Fin-n↠X) →
-          rec-coproduct
-            ( λ N=0 →
-              inr (is-empty-surjection Fin-n↠X (is-empty-is-zero-Fin N N=0)))
-            ( λ N≠0 →
-              inl
-                ( map-is-inhabited
-                  ( map-surjection Fin-n↠X)
-                  ( is-inhabited-is-nonzero-Fin N N≠0)))
-            ( is-decidable-is-zero-ℕ N))
+          is-inhabited-or-empty-surjection
+            ( Fin-n↠X)
+            ( is-inhabited-or-empty-Fin N))
         ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
 ```

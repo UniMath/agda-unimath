@@ -12,6 +12,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.empty-types
+open import foundation.decidable-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -206,13 +207,16 @@ is-empty-is-zero-Fin : (n : ℕ) → is-zero-ℕ n → is-empty (Fin n)
 is-empty-is-zero-Fin _ refl ()
 ```
 
-### The standard finite types are propositionally decidable
+### The standard finite types are decidable
 
 ```agda
-decide-is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
-decide-is-inhabited-or-empty-Fin zero-ℕ = inr (λ ())
-decide-is-inhabited-or-empty-Fin (succ-ℕ n) =
-  inl (unit-trunc-Prop (neg-one-Fin n))
+is-decidable-Fin : (n : ℕ) → is-decidable (Fin n)
+is-decidable-Fin zero-ℕ = inr (λ ())
+is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
+
+is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
+is-inhabited-or-empty-Fin n =
+  is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
 ```
 
 ### The finite types are propositionally decidable
@@ -222,14 +226,12 @@ module _
   {l : Level} (X : Finite-Type l)
   where
 
-  decide-is-inhabited-or-empty-Finite-Type :
+  is-inhabited-or-empty-type-Finite-Type :
     is-inhabited-or-empty (type-Finite-Type X)
-  decide-is-inhabited-or-empty-Finite-Type =
+  is-inhabited-or-empty-type-Finite-Type =
     rec-trunc-Prop
       ( is-inhabited-or-empty-Prop (type-Finite-Type X))
-      ( λ (N , Fin-n≃X) →
-        is-inhabited-or-empty-equiv'
-          ( Fin-n≃X)
-          ( decide-is-inhabited-or-empty-Fin N))
+      ( λ (n , Fin-n≃X) →
+        is-inhabited-or-empty-equiv' Fin-n≃X (is-inhabited-or-empty-Fin n))
       ( is-finite-type-Finite-Type X)
 ```
