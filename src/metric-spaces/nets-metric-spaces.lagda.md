@@ -104,6 +104,8 @@ module _
 
 ### A metric space and any net for it are coinhabited
 
+A metric space is inhabited if and only if any net for it is inhabited.
+
 ```agda
 module _
   {l1 l2 l3 : Level}
