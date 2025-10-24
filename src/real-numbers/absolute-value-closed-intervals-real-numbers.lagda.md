@@ -26,7 +26,8 @@ open import real-numbers.nonnegative-real-numbers
 The [absolute value](real-numbers.absolute-value-real-numbers.md) of an element
 of a [closed interval](real-numbers.closed-intervals-real-numbers.md) `[a, b]`
 of [real numbers](real-numbers.dedekind-real-numbers.md) is bounded by the
-[maximum](real-numbers.binary-maximum-real-numbers.md).
+[maximum](real-numbers.binary-maximum-real-numbers.md) of the
+[negation](real-numbers.negation-real-numbers.md) of `a`, and `b`.
 
 ## Definition
 
@@ -38,7 +39,7 @@ max-abs-closed-interval-ℝ ((a , b) , a≤b) = max-ℝ (neg-ℝ a) b
 
 ## Properties
 
-### If `z ∈ [x, y]`, then `|z| ≤ max(|x|, |y|)`
+### If `z ∈ [x, y]`, then `|z| ≤ max(-x, y)`
 
 ```agda
 abstract

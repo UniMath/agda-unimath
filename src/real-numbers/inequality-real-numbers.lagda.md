@@ -253,13 +253,6 @@ large-preorder-Large-Poset ℝ-Large-Poset = ℝ-Large-Preorder
 antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 ```
 
-### Inequality reasoning in the real numbers
-
-```agda
-module inequality-reasoning-ℝ where
-  open inequality-reasoning-Large-Poset ℝ-Large-Poset public
-```
-
 ### Similarity in the large poset of real numbers is equivalent to similarity
 
 ```agda

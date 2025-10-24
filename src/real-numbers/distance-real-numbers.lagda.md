@@ -306,26 +306,28 @@ abstract
 ## Distributivity laws
 
 ```agda
-abstract
-  left-distributive-abs-mul-dist-ℝ :
-    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
-    abs-ℝ x *ℝ dist-ℝ y z ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
-  left-distributive-abs-mul-dist-ℝ x y z =
-    equational-reasoning
-      abs-ℝ x *ℝ abs-ℝ (y -ℝ z)
-      ＝ abs-ℝ (x *ℝ (y -ℝ z))
-        by inv (abs-mul-ℝ x (y -ℝ z))
-      ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
-        by ap abs-ℝ (left-distributive-mul-diff-ℝ x y z)
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
 
-  right-distributive-abs-mul-dist-ℝ :
-    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
-    dist-ℝ x y *ℝ abs-ℝ z ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
-  right-distributive-abs-mul-dist-ℝ x y z =
-    equational-reasoning
-      abs-ℝ (x -ℝ y) *ℝ abs-ℝ z
-      ＝ abs-ℝ ((x -ℝ y) *ℝ z)
-        by inv (abs-mul-ℝ (x -ℝ y) z)
-      ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
-        by ap abs-ℝ (right-distributive-mul-diff-ℝ x y z)
+  abstract
+    left-distributive-abs-mul-dist-ℝ :
+      abs-ℝ x *ℝ dist-ℝ y z ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
+    left-distributive-abs-mul-dist-ℝ =
+      equational-reasoning
+        abs-ℝ x *ℝ abs-ℝ (y -ℝ z)
+        ＝ abs-ℝ (x *ℝ (y -ℝ z))
+          by inv (abs-mul-ℝ x (y -ℝ z))
+        ＝ dist-ℝ (x *ℝ y) (x *ℝ z)
+          by ap abs-ℝ (left-distributive-mul-diff-ℝ x y z)
+
+    right-distributive-abs-mul-dist-ℝ :
+      dist-ℝ x y *ℝ abs-ℝ z ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
+    right-distributive-abs-mul-dist-ℝ =
+      equational-reasoning
+        abs-ℝ (x -ℝ y) *ℝ abs-ℝ z
+        ＝ abs-ℝ ((x -ℝ y) *ℝ z)
+          by inv (abs-mul-ℝ (x -ℝ y) z)
+        ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
+          by ap abs-ℝ (right-distributive-mul-diff-ℝ x y z)
 ```
