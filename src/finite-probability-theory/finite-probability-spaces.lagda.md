@@ -7,8 +7,8 @@ module finite-probability-theory.finite-probability-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-probability-theory.measures-on-finite-types
-open import finite-probability-theory.probability-measures-on-finite-types
+open import finite-probability-theory.positive-distributions-on-finite-types
+open import finite-probability-theory.probability-distributions-on-finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -38,7 +38,7 @@ open import univalent-combinatorics.finite-types
 
 A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 [finite type](univalent-combinatorics.finite-types.md) equipped with a
-[probability measure](finite-probability-theory.probability-measures-on-finite-types.md).
+[probability distribution](finite-probability-theory.probability-distributions-on-finite-types.md).
 
 ## Definitions
 
@@ -48,7 +48,7 @@ A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 Finite-Probability-Space : (l : Level) → UU (lsuc l)
 Finite-Probability-Space l =
   Σ ( Finite-Type l)
-    ( probability-measure-Finite-Type)
+    ( probability-distribution-Finite-Type)
 
 module _
   {l : Level} (Ω : Finite-Probability-Space l)
@@ -66,23 +66,23 @@ module _
   is-finite-type-Finite-Probability-Space =
     is-finite-type-Finite-Type finite-type-Finite-Probability-Space
 
-  measure-Finite-Probability-Space :
-    measure-Finite-Type finite-type-Finite-Probability-Space
-  measure-Finite-Probability-Space = pr1 (pr2 Ω)
+  distribution-Finite-Probability-Space :
+    positive-distribution-Finite-Type finite-type-Finite-Probability-Space
+  distribution-Finite-Probability-Space = pr1 (pr2 Ω)
 
-  real-measure-Finite-Probability-Space :
+  real-distribution-Finite-Probability-Space :
     type-Finite-Probability-Space → ℝ lzero
-  real-measure-Finite-Probability-Space =
-    real-measure-Finite-Type
+  real-distribution-Finite-Probability-Space =
+    real-positive-distribution-Finite-Type
       ( finite-type-Finite-Probability-Space)
-      ( measure-Finite-Probability-Space)
+      ( distribution-Finite-Probability-Space)
 
-  eq-one-total-measure-Finite-Probability-Space :
-    ( total-measure-Finite-Type
+  eq-one-total-measure-distribution-Finite-Probability-Space :
+    ( total-measure-positive-distribution-Finite-Type
       ( finite-type-Finite-Probability-Space)
-      ( measure-Finite-Probability-Space)) ＝
+      ( distribution-Finite-Probability-Space)) ＝
     one-ℝ
-  eq-one-total-measure-Finite-Probability-Space =
+  eq-one-total-measure-distribution-Finite-Probability-Space =
     pr2 (pr2 (Ω))
 ```
 
@@ -106,11 +106,11 @@ module _
       zero-ℝ ＝ one-ℝ
     absurd-is-empty-Finite-Probability-Space H =
       ( inv
-        ( is-zero-total-measure-is-empty-Finite-Type
+        ( is-zero-total-measure-positive-distribution-is-empty-Finite-Type
           ( finite-type-Finite-Probability-Space Ω)
-          ( measure-Finite-Probability-Space Ω)
+          ( distribution-Finite-Probability-Space Ω)
           ( H))) ∙
-      ( eq-one-total-measure-Finite-Probability-Space Ω)
+      ( eq-one-total-measure-distribution-Finite-Probability-Space Ω)
 
     not-0＝1 : is-empty (zero-ℝ ＝ one-ℝ)
     not-0＝1 H =

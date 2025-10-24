@@ -8,8 +8,8 @@ module finite-probability-theory.random-real-variables-finite-probability-spaces
 
 ```agda
 open import finite-probability-theory.finite-probability-spaces
-open import finite-probability-theory.measures-on-finite-types
-open import finite-probability-theory.probability-measures-on-finite-types
+open import finite-probability-theory.positive-distributions-on-finite-types
+open import finite-probability-theory.probability-distributions-on-finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types

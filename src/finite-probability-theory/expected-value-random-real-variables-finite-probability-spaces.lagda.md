@@ -8,8 +8,8 @@ module finite-probability-theory.expected-value-random-real-variables-finite-pro
 
 ```agda
 open import finite-probability-theory.finite-probability-spaces
-open import finite-probability-theory.measures-on-finite-types
-open import finite-probability-theory.probability-measures-on-finite-types
+open import finite-probability-theory.positive-distributions-on-finite-types
+open import finite-probability-theory.probability-distributions-on-finite-types
 open import finite-probability-theory.random-real-variables-finite-probability-spaces
 
 open import foundation.dependent-pair-types
@@ -48,7 +48,9 @@ of a
 `(Ω , μ)` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
-\[ ∑\_{x ∈ Ω} X(x)μ(x). \]
+$$
+  ∑_{x ∈ Ω} X(x)μ(x).
+$$
 
 ## Definitions
 
@@ -68,5 +70,5 @@ module _
       ( λ x →
         mul-ℝ
           ( X x)
-          ( real-measure-Finite-Probability-Space Ω x))
+          ( real-distribution-Finite-Probability-Space Ω x))
 ```
