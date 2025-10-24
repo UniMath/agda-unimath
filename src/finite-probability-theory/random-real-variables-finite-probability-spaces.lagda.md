@@ -11,6 +11,7 @@ open import finite-probability-theory.finite-probability-spaces
 open import finite-probability-theory.positive-distributions-on-finite-types
 open import finite-probability-theory.probability-distributions-on-finite-types
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -31,6 +32,7 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
 
@@ -62,7 +64,7 @@ module _
     type-Finite-Probability-Space Ω → ℝ lzero
 ```
 
-## Constant random variables in a finite probability space
+### Constant random variables in a finite probability space
 
 ```agda
 module _
@@ -72,4 +74,24 @@ module _
   const-random-real-variable-Finite-Probablity-Space :
     (x : ℝ lzero) → random-real-variable-Finite-Probability-Space Ω
   const-random-real-variable-Finite-Probablity-Space x _ = x
+```
+
+### Atomic random variables in a finite probability space
+
+```agda
+module _
+  {l : Level} (Ω : Finite-Probability-Space l)
+  (e : type-Finite-Probability-Space Ω)
+  where
+
+  atomic-random-real-variable-Finite-Probability-Space :
+    random-real-variable-Finite-Probability-Space Ω
+  atomic-random-real-variable-Finite-Probability-Space e' =
+    rec-coproduct
+      ( λ _ → one-ℝ)
+      ( λ _ → zero-ℝ)
+      ( has-decidable-equality-is-finite
+        ( is-finite-type-Finite-Probability-Space Ω)
+        ( e)
+        ( e'))
 ```
