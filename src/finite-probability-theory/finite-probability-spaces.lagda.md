@@ -148,3 +148,7 @@ module _
     ( finite-type-Finite-Probability-Space Ω ,
       is-inhabited-type-Finite-Probability-Space)
 ```
+
+## References
+
+{{#bibliography}}

@@ -74,3 +74,7 @@ module _
           ( X x)
           ( real-distribution-Finite-Probability-Space Ω x))
 ```
+
+## References
+
+{{#bibliography}}

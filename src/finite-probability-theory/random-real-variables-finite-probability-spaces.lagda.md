@@ -95,3 +95,7 @@ module _
         ( e)
         ( e'))
 ```
+
+## References
+
+{{#bibliography}}
