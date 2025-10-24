@@ -35,6 +35,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
@@ -59,6 +60,16 @@ opaque
 ```
 
 ## Properties
+
+### The absolute value of zero is zero
+
+```agda
+opaque
+  unfolding abs-ℝ
+
+  abs-zero-ℝ : abs-ℝ zero-ℝ ＝ zero-ℝ
+  abs-zero-ℝ = (ap (max-ℝ zero-ℝ) neg-zero-ℝ) ∙ (is-idempotent-max-ℝ zero-ℝ)
+```
 
 ### The absolute value preserves similarity
 
@@ -127,6 +138,70 @@ module _
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+```
+
+### If `|x| ＝ 0` then `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
+  where
+
+  abstract
+    is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-zero-abs-ℝ =
+      antisymmetric-leq-ℝ
+        ( x)
+        ( zero-ℝ)
+        ( tr (leq-ℝ x) |x|=0 (leq-abs-ℝ x))
+        ( tr
+          ( λ y → leq-ℝ y x)
+          ( (ap neg-ℝ |x|=0) ∙ neg-zero-ℝ)
+          ( leq-neg-abs-ℝ x))
+```
+
+### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero) (|x|≤0 : leq-ℝ (abs-ℝ x) zero-ℝ)
+  where
+
+  abstract
+    is-zero-abs-leq-zero-abs-ℝ : abs-ℝ x ＝ zero-ℝ
+    is-zero-abs-leq-zero-abs-ℝ =
+      antisymmetric-leq-ℝ
+        ( abs-ℝ x)
+        ( zero-ℝ)
+        ( |x|≤0)
+        ( is-nonnegative-abs-ℝ x)
+
+    is-zero-leq-zero-abs-ℝ : x ＝ zero-ℝ
+    is-zero-leq-zero-abs-ℝ =
+      is-zero-is-zero-abs-ℝ x is-zero-abs-leq-zero-abs-ℝ
+```
+
+### If `|x| ≤ ε` for all `ε : ℚ⁺` then `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero)
+  (is-infinitesimal-x : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
+  where
+
+  abstract
+    is-zero-is-infinitesimal-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-infinitesimal-abs-ℝ =
+      is-zero-leq-zero-abs-ℝ
+        ( x)
+        ( saturated-leq-ℝ
+          ( abs-ℝ x)
+          ( zero-ℝ)
+          ( λ ε →
+            inv-tr
+              ( leq-ℝ (abs-ℝ x))
+              ( left-unit-law-add-ℝ (real-ℚ⁺ ε))
+              ( is-infinitesimal-x ε)))
 ```
 
 ### If `x ≤ y` and `-x ≤ y`, `|x| ≤ y`
