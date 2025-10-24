@@ -48,17 +48,17 @@ lift-hom-arrow :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
-  (α : hom-arrow f h) (β : hom-arrow g h) →
+  (β : hom-arrow g h) (α : hom-arrow f h) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
 lift-hom-arrow f g h α β =
-  Σ (hom-arrow f g) (coherence-triangle-hom-arrow f g h α β)
+  Σ (hom-arrow f g) (coherence-triangle-hom-arrow f g h β α)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
-  (α : hom-arrow f h) (β : hom-arrow g h)
-  (γ : lift-hom-arrow f g h α β)
+  (β : hom-arrow g h) (α : hom-arrow f h)
+  (γ : lift-hom-arrow f g h β α)
   where
 
   hom-arrow-lift-hom-arrow : hom-arrow f g
@@ -162,23 +162,23 @@ module _
 
   compute-fiber-lift-codomain-lift-hom-arrow :
     (δ : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
-    fiber (lift-codomain-lift-hom-arrow f g h α β) δ ≃
+    fiber (lift-codomain-lift-hom-arrow f g h β α) δ ≃
     lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β δ
   compute-fiber-lift-codomain-lift-hom-arrow (δ , Hδ) =
     equivalence-reasoning
-    Σ ( lift-hom-arrow f g h α β)
-      ( λ γ → lift-codomain-lift-hom-arrow f g h α β γ ＝ (δ , Hδ))
-    ≃ Σ ( lift-hom-arrow f g h α β)
+    Σ ( lift-hom-arrow f g h β α)
+      ( λ γ → lift-codomain-lift-hom-arrow f g h β α γ ＝ (δ , Hδ))
+    ≃ Σ ( lift-hom-arrow f g h β α)
         ( λ γ →
-          Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
-            ( λ Hi → coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ))
+          Σ ( map-codomain-lift-hom-arrow f g h β α γ ~ δ)
+            ( λ Hi → coh-codomain-lift-hom-arrow f g h β α γ ∙h β₁ ·l Hi ~ Hδ))
       by
       equiv-tot
         ( λ γ →
           extensionality-lift
             ( map-codomain-hom-arrow g h β)
             ( map-codomain-hom-arrow f h α)
-            ( lift-codomain-lift-hom-arrow f g h α β γ)
+            ( lift-codomain-lift-hom-arrow f g h β α γ)
             ( δ , Hδ))
     ≃ Σ ( Σ (A' → B') (_~ δ))
         ( λ (i , Hi) →
@@ -214,11 +214,11 @@ module _
       by left-unit-law-Σ-is-contr (is-torsorial-htpy' Hδ) (Hδ , refl-htpy)
     where
       reassociate :
-        Σ ( lift-hom-arrow f g h α β)
+        Σ ( lift-hom-arrow f g h β α)
           ( λ γ →
-            Σ ( map-codomain-lift-hom-arrow f g h α β γ ~ δ)
+            Σ ( map-codomain-lift-hom-arrow f g h β α γ ~ δ)
               ( λ Hi →
-                coh-codomain-lift-hom-arrow f g h α β γ ∙h β₁ ·l Hi ~ Hδ)) ≃
+                coh-codomain-lift-hom-arrow f g h β α γ ∙h β₁ ·l Hi ~ Hδ)) ≃
         Σ ( Σ (A' → B') (_~ δ))
           ( λ (i , Hi) →
             Σ ( Σ ( coherence-triangle-maps

@@ -57,12 +57,17 @@ open import orthogonal-factorization-systems.lifts-maps
 ## Idea
 
 A [morphism of arrows](foundation.morphisms-arrows.md) `β : g ⇒ h`, is said to
-satisfy the VojtechStep14 hours ago Suggested change:
-
+satisfy the
 {{#concept "universal property" Disambiguation="cartesian morphisms of arrows" Agda=universal-property-cartesian-hom-arrow}}
-of [cartesian morphisms](foundation.cartesian-morphisms-arrows.md) of arrows if
-the natural map that assigns to, given another morphism of arrows `α : f ⇒ h`,
-and a [lifting diagram](foundation.lifts-morphisms-arrows.md) of the form
+of [cartesian morphisms](foundation.cartesian-morphisms-arrows.md) of arrows if,
+for every morphism of arrows `α : f ⇒ h`, then each lift on the codomain `α₁`
+along `β₁` extends uniquely to a lift of the morphism of arrows along `β`.
+
+The way we formalize this is to state that the natural map that assigns to every
+[lifting diagram](foundation.lifts-morphisms-arrows.md) of `α` along `β` the
+underlying [lift](orthogonal-factorization-systems.lifts-maps.md) on the
+codomain, is an equivalence. In other words, the natural map takes a lifting
+diagram of the form
 
 ```text
           B
@@ -79,19 +84,16 @@ and a [lifting diagram](foundation.lifts-morphisms-arrows.md) of the form
     A' -------> C',
 ```
 
-the underlying [lift](orthogonal-factorization-systems.lifts-maps.md) on the
-codomain
+and spits out the underlying
 
 ```text
           B'
         ∧   \
      i /     \ β₁
       /       ∨
-    A' -------> C'
+    A' -------> C'.
           α₁
 ```
-
-is an [equivalence](foundation-core.equivalences.md).
 
 ## Definitions
 
@@ -108,7 +110,7 @@ module _
     (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   universal-property-cartesian-hom-arrow-Level l1 l2 =
     {A : UU l1} {A' : UU l2} (f : A → A') (α : hom-arrow f h) →
-    is-equiv (lift-codomain-lift-hom-arrow f g h α β)
+    is-equiv (lift-codomain-lift-hom-arrow f g h β α)
 
   universal-property-cartesian-hom-arrow : UUω
   universal-property-cartesian-hom-arrow =

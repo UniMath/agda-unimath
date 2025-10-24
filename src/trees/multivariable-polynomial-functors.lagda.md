@@ -38,7 +38,8 @@ generalization of the notion of
 [polynomial endofunctors](trees.polynomial-endofunctors.md) to the case of
 families of types (variables). Given a type family `A : J → Type` and a type
 family `B : I → {j : J} → A j → Type` over `A`, we have a multivariable
-polynomial functor `P A B` with action on type families given by
+polynomial functor `P A B`, also denoted `A ◃ B`, with action on `I`-indexed
+type families given by
 
 ```text
   P A B X j := Σ (a : A j), ((i : I) → B i a → X i).

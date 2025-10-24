@@ -35,7 +35,7 @@ open import foundation-core.torsorial-type-families
 Given a type `A` [equipped](foundation.structure.md) with a type family `B` over
 `A`, the
 {{#concept "polynomial endofunctor" WD="polynomial functor" WDID=Q49000754 Agda=polynomial-endofunctor}}
-`P A B` is defined by
+`P A B`, also denoted `A ◃ B`, is defined by
 
 ```text
   X ↦ Σ (x : A), (B x → X).
