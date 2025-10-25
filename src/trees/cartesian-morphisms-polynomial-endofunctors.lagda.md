@@ -262,32 +262,34 @@ module _
   (Q : polynomial-endofunctor l3 l4)
   where
 
-  is-trunc-succ-cartesian-hom-polynomial-endofunctor' :
-    (k : 𝕋) →
-    is-trunc (succ-𝕋 k) (shape-polynomial-endofunctor Q) →
-    ( (c : shape-polynomial-endofunctor Q) →
-      is-trunc (succ-𝕋 k) (position-polynomial-endofunctor Q c)) →
-    is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor' P Q)
-  is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ' =
-    is-trunc-Σ
-      ( is-trunc-function-type (succ-𝕋 k) hQ)
-      ( λ f →
-        is-trunc-Π
-          ( succ-𝕋 k)
-          ( λ e → is-trunc-equiv-is-trunc-domain k (hQ' (f e))))
+  abstract
+    is-trunc-succ-cartesian-hom-polynomial-endofunctor' :
+      (k : 𝕋) →
+      is-trunc (succ-𝕋 k) (shape-polynomial-endofunctor Q) →
+      ( (c : shape-polynomial-endofunctor Q) →
+        is-trunc (succ-𝕋 k) (position-polynomial-endofunctor Q c)) →
+      is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor' P Q)
+    is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ' =
+      is-trunc-Σ
+        ( is-trunc-function-type (succ-𝕋 k) hQ)
+        ( λ f →
+          is-trunc-Π
+            ( succ-𝕋 k)
+            ( λ e → is-trunc-equiv-is-trunc-domain k (hQ' (f e))))
 
-  is-trunc-succ-cartesian-hom-polynomial-endofunctor :
-    (k : 𝕋) →
-    is-trunc (succ-𝕋 k) (shape-polynomial-endofunctor Q) →
-    ( (c : shape-polynomial-endofunctor Q) →
-      is-trunc (succ-𝕋 k) (position-polynomial-endofunctor Q c)) →
-    is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor P Q)
-  is-trunc-succ-cartesian-hom-polynomial-endofunctor k hQ hQ' =
-    is-trunc-equiv
-      ( succ-𝕋 k)
-      ( cartesian-hom-polynomial-endofunctor' P Q)
-      ( reassociate-type-cartesian-hom-polynomial-endofunctor P Q)
-      ( is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ')
+  abstract
+    is-trunc-succ-cartesian-hom-polynomial-endofunctor :
+      (k : 𝕋) →
+      is-trunc (succ-𝕋 k) (shape-polynomial-endofunctor Q) →
+      ( (c : shape-polynomial-endofunctor Q) →
+        is-trunc (succ-𝕋 k) (position-polynomial-endofunctor Q c)) →
+      is-trunc (succ-𝕋 k) (cartesian-hom-polynomial-endofunctor P Q)
+    is-trunc-succ-cartesian-hom-polynomial-endofunctor k hQ hQ' =
+      is-trunc-equiv
+        ( succ-𝕋 k)
+        ( cartesian-hom-polynomial-endofunctor' P Q)
+        ( reassociate-type-cartesian-hom-polynomial-endofunctor P Q)
+        ( is-trunc-succ-cartesian-hom-polynomial-endofunctor' k hQ hQ')
 ```
 
 ### Computing the fibers of the induced natural transformation
@@ -306,32 +308,32 @@ module _
   compute-fiber-type-cartesian-hom-polynomial-endofunctor :
     (c : shape-polynomial-endofunctor Q)
     (x : position-polynomial-endofunctor Q c → X) →
-    fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) (c , x) ≃
+    fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) q@(c , x) ≃
     fiber α₀ c
   compute-fiber-type-cartesian-hom-polynomial-endofunctor c x =
     equivalence-reasoning
-      fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) (c , x)
+      fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) q
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →
             fiber
               ( precomp (α₁ a) X)
               ( inv-tr (λ c → position-polynomial-endofunctor Q c → X) p x))
         by
-          compute-fiber-map-Σ
-            ( λ c → position-polynomial-endofunctor Q c → X)
-            ( α₀)
-            ( λ a → precomp (α₁ a) X)
-            ( c , x)
+        compute-fiber-map-Σ
+          ( λ c → position-polynomial-endofunctor Q c → X)
+          ( α₀)
+          ( λ a → precomp (α₁ a) X)
+          ( c , x)
       ≃ fiber α₀ c
         by
-          right-unit-law-Σ-is-contr
-            ( λ (a , p) →
-              is-contr-map-is-equiv
-                ( is-equiv-precomp-is-equiv
-                  ( α₁ a)
-                  ( is-cartesian-cartesian-hom-polynomial-endofunctor P Q α a)
-                  ( X))
-                ( inv-tr (λ c → position-polynomial-endofunctor Q c → X) p x))
+        right-unit-law-Σ-is-contr
+          ( λ (a , p) →
+            is-contr-map-is-equiv
+              ( is-equiv-precomp-is-equiv
+                ( α₁ a)
+                ( is-cartesian-cartesian-hom-polynomial-endofunctor P Q α a)
+                ( X))
+              ( inv-tr (λ c → position-polynomial-endofunctor Q c → X) p x))
 ```
 
 ### The associated natural transformation of a cartesian morphism is cartesian
@@ -374,6 +376,8 @@ module _
 
 This is proved in a slightly different setting as part of Lemma 2.3.3 in
 {{#cite GHK22}}.
+
+> This remains to be formalized.
 
 ## References
 

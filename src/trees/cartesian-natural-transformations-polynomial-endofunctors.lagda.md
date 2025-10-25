@@ -58,8 +58,7 @@ Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
 $P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, then a
 [natural transformation](trees.natural-transformations-polynomial-endofunctors.md)
 $α$ between them is
-{{#concept "cartesian" Disambiguation="natural transformations of polynomial endofunctors of types" Agda=is-cartesian-natural-transformation-polynomial-endofunctor}}
-
+{{#concept "cartesian" Disambiguation="natural transformations between polynomial endofunctors of types" Agda=is-cartesian-natural-transformation-polynomial-endofunctor}}
 if every naturality square
 
 ```text
@@ -97,21 +96,22 @@ module _
       ( map-polynomial-endofunctor Q f)
       ( hom-arrow-natural-transformation-polynomial-endofunctor P Q α f)
 
-  is-prop-is-cartesian-natural-transformation-polynomial-endofunctor :
-    is-prop is-cartesian-natural-transformation-polynomial-endofunctor
-  is-prop-is-cartesian-natural-transformation-polynomial-endofunctor =
-    is-prop-implicit-Π
-      ( λ X →
-        is-prop-implicit-Π
-          ( λ Y →
-            is-prop-Π
-              ( λ f →
-                is-prop-is-cartesian-hom-arrow
-                  ( map-polynomial-endofunctor P f)
-                  ( map-polynomial-endofunctor Q f)
-                  ( hom-arrow-natural-transformation-polynomial-endofunctor P Q
-                    ( α)
-                    ( f)))))
+  abstract
+    is-prop-is-cartesian-natural-transformation-polynomial-endofunctor :
+      is-prop is-cartesian-natural-transformation-polynomial-endofunctor
+    is-prop-is-cartesian-natural-transformation-polynomial-endofunctor =
+      is-prop-implicit-Π
+        ( λ X →
+          is-prop-implicit-Π
+            ( λ Y →
+              is-prop-Π
+                ( λ f →
+                  is-prop-is-cartesian-hom-arrow
+                    ( map-polynomial-endofunctor P f)
+                    ( map-polynomial-endofunctor Q f)
+                    ( hom-arrow-natural-transformation-polynomial-endofunctor P Q
+                      ( α)
+                      ( f)))))
 
   is-cartesian-natural-transformation-polynomial-endofunctor-Prop :
     Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
@@ -150,7 +150,7 @@ module _
     type-polynomial-endofunctor Q X
   type-cartesian-natural-transformation-polynomial-endofunctor =
     type-natural-transformation-polynomial-endofunctor P Q
-      natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
+      ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor)
 
   naturality-cartesian-natural-transformation-polynomial-endofunctor :
     coherence-natural-transformation-polynomial-endofunctor P Q

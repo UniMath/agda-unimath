@@ -49,10 +49,14 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, a
+`P ≐ (A ◃ B)` and `Q ≐ (C ◃ D)`, a
 {{#concept "morphism" Disambiguation="of polynomial endofunctors of types" Agda=hom-polynomial-endofunctor}}
-$α$ from $P$ to $Q$ consists of a map $α₀ : A → C$ and a family of maps
-$$α₁ : (a : A) → D (α₀ a) → B a.$$
+`α` from `P` to `Q` consists of a pair of maps
+
+```text
+  α₀ : A → C
+  α₁ : (a : A) → D (α₀ a) → B a.
+```
 
 ## Definitions
 
@@ -154,22 +158,24 @@ module _
   htpy-eq-hom-polynomial-endofunctor α .α refl =
     refl-htpy-hom-polynomial-endofunctor α
 
-  is-torsorial-htpy-hom-polynomial-endofunctor :
-    (α : hom-polynomial-endofunctor P Q) →
-    is-torsorial (htpy-hom-polynomial-endofunctor α)
-  is-torsorial-htpy-hom-polynomial-endofunctor α =
-    is-torsorial-Eq-structure
-      ( is-torsorial-htpy (shape-hom-polynomial-endofunctor P Q α))
-      ( shape-hom-polynomial-endofunctor P Q α , refl-htpy)
-      ( is-torsorial-binary-htpy (position-hom-polynomial-endofunctor P Q α))
+  abstract
+    is-torsorial-htpy-hom-polynomial-endofunctor :
+      (α : hom-polynomial-endofunctor P Q) →
+      is-torsorial (htpy-hom-polynomial-endofunctor α)
+    is-torsorial-htpy-hom-polynomial-endofunctor α =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy (shape-hom-polynomial-endofunctor P Q α))
+        ( shape-hom-polynomial-endofunctor P Q α , refl-htpy)
+        ( is-torsorial-binary-htpy (position-hom-polynomial-endofunctor P Q α))
 
-  is-equiv-htpy-eq-hom-polynomial-endofunctor :
-    (α β : hom-polynomial-endofunctor P Q) →
-    is-equiv (htpy-eq-hom-polynomial-endofunctor α β)
-  is-equiv-htpy-eq-hom-polynomial-endofunctor α =
-    fundamental-theorem-id
-      ( is-torsorial-htpy-hom-polynomial-endofunctor α)
-      ( htpy-eq-hom-polynomial-endofunctor α)
+  abstract
+    is-equiv-htpy-eq-hom-polynomial-endofunctor :
+      (α β : hom-polynomial-endofunctor P Q) →
+      is-equiv (htpy-eq-hom-polynomial-endofunctor α β)
+    is-equiv-htpy-eq-hom-polynomial-endofunctor α =
+      fundamental-theorem-id
+        ( is-torsorial-htpy-hom-polynomial-endofunctor α)
+        ( htpy-eq-hom-polynomial-endofunctor α)
 
   equiv-htpy-eq-hom-polynomial-endofunctor :
     (α β : hom-polynomial-endofunctor P Q) →
@@ -198,19 +204,23 @@ module _
   (Q : polynomial-endofunctor l3 l4)
   where
 
-  is-trunc-hom-polynomial-endofunctor :
-    (k : 𝕋) →
-    is-trunc k (shape-polynomial-endofunctor Q) →
-    ( (a : shape-polynomial-endofunctor P) →
-      is-trunc k (position-polynomial-endofunctor P a)) →
-    is-trunc k (hom-polynomial-endofunctor P Q)
-  is-trunc-hom-polynomial-endofunctor k hQ hP =
-    is-trunc-Σ
-      ( is-trunc-function-type k hQ)
-      ( λ f → is-trunc-Π k (λ a → is-trunc-function-type k (hP a)))
+  abstract
+    is-trunc-hom-polynomial-endofunctor :
+      (k : 𝕋) →
+      is-trunc k (shape-polynomial-endofunctor Q) →
+      ( (a : shape-polynomial-endofunctor P) →
+        is-trunc k (position-polynomial-endofunctor P a)) →
+      is-trunc k (hom-polynomial-endofunctor P Q)
+    is-trunc-hom-polynomial-endofunctor k hQ hP =
+      is-trunc-Σ
+        ( is-trunc-function-type k hQ)
+        ( λ f → is-trunc-Π k (λ a → is-trunc-function-type k (hP a)))
 ```
 
 ### Morphisms are natural transformations
+
+Morphisms of polynomial endofunctors define
+[natural transformations](trees.natural-transformations-polynomial-endofunctors.md).
 
 ```agda
 module _
@@ -360,8 +370,9 @@ module _
 
 ### Comparison between morphisms and natural transformations
 
-Morphisms of polynomial endofunctors form a retract of natural transformations,
-and this map is a section on shapes.
+Morphisms of polynomial endofunctors form a
+[retract](foundation.retracts-of-types.md) of natural transformations, and this
+map is a [section](foundation-core.sections.md) on shapes.
 
 ```agda
 module _

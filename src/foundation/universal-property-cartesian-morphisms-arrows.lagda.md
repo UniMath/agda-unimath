@@ -60,14 +60,15 @@ A [morphism of arrows](foundation.morphisms-arrows.md) `β : g ⇒ h`, is said t
 satisfy the
 {{#concept "universal property" Disambiguation="cartesian morphisms of arrows" Agda=universal-property-cartesian-hom-arrow}}
 of [cartesian morphisms](foundation.cartesian-morphisms-arrows.md) of arrows if,
-for every morphism of arrows `α : f ⇒ h`, then each lift on the codomain `α₁`
-along `β₁` extends uniquely to a lift of the morphism of arrows along `β`.
+for every morphism of arrows `α : f ⇒ h`, each
+[lift](orthogonal-factorization-systems.lifts-maps.md) on the codomain `α₁`
+along `β₁` extends uniquely to a
+[lifting diagram](foundation.lifts-morphisms-arrows.md) of the morphism of
+arrows along `β`.
 
 The way we formalize this is to state that the natural map that assigns to every
-[lifting diagram](foundation.lifts-morphisms-arrows.md) of `α` along `β` the
-underlying [lift](orthogonal-factorization-systems.lifts-maps.md) on the
-codomain, is an equivalence. In other words, the natural map takes a lifting
-diagram of the form
+lifting diagram of `α` along `β` the underlying lift on the codomain, is an
+equivalence. In other words, the natural map takes a lifting diagram of the form
 
 ```text
           B
@@ -84,7 +85,7 @@ diagram of the form
     A' -------> C',
 ```
 
-and spits out the underlying
+and returns the underlying diagram
 
 ```text
           B'
