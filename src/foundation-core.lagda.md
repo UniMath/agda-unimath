@@ -21,6 +21,7 @@ open import foundation-core.decidable-propositions public
 open import foundation-core.dependent-identifications public
 open import foundation-core.diagonal-maps-cartesian-products-of-types public
 open import foundation-core.discrete-types public
+open import foundation-core.double-negation-stable-equality public
 open import foundation-core.embeddings public
 open import foundation-core.empty-types public
 open import foundation-core.endomorphisms public
