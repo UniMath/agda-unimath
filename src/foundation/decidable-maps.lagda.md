@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
-open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -21,8 +20,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
 open import foundation.transport-along-identifications
@@ -37,7 +34,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
-open import foundation-core.iterating-functions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -165,9 +161,10 @@ module _
         ( G x)
 ```
 
-The composite `g ∘ f` of two decidable maps is decidable if `g` is π₀-trivial.
+The composite `g ∘ f` of two decidable maps is decidable if `g` has double
+negation dense equality on fibers.
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
@@ -192,7 +189,8 @@ module _
 
   is-decidable-map-iterate-is-π₀-trivial-map' :
     (n : ℕ) → is-decidable-map (iterate n f)
-  is-decidable-map-iterate-is-π₀-trivial-map' zero-ℕ = is-decidable-map-id
+  is-decidable-map-iterate-is-π₀-trivial-map' zero-ℕ =
+    is-decidable-map-id
   is-decidable-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
     is-decidable-map-comp-is-π₀-trivial-map'
       ( is-π₀-trivial-f)
@@ -215,7 +213,7 @@ module _
     is-decidable-map-right-factor' GF G y =
       rec-coproduct
         ( λ q → inl (pr1 q , G (pr2 q)))
-        ( λ q → inr (λ x → q ((pr1 x) , ap g (pr2 x))))
+        ( λ q → inr (λ x → q (pr1 x , ap g (pr2 x))))
         ( GF (g y))
 ```
 

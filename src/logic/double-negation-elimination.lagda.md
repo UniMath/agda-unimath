@@ -20,7 +20,6 @@ open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type

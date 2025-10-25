@@ -18,11 +18,10 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.hilbert-epsilon-operators-maps
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
-open import foundation.maps-with-hilbert-epsilon-operators
 open import foundation.perfect-images
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
@@ -69,7 +68,7 @@ The Cantor–Schröder–Bernstein theorem is the 25th theorem on
 Given a pair of mutual maps `f : A → B` and `g : B → A` such that
 
 1. the maps `f` and `g` satisfy double negation elimination on their fibers
-2. For every element `x : A` it is decidable wheter `x` is a perfect image of
+2. For every element `x : A` it is decidable whether `x` is a perfect image of
    `g` relative to `f`
 3. `g` is injective
 4. `f` is π₀-trivial
@@ -266,8 +265,8 @@ Piecing it all together.
 ### The Cantor-Schröder-Bernstein theorem assuming the weak limited principle of omniscience
 
 It follows from the weak limited principle of omniscience that, for every pair
-of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable for
-every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
+for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
 
 Applying this fact to the Cantor-Schröder-Bernstein-Escardó construction, we
 conclude that every pair of types that mutually embed into oneanother via
@@ -338,10 +337,10 @@ Cantor-Schröder-Bernstein-WLPO wlpo (f , F) (g , G) =
 
 ### The ε-generalized Cantor-Schröder-Bernstein-Escardó theorem
 
-Assuming the [law of exluded middle](foundation.law-of-excluded-middle.md), then
-given two types `A` and `B` such that there is a π₀-trivial injection `A → B`
-equipped with a Hilbert ε-operator, and an embedding `B ↪ A`, then `A` and `B`
-are equivalent.
+Assuming the [law of excluded middle](foundation.law-of-excluded-middle.md),
+then given two types `A` and `B` such that there is a π₀-trivial injection
+`A → B` equipped with a Hilbert ε-operator, and an embedding `B ↪ A`, then `A`
+and `B` are equivalent.
 
 ```agda
 ε-Cantor-Schröder-Bernstein-LEM :

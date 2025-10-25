@@ -28,7 +28,6 @@ open import foundation.law-of-excluded-middle
 open import foundation.mere-equality
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
