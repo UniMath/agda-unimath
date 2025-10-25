@@ -36,7 +36,7 @@ A
 {{#concept "probability distribution" Disambiguation="on a finite type" Agda=probability-distribution-Finite-Type}}
 on a [finite type](univalent-combinatorics.finite-types.md) is a
 [positive distribution](finite-probability-theory.positive-distributions-on-finite-types.md)
-with **total measure** equal to 1.
+with total measure equal to 1.
 
 ## Definition
 
