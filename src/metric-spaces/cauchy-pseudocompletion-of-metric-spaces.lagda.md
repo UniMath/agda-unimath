@@ -346,6 +346,30 @@ module _
       ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
       ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
 
+  is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+    is-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( ( const-cauchy-approximation-Metric-Space M) ∘
+        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
+  is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+    d x y =
+      preserves-neighborhood-sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        { x}
+        { const-cauchy-approximation-Metric-Space
+          ( M)
+          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)}
+        { y}
+        { const-cauchy-approximation-Metric-Space
+          ( M)
+          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)}
+        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( x))
+        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( y))
+        ( d)
+
   is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
     is-short-function-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
@@ -359,32 +383,6 @@ module _
       ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)
       ( lemma-saturated-neighborhood-map-lim)
     where
-
-      neighborhood-const-lim-x-y :
-        neighborhood-Pseudometric-Space
-          ( cauchy-pseudocompletion-Metric-Space M)
-          ( d)
-          ( const-cauchy-approximation-Metric-Space M
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x))
-          ( const-cauchy-approximation-Metric-Space M
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y))
-      neighborhood-const-lim-x-y =
-        preserves-neighborhood-sim-Pseudometric-Space
-          ( cauchy-pseudocompletion-Metric-Space M)
-          { x}
-          { const-cauchy-approximation-Metric-Space
-            ( M)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)}
-          { y}
-          { const-cauchy-approximation-Metric-Space
-            ( M)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)}
-          ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-            ( x))
-          ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-            ( y))
-          ( d)
-          ( Nxy)
 
       lemma-saturated-neighborhood-map-lim :
         (δ : ℚ⁺) →
@@ -400,7 +398,11 @@ module _
             ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)
             ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y))
           ( ap (add-ℚ⁺' d) (eq-add-split-ℚ⁺ δ) ∙ commutative-add-ℚ⁺ δ d)
-          ( neighborhood-const-lim-x-y
+          ( is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+            ( d)
+            ( x)
+            ( y)
+            ( Nxy)
             ( left-summand-split-ℚ⁺ δ)
             ( right-summand-split-ℚ⁺ δ))
 
