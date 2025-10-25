@@ -14,7 +14,6 @@ open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
-open import foundation.iterating-functions
 open import foundation.dependent-pair-types
 open import foundation.double-negation-dense-equality-maps
 open import foundation.embeddings
@@ -22,6 +21,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
+open import foundation.iterating-functions
 open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
 open import foundation.transport-along-identifications

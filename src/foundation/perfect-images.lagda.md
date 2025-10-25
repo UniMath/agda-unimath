@@ -177,7 +177,7 @@ module _
 
   is-perfect-image-Prop : is-emb g → A → Prop (l1 ⊔ l2)
   is-perfect-image-Prop G a =
-    ( is-perfect-image f g a ,  is-prop-is-perfect-image-is-emb G a)
+    ( is-perfect-image f g a , is-prop-is-perfect-image-is-emb G a)
 ```
 
 ### Fibers over perfect images
@@ -416,14 +416,14 @@ module _
   (DNE-g : is-double-negation-eliminating-map g)
   (inj-g : is-injective g)
   (DNE-f : is-double-negation-eliminating-map f)
-  (DNEq-f : has-double-negation-dense-equality-map f)
+  (NEq-f : has-double-negation-dense-equality-map f)
   (b : B) (nρ : ¬ (is-perfect-image f g (g b)))
   where
 
   has-nonperfect-fiber-is-not-perfect-image :
     has-nonperfect-fiber f g b
   has-nonperfect-fiber-is-not-perfect-image =
-    double-negation-elim-has-nonperfect-fiber DNE-f DNEq-f b
+    double-negation-elim-has-nonperfect-fiber DNE-f NEq-f b
       ( is-irrefutable-has-nonperfect-fiber-is-not-perfect-image
         ( DNE-g)
         ( inj-g)
@@ -448,3 +448,47 @@ module _
   is-not-perfect-image-has-nonperfect-fiber-is-not-perfect-image =
     pr2 has-nonperfect-fiber-is-not-perfect-image
 ```
+
+### Decidability of perfect images under WLPO
+
+It follows from the weak limited principle of omniscience that, for every pair
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
+for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+
+In fact, it suffices to assume that `f` is decidable, injective, and has double
+negation dense equality.
+
+```agda
+module _
+  {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
+  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
+  where abstract
+
+  is-decidable-is-perfect-image'-WLPO :
+    is-decidable-emb g →
+    is-decidable-map f →
+    has-double-negation-dense-equality-map f →
+    (a : A) →
+    is-decidable (is-perfect-image' f g a)
+  is-decidable-is-perfect-image'-WLPO G F F' a =
+    wlpo
+      ( λ n →
+        is-perfect-image-at' f g a n ,
+        is-decidable-prop-is-perfect-image-at' G F F' a n)
+
+  is-decidable-is-perfect-image-WLPO :
+    is-decidable-emb g →
+    is-decidable-map f →
+    has-double-negation-dense-equality-map f →
+    (a : A) →
+    is-decidable (is-perfect-image f g a)
+  is-decidable-is-perfect-image-WLPO G F F' a =
+    is-decidable-equiv'
+      ( compute-is-perfect-image f g a)
+      ( is-decidable-is-perfect-image'-WLPO G F F' a)
+```
+
+## See also
+
+See also the twin formalization in TypeTopology at
+[`CantorSchroederBernstein.PerfectImages`](https://martinescardo.github.io/TypeTopology/CantorSchroederBernstein.PerfectImages.html).
