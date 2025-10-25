@@ -9,40 +9,20 @@ module foundation.cantor-schroder-bernstein-escardo where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.cantor-schroder-bernstein-decidable-embeddings
-open import foundation.decidable-embeddings
-open import foundation.decidable-maps
 open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.double-negation-dense-equality-maps
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.hilbert-epsilon-operators-maps
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
-open import foundation.perfect-images
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sections
-open import foundation.split-surjective-maps
 open import foundation.universe-levels
-open import foundation.weak-limited-principle-of-omniscience
 
-open import foundation-core.coproduct-types
 open import foundation-core.embeddings
-open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.propositional-maps
 open import foundation-core.sets
-
-open import logic.double-negation-eliminating-maps
-open import logic.double-negation-stable-embeddings
 ```
 
 </details>
