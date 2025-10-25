@@ -26,7 +26,7 @@ open import real-numbers.suprema-families-real-numbers
 
 ## Idea
 
-This file describes relationships between
+On this page we describe relationships between
 [infima](real-numbers.infima-families-real-numbers.md) and
 [suprema](real-numbers.suprema-families-real-numbers.md) of families and
 [subsets](real-numbers.subsets-real-numbers.md) of the
