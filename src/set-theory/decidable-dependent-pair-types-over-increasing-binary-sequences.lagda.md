@@ -69,7 +69,7 @@ decidable. {{#cite Esc13}}
 We prove that the type of increasing binary sequences pointedly has decidable
 dependent sums, from which the main result is an easy corollary. The
 formalization follows earlier formalizations written by Martín Escardó
-{{#cite TypeTopology}} verbatim.
+{{#cite TypeTopology}} almost verbatim.
 
 ```agda
 abstract
