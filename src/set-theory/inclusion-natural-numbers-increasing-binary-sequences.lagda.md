@@ -199,11 +199,11 @@ abstract
   Eq-succ-criterion-ℕ∞↑ :
     {x : ℕ∞↑} {n : ℕ} →
     is-strictly-bounded-below-ℕ∞↑ n x →
-    is-bounded-ℕ∞↑ x (succ-ℕ n) →
+    is-finitely-bounded-ℕ∞↑ x (succ-ℕ n) →
     Eq-ℕ∞↑ x (increasing-binary-sequence-ℕ (succ-ℕ n))
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s 0 = r
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s (succ-ℕ i) =
-    is-bounded-is-bounded-zero-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
+    is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s 0 =
     is-positive-is-strictly-bounded-below-ℕ∞↑ x (succ-ℕ n) r
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s (succ-ℕ i) =
@@ -213,7 +213,7 @@ abstract
   eq-succ-criterion-ℕ∞↑ :
     {x : ℕ∞↑} {n : ℕ} →
     is-strictly-bounded-below-ℕ∞↑ n x →
-    is-bounded-ℕ∞↑ x (succ-ℕ n) →
+    is-finitely-bounded-ℕ∞↑ x (succ-ℕ n) →
     x ＝ increasing-binary-sequence-ℕ (succ-ℕ n)
   eq-succ-criterion-ℕ∞↑ {x} {n} r s =
     is-injective-sequence-ℕ∞↑ (eq-htpy (Eq-succ-criterion-ℕ∞↑ {x} {n} r s))
@@ -273,7 +273,9 @@ module _
 
   htpy-ℕ∞↑-htpy-ℕ :
     (H : (x : ℕ∞↑) → has-double-negation-stable-equality (Y x)) →
-    ((n : ℕ) → f (increasing-binary-sequence-ℕ n) ＝ g (increasing-binary-sequence-ℕ n)) →
+    ( (n : ℕ) →
+      f (increasing-binary-sequence-ℕ n) ＝
+      g (increasing-binary-sequence-ℕ n)) →
     f infinity-ℕ∞↑ ＝ g infinity-ℕ∞↑ →
     f ~ g
   htpy-ℕ∞↑-htpy-ℕ H h h∞ =
@@ -286,13 +288,13 @@ module _
 ### The tight bounds on the image of the natural numbers
 
 ```agda
-is-bounded-increasing-binary-sequence-ℕ :
+is-finitely-bounded-increasing-binary-sequence-ℕ :
   (n : ℕ) →
-  is-bounded-ℕ∞↑ (increasing-binary-sequence-ℕ n) n
-is-bounded-increasing-binary-sequence-ℕ zero-ℕ =
+  is-finitely-bounded-ℕ∞↑ (increasing-binary-sequence-ℕ n) n
+is-finitely-bounded-increasing-binary-sequence-ℕ zero-ℕ =
   refl
-is-bounded-increasing-binary-sequence-ℕ (succ-ℕ n) =
-  is-bounded-increasing-binary-sequence-ℕ n
+is-finitely-bounded-increasing-binary-sequence-ℕ (succ-ℕ n) =
+  is-finitely-bounded-increasing-binary-sequence-ℕ n
 
 is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ :
   (n : ℕ) →

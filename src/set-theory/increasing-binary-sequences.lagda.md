@@ -251,6 +251,10 @@ is-injective-cons-ℕ∞↑ =
 
 ### The type of increasing binary sequences as a retract of the cantor space
 
+We can "force" any binary sequence into an increasing binary sequence by
+replacing the 𝑛'th value by the least upper bound of all values up to and
+including 𝑛. This defines a retract.
+
 ```agda
 force-ℕ∞↑' : cantor-space → cantor-space
 force-ℕ∞↑' x zero-ℕ = x zero-ℕ

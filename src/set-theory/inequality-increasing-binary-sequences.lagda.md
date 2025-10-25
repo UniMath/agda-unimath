@@ -46,9 +46,10 @@ infix 30 _≤-ℕ∞↑_
 _≤-ℕ∞↑_ : ℕ∞↑ → ℕ∞↑ → UU lzero
 _≤-ℕ∞↑_ = leq-ℕ∞↑
 
-is-prop-leq-ℕ∞↑ : (x y : ℕ∞↑) → is-prop (x ≤-ℕ∞↑ y)
-is-prop-leq-ℕ∞↑ x y =
-  is-prop-Π (λ n → is-prop-leq-bool {sequence-ℕ∞↑ y n} {sequence-ℕ∞↑ x n})
+abstract
+  is-prop-leq-ℕ∞↑ : (x y : ℕ∞↑) → is-prop (leq-ℕ∞↑ x y)
+  is-prop-leq-ℕ∞↑ x y =
+    is-prop-Π (λ n → is-prop-leq-bool {sequence-ℕ∞↑ y n} {sequence-ℕ∞↑ x n})
 
 leq-prop-ℕ∞↑ : ℕ∞↑ → ℕ∞↑ → Prop lzero
 leq-prop-ℕ∞↑ x y = (leq-ℕ∞↑ x y , is-prop-leq-ℕ∞↑ x y)
@@ -80,7 +81,7 @@ abstract
 
 ```agda
 transitive-leq-ℕ∞↑ :
-  (x y z : ℕ∞↑) → y ≤-ℕ∞↑ z → x ≤-ℕ∞↑ y → x ≤-ℕ∞↑ z
+  (x y z : ℕ∞↑) → leq-ℕ∞↑ y z → leq-ℕ∞↑ x y → leq-ℕ∞↑ x z
 transitive-leq-ℕ∞↑ x y z p q n =
   transitive-leq-bool
     { sequence-ℕ∞↑ z n}
@@ -93,16 +94,17 @@ transitive-leq-ℕ∞↑ x y z p q n =
 ### Inequality of increasing binary sequences is antisymmetric
 
 ```agda
-antisymmetric-leq-ℕ∞↑ :
-  (x y : ℕ∞↑) → x ≤-ℕ∞↑ y → y ≤-ℕ∞↑ x → x ＝ y
-antisymmetric-leq-ℕ∞↑ x y p q =
-  eq-Eq-ℕ∞↑
-    ( λ n →
-      antisymmetric-leq-bool
-        { sequence-ℕ∞↑ x n}
-        { sequence-ℕ∞↑ y n}
-        ( q n)
-        ( p n))
+abstract
+  antisymmetric-leq-ℕ∞↑ :
+    (x y : ℕ∞↑) → leq-ℕ∞↑ x y → leq-ℕ∞↑ y x → x ＝ y
+  antisymmetric-leq-ℕ∞↑ x y p q =
+    eq-Eq-ℕ∞↑
+      ( λ n →
+        antisymmetric-leq-bool
+          { sequence-ℕ∞↑ x n}
+          { sequence-ℕ∞↑ y n}
+          ( q n)
+          ( p n))
 ```
 
 ### The poset of increasing binary sequences
@@ -123,7 +125,7 @@ is-preorder-leq-ℕ∞↑ = (refl-leq-ℕ∞↑ , transitive-leq-ℕ∞↑)
 
 ```agda
 preserves-order-succ-ℕ∞↑ :
-  (x y : ℕ∞↑) → x ≤-ℕ∞↑ y → (succ-ℕ∞↑ x) ≤-ℕ∞↑ (succ-ℕ∞↑ y)
+  (x y : ℕ∞↑) → leq-ℕ∞↑ x y → leq-ℕ∞↑ (succ-ℕ∞↑ x) (succ-ℕ∞↑ y)
 preserves-order-succ-ℕ∞↑ x y p zero-ℕ = star
 preserves-order-succ-ℕ∞↑ x y p (succ-ℕ n) = p n
 ```
@@ -131,7 +133,7 @@ preserves-order-succ-ℕ∞↑ x y p (succ-ℕ n) = p n
 ### The successor function is inflationary
 
 ```agda
-leq-succ-ℕ∞↑ : (x : ℕ∞↑) → x ≤-ℕ∞↑ (succ-ℕ∞↑ x)
+leq-succ-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ x (succ-ℕ∞↑ x)
 leq-succ-ℕ∞↑ x zero-ℕ = star
 leq-succ-ℕ∞↑ x (succ-ℕ n) = is-increasing-sequence-ℕ∞↑ x n
 ```
@@ -139,26 +141,26 @@ leq-succ-ℕ∞↑ x (succ-ℕ n) = is-increasing-sequence-ℕ∞↑ x n
 ### Zero is the smallest element
 
 ```agda
-leq-zero-ℕ∞↑ : (x : ℕ∞↑) → zero-ℕ∞↑ ≤-ℕ∞↑ x
+leq-zero-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ zero-ℕ∞↑ x
 leq-zero-ℕ∞↑ x n = leq-true-bool {sequence-ℕ∞↑ x n}
 
 Eq-leq-zero-ℕ∞↑ :
-  (x : ℕ∞↑) → x ≤-ℕ∞↑ zero-ℕ∞↑ → Eq-ℕ∞↑ x zero-ℕ∞↑
+  (x : ℕ∞↑) → leq-ℕ∞↑ x zero-ℕ∞↑ → Eq-ℕ∞↑ x zero-ℕ∞↑
 Eq-leq-zero-ℕ∞↑ x p = eq-leq-true-bool ∘ p
 
-eq-leq-zero-ℕ∞↑ : (x : ℕ∞↑) → x ≤-ℕ∞↑ zero-ℕ∞↑ → x ＝ zero-ℕ∞↑
+eq-leq-zero-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ x zero-ℕ∞↑ → x ＝ zero-ℕ∞↑
 eq-leq-zero-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-leq-zero-ℕ∞↑ x p)
 ```
 
 ### Infinity is the largest element
 
 ```agda
-infinity-leq-ℕ∞↑ : (x : ℕ∞↑) → x ≤-ℕ∞↑ infinity-ℕ∞↑
+infinity-leq-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ x infinity-ℕ∞↑
 infinity-leq-ℕ∞↑ x n = leq-false-bool {sequence-ℕ∞↑ x n}
 
-Eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → infinity-ℕ∞↑ ≤-ℕ∞↑ x → Eq-ℕ∞↑ x infinity-ℕ∞↑
+Eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ infinity-ℕ∞↑ x → Eq-ℕ∞↑ x infinity-ℕ∞↑
 Eq-leq-infinity-ℕ∞↑ x p = eq-leq-false-bool ∘ p
 
-eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → infinity-ℕ∞↑ ≤-ℕ∞↑ x → x ＝ infinity-ℕ∞↑
+eq-leq-infinity-ℕ∞↑ : (x : ℕ∞↑) → leq-ℕ∞↑ infinity-ℕ∞↑ x → x ＝ infinity-ℕ∞↑
 eq-leq-infinity-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-leq-infinity-ℕ∞↑ x p)
 ```
