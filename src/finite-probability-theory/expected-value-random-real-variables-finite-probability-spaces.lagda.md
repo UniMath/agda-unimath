@@ -45,11 +45,11 @@ of a
 [random real variable](finite-probability-theory.random-real-variables-finite-probability-spaces.md)
 `X` in a
 [finite probability space](finite-probability-theory.finite-probability-spaces.md)
-`(Ω , μ)` is the
+`(Ω , Pr)` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
 $$
-  ∑_{x ∈ Ω} X(x)μ(x).
+  ∑_{x ∈ Ω} X(x)\operatorname{Pr}(x).
 $$
 
 Our definition follows Definition 2.2 of {{#cite Babai00}}.

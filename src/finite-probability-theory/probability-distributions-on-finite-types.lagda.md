@@ -44,7 +44,7 @@ with total measure equal to 1.
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Type l) (μ : positive-distribution-Finite-Type Ω)
+  {l : Level} (Ω : Finite-Type l) (Pr : positive-distribution-Finite-Type Ω)
   where
 
   is-probability-distribution-prop-positive-distribution-Finite-Type :
@@ -52,7 +52,7 @@ module _
   is-probability-distribution-prop-positive-distribution-Finite-Type =
     Id-Prop
       ( ℝ-Set lzero)
-      ( total-measure-positive-distribution-Finite-Type Ω μ)
+      ( total-measure-positive-distribution-Finite-Type Ω Pr)
       ( one-ℝ)
 
   is-probability-distribution-positive-distribution-Finite-Type :

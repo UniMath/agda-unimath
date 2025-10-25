@@ -30,15 +30,15 @@ A
 {{#concept "positive distribution" Disambiguation="on a finite type" Agda=positive-distribution-Finite-Type}}
 on a [finite type](univalent-combinatorics.finite-types.md) `Ω` is a function
 into the [positive real numbers](real-numbers.positive-real-numbers.md),
-`μ : Ω → ℝ⁺`. We interpret the type `Ω` as the collection of _atomic events_,
-and `μ(x)` as the (unnormalized) _probability_ that the atomic event `x` will
+`Pr : Ω → ℝ⁺`. We interpret the type `Ω` as the collection of _atomic events_,
+and `Pr(x)` as the (unnormalized) _probability_ that the atomic event `x` will
 occur. Note that for positive distributions no atomic event can be _impossible_
-since `μ(x)` is always strictly greater than `0`. The **total measure** of a
-positive distribution `μ` on a finite type `Ω` is the
+since `Pr(x)` is always strictly greater than `0`. The **total measure** of a
+positive distribution `Pr` on a finite type `Ω` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
 $$
-  ∑_{x ∈ Ω} μ(x).
+  ∑_{x ∈ Ω}\operatorname{Pr}(x).
 $$
 
 ## Definitions
@@ -55,7 +55,7 @@ module _
 
   real-positive-distribution-Finite-Type :
     positive-distribution-Finite-Type → type-Finite-Type Ω → ℝ lzero
-  real-positive-distribution-Finite-Type μ = real-ℝ⁺ ∘ μ
+  real-positive-distribution-Finite-Type Pr = real-ℝ⁺ ∘ Pr
 ```
 
 ### The total measure of a positive distribution on a finite type
@@ -63,7 +63,7 @@ module _
 ```agda
 module _
   {l : Level} (Ω : Finite-Type l)
-  (μ : positive-distribution-Finite-Type Ω)
+  (Pr : positive-distribution-Finite-Type Ω)
   where
 
   total-measure-positive-distribution-Finite-Type : ℝ lzero
@@ -71,7 +71,7 @@ module _
     sum-finite-Ab
       ( abelian-group-add-ℝ-lzero)
       ( Ω)
-      ( real-positive-distribution-Finite-Type Ω μ)
+      ( real-positive-distribution-Finite-Type Ω Pr)
 ```
 
 ## Properties
@@ -80,16 +80,16 @@ module _
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Type l) (μ : positive-distribution-Finite-Type Ω)
+  {l : Level} (Ω : Finite-Type l) (Pr : positive-distribution-Finite-Type Ω)
   where
 
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type :
     is-empty (type-Finite-Type Ω) →
-    total-measure-positive-distribution-Finite-Type Ω μ ＝ zero-ℝ
+    total-measure-positive-distribution-Finite-Type Ω Pr ＝ zero-ℝ
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type H =
     eq-zero-sum-finite-is-empty-Ab
       ( abelian-group-add-ℝ-lzero)
       ( Ω)
       ( H)
-      ( real-positive-distribution-Finite-Type Ω μ)
+      ( real-positive-distribution-Finite-Type Ω Pr)
 ```
