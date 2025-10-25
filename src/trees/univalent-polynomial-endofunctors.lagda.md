@@ -170,7 +170,7 @@ map-univalent-polynomial-endofunctor P =
     ( polynomial-endofunctor-univalent-polynomial-endofunctor P)
 ```
 
-### Characterizing identity in the image of univalent polynomial endofunctors
+### Characterizing equality in the image of univalent polynomial endofunctors
 
 When the polynomial endofunctor is univalent we get a stronger characterization
 of identity in its image, since equality of shapes is characterized by

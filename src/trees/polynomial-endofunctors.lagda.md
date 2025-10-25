@@ -95,7 +95,7 @@ map-polynomial-endofunctor (A , B) = map-polynomial-endofunctor' A B
 
 ## Properties
 
-### Characterizing identity in the image of polynomial endofunctors
+### Characterizing equality in the image of polynomial endofunctors
 
 ```agda
 module _
