@@ -89,7 +89,8 @@ increasing-binary-sequence-Maybe-ℕ =
 
 ```agda
 abstract
-  is-injective-increasing-binary-sequence-ℕ : is-injective increasing-binary-sequence-ℕ
+  is-injective-increasing-binary-sequence-ℕ :
+    is-injective increasing-binary-sequence-ℕ
   is-injective-increasing-binary-sequence-ℕ {zero-ℕ} {zero-ℕ} p =
     refl
   is-injective-increasing-binary-sequence-ℕ {zero-ℕ} {succ-ℕ y} p =
@@ -97,15 +98,17 @@ abstract
   is-injective-increasing-binary-sequence-ℕ {succ-ℕ x} {zero-ℕ} p =
     ex-falso (neq-succ-zero-ℕ∞↑ p)
   is-injective-increasing-binary-sequence-ℕ {succ-ℕ x} {succ-ℕ y} p =
-    ap succ-ℕ (is-injective-increasing-binary-sequence-ℕ (is-injective-succ-ℕ∞↑ p))
+    ap succ-ℕ
+      ( is-injective-increasing-binary-sequence-ℕ (is-injective-succ-ℕ∞↑ p))
 
 abstract
   is-emb-increasing-binary-sequence-ℕ : is-emb increasing-binary-sequence-ℕ
   is-emb-increasing-binary-sequence-ℕ =
     is-emb-is-injective is-set-ℕ∞↑ is-injective-increasing-binary-sequence-ℕ
 
-emb-ℕ∞↑-ℕ : ℕ ↪ ℕ∞↑
-emb-ℕ∞↑-ℕ = (increasing-binary-sequence-ℕ , is-emb-increasing-binary-sequence-ℕ)
+emb-increasing-binary-sequence-ℕ : ℕ ↪ ℕ∞↑
+emb-increasing-binary-sequence-ℕ =
+    ( increasing-binary-sequence-ℕ , is-emb-increasing-binary-sequence-ℕ)
 ```
 
 ### The canonical inclusion preserves order
@@ -142,7 +145,8 @@ abstract
   is-not-double-negation-dense-increasing-binary-sequence-ℕ :
     ¬ (is-double-negation-dense-map increasing-binary-sequence-ℕ)
   is-not-double-negation-dense-increasing-binary-sequence-ℕ H =
-    H infinity-ℕ∞↑ (λ p → neq-infinity-increasing-binary-sequence-ℕ (pr1 p) (pr2 p))
+    H ( infinity-ℕ∞↑)
+      ( λ p → neq-infinity-increasing-binary-sequence-ℕ (pr1 p) (pr2 p))
 
   is-not-surjective-increasing-binary-sequence-ℕ :
     ¬ (is-surjective increasing-binary-sequence-ℕ)
@@ -174,19 +178,19 @@ emb-increasing-binary-sequence-Maybe-ℕ =
 ### Natural numbers are finite increasing binary sequences
 
 ```agda
-upper-bound-increasing-binary-sequence-ℕ :
-  (n : ℕ) → upper-bound-ℕ∞↑ (increasing-binary-sequence-ℕ n)
-upper-bound-increasing-binary-sequence-ℕ zero-ℕ =
+finite-bound-increasing-binary-sequence-ℕ :
+  (n : ℕ) → finite-bound-ℕ∞↑ (increasing-binary-sequence-ℕ n)
+finite-bound-increasing-binary-sequence-ℕ zero-ℕ =
   ( 0 , refl)
-upper-bound-increasing-binary-sequence-ℕ (succ-ℕ n) =
-  ( succ-ℕ (pr1 (upper-bound-increasing-binary-sequence-ℕ n)) ,
-    pr2 (upper-bound-increasing-binary-sequence-ℕ n))
+finite-bound-increasing-binary-sequence-ℕ (succ-ℕ n) =
+  ( succ-ℕ (pr1 (finite-bound-increasing-binary-sequence-ℕ n)) ,
+    pr2 (finite-bound-increasing-binary-sequence-ℕ n))
 
 abstract
   is-finite-increasing-binary-sequence-ℕ :
     (n : ℕ) → is-finite-ℕ∞↑ (increasing-binary-sequence-ℕ n)
   is-finite-increasing-binary-sequence-ℕ n =
-    unit-trunc-Prop (upper-bound-increasing-binary-sequence-ℕ n)
+    unit-trunc-Prop (finite-bound-increasing-binary-sequence-ℕ n)
 ```
 
 #### Successor condition on the image of the natural numbers
@@ -203,7 +207,7 @@ abstract
     Eq-ℕ∞↑ x (increasing-binary-sequence-ℕ (succ-ℕ n))
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s 0 = r
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s (succ-ℕ i) =
-    is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
+    is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s 0 =
     is-positive-is-strictly-bounded-below-ℕ∞↑ x (succ-ℕ n) r
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s (succ-ℕ i) =

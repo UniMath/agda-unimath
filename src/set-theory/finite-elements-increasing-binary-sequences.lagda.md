@@ -79,7 +79,7 @@ finite-bound-ℕ∞↑ : ℕ∞↑ → UU lzero
 finite-bound-ℕ∞↑ x = Σ ℕ (is-finitely-bounded-ℕ∞↑ x)
 ```
 
-### Least upper bounds on the size of a finite element in increasing binary sequences
+### Least finite bounds on the size of a finite element in increasing binary sequences
 
 ```agda
 least-finite-bound-ℕ∞↑ : ℕ∞↑ → UU lzero
@@ -98,12 +98,13 @@ abstract
       ( eq-is-prop (is-prop-Π λ u → is-prop-leq-ℕ m (pr1 u)))
 
 abstract
-  is-prop-least-finite-bound-ℕ∞↑ : (x : ℕ∞↑) → is-prop (least-finite-bound-ℕ∞↑ x)
+  is-prop-least-finite-bound-ℕ∞↑ :
+    (x : ℕ∞↑) → is-prop (least-finite-bound-ℕ∞↑ x)
   is-prop-least-finite-bound-ℕ∞↑ x =
     is-prop-all-elements-equal (all-elements-equal-least-finite-bound-ℕ∞↑ x)
 
-least-upper-bound-prop-ℕ∞↑ : ℕ∞↑ → Prop lzero
-least-upper-bound-prop-ℕ∞↑ x =
+least-finite-bound-prop-ℕ∞↑ : ℕ∞↑ → Prop lzero
+least-finite-bound-prop-ℕ∞↑ x =
   ( least-finite-bound-ℕ∞↑ x , is-prop-least-finite-bound-ℕ∞↑ x)
 ```
 
@@ -131,7 +132,7 @@ is-not-finitely-bounded-infinity-ℕ∞↑ :
 is-not-finitely-bounded-infinity-ℕ∞↑ n ()
 ```
 
-### If an increasing binary sequence is not bounded then it is infinite
+### If an increasing binary sequence is not finitely bounded then it is infinite
 
 ```agda
 module _
@@ -162,21 +163,21 @@ abstract
     is-true-is-true-leq-bool (is-increasing-sequence-ℕ∞↑ x n)
 
 abstract
-  is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ :
+  is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ :
     (x : ℕ∞↑) (n : ℕ) →
     is-finitely-bounded-ℕ∞↑ x 0 → is-finitely-bounded-ℕ∞↑ x n
-  is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ x 0 s = s
-  is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ x (succ-ℕ i) s =
+  is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ x 0 s = s
+  is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ x (succ-ℕ i) s =
     contrapositive-is-false-bool
       ( is-false-is-false-leq-bool (is-increasing-sequence-ℕ∞↑ x i))
-      ( is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ x i s)
+      ( is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ x i s)
 
 abstract
   is-finitely-bounded-leq-ℕ∞↑ :
     (x : ℕ∞↑) (n m : ℕ) → leq-ℕ n m →
     is-finitely-bounded-ℕ∞↑ x n → is-finitely-bounded-ℕ∞↑ x m
   is-finitely-bounded-leq-ℕ∞↑ x 0 m p =
-    is-finitely-bounded-is-finitely-bounded-zero-ℕ∞↑ x m
+    is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↑ x m
   is-finitely-bounded-leq-ℕ∞↑ x (succ-ℕ n) (succ-ℕ m) =
     is-finitely-bounded-leq-ℕ∞↑ (shift-left-ℕ∞↑ x) n m
 ```
