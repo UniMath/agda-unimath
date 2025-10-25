@@ -109,7 +109,9 @@ module _
                   is-prop-is-cartesian-hom-arrow
                     ( map-polynomial-endofunctor P f)
                     ( map-polynomial-endofunctor Q f)
-                    ( hom-arrow-natural-transformation-polynomial-endofunctor P Q
+                    ( hom-arrow-natural-transformation-polynomial-endofunctor
+                      ( P)
+                      ( Q)
                       ( α)
                       ( f)))))
 

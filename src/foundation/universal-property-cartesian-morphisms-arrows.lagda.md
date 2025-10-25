@@ -132,7 +132,7 @@ module _
   has-unique-lifts-hom-arrow-Level l1 l2 =
     {A : UU l1} {A' : UU l2} (f : A → A') (α : hom-arrow f h) →
     (δ : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
-    is-contr (lift-hom-arrow-of-lift-codomain-hom-arrow f g h α β δ)
+    is-contr (lift-hom-arrow-of-lift-codomain-hom-arrow f g h β α δ)
 
   has-unique-lifts-hom-arrow : UUω
   has-unique-lifts-hom-arrow =
@@ -156,7 +156,7 @@ module _
       has-unique-lifts-hom-arrow g h β
     has-unique-lifts-up-cartesian-hom-arrow up-β f α δ =
       is-contr-equiv' _
-        ( compute-fiber-lift-codomain-lift-hom-arrow f g h α β δ)
+        ( compute-fiber-lift-codomain-lift-hom-arrow f g h β α δ)
         ( is-contr-map-is-equiv (up-β f α) δ)
 
   abstract
@@ -167,7 +167,7 @@ module _
       is-equiv-is-contr-map
         ( λ δ →
           is-contr-equiv _
-            ( compute-fiber-lift-codomain-lift-hom-arrow f g h α β δ)
+            ( compute-fiber-lift-codomain-lift-hom-arrow f g h β α δ)
             ( L f α δ))
 ```
 
@@ -188,7 +188,7 @@ module _
       is-contr-equiv _
         ( equiv-tot
           ( equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow
-            f g h α β (i , I)))
+            f g h β α (i , I)))
         ( uniqueness-universal-property-pullback
           ( map-codomain-hom-arrow g h β)
           ( h)
@@ -219,8 +219,8 @@ module _
                   ( f)
                   ( g)
                   ( h)
-                  ( i , map-codomain-hom-arrow g h β , I)
                   ( β)
+                  ( i , map-codomain-hom-arrow g h β , I)
                   ( id , refl-htpy)))
               ( H f (i , map-codomain-hom-arrow g h β , I) (id , refl-htpy)))))
 ```
