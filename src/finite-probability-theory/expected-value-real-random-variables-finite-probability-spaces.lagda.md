@@ -40,7 +40,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The
-{{#concept "expected value" Disambiguation="of a real random variable in a finite probability space" Agda=expected-value-random-real-variable-Finite-Probability-Space}}
+{{#concept "expected value" Disambiguation="of a real random variable in a finite probability space" Agda=expected-value-real-random-variable-Finite-Probability-Space}}
 of a
 [real random variable](finite-probability-theory.real-random-variables-finite-probability-spaces.md)
 `X` in a
