@@ -370,14 +370,3 @@ module _
               ( λ where (u , refl) → refl))
             ( is-equiv-id))
 ```
-
-### Equivalence between cartesian morphisms and cartesian natural transformations
-
-This is proved in a slightly different setting as part of Lemma 2.3.3 in
-{{#cite GHK22}}.
-
-> This remains to be formalized.
-
-## References
-
-{{#bibliography}}
