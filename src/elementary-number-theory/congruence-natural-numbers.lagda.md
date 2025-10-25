@@ -80,7 +80,7 @@ cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
 symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
 pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
-pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
+pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (commutative-dist-ℕ x y)
 
 cong-zero-ℕ' : (k : ℕ) → cong-ℕ k zero-ℕ k
 cong-zero-ℕ' k =
@@ -212,6 +212,12 @@ reflects-cong-add-ℕ :
 pr1 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) = d
 pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
   p ∙ translation-invariant-dist-ℕ x y z
+
+reflects-cong-left-add-ℕ :
+  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (x +ℕ z) (y +ℕ z) → cong-ℕ k x y
+pr1 (reflects-cong-left-add-ℕ x (d , p)) = d
+pr2 (reflects-cong-left-add-ℕ {k} x {y} {z} (d , p)) =
+  p ∙ translation-invariant-dist-ℕ' z x y
 
 reflects-cong-add-ℕ' :
   {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ' x y) (add-ℕ' x z) → cong-ℕ k y z

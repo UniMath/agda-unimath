@@ -47,7 +47,7 @@ Recall that there is a standard unordered pairing operation
 
 A binary operation `μ : A → A → B` is symmetric if it extends to an operation
 `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is
-symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that
+symmetric if there is an operation `μ̃` on the unordered pairs in `A`, such that
 `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood
 to be fully coherent commutative operations. One can check that if `B` is a set,
 then `μ` has such an extension if and only if it is commutative in the usual
@@ -127,12 +127,12 @@ module _
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
           ( map-equiv-coproduct
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (pair X K) e e'))
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2 (pair X K) e e'))
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2
               ( pair X K)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
-            ( decide-value-equiv-Fin-two-ℕ
+            ( decide-value-equiv-Fin-2
               ( pair X K)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
@@ -149,13 +149,16 @@ module _
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
           ( map-equiv-coproduct
             ( inv-equiv
-              ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin' 2) e e'))
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin' 2)
+              ( equiv-ev-zero-htpy-equiv-Fin-2
+                ( Fin-Type-With-Cardinality-ℕ 2)
+                ( e)
+                ( e')))
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-2
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
-            ( decide-value-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin' 2)
+            ( decide-value-equiv-Fin-2
+              ( Fin-Type-With-Cardinality-ℕ 2)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)

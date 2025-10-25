@@ -21,10 +21,12 @@ open import order-theory.large-preorders
 ## Idea
 
 Two elements `x` and `y` of a [large preorder](order-theory.large-preorders.md)
-`P` are said to be **similar** if both `x ≤ y` and `y ≤ x` hold.
+`P` are said to be
+{{#concept "similar" Disambiguation="elements of a large preorder" Agda=sim-Large-Preorder}}
+if both `x ≤ y` and `y ≤ x` hold.
 
 In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
-are similar elements in a preorder `P`.
+are similar elements in a large preorder `P`.
 
 ## Definition
 
@@ -110,4 +112,21 @@ module _
     {l : Level} {x y : type-Large-Preorder P l} →
     x ＝ y → sim-Large-Preorder P x y
   sim-eq-Large-Preorder refl = refl-sim-Large-Preorder P _
+```
+
+### Similarity in a large preorder is itself a large preorder
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Preorder α β)
+  where
+
+  large-preorder-sim-Large-Preorder :
+    Large-Preorder α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+  large-preorder-sim-Large-Preorder =
+    make-Large-Preorder
+      ( type-Large-Preorder P)
+      ( sim-prop-Large-Preorder P)
+      ( refl-sim-Large-Preorder P)
+      ( transitive-sim-Large-Preorder P)
 ```

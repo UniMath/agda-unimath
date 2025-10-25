@@ -38,8 +38,8 @@ open import foundation.unit-type
 
 </details>
 
-Bézout's Lemma is the 60th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+Bézout's Lemma is the [60th](literature.100-theorems.md#60) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}. It was
 originally added to agda-unimath by [Bryan Lu](https://blu-bird.github.io).
 

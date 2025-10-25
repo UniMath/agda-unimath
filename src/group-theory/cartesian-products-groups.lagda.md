@@ -23,9 +23,11 @@ open import group-theory.semigroups
 
 ## Idea
 
-The cartesian product of two groups `G` and `H` has the product of the
-underlying sets of `G` and `H` as its underlying type, and is equipped with
-pointwise multiplication.
+The
+{{#concept "cartesian product" disambiguation="of groups" Agda=product-Group WDID=Q173740 WD="Cartesian product"}}
+of two [groups](group-theory.groups.md) `G` and `H` consists of the
+[product](foundation.cartesian-product-types.md) `G × H` of the underlying
+[sets](foundation.sets.md) and the componentwise operation on it.
 
 ## Definition
 
@@ -54,9 +56,8 @@ module _
 
   associative-mul-product-Group :
     (x y z : type-product-Group) →
-    Id
-      ( mul-product-Group (mul-product-Group x y) z)
-      ( mul-product-Group x (mul-product-Group y z))
+    mul-product-Group (mul-product-Group x y) z ＝
+    mul-product-Group x (mul-product-Group y z)
   associative-mul-product-Group =
     associative-mul-Semigroup semigroup-product-Group
 
@@ -64,12 +65,12 @@ module _
   unit-product-Group = unit-Monoid monoid-product-Group
 
   left-unit-law-mul-product-Group :
-    (x : type-product-Group) → Id (mul-product-Group unit-product-Group x) x
+    (x : type-product-Group) → mul-product-Group unit-product-Group x ＝ x
   left-unit-law-mul-product-Group =
     left-unit-law-mul-Monoid monoid-product-Group
 
   right-unit-law-mul-product-Group :
-    (x : type-product-Group) → Id (mul-product-Group x unit-product-Group) x
+    (x : type-product-Group) → mul-product-Group x unit-product-Group ＝ x
   right-unit-law-mul-product-Group =
     right-unit-law-mul-Monoid monoid-product-Group
 
@@ -79,13 +80,13 @@ module _
 
   left-inverse-law-product-Group :
     (x : type-product-Group) →
-    Id (mul-product-Group (inv-product-Group x) x) unit-product-Group
+    mul-product-Group (inv-product-Group x) x ＝ unit-product-Group
   left-inverse-law-product-Group (pair x y) =
     eq-pair (left-inverse-law-mul-Group G x) (left-inverse-law-mul-Group H y)
 
   right-inverse-law-product-Group :
     (x : type-product-Group) →
-    Id (mul-product-Group x (inv-product-Group x)) unit-product-Group
+    mul-product-Group x (inv-product-Group x) ＝ unit-product-Group
   right-inverse-law-product-Group (pair x y) =
     eq-pair (right-inverse-law-mul-Group G x) (right-inverse-law-mul-Group H y)
 

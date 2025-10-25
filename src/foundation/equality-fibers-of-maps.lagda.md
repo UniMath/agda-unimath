@@ -121,7 +121,7 @@ module _
 
   abstract
     is-equiv-eq-fiber-fiber-ap :
-      (q : (f x) ＝ f y) → is-equiv (eq-fiber-fiber-ap q)
+      (q : f x ＝ f y) → is-equiv (eq-fiber-fiber-ap q)
     is-equiv-eq-fiber-fiber-ap q =
       is-equiv-comp
         ( tr (fiber (ap f)) right-unit)

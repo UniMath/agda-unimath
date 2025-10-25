@@ -10,7 +10,12 @@ module foundation.powersets where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.identity-types
 open import foundation.large-locale-of-propositions
+open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -32,6 +37,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.suplattices
 open import order-theory.top-elements-large-posets
 open import order-theory.top-elements-posets

@@ -13,6 +13,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.universe-levels
 
@@ -21,14 +22,20 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
 
 ## Idea
 
-A repetition of values of a map `f : A → B` consists of a pair of distinct
-points in `A` that get mapped to the same point in `B`.
+A
+{{#concept "repetition of values" Disambiguation="of a map of types" Agda=repetition-of-values}}
+of a map `f : A → B` consists of a
+[pair of distinct elements](foundation.pairs-of-distinct-elements.md) `x ≠ y` of
+`A` that get mapped to the [same](foundation-core.identity-types.md) element in
+`B`: `f x ＝ f y`.
 
 ## Definitions
 
@@ -39,8 +46,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-repetition-of-values :
-    (f : A → B) (p : pair-of-distinct-elements A) → UU l2
+  is-repetition-of-values : (A → B) → pair-of-distinct-elements A → UU l2
   is-repetition-of-values f p =
     f (first-pair-of-distinct-elements p) ＝
     f (second-pair-of-distinct-elements p)
@@ -75,8 +81,7 @@ module _
       pair-of-distinct-elements-repetition-of-values
 
   is-repetition-of-values-repetition-of-values :
-    is-repetition-of-values f
-      pair-of-distinct-elements-repetition-of-values
+    is-repetition-of-values f pair-of-distinct-elements-repetition-of-values
   is-repetition-of-values-repetition-of-values = pr2 r
 ```
 
@@ -84,33 +89,58 @@ module _
 
 ```agda
 is-repeated-value :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (a : A) → UU (l1 ⊔ l2)
-is-repeated-value {l1} {l2} {A} {B} f a =
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → A → UU (l1 ⊔ l2)
+is-repeated-value {A = A} f a =
   Σ (Σ A (λ x → a ≠ x)) (λ x → f a ＝ f (pr1 x))
 ```
 
 ## Properties
 
+### Maps with repetitions of values are not injective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-not-injective-repetition-of-values :
+    repetition-of-values f → ¬ (is-injective f)
+  is-not-injective-repetition-of-values r H =
+    distinction-repetition-of-values f r
+      ( H (is-repetition-of-values-repetition-of-values f r))
+```
+
 ### Repetitions of values of composite maps
 
 ```agda
-repetition-of-values-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  {f : A → B} → repetition-of-values f → repetition-of-values (g ∘ f)
-repetition-of-values-comp g ((x , y , s) , t) =
-  ((x , y , s) , ap g t)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
 
-repetition-of-values-left-factor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
-  {f : A → B} → is-emb f → repetition-of-values (g ∘ f) → repetition-of-values g
-repetition-of-values-left-factor {g = g} {f} H ((a , b , K) , p) =
-  ((f a , f b , λ q → K (is-injective-is-emb H q)) , p)
+  repetition-of-values-comp :
+    repetition-of-values f → repetition-of-values (g ∘ f)
+  repetition-of-values-comp ((x , y , s) , t) =
+    ((x , y , s) , ap g t)
 
-repetition-of-values-right-factor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
-  {f : A → B} → is-emb g → repetition-of-values (g ∘ f) → repetition-of-values f
-repetition-of-values-right-factor {g = g} {f} H ((a , b , K) , p) =
-  ((a , b , K) , is-injective-is-emb H p)
+  repetition-of-values-left-factor' :
+    is-injective f → repetition-of-values (g ∘ f) → repetition-of-values g
+  repetition-of-values-left-factor' H ((a , b , K) , p) =
+    ((f a , f b , λ q → K (H q)) , p)
+
+  repetition-of-values-left-factor :
+    is-emb f → repetition-of-values (g ∘ f) → repetition-of-values g
+  repetition-of-values-left-factor H =
+    repetition-of-values-left-factor' (is-injective-is-emb H)
+
+  repetition-of-values-right-factor' :
+    is-injective g → repetition-of-values (g ∘ f) → repetition-of-values f
+  repetition-of-values-right-factor' H ((a , b , K) , p) = ((a , b , K) , H p)
+
+  repetition-of-values-right-factor :
+    is-emb g → repetition-of-values (g ∘ f) → repetition-of-values f
+  repetition-of-values-right-factor H =
+    repetition-of-values-right-factor' (is-injective-is-emb H)
 ```
 
 ### The type of repetitions of values is invariant under equivalences
@@ -150,17 +180,36 @@ module _
   map-inv-equiv-repetition-of-values = map-inv-equiv equiv-repetition-of-values
 
   is-section-map-inv-equiv-repetition-of-values :
-    ( map-equiv-repetition-of-values ∘ map-inv-equiv-repetition-of-values) ~ id
+    is-section
+      ( map-equiv-repetition-of-values)
+      ( map-inv-equiv-repetition-of-values)
   is-section-map-inv-equiv-repetition-of-values =
     is-section-map-inv-equiv equiv-repetition-of-values
 
   is-retraction-map-inv-equiv-repetition-of-values :
-    ( map-inv-equiv-repetition-of-values ∘ map-equiv-repetition-of-values) ~ id
+    is-retraction
+      ( map-equiv-repetition-of-values)
+      ( map-inv-equiv-repetition-of-values)
   is-retraction-map-inv-equiv-repetition-of-values =
     is-retraction-map-inv-equiv equiv-repetition-of-values
 ```
 
-### Embeddings of repetitions values
+### Embeddings of repetitions of values
+
+Given an embedding of arrows `f ↪ g`, i.e. a commuting square
+
+```text
+         e
+    A ------> C
+    |         |
+  f |         | g
+    ∨         ∨
+    B ------> D
+         d
+```
+
+where `e` and `d` are embeddings, then the type of repetitions of values of `f`
+embeds into the type of repetitions of values of `g`.
 
 ```agda
 module _
@@ -192,3 +241,7 @@ module _
   is-emb-map-emb-repetition-of-values : is-emb map-emb-repetition-of-values
   is-emb-map-emb-repetition-of-values = is-emb-map-emb emb-repetition-of-values
 ```
+
+## See also
+
+- [Noninjective maps](foundation.noninjective-maps.md)

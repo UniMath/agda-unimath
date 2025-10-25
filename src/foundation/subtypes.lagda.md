@@ -9,6 +9,7 @@ open import foundation-core.subtypes public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -28,6 +30,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
+open import foundation-core.univalence
 ```
 
 </details>
@@ -114,28 +117,34 @@ module _
     map-inv-equiv (extensionality-subtype Q)
 ```
 
-### Similarity of subtypes
+### Subtypes with the same elements are equivalent
 
 ```agda
 module _
-  {l1 : Level} {A : UU l1}
+  {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X)
   where
 
-  sim-subtype :
-    {l2 l3 : Level} → subtype l2 A → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  sim-subtype P Q = (P ⊆ Q) × (Q ⊆ P)
+  equiv-has-same-elements-type-subtype :
+    has-same-elements-subtype S T → type-subtype S ≃ type-subtype T
+  equiv-has-same-elements-type-subtype H =
+    equiv-tot (λ x → equiv-iff' (S x) (T x) (H x))
+```
 
-  has-same-elements-sim-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    sim-subtype P Q → has-same-elements-subtype P Q
-  pr1 (has-same-elements-sim-subtype P Q s x) = pr1 s x
-  pr2 (has-same-elements-sim-subtype P Q s x) = pr2 s x
+### A subtype `S` is equivalent to `S` precomposed with an equivalence
 
-  sim-has-same-elements-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    has-same-elements-subtype P Q → sim-subtype P Q
-  pr1 (sim-has-same-elements-subtype P Q s) x = forward-implication (s x)
-  pr2 (sim-has-same-elements-subtype P Q s) x = backward-implication (s x)
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (S : subtype l3 Y)
+  where
+
+  equiv-precomp-equiv-type-subtype :
+    type-subtype S ≃ type-subtype (S ∘ map-equiv e)
+  equiv-precomp-equiv-type-subtype =
+    equiv-Σ
+      ( λ x → type-Prop ((S ∘ map-equiv e) x))
+      ( inv-equiv e)
+      ( λ y →
+        equiv-eq (ap (type-Prop ∘ S) (inv (is-section-map-inv-equiv e y))))
 ```
 
 ### The containment relation is antisymmetric
@@ -176,7 +185,7 @@ pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
 
-### Characterisation of embeddings into subtypes
+### Characterization of embeddings into subtypes
 
 ```agda
 module _

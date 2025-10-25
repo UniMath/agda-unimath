@@ -29,7 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **necklace** is an arrangement of coloured beads, i.e., it consists of a
+A **necklace** is an arrangement of colored beads, i.e., it consists of a
 [cyclic finite type](univalent-combinatorics.cyclic-finite-types.md) equipped
 with a coloring of the elements. Two necklaces are considered the same if one
 can be obtained from the other by rotating.
@@ -61,8 +61,8 @@ module _
   is-cyclic-endo-necklace : is-cyclic-Type-With-Endomorphism m endo-necklace
   is-cyclic-endo-necklace = mere-equiv-endo-Cyclic-Type m cyclic-necklace
 
-  colouring-necklace : type-necklace → Fin n
-  colouring-necklace = pr2 N
+  coloring-necklace : type-necklace → Fin n
+  coloring-necklace = pr2 N
 ```
 
 ### Necklace patterns
@@ -71,7 +71,9 @@ module _
 necklace-pattern : (l : Level) → ℕ → ℕ → UU (lsuc l)
 necklace-pattern l m n =
   Σ ( Cyclic-Type l m)
-    ( λ X → Σ (UU-Fin lzero n) (λ C → type-Cyclic-Type m X → type-UU-Fin n C))
+    ( λ X →
+      Σ ( Type-With-Cardinality-ℕ lzero n)
+        ( λ C → type-Cyclic-Type m X → type-Type-With-Cardinality-ℕ n C))
 ```
 
 ## Properties
@@ -88,8 +90,8 @@ module _
   equiv-necklace N1 N2 =
     Σ ( equiv-Cyclic-Type m (cyclic-necklace m n N1) (cyclic-necklace m n N2))
       ( λ e →
-        ( colouring-necklace m n N1) ~
-        ( ( colouring-necklace m n N2) ∘
+        ( coloring-necklace m n N1) ~
+        ( ( coloring-necklace m n N2) ∘
           ( map-equiv-Cyclic-Type m
             ( cyclic-necklace m n N1)
             ( cyclic-necklace m n N2)
@@ -109,11 +111,11 @@ module _
   where
 
   extensionality-necklace :
-    (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
+    (N1 N2 : necklace l m n) → (N1 ＝ N2) ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =
     extensionality-Σ
       ( λ {X} f e →
-        ( colouring-necklace m n N1) ~
+        ( coloring-necklace m n N1) ~
         ( f ∘ map-equiv-Cyclic-Type m (cyclic-necklace m n N1) X e))
       ( id-equiv-Cyclic-Type m (cyclic-necklace m n N1))
       ( refl-htpy)
@@ -122,7 +124,7 @@ module _
 
   refl-extensionality-necklace :
     (N : necklace l m n) →
-    Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m n N)
+    map-equiv (extensionality-necklace N N) refl ＝ id-equiv-necklace m n N
   refl-extensionality-necklace N = refl
 ```
 

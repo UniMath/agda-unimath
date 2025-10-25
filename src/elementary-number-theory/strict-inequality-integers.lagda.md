@@ -19,8 +19,10 @@ open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -47,7 +49,7 @@ An [integer](elementary-number-theory.integers.md) `x` is _strictly less than_
 the integer `y` if the
 [difference](elementary-number-theory.difference-integers.md) `y - x` is
 [positive](elementary-number-theory.positive-integers.md). This relation defines
-the {{#concept "standard strict ordering" Disambiguation="integers" Agda=leq-ℤ}}
+the {{#concept "standard strict ordering" Disambiguation="integers" Agda=le-ℤ}}
 on the integers.
 
 ## Definition
@@ -55,14 +57,15 @@ on the integers.
 ### Strict inequality on the integers
 
 ```agda
-le-ℤ-Prop : ℤ → ℤ → Prop lzero
-le-ℤ-Prop x y = subtype-positive-ℤ (y -ℤ x)
+le-prop-ℤ : ℤ → ℤ → Prop lzero
+le-prop-ℤ x y = subtype-positive-ℤ (y -ℤ x)
 
 le-ℤ : ℤ → ℤ → UU lzero
-le-ℤ x y = type-Prop (le-ℤ-Prop x y)
+le-ℤ x y = type-Prop (le-prop-ℤ x y)
 
-is-prop-le-ℤ : (x y : ℤ) → is-prop (le-ℤ x y)
-is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
+abstract
+  is-prop-le-ℤ : (x y : ℤ) → is-prop (le-ℤ x y)
+  is-prop-le-ℤ x y = is-prop-type-Prop (le-prop-ℤ x y)
 ```
 
 ## Properties
@@ -70,8 +73,9 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 ### Strict inequality on the integers implies inequality
 
 ```agda
-leq-le-ℤ : {x y : ℤ} → le-ℤ x y → leq-ℤ x y
-leq-le-ℤ {x} {y} = is-nonnegative-is-positive-ℤ
+abstract
+  leq-le-ℤ : {x y : ℤ} → le-ℤ x y → leq-ℤ x y
+  leq-le-ℤ {x} {y} = is-nonnegative-is-positive-ℤ
 ```
 
 ### Strict inequality on the integers is decidable
@@ -90,23 +94,25 @@ le-ℤ-Decidable-Prop x y =
 ### Strict inequality on the integers is transitive
 
 ```agda
-transitive-le-ℤ : (k l m : ℤ) → le-ℤ l m → le-ℤ k l → le-ℤ k m
-transitive-le-ℤ k l m H K =
-  is-positive-eq-ℤ
-    ( triangle-diff-ℤ m l k)
-    ( is-positive-add-ℤ H K)
+abstract
+  transitive-le-ℤ : (k l m : ℤ) → le-ℤ l m → le-ℤ k l → le-ℤ k m
+  transitive-le-ℤ k l m H K =
+    is-positive-eq-ℤ
+      ( triangle-diff-ℤ m l k)
+      ( is-positive-add-ℤ H K)
 ```
 
 ### Strict inequality on the integers is asymmetric
 
 ```agda
-asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
-asymmetric-le-ℤ x y p =
-  is-not-positive-is-nonpositive-ℤ
-    ( is-nonpositive-eq-ℤ
-      ( distributive-neg-diff-ℤ y x)
-      ( is-nonpositive-neg-is-nonnegative-ℤ
-        ( is-nonnegative-is-positive-ℤ p)))
+abstract
+  asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
+  asymmetric-le-ℤ x y p =
+    is-not-positive-is-nonpositive-ℤ
+      ( is-nonpositive-eq-ℤ
+        ( distributive-neg-diff-ℤ y x)
+        ( is-nonpositive-neg-is-nonnegative-ℤ
+          ( is-nonnegative-is-positive-ℤ p)))
 ```
 
 ### Strict inequality on the integers is connected
@@ -126,21 +132,23 @@ connected-le-ℤ x y H =
 ### Any integer is strictly greater than its predecessor
 
 ```agda
-le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
-le-pred-ℤ x =
-  is-positive-eq-ℤ
-    ( inv (right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
-    ( is-positive-int-positive-ℤ one-positive-ℤ)
+abstract
+  le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
+  le-pred-ℤ x =
+    is-positive-eq-ℤ
+      ( inv (right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
+      ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
 ### Any integer is strictly lesser than its successor
 
 ```agda
-le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
-le-succ-ℤ x =
-  is-positive-eq-ℤ
-    ( inv (left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
-    ( is-positive-int-positive-ℤ one-positive-ℤ)
+abstract
+  le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
+  le-succ-ℤ x =
+    is-positive-eq-ℤ
+      ( inv (left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
+      ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
 ### Strict inequality on the integers is invariant by translation
@@ -160,39 +168,41 @@ module _
 ### Addition on the integers preserves strict inequality
 
 ```agda
-preserves-le-left-add-ℤ :
-  (z x y : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
-preserves-le-left-add-ℤ z x y =
-  is-positive-eq-ℤ (inv (right-translation-diff-ℤ y x z))
+abstract
+  preserves-le-left-add-ℤ :
+    (z x y : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
+  preserves-le-left-add-ℤ z x y =
+    is-positive-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-le-right-add-ℤ :
-  (z x y : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
-preserves-le-right-add-ℤ z x y =
-  is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
+  preserves-le-right-add-ℤ :
+    (z x y : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
+  preserves-le-right-add-ℤ z x y =
+    is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-le-add-ℤ :
-  {a b c d : ℤ} → le-ℤ a b → le-ℤ c d → le-ℤ (a +ℤ c) (b +ℤ d)
-preserves-le-add-ℤ {a} {b} {c} {d} H K =
-  transitive-le-ℤ
-    ( a +ℤ c)
-    ( b +ℤ c)
-    ( b +ℤ d)
-    ( preserves-le-right-add-ℤ b c d K)
-    ( preserves-le-left-add-ℤ c a b H)
+  preserves-le-add-ℤ :
+    {a b c d : ℤ} → le-ℤ a b → le-ℤ c d → le-ℤ (a +ℤ c) (b +ℤ d)
+  preserves-le-add-ℤ {a} {b} {c} {d} H K =
+    transitive-le-ℤ
+      ( a +ℤ c)
+      ( b +ℤ c)
+      ( b +ℤ d)
+      ( preserves-le-right-add-ℤ b c d K)
+      ( preserves-le-left-add-ℤ c a b H)
 ```
 
 ### Addition on the integers reflects strict inequality
 
 ```agda
-reflects-le-left-add-ℤ :
-  (z x y : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
-reflects-le-left-add-ℤ z x y =
-  is-positive-eq-ℤ (right-translation-diff-ℤ y x z)
+abstract
+  reflects-le-left-add-ℤ :
+    (z x y : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
+  reflects-le-left-add-ℤ z x y =
+    is-positive-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-le-right-add-ℤ :
-  (z x y : ℤ) → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
-reflects-le-right-add-ℤ z x y =
-  is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
+  reflects-le-right-add-ℤ :
+    (z x y : ℤ) → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
+  reflects-le-right-add-ℤ z x y =
+    is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
 ### An integer `x` is positive if and only if `0 < x`
@@ -256,7 +266,6 @@ module _
 module _
   (x y : ℤ) (I : le-ℤ x y)
   where
-
   abstract
     is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
     is-negative-le-negative-ℤ H =
@@ -267,4 +276,56 @@ module _
           ( zero-ℤ)
           ( le-zero-is-negative-ℤ y H)
           ( I))
+```
+
+### The inclusion of natural numbers preserves and reflects strict inequality
+
+```agda
+abstract
+  preserves-le-int-ℕ : (m n : ℕ) → le-ℕ m n → le-ℤ (int-ℕ m) (int-ℕ n)
+  preserves-le-int-ℕ zero-ℕ (succ-ℕ n) star =
+    le-zero-is-positive-ℤ
+      (int-ℕ (succ-ℕ n))
+      (is-positive-int-is-nonzero-ℕ (succ-ℕ n) λ ())
+  preserves-le-int-ℕ (succ-ℕ m) (succ-ℕ n) m<n =
+    binary-tr
+      ( le-ℤ)
+      ( succ-int-ℕ m)
+      ( succ-int-ℕ n)
+      ( preserves-le-right-add-ℤ
+        ( one-ℤ)
+        ( int-ℕ m)
+        ( int-ℕ n)
+        ( preserves-le-int-ℕ m n m<n))
+
+  reflects-le-int-ℕ : (m n : ℕ) → le-ℤ (int-ℕ m) (int-ℕ n) → le-ℕ m n
+  reflects-le-int-ℕ zero-ℕ (succ-ℕ _) _ = star
+  reflects-le-int-ℕ (succ-ℕ m) (succ-ℕ n) H =
+    reflects-le-int-ℕ
+      ( m)
+      ( n)
+      ( reflects-le-left-add-ℤ
+        ( one-ℤ)
+        ( int-ℕ m)
+        ( int-ℕ n)
+        ( binary-tr
+          ( le-ℤ)
+          ( inv (succ-int-ℕ m) ∙ is-right-add-one-succ-ℤ (int-ℕ m))
+          ( inv (succ-int-ℕ n) ∙ is-right-add-one-succ-ℤ (int-ℕ n))
+          ( H)))
+
+  iff-le-int-ℕ : (m n : ℕ) → le-ℕ m n ↔ le-ℤ (int-ℕ m) (int-ℕ n)
+  iff-le-int-ℕ m n = (preserves-le-int-ℕ m n , reflects-le-int-ℕ m n)
+```
+
+### Negation reverses the order of strict inequality of integers
+
+```agda
+abstract
+  neg-le-ℤ : (x y : ℤ) → le-ℤ x y → le-ℤ (neg-ℤ y) (neg-ℤ x)
+  neg-le-ℤ x y =
+    tr
+      ( is-positive-ℤ)
+      ( ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y))) ∙
+        ( commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x)))
 ```

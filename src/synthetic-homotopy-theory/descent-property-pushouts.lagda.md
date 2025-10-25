@@ -120,18 +120,16 @@ module _
   equiv-descent-data-cocone-span-diagram-UU :
     (l4 : Level) →
     cocone-span-diagram 𝒮 (UU l4) ≃
-    descent-data-pushout 𝒮 l4
+    descent-data-pushout 𝒮 l4 l4
   equiv-descent-data-cocone-span-diagram-UU _ =
     equiv-tot
       ( λ PA →
-        equiv-tot
-          ( λ PB →
-            ( equiv-Π-equiv-family (λ s → equiv-univalence))))
+        equiv-tot (λ PB → (equiv-Π-equiv-family (λ s → equiv-univalence))))
 
   descent-data-cocone-span-diagram-UU :
     {l4 : Level} →
     cocone-span-diagram 𝒮 (UU l4) →
-    descent-data-pushout 𝒮 l4
+    descent-data-pushout 𝒮 l4 l4
   descent-data-cocone-span-diagram-UU {l4} =
     map-equiv (equiv-descent-data-cocone-span-diagram-UU l4)
 
@@ -176,7 +174,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : descent-data-pushout 𝒮 l5)
+  (P : descent-data-pushout 𝒮 l5 l5)
   where
 
   abstract
@@ -293,7 +291,7 @@ module _
     map-equiv (compute-inv-right-family-cocone-descent-data-pushout b)
 
   family-with-descent-data-pushout-descent-data-pushout :
-    family-with-descent-data-pushout c l5
+    family-with-descent-data-pushout c l5 l5 l5
   pr1 family-with-descent-data-pushout-descent-data-pushout =
     family-cocone-descent-data-pushout
   pr1 (pr2 family-with-descent-data-pushout-descent-data-pushout) =

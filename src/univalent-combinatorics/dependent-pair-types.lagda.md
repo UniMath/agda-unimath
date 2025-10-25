@@ -66,15 +66,18 @@ abstract
           ( is-finite-Prop (Σ A B))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-𝔽 : {l1 l2 : Level} (A : 𝔽 l1) (B : type-𝔽 A → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
-pr1 (Σ-𝔽 A B) = Σ (type-𝔽 A) (λ a → type-𝔽 (B a))
-pr2 (Σ-𝔽 A B) =
+Σ-Finite-Type :
+  {l1 l2 : Level}
+  (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) →
+  Finite-Type (l1 ⊔ l2)
+pr1 (Σ-Finite-Type A B) = Σ (type-Finite-Type A) (λ a → type-Finite-Type (B a))
+pr2 (Σ-Finite-Type A B) =
   is-finite-Σ
-    ( is-finite-type-𝔽 A)
-    ( λ a → is-finite-type-𝔽 (B a))
+    ( is-finite-type-Finite-Type A)
+    ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
-### If `A` and `Σ A B` are finite, then eacy `B a` is finite
+### If `A` and `Σ A B` are finite, then each `B a` is finite
 
 ```agda
 abstract
@@ -105,9 +108,7 @@ abstract
                 ( λ t →
                   ( equiv-tot
                     ( λ x → equiv-eq-pair-Σ (map-section-family b x) t)) ∘e
-                  ( ( associative-Σ A
-                      ( λ (x : A) → Id x (pr1 t))
-                      ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
+                  ( ( associative-Σ) ∘e
                     ( inv-left-unit-law-Σ-is-contr
                       ( is-torsorial-Id' (pr1 t))
                       ( pair (pr1 t) refl))))))
@@ -159,10 +160,7 @@ abstract
             is-proof-irrelevant-is-prop
               ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
-        ( inv-equiv
-          ( left-distributive-Σ-coproduct A
-            ( λ x → type-trunc-Prop (B x))
-            ( λ x → is-empty (B x)))))
+        ( inv-left-distributive-Σ-coproduct))
       ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)

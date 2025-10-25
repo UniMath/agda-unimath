@@ -32,8 +32,8 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -48,74 +48,76 @@ Finite semigroups are semigroups of which the underlying type is finite.
 ### The predicate of having an associative multiplication operation on finite types
 
 ```agda
-has-associative-mul-𝔽 : {l : Level} (X : 𝔽 l) → UU l
-has-associative-mul-𝔽 X = has-associative-mul (type-𝔽 X)
+has-associative-mul-Finite-Type : {l : Level} (X : Finite-Type l) → UU l
+has-associative-mul-Finite-Type X = has-associative-mul (type-Finite-Type X)
 ```
 
 ### Finite semigroups
 
 ```agda
-Semigroup-𝔽 : (l : Level) → UU (lsuc l)
-Semigroup-𝔽 l = Σ (𝔽 l) (has-associative-mul-𝔽)
+Finite-Semigroup : (l : Level) → UU (lsuc l)
+Finite-Semigroup l = Σ (Finite-Type l) (has-associative-mul-Finite-Type)
 
 module _
-  {l : Level} (G : Semigroup-𝔽 l)
+  {l : Level} (G : Finite-Semigroup l)
   where
 
-  finite-type-Semigroup-𝔽 : 𝔽 l
-  finite-type-Semigroup-𝔽 = pr1 G
+  finite-type-Finite-Semigroup : Finite-Type l
+  finite-type-Finite-Semigroup = pr1 G
 
-  set-Semigroup-𝔽 : Set l
-  set-Semigroup-𝔽 = set-𝔽 finite-type-Semigroup-𝔽
+  set-Finite-Semigroup : Set l
+  set-Finite-Semigroup = set-Finite-Type finite-type-Finite-Semigroup
 
-  type-Semigroup-𝔽 : UU l
-  type-Semigroup-𝔽 = type-𝔽 finite-type-Semigroup-𝔽
+  type-Finite-Semigroup : UU l
+  type-Finite-Semigroup = type-Finite-Type finite-type-Finite-Semigroup
 
-  is-finite-type-Semigroup-𝔽 : is-finite type-Semigroup-𝔽
-  is-finite-type-Semigroup-𝔽 =
-    is-finite-type-𝔽 finite-type-Semigroup-𝔽
+  is-finite-type-Finite-Semigroup : is-finite type-Finite-Semigroup
+  is-finite-type-Finite-Semigroup =
+    is-finite-type-Finite-Type finite-type-Finite-Semigroup
 
-  is-set-type-Semigroup-𝔽 : is-set type-Semigroup-𝔽
-  is-set-type-Semigroup-𝔽 =
-    is-set-type-𝔽 finite-type-Semigroup-𝔽
+  is-set-type-Finite-Semigroup : is-set type-Finite-Semigroup
+  is-set-type-Finite-Semigroup =
+    is-set-type-Finite-Type finite-type-Finite-Semigroup
 
-  has-associative-mul-Semigroup-𝔽 :
-    has-associative-mul type-Semigroup-𝔽
-  has-associative-mul-Semigroup-𝔽 = pr2 G
+  has-associative-mul-Finite-Semigroup :
+    has-associative-mul type-Finite-Semigroup
+  has-associative-mul-Finite-Semigroup = pr2 G
 
-  semigroup-Semigroup-𝔽 : Semigroup l
-  pr1 semigroup-Semigroup-𝔽 = set-Semigroup-𝔽
-  pr2 semigroup-Semigroup-𝔽 = has-associative-mul-Semigroup-𝔽
+  semigroup-Finite-Semigroup : Semigroup l
+  pr1 semigroup-Finite-Semigroup = set-Finite-Semigroup
+  pr2 semigroup-Finite-Semigroup = has-associative-mul-Finite-Semigroup
 
-  mul-Semigroup-𝔽 :
-    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
-  mul-Semigroup-𝔽 = mul-Semigroup semigroup-Semigroup-𝔽
+  mul-Finite-Semigroup :
+    type-Finite-Semigroup → type-Finite-Semigroup → type-Finite-Semigroup
+  mul-Finite-Semigroup = mul-Semigroup semigroup-Finite-Semigroup
 
-  mul-Semigroup-𝔽' :
-    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
-  mul-Semigroup-𝔽' = mul-Semigroup' semigroup-Semigroup-𝔽
+  mul-Finite-Semigroup' :
+    type-Finite-Semigroup → type-Finite-Semigroup → type-Finite-Semigroup
+  mul-Finite-Semigroup' = mul-Semigroup' semigroup-Finite-Semigroup
 
-  associative-mul-Semigroup-𝔽 :
-    (x y z : type-Semigroup-𝔽) →
-    ( mul-Semigroup-𝔽 (mul-Semigroup-𝔽 x y) z) ＝
-    ( mul-Semigroup-𝔽 x (mul-Semigroup-𝔽 y z))
-  associative-mul-Semigroup-𝔽 =
-    associative-mul-Semigroup semigroup-Semigroup-𝔽
+  associative-mul-Finite-Semigroup :
+    (x y z : type-Finite-Semigroup) →
+    ( mul-Finite-Semigroup (mul-Finite-Semigroup x y) z) ＝
+    ( mul-Finite-Semigroup x (mul-Finite-Semigroup y z))
+  associative-mul-Finite-Semigroup =
+    associative-mul-Semigroup semigroup-Finite-Semigroup
 
 finite-semigroup-is-finite-Semigroup :
-  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Semigroup-𝔽 l
+  {l : Level} (G : Semigroup l) → is-finite (type-Semigroup G) →
+  Finite-Semigroup l
 pr1 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = type-Semigroup G
 pr2 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = f
 pr2 (finite-semigroup-is-finite-Semigroup G f) = has-associative-mul-Semigroup G
 
 module _
-  {l : Level} (G : Semigroup-𝔽 l)
+  {l : Level} (G : Finite-Semigroup l)
   where
 
-  ap-mul-Semigroup-𝔽 :
-    {x x' y y' : type-Semigroup-𝔽 G} →
-    x ＝ x' → y ＝ y' → mul-Semigroup-𝔽 G x y ＝ mul-Semigroup-𝔽 G x' y'
-  ap-mul-Semigroup-𝔽 = ap-mul-Semigroup (semigroup-Semigroup-𝔽 G)
+  ap-mul-Finite-Semigroup :
+    {x x' y y' : type-Finite-Semigroup G} →
+    x ＝ x' → y ＝ y' →
+    mul-Finite-Semigroup G x y ＝ mul-Finite-Semigroup G x' y'
+  ap-mul-Finite-Semigroup = ap-mul-Semigroup (semigroup-Finite-Semigroup G)
 ```
 
 ### Semigroups of order `n`
@@ -123,8 +125,8 @@ module _
 ```agda
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order' l n =
-  Σ ( UU-Fin l n)
-    ( λ X → has-associative-mul (type-UU-Fin n X))
+  Σ ( Type-With-Cardinality-ℕ l n)
+    ( λ X → has-associative-mul (type-Type-With-Cardinality-ℕ n X))
 
 Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order l n =
@@ -140,12 +142,12 @@ compute-Semigroup-of-Order :
   {l : Level} (n : ℕ) → Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
 compute-Semigroup-of-Order {l} n =
   ( equiv-Σ
-    ( has-associative-mul ∘ type-UU-Fin n)
+    ( has-associative-mul ∘ type-Type-With-Cardinality-ℕ n)
     ( ( right-unit-law-Σ-is-contr
         ( λ X →
           is-proof-irrelevant-is-prop
             ( is-prop-is-set _)
-            ( is-set-is-finite (is-finite-has-cardinality n (pr2 X))))) ∘e
+            ( is-set-is-finite (is-finite-has-cardinality-ℕ n (pr2 X))))) ∘e
       ( equiv-right-swap-Σ))
     ( λ X → id-equiv)) ∘e
   ( equiv-right-swap-Σ
@@ -190,11 +192,11 @@ is-untruncated-π-finite-Semigroup-of-Order' :
   {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order' l n)
 is-untruncated-π-finite-Semigroup-of-Order' k n =
   is-untruncated-π-finite-Σ k
-    ( is-untruncated-π-finite-UU-Fin (succ-ℕ k) n)
+    ( is-untruncated-π-finite-Type-With-Cardinality-ℕ (succ-ℕ k) n)
     ( λ x →
       is-untruncated-π-finite-is-finite k
         ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin n x)))
+          ( is-finite-type-Type-With-Cardinality-ℕ n x)))
 
 is-untruncated-π-finite-Semigroup-of-Order :
   {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order l n)
@@ -203,10 +205,10 @@ is-untruncated-π-finite-Semigroup-of-Order k n =
     ( compute-Semigroup-of-Order n)
     ( is-untruncated-π-finite-Semigroup-of-Order' k n)
 
-is-π-finite-Semigroup-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Semigroup-of-Order l n)
-is-π-finite-Semigroup-of-Order {l} n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Semigroup-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Semigroup-of-Order l n)
+is-truncated-π-finite-Semigroup-of-Order {l} n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Semigroup-of-Order n)
     ( is-untruncated-π-finite-Semigroup-of-Order 1 n)
 ```
@@ -236,35 +238,39 @@ mere-equiv-number-of-semigroups-of-order n =
 ### There is a finite number of ways to equip a finite type with the structure of a semigroup
 
 ```agda
-structure-semigroup-𝔽 :
-  {l1 : Level} → 𝔽 l1 → UU l1
-structure-semigroup-𝔽 = has-associative-mul-𝔽
+structure-semigroup-Finite-Type :
+  {l1 : Level} → Finite-Type l1 → UU l1
+structure-semigroup-Finite-Type = has-associative-mul-Finite-Type
 
-is-finite-structure-semigroup-𝔽 :
-  {l : Level} → (X : 𝔽 l) → is-finite (structure-semigroup-𝔽 X)
-is-finite-structure-semigroup-𝔽 X =
+is-finite-structure-semigroup-Finite-Type :
+  {l : Level} (X : Finite-Type l) →
+  is-finite (structure-semigroup-Finite-Type X)
+is-finite-structure-semigroup-Finite-Type X =
   is-finite-Σ
     ( is-finite-Π
-      ( is-finite-type-𝔽 X)
-      ( λ _ → is-finite-Π (is-finite-type-𝔽 X) (λ _ → is-finite-type-𝔽 X)))
+      ( is-finite-type-Finite-Type X)
+      ( λ _ →
+        is-finite-Π
+          ( is-finite-type-Finite-Type X)
+          ( λ _ → is-finite-type-Finite-Type X)))
     ( λ m →
       is-finite-Π
-        ( is-finite-type-𝔽 X)
+        ( is-finite-type-Finite-Type X)
         ( λ x →
           is-finite-Π
-            ( is-finite-type-𝔽 X)
+            ( is-finite-type-Finite-Type X)
             ( λ y →
               is-finite-Π
-                ( is-finite-type-𝔽 X)
+                ( is-finite-type-Finite-Type X)
                 ( λ z →
                   is-finite-is-decidable-Prop
                     ( (m (m x y) z ＝ m x (m y z)) ,
                       is-set-is-finite
-                        ( is-finite-type-𝔽 X)
+                        ( is-finite-type-Finite-Type X)
                         ( m (m x y) z)
                         ( m x (m y z)))
                     ( has-decidable-equality-is-finite
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( m (m x y) z)
                       ( m x (m y z)))))))
 ```

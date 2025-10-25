@@ -41,8 +41,12 @@ has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. On this page, we consider the
 {{#concept "computational identity types" Agda=computational-Id}} `x ＝ʲ y`,
 whose elements we call
-{{#concept "computational identifications" Agda=computational-Id}}. These are
-defined by taking the
+{{#concept "computational identifications" Agda=computational-Id}}. The
+computational identity types are equivalent to the standard identity types, but
+have strictly associative and one-sided unital concatenation and a strictly
+involutive inverse operator.
+
+The computational identity types are defined by taking the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md):
 
 ```text
@@ -92,8 +96,8 @@ computational identity types that computes strictly.
 - `p ∙ʲ invʲ p ≐ reflʲ`,
 
 and they do not have a strict computation property for their induction
-principle. This boils down to the fact that the Yoneda identity types do not
-have a strict computation property for their induction principle, which is
+principle. This is a consequence of the fact that the Yoneda identity types do
+not have a strict computation property for their induction principle, which is
 explained further there.
 
 ## Definition
@@ -332,7 +336,7 @@ module _
 
 ### The strict recursion principle for the computational identity types
 
-Using the fact that the recusion principles of both the Yoneda identity types
+Using the fact that the recursion principles of both the Yoneda identity types
 and the strictly involutive identity types can be defined to compute strictly,
 we obtain a strictly computing recursion principle for the computational
 identity types as well.

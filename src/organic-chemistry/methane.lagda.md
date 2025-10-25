@@ -40,8 +40,8 @@ module _
   where
 
   methane : hydrocarbon lzero lzero
-  pr1 (pr1 methane) = unit-𝔽
-  pr2 (pr1 methane) x = empty-𝔽
+  pr1 (pr1 methane) = unit-Finite-Type
+  pr2 (pr1 methane) x = empty-Finite-Type
   pr1 (pr2 methane) c = t
   pr1 (pr1 (pr2 (pr2 methane)) c) e = ex-falso (pr2 e)
   pr2 (pr1 (pr2 (pr2 methane)) c) e = ex-falso (pr2 e)

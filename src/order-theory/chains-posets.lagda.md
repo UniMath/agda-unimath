@@ -130,7 +130,7 @@ module _
                   inl-disjunction
                     ( concatenate-eq-leq-eq-Poset' X
                       ( pr2 p)
-                      ( preserves-order-map-hom-Poset (poset-Total-Order T) X f
+                      ( preserves-order-hom-Poset (poset-Total-Order T) X f
                         ( pr1 p)
                         ( pr1 q)
                         ( H))
@@ -139,7 +139,7 @@ module _
                   inr-disjunction
                     ( concatenate-eq-leq-eq-Poset' X
                       ( pr2 q)
-                      ( preserves-order-map-hom-Poset (poset-Total-Order T) X f
+                      ( preserves-order-hom-Poset (poset-Total-Order T) X f
                         ( pr1 q)
                         ( pr1 p)
                         ( H))

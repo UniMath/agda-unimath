@@ -40,7 +40,7 @@ the map `y ↦ (xy)x⁻¹`. This can be seen as a homomorphism `G → G` as well
 group action of `G` onto itself.
 
 The delooping of the conjugation homomorphism is defined in
-[`structured-types.conjugation-pointed-types.md`](structured-types.conjugation-pointed-types.md)`.
+[`structured-types.conjugation-pointed-types`](structured-types.conjugation-pointed-types.md).
 
 ## Definitions
 
@@ -51,12 +51,27 @@ module _
   {l : Level} (G : Group l)
   where
 
-  equiv-conjugation-Group : (x : type-Group G) → type-Group G ≃ type-Group G
-  equiv-conjugation-Group x =
+  equiv-left-conjugation-Group :
+    (x : type-Group G) → type-Group G ≃ type-Group G
+  equiv-left-conjugation-Group x =
     equiv-mul-Group' G (inv-Group G x) ∘e equiv-mul-Group G x
 
+  equiv-right-conjugation-Group :
+    (x : type-Group G) → type-Group G ≃ type-Group G
+  equiv-right-conjugation-Group x =
+    equiv-mul-Group G x ∘e equiv-mul-Group' G (inv-Group G x)
+
+  equiv-conjugation-Group : (x : type-Group G) → type-Group G ≃ type-Group G
+  equiv-conjugation-Group = equiv-left-conjugation-Group
+
+  left-conjugation-Group : (x : type-Group G) → type-Group G → type-Group G
+  left-conjugation-Group x = map-equiv (equiv-left-conjugation-Group x)
+
+  right-conjugation-Group : (x : type-Group G) → type-Group G → type-Group G
+  right-conjugation-Group x = map-equiv (equiv-right-conjugation-Group x)
+
   conjugation-Group : (x : type-Group G) → type-Group G → type-Group G
-  conjugation-Group x = map-equiv (equiv-conjugation-Group x)
+  conjugation-Group = left-conjugation-Group
 
   equiv-conjugation-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
   equiv-conjugation-Group' x =
@@ -64,6 +79,19 @@ module _
 
   conjugation-Group' : (x : type-Group G) → type-Group G → type-Group G
   conjugation-Group' x = map-equiv (equiv-conjugation-Group' x)
+```
+
+### Left and right conjugation are equivalent
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  left-right-conjugation-Group :
+    (x : type-Group G) →
+    left-conjugation-Group G x ~ right-conjugation-Group G x
+  left-right-conjugation-Group x y = associative-mul-Group G x y (inv-Group G x)
 ```
 
 ### The conjugation action of a group on itself

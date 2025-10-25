@@ -18,12 +18,14 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **species of finite types** is a map from `𝔽` to a `𝔽`.
+A {{#concept "species of finite types" Agda=finite-species}} is a map from the
+[subuniverse](foundation.global-subuniverses.md) of
+[finite types](univalent-combinatorics.finite-types.md) to itself.
 
 ## Definition
 
 ```agda
-species-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-species-𝔽 l1 l2 =
+finite-species : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+finite-species l1 l2 =
   species-subuniverse (is-finite-Prop {l1}) (is-finite-Prop {l2})
 ```

@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
@@ -290,6 +291,10 @@ module _
       ( λ x p → intro-exists (inl x) (ap inl p))
       ( F y)
   is-surjective-map-is-surjective-Maybe F (inr *) = intro-exists (inr *) refl
+
+  surjection-map-surjection-Maybe : (f : A ↠ B) → Maybe A ↠ Maybe B
+  surjection-map-surjection-Maybe (f , is-surjective-f) =
+    ( map-Maybe f , is-surjective-map-is-surjective-Maybe is-surjective-f)
 ```
 
 ### There is a surjection from `Maybe A + Maybe B` to `Maybe (A + B)`
@@ -332,6 +337,13 @@ module _
     unit-trunc-Prop ((inl a , inl b) , refl)
   is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
+```
+
+### If `X` is a set, `Maybe X` is a set
+
+```agda
+maybe-Set : {l : Level} (X : Set l) → Set l
+maybe-Set X = coproduct-Set X unit-Set
 ```
 
 ## External links

@@ -9,12 +9,17 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.empty-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.negation
@@ -27,7 +32,8 @@ open import foundation-core.sets
 
 ## Idea
 
-A map `f : A → B` is **injective** if `f x ＝ f y` implies `x ＝ y`.
+A map `f : A → B` is **injective**, also called _left cancellable_, if
+`f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
@@ -37,17 +43,6 @@ maps between general types it is recommended to use the notion of
 [embedding](foundation-core.embeddings.md).
 
 ## Definitions
-
-### Noninjective maps
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-not-injective : (A → B) → UU (l1 ⊔ l2)
-  is-not-injective f = ¬ (is-injective f)
-```
 
 ### Any map out of an empty type is injective
 
@@ -102,16 +97,53 @@ module _
     is-set A → (f : A → B) → is-prop (is-injective f)
   is-prop-is-injective H f =
     is-prop-implicit-Π
-      ( λ x →
-        is-prop-implicit-Π
-          ( λ y → is-prop-function-type (H x y)))
+      ( λ x → is-prop-implicit-Π (λ y → is-prop-function-type (H x y)))
 
   is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-injective-Prop H f) = is-injective f
   pr2 (is-injective-Prop H f) = is-prop-is-injective H f
 ```
 
+### The map on total spaces induced by a family of injective maps is an injective map
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+  is-injective-tot :
+    {f : (x : A) → B x → C x} →
+    ((x : A) → is-injective (f x)) →
+    is-injective (tot f)
+  is-injective-tot {f} H {x} {y} p =
+    eq-pair-Σ
+      ( ap pr1 p)
+      ( H (pr1 y) (preserves-tr f (ap pr1 p) (pr2 x) ∙ tr-eq-Σ p))
+
+  injection-tot : ((x : A) → injection (B x) (C x)) → injection (Σ A B) (Σ A C)
+  injection-tot f = (tot (pr1 ∘ f) , is-injective-tot (pr2 ∘ f))
+```
+
+### Families of injective maps induce injective maps on dependent function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  abstract
+    is-injective-map-Π :
+      {f : (i : I) → A i → B i} →
+      ((i : I) → is-injective (f i)) → is-injective (map-Π f)
+    is-injective-map-Π {f = f} H {x} {y} p = eq-htpy (λ i → H i (htpy-eq p i))
+
+  injection-Π :
+    ((i : I) → injection (A i) (B i)) →
+    injection ((i : I) → A i) ((i : I) → B i)
+  injection-Π f = (map-Π (pr1 ∘ f) , is-injective-map-Π (pr2 ∘ f))
+```
+
 ## See also
 
 - [Embeddings](foundation-core.embeddings.md)
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
+- [Noninjective maps](foundation.noninjective-maps.md)

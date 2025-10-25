@@ -50,122 +50,127 @@ each `R x y` is a
 ## Definition
 
 ```agda
-Decidable-equivalence-relation-𝔽 :
-  {l1 : Level} (l2 : Level) (X : 𝔽 l1) → UU (l1 ⊔ lsuc l2)
-Decidable-equivalence-relation-𝔽 l2 X =
-  Decidable-equivalence-relation l2 (type-𝔽 X)
+type-Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) (X : Finite-Type l1) → UU (l1 ⊔ lsuc l2)
+type-Decidable-Equivalence-Relation-Finite-Type l2 X =
+  Decidable-Equivalence-Relation l2 (type-Finite-Type X)
 
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-equivalence-relation-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (R : type-Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
-  decidable-relation-Decidable-equivalence-relation-𝔽 :
-    Decidable-Relation l2 (type-𝔽 X)
-  decidable-relation-Decidable-equivalence-relation-𝔽 =
-    decidable-relation-Decidable-equivalence-relation R
+  decidable-relation-Decidable-Equivalence-Relation-Finite-Type :
+    Decidable-Relation l2 (type-Finite-Type X)
+  decidable-relation-Decidable-Equivalence-Relation-Finite-Type =
+    decidable-relation-Decidable-Equivalence-Relation R
 
-  relation-Decidable-equivalence-relation-𝔽 :
-    type-𝔽 X → type-𝔽 X → Prop l2
-  relation-Decidable-equivalence-relation-𝔽 =
-    relation-Decidable-equivalence-relation R
+  relation-Decidable-Equivalence-Relation-Finite-Type :
+    type-Finite-Type X → type-Finite-Type X → Prop l2
+  relation-Decidable-Equivalence-Relation-Finite-Type =
+    relation-Decidable-Equivalence-Relation R
 
-  sim-Decidable-equivalence-relation-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
-  sim-Decidable-equivalence-relation-𝔽 =
-    sim-Decidable-equivalence-relation R
+  sim-Decidable-Equivalence-Relation-Finite-Type :
+    type-Finite-Type X → type-Finite-Type X → UU l2
+  sim-Decidable-Equivalence-Relation-Finite-Type =
+    sim-Decidable-Equivalence-Relation R
 
-  is-prop-sim-Decidable-equivalence-relation-𝔽 :
-    (x y : type-𝔽 X) → is-prop (sim-Decidable-equivalence-relation-𝔽 x y)
-  is-prop-sim-Decidable-equivalence-relation-𝔽 =
-    is-prop-sim-Decidable-equivalence-relation R
+  is-prop-sim-Decidable-Equivalence-Relation-Finite-Type :
+    (x y : type-Finite-Type X) →
+    is-prop (sim-Decidable-Equivalence-Relation-Finite-Type x y)
+  is-prop-sim-Decidable-Equivalence-Relation-Finite-Type =
+    is-prop-sim-Decidable-Equivalence-Relation R
 
-  is-decidable-sim-Decidable-equivalence-relation-𝔽 :
-    (x y : type-𝔽 X) → is-decidable (sim-Decidable-equivalence-relation-𝔽 x y)
-  is-decidable-sim-Decidable-equivalence-relation-𝔽 =
-    is-decidable-sim-Decidable-equivalence-relation R
+  is-decidable-sim-Decidable-Equivalence-Relation-Finite-Type :
+    (x y : type-Finite-Type X) →
+    is-decidable (sim-Decidable-Equivalence-Relation-Finite-Type x y)
+  is-decidable-sim-Decidable-Equivalence-Relation-Finite-Type =
+    is-decidable-sim-Decidable-Equivalence-Relation R
 
-  is-equivalence-relation-Decidable-equivalence-relation-𝔽 :
-    is-equivalence-relation relation-Decidable-equivalence-relation-𝔽
-  is-equivalence-relation-Decidable-equivalence-relation-𝔽 =
-    is-equivalence-relation-Decidable-equivalence-relation R
+  is-equivalence-relation-Decidable-Equivalence-Relation-Finite-Type :
+    is-equivalence-relation relation-Decidable-Equivalence-Relation-Finite-Type
+  is-equivalence-relation-Decidable-Equivalence-Relation-Finite-Type =
+    is-equivalence-relation-Decidable-Equivalence-Relation R
 
-  equivalence-relation-Decidable-equivalence-relation-𝔽 :
-    equivalence-relation l2 (type-𝔽 X)
-  equivalence-relation-Decidable-equivalence-relation-𝔽 =
-    equivalence-relation-Decidable-equivalence-relation R
+  equivalence-relation-Decidable-Equivalence-Relation-Finite-Type :
+    equivalence-relation l2 (type-Finite-Type X)
+  equivalence-relation-Decidable-Equivalence-Relation-Finite-Type =
+    equivalence-relation-Decidable-Equivalence-Relation R
 
-  refl-Decidable-equivalence-relation-𝔽 :
-    is-reflexive sim-Decidable-equivalence-relation-𝔽
-  refl-Decidable-equivalence-relation-𝔽 =
-    refl-Decidable-equivalence-relation R
+  refl-Decidable-Equivalence-Relation-Finite-Type :
+    is-reflexive sim-Decidable-Equivalence-Relation-Finite-Type
+  refl-Decidable-Equivalence-Relation-Finite-Type =
+    refl-Decidable-Equivalence-Relation R
 
-  symmetric-Decidable-equivalence-relation-𝔽 :
-    is-symmetric sim-Decidable-equivalence-relation-𝔽
-  symmetric-Decidable-equivalence-relation-𝔽 =
-    symmetric-Decidable-equivalence-relation R
+  symmetric-Decidable-Equivalence-Relation-Finite-Type :
+    is-symmetric sim-Decidable-Equivalence-Relation-Finite-Type
+  symmetric-Decidable-Equivalence-Relation-Finite-Type =
+    symmetric-Decidable-Equivalence-Relation R
 
-  transitive-Decidable-equivalence-relation-𝔽 :
-    is-transitive sim-Decidable-equivalence-relation-𝔽
-  transitive-Decidable-equivalence-relation-𝔽 =
-    transitive-Decidable-equivalence-relation R
+  transitive-Decidable-Equivalence-Relation-Finite-Type :
+    is-transitive sim-Decidable-Equivalence-Relation-Finite-Type
+  transitive-Decidable-Equivalence-Relation-Finite-Type =
+    transitive-Decidable-Equivalence-Relation R
 
 module _
-  {l1 l2 : Level} (A : 𝔽 l1) (R : Decidable-Relation l2 (type-𝔽 A))
+  {l1 l2 : Level} (A : Finite-Type l1)
+  (R : Decidable-Relation l2 (type-Finite-Type A))
   where
 
-  is-finite-relation-Decidable-Relation-𝔽 :
-    (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (rel-Decidable-Relation R x y)
-  is-finite-relation-Decidable-Relation-𝔽 x y =
+  is-finite-relation-Decidable-Relation-Finite-Type :
+    (x y : type-Finite-Type A) → is-finite (rel-Decidable-Relation R x y)
+  is-finite-relation-Decidable-Relation-Finite-Type x y =
     unit-trunc-Prop
       ( count-type-Decidable-Prop
         ( relation-Decidable-Relation R x y)
         ( is-decidable-Decidable-Relation R x y))
 
-  is-finite-is-reflexive-Dec-Relation-Prop-𝔽 :
+  is-finite-is-reflexive-Decidable-Relation-Finite-Type :
     is-finite (is-reflexive-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-reflexive-Dec-Relation-Prop-𝔽 =
+  is-finite-is-reflexive-Decidable-Relation-Finite-Type =
     is-finite-Π
-      ( is-finite-type-𝔽 A)
-      (λ x → is-finite-relation-Decidable-Relation-𝔽 x x)
+      ( is-finite-type-Finite-Type A)
+      ( λ x → is-finite-relation-Decidable-Relation-Finite-Type x x)
 
-  is-finite-is-symmetric-Dec-Relation-Prop-𝔽 :
+  is-finite-is-symmetric-Decidable-Relation-Finite-Type :
     is-finite (is-symmetric-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-symmetric-Dec-Relation-Prop-𝔽 =
+  is-finite-is-symmetric-Decidable-Relation-Finite-Type =
     is-finite-Π
-      ( is-finite-type-𝔽 A)
+      ( is-finite-type-Finite-Type A)
       ( λ x →
         is-finite-Π
-          ( is-finite-type-𝔽 A)
+          ( is-finite-type-Finite-Type A)
           ( λ y →
             is-finite-function-type
-              ( is-finite-relation-Decidable-Relation-𝔽 x y)
-              ( is-finite-relation-Decidable-Relation-𝔽 y x)))
+              ( is-finite-relation-Decidable-Relation-Finite-Type x y)
+              ( is-finite-relation-Decidable-Relation-Finite-Type y x)))
 
-  is-finite-is-transitive-Dec-Relation-Prop-𝔽 :
+  is-finite-is-transitive-Decidable-Relation-Finite-Type :
     is-finite (is-transitive-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-transitive-Dec-Relation-Prop-𝔽 =
+  is-finite-is-transitive-Decidable-Relation-Finite-Type =
     is-finite-Π
-      ( is-finite-type-𝔽 A)
+      ( is-finite-type-Finite-Type A)
       ( λ x →
         is-finite-Π
-          ( is-finite-type-𝔽 A)
+          ( is-finite-type-Finite-Type A)
           ( λ y →
             is-finite-Π
-              ( is-finite-type-𝔽 A)
+              ( is-finite-type-Finite-Type A)
               ( λ z →
                 is-finite-function-type
-                  ( is-finite-relation-Decidable-Relation-𝔽 y z)
+                  ( is-finite-relation-Decidable-Relation-Finite-Type y z)
                   ( is-finite-function-type
-                    ( is-finite-relation-Decidable-Relation-𝔽 x y)
-                    ( is-finite-relation-Decidable-Relation-𝔽 x z)))))
+                    ( is-finite-relation-Decidable-Relation-Finite-Type x y)
+                    ( is-finite-relation-Decidable-Relation-Finite-Type x z)))))
 
-  is-finite-is-equivalence-Dec-Relation-Prop-𝔽 :
+  is-finite-is-equivalence-Decidable-Relation-Finite-Type :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
-  is-finite-is-equivalence-Dec-Relation-Prop-𝔽 =
+  is-finite-is-equivalence-Decidable-Relation-Finite-Type =
     is-finite-product
-      ( is-finite-is-reflexive-Dec-Relation-Prop-𝔽)
+      ( is-finite-is-reflexive-Decidable-Relation-Finite-Type)
       ( is-finite-product
-          is-finite-is-symmetric-Dec-Relation-Prop-𝔽
-          is-finite-is-transitive-Dec-Relation-Prop-𝔽)
+          is-finite-is-symmetric-Decidable-Relation-Finite-Type
+          is-finite-is-transitive-Decidable-Relation-Finite-Type)
 ```
 
 ## Properties
@@ -173,81 +178,66 @@ module _
 #### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a finite type
 
 ```agda
-equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 :
-  {l1 : Level} (A : 𝔽 l1) →
-  Decidable-equivalence-relation-𝔽 l1 A ≃
-  Surjection-𝔽 l1 A
-equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 {l1} A =
+equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (A : Finite-Type l1) →
+  type-Decidable-Equivalence-Relation-Finite-Type l1 A ≃
+  Surjection-Finite-Type l1 A
+equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type {l1} A =
   ( equiv-Σ-equiv-base
-      ( λ X → (type-𝔽 A) ↠ (type-𝔽 X))
-      ( equiv-Σ
-          ( is-finite)
-          ( id-equiv)
-          ( λ X →
-            inv-equiv is-finite-iff-∃-surjection-has-decidable-equality)) ∘e
-    ( ( inv-associative-Σ
-          ( UU l1)
-          ( λ X →
-              has-decidable-equality X ×
-              type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-          ( λ X → type-𝔽 A ↠ pr1 X)) ∘e
-      ( ( equiv-Σ
-            (λ X →
-                Σ ( has-decidable-equality X ×
-                    type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-                  ( λ _ → pr1 A ↠ X))
-            ( id-equiv)
-            ( λ X →
-              ( ( inv-equiv
-                  ( associative-product
-                    ( has-decidable-equality X)
-                    ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
-                    ( type-𝔽 A ↠ X))) ∘e
-                ( ( equiv-product id-equiv commutative-product) ∘e
-                  ( ( associative-product
-                      ( has-decidable-equality (map-equiv id-equiv X))
-                      ( type-𝔽 A ↠ X)
-                      ( type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))) ∘e
-                  ( ( equiv-product commutative-product id-equiv) ∘e
-                    ( ( equiv-add-redundant-prop
-                        ( is-prop-type-trunc-Prop)
-                        ( λ x →
-                          apply-universal-property-trunc-Prop
-                            ( is-finite-type-𝔽 A)
-                            ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
-                            ( λ count-A →
-                              unit-trunc-Prop
-                                ( number-of-elements-count count-A ,
-                                  ( ( map-surjection (pr1 x) ∘
-                                      map-equiv-count count-A) ,
-                                    is-surjective-right-comp-equiv
-                                      ( is-surjective-map-surjection (pr1 x))
-                                      ( equiv-count count-A)))))))))))) ∘e
-        ( equiv-Surjection-Into-Set-Decidable-equivalence-relation
-          ( type-𝔽 A))))))
+    ( λ X → (type-Finite-Type A) ↠ (type-Finite-Type X))
+    ( equiv-tot
+      ( λ X → inv-equiv is-finite-iff-∃-surjection-has-decidable-equality))) ∘e
+  ( inv-associative-Σ) ∘e
+  ( equiv-tot
+    ( λ X →
+      ( ( inv-associative-product) ∘e
+        ( equiv-product-right commutative-product) ∘e
+        ( associative-product) ∘e
+        ( equiv-product-left commutative-product) ∘e
+        ( equiv-add-redundant-prop
+          ( is-prop-type-trunc-Prop)
+          ( λ x →
+            apply-universal-property-trunc-Prop
+              ( is-finite-type-Finite-Type A)
+              ( trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
+              ( λ count-A →
+                unit-trunc-Prop
+                  ( number-of-elements-count count-A ,
+                    ( ( map-surjection (pr1 x) ∘ map-equiv-count count-A) ,
+                      is-surjective-right-comp-equiv
+                        ( is-surjective-map-surjection (pr1 x))
+                        ( equiv-count count-A))))))))) ∘e
+    ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation
+      ( type-Finite-Type A))
 ```
 
 ### The type of decidable equivalence relations on a finite type is finite
 
 ```agda
-is-finite-Decidable-Relation-𝔽 :
-  {l1 : Level} (A : 𝔽 l1) →
-  is-finite (Decidable-Relation l1 (type-𝔽 A))
-is-finite-Decidable-Relation-𝔽 A =
+is-finite-Decidable-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-finite (Decidable-Relation l2 (type-Finite-Type A))
+is-finite-Decidable-Relation-Finite-Type l2 A =
   is-finite-Π
-    ( is-finite-type-𝔽 A)
+    ( is-finite-type-Finite-Type A)
     ( λ a →
       is-finite-Π
-        ( is-finite-type-𝔽 A)
+        ( is-finite-type-Finite-Type A)
         ( λ b → is-finite-Decidable-Prop))
 
-is-finite-Decidable-equivalence-relation-𝔽 :
-  {l1 : Level} (A : 𝔽 l1) →
-  is-finite (Decidable-equivalence-relation-𝔽 l1 A)
-is-finite-Decidable-equivalence-relation-𝔽 A =
+is-finite-type-Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-finite (type-Decidable-Equivalence-Relation-Finite-Type l2 A)
+is-finite-type-Decidable-Equivalence-Relation-Finite-Type l2 A =
   is-finite-Σ
-    ( is-finite-Decidable-Relation-𝔽 A)
-    ( is-finite-is-equivalence-Dec-Relation-Prop-𝔽 A)
+    ( is-finite-Decidable-Relation-Finite-Type l2 A)
+    ( is-finite-is-equivalence-Decidable-Relation-Finite-Type A)
+
+Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → Finite-Type (l1 ⊔ lsuc l2)
+Decidable-Equivalence-Relation-Finite-Type l2 A =
+  ( type-Decidable-Equivalence-Relation-Finite-Type l2 A ,
+    is-finite-type-Decidable-Equivalence-Relation-Finite-Type l2 A)
 ```
 
 ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind

@@ -28,8 +28,9 @@ open import foundation.unit-type
 
 ## Idea
 
-The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
-an integer is the natural number with the same distance from `0`.
+The
+{{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ WD="absolute value" WDID=Q120812}}
+of an integer is the natural number with the same distance from `0`.
 
 ## Definition
 
@@ -213,36 +214,39 @@ multiplicative-abs-ℤ x y =
 ### `|(-x)y| ＝ |xy|`
 
 ```agda
-left-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
-left-negative-law-mul-abs-ℤ x y =
-  equational-reasoning
-    abs-ℤ (x *ℤ y)
-    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-      by (inv (negative-law-abs-ℤ (x *ℤ y)))
-    ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
-      by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
+abstract
+  left-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
+  left-negative-law-mul-abs-ℤ x y =
+    equational-reasoning
+      abs-ℤ (x *ℤ y)
+      ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+      ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
+        by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 ```
 
 ### `|x(-y)| ＝ |xy|`
 
 ```agda
-right-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ (x *ℤ (neg-ℤ y))
-right-negative-law-mul-abs-ℤ x y =
-  equational-reasoning
-    abs-ℤ (x *ℤ y)
-    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-      by (inv (negative-law-abs-ℤ (x *ℤ y)))
-    ＝ abs-ℤ (x *ℤ (neg-ℤ y))
-      by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
+abstract
+  right-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ (x *ℤ (neg-ℤ y))
+  right-negative-law-mul-abs-ℤ x y =
+    equational-reasoning
+      abs-ℤ (x *ℤ y)
+      ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+      ＝ abs-ℤ (x *ℤ (neg-ℤ y))
+        by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
 ```
 
 ### `|(-x)(-y)| ＝ |xy|`
 
 ```agda
-double-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ (neg-ℤ y))
-double-negative-law-mul-abs-ℤ x y =
-  (right-negative-law-mul-abs-ℤ x y) ∙ (left-negative-law-mul-abs-ℤ x (neg-ℤ y))
+abstract
+  double-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ (neg-ℤ y))
+  double-negative-law-mul-abs-ℤ x y =
+    ap abs-ℤ (inv (double-negative-law-mul-ℤ x y))
 ```

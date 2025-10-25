@@ -19,13 +19,16 @@ open import univalent-combinatorics.inhabited-finite-types
 
 ## Idea
 
-A **species of finite inhabited types** is a map from the subuniverse of finite
-inhabited types to a universe of finite types.
+A
+{{#concept "species of finite inhabited types" Agda=species-Inhabited-Finite-Type}}
+is a map from the [subuniverse](foundation.global-subuniverses.md) of
+[finite inhabited types](univalent-combinatorics.inhabited-finite-types.md) to
+the universe of [finite types](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
 ```agda
-species-Inhabited-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-species-Inhabited-𝔽 l1 l2 =
+species-Inhabited-Finite-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species-Inhabited-Finite-Type l1 l2 =
   species-subuniverse (is-finite-and-inhabited-Prop {l1}) (is-finite-Prop {l2})
 ```

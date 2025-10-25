@@ -124,6 +124,27 @@ module _
       ( is-binary-upper-bound-is-least-binary-upper-bound-Poset H)
 ```
 
+### The least upper bound of `a` and `b` is the least upper bound of `b` and `a`
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (a b c : type-Poset P)
+  where
+
+  symmetric-is-least-binary-upper-bound-Poset :
+    is-least-binary-upper-bound-Poset P a b c →
+    is-least-binary-upper-bound-Poset P b a c
+  pr1 (symmetric-is-least-binary-upper-bound-Poset lub-c d) lub-d =
+    forward-implication
+      ( lub-c d)
+      ( leq-right-is-binary-upper-bound-Poset P lub-d ,
+        leq-left-is-binary-upper-bound-Poset P lub-d)
+  pr1 (pr2 (symmetric-is-least-binary-upper-bound-Poset lub-c d) c≤d) =
+    leq-right-is-binary-upper-bound-Poset P (backward-implication (lub-c d) c≤d)
+  pr2 (pr2 (symmetric-is-least-binary-upper-bound-Poset lub-c d) c≤d) =
+    leq-left-is-binary-upper-bound-Poset P (backward-implication (lub-c d) c≤d)
+```
+
 ### The proposition that two elements have a least upper bound
 
 ```agda
@@ -173,6 +194,21 @@ module _
       ( all-elements-equal-has-least-binary-upper-bound-Poset P a b
         ( x , H)
         ( y , K))
+```
+
+### The property of having a least binary upper bound is symmetric
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (a b : type-Poset P)
+  where
+
+  symmetric-has-least-binary-upper-bound-Poset :
+    has-least-binary-upper-bound-Poset P a b →
+    has-least-binary-upper-bound-Poset P b a
+  pr1 (symmetric-has-least-binary-upper-bound-Poset (lub , is-lub)) = lub
+  pr2 (symmetric-has-least-binary-upper-bound-Poset (lub , is-lub)) =
+    symmetric-is-least-binary-upper-bound-Poset P a b lub is-lub
 ```
 
 ### Least upper bounds of families of elements
@@ -290,6 +326,48 @@ module _
         ( a)
         ( x , H)
         ( y , K))
+```
+
+### Least upper bounds of subsets of elements
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (S : subtype l3 (type-Poset P))
+  where
+
+  is-least-upper-bound-subset-prop-Poset : type-Poset P → Prop (l1 ⊔ l2 ⊔ l3)
+  is-least-upper-bound-subset-prop-Poset =
+    is-least-upper-bound-family-of-elements-prop-Poset P (inclusion-subtype S)
+
+  is-least-upper-bound-subset-Poset : type-Poset P → UU (l1 ⊔ l2 ⊔ l3)
+  is-least-upper-bound-subset-Poset x =
+    type-Prop (is-least-upper-bound-subset-prop-Poset x)
+
+  is-prop-is-least-upper-bound-subset-Poset :
+    (x : type-Poset P) → is-prop (is-least-upper-bound-subset-Poset x)
+  is-prop-is-least-upper-bound-subset-Poset x =
+    is-prop-type-Prop (is-least-upper-bound-subset-prop-Poset x)
+```
+
+### The proposition that a subset of elements have a least upper bound
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (S : subtype l3 (type-Poset P))
+  where
+
+  has-least-upper-bound-subset-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3)
+  has-least-upper-bound-subset-prop-Poset =
+    has-least-upper-bound-family-of-elements-prop-Poset P (inclusion-subtype S)
+
+  has-least-upper-bound-subset-Poset : UU (l1 ⊔ l2 ⊔ l3)
+  has-least-upper-bound-subset-Poset =
+    type-Prop has-least-upper-bound-subset-prop-Poset
+
+  is-prop-has-least-upper-bound-subset-Poset :
+    is-prop has-least-upper-bound-subset-Poset
+  is-prop-has-least-upper-bound-subset-Poset =
+    is-prop-type-Prop has-least-upper-bound-subset-prop-Poset
 ```
 
 ## Properties

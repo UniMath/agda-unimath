@@ -36,145 +36,150 @@ all `x y : M`.
 ### Finite commutative monoids
 
 ```agda
-is-commutative-Monoid-𝔽 :
-  {l : Level} (M : Monoid-𝔽 l) → UU l
-is-commutative-Monoid-𝔽 M =
-  is-commutative-Monoid (monoid-Monoid-𝔽 M)
+is-commutative-Finite-Monoid :
+  {l : Level} (M : Finite-Monoid l) → UU l
+is-commutative-Finite-Monoid M =
+  is-commutative-Monoid (monoid-Finite-Monoid M)
 
-Commutative-Monoid-𝔽 : (l : Level) → UU (lsuc l)
-Commutative-Monoid-𝔽 l = Σ (Monoid-𝔽 l) is-commutative-Monoid-𝔽
+Finite-Commutative-Monoid : (l : Level) → UU (lsuc l)
+Finite-Commutative-Monoid l = Σ (Finite-Monoid l) is-commutative-Finite-Monoid
 
 module _
-  {l : Level} (M : Commutative-Monoid-𝔽 l)
+  {l : Level} (M : Finite-Commutative-Monoid l)
   where
 
-  finite-monoid-Commutative-Monoid-𝔽 : Monoid-𝔽 l
-  finite-monoid-Commutative-Monoid-𝔽 = pr1 M
+  finite-monoid-Finite-Commutative-Monoid : Finite-Monoid l
+  finite-monoid-Finite-Commutative-Monoid = pr1 M
 
-  monoid-Commutative-Monoid-𝔽 : Monoid l
-  monoid-Commutative-Monoid-𝔽 =
-    monoid-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  monoid-Finite-Commutative-Monoid : Monoid l
+  monoid-Finite-Commutative-Monoid =
+    monoid-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  finite-type-Commutative-Monoid-𝔽 : 𝔽 l
-  finite-type-Commutative-Monoid-𝔽 =
-    finite-type-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  finite-type-Finite-Commutative-Monoid : Finite-Type l
+  finite-type-Finite-Commutative-Monoid =
+    finite-type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  type-Commutative-Monoid-𝔽 : UU l
-  type-Commutative-Monoid-𝔽 =
-    type-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  type-Finite-Commutative-Monoid : UU l
+  type-Finite-Commutative-Monoid =
+    type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  is-finite-type-Commutative-Monoid-𝔽 : is-finite type-Commutative-Monoid-𝔽
-  is-finite-type-Commutative-Monoid-𝔽 =
-    is-finite-type-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  is-finite-type-Finite-Commutative-Monoid :
+    is-finite type-Finite-Commutative-Monoid
+  is-finite-type-Finite-Commutative-Monoid =
+    is-finite-type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  semigroup-Commutative-Monoid-𝔽 : Semigroup l
-  semigroup-Commutative-Monoid-𝔽 =
-    semigroup-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  semigroup-Finite-Commutative-Monoid : Semigroup l
+  semigroup-Finite-Commutative-Monoid =
+    semigroup-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  set-Commutative-Monoid-𝔽 : Set l
-  set-Commutative-Monoid-𝔽 =
-    set-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  set-Finite-Commutative-Monoid : Set l
+  set-Finite-Commutative-Monoid =
+    set-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  is-set-type-Commutative-Monoid-𝔽 : is-set type-Commutative-Monoid-𝔽
-  is-set-type-Commutative-Monoid-𝔽 =
-    is-set-type-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  is-set-type-Finite-Commutative-Monoid : is-set type-Finite-Commutative-Monoid
+  is-set-type-Finite-Commutative-Monoid =
+    is-set-type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 ```
 
 ### The multiplicative operation of a commutative monoid
 
 ```agda
-  has-associative-mul-Commutative-Monoid-𝔽 :
-    has-associative-mul-Set set-Commutative-Monoid-𝔽
-  has-associative-mul-Commutative-Monoid-𝔽 =
-    has-associative-mul-Semigroup semigroup-Commutative-Monoid-𝔽
+  has-associative-mul-Finite-Commutative-Monoid :
+    has-associative-mul-Set set-Finite-Commutative-Monoid
+  has-associative-mul-Finite-Commutative-Monoid =
+    has-associative-mul-Semigroup semigroup-Finite-Commutative-Monoid
 
-  mul-Commutative-Monoid-𝔽 :
-    (x y : type-Commutative-Monoid-𝔽) → type-Commutative-Monoid-𝔽
-  mul-Commutative-Monoid-𝔽 = mul-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  mul-Finite-Commutative-Monoid :
+    (x y : type-Finite-Commutative-Monoid) → type-Finite-Commutative-Monoid
+  mul-Finite-Commutative-Monoid =
+    mul-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  mul-Commutative-Monoid-𝔽' :
-    (x y : type-Commutative-Monoid-𝔽) → type-Commutative-Monoid-𝔽
-  mul-Commutative-Monoid-𝔽' =
-    mul-Monoid-𝔽' finite-monoid-Commutative-Monoid-𝔽
+  mul-Finite-Commutative-Monoid' :
+    (x y : type-Finite-Commutative-Monoid) → type-Finite-Commutative-Monoid
+  mul-Finite-Commutative-Monoid' =
+    mul-Finite-Monoid' finite-monoid-Finite-Commutative-Monoid
 
-  ap-mul-Commutative-Monoid-𝔽 :
-    {x x' y y' : type-Commutative-Monoid-𝔽} →
+  ap-mul-Finite-Commutative-Monoid :
+    {x x' y y' : type-Finite-Commutative-Monoid} →
     x ＝ x' → y ＝ y' →
-    mul-Commutative-Monoid-𝔽 x y ＝ mul-Commutative-Monoid-𝔽 x' y'
-  ap-mul-Commutative-Monoid-𝔽 =
-    ap-mul-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+    mul-Finite-Commutative-Monoid x y ＝ mul-Finite-Commutative-Monoid x' y'
+  ap-mul-Finite-Commutative-Monoid =
+    ap-mul-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  associative-mul-Commutative-Monoid-𝔽 :
-    (x y z : type-Commutative-Monoid-𝔽) →
-    ( mul-Commutative-Monoid-𝔽 (mul-Commutative-Monoid-𝔽 x y) z) ＝
-    ( mul-Commutative-Monoid-𝔽 x (mul-Commutative-Monoid-𝔽 y z))
-  associative-mul-Commutative-Monoid-𝔽 =
-    associative-mul-Monoid-𝔽 finite-monoid-Commutative-Monoid-𝔽
+  associative-mul-Finite-Commutative-Monoid :
+    (x y z : type-Finite-Commutative-Monoid) →
+    ( mul-Finite-Commutative-Monoid (mul-Finite-Commutative-Monoid x y) z) ＝
+    ( mul-Finite-Commutative-Monoid x (mul-Finite-Commutative-Monoid y z))
+  associative-mul-Finite-Commutative-Monoid =
+    associative-mul-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  commutative-mul-Commutative-Monoid-𝔽 :
-    (x y : type-Commutative-Monoid-𝔽) →
-    mul-Commutative-Monoid-𝔽 x y ＝ mul-Commutative-Monoid-𝔽 y x
-  commutative-mul-Commutative-Monoid-𝔽 = pr2 M
+  commutative-mul-Finite-Commutative-Monoid :
+    (x y : type-Finite-Commutative-Monoid) →
+    mul-Finite-Commutative-Monoid x y ＝ mul-Finite-Commutative-Monoid y x
+  commutative-mul-Finite-Commutative-Monoid = pr2 M
 
-  commutative-monoid-Commutative-Monoid-𝔽 : Commutative-Monoid l
-  pr1 commutative-monoid-Commutative-Monoid-𝔽 = monoid-Commutative-Monoid-𝔽
-  pr2 commutative-monoid-Commutative-Monoid-𝔽 =
-    commutative-mul-Commutative-Monoid-𝔽
+  commutative-monoid-Finite-Commutative-Monoid : Commutative-Monoid l
+  pr1 commutative-monoid-Finite-Commutative-Monoid =
+    monoid-Finite-Commutative-Monoid
+  pr2 commutative-monoid-Finite-Commutative-Monoid =
+    commutative-mul-Finite-Commutative-Monoid
 
-  interchange-mul-mul-Commutative-Monoid-𝔽 :
-    (x y x' y' : type-Commutative-Monoid-𝔽) →
-    ( mul-Commutative-Monoid-𝔽
-      ( mul-Commutative-Monoid-𝔽 x y)
-      ( mul-Commutative-Monoid-𝔽 x' y')) ＝
-    ( mul-Commutative-Monoid-𝔽
-      ( mul-Commutative-Monoid-𝔽 x x')
-      ( mul-Commutative-Monoid-𝔽 y y'))
-  interchange-mul-mul-Commutative-Monoid-𝔽 =
+  interchange-mul-mul-Finite-Commutative-Monoid :
+    (x y x' y' : type-Finite-Commutative-Monoid) →
+    ( mul-Finite-Commutative-Monoid
+      ( mul-Finite-Commutative-Monoid x y)
+      ( mul-Finite-Commutative-Monoid x' y')) ＝
+    ( mul-Finite-Commutative-Monoid
+      ( mul-Finite-Commutative-Monoid x x')
+      ( mul-Finite-Commutative-Monoid y y'))
+  interchange-mul-mul-Finite-Commutative-Monoid =
     interchange-mul-mul-Commutative-Monoid
-      commutative-monoid-Commutative-Monoid-𝔽
+      commutative-monoid-Finite-Commutative-Monoid
 
-  right-swap-mul-Commutative-Monoid-𝔽 :
-    (x y z : type-Commutative-Monoid-𝔽) →
-    mul-Commutative-Monoid-𝔽 (mul-Commutative-Monoid-𝔽 x y) z ＝
-    mul-Commutative-Monoid-𝔽 (mul-Commutative-Monoid-𝔽 x z) y
-  right-swap-mul-Commutative-Monoid-𝔽 =
+  right-swap-mul-Finite-Commutative-Monoid :
+    (x y z : type-Finite-Commutative-Monoid) →
+    mul-Finite-Commutative-Monoid (mul-Finite-Commutative-Monoid x y) z ＝
+    mul-Finite-Commutative-Monoid (mul-Finite-Commutative-Monoid x z) y
+  right-swap-mul-Finite-Commutative-Monoid =
     right-swap-mul-Commutative-Monoid
-      commutative-monoid-Commutative-Monoid-𝔽
+      commutative-monoid-Finite-Commutative-Monoid
 
-  left-swap-mul-Commutative-Monoid-𝔽 :
-    (x y z : type-Commutative-Monoid-𝔽) →
-    mul-Commutative-Monoid-𝔽 x (mul-Commutative-Monoid-𝔽 y z) ＝
-    mul-Commutative-Monoid-𝔽 y (mul-Commutative-Monoid-𝔽 x z)
-  left-swap-mul-Commutative-Monoid-𝔽 =
+  left-swap-mul-Finite-Commutative-Monoid :
+    (x y z : type-Finite-Commutative-Monoid) →
+    mul-Finite-Commutative-Monoid x (mul-Finite-Commutative-Monoid y z) ＝
+    mul-Finite-Commutative-Monoid y (mul-Finite-Commutative-Monoid x z)
+  left-swap-mul-Finite-Commutative-Monoid =
     left-swap-mul-Commutative-Monoid
-      commutative-monoid-Commutative-Monoid-𝔽
+      commutative-monoid-Finite-Commutative-Monoid
 ```
 
 ### The unit element of a commutative monoid
 
 ```agda
 module _
-  {l : Level} (M : Commutative-Monoid-𝔽 l)
+  {l : Level} (M : Finite-Commutative-Monoid l)
   where
 
-  has-unit-Commutative-Monoid-𝔽 : is-unital (mul-Commutative-Monoid-𝔽 M)
-  has-unit-Commutative-Monoid-𝔽 =
-    has-unit-Monoid (monoid-Commutative-Monoid-𝔽 M)
+  has-unit-Finite-Commutative-Monoid :
+    is-unital (mul-Finite-Commutative-Monoid M)
+  has-unit-Finite-Commutative-Monoid =
+    has-unit-Monoid (monoid-Finite-Commutative-Monoid M)
 
-  unit-Commutative-Monoid-𝔽 : type-Commutative-Monoid-𝔽 M
-  unit-Commutative-Monoid-𝔽 = unit-Monoid (monoid-Commutative-Monoid-𝔽 M)
+  unit-Finite-Commutative-Monoid : type-Finite-Commutative-Monoid M
+  unit-Finite-Commutative-Monoid =
+    unit-Monoid (monoid-Finite-Commutative-Monoid M)
 
-  left-unit-law-mul-Commutative-Monoid-𝔽 :
-    (x : type-Commutative-Monoid-𝔽 M) →
-    mul-Commutative-Monoid-𝔽 M unit-Commutative-Monoid-𝔽 x ＝ x
-  left-unit-law-mul-Commutative-Monoid-𝔽 =
-    left-unit-law-mul-Monoid (monoid-Commutative-Monoid-𝔽 M)
+  left-unit-law-mul-Finite-Commutative-Monoid :
+    (x : type-Finite-Commutative-Monoid M) →
+    mul-Finite-Commutative-Monoid M unit-Finite-Commutative-Monoid x ＝ x
+  left-unit-law-mul-Finite-Commutative-Monoid =
+    left-unit-law-mul-Monoid (monoid-Finite-Commutative-Monoid M)
 
-  right-unit-law-mul-Commutative-Monoid-𝔽 :
-    (x : type-Commutative-Monoid-𝔽 M) →
-    mul-Commutative-Monoid-𝔽 M x unit-Commutative-Monoid-𝔽 ＝ x
-  right-unit-law-mul-Commutative-Monoid-𝔽 =
-    right-unit-law-mul-Monoid (monoid-Commutative-Monoid-𝔽 M)
+  right-unit-law-mul-Finite-Commutative-Monoid :
+    (x : type-Finite-Commutative-Monoid M) →
+    mul-Finite-Commutative-Monoid M x unit-Finite-Commutative-Monoid ＝ x
+  right-unit-law-mul-Finite-Commutative-Monoid =
+    right-unit-law-mul-Monoid (monoid-Finite-Commutative-Monoid M)
 ```
 
 ## Properties
@@ -184,27 +189,31 @@ module _
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
-  structure-commutative-monoid-𝔽 : UU l
-  structure-commutative-monoid-𝔽 =
-    Σ ( structure-monoid-𝔽 X)
-      ( λ m → is-commutative-Monoid-𝔽 (finite-monoid-structure-monoid-𝔽 X m))
+  structure-commutative-monoid-Finite-Type : UU l
+  structure-commutative-monoid-Finite-Type =
+    Σ ( structure-monoid-Finite-Type X)
+      ( λ m →
+        is-commutative-Finite-Monoid
+          ( finite-monoid-structure-monoid-Finite-Type X m))
 
-  finite-commutative-monoid-structure-commutative-monoid-𝔽 :
-    structure-commutative-monoid-𝔽 → Commutative-Monoid-𝔽 l
-  pr1 (finite-commutative-monoid-structure-commutative-monoid-𝔽 (m , c)) =
-    finite-monoid-structure-monoid-𝔽 X m
-  pr2 (finite-commutative-monoid-structure-commutative-monoid-𝔽 (m , c)) = c
+  finite-commutative-monoid-structure-commutative-monoid-Finite-Type :
+    structure-commutative-monoid-Finite-Type → Finite-Commutative-Monoid l
+  finite-commutative-monoid-structure-commutative-monoid-Finite-Type (m , c) =
+    finite-monoid-structure-monoid-Finite-Type X m , c
 
-  is-finite-structure-commutative-monoid-𝔽 :
-    is-finite structure-commutative-monoid-𝔽
-  is-finite-structure-commutative-monoid-𝔽 =
+  is-finite-structure-commutative-monoid-Finite-Type :
+    is-finite structure-commutative-monoid-Finite-Type
+  is-finite-structure-commutative-monoid-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-monoid-𝔽 X)
+      ( is-finite-structure-monoid-Finite-Type X)
       ( λ m →
         is-finite-Π
-          ( is-finite-type-𝔽 X)
-          ( λ x → is-finite-Π ( is-finite-type-𝔽 X) ( λ y → is-finite-eq-𝔽 X)))
+          ( is-finite-type-Finite-Type X)
+          ( λ x →
+            is-finite-Π
+              ( is-finite-type-Finite-Type X)
+              ( λ y → is-finite-eq-Finite-Type X)))
 ```

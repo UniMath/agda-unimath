@@ -21,11 +21,13 @@ open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.idempotent-maps
 open import foundation.inverse-sequential-diagrams
-open import foundation.path-algebra
+open import foundation.locally-small-types
+open import foundation.path-cosplit-maps
 open import foundation.quasicoherently-idempotent-maps
 open import foundation.retracts-of-types
 open import foundation.sequential-limits
 open import foundation.structure-identity-principle
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -79,7 +81,7 @@ One important fact about split idempotent maps is that every
 [quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md)
 splits, and conversely, every split idempotent map is quasicoherently
 idempotent. In fact, the type of proofs of split idempotence for an endomap `f`
-is a retract of the type of proofs of quasicoherent idempotence.
+is a retract of the type of proofs of quasicoherent idempotence. {{#cite Shu17}}
 
 ## Definitions
 
@@ -342,13 +344,7 @@ module _
             Σ ( B retract-of A)
               ( λ (i , r , R) → i ∘ r ~ f)))
     ≃ Σ (A → A) (λ f → (Σ (retracts l2 A) (λ (B , i , r , R) → i ∘ r ~ f)))
-    by
-      equiv-tot
-        ( λ f →
-          inv-associative-Σ
-            ( UU l2)
-            ( _retract-of A)
-            ( λ (B , i , r , R) → i ∘ r ~ f))
+    by equiv-tot (λ f → inv-associative-Σ)
     ≃ Σ (retracts l2 A) (λ (B , i , r , R) → Σ (A → A) (λ f → i ∘ r ~ f))
     by equiv-left-swap-Σ
     ≃ retracts l2 A
@@ -618,60 +614,60 @@ This is Theorem 3.9 of {{#cite Shu17}}.
 ```agda
 module _
   {l : Level} {A : UU l} {f : A → A}
-  (H : is-idempotent f) (W : is-weakly-constant f)
+  (H : is-idempotent f) (W : is-weakly-constant-map f)
   where
 
-  splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent :
+  splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     UU l
-  splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent =
+  splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent =
     fixed-point f
 
-  inclusion-is-split-idempotent-is-weakly-constant-is-idempotent :
-    splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent →
+  inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent :
+    splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent →
     A
-  inclusion-is-split-idempotent-is-weakly-constant-is-idempotent = pr1
+  inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent = pr1
 
-  map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     A →
-    splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent
-  map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent x =
+    splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent
+  map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent x =
     ( f x , H x)
 
-  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     is-retraction
-      ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent)
-      ( map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
-  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent
+      ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+      ( map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent
     _ =
-    eq-is-prop (is-prop-fixed-point-is-weakly-constant W)
+    eq-is-prop (is-prop-fixed-point-is-weakly-constant-map W)
 
-  retraction-is-split-idempotent-is-weakly-constant-is-idempotent :
+  retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     retraction
-      ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent)
-  retraction-is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
+      ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 
-  retract-is-split-idempotent-is-weakly-constant-is-idempotent :
+  retract-is-split-idempotent-is-weakly-constant-map-is-idempotent :
     retract
       ( A)
-      ( splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent)
-  retract-is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( inclusion-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      retraction-is-split-idempotent-is-weakly-constant-is-idempotent)
+      ( splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent)
+  retract-is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 
-  htpy-is-split-idempotent-is-weakly-constant-is-idempotent :
-    inclusion-is-split-idempotent-is-weakly-constant-is-idempotent ∘
-    map-retraction-is-split-idempotent-is-weakly-constant-is-idempotent ~
+  htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent :
+    inclusion-is-split-idempotent-is-weakly-constant-map-is-idempotent ∘
+    map-retraction-is-split-idempotent-is-weakly-constant-map-is-idempotent ~
     f
-  htpy-is-split-idempotent-is-weakly-constant-is-idempotent = refl-htpy
+  htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent = refl-htpy
 
-  is-split-idempotent-is-weakly-constant-is-idempotent :
+  is-split-idempotent-is-weakly-constant-map-is-idempotent :
     is-split-idempotent l f
-  is-split-idempotent-is-weakly-constant-is-idempotent =
-    ( splitting-type-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      retract-is-split-idempotent-is-weakly-constant-is-idempotent ,
-      htpy-is-split-idempotent-is-weakly-constant-is-idempotent)
+  is-split-idempotent-is-weakly-constant-map-is-idempotent =
+    ( splitting-type-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      retract-is-split-idempotent-is-weakly-constant-map-is-idempotent ,
+      htpy-is-split-idempotent-is-weakly-constant-map-is-idempotent)
 ```
 
 ### Quasicoherently idempotent maps split
@@ -940,14 +936,14 @@ For the inductive step we fill the following diagram as prescribed, in the
 notation of {{#cite Shu17}}:
 
 ```text
-              ξₙ₊₁               I aₙ₊₁             f (αₙ₊₁)⁻¹
-    f a₀ ------------> f (f aₙ₊₁) ---> f aₙ₊₁ --------------------> f (f aₙ₊₂)
-     |                    |                  [nat-htpy]  ___refl___/   |
-  (I⁻¹ a₀)    [Ξₙ]        |       I (f aₙ₊₂)            /         (f ∘ f)(αₙ₊₂)
-     ∨                    ∨         ------>           /                ∨
-  f (f a₀) --------> f (f (f aₙ₊₂))   [J]   f (f aₙ₊₂) ----------> f (f (f aₙ₊₃))
-     (f (ξₙ ∙ I aₙ₊₁ ∙ f αₙ₊₁))     ------>           (f ∘ f) (αₙ₊₂)
-                                  f (I aₙ₊₂)
+                  ξₙ₊₁                   I aₙ₊₁
+        f a₀ ------------> f (f aₙ₊₁) -------------> f aₙ₊₁
+         |                     |       [nat-htpy]      |
+  I⁻¹ a₀ |        [Ξₙ]         |                       | f (αₙ₊₁)⁻¹
+         ∨                     ∨        -------->      ∨
+      f (f a₀) --------> f (f (f aₙ₊₂))    [J]    f (f aₙ₊₂) ----> f (f (f aₙ₊₃))
+         (f (ξₙ ∙ I aₙ₊₁ ∙ f αₙ₊₁))     -------->          f (f αₙ₊₂)
+                                        f (I aₙ₊₂)
 ```
 
 where the symbols translate to code as follows:
@@ -999,11 +995,12 @@ Note, in particular, that the left-hand square is the inductive hypothesis.
               ( ap f (I (a (second-succ-ℕ n))))) ∙
           ( ap
             ( ξ n ∙_)
-            ( ap
-              ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
-              ( coh-is-quasicoherently-idempotent H
-                ( a (succ-ℕ (succ-ℕ n)))) ∙
-            ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
+            ( ( ap
+                ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
+                ( coh-is-quasicoherently-idempotent
+                  ( H)
+                  ( a (succ-ℕ (succ-ℕ n))))) ∙
+              ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
           ( inv (assoc (ξ n) (I (a (succ-ℕ n))) (ap f (α (succ-ℕ n)))))))
       where
         ξ :
@@ -1197,6 +1194,23 @@ module _
   is-small-retract is-small-A r =
     is-small-retract'
       ( comp-retract (retract-equiv (equiv-is-small is-small-A)) r)
+```
+
+### Locally small types are closed under path cosplittings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-locally-small-path-cosplitting :
+    is-locally-small l3 A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-locally-small l3 B
+  is-locally-small-path-cosplitting H r x y =
+    is-small-retract
+      ( H (map-path-cosplit-map r x) (map-path-cosplit-map r y))
+      ( ap (map-path-cosplit-map r) , is-path-cosplit-path-cosplit-map r x y)
 ```
 
 ## References

@@ -33,10 +33,10 @@ globular structure on dependent function types.
 The globular type of dependent functions of a type family `B` over `A` is
 [reflexive](globular-types.reflexive-globular-types.md) and
 [transitive](globular-types.transitive-globular-types.md), so it is a
-[noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md).
+[noncoherent ω-precategory](wild-category-theory.noncoherent-omega-precategories.md).
 
 The structures defined in this file are used to define the
-[noncoherent large wild higher precategory of types](foundation.wild-category-of-types.md).
+[wild category of types](foundation.wild-category-of-types.md).
 
 ## Definitions
 

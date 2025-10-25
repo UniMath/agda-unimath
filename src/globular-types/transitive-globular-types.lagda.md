@@ -324,6 +324,6 @@ module _
 ## See also
 
 - [Composition structure on globular types](globular-types.composition-structure-globular-types.md)
-- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+- [Noncoherent ω-precategories](wild-category-theory.noncoherent-omega-precategories.md)
   are globular types that are both
   [reflexive](globular-types.reflexive-globular-types.md) and transitive.

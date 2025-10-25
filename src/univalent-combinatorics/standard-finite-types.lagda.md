@@ -20,7 +20,9 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
@@ -32,8 +34,10 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -143,33 +147,39 @@ is-decidable-is-inl-Fin k (inr star) = inr α
 ### `Fin 1` is contractible
 
 ```agda
-map-equiv-Fin-one-ℕ : Fin 1 → unit
-map-equiv-Fin-one-ℕ (inr x) = x
+map-equiv-Fin-1 : Fin 1 → unit
+map-equiv-Fin-1 (inr x) = x
 
-map-inv-equiv-Fin-one-ℕ : unit → Fin 1
-map-inv-equiv-Fin-one-ℕ x = inr x
+map-inv-equiv-Fin-1 : unit → Fin 1
+map-inv-equiv-Fin-1 = inr
 
-is-section-map-inv-equiv-Fin-one-ℕ :
-  ( map-equiv-Fin-one-ℕ ∘ map-inv-equiv-Fin-one-ℕ) ~ id
-is-section-map-inv-equiv-Fin-one-ℕ _ = refl
+is-section-map-inv-equiv-Fin-1 :
+  ( map-equiv-Fin-1 ∘ map-inv-equiv-Fin-1) ~ id
+is-section-map-inv-equiv-Fin-1 _ = refl
 
-is-retraction-map-inv-equiv-Fin-one-ℕ :
-  ( map-inv-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-is-retraction-map-inv-equiv-Fin-one-ℕ (inr _) = refl
+is-retraction-map-inv-equiv-Fin-1 :
+  ( map-inv-equiv-Fin-1 ∘ map-equiv-Fin-1) ~ id
+is-retraction-map-inv-equiv-Fin-1 (inr _) = refl
 
-is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
-is-equiv-map-equiv-Fin-one-ℕ =
+is-equiv-map-equiv-Fin-1 : is-equiv map-equiv-Fin-1
+is-equiv-map-equiv-Fin-1 =
   is-equiv-is-invertible
-    map-inv-equiv-Fin-one-ℕ
-    is-section-map-inv-equiv-Fin-one-ℕ
-    is-retraction-map-inv-equiv-Fin-one-ℕ
+    map-inv-equiv-Fin-1
+    is-section-map-inv-equiv-Fin-1
+    is-retraction-map-inv-equiv-Fin-1
 
-equiv-Fin-one-ℕ : Fin 1 ≃ unit
-pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
-pr2 equiv-Fin-one-ℕ = is-equiv-map-equiv-Fin-one-ℕ
+equiv-Fin-1 : Fin 1 ≃ unit
+pr1 equiv-Fin-1 = map-equiv-Fin-1
+pr2 equiv-Fin-1 = is-equiv-map-equiv-Fin-1
 
-is-contr-Fin-one-ℕ : is-contr (Fin 1)
-is-contr-Fin-one-ℕ = is-contr-equiv unit equiv-Fin-one-ℕ is-contr-unit
+is-contr-Fin-1 : is-contr (Fin 1)
+is-contr-Fin-1 = is-contr-equiv unit equiv-Fin-1 is-contr-unit
+
+is-prop-Fin-1 : is-prop (Fin 1)
+is-prop-Fin-1 = is-prop-is-contr is-contr-Fin-1
+
+Fin-1-Prop : Prop lzero
+Fin-1-Prop = (Fin 1 , is-prop-Fin-1)
 
 is-not-contractible-Fin :
   (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)
@@ -228,7 +238,7 @@ nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 
 nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
-nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
+nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin-reverse k x)
 nat-Fin-reverse (succ-ℕ k) (inr x) = 0
 
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
@@ -301,10 +311,10 @@ one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
 is-one-Fin : (k : ℕ) → Fin k → UU lzero
 is-one-Fin (succ-ℕ k) x = x ＝ one-Fin k
 
-is-zero-or-one-Fin-two-ℕ :
+is-zero-or-one-Fin-2 :
   (x : Fin 2) → (is-zero-Fin 2 x) + (is-one-Fin 2 x)
-is-zero-or-one-Fin-two-ℕ (inl (inr star)) = inl refl
-is-zero-or-one-Fin-two-ℕ (inr star) = inr refl
+is-zero-or-one-Fin-2 (inl (inr star)) = inl refl
+is-zero-or-one-Fin-2 (inr star) = inr refl
 
 is-one-nat-one-Fin :
   (k : ℕ) → is-one-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k)))
@@ -491,3 +501,8 @@ is-preunivalent-Fin : is-preunivalent Fin
 is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```
+
+## See also
+
+- [Classical finite types](univalent-combinatorics.classical-finite-types.md),
+  the set of natural numbers less than `n`

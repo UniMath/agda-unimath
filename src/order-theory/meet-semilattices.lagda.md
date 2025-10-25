@@ -15,8 +15,10 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.commutative-semigroups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.semigroups
 
@@ -30,12 +32,14 @@ open import order-theory.preorders
 
 ## Idea
 
-A **meet-semilattice** is a poset in which every pair of elements has a greatest
-binary-lower bound. Alternatively, meet-semilattices can be defined
-algebraically as a set `X` equipped with a binary operation `∧ : X → X → X`
-satisfying
+A
+{{#concept "meet-semilattice" WDID=Q29018102 WD="lower semilattice" Agda=Meet-Semilattice}}
+is a [poset](order-theory.posets.md) in which every pair of elements has a
+[greatest binary lower bound](order-theory.greatest-lower-bounds-posets.md).
+Alternatively, meet-semilattices can be defined algebraically as a set `X`
+equipped with a binary operation `∧ : X → X → X` satisfying
 
-1. Asociativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
+1. Associativity: `(x ∧ y) ∧ z ＝ x ∧ (y ∧ z)`,
 2. Commutativity: `x ∧ y ＝ y ∧ x`,
 3. Idempotency: `x ∧ x ＝ x`.
 
@@ -46,56 +50,49 @@ of meet-semilattices.
 
 ## Definitions
 
-### The predicate on semigroups of being a meet-semilattice
+### The predicate on commutative semigroups of being a meet-semilattice
 
 ```agda
 module _
-  {l : Level} (X : Semigroup l)
+  {l : Level} (X : Commutative-Semigroup l)
   where
 
-  is-meet-semilattice-prop-Semigroup : Prop l
-  is-meet-semilattice-prop-Semigroup =
-    product-Prop
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Π-Prop
-            ( type-Semigroup X)
-            ( λ y →
-              Id-Prop
-                ( set-Semigroup X)
-                ( mul-Semigroup X x y)
-                ( mul-Semigroup X y x))))
-      ( Π-Prop
-        ( type-Semigroup X)
-        ( λ x →
-          Id-Prop
-            ( set-Semigroup X)
-            ( mul-Semigroup X x x)
-            ( x)))
+  is-meet-semilattice-prop-Commutative-Semigroup : Prop l
+  is-meet-semilattice-prop-Commutative-Semigroup =
+    Π-Prop
+      ( type-Commutative-Semigroup X)
+      ( λ x →
+        Id-Prop
+          ( set-Commutative-Semigroup X)
+          ( mul-Commutative-Semigroup X x x)
+          ( x))
 
-  is-meet-semilattice-Semigroup : UU l
-  is-meet-semilattice-Semigroup =
-    type-Prop is-meet-semilattice-prop-Semigroup
+  is-meet-semilattice-Commutative-Semigroup : UU l
+  is-meet-semilattice-Commutative-Semigroup =
+    type-Prop is-meet-semilattice-prop-Commutative-Semigroup
 
-  is-prop-is-meet-semilattice-Semigroup :
-    is-prop is-meet-semilattice-Semigroup
-  is-prop-is-meet-semilattice-Semigroup =
-    is-prop-type-Prop is-meet-semilattice-prop-Semigroup
+  is-prop-is-meet-semilattice-Commutative-Semigroup :
+    is-prop is-meet-semilattice-Commutative-Semigroup
+  is-prop-is-meet-semilattice-Commutative-Semigroup =
+    is-prop-type-Prop is-meet-semilattice-prop-Commutative-Semigroup
 ```
 
 ### The algebraic definition of meet-semilattices
 
 ```agda
 Meet-Semilattice : (l : Level) → UU (lsuc l)
-Meet-Semilattice l = type-subtype is-meet-semilattice-prop-Semigroup
+Meet-Semilattice l = type-subtype is-meet-semilattice-prop-Commutative-Semigroup
 
 module _
   {l : Level} (X : Meet-Semilattice l)
   where
 
+  commutative-semigroup-Meet-Semilattice : Commutative-Semigroup l
+  commutative-semigroup-Meet-Semilattice = pr1 X
+
   semigroup-Meet-Semilattice : Semigroup l
-  semigroup-Meet-Semilattice = pr1 X
+  semigroup-Meet-Semilattice =
+    semigroup-Commutative-Semigroup commutative-semigroup-Meet-Semilattice
 
   set-Meet-Semilattice : Set l
   set-Meet-Semilattice = set-Semigroup semigroup-Meet-Semilattice
@@ -122,18 +119,19 @@ module _
     associative-mul-Semigroup semigroup-Meet-Semilattice
 
   is-meet-semilattice-Meet-Semilattice :
-    is-meet-semilattice-Semigroup semigroup-Meet-Semilattice
+    is-meet-semilattice-Commutative-Semigroup
+      ( commutative-semigroup-Meet-Semilattice)
   is-meet-semilattice-Meet-Semilattice = pr2 X
 
   commutative-meet-Meet-Semilattice :
     (x y : type-Meet-Semilattice) → (x ∧ y) ＝ (y ∧ x)
   commutative-meet-Meet-Semilattice =
-    pr1 is-meet-semilattice-Meet-Semilattice
+    commutative-mul-Commutative-Semigroup commutative-semigroup-Meet-Semilattice
 
   idempotent-meet-Meet-Semilattice :
     (x : type-Meet-Semilattice) → (x ∧ x) ＝ x
   idempotent-meet-Meet-Semilattice =
-    pr2 is-meet-semilattice-Meet-Semilattice
+    is-meet-semilattice-Meet-Semilattice
 
   leq-Meet-Semilattice-Prop :
     (x y : type-Meet-Semilattice) → Prop l
@@ -245,6 +243,46 @@ module _
     meet-Meet-Semilattice x y
   pr2 (has-greatest-binary-lower-bound-Meet-Semilattice x y) =
     is-greatest-binary-lower-bound-meet-Meet-Semilattice x y
+
+  leq-left-meet-Meet-Semilattice :
+    (x y : type-Meet-Semilattice) → leq-Meet-Semilattice (x ∧ y) x
+  leq-left-meet-Meet-Semilattice x y =
+    equational-reasoning
+      (x ∧ y) ∧ x
+      ＝ x ∧ (x ∧ y) by commutative-meet-Meet-Semilattice _ _
+      ＝ (x ∧ x) ∧ y by inv (associative-meet-Meet-Semilattice x x y)
+      ＝ x ∧ y by ap (_∧ y) (idempotent-meet-Meet-Semilattice x)
+
+  leq-right-meet-Meet-Semilattice :
+    (x y : type-Meet-Semilattice) → leq-Meet-Semilattice (x ∧ y) y
+  leq-right-meet-Meet-Semilattice x y =
+    equational-reasoning
+      (x ∧ y) ∧ y
+      ＝ x ∧ (y ∧ y) by associative-meet-Meet-Semilattice x y y
+      ＝ x ∧ y by ap (x ∧_) (idempotent-meet-Meet-Semilattice y)
+
+  meet-leq-leq-Meet-Semilattice :
+    (a b c d : type-Meet-Semilattice) →
+    leq-Meet-Semilattice a b → leq-Meet-Semilattice c d →
+    leq-Meet-Semilattice (meet-Meet-Semilattice a c) (meet-Meet-Semilattice b d)
+  meet-leq-leq-Meet-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-greatest-binary-lower-bound-meet-Meet-Semilattice
+        ( b)
+        ( d)
+        ( meet-Meet-Semilattice a c))
+      ( transitive-leq-Meet-Semilattice
+        ( a ∧ c)
+        ( a)
+        ( b)
+        ( a≤b)
+        ( leq-left-meet-Meet-Semilattice a c) ,
+        transitive-leq-Meet-Semilattice
+          ( a ∧ c)
+          ( c)
+          ( d)
+          ( c≤d)
+          ( leq-right-meet-Meet-Semilattice a c))
 ```
 
 ### The predicate on posets of being a meet-semilattice
@@ -261,7 +299,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-greatest-binary-lower-bound-Poset-Prop P x))
+          ( has-greatest-binary-lower-bound-prop-Poset P x))
 
   is-meet-semilattice-Poset : UU (l1 ⊔ l2)
   is-meet-semilattice-Poset = type-Prop is-meet-semilattice-Poset-Prop
@@ -421,6 +459,32 @@ module _
         ( y)
         ( z))
       ( H , K)
+
+  meet-leq-leq-Order-Theoretic-Meet-Semilattice :
+    (a b c d : type-Order-Theoretic-Meet-Semilattice) →
+    leq-Order-Theoretic-Meet-Semilattice a b →
+    leq-Order-Theoretic-Meet-Semilattice c d →
+    leq-Order-Theoretic-Meet-Semilattice
+      (meet-Order-Theoretic-Meet-Semilattice a c)
+      (meet-Order-Theoretic-Meet-Semilattice b d)
+  meet-leq-leq-Order-Theoretic-Meet-Semilattice a b c d a≤b c≤d =
+    forward-implication
+      ( is-greatest-binary-lower-bound-meet-Order-Theoretic-Meet-Semilattice
+        ( b)
+        ( d)
+        ( meet-Order-Theoretic-Meet-Semilattice a c))
+      ( transitive-leq-Order-Theoretic-Meet-Semilattice
+          ( a ∧ c)
+          ( a)
+          ( b)
+          ( a≤b)
+          ( leq-left-meet-Order-Theoretic-Meet-Semilattice a c) ,
+        transitive-leq-Order-Theoretic-Meet-Semilattice
+          ( a ∧ c)
+          ( c)
+          ( d)
+          ( c≤d)
+          ( leq-right-meet-Order-Theoretic-Meet-Semilattice a c))
 ```
 
 ## Properties
@@ -440,30 +504,30 @@ module _
   leq-left-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ x
   leq-left-triple-meet-Order-Theoretic-Meet-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ x
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ y
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         (x ∧ y) ∧ z
           ≤ x ∧ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A (x ∧ y) z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ y
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x y
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ z
@@ -478,30 +542,30 @@ module _
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ y
   leq-center-triple-meet-Order-Theoretic-Meet-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ y
             by leq-left-meet-Order-Theoretic-Meet-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' :
     (x ∧ (y ∧ z)) ≤ z
   leq-right-triple-meet-Order-Theoretic-Meet-Semilattice' =
-    calculate-in-Poset
-      ( poset-Order-Theoretic-Meet-Semilattice A)
+    let
+      open
+        inequality-reasoning-Poset (poset-Order-Theoretic-Meet-Semilattice A)
+    in
       chain-of-inequalities
         x ∧ (y ∧ z)
           ≤ y ∧ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A x (y ∧ z)
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
           ≤ z
             by leq-right-meet-Order-Theoretic-Meet-Semilattice A y z
-            in-Poset poset-Order-Theoretic-Meet-Semilattice A
 
   leq-associative-meet-Order-Theoretic-Meet-Semilattice :
     ((x ∧ y) ∧ z) ≤ (x ∧ (y ∧ z))
@@ -600,13 +664,18 @@ module _
   pr2 (pr2 semigroup-Order-Theoretic-Meet-Semilattice) =
     associative-meet-Order-Theoretic-Meet-Semilattice A
 
+  commutative-semigroup-Order-Theoretic-Meet-Semilattice :
+    Commutative-Semigroup l1
+  pr1 commutative-semigroup-Order-Theoretic-Meet-Semilattice =
+    semigroup-Order-Theoretic-Meet-Semilattice
+  pr2 commutative-semigroup-Order-Theoretic-Meet-Semilattice =
+    commutative-meet-Order-Theoretic-Meet-Semilattice A
+
   meet-semilattice-Order-Theoretic-Meet-Semilattice :
     Meet-Semilattice l1
   pr1 meet-semilattice-Order-Theoretic-Meet-Semilattice =
-    semigroup-Order-Theoretic-Meet-Semilattice
-  pr1 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
-    commutative-meet-Order-Theoretic-Meet-Semilattice A
-  pr2 (pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice) =
+    commutative-semigroup-Order-Theoretic-Meet-Semilattice
+  pr2 meet-semilattice-Order-Theoretic-Meet-Semilattice =
     idempotent-meet-Order-Theoretic-Meet-Semilattice A
 ```
 
@@ -643,4 +712,75 @@ module _
           ( order-theoretic-meet-semilattice-Meet-Semilattice)))
   compute-order-theoretic-meet-semilattice-Meet-Semilattice =
     id-iso-Semigroup (semigroup-Meet-Semilattice A)
+```
+
+### If `a ≤ b` and `a ≤ c`, then `a` is less than or equal to the meet of `b` and `c`
+
+```agda
+module _
+  {l1 l2 : Level} (L : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    leq-meet-leq-both-Order-Theoretic-Meet-Semilattice :
+      (a b c : type-Order-Theoretic-Meet-Semilattice L) →
+      leq-Order-Theoretic-Meet-Semilattice L a b →
+      leq-Order-Theoretic-Meet-Semilattice L a c →
+      leq-Order-Theoretic-Meet-Semilattice L
+        ( a)
+        ( meet-Order-Theoretic-Meet-Semilattice L b c)
+    leq-meet-leq-both-Order-Theoretic-Meet-Semilattice a b c a≤b a≤c =
+      tr
+        ( λ d →
+          leq-Order-Theoretic-Meet-Semilattice L
+            ( d)
+            ( meet-Order-Theoretic-Meet-Semilattice L b c))
+        ( idempotent-meet-Order-Theoretic-Meet-Semilattice L a)
+        ( meet-leq-leq-Order-Theoretic-Meet-Semilattice L a b a c a≤b a≤c)
+```
+
+### If `x` is less than or equal to `y`, the meet of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    left-leq-right-meet-Order-Theoretic-Meet-Semilattice :
+      (x y : type-Order-Theoretic-Meet-Semilattice A) →
+      leq-Order-Theoretic-Meet-Semilattice A x y →
+      meet-Order-Theoretic-Meet-Semilattice A x y ＝ x
+    left-leq-right-meet-Order-Theoretic-Meet-Semilattice x y x≤y =
+      ap pr1
+        ( eq-type-Prop
+          ( has-greatest-binary-lower-bound-prop-Poset
+            ( poset-Order-Theoretic-Meet-Semilattice A)
+            ( x)
+            ( y))
+          { is-meet-semilattice-Order-Theoretic-Meet-Semilattice A x y}
+          { has-greatest-binary-lower-bound-leq-Poset
+            ( poset-Order-Theoretic-Meet-Semilattice A)
+            ( x)
+            ( y)
+            ( x≤y)})
+```
+
+### If `y` is less than or equal to `x`, the meet of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Order-Theoretic-Meet-Semilattice l1 l2)
+  where
+
+  abstract
+    right-leq-left-meet-Order-Theoretic-Meet-Semilattice :
+      (x y : type-Order-Theoretic-Meet-Semilattice A) →
+      leq-Order-Theoretic-Meet-Semilattice A y x →
+      meet-Order-Theoretic-Meet-Semilattice A x y ＝ y
+    right-leq-left-meet-Order-Theoretic-Meet-Semilattice x y y≤x =
+      ( commutative-meet-Order-Theoretic-Meet-Semilattice A x y) ∙
+      ( left-leq-right-meet-Order-Theoretic-Meet-Semilattice A y x y≤x)
 ```

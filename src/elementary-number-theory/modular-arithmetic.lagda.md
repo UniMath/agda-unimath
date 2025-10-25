@@ -130,9 +130,9 @@ abstract
   is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
   is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin (succ-ℕ k)
 
-ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽 lzero
-pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
-pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
+ℤ-Mod-Finite-Type : (k : ℕ) → is-nonzero-ℕ k → Finite-Type lzero
+pr1 (ℤ-Mod-Finite-Type k H) = ℤ-Mod k
+pr2 (ℤ-Mod-Finite-Type k H) = is-finite-ℤ-Mod H
 ```
 
 ## The inclusion of the integers modulo `k` into ℤ
@@ -390,16 +390,16 @@ right-unit-law-mul-ℤ-Mod (succ-ℕ k) = right-unit-law-mul-Fin k
 
 left-distributive-mul-add-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
-  ( mul-ℤ-Mod k x (add-ℤ-Mod k y z)) ＝
-  ( add-ℤ-Mod k (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x z))
+  mul-ℤ-Mod k x (add-ℤ-Mod k y z) ＝
+  add-ℤ-Mod k (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x z)
 left-distributive-mul-add-ℤ-Mod zero-ℕ = left-distributive-mul-add-ℤ
 left-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
   left-distributive-mul-add-Fin (succ-ℕ k)
 
 right-distributive-mul-add-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
-  ( mul-ℤ-Mod k (add-ℤ-Mod k x y) z) ＝
-  ( add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z))
+  mul-ℤ-Mod k (add-ℤ-Mod k x y) z ＝
+  add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z)
 right-distributive-mul-add-ℤ-Mod zero-ℕ = right-distributive-mul-add-ℤ
 right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
   right-distributive-mul-add-Fin (succ-ℕ k)

@@ -97,7 +97,6 @@ module _
       universal-property-equiv f → is-equiv f
     is-equiv-is-equiv-precomp H =
       is-equiv-is-equiv-precomp-structured-type
-        ( λ l → l1 ⊔ l2)
         ( λ X → A → B)
         ( A , f)
         ( B , f)

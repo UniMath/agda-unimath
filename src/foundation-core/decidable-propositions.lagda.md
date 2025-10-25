@@ -20,9 +20,12 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.small-types
 open import foundation-core.subtypes
 ```
 
@@ -116,6 +119,9 @@ module _
     is-decidable type-Decidable-Prop
   pr2 is-decidable-prop-Decidable-Prop =
     is-prop-is-decidable is-prop-type-Decidable-Prop
+
+  set-Decidable-Prop : Set l
+  set-Decidable-Prop = set-Prop prop-Decidable-Prop
 ```
 
 ### The empty type is a decidable proposition
@@ -206,20 +212,11 @@ module _
 
   is-decidable-is-decidable-prop-Σ : is-decidable (Σ P Q)
   is-decidable-is-decidable-prop-Σ =
-    rec-coproduct
-      ( λ x →
-        rec-coproduct
-          ( λ y → inl (x , y))
-          ( λ ny →
-            inr
-              ( λ xy →
-                ny
-                  ( tr Q
-                    ( eq-is-prop (is-prop-type-is-decidable-prop H))
-                    ( pr2 xy))))
-          ( is-decidable-type-is-decidable-prop (K x)))
-      ( λ nx → inr (λ xy → nx (pr1 xy)))
+    is-decidable-Σ-has-double-negation-dense-equality-base
+      ( λ x y →
+        intro-double-negation (eq-is-prop (is-prop-type-is-decidable-prop H)))
       ( is-decidable-type-is-decidable-prop H)
+      ( is-decidable-type-is-decidable-prop ∘ K)
 
   is-decidable-prop-Σ : is-decidable-prop (Σ P Q)
   is-decidable-prop-Σ =
@@ -268,29 +265,33 @@ module _
   {l1 l2 : Level} {P : UU l1} {Q : UU l2}
   where
 
-  is-decidable-prop-function-type' :
-    is-decidable P → (P → is-decidable-prop Q) → is-decidable-prop (P → Q)
-  is-decidable-prop-function-type' H K =
-    ( rec-coproduct
-      ( λ p → is-prop-function-type (is-prop-type-is-decidable-prop (K p)))
-      ( λ np → is-prop-is-contr (universal-property-empty-is-empty P np Q))
-      ( H)) ,
-    ( is-decidable-function-type' H (is-decidable-type-is-decidable-prop ∘ K))
+  abstract
+    is-decidable-prop-function-type' :
+      is-decidable P → (P → is-decidable-prop Q) → is-decidable-prop (P → Q)
+    pr1 (is-decidable-prop-function-type' H K) =
+      rec-coproduct
+        ( λ p → is-prop-function-type (is-prop-type-is-decidable-prop (K p)))
+        ( λ np → is-prop-is-contr (universal-property-empty-is-empty P np Q))
+        ( H)
+    pr2 (is-decidable-prop-function-type' H K) =
+      is-decidable-function-type' H (is-decidable-type-is-decidable-prop ∘ K)
 
-  is-decidable-prop-function-type :
-    is-decidable P → is-decidable-prop Q → is-decidable-prop (P → Q)
-  is-decidable-prop-function-type H K =
-    ( is-prop-function-type (is-prop-type-is-decidable-prop K)) ,
-    ( is-decidable-function-type H (is-decidable-type-is-decidable-prop K))
+  abstract
+    is-decidable-prop-function-type :
+      is-decidable P → is-decidable-prop Q → is-decidable-prop (P → Q)
+    pr1 (is-decidable-prop-function-type H K) =
+      is-prop-function-type (is-prop-type-is-decidable-prop K)
+    pr2 (is-decidable-prop-function-type H K) =
+      is-decidable-function-type H (is-decidable-type-is-decidable-prop K)
 
 hom-Decidable-Prop :
   {l1 l2 : Level} →
   Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
-hom-Decidable-Prop P Q =
-  ( type-Decidable-Prop P → type-Decidable-Prop Q) ,
-  ( is-decidable-prop-function-type
+pr1 (hom-Decidable-Prop P Q) = type-Decidable-Prop P → type-Decidable-Prop Q
+pr2 (hom-Decidable-Prop P Q) =
+  is-decidable-prop-function-type
     ( is-decidable-Decidable-Prop P)
-    ( is-decidable-prop-type-Decidable-Prop Q))
+    ( is-decidable-prop-type-Decidable-Prop Q)
 ```
 
 ### Dependent products of decidable propositions
@@ -328,4 +329,35 @@ module _
   ( is-decidable-prop-Π
     ( is-decidable-prop-type-Decidable-Prop P)
     ( is-decidable-prop-type-Decidable-Prop ∘ Q))
+```
+
+### Decidable propositions are either equivalent to the unit type or the empty type
+
+```agda
+decide-equiv-is-decidable-prop :
+  {l : Level} {P : UU l} → is-decidable-prop P → (P ≃ unit) + (P ≃ empty)
+decide-equiv-is-decidable-prop (H , inl p) =
+  inl (equiv-unit-is-contr (is-proof-irrelevant-is-prop H p))
+decide-equiv-is-decidable-prop (_ , inr np) =
+  inr (np , is-equiv-is-empty' np)
+
+decide-equiv-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) →
+  (type-Decidable-Prop P ≃ unit) + (type-Decidable-Prop P ≃ empty)
+decide-equiv-Decidable-Prop (P , H) = decide-equiv-is-decidable-prop H
+```
+
+### Decidable propositions are small
+
+```agda
+is-small-is-decidable-prop :
+  {l : Level} {P : UU l} → is-decidable-prop P → is-small lzero P
+is-small-is-decidable-prop (H , inl p) =
+  ( unit , equiv-unit-is-contr (is-proof-irrelevant-is-prop H p))
+is-small-is-decidable-prop (H , inr np) =
+  ( empty , equiv-is-empty' np)
+
+is-small-type-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) → is-small lzero (type-Decidable-Prop P)
+is-small-type-Decidable-Prop (P , H) = is-small-is-decidable-prop H
 ```

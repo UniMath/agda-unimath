@@ -1,10 +1,20 @@
 [book]
+title = "agda-unimath"
+description = "A community-driven library of formalized mathematics from a univalent point of view using the dependently typed programming language Agda."
+authors = [
+  "Egbert Rijke",
+  "Elisabeth Stenholm",
+  "Jonathan Prieto-Cubides",
+  "Fredrik Bakke",
+  "Vojtěch Štěpančík",
+  "others"
+]
 language = "en"
 multilingual = false
-src = "docs"
-title = "agda-unimath"
+src = "book/src"
 
 [build]
+build-dir = "book"
 create-missing = true
 
 [preprocessor.index]
@@ -19,15 +29,16 @@ static-css = false
 include-src = false
 block-delimiter = {left = "$$", right = "$$"}
 inline-delimiter = {left = "$", right = "$"}
-macros = "website/latex-macros.txt"
+macros = "config/latex-macros.txt"
 
 [preprocessor.catppuccin]
-assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+assets_version = "1.2.0" # ! DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
+contributors_file = "CONTRIBUTORS.toml"
 # Disable by default - it takes a nontrivial amount of time
-# Can be overriden by running
+# Can be overridden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
 enable = false
 # Only show "Content created by" on Agda source files
@@ -35,22 +46,23 @@ attribute_file_extensions = [ ".lagda.md" ]
 # Don't add anything to the "non-content" pages,
 # i.e. top-level markdown files which aren't guides
 suppress_processing = [
-  "HOME.md",
-  "MAINTAINERS.md",
-  "CONTRIBUTORS.md",
-  "STATEMENT-OF-INCLUSION",
-  "PROJECTS.md",
-  "GRANT-ACKNOWLEDGEMENTS.md",
-  "SUMMARY.md",
-  "ART.md",
-  "VISUALIZATION.md"
+  "docs/ART.md",
+  "docs/CONTRIBUTORS.md",
+  "docs/GRANT-ACKNOWLEDGMENTS.md",
+  "docs/HOME.md",
+  "docs/MAINTAINERS.md",
+  "docs/PROJECTS.md",
+  "docs/STATEMENT-OF-INCLUSIVITY.md",
+  "docs/SUMMARY.md",
+  "docs/VISUALIZATION.md"
 ]
 
 [preprocessor.concepts]
 command = "python3 ./scripts/preprocessor_concepts.py"
-output-file = "docs/concept_index.json"
+output-file = "book/src/concept_index.json"
 mathswitch-template = "https://mathswitch.xyz/concept/Wd/{wikidata_id}"
 wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
+skip-agda = false
 
 [preprocessor.citations]
 command = "python3 ./scripts/preprocessor_citations.py"
@@ -65,6 +77,7 @@ before = [ "git-metadata" ]
 follow-web-links = false
 
 [output.html]
+theme = "website/theme"
 default-theme = "light"
 preferred-dark-theme = "Ayu"
 # The following option is renamed to smart-punctuation in mdbook 0.4.38
@@ -75,13 +88,13 @@ additional-css = [
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
   "website/css/bibliography.css",
-  "theme/catppuccin.css",
-  "theme/catppuccin-admonish.css",
-  "theme/pagetoc.css",
+  "website/theme/catppuccin.css",
+  "website/theme/catppuccin-admonish.css",
+  "website/theme/pagetoc.css",
 ]
 additional-js = [
   "website/js/custom.js",
-  "theme/pagetoc.js"
+  "website/theme/pagetoc.js"
 ]
 no-section-label = false
 site-url = "/agda-unimath/"
@@ -93,7 +106,7 @@ enable = false
 
 [output.html.fold]
 enable = true    # whether or not to enable section folding
-level = 0         # the depth to start folding
+level = 0        # the depth to start folding
 
 [output.html.search]
 enable = true            # enables the search feature

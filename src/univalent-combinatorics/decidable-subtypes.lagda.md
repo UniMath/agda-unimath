@@ -41,58 +41,62 @@ open import univalent-combinatorics.function-types
 ### Finite subsets of a finite set
 
 ```agda
-subset-𝔽 : {l1 : Level} (l2 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2)
-subset-𝔽 l2 X = decidable-subtype l2 (type-𝔽 X)
+subset-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → UU (l1 ⊔ lsuc l2)
+subset-Finite-Type l2 X = decidable-subtype l2 (type-Finite-Type X)
 
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X)
   where
 
-  subtype-subset-𝔽 : subtype l2 (type-𝔽 X)
-  subtype-subset-𝔽 = subtype-decidable-subtype P
+  subtype-subset-Finite-Type : subtype l2 (type-Finite-Type X)
+  subtype-subset-Finite-Type = subtype-decidable-subtype P
 
-  is-decidable-subset-𝔽 : is-decidable-subtype subtype-subset-𝔽
-  is-decidable-subset-𝔽 =
+  is-decidable-subset-Finite-Type :
+    is-decidable-subtype subtype-subset-Finite-Type
+  is-decidable-subset-Finite-Type =
     is-decidable-decidable-subtype P
 
-  is-in-subset-𝔽 : type-𝔽 X → UU l2
-  is-in-subset-𝔽 = is-in-decidable-subtype P
+  is-in-subset-Finite-Type : type-Finite-Type X → UU l2
+  is-in-subset-Finite-Type = is-in-decidable-subtype P
 
-  is-prop-is-in-subset-𝔽 :
-    (x : type-𝔽 X) → is-prop (is-in-subset-𝔽 x)
-  is-prop-is-in-subset-𝔽 = is-prop-is-in-decidable-subtype P
+  is-prop-is-in-subset-Finite-Type :
+    (x : type-Finite-Type X) → is-prop (is-in-subset-Finite-Type x)
+  is-prop-is-in-subset-Finite-Type = is-prop-is-in-decidable-subtype P
 ```
 
 ### The underlying type of a decidable subtype
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X)
   where
 
-  type-subset-𝔽 : UU (l1 ⊔ l2)
-  type-subset-𝔽 = type-decidable-subtype P
+  type-subset-Finite-Type : UU (l1 ⊔ l2)
+  type-subset-Finite-Type = type-decidable-subtype P
 
-  inclusion-subset-𝔽 : type-subset-𝔽 → type-𝔽 X
-  inclusion-subset-𝔽 = inclusion-decidable-subtype P
+  inclusion-subset-Finite-Type : type-subset-Finite-Type → type-Finite-Type X
+  inclusion-subset-Finite-Type = inclusion-decidable-subtype P
 
-  is-emb-inclusion-subset-𝔽 : is-emb inclusion-subset-𝔽
-  is-emb-inclusion-subset-𝔽 = is-emb-inclusion-decidable-subtype P
+  is-emb-inclusion-subset-Finite-Type : is-emb inclusion-subset-Finite-Type
+  is-emb-inclusion-subset-Finite-Type = is-emb-inclusion-decidable-subtype P
 
-  is-injective-inclusion-subset-𝔽 : is-injective inclusion-subset-𝔽
-  is-injective-inclusion-subset-𝔽 =
+  is-injective-inclusion-subset-Finite-Type :
+    is-injective inclusion-subset-Finite-Type
+  is-injective-inclusion-subset-Finite-Type =
     is-injective-inclusion-decidable-subtype P
 
-  emb-subset-𝔽 : type-subset-𝔽 ↪ type-𝔽 X
-  emb-subset-𝔽 = emb-decidable-subtype P
+  emb-subset-Finite-Type : type-subset-Finite-Type ↪ type-Finite-Type X
+  emb-subset-Finite-Type = emb-decidable-subtype P
 ```
 
 ## Properties
 
 ### The type of decidable subtypes of a finite type is finite
 
-The computation of the number of subsets of a finite sets is the 52nd theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+The computation of the number of subsets of a finite sets is the
+[52nd](literature.100-theorems.md#52) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
@@ -113,21 +117,22 @@ number-of-elements-decidable-subtype-is-finite {l1} {l2} H =
     ( λ x → exp-ℕ x (number-of-elements-is-finite H))
     ( number-of-elements-Decidable-Prop {l2})
 
-Subset-𝔽 :
-  {l1 : Level} (l2 : Level) → 𝔽 l1 → 𝔽 (l1 ⊔ lsuc l2)
-pr1 (Subset-𝔽 l2 X) = subset-𝔽 l2 X
-pr2 (Subset-𝔽 l2 X) = is-finite-decidable-subtype-is-finite (is-finite-type-𝔽 X)
+Subset-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → Finite-Type (l1 ⊔ lsuc l2)
+pr1 (Subset-Finite-Type l2 X) = subset-Finite-Type l2 X
+pr2 (Subset-Finite-Type l2 X) =
+  is-finite-decidable-subtype-is-finite (is-finite-type-Finite-Type X)
 ```
 
 ### The type of decidable subsets of a finite type has decidable equality
 
 ```agda
-has-decidable-equality-Subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) →
-  has-decidable-equality (decidable-subtype l2 (type-𝔽 X))
-has-decidable-equality-Subset-𝔽 {l1} {l2} X =
+has-decidable-equality-Subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) →
+  has-decidable-equality (decidable-subtype l2 (type-Finite-Type X))
+has-decidable-equality-Subset-Finite-Type {l1} {l2} X =
   has-decidable-equality-is-finite
-    ( is-finite-decidable-subtype-is-finite (is-finite-type-𝔽 X))
+    ( is-finite-decidable-subtype-is-finite (is-finite-type-Finite-Type X))
 ```
 
 ### Decidable subtypes of finite types are finite
@@ -143,16 +148,17 @@ is-finite-type-decidable-subtype P H =
         ( prop-Decidable-Prop (P x))
         ( is-decidable-Decidable-Prop (P x)))
 
-is-finite-type-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) →
-  is-finite (type-subset-𝔽 X P)
-is-finite-type-subset-𝔽 X P =
-  is-finite-type-decidable-subtype P (is-finite-type-𝔽 X)
+is-finite-type-subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  is-finite (type-subset-Finite-Type X P)
+is-finite-type-subset-Finite-Type X P =
+  is-finite-type-decidable-subtype P (is-finite-type-Finite-Type X)
 
-finite-type-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) → subset-𝔽 l2 X → 𝔽 (l1 ⊔ l2)
-pr1 (finite-type-subset-𝔽 X P) = type-subset-𝔽 X P
-pr2 (finite-type-subset-𝔽 X P) = is-finite-type-subset-𝔽 X P
+finite-type-subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) →
+  subset-Finite-Type l2 X → Finite-Type (l1 ⊔ l2)
+pr1 (finite-type-subset-Finite-Type X P) = type-subset-Finite-Type X P
+pr2 (finite-type-subset-Finite-Type X P) = is-finite-type-subset-Finite-Type X P
 ```
 
 ### The underlying type of a decidable subtype has decidable equality
@@ -164,34 +170,38 @@ has-decidable-equality-type-decidable-subtype-is-finite :
 has-decidable-equality-type-decidable-subtype-is-finite P H =
   has-decidable-equality-is-finite (is-finite-type-decidable-subtype P H)
 
-has-decidable-equality-type-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) →
-  has-decidable-equality (type-subset-𝔽 X P)
-has-decidable-equality-type-subset-𝔽 X P =
-  has-decidable-equality-is-finite (is-finite-type-subset-𝔽 X P)
+has-decidable-equality-type-subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  has-decidable-equality (type-subset-Finite-Type X P)
+has-decidable-equality-type-subset-Finite-Type X P =
+  has-decidable-equality-is-finite (is-finite-type-subset-Finite-Type X P)
 ```
 
 ### The underlying type of a decidable subtype of a finite type is a set
 
 ```agda
-is-set-type-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) → is-set (type-subset-𝔽 X P)
-is-set-type-subset-𝔽 X P = is-set-type-decidable-subtype P (is-set-type-𝔽 X)
+is-set-type-subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  is-set (type-subset-Finite-Type X P)
+is-set-type-subset-Finite-Type X P =
+  is-set-type-decidable-subtype P (is-set-type-Finite-Type X)
 
-set-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) → Set (l1 ⊔ l2)
-set-subset-𝔽 X P = set-decidable-subset (set-𝔽 X) P
+set-subset-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  Set (l1 ⊔ l2)
+set-subset-Finite-Type X P = set-decidable-subset (set-Finite-Type X) P
 ```
 
 ### The number of elements of a decidable subtype of a finite type is smaller than the number of elements of the ambient type
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X)
   where
 
-  number-of-elements-subset-𝔽 : ℕ
-  number-of-elements-subset-𝔽 = number-of-elements-𝔽 (finite-type-subset-𝔽 X P)
+  number-of-elements-subset-Finite-Type : ℕ
+  number-of-elements-subset-Finite-Type =
+    number-of-elements-Finite-Type (finite-type-subset-Finite-Type X P)
 ```
 
 ### A subtype `S` over a type `A` with decidable equalities such that the underlying type generated by `S` is finite is a decidable subtype
@@ -215,3 +225,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
 ## References
 
 {{#bibliography}}
+
+## See also
+
+- [Counting the elements of decidable subtypes](univalent-combinatorics.counting-decidable-subtypes.md)

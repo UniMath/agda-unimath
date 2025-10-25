@@ -20,28 +20,34 @@ open import univalent-combinatorics.image-of-maps
 
 ## Idea
 
-The quotient of a finite type by a decidable equivalence relation is again a
-finite type. In this file we set up some infrastructure for such quotients.
+The quotient of a [finite type](univalent-combinatorics.finite-types.md) by a
+[decidable equivalence relation](foundation.decidable-equivalence-relations.md)
+is again a finite type. In this file we set up some infrastructure for such
+quotients.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-equivalence-relation-𝔽 l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (R : type-Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
-  equivalence-class-Decidable-equivalence-relation-𝔽 : UU (l1 ⊔ lsuc l2)
-  equivalence-class-Decidable-equivalence-relation-𝔽 =
-    im (decidable-relation-Decidable-equivalence-relation-𝔽 X R)
+  equivalence-class-Decidable-Equivalence-Relation-Finite-Type :
+    UU (l1 ⊔ lsuc l2)
+  equivalence-class-Decidable-Equivalence-Relation-Finite-Type =
+    im (decidable-relation-Decidable-Equivalence-Relation-Finite-Type X R)
 
-  is-finite-equivalence-class-Decidable-equivalence-relation-𝔽' :
-    is-finite equivalence-class-Decidable-equivalence-relation-𝔽
-  is-finite-equivalence-class-Decidable-equivalence-relation-𝔽' =
+  is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type' :
+    is-finite equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type' =
     is-finite-im
-      ( is-finite-type-𝔽 X)
-      ( has-decidable-equality-Subset-𝔽 X)
+      ( is-finite-type-Finite-Type X)
+      ( has-decidable-equality-Subset-Finite-Type X)
 
-  quotient-𝔽 : 𝔽 (l1 ⊔ lsuc l2)
-  pr1 quotient-𝔽 = equivalence-class-Decidable-equivalence-relation-𝔽
-  pr2 quotient-𝔽 = is-finite-equivalence-class-Decidable-equivalence-relation-𝔽'
+  quotient-Finite-Type : Finite-Type (l1 ⊔ lsuc l2)
+  pr1 quotient-Finite-Type =
+    equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  pr2 quotient-Finite-Type =
+    is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type'
 ```

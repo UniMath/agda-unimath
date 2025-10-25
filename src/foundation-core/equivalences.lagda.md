@@ -420,7 +420,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
-  abstract
+  opaque
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
     pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
@@ -718,7 +718,7 @@ underlying map.
 Even if a proof by equivalence reasoning is clear to the human reader,
 constructing equivalences by hand by constructing maps back and forth and two
 homotopies witnessing that they are mutual inverses is often the most
-straigtforward solution that gives the best expected computational behavior of
+straightforward solution that gives the best expected computational behavior of
 the constructed equivalence. In particular, if the underlying map or its inverse
 are noteworthy maps, it is good practice to define them directly rather than as
 underlying maps of equivalences constructed by equivalence reasoning.

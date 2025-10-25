@@ -13,21 +13,19 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation-stable-propositions
 open import foundation.evaluation-functions
 open import foundation.full-subtypes
 open import foundation.involutions
-open import foundation.negation
-open import foundation.postcomposition-functions
-open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.subtypes
-
-open import logic.double-negation-stable-subtypes
 ```
 
 </details>
@@ -44,9 +42,20 @@ the elements that are not in `B`.
 ### Complements of decidable subtypes
 
 ```agda
-complement-decidable-subtype :
-  {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → decidable-subtype l2 A
-complement-decidable-subtype P x = neg-Decidable-Prop (P x)
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  complement-decidable-subtype : decidable-subtype l2 A
+  complement-decidable-subtype x = neg-Decidable-Prop (P x)
+
+  type-complement-decidable-subtype : UU (l1 ⊔ l2)
+  type-complement-decidable-subtype =
+    type-decidable-subtype complement-decidable-subtype
+
+  is-in-complement-decidable-subtype : A → UU l2
+  is-in-complement-decidable-subtype =
+    is-in-decidable-subtype complement-decidable-subtype
 ```
 
 ## Properties
@@ -97,4 +106,29 @@ module _
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
       ( is-decidable-decidable-subtype P)
+```
+
+### The coproduct decomposition associated to a decidable subtype
+
+Every decidable subtype `P ⊆ A` decomposes `A` into a coproduct `A ≃ (P + A∖P)`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  equiv-coproduct-decomposition-decidable-subtype :
+    A ≃ type-decidable-subtype P + type-complement-decidable-subtype P
+  equiv-coproduct-decomposition-decidable-subtype =
+    equivalence-reasoning
+      A
+      ≃ Σ A (λ x → is-decidable (is-in-decidable-subtype P x))
+        by
+        inv-right-unit-law-Σ-is-contr
+          ( λ x →
+            is-proof-irrelevant-is-prop
+              ( is-prop-is-decidable (is-prop-is-in-decidable-subtype P x))
+              ( is-decidable-decidable-subtype P x))
+      ≃ type-decidable-subtype P + type-complement-decidable-subtype P
+        by left-distributive-Σ-coproduct
 ```

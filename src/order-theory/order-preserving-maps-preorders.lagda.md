@@ -28,21 +28,24 @@ open import order-theory.preorders
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two preorders is said to be
-**order preserving** if `x ≤ y` in `P` implies `f x ≤ f y` in `Q`.
+A map `f : P → Q` between the underlying types of two
+[preorders](order-theory.preorders.md) is said to be an
+{{#concept "order preserving map" Disambiguation="preorder" Agda=hom-Preorder}}
+if for any two elements `x ≤ y` in `P` we have `f x ≤ f y` in `Q`.
 
 ## Definition
 
-### Order preserving maps
+### The predicate of being an order preserving map
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  (f : type-Preorder P → type-Preorder Q)
   where
 
   preserves-order-prop-Preorder :
-    (type-Preorder P → type-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-prop-Preorder f =
+    Prop (l1 ⊔ l2 ⊔ l4)
+  preserves-order-prop-Preorder =
     Π-Prop
       ( type-Preorder P)
       ( λ x →
@@ -54,26 +57,37 @@ module _
               ( leq-prop-Preorder Q (f x) (f y))))
 
   preserves-order-Preorder :
-    (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)
-  preserves-order-Preorder f =
-    type-Prop (preserves-order-prop-Preorder f)
+    UU (l1 ⊔ l2 ⊔ l4)
+  preserves-order-Preorder =
+    type-Prop preserves-order-prop-Preorder
 
   is-prop-preserves-order-Preorder :
-    (f : type-Preorder P → type-Preorder Q) →
-    is-prop (preserves-order-Preorder f)
-  is-prop-preserves-order-Preorder f =
-    is-prop-type-Prop (preserves-order-prop-Preorder f)
+    is-prop preserves-order-Preorder
+  is-prop-preserves-order-Preorder =
+    is-prop-type-Prop preserves-order-prop-Preorder
+```
 
-  hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+### The type of order preserving maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  where
+
+  hom-Preorder :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Preorder =
-    Σ (type-Preorder P → type-Preorder Q) preserves-order-Preorder
+    Σ (type-Preorder P → type-Preorder Q) (preserves-order-Preorder P Q)
 
-  map-hom-Preorder : hom-Preorder → type-Preorder P → type-Preorder Q
-  map-hom-Preorder = pr1
+  map-hom-Preorder :
+    hom-Preorder → type-Preorder P → type-Preorder Q
+  map-hom-Preorder =
+    pr1
 
-  preserves-order-map-hom-Preorder :
-    (f : hom-Preorder) → preserves-order-Preorder (map-hom-Preorder f)
-  preserves-order-map-hom-Preorder = pr2
+  preserves-order-hom-Preorder :
+    (f : hom-Preorder) → preserves-order-Preorder P Q (map-hom-Preorder f)
+  preserves-order-hom-Preorder =
+    pr2
 ```
 
 ### Homotopies of order preserving maps
@@ -90,7 +104,7 @@ module _
   refl-htpy-hom-Preorder f = refl-htpy
 
   htpy-eq-hom-Preorder :
-    (f g : hom-Preorder P Q) → Id f g → htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → f ＝ g → htpy-hom-Preorder f g
   htpy-eq-hom-Preorder f .f refl = refl-htpy-hom-Preorder f
 
   is-torsorial-htpy-hom-Preorder :
@@ -101,7 +115,7 @@ module _
       ( is-prop-preserves-order-Preorder P Q)
       ( map-hom-Preorder P Q f)
       ( refl-htpy)
-      ( preserves-order-map-hom-Preorder P Q f)
+      ( preserves-order-hom-Preorder P Q f)
 
   is-equiv-htpy-eq-hom-Preorder :
     (f g : hom-Preorder P Q) → is-equiv (htpy-eq-hom-Preorder f g)
@@ -111,12 +125,12 @@ module _
       ( htpy-eq-hom-Preorder f)
 
   extensionality-hom-Preorder :
-    (f g : hom-Preorder P Q) → Id f g ≃ htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → (f ＝ g) ≃ htpy-hom-Preorder f g
   pr1 (extensionality-hom-Preorder f g) = htpy-eq-hom-Preorder f g
   pr2 (extensionality-hom-Preorder f g) = is-equiv-htpy-eq-hom-Preorder f g
 
   eq-htpy-hom-Preorder :
-    (f g : hom-Preorder P Q) → htpy-hom-Preorder f g → Id f g
+    (f g : hom-Preorder P Q) → htpy-hom-Preorder f g → f ＝ g
   eq-htpy-hom-Preorder f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Preorder f g)
 ```
@@ -150,10 +164,10 @@ module _
     preserves-order-Preorder P R
       ( map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f)
   preserves-order-comp-Preorder g f x y H =
-    preserves-order-map-hom-Preorder Q R g
+    preserves-order-hom-Preorder Q R g
       ( map-hom-Preorder P Q f x)
       ( map-hom-Preorder P Q f y)
-      ( preserves-order-map-hom-Preorder P Q f x y H)
+      ( preserves-order-hom-Preorder P Q f x y H)
 
   comp-hom-Preorder :
     (g : hom-Preorder Q R) (f : hom-Preorder P Q) →
@@ -173,7 +187,7 @@ module _
 
   left-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
+    comp-hom-Preorder P Q Q (id-hom-Preorder Q) f ＝ f
   left-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f)
@@ -182,7 +196,7 @@ module _
 
   right-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id (comp-hom-Preorder P P Q f (id-hom-Preorder P)) f
+    comp-hom-Preorder P P Q f (id-hom-Preorder P) ＝ f
   right-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P P Q f (id-hom-Preorder P))

@@ -40,7 +40,7 @@ Fin-falling-factorial-ℕ :
   (n m : ℕ) → Fin (falling-factorial-ℕ n m) ≃ (Fin m ↪ Fin n)
 Fin-falling-factorial-ℕ zero-ℕ zero-ℕ =
   equiv-is-contr
-    ( is-contr-Fin-one-ℕ)
+    ( is-contr-Fin-1)
     ( is-contr-equiv
       ( is-emb id)
       ( left-unit-law-Σ-is-contr
@@ -52,7 +52,7 @@ Fin-falling-factorial-ℕ zero-ℕ (succ-ℕ m) =
   equiv-is-empty id (λ f → map-emb f (inr star))
 Fin-falling-factorial-ℕ (succ-ℕ n) zero-ℕ =
   equiv-is-contr
-    ( is-contr-Fin-one-ℕ)
+    ( is-contr-Fin-1)
     ( is-contr-equiv
       ( is-emb ex-falso)
       ( left-unit-law-Σ-is-contr
@@ -70,15 +70,11 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
             ( is-decidable-Σ-Fin
               ( λ x →
                 has-decidable-equality-Fin (map-emb f x) (inr star))))) ∘e
-      ( ( inv-equiv
-          ( left-distributive-Σ-coproduct
-            ( Fin (succ-ℕ m) ↪ Fin (succ-ℕ n))
-            ( λ f → fiber (map-emb f) (inr star))
-            ( λ f → ¬ (fiber (map-emb f) (inr star))))) ∘e
+      ( ( inv-left-distributive-Σ-coproduct) ∘e
         {!!})) ∘e
     ( equiv-coproduct
       ( Fin-falling-factorial-ℕ n m)
       ( Fin-falling-factorial-ℕ n (succ-ℕ m)))) ∘e
-  ( Fin-add-ℕ (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))
+  ( inv-compute-coproduct-Fin (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))
 -}
 ```

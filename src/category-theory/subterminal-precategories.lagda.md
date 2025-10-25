@@ -12,7 +12,6 @@ open import category-theory.fully-faithful-functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
-open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 open import category-theory.terminal-category
 

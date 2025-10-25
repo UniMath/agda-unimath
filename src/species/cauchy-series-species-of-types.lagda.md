@@ -22,24 +22,28 @@ open import species.species-of-types
 
 ## Idea
 
-In classical mathematics, the Cauchy series of a species (of finite types) `S`
-is the formal series in `x` :
+In classical mathematics, the _Cauchy series_ of a
+[species](species.species-of-finite-types.md) (of
+[finite types](univalent-combinatorics.finite-types.md)) `S` is the formal
+series in `x`:
 
 ```text
-Σ (n : ℕ) (|S({1,...,n}| x^n / n!))
+  Σ (n : ℕ) (|S({1,...,n})| x^n / n!)
 ```
 
-The categorified version of this series is :
+The categorified version of this series is:
 
 ```text
-  Σ (F : 𝔽), S(F) × (F → X)
+  Σ (F : Finite-Type), S(F) × (F → X).
 ```
 
-Remarks that we can generalized this to species of types with the following
-definition :
+Hence, we can generalize to
+{{#concept "Cauchy series" Disambiguation="of species of types" Agda=cauchy-series-species-types}}
+of any [species of types](species.species-of-types.md) `S` with the following
+definition:
 
 ```text
-  Σ (U : UU), S(U) × (U → X)
+  Σ (U : UU), S(U) × (U → X).
 ```
 
 ## Definition
@@ -66,7 +70,7 @@ module _
   equiv-cauchy-series-equiv-species-types :
     cauchy-series-species-types S X ≃ cauchy-series-species-types T X
   equiv-cauchy-series-equiv-species-types =
-    equiv-tot λ X → equiv-product (f X) id-equiv
+    equiv-tot (λ X → equiv-product-left (f X))
 ```
 
 ### Cauchy series of types are equivalence invariant
@@ -75,13 +79,12 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (S : species-types l1 l2)
-  (X : UU l3)
-  (Y : UU l4)
+  {X : UU l3} {Y : UU l4}
   (e : X ≃ Y)
   where
 
   equiv-cauchy-series-species-types :
     cauchy-series-species-types S X ≃ cauchy-series-species-types S Y
   equiv-cauchy-series-species-types =
-    equiv-tot (λ F → equiv-product id-equiv (equiv-postcomp F e))
+    equiv-tot (λ F → equiv-product-right (equiv-postcomp F e))
 ```

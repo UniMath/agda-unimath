@@ -121,7 +121,7 @@ id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equi
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1}
+  {l1 l2 l3 : Level} {A : UU l1}
   where
 
   equiv-htpy-map-Π-fam-equiv :
@@ -133,35 +133,32 @@ module _
       ( λ a → equiv-ap (e a) (f a) (g a))
 ```
 
-### Truncated families of maps induce truncated maps on dependent function types
+### Families of truncated maps induce truncated maps on dependent function types
 
 ```agda
-abstract
-  is-trunc-map-map-Π :
-    (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    (f : (i : I) → A i → B i) →
-    ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
-  is-trunc-map-map-Π k {I = I} f H h =
-    is-trunc-equiv' k
-      ( (i : I) → fiber (f i) (h i))
-      ( compute-fiber-map-Π f h)
-      ( is-trunc-Π k (λ i → H i (h i)))
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
 
-abstract
-  is-emb-map-Π :
-    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    {f : (i : I) → A i → B i} →
-    ((i : I) → is-emb (f i)) → is-emb (map-Π f)
-  is-emb-map-Π {f = f} H =
-    is-emb-is-prop-map
-      ( is-trunc-map-map-Π neg-one-𝕋 f
-        ( λ i → is-prop-map-is-emb (H i)))
+  abstract
+    is-trunc-map-map-Π :
+      (k : 𝕋) (f : (i : I) → A i → B i) →
+      ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
+    is-trunc-map-map-Π k f H h =
+      is-trunc-equiv' k
+        ( (i : I) → fiber (f i) (h i))
+        ( compute-fiber-map-Π f h)
+        ( is-trunc-Π k (λ i → H i (h i)))
 
-emb-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
-  ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
-pr1 (emb-Π f) = map-Π (λ i → map-emb (f i))
-pr2 (emb-Π f) = is-emb-map-Π (λ i → is-emb-map-emb (f i))
+  abstract
+    is-emb-map-Π :
+      {f : (i : I) → A i → B i} → ((i : I) → is-emb (f i)) → is-emb (map-Π f)
+    is-emb-map-Π {f} H =
+      is-emb-is-prop-map
+        ( is-trunc-map-map-Π neg-one-𝕋 f (λ i → is-prop-map-is-emb (H i)))
+
+  emb-Π : ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
+  emb-Π f = (map-Π (map-emb ∘ f) , is-emb-map-Π (is-emb-map-emb ∘ f))
 ```
 
 ### A family of truncated maps over any map induces a truncated map on dependent function types

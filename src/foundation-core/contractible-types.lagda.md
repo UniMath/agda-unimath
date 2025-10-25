@@ -92,8 +92,8 @@ module _
       is-contr-retract-of B (f , retraction-is-equiv is-equiv-f)
 
   abstract
-    is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
-    is-contr-equiv (pair e is-equiv-e) is-contr-B =
+    is-contr-equiv : A ≃ B → is-contr B → is-contr A
+    is-contr-equiv (e , is-equiv-e) is-contr-B =
       is-contr-is-equiv e is-equiv-e is-contr-B
 
 module _
@@ -131,24 +131,6 @@ module _
   pr1 (equiv-is-contr is-contr-A is-contr-B) a = center is-contr-B
   pr2 (equiv-is-contr is-contr-A is-contr-B) =
     is-equiv-is-contr _ is-contr-A is-contr-B
-```
-
-### Contractibility of the base of a contractible dependent sum
-
-Given a type `A` and a type family over it `B`, then if the dependent sum
-`Σ A B` is contractible, it follows that if there is a section `(x : A) → B x`
-then `A` is contractible.
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
-  where
-
-  abstract
-    is-contr-base-is-contr-Σ' :
-      ((x : A) → B x) → is-contr (Σ A B) → is-contr A
-    is-contr-base-is-contr-Σ' s =
-      is-contr-retract-of (Σ A B) ((λ a → a , s a) , pr1 , refl-htpy)
 ```
 
 ### Contractibility of cartesian product types
@@ -247,6 +229,24 @@ element (as it inevitably will do sometimes) then in such cases it will not just
 normalize the extracted information (in this case the first projection of the
 proof of contractibility), but it will normalize the entire proof of
 contractibility first, and then apply the projection.
+
+### Contractibility of the base of a contractible dependent sum
+
+Given a type `A` and a type family over it `B`, then if the dependent sum
+`Σ A B` is contractible and there is a section `(x : A) → B x`, then `A` is
+contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    is-contr-base-is-contr-Σ' :
+      ((x : A) → B x) → is-contr (Σ A B) → is-contr A
+    is-contr-base-is-contr-Σ' s =
+      is-contr-retract-of (Σ A B) ((λ a → a , s a) , pr1 , refl-htpy)
+```
 
 ### Contractible types are propositions
 

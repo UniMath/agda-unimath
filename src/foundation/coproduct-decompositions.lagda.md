@@ -244,9 +244,9 @@ module _
       (X ≃ ((fiber f (inl (inr star))) + (fiber f (inr star))))
     matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
       ( ( equiv-coproduct
-          ( left-unit-law-Σ-is-contr ( is-contr-Fin-one-ℕ) ( inr star))
+          ( left-unit-law-Σ-is-contr ( is-contr-Fin-1) ( inr star))
           ( left-unit-law-Σ-is-contr is-contr-unit star)) ∘e
-        ( ( right-distributive-Σ-coproduct ( Fin 1) unit (λ x → fiber f x) ∘e
+        ( ( right-distributive-Σ-coproduct (λ x → fiber f x) ∘e
             ( inv-equiv-total-fiber f))))
 
     compute-left-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
@@ -268,12 +268,10 @@ module _
                 inl y ＝
                 ( map-coproduct
                   ( map-left-unit-law-Σ-is-contr
-                    ( is-contr-Fin-one-ℕ)
+                    ( is-contr-Fin-1)
                     ( inr star))
                   ( map-left-unit-law-Σ-is-contr is-contr-unit star))
                 ( map-right-distributive-Σ-coproduct
-                  ( Fin 1)
-                  ( unit)
                   ( λ x → fiber f x)
                   ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
@@ -283,7 +281,7 @@ module _
               ( inl)
               ( inv
                 ( map-inv-eq-transpose-equiv
-                  ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (inr star))
+                  ( left-unit-law-Σ-is-contr is-contr-Fin-1 (inr star))
                   ( refl))))) ,
           refl)
 
@@ -331,12 +329,10 @@ module _
                   inr y ＝
                   ( map-coproduct
                     ( map-left-unit-law-Σ-is-contr
-                      ( is-contr-Fin-one-ℕ)
+                      ( is-contr-Fin-1)
                       ( inr star))
                     ( map-left-unit-law-Σ-is-contr is-contr-unit star))
                   ( map-right-distributive-Σ-coproduct
-                    ( Fin 1)
-                    ( unit)
                     ( λ x → fiber f x)
                     ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
@@ -516,11 +512,9 @@ module _
           ( f)
           ( x)
           ( map-coproduct
-            ( map-left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ ( inr star))
+            ( map-left-unit-law-Σ-is-contr is-contr-Fin-1 ( inr star))
             ( map-left-unit-law-Σ-is-contr is-contr-unit star)
             ( map-right-distributive-Σ-coproduct
-              ( Fin 1)
-              ( unit)
               ( λ y → y ＝ f x)
               ( f x , refl))))
 
@@ -543,8 +537,6 @@ module _
             equiv-tot
               ( λ _ → extensionality-Fin 2 (inr star) (inl (inr star))))) ∘e
         ( ( right-distributive-Σ-coproduct
-            ( left-summand-binary-coproduct-Decomposition d)
-            ( right-summand-binary-coproduct-Decomposition d)
             ( λ y →
               map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
                 d y ＝ inl (inr star))) ∘e
@@ -573,8 +565,6 @@ module _
             equiv-tot
               ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
         ( ( right-distributive-Σ-coproduct
-            ( left-summand-binary-coproduct-Decomposition d)
-            ( right-summand-binary-coproduct-Decomposition d)
             ( λ y →
               map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
                 d y ＝ inr star)) ∘e
@@ -612,8 +602,6 @@ module _
                       ( λ _ →
                         extensionality-Fin 2 (inr star) (inl (inr star))))) ∘e
                 ( ( right-distributive-Σ-coproduct
-                    ( left-summand-binary-coproduct-Decomposition d)
-                    ( right-summand-binary-coproduct-Decomposition d)
                     ( λ y →
                       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
                         d y ＝
@@ -667,8 +655,6 @@ module _
                     equiv-tot
                       ( λ _ → extensionality-Fin 2 (inr star) (inr star)))) ∘e
                 ( ( right-distributive-Σ-coproduct
-                    ( left-summand-binary-coproduct-Decomposition d)
-                    ( right-summand-binary-coproduct-Decomposition d)
                     ( λ y →
                       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ-helper
                         d y ＝ inr star)))))
@@ -813,7 +799,7 @@ module _
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper :
     (y : Fin 2) → (inl (inr star) ＝ y) + (inr star ＝ y)
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper (inl x) =
-    inl (ap inl (eq-is-contr is-contr-Fin-one-ℕ))
+    inl (ap inl (eq-is-contr is-contr-Fin-1))
   value-map-into-Fin-Two-ℕ-eq-zero-or-one-helper (inr x) =
     inr (ap inr (eq-is-contr is-contr-unit))
 

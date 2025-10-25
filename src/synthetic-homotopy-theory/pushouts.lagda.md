@@ -33,6 +33,7 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
+open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -133,7 +134,7 @@ We postulate the constituents of a section of
 cocones. This is, assuming
 [function extensionality](foundation.function-extensionality.md), precisely the
 data of the induction principle of pushouts. We write out each component
-separately to accomodate
+separately to accommodate
 [optional rewrite rules for the standard pushouts](synthetic-homotopy-theory.rewriting-pushouts.md).
 
 ```agda
@@ -266,7 +267,7 @@ module _
 ### The cogap map
 
 We define `cogap` and its computation rules in terms of `dependent-cogap` to
-ensure the proper computational behaviour when in the presence of strict
+ensure the proper computational behavior when in the presence of strict
 computation laws on the point constructors of the standard pushouts.
 
 ```agda
@@ -470,6 +471,29 @@ module _
         ( up-pushout f g)
         ( c))
       ( up-pushout f g)
+```
+
+### Pushout cocones satisfy the pullback property of the pushout
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  abstract
+    pullback-property-pushout-is-pushout :
+      is-pushout f g c → pullback-property-pushout f g c
+    pullback-property-pushout-is-pushout po =
+      pullback-property-pushout-universal-property-pushout f g c
+        ( universal-property-pushout-is-pushout f g c po)
+
+  abstract
+    is-pushout-pullback-property-pushout :
+      pullback-property-pushout f g c → is-pushout f g c
+    is-pushout-pullback-property-pushout pb =
+      is-pushout-universal-property-pushout f g c
+        ( universal-property-pushout-pullback-property-pushout f g c pb)
 ```
 
 ### Fibers of the cogap map

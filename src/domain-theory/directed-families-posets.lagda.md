@@ -138,11 +138,11 @@ module _
         ( exists-structure-Prop type-directed-family-hom-Poset _)
         ( λ z y →
           intro-exists z
-            ( preserves-order-map-hom-Poset P Q f
+            ( preserves-order-hom-Poset P Q f
                 ( family-directed-family-Poset P x u)
                 ( family-directed-family-Poset P x z)
                 ( pr1 y) ,
-              preserves-order-map-hom-Poset P Q f
+              preserves-order-hom-Poset P Q f
                 ( family-directed-family-Poset P x v)
                 ( family-directed-family-Poset P x z)
                 ( pr2 y)))

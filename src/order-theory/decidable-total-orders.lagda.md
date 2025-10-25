@@ -7,19 +7,33 @@ module order-theory.decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
+open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.decidable-posets
 open import order-theory.decidable-total-preorders
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.join-semilattices
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-posets
+open import order-theory.subposets
 open import order-theory.total-orders
 ```
 
@@ -65,6 +79,11 @@ module _
   is-total-poset-Decidable-Total-Order :
     is-total-Poset (poset-Decidable-Total-Order)
   is-total-poset-Decidable-Total-Order = pr1 (pr2 P)
+
+  total-order-Decidable-Total-Order : Total-Order l1 l2
+  total-order-Decidable-Total-Order =
+    ( poset-Decidable-Total-Order ,
+      is-total-poset-Decidable-Total-Order)
 
   is-decidable-poset-Decidable-Total-Order :
     is-decidable-leq-Poset (poset-Decidable-Total-Order)
@@ -160,7 +179,7 @@ module _
 
   antisymmetric-leq-Decidable-Total-Order :
     (x y : type-Decidable-Total-Order) →
-    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → Id x y
+    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order y x → x ＝ y
   antisymmetric-leq-Decidable-Total-Order =
     antisymmetric-leq-Poset poset-Decidable-Total-Order
 
@@ -180,4 +199,456 @@ module _
 
   set-Decidable-Total-Order : Set l1
   set-Decidable-Total-Order = set-Poset poset-Decidable-Total-Order
+```
+
+## Properties
+
+### Decidable total orders have decidable equality
+
+**Proof.** By antisymmetry, equality `x ＝ y` in a decidable total order is
+characterized by smiliarity, `(x ≤ y) × (y ≤ x)`, and this is a decidable type.
+∎
+
+```agda
+module _
+  {l1 l2 : Level} (P : Decidable-Total-Order l1 l2)
+  where
+
+  is-decidable-sim-Decidable-Total-Order :
+    {x y : type-Decidable-Total-Order P} →
+    is-decidable (sim-Poset (poset-Decidable-Total-Order P) x y)
+  is-decidable-sim-Decidable-Total-Order =
+    is-decidable-sim-Decidable-Poset (decidable-poset-Decidable-Total-Order P)
+
+  has-decidable-equality-type-Decidable-Total-Order :
+    has-decidable-equality (type-Decidable-Total-Order P)
+  has-decidable-equality-type-Decidable-Total-Order =
+    has-decidable-equality-type-Decidable-Poset
+      ( decidable-poset-Decidable-Total-Order P)
+
+  discrete-type-Decidable-Total-Order : Discrete-Type l1
+  discrete-type-Decidable-Total-Order =
+    discrete-type-Decidable-Poset (decidable-poset-Decidable-Total-Order P)
+```
+
+### Any two elements in a decidable total order have a minimum and maximum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  min-Decidable-Total-Order :
+    type-Decidable-Total-Order T → type-Decidable-Total-Order T →
+    type-Decidable-Total-Order T
+  min-Decidable-Total-Order =
+    min-Total-Order (total-order-Decidable-Total-Order T)
+
+  max-Decidable-Total-Order :
+    type-Decidable-Total-Order T → type-Decidable-Total-Order T →
+    type-Decidable-Total-Order T
+  max-Decidable-Total-Order =
+    max-Total-Order (total-order-Decidable-Total-Order T)
+```
+
+### The binary minimum is the binary greatest lower bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  min-is-greatest-binary-lower-bound-Decidable-Total-Order :
+    is-greatest-binary-lower-bound-Poset
+      ( poset-Decidable-Total-Order T)
+      ( x)
+      ( y)
+      ( min-Decidable-Total-Order T x y)
+  min-is-greatest-binary-lower-bound-Decidable-Total-Order =
+    min-is-greatest-binary-lower-bound-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+
+  has-greatest-binary-lower-bound-Decidable-Total-Order :
+    has-greatest-binary-lower-bound-Poset (poset-Decidable-Total-Order T) x y
+  has-greatest-binary-lower-bound-Decidable-Total-Order =
+    has-greatest-binary-lower-bound-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+```
+
+### The minimum of two values is a lower bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  leq-left-min-Decidable-Total-Order :
+    leq-Decidable-Total-Order T (min-Decidable-Total-Order T x y) x
+  leq-left-min-Decidable-Total-Order =
+    leq-left-min-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+
+  leq-right-min-Decidable-Total-Order :
+    leq-Decidable-Total-Order T (min-Decidable-Total-Order T x y) y
+  leq-right-min-Decidable-Total-Order =
+    leq-right-min-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+```
+
+### The maximum of two values is their least upper bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  max-is-least-binary-upper-bound-Decidable-Total-Order :
+    is-least-binary-upper-bound-Poset
+      ( poset-Decidable-Total-Order T)
+      ( x)
+      ( y)
+      ( max-Decidable-Total-Order T x y)
+  max-is-least-binary-upper-bound-Decidable-Total-Order =
+    max-is-least-binary-upper-bound-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+
+  has-least-binary-upper-bound-Decidable-Total-Order :
+    has-least-binary-upper-bound-Poset (poset-Decidable-Total-Order T) x y
+  pr1 has-least-binary-upper-bound-Decidable-Total-Order =
+    max-Decidable-Total-Order T x y
+  pr2 has-least-binary-upper-bound-Decidable-Total-Order =
+    max-is-least-binary-upper-bound-Decidable-Total-Order
+```
+
+### The maximum of two values is an upper bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  leq-left-max-Decidable-Total-Order :
+    leq-Decidable-Total-Order T x (max-Decidable-Total-Order T x y)
+  leq-left-max-Decidable-Total-Order =
+    leq-left-max-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+
+  leq-right-max-Decidable-Total-Order :
+    leq-Decidable-Total-Order T y (max-Decidable-Total-Order T x y)
+  leq-right-max-Decidable-Total-Order =
+    leq-right-max-Total-Order
+      ( total-order-Decidable-Total-Order T)
+      ( x)
+      ( y)
+```
+
+### The minimum of two values is less than or equal to their maximum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
+
+  abstract
+    min-leq-max-Decidable-Total-Order :
+      leq-Decidable-Total-Order T
+        ( min-Decidable-Total-Order T x y)
+        ( max-Decidable-Total-Order T x y)
+    min-leq-max-Decidable-Total-Order =
+      min-leq-max-Total-Order (total-order-Decidable-Total-Order T) x y
+```
+
+### Decidable total orders are meet semilattices
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  is-meet-semilattice-Decidable-Total-Order :
+    is-meet-semilattice-Poset (poset-Decidable-Total-Order T)
+  is-meet-semilattice-Decidable-Total-Order =
+    is-meet-semilattice-Total-Order
+      ( total-order-Decidable-Total-Order T)
+
+  order-theoretic-meet-semilattice-Decidable-Total-Order :
+    Order-Theoretic-Meet-Semilattice l1 l2
+  order-theoretic-meet-semilattice-Decidable-Total-Order =
+    order-theoretic-meet-semilattice-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### Decidable total orders are join semilattices
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  is-join-semilattice-Decidable-Total-Order :
+    is-join-semilattice-Poset (poset-Decidable-Total-Order T)
+  is-join-semilattice-Decidable-Total-Order =
+    is-join-semilattice-Total-Order
+      ( total-order-Decidable-Total-Order T)
+
+  order-theoretic-join-semilattice-Decidable-Total-Order :
+    Order-Theoretic-Join-Semilattice l1 l2
+  order-theoretic-join-semilattice-Decidable-Total-Order =
+    order-theoretic-join-semilattice-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary minimum operation is associative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  associative-min-Decidable-Total-Order :
+    (x y z : type-Decidable-Total-Order T) →
+    min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z ＝
+    min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+  associative-min-Decidable-Total-Order =
+    associative-min-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary maximum operation is associative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  associative-max-Decidable-Total-Order :
+    (x y z : type-Decidable-Total-Order T) →
+    max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z ＝
+    max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+  associative-max-Decidable-Total-Order =
+    associative-max-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary minimum operation is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  commutative-min-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    min-Decidable-Total-Order T x y ＝ min-Decidable-Total-Order T y x
+  commutative-min-Decidable-Total-Order =
+    commutative-min-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary maximum operation is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  commutative-max-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    max-Decidable-Total-Order T x y ＝ max-Decidable-Total-Order T y x
+  commutative-max-Decidable-Total-Order =
+    commutative-max-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary minimum operation is idempotent
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  idempotent-min-Decidable-Total-Order :
+    (x : type-Decidable-Total-Order T) →
+    min-Decidable-Total-Order T x x ＝ x
+  idempotent-min-Decidable-Total-Order =
+    idempotent-min-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### The binary maximum operation is idempotent
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  idempotent-max-Decidable-Total-Order :
+    (x : type-Decidable-Total-Order T) →
+    max-Decidable-Total-Order T x x ＝ x
+  idempotent-max-Decidable-Total-Order =
+    idempotent-max-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### If `x` is less than or equal to `y`, the minimum of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  left-leq-right-min-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T x y → min-Decidable-Total-Order T x y ＝ x
+  left-leq-right-min-Decidable-Total-Order =
+    left-leq-right-min-Total-Order (total-order-Decidable-Total-Order T)
+```
+
+### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  right-leq-left-min-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T y x → min-Decidable-Total-Order T x y ＝ y
+  right-leq-left-min-Decidable-Total-Order =
+    right-leq-left-min-Total-Order (total-order-Decidable-Total-Order T)
+```
+
+### If `x` is less than or equal to `y`, the maximum of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  left-leq-right-max-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T x y → max-Decidable-Total-Order T x y ＝ y
+  left-leq-right-max-Decidable-Total-Order =
+    left-leq-right-max-Total-Order (total-order-Decidable-Total-Order T)
+```
+
+### If `y` is less than or equal to `x`, the maximum of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  where
+
+  right-leq-left-max-Decidable-Total-Order :
+    (x y : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T y x → max-Decidable-Total-Order T x y ＝ x
+  right-leq-left-max-Decidable-Total-Order =
+    right-leq-left-max-Total-Order (total-order-Decidable-Total-Order T)
+```
+
+### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`
+
+```agda
+  min-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( min-Decidable-Total-Order T a c)
+      ( min-Decidable-Total-Order T b d)
+  min-leq-leq-Decidable-Total-Order =
+    min-leq-leq-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
+
+```agda
+  max-leq-leq-Decidable-Total-Order :
+    (a b c d : type-Decidable-Total-Order T) →
+    leq-Decidable-Total-Order T a b → leq-Decidable-Total-Order T c d →
+    leq-Decidable-Total-Order
+      ( T)
+      ( max-Decidable-Total-Order T a c)
+      ( max-Decidable-Total-Order T b d)
+  max-leq-leq-Decidable-Total-Order =
+    max-leq-leq-Total-Order
+      ( total-order-Decidable-Total-Order T)
+```
+
+### Subsets of decidable total orders are decidable total orders
+
+```agda
+Decidable-Total-Suborder :
+  {l1 l2 : Level} (l3 : Level) →
+  Decidable-Total-Order l1 l2 →
+  UU (l1 ⊔ lsuc l3)
+Decidable-Total-Suborder l3 T =
+  Subposet l3 (poset-Decidable-Total-Order T)
+
+module _
+  {l1 l2 l3 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (P : Decidable-Total-Suborder l3 T)
+  where
+
+  is-total-leq-Decidable-Total-Suborder :
+    is-total-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-total-leq-Decidable-Total-Suborder x y =
+    is-total-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  is-decidable-leq-Decidable-Total-Suborder :
+    is-decidable-leq-Poset
+      (poset-Subposet (poset-Decidable-Total-Order T) P)
+  is-decidable-leq-Decidable-Total-Suborder x y =
+    is-decidable-poset-Decidable-Total-Order
+      ( T)
+      ( inclusion-subtype P x)
+      ( inclusion-subtype P y)
+
+  decidable-total-order-Decidable-Total-Suborder :
+    Decidable-Total-Order (l1 ⊔ l3) l2
+  decidable-total-order-Decidable-Total-Suborder =
+    poset-Subposet (poset-Decidable-Total-Order T) P ,
+    is-total-leq-Decidable-Total-Suborder ,
+    is-decidable-leq-Decidable-Total-Suborder
 ```

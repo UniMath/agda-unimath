@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -100,7 +101,7 @@ neg-one-nonpositive-ℤ = (neg-one-ℤ , star)
 ### Nonpositivity is decidable
 
 ```agda
-is-decidable-is-nonpositive-ℤ : is-decidable-fam is-nonpositive-ℤ
+is-decidable-is-nonpositive-ℤ : is-decidable-family is-nonpositive-ℤ
 is-decidable-is-nonpositive-ℤ (inl x) = inl star
 is-decidable-is-nonpositive-ℤ (inr (inl x)) = inl star
 is-decidable-is-nonpositive-ℤ (inr (inr x)) = inr id
@@ -159,25 +160,27 @@ eq-nat-nonpositive-pred-nonpositive-ℤ :
 eq-nat-nonpositive-pred-nonpositive-ℤ (inl x , H) = refl
 eq-nat-nonpositive-pred-nonpositive-ℤ (inr (inl x) , H) = refl
 
-is-section-nat-nonpositive-ℤ :
-  (x : nonpositive-ℤ) → nonpositive-int-ℕ (nat-nonpositive-ℤ x) ＝ x
-is-section-nat-nonpositive-ℤ (inl zero-ℕ , H) = refl
-is-section-nat-nonpositive-ℤ (inl (succ-ℕ x) , H) =
-  ap pred-nonpositive-ℤ (is-section-nat-nonpositive-ℤ (inl x , H))
-is-section-nat-nonpositive-ℤ (inr (inl x) , H) = refl
+abstract
+  is-section-nat-nonpositive-ℤ :
+    (x : nonpositive-ℤ) → nonpositive-int-ℕ (nat-nonpositive-ℤ x) ＝ x
+  is-section-nat-nonpositive-ℤ (inl zero-ℕ , H) = refl
+  is-section-nat-nonpositive-ℤ (inl (succ-ℕ x) , H) =
+    ap pred-nonpositive-ℤ (is-section-nat-nonpositive-ℤ (inl x , H))
+  is-section-nat-nonpositive-ℤ (inr (inl x) , H) = refl
 
-is-retraction-nat-nonpositive-ℤ :
-  (n : ℕ) → nat-nonpositive-ℤ (nonpositive-int-ℕ n) ＝ n
-is-retraction-nat-nonpositive-ℤ zero-ℕ = refl
-is-retraction-nat-nonpositive-ℤ (succ-ℕ n) =
-  eq-nat-nonpositive-pred-nonpositive-ℤ (nonpositive-int-ℕ n) ∙
-  ap succ-ℕ (is-retraction-nat-nonpositive-ℤ n)
+  is-retraction-nat-nonpositive-ℤ :
+    (n : ℕ) → nat-nonpositive-ℤ (nonpositive-int-ℕ n) ＝ n
+  is-retraction-nat-nonpositive-ℤ zero-ℕ = refl
+  is-retraction-nat-nonpositive-ℤ (succ-ℕ n) =
+    eq-nat-nonpositive-pred-nonpositive-ℤ (nonpositive-int-ℕ n) ∙
+    ap succ-ℕ (is-retraction-nat-nonpositive-ℤ n)
 
-is-equiv-nonpositive-int-ℕ : is-equiv nonpositive-int-ℕ
-pr1 (pr1 is-equiv-nonpositive-int-ℕ) = nat-nonpositive-ℤ
-pr2 (pr1 is-equiv-nonpositive-int-ℕ) = is-section-nat-nonpositive-ℤ
-pr1 (pr2 is-equiv-nonpositive-int-ℕ) = nat-nonpositive-ℤ
-pr2 (pr2 is-equiv-nonpositive-int-ℕ) = is-retraction-nat-nonpositive-ℤ
+  is-equiv-nonpositive-int-ℕ : is-equiv nonpositive-int-ℕ
+  is-equiv-nonpositive-int-ℕ =
+    is-equiv-is-invertible
+      ( nat-nonpositive-ℤ)
+      ( is-section-nat-nonpositive-ℤ)
+      ( is-retraction-nat-nonpositive-ℤ)
 
 equiv-nonpositive-int-ℕ : ℕ ≃ nonpositive-ℤ
 pr1 equiv-nonpositive-int-ℕ = nonpositive-int-ℕ

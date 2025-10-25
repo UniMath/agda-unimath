@@ -269,7 +269,7 @@ diagram
      f     g
 ```
 
-The composite `g ∘ f` is then an extension of `c` along `a.
+The composite `g ∘ f` is then an extension of `c` along `a`.
 
 ```agda
 module _
@@ -308,4 +308,4 @@ module _
 ## See also
 
 - [Extensions of double lifts of families of elements](orthogonal-factorization-systems.extensions-double-lifts-families-of-elements.md)
-- [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
+- [Extensions of maps](orthogonal-factorization-systems.extensions-maps.md)

@@ -12,8 +12,10 @@ open import foundation-core.decidable-propositions public
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
+open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -67,6 +69,17 @@ pr1 emb-prop-Decidable-Prop = prop-Decidable-Prop
 pr2 emb-prop-Decidable-Prop = is-emb-prop-Decidable-Prop
 ```
 
+### The type of decidable propositions is equivalent to the coproduct of the type of true propositions and the type of false propositions
+
+```agda
+split-Decidable-Prop :
+  {l : Level} →
+  Decidable-Prop l ≃
+  ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
+split-Decidable-Prop {l} =
+  left-distributive-Σ-coproduct ∘e inv-associative-Σ
+```
+
 ### The type of decidable propositions in universe level `l` is equivalent to the type of booleans
 
 ```agda
@@ -74,64 +87,57 @@ module _
   {l : Level}
   where
 
-  split-Decidable-Prop :
-    Decidable-Prop l ≃
-    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
-  split-Decidable-Prop =
-    ( left-distributive-Σ-coproduct (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
-    ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+  map-equiv-bool-Decidable-Prop : Decidable-Prop l → bool
+  map-equiv-bool-Decidable-Prop P =
+    rec-coproduct (λ _ → true) (λ _ → false) (is-decidable-Decidable-Prop P)
 
-  map-equiv-bool-Decidable-Prop' :
-    (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))) →
-    bool
-  map-equiv-bool-Decidable-Prop' (inl x) = true
-  map-equiv-bool-Decidable-Prop' (inr x) = false
+  map-inv-equiv-bool-Decidable-Prop : bool → Decidable-Prop l
+  map-inv-equiv-bool-Decidable-Prop true =
+    ( raise-unit l , is-prop-raise-unit , inl raise-star)
+  map-inv-equiv-bool-Decidable-Prop false =
+    ( raise-empty l , is-prop-raise-empty , inr map-inv-raise)
 
-  map-inv-equiv-bool-Decidable-Prop' :
-    bool →
-    (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))
-  map-inv-equiv-bool-Decidable-Prop' true =
-    inl (pair (raise-unit-Prop l) raise-star)
-  map-inv-equiv-bool-Decidable-Prop' false =
-    inr (pair (raise-empty-Prop l) is-empty-raise-empty)
+  is-section-map-inv-equiv-bool-Decidable-Prop :
+    (map-equiv-bool-Decidable-Prop ∘ map-inv-equiv-bool-Decidable-Prop) ~ id
+  is-section-map-inv-equiv-bool-Decidable-Prop false = refl
+  is-section-map-inv-equiv-bool-Decidable-Prop true = refl
 
-  is-section-map-inv-equiv-bool-Decidable-Prop' :
-    (map-equiv-bool-Decidable-Prop' ∘ map-inv-equiv-bool-Decidable-Prop') ~ id
-  is-section-map-inv-equiv-bool-Decidable-Prop' true = refl
-  is-section-map-inv-equiv-bool-Decidable-Prop' false = refl
+  is-retraction-map-inv-equiv-bool-Decidable-Prop :
+    (map-inv-equiv-bool-Decidable-Prop ∘ map-equiv-bool-Decidable-Prop) ~ id
+  is-retraction-map-inv-equiv-bool-Decidable-Prop prop@(_ , _ , inl _) =
+    ap
+      ( λ ((t' , is-prop-t') , type-t') → (t' , is-prop-t' , inl type-t'))
+      ( eq-is-contr is-torsorial-true-Prop)
+  is-retraction-map-inv-equiv-bool-Decidable-Prop prop@(_ , _ , inr _) =
+    ap
+      ( λ ((t' , is-prop-t') , type-t') → (t' , is-prop-t' , inr type-t'))
+      ( eq-is-contr is-torsorial-false-Prop)
 
-  is-retraction-map-inv-equiv-bool-Decidable-Prop' :
-    (map-inv-equiv-bool-Decidable-Prop' ∘ map-equiv-bool-Decidable-Prop') ~ id
-  is-retraction-map-inv-equiv-bool-Decidable-Prop' (inl x) =
-    ap inl (eq-is-contr is-torsorial-true-Prop)
-  is-retraction-map-inv-equiv-bool-Decidable-Prop' (inr x) =
-    ap inr (eq-is-contr is-torsorial-false-Prop)
-
-  is-equiv-map-equiv-bool-Decidable-Prop' :
-    is-equiv map-equiv-bool-Decidable-Prop'
-  is-equiv-map-equiv-bool-Decidable-Prop' =
+  is-equiv-map-equiv-bool-Decidable-Prop :
+    is-equiv map-equiv-bool-Decidable-Prop
+  is-equiv-map-equiv-bool-Decidable-Prop =
     is-equiv-is-invertible
-      map-inv-equiv-bool-Decidable-Prop'
-      is-section-map-inv-equiv-bool-Decidable-Prop'
-      is-retraction-map-inv-equiv-bool-Decidable-Prop'
-
-  equiv-bool-Decidable-Prop' :
-    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))) ≃ bool
-  pr1 equiv-bool-Decidable-Prop' = map-equiv-bool-Decidable-Prop'
-  pr2 equiv-bool-Decidable-Prop' = is-equiv-map-equiv-bool-Decidable-Prop'
+      ( map-inv-equiv-bool-Decidable-Prop)
+      ( is-section-map-inv-equiv-bool-Decidable-Prop)
+      ( is-retraction-map-inv-equiv-bool-Decidable-Prop)
 
   equiv-bool-Decidable-Prop : Decidable-Prop l ≃ bool
-  equiv-bool-Decidable-Prop = equiv-bool-Decidable-Prop' ∘e split-Decidable-Prop
+  equiv-bool-Decidable-Prop =
+    ( map-equiv-bool-Decidable-Prop ,
+      is-equiv-map-equiv-bool-Decidable-Prop)
+
+  bool-Decidable-Prop : Decidable-Prop l → bool
+  bool-Decidable-Prop = map-equiv equiv-bool-Decidable-Prop
 
   abstract
     compute-equiv-bool-Decidable-Prop :
       (P : Decidable-Prop l) →
       type-Decidable-Prop P ≃ (map-equiv equiv-bool-Decidable-Prop P ＝ true)
-    compute-equiv-bool-Decidable-Prop (pair P (pair H (inl p))) =
+    compute-equiv-bool-Decidable-Prop (P , H , inl p) =
       equiv-is-contr
         ( is-proof-irrelevant-is-prop H p)
         ( is-proof-irrelevant-is-prop (is-set-bool true true) refl)
-    compute-equiv-bool-Decidable-Prop (pair P (pair H (inr np))) =
+    compute-equiv-bool-Decidable-Prop (P , H , inr np) =
       equiv-is-empty np neq-false-true-bool
 ```
 
@@ -165,6 +171,21 @@ pr2 (iff-universes-Decidable-Prop l l' P) p =
         ( compute-equiv-bool-Decidable-Prop
           ( map-equiv (equiv-universes-Decidable-Prop l l') P))
         ( p)))
+```
+
+### The type of decidable propositions in any universe is discrete
+
+```agda
+has-decidable-equality-Decidable-Prop :
+  {l : Level} → has-decidable-equality (Decidable-Prop l)
+has-decidable-equality-Decidable-Prop =
+  has-decidable-equality-equiv
+    ( equiv-bool-Decidable-Prop)
+    ( has-decidable-equality-bool)
+
+Decidable-Prop-Discrete-Type : (l : Level) → Discrete-Type (lsuc l)
+Decidable-Prop-Discrete-Type l =
+  ( Decidable-Prop l , has-decidable-equality-Decidable-Prop)
 ```
 
 ### The type of decidable propositions in any universe is a set
@@ -253,7 +274,7 @@ count-Decidable-Prop :
   {l : Level} → count (Decidable-Prop l)
 pr1 count-Decidable-Prop = 2
 pr2 count-Decidable-Prop =
-  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ
+  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-2
 
 is-finite-Decidable-Prop : {l : Level} → is-finite (Decidable-Prop l)
 is-finite-Decidable-Prop {l} = unit-trunc-Prop count-Decidable-Prop
@@ -266,9 +287,8 @@ number-of-elements-Decidable-Prop =
       ( count-Decidable-Prop)
       ( is-finite-Decidable-Prop))
 
-decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
-pr1 (decidable-Prop-𝔽 l) = Decidable-Prop l
-pr2 (decidable-Prop-𝔽 l) = is-finite-Decidable-Prop
+Decidable-Prop-Finite-Type : (l : Level) → Finite-Type (lsuc l)
+Decidable-Prop-Finite-Type l = (Decidable-Prop l , is-finite-Decidable-Prop)
 ```
 
 ### Decidable propositions are closed under retracts
@@ -311,4 +331,15 @@ abstract
     ¬ (type-Decidable-Prop P ↔ ¬ (type-Decidable-Prop P))
   no-fixed-points-neg-Decidable-Prop P =
     no-fixed-points-neg (type-Decidable-Prop P)
+```
+
+### Raising the universe level of decidable propositions
+
+```agda
+raise-Decidable-Prop :
+  {l0 : Level} → (l : Level) → Decidable-Prop l0 → Decidable-Prop (l0 ⊔ l)
+raise-Decidable-Prop l (t , is-prop-t , is-dec-t) =
+  ( raise l t ,
+    is-prop-type-Prop (raise-Prop l (t , is-prop-t)) ,
+    rec-coproduct (inl ∘ map-raise) (λ ¬t → inr (¬t ∘ map-inv-raise)) is-dec-t)
 ```

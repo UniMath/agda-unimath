@@ -8,9 +8,6 @@ on:
         required: true
         default: master
 
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -27,18 +24,22 @@ concurrency:
 
 jobs:
   typecheck:
-    runs-on: ${{ matrix.os }}
+    if:
+      ${{ github.event_name == 'workflow_dispatch' || github.event_name ==
+      'push' || (github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false) }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [macOS-13, ubuntu-latest]
-        agda: ['2.7.0']
+        agda: ['2.8.0']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v4
         with:
-          path: master
-      - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+          path: repo
+
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./repo/.github/actions/setup-agda
         with:
           agda-version: ${{ matrix.agda }}
 
@@ -46,69 +47,35 @@ jobs:
         id: cache-agda-formalization
         name: Restore Agda formalization cache
         with:
-          path: master/_build
+          path: repo/_build
           key:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('master/src/**') }}
+            hashFiles('repo/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
 
       - name: Typecheck library
         run: |
-          cd master
+          cd repo
           agda --version
           make check
 
       - name: Save Agda build cache
         uses: actions/cache/save@v4
         with:
-          path: master/_build
+          path: repo/_build
           key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
-
-      # Install Python and friends for website generation only where needed
-      - uses: actions/setup-python@v5
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        with:
-          python-version: '3.8'
-          check-latest: true
-          cache: 'pip'
-
-      - run: python3 -m pip install -r master/scripts/requirements.txt
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-
-      # We need to run the sources through Agda not only to get the highlighting
-      # (which is irrelevant for checking links), but because it flattens the
-      # directory structure to a format which is expected in the links we write.
-      # We don't need to produce this artifact for more than one configuration.
-      - name: Produce syntax highlighted markdown
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: |
-          cd master
-          make website-prepare
-
-      # The lifetime of this cache is for one CI run only, so it's indexed by
-      # the run ID. According to the docs, caches are immutable, so we can't
-      # keep the same key for a branch and update it on pushes.
-      - name: Save pre-website cache
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        uses: actions/cache/save@v4
-        with:
-          key: pre-website-${{ github.run_id }}
-          path: master/docs
 
   # We're only running the linkcheck renderer, so we don't need to install
   # any other packages; that gives a warning during building, but doesn't
   # fail the build.
   link-check:
-    needs: typecheck
-    permissions:
-      actions: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          path: master
+          path: repo
 
       - uses: peaceiris/actions-mdbook@v2
         with:
@@ -122,42 +89,19 @@ jobs:
       # Install Python and friends for website generation only where needed
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
           check-latest: true
           cache: 'pip'
 
-      - run: python3 -m pip install -r master/scripts/requirements.txt
-
-      - uses: actions/cache/restore@v4
-        with:
-          key: pre-website-${{ github.run_id }}
-          path: master/docs
+      - run: python3 -m pip install -r repo/scripts/requirements.txt
 
       # Tell mdbook to use only the linkcheck backend
       - name: Check website links and bibtex references
         env:
           MDBOOK_OUTPUT: '{"linkcheck":{}}'
         run: |
-          cd master
-          mdbook build
-
-      - name: Delete website cache
-        if: ${{ always() }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Note that the cleanup currently fails, because we don't give the
-        # `actions:write` permission to actions; hence the `set +e` to ignore
-        # the error
-        run: |
-          gh extension install actions/gh-actions-cache
-          REPO=${{ github.repository }}
-          BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
-
-          set +e
-          gh actions-cache delete pre-website-${{ github.run_id }} -R $REPO -B $BRANCH --confirm
-
-          # The previous command failing would report an error even with `set -e`
-          exit 0
+          cd repo
+          make SKIPAGDA=1 SKIPAUX=1 website
 
   pre-commit:
     runs-on: ubuntu-latest
@@ -166,7 +110,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
           check-latest: true
           cache: 'pip'
 

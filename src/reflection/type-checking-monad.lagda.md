@@ -293,7 +293,7 @@ private
 ### Trying a path
 
 The following example tries to solve a goal by using path `p` or `inv p`. This
-example was addapted from
+example was adapted from
 
 ```agda
   private
@@ -331,10 +331,10 @@ example was addapted from
               nil)))
 
   module _ (a b : ℕ) (p : a ＝ b) where
-    ex3 : Id a b
+    ex3 : a ＝ b
     ex3 = try-path! p
 
-    ex4 : Id b a
+    ex4 : b ＝ a
     ex4 = try-path! p
 ```
 

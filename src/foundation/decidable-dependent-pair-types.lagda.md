@@ -9,9 +9,9 @@ module foundation.decidable-dependent-pair-types where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
+open import foundation.double-negation-dense-equality
+open import foundation.irrefutable-equality
 open import foundation.maybe
-open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
@@ -36,7 +36,22 @@ We describe conditions under which
 [dependent sums](foundation.dependent-pair-types.md) are
 [decidable](foundation.decidable-types.md)
 
-## Properites
+## Properties
+
+### Decidability of dependent sums over equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
+  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
+  where
+
+  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
+  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
+
+  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
+  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
+```
 
 ### Decidability of dependent sums over equivalences
 
@@ -78,7 +93,7 @@ is-decidable-Σ-coproduct :
   is-decidable (Σ (A + B) C)
 is-decidable-Σ-coproduct {A = A} {B} C dA dB =
   is-decidable-equiv
-    ( right-distributive-Σ-coproduct A B C)
+    ( right-distributive-Σ-coproduct C)
     ( is-decidable-coproduct dA dB)
 ```
 
@@ -95,50 +110,36 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
     ( is-decidable-equiv (left-unit-law-Σ (B ∘ inr)) de)
 ```
 
-### Decidability of dependent sums over π₀-trivial bases
+### Decidability of dependent sums over bases with double negation dense equality
+
+This is a special case of the more general fact that a type has decidable sums
+if and only if its totally separated reflection does, and totally separated
+types have double negation stable equality
+[`TypeTopology.TotallySeparated`](http://martinescardo.github.io/TypeTopology/TypeTopology.TotallySeparated.html)
+{{#cite TypeTopology}}.
 
 ```agda
-is-decidable-Σ-all-elements-merely-equal-base :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  all-elements-merely-equal A →
-  is-decidable A →
-  ((x : A) → is-decidable (B x)) →
-  is-decidable (Σ A B)
-is-decidable-Σ-all-elements-merely-equal-base {B = B} H (inl x) K =
-  rec-coproduct
-    ( λ y → inl (x , y))
-    ( λ ny →
-      inr
-        ( λ ab →
-          rec-trunc-Prop
-            ( empty-Prop)
-            ( λ p → ny (tr B p (pr2 ab)))
-            ( H (pr1 ab) x)))
-    ( K x)
-is-decidable-Σ-all-elements-merely-equal-base H (inr nx) K =
-  inr (map-neg pr1 nx)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (H : has-double-negation-dense-equality A)
+  where
 
-is-inhabited-or-empty-Σ-all-elements-merely-equal-base :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  all-elements-merely-equal A →
-  is-inhabited-or-empty A →
-  ((x : A) → is-inhabited-or-empty (B x)) →
-  is-inhabited-or-empty (Σ A B)
-is-inhabited-or-empty-Σ-all-elements-merely-equal-base {A = A} {B} H dA dB =
-  elim-is-inhabited-or-empty-Prop
-    ( is-inhabited-or-empty-Prop (Σ A B))
-    ( λ a →
-      elim-is-inhabited-or-empty-Prop
-        ( is-inhabited-or-empty-Prop (Σ A B))
-        ( λ b → inl (unit-trunc-Prop (a , b)))
-        ( λ nb →
-          inr
-            ( λ x →
-              rec-trunc-Prop
-                ( empty-Prop)
-                ( λ p → nb (tr B p (pr2 x)))
-                ( H (pr1 x) a)))
-        ( dB a))
-    ( λ na → inr (map-neg pr1 na))
-    ( dA)
+  is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base :
+    is-inhabited-or-empty A →
+    ((x : A) → is-inhabited-or-empty (B x)) →
+    is-inhabited-or-empty (Σ A B)
+  is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base dA dB =
+    elim-is-inhabited-or-empty-Prop
+      ( is-inhabited-or-empty-Prop (Σ A B))
+      ( λ a →
+        elim-is-inhabited-or-empty-Prop
+          ( is-inhabited-or-empty-Prop (Σ A B))
+          ( λ b → inl (unit-trunc-Prop (a , b)))
+          ( λ nb → inr (λ x → H (pr1 x) a (λ p → nb (tr B p (pr2 x)))))
+          ( dB a))
+      ( λ na → inr (map-neg pr1 na))
+      ( dA)
 ```
+
+See [`foundation.decidable-types`](foundation.decidable-types.md) for the
+untruncated version.

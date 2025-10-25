@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
@@ -128,7 +129,10 @@ module _
     is-contr-retraction-terminal-map (retraction-is-equiv H)
 
   is-contr-equiv-unit : A ≃ unit → is-contr A
-  is-contr-equiv-unit e = map-inv-equiv e star , is-retraction-map-inv-equiv e
+  is-contr-equiv-unit e = (map-inv-equiv e star , is-retraction-map-inv-equiv e)
+
+  is-contr-equiv-unit' : unit ≃ A → is-contr A
+  is-contr-equiv-unit' e = (map-equiv e star , is-section-map-inv-equiv e)
 ```
 
 ### Any contractible type is equivalent to the raised unit type
@@ -227,4 +231,24 @@ module _
   point-injection : injection unit A
   pr1 point-injection = point x
   pr2 point-injection = is-injective-point
+```
+
+### The map `point x` has a retraction for every `x`
+
+```agda
+module _
+  {l : Level} {A : UU l} (x : A)
+  where
+
+  retraction-point : retraction (point x)
+  retraction-point = terminal-map A , refl-htpy
+```
+
+### Contractibility of dependent sums over the unit type
+
+```agda
+abstract
+  is-contr-Σ-unit :
+    {l : Level} {B : unit → UU l} → is-contr (B star) → is-contr (Σ unit B)
+  is-contr-Σ-unit = is-contr-Σ is-contr-unit star
 ```

@@ -11,22 +11,25 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.evaluation-functions
+open import foundation.functoriality-coproduct-types
 open import foundation.hilberts-epsilon-operators
+open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
-open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -53,10 +56,6 @@ type is expressed using the
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
 is-decidable A = A + (¬ A)
-
-is-decidable-fam :
-  {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
-is-decidable-fam {A = A} P = (x : A) → is-decidable (P x)
 ```
 
 ## Examples
@@ -139,6 +138,14 @@ is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 is-decidable-neg :
   {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
+```
+
+### The double negation of a decidable type is decidable
+
+```agda
+is-decidable-double-negation :
+  {l : Level} {A : UU l} → is-decidable A → is-decidable (¬¬ A)
+is-decidable-double-negation d = is-decidable-neg (is-decidable-neg d)
 ```
 
 ### Decidable types are closed under coinhabited types
@@ -255,21 +262,28 @@ See also
 ### Decidable types have ε-operators
 
 ```agda
-elim-trunc-Prop-is-decidable :
+ε-operator-is-decidable :
   {l : Level} {A : UU l} → is-decidable A → ε-operator-Hilbert A
-elim-trunc-Prop-is-decidable (inl a) x = a
-elim-trunc-Prop-is-decidable (inr f) x =
+ε-operator-is-decidable (inl a) x = a
+ε-operator-is-decidable (inr f) x =
   ex-falso (apply-universal-property-trunc-Prop x empty-Prop f)
 ```
 
 ### `is-decidable` is an idempotent operation
 
 ```agda
-idempotent-is-decidable :
-  {l : Level} (P : UU l) → is-decidable (is-decidable P) → is-decidable P
-idempotent-is-decidable P (inl (inl p)) = inl p
-idempotent-is-decidable P (inl (inr np)) = inr np
-idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
+module _
+  {l : Level} {P : UU l}
+  where
+
+  map-idempotent-is-decidable : is-decidable P → is-decidable (is-decidable P)
+  map-idempotent-is-decidable = inl
+
+  map-inv-idempotent-is-decidable :
+    is-decidable (is-decidable P) → is-decidable P
+  map-inv-idempotent-is-decidable (inl (inl p)) = inl p
+  map-inv-idempotent-is-decidable (inl (inr np)) = inr np
+  map-inv-idempotent-is-decidable (inr np) = inr (λ p → np (inl p))
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`
@@ -281,7 +295,28 @@ is-fixed-point-is-decidable-is-inhabited {l} {X} t =
   right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
 
-### Raising universe level conserves decidability
+### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable
+
+This is a special case of the more general fact that a type has decidable sums
+if and only if its totally separated reflection does, and totally separated
+types have double negation stable equality. {{#cite TypeTopology}}
+
+```agda
+is-decidable-Σ-has-double-negation-dense-equality-base :
+  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
+  has-double-negation-dense-equality P →
+  is-decidable P →
+  ((x : P) → is-decidable (Q x)) → is-decidable (Σ P Q)
+is-decidable-Σ-has-double-negation-dense-equality-base {Q = Q} hP (inl p) dQ =
+  map-coproduct
+    ( pair p)
+    ( λ nq pq → hP (pr1 pq) p (λ r → nq (tr Q r (pr2 pq))))
+    ( dQ p)
+is-decidable-Σ-has-double-negation-dense-equality-base hP (inr np) _ =
+  inr (map-neg pr1 np)
+```
+
+### Raising universe level preserves decidability
 
 ```agda
 module _

@@ -367,10 +367,11 @@ abstract
 
 abstract
   is-equiv-left-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
-  pr1 (pr1 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr1 (is-equiv-left-add-ℤ x)) = is-section-left-add-neg-ℤ x
-  pr1 (pr2 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr2 (is-equiv-left-add-ℤ x)) = is-retraction-left-add-neg-ℤ x
+  is-equiv-left-add-ℤ x =
+    is-equiv-is-invertible
+      ( add-ℤ (neg-ℤ x))
+      ( is-section-left-add-neg-ℤ x)
+      ( is-retraction-left-add-neg-ℤ x)
 
 equiv-left-add-ℤ : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-left-add-ℤ x) = add-ℤ x
@@ -403,10 +404,11 @@ abstract
 
 abstract
   is-equiv-right-add-ℤ : (y : ℤ) → is-equiv (_+ℤ y)
-  pr1 (pr1 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr1 (is-equiv-right-add-ℤ y)) = is-section-right-add-neg-ℤ y
-  pr1 (pr2 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr2 (is-equiv-right-add-ℤ y)) = is-retraction-right-add-neg-ℤ y
+  is-equiv-right-add-ℤ y =
+    is-equiv-is-invertible
+      ( _+ℤ (neg-ℤ y))
+      ( is-section-right-add-neg-ℤ y)
+      ( is-retraction-right-add-neg-ℤ y)
 
 equiv-right-add-ℤ : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-right-add-ℤ y) = _+ℤ y
@@ -566,6 +568,19 @@ abstract
     (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
   is-zero-right-add-ℤ x y H =
     is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
+```
+
+### Swapping laws
+
+```agda
+abstract
+  right-swap-add-ℤ : (x y z : ℤ) → (x +ℤ y) +ℤ z ＝ (x +ℤ z) +ℤ y
+  right-swap-add-ℤ x y z =
+    equational-reasoning
+      (x +ℤ y) +ℤ z
+      ＝ x +ℤ (y +ℤ z) by associative-add-ℤ x y z
+      ＝ x +ℤ (z +ℤ y) by ap (x +ℤ_) (commutative-add-ℤ y z)
+      ＝ (x +ℤ z) +ℤ y by inv (associative-add-ℤ x z y)
 ```
 
 ## See also

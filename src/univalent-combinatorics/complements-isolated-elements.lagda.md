@@ -35,82 +35,96 @@ For any element `x` in a [finite type](univalent-combinatorics.finite-types.md)
 ### The complement of a element in a `k`-element type of arbitrary universe level
 
 ```agda
-isolated-element-UU-Fin :
-  {l : Level} (k : ℕ) (X : UU-Fin l (succ-ℕ k)) →
-  type-UU-Fin (succ-ℕ k) X →
-  isolated-element (type-UU-Fin (succ-ℕ k) X)
-pr1 (isolated-element-UU-Fin k X x) = x
-pr2 (isolated-element-UU-Fin k X x) =
-  has-decidable-equality-has-cardinality
+isolated-element-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X : Type-With-Cardinality-ℕ l (succ-ℕ k)) →
+  type-Type-With-Cardinality-ℕ (succ-ℕ k) X →
+  isolated-element (type-Type-With-Cardinality-ℕ (succ-ℕ k) X)
+pr1 (isolated-element-Type-With-Cardinality-ℕ k X x) = x
+pr2 (isolated-element-Type-With-Cardinality-ℕ k X x) =
+  has-decidable-equality-has-cardinality-ℕ
     ( succ-ℕ k)
-    ( has-cardinality-type-UU-Fin (succ-ℕ k) X)
+    ( has-cardinality-type-Type-With-Cardinality-ℕ (succ-ℕ k) X)
     ( x)
 
-type-complement-element-UU-Fin :
+type-complement-element-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ) →
-  Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) → UU l1
-type-complement-element-UU-Fin k (X , x) =
+  Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
+    ( type-Type-With-Cardinality-ℕ (succ-ℕ k)) →
+  UU l1
+type-complement-element-Type-With-Cardinality-ℕ k (X , x) =
   complement-isolated-element
-    ( type-UU-Fin (succ-ℕ k) X)
-    ( isolated-element-UU-Fin k X x)
+    ( type-Type-With-Cardinality-ℕ (succ-ℕ k) X)
+    ( isolated-element-Type-With-Cardinality-ℕ k X x)
 
-equiv-maybe-structure-element-UU-Fin :
-  {l : Level} (k : ℕ) (X : UU-Fin l (succ-ℕ k)) →
-  (x : type-UU-Fin (succ-ℕ k) X) →
-  Maybe (type-complement-element-UU-Fin k (pair X x)) ≃
-  type-UU-Fin (succ-ℕ k) X
-equiv-maybe-structure-element-UU-Fin k X x =
+equiv-maybe-structure-element-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X : Type-With-Cardinality-ℕ l (succ-ℕ k)) →
+  (x : type-Type-With-Cardinality-ℕ (succ-ℕ k) X) →
+  Maybe (type-complement-element-Type-With-Cardinality-ℕ k (pair X x)) ≃
+  type-Type-With-Cardinality-ℕ (succ-ℕ k) X
+equiv-maybe-structure-element-Type-With-Cardinality-ℕ k X x =
   equiv-maybe-structure-isolated-element
-    ( type-UU-Fin (succ-ℕ k) X)
-    ( isolated-element-UU-Fin k X x)
+    ( type-Type-With-Cardinality-ℕ (succ-ℕ k) X)
+    ( isolated-element-Type-With-Cardinality-ℕ k X x)
 
-has-cardinality-type-complement-element-UU-Fin :
+has-cardinality-type-complement-element-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ)
-  (X : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
-  has-cardinality k (type-complement-element-UU-Fin k X)
-has-cardinality-type-complement-element-UU-Fin k (pair (pair X H) x) =
+  (X :
+    Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
+      ( type-Type-With-Cardinality-ℕ (succ-ℕ k))) →
+  has-cardinality-ℕ k (type-complement-element-Type-With-Cardinality-ℕ k X)
+has-cardinality-type-complement-element-Type-With-Cardinality-ℕ
+  k (pair (pair X H) x) =
   apply-universal-property-trunc-Prop H
-    ( has-cardinality-Prop k
-      ( type-complement-element-UU-Fin k (pair (pair X H) x)))
+    ( has-cardinality-ℕ-Prop k
+      ( type-complement-element-Type-With-Cardinality-ℕ k
+        ( pair (pair X H) x)))
     ( λ e →
       unit-trunc-Prop
         ( equiv-equiv-Maybe
           ( ( inv-equiv
-              ( equiv-maybe-structure-element-UU-Fin k (pair X H) x)) ∘e
+              ( equiv-maybe-structure-element-Type-With-Cardinality-ℕ k
+                ( pair X H)
+                ( x))) ∘e
             ( e))))
 
-complement-element-UU-Fin :
+complement-element-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ) →
-  Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) →
-  UU-Fin l1 k
-pr1 (complement-element-UU-Fin k T) =
-  type-complement-element-UU-Fin k T
-pr2 (complement-element-UU-Fin k T) =
-  has-cardinality-type-complement-element-UU-Fin k T
+  Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
+    ( type-Type-With-Cardinality-ℕ (succ-ℕ k)) →
+  Type-With-Cardinality-ℕ l1 k
+pr1 (complement-element-Type-With-Cardinality-ℕ k T) =
+  type-complement-element-Type-With-Cardinality-ℕ k T
+pr2 (complement-element-Type-With-Cardinality-ℕ k T) =
+  has-cardinality-type-complement-element-Type-With-Cardinality-ℕ k T
 
-inclusion-complement-element-UU-Fin :
+inclusion-complement-element-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ)
-  (X : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
-  type-complement-element-UU-Fin k X → type-UU-Fin (succ-ℕ k) (pr1 X)
-inclusion-complement-element-UU-Fin k X x = pr1 x
+  (X :
+    Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
+      ( type-Type-With-Cardinality-ℕ (succ-ℕ k))) →
+  type-complement-element-Type-With-Cardinality-ℕ k X →
+  type-Type-With-Cardinality-ℕ (succ-ℕ k) (pr1 X)
+inclusion-complement-element-Type-With-Cardinality-ℕ k X x = pr1 x
 ```
 
 ### The action of equivalences on complements of isolated points
 
 ```agda
-equiv-complement-element-UU-Fin :
+equiv-complement-element-Type-With-Cardinality-ℕ :
   {l1 : Level} (k : ℕ)
-  (X Y : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
-  (e : equiv-UU-Fin (succ-ℕ k) (pr1 X) (pr1 Y))
-  (p : Id (map-equiv e (pr2 X)) (pr2 Y)) →
-  equiv-UU-Fin k
-    ( complement-element-UU-Fin k X)
-    ( complement-element-UU-Fin k Y)
-equiv-complement-element-UU-Fin
+  (X Y :
+    Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
+      ( type-Type-With-Cardinality-ℕ (succ-ℕ k))) →
+  (e : equiv-Type-With-Cardinality-ℕ (succ-ℕ k) (pr1 X) (pr1 Y))
+  (p : map-equiv e (pr2 X) ＝ pr2 Y) →
+  equiv-Type-With-Cardinality-ℕ k
+    ( complement-element-Type-With-Cardinality-ℕ k X)
+    ( complement-element-Type-With-Cardinality-ℕ k Y)
+equiv-complement-element-Type-With-Cardinality-ℕ
   k S T e p =
   equiv-complement-isolated-element e
-    ( pair x (λ x' → has-decidable-equality-has-cardinality (succ-ℕ k) H x x'))
-    ( pair y (λ y' → has-decidable-equality-has-cardinality (succ-ℕ k) K y y'))
+    ( x , (λ x' → has-decidable-equality-has-cardinality-ℕ (succ-ℕ k) H x x'))
+    ( y , (λ y' → has-decidable-equality-has-cardinality-ℕ (succ-ℕ k) K y y'))
     ( p)
   where
   H = pr2 (pr1 S)

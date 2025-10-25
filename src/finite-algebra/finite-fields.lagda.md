@@ -54,488 +54,491 @@ because only nonzero elements are assumed to be invertible.
 ## Definition
 
 ```agda
-is-finite-field-Commutative-Ring-𝔽 : {l : Level} → Commutative-Ring-𝔽 l → UU l
-is-finite-field-Commutative-Ring-𝔽 A =
-  is-division-Ring (ring-Commutative-Ring-𝔽 A)
+is-finite-field-Finite-Commutative-Ring :
+  {l : Level} → Finite-Commutative-Ring l → UU l
+is-finite-field-Finite-Commutative-Ring A =
+  is-division-Ring (ring-Finite-Commutative-Ring A)
 
-Field-𝔽 : (l : Level) → UU (lsuc l)
-Field-𝔽 l =
-  Σ (Commutative-Ring-𝔽 l) (λ A → is-finite-field-Commutative-Ring-𝔽 A)
+Finite-Field : (l : Level) → UU (lsuc l)
+Finite-Field l =
+  Σ ( Finite-Commutative-Ring l)
+    ( λ A → is-finite-field-Finite-Commutative-Ring A)
 
 module _
-  {l : Level} (A : Field-𝔽 l)
+  {l : Level} (A : Finite-Field l)
   where
 
-  commutative-finite-ring-Field-𝔽 : Commutative-Ring-𝔽 l
-  commutative-finite-ring-Field-𝔽 = pr1 A
+  commutative-finite-ring-Finite-Field : Finite-Commutative-Ring l
+  commutative-finite-ring-Finite-Field = pr1 A
 
-  commutative-ring-Field-𝔽 : Commutative-Ring l
-  commutative-ring-Field-𝔽 =
-    commutative-ring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  commutative-ring-Finite-Field : Commutative-Ring l
+  commutative-ring-Finite-Field =
+    commutative-ring-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 
-  finite-ring-Field-𝔽 : Ring-𝔽 l
-  finite-ring-Field-𝔽 =
-    finite-ring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  finite-ring-Finite-Field : Finite-Ring l
+  finite-ring-Finite-Field =
+    finite-ring-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
 
-  ring-Field-𝔽 : Ring l
-  ring-Field-𝔽 = ring-Ring-𝔽 (finite-ring-Field-𝔽)
+  ring-Finite-Field : Ring l
+  ring-Finite-Field = ring-Finite-Ring (finite-ring-Finite-Field)
 
-  ab-Field-𝔽 : Ab l
-  ab-Field-𝔽 = ab-Ring-𝔽 finite-ring-Field-𝔽
+  ab-Finite-Field : Ab l
+  ab-Finite-Field = ab-Finite-Ring finite-ring-Finite-Field
 
-  set-Field-𝔽 : Set l
-  set-Field-𝔽 = set-Ring-𝔽 finite-ring-Field-𝔽
+  set-Finite-Field : Set l
+  set-Finite-Field = set-Finite-Ring finite-ring-Finite-Field
 
-  type-Field-𝔽 : UU l
-  type-Field-𝔽 = type-Ring-𝔽 finite-ring-Field-𝔽
+  type-Finite-Field : UU l
+  type-Finite-Field = type-Finite-Ring finite-ring-Finite-Field
 
-  is-set-type-Field-𝔽 : is-set type-Field-𝔽
-  is-set-type-Field-𝔽 = is-set-type-Ring-𝔽 finite-ring-Field-𝔽
+  is-set-type-Finite-Field : is-set type-Finite-Field
+  is-set-type-Finite-Field = is-set-type-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Addition in a finite field
 
 ```agda
-  has-associative-add-Field-𝔽 :
-    has-associative-mul-Set set-Field-𝔽
-  has-associative-add-Field-𝔽 =
-    has-associative-add-Ring-𝔽 finite-ring-Field-𝔽
+  has-associative-add-Finite-Field :
+    has-associative-mul-Set set-Finite-Field
+  has-associative-add-Finite-Field =
+    has-associative-add-Finite-Ring finite-ring-Finite-Field
 
-  add-Field-𝔽 :
-    type-Field-𝔽 → type-Field-𝔽 → type-Field-𝔽
-  add-Field-𝔽 = add-Ring-𝔽 finite-ring-Field-𝔽
+  add-Finite-Field :
+    type-Finite-Field → type-Finite-Field → type-Finite-Field
+  add-Finite-Field = add-Finite-Ring finite-ring-Finite-Field
 
-  add-Field-𝔽' :
-    type-Field-𝔽 → type-Field-𝔽 → type-Field-𝔽
-  add-Field-𝔽' = add-Ring-𝔽' finite-ring-Field-𝔽
+  add-Finite-Field' :
+    type-Finite-Field → type-Finite-Field → type-Finite-Field
+  add-Finite-Field' = add-Finite-Ring' finite-ring-Finite-Field
 
-  ap-add-Field-𝔽 :
-    {x x' y y' : type-Field-𝔽} →
+  ap-add-Finite-Field :
+    {x x' y y' : type-Finite-Field} →
     (x ＝ x') → (y ＝ y') →
-    add-Field-𝔽 x y ＝ add-Field-𝔽 x' y'
-  ap-add-Field-𝔽 = ap-add-Ring-𝔽 finite-ring-Field-𝔽
+    add-Finite-Field x y ＝ add-Finite-Field x' y'
+  ap-add-Finite-Field = ap-add-Finite-Ring finite-ring-Finite-Field
 
-  associative-add-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    ( add-Field-𝔽 (add-Field-𝔽 x y) z) ＝
-    ( add-Field-𝔽 x (add-Field-𝔽 y z))
-  associative-add-Field-𝔽 =
-    associative-add-Ring-𝔽 finite-ring-Field-𝔽
+  associative-add-Finite-Field :
+    (x y z : type-Finite-Field) →
+    add-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field x (add-Finite-Field y z)
+  associative-add-Finite-Field =
+    associative-add-Finite-Ring finite-ring-Finite-Field
 
-  additive-semigroup-Field-𝔽 : Semigroup l
-  additive-semigroup-Field-𝔽 = semigroup-Ab ab-Field-𝔽
+  additive-semigroup-Finite-Field : Semigroup l
+  additive-semigroup-Finite-Field = semigroup-Ab ab-Finite-Field
 
-  is-group-additive-semigroup-Field-𝔽 :
-    is-group-Semigroup additive-semigroup-Field-𝔽
-  is-group-additive-semigroup-Field-𝔽 =
-    is-group-Ab ab-Field-𝔽
+  is-group-additive-semigroup-Finite-Field :
+    is-group-Semigroup additive-semigroup-Finite-Field
+  is-group-additive-semigroup-Finite-Field =
+    is-group-Ab ab-Finite-Field
 
-  commutative-add-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    Id (add-Field-𝔽 x y) (add-Field-𝔽 y x)
-  commutative-add-Field-𝔽 = commutative-add-Ab ab-Field-𝔽
+  commutative-add-Finite-Field :
+    (x y : type-Finite-Field) →
+    add-Finite-Field x y ＝ add-Finite-Field y x
+  commutative-add-Finite-Field = commutative-add-Ab ab-Finite-Field
 
-  interchange-add-add-Field-𝔽 :
-    (x y x' y' : type-Field-𝔽) →
-    ( add-Field-𝔽
-      ( add-Field-𝔽 x y)
-      ( add-Field-𝔽 x' y')) ＝
-    ( add-Field-𝔽
-      ( add-Field-𝔽 x x')
-      ( add-Field-𝔽 y y'))
-  interchange-add-add-Field-𝔽 =
-    interchange-add-add-Ring-𝔽 finite-ring-Field-𝔽
+  interchange-add-add-Finite-Field :
+    (x y x' y' : type-Finite-Field) →
+    ( add-Finite-Field
+      ( add-Finite-Field x y)
+      ( add-Finite-Field x' y')) ＝
+    ( add-Finite-Field
+      ( add-Finite-Field x x')
+      ( add-Finite-Field y y'))
+  interchange-add-add-Finite-Field =
+    interchange-add-add-Finite-Ring finite-ring-Finite-Field
 
-  right-swap-add-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    ( add-Field-𝔽 (add-Field-𝔽 x y) z) ＝
-    ( add-Field-𝔽 (add-Field-𝔽 x z) y)
-  right-swap-add-Field-𝔽 =
-    right-swap-add-Ring-𝔽 finite-ring-Field-𝔽
+  right-swap-add-Finite-Field :
+    (x y z : type-Finite-Field) →
+    ( add-Finite-Field (add-Finite-Field x y) z) ＝
+    ( add-Finite-Field (add-Finite-Field x z) y)
+  right-swap-add-Finite-Field =
+    right-swap-add-Finite-Ring finite-ring-Finite-Field
 
-  left-swap-add-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    ( add-Field-𝔽 x (add-Field-𝔽 y z)) ＝
-    ( add-Field-𝔽 y (add-Field-𝔽 x z))
-  left-swap-add-Field-𝔽 =
-    left-swap-add-Ring-𝔽 finite-ring-Field-𝔽
+  left-swap-add-Finite-Field :
+    (x y z : type-Finite-Field) →
+    ( add-Finite-Field x (add-Finite-Field y z)) ＝
+    ( add-Finite-Field y (add-Finite-Field x z))
+  left-swap-add-Finite-Field =
+    left-swap-add-Finite-Ring finite-ring-Finite-Field
 
-  is-equiv-add-Field-𝔽 :
-    (x : type-Field-𝔽) → is-equiv (add-Field-𝔽 x)
-  is-equiv-add-Field-𝔽 = is-equiv-add-Ab ab-Field-𝔽
+  is-equiv-add-Finite-Field :
+    (x : type-Finite-Field) → is-equiv (add-Finite-Field x)
+  is-equiv-add-Finite-Field = is-equiv-add-Ab ab-Finite-Field
 
-  is-equiv-add-Field-𝔽' :
-    (x : type-Field-𝔽) → is-equiv (add-Field-𝔽' x)
-  is-equiv-add-Field-𝔽' = is-equiv-add-Ab' ab-Field-𝔽
+  is-equiv-add-Finite-Field' :
+    (x : type-Finite-Field) → is-equiv (add-Finite-Field' x)
+  is-equiv-add-Finite-Field' = is-equiv-add-Ab' ab-Finite-Field
 
-  is-binary-equiv-add-Field-𝔽 : is-binary-equiv add-Field-𝔽
-  pr1 is-binary-equiv-add-Field-𝔽 = is-equiv-add-Field-𝔽'
-  pr2 is-binary-equiv-add-Field-𝔽 = is-equiv-add-Field-𝔽
+  is-binary-equiv-add-Finite-Field : is-binary-equiv add-Finite-Field
+  pr1 is-binary-equiv-add-Finite-Field = is-equiv-add-Finite-Field'
+  pr2 is-binary-equiv-add-Finite-Field = is-equiv-add-Finite-Field
 
-  is-binary-emb-add-Field-𝔽 : is-binary-emb add-Field-𝔽
-  is-binary-emb-add-Field-𝔽 = is-binary-emb-add-Ab ab-Field-𝔽
+  is-binary-emb-add-Finite-Field : is-binary-emb add-Finite-Field
+  is-binary-emb-add-Finite-Field = is-binary-emb-add-Ab ab-Finite-Field
 
-  is-emb-add-Field-𝔽 :
-    (x : type-Field-𝔽) → is-emb (add-Field-𝔽 x)
-  is-emb-add-Field-𝔽 = is-emb-add-Ab ab-Field-𝔽
+  is-emb-add-Finite-Field :
+    (x : type-Finite-Field) → is-emb (add-Finite-Field x)
+  is-emb-add-Finite-Field = is-emb-add-Ab ab-Finite-Field
 
-  is-emb-add-Field-𝔽' :
-    (x : type-Field-𝔽) → is-emb (add-Field-𝔽' x)
-  is-emb-add-Field-𝔽' = is-emb-add-Ab' ab-Field-𝔽
+  is-emb-add-Finite-Field' :
+    (x : type-Finite-Field) → is-emb (add-Finite-Field' x)
+  is-emb-add-Finite-Field' = is-emb-add-Ab' ab-Finite-Field
 
-  is-injective-add-Field-𝔽 :
-    (x : type-Field-𝔽) → is-injective (add-Field-𝔽 x)
-  is-injective-add-Field-𝔽 = is-injective-add-Ab ab-Field-𝔽
+  is-injective-add-Finite-Field :
+    (x : type-Finite-Field) → is-injective (add-Finite-Field x)
+  is-injective-add-Finite-Field = is-injective-add-Ab ab-Finite-Field
 
-  is-injective-add-Field-𝔽' :
-    (x : type-Field-𝔽) → is-injective (add-Field-𝔽' x)
-  is-injective-add-Field-𝔽' = is-injective-add-Ab' ab-Field-𝔽
+  is-injective-add-Finite-Field' :
+    (x : type-Finite-Field) → is-injective (add-Finite-Field' x)
+  is-injective-add-Finite-Field' = is-injective-add-Ab' ab-Finite-Field
 ```
 
 ### The zero element of a finite field
 
 ```agda
-  has-zero-Field-𝔽 : is-unital add-Field-𝔽
-  has-zero-Field-𝔽 = has-zero-Ring-𝔽 finite-ring-Field-𝔽
+  has-zero-Finite-Field : is-unital add-Finite-Field
+  has-zero-Finite-Field = has-zero-Finite-Ring finite-ring-Finite-Field
 
-  zero-Field-𝔽 : type-Field-𝔽
-  zero-Field-𝔽 = zero-Ring-𝔽 finite-ring-Field-𝔽
+  zero-Finite-Field : type-Finite-Field
+  zero-Finite-Field = zero-Finite-Ring finite-ring-Finite-Field
 
-  is-zero-Field-𝔽 : type-Field-𝔽 → UU l
-  is-zero-Field-𝔽 = is-zero-Ring-𝔽 finite-ring-Field-𝔽
+  is-zero-Finite-Field : type-Finite-Field → UU l
+  is-zero-Finite-Field = is-zero-Finite-Ring finite-ring-Finite-Field
 
-  is-nonzero-Field-𝔽 : type-Field-𝔽 → UU l
-  is-nonzero-Field-𝔽 = is-nonzero-Ring-𝔽 finite-ring-Field-𝔽
+  is-nonzero-Finite-Field : type-Finite-Field → UU l
+  is-nonzero-Finite-Field = is-nonzero-Finite-Ring finite-ring-Finite-Field
 
-  is-zero-field-finite-Prop : type-Field-𝔽 → Prop l
-  is-zero-field-finite-Prop = is-zero-finite-ring-Prop finite-ring-Field-𝔽
+  is-zero-field-finite-Prop : type-Finite-Field → Prop l
+  is-zero-field-finite-Prop = is-zero-finite-ring-Prop finite-ring-Finite-Field
 
-  is-nonzero-field-finite-Prop : type-Field-𝔽 → Prop l
-  is-nonzero-field-finite-Prop = is-nonzero-finite-ring-Prop finite-ring-Field-𝔽
+  is-nonzero-field-finite-Prop : type-Finite-Field → Prop l
+  is-nonzero-field-finite-Prop =
+    is-nonzero-finite-ring-Prop finite-ring-Finite-Field
 
-  left-unit-law-add-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    add-Field-𝔽 zero-Field-𝔽 x ＝ x
-  left-unit-law-add-Field-𝔽 =
-    left-unit-law-add-Ring-𝔽 finite-ring-Field-𝔽
+  left-unit-law-add-Finite-Field :
+    (x : type-Finite-Field) →
+    add-Finite-Field zero-Finite-Field x ＝ x
+  left-unit-law-add-Finite-Field =
+    left-unit-law-add-Finite-Ring finite-ring-Finite-Field
 
-  right-unit-law-add-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    add-Field-𝔽 x zero-Field-𝔽 ＝ x
-  right-unit-law-add-Field-𝔽 =
-    right-unit-law-add-Ring-𝔽 finite-ring-Field-𝔽
+  right-unit-law-add-Finite-Field :
+    (x : type-Finite-Field) →
+    add-Finite-Field x zero-Finite-Field ＝ x
+  right-unit-law-add-Finite-Field =
+    right-unit-law-add-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Additive inverses in a finite fields
 
 ```agda
-  has-negatives-Field-𝔽 :
-    is-group-is-unital-Semigroup additive-semigroup-Field-𝔽 has-zero-Field-𝔽
-  has-negatives-Field-𝔽 = has-negatives-Ab ab-Field-𝔽
+  has-negatives-Finite-Field :
+    is-group-is-unital-Semigroup
+      additive-semigroup-Finite-Field
+      has-zero-Finite-Field
+  has-negatives-Finite-Field = has-negatives-Ab ab-Finite-Field
 
-  neg-Field-𝔽 : type-Field-𝔽 → type-Field-𝔽
-  neg-Field-𝔽 = neg-Ring-𝔽 finite-ring-Field-𝔽
+  neg-Finite-Field : type-Finite-Field → type-Finite-Field
+  neg-Finite-Field = neg-Finite-Ring finite-ring-Finite-Field
 
-  left-inverse-law-add-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    add-Field-𝔽 (neg-Field-𝔽 x) x ＝ zero-Field-𝔽
-  left-inverse-law-add-Field-𝔽 =
-    left-inverse-law-add-Ring-𝔽 finite-ring-Field-𝔽
+  left-inverse-law-add-Finite-Field :
+    (x : type-Finite-Field) →
+    add-Finite-Field (neg-Finite-Field x) x ＝ zero-Finite-Field
+  left-inverse-law-add-Finite-Field =
+    left-inverse-law-add-Finite-Ring finite-ring-Finite-Field
 
-  right-inverse-law-add-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    add-Field-𝔽 x (neg-Field-𝔽 x) ＝ zero-Field-𝔽
-  right-inverse-law-add-Field-𝔽 =
-    right-inverse-law-add-Ring-𝔽 finite-ring-Field-𝔽
+  right-inverse-law-add-Finite-Field :
+    (x : type-Finite-Field) →
+    add-Finite-Field x (neg-Finite-Field x) ＝ zero-Finite-Field
+  right-inverse-law-add-Finite-Field =
+    right-inverse-law-add-Finite-Ring finite-ring-Finite-Field
 
-  neg-neg-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    neg-Field-𝔽 (neg-Field-𝔽 x) ＝ x
-  neg-neg-Field-𝔽 = neg-neg-Ab ab-Field-𝔽
+  neg-neg-Finite-Field :
+    (x : type-Finite-Field) →
+    neg-Finite-Field (neg-Finite-Field x) ＝ x
+  neg-neg-Finite-Field = neg-neg-Ab ab-Finite-Field
 
-  distributive-neg-add-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    neg-Field-𝔽 (add-Field-𝔽 x y) ＝
-    add-Field-𝔽 (neg-Field-𝔽 x) (neg-Field-𝔽 y)
-  distributive-neg-add-Field-𝔽 =
-    distributive-neg-add-Ab ab-Field-𝔽
+  distributive-neg-add-Finite-Field :
+    (x y : type-Finite-Field) →
+    neg-Finite-Field (add-Finite-Field x y) ＝
+    add-Finite-Field (neg-Finite-Field x) (neg-Finite-Field y)
+  distributive-neg-add-Finite-Field =
+    distributive-neg-add-Ab ab-Finite-Field
 ```
 
 ### Multiplication in a finite fields
 
 ```agda
-  has-associative-mul-Field-𝔽 :
-    has-associative-mul-Set set-Field-𝔽
-  has-associative-mul-Field-𝔽 =
-    has-associative-mul-Ring-𝔽 finite-ring-Field-𝔽
+  has-associative-mul-Finite-Field :
+    has-associative-mul-Set set-Finite-Field
+  has-associative-mul-Finite-Field =
+    has-associative-mul-Finite-Ring finite-ring-Finite-Field
 
-  mul-Field-𝔽 : (x y : type-Field-𝔽) → type-Field-𝔽
-  mul-Field-𝔽 = mul-Ring-𝔽 finite-ring-Field-𝔽
+  mul-Finite-Field : (x y : type-Finite-Field) → type-Finite-Field
+  mul-Finite-Field = mul-Finite-Ring finite-ring-Finite-Field
 
-  mul-Field-𝔽' : (x y : type-Field-𝔽) → type-Field-𝔽
-  mul-Field-𝔽' = mul-Ring-𝔽' finite-ring-Field-𝔽
+  mul-Finite-Field' : (x y : type-Finite-Field) → type-Finite-Field
+  mul-Finite-Field' = mul-Finite-Ring' finite-ring-Finite-Field
 
-  ap-mul-Field-𝔽 :
-    {x x' y y' : type-Field-𝔽} (p : Id x x') (q : Id y y') →
-    Id (mul-Field-𝔽 x y) (mul-Field-𝔽 x' y')
-  ap-mul-Field-𝔽 p q = ap-binary mul-Field-𝔽 p q
+  ap-mul-Finite-Field :
+    {x x' y y' : type-Finite-Field} (p : x ＝ x') (q : y ＝ y') →
+    mul-Finite-Field x y ＝ mul-Finite-Field x' y'
+  ap-mul-Finite-Field p q = ap-binary mul-Finite-Field p q
 
-  associative-mul-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    mul-Field-𝔽 (mul-Field-𝔽 x y) z ＝
-    mul-Field-𝔽 x (mul-Field-𝔽 y z)
-  associative-mul-Field-𝔽 =
-    associative-mul-Ring-𝔽 finite-ring-Field-𝔽
+  associative-mul-Finite-Field :
+    (x y z : type-Finite-Field) →
+    mul-Finite-Field (mul-Finite-Field x y) z ＝
+    mul-Finite-Field x (mul-Finite-Field y z)
+  associative-mul-Finite-Field =
+    associative-mul-Finite-Ring finite-ring-Finite-Field
 
-  multiplicative-semigroup-Field-𝔽 : Semigroup l
-  pr1 multiplicative-semigroup-Field-𝔽 = set-Field-𝔽
-  pr2 multiplicative-semigroup-Field-𝔽 =
-    has-associative-mul-Field-𝔽
+  multiplicative-semigroup-Finite-Field : Semigroup l
+  pr1 multiplicative-semigroup-Finite-Field = set-Finite-Field
+  pr2 multiplicative-semigroup-Finite-Field =
+    has-associative-mul-Finite-Field
 
-  left-distributive-mul-add-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    ( mul-Field-𝔽 x (add-Field-𝔽 y z)) ＝
-    ( add-Field-𝔽
-      ( mul-Field-𝔽 x y)
-      ( mul-Field-𝔽 x z))
-  left-distributive-mul-add-Field-𝔽 =
-    left-distributive-mul-add-Ring-𝔽 finite-ring-Field-𝔽
+  left-distributive-mul-add-Finite-Field :
+    (x y z : type-Finite-Field) →
+    mul-Finite-Field x (add-Finite-Field y z) ＝
+    add-Finite-Field (mul-Finite-Field x y) (mul-Finite-Field x z)
+  left-distributive-mul-add-Finite-Field =
+    left-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 
-  right-distributive-mul-add-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    ( mul-Field-𝔽 (add-Field-𝔽 x y) z) ＝
-    ( add-Field-𝔽
-      ( mul-Field-𝔽 x z)
-      ( mul-Field-𝔽 y z))
-  right-distributive-mul-add-Field-𝔽 =
-    right-distributive-mul-add-Ring-𝔽 finite-ring-Field-𝔽
+  right-distributive-mul-add-Finite-Field :
+    (x y z : type-Finite-Field) →
+    mul-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field (mul-Finite-Field x z) (mul-Finite-Field y z)
+  right-distributive-mul-add-Finite-Field =
+    right-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 
-  commutative-mul-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    mul-Field-𝔽 x y ＝ mul-Field-𝔽 y x
-  commutative-mul-Field-𝔽 =
-    commutative-mul-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  commutative-mul-Finite-Field :
+    (x y : type-Finite-Field) →
+    mul-Finite-Field x y ＝ mul-Finite-Field y x
+  commutative-mul-Finite-Field =
+    commutative-mul-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
 ```
 
 ### Multiplicative units in a finite fields
 
 ```agda
-  is-unital-Field-𝔽 : is-unital mul-Field-𝔽
-  is-unital-Field-𝔽 = is-unital-Ring-𝔽 finite-ring-Field-𝔽
+  is-unital-Finite-Field : is-unital mul-Finite-Field
+  is-unital-Finite-Field = is-unital-Finite-Ring finite-ring-Finite-Field
 
-  multiplicative-monoid-Field-𝔽 : Monoid l
-  multiplicative-monoid-Field-𝔽 =
-    multiplicative-monoid-Ring-𝔽 finite-ring-Field-𝔽
+  multiplicative-monoid-Finite-Field : Monoid l
+  multiplicative-monoid-Finite-Field =
+    multiplicative-monoid-Finite-Ring finite-ring-Finite-Field
 
-  one-Field-𝔽 : type-Field-𝔽
-  one-Field-𝔽 = one-Ring-𝔽 finite-ring-Field-𝔽
+  one-Finite-Field : type-Finite-Field
+  one-Finite-Field = one-Finite-Ring finite-ring-Finite-Field
 
-  left-unit-law-mul-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 one-Field-𝔽 x ＝ x
-  left-unit-law-mul-Field-𝔽 =
-    left-unit-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  left-unit-law-mul-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-Finite-Field one-Finite-Field x ＝ x
+  left-unit-law-mul-Finite-Field =
+    left-unit-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  right-unit-law-mul-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 x one-Field-𝔽 ＝ x
-  right-unit-law-mul-Field-𝔽 =
-    right-unit-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  right-unit-law-mul-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-Finite-Field x one-Finite-Field ＝ x
+  right-unit-law-mul-Finite-Field =
+    right-unit-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  right-swap-mul-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    mul-Field-𝔽 (mul-Field-𝔽 x y) z ＝
-    mul-Field-𝔽 (mul-Field-𝔽 x z) y
-  right-swap-mul-Field-𝔽 =
-    right-swap-mul-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  right-swap-mul-Finite-Field :
+    (x y z : type-Finite-Field) →
+    mul-Finite-Field (mul-Finite-Field x y) z ＝
+    mul-Finite-Field (mul-Finite-Field x z) y
+  right-swap-mul-Finite-Field =
+    right-swap-mul-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
 
-  left-swap-mul-Field-𝔽 :
-    (x y z : type-Field-𝔽) →
-    mul-Field-𝔽 x (mul-Field-𝔽 y z) ＝
-    mul-Field-𝔽 y (mul-Field-𝔽 x z)
-  left-swap-mul-Field-𝔽 =
-    left-swap-mul-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  left-swap-mul-Finite-Field :
+    (x y z : type-Finite-Field) →
+    mul-Finite-Field x (mul-Finite-Field y z) ＝
+    mul-Finite-Field y (mul-Finite-Field x z)
+  left-swap-mul-Finite-Field =
+    left-swap-mul-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
 
-  interchange-mul-mul-Field-𝔽 :
-    (x y z w : type-Field-𝔽) →
-    mul-Field-𝔽
-      ( mul-Field-𝔽 x y)
-      ( mul-Field-𝔽 z w) ＝
-    mul-Field-𝔽
-      ( mul-Field-𝔽 x z)
-      ( mul-Field-𝔽 y w)
-  interchange-mul-mul-Field-𝔽 =
-    interchange-mul-mul-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  interchange-mul-mul-Finite-Field :
+    (x y z w : type-Finite-Field) →
+    mul-Finite-Field
+      ( mul-Finite-Field x y)
+      ( mul-Finite-Field z w) ＝
+    mul-Finite-Field
+      ( mul-Finite-Field x z)
+      ( mul-Finite-Field y w)
+  interchange-mul-mul-Finite-Field =
+    interchange-mul-mul-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 ```
 
 ### The zero laws for multiplication of a finite field
 
 ```agda
-  left-zero-law-mul-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 zero-Field-𝔽 x ＝
-    zero-Field-𝔽
-  left-zero-law-mul-Field-𝔽 =
-    left-zero-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  left-zero-law-mul-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-Finite-Field zero-Finite-Field x ＝
+    zero-Finite-Field
+  left-zero-law-mul-Finite-Field =
+    left-zero-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  right-zero-law-mul-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 x zero-Field-𝔽 ＝
-    zero-Field-𝔽
-  right-zero-law-mul-Field-𝔽 =
-    right-zero-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  right-zero-law-mul-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-Finite-Field x zero-Finite-Field ＝
+    zero-Finite-Field
+  right-zero-law-mul-Finite-Field =
+    right-zero-law-mul-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Finite fields are commutative finite semirings
 
 ```agda
-  multiplicative-commutative-monoid-Field-𝔽 : Commutative-Monoid l
-  multiplicative-commutative-monoid-Field-𝔽 =
-    multiplicative-commutative-monoid-Commutative-Ring-𝔽
-      commutative-finite-ring-Field-𝔽
+  multiplicative-commutative-monoid-Finite-Field : Commutative-Monoid l
+  multiplicative-commutative-monoid-Finite-Field =
+    multiplicative-commutative-monoid-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 
-  semifinite-ring-Field-𝔽 : Semiring l
-  semifinite-ring-Field-𝔽 = semiring-Ring-𝔽 finite-ring-Field-𝔽
+  semifinite-ring-Finite-Field : Semiring l
+  semifinite-ring-Finite-Field = semiring-Finite-Ring finite-ring-Finite-Field
 
-  commutative-semiring-Field-𝔽 : Commutative-Semiring l
-  commutative-semiring-Field-𝔽 =
-    commutative-semiring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  commutative-semiring-Finite-Field : Commutative-Semiring l
+  commutative-semiring-Finite-Field =
+    commutative-semiring-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 ```
 
 ### Computing multiplication with minus one in a finite field
 
 ```agda
-  neg-one-Field-𝔽 : type-Field-𝔽
-  neg-one-Field-𝔽 = neg-one-Ring-𝔽 finite-ring-Field-𝔽
+  neg-one-Finite-Field : type-Finite-Field
+  neg-one-Finite-Field = neg-one-Finite-Ring finite-ring-Finite-Field
 
-  mul-neg-one-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 neg-one-Field-𝔽 x ＝
-    neg-Field-𝔽 x
-  mul-neg-one-Field-𝔽 = mul-neg-one-Ring-𝔽 finite-ring-Field-𝔽
+  mul-neg-one-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-Finite-Field neg-one-Finite-Field x ＝
+    neg-Finite-Field x
+  mul-neg-one-Finite-Field = mul-neg-one-Finite-Ring finite-ring-Finite-Field
 
-  mul-neg-one-Field-𝔽' :
-    (x : type-Field-𝔽) →
-    mul-Field-𝔽 x neg-one-Field-𝔽 ＝
-    neg-Field-𝔽 x
-  mul-neg-one-Field-𝔽' = mul-neg-one-Ring-𝔽' finite-ring-Field-𝔽
+  mul-neg-one-Finite-Field' :
+    (x : type-Finite-Field) →
+    mul-Finite-Field x neg-one-Finite-Field ＝
+    neg-Finite-Field x
+  mul-neg-one-Finite-Field' = mul-neg-one-Finite-Ring' finite-ring-Finite-Field
 
-  is-involution-mul-neg-one-Field-𝔽 :
-    is-involution (mul-Field-𝔽 neg-one-Field-𝔽)
-  is-involution-mul-neg-one-Field-𝔽 =
-    is-involution-mul-neg-one-Ring-𝔽 finite-ring-Field-𝔽
+  is-involution-mul-neg-one-Finite-Field :
+    is-involution (mul-Finite-Field neg-one-Finite-Field)
+  is-involution-mul-neg-one-Finite-Field =
+    is-involution-mul-neg-one-Finite-Ring finite-ring-Finite-Field
 
-  is-involution-mul-neg-one-Field-𝔽' :
-    is-involution (mul-Field-𝔽' neg-one-Field-𝔽)
-  is-involution-mul-neg-one-Field-𝔽' =
-    is-involution-mul-neg-one-Ring-𝔽' finite-ring-Field-𝔽
+  is-involution-mul-neg-one-Finite-Field' :
+    is-involution (mul-Finite-Field' neg-one-Finite-Field)
+  is-involution-mul-neg-one-Finite-Field' =
+    is-involution-mul-neg-one-Finite-Ring' finite-ring-Finite-Field
 ```
 
 ### Left and right negative laws for multiplication
 
 ```agda
-  left-negative-law-mul-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    mul-Field-𝔽 (neg-Field-𝔽 x) y ＝
-    neg-Field-𝔽 (mul-Field-𝔽 x y)
-  left-negative-law-mul-Field-𝔽 =
-    left-negative-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  left-negative-law-mul-Finite-Field :
+    (x y : type-Finite-Field) →
+    mul-Finite-Field (neg-Finite-Field x) y ＝
+    neg-Finite-Field (mul-Finite-Field x y)
+  left-negative-law-mul-Finite-Field =
+    left-negative-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  right-negative-law-mul-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    mul-Field-𝔽 x (neg-Field-𝔽 y) ＝
-    neg-Field-𝔽 (mul-Field-𝔽 x y)
-  right-negative-law-mul-Field-𝔽 =
-    right-negative-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  right-negative-law-mul-Finite-Field :
+    (x y : type-Finite-Field) →
+    mul-Finite-Field x (neg-Finite-Field y) ＝
+    neg-Finite-Field (mul-Finite-Field x y)
+  right-negative-law-mul-Finite-Field =
+    right-negative-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  mul-neg-Field-𝔽 :
-    (x y : type-Field-𝔽) →
-    mul-Field-𝔽 (neg-Field-𝔽 x) (neg-Field-𝔽 y) ＝
-    mul-Field-𝔽 x y
-  mul-neg-Field-𝔽 = mul-neg-Ring-𝔽 finite-ring-Field-𝔽
+  mul-neg-Finite-Field :
+    (x y : type-Finite-Field) →
+    mul-Finite-Field (neg-Finite-Field x) (neg-Finite-Field y) ＝
+    mul-Finite-Field x y
+  mul-neg-Finite-Field = mul-neg-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Scalar multiplication of elements of a commutative finite ring by natural numbers
 
 ```agda
-  mul-nat-scalar-Field-𝔽 :
-    ℕ → type-Field-𝔽 → type-Field-𝔽
-  mul-nat-scalar-Field-𝔽 =
-    mul-nat-scalar-Ring-𝔽 finite-ring-Field-𝔽
+  mul-nat-scalar-Finite-Field :
+    ℕ → type-Finite-Field → type-Finite-Field
+  mul-nat-scalar-Finite-Field =
+    mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  ap-mul-nat-scalar-Field-𝔽 :
-    {m n : ℕ} {x y : type-Field-𝔽} →
+  ap-mul-nat-scalar-Finite-Field :
+    {m n : ℕ} {x y : type-Finite-Field} →
     (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Field-𝔽 m x ＝
-    mul-nat-scalar-Field-𝔽 n y
-  ap-mul-nat-scalar-Field-𝔽 =
-    ap-mul-nat-scalar-Ring-𝔽 finite-ring-Field-𝔽
+    mul-nat-scalar-Finite-Field m x ＝
+    mul-nat-scalar-Finite-Field n y
+  ap-mul-nat-scalar-Finite-Field =
+    ap-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  left-zero-law-mul-nat-scalar-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-nat-scalar-Field-𝔽 0 x ＝ zero-Field-𝔽
-  left-zero-law-mul-nat-scalar-Field-𝔽 =
-    left-zero-law-mul-nat-scalar-Ring-𝔽 finite-ring-Field-𝔽
+  left-zero-law-mul-nat-scalar-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-nat-scalar-Finite-Field 0 x ＝ zero-Finite-Field
+  left-zero-law-mul-nat-scalar-Finite-Field =
+    left-zero-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  right-zero-law-mul-nat-scalar-Field-𝔽 :
+  right-zero-law-mul-nat-scalar-Finite-Field :
     (n : ℕ) →
-    mul-nat-scalar-Field-𝔽 n zero-Field-𝔽 ＝
-    zero-Field-𝔽
-  right-zero-law-mul-nat-scalar-Field-𝔽 =
-    right-zero-law-mul-nat-scalar-Ring-𝔽 finite-ring-Field-𝔽
+    mul-nat-scalar-Finite-Field n zero-Finite-Field ＝
+    zero-Finite-Field
+  right-zero-law-mul-nat-scalar-Finite-Field =
+    right-zero-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  left-unit-law-mul-nat-scalar-Field-𝔽 :
-    (x : type-Field-𝔽) →
-    mul-nat-scalar-Field-𝔽 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Field-𝔽 =
-    left-unit-law-mul-nat-scalar-Ring-𝔽 finite-ring-Field-𝔽
+  left-unit-law-mul-nat-scalar-Finite-Field :
+    (x : type-Finite-Field) →
+    mul-nat-scalar-Finite-Field 1 x ＝ x
+  left-unit-law-mul-nat-scalar-Finite-Field =
+    left-unit-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  left-nat-scalar-law-mul-Field-𝔽 :
-    (n : ℕ) (x y : type-Field-𝔽) →
-    mul-Field-𝔽 (mul-nat-scalar-Field-𝔽 n x) y ＝
-    mul-nat-scalar-Field-𝔽 n (mul-Field-𝔽 x y)
-  left-nat-scalar-law-mul-Field-𝔽 =
-    left-nat-scalar-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  left-nat-scalar-law-mul-Finite-Field :
+    (n : ℕ) (x y : type-Finite-Field) →
+    mul-Finite-Field (mul-nat-scalar-Finite-Field n x) y ＝
+    mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
+  left-nat-scalar-law-mul-Finite-Field =
+    left-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  right-nat-scalar-law-mul-Field-𝔽 :
-    (n : ℕ) (x y : type-Field-𝔽) →
-    mul-Field-𝔽 x (mul-nat-scalar-Field-𝔽 n y) ＝
-    mul-nat-scalar-Field-𝔽 n (mul-Field-𝔽 x y)
-  right-nat-scalar-law-mul-Field-𝔽 =
-    right-nat-scalar-law-mul-Ring-𝔽 finite-ring-Field-𝔽
+  right-nat-scalar-law-mul-Finite-Field :
+    (n : ℕ) (x y : type-Finite-Field) →
+    mul-Finite-Field x (mul-nat-scalar-Finite-Field n y) ＝
+    mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
+  right-nat-scalar-law-mul-Finite-Field =
+    right-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Field
 
-  left-distributive-mul-nat-scalar-add-Field-𝔽 :
-    (n : ℕ) (x y : type-Field-𝔽) →
-    mul-nat-scalar-Field-𝔽 n (add-Field-𝔽 x y) ＝
-    add-Field-𝔽
-      ( mul-nat-scalar-Field-𝔽 n x)
-      ( mul-nat-scalar-Field-𝔽 n y)
-  left-distributive-mul-nat-scalar-add-Field-𝔽 =
-    left-distributive-mul-nat-scalar-add-Ring-𝔽 finite-ring-Field-𝔽
+  left-distributive-mul-nat-scalar-add-Finite-Field :
+    (n : ℕ) (x y : type-Finite-Field) →
+    mul-nat-scalar-Finite-Field n (add-Finite-Field x y) ＝
+    add-Finite-Field
+      ( mul-nat-scalar-Finite-Field n x)
+      ( mul-nat-scalar-Finite-Field n y)
+  left-distributive-mul-nat-scalar-add-Finite-Field =
+    left-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Field
 
-  right-distributive-mul-nat-scalar-add-Field-𝔽 :
-    (m n : ℕ) (x : type-Field-𝔽) →
-    mul-nat-scalar-Field-𝔽 (m +ℕ n) x ＝
-    add-Field-𝔽
-      ( mul-nat-scalar-Field-𝔽 m x)
-      ( mul-nat-scalar-Field-𝔽 n x)
-  right-distributive-mul-nat-scalar-add-Field-𝔽 =
-    right-distributive-mul-nat-scalar-add-Ring-𝔽 finite-ring-Field-𝔽
+  right-distributive-mul-nat-scalar-add-Finite-Field :
+    (m n : ℕ) (x : type-Finite-Field) →
+    mul-nat-scalar-Finite-Field (m +ℕ n) x ＝
+    add-Finite-Field
+      ( mul-nat-scalar-Finite-Field m x)
+      ( mul-nat-scalar-Finite-Field n x)
+  right-distributive-mul-nat-scalar-add-Finite-Field =
+    right-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Addition of a list of elements in a finite field
 
 ```agda
-  add-list-Field-𝔽 : list type-Field-𝔽 → type-Field-𝔽
-  add-list-Field-𝔽 = add-list-Ring-𝔽 finite-ring-Field-𝔽
+  add-list-Finite-Field : list type-Finite-Field → type-Finite-Field
+  add-list-Finite-Field = add-list-Finite-Ring finite-ring-Finite-Field
 
-  preserves-concat-add-list-Field-𝔽 :
-    (l1 l2 : list type-Field-𝔽) →
-    Id
-      ( add-list-Field-𝔽 (concat-list l1 l2))
-      ( add-Field-𝔽
-        ( add-list-Field-𝔽 l1)
-        ( add-list-Field-𝔽 l2))
-  preserves-concat-add-list-Field-𝔽 =
-    preserves-concat-add-list-Ring-𝔽 finite-ring-Field-𝔽
+  preserves-concat-add-list-Finite-Field :
+    (l1 l2 : list type-Finite-Field) →
+    ( add-list-Finite-Field (concat-list l1 l2)) ＝
+    ( add-Finite-Field
+      ( add-list-Finite-Field l1)
+      ( add-list-Finite-Field l2))
+  preserves-concat-add-list-Finite-Field =
+    preserves-concat-add-list-Finite-Ring finite-ring-Finite-Field
 ```

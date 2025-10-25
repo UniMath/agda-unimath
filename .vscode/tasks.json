@@ -2,24 +2,70 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "check",
-      "detail": "Typecheck the entire library.",
+      "label": "quality-test",
+      "detail": "Run GitHub tests",
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "dependsOn": ["link-check", "typecheck-after-pre-commit"],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "typecheck-after-pre-commit",
+      "detail": "Typecheck the library after running pre-commit",
       "type": "shell",
       "command": "make",
       "args": ["check"],
       "problemMatcher": [],
-      "group": "build"
+      "group": { "kind": "build" },
+      "dependsOn": "pre-commit",
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      },
+      "hide": true
+    },
+    {
+      "label": "typecheck",
+      "detail": "Typecheck the library",
+      "type": "shell",
+      "command": "make",
+      "args": ["check"],
+      "problemMatcher": [],
+      "group": { "kind": "build" },
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
     },
     {
       "label": "pre-commit",
-      "detail": "Quality assurance for the library.",
+      "detail": "Check and fix code conventions",
+      "type": "shell",
+      "command": "pre-commit",
+      "args": ["run", "--all-files"],
+      "problemMatcher": [],
+      "hide": true,
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "link-check",
+      "detail": "Check website links and bibtex references",
       "type": "shell",
       "command": "make",
-      "args": ["pre-commit"],
+      "args": ["SKIPAGDA=1", "SKIPAUX=1", "website"],
       "problemMatcher": [],
       "group": {
-        "kind": "build",
-        "isDefault": true
+        "kind": "test"
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "clear": true
       }
     },
     {
@@ -48,10 +94,11 @@
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
       "problemMatcher": [],
       "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
-      "dependsOrder": "sequence"
+      "dependsOrder": "sequence",
+      "hide": true
     },
     {
-      "label": "remove-unused-imports-current-file",
+      "label": "unused-imports-here",
       "detail": "Remove unused imports in current file",
       "type": "shell",
       "command": "${workspaceFolder}/scripts/remove_unused_imports.py",
@@ -59,12 +106,12 @@
       "problemMatcher": [],
       // "hide": true,
       "presentation": {
-        "reveal": "silent",
         "revealProblems": "onProblem",
-        "close": true
+        "close": false
       },
       "runOptions": {
-        "runOn": "default"
+        "runOn": "default",
+        "instanceLimit": 99
       }
     }
   ],

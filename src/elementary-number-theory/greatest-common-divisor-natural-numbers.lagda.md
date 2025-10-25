@@ -24,6 +24,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -42,8 +43,9 @@ The greatest common divisor of two natural numbers `x` and `y` is a number
 `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and
 `y` if and only if it is a divisor of `gcd x y`.
 
-The algorithm defining the greatest common divisor is the 69th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+The algorithm defining the greatest common divisor is the
+[69th](literature.100-theorems.md#69) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definition
@@ -76,88 +78,95 @@ is-multiple-of-gcd-ℕ a b n =
 ### Reflexivity for common divisors
 
 ```agda
-refl-is-common-divisor-ℕ :
-  (x : ℕ) → is-common-divisor-ℕ x x x
-pr1 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
-pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
+abstract
+  refl-is-common-divisor-ℕ :
+    (x : ℕ) → is-common-divisor-ℕ x x x
+  pr1 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
+  pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
 ```
 
 ### Being a common divisor is decidable
 
 ```agda
-is-decidable-is-common-divisor-ℕ :
-  (a b : ℕ) → is-decidable-fam (is-common-divisor-ℕ a b)
-is-decidable-is-common-divisor-ℕ a b x =
-  is-decidable-product
-    ( is-decidable-div-ℕ x a)
-    ( is-decidable-div-ℕ x b)
+abstract
+  is-decidable-is-common-divisor-ℕ :
+    (a b : ℕ) → is-decidable-family (is-common-divisor-ℕ a b)
+  is-decidable-is-common-divisor-ℕ a b x =
+    is-decidable-product
+      ( is-decidable-div-ℕ x a)
+      ( is-decidable-div-ℕ x b)
 ```
 
 ### Any greatest common divisor is a common divisor
 
 ```agda
-is-common-divisor-is-gcd-ℕ :
-  (a b d : ℕ) → is-gcd-ℕ a b d → is-common-divisor-ℕ a b d
-is-common-divisor-is-gcd-ℕ a b d H = pr2 (H d) (refl-div-ℕ d)
+abstract
+  is-common-divisor-is-gcd-ℕ :
+    (a b d : ℕ) → is-gcd-ℕ a b d → is-common-divisor-ℕ a b d
+  is-common-divisor-is-gcd-ℕ a b d H = pr2 (H d) (refl-div-ℕ d)
 ```
 
 ### Uniqueness of greatest common divisors
 
 ```agda
-uniqueness-is-gcd-ℕ :
-  (a b d d' : ℕ) → is-gcd-ℕ a b d → is-gcd-ℕ a b d' → d ＝ d'
-uniqueness-is-gcd-ℕ a b d d' H H' =
-  antisymmetric-div-ℕ d d'
-    ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
-    ( pr1 (H d') (is-common-divisor-is-gcd-ℕ a b d' H'))
+abstract
+  uniqueness-is-gcd-ℕ :
+    (a b d d' : ℕ) → is-gcd-ℕ a b d → is-gcd-ℕ a b d' → d ＝ d'
+  uniqueness-is-gcd-ℕ a b d d' H H' =
+    antisymmetric-div-ℕ d d'
+      ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
+      ( pr1 (H d') (is-common-divisor-is-gcd-ℕ a b d' H'))
 ```
 
 ### If `d` is a common divisor of `a` and `b`, and `a + b ≠ 0`, then `d ≤ a + b`
 
 ```agda
-leq-sum-is-common-divisor-ℕ' :
-  (a b d : ℕ) →
-  is-successor-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
-leq-sum-is-common-divisor-ℕ' a zero-ℕ d (pair k p) H =
-  concatenate-leq-eq-ℕ d
-    ( leq-div-succ-ℕ d k (concatenate-div-eq-ℕ (pr1 H) p))
-    ( inv p)
-leq-sum-is-common-divisor-ℕ' a (succ-ℕ b) d (pair k p) H =
-  leq-div-succ-ℕ d (a +ℕ b) (div-add-ℕ d a (succ-ℕ b) (pr1 H) (pr2 H))
+abstract
+  leq-sum-is-common-divisor-ℕ' :
+    (a b d : ℕ) →
+    is-successor-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
+  leq-sum-is-common-divisor-ℕ' a zero-ℕ d (pair k p) H =
+    concatenate-leq-eq-ℕ d
+      ( leq-div-succ-ℕ d k (concatenate-div-eq-ℕ (pr1 H) p))
+      ( inv p)
+  leq-sum-is-common-divisor-ℕ' a (succ-ℕ b) d (pair k p) H =
+    leq-div-succ-ℕ d (a +ℕ b) (div-add-ℕ d a (succ-ℕ b) (pr1 H) (pr2 H))
 
-leq-sum-is-common-divisor-ℕ :
-  (a b d : ℕ) →
-  is-nonzero-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
-leq-sum-is-common-divisor-ℕ a b d H =
-  leq-sum-is-common-divisor-ℕ' a b d (is-successor-is-nonzero-ℕ H)
+  leq-sum-is-common-divisor-ℕ :
+    (a b d : ℕ) →
+    is-nonzero-ℕ (a +ℕ b) → is-common-divisor-ℕ a b d → leq-ℕ d (a +ℕ b)
+  leq-sum-is-common-divisor-ℕ a b d H =
+    leq-sum-is-common-divisor-ℕ' a b d (is-successor-is-nonzero-ℕ H)
 ```
 
 ### Being a multiple of the greatest common divisor is decidable
 
 ```agda
-is-decidable-is-multiple-of-gcd-ℕ :
-  (a b : ℕ) → is-decidable-fam (is-multiple-of-gcd-ℕ a b)
-is-decidable-is-multiple-of-gcd-ℕ a b n =
-  is-decidable-function-type'
-    ( is-decidable-neg (is-decidable-is-zero-ℕ (a +ℕ b)))
-    ( λ np →
-      is-decidable-product
-        ( is-decidable-neg (is-decidable-is-zero-ℕ n))
-        ( is-decidable-bounded-Π-ℕ
-          ( is-common-divisor-ℕ a b)
-          ( λ x → div-ℕ x n)
-          ( is-decidable-is-common-divisor-ℕ a b)
-          ( λ x → is-decidable-div-ℕ x n)
-          ( a +ℕ b)
-          ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
+abstract
+  is-decidable-is-multiple-of-gcd-ℕ :
+    (a b : ℕ) → is-decidable-family (is-multiple-of-gcd-ℕ a b)
+  is-decidable-is-multiple-of-gcd-ℕ a b n =
+    is-decidable-function-type'
+      ( is-decidable-neg (is-decidable-is-zero-ℕ (a +ℕ b)))
+      ( λ np →
+        is-decidable-product
+          ( is-decidable-neg (is-decidable-is-zero-ℕ n))
+          ( is-decidable-bounded-Π-ℕ
+            ( is-common-divisor-ℕ a b)
+            ( λ x → div-ℕ x n)
+            ( is-decidable-is-common-divisor-ℕ a b)
+            ( λ x → is-decidable-div-ℕ x n)
+            ( a +ℕ b)
+            ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
 ```
 
 ### The sum of `a` and `b` is a multiple of the greatest common divisor of `a` and `b`
 
 ```agda
-sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (a +ℕ b)
-pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
-pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
+abstract
+  sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (a +ℕ b)
+  pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
+  pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
 ```
 
 ### The greatest common divisor exists
@@ -185,40 +194,42 @@ is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 ### `a + b = 0` if and only if `gcd a b = 0`
 
 ```agda
-is-zero-gcd-ℕ :
-  (a b : ℕ) → is-zero-ℕ (a +ℕ b) → is-zero-ℕ (gcd-ℕ a b)
-is-zero-gcd-ℕ a b p =
-  is-zero-leq-zero-ℕ
-    ( gcd-ℕ a b)
-    ( concatenate-leq-eq-ℕ
+abstract
+  is-zero-gcd-ℕ :
+    (a b : ℕ) → is-zero-ℕ (a +ℕ b) → is-zero-ℕ (gcd-ℕ a b)
+  is-zero-gcd-ℕ a b p =
+    is-zero-leq-zero-ℕ
       ( gcd-ℕ a b)
-      ( is-lower-bound-gcd-ℕ a b
-        ( a +ℕ b)
-        ( sum-is-multiple-of-gcd-ℕ a b))
-      ( p))
+      ( concatenate-leq-eq-ℕ
+        ( gcd-ℕ a b)
+        ( is-lower-bound-gcd-ℕ a b
+          ( a +ℕ b)
+          ( sum-is-multiple-of-gcd-ℕ a b))
+        ( p))
 
-is-zero-gcd-zero-zero-ℕ : is-zero-ℕ (gcd-ℕ zero-ℕ zero-ℕ)
-is-zero-gcd-zero-zero-ℕ = is-zero-gcd-ℕ zero-ℕ zero-ℕ refl
+  is-zero-gcd-zero-zero-ℕ : is-zero-ℕ (gcd-ℕ zero-ℕ zero-ℕ)
+  is-zero-gcd-zero-zero-ℕ = is-zero-gcd-ℕ zero-ℕ zero-ℕ refl
 
-is-zero-add-is-zero-gcd-ℕ :
-  (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (a +ℕ b)
-is-zero-add-is-zero-gcd-ℕ a b H =
-  double-negation-elim-is-decidable
-    ( is-decidable-is-zero-ℕ (a +ℕ b))
-    ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
+  is-zero-add-is-zero-gcd-ℕ :
+    (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (a +ℕ b)
+  is-zero-add-is-zero-gcd-ℕ a b H =
+    double-negation-elim-is-decidable
+      ( is-decidable-is-zero-ℕ (a +ℕ b))
+      ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
 
 ### If at least one of `a` and `b` is nonzero, then their gcd is nonzero
 
 ```agda
-is-nonzero-gcd-ℕ :
-  (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-nonzero-ℕ (gcd-ℕ a b)
-is-nonzero-gcd-ℕ a b ne = pr1 (is-multiple-of-gcd-gcd-ℕ a b ne)
+abstract
+  is-nonzero-gcd-ℕ :
+    (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-nonzero-ℕ (gcd-ℕ a b)
+  is-nonzero-gcd-ℕ a b ne = pr1 (is-multiple-of-gcd-gcd-ℕ a b ne)
 
-is-successor-gcd-ℕ :
-  (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-successor-ℕ (gcd-ℕ a b)
-is-successor-gcd-ℕ a b ne =
-  is-successor-is-nonzero-ℕ (is-nonzero-gcd-ℕ a b ne)
+  is-successor-gcd-ℕ :
+    (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) → is-successor-ℕ (gcd-ℕ a b)
+  is-successor-gcd-ℕ a b ne =
+    is-successor-is-nonzero-ℕ (is-nonzero-gcd-ℕ a b ne)
 ```
 
 ### Any common divisor is also a divisor of the greatest common divisor
@@ -235,15 +246,16 @@ div-gcd-is-common-divisor-ℕ a b x H with
 ### If every common divisor divides a number `r < gcd a b`, then `r = 0`
 
 ```agda
-is-zero-is-common-divisor-le-gcd-ℕ :
-  (a b r : ℕ) → le-ℕ r (gcd-ℕ a b) →
-  ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x r) → is-zero-ℕ r
-is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
-... | inl H = H
-... | inr x =
-  ex-falso
-    ( contradiction-le-ℕ r (gcd-ℕ a b) l
-      ( is-lower-bound-gcd-ℕ a b r (λ np → pair x d)))
+abstract
+  is-zero-is-common-divisor-le-gcd-ℕ :
+    (a b r : ℕ) → le-ℕ r (gcd-ℕ a b) →
+    ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x r) → is-zero-ℕ r
+  is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
+  ... | inl H = H
+  ... | inr x =
+    ex-falso
+      ( contradiction-le-ℕ r (gcd-ℕ a b) l
+        ( is-lower-bound-gcd-ℕ a b r (λ np → pair x d)))
 ```
 
 ### Any divisor of `gcd a b` is a common divisor of `a` and `b`
@@ -342,17 +354,18 @@ pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
 ### The gcd is commutative
 
 ```agda
-is-commutative-gcd-ℕ : (a b : ℕ) → gcd-ℕ a b ＝ gcd-ℕ b a
-is-commutative-gcd-ℕ a b =
-  antisymmetric-div-ℕ
-    ( gcd-ℕ a b)
-    ( gcd-ℕ b a)
-    ( pr1 (is-gcd-gcd-ℕ b a (gcd-ℕ a b)) (σ (is-common-divisor-gcd-ℕ a b)))
-    ( pr1 (is-gcd-gcd-ℕ a b (gcd-ℕ b a)) (σ (is-common-divisor-gcd-ℕ b a)))
-  where
-  σ : {A B : UU lzero} → A × B → B × A
-  pr1 (σ (pair x y)) = y
-  pr2 (σ (pair x y)) = x
+abstract
+  is-commutative-gcd-ℕ : (a b : ℕ) → gcd-ℕ a b ＝ gcd-ℕ b a
+  is-commutative-gcd-ℕ a b =
+    antisymmetric-div-ℕ
+      ( gcd-ℕ a b)
+      ( gcd-ℕ b a)
+      ( pr1 (is-gcd-gcd-ℕ b a (gcd-ℕ a b)) (σ (is-common-divisor-gcd-ℕ a b)))
+      ( pr1 (is-gcd-gcd-ℕ a b (gcd-ℕ b a)) (σ (is-common-divisor-gcd-ℕ b a)))
+    where
+    σ : {A B : UU lzero} → A × B → B × A
+    pr1 (σ (pair x y)) = y
+    pr2 (σ (pair x y)) = x
 ```
 
 ### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`
@@ -379,43 +392,47 @@ reflects-is-common-divisor-mul-ℕ k a b d H =
 ### `gcd-ℕ 1 b ＝ 1`
 
 ```agda
-is-one-is-gcd-one-ℕ : {b x : ℕ} → is-gcd-ℕ 1 b x → is-one-ℕ x
-is-one-is-gcd-one-ℕ {b} {x} H =
-  is-one-div-one-ℕ x (pr1 (is-common-divisor-is-gcd-ℕ 1 b x H))
+abstract
+  is-one-is-gcd-one-ℕ : {b x : ℕ} → is-gcd-ℕ 1 b x → is-one-ℕ x
+  is-one-is-gcd-one-ℕ {b} {x} H =
+    is-one-div-one-ℕ x (pr1 (is-common-divisor-is-gcd-ℕ 1 b x H))
 
-is-one-gcd-one-ℕ : (b : ℕ) → is-one-ℕ (gcd-ℕ 1 b)
-is-one-gcd-one-ℕ b = is-one-is-gcd-one-ℕ (is-gcd-gcd-ℕ 1 b)
+  is-one-gcd-one-ℕ : (b : ℕ) → is-one-ℕ (gcd-ℕ 1 b)
+  is-one-gcd-one-ℕ b = is-one-is-gcd-one-ℕ (is-gcd-gcd-ℕ 1 b)
 ```
 
 ### `gcd-ℕ a 1 ＝ 1`
 
 ```agda
-is-one-is-gcd-one-ℕ' : {a x : ℕ} → is-gcd-ℕ a 1 x → is-one-ℕ x
-is-one-is-gcd-one-ℕ' {a} {x} H =
-  is-one-div-one-ℕ x (pr2 (is-common-divisor-is-gcd-ℕ a 1 x H))
+abstract
+  is-one-is-gcd-one-ℕ' : {a x : ℕ} → is-gcd-ℕ a 1 x → is-one-ℕ x
+  is-one-is-gcd-one-ℕ' {a} {x} H =
+    is-one-div-one-ℕ x (pr2 (is-common-divisor-is-gcd-ℕ a 1 x H))
 
-is-one-gcd-one-ℕ' : (a : ℕ) → is-one-ℕ (gcd-ℕ a 1)
-is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
+  is-one-gcd-one-ℕ' : (a : ℕ) → is-one-ℕ (gcd-ℕ a 1)
+  is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
 ```
 
 ### `gcd-ℕ 0 b ＝ b`
 
 ```agda
-is-id-is-gcd-zero-ℕ : {b x : ℕ} → gcd-ℕ 0 b ＝ x → x ＝ b
-is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
-  (pr2 (is-common-divisor-is-gcd-ℕ 0 b x
-    (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b))))
-  (tr (λ t → div-ℕ b t) H
-    (div-gcd-is-common-divisor-ℕ 0 b b
-      (pair' (div-zero-ℕ b) (refl-div-ℕ b))))
+abstract
+  is-id-is-gcd-zero-ℕ : {b x : ℕ} → gcd-ℕ 0 b ＝ x → x ＝ b
+  is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b
+    (pr2 (is-common-divisor-is-gcd-ℕ 0 b x
+      (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b))))
+    (tr (λ t → div-ℕ b t) H
+      (div-gcd-is-common-divisor-ℕ 0 b b
+        (pair' (div-zero-ℕ b) (refl-div-ℕ b))))
 ```
 
 ### `gcd-ℕ a 0 ＝ a`
 
 ```agda
-is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
-is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
-  ((is-commutative-gcd-ℕ 0 a) ∙ H)
+abstract
+  is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
+  is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
+    ((is-commutative-gcd-ℕ 0 a) ∙ H)
 ```
 
 ### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`
@@ -454,32 +471,33 @@ pr2 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
 ### The greatest common divisor of `a/d` and `b/d` is `gcd(a,b)/d`
 
 ```agda
-is-gcd-quotient-div-gcd-ℕ :
-  {a b d : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
-  is-gcd-ℕ
-    ( quotient-div-ℕ d a (pr1 H))
-    ( quotient-div-ℕ d b (pr2 H))
-    ( quotient-div-ℕ d
-      ( gcd-ℕ a b)
-      ( div-gcd-is-common-divisor-ℕ a b d H))
-is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
-  logical-equivalence-reasoning
-    is-common-divisor-ℕ
+abstract
+  is-gcd-quotient-div-gcd-ℕ :
+    {a b d : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+    is-gcd-ℕ
       ( quotient-div-ℕ d a (pr1 H))
       ( quotient-div-ℕ d b (pr2 H))
-      ( x)
-    ↔ is-common-divisor-ℕ a b (x *ℕ d)
-      by simplify-is-common-divisor-quotient-div-ℕ nz H
-    ↔ div-ℕ (x *ℕ d) (gcd-ℕ a b)
-      by is-gcd-gcd-ℕ a b (x *ℕ d)
-    ↔ div-ℕ x
-        ( quotient-div-ℕ d
-          ( gcd-ℕ a b)
-          ( div-gcd-is-common-divisor-ℕ a b d H))
-      by
-      inv-iff
-        ( simplify-div-quotient-div-ℕ nz
-          ( div-gcd-is-common-divisor-ℕ a b d H))
+      ( quotient-div-ℕ d
+        ( gcd-ℕ a b)
+        ( div-gcd-is-common-divisor-ℕ a b d H))
+  is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
+    logical-equivalence-reasoning
+      is-common-divisor-ℕ
+        ( quotient-div-ℕ d a (pr1 H))
+        ( quotient-div-ℕ d b (pr2 H))
+        ( x)
+      ↔ is-common-divisor-ℕ a b (x *ℕ d)
+        by simplify-is-common-divisor-quotient-div-ℕ nz H
+      ↔ div-ℕ (x *ℕ d) (gcd-ℕ a b)
+        by is-gcd-gcd-ℕ a b (x *ℕ d)
+      ↔ div-ℕ x
+          ( quotient-div-ℕ d
+            ( gcd-ℕ a b)
+            ( div-gcd-is-common-divisor-ℕ a b d H))
+        by
+        inv-iff
+          ( simplify-div-quotient-div-ℕ nz
+            ( div-gcd-is-common-divisor-ℕ a b d H))
 ```
 
 ## References

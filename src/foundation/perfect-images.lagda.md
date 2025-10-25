@@ -124,7 +124,12 @@ module _
     Σ A (λ a₀ → Σ ℕ (λ n → (iterate n (g ∘ f) a₀ ＝ a) × ¬ (fiber g a₀)))
 ```
 
-### Nonperfect fibers over an element
+If `g` is an [embedding](foundation-core.embeddings.md), then
+`is-perfect-image a` is a [proposition](foundation-core.propositions.md). In
+this case, if we assume the
+[law of excluded middle](foundation.law-of-excluded-middle.md), we can show
+`is-perfect-image a` is a [decidable type](foundation.decidable-types.md) for
+any `a : A`.
 
 ```agda
 module _

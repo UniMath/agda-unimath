@@ -1,0 +1,65 @@
+# Monotonic rational neighborhood relations
+
+```agda
+module metric-spaces.monotonic-rational-neighborhood-relations where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
+
+open import foundation.propositions
+open import foundation.universe-levels
+
+open import metric-spaces.rational-neighborhood-relations
+```
+
+</details>
+
+## Idea
+
+A
+[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
+is
+{{#concept "monotonic" Disambiguation="rational neighborhood relation" Agda=is-monotonic-Rational-Neighborhood-Relation}}
+if, for all `d₁ < d₂`, all `d₁`-neighborhoods are `d₂`-neighborhoods.
+
+## Definitions
+
+### The property of being a monotonic rational neighborhood relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Rational-Neighborhood-Relation l2 A)
+  where
+
+  is-monotonic-prop-Rational-Neighborhood-Relation : Prop (l1 ⊔ l2)
+  is-monotonic-prop-Rational-Neighborhood-Relation =
+    Π-Prop
+      ( A)
+      ( λ x →
+        ( Π-Prop
+          ( A)
+          ( λ y →
+            ( Π-Prop
+              ( ℚ⁺)
+              ( λ d₁ →
+                ( Π-Prop
+                  ( ℚ⁺)
+                  ( λ d₂ →
+                    ( Π-Prop
+                      ( le-ℚ⁺ d₁ d₂)
+                      ( λ H →
+                        hom-Prop (B d₁ x y) (B d₂ x y))))))))))
+
+  is-monotonic-Rational-Neighborhood-Relation : UU (l1 ⊔ l2)
+  is-monotonic-Rational-Neighborhood-Relation =
+    type-Prop is-monotonic-prop-Rational-Neighborhood-Relation
+
+  is-prop-is-monotonic-Rational-Neighborhood-Relation :
+    is-prop is-monotonic-Rational-Neighborhood-Relation
+  is-prop-is-monotonic-Rational-Neighborhood-Relation =
+    is-prop-type-Prop is-monotonic-prop-Rational-Neighborhood-Relation
+```

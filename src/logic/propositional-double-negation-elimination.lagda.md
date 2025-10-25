@@ -9,24 +9,21 @@ module logic.propositional-double-negation-elimination where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality
 open import foundation.empty-types
-open import foundation.evaluation-functions
 open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators
+open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -41,15 +38,17 @@ open import logic.propositionally-decidable-types
 
 We say a type `A` satisfies
 {{#concept "propositional double negation elimination" Disambiguation="on a type" Agda=has-prop-double-negation-elim}}
-if there is a map
+if the implication
 
 ```text
-  ¬¬A → ║A║₋₁.
+  ¬¬A ⇒ ║A║₋₁
 ```
+
+holds.
 
 ## Definitions
 
-### Untruncated double negation elimination
+### Propositional double negation elimination
 
 ```agda
 module _
@@ -128,7 +127,7 @@ module _
     has-prop-double-negation-elim-iff' (iff-retract e)
 ```
 
-### If the negation of a type with double negation elimination is decidable, then the type is merely decidable
+### If the negation of a type with double negation elimination is decidable, then the type is inhabited or empty
 
 ```agda
 module _
@@ -148,9 +147,9 @@ module _
 ```
 
 **Remark.** It is an established fact that both the property of satisfying
-double negation elimination, and the property of having decidable negation, are
-strictly weaker conditions than being decidable. Therefore, this result
-demonstrates that they are independent too.
+double negation elimination and the property of having decidable negation are
+strictly weaker conditions than being decidable {{#cite Johnstone02}}.
+Therefore, this result demonstrates that they are independent too.
 
 ### Types with double negation elimination satisfy propositional double negation elimination
 
@@ -162,7 +161,7 @@ has-prop-double-negation-elim-has-double-negation-elim :
 has-prop-double-negation-elim-has-double-negation-elim H = unit-trunc-Prop ∘ H
 ```
 
-### Propositional double negation elimination for merely decidable types
+### Propositional double negation elimination for inhabited or empty types
 
 ```agda
 prop-double-negation-elim-is-inhabited-or-empty :
@@ -179,28 +178,32 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base :
-    all-elements-merely-equal A →
+  has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base :
+    has-double-negation-dense-equality A →
     has-prop-double-negation-elim A →
     ((x : A) → has-prop-double-negation-elim (B x)) →
     has-prop-double-negation-elim (Σ A B)
-  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base H f g nnab =
+  has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base
+    H f g nnab =
     rec-trunc-Prop
       ( trunc-Prop (Σ A B))
       ( λ a →
         rec-trunc-Prop
           ( trunc-Prop (Σ A B))
           ( λ b → unit-trunc-Prop (a , b))
-          ( g
-            ( a)
-            ( λ nb →
-              nnab
-                ( λ x →
-                  rec-trunc-Prop
-                    ( empty-Prop)
-                    ( λ p → nb (tr B p (pr2 x)))
-                    ( H (pr1 x) a)))))
+          ( g a (λ nb → nnab (λ x → H (pr1 x) a (λ p → nb (tr B p (pr2 x)))))))
       ( f (map-double-negation pr1 nnab))
+
+  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base :
+    all-elements-merely-equal A →
+    has-prop-double-negation-elim A →
+    ((x : A) → has-prop-double-negation-elim (B x)) →
+    has-prop-double-negation-elim (Σ A B)
+  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base H =
+    has-prop-double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( λ x y →
+        double-negation-double-negation-type-trunc-Prop
+          ( intro-double-negation (H x y)))
 
   has-prop-double-negation-elim-Σ-is-prop-base :
     is-prop A →
@@ -250,15 +253,15 @@ has-prop-double-negation-elim-product :
   has-prop-double-negation-elim B →
   has-prop-double-negation-elim (A × B)
 has-prop-double-negation-elim-product {A = A} {B} f g nnab =
-  rec-trunc-Prop
-    ( trunc-Prop (A × B))
-    ( λ a →
-      rec-trunc-Prop
-        ( trunc-Prop (A × B))
-        ( λ b → unit-trunc-Prop (a , b))
-        ( g (map-double-negation pr2 nnab)))
+  map-binary-trunc-Prop
+    ( pair)
     ( f (map-double-negation pr1 nnab))
+    ( g (map-double-negation pr2 nnab))
 ```
+
+## References
+
+{{#bibliography}}
 
 ## See also
 

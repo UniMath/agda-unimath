@@ -63,19 +63,26 @@ id-equiv-cube :
 id-equiv-cube k X = pair id-equiv (λ x → id-equiv)
 
 equiv-eq-cube :
-  (k : ℕ) {X Y : cube k} → Id X Y → equiv-cube k X Y
+  (k : ℕ) {X Y : cube k} → X ＝ Y → equiv-cube k X Y
 equiv-eq-cube k {X} refl = id-equiv-cube k X
 
 is-torsorial-equiv-cube :
   (k : ℕ) (X : cube k) → is-torsorial (equiv-cube k X)
 is-torsorial-equiv-cube k X =
   is-torsorial-Eq-structure
-    ( is-torsorial-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
+    ( is-torsorial-equiv-Type-With-Cardinality-ℕ
+      { k = k}
+      ( dim-cube-Type-With-Cardinality-ℕ k X))
     ( pair
-      ( dim-cube-UU-Fin k X)
-      ( id-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X)))
+      ( dim-cube-Type-With-Cardinality-ℕ k X)
+      ( id-equiv-Type-With-Cardinality-ℕ
+        { k = k}
+        ( dim-cube-Type-With-Cardinality-ℕ k X)))
     ( is-torsorial-Eq-Π
-      ( λ i → is-torsorial-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
+      ( λ i →
+        is-torsorial-equiv-Type-With-Cardinality-ℕ
+          { k = 2}
+          ( axis-cube-UU-2 k X i)))
 
 is-equiv-equiv-eq-cube :
   (k : ℕ) (X Y : cube k) → is-equiv (equiv-eq-cube k {X} {Y})
@@ -85,7 +92,7 @@ is-equiv-equiv-eq-cube k X =
     ( λ Y → equiv-eq-cube k {X = X} {Y})
 
 eq-equiv-cube :
-  (k : ℕ) (X Y : cube k) → equiv-cube k X Y → Id X Y
+  (k : ℕ) (X Y : cube k) → equiv-cube k X Y → X ＝ Y
 eq-equiv-cube k X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-cube k X Y)
 
@@ -110,7 +117,7 @@ refl-htpy-equiv-cube k X Y e = pair refl-htpy (λ d → refl-htpy)
 
 htpy-eq-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) →
-  Id e f → htpy-equiv-cube k X Y e f
+  e ＝ f → htpy-equiv-cube k X Y e f
 htpy-eq-equiv-cube k X Y e .e refl = refl-htpy-equiv-cube k X Y e
 
 is-torsorial-htpy-equiv-cube :
@@ -134,7 +141,7 @@ is-equiv-htpy-eq-equiv-cube k X Y e =
 
 eq-htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) →
-  htpy-equiv-cube k X Y e f → Id e f
+  htpy-equiv-cube k X Y e f → e ＝ f
 eq-htpy-equiv-cube k X Y e f =
   map-inv-is-equiv (is-equiv-htpy-eq-equiv-cube k X Y e f)
 ```
@@ -142,6 +149,6 @@ eq-htpy-equiv-cube k X Y e f =
 ### Labelings of cubes
 
 ```agda
-labelling-cube : (k : ℕ) (X : cube k) → UU lzero
-labelling-cube k X = equiv-cube k (standard-cube k) X
+labeling-cube : (k : ℕ) (X : cube k) → UU lzero
+labeling-cube k X = equiv-cube k (standard-cube k) X
 ```

@@ -27,6 +27,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
@@ -70,7 +71,7 @@ module _
       ( Σ
         ( X → Decidable-Prop l2)
         ( λ P →
-          has-cardinality 2 (Σ X (type-Decidable-Prop ∘ P))))
+          has-cardinality-ℕ 2 (Σ X (type-Decidable-Prop ∘ P))))
   list-transpositions-permutation-count =
     map-list
       ( transposition-conjugation-equiv
@@ -113,50 +114,48 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (n : ℕ) (X : UU-Fin l1 n)
+  {l1 l2 : Level} (n : ℕ) (X : Type-With-Cardinality-ℕ l1 n)
   where
 
   is-generated-transposition-symmetric-Fin-Level :
     is-generating-set-Group
-      ( symmetric-Group (set-UU-Fin n X))
+      ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =
-    apply-universal-property-trunc-Prop
-      ( has-cardinality-type-UU-Fin n X)
-      ( subset-subgroup-subset-Group
-        ( symmetric-Group (set-UU-Fin n X))
-        ( is-transposition-permutation-Prop)
-        ( f))
+    map-trunc-Prop
       ( λ h →
-        unit-trunc-Prop
-          ( pair
-            ( map-list
-              ( λ x →
-                pair
-                  ( inr star)
-                  ( pair
-                    ( transposition x)
-                    ( unit-trunc-Prop (pair x refl))))
+        pair
+          ( map-list
+            ( λ x →
+              pair
+                ( inr star)
+                ( pair
+                  ( transposition x)
+                  ( unit-trunc-Prop (pair x refl))))
+            ( list-transpositions-permutation-count
+              ( type-Type-With-Cardinality-ℕ n X)
+              ( pair n h)
+              ( f)))
+          ( ( lemma
               ( list-transpositions-permutation-count
-                ( type-UU-Fin n X)
+                ( type-Type-With-Cardinality-ℕ n X)
                 ( pair n h)
-                ( f)))
-            ( ( lemma
-                ( list-transpositions-permutation-count
-                  ( type-UU-Fin n X)
-                  ( pair n h)
-                  ( f))) ∙
-              ( eq-htpy-equiv
-                ( retraction-permutation-list-transpositions-count
-                  ( type-UU-Fin n X)
-                  ( pair n h)
-                  ( f))))))
+                ( f))) ∙
+            ( eq-htpy-equiv
+              ( retraction-permutation-list-transpositions-count
+                ( type-Type-With-Cardinality-ℕ n X)
+                ( pair n h)
+                ( f)))))
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
     where
     lemma :
-      (l : list (2-Element-Decidable-Subtype l2 (type-UU-Fin n X))) →
+      (l :
+        list
+          ( 2-Element-Decidable-Subtype l2
+            ( type-Type-With-Cardinality-ℕ n X))) →
       Id
         ( ev-formal-combination-subset-Group
-          ( symmetric-Group (set-UU-Fin n X))
+          ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
           ( is-transposition-permutation-Prop)
           ( map-list
             ( λ x →
@@ -171,152 +170,161 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin l n)
+  {l : Level} (n : ℕ) (X : Type-With-Cardinality-ℕ l n)
+  (f : type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X)
   where
 
-  module _
-    (f : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
-    where
+  parity-transposition-permutation : UU (lsuc l)
+  parity-transposition-permutation =
+    Σ ( Fin 2)
+      ( λ k →
+        type-trunc-Prop
+          ( Σ
+            ( list
+              ( Σ
+                ( type-Type-With-Cardinality-ℕ n X → Decidable-Prop l)
+                ( λ P →
+                  has-cardinality-ℕ 2
+                    ( Σ ( type-Type-With-Cardinality-ℕ n X)
+                        ( type-Decidable-Prop ∘ P)))))
+            ( λ li →
+              ( k ＝ mod-two-ℕ (length-list li)) ×
+              ( f ＝ permutation-list-transpositions li))))
 
-    parity-transposition-permutation : UU (lsuc l)
-    parity-transposition-permutation =
-      Σ ( Fin 2)
-        ( λ k →
-          type-trunc-Prop
-            ( Σ
-              ( list
-                ( Σ
-                  ( type-UU-Fin n X → Decidable-Prop l)
-                  ( λ P →
-                    has-cardinality 2
-                      ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P)))))
-              ( λ li →
-                Id k (mod-two-ℕ (length-list li)) ×
-                Id f (permutation-list-transpositions li))))
-
-    abstract
-      is-contr-parity-transposition-permutation :
-        is-contr parity-transposition-permutation
-      is-contr-parity-transposition-permutation =
-        apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin n X)
-          ( is-trunc-Prop neg-two-𝕋 parity-transposition-permutation)
-          ( λ h →
-            pair
-              ( pair
-                ( mod-two-ℕ (length-list (list-transposition-f h)))
-                ( unit-trunc-Prop
-                  ( pair (list-transposition-f h)
-                    ( pair refl
-                      ( inv
-                        ( eq-htpy-equiv
-                          ( retraction-permutation-list-transpositions-count
-                            ( type-UU-Fin n X)
-                            ( pair n h)
-                            ( f))))))))
-              ( λ (pair k u) →
-                eq-pair-Σ
-                  ( apply-universal-property-trunc-Prop u
-                    ( Id-Prop
-                      ( Fin-Set 2)
+  abstract
+    is-contr-parity-transposition-permutation :
+      is-contr parity-transposition-permutation
+    is-contr-parity-transposition-permutation =
+      apply-universal-property-trunc-Prop
+        ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
+        ( is-trunc-Prop neg-two-𝕋 parity-transposition-permutation)
+        ( λ h →
+          pair
+            ( pair
+              ( mod-two-ℕ (length-list (list-transposition-f h)))
+              ( unit-trunc-Prop
+                ( pair (list-transposition-f h)
+                  ( pair refl
+                    ( inv
+                      ( eq-htpy-equiv
+                        ( retraction-permutation-list-transpositions-count
+                          ( type-Type-With-Cardinality-ℕ n X)
+                          ( pair n h)
+                          ( f))))))))
+            ( λ (pair k u) →
+              eq-pair-Σ
+                ( apply-universal-property-trunc-Prop u
+                  ( Id-Prop
+                    ( Fin-Set 2)
+                    ( mod-two-ℕ (length-list (list-transposition-f h)))
+                    ( k))
+                  ( λ (pair li (pair q r)) →
+                    is-injective-iterate-involution
                       ( mod-two-ℕ (length-list (list-transposition-f h)))
-                      ( k))
-                    ( λ (pair li (pair q r)) →
-                      is-injective-iterate-involution
-                        ( mod-two-ℕ (length-list (list-transposition-f h)))
-                        ( k)
-                        ( sign-permutation-orbit
-                          ( n)
-                          ( pair (type-UU-Fin n X) (unit-trunc-Prop h))
-                          ( id-equiv))
-                        ( inv
-                          ( iterate-involution
-                            ( succ-Fin 2)
-                            ( is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2))
-                            ( length-list (list-transposition-f h))
+                      ( k)
+                      ( sign-permutation-orbit
+                        ( n)
+                        ( pair
+                          ( type-Type-With-Cardinality-ℕ n X)
+                          ( unit-trunc-Prop h))
+                        ( id-equiv))
+                      ( inv
+                        ( iterate-involution
+                          ( succ-Fin 2)
+                          ( is-involution-aut-Fin-2 (equiv-succ-Fin 2))
+                          ( length-list (list-transposition-f h))
+                          ( sign-permutation-orbit
+                            ( n)
+                            ( pair
+                              ( type-Type-With-Cardinality-ℕ n X)
+                              ( unit-trunc-Prop h))
+                            ( id-equiv))) ∙
+                        ( ( sign-list-transpositions-count
+                            ( type-Type-With-Cardinality-ℕ n X)
+                            ( pair n h)
+                            ( list-transposition-f h)) ∙
+                          ( ap
                             ( sign-permutation-orbit
                               ( n)
-                              ( pair (type-UU-Fin n X) (unit-trunc-Prop h))
-                              ( id-equiv))) ∙
-                          ( ( sign-list-transpositions-count
-                              ( type-UU-Fin n X)
-                              ( pair n h)
-                              ( list-transposition-f h)) ∙
-                            ( ap
-                              ( sign-permutation-orbit
-                                ( n)
-                                ( pair (type-UU-Fin n X) (unit-trunc-Prop h)))
-                              { x =
-                                permutation-list-transpositions
-                                  ( list-transposition-f h)}
-                              { y = permutation-list-transpositions li}
-                              ( ( eq-htpy-equiv
-                                  ( retraction-permutation-list-transpositions-count
-                                    ( type-UU-Fin n X)
-                                    ( pair n h)
-                                    ( f))) ∙
-                                ( r)) ∙
-                              ( inv
-                                ( sign-list-transpositions-count
-                                  ( type-UU-Fin n X)
+                              ( pair
+                                ( type-Type-With-Cardinality-ℕ n X)
+                                ( unit-trunc-Prop h)))
+                            { x =
+                              permutation-list-transpositions
+                                ( list-transposition-f h)}
+                            { y = permutation-list-transpositions li}
+                            ( ( eq-htpy-equiv
+                                ( retraction-permutation-list-transpositions-count
+                                  ( type-Type-With-Cardinality-ℕ n X)
                                   ( pair n h)
-                                  ( li)) ∙
-                                ( ( iterate-involution
-                                    ( succ-Fin 2)
-                                    ( is-involution-aut-Fin-two-ℕ
-                                      ( equiv-succ-Fin 2))
-                                    ( length-list li)
-                                  ( sign-permutation-orbit
-                                    ( n)
-                                    ( pair
-                                      ( type-UU-Fin n X)
-                                      ( unit-trunc-Prop h))
-                                    ( id-equiv))) ∙
-                                  ( ap
-                                    ( λ k →
-                                      iterate
-                                        ( nat-Fin 2 k)
-                                        (succ-Fin 2)
-                                        ( sign-permutation-orbit
-                                          ( n)
-                                          ( pair
-                                            ( type-UU-Fin n X)
-                                            ( unit-trunc-Prop h))
-                                          ( id-equiv)))
-                                    ( inv q)))))))))
-                  ( eq-is-prop is-prop-type-trunc-Prop)))
-        where
-        list-transposition-f :
-          (h : Fin n ≃ (type-UU-Fin n X)) →
-          list
-            ( Σ
-              ( type-UU-Fin n X → Decidable-Prop l)
-              ( λ P →
-                has-cardinality 2
-                  ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
-        list-transposition-f h =
-          list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f
-        is-injective-iterate-involution :
-          (k k' x : Fin 2) →
-          Id
-            ( iterate (nat-Fin 2 k) (succ-Fin 2) x)
-            ( iterate (nat-Fin 2 k') (succ-Fin 2) x) →
-          Id k k'
-        is-injective-iterate-involution
-          (inl (inr star)) (inl (inr star)) x p =
-          refl
-        is-injective-iterate-involution
-          (inl (inr star)) (inr star) (inl (inr star)) p =
-          ex-falso (neq-inl-inr p)
-        is-injective-iterate-involution
-          (inl (inr star)) (inr star) (inr star) p =
-          ex-falso (neq-inr-inl p)
-        is-injective-iterate-involution
-          (inr star) (inl (inr star)) (inl (inr star)) p =
-          ex-falso (neq-inr-inl p)
-        is-injective-iterate-involution
-          (inr star) (inl (inr star)) (inr star) p =
-          ex-falso (neq-inl-inr p)
-        is-injective-iterate-involution
-          (inr star) (inr star) x p = refl
+                                  ( f))) ∙
+                              ( r)) ∙
+                            ( inv
+                              ( sign-list-transpositions-count
+                                ( type-Type-With-Cardinality-ℕ n X)
+                                ( pair n h)
+                                ( li)) ∙
+                              ( ( iterate-involution
+                                  ( succ-Fin 2)
+                                  ( is-involution-aut-Fin-2
+                                    ( equiv-succ-Fin 2))
+                                  ( length-list li)
+                                ( sign-permutation-orbit
+                                  ( n)
+                                  ( pair
+                                    ( type-Type-With-Cardinality-ℕ n X)
+                                    ( unit-trunc-Prop h))
+                                  ( id-equiv))) ∙
+                                ( ap
+                                  ( λ k →
+                                    iterate
+                                      ( nat-Fin 2 k)
+                                      (succ-Fin 2)
+                                      ( sign-permutation-orbit
+                                        ( n)
+                                        ( pair
+                                          ( type-Type-With-Cardinality-ℕ
+                                            ( n)
+                                            ( X))
+                                          ( unit-trunc-Prop h))
+                                        ( id-equiv)))
+                                  ( inv q)))))))))
+                ( eq-is-prop is-prop-type-trunc-Prop)))
+      where
+      list-transposition-f :
+        (h : Fin n ≃ (type-Type-With-Cardinality-ℕ n X)) →
+        list
+          ( Σ
+            ( type-Type-With-Cardinality-ℕ n X → Decidable-Prop l)
+            ( λ P →
+              has-cardinality-ℕ 2
+                ( Σ ( type-Type-With-Cardinality-ℕ n X)
+                    ( type-Decidable-Prop ∘ P))))
+      list-transposition-f h =
+        list-transpositions-permutation-count
+          ( type-Type-With-Cardinality-ℕ n X)
+          ( pair n h)
+          ( f)
+      is-injective-iterate-involution :
+        (k k' x : Fin 2) →
+        ( iterate (nat-Fin 2 k) (succ-Fin 2) x ＝
+          iterate (nat-Fin 2 k') (succ-Fin 2) x) →
+        k ＝ k'
+      is-injective-iterate-involution
+        (inl (inr star)) (inl (inr star)) x p =
+        refl
+      is-injective-iterate-involution
+        (inl (inr star)) (inr star) (inl (inr star)) p =
+        ex-falso (neq-inl-inr p)
+      is-injective-iterate-involution
+        (inl (inr star)) (inr star) (inr star) p =
+        ex-falso (neq-inr-inl p)
+      is-injective-iterate-involution
+        (inr star) (inl (inr star)) (inl (inr star)) p =
+        ex-falso (neq-inr-inl p)
+      is-injective-iterate-involution
+        (inr star) (inl (inr star)) (inr star) p =
+        ex-falso (neq-inl-inr p)
+      is-injective-iterate-involution
+        (inr star) (inr star) x p = refl
 ```

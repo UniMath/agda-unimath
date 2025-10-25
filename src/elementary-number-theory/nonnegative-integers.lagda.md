@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -98,7 +99,7 @@ one-nonnegative-ℤ = (one-ℤ , star)
 ### Nonnegativity is decidable
 
 ```agda
-is-decidable-is-nonnegative-ℤ : is-decidable-fam is-nonnegative-ℤ
+is-decidable-is-nonnegative-ℤ : is-decidable-family is-nonnegative-ℤ
 is-decidable-is-nonnegative-ℤ (inl x) = inr id
 is-decidable-is-nonnegative-ℤ (inr x) = inl star
 
@@ -164,27 +165,23 @@ eq-nat-nonnegative-succ-nonnnegative-ℤ :
 eq-nat-nonnegative-succ-nonnnegative-ℤ (inr (inl x) , H) = refl
 eq-nat-nonnegative-succ-nonnnegative-ℤ (inr (inr x) , H) = refl
 
-is-section-nat-nonnegative-ℤ :
-  (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
-is-section-nat-nonnegative-ℤ ((inr (inl star)) , H) = refl
-is-section-nat-nonnegative-ℤ ((inr (inr x)) , H) = refl
+abstract
+  is-section-nat-nonnegative-ℤ :
+    (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
+  is-section-nat-nonnegative-ℤ ((inr (inl star)) , H) = refl
+  is-section-nat-nonnegative-ℤ ((inr (inr x)) , H) = refl
 
-is-retraction-nat-nonnegative-ℤ :
-  (n : ℕ) → nat-nonnegative-ℤ (nonnegative-int-ℕ n) ＝ n
-is-retraction-nat-nonnegative-ℤ zero-ℕ = refl
-is-retraction-nat-nonnegative-ℤ (succ-ℕ n) = refl
+  is-retraction-nat-nonnegative-ℤ :
+    (n : ℕ) → nat-nonnegative-ℤ (nonnegative-int-ℕ n) ＝ n
+  is-retraction-nat-nonnegative-ℤ zero-ℕ = refl
+  is-retraction-nat-nonnegative-ℤ (succ-ℕ n) = refl
 
-is-equiv-nat-nonnegative-ℤ : is-equiv nat-nonnegative-ℤ
-pr1 (pr1 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr1 is-equiv-nat-nonnegative-ℤ) = is-retraction-nat-nonnegative-ℤ
-pr1 (pr2 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr2 is-equiv-nat-nonnegative-ℤ) = is-section-nat-nonnegative-ℤ
-
-is-equiv-nonnegative-int-ℕ : is-equiv nonnegative-int-ℕ
-pr1 (pr1 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr1 is-equiv-nonnegative-int-ℕ) = is-section-nat-nonnegative-ℤ
-pr1 (pr2 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr2 is-equiv-nonnegative-int-ℕ) = is-retraction-nat-nonnegative-ℤ
+  is-equiv-nonnegative-int-ℕ : is-equiv nonnegative-int-ℕ
+  is-equiv-nonnegative-int-ℕ =
+    is-equiv-is-invertible
+      ( nat-nonnegative-ℤ)
+      ( is-section-nat-nonnegative-ℤ)
+      ( is-retraction-nat-nonnegative-ℤ)
 
 equiv-nonnegative-int-ℕ : ℕ ≃ nonnegative-ℤ
 pr1 equiv-nonnegative-int-ℕ = nonnegative-int-ℕ

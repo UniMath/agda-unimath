@@ -14,7 +14,7 @@
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.invisibleCharacters": true,
 
-  // File nesting for agda auxillary files
+  // File nesting for agda auxiliary files
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
@@ -52,7 +52,8 @@
 
   // File type specific
   "files.associations": {
-    "*.lock": "json"
+    "*.lock": "json",
+    "*.bib": "bibtex"
   },
 
   "[agda]": {
@@ -93,7 +94,8 @@
 
   "[makefile]": {
     "editor.insertSpaces": false,
-    "editor.detectIndentation": true
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "boundary"
   },
 
   "[markdown]": {
@@ -110,5 +112,12 @@
     "editor.formatOnSave": false,
     "editor.formatOnType": false,
     "editor.formatOnPaste": false
+  },
+
+  "[bibtex]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    "editor.defaultFormatter": null
   }
 }

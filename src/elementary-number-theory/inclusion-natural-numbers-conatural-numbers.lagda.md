@@ -29,7 +29,7 @@ open import foundation-core.identity-types
 ## Idea
 
 The
-{{#concept "inclusion of the nautural numbers into the conatural numbers" Agda=ℕ∞}}
+{{#concept "inclusion of the nautural numbers into the conatural numbers" Agda=conatural-ℕ}}
 is the inductively defined map
 
 ```text
@@ -69,12 +69,12 @@ is-injective-conatural-ℕ {succ-ℕ x} {succ-ℕ y} p =
 The canonical inclusion of the natural numbers is not surjective because it does
 not hit the point at infinity.
 
-```text
+```agda
 neq-infinity-conatural-ℕ : (n : ℕ) → conatural-ℕ n ≠ infinity-ℕ∞
 neq-infinity-conatural-ℕ zero-ℕ = neq-infinity-zero-ℕ∞
 neq-infinity-conatural-ℕ (succ-ℕ n) p =
   neq-infinity-conatural-ℕ n
-    ( is-injective-succ-ℕ∞ (p ∙ {! is-infinite-successor-condition-infinity-ℕ∞  !}))
+    ( is-injective-succ-ℕ∞ (p ∙ is-infinite-successor-condition-infinity-ℕ∞))
 
 is-not-surjective-conatural-ℕ : ¬ (is-surjective conatural-ℕ)
 is-not-surjective-conatural-ℕ H =

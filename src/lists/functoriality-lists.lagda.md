@@ -20,19 +20,18 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors
-open import linear-algebra.vectors
-
 open import lists.arrays
 open import lists.concatenation-lists
+open import lists.functoriality-tuples
 open import lists.lists
+open import lists.tuples
 ```
 
 </details>
 
 ## Idea
 
-Given a functiion `f : A → B`, we obtain a function
+Given a function `f : A → B`, we obtain a function
 `map-list f : list A → list B`.
 
 ## Definition
@@ -51,13 +50,13 @@ map-list f = fold-list nil (λ a → cons (f a))
 ```agda
 length-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (l : list A) →
-  Id (length-list (map-list f l)) (length-list l)
+  length-list (map-list f l) ＝ length-list l
 length-map-list f nil = refl
 length-map-list f (cons x l) =
   ap succ-ℕ (length-map-list f l)
 ```
 
-### Link between `map-list` and `map-vec`
+### Link between `map-list` and `map-tuple`
 
 ```agda
 module _
@@ -65,148 +64,150 @@ module _
   (f : A → B)
   where
 
-  map-list-map-vec-list :
+  map-list-map-tuple-list :
     (l : list A) →
-    list-vec (length-list l) (map-vec f (vec-list l)) ＝
+    list-tuple (length-list l) (map-tuple f (tuple-list l)) ＝
     map-list f l
-  map-list-map-vec-list nil = refl
-  map-list-map-vec-list (cons x l) =
+  map-list-map-tuple-list nil = refl
+  map-list-map-tuple-list (cons x l) =
     eq-Eq-list
-      ( list-vec (length-list (cons x l)) (map-vec f (vec-list (cons x l))))
+      ( list-tuple
+        ( length-list (cons x l))
+        ( map-tuple f (tuple-list (cons x l))))
       ( map-list f (cons x l))
       ( refl ,
         Eq-eq-list
-          ( list-vec (length-list l) (map-vec f (vec-list l)))
+          ( list-tuple (length-list l) (map-tuple f (tuple-list l)))
           ( map-list f l)
-          ( map-list-map-vec-list l))
+          ( map-list-map-tuple-list l))
 
-  map-vec-map-list-vec :
-    (n : ℕ) (v : vec A n) →
+  map-tuple-map-list-tuple :
+    (n : ℕ) (v : tuple A n) →
     tr
-      ( vec B)
-      ( length-map-list f (list-vec n v) ∙
-        compute-length-list-list-vec n v)
-      ( vec-list (map-list f (list-vec n v))) ＝
-    map-vec f v
-  map-vec-map-list-vec 0 empty-vec = refl
-  map-vec-map-list-vec (succ-ℕ n) (x ∷ v) =
-    compute-tr-vec
-      ( ap succ-ℕ (length-map-list f (list-vec n v)) ∙
-        compute-length-list-list-vec (succ-ℕ n) (x ∷ v))
-      ( vec-list (fold-list nil (λ a → cons (f a)) (list-vec n v)))
+      ( tuple B)
+      ( length-map-list f (list-tuple n v) ∙
+        compute-length-list-list-tuple n v)
+      ( tuple-list (map-list f (list-tuple n v))) ＝
+    map-tuple f v
+  map-tuple-map-list-tuple 0 empty-tuple = refl
+  map-tuple-map-list-tuple (succ-ℕ n) (x ∷ v) =
+    compute-tr-tuple
+      ( ap succ-ℕ (length-map-list f (list-tuple n v)) ∙
+        compute-length-list-list-tuple (succ-ℕ n) (x ∷ v))
+      ( tuple-list (fold-list nil (λ a → cons (f a)) (list-tuple n v)))
       ( f x) ∙
-    eq-Eq-vec
+    eq-Eq-tuple
       ( succ-ℕ n)
       ( f x ∷
         tr
-          ( vec B)
+          ( tuple B)
           ( is-injective-succ-ℕ
-            ( ap succ-ℕ (length-map-list f (list-vec n v)) ∙
-              compute-length-list-list-vec (succ-ℕ n) (x ∷ v)))
-          ( vec-list (map-list f (list-vec n v))))
-      ( map-vec f (x ∷ v))
+            ( ap succ-ℕ (length-map-list f (list-tuple n v)) ∙
+              compute-length-list-list-tuple (succ-ℕ n) (x ∷ v)))
+          ( tuple-list (map-list f (list-tuple n v))))
+      ( map-tuple f (x ∷ v))
       ( refl ,
-        ( Eq-eq-vec
+        ( Eq-eq-tuple
           ( n)
           ( tr
-            ( vec B)
+            ( tuple B)
             ( is-injective-succ-ℕ
-              ( ap succ-ℕ (length-map-list f (list-vec n v)) ∙
-                compute-length-list-list-vec (succ-ℕ n) (x ∷ v)))
-            ( vec-list (map-list f (list-vec n v))))
-          ( map-vec f v)
+              ( ap succ-ℕ (length-map-list f (list-tuple n v)) ∙
+                compute-length-list-list-tuple (succ-ℕ n) (x ∷ v)))
+            ( tuple-list (map-list f (list-tuple n v))))
+          ( map-tuple f v)
           ( tr
             ( λ p →
               tr
-                ( vec B)
+                ( tuple B)
                 ( p)
-                ( vec-list (map-list f (list-vec n v))) ＝
-              map-vec f v)
+                ( tuple-list (map-list f (list-tuple n v))) ＝
+              map-tuple f v)
             ( eq-is-prop
               ( is-set-ℕ
-                ( length-list (map-list f (list-vec n v)))
+                ( length-list (map-list f (list-tuple n v)))
                 ( n)))
-            ( map-vec-map-list-vec n v))))
+            ( map-tuple-map-list-tuple n v))))
 
-  map-vec-map-list-vec' :
-    (n : ℕ) (v : vec A n) →
-    vec-list (map-list f (list-vec n v)) ＝
+  map-tuple-map-list-tuple' :
+    (n : ℕ) (v : tuple A n) →
+    tuple-list (map-list f (list-tuple n v)) ＝
     tr
-      ( vec B)
+      ( tuple B)
       ( inv
-        ( length-map-list f (list-vec n v) ∙
-          compute-length-list-list-vec n v))
-      ( map-vec f v)
-  map-vec-map-list-vec' n v =
+        ( length-map-list f (list-tuple n v) ∙
+          compute-length-list-list-tuple n v))
+      ( map-tuple f v)
+  map-tuple-map-list-tuple' n v =
     eq-transpose-tr'
-      ( length-map-list f (list-vec n v) ∙ compute-length-list-list-vec n v)
-      ( map-vec-map-list-vec n v)
+      ( length-map-list f (list-tuple n v) ∙ compute-length-list-list-tuple n v)
+      ( map-tuple-map-list-tuple n v)
 
-  vec-list-map-list-map-vec-list :
+  tuple-list-map-list-map-tuple-list :
     (l : list A) →
     tr
-      ( vec B)
+      ( tuple B)
       ( length-map-list f l)
-      ( vec-list (map-list f l)) ＝
-    map-vec f (vec-list l)
-  vec-list-map-list-map-vec-list nil = refl
-  vec-list-map-list-map-vec-list (cons x l) =
-    compute-tr-vec
+      ( tuple-list (map-list f l)) ＝
+    map-tuple f (tuple-list l)
+  tuple-list-map-list-map-tuple-list nil = refl
+  tuple-list-map-list-map-tuple-list (cons x l) =
+    compute-tr-tuple
       ( ap succ-ℕ (length-map-list f l))
-      ( vec-list (map-list f l))
+      ( tuple-list (map-list f l))
       ( f x) ∙
-    eq-Eq-vec
+    eq-Eq-tuple
       ( succ-ℕ (length-list l))
       ( f x ∷
         tr
-          ( vec B)
+          ( tuple B)
           ( is-injective-succ-ℕ (ap succ-ℕ (length-map-list f l)))
-          ( vec-list (map-list f l)))
-      ( map-vec f (vec-list (cons x l)))
+          ( tuple-list (map-list f l)))
+      ( map-tuple f (tuple-list (cons x l)))
       ( refl ,
-        Eq-eq-vec
+        Eq-eq-tuple
           ( length-list l)
           ( tr
-            ( vec B)
+            ( tuple B)
             ( is-injective-succ-ℕ (ap succ-ℕ (length-map-list f l)))
-            ( vec-list (map-list f l)))
-          ( map-vec f (vec-list l))
+            ( tuple-list (map-list f l)))
+          ( map-tuple f (tuple-list l))
           ( tr
             ( λ p →
               ( tr
-                ( vec B)
+                ( tuple B)
                 ( p)
-                ( vec-list (map-list f l))) ＝
-              ( map-vec f (vec-list l)))
+                ( tuple-list (map-list f l))) ＝
+              ( map-tuple f (tuple-list l)))
             ( eq-is-prop
               ( is-set-ℕ (length-list (map-list f l)) (length-list l)))
-            ( vec-list-map-list-map-vec-list l)))
+            ( tuple-list-map-list-map-tuple-list l)))
 
-  vec-list-map-list-map-vec-list' :
+  tuple-list-map-list-map-tuple-list' :
     (l : list A) →
-    vec-list (map-list f l) ＝
+    tuple-list (map-list f l) ＝
     tr
-      ( vec B)
+      ( tuple B)
       ( inv (length-map-list f l))
-      ( map-vec f (vec-list l))
-  vec-list-map-list-map-vec-list' l =
+      ( map-tuple f (tuple-list l))
+  tuple-list-map-list-map-tuple-list' l =
     eq-transpose-tr'
       ( length-map-list f l)
-      ( vec-list-map-list-map-vec-list l)
+      ( tuple-list-map-list-map-tuple-list l)
 
-  list-vec-map-vec-map-list-vec :
-    (n : ℕ) (v : vec A n) →
-    list-vec
-      ( length-list (map-list f (list-vec n v)))
-      ( vec-list (map-list f (list-vec n v))) ＝
-    list-vec n (map-vec f v)
-  list-vec-map-vec-map-list-vec n v =
+  list-tuple-map-tuple-map-list-tuple :
+    (n : ℕ) (v : tuple A n) →
+    list-tuple
+      ( length-list (map-list f (list-tuple n v)))
+      ( tuple-list (map-list f (list-tuple n v))) ＝
+    list-tuple n (map-tuple f v)
+  list-tuple-map-tuple-map-list-tuple n v =
     ap
-      ( λ p → list-vec (pr1 p) (pr2 p))
+      ( λ p → list-tuple (pr1 p) (pr2 p))
       ( eq-pair-Σ
-        ( length-map-list f (list-vec n v) ∙
-          compute-length-list-list-vec n v)
-        ( map-vec-map-list-vec n v))
+        ( length-map-list f (list-tuple n v) ∙
+          compute-length-list-list-tuple n v)
+        ( map-tuple-map-list-tuple n v))
 ```
 
 ### `map-list` preserves concatenation
@@ -218,9 +219,7 @@ module _
 
   preserves-concat-map-list :
     (l k : list A) →
-    Id
-      ( map-list f (concat-list l k))
-      ( concat-list (map-list f l) (map-list f k))
+    map-list f (concat-list l k) ＝ concat-list (map-list f l) (map-list f k)
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)

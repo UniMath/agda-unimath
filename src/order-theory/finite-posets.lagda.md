@@ -52,23 +52,24 @@ module _
   is-decidable-leq-is-finite-Poset =
     is-decidable-leq-is-finite-Preorder (preorder-Poset P)
 
-Poset-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Poset-𝔽 l1 l2 =
-  Σ ( Preorder-𝔽 l1 l2)
-    ( λ P → is-antisymmetric-leq-Preorder (preorder-Preorder-𝔽 P))
+Finite-Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Finite-Poset l1 l2 =
+  Σ ( Finite-Preorder l1 l2)
+    ( λ P → is-antisymmetric-leq-Preorder (preorder-Finite-Preorder P))
 
-preorder-𝔽-Poset-𝔽 : {l1 l2 : Level} → Poset-𝔽 l1 l2 → Preorder-𝔽 l1 l2
-preorder-𝔽-Poset-𝔽 = pr1
+finite-preorder-Finite-Poset :
+  {l1 l2 : Level} → Finite-Poset l1 l2 → Finite-Preorder l1 l2
+finite-preorder-Finite-Poset = pr1
 
-preorder-Poset-𝔽 : {l1 l2 : Level} → Poset-𝔽 l1 l2 → Preorder l1 l2
-preorder-Poset-𝔽 = preorder-Preorder-𝔽 ∘ pr1
+preorder-Finite-Poset : {l1 l2 : Level} → Finite-Poset l1 l2 → Preorder l1 l2
+preorder-Finite-Poset = preorder-Finite-Preorder ∘ pr1
 
-is-antisymmetric-leq-Poset-𝔽 :
-  {l1 l2 : Level} (P : Poset-𝔽 l1 l2) →
-  is-antisymmetric-leq-Preorder (preorder-Poset-𝔽 P)
-is-antisymmetric-leq-Poset-𝔽 = pr2
+is-antisymmetric-leq-Finite-Poset :
+  {l1 l2 : Level} (P : Finite-Poset l1 l2) →
+  is-antisymmetric-leq-Preorder (preorder-Finite-Poset P)
+is-antisymmetric-leq-Finite-Poset = pr2
 
-poset-Poset-𝔽 : {l1 l2 : Level} → Poset-𝔽 l1 l2 → Poset l1 l2
-pr1 (poset-Poset-𝔽 P) = preorder-Poset-𝔽 P
-pr2 (poset-Poset-𝔽 P) = is-antisymmetric-leq-Poset-𝔽 P
+poset-Finite-Poset : {l1 l2 : Level} → Finite-Poset l1 l2 → Poset l1 l2
+pr1 (poset-Finite-Poset P) = preorder-Finite-Poset P
+pr2 (poset-Finite-Poset P) = is-antisymmetric-leq-Finite-Poset P
 ```

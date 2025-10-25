@@ -18,16 +18,22 @@ open import species.species-of-finite-inhabited-types
 
 ## Idea
 
-The product of two Dirichlet series is the pointwise product.
+The
+{{#concept "product" Disambiguation="of Caucy series of species of finite inhabited types" Agda=product-dirichlet-series-species-Inhabited-Finite-Type}}
+of two
+[Dirichlet series](species.dirichlet-series-species-of-finite-inhabited-types.md)
+of
+[species of types in subuniverses](species.species-of-finite-inhabited-types.md)
+is just the pointwise [product](foundation.cartesian-product-types.md).
 
 ## Definition
 
 ```agda
-product-dirichlet-series-species-Inhabited-𝔽 :
-  {l1 l2 l3 l4 : Level} → species-Inhabited-𝔽 l1 l2 →
-  species-Inhabited-𝔽 l1 l3 →
+product-dirichlet-series-species-Inhabited-Finite-Type :
+  {l1 l2 l3 l4 : Level} → species-Inhabited-Finite-Type l1 l2 →
+  species-Inhabited-Finite-Type l1 l3 →
   UU l4 → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
-product-dirichlet-series-species-Inhabited-𝔽 S T X =
-  dirichlet-series-species-Inhabited-𝔽 S X ×
-  dirichlet-series-species-Inhabited-𝔽 T X
+product-dirichlet-series-species-Inhabited-Finite-Type S T X =
+  dirichlet-series-species-Inhabited-Finite-Type S X ×
+  dirichlet-series-species-Inhabited-Finite-Type T X
 ```

@@ -16,8 +16,8 @@ open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
-open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
@@ -112,7 +112,7 @@ is-category-terminal-Category x y =
   is-equiv-is-contr
     ( iso-eq-Precategory terminal-Precategory x y)
     ( is-prop-unit x y)
-    ( is-contr-Σ is-contr-unit star
+    ( is-contr-Σ-unit
       ( is-proof-irrelevant-is-prop
         ( is-prop-is-iso-Precategory terminal-Precategory star)
         ( star , refl , refl)))
@@ -125,14 +125,15 @@ pr2 terminal-Category = is-category-terminal-Category
 ### The terminal preunivalent category
 
 ```agda
-is-preunivalent-terminal-Category :
-  is-preunivalent-Precategory terminal-Precategory
-is-preunivalent-terminal-Category =
-  is-preunivalent-category-Category terminal-Category
+is-strongly-preunivalent-terminal-Category :
+  is-strongly-preunivalent-Precategory terminal-Precategory
+is-strongly-preunivalent-terminal-Category =
+  is-strongly-preunivalent-category-Category terminal-Category
 
-terminal-Preunivalent-Category : Preunivalent-Category lzero lzero
-terminal-Preunivalent-Category =
-  preunivalent-category-Category terminal-Category
+terminal-Strongly-Preunivalent-Category :
+  Strongly-Preunivalent-Category lzero lzero
+terminal-Strongly-Preunivalent-Category =
+  strongly-preunivalent-category-Category terminal-Category
 ```
 
 ### The terminal strict category

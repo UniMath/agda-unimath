@@ -37,34 +37,34 @@ merely equivalent to an iterated cartesian product of finite fields.
 ### Semisimple commutative finite rings
 
 ```agda
-is-semisimple-Commutative-Ring-𝔽 :
-  {l1 : Level} (l2 : Level) → Commutative-Ring-𝔽 l1 →
+is-semisimple-Finite-Commutative-Ring :
+  {l1 : Level} (l2 : Level) → Finite-Commutative-Ring l1 →
   UU (l1 ⊔ lsuc l2)
-is-semisimple-Commutative-Ring-𝔽 l2 R =
+is-semisimple-Finite-Commutative-Ring l2 R =
   exists
     ( ℕ)
     ( λ n →
-      ∃ ( Fin n → Field-𝔽 l2)
+      ∃ ( Fin n → Finite-Field l2)
         ( λ A →
           trunc-Prop
-            ( hom-Commutative-Ring-𝔽
+            ( hom-Finite-Commutative-Ring
               ( R)
-              ( Π-Commutative-Ring-𝔽
+              ( Π-Finite-Commutative-Ring
                 ( Fin n , is-finite-Fin n)
-                ( commutative-finite-ring-Field-𝔽 ∘ A)))))
+                ( commutative-finite-ring-Finite-Field ∘ A)))))
 
-Semisimple-Commutative-Ring-𝔽 :
+Semisimple-Finite-Commutative-Ring :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Semisimple-Commutative-Ring-𝔽 l1 l2 =
-  Σ (Commutative-Ring-𝔽 l1) (is-semisimple-Commutative-Ring-𝔽 l2)
+Semisimple-Finite-Commutative-Ring l1 l2 =
+  Σ (Finite-Commutative-Ring l1) (is-semisimple-Finite-Commutative-Ring l2)
 
 module _
-  {l1 l2 : Level} (A : Semisimple-Commutative-Ring-𝔽 l1 l2)
+  {l1 l2 : Level} (A : Semisimple-Finite-Commutative-Ring l1 l2)
   where
 
-  commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 :
-    Commutative-Ring-𝔽 l1
-  commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 = pr1 A
+  commutative-finite-ring-Semisimple-Finite-Commutative-Ring :
+    Finite-Commutative-Ring l1
+  commutative-finite-ring-Semisimple-Finite-Commutative-Ring = pr1 A
 ```
 
 ## Properties
@@ -75,23 +75,23 @@ module _
 module _
   {l1 : Level}
   (l2 : Level)
-  (X : 𝔽 l1)
+  (X : Finite-Type l1)
   where
 
-  structure-semisimple-commutative-ring-𝔽 :
+  structure-semisimple-commutative-ring-Finite-Type :
     UU (l1 ⊔ lsuc l2)
-  structure-semisimple-commutative-ring-𝔽 =
-    Σ ( structure-commutative-ring-𝔽 X)
+  structure-semisimple-commutative-ring-Finite-Type =
+    Σ ( structure-commutative-ring-Finite-Type X)
       ( λ r →
-        is-semisimple-Commutative-Ring-𝔽
+        is-semisimple-Finite-Commutative-Ring
           ( l2)
-          ( finite-commutative-ring-structure-commutative-ring-𝔽 X r))
+          ( finite-commutative-ring-structure-commutative-ring-Finite-Type X r))
 
-  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽 :
-    structure-semisimple-commutative-ring-𝔽 →
-    Semisimple-Commutative-Ring-𝔽 l1 l2
-  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽 =
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type :
+    structure-semisimple-commutative-ring-Finite-Type →
+    Semisimple-Finite-Commutative-Ring l1 l2
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type =
     map-Σ-map-base
-      ( finite-commutative-ring-structure-commutative-ring-𝔽 X)
-      ( is-semisimple-Commutative-Ring-𝔽 l2)
+      ( finite-commutative-ring-structure-commutative-ring-Finite-Type X)
+      ( is-semisimple-Finite-Commutative-Ring l2)
 ```

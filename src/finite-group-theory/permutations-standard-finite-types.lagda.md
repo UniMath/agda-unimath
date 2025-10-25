@@ -64,12 +64,12 @@ Permutation n = Aut (Fin n)
 ```agda
 list-transpositions-permutation-Fin' :
   (n : ℕ) (f : Permutation (succ-ℕ n)) →
-  (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
+  (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
   ( list
     ( Σ
       ( Fin (succ-ℕ n) → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2
+        has-cardinality-ℕ 2
           ( Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
@@ -86,7 +86,7 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   t :
     Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
       ( λ P →
-        has-cardinality 2
+        has-cardinality-ℕ 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
   t = standard-2-Element-Decidable-Subtype
       ( has-decidable-equality-Fin (succ-ℕ (succ-ℕ n)))
@@ -118,7 +118,7 @@ list-transpositions-permutation-Fin :
   ( list
     ( Σ
       ( Fin n → Decidable-Prop lzero)
-      ( λ P → has-cardinality 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))))
+      ( λ P → has-cardinality-ℕ 2 (Σ (Fin n) (type-Decidable-Prop ∘ P)))))
 list-transpositions-permutation-Fin zero-ℕ f = nil
 list-transpositions-permutation-Fin (succ-ℕ n) f =
   list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
@@ -126,8 +126,8 @@ list-transpositions-permutation-Fin (succ-ℕ n) f =
 abstract
   retraction-permutation-list-transpositions-Fin' :
     (n : ℕ) (f : Permutation (succ-ℕ n)) →
-    (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
-    (y z : Fin (succ-ℕ n)) → Id (map-equiv f y) z →
+    (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
+    (y z : Fin (succ-ℕ n)) → map-equiv f y ＝ z →
     Id
       ( map-equiv
         ( permutation-list-transpositions
@@ -180,7 +180,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype
@@ -190,7 +190,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( Permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P =
       pair
         ( transposition t ∘e f)
@@ -274,7 +274,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype
@@ -284,7 +284,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( Permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P = pair
       ( transposition t ∘e f)
       ( ( ap (map-transposition t) p) ∙
@@ -350,7 +350,7 @@ abstract
     t :
       Σ ( Fin (succ-ℕ (succ-ℕ n)) → Decidable-Prop lzero)
         ( λ P →
-          has-cardinality 2
+          has-cardinality-ℕ 2
             ( Σ (Fin (succ-ℕ (succ-ℕ n))) (type-Decidable-Prop ∘ P)))
     t =
       standard-2-Element-Decidable-Subtype
@@ -506,4 +506,13 @@ retraction-permutation-list-standard-transpositions-Fin 0 f ()
 retraction-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
   htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
   retraction-permutation-list-transpositions-Fin (succ-ℕ n) f
+
+eq-permutation-list-standard-transpositions-Fin :
+  (n : ℕ) (f : Permutation n) →
+  permutation-list-standard-transpositions-Fin
+    ( n)
+    ( list-standard-transpositions-permutation-Fin n f) ＝
+  f
+eq-permutation-list-standard-transpositions-Fin n f =
+  eq-htpy-equiv (retraction-permutation-list-standard-transpositions-Fin n f)
 ```

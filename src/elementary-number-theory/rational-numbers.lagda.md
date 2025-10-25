@@ -13,6 +13,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
@@ -92,9 +93,10 @@ module _
 ### Inclusion of fractions
 
 ```agda
-rational-fraction-ℤ : fraction-ℤ → ℚ
-pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
-pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
+opaque
+  rational-fraction-ℤ : fraction-ℤ → ℚ
+  pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
+  pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ```
 
 ### Inclusion of the integers
@@ -104,6 +106,13 @@ rational-ℤ : ℤ → ℚ
 pr1 (pr1 (rational-ℤ x)) = x
 pr2 (pr1 (rational-ℤ x)) = one-positive-ℤ
 pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
+```
+
+### Inclusion of the natural numbers
+
+```agda
+rational-ℕ : ℕ → ℚ
+rational-ℕ n = rational-ℤ (int-ℕ n)
 ```
 
 ### Negative one, zero and one
@@ -134,20 +143,32 @@ is-one-ℚ x = (x ＝ one-ℚ)
 ### The negative of a rational number
 
 ```agda
-neg-ℚ : ℚ → ℚ
-pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
-pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
+opaque
+  neg-ℚ : ℚ → ℚ
+  pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
+  pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
+```
+
+### The negation of zero is zero
+
+```agda
+opaque
+  unfolding neg-ℚ
+
+  neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
+  neg-zero-ℚ = refl
 ```
 
 ### The mediant of two rationals
 
 ```agda
-mediant-ℚ : ℚ → ℚ → ℚ
-mediant-ℚ x y =
-  rational-fraction-ℤ
-    ( mediant-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y))
+opaque
+  mediant-ℚ : ℚ → ℚ → ℚ
+  mediant-ℚ x y =
+    rational-fraction-ℤ
+      ( mediant-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y))
 ```
 
 ## Properties
@@ -155,14 +176,17 @@ mediant-ℚ x y =
 ### The rational images of two similar integer fractions are equal
 
 ```agda
-eq-ℚ-sim-fraction-ℤ :
-  (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-  rational-fraction-ℤ x ＝ rational-fraction-ℤ y
-eq-ℚ-sim-fraction-ℤ x y H =
-  eq-pair-Σ'
-    ( pair
-      ( unique-reduce-fraction-ℤ x y H)
-      ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+opaque
+  unfolding rational-fraction-ℤ
+
+  eq-ℚ-sim-fraction-ℤ :
+    (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
+    rational-fraction-ℤ x ＝ rational-fraction-ℤ y
+  eq-ℚ-sim-fraction-ℤ x y H =
+    eq-pair-Σ'
+      ( pair
+        ( unique-reduce-fraction-ℤ x y H)
+        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
 ```
 
 ### The type of rationals is a set
@@ -183,7 +207,9 @@ pr2 ℚ-Set = is-set-ℚ
 ### The rationals are a retract of the integer fractions
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
   is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
@@ -205,8 +231,9 @@ retract-integer-fraction-ℚ =
 
 ### The rationals are countable
 
-The denumerability of the rational numbers is the third theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+The denumerability of the rational numbers is the
+[third](literature.100-theorems.md#3) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
@@ -267,21 +294,33 @@ module _
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-abstract
-  preserves-neg-rational-ℤ :
+opaque
+  unfolding neg-ℚ
+
+  neg-rational-ℤ :
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-  preserves-neg-rational-ℤ k =
+  neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
+```
+
+### The negation of one is negative one
+
+```agda
+abstract
+  eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
+  eq-neg-one-ℚ = inv (neg-rational-ℤ one-ℤ)
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
-abstract
-  preserves-neg-rational-fraction-ℤ :
+opaque
+  unfolding neg-ℚ rational-fraction-ℤ
+
+  neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-  preserves-neg-rational-fraction-ℤ x =
+  neg-rational-fraction-ℤ x =
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
@@ -295,7 +334,9 @@ abstract
 ### The negative function on the rational numbers is an involution
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
   neg-neg-ℚ x = eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
 ```

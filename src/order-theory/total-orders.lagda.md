@@ -7,13 +7,24 @@ module order-theory.total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.join-semilattices
+open import order-theory.lattices
+open import order-theory.least-upper-bounds-posets
+open import order-theory.meet-semilattices
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.total-preorders
@@ -82,8 +93,8 @@ module _
   type-Total-Order : UU l1
   type-Total-Order = type-Poset poset-Total-Order
 
-  leq-Total-Order-Prop : (x y : type-Total-Order) → Prop l2
-  leq-Total-Order-Prop = leq-prop-Poset poset-Total-Order
+  leq-prop-Total-Order : (x y : type-Total-Order) → Prop l2
+  leq-prop-Total-Order = leq-prop-Poset poset-Total-Order
 
   leq-Total-Order : (x y : type-Total-Order) → UU l2
   leq-Total-Order = leq-Poset poset-Total-Order
@@ -116,6 +127,574 @@ module _
 
   set-Total-Order : Set l1
   set-Total-Order = set-Poset poset-Total-Order
+```
+
+### The maximum operation on a total order
+
+```agda
+module _
+  {l1 l2 : Level} (X : Total-Order l1 l2)
+  (x y : type-Total-Order X)
+  where
+
+  opaque
+    has-least-binary-upper-bound-Total-Order :
+      has-least-binary-upper-bound-Poset (poset-Total-Order X) x y
+    has-least-binary-upper-bound-Total-Order =
+      elim-disjunction
+        ( has-least-binary-upper-bound-prop-Poset (poset-Total-Order X) x y)
+        ( has-least-binary-upper-bound-leq-Poset (poset-Total-Order X) x y)
+        ( λ y≤x →
+          symmetric-has-least-binary-upper-bound-Poset
+            ( poset-Total-Order X)
+            ( y)
+            ( x)
+            ( has-least-binary-upper-bound-leq-Poset
+              ( poset-Total-Order X)
+              ( y)
+              ( x)
+              ( y≤x)))
+        ( is-total-Total-Order X x y)
+
+  max-Total-Order : type-Total-Order X
+  max-Total-Order = pr1 has-least-binary-upper-bound-Total-Order
+
+  max-is-least-binary-upper-bound-Total-Order :
+    is-least-binary-upper-bound-Poset (poset-Total-Order X) x y max-Total-Order
+  max-is-least-binary-upper-bound-Total-Order =
+    pr2 has-least-binary-upper-bound-Total-Order
+```
+
+### The minimum operation on a total order
+
+```agda
+module _
+  {l1 l2 : Level} (X : Total-Order l1 l2)
+  (x y : type-Total-Order X)
+  where
+
+  opaque
+    has-greatest-binary-lower-bound-Total-Order :
+      has-greatest-binary-lower-bound-Poset (poset-Total-Order X) x y
+    has-greatest-binary-lower-bound-Total-Order =
+      elim-disjunction
+        ( has-greatest-binary-lower-bound-prop-Poset (poset-Total-Order X) x y)
+        ( has-greatest-binary-lower-bound-leq-Poset
+            ( poset-Total-Order X)
+            ( x)
+            ( y))
+        ( λ y≤x →
+          symmetric-has-greatest-binary-lower-bound-Poset
+            ( poset-Total-Order X)
+            ( y)
+            ( x)
+            ( has-greatest-binary-lower-bound-leq-Poset
+              ( poset-Total-Order X)
+              ( y)
+              ( x)
+              ( y≤x)))
+        ( is-total-Total-Order X x y)
+
+  min-Total-Order : type-Total-Order X
+  min-Total-Order = pr1 has-greatest-binary-lower-bound-Total-Order
+
+  min-is-greatest-binary-lower-bound-Total-Order :
+    is-greatest-binary-lower-bound-Poset
+      ( poset-Total-Order X)
+      ( x)
+      ( y)
+      ( min-Total-Order)
+  min-is-greatest-binary-lower-bound-Total-Order =
+    pr2 has-greatest-binary-lower-bound-Total-Order
+```
+
+## Properties
+
+### Total orders are lattices
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  is-lattice-Total-Order : is-lattice-Poset (poset-Total-Order T)
+  is-lattice-Total-Order =
+    ( has-greatest-binary-lower-bound-Total-Order T ,
+      has-least-binary-upper-bound-Total-Order T)
+
+  lattice-Total-Order : Lattice l1 l2
+  lattice-Total-Order = (poset-Total-Order T , is-lattice-Total-Order)
+```
+
+### The minimum of two values is a lower bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  (x y : type-Total-Order T)
+  where
+
+  leq-left-min-Total-Order :
+    leq-Total-Order T (min-Total-Order T x y) x
+  leq-left-min-Total-Order =
+    leq-left-is-greatest-binary-lower-bound-Poset
+      ( poset-Total-Order T)
+      ( min-is-greatest-binary-lower-bound-Total-Order T x y)
+
+  leq-right-min-Total-Order :
+    leq-Total-Order T (min-Total-Order T x y) y
+  leq-right-min-Total-Order =
+    leq-right-is-greatest-binary-lower-bound-Poset
+      ( poset-Total-Order T)
+      ( min-is-greatest-binary-lower-bound-Total-Order T x y)
+```
+
+### The maximum of two values is an upper bound
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  (x y : type-Total-Order T)
+  where
+
+  leq-left-max-Total-Order :
+    leq-Total-Order T x (max-Total-Order T x y)
+  leq-left-max-Total-Order =
+    leq-left-is-least-binary-upper-bound-Poset
+      ( poset-Total-Order T)
+      ( max-is-least-binary-upper-bound-Total-Order T x y)
+
+  leq-right-max-Total-Order :
+    leq-Total-Order T y (max-Total-Order T x y)
+  leq-right-max-Total-Order =
+    leq-right-is-least-binary-upper-bound-Poset
+      ( poset-Total-Order T)
+      ( max-is-least-binary-upper-bound-Total-Order T x y)
+```
+
+### The minimum of two values is less than or equal to their maximum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  (x y : type-Total-Order T)
+  where
+
+  abstract
+    min-leq-max-Total-Order :
+      leq-Total-Order T (min-Total-Order T x y) (max-Total-Order T x y)
+    min-leq-max-Total-Order =
+      transitive-leq-Total-Order T
+        ( min-Total-Order T x y)
+        ( x)
+        ( max-Total-Order T x y)
+        ( leq-left-max-Total-Order T x y)
+        ( leq-left-min-Total-Order T x y)
+```
+
+### Total orders are meet semilattices
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  is-meet-semilattice-Total-Order :
+    is-meet-semilattice-Poset (poset-Total-Order T)
+  is-meet-semilattice-Total-Order =
+    has-greatest-binary-lower-bound-Total-Order T
+
+  order-theoretic-meet-semilattice-Total-Order :
+    Order-Theoretic-Meet-Semilattice l1 l2
+  order-theoretic-meet-semilattice-Total-Order =
+    poset-Total-Order T , is-meet-semilattice-Total-Order
+```
+
+### Total orders are join semilattices
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  is-join-semilattice-Total-Order :
+    is-join-semilattice-Poset (poset-Total-Order T)
+  is-join-semilattice-Total-Order =
+    has-least-binary-upper-bound-Total-Order T
+
+  order-theoretic-join-semilattice-Total-Order :
+    Order-Theoretic-Join-Semilattice l1 l2
+  order-theoretic-join-semilattice-Total-Order =
+    poset-Total-Order T , is-join-semilattice-Total-Order
+```
+
+### The binary minimum operation is associative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  associative-min-Total-Order :
+    (x y z : type-Total-Order T) →
+    min-Total-Order T (min-Total-Order T x y) z ＝
+    min-Total-Order T x (min-Total-Order T y z)
+  associative-min-Total-Order =
+    associative-meet-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Total-Order T)
+```
+
+### The binary maximum operation is associative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  associative-max-Total-Order :
+    (x y z : type-Total-Order T) →
+    max-Total-Order T (max-Total-Order T x y) z ＝
+    max-Total-Order T x (max-Total-Order T y z)
+  associative-max-Total-Order =
+    associative-join-Order-Theoretic-Join-Semilattice
+      ( order-theoretic-join-semilattice-Total-Order T)
+```
+
+### The binary minimum operation is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  commutative-min-Total-Order :
+    (x y : type-Total-Order T) →
+    min-Total-Order T x y ＝ min-Total-Order T y x
+  commutative-min-Total-Order =
+    commutative-meet-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Total-Order T)
+```
+
+### The binary maximum operation is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  commutative-max-Total-Order :
+    (x y : type-Total-Order T) →
+    max-Total-Order T x y ＝ max-Total-Order T y x
+  commutative-max-Total-Order =
+    commutative-join-Order-Theoretic-Join-Semilattice
+      ( order-theoretic-join-semilattice-Total-Order T)
+```
+
+### Interchange on the binary minimum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-min-Total-Order :
+      (a b c d : type-Total-Order T) →
+      min-Total-Order T (min-Total-Order T a b) (min-Total-Order T c d) ＝
+      min-Total-Order T (min-Total-Order T a c) (min-Total-Order T b d)
+    interchange-law-min-Total-Order =
+      interchange-law-commutative-and-associative
+        ( min-Total-Order T)
+        ( commutative-min-Total-Order T)
+        ( associative-min-Total-Order T)
+```
+
+### Interchange on the binary maximum operation
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    interchange-law-max-Total-Order :
+      (a b c d : type-Total-Order T) →
+      max-Total-Order T (max-Total-Order T a b) (max-Total-Order T c d) ＝
+      max-Total-Order T (max-Total-Order T a c) (max-Total-Order T b d)
+    interchange-law-max-Total-Order =
+      interchange-law-commutative-and-associative
+        ( max-Total-Order T)
+        ( commutative-max-Total-Order T)
+        ( associative-max-Total-Order T)
+```
+
+### The binary minimum operation is idempotent
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  idempotent-min-Total-Order :
+    (x : type-Total-Order T) →
+    min-Total-Order T x x ＝ x
+  idempotent-min-Total-Order =
+    idempotent-meet-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Total-Order T)
+```
+
+### The binary maximum operation is idempotent
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  idempotent-max-Total-Order :
+    (x : type-Total-Order T) →
+    max-Total-Order T x x ＝ x
+  idempotent-max-Total-Order =
+    idempotent-join-Order-Theoretic-Join-Semilattice
+      ( order-theoretic-join-semilattice-Total-Order T)
+```
+
+### If `x` is less than or equal to `y`, the minimum of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    left-leq-right-min-Total-Order :
+      (x y : type-Total-Order T) →
+      leq-Total-Order T x y → min-Total-Order T x y ＝ x
+    left-leq-right-min-Total-Order =
+      left-leq-right-meet-Lattice (lattice-Total-Order T)
+```
+
+### If `y` is less than or equal to `x`, the minimum of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    right-leq-left-min-Total-Order :
+      (x y : type-Total-Order T) →
+      leq-Total-Order T y x → min-Total-Order T x y ＝ y
+    right-leq-left-min-Total-Order =
+      right-leq-left-meet-Lattice (lattice-Total-Order T)
+```
+
+### If `x` is less than or equal to `y`, the maximum of `x` and `y` is `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    left-leq-right-max-Total-Order :
+      (x y : type-Total-Order T) →
+      leq-Total-Order T x y → max-Total-Order T x y ＝ y
+    left-leq-right-max-Total-Order =
+      left-leq-right-join-Lattice (lattice-Total-Order T)
+```
+
+### If `y` is less than or equal to `x`, the maximum of `x` and `y` is `x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    right-leq-left-max-Total-Order :
+      (x y : type-Total-Order T) →
+      leq-Total-Order T y x → max-Total-Order T x y ＝ x
+    right-leq-left-max-Total-Order =
+      right-leq-left-join-Lattice (lattice-Total-Order T)
+```
+
+### If `a ≤ b` and `c ≤ d`, then `min a c ≤ min b d`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    min-leq-leq-Total-Order :
+      (a b c d : type-Total-Order T) →
+      leq-Total-Order T a b → leq-Total-Order T c d →
+      leq-Total-Order
+        ( T)
+        ( min-Total-Order T a c)
+        ( min-Total-Order T b d)
+    min-leq-leq-Total-Order =
+      meet-leq-leq-Order-Theoretic-Meet-Semilattice
+        ( order-theoretic-meet-semilattice-Total-Order T)
+```
+
+### If `a ≤ b` and `a ≤ c`, then `a ≤ min b c`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-min-leq-both-Total-Order :
+      (a b c : type-Total-Order T) →
+      leq-Total-Order T a b → leq-Total-Order T a c →
+      leq-Total-Order T a (min-Total-Order T b c)
+    leq-min-leq-both-Total-Order =
+      leq-meet-leq-both-Lattice (lattice-Total-Order T)
+```
+
+### If `a ≤ b` and `c ≤ d`, then `max a c ≤ max b d`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (T : Total-Order l1 l2)
+  where
+
+  abstract
+    max-leq-leq-Total-Order :
+      (a b c d : type-Total-Order T) →
+      leq-Total-Order T a b → leq-Total-Order T c d →
+      leq-Total-Order
+        ( T)
+        ( max-Total-Order T a c)
+        ( max-Total-Order T b d)
+    max-leq-leq-Total-Order =
+      join-leq-leq-Order-Theoretic-Join-Semilattice
+        ( order-theoretic-join-semilattice-Total-Order T)
+```
+
+### If `a ≤ c` and `b ≤ c`, then `max a b ≤ c`
+
+```agda
+module _
+  {l1 l2 : Level} (T : Total-Order l1 l2)
+  where
+
+  abstract
+    leq-max-leq-both-Total-Order :
+      (a b c : type-Total-Order T) →
+      leq-Total-Order T a c → leq-Total-Order T b c →
+      leq-Total-Order T (max-Total-Order T a b) c
+    leq-max-leq-both-Total-Order =
+      leq-join-leq-both-Lattice (lattice-Total-Order T)
+```
+
+### The minimum of two values is equal to one of them
+
+```agda
+module _
+  {l1 l2 l3 : Level} (T : Total-Order l1 l2) (P : Prop l3)
+  where
+
+  abstract
+    eq-one-min-Total-Order :
+      (x y : type-Total-Order T) →
+      ((min-Total-Order T x y ＝ x) → type-Prop P) →
+      ((min-Total-Order T x y ＝ y) → type-Prop P) →
+      type-Prop P
+    eq-one-min-Total-Order x y H I =
+      elim-disjunction
+        ( P)
+        ( I ∘ right-leq-left-min-Total-Order T x y)
+        ( H ∘ left-leq-right-min-Total-Order T x y)
+        ( is-total-Total-Order T y x)
+
+    eq-one-of-four-min-Total-Order :
+      (x y z w : type-Total-Order T) →
+      let
+        min=_ =
+          min-Total-Order T (min-Total-Order T x y) (min-Total-Order T z w) ＝_
+      in
+        ( min= x → type-Prop P) →
+        ( min= y → type-Prop P) →
+        ( min= z → type-Prop P) →
+        ( min= w → type-Prop P) →
+        type-Prop P
+    eq-one-of-four-min-Total-Order x y z w H I J K =
+      eq-one-min-Total-Order
+        ( min-Total-Order T x y)
+        ( min-Total-Order T z w)
+        ( λ min=min-x-y →
+          eq-one-min-Total-Order x y
+            ( H ∘ (min=min-x-y ∙_))
+            ( I ∘ (min=min-x-y ∙_)))
+        ( λ min=min-z-w →
+          eq-one-min-Total-Order z w
+            ( J ∘ (min=min-z-w ∙_))
+            ( K ∘ (min=min-z-w ∙_)))
+```
+
+### The maximum of two values is equal to one of them
+
+```agda
+module _
+  {l1 l2 l3 : Level} (T : Total-Order l1 l2) (P : Prop l3)
+  where
+
+  abstract
+    eq-one-max-Total-Order :
+      (x y : type-Total-Order T) →
+      ((max-Total-Order T x y ＝ x) → type-Prop P) →
+      ((max-Total-Order T x y ＝ y) → type-Prop P) →
+      type-Prop P
+    eq-one-max-Total-Order x y H I =
+      elim-disjunction
+        ( P)
+        ( H ∘ right-leq-left-max-Total-Order T x y)
+        ( I ∘ left-leq-right-max-Total-Order T x y)
+        ( is-total-Total-Order T y x)
+
+    eq-one-of-four-max-Total-Order :
+      (x y z w : type-Total-Order T) →
+      let
+        max=_ =
+          max-Total-Order T (max-Total-Order T x y) (max-Total-Order T z w) ＝_
+      in
+        ( max= x → type-Prop P) →
+        ( max= y → type-Prop P) →
+        ( max= z → type-Prop P) →
+        ( max= w → type-Prop P) →
+        type-Prop P
+    eq-one-of-four-max-Total-Order x y z w H I J K =
+      eq-one-max-Total-Order
+        ( max-Total-Order T x y)
+        ( max-Total-Order T z w)
+        ( λ max=max-x-y →
+          eq-one-max-Total-Order x y
+            ( H ∘ (max=max-x-y ∙_))
+            ( I ∘ (max=max-x-y ∙_)))
+        ( λ max=max-z-w →
+          eq-one-max-Total-Order z w
+            ( J ∘ (max=max-z-w ∙_))
+            ( K ∘ (max=max-z-w ∙_)))
 ```
 
 ## External links

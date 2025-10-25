@@ -22,6 +22,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -420,7 +421,7 @@ module _
     is-section-hom-inv-is-iso-Precategory C p
 ```
 
-### Inverses of isomorphisms
+### The inverse operation on isomorphisms
 
 ```agda
 module _
@@ -526,6 +527,49 @@ module _
       ( id-iso-Precategory C)
       ( is-section-hom-inv-iso-Precategory C f)
 ```
+
+### The 3-for-2 property of isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y z : obj-Precategory C}
+  (f : hom-Precategory C x y)
+  (g : hom-Precategory C y z)
+  where
+
+  is-iso-left-factor-Precategory :
+    is-iso-Precategory C f →
+    is-iso-Precategory C (comp-hom-Precategory C g f) →
+    is-iso-Precategory C g
+  is-iso-left-factor-Precategory F GF =
+    tr
+      ( is-iso-Precategory C)
+      ( equational-reasoning
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C g f)
+          ( hom-inv-is-iso-Precategory C F))
+        ＝ ( comp-hom-Precategory C
+            ( g)
+            ( comp-hom-Precategory C f ( hom-inv-is-iso-Precategory C F)))
+          by
+          associative-comp-hom-Precategory C
+            ( g)
+            ( f)
+            ( hom-inv-is-iso-Precategory C F)
+        ＝ (comp-hom-Precategory C g (id-hom-Precategory C))
+          by
+            ap
+              ( comp-hom-Precategory C g)
+              ( is-section-hom-inv-is-iso-Precategory C F)
+        ＝ g
+          by right-unit-law-comp-hom-Precategory C g)
+      ( is-iso-comp-is-iso-Precategory C GF (is-iso-inv-is-iso-Precategory C F))
+```
+
+> It remains to formalize the implication
+> `is-iso g → is-iso (g ∘ f) → is-iso f`.
 
 ### The inverse operation is a fibered involution on isomorphisms
 
@@ -704,6 +748,37 @@ module _
     hom-Precategory C y z ≃ hom-Precategory C x z
   equiv-precomp-hom-iso-Precategory =
     equiv-precomp-hom-is-iso-Precategory C (is-iso-iso-Precategory C f) z
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  {x y : obj-Precategory C}
+  (f : iso-Precategory C x y)
+  (z : obj-Precategory C)
+  where
+
+  precomp-iso-Precategory : iso-Precategory C y z → iso-Precategory C x z
+  precomp-iso-Precategory g = comp-iso-Precategory C g f
+
+  is-equiv-precomp-iso-Precategory : is-equiv precomp-iso-Precategory
+  is-equiv-precomp-iso-Precategory =
+    is-equiv-subtype-is-equiv
+      ( is-prop-is-iso-Precategory C)
+      ( is-prop-is-iso-Precategory C)
+      ( precomp-hom-Precategory C (hom-iso-Precategory C f) z)
+      ( λ g is-iso-g →
+        is-iso-comp-is-iso-Precategory C is-iso-g (is-iso-iso-Precategory C f))
+      ( is-equiv-precomp-hom-iso-Precategory C f z)
+      ( λ g →
+        is-iso-left-factor-Precategory C (hom-iso-Precategory C f) g
+          ( is-iso-iso-Precategory C f))
+
+  equiv-precomp-iso-Precategory :
+    iso-Precategory C y z ≃ iso-Precategory C x z
+  equiv-precomp-iso-Precategory =
+    ( precomp-iso-Precategory , is-equiv-precomp-iso-Precategory)
 ```
 
 ### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence

@@ -20,7 +20,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 A
-{{#concept "complete undirected graph" Agda=complete-Undirected-Graph-𝔽 WD="complete graph" WDID=Q45715}}
+{{#concept "complete undirected graph" Agda=complete-Finite-Undirected-Graph WD="complete graph" WDID=Q45715}}
 is a [complete multipartite graph](graph-theory.complete-multipartite-graphs.md)
 in which every block has exactly one vertex. In other words, it is an
 [undirected graph](graph-theory.undirected-graphs.md) in which every vertex is
@@ -34,9 +34,10 @@ of its vertices.
 ## Definition
 
 ```agda
-complete-Undirected-Graph-𝔽 : {l : Level} → 𝔽 l → Undirected-Graph-𝔽 l l
-complete-Undirected-Graph-𝔽 X =
-  complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
+complete-Finite-Undirected-Graph :
+  {l : Level} → Finite-Type l → Finite-Undirected-Graph l l
+complete-Finite-Undirected-Graph X =
+  complete-multipartite-Finite-Undirected-Graph X (λ x → unit-Finite-Type)
 ```
 
 ## External links

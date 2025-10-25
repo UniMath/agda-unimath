@@ -13,8 +13,10 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -41,6 +43,7 @@ open import foundation-core.homotopies
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.subtypes
@@ -48,7 +51,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -225,6 +228,26 @@ abstract
   is-surjective-has-section (g , G) b = unit-trunc-Prop (g b , G b)
 ```
 
+### The underlying surjection of a retract
+
+```agda
+surjection-retract :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A retract-of B → B ↠ A
+surjection-retract R =
+  ( map-retraction-retract R , is-surjective-has-section (section-retract R))
+```
+
+### If an empty type has a surjection into another type, that type is empty
+
+```agda
+abstract
+  is-empty-surjection :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-empty A → is-empty B
+  is-empty-surjection A↠B ¬A b =
+    rec-trunc-Prop empty-Prop (¬A ∘ pr1) (is-surjective-map-surjection A↠B b)
+```
+
 ### Any split surjective map is surjective
 
 ```agda
@@ -265,6 +288,9 @@ module _
 
   is-surjective-id : is-surjective (id {A = A})
   is-surjective-id a = unit-trunc-Prop (a , refl)
+
+  id-surjection : A ↠ A
+  id-surjection = (id , is-surjective-id)
 ```
 
 ### Maps which are homotopic to surjective maps are surjective
@@ -532,7 +558,7 @@ module _
 
   abstract
     is-surjective-right-map-triangle :
-      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
       is-surjective f → is-surjective g
     is-surjective-right-map-triangle f g h H is-surj-f x =
       apply-universal-property-trunc-Prop
@@ -589,9 +615,7 @@ is-trunc-map-precomp-Π-is-surjective :
 is-trunc-map-precomp-Π-is-surjective k H =
   is-trunc-map-precomp-Π-is-connected-map
     ( neg-one-𝕋)
-    ( succ-𝕋 k)
     ( k)
-    ( refl)
     ( is-neg-one-connected-map-is-surjective H)
 ```
 
@@ -644,7 +668,7 @@ equiv-Surjection :
   Surjection l2 A → Surjection l3 A → UU (l1 ⊔ l2 ⊔ l3)
 equiv-Surjection f g =
   Σ ( type-Surjection f ≃ type-Surjection g)
-    ( λ e → (map-equiv e ∘ map-Surjection f) ~ map-Surjection g)
+    ( λ e → map-equiv e ∘ map-Surjection f ~ map-Surjection g)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
@@ -850,9 +874,7 @@ module _
   is-inhabited-is-surjective :
     {f : A → B} → is-surjective f → is-inhabited B → is-inhabited A
   is-inhabited-is-surjective F =
-    rec-trunc-Prop
-      ( is-inhabited-Prop A)
-      ( rec-trunc-Prop (is-inhabited-Prop A) (unit-trunc-Prop ∘ pr1) ∘ F)
+    rec-trunc-Prop (is-inhabited-Prop A) (map-trunc-Prop pr1 ∘ F)
 
   is-inhabited-surjection :
     A ↠ B → is-inhabited B → is-inhabited A
@@ -862,8 +884,8 @@ module _
 
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
 
-This remains to be shown.
-[#735](https://github.com/UniMath/agda-unimath/issues/735)
+> This remains to be shown.
+> [#735](https://github.com/UniMath/agda-unimath/issues/735)
 
 ## See also
 

@@ -84,7 +84,7 @@ module _
     preserves-order-upper-adjoint-Galois-Connection :
       preserves-order-Poset Q P map-upper-adjoint-Galois-Connection
     preserves-order-upper-adjoint-Galois-Connection =
-      preserves-order-map-hom-Poset Q P upper-adjoint-Galois-Connection
+      preserves-order-hom-Poset Q P upper-adjoint-Galois-Connection
 
     is-upper-adjoint-upper-adjoint-Galois-Connection :
       is-upper-adjoint-Galois-Connection upper-adjoint-Galois-Connection
@@ -102,7 +102,7 @@ module _
     preserves-order-lower-adjoint-Galois-Connection :
       preserves-order-Poset P Q map-lower-adjoint-Galois-Connection
     preserves-order-lower-adjoint-Galois-Connection =
-      preserves-order-map-hom-Poset P Q lower-adjoint-Galois-Connection
+      preserves-order-hom-Poset P Q lower-adjoint-Galois-Connection
 
     adjoint-relation-Galois-Connection :
       (x : type-Poset P) (y : type-Poset Q) →

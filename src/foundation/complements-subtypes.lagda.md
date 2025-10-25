@@ -77,3 +77,19 @@ neg-hom-powerset =
     ( λ P x → neg-Prop (P x))
     ( λ P Q f x → map-neg (f x))
 ```
+
+### Complementation reverses the containment order on subsets
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1}
+  (B : subtype l2 A)
+  (C : subtype l3 A)
+  where
+
+  reverses-order-complement-subtype :
+    B ⊆ C →
+    complement-subtype C ⊆ complement-subtype B
+  reverses-order-complement-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
+```

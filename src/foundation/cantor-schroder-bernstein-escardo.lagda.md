@@ -410,3 +410,14 @@ Cantor-Schröder-Bernstein lem A B f g =
   {{#cite TypeTopology}}
 
 {{#bibliography}}
+
+## See also
+
+The Cantor–Schröder–Bernstein–Escardó theorem holds constructively for many
+notions of finite type, including
+
+- [Finite types](univalent-combinatorics.finite-types.md) (unformalized)
+- [Subfinite types](univalent-combinatorics.subfinite-types.md)
+- [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
+- [Subfinitely enumerable types](univalent-combinatorics.subfinitely-enumerable-types.md)
+- [Dedekind finite types](univalent-combinatorics.dedekind-finite-types.md)

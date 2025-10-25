@@ -40,6 +40,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 ```
 
@@ -207,44 +208,60 @@ module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   where
 
-  abstract
-    is-equiv-map-coproduct :
-      {f : A → A'} {g : B → B'} →
-      is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
-    pr1
-      ( pr1
-        ( is-equiv-map-coproduct
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) = map-coproduct sf sg
-    pr2
-      ( pr1
-        ( is-equiv-map-coproduct {f} {g}
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) =
-      ( ( inv-htpy (preserves-comp-map-coproduct sf f sg g)) ∙h
-        ( htpy-map-coproduct Sf Sg)) ∙h
-      ( id-map-coproduct A' B')
-    pr1
-      ( pr2
-        ( is-equiv-map-coproduct
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) = map-coproduct rf rg
-    pr2
-      ( pr2
-        ( is-equiv-map-coproduct {f} {g}
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) =
-      ( ( inv-htpy (preserves-comp-map-coproduct f rf g rg)) ∙h
-        ( htpy-map-coproduct Rf Rg)) ∙h
-      ( id-map-coproduct A B)
-
   map-equiv-coproduct : A ≃ A' → B ≃ B' → A + B → A' + B'
-  map-equiv-coproduct e e' = map-coproduct (map-equiv e) (map-equiv e')
+  map-equiv-coproduct f g = map-coproduct (map-equiv f) (map-equiv g)
+
+  map-inv-equiv-coproduct : A ≃ A' → B ≃ B' → A' + B' → A + B
+  map-inv-equiv-coproduct f g =
+    map-coproduct (map-inv-equiv f) (map-inv-equiv g)
+
+  is-section-map-inv-equiv-coproduct :
+    (f : A ≃ A') (g : B ≃ B') →
+    is-section
+      ( map-equiv-coproduct f g)
+      ( map-inv-equiv-coproduct f g)
+  is-section-map-inv-equiv-coproduct f g =
+    ( inv-htpy
+      ( preserves-comp-map-coproduct
+        ( map-inv-equiv f)
+        ( map-equiv f)
+        ( map-inv-equiv g)
+        ( map-equiv g))) ∙h
+    ( htpy-map-coproduct
+      ( is-section-map-inv-equiv f)
+      ( is-section-map-inv-equiv g)) ∙h
+    ( id-map-coproduct A' B')
+
+  is-retraction-map-inv-equiv-coproduct :
+    (f : A ≃ A') (g : B ≃ B') →
+    is-retraction
+      ( map-equiv-coproduct f g)
+      ( map-inv-equiv-coproduct f g)
+  is-retraction-map-inv-equiv-coproduct f g =
+    ( inv-htpy
+      ( preserves-comp-map-coproduct
+        ( map-equiv f)
+        ( map-inv-equiv f)
+        ( map-equiv g)
+        ( map-inv-equiv g))) ∙h
+    ( htpy-map-coproduct
+      ( is-retraction-map-inv-equiv f)
+      ( is-retraction-map-inv-equiv g)) ∙h
+    ( id-map-coproduct A B)
+
+  is-equiv-map-coproduct :
+    {f : A → A'} {g : B → B'} →
+    is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
+  is-equiv-map-coproduct {f} {g} H K =
+    is-equiv-is-invertible
+      ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
+      ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
+      ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
 
   equiv-coproduct : A ≃ A' → B ≃ B' → (A + B) ≃ (A' + B')
-  pr1 (equiv-coproduct e e') = map-equiv-coproduct e e'
-  pr2 (equiv-coproduct e e') =
-    is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
+  equiv-coproduct e e' =
+    ( map-equiv-coproduct e e' ,
+      is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e'))
 ```
 
 ### The functorial action of coproducts preserves retractions

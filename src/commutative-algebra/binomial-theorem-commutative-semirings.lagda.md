@@ -9,18 +9,19 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
-open import commutative-algebra.sums-commutative-semirings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors-on-commutative-semirings
+open import linear-algebra.finite-sequences-in-commutative-semirings
 
 open import ring-theory.binomial-theorem-semirings
 
@@ -39,8 +40,8 @@ we have
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
-The binomial theorem is the 44th theorem on
-[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+The binomial theorem is the [44th](literature.100-theorems.md#44) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definitions
@@ -48,12 +49,12 @@ The binomial theorem is the 44th theorem on
 ### Binomial sums
 
 ```agda
-binomial-sum-Commutative-Semiring :
+binomial-sum-fin-sequence-type-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l)
-  (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+  (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
   type-Commutative-Semiring A
-binomial-sum-Commutative-Semiring A =
-  binomial-sum-Semiring (semiring-Commutative-Semiring A)
+binomial-sum-fin-sequence-type-Commutative-Semiring A =
+  binomial-sum-fin-sequence-type-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ## Properties
@@ -66,15 +67,15 @@ module _
   where
 
   binomial-sum-one-element-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 1) →
-    binomial-sum-Commutative-Semiring A 0 f ＝
-    head-functional-vec-Commutative-Semiring A 0 f
+    (f : fin-sequence-type-Commutative-Semiring A 1) →
+    binomial-sum-fin-sequence-type-Commutative-Semiring A 0 f ＝
+    head-fin-sequence-type-Commutative-Semiring A 0 f
   binomial-sum-one-element-Commutative-Semiring =
     binomial-sum-one-element-Semiring (semiring-Commutative-Semiring A)
 
   binomial-sum-two-elements-Commutative-Semiring :
-    (f : functional-vec-Commutative-Semiring A 2) →
-    binomial-sum-Commutative-Semiring A 1 f ＝
+    (f : fin-sequence-type-Commutative-Semiring A 2) →
+    binomial-sum-fin-sequence-type-Commutative-Semiring A 1 f ＝
     add-Commutative-Semiring A (f (zero-Fin 1)) (f (one-Fin 1))
   binomial-sum-two-elements-Commutative-Semiring =
     binomial-sum-two-elements-Semiring (semiring-Commutative-Semiring A)
@@ -87,13 +88,14 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  htpy-binomial-sum-Commutative-Semiring :
-    (n : ℕ) {f g : functional-vec-Commutative-Semiring A (succ-ℕ n)} →
+  htpy-binomial-sum-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) {f g : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)} →
     (f ~ g) →
-    binomial-sum-Commutative-Semiring A n f ＝
-    binomial-sum-Commutative-Semiring A n g
-  htpy-binomial-sum-Commutative-Semiring =
-    htpy-binomial-sum-Semiring (semiring-Commutative-Semiring A)
+    binomial-sum-fin-sequence-type-Commutative-Semiring A n f ＝
+    binomial-sum-fin-sequence-type-Commutative-Semiring A n g
+  htpy-binomial-sum-fin-sequence-type-Commutative-Semiring =
+    htpy-binomial-sum-fin-sequence-type-Semiring
+      ( semiring-Commutative-Semiring A)
 ```
 
 ### Multiplication distributes over sums
@@ -103,24 +105,28 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  left-distributive-mul-binomial-sum-Commutative-Semiring :
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring :
     (n : ℕ) (x : type-Commutative-Semiring A)
-    (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
-    mul-Commutative-Semiring A x (binomial-sum-Commutative-Semiring A n f) ＝
-    binomial-sum-Commutative-Semiring A n
+    (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
+    mul-Commutative-Semiring A
+      ( x)
+      ( binomial-sum-fin-sequence-type-Commutative-Semiring A n f) ＝
+    binomial-sum-fin-sequence-type-Commutative-Semiring A n
       ( λ i → mul-Commutative-Semiring A x (f i))
-  left-distributive-mul-binomial-sum-Commutative-Semiring =
-    left-distributive-mul-binomial-sum-Semiring
+  left-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring =
+    left-distributive-mul-binomial-sum-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring A)
 
-  right-distributive-mul-binomial-sum-Commutative-Semiring :
-    (n : ℕ) (f : functional-vec-Commutative-Semiring A (succ-ℕ n)) →
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring :
+    (n : ℕ) (f : fin-sequence-type-Commutative-Semiring A (succ-ℕ n)) →
     (x : type-Commutative-Semiring A) →
-    mul-Commutative-Semiring A (binomial-sum-Commutative-Semiring A n f) x ＝
-    binomial-sum-Commutative-Semiring A n
-      ( λ i → mul-Commutative-Semiring A (f i) x)
-  right-distributive-mul-binomial-sum-Commutative-Semiring =
-    right-distributive-mul-binomial-sum-Semiring
+    mul-Commutative-Semiring A
+      ( binomial-sum-fin-sequence-type-Commutative-Semiring A n f)
+      ( x) ＝
+    binomial-sum-fin-sequence-type-Commutative-Semiring A n
+      ( mul-Commutative-Semiring' A x ∘ f)
+  right-distributive-mul-binomial-sum-fin-sequence-type-Commutative-Semiring =
+    right-distributive-mul-binomial-sum-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring A)
 ```
 
@@ -133,7 +139,7 @@ binomial-theorem-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l) →
   (n : ℕ) (x y : type-Commutative-Semiring A) →
   power-Commutative-Semiring A n (add-Commutative-Semiring A x y) ＝
-  binomial-sum-Commutative-Semiring A n
+  binomial-sum-fin-sequence-type-Commutative-Semiring A n
     ( λ i →
       mul-Commutative-Semiring A
       ( power-Commutative-Semiring A (nat-Fin (succ-ℕ n) i) x)
@@ -159,7 +165,7 @@ is-linear-combination-power-add-Commutative-Semiring :
   add-Commutative-Semiring A
     ( mul-Commutative-Semiring A
       ( power-Commutative-Semiring A m y)
-      ( sum-Commutative-Semiring A n
+      ( sum-fin-sequence-type-Commutative-Semiring A n
         ( λ i →
           mul-nat-scalar-Commutative-Semiring A
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
@@ -168,7 +174,7 @@ is-linear-combination-power-add-Commutative-Semiring :
               ( power-Commutative-Semiring A (dist-ℕ (nat-Fin n i) n) y)))))
     ( mul-Commutative-Semiring A
       ( power-Commutative-Semiring A n x)
-      ( sum-Commutative-Semiring A
+      ( sum-fin-sequence-type-Commutative-Semiring A
         ( succ-ℕ m)
         ( λ i →
           mul-nat-scalar-Commutative-Semiring A

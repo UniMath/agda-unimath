@@ -49,8 +49,8 @@ open import foundation-core.type-theoretic-principle-of-choice
 ### Any equivalence is an embedding
 
 We already proved in `foundation-core.equivalences` that equivalences are
-embeddings. Here we have `_↪_` available, so we record the map from equivalences
-to embeddings.
+embeddings. Here we have `_↪_` available, so we record the map from
+equivalences to embeddings.
 
 ```agda
 module _
@@ -113,7 +113,7 @@ equivalences are contractible maps, it follows that the
 at `id : A → A` is contractible, i.e., the type `Σ (B → A) (λ h → h ∘ f ＝ id)`
 is contractible. Furthermore, since fiberwise equivalences induce equivalences
 on total spaces, it follows from
-[function extensionality](foundation.function-extensionality.md)` that the type
+[function extensionality](foundation.function-extensionality.md) that the type
 
 ```text
   Σ (B → A) (λ h → h ∘ f ~ id)
@@ -492,7 +492,7 @@ module _
 
   distributive-inv-comp-equiv :
     (e : X ≃ Y) (f : Y ≃ Z) →
-    (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
+    inv-equiv (f ∘e e) ＝ (inv-equiv e) ∘e (inv-equiv f)
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv
       ( λ x →
@@ -574,6 +574,45 @@ pr1 (equiv-precomp-equiv e C) = _∘e e
 pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv e
 ```
 
+### Transposing inverses
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  (p : X ≃ Y) (q : Y ≃ Z) (r : X ≃ Z)
+  where
+
+  equiv-right-transpose-equiv-comp :
+    (q ∘e p ＝ r) ≃ (q ＝ r ∘e inv-equiv p)
+  equiv-right-transpose-equiv-comp =
+    eq-transpose-equiv (equiv-precomp-equiv p Z) q r
+
+  equiv-left-transpose-equiv-comp :
+    (q ∘e p ＝ r) ≃ (p ＝ inv-equiv q ∘e r)
+  equiv-left-transpose-equiv-comp =
+    eq-transpose-equiv (equiv-postcomp-equiv q X) p r
+
+  right-transpose-equiv-comp :
+    q ∘e p ＝ r → q ＝ r ∘e inv-equiv p
+  right-transpose-equiv-comp s =
+    inv (is-retraction-precomp-equiv-inv-equiv p q) ∙ ap (_∘e inv-equiv p) s
+
+  inv-right-transpose-equiv-comp :
+    q ＝ r ∘e inv-equiv p → q ∘e p ＝ r
+  inv-right-transpose-equiv-comp s =
+    ap (_∘e p) s ∙ is-section-precomp-equiv-inv-equiv p r
+
+  left-transpose-equiv-comp :
+    q ∘e p ＝ r → p ＝ inv-equiv q ∘e r
+  left-transpose-equiv-comp s =
+    inv (is-retraction-postcomp-equiv-inv-equiv q p) ∙ ap (inv-equiv q ∘e_) s
+
+  inv-left-transpose-equiv-comp :
+    p ＝ inv-equiv q ∘e r → q ∘e p ＝ r
+  inv-left-transpose-equiv-comp s =
+    ap (q ∘e_) s ∙ is-section-postcomp-equiv-inv-equiv q r
+```
+
 ### Computing transport in the type of equivalences
 
 ```agda
@@ -585,6 +624,18 @@ module _
     {x y : A} (p : x ＝ y) (e : B x ≃ C x) →
     tr (λ x → B x ≃ C x) p e ＝ equiv-tr C p ∘e e ∘e equiv-tr B (inv p)
   tr-equiv-type refl e = eq-htpy-equiv refl-htpy
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y Y' : UU l2}
+  where
+
+  tr-equiv-type-right :
+    (p : Y ＝ Y') (α : X ≃ Y) → equiv-tr id p ∘e α ＝ tr (X ≃_) p α
+  tr-equiv-type-right refl = left-unit-law-equiv
+
+  tr-equiv-type-left :
+    (p : Y ＝ Y') (α : Y ≃ X) → α ∘e equiv-tr id (inv p) ＝ tr (_≃ X) p α
+  tr-equiv-type-left refl = right-unit-law-equiv
 ```
 
 ### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence

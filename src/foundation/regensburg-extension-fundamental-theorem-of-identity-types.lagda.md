@@ -25,8 +25,10 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.maps-in-subuniverses
+open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.separated-types-subuniverses
+open import foundation.structured-equality-duality
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps
@@ -39,7 +41,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **Regensburg extension** of the
+The
+{{#concept "Regensburg extension" Disambiguation="of the fundamental theorem of identity types" Agda=extended-fundamental-theorem-id}}
+of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
 [pointed](structured-types.pointed-types.md)
@@ -82,48 +86,94 @@ agda-unimath.
 
 ## Theorem
 
+### The extended fundamental theorem of identity types
+
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
+  {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
   {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   abstract
     forward-implication-extended-fundamental-theorem-id :
       is-0-connected A →
-      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) →
-      is-separated P (Σ A B)
-    forward-implication-extended-fundamental-theorem-id H K (x , y) (x' , y') =
-      apply-universal-property-trunc-Prop
-        ( mere-eq-is-0-connected H a x)
-        ( P _)
-        ( λ where
-          refl →
-            is-in-subuniverse-equiv P
-              ( compute-fiber-map-out-of-identity-type
-                ( ind-Id a (λ u v → B u) y)
-                ( x')
-                ( y'))
-              ( K (ind-Id a (λ u v → B u) y) x' y'))
+      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)) →
+      is-separated 𝒫 (Σ A B)
+    forward-implication-extended-fundamental-theorem-id H K =
+      forward-implication-subuniverse-equality-duality 𝒫
+        ( is-in-subuniverse-equiv 𝒫)
+        ( λ x f y b →
+          apply-universal-property-trunc-Prop
+            ( mere-eq-is-0-connected H a x)
+            ( 𝒫 (fiber (f y) b))
+            ( λ where refl → K f y b))
 
   abstract
     backward-implication-extended-fundamental-theorem-id :
-      is-separated P (Σ A B) →
-      (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)
-    backward-implication-extended-fundamental-theorem-id K f x y =
-      is-in-subuniverse-equiv' P
-        ( compute-fiber-map-out-of-identity-type f x y)
-        ( K (a , f a refl) (x , y))
+      is-separated 𝒫 (Σ A B) →
+      (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)
+    backward-implication-extended-fundamental-theorem-id K =
+      backward-implication-subuniverse-equality-duality 𝒫
+        ( is-in-subuniverse-equiv 𝒫)
+        ( K)
+        ( a)
 
-  abstract
-    extended-fundamental-theorem-id :
-      is-0-connected A →
-      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) ↔
-      is-separated P (Σ A B)
-    pr1 (extended-fundamental-theorem-id H) =
-      forward-implication-extended-fundamental-theorem-id H
-    pr2 (extended-fundamental-theorem-id H) =
-      backward-implication-extended-fundamental-theorem-id
+  extended-fundamental-theorem-id :
+    is-0-connected A →
+    ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map 𝒫 (f x)) ↔
+    is-separated 𝒫 (Σ A B)
+  extended-fundamental-theorem-id H =
+    ( forward-implication-extended-fundamental-theorem-id H ,
+      backward-implication-extended-fundamental-theorem-id)
+```
+
+### The unbased extended fundamental theorem of identity types
+
+We give a similar characterization for a binary family of types `B : A → A → 𝒰`
+over a not necessarily pointed or inhabited type `A` whose elements are all
+merely equal. In other words, `A` is any π₀-trivial type. The characterization
+asserts that the following are equivalent:
+
+1. For every `x : A`, every family of maps out of the identity types
+   `f : (y : A) → (x ＝ y) → B x y`, is a family of `𝒫`-maps.
+2. For every `x : A` the type `Σ A (B x)` is `𝒫`-separated.
+
+This unbased extension of the fundamental theorem was not stated or proved at
+the Regensburg summer school, but was later contributed by
+[Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke) in January 2025.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (𝒫 : subuniverse (l1 ⊔ l2) l3)
+  {A : UU l1} {B : A → A → UU l2}
+  where
+
+  forward-implication-extended-fundamental-theorem-unbased-id :
+    ( (x y : A) → mere-eq x y) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
+    ( (x : A) → is-separated 𝒫 (Σ A (B x)))
+  forward-implication-extended-fundamental-theorem-unbased-id H K x =
+    forward-implication-extended-fundamental-theorem-id 𝒫
+      ( x)
+      ( is-0-connected-mere-eq x (H x))
+      ( K x)
+
+  backward-implication-extended-fundamental-theorem-unbased-id :
+    ( (x : A) → is-separated 𝒫 (Σ A (B x))) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y))
+  backward-implication-extended-fundamental-theorem-unbased-id K x =
+    backward-implication-extended-fundamental-theorem-id 𝒫 x (K x)
+
+  extended-fundamental-theorem-unbased-id :
+    ( (x y : A) → mere-eq x y) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B x y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
+    ( (x : A) → is-separated 𝒫 (Σ A (B x)))
+  extended-fundamental-theorem-unbased-id H =
+    ( forward-implication-extended-fundamental-theorem-unbased-id H ,
+      backward-implication-extended-fundamental-theorem-unbased-id)
 ```
 
 ## Corollaries
@@ -247,11 +297,11 @@ The Regensburg extension of the fundamental theorem is used in the following
 files:
 
 - In
-  [`higher-group-theory.free-higher-group-actions.md`](higher-group-theory.free-higher-group-actions.md)
+  [`higher-group-theory.free-higher-group-actions`](higher-group-theory.free-higher-group-actions.md)
   it is used to show that a higher group action is free if and only its total
   space is a set.
 - In
-  [`higher-group-theory.transitive-higher-group-actions.md`](higher-group-theory.transitive-higher-group-actions.md)
+  [`higher-group-theory.transitive-higher-group-actions`](higher-group-theory.transitive-higher-group-actions.md)
   it is used to show that a higher group action is transitive if and only if its
   total space is connected.
 

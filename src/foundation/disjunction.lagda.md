@@ -10,9 +10,11 @@ module foundation.disjunction where
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -334,6 +336,49 @@ module _
       is-decidable-disjunction
         ( is-decidable-Decidable-Prop P)
         ( is-decidable-Decidable-Prop Q))
+```
+
+### Symmetry of the disjuction
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  swap-disjunction : disjunction-type A B → disjunction-type B A
+  swap-disjunction = map-trunc-Prop map-commutative-coproduct
+```
+
+### Associativity of the disjunction
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  left-associate-disjunction :
+    disjunction-type A (disjunction-type B C) →
+    disjunction-type (disjunction-type A B) C
+  left-associate-disjunction =
+    elim-disjunction
+      ( disjunction-type-Prop (disjunction-type A B) C)
+      ( inl-disjunction ∘ inl-disjunction)
+      ( map-trunc-Prop (map-coproduct inr-disjunction id))
+
+  right-associate-disjunction :
+    disjunction-type (disjunction-type A B) C →
+    disjunction-type A (disjunction-type B C)
+  right-associate-disjunction =
+    elim-disjunction
+      ( disjunction-type-Prop A (disjunction-type B C))
+      ( map-trunc-Prop (map-coproduct id inl-disjunction))
+      ( inr-disjunction ∘ inr-disjunction)
+
+  associative-disjunction :
+    disjunction-type (disjunction-type A B) C ↔
+    disjunction-type A (disjunction-type B C)
+  associative-disjunction =
+    ( right-associate-disjunction , left-associate-disjunction)
 ```
 
 ## See also

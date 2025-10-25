@@ -9,36 +9,21 @@ module logic.propositionally-decidable-maps where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
 open import foundation.decidable-dependent-pair-types
-open import foundation.decidable-equality
 open import foundation.decidable-maps
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
+open import foundation.double-negation-dense-equality-maps
 open import foundation.identity-types
-open import foundation.mere-equality
-open import foundation.pi-0-trivial-maps
 open import foundation.propositional-truncations
-open import foundation.retracts-of-maps
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.empty-types
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.iterating-functions
-open import foundation-core.retractions
-open import foundation-core.sections
 
 open import logic.propositionally-decidable-types
 ```
@@ -50,11 +35,13 @@ open import logic.propositionally-decidable-types
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "propositionally decidable" Disambiguation="map of types" Agda=is-inhabited-or-empty-map}}
 if its [fibers](foundation-core.fibers-of-maps.md) are
-[propositionally decidable types](logic.propositionally-decidable-types.md).
+[propositionally decidable types](logic.propositionally-decidable-types.md),
+i.e., if they are merely [inhabited](foundation.inhabited-types.md) or
+[empty](foundation.empty-types.md).
 
 ## Definitions
 
-### The structure on a map of decidability
+### The propositional decidability predicate on a map
 
 ```agda
 module _
@@ -65,7 +52,7 @@ module _
   is-inhabited-or-empty-map f = (y : B) → is-inhabited-or-empty (fiber f y)
 ```
 
-### The type of decidable maps
+### The type of propositionally decidable maps
 
 ```agda
 inhabited-or-empty-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
@@ -78,9 +65,9 @@ module _
   map-inhabited-or-empty-map : A → B
   map-inhabited-or-empty-map = pr1 f
 
-  is-decidable-inhabited-or-empty-map :
+  is-inhabited-or-empty-inhabited-or-empty-map :
     is-inhabited-or-empty-map map-inhabited-or-empty-map
-  is-decidable-inhabited-or-empty-map = pr2 f
+  is-inhabited-or-empty-inhabited-or-empty-map = pr2 f
 ```
 
 ## Properties
@@ -108,7 +95,7 @@ is-inhabited-or-empty-map-is-decidable-map H x =
   is-inhabited-or-empty-is-decidable (H x)
 ```
 
-### The identity map is decidable
+### The identity map is propositionally decidable
 
 ```agda
 abstract
@@ -156,7 +143,7 @@ module _
 ```
 
 The composite `g ∘ f` of two propositionally decidable maps is propositionally
-decidable if `g` is π₀-trivial.
+decidable if `g` has double negation dense equality.
 
 ```agda
 module _
@@ -165,15 +152,16 @@ module _
   where
 
   abstract
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map' :
-      is-π₀-trivial-map' g →
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map :
+      has-double-negation-dense-equality-map g →
       is-inhabited-or-empty-map g →
       is-inhabited-or-empty-map f →
       is-inhabited-or-empty-map (g ∘ f)
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map' H G F x =
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map
+      H G F x =
       is-inhabited-or-empty-equiv
         ( compute-fiber-comp g f x)
-        ( is-inhabited-or-empty-Σ-all-elements-merely-equal-base
+        ( is-inhabited-or-empty-Σ-has-double-negation-dense-equality-base
           ( H x)
           ( G x)
           ( F ∘ pr1))
@@ -181,16 +169,19 @@ module _
 module _
   {l1 : Level} {A : UU l1} {f : A → A}
   (is-inhabited-or-empty-f : is-inhabited-or-empty-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  (F : has-double-negation-dense-equality-map f)
   where
 
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' :
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map :
     (n : ℕ) → is-inhabited-or-empty-map (iterate n f)
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' zero-ℕ =
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+    zero-ℕ =
     is-inhabited-or-empty-map-id
-  is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
-    is-inhabited-or-empty-map-comp-is-π₀-trivial-map'
-      ( is-π₀-trivial-f)
+  is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+    ( succ-ℕ n) =
+    is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map
+      ( F)
       ( is-inhabited-or-empty-f)
-      ( is-inhabited-or-empty-map-iterate-is-π₀-trivial-map' n)
+      ( is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+        ( n))
 ```

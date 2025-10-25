@@ -133,7 +133,7 @@ all-elements-equal-type-symmetric-exclusive-sum-Prop :
 all-elements-equal-type-symmetric-exclusive-sum-Prop (X , P) x y =
   cases-is-prop-type-symmetric-exclusive-sum-Prop
     ( has-decidable-equality-is-finite
-      ( is-finite-type-UU-Fin 2 X)
+      ( is-finite-type-Type-With-Cardinality-ℕ 2 X)
       ( pr1 x)
       ( pr1 y))
   where
@@ -187,7 +187,7 @@ module _
       ( pair p
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-          ( compute-swap-Fin-two-ℕ (zero-Fin 1))
+          ( compute-swap-Fin-2 (zero-Fin 1))
           ( nq)))
   exclusive-sum-symmetric-exclusive-sum (pair (inr _) (q , np)) =
     inr
@@ -195,7 +195,7 @@ module _
         ( q)
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-          ( compute-swap-Fin-two-ℕ (one-Fin 1))
+          ( compute-swap-Fin-2 (one-Fin 1))
           ( np)))
 
   symmetric-exclusive-sum-exclusive-sum :
@@ -205,14 +205,14 @@ module _
   pr2 (pr2 (symmetric-exclusive-sum-exclusive-sum (inl (a , nb)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-      ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
+      ( inv (compute-swap-Fin-2 (zero-Fin 1)))
       ( nb)
   pr1 (symmetric-exclusive-sum-exclusive-sum (inr (na , b))) = (one-Fin 1)
   pr1 (pr2 (symmetric-exclusive-sum-exclusive-sum (inr (b , na)))) = b
   pr2 (pr2 (symmetric-exclusive-sum-exclusive-sum (inr (b , na)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-      ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
+      ( inv (compute-swap-Fin-2 (one-Fin 1)))
       ( na)
 ```
 
@@ -237,7 +237,7 @@ module _
                       ( λ b →
                         ( ¬ (type-Prop (pr2 (standard-unordered-pair P Q) b))) ≃
                         ( ¬ (type-Prop Q)))
-                      ( inv (compute-swap-Fin-two-ℕ (zero-Fin ?)))
+                      ( inv (compute-swap-Fin-2 (zero-Fin ?)))
                       ( id-equiv))) ∘e
                     ( left-unit-law-Σ
                       ( λ y →
@@ -250,8 +250,6 @@ module _
                                   ( pr1 (standard-unordered-pair P Q))
                                   ( inl (inr y))))))))))) ∘e
           ( ( right-distributive-Σ-coproduct
-              ( Fin 0)
-              ( unit)
               ( λ x →
                 ( type-Prop (pr2 (standard-unordered-pair P Q) (inl x))) ×
                 ( ¬ ( type-Prop
@@ -264,7 +262,7 @@ module _
               ( λ b →
                 ¬ (type-Prop (pr2 (standard-unordered-pair P Q) b)) ≃
                 ¬ (type-Prop P))
-              ( inv (compute-swap-Fin-two-ℕ (one-Fin ?)))
+              ( inv (compute-swap-Fin-2 (one-Fin ?)))
               ( id-equiv))
             ( id-equiv)) ∘e
           ( ( commutative-product) ∘e
@@ -278,8 +276,6 @@ module _
                           ( pr1 (standard-unordered-pair P Q))
                           ( inr y)))))))))) ∘e
       ( right-distributive-Σ-coproduct
-        ( Fin 1)
-        ( unit)
         ( λ x →
           ( type-Prop (pr2 (standard-unordered-pair P Q) x)) ×
           ( ¬ ( type-Prop
@@ -306,7 +302,7 @@ module _
           ( λ t →
             ¬ ( type-Prop
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
-          ( compute-swap-Fin-two-ℕ (zero-Fin 1))
+          ( compute-swap-Fin-2 (zero-Fin 1))
           ( nq)))
   exclusive-sum-symmetric-exclusive-sum-Prop (pair (inr _) (q , np)) =
     inr
@@ -315,7 +311,7 @@ module _
           ( λ t →
             ¬ ( type-Prop
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
-          ( compute-swap-Fin-two-ℕ (one-Fin 1))
+          ( compute-swap-Fin-2 (one-Fin 1))
           ( np)))
 
   symmetric-exclusive-sum-exclusive-sum-Prop :
@@ -328,7 +324,7 @@ module _
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
-      ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
+      ( inv (compute-swap-Fin-2 (zero-Fin 1)))
       ( nq)
   pr1 (symmetric-exclusive-sum-exclusive-sum-Prop (inr (q , np))) = one-Fin 1
   pr1 (pr2 (symmetric-exclusive-sum-exclusive-sum-Prop (inr (q , np)))) = q
@@ -336,7 +332,7 @@ module _
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
-      ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
+      ( inv (compute-swap-Fin-2 (one-Fin 1)))
       ( np)
 
 eq-commmutative-exclusive-sum-exclusive-sum :

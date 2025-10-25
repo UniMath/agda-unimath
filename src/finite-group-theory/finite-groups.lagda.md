@@ -51,8 +51,8 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -60,8 +60,8 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 ## Idea
 
-An {{#concept "(abstract) finite group" Agda=Group-𝔽}} is a finite group in the
-usual algebraic sense, i.e., it consists of a
+An {{#concept "(abstract) finite group" Agda=Finite-Group}} is a finite group in
+the usual algebraic sense, i.e., it consists of a
 [finite type](univalent-combinatorics.finite-types.md)
 [equipped](foundation.structure.md) with a unit element `e`, a binary operation
 `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the
@@ -80,251 +80,256 @@ usual algebraic sense, i.e., it consists of a
 ### The condition that a finite semigroup is a finite group
 
 ```agda
-is-group-𝔽 :
-  {l : Level} (G : Semigroup-𝔽 l) → UU l
-is-group-𝔽 G = is-group-Semigroup (semigroup-Semigroup-𝔽 G)
+is-group-Finite-Semigroup :
+  {l : Level} (G : Finite-Semigroup l) → UU l
+is-group-Finite-Semigroup G = is-group-Semigroup (semigroup-Finite-Semigroup G)
 ```
 
 ### The type of finite groups
 
 ```agda
-Group-𝔽 :
+Finite-Group :
   (l : Level) → UU (lsuc l)
-Group-𝔽 l = Σ (Semigroup-𝔽 l) (is-group-𝔽)
+Finite-Group l = Σ (Finite-Semigroup l) (is-group-Finite-Semigroup)
 
 module _
-  {l : Level} (G : Group-𝔽 l)
+  {l : Level} (G : Finite-Group l)
   where
 
-  finite-semigroup-Group-𝔽 : Semigroup-𝔽 l
-  finite-semigroup-Group-𝔽 = pr1 G
+  finite-semigroup-Finite-Group : Finite-Semigroup l
+  finite-semigroup-Finite-Group = pr1 G
 
-  semigroup-Group-𝔽 : Semigroup l
-  semigroup-Group-𝔽 =
-    semigroup-Semigroup-𝔽 finite-semigroup-Group-𝔽
+  semigroup-Finite-Group : Semigroup l
+  semigroup-Finite-Group =
+    semigroup-Finite-Semigroup finite-semigroup-Finite-Group
 
-  is-group-Group-𝔽 : is-group-Semigroup semigroup-Group-𝔽
-  is-group-Group-𝔽 = pr2 G
+  is-group-Finite-Group : is-group-Semigroup semigroup-Finite-Group
+  is-group-Finite-Group = pr2 G
 
-  group-Group-𝔽 : Group l
-  pr1 group-Group-𝔽 = semigroup-Group-𝔽
-  pr2 group-Group-𝔽 = is-group-Group-𝔽
+  group-Finite-Group : Group l
+  pr1 group-Finite-Group = semigroup-Finite-Group
+  pr2 group-Finite-Group = is-group-Finite-Group
 
-  finite-type-Group-𝔽 : 𝔽 l
-  finite-type-Group-𝔽 =
-    finite-type-Semigroup-𝔽 finite-semigroup-Group-𝔽
+  finite-type-Finite-Group : Finite-Type l
+  finite-type-Finite-Group =
+    finite-type-Finite-Semigroup finite-semigroup-Finite-Group
 
-  type-Group-𝔽 : UU l
-  type-Group-𝔽 = type-Group group-Group-𝔽
+  type-Finite-Group : UU l
+  type-Finite-Group = type-Group group-Finite-Group
 
-  is-finite-type-Group-𝔽 : is-finite type-Group-𝔽
-  is-finite-type-Group-𝔽 = is-finite-type-𝔽 finite-type-Group-𝔽
+  is-finite-type-Finite-Group : is-finite type-Finite-Group
+  is-finite-type-Finite-Group =
+    is-finite-type-Finite-Type finite-type-Finite-Group
 
-  has-decidable-equality-Group-𝔽 : has-decidable-equality type-Group-𝔽
-  has-decidable-equality-Group-𝔽 =
-    has-decidable-equality-is-finite is-finite-type-Group-𝔽
+  has-decidable-equality-Finite-Group : has-decidable-equality type-Finite-Group
+  has-decidable-equality-Finite-Group =
+    has-decidable-equality-is-finite is-finite-type-Finite-Group
 
-  is-set-type-Group-𝔽 : is-set type-Group-𝔽
-  is-set-type-Group-𝔽 = is-set-type-Group group-Group-𝔽
+  is-set-type-Finite-Group : is-set type-Finite-Group
+  is-set-type-Finite-Group = is-set-type-Group group-Finite-Group
 
-  set-Group-𝔽 : Set l
-  set-Group-𝔽 = set-Group group-Group-𝔽
+  set-Finite-Group : Set l
+  set-Finite-Group = set-Group group-Finite-Group
 
-  has-associative-mul-Group-𝔽 : has-associative-mul type-Group-𝔽
-  has-associative-mul-Group-𝔽 =
-    has-associative-mul-Group group-Group-𝔽
+  has-associative-mul-Finite-Group : has-associative-mul type-Finite-Group
+  has-associative-mul-Finite-Group =
+    has-associative-mul-Group group-Finite-Group
 
-  mul-Group-𝔽 : (x y : type-Group-𝔽) → type-Group-𝔽
-  mul-Group-𝔽 = mul-Group group-Group-𝔽
+  mul-Finite-Group : (x y : type-Finite-Group) → type-Finite-Group
+  mul-Finite-Group = mul-Group group-Finite-Group
 
-  ap-mul-Group-𝔽 :
-    {x x' y y' : type-Group-𝔽} → (x ＝ x') → (y ＝ y') →
-    mul-Group-𝔽 x y ＝ mul-Group-𝔽 x' y'
-  ap-mul-Group-𝔽 = ap-mul-Group group-Group-𝔽
+  ap-mul-Finite-Group :
+    {x x' y y' : type-Finite-Group} → (x ＝ x') → (y ＝ y') →
+    mul-Finite-Group x y ＝ mul-Finite-Group x' y'
+  ap-mul-Finite-Group = ap-mul-Group group-Finite-Group
 
-  mul-Group-𝔽' : (x y : type-Group-𝔽) → type-Group-𝔽
-  mul-Group-𝔽' = mul-Group' group-Group-𝔽
+  mul-Finite-Group' : (x y : type-Finite-Group) → type-Finite-Group
+  mul-Finite-Group' = mul-Group' group-Finite-Group
 
-  associative-mul-Group-𝔽 :
-    (x y z : type-Group-𝔽) →
-    ( mul-Group-𝔽 (mul-Group-𝔽 x y) z) ＝
-    ( mul-Group-𝔽 x (mul-Group-𝔽 y z))
-  associative-mul-Group-𝔽 = associative-mul-Group group-Group-𝔽
+  associative-mul-Finite-Group :
+    (x y z : type-Finite-Group) →
+    ( mul-Finite-Group (mul-Finite-Group x y) z) ＝
+    ( mul-Finite-Group x (mul-Finite-Group y z))
+  associative-mul-Finite-Group = associative-mul-Group group-Finite-Group
 
-  is-unital-Group-𝔽 : is-unital-Semigroup semigroup-Group-𝔽
-  is-unital-Group-𝔽 = is-unital-Group group-Group-𝔽
+  is-unital-Finite-Group : is-unital-Semigroup semigroup-Finite-Group
+  is-unital-Finite-Group = is-unital-Group group-Finite-Group
 
-  monoid-Group-𝔽 : Monoid l
-  monoid-Group-𝔽 = monoid-Group group-Group-𝔽
+  monoid-Finite-Group : Monoid l
+  monoid-Finite-Group = monoid-Group group-Finite-Group
 
-  unit-Group-𝔽 : type-Group-𝔽
-  unit-Group-𝔽 = unit-Group group-Group-𝔽
+  unit-Finite-Group : type-Finite-Group
+  unit-Finite-Group = unit-Group group-Finite-Group
 
-  is-unit-Group-𝔽 : type-Group-𝔽 → UU l
-  is-unit-Group-𝔽 = is-unit-Group group-Group-𝔽
+  is-unit-Finite-Group : type-Finite-Group → UU l
+  is-unit-Finite-Group = is-unit-Group group-Finite-Group
 
-  is-decidable-is-unit-Group-𝔽 :
-    (x : type-Group-𝔽) → is-decidable (is-unit-Group-𝔽 x)
-  is-decidable-is-unit-Group-𝔽 x =
-    has-decidable-equality-Group-𝔽 x unit-Group-𝔽
+  is-decidable-is-unit-Finite-Group :
+    (x : type-Finite-Group) → is-decidable (is-unit-Finite-Group x)
+  is-decidable-is-unit-Finite-Group x =
+    has-decidable-equality-Finite-Group x unit-Finite-Group
 
-  is-prop-is-unit-Group-𝔽 :
-    (x : type-Group-𝔽) → is-prop (is-unit-Group-𝔽 x)
-  is-prop-is-unit-Group-𝔽 = is-prop-is-unit-Group group-Group-𝔽
+  is-prop-is-unit-Finite-Group :
+    (x : type-Finite-Group) → is-prop (is-unit-Finite-Group x)
+  is-prop-is-unit-Finite-Group = is-prop-is-unit-Group group-Finite-Group
 
-  is-decidable-prop-is-unit-Group-𝔽 :
-    (x : type-Group-𝔽) → is-decidable-prop (is-unit-Group-𝔽 x)
-  pr1 (is-decidable-prop-is-unit-Group-𝔽 x) =
-    is-prop-is-unit-Group-𝔽 x
-  pr2 (is-decidable-prop-is-unit-Group-𝔽 x) =
-    is-decidable-is-unit-Group-𝔽 x
+  is-decidable-prop-is-unit-Finite-Group :
+    (x : type-Finite-Group) → is-decidable-prop (is-unit-Finite-Group x)
+  pr1 (is-decidable-prop-is-unit-Finite-Group x) =
+    is-prop-is-unit-Finite-Group x
+  pr2 (is-decidable-prop-is-unit-Finite-Group x) =
+    is-decidable-is-unit-Finite-Group x
 
-  is-unit-prop-Group-𝔽 : type-Group-𝔽 → Prop l
-  is-unit-prop-Group-𝔽 = is-unit-prop-Group group-Group-𝔽
+  is-unit-prop-Finite-Group : type-Finite-Group → Prop l
+  is-unit-prop-Finite-Group = is-unit-prop-Group group-Finite-Group
 
-  is-unit-finite-group-Decidable-Prop : type-Group-𝔽 → Decidable-Prop l
+  is-unit-finite-group-Decidable-Prop : type-Finite-Group → Decidable-Prop l
   pr1 (is-unit-finite-group-Decidable-Prop x) =
-    is-unit-Group-𝔽 x
+    is-unit-Finite-Group x
   pr2 (is-unit-finite-group-Decidable-Prop x) =
-    is-decidable-prop-is-unit-Group-𝔽 x
+    is-decidable-prop-is-unit-Finite-Group x
 
-  left-unit-law-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → mul-Group-𝔽 unit-Group-𝔽 x ＝ x
-  left-unit-law-mul-Group-𝔽 =
-    left-unit-law-mul-Group group-Group-𝔽
+  left-unit-law-mul-Finite-Group :
+    (x : type-Finite-Group) → mul-Finite-Group unit-Finite-Group x ＝ x
+  left-unit-law-mul-Finite-Group =
+    left-unit-law-mul-Group group-Finite-Group
 
-  right-unit-law-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → mul-Group-𝔽 x unit-Group-𝔽 ＝ x
-  right-unit-law-mul-Group-𝔽 =
-    right-unit-law-mul-Group group-Group-𝔽
+  right-unit-law-mul-Finite-Group :
+    (x : type-Finite-Group) → mul-Finite-Group x unit-Finite-Group ＝ x
+  right-unit-law-mul-Finite-Group =
+    right-unit-law-mul-Group group-Finite-Group
 
-  pointed-type-Group-𝔽 : Pointed-Type l
-  pointed-type-Group-𝔽 = pointed-type-Group group-Group-𝔽
+  pointed-type-Finite-Group : Pointed-Type l
+  pointed-type-Finite-Group = pointed-type-Group group-Finite-Group
 
-  has-inverses-Group-𝔽 :
-    is-group-is-unital-Semigroup semigroup-Group-𝔽 is-unital-Group-𝔽
-  has-inverses-Group-𝔽 = has-inverses-Group group-Group-𝔽
+  has-inverses-Finite-Group :
+    is-group-is-unital-Semigroup semigroup-Finite-Group is-unital-Finite-Group
+  has-inverses-Finite-Group = has-inverses-Group group-Finite-Group
 
-  inv-Group-𝔽 : type-Group-𝔽 → type-Group-𝔽
-  inv-Group-𝔽 = inv-Group group-Group-𝔽
+  inv-Finite-Group : type-Finite-Group → type-Finite-Group
+  inv-Finite-Group = inv-Group group-Finite-Group
 
-  left-inverse-law-mul-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    mul-Group-𝔽 (inv-Group-𝔽 x) x ＝ unit-Group-𝔽
-  left-inverse-law-mul-Group-𝔽 =
-    left-inverse-law-mul-Group group-Group-𝔽
+  left-inverse-law-mul-Finite-Group :
+    (x : type-Finite-Group) →
+    mul-Finite-Group (inv-Finite-Group x) x ＝ unit-Finite-Group
+  left-inverse-law-mul-Finite-Group =
+    left-inverse-law-mul-Group group-Finite-Group
 
-  right-inverse-law-mul-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    mul-Group-𝔽 x (inv-Group-𝔽 x) ＝ unit-Group-𝔽
-  right-inverse-law-mul-Group-𝔽 =
-    right-inverse-law-mul-Group group-Group-𝔽
+  right-inverse-law-mul-Finite-Group :
+    (x : type-Finite-Group) →
+    mul-Finite-Group x (inv-Finite-Group x) ＝ unit-Finite-Group
+  right-inverse-law-mul-Finite-Group =
+    right-inverse-law-mul-Group group-Finite-Group
 
-  inv-unit-Group-𝔽 :
-    inv-Group-𝔽 unit-Group-𝔽 ＝ unit-Group-𝔽
-  inv-unit-Group-𝔽 = inv-unit-Group group-Group-𝔽
+  inv-unit-Finite-Group :
+    inv-Finite-Group unit-Finite-Group ＝ unit-Finite-Group
+  inv-unit-Finite-Group = inv-unit-Group group-Finite-Group
 
-  is-section-left-div-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    ( mul-Group-𝔽 x ∘ mul-Group-𝔽 (inv-Group-𝔽 x)) ~ id
-  is-section-left-div-Group-𝔽 = is-section-left-div-Group group-Group-𝔽
+  is-section-left-div-Finite-Group :
+    (x : type-Finite-Group) →
+    ( mul-Finite-Group x ∘ mul-Finite-Group (inv-Finite-Group x)) ~ id
+  is-section-left-div-Finite-Group =
+    is-section-left-div-Group group-Finite-Group
 
-  is-retraction-left-div-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    ( mul-Group-𝔽 (inv-Group-𝔽 x) ∘ mul-Group-𝔽 x) ~ id
-  is-retraction-left-div-Group-𝔽 = is-retraction-left-div-Group group-Group-𝔽
+  is-retraction-left-div-Finite-Group :
+    (x : type-Finite-Group) →
+    ( mul-Finite-Group (inv-Finite-Group x) ∘ mul-Finite-Group x) ~ id
+  is-retraction-left-div-Finite-Group =
+    is-retraction-left-div-Group group-Finite-Group
 
-  is-equiv-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽 x)
-  is-equiv-mul-Group-𝔽 = is-equiv-mul-Group group-Group-𝔽
+  is-equiv-mul-Finite-Group :
+    (x : type-Finite-Group) → is-equiv (mul-Finite-Group x)
+  is-equiv-mul-Finite-Group = is-equiv-mul-Group group-Finite-Group
 
-  equiv-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → type-Group-𝔽 ≃ type-Group-𝔽
-  equiv-mul-Group-𝔽 = equiv-mul-Group group-Group-𝔽
+  equiv-mul-Finite-Group :
+    (x : type-Finite-Group) → type-Finite-Group ≃ type-Finite-Group
+  equiv-mul-Finite-Group = equiv-mul-Group group-Finite-Group
 
-  is-section-right-div-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    (mul-Group-𝔽' x ∘ mul-Group-𝔽' (inv-Group-𝔽 x)) ~ id
-  is-section-right-div-Group-𝔽 = is-section-right-div-Group group-Group-𝔽
+  is-section-right-div-Finite-Group :
+    (x : type-Finite-Group) →
+    (mul-Finite-Group' x ∘ mul-Finite-Group' (inv-Finite-Group x)) ~ id
+  is-section-right-div-Finite-Group =
+    is-section-right-div-Group group-Finite-Group
 
-  is-retraction-right-div-Group-𝔽 :
-    (x : type-Group-𝔽) →
-    (mul-Group-𝔽' (inv-Group-𝔽 x) ∘ mul-Group-𝔽' x) ~ id
-  is-retraction-right-div-Group-𝔽 = is-retraction-right-div-Group group-Group-𝔽
+  is-retraction-right-div-Finite-Group :
+    (x : type-Finite-Group) →
+    (mul-Finite-Group' (inv-Finite-Group x) ∘ mul-Finite-Group' x) ~ id
+  is-retraction-right-div-Finite-Group =
+    is-retraction-right-div-Group group-Finite-Group
 
-  is-equiv-mul-Group-𝔽' :
-    (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽' x)
-  is-equiv-mul-Group-𝔽' = is-equiv-mul-Group' group-Group-𝔽
+  is-equiv-mul-Finite-Group' :
+    (x : type-Finite-Group) → is-equiv (mul-Finite-Group' x)
+  is-equiv-mul-Finite-Group' = is-equiv-mul-Group' group-Finite-Group
 
-  equiv-mul-Group-𝔽' :
-    (x : type-Group-𝔽) → type-Group-𝔽 ≃ type-Group-𝔽
-  equiv-mul-Group-𝔽' = equiv-mul-Group' group-Group-𝔽
+  equiv-mul-Finite-Group' :
+    (x : type-Finite-Group) → type-Finite-Group ≃ type-Finite-Group
+  equiv-mul-Finite-Group' = equiv-mul-Group' group-Finite-Group
 
-  is-binary-equiv-mul-Group-𝔽 : is-binary-equiv mul-Group-𝔽
-  is-binary-equiv-mul-Group-𝔽 =
-    is-binary-equiv-mul-Group group-Group-𝔽
+  is-binary-equiv-mul-Finite-Group : is-binary-equiv mul-Finite-Group
+  is-binary-equiv-mul-Finite-Group =
+    is-binary-equiv-mul-Group group-Finite-Group
 
-  is-binary-emb-mul-Group-𝔽 : is-binary-emb mul-Group-𝔽
-  is-binary-emb-mul-Group-𝔽 =
-    is-binary-emb-mul-Group group-Group-𝔽
+  is-binary-emb-mul-Finite-Group : is-binary-emb mul-Finite-Group
+  is-binary-emb-mul-Finite-Group =
+    is-binary-emb-mul-Group group-Finite-Group
 
-  is-emb-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → is-emb (mul-Group-𝔽 x)
-  is-emb-mul-Group-𝔽 = is-emb-mul-Group group-Group-𝔽
+  is-emb-mul-Finite-Group :
+    (x : type-Finite-Group) → is-emb (mul-Finite-Group x)
+  is-emb-mul-Finite-Group = is-emb-mul-Group group-Finite-Group
 
-  is-emb-mul-Group-𝔽' :
-    (x : type-Group-𝔽) → is-emb (mul-Group-𝔽' x)
-  is-emb-mul-Group-𝔽' = is-emb-mul-Group' group-Group-𝔽
+  is-emb-mul-Finite-Group' :
+    (x : type-Finite-Group) → is-emb (mul-Finite-Group' x)
+  is-emb-mul-Finite-Group' = is-emb-mul-Group' group-Finite-Group
 
-  is-injective-mul-Group-𝔽 :
-    (x : type-Group-𝔽) → is-injective (mul-Group-𝔽 x)
-  is-injective-mul-Group-𝔽 =
-    is-injective-mul-Group group-Group-𝔽
+  is-injective-mul-Finite-Group :
+    (x : type-Finite-Group) → is-injective (mul-Finite-Group x)
+  is-injective-mul-Finite-Group =
+    is-injective-mul-Group group-Finite-Group
 
-  is-injective-mul-Group-𝔽' :
-    (x : type-Group-𝔽) → is-injective (mul-Group-𝔽' x)
-  is-injective-mul-Group-𝔽' =
-    is-injective-mul-Group' group-Group-𝔽
+  is-injective-mul-Finite-Group' :
+    (x : type-Finite-Group) → is-injective (mul-Finite-Group' x)
+  is-injective-mul-Finite-Group' =
+    is-injective-mul-Group' group-Finite-Group
 
-  transpose-eq-mul-Group-𝔽 :
-    {x y z : type-Group-𝔽} →
-    (mul-Group-𝔽 x y ＝ z) → (x ＝ mul-Group-𝔽 z (inv-Group-𝔽 y))
-  transpose-eq-mul-Group-𝔽 =
-    transpose-eq-mul-Group group-Group-𝔽
+  transpose-eq-mul-Finite-Group :
+    {x y z : type-Finite-Group} →
+    (mul-Finite-Group x y ＝ z) → (x ＝ mul-Finite-Group z (inv-Finite-Group y))
+  transpose-eq-mul-Finite-Group =
+    transpose-eq-mul-Group group-Finite-Group
 
-  transpose-eq-mul-Group-𝔽' :
-    {x y z : type-Group-𝔽} →
-    (mul-Group-𝔽 x y ＝ z) → (y ＝ mul-Group-𝔽 (inv-Group-𝔽 x) z)
-  transpose-eq-mul-Group-𝔽' =
-    transpose-eq-mul-Group' group-Group-𝔽
+  transpose-eq-mul-Finite-Group' :
+    {x y z : type-Finite-Group} →
+    (mul-Finite-Group x y ＝ z) → (y ＝ mul-Finite-Group (inv-Finite-Group x) z)
+  transpose-eq-mul-Finite-Group' =
+    transpose-eq-mul-Group' group-Finite-Group
 
-  distributive-inv-mul-Group-𝔽 :
-    {x y : type-Group-𝔽} →
-    ( inv-Group-𝔽 (mul-Group-𝔽 x y)) ＝
-    ( mul-Group-𝔽 (inv-Group-𝔽 y) (inv-Group-𝔽 x))
-  distributive-inv-mul-Group-𝔽 =
-    distributive-inv-mul-Group group-Group-𝔽
+  distributive-inv-mul-Finite-Group :
+    {x y : type-Finite-Group} →
+    ( inv-Finite-Group (mul-Finite-Group x y)) ＝
+    ( mul-Finite-Group (inv-Finite-Group y) (inv-Finite-Group x))
+  distributive-inv-mul-Finite-Group =
+    distributive-inv-mul-Group group-Finite-Group
 
-  inv-inv-Group-𝔽 :
-    (x : type-Group-𝔽) → inv-Group-𝔽 (inv-Group-𝔽 x) ＝ x
-  inv-inv-Group-𝔽 = inv-inv-Group group-Group-𝔽
+  inv-inv-Finite-Group :
+    (x : type-Finite-Group) → inv-Finite-Group (inv-Finite-Group x) ＝ x
+  inv-inv-Finite-Group = inv-inv-Group group-Finite-Group
 
 finite-group-is-finite-Group :
-  {l : Level} → (G : Group l) → is-finite (type-Group G) → Group-𝔽 l
+  {l : Level} → (G : Group l) → is-finite (type-Group G) → Finite-Group l
 pr1 (finite-group-is-finite-Group G f) =
   finite-semigroup-is-finite-Semigroup (semigroup-Group G) f
 pr2 (finite-group-is-finite-Group G f) = is-group-Group G
 
 module _
-  {l : Level} (G : Group-𝔽 l)
+  {l : Level} (G : Finite-Group l)
   where
 
-  commute-Group-𝔽 : type-Group-𝔽 G → type-Group-𝔽 G → UU l
-  commute-Group-𝔽 = commute-Group (group-Group-𝔽 G)
+  commute-Finite-Group : type-Finite-Group G → type-Finite-Group G → UU l
+  commute-Finite-Group = commute-Group (group-Finite-Group G)
 
-  finite-monoid-Group-𝔽 : Monoid-𝔽 l
-  pr1 finite-monoid-Group-𝔽 = finite-semigroup-Group-𝔽 G
-  pr2 finite-monoid-Group-𝔽 = is-unital-Group-𝔽 G
+  finite-monoid-Finite-Group : Finite-Monoid l
+  pr1 finite-monoid-Finite-Group = finite-semigroup-Finite-Group G
+  pr2 finite-monoid-Finite-Group = is-unital-Finite-Group G
 ```
 
 ### Groups of fixed finite order
@@ -419,10 +424,10 @@ is-untruncated-π-finite-Group-of-Order {l} k n =
         is-untruncated-π-finite-is-finite k
           ( is-finite-is-group-Semigroup n X)))
 
-is-π-finite-Group-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Group-of-Order l n)
-is-π-finite-Group-of-Order n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Group-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Group-of-Order l n)
+is-truncated-π-finite-Group-of-Order n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Group-of-Order n)
     ( is-untruncated-π-finite-Group-of-Order 1 n)
 ```
@@ -454,39 +459,40 @@ mere-equiv-number-of-groups-of-order n =
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
-  structure-group-𝔽 : UU l
-  structure-group-𝔽 =
-    Σ (structure-semigroup-𝔽 X) (λ s → is-group-𝔽 (X , s))
+  structure-group-Finite-Type : UU l
+  structure-group-Finite-Type =
+    Σ ( structure-semigroup-Finite-Type X)
+      ( λ s → is-group-Finite-Semigroup (X , s))
 
-  finite-group-structure-group-𝔽 :
-    structure-group-𝔽 → Group-𝔽 l
-  pr1 (finite-group-structure-group-𝔽 (s , g)) = (X , s)
-  pr2 (finite-group-structure-group-𝔽 (s , g)) = g
+  finite-group-structure-group-Finite-Type :
+    structure-group-Finite-Type → Finite-Group l
+  pr1 (finite-group-structure-group-Finite-Type (s , g)) = (X , s)
+  pr2 (finite-group-structure-group-Finite-Type (s , g)) = g
 
-  is-finite-structure-group-𝔽 :
-    is-finite (structure-group-𝔽)
-  is-finite-structure-group-𝔽 =
+  is-finite-structure-group-Finite-Type :
+    is-finite (structure-group-Finite-Type)
+  is-finite-structure-group-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-semigroup-𝔽 X)
+      ( is-finite-structure-semigroup-Finite-Type X)
       ( λ s →
         is-finite-Σ
-          ( is-finite-is-unital-Semigroup-𝔽 (X , s))
+          ( is-finite-is-unital-Finite-Semigroup (X , s))
           ( λ u →
             is-finite-Σ
               ( is-finite-Π
-                ( is-finite-type-𝔽 X)
-                ( λ _ → is-finite-type-𝔽 X))
+                ( is-finite-type-Finite-Type X)
+                ( λ _ → is-finite-type-Finite-Type X))
               ( λ i →
                 is-finite-product
                   ( is-finite-Π
-                    ( is-finite-type-𝔽 X)
-                    ( λ x → is-finite-eq-𝔽 X))
+                    ( is-finite-type-Finite-Type X)
+                    ( λ x → is-finite-eq-Finite-Type X))
                   ( is-finite-Π
-                    ( is-finite-type-𝔽 X)
-                    ( λ x → is-finite-eq-𝔽 X)))))
+                    ( is-finite-type-Finite-Type X)
+                    ( λ x → is-finite-eq-Finite-Type X)))))
 ```
 
 ## References

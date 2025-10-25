@@ -478,13 +478,13 @@ module _
   {l : Level} (P : Prop l)
   where
 
-  is-kuratowski-finite-set-suspension-Prop :
-    is-kuratowski-finite-set (suspension-set-Prop P)
-  is-kuratowski-finite-set-suspension-Prop =
+  is-kuratowski-finite-set-suspension-set-Prop :
+    is-kuratowski-finite-Set (suspension-set-Prop P)
+  is-kuratowski-finite-set-suspension-set-Prop =
     intro-exists 2
       ( comp-surjection
         ( surjection-bool-suspension)
-        ( surjection-equiv equiv-bool-Fin-two-ℕ))
+        ( surjection-equiv equiv-bool-Fin-2))
 ```
 
 ## See also

@@ -84,11 +84,19 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  retraction-section-precomp-domain : section (precomp f X) → retraction f
-  pr1 (retraction-section-precomp-domain s) =
-    map-section (precomp f X) s id
-  pr2 (retraction-section-precomp-domain s) =
-    htpy-eq (is-section-map-section (precomp f X) s id)
+  retraction-map-section-precomp : section (precomp f X) → retraction f
+  retraction-map-section-precomp (s , S) = s id , htpy-eq (S id)
+```
+
+### If `f` has a retraction then `- ∘ f : (Y → X) → (X → X)` has a section
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  where
+
+  section-precomp-retraction-map : retraction f → section (precomp f X)
+  section-precomp-retraction-map (r , H) = precomp r X , htpy-precomp H X
 ```
 
 ### Equivalences induce an equivalence from the type of homotopies between two maps to the type of homotopies between their precomposites
@@ -191,28 +199,41 @@ module _
   (f : A → B) {g h : B → C}
   where
 
-  compute-htpy-eq-ap-precomp :
+  coherence-htpy-eq-ap-precomp :
     coherence-square-maps
       ( ap (precomp f C))
       ( htpy-eq)
       ( htpy-eq)
       ( precomp-Π f (eq-value g h))
-  compute-htpy-eq-ap-precomp =
-    compute-htpy-eq-ap-precomp-Π f
+  coherence-htpy-eq-ap-precomp =
+    coherence-htpy-eq-ap-precomp-Π f
 
-  compute-eq-htpy-ap-precomp :
+  coherence-htpy-eq-ap-precomp' :
+    coherence-square-maps'
+      ( ap (precomp f C))
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  coherence-htpy-eq-ap-precomp' =
+    coherence-htpy-eq-ap-precomp-Π' f
+
+  coherence-eq-htpy-ap-precomp :
     coherence-square-maps
       ( precomp-Π f (eq-value g h))
       ( eq-htpy)
       ( eq-htpy)
       ( ap (precomp f C))
-  compute-eq-htpy-ap-precomp =
-    vertical-inv-equiv-coherence-square-maps
-      ( ap (precomp f C))
-      ( equiv-funext)
-      ( equiv-funext)
+  coherence-eq-htpy-ap-precomp =
+    coherence-eq-htpy-ap-precomp-Π f
+
+  coherence-eq-htpy-ap-precomp' :
+    coherence-square-maps'
       ( precomp-Π f (eq-value g h))
-      ( compute-htpy-eq-ap-precomp)
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp f C))
+  coherence-eq-htpy-ap-precomp' =
+    coherence-eq-htpy-ap-precomp-Π' f
 ```
 
 ### The precomposition map at a dependent pair type

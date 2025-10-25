@@ -56,450 +56,485 @@ A **finite ring** is a ring where the underlying type is finite.
 ### Finite Rings
 
 ```agda
-has-mul-Ab-𝔽 : {l1 : Level} (A : Ab-𝔽 l1) → UU l1
-has-mul-Ab-𝔽 A = has-mul-Ab (ab-Ab-𝔽 A)
+has-mul-Finite-Ab : {l1 : Level} (A : Finite-Ab l1) → UU l1
+has-mul-Finite-Ab A = has-mul-Ab (ab-Finite-Ab A)
 
-Ring-𝔽 : (l1 : Level) → UU (lsuc l1)
-Ring-𝔽 l1 = Σ (Ab-𝔽 l1) (λ A → has-mul-Ab-𝔽 A)
+Finite-Ring : (l1 : Level) → UU (lsuc l1)
+Finite-Ring l1 = Σ (Finite-Ab l1) (λ A → has-mul-Finite-Ab A)
 
 finite-ring-is-finite-Ring :
-  {l : Level} → (R : Ring l) → is-finite (type-Ring R) → Ring-𝔽 l
+  {l : Level} → (R : Ring l) → is-finite (type-Ring R) → Finite-Ring l
 pr1 (finite-ring-is-finite-Ring R f) =
   finite-abelian-group-is-finite-Ab (ab-Ring R) f
 pr2 (finite-ring-is-finite-Ring R f) = pr2 R
 
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  finite-ab-Ring-𝔽 : Ab-𝔽 l
-  finite-ab-Ring-𝔽 = pr1 R
+  finite-ab-Finite-Ring : Finite-Ab l
+  finite-ab-Finite-Ring = pr1 R
 
-  ab-Ring-𝔽 : Ab l
-  ab-Ring-𝔽 = ab-Ab-𝔽 finite-ab-Ring-𝔽
+  ab-Finite-Ring : Ab l
+  ab-Finite-Ring = ab-Finite-Ab finite-ab-Finite-Ring
 
-  ring-Ring-𝔽 : Ring l
-  pr1 ring-Ring-𝔽 = ab-Ring-𝔽
-  pr2 ring-Ring-𝔽 = pr2 R
+  ring-Finite-Ring : Ring l
+  pr1 ring-Finite-Ring = ab-Finite-Ring
+  pr2 ring-Finite-Ring = pr2 R
 
-  finite-type-Ring-𝔽 : 𝔽 l
-  finite-type-Ring-𝔽 = finite-type-Ab-𝔽 finite-ab-Ring-𝔽
+  finite-type-Finite-Ring : Finite-Type l
+  finite-type-Finite-Ring = finite-type-Finite-Ab finite-ab-Finite-Ring
 
-  type-Ring-𝔽 : UU l
-  type-Ring-𝔽 = type-Ab-𝔽 finite-ab-Ring-𝔽
+  type-Finite-Ring : UU l
+  type-Finite-Ring = type-Finite-Ab finite-ab-Finite-Ring
 
-  is-finite-type-Ring-𝔽 : is-finite type-Ring-𝔽
-  is-finite-type-Ring-𝔽 = is-finite-type-Ab-𝔽 finite-ab-Ring-𝔽
+  is-finite-type-Finite-Ring : is-finite type-Finite-Ring
+  is-finite-type-Finite-Ring = is-finite-type-Finite-Ab finite-ab-Finite-Ring
 
-  finite-group-Ring-𝔽 : Group-𝔽 l
-  finite-group-Ring-𝔽 = finite-group-Ab-𝔽 finite-ab-Ring-𝔽
+  finite-group-Finite-Ring : Finite-Group l
+  finite-group-Finite-Ring = finite-group-Finite-Ab finite-ab-Finite-Ring
 
-  group-Ring-𝔽 : Group l
-  group-Ring-𝔽 = group-Ab ab-Ring-𝔽
+  group-Finite-Ring : Group l
+  group-Finite-Ring = group-Ab ab-Finite-Ring
 
-  additive-commutative-monoid-Ring-𝔽 : Commutative-Monoid l
-  additive-commutative-monoid-Ring-𝔽 =
-    commutative-monoid-Ab ab-Ring-𝔽
+  additive-commutative-monoid-Finite-Ring : Commutative-Monoid l
+  additive-commutative-monoid-Finite-Ring =
+    commutative-monoid-Ab ab-Finite-Ring
 
-  additive-monoid-Ring-𝔽 : Monoid l
-  additive-monoid-Ring-𝔽 = monoid-Ab ab-Ring-𝔽
+  additive-monoid-Finite-Ring : Monoid l
+  additive-monoid-Finite-Ring = monoid-Ab ab-Finite-Ring
 
-  additive-semigroup-Ring-𝔽 : Semigroup l
-  additive-semigroup-Ring-𝔽 = semigroup-Ab ab-Ring-𝔽
+  additive-semigroup-Finite-Ring : Semigroup l
+  additive-semigroup-Finite-Ring = semigroup-Ab ab-Finite-Ring
 
-  set-Ring-𝔽 : Set l
-  set-Ring-𝔽 = set-Ab ab-Ring-𝔽
+  set-Finite-Ring : Set l
+  set-Finite-Ring = set-Ab ab-Finite-Ring
 
-  is-set-type-Ring-𝔽 : is-set type-Ring-𝔽
-  is-set-type-Ring-𝔽 = is-set-type-Ab ab-Ring-𝔽
+  is-set-type-Finite-Ring : is-set type-Finite-Ring
+  is-set-type-Finite-Ring = is-set-type-Ab ab-Finite-Ring
 ```
 
 ### Addition in a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  has-associative-add-Ring-𝔽 : has-associative-mul-Set (set-Ring-𝔽 R)
-  has-associative-add-Ring-𝔽 = has-associative-add-Ring (ring-Ring-𝔽 R)
+  has-associative-add-Finite-Ring : has-associative-mul-Set (set-Finite-Ring R)
+  has-associative-add-Finite-Ring =
+    has-associative-add-Ring (ring-Finite-Ring R)
 
-  add-Ring-𝔽 : type-Ring-𝔽 R → type-Ring-𝔽 R → type-Ring-𝔽 R
-  add-Ring-𝔽 = add-Ring (ring-Ring-𝔽 R)
+  add-Finite-Ring : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  add-Finite-Ring = add-Ring (ring-Finite-Ring R)
 
-  add-Ring-𝔽' : type-Ring-𝔽 R → type-Ring-𝔽 R → type-Ring-𝔽 R
-  add-Ring-𝔽' = add-Ring' (ring-Ring-𝔽 R)
+  add-Finite-Ring' :
+    type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  add-Finite-Ring' = add-Ring' (ring-Finite-Ring R)
 
-  ap-add-Ring-𝔽 :
-    {x y x' y' : type-Ring-𝔽 R} →
-    Id x x' → Id y y' → Id (add-Ring-𝔽 x y) (add-Ring-𝔽 x' y')
-  ap-add-Ring-𝔽 = ap-add-Ring (ring-Ring-𝔽 R)
+  ap-add-Finite-Ring :
+    {x y x' y' : type-Finite-Ring R} →
+    x ＝ x' → y ＝ y' → add-Finite-Ring x y ＝ add-Finite-Ring x' y'
+  ap-add-Finite-Ring = ap-add-Ring (ring-Finite-Ring R)
 
-  associative-add-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    Id (add-Ring-𝔽 (add-Ring-𝔽 x y) z) (add-Ring-𝔽 x (add-Ring-𝔽 y z))
-  associative-add-Ring-𝔽 = associative-add-Ring (ring-Ring-𝔽 R)
+  associative-add-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    add-Finite-Ring (add-Finite-Ring x y) z ＝
+    add-Finite-Ring x (add-Finite-Ring y z)
+  associative-add-Finite-Ring = associative-add-Ring (ring-Finite-Ring R)
 
-  is-group-additive-semigroup-Ring-𝔽 :
-    is-group-Semigroup (additive-semigroup-Ring-𝔽 R)
-  is-group-additive-semigroup-Ring-𝔽 =
-    is-group-additive-semigroup-Ring (ring-Ring-𝔽 R)
+  is-group-additive-semigroup-Finite-Ring :
+    is-group-Semigroup (additive-semigroup-Finite-Ring R)
+  is-group-additive-semigroup-Finite-Ring =
+    is-group-additive-semigroup-Ring (ring-Finite-Ring R)
 
-  commutative-add-Ring-𝔽 :
-    (x y : type-Ring-𝔽 R) → Id (add-Ring-𝔽 x y) (add-Ring-𝔽 y x)
-  commutative-add-Ring-𝔽 = commutative-add-Ring (ring-Ring-𝔽 R)
+  commutative-add-Finite-Ring :
+    (x y : type-Finite-Ring R) → add-Finite-Ring x y ＝ add-Finite-Ring y x
+  commutative-add-Finite-Ring = commutative-add-Ring (ring-Finite-Ring R)
 
-  interchange-add-add-Ring-𝔽 :
-    (x y x' y' : type-Ring-𝔽 R) →
-    ( add-Ring-𝔽 (add-Ring-𝔽 x y) (add-Ring-𝔽 x' y')) ＝
-    ( add-Ring-𝔽 (add-Ring-𝔽 x x') (add-Ring-𝔽 y y'))
-  interchange-add-add-Ring-𝔽 =
-    interchange-add-add-Ring (ring-Ring-𝔽 R)
+  interchange-add-add-Finite-Ring :
+    (x y x' y' : type-Finite-Ring R) →
+    ( add-Finite-Ring (add-Finite-Ring x y) (add-Finite-Ring x' y')) ＝
+    ( add-Finite-Ring (add-Finite-Ring x x') (add-Finite-Ring y y'))
+  interchange-add-add-Finite-Ring =
+    interchange-add-add-Ring (ring-Finite-Ring R)
 
-  right-swap-add-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    add-Ring-𝔽 (add-Ring-𝔽 x y) z ＝ add-Ring-𝔽 (add-Ring-𝔽 x z) y
-  right-swap-add-Ring-𝔽 = right-swap-add-Ring (ring-Ring-𝔽 R)
+  right-swap-add-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    add-Finite-Ring (add-Finite-Ring x y) z ＝
+    add-Finite-Ring (add-Finite-Ring x z) y
+  right-swap-add-Finite-Ring = right-swap-add-Ring (ring-Finite-Ring R)
 
-  left-swap-add-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    add-Ring-𝔽 x (add-Ring-𝔽 y z) ＝ add-Ring-𝔽 y (add-Ring-𝔽 x z)
-  left-swap-add-Ring-𝔽 = left-swap-add-Ring (ring-Ring-𝔽 R)
+  left-swap-add-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    add-Finite-Ring x (add-Finite-Ring y z) ＝
+    add-Finite-Ring y (add-Finite-Ring x z)
+  left-swap-add-Finite-Ring = left-swap-add-Ring (ring-Finite-Ring R)
 
-  is-equiv-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → is-equiv (add-Ring-𝔽 x)
-  is-equiv-add-Ring-𝔽 = is-equiv-add-Ring (ring-Ring-𝔽 R)
+  is-equiv-add-Finite-Ring :
+    (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring x)
+  is-equiv-add-Finite-Ring = is-equiv-add-Ring (ring-Finite-Ring R)
 
-  is-equiv-add-Ring-𝔽' : (x : type-Ring-𝔽 R) → is-equiv (add-Ring-𝔽' x)
-  is-equiv-add-Ring-𝔽' = is-equiv-add-Ring' (ring-Ring-𝔽 R)
+  is-equiv-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring' x)
+  is-equiv-add-Finite-Ring' = is-equiv-add-Ring' (ring-Finite-Ring R)
 
-  is-binary-equiv-add-Ring-𝔽 : is-binary-equiv add-Ring-𝔽
-  is-binary-equiv-add-Ring-𝔽 = is-binary-equiv-add-Ring (ring-Ring-𝔽 R)
+  is-binary-equiv-add-Finite-Ring : is-binary-equiv add-Finite-Ring
+  is-binary-equiv-add-Finite-Ring =
+    is-binary-equiv-add-Ring (ring-Finite-Ring R)
 
-  is-binary-emb-add-Ring-𝔽 : is-binary-emb add-Ring-𝔽
-  is-binary-emb-add-Ring-𝔽 = is-binary-emb-add-Ring (ring-Ring-𝔽 R)
+  is-binary-emb-add-Finite-Ring : is-binary-emb add-Finite-Ring
+  is-binary-emb-add-Finite-Ring = is-binary-emb-add-Ring (ring-Finite-Ring R)
 
-  is-emb-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → is-emb (add-Ring-𝔽 x)
-  is-emb-add-Ring-𝔽 = is-emb-add-Ring (ring-Ring-𝔽 R)
+  is-emb-add-Finite-Ring : (x : type-Finite-Ring R) → is-emb (add-Finite-Ring x)
+  is-emb-add-Finite-Ring = is-emb-add-Ring (ring-Finite-Ring R)
 
-  is-emb-add-Ring-𝔽' : (x : type-Ring-𝔽 R) → is-emb (add-Ring-𝔽' x)
-  is-emb-add-Ring-𝔽' = is-emb-add-Ring' (ring-Ring-𝔽 R)
+  is-emb-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-emb (add-Finite-Ring' x)
+  is-emb-add-Finite-Ring' = is-emb-add-Ring' (ring-Finite-Ring R)
 
-  is-injective-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → is-injective (add-Ring-𝔽 x)
-  is-injective-add-Ring-𝔽 = is-injective-add-Ring (ring-Ring-𝔽 R)
+  is-injective-add-Finite-Ring :
+    (x : type-Finite-Ring R) → is-injective (add-Finite-Ring x)
+  is-injective-add-Finite-Ring = is-injective-add-Ring (ring-Finite-Ring R)
 
-  is-injective-add-Ring-𝔽' : (x : type-Ring-𝔽 R) → is-injective (add-Ring-𝔽' x)
-  is-injective-add-Ring-𝔽' = is-injective-add-Ring' (ring-Ring-𝔽 R)
+  is-injective-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-injective (add-Finite-Ring' x)
+  is-injective-add-Finite-Ring' = is-injective-add-Ring' (ring-Finite-Ring R)
 ```
 
 ### The zero element of a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  has-zero-Ring-𝔽 : is-unital (add-Ring-𝔽 R)
-  has-zero-Ring-𝔽 = has-zero-Ring (ring-Ring-𝔽 R)
+  has-zero-Finite-Ring : is-unital (add-Finite-Ring R)
+  has-zero-Finite-Ring = has-zero-Ring (ring-Finite-Ring R)
 
-  zero-Ring-𝔽 : type-Ring-𝔽 R
-  zero-Ring-𝔽 = zero-Ring (ring-Ring-𝔽 R)
+  zero-Finite-Ring : type-Finite-Ring R
+  zero-Finite-Ring = zero-Ring (ring-Finite-Ring R)
 
-  is-zero-Ring-𝔽 : type-Ring-𝔽 R → UU l
-  is-zero-Ring-𝔽 = is-zero-Ring (ring-Ring-𝔽 R)
+  is-zero-Finite-Ring : type-Finite-Ring R → UU l
+  is-zero-Finite-Ring = is-zero-Ring (ring-Finite-Ring R)
 
-  is-nonzero-Ring-𝔽 : type-Ring-𝔽 R → UU l
-  is-nonzero-Ring-𝔽 = is-nonzero-Ring (ring-Ring-𝔽 R)
+  is-nonzero-Finite-Ring : type-Finite-Ring R → UU l
+  is-nonzero-Finite-Ring = is-nonzero-Ring (ring-Finite-Ring R)
 
-  is-zero-finite-ring-Prop : type-Ring-𝔽 R → Prop l
-  is-zero-finite-ring-Prop = is-zero-ring-Prop (ring-Ring-𝔽 R)
+  is-zero-finite-ring-Prop : type-Finite-Ring R → Prop l
+  is-zero-finite-ring-Prop = is-zero-ring-Prop (ring-Finite-Ring R)
 
-  is-nonzero-finite-ring-Prop : type-Ring-𝔽 R → Prop l
-  is-nonzero-finite-ring-Prop = is-nonzero-ring-Prop (ring-Ring-𝔽 R)
+  is-nonzero-finite-ring-Prop : type-Finite-Ring R → Prop l
+  is-nonzero-finite-ring-Prop = is-nonzero-ring-Prop (ring-Finite-Ring R)
 
-  left-unit-law-add-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R zero-Ring-𝔽 x) x
-  left-unit-law-add-Ring-𝔽 = left-unit-law-add-Ring (ring-Ring-𝔽 R)
+  left-unit-law-add-Finite-Ring :
+    (x : type-Finite-Ring R) → add-Finite-Ring R zero-Finite-Ring x ＝ x
+  left-unit-law-add-Finite-Ring = left-unit-law-add-Ring (ring-Finite-Ring R)
 
-  right-unit-law-add-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R x zero-Ring-𝔽) x
-  right-unit-law-add-Ring-𝔽 = right-unit-law-add-Ring (ring-Ring-𝔽 R)
+  right-unit-law-add-Finite-Ring :
+    (x : type-Finite-Ring R) → add-Finite-Ring R x zero-Finite-Ring ＝ x
+  right-unit-law-add-Finite-Ring = right-unit-law-add-Ring (ring-Finite-Ring R)
 ```
 
 ### Additive inverses in a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  has-negatives-Ring-𝔽 :
+  has-negatives-Finite-Ring :
     is-group-is-unital-Semigroup
-      ( additive-semigroup-Ring-𝔽 R)
-      ( has-zero-Ring-𝔽 R)
-  has-negatives-Ring-𝔽 = has-negatives-Ring (ring-Ring-𝔽 R)
+      ( additive-semigroup-Finite-Ring R)
+      ( has-zero-Finite-Ring R)
+  has-negatives-Finite-Ring = has-negatives-Ring (ring-Finite-Ring R)
 
-  neg-Ring-𝔽 : type-Ring-𝔽 R → type-Ring-𝔽 R
-  neg-Ring-𝔽 = neg-Ring (ring-Ring-𝔽 R)
+  neg-Finite-Ring : type-Finite-Ring R → type-Finite-Ring R
+  neg-Finite-Ring = neg-Ring (ring-Finite-Ring R)
 
-  left-inverse-law-add-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R (neg-Ring-𝔽 x) x) (zero-Ring-𝔽 R)
-  left-inverse-law-add-Ring-𝔽 = left-inverse-law-add-Ring (ring-Ring-𝔽 R)
+  left-inverse-law-add-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    add-Finite-Ring R (neg-Finite-Ring x) x ＝ zero-Finite-Ring R
+  left-inverse-law-add-Finite-Ring =
+    left-inverse-law-add-Ring (ring-Finite-Ring R)
 
-  right-inverse-law-add-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R x (neg-Ring-𝔽 x)) (zero-Ring-𝔽 R)
-  right-inverse-law-add-Ring-𝔽 = right-inverse-law-add-Ring (ring-Ring-𝔽 R)
+  right-inverse-law-add-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    add-Finite-Ring R x (neg-Finite-Ring x) ＝ zero-Finite-Ring R
+  right-inverse-law-add-Finite-Ring =
+    right-inverse-law-add-Ring (ring-Finite-Ring R)
 
-  neg-neg-Ring-𝔽 : (x : type-Ring-𝔽 R) → neg-Ring-𝔽 (neg-Ring-𝔽 x) ＝ x
-  neg-neg-Ring-𝔽 = neg-neg-Ring (ring-Ring-𝔽 R)
+  neg-neg-Finite-Ring :
+    (x : type-Finite-Ring R) → neg-Finite-Ring (neg-Finite-Ring x) ＝ x
+  neg-neg-Finite-Ring = neg-neg-Ring (ring-Finite-Ring R)
 
-  distributive-neg-add-Ring-𝔽 :
-    (x y : type-Ring-𝔽 R) →
-    neg-Ring-𝔽 (add-Ring-𝔽 R x y) ＝ add-Ring-𝔽 R (neg-Ring-𝔽 x) (neg-Ring-𝔽 y)
-  distributive-neg-add-Ring-𝔽 = distributive-neg-add-Ring (ring-Ring-𝔽 R)
+  distributive-neg-add-Finite-Ring :
+    (x y : type-Finite-Ring R) →
+    neg-Finite-Ring (add-Finite-Ring R x y) ＝
+    add-Finite-Ring R (neg-Finite-Ring x) (neg-Finite-Ring y)
+  distributive-neg-add-Finite-Ring =
+    distributive-neg-add-Ring (ring-Finite-Ring R)
 ```
 
 ### Multiplication in a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  has-associative-mul-Ring-𝔽 : has-associative-mul-Set (set-Ring-𝔽 R)
-  has-associative-mul-Ring-𝔽 = has-associative-mul-Ring (ring-Ring-𝔽 R)
+  has-associative-mul-Finite-Ring : has-associative-mul-Set (set-Finite-Ring R)
+  has-associative-mul-Finite-Ring =
+    has-associative-mul-Ring (ring-Finite-Ring R)
 
-  mul-Ring-𝔽 : type-Ring-𝔽 R → type-Ring-𝔽 R → type-Ring-𝔽 R
-  mul-Ring-𝔽 = mul-Ring (ring-Ring-𝔽 R)
+  mul-Finite-Ring : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  mul-Finite-Ring = mul-Ring (ring-Finite-Ring R)
 
-  mul-Ring-𝔽' : type-Ring-𝔽 R → type-Ring-𝔽 R → type-Ring-𝔽 R
-  mul-Ring-𝔽' = mul-Ring' (ring-Ring-𝔽 R)
+  mul-Finite-Ring' :
+    type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  mul-Finite-Ring' = mul-Ring' (ring-Finite-Ring R)
 
-  ap-mul-Ring-𝔽 :
-    {x x' y y' : type-Ring-𝔽 R} (p : Id x x') (q : Id y y') →
-    Id (mul-Ring-𝔽 x y) (mul-Ring-𝔽 x' y')
-  ap-mul-Ring-𝔽 = ap-mul-Ring (ring-Ring-𝔽 R)
+  ap-mul-Finite-Ring :
+    {x x' y y' : type-Finite-Ring R} (p : x ＝ x') (q : y ＝ y') →
+    mul-Finite-Ring x y ＝ mul-Finite-Ring x' y'
+  ap-mul-Finite-Ring = ap-mul-Ring (ring-Finite-Ring R)
 
-  associative-mul-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    Id (mul-Ring-𝔽 (mul-Ring-𝔽 x y) z) (mul-Ring-𝔽 x (mul-Ring-𝔽 y z))
-  associative-mul-Ring-𝔽 = associative-mul-Ring (ring-Ring-𝔽 R)
+  associative-mul-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    ( mul-Finite-Ring (mul-Finite-Ring x y) z) ＝
+    ( mul-Finite-Ring x (mul-Finite-Ring y z))
+  associative-mul-Finite-Ring = associative-mul-Ring (ring-Finite-Ring R)
 
-  multiplicative-semigroup-Ring-𝔽 : Semigroup l
-  multiplicative-semigroup-Ring-𝔽 =
-    multiplicative-semigroup-Ring (ring-Ring-𝔽 R)
+  multiplicative-semigroup-Finite-Ring : Semigroup l
+  multiplicative-semigroup-Finite-Ring =
+    multiplicative-semigroup-Ring (ring-Finite-Ring R)
 
-  left-distributive-mul-add-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 x (add-Ring-𝔽 R y z) ＝
-    add-Ring-𝔽 R (mul-Ring-𝔽 x y) (mul-Ring-𝔽 x z)
-  left-distributive-mul-add-Ring-𝔽 =
-    left-distributive-mul-add-Ring (ring-Ring-𝔽 R)
+  left-distributive-mul-add-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    mul-Finite-Ring x (add-Finite-Ring R y z) ＝
+    add-Finite-Ring R (mul-Finite-Ring x y) (mul-Finite-Ring x z)
+  left-distributive-mul-add-Finite-Ring =
+    left-distributive-mul-add-Ring (ring-Finite-Ring R)
 
-  right-distributive-mul-add-Ring-𝔽 :
-    (x y z : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 (add-Ring-𝔽 R x y) z ＝
-    add-Ring-𝔽 R (mul-Ring-𝔽 x z) (mul-Ring-𝔽 y z)
-  right-distributive-mul-add-Ring-𝔽 =
-    right-distributive-mul-add-Ring (ring-Ring-𝔽 R)
+  right-distributive-mul-add-Finite-Ring :
+    (x y z : type-Finite-Ring R) →
+    mul-Finite-Ring (add-Finite-Ring R x y) z ＝
+    add-Finite-Ring R (mul-Finite-Ring x z) (mul-Finite-Ring y z)
+  right-distributive-mul-add-Finite-Ring =
+    right-distributive-mul-add-Ring (ring-Finite-Ring R)
 ```
 
 ### Multiplicative units in a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  is-unital-Ring-𝔽 : is-unital (mul-Ring-𝔽 R)
-  is-unital-Ring-𝔽 = is-unital-Ring (ring-Ring-𝔽 R)
+  is-unital-Finite-Ring : is-unital (mul-Finite-Ring R)
+  is-unital-Finite-Ring = is-unital-Ring (ring-Finite-Ring R)
 
-  multiplicative-monoid-Ring-𝔽 : Monoid l
-  multiplicative-monoid-Ring-𝔽 = multiplicative-monoid-Ring (ring-Ring-𝔽 R)
+  multiplicative-monoid-Finite-Ring : Monoid l
+  multiplicative-monoid-Finite-Ring =
+    multiplicative-monoid-Ring (ring-Finite-Ring R)
 
-  one-Ring-𝔽 : type-Ring-𝔽 R
-  one-Ring-𝔽 = one-Ring (ring-Ring-𝔽 R)
+  one-Finite-Ring : type-Finite-Ring R
+  one-Finite-Ring = one-Ring (ring-Finite-Ring R)
 
-  left-unit-law-mul-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R one-Ring-𝔽 x) x
-  left-unit-law-mul-Ring-𝔽 = left-unit-law-mul-Ring (ring-Ring-𝔽 R)
+  left-unit-law-mul-Finite-Ring :
+    (x : type-Finite-Ring R) → mul-Finite-Ring R one-Finite-Ring x ＝ x
+  left-unit-law-mul-Finite-Ring = left-unit-law-mul-Ring (ring-Finite-Ring R)
 
-  right-unit-law-mul-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R x one-Ring-𝔽) x
-  right-unit-law-mul-Ring-𝔽 = right-unit-law-mul-Ring (ring-Ring-𝔽 R)
+  right-unit-law-mul-Finite-Ring :
+    (x : type-Finite-Ring R) → mul-Finite-Ring R x one-Finite-Ring ＝ x
+  right-unit-law-mul-Finite-Ring = right-unit-law-mul-Ring (ring-Finite-Ring R)
 ```
 
 ### The zero laws for multiplication of a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  left-zero-law-mul-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R (zero-Ring-𝔽 R) x) (zero-Ring-𝔽 R)
-  left-zero-law-mul-Ring-𝔽 =
-    left-zero-law-mul-Ring (ring-Ring-𝔽 R)
+  left-zero-law-mul-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R (zero-Finite-Ring R) x ＝ zero-Finite-Ring R
+  left-zero-law-mul-Finite-Ring =
+    left-zero-law-mul-Ring (ring-Finite-Ring R)
 
-  right-zero-law-mul-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R x (zero-Ring-𝔽 R)) (zero-Ring-𝔽 R)
-  right-zero-law-mul-Ring-𝔽 =
-    right-zero-law-mul-Ring (ring-Ring-𝔽 R)
+  right-zero-law-mul-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R x (zero-Finite-Ring R) ＝ zero-Finite-Ring R
+  right-zero-law-mul-Finite-Ring =
+    right-zero-law-mul-Ring (ring-Finite-Ring R)
 ```
 
 ### Rings are semirings
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  has-mul-Ring-𝔽 :
-    has-mul-Commutative-Monoid (additive-commutative-monoid-Ring-𝔽 R)
-  has-mul-Ring-𝔽 = has-mul-Ring (ring-Ring-𝔽 R)
+  has-mul-Finite-Ring :
+    has-mul-Commutative-Monoid (additive-commutative-monoid-Finite-Ring R)
+  has-mul-Finite-Ring = has-mul-Ring (ring-Finite-Ring R)
 
-  zero-laws-mul-Ring-𝔽 :
+  zero-laws-mul-Finite-Ring :
     zero-laws-Commutative-Monoid
-      ( additive-commutative-monoid-Ring-𝔽 R)
-      ( has-mul-Ring-𝔽)
-  zero-laws-mul-Ring-𝔽 = zero-laws-mul-Ring (ring-Ring-𝔽 R)
+      ( additive-commutative-monoid-Finite-Ring R)
+      ( has-mul-Finite-Ring)
+  zero-laws-mul-Finite-Ring = zero-laws-mul-Ring (ring-Finite-Ring R)
 
-  semiring-Ring-𝔽 : Semiring l
-  semiring-Ring-𝔽 = semiring-Ring (ring-Ring-𝔽 R)
+  semiring-Finite-Ring : Semiring l
+  semiring-Finite-Ring = semiring-Ring (ring-Finite-Ring R)
 ```
 
 ### Computing multiplication with minus one in a ring
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  neg-one-Ring-𝔽 : type-Ring-𝔽 R
-  neg-one-Ring-𝔽 = neg-one-Ring (ring-Ring-𝔽 R)
+  neg-one-Finite-Ring : type-Finite-Ring R
+  neg-one-Finite-Ring = neg-one-Ring (ring-Finite-Ring R)
 
-  mul-neg-one-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → mul-Ring-𝔽 R neg-one-Ring-𝔽 x ＝ neg-Ring-𝔽 R x
-  mul-neg-one-Ring-𝔽 =
-    mul-neg-one-Ring (ring-Ring-𝔽 R)
+  mul-neg-one-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R neg-one-Finite-Ring x ＝ neg-Finite-Ring R x
+  mul-neg-one-Finite-Ring =
+    mul-neg-one-Ring (ring-Finite-Ring R)
 
-  mul-neg-one-Ring-𝔽' :
-    (x : type-Ring-𝔽 R) → mul-Ring-𝔽 R x neg-one-Ring-𝔽 ＝ neg-Ring-𝔽 R x
-  mul-neg-one-Ring-𝔽' =
-    mul-neg-one-Ring' (ring-Ring-𝔽 R)
+  mul-neg-one-Finite-Ring' :
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R x neg-one-Finite-Ring ＝ neg-Finite-Ring R x
+  mul-neg-one-Finite-Ring' =
+    mul-neg-one-Ring' (ring-Finite-Ring R)
 
-  is-involution-mul-neg-one-Ring-𝔽 :
-    is-involution (mul-Ring-𝔽 R neg-one-Ring-𝔽)
-  is-involution-mul-neg-one-Ring-𝔽 =
-    is-involution-mul-neg-one-Ring (ring-Ring-𝔽 R)
+  is-involution-mul-neg-one-Finite-Ring :
+    is-involution (mul-Finite-Ring R neg-one-Finite-Ring)
+  is-involution-mul-neg-one-Finite-Ring =
+    is-involution-mul-neg-one-Ring (ring-Finite-Ring R)
 
-  is-involution-mul-neg-one-Ring-𝔽' :
-    is-involution (mul-Ring-𝔽' R neg-one-Ring-𝔽)
-  is-involution-mul-neg-one-Ring-𝔽' =
-    is-involution-mul-neg-one-Ring' (ring-Ring-𝔽 R)
+  is-involution-mul-neg-one-Finite-Ring' :
+    is-involution (mul-Finite-Ring' R neg-one-Finite-Ring)
+  is-involution-mul-neg-one-Finite-Ring' =
+    is-involution-mul-neg-one-Ring' (ring-Finite-Ring R)
 ```
 
 ### Left and right negative laws for multiplication
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  left-negative-law-mul-Ring-𝔽 :
-    (x y : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 R (neg-Ring-𝔽 R x) y ＝ neg-Ring-𝔽 R (mul-Ring-𝔽 R x y)
-  left-negative-law-mul-Ring-𝔽 =
-    left-negative-law-mul-Ring (ring-Ring-𝔽 R)
+  left-negative-law-mul-Finite-Ring :
+    (x y : type-Finite-Ring R) →
+    mul-Finite-Ring R (neg-Finite-Ring R x) y ＝
+    neg-Finite-Ring R (mul-Finite-Ring R x y)
+  left-negative-law-mul-Finite-Ring =
+    left-negative-law-mul-Ring (ring-Finite-Ring R)
 
-  right-negative-law-mul-Ring-𝔽 :
-    (x y : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 R x (neg-Ring-𝔽 R y) ＝ neg-Ring-𝔽 R (mul-Ring-𝔽 R x y)
-  right-negative-law-mul-Ring-𝔽 =
-    right-negative-law-mul-Ring (ring-Ring-𝔽 R)
+  right-negative-law-mul-Finite-Ring :
+    (x y : type-Finite-Ring R) →
+    mul-Finite-Ring R x (neg-Finite-Ring R y) ＝
+    neg-Finite-Ring R (mul-Finite-Ring R x y)
+  right-negative-law-mul-Finite-Ring =
+    right-negative-law-mul-Ring (ring-Finite-Ring R)
 
-  mul-neg-Ring-𝔽 :
-    (x y : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 R (neg-Ring-𝔽 R x) (neg-Ring-𝔽 R y) ＝ mul-Ring-𝔽 R x y
-  mul-neg-Ring-𝔽 =
-    mul-neg-Ring (ring-Ring-𝔽 R)
+  mul-neg-Finite-Ring :
+    (x y : type-Finite-Ring R) →
+    mul-Finite-Ring R (neg-Finite-Ring R x) (neg-Finite-Ring R y) ＝
+    mul-Finite-Ring R x y
+  mul-neg-Finite-Ring =
+    mul-neg-Ring (ring-Finite-Ring R)
 ```
 
 ### Scalar multiplication of ring elements by a natural number
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  mul-nat-scalar-Ring-𝔽 : ℕ → type-Ring-𝔽 R → type-Ring-𝔽 R
-  mul-nat-scalar-Ring-𝔽 = mul-nat-scalar-Ring (ring-Ring-𝔽 R)
+  mul-nat-scalar-Finite-Ring : ℕ → type-Finite-Ring R → type-Finite-Ring R
+  mul-nat-scalar-Finite-Ring = mul-nat-scalar-Ring (ring-Finite-Ring R)
 
-  ap-mul-nat-scalar-Ring-𝔽 :
-    {m n : ℕ} {x y : type-Ring-𝔽 R} →
-    (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring-𝔽 m x ＝ mul-nat-scalar-Ring-𝔽 n y
-  ap-mul-nat-scalar-Ring-𝔽 = ap-mul-nat-scalar-Ring (ring-Ring-𝔽 R)
+  ap-mul-nat-scalar-Finite-Ring :
+    {m n : ℕ} {x y : type-Finite-Ring R} →
+    (m ＝ n) → (x ＝ y) →
+    mul-nat-scalar-Finite-Ring m x ＝ mul-nat-scalar-Finite-Ring n y
+  ap-mul-nat-scalar-Finite-Ring = ap-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
-  left-zero-law-mul-nat-scalar-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → mul-nat-scalar-Ring-𝔽 0 x ＝ zero-Ring-𝔽 R
-  left-zero-law-mul-nat-scalar-Ring-𝔽 =
-    left-zero-law-mul-nat-scalar-Ring (ring-Ring-𝔽 R)
+  left-zero-law-mul-nat-scalar-Finite-Ring :
+    (x : type-Finite-Ring R) →
+    mul-nat-scalar-Finite-Ring 0 x ＝ zero-Finite-Ring R
+  left-zero-law-mul-nat-scalar-Finite-Ring =
+    left-zero-law-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
-  right-zero-law-mul-nat-scalar-Ring-𝔽 :
-    (n : ℕ) → mul-nat-scalar-Ring-𝔽 n (zero-Ring-𝔽 R) ＝ zero-Ring-𝔽 R
-  right-zero-law-mul-nat-scalar-Ring-𝔽 =
-    right-zero-law-mul-nat-scalar-Ring (ring-Ring-𝔽 R)
+  right-zero-law-mul-nat-scalar-Finite-Ring :
+    (n : ℕ) →
+    mul-nat-scalar-Finite-Ring n (zero-Finite-Ring R) ＝ zero-Finite-Ring R
+  right-zero-law-mul-nat-scalar-Finite-Ring =
+    right-zero-law-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
-  left-unit-law-mul-nat-scalar-Ring-𝔽 :
-    (x : type-Ring-𝔽 R) → mul-nat-scalar-Ring-𝔽 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Ring-𝔽 =
-    left-unit-law-mul-nat-scalar-Ring (ring-Ring-𝔽 R)
+  left-unit-law-mul-nat-scalar-Finite-Ring :
+    (x : type-Finite-Ring R) → mul-nat-scalar-Finite-Ring 1 x ＝ x
+  left-unit-law-mul-nat-scalar-Finite-Ring =
+    left-unit-law-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
-  left-nat-scalar-law-mul-Ring-𝔽 :
-    (n : ℕ) (x y : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 R (mul-nat-scalar-Ring-𝔽 n x) y ＝
-    mul-nat-scalar-Ring-𝔽 n (mul-Ring-𝔽 R x y)
-  left-nat-scalar-law-mul-Ring-𝔽 =
-    left-nat-scalar-law-mul-Ring (ring-Ring-𝔽 R)
+  left-nat-scalar-law-mul-Finite-Ring :
+    (n : ℕ) (x y : type-Finite-Ring R) →
+    mul-Finite-Ring R (mul-nat-scalar-Finite-Ring n x) y ＝
+    mul-nat-scalar-Finite-Ring n (mul-Finite-Ring R x y)
+  left-nat-scalar-law-mul-Finite-Ring =
+    left-nat-scalar-law-mul-Ring (ring-Finite-Ring R)
 
-  right-nat-scalar-law-mul-Ring-𝔽 :
-    (n : ℕ) (x y : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 R x (mul-nat-scalar-Ring-𝔽 n y) ＝
-    mul-nat-scalar-Ring-𝔽 n (mul-Ring-𝔽 R x y)
-  right-nat-scalar-law-mul-Ring-𝔽 =
-    right-nat-scalar-law-mul-Ring (ring-Ring-𝔽 R)
+  right-nat-scalar-law-mul-Finite-Ring :
+    (n : ℕ) (x y : type-Finite-Ring R) →
+    mul-Finite-Ring R x (mul-nat-scalar-Finite-Ring n y) ＝
+    mul-nat-scalar-Finite-Ring n (mul-Finite-Ring R x y)
+  right-nat-scalar-law-mul-Finite-Ring =
+    right-nat-scalar-law-mul-Ring (ring-Finite-Ring R)
 
-  left-distributive-mul-nat-scalar-add-Ring-𝔽 :
-    (n : ℕ) (x y : type-Ring-𝔽 R) →
-    mul-nat-scalar-Ring-𝔽 n (add-Ring-𝔽 R x y) ＝
-    add-Ring-𝔽 R (mul-nat-scalar-Ring-𝔽 n x) (mul-nat-scalar-Ring-𝔽 n y)
-  left-distributive-mul-nat-scalar-add-Ring-𝔽 =
-    left-distributive-mul-nat-scalar-add-Ring (ring-Ring-𝔽 R)
+  left-distributive-mul-nat-scalar-add-Finite-Ring :
+    (n : ℕ) (x y : type-Finite-Ring R) →
+    mul-nat-scalar-Finite-Ring n (add-Finite-Ring R x y) ＝
+    add-Finite-Ring R
+      ( mul-nat-scalar-Finite-Ring n x)
+      ( mul-nat-scalar-Finite-Ring n y)
+  left-distributive-mul-nat-scalar-add-Finite-Ring =
+    left-distributive-mul-nat-scalar-add-Ring (ring-Finite-Ring R)
 
-  right-distributive-mul-nat-scalar-add-Ring-𝔽 :
-    (m n : ℕ) (x : type-Ring-𝔽 R) →
-    mul-nat-scalar-Ring-𝔽 (m +ℕ n) x ＝
-    add-Ring-𝔽 R (mul-nat-scalar-Ring-𝔽 m x) (mul-nat-scalar-Ring-𝔽 n x)
-  right-distributive-mul-nat-scalar-add-Ring-𝔽 =
-    right-distributive-mul-nat-scalar-add-Ring (ring-Ring-𝔽 R)
+  right-distributive-mul-nat-scalar-add-Finite-Ring :
+    (m n : ℕ) (x : type-Finite-Ring R) →
+    mul-nat-scalar-Finite-Ring (m +ℕ n) x ＝
+    add-Finite-Ring R
+      ( mul-nat-scalar-Finite-Ring m x)
+      ( mul-nat-scalar-Finite-Ring n x)
+  right-distributive-mul-nat-scalar-add-Finite-Ring =
+    right-distributive-mul-nat-scalar-add-Ring (ring-Finite-Ring R)
 ```
 
 ### Addition of a list of elements in an abelian group
 
 ```agda
 module _
-  {l : Level} (R : Ring-𝔽 l)
+  {l : Level} (R : Finite-Ring l)
   where
 
-  add-list-Ring-𝔽 : list (type-Ring-𝔽 R) → type-Ring-𝔽 R
-  add-list-Ring-𝔽 = add-list-Ring (ring-Ring-𝔽 R)
+  add-list-Finite-Ring : list (type-Finite-Ring R) → type-Finite-Ring R
+  add-list-Finite-Ring = add-list-Ring (ring-Finite-Ring R)
 
-  preserves-concat-add-list-Ring-𝔽 :
-    (l1 l2 : list (type-Ring-𝔽 R)) →
-    Id
-      ( add-list-Ring-𝔽 (concat-list l1 l2))
-      ( add-Ring-𝔽 R (add-list-Ring-𝔽 l1) (add-list-Ring-𝔽 l2))
-  preserves-concat-add-list-Ring-𝔽 =
-    preserves-concat-add-list-Ring (ring-Ring-𝔽 R)
+  preserves-concat-add-list-Finite-Ring :
+    (l1 l2 : list (type-Finite-Ring R)) →
+    ( add-list-Finite-Ring (concat-list l1 l2)) ＝
+    ( add-Finite-Ring R (add-list-Finite-Ring l1) (add-list-Finite-Ring l2))
+  preserves-concat-add-list-Finite-Ring =
+    preserves-concat-add-list-Ring (ring-Finite-Ring R)
 ```
 
 ## Properties
@@ -509,64 +544,66 @@ module _
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
-  structure-ring-𝔽 : UU l
-  structure-ring-𝔽 =
-    Σ ( structure-abelian-group-𝔽 X)
-      ( λ m → has-mul-Ab-𝔽 (finite-abelian-group-structure-abelian-group-𝔽 X m))
+  structure-ring-Finite-Type : UU l
+  structure-ring-Finite-Type =
+    Σ ( structure-abelian-group-Finite-Type X)
+      ( λ m →
+        has-mul-Finite-Ab
+          ( finite-abelian-group-structure-abelian-group-Finite-Type X m))
 
-  finite-ring-structure-ring-𝔽 :
-    structure-ring-𝔽 → Ring-𝔽 l
-  pr1 (finite-ring-structure-ring-𝔽 (m , c)) =
-    finite-abelian-group-structure-abelian-group-𝔽 X m
-  pr2 (finite-ring-structure-ring-𝔽 (m , c)) = c
+  finite-ring-structure-ring-Finite-Type :
+    structure-ring-Finite-Type → Finite-Ring l
+  pr1 (finite-ring-structure-ring-Finite-Type (m , c)) =
+    finite-abelian-group-structure-abelian-group-Finite-Type X m
+  pr2 (finite-ring-structure-ring-Finite-Type (m , c)) = c
 
-  is-finite-structure-ring-𝔽 :
-    is-finite structure-ring-𝔽
-  is-finite-structure-ring-𝔽 =
+  is-finite-structure-ring-Finite-Type :
+    is-finite structure-ring-Finite-Type
+  is-finite-structure-ring-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-abelian-group-𝔽 X)
+      ( is-finite-structure-abelian-group-Finite-Type X)
       ( λ a →
         is-finite-Σ
           ( is-finite-Σ
             ( is-finite-Π
-              ( is-finite-type-𝔽 X)
+              ( is-finite-type-Finite-Type X)
               ( λ _ →
                 is-finite-Π
-                  ( is-finite-type-𝔽 X)
-                  ( λ _ → is-finite-type-𝔽 X)))
+                  ( is-finite-type-Finite-Type X)
+                  ( λ _ → is-finite-type-Finite-Type X)))
             ( λ m →
               is-finite-Π
-                ( is-finite-type-𝔽 X)
+                ( is-finite-type-Finite-Type X)
                 ( λ x →
                   is-finite-Π
-                    ( is-finite-type-𝔽 X)
+                    ( is-finite-type-Finite-Type X)
                     ( λ y →
                       is-finite-Π
-                        ( is-finite-type-𝔽 X)
-                        ( λ z → is-finite-eq-𝔽 X)))))
+                        ( is-finite-type-Finite-Type X)
+                        ( λ z → is-finite-eq-Finite-Type X)))))
           ( λ a →
             is-finite-product
-              ( is-finite-is-unital-Semigroup-𝔽 (X , a))
+              ( is-finite-is-unital-Finite-Semigroup (X , a))
               ( is-finite-product
                 ( is-finite-Π
-                  ( is-finite-type-𝔽 X)
+                  ( is-finite-type-Finite-Type X)
                   ( λ _ →
                     is-finite-Π
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( λ _ →
                         is-finite-Π
-                          ( is-finite-type-𝔽 X)
-                          ( λ _ → is-finite-eq-𝔽 X))))
+                          ( is-finite-type-Finite-Type X)
+                          ( λ _ → is-finite-eq-Finite-Type X))))
                 ( is-finite-Π
-                  ( is-finite-type-𝔽 X)
+                  ( is-finite-type-Finite-Type X)
                   ( λ _ →
                     is-finite-Π
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( λ _ →
                         is-finite-Π
-                          ( is-finite-type-𝔽 X)
-                          ( λ _ → is-finite-eq-𝔽 X)))))))
+                          ( is-finite-type-Finite-Type X)
+                          ( λ _ → is-finite-eq-Finite-Type X)))))))
 ```

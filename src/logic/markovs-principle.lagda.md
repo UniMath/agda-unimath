@@ -55,7 +55,7 @@ Markov's-Principle = is-markovian ℕ
 
 ## Properties
 
-### Markov's principle is constructively valid for ascending chains of decidable propositions
+### Markov's principle is constructively valid for upwards closed subtypes
 
 **Proof.** Assume given an ascending chain of decidable propositions `Pᵢ ⇒ Pᵢ₊₁`
 indexed by the natural numbers `ℕ`. This gives a decidable subtype `𝒫` of `ℕ`
@@ -65,10 +65,10 @@ also in `𝒫`, and there must exist a least such `i ∈ 𝒫`. Therefore,
 case that `¬ P₀`.
 
 ```agda
-markovs-principle-ascending-chains :
+markovs-principle-upwards-closed-structure :
   {l : Level} (P : ℕ → UU l)
   (H : (n : ℕ) → P n → P (succ-ℕ n)) → ¬ ((n : ℕ) → P n) → Σ ℕ (¬_ ∘ P)
-markovs-principle-ascending-chains P H q = (0 , λ x → q (ind-ℕ x H))
+markovs-principle-upwards-closed-structure P H q = (0 , λ x → q (ind-ℕ x H))
 ```
 
 ## See also
@@ -80,7 +80,7 @@ markovs-principle-ascending-chains P H q = (0 , λ x → q (ind-ℕ x H))
 
 ## External links
 
-- [Taboos.MarkovsPrinciple](https://martinescardo.github.io/TypeTopology/Taboos.MarkovsPrinciple.html)
+- [`Taboos.MarkovsPrinciple`](https://martinescardo.github.io/TypeTopology/Taboos.MarkovsPrinciple.html)
   at TypeTopology
 - [limited principle of omniscience](https://ncatlab.org/nlab/show/limited+principle+of+omniscience)
   at $n$Lab

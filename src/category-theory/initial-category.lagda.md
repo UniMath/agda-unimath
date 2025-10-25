@@ -12,8 +12,8 @@ open import category-theory.functors-precategories
 open import category-theory.gaunt-categories
 open import category-theory.indiscrete-precategories
 open import category-theory.precategories
-open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -104,16 +104,16 @@ pr1 initial-Category = initial-Precategory
 pr2 initial-Category = is-category-initial-Category
 ```
 
-### The initial preunivalent category
+### The initial strongly preunivalent category
 
 ```agda
-is-preunivalent-initial-Category :
-  is-preunivalent-Precategory initial-Precategory
-is-preunivalent-initial-Category ()
+is-strongly-preunivalent-initial-Category :
+  is-strongly-preunivalent-Precategory initial-Precategory
+is-strongly-preunivalent-initial-Category ()
 
-initial-Preunivalent-Category : Preunivalent-Category lzero lzero
-initial-Preunivalent-Category =
-  preunivalent-category-Category initial-Category
+-- initial-Preunivalent-Category : Preunivalent-Category lzero lzero
+-- initial-Preunivalent-Category =
+--   strongly-preunivalent-category-Category initial-Category
 ```
 
 ### The initial strict category

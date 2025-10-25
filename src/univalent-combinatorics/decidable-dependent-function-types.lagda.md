@@ -62,7 +62,7 @@ is-decidable-Π-is-finite :
   ((x : A) → is-decidable (B x)) → is-decidable ((x : A) → B x)
 is-decidable-Π-is-finite {l1} {l2} {A} {B} H d =
   is-decidable-iff
-    ( map-Π (λ x → elim-trunc-Prop-is-decidable (d x)))
+    ( map-Π (λ x → ε-operator-is-decidable (d x)))
     ( map-Π (λ x → unit-trunc-Prop))
     ( is-decidable-iff
       ( α)
@@ -77,7 +77,7 @@ is-decidable-Π-is-finite {l1} {l2} {A} {B} H d =
               ( λ x →
                 is-decidable-iff
                   ( unit-trunc-Prop)
-                  ( elim-trunc-Prop-is-decidable (d x))
+                  ( ε-operator-is-decidable (d x))
                   ( d x))))))
   where
   α : type-trunc-Prop ((x : A) → B x) → (x : A) → type-trunc-Prop (B x)

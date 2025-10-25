@@ -10,6 +10,7 @@ module elementary-number-theory.multiplication-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
@@ -17,9 +18,12 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -32,9 +36,9 @@ open import foundation.interchange-law
 
 ## Idea
 
-**Multiplication** on the
-[rational numbers](elementary-number-theory.rational-numbers.md) is defined by
-extending
+{{#concept "Multiplication" WDID=Q40276 WD="multiplication" Disambiguation="of rational numbers" Agda=mul-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) is
+defined by extending
 [multiplication](elementary-number-theory.multiplication-integer-fractions.md)
 on [integer fractions](elementary-number-theory.integer-fractions.md) to the
 rational numbers.
@@ -42,14 +46,19 @@ rational numbers.
 ## Definition
 
 ```agda
-mul-ℚ : ℚ → ℚ → ℚ
-mul-ℚ (x , p) (y , q) = rational-fraction-ℤ (mul-fraction-ℤ x y)
+opaque
+  mul-ℚ : ℚ → ℚ → ℚ
+  mul-ℚ (x , p) (y , q) = rational-fraction-ℤ (mul-fraction-ℤ x y)
 
 mul-ℚ' : ℚ → ℚ → ℚ
 mul-ℚ' x y = mul-ℚ y x
 
 infixl 40 _*ℚ_
 _*ℚ_ = mul-ℚ
+
+ap-mul-ℚ :
+  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → x *ℚ y ＝ x' *ℚ y'
+ap-mul-ℚ p q = ap-binary mul-ℚ p q
 ```
 
 ## Properties
@@ -61,7 +70,9 @@ module _
   (x : ℚ)
   where
 
-  abstract
+  opaque
+    unfolding mul-ℚ
+
     left-zero-law-mul-ℚ : zero-ℚ *ℚ x ＝ zero-ℚ
     left-zero-law-mul-ℚ =
       ( eq-ℚ-sim-fraction-ℤ
@@ -86,34 +97,40 @@ module _
 ### If the product of two rational numbers is zero, the left or right factor is zero
 
 ```agda
-decide-is-zero-factor-is-zero-mul-ℚ :
-  (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
-decide-is-zero-factor-is-zero-mul-ℚ x y H =
-  rec-coproduct
-    ( inl ∘ is-zero-is-zero-numerator-ℚ x)
-    ( inr ∘ is-zero-is-zero-numerator-ℚ y)
-    ( is-zero-is-zero-mul-ℤ
-      ( numerator-ℚ x)
-      ( numerator-ℚ y)
-      ( ( inv
-          ( eq-reduce-numerator-fraction-ℤ
-            ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))) ∙
-        ( ap
-          ( mul-ℤ'
-            ( gcd-ℤ
-              ( numerator-ℚ x *ℤ numerator-ℚ y)
-              ( denominator-ℚ x *ℤ denominator-ℚ y)))
-          ( ( is-zero-numerator-is-zero-ℚ (x *ℚ y) H) ∙
-            ( left-zero-law-mul-ℤ
+opaque
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
+
+  decide-is-zero-factor-is-zero-mul-ℚ :
+    (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
+  decide-is-zero-factor-is-zero-mul-ℚ x y H =
+    rec-coproduct
+      ( inl ∘ is-zero-is-zero-numerator-ℚ x)
+      ( inr ∘ is-zero-is-zero-numerator-ℚ y)
+      ( is-zero-is-zero-mul-ℤ
+        ( numerator-ℚ x)
+        ( numerator-ℚ y)
+        ( ( inv
+            ( eq-reduce-numerator-fraction-ℤ
+              ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)))) ∙
+          ( ap
+            ( mul-ℤ'
               ( gcd-ℤ
-                (numerator-ℚ x *ℤ numerator-ℚ y)
-                (denominator-ℚ x *ℤ denominator-ℚ y)))))))
+                ( numerator-ℚ x *ℤ numerator-ℚ y)
+                ( denominator-ℚ x *ℤ denominator-ℚ y)))
+            ( ( is-zero-numerator-is-zero-ℚ (x *ℚ y) H) ∙
+              ( left-zero-law-mul-ℤ
+                ( gcd-ℤ
+                  (numerator-ℚ x *ℤ numerator-ℚ y)
+                  (denominator-ℚ x *ℤ denominator-ℚ y)))))))
 ```
 
 ### Unit laws for multiplication on rational numbers
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   left-unit-law-mul-ℚ : (x : ℚ) → one-ℚ *ℚ x ＝ x
   left-unit-law-mul-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -134,7 +151,10 @@ abstract
 ### Multiplication of a rational number by `-1` is equal to the negative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+  unfolding neg-ℚ
+
   left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
   left-neg-unit-law-mul-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -159,7 +179,10 @@ abstract
 ### Multiplication of rational numbers is associative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
+
   associative-mul-ℚ :
     (x y z : ℚ) → (x *ℚ y) *ℚ z ＝ x *ℚ (y *ℚ z)
   associative-mul-ℚ x y z =
@@ -198,7 +221,9 @@ abstract
 ### Multiplication of rational numbers is commutative
 
 ```agda
-abstract
+opaque
+  unfolding mul-ℚ
+
   commutative-mul-ℚ : (x y : ℚ) → x *ℚ y ＝ y *ℚ x
   commutative-mul-ℚ x y =
     eq-ℚ-sim-fraction-ℤ
@@ -218,6 +243,19 @@ abstract
       mul-ℚ
       commutative-mul-ℚ
       associative-mul-ℚ
+```
+
+### Swapping laws for multiplication
+
+```agda
+abstract
+  left-swap-mul-ℚ : (x y z : ℚ) → x *ℚ (y *ℚ z) ＝ y *ℚ (x *ℚ z)
+  left-swap-mul-ℚ x y z =
+    equational-reasoning
+      x *ℚ (y *ℚ z)
+      ＝ (x *ℚ y) *ℚ z by inv (associative-mul-ℚ x y z)
+      ＝ (y *ℚ x) *ℚ z by ap-mul-ℚ (commutative-mul-ℚ x y) refl
+      ＝ y *ℚ (x *ℚ z) by associative-mul-ℚ y x z
 ```
 
 ### Negative laws for multiplication on rational numbers
@@ -256,7 +294,11 @@ abstract
 ### Multiplication on rational numbers distributes over addition
 
 ```agda
-abstract
+opaque
+  unfolding add-ℚ
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
+
   left-distributive-mul-add-ℚ :
     (x y z : ℚ) → x *ℚ (y +ℚ z) ＝ (x *ℚ y) +ℚ (x *ℚ z)
   left-distributive-mul-add-ℚ x y z =
@@ -325,9 +367,147 @@ abstract
     ( ap ((x *ℚ z) +ℚ_) (left-negative-law-mul-ℚ y z))
 ```
 
+### The inclusion of integer fractions preserves multiplication
+
+```agda
+opaque
+  unfolding mul-ℚ
+  unfolding rational-fraction-ℤ
+
+  mul-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x *fraction-ℤ y)
+  mul-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      ( mul-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      ( x *fraction-ℤ y)
+      ( sim-fraction-mul-fraction-ℤ
+        ( symmetric-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ x))
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y)))
+```
+
+### The inclusion of integers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℤ :
+    (x y : ℤ) → rational-ℤ x *ℚ rational-ℤ y ＝ rational-ℤ (x *ℤ y)
+  mul-rational-ℤ x y =
+    equational-reasoning
+      rational-ℤ x *ℚ rational-ℤ y
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x) *ℚ
+        rational-fraction-ℤ (in-fraction-ℤ y)
+        by
+          ap-mul-ℚ
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ x)))
+            ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ y)))
+      ＝
+        rational-fraction-ℤ (in-fraction-ℤ x *fraction-ℤ in-fraction-ℤ y)
+        by mul-rational-fraction-ℤ _ _
+      ＝ rational-fraction-ℤ (in-fraction-ℤ (x *ℤ y))
+        by ap rational-fraction-ℤ (mul-in-fraction-ℤ x y)
+      ＝ rational-ℤ (x *ℤ y) by is-retraction-rational-fraction-ℚ _
+```
+
+### The inclusion of natural numbers preserves multiplication
+
+```agda
+abstract
+  mul-rational-ℕ :
+    (x y : ℕ) → rational-ℕ x *ℚ rational-ℕ y ＝ rational-ℕ (x *ℕ y)
+  mul-rational-ℕ x y = mul-rational-ℤ _ _ ∙ ap rational-ℤ (mul-int-ℕ x y)
+```
+
+### `succ-ℚ p * q = q + (p * q)`
+
+```agda
+abstract
+  mul-left-succ-ℚ :
+    (p q : ℚ) →
+    (succ-ℚ p *ℚ q) ＝ q +ℚ (p *ℚ q)
+  mul-left-succ-ℚ p q =
+    equational-reasoning
+      succ-ℚ p *ℚ q
+      ＝ (one-ℚ *ℚ q) +ℚ (p *ℚ q)
+        by right-distributive-mul-add-ℚ one-ℚ p q
+      ＝ q +ℚ (p *ℚ q) by ap-add-ℚ (left-unit-law-mul-ℚ q) refl
+
+  mul-right-succ-ℚ :
+    (p q : ℚ) →
+    (p *ℚ succ-ℚ q) ＝ p +ℚ (p *ℚ q)
+  mul-right-succ-ℚ p q =
+    equational-reasoning
+      p *ℚ succ-ℚ q
+      ＝ (p *ℚ one-ℚ) +ℚ (p *ℚ q)
+        by left-distributive-mul-add-ℚ p one-ℚ q
+      ＝ p +ℚ (p *ℚ q)
+        by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
+### `2q = q + q`
+
+```agda
+abstract
+  mul-two-ℚ : (q : ℚ) → rational-ℕ 2 *ℚ q ＝ q +ℚ q
+  mul-two-ℚ q =
+    equational-reasoning
+      rational-ℤ (one-ℤ +ℤ one-ℤ) *ℚ q
+      ＝ (one-ℚ +ℚ one-ℚ) *ℚ q by ap (_*ℚ q) (inv (add-rational-ℤ one-ℤ one-ℤ))
+      ＝ (one-ℚ *ℚ q) +ℚ (one-ℚ *ℚ q) by right-distributive-mul-add-ℚ _ _ _
+      ＝ q +ℚ q by ap-add-ℚ (left-unit-law-mul-ℚ q) (left-unit-law-mul-ℚ q)
+```
+
+### The product of a rational number and its denominator is its numerator
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  opaque
+    unfolding mul-ℚ
+
+    eq-numerator-mul-denominator-ℚ :
+      mul-ℚ
+        ( x)
+        ( rational-ℤ (denominator-ℚ x)) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ =
+      ( eq-ℚ-sim-fraction-ℤ
+        ( mul-fraction-ℤ
+          ( fraction-ℚ x)
+          ( in-fraction-ℤ (denominator-ℚ x)))
+        ( in-fraction-ℤ (numerator-ℚ x))
+        ( associative-mul-ℤ
+          ( numerator-ℚ x)
+          ( denominator-ℚ x)
+          ( one-ℤ))) ∙
+      ( is-retraction-rational-fraction-ℚ
+        ( rational-ℤ (numerator-ℚ x)))
+
+    eq-numerator-mul-denominator-ℚ' :
+      mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x) ＝
+      rational-ℤ (numerator-ℚ x)
+    eq-numerator-mul-denominator-ℚ' =
+      ( commutative-mul-ℚ
+        ( rational-ℤ (denominator-ℚ x))
+        ( x)) ∙
+      ( eq-numerator-mul-denominator-ℚ)
+```
+
 ## See also
 
-- The multiplicative monoid strucutre on the rational numbers is defined in
+- The multiplicative monoid structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-monoid-of-rational-numbers`](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md);
 - The multiplicative group structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-group-of-rational-numbers`](elementary-number-theory.multiplicative-group-of-rational-numbers.md).
