@@ -66,75 +66,76 @@ decidable. {{#cite Esc13}}
 
 ## Proof
 
-We follow the formalizations written by Martín Escardó {{#cite TypeTopology}}
-verbatim.
+We prove that the type of increasing binary sequences pointedly has decidable
+dependent sums, from which the main result is an easy corollary. The
+formalization follows earlier formalizations written by Martín Escardó
+{{#cite TypeTopology}} verbatim.
 
 ```agda
 abstract
   has-decidable-Σ-pointed-bool-ℕ∞↗' :
     has-decidable-Σ-pointed-bool' ℕ∞↗
-  has-decidable-Σ-pointed-bool-ℕ∞↗' p = (a , Lemma)
+  has-decidable-Σ-pointed-bool-ℕ∞↗' p = (a , lemma)
     where
     a : ℕ∞↗
     a = force-ℕ∞↗ (p ∘ increasing-binary-sequence-ℕ)
 
-    Dagger₀ :
+    dagger₀ :
       (n : ℕ) →
       a ＝ increasing-binary-sequence-ℕ n →
       p (increasing-binary-sequence-ℕ n) ＝ true
-    Dagger₀ 0 r = ap (λ x → pr1 x 0) r
-    Dagger₀ (succ-ℕ n) r =
+    dagger₀ 0 r =
+      ap (ev-ℕ∞↗ 0) r
+    dagger₀ (succ-ℕ n) r =
       ( inv
         ( ap
           ( or-bool (p (increasing-binary-sequence-ℕ (succ-ℕ n))))
-          ( ( ap (λ x → pr1 x n) r) ∙
+          ( ( ap (ev-ℕ∞↗ n) r) ∙
             ( is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ n)) ∙
           ( right-unit-law-or-bool))) ∙
-      ( ap (λ x → pr1 x (succ-ℕ n)) r) ∙
+      ( ap (ev-ℕ∞↗ (succ-ℕ n)) r) ∙
       ( is-finitely-bounded-increasing-binary-sequence-ℕ n)
 
-    Dagger₁ :
+    dagger₁ :
       a ＝ infinity-ℕ∞↗ → (n : ℕ) → p (increasing-binary-sequence-ℕ n) ＝ false
-    Dagger₁ r 0 = ap (λ - → pr1 - 0) r
-    Dagger₁ r (succ-ℕ n) =
+    dagger₁ r 0 = ap (ev-ℕ∞↗ 0) r
+    dagger₁ r (succ-ℕ n) =
       ( inv
         ( ( ap
             ( or-bool (p (increasing-binary-sequence-ℕ (succ-ℕ n))))
-            ( ap (λ x → pr1 x n) r)) ∙
+            ( ap (ev-ℕ∞↗ n) r)) ∙
           ( right-unit-law-or-bool))) ∙
-      ( ap (λ x → pr1 x (succ-ℕ n)) r)
+      ( ap (ev-ℕ∞↗ (succ-ℕ n)) r)
 
-    Lemma₀ :
+    lemma₀ :
       (n : ℕ) → a ＝ increasing-binary-sequence-ℕ n → p a ＝ true
-    Lemma₀ n t = ap p t ∙ Dagger₀ n t
+    lemma₀ n t = ap p t ∙ dagger₀ n t
 
-    Claim₀ :
+    claim₀ :
       p a ＝ false → (n : ℕ) → a ≠ increasing-binary-sequence-ℕ n
-    Claim₀ r n s = neq-false-true-bool (inv r ∙ Lemma₀ n s)
+    claim₀ r n s = neq-false-true-bool (inv r ∙ lemma₀ n s)
 
-    Claim₁ :
+    claim₁ :
       p a ＝ false → a ＝ infinity-ℕ∞↗
-    Claim₁ r =
-      eq-infinity-is-not-in-image-increasing-binary-sequence-ℕ a (Claim₀ r)
+    claim₁ r =
+      eq-infinity-is-not-in-image-increasing-binary-sequence-ℕ a (claim₀ r)
 
-    Claim₂ :
+    claim₂ :
       p a ＝ false → (n : ℕ) → p (increasing-binary-sequence-ℕ n) ＝ false
-    Claim₂ r = Dagger₁ (Claim₁ r)
+    claim₂ r = dagger₁ (claim₁ r)
 
-    Claim₃ :
+    claim₃ :
       p a ＝ false → p infinity-ℕ∞↗ ＝ false
-    Claim₃ r = ap p (inv (Claim₁ r)) ∙ r
+    claim₃ r = ap p (inv (claim₁ r)) ∙ r
 
-    Lemma :
+    lemma :
       p a ＝ false → (v : ℕ∞↗) → p v ＝ false
-    Lemma r =
+    lemma r =
       htpy-ℕ∞↗-htpy-ℕ+∞
         ( λ _ → has-double-negation-stable-equality-bool)
-        ( Claim₂ r)
-        ( Claim₃ r)
+        ( claim₂ r)
+        ( claim₃ r)
 ```
-
-Thank you Professor Escardó! 🙏
 
 ## Corollaries
 

@@ -141,7 +141,7 @@ cons-ℕ∞↗ (inl x) = succ-ℕ∞↗ x
 cons-ℕ∞↗ (inr x) = zero-ℕ∞↗
 ```
 
-### Some other constants
+### Small constants
 
 ```agda
 one-ℕ∞↗ : ℕ∞↗
@@ -152,6 +152,13 @@ two-ℕ∞↗ = succ-ℕ∞↗ one-ℕ∞↗
 
 three-ℕ∞↗ : ℕ∞↗
 three-ℕ∞↗ = succ-ℕ∞↗ two-ℕ∞↗
+```
+
+### Evaluation of increasing binary sequences
+
+```agda
+ev-ℕ∞↗ : ℕ → ℕ∞↗ → bool
+ev-ℕ∞↗ n x = sequence-ℕ∞↗ x n
 ```
 
 ## Properties
