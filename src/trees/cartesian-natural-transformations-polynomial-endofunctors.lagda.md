@@ -361,7 +361,7 @@ module _
   is-cartesian-is-cartesian-at-terminal-map-natural-transformation-is-set-shape-polynomial-endofunctor
     HQ Hα {X} {Y} f =
     is-pullback-top-square-vertical-triangle
-      (type-natural-transformation-polynomial-endofunctor P Q α)
+      ( type-natural-transformation-polynomial-endofunctor P Q α)
       (map-polynomial-endofunctor Q (raise-terminal-map Y))
       (map-polynomial-endofunctor Q f)
       (map-polynomial-endofunctor Q (raise-terminal-map X))
