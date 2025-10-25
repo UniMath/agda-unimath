@@ -195,35 +195,37 @@ module _
   htpy-eq-natural-transformation-polynomial-endofunctor α .α refl =
     refl-htpy-natural-transformation-polynomial-endofunctor α
 
-  is-torsorial-htpy-natural-transformation-polynomial-endofunctor :
-    (α : natural-transformation-polynomial-endofunctor l5 P Q) →
-    is-torsorial (htpy-natural-transformation-polynomial-endofunctor α)
-  is-torsorial-htpy-natural-transformation-polynomial-endofunctor α =
-    is-torsorial-Eq-structure
-      ( is-torsorial-Eq-implicit-Π'
-        ( λ X →
-          is-torsorial-htpy
-            ( map-natural-transformation-polynomial-endofunctor P Q α)))
-      ( map-natural-transformation-polynomial-endofunctor P Q α ,
-        ( λ _ _ → refl))
-      ( is-torsorial-Eq-implicit-Π'
-        ( λ X →
-          is-torsorial-Eq-implicit-Π'
-            ( λ Y →
-              is-torsorial-Eq-Π
-                ( λ f →
-                  is-torsorial-htpy'
-                    ( ( naturality-natural-transformation-polynomial-endofunctor
-                          P Q α f) ∙h
-                      ( refl-htpy))))))
+  abstract
+    is-torsorial-htpy-natural-transformation-polynomial-endofunctor :
+      (α : natural-transformation-polynomial-endofunctor l5 P Q) →
+      is-torsorial (htpy-natural-transformation-polynomial-endofunctor α)
+    is-torsorial-htpy-natural-transformation-polynomial-endofunctor α =
+      is-torsorial-Eq-structure
+        ( is-torsorial-Eq-implicit-Π'
+          ( λ X →
+            is-torsorial-htpy
+              ( map-natural-transformation-polynomial-endofunctor P Q α)))
+        ( map-natural-transformation-polynomial-endofunctor P Q α ,
+          ( λ _ _ → refl))
+        ( is-torsorial-Eq-implicit-Π'
+          ( λ X →
+            is-torsorial-Eq-implicit-Π'
+              ( λ Y →
+                is-torsorial-Eq-Π
+                  ( λ f →
+                    is-torsorial-htpy'
+                      ( ( naturality-natural-transformation-polynomial-endofunctor
+                            P Q α f) ∙h
+                        ( refl-htpy))))))
 
-  is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor :
-    (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
-    is-equiv (htpy-eq-natural-transformation-polynomial-endofunctor α β)
-  is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor α =
-    fundamental-theorem-id
-      ( is-torsorial-htpy-natural-transformation-polynomial-endofunctor α)
-      ( htpy-eq-natural-transformation-polynomial-endofunctor α)
+  abstract
+    is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor :
+      (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
+      is-equiv (htpy-eq-natural-transformation-polynomial-endofunctor α β)
+    is-equiv-htpy-eq-natural-transformation-polynomial-endofunctor α =
+      fundamental-theorem-id
+        ( is-torsorial-htpy-natural-transformation-polynomial-endofunctor α)
+        ( htpy-eq-natural-transformation-polynomial-endofunctor α)
 
   equiv-htpy-eq-natural-transformation-polynomial-endofunctor :
     (α β : natural-transformation-polynomial-endofunctor l5 P Q) →
