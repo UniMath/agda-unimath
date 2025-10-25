@@ -1,4 +1,4 @@
-# Decidability of dependents sums over increasing binary sequences
+# Decidability of dependents pair types over increasing binary sequences
 
 ```agda
 module set-theory.decidable-dependent-pair-types-over-increasing-binary-sequences where
@@ -7,52 +7,21 @@ module set-theory.decidable-dependent-pair-types-over-increasing-binary-sequence
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-total-order-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
-open import foundation.constant-maps
-open import foundation.coproduct-types
-open import foundation.decidable-type-families
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.double-negation-stable-equality
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.functoriality-coproduct-types
-open import foundation.homotopies
-open import foundation.inequality-booleans
-open import foundation.injective-maps
 open import foundation.logical-operations-booleans
-open import foundation.maybe
 open import foundation.negated-equality
-open import foundation.negation
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.tight-apartness-relations
-open import foundation.transport-along-identifications
 open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.types-with-decidable-dependent-product-types
-open import foundation.unit-type
-open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
-open import order-theory.order-preserving-maps-posets
-
-open import set-theory.cantor-space
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences
 open import set-theory.increasing-binary-sequences
-open import set-theory.strict-lower-bounds-increasing-binary-sequences
 ```
 
 </details>
