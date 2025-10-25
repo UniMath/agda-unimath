@@ -19,6 +19,9 @@ open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.large-semigroups
+open import group-theory.semigroups
+
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.meet-semilattices
@@ -130,6 +133,78 @@ module _
           ( x)
           ( y)
           ( is-greatest-binary-lower-bound-min-ℝ x y))
+```
+
+### The binary minimum is associative
+
+```agda
+module _
+  {lx ly lz : Level}
+  (x : ℝ lx) (y : ℝ ly) (z : ℝ lz)
+  where
+
+  abstract
+    associative-min-ℝ : min-ℝ (min-ℝ x y) z ＝ min-ℝ x (min-ℝ y z)
+    associative-min-ℝ =
+      antisymmetric-leq-ℝ
+        ( min-ℝ (min-ℝ x y) z)
+        ( min-ℝ x (min-ℝ y z))
+        ( leq-min-leq-leq-ℝ
+          ( x)
+          ( min-ℝ y z)
+          ( min-ℝ (min-ℝ x y) z)
+          ( transitive-leq-ℝ
+            ( min-ℝ (min-ℝ x y) z)
+            ( min-ℝ x y)
+            ( x)
+            ( leq-left-min-ℝ x y)
+            ( leq-left-min-ℝ (min-ℝ x y) z))
+          ( leq-min-leq-leq-ℝ
+            ( y)
+            ( z)
+            ( min-ℝ ( min-ℝ x y) z)
+            ( transitive-leq-ℝ
+              ( min-ℝ (min-ℝ x y) z)
+              ( min-ℝ x y)
+              ( y)
+              ( leq-right-min-ℝ x y)
+              ( leq-left-min-ℝ (min-ℝ x y) z))
+            ( leq-right-min-ℝ (min-ℝ x y) z)))
+        ( leq-min-leq-leq-ℝ
+          ( min-ℝ x y)
+          ( z)
+          ( min-ℝ x (min-ℝ y z))
+          ( leq-min-leq-leq-ℝ
+            ( x)
+            ( y)
+            ( min-ℝ x (min-ℝ y z))
+            ( leq-left-min-ℝ x (min-ℝ y z))
+            ( transitive-leq-ℝ
+              ( min-ℝ x (min-ℝ y z))
+              ( min-ℝ y z)
+              ( y)
+              ( leq-left-min-ℝ y z)
+              ( leq-right-min-ℝ x (min-ℝ y z))))
+          ( transitive-leq-ℝ
+            ( min-ℝ x (min-ℝ y z))
+            ( min-ℝ y z)
+            ( z)
+            ( leq-right-min-ℝ y z)
+            ( leq-right-min-ℝ x (min-ℝ y z))))
+```
+
+### The large semigroup of real numbers under the minimum operator
+
+```agda
+large-semigroup-min-ℝ : Large-Semigroup lsuc
+large-semigroup-min-ℝ = make-Large-Semigroup ℝ-Set min-ℝ associative-min-ℝ
+```
+
+### The semigroup of real numbers under the minimum operator at a given level
+
+```agda
+semigroup-min-ℝ : (l : Level) → Semigroup (lsuc l)
+semigroup-min-ℝ = semigroup-Large-Semigroup large-semigroup-min-ℝ
 ```
 
 ### The large poset of real numbers has meets
