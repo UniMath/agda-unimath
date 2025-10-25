@@ -19,13 +19,13 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality-maps
 open import foundation.double-negation-stable-propositions
 open import foundation.functoriality-dependent-function-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
-open import foundation.mere-equality
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -172,11 +172,12 @@ module _
   is-prop-is-perfect-image-is-emb :
     is-emb g → (a : A) → is-prop (is-perfect-image f g a)
   is-prop-is-perfect-image-is-emb G a =
-    is-prop-iterated-Π 3 (λ a₀ n p → is-prop-map-is-emb G a₀)
+    is-prop-Π
+      ( λ a₀ → is-prop-Π (λ n → is-prop-Π (λ p → is-prop-map-is-emb G a₀)))
 
   is-perfect-image-Prop : is-emb g → A → Prop (l1 ⊔ l2)
-  pr1 (is-perfect-image-Prop G a) = is-perfect-image f g a
-  pr2 (is-perfect-image-Prop G a) = is-prop-is-perfect-image-is-emb G a
+  is-perfect-image-Prop G a =
+    ( is-perfect-image f g a ,  is-prop-is-perfect-image-is-emb G a)
 ```
 
 ### Fibers over perfect images
@@ -207,8 +208,10 @@ module _
   inverse-of-perfect-image a ρ = pr1 (fiber-is-perfect-image a ρ)
 
   is-section-inverse-of-perfect-image :
-    (a : A) (ρ : is-perfect-image f g a) → g (inverse-of-perfect-image a ρ) ＝ a
-  is-section-inverse-of-perfect-image a ρ = pr2 (fiber-is-perfect-image a ρ)
+    (a : A) (ρ : is-perfect-image f g a) →
+    g (inverse-of-perfect-image a ρ) ＝ a
+  is-section-inverse-of-perfect-image a ρ =
+    pr2 (fiber-is-perfect-image a ρ)
 ```
 
 When `g` is also injective, the map gives a kind of
@@ -236,16 +239,24 @@ module _
 
   previous-perfect-image-at' :
     (a : A) (n : ℕ) →
-    is-perfect-image-at' f g (g (f a)) (succ-ℕ n) → is-perfect-image-at' f g a n
-  previous-perfect-image-at' a n γ (a₀ , p) = γ (a₀ , ap (g ∘ f) p)
+    is-perfect-image-at' f g (g (f a)) (succ-ℕ n) →
+    is-perfect-image-at' f g a n
+  previous-perfect-image-at' a n γ (a₀ , p) =
+    γ (a₀ , ap (g ∘ f) p)
 
   previous-perfect-image' :
-    (a : A) → is-perfect-image' f g (g (f a)) → is-perfect-image' f g a
-  previous-perfect-image' a γ n = previous-perfect-image-at' a n (γ (succ-ℕ n))
+    (a : A) →
+    is-perfect-image' f g (g (f a)) →
+    is-perfect-image' f g a
+  previous-perfect-image' a γ n =
+    previous-perfect-image-at' a n (γ (succ-ℕ n))
 
   previous-perfect-image :
-    (a : A) → is-perfect-image f g (g (f a)) → is-perfect-image f g a
-  previous-perfect-image a γ a₀ n p = γ a₀ (succ-ℕ n) (ap (g ∘ f) p)
+    (a : A) →
+    is-perfect-image f g (g (f a)) →
+    is-perfect-image f g a
+  previous-perfect-image a γ a₀ n p =
+    γ a₀ (succ-ℕ n) (ap (g ∘ f) p)
 ```
 
 Perfect images of `g` relative to `f` not mapped to the image of `f` under
@@ -287,32 +298,43 @@ module _
   where
 
   is-decidable-prop-is-perfect-image-at'' :
-    is-decidable-emb g → is-inhabited-or-empty-map f → is-π₀-trivial-map' f →
-    (a : A) (n : ℕ) → is-decidable-prop (is-perfect-image-at' f g a n)
+    is-decidable-emb g →
+    is-inhabited-or-empty-map f →
+    has-double-negation-dense-equality-map f →
+    (a : A) (n : ℕ) →
+    is-decidable-prop (is-perfect-image-at' f g a n)
   is-decidable-prop-is-perfect-image-at'' G F F' a n =
-    is-decidable-prop-Π-all-elements-merely-equal-base'
-    ( λ x → fiber g (pr1 x) , is-decidable-prop-map-is-decidable-emb G (pr1 x))
-    ( is-π₀-trivial-map'-iterate
-      ( is-π₀-trivial-map'-comp
-        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+    is-decidable-prop-Π-has-double-negation-dense-equality-base'
+    ( λ x →
+      fiber g (pr1 x) ,
+      is-decidable-prop-map-is-decidable-emb G (pr1 x))
+    ( has-double-negation-dense-equality-map-iterate
+      ( has-double-negation-dense-equality-map-comp
+        ( has-double-negation-dense-equality-map-is-emb
+          ( is-emb-is-decidable-emb G))
         ( F'))
       ( n)
       ( a))
-    ( is-inhabited-or-empty-map-iterate-is-π₀-trivial-map'
-      ( is-inhabited-or-empty-map-comp-is-π₀-trivial-map'
-        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+    ( is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
+      ( is-inhabited-or-empty-map-comp-has-double-negation-dense-equality-map
+        ( has-double-negation-dense-equality-map-is-emb
+          ( is-emb-is-decidable-emb G))
         ( is-inhabited-or-empty-map-is-decidable-map
           ( is-decidable-map-is-decidable-emb G))
         ( F))
-      ( is-π₀-trivial-map'-comp
-        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+      ( has-double-negation-dense-equality-map-comp
+        ( has-double-negation-dense-equality-map-is-emb
+          ( is-emb-is-decidable-emb G))
         ( F'))
       ( n)
       ( a))
 
   is-decidable-prop-is-perfect-image-at' :
-    is-decidable-emb g → is-decidable-map f → is-π₀-trivial-map' f →
-    (a : A) (n : ℕ) → is-decidable-prop (is-perfect-image-at' f g a n)
+    is-decidable-emb g →
+    is-decidable-map f →
+    has-double-negation-dense-equality-map f →
+    (a : A) (n : ℕ) →
+    is-decidable-prop (is-perfect-image-at' f g a n)
   is-decidable-prop-is-perfect-image-at' G F =
     is-decidable-prop-is-perfect-image-at'' G
       ( is-inhabited-or-empty-map-is-decidable-map F)
@@ -352,7 +374,8 @@ module _
 
   has-nonperfect-fiber-is-nonperfect-image :
     is-injective g → (b : B) →
-    is-nonperfect-image {f = f} (g b) → has-nonperfect-fiber f g b
+    is-nonperfect-image {f = f} (g b) →
+    has-nonperfect-fiber f g b
   has-nonperfect-fiber-is-nonperfect-image G b (x₀ , zero-ℕ , u) =
     ex-falso (pr2 u (b , inv (pr1 u)))
   has-nonperfect-fiber-is-nonperfect-image G b (x₀ , succ-ℕ n , u) =
@@ -360,7 +383,8 @@ module _
     ( λ s → pr2 u (s x₀ n refl))
 
   is-irrefutable-has-nonperfect-fiber-is-not-perfect-image :
-    is-double-negation-eliminating-map g → is-injective g →
+    is-double-negation-eliminating-map g →
+    is-injective g →
     (b : B) (nρ : ¬ (is-perfect-image f g (g b))) →
     ¬¬ (has-nonperfect-fiber f g b)
   is-irrefutable-has-nonperfect-fiber-is-not-perfect-image G G' b nρ t =
@@ -368,7 +392,8 @@ module _
       ( λ s → t (has-nonperfect-fiber-is-nonperfect-image G' b s))
 ```
 
-If `f` is π₀-trivial and has double negation elimination, then
+If `f` has double negation dense equality and double negation elimination, then
+`has-nonperfect-fiber f g b` has double negation elimination.
 
 ```agda
 module _
@@ -377,31 +402,31 @@ module _
 
   double-negation-elim-has-nonperfect-fiber :
     is-double-negation-eliminating-map f →
-    is-π₀-trivial-map' f →
-    (b : B) → has-double-negation-elim (has-nonperfect-fiber f g b)
+    has-double-negation-dense-equality-map f →
+    (b : B) →
+    has-double-negation-elim (has-nonperfect-fiber f g b)
   double-negation-elim-has-nonperfect-fiber F F' b =
-    double-negation-elim-Σ-all-elements-merely-equal-base (F' b) (F b)
+    double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( F' b)
+      ( F b)
       ( λ p → double-negation-elim-neg (is-perfect-image f g (pr1 p)))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (is-double-negation-eliminating-g : is-double-negation-eliminating-map g)
-  (is-injective-g : is-injective g)
-  (is-double-negation-eliminating-f : is-double-negation-eliminating-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  (DNE-g : is-double-negation-eliminating-map g)
+  (inj-g : is-injective g)
+  (DNE-f : is-double-negation-eliminating-map f)
+  (DNEq-f : has-double-negation-dense-equality-map f)
   (b : B) (nρ : ¬ (is-perfect-image f g (g b)))
   where
 
   has-nonperfect-fiber-is-not-perfect-image :
     has-nonperfect-fiber f g b
   has-nonperfect-fiber-is-not-perfect-image =
-    double-negation-elim-has-nonperfect-fiber
-      ( is-double-negation-eliminating-f)
-      ( is-π₀-trivial-f)
-      ( b)
+    double-negation-elim-has-nonperfect-fiber DNE-f DNEq-f b
       ( is-irrefutable-has-nonperfect-fiber-is-not-perfect-image
-        ( is-double-negation-eliminating-g)
-        ( is-injective-g)
+        ( DNE-g)
+        ( inj-g)
         ( b)
         ( nρ))
 

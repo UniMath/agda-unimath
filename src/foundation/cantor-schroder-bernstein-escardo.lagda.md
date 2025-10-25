@@ -1,4 +1,4 @@
-# The Cantor–Schröder–Bernstein–Escardó construction
+# The Cantor–Schröder–Bernstein–Escardó theorem
 
 ```agda
 module foundation.cantor-schroder-bernstein-escardo where
@@ -16,6 +16,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-dense-equality-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.hilbert-epsilon-operators-maps
@@ -109,7 +110,7 @@ module _
     ex-falso (v γ)
 
   compute-map-construction-is-not-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B) →
     (nγ : ¬ (is-perfect-image f g (g y))) →
     (d :
@@ -132,7 +133,7 @@ module _
       G G' F F' y nγ
 
   map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B) → is-decidable (is-perfect-image f g (g y)) → A
   map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein–Escardó
     F' y (inl _) = g y
@@ -141,7 +142,7 @@ module _
     element-has-nonperfect-fiber-is-not-perfect-image G G' F F' y nγ
 
   is-section-map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (y : B)
     (d : is-decidable (is-perfect-image f g (g y))) →
     (d' :
@@ -171,7 +172,7 @@ module _
       ( D x)
 
   map-section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (y : B) → is-decidable (is-perfect-image f g (g y))) → B → A
   map-section-construction-Cantor-Schröder-Bernstein–Escardó F' D y =
     map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein–Escardó
@@ -180,7 +181,7 @@ module _
       ( D y)
 
   is-section-map-section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (x : A) → is-decidable (is-perfect-image f g x)) →
     is-section
       ( map-construction-Cantor-Schröder-Bernstein–Escardó D)
@@ -194,7 +195,7 @@ module _
               F' (D ∘ g) y))
 
   section-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (D : (x : A) → is-decidable (is-perfect-image f g x)) →
     section (map-construction-Cantor-Schröder-Bernstein–Escardó D)
   section-construction-Cantor-Schröder-Bernstein–Escardó F' D =
@@ -236,7 +237,7 @@ Piecing it all together.
 
 ```agda
   is-equiv-map-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (F'' : is-injective f) →
     (D : (x : A) → is-decidable (is-perfect-image f g x)) →
     is-equiv (map-construction-Cantor-Schröder-Bernstein–Escardó D)
@@ -251,7 +252,7 @@ Piecing it all together.
           ( D x'))
 
   equiv-construction-Cantor-Schröder-Bernstein–Escardó :
-    (F' : is-π₀-trivial-map' f) →
+    (F' : has-double-negation-dense-equality-map f) →
     (F'' : is-injective f) →
     (D : (x : A) → is-decidable (is-perfect-image f g x)) →
     A ≃ B
@@ -279,7 +280,7 @@ abstract
   is-decidable-is-perfect-image'-WLPO :
     {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
     {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
-    is-decidable-emb g → is-decidable-map f → is-π₀-trivial-map' f →
+    is-decidable-emb g → is-decidable-map f → has-double-negation-dense-equality-map f →
     (a : A) → is-decidable (is-perfect-image' f g a)
   is-decidable-is-perfect-image'-WLPO wlpo {f = f} {g} G F F' a =
     wlpo
@@ -290,7 +291,7 @@ abstract
 is-decidable-is-perfect-image-WLPO :
   {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
   {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
-  is-decidable-emb g → is-decidable-map f → is-π₀-trivial-map' f →
+  is-decidable-emb g → is-decidable-map f → has-double-negation-dense-equality-map f →
   (a : A) → is-decidable (is-perfect-image f g a)
 is-decidable-is-perfect-image-WLPO wlpo {f = f} {g} G F F' a =
   is-decidable-equiv'
@@ -303,7 +304,7 @@ generalized-Cantor-Schröder-Bernstein-WLPO :
   {l1 l2 : Level} → level-WLPO (l1 ⊔ l2) →
   {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
   is-decidable-emb g →
-  is-decidable-map f → is-π₀-trivial-map' f → is-injective f →
+  is-decidable-map f → has-double-negation-dense-equality-map f → is-injective f →
   A ≃ B
 generalized-Cantor-Schröder-Bernstein-WLPO wlpo G F F' F'' =
   equiv-construction-Cantor-Schröder-Bernstein–Escardó
@@ -325,7 +326,7 @@ Cantor-Schröder-Bernstein-WLPO' :
 Cantor-Schröder-Bernstein-WLPO' wlpo G F =
   generalized-Cantor-Schröder-Bernstein-WLPO wlpo G
     ( is-decidable-map-is-decidable-emb F)
-    ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb F))
+    ( has-double-negation-dense-equality-map-is-emb (is-emb-is-decidable-emb F))
     ( is-injective-is-decidable-emb F)
 
 Cantor-Schröder-Bernstein-WLPO :
@@ -347,7 +348,7 @@ and `B` are equivalent.
   {l1 l2 : Level} → LEM (l1 ⊔ l2) →
   {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   (G : is-emb g) →
-  (F : is-π₀-trivial-map' f) →
+  (F : has-double-negation-dense-equality-map f) →
   (F' : is-injective f) →
   (εF : ε-operator-map-Hilbert f) →
   A ≃ B

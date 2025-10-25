@@ -14,7 +14,9 @@ open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
+open import foundation.iterating-functions
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality-maps
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -136,7 +138,7 @@ abstract
 
 ### Composition of decidable maps
 
-The composite `g ∘ f` of two decidable maps is decidable if `g` is injective.
+The composite of two decidable maps `g ∘ f` is decidable if `g` is injective.
 
 ```agda
 module _
@@ -161,41 +163,44 @@ module _
         ( G x)
 ```
 
-The composite `g ∘ f` of two decidable maps is decidable if `g` has double
+The composite of two decidable maps `g ∘ f` is decidable if `g` has double
 negation dense equality on fibers.
 
-```text
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
   where
 
   abstract
-    is-decidable-map-comp-is-π₀-trivial-map' :
-      is-π₀-trivial-map' g →
+    is-decidable-map-comp-has-double-negation-dense-equality-map :
+      has-double-negation-dense-equality-map g →
       is-decidable-map g →
       is-decidable-map f →
       is-decidable-map (g ∘ f)
-    is-decidable-map-comp-is-π₀-trivial-map' H G F x =
+    is-decidable-map-comp-has-double-negation-dense-equality-map H G F x =
       is-decidable-equiv
         ( compute-fiber-comp g f x)
-        ( is-decidable-Σ-all-elements-merely-equal-base (H x) (G x) (F ∘ pr1))
+        ( is-decidable-Σ-has-double-negation-dense-equality-base
+          ( H x)
+          ( G x)
+          ( F ∘ pr1))
 
 module _
   {l1 : Level} {A : UU l1} {f : A → A}
   (is-decidable-f : is-decidable-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  (H : has-double-negation-dense-equality-map f)
   where
 
-  is-decidable-map-iterate-is-π₀-trivial-map' :
+  is-decidable-map-iterate-has-double-negation-dense-equality-map :
     (n : ℕ) → is-decidable-map (iterate n f)
-  is-decidable-map-iterate-is-π₀-trivial-map' zero-ℕ =
+  is-decidable-map-iterate-has-double-negation-dense-equality-map zero-ℕ =
     is-decidable-map-id
-  is-decidable-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
-    is-decidable-map-comp-is-π₀-trivial-map'
-      ( is-π₀-trivial-f)
+  is-decidable-map-iterate-has-double-negation-dense-equality-map (succ-ℕ n) =
+    is-decidable-map-comp-has-double-negation-dense-equality-map
+      ( H)
       ( is-decidable-f)
-      ( is-decidable-map-iterate-is-π₀-trivial-map' n)
+      ( is-decidable-map-iterate-has-double-negation-dense-equality-map n)
 ```
 
 ### Left cancellation for decidable maps
