@@ -1,7 +1,7 @@
-# Random real variables in finite probability spaces
+# Real random variables in finite probability spaces
 
 ```agda
-module finite-probability-theory.random-real-variables-finite-probability-spaces where
+module finite-probability-theory.real-random-variables-finite-probability-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -41,7 +41,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 A
-{{#concept "random real variable" Disambiguation="in a finite probability space" Agda=random-real-variable-Finite-Probability-Space}}
+{{#concept "real random variable" Disambiguation="in a finite probability space" Agda=random-real-variable-Finite-Probability-Space}}
 in a
 [finite probability space](finite-probability-theory.finite-probability-spaces.md)
 is a function from the underlying
@@ -52,15 +52,15 @@ Our definition follows Definition 2.1 of {{#cite Babai00}}.
 
 ## Definitions
 
-### Random real variables in a finite probability space
+### Real random variables in a finite probability space
 
 ```agda
 module _
   {l : Level} (Ω : Finite-Probability-Space l)
   where
 
-  random-real-variable-Finite-Probability-Space : UU (lsuc lzero ⊔ l)
-  random-real-variable-Finite-Probability-Space =
+  real-random-variable-Finite-Probability-Space : UU (lsuc lzero ⊔ l)
+  real-random-variable-Finite-Probability-Space =
     type-Finite-Probability-Space Ω → ℝ lzero
 ```
 
@@ -71,12 +71,12 @@ module _
   {l : Level} (Ω : Finite-Probability-Space l)
   where
 
-  const-random-real-variable-Finite-Probablity-Space :
-    (x : ℝ lzero) → random-real-variable-Finite-Probability-Space Ω
-  const-random-real-variable-Finite-Probablity-Space x _ = x
+  const-real-random-variable-Finite-Probablity-Space :
+    (x : ℝ lzero) → real-random-variable-Finite-Probability-Space Ω
+  const-real-random-variable-Finite-Probablity-Space x _ = x
 ```
 
-### Atomic random variables in a finite probability space
+### Atomic real random variables in a finite probability space
 
 ```agda
 module _
@@ -84,9 +84,9 @@ module _
   (e : type-Finite-Probability-Space Ω)
   where
 
-  atomic-random-real-variable-Finite-Probability-Space :
-    random-real-variable-Finite-Probability-Space Ω
-  atomic-random-real-variable-Finite-Probability-Space e' =
+  atomic-real-random-variable-Finite-Probability-Space :
+    real-random-variable-Finite-Probability-Space Ω
+  atomic-real-random-variable-Finite-Probability-Space e' =
     rec-coproduct
       ( λ _ → one-ℝ)
       ( λ _ → zero-ℝ)
