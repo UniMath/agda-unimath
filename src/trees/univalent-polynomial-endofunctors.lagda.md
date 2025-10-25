@@ -118,11 +118,6 @@ module _
   equiv-equiv-tr-univalent-polynomial-endofunctor =
     equiv-equiv-tr-univalent-family
       univalent-family-univalent-polynomial-endofunctor
-
-make-univalent-polynomial-endofunctor :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → is-univalent B →
-  univalent-polynomial-endofunctor l1 l2
-make-univalent-polynomial-endofunctor B H = ((_ , B) , H)
 ```
 
 ### The underlying subuniverse of a univalent polynomial endofunctor

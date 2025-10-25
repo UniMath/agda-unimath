@@ -62,10 +62,6 @@ module _
 
   position-polynomial-endofunctor : shape-polynomial-endofunctor → UU l2
   position-polynomial-endofunctor = pr2 P
-
-make-polynomial-endofunctor :
-  {l1 l2 : Level} {A : UU l1} → (A → UU l2) → polynomial-endofunctor l1 l2
-make-polynomial-endofunctor B = (_ , B)
 ```
 
 ### The action on types of a polynomial endofunctor

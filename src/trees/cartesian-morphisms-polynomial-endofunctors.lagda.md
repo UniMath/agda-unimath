@@ -112,18 +112,6 @@ cartesian-hom-polynomial-endofunctor P Q =
   Σ ( hom-polynomial-endofunctor P Q)
     ( is-cartesian-hom-polynomial-endofunctor P Q)
 
-make-cartesian-hom-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level}
-  (P : polynomial-endofunctor l1 l2)
-  (Q : polynomial-endofunctor l3 l4)
-  (α₀ : shape-polynomial-endofunctor P → shape-polynomial-endofunctor Q) →
-  ( (a : shape-polynomial-endofunctor P) →
-    position-polynomial-endofunctor Q (α₀ a) ≃
-    position-polynomial-endofunctor P a) →
-  cartesian-hom-polynomial-endofunctor P Q
-make-cartesian-hom-polynomial-endofunctor P Q α₀ α₁ =
-  ( ( α₀ , map-equiv ∘ α₁) , is-equiv-map-equiv ∘ α₁)
-
 module _
   {l1 l2 l3 l4 : Level}
   (P : polynomial-endofunctor l1 l2)
