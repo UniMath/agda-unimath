@@ -9,7 +9,11 @@ module synthetic-homotopy-theory.iterated-loop-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.function-types
+open import foundation.iterated-successors-truncation-levels
 open import foundation.iterating-functions
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
@@ -59,6 +63,20 @@ module _
   iterated-loop-space-H-Space zero-ℕ X = X
   iterated-loop-space-H-Space (succ-ℕ n) X =
     Ω-H-Space (iterated-loop-space n (pointed-type-H-Space X))
+```
+
+### If A is (𝑛+𝑘)-truncated then ΩⁿA is 𝑘-truncated
+
+```agda
+is-trunc-iterated-loop-space :
+  {l : Level} (n : ℕ) (k : 𝕋) (A : Pointed-Type l) →
+  is-trunc (iterate-succ-𝕋 n k) (type-Pointed-Type A) →
+  is-trunc k (type-iterated-loop-space n A)
+is-trunc-iterated-loop-space zero-ℕ k A H = H
+is-trunc-iterated-loop-space (succ-ℕ n) k A H =
+  is-trunc-Ω k
+    ( iterated-loop-space n A)
+    ( is-trunc-iterated-loop-space n (succ-𝕋 k) A H)
 ```
 
 ## See also
