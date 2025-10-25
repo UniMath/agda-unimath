@@ -41,7 +41,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 A
-{{#concept "real random variable" Disambiguation="in a finite probability space" Agda=random-real-variable-Finite-Probability-Space}}
+{{#concept "real random variable" Disambiguation="in a finite probability space" Agda=real-random-variable-Finite-Probability-Space}}
 in a
 [finite probability space](finite-probability-theory.finite-probability-spaces.md)
 is a function from the underlying
