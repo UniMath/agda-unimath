@@ -5,6 +5,7 @@
 ```agda
 module real-numbers where
 
+open import real-numbers.absolute-value-closed-intervals-real-numbers public
 open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
 open import real-numbers.addition-real-numbers public
@@ -25,12 +26,14 @@ open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-positive-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
+open import real-numbers.infima-and-suprema-families-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public

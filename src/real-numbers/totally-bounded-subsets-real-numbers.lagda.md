@@ -66,6 +66,10 @@ module _
   subset-totally-bounded-subset-ℝ : subset-ℝ l1 l2
   subset-totally-bounded-subset-ℝ = pr1 S
 
+  type-totally-bounded-subset-ℝ : UU (l1 ⊔ lsuc l2)
+  type-totally-bounded-subset-ℝ =
+    type-subtype subset-totally-bounded-subset-ℝ
+
   metric-space-totally-bounded-subset-ℝ : Metric-Space (l1 ⊔ lsuc l2) l2
   metric-space-totally-bounded-subset-ℝ =
     metric-space-subset-ℝ subset-totally-bounded-subset-ℝ
