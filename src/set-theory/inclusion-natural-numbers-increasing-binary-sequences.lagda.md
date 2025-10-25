@@ -269,26 +269,6 @@ double-negation-dense-increasing-binary-sequence-ℕ+∞ =
     is-double-negation-dense-increasing-binary-sequence-ℕ+∞)
 ```
 
-```agda
-module _
-  {l : Level} {Y : ℕ∞↗ → UU l}
-  {f g : (x : ℕ∞↗) → Y x}
-  where
-
-  htpy-ℕ∞↗-htpy-ℕ :
-    (H : (x : ℕ∞↗) → has-double-negation-stable-equality (Y x)) →
-    ( (n : ℕ) →
-      f (increasing-binary-sequence-ℕ n) ＝
-      g (increasing-binary-sequence-ℕ n)) →
-    f infinity-ℕ∞↗ ＝ g infinity-ℕ∞↗ →
-    f ~ g
-  htpy-ℕ∞↗-htpy-ℕ H h h∞ =
-    htpy-htpy-double-negation-dense-map
-      ( double-negation-dense-increasing-binary-sequence-ℕ+∞)
-      ( H)
-      ( ind-Maybe (h , h∞))
-```
-
 ### The tight bounds on the image of the natural numbers
 
 ```agda
@@ -307,6 +287,28 @@ is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ zero-ℕ =
   refl
 is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ (succ-ℕ n) =
   is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ n
+```
+
+### Criterion for homotopies of functions into types with double negation stable equality
+
+```agda
+module _
+  {l : Level} {Y : ℕ∞↗ → UU l}
+  {f g : (x : ℕ∞↗) → Y x}
+  where
+
+  htpy-ℕ∞↗-htpy-ℕ+∞ :
+    (H : (x : ℕ∞↗) → has-double-negation-stable-equality (Y x)) →
+    ( (n : ℕ) →
+      f (increasing-binary-sequence-ℕ n) ＝
+      g (increasing-binary-sequence-ℕ n)) →
+    f infinity-ℕ∞↗ ＝ g infinity-ℕ∞↗ →
+    f ~ g
+  htpy-ℕ∞↗-htpy-ℕ+∞ H h h∞ =
+    htpy-htpy-double-negation-dense-map
+      ( double-negation-dense-increasing-binary-sequence-ℕ+∞)
+      ( H)
+      ( ind-Maybe (h , h∞))
 ```
 
 ## References
