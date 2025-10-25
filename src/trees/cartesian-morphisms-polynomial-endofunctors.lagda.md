@@ -306,11 +306,10 @@ module _
   where
 
   compute-fiber-type-cartesian-hom-polynomial-endofunctor :
-    (c : shape-polynomial-endofunctor Q)
-    (x : position-polynomial-endofunctor Q c → X) →
-    fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) q@(c , x) ≃
+    (q@(c , x) : type-polynomial-endofunctor Q X) →
+    fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) q ≃
     fiber α₀ c
-  compute-fiber-type-cartesian-hom-polynomial-endofunctor c x =
+  compute-fiber-type-cartesian-hom-polynomial-endofunctor q@(c , x) =
     equivalence-reasoning
       fiber (type-cartesian-hom-polynomial-endofunctor P Q α {X = X}) q
       ≃ Σ ( fiber α₀ c)
@@ -364,10 +363,10 @@ module _
               ( cone-cartesian-hom-polynomial-endofunctor P Q α f)
               ( a , y))
             ( id)
-            ( ( compute-fiber-type-cartesian-hom-polynomial-endofunctor P Q α a
-                ( y)) ,
-              ( compute-fiber-type-cartesian-hom-polynomial-endofunctor P Q α a
-                ( f ∘ y)) ,
+            ( ( compute-fiber-type-cartesian-hom-polynomial-endofunctor P Q α
+                ( a , y)) ,
+              ( compute-fiber-type-cartesian-hom-polynomial-endofunctor P Q α
+                ( a , f ∘ y)) ,
               ( λ where (u , refl) → refl))
             ( is-equiv-id))
 ```
