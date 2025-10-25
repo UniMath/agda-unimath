@@ -26,6 +26,7 @@ open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-maybe
@@ -40,6 +41,8 @@ open import order-theory.order-preserving-maps-posets
 open import set-theory.finite-elements-increasing-binary-sequences
 open import set-theory.increasing-binary-sequences
 open import set-theory.inequality-increasing-binary-sequences
+open import set-theory.positive-elements-increasing-binary-sequences
+open import set-theory.strict-lower-bounds-increasing-binary-sequences
 ```
 
 </details>
@@ -48,7 +51,7 @@ open import set-theory.inequality-increasing-binary-sequences
 
 The canonical map `ℕ → ℕ∞↑` defined by induction to send zero to zero, and the
 successor of `n` to the successor of the map evaluated at `n` is the
-{{#concept "canonical inclusion" Disambiguation="of the natural numbers into increasing binary sequences" Agda=inclusion-ℕ∞↑-ℕ}}.
+{{#concept "canonical inclusion" Disambiguation="of the natural numbers into increasing binary sequences" Agda=increasing-binseq-ℕ}}.
 This map is a [embedding](foundation-core.embeddings.md) of
 [sets](foundation-core.sets.md) that is
 non-[surjective](foundation.surjective-maps.md), as it does not hit the element
@@ -68,15 +71,16 @@ holds.
 ### The canonical inclusion of natural numbers
 
 ```agda
-inclusion-ℕ∞↑-ℕ : ℕ → ℕ∞↑
-inclusion-ℕ∞↑-ℕ = rec-ℕ zero-ℕ∞↑ (λ _ → succ-ℕ∞↑)
+increasing-binseq-ℕ : ℕ → ℕ∞↑
+increasing-binseq-ℕ = rec-ℕ zero-ℕ∞↑ (λ _ → succ-ℕ∞↑)
 ```
 
 ### The canonical extended inclusion
 
 ```agda
-inclusion-ℕ∞↑-Maybe-ℕ : Maybe ℕ → ℕ∞↑
-inclusion-ℕ∞↑-Maybe-ℕ = rec-coproduct inclusion-ℕ∞↑-ℕ (point infinity-ℕ∞↑)
+increasing-binseq-Maybe-ℕ : Maybe ℕ → ℕ∞↑
+increasing-binseq-Maybe-ℕ =
+  rec-coproduct increasing-binseq-ℕ (point infinity-ℕ∞↑)
 ```
 
 ## Properties
@@ -85,81 +89,104 @@ inclusion-ℕ∞↑-Maybe-ℕ = rec-coproduct inclusion-ℕ∞↑-ℕ (point inf
 
 ```agda
 abstract
-  is-injective-inclusion-ℕ∞↑-ℕ : is-injective inclusion-ℕ∞↑-ℕ
-  is-injective-inclusion-ℕ∞↑-ℕ {zero-ℕ} {zero-ℕ} p =
+  is-injective-increasing-binseq-ℕ : is-injective increasing-binseq-ℕ
+  is-injective-increasing-binseq-ℕ {zero-ℕ} {zero-ℕ} p =
     refl
-  is-injective-inclusion-ℕ∞↑-ℕ {zero-ℕ} {succ-ℕ y} p =
+  is-injective-increasing-binseq-ℕ {zero-ℕ} {succ-ℕ y} p =
     ex-falso (neq-zero-succ-ℕ∞↑ p)
-  is-injective-inclusion-ℕ∞↑-ℕ {succ-ℕ x} {zero-ℕ} p =
+  is-injective-increasing-binseq-ℕ {succ-ℕ x} {zero-ℕ} p =
     ex-falso (neq-succ-zero-ℕ∞↑ p)
-  is-injective-inclusion-ℕ∞↑-ℕ {succ-ℕ x} {succ-ℕ y} p =
-    ap succ-ℕ (is-injective-inclusion-ℕ∞↑-ℕ (is-injective-succ-ℕ∞↑ p))
+  is-injective-increasing-binseq-ℕ {succ-ℕ x} {succ-ℕ y} p =
+    ap succ-ℕ (is-injective-increasing-binseq-ℕ (is-injective-succ-ℕ∞↑ p))
 
 abstract
-  is-emb-inclusion-ℕ∞↑-ℕ : is-emb inclusion-ℕ∞↑-ℕ
-  is-emb-inclusion-ℕ∞↑-ℕ =
-    is-emb-is-injective is-set-ℕ∞↑ is-injective-inclusion-ℕ∞↑-ℕ
+  is-emb-increasing-binseq-ℕ : is-emb increasing-binseq-ℕ
+  is-emb-increasing-binseq-ℕ =
+    is-emb-is-injective is-set-ℕ∞↑ is-injective-increasing-binseq-ℕ
 
 emb-ℕ∞↑-ℕ : ℕ ↪ ℕ∞↑
-emb-ℕ∞↑-ℕ = (inclusion-ℕ∞↑-ℕ , is-emb-inclusion-ℕ∞↑-ℕ)
+emb-ℕ∞↑-ℕ = (increasing-binseq-ℕ , is-emb-increasing-binseq-ℕ)
 ```
 
 ### The canonical inclusion preserves order
 
 ```agda
 abstract
-  preserves-order-inclusion-ℕ∞↑-ℕ :
-    preserves-order-Poset ℕ-Poset ℕ∞↑-Poset inclusion-ℕ∞↑-ℕ
-  preserves-order-inclusion-ℕ∞↑-ℕ zero-ℕ y p =
-    leq-zero-ℕ∞↑ (inclusion-ℕ∞↑-ℕ y)
-  preserves-order-inclusion-ℕ∞↑-ℕ
+  preserves-order-increasing-binseq-ℕ :
+    preserves-order-Poset ℕ-Poset ℕ∞↑-Poset increasing-binseq-ℕ
+  preserves-order-increasing-binseq-ℕ zero-ℕ y p =
+    leq-zero-ℕ∞↑ (increasing-binseq-ℕ y)
+  preserves-order-increasing-binseq-ℕ
     ( succ-ℕ x) (succ-ℕ y) p =
     preserves-order-succ-ℕ∞↑
-      ( inclusion-ℕ∞↑-ℕ x)
-      ( inclusion-ℕ∞↑-ℕ y)
-      ( preserves-order-inclusion-ℕ∞↑-ℕ x y p)
+      ( increasing-binseq-ℕ x)
+      ( increasing-binseq-ℕ y)
+      ( preserves-order-increasing-binseq-ℕ x y p)
 ```
 
 ### The canonical inclusion is not surjective
 
 ```agda
 abstract
-  Neq-infinity-inclusion-ℕ∞↑-ℕ :
-    (n : ℕ) → ¬ (sequence-ℕ∞↑ (inclusion-ℕ∞↑-ℕ n) ~ const ℕ false)
-  Neq-infinity-inclusion-ℕ∞↑-ℕ zero-ℕ H = neq-true-false-bool (H 0)
-  Neq-infinity-inclusion-ℕ∞↑-ℕ (succ-ℕ n) H =
-    Neq-infinity-inclusion-ℕ∞↑-ℕ n (H ∘ succ-ℕ)
+  Neq-infinity-increasing-binseq-ℕ :
+    (n : ℕ) → ¬ (sequence-ℕ∞↑ (increasing-binseq-ℕ n) ~ const ℕ false)
+  Neq-infinity-increasing-binseq-ℕ zero-ℕ H = neq-true-false-bool (H 0)
+  Neq-infinity-increasing-binseq-ℕ (succ-ℕ n) H =
+    Neq-infinity-increasing-binseq-ℕ n (H ∘ succ-ℕ)
 
-neq-infinity-inclusion-ℕ∞↑-ℕ :
-    (n : ℕ) → inclusion-ℕ∞↑-ℕ n ≠ infinity-ℕ∞↑
-neq-infinity-inclusion-ℕ∞↑-ℕ n =
-  map-neg Eq-eq-ℕ∞↑ (Neq-infinity-inclusion-ℕ∞↑-ℕ n)
+  neq-infinity-increasing-binseq-ℕ :
+      (n : ℕ) → increasing-binseq-ℕ n ≠ infinity-ℕ∞↑
+  neq-infinity-increasing-binseq-ℕ n =
+    map-neg Eq-eq-ℕ∞↑ (Neq-infinity-increasing-binseq-ℕ n)
 
-is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ :
-  ¬ (is-double-negation-dense-map inclusion-ℕ∞↑-ℕ)
-is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ H =
-  H infinity-ℕ∞↑ (λ p → neq-infinity-inclusion-ℕ∞↑-ℕ (pr1 p) (pr2 p))
+  is-not-double-negation-dense-increasing-binseq-ℕ :
+    ¬ (is-double-negation-dense-map increasing-binseq-ℕ)
+  is-not-double-negation-dense-increasing-binseq-ℕ H =
+    H infinity-ℕ∞↑ (λ p → neq-infinity-increasing-binseq-ℕ (pr1 p) (pr2 p))
 
-is-not-surjective-inclusion-ℕ∞↑-ℕ : ¬ (is-surjective inclusion-ℕ∞↑-ℕ)
-is-not-surjective-inclusion-ℕ∞↑-ℕ =
-  map-neg
-    is-double-negation-dense-map-is-surjective
-    is-not-double-negation-dense-inclusion-ℕ∞↑-ℕ
+  is-not-surjective-increasing-binseq-ℕ :
+    ¬ (is-surjective increasing-binseq-ℕ)
+  is-not-surjective-increasing-binseq-ℕ =
+    map-neg
+      ( is-double-negation-dense-map-is-surjective)
+      ( is-not-double-negation-dense-increasing-binseq-ℕ)
 ```
 
 ### The canonical extended inclusion is an embedding
 
 ```agda
 abstract
-  is-emb-inclusion-ℕ∞↑-Maybe-ℕ : is-emb inclusion-ℕ∞↑-Maybe-ℕ
-  is-emb-inclusion-ℕ∞↑-Maybe-ℕ =
+  is-emb-increasing-binseq-Maybe-ℕ :
+    is-emb increasing-binseq-Maybe-ℕ
+  is-emb-increasing-binseq-Maybe-ℕ =
     is-emb-coproduct
-      ( is-emb-inclusion-ℕ∞↑-ℕ)
-      ( is-emb-is-injective is-set-ℕ∞↑ (is-injective-point infinity-ℕ∞↑))
-      ( λ n * → neq-infinity-inclusion-ℕ∞↑-ℕ n)
+      ( is-emb-increasing-binseq-ℕ)
+      ( is-emb-is-injective is-set-ℕ∞↑
+        ( is-injective-point infinity-ℕ∞↑))
+      ( λ n * → neq-infinity-increasing-binseq-ℕ n)
 
-emb-ℕ∞↑-Maybe-ℕ : Maybe ℕ ↪ ℕ∞↑
-emb-ℕ∞↑-Maybe-ℕ = (inclusion-ℕ∞↑-Maybe-ℕ , is-emb-inclusion-ℕ∞↑-Maybe-ℕ)
+emb-increasing-binseq-Maybe-ℕ : Maybe ℕ ↪ ℕ∞↑
+emb-increasing-binseq-Maybe-ℕ =
+  ( increasing-binseq-Maybe-ℕ ,
+    is-emb-increasing-binseq-Maybe-ℕ)
+```
+
+### Natural numbers are finite increasing binary sequences
+
+```agda
+upper-bound-increasing-binseq-ℕ :
+  (n : ℕ) → upper-bound-ℕ∞↑ (increasing-binseq-ℕ n)
+upper-bound-increasing-binseq-ℕ zero-ℕ =
+  ( 0 , refl)
+upper-bound-increasing-binseq-ℕ (succ-ℕ n) =
+  ( succ-ℕ (pr1 (upper-bound-increasing-binseq-ℕ n)) ,
+    pr2 (upper-bound-increasing-binseq-ℕ n))
+
+abstract
+  is-finite-increasing-binseq-ℕ :
+    (n : ℕ) → is-finite-ℕ∞↑ (increasing-binseq-ℕ n)
+  is-finite-increasing-binseq-ℕ n =
+    unit-trunc-Prop (upper-bound-increasing-binseq-ℕ n)
 ```
 
 #### Successor condition on the image of the natural numbers
@@ -171,62 +198,71 @@ then it is the image of `n + 1`.
 abstract
   Eq-succ-criterion-ℕ∞↑ :
     {x : ℕ∞↑} {n : ℕ} →
-    le-ℕ∞↑-ℕ n x → leq-ℕ-ℕ∞↑ x (succ-ℕ n) → Eq-ℕ∞↑ x (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
+    is-strictly-bounded-below-ℕ∞↑ n x →
+    is-bounded-ℕ∞↑ x (succ-ℕ n) →
+    Eq-ℕ∞↑ x (increasing-binseq-ℕ (succ-ℕ n))
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s 0 = r
   Eq-succ-criterion-ℕ∞↑ {x} {0} r s (succ-ℕ i) =
-    leq-leq-zero-ℕ-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
+    is-bounded-is-bounded-zero-ℕ∞↑ (shift-left-ℕ∞↑ x) i s
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s 0 =
-    is-positive-le-ℕ∞↑-ℕ x (succ-ℕ n) r
+    is-positive-is-strictly-bounded-below-ℕ∞↑ x (succ-ℕ n) r
   Eq-succ-criterion-ℕ∞↑ {x} {succ-ℕ n} r s (succ-ℕ i) =
     Eq-succ-criterion-ℕ∞↑ {shift-left-ℕ∞↑ x} {n} r s i
 
-eq-succ-criterion-ℕ∞↑ :
-  {x : ℕ∞↑} {n : ℕ} →
-  le-ℕ∞↑-ℕ n x → leq-ℕ-ℕ∞↑ x (succ-ℕ n) → x ＝ inclusion-ℕ∞↑-ℕ (succ-ℕ n)
-eq-succ-criterion-ℕ∞↑ {x} {n} r s =
-  is-injective-sequence-ℕ∞↑ (eq-htpy (Eq-succ-criterion-ℕ∞↑ {x} {n} r s))
+abstract
+  eq-succ-criterion-ℕ∞↑ :
+    {x : ℕ∞↑} {n : ℕ} →
+    is-strictly-bounded-below-ℕ∞↑ n x →
+    is-bounded-ℕ∞↑ x (succ-ℕ n) →
+    x ＝ increasing-binseq-ℕ (succ-ℕ n)
+  eq-succ-criterion-ℕ∞↑ {x} {n} r s =
+    is-injective-sequence-ℕ∞↑ (eq-htpy (Eq-succ-criterion-ℕ∞↑ {x} {n} r s))
 ```
 
 ### If an increasing binary sequence is not in the image of the natural numbers it is infinite
 
 ```agda
 module _
-  (x : ℕ∞↑) (H : (n : ℕ) → x ≠ inclusion-ℕ∞↑-ℕ n)
+  (x : ℕ∞↑) (H : (n : ℕ) → x ≠ increasing-binseq-ℕ n)
   where
 
   abstract
-    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ :
+    Eq-infinity-is-not-in-image-increasing-binseq-ℕ :
       sequence-ℕ∞↑ x ~ const ℕ false
-    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ zero-ℕ =
+    Eq-infinity-is-not-in-image-increasing-binseq-ℕ zero-ℕ =
       is-false-is-not-true (sequence-ℕ∞↑ x 0) (H 0 ∘ eq-zero-is-zero-ℕ∞↑ x)
-    Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ (succ-ℕ n) =
+    Eq-infinity-is-not-in-image-increasing-binseq-ℕ (succ-ℕ n) =
       is-false-is-not-true
         ( sequence-ℕ∞↑ x (succ-ℕ n))
         ( H (succ-ℕ n) ∘
-          eq-succ-criterion-ℕ∞↑ (Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ n))
+          eq-succ-criterion-ℕ∞↑
+            ( Eq-infinity-is-not-in-image-increasing-binseq-ℕ n))
 
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ : x ＝ infinity-ℕ∞↑
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ =
-    eq-Eq-ℕ∞↑ Eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ
+  eq-infinity-is-not-in-image-increasing-binseq-ℕ : x ＝ infinity-ℕ∞↑
+  eq-infinity-is-not-in-image-increasing-binseq-ℕ =
+    eq-Eq-ℕ∞↑ Eq-infinity-is-not-in-image-increasing-binseq-ℕ
 
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' : infinity-ℕ∞↑ ＝ x
-  eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' =
-    inv eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ
+  eq-infinity-is-not-in-image-increasing-binseq-ℕ' : infinity-ℕ∞↑ ＝ x
+  eq-infinity-is-not-in-image-increasing-binseq-ℕ' =
+    inv eq-infinity-is-not-in-image-increasing-binseq-ℕ
 ```
 
 ### The extended inclusion is double negation dense
 
 ```agda
-is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ :
-  is-double-negation-dense-map inclusion-ℕ∞↑-Maybe-ℕ
-is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ x H =
-  H ( inr star ,
-      eq-infinity-is-not-in-image-inclusion-ℕ∞↑-ℕ' x
-        ( λ n p → H (inl n , inv p)))
+abstract
+  is-double-negation-dense-increasing-binseq-Maybe-ℕ :
+    is-double-negation-dense-map increasing-binseq-Maybe-ℕ
+  is-double-negation-dense-increasing-binseq-Maybe-ℕ x H =
+    H ( inr star ,
+        eq-infinity-is-not-in-image-increasing-binseq-ℕ' x
+          ( λ n p → H (inl n , inv p)))
 
-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ : Maybe ℕ ↠¬¬ ℕ∞↑
-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ =
-  ( inclusion-ℕ∞↑-Maybe-ℕ , is-double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ)
+double-negation-dense-increasing-binseq-Maybe-ℕ :
+  Maybe ℕ ↠¬¬ ℕ∞↑
+double-negation-dense-increasing-binseq-Maybe-ℕ =
+  ( increasing-binseq-Maybe-ℕ ,
+    is-double-negation-dense-increasing-binseq-Maybe-ℕ)
 ```
 
 ```agda
@@ -237,12 +273,12 @@ module _
 
   htpy-ℕ∞↑-htpy-ℕ :
     (H : (x : ℕ∞↑) → has-double-negation-stable-equality (Y x)) →
-    ((n : ℕ) → f (inclusion-ℕ∞↑-ℕ n) ＝ g (inclusion-ℕ∞↑-ℕ n)) →
+    ((n : ℕ) → f (increasing-binseq-ℕ n) ＝ g (increasing-binseq-ℕ n)) →
     f infinity-ℕ∞↑ ＝ g infinity-ℕ∞↑ →
     f ~ g
   htpy-ℕ∞↑-htpy-ℕ H h h∞ =
     htpy-htpy-double-negation-dense-map
-      ( double-negation-dense-inclusion-ℕ∞↑-Maybe-ℕ)
+      ( double-negation-dense-increasing-binseq-Maybe-ℕ)
       ( H)
       ( ind-Maybe (h , h∞))
 ```
@@ -250,13 +286,21 @@ module _
 ### The tight bounds on the image of the natural numbers
 
 ```agda
-refl-leq-ℕ-ℕ∞↑ : (n : ℕ) → leq-ℕ-ℕ∞↑ (inclusion-ℕ∞↑-ℕ n) n
-refl-leq-ℕ-ℕ∞↑ zero-ℕ = refl
-refl-leq-ℕ-ℕ∞↑ (succ-ℕ n) = refl-leq-ℕ-ℕ∞↑ n
+is-bounded-increasing-binseq-ℕ :
+  (n : ℕ) →
+  is-bounded-ℕ∞↑ (increasing-binseq-ℕ n) n
+is-bounded-increasing-binseq-ℕ zero-ℕ =
+  refl
+is-bounded-increasing-binseq-ℕ (succ-ℕ n) =
+  is-bounded-increasing-binseq-ℕ n
 
-le-succ-ℕ-ℕ∞↑ : (n : ℕ) → le-ℕ∞↑-ℕ n (inclusion-ℕ∞↑-ℕ (succ-ℕ n))
-le-succ-ℕ-ℕ∞↑ zero-ℕ = refl
-le-succ-ℕ-ℕ∞↑ (succ-ℕ n) = le-succ-ℕ-ℕ∞↑ n
+is-strictly-bounded-below-increasing-binseq-succ-ℕ :
+  (n : ℕ) →
+  is-strictly-bounded-below-ℕ∞↑ n (increasing-binseq-ℕ (succ-ℕ n))
+is-strictly-bounded-below-increasing-binseq-succ-ℕ zero-ℕ =
+  refl
+is-strictly-bounded-below-increasing-binseq-succ-ℕ (succ-ℕ n) =
+  is-strictly-bounded-below-increasing-binseq-succ-ℕ n
 ```
 
 ## References

@@ -48,19 +48,19 @@ module _
   (n : ℕ∞↑) (k : bounded-ℕ∞↑ n)
   where
 
-  increasing-binary-sequence-bounded-ℕ∞↑ : ℕ∞↑
-  increasing-binary-sequence-bounded-ℕ∞↑ = pr1 k
+  increasing-binseq-bounded-ℕ∞↑ : ℕ∞↑
+  increasing-binseq-bounded-ℕ∞↑ = pr1 k
 
   sequence-bounded-ℕ∞↑ : ℕ → bool
-  sequence-bounded-ℕ∞↑ = sequence-ℕ∞↑ increasing-binary-sequence-bounded-ℕ∞↑
+  sequence-bounded-ℕ∞↑ = sequence-ℕ∞↑ increasing-binseq-bounded-ℕ∞↑
 
   is-increasing-sequence-bounded-ℕ∞↑ :
     is-increasing-binary-sequence sequence-bounded-ℕ∞↑
   is-increasing-sequence-bounded-ℕ∞↑ =
-    is-increasing-sequence-ℕ∞↑ increasing-binary-sequence-bounded-ℕ∞↑
+    is-increasing-sequence-ℕ∞↑ increasing-binseq-bounded-ℕ∞↑
 
-  is-bounded-bounded-ℕ∞↑ : increasing-binary-sequence-bounded-ℕ∞↑ ≤-ℕ∞↑ n
-  is-bounded-bounded-ℕ∞↑ = pr2 k
+  is-strictly-bounded-below-bounded-ℕ∞↑ : increasing-binseq-bounded-ℕ∞↑ ≤-ℕ∞↑ n
+  is-strictly-bounded-below-bounded-ℕ∞↑ = pr2 k
 
 abstract
   is-set-bounded-ℕ∞↑ : (n : ℕ∞↑) → is-set (bounded-ℕ∞↑ n)
@@ -77,40 +77,41 @@ module _
   (n : ℕ∞↑) (k : succ-bounded-ℕ∞↑ n)
   where
 
-  increasing-binary-sequence-succ-bounded-ℕ∞↑ : ℕ∞↑
-  increasing-binary-sequence-succ-bounded-ℕ∞↑ = pr1 k
+  increasing-binseq-succ-bounded-ℕ∞↑ : ℕ∞↑
+  increasing-binseq-succ-bounded-ℕ∞↑ = pr1 k
 
   sequence-succ-bounded-ℕ∞↑ : ℕ → bool
   sequence-succ-bounded-ℕ∞↑ =
-    sequence-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑
+    sequence-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑
 
   is-increasing-sequence-succ-bounded-ℕ∞↑ :
     is-increasing-binary-sequence sequence-succ-bounded-ℕ∞↑
   is-increasing-sequence-succ-bounded-ℕ∞↑ =
-    is-increasing-sequence-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑
+    is-increasing-sequence-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑
 
   is-succ-bounded-succ-bounded-ℕ∞↑ :
-    succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
+    succ-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
   is-succ-bounded-succ-bounded-ℕ∞↑ = pr2 k
 
   bounded-succ-succ-bounded-ℕ∞↑ : bounded-ℕ∞↑ n
   bounded-succ-succ-bounded-ℕ∞↑ =
-    ( succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑ ,
+    ( succ-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑ ,
       is-succ-bounded-succ-bounded-ℕ∞↑)
 
-  is-bounded-succ-bounded-ℕ∞↑ :
-    increasing-binary-sequence-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
-  is-bounded-succ-bounded-ℕ∞↑ =
+  is-strictly-bounded-below-succ-bounded-ℕ∞↑ :
+    increasing-binseq-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
+  is-strictly-bounded-below-succ-bounded-ℕ∞↑ =
     transitive-leq-ℕ∞↑
-      ( increasing-binary-sequence-succ-bounded-ℕ∞↑)
-      ( succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑)
+      ( increasing-binseq-succ-bounded-ℕ∞↑)
+      ( succ-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑)
       ( n)
       ( is-succ-bounded-succ-bounded-ℕ∞↑)
-      ( leq-succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑)
+      ( leq-succ-ℕ∞↑ increasing-binseq-succ-bounded-ℕ∞↑)
 
   bounded-succ-bounded-ℕ∞↑ : bounded-ℕ∞↑ n
   bounded-succ-bounded-ℕ∞↑ =
-    ( increasing-binary-sequence-succ-bounded-ℕ∞↑ , is-bounded-succ-bounded-ℕ∞↑)
+    ( increasing-binseq-succ-bounded-ℕ∞↑ ,
+      is-strictly-bounded-below-succ-bounded-ℕ∞↑)
 
 abstract
   is-set-succ-bounded-ℕ∞↑ : (n : ℕ∞↑) → is-set (succ-bounded-ℕ∞↑ n)
@@ -160,22 +161,22 @@ zero-bounded-ℕ∞↑ n = (zero-ℕ∞↑ , leq-zero-ℕ∞↑ n)
 inclusion-bounded-succ-bounded-ℕ∞↑ :
   (n : ℕ∞↑) → bounded-ℕ∞↑ n → bounded-ℕ∞↑ (succ-ℕ∞↑ n)
 inclusion-bounded-succ-bounded-ℕ∞↑ n x =
-  ( increasing-binary-sequence-bounded-ℕ∞↑ n x ,
+  ( increasing-binseq-bounded-ℕ∞↑ n x ,
     transitive-leq-ℕ∞↑
-      ( increasing-binary-sequence-bounded-ℕ∞↑ n x)
+      ( increasing-binseq-bounded-ℕ∞↑ n x)
       ( n)
       ( succ-ℕ∞↑ n)
       ( leq-succ-ℕ∞↑ n)
-      ( is-bounded-bounded-ℕ∞↑ n x))
+      ( is-strictly-bounded-below-bounded-ℕ∞↑ n x))
 
 inclusion-succ-bounded-ℕ∞↑ :
   (n : ℕ∞↑) → bounded-ℕ∞↑ n → bounded-ℕ∞↑ (succ-ℕ∞↑ n)
 inclusion-succ-bounded-ℕ∞↑ n x =
-  ( succ-ℕ∞↑ (increasing-binary-sequence-bounded-ℕ∞↑ n x) ,
+  ( succ-ℕ∞↑ (increasing-binseq-bounded-ℕ∞↑ n x) ,
     preserves-order-succ-ℕ∞↑
-      ( increasing-binary-sequence-bounded-ℕ∞↑ n x)
+      ( increasing-binseq-bounded-ℕ∞↑ n x)
       ( n)
-      ( is-bounded-bounded-ℕ∞↑ n x))
+      ( is-strictly-bounded-below-bounded-ℕ∞↑ n x))
 ```
 
 ### Every increasing binary sequence is bounded by itself
