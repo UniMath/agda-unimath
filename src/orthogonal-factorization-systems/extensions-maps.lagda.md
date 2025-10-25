@@ -10,6 +10,8 @@ module orthogonal-factorization-systems.extensions-maps where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.precomposition-functions
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -33,7 +35,7 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-
+open import foundation.precomposition-dependent-functions
 open import foundation-core.torsorial-type-families
 ```
 
@@ -270,6 +272,79 @@ module _
     coherence-htpy-extension e e' H → e ＝ e'
   eq-htpy-extension e e' H K =
     map-inv-equiv (extensionality-extension e e') (H , K)
+```
+
+### Computing extension types as a dependent product
+
+Extension types are equivalent to fibers of precomposition maps, which in turn
+have a Π-type characterization. Given `i : A → B` and `g : B → C`, then
+
+```text
+  extension i g ≃ ((y : B) → Σ (c : C), (x : X) → (i x ＝ y) → (c ＝ g y)).
+```
+
+We give 4 different formulations of this equivalence for both the nondependent
+and dependent extension type.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {C : UU l3} (g : A → C)
+  where
+
+
+  equiv-fiber-Π-curry-precomp-extension :
+    extension i g ≃ ((b : B) → Σ C (λ u → (a : A) → i a ＝ b → g a ＝ u))
+  equiv-fiber-Π-curry-precomp-extension =
+    ( compute-fiber-Π-curry-precomp i g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp i g))
+
+  equiv-fiber-Π-curry-precomp-extension' :
+    extension i g ≃ ((b : B) → Σ C (λ u → (a : A) → b ＝ i a → u ＝ g a))
+  equiv-fiber-Π-curry-precomp-extension' =
+    ( compute-fiber-Π-curry-precomp' i g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp i g))
+
+  equiv-fiber-Π-precomp-extension :
+    extension i g ≃ fiber-Π-precomp i g
+  equiv-fiber-Π-precomp-extension =
+    ( compute-fiber-Π-precomp i g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp i g))
+
+  equiv-fiber-Π-precomp-extension' :
+    extension i g ≃ fiber-Π-precomp' i g
+  equiv-fiber-Π-precomp-extension' =
+    ( compute-fiber-Π-precomp' i g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp i g))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {P : B → UU l3} (g : (x : A) → P (i x))
+  where
+
+  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type :
+    extension-dependent-type i P g ≃ fiber-Π-curry-precomp-Π i P g
+  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type =
+    ( compute-fiber-Π-curry-precomp-Π i P g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
+
+  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type' :
+    extension-dependent-type i P g ≃ fiber-Π-curry-precomp-Π' i P g
+  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type' =
+    ( compute-fiber-Π-curry-precomp-Π' i P g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
+
+  equiv-fiber-Π-precomp-Π-extension-dependent-type :
+    extension-dependent-type i P g ≃ fiber-Π-precomp-Π i P g
+  equiv-fiber-Π-precomp-Π-extension-dependent-type =
+    ( compute-fiber-Π-precomp-Π i P g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
+
+  equiv-fiber-Π-precomp-Π-extension-dependent-type' :
+    extension-dependent-type i P g ≃ fiber-Π-precomp-Π' i P g
+  equiv-fiber-Π-precomp-Π-extension-dependent-type' =
+    ( compute-fiber-Π-precomp-Π' i P g) ∘e
+    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
 ```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`

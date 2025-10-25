@@ -131,7 +131,7 @@ commutes.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {X : UU l3}
   where
 
   compute-extension-fiber-precomp' :

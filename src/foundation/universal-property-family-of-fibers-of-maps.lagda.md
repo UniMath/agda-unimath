@@ -636,7 +636,7 @@ dependent products:
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (U : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {U : UU l3}
   (g : A → U)
   where
 
@@ -652,7 +652,7 @@ module _
     equivalence-reasoning
       fiber (precomp f U) g
       ≃ Σ (B → U) (λ h → (a : A) → g a ＝ (h ∘ f) a)
-        by compute-extension-fiber-precomp f U g
+        by compute-extension-fiber-precomp f g
       ≃ Σ ( B → U)
           ( λ h → (b : B) ((a , _) : fiber f b) → g a ＝ h b)
         by
@@ -681,7 +681,7 @@ module _
     equivalence-reasoning
       fiber (precomp f U) g
       ≃ Σ (B → U) (λ h → (h ∘ f) ~ g)
-        by compute-extension-fiber-precomp' f U g
+        by compute-extension-fiber-precomp' f g
       ≃ Σ ( B → U)
           ( λ h → (b : B) ((a , _) : fiber' f b) → h b ＝ g a)
         by
