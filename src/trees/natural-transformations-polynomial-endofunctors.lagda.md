@@ -88,7 +88,7 @@ natural-transformation-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} (l : Level) →
   (P : polynomial-endofunctor l1 l2)
   (Q : polynomial-endofunctor l3 l4) →
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 natural-transformation-polynomial-endofunctor l P Q =
   Σ ( {X : UU l} →
       type-polynomial-endofunctor P X →
@@ -102,15 +102,15 @@ module _
   (α : natural-transformation-polynomial-endofunctor l5 P Q)
   where
 
-  type-natural-transformation-polynomial-endofunctor :
+  map-natural-transformation-polynomial-endofunctor :
     {X : UU l5} →
     type-polynomial-endofunctor P X →
     type-polynomial-endofunctor Q X
-  type-natural-transformation-polynomial-endofunctor = pr1 α
+  map-natural-transformation-polynomial-endofunctor = pr1 α
 
   naturality-natural-transformation-polynomial-endofunctor :
     coherence-natural-transformation-polynomial-endofunctor P Q
-      ( type-natural-transformation-polynomial-endofunctor)
+      ( map-natural-transformation-polynomial-endofunctor)
   naturality-natural-transformation-polynomial-endofunctor = pr2 α
 ```
 
@@ -173,8 +173,8 @@ module _
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
   htpy-natural-transformation-polynomial-endofunctor α β =
     Σ ( (X : UU l5) →
-        type-natural-transformation-polynomial-endofunctor P Q α {X} ~
-        type-natural-transformation-polynomial-endofunctor P Q β {X})
+        map-natural-transformation-polynomial-endofunctor P Q α {X} ~
+        map-natural-transformation-polynomial-endofunctor P Q β {X})
       ( λ H →
         (X Y : UU l5) (f : X → Y) →
         coherence-square-homotopies
@@ -203,8 +203,8 @@ module _
       ( is-torsorial-Eq-implicit-Π'
         ( λ X →
           is-torsorial-htpy
-            ( type-natural-transformation-polynomial-endofunctor P Q α)))
-      ( type-natural-transformation-polynomial-endofunctor P Q α ,
+            ( map-natural-transformation-polynomial-endofunctor P Q α)))
+      ( map-natural-transformation-polynomial-endofunctor P Q α ,
         ( λ _ _ → refl))
       ( is-torsorial-Eq-implicit-Π'
         ( λ X →

@@ -144,17 +144,17 @@ module _
   natural-transformation-cartesian-natural-transformation-polynomial-endofunctor =
     pr1 α
 
-  type-cartesian-natural-transformation-polynomial-endofunctor :
+  map-cartesian-natural-transformation-polynomial-endofunctor :
     {X : UU l} →
     type-polynomial-endofunctor P X →
     type-polynomial-endofunctor Q X
-  type-cartesian-natural-transformation-polynomial-endofunctor =
-    type-natural-transformation-polynomial-endofunctor P Q
+  map-cartesian-natural-transformation-polynomial-endofunctor =
+    map-natural-transformation-polynomial-endofunctor P Q
       ( natural-transformation-cartesian-natural-transformation-polynomial-endofunctor)
 
   naturality-cartesian-natural-transformation-polynomial-endofunctor :
     coherence-natural-transformation-polynomial-endofunctor P Q
-      ( type-cartesian-natural-transformation-polynomial-endofunctor)
+      ( map-cartesian-natural-transformation-polynomial-endofunctor)
   naturality-cartesian-natural-transformation-polynomial-endofunctor =
     naturality-natural-transformation-polynomial-endofunctor P Q
       natural-transformation-cartesian-natural-transformation-polynomial-endofunctor
@@ -223,7 +223,7 @@ module _
   cone-cartesian-natural-transformation-polynomial-endofunctor :
     {X Y : UU l5} (f : X → Y) →
     cone
-      ( type-cartesian-natural-transformation-polynomial-endofunctor P Q α)
+      ( map-cartesian-natural-transformation-polynomial-endofunctor P Q α)
       ( map-polynomial-endofunctor Q f)
       ( type-polynomial-endofunctor P X)
   cone-cartesian-natural-transformation-polynomial-endofunctor =
@@ -249,7 +249,7 @@ module _
   (α : cartesian-natural-transformation-polynomial-endofunctor l2 P Q)
   (let P₀ = shape-polynomial-endofunctor P)
   (let P₁ = position-polynomial-endofunctor P)
-  (let α₀ = type-cartesian-natural-transformation-polynomial-endofunctor P Q α)
+  (let α₀ = map-cartesian-natural-transformation-polynomial-endofunctor P Q α)
   where
 
   shape-cartesian-natural-transformation-polynomial-endofunctor :
@@ -361,7 +361,7 @@ module _
   is-cartesian-is-cartesian-at-terminal-map-natural-transformation-is-set-shape-polynomial-endofunctor
     HQ Hα {X} {Y} f =
     is-pullback-top-square-vertical-triangle
-      ( type-natural-transformation-polynomial-endofunctor P Q α)
+      ( map-natural-transformation-polynomial-endofunctor P Q α)
       (map-polynomial-endofunctor Q (raise-terminal-map Y))
       (map-polynomial-endofunctor Q f)
       (map-polynomial-endofunctor Q (raise-terminal-map X))

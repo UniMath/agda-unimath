@@ -283,7 +283,7 @@ module _
   shape-natural-transformation-polynomial-endofunctor :
     shape-polynomial-endofunctor P → shape-polynomial-endofunctor Q
   shape-natural-transformation-polynomial-endofunctor a =
-    pr1 (type-natural-transformation-polynomial-endofunctor P Q α (a , id))
+    pr1 (map-natural-transformation-polynomial-endofunctor P Q α (a , id))
 
   position-natural-transformation-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor P) →
@@ -291,7 +291,7 @@ module _
       ( shape-natural-transformation-polynomial-endofunctor a) →
     position-polynomial-endofunctor P a
   position-natural-transformation-polynomial-endofunctor a =
-    pr2 (type-natural-transformation-polynomial-endofunctor P Q α (a , id))
+    pr2 (map-natural-transformation-polynomial-endofunctor P Q α (a , id))
 
   hom-natural-transformation-polynomial-endofunctor :
     hom-polynomial-endofunctor P Q
@@ -390,10 +390,10 @@ module _
   is-section-type-hom-natural-transformation-polynomial-endofunctor :
     (α : natural-transformation-polynomial-endofunctor l2 P Q)
     (X : UU l2) →
-    type-natural-transformation-polynomial-endofunctor P Q
+    map-natural-transformation-polynomial-endofunctor P Q
       ( natural-transformation-hom-polynomial-endofunctor P Q
         ( hom-natural-transformation-polynomial-endofunctor P Q α)) ~
-    type-natural-transformation-polynomial-endofunctor P Q α {X}
+    map-natural-transformation-polynomial-endofunctor P Q α {X}
   is-section-type-hom-natural-transformation-polynomial-endofunctor
     α X (a , x) =
     inv
