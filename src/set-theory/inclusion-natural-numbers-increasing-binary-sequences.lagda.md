@@ -78,8 +78,8 @@ increasing-binary-sequence-ℕ = rec-ℕ zero-ℕ∞↑ (λ _ → succ-ℕ∞↑
 ### The canonical extended inclusion
 
 ```agda
-increasing-binary-sequence-Maybe-ℕ : Maybe ℕ → ℕ∞↑
-increasing-binary-sequence-Maybe-ℕ =
+increasing-binary-sequence-ℕ+∞ : Maybe ℕ → ℕ∞↑
+increasing-binary-sequence-ℕ+∞ =
   rec-coproduct increasing-binary-sequence-ℕ (point infinity-ℕ∞↑)
 ```
 
@@ -160,19 +160,19 @@ abstract
 
 ```agda
 abstract
-  is-emb-increasing-binary-sequence-Maybe-ℕ :
-    is-emb increasing-binary-sequence-Maybe-ℕ
-  is-emb-increasing-binary-sequence-Maybe-ℕ =
+  is-emb-increasing-binary-sequence-ℕ+∞ :
+    is-emb increasing-binary-sequence-ℕ+∞
+  is-emb-increasing-binary-sequence-ℕ+∞ =
     is-emb-coproduct
       ( is-emb-increasing-binary-sequence-ℕ)
       ( is-emb-is-injective is-set-ℕ∞↑
         ( is-injective-point infinity-ℕ∞↑))
       ( λ n * → neq-infinity-increasing-binary-sequence-ℕ n)
 
-emb-increasing-binary-sequence-Maybe-ℕ : Maybe ℕ ↪ ℕ∞↑
-emb-increasing-binary-sequence-Maybe-ℕ =
-  ( increasing-binary-sequence-Maybe-ℕ ,
-    is-emb-increasing-binary-sequence-Maybe-ℕ)
+emb-increasing-binary-sequence-ℕ+∞ : Maybe ℕ ↪ ℕ∞↑
+emb-increasing-binary-sequence-ℕ+∞ =
+  ( increasing-binary-sequence-ℕ+∞ ,
+    is-emb-increasing-binary-sequence-ℕ+∞)
 ```
 
 ### Natural numbers are finite increasing binary sequences
@@ -255,18 +255,18 @@ module _
 
 ```agda
 abstract
-  is-double-negation-dense-increasing-binary-sequence-Maybe-ℕ :
-    is-double-negation-dense-map increasing-binary-sequence-Maybe-ℕ
-  is-double-negation-dense-increasing-binary-sequence-Maybe-ℕ x H =
+  is-double-negation-dense-increasing-binary-sequence-ℕ+∞ :
+    is-double-negation-dense-map increasing-binary-sequence-ℕ+∞
+  is-double-negation-dense-increasing-binary-sequence-ℕ+∞ x H =
     H ( inr star ,
         eq-infinity-is-not-in-image-increasing-binary-sequence-ℕ' x
           ( λ n p → H (inl n , inv p)))
 
-double-negation-dense-increasing-binary-sequence-Maybe-ℕ :
+double-negation-dense-increasing-binary-sequence-ℕ+∞ :
   Maybe ℕ ↠¬¬ ℕ∞↑
-double-negation-dense-increasing-binary-sequence-Maybe-ℕ =
-  ( increasing-binary-sequence-Maybe-ℕ ,
-    is-double-negation-dense-increasing-binary-sequence-Maybe-ℕ)
+double-negation-dense-increasing-binary-sequence-ℕ+∞ =
+  ( increasing-binary-sequence-ℕ+∞ ,
+    is-double-negation-dense-increasing-binary-sequence-ℕ+∞)
 ```
 
 ```agda
@@ -284,7 +284,7 @@ module _
     f ~ g
   htpy-ℕ∞↑-htpy-ℕ H h h∞ =
     htpy-htpy-double-negation-dense-map
-      ( double-negation-dense-increasing-binary-sequence-Maybe-ℕ)
+      ( double-negation-dense-increasing-binary-sequence-ℕ+∞)
       ( H)
       ( ind-Maybe (h , h∞))
 ```
