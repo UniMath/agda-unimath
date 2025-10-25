@@ -14,9 +14,9 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
@@ -34,8 +34,6 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import logic.functoriality-existential-quantification
 
 open import metric-spaces.metric-spaces
 
@@ -129,7 +127,7 @@ eq-ℝ⁰⁺ _ _ = eq-type-subtype is-nonnegative-prop-ℝ
 abstract
   is-nonnegative-real-ℚ⁰⁺ : (q : ℚ⁰⁺) → is-nonnegative-ℝ (real-ℚ⁰⁺ q)
   is-nonnegative-real-ℚ⁰⁺ (q , nonneg-q) =
-    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ q nonneg-q)
+    preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ nonneg-q)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ q = (real-ℚ⁰⁺ q , is-nonnegative-real-ℚ⁰⁺ q)
@@ -229,56 +227,6 @@ module _
   transitive-leq-ℝ⁰⁺ = transitive-leq-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
 ```
 
-### Strict inequality on nonnegative real numbers
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2)
-  where
-
-  le-prop-ℝ⁰⁺ : Prop (l1 ⊔ l2)
-  le-prop-ℝ⁰⁺ = le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
-
-  le-ℝ⁰⁺ : UU (l1 ⊔ l2)
-  le-ℝ⁰⁺ = type-Prop le-prop-ℝ⁰⁺
-```
-
-### The canonical embedding of nonnegative rational numbers to nonnegative reals preserves strict inequality
-
-```agda
-abstract
-  preserves-le-nonnegative-real-ℚ⁰⁺ :
-    (p q : ℚ⁰⁺) →
-    le-ℚ⁰⁺ p q → le-ℝ⁰⁺ (nonnegative-real-ℚ⁰⁺ p) (nonnegative-real-ℚ⁰⁺ q)
-  preserves-le-nonnegative-real-ℚ⁰⁺ p q = preserves-le-real-ℚ _ _
-```
-
-### Similarity preserves strict inequality
-
-```agda
-module _
-  {l1 l2 l3 : Level} (z : ℝ⁰⁺ l1) (x : ℝ⁰⁺ l2) (y : ℝ⁰⁺ l3) (x~y : sim-ℝ⁰⁺ x y)
-  where
-
-  abstract
-    preserves-le-left-sim-ℝ⁰⁺ : le-ℝ⁰⁺ x z → le-ℝ⁰⁺ y z
-    preserves-le-left-sim-ℝ⁰⁺ =
-      preserves-le-left-sim-ℝ (real-ℝ⁰⁺ z) _ _ x~y
-```
-
-### Concatenation of inequality and strict inequality
-
-```agda
-module _
-  {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3)
-  where
-
-  abstract
-    concatenate-leq-le-ℝ⁰⁺ : leq-ℝ⁰⁺ x y → le-ℝ⁰⁺ y z → le-ℝ⁰⁺ x z
-    concatenate-leq-le-ℝ⁰⁺ =
-      concatenate-leq-le-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
-```
-
 ### A real number is nonnegative if and only if every element of its upper cut is positive
 
 ```agda
@@ -288,7 +236,6 @@ abstract
     is-positive-ℚ q
   is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) q x<q =
     is-positive-le-zero-ℚ
-      ( q)
       ( reflects-le-real-ℚ
         ( zero-ℚ)
         ( q)
@@ -303,7 +250,7 @@ opaque
     {l : Level} → (x : ℝ l) → (upper-cut-ℝ x ⊆ is-positive-prop-ℚ) →
     is-nonnegative-ℝ x
   is-nonnegative-is-positive-upper-cut-ℝ x Uₓ⊆ℚ⁺ =
-    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ q (Uₓ⊆ℚ⁺ q q∈Uₓ))
+    leq-leq'-ℝ zero-ℝ x (λ q q∈Uₓ → le-zero-is-positive-ℚ (Uₓ⊆ℚ⁺ q q∈Uₓ))
 ```
 
 ### A real number is nonnegative if and only if every negative rational number is in its lower cut
@@ -316,13 +263,13 @@ opaque
     {l : Level} (x : ℝ l) → (is-negative-prop-ℚ ⊆ lower-cut-ℝ x) →
     is-nonnegative-ℝ x
   is-nonnegative-leq-negative-lower-cut-ℝ x ℚ⁻⊆Lₓ q q<0 =
-    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q q<0)
+    ℚ⁻⊆Lₓ q (is-negative-le-zero-ℚ q<0)
 
   leq-negative-lower-cut-is-nonnegative-ℝ :
     {l : Level} (x : ℝ l) → is-nonnegative-ℝ x →
     (is-negative-prop-ℚ ⊆ lower-cut-ℝ x)
   leq-negative-lower-cut-is-nonnegative-ℝ x 0≤x q is-neg-q =
-    0≤x q (le-zero-is-negative-ℚ q is-neg-q)
+    0≤x q (le-zero-is-negative-ℚ is-neg-q)
 ```
 
 ### Every nonnegative real number has a positive rational number in its upper cut
@@ -337,22 +284,6 @@ abstract
     in do
       (q , x<q) ← is-inhabited-upper-cut-ℝ (real-ℝ⁰⁺ x)
       intro-exists (q , is-positive-is-in-upper-cut-ℝ⁰⁺ x q x<q) x<q
-```
-
-### Every nonnegative real number is less than some positive rational number
-
-```agda
-module _
-  {l : Level} (x : ℝ⁰⁺ l)
-  where
-
-  abstract
-    le-some-positive-rational-ℝ⁰⁺ :
-      exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q))
-    le-some-positive-rational-ℝ⁰⁺ =
-      map-tot-exists
-        ( λ (q , _) x<q → le-real-is-in-upper-cut-ℚ q (real-ℝ⁰⁺ x) x<q)
-        ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Addition on nonnegative real numbers
@@ -447,20 +378,6 @@ sim-zero-le-positive-rational-ℝ⁰⁺ x H =
         ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)))
 ```
 
-### Addition preserves strict inequality
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3) (w : ℝ⁰⁺ l4)
-  where
-
-  abstract
-    preserves-le-add-ℝ⁰⁺ :
-      le-ℝ⁰⁺ x y → le-ℝ⁰⁺ z w → le-ℝ⁰⁺ (x +ℝ⁰⁺ z) (y +ℝ⁰⁺ w)
-    preserves-le-add-ℝ⁰⁺ =
-      preserves-le-add-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z) (real-ℝ⁰⁺ w)
-```
-
 ### The canonical embedding of nonnegative rational numbers to nonnegative real numbers preserves addition
 
 ```agda
@@ -517,7 +434,6 @@ module _
       le-ℝ (real-ℝ⁰⁺ x) (real-ℚ q) → is-positive-ℚ q
     is-positive-le-nonnegative-real-ℚ x<q =
       is-positive-le-zero-ℚ
-        ( q)
         ( reflects-le-real-ℚ _ _
           ( concatenate-leq-le-ℝ _ _ _ (is-nonnegative-real-ℝ⁰⁺ x) x<q))
 ```
@@ -650,4 +566,14 @@ abstract
       ( λ z → leq-ℝ z y)
       ( left-unit-law-add-ℝ x)
       ( leq-transpose-right-diff-ℝ _ _ _ 0≤y-x)
+```
+
+### If a nonnegative real number `x` is less than or equal to a real number `y`, `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-leq-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁰⁺ x) y →
+    is-nonnegative-ℝ y
+  is-nonnegative-leq-ℝ⁰⁺ (x , 0≤x) y x≤y = transitive-leq-ℝ zero-ℝ x y x≤y 0≤x
 ```

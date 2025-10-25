@@ -263,7 +263,7 @@ abstract
               ( is-identity-right-conjugation-add-ℚ (p *ℚ p) q))
             ( refl)
             ( preserves-le-right-add-ℚ (p *ℚ p) _ _
-              ( neg-le-ℚ _ _
+              ( neg-le-ℚ
                 ( tr
                   ( le-ℚ _)
                   ( ap

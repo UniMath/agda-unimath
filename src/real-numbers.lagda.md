@@ -5,6 +5,7 @@
 ```agda
 module real-numbers where
 
+open import real-numbers.absolute-value-closed-intervals-real-numbers public
 open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
 open import real-numbers.addition-real-numbers public
@@ -14,6 +15,7 @@ open import real-numbers.arithmetically-located-dedekind-cuts public
 open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
+open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -24,11 +26,14 @@ open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-positive-real-numbers public
 open import real-numbers.inequality-real-numbers public
 open import real-numbers.inequality-upper-dedekind-real-numbers public
+open import real-numbers.infima-and-suprema-families-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
+open import real-numbers.limits-sequences-real-numbers public
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
@@ -63,6 +68,7 @@ open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public
 open import real-numbers.squares-real-numbers public
+open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public

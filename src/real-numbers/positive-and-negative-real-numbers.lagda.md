@@ -16,6 +16,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -78,4 +79,20 @@ abstract
 
 neg-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 neg-ℝ⁻ (x , is-neg-x) = (neg-ℝ x , neg-is-negative-ℝ x is-neg-x)
+```
+
+### If a nonnegative real number `x` is less than a real number `y`, `y` is positive
+
+```agda
+abstract
+  is-positive-le-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
+    is-positive-ℝ y
+  is-positive-le-ℝ⁰⁺ (x , 0≤x) y = concatenate-leq-le-ℝ zero-ℝ x y 0≤x
+
+  is-nonnegative-le-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
+    is-nonnegative-ℝ y
+  is-nonnegative-le-ℝ⁰⁺ x y x<y =
+    is-nonnegative-is-positive-ℝ (is-positive-le-ℝ⁰⁺ x y x<y)
 ```

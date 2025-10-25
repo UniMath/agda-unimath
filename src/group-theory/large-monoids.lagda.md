@@ -181,21 +181,22 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (M : Large-Monoid α β)
   where
 
-  raise-raise-Large-Monoid :
-    {l1 l2 l3 : Level} → (x : type-Large-Monoid M l1) →
-    raise-Large-Monoid M l2 (raise-Large-Monoid M l3 x) ＝
-    raise-Large-Monoid M (l2 ⊔ l3) x
-  raise-raise-Large-Monoid {l1} {l2} {l3} x =
-    inv
-      ( eq-sim-Large-Monoid M _ _
-        ( transitive-sim-Large-Monoid M
-          ( raise-Large-Monoid M (l2 ⊔ l3) x)
-          ( x)
-          ( raise-Large-Monoid M l2 (raise-Large-Monoid M l3 x))
-          ( transitive-sim-Large-Monoid M _ _ _
-            ( sim-raise-Large-Monoid M _ _)
-            ( sim-raise-Large-Monoid M _ _))
-          ( sim-raise-Large-Monoid' M _ _)))
+  abstract
+    raise-raise-Large-Monoid :
+      {l1 l2 l3 : Level} → (x : type-Large-Monoid M l1) →
+      raise-Large-Monoid M l2 (raise-Large-Monoid M l3 x) ＝
+      raise-Large-Monoid M (l2 ⊔ l3) x
+    raise-raise-Large-Monoid {l1} {l2} {l3} x =
+      inv
+        ( eq-sim-Large-Monoid M _ _
+          ( transitive-sim-Large-Monoid M
+            ( raise-Large-Monoid M (l2 ⊔ l3) x)
+            ( x)
+            ( raise-Large-Monoid M l2 (raise-Large-Monoid M l3 x))
+            ( transitive-sim-Large-Monoid M _ _ _
+              ( sim-raise-Large-Monoid M _ _)
+              ( sim-raise-Large-Monoid M _ _))
+            ( sim-raise-Large-Monoid' M _ _)))
 ```
 
 ### Raising the universe level of an element of a large monoid is the identity for lower universe levels

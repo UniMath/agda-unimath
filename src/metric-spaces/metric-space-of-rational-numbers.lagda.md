@@ -407,8 +407,6 @@ is-cauchy-approximation-rational-ℚ⁺ :
     rational-ℚ⁺
 is-cauchy-approximation-rational-ℚ⁺ ε δ =
   ( leq-le-ℚ
-    { rational-ℚ⁺ δ}
-    { rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
     ( transitive-le-ℚ
       ( rational-ℚ⁺ δ)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
@@ -418,8 +416,6 @@ is-cauchy-approximation-rational-ℚ⁺ ε δ =
         ( ε +ℚ⁺ δ))
       ( le-right-add-ℚ⁺ ε δ))) ,
   ( leq-le-ℚ
-    { rational-ℚ⁺ ε}
-    { rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
     ( transitive-le-ℚ
       ( rational-ℚ⁺ ε)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
@@ -444,9 +440,7 @@ is-zero-limit-rational-ℚ⁺ ε δ =
     { zero-ℚ}
     { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
     ( le-zero-is-positive-ℚ
-      ( rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ)))
-      ( is-positive-rational-ℚ⁺
-        (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
+      ( is-positive-rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
   ( leq-le-ℚ
     { rational-ℚ⁺ ε}
     { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}

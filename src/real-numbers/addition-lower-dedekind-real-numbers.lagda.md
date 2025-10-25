@@ -12,6 +12,8 @@ module real-numbers.addition-lower-dedekind-real-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -213,9 +215,7 @@ module _
   {l : Level} (x : lower-ℝ l)
   where
 
-  opaque
-    unfolding neg-ℚ
-
+  abstract
     right-unit-law-add-lower-ℝ : add-lower-ℝ x (lower-real-ℚ zero-ℚ) ＝ x
     right-unit-law-add-lower-ℝ =
       eq-sim-cut-lower-ℝ
@@ -231,8 +231,7 @@ module _
                   ( is-in-cut-diff-rational-ℚ⁺-lower-ℝ
                     ( x)
                     ( p)
-                    ( neg-ℚ q ,
-                      is-positive-le-zero-ℚ (neg-ℚ q) (neg-le-ℚ q zero-ℚ q<0))
+                    ( neg-ℚ⁻ (q , is-negative-le-zero-ℚ q<0))
                     ( p<x)))) ,
           (λ p p<x →
             elim-exists
@@ -241,12 +240,11 @@ module _
                 intro-exists
                   ( q , p -ℚ q)
                   ( q<x ,
-                    tr
-                      ( λ r → le-ℚ r zero-ℚ)
+                    binary-tr
+                      ( le-ℚ)
                       ( distributive-neg-diff-ℚ q p)
+                      ( neg-zero-ℚ)
                       ( neg-le-ℚ
-                        ( zero-ℚ)
-                        ( q -ℚ p)
                         ( backward-implication
                           ( iff-translate-diff-le-zero-ℚ p q)
                           ( p<q))) ,
