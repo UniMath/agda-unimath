@@ -207,7 +207,7 @@ module _
 
   compute-fiber-map-polynomial-endofunctor :
     (p@(a , y) : type-polynomial-endofunctor P Y) →
-    fiber (map-polynomial-endofunctor P f) (a , y) ≃
+    fiber (map-polynomial-endofunctor P f) p ≃
     ( (b : position-polynomial-endofunctor P a) → fiber f (y b))
   compute-fiber-map-polynomial-endofunctor (a , y) =
     equivalence-reasoning
