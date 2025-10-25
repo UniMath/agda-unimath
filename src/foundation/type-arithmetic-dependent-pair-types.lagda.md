@@ -304,7 +304,7 @@ module _
 
   interchange-Σ-Σ-Σ :
     Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y))) ≃
-    Σ A (λ x → Σ (C x) (λ z → Σ (B x) λ y → D x y z))
+    Σ A (λ x → Σ (C x) (λ z → Σ (B x) (λ y → D x y z)))
   interchange-Σ-Σ-Σ =
     associative-Σ' A C (λ x z → Σ (B x) λ y → D x y z) ∘e
     interchange-Σ-Σ ∘e

@@ -294,6 +294,7 @@ open import foundation.large-similarity-relations public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
+open import foundation.lifts-morphisms-arrows public
 open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
@@ -496,6 +497,7 @@ open import foundation.univalence public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public
+open import foundation.universal-property-cartesian-morphisms-arrows public
 open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-contractible-types public
 open import foundation.universal-property-coproduct-types public
