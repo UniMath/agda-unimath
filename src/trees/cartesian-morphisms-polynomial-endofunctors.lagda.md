@@ -138,7 +138,7 @@ module _
     shape-polynomial-endofunctor P → shape-polynomial-endofunctor Q
   shape-cartesian-hom-polynomial-endofunctor =
     shape-hom-polynomial-endofunctor P Q
-      hom-cartesian-hom-polynomial-endofunctor
+      ( hom-cartesian-hom-polynomial-endofunctor)
 
   position-cartesian-hom-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor P) →
