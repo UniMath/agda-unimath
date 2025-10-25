@@ -33,7 +33,7 @@ open import set-theory.inequality-increasing-binary-sequences
 
 Given an [increasing binary sequence](set-theory.increasing-binary-sequences.md)
 `n`, then another increasing binary sequence `x` is
-{{#concept "bounded" Disambiguation="increasing binary sequence by increasing binary sequence" Agda=bounded-ℕ∞↑}}
+{{#concept "bounded" Disambiguation="increasing binary sequence by increasing binary sequence" Agda=bounded-ℕ∞↗}}
 by `n` if `x ≤ n`.
 
 ## Definitions
@@ -41,156 +41,156 @@ by `n` if `x ≤ n`.
 ### Bounded increasing binary sequences
 
 ```agda
-bounded-ℕ∞↑ : (n : ℕ∞↑) → UU lzero
-bounded-ℕ∞↑ n = Σ ℕ∞↑ (_≤-ℕ∞↑ n)
+bounded-ℕ∞↗ : (n : ℕ∞↗) → UU lzero
+bounded-ℕ∞↗ n = Σ ℕ∞↗ (_≤-ℕ∞↗ n)
 
 module _
-  (n : ℕ∞↑) (k : bounded-ℕ∞↑ n)
+  (n : ℕ∞↗) (k : bounded-ℕ∞↗ n)
   where
 
-  increasing-binary-sequence-bounded-ℕ∞↑ : ℕ∞↑
-  increasing-binary-sequence-bounded-ℕ∞↑ = pr1 k
+  increasing-binary-sequence-bounded-ℕ∞↗ : ℕ∞↗
+  increasing-binary-sequence-bounded-ℕ∞↗ = pr1 k
 
-  sequence-bounded-ℕ∞↑ : ℕ → bool
-  sequence-bounded-ℕ∞↑ =
-    sequence-ℕ∞↑ increasing-binary-sequence-bounded-ℕ∞↑
+  sequence-bounded-ℕ∞↗ : ℕ → bool
+  sequence-bounded-ℕ∞↗ =
+    sequence-ℕ∞↗ increasing-binary-sequence-bounded-ℕ∞↗
 
-  is-increasing-sequence-bounded-ℕ∞↑ :
-    is-increasing-binary-sequence sequence-bounded-ℕ∞↑
-  is-increasing-sequence-bounded-ℕ∞↑ =
-    is-increasing-sequence-ℕ∞↑ increasing-binary-sequence-bounded-ℕ∞↑
+  is-increasing-sequence-bounded-ℕ∞↗ :
+    is-increasing-binary-sequence sequence-bounded-ℕ∞↗
+  is-increasing-sequence-bounded-ℕ∞↗ =
+    is-increasing-sequence-ℕ∞↗ increasing-binary-sequence-bounded-ℕ∞↗
 
-  is-strictly-bounded-below-bounded-ℕ∞↑ :
-    increasing-binary-sequence-bounded-ℕ∞↑ ≤-ℕ∞↑ n
-  is-strictly-bounded-below-bounded-ℕ∞↑ = pr2 k
+  is-strictly-bounded-below-bounded-ℕ∞↗ :
+    increasing-binary-sequence-bounded-ℕ∞↗ ≤-ℕ∞↗ n
+  is-strictly-bounded-below-bounded-ℕ∞↗ = pr2 k
 
 abstract
-  is-set-bounded-ℕ∞↑ : (n : ℕ∞↑) → is-set (bounded-ℕ∞↑ n)
-  is-set-bounded-ℕ∞↑ n =
-    is-set-type-subtype (λ k → leq-prop-ℕ∞↑ k n) is-set-ℕ∞↑
+  is-set-bounded-ℕ∞↗ : (n : ℕ∞↗) → is-set (bounded-ℕ∞↗ n)
+  is-set-bounded-ℕ∞↗ n =
+    is-set-type-subtype (λ k → leq-prop-ℕ∞↗ k n) is-set-ℕ∞↗
 ```
 
 ### Successor-bounded increasing binary sequences
 
 ```agda
-succ-bounded-ℕ∞↑ : (n : ℕ∞↑) → UU lzero
-succ-bounded-ℕ∞↑ n = Σ ℕ∞↑ (λ k → (succ-ℕ∞↑ k) ≤-ℕ∞↑ n)
+succ-bounded-ℕ∞↗ : (n : ℕ∞↗) → UU lzero
+succ-bounded-ℕ∞↗ n = Σ ℕ∞↗ (λ k → (succ-ℕ∞↗ k) ≤-ℕ∞↗ n)
 
 module _
-  (n : ℕ∞↑) (k : succ-bounded-ℕ∞↑ n)
+  (n : ℕ∞↗) (k : succ-bounded-ℕ∞↗ n)
   where
 
-  increasing-binary-sequence-succ-bounded-ℕ∞↑ : ℕ∞↑
-  increasing-binary-sequence-succ-bounded-ℕ∞↑ = pr1 k
+  increasing-binary-sequence-succ-bounded-ℕ∞↗ : ℕ∞↗
+  increasing-binary-sequence-succ-bounded-ℕ∞↗ = pr1 k
 
-  sequence-succ-bounded-ℕ∞↑ : ℕ → bool
-  sequence-succ-bounded-ℕ∞↑ =
-    sequence-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑
+  sequence-succ-bounded-ℕ∞↗ : ℕ → bool
+  sequence-succ-bounded-ℕ∞↗ =
+    sequence-ℕ∞↗ increasing-binary-sequence-succ-bounded-ℕ∞↗
 
-  is-increasing-sequence-succ-bounded-ℕ∞↑ :
-    is-increasing-binary-sequence sequence-succ-bounded-ℕ∞↑
-  is-increasing-sequence-succ-bounded-ℕ∞↑ =
-    is-increasing-sequence-ℕ∞↑
-      ( increasing-binary-sequence-succ-bounded-ℕ∞↑)
+  is-increasing-sequence-succ-bounded-ℕ∞↗ :
+    is-increasing-binary-sequence sequence-succ-bounded-ℕ∞↗
+  is-increasing-sequence-succ-bounded-ℕ∞↗ =
+    is-increasing-sequence-ℕ∞↗
+      ( increasing-binary-sequence-succ-bounded-ℕ∞↗)
 
-  is-succ-bounded-succ-bounded-ℕ∞↑ :
-    succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
-  is-succ-bounded-succ-bounded-ℕ∞↑ = pr2 k
+  is-succ-bounded-succ-bounded-ℕ∞↗ :
+    succ-ℕ∞↗ increasing-binary-sequence-succ-bounded-ℕ∞↗ ≤-ℕ∞↗ n
+  is-succ-bounded-succ-bounded-ℕ∞↗ = pr2 k
 
-  bounded-succ-succ-bounded-ℕ∞↑ : bounded-ℕ∞↑ n
-  bounded-succ-succ-bounded-ℕ∞↑ =
-    ( succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑ ,
-      is-succ-bounded-succ-bounded-ℕ∞↑)
+  bounded-succ-succ-bounded-ℕ∞↗ : bounded-ℕ∞↗ n
+  bounded-succ-succ-bounded-ℕ∞↗ =
+    ( succ-ℕ∞↗ increasing-binary-sequence-succ-bounded-ℕ∞↗ ,
+      is-succ-bounded-succ-bounded-ℕ∞↗)
 
-  is-strictly-bounded-below-succ-bounded-ℕ∞↑ :
-    increasing-binary-sequence-succ-bounded-ℕ∞↑ ≤-ℕ∞↑ n
-  is-strictly-bounded-below-succ-bounded-ℕ∞↑ =
-    transitive-leq-ℕ∞↑
-      ( increasing-binary-sequence-succ-bounded-ℕ∞↑)
-      ( succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑)
+  is-strictly-bounded-below-succ-bounded-ℕ∞↗ :
+    increasing-binary-sequence-succ-bounded-ℕ∞↗ ≤-ℕ∞↗ n
+  is-strictly-bounded-below-succ-bounded-ℕ∞↗ =
+    transitive-leq-ℕ∞↗
+      ( increasing-binary-sequence-succ-bounded-ℕ∞↗)
+      ( succ-ℕ∞↗ increasing-binary-sequence-succ-bounded-ℕ∞↗)
       ( n)
-      ( is-succ-bounded-succ-bounded-ℕ∞↑)
-      ( leq-succ-ℕ∞↑ increasing-binary-sequence-succ-bounded-ℕ∞↑)
+      ( is-succ-bounded-succ-bounded-ℕ∞↗)
+      ( leq-succ-ℕ∞↗ increasing-binary-sequence-succ-bounded-ℕ∞↗)
 
-  bounded-succ-bounded-ℕ∞↑ : bounded-ℕ∞↑ n
-  bounded-succ-bounded-ℕ∞↑ =
-    ( increasing-binary-sequence-succ-bounded-ℕ∞↑ ,
-      is-strictly-bounded-below-succ-bounded-ℕ∞↑)
+  bounded-succ-bounded-ℕ∞↗ : bounded-ℕ∞↗ n
+  bounded-succ-bounded-ℕ∞↗ =
+    ( increasing-binary-sequence-succ-bounded-ℕ∞↗ ,
+      is-strictly-bounded-below-succ-bounded-ℕ∞↗)
 
 abstract
-  is-set-succ-bounded-ℕ∞↑ :
-    (n : ℕ∞↑) → is-set (succ-bounded-ℕ∞↑ n)
-  is-set-succ-bounded-ℕ∞↑ n =
+  is-set-succ-bounded-ℕ∞↗ :
+    (n : ℕ∞↗) → is-set (succ-bounded-ℕ∞↗ n)
+  is-set-succ-bounded-ℕ∞↗ n =
     is-set-type-subtype
-      ( λ k → leq-prop-ℕ∞↑ (succ-ℕ∞↑ k) n)
-      ( is-set-ℕ∞↑)
+      ( λ k → leq-prop-ℕ∞↗ (succ-ℕ∞↗ k) n)
+      ( is-set-ℕ∞↗)
 ```
 
 ### Inequality on bounded increasing binary sequences
 
 ```agda
 module _
-  (n : ℕ∞↑)
+  (n : ℕ∞↗)
   where
 
-  bounded-ℕ∞↑-Poset : Poset lzero lzero
-  bounded-ℕ∞↑-Poset = poset-Subposet ℕ∞↑-Poset (λ k → leq-prop-ℕ∞↑ k n)
+  bounded-ℕ∞↗-Poset : Poset lzero lzero
+  bounded-ℕ∞↗-Poset = poset-Subposet ℕ∞↗-Poset (λ k → leq-prop-ℕ∞↗ k n)
 
-  leq-bounded-ℕ∞↑ : (x y : bounded-ℕ∞↑ n) → UU lzero
-  leq-bounded-ℕ∞↑ = leq-Poset bounded-ℕ∞↑-Poset
+  leq-bounded-ℕ∞↗ : (x y : bounded-ℕ∞↗ n) → UU lzero
+  leq-bounded-ℕ∞↗ = leq-Poset bounded-ℕ∞↗-Poset
 
-  leq-prop-bounded-ℕ∞↑ : (x y : bounded-ℕ∞↑ n) → Prop lzero
-  leq-prop-bounded-ℕ∞↑ = leq-prop-Poset bounded-ℕ∞↑-Poset
+  leq-prop-bounded-ℕ∞↗ : (x y : bounded-ℕ∞↗ n) → Prop lzero
+  leq-prop-bounded-ℕ∞↗ = leq-prop-Poset bounded-ℕ∞↗-Poset
 
-  refl-leq-bounded-ℕ∞↑ : (x : bounded-ℕ∞↑ n) → leq-bounded-ℕ∞↑ x x
-  refl-leq-bounded-ℕ∞↑ = refl-leq-Poset bounded-ℕ∞↑-Poset
+  refl-leq-bounded-ℕ∞↗ : (x : bounded-ℕ∞↗ n) → leq-bounded-ℕ∞↗ x x
+  refl-leq-bounded-ℕ∞↗ = refl-leq-Poset bounded-ℕ∞↗-Poset
 
-  transitive-leq-bounded-ℕ∞↑ :
-    (x y z : bounded-ℕ∞↑ n) →
-    leq-bounded-ℕ∞↑ y z → leq-bounded-ℕ∞↑ x y → leq-bounded-ℕ∞↑ x z
-  transitive-leq-bounded-ℕ∞↑ = transitive-leq-Poset bounded-ℕ∞↑-Poset
+  transitive-leq-bounded-ℕ∞↗ :
+    (x y z : bounded-ℕ∞↗ n) →
+    leq-bounded-ℕ∞↗ y z → leq-bounded-ℕ∞↗ x y → leq-bounded-ℕ∞↗ x z
+  transitive-leq-bounded-ℕ∞↗ = transitive-leq-Poset bounded-ℕ∞↗-Poset
 
-  antisymmetric-leq-bounded-ℕ∞↑ :
-    (x y : bounded-ℕ∞↑ n) → leq-bounded-ℕ∞↑ x y → leq-bounded-ℕ∞↑ y x → x ＝ y
-  antisymmetric-leq-bounded-ℕ∞↑ = antisymmetric-leq-Poset bounded-ℕ∞↑-Poset
+  antisymmetric-leq-bounded-ℕ∞↗ :
+    (x y : bounded-ℕ∞↗ n) → leq-bounded-ℕ∞↗ x y → leq-bounded-ℕ∞↗ y x → x ＝ y
+  antisymmetric-leq-bounded-ℕ∞↗ = antisymmetric-leq-Poset bounded-ℕ∞↗-Poset
 ```
 
 ### The zero element
 
 ```agda
-zero-bounded-ℕ∞↑ : (n : ℕ∞↑) → bounded-ℕ∞↑ n
-zero-bounded-ℕ∞↑ n = (zero-ℕ∞↑ , leq-zero-ℕ∞↑ n)
+zero-bounded-ℕ∞↗ : (n : ℕ∞↗) → bounded-ℕ∞↗ n
+zero-bounded-ℕ∞↗ n = (zero-ℕ∞↗ , leq-zero-ℕ∞↗ n)
 ```
 
 ### The successor function
 
 ```agda
-inclusion-bounded-succ-bounded-ℕ∞↑ :
-  (n : ℕ∞↑) → bounded-ℕ∞↑ n → bounded-ℕ∞↑ (succ-ℕ∞↑ n)
-inclusion-bounded-succ-bounded-ℕ∞↑ n x =
-  ( increasing-binary-sequence-bounded-ℕ∞↑ n x ,
-    transitive-leq-ℕ∞↑
-      ( increasing-binary-sequence-bounded-ℕ∞↑ n x)
+inclusion-bounded-succ-bounded-ℕ∞↗ :
+  (n : ℕ∞↗) → bounded-ℕ∞↗ n → bounded-ℕ∞↗ (succ-ℕ∞↗ n)
+inclusion-bounded-succ-bounded-ℕ∞↗ n x =
+  ( increasing-binary-sequence-bounded-ℕ∞↗ n x ,
+    transitive-leq-ℕ∞↗
+      ( increasing-binary-sequence-bounded-ℕ∞↗ n x)
       ( n)
-      ( succ-ℕ∞↑ n)
-      ( leq-succ-ℕ∞↑ n)
-      ( is-strictly-bounded-below-bounded-ℕ∞↑ n x))
+      ( succ-ℕ∞↗ n)
+      ( leq-succ-ℕ∞↗ n)
+      ( is-strictly-bounded-below-bounded-ℕ∞↗ n x))
 
-inclusion-succ-bounded-ℕ∞↑ :
-  (n : ℕ∞↑) → bounded-ℕ∞↑ n → bounded-ℕ∞↑ (succ-ℕ∞↑ n)
-inclusion-succ-bounded-ℕ∞↑ n x =
-  ( succ-ℕ∞↑ (increasing-binary-sequence-bounded-ℕ∞↑ n x) ,
-    preserves-order-succ-ℕ∞↑
-      ( increasing-binary-sequence-bounded-ℕ∞↑ n x)
+inclusion-succ-bounded-ℕ∞↗ :
+  (n : ℕ∞↗) → bounded-ℕ∞↗ n → bounded-ℕ∞↗ (succ-ℕ∞↗ n)
+inclusion-succ-bounded-ℕ∞↗ n x =
+  ( succ-ℕ∞↗ (increasing-binary-sequence-bounded-ℕ∞↗ n x) ,
+    preserves-order-succ-ℕ∞↗
+      ( increasing-binary-sequence-bounded-ℕ∞↗ n x)
       ( n)
-      ( is-strictly-bounded-below-bounded-ℕ∞↑ n x))
+      ( is-strictly-bounded-below-bounded-ℕ∞↗ n x))
 ```
 
 ### Every increasing binary sequence is bounded by itself
 
 ```agda
-self-bounded-ℕ∞↑ : (n : ℕ∞↑) → bounded-ℕ∞↑ n
-self-bounded-ℕ∞↑ n = (n , refl-leq-ℕ∞↑ n)
+self-bounded-ℕ∞↗ : (n : ℕ∞↗) → bounded-ℕ∞↗ n
+self-bounded-ℕ∞↗ n = (n , refl-leq-ℕ∞↗ n)
 ```
 
 ## Properties
@@ -198,24 +198,24 @@ self-bounded-ℕ∞↑ n = (n , refl-leq-ℕ∞↑ n)
 ### Bounded increasing binary sequences have tight apartness
 
 ```agda
-bounded-ℕ∞↑-Type-With-Tight-Apartness :
-  ℕ∞↑ → Type-With-Tight-Apartness lzero lzero
-bounded-ℕ∞↑-Type-With-Tight-Apartness n =
+bounded-ℕ∞↗-Type-With-Tight-Apartness :
+  ℕ∞↗ → Type-With-Tight-Apartness lzero lzero
+bounded-ℕ∞↗-Type-With-Tight-Apartness n =
   subtype-Type-With-Tight-Apartness
-    ( ℕ∞↑-Type-With-Tight-Apartness)
-    ( λ k → leq-prop-ℕ∞↑ k n)
+    ( ℕ∞↗-Type-With-Tight-Apartness)
+    ( λ k → leq-prop-ℕ∞↗ k n)
 ```
 
 ### Bounded increasing binary sequences have double negation stable equality
 
 ```agda
-has-double-negation-stable-equality-bounded-ℕ∞↑ :
-  (n : ℕ∞↑) → has-double-negation-stable-equality (bounded-ℕ∞↑ n)
-has-double-negation-stable-equality-bounded-ℕ∞↑ n =
+has-double-negation-stable-equality-bounded-ℕ∞↗ :
+  (n : ℕ∞↗) → has-double-negation-stable-equality (bounded-ℕ∞↗ n)
+has-double-negation-stable-equality-bounded-ℕ∞↗ n =
   has-double-negation-stable-equality-type-Type-With-Tight-Apartness
-    ( bounded-ℕ∞↑-Type-With-Tight-Apartness n)
+    ( bounded-ℕ∞↗-Type-With-Tight-Apartness n)
 ```
 
-### If `n` is finite then `bounded-ℕ∞↑ n` is a finite set with `n + 1` elements
+### If `n` is finite then `bounded-ℕ∞↗ n` is a finite set with `n + 1` elements
 
 > This remains to be formalized.

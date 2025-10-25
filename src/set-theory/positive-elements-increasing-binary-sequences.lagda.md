@@ -37,7 +37,7 @@ open import set-theory.strict-lower-bounds-increasing-binary-sequences
 
 An [increasing binary sequence](set-theory.increasing-binary-sequences.md) `x`
 is
-{{#concept "positive" Disambiguation="element of the type of increasing binary sequences" Agda=is-positive-ℕ∞↑ Agda=ℕ∞↑₊}}
+{{#concept "positive" Disambiguation="element of the type of increasing binary sequences" Agda=is-positive-ℕ∞↗ Agda=ℕ∞↗₊}}
 if `x₀` is false.
 
 ## Definitions
@@ -45,28 +45,28 @@ if `x₀` is false.
 ### The predicate on increasing binary sequences of being positive
 
 ```agda
-is-positive-ℕ∞↑ : ℕ∞↑ → UU lzero
-is-positive-ℕ∞↑ = is-strictly-bounded-below-ℕ∞↑ 0
+is-positive-ℕ∞↗ : ℕ∞↗ → UU lzero
+is-positive-ℕ∞↗ = is-strictly-bounded-below-ℕ∞↗ 0
 
 abstract
-  is-prop-is-positive-ℕ∞↑ :
-    (x : ℕ∞↑) → is-prop (is-positive-ℕ∞↑ x)
-  is-prop-is-positive-ℕ∞↑ =
-    is-prop-is-strictly-bounded-below-ℕ∞↑ 0
+  is-prop-is-positive-ℕ∞↗ :
+    (x : ℕ∞↗) → is-prop (is-positive-ℕ∞↗ x)
+  is-prop-is-positive-ℕ∞↗ =
+    is-prop-is-strictly-bounded-below-ℕ∞↗ 0
 
-is-positive-prop-ℕ∞↑ : ℕ∞↑ → Prop lzero
-is-positive-prop-ℕ∞↑ =
-  is-strictly-bounded-below-prop-ℕ∞↑ 0
+is-positive-prop-ℕ∞↗ : ℕ∞↗ → Prop lzero
+is-positive-prop-ℕ∞↗ =
+  is-strictly-bounded-below-prop-ℕ∞↗ 0
 ```
 
 ### The type of positive increasing binary sequences
 
 ```agda
-positive-ℕ∞↑ : UU lzero
-positive-ℕ∞↑ = Σ ℕ∞↑ is-positive-ℕ∞↑
+positive-ℕ∞↗ : UU lzero
+positive-ℕ∞↗ = Σ ℕ∞↗ is-positive-ℕ∞↗
 
-ℕ∞↑₊ : UU lzero
-ℕ∞↑₊ = positive-ℕ∞↑
+ℕ∞↗₊ : UU lzero
+ℕ∞↗₊ = positive-ℕ∞↗
 ```
 
 ## Properties
@@ -74,11 +74,11 @@ positive-ℕ∞↑ = Σ ℕ∞↑ is-positive-ℕ∞↑
 ### If an increasing binary sequence is strictly bounded below, then it is positive
 
 ```agda
-is-positive-is-strictly-bounded-below-ℕ∞↑ :
-  (x : ℕ∞↑) (n : ℕ) →
-  is-strictly-bounded-below-ℕ∞↑ n x → is-positive-ℕ∞↑ x
-is-positive-is-strictly-bounded-below-ℕ∞↑ x 0 p = p
-is-positive-is-strictly-bounded-below-ℕ∞↑ x (succ-ℕ n) p =
-  is-positive-is-strictly-bounded-below-ℕ∞↑ x n
-    ( is-strictly-bounded-below-is-strictly-bounded-below-succ-ℕ∞↑ x n p)
+is-positive-is-strictly-bounded-below-ℕ∞↗ :
+  (x : ℕ∞↗) (n : ℕ) →
+  is-strictly-bounded-below-ℕ∞↗ n x → is-positive-ℕ∞↗ x
+is-positive-is-strictly-bounded-below-ℕ∞↗ x 0 p = p
+is-positive-is-strictly-bounded-below-ℕ∞↗ x (succ-ℕ n) p =
+  is-positive-is-strictly-bounded-below-ℕ∞↗ x n
+    ( is-strictly-bounded-below-is-strictly-bounded-below-succ-ℕ∞↗ x n p)
 ```
