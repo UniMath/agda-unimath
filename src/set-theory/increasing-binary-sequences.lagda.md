@@ -237,7 +237,7 @@ abstract
   neq-succ-zero-ℕ∞↗ p = neq-false-true-bool (Eq-eq-ℕ∞↗ p 0)
 ```
 
-### The constructor is a section of the destructor function
+### The constructor is a section of the deconstructor function
 
 ```agda
 is-section-cons-ℕ∞↗ : is-section decons-ℕ∞↗ cons-ℕ∞↗

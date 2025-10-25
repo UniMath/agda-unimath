@@ -77,7 +77,7 @@ is-decidable-is-strictly-bounded-below-ℕ∞↗ n x =
 
 ## Properties
 
-### If an increasing binary sequence is strictly bounded below by `𝑛+1` then it strictly bounded below by `𝑛`
+### If an increasing binary sequence is strictly bounded below by `𝑛+1` then it is strictly bounded below by `𝑛`
 
 ```agda
 is-strictly-bounded-below-is-strictly-bounded-below-succ-ℕ∞↗ :
