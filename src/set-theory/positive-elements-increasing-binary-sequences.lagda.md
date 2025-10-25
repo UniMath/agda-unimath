@@ -49,11 +49,14 @@ is-positive-ℕ∞↑ : ℕ∞↑ → UU lzero
 is-positive-ℕ∞↑ = is-strictly-bounded-below-ℕ∞↑ 0
 
 abstract
-  is-prop-is-positive-ℕ∞↑ : (x : ℕ∞↑) → is-prop (is-positive-ℕ∞↑ x)
-  is-prop-is-positive-ℕ∞↑ = is-prop-is-strictly-bounded-below-ℕ∞↑ 0
+  is-prop-is-positive-ℕ∞↑ :
+    (x : ℕ∞↑) → is-prop (is-positive-ℕ∞↑ x)
+  is-prop-is-positive-ℕ∞↑ =
+    is-prop-is-strictly-bounded-below-ℕ∞↑ 0
 
 is-positive-prop-ℕ∞↑ : ℕ∞↑ → Prop lzero
-is-positive-prop-ℕ∞↑ = is-strictly-bounded-below-prop-ℕ∞↑ 0
+is-positive-prop-ℕ∞↑ =
+  is-strictly-bounded-below-prop-ℕ∞↑ 0
 ```
 
 ### The type of positive increasing binary sequences
@@ -72,7 +75,8 @@ positive-ℕ∞↑ = Σ ℕ∞↑ is-positive-ℕ∞↑
 
 ```agda
 is-positive-is-strictly-bounded-below-ℕ∞↑ :
-  (x : ℕ∞↑) (n : ℕ) → is-strictly-bounded-below-ℕ∞↑ n x → is-positive-ℕ∞↑ x
+  (x : ℕ∞↑) (n : ℕ) →
+  is-strictly-bounded-below-ℕ∞↑ n x → is-positive-ℕ∞↑ x
 is-positive-is-strictly-bounded-below-ℕ∞↑ x 0 p = p
 is-positive-is-strictly-bounded-below-ℕ∞↑ x (succ-ℕ n) p =
   is-positive-is-strictly-bounded-below-ℕ∞↑ x n

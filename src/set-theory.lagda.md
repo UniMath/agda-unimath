@@ -68,7 +68,7 @@ open import set-theory.uncountable-sets public
 
 ## See also
 
-- The [trees](trees.md) namespace
+- The [`trees`](trees.md) namespace
 
 ## References
 

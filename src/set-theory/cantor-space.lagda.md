@@ -47,12 +47,15 @@ tight-apartness-relation-cantor-space :
   Tight-Apartness-Relation lzero cantor-space
 tight-apartness-relation-cantor-space =
   tight-apartness-relation-function-into-Type-With-Tight-Apartness
-    ℕ
-    bool-Type-With-Tight-Apartness
+    ( ℕ)
+    ( bool-Type-With-Tight-Apartness)
 
-cantor-space-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+cantor-space-Type-With-Tight-Apartness :
+  Type-With-Tight-Apartness lzero lzero
 cantor-space-Type-With-Tight-Apartness =
-  function-into-Type-With-Tight-Apartness ℕ bool-Type-With-Tight-Apartness
+  function-into-Type-With-Tight-Apartness
+    ( ℕ)
+    ( bool-Type-With-Tight-Apartness)
 ```
 
 ### The cantor space has double negation stable equality

@@ -45,27 +45,34 @@ by a [natural number](elementary-number-theory.natural-numbers.md) `n : ℕ` if
 ### Strict finite boundedness below of increasing binary sequences
 
 ```agda
-is-strictly-bounded-below-decidable-prop-ℕ∞↑ : ℕ → ℕ∞↑ → Decidable-Prop lzero
+is-strictly-bounded-below-decidable-prop-ℕ∞↑ :
+  ℕ → ℕ∞↑ → Decidable-Prop lzero
 is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x =
   is-false-Decidable-Prop (sequence-ℕ∞↑ x n)
 
 is-strictly-bounded-below-prop-ℕ∞↑ : ℕ → ℕ∞↑ → Prop lzero
 is-strictly-bounded-below-prop-ℕ∞↑ n x =
-  prop-Decidable-Prop (is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
+  prop-Decidable-Prop
+    ( is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
 
 is-strictly-bounded-below-ℕ∞↑ : ℕ → ℕ∞↑ → UU lzero
 is-strictly-bounded-below-ℕ∞↑ x n =
-  type-Decidable-Prop (is-strictly-bounded-below-decidable-prop-ℕ∞↑ x n)
+  type-Decidable-Prop
+    ( is-strictly-bounded-below-decidable-prop-ℕ∞↑ x n)
 
 is-prop-is-strictly-bounded-below-ℕ∞↑ :
-  (n : ℕ) (x : ℕ∞↑) → is-prop (is-strictly-bounded-below-ℕ∞↑ n x)
+  (n : ℕ) (x : ℕ∞↑) →
+  is-prop (is-strictly-bounded-below-ℕ∞↑ n x)
 is-prop-is-strictly-bounded-below-ℕ∞↑ n x =
-  is-prop-type-Decidable-Prop (is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
+  is-prop-type-Decidable-Prop
+    ( is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
 
 is-decidable-is-strictly-bounded-below-ℕ∞↑ :
-  (n : ℕ) (x : ℕ∞↑) → is-decidable (is-strictly-bounded-below-ℕ∞↑ n x)
+  (n : ℕ) (x : ℕ∞↑) →
+  is-decidable (is-strictly-bounded-below-ℕ∞↑ n x)
 is-decidable-is-strictly-bounded-below-ℕ∞↑ n x =
-  is-decidable-Decidable-Prop (is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
+  is-decidable-Decidable-Prop
+    ( is-strictly-bounded-below-decidable-prop-ℕ∞↑ n x)
 ```
 
 ## Properties
