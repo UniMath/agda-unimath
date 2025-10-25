@@ -45,7 +45,7 @@ A {{#concept "finite probability space" Agda=Finite-Probability-Space}} is a
 
 Any finite probability space is [inhabited](foundation.inhabited-types.md).
 
-Our definitions follows {{#cite Babai00}}, although, there it is assumed that
+Our definitions follows {{#cite Babai00}}, except, there it is assumed that
 the underlying type is [nonempty](foundation-core.empty-types.md), but this
 follows from the condition of having
 [total measure](finite-probability-theory.positive-distributions-on-finite-types.md)
