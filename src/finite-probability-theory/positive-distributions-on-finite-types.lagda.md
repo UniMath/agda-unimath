@@ -28,10 +28,13 @@ open import univalent-combinatorics.finite-types
 
 A
 {{#concept "positive distribution" Disambiguation="on a finite type" Agda=positive-distribution-Finite-Type}}
-on a [finite type](univalent-combinatorics.finite-types.md) is a function into
-the [positive real numbers](real-numbers.positive-real-numbers.md).
-
-The **total measure** of a positive-distribution `μ` on a finite type `Ω` is the
+on a [finite type](univalent-combinatorics.finite-types.md) `Ω` is a function
+into the [positive real numbers](real-numbers.positive-real-numbers.md),
+`μ : Ω → ℝ⁺`. We interpret the type `Ω` as the collection of _atomic events_,
+and `μ(x)` as the (unnormalized) _probability_ that the atomic event `x` will
+occur. Note that for positive distributions no atomic event can be _impossible_
+since `μ(x)` is always strictly greater than `0`. The **total measure** of a
+positive distribution `μ` on a finite type `Ω` is the
 [sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
 
 $$
