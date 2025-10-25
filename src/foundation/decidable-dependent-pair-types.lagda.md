@@ -53,7 +53,7 @@ module _
   is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
 ```
 
-### Dependent sums of a uniformly decidable family of types
+### Dependent sums of uniformly decidable families of types
 
 ```agda
 is-decidable-Σ-uniformly-decidable-family :
