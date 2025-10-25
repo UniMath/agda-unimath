@@ -210,12 +210,12 @@ module _
       fiber (map-polynomial-endofunctor P f) (a , y)
       ≃ fiber (postcomp (position-polynomial-endofunctor P a) f) y
         by
-          compute-fiber-tot
-            ( λ a → postcomp (position-polynomial-endofunctor P a) f)
-            ( a , y)
+        compute-fiber-tot
+          ( λ a → postcomp (position-polynomial-endofunctor P a) f)
+          ( a , y)
       ≃ ((b : position-polynomial-endofunctor P a) → fiber f (y b))
         by
-          inv-compute-Π-fiber-postcomp (position-polynomial-endofunctor P a) f y
+        inv-compute-Π-fiber-postcomp (position-polynomial-endofunctor P a) f y
 ```
 
 ## See also
