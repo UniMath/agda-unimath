@@ -298,10 +298,8 @@ retract-cantor-space-ℕ∞↗ = (sequence-ℕ∞↗ , retraction-sequence-ℕ�
 abstract
   preserves-order-ℕ∞↗ :
     {x : ℕ∞↗} → preserves-order-Poset ℕ-Poset bool-Poset (sequence-ℕ∞↗ x)
-  preserves-order-ℕ∞↗ {x} =
-    preserves-order-ind-ℕ-Poset bool-Poset
-      ( sequence-ℕ∞↗ x)
-      ( is-increasing-sequence-ℕ∞↗ x)
+  preserves-order-ℕ∞↗ {x , p} =
+    preserves-order-ind-ℕ-Poset bool-Poset x p
 
 abstract
   is-increasing-preserves-order-binary-sequence :

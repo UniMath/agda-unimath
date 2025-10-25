@@ -1,7 +1,7 @@
 # Decidability of dependents sums over increasing binary sequences
 
 ```agda
-module set-theory.decidability-dependent-pair-types-over-increasing-binary-sequences where
+module set-theory.decidable-dependent-pair-types-over-increasing-binary-sequences where
 ```
 
 <details><summary>Imports</summary>
@@ -87,9 +87,9 @@ abstract
       ( inv
         ( ap
           ( or-bool (p (increasing-binary-sequence-ℕ (succ-ℕ n))))
-          ( ap (λ x → pr1 x n) r ∙
-            is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ n) ∙
-            right-unit-law-or-bool)) ∙
+          ( ( ap (λ x → pr1 x n) r) ∙
+            ( is-strictly-bounded-below-increasing-binary-sequence-succ-ℕ n)) ∙
+          ( right-unit-law-or-bool))) ∙
       ( ap (λ x → pr1 x (succ-ℕ n)) r) ∙
       ( is-finitely-bounded-increasing-binary-sequence-ℕ n)
 
