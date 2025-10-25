@@ -322,23 +322,23 @@ module _
         Σ (P₁ a → X) (λ x' → coherence-square-maps (tr Q₁ p) (α₁ a) x x'))
 
   compute-fiber-type-hom-polynomial-endofunctor :
-    (c : Q₀) (x : Q₁ c → X) →
-    fiber (type-hom-polynomial-endofunctor P Q α) (c , x) ≃
+    (q@(c , x) : type-polynomial-endofunctor Q X) →
+    fiber (type-hom-polynomial-endofunctor P Q α) q ≃
     fiber-type-hom-polynomial-endofunctor c x
-  compute-fiber-type-hom-polynomial-endofunctor c x =
+  compute-fiber-type-hom-polynomial-endofunctor q@(c , x) =
     equivalence-reasoning
-      fiber (type-hom-polynomial-endofunctor P Q α {X = X}) (c , x)
+      fiber (type-hom-polynomial-endofunctor P Q α {X = X}) q
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →
             fiber
               ( precomp (α₁ a) X)
-              ( inv-tr (λ c' → pr2 Q c' → X) p x))
+              ( inv-tr (λ c' → Q₁ c' → X) p x))
         by
-          compute-fiber-map-Σ
-            ( λ c → position-polynomial-endofunctor Q c → X)
-            ( α₀)
-            ( λ a → precomp (α₁ a) X)
-            ( c , x)
+        compute-fiber-map-Σ
+          ( λ c → position-polynomial-endofunctor Q c → X)
+          ( α₀)
+          ( λ a → precomp (α₁ a) X)
+          ( q)
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →
             Σ (P₁ a → X)
@@ -348,24 +348,24 @@ module _
                   ( x')
                   ( α₁ a)))
         by
-          equiv-tot
-            ( λ (a , p) →
-              compute-coherence-triangle-fiber-precomp'
-                ( α₁ a)
-                ( X)
-                ( inv-tr (λ c' → pr2 Q c' → X) p x))
+        equiv-tot
+          ( λ (a , p) →
+            compute-coherence-triangle-fiber-precomp'
+              ( α₁ a)
+              ( X)
+              ( inv-tr (λ c' → Q₁ c' → X) p x))
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →
             Σ (P₁ a → X) (λ x' → coherence-square-maps (tr Q₁ p) (α₁ a) x x'))
         by
-          equiv-tot
-            ( λ (a , p) →
-              equiv-tot
-                ( λ x' →
-                  equiv-tr
-                    ( λ u → coherence-triangle-maps' u x' (α₁ a))
-                    ( ( tr-function-type-fixed-codomain Q₁ X (inv p) x) ∙
-                      ( ap (λ q → x ∘ tr Q₁ q) (inv-inv p)))))
+        equiv-tot
+          ( λ (a , p) →
+            equiv-tot
+              ( λ x' →
+                equiv-tr
+                  ( λ u → coherence-triangle-maps' u x' (α₁ a))
+                  ( ( tr-function-type-fixed-codomain Q₁ X (inv p) x) ∙
+                    ( ap (λ q → x ∘ tr Q₁ q) (inv-inv p)))))
 ```
 
 ### Comparison between morphisms and natural transformations
