@@ -48,13 +48,20 @@ open import logic.double-negation-stable-embeddings
 
 ## Idea
 
-The classical Cantor–Schröder–Bernstein theorem asserts that from any pair of
-[injective maps](foundation-core.injective-maps.md) `f : A → B` and `g : B → A`
-we can construct a bijection between `A` and `B`. In a recent generalization,
-Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
-∞-groupoids. His generalization asserts that given two types that
-[embed](foundation-core.embeddings.md) into each other, then the types are
-[equivalent](foundation-core.equivalences.md). {{#cite Esc21}}
+Assuming the
+[weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md),
+then if two types mutually embed via
+[decidable embeddings](foundation.decidable-embeddings.md), `A ↪ᵈ B` and
+`B ↪ᵈ A`, then `A` and `B` are [equivalent](foundation-core.equivalences.md)
+types.
+
+Classically, the Cantor–Schröder–Bernstein theorem asserts that from any pair of
+[injective maps](foundation-core.injective-maps.md) between sets `f : A → B` and
+`g : B → A` we can construct a bijection between `A` and `B`. In a recent
+generalization, Escardó proved that a Cantor–Schröder–Bernstein theorem also
+holds for ∞-groupoids {{#cite Esc21}}. His generalization asserts that given two
+types that [embed](foundation-core.embeddings.md) into each other, then the
+types are [equivalent](foundation-core.equivalences.md).
 
 In this file we give a fine-grained analysis of the construction used in the
 proof of this
@@ -67,13 +74,15 @@ and use this deconstruction to give a generalization of the theorem for
 Given a pair of mutual maps `f : A → B` and `g : B → A` such that
 
 1. the maps `f` and `g` satisfy double negation elimination on their fibers
-2. For every element `x : A` it is decidable whether `x` is a perfect image of
-   `g` relative to `f`
+2. `f` has double negation dense equality
 3. `g` is injective
-4. `f` is π₀-trivial
+4. the perfect image of `g` relative to `f` is decidable
 
 Then `B` is a retract of `A`. If `f` moreover is injective, then this retract is
 an equivalence.
+
+This can be understood as an entirely constructive formulation of the
+Cantor–Schröder–Bernstein theorem.
 
 ```agda
 module _
@@ -264,8 +273,8 @@ Piecing it all together.
 ### The Cantor-Schröder-Bernstein theorem assuming the weak limited principle of omniscience
 
 It follows from the weak limited principle of omniscience that, for every pair
-of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
-for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable for
+every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
 
 Applying this fact to the Cantor-Schröder-Bernstein construction, we conclude
 that every pair of types that mutually embed into one another via decidable
