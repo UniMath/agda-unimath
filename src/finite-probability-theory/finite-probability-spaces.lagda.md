@@ -24,6 +24,8 @@ open import foundation.universe-levels
 
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups
 
+open import logic.propositional-double-negation-elimination
+
 open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -134,11 +136,10 @@ module _
   is-inhabited-type-Finite-Probability-Space :
     is-inhabited (type-Finite-Probability-Space Ω)
   is-inhabited-type-Finite-Probability-Space =
-    rec-coproduct
-      ( id)
-      ( ex-falso ∘ (is-nonempty-type-Finite-Probability-Space Ω))
+    prop-double-negation-elim-is-inhabited-or-empty
       ( is-inhabited-or-empty-is-finite
         ( is-finite-type-Finite-Probability-Space Ω))
+      ( is-nonempty-type-Finite-Probability-Space Ω)
 
   inhabited-type-Finite-Probability-Space : Inhabited-Type l
   inhabited-type-Finite-Probability-Space =
