@@ -248,62 +248,37 @@ module _
     ( f (map-double-negation pr1 h) , g (map-double-negation pr2 h))
 ```
 
-### Double negation elimination for universal quantifications
+### Double negation elimination for universal quantification over double negations
 
 ```agda
 module _
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2}
   where
 
+  double-negation-elim-Π-neg-neg :
+    has-double-negation-elim ((p : P) → ¬¬ (Q p))
+  double-negation-elim-Π-neg-neg f p =
+    double-negation-elim-neg (¬ (Q p)) (map-double-negation (ev p) f)
+
   double-negation-elim-Π :
     ((p : P) → has-double-negation-elim (Q p)) →
     has-double-negation-elim ((p : P) → Q p)
   double-negation-elim-Π H f p = H p (map-double-negation (ev p) f)
-
-module _
-  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2}
-  where
-
-  double-negation-elim-Π-neg :
-    has-double-negation-elim ((p : P) → ¬ (Q p))
-  double-negation-elim-Π-neg =
-    double-negation-elim-Π (double-negation-elim-neg ∘ Q)
 ```
 
-### Double negation elimination for function types
+### Double negation elimination for function types into double negations
 
 ```agda
 module _
   {l1 l2 : Level} {P : UU l1} {Q : UU l2}
   where
 
+  double-negation-elim-exp-neg-neg : has-double-negation-elim (P → ¬¬ Q)
+  double-negation-elim-exp-neg-neg = double-negation-elim-Π-neg-neg
+
   double-negation-elim-exp :
     has-double-negation-elim Q → has-double-negation-elim (P → Q)
   double-negation-elim-exp q = double-negation-elim-Π (λ _ → q)
-
-  double-negation-elim-exp-neg : has-double-negation-elim (P → ¬ Q)
-  double-negation-elim-exp-neg = double-negation-elim-Π-neg
-```
-
-### Double negation elimination for logical equivalences
-
-```agda
-double-negation-elim-iff :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  has-double-negation-elim P →
-  has-double-negation-elim Q →
-  has-double-negation-elim (P ↔ Q)
-double-negation-elim-iff p q f =
-  ( double-negation-elim-exp q (map-double-negation forward-implication f) ,
-    double-negation-elim-exp p (map-double-negation backward-implication f))
-
-double-negation-elim-iff-neg :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  has-double-negation-elim (¬ P ↔ ¬ Q)
-double-negation-elim-iff-neg {P = P} {Q} =
-  double-negation-elim-iff
-    ( double-negation-elim-neg P)
-    ( double-negation-elim-neg Q)
 ```
 
 ### If a type satisfies untruncated double negation elimination then it has a Hilbert ε-operator
