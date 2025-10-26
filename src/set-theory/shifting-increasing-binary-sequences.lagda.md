@@ -26,7 +26,7 @@ open import set-theory.increasing-binary-sequences
 
 ## Idea
 
-For each [natural number](elementary-number-theory.natural-numbers) `n`, we
+For each [natural number](elementary-number-theory.natural-numbers.md) `n`, we
 define a
 {{#concept "shift operation" Disambiguation="on increasing binary sequences by a natural number" Agda=shift-ℕ∞↗}}
 on [increasing binary sequences](set-theory.increasing-binary-sequences.md) by
