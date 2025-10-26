@@ -35,7 +35,7 @@ open import elementary-number-theory.infinitude-of-primes using
 
 **Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
 agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martin-Escardó,
+restricted to sets. This generalization is originally due to Martín Escardó,
 hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
 theorem.
 
@@ -43,6 +43,8 @@ theorem.
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
+open import foundation.cantor-schroder-bernstein-decidable-embeddings using
+  ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
 ### 44. The binomial theorem {#44}
@@ -159,7 +161,6 @@ open import real-numbers.metric-space-of-real-numbers using
 ```agda
 open import real-numbers.absolute-value-real-numbers using
   ( triangle-inequality-abs-ℝ)
-
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```

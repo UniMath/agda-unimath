@@ -52,7 +52,7 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 **Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
 agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martin-Escardó,
+restricted to sets. This generalization is originally due to Martín Escardó,
 hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
 theorem.
 
