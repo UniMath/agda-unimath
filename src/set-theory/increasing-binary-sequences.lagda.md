@@ -7,6 +7,7 @@ module set-theory.increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -24,6 +25,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.injective-maps
+open import foundation.iterating-functions
 open import foundation.logical-operations-booleans
 open import foundation.maybe
 open import foundation.negated-equality
@@ -338,6 +340,18 @@ abstract
 abstract
   eq-zero-is-zero-ℕ∞↗ : (x : ℕ∞↗) → is-true (sequence-ℕ∞↗ x 0) → x ＝ zero-ℕ∞↗
   eq-zero-is-zero-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-zero-is-zero-ℕ∞↗ x p)
+```
+
+### Infinity is a fixed point for the successor function
+
+```agda
+Eq-succ-infinity-ℕ∞↗ : Eq-ℕ∞↗ (succ-ℕ∞↗ infinity-ℕ∞↗) infinity-ℕ∞↗
+Eq-succ-infinity-ℕ∞↗ zero-ℕ = refl
+Eq-succ-infinity-ℕ∞↗ (succ-ℕ n) = refl
+
+abstract
+  succ-infinity-ℕ∞↗ : succ-ℕ∞↗ infinity-ℕ∞↗ ＝ infinity-ℕ∞↗
+  succ-infinity-ℕ∞↗ = eq-Eq-ℕ∞↗ Eq-succ-infinity-ℕ∞↗
 ```
 
 ## See also

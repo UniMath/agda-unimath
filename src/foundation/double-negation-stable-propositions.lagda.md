@@ -25,6 +25,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.double-negation-stable-equality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.retracts-of-types
@@ -398,6 +399,30 @@ abstract
     ¬ (type-Double-Negation-Stable-Prop P))
   no-fixed-points-neg-Double-Negation-Stable-Prop P =
     no-fixed-points-neg (type-Double-Negation-Stable-Prop P)
+```
+
+### The universe of double negation stable propositions has double negation stable equality
+
+```agda
+double-negation-elim-iff-Double-Negation-Stable-Prop :
+  {l1 l2 : Level} →
+  (P : Double-Negation-Stable-Prop l1)
+  (Q : Double-Negation-Stable-Prop l2) →
+  has-double-negation-elim
+    ( type-Double-Negation-Stable-Prop P ↔
+      type-Double-Negation-Stable-Prop Q)
+double-negation-elim-iff-Double-Negation-Stable-Prop P Q =
+  double-negation-elim-iff
+    ( has-double-negation-elim-type-Double-Negation-Stable-Prop P)
+    ( has-double-negation-elim-type-Double-Negation-Stable-Prop Q)
+
+has-double-negation-stable-equality-Double-Negation-Stable-Prop :
+  {l : Level} →
+  has-double-negation-stable-equality (Double-Negation-Stable-Prop l)
+has-double-negation-stable-equality-Double-Negation-Stable-Prop P Q =
+  has-double-negation-elim-equiv
+    ( extensionality-Double-Negation-Stable-Prop P Q)
+    ( double-negation-elim-iff-Double-Negation-Stable-Prop P Q)
 ```
 
 ## See also
