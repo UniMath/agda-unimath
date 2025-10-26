@@ -54,33 +54,36 @@ abstract
 ### The `n + m`'th position of `shift m x` is `x n`
 
 ```agda
-compute-ev-add-shift-ℕ∞↗ :
-  (n m : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ (add-ℕ n m) (shift-ℕ∞↗ m x) ＝ ev-ℕ∞↗ n x
-compute-ev-add-shift-ℕ∞↗ n zero-ℕ x = refl
-compute-ev-add-shift-ℕ∞↗ n (succ-ℕ m) x = compute-ev-add-shift-ℕ∞↗ n m x
+abstract
+  compute-ev-add-shift-ℕ∞↗ :
+    (n m : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ (add-ℕ n m) (shift-ℕ∞↗ m x) ＝ ev-ℕ∞↗ n x
+  compute-ev-add-shift-ℕ∞↗ n zero-ℕ x = refl
+  compute-ev-add-shift-ℕ∞↗ n (succ-ℕ m) x = compute-ev-add-shift-ℕ∞↗ n m x
 
-compute-ev-add'-shift-ℕ∞↗ :
-  (n m : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ (add-ℕ' n m) (shift-ℕ∞↗ m x) ＝ ev-ℕ∞↗ n x
-compute-ev-add'-shift-ℕ∞↗ n m x =
-  ( ap (λ - → ev-ℕ∞↗ - (shift-ℕ∞↗ m x)) (commutative-add-ℕ m n)) ∙
-  ( compute-ev-add-shift-ℕ∞↗ n m x)
+  compute-ev-add'-shift-ℕ∞↗ :
+    (n m : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ (add-ℕ' n m) (shift-ℕ∞↗ m x) ＝ ev-ℕ∞↗ n x
+  compute-ev-add'-shift-ℕ∞↗ n m x =
+    ( ap (λ - → ev-ℕ∞↗ - (shift-ℕ∞↗ m x)) (commutative-add-ℕ m n)) ∙
+    ( compute-ev-add-shift-ℕ∞↗ n m x)
 ```
 
 ### The `n`'th position of `shift n x` is `x 0`
 
 ```agda
-compute-ev-shift-ℕ∞↗ :
-  (n : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ n (shift-ℕ∞↗ n x) ＝ ev-ℕ∞↗ 0 x
-compute-ev-shift-ℕ∞↗ n x = compute-ev-add'-shift-ℕ∞↗ 0 n x
+abstract
+  compute-ev-shift-ℕ∞↗ :
+    (n : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ n (shift-ℕ∞↗ n x) ＝ ev-ℕ∞↗ 0 x
+  compute-ev-shift-ℕ∞↗ n x = compute-ev-add'-shift-ℕ∞↗ 0 n x
 ```
 
 ### The `n`'th position of `shift (n+1) x` is `false`
 
 ```agda
-compute-ev-shift-succ-ℕ∞↗ :
-  (n : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ n (shift-ℕ∞↗ (succ-ℕ n) x) ＝ false
-compute-ev-shift-succ-ℕ∞↗ zero-ℕ x = refl
-compute-ev-shift-succ-ℕ∞↗ (succ-ℕ n) x = compute-ev-shift-succ-ℕ∞↗ n x
+abstract
+  compute-ev-shift-succ-ℕ∞↗ :
+    (n : ℕ) (x : ℕ∞↗) → ev-ℕ∞↗ n (shift-ℕ∞↗ (succ-ℕ n) x) ＝ false
+  compute-ev-shift-succ-ℕ∞↗ zero-ℕ x = refl
+  compute-ev-shift-succ-ℕ∞↗ (succ-ℕ n) x = compute-ev-shift-succ-ℕ∞↗ n x
 ```
 
 ### Computing the shift operation at finite elements
