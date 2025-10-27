@@ -765,7 +765,6 @@ module _
 
 ### The action of short maps on Cauchy approximations is short
 
-
 ```agda
 module _
   {l1 l2 l1' l2' : Level}

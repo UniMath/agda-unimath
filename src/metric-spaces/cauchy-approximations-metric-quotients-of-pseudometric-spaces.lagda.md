@@ -46,6 +46,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
@@ -334,4 +335,22 @@ module _
         ( lim)
         ( is-lim))
       ( is-inhabited-class-metric-quotient-Pseudometric-Space A lim)
+```
+
+### If the metric quotient of a pseudometric space is complete, all cauchy approximations have lifts up to similarity
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (H : is-complete-Metric-Space (metric-quotient-Pseudometric-Space A))
+  (u : cauchy-approximation-Metric-Space (metric-quotient-Pseudometric-Space A))
+  where
+
+  has-lift-cauchy-approximation-is-complete-metric-quotient-Pseudometric-Space :
+    has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space A u
+  has-lift-cauchy-approximation-is-complete-metric-quotient-Pseudometric-Space =
+    has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( A)
+      ( u)
+      ( H u)
 ```
