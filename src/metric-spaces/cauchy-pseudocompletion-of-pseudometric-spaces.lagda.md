@@ -762,3 +762,35 @@ module _
     ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space M ,
       is-isometry-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space)
 ```
+
+### The action of short maps on Cauchy approximations is short
+
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A B)
+  where
+
+  is-short-map-short-function-cauchy-approximation-Pseudometric-Space :
+    is-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( map-short-function-cauchy-approximation-Pseudometric-Space A B f)
+  is-short-map-short-function-cauchy-approximation-Pseudometric-Space
+    d x y Nxy α β =
+    is-short-map-short-function-Pseudometric-Space A B f
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( map-cauchy-approximation-Pseudometric-Space A x α)
+      ( map-cauchy-approximation-Pseudometric-Space A y β)
+      ( Nxy α β)
+
+  short-map-short-function-cauchy-approximation-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+  short-map-short-function-cauchy-approximation-Pseudometric-Space =
+    ( map-short-function-cauchy-approximation-Pseudometric-Space A B f ,
+      is-short-map-short-function-cauchy-approximation-Pseudometric-Space)
+```

@@ -98,15 +98,40 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
+  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-quotient-Pseudometric-Space M))
+  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space =
+    short-map-short-function-cauchy-approximation-Pseudometric-Space
+      ( M)
+      ( pseudometric-metric-quotient-Pseudometric-Space M)
+      ( short-map-metric-quotient-Pseudometric-Space M)
+
   map-metric-quotient-cauchy-approximation-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space M →
     cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
   map-metric-quotient-cauchy-approximation-Pseudometric-Space =
-    map-short-function-cauchy-approximation-Pseudometric-Space
-      ( M)
-      ( pseudometric-metric-quotient-Pseudometric-Space M)
-      ( short-map-metric-quotient-Pseudometric-Space M)
+    map-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-quotient-Pseudometric-Space M))
+      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
+
+  is-short-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
+    is-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-quotient-Pseudometric-Space M))
+      ( map-metric-quotient-cauchy-approximation-Pseudometric-Space)
+  is-short-map-metric-quotient-cauchy-approximation-Pseudometric-Space =
+    is-short-map-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-quotient-Pseudometric-Space M))
+      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
 ```
 
 ### Lifts of Cauchy approximations in the quotient metric space up to similarity
