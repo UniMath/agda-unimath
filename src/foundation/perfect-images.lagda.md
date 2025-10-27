@@ -10,8 +10,6 @@ module foundation.perfect-images where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.connected-maps
-open import foundation.coproduct-types
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
@@ -20,15 +18,10 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality-maps
-open import foundation.double-negation-stable-propositions
 open import foundation.functoriality-dependent-function-types
-open import foundation.inhabited-types
-open import foundation.iterated-dependent-product-types
 open import foundation.iterating-functions
-open import foundation.law-of-excluded-middle
 open import foundation.negated-equality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -48,9 +41,7 @@ open import foundation-core.transport-along-identifications
 
 open import logic.double-negation-eliminating-maps
 open import logic.double-negation-elimination
-open import logic.double-negation-stable-embeddings
 open import logic.propositionally-decidable-maps
-open import logic.propositionally-double-negation-eliminating-maps
 ```
 
 </details>

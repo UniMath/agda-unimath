@@ -9,7 +9,6 @@ module foundation.cantor-schroder-bernstein-decidable-embeddings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-embeddings
-open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-dense-equality-maps
