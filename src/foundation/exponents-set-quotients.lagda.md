@@ -66,7 +66,7 @@ module _
     Π-Prop X (λ x → prop-equivalence-relation R (f x) (g x))
 
   sim-function-type : (f g : X → A) → UU (l1 ⊔ l3)
-  sim-function-type = rel-Relation-Prop rel-function-type
+  sim-function-type = type-Relation-Prop rel-function-type
 
   refl-sim-function-type : is-reflexive sim-function-type
   refl-sim-function-type f x = refl-equivalence-relation R (f x)

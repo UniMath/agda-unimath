@@ -51,7 +51,7 @@ module _
   intersect-closed-interval-Lattice :
     Relation l2 (closed-interval-Lattice L)
   intersect-closed-interval-Lattice =
-    rel-Relation-Prop intersect-prop-closed-interval-Lattice
+    type-Relation-Prop intersect-prop-closed-interval-Lattice
 ```
 
 ## Properties

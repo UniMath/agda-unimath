@@ -51,14 +51,14 @@ prop-equivalence-relation = pr1
 
 sim-equivalence-relation :
   {l1 l2 : Level} {A : UU l1} → equivalence-relation l2 A → A → A → UU l2
-sim-equivalence-relation R = rel-Relation-Prop (prop-equivalence-relation R)
+sim-equivalence-relation R = type-Relation-Prop (prop-equivalence-relation R)
 
 abstract
   is-prop-sim-equivalence-relation :
     {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) (x y : A) →
     is-prop (sim-equivalence-relation R x y)
   is-prop-sim-equivalence-relation R =
-    is-prop-rel-Relation-Prop (prop-equivalence-relation R)
+    is-prop-type-Relation-Prop (prop-equivalence-relation R)
 
 is-prop-is-equivalence-relation :
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →

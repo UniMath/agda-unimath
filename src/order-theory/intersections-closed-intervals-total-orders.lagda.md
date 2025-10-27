@@ -51,7 +51,7 @@ module _
   intersect-closed-interval-Total-Order :
     Relation l2 (closed-interval-Total-Order T)
   intersect-closed-interval-Total-Order =
-    rel-Relation-Prop intersect-prop-closed-interval-Total-Order
+    type-Relation-Prop intersect-prop-closed-interval-Total-Order
 ```
 
 ## Properties

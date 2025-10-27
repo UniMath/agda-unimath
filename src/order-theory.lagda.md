@@ -168,7 +168,6 @@ open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
-open import order-theory.well-founded-propositional-relations public
 open import order-theory.well-founded-relations public
 open import order-theory.zorns-lemma public
 ```

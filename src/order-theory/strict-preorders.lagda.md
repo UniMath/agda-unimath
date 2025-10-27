@@ -61,13 +61,13 @@ module _
   le-Strict-Preorder :
     Relation l2 type-Strict-Preorder
   le-Strict-Preorder =
-    rel-Relation-Prop le-prop-Strict-Preorder
+    type-Relation-Prop le-prop-Strict-Preorder
 
   is-prop-le-Strict-Preorder :
     (x y : type-Strict-Preorder) →
     is-prop (le-Strict-Preorder x y)
   is-prop-le-Strict-Preorder =
-    is-prop-rel-Relation-Prop le-prop-Strict-Preorder
+    is-prop-type-Relation-Prop le-prop-Strict-Preorder
 
   is-irreflexive-le-Strict-Preorder :
     is-irreflexive le-Strict-Preorder

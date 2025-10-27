@@ -84,7 +84,7 @@ module _
   grothendieck-relation-Commutative-Monoid :
     Relation l (type-product-Commutative-Monoid M M)
   grothendieck-relation-Commutative-Monoid =
-    rel-Relation-Prop grothendieck-relation-prop-Commutative-Monoid
+    type-Relation-Prop grothendieck-relation-prop-Commutative-Monoid
 
   refl-grothendieck-relation-Commutative-Monoid :
     is-reflexive-Relation-Prop grothendieck-relation-prop-Commutative-Monoid

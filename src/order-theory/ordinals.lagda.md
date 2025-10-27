@@ -50,7 +50,7 @@ extensionality-principle-Ordinal :
   {l1 l2 : Level} {X : UU l1} → Relation-Prop l2 X → UU (l1 ⊔ l2)
 extensionality-principle-Ordinal {X = X} R =
   (x y : X) →
-  ((u : X) → rel-Relation-Prop R u x ↔ rel-Relation-Prop R u y) → x ＝ y
+  ((u : X) → type-Relation-Prop R u x ↔ type-Relation-Prop R u y) → x ＝ y
 ```
 
 ### The predicate of being an ordinal
@@ -62,7 +62,7 @@ module _
 
   is-ordinal : UU (l1 ⊔ l2)
   is-ordinal =
-    ( is-transitive-well-founded-relation-Relation (rel-Relation-Prop R)) ×
+    ( is-transitive-well-founded-relation-Relation (type-Relation-Prop R)) ×
     ( extensionality-principle-Ordinal R)
 ```
 
@@ -83,7 +83,7 @@ module _
   le-prop-Ordinal = pr1 (pr2 O)
 
   le-Ordinal : Relation l2 type-Ordinal
-  le-Ordinal = rel-Relation-Prop le-prop-Ordinal
+  le-Ordinal = type-Relation-Prop le-prop-Ordinal
 
   is-ordinal-Ordinal : is-ordinal le-prop-Ordinal
   is-ordinal-Ordinal = pr2 (pr2 O)
@@ -138,7 +138,7 @@ The associated reflexive relation on an ordinal.
   is-prop-leq-Ordinal {y = y} =
     is-prop-Π
       ( λ u →
-        is-prop-function-type (is-prop-rel-Relation-Prop le-prop-Ordinal u y))
+        is-prop-function-type (is-prop-type-Relation-Prop le-prop-Ordinal u y))
 
   leq-prop-Ordinal : Relation-Prop (l1 ⊔ l2) type-Ordinal
   leq-prop-Ordinal x y = (leq-Ordinal x y , is-prop-leq-Ordinal)
