@@ -88,7 +88,9 @@ The pointwise quotient of Cauchy approximations preserves
 The pointwise quotient of a Cauchy approximation has a lift. A Cauchy
 approximation that admits a
 [limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md)
-has a lift.
+has a lift. If the metric quotient is
+[complete](metric-spaces.complete-metric-spaces.md), then all Cauchy
+approximations in the metric quotient have a lift.
 
 ## Definitions
 
