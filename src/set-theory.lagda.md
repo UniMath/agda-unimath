@@ -61,12 +61,12 @@ open import set-theory.inclusion-natural-numbers-increasing-binary-sequences pub
 open import set-theory.increasing-binary-sequences public
 open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
-open import set-theory.material-types public
+open import set-theory.material-sets public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
-open import set-theory.well-founded-material-types public
+open import set-theory.well-founded-material-sets public
 ```
 
 ## See also
