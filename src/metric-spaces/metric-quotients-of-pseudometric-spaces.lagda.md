@@ -70,7 +70,7 @@ of a [pseudometric space](metric-spaces.pseudometric-spaces.md) is the
 [metric space](metric-spaces.metric-spaces.md) whose points are
 [quotient classes](foundation.set-quotients.md) of `M` by the
 [similarity relation](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
-and [neighborhoods](metric-spaces.rational-neighborhood-relations.md) given by
+and [neighborhoods](metric-spaces.rational-neighborhood-relations.md) are
 neighborhoods of inhabitants of the quotient classes: two quotient classes `X`,
 `Y` are in a `d`-neighborhood if for all `x ∈ X` and `y ∈ Y`, `x` and `y` are
 `d`-neighbors in the pseudometric space.
