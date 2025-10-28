@@ -8,6 +8,7 @@ module foundation.similarity-subtypes where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
@@ -43,6 +44,9 @@ module _
   sim-subtype : UU (l1 ⊔ l2 ⊔ l3)
   sim-subtype = type-Prop sim-prop-subtype
 
+  is-prop-sim-subtype : is-prop sim-subtype
+  is-prop-sim-subtype = is-prop-type-Prop sim-prop-subtype
+
   has-same-elements-sim-subtype :
     sim-subtype → has-same-elements-subtype P Q
   pr1 (has-same-elements-sim-subtype s x) = pr1 s x
@@ -52,6 +56,41 @@ module _
     has-same-elements-subtype P Q → sim-subtype
   pr1 (sim-has-same-elements-subtype s) x = forward-implication (s x)
   pr2 (sim-has-same-elements-subtype s) x = backward-implication (s x)
+
+  has-same-elements-iff-sim-subtype :
+    sim-subtype ↔ has-same-elements-subtype P Q
+  has-same-elements-iff-sim-subtype =
+    ( has-same-elements-sim-subtype ,
+      sim-has-same-elements-subtype)
+
+  sim-iff-has-same-elements-subtype :
+    has-same-elements-subtype P Q ↔ sim-subtype
+  sim-iff-has-same-elements-subtype =
+    ( sim-has-same-elements-subtype ,
+      has-same-elements-sim-subtype)
+
+  equiv-has-same-elements-sim-subtype :
+    sim-subtype ≃ has-same-elements-subtype P Q
+  equiv-has-same-elements-sim-subtype =
+    equiv-iff'
+      ( sim-prop-subtype)
+      ( has-same-elements-subtype-Prop P Q)
+      ( has-same-elements-iff-sim-subtype)
+
+  inv-equiv-has-same-elements-sim-subtype :
+    has-same-elements-subtype P Q ≃ sim-subtype
+  inv-equiv-has-same-elements-sim-subtype =
+    equiv-iff'
+      ( has-same-elements-subtype-Prop P Q)
+      ( sim-prop-subtype)
+      ( sim-iff-has-same-elements-subtype)
+module _
+  {l1 l2 : Level} {A : UU l1} (P Q : subtype l2 A)
+  where
+
+  extensionality-sim-subtype : (P ＝ Q) ≃ sim-subtype P Q
+  extensionality-sim-subtype =
+    inv-equiv-has-same-elements-sim-subtype P Q ∘e extensionality-subtype P Q
 ```
 
 #### Similarity is reflexive
