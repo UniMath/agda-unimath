@@ -61,7 +61,7 @@ such that `l` is double negation dense, i.e., its
 [fibers](foundation-core.fibers-of-maps.md) are
 [nonempty](foundation.double-negation.md), and `r` is a double negation stable
 embedding, i.e., its fibers are [propositions](foundation-core.propositions.md)
-and satisfy the property that if they are nonempty then they are inhabited.
+that satisfy the property that if they are nonempty then they are inhabited.
 
 This factorization is unique in the sense that any other commuting triangle
 
@@ -79,9 +79,9 @@ modality, which is shown in
 [`foundation.double-negation-modality`](foundation.double-negation-modality.md).
 
 The double negation image factorization is in one sense an approximation to the
-[image factorization](foundation.images.md) which satisfies a restricted
-universal property that only applies to
-[negative statements](foundation-core.negation.md) and does not rely on the
+[image factorization](foundation.images.md) that satisfies a restricted
+universal property which only applies to
+[negative statements](foundation-core.negation.md), and does not rely on the
 existence of
 [propositional truncations](foundation.propositional-truncations.md). On the
 other hand, the double negation image inclusion `r` satisfies the additional

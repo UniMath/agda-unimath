@@ -70,7 +70,7 @@ module _
 ```agda
 structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
+  type-polynomial-endofunctor' A B (𝕎 A B) → 𝕎 A B
 structure-𝕎-Alg (pair x α) = tree-𝕎 x α
 
 𝕎-Alg :
@@ -202,7 +202,7 @@ module _
 ```agda
 map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  𝕎 A B → type-polynomial-endofunctor A B (𝕎 A B)
+  𝕎 A B → type-polynomial-endofunctor' A B (𝕎 A B)
 map-inv-structure-𝕎-Alg (tree-𝕎 x α) = pair x α
 
 is-section-map-inv-structure-𝕎-Alg :
@@ -226,7 +226,7 @@ is-equiv-structure-𝕎-Alg =
 
 equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) ≃ 𝕎 A B
+  type-polynomial-endofunctor' A B (𝕎 A B) ≃ 𝕎 A B
 equiv-structure-𝕎-Alg =
   pair structure-𝕎-Alg is-equiv-structure-𝕎-Alg
 
@@ -241,7 +241,7 @@ is-equiv-map-inv-structure-𝕎-Alg =
 
 inv-equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  𝕎 A B ≃ type-polynomial-endofunctor A B (𝕎 A B)
+  𝕎 A B ≃ type-polynomial-endofunctor' A B (𝕎 A B)
 inv-equiv-structure-𝕎-Alg =
   pair map-inv-structure-𝕎-Alg is-equiv-map-inv-structure-𝕎-Alg
 ```
@@ -262,7 +262,7 @@ structure-hom-𝕎-Alg :
   (X : algebra-polynomial-endofunctor l3 A B) →
   ( (map-hom-𝕎-Alg X) ∘ structure-𝕎-Alg) ~
   ( ( structure-algebra-polynomial-endofunctor X) ∘
-    ( map-polynomial-endofunctor A B (map-hom-𝕎-Alg X)))
+    ( map-polynomial-endofunctor' A B (map-hom-𝕎-Alg X)))
 structure-hom-𝕎-Alg X (pair x α) = refl
 
 hom-𝕎-Alg :
@@ -292,7 +292,7 @@ compute-structure-htpy-hom-𝕎-Alg :
   (H : map-hom-𝕎-Alg X ~ f) →
   ( ap
     ( structure-algebra-polynomial-endofunctor X)
-    ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+    ( htpy-polynomial-endofunctor' A B H (pair x α))) ＝
   ( ap
     ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
     ( htpy-postcomp (B x) H α))
@@ -302,13 +302,13 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
     ( λ f H →
       ( ap
         ( structure-algebra-polynomial-endofunctor X)
-        ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+        ( htpy-polynomial-endofunctor' A B H (pair x α))) ＝
       ( ap
         ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
         ( htpy-postcomp (B x) H α)))
     ( ap
       ( ap (pr2 X))
-      ( coh-refl-htpy-polynomial-endofunctor A B
+      ( coh-refl-htpy-polynomial-endofunctor' A B
         ( map-hom-𝕎-Alg X)
         ( pair x α)) ∙
     ( inv
@@ -322,7 +322,7 @@ structure-htpy-hom-𝕎-Alg :
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   ( structure-hom-𝕎-Alg X ∙h
     ( ( structure-algebra-polynomial-endofunctor X) ·l
-      ( htpy-polynomial-endofunctor A B (htpy-htpy-hom-𝕎-Alg X f)))) ~
+      ( htpy-polynomial-endofunctor' A B (htpy-htpy-hom-𝕎-Alg X f)))) ~
   ( ( (htpy-htpy-hom-𝕎-Alg X f) ·r structure-𝕎-Alg {B = B}) ∙h
     ( structure-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f))
 structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
@@ -334,7 +334,7 @@ structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
         ( ap
           ( λ t → pr2 X (pair x t))
           ( eq-htpy (htpy-htpy-hom-𝕎-Alg X (pair f μ-f) ·r α)))
-        ( pr2 X (map-polynomial-endofunctor A B f (pair x α))))
+        ( pr2 X (map-polynomial-endofunctor' A B f (pair x α))))
       ( inv (left-inv ( μ-f (pair x α)))))) ∙
   ( inv
     ( assoc
