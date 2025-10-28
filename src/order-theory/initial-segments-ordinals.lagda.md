@@ -1,4 +1,4 @@
-# Initial segments on ordinals
+# Initial segments of ordinals
 
 ```agda
 module order-theory.initial-segments-ordinals where
@@ -9,19 +9,19 @@ module order-theory.initial-segments-ordinals where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.embeddings
-open import foundation.similarity-subtypes
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import order-theory.accessible-elements-relations
+open import order-theory.ordinals
 open import order-theory.transitive-well-founded-relations
 open import order-theory.well-founded-relations
-open import order-theory.ordinals
-open import order-theory.accessible-elements-relations
 ```
 
 </details>
@@ -134,7 +134,6 @@ module _
     initial-segment-Ordinal l3 α ↪ subtype l3 (type-Ordinal α)
   emb-subtype-initial-segment-Ordinal =
     (subtype-initial-segment-Ordinal α , is-emb-subtype-initial-segment-Ordinal)
-
 ```
 
 ### Initial segments with the same elements
@@ -189,7 +188,6 @@ module _
       ( subtype-initial-segment-Ordinal α I)
       ( subtype-initial-segment-Ordinal α J)) ∘e
     ( equiv-ap-emb (emb-subtype-initial-segment-Ordinal α))
-
 ```
 
 ## Properties
@@ -242,8 +240,10 @@ module _
     le-initial-segment-Ordinal I J →
     le-initial-segment-Ordinal I K
   pr1 (transitive-le-initial-segment-Ordinal I J K J<K I<J) = pr1 I<J
-  pr1 (pr2 (transitive-le-initial-segment-Ordinal I J K J<K I<J)) = pr1 (pr2 I<J)
-  pr2 (pr2 (transitive-le-initial-segment-Ordinal I J K J<K I<J)) = pr2 K (pr1 (transitive-le-initial-segment-Ordinal I J K J<K I<J))
+  pr1 (pr2 (transitive-le-initial-segment-Ordinal I J K J<K I<J)) =
+    pr1 (pr2 I<J)
+  pr2 (pr2 (transitive-le-initial-segment-Ordinal I J K J<K I<J)) =
+    pr2 K (pr1 (transitive-le-initial-segment-Ordinal I J K J<K I<J))
     (pr1 J<K)
     (pr1
      (pr1 (pr2 J<K)
