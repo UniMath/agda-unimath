@@ -48,8 +48,9 @@ open import logic.propositionally-decidable-maps
 
 ## Idea
 
-Given two maps `f : A → B` and `g : B → A`, then if `(g ◦ f)ⁿ(a₀) ＝ a` we have
-a chain of elements
+Given two maps `f : A → B` and `g : B → A`, then if `(g ◦ f)ⁿ(a₀) ＝ a` for some
+[natural number](elementary-number-theory.natural-numbers.md) `n : ℕ`, we have a
+chain of elements
 
 ```text
       f          g            f               g       g
@@ -63,7 +64,8 @@ of `g`.
 
 This concept is used in the
 [Cantor–Schröder–Bernstein construction](foundation.cantor-schroder-bernstein-decidable-embeddings.md)
-to construct an equivalence of types `A ≃ B` given that they mutually embed.
+to construct an equivalence of types `A ≃ B` given mutual embeddings `f : A ↪ B`
+and `g : B ↪ A`.
 
 ## Definitions
 
@@ -107,8 +109,9 @@ module _
 
 We say an origin of `a` is a
 {{#concept "nonperfect image" Disambiguation="of pair of mutually converse maps" Agda=is-nonperfect-image}}
-if we have an `a₀ : A` and a `n : ℕ` such that `(g ∘ f)ⁿ(a₀) = a`, but the fiber
-of `g` above `a₀` is [empty](foundation.empty-types.md).
+if we have an `a₀ : A` and a natural number `n : ℕ` such that
+`(g ∘ f)ⁿ(a₀) = a`, but the fiber of `g` above `a₀` is
+[empty](foundation.empty-types.md).
 
 ```agda
 module _
@@ -117,8 +120,12 @@ module _
 
   is-nonperfect-image : (a : A) → UU (l1 ⊔ l2)
   is-nonperfect-image a =
-    Σ A (λ a₀ → Σ ℕ (λ n → (iterate n (g ∘ f) a₀ ＝ a) × ¬ (fiber g a₀)))
+    Σ ℕ (λ n → Σ A (λ a₀ → (iterate n (g ∘ f) a₀ ＝ a) × ¬ (fiber g a₀)))
 ```
+
+**Comment.** Notice that, while being a nonperfect image is not always a
+proposition when `f` and `g` are embeddings, if we in addition require that `n`
+be minimal this would make it propositional.
 
 ### Nonperfect fibers
 
@@ -142,25 +149,39 @@ module _
 
 ## Properties
 
-### If `g` is an embedding then being a perfect image of `g` relative to `f` is a property
+### If `g` is an embedding then being a perfect image of `g` is a property
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
-  is-prop-is-perfect-image-is-emb :
+  is-prop-is-perfect-image-at'' :
+    is-prop-map g → (a : A) (n : ℕ) →
+    is-prop (is-perfect-image-at' f g a n)
+  is-prop-is-perfect-image-at'' G a n =
+    is-prop-Π (λ p → G (pr1 p))
+
+  is-prop-is-perfect-image' :
+    is-prop-map g → (a : A) → is-prop (is-perfect-image f g a)
+  is-prop-is-perfect-image' G a =
+    is-prop-Π (λ a₀ → is-prop-Π (λ n → is-prop-Π (λ p → G a₀)))
+
+  is-perfect-image-Prop' : is-prop-map g → A → Prop (l1 ⊔ l2)
+  is-perfect-image-Prop' G a =
+    ( is-perfect-image f g a , is-prop-is-perfect-image' G a)
+
+  is-prop-is-perfect-image :
     is-emb g → (a : A) → is-prop (is-perfect-image f g a)
-  is-prop-is-perfect-image-is-emb G a =
-    is-prop-Π
-      ( λ a₀ → is-prop-Π (λ n → is-prop-Π (λ p → is-prop-map-is-emb G a₀)))
+  is-prop-is-perfect-image G =
+    is-prop-is-perfect-image' (is-prop-map-is-emb G)
 
   is-perfect-image-Prop : is-emb g → A → Prop (l1 ⊔ l2)
   is-perfect-image-Prop G a =
-    ( is-perfect-image f g a , is-prop-is-perfect-image-is-emb G a)
+    ( is-perfect-image f g a , is-prop-is-perfect-image G a)
 ```
 
-### If `f` is an embedding then having a nonperfect fiber is a proposition
+### If `f` is an embedding then having a not perfect fiber is a proposition
 
 ```agda
 module _
@@ -306,7 +327,7 @@ module _
     is-double-negation-eliminating-map g →
     (a : A) → ¬ (is-nonperfect-image f g a) → is-perfect-image f g a
   double-negation-elim-is-perfect-image G a nρ a₀ n p =
-    G a₀ (λ a₁ → nρ (a₀ , n , p , a₁))
+    G a₀ (λ a₁ → nρ (n , a₀ , p , a₁))
 ```
 
 If `g(b)` is not a perfect image, then there is an `a ∈ fiber f b` that is not a
@@ -329,9 +350,9 @@ module _
     (b : B) →
     is-nonperfect-image f g (g b) →
     has-not-perfect-fiber f g b
-  has-not-perfect-fiber-is-nonperfect-image G b (x₀ , zero-ℕ , u) =
+  has-not-perfect-fiber-is-nonperfect-image G b (zero-ℕ , x₀ , u) =
     ex-falso (pr2 u (b , inv (pr1 u)))
-  has-not-perfect-fiber-is-nonperfect-image G b (x₀ , succ-ℕ n , u) =
+  has-not-perfect-fiber-is-nonperfect-image G b (succ-ℕ n , x₀ , u) =
     ( iterate n (g ∘ f) x₀ , G (pr1 u)) ,
     ( λ s → pr2 u (s x₀ n refl))
 
@@ -457,9 +478,9 @@ module _
 
 It follows from the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
-that, for every pair of mutual decidable embeddings `f : A ↪ B` and
-`g : B ↪ A`, it is decidable for every element `x : A` whether `x` is a perfect
-image of `g` relative to `f`.
+that, for every pair of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`,
+it is decidable for every element `x : A` whether `x` is a perfect image of `g`
+relative to `f`.
 
 ```agda
 module _

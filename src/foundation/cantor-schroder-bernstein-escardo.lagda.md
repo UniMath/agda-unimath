@@ -77,7 +77,9 @@ module _
     injection (type-Set B) (type-Set A) →
     (type-Set A) ≃ (type-Set B)
   Cantor-Schröder-Bernstein f g =
-    Cantor-Schröder-Bernstein-Escardó lem (emb-injection B f) (emb-injection A g)
+    Cantor-Schröder-Bernstein-Escardó lem
+      ( emb-injection B f)
+      ( emb-injection A g)
 ```
 
 ## References

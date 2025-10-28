@@ -32,6 +32,8 @@ epimorhpsim->epimorphism
 epimorhpsims->epimorphisms
 epimorphsim->epimorphism
 epimorphsims->epimorphisms
+equivalenc->equivalence
+equivalencs->equivalences
 foundaiton->foundation
 geomeric->geometric
 homomorhpism->homomorphism
