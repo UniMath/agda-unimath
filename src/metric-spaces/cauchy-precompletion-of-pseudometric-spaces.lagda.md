@@ -58,7 +58,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 Let `M` be a [pseudometric space](metric-spaces.pseudometric-spaces.md) and
 `C M` denote its
-[Cauchy pseudocompletion](metric-spaces.pseudometric-completion-of-pseudometric-spaces.md);
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md);
 the
 {{#concept "Cauchy precompletion" Disambiguation="of a pseudometric space" Agda=cauchy-precompletion-Pseudometric-Space}}
 of `M` is the
