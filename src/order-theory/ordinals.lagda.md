@@ -69,43 +69,51 @@ module _
 ### The type of ordinals
 
 ```agda
-Ordinal : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Ordinal l1 l2 = Σ (UU l1) (λ X → Σ (Relation-Prop l2 X) is-ordinal)
+opaque
+  Ordinal : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+  Ordinal l1 l2 = Σ (UU l1) (λ X → Σ (Relation-Prop l2 X) is-ordinal)
 
 module _
   {l1 l2 : Level} (O : Ordinal l1 l2)
   where
 
-  type-Ordinal : UU l1
-  type-Ordinal = pr1 O
+  opaque
+    unfolding Ordinal
+    type-Ordinal : UU l1
+    type-Ordinal = pr1 O
 
-  le-prop-Ordinal : Relation-Prop l2 type-Ordinal
-  le-prop-Ordinal = pr1 (pr2 O)
+    le-prop-Ordinal : Relation-Prop l2 type-Ordinal
+    le-prop-Ordinal = pr1 (pr2 O)
+
+    is-ordinal-Ordinal : is-ordinal le-prop-Ordinal
+    is-ordinal-Ordinal = pr2 (pr2 O)
+
+    is-transitive-well-founded-relation-le-Ordinal :
+      is-transitive-well-founded-relation-Relation
+        ( rel-Relation-Prop le-prop-Ordinal)
+    is-transitive-well-founded-relation-le-Ordinal =
+      pr1 is-ordinal-Ordinal
+
+    is-extensional-Ordinal :
+      extensionality-principle-Ordinal le-prop-Ordinal
+    is-extensional-Ordinal = pr2 is-ordinal-Ordinal
 
   le-Ordinal : Relation l2 type-Ordinal
   le-Ordinal = rel-Relation-Prop le-prop-Ordinal
 
-  is-ordinal-Ordinal : is-ordinal le-prop-Ordinal
-  is-ordinal-Ordinal = pr2 (pr2 O)
-
-  is-transitive-well-founded-relation-le-Ordinal :
-    is-transitive-well-founded-relation-Relation le-Ordinal
-  is-transitive-well-founded-relation-le-Ordinal = pr1 is-ordinal-Ordinal
-
   transitive-well-founded-relation-Ordinal :
     Transitive-Well-Founded-Relation l2 type-Ordinal
   transitive-well-founded-relation-Ordinal =
-    ( le-Ordinal , is-transitive-well-founded-relation-le-Ordinal)
-
-  is-extensional-Ordinal : extensionality-principle-Ordinal le-prop-Ordinal
-  is-extensional-Ordinal = pr2 is-ordinal-Ordinal
+    ( le-Ordinal ,
+      is-transitive-well-founded-relation-le-Ordinal)
 
   transitive-le-Ordinal : is-transitive le-Ordinal
   transitive-le-Ordinal =
     transitive-le-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
 
-  is-well-founded-relation-le-Ordinal : is-well-founded-Relation le-Ordinal
+  is-well-founded-relation-le-Ordinal :
+    is-well-founded-Relation le-Ordinal
   is-well-founded-relation-le-Ordinal =
     is-well-founded-relation-le-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
@@ -134,11 +142,12 @@ The associated reflexive relation on an ordinal.
     leq-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
 
-  is-prop-leq-Ordinal : {x y : type-Ordinal} → is-prop (leq-Ordinal x y)
-  is-prop-leq-Ordinal {y = y} =
-    is-prop-Π
-      ( λ u →
-        is-prop-function-type (is-prop-rel-Relation-Prop le-prop-Ordinal u y))
+  abstract
+    is-prop-leq-Ordinal : {x y : type-Ordinal} → is-prop (leq-Ordinal x y)
+    is-prop-leq-Ordinal {y = y} =
+      is-prop-Π
+        ( λ u →
+          is-prop-function-type (is-prop-rel-Relation-Prop le-prop-Ordinal u y))
 
   leq-prop-Ordinal : Relation-Prop (l1 ⊔ l2) type-Ordinal
   leq-prop-Ordinal x y = (leq-Ordinal x y , is-prop-leq-Ordinal)
@@ -181,4 +190,19 @@ The associated reflexive relation on an ordinal.
 
   set-Ordinal : Set l1
   set-Ordinal = (type-Ordinal , is-set-type-Ordinal)
+```
+
+### Well-founded induction on ordinals
+
+```agda
+module _
+  {l1 l2 : Level} (α : Ordinal l1 l2)
+  (let X = type-Ordinal α)
+  (let _<_ = le-Ordinal α)
+  where
+
+  ind-Ordinal :
+    {l3 : Level} (P : X → UU l3) →
+    ({x : X} → ({u : X} → u < x → P u) → P x) → (x : X) → P x
+  ind-Ordinal = ind-Well-Founded-Relation (well-founded-relation-Ordinal α)
 ```
