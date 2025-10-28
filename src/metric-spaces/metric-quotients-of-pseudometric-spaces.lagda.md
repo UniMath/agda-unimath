@@ -81,8 +81,8 @@ quotient; if `M` is a metric space, this is an
 [isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
 Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
-isometry) from a pseudometric space to a metric space factors as a short map
-(resp. isometry) through the metric quotient of its domain.
+isometry) from a pseudometric space to a metric space factors uniquely as a short map
+(resp. isometry) through the metric quotient of its domain. This is the {{#concept "universal property" Disambiguation="of the metric space quotient of a pseudometric space"}} of the metric space quotient.
 
 ## Definitions
 
