@@ -296,7 +296,7 @@ module _
   abstract
     is-tight-pseudometric-metric-quotient-Pseudometric-Space :
       is-tight-Pseudometric-Space
-        (pseudometric-metric-quotient-Pseudometric-Space M)
+        ( pseudometric-metric-quotient-Pseudometric-Space M)
     is-tight-pseudometric-metric-quotient-Pseudometric-Space X Y X~Y =
       let
         open
