@@ -18,6 +18,8 @@ automorphsims->automorphisms
 cagegory->category
 consistsing->consisting
 eacy->each,easy
+embeddding->embedding
+embedddings->embeddings
 endomorhpism->endomorphism
 endomorhpisms->endomorphisms
 endomorhpsim->endomorphism

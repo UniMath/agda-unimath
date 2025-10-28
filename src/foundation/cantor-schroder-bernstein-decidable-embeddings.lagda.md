@@ -15,8 +15,8 @@ open import foundation.double-negation-dense-equality-maps
 open import foundation.double-negation-images
 open import foundation.function-types
 open import foundation.injective-maps
-open import foundation.retracts-of-types
 open import foundation.perfect-images
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
@@ -41,7 +41,7 @@ for [decidable embeddings](foundation.decidable-embeddings.md) states that,
 assuming the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 (WLPO), then if two types `A` and `B` mutually embed via
-[embeddings](foundation-core.embedddings.md) whose
+[embeddings](foundation-core.embeddings.md) whose
 [fibers](foundation.fibers-of-maps.md) are
 [decidable](foundation.decidable-types.md), then `A` and `B` are
 [equivalent](foundation-core.equivalences.md) types.
@@ -82,7 +82,7 @@ This can be understood as an entirely constructive formulation of the
 Cantor–Schröder–Bernstein theorem.
 
 The reader may also note that under the additional assumption of
-[function extensionality](foundation-core.function-extensionality.md), double
+[function extensionality](foundation.function-extensionality.md), double
 negation eliminating injections are double negation stable embeddings.
 
 The underlying map `A → B` of the construction.
@@ -132,20 +132,20 @@ Computing the underlying map `A → B` of the construction.
     (d :
       is-decidable
         ( is-perfect-image f g
-          ( element-has-nonperfect-fiber-is-not-perfect-image
+          ( element-has-not-perfect-fiber-is-not-perfect-image
               G G' F F' y nγ))) →
     map-construction-Cantor-Schröder-Bernstein'
-      ( element-has-nonperfect-fiber-is-not-perfect-image G G' F F' y nγ)
+      ( element-has-not-perfect-fiber-is-not-perfect-image G G' F F' y nγ)
       ( d) ＝
     y
   compute-map-construction-on-not-perfect-image-Cantor-Schröder-Bernstein
     G G' F F' y nγ (inl v) =
     ex-falso
-      ( is-not-perfect-image-has-nonperfect-fiber-is-not-perfect-image
+      ( is-not-perfect-image-has-not-perfect-fiber-is-not-perfect-image
           G G' F F' y nγ v)
   compute-map-construction-on-not-perfect-image-Cantor-Schröder-Bernstein
     G G' F F' y nγ (inr _) =
-    is-in-fiber-element-has-nonperfect-fiber-is-not-perfect-image
+    is-in-fiber-element-has-not-perfect-fiber-is-not-perfect-image
       G G' F F' y nγ
 ```
 
@@ -166,7 +166,7 @@ module _
   map-section-construction-Cantor-Schröder-Bernstein' y (inl _) =
     g y
   map-section-construction-Cantor-Schröder-Bernstein' y (inr nγ) =
-    element-has-nonperfect-fiber-is-not-perfect-image G G' F F' y nγ
+    element-has-not-perfect-fiber-is-not-perfect-image G G' F F' y nγ
 
   map-section-construction-Cantor-Schröder-Bernstein :
     (D : (y : B) → is-decidable (is-perfect-image f g (g y))) →
@@ -284,8 +284,8 @@ module _
 ## Theorem
 
 It follows from the weak limited principle of omniscience that, for every pair
-of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable for
-every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
+for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
 Applying this fact to the Cantor-Schröder-Bernstein construction, we conclude
 with the main result.
 
