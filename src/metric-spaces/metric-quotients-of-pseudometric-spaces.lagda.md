@@ -592,7 +592,7 @@ module _
           ( metric-quotient-Pseudometric-Space M)))
 ```
 
-### Induced short function from the quotient metric space into a metric space
+### The induced short function from the quotient metric space into a metric space
 
 ```agda
 module _
