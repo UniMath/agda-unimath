@@ -363,7 +363,7 @@ Given a triangle of the form
          C,
 ```
 
-if the left map is is `k`-path-cosplit then so is the top map.
+if the left map is `k`-path-cosplit then so is the top map.
 
 ```agda
 is-path-cosplit-top-map-triangle' :

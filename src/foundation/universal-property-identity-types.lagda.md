@@ -245,7 +245,7 @@ is-emb-Id : {l : Level} (A : UU l) → is-emb (Id {A = A})
 is-emb-Id = is-emb-Id-preunivalence-axiom preunivalence
 ```
 
-### Characteriation of equality of `Id`
+### Characterization of equality of `Id`
 
 ```agda
 equiv-Id :
