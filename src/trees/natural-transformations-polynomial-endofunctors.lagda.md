@@ -121,7 +121,9 @@ module _
   {l1 l2 l3 l4 l5 : Level}
   (P : polynomial-endofunctor l1 l2)
   (Q : polynomial-endofunctor l3 l4)
-  (α@(α₀ , α₁) : natural-transformation-polynomial-endofunctor l5 P Q)
+  (α : natural-transformation-polynomial-endofunctor l5 P Q)
+  (let α₀ = map-natural-transformation-polynomial-endofunctor P Q α)
+  (let α₁ = naturality-natural-transformation-polynomial-endofunctor P Q α)
   {X Y : UU l5} (f : X → Y)
   where
 
