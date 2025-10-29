@@ -60,11 +60,12 @@ module _
   (q : ℚ)
   where
 
-  is-nonnegative-ℚ : UU lzero
-  is-nonnegative-ℚ = is-nonnegative-fraction-ℤ (fraction-ℚ q)
+  opaque
+    is-nonnegative-ℚ : UU lzero
+    is-nonnegative-ℚ = is-nonnegative-fraction-ℤ (fraction-ℚ q)
 
-  is-prop-is-nonnegative-ℚ : is-prop is-nonnegative-ℚ
-  is-prop-is-nonnegative-ℚ = is-prop-is-nonnegative-fraction-ℤ (fraction-ℚ q)
+    is-prop-is-nonnegative-ℚ : is-prop is-nonnegative-ℚ
+    is-prop-is-nonnegative-ℚ = is-prop-is-nonnegative-fraction-ℤ (fraction-ℚ q)
 
   is-nonnegative-prop-ℚ : Prop lzero
   pr1 is-nonnegative-prop-ℚ = is-nonnegative-ℚ
@@ -99,20 +100,17 @@ module _
   is-nonnegative-rational-ℚ⁰⁺ : is-nonnegative-ℚ rational-ℚ⁰⁺
   is-nonnegative-rational-ℚ⁰⁺ = pr2 x
 
-  is-nonnegative-fraction-ℚ⁰⁺ : is-nonnegative-fraction-ℤ fraction-ℚ⁰⁺
-  is-nonnegative-fraction-ℚ⁰⁺ = pr2 x
+  opaque
+    unfolding is-nonnegative-ℚ
+
+    is-nonnegative-fraction-ℚ⁰⁺ : is-nonnegative-fraction-ℤ fraction-ℚ⁰⁺
+    is-nonnegative-fraction-ℚ⁰⁺ = pr2 x
 
   is-nonnegative-numerator-ℚ⁰⁺ : is-nonnegative-ℤ numerator-ℚ⁰⁺
   is-nonnegative-numerator-ℚ⁰⁺ = is-nonnegative-fraction-ℚ⁰⁺
 
   is-positive-denominator-ℚ⁰⁺ : is-positive-ℤ denominator-ℚ⁰⁺
   is-positive-denominator-ℚ⁰⁺ = is-positive-denominator-ℚ rational-ℚ⁰⁺
-
-zero-ℚ⁰⁺ : ℚ⁰⁺
-zero-ℚ⁰⁺ = zero-ℚ , _
-
-one-ℚ⁰⁺ : ℚ⁰⁺
-one-ℚ⁰⁺ = one-ℚ , _
 ```
 
 ## Properties
@@ -132,42 +130,52 @@ is-set-ℚ⁰⁺ : is-set ℚ⁰⁺
 is-set-ℚ⁰⁺ = is-set-type-subtype is-nonnegative-prop-ℚ is-set-ℚ
 ```
 
-### All positive rational numbers are nonnegative
-
-```agda
-abstract
-  is-nonnegative-is-positive-ℚ : (q : ℚ) → is-positive-ℚ q → is-nonnegative-ℚ q
-  is-nonnegative-is-positive-ℚ _ = is-nonnegative-is-positive-ℤ
-
-nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
-nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ q H)
-```
-
 ### The rational image of a nonnegative integer is nonnegative
 
 ```agda
-abstract
+opaque
+  unfolding is-nonnegative-ℚ
+
   is-nonnegative-rational-ℤ :
-    (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℚ (rational-ℤ x)
-  is-nonnegative-rational-ℤ _ H = H
+    {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℚ (rational-ℤ x)
+  is-nonnegative-rational-ℤ H = H
 
 nonnegative-rational-nonnegative-ℤ : nonnegative-ℤ → ℚ⁰⁺
 nonnegative-rational-nonnegative-ℤ (x , x-is-neg) =
-  ( rational-ℤ x , is-nonnegative-rational-ℤ x x-is-neg)
+  ( rational-ℤ x , is-nonnegative-rational-ℤ x-is-neg)
 ```
 
 ### The images of natural numbers in the rationals are nonnegative
 
 ```agda
-nonnegative-rational-ℕ : ℕ → ℚ⁰⁺
-nonnegative-rational-ℕ n = (rational-ℕ n , is-nonnegative-int-ℕ n)
+module _
+  (n : ℕ)
+  where
+
+  opaque
+    unfolding is-nonnegative-ℚ
+
+    is-nonnegative-rational-ℕ : is-nonnegative-ℚ (rational-ℕ n)
+    is-nonnegative-rational-ℕ = is-nonnegative-int-ℕ n
+
+  nonnegative-rational-ℕ : ℚ⁰⁺
+  nonnegative-rational-ℕ = (rational-ℕ n , is-nonnegative-rational-ℕ)
+
+zero-ℚ⁰⁺ : ℚ⁰⁺
+zero-ℚ⁰⁺ = nonnegative-rational-ℕ zero-ℕ
+
+one-ℚ⁰⁺ : ℚ⁰⁺
+one-ℚ⁰⁺ = nonnegative-rational-ℕ 1
+
+is-nonnegative-one-ℚ : is-nonnegative-ℚ one-ℚ
+is-nonnegative-one-ℚ = is-nonnegative-rational-ℕ 1
 ```
 
 ### The rational image of a nonnegative integer fraction is nonnegative
 
 ```agda
 opaque
-  unfolding rational-fraction-ℤ
+  unfolding is-nonnegative-ℚ rational-fraction-ℤ
 
   is-nonnegative-rational-fraction-ℤ :
     {x : fraction-ℤ} (P : is-nonnegative-fraction-ℤ x) →
@@ -182,30 +190,26 @@ opaque
 ### A rational number `x` is nonnegative if and only if `0 ≤ x`
 
 ```agda
-module _
-  (x : ℚ)
-  where
+opaque
+  unfolding is-nonnegative-ℚ leq-ℚ-Prop
 
-  opaque
-    unfolding leq-ℚ-Prop
+  leq-zero-is-nonnegative-ℚ : {x : ℚ} → is-nonnegative-ℚ x → leq-ℚ zero-ℚ x
+  leq-zero-is-nonnegative-ℚ {x} =
+    is-nonnegative-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
 
-    leq-zero-is-nonnegative-ℚ : is-nonnegative-ℚ x → leq-ℚ zero-ℚ x
-    leq-zero-is-nonnegative-ℚ =
-      is-nonnegative-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
+  is-nonnegative-leq-zero-ℚ : {x : ℚ} → leq-ℚ zero-ℚ x → is-nonnegative-ℚ x
+  is-nonnegative-leq-zero-ℚ {x} =
+    is-nonnegative-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
 
-    is-nonnegative-leq-zero-ℚ : leq-ℚ zero-ℚ x → is-nonnegative-ℚ x
-    is-nonnegative-leq-zero-ℚ =
-      is-nonnegative-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
-
-    is-nonnegative-iff-leq-zero-ℚ : is-nonnegative-ℚ x ↔ leq-ℚ zero-ℚ x
-    is-nonnegative-iff-leq-zero-ℚ =
-      ( leq-zero-is-nonnegative-ℚ ,
-        is-nonnegative-leq-zero-ℚ)
+is-nonnegative-iff-leq-zero-ℚ : (x : ℚ) → is-nonnegative-ℚ x ↔ leq-ℚ zero-ℚ x
+is-nonnegative-iff-leq-zero-ℚ x =
+  ( leq-zero-is-nonnegative-ℚ ,
+    is-nonnegative-leq-zero-ℚ)
 
 abstract
   leq-zero-rational-ℚ⁰⁺ : (p : ℚ⁰⁺) → leq-ℚ zero-ℚ (rational-ℚ⁰⁺ p)
   leq-zero-rational-ℚ⁰⁺ (p , is-nonneg-p) =
-    leq-zero-is-nonnegative-ℚ p is-nonneg-p
+    leq-zero-is-nonnegative-ℚ is-nonneg-p
 ```
 
 ### The successor of a nonnegative rational number is positive
@@ -216,12 +220,11 @@ abstract
     (q : ℚ) → is-nonnegative-ℚ q → is-positive-ℚ (succ-ℚ q)
   is-positive-succ-is-nonnegative-ℚ q H =
     is-positive-le-zero-ℚ
-      ( succ-ℚ q)
       ( concatenate-leq-le-ℚ
         ( zero-ℚ)
         ( q)
         ( succ-ℚ q)
-        ( leq-zero-is-nonnegative-ℚ q H)
+        ( leq-zero-is-nonnegative-ℚ H)
         ( le-left-add-rational-ℚ⁺ q one-ℚ⁺))
 
 positive-succ-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁺
@@ -248,4 +251,29 @@ abstract
 
 nonnegative-diff-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ℚ⁰⁺
 nonnegative-diff-leq-ℚ x y x≤y = (y -ℚ x , is-nonnegative-diff-leq-ℚ x y x≤y)
+```
+
+### If `x ≤ y` and `x` is nonnegative, then `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-leq-ℚ⁰⁺ :
+    (x : ℚ⁰⁺) (y : ℚ) → leq-ℚ (rational-ℚ⁰⁺ x) y →
+    is-nonnegative-ℚ y
+  is-nonnegative-leq-ℚ⁰⁺ (x , is-nonneg-x) y x≤y =
+    is-nonnegative-leq-zero-ℚ
+      ( transitive-leq-ℚ zero-ℚ x y
+        ( x≤y)
+        ( leq-zero-is-nonnegative-ℚ is-nonneg-x))
+```
+
+### If `x < y` and `x` is nonnegative, then `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-le-ℚ⁰⁺ :
+    (x : ℚ⁰⁺) (y : ℚ) → le-ℚ (rational-ℚ⁰⁺ x) y →
+    is-nonnegative-ℚ y
+  is-nonnegative-le-ℚ⁰⁺ x y x<y =
+    is-nonnegative-leq-ℚ⁰⁺ x y (leq-le-ℚ x<y)
 ```

@@ -512,7 +512,7 @@ abstract
   trichotomy-le-ℚ :
     {l : Level} {A : UU l} (x y : ℚ) →
     ( le-ℚ x y → A) →
-    ( Id x y → A) →
+    ( x ＝ y → A) →
     ( le-ℚ y x → A) →
     A
   trichotomy-le-ℚ x y left eq right
@@ -580,11 +580,10 @@ abstract
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding neg-ℚ
+  unfolding le-ℚ-Prop neg-ℚ
 
-  neg-le-ℚ : (x y : ℚ) → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
-  neg-le-ℚ x y = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+  neg-le-ℚ : {x y : ℚ} → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
+  neg-le-ℚ {x} {y} = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ### Transposing additions on strict inequalities of rational numbers

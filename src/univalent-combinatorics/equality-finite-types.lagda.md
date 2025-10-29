@@ -64,7 +64,7 @@ has-decidable-equality-has-cardinality-ℕ {l1} {X} k H =
 abstract
   is-finite-eq :
     {l : Level} {X : UU l} →
-    has-decidable-equality X → {x y : X} → is-finite (Id x y)
+    has-decidable-equality X → {x y : X} → is-finite (x ＝ y)
   is-finite-eq d {x} {y} = is-finite-count (count-eq d x y)
 
 is-finite-eq-is-finite :
@@ -79,6 +79,6 @@ is-finite-eq-Finite-Type X =
 
 Id-Finite-Type :
   {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
-pr1 (Id-Finite-Type X x y) = Id x y
+pr1 (Id-Finite-Type X x y) = x ＝ y
 pr2 (Id-Finite-Type X x y) = is-finite-eq-Finite-Type X
 ```

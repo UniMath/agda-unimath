@@ -12,8 +12,10 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -140,4 +142,52 @@ module _
       ( map-convergent-cauchy-approximation-Metric-Space ε)
       ( limit-convergent-cauchy-approximation-Metric-Space)
   is-limit-limit-convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)
+```
+
+## Properties
+
+### Constant Cauchy approximations are convergent
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  is-convergent-const-cauchy-approximation-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( A)
+      ( const-cauchy-approximation-Metric-Space A x)
+  is-convergent-const-cauchy-approximation-Metric-Space =
+    ( x , is-limit-const-cauchy-approximation-Metric-Space A x)
+
+  convergent-const-cauchy-approximation-Metric-Space :
+    convergent-cauchy-approximation-Metric-Space A
+  convergent-const-cauchy-approximation-Metric-Space =
+    ( const-cauchy-approximation-Metric-Space A x ,
+      is-convergent-const-cauchy-approximation-Metric-Space)
+```
+
+### Any metric space is a retract of its type of convergent Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  where
+
+  abstract
+    is-retraction-convergent-cauchy-approximation-Metric-Space :
+      ( limit-convergent-cauchy-approximation-Metric-Space A ∘
+        convergent-const-cauchy-approximation-Metric-Space A) ~
+      ( id)
+    is-retraction-convergent-cauchy-approximation-Metric-Space x = refl
+
+  retract-convergent-cauchy-approximation-Metric-Space :
+    retract
+      ( convergent-cauchy-approximation-Metric-Space A)
+      ( type-Metric-Space A)
+  retract-convergent-cauchy-approximation-Metric-Space =
+    ( convergent-const-cauchy-approximation-Metric-Space A ,
+      limit-convergent-cauchy-approximation-Metric-Space A ,
+      is-retraction-convergent-cauchy-approximation-Metric-Space)
 ```

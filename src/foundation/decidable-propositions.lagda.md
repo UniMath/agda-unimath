@@ -9,6 +9,7 @@ open import foundation-core.decidable-propositions public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.decidable-equality
@@ -76,8 +77,7 @@ split-Decidable-Prop :
   Decidable-Prop l ≃
   ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
 split-Decidable-Prop {l} =
-  ( left-distributive-Σ-coproduct (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
-  ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
+  left-distributive-Σ-coproduct ∘e inv-associative-Σ
 ```
 
 ### The type of decidable propositions in universe level `l` is equivalent to the type of booleans

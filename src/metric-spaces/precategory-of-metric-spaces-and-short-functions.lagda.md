@@ -232,16 +232,21 @@ module _
   {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
   where
+
   equiv-isometric-equiv-iso-short-function-Metric-Space' :
     iso-Precategory precategory-short-function-Metric-Space A B ≃
     isometric-equiv-Metric-Space' A B
   equiv-isometric-equiv-iso-short-function-Metric-Space' =
-    equiv-tot
-      ( equiv-is-isometric-equiv-is-iso-short-function-Metric-Space A B) ∘e
-    associative-Σ
-      ( type-function-Metric-Space A B)
-      ( is-short-function-Metric-Space A B)
-      ( is-iso-Precategory precategory-short-function-Metric-Space {A} {B})
+    ( equiv-tot
+      ( equiv-is-isometric-equiv-is-iso-short-function-Metric-Space A B)) ∘e
+    ( associative-Σ)
+
+  map-equiv-isometric-equiv-iso-short-function-Metric-Space' :
+    iso-Precategory precategory-short-function-Metric-Space A B →
+    isometric-equiv-Metric-Space' A B
+  map-equiv-isometric-equiv-iso-short-function-Metric-Space' =
+    map-equiv
+      ( equiv-isometric-equiv-iso-short-function-Metric-Space')
 ```
 
 ## See also

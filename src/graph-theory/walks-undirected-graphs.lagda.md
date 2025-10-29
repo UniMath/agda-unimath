@@ -194,10 +194,7 @@ module _
       ( equiv-is-contr
         ( is-torsorial-Id (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coproduct
-      ( vertex-Undirected-Graph G)
-      ( is-vertex-on-walk-Undirected-Graph G w)
-      ( λ z → other-element-unordered-pair p y ＝ z))
+    ( left-distributive-Σ-coproduct)
 ```
 
 ### The type of edges on a constant walk is empty
@@ -233,10 +230,7 @@ module _
       ( equiv-is-contr
         ( is-torsorial-Id (pair p e))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coproduct
-      ( total-edge-Undirected-Graph G)
-      ( is-edge-on-walk-Undirected-Graph' G w)
-      ( λ z → pair p e ＝ z))
+    ( left-distributive-Σ-coproduct)
 ```
 
 ### Right unit law for concatenation of walks

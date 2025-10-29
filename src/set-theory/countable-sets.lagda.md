@@ -99,18 +99,18 @@ module _
   {l : Level} (X : Set l)
   where
 
-  decidable-subprojection-ℕ : UU (lsuc l ⊔ l)
+  decidable-subprojection-ℕ : UU (lsuc l)
   decidable-subprojection-ℕ =
     Σ ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
-  is-countable-Prop' : Prop (lsuc l ⊔ l)
+  is-countable-Prop' : Prop (lsuc l)
   is-countable-Prop' =
     exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
-  is-countable' : UU (lsuc l ⊔ l)
+  is-countable' : UU (lsuc l)
   is-countable' = type-Prop is-countable-Prop'
 
   is-prop-is-countable' : is-prop is-countable'
@@ -591,9 +591,8 @@ module _
     exists-emb-ℕ-countable-discrete-Set :
       exists (type-Set X → ℕ) is-emb-Prop
     exists-emb-ℕ-countable-discrete-Set =
-      rec-trunc-Prop
-        ( ∃ (type-Set X → ℕ) is-emb-Prop)
-        ( λ e → unit-trunc-Prop (emb-ℕ-enumeration-discrete-Set X e K))
+      map-trunc-Prop
+        ( λ e → emb-ℕ-enumeration-discrete-Set X e K)
         ( H)
 ```
 

@@ -41,7 +41,7 @@ A W-type `𝕎 A B` is said to be **extensional** if for any two elements
 `S T : 𝕎 A B` the induced map
 
 ```text
-  Id S T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
+  S ＝ T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
 ```
 
 is an equivalence.
@@ -135,10 +135,7 @@ module _
                 ( equiv-tot
                   ( λ g →
                     inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e
-          ( associative-Σ
-            ( A)
-            ( λ x → B x → 𝕎 A B)
-            ( λ t → Eq-ext-𝕎 (tree-𝕎 a f) (tree-𝕎 (pr1 t) (pr2 t))))) ∘e
+          ( associative-Σ)) ∘e
         ( equiv-Σ
           ( λ (t : Σ A (λ x → B x → 𝕎 A B)) →
             Eq-ext-𝕎 (tree-𝕎 a f) (tree-𝕎 (pr1 t) (pr2 t)))

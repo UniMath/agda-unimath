@@ -60,10 +60,9 @@ inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 is-section-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id
-    ( generating-map-fibonacci-pair-Fin k
-      ( inv-generating-map-fibonacci-pair-Fin k p))
-    ( p)
+  generating-map-fibonacci-pair-Fin k
+    ( inv-generating-map-fibonacci-pair-Fin k p) ＝
+  p
 is-section-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair refl
     ( ( commutative-add-Fin
@@ -76,10 +75,9 @@ is-section-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 is-retraction-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id
-    ( inv-generating-map-fibonacci-pair-Fin k
-      ( generating-map-fibonacci-pair-Fin k p))
-    ( p)
+  inv-generating-map-fibonacci-pair-Fin k
+    ( generating-map-fibonacci-pair-Fin k p) ＝
+  p
 is-retraction-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair
     ( ( commutative-add-Fin
@@ -107,9 +105,8 @@ fibonacci-pair-Fin k (succ-ℕ n) =
 
 compute-fibonacci-pair-Fin :
   (k : ℕ) (n : ℕ) →
-  Id
-    ( fibonacci-pair-Fin k n)
-    ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
+  fibonacci-pair-Fin k n ＝
+  ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
 compute-fibonacci-pair-Fin k zero-ℕ = refl
 compute-fibonacci-pair-Fin k (succ-ℕ zero-ℕ) =
   ap-binary pair refl (right-unit-law-add-Fin k (one-Fin k))
@@ -168,8 +165,10 @@ is-lower-bound-pisano-period k =
   pr2 (pr2 (minimal-ordered-repetition-fibonacci-pair-Fin k))
 
 cases-is-repetition-of-zero-pisano-period :
-  (k x y : ℕ) → Id (pr1 (is-ordered-repetition-pisano-period k)) x →
-  Id (pisano-period k) y → is-zero-ℕ x
+  (k x y : ℕ) →
+  pr1 (is-ordered-repetition-pisano-period k) ＝ x →
+  pisano-period k ＝ y →
+  is-zero-ℕ x
 cases-is-repetition-of-zero-pisano-period k zero-ℕ y p q = refl
 cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) zero-ℕ p q =
   ex-falso
@@ -205,7 +204,7 @@ is-repetition-of-zero-pisano-period k =
 
 compute-fibonacci-pair-Fin-pisano-period :
   (k : ℕ) →
-  Id (fibonacci-pair-Fin k (pisano-period k)) (fibonacci-pair-Fin k zero-ℕ)
+  fibonacci-pair-Fin k (pisano-period k) ＝ fibonacci-pair-Fin k zero-ℕ
 compute-fibonacci-pair-Fin-pisano-period k =
   ( inv (pr2 (pr2 (is-ordered-repetition-pisano-period k)))) ∙
   ( ap (fibonacci-pair-Fin k) (is-repetition-of-zero-pisano-period k))

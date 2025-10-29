@@ -1,5 +1,9 @@
 # Ring theory
 
+## Examples of rings
+
+{{#include tables/rings.md}}
+
 ## Modules in the ring theory namespace
 
 ```agda
@@ -83,6 +87,7 @@ open import ring-theory.right-ideals-rings public
 open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.subrings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-of-finite-families-of-elements-rings public

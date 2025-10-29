@@ -283,8 +283,7 @@ module _
 
   is-pullback-family-is-pullback-tot :
     is-pullback f g c →
-    is-pullback
-      (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family →
+    is-pullback (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family →
     (x : C) →
     is-pullback
       ( ( tr PX (coherence-square-cone f g c x)) ∘

@@ -33,6 +33,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -591,6 +592,9 @@ module _
         ( upper-real-mul-ℝ x y)
         ( is-disjoint-lower-upper-cut-mul-ℝ x y)
         ( is-located-mul-ℝ)
+
+mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
+mul-ℝ' y x = mul-ℝ x y
 
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)

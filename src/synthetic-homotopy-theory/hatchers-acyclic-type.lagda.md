@@ -219,11 +219,7 @@ module _
           ( ( ( left-unit-law-Σ-is-contr
                 ( is-torsorial-Id' (a ∙ a))
                 ( a ∙ a , refl)) ∘e
-              ( inv-associative-Σ
-                ( type-Ω (Ω A))
-                ( λ b → b ＝ (a ∙ a))
-                ( λ bq →
-                  power-nat-Ω 5 (Ω A) a ＝ power-nat-Ω 3 (Ω A) (pr1 bq)))) ∘e
+              ( inv-associative-Σ)) ∘e
             ( equiv-tot
               ( λ b →
                 ( commutative-product) ∘e

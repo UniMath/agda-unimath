@@ -92,6 +92,7 @@ open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers public
 open import elementary-number-theory.inequality-arithmetic-geometric-means-integers public
 open import elementary-number-theory.inequality-arithmetic-geometric-means-rational-numbers public
 open import elementary-number-theory.inequality-conatural-numbers public
@@ -147,6 +148,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.multiplicative-group-of-rational-numbers public
 open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-nonnegative-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
@@ -177,7 +179,10 @@ open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.positive-rational-numbers public
 open import elementary-number-theory.powers-integers public
+open import elementary-number-theory.powers-nonnegative-rational-numbers public
 open import elementary-number-theory.powers-of-two public
+open import elementary-number-theory.powers-positive-rational-numbers public
+open import elementary-number-theory.powers-rational-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-closed-intervals-rational-numbers public

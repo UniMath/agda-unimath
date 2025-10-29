@@ -146,19 +146,9 @@ module _
     ( left-unit-law-Σ-is-contr
       ( is-torsorial-Id (point-Pointed-Type Y))
       ( point-Pointed-Type Y , refl)) ∘e
-    ( inv-associative-Σ
-      ( type-Pointed-Type Y)
-      ( λ z → point-Pointed-Type Y ＝ z)
-      ( λ t →
-        Σ ( type-Pointed-Type X → point-Pointed-Type Y ＝ pr1 t)
-          ( λ f → f (point-Pointed-Type X) ＝ pr2 t))) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
-    ( associative-Σ
-      ( type-Pointed-Type Y)
-      ( λ y1 → type-Pointed-Type X → point-Pointed-Type Y ＝ y1)
-      ( λ z →
-        Σ ( point-Pointed-Type Y ＝ pr1 z)
-          ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
+    ( associative-Σ) ∘e
     ( inv-right-unit-law-Σ-is-contr
       ( λ z → is-torsorial-Id (pr2 z (point-Pointed-Type X)))) ∘e
     ( left-unit-law-Σ-is-contr
