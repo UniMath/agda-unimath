@@ -56,13 +56,12 @@ transitive-mere-decidable-emb :
 transitive-mere-decidable-emb = map-binary-trunc-Prop comp-decidable-emb
 
 mere-decidable-emb-Large-Preorder : Large-Preorder lsuc (_⊔_)
-type-Large-Preorder mere-decidable-emb-Large-Preorder l = UU l
-leq-prop-Large-Preorder mere-decidable-emb-Large-Preorder =
-  mere-decidable-emb-Prop
-refl-leq-Large-Preorder mere-decidable-emb-Large-Preorder =
-  refl-mere-decidable-emb
-transitive-leq-Large-Preorder mere-decidable-emb-Large-Preorder X Y Z =
-  transitive-mere-decidable-emb
+mere-decidable-emb-Large-Preorder =
+  λ where
+  .type-Large-Preorder l → UU l
+  .leq-prop-Large-Preorder → mere-decidable-emb-Prop
+  .refl-leq-Large-Preorder →  refl-mere-decidable-emb
+  .transitive-leq-Large-Preorder X Y Z → transitive-mere-decidable-emb
 ```
 
 ### Assuming WLPO, then types equipped with mere decidable embeddings form a partial ordering
