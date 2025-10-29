@@ -407,4 +407,4 @@ fiber-Σ {l1} {l2} X A =
   [`structured-types.pointed-type-duality`](structured-types.pointed-type-duality.md)
   we show that families of [pointed types](structured-types.pointed-types.md)
   are equivalently described as
-  [retractive types](structured-types.retractive-types.md)
+  [retractive types](structured-types.retractive-types.md).
