@@ -214,4 +214,4 @@ module _
 
 ## External links
 
-- <https://elisabeth.stenholm.one/univalent-material-set-theory/e-structure.core.html>
+- <https://git.app.uib.no/hott/hott-set-theory/-/blob/master/src/e-structure/core.agda>
