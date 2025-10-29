@@ -20,8 +20,10 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.weak-limited-principle-of-omniscience
 
 open import set-theory.cardinals
+open import set-theory.equality-cardinals
 ```
 
 </details>
@@ -210,11 +212,9 @@ Using the previous result and assuming the weak limited principle of
 omniscience, we can conclude `leq-complemented-Cardinal` is a partial order by
 showing that it is antisymmetric.
 
-> This remains to be formalized.
-
-```text
+```agda
 module _
-  {l : Level} (wlpo : WLPO l)
+  {l : Level} (wlpo : level-WLPO l)
   where
 
   antisymmetric-leq-complemented-cardinality :
