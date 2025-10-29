@@ -133,14 +133,15 @@ module _
   compute-total-Eq-type-polynomial-endofunctor-UU' X =
     equiv-tot (compute-Eq-type-polynomial-endofunctor-UU' X)
 
-  is-torsorial-Eq-type-polynomial-endofunctor-UU' :
-    (X : type-polynomial-endofunctor-UU l A) →
-    is-torsorial (Eq-type-polynomial-endofunctor-UU' X)
-  is-torsorial-Eq-type-polynomial-endofunctor-UU' X =
-    is-contr-equiv
-      ( Σ ( type-polynomial-endofunctor-UU l A) (X ＝_))
-      ( compute-total-Eq-type-polynomial-endofunctor-UU' X)
-      ( is-torsorial-Id X)
+  abstract
+    is-torsorial-Eq-type-polynomial-endofunctor-UU' :
+      (X : type-polynomial-endofunctor-UU l A) →
+      is-torsorial (Eq-type-polynomial-endofunctor-UU' X)
+    is-torsorial-Eq-type-polynomial-endofunctor-UU' X =
+      is-contr-equiv
+        ( Σ ( type-polynomial-endofunctor-UU l A) (X ＝_))
+        ( compute-total-Eq-type-polynomial-endofunctor-UU' X)
+        ( is-torsorial-Id X)
 ```
 
 ### If `A` is locally `l`-small, then we can construct an embedding `type-polynomial-endofunctor l A ↪ type-exp-UU A`
@@ -155,11 +156,12 @@ module _
   map-type-duality (X , f) a =
     Σ X (λ x → type-is-small (H (f x) a))
 
-  is-emb-map-type-duality : is-emb map-type-duality
-  is-emb-map-type-duality (X , f) =
-    fundamental-theorem-id
-      ( is-torsorial-Eq-type-polynomial-endofunctor-UU' H (X , f))
-      ( λ Y → ap map-type-duality)
+  abstract
+    is-emb-map-type-duality : is-emb map-type-duality
+    is-emb-map-type-duality (X , f) =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-type-polynomial-endofunctor-UU' H (X , f))
+        ( λ Y → ap map-type-duality)
 
   emb-type-duality :
     type-polynomial-endofunctor-UU l A ↪ type-exp-UU l A
@@ -183,46 +185,54 @@ module _
     ( pr1) ∘
     ( map-inv-equiv-is-small (is-small-Σ H (λ a → is-small' {l} {B a})))
 
-  is-section-map-inv-type-duality :
-    is-section
-      ( map-type-duality (is-locally-small-is-small H))
-      ( map-inv-type-duality)
-  is-section-map-inv-type-duality B =
-    eq-equiv-fam
-      ( λ a →
-        equivalence-reasoning
-          map-type-duality
-            ( is-locally-small-is-small H)
-            ( map-inv-type-duality B)
-            ( a)
-          ≃ fiber
-            ( ( pr1 {B = B}) ∘
-              ( map-inv-equiv-is-small (is-small-Σ H (λ a → is-small')))) a
-            by
-            equiv-tot
-              ( λ x →
-                inv-equiv
-                  ( equiv-is-small
-                    ( is-locally-small-is-small H
-                      ( pr2 (map-inv-type-duality B) x)
-                      ( a))))
-          ≃ Σ ( fiber (pr1 {B = B}) a)
-              ( λ b →
-                fiber
-                  ( map-inv-equiv-is-small
-                    ( is-small-Σ H (λ a → is-small' {l} {B a})))
-                  ( pr1 b))
-            by compute-fiber-comp pr1 _ a
-          ≃ fiber (pr1 {B = B}) a
-            by
-            right-unit-law-Σ-is-contr
-              ( λ b →
-                is-contr-map-is-equiv
-                  ( is-equiv-map-inv-equiv-is-small
-                    ( is-small-Σ H (λ a → is-small' {l} {B a})))
-                  ( pr1 b))
-          ≃ B a
-            by equiv-fiber-pr1 B a)
+  compute-map-type-duality :
+    (B : type-exp-UU l A) (a : A) →
+    map-type-duality
+      ( is-locally-small-is-small H)
+      ( map-inv-type-duality B)
+      ( a) ≃
+    B a
+  compute-map-type-duality B a =
+    equivalence-reasoning
+      map-type-duality
+        ( is-locally-small-is-small H)
+        ( map-inv-type-duality B)
+        ( a)
+      ≃ fiber
+          ( pr1 ∘ map-inv-equiv-is-small (is-small-Σ H (λ a → is-small')))
+          ( a)
+        by
+        equiv-tot
+          ( λ x →
+            inv-equiv-is-small
+              ( is-locally-small-is-small H
+                ( pr2 (map-inv-type-duality B) x)
+                ( a)))
+      ≃ Σ ( fiber pr1 a)
+          ( λ b →
+            fiber
+              ( map-inv-equiv-is-small
+                ( is-small-Σ H (λ a → is-small' {l} {B a})))
+              ( pr1 b))
+        by compute-fiber-comp pr1 _ a
+      ≃ fiber pr1 a
+        by
+        right-unit-law-Σ-is-contr
+          ( λ b →
+            is-contr-map-is-equiv
+              ( is-equiv-map-inv-equiv-is-small
+                ( is-small-Σ H (λ a → is-small' {l} {B a})))
+              ( pr1 b))
+      ≃ B a
+        by equiv-fiber-pr1 B a
+
+  abstract
+    is-section-map-inv-type-duality :
+      is-section
+        ( map-type-duality (is-locally-small-is-small H))
+        ( map-inv-type-duality)
+    is-section-map-inv-type-duality B =
+      eq-equiv-fam (compute-map-type-duality B)
 
   is-retraction-map-inv-type-duality :
     is-retraction
