@@ -53,7 +53,7 @@ is a function
   (x : X) → ((u : A) → (u ∈ x) → P u) → P x.
 ```
 
-In {{#cite GS24}}, such types are said to have elementhood structures that
+In {{#cite GS26}}, such types are said to have elementhood structures that
 satisfy _foundation_.
 
 ## Definitions
@@ -194,7 +194,7 @@ module _
 
 ### Uniqueness of comprehensions
 
-This is Proposition 4 of {{#cite GS24}}.
+This is Proposition 4 of {{#cite GS26}}.
 
 ```agda
 module _

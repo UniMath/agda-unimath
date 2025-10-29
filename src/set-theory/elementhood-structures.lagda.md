@@ -149,7 +149,7 @@ If the elementhood relation `_∈_ : A → A → Type` is valued in a
 [localization](orthogonal-factorization-systems.reflective-global-subuniverses.md)
 `ℒ`, then `A` is `ℒ`-[separated](foundation.separated-types-subuniverses.md).
 
-This is a generalization of Proposition 1 of {{#cite GS24}}.
+This is a generalization of Proposition 1 of {{#cite GS26}}.
 
 **Proof.** By extensionality, `(x ＝ y) ≃ ((u : A) → (u ∈ x) ≃ (u ∈ y))`, and
 the right hand side is a dependent product of equivalence types between
@@ -178,7 +178,7 @@ module _
 
 ### Uniqueness of comprehensions
 
-This is Proposition 4 of {{#cite GS24}}.
+This is Proposition 4 of {{#cite GS26}}.
 
 ```agda
 module _
