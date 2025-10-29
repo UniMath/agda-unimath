@@ -16,6 +16,8 @@ automorhpsims->automorphisms
 automorphsim->automorphism
 automorphsims->automorphisms
 cagegory->category
+characteriation->characterization
+characteriing->characterizing
 consistsing->consisting
 eacy->each,easy
 embeddding->embedding
