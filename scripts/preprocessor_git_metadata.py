@@ -214,13 +214,14 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     source_file_name = potential_source_file_name
 
     if source_file_name in config['suppress_processing']:
+        # Suppress processing for this page
         return
 
     if source_file_name in config['sitewide_changes']:
-        # If this is the home page, append recent sitewide changes
+        # Insert recent sitewide changes on page
         footer_recent_sitewide = get_recent_sitewide_changes(
             contributors, config['contributors_file'])
-        # Append to end of file (after footer)
+        # Append to end of file
         chapter['content'] += '\n' + footer_recent_sitewide
         return
 
