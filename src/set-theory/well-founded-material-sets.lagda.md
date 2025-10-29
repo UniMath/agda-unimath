@@ -248,4 +248,4 @@ module _
 
 ## External links
 
-- <https://elisabeth.stenholm.one/univalent-material-set-theory/e-structure.property.foundation.html>
+- <https://git.app.uib.no/hott/hott-set-theory/-/blob/master/src/e-structure/property/foundation.agda>
