@@ -56,6 +56,10 @@ suppress_processing = [
   "docs/SUMMARY.md",
   "docs/VISUALIZATION.md"
 ]
+sitewide_changes = [
+  "docs/HOME.md",
+  "docs/SUMMARY.md"
+]
 
 [preprocessor.concepts]
 command = "python3 ./scripts/preprocessor_concepts.py"

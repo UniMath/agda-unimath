@@ -116,6 +116,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
         '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
         'HEAD', '--', filename
     ], capture_output=True, text=True, check=True).stdout.splitlines()
+
     recent_changes = '## Recent changes\n'
     for recent_changes_line in recent_changes_output:
         [sha, date, message, *raw_authors] = recent_changes_line.split('\t')
@@ -145,6 +146,55 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     )
 
 
+def get_recent_sitewide_changes(contributors, contributors_file):
+    """
+    Returns an HTML list of the most recent RECENT_CHANGES_COUNT commits
+    across the entire repository.
+    """
+    recent_changes_output = subprocess.run([
+        'git', 'log',
+        # Show only last RECENT_CHANGES_COUNT commits
+        '-n', str(RECENT_CHANGES_COUNT),
+        # Skip chore commits
+        '--invert-grep', '--grep=^chore:',
+        # Get hash, date, message, author and coauthors, separated by tabs
+        # NB When there are no trailers, the line ends with a tab
+        # NB Coauthors usually have the format "name <email>" and there is
+        #    no way to tell git to strip the email, so it needs to be done
+        #    in post processing
+        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
+        'HEAD'
+    ], capture_output=True, text=True, check=True).stdout.splitlines()
+
+    skipped_authors = set()
+    recent_changes = '## Recent changes\n'
+
+    for line in recent_changes_output:
+        [sha, date, message, *raw_authors] = line.split('\t')
+        author_indices = []
+        for raw_author in map(cleanup_author_part, raw_authors):
+            if raw_author == '':
+                continue
+            author_index = get_real_author_index(raw_author, contributors)
+            if author_index is None:
+                skipped_authors.add(raw_author)
+                continue
+            author_indices.append(author_index)
+
+        if not author_indices:
+            continue
+
+        formatted_authors = format_multiple_authors_attribution([
+            contributors[idx]['displayName'] for idx in author_indices
+        ])
+        recent_changes +=  f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+
+    if skipped_authors:
+        print_skipping_contributors_warning(skipped_authors, contributors_file)
+
+    return recent_changes
+
+
 def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     """
     Modifies chapter's content to reflect its git contributors,
@@ -166,12 +216,21 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     if source_file_name in config['suppress_processing']:
         return
 
+    if source_file_name in config['sitewide_changes']:
+        # If this is the home page, append recent sitewide changes
+        footer_recent_sitewide = get_recent_sitewide_changes(
+            contributors, config['contributors_file'])
+        # Append to end of file (after footer)
+        chapter['content'] += '\n' + footer_recent_sitewide
+        return
+
     header_info_element, footer_info_element = get_author_element_for_file(
         source_file_name,
         any((source_file_name.endswith(ext)
             for ext in config['attribute_file_extensions'])),
         contributors,
         config['contributors_file'])
+
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
     chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
@@ -225,6 +284,8 @@ if __name__ == '__main__':
         'attribute_file_extensions', [])
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
+    metadata_config['sitewide_changes'] = metadata_config.get(
+        'sitewide_changes', [])
     metadata_config['contributors_file'] = metadata_config.get(
         'contributors_file', 'CONTRIBUTORS.toml')
 
