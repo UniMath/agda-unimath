@@ -29,7 +29,7 @@ type-valued relation `_∈_ : A → A → Type` such that
 `(x ＝ y) ≃ ((u : A) → (u ∈ x) ≃ (u ∈ y))` for all `x y : A`.
 
 **Terminology.** Note that a material set does not generally define a homotopy
-set in the sense of [0-types](foundation-core.sets.md). Here, by _set_ is is
+set in the sense of [0-types](foundation-core.sets.md). Here, by _set_ it is
 instead meant that we have structure with an appropriate notion of
 "elementhood".
 
@@ -118,7 +118,7 @@ This is a generalization of Proposition 1 of {{#cite GS26}}.
 
 **Proof.** By extensionality, `(x ＝ y) ≃ ((u : A) → (u ∈ x) ≃ (u ∈ y))`, and
 the right hand side is a dependent product of equivalence types between
-`ℒ`-types, and so is itself an `ℒ`-type. ∎
+`ℒ`-types and so is itself an `ℒ`-type. ∎
 
 ```agda
 module _

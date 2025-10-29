@@ -148,7 +148,7 @@ This is a generalization of Proposition 1 of {{#cite GS26}}.
 
 **Proof.** By extensionality, `(x ＝ y) ≃ ((u : A) → (u ∈ x) ≃ (u ∈ y))`, and
 the right hand side is a dependent product of equivalence types between
-`ℒ`-types, and so is itself an `ℒ`-type. ∎
+`ℒ`-types and so is itself an `ℒ`-type. ∎
 
 ```agda
 module _
