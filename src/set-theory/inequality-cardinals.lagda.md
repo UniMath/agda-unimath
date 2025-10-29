@@ -22,6 +22,9 @@ open import foundation.sets
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import order-theory.large-posets
+open import order-theory.large-preorders
+
 open import set-theory.cardinals
 open import set-theory.equality-cardinals
 ```
@@ -210,6 +213,28 @@ module _
             ( function-Prop (leq-Cardinal Y X) (Id-Prop (Cardinal-Set l) X Y))))
       ( antisymmetric-leq-cardinality)
 ```
+
+### The large poset of cardinals
+
+```agda
+large-preorder-Cardinal : Large-Preorder lsuc (_⊔_)
+large-preorder-Cardinal =
+  λ where
+  .type-Large-Preorder → Cardinal
+  .leq-prop-Large-Preorder → leq-prop-Cardinal
+  .refl-leq-Large-Preorder → refl-leq-Cardinal
+  .transitive-leq-Large-Preorder → transitive-leq-Cardinal
+
+large-poset-Cardinal : LEMω → Large-Poset lsuc (_⊔_)
+large-poset-Cardinal lem =
+  λ where
+  .large-preorder-Large-Poset → large-preorder-Cardinal
+  .antisymmetric-leq-Large-Poset → antisymmetric-leq-Cardinal lem
+```
+
+## See also
+
+- [Complemented inequality of cardinals](set-theory.complemented-inequality-cardinals.md)
 
 ## External links
 

@@ -22,6 +22,9 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
 
+open import order-theory.large-posets
+open import order-theory.large-preorders
+
 open import set-theory.cardinals
 open import set-theory.equality-cardinals
 ```
@@ -30,21 +33,21 @@ open import set-theory.equality-cardinals
 
 ## Idea
 
-We may say a [cardinal of sets](set-theory.cardinals.md) `X` is
-{{#concept "less than or equal to" Agda=leq-complemented-cardinality}} a
-cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class
-represented by `X` [embeds](foundation-core.embeddings.md) as a
+We may say a [cardinal](set-theory.cardinals.md) `X` is
+{{#concept "less than or equal to" Agda=leq-complemented-Cardinal}} a cardinal
+`Y` if any [set](foundation-core.sets.md) in the isomorphism class represented
+by `X` [embeds](foundation-core.embeddings.md) as a
 [complemented subtype](foundation.decidable-subtypes.md) into any set in the
 isomorphism class represented by `Y`. In other words, if there is a
-[decidable embedding](foundation.decidable-embeddings.md) from one to the other.
-This defines the
+[decidable embedding](foundation.decidable-embeddings.md) from the first to the
+second. This defines the
 {{#concept "complemented ordering" Disambiguation="on cardinalities of sets"}}
 on cardinalities of sets.
 
 Under the assumption of the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md),
 this relation is antisymmetric and hence defines a
-[partial order](order-theory.posets.md) on cardinalites.
+[partial order](order-theory.posets.md) on cardinals.
 
 ## Definition
 
@@ -242,4 +245,22 @@ module _
               ( leq-complemented-Cardinal Y X)
               ( Id-Prop (Cardinal-Set l) X Y))))
       ( antisymmetric-leq-complemented-cardinality)
+```
+
+### The large poset of cardinals under complemented inequality
+
+```agda
+large-preorder-complemented-Cardinal : Large-Preorder lsuc (_⊔_)
+large-preorder-complemented-Cardinal =
+  λ where
+  .type-Large-Preorder → Cardinal
+  .leq-prop-Large-Preorder → leq-complemented-prop-Cardinal
+  .refl-leq-Large-Preorder → refl-leq-complemented-Cardinal
+  .transitive-leq-Large-Preorder → transitive-leq-complemented-Cardinal
+
+large-poset-complemented-Cardinal : WLPO → Large-Poset lsuc (_⊔_)
+large-poset-complemented-Cardinal wlpo =
+  λ where
+  .large-preorder-Large-Poset → large-preorder-complemented-Cardinal
+  .antisymmetric-leq-Large-Poset → antisymmetric-leq-complemented-Cardinal wlpo
 ```
