@@ -33,6 +33,9 @@ asserts that any [proposition](foundation-core.propositions.md) `P` is
 LEM : (l : Level) → UU (lsuc l)
 LEM l = (P : Prop l) → is-decidable (type-Prop P)
 
+LEMω : UUω
+LEMω = {l : Level} → LEM l
+
 prop-LEM : (l : Level) → Prop (lsuc l)
 prop-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 ```
