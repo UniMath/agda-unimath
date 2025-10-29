@@ -291,8 +291,8 @@ with the main result.
 
 ```agda
 module _
-   {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
-   {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
+  {A : UU l1} {B : UU l2}
   where
 
   abstract

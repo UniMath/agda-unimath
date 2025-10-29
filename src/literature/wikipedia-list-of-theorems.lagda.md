@@ -50,16 +50,17 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
 
-**Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
-agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martín Escardó,
-hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
-theorem.
-
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
+```
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import foundation.cantor-schroder-bernstein-decidable-embeddings using
+  ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
 ### Cantor's theorem {#Q474881}
