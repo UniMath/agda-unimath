@@ -66,13 +66,13 @@ module _
   (lower-left : coherence-triangle-maps' diagonal-down bottom left)
   where
 
-  coherence-tetrahedron-maps'' : UU (l1 ⊔ l4)
-  coherence-tetrahedron-maps'' =
+  coherence-reverse-tetrahedron-maps : UU (l1 ⊔ l4)
+  coherence-reverse-tetrahedron-maps =
     ( (right ·l upper-left) ∙h upper-right) ~
     ( (lower-right ·r left) ∙h lower-left)
 
-  coherence-tetrahedron-maps''' : UU (l1 ⊔ l4)
-  coherence-tetrahedron-maps''' =
+  coherence-reverse-tetrahedron-maps' : UU (l1 ⊔ l4)
+  coherence-reverse-tetrahedron-maps' =
     ( (lower-right ·r left) ∙h lower-left) ~
     ( (right ·l upper-left) ∙h upper-right)
 ```

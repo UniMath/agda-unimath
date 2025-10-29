@@ -21,8 +21,10 @@ A
 {{#concept "pointed family of types" Disambiguation="over a pointed type" Agda=Pointed-Fam}}
 over a [pointed type](structured-types.pointed-types.md) `A` is a family of
 types `B` over the underlying type of `A` [equipped](foundation.structure.md)
-with a base point over the base point of `A`. Note that a pointed family of
-types should not be confused with a family of pointed types over `A`.
+with a base point over the base point of `A`.
+
+Note that a pointed family of types should not be confused with a family of
+pointed types over `A`.
 
 ## Definition
 

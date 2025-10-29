@@ -117,7 +117,7 @@ module _
     ( equiv-Π-equiv-family
       ( λ a →
         ( equiv-postcomp-equiv
-          ( equiv-tot (λ y → inv-equiv (equiv-is-small (H (g y) a))))
+          ( equiv-tot (λ y → inv-equiv-is-small (H (g y) a)))
           ( fiber f a)) ∘e
         ( equiv-precomp-equiv
           ( equiv-tot (λ x → equiv-is-small (H (f x) a)))

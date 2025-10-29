@@ -58,7 +58,7 @@ module _
       ( f) →
     UU l
   coherence-of-coherence-hom-Retractive-Type f H K =
-    coherence-tetrahedron-maps''
+    coherence-reverse-tetrahedron-maps
       ( inclusion-Retractive-Type B)
       ( inclusion-Retractive-Type A)
       ( map-retraction-Retractive-Type B)
@@ -95,7 +95,8 @@ module _
   (f : hom-Retractive-Type A B)
   where
 
-  map-type-hom-Retractive-Type : type-Retractive-Type A → type-Retractive-Type B
+  map-type-hom-Retractive-Type :
+    type-Retractive-Type A → type-Retractive-Type B
   map-type-hom-Retractive-Type = pr1 f
 
   coh-hom-Retractive-Type :
@@ -128,7 +129,9 @@ module _
 
 ```agda
 id-hom-Retractive-Type :
-  {l1 l2 : Level} {X : UU l1} (A : Retractive-Type l2 X) →
+  {l1 l2 : Level} {X : UU l1}
+  (A : Retractive-Type l2 X) →
   hom-Retractive-Type A A
-id-hom-Retractive-Type A = (id , refl-htpy , refl-htpy , refl-htpy)
+id-hom-Retractive-Type A =
+  ( id , refl-htpy , refl-htpy , refl-htpy)
 ```

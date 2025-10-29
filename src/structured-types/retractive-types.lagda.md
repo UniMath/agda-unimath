@@ -41,12 +41,12 @@ correspond precisely to families of
 retractive types is the study of pointed types parametrized over a base type
 `X`.
 
-`X`-Retractive types live naturally in the [coslice](foundation.coslice.md) of
-`X`, which is why we use the preposition _under_, rather than _over_.
+The `X`-retractive types live naturally in the [coslice](foundation.coslice.md)
+of `X`, which is why we use the preposition _under_ rather than _over_.
 
 ## Definitions
 
-### The predicate that a type is retractive under `X`
+### The predicate on types of being retractive under `X`
 
 ```agda
 module _
@@ -90,7 +90,7 @@ module _
 
   section-Retractive-Type : section map-retraction-Retractive-Type
   section-Retractive-Type =
-    (inclusion-Retractive-Type , is-retract-Retractive-Type)
+    ( inclusion-Retractive-Type , is-retract-Retractive-Type)
 ```
 
 ### Evaluation at the inclusion/section

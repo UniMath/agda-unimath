@@ -38,7 +38,7 @@ between two [retractive types](structured-types.retractive-types.md) `A` and `B`
 under `X` is a
 [morphism of retractive types](structured-types.morphisms-retractive-types.md)
 whose underlying map is an [equivalence](foundation-core.equivalences.md) of
-types, i.e., it is an equivalence `f : A ≃ B` such that the following
+types. I.e., it is an equivalence `f : A ≃ B` such that the following
 [tetrahedron](foundation.commuting-tetrahedra-of-maps.md) commutes
 
 ```text
@@ -227,26 +227,28 @@ module _
     (A B : Retractive-Type l2 X) → A ＝ B → equiv-Retractive-Type' A B
   equiv-eq-Retractive-Type' A .A refl = id-equiv-Retractive-Type' A
 
-  is-torsorial-equiv-Retractive-Type' :
-    (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type' A)
-  is-torsorial-equiv-Retractive-Type' A =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-Retractive-Type A))
-      ( type-Retractive-Type A , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (inclusion-Retractive-Type A))
-        ( inclusion-Retractive-Type A , refl-htpy)
+  abstract
+    is-torsorial-equiv-Retractive-Type' :
+      (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type' A)
+    is-torsorial-equiv-Retractive-Type' A =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (type-Retractive-Type A))
+        ( type-Retractive-Type A , id-equiv)
         ( is-torsorial-Eq-structure
-          ( is-torsorial-htpy' (map-retraction-Retractive-Type A))
-          ( map-retraction-Retractive-Type A , refl-htpy)
-          ( is-torsorial-htpy' (is-retract-Retractive-Type A))))
+          ( is-torsorial-htpy (inclusion-Retractive-Type A))
+          ( inclusion-Retractive-Type A , refl-htpy)
+          ( is-torsorial-Eq-structure
+            ( is-torsorial-htpy' (map-retraction-Retractive-Type A))
+            ( map-retraction-Retractive-Type A , refl-htpy)
+            ( is-torsorial-htpy' (is-retract-Retractive-Type A))))
 
-  is-equiv-equiv-eq-Retractive-Type' :
-    (A B : Retractive-Type l2 X) → is-equiv (equiv-eq-Retractive-Type' A B)
-  is-equiv-equiv-eq-Retractive-Type' A =
-    fundamental-theorem-id
-      ( is-torsorial-equiv-Retractive-Type' A)
-      ( equiv-eq-Retractive-Type' A)
+  abstract
+    is-equiv-equiv-eq-Retractive-Type' :
+      (A B : Retractive-Type l2 X) → is-equiv (equiv-eq-Retractive-Type' A B)
+    is-equiv-equiv-eq-Retractive-Type' A =
+      fundamental-theorem-id
+        ( is-torsorial-equiv-Retractive-Type' A)
+        ( equiv-eq-Retractive-Type' A)
 
   extensionality-Retractive-Type' :
     (A B : Retractive-Type l2 X) → (A ＝ B) ≃ equiv-Retractive-Type' A B
@@ -266,19 +268,21 @@ module _
     (A B : Retractive-Type l2 X) → A ＝ B → equiv-Retractive-Type A B
   equiv-eq-Retractive-Type A .A refl = id-equiv-Retractive-Type A
 
-  is-torsorial-equiv-Retractive-Type :
-    (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type A)
-  is-torsorial-equiv-Retractive-Type A =
-    is-contr-equiv _
-      ( equiv-tot (compute-equiv-Retractive-Type A))
-      ( is-torsorial-equiv-Retractive-Type' A)
+  abstract
+    is-torsorial-equiv-Retractive-Type :
+      (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type A)
+    is-torsorial-equiv-Retractive-Type A =
+      is-contr-equiv _
+        ( equiv-tot (compute-equiv-Retractive-Type A))
+        ( is-torsorial-equiv-Retractive-Type' A)
 
-  is-equiv-equiv-eq-Retractive-Type :
-    (A B : Retractive-Type l2 X) → is-equiv (equiv-eq-Retractive-Type A B)
-  is-equiv-equiv-eq-Retractive-Type A =
-    fundamental-theorem-id
-      ( is-torsorial-equiv-Retractive-Type A)
-      ( equiv-eq-Retractive-Type A)
+  abstract
+    is-equiv-equiv-eq-Retractive-Type :
+      (A B : Retractive-Type l2 X) → is-equiv (equiv-eq-Retractive-Type A B)
+    is-equiv-equiv-eq-Retractive-Type A =
+      fundamental-theorem-id
+        ( is-torsorial-equiv-Retractive-Type A)
+        ( equiv-eq-Retractive-Type A)
 
   extensionality-Retractive-Type :
     (A B : Retractive-Type l2 X) → (A ＝ B) ≃ equiv-Retractive-Type A B
