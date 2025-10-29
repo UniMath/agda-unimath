@@ -7,10 +7,13 @@ module foundation.mere-decidable-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cantor-schroder-bernstein-decidable-embeddings
 open import foundation.decidable-embeddings
 open import foundation.functoriality-propositional-truncation
+open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
+open import foundation.weak-limited-principle-of-omniscience
 
 open import foundation-core.propositions
 
@@ -64,12 +67,10 @@ transitive-leq-Large-Preorder mere-decidable-emb-Large-Preorder X Y Z =
 
 ### Assuming WLPO, then types equipped with mere decidable embeddings form a partial ordering
 
-> This remains to be formalized.
-
-```text
+```agda
 antisymmetric-mere-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → WLPO (l1 ⊔ l2) →
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → level-WLPO (l1 ⊔ l2) →
   mere-decidable-emb X Y → mere-decidable-emb Y X → mere-equiv X Y
 antisymmetric-mere-decidable-emb wlpo =
-  map-binary-trunc-Prop (decidable-emb-Cantor-Schröder-Bernstein wlpo)
+  map-binary-trunc-Prop (Cantor-Schröder-Bernstein-WLPO wlpo)
 ```
