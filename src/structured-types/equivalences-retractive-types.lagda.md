@@ -229,7 +229,8 @@ module _
 
   abstract
     is-torsorial-equiv-Retractive-Type' :
-      (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type' A)
+      (A : Retractive-Type l2 X) →
+      is-torsorial (equiv-Retractive-Type' {l2 = l2} A)
     is-torsorial-equiv-Retractive-Type' A =
       is-torsorial-Eq-structure
         ( is-torsorial-equiv (type-Retractive-Type A))
@@ -270,7 +271,8 @@ module _
 
   abstract
     is-torsorial-equiv-Retractive-Type :
-      (A : Retractive-Type l2 X) → is-torsorial (equiv-Retractive-Type A)
+      (A : Retractive-Type l2 X) →
+      is-torsorial (equiv-Retractive-Type {l2 = l2} A)
     is-torsorial-equiv-Retractive-Type A =
       is-contr-equiv _
         ( equiv-tot (compute-equiv-Retractive-Type A))
