@@ -187,7 +187,7 @@ def get_recent_sitewide_changes(contributors, contributors_file):
         formatted_authors = format_multiple_authors_attribution([
             contributors[idx]['displayName'] for idx in author_indices
         ])
-        recent_changes +=  f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     if skipped_authors:
         print_skipping_contributors_warning(skipped_authors, contributors_file)
