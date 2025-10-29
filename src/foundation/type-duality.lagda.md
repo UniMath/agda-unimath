@@ -290,11 +290,12 @@ module _
                 ( H (pr2 (map-inv-is-equiv E (λ _ → raise-unit l)) x) a))))
         ( is-contr-raise-unit)
 
-  is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality :
-    is-equiv map-inv-equiv-is-small-is-equiv-map-type-duality
-  is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality =
-    is-equiv-is-contr-map
-      is-contr-map-map-inv-equiv-is-small-is-equiv-map-type-duality
+  abstract
+    is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality :
+      is-equiv map-inv-equiv-is-small-is-equiv-map-type-duality
+    is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality =
+      is-equiv-is-contr-map
+        is-contr-map-map-inv-equiv-is-small-is-equiv-map-type-duality
 
   inv-equiv-is-small-is-equiv-map-type-duality :
     type-is-small-is-equiv-map-type-duality ≃ A
