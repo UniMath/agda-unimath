@@ -41,7 +41,7 @@ is an [equivalence](foundation-core.equivalences.md).
 
 An extensional elementhood relation on `A` endows the type `A` with the
 [structure](foundation.structure.md) of
-{{#concept "elementhood" Disambiguation="on a type" Agda=Elementhood-Structure}}.
+{{#concept "elementhood" Disambiguation="on a type" Agda=Elementhood-Structure WD="is an element of" WDID=Q655288}}.
 
 ## Definitions
 
