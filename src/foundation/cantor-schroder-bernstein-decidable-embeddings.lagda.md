@@ -57,11 +57,11 @@ that the Cantor–Schröder–Bernstein theorem also holds for ∞-groupoids
 [embed](foundation-core.embeddings.md) into each other, then the types are
 [equivalent](foundation-core.equivalences.md).
 
-In this file we present a fine-grained decomposition of the construction used in
+In this file we give a fine-grained deconstruction of the construction used in
 the proof of this
 [Cantor–Schröder–Bernstein-Escardó theorem](foundation.cantor-schroder-bernstein-escardo.md),
-originally due to König {{#cite König1906}}, and use this deconstruction to give
-the generalization of the theorem for
+originally due to König {{#cite König1906}}, and use this to give the
+generalization of the theorem for
 [decidable embeddings](foundation.decidable-embeddings.md) under the assumption
 of the weak limited principle of omniscience.
 
@@ -284,8 +284,8 @@ module _
 ## Theorem
 
 It follows from the weak limited principle of omniscience that, for every pair
-of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
-for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable for
+every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
 Applying this fact to the Cantor-Schröder-Bernstein construction, we conclude
 with the main result.
 
