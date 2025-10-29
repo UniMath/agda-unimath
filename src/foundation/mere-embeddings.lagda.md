@@ -60,7 +60,7 @@ mere-emb-Large-Preorder =
   λ where
   .type-Large-Preorder l → UU l
   .leq-prop-Large-Preorder → mere-emb-Prop
-  .refl-leq-Large-Preorder →  refl-mere-emb
+  .refl-leq-Large-Preorder → refl-mere-emb
   .transitive-leq-Large-Preorder X Y Z → transitive-mere-emb
 ```
 

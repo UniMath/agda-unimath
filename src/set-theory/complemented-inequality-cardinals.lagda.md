@@ -209,11 +209,7 @@ module _
 
 ## Properties
 
-### Assuming the weak limited principle of omniscience, then complemented inequality is antisymmetric
-
-Using the previous result and assuming the weak limited principle of
-omniscience, we can conclude `leq-complemented-Cardinal` is a partial order by
-showing that it is antisymmetric.
+### Assuming the weak limited principle of omniscience, then complemented inequality forms a partial order
 
 ```agda
 module _

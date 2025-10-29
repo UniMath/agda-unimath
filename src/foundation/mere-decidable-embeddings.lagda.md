@@ -60,7 +60,7 @@ mere-decidable-emb-Large-Preorder =
   λ where
   .type-Large-Preorder l → UU l
   .leq-prop-Large-Preorder → mere-decidable-emb-Prop
-  .refl-leq-Large-Preorder →  refl-mere-decidable-emb
+  .refl-leq-Large-Preorder → refl-mere-decidable-emb
   .transitive-leq-Large-Preorder X Y Z → transitive-mere-decidable-emb
 ```
 
