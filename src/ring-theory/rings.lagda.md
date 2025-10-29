@@ -705,3 +705,7 @@ ring-structure-ring :
 pr1 (ring-structure-ring X (p , q)) = abelian-group-structure-abelian-group X p
 pr2 (ring-structure-ring X (p , q)) = q
 ```
+
+## Examples of rings
+
+{{#include tables/rings.md}}

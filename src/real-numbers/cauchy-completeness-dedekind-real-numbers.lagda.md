@@ -547,15 +547,3 @@ complete-metric-space-ℝ :
 pr1 (complete-metric-space-ℝ l) = metric-space-ℝ l
 pr2 (complete-metric-space-ℝ l) = is-complete-metric-space-ℝ l
 ```
-
-### Limits of Cauchy sequences in ℝ
-
-```agda
-cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
-cauchy-sequence-ℝ l =
-  cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
-
-lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
-lim-cauchy-sequence-ℝ {l} =
-  limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
-```

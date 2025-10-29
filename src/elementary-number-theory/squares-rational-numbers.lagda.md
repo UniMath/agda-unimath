@@ -9,12 +9,16 @@ module elementary-number-theory.squares-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-nonpositive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
@@ -62,9 +66,8 @@ abstract
     rec-coproduct
       ( λ H →
         is-nonnegative-is-positive-ℚ
-          ( a *ℚ a)
           ( is-positive-mul-negative-ℚ {a} {a} H H))
-      ( λ H → is-nonnegative-mul-ℚ a a H H)
+      ( λ H → is-nonnegative-mul-ℚ H H)
       ( decide-is-negative-is-nonnegative-ℚ a)
 
 nonnegative-square-ℚ : ℚ → ℚ⁰⁺
@@ -170,6 +173,10 @@ abstract
     (x : ℚ) → is-negative-ℚ x → is-positive-ℚ (square-ℚ x)
   is-positive-square-negative-ℚ x neg-x =
     is-positive-mul-negative-ℚ {x} {x} neg-x neg-x
+
+square-ℚ⁻ : ℚ⁻ → ℚ⁺
+square-ℚ⁻ (q , is-neg-q) =
+  (square-ℚ q , is-positive-square-negative-ℚ q is-neg-q)
 ```
 
 ### If the square of a rational number is 0, it is zero
@@ -272,4 +279,22 @@ abstract
             ( p²<q²)
             ( preserves-leq-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q≤p)))
       ( decide-le-leq-ℚ p q)
+```
+
+### `|p|² = p²`
+
+```agda
+abstract
+  square-abs-ℚ : (q : ℚ) → square-ℚ (rational-abs-ℚ q) ＝ square-ℚ q
+  square-abs-ℚ q =
+    rec-coproduct
+      ( λ q≤-q →
+        equational-reasoning
+          square-ℚ (rational-abs-ℚ q)
+          ＝ square-ℚ (neg-ℚ q)
+            by ap square-ℚ (left-leq-right-max-ℚ _ _ q≤-q)
+          ＝ square-ℚ q
+            by square-neg-ℚ q)
+      ( λ -q≤q → ap square-ℚ (right-leq-left-max-ℚ _ _ -q≤q))
+      ( linear-leq-ℚ q (neg-ℚ q))
 ```

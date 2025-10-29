@@ -76,7 +76,7 @@ type-polynomial-endofunctor-UU l = Slice l
 map-polynomial-endofunctor-UU :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   type-polynomial-endofunctor-UU l A → type-polynomial-endofunctor-UU l B
-map-polynomial-endofunctor-UU l = map-polynomial-endofunctor (UU l) (λ X → X)
+map-polynomial-endofunctor-UU l = map-polynomial-endofunctor' (UU l) (λ X → X)
 ```
 
 ### Type families

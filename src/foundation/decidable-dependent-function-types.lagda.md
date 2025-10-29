@@ -10,8 +10,8 @@ module foundation.decidable-dependent-function-types where
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
 open import foundation.functoriality-dependent-function-types
-open import foundation.irrefutable-equality
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.propositions
@@ -105,7 +105,51 @@ is-decidable-Π-Maybe {B = B} du de =
     ( is-decidable-product du de)
 ```
 
-### Dependent products of decidable propositions over a base with all elements merely equal are decidable propositions
+### Dependent products of decidable propositions over a merely decidable base with double negation dense equality are decidable propositions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → Decidable-Prop l2)
+  where
+
+  is-decidable-Π-has-double-negation-dense-equality-base :
+    has-double-negation-dense-equality A →
+    is-decidable A →
+    is-decidable ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-Π-has-double-negation-dense-equality-base H dA =
+    is-decidable-Π-uniformly-decidable-family dA
+      ( is-uniformly-decidable-family-has-double-negation-dense-equality-base
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA))
+
+  is-decidable-prop-Π-has-double-negation-dense-equality-base :
+    has-double-negation-dense-equality A →
+    is-decidable A →
+    is-decidable-prop ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-prop-Π-has-double-negation-dense-equality-base H dA =
+    is-decidable-prop-Π-uniformly-decidable-family dA
+      ( is-uniformly-decidable-family-has-double-negation-dense-equality-base
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
+
+  is-decidable-prop-Π-has-double-negation-dense-equality-base' :
+    has-double-negation-dense-equality A →
+    is-inhabited-or-empty A →
+    is-decidable-prop ((x : A) → type-Decidable-Prop (B x))
+  is-decidable-prop-Π-has-double-negation-dense-equality-base' H dA =
+    is-decidable-prop-Π-uniformly-decidable-family' dA
+      ( is-uniformly-decidable-family-has-double-negation-dense-equality-base'
+        ( H)
+        ( λ x → is-decidable-Decidable-Prop (B x))
+        ( dA)
+        ( λ x → is-prop-type-Decidable-Prop (B x)))
+      ( λ x → is-prop-type-Decidable-Prop (B x))
+```
+
+### Dependent products of decidable propositions over a merely decidable base with mere equality are decidable propositions
 
 Assuming that all elements are merely equal in a type `A` then a dependent
 product of decidable propositions over `A` is again a decidable proposition.

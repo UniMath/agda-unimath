@@ -356,3 +356,5 @@ is-small-logical-equivalence H K =
 ## See also
 
 - [Small maps](foundation.small-maps.md)
+- The `is-essentially-in-subuniverse` predicate in
+  [`foundation.subuniverses`](foundation.subuniverses.md)
