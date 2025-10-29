@@ -61,8 +61,8 @@ We introduce {{#concept "addition" Disambiguation="real numbers" Agda=add-ℝ}} 
 the [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) and derive
 its basic properties.
 
-The sum of two Dedekind real numbers is is a Dedekind real number whose lower
-cut (upper cut) is the the
+The sum of two Dedekind real numbers is a Dedekind real number whose lower cut
+(upper cut) is the
 [Minkowski sum](group-theory.minkowski-multiplication-commutative-monoids.md) of
 their lower (upper) cuts.
 
