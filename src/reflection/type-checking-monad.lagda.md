@@ -36,7 +36,7 @@ open import reflection.terms
 
 The type-checking monad `type-Type-Checker` allows us to interact directly with
 Agda's type checking mechanism. Additionally to primitives (see below), Agda
-includes the the keyword `unquote` to manually unquote an element from
+includes the keyword `unquote` to manually unquote an element from
 `type-Type-Checker unit`.
 
 ## Definitions
