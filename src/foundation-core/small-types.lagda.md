@@ -80,6 +80,9 @@ module _
   is-retraction-map-inv-equiv-is-small =
     is-retraction-map-inv-equiv equiv-is-small
 
+  is-equiv-map-inv-equiv-is-small : is-equiv map-inv-equiv-is-small
+  is-equiv-map-inv-equiv-is-small = is-equiv-map-inv-equiv equiv-is-small
+
   coherence-map-inv-equiv-is-small :
     coherence-is-coherently-invertible
       ( map-equiv-is-small)
