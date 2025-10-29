@@ -59,11 +59,12 @@ transitive-mere-emb :
 transitive-mere-emb = map-binary-trunc-Prop comp-emb
 
 mere-emb-Large-Preorder : Large-Preorder lsuc (_⊔_)
-type-Large-Preorder mere-emb-Large-Preorder l = UU l
-leq-prop-Large-Preorder mere-emb-Large-Preorder = mere-emb-Prop
-refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
-transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
-  transitive-mere-emb
+mere-emb-Large-Preorder =
+  λ where
+  .type-Large-Preorder l → UU l
+  .leq-prop-Large-Preorder → mere-emb-Prop
+  .refl-leq-Large-Preorder →  refl-mere-emb
+  .transitive-leq-Large-Preorder X Y Z → transitive-mere-emb
 ```
 
 ### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them
