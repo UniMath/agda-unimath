@@ -34,7 +34,7 @@ Well-founded material sets satisfy an induction principle: given a type family
 `P : A → Type` then in order to construct an element of `P x` for all `x : A` it
 suffices to construct an element of `P u` for all elements `u ∈ x`. More
 precisely, the
-{{#concept "well-founded induction principle" WDID=Q14402036 WD="well-founded induction" Agda=ind-Well-Founded-Material-Set}}
+{{#concept "well-founded induction principle" Disambiguation="of a well-founded material set" WDID=Q14402036 WD="well-founded induction" Agda=ind-Well-Founded-Material-Set}}
 is a function
 
 ```text
