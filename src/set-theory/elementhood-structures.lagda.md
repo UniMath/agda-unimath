@@ -10,20 +10,15 @@ module set-theory.elementhood-structures where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.separated-types-subuniverses
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.torsorial-type-families
-
-open import order-theory.accessible-elements-relations
-open import order-theory.preorders
 
 open import orthogonal-factorization-systems.reflective-global-subuniverses
 ```
@@ -109,14 +104,14 @@ module _
   is-extensional-Elementhood-Structure = pr2 R
 
   equiv-eq-Elementhood-Structure :
-    (x y : A) → (x ＝ y) → (u : A) → (u ∈ x) ≃ (u ∈ y)
+    {x y : A} → (x ＝ y) → (u : A) → (u ∈ x) ≃ (u ∈ y)
   equiv-eq-Elementhood-Structure =
-    equiv-elementhood-eq-Relation _∈_
+    equiv-elementhood-eq-Relation _∈_ _ _
 
   extensionality-Elementhood-Structure :
     (x y : A) → (x ＝ y) ≃ ((u : A) → (u ∈ x) ≃ (u ∈ y))
   extensionality-Elementhood-Structure x y =
-    ( equiv-eq-Elementhood-Structure x y ,
+    ( equiv-eq-Elementhood-Structure ,
       is-extensional-Elementhood-Structure x y)
 
   inv-extensionality-Elementhood-Structure :
@@ -125,8 +120,8 @@ module _
     inv-equiv (extensionality-Elementhood-Structure x y)
 
   eq-equiv-Elementhood-Structure :
-    (x y : A) → ((u : A) → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
-  eq-equiv-Elementhood-Structure x y =
+    {x y : A} → ((u : A) → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
+  eq-equiv-Elementhood-Structure {x} {y} =
     map-inv-equiv (extensionality-Elementhood-Structure x y)
 ```
 

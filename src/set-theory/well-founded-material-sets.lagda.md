@@ -10,23 +10,11 @@ module set-theory.well-founded-material-sets where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.separated-types-subuniverses
-open import foundation.subtypes
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-open import foundation-core.torsorial-type-families
-
-open import order-theory.accessible-elements-relations
-open import order-theory.preorders
 open import order-theory.well-founded-relations
-
-open import orthogonal-factorization-systems.reflective-global-subuniverses
 
 open import set-theory.elementhood-structures
 open import set-theory.material-sets
@@ -128,33 +116,30 @@ module _
 
 module _
   {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
+  (let A' = type-Well-Founded-Material-Set A)
   (let _∈_ = elementhood-Well-Founded-Material-Set A)
   where
 
   equiv-elementhood-eq-Well-Founded-Material-Set :
-    (x y : type-Well-Founded-Material-Set A) →
-    (x ＝ y) → (u : type-Well-Founded-Material-Set A) → (u ∈ x) ≃ (u ∈ y)
+    {x y : A'} → (x ＝ y) → (u : A') → (u ∈ x) ≃ (u ∈ y)
   equiv-elementhood-eq-Well-Founded-Material-Set =
     equiv-elementhood-eq-Material-Set
       ( material-set-Well-Founded-Material-Set A)
 
   extensionality-Well-Founded-Material-Set :
-    (x y : type-Well-Founded-Material-Set A) →
-    (x ＝ y) ≃ ((u : type-Well-Founded-Material-Set A) → (u ∈ x) ≃ (u ∈ y))
+    (x y : A') → (x ＝ y) ≃ ((u : A') → (u ∈ x) ≃ (u ∈ y))
   extensionality-Well-Founded-Material-Set =
     extensionality-Material-Set
       ( material-set-Well-Founded-Material-Set A)
 
   inv-extensionality-Well-Founded-Material-Set :
-    (x y : type-Well-Founded-Material-Set A) →
-    ((u : type-Well-Founded-Material-Set A) → (u ∈ x) ≃ (u ∈ y)) ≃ (x ＝ y)
+    (x y : A') → ((u : A') → (u ∈ x) ≃ (u ∈ y)) ≃ (x ＝ y)
   inv-extensionality-Well-Founded-Material-Set =
     inv-extensionality-Material-Set
       ( material-set-Well-Founded-Material-Set A)
 
   eq-equiv-elementhood-Well-Founded-Material-Set :
-    (x y : type-Well-Founded-Material-Set A) →
-    ((u : type-Well-Founded-Material-Set A) → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
+    {x y : A'} → ((u : A') → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
   eq-equiv-elementhood-Well-Founded-Material-Set =
     eq-equiv-elementhood-Material-Set
       ( material-set-Well-Founded-Material-Set A)
@@ -199,23 +184,20 @@ This is Proposition 4 of {{#cite GS26}}.
 ```agda
 module _
   {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
+  (let A' = type-Well-Founded-Material-Set A)
   (let _∈_ = elementhood-Well-Founded-Material-Set A)
   where
 
   uniqueness-comprehension-Well-Founded-Material-Set' :
-    {l3 : Level} (ϕ : type-Well-Founded-Material-Set A → UU l3) →
-    is-proof-irrelevant
-      ( Σ ( type-Well-Founded-Material-Set A)
-          ( λ x → (u : type-Well-Founded-Material-Set A) → ϕ u ≃ (u ∈ x)))
+    {l3 : Level} (ϕ : A' → UU l3) →
+    is-proof-irrelevant (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
   uniqueness-comprehension-Well-Founded-Material-Set' =
     uniqueness-comprehension-Material-Set'
       ( material-set-Well-Founded-Material-Set A)
 
   uniqueness-comprehension-Well-Founded-Material-Set :
-    {l3 : Level} (ϕ : type-Well-Founded-Material-Set A → UU l3) →
-    is-prop
-      ( Σ ( type-Well-Founded-Material-Set A)
-          ( λ x → (u : type-Well-Founded-Material-Set A) → ϕ u ≃ (u ∈ x)))
+    {l3 : Level} (ϕ : A' → UU l3) →
+    is-prop (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
   uniqueness-comprehension-Well-Founded-Material-Set =
     uniqueness-comprehension-Material-Set
       ( material-set-Well-Founded-Material-Set A)
@@ -235,6 +217,15 @@ module _
   asymmetric-elementhood-Well-Founded-Material-Set =
     is-asymmetric-le-Well-Founded-Relation
       ( well-founded-relation-Well-Founded-Material-Set A)
+```
+
+### Well-founded elementhood relations are irreflexive
+
+```agda
+module _
+  {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
+  (let _∈_ = elementhood-Well-Founded-Material-Set A)
+  where
 
   irreflexive-elementhood-Well-Founded-Material-Set : is-irreflexive _∈_
   irreflexive-elementhood-Well-Founded-Material-Set =
@@ -248,4 +239,4 @@ module _
 
 ## External links
 
-- <https://git.app.uib.no/hott/hott-set-theory/-/blob/master/src/e-structure/property/foundation.agda>
+- <https://elisabeth.stenholm.one/univalent-material-set-theory/e-structure.property.foundation.html>

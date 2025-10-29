@@ -10,21 +10,9 @@ module set-theory.material-sets where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.separated-types-subuniverses
-open import foundation.subtypes
 open import foundation.universe-levels
-
-open import foundation-core.contractible-types
-open import foundation-core.torsorial-type-families
-
-open import order-theory.accessible-elements-relations
-open import order-theory.preorders
 
 open import orthogonal-factorization-systems.reflective-global-subuniverses
 
@@ -77,33 +65,30 @@ module _
 
 module _
   {l1 l2 : Level} (A : Material-Set l1 l2)
+  (let A' = type-Material-Set A)
   (let _∈_ = elementhood-Material-Set A)
   where
 
   equiv-elementhood-eq-Material-Set :
-    (x y : type-Material-Set A) →
-    (x ＝ y) → (u : type-Material-Set A) → (u ∈ x) ≃ (u ∈ y)
+    {x y : A'} → (x ＝ y) → (u : A') → (u ∈ x) ≃ (u ∈ y)
   equiv-elementhood-eq-Material-Set =
     equiv-eq-Elementhood-Structure
       ( elementhood-structure-Material-Set A)
 
   extensionality-Material-Set :
-    (x y : type-Material-Set A) →
-    (x ＝ y) ≃ ((u : type-Material-Set A) → (u ∈ x) ≃ (u ∈ y))
+    (x y : A') → (x ＝ y) ≃ ((u : A') → (u ∈ x) ≃ (u ∈ y))
   extensionality-Material-Set =
     extensionality-Elementhood-Structure
       ( elementhood-structure-Material-Set A)
 
   inv-extensionality-Material-Set :
-    (x y : type-Material-Set A) →
-    ((u : type-Material-Set A) → (u ∈ x) ≃ (u ∈ y)) ≃ (x ＝ y)
+    (x y : A') → ((u : A') → (u ∈ x) ≃ (u ∈ y)) ≃ (x ＝ y)
   inv-extensionality-Material-Set =
     inv-extensionality-Elementhood-Structure
       ( elementhood-structure-Material-Set A)
 
   eq-equiv-elementhood-Material-Set :
-    (x y : type-Material-Set A) →
-    ((u : type-Material-Set A) → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
+    {x y : A'} → ((u : A') → (u ∈ x) ≃ (u ∈ y)) → (x ＝ y)
   eq-equiv-elementhood-Material-Set =
     eq-equiv-Elementhood-Structure
       ( elementhood-structure-Material-Set A)
@@ -140,15 +125,14 @@ module _
   {α β : Level → Level} {l1 l2 : Level}
   (ℒ : reflective-global-subuniverse α β)
   (A : Material-Set l1 l2)
+  (let A' = type-Material-Set A)
   (let _∈_ = elementhood-Material-Set A)
   where
 
   abstract
     is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set :
-      ( (x y : type-Material-Set A) →
-        is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
-      (x y : type-Material-Set A) →
-      is-in-reflective-global-subuniverse ℒ (x ＝ y)
+      ( (x y : A') → is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
+      (x y : A') → is-in-reflective-global-subuniverse ℒ (x ＝ y)
     is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set =
       is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure ℒ
       ( elementhood-structure-Material-Set A)
@@ -161,25 +145,22 @@ This is Proposition 4 of {{#cite GS26}}.
 ```agda
 module _
   {l1 l2 : Level} (A : Material-Set l1 l2)
+  (let A' = type-Material-Set A)
   (let _∈_ = elementhood-Material-Set A)
   where
 
   abstract
     uniqueness-comprehension-Material-Set' :
-      {l3 : Level} (ϕ : type-Material-Set A → UU l3) →
-      is-proof-irrelevant
-        ( Σ ( type-Material-Set A)
-            ( λ x → (u : type-Material-Set A) → ϕ u ≃ (u ∈ x)))
+      {l3 : Level} (ϕ : A' → UU l3) →
+      is-proof-irrelevant (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
     uniqueness-comprehension-Material-Set' =
       uniqueness-comprehension-Elementhood-Structure'
         ( elementhood-structure-Material-Set A)
 
   abstract
     uniqueness-comprehension-Material-Set :
-      {l3 : Level} (ϕ : type-Material-Set A → UU l3) →
-      is-prop
-        ( Σ ( type-Material-Set A)
-            ( λ x → (u : type-Material-Set A) → ϕ u ≃ (u ∈ x)))
+      {l3 : Level} (ϕ : A' → UU l3) →
+      is-prop (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
     uniqueness-comprehension-Material-Set =
       uniqueness-comprehension-Elementhood-Structure
         ( elementhood-structure-Material-Set A)
