@@ -21,8 +21,8 @@ open import foundation-core.sections
 ## Idea
 
 A {{#concept "retractive type" Agda=Retractive-Type}} `A` under `X`, or
-**`X`-retractive type** is the data of displaying `X` as a retract of `A`. I.e.,
-it is a pair of maps
+**`X`-retractive type** is the data of displaying `X` as a
+[retract](foundation.retracts-of-types.md) of `A`. I.e., it is a pair of maps
 
 ```text
       a       p
@@ -30,14 +30,16 @@ it is a pair of maps
 ```
 
 such that the composite `p ∘ a` is the identity. We refer to `a` as the
-_inclusion_, or _section_, of `A` and `p` as the _retraction_, or _projection_.
+_inclusion_, or _section_, of `A` and `p` as the _retraction_, or _projection_
+of `A`.
 
 Retractive types are also known as **ex-spaces**, and form the basic objects in
 the study of parametrized homotopy theory {{#cite MS04}}. Observe that under
-[type duality](foundation.type-duality.md) retractive types correspond precisely
-to families of [pointed types](structured-types.pointed-types.md), hence the
-study of retractive types is the study of pointed types parametrized over a base
-type `X`.
+[type duality](structured-types.pointed-type-duality.md) retractive types
+correspond precisely to families of
+[pointed types](structured-types.pointed-types.md), hence the study of
+retractive types is the study of pointed types parametrized over a base type
+`X`.
 
 `X`-Retractive types live naturally in the [coslice](foundation.coslice.md) of
 `X`, which is why we use the preposition _under_, rather than _over_.

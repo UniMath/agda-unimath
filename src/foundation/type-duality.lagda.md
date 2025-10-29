@@ -389,12 +389,12 @@ fiber-Σ {l1} {l2} X A =
   ( equiv-Σ
     ( λ Z → X ≃ Σ A Z)
     ( equiv-Fiber l1 A)
-    ( λ s → inv-equiv (equiv-postcomp-equiv (equiv-total-fiber (pr2 s)) X))) ∘e
+    ( λ s → equiv-postcomp-equiv (inv-equiv-total-fiber (pr2 s)) X)) ∘e
   ( equiv-right-swap-Σ) ∘e
   ( inv-left-unit-law-Σ-is-contr
     ( is-contr-is-small-lmax l2 X)
     ( is-small-lmax l2 X)) ∘e
-  ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A)
+  ( equiv-precomp (inv-equiv-is-small (is-small-lmax l2 X)) A)
 ```
 
 ## See also
