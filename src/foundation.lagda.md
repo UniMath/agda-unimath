@@ -341,6 +341,8 @@ open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.parametric-types public
+open import foundation.parametricity-axiom public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
 open import foundation.partitions public
