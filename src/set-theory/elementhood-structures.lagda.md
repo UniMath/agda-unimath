@@ -155,20 +155,19 @@ module _
   {α β : Level → Level} {l1 l2 : Level}
   (ℒ : reflective-global-subuniverse α β)
   {A : UU l1} (R@(_∈_ , _) : Elementhood-Structure l2 A)
-  where
+  where abstract
 
-  abstract
-    is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure :
-      ((x y : A) → is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
-      (x y : A) → is-in-reflective-global-subuniverse ℒ (x ＝ y)
-    is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure
-      H x y =
-      is-closed-under-equiv-reflective-global-subuniverse ℒ
-        ( (u : A) → (u ∈ x) ≃ (u ∈ y))
-        ( x ＝ y)
-        ( inv-extensionality-Elementhood-Structure R x y)
-        ( is-in-reflective-global-subuniverse-Π ℒ
-          ( λ u → is-in-reflective-global-subuniverse-equiv ℒ (H u x) (H u y)))
+  is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure :
+    ((x y : A) → is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
+    (x y : A) → is-in-reflective-global-subuniverse ℒ (x ＝ y)
+  is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure
+    H x y =
+    is-closed-under-equiv-reflective-global-subuniverse ℒ
+      ( (u : A) → (u ∈ x) ≃ (u ∈ y))
+      ( x ＝ y)
+      ( inv-extensionality-Elementhood-Structure R x y)
+      ( is-in-reflective-global-subuniverse-Π ℒ
+        ( λ u → is-in-reflective-global-subuniverse-equiv ℒ (H u x) (H u y)))
 ```
 
 ### Uniqueness of comprehensions
@@ -178,29 +177,27 @@ This is Proposition 4 of {{#cite GS26}}.
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R@(_∈_ , _) : Elementhood-Structure l2 A)
-  where
+  where abstract
 
-  abstract
-    uniqueness-comprehension-Elementhood-Structure' :
-      {l3 : Level} (ϕ : A → UU l3) →
-      is-proof-irrelevant (Σ A (λ x → (u : A) → ϕ u ≃ (u ∈ x)))
-    uniqueness-comprehension-Elementhood-Structure' ϕ (x , α) =
-      is-contr-equiv'
-        ( Σ A (x ＝_))
-        ( equiv-tot
-          ( λ y →
-            equiv-Π-equiv-family
-              ( λ u → equiv-precomp-equiv (α u) (u ∈ y)) ∘e
-              ( extensionality-Elementhood-Structure R x y)))
-        ( is-torsorial-Id x)
+  uniqueness-comprehension-Elementhood-Structure' :
+    {l3 : Level} (ϕ : A → UU l3) →
+    is-proof-irrelevant (Σ A (λ x → (u : A) → ϕ u ≃ (u ∈ x)))
+  uniqueness-comprehension-Elementhood-Structure' ϕ (x , α) =
+    is-contr-equiv'
+      ( Σ A (x ＝_))
+      ( equiv-tot
+        ( λ y →
+          equiv-Π-equiv-family
+            ( λ u → equiv-precomp-equiv (α u) (u ∈ y)) ∘e
+            ( extensionality-Elementhood-Structure R x y)))
+      ( is-torsorial-Id x)
 
-  abstract
-    uniqueness-comprehension-Elementhood-Structure :
-      {l3 : Level} (ϕ : A → UU l3) →
-      is-prop (Σ A (λ x → (u : A) → ϕ u ≃ (u ∈ x)))
-    uniqueness-comprehension-Elementhood-Structure ϕ =
-      is-prop-is-proof-irrelevant
-        ( uniqueness-comprehension-Elementhood-Structure' ϕ)
+  uniqueness-comprehension-Elementhood-Structure :
+    {l3 : Level} (ϕ : A → UU l3) →
+    is-prop (Σ A (λ x → (u : A) → ϕ u ≃ (u ∈ x)))
+  uniqueness-comprehension-Elementhood-Structure ϕ =
+    is-prop-is-proof-irrelevant
+      ( uniqueness-comprehension-Elementhood-Structure' ϕ)
 ```
 
 ## References

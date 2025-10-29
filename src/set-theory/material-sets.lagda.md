@@ -108,7 +108,7 @@ module _
 
 ## Properties
 
-### Elementhood relations valued in localizations
+### Separation of material sets at localizations
 
 If the elementhood relation `_∈_ : A → A → Type` is valued in a
 [localization](orthogonal-factorization-systems.reflective-global-subuniverses.md)
@@ -127,15 +127,14 @@ module _
   (A : Material-Set l1 l2)
   (let A' = type-Material-Set A)
   (let _∈_ = elementhood-Material-Set A)
-  where
+  where abstract
 
-  abstract
-    is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set :
-      ( (x y : A') → is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
-      (x y : A') → is-in-reflective-global-subuniverse ℒ (x ＝ y)
-    is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set =
-      is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure ℒ
-      ( elementhood-structure-Material-Set A)
+  is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set :
+    ( (x y : A') → is-in-reflective-global-subuniverse ℒ (x ∈ y)) →
+    (x y : A') → is-in-reflective-global-subuniverse ℒ (x ＝ y)
+  is-separated-type-is-in-global-reflective-subuniverse-elementhood-Material-Set =
+    is-separated-is-in-global-reflective-subuniverse-Elementhood-Structure ℒ
+    ( elementhood-structure-Material-Set A)
 ```
 
 ### Uniqueness of comprehensions
@@ -147,23 +146,21 @@ module _
   {l1 l2 : Level} (A : Material-Set l1 l2)
   (let A' = type-Material-Set A)
   (let _∈_ = elementhood-Material-Set A)
-  where
+  where abstract
 
-  abstract
-    uniqueness-comprehension-Material-Set' :
-      {l3 : Level} (ϕ : A' → UU l3) →
-      is-proof-irrelevant (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
-    uniqueness-comprehension-Material-Set' =
-      uniqueness-comprehension-Elementhood-Structure'
-        ( elementhood-structure-Material-Set A)
+  uniqueness-comprehension-Material-Set' :
+    {l3 : Level} (ϕ : A' → UU l3) →
+    is-proof-irrelevant (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
+  uniqueness-comprehension-Material-Set' =
+    uniqueness-comprehension-Elementhood-Structure'
+      ( elementhood-structure-Material-Set A)
 
-  abstract
-    uniqueness-comprehension-Material-Set :
-      {l3 : Level} (ϕ : A' → UU l3) →
-      is-prop (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
-    uniqueness-comprehension-Material-Set =
-      uniqueness-comprehension-Elementhood-Structure
-        ( elementhood-structure-Material-Set A)
+  uniqueness-comprehension-Material-Set :
+    {l3 : Level} (ϕ : A' → UU l3) →
+    is-prop (Σ A' (λ x → (u : A') → ϕ u ≃ (u ∈ x)))
+  uniqueness-comprehension-Material-Set =
+    uniqueness-comprehension-Elementhood-Structure
+      ( elementhood-structure-Material-Set A)
 ```
 
 ## References

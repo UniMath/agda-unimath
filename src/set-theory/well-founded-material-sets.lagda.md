@@ -186,7 +186,7 @@ module _
   {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
   (let A' = type-Well-Founded-Material-Set A)
   (let _∈_ = elementhood-Well-Founded-Material-Set A)
-  where
+  where abstract
 
   uniqueness-comprehension-Well-Founded-Material-Set' :
     {l3 : Level} (ϕ : A' → UU l3) →
@@ -203,15 +203,13 @@ module _
       ( material-set-Well-Founded-Material-Set A)
 ```
 
-## Properties
-
 ### Well-founded elementhood relations are asymmetric
 
 ```agda
 module _
   {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
   (let _∈_ = elementhood-Well-Founded-Material-Set A)
-  where
+  where abstract
 
   asymmetric-elementhood-Well-Founded-Material-Set : is-asymmetric _∈_
   asymmetric-elementhood-Well-Founded-Material-Set =
@@ -225,7 +223,7 @@ module _
 module _
   {l1 l2 : Level} (A : Well-Founded-Material-Set l1 l2)
   (let _∈_ = elementhood-Well-Founded-Material-Set A)
-  where
+  where abstract
 
   irreflexive-elementhood-Well-Founded-Material-Set : is-irreflexive _∈_
   irreflexive-elementhood-Well-Founded-Material-Set =
