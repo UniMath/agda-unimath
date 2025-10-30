@@ -148,7 +148,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
 
 def get_recent_sitewide_changes(contributors, contributors_file):
     """
-    Returns an HTML list of the most recent RECENT_CHANGES_COUNT commits
+    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits
     across the entire repository.
     """
     recent_changes_output = subprocess.run([
