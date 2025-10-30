@@ -21,9 +21,13 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-From a list of a types equipped with endomorphisms, we define its iterated
-cartesian product recursively via the cartesian product of types equipped with
-endomorphism.
+From a [list](lists.lists.md) of
+[types equipped with endomorphisms](structured-types.types-equipped-with-endomorphisms.md),
+we define its
+{{#concept "iterated cartesian product" Disambiguation="of types equipped with endomorphisms" Agda=iterated-product-list-Type-With-Endomorphism}}
+recursively via the
+[cartesian product](structured-types.cartesian-products-types-equipped-with-endomorphisms.md)
+of types equipped with endomorphism.
 
 ## Definitions
 

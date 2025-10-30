@@ -22,8 +22,9 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-**Morphisms** between two [wild monoids](structured-types.wild-monoids.md) are
-maps that preserve the unit and multiplication. We only require the unit and
+{{#concept "Morphisms" Disambiguation="of wild monoids" Agda=hom-Wild-Monoid}}
+between two [wild monoids](structured-types.wild-monoids.md) are maps that
+preserve the unit and multiplication. We only require the unit and
 multiplication to be preserved. This is because we would need further coherence
 in wild monoids if we want morphisms list $X → M$ to preserve the unital
 associator.

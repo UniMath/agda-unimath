@@ -19,7 +19,9 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The **cartesian product** of two
+The
+{{#concept "cartesian product" Disambiguation="of two types equipped with an endomorphism" Agda=product-Type-With-Endomorphism}}
+of two
 [types equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
 `(A , f)` and `(B , g)` is defined as `(A × B , f × g)`
 
