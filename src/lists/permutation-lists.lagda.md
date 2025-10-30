@@ -32,10 +32,14 @@ open import lists.tuples
 
 ## Idea
 
-Given an array `t` of length `n` and a automorphism `σ` of `Fin n`, the
-permutation of `t` according to `σ` is the array where the index are permuted by
-`σ`. Then, we can define what is a permutation of a list of length `n` via the
-equivalence between arrays and lists.
+Given an [array](lists.arrays.md) `t` of length `n` and an
+[automorphism](foundation.automorphisms.md) `σ` of `Fin n`, the
+{{#concept "permutation" WD="permutation" WDID=Q161519 Disambiguation="of an array"}}
+of `t` according to `σ` is the array where the indexes are permuted by `σ`.
+Then, we can define what is a
+{{#concept "permutation" Disambiguation="of a list" WD="permutation" WDID=Q161519 Agda=permute-list}}
+of a [list](lists.lists.md) of length `n` via the
+[equivalence](foundation-core.equivalences.md) between arrays and lists.
 
 ## Definition
 

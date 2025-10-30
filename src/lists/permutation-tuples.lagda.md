@@ -43,9 +43,11 @@ open import univalent-combinatorics.standard-finite-types
 
 Given a [finite sequence](lists.finite-sequences.md) `t` of length `n` and an
 [automorphism](finite-group-theory.permutations-standard-finite-types.md) `σ` of
-`Fin n`, the permutation of `t` according to `σ` is the finite sequence where
-the indices are permuted by `σ`. Then, we can define what is a permutation of a
-[tuple](lists.tuples.md) of length `n` via the
+`Fin n`, the
+{{#concept "permutation" Disambiguation="of a tuple" WD="permutation" WDID=Q161519 Agda=permute-tuple}}
+of `t` according to `σ` is the finite sequence where the indices are permuted by
+`σ`. Then, we can define what is a permutation of a [tuple](lists.tuples.md) of
+length `n` via the
 [equivalence between finite sequences and tuples](lists.equivalence-tuples-finite-sequences.md).
 
 ## Definitions

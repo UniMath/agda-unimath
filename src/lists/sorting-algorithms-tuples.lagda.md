@@ -27,8 +27,10 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-A function `f` on tuples is a **sort** if `f` is a permutation and if for every
-tuple `v`, `f v` is sorted.
+An endofunction `f` on the type of [tuples](tuples.tuples.md) is a
+{{#concept "sorting algorithm" Disambiguation="on tuples" WD="sorting algorithm" WDID=Q181593 Agda=is-sort-tuple}}
+if `f` is a [permutation](tuples.permutation-tuples.md) and if for every tuple
+`l`, `f l` is [sorted](tuples.sorted-tuples.md).
 
 ## Definition
 
