@@ -50,28 +50,29 @@ the [real numbers](real-numbers.dedekind-real-numbers.md) is a
 ## Definition
 
 ```agda
-closed-interval-ℝ : (l : Level) → UU (lsuc l)
-closed-interval-ℝ l = closed-interval-Large-Poset ℝ-Large-Poset l l
+closed-interval-ℝ : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+closed-interval-ℝ l1 l2 = closed-interval-Large-Poset ℝ-Large-Poset l1 l2
 
 is-in-closed-interval-prop-ℝ :
-  {l1 l2 : Level} → closed-interval-ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
+  {l1 l2 l3 : Level} → closed-interval-ℝ l1 l3 → ℝ l2 → Prop (l1 ⊔ l2 ⊔ l3)
 is-in-closed-interval-prop-ℝ =
   is-in-closed-interval-prop-Large-Poset ℝ-Large-Poset
 
 is-in-closed-interval-ℝ :
-  {l1 l2 : Level} → closed-interval-ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
+  {l1 l2 l3 : Level} → closed-interval-ℝ l1 l2 → ℝ l3 → UU (l1 ⊔ l2 ⊔ l3)
 is-in-closed-interval-ℝ =
   is-in-closed-interval-Large-Poset ℝ-Large-Poset
 
 subtype-closed-interval-ℝ :
-  {l1 : Level} (l : Level) → closed-interval-ℝ l1 → subtype (l1 ⊔ l) (ℝ l)
+  {l1 l2 : Level} (l : Level) → closed-interval-ℝ l1 l2 →
+  subtype (l1 ⊔ l2 ⊔ l) (ℝ l)
 subtype-closed-interval-ℝ = subtype-closed-interval-Large-Poset ℝ-Large-Poset
 
-lower-bound-closed-interval-ℝ : {l : Level} → closed-interval-ℝ l → ℝ l
+lower-bound-closed-interval-ℝ : {l1 l2 : Level} → closed-interval-ℝ l1 l2 → ℝ l1
 lower-bound-closed-interval-ℝ =
   lower-bound-closed-interval-Large-Poset ℝ-Large-Poset
 
-upper-bound-closed-interval-ℝ : {l : Level} → closed-interval-ℝ l → ℝ l
+upper-bound-closed-interval-ℝ : {l1 l2 : Level} → closed-interval-ℝ l1 l2 → ℝ l2
 upper-bound-closed-interval-ℝ =
   upper-bound-closed-interval-Large-Poset ℝ-Large-Poset
 ```
@@ -81,7 +82,7 @@ upper-bound-closed-interval-ℝ =
 ### The unit interval on the real numbers
 
 ```agda
-unit-closed-interval-ℝ : closed-interval-ℝ lzero
+unit-closed-interval-ℝ : closed-interval-ℝ lzero lzero
 unit-closed-interval-ℝ =
   ((zero-ℝ , one-ℝ) , preserves-leq-real-ℚ zero-ℚ one-ℚ leq-zero-one-ℚ)
 ```
@@ -93,10 +94,10 @@ opaque
   unfolding leq-ℝ neighborhood-ℝ
 
   is-closed-subset-closed-interval-ℝ :
-    {l1 l2 : Level} → ([a,b] : closed-interval-ℝ l1) →
+    {l1 l2 l3 : Level} → ([a,b] : closed-interval-ℝ l1 l2) →
     is-closed-subset-Metric-Space
-      ( metric-space-ℝ l2)
-      ( subtype-closed-interval-ℝ l2 [a,b])
+      ( metric-space-ℝ l3)
+      ( subtype-closed-interval-ℝ l3 [a,b])
   is-closed-subset-closed-interval-ℝ ((a , b) , a≤b) x H =
     ( ( λ q q<a →
         let open do-syntax-trunc-Prop (lower-cut-ℝ x q)
@@ -132,23 +133,23 @@ opaque
 
 ```agda
 closed-subset-closed-interval-ℝ :
-  {l1 : Level} (l : Level) → closed-interval-ℝ l1 →
-  closed-subset-Metric-Space (l1 ⊔ l) (metric-space-ℝ l)
+  {l1 l2 : Level} (l : Level) → closed-interval-ℝ l1 l2 →
+  closed-subset-Metric-Space (l1 ⊔ l2 ⊔ l) (metric-space-ℝ l)
 closed-subset-closed-interval-ℝ l [a,b] =
   ( subtype-closed-interval-ℝ l [a,b] ,
     is-closed-subset-closed-interval-ℝ [a,b])
 
 metric-space-closed-interval-ℝ :
-  {l1 : Level} (l : Level) → closed-interval-ℝ l1 →
-  Metric-Space (l1 ⊔ lsuc l) l
+  {l1 l2 : Level} (l : Level) → closed-interval-ℝ l1 l2 →
+  Metric-Space (l1 ⊔ l2 ⊔ lsuc l) l
 metric-space-closed-interval-ℝ l [a,b] =
   subspace-closed-subset-Metric-Space
     ( metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
 
 complete-metric-space-closed-interval-ℝ :
-  {l1 : Level} (l : Level) → closed-interval-ℝ l1 →
-  Complete-Metric-Space (l1 ⊔ lsuc l) l
+  {l1 l2 : Level} (l : Level) → closed-interval-ℝ l1 l2 →
+  Complete-Metric-Space (l1 ⊔ l2 ⊔ lsuc l) l
 complete-metric-space-closed-interval-ℝ l [a,b] =
   complete-closed-subspace-Complete-Metric-Space
     ( complete-metric-space-ℝ l)

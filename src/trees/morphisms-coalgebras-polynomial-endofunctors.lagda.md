@@ -62,7 +62,7 @@ hom-coalgebra-polynomial-endofunctor {A = A} {B} X Y =
       ( coherence-square-maps f
           ( structure-coalgebra-polynomial-endofunctor X)
           ( structure-coalgebra-polynomial-endofunctor Y)
-          ( map-polynomial-endofunctor A B f)))
+          ( map-polynomial-endofunctor' A B f)))
 
 map-hom-coalgebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
@@ -82,7 +82,7 @@ structure-hom-coalgebra-polynomial-endofunctor :
     ( map-hom-coalgebra-polynomial-endofunctor X Y f)
     ( structure-coalgebra-polynomial-endofunctor X)
     ( structure-coalgebra-polynomial-endofunctor Y)
-    ( map-polynomial-endofunctor A B
+    ( map-polynomial-endofunctor' A B
       ( map-hom-coalgebra-polynomial-endofunctor X Y f))
 structure-hom-coalgebra-polynomial-endofunctor X Y f = pr2 f
 ```
@@ -107,7 +107,7 @@ module _
       ( λ H →
         ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
           ( structure-coalgebra-polynomial-endofunctor Y ·l H)) ~
-        ( ( ( htpy-polynomial-endofunctor A B H) ·r
+        ( ( ( htpy-polynomial-endofunctor' A B H) ·r
             ( structure-coalgebra-polynomial-endofunctor X)) ∙h
           ( structure-hom-coalgebra-polynomial-endofunctor X Y g)))
 
@@ -119,11 +119,11 @@ module _
     ( inv
       ( ap
         ( concat'
-          ( map-polynomial-endofunctor A B
+          ( map-polynomial-endofunctor' A B
             ( map-hom-coalgebra-polynomial-endofunctor X Y f)
             ( structure-coalgebra-polynomial-endofunctor X z))
           ( structure-hom-coalgebra-polynomial-endofunctor X Y f z))
-        ( coh-refl-htpy-polynomial-endofunctor A B
+        ( coh-refl-htpy-polynomial-endofunctor' A B
           ( map-hom-coalgebra-polynomial-endofunctor X Y f)
           ( structure-coalgebra-polynomial-endofunctor X z))))
 
@@ -144,7 +144,7 @@ module _
               ( map-hom-coalgebra-polynomial-endofunctor X Y f)
               ( structure-coalgebra-polynomial-endofunctor X)
               ( structure-coalgebra-polynomial-endofunctor Y)
-              ( map-polynomial-endofunctor A B
+              ( map-polynomial-endofunctor' A B
                 ( map-hom-coalgebra-polynomial-endofunctor X Y f)))
             ( λ G →
               ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
@@ -158,12 +158,12 @@ module _
               ( λ x →
                 ap
                   ( concat'
-                    ( ( map-polynomial-endofunctor A B
+                    ( ( map-polynomial-endofunctor' A B
                         ( map-hom-coalgebra-polynomial-endofunctor X Y f)
                         ( structure-coalgebra-polynomial-endofunctor X x)))
                     (G x))
                   ( inv
-                    ( coh-refl-htpy-polynomial-endofunctor A B
+                    ( coh-refl-htpy-polynomial-endofunctor' A B
                       ( map-hom-coalgebra-polynomial-endofunctor X Y f)
                       ( structure-coalgebra-polynomial-endofunctor X x))))))
         ( is-torsorial-htpy

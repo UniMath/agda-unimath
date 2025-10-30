@@ -14,6 +14,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
 open import foundation.slice
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
@@ -30,6 +31,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 
@@ -73,7 +76,7 @@ type-polynomial-endofunctor-UU l = Slice l
 map-polynomial-endofunctor-UU :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   type-polynomial-endofunctor-UU l A → type-polynomial-endofunctor-UU l B
-map-polynomial-endofunctor-UU l = map-polynomial-endofunctor (UU l) (λ X → X)
+map-polynomial-endofunctor-UU l = map-polynomial-endofunctor' (UU l) (λ X → X)
 ```
 
 ### Type families
@@ -90,44 +93,79 @@ map-exp-UU l f P = P ∘ f
 
 ## Properties
 
+### Characterizing equality in `type-polynomial-endofunctor-UU` over locally small `A`
+
+```agda
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A)
+  where
+
+  Eq-type-polynomial-endofunctor-UU' :
+    type-polynomial-endofunctor-UU l A →
+    type-polynomial-endofunctor-UU l A →
+    UU (lsuc l ⊔ l1)
+  Eq-type-polynomial-endofunctor-UU' (X , f) (Y , g) =
+    ( λ a → Σ X (λ x → type-is-small (H (f x) a))) ＝
+    ( λ a → Σ Y (λ y → type-is-small (H (g y) a)))
+
+  compute-Eq-type-polynomial-endofunctor-UU' :
+    (X Y : type-polynomial-endofunctor-UU l A) →
+    (Eq-type-polynomial-endofunctor-UU' X Y) ≃ (X ＝ Y)
+  compute-Eq-type-polynomial-endofunctor-UU' (X , f) (Y , g) =
+    ( inv-equiv (extensionality-Slice (X , f) (Y , g))) ∘e
+    ( inv-equiv (equiv-fam-equiv-equiv-slice f g)) ∘e
+    ( equiv-Π-equiv-family
+      ( λ a →
+        ( equiv-postcomp-equiv
+          ( equiv-tot (λ y → inv-equiv-is-small (H (g y) a)))
+          ( fiber f a)) ∘e
+        ( equiv-precomp-equiv
+          ( equiv-tot (λ x → equiv-is-small (H (f x) a)))
+          ( Σ Y (λ y → type-is-small (H (g y) a)))) ∘e
+        ( equiv-univalence))) ∘e
+    ( equiv-funext)
+
+  compute-total-Eq-type-polynomial-endofunctor-UU' :
+    (X : type-polynomial-endofunctor-UU l A) →
+    Σ ( type-polynomial-endofunctor-UU l A)
+      ( Eq-type-polynomial-endofunctor-UU' X) ≃
+    Σ (type-polynomial-endofunctor-UU l A) (X ＝_)
+  compute-total-Eq-type-polynomial-endofunctor-UU' X =
+    equiv-tot (compute-Eq-type-polynomial-endofunctor-UU' X)
+
+  abstract
+    is-torsorial-Eq-type-polynomial-endofunctor-UU' :
+      (X : type-polynomial-endofunctor-UU l A) →
+      is-torsorial (Eq-type-polynomial-endofunctor-UU' X)
+    is-torsorial-Eq-type-polynomial-endofunctor-UU' X =
+      is-contr-equiv
+        ( Σ ( type-polynomial-endofunctor-UU l A) (X ＝_))
+        ( compute-total-Eq-type-polynomial-endofunctor-UU' X)
+        ( is-torsorial-Id X)
+```
+
 ### If `A` is locally `l`-small, then we can construct an embedding `type-polynomial-endofunctor l A ↪ type-exp-UU A`
 
 ```agda
-map-type-duality :
-  {l l1 : Level} {A : UU l1} → is-locally-small l A →
-  type-polynomial-endofunctor-UU l A → type-exp-UU l A
-map-type-duality H (X , f) a =
-  Σ X (λ x → type-is-small (H (f x) a))
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A)
+  where
 
-is-emb-map-type-duality :
-  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) →
-  is-emb (map-type-duality H)
-is-emb-map-type-duality {l} {l1} {A} H (X , f) =
-  fundamental-theorem-id
-    ( is-contr-equiv
-      ( Σ ( type-polynomial-endofunctor-UU l A) ((X , f) ＝_))
-      ( equiv-tot
-        ( λ (Y , g) →
-          ( inv-equiv (extensionality-Slice (X , f) (Y , g))) ∘e
-          ( inv-equiv (equiv-fam-equiv-equiv-slice f g)) ∘e
-          ( equiv-Π-equiv-family
-            ( λ a →
-              ( equiv-postcomp-equiv
-                ( equiv-tot (λ y → inv-equiv (equiv-is-small (H (g y) a))))
-                ( fiber f a)) ∘e
-              ( equiv-precomp-equiv
-                ( equiv-tot (λ x → equiv-is-small (H (f x) a)))
-                ( Σ Y (λ y → type-is-small (H (g y) a)))) ∘e
-              ( equiv-univalence))) ∘e
-          ( equiv-funext)))
-      ( is-torsorial-Id (X , f)))
-    ( λ Y → ap (map-type-duality H))
+  map-type-duality :
+    type-polynomial-endofunctor-UU l A → type-exp-UU l A
+  map-type-duality (X , f) a =
+    Σ X (λ x → type-is-small (H (f x) a))
 
-emb-type-duality :
-  {l l1 : Level} {A : UU l1} → is-locally-small l A →
-  type-polynomial-endofunctor-UU l A ↪ type-exp-UU l A
-pr1 (emb-type-duality H) = map-type-duality H
-pr2 (emb-type-duality H) = is-emb-map-type-duality H
+  abstract
+    is-emb-map-type-duality : is-emb map-type-duality
+    is-emb-map-type-duality (X , f) =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-type-polynomial-endofunctor-UU' H (X , f))
+        ( λ Y → ap map-type-duality)
+
+  emb-type-duality :
+    type-polynomial-endofunctor-UU l A ↪ type-exp-UU l A
+  emb-type-duality = (map-type-duality , is-emb-map-type-duality)
 ```
 
 ### A type `A` is small if and only if `P_𝒰(A) ↪ P^𝒰(A)` is an equivalence
@@ -145,54 +183,61 @@ module _
     type-is-small (is-small-Σ H (λ a → is-small' {l} {B a}))
   pr2 (map-inv-type-duality B) =
     ( pr1) ∘
-    ( map-inv-equiv (equiv-is-small (is-small-Σ H (λ a → is-small' {l} {B a}))))
+    ( map-inv-equiv-is-small (is-small-Σ H (λ a → is-small' {l} {B a})))
 
-  is-section-map-inv-type-duality :
-    map-type-duality (is-locally-small-is-small H) ∘ map-inv-type-duality ~ id
-  is-section-map-inv-type-duality B =
-    eq-equiv-fam
-      ( λ a →
-        equivalence-reasoning
-          map-type-duality
-            ( is-locally-small-is-small H)
-            ( map-inv-type-duality B)
-            ( a)
-          ≃ fiber
-            ( ( pr1 {B = B}) ∘
-              ( map-inv-equiv
-                ( equiv-is-small
-                  ( is-small-Σ H (λ a → is-small'))))) a
-            by
-            equiv-tot
-              ( λ x →
-                inv-equiv
-                  ( equiv-is-small
-                    ( is-locally-small-is-small H
-                      ( pr2 (map-inv-type-duality B) x)
-                      ( a))))
-          ≃ Σ ( fiber (pr1 {B = B}) a)
-              ( λ b →
-                fiber
-                  ( map-inv-equiv
-                    ( equiv-is-small
-                      ( is-small-Σ H (λ a → is-small' {l} {B a}))))
-                  ( pr1 b))
-            by compute-fiber-comp pr1 _ a
-          ≃ fiber (pr1 {B = B}) a
-            by
-            right-unit-law-Σ-is-contr
-              ( λ b →
-                is-contr-map-is-equiv
-                  ( is-equiv-map-inv-equiv
-                    ( equiv-is-small
-                      ( is-small-Σ H (λ a → is-small' {l} {B a}))))
-                  ( pr1 b))
-          ≃ B a
-            by
-            equiv-fiber-pr1 B a)
+  compute-map-type-duality :
+    (B : type-exp-UU l A) (a : A) →
+    map-type-duality
+      ( is-locally-small-is-small H)
+      ( map-inv-type-duality B)
+      ( a) ≃
+    B a
+  compute-map-type-duality B a =
+    equivalence-reasoning
+      map-type-duality
+        ( is-locally-small-is-small H)
+        ( map-inv-type-duality B)
+        ( a)
+      ≃ fiber
+          ( pr1 ∘ map-inv-equiv-is-small (is-small-Σ H (λ a → is-small')))
+          ( a)
+        by
+        equiv-tot
+          ( λ x →
+            inv-equiv-is-small
+              ( is-locally-small-is-small H
+                ( pr2 (map-inv-type-duality B) x)
+                ( a)))
+      ≃ Σ ( fiber pr1 a)
+          ( λ b →
+            fiber
+              ( map-inv-equiv-is-small
+                ( is-small-Σ H (λ a → is-small' {l} {B a})))
+              ( pr1 b))
+        by compute-fiber-comp pr1 _ a
+      ≃ fiber pr1 a
+        by
+        right-unit-law-Σ-is-contr
+          ( λ b →
+            is-contr-map-is-equiv
+              ( is-equiv-map-inv-equiv-is-small
+                ( is-small-Σ H (λ a → is-small' {l} {B a})))
+              ( pr1 b))
+      ≃ B a
+        by equiv-fiber-pr1 B a
+
+  abstract
+    is-section-map-inv-type-duality :
+      is-section
+        ( map-type-duality (is-locally-small-is-small H))
+        ( map-inv-type-duality)
+    is-section-map-inv-type-duality B =
+      eq-equiv-fam (compute-map-type-duality B)
 
   is-retraction-map-inv-type-duality :
-    map-inv-type-duality ∘ map-type-duality (is-locally-small-is-small H) ~ id
+    is-retraction
+      ( map-type-duality (is-locally-small-is-small H))
+      ( map-inv-type-duality)
   is-retraction-map-inv-type-duality X =
     is-injective-is-emb
       ( is-emb-map-type-duality (is-locally-small-is-small H))
@@ -216,29 +261,73 @@ module _
 
 ```agda
 module _
-  {l l1 : Level} {A : UU l1} (H : is-locally-small l A)
+  {l l1 : Level} {A : UU l1}
+  (H : is-locally-small l A)
+  (E : is-equiv (map-type-duality H))
   where
 
-  is-small-is-equiv-map-type-duality :
-    is-equiv (map-type-duality H) → is-small l A
-  pr1 (is-small-is-equiv-map-type-duality E) =
+  type-is-small-is-equiv-map-type-duality : UU l
+  type-is-small-is-equiv-map-type-duality =
     pr1 (map-inv-is-equiv E (λ _ → raise-unit l))
-  pr2 (is-small-is-equiv-map-type-duality E) =
-    inv-equiv
-      ( ( pr2 (map-inv-is-equiv E (λ _ → raise-unit l))) ,
-        ( is-equiv-is-contr-map
-          ( λ a →
-            is-contr-equiv
-              ( raise-unit l)
-              ( ( equiv-eq-fam _ _
-                  ( is-section-map-inv-is-equiv E (λ _ → raise-unit l))
-                  ( a)) ∘e
-                ( equiv-tot
-                  ( λ x →
-                    equiv-is-small
-                      ( H ( pr2 (map-inv-is-equiv E (λ _ → raise-unit l)) x)
-                          ( a)))))
-              ( is-contr-raise-unit))))
+
+  map-inv-equiv-is-small-is-equiv-map-type-duality :
+    type-is-small-is-equiv-map-type-duality → A
+  map-inv-equiv-is-small-is-equiv-map-type-duality =
+    pr2 (map-inv-is-equiv E (λ _ → raise-unit l))
+
+  abstract
+    is-contr-map-map-inv-equiv-is-small-is-equiv-map-type-duality :
+      is-contr-map map-inv-equiv-is-small-is-equiv-map-type-duality
+    is-contr-map-map-inv-equiv-is-small-is-equiv-map-type-duality a =
+      is-contr-equiv
+        ( raise-unit l)
+        ( ( equiv-eq-fam _ _
+            ( is-section-map-inv-is-equiv E (λ _ → raise-unit l))
+            ( a)) ∘e
+          ( equiv-tot
+            ( λ x →
+              equiv-is-small
+                ( H (pr2 (map-inv-is-equiv E (λ _ → raise-unit l)) x) a))))
+        ( is-contr-raise-unit)
+
+  abstract
+    is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality :
+      is-equiv map-inv-equiv-is-small-is-equiv-map-type-duality
+    is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality =
+      is-equiv-is-contr-map
+        is-contr-map-map-inv-equiv-is-small-is-equiv-map-type-duality
+
+  inv-equiv-is-small-is-equiv-map-type-duality :
+    type-is-small-is-equiv-map-type-duality ≃ A
+  inv-equiv-is-small-is-equiv-map-type-duality =
+    ( map-inv-equiv-is-small-is-equiv-map-type-duality ,
+      is-equiv-map-inv-equiv-is-small-is-equiv-map-type-duality)
+
+  equiv-is-small-is-equiv-map-type-duality :
+    A ≃ type-is-small-is-equiv-map-type-duality
+  equiv-is-small-is-equiv-map-type-duality =
+    inv-equiv inv-equiv-is-small-is-equiv-map-type-duality
+
+  is-small-is-equiv-map-type-duality : is-small l A
+  is-small-is-equiv-map-type-duality =
+    ( type-is-small-is-equiv-map-type-duality ,
+      equiv-is-small-is-equiv-map-type-duality)
+```
+
+Since `map-type-duality` is always an embedding, it suffices to show it is
+surjective.
+
+```agda
+module _
+  {l l1 : Level} {A : UU l1}
+  (H : is-locally-small l A)
+  (E : is-surjective (map-type-duality H))
+  where
+
+  is-small-is-surjective-map-type-duality : is-small l A
+  is-small-is-surjective-map-type-duality =
+    is-small-is-equiv-map-type-duality H
+      ( is-equiv-is-emb-is-surjective E (is-emb-map-type-duality H))
 ```
 
 ### Type duality formulated using `l1 ⊔ l2`
@@ -296,17 +385,17 @@ The type of all function from `A → B` is equivalent to the type of function
 ```agda
 fiber-Σ :
   {l1 l2 : Level} (X : UU l1) (A : UU l2) →
-  (X → A) ≃ Σ (A → UU (l2 ⊔ l1)) (λ Y → X ≃ Σ A Y)
+  (X → A) ≃ Σ (A → UU (l1 ⊔ l2)) (λ Y → X ≃ Σ A Y)
 fiber-Σ {l1} {l2} X A =
   ( equiv-Σ
     ( λ Z → X ≃ Σ A Z)
     ( equiv-Fiber l1 A)
-    ( λ s → inv-equiv ( equiv-postcomp-equiv (equiv-total-fiber (pr2 s)) X))) ∘e
+    ( λ s → equiv-postcomp-equiv (inv-equiv-total-fiber (pr2 s)) X)) ∘e
   ( equiv-right-swap-Σ) ∘e
   ( inv-left-unit-law-Σ-is-contr
     ( is-contr-is-small-lmax l2 X)
     ( is-small-lmax l2 X)) ∘e
-  ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A)
+  ( equiv-precomp (inv-equiv-is-small (is-small-lmax l2 X)) A)
 ```
 
 ## See also
@@ -314,3 +403,8 @@ fiber-Σ {l1} {l2} X A =
 - In [`foundation.binary-type-duality`](foundation.binary-type-duality.md) we
   show that [binary relations](foundation.binary-relations.md) are equivalently
   described as [spans of types](foundation.spans.md).
+- In
+  [`structured-types.pointed-type-duality`](structured-types.pointed-type-duality.md)
+  we show that families of [pointed types](structured-types.pointed-types.md)
+  are equivalently described as
+  [retractive types](structured-types.retractive-types.md).

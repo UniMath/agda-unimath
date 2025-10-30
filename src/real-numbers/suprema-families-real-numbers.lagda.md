@@ -19,7 +19,9 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -208,6 +210,23 @@ module _
 
   has-supremum-subset-ℝ : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   has-supremum-subset-ℝ = type-Prop has-supremum-prop-subset-ℝ
+```
+
+### A subset of real numbers with a supremum is inhabited
+
+```agda
+abstract
+  is-inhabited-has-supremum-subset-ℝ :
+    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-supremum-subset-ℝ S l3 →
+    is-inhabited-subtype S
+  is-inhabited-has-supremum-subset-ℝ S (s , is-sup-s) =
+    map-trunc-Prop
+      ( pr1)
+      ( is-approximated-below-is-supremum-family-ℝ
+        ( inclusion-subset-ℝ S)
+        ( s)
+        ( is-sup-s)
+        ( one-ℚ⁺))
 ```
 
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`

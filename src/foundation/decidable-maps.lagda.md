@@ -7,18 +7,24 @@ module foundation.decidable-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality-maps
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
+open import foundation.iterating-functions
+open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -43,7 +49,7 @@ A [map](foundation-core.function-types.md) is said to be
 its [fibers](foundation-core.fibers-of-maps.md) are
 [decidable types](foundation.decidable-types.md).
 
-## Definition
+## Definitions
 
 ### The structure on a map of decidability
 
@@ -93,65 +99,6 @@ opaque
       ( K b)
 ```
 
-### Composition of decidable maps
-
-The composite `g ∘ f` of two decidable maps is decidable if `g` is injective.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {g : B → C} {f : A → B}
-  where
-
-  abstract
-    is-decidable-map-comp :
-      is-injective g →
-      is-decidable-map g →
-      is-decidable-map f →
-      is-decidable-map (g ∘ f)
-    is-decidable-map-comp H G F x =
-      rec-coproduct
-        ( λ u →
-          is-decidable-iff
-            ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
-            ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
-            ( F (pr1 u)))
-        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-        ( G x)
-```
-
-### Left cancellation for decidable maps
-
-If a composite `g ∘ f` is decidable and `g` is injective then `f` is decidable.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
-  where
-
-  abstract
-    is-decidable-map-right-factor' :
-      is-decidable-map (g ∘ f) → is-injective g → is-decidable-map f
-    is-decidable-map-right-factor' GF G y =
-      rec-coproduct
-        ( λ q → inl (pr1 q , G (pr2 q)))
-        ( λ q → inr (λ x → q ((pr1 x) , ap g (pr2 x))))
-        ( GF (g y))
-```
-
-### Retracts into types with decidable equality are decidable
-
-```agda
-is-decidable-map-retraction :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → has-decidable-equality B →
-  (i : A → B) → retraction i → is-decidable-map i
-is-decidable-map-retraction d i (r , R) b =
-  is-decidable-iff
-    ( λ (p : i (r b) ＝ b) → r b , p)
-    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ ap i (R (pr1 t)) ∙ pr2 t)
-    ( d (i (r b)) b)
-```
-
 ### Maps with sections are decidable
 
 ```agda
@@ -187,6 +134,105 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
     is-equiv f → is-decidable-map f
   is-decidable-map-is-equiv H x = inl (center (is-contr-map-is-equiv H x))
+```
+
+### Composition of decidable maps
+
+The composite of two decidable maps `g ∘ f` is decidable if `g` is injective.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp :
+      is-injective g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp H G F x =
+      rec-coproduct
+        ( λ u →
+          is-decidable-iff
+            ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+            ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+            ( F (pr1 u)))
+        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+        ( G x)
+```
+
+The composite of two decidable maps `g ∘ f` is decidable if `g` has double
+negation dense equality on fibers.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp-has-double-negation-dense-equality-map :
+      has-double-negation-dense-equality-map g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp-has-double-negation-dense-equality-map H G F x =
+      is-decidable-equiv
+        ( compute-fiber-comp g f x)
+        ( is-decidable-Σ-has-double-negation-dense-equality-base
+          ( H x)
+          ( G x)
+          ( F ∘ pr1))
+
+module _
+  {l1 : Level} {A : UU l1} {f : A → A}
+  (is-decidable-f : is-decidable-map f)
+  (H : has-double-negation-dense-equality-map f)
+  where
+
+  is-decidable-map-iterate-has-double-negation-dense-equality-map :
+    (n : ℕ) → is-decidable-map (iterate n f)
+  is-decidable-map-iterate-has-double-negation-dense-equality-map zero-ℕ =
+    is-decidable-map-id
+  is-decidable-map-iterate-has-double-negation-dense-equality-map (succ-ℕ n) =
+    is-decidable-map-comp-has-double-negation-dense-equality-map
+      ( H)
+      ( is-decidable-f)
+      ( is-decidable-map-iterate-has-double-negation-dense-equality-map n)
+```
+
+### Left cancellation for decidable maps
+
+If a composite `g ∘ f` is decidable and `g` is injective then `f` is decidable.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
+  where
+
+  abstract
+    is-decidable-map-right-factor' :
+      is-decidable-map (g ∘ f) → is-injective g → is-decidable-map f
+    is-decidable-map-right-factor' GF G y =
+      rec-coproduct
+        ( λ q → inl (pr1 q , G (pr2 q)))
+        ( λ q → inr (λ x → q (pr1 x , ap g (pr2 x))))
+        ( GF (g y))
+```
+
+### Retracts into types with decidable equality are decidable
+
+```agda
+is-decidable-map-retraction :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → has-decidable-equality B →
+  (i : A → B) → retraction i → is-decidable-map i
+is-decidable-map-retraction d i (r , R) b =
+  is-decidable-iff
+    ( λ (p : i (r b) ＝ b) → r b , p)
+    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ ap i (R (pr1 t)) ∙ pr2 t)
+    ( d (i (r b)) b)
 ```
 
 ### The map on total spaces induced by a family of decidable maps is decidable

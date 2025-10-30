@@ -38,7 +38,7 @@ module _
 
   structure-coalgebra-Enriched-Directed-Tree :
     Enriched-Directed-Tree l3 l3 A B →
-    type-polynomial-endofunctor A B (Enriched-Directed-Tree l3 l3 A B)
+    type-polynomial-endofunctor' A B (Enriched-Directed-Tree l3 l3 A B)
   pr1 (structure-coalgebra-Enriched-Directed-Tree T) =
     shape-root-Enriched-Directed-Tree A B T
   pr2 (structure-coalgebra-Enriched-Directed-Tree T) =
