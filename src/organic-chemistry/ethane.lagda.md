@@ -46,9 +46,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Ethane" WD="ethane" WDID=Q52858 Agda=ethane}} is the
-[unique](foundation-core.contractible-types.md)
-[alkane](organic-chemistry.alkanes.md) with two carbons.
+**Ethane** is the unique alkane with two carbons.
 
 ## Definition
 

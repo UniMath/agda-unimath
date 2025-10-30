@@ -23,11 +23,9 @@ open import organic-chemistry.saturated-carbons
 
 ## Idea
 
-An {{#concept "alcohol" WD="alcohols" WDID=Q156 Agda=alcohol}} is a
-[hydrocarbon](organic-chemistry.hydrocarbons.md) with at least one `-OH` group.
-The type of alcohols can therefore be defined as the type of hydrocarbons
-equipped with a distinguished subset of the available (unbonded) electrons of
-the carbon atoms.
+An alcohol is a hydrocarbon with at least one `-OH` group. The type of alcohols
+can therefore be defined as the type of hydrocarbons equipped with a
+distinguished subset of the available (unbonded) electrons of the carbon atoms.
 
 ## Definition
 

@@ -38,9 +38,7 @@ number 4 comes from the number of bonds a carbon atom makes in a molecule.
 Bonds in hydrocarbons can appear as single bonds, double bonds, and triple
 bonds, but there are no quadruple bonds.
 
-We define
-{{#concept "hydrocarbons" WD="hydrocarbon" WDID=Q43648 Agda=hydrocarbon}} to be
-[graphs](graph-theory.finite-graphs.md) equipped with a family of tetrahedra in
+We define hydrocarbons to be graphs equipped with a family of tetrahedra in
 3-dimensional space indexed by the vertices and for each vertex `c` an embedding
 from the type of all edges incident to `c` into the vertices of the tetrahedron
 associated to `c`, satisfying the following conditions:
