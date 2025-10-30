@@ -29,7 +29,7 @@ has the structure of a [coalgebra](trees.coalgebras-polynomial-endofunctors.md)
 for the [polynomial endofunctor](trees.polynomial-endofunctors.md)
 
 ```text
-  A ↦ Σ (X : UU), X → A
+  A ↦ Σ (X : Type), (X → A).
 ```
 
 ## Definition
