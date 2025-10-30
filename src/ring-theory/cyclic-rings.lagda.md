@@ -56,7 +56,7 @@ three claims about a ring `R` are equivalent:
 
 Cyclic rings therefore have a specified generating element, i.e., the element
 `1`. With this fact in the pocket, it is easy to show that cyclic rings are
-[commutative rings](ring-theory.commutative-rings.md). Furthermore, the
+[commutative rings](commutative-algebra.commutative-rings.md). Furthermore, the
 multiplicative structure of `R` coincides with the multiplicative structure
 constructed in
 [`group-theory.generating-elements-groups`](group-theory.generating-elements-groups.md)
