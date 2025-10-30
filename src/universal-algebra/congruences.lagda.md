@@ -27,7 +27,9 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A congruence in an algebra is an equivalence relation that respects all
+A {{#concept "congruence" Agda=congruence-Algebra}} in an
+[algebra](universal-algebra.algebras-of-theories.md) is an
+[equivalence relation](foundation.equivalence-relations.md) that respects all
 operations of the algebra.
 
 ## Definitions
@@ -75,12 +77,12 @@ module _
 
   equivalence-relation-congruence-Algebra :
     {l4 : Level} →
-    congruence-Algebra l4 → ( equivalence-relation l4 (type-Algebra σ T A))
+    congruence-Algebra l4 → equivalence-relation l4 (type-Algebra σ T A)
   equivalence-relation-congruence-Algebra = pr1
 
   preserves-operations-congruence-Algebra :
     {l4 : Level} →
     (R : congruence-Algebra l4) →
-    (preserves-operations (equivalence-relation-congruence-Algebra R))
+    preserves-operations (equivalence-relation-congruence-Algebra R)
   preserves-operations-congruence-Algebra = pr2
 ```

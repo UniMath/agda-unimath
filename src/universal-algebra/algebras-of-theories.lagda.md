@@ -32,8 +32,12 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-Given a theory, an algebra is a model on a set such that it satisfies all
-equations in the theory.
+Given a [theory](universal-algebra.algebraic-theories.md), an
+{{#concept "algebra" Disambiguation="of an algebraic theory" Agda=Algebra}} is a
+[model](universal-algebra.models-of-signatures.md) on a
+[set](foundation-core.sets.md) such that it satisfies all
+[equations](universal-algebra.abstract-equations-over-signatures.md) in the
+theory.
 
 ## Definitions
 

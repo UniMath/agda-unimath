@@ -31,8 +31,12 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The kernel of a homomorphism `f` of algebras is the congruence relation given by
-`x ~ y` iff `f x ~ f y`.
+The
+{{#concept "kernel" Disambiguation="of a homomorphism of algebras" Agda=kernel-hom-Algebra}}
+of a [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `f` of
+[algebras](universal-algebra.algebras-of-theories.md) is the
+[congruence relation](universal-algebra.congrueces.md) given by `x ~ y` iff
+`f x ~ f y`.
 
 ## Definitions
 

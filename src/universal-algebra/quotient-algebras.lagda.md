@@ -37,9 +37,11 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The quotient of an algebra by a congruence is the set quotient by that
-congruence. This quotient again has the structure of an algebra inherited by the
-original one.
+The {{#concept "quotient" Disambiguation="of an algebra"}} of an
+[algebra](universal-algebra.algebras-of-theories.md) by a
+[congruence](universal-algebra.congruences.md) is the
+[set quotient](foundation.set-quotients.md) by that congruence. This quotient
+again has the structure of an algebra inherited by the original one.
 
 ## Definitions
 
@@ -63,16 +65,14 @@ module _
   is-set-set-quotient-Algebra = pr2 set-quotient-Algebra
 
   compute-quotient-Algebra :
-    equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R) ≃
-      (type-quotient-Algebra)
+    equivalence-class (equivalence-relation-congruence-Algebra σ T A R) ≃
+    type-quotient-Algebra
   compute-quotient-Algebra =
     compute-set-quotient
       ( equivalence-relation-congruence-Algebra σ T A R)
 
   set-quotient-equivalence-class-Algebra :
-    equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R) →
+    equivalence-class (equivalence-relation-congruence-Algebra σ T A R) →
     type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
@@ -147,4 +147,8 @@ module _
         ( arity-operation-signature σ op)
         ( type-quotient-Algebra)
         ( v))
+
+  model-quotient-Algebra : Model-Signature σ (l3 ⊔ l4)
+  model-quotient-Algebra =
+    ( set-quotient-Algebra , is-model-set-quotient-Algebra)
 ```

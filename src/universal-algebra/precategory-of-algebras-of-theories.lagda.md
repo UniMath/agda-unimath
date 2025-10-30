@@ -8,6 +8,7 @@ module universal-algebra.precategory-of-algebras-of-theories where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.sets
@@ -26,13 +27,15 @@ open import universal-algebra.signatures
 
 ## Idea
 
-For any [signature](universal-algebra.signatures.md) `σ` and
-`σ`-[theory](universal-algebra.algebraic-theories.md) `T`, there is a
-[large precategory](category-theory.large-precategories.md) of
-`T`-[algebras](universal-algebra.algebras-of-theories.md) and `T`-algebra
-[homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
+Given a [theory](universal-algebra.algebraic-theories.md) `T` over a
+[signature](universal-algebra.signatures.md) `σ`, we have the
+{{#concept "large precategory of `T`-algebras" Disambiguation="of an equational theory over a signature" Agda=Algebra-Large-Precategory}},
+which consists of `T`-[algebras](universal-algebra.algebras-of-theories.md) and
+`T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
 
 ## Definition
+
+### The large precategory of algebras
 
 ```agda
 module _
@@ -41,13 +44,30 @@ module _
 
   Algebra-Large-Precategory :
     Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 l4 → l1 ⊔ l3 ⊔ l4)
-  Algebra-Large-Precategory = make-Large-Precategory
-    ( Algebra σ T)
-    ( set-hom-Algebra σ T)
-    ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra σ T X Y Z)
-    ( λ {l} {X} → id-hom-Algebra σ T X)
-    ( λ {l3} {l4} {l5} {l6} {X} {Y} {Z} {W} →
-      associative-comp-hom-Algebra σ T X Y Z W)
-    ( λ {l3} {l4} {X} {Y} → left-unit-law-comp-hom-Algebra σ T X Y)
-    ( λ {l3} {l4} {X} {Y} → right-unit-law-comp-hom-Algebra σ T X Y)
+  Algebra-Large-Precategory =
+    make-Large-Precategory
+      ( Algebra σ T)
+      ( set-hom-Algebra σ T)
+      ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra σ T X Y Z)
+      ( λ {l} {X} → id-hom-Algebra σ T X)
+      ( λ {l3} {l4} {l5} {l6} {X} {Y} {Z} {W} →
+        associative-comp-hom-Algebra σ T X Y Z W)
+      ( λ {l3} {l4} {X} {Y} → left-unit-law-comp-hom-Algebra σ T X Y)
+      ( λ {l3} {l4} {X} {Y} → right-unit-law-comp-hom-Algebra σ T X Y)
 ```
+
+### The small precategory of algebras
+
+```agda
+module _
+  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  where
+
+  Algebra-Precategory : (l3 : Level) → Precategory (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
+  Algebra-Precategory =
+    precategory-Large-Precategory (Algebra-Large-Precategory σ T)
+```
+
+## See also
+
+- [The category of algebras of an equational theory](universal-algebra.category-of-algebras-of-theories.md)

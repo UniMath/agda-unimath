@@ -31,8 +31,11 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-There is an algebraic theory of groups. They type of all such algebras is
-equivalent to the type of groups.
+There is an
+{{#concept "algebraic theory of groups" Disambiguation=group-Theory}}. The type
+of all such [algebras](universal-algebra.algebras-of-theories.md) is
+[equivalent](foundation-core.equivalences.md) to the type of
+[groups](group-theory.groups.md).
 
 ## Definitions
 

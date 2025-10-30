@@ -1,8 +1,6 @@
 # Models of signatures
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.models-of-signatures where
 ```
 
@@ -36,9 +34,10 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A model of a signature `Sig` in a type `A` is a dependent function that assigns
-to each function symbol `f` of arity `n` and `n`-tuple of elements of `A` an
-element of `A`.
+A {{#concept "model" Disambiguation="of a signature" Agda=Model-Signature}} of a
+[signature](universal-algebra.signatures.md) `σ` in a type `A` is a dependent
+function that assigns to each function symbol `f` of arity `n` and
+`n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
 
 ## Definitions
 

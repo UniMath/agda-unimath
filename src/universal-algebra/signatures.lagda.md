@@ -20,7 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A signature is a collection of function symbols with given arities.
+A {{#concept "signature" Agda=signature}} is a
+[collection](foundation.dependent-pair-types.md) of function symbols with given
+arities.
 
 ## Definitions
 
@@ -28,16 +30,16 @@ A signature is a collection of function symbols with given arities.
 
 ```agda
 signature : (l : Level) → UU (lsuc l)
-signature (l) = Σ (UU l) (λ operations → (operations → ℕ))
+signature l = Σ (UU l) (λ operations → (operations → ℕ))
 
 operation-signature : {l : Level} → signature l → UU l
-operation-signature σ = pr1 σ
+operation-signature = pr1
 
 arity-operation-signature :
   {l : Level} →
   (σ : signature l) →
   (operation-signature σ → ℕ)
-arity-operation-signature σ = pr2 σ
+arity-operation-signature = pr2
 ```
 
 ### Extension of signatures

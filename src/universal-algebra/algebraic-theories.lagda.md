@@ -18,10 +18,13 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An algebraic theory is a collection of abstract equations over a signature `σ`
-that we consider to 'hold' in the theory. It is algebraic in the sense that we
-only require equations involving function symbols from the signature, in
-contrast to, say, requiring additional types of relations.
+An {{#concept "algebraic theory" Agda=Theory}} is a
+[collection](foundation.dependent-pair-types.md) of
+[abstract equations](universal-algebra.abstract-equations-over-signatures.md)
+over a [signature](universal-algebra.signatures.md) `σ` that we consider to
+'hold' in the theory. It is algebraic in the sense that we only require
+equations involving function symbols from the signature, in contrast to, say,
+requiring additional types of relations.
 
 ## Definitions
 

@@ -19,9 +19,11 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-An **abstract equation** over a signature `σ` is a statement of a form "`x`
-equals `y`", where `x` and `y` are terms over `σ`. Thus, the data of an abstract
-equation is simply two terms over a common signature.
+An {{#concept "abstract equation" Agda=Abstract-Equation}} over a
+[signature](universal-algebra.signatures.md) `σ` is a statement of the form "`x`
+equals `y`", where `x` and `y` are
+[terms](universal-algebra.terms-over-signatures.md) over `σ`. Thus, the data of
+an abstract equation is simply two terms over a common signature.
 
 ## Definitions
 

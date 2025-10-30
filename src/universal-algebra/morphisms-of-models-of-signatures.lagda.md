@@ -35,11 +35,11 @@ open import universal-algebra.signatures
 
 A
 {{#concept "morphism" Disambiguation="of models over a signature" Agda=hom-Model-Signature}}
-of [`σ`-models](universal-algebra.models-of-signatures.md) `A` and `B` is a
-function `f : A → B` between their underlying sets that preserves the operations
-of `σ`, in the sense that for `op ∈ σ` an abstract operation with arity `n ∈ ℕ`,
-and `assign-A` and `assign-B` the semantics of `σ` in `A` and `B` respectively,
-and for a `v ∈ tuple A n`, we have
+of `σ`-[models](universal-algebra.models-of-signatures.md) `A` and `B` is a
+function `f : A → B` between their underlying [sets](foundation-core.sets.md)
+that preserves the operations of `σ`, in the sense that for `op ∈ σ` an abstract
+operation with arity `n : ℕ`, and `assign-A` and `assign-B` the semantics of `σ`
+in `A` and `B` respectively, and for a `v : tuple A n`, we have
 
 ```text
   f (assign-A op v) = assign-B op (f v).
