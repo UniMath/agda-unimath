@@ -35,7 +35,7 @@ The
 {{#concept "kernel" Disambiguation="of a homomorphism of algebras" WD="kernel" WDID=Q574844 Agda=kernel-hom-Algebra}}
 of a [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `f` of
 [algebras](universal-algebra.algebras-of-theories.md) is the
-[congruence relation](universal-algebra.congrueces.md) given by `x ~ y` iff
+[congruence relation](universal-algebra.congruences.md) given by `x ~ y` iff
 `f x ~ f y`.
 
 ## Definitions
