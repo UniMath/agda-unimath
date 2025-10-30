@@ -23,14 +23,15 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of
-which has a triple bond.
+An $n$-{{#concept "alkyne" WD="alkyne" WDID=Q159226 Agda=alkyne}} is a
+[hydrocarbon](organic-chemistry.hydrocarbons.md) equipped with a choice of $n$
+carbons, each of which has a triple bond.
 
 ## Definition
 
 ```agda
-n-alkyne : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lsuc l1 ⊔ l2)
-n-alkyne {l1} {l2} H n =
+alkyne : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lsuc l1 ⊔ l2)
+alkyne {l1} {l2} H n =
   Σ ( Type-With-Cardinality-ℕ l1 n)
     ( λ carbons →
       Σ ( type-Type-With-Cardinality-ℕ n carbons ↪ vertex-hydrocarbon H)
