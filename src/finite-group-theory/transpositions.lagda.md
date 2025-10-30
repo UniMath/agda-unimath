@@ -45,6 +45,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import lists.concatenation-lists
 open import lists.functoriality-lists
@@ -62,8 +63,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Transpositions" Agda=transposition}} are permutations that swap two
-elements.
+{{#concept "Transpositions" WD="transposition" WDID=Q2666112 Agda=transposition}}
+are permutations that swap two elements.
 
 ## Definitions
 
@@ -229,23 +230,34 @@ module _
   where
 
   permutation-list-transpositions :
-    ( list (2-Element-Decidable-Subtype l2 X)) → Aut X
+    list (2-Element-Decidable-Subtype l2 X) → Aut X
   permutation-list-transpositions =
     fold-list id-equiv (λ P e → (transposition P) ∘e e)
 
-  -- !! Why not a homotopy?
+  map-permutation-list-transpositions :
+    list (2-Element-Decidable-Subtype l2 X) → X → X
+  map-permutation-list-transpositions l =
+    map-equiv (permutation-list-transpositions l)
+
+  htpy-concat-permutation-list-transpositions :
+    (l l' : list (2-Element-Decidable-Subtype l2 X)) →
+    htpy-equiv
+    ( ( permutation-list-transpositions l) ∘e
+      ( permutation-list-transpositions l'))
+    ( permutation-list-transpositions (concat-list l l'))
+  htpy-concat-permutation-list-transpositions nil l' =
+    refl-htpy
+  htpy-concat-permutation-list-transpositions (cons P l) l' =
+    ( map-equiv (transposition P)) ·l
+    ( htpy-concat-permutation-list-transpositions l l')
+
   eq-concat-permutation-list-transpositions :
     (l l' : list (2-Element-Decidable-Subtype l2 X)) →
     ( permutation-list-transpositions l) ∘e
     ( permutation-list-transpositions l') ＝
     ( permutation-list-transpositions (concat-list l l'))
-  eq-concat-permutation-list-transpositions nil l' = eq-htpy-equiv refl-htpy
-  eq-concat-permutation-list-transpositions (cons P l) l' =
-    eq-htpy-equiv
-      ( λ x →
-        ap
-          ( map-equiv (transposition P))
-          ( htpy-eq-equiv (eq-concat-permutation-list-transpositions l l') x))
+  eq-concat-permutation-list-transpositions l l' =
+    eq-htpy-equiv (htpy-concat-permutation-list-transpositions l l')
 ```
 
 ## Properties
