@@ -22,7 +22,7 @@ open import graph-theory.reflexive-graphs
 ## Idea
 
 An
-{{#concept "equivalence" Disambiguation="of reflexive graphs" Agda=equiv-Reflexive-Graph}}
+{{#concept "equivalence" Disambiguation="of reflexive graphs" WD="graph isomorphism" WDID=Q303100 Agda=equiv-Reflexive-Graph}}
 of [reflexive graphs](graph-theory.reflexive-graphs.md) from `(V, E, r)` to
 `(V', E', r')` consists of an
 [equivalence](graph-theory.equivalences-directed-graphs.md) `(e₀, e₁)` of

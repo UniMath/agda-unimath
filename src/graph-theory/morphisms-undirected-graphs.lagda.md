@@ -33,7 +33,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 A
-{{#concept "morphism" Disambiguation="of undirected graphs" Agda=hom-Undirected-Graph}}
+{{#concept "morphism" Disambiguation="of undirected graphs" WD="graph homomorphism" WDID=Q3385162 Agda=hom-Undirected-Graph}}
 of [undirected graphs](graph-theory.undirected-graphs.md) from `G` to `H`
 consists of a map `f` from the vertices of `G` to the vertices of `H`, and a
 family of maps from the edges `E_G x y` in `G` to the edges `E_H (f x) (f y)` in

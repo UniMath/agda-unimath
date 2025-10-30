@@ -39,7 +39,7 @@ open import graph-theory.morphisms-directed-graphs
 ## Idea
 
 An
-{{#concept "equivalence" Disambiguation="of directed graps" Agda=equiv-Directed-Graph}}
+{{#concept "equivalence" Disambiguation="of directed graps" WD="graph isomorphism" WDID=Q303100 Agda=equiv-Directed-Graph}}
 of [directed graphs](graph-theory.directed-graphs.md) from a directed graph
 `(V,E)` to a directed graph `(V',E')` consists of an
 [equivalence](foundation-core.equivalences.md) `e : V ≃ V'` of vertices, and a

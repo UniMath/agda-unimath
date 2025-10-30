@@ -22,7 +22,7 @@ open import graph-theory.walks-undirected-graphs
 ## Idea
 
 A
-{{#concept "path" Disambiguation="in an undirected graph" Agda=path-Undirected-Graph Agda=is-path-Undirected-Graph}}
+{{#concept "path" Disambiguation="in an undirected graph" WD="path" WDID=Q1415372 Agda=path-Undirected-Graph Agda=is-path-Undirected-Graph}}
 in an [undirected graph](graph-theory.undirected-graphs.md) `G` is a
 [walk](graph-theory.walks-undirected-graphs.md) `w` in G such that the inclusion
 of the type of vertices on `w` into the vertices of `G` is an

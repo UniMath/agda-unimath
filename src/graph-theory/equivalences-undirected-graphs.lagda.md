@@ -35,7 +35,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 An
-{{#concept "equivalence" Disambiguation="of undirected graphs" Agda=equiv-Undirected-Graph}}
+{{#concept "equivalence" Disambiguation="of undirected graphs" WD="graph isomorphism" WDID=Q303100 Agda=equiv-Undirected-Graph}}
 of [undirected graphs](graph-theory.undirected-graphs.md) is a
 [morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
 that induces an [equivalence](foundation-core.equivalences.md) on vertices and

@@ -21,7 +21,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 An
-{{#concept "embedding" Disambiguation="of undirected graphs" Agda=is-emb-hom-Undirected-Graph Agda=emb-Undirected-Graph}}
+{{#concept "embedding" Disambiguation="of undirected graphs" WD="graph embedding" WDID=Q5597085 Agda=is-emb-hom-Undirected-Graph Agda=emb-Undirected-Graph}}
 of [undirected graphs](graph-theory.undirected-graphs.md) is a
 [morphism](graph-theory.morphisms-undirected-graphs.md) `f : G → H` of
 undirected graphs which is an [embedding](foundation.embeddings.md) on vertices

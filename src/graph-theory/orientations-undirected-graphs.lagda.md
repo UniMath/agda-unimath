@@ -20,7 +20,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 An
-{{#concept "orientation" Disambiguation="of an undirected graph" Agda=orientation-Undirected-Graph}}
+{{#concept "orientation" Disambiguation="of an undirected graph" WD="orientation" WDID=Q7102401 Agda=orientation-Undirected-Graph}}
 of an [undirected graph](graph-theory.undirected-graphs.md) is a function that
 picks a direction for every edge.
 
