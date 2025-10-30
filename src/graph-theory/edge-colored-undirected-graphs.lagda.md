@@ -21,7 +21,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 An
-{{#concept "edge-colored undirected graph" Agda=Edge-Colored-Undirected-Graph}}
+{{#concept "edge-colored undirected graph" WD="edge-labeled graph" WDID=Q1541875 Agda=Edge-Colored-Undirected-Graph}}
 is an [undirected graph](graph-theory.undirected-graphs.md) equipped with a
 family of maps `E p → X` from the edges at
 [unordered pairs](foundation.unordered-pairs.md) `p` into a type `C` of colors,

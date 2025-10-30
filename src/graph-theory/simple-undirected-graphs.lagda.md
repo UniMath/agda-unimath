@@ -24,7 +24,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 An [undirected graph](graph-theory.undirected-graphs.md) is said to be
-{{#concept "simple" Disambiguation="undirected graph" Agda=Simple-Undirected-Graph}}
+{{#concept "simple" Disambiguation="undirected graph" WD="simple graph" WDID=Q15838309 Agda=Simple-Undirected-Graph}}
 if it only contains edges between
 [distinct points](foundation.pairs-of-distinct-elements.md), and there is at
 most one edge between any two vertices.

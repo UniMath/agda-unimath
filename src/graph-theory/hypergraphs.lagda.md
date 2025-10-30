@@ -18,8 +18,8 @@ open import foundation.unordered-tuples
 
 ## Idea
 
-A {{#concept "`k`-hypergraph" Agda=Hypergraph}} consists of a type `V` of
-vertices and a family `E` of types indexed by the
+A {{#concept "`k`-hypergraph" WD="hypergraph" WDID=Q840247 Agda=Hypergraph}}
+consists of a type `V` of vertices and a family `E` of types indexed by the
 [unordered `k`-tuples](foundation.unordered-tuples.md) of vertices.
 
 ## Definition

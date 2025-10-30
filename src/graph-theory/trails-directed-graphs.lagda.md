@@ -20,7 +20,7 @@ open import graph-theory.walks-directed-graphs
 ## Idea
 
 A
-{{#concept "trail" Disambiguation="in a directed graph" Agda=trail-Directed-Graph}}
+{{#concept "trail" Disambiguation="in a directed graph" WD="trail" WDID=Q17455228 Agda=trail-Directed-Graph}}
 in a [directed graph](graph-theory.directed-graphs.md) is a
 [walk](graph-theory.walks-directed-graphs.md) that goes through each edge
 [at most once](foundation.subterminal-types.md).

@@ -21,8 +21,9 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-An {{#concept "undirected graph" Agda=Undirected-Graph}} consists of a type `V`
-of vertices and a family `E` of types over the
+An
+{{#concept "undirected graph" WD="undirected graph" WDID=Q3115587 Agda=Undirected-Graph}}
+consists of a type `V` of vertices and a family `E` of types over the
 [unordered pairs](foundation.unordered-pairs.md) of `V`.
 
 ## Definition

@@ -24,7 +24,7 @@ open import graph-theory.walks-undirected-graphs
 ## Idea
 
 A
-{{#concept "trail" Disambiguation="in an undirected graph" Agda=trail-Undirected-Graph}}
+{{#concept "trail" Disambiguation="in an undirected graph" WD="trail" WDID=Q17455228 Agda=trail-Undirected-Graph}}
 in an [undirected graph](graph-theory.undirected-graphs.md) is a
 [walk](graph-theory.walks-undirected-graphs.md) that passes through each edge at
 most once.

@@ -21,7 +21,7 @@ open import graph-theory.equivalences-undirected-graphs
 ## Idea
 
 A
-{{#concept "stereoisomerism" Disambiguation="between enriched undirected graphs" Agda=stereoisomerism-Enriched-Undirected-Graph}}
+{{#concept "stereoisomerism" Disambiguation="between enriched undirected graphs" WD="stereoisomerism" WDID=Q47455153  Agda=stereoisomerism-Enriched-Undirected-Graph}}
 between two
 `(A,B)`-[enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
 is an [equivalence](graph-theory.equivalences-undirected-graphs.md) between
