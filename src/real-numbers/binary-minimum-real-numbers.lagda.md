@@ -139,8 +139,8 @@ module _
 
 ```agda
 module _
-  {lx ly lz : Level}
-  (x : ℝ lx) (y : ℝ ly) (z : ℝ lz)
+  {l1 l2 l3 : Level}
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
   abstract
