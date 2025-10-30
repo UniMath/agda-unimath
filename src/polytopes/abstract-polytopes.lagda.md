@@ -34,16 +34,20 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define abstract polytopes as finitely graded posets satisfying certain
-axioms. In the classical definition, the grading is a consequence of the axioms.
-Here, we take finitely graded posets as our starting point
+We define
+{{#concept "abstract polytopes" WD="abstract polytope" WDID=Q4669958 Agda=Polytope}}
+as [finitely graded posets](order-theory.finitely-graded-posets.md) satisfying
+certain axioms. In the classical definition, the grading is a consequence of the
+axioms. Here, we take finitely graded posets as our starting point
 
 The first axiom of polytopes asserts that polytopes have a least and a largest
 element. This is already defined as
 
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
-Next, we assert the diamond condition for abstract polytopes.
+Next, we assert the
+{{#concept "diamond condition" Disambiguation="for abstract polytopes" Agda=diamond-condition-Finitely-Graded-Poset}}
+for abstract polytopes.
 
 ## Definition
 
