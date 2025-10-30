@@ -21,8 +21,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A {{#concept "local ring" Agda=Local-Ring}} is a [ring](ring-theory.rings.md)
-such that whenever a sum of elements is
+A {{#concept "local ring" WD="local ring" WDID=Q1142704 Agda=Local-Ring}} is a
+[ring](ring-theory.rings.md) such that whenever a sum of elements is
 [invertible](ring-theory.invertible-elements-rings.md), then one of its summands
 is invertible. This implies that the noninvertible elements form an
 [ideal](ring-theory.ideals-rings.md). However, the

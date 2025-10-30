@@ -21,8 +21,9 @@ open import ring-theory.rings
 
 ## Idea
 
-A {{#concept "nil ideal" Disambiguation="in a ring" Agda=is-nil-ideal-Ring}} in
-a [ring](ring-theory.rings.md) is an [ideal](ring-theory.ideals-rings.md) in
+A
+{{#concept "nil ideal" Disambiguation="in a ring" WD="nil ideal" WDID=Q453275 Agda=is-nil-ideal-Ring}}
+in a [ring](ring-theory.rings.md) is an [ideal](ring-theory.ideals-rings.md) in
 which every element is [nilpotent](ring-theory.nilpotent-elements-rings.md).
 
 ## Definition

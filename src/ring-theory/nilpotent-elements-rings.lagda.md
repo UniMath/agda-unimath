@@ -26,7 +26,7 @@ open import ring-theory.subsets-rings
 ## Idea
 
 A
-{{#concept "nilpotent element" Disambiguation="in a ring" Agda=is-nilpotent-element-Ring}}
+{{#concept "nilpotent element" Disambiguation="in a ring" WD="nilpotent element" WDID=Q840023 Agda=is-nilpotent-element-Ring}}
 in a [ring](ring-theory.rings.md) is an element `x` for which there is a
 [natural number](elementary-number-theory.natural-numbers.md) `n` such that
 `xⁿ = 0`.

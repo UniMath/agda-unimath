@@ -22,8 +22,8 @@ open import ring-theory.rings
 
 ## Idea
 
-{{#concept "Trivial rings" Agda=is-trivial-Ring}} are
-[rings](ring-theory.rings.md) in which `0 = 1`.
+{{#concept "Trivial rings" WD="trivial ring" WDID=Q1652969 Agda=is-trivial-Ring}}
+are [rings](ring-theory.rings.md) in which `0 = 1`.
 
 ## Definition
 

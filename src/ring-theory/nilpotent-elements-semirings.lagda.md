@@ -29,7 +29,7 @@ open import ring-theory.semirings
 ## Idea
 
 A
-{{#concept "nilpotent element" Disambiguation="in a semiring" Agda=is-nilpotent-element-Semiring}}
+{{#concept "nilpotent element" Disambiguation="in a semiring" WD="nilpotent element" WDID=Q840023 Agda=is-nilpotent-element-Semiring}}
 in a [semiring](ring-theory.semirings.md) is an element `x` for which there is a
 [natural number](elementary-number-theory.natural-numbers.md) `n` such that
 `xⁿ = 0`.

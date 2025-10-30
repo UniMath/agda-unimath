@@ -14,9 +14,10 @@ module ring-theory.maximal-ideals-rings where
 
 ## Idea
 
-A {{#concept "maximal ideal" Disambiguation="in a ring"}} in a
-[ring](ring-theory.rings.md) `R` is a proper ideal `I` of `R` such that for any
-[ideal](ring-theory.ideals-rings.md) `J` containing `I` is either `I` or the
+A
+{{#concept "maximal ideal" Disambiguation="in a ring" WD="maximal ideal" WDID=Q1203540}}
+in a [ring](ring-theory.rings.md) `R` is a proper ideal `I` of `R` such that for
+any [ideal](ring-theory.ideals-rings.md) `J` containing `I` is either `I` or the
 entire ring `R`.
 
 ## Definition

@@ -18,8 +18,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The {{#concept "opposite" Disambiguation="of a ring" Agda=op-Ring}} of a
-[ring](ring-theory.rings.md) `R` is a ring with the same underlying
+The
+{{#concept "opposite" Disambiguation="of a ring" WD="opposite ring" WDID=Q1940482 Agda=op-Ring}}
+of a [ring](ring-theory.rings.md) `R` is a ring with the same underlying
 [abelian group](group-theory.abelian-groups.md), but with multiplication given
 by `x·y := yx`.
 

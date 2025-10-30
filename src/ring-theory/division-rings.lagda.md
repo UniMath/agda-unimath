@@ -20,8 +20,8 @@ open import ring-theory.rings
 
 ## Idea
 
-{{#concept "Division rings" Agda=is-division-Ring}} are
-[nontrivial rings](ring-theory.nontrivial-rings.md) in which all nonzero
+{{#concept "Division rings" WD="division ring" WDID=Q650741 Agda=is-division-Ring}}
+are [nontrivial rings](ring-theory.nontrivial-rings.md) in which all nonzero
 elements are [invertible](ring-theory.invertible-elements-rings.md).
 
 ## Definition

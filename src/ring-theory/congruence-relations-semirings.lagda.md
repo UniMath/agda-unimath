@@ -29,7 +29,7 @@ open import ring-theory.semirings
 ## Idea
 
 A
-{{#concept "congruence relation" Disambiguation="on a semiring" Agda=congruence-Semiring}}
+{{#concept "congruence relation" Disambiguation="on a semiring" WD="congruence relation" WDID=Q8349849 Agda=congruence-Semiring}}
 on a [semiring](ring-theory.semirings.md) `R` is a
 [congruence relation](group-theory.congruence-relations-monoids.md) on the
 underlying additive [monoid](group-theory.monoids.md) of `R` which is also a

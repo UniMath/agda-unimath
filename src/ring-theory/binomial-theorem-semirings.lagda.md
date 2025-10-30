@@ -34,7 +34,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "binomial theorem" Disambiguation="for semirings" Agda=binomial-theorem-Semiring}}
+{{#concept "binomial theorem" Disambiguation="for semirings" WD="binomial theorem" WDID=Q26708 Agda=binomial-theorem-Semiring}}
 for [semirings](ring-theory.semirings.md) asserts that for any two elements `x`
 and `y` of a semiring `R` such that `xy = yx` and any
 [natural number](elementary-number-theory.natural-numbers.md) `n` we have

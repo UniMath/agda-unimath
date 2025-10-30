@@ -31,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "binomial theorem" Disambiguation="for rings" Agda=binomial-theorem-Ring}}
+{{#concept "binomial theorem" Disambiguation="for rings" WD="binomial theorem" WDID=Q26708 Agda=binomial-theorem-Ring}}
 for [rings](ring-theory.rings.md) asserts that for any two elements `x` and `y`
 of a ring `R` such that `xy = yx` and any
 [natural number](elementary-number-theory.natural-numbers.md) `n` we have

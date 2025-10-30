@@ -20,7 +20,7 @@ open import ring-theory.rings
 ## Idea
 
 An
-{{#concept "idempotent element" Disambiguation="in a ring" Agda=is-idempotent-element-Ring Agda=idempotent-element-Ring}}
+{{#concept "idempotent element" Disambiguation="in a ring" WD="idempotent element" WDID=Q2243424 Agda=is-idempotent-element-Ring Agda=idempotent-element-Ring}}
 in a [ring](ring-theory.rings.md) is an element `x` such that `x² = x`.
 
 ## Definition
