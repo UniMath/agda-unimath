@@ -25,8 +25,11 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A nilpotent element in a ring is an element `x` for which there is a natural
-number `n` such that `x^n = 0`.
+A
+{{#concept "nilpotent element" Disambiguation="in a ring" Agda=is-nilpotent-element-Ring}}
+in a [ring](ring-theory.rings.md) is an element `x` for which there is a
+[natural number](elementary-number-theory.natural-numbers.md) `n` such that
+`xⁿ = 0`.
 
 ## Definition
 

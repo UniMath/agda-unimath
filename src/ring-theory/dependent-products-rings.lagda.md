@@ -33,8 +33,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a family of rings `R i` indexed by `i : I`, their dependent product
-`Π(i:I), R i` is again a ring.
+Given a family of [rings](ring-theory.rings.md) `R i` indexed by `i : I`, their
+{{#concept "dependent product" Disambiguation="ring" Agda=Π-Ring}} `Π(i:I), R i`
+is again a ring.
 
 ## Definition
 

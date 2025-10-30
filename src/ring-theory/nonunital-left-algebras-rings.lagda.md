@@ -1,7 +1,7 @@
 # Algebras over rings
 
 ```agda
-module ring-theory.algebras-rings where
+module ring-theory.nonunital-left-algebras-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -21,8 +21,10 @@ open import ring-theory.rings
 
 ## Idea
 
-An **algebra** over a [ring](ring-theory.rings.md) `R` consists of an
-[`R`-module](linear-algebra.left-modules-rings.md) `M` equipped with a binary
+A
+{{#concept "nununital left algebra" Disambiguation="over a ring" Agda=Nonunital-Left-Algebra-Ring}}
+over a [ring](ring-theory.rings.md) `R` consists of an
+`R`-[module](linear-algebra.left-modules-rings.md) `M` equipped with a binary
 operation `x y ↦ xy : M → M → M` such that
 
 ```text
@@ -200,8 +202,3 @@ module _
     right-negative-law-mul-left-module-Ring R
       left-module-Nonunital-Left-Algebra-Ring
 ```
-
-### Unital algebras over a ring
-
-This remains to be defined.
-[#740](https://github.com/UniMath/agda-unimath/issues/740)

@@ -38,7 +38,8 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-An **ideal** in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
+An {{#concept "ideal" Disambiguation="in a ring" Agda=ideal-Ring}} in a
+[ring](ring-theory.rings.md) `R` is a submodule of `R`.
 
 ## Definitions
 

@@ -30,9 +30,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial theorem for rings asserts that for any two elements `x` and `y` of
-a commutative ring `R` and any natural number `n`, if `xy ＝ yx` holds then we
-have
+The
+{{#concept "binomial theorem" Disambiguation="for rings" Agda=binomial-theorem-Ring}}
+for [rings](ring-theory.rings.md) asserts that for any two elements `x` and `y`
+of a ring `R` such that `xy = yx` and any
+[natural number](elementary-number-theory.natural-numbers.md) `n` we have
 
 ```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.

@@ -21,7 +21,9 @@ open import ring-theory.rings
 
 ## Idea
 
-A nil ideal in a ring is an ideal in which every element is nilpotent
+A {{#concept "nil ideal" Disambiguation="in a ring" Agda=is-nil-ideal-Ring}} in
+a [ring](ring-theory.rings.md) is an [ideal](ring-theory.ideals-rings.md) in
+which every element is [nilpotent](ring-theory.nilpotent-elements-rings.md).
 
 ## Definition
 

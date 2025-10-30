@@ -40,7 +40,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A [ring](ring-theory.rings.md) is said to be **cyclic** if its underlying
+A [ring](ring-theory.rings.md) is said to be
+{{#concept "cyclic" Disambiguation="ring" Agda=Cyclic-Ring}} if its underlying
 additive [group](group-theory.groups.md) is a
 [cyclic group](group-theory.cyclic-groups.md). We will show that the following
 three claims about a ring `R` are equivalent:
@@ -55,8 +56,9 @@ three claims about a ring `R` are equivalent:
 
 Cyclic rings therefore have a specified generating element, i.e., the element
 `1`. With this fact in the pocket, it is easy to show that cyclic rings are
-commutative rings. Furthermore, the multiplicative structure of `R` coincides
-with the multiplicative structure constructed in
+[commutative rings](ring-theory.commutative-rings.md). Furthermore, the
+multiplicative structure of `R` coincides with the multiplicative structure
+constructed in
 [`group-theory.generating-elements-groups`](group-theory.generating-elements-groups.md)
 using the generating element `1`. In particular, it follows that for any cyclic
 group `G`, the type of ring structures on `G` is equivalent with the type of

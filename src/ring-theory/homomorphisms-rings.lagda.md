@@ -33,7 +33,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Ring homomorphisms are maps between rings that preserve the ring structure
+{{#concept "Ring homomorphisms" Agda=hom-Ring}} are maps between
+[rings](ring-theory.rings.md) that preserve the ring structure.
 
 ## Definitions
 

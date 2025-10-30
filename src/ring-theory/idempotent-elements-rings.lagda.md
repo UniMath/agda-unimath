@@ -19,7 +19,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An idempotent element in a ring is an element `x` such that `x² = x`.
+An
+{{#concept "idempotent element" Disambiguation="in a ring" Agda=is-idempotent-element-Ring Agda=idempotent-element-Ring}}
+in a [ring](ring-theory.rings.md) is an element `x` such that `x² = x`.
 
 ## Definition
 

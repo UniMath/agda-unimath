@@ -24,8 +24,11 @@ open import ring-theory.rings
 
 ## Idea
 
-Given two ringrs R1 and R2, we define a ring structure on the product of R1 and
-R2.
+Given two [rings](ring-theory.rings.md) `R1` and `R2`, the
+{{#concept "product" Disambiguation="of a pair of rings" Agda=product-Ring}}
+ring `R1 × R2` is a ring structure on the
+[cartesian product](foundation.cartesian-product-types.md) of `R1` and `R2`
+given by componentwise operations.
 
 ## Definition
 

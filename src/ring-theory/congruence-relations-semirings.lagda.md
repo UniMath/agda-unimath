@@ -28,9 +28,12 @@ open import ring-theory.semirings
 
 ## Idea
 
-A congruence relation on a semiring `R` is a congruence relation on the
-underlying additive monoid of `R` which is also a congruence relation on the
-multiplicative monoid of `R`.
+A
+{{#concept "congruence relation" Disambiguation="on a semiring" Agda=congruence-Semiring}}
+on a [semiring](ring-theory.semirings.md) `R` is a
+[congruence relation](group-theory.congruence-relations-monoids.md) on the
+underlying additive [monoid](group-theory.monoids.md) of `R` which is also a
+congruence relation on the multiplicative monoid of `R`.
 
 ## Definition
 
