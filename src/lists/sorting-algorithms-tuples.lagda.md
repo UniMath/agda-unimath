@@ -27,10 +27,10 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-An endofunction `f` on the type of [tuples](tuples.tuples.md) is a
+An endofunction `f` on the type of [tuples](lists.tuples.md) is a
 {{#concept "sorting algorithm" Disambiguation="on tuples" WD="sorting algorithm" WDID=Q181593 Agda=is-sort-tuple}}
-if `f` is a [permutation](tuples.permutation-tuples.md) and if for every tuple
-`l`, `f l` is [sorted](tuples.sorted-tuples.md).
+if `f` is a [permutation](lists.permutation-tuples.md) and if for every tuple
+`l`, `f l` is [sorted](lists.sorted-tuples.md).
 
 ## Definition
 
