@@ -25,8 +25,9 @@ open import univalent-combinatorics.finite-types
 An important distinguishing property of organic compounds is the presence of
 double or triple carbon-carbon bonds, i.e., the presence or absence of
 _unsaturated carbons_. In this module we define what it means for a carbon atom
-to be saturated, and what it means for carbon atoms to have double and triple
-bonds.
+to be
+{{#concept "saturated" Disambiguation="carbon atom" Agda=is-saturated-carbon-hydrocarbon}},
+and what it means for carbon atoms to have double and triple bonds.
 
 ## Definition
 
