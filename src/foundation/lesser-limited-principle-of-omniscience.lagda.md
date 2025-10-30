@@ -37,7 +37,7 @@ open import foundation-core.propositions
 
 </details>
 
-## Statement
+## Idea
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
 asserts that if two [decidable subtypes](foundation.decidable-subtypes.md) of
@@ -45,6 +45,10 @@ the [natural numbers](elementary-number-theory.natural-numbers.md) are not
 [both](foundation.conjunction.md) [inhabited](foundation.inhabited-subtypes.md),
 then merely one [or](foundation.disjunction.md) the other are
 [empty](foundation.empty-types.md).
+
+## Definitions
+
+### The small lesser limited principle of omniscience
 
 ```agda
 level-prop-LLPO : (l : Level) → Prop (lsuc l)
