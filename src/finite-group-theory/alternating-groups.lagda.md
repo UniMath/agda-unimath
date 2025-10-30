@@ -24,7 +24,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "alternating group" Disambiguation="on a finite set" Agda=alternating-Group}}
+{{#concept "alternating group" Disambiguation="on a finite set" WD="alternating group" WDID=Q438814 Agda=alternating-Group}}
 on a [finite set](univalent-combinatorics.finite-types.md) `X` is the
 [group](group-theory.groups.md) of even permutations of `X`, i.e., it is the
 [kernel](group-theory.kernels-homomorphisms-groups.md) of the

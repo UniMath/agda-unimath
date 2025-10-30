@@ -47,7 +47,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sign" Disambiguation="of a permutation" Agda=map-sign-homomorphism}}
+{{#concept "sign" Disambiguation="of a permutation" WD="parity of a permutation" WDID=Q1064405 Agda=map-sign-homomorphism}}
 of a [permutation](finite-group-theory.permutations.md) is defined as the parity
 of the length of the decomposition of the permutation into
 [transpositions](finite-group-theory.transpositions.md). We show that each such

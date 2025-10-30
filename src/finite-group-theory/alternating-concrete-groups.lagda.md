@@ -22,7 +22,8 @@ open import group-theory.kernels-homomorphisms-concrete-groups
 
 ## Idea
 
-The {{#concept "alternating concrete groups" Agda=alternating-Concrete-Group}}
+The
+{{#concept "alternating concrete groups" WD="alternating group" WDID=Q438814 Agda=alternating-Concrete-Group}}
 are the [kernels](group-theory.kernels-homomorphisms-concrete-groups.md) of the
 [concrete sign homomorphism](finite-group-theory.cartier-delooping-sign-homomorphism.md).
 
