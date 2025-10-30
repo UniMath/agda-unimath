@@ -38,11 +38,10 @@ We define
 {{#concept "abstract polytopes" WD="abstract polytope" WDID=Q4669958 Agda=Polytope}}
 as [finitely graded posets](order-theory.finitely-graded-posets.md) satisfying
 certain axioms. In the classical definition, the grading is a consequence of the
-axioms. Here, we take finitely graded posets as our starting point
+axioms. Here, we take finitely graded posets as our starting point.
 
 The first axiom of polytopes asserts that polytopes have a least and a largest
 element. This is already defined as
-
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
 Next, we assert the
