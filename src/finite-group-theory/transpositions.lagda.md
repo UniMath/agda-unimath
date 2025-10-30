@@ -62,8 +62,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-**Transpositions** are [permutations](finite-group-theory.permutations.md) that
-swap two elements.
+{{#concept "Transpositions" Agda=transposition}} are permutations that swap two
+elements.
 
 ## Definitions
 
@@ -1318,5 +1318,5 @@ module _
           standard-transposition H npyz))
       ( standard-transposition H npxz)
   htpy-conjugate-transposition w =
-    cases-htpy-conjugate-transposition w ( H w x) ( H w y) ( H w z)
+    cases-htpy-conjugate-transposition w (H w x) (H w y) (H w z)
 ```

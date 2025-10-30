@@ -69,7 +69,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Ideas
 
-We give a definition of the delooping of the sign homomorphism based on a
+We give a definition of the delooping of the
+[sign homomorphism](finite-group-theory.sign-homomorphism.md) based on a
 suggestion by Alex Simpson.
 
 ## Definitions

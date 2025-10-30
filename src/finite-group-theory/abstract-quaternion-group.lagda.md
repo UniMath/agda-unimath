@@ -34,8 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The abstract quaternion group of order 8 is the group of the quaternions `1`,
-`-1`, `i`, `-i`, `j`, `-j`, `k`, and `-k`.
+The {{#concept "abstract quaternion group of order 8" Agda=Q8-Group}} is the
+group of the quaternions `1`, `-1`, `i`, `-i`, `j`, `-j`, `k`, and `-k`.
 
 ## Definition
 
