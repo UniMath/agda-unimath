@@ -17,27 +17,28 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-**Coalgebras** for polynomial endofunctors are types `X` equipped with a
-function
+{{#concept "Coalgebras" Disambiguation="of a polynomial endofunctor" Agda=coalgebra-polynomial-endofunctor}}
+for a [polynomial endofunctor](trees.polynomial-endofunctors.md) `P A B` are
+types `X` [equipped](foundation.structure.md) with a function
 
 ```text
-  X → Σ (a : A), B a → X
+  X → Σ (a : A), (B a → X).
 ```
 
 ## Definitions
 
 ```agda
 module _
-  {l1 l2 : Level} (l : Level) (A : UU l1) (B : A → UU l2)
+  {l1 l2 : Level} (l : Level) (P : polynomial-endofunctor l1 l2)
   where
 
   coalgebra-polynomial-endofunctor : UU (l1 ⊔ l2 ⊔ lsuc l)
   coalgebra-polynomial-endofunctor =
-    Σ (UU l) (λ X → X → type-polynomial-endofunctor' A B X)
+    Σ (UU l) (λ X → X → type-polynomial-endofunctor P X)
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   type-coalgebra-polynomial-endofunctor : UU l3
@@ -45,17 +46,18 @@ module _
 
   structure-coalgebra-polynomial-endofunctor :
     type-coalgebra-polynomial-endofunctor →
-    type-polynomial-endofunctor' A B type-coalgebra-polynomial-endofunctor
+    type-polynomial-endofunctor P type-coalgebra-polynomial-endofunctor
   structure-coalgebra-polynomial-endofunctor = pr2 X
 
   shape-coalgebra-polynomial-endofunctor :
-    type-coalgebra-polynomial-endofunctor → A
+    type-coalgebra-polynomial-endofunctor → shape-polynomial-endofunctor P
   shape-coalgebra-polynomial-endofunctor x =
     pr1 (structure-coalgebra-polynomial-endofunctor x)
 
   component-coalgebra-polynomial-endofunctor :
     (x : type-coalgebra-polynomial-endofunctor) →
-    B (shape-coalgebra-polynomial-endofunctor x) →
+    position-polynomial-endofunctor P
+      ( shape-coalgebra-polynomial-endofunctor x) →
     type-coalgebra-polynomial-endofunctor
   component-coalgebra-polynomial-endofunctor x =
     pr2 (structure-coalgebra-polynomial-endofunctor x)

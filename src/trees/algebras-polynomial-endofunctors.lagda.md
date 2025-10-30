@@ -17,8 +17,9 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-Given a polynomial endofunctor `P A B`, an **algebra** for `P A B` conisists of
-a type `X` and a map `P A B X → X`.
+Given a [polynomial endofunctor](trees.polynomial-endofunctors.md) `P`, an
+{{#concept "algebra" Disambiguation="of a polynomial endofunctor on types" Agda=algebra-polynomial-endofunctor}}
+for `P` conisists of a type `X` and a map `P(X) → X`.
 
 ## Definitions
 
@@ -26,20 +27,23 @@ a type `X` and a map `P A B X → X`.
 
 ```agda
 algebra-polynomial-endofunctor :
-  (l : Level) {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
+  (l : Level) {l1 l2 : Level} →
+  polynomial-endofunctor l1 l2 →
   UU (lsuc l ⊔ l1 ⊔ l2)
-algebra-polynomial-endofunctor l A B =
-  Σ (UU l) (λ X → type-polynomial-endofunctor' A B X → X)
+algebra-polynomial-endofunctor l P =
+  Σ (UU l) (λ X → type-polynomial-endofunctor P X → X)
 
-type-algebra-polynomial-endofunctor :
-  {l l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  algebra-polynomial-endofunctor l A B → UU l
-type-algebra-polynomial-endofunctor X = pr1 X
+module _
+  {l l1 l2 : Level} {P : polynomial-endofunctor l1 l2}
+  where
 
-structure-algebra-polynomial-endofunctor :
-  {l l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l A B) →
-  type-polynomial-endofunctor' A B (type-algebra-polynomial-endofunctor X) →
-  type-algebra-polynomial-endofunctor X
-structure-algebra-polynomial-endofunctor X = pr2 X
+  type-algebra-polynomial-endofunctor :
+    algebra-polynomial-endofunctor l P → UU l
+  type-algebra-polynomial-endofunctor X = pr1 X
+
+  structure-algebra-polynomial-endofunctor :
+    (X : algebra-polynomial-endofunctor l P) →
+    type-polynomial-endofunctor P (type-algebra-polynomial-endofunctor X) →
+    type-algebra-polynomial-endofunctor X
+  structure-algebra-polynomial-endofunctor X = pr2 X
 ```

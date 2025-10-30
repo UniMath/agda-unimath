@@ -18,8 +18,9 @@ open import trees.multisets
 
 ## Idea
 
-Given two multisets `x` and `y`, we say that `x` is a **submultiset** of `y` if
-for every `z ∈-𝕍 x` we have `z ∈-𝕍 x ↪ z ∈-𝕍 y`.
+Given two [multisets](trees.multisets.md) `x` and `y`, we say that `x` is a
+{{#concept "submultiset" Agda=is-submultiset-𝕍}} of `y` if for every `z ∈-𝕍 x`
+we have `z ∈-𝕍 x ↪ z ∈-𝕍 y`.
 
 ## Definition
 

@@ -41,37 +41,49 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A **directed tree** is a directed graph `G` equipped with a root `r : G` such
-that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
+A {{#concept "directed tree" Agda=Directed-Tree}} is a
+[directed graph](graph-theory.directed-graphs.md) `G`
+[equipped](foundation.structure.md) with a root `r : G` such that for every
+vertex `x : G` the type of [walks](graph-theory.walks-directed-graphs.md) from
+`x` to `r` is [contractible](foundation-core.contractible-types.md).
 
 ## Definition
 
+### The predicate on directed graphs with a vertex of being a directed tree
+
 ```agda
-is-tree-Directed-Graph-Prop' :
-  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
-  Prop (l1 ⊔ l2)
-is-tree-Directed-Graph-Prop' G r =
-  Π-Prop
-    ( vertex-Directed-Graph G)
-    ( λ x → is-contr-Prop (walk-Directed-Graph G x r))
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G)
+  where
 
-is-tree-Directed-Graph' :
-  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
-  UU (l1 ⊔ l2)
-is-tree-Directed-Graph' G r = type-Prop (is-tree-Directed-Graph-Prop' G r)
+  is-tree-prop-Directed-Graph' : Prop (l1 ⊔ l2)
+  is-tree-prop-Directed-Graph' =
+    Π-Prop
+      ( vertex-Directed-Graph G)
+      ( λ x → is-contr-Prop (walk-Directed-Graph G x r))
 
-is-prop-is-tree-Directed-Graph' :
-  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
-  is-prop (is-tree-Directed-Graph' G r)
-is-prop-is-tree-Directed-Graph' G r =
-  is-prop-type-Prop (is-tree-Directed-Graph-Prop' G r)
+  is-tree-Directed-Graph' : UU (l1 ⊔ l2)
+  is-tree-Directed-Graph' = type-Prop is-tree-prop-Directed-Graph'
 
+  is-prop-is-tree-Directed-Graph' :
+    is-prop is-tree-Directed-Graph'
+  is-prop-is-tree-Directed-Graph' =
+    is-prop-type-Prop is-tree-prop-Directed-Graph'
+```
+
+### The structure on a directed graph of being a directed tree
+
+```agda
 is-tree-Directed-Graph :
   {l1 l2 : Level} → Directed-Graph l1 l2 → UU (l1 ⊔ l2)
 is-tree-Directed-Graph G =
   Σ ( vertex-Directed-Graph G)
     ( λ r → is-tree-Directed-Graph' G r)
+```
 
+### The type of directed trees
+
+```agda
 Directed-Tree : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Directed-Tree l1 l2 =
   Σ ( Directed-Graph l1 l2) is-tree-Directed-Graph
@@ -232,7 +244,7 @@ module _
     is-prop-all-elements-equal
       ( λ H K →
         eq-type-subtype
-          ( is-tree-Directed-Graph-Prop' G)
+          ( is-tree-prop-Directed-Graph' G)
           ( uniqueness-root-is-tree-Directed-Graph H K))
 
   is-tree-directed-graph-Prop : Prop (l1 ⊔ l2)
