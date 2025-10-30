@@ -41,8 +41,9 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A {{#concept "directed tree" Agda=Directed-Tree}} is a
-[directed graph](graph-theory.directed-graphs.md) `G`
+A
+{{#concept "directed tree" WD="rooted tree" WDID=Q63721528 Agda=Directed-Tree}}
+is a [directed graph](graph-theory.directed-graphs.md) `G`
 [equipped](foundation.structure.md) with a root `r : G` such that for every
 vertex `x : G` the type of [walks](graph-theory.walks-directed-graphs.md) from
 `x` to `r` is [contractible](foundation-core.contractible-types.md).

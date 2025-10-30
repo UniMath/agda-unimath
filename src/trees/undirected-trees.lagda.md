@@ -33,8 +33,8 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-An {{#concept "undirected tree" Agda=Undirected-Tree}} is an
-[undirected graph](graph-theory.undirected-graphs.md) such that the type of
+An {{#concept "undirected tree" WD="tree" WDID=Q223655 Agda=Undirected-Tree}} is
+an [undirected graph](graph-theory.undirected-graphs.md) such that the type of
 [trails](graph-theory.trails-undirected-graphs.md) from x to y is
 [contractible](foundation-core.contractible-types.md) for any two vertices x and
 y.
