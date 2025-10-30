@@ -19,9 +19,11 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A **trail** in a [directed graph](graph-theory.directed-graphs.md) is a
-[walk](graph-theory.walks-directed-graphs.md) that goes through each edge at
-most once.
+A
+{{#concept "trail" Disambiguation="in a directed graph" Agda=trail-Directed-Graph}}
+in a [directed graph](graph-theory.directed-graphs.md) is a
+[walk](graph-theory.walks-directed-graphs.md) that goes through each edge
+[at most once](foundation.subterminal-types.md).
 
 ```agda
 module _

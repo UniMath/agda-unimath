@@ -18,10 +18,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **directed graph** consists of a type of vertices equipped with a binary, type
-valued relation of edges. Alternatively, one can define a directed graph to
-consist of a type `V` of **vertices**, a type `E` of **edges**, and a map
-`E → V × V` determining the **source** and **target** of each edge.
+A
+{{#concept "directed graph" WD="directed graph" WDID=Q1137726 Agda=Directed-Graph}}
+consists of a type of vertices equipped with a binary, type valued relation of
+edges. Alternatively, one can define a directed graph to consist of a type `V`
+of **vertices**, a type `E` of **edges**, and a map `E → V × V` determining the
+**source** and **target** of each edge.
 
 To see that these two definitions are
 [equivalent](foundation-core.equivalences.md), recall that

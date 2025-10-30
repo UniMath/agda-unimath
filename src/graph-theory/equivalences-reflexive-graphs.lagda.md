@@ -21,11 +21,13 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-An {{#concept "equivalence of reflexive graphs" Agda=equiv-Reflexive-Graph}}
-from a [reflexive graph](graph-theory.reflexive-graphs.md) `(V,E,r)` to a
-reflexive graph `(V',E',r')` consists of an
+An
+{{#concept "equivalence" Disambiguation="of reflexive graphs" Agda=equiv-Reflexive-Graph}}
+of [reflexive graphs](graph-theory.reflexive-graphs.md) from `(V, E, r)` to
+`(V', E', r')` consists of an
 [equivalence](graph-theory.equivalences-directed-graphs.md) `(e₀, e₁)` of
-directed graphs from `(V,E)` to `(V',E')` equipped with an identification
+[directed graphs](graph-theory.directed-graphs.md) from `(V, E)` to `(V', E')`
+equipped with an [identification](foundation-core.identity-types.md)
 
 ```text
   e₁ (r x) ＝ r' (e₀ x)

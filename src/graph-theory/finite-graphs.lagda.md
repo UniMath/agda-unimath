@@ -24,9 +24,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **finite undirected graph** consists of a
-[finite set](univalent-combinatorics.finite-types.md) of vertices and a family
-of finite types of edges indexed by
+A {{#concept "finite undirected graph" Agda=Finite-Undirected-Graph}} consists
+of a [finite set](univalent-combinatorics.finite-types.md) of vertices and a
+family of finite types of edges indexed by
 [unordered pairs](foundation.unordered-pairs.md) of vertices.
 
 **Note:** In our definition of finite graph, we allow for the possibility that

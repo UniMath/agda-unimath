@@ -34,11 +34,12 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **equivalence of undirected graphs** is a
-[morphism](graph-theory.morphisms-undirected-graphs.md) of
-[undirected graphs](graph-theory.undirected-graphs.md) that induces an
-[equivalence](foundation-core.equivalences.md) on vertices and equivalences on
-edges.
+An
+{{#concept "equivalence" Disambiguation="of undirected graphs" Agda=equiv-Undirected-Graph}}
+of [undirected graphs](graph-theory.undirected-graphs.md) is a
+[morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
+that induces an [equivalence](foundation-core.equivalences.md) on vertices and
+equivalences on edges.
 
 ## Definitions
 

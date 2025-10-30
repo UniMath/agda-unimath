@@ -31,8 +31,8 @@ open import graph-theory.reflexive-graphs
 Consider two
 [dependent reflexive graphs](graph-theory.dependent-reflexive-graphs.md) `H` and
 `K` over a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. An
-{{#concept "equivalence of dependent reflexive graphs" Agda=equiv-Dependent-Reflexive-Graph}}
-from `H` to `K` is an
+{{#concept "equivalence" Agda=equiv-Dependent-Reflexive-Graph}} from `H` to `K`
+is an
 [equivalence of dependent directed graphs](graph-theory.equivalences-dependent-directed-graphs.md)
 from `H` to `K` preserving reflexivity. More specifically, an equivalence `α`
 from `H` to `K` consists of

@@ -25,8 +25,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **vertex cover** on a [undirect graph](graph-theory.undirected-graphs.md) is a
-set of vertices that includes at least one extremity of each edge of the graph.
+A
+{{#concept "vertex cover" Disambiguation="on an undirected graph" Agda=vertex-cover}}
+on an [undirect graph](graph-theory.undirected-graphs.md) is a set of vertices
+that includes at least one extremity of each edge of the graph.
 
 ## Definitions
 

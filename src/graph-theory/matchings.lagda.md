@@ -25,8 +25,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **matching** in a [undirected graph](graph-theory.undirected-graphs.md) is a
-type of edges without common vertices.
+A {{#concept "matching" Disambiguation="in a undirected graph" Agda=matching}}
+in an [undirected graph](graph-theory.undirected-graphs.md) is a type of edges
+without common vertices.
 
 ## Definitions
 

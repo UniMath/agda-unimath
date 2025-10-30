@@ -38,11 +38,12 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An {{#concept "equivalence of directed graphs" Agda=equiv-Directed-Graph}} from
-a [directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
-`(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
-`e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
-of edges indexed by `x y : V`.
+An
+{{#concept "equivalence" Disambiguation="of directed graps" Agda=equiv-Directed-Graph}}
+of [directed graphs](graph-theory.directed-graphs.md) from a directed graph
+`(V,E)` to a directed graph `(V',E')` consists of an
+[equivalence](foundation-core.equivalences.md) `e : V ≃ V'` of vertices, and a
+family of equivalences `E x y ≃ E' (e x) (e y)` of edges indexed by `x y : V`.
 
 ## Definitions
 

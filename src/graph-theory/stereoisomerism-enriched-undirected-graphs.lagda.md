@@ -20,8 +20,10 @@ open import graph-theory.equivalences-undirected-graphs
 
 ## Idea
 
-A **stereoisomerism** between two
-[`(A,B)`-enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
+A
+{{#concept "stereoisomerism" Disambiguation="between enriched undirected graphs" Agda=stereoisomerism-Enriched-Undirected-Graph}}
+between two
+`(A,B)`-[enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
 is an [equivalence](graph-theory.equivalences-undirected-graphs.md) between
 their underlying [undirected graphs](graph-theory.undirected-graphs.md)
 preserving the shape of the vertices. This concept is derived from the concept

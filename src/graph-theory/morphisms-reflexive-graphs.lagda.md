@@ -32,9 +32,11 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-A {{#concept "morphism of reflexive graphs" Agda=hom-Reflexive-Graph}} from `G`
-to `H` consists of a map `f₀ : G₀ → H₀` from the vertices of `G` to the vertices
-of `H`, a family of maps `f₁` from the edges `G₁ x y` in `G` to the edges
+A
+{{#concept "morphism" Disambiguation="of reflexive graphs" Agda=hom-Reflexive-Graph}}
+of [reflexive graphs](graph-theory.reflexive-graphs.md) from `G` to `H` consists
+of a map `f₀ : G₀ → H₀` from the vertices of `G` to the vertices of `H`, a
+family of maps `f₁` from the edges `G₁ x y` in `G` to the edges
 `H₁ (f₀ x) (f₀ y)` in `H`, equipped with an
 [identification](foundation-core.identity-types.md)
 
