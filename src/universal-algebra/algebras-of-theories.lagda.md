@@ -33,8 +33,8 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 Given a [theory](universal-algebra.algebraic-theories.md), an
-{{#concept "algebra" Disambiguation="of an algebraic theory" Agda=Algebra}} is a
-[model](universal-algebra.models-of-signatures.md) on a
+{{#concept "algebra" Disambiguation="of an algebraic theory" WD="algebraic structure" WDID=Q205464 Agda=Algebra}}
+is a [model](universal-algebra.models-of-signatures.md) on a
 [set](foundation-core.sets.md) such that it satisfies all
 [equations](universal-algebra.abstract-equations-over-signatures.md) in the
 theory.

@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "signature" Agda=signature}} is a
+A {{#concept "signature" WD="signature" WDID=Q741810 Agda=signature}} is a
 [collection](foundation.dependent-pair-types.md) of function symbols with given
 arities.
 

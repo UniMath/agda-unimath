@@ -37,8 +37,9 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The {{#concept "quotient" Disambiguation="of an algebra"}} of an
-[algebra](universal-algebra.algebras-of-theories.md) by a
+The
+{{#concept "quotient" Disambiguation="of an algebra" WD="quotient algebra" WDID=Q2589508}}
+of an [algebra](universal-algebra.algebras-of-theories.md) by a
 [congruence](universal-algebra.congruences.md) is the
 [set quotient](foundation.set-quotients.md) by that congruence. This quotient
 again has the structure of an algebra inherited by the original one.

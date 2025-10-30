@@ -18,8 +18,9 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An {{#concept "algebraic theory" Agda=Theory}} is a
-[collection](foundation.dependent-pair-types.md) of
+An
+{{#concept "algebraic theory" WD="algebraic theory" WDID=Q4724020 Agda=Theory}}
+is a [collection](foundation.dependent-pair-types.md) of
 [abstract equations](universal-algebra.abstract-equations-over-signatures.md)
 over a [signature](universal-algebra.signatures.md) `σ` that we consider to
 'hold' in the theory. It is algebraic in the sense that we only require

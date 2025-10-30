@@ -41,9 +41,11 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An {{#concept "algebra homomorphism" Agda=hom-Algebra}} from one
-[algebra](universal-algebra.algebras-of-theories.md) to another is a function
-between their underlying types such that all the structure is preserved.
+An
+{{#concept "algebra homomorphism" WD="homomorphism" WDID=Q215111 Agda=hom-Algebra}}
+from one [algebra](universal-algebra.algebras-of-theories.md) to another is a
+function between their underlying types such that all the structure is
+preserved.
 
 ## Definitions
 

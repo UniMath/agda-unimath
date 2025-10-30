@@ -27,8 +27,9 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A {{#concept "congruence" Agda=congruence-Algebra}} in an
-[algebra](universal-algebra.algebras-of-theories.md) is an
+A
+{{#concept "congruence" WD="congruence relation" WDID=Q8349849 Agda=congruence-Algebra}}
+in an [algebra](universal-algebra.algebras-of-theories.md) is an
 [equivalence relation](foundation.equivalence-relations.md) that respects all
 operations of the algebra.
 
