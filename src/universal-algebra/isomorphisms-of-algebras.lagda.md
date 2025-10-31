@@ -95,7 +95,7 @@ module _
 
   equiv-Algebra : (A : Algebra l3 σ T) (B : Algebra l4 σ T) → UU (l1 ⊔ l3 ⊔ l4)
   equiv-Algebra A B =
-    equiv-Model-Signature σ (model-Algebra σ T A) (model-Algebra σ T B)
+    equiv-Model σ (model-Algebra σ T A) (model-Algebra σ T B)
 ```
 
 ### The inverse of an equivalence of algebras
@@ -159,7 +159,7 @@ module _
   equiv-eq-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) → A ＝ B → equiv-Algebra σ T A B
   equiv-eq-Algebra A .A refl =
-    refl-equiv-Model-Signature σ (model-Algebra σ T A)
+    id-equiv-Model σ (model-Algebra σ T A)
 
   is-equiv-equiv-eq-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) →
@@ -168,9 +168,9 @@ module _
     subtype-identity-principle
       ( is-prop-is-algebra σ T)
       ( p)
-      ( refl-equiv-Model-Signature σ A)
+      ( id-equiv-Model σ A)
       ( equiv-eq-Algebra (A , p))
-      ( is-equiv-Eq-eq-Model-Signature σ A)
+      ( is-equiv-equiv-eq-Model σ A)
 
   extensionality-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) →

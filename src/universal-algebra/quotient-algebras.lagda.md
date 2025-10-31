@@ -152,7 +152,7 @@ module _
         ( type-quotient-Algebra)
         ( v))
 
-  model-quotient-Algebra : Model-Signature (l3 ⊔ l4) σ
+  model-quotient-Algebra : Model (l3 ⊔ l4) σ
   model-quotient-Algebra =
     ( set-quotient-Algebra , is-model-set-quotient-Algebra)
 ```

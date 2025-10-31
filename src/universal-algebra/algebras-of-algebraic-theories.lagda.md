@@ -46,14 +46,14 @@ module _
   {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  is-algebra : {l3 : Level} → Model-Signature l3 σ → UU (l2 ⊔ l3)
+  is-algebra : {l3 : Level} → Model l3 σ → UU (l2 ⊔ l3)
   is-algebra M =
     (e : index-Algebraic-Theory σ T) →
-    (assign : assignment σ (type-Model-Signature σ M)) →
-    eval-term σ (is-model-set-Model-Signature σ M) assign
+    (assign : assignment σ (type-Model σ M)) →
+    eval-term σ (is-model-set-Model σ M) assign
       ( lhs-abstract-equation σ
         ( index-abstract-equation-Algebraic-Theory σ T e)) ＝
-    eval-term σ (is-model-set-Model-Signature σ M) assign
+    eval-term σ (is-model-set-Model σ M) assign
       ( rhs-abstract-equation σ
         ( index-abstract-equation-Algebraic-Theory σ T e))
 ```
@@ -67,21 +67,21 @@ Algebra :
   Algebraic-Theory l2 σ →
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 Algebra l3 σ T =
-  Σ (Model-Signature l3 σ) (is-algebra σ T)
+  Σ (Model l3 σ) (is-algebra σ T)
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
   (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
-  model-Algebra : Model-Signature l3 σ
+  model-Algebra : Model l3 σ
   model-Algebra = pr1 A
 
   set-Algebra : Set l3
-  set-Algebra = set-Model-Signature σ model-Algebra
+  set-Algebra = set-Model σ model-Algebra
 
   is-model-set-Algebra : is-model σ set-Algebra
-  is-model-set-Algebra = is-model-set-Model-Signature σ model-Algebra
+  is-model-set-Algebra = is-model-set-Model σ model-Algebra
 
   type-Algebra : UU l3
   type-Algebra = type-Set set-Algebra
@@ -100,7 +100,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory l2 σ) (X : Model-Signature l3 σ)
+  (T : Algebraic-Theory l2 σ) (X : Model l3 σ)
   where
 
   abstract
@@ -109,7 +109,7 @@ module _
       is-prop-Π
         ( λ e →
           ( is-prop-Π
-            ( λ _ → is-set-type-Model-Signature σ X _ _)))
+            ( λ _ → is-set-type-Model σ X _ _)))
 
   is-algebra-Prop : Prop (l2 ⊔ l3)
   is-algebra-Prop = (is-algebra σ T X , is-prop-is-algebra)
