@@ -25,7 +25,7 @@ open import lists.lists
 ## Idea
 
 The
-{{#concept "reverse "Disambiguation="of a list" WD="reversal" WDID=Q62102795 Agda=reverse-list}}
+{{#concept "reverse" Disambiguation="of a list" WD="reversal" WDID=Q62102795 Agda=reverse-list}}
 of a [list](lists.lists.md) of elements in `A` lists the elements of `A` in the
 reversed order.
 

@@ -38,8 +38,8 @@ open import univalent-combinatorics.standard-finite-types
 An
 {{#concept "array" WD="array data type" WDID=Q121079 WD="list" WDID=Q27948 Agda=array}}
 is a pair of a [natural number](elementary-number-theory.natural-numbers.md)
-`n`, and a [finite sequence](lists.finite-sequences.md) of elements of the type
-`A` of length `n`. We show that arrays and [lists](lists.lists.md) are
+`n`, and a length `n` [finite sequence](lists.finite-sequences.md) of elements
+of a type. We show that arrays and [lists](lists.lists.md) are
 [equivalent](foundation-core.equivalences.md).
 
 ## Definitions

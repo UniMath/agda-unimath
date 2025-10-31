@@ -32,14 +32,12 @@ open import lists.tuples
 
 ## Idea
 
-Given an [array](lists.arrays.md) `t` of length `n` and an
-[automorphism](foundation.automorphisms.md) `σ` of `Fin n`, the
-{{#concept "permutation" WD="permutation" WDID=Q161519 Disambiguation="of an array"}}
-of `t` according to `σ` is the array where the indexes are permuted by `σ`.
-Then, we can define what is a
+Given a [list](lists.lists.md) `l` of length `n` and an
+[automorphism](finite-group-theory.permutations-standard-finite-types.md) `σ` of
+`Fin n`, the
 {{#concept "permutation" Disambiguation="of a list" WD="permutation" WDID=Q161519 Agda=permute-list}}
-of a [list](lists.lists.md) of length `n` via the
-[equivalence](foundation-core.equivalences.md) between arrays and lists.
+of `l` according to `σ` is the list where the positions of elements are permuted
+according to `σ`.
 
 ## Definition
 

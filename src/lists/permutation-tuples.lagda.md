@@ -41,14 +41,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given a [finite sequence](lists.finite-sequences.md) `t` of length `n` and an
+Given a [tuple](lists.tuples.md) `t` of length `n` and an
 [automorphism](finite-group-theory.permutations-standard-finite-types.md) `σ` of
 `Fin n`, the
 {{#concept "permutation" Disambiguation="of a tuple" WD="permutation" WDID=Q161519 Agda=permute-tuple}}
-of `t` according to `σ` is the finite sequence where the indices are permuted by
-`σ`. Then, we can define what is a permutation of a [tuple](lists.tuples.md) of
-length `n` via the
-[equivalence between finite sequences and tuples](lists.equivalence-tuples-finite-sequences.md).
+of `t` according to `σ` is the tuple where the positions of elements are
+permuted according to `σ`.
 
 ## Definitions
 
@@ -59,7 +57,7 @@ module _
 
   permute-tuple : (n : ℕ) → tuple A n → Permutation n → tuple A n
   permute-tuple n v s =
-    tuple-fin-sequence n (fin-sequence-tuple n v ∘ (map-equiv s))
+    tuple-fin-sequence n (fin-sequence-tuple n v ∘ map-equiv s)
 ```
 
 ### The predicate that a function from `tuple` to `tuple` is just permuting tuples
