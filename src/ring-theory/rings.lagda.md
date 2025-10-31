@@ -45,7 +45,7 @@ open import ring-theory.semirings
 
 ## Idea
 
-The concept of _ring_ vastly generalizes the
+The concept of a _ring_ vastly generalizes the
 [arithmetical structure](elementary-number-theory.ring-of-integers.md) on the
 [integers](elementary-number-theory.integers.md). A
 {{#concept "ring" WD="ring" WDID=Q161172 Agda=Ring}} consists of a

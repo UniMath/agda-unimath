@@ -1,4 +1,4 @@
-# Algebras over rings
+# Nonunital left algebras over rings
 
 ```agda
 module ring-theory.nonunital-left-algebras-rings where
