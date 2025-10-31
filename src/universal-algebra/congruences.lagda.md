@@ -40,32 +40,31 @@ operations of the algebra.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1)
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
   (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
+  (R : equivalence-relation l4 (type-Algebra σ T A))
   where
 
-  relation-holds-all-tuple :
-    {l4 : Level} →
-    (R : equivalence-relation l4 (type-Algebra σ T A)) →
+  relation-holds-all-tuple-equivalence-relation-Algebra :
     {n : ℕ} →
     (v : tuple (type-Algebra σ T A) n) →
     (v' : tuple (type-Algebra σ T A) n) →
     UU l4
-  relation-holds-all-tuple {l4} R {.zero-ℕ} empty-tuple empty-tuple =
+  relation-holds-all-tuple-equivalence-relation-Algebra
+    { .zero-ℕ} empty-tuple empty-tuple =
     raise-unit l4
-  relation-holds-all-tuple {l4} R {.(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
+  relation-holds-all-tuple-equivalence-relation-Algebra
+    { .(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
     ( sim-equivalence-relation R x x') ×
-    ( relation-holds-all-tuple R v v')
+    ( relation-holds-all-tuple-equivalence-relation-Algebra v v')
 
-  preserves-operations :
-    {l4 : Level} →
-    (R : equivalence-relation l4 (type-Algebra σ T A)) →
+  preserves-operations-equivalence-relation-Algebra :
     UU (l1 ⊔ l3 ⊔ l4)
-  preserves-operations R =
+  preserves-operations-equivalence-relation-Algebra =
     ( op : operation-signature σ) →
     ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
     ( v' : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
-    relation-holds-all-tuple R v v' →
+    relation-holds-all-tuple-equivalence-relation-Algebra v v' →
     sim-equivalence-relation R
       ( is-model-set-Algebra σ T A op v)
       ( is-model-set-Algebra σ T A op v')
@@ -80,7 +79,7 @@ congruence-Algebra :
   UU (l1 ⊔ l3 ⊔ lsuc l4)
 congruence-Algebra l4 σ T A =
   Σ ( equivalence-relation l4 (type-Algebra σ T A))
-    ( preserves-operations σ T A)
+    ( preserves-operations-equivalence-relation-Algebra σ T A)
 
 module _
   {l1 l2 l3 l4 : Level} (σ : signature l1)
@@ -93,6 +92,6 @@ module _
   equivalence-relation-congruence-Algebra = pr1 R
 
   preserves-operations-congruence-Algebra :
-    preserves-operations σ T A equivalence-relation-congruence-Algebra
+    preserves-operations-equivalence-relation-Algebra σ T A equivalence-relation-congruence-Algebra
   preserves-operations-congruence-Algebra = pr2 R
 ```

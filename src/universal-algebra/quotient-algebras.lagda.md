@@ -87,22 +87,22 @@ module _
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
-  tuple-type-quotient-tuple-type-Algebra :
+  tuple-type-quotient-tuple-type-quotient-Algebra :
     {n : ℕ} →
     tuple type-quotient-Algebra n →
     type-trunc-Prop (tuple (type-Algebra σ T A) n)
-  tuple-type-quotient-tuple-type-Algebra empty-tuple =
+  tuple-type-quotient-tuple-type-quotient-Algebra empty-tuple =
     unit-trunc-Prop empty-tuple
-  tuple-type-quotient-tuple-type-Algebra (x ∷ v) =
+  tuple-type-quotient-tuple-type-quotient-Algebra (x ∷ v) =
     map-universal-property-trunc-Prop
       ( trunc-Prop _)
       ( λ (z , p) →
         map-trunc-Prop
           ( λ v' → z ∷ v')
-          ( tuple-type-quotient-tuple-type-Algebra v))
+          ( tuple-type-quotient-tuple-type-quotient-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-all-tuple-all-sim-equivalence-relation :
+  relation-holds-all-tuple-all-sim-equivalence-relation-quotient-Algebra :
     {n : ℕ}
     (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
     sim-equivalence-relation
@@ -115,11 +115,16 @@ module _
       ( equivalence-relation-congruence-Algebra σ T A R)
       ( tuple-multivariable-input n (type-Algebra σ T A) v)
       ( tuple-multivariable-input n (type-Algebra σ T A) v')
-  relation-holds-all-tuple-all-sim-equivalence-relation {zero-ℕ} v v' p =
+  relation-holds-all-tuple-all-sim-equivalence-relation-quotient-Algebra
+    {zero-ℕ} v v' p =
     raise-star
-  relation-holds-all-tuple-all-sim-equivalence-relation
+  relation-holds-all-tuple-all-sim-equivalence-relation-quotient-Algebra
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    ( p , relation-holds-all-tuple-all-sim-equivalence-relation v v' p')
+    ( p ,
+      relation-holds-all-tuple-all-sim-equivalence-relation-quotient-Algebra
+        ( v)
+        ( v')
+        ( p'))
 
   is-model-set-quotient-Algebra :
     is-model σ set-quotient-Algebra
@@ -146,7 +151,10 @@ module _
               ( arity-operation-signature σ op)
               ( type-Algebra σ T A)
               ( v'))
-            (relation-holds-all-tuple-all-sim-equivalence-relation v v' p)))
+            ( relation-holds-all-tuple-all-sim-equivalence-relation-quotient-Algebra
+              ( v)
+              ( v')
+              ( p))))
       ( multivariable-input-tuple
         ( arity-operation-signature σ op)
         ( type-quotient-Algebra)
