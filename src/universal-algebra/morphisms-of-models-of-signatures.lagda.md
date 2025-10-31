@@ -157,4 +157,13 @@ module _
         ( refl-htpy)
         ( htpy-eq-hom-Model (f , hom-f))
         ( funext f)
+
+  extensionality-hom-Model :
+    (f g : hom-Model σ X Y) → (f ＝ g) ≃ htpy-hom-Model f g
+  extensionality-hom-Model f g =
+    (htpy-eq-hom-Model f g , is-equiv-htpy-eq-hom-Model f g)
+
+  eq-htpy-hom-Model :
+    (f g : hom-Model σ X Y) → htpy-hom-Model f g → f ＝ g
+  eq-htpy-hom-Model f g = map-inv-equiv (extensionality-hom-Model f g)
 ```

@@ -302,21 +302,37 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
-  where abstract
+  (T : Algebraic-Theory l2 σ)
+  where
 
-  is-torsorial-iso-Algebra : is-torsorial (iso-Algebra {l4 = l3} σ T A)
-  is-torsorial-iso-Algebra =
-    is-contr-equiv'
-      ( Σ (Algebra l3 σ T) (equiv-Algebra σ T A))
-      ( equiv-tot (equiv-iso-equiv-Algebra σ T A))
-      ( is-torsorial-equiv-Algebra σ T A)
+  abstract
+    is-torsorial-iso-Algebra :
+      (A : Algebra l3 σ T) → is-torsorial (iso-Algebra {l4 = l3} σ T A)
+    is-torsorial-iso-Algebra A =
+      is-contr-equiv'
+        ( Σ (Algebra l3 σ T) (equiv-Algebra σ T A))
+        ( equiv-tot (equiv-iso-equiv-Algebra σ T A))
+        ( is-torsorial-equiv-Algebra σ T A)
 
-  is-equiv-iso-eq-Algebra :
-    (B : Algebra l3 σ T) →
-    is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A B)
-  is-equiv-iso-eq-Algebra =
-    fundamental-theorem-id
-      ( is-torsorial-iso-Algebra)
-      ( iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A)
+  iso-eq-Algebra :
+      (A B : Algebra l3 σ T) → A ＝ B → iso-Algebra σ T A B
+  iso-eq-Algebra = iso-eq-Large-Precategory (Algebra-Large-Precategory σ T)
+
+  abstract
+    is-equiv-iso-eq-Algebra :
+      (A B : Algebra l3 σ T) →
+      is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A B)
+    is-equiv-iso-eq-Algebra A =
+      fundamental-theorem-id
+        ( is-torsorial-iso-Algebra A)
+        ( iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A)
+
+  extensionality-iso-Algebra :
+    (A B : Algebra l3 σ T) → (A ＝ B) ≃ iso-Algebra σ T A B
+  extensionality-iso-Algebra A B =
+    ( iso-eq-Algebra A B , is-equiv-iso-eq-Algebra A B)
+
+  eq-iso-Algebra :
+    (A B : Algebra l3 σ T) → iso-Algebra σ T A B → A ＝ B
+  eq-iso-Algebra A B = map-inv-equiv (extensionality-iso-Algebra A B)
 ```

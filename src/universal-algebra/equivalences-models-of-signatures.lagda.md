@@ -223,14 +223,14 @@ module _
         ( is-equiv-equiv-eq-Set X)
         ( is-equiv-htpy-eq-is-model' σ (λ f z → id (X-assign f z)))
 
-  equiv-equiv-eq-Model :
+  extensionality-Model :
     {l2 : Level} (X Y : Model l2 σ) →
     (X ＝ Y) ≃ equiv-Model σ X Y
-  equiv-equiv-eq-Model X Y =
+  extensionality-Model X Y =
     ( equiv-eq-Model X Y , is-equiv-equiv-eq-Model X Y)
 
   eq-equiv-Model :
     {l2 : Level} (X Y : Model l2 σ) →
     equiv-Model σ X Y → X ＝ Y
-  eq-equiv-Model X Y = map-inv-equiv (equiv-equiv-eq-Model X Y)
+  eq-equiv-Model X Y = map-inv-equiv (extensionality-Model X Y)
 ```
