@@ -56,17 +56,17 @@ module _
 
   de-bruijn-variables-term : term → list ℕ
 
-  de-bruijn-variables-term-tuple : {n : ℕ} → tuple term n → list ℕ
+  de-bruijn-variables-tuple-term : {n : ℕ} → tuple term n → list ℕ
 
   de-bruijn-variables-term (var-term x) = cons x nil
-  de-bruijn-variables-term (op-term f x) = de-bruijn-variables-term-tuple x
+  de-bruijn-variables-term (op-term f x) = de-bruijn-variables-tuple-term x
 
-  de-bruijn-variables-term-tuple empty-tuple = nil
-  de-bruijn-variables-term-tuple (x ∷ v) =
+  de-bruijn-variables-tuple-term empty-tuple = nil
+  de-bruijn-variables-tuple-term (x ∷ v) =
     union-list
       has-decidable-equality-ℕ
         (de-bruijn-variables-term x)
-        (de-bruijn-variables-term-tuple v)
+        (de-bruijn-variables-tuple-term v)
 
   arity-term : term → ℕ
   arity-term t = length-list (de-bruijn-variables-term t)
@@ -152,7 +152,7 @@ module _
     all-tuple-lemma :
       { n : ℕ}
       ( v : tuple (term σ) n) →
-      ( de-bruijn-variables-term-tuple σ v ＝ nil) →
+      ( de-bruijn-variables-tuple-term σ v ＝ nil) →
       all-tuple (λ t → is-nil-list (de-bruijn-variables-term σ t)) v
     all-tuple-lemma empty-tuple p = raise-star
     all-tuple-lemma (x ∷ v) p =
@@ -164,7 +164,7 @@ module _
         is-nil-union-is-nil-list
           ( has-decidable-equality-ℕ)
           ( de-bruijn-variables-term σ x)
-          ( de-bruijn-variables-term-tuple σ v)
+          ( de-bruijn-variables-tuple-term σ v)
 
   eval-constant-tuple-term m empty-tuple p = empty-tuple
   eval-constant-tuple-term m (x ∷ v) (p , p') =
