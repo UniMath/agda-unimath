@@ -1,8 +1,6 @@
 # The category of algebras of an equational theory
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.category-of-algebras-of-theories where
 ```
 

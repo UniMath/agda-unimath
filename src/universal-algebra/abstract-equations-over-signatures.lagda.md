@@ -19,7 +19,7 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-An {{#concept "abstract equation" Agda=Abstract-Equation}} over a
+An {{#concept "abstract equation" Agda=abstract-equation}} over a
 [signature](universal-algebra.signatures.md) `σ` is a statement of the form "`x`
 equals `y`", where `x` and `y` are
 [terms](universal-algebra.terms-over-signatures.md) over `σ`. Thus, the data of
@@ -34,12 +34,12 @@ module _
   {l1 : Level} (σ : signature l1)
   where
 
-  Abstract-Equation : UU l1
-  Abstract-Equation = Term σ × Term σ
+  abstract-equation : UU l1
+  abstract-equation = Term σ × Term σ
 
-  lhs-Abstract-Equation : Abstract-Equation → Term σ
-  lhs-Abstract-Equation = pr1
+  lhs-abstract-equation : abstract-equation → Term σ
+  lhs-abstract-equation = pr1
 
-  rhs-Abstract-Equation : Abstract-Equation → Term σ
-  rhs-Abstract-Equation = pr2
+  rhs-abstract-equation : abstract-equation → Term σ
+  rhs-abstract-equation = pr2
 ```

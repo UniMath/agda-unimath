@@ -36,49 +36,6 @@ operation-signature : {l : Level} → signature l → UU l
 operation-signature = pr1
 
 arity-operation-signature :
-  {l : Level} →
-  (σ : signature l) →
-  (operation-signature σ → ℕ)
+  {l : Level} (σ : signature l) → operation-signature σ → ℕ
 arity-operation-signature = pr2
-```
-
-### Extension of signatures
-
-```agda
-is-extension-signature :
-  {l1 l2 : Level} →
-  signature l1 → signature l2 → UU (l1 ⊔ l2)
-is-extension-signature σ τ =
-  Σ ( operation-signature τ → operation-signature σ)
-    ( λ f → is-emb f ×
-      ( ( op : operation-signature τ) →
-        arity-operation-signature τ op ＝
-          arity-operation-signature σ (f op)))
-
-emb-extension-signature :
-  {l1 l2 : Level} →
-  (σ : signature l1) →
-  (τ : signature l2) →
-  is-extension-signature σ τ →
-  (operation-signature τ → operation-signature σ)
-emb-extension-signature σ τ ext = pr1 ext
-
-is-emb-extension-signature :
-  {l1 l2 : Level} →
-  (σ : signature l1) →
-  (τ : signature l2) →
-  (ext : is-extension-signature σ τ) →
-  is-emb (emb-extension-signature σ τ ext)
-is-emb-extension-signature σ τ ext = pr1 (pr2 ext)
-
-arity-preserved-extension-signature :
-  {l1 l2 : Level} →
-  (σ : signature l1) →
-  (τ : signature l2) →
-  (ext : is-extension-signature σ τ) →
-  (op : operation-signature τ) →
-  arity-operation-signature τ op ＝
-    arity-operation-signature σ
-      (emb-extension-signature σ τ ext op)
-arity-preserved-extension-signature σ τ ext = pr2 (pr2 ext)
 ```

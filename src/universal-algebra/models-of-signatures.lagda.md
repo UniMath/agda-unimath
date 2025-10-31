@@ -48,32 +48,30 @@ module _
   {l1 : Level} (σ : signature l1)
   where
 
-  is-model : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
-  is-model X =
-    ( f : operation-signature σ) →
-    ( tuple X (arity-operation-signature σ f) → X)
+  is-model-type : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
+  is-model-type X =
+    (f : operation-signature σ) →
+    tuple X (arity-operation-signature σ f) → X
 
-  is-model-signature : {l2 : Level} → (Set l2) → UU (l1 ⊔ l2)
-  is-model-signature X = is-model (type-Set X)
+  is-model : {l2 : Level} → Set l2 → UU (l1 ⊔ l2)
+  is-model X = is-model-type (type-Set X)
 
   Model-Signature : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Model-Signature l2 = Σ (Set l2) (λ X → is-model-signature X)
+  Model-Signature l2 = Σ (Set l2) (is-model)
 
   set-Model-Signature : {l2 : Level} → Model-Signature l2 → Set l2
-  set-Model-Signature M = pr1 M
+  set-Model-Signature = pr1
 
   is-model-set-Model-Signature :
-    {l2 : Level} →
-    (M : Model-Signature l2) →
-    is-model-signature (set-Model-Signature M)
-  is-model-set-Model-Signature M = pr2 M
+    {l2 : Level} (M : Model-Signature l2) →
+    is-model (set-Model-Signature M)
+  is-model-set-Model-Signature = pr2
 
   type-Model-Signature : {l2 : Level} → Model-Signature l2 → UU l2
   type-Model-Signature M = pr1 (set-Model-Signature M)
 
   is-set-type-Model-Signature :
-    {l2 : Level} →
-    (M : Model-Signature l2) →
+    {l2 : Level} (M : Model-Signature l2) →
     is-set (type-Model-Signature M)
   is-set-type-Model-Signature M = pr2 (set-Model-Signature M)
 ```

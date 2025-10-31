@@ -37,12 +37,12 @@ module _
   where
 
   Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation σ))
+  Theory l2 = Σ (UU l2) (λ B → (B → abstract-equation σ))
 
   index-Theory : {l2 : Level} → Theory l2 → UU l2
   index-Theory = pr1
 
-  index-Abstract-Equation-Theory :
-    {l2 : Level} (Th : Theory l2) → (index-Theory Th) → Abstract-Equation σ
-  index-Abstract-Equation-Theory Th e = pr2 Th e
+  index-abstract-equation-Theory :
+    {l2 : Level} (Th : Theory l2) → index-Theory Th → abstract-equation σ
+  index-abstract-equation-Theory Th e = pr2 Th e
 ```

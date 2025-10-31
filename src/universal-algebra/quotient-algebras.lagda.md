@@ -66,14 +66,16 @@ module _
   is-set-set-quotient-Algebra = pr2 set-quotient-Algebra
 
   compute-quotient-Algebra :
-    equivalence-class (equivalence-relation-congruence-Algebra σ T A R) ≃
+    equivalence-class
+      ( equivalence-relation-congruence-Algebra σ T A R) ≃
     type-quotient-Algebra
   compute-quotient-Algebra =
     compute-set-quotient
       ( equivalence-relation-congruence-Algebra σ T A R)
 
   set-quotient-equivalence-class-Algebra :
-    equivalence-class (equivalence-relation-congruence-Algebra σ T A R) →
+    equivalence-class
+      ( equivalence-relation-congruence-Algebra σ T A R) →
     type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
@@ -81,7 +83,7 @@ module _
   equivalence-class-set-quotient-Algebra :
     type-quotient-Algebra →
     equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R)
+      ( equivalence-relation-congruence-Algebra σ T A R)
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
@@ -96,7 +98,7 @@ module _
       ( trunc-Prop _)
       ( λ (z , p) →
         map-trunc-Prop
-          (λ v' → z ∷ v')
+          ( λ v' → z ∷ v')
           ( tuple-type-quotient-tuple-type-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
@@ -116,10 +118,10 @@ module _
     raise-star
   relation-holds-all-tuple-all-sim-equivalence-relation
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    p , (relation-holds-all-tuple-all-sim-equivalence-relation v v' p')
+    ( p , relation-holds-all-tuple-all-sim-equivalence-relation v v' p')
 
   is-model-set-quotient-Algebra :
-    is-model-signature σ set-quotient-Algebra
+    is-model σ set-quotient-Algebra
   is-model-set-quotient-Algebra op v =
     multivariable-map-set-quotient
       ( arity-operation-signature σ op)

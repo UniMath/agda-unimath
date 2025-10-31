@@ -1,8 +1,6 @@
 # Algebras
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.algebras-of-theories where
 ```
 
@@ -53,46 +51,36 @@ module _
     (e : index-Theory σ T) →
     (assign : assignment σ (type-Model-Signature σ M)) →
     eval-term σ (is-model-set-Model-Signature σ M) assign
-      ( lhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e)) ＝
+      ( lhs-abstract-equation σ (index-abstract-equation-Theory σ T e)) ＝
     eval-term σ (is-model-set-Model-Signature σ M) assign
-      ( rhs-Abstract-Equation σ (index-Abstract-Equation-Theory σ T e))
+      ( rhs-abstract-equation σ (index-abstract-equation-Theory σ T e))
 
   Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =
     Σ ( Model-Signature σ l3) (is-algebra)
 
-  model-Algebra :
-    {l3 : Level} →
-    Algebra l3 → Model-Signature σ l3
-  model-Algebra A = pr1 A
+module _
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Theory σ l2) (A : Algebra σ T l3)
+  where
 
-  set-Algebra :
-    {l3 : Level} →
-    Algebra l3 → Set l3
-  set-Algebra A = pr1 (pr1 A)
+  model-Algebra : Model-Signature σ l3
+  model-Algebra = pr1 A
 
-  is-model-set-Algebra :
-    {l3 : Level} →
-    (A : Algebra l3) →
-    is-model-signature σ (set-Algebra A)
-  is-model-set-Algebra A = pr2 (pr1 A)
+  set-Algebra : Set l3
+  set-Algebra = set-Model-Signature σ model-Algebra
 
-  type-Algebra :
-    {l3 : Level} →
-    Algebra l3 → UU l3
-  type-Algebra A =
-    pr1 (pr1 (pr1 A))
+  is-model-set-Algebra : is-model σ set-Algebra
+  is-model-set-Algebra = is-model-set-Model-Signature σ model-Algebra
 
-  is-set-type-Algebra :
-    {l3 : Level} →
-    (A : Algebra l3) → is-set (type-Algebra A)
-  is-set-type-Algebra A = pr2 (pr1 (pr1 A))
+  type-Algebra : UU l3
+  type-Algebra = type-Set set-Algebra
 
-  is-algebra-Algebra :
-    {l3 : Level} →
-    (A : Algebra l3) →
-    is-algebra (model-Algebra A)
-  is-algebra-Algebra A = pr2 A
+  is-set-type-Algebra : is-set type-Algebra
+  is-set-type-Algebra = is-set-type-Set set-Algebra
+
+  is-algebra-Algebra : is-algebra σ T model-Algebra
+  is-algebra-Algebra = pr2 A
 ```
 
 ## Properties
@@ -100,64 +88,19 @@ module _
 ### Being an algebra is a proposition
 
 ```agda
-  is-prop-is-algebra :
-    {l3 : Level} →
-    (X : Model-Signature σ l3) →
-    is-prop (is-algebra X)
-  is-prop-is-algebra M =
-    is-prop-Π
-      ( λ e →
-        ( is-prop-Π
-          ( λ assign → is-set-type-Model-Signature σ M _ _)))
-
-  is-algebra-Prop :
-    {l3 : Level} (X : Model-Signature σ l3) → Prop (l2 ⊔ l3)
-  pr1 (is-algebra-Prop X) = is-algebra X
-  pr2 (is-algebra-Prop X) = is-prop-is-algebra X
-```
-
-### Characterizing identifications of algebras
-
-```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Theory σ l2) (X : Model-Signature σ l3)
   where
 
-  Eq-Algebra : {l3 : Level} (A B : Algebra σ T l3) → UU (l1 ⊔ l3)
-  Eq-Algebra A B =
-    Eq-Model-Signature σ (model-Algebra σ T A) (model-Algebra σ T B)
-
-  Eq-eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) → A ＝ B → Eq-Algebra A B
-  Eq-eq-Algebra A .A refl = refl-Eq-Model-Signature σ (model-Algebra σ T A)
-
-  is-equiv-Eq-eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
-    is-equiv (Eq-eq-Algebra A B)
-  is-equiv-Eq-eq-Algebra (A , p) =
-    subtype-identity-principle
-      ( is-prop-is-algebra σ T)
-      ( p)
-      ( refl-Eq-Model-Signature σ A)
-      ( Eq-eq-Algebra (A , p))
-      ( is-equiv-Eq-eq-Model-Signature σ A)
-
-  equiv-Eq-eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
-    (A ＝ B) ≃ Eq-Algebra A B
-  pr1 (equiv-Eq-eq-Algebra A B) = Eq-eq-Algebra A B
-  pr2 (equiv-Eq-eq-Algebra A B) = is-equiv-Eq-eq-Algebra A B
-
-  eq-Eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
-    Eq-Algebra A B → A ＝ B
-  eq-Eq-Algebra A B = map-inv-equiv (equiv-Eq-eq-Algebra A B)
-
   abstract
-    is-torsorial-Eq-Algebra :
-      {l3 : Level} (A : Algebra σ T l3) → is-torsorial (Eq-Algebra A)
-    is-torsorial-Eq-Algebra A =
-      fundamental-theorem-id'
-        ( Eq-eq-Algebra A)
-        ( λ B → is-equiv-Eq-eq-Algebra A B)
+    is-prop-is-algebra : is-prop (is-algebra σ T X)
+    is-prop-is-algebra =
+      is-prop-Π
+        ( λ e →
+          ( is-prop-Π
+            ( λ _ → is-set-type-Model-Signature σ X _ _)))
+
+  is-algebra-Prop : Prop (l2 ⊔ l3)
+  is-algebra-Prop = (is-algebra σ T X , is-prop-is-algebra)
 ```

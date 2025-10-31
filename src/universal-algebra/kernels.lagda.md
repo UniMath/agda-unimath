@@ -53,8 +53,7 @@ module _
   rel-prop-kernel-hom-Algebra :
     Relation-Prop l4 (type-Algebra σ T A)
   pr1 (rel-prop-kernel-hom-Algebra x y) =
-    map-hom-Algebra σ T A B F x ＝
-      map-hom-Algebra σ T A B F y
+    map-hom-Algebra σ T A B F x ＝ map-hom-Algebra σ T A B F y
   pr2 (rel-prop-kernel-hom-Algebra x y) =
     is-set-type-Algebra σ T B _ _
 
@@ -68,7 +67,8 @@ module _
 
   kernel-hom-Algebra :
     congruence-Algebra σ T A l4
-  pr1 kernel-hom-Algebra = equivalence-relation-kernel-hom-Algebra
+  pr1 kernel-hom-Algebra =
+    equivalence-relation-kernel-hom-Algebra
   pr2 kernel-hom-Algebra op v v' p =
     equational-reasoning
       f (is-model-set-Algebra σ T A op v)
@@ -89,7 +89,8 @@ module _
       ( relation-holds-all-tuple σ T A
         equivalence-relation-kernel-hom-Algebra v v') →
       (map-tuple f v) ＝ (map-tuple f v')
-    map-hom-Algebra-lemma zero-ℕ empty-tuple empty-tuple p = refl
+    map-hom-Algebra-lemma zero-ℕ empty-tuple empty-tuple p =
+      refl
     map-hom-Algebra-lemma (succ-ℕ n) (x ∷ v) (x' ∷ v') (p , p') =
       ap-binary (_∷_) p (map-hom-Algebra-lemma n v v' p')
 ```

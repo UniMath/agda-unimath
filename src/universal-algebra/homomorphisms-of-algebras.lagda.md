@@ -1,8 +1,6 @@
 # Homomorphisms of algebras
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.homomorphisms-of-algebras where
 ```
 
