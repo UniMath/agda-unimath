@@ -188,13 +188,14 @@ module _
 
 ```agda
 pointed-equiv :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} → Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
 pointed-equiv A B =
   Σ ( type-Pointed-Type A ≃ type-Pointed-Type B)
     ( λ e → map-equiv e (point-Pointed-Type A) ＝ point-Pointed-Type B)
 
 infix 6 _≃∗_
 
+_≃∗_ : {l1 l2 : Level} → Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
 _≃∗_ = pointed-equiv
 
 module _

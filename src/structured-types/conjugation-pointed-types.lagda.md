@@ -27,12 +27,12 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-Conjugation on a [pointed type](structured-types.pointed-types.md) `(B,b)` is
-defined as a family of [pointed maps](structured-types.pointed-maps.md)
-`conj u p : (B,b) →∗ (B,u)` indexed by `u : B` and `p : b ＝ u`, such that
-`conj b ω` acts on the [loop space](synthetic-homotopy-theory.loop-spaces.md)
-`Ω (B , b)` by conjugation, i.e., it maps a loop `α : b ＝ b` to the loop
-`ω⁻¹αω`.
+{{#concept "Conjugation" Agda=conjugation-Pointed-Type}} on a
+[pointed type](structured-types.pointed-types.md) `(B,b)` is defined as a family
+of [pointed maps](structured-types.pointed-maps.md) `conj u p : (B,b) →∗ (B,u)`
+indexed by `u : B` and `p : b ＝ u`, such that `conj b ω` acts on the
+[loop space](synthetic-homotopy-theory.loop-spaces.md) `Ω (B , b)` by
+conjugation, i.e., it maps a loop `α : b ＝ b` to the loop `ω⁻¹αω`.
 
 ## Definition
 
