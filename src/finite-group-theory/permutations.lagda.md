@@ -57,7 +57,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A permutation of X is an automorphism of X.
+A {{#concept "permutation" Disambiguation="of a finite type"}} of a
+[finite type](univalent-combinatorics.finite-types.md) `X` is an
+[automorphism](foundation.automorphisms.md) on `X`.
 
 ## Properties
 
