@@ -36,8 +36,8 @@ can be transported along the isomorphism to obtain a ring structure on `A`.
 
 Note that this structure can be transported by
 [univalence](foundation.univalence.md). However, we will give explicit
-definitions, since univalence is not strictly necessary to obtain this
-transported ring structure.
+definitions, since univalence is not necessary to obtain this transported ring
+structure.
 
 ## Definitions
 
