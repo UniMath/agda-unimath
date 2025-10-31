@@ -1,4 +1,4 @@
-# Models of signatures
+# Model-Of-Signatures of signatures
 
 ```agda
 module universal-algebra.models-of-signatures where
@@ -34,10 +34,11 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A {{#concept "model" Disambiguation="of a finitary signature" Agda=Model}} of a
-[(finitary) signature](universal-algebra.signatures.md) `σ` in a type `A` is a
-dependent function that assigns to each function symbol `f` of arity `n` and
-`n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
+A
+{{#concept "model" Disambiguation="of a finitary signature" Agda=Model-Of-Signature}}
+of a [(finitary) signature](universal-algebra.signatures.md) `σ` in a type `A`
+is a dependent function that assigns to each function symbol `f` of arity `n`
+and `n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
 
 ## Definitions
 
@@ -58,22 +59,22 @@ is-model σ X = is-model-type σ (type-Set X)
 ```
 
 ```agda
-Model : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
-Model l2 σ = Σ (Set l2) (is-model σ)
+Model-Of-Signature : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Model-Of-Signature l2 σ = Σ (Set l2) (is-model σ)
 
 module _
-  {l1 l2 : Level} (σ : signature l1) (X : Model l2 σ)
+  {l1 l2 : Level} (σ : signature l1) (X : Model-Of-Signature l2 σ)
   where
 
-  set-Model : Set l2
-  set-Model = pr1 X
+  set-Model-Of-Signature : Set l2
+  set-Model-Of-Signature = pr1 X
 
-  is-model-set-Model : is-model σ set-Model
-  is-model-set-Model = pr2 X
+  is-model-set-Model-Of-Signature : is-model σ set-Model-Of-Signature
+  is-model-set-Model-Of-Signature = pr2 X
 
-  type-Model : UU l2
-  type-Model = type-Set set-Model
+  type-Model-Of-Signature : UU l2
+  type-Model-Of-Signature = type-Set set-Model-Of-Signature
 
-  is-set-type-Model : is-set type-Model
-  is-set-type-Model = is-set-type-Set set-Model
+  is-set-type-Model-Of-Signature : is-set type-Model-Of-Signature
+  is-set-type-Model-Of-Signature = is-set-type-Set set-Model-Of-Signature
 ```

@@ -117,7 +117,7 @@ module _
 
   equiv-Algebra : (A : Algebra l3 σ T) (B : Algebra l4 σ T) → UU (l1 ⊔ l3 ⊔ l4)
   equiv-Algebra A B =
-    equiv-Model σ (model-Algebra σ T A) (model-Algebra σ T B)
+    equiv-Model-Of-Signature σ (model-Algebra σ T A) (model-Algebra σ T B)
 ```
 
 ## Properties
@@ -182,7 +182,7 @@ module _
   equiv-eq-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) → A ＝ B → equiv-Algebra σ T A B
   equiv-eq-Algebra A B p =
-    equiv-eq-Model σ
+    equiv-eq-Model-Of-Signature σ
       ( model-Algebra σ T A)
       ( model-Algebra σ T B)
       ( ap (model-Algebra σ T) p)
@@ -195,9 +195,9 @@ module _
       subtype-identity-principle
         ( is-prop-is-algebra σ T)
         ( p)
-        ( id-equiv-Model σ A)
+        ( id-equiv-Model-Of-Signature σ A)
         ( equiv-eq-Algebra (A , p))
-        ( is-equiv-equiv-eq-Model σ A)
+        ( is-equiv-equiv-eq-Model-Of-Signature σ A)
 
   abstract
     is-torsorial-equiv-Algebra :

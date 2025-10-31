@@ -51,43 +51,43 @@ We characterize [equivalences](foundation-core.equivalences.md) of
 ### Equivalences of models of signatures
 
 ```agda
-equiv-Model :
+equiv-Model-Of-Signature :
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model l2 σ)
-  (Y : Model l3 σ) →
+  (X : Model-Of-Signature l2 σ)
+  (Y : Model-Of-Signature l3 σ) →
   UU (l1 ⊔ l2 ⊔ l3)
-equiv-Model σ X Y =
-  Σ ( type-Model σ X ≃ type-Model σ Y)
-    ( λ e → preserves-operations-Model σ X Y (map-equiv e))
+equiv-Model-Of-Signature σ X Y =
+  Σ ( type-Model-Of-Signature σ X ≃ type-Model-Of-Signature σ Y)
+    ( λ e → preserves-operations-Model-Of-Signature σ X Y (map-equiv e))
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model l2 σ)
-  (Y : Model l3 σ)
-  (e : equiv-Model σ X Y)
+  (X : Model-Of-Signature l2 σ)
+  (Y : Model-Of-Signature l3 σ)
+  (e : equiv-Model-Of-Signature σ X Y)
   where
 
-  equiv-type-equiv-Model :
-    type-Model σ X ≃ type-Model σ Y
-  equiv-type-equiv-Model = pr1 e
+  equiv-type-equiv-Model-Of-Signature :
+    type-Model-Of-Signature σ X ≃ type-Model-Of-Signature σ Y
+  equiv-type-equiv-Model-Of-Signature = pr1 e
 
-  map-type-equiv-Model :
-    type-Model σ X → type-Model σ Y
-  map-type-equiv-Model = map-equiv equiv-type-equiv-Model
+  map-type-equiv-Model-Of-Signature :
+    type-Model-Of-Signature σ X → type-Model-Of-Signature σ Y
+  map-type-equiv-Model-Of-Signature = map-equiv equiv-type-equiv-Model-Of-Signature
 
-  map-inv-type-equiv-Model :
-    type-Model σ Y → type-Model σ X
-  map-inv-type-equiv-Model =
-    map-inv-equiv equiv-type-equiv-Model
+  map-inv-type-equiv-Model-Of-Signature :
+    type-Model-Of-Signature σ Y → type-Model-Of-Signature σ X
+  map-inv-type-equiv-Model-Of-Signature =
+    map-inv-equiv equiv-type-equiv-Model-Of-Signature
 
-  is-equiv-map-type-equiv-Model :
-    is-equiv map-type-equiv-Model
-  is-equiv-map-type-equiv-Model =
-    is-equiv-map-equiv equiv-type-equiv-Model
+  is-equiv-map-type-equiv-Model-Of-Signature :
+    is-equiv map-type-equiv-Model-Of-Signature
+  is-equiv-map-type-equiv-Model-Of-Signature =
+    is-equiv-map-equiv equiv-type-equiv-Model-Of-Signature
 
-  preserves-operations-equiv-Model :
-    preserves-operations-Model σ X Y map-type-equiv-Model
-  preserves-operations-equiv-Model = pr2 e
+  preserves-operations-equiv-Model-Of-Signature :
+    preserves-operations-Model-Of-Signature σ X Y map-type-equiv-Model-Of-Signature
+  preserves-operations-equiv-Model-Of-Signature = pr2 e
 ```
 
 ## Properties
@@ -199,38 +199,38 @@ module _
   {l1 : Level} (σ : signature l1)
   where
 
-  id-equiv-Model :
-    {l2 : Level} (X : Model l2 σ) → equiv-Model σ X X
-  id-equiv-Model X =
-    ( id-equiv , preserves-operations-id-Model σ X)
+  id-equiv-Model-Of-Signature :
+    {l2 : Level} (X : Model-Of-Signature l2 σ) → equiv-Model-Of-Signature σ X X
+  id-equiv-Model-Of-Signature X =
+    ( id-equiv , preserves-operations-id-Model-Of-Signature σ X)
 
-  equiv-eq-Model :
-    {l2 : Level} (X Y : Model l2 σ) →
-    X ＝ Y → equiv-Model σ X Y
-  equiv-eq-Model X .X refl = id-equiv-Model X
+  equiv-eq-Model-Of-Signature :
+    {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
+    X ＝ Y → equiv-Model-Of-Signature σ X Y
+  equiv-eq-Model-Of-Signature X .X refl = id-equiv-Model-Of-Signature X
 
   abstract
-    is-equiv-equiv-eq-Model :
-      {l2 : Level} (X Y : Model l2 σ) →
-      is-equiv (equiv-eq-Model X Y)
-    is-equiv-equiv-eq-Model (X , X-assign) =
+    is-equiv-equiv-eq-Model-Of-Signature :
+      {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
+      is-equiv (equiv-eq-Model-Of-Signature X Y)
+    is-equiv-equiv-eq-Model-Of-Signature (X , X-assign) =
       structure-identity-principle
         ( λ {Y} f (eq , _) →
-          preserves-operations-Model σ (X , X-assign) (Y , f) eq)
+          preserves-operations-Model-Of-Signature σ (X , X-assign) (Y , f) eq)
         ( id-equiv)
-        ( preserves-operations-id-Model σ (X , X-assign))
-        ( equiv-eq-Model (X , X-assign))
+        ( preserves-operations-id-Model-Of-Signature σ (X , X-assign))
+        ( equiv-eq-Model-Of-Signature (X , X-assign))
         ( is-equiv-equiv-eq-Set X)
         ( is-equiv-htpy-eq-is-model' σ (λ f z → id (X-assign f z)))
 
-  extensionality-Model :
-    {l2 : Level} (X Y : Model l2 σ) →
-    (X ＝ Y) ≃ equiv-Model σ X Y
-  extensionality-Model X Y =
-    ( equiv-eq-Model X Y , is-equiv-equiv-eq-Model X Y)
+  extensionality-Model-Of-Signature :
+    {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
+    (X ＝ Y) ≃ equiv-Model-Of-Signature σ X Y
+  extensionality-Model-Of-Signature X Y =
+    ( equiv-eq-Model-Of-Signature X Y , is-equiv-equiv-eq-Model-Of-Signature X Y)
 
-  eq-equiv-Model :
-    {l2 : Level} (X Y : Model l2 σ) →
-    equiv-Model σ X Y → X ＝ Y
-  eq-equiv-Model X Y = map-inv-equiv (extensionality-Model X Y)
+  eq-equiv-Model-Of-Signature :
+    {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
+    equiv-Model-Of-Signature σ X Y → X ＝ Y
+  eq-equiv-Model-Of-Signature X Y = map-inv-equiv (extensionality-Model-Of-Signature X Y)
 ```
