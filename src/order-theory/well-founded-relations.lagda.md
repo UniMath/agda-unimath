@@ -55,6 +55,10 @@ module _
 
   is-well-founded-Relation : UU (l1 ⊔ l2)
   is-well-founded-Relation = (x : X) → is-accessible-element-Relation _∈_ x
+
+  is-prop-is-well-founded-Relation : is-prop is-well-founded-Relation
+  is-prop-is-well-founded-Relation =
+    is-prop-type-Prop is-well-founded-prop-Relation
 ```
 
 ### Well-founded relations
