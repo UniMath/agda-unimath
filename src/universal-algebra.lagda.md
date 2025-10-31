@@ -8,7 +8,7 @@ module universal-algebra where
 open import universal-algebra.abstract-equations-over-signatures public
 open import universal-algebra.algebraic-theories public
 open import universal-algebra.algebraic-theory-of-groups public
-open import universal-algebra.algebras-of-algebraic-theories public
+open import universal-algebra.algebras public
 open import universal-algebra.category-of-algebras-algebraic-theories public
 open import universal-algebra.congruences public
 open import universal-algebra.equivalences-models-of-signatures public

@@ -23,7 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
@@ -38,8 +38,7 @@ open import universal-algebra.signatures
 Given an [algebraic theory](universal-algebra.algebraic-theories.md) `T` over a
 [(finitary) signature](universal-algebra.signatures.md) `σ`, we have the
 {{#concept "large category of `T`-algebras" Disambiguation="of an algebraic theory, single-sorted, finitary" Agda=Algebra-Large-Category}},
-which consists of
-`T`-[algebras](universal-algebra.algebras-of-algebraic-theories.md) and
+which consists of `T`-[algebras](universal-algebra.algebras.md) and
 `T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
 
 ## Definition

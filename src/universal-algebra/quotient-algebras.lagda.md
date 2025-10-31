@@ -1,4 +1,4 @@
-# Quotient algebras of algebraic theories
+# Quotient algebras
 
 ```agda
 module universal-algebra.quotient-algebras where
@@ -27,7 +27,7 @@ open import foundation.universe-levels
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.congruences
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
@@ -39,7 +39,7 @@ open import universal-algebra.signatures
 
 The
 {{#concept "quotient" Disambiguation="of an algebra of an algebraic theory, single-sorted, finitary" WD="quotient algebra" WDID=Q2589508}}
-of an [algebra](universal-algebra.algebras-of-algebraic-theories.md) by a
+of an [algebra](universal-algebra.algebras.md) by a
 [congruence](universal-algebra.congruences.md) is the
 [set quotient](foundation.set-quotients.md) by that congruence. This quotient
 again has the structure of an algebra inherited by the original one.

@@ -30,7 +30,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
@@ -41,7 +41,7 @@ open import universal-algebra.signatures
 
 An
 {{#concept "algebra homomorphism" Disambiguation="algebraic theory, single-sorted, finitary" WD="homomorphism" WDID=Q215111 Agda=hom-Algebra}}
-from one [algebra](universal-algebra.algebras-of-algebraic-theories.md) of an
+from one [algebra](universal-algebra.algebras.md) of an
 [algebraic theory](universal-algebra.algebraic-theories.md) to another is a
 function between their underlying types such that all the structure is
 preserved.

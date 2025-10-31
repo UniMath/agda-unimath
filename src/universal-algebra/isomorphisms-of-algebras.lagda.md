@@ -39,7 +39,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.equivalences-models-of-signatures
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures

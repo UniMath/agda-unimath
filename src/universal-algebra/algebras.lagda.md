@@ -1,7 +1,7 @@
 # Algebras of algebraic theories
 
 ```agda
-module universal-algebra.algebras-of-algebraic-theories where
+module universal-algebra.algebras where
 ```
 
 <details><summary>Imports</summary>

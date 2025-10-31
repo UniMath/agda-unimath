@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.signatures
 ```
 
@@ -29,7 +29,7 @@ open import universal-algebra.signatures
 
 A
 {{#concept "congruence" Disambiguation="in an algebra of an algebraic theory, single-sorted, finitary" WD="congruence relation" WDID=Q8349849 Agda=congruence-Algebra}}
-in an [algebra](universal-algebra.algebras-of-algebraic-theories.md) of an
+in an [algebra](universal-algebra.algebras.md) of an
 [algebraic theory](universal-algebra.algebraic-theories.md) is an
 [equivalence relation](foundation.equivalence-relations.md) that respects all
 operations of the algebra.

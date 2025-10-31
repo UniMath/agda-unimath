@@ -22,7 +22,7 @@ open import group-theory.groups
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.algebras
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -33,7 +33,7 @@ open import universal-algebra.terms-over-signatures
 
 There is an
 {{#concept "algebraic theory of groups" Agda=algebraic-theory-Group}}. The type
-of all such [algebras](universal-algebra.algebras-of-algebraic-theories.md) is
+of all such [algebras](universal-algebra.algebras.md) is
 [equivalent](foundation-core.equivalences.md) to the type of
 [groups](group-theory.groups.md).
 
