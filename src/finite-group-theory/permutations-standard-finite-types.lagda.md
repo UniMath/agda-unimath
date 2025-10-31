@@ -48,7 +48,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A permutation of `Fin n` is an automorphism of `Fin n`.
+A
+{{#concept "permutation" Disambiguation="of a standard finite type" Agda=Permutation}}
+of `Fin n` is an [automorphism](foundation.automorphisms.md) on `Fin n`.
 
 ## Definitions
 
