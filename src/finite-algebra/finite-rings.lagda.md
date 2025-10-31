@@ -49,7 +49,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **finite ring** is a ring where the underlying type is finite.
+A {{#concept "finite ring" WD="finite ring" WDID=Q2354159 Agda=Finite-Ring}} is
+a [ring](ring-theory.rings.md) where the underlying type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definitions
 
