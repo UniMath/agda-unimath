@@ -1,3 +1,4 @@
+Ahda->Agda
 Kratowski->Kuratowski
 Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
