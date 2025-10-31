@@ -23,9 +23,10 @@ open import primitives.characters
 
 ## Idea
 
-The `String` type represents strings. Agda provides primitive functions to
-manipulate them. Strings are written between double quotes, e.g.
-`"agda-unimath"`.
+The `String` type represents
+{{#concept "strings" WD="string" WDID=Q184754 Agda=String}}. Agda provides
+primitive functions to manipulate them. Strings are written between double
+quotes, e.g. `"agda-unimath"`.
 
 ## Definitions
 

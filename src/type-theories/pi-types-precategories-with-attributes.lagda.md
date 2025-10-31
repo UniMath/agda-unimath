@@ -20,8 +20,9 @@ open import type-theories.precategories-with-attributes
 ## Idea
 
 A [precategory with attributes](type-theories.precategories-with-attributes.md)
-`𝒯` is said to have **Π-types** if it comes equipped with the following
-structure:
+`𝒯` is said to have
+{{#concept "Π-types" Disambiguation="precategory with attributes" Agda=Π-structure-Precategory-With-Attributes}}
+if it comes equipped with the following structure:
 
 - An operation `Π : (A : Ty Γ) → Ty (ext Γ A) → Ty Γ` for every context `Γ`,
 - A family of equivalences `Tm Γ (Π A B) ≃ Tm (ext Γ A) B`,
