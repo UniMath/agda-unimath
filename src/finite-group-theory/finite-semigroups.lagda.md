@@ -42,7 +42,7 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 ## Idea
 
 {{#concept "Finite semigroups" Agda=Finite-Semigroup}} are
-[semigroups](group-theory.semigroups.md) whose the underlying type is
+[semigroups](group-theory.semigroups.md) whose underlying type is
 [finite](univalent-combinatorics.finite-types.md).
 
 ## Definitions

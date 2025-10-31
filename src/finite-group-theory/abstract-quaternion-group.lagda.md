@@ -34,8 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The
-{{#concept "abstract quaternion group of order 8" WD="quaternion group" WDID=Q1335680 Agda=Q8-Group}}
+The [abstract](group-theory.groups.md)
+{{#concept "quaternion group of order 8" Disambiguation="abstract" WD="quaternion group" WDID=Q1335680 Agda=Q8-Group}}
 is the [group](group-theory.groups.md) of the quaternions `1`, `-1`, `i`, `-i`,
 `j`, `-j`, `k`, and `-k`.
 

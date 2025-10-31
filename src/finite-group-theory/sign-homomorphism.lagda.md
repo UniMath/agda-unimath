@@ -51,7 +51,7 @@ The
 of a [permutation](finite-group-theory.permutations.md) is defined as the parity
 of the length of the decomposition of the permutation into
 [transpositions](finite-group-theory.transpositions.md). We show that each such
-decomposition has the same parity, so the sign map is well defined. We then show
+decomposition has the same parity, so the sign map is well-defined. We then show
 that the sign map is a
 [group homomorphism](group-theory.homomorphisms-groups.md).
 
