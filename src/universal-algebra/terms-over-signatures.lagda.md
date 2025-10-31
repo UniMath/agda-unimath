@@ -102,7 +102,8 @@ module _
 
   eval-tuple-term :
     {l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model-of-signature-type σ A → assignment σ A → tuple (term σ) n → tuple A n
+    is-model-of-signature-type σ A →
+    assignment σ A → tuple (term σ) n → tuple A n
 
   eval-term m assign (var-term n) = assign n
   eval-term m assign (op-term f x) = m f (eval-tuple-term m assign x)
