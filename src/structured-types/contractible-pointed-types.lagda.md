@@ -16,6 +16,12 @@ open import structured-types.pointed-types
 
 </details>
 
+## Idea
+
+A {{#concept "contractible pointed type" Agda=is-contr-Pointed-Type}} is a
+[pointed type](structured-types.pointed-types.md) that is
+[contractible](foundation-core.contractible-types.md).
+
 ## Definition
 
 ```agda

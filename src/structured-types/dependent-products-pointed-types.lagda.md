@@ -18,9 +18,11 @@ open import structured-types.pointed-types
 ## Idea
 
 Given a family of [pointed types](structured-types.pointed-types.md) `Mᵢ`
-indexed by `i : I`, the dependent product `Π(i : I), Mᵢ` is a pointed type
-consisting of dependent functions taking `i : I` to an element of the underlying
-type of `Mᵢ`. The base point is given pointwise.
+indexed by `i : I`, the
+{{#concept "dependent product" Disambiguation="pointed type" Agda=Π-Pointed-Type}}
+`Π(i : I), Mᵢ` is a pointed type consisting of dependent functions taking
+`i : I` to an element of the underlying type of `Mᵢ`. The base point is given
+pointwise.
 
 ## Definition
 
