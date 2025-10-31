@@ -18,8 +18,9 @@ open import trees.w-types
 
 ## Idea
 
-We define by induction a type family over `𝕎 A B` in a way that generalizes the
-construction of the
+We define by induction the
+{{#concept "type family of lower elements" Disambiguation="over a W-type" Agda=lower-𝕎}}
+over `𝕎 A B`. These generalize the construction of the
 [standard finite types](univalent-combinatorics.standard-finite-types.md) over
 the [natural numbers](elementary-number-theory.natural-numbers.md) to arbitrary
 [W-types](trees.w-types.md).
