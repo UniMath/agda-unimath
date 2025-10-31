@@ -762,3 +762,99 @@ module _
     ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space M ,
       is-isometry-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space)
 ```
+
+### The action of short maps on Cauchy approximations is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-function-Pseudometric-Space A B)
+  where
+
+  is-short-map-short-function-cauchy-approximation-Pseudometric-Space :
+    is-short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( map-short-function-cauchy-approximation-Pseudometric-Space A B f)
+  is-short-map-short-function-cauchy-approximation-Pseudometric-Space
+    d x y Nxy α β =
+    is-short-map-short-function-Pseudometric-Space A B f
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( map-cauchy-approximation-Pseudometric-Space A x α)
+      ( map-cauchy-approximation-Pseudometric-Space A y β)
+      ( Nxy α β)
+
+  short-map-short-function-cauchy-approximation-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+  short-map-short-function-cauchy-approximation-Pseudometric-Space =
+    ( map-short-function-cauchy-approximation-Pseudometric-Space A B f ,
+      is-short-map-short-function-cauchy-approximation-Pseudometric-Space)
+```
+
+### The pointwise image of a Cauchy approximation in a pseudometric space by the inclusion in its Cauchy pseudocompletion is convergent
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space M)
+  where
+
+  is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( map-short-function-cauchy-approximation-Pseudometric-Space
+        ( M)
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( u))
+      ( u)
+  is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space
+    ε δ α β =
+    symmetric-neighborhood-Pseudometric-Space M
+      ( (α +ℚ⁺ β) +ℚ⁺ (ε +ℚ⁺ δ))
+      ( map-cauchy-approximation-Pseudometric-Space M u β)
+      ( map-cauchy-approximation-Pseudometric-Space M u ε)
+      ( monotonic-neighborhood-Pseudometric-Space M
+        ( map-cauchy-approximation-Pseudometric-Space M u β)
+        ( map-cauchy-approximation-Pseudometric-Space M u ε)
+        ( β +ℚ⁺ ε)
+        ( (α +ℚ⁺ β) +ℚ⁺ (ε +ℚ⁺ δ))
+        ( preserves-le-add-ℚ
+          { rational-ℚ⁺ β}
+          { rational-ℚ⁺ (α +ℚ⁺ β)}
+          { rational-ℚ⁺ ε}
+          { rational-ℚ⁺ (ε +ℚ⁺ δ)}
+          ( le-right-add-ℚ⁺ α β)
+          ( le-left-add-ℚ⁺ ε δ))
+        ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+          ( M)
+          ( u)
+          ( β)
+          ( ε)))
+
+  sim-map-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space M))
+      ( map-short-function-cauchy-approximation-Pseudometric-Space
+        ( M)
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( u))
+      ( map-cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( u))
+  sim-map-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space =
+    sim-const-is-limit-cauchy-approximation-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( map-short-function-cauchy-approximation-Pseudometric-Space
+        ( M)
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( u))
+      ( u)
+      ( is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space)
+```
