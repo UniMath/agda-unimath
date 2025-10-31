@@ -127,7 +127,7 @@ module _
         ( p'))
 
   is-model-set-quotient-Algebra :
-    is-model σ set-quotient-Algebra
+    is-model-of-signature σ set-quotient-Algebra
   is-model-set-quotient-Algebra op v =
     multivariable-map-set-quotient
       ( arity-operation-signature σ op)

@@ -47,8 +47,9 @@ of `A`.
 ### The predicate on a type of being a model
 
 ```agda
-is-model-type : {l1 l2 : Level} → signature l1 → UU l2 → UU (l1 ⊔ l2)
-is-model-type σ X =
+is-model-of-signature-type :
+  {l1 l2 : Level} → signature l1 → UU l2 → UU (l1 ⊔ l2)
+is-model-of-signature-type σ X =
   (f : operation-signature σ) →
   tuple X (arity-operation-signature σ f) → X
 ```
@@ -56,14 +57,14 @@ is-model-type σ X =
 ### The predicate on a set of being a model
 
 ```agda
-is-model : {l1 l2 : Level} → signature l1 → Set l2 → UU (l1 ⊔ l2)
-is-model σ X = is-model-type σ (type-Set X)
+is-model-of-signature : {l1 l2 : Level} → signature l1 → Set l2 → UU (l1 ⊔ l2)
+is-model-of-signature σ X = is-model-of-signature-type σ (type-Set X)
 ```
 
 ```agda
 Model-Of-Signature :
   {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
-Model-Of-Signature l2 σ = Σ (Set l2) (is-model σ)
+Model-Of-Signature l2 σ = Σ (Set l2) (is-model-of-signature σ)
 
 module _
   {l1 l2 : Level} (σ : signature l1) (X : Model-Of-Signature l2 σ)
@@ -72,7 +73,8 @@ module _
   set-Model-Of-Signature : Set l2
   set-Model-Of-Signature = pr1 X
 
-  is-model-set-Model-Of-Signature : is-model σ set-Model-Of-Signature
+  is-model-set-Model-Of-Signature :
+    is-model-of-signature σ set-Model-Of-Signature
   is-model-set-Model-Of-Signature = pr2 X
 
   type-Model-Of-Signature : UU l2

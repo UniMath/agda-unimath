@@ -81,7 +81,7 @@ module _
   set-Algebra : Set l3
   set-Algebra = set-Model-Of-Signature σ model-Algebra
 
-  is-model-set-Algebra : is-model σ set-Algebra
+  is-model-set-Algebra : is-model-of-signature σ set-Algebra
   is-model-set-Algebra = is-model-set-Model-Of-Signature σ model-Algebra
 
   type-Algebra : UU l3

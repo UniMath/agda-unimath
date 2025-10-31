@@ -52,7 +52,7 @@ module _
 
   data term : UU l1 where
     var-term : ℕ → term
-    op-term : is-model-type σ term
+    op-term : is-model-of-signature-type σ term
 
   de-bruijn-variables-term : term → list ℕ
 
@@ -98,23 +98,25 @@ module _
 
   eval-term :
     {l2 : Level} → {A : UU l2} →
-    is-model-type σ A → assignment σ A → term σ → A
+    is-model-of-signature-type σ A → assignment σ A → term σ → A
 
-  eval-tuple :
+  eval-tuple-term :
     {l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model-type σ A → assignment σ A → tuple (term σ) n → tuple A n
+    is-model-of-signature-type σ A → assignment σ A → tuple (term σ) n → tuple A n
 
   eval-term m assign (var-term n) = assign n
-  eval-term m assign (op-term f x) = m f (eval-tuple m assign x)
+  eval-term m assign (op-term f x) = m f (eval-tuple-term m assign x)
 
-  eval-tuple m assign empty-tuple = empty-tuple
-  eval-tuple m assign (x ∷ v) =
-    eval-term m assign x ∷ (eval-tuple m assign v)
+  eval-tuple-term m assign empty-tuple = empty-tuple
+  eval-tuple-term m assign (x ∷ v) =
+    eval-term m assign x ∷ (eval-tuple-term m assign v)
 
   eval-tuple-map-tuple-eval-term :
     {l2 : Level} {A : UU l2} {n : ℕ} →
-    (m : is-model-type σ A) (assign : assignment σ A) (v : tuple (term σ) n) →
-    eval-tuple m assign v ＝ map-tuple (eval-term m assign) v
+    (m : is-model-of-signature-type σ A)
+    (assign : assignment σ A)
+    (v : tuple (term σ) n) →
+    eval-tuple-term m assign v ＝ map-tuple (eval-term m assign) v
   eval-tuple-map-tuple-eval-term m assign empty-tuple = refl
   eval-tuple-map-tuple-eval-term m assign (x ∷ v) =
     ap (eval-term m assign x ∷_) (eval-tuple-map-tuple-eval-term m assign v)
@@ -132,20 +134,20 @@ module _
 
   eval-constant-term :
     {l2 : Level} {A : UU l2} →
-    is-model-type σ A →
+    is-model-of-signature-type σ A →
     (t : term σ) →
     (de-bruijn-variables-term σ t ＝ nil) →
     A
 
-  eval-constant-term-tuple :
+  eval-constant-tuple-term :
     {l2 : Level} {A : UU l2} {n : ℕ} →
-    (is-model-type σ A) →
+    (is-model-of-signature-type σ A) →
     (v : tuple (term σ) n) →
     (all-tuple (λ t → is-nil-list (de-bruijn-variables-term σ t)) v) →
     tuple A n
 
   eval-constant-term m (op-term f x) p =
-    m f (eval-constant-term-tuple m x (all-tuple-lemma x p))
+    m f (eval-constant-tuple-term m x (all-tuple-lemma x p))
     where
     all-tuple-lemma :
       { n : ℕ}
@@ -164,9 +166,9 @@ module _
           ( de-bruijn-variables-term σ x)
           ( de-bruijn-variables-term-tuple σ v)
 
-  eval-constant-term-tuple m empty-tuple p = empty-tuple
-  eval-constant-term-tuple m (x ∷ v) (p , p') =
-    eval-constant-term m x p ∷ eval-constant-term-tuple m v p'
+  eval-constant-tuple-term m empty-tuple p = empty-tuple
+  eval-constant-tuple-term m (x ∷ v) (p , p') =
+    eval-constant-term m x p ∷ eval-constant-tuple-term m v p'
 ```
 
 ### The induced function by a term on a model
@@ -189,7 +191,7 @@ module _
 
   induced-function-term :
     {l2 : Level} → {A : UU l2} →
-    is-model-type σ A → (t : term σ) →
+    is-model-of-signature-type σ A → (t : term σ) →
     tuple A (arity-term σ t) → A
   induced-function-term {l2} {A} m t v with
     ( has-decidable-equality-list
@@ -228,19 +230,20 @@ module _
 
   translation-term : term σ → term τ
 
-  translation-tuple : {n : ℕ} → tuple (term σ) n → tuple (term τ) n
+  translation-tuple-term : {n : ℕ} → tuple (term σ) n → tuple (term τ) n
 
-  translation-term (var-term x) = var-term x
+  translation-term (var-term x) =
+    var-term x
   translation-term (op-term f v) =
     op-term
       ( inclusion-is-extension-of-signature σ τ E f)
       ( tr
         ( tuple (term τ))
         ( preserves-arity-inclusion-is-extension-of-signature σ τ E f)
-        ( translation-tuple v))
+        ( translation-tuple-term v))
 
-  translation-tuple empty-tuple =
+  translation-tuple-term empty-tuple =
     empty-tuple
-  translation-tuple (x ∷ v) =
-    (translation-term x) ∷ (translation-tuple v)
+  translation-tuple-term (x ∷ v) =
+    (translation-term x) ∷ (translation-tuple-term v)
 ```
