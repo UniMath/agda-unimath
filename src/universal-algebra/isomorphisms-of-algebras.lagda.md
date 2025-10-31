@@ -1,8 +1,6 @@
 # Isomorphisms of algebras of theories
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.isomorphisms-of-algebras where
 ```
 
@@ -60,6 +58,30 @@ We characterize
 
 ## Definitions
 
+### Isomorphisms of algebras
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T) (B : Algebra l4 σ T)
+  where
+
+  is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3 ⊔ l4)
+  is-iso-Algebra f =
+    is-iso-Large-Precategory (Algebra-Large-Precategory σ T) {X = A} {Y = B} f
+
+  iso-Algebra : UU (l1 ⊔ l3 ⊔ l4)
+  iso-Algebra = iso-Large-Precategory (Algebra-Large-Precategory σ T) A B
+
+  is-prop-is-iso-Algebra :
+    (f : hom-Algebra σ T A B) → is-prop (is-iso-Algebra f)
+  is-prop-is-iso-Algebra =
+    is-prop-is-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
+```
+
 ### The property that a homomorphism of algebras is an equivalence
 
 ```agda
@@ -98,7 +120,9 @@ module _
     equiv-Model σ (model-Algebra σ T A) (model-Algebra σ T B)
 ```
 
-### The inverse of an equivalence of algebras
+## Properties
+
+### The inverse of an equivalence of algebras preserves the operations
 
 ```agda
 module _
@@ -111,34 +135,35 @@ module _
   (eq : is-equiv (map-hom-Algebra σ T A B f))
   where
 
-  preserves-operations-map-hom-inv-is-equiv-hom-Algebra :
-    preserves-operations-Algebra σ T B A
-      (map-inv-equiv ((map-hom-Algebra σ T A B f) , eq))
-  preserves-operations-map-hom-inv-is-equiv-hom-Algebra op v =
-    is-injective-is-equiv eq
-      ( is-section-map-inv-is-equiv eq
-        ( is-model-set-Algebra σ T B op v) ∙
-          ( ap
-            ( is-model-set-Algebra σ T B op)
-            ( eq-Eq-tuple
-              ( arity-operation-signature σ op)
-              ( v)
-              ( map-tuple
-                ( map-hom-Algebra σ T A B f)
-                ( map-tuple (map-inv-is-equiv eq) v))
-              ( eq2 (arity-operation-signature σ op) v)) ∙
-            ( inv
-              ( preserves-operations-hom-Algebra σ T A B f op
-                ( map-tuple (map-inv-is-equiv eq) v)))))
-    where
-    eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
-      Eq-tuple n w
-        ( map-tuple
-          ( map-hom-Algebra σ T A B f)
-          ( map-tuple (map-inv-is-equiv eq) w))
-    eq2 zero-ℕ empty-tuple = map-raise star
-    pr1 (eq2 (succ-ℕ n) (x ∷ w)) = inv (is-section-map-section-is-equiv eq x)
-    pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
+  abstract
+    preserves-operations-map-hom-inv-is-equiv-hom-Algebra :
+      preserves-operations-Algebra σ T B A
+        (map-inv-equiv ((map-hom-Algebra σ T A B f) , eq))
+    preserves-operations-map-hom-inv-is-equiv-hom-Algebra op v =
+      is-injective-is-equiv eq
+        ( is-section-map-inv-is-equiv eq
+          ( is-model-set-Algebra σ T B op v) ∙
+            ( ap
+              ( is-model-set-Algebra σ T B op)
+              ( eq-Eq-tuple
+                ( arity-operation-signature σ op)
+                ( v)
+                ( map-tuple
+                  ( map-hom-Algebra σ T A B f)
+                  ( map-tuple (map-inv-is-equiv eq) v))
+                ( eq2 (arity-operation-signature σ op) v)) ∙
+              ( inv
+                ( preserves-operations-hom-Algebra σ T A B f op
+                  ( map-tuple (map-inv-is-equiv eq) v)))))
+      where
+      eq2 : (n : ℕ) (w : tuple (type-Algebra σ T B) n) →
+        Eq-tuple n w
+          ( map-tuple
+            ( map-hom-Algebra σ T A B f)
+            ( map-tuple (map-inv-is-equiv eq) w))
+      eq2 zero-ℕ empty-tuple = map-raise star
+      pr1 (eq2 (succ-ℕ n) (x ∷ w)) = inv (is-section-map-section-is-equiv eq x)
+      pr2 (eq2 (succ-ℕ n) (x ∷ w)) = eq2 n w
 
   hom-inv-is-equiv-hom-Algebra : hom-Algebra σ T B A
   pr1 hom-inv-is-equiv-hom-Algebra =
@@ -146,8 +171,6 @@ module _
   pr2 hom-inv-is-equiv-hom-Algebra =
     preserves-operations-map-hom-inv-is-equiv-hom-Algebra
 ```
-
-## Properties
 
 ### Equivalences characterize equality of algebras
 
@@ -197,29 +220,17 @@ module _
   eq-equiv-Algebra A B = map-inv-equiv (extensionality-Algebra A B)
 ```
 
-### Characterizing isomorphisms of algebras
+### Equivalence of isomorphisms and equivalences
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory l2 σ) (A B : Algebra l3 σ T)
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T) (B : Algebra l4 σ T)
   where
-
-  is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3)
-  is-iso-Algebra f =
-    is-iso-Large-Precategory (Algebra-Large-Precategory σ T) {X = A} {Y = B} f
-
-  iso-Algebra : UU (l1 ⊔ l3)
-  iso-Algebra = iso-Large-Precategory (Algebra-Large-Precategory σ T) A B
-
-  is-prop-is-iso-Algebra :
-    (f : hom-Algebra σ T A B) → is-prop (is-iso-Algebra f)
-  is-prop-is-iso-Algebra =
-    is-prop-is-iso-Large-Precategory (Algebra-Large-Precategory σ T)
 
   is-equiv-hom-is-iso-Algebra :
     (f : hom-Algebra σ T A B) →
-    is-iso-Algebra f →
+    is-iso-Algebra σ T A B f →
     is-equiv-hom-Algebra σ T A B f
   is-equiv-hom-is-iso-Algebra f (g , (p , q)) =
     is-equiv-is-invertible
@@ -264,33 +275,37 @@ module _
   is-iso-is-equiv-hom-Algebra :
     (f : hom-Algebra σ T A B) →
     is-equiv-hom-Algebra σ T A B f →
-    is-iso-Algebra f
+    is-iso-Algebra σ T A B f
   is-iso-is-equiv-hom-Algebra f eq =
     ( hom-inv-is-equiv-hom-Algebra σ T A B f eq ,
       is-split-mono-is-equiv-hom-Algebra f eq ,
       is-split-epi-is-equiv-hom-Algebra f eq)
 
-  equiv-iso-equiv-Algebra : equiv-Algebra σ T A B ≃ iso-Algebra
+  equiv-iso-equiv-Algebra : equiv-Algebra σ T A B ≃ iso-Algebra σ T A B
   equiv-iso-equiv-Algebra =
     ( equiv-type-subtype
       ( is-prop-is-equiv-hom-Algebra σ T A B)
-      ( is-prop-is-iso-Algebra)
+      ( is-prop-is-iso-Algebra σ T A B)
       ( is-iso-is-equiv-hom-Algebra)
       ( is-equiv-hom-is-iso-Algebra)) ∘e
     ( equiv-right-swap-Σ)
 
-  iso-equiv-Algebra : equiv-Algebra σ T A B → iso-Algebra
+  iso-equiv-Algebra : equiv-Algebra σ T A B → iso-Algebra σ T A B
   iso-equiv-Algebra = map-equiv equiv-iso-equiv-Algebra
 
   is-equiv-iso-equiv-Algebra : is-equiv iso-equiv-Algebra
   is-equiv-iso-equiv-Algebra = is-equiv-map-equiv equiv-iso-equiv-Algebra
+```
 
+### Isomorphisms characterize equality of algebras
+
+```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
   (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where abstract
 
-  is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)
+  is-torsorial-iso-Algebra : is-torsorial (iso-Algebra {l4 = l3} σ T A)
   is-torsorial-iso-Algebra =
     is-contr-equiv'
       ( Σ (Algebra l3 σ T) (equiv-Algebra σ T A))
