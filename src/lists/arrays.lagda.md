@@ -37,9 +37,10 @@ open import univalent-combinatorics.standard-finite-types
 
 An
 {{#concept "array" WD="array data type" WDID=Q121079 WD="list" WDID=Q27948 Agda=array}}
-is a pair of a [natural number](elementary-number-theory.natural-numbers.md)
-`n`, and a length `n` [finite sequence](lists.finite-sequences.md) of elements
-of a type. We show that arrays and [lists](lists.lists.md) are
+is a [pair](foundation.dependent-pair-types.md) of a
+[natural number](elementary-number-theory.natural-numbers.md) `n`, and a length
+`n` [finite sequence](lists.finite-sequences.md) of elements of a type. We show
+that arrays and [lists](lists.lists.md) are
 [equivalent](foundation-core.equivalences.md).
 
 ## Definitions
