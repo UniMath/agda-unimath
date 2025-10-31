@@ -52,8 +52,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite ring `A` is said to be **commutative** if its multiplicative operation
-is commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
+A [finite ring](finite-algebra.finite-rings.md) `A` is said to be
+{{#concept "commutative" Disambiguation="finite ring" Agda=is-commutative-Finite-Ring Agda=Finite-Commutative-Ring}}
+if its multiplicative operation is commutative, i.e., if `xy = yx` for all
+`x, y ∈ A`.
 
 ## Definition
 
