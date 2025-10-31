@@ -28,8 +28,8 @@ open import group-theory.homomorphisms-groups
 open import ring-theory.homomorphisms-rings
 open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.nontrivial-rings
 open import ring-theory.rings
-open import ring-theory.trivial-rings
 ```
 
 </details>

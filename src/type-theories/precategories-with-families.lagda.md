@@ -32,7 +32,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **precategory with families** consists of:
+A {{#concept "precategory with families" Agda=Precategory-With-Families}}
+consists of:
 
 - a [precategory](category-theory.precategories.md) `C`, which we think of as a
   category of contexts and context morphisms

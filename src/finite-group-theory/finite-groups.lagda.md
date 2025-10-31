@@ -60,8 +60,9 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 ## Idea
 
-An {{#concept "(abstract) finite group" Agda=Finite-Group}} is a finite group in
-the usual algebraic sense, i.e., it consists of a
+An
+{{#concept "(abstract) finite group" WD="finite group" WDID=Q1057968 Agda=Finite-Group}}
+is a finite group in the usual algebraic sense, i.e., it consists of a
 [finite type](univalent-combinatorics.finite-types.md)
 [equipped](foundation.structure.md) with a unit element `e`, a binary operation
 `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the

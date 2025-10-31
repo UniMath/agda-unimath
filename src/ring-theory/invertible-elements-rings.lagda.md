@@ -29,14 +29,14 @@ open import ring-theory.rings
 
 ## Idea
 
-**Invertible elements** in a [ring](ring-theory.rings.md) are elements that have
-a two-sided multiplicative inverse. Such elements are also called the
-**(multiplicative) units** of the ring.
+{{#concept "Invertible elements" Disambiguation="of a ring" Agda=is-invertible-element-Ring}}
+of a [ring](ring-theory.rings.md) are elements that have a two-sided
+multiplicative inverse. Such elements are also called the **(multiplicative)
+units** of the ring.
 
 The [set](foundation.sets.md) of units of any ring forms a
-[group](group-theory.groups.md), called the
-[group of units](ring-theory.groups-of-units-rings.md). The group of units of a
-ring is constructed in
+[group](group-theory.groups.md), called the _group of units_. The group of units
+of a ring is constructed in
 [`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
 
 ## Definitions

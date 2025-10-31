@@ -1,3 +1,4 @@
+Ahda->Agda
 Kratowski->Kuratowski
 Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
@@ -25,6 +26,7 @@ conisists->consists
 conisistsed->consisted
 conisistsing->consisting
 consistsed->consisted
+conceot->concept
 consistsing->consisting
 eacy->each,easy
 embeddding->embedding
@@ -72,3 +74,5 @@ morhpsims->morphisms
 morphsim->morphism
 morphsims->morphisms
 outout->output
+ringr->ring
+ringrs->rings

@@ -20,9 +20,11 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-The **intersection** of two [ideals](ring-theory.ideals-semirings.md) of a
-[semiring](ring-theory.semirings.md) consists of the elements contained in both
-of them.
+The
+{{#concept "intersection" Disambiguation="of two ideals in a semiring" Agda=intersection-ideal-Semiring}}
+of two [ideals](ring-theory.ideals-semirings.md) in a
+[semiring](ring-theory.semirings.md) `R` consists of the elements contained in
+both of them.
 
 ## Definition
 
