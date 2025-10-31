@@ -41,11 +41,11 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
-open import universal-algebra.equivalences-of-models-of-signatures
+open import universal-algebra.algebras-of-algebraic-theories
+open import universal-algebra.equivalences-models-of-signatures
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
-open import universal-algebra.precategory-of-algebras-of-theories
+open import universal-algebra.precategory-of-algebras-algebraic-theories
 open import universal-algebra.signatures
 ```
 
@@ -55,7 +55,8 @@ open import universal-algebra.signatures
 
 We characterize
 [isomorphisms](category-theory.isomorphisms-in-large-precategories.md) of
-[algebras of theories](universal-algebra.precategory-of-algebras-of-theories.md).
+[algebras](universal-algebra.precategory-of-algebras-algebraic-theories.md) of
+[algebraic theories](universal-algebra.algebraic-theories.md).
 
 ## Definitions
 
@@ -65,7 +66,7 @@ We characterize
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   where
@@ -89,7 +90,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 l3 l4 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
   where
 
   equiv-Algebra : (A : Algebra σ T l3) (B : Algebra σ T l4) → UU (l1 ⊔ l3 ⊔ l4)
@@ -103,7 +104,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   (f : hom-Algebra σ T A B)
@@ -152,7 +153,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
   where
 
   equiv-eq-Algebra :
@@ -196,7 +197,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
   where
 
   equiv-equiv-hom-Algebra' :
@@ -216,7 +218,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A B : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory σ l2) (A B : Algebra σ T l3)
   where
 
   is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3)
@@ -301,7 +304,8 @@ module _
   is-equiv-iso-equiv-Algebra = is-equiv-map-equiv equiv-iso-equiv-Algebra
 
 module _
-  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
   where abstract
 
   is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)

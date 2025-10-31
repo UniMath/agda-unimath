@@ -22,7 +22,7 @@ open import group-theory.groups
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -32,8 +32,8 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 There is an
-{{#concept "algebraic theory of groups" Disambiguation=theory-Group}}. The type
-of all such [algebras](universal-algebra.algebras-of-theories.md) is
+{{#concept "algebraic theory of groups" Agda=algebraic-theory-Group}}. The type
+of all such [algebras](universal-algebra.algebras-of-algebraic-theories.md) is
 [equivalent](foundation-core.equivalences.md) to the type of
 [groups](group-theory.groups.md).
 
@@ -58,9 +58,9 @@ data group-laws : UU lzero where
   idl-l-group-laws : group-laws
   idr-r-group-laws : group-laws
 
-theory-Group : Theory group-signature lzero
-pr1 theory-Group = group-laws
-pr2 theory-Group =
+algebraic-theory-Group : Algebraic-Theory group-signature lzero
+pr1 algebraic-theory-Group = group-laws
+pr2 algebraic-theory-Group =
   λ where
   associative-l-group-laws →
     ( op mul-group-op
@@ -84,11 +84,11 @@ pr2 theory-Group =
     ( op mul-group-op (var 0 ∷ op unit-group-op empty-tuple ∷ empty-tuple)) ,
     ( var 0)
     where
-    op = op-Term
-    var = var-Term
+    op = op-term
+    var = var-term
 
 algebra-Group : (l : Level) → UU (lsuc l)
-algebra-Group l = Algebra group-signature theory-Group l
+algebra-Group l = Algebra group-signature algebraic-theory-Group l
 ```
 
 ## Properties
@@ -97,9 +97,7 @@ algebra-Group l = Algebra group-signature theory-Group l
 
 ```agda
 group-algebra-Group :
-  {l : Level} →
-  Algebra group-signature theory-Group l →
-  Group l
+  {l : Level} → algebra-Group l → Group l
 pr1 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A))) = A-Set
 pr1 (pr2 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x y =
   models-A mul-group-op (x ∷ y ∷ empty-tuple)
@@ -120,13 +118,11 @@ pr2 (pr2 (pr2 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
   satisfies-A invr-r-group-laws (λ _ → x)
 
 algebra-group-Group :
-  {l : Level} →
-  Group l →
-  Algebra group-signature theory-Group l
+  {l : Level} → Group l → algebra-Group l
 algebra-group-Group G =
   pair
     ( pair
-      ( ( set-Group G))
+      ( set-Group G)
       ( λ where
         unit-group-op v → unit-Group G
         mul-group-op (x ∷ y ∷ empty-tuple) → mul-Group G x y
@@ -145,9 +141,7 @@ algebra-group-Group G =
 
 abstract
   equiv-group-algebra-Group :
-    {l : Level} →
-    Algebra group-signature theory-Group l ≃
-    Group l
+    {l : Level} → algebra-Group l ≃ Group l
   pr1 equiv-group-algebra-Group = group-algebra-Group
   pr1 (pr1 (pr2 equiv-group-algebra-Group)) = algebra-group-Group
   pr2 (pr1 (pr2 equiv-group-algebra-Group)) G =
@@ -164,6 +158,6 @@ abstract
             inv-group-op → eq-htpy (λ where (x ∷ empty-tuple) → refl))))
       ( eq-is-prop
         ( is-prop-is-algebra
-          ( group-signature) ( theory-Group)
-          ( model-Algebra group-signature theory-Group A)))
+          ( group-signature) ( algebraic-theory-Group)
+          ( model-Algebra group-signature algebraic-theory-Group A)))
 ```

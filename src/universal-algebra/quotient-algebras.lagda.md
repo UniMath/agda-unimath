@@ -27,7 +27,7 @@ open import foundation.universe-levels
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.congruences
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
@@ -38,8 +38,8 @@ open import universal-algebra.signatures
 ## Idea
 
 The
-{{#concept "quotient" Disambiguation="of an algebra" WD="quotient algebra" WDID=Q2589508}}
-of an [algebra](universal-algebra.algebras-of-theories.md) by a
+{{#concept "quotient" Disambiguation="of an algebra of an algebraic theory" WD="quotient algebra" WDID=Q2589508}}
+of an [algebra](universal-algebra.algebras-of-algebraic-theories.md) by a
 [congruence](universal-algebra.congruences.md) is the
 [set quotient](foundation.set-quotients.md) by that congruence. This quotient
 again has the structure of an algebra inherited by the original one.
@@ -50,7 +50,7 @@ again has the structure of an algebra inherited by the original one.
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (R : congruence-Algebra σ T A l4)
   where
@@ -105,15 +105,16 @@ module _
   relation-holds-all-tuple-all-sim-equivalence-relation :
     {n : ℕ}
     (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
-    (type-Prop
-      (prop-equivalence-relation
-        (all-sim-equivalence-relation n
-          (λ _ → type-Algebra σ T A)
-          (λ _ → equivalence-relation-congruence-Algebra σ T A R)) v v')) →
+    sim-equivalence-relation
+      ( all-sim-equivalence-relation n
+        ( λ _ → type-Algebra σ T A)
+        ( λ _ → equivalence-relation-congruence-Algebra σ T A R))
+      ( v)
+      ( v') →
     relation-holds-all-tuple σ T A
-      (equivalence-relation-congruence-Algebra σ T A R)
-      (tuple-multivariable-input n (type-Algebra σ T A) v)
-      (tuple-multivariable-input n (type-Algebra σ T A) v')
+      ( equivalence-relation-congruence-Algebra σ T A R)
+      ( tuple-multivariable-input n (type-Algebra σ T A) v)
+      ( tuple-multivariable-input n (type-Algebra σ T A) v')
   relation-holds-all-tuple-all-sim-equivalence-relation {zero-ℕ} v v' p =
     raise-star
   relation-holds-all-tuple-all-sim-equivalence-relation

@@ -20,8 +20,8 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 An {{#concept "abstract equation" Agda=abstract-equation}} over a
-[signature](universal-algebra.signatures.md) `σ` is a statement of the form "`x`
-equals `y`", where `x` and `y` are
+[(finitary) signature](universal-algebra.signatures.md) `σ` is a statement of
+the form "`x` equals `y`", where `x` and `y` are
 [terms](universal-algebra.terms-over-signatures.md) over `σ`. Thus, the data of
 an abstract equation is simply two terms over a common signature.
 
@@ -35,11 +35,11 @@ module _
   where
 
   abstract-equation : UU l1
-  abstract-equation = Term σ × Term σ
+  abstract-equation = term σ × term σ
 
-  lhs-abstract-equation : abstract-equation → Term σ
+  lhs-abstract-equation : abstract-equation → term σ
   lhs-abstract-equation = pr1
 
-  rhs-abstract-equation : abstract-equation → Term σ
+  rhs-abstract-equation : abstract-equation → term σ
   rhs-abstract-equation = pr2
 ```

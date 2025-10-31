@@ -21,7 +21,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.congruences
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.signatures
@@ -32,9 +32,9 @@ open import universal-algebra.signatures
 ## Idea
 
 The
-{{#concept "kernel" Disambiguation="of a homomorphism of algebras" WD="kernel" WDID=Q574844 Agda=kernel-hom-Algebra}}
+{{#concept "kernel" Disambiguation="of a homomorphism of algebras of an algebraic theory, single-sorted, finitary" WD="kernel" WDID=Q574844 Agda=kernel-hom-Algebra}}
 of a [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `f` of
-[algebras](universal-algebra.algebras-of-theories.md) is the
+[algebras](universal-algebra.algebras-of-algebraic-theories.md) is the
 [congruence relation](universal-algebra.congruences.md) given by `x ~ y` iff
 `f x ~ f y`.
 
@@ -44,7 +44,7 @@ of a [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `f` of
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   (F : hom-Algebra σ T A B)

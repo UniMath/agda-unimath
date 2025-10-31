@@ -30,7 +30,7 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 ```
@@ -40,8 +40,9 @@ open import universal-algebra.signatures
 ## Idea
 
 An
-{{#concept "algebra homomorphism" WD="homomorphism" WDID=Q215111 Agda=hom-Algebra}}
-from one [algebra](universal-algebra.algebras-of-theories.md) to another is a
+{{#concept "algebra homomorphism" Disambiguation="algebraic theory, single-sorted, finitary" WD="homomorphism" WDID=Q215111 Agda=hom-Algebra}}
+from one [algebra](universal-algebra.algebras-of-algebraic-theories.md) of an
+[algebraic theory](universal-algebra.algebraic-theories.md) to another is a
 function between their underlying types such that all the structure is
 preserved.
 
@@ -51,7 +52,7 @@ preserved.
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   where
@@ -105,7 +106,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   (C : Algebra σ T l5)
@@ -145,7 +146,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   where
@@ -194,7 +195,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
   where
 
   preserves-operations-id-Algebra : preserves-operations-Algebra σ T A A id
@@ -213,7 +215,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   (C : Algebra σ T l5)
@@ -243,7 +245,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
+  (T : Algebraic-Theory σ l2)
   (A : Algebra σ T l3)
   (B : Algebra σ T l4)
   where

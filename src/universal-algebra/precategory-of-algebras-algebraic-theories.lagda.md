@@ -1,7 +1,7 @@
-# The precategory of algebras of an equational theory
+# The precategory of algebras of an algebraic theory
 
 ```agda
-module universal-algebra.precategory-of-algebras-of-theories where
+module universal-algebra.precategory-of-algebras-algebraic-theories where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,7 @@ open import foundation.universe-levels
 open import foundation-core.identity-types
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
@@ -27,10 +27,11 @@ open import universal-algebra.signatures
 
 ## Idea
 
-Given a [theory](universal-algebra.algebraic-theories.md) `T` over a
+Given an [algebraic theory](universal-algebra.algebraic-theories.md) `T` over a
 [signature](universal-algebra.signatures.md) `σ`, we have the
 {{#concept "large precategory of `T`-algebras" Disambiguation="of an equational theory over a signature" Agda=Algebra-Large-Precategory}},
-which consists of `T`-[algebras](universal-algebra.algebras-of-theories.md) and
+which consists of
+`T`-[algebras](universal-algebra.algebras-of-algebraic-theories.md) and
 `T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
 
 ## Definition
@@ -39,7 +40,7 @@ which consists of `T`-[algebras](universal-algebra.algebras-of-theories.md) and
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
   where
 
   Algebra-Large-Precategory :
@@ -60,7 +61,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
   where
 
   Algebra-Precategory : (l3 : Level) → Precategory (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
@@ -70,4 +71,4 @@ module _
 
 ## See also
 
-- [The category of algebras of an equational theory](universal-algebra.category-of-algebras-of-theories.md)
+- [The category of algebras of an equational theory](universal-algebra.category-of-algebras-algebraic-theories.md)

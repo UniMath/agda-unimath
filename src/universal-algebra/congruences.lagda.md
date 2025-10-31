@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras-of-algebraic-theories
 open import universal-algebra.signatures
 ```
 
@@ -28,8 +28,9 @@ open import universal-algebra.signatures
 ## Idea
 
 A
-{{#concept "congruence" WD="congruence relation" WDID=Q8349849 Agda=congruence-Algebra}}
-in an [algebra](universal-algebra.algebras-of-theories.md) is an
+{{#concept "congruence" Disambiguation="in an algebra of an algebraic theory, single-sorted, finitary" WD="congruence relation" WDID=Q8349849 Agda=congruence-Algebra}}
+in an [algebra](universal-algebra.algebras-of-algebraic-theories.md) of an
+[algebraic theory](universal-algebra.algebraic-theories.md) is an
 [equivalence relation](foundation.equivalence-relations.md) that respects all
 operations of the algebra.
 
@@ -37,7 +38,8 @@ operations of the algebra.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (σ : signature l1) (T : Theory σ l2) (A : Algebra σ T l3)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
   where
 
   relation-holds-all-tuple :
@@ -50,7 +52,7 @@ module _
   relation-holds-all-tuple {l4} R {.zero-ℕ} empty-tuple empty-tuple =
     raise-unit l4
   relation-holds-all-tuple {l4} R {.(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
-    ( type-Prop (prop-equivalence-relation R x x')) ×
+    ( sim-equivalence-relation R x x') ×
     ( relation-holds-all-tuple R v v')
 
   preserves-operations :
@@ -59,19 +61,15 @@ module _
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations R =
     ( op : operation-signature σ) →
-    ( v : tuple (type-Algebra σ T A)
-      ( arity-operation-signature σ op)) →
-    ( v' : tuple (type-Algebra σ T A)
-      ( arity-operation-signature σ op)) →
-        ( relation-holds-all-tuple R v v' →
-          ( type-Prop
-            ( prop-equivalence-relation R
-              ( is-model-set-Algebra σ T A op v)
-              ( is-model-set-Algebra σ T A op v'))))
+    ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
+    ( v' : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
+    relation-holds-all-tuple R v v' →
+    sim-equivalence-relation R
+      ( is-model-set-Algebra σ T A op v)
+      ( is-model-set-Algebra σ T A op v')
 
   congruence-Algebra :
-    (l4 : Level) →
-    UU (l1 ⊔ l3 ⊔ lsuc l4)
+    (l4 : Level) → UU (l1 ⊔ l3 ⊔ lsuc l4)
   congruence-Algebra l4 =
     Σ ( equivalence-relation l4 (type-Algebra σ T A))
       ( preserves-operations)

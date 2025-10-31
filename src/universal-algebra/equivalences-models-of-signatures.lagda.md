@@ -1,7 +1,7 @@
 # Equivalences of models of signatures
 
 ```agda
-module universal-algebra.equivalences-of-models-of-signatures where
+module universal-algebra.equivalences-models-of-signatures where
 ```
 
 <details><summary>Imports</summary>
@@ -44,7 +44,7 @@ open import universal-algebra.signatures
 
 We characterize [equivalences](foundation-core.equivalences.md) of
 [models](universal-algebra.models-of-signatures.md) of
-[signatures](universal-algebra.signatures.md).
+[(finitary) signatures](universal-algebra.signatures.md).
 
 ## Definitions
 
@@ -92,55 +92,27 @@ module _
 
 ## Properties
 
-### Characterizing equality of model structures on a fixed set
+### Characterizing equality of model structures on a set
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (X : Set l2)
+  {l1 l2 : Level} (σ : signature l1) {X : UU l2}
   where
 
-  htpy-is-model :
-    (f g : is-model σ X) → UU (l1 ⊔ l2)
-  htpy-is-model f g =
-    preserves-operations-Model-Signature σ (X , f) (X , g) id
-
-  abstract
-    is-prop-htpy-is-model :
-      (f g : is-model σ X) →
-      is-prop (htpy-is-model f g)
-    is-prop-htpy-is-model f g =
-      is-prop-Π
-        ( λ op →
-          is-prop-Π
-            ( λ v → is-set-type-Set X (f op v) (g op (map-tuple id v))))
-
-  htpy-prop-is-model :
-    (f g : is-model σ X) → Prop (l1 ⊔ l2)
-  htpy-prop-is-model f g =
-    ( htpy-is-model f g ,
-      is-prop-htpy-is-model f g)
-
-  htpy-is-model' :
-    (f g : is-model σ X) → UU (l1 ⊔ l2)
+  htpy-is-model' : (f g : is-model-type σ X) → UU (l1 ⊔ l2)
   htpy-is-model' f g =
+    ( op : operation-signature σ)
+    ( v : tuple X (arity-operation-signature σ op)) →
+    f op v ＝ g op (map-tuple id v)
+
+  htpy-is-model :
+    (f g : is-model-type σ X) → UU (l1 ⊔ l2)
+  htpy-is-model f g =
     (op : operation-signature σ) → f op ~ g op
 
-  abstract
-    is-prop-htpy-is-model' :
-      (f g : is-model σ X) →
-      is-prop (htpy-is-model' f g)
-    is-prop-htpy-is-model' f g =
-      is-prop-Π (λ op → is-prop-Π (λ v → is-set-type-Set X (f op v) (g op v)))
-
-  htpy-prop-is-model-type :
-    (f g : is-model σ X) → Prop (l1 ⊔ l2)
-  htpy-prop-is-model-type f g =
-    ( htpy-is-model' f g ,
-      is-prop-htpy-is-model' f g)
-
   compute-htpy-is-model :
-    (f g : is-model σ X) →
-    htpy-is-model' f g ≃ htpy-is-model f g
+    (f g : is-model-type σ X) →
+    htpy-is-model f g ≃ htpy-is-model' f g
   compute-htpy-is-model f g =
     equiv-Π-equiv-family
       ( λ op →
@@ -152,39 +124,72 @@ module _
                 ( g op)
                 ( preserves-id-map-tuple (arity-operation-signature σ op) v))))
 
-  refl-htpy-is-model :
-    (f : is-model σ X) →
-    htpy-is-model f f
-  refl-htpy-is-model f op v =
+  refl-htpy-is-model' :
+    (f : is-model-type σ X) →
+    htpy-is-model' f f
+  refl-htpy-is-model' f op v =
     ap (f op) (preserves-id-map-tuple (arity-operation-signature σ op) v)
 
-  htpy-eq-is-model :
-    (f g : is-model σ X) →
-    f ＝ g → htpy-is-model f g
-  htpy-eq-is-model f .f refl op v =
+  htpy-eq-is-model' :
+    (f g : is-model-type σ X) →
+    f ＝ g → htpy-is-model' f g
+  htpy-eq-is-model' f .f refl op v =
     ap (f op) (preserves-id-map-tuple (arity-operation-signature σ op) v)
 
-  is-torsorial-htpy-is-model' :
-    (f : is-model σ X) → is-torsorial (htpy-is-model' f)
-  is-torsorial-htpy-is-model' f = is-torsorial-binary-htpy f
+  is-torsorial-htpy-is-model :
+    (f : is-model-type σ X) → is-torsorial (htpy-is-model f)
+  is-torsorial-htpy-is-model f = is-torsorial-binary-htpy f
 
   abstract
-    is-torsorial-htpy-is-model :
-      (f : is-model σ X) → is-torsorial (htpy-is-model f)
-    is-torsorial-htpy-is-model f =
+    is-torsorial-htpy-is-model' :
+      (f : is-model-type σ X) → is-torsorial (htpy-is-model' f)
+    is-torsorial-htpy-is-model' f =
       is-contr-equiv'
-        ( Σ (is-model σ X) (htpy-is-model' f))
+        ( Σ (is-model-type σ X) (htpy-is-model f))
         ( equiv-tot (compute-htpy-is-model f))
-        ( is-torsorial-htpy-is-model' f)
+        ( is-torsorial-htpy-is-model f)
 
   abstract
-    is-equiv-htpy-eq-is-model :
-      (f g : is-model σ X) →
-      is-equiv (htpy-eq-is-model f g)
-    is-equiv-htpy-eq-is-model f =
+    is-equiv-htpy-eq-is-model' :
+      (f g : is-model-type σ X) →
+      is-equiv (htpy-eq-is-model' f g)
+    is-equiv-htpy-eq-is-model' f =
       fundamental-theorem-id
-        ( is-torsorial-htpy-is-model f)
-        ( htpy-eq-is-model f)
+        ( is-torsorial-htpy-is-model' f)
+        ( htpy-eq-is-model' f)
+```
+
+### Homotopy of models is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} (σ : signature l1) (X : Set l2)
+  where
+
+  abstract
+    is-prop-htpy-is-model' :
+      (f g : is-model σ X) → is-prop (htpy-is-model' σ f g)
+    is-prop-htpy-is-model' f g =
+      is-prop-Π
+        ( λ op →
+          is-prop-Π
+            ( λ v → is-set-type-Set X (f op v) (g op (map-tuple id v))))
+
+  htpy-prop-is-model' :
+    (f g : is-model σ X) → Prop (l1 ⊔ l2)
+  htpy-prop-is-model' f g =
+    ( htpy-is-model' σ f g , is-prop-htpy-is-model' f g)
+
+  abstract
+    is-prop-htpy-is-model :
+      (f g : is-model σ X) → is-prop (htpy-is-model σ f g)
+    is-prop-htpy-is-model f g =
+      is-prop-Π (λ op → is-prop-Π (λ v → is-set-type-Set X (f op v) (g op v)))
+
+  htpy-prop-is-model :
+    (f g : is-model σ X) → Prop (l1 ⊔ l2)
+  htpy-prop-is-model f g =
+    ( htpy-is-model σ f g , is-prop-htpy-is-model f g)
 ```
 
 ### The characterization of identities of models
@@ -216,7 +221,7 @@ module _
         ( preserves-operations-id-Model-Signature σ (X , X-assign))
         ( Eq-eq-Model-Signature (X , X-assign))
         ( is-equiv-equiv-eq-Set X)
-        ( is-equiv-htpy-eq-is-model σ X (λ f z → id (X-assign f z)))
+        ( is-equiv-htpy-eq-is-model' σ (λ f z → id (X-assign f z)))
 
   equiv-Eq-eq-Model-Signature :
     {l2 : Level} (X Y : Model-Signature σ l2) →

@@ -8,13 +8,14 @@ module universal-algebra.extensions-signatures where
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import universal-algebra.signatures
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import universal-algebra.signatures
 ```
 
 </details>
@@ -22,9 +23,9 @@ open import foundation.universe-levels
 ## Idea
 
 An
-{{#concept "extension" Disambiguation="of a signature" Agda=is-extension-of-signature}}
-of a [signature](universal-algebra.signatures.md) `σ` is a signature `τ` such
-that `σ` [embeds](foundation-core.embeddings.md) into `τ` via an
+{{#concept "extension" Disambiguation="of a finitary signature" Agda=is-extension-of-signature}}
+of a [(finitary) signature](universal-algebra.signatures.md) `σ` is a signature
+`τ` such that `σ` [embeds](foundation-core.embeddings.md) into `τ` via an
 arity-preserving map.
 
 ## Definitions

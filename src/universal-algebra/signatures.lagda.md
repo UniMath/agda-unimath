@@ -20,9 +20,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "signature" WD="signature" WDID=Q741810 Agda=signature}} is a
-[collection](foundation.dependent-pair-types.md) of function symbols with given
-arities.
+A
+{{#concept "signature" Disambiguation="finitary" WD="signature" WDID=Q741810 Agda=signature}}
+is a [collection](foundation.dependent-pair-types.md) of function symbols with
+given finite arities.
 
 ## Definitions
 

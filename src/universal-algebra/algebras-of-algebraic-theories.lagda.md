@@ -1,7 +1,7 @@
 # Algebras
 
 ```agda
-module universal-algebra.algebras-of-theories where
+module universal-algebra.algebras-of-algebraic-theories where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import foundation-core.equivalences
 
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
-open import universal-algebra.equivalences-of-models-of-signatures
+open import universal-algebra.equivalences-models-of-signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
@@ -30,38 +30,48 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-Given a [theory](universal-algebra.algebraic-theories.md), an
-{{#concept "algebra" Disambiguation="of an algebraic theory" WD="algebraic structure" WDID=Q205464 Agda=Algebra}}
+Given an [algebraic theory](universal-algebra.algebraic-theories.md), an
+{{#concept "algebra" Disambiguation="of an algebraic theory, single-sorted, finitary" WD="algebraic structure" WDID=Q205464 Agda=Algebra}}
 is a [model](universal-algebra.models-of-signatures.md) on a
-[set](foundation-core.sets.md) such that it satisfies all
+[set](foundation-core.sets.md) that satisfies all
 [equations](universal-algebra.abstract-equations-over-signatures.md) in the
 theory.
 
 ## Definitions
 
-### Algebra
+### The predicate of being an algebra
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
   where
 
   is-algebra : {l3 : Level} → Model-Signature σ l3 → UU (l2 ⊔ l3)
   is-algebra M =
-    (e : index-Theory σ T) →
+    (e : index-Algebraic-Theory σ T) →
     (assign : assignment σ (type-Model-Signature σ M)) →
     eval-term σ (is-model-set-Model-Signature σ M) assign
-      ( lhs-abstract-equation σ (index-abstract-equation-Theory σ T e)) ＝
+      ( lhs-abstract-equation σ
+        ( index-abstract-equation-Algebraic-Theory σ T e)) ＝
     eval-term σ (is-model-set-Model-Signature σ M) assign
-      ( rhs-abstract-equation σ (index-abstract-equation-Theory σ T e))
+      ( rhs-abstract-equation σ
+        ( index-abstract-equation-Algebraic-Theory σ T e))
+```
+
+### The type of algebras
+
+```agda
+module _
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  where
 
   Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   Algebra l3 =
-    Σ ( Model-Signature σ l3) (is-algebra)
+    Σ (Model-Signature σ l3) (is-algebra σ T)
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
   where
 
   model-Algebra : Model-Signature σ l3
@@ -90,7 +100,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Theory σ l2) (X : Model-Signature σ l3)
+  (T : Algebraic-Theory σ l2) (X : Model-Signature σ l3)
   where
 
   abstract

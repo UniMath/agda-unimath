@@ -34,44 +34,47 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A {{#concept "model" Disambiguation="of a signature" Agda=Model-Signature}} of a
-[signature](universal-algebra.signatures.md) `σ` in a type `A` is a dependent
-function that assigns to each function symbol `f` of arity `n` and
-`n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
+A
+{{#concept "model" Disambiguation="of a finitary signature" Agda=Model-Signature}}
+of a [(finitary) signature](universal-algebra.signatures.md) `σ` in a type `A`
+is a dependent function that assigns to each function symbol `f` of arity `n`
+and `n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
 
 ## Definitions
 
-### Models
+### The predicate on a type of being a model
 
 ```agda
+is-model-type : {l1 l2 : Level} → signature l1 → UU l2 → UU (l1 ⊔ l2)
+is-model-type σ X =
+  (f : operation-signature σ) →
+  tuple X (arity-operation-signature σ f) → X
+```
+
+### The predicate on a set of being a model
+
+```agda
+is-model : {l1 l2 : Level} → signature l1 → Set l2 → UU (l1 ⊔ l2)
+is-model σ X = is-model-type σ (type-Set X)
+```
+
+```agda
+Model-Signature : {l1 : Level} → signature l1 → (l2 : Level) → UU (l1 ⊔ lsuc l2)
+Model-Signature σ l2 = Σ (Set l2) (is-model σ)
+
 module _
-  {l1 : Level} (σ : signature l1)
+  {l1 l2 : Level} (σ : signature l1) (X : Model-Signature σ l2)
   where
 
-  is-model-type : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
-  is-model-type X =
-    (f : operation-signature σ) →
-    tuple X (arity-operation-signature σ f) → X
+  set-Model-Signature : Set l2
+  set-Model-Signature = pr1 X
 
-  is-model : {l2 : Level} → Set l2 → UU (l1 ⊔ l2)
-  is-model X = is-model-type (type-Set X)
+  is-model-set-Model-Signature : is-model σ set-Model-Signature
+  is-model-set-Model-Signature = pr2 X
 
-  Model-Signature : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Model-Signature l2 = Σ (Set l2) (is-model)
+  type-Model-Signature :  UU l2
+  type-Model-Signature = type-Set set-Model-Signature
 
-  set-Model-Signature : {l2 : Level} → Model-Signature l2 → Set l2
-  set-Model-Signature = pr1
-
-  is-model-set-Model-Signature :
-    {l2 : Level} (M : Model-Signature l2) →
-    is-model (set-Model-Signature M)
-  is-model-set-Model-Signature = pr2
-
-  type-Model-Signature : {l2 : Level} → Model-Signature l2 → UU l2
-  type-Model-Signature M = pr1 (set-Model-Signature M)
-
-  is-set-type-Model-Signature :
-    {l2 : Level} (M : Model-Signature l2) →
-    is-set (type-Model-Signature M)
-  is-set-type-Model-Signature M = pr2 (set-Model-Signature M)
+  is-set-type-Model-Signature : is-set type-Model-Signature
+  is-set-type-Model-Signature = is-set-type-Set set-Model-Signature
 ```

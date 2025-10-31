@@ -32,9 +32,12 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A term in a signature, is an abstract representation of a well formed expression
-which uses only variables and operations in the signature. For this particular
-formalization, we are using de Bruijn variables.
+A {{#concept "term" Disambiguation="over a finitary signature" Agda=term}} over
+a [(finitary) signature](universal-algebra.signatures.md), is an abstract
+representation of a well-formed expression which uses only variables and
+operations in the signature.
+
+For this particular formalization, we are using de Bruijn variables.
 
 ## Definitions
 
@@ -45,16 +48,16 @@ module _
   {l1 : Level} (σ : signature l1)
   where
 
-  data Term : UU l1 where
-    var-Term : ℕ → Term
-    op-Term : is-model-type σ Term
+  data term : UU l1 where
+    var-term : ℕ → term
+    op-term : is-model-type σ term
 
-  de-bruijn-variables-term : Term → list ℕ
+  de-bruijn-variables-term : term → list ℕ
 
-  de-bruijn-variables-term-tuple : {n : ℕ} → tuple Term n → list ℕ
+  de-bruijn-variables-term-tuple : {n : ℕ} → tuple term n → list ℕ
 
-  de-bruijn-variables-term (var-Term x) = cons x nil
-  de-bruijn-variables-term (op-Term f x) = de-bruijn-variables-term-tuple x
+  de-bruijn-variables-term (var-term x) = cons x nil
+  de-bruijn-variables-term (op-term f x) = de-bruijn-variables-term-tuple x
 
   de-bruijn-variables-term-tuple empty-tuple = nil
   de-bruijn-variables-term-tuple (x ∷ v) =
@@ -63,7 +66,7 @@ module _
         (de-bruijn-variables-term x)
         (de-bruijn-variables-term-tuple v)
 
-  arity-term : Term → ℕ
+  arity-term : term → ℕ
   arity-term t = length-list (de-bruijn-variables-term t)
 ```
 
@@ -73,7 +76,11 @@ An assignment of variables, assigns each de Bruijn variable to an element in a
 type.
 
 ```agda
-  assignment : {l2 : Level} → (A : UU l2) → UU l2
+module _
+  {l1 : Level} (σ : signature l1)
+  where
+
+  assignment : {l2 : Level} → UU l2 → UU l2
   assignment A = ℕ → A
 ```
 
@@ -83,16 +90,20 @@ Given a model of a type `A` and an assignment of variables, any term can be
 evaluated to a concrete element of the type `A`.
 
 ```agda
+module _
+  {l1 : Level} (σ : signature l1)
+  where
+
   eval-term :
     {l2 : Level} → {A : UU l2} →
-    is-model-type σ A → assignment A → Term → A
+    is-model-type σ A → assignment σ A → term σ → A
 
   eval-tuple :
     {l2 : Level} → {A : UU l2} {n : ℕ} →
-    is-model-type σ A → assignment A → tuple Term n → tuple A n
+    is-model-type σ A → assignment σ A → tuple (term σ) n → tuple A n
 
-  eval-term m assign (var-Term n) = assign n
-  eval-term m assign (op-Term f x) = m f (eval-tuple m assign x)
+  eval-term m assign (var-term n) = assign n
+  eval-term m assign (op-term f x) = m f (eval-tuple m assign x)
 
   eval-tuple m assign empty-tuple = empty-tuple
   eval-tuple m assign (x ∷ v) =
@@ -100,7 +111,7 @@ evaluated to a concrete element of the type `A`.
 
   eval-tuple-map-tuple-eval-term :
     {l2 : Level} {A : UU l2} {n : ℕ} →
-    (m : is-model-type σ A) → (assign : assignment A) → (v : tuple Term n) →
+    (m : is-model-type σ A) (assign : assignment σ A) (v : tuple (term σ) n) →
     eval-tuple m assign v ＝ map-tuple (eval-term m assign) v
   eval-tuple-map-tuple-eval-term m assign empty-tuple = refl
   eval-tuple-map-tuple-eval-term m assign (x ∷ v) =
@@ -113,28 +124,32 @@ If a term `t` uses no variables, then any model on a type `A` assigns `t` to an
 element of `A`.
 
 ```agda
+module _
+  {l1 : Level} (σ : signature l1)
+  where
+
   eval-constant-term :
     {l2 : Level} {A : UU l2} →
-    (is-model-type σ A) →
-    (t : Term) →
-    (de-bruijn-variables-term t ＝ nil) →
+    is-model-type σ A →
+    (t : term σ) →
+    (de-bruijn-variables-term σ t ＝ nil) →
     A
 
   eval-constant-term-tuple :
     {l2 : Level} {A : UU l2} {n : ℕ} →
     (is-model-type σ A) →
-    (v : tuple Term n) →
-    (all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v) →
+    (v : tuple (term σ) n) →
+    (all-tuple (λ t → is-nil-list (de-bruijn-variables-term σ t)) v) →
     tuple A n
 
-  eval-constant-term m (op-Term f x) p =
+  eval-constant-term m (op-term f x) p =
     m f (eval-constant-term-tuple m x (all-tuple-lemma x p))
     where
     all-tuple-lemma :
       { n : ℕ}
-      ( v : tuple Term n) →
-      ( de-bruijn-variables-term-tuple v ＝ nil) →
-      all-tuple (λ t → is-nil-list (de-bruijn-variables-term t)) v
+      ( v : tuple (term σ) n) →
+      ( de-bruijn-variables-term-tuple σ v ＝ nil) →
+      all-tuple (λ t → is-nil-list (de-bruijn-variables-term σ t)) v
     all-tuple-lemma empty-tuple p = raise-star
     all-tuple-lemma (x ∷ v) p =
       pair
@@ -144,8 +159,8 @@ element of `A`.
       is-nil-lemma =
         is-nil-union-is-nil-list
           ( has-decidable-equality-ℕ)
-          ( de-bruijn-variables-term x)
-          ( de-bruijn-variables-term-tuple v)
+          ( de-bruijn-variables-term σ x)
+          ( de-bruijn-variables-term-tuple σ v)
 
   eval-constant-term-tuple m empty-tuple p = empty-tuple
   eval-constant-term-tuple m (x ∷ v) (p , p') =
@@ -155,10 +170,14 @@ element of `A`.
 ### The induced function by a term on a model
 
 ```agda
+module _
+  {l1 : Level} (σ : signature l1)
+  where
+
   tuple-assignment :
     {l2 : Level} {A : UU l2} →
     ℕ → (l : list ℕ) →
-    tuple A (succ-ℕ (length-list l)) → assignment A
+    tuple A (succ-ℕ (length-list l)) → assignment σ A
   tuple-assignment x nil (y ∷ empty-tuple) n = y
   tuple-assignment x (cons x' l) (y ∷ y' ∷ v) n
     with
@@ -168,28 +187,28 @@ element of `A`.
 
   induced-function-term :
     {l2 : Level} → {A : UU l2} →
-    is-model-type σ A → (t : Term) →
-    tuple A (arity-term t) → A
+    is-model-type σ A → (t : term σ) →
+    tuple A (arity-term σ t) → A
   induced-function-term {l2} {A} m t v with
     ( has-decidable-equality-list
       has-decidable-equality-ℕ
-      (de-bruijn-variables-term t) nil)
-  ... | inl p = eval-constant-term m t p
+      (de-bruijn-variables-term σ t) nil)
+  ... | inl p = eval-constant-term σ m t p
   ... | inr p =
-    eval-term m
+    eval-term σ m
       ( tr
-        ( λ n → tuple A n → assignment A)
-        ( lenght-tail-is-nonnil-list (de-bruijn-variables-term t) p)
+        ( λ n → tuple A n → assignment σ A)
+        ( lenght-tail-is-nonnil-list (de-bruijn-variables-term σ t) p)
         ( tuple-assignment
-          ( head-is-nonnil-list (de-bruijn-variables-term t) p)
-          ( tail-is-nonnil-list (de-bruijn-variables-term t) p))
+          ( head-is-nonnil-list (de-bruijn-variables-term σ t) p)
+          ( tail-is-nonnil-list (de-bruijn-variables-term σ t) p))
           ( v))
       ( t)
 
   assignment-tuple :
     {l2 : Level} {A : UU l2} →
     (l : list ℕ) →
-    assignment A →
+    assignment σ A →
     tuple A (length-list l)
   assignment-tuple nil f = empty-tuple
   assignment-tuple (cons x l) f = f x ∷ assignment-tuple l f
@@ -198,31 +217,28 @@ element of `A`.
 ### Translation of terms
 
 ```agda
-translation-term :
-  {l1 l2 : Level} →
-  (σ : signature l1) →
-  (τ : signature l2) →
-  is-extension-of-signature σ τ →
-  Term σ → Term τ
+module _
+  {l1 l2 : Level}
+  (σ : signature l1)
+  (τ : signature l2)
+  (E : is-extension-of-signature σ τ)
+  where
 
-translation-tuple :
-  {l1 l2 : Level} →
-  (σ : signature l1) →
-  (τ : signature l2) →
-  {n : ℕ} →
-  is-extension-of-signature σ τ →
-  tuple (Term σ) n → tuple (Term τ) n
+  translation-term : term σ → term τ
 
-translation-term σ τ ext (var-Term x) = var-Term x
-translation-term σ τ ext (op-Term f v) =
-  op-Term
-    ( inclusion-is-extension-of-signature σ τ ext f)
-    ( tr (tuple (Term τ))
-      ( preserves-arity-inclusion-is-extension-of-signature σ τ ext f)
-      ( translation-tuple σ τ ext v))
+  translation-tuple : {n : ℕ} → tuple (term σ) n → tuple (term τ) n
 
-translation-tuple σ τ ext empty-tuple =
-  empty-tuple
-translation-tuple σ τ ext (x ∷ v) =
-  (translation-term σ τ ext x) ∷ (translation-tuple σ τ ext v)
+  translation-term (var-term x) = var-term x
+  translation-term (op-term f v) =
+    op-term
+      ( inclusion-is-extension-of-signature σ τ E f)
+      ( tr
+        ( tuple (term τ))
+        ( preserves-arity-inclusion-is-extension-of-signature σ τ E f)
+        ( translation-tuple v))
+
+  translation-tuple empty-tuple =
+    empty-tuple
+  translation-tuple (x ∷ v) =
+    (translation-term x) ∷ (translation-tuple v)
 ```
