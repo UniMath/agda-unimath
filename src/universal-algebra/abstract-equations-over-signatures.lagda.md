@@ -19,7 +19,9 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-An {{#concept "abstract equation" Agda=abstract-equation}} over a
+An
+{{#concept "abstract equation" Disambiguation="over a single-sorted finitary algebraic signature" Agda=abstract-equation}}
+over a
 [single-sorted finitary algebraic signature](universal-algebra.signatures.md)
 `σ` is a statement of the form "`x` equals `y`", where `x` and `y` are
 [terms](universal-algebra.terms-over-signatures.md) over `σ`. Thus, the data of
