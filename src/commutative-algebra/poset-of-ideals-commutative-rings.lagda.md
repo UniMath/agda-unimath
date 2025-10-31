@@ -1,4 +1,4 @@
-# The poset of ideals of a commutative ring
+# The poset of ideals in a commutative ring
 
 ```agda
 module commutative-algebra.poset-of-ideals-commutative-rings where

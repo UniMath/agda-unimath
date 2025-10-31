@@ -22,8 +22,10 @@ open import group-theory.kernels-homomorphisms-concrete-groups
 
 ## Idea
 
-The alternating concrete groups are the kernels of the concrete sign
-homomorphism
+The [concrete](group-theory.concrete-groups.md)
+{{#concept "alternating groups" Disambiguation="concrete" WD="alternating group" WDID=Q438814 Agda=alternating-Concrete-Group}}
+are the [kernels](group-theory.kernels-homomorphisms-concrete-groups.md) of the
+[concrete sign homomorphism](finite-group-theory.cartier-delooping-sign-homomorphism.md).
 
 ## Definition
 

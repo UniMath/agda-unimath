@@ -48,8 +48,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-A **discrete field** is a commutative division ring. They are called discrete,
-because only nonzero elements are assumed to be invertible.
+A {{#concept "finite field" WD="finite field" WDID=Q603880 Agda=Finite-Field}}
+is a [division ring](ring-theory.division-rings.md) that is
+[finite](finite-algebra.finite-rings.md).
 
 ## Definition
 
