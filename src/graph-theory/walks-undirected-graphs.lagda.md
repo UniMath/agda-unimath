@@ -37,10 +37,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
-of a [list](lists.lists.md) of edges that connect the starting point with the
-end point. Walks may repeat edges and pass through the same vertex multiple
-times.
+A
+{{#concept "walk" Disambiguation="in an undirected graph" WD="walk" WDID=Q12776184 Agda=walk-Undirected-Graph}}
+in an [undirected graph](graph-theory.undirected-graphs.md) consists of a
+[list](lists.lists.md) of edges that connect the starting point with the end
+point. Walks may repeat edges and pass through the same vertex multiple times.
 
 ## Definitions
 
