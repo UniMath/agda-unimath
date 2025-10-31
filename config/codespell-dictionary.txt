@@ -18,6 +18,7 @@ automorphsims->automorphisms
 cagegory->category
 characteriation->characterization
 characteriing->characterizing
+conceot->concept
 congruece->congruence
 congrueces->congruences
 consistsing->consisting
@@ -67,3 +68,5 @@ morhpsims->morphisms
 morphsim->morphism
 morphsims->morphisms
 outout->output
+ringr->ring
+ringrs->rings

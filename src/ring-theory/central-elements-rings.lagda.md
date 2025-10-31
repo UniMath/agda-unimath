@@ -20,8 +20,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An element `x` of a ring `R` is said to be central if `xy ＝ yx` for every
-`y : R`.
+An element `x` of a [ring](ring-theory.rings.md) `R` is said to be
+{{#concept "central" Disambiguation="element of a ring" Agda=is-central-element-Ring}}
+if `xy ＝ yx` for every `y : R`.
 
 ## Definition
 

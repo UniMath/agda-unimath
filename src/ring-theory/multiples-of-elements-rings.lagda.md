@@ -25,9 +25,11 @@ open import ring-theory.rings
 ## Idea
 
 For any [ring](ring-theory.rings.md) `R` there is a multiplication operation
-`ℕ → R → R`, which we write informally as `n x ↦ n · x`. This operation is
-defined by [iteratively](foundation.iterating-functions.md) adding `x` with
-itself `n` times.
+`ℕ → R → R`, which we write informally as `n x ↦ n · x`, called taking a
+{{#concept "multiple" Disambiguation="of an element of a ring, natural number" Agda=multiple-Ring}}
+of `x`. This operation is defined by
+[iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
+times.
 
 ## Definition
 
@@ -45,8 +47,8 @@ module _
 ### The predicate of being a natural multiple of an element in an ring
 
 We say that an element `y` **is a multiple** of an element `x` if there
-[exists](foundation.existential-quantification.md) a number `n` such that
-`nx ＝ y`.
+[exists](foundation.existential-quantification.md) a natural number `n` such
+that `nx ＝ y`.
 
 ```agda
 module _
