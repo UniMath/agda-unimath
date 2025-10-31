@@ -19,6 +19,7 @@ automorphsims->automorphisms
 cagegory->category
 characteriation->characterization
 characteriing->characterizing
+conceot->concept
 conisist->consist
 conisisted->consisted
 conisisting->consisting
@@ -26,7 +27,6 @@ conisists->consists
 conisistsed->consisted
 conisistsing->consisting
 consistsed->consisted
-conceot->concept
 consistsing->consisting
 eacy->each,easy
 embeddding->embedding

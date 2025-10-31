@@ -18,8 +18,9 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 {{#concept "Coalgebras" Disambiguation="of a polynomial endofunctor" Agda=coalgebra-polynomial-endofunctor}}
-for a [polynomial endofunctor](trees.polynomial-endofunctors.md) $P ≐ (A \mathbin{◃} B)$ are
-types `X` [equipped](foundation.structure.md) with a function
+for a [polynomial endofunctor](trees.polynomial-endofunctors.md)
+$P ≐ (A \mathbin{◃} B)$ are types `X` [equipped](foundation.structure.md) with a
+function
 
 ```text
   X → Σ (a : A), (B a → X).
