@@ -1,4 +1,4 @@
-# Abelian groups
+# Finite abelian groups
 
 ```agda
 module finite-group-theory.finite-abelian-groups where
@@ -32,7 +32,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Abelian groups are groups of which the group operation is commutative
+{{#concept "Finite abelian groups" WD="finite abelian group" WDID=Q3117606 Agda=Finite-Ab}}
+are [abelian groups](group-theory.abelian-groups.md) whose carrier type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definition
 

@@ -270,3 +270,7 @@ module _
     ( Eq-type-univalent-polynomial-endofunctor P x y ,
       extensionality-type-univalent-polynomial-endofunctor P x y)
 ```
+
+## See also
+
+- [Extensional W-types](trees.extensional-w-types.md)

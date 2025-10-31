@@ -21,9 +21,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Simple type theories are type theories that have no type dependency. The
-category of simple type theories is equivalent to the category of multisorted
-algebraic theories.
+{{#concept "Simple type theories"}} are type theories that have no type
+dependency. The category of simple type theories is equivalent to the category
+of multisorted algebraic theories.
 
 ## Definitions
 
