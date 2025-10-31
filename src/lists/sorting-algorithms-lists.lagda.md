@@ -30,12 +30,12 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-In this file we define the notion of sorting algorithms for lists.
+An endofunction `f` on the type of [lists](lists.lists.md) is a
+{{#concept "sorting algorithm" Disambiguation="on lists" WD="sorting algorithm" WDID=Q181593 Agda=is-sort-list}}
+if `f` is a [permutation](lists.permutation-lists.md) and if for every list `l`,
+`f l` is [sorted](lists.sorted-lists.md).
 
 ## Definition
-
-A function `f` from `list` to `list` is a sort if `f` is a permutation and if
-for every list `l`, `f l` is sorted
 
 ```agda
 module _

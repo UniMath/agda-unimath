@@ -1,3 +1,4 @@
+Ahda->Agda
 Kratowski->Kuratowski
 Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
@@ -21,6 +22,13 @@ characteriing->characterizing
 conceot->concept
 congruece->congruence
 congrueces->congruences
+conisist->consist
+conisisted->consisted
+conisisting->consisting
+conisists->consists
+conisistsed->consisted
+conisistsing->consisting
+consistsed->consisted
 consistsing->consisting
 eacy->each,easy
 embeddding->embedding

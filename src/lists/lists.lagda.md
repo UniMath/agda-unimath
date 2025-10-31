@@ -37,8 +37,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of lists of elements of a type `A` is defined inductively, with an
-empty list and an operation that extends a list with one element from `A`.
+The type of {{#concept "lists" WD="list" WDID=Q27948 Agda=list}} of elements of
+a type `A` is defined inductively, with an empty list `nil`, and an operation
+`cons` that extends a list with one element from `A`.
 
 ## Definition
 
