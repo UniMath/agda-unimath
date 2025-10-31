@@ -158,19 +158,32 @@ module _
 
   equiv-eq-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) → A ＝ B → equiv-Algebra σ T A B
-  equiv-eq-Algebra A .A refl =
-    id-equiv-Model σ (model-Algebra σ T A)
+  equiv-eq-Algebra A B p =
+    equiv-eq-Model σ
+      ( model-Algebra σ T A)
+      ( model-Algebra σ T B)
+      ( ap (model-Algebra σ T) p)
 
-  is-equiv-equiv-eq-Algebra :
-    {l3 : Level} (A B : Algebra l3 σ T) →
-    is-equiv (equiv-eq-Algebra A B)
-  is-equiv-equiv-eq-Algebra (A , p) =
-    subtype-identity-principle
-      ( is-prop-is-algebra σ T)
-      ( p)
-      ( id-equiv-Model σ A)
-      ( equiv-eq-Algebra (A , p))
-      ( is-equiv-equiv-eq-Model σ A)
+  abstract
+    is-equiv-equiv-eq-Algebra :
+      {l3 : Level} (A B : Algebra l3 σ T) →
+      is-equiv (equiv-eq-Algebra A B)
+    is-equiv-equiv-eq-Algebra (A , p) =
+      subtype-identity-principle
+        ( is-prop-is-algebra σ T)
+        ( p)
+        ( id-equiv-Model σ A)
+        ( equiv-eq-Algebra (A , p))
+        ( is-equiv-equiv-eq-Model σ A)
+
+  abstract
+    is-torsorial-equiv-Algebra :
+      {l3 : Level} (A : Algebra l3 σ T) →
+      is-torsorial (equiv-Algebra {l4 = l3} σ T A)
+    is-torsorial-equiv-Algebra A =
+      fundamental-theorem-id'
+        ( equiv-eq-Algebra A)
+        ( λ B → is-equiv-equiv-eq-Algebra A B)
 
   extensionality-Algebra :
     {l3 : Level} (A B : Algebra l3 σ T) →
@@ -182,36 +195,6 @@ module _
     {l3 : Level} (A B : Algebra l3 σ T) →
     equiv-Algebra σ T A B → A ＝ B
   eq-equiv-Algebra A B = map-inv-equiv (extensionality-Algebra A B)
-
-  abstract
-    is-torsorial-equiv-Algebra :
-      {l3 : Level} (A : Algebra l3 σ T) →
-      is-torsorial (equiv-Algebra {l4 = l3} σ T A)
-    is-torsorial-equiv-Algebra A =
-      fundamental-theorem-id'
-        ( equiv-eq-Algebra A)
-        ( λ B → is-equiv-equiv-eq-Algebra A B)
-```
-
-### A useful factorization for characterizing isomorphisms of algebras
-
-```agda
-module _
-  {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
-  where
-
-  equiv-equiv-hom-Algebra' :
-    {l4 : Level}
-    (B : Algebra l4 σ T) →
-    equiv-hom-Algebra σ T A B ≃
-    Σ ( type-Algebra σ T A → type-Algebra σ T B)
-      ( λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
-  pr1 (equiv-equiv-hom-Algebra' B) ((f , p) , eq) = (f , eq , p)
-  pr1 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
-  pr2 (pr1 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
-  pr1 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) (f , eq , p) = ((f , p) , eq)
-  pr2 (pr2 (pr2 (equiv-equiv-hom-Algebra' B))) _ = refl
 ```
 
 ### Characterizing isomorphisms of algebras
@@ -294,8 +277,7 @@ module _
       ( is-prop-is-iso-Algebra)
       ( is-iso-is-equiv-hom-Algebra)
       ( is-equiv-hom-is-iso-Algebra)) ∘e
-    ( inv-equiv (equiv-equiv-hom-Algebra' σ T A B)) ∘e
-    ( associative-Σ)
+    ( equiv-right-swap-Σ)
 
   iso-equiv-Algebra : equiv-Algebra σ T A B → iso-Algebra
   iso-equiv-Algebra = map-equiv equiv-iso-equiv-Algebra
