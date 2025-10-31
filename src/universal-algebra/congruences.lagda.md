@@ -45,18 +45,18 @@ module _
   (R : equivalence-relation l4 (type-Algebra σ T A))
   where
 
-  relation-holds-all-tuple-equivalence-relation-Algebra :
+  relation-holds-for-all-tuples-equivalence-relation-Algebra :
     {n : ℕ} →
     (v : tuple (type-Algebra σ T A) n) →
     (v' : tuple (type-Algebra σ T A) n) →
     UU l4
-  relation-holds-all-tuple-equivalence-relation-Algebra
+  relation-holds-for-all-tuples-equivalence-relation-Algebra
     { .zero-ℕ} empty-tuple empty-tuple =
     raise-unit l4
-  relation-holds-all-tuple-equivalence-relation-Algebra
+  relation-holds-for-all-tuples-equivalence-relation-Algebra
     { .(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
     ( sim-equivalence-relation R x x') ×
-    ( relation-holds-all-tuple-equivalence-relation-Algebra v v')
+    ( relation-holds-for-all-tuples-equivalence-relation-Algebra v v')
 
   preserves-operations-equivalence-relation-Algebra :
     UU (l1 ⊔ l3 ⊔ l4)
@@ -64,7 +64,7 @@ module _
     ( op : operation-signature σ) →
     ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
     ( v' : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
-    relation-holds-all-tuple-equivalence-relation-Algebra v v' →
+    relation-holds-for-all-tuples-equivalence-relation-Algebra v v' →
     sim-equivalence-relation R
       ( is-model-set-Algebra σ T A op v)
       ( is-model-set-Algebra σ T A op v')

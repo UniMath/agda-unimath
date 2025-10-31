@@ -15,8 +15,8 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.propositions
+open import foundation.universe-levels
 
 open import lists.functoriality-tuples
 open import lists.tuples
@@ -97,7 +97,7 @@ module _
       map-hom-Algebra-lemma :
         ( n : ℕ) →
         ( v v' : tuple (type-Algebra σ T A) n) →
-        ( relation-holds-all-tuple-equivalence-relation-Algebra σ T A
+        ( relation-holds-for-all-tuples-equivalence-relation-Algebra σ T A
           equivalence-relation-kernel-hom-Algebra v v') →
         (map-tuple f v) ＝ (map-tuple f v')
       map-hom-Algebra-lemma zero-ℕ empty-tuple empty-tuple p =
