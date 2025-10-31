@@ -20,8 +20,8 @@ open import universal-algebra.terms-over-signatures
 ## Idea
 
 An {{#concept "abstract equation" Agda=abstract-equation}} over a
-[(finitary) signature](universal-algebra.signatures.md) `σ` is a statement of
-the form "`x` equals `y`", where `x` and `y` are
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` is a statement of the form "`x` equals `y`", where `x` and `y` are
 [terms](universal-algebra.terms-over-signatures.md) over `σ`. Thus, the data of
 an abstract equation is simply two terms over a common signature.
 

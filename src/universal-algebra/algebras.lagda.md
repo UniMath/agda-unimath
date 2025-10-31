@@ -32,8 +32,9 @@ open import universal-algebra.terms-over-signatures
 
 Given an [algebraic theory](universal-algebra.algebraic-theories.md), an
 {{#concept "algebra" Disambiguation="of an algebraic theory, single-sorted, finitary" WD="algebraic structure" WDID=Q205464 Agda=Algebra}}
-is a [model](universal-algebra.models-of-signatures.md) on a
-[set](foundation-core.sets.md) that satisfies all
+is a [model](universal-algebra.models-of-signatures.md) of a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md) on
+a [set](foundation-core.sets.md) that satisfies all
 [equations](universal-algebra.abstract-equations-over-signatures.md) in the
 theory.
 

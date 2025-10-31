@@ -23,10 +23,11 @@ open import universal-algebra.signatures
 ## Idea
 
 An
-{{#concept "extension" Disambiguation="of a finitary signature" Agda=is-extension-of-signature}}
-of a [(finitary) signature](universal-algebra.signatures.md) `σ` is a signature
-`τ` such that `σ` [embeds](foundation-core.embeddings.md) into `τ` via an
-arity-preserving map.
+{{#concept "extension" Disambiguation="of a single-sorted finitary algebraic signature" Agda=is-extension-of-signature}}
+of a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` is a signature `τ` such that `σ` [embeds](foundation-core.embeddings.md)
+into `τ` via an arity-preserving map.
 
 ## Definitions
 

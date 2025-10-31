@@ -36,7 +36,8 @@ open import universal-algebra.signatures
 ## Idea
 
 Given an [algebraic theory](universal-algebra.algebraic-theories.md) `T` over a
-[(finitary) signature](universal-algebra.signatures.md) `σ`, we have the
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ`, we have the
 {{#concept "large category of `T`-algebras" Disambiguation="of an algebraic theory, single-sorted, finitary" Agda=Algebra-Large-Category}},
 which consists of `T`-[algebras](universal-algebra.algebras.md) and
 `T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).

@@ -92,6 +92,7 @@ module _
   equivalence-relation-congruence-Algebra = pr1 R
 
   preserves-operations-congruence-Algebra :
-    preserves-operations-equivalence-relation-Algebra σ T A equivalence-relation-congruence-Algebra
+    preserves-operations-equivalence-relation-Algebra σ T A
+      ( equivalence-relation-congruence-Algebra)
   preserves-operations-congruence-Algebra = pr2 R
 ```

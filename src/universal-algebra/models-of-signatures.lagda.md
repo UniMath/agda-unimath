@@ -35,10 +35,12 @@ open import universal-algebra.signatures
 ## Idea
 
 A
-{{#concept "model" Disambiguation="of a finitary signature" Agda=Model-Of-Signature}}
-of a [(finitary) signature](universal-algebra.signatures.md) `σ` in a type `A`
-is a dependent function that assigns to each function symbol `f` of arity `n`
-and `n`-[tuple](lists.tuples.md) of elements of `A` an element of `A`.
+{{#concept "model" Disambiguation="of a single-sorted finitary algebraic signature" Agda=Model-Of-Signature}}
+of a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` in a type `A` is a dependent function that assigns to each function symbol
+`f` of arity `n` and `n`-[tuple](lists.tuples.md) of elements of `A` an element
+of `A`.
 
 ## Definitions
 
@@ -59,7 +61,8 @@ is-model σ X = is-model-type σ (type-Set X)
 ```
 
 ```agda
-Model-Of-Signature : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Model-Of-Signature :
+  {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
 Model-Of-Signature l2 σ = Σ (Set l2) (is-model σ)
 
 module _

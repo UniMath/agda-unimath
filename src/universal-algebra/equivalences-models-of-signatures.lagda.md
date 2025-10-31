@@ -44,7 +44,7 @@ open import universal-algebra.signatures
 
 We characterize [equivalences](foundation-core.equivalences.md) of
 [models](universal-algebra.models-of-signatures.md) of
-[(finitary) signatures](universal-algebra.signatures.md).
+[single-sorted finitary algebraic signatures](universal-algebra.signatures.md).
 
 ## Definitions
 
@@ -73,7 +73,8 @@ module _
 
   map-type-equiv-Model-Of-Signature :
     type-Model-Of-Signature σ X → type-Model-Of-Signature σ Y
-  map-type-equiv-Model-Of-Signature = map-equiv equiv-type-equiv-Model-Of-Signature
+  map-type-equiv-Model-Of-Signature =
+    map-equiv equiv-type-equiv-Model-Of-Signature
 
   map-inv-type-equiv-Model-Of-Signature :
     type-Model-Of-Signature σ Y → type-Model-Of-Signature σ X
@@ -86,7 +87,8 @@ module _
     is-equiv-map-equiv equiv-type-equiv-Model-Of-Signature
 
   preserves-operations-equiv-Model-Of-Signature :
-    preserves-operations-Model-Of-Signature σ X Y map-type-equiv-Model-Of-Signature
+    preserves-operations-Model-Of-Signature σ X Y
+      ( map-type-equiv-Model-Of-Signature)
   preserves-operations-equiv-Model-Of-Signature = pr2 e
 ```
 
@@ -227,10 +229,12 @@ module _
     {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
     (X ＝ Y) ≃ equiv-Model-Of-Signature σ X Y
   extensionality-Model-Of-Signature X Y =
-    ( equiv-eq-Model-Of-Signature X Y , is-equiv-equiv-eq-Model-Of-Signature X Y)
+    ( equiv-eq-Model-Of-Signature X Y ,
+      is-equiv-equiv-eq-Model-Of-Signature X Y)
 
   eq-equiv-Model-Of-Signature :
     {l2 : Level} (X Y : Model-Of-Signature l2 σ) →
     equiv-Model-Of-Signature σ X Y → X ＝ Y
-  eq-equiv-Model-Of-Signature X Y = map-inv-equiv (extensionality-Model-Of-Signature X Y)
+  eq-equiv-Model-Of-Signature X Y =
+    map-inv-equiv (extensionality-Model-Of-Signature X Y)
 ```

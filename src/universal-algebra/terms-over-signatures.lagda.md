@@ -32,10 +32,12 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A {{#concept "term" Disambiguation="over a finitary signature" Agda=term}} over
-a [(finitary) signature](universal-algebra.signatures.md), is an abstract
-representation of a well-formed expression which uses only variables and
-operations in the signature.
+A
+{{#concept "term" Disambiguation="over a single-sorted finitary algebraic signature" Agda=term}}
+over a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md),
+is an abstract representation of a well-formed expression which uses only
+variables and operations in the signature.
 
 For this particular formalization, we are using de Bruijn variables.
 

@@ -34,13 +34,14 @@ open import universal-algebra.signatures
 ## Idea
 
 A
-{{#concept "morphism" Disambiguation="of models over a finitary signature" Agda=hom-Model-Of-Signature}}
+{{#concept "morphism" Disambiguation="of models over a single-sorted finitary algebraic signature" Agda=hom-Model-Of-Signature}}
 of `σ`-[models](universal-algebra.models-of-signatures.md) `A` and `B` over a
-[(finitary) signature](universal-algebra.signatures.md) `σ` is a function
-`f : A → B` between their underlying [sets](foundation-core.sets.md) that
-preserves the operations of `σ`, in the sense that for `op ∈ σ` an abstract
-operation with arity `n : ℕ`, and `assign-A` and `assign-B` the semantics of `σ`
-in `A` and `B` respectively, and for a `v : tuple A n`, we have
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` is a function `f : A → B` between their underlying
+[sets](foundation-core.sets.md) that preserves the operations of `σ`, in the
+sense that for `op ∈ σ` an abstract operation with arity `n : ℕ`, and `assign-A`
+and `assign-B` the semantics of `σ` in `A` and `B` respectively, and for a
+`v : tuple A n`, we have
 
 ```text
   f (assign-A op v) = assign-B op (f v).
@@ -159,11 +160,15 @@ module _
         ( funext f)
 
   extensionality-hom-Model-Of-Signature :
-    (f g : hom-Model-Of-Signature σ X Y) → (f ＝ g) ≃ htpy-hom-Model-Of-Signature f g
+    (f g : hom-Model-Of-Signature σ X Y) →
+    (f ＝ g) ≃ htpy-hom-Model-Of-Signature f g
   extensionality-hom-Model-Of-Signature f g =
-    (htpy-eq-hom-Model-Of-Signature f g , is-equiv-htpy-eq-hom-Model-Of-Signature f g)
+    ( htpy-eq-hom-Model-Of-Signature f g ,
+      is-equiv-htpy-eq-hom-Model-Of-Signature f g)
 
   eq-htpy-hom-Model-Of-Signature :
-    (f g : hom-Model-Of-Signature σ X Y) → htpy-hom-Model-Of-Signature f g → f ＝ g
-  eq-htpy-hom-Model-Of-Signature f g = map-inv-equiv (extensionality-hom-Model-Of-Signature f g)
+    (f g : hom-Model-Of-Signature σ X Y) →
+    htpy-hom-Model-Of-Signature f g → f ＝ g
+  eq-htpy-hom-Model-Of-Signature f g =
+    map-inv-equiv (extensionality-hom-Model-Of-Signature f g)
 ```

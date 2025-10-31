@@ -22,10 +22,11 @@ An
 {{#concept "algebraic theory" Disambiguation="single-sorted, finitary" WD="algebraic theory" WDID=Q4724020 Agda=Algebraic-Theory}}
 is a [collection](foundation.dependent-pair-types.md) of
 [abstract equations](universal-algebra.abstract-equations-over-signatures.md)
-over a [(finitary) signature](universal-algebra.signatures.md) `σ` that we
-consider to 'hold' in the theory. It is algebraic in the sense that we only
-require equations involving function symbols from the signature, in contrast to,
-say, requiring additional types of relations.
+over a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` that we consider to 'hold' in the theory. It is algebraic in the sense that
+we only require equations involving function symbols from the signature, in
+contrast to, say, requiring additional types of relations.
 
 ## Definitions
 

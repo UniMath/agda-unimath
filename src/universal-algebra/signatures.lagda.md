@@ -20,8 +20,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A
-{{#concept "signature" Disambiguation="finitary" WD="signature" WDID=Q741810 Agda=signature}}
+A (single-sorted, finitary, algebraic)
+{{#concept "signature" Disambiguation="single-sorted, algebraic, finitary" WD="signature" WDID=Q741810 Agda=signature}}
 is a [collection](foundation.dependent-pair-types.md) of function symbols with
 given finite arities.
 
