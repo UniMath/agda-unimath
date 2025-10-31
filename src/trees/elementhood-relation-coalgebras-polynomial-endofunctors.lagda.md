@@ -15,20 +15,23 @@ open import graph-theory.directed-graphs
 open import graph-theory.walks-directed-graphs
 
 open import trees.coalgebras-polynomial-endofunctors
+open import trees.polynomial-endofunctors
 ```
 
 </details>
 
 ## Idea
 
-Given two elements `x y : X` in the underlying type of a coalgebra of a
-polynomial endofunctor, We say that **`x` is an element of `y`**, i.e., `x ∈ y`,
-if there is an element `b : B (shape y)` equipped with an identification
-`component y b ＝ x`. Note that this elementhood relation of an arbitrary
-coalgebra need not be irreflexive.
+Given two elements `x y : X` in the underlying type of a
+[coalgebra](trees.coalgebras-polynomial-endofunctors.md) of a
+[polynomial endofunctor](trees.polynomial-endofunctors.md), We say that `x`
+{{#concept "is an element of" Disambiguation="coalgebras of a polynomial endofunctor" Agda=is-element-of-coalgebra-polynomial-endofunctor}}
+`y`, i.e., `x ∈ y`, if there is an element `b : B (shape y)` equipped with an
+identification `component y b ＝ x`. Note that this elementhood relation of an
+arbitrary coalgebra need not be irreflexive.
 
 By the elementhood relation on coalgebras we obtain for each coalgebra a
-directed graph.
+[directed graph](graph-theory.directed-graphs.md).
 
 ## Definition
 
@@ -36,8 +39,8 @@ directed graph.
 infixl 6 is-element-of-coalgebra-polynomial-endofunctor
 
 is-element-of-coalgebra-polynomial-endofunctor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   (x y : type-coalgebra-polynomial-endofunctor X) → UU (l2 ⊔ l3)
 is-element-of-coalgebra-polynomial-endofunctor X x y =
   fiber (component-coalgebra-polynomial-endofunctor X y) x
@@ -50,8 +53,8 @@ syntax
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   graph-coalgebra-polynomial-endofunctor :

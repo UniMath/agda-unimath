@@ -20,8 +20,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-An element `x` of a semiring `R` is said to be central if `xy ＝ yx` for every
-`y : R`.
+An element `x` of a [semiring](ring-theory.semirings.md) `R` is said to be
+{{#concept "central" Disambiguation="element of a semiring" Agda=is-central-element-Semiring}}
+if `xy ＝ yx` for every `y : R`.
 
 ## Definition
 

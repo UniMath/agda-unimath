@@ -33,8 +33,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-{{#concept "Multivariable polynomial functors" Agda=polynomial-functor}} are a
-generalization of the notion of
+{{#concept "Multivariable polynomial functors" WD="polynomial functor" WDID=Q49000754 Agda=polynomial-functor}}
+are a generalization of the notion of
 [polynomial endofunctors](trees.polynomial-endofunctors.md) to the case of
 families of types (variables). Given a type family `A : J → Type` and a type
 family `B : I → {j : J} → A j → Type` over `A`, we have a multivariable

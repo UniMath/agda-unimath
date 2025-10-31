@@ -28,8 +28,8 @@ open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 
 ## Idea
 
-A {{concept "subsequence" Agda=subsequence}} of a [sequence](lists.sequences.md)
-`u : ℕ → A` is a sequence `u ∘ f` for some
+A {{concept "subsequence" WD="subsequence" WDID=Q1332977 Agda=subsequence}} of a
+[sequence](lists.sequences.md) `u : ℕ → A` is a sequence `u ∘ f` for some
 [strictly increasing](order-theory.strict-order-preserving-maps.md) sequence
 `f : ℕ → ℕ`.
 

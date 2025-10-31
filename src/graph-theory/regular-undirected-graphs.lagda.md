@@ -19,9 +19,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **regular undirected graph** is an
-[undirected graph](graph-theory.undirected-graphs.md) of which each vertex has
-the same number of
+A
+{{#concept "regular undirected graph" WD="regular graph" WDID=Q826467 Agda=is-regular-Undirected-Graph}}
+is an [undirected graph](graph-theory.undirected-graphs.md) of which each vertex
+has the same number of
 [incident edges](graph-theory.neighbors-undirected-graphs.md).
 
 ## Definition

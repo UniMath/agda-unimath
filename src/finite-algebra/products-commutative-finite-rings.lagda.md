@@ -29,8 +29,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Given two commutative finite rings R1 and R2, we define a commutative finite
-ring structure on the product of R1 and R2.
+Given two [commutative finite rings](finite-algebra.commutative-finite-rings.md)
+`R1` and `R2`, then the
+{{#concept "product" Disambiguation="of commutative finite rings" Agda=product-Finite-Commutative-Ring}}
+commutative finite ring `R1 × R2` is defined componentwise.
 
 ## Definition
 

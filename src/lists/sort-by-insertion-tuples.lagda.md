@@ -34,9 +34,11 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-Sort by insertion is a recursive sort on tuples. If a tuple is empty or with
-only one element then it is sorted. Otherwise, we recursively sort the tail of
-the tuple. Then we compare the head of the tuple to the head of the sorted tail.
+{{#concept "Sort by insertion" Disambiguation="for tuples" WD="insertion sort" WDID=Q117241 Agda=insertion-sort-tuple}}
+is a recursive [sorting algorithm](lists.sorting-algorithms-lists.md) on
+[tuples](lists.tuples.md). If a tuple is empty or with only one element then it
+is sorted. Otherwise, we recursively sort the tail of the tuple. Then we compare
+the head of the tuple to the head of the [sorted](lists.sorted-tuples.md) tail.
 If the head is less or equal than the head of the tail the tuple is sorted.
 Otherwise we permute the two elements and we recursively sort the tail of the
 tuple.

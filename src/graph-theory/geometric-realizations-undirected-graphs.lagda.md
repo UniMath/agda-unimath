@@ -21,9 +21,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The **geometric realization** of an
-[undirected graph](graph-theory.undirected-graphs.md) `G` is the initial type
-`X` equipped with a
+The {{#concept "geometric realization" Disambiguation="of an undirected graph"}}
+of an [undirected graph](graph-theory.undirected-graphs.md) `G` is the initial
+type `X` equipped with a
 [reflecting map](graph-theory.reflecting-maps-undirected-graphs.md) from `G`
 into `X`.
 

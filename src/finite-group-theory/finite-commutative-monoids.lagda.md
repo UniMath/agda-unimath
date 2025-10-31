@@ -1,4 +1,4 @@
-# Finite Commutative monoids
+# Finite commutative monoids
 
 ```agda
 module finite-group-theory.finite-commutative-monoids where
@@ -28,8 +28,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite commutative monoid is a finite monoid `M` in which `xy = yx` holds for
-all `x y : M`.
+A {{#concept "finite commutative monoid" Agda=Finite-Commutative-Monoid}} is a
+[finite monoid](finite-group-theory.finite-monoids.md) `M` in which `xy = yx`
+holds for all `x y : M`.
 
 ## Definition
 

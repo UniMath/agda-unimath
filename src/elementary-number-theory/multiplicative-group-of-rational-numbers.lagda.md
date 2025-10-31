@@ -37,7 +37,7 @@ open import group-theory.submonoids-commutative-monoids
 
 open import ring-theory.groups-of-units-rings
 open import ring-theory.invertible-elements-rings
-open import ring-theory.trivial-rings
+open import ring-theory.nontrivial-rings
 ```
 
 </details>
