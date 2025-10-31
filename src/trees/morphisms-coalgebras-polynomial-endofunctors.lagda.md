@@ -30,18 +30,21 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-A **morphism** of coalgebras of a polynomial endofunctor `P A B` consists of a
+A
+{{#concept "morphism" Disambiguation="of coalgebras of a polynomial endofunctor" Agda=hom-coalgebra-polynomial-endofunctor}}
+of [coalgebras](trees.coalgebras-polynomial-endofunctors.md) of a
+[polynomial endofunctor](trees.polynomial-endofunctors.md) `P` consists of a
 function `f : X → Y` between their underlying types, equipped with a homotopy
 witnessing that the square
 
 ```text
-              f
-      X -------------> Y
-      |                |
-      |                |
-      ∨                ∨
-  P A B X ---------> P A B Y
-           P A B f
+            f
+    X -------------> Y
+    |                |
+    |                |
+    ∨                ∨
+   P X -----------> P Y
+           P f
 ```
 
 commutes.
@@ -51,40 +54,38 @@ commutes.
 ### Morphisms of coalgebras for polynomial endofunctors
 
 ```agda
-hom-coalgebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B) →
-  (Y : coalgebra-polynomial-endofunctor l4 A B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-hom-coalgebra-polynomial-endofunctor {A = A} {B} X Y =
-  Σ ( type-coalgebra-polynomial-endofunctor X →
-      type-coalgebra-polynomial-endofunctor Y)
-    ( λ f →
-      ( coherence-square-maps f
-          ( structure-coalgebra-polynomial-endofunctor X)
-          ( structure-coalgebra-polynomial-endofunctor Y)
-          ( map-polynomial-endofunctor' A B f)))
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
+  (Y : coalgebra-polynomial-endofunctor l4 P)
+  where
 
-map-hom-coalgebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B) →
-  (Y : coalgebra-polynomial-endofunctor l4 A B) →
-  hom-coalgebra-polynomial-endofunctor X Y →
-  type-coalgebra-polynomial-endofunctor X →
-  type-coalgebra-polynomial-endofunctor Y
-map-hom-coalgebra-polynomial-endofunctor X Y f = pr1 f
+  hom-coalgebra-polynomial-endofunctor : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-coalgebra-polynomial-endofunctor =
+    Σ ( type-coalgebra-polynomial-endofunctor X →
+        type-coalgebra-polynomial-endofunctor Y)
+      ( λ f →
+        ( coherence-square-maps f
+            ( structure-coalgebra-polynomial-endofunctor X)
+            ( structure-coalgebra-polynomial-endofunctor Y)
+            ( map-polynomial-endofunctor P f)))
 
-structure-hom-coalgebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B) →
-  (Y : coalgebra-polynomial-endofunctor l4 A B) →
-  (f : hom-coalgebra-polynomial-endofunctor X Y) →
-  coherence-square-maps
-    ( map-hom-coalgebra-polynomial-endofunctor X Y f)
-    ( structure-coalgebra-polynomial-endofunctor X)
-    ( structure-coalgebra-polynomial-endofunctor Y)
-    ( map-polynomial-endofunctor' A B
-      ( map-hom-coalgebra-polynomial-endofunctor X Y f))
-structure-hom-coalgebra-polynomial-endofunctor X Y f = pr2 f
+  map-hom-coalgebra-polynomial-endofunctor :
+    hom-coalgebra-polynomial-endofunctor →
+    type-coalgebra-polynomial-endofunctor X →
+    type-coalgebra-polynomial-endofunctor Y
+  map-hom-coalgebra-polynomial-endofunctor f = pr1 f
+
+  structure-hom-coalgebra-polynomial-endofunctor :
+    (f : hom-coalgebra-polynomial-endofunctor) →
+    coherence-square-maps
+      ( map-hom-coalgebra-polynomial-endofunctor f)
+      ( structure-coalgebra-polynomial-endofunctor X)
+      ( structure-coalgebra-polynomial-endofunctor Y)
+      ( map-polynomial-endofunctor P
+        ( map-hom-coalgebra-polynomial-endofunctor f))
+  structure-hom-coalgebra-polynomial-endofunctor f = pr2 f
 ```
 
 ## Properties
@@ -93,9 +94,10 @@ structure-hom-coalgebra-polynomial-endofunctor X Y f = pr2 f
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
-  (Y : coalgebra-polynomial-endofunctor l4 A B)
+  {l1 l2 l3 l4 : Level}
+  {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
+  (Y : coalgebra-polynomial-endofunctor l4 P)
   (f : hom-coalgebra-polynomial-endofunctor X Y)
   where
 
@@ -107,7 +109,7 @@ module _
       ( λ H →
         ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
           ( structure-coalgebra-polynomial-endofunctor Y ·l H)) ~
-        ( ( ( htpy-polynomial-endofunctor' A B H) ·r
+        ( ( ( htpy-polynomial-endofunctor P H) ·r
             ( structure-coalgebra-polynomial-endofunctor X)) ∙h
           ( structure-hom-coalgebra-polynomial-endofunctor X Y g)))
 
@@ -119,11 +121,11 @@ module _
     ( inv
       ( ap
         ( concat'
-          ( map-polynomial-endofunctor' A B
+          ( map-polynomial-endofunctor P
             ( map-hom-coalgebra-polynomial-endofunctor X Y f)
             ( structure-coalgebra-polynomial-endofunctor X z))
           ( structure-hom-coalgebra-polynomial-endofunctor X Y f z))
-        ( coh-refl-htpy-polynomial-endofunctor' A B
+        ( coh-refl-htpy-polynomial-endofunctor P
           ( map-hom-coalgebra-polynomial-endofunctor X Y f)
           ( structure-coalgebra-polynomial-endofunctor X z))))
 
@@ -144,7 +146,7 @@ module _
               ( map-hom-coalgebra-polynomial-endofunctor X Y f)
               ( structure-coalgebra-polynomial-endofunctor X)
               ( structure-coalgebra-polynomial-endofunctor Y)
-              ( map-polynomial-endofunctor' A B
+              ( map-polynomial-endofunctor P
                 ( map-hom-coalgebra-polynomial-endofunctor X Y f)))
             ( λ G →
               ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
@@ -158,12 +160,12 @@ module _
               ( λ x →
                 ap
                   ( concat'
-                    ( ( map-polynomial-endofunctor' A B
-                        ( map-hom-coalgebra-polynomial-endofunctor X Y f)
-                        ( structure-coalgebra-polynomial-endofunctor X x)))
+                    ( map-polynomial-endofunctor P
+                      ( map-hom-coalgebra-polynomial-endofunctor X Y f)
+                      ( structure-coalgebra-polynomial-endofunctor X x))
                     (G x))
                   ( inv
-                    ( coh-refl-htpy-polynomial-endofunctor' A B
+                    ( coh-refl-htpy-polynomial-endofunctor P
                       ( map-hom-coalgebra-polynomial-endofunctor X Y f)
                       ( structure-coalgebra-polynomial-endofunctor X x))))))
         ( is-torsorial-htpy

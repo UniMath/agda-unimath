@@ -31,8 +31,11 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-A **rooted morphism** of directed trees from `S` to `T` is a morphism of
-directed trees that maps the root of `S` to the root of `T`
+A
+{{#concept "rooted morphism" Disambiguation="of directed trees" Agda=rooted-hom-Directed-Tree}}
+of [directed trees](trees.directed-trees.md) from `S` to `T` is a
+[morphism](trees.morphisms-directed-trees.md) of directed trees that maps the
+root of `S` to the root of `T`.
 
 ## Definition
 
