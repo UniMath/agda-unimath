@@ -192,7 +192,7 @@ module _
     ( htpy-is-model σ f g , is-prop-htpy-is-model f g)
 ```
 
-### The characterization of identities of models
+### Characterizing equality of models
 
 ```agda
 module _

@@ -1,4 +1,4 @@
-# Algebras
+# Algebras of algebraic theories
 
 ```agda
 module universal-algebra.algebras-of-algebraic-theories where

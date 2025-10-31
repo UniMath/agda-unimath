@@ -199,14 +199,14 @@ module _
   (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
-  preserves-operations-id-Algebra : preserves-operations-Algebra σ T A A id
-  preserves-operations-id-Algebra op v =
+  preserves-operations-id-hom-Algebra : preserves-operations-Algebra σ T A A id
+  preserves-operations-id-hom-Algebra op v =
     ap
       ( is-model-set-Algebra σ T A op)
       ( preserves-id-map-tuple (arity-operation-signature σ op) v)
 
   id-hom-Algebra : hom-Algebra σ T A A
-  id-hom-Algebra = (id , preserves-operations-id-Algebra)
+  id-hom-Algebra = (id , preserves-operations-id-hom-Algebra)
 ```
 
 ### Composition of algebra homomorphisms is associative
