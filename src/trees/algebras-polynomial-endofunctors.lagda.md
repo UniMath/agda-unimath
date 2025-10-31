@@ -19,7 +19,7 @@ open import trees.polynomial-endofunctors
 
 Given a [polynomial endofunctor](trees.polynomial-endofunctors.md) `P`, an
 {{#concept "algebra" Disambiguation="of a polynomial endofunctor on types" Agda=algebra-polynomial-endofunctor}}
-for `P` conisists of a type `X` and a map `P(X) → X`.
+for `P` consists of a type `X` and a map `P(X) → X`.
 
 ## Definitions
 
