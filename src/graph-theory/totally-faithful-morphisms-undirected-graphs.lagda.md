@@ -23,8 +23,8 @@ open import graph-theory.undirected-graphs
 A
 {{#concept "totally faithful morphism" Agda=is-totally-faithful-hom-Undirected-Graph Agda=totally-faithful-hom-Undirected-Graph}}
 of [undirected graphs](graph-theory.undirected-graphs.md) is a
-[morphism](graph-theory.morphisms-undirected-graphs.md) undirected graphs
-`f : G → H` of such that for edge `e` in `H` there is at most one edge in `G`
+[morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
+`f : G → H` such that for each edge `e` in `H` there is at most one edge in `G`
 that `f` maps to `e`.
 
 ## Definition

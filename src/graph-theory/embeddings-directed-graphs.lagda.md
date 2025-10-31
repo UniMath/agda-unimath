@@ -21,10 +21,10 @@ open import graph-theory.morphisms-directed-graphs
 ## Idea
 
 An
-{{#concept "embedding" Disambiguation="of directed graphs" WD="graph embedding" WDID=Q5597085 Agda=is-emb-hom-Directed-Graph Agda=emb-Directed-Graph}}
+{{#concept "embedding" Disambiguation="of directed graphs" Agda=is-emb-hom-Directed-Graph Agda=emb-Directed-Graph}}
 of [directed graphs](graph-theory.directed-graphs.md) is a
 [morphism](graph-theory.morphisms-directed-graphs.md) of directed graphs
-`f : G → H`which is an [embedding](foundation.embeddings.md) on vertices such
+`f : G → H` which is an [embedding](foundation.embeddings.md) on vertices such
 that for each pair `(x , y)` of vertices in `G` the map
 
 ```text
