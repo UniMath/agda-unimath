@@ -87,22 +87,22 @@ module _
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
-  tuple-type-quotient-tuple-type-quotient-Algebra :
+  is-inhabited-tuple-type-quotient-Algebra :
     {n : ℕ} →
     tuple type-quotient-Algebra n →
     type-trunc-Prop (tuple (type-Algebra σ T A) n)
-  tuple-type-quotient-tuple-type-quotient-Algebra empty-tuple =
+  is-inhabited-tuple-type-quotient-Algebra empty-tuple =
     unit-trunc-Prop empty-tuple
-  tuple-type-quotient-tuple-type-quotient-Algebra (x ∷ v) =
+  is-inhabited-tuple-type-quotient-Algebra (x ∷ v) =
     map-universal-property-trunc-Prop
       ( trunc-Prop _)
       ( λ (z , p) →
         map-trunc-Prop
           ( λ v' → z ∷ v')
-          ( tuple-type-quotient-tuple-type-quotient-Algebra v))
+          ( is-inhabited-tuple-type-quotient-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-for-all-tuples-all-sim-equivalence-relation-quotient-Algebra :
+  relation-holds-for-all-tuples-sim-quotient-Algebra :
     {n : ℕ}
     (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
     sim-equivalence-relation
@@ -115,13 +115,13 @@ module _
       ( equivalence-relation-congruence-Algebra σ T A R)
       ( tuple-multivariable-input n (type-Algebra σ T A) v)
       ( tuple-multivariable-input n (type-Algebra σ T A) v')
-  relation-holds-for-all-tuples-all-sim-equivalence-relation-quotient-Algebra
+  relation-holds-for-all-tuples-sim-quotient-Algebra
     {zero-ℕ} v v' p =
     raise-star
-  relation-holds-for-all-tuples-all-sim-equivalence-relation-quotient-Algebra
+  relation-holds-for-all-tuples-sim-quotient-Algebra
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
     ( p ,
-      relation-holds-for-all-tuples-all-sim-equivalence-relation-quotient-Algebra
+      relation-holds-for-all-tuples-sim-quotient-Algebra
         ( v)
         ( v')
         ( p'))
@@ -151,7 +151,7 @@ module _
               ( arity-operation-signature σ op)
               ( type-Algebra σ T A)
               ( v'))
-            ( relation-holds-for-all-tuples-all-sim-equivalence-relation-quotient-Algebra
+            ( relation-holds-for-all-tuples-sim-quotient-Algebra
               ( v)
               ( v')
               ( p))))

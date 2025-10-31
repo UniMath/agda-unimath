@@ -1,4 +1,4 @@
-# Model-Of-Signatures of signatures
+# Models of signatures
 
 ```agda
 module universal-algebra.models-of-signatures where
@@ -60,6 +60,8 @@ is-model-of-signature-type σ X =
 is-model-of-signature : {l1 l2 : Level} → signature l1 → Set l2 → UU (l1 ⊔ l2)
 is-model-of-signature σ X = is-model-of-signature-type σ (type-Set X)
 ```
+
+### The type of models of a signature
 
 ```agda
 Model-Of-Signature :
