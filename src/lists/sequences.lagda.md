@@ -20,9 +20,9 @@ open import lists.dependent-sequences
 
 ## Idea
 
-A {{#concept "sequence" Agda=sequence}} of elements of type `A` is a map `ℕ → A`
-from the [natural numbers](elementary-number-theory.natural-numbers.md) into
-`A`.
+A {{#concept "sequence" WD="infinite sequence" WDID=Q11085785 Agda=sequence}} of
+elements of type `A` is a map `ℕ → A` from the
+[natural numbers](elementary-number-theory.natural-numbers.md) into `A`.
 
 For a list of number sequences from the
 [On-Line Encyclopedia of Integer Sequences](https://oeis.org) {{#cite oeis}}

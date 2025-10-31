@@ -35,6 +35,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 
 open import trees.polynomial-endofunctors
+open import trees.universal-polynomial-endofunctor
 ```
 
 </details>
@@ -52,7 +53,7 @@ definitions for types.
 
 ```agda
 Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
-Slice l = type-polynomial-endofunctor' (UU l) (λ X → X)
+Slice l = type-polynomial-endofunctor (universal-polynomial-endofunctor l)
 ```
 
 ### The morphisms in the slice category of types
