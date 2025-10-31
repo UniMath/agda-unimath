@@ -216,14 +216,11 @@ module _
       (c c' : vertex-ethane) →
       number-of-elements-count (count-standard-edge-ethane c c') ≤-ℕ 3
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr _)) (inl (inr _)) =
-      star
+      (inl (inr _)) (inl (inr _)) = star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr _)) (inr _) =
-      star
+      (inl (inr _)) (inr _) = star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inr _) (inl (inr _)) =
-      star
+      (inr _) (inl (inr _)) = star
     number-of-elements-count-standard-edge-ethane-leq-3
       (inr _) (inr _) = star
 

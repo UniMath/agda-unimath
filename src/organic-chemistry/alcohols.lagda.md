@@ -26,8 +26,9 @@ open import organic-chemistry.saturated-carbons
 An {{#concept "alcohol" WD="alcohols" WDID=Q156 Agda=alcohol}} is a
 [hydrocarbon](organic-chemistry.hydrocarbons.md) with at least one `-OH` group.
 The type of alcohols can therefore be defined as the type of hydrocarbons
-equipped with a distinguished subset of the available (unbonded) electrons of
-the carbon atoms.
+[equipped](foundation.structure.md) with a distinguished
+[subset](foundation.decidable-subtypes.md) of the available (unbonded) electrons
+of the carbon atoms.
 
 ## Definition
 
@@ -43,12 +44,11 @@ alcohol =
             ( b : edge-hydrocarbon X (standard-unordered-pair c c')) →
             ¬ (is-in-decidable-subtype (OH c) (bonding-hydrocarbon X b))) ×
           ( ( type-trunc-Prop
-            ( Σ ( vertex-hydrocarbon X)
-                ( λ c → type-decidable-subtype (OH c)))) ×
+              ( Σ ( vertex-hydrocarbon X)
+                  ( λ c → type-decidable-subtype (OH c)))) ×
             ( ( c : vertex-hydrocarbon X) →
               type-decidable-subtype (OH c) →
-              is-saturated-carbon-hydrocarbon X c
-              ))))
+              is-saturated-carbon-hydrocarbon X c))))
 ```
 
 More explicitly, an alcohol is a hydrocarbon equipped with, for each of its

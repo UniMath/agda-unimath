@@ -24,12 +24,14 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 An $n$-{{#concept "alkene" WD="alkene" WDID=Q81406 Agda=alkene}} is a
-[hydrocarbon](organic-chemistry.hydrocarbons.md) equipped with a choice of $n$
-carbons, each of which has a double bond. For an $n$-alkene, the embedding from
-the given type (the first component of the $n$-alkene structure) specifies which
-carbons have double bonds. For example, 1-butene and but-2-ene have the same
-geometry, and the embedding is what differentiates them (while the third
-tautometer, isobutylene, is branched, thus has a different geometry).
+[hydrocarbon](organic-chemistry.hydrocarbons.md)
+[equipped](foundation.structure.md) with a choice of $n$ carbons, each of which
+has a double bond. For an $n$-alkene, the
+[embedding](foundation-core.embeddings.md) from the given type (the first
+component of the $n$-alkene structure) specifies which carbons have double
+bonds. For example, 1-butene and but-2-ene have the same geometry, and the
+embedding is what differentiates them (while the third tautometer, isobutylene,
+is branched, thus has a different geometry).
 
 ## Definition
 
@@ -41,5 +43,5 @@ alkene H n =
       Σ ( type-Type-With-Cardinality-ℕ n carbons ↪ vertex-hydrocarbon H)
         ( λ embed-carbons →
           ( c : type-Type-With-Cardinality-ℕ n carbons) →
-          pr1 (has-double-bond-hydrocarbon H (pr1 embed-carbons c))))
+          has-double-bond-hydrocarbon H (map-emb embed-carbons c)))
 ```

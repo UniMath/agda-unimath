@@ -24,8 +24,9 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 An $n$-{{#concept "alkyne" WD="alkyne" WDID=Q159226 Agda=alkyne}} is a
-[hydrocarbon](organic-chemistry.hydrocarbons.md) equipped with a choice of $n$
-carbons, each of which has a triple bond.
+[hydrocarbon](organic-chemistry.hydrocarbons.md)
+[equipped](foundation.structure.md) with a choice of $n$ carbons, each of which
+has a [triple bond](organic-chemistry.saturated-carbons.md).
 
 ## Definition
 
