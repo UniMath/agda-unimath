@@ -66,9 +66,9 @@ We characterize
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   where
 
   is-equiv-hom-Algebra : (f : hom-Algebra σ T A B) → UU (l3 ⊔ l4)
@@ -90,10 +90,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 l3 l4 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  equiv-Algebra : (A : Algebra σ T l3) (B : Algebra σ T l4) → UU (l1 ⊔ l3 ⊔ l4)
+  equiv-Algebra : (A : Algebra l3 σ T) (B : Algebra l4 σ T) → UU (l1 ⊔ l3 ⊔ l4)
   equiv-Algebra A B =
     equiv-Model-Signature σ (model-Algebra σ T A) (model-Algebra σ T B)
 ```
@@ -104,9 +104,9 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   (f : hom-Algebra σ T A B)
   (eq : is-equiv (map-hom-Algebra σ T A B f))
   where
@@ -153,16 +153,16 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
   equiv-eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) → A ＝ B → equiv-Algebra σ T A B
+    {l3 : Level} (A B : Algebra l3 σ T) → A ＝ B → equiv-Algebra σ T A B
   equiv-eq-Algebra A .A refl =
     refl-equiv-Model-Signature σ (model-Algebra σ T A)
 
   is-equiv-equiv-eq-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
+    {l3 : Level} (A B : Algebra l3 σ T) →
     is-equiv (equiv-eq-Algebra A B)
   is-equiv-equiv-eq-Algebra (A , p) =
     subtype-identity-principle
@@ -173,19 +173,19 @@ module _
       ( is-equiv-Eq-eq-Model-Signature σ A)
 
   extensionality-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
+    {l3 : Level} (A B : Algebra l3 σ T) →
     (A ＝ B) ≃ equiv-Algebra σ T A B
   extensionality-Algebra A B =
     ( equiv-eq-Algebra A B , is-equiv-equiv-eq-Algebra A B)
 
   eq-equiv-Algebra :
-    {l3 : Level} (A B : Algebra σ T l3) →
+    {l3 : Level} (A B : Algebra l3 σ T) →
     equiv-Algebra σ T A B → A ＝ B
   eq-equiv-Algebra A B = map-inv-equiv (extensionality-Algebra A B)
 
   abstract
     is-torsorial-equiv-Algebra :
-      {l3 : Level} (A : Algebra σ T l3) →
+      {l3 : Level} (A : Algebra l3 σ T) →
       is-torsorial (equiv-Algebra {l4 = l3} σ T A)
     is-torsorial-equiv-Algebra A =
       fundamental-theorem-id'
@@ -198,12 +198,12 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
   equiv-equiv-hom-Algebra' :
     {l4 : Level}
-    (B : Algebra σ T l4) →
+    (B : Algebra l4 σ T) →
     equiv-hom-Algebra σ T A B ≃
     Σ ( type-Algebra σ T A → type-Algebra σ T B)
       ( λ f → (is-equiv f) × preserves-operations-Algebra σ T A B f)
@@ -219,7 +219,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A B : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A B : Algebra l3 σ T)
   where
 
   is-iso-Algebra : (f : hom-Algebra σ T A B) → UU (l1 ⊔ l3)
@@ -305,18 +305,18 @@ module _
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where abstract
 
   is-torsorial-iso-Algebra : is-torsorial (iso-Algebra σ T A)
   is-torsorial-iso-Algebra =
     is-contr-equiv'
-      ( Σ (Algebra σ T l3) (equiv-Algebra σ T A))
+      ( Σ (Algebra l3 σ T) (equiv-Algebra σ T A))
       ( equiv-tot (equiv-iso-equiv-Algebra σ T A))
       ( is-torsorial-equiv-Algebra σ T A)
 
   is-equiv-iso-eq-Algebra :
-    (B : Algebra σ T l3) →
+    (B : Algebra l3 σ T) →
     is-equiv (iso-eq-Large-Precategory (Algebra-Large-Precategory σ T) A B)
   is-equiv-iso-eq-Algebra =
     fundamental-theorem-id

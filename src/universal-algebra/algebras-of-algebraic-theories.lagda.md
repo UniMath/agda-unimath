@@ -43,10 +43,10 @@ theory.
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  is-algebra : {l3 : Level} → Model-Signature σ l3 → UU (l2 ⊔ l3)
+  is-algebra : {l3 : Level} → Model-Signature l3 σ → UU (l2 ⊔ l3)
   is-algebra M =
     (e : index-Algebraic-Theory σ T) →
     (assign : assignment σ (type-Model-Signature σ M)) →
@@ -61,20 +61,20 @@ module _
 ### The type of algebras
 
 ```agda
-module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
-  where
-
-  Algebra : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-  Algebra l3 =
-    Σ (Model-Signature σ l3) (is-algebra σ T)
+Algebra :
+  {l1 l2 : Level} (l3 : Level)
+  (σ : signature l1) →
+  Algebraic-Theory l2 σ →
+  UU (l1 ⊔ l2 ⊔ lsuc l3)
+Algebra l3 σ T =
+  Σ (Model-Signature l3 σ) (is-algebra σ T)
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
-  model-Algebra : Model-Signature σ l3
+  model-Algebra : Model-Signature l3 σ
   model-Algebra = pr1 A
 
   set-Algebra : Set l3
@@ -100,7 +100,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (X : Model-Signature σ l3)
+  (T : Algebraic-Theory l2 σ) (X : Model-Signature l3 σ)
   where
 
   abstract

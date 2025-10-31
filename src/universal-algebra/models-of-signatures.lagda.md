@@ -59,11 +59,11 @@ is-model σ X = is-model-type σ (type-Set X)
 ```
 
 ```agda
-Model-Signature : {l1 : Level} → signature l1 → (l2 : Level) → UU (l1 ⊔ lsuc l2)
-Model-Signature σ l2 = Σ (Set l2) (is-model σ)
+Model-Signature : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Model-Signature l2 σ = Σ (Set l2) (is-model σ)
 
 module _
-  {l1 l2 : Level} (σ : signature l1) (X : Model-Signature σ l2)
+  {l1 l2 : Level} (σ : signature l1) (X : Model-Signature l2 σ)
   where
 
   set-Model-Signature : Set l2
@@ -72,7 +72,7 @@ module _
   is-model-set-Model-Signature : is-model σ set-Model-Signature
   is-model-set-Model-Signature = pr2 X
 
-  type-Model-Signature :  UU l2
+  type-Model-Signature : UU l2
   type-Model-Signature = type-Set set-Model-Signature
 
   is-set-type-Model-Signature : is-set type-Model-Signature

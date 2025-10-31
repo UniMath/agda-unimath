@@ -58,7 +58,7 @@ data group-laws : UU lzero where
   idl-l-group-laws : group-laws
   idr-r-group-laws : group-laws
 
-algebraic-theory-Group : Algebraic-Theory group-signature lzero
+algebraic-theory-Group : Algebraic-Theory lzero group-signature
 pr1 algebraic-theory-Group = group-laws
 pr2 algebraic-theory-Group =
   λ where
@@ -88,7 +88,7 @@ pr2 algebraic-theory-Group =
     var = var-term
 
 algebra-Group : (l : Level) → UU (lsuc l)
-algebra-Group l = Algebra group-signature algebraic-theory-Group l
+algebra-Group l = Algebra l group-signature algebraic-theory-Group
 ```
 
 ## Properties

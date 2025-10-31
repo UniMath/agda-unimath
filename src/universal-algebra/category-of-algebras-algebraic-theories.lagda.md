@@ -1,7 +1,7 @@
 # The category of algebras of an algebraic theory
 
 ```agda
-module universal-algebra\.category-of-algebras-algebraic-theories where
+module universal-algebra.category-of-algebras-algebraic-theories where
 ```
 
 <details><summary>Imports</summary>
@@ -37,7 +37,7 @@ open import universal-algebra.signatures
 
 Given an [algebraic theory](universal-algebra.algebraic-theories.md) `T` over a
 [(finitary) signature](universal-algebra.signatures.md) `σ`, we have the
-{{#concept "large category of `T`-algebras" Disambiguation="of an algebraic theory over a signature, single-sorted, finitary" Agda=Algebra-Large-Category}},
+{{#concept "large category of `T`-algebras" Disambiguation="of an algebraic theory, single-sorted, finitary" Agda=Algebra-Large-Category}},
 which consists of
 `T`-[algebras](universal-algebra.algebras-of-algebraic-theories.md) and
 `T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
@@ -48,7 +48,7 @@ which consists of
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
   is-large-category-Algebra-Large-Precategory :
@@ -67,7 +67,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
   Algebra-Category : (l3 : Level) → Category (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)

@@ -32,18 +32,17 @@ say, requiring additional types of relations.
 ### Theories
 
 ```agda
+Algebraic-Theory : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Algebraic-Theory l2 σ = Σ (UU l2) (λ B → (B → abstract-equation σ))
+
 module _
-  {l1 : Level} (σ : signature l1)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  Algebraic-Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Algebraic-Theory l2 = Σ (UU l2) (λ B → (B → abstract-equation σ))
-
-  index-Algebraic-Theory : {l2 : Level} → Algebraic-Theory l2 → UU l2
-  index-Algebraic-Theory = pr1
+  index-Algebraic-Theory : UU l2
+  index-Algebraic-Theory = pr1 T
 
   index-abstract-equation-Algebraic-Theory :
-    {l2 : Level} (Th : Algebraic-Theory l2) →
-    index-Algebraic-Theory Th → abstract-equation σ
-  index-abstract-equation-Algebraic-Theory = pr2
+    index-Algebraic-Theory → abstract-equation σ
+  index-abstract-equation-Algebraic-Theory = pr2 T
 ```

@@ -44,9 +44,9 @@ of a [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `f` of
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   (F : hom-Algebra σ T A B)
   where
 

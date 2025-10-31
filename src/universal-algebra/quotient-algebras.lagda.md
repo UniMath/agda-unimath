@@ -38,7 +38,7 @@ open import universal-algebra.signatures
 ## Idea
 
 The
-{{#concept "quotient" Disambiguation="of an algebra of an algebraic theory" WD="quotient algebra" WDID=Q2589508}}
+{{#concept "quotient" Disambiguation="of an algebra of an algebraic theory, single-sorted, finitary" WD="quotient algebra" WDID=Q2589508}}
 of an [algebra](universal-algebra.algebras-of-algebraic-theories.md) by a
 [congruence](universal-algebra.congruences.md) is the
 [set quotient](foundation.set-quotients.md) by that congruence. This quotient
@@ -50,8 +50,8 @@ again has the structure of an algebra inherited by the original one.
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
   (R : congruence-Algebra σ T A l4)
   where
 
@@ -152,7 +152,7 @@ module _
         ( type-quotient-Algebra)
         ( v))
 
-  model-quotient-Algebra : Model-Signature σ (l3 ⊔ l4)
+  model-quotient-Algebra : Model-Signature (l3 ⊔ l4) σ
   model-quotient-Algebra =
     ( set-quotient-Algebra , is-model-set-quotient-Algebra)
 ```

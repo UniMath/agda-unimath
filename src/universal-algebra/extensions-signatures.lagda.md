@@ -46,12 +46,12 @@ is-extension-of-signature σ τ =
 module _
   {l1 l2 : Level}
   (σ : signature l1) (τ : signature l2)
-  (ext : is-extension-of-signature σ τ)
+  (E : is-extension-of-signature σ τ)
   where
 
   emb-inclusion-is-extension-of-signature :
     operation-signature σ ↪ operation-signature τ
-  emb-inclusion-is-extension-of-signature = pr1 ext
+  emb-inclusion-is-extension-of-signature = pr1 E
 
   inclusion-is-extension-of-signature :
     operation-signature σ → operation-signature τ
@@ -67,5 +67,5 @@ module _
     (op : operation-signature σ) →
     arity-operation-signature σ op ＝
     arity-operation-signature τ (inclusion-is-extension-of-signature op)
-  preserves-arity-inclusion-is-extension-of-signature = pr2 ext
+  preserves-arity-inclusion-is-extension-of-signature = pr2 E
 ```

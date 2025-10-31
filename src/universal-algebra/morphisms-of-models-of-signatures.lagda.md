@@ -53,8 +53,8 @@ in `A` and `B` respectively, and for a `v : tuple A n`, we have
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X'@((X , is-set-X) , assign-X) : Model-Signature σ l2)
-  (Y'@((Y , is-set-Y) , assign-Y) : Model-Signature σ l3)
+  (X'@((X , is-set-X) , assign-X) : Model-Signature l2 σ)
+  (Y'@((Y , is-set-Y) , assign-Y) : Model-Signature l3 σ)
   (f : type-Model-Signature σ X' → type-Model-Signature σ Y')
   where
 
@@ -88,7 +88,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
+  (X : Model-Signature l2 σ) (Y : Model-Signature l3 σ)
   where
 
   hom-Model-Signature : UU (l1 ⊔ l2 ⊔ l3)
@@ -114,7 +114,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (σ : signature l1)
-  (X'@((X , _) , assign-X) : Model-Signature σ l2)
+  (X'@((X , _) , assign-X) : Model-Signature l2 σ)
   where
 
   preserves-operations-id-Model-Signature :
@@ -133,7 +133,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
+  (X : Model-Signature l2 σ) (Y : Model-Signature l3 σ)
   where
 
   htpy-hom-Model-Signature :

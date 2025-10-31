@@ -39,7 +39,7 @@ operations of the algebra.
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
   relation-holds-all-tuple :

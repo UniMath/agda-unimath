@@ -52,9 +52,9 @@ preserved.
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   where
 
   preserves-operations-Algebra :
@@ -106,10 +106,10 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
-  (C : Algebra σ T l5)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
+  (C : Algebra l5 σ T)
   where
 
   preserves-operations-map-comp-hom-Algebra :
@@ -146,9 +146,9 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   where
 
   is-set-hom-Algebra : is-set (hom-Algebra σ T A B)
@@ -196,7 +196,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory σ l2) (A : Algebra σ T l3)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
   where
 
   preserves-operations-id-Algebra : preserves-operations-Algebra σ T A A id
@@ -215,11 +215,11 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
-  (C : Algebra σ T l5)
-  (D : Algebra σ T l6)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
+  (C : Algebra l5 σ T)
+  (D : Algebra l6 σ T)
   where
 
   associative-comp-hom-Algebra :
@@ -245,9 +245,9 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Algebraic-Theory σ l2)
-  (A : Algebra σ T l3)
-  (B : Algebra σ T l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
   where
 
   left-unit-law-comp-hom-Algebra :

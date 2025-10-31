@@ -53,8 +53,8 @@ We characterize [equivalences](foundation-core.equivalences.md) of
 ```agda
 equiv-Model-Signature :
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model-Signature σ l2)
-  (Y : Model-Signature σ l3) →
+  (X : Model-Signature l2 σ)
+  (Y : Model-Signature l3 σ) →
   UU (l1 ⊔ l2 ⊔ l3)
 equiv-Model-Signature σ X Y =
   Σ ( type-Model-Signature σ X ≃ type-Model-Signature σ Y)
@@ -62,8 +62,8 @@ equiv-Model-Signature σ X Y =
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model-Signature σ l2)
-  (Y : Model-Signature σ l3)
+  (X : Model-Signature l2 σ)
+  (Y : Model-Signature l3 σ)
   (e : equiv-Model-Signature σ X Y)
   where
 
@@ -200,18 +200,18 @@ module _
   where
 
   refl-equiv-Model-Signature :
-    {l2 : Level} (X : Model-Signature σ l2) → equiv-Model-Signature σ X X
+    {l2 : Level} (X : Model-Signature l2 σ) → equiv-Model-Signature σ X X
   refl-equiv-Model-Signature X =
     ( id-equiv , preserves-operations-id-Model-Signature σ X)
 
   Eq-eq-Model-Signature :
-    {l2 : Level} (X Y : Model-Signature σ l2) →
+    {l2 : Level} (X Y : Model-Signature l2 σ) →
     X ＝ Y → equiv-Model-Signature σ X Y
   Eq-eq-Model-Signature X .X refl = refl-equiv-Model-Signature X
 
   abstract
     is-equiv-Eq-eq-Model-Signature :
-      {l2 : Level} (X Y : Model-Signature σ l2) →
+      {l2 : Level} (X Y : Model-Signature l2 σ) →
       is-equiv (Eq-eq-Model-Signature X Y)
     is-equiv-Eq-eq-Model-Signature (X , X-assign) =
       structure-identity-principle
@@ -224,13 +224,13 @@ module _
         ( is-equiv-htpy-eq-is-model' σ (λ f z → id (X-assign f z)))
 
   equiv-Eq-eq-Model-Signature :
-    {l2 : Level} (X Y : Model-Signature σ l2) →
+    {l2 : Level} (X Y : Model-Signature l2 σ) →
     (X ＝ Y) ≃ equiv-Model-Signature σ X Y
   equiv-Eq-eq-Model-Signature X Y =
     ( Eq-eq-Model-Signature X Y , is-equiv-Eq-eq-Model-Signature X Y)
 
   eq-equiv-Model-Signature :
-    {l2 : Level} (X Y : Model-Signature σ l2) →
+    {l2 : Level} (X Y : Model-Signature l2 σ) →
     equiv-Model-Signature σ X Y → X ＝ Y
   eq-equiv-Model-Signature X Y = map-inv-equiv (equiv-Eq-eq-Model-Signature X Y)
 ```

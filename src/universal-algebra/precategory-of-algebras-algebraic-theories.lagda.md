@@ -29,7 +29,7 @@ open import universal-algebra.signatures
 
 Given an [algebraic theory](universal-algebra.algebraic-theories.md) `T` over a
 [signature](universal-algebra.signatures.md) `σ`, we have the
-{{#concept "large precategory of `T`-algebras" Disambiguation="of an equational theory over a signature" Agda=Algebra-Large-Precategory}},
+{{#concept "large precategory of `T`-algebras" Disambiguation="of an algebraic theory, single-sorted, finitary" Agda=Algebra-Large-Precategory}},
 which consists of
 `T`-[algebras](universal-algebra.algebras-of-algebraic-theories.md) and
 `T`-[algebra homomorphisms](universal-algebra.homomorphisms-of-algebras.md).
@@ -40,14 +40,14 @@ which consists of
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
   Algebra-Large-Precategory :
     Large-Precategory (λ l → l1 ⊔ l2 ⊔ lsuc l) (λ l3 l4 → l1 ⊔ l3 ⊔ l4)
   Algebra-Large-Precategory =
     make-Large-Precategory
-      ( Algebra σ T)
+      ( λ l → Algebra l σ T)
       ( set-hom-Algebra σ T)
       ( λ {l3} {l4} {l5} {X} {Y} {Z} → comp-hom-Algebra σ T X Y Z)
       ( λ {l} {X} → id-hom-Algebra σ T X)
@@ -61,7 +61,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory σ l2)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
   Algebra-Precategory : (l3 : Level) → Precategory (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
