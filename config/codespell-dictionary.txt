@@ -20,6 +20,8 @@ cagegory->category
 characteriation->characterization
 characteriing->characterizing
 conceot->concept
+congruece->congruence
+congrueces->congruences
 conisist->consist
 conisisted->consisted
 conisisting->consisting
