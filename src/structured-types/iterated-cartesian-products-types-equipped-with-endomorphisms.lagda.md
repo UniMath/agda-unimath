@@ -27,7 +27,7 @@ we define its
 {{#concept "iterated cartesian product" Disambiguation="of types equipped with endomorphisms" Agda=iterated-product-list-Type-With-Endomorphism}}
 recursively via the
 [cartesian product](structured-types.cartesian-products-types-equipped-with-endomorphisms.md)
-of types equipped with endomorphism.
+of types equipped with endomorphisms.
 
 ## Definitions
 
