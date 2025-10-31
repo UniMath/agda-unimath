@@ -32,8 +32,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The **integer multiple operation** on a [ring](ring-theory.rings.md) is the map
-`k x ↦ kx`, which is defined by
+The
+{{#concept "integer multiple operation" Disambiguation="on a ring" Agda=integer-multiple-Ring}}
+on a [ring](ring-theory.rings.md) is the map `k x ↦ kx`, which is defined by
 [iteratively](foundation.iterating-automorphisms.md) adding `x` with itself an
 [integer](elementary-number-theory.integers.md) `k` times.
 

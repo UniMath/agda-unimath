@@ -20,8 +20,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **characteristic** of a [ring](ring-theory.rings.md) `R` is defined to be
-the kernel of the
+The
+{{#concept "characteristic" Disambiguation="of a ring" WD="characteristic" WDID=Q836088 Agda=characteristic-Ring}}
+of a [ring](ring-theory.rings.md) `R` is defined to be the
+[kernel](ring-theory.kernels-of-ring-homomorphisms.md) of the
 [initial ring homomorphism](elementary-number-theory.ring-of-integers.md) from
 the [ring `ℤ` of integers](elementary-number-theory.ring-of-integers.md) to `R`.
 
