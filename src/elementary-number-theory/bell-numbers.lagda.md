@@ -26,7 +26,7 @@ The {{#concept "Bell numbers" Agda=bell-number-ℕ WDID=Q816063 WD="Bell number"
 be defined recursively by $B_0 := 1$ and
 
 $$
-  B_{n+1} := \sum_{k=0}^{n} \binom{n}{k}B_k.
+  B_{n+1} := ∑_{k=0}^{n} \binom{n}{k}B_k.
 $$
 
 The Bell numbers are listed as sequence A000110 in the
