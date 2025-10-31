@@ -31,8 +31,9 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-The type of lists of elements of `X` is the initial wild monoid equipped with a
-map from `X` into it.
+The type of [lists](lists.lists.md) of elements of `X` is the
+{{#concept "initial wild monoid" Disambiguation="equipped with a map from a type" Agda=list-Wild-Monoid}}
+[equipped](foundation.structure.md) with a map from `X` into it.
 
 ## Definition
 
