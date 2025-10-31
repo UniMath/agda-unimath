@@ -52,7 +52,7 @@ module _
   (σ : signature l1)
   (T : Algebraic-Theory l2 σ)
   (A : Algebra l3 σ T)
-  (R : congruence-Algebra σ T A l4)
+  (R : congruence-Algebra l4 σ T A)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)

@@ -36,6 +36,8 @@ operations of the algebra.
 
 ## Definitions
 
+### The predicate on an equivalence relation of preserving the operations of an algebra
+
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
@@ -67,21 +69,30 @@ module _
     sim-equivalence-relation R
       ( is-model-set-Algebra σ T A op v)
       ( is-model-set-Algebra σ T A op v')
+```
 
-  congruence-Algebra :
-    (l4 : Level) → UU (l1 ⊔ l3 ⊔ lsuc l4)
-  congruence-Algebra l4 =
-    Σ ( equivalence-relation l4 (type-Algebra σ T A))
-      ( preserves-operations)
+### Congruences
+
+```agda
+congruence-Algebra :
+  {l1 l2 l3 : Level} (l4 : Level)
+  (σ : signature l1) (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T) →
+  UU (l1 ⊔ l3 ⊔ lsuc l4)
+congruence-Algebra l4 σ T A =
+  Σ ( equivalence-relation l4 (type-Algebra σ T A))
+    ( preserves-operations σ T A)
+
+module _
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
+  (R : congruence-Algebra l4 σ T A)
+  where
 
   equivalence-relation-congruence-Algebra :
-    {l4 : Level} →
-    congruence-Algebra l4 → equivalence-relation l4 (type-Algebra σ T A)
-  equivalence-relation-congruence-Algebra = pr1
+    equivalence-relation l4 (type-Algebra σ T A)
+  equivalence-relation-congruence-Algebra = pr1 R
 
   preserves-operations-congruence-Algebra :
-    {l4 : Level} →
-    (R : congruence-Algebra l4) →
-    preserves-operations (equivalence-relation-congruence-Algebra R)
-  preserves-operations-congruence-Algebra = pr2
+    preserves-operations σ T A equivalence-relation-congruence-Algebra
+  preserves-operations-congruence-Algebra = pr2 R
 ```
