@@ -245,6 +245,17 @@ is-null-is-contr {A = A} B is-contr-A =
     ( is-local-is-contr (terminal-map B) A is-contr-A)
 ```
 
+### Propositions are null if the diagonal has a converse map
+
+```agda
+is-null-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop A → ((B → A) → A) → is-null B A
+is-null-is-prop {A = A} {B} is-prop-A f =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-prop (terminal-map B) A is-prop-A (λ g _ → f g))
+```
+
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
