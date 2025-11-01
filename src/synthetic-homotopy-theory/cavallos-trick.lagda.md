@@ -48,8 +48,8 @@ module _
     (f g : A →∗ B) → section (λ (H : id ~ id) → H b∗) →
     (map-pointed-map f ~ map-pointed-map g) →
     unpointed-htpy-pointed-map f g
-  htpy-cavallos-trick (f , p) (g , q) (K , α) H a =
-    K (inv q ∙ inv (H a∗) ∙ p) (f a) ∙ H a
+  htpy-cavallos-trick (f , p) (g , q) (K , α) H x =
+    K (inv q ∙ inv (H a∗) ∙ p) (f x) ∙ H x
 
   compute-htpy-cavallos-trick :
     (f g : A →∗ B) (s : section (λ (H : id ~ id) → H b∗)) →
