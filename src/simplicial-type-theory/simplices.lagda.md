@@ -13,10 +13,12 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -270,6 +272,30 @@ module simplex
 
     open hom-Δ public
 
+    record
+      htpy-hom-Δ {x y : obj-Δ A} (f g : hom-Δ x y) : UU (l1 ⊔ l2)
+      where
+
+      field
+        htpy-mor-hom-Δ : mor-hom-Δ f ~ mor-hom-Δ g
+        htpy-htpy-dom-hom-Δ :
+          coherence-triangle-homotopies
+            ( htpy-dom-hom-Δ f)
+            ( htpy-dom-hom-Δ g)
+            ( htpy-mor-hom-Δ ·r d01)
+        htpy-htpy-cod-hom-Δ :
+          coherence-triangle-homotopies
+            ( htpy-cod-hom-Δ f)
+            ( htpy-cod-hom-Δ g)
+            ( htpy-mor-hom-Δ ·r d00)
+
+    open htpy-hom-Δ public
+
+    refl-htpy-hom-Δ : {x y : obj-Δ A} (f : hom-Δ x y) → htpy-hom-Δ f f
+    htpy-mor-hom-Δ (refl-htpy-hom-Δ f) = refl-htpy
+    htpy-htpy-dom-hom-Δ (refl-htpy-hom-Δ f) = refl-htpy
+    htpy-htpy-cod-hom-Δ (refl-htpy-hom-Δ f) = refl-htpy      
+
     id-Δ : (x : obj-Δ A) → hom-Δ x x
     mor-hom-Δ (id-Δ x) = x ∘ s00
     htpy-dom-hom-Δ (id-Δ x) pt-Δ = refl
@@ -285,6 +311,8 @@ module simplex
     field
       fstmor sndmor : mor-Δ A
       compat : cod-Δ fstmor pt-Δ ＝ dom-Δ sndmor pt-Δ
+
+  open midhorn public
 
   representing-midhorn : UU l1
   representing-midhorn =
@@ -329,7 +357,8 @@ module simplex
 
   htpy-2-simplex-is-segal :
     {l : Level} {A : UU l} (H : is-segal A) →
-    (h : representing-midhorn → A) → h ~ 2-simplex-is-segal H h ∘ horn-inclusion
+    (h : representing-midhorn → A) →
+    h ~ 2-simplex-is-segal H h ∘ horn-inclusion
   htpy-2-simplex-is-segal H h =
     is-extension-map-extension (extension-is-segal H h)
 
@@ -395,34 +424,57 @@ module simplex
         ( mor-hom-Δ f ,
           mor-hom-Δ g ,
           ( λ u → htpy-cod-hom-Δ f u ∙ inv (htpy-dom-hom-Δ g u)))
+
+    comp-is-segal-witness :
+      {x y z : obj-Δ A} → hom-Δ y z → hom-Δ x y → Δ 2 → A
+    comp-is-segal-witness g f =
+      2-simplex-is-segal H (horn-composable-hom-Δ g f)
+
+    is-extension-comp-is-segal-witness :
+      {x y z : obj-Δ A} (g : hom-Δ y z) (f : hom-Δ x y) →
+      is-extension horn-inclusion
+        ( horn-composable-hom-Δ g f)
+        ( comp-is-segal-witness g f)
+    is-extension-comp-is-segal-witness g f =
+      htpy-2-simplex-is-segal H (horn-composable-hom-Δ g f)
     
     comp-is-segal : {x y z : obj-Δ A} → hom-Δ y z → hom-Δ x y → hom-Δ x z
     mor-hom-Δ (comp-is-segal g f) =
-      2-simplex-is-segal H (horn-composable-hom-Δ g f) ∘ d11
+      comp-is-segal-witness g f ∘ d11
     htpy-dom-hom-Δ (comp-is-segal {x} {y} {z} g f) =
-      ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l identity-d11-d01) ∙h
+      ( comp-is-segal-witness g f ·l identity-d11-d01) ∙h
       ( inv-htpy
-        ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+        ( comp-is-segal-witness g f ·l
           compute-inl-horn-inclusion ·r d01)) ∙h
       ( inv-htpy
-        ( htpy-2-simplex-is-segal H (horn-composable-hom-Δ g f) ·r
+        ( is-extension-comp-is-segal-witness g f ·r
           inl-representing-midhorn ∘ d01)) ∙h
       ( compute-inl-horn-composable-hom-Δ g f ·r d01) ∙h
       ( htpy-dom-hom-Δ f)
     htpy-cod-hom-Δ (comp-is-segal g f) =
-      ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+      ( comp-is-segal-witness g f ·l
         inv-htpy identity-d10-d00) ∙h
       ( inv-htpy
-        ( 2-simplex-is-segal H (horn-composable-hom-Δ g f) ·l
+        ( comp-is-segal-witness g f ·l
           compute-inr-horn-inclusion ·r d00)) ∙h
       ( inv-htpy
-        ( htpy-2-simplex-is-segal H (horn-composable-hom-Δ g f) ·r
+        ( is-extension-comp-is-segal-witness g f ·r
           inr-representing-midhorn ∘ d00)) ∙h
       ( compute-inr-horn-composable-hom-Δ g f ·r d00) ∙h
       ( htpy-cod-hom-Δ g)
 
-  open midhorn public
-  
+    comp-is-segal-witness-uniqueness :
+      {x y z : obj-Δ A} (g : hom-Δ y z) (f : hom-Δ x y)
+      (α : Δ 2 → A) (β : horn-composable-hom-Δ g f ~ α ∘ horn-inclusion) →
+      comp-is-segal-witness g f ~ α
+    comp-is-segal-witness-uniqueness g f α β =
+      htpy-eq
+        ( ap pr1
+          ( eq-is-contr
+            ( H (horn-composable-hom-Δ g f))
+            { comp-is-segal-witness g f , is-extension-comp-is-segal-witness g f}
+            { α , β}))
+
   resmid-Δ : {l : Level} {X : UU l} → nerve-Δ X 2 → midhorn X
   fstmor (resmid-Δ f) = f ∘ d12
   sndmor (resmid-Δ f) = f ∘ d10
