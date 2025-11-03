@@ -7,39 +7,31 @@ module synthetic-homotopy-theory.multivariable-loop-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.commuting-triangles-of-identifications
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.homotopies
-open import foundation.torsorial-type-families
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.transport-along-identifications
-open import foundation.identity-types
-open import foundation.structure-identity-principle
-open import foundation.universe-levels
-open import foundation.coproduct-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-maybe
-open import foundation.cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.homotopy-induction
 open import foundation.unit-type
-open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.equality-dependent-function-types
-open import foundation.commuting-triangles-of-identifications
-open import foundation.constant-type-families
-open import synthetic-homotopy-theory.loop-spaces
-open import foundation.equality-dependent-pair-types
+open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
 open import structured-types.h-spaces
 open import structured-types.magmas
-open import foundation.function-extensionality
-open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
-open import structured-types.wild-quasigroups
+
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>
@@ -48,7 +40,8 @@ open import structured-types.wild-quasigroups
 
 Given a [pointed type](structured-types.pointed-types.md) `i∗ : I`, and a
 pointed type `a∗ : A`, we can form the `I`-ary loop space in `A` as the type
-`Σ (a : A), (I → (a ＝ a∗))`. We recover the normal loops as the binary loops.
+`Σ (a : A), (I → (a ＝ a∗))`. We recover the
+[standard loops](synthetic-homotopy-theory.loop-spaces.md) as the binary loops.
 
 ## Table of files directly related to loop spaces
 
