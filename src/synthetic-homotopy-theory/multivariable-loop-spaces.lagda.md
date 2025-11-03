@@ -324,7 +324,7 @@ module _
       ( Eq-associative-mul-multivar-Ω x y z)
 ```
 
-### `I`-ary loops at isolated points
+### `I+1`-ary loops
 
 `(I + 1)`-ary loops are equivalent to families `I → ΩA`, where `Ω` is the
 standard loop type.
