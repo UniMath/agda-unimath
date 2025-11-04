@@ -13,12 +13,15 @@ open import foundation.commuting-triangles-of-identifications
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
@@ -28,6 +31,7 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
+open import structured-types.left-invertible-magmas
 open import structured-types.magmas
 open import structured-types.pointed-types
 
@@ -349,4 +353,68 @@ module _
       by inv-associative-Σ
     ≃ (I → type-Ω A∗)
       by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
+```
+
+### One-sided invertibility of left and right multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I∗ : Pointed-Type l1) (A∗ : Pointed-Type l2)
+  (let I = type-Pointed-Type I∗)
+  (let A = type-Pointed-Type A∗)
+  where
+
+  map-section-left-mul-multivar-Ω :
+    type-multivar-Ω I A∗ → type-multivar-Ω I A∗ → type-multivar-Ω I A∗
+  map-section-left-mul-multivar-Ω a =
+    mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a)
+
+  is-section-map-section-left-mul-multivar-Ω :
+    (a : type-multivar-Ω I A∗) →
+    is-section (mul-multivar-Ω I∗ A∗ a) (map-section-left-mul-multivar-Ω a)
+  is-section-map-section-left-mul-multivar-Ω a x =
+    equational-reasoning
+    mul-multivar-Ω I∗ A∗ a (mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) x)
+    ＝ mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a)) x
+      by inv (associative-mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a) x)
+    ＝ mul-multivar-Ω I∗ A∗ (refl-multivar-Ω I A∗) x
+      by
+      ap
+        ( λ u → mul-multivar-Ω I∗ A∗ u x)
+        ( right-inverse-law-mul-multivar-Ω I∗ A∗ a)
+    ＝ x
+      by left-unit-law-mul-multivar-Ω I∗ A∗ x
+
+  section-left-mul-multivar-Ω :
+    (a : type-multivar-Ω I A∗) → section (mul-multivar-Ω I∗ A∗ a)
+  section-left-mul-multivar-Ω a =
+    ( map-section-left-mul-multivar-Ω a ,
+      is-section-map-section-left-mul-multivar-Ω a)
+
+  map-retraction-right-mul-multivar-Ω :
+    type-multivar-Ω I A∗ → type-multivar-Ω I A∗ → type-multivar-Ω I A∗
+  map-retraction-right-mul-multivar-Ω a x =
+    mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω I∗ A∗ a)
+
+  is-retraction-map-retraction-right-mul-multivar-Ω :
+    (a : type-multivar-Ω I A∗) →
+    is-retraction
+      ( λ x → mul-multivar-Ω I∗ A∗ x a)
+      ( map-retraction-right-mul-multivar-Ω a)
+  is-retraction-map-retraction-right-mul-multivar-Ω a x =
+    equational-reasoning
+    mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x a) (inv-multivar-Ω I∗ A∗ a)
+    ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a))
+      by associative-mul-multivar-Ω I∗ A∗ x a (inv-multivar-Ω I∗ A∗ a)
+    ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
+      by ap (mul-multivar-Ω I∗ A∗ x) (right-inverse-law-mul-multivar-Ω I∗ A∗ a)
+    ＝ x
+      by right-unit-law-mul-multivar-Ω I∗ A∗ x
+
+  retraction-right-mul-multivar-Ω :
+    (a : type-multivar-Ω I A∗) → retraction (λ x → mul-multivar-Ω I∗ A∗ x a)
+  retraction-right-mul-multivar-Ω a =
+    ( map-retraction-right-mul-multivar-Ω a ,
+      is-retraction-map-retraction-right-mul-multivar-Ω a)
 ```

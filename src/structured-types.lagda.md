@@ -39,6 +39,7 @@ open import structured-types.involutive-type-of-h-space-structures public
 open import structured-types.involutive-types public
 open import structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms public
 open import structured-types.iterated-pointed-cartesian-product-types public
+open import structured-types.left-invertible-magmas public
 open import structured-types.magmas public
 open import structured-types.medial-magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
