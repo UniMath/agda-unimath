@@ -64,7 +64,7 @@ module _
     is-equiv-left-whisker-concat
 ```
 
-### Right whiskering of identification is an equivalence
+### Right whiskering of identifications is an equivalence
 
 ```agda
 module _
@@ -83,7 +83,23 @@ module _
     is-equiv-right-whisker-concat
 ```
 
-### Right unwhiskering of identification is an equivalence
+### Right unwhiskering of identifications is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {q q' : y ＝ z}
+  where
+
+  is-equiv-left-unwhisker-concat :
+    is-equiv (λ (α : p ∙ q ＝ p ∙ q') → left-unwhisker-concat p α)
+  is-equiv-left-unwhisker-concat = is-equiv-is-injective-concat p
+
+  equiv-left-unwhisker-concat : (p ∙ q ＝ p ∙ q') ≃ (q ＝ q')
+  equiv-left-unwhisker-concat =
+    ( left-unwhisker-concat p , is-equiv-left-unwhisker-concat)
+```
+
+### Right unwhiskering of identifications is an equivalence
 
 ```agda
 module _

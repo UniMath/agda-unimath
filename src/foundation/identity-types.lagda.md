@@ -200,6 +200,20 @@ module _
     is-section (ap (concat p z)) (is-injective-concat p {q} {r})
   is-section-is-injective-concat refl refl = refl
 
+  is-retraction-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-retraction (ap (concat p z)) (is-injective-concat p {q} {r})
+  is-retraction-is-injective-concat refl refl = refl
+
+  is-equiv-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-equiv (is-injective-concat p {q} {r})
+  is-equiv-is-injective-concat {z = z} p =
+    is-equiv-is-invertible
+      ( ap (concat p z))
+      ( is-retraction-is-injective-concat p)
+      ( is-section-is-injective-concat p)
+
   cases-is-section-is-injective-concat' :
     {x y : A} {p q : x ＝ y} (s : p ＝ q) →
     ( ap
