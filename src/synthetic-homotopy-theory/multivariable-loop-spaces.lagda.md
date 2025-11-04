@@ -31,7 +31,6 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
-open import structured-types.left-invertible-magmas
 open import structured-types.magmas
 open import structured-types.pointed-types
 
