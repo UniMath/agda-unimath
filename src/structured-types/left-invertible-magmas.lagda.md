@@ -24,6 +24,9 @@ A [magma](structured.magma.md) `A` is
 if the multiplication map `μ(a,-) : A → A` is an
 [equivalence](foundation-core.equivalences.md) for every `a : A`.
 
+Left-invertibility in the context of [H-spaces](structured-types.h-spaces.md)
+appears as Definition 2.1(4) of {{#cite BCFR23}}.
+
 ## Definition
 
 ```agda
@@ -42,3 +45,7 @@ module _
   is-left-invertible-prop-Magma =
     ( is-left-invertible-Magma , is-prop-is-left-invertible-Magma)
 ```
+
+## References
+
+{{#bibliography}}
