@@ -41,7 +41,8 @@ open import synthetic-homotopy-theory.loop-spaces
 Given a [pointed type](structured-types.pointed-types.md) `i∗ : I`, and a
 pointed type `a∗ : A`, we can form the `I`-ary loop space in `A` as the type
 `Σ (a : A), (I → (a ＝ a∗))`. We recover the
-[standard loops](synthetic-homotopy-theory.loop-spaces.md) as the binary loops.
+[standard loops](synthetic-homotopy-theory.loop-spaces.md) as the binary loops,
+`A` as the `∅`-ary loops, and there is a unique unary loop.
 
 ## Table of files directly related to loop spaces
 
