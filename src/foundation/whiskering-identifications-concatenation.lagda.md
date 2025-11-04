@@ -82,3 +82,19 @@ module _
   pr2 equiv-right-whisker-concat =
     is-equiv-right-whisker-concat
 ```
+
+### Right unwhiskering of identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p p' : x ＝ y} (q : y ＝ z)
+  where
+
+  is-equiv-right-unwhisker-concat :
+    is-equiv (λ (α : p ∙ q ＝ p' ∙ q) → right-unwhisker-concat q α)
+  is-equiv-right-unwhisker-concat = is-equiv-is-injective-concat' q
+
+  equiv-right-unwhisker-concat : (p ∙ q ＝ p' ∙ q) ≃ (p ＝ p')
+  equiv-right-unwhisker-concat =
+    ( right-unwhisker-concat q , is-equiv-right-unwhisker-concat)
+```

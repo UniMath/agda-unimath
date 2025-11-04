@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
@@ -48,7 +49,7 @@ module _
   refl-Ω = refl
 
   Ω : Pointed-Type l
-  Ω = pair type-Ω refl-Ω
+  Ω = (type-Ω , refl-Ω)
 ```
 
 ### The magma of loops on a pointed space
@@ -124,8 +125,10 @@ module _
   associative-mul-Ω :
     (x y z : type-Ω A) →
     mul-Ω A (mul-Ω A x y) z ＝ mul-Ω A x (mul-Ω A y z)
-  associative-mul-Ω x y z = assoc x y z
+  associative-mul-Ω = assoc
 ```
+
+### Transport
 
 We compute transport of `type-Ω`.
 
@@ -134,15 +137,18 @@ module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
 
-  equiv-tr-Ω : x ＝ y → Ω (pair A x) ≃∗ Ω (pair A y)
-  equiv-tr-Ω refl = pair id-equiv refl
+  equiv-tr-Ω : x ＝ y → Ω (A , x) ≃∗ Ω (A , y)
+  equiv-tr-Ω refl = (id-equiv , refl)
 
-  equiv-tr-type-Ω : x ＝ y → type-Ω (pair A x) ≃ type-Ω (pair A y)
+  equiv-tr-type-Ω : x ＝ y → type-Ω (A , x) ≃ type-Ω (A , y)
   equiv-tr-type-Ω p =
     equiv-pointed-equiv (equiv-tr-Ω p)
 
-  tr-type-Ω : x ＝ y → type-Ω (pair A x) → type-Ω (pair A y)
+  tr-type-Ω : x ＝ y → type-Ω (A , x) → type-Ω (A , y)
   tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
+
+  tr-Ω : x ＝ y → Ω (A , x) →∗ Ω (A , y)
+  tr-Ω p = pointed-map-pointed-equiv (equiv-tr-Ω p)
 
   is-equiv-tr-type-Ω : (p : x ＝ y) → is-equiv (tr-type-Ω p)
   is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
@@ -151,23 +157,26 @@ module _
   preserves-refl-tr-Ω refl = refl
 
   preserves-mul-tr-Ω :
-    (p : x ＝ y) (u v : type-Ω (pair A x)) →
-    Id
-      ( tr-type-Ω p (mul-Ω (pair A x) u v))
-      ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+    (p : x ＝ y) (u v : type-Ω (A , x)) →
+    tr-type-Ω p (mul-Ω (A , x) u v) ＝
+    mul-Ω (A , y) (tr-type-Ω p u) (tr-type-Ω p v)
   preserves-mul-tr-Ω refl u v = refl
 
   preserves-inv-tr-Ω :
-    (p : x ＝ y) (u : type-Ω (pair A x)) →
-    Id
-      ( tr-type-Ω p (inv-Ω (pair A x) u))
-      ( inv-Ω (pair A y) (tr-type-Ω p u))
+    (p : x ＝ y) (u : type-Ω (A , x)) →
+    tr-type-Ω p (inv-Ω (A , x) u) ＝
+    inv-Ω (A , y) (tr-type-Ω p u)
   preserves-inv-tr-Ω refl u = refl
 
-  eq-tr-type-Ω :
-    (p : x ＝ y) (q : type-Ω (pair A x)) →
+  eq-conjugation-tr-type-Ω :
+    (p : x ＝ y) (q : type-Ω (A , x)) →
     tr-type-Ω p q ＝ inv p ∙ (q ∙ p)
-  eq-tr-type-Ω refl q = inv right-unit
+  eq-conjugation-tr-type-Ω refl q = inv right-unit
+
+  compute-eq-conjugation-tr-type-Ω-refl :
+    (p : x ＝ y) →
+    preserves-refl-tr-Ω p ∙ inv (left-inv p) ＝ eq-conjugation-tr-type-Ω p refl
+  compute-eq-conjugation-tr-type-Ω-refl refl = refl
 ```
 
 ## Properties
@@ -181,7 +190,7 @@ module _
   where
 
   pointed-equiv-loop-pointed-identity :
-    ( pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω A
+    ( point-Pointed-Type A ＝ x , p) ≃∗ Ω A
   pr1 pointed-equiv-loop-pointed-identity =
     equiv-concat' (point-Pointed-Type A) (inv p)
   pr2 pointed-equiv-loop-pointed-identity =

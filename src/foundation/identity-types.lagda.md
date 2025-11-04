@@ -21,6 +21,8 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -56,6 +58,20 @@ mac-lane-pentagon :
   in
     coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
 mac-lane-pentagon refl refl refl refl = refl
+```
+
+### Conjugation by the right unit law
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  conjugate-right-unit :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    inv right-unit ∙ ap (_∙ refl) s ∙ right-unit ＝ s
+  conjugate-right-unit refl =
+    ap (_∙ right-unit) right-unit ∙ left-inv right-unit
 ```
 
 ### The groupoidal operations on identity types are equivalences
@@ -180,8 +196,8 @@ module _
   where
 
   is-section-is-injective-concat :
-    {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : (p ∙ q) ＝ (p ∙ r)) →
-    ap (concat p z) (is-injective-concat p s) ＝ s
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-section (ap (concat p z)) (is-injective-concat p {q} {r})
   is-section-is-injective-concat refl refl = refl
 
   cases-is-section-is-injective-concat' :
@@ -192,31 +208,46 @@ module _
     ( right-unit ∙ (s ∙ inv right-unit))
   cases-is-section-is-injective-concat' {p = refl} refl = refl
 
-  is-section-is-injective-concat' :
-    {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
-    ap (concat' x r) (is-injective-concat' r s) ＝ s
-  is-section-is-injective-concat' refl s =
-    ( ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α)) ∙
-    ( ( cases-is-section-is-injective-concat'
-        ( inv right-unit ∙ (s ∙ right-unit))) ∙
-      ( α))
-    where
-    α :
-      ( ( right-unit) ∙
-        ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
-          ( inv right-unit))) ＝
-      ( s)
-    α =
-      ( ap
-        ( concat right-unit _)
-        ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
-          ( ( ap
-              ( concat (inv right-unit) _)
+  abstract
+    is-section-is-injective-concat' :
+      {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+      is-section (ap (concat' x r)) (is-injective-concat' r {p} {q})
+    is-section-is-injective-concat' refl {p} {q} s =
+      ( ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α)) ∙
+      ( ( cases-is-section-is-injective-concat'
+          ( inv right-unit ∙ (s ∙ right-unit))) ∙
+        ( α))
+      where
+      α :
+        ( ( right-unit) ∙
+          ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
+            ( inv right-unit))) ＝
+        ( s)
+      α =
+        ( ap
+          ( concat right-unit (q ∙ refl))
+          ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+            ( ap
+              ( concat (inv right-unit) (q ∙ refl))
               ( ( assoc s right-unit (inv right-unit)) ∙
-                ( ( ap (concat s _) (right-inv right-unit)) ∙
-                  ( right-unit))))))) ∙
-      ( ( inv (assoc right-unit (inv right-unit) s)) ∙
-        ( ( ap (concat' _ s) (right-inv right-unit))))
+                ( ap (concat s (q ∙ refl)) (right-inv right-unit)) ∙
+                ( right-unit))))) ∙
+        ( inv (assoc right-unit (inv right-unit) s)) ∙
+        ( ( ap (concat' (p ∙ refl) s) (right-inv right-unit)))
+
+  is-retraction-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+    is-retraction (ap (concat' x r)) (is-injective-concat' r {p} {q})
+  is-retraction-is-injective-concat' refl = conjugate-right-unit
+
+  is-equiv-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+    is-equiv (is-injective-concat' r {p} {q})
+  is-equiv-is-injective-concat' {x} r =
+    is-equiv-is-invertible
+      ( ap (concat' x r))
+      ( is-retraction-is-injective-concat' r)
+      ( is-section-is-injective-concat' r)
 ```
 
 ### Applying the right unit law on one side of a higher identification is an equivalence

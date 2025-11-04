@@ -9,6 +9,8 @@ module synthetic-homotopy-theory.cavallos-trick where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -16,9 +18,13 @@ open import foundation.sections
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
+open import structured-types.h-spaces
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
+open import structured-types.pointed-sections
 open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
 
 </details>
@@ -32,7 +38,9 @@ unpointed [homotopy](foundation.homotopies.md) between
 
 Originally, this trick was formulated by [Evan Cavallo](https://ecavallo.net/)
 for homogeneous spaces, but it works as soon as the evaluation map
-`(id ~ id) → Ω B` has a [section](foundation-core.sections.md).
+`(id ~ id) → Ω B` has a [section](foundation-core.sections.md). This
+generalization was found by Buchholtz, Christensen, Rijke, and Taxerås Flaten,
+and appears as Lemma 2.7 (2)⇒(3) in {{#cite BCFR23}}.
 
 ## Theorem
 
@@ -91,11 +99,70 @@ module _
   pr2 (cavallos-trick f g s H) = coherence-point-cavallos-trick f g s H
 ```
 
+## Corollaries
+
+### Cavallo's trick for H-spaces
+
+For pointed maps between H-spaces there is a map that promotes unpointed
+homotopies to pointed ones.
+
+First, we prove that the required evaluation map has a section. This is Lemma
+2.7 (1)⇒(2) in {{#cite BCFR23}}.
+
+```agda
+module _
+  {l : Level} (A : H-Space l)
+  (let a∗ = unit-H-Space A)
+  where
+
+  pointed-section-Ω-ev-endo-H-Space :
+    pointed-section (pointed-map-Ω (ev-endo-H-Space A))
+  pointed-section-Ω-ev-endo-H-Space =
+    pointed-section-Ω-pointed-section
+      ( ev-endo-H-Space A)
+      ( pointed-section-ev-endo-H-Space A)
+
+  section-map-Ω-ev-endo-H-Space :
+    section (map-Ω (ev-endo-H-Space A))
+  section-map-Ω-ev-endo-H-Space =
+    section-pointed-section
+      ( pointed-map-Ω (ev-endo-H-Space A))
+      ( pointed-section-Ω-ev-endo-H-Space)
+
+  section-ev-unit-htpy-H-Space :
+    section (λ (H : id ~ id) → H a∗)
+  section-ev-unit-htpy-H-Space =
+    section-left-factor (ev a∗) htpy-eq (section-map-Ω-ev-endo-H-Space)
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A∗ : Pointed-Type l1) (B : H-Space l2)
+  (let B∗ = pointed-type-H-Space B)
+  where
+
+  cavallos-trick-H-Space' :
+    (f g : A∗ →∗ B∗) → (map-pointed-map f ~ map-pointed-map g) → f ~∗ g
+  cavallos-trick-H-Space' f g =
+    cavallos-trick f g (section-ev-unit-htpy-H-Space B)
+
+module _
+  {l1 l2 : Level}
+  (A : H-Space l1) (B : H-Space l2)
+  (let A∗ = pointed-type-H-Space A)
+  (let B∗ = pointed-type-H-Space B)
+  where
+
+  cavallos-trick-H-Space :
+    (f g : A∗ →∗ B∗) → (map-pointed-map f ~ map-pointed-map g) → f ~∗ g
+  cavallos-trick-H-Space =
+    cavallos-trick-H-Space' (pointed-type-H-Space A) B
+```
+
 ## References
 
 - Cavallo's trick was originally formalized in the
   [cubical agda library](https://agda.github.io/cubical/Cubical.Foundations.Pointed.Homogeneous.html).
-- The above generalization was found by Buchholtz, Christensen, Rijke, and
-  Taxerås Flaten, in {{#cite BCFR23}}.
 
 {{#bibliography}}
