@@ -111,9 +111,9 @@ module _
     is-inhabited-or-empty-type-Finitely-Enumerable-Type =
       rec-trunc-Prop
         ( is-inhabited-or-empty-Prop (type-Finitely-Enumerable-Type X))
-        ( λ (N , Fin-n↠X) →
+        ( λ (n , Fin-n↠X) →
           is-inhabited-or-empty-surjection
             ( Fin-n↠X)
-            ( is-inhabited-or-empty-Fin N))
+            ( is-inhabited-or-empty-Fin n))
         ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
 ```
