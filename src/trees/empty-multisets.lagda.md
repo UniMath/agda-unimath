@@ -22,7 +22,9 @@ open import trees.w-types
 
 ## Idea
 
-A [multiset](trees.multisets.md) is said to be **empty** if it has no
+A [multiset](trees.multisets.md) is said to be
+{{#concept "empty" Disambiguation="multiset" Agda=is-empty-𝕍}} if it has
+[no](foundation-core.negation.md)
 [elements](trees.elementhood-relation-w-types.md).
 
 ## Definition

@@ -19,9 +19,11 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **rooted quasitree** is an undirected graph `G` equipped with a marked
-vertex`r`, to be called the root, such that for every vertex `x` there is a
-unique trail from `r` to `x`.
+A {{#concept "rooted quasitree" Agda=Rooted-Quasitree}} is an
+[undirected graph](graph-theory.undirected-graphs.md) `G`
+[equipped](foundation.structure.md) with a marked vertex`r`, to be called the
+root, such that for every vertex `x` there is a unique
+[trail](graph-theory.trails-undirected-graphs.md) from `r` to `x`.
 
 ## Definition
 

@@ -1,7 +1,9 @@
+Ahda->Agda
 Kratowski->Kuratowski
 Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
 Lavwere->Lawvere
+ahda->agda
 anamorhpism->anamorphism
 anamorhpisms->anamorphisms
 anamorhpsim->anamorphism
@@ -18,6 +20,16 @@ automorphsims->automorphisms
 cagegory->category
 characteriation->characterization
 characteriing->characterizing
+conceot->concept
+congruece->congruence
+congrueces->congruences
+conisist->consist
+conisisted->consisted
+conisisting->consisting
+conisists->consists
+conisistsed->consisted
+conisistsing->consisting
+consistsed->consisted
 consistsing->consisting
 eacy->each,easy
 embeddding->embedding
@@ -65,3 +77,5 @@ morhpsims->morphisms
 morphsim->morphism
 morphsims->morphisms
 outout->output
+ringr->ring
+ringrs->rings

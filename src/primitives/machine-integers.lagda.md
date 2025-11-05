@@ -17,8 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The `Word64` type represents 64-bit machine words. Agda provides primitive
-functions to manipulate them.
+The `Word64` type represents {{#concept "64-bit machine words" Agda=Word64}}.
+Agda provides primitive functions to manipulate them.
 
 ## Definitions
 

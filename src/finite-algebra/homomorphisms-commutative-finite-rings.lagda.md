@@ -29,8 +29,11 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A **homomorphism of commutative finite rings** is a homomorphism between their
-underlying rings.
+A
+{{#concept "homomorphism" Disambiguation="of commutative finite rings" Agda=hom-Finite-Commutative-Ring}}
+of [commutative finite rings](finite-algebra.commutative-finite-rings.md) is a
+[homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
+[rings](ring-theory.rings.md).
 
 ## Definition
 

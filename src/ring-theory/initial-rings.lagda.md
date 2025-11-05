@@ -19,8 +19,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The **initial ring** is a [ring](ring-theory.rings.md) `R` that satisfies the
-universal property that for any ring `S`, the type
+The {{#concept "initial ring" Agda=is-initial-Ring}} is a
+[ring](ring-theory.rings.md) `R` that satisfies the universal property that for
+any ring `S`, the type
 
 ```text
   hom-Ring R S
