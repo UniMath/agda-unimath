@@ -153,11 +153,11 @@ module _
   abstract
     is-inhabited-or-empty-totally-bounded-subspace-Metric-Space :
       is-inhabited-or-empty (type-totally-bounded-subspace-Metric-Space X S)
-    decide-is-inhabited-or-empty-totally-bounded-subspace-Metric-Space =
+    is-inhabited-or-empty-totally-bounded-subspace-Metric-Space =
       rec-trunc-Prop
         ( is-inhabited-or-empty-Prop _)
         ( λ M →
-          decide-is-inhabited-or-empty-net-Metric-Space
+          is-inhabited-or-empty-type-is-inhabited-or-empty-net-Metric-Space
             ( subspace-totally-bounded-subspace-Metric-Space X S)
             ( one-ℚ⁺)
             ( M one-ℚ⁺))
