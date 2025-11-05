@@ -32,8 +32,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "finite sequence" Agda=fin-sequence}} of length `n` is a map from
-the [standard finite type](univalent-combinatorics.standard-finite-types.md) of
+A {{#concept "finite sequence" WD="n-tuple" WDID=Q600590 Agda=fin-sequence}} of
+length `n` is a map from the
+[standard finite type](univalent-combinatorics.standard-finite-types.md) of
 cardinality `n`, `Fin n`, to `A`. These are
 [equivalent](lists.equivalence-tuples-finite-sequences.md) to the related
 concept of [tuples](lists.tuples.md), but are structured like
