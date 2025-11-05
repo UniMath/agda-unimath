@@ -103,14 +103,6 @@ def get_recent_changes(contributors, *args):
     return (recent_changes, skipped_authors)
 
 
-def get_recent_sitewide_changes(contributors):
-    """
-    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits
-    across the entire repository.
-    """
-    return get_recent_changes(contributors)
-
-
 def get_author_element_for_file(filename, include_contributors, contributors, contributors_file):
     """
     Extracts git usernames of contributors to a particular file
@@ -193,7 +185,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
 
     if source_file_name in config['sitewide_changes']:
         # Insert recent sitewide changes on page
-        footer_recent_sitewide, skipped_authors = get_recent_sitewide_changes(contributors)
+        footer_recent_sitewide, skipped_authors = get_recent_changes(contributors)
 
         if skipped_authors:
             print_skipping_contributors_warning(skipped_authors, config['contributors_file'])
