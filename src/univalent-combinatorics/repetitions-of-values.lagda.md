@@ -80,7 +80,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
   K = pr2 v
   w : (f x ＝ f y) × (x ≠ y)
   w = exists-not-not-for-all-count
-      ( λ _ → Id x y)
+      ( λ _ → x ＝ y)
       ( λ _ →
         has-decidable-equality-Fin k x y)
       ( count-is-decidable-is-prop

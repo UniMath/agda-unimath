@@ -38,10 +38,14 @@ number 4 comes from the number of bonds a carbon atom makes in a molecule.
 Bonds in hydrocarbons can appear as single bonds, double bonds, and triple
 bonds, but there are no quadruple bonds.
 
-We define hydrocarbons to be graphs equipped with a family of tetrahedra in
-3-dimensional space indexed by the vertices and for each vertex `c` an embedding
-from the type of all edges incident to `c` into the vertices of the tetrahedron
-associated to `c`, satisfying the following conditions:
+We define
+{{#concept "hydrocarbons" WD="hydrocarbon" WDID=Q43648 Agda=hydrocarbon}} to be
+[graphs](graph-theory.finite-graphs.md) equipped with a family of
+[tetrahedra in 3-dimensional space](finite-group-theory.tetrahedra-in-3-space.md)
+indexed by the vertices and for each vertex `c` an
+[embedding](foundation-core.embeddings.md) from the type of all edges incident
+to `c` into the vertices of the tetrahedron associated to `c`, satisfying the
+following conditions:
 
 - There are at most 3 edges between any two vertices
 - The graph contains no loops
@@ -70,8 +74,8 @@ hydrocarbon l1 l2 =
                     ( is-finite-type-Finite-Type
                       ( pr2 G (standard-unordered-pair c c'))))
                   ( 3)) ×
-                is-connected-Undirected-Graph
-                  ( undirected-graph-Finite-Undirected-Graph G)))))
+              ( is-connected-Undirected-Graph
+                ( undirected-graph-Finite-Undirected-Graph G))))))
 
 module _
   {l1 l2 : Level} (H : hydrocarbon l1 l2)
@@ -126,5 +130,5 @@ module _
     edge-hydrocarbon (standard-unordered-pair c c') →
     electron-carbon-atom-hydrocarbon c
   bonding-hydrocarbon {c} {c'} b =
-    map-emb (emb-bonding-hydrocarbon c) (pair c' b)
+    map-emb (emb-bonding-hydrocarbon c) (c' , b)
 ```

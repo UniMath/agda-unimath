@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
@@ -71,17 +70,12 @@ open Large-Ab public
 
 ## Properties
 
-### The similarity relation of a large commutative monoid
+### The similarity relation of a large abelian group
 
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   where
-
-  large-similarity-relation-Large-Ab :
-    Large-Similarity-Relation β (type-Large-Ab G)
-  large-similarity-relation-Large-Ab =
-    large-similarity-relation-Large-Group (large-group-Large-Ab G)
 
   sim-prop-Large-Ab : Large-Relation-Prop β (type-Large-Ab G)
   sim-prop-Large-Ab = sim-prop-Large-Group (large-group-Large-Ab G)
@@ -205,7 +199,7 @@ module _
     right-unit-law-mul-Large-Group (large-group-Large-Ab G)
 ```
 
-### The inverse of the identity is the identity
+### The negation of the identity is the identity
 
 ```agda
 module _
@@ -217,7 +211,7 @@ module _
     neg-zero-Large-Ab = inv-unit-Large-Group (large-group-Large-Ab G)
 ```
 
-### Uniqueness of right inverses
+### Uniqueness of additive right inverses
 
 ```agda
 module _
@@ -233,7 +227,7 @@ module _
       unique-right-inv-Large-Group (large-group-Large-Ab G)
 ```
 
-### Uniqueness of left inverses
+### Uniqueness of additive left inverses
 
 ```agda
 module _
@@ -348,7 +342,7 @@ module _
       ( commutative-add-Large-Ab G)
 ```
 
-### Cancellations in a large group
+### Cancellation laws in a large abelian group
 
 ```agda
 module _
@@ -417,7 +411,7 @@ module _
       sim-cancel-right-div-mul-Large-Group (large-group-Large-Ab G)
 ```
 
-### Addition of an element of a large abelian group is an embedding
+### Addition by an element of a large abelian group is an embedding
 
 ```agda
 module _

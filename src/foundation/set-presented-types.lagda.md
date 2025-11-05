@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.images
@@ -161,36 +162,30 @@ module _
         ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
         ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
         ( λ (b1 , u) (b2 , v) →
-          apply-universal-property-trunc-Prop u
+          apply-twice-universal-property-trunc-Prop u v
             ( function-Prop _ empty-Prop)
             ( λ where
-              ( x , refl) →
-                apply-universal-property-trunc-Prop v
-                  ( function-Prop _ empty-Prop)
-                  ( λ where
-                    ( y , refl) r →
-                      is-empty-eq-coproduct-inl-inr x y
-                        ( is-injective-is-equiv
-                          ( is-equiv-map-equiv e)
-                          ( ( inv (H (inl x))) ∙
-                            ( ap unit-trunc-Set r) ∙
-                            ( H (inr y)))))))
+              ( x , refl) (y , refl) r →
+                is-empty-eq-coproduct-inl-inr x y
+                  ( is-injective-is-equiv
+                    ( is-equiv-map-equiv e)
+                    ( ( inv (H (inl x))) ∙
+                      ( ap unit-trunc-Set r) ∙
+                      ( H (inr y))))))
 
   abstract
     is-surjective-map-is-coproduct-codomain :
       is-surjective map-is-coproduct-codomain
     is-surjective-map-is-coproduct-codomain b =
-      apply-universal-property-trunc-Prop
+      map-trunc-Prop
+        ( λ p →
+          ( map-coproduct
+            ( map-unit-im (f ∘ inl))
+            ( map-unit-im (f ∘ inr))
+            ( a)) ,
+          ( triangle-is-coproduct-codomain a ∙ inv p))
         ( apply-effectiveness-unit-trunc-Set
           ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
-        ( trunc-Prop (fiber map-is-coproduct-codomain b))
-        ( λ p →
-          unit-trunc-Prop
-            ( ( map-coproduct
-                ( map-unit-im (f ∘ inl))
-                ( map-unit-im (f ∘ inr))
-                ( a)) ,
-              ( triangle-is-coproduct-codomain a ∙ inv p)))
       where
       a : X1 + X2
       a = map-inv-equiv e (unit-trunc-Set b)

@@ -235,21 +235,19 @@ module _
       ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
           ( λ h →
             (x : A) (y : type-Truncated-Type (B x)) →
-            Id
-              ( h (unit-trunc x , map-compute-truncated-fam-trunc B x y))
-              ( f x y)))
+            h (unit-trunc x , map-compute-truncated-fam-trunc B x y) ＝
+            f x y))
   dependent-universal-property-total-truncated-fam-trunc =
     is-contr-equiv _
       ( equiv-Σ
         ( λ g →
           (x : A) →
-          Id
-            ( g (unit-trunc x))
-            ( map-equiv-Π
-              ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
-              ( compute-truncated-fam-trunc B x)
-              ( λ u → id-equiv)
-              ( f x)))
+          g (unit-trunc x) ＝
+          map-equiv-Π
+            ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
+            ( compute-truncated-fam-trunc B x)
+            ( λ u → id-equiv)
+            ( f x))
         ( equiv-ev-pair)
         ( λ g →
           equiv-Π-equiv-family
@@ -257,15 +255,14 @@ module _
               ( inv-equiv equiv-funext) ∘e
               ( equiv-Π
                 ( λ y →
-                  Id
-                    ( g (unit-trunc x , y))
-                    ( map-equiv-Π
-                      ( λ u →
-                        type-Truncated-Type (C (unit-trunc x , u)))
-                      ( compute-truncated-fam-trunc B x)
-                      ( λ u → id-equiv)
-                      ( f x)
-                      ( y)))
+                  g (unit-trunc x , y) ＝
+                  map-equiv-Π
+                    ( λ u →
+                      type-Truncated-Type (C (unit-trunc x , u)))
+                    ( compute-truncated-fam-trunc B x)
+                    ( λ u → id-equiv)
+                    ( f x)
+                    ( y))
                 ( compute-truncated-fam-trunc B x)
                 ( λ y →
                   equiv-concat'
@@ -297,10 +294,9 @@ module _
 
   htpy-dependent-universal-property-total-truncated-fam-trunc :
     (x : A) (y : type-Truncated-Type (B x)) →
-    Id
-      ( function-dependent-universal-property-total-truncated-fam-trunc
-        ( unit-trunc x , map-compute-truncated-fam-trunc B x y))
-      ( f x y)
+    function-dependent-universal-property-total-truncated-fam-trunc
+        ( unit-trunc x , map-compute-truncated-fam-trunc B x y) ＝
+    f x y
   htpy-dependent-universal-property-total-truncated-fam-trunc =
     pr2 (center dependent-universal-property-total-truncated-fam-trunc)
 ```
@@ -361,6 +357,10 @@ module _
   is-equiv-unit-trunc-is-contr : is-contr A → is-equiv unit-trunc
   is-equiv-unit-trunc-is-contr c =
     is-equiv-unit-trunc (A , is-trunc-is-contr k c)
+
+  is-contr-type-trunc : is-contr A → is-contr (type-trunc k A)
+  is-contr-type-trunc H =
+    is-contr-is-equiv' A unit-trunc (is-equiv-unit-trunc-is-contr H) H
 ```
 
 ### Truncation is idempotent

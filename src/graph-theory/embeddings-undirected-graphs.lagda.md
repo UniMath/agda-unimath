@@ -20,11 +20,13 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **embedding of undirected graphs** is a
+An
+{{#concept "embedding" Disambiguation="of undirected graphs" Agda=is-emb-hom-Undirected-Graph Agda=emb-Undirected-Graph}}
+of [undirected graphs](graph-theory.undirected-graphs.md) is a
 [morphism](graph-theory.morphisms-undirected-graphs.md) `f : G → H` of
-[undirected graphs](graph-theory.undirected-graphs.md) which is an
-[embedding](foundation.embeddings.md) on vertices such that for each
-[unordered pair](foundation.unordered-pairs.md) `p` of vertices in `G` the map
+undirected graphs which is an [embedding](foundation.embeddings.md) on vertices
+such that for each [unordered pair](foundation.unordered-pairs.md) `p` of
+vertices in `G` the map
 
 ```text
   edge-hom-Undirected-Graph G H :

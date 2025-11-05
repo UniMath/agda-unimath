@@ -24,6 +24,7 @@ open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retracts-of-maps
+open import foundation.small-maps
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -54,7 +55,7 @@ if it is an [embedding](foundation-core.embeddings.md) and its
 Equivalently, a decidable embedding is a map whose fibers are
 [decidable propositions](foundation-core.decidable-propositions.md). We refer to
 this condition as being a
-{{#concept "decidably propositional map" Disambiguation="of types" Agda=is-decidable-prop-map}}.
+{{#concept "decidable propositional map" Disambiguation="of types" Agda=is-decidable-prop-map}}.
 
 ## Definitions
 
@@ -81,7 +82,7 @@ is-injective-is-decidable-emb :
 is-injective-is-decidable-emb = is-injective-is-emb ∘ is-emb-is-decidable-emb
 ```
 
-### Decidably propositional maps
+### Decidable propositional maps
 
 ```agda
 module _
@@ -139,6 +140,11 @@ module _
     is-decidable-map map-decidable-emb
   is-decidable-map-map-decidable-emb =
     is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
+
+  is-injective-map-decidable-emb :
+    is-injective map-decidable-emb
+  is-injective-map-decidable-emb =
+    is-injective-is-decidable-emb is-decidable-emb-map-decidable-emb
 
   emb-decidable-emb : X ↪ Y
   emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
@@ -640,6 +646,28 @@ module _
             ( is-prop-Σ (is-prop-type-Prop P) (is-prop-type-Prop ∘ Q) , H))
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
+```
+
+### Decidable embeddings are small
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-small-map-is-decidable-prop-map :
+    {f : A → B} → is-decidable-prop-map f → is-small-map lzero f
+  is-small-map-is-decidable-prop-map H x = is-small-is-decidable-prop (H x)
+
+  is-small-map-is-decidable-emb :
+    {f : A → B} → is-decidable-emb f → is-small-map lzero f
+  is-small-map-is-decidable-emb H =
+    is-small-map-is-decidable-prop-map
+      ( is-decidable-prop-map-is-decidable-emb H)
+
+  is-small-map-decidable-emb :
+    (f : A ↪ᵈ B) → is-small-map lzero (map-decidable-emb f)
+  is-small-map-decidable-emb (f , H) = is-small-map-is-decidable-emb H
 ```
 
 ## References

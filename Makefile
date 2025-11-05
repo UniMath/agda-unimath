@@ -56,7 +56,7 @@ else
 	AGDA_MIN_HEAP ?= 4G
 endif
 
-AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M6G -RTS
+AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M8G -RTS
 AGDAFILES := $(shell find $(SOURCE_DIR) -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 
 # All our code is in literate Agda, so we could set highlight=code and drop the

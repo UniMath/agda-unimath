@@ -704,7 +704,7 @@ module _
                     rec-coproduct
                       ( λ j<Nq →
                         ex-falso
-                          ( anti-reflexive-le-ℕ
+                          ( irreflexive-le-ℕ
                             ( n)
                             ( tr
                               ( λ m → le-ℕ m n)
@@ -874,7 +874,7 @@ module _
                           sum-equiv-finite-Commutative-Semiring R
                             ( _)
                             ( _)
-                            ( associative-Σ _ _ _)
+                            ( associative-Σ)
                             ( _))
                     ( refl))
           ＝
@@ -948,10 +948,10 @@ module _
                             ( rearrange)
                             ( eq-type-subtype
                               ( λ (i , j , n) →
-                                ( ( le-ℕ-Prop i Np) ∧
-                                  ( le-ℕ-Prop j Nq) ∧
+                                ( ( le-prop-ℕ i Np) ∧
+                                  ( le-prop-ℕ j Nq) ∧
                                   ( Id-Prop ℕ-Set (j +ℕ i) n) ∧
-                                  ( le-ℕ-Prop n (Nq +ℕ Np))))
+                                  ( le-prop-ℕ n (Nq +ℕ Np))))
                               refl)))
                 ( _)
           ＝

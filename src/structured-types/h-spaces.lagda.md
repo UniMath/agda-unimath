@@ -35,7 +35,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **(coherent) H-space** is a "wild unital magma", i.e., it is a
+A (coherent) {{#concept "H-space" WD="H-space" WDID=Q1562471 Agda=H-Space}} is a
+"wild unital magma", i.e., it is a
 [pointed type](structured-types.pointed-types.md)
 [equipped](foundation.structure.md) with a binary operation for which the base
 point is a unit, with a coherence law between the left and the right unit laws.
@@ -107,8 +108,8 @@ module _
   mul-H-Space' x y = mul-H-Space y x
 
   ap-mul-H-Space :
-    {a b c d : type-H-Space} → Id a b → Id c d →
-    Id (mul-H-Space a c) (mul-H-Space b d)
+    {a b c d : type-H-Space} → a ＝ b → c ＝ d →
+    mul-H-Space a c ＝ mul-H-Space b d
   ap-mul-H-Space p q = ap-binary mul-H-Space p q
 
   magma-H-Space : Magma l
@@ -122,20 +123,19 @@ module _
 
   left-unit-law-mul-H-Space :
     (x : type-H-Space) →
-    Id (mul-H-Space unit-H-Space x) x
+    mul-H-Space unit-H-Space x ＝ x
   left-unit-law-mul-H-Space =
     pr1 coherent-unit-laws-mul-H-Space
 
   right-unit-law-mul-H-Space :
     (x : type-H-Space) →
-    Id (mul-H-Space x unit-H-Space) x
+    mul-H-Space x unit-H-Space ＝ x
   right-unit-law-mul-H-Space =
     pr1 (pr2 coherent-unit-laws-mul-H-Space)
 
   coh-unit-laws-mul-H-Space :
-    Id
-      ( left-unit-law-mul-H-Space unit-H-Space)
-      ( right-unit-law-mul-H-Space unit-H-Space)
+    left-unit-law-mul-H-Space unit-H-Space ＝
+    right-unit-law-mul-H-Space unit-H-Space
   coh-unit-laws-mul-H-Space =
     pr2 (pr2 coherent-unit-laws-mul-H-Space)
 
@@ -194,5 +194,5 @@ module _
           ( equiv-funext)
           ( λ _ →
             equiv-tot (λ _ → inv-equiv (equiv-right-whisker-concat refl))))) ∘e
-    ( associative-Σ _ _ _)
+    ( associative-Σ)
 ```

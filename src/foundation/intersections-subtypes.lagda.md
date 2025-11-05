@@ -18,6 +18,7 @@ open import foundation.large-locale-of-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.raising-universe-levels
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
@@ -136,7 +137,7 @@ abstract
     intersection-subtype P (intersection-subtype Q R)
   associative-intersection-subtype P Q R =
     eq-has-same-elements-subtype _ _
-      ( λ _ → iff-equiv (associative-product _ _ _))
+      ( λ _ → iff-equiv associative-product)
 ```
 
 ### The intersection operation is idempotent

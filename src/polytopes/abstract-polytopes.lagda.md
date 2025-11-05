@@ -34,16 +34,19 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define abstract polytopes as finitely graded posets satisfying certain
-axioms. In the classical definition, the grading is a consequence of the axioms.
-Here, we take finitely graded posets as our starting point
+We define
+{{#concept "abstract polytopes" WD="abstract polytope" WDID=Q4669958 Agda=Polytope}}
+as [finitely graded posets](order-theory.finitely-graded-posets.md) satisfying
+certain axioms. In the classical definition, the grading is a consequence of the
+axioms. Here, we take finitely graded posets as our starting point.
 
 The first axiom of polytopes asserts that polytopes have a least and a largest
 element. This is already defined as
-
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
-Next, we assert the diamond condition for abstract polytopes.
+Next, we assert the
+{{#concept "diamond condition" Disambiguation="for abstract polytopes" Agda=diamond-condition-Finitely-Graded-Poset}}
+for abstract polytopes.
 
 ## Definition
 
@@ -226,7 +229,7 @@ module _
   cons-path-faces-Prepolytope a p = cons-path-faces-Finitely-Graded-Poset a p
 
   tr-refl-path-faces-Preposet :
-    {i j : Fin (succ-ℕ k)} (p : Id j i) (x : face-Prepolytope j) →
+    {i j : Fin (succ-ℕ k)} (p : j ＝ i) (x : face-Prepolytope j) →
     path-faces-Prepolytope (tr face-Prepolytope p x) x
   tr-refl-path-faces-Preposet =
     tr-refl-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
@@ -264,20 +267,20 @@ module _
 
   eq-path-elements-Prepolytope :
     (x y : type-Prepolytope)
-    (p : Id (shape-Prepolytope x) (shape-Prepolytope y)) →
-    path-elements-Prepolytope x y → Id x y
+    (p : shape-Prepolytope x ＝ shape-Prepolytope y) →
+    path-elements-Prepolytope x y → x ＝ y
   eq-path-elements-Prepolytope =
     eq-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   eq-path-faces-Prepolytope :
     {i : Fin (succ-ℕ k)} (x y : face-Prepolytope i) →
-    path-faces-Prepolytope x y → Id x y
+    path-faces-Prepolytope x y → x ＝ y
   eq-path-faces-Prepolytope =
     eq-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   antisymmetric-path-elements-Prepolytope :
     (x y : type-Prepolytope) → path-elements-Prepolytope x y →
-    path-elements-Prepolytope y x → Id x y
+    path-elements-Prepolytope y x → x ＝ y
   antisymmetric-path-elements-Prepolytope =
     antisymmetric-path-elements-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope

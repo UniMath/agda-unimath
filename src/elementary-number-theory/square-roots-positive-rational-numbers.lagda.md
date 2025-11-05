@@ -35,6 +35,8 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 
+open import group-theory.groups
+
 open import order-theory.posets
 ```
 
@@ -195,7 +197,8 @@ abstract
                     ( refl)
                     ( ap
                       ( rational-ℚ⁺)
-                      ( is-section-right-div-ℚ⁺
+                      ( is-section-right-div-Group
+                        ( group-mul-ℚ⁺)
                         ( p⁺)
                         ( positive-diff-le-ℚ _ _ p²<q)))
               ＝ q
@@ -229,7 +232,7 @@ abstract
             ( p)
             ( tr
               ( le-ℚ _)
-              ( ap rational-ℚ⁺ (is-retraction-right-div-ℚ⁺ p⁺ p⁺))
+              ( is-retraction-right-div-ℚ⁺ p⁺ p)
               ( preserves-le-right-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _
                 ( le-diff-rational-ℚ⁺ (p *ℚ p) q⁺)))
             ( δ+δ<⟨p²-q⟩/p))
@@ -260,12 +263,15 @@ abstract
               ( is-identity-right-conjugation-add-ℚ (p *ℚ p) q))
             ( refl)
             ( preserves-le-right-add-ℚ (p *ℚ p) _ _
-              ( neg-le-ℚ _ _
+              ( neg-le-ℚ
                 ( tr
                   ( le-ℚ _)
                   ( ap
                     ( rational-ℚ⁺)
-                    ( is-section-right-div-ℚ⁺ p⁺ (positive-diff-le-ℚ _ _ q<p²)))
+                    ( is-section-right-div-Group
+                      ( group-mul-ℚ⁺)
+                      ( p⁺)
+                      ( positive-diff-le-ℚ _ _ q<p²)))
                   ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
 
   rounded-above-square-le-ℚ⁺ :

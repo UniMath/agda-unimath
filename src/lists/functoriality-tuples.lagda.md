@@ -29,7 +29,9 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Any map `f : A → B` determines a map between [tuples](lists.tuples.md)
-`tuple A n → tuple B n` for every `n`.
+`tuple A n → tuple B n` for every `n`. This is the
+{{#concept "functorial action" Disambiguation="of tuples" Agda=map-tuple}} of
+[tuples](lists.tuples.md).
 
 ## Definition
 

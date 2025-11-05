@@ -48,8 +48,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-A **discrete field** is a commutative division ring. They are called discrete,
-because only nonzero elements are assumed to be invertible.
+A {{#concept "finite field" WD="finite field" WDID=Q603880 Agda=Finite-Field}}
+is a [division ring](ring-theory.division-rings.md) that is
+[finite](finite-algebra.finite-rings.md).
 
 ## Definition
 
@@ -120,8 +121,8 @@ module _
 
   associative-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( add-Finite-Field (add-Finite-Field x y) z) ＝
-    ( add-Finite-Field x (add-Finite-Field y z))
+    add-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field x (add-Finite-Field y z)
   associative-add-Finite-Field =
     associative-add-Finite-Ring finite-ring-Finite-Field
 
@@ -135,7 +136,7 @@ module _
 
   commutative-add-Finite-Field :
     (x y : type-Finite-Field) →
-    Id (add-Finite-Field x y) (add-Finite-Field y x)
+    add-Finite-Field x y ＝ add-Finite-Field y x
   commutative-add-Finite-Field = commutative-add-Ab ab-Finite-Field
 
   interchange-add-add-Finite-Field :
@@ -282,8 +283,8 @@ module _
   mul-Finite-Field' = mul-Finite-Ring' finite-ring-Finite-Field
 
   ap-mul-Finite-Field :
-    {x x' y y' : type-Finite-Field} (p : Id x x') (q : Id y y') →
-    Id (mul-Finite-Field x y) (mul-Finite-Field x' y')
+    {x x' y y' : type-Finite-Field} (p : x ＝ x') (q : y ＝ y') →
+    mul-Finite-Field x y ＝ mul-Finite-Field x' y'
   ap-mul-Finite-Field p q = ap-binary mul-Finite-Field p q
 
   associative-mul-Finite-Field :
@@ -300,19 +301,15 @@ module _
 
   left-distributive-mul-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( mul-Finite-Field x (add-Finite-Field y z)) ＝
-    ( add-Finite-Field
-      ( mul-Finite-Field x y)
-      ( mul-Finite-Field x z))
+    mul-Finite-Field x (add-Finite-Field y z) ＝
+    add-Finite-Field (mul-Finite-Field x y) (mul-Finite-Field x z)
   left-distributive-mul-add-Finite-Field =
     left-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 
   right-distributive-mul-add-Finite-Field :
     (x y z : type-Finite-Field) →
-    ( mul-Finite-Field (add-Finite-Field x y) z) ＝
-    ( add-Finite-Field
-      ( mul-Finite-Field x z)
-      ( mul-Finite-Field y z))
+    mul-Finite-Field (add-Finite-Field x y) z ＝
+    add-Finite-Field (mul-Finite-Field x z) (mul-Finite-Field y z)
   right-distributive-mul-add-Finite-Field =
     right-distributive-mul-add-Finite-Ring finite-ring-Finite-Field
 
@@ -539,11 +536,10 @@ module _
 
   preserves-concat-add-list-Finite-Field :
     (l1 l2 : list type-Finite-Field) →
-    Id
-      ( add-list-Finite-Field (concat-list l1 l2))
-      ( add-Finite-Field
-        ( add-list-Finite-Field l1)
-        ( add-list-Finite-Field l2))
+    ( add-list-Finite-Field (concat-list l1 l2)) ＝
+    ( add-Finite-Field
+      ( add-list-Finite-Field l1)
+      ( add-list-Finite-Field l2))
   preserves-concat-add-list-Finite-Field =
     preserves-concat-add-list-Finite-Ring finite-ring-Finite-Field
 ```

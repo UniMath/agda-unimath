@@ -19,10 +19,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **noncoherent H-space** is a [pointed type](structured-types.pointed-types.md)
-`A` [equipped](foundation.structure.md) with a binary operation `μ` and
+A {{#concept "noncoherent H-space" Agda=Noncoherent-H-Space}} is a
+[pointed type](structured-types.pointed-types.md) `A`
+[equipped](foundation.structure.md) with a binary operation `μ` and
 [homotopies](foundation-core.homotopies.md) `(λ x → μ point x) ~ id` and
-`λ x → μ x point ~ id`. If `A` is a [connected](foundation.connected-types.md)
+`(λ x → μ x point) ~ id`. If `A` is a [connected](foundation.connected-types.md)
 H-space, then `λ x → μ a x` and `λ x → μ x a` are
 [equivalences](foundation-core.equivalences.md) for each `a : A`.
 

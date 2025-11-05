@@ -17,7 +17,9 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -141,7 +143,7 @@ module _
           let open do-syntax-trunc-Prop empty-Prop
           in do
             (ε⁺@(ε , _) , ε<z-x) ←
-              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
             (i , yᵢ<x+ε) ←
               is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
             not-leq-le-ℝ (y i) z
@@ -211,6 +213,23 @@ module _
   has-infimum-subset-ℝ = type-Prop has-infimum-prop-subset-ℝ
 ```
 
+### A subset of real numbers with a supremum is inhabited
+
+```agda
+abstract
+  is-inhabited-has-infimum-subset-ℝ :
+    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-infimum-subset-ℝ S l3 →
+    is-inhabited-subtype S
+  is-inhabited-has-infimum-subset-ℝ S (s , is-inf-s) =
+    map-trunc-Prop
+      ( pr1)
+      ( is-approximated-above-is-infimum-family-ℝ
+        ( inclusion-subset-ℝ S)
+        ( s)
+        ( is-inf-s)
+        ( one-ℚ⁺))
+```
+
 ### A real number `r` is greater than the infimum of the `yᵢ` if and only if it is greater than some `yᵢ`
 
 ```agda
@@ -231,7 +250,7 @@ module _
     let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ (y i) z))
     in do
       (ε⁺@(ε , _) , ε<z-x) ←
-        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
       (i , yᵢ<x+ε) ←
         is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
       intro-exists

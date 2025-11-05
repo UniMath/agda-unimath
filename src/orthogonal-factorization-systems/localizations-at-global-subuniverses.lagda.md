@@ -278,7 +278,7 @@ This is stated as Proposition 5.1.5 in {{#cite Rij19}} and as Proposition 2.8 in
 The bottom horizontal map is an equivalence by the universal property of the
 localization and the top vertical maps are fiber inclusions. Therefore, the
 middle horizontal map is an equivalence and the bottom square is a pullback if
-and only if the the top horizontal map is an equivalence.
+and only if the top horizontal map is an equivalence.
 
 ```agda
 module _

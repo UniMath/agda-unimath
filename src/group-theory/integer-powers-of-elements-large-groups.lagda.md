@@ -210,14 +210,12 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
-  where
-
-  private
+  (let _*_ = mul-Large-Group G)
+  (let mul-inv = inv-Large-Group G)
+  (let
     _^_ : {l : Level} → type-Large-Group G l → ℤ → type-Large-Group G l
-    x ^ k = int-power-Large-Group G k x
-
-    _*_ = mul-Large-Group G
-    neg = inv-Large-Group G
+    x ^ k = int-power-Large-Group G k x)
+  where
 
   abstract
     commute-int-powers-Large-Group' :
@@ -232,14 +230,14 @@ module _
           is-injective-emb
             ( emb-left-mul-Large-Group G (l1 ⊔ l2) x)
             ( equational-reasoning
-              x * (neg x * y)
+              x * (mul-inv x * y)
               ＝ raise-Large-Group G l1 y
                 by cancel-left-mul-div-Large-Group G x y
-              ＝ (y * x) * neg x
+              ＝ (y * x) * mul-inv x
                 by inv (cancel-right-mul-div-Large-Group G x y)
-              ＝ (x * y) * neg x
+              ＝ (x * y) * mul-inv x
                 by ap-mul-Large-Group G (inv xy=yx) refl
-              ＝ x * (y * neg x)
+              ＝ x * (y * mul-inv x)
                 by associative-mul-Large-Group G _ _ _)
         nonneg-case n =
           equational-reasoning
@@ -262,9 +260,9 @@ module _
           ( λ k → (x ^ k) * y ＝ y * (x ^ k))
           ( equational-reasoning
             (x ^ neg-one-ℤ) * y
-            ＝ neg x * y
+            ＝ mul-inv x * y
               by ap-mul-Large-Group G (int-power-neg-one-Large-Group G x) refl
-            ＝ y * neg x
+            ＝ y * mul-inv x
               by x⁻¹y=yx⁻¹
             ＝ y * (x ^ neg-one-ℤ)
               by
@@ -274,20 +272,20 @@ module _
           ( λ n x⁻ⁿy=yx⁻ⁿ →
             equational-reasoning
               (x ^ in-neg-ℤ (succ-ℕ n)) * y
-              ＝ ((x ^ in-neg-ℤ n) * neg x) * y
+              ＝ ((x ^ in-neg-ℤ n) * mul-inv x) * y
                 by
                   ap-mul-Large-Group G
                     ( int-power-pred-Large-Group G (in-neg-ℤ n) x)
                     ( refl)
-              ＝ (x ^ in-neg-ℤ n) * (neg x * y)
+              ＝ (x ^ in-neg-ℤ n) * (mul-inv x * y)
                 by associative-mul-Large-Group G _ _ _
-              ＝ (x ^ in-neg-ℤ n) * (y * neg x)
+              ＝ (x ^ in-neg-ℤ n) * (y * mul-inv x)
                 by ap-mul-Large-Group G refl x⁻¹y=yx⁻¹
-              ＝ ((x ^ in-neg-ℤ n) * y) * neg x
+              ＝ ((x ^ in-neg-ℤ n) * y) * mul-inv x
                 by inv (associative-mul-Large-Group G _ _ _)
-              ＝ (y * (x ^ in-neg-ℤ n)) * neg x
+              ＝ (y * (x ^ in-neg-ℤ n)) * mul-inv x
                 by ap-mul-Large-Group G x⁻ⁿy=yx⁻ⁿ refl
-              ＝ y * ((x ^ in-neg-ℤ n) * neg x)
+              ＝ y * ((x ^ in-neg-ℤ n) * mul-inv x)
                 by associative-mul-Large-Group G _ _ _
               ＝ y * (x ^ in-neg-ℤ (succ-ℕ n))
                 by
@@ -311,14 +309,14 @@ module _
           is-injective-emb
             ( emb-right-mul-Large-Group G (l1 ⊔ l2) y)
             ( equational-reasoning
-              (x * neg y) * y
+              (x * mul-inv y) * y
               ＝ raise-Large-Group G l2 x
                 by cancel-right-div-mul-Large-Group G y x
-              ＝ neg y * (y * x)
+              ＝ mul-inv y * (y * x)
                 by inv (cancel-left-div-mul-Large-Group G y x)
-              ＝ neg y * (x * y)
+              ＝ mul-inv y * (x * y)
                 by ap-mul-Large-Group G refl (inv xy=yx)
-              ＝ (neg y * x) * y
+              ＝ (mul-inv y * x) * y
                 by inv (associative-mul-Large-Group G _ _ _))
         nonneg-case n =
           equational-reasoning
@@ -343,9 +341,9 @@ module _
             mul-Large-Group G (int-power-Large-Group G k y) x)
           ( equational-reasoning
             x * (y ^ neg-one-ℤ)
-            ＝ x * neg y
+            ＝ x * mul-inv y
               by ap-mul-Large-Group G refl (int-power-neg-one-Large-Group G y)
-            ＝ neg y * x
+            ＝ mul-inv y * x
               by xy⁻¹=y⁻¹x
             ＝ (y ^ neg-one-ℤ) * x
               by
@@ -355,20 +353,20 @@ module _
           ( λ n xy⁻ⁿ=y⁻ⁿx →
             equational-reasoning
               x * (y ^ in-neg-ℤ (succ-ℕ n))
-              ＝ x * (neg y * (y ^ in-neg-ℤ n))
+              ＝ x * (mul-inv y * (y ^ in-neg-ℤ n))
                 by
                   ap-mul-Large-Group G
                     ( refl)
                     ( int-power-pred-Large-Group' G (in-neg-ℤ n) y)
-              ＝ (x * neg y) * (y ^ in-neg-ℤ n)
+              ＝ (x * mul-inv y) * (y ^ in-neg-ℤ n)
                 by inv (associative-mul-Large-Group G _ _ _)
-              ＝ (neg y * x) * (y ^ in-neg-ℤ n)
+              ＝ (mul-inv y * x) * (y ^ in-neg-ℤ n)
                 by ap-mul-Large-Group G xy⁻¹=y⁻¹x refl
-              ＝ neg y * (x * (y ^ in-neg-ℤ n))
+              ＝ mul-inv y * (x * (y ^ in-neg-ℤ n))
                 by associative-mul-Large-Group G _ _ _
-              ＝ neg y * ((y ^ in-neg-ℤ n) * x)
+              ＝ mul-inv y * ((y ^ in-neg-ℤ n) * x)
                 by ap-mul-Large-Group G refl xy⁻ⁿ=y⁻ⁿx
-              ＝ (neg y * (y ^ in-neg-ℤ n)) * x
+              ＝ (mul-inv y * (y ^ in-neg-ℤ n)) * x
                 by inv (associative-mul-Large-Group G _ _ _)
               ＝ (y ^ in-neg-ℤ (succ-ℕ n)) * x
                 by
@@ -416,7 +414,7 @@ module _
         _^_ : {l : Level} → type-Large-Group G l → ℤ → type-Large-Group G l
         x ^ k = int-power-Large-Group G k x
         _*_ = mul-Large-Group G
-        neg = inv-Large-Group G
+        mul-inv = inv-Large-Group G
         nonneg-case n =
           equational-reasoning
             (x * y) ^ int-ℕ n
@@ -431,19 +429,19 @@ module _
                   ( inv (int-power-int-Large-Group G n y))
         x⁻¹y⁻¹=⟨xy⟩⁻¹ =
           eq-sim-Large-Group G _ _
-            ( unique-right-inv-Large-Group G (x * y) (neg x * neg y)
+            ( unique-right-inv-Large-Group G (x * y) (mul-inv x * mul-inv y)
               ( equational-reasoning
-                (x * y) * (neg x * neg y)
-                ＝ (y * x) * (neg x * neg y)
+                (x * y) * (mul-inv x * mul-inv y)
+                ＝ (y * x) * (mul-inv x * mul-inv y)
                   by ap-mul-Large-Group G xy=yx refl
-                ＝ y * (x * (neg x * neg y))
+                ＝ y * (x * (mul-inv x * mul-inv y))
                   by associative-mul-Large-Group G _ _ _
-                ＝ y * raise-Large-Group G l1 (neg y)
+                ＝ y * raise-Large-Group G l1 (mul-inv y)
                   by
                     ap-mul-Large-Group G
                       ( refl)
                       ( cancel-left-mul-div-Large-Group G x _)
-                ＝ raise-Large-Group G l1 (y * neg y)
+                ＝ raise-Large-Group G l1 (y * mul-inv y)
                   by raise-right-mul-Large-Group G _ _
                 ＝ raise-Large-Group G l1 (raise-unit-Large-Group G l2)
                   by
@@ -461,9 +459,9 @@ module _
               ( int-power-Large-Group G k y))
           ( equational-reasoning
             (x * y) ^ neg-one-ℤ
-            ＝ neg (x * y)
+            ＝ mul-inv (x * y)
               by int-power-neg-one-Large-Group G _
-            ＝ neg x * neg y
+            ＝ mul-inv x * mul-inv y
               by inv x⁻¹y⁻¹=⟨xy⟩⁻¹
             ＝ (x ^ neg-one-ℤ) * (y ^ neg-one-ℤ)
               by
@@ -474,22 +472,22 @@ module _
 
             equational-reasoning
               (x * y) ^ in-neg-ℤ (succ-ℕ n)
-              ＝ ((x * y) ^ in-neg-ℤ n) * neg (x * y)
+              ＝ ((x * y) ^ in-neg-ℤ n) * mul-inv (x * y)
                 by int-power-pred-Large-Group G (in-neg-ℤ n) (x * y)
-              ＝ (( x ^ in-neg-ℤ n) * (y ^ in-neg-ℤ n)) * (neg x * neg y)
+              ＝ (( x ^ in-neg-ℤ n) * (y ^ in-neg-ℤ n)) * (mul-inv x * mul-inv y)
                 by
                   ap-mul-Large-Group G ⟨xy⟩⁻ⁿ=x⁻ⁿy⁻ⁿ (inv x⁻¹y⁻¹=⟨xy⟩⁻¹)
-              ＝ (x ^ in-neg-ℤ n) * ((y ^ in-neg-ℤ n) * (neg x * neg y))
+              ＝ (x ^ in-neg-ℤ n) * ((y ^ in-neg-ℤ n) * (mul-inv x * mul-inv y))
                 by
                   associative-mul-Large-Group G _ _ _
-              ＝ (x ^ in-neg-ℤ n) * (((y ^ in-neg-ℤ n) * neg x) * neg y)
+              ＝ (x ^ in-neg-ℤ n) * (((y ^ in-neg-ℤ n) * mul-inv x) * mul-inv y)
                 by
                   ap-mul-Large-Group G
                     ( refl)
                     ( inv (associative-mul-Large-Group G _ _ _))
               ＝
                 (x ^ in-neg-ℤ n) *
-                (((y ^ in-neg-ℤ n) * (x ^ neg-one-ℤ)) * neg y)
+                (((y ^ in-neg-ℤ n) * (x ^ neg-one-ℤ)) * mul-inv y)
                 by
                   ap-mul-Large-Group G
                     ( refl)
@@ -500,7 +498,7 @@ module _
                       ( refl))
               ＝
                 (x ^ in-neg-ℤ n) *
-                (((x ^ neg-one-ℤ) * (y ^ in-neg-ℤ n)) * neg y)
+                (((x ^ neg-one-ℤ) * (y ^ in-neg-ℤ n)) * mul-inv y)
                 by
                   ap-mul-Large-Group G
                     ( refl)
@@ -512,17 +510,17 @@ module _
                       ( refl))
               ＝
                 (x ^ in-neg-ℤ n) *
-                ((x ^ neg-one-ℤ) * ((y ^ in-neg-ℤ n) * neg y))
+                ((x ^ neg-one-ℤ) * ((y ^ in-neg-ℤ n) * mul-inv y))
                 by
                   ap-mul-Large-Group G
                     ( refl)
                     ( associative-mul-Large-Group G _ _ _)
               ＝
                 ((x ^ in-neg-ℤ n) * (x ^ neg-one-ℤ)) *
-                ((y ^ in-neg-ℤ n) * neg y)
+                ((y ^ in-neg-ℤ n) * mul-inv y)
                 by
                   inv (associative-mul-Large-Group G _ _ _)
-              ＝ ((x ^ in-neg-ℤ n) * neg x) * (y ^ in-neg-ℤ (succ-ℕ n))
+              ＝ ((x ^ in-neg-ℤ n) * mul-inv x) * (y ^ in-neg-ℤ (succ-ℕ n))
                   by
                     ap-mul-Large-Group G
                       ( ap-mul-Large-Group G

@@ -10,8 +10,6 @@ module order-theory.strictly-preordered-sets where
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -31,8 +29,8 @@ preordered set consists of a set $A$, a
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
 irreflexive and transitive:
 
-- For any $x:A$ we have $x \nle x$.
-- For any $x,y,z:A$ we have $y<z \to x<y \to x<z$.
+- For any $x:A$ we have $x \nless x$.
+- For any $x,y,z:A$ we have $(y<z) → (x<y) → (x<z)$.
 
 Strictly preordered sets satisfy antisymmetry by irreflexivity and transitivity.
 

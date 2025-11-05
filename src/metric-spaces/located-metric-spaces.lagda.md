@@ -136,12 +136,12 @@ module _
         ( λ 0<p →
           let
             r = mediant-ℚ p q
-            p⁺ = (p , is-positive-le-zero-ℚ p 0<p)
+            p⁺ = (p , is-positive-le-zero-ℚ 0<p)
             p<r = le-left-mediant-ℚ p q p<q
             r<q = le-right-mediant-ℚ p q p<q
             r⁺ =
               ( r ,
-                is-positive-le-zero-ℚ r (transitive-le-ℚ zero-ℚ p r p<r 0<p))
+                is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ p r p<r 0<p))
           in
             map-disjunction
               ( λ ¬Npxy p∈U →

@@ -141,7 +141,7 @@ abstract
       ( equational-reasoning
         p *ℚ rational-dist-ℚ q r
         ＝ rational-abs-ℚ (p *ℚ (q -ℚ r))
-          by ap rational-ℚ⁰⁺ (inv (abs-left-mul-nonnegative-ℚ _ p⁰⁺))
+          by inv (rational-abs-left-mul-nonnegative-ℚ _ p⁰⁺)
         ＝ rational-abs-ℚ (p *ℚ q +ℚ p *ℚ (neg-ℚ r))
           by ap rational-abs-ℚ (left-distributive-mul-add-ℚ p q (neg-ℚ r))
         ＝ rational-abs-ℚ (p *ℚ q -ℚ p *ℚ r)

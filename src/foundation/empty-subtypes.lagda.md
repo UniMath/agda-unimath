@@ -31,7 +31,7 @@ open import foundation.universe-levels
 
 A [subtype](foundation-core.subtypes.md) is an
 {{#concept "empty" WDID=Q226183 WD="empty set" Agda=is-empty-subtype}} subtype
-if is is [empty](foundation.empty-types.md) as a type.
+if it is [empty](foundation.empty-types.md) as a type.
 
 ## Definition
 

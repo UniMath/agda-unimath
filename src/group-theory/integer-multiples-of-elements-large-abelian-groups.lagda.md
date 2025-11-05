@@ -26,7 +26,7 @@ open import group-theory.multiples-of-elements-large-abelian-groups
 ## Idea
 
 The integer
-{{#concept "multiplication" Disambiguation="integer multiplication of elements of large abelian groups" Agda=int-multiple-large-Ab}}
+{{#concept "multiplication" Disambiguation="integer multiplication of elements of large abelian groups" Agda=int-multiple-Large-Ab}}
 on a [large abelian group](group-theory.large-abelian-groups.md) is the map
 `k x ↦ kx`, which is defined by
 [iteratively](foundation.iterating-automorphisms.md) adding `x` with itself an

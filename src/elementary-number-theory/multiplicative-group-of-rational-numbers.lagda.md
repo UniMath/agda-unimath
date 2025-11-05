@@ -37,7 +37,7 @@ open import group-theory.submonoids-commutative-monoids
 
 open import ring-theory.groups-of-units-rings
 open import ring-theory.invertible-elements-rings
-open import ring-theory.trivial-rings
+open import ring-theory.nontrivial-rings
 ```
 
 </details>
@@ -138,7 +138,9 @@ module _
       ( H)
       ( inv K)
 
-  abstract
+  opaque
+    unfolding is-negative-ℚ
+
     is-invertible-element-ring-is-nonzero-ℚ :
       is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
     is-invertible-element-ring-is-nonzero-ℚ H =

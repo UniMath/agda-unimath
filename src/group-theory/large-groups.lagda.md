@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.large-binary-relations
-open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -66,7 +65,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   mul-Large-Group' x y = mul-Large-Group y x
 
   ap-mul-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     {x x' : type-Large-Group l1} → x ＝ x' →
     {y y' : type-Large-Group l2} → y ＝ y' →
     mul-Large-Group x y ＝ mul-Large-Group x' y'
@@ -74,11 +73,6 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
 
   unit-Large-Group : type-Large-Group lzero
   unit-Large-Group = unit-Large-Monoid large-monoid-Large-Group
-
-  large-similarity-relation-Large-Group :
-    Large-Similarity-Relation β type-Large-Group
-  large-similarity-relation-Large-Group =
-    large-similarity-relation-Large-Monoid large-monoid-Large-Group
 
   sim-prop-Large-Group : Large-Relation-Prop β type-Large-Group
   sim-prop-Large-Group = sim-prop-Large-Monoid large-monoid-Large-Group
@@ -105,16 +99,16 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     symmetric-sim-Large-Monoid large-monoid-Large-Group
 
   transitive-sim-Large-Group :
-    {l1 l2 l3 : Level} →
-    (x : type-Large-Group l1) →
-    (y : type-Large-Group l2) →
+    {l1 l2 l3 : Level}
+    (x : type-Large-Group l1)
+    (y : type-Large-Group l2)
     (z : type-Large-Group l3) →
     sim-Large-Group y z → sim-Large-Group x y → sim-Large-Group x z
   transitive-sim-Large-Group =
     transitive-sim-Large-Monoid large-monoid-Large-Group
 
   preserves-sim-left-mul-Large-Group :
-    {l1 l2 l3 : Level} (y : type-Large-Group l1) →
+    {l1 l2 l3 : Level} (y : type-Large-Group l1)
     (x : type-Large-Group l2) (x' : type-Large-Group l3) →
     sim-Large-Group x x' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x' y)
@@ -122,7 +116,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     preserves-sim-left-mul-Large-Monoid large-monoid-Large-Group
 
   preserves-sim-right-mul-Large-Group :
-    {l1 l2 l3 : Level} (x : type-Large-Group l1) →
+    {l1 l2 l3 : Level} (x : type-Large-Group l1)
     (y : type-Large-Group l2) (y' : type-Large-Group l3) →
     sim-Large-Group y y' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x y')
@@ -210,14 +204,14 @@ module _
   eq-raise-Large-Group = eq-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-raise-Large-Group :
-    {l1 l2 l3 : Level} → (x : type-Large-Group G l1) →
+    {l1 l2 l3 : Level} (x : type-Large-Group G l1) →
     raise-Large-Group G l2 (raise-Large-Group G l3 x) ＝
     raise-Large-Group G (l2 ⊔ l3) x
   raise-raise-Large-Group =
     raise-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-left-mul-Large-Group :
-    {l1 l2 l3 : Level} →
+    {l1 l2 l3 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G (raise-Large-Group G l3 x) y ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
@@ -225,7 +219,7 @@ module _
     raise-left-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-right-mul-Large-Group :
-    {l1 l2 l3 : Level} →
+    {l1 l2 l3 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G x (raise-Large-Group G l3 y) ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
@@ -233,7 +227,7 @@ module _
     raise-right-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-mul-Large-Group :
-    {l1 l2 l3 l4 : Level} →
+    {l1 l2 l3 l4 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     mul-Large-Group G
       ( raise-Large-Group G l3 x)
@@ -271,6 +265,43 @@ module
   where
 
   open similarity-reasoning-Large-Monoid (large-monoid-Large-Group G) public
+```
+
+### Inverse laws in terms of similarity
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  open similarity-reasoning-Large-Group G
+
+  abstract
+    sim-left-inverse-law-mul-Large-Group :
+      {l : Level} (x : type-Large-Group G l) →
+      sim-Large-Group G
+        ( mul-Large-Group G (inv-Large-Group G x) x)
+        ( unit-Large-Group G)
+    sim-left-inverse-law-mul-Large-Group {l} x =
+      similarity-reasoning
+        mul-Large-Group G (inv-Large-Group G x) x
+        ~ raise-unit-Large-Group G l
+          by sim-eq-Large-Group G (left-inverse-law-mul-Large-Group G x)
+        ~ unit-Large-Group G
+          by sim-raise-Large-Group' G _ _
+
+    sim-right-inverse-law-mul-Large-Group :
+      {l : Level} (x : type-Large-Group G l) →
+      sim-Large-Group G
+        ( mul-Large-Group G x (inv-Large-Group G x))
+        ( unit-Large-Group G)
+    sim-right-inverse-law-mul-Large-Group {l} x =
+      similarity-reasoning
+        mul-Large-Group G x (inv-Large-Group G x)
+        ~ raise-unit-Large-Group G l
+          by sim-eq-Large-Group G (right-inverse-law-mul-Large-Group G x)
+        ~ unit-Large-Group G
+          by sim-raise-Large-Group' G _ _
 ```
 
 ### The inverse of the identity is the identity
@@ -395,32 +426,32 @@ module _
         ( let
             open similarity-reasoning-Large-Group G
             _*_ = mul-Large-Group G
-            neg = inv-Large-Group G
+            mul-inv = inv-Large-Group G
           in
             eq-sim-Large-Group G _ _
               ( unique-right-inv-Large-Group G _ _
                 ( equational-reasoning
-                  (x * y) * (neg y * neg x)
-                  ＝ x * (y * (neg y * neg x))
+                  (x * y) * (mul-inv y * mul-inv x)
+                  ＝ x * (y * (mul-inv y * mul-inv x))
                     by associative-mul-Large-Group G _ _ _
-                  ＝ x * ((y * neg y) * neg x)
+                  ＝ x * ((y * mul-inv y) * mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( inv (associative-mul-Large-Group G _ _ _))
-                  ＝ x * (raise-unit-Large-Group G l2 * neg x)
+                  ＝ x * (raise-unit-Large-Group G l2 * mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( ap-mul-Large-Group G
                           ( right-inverse-law-mul-Large-Group G y)
                           ( refl))
-                  ＝ x * raise-Large-Group G l2 (neg x)
+                  ＝ x * raise-Large-Group G l2 (mul-inv x)
                     by
                       ap-mul-Large-Group G
                         ( refl)
                         ( raise-left-unit-law-Large-Group G _)
-                  ＝ raise-Large-Group G l2 (x * neg x)
+                  ＝ raise-Large-Group G l2 (x * mul-inv x)
                     by raise-right-mul-Large-Group G _ _
                   ＝ raise-Large-Group G l2 (raise-unit-Large-Group G l1)
                     by
@@ -438,15 +469,14 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
   where
 
-  abstract
-    inv-inv-Large-Group :
-      {l : Level} (x : type-Large-Group G l) →
-      inv-Large-Group G (inv-Large-Group G x) ＝ x
-    inv-inv-Large-Group x =
-      inv
-        ( eq-sim-Large-Group G _ _
-          ( unique-right-inv-Large-Group G _ _
-            ( left-inverse-law-mul-Large-Group G x)))
+  inv-inv-Large-Group :
+    {l : Level} (x : type-Large-Group G l) →
+    inv-Large-Group G (inv-Large-Group G x) ＝ x
+  inv-inv-Large-Group x =
+    inv
+      ( eq-sim-Large-Group G _ _
+        ( unique-right-inv-Large-Group G _ _
+          ( left-inverse-law-mul-Large-Group G x)))
 
   aut-inv-Large-Group : (l : Level) → Aut (type-Large-Group G l)
   aut-inv-Large-Group l =
@@ -462,7 +492,7 @@ module _
   where
 
   sim-iff-eq-raise-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     ( sim-Large-Group G x y) ↔
     ( raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y)
@@ -470,7 +500,7 @@ module _
     sim-iff-eq-raise-Large-Monoid (large-monoid-Large-Group G)
 
   sim-eq-raise-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     (raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y) →
     sim-Large-Group G x y
@@ -478,7 +508,7 @@ module _
     backward-implication (sim-iff-eq-raise-Large-Group x y)
 
   eq-raise-sim-Large-Group :
-    {l1 l2 : Level} →
+    {l1 l2 : Level}
     (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
     sim-Large-Group G x y →
     raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y
@@ -517,13 +547,10 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  (let _*_ = mul-Large-Group G) (let mul-inv = inv-Large-Group G)
   where
 
   open similarity-reasoning-Large-Group G
-
-  private
-    _*_ = mul-Large-Group G
-    neg = inv-Large-Group G
 
   abstract
     cancel-left-div-mul-Large-Group :
@@ -534,8 +561,8 @@ module _
       raise-Large-Group G l1 y
     cancel-left-div-mul-Large-Group {l1} {l2} x y =
       equational-reasoning
-        neg x * (x * y)
-        ＝ (neg x * x) * y
+        mul-inv x * (x * y)
+        ＝ (mul-inv x * x) * y
           by inv (associative-mul-Large-Group G _ _ _)
         ＝ raise-unit-Large-Group G l1 * y
           by ap-mul-Large-Group G (left-inverse-law-mul-Large-Group G x) refl
@@ -549,7 +576,7 @@ module _
         ( y)
     sim-cancel-left-div-mul-Large-Group {l1} x y =
       similarity-reasoning
-        neg x * (x * y)
+        mul-inv x * (x * y)
         ~ raise-Large-Group G l1 y
           by sim-eq-Large-Group G (cancel-left-div-mul-Large-Group x y)
         ~ y
@@ -563,11 +590,11 @@ module _
       raise-Large-Group G l1 y
     cancel-left-mul-div-Large-Group {l1} x y =
       equational-reasoning
-        x * (neg x * y)
-        ＝ neg (neg x) * (neg x * y)
+        x * (mul-inv x * y)
+        ＝ mul-inv (mul-inv x) * (mul-inv x * y)
           by ap-mul-Large-Group G (inv (inv-inv-Large-Group G x)) refl
         ＝ raise-Large-Group G l1 y
-          by cancel-left-div-mul-Large-Group (neg x) y
+          by cancel-left-div-mul-Large-Group (mul-inv x) y
 
     sim-cancel-left-mul-div-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -576,9 +603,9 @@ module _
         ( y)
     sim-cancel-left-mul-div-Large-Group x y =
       tr
-        ( λ z → sim-Large-Group G (z * (neg x * y)) y)
+        ( λ z → sim-Large-Group G (z * (mul-inv x * y)) y)
         ( inv-inv-Large-Group G x)
-        ( sim-cancel-left-div-mul-Large-Group (neg x) y)
+        ( sim-cancel-left-div-mul-Large-Group (mul-inv x) y)
 
     cancel-right-mul-div-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -586,8 +613,8 @@ module _
       raise-Large-Group G l1 y
     cancel-right-mul-div-Large-Group {l1} x y =
       equational-reasoning
-        (y * x) * neg x
-        ＝ y * (x * neg x)
+        (y * x) * mul-inv x
+        ＝ y * (x * mul-inv x)
           by associative-mul-Large-Group G _ _ _
         ＝ y * raise-unit-Large-Group G l1
           by ap-mul-Large-Group G refl (right-inverse-law-mul-Large-Group G x)
@@ -613,11 +640,11 @@ module _
       raise-Large-Group G l1 y
     cancel-right-div-mul-Large-Group {l1} x y =
       equational-reasoning
-        (y * neg x) * x
-        ＝ (y * neg x) * neg (neg x)
+        (y * mul-inv x) * x
+        ＝ (y * mul-inv x) * mul-inv (mul-inv x)
           by ap-mul-Large-Group G refl (inv (inv-inv-Large-Group G x))
         ＝ raise-Large-Group G l1 y
-          by cancel-right-mul-div-Large-Group (neg x) y
+          by cancel-right-mul-div-Large-Group (mul-inv x) y
 
     sim-cancel-right-div-mul-Large-Group :
       {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -626,9 +653,9 @@ module _
         ( y)
     sim-cancel-right-div-mul-Large-Group x y =
       tr
-        ( λ z → sim-Large-Group G ((y * neg x) * z) y)
+        ( λ z → sim-Large-Group G ((y * mul-inv x) * z) y)
         ( inv-inv-Large-Group G x)
-        ( sim-cancel-right-mul-div-Large-Group (neg x) y)
+        ( sim-cancel-right-mul-div-Large-Group (mul-inv x) y)
 ```
 
 ### Left multiplication by an element of a large group is an embedding
@@ -646,7 +673,7 @@ module _
       let
         open similarity-reasoning-Large-Group G
         _*_ = mul-Large-Group G
-        neg = inv-Large-Group G
+        mul-inv = inv-Large-Group G
       in
         is-prop-all-elements-equal
           ( λ (z , xz=y) (z' , xz'=y) →
@@ -659,11 +686,11 @@ module _
               ( eq-sim-Large-Group G _ _
                 ( similarity-reasoning
                   z
-                  ~ neg x * (x * z)
+                  ~ mul-inv x * (x * z)
                     by
                       symmetric-sim-Large-Group G _ _
                         ( sim-cancel-left-div-mul-Large-Group G x z)
-                  ~ neg x * (x * z')
+                  ~ mul-inv x * (x * z')
                     by
                       sim-eq-Large-Group G
                         ( ap-mul-Large-Group G
@@ -697,7 +724,7 @@ module _
       let
         open similarity-reasoning-Large-Group G
         _*_ = mul-Large-Group G
-        neg = inv-Large-Group G
+        mul-inv = inv-Large-Group G
       in
         is-prop-all-elements-equal
           ( λ (z , zx=y) (z' , z'x=y) →
@@ -710,11 +737,11 @@ module _
               ( eq-sim-Large-Group G _ _
                 ( similarity-reasoning
                   z
-                  ~ (z * x) * neg x
+                  ~ (z * x) * mul-inv x
                     by
                       symmetric-sim-Large-Group G _ _
                         ( sim-cancel-right-mul-div-Large-Group G x z)
-                  ~ (z' * x) * neg x
+                  ~ (z' * x) * mul-inv x
                     by
                       sim-eq-Large-Group G
                         ( ap-mul-Large-Group G
