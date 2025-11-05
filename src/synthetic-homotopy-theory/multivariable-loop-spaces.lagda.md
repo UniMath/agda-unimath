@@ -359,32 +359,6 @@ module _
       ( Eq-left-inverse-law-mul-multivar-Ω x)
 ```
 
-### `I+1`-ary loops
-
-`(I + 1)`-ary loops are equivalent to families `I → ΩA`, where `Ω` is the
-standard loop type.
-
-```agda
-module _
-  {l1 l2 : Level} {I : UU l1} (A∗ : Pointed-Type l1)
-  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
-  where
-
-  equiv-type-isolated-point-multivar-Ω :
-    type-multivar-Ω (I + unit) A∗ ≃ (I → type-Ω A∗)
-  equiv-type-isolated-point-multivar-Ω =
-    equivalence-reasoning
-    Σ A (λ a → I + unit → a ＝ a∗)
-    ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
-      by equiv-tot (λ a → equiv-universal-property-Maybe)
-    ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
-      by equiv-tot (λ a → commutative-product)
-    ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
-      by inv-associative-Σ
-    ≃ (I → type-Ω A∗)
-      by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
-```
-
 ### Invertibility of left and right multiplication
 
 ```agda
@@ -536,6 +510,32 @@ module _
     (a : type-multivar-Ω I A∗) → type-multivar-Ω I A∗ ≃ type-multivar-Ω I A∗
   equiv-right-mul-multivar-Ω a =
     ((λ x → mul-multivar-Ω I∗ A∗ x a) , is-equiv-right-mul-multivar-Ω a)
+```
+
+### `I+1`-ary loops
+
+`(I + 1)`-ary loops are equivalent to families `I → ΩA`, where `Ω` is the
+standard loop type.
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (A∗ : Pointed-Type l1)
+  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
+  where
+
+  equiv-type-isolated-point-multivar-Ω :
+    type-multivar-Ω (I + unit) A∗ ≃ (I → type-Ω A∗)
+  equiv-type-isolated-point-multivar-Ω =
+    equivalence-reasoning
+    Σ A (λ a → I + unit → a ＝ a∗)
+    ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
+      by equiv-tot (λ a → equiv-universal-property-Maybe)
+    ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
+      by equiv-tot (λ a → commutative-product)
+    ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
+      by inv-associative-Σ
+    ≃ (I → type-Ω A∗)
+      by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
 ```
 
 ### `ΣI`-ary loops are `I`-ary loops of loops
