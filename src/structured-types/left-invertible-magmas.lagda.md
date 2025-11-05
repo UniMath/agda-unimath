@@ -19,7 +19,7 @@ open import structured-types.magmas
 
 ## Idea
 
-A [magma](structured-types.magma.md) `A` is
+A [magma](structured-types.magmas.md) `A` is
 {{#concept "left-invertible" Disambiguation="magma" Agda=is-left-invertible-Magma}}
 if the multiplication map `μ(a,-) : A → A` is an
 [equivalence](foundation-core.equivalences.md) for every `a : A`.
