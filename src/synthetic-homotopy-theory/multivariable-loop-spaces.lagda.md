@@ -36,6 +36,9 @@ open import structured-types.magmas
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
 </details>
@@ -533,4 +536,29 @@ module _
     (a : type-multivar-Ω I A∗) → type-multivar-Ω I A∗ ≃ type-multivar-Ω I A∗
   equiv-right-mul-multivar-Ω a =
     ((λ x → mul-multivar-Ω I∗ A∗ x a) , is-equiv-right-mul-multivar-Ω a)
+```
+
+### `ΣI`-ary loops are `I`-ary loops of loops
+
+For every type $I$ we have the equivalence
+
+$$Ω_{ΣI}(A) ≃ Ω_I(Ω(A)).$$
+
+```agda
+module _
+  {l1 l2 : Level} (I : UU l1) (A∗ : Pointed-Type l2)
+  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
+  where
+
+  compute-type-multivar-Ω-suspension :
+    type-multivar-Ω (suspension I) A∗ ≃ type-multivar-Ω I (Ω A∗)
+  compute-type-multivar-Ω-suspension =
+    equivalence-reasoning
+    Σ A (λ a → suspension I → a ＝ a∗)
+    ≃ Σ A (λ a → Σ (a ＝ a∗) (λ S → Σ (a ＝ a∗) (λ N → I → N ＝ S)))
+      by equiv-tot (λ a → equiv-left-swap-Σ ∘e equiv-up-suspension)
+    ≃ Σ (Σ A (λ a → a ＝ a∗)) (λ (a , S) → Σ (a ＝ a∗) (λ N → I → N ＝ S))
+      by inv-associative-Σ
+    ≃ Σ (a∗ ＝ a∗) (λ N → I → N ＝ refl)
+      by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl-Ω A∗)
 ```
