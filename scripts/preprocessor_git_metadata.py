@@ -65,8 +65,6 @@ def get_recent_changes(contributors, *args):
         'git', 'log',
         # Show only last RECENT_CHANGES_COUNT commits
         '-n', str(RECENT_CHANGES_COUNT),
-        # Skip chore commits
-        '--invert-grep', '--grep=^chore:',
         # Get hash, date, message, author and coauthors, separated by tabs
         # NB When there are no trailers, the line ends with a tab
         # NB Coauthors usually have the format "name <email>" and there is
@@ -150,7 +148,8 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
 
-    recent_changes, skipped_authors = get_recent_changes(contributors, '--', filename)
+    recent_changes, skipped_authors = get_recent_changes(
+        contributors, '--', filename)
 
     if skipped_authors:
         print_skipping_contributors_warning(skipped_authors, contributors_file)
@@ -185,10 +184,12 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
 
     if source_file_name in config['sitewide_changes']:
         # Insert recent sitewide changes on page
-        footer_recent_sitewide, skipped_authors = get_recent_changes(contributors)
+        footer_recent_sitewide, skipped_authors = get_recent_changes(
+            contributors, '--invert-grep', '--grep=^chore:')
 
         if skipped_authors:
-            print_skipping_contributors_warning(skipped_authors, config['contributors_file'])
+            print_skipping_contributors_warning(
+                skipped_authors, config['contributors_file'])
 
         # Append to end of file
         chapter['content'] += '\n' + footer_recent_sitewide
