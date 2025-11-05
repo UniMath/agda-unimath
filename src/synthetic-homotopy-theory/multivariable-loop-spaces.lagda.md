@@ -45,14 +45,15 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-Given a [pointed type](structured-types.pointed-types.md) `i∗ : I`, and a
-pointed type `a∗ : A`, we can form the `I`-ary loop space in `A` as the type
+Given a type `I` and a [pointed type](structured-types.pointed-types.md)
+`a∗ : A`, we can form the `I`-ary loop space in `A` as the type
 `Σ (a : A), (I → (a ＝ a∗))`. We recover the
 [standard loops](synthetic-homotopy-theory.loop-spaces.md) as the binary loops,
-`A` as the `∅`-ary loops, and there is a unique unary loop.
+`A` as the `∅`-ary loops, and there is a unique unary loop. The `𝕊¹`-ary loops
+correspond to [loops of loops](synthetic-homotopy-theory.double-loop-spaces.md).
 
-The type of `I`-ary loops have an associative coherent H-space structure with
-right inverses.
+For every point of `I` there is a coherent, associative, and invertible H-space
+structure on `I`-ary loops.
 
 ## Table of files directly related to loop spaces
 
