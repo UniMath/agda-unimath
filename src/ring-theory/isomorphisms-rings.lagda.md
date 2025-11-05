@@ -46,6 +46,12 @@ open import ring-theory.rings
 
 </details>
 
+## Idea
+
+{{#concept "Ring isomorphisms" WD="ring isomorphism" WDID=Q135670074 Agda=iso-Ring}}
+are [ring homomorphisms](ring-theory.homomorphisms-rings.md) with a two-sided
+inverse homomorphism.
+
 ## Definition
 
 ### The predicate of being an isomorphism of rings

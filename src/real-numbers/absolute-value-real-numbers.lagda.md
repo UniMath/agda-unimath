@@ -11,6 +11,7 @@ module real-numbers.absolute-value-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -29,10 +30,15 @@ open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
 ```
 
 </details>
@@ -54,6 +60,16 @@ opaque
 ```
 
 ## Properties
+
+### The absolute value of zero is zero
+
+```agda
+opaque
+  unfolding abs-ℝ
+
+  abs-zero-ℝ : abs-ℝ zero-ℝ ＝ zero-ℝ
+  abs-zero-ℝ = (ap (max-ℝ zero-ℝ) neg-zero-ℝ) ∙ (is-idempotent-max-ℝ zero-ℝ)
+```
 
 ### The absolute value preserves similarity
 
@@ -81,6 +97,9 @@ opaque
       ( id)
       ( λ (x<0 , 0<x) → ex-falso (is-disjoint-cut-ℝ x zero-ℚ (0<x , x<0)))
       ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q zero-ℚ q<0)
+
+nonnegative-abs-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
+nonnegative-abs-ℝ x = (abs-ℝ x , is-nonnegative-abs-ℝ x)
 ```
 
 ### The absolute value of the negation of a real number is its absolute value
@@ -119,6 +138,70 @@ module _
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
     neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+```
+
+### If `|x| ＝ 0` then `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
+  where
+
+  abstract
+    is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-zero-abs-ℝ =
+      antisymmetric-leq-ℝ
+        ( x)
+        ( zero-ℝ)
+        ( tr (leq-ℝ x) |x|=0 (leq-abs-ℝ x))
+        ( tr
+          ( λ y → leq-ℝ y x)
+          ( (ap neg-ℝ |x|=0) ∙ neg-zero-ℝ)
+          ( leq-neg-abs-ℝ x))
+```
+
+### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero) (|x|≤0 : leq-ℝ (abs-ℝ x) zero-ℝ)
+  where
+
+  abstract
+    is-zero-abs-leq-zero-abs-ℝ : abs-ℝ x ＝ zero-ℝ
+    is-zero-abs-leq-zero-abs-ℝ =
+      antisymmetric-leq-ℝ
+        ( abs-ℝ x)
+        ( zero-ℝ)
+        ( |x|≤0)
+        ( is-nonnegative-abs-ℝ x)
+
+    is-zero-leq-zero-abs-ℝ : x ＝ zero-ℝ
+    is-zero-leq-zero-abs-ℝ =
+      is-zero-is-zero-abs-ℝ x is-zero-abs-leq-zero-abs-ℝ
+```
+
+### If `|x| ≤ ε` for all `ε : ℚ⁺` then `x ＝ 0`
+
+```agda
+module _
+  (x : ℝ lzero)
+  (is-infinitesimal-x : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
+  where
+
+  abstract
+    is-zero-is-infinitesimal-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-infinitesimal-abs-ℝ =
+      is-zero-leq-zero-abs-ℝ
+        ( x)
+        ( saturated-leq-ℝ
+          ( abs-ℝ x)
+          ( zero-ℝ)
+          ( λ ε →
+            inv-tr
+              ( leq-ℝ (abs-ℝ x))
+              ( left-unit-law-add-ℝ (real-ℚ⁺ ε))
+              ( is-infinitesimal-x ε)))
 ```
 
 ### If `x ≤ y` and `-x ≤ y`, `|x| ≤ y`
@@ -243,4 +326,73 @@ module _
   short-abs-ℝ :
     short-function-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
   short-abs-ℝ = (abs-ℝ , is-short-abs-ℝ)
+```
+
+### The absolute value of `x` is the square root of `x²`
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract opaque
+    unfolding abs-ℝ leq-ℝ leq-ℝ' max-ℝ neg-ℝ real-sqrt-ℝ⁰⁺
+
+    leq-abs-sqrt-square-ℝ :
+      leq-ℝ (abs-ℝ x) (real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
+    leq-abs-sqrt-square-ℝ q =
+      elim-disjunction
+        ( lower-cut-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x) q)
+        ( λ q<x is-nonneg-q →
+          is-in-lower-cut-square-ℝ x (q , is-nonneg-q) q<x)
+        ( λ q<-x is-nonneg-q →
+          tr
+            ( λ y → is-in-lower-cut-ℝ y (square-ℚ q))
+            ( square-neg-ℝ x)
+            ( is-in-lower-cut-square-ℝ (neg-ℝ x) (q , is-nonneg-q) q<-x))
+
+    leq-abs-sqrt-square-ℝ' :
+      leq-ℝ' (real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)) (abs-ℝ x)
+    leq-abs-sqrt-square-ℝ' q |x|<q@(x<q , -x<q) =
+      ( is-positive-is-in-upper-cut-ℝ⁰⁺ (nonnegative-abs-ℝ x) q (x<q , -x<q) ,
+        is-in-upper-cut-square-pos-neg-ℝ x q x<q -x<q)
+
+    eq-abs-sqrt-square-ℝ : abs-ℝ x ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)
+    eq-abs-sqrt-square-ℝ =
+      antisymmetric-leq-ℝ
+        ( abs-ℝ x)
+        ( real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
+        ( leq-abs-sqrt-square-ℝ)
+        ( leq-leq'-ℝ
+          ( real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
+          ( abs-ℝ x)
+          ( leq-abs-sqrt-square-ℝ'))
+```
+
+### Absolute values distribute over multiplication
+
+The proof from the square root is likely simplest, but this could also be proved
+directly.
+
+```agda
+abstract
+  abs-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    abs-ℝ (x *ℝ y) ＝ abs-ℝ x *ℝ abs-ℝ y
+  abs-mul-ℝ x y =
+    equational-reasoning
+      abs-ℝ (x *ℝ y)
+      ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (x *ℝ y))
+        by eq-abs-sqrt-square-ℝ (x *ℝ y)
+      ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x *ℝ⁰⁺ nonnegative-square-ℝ y)
+        by
+          ap
+            ( real-sqrt-ℝ⁰⁺)
+            ( eq-ℝ⁰⁺ _ _ (distributive-square-mul-ℝ x y))
+      ＝
+        real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x) *ℝ
+        real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ y)
+        by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
+      ＝ abs-ℝ x *ℝ abs-ℝ y
+        by inv (ap-mul-ℝ (eq-abs-sqrt-square-ℝ x) (eq-abs-sqrt-square-ℝ y))
 ```

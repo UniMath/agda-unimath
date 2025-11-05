@@ -17,8 +17,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The type of unpointed maps between pointed types is a pointed type, pointed at
-the constant function.
+The type of {{#concept "unpointed maps" Agda=unpointed-map-Pointed-Type}}
+between [pointed types](structured-types.pointed-types.md) is a pointed type,
+pointed at the constant function.
 
 ## Definition
 

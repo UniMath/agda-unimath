@@ -106,16 +106,16 @@ power-mul-ℚ⁰⁺ m n q =
   power-mul-Commutative-Monoid commutative-monoid-mul-ℚ⁰⁺ m n
 ```
 
-### If `p` and `q` are nonnegative rational numbers with `p < q` and `n` is nonzero, `pⁿ < qⁿ`
+### If `p` and `q` are nonnegative rational numbers with `p < q` and `n` is nonzero, then `pⁿ < qⁿ`
 
 ```agda
 abstract
   preserves-le-power-ℚ⁰⁺ :
-    (n : ℕ) → is-nonzero-ℕ n → (p q : ℚ⁰⁺) → le-ℚ⁰⁺ p q →
+    (n : ℕ) → (p q : ℚ⁰⁺) → le-ℚ⁰⁺ p q → (is-nonzero-ℕ n) →
     le-ℚ⁰⁺ (power-ℚ⁰⁺ n p) (power-ℚ⁰⁺ n q)
-  preserves-le-power-ℚ⁰⁺ 0 H p q p<q = ex-falso (H refl)
-  preserves-le-power-ℚ⁰⁺ 1 _ p q p<q = p<q
-  preserves-le-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) _ p q p<q =
+  preserves-le-power-ℚ⁰⁺ 0 p q p<q H = ex-falso (H refl)
+  preserves-le-power-ℚ⁰⁺ 1 p q p<q _ = p<q
+  preserves-le-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
     concatenate-leq-le-ℚ⁰⁺
       ( power-ℚ⁰⁺ (succ-ℕ n) p)
       ( power-ℚ⁰⁺ n p *ℚ⁰⁺ q)
@@ -125,10 +125,10 @@ abstract
         ( rational-ℚ⁰⁺ q , is-positive-le-ℚ⁰⁺ p _ p<q)
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n p))
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n q))
-        ( preserves-le-power-ℚ⁰⁺ n (is-nonzero-succ-ℕ _) p q p<q))
+        ( preserves-le-power-ℚ⁰⁺ n p q p<q (is-nonzero-succ-ℕ _)))
 ```
 
-### If `p` and `q` are nonnegative rational numbers with `p ≤ q`, `pⁿ ≤ qⁿ`
+### If `p` and `q` are nonnegative rational numbers with `p ≤ q`, then `pⁿ ≤ qⁿ`
 
 ```agda
 abstract

@@ -35,7 +35,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **(coherent) H-space** is a "wild unital magma", i.e., it is a
+A (coherent) {{#concept "H-space" WD="H-space" WDID=Q1562471 Agda=H-Space}} is a
+"wild unital magma", i.e., it is a
 [pointed type](structured-types.pointed-types.md)
 [equipped](foundation.structure.md) with a binary operation for which the base
 point is a unit, with a coherence law between the left and the right unit laws.

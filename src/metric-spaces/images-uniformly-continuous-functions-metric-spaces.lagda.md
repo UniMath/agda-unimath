@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 

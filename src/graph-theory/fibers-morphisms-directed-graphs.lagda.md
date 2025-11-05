@@ -28,7 +28,8 @@ open import graph-theory.morphisms-directed-graphs
 
 Consider a [morphism](graph-theory.morphisms-directed-graphs.md) `f : H → G` of
 [directed graphs](graph-theory.directed-graphs.md). The
-{{#concept "fiber" Disambiguation="morphisms of directed graphs"}} of `f` is the
+{{#concept "fiber" Disambiguation="morphisms of directed graphs" Agda=fiber-hom-Directed-Graph}}
+of `f` is the
 [dependent directed graph](graph-theory.dependent-directed-graphs.md) `fib_f`
 over `G` given by
 

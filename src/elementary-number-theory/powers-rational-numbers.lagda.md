@@ -250,6 +250,17 @@ abstract
           by ap neg-ℚ (inv (power-succ-ℚ (k *ℕ 2) q))
         ＝ neg-ℚ (power-ℚ n q)
           by ap (λ m → neg-ℚ (power-ℚ m q)) k2+1=n
+
+  neg-odd-power-neg-ℚ :
+    (n : ℕ) (q : ℚ) → is-odd-ℕ n → neg-ℚ (power-ℚ n (neg-ℚ q)) ＝ power-ℚ n q
+  neg-odd-power-neg-ℚ n q odd-n =
+    ap neg-ℚ (odd-power-neg-ℚ n q odd-n) ∙ neg-neg-ℚ _
+
+  neg-odd-power-neg-ℚ⁻ :
+    (n : ℕ) (q : ℚ⁻) → is-odd-ℕ n →
+    neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q))) ＝ power-ℚ n (rational-ℚ⁻ q)
+  neg-odd-power-neg-ℚ⁻ n q⁻@(q , _) odd-n =
+    ap neg-ℚ (inv (power-rational-ℚ⁺ n _)) ∙ neg-odd-power-neg-ℚ n q odd-n
 ```
 
 ### `|q|ⁿ=|qⁿ|`
@@ -303,22 +314,8 @@ abstract
             in
               binary-tr
                 ( leq-ℚ)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ p))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n p))
-                    by ap neg-ℚ (odd-power-neg-ℚ n p odd-n)
-                  ＝ power-ℚ n p
-                    by neg-neg-ℚ _)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ q))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n q))
-                    by ap neg-ℚ (odd-power-neg-ℚ n q odd-n)
-                  ＝ power-ℚ n q
-                    by neg-neg-ℚ _)
+                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
+                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
                 ( neg-leq-ℚ
                   ( preserves-leq-power-ℚ⁺
                     ( n)
@@ -330,7 +327,8 @@ abstract
               ( leq-ℚ (power-ℚ n p))
               ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
               ( leq-negative-nonnegative-ℚ
-                ( power-ℚ n p , is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
+                ( power-ℚ n p ,
+                  is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
                 ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
           ( decide-is-negative-is-nonnegative-ℚ q))
       ( λ is-nonneg-p →
@@ -364,29 +362,15 @@ abstract
             in
               binary-tr
                 ( le-ℚ)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ p))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ p⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n p))
-                    by ap neg-ℚ (odd-power-neg-ℚ n p odd-n)
-                  ＝ power-ℚ n p
-                    by neg-neg-ℚ _)
-                ( equational-reasoning
-                  neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (power-ℚ n (neg-ℚ q))
-                    by ap neg-ℚ (inv (power-rational-ℚ⁺ n (neg-ℚ⁻ q⁻)))
-                  ＝ neg-ℚ (neg-ℚ (power-ℚ n q))
-                    by ap neg-ℚ (odd-power-neg-ℚ n q odd-n)
-                  ＝ power-ℚ n q
-                    by neg-neg-ℚ _)
+                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
+                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
                 ( neg-le-ℚ
                   ( preserves-le-power-ℚ⁺
                     ( n)
-                    ( is-nonzero-is-odd-ℕ odd-n)
                     ( neg-ℚ⁻ q⁻)
                     ( neg-ℚ⁻ p⁻)
-                    ( neg-le-ℚ p<q))))
+                    ( neg-le-ℚ p<q)
+                    ( is-nonzero-is-odd-ℕ odd-n))))
           ( λ is-nonneg-q →
             inv-tr
               ( le-ℚ (power-ℚ n p))
@@ -404,7 +388,7 @@ abstract
             ( le-ℚ)
             ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-le-power-ℚ⁰⁺ n (is-nonzero-is-odd-ℕ odd-n) p⁰⁺ q⁰⁺ p<q))
+            ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
 ```
 

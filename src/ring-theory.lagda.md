@@ -1,12 +1,15 @@
 # Ring theory
 
+## Examples of rings
+
+{{#include tables/rings.md}}
+
 ## Modules in the ring theory namespace
 
 ```agda
 module ring-theory where
 
 open import ring-theory.additive-orders-of-elements-rings public
-open import ring-theory.algebras-rings public
 open import ring-theory.arithmetic-sequences-semirings public
 open import ring-theory.arithmetic-series-semirings public
 open import ring-theory.binomial-theorem-rings public
@@ -61,6 +64,8 @@ open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
+open import ring-theory.nontrivial-rings public
+open import ring-theory.nonunital-left-algebras-rings public
 open import ring-theory.opposite-ring-extensions-rational-numbers public
 open import ring-theory.opposite-rings public
 open import ring-theory.partial-sums-sequences-semirings public
@@ -84,6 +89,7 @@ open import ring-theory.right-ideals-rings public
 open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.subrings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-of-finite-families-of-elements-rings public

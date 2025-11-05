@@ -42,6 +42,7 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```

@@ -113,11 +113,11 @@ power-mul-ℚ⁺ m n q = power-mul-Group group-mul-ℚ⁺ m n
 ```agda
 abstract
   preserves-le-power-ℚ⁺ :
-    (n : ℕ) → is-nonzero-ℕ n → (p q : ℚ⁺) → le-ℚ⁺ p q →
+    (n : ℕ) → (p q : ℚ⁺) → le-ℚ⁺ p q → is-nonzero-ℕ n →
     le-ℚ⁺ (power-ℚ⁺ n p) (power-ℚ⁺ n q)
-  preserves-le-power-ℚ⁺ 0 H p q p<q = ex-falso (H refl)
-  preserves-le-power-ℚ⁺ 1 _ p q p<q = p<q
-  preserves-le-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) _ p q p<q =
+  preserves-le-power-ℚ⁺ 0 p q p<q H = ex-falso (H refl)
+  preserves-le-power-ℚ⁺ 1 p q p<q _ = p<q
+  preserves-le-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
     transitive-le-ℚ⁺
       ( power-ℚ⁺ (succ-ℕ n) p)
       ( power-ℚ⁺ n p *ℚ⁺ q)
