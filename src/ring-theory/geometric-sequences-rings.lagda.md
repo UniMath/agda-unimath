@@ -34,8 +34,8 @@ open import ring-theory.rings
 
 A
 {{#concept "geometric sequence" Disambiguation="in a ring" Agda=geometric-sequence-Ring}}
-in a [ring](ring-theory.semirings.md) is an
-[arithmetic sequence](ring-theory.geometric-sequence-semirings.md) in the
+in a [ring](ring-theory.semirings.md) is a
+[geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
 underlying [semiring](ring-theory.semirings.md).
 
 These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
