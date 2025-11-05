@@ -253,6 +253,7 @@ module _
 ### A metric space and any approximation of it are coinhabited
 
 A metric space is inhabited if and only if any approximation of it is inhabited.
+
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (ε : ℚ⁺)

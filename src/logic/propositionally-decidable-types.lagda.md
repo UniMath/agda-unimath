@@ -17,9 +17,9 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.surjective-maps
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

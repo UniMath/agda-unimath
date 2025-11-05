@@ -8,6 +8,7 @@ module foundation.surjective-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.coinhabited-pairs-of-types
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -24,7 +25,6 @@ open import foundation.inhabited-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
-open import foundation.coinhabited-pairs-of-types
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.truncated-types
