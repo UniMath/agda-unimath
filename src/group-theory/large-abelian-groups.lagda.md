@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
@@ -76,6 +77,11 @@ open Large-Ab public
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   where
+
+  large-similarity-relation-Large-Ab :
+    Large-Similarity-Relation β (type-Large-Ab G)
+  large-similarity-relation-Large-Ab =
+    large-similarity-relation-Large-Group (large-group-Large-Ab G)
 
   sim-prop-Large-Ab : Large-Relation-Prop β (type-Large-Ab G)
   sim-prop-Large-Ab = sim-prop-Large-Group (large-group-Large-Ab G)

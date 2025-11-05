@@ -17,6 +17,7 @@ open import foundation.universe-levels
 open import group-theory.large-abelian-groups
 open import group-theory.large-monoids
 open import group-theory.large-semigroups
+open import group-theory.monoids
 
 open import ring-theory.rings
 ```
@@ -114,7 +115,7 @@ open Large-Ring public
 
 ## Properties
 
-### The similarity relation of a large commutative monoid
+### The similarity relation of a large ring
 
 ```agda
 module _
@@ -232,6 +233,10 @@ module _
       ( one-Large-Ring R)
       ( left-unit-law-mul-Large-Ring R)
       ( right-unit-law-mul-Large-Ring R)
+
+  raise-one-Large-Ring : (l : Level) → type-Large-Ring R l
+  raise-one-Large-Ring =
+    raise-unit-Large-Monoid multiplicative-large-monoid-Large-Ring
 ```
 
 ### Abelian group properties of addition in a large ring
@@ -266,4 +271,21 @@ module _
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R x y ＝ add-Large-Ring R y x
   commutative-add-Large-Ring = commutative-add-Large-Ab (large-ab-Large-Ring R)
+```
+
+### Small rings from large rings
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  ring-Large-Ring : (l : Level) → Ring (α l)
+  ring-Large-Ring l =
+    ( ab-Large-Ab (large-ab-Large-Ring R) l ,
+      ( mul-Large-Ring R , associative-mul-Large-Ring R) ,
+      is-unital-Monoid
+        ( monoid-Large-Monoid (multiplicative-large-monoid-Large-Ring R) l) ,
+      left-distributive-mul-add-Large-Ring R ,
+      right-distributive-mul-add-Large-Ring R)
 ```
