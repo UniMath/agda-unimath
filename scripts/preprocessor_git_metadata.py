@@ -57,6 +57,60 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
+def get_recent_changes(contributors, *args):
+    """
+    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits.
+    """
+    recent_changes_output = subprocess.run([
+        'git', 'log',
+        # Show only last RECENT_CHANGES_COUNT commits
+        '-n', str(RECENT_CHANGES_COUNT),
+        # Skip chore commits
+        '--invert-grep', '--grep=^chore:',
+        # Get hash, date, message, author and coauthors, separated by tabs
+        # NB When there are no trailers, the line ends with a tab
+        # NB Coauthors usually have the format "name <email>" and there is
+        #    no way to tell git to strip the email, so it needs to be done
+        #    in post processing
+        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
+        'HEAD',
+        *args
+    ], capture_output=True, text=True, check=True).stdout.splitlines()
+
+    skipped_authors = set()
+    recent_changes = '## Recent changes\n'
+
+    for line in recent_changes_output:
+        [sha, date, message, *raw_authors] = line.split('\t')
+        author_indices = []
+        for raw_author in map(cleanup_author_part, raw_authors):
+            if raw_author == '':
+                continue
+            author_index = get_real_author_index(raw_author, contributors)
+            if author_index is None:
+                skipped_authors.add(raw_author)
+                continue
+            author_indices.append(author_index)
+
+        if not author_indices:
+            continue
+
+        formatted_authors = format_multiple_authors_attribution([
+            contributors[idx]['displayName'] for idx in author_indices
+        ])
+        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+
+    return (recent_changes, skipped_authors)
+
+
+def get_recent_sitewide_changes(contributors):
+    """
+    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits
+    across the entire repository.
+    """
+    return get_recent_changes(contributors)
+
+
 def get_author_element_for_file(filename, include_contributors, contributors, contributors_file):
     """
     Extracts git usernames of contributors to a particular file
@@ -104,38 +158,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
 
-    recent_changes_output = subprocess.run([
-        'git', 'log',
-        # Show only last RECENT_CHANGES_COUNT commits
-        '-n', str(RECENT_CHANGES_COUNT),
-        # Get hash, date, message, author and coauthors, separated by tabs
-        # NB When there are no trailers, the line ends with a tab
-        # NB Coauthors usually have the format "name <email>" and there is
-        #    no way to tell git to strip the email, so it needs to be done
-        #    in post processing
-        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
-        'HEAD', '--', filename
-    ], capture_output=True, text=True, check=True).stdout.splitlines()
-
-    recent_changes = '## Recent changes\n'
-    for recent_changes_line in recent_changes_output:
-        [sha, date, message, *raw_authors] = recent_changes_line.split('\t')
-        author_indices = []
-        for raw_author in map(cleanup_author_part, raw_authors):
-            # Line ended with a tab
-            if raw_author == '':
-                continue
-            author_index = get_real_author_index(raw_author, contributors)
-            if author_index is None:
-                skipped_authors.add(raw_author)
-                continue
-            author_indices.append(author_index)
-        if len(author_indices) == 0:
-            continue
-        formatted_authors = format_multiple_authors_attribution([
-            contributors[author_index]['displayName'] for author_index in author_indices
-        ])
-        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+    recent_changes, skipped_authors = get_recent_changes(contributors, '--', filename)
 
     if skipped_authors:
         print_skipping_contributors_warning(skipped_authors, contributors_file)
@@ -144,55 +167,6 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
         f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{nobreak_span("Last modified on " + modified_date)}.</i></p>',
         recent_changes
     )
-
-
-def get_recent_sitewide_changes(contributors, contributors_file):
-    """
-    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits
-    across the entire repository.
-    """
-    recent_changes_output = subprocess.run([
-        'git', 'log',
-        # Show only last RECENT_CHANGES_COUNT commits
-        '-n', str(RECENT_CHANGES_COUNT),
-        # Skip chore commits
-        '--invert-grep', '--grep=^chore:',
-        # Get hash, date, message, author and coauthors, separated by tabs
-        # NB When there are no trailers, the line ends with a tab
-        # NB Coauthors usually have the format "name <email>" and there is
-        #    no way to tell git to strip the email, so it needs to be done
-        #    in post processing
-        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
-        'HEAD'
-    ], capture_output=True, text=True, check=True).stdout.splitlines()
-
-    skipped_authors = set()
-    recent_changes = '## Recent changes\n'
-
-    for line in recent_changes_output:
-        [sha, date, message, *raw_authors] = line.split('\t')
-        author_indices = []
-        for raw_author in map(cleanup_author_part, raw_authors):
-            if raw_author == '':
-                continue
-            author_index = get_real_author_index(raw_author, contributors)
-            if author_index is None:
-                skipped_authors.add(raw_author)
-                continue
-            author_indices.append(author_index)
-
-        if not author_indices:
-            continue
-
-        formatted_authors = format_multiple_authors_attribution([
-            contributors[idx]['displayName'] for idx in author_indices
-        ])
-        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
-
-    if skipped_authors:
-        print_skipping_contributors_warning(skipped_authors, contributors_file)
-
-    return recent_changes
 
 
 def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
@@ -219,8 +193,11 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
 
     if source_file_name in config['sitewide_changes']:
         # Insert recent sitewide changes on page
-        footer_recent_sitewide = get_recent_sitewide_changes(
-            contributors, config['contributors_file'])
+        footer_recent_sitewide, skipped_authors = get_recent_sitewide_changes(contributors)
+
+        if skipped_authors:
+            print_skipping_contributors_warning(skipped_authors, config['contributors_file'])
+
         # Append to end of file
         chapter['content'] += '\n' + footer_recent_sitewide
         return
