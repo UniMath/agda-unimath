@@ -123,7 +123,7 @@ abstract
       ( power-ℚ⁺ n p *ℚ⁺ q)
       ( power-ℚ⁺ (succ-ℕ n) q)
       ( preserves-le-right-mul-ℚ⁺ q _ _
-        ( preserves-le-power-ℚ⁺ n (is-nonzero-succ-ℕ _) p q p<q))
+        ( preserves-le-power-ℚ⁺ n p q p<q (is-nonzero-succ-ℕ _)))
       ( preserves-le-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p<q)
 ```
 
