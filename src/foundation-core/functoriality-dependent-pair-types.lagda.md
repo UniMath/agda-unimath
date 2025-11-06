@@ -389,9 +389,9 @@ module _
   where
 
   abstract
-    is-contr-map-Σ-map-base :
+    is-contr-map-map-Σ-map-base :
       is-contr-map f → is-contr-map (map-Σ-map-base f C)
-    is-contr-map-Σ-map-base is-contr-f (pair y z) =
+    is-contr-map-map-Σ-map-base is-contr-f (pair y z) =
       is-contr-equiv'
         ( fiber f y)
         ( compute-fiber-map-Σ-map-base f C (pair y z))
@@ -409,7 +409,7 @@ module _
     is-equiv-map-Σ-map-base : is-equiv f → is-equiv (map-Σ-map-base f C)
     is-equiv-map-Σ-map-base is-equiv-f =
       is-equiv-is-contr-map
-        ( is-contr-map-Σ-map-base f C (is-contr-map-is-equiv is-equiv-f))
+        ( is-contr-map-map-Σ-map-base f C (is-contr-map-is-equiv is-equiv-f))
 
 equiv-Σ-equiv-base :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →

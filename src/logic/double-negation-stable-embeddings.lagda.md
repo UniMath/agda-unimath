@@ -145,25 +145,25 @@ module _
   map-double-negation-stable-emb : X → Y
   map-double-negation-stable-emb = pr1 e
 
-  is-double-negation-stable-emb-double-negation-stable-emb :
+  is-double-negation-stable-emb-map-double-negation-stable-emb :
     is-double-negation-stable-emb map-double-negation-stable-emb
-  is-double-negation-stable-emb-double-negation-stable-emb = pr2 e
+  is-double-negation-stable-emb-map-double-negation-stable-emb = pr2 e
 
-  is-emb-double-negation-stable-emb :
+  is-emb-map-double-negation-stable-emb :
     is-emb map-double-negation-stable-emb
-  is-emb-double-negation-stable-emb =
+  is-emb-map-double-negation-stable-emb =
     is-emb-is-double-negation-stable-emb
-      is-double-negation-stable-emb-double-negation-stable-emb
+      is-double-negation-stable-emb-map-double-negation-stable-emb
 
-  is-double-negation-eliminating-double-negation-stable-emb :
+  is-double-negation-eliminating-map-double-negation-stable-emb :
     is-double-negation-eliminating-map map-double-negation-stable-emb
-  is-double-negation-eliminating-double-negation-stable-emb =
+  is-double-negation-eliminating-map-double-negation-stable-emb =
     is-double-negation-eliminating-map-is-double-negation-stable-emb
-      is-double-negation-stable-emb-double-negation-stable-emb
+      is-double-negation-stable-emb-map-double-negation-stable-emb
 
   emb-double-negation-stable-emb : X ↪ Y
   emb-double-negation-stable-emb =
-    map-double-negation-stable-emb , is-emb-double-negation-stable-emb
+    map-double-negation-stable-emb , is-emb-map-double-negation-stable-emb
 ```
 
 ## Properties
@@ -450,7 +450,7 @@ abstract
       ( is-prop-is-double-negation-stable-emb)
       ( map-double-negation-stable-emb f)
       ( refl-htpy)
-      ( is-double-negation-stable-emb-double-negation-stable-emb f)
+      ( is-double-negation-stable-emb-map-double-negation-stable-emb f)
 
 abstract
   is-equiv-htpy-eq-double-negation-stable-emb :
@@ -536,7 +536,7 @@ module _
   double-negation-stable-emb-tot f =
     ( tot (map-double-negation-stable-emb ∘ f) ,
       is-double-negation-stable-emb-tot
-        ( is-double-negation-stable-emb-double-negation-stable-emb ∘ f))
+        ( is-double-negation-stable-emb-map-double-negation-stable-emb ∘ f))
 ```
 
 ### The map on total spaces induced by a double negation stable embedding on the base is a double negation stable embedding
@@ -560,7 +560,7 @@ module _
   double-negation-stable-emb-map-Σ-map-base f =
     ( map-Σ-map-base (map-double-negation-stable-emb f) C ,
       is-double-negation-stable-emb-map-Σ-map-base
-        ( is-double-negation-stable-emb-double-negation-stable-emb f))
+        ( is-double-negation-stable-emb-map-double-negation-stable-emb f))
 ```
 
 ### The functoriality of dependent pair types preserves double negation stable embeddings
@@ -590,8 +590,8 @@ module _
         ( map-double-negation-stable-emb f)
         ( map-double-negation-stable-emb ∘ g)) ,
       ( is-double-negation-stable-emb-map-Σ
-        ( is-double-negation-stable-emb-double-negation-stable-emb f)
-        ( is-double-negation-stable-emb-double-negation-stable-emb ∘ g)))
+        ( is-double-negation-stable-emb-map-double-negation-stable-emb f)
+        ( is-double-negation-stable-emb-map-double-negation-stable-emb ∘ g)))
 ```
 
 ### Products of double negation stable embeddings are double negation stable embeddings

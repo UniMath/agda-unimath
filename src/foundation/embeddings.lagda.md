@@ -223,7 +223,7 @@ module _
     is-emb-map-Σ-map-base :
       {f : A → B} (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
     is-emb-map-Σ-map-base C H =
-      is-emb-is-prop-map (is-prop-map-Σ-map-base C (is-prop-map-is-emb H))
+      is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
 
   emb-Σ-emb-base :
     (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
@@ -240,7 +240,7 @@ module _
     is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
   is-emb-map-Σ D H K =
     is-emb-is-prop-map
-      ( is-prop-map-Σ D
+      ( is-prop-map-map-Σ D
         ( is-prop-map-is-emb H)
         ( λ x → is-prop-map-is-emb (K x)))
 

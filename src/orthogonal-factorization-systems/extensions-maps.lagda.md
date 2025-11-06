@@ -10,8 +10,6 @@ module orthogonal-factorization-systems.extensions-maps where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
-open import foundation.precomposition-functions
-open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -25,6 +23,8 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
@@ -33,9 +33,10 @@ open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.precomposition-dependent-functions
+
 open import foundation-core.torsorial-type-families
 ```
 
@@ -291,7 +292,6 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   {C : UU l3} (g : A → C)
   where
-
 
   equiv-fiber-Π-curry-precomp-extension :
     extension i g ≃ ((b : B) → Σ C (λ u → (a : A) → i a ＝ b → g a ＝ u))

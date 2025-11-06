@@ -86,11 +86,11 @@ module _
   {l1 l2 : Level} (k : 𝕋) {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
 
-  is-trunc-map-Ω :
+  is-trunc-map-map-Ω :
     (f : A →∗ B) →
     is-trunc-map (succ-𝕋 k) (map-pointed-map f) →
     is-trunc-map k (map-Ω f)
-  is-trunc-map-Ω f H =
+  is-trunc-map-map-Ω f H =
     is-trunc-map-comp k
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap (map-pointed-map f))

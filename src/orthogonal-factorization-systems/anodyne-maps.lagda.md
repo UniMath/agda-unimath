@@ -136,9 +136,9 @@ module _
   (f : A → B) (j : C → D) (i : E → F)
   where
 
-  is-anodyne-map-product :
+  is-anodyne-map-map-product :
     is-anodyne-map f j → is-anodyne-map f i → is-anodyne-map f (map-product j i)
-  is-anodyne-map-product J I g H =
+  is-anodyne-map-map-product J I g H =
     is-orthogonal-left-product j i g (J g H) (I g H)
 ```
 
@@ -151,11 +151,11 @@ module _
   (f : A → B) (j : C → D) (i : E → F)
   where
 
-  is-anodyne-map-coproduct :
+  is-anodyne-map-map-coproduct :
     is-anodyne-map f j →
     is-anodyne-map f i →
     is-anodyne-map f (map-coproduct j i)
-  is-anodyne-map-coproduct J I g H =
+  is-anodyne-map-map-coproduct J I g H =
     is-orthogonal-left-coproduct j i g (J g H) (I g H)
 ```
 

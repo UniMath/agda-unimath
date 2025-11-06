@@ -143,19 +143,19 @@ module _
   map-de-morgan-emb : X → Y
   map-de-morgan-emb = pr1 e
 
-  is-de-morgan-emb-de-morgan-emb : is-de-morgan-emb map-de-morgan-emb
-  is-de-morgan-emb-de-morgan-emb = pr2 e
+  is-de-morgan-emb-map-de-morgan-emb : is-de-morgan-emb map-de-morgan-emb
+  is-de-morgan-emb-map-de-morgan-emb = pr2 e
 
-  is-emb-de-morgan-emb : is-emb map-de-morgan-emb
-  is-emb-de-morgan-emb =
-    is-emb-is-de-morgan-emb is-de-morgan-emb-de-morgan-emb
+  is-emb-map-de-morgan-emb : is-emb map-de-morgan-emb
+  is-emb-map-de-morgan-emb =
+    is-emb-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
 
-  is-de-morgan-de-morgan-emb : is-de-morgan-map map-de-morgan-emb
-  is-de-morgan-de-morgan-emb =
-    is-de-morgan-map-is-de-morgan-emb is-de-morgan-emb-de-morgan-emb
+  is-de-morgan-map-de-morgan-emb : is-de-morgan-map map-de-morgan-emb
+  is-de-morgan-map-de-morgan-emb =
+    is-de-morgan-map-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
 
   emb-de-morgan-emb : X ↪ Y
-  emb-de-morgan-emb = map-de-morgan-emb , is-emb-de-morgan-emb
+  emb-de-morgan-emb = map-de-morgan-emb , is-emb-map-de-morgan-emb
 ```
 
 ## Properties
@@ -425,7 +425,7 @@ abstract
       ( is-prop-is-de-morgan-emb)
       ( map-de-morgan-emb f)
       ( refl-htpy)
-      ( is-de-morgan-emb-de-morgan-emb f)
+      ( is-de-morgan-emb-map-de-morgan-emb f)
 
 abstract
   is-equiv-htpy-eq-de-morgan-emb :
@@ -478,7 +478,7 @@ module _
   de-morgan-emb-tot f =
     ( tot (map-de-morgan-emb ∘ f) ,
       is-de-morgan-emb-tot
-        ( is-de-morgan-emb-de-morgan-emb ∘ f))
+        ( is-de-morgan-emb-map-de-morgan-emb ∘ f))
 ```
 
 ### The map on total spaces induced by a De Morgan embedding on the base is a De Morgan embedding
@@ -502,7 +502,7 @@ module _
   de-morgan-emb-map-Σ-map-base f =
     ( map-Σ-map-base (map-de-morgan-emb f) C ,
       is-de-morgan-emb-map-Σ-map-base
-        ( is-de-morgan-emb-de-morgan-emb f))
+        ( is-de-morgan-emb-map-de-morgan-emb f))
 ```
 
 ### The functoriality of dependent pair types on De Morgan embeddings
@@ -531,7 +531,7 @@ module _
     ( ( map-Σ D (map-decidable-emb f) (map-de-morgan-emb ∘ g)) ,
       ( is-de-morgan-emb-map-Σ
         ( is-decidable-emb-decidable-emb f)
-        ( is-de-morgan-emb-de-morgan-emb ∘ g)))
+        ( is-de-morgan-emb-map-de-morgan-emb ∘ g)))
 ```
 
 ### Products of De Morgan embeddings are De Morgan embeddings

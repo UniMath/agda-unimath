@@ -128,11 +128,11 @@ module _
     (f : A → B) (i : A → X) (g : X → Y) → is-trunc-map k g →
     is-trunc-map k (postcomp-extension f i g)
   is-trunc-map-postcomp-extension f i g G =
-    is-trunc-map-Σ k
+    is-trunc-map-map-Σ k
       ( is-extension f (g ∘ i))
       ( is-trunc-map-postcomp-is-trunc-map k g G B)
       ( λ j →
-        is-trunc-map-Π k
+        is-trunc-map-map-Π k
           ( λ a → ap g)
           ( λ a → is-trunc-map-ap-is-trunc-map k g G (i a) (j (f a))))
 

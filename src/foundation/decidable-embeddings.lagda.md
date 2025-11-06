@@ -132,17 +132,17 @@ module _
     is-decidable-emb map-decidable-emb
   is-decidable-emb-decidable-emb = pr2 e
 
-  is-emb-decidable-emb : is-emb map-decidable-emb
-  is-emb-decidable-emb =
+  is-emb-map-decidable-emb : is-emb map-decidable-emb
+  is-emb-map-decidable-emb =
     is-emb-is-decidable-emb is-decidable-emb-decidable-emb
 
-  is-decidable-decidable-emb :
+  is-decidable-map-decidable-emb :
     is-decidable-map map-decidable-emb
-  is-decidable-decidable-emb =
+  is-decidable-map-decidable-emb =
     is-decidable-map-is-decidable-emb is-decidable-emb-decidable-emb
 
   emb-decidable-emb : X ↪ Y
-  emb-decidable-emb = map-decidable-emb , is-emb-decidable-emb
+  emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
 ```
 
 ## Properties
