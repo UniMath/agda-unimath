@@ -19,6 +19,8 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.truncated-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
@@ -226,57 +228,6 @@ undesirable to compute with the current construction, it is marked as
 
 ## Properties
 
-### Faithful pointed maps induce embeddings on loop spaces
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  where
-
-  is-emb-map-Ω :
-    (f : A →∗ B) → is-faithful (map-pointed-map f) → is-emb (map-Ω f)
-  is-emb-map-Ω f H =
-    is-emb-comp
-      ( tr-type-Ω (preserves-point-pointed-map f))
-      ( ap (map-pointed-map f))
-      ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
-      ( H (point-Pointed-Type A) (point-Pointed-Type A))
-
-  emb-Ω :
-    faithful-pointed-map A B → type-Ω A ↪ type-Ω B
-  pr1 (emb-Ω f) =
-    map-Ω (pointed-map-faithful-pointed-map f)
-  pr2 (emb-Ω f) =
-    is-emb-map-Ω
-      ( pointed-map-faithful-pointed-map f)
-      ( is-faithful-faithful-pointed-map f)
-```
-
-### Pointed embeddings induce pointed equivalences on loop spaces
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (f : A →∗ B) (is-emb-f : is-emb (map-pointed-map f))
-  where
-
-  is-equiv-map-Ω-is-emb : is-equiv (map-Ω f)
-  is-equiv-map-Ω-is-emb =
-    is-equiv-comp
-      ( tr-type-Ω (preserves-point-pointed-map f))
-      ( ap (map-pointed-map f))
-      ( is-emb-f (point-Pointed-Type A) (point-Pointed-Type A))
-      ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
-
-  equiv-map-Ω-is-emb : type-Ω A ≃ type-Ω B
-  pr1 equiv-map-Ω-is-emb = map-Ω f
-  pr2 equiv-map-Ω-is-emb = is-equiv-map-Ω-is-emb
-
-  pointed-equiv-pointed-map-Ω-is-emb : Ω A ≃∗ Ω B
-  pr1 pointed-equiv-pointed-map-Ω-is-emb = equiv-map-Ω-is-emb
-  pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
-```
-
 ### The operator `pointed-map-Ω` preserves identities
 
 ```agda
@@ -369,3 +320,80 @@ module _
           ( pointed-htpy-Ω (f ∘∗ s) id-pointed-map H)
           ( preserves-id-pointed-map-Ω)))
 ```
+
+
+### (𝑛+1)-truncated pointed maps induce 𝑛-truncated maps on loop spaces
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : Pointed-Type l1} {B : Pointed-Type l2}
+  where
+
+  is-trunc-map-map-Ω :
+    (f : A →∗ B) →
+    is-trunc-map (succ-𝕋 k) (map-pointed-map f) →
+    is-trunc-map k (map-Ω f)
+  is-trunc-map-map-Ω f H =
+    is-trunc-map-comp k
+      ( tr-type-Ω (preserves-point-pointed-map f))
+      ( ap (map-pointed-map f))
+      ( is-trunc-map-is-equiv k
+        ( is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
+      ( is-trunc-map-ap-is-trunc-map k
+        ( map-pointed-map f)
+        ( H)
+        ( point-Pointed-Type A)
+        ( point-Pointed-Type A))
+```
+
+### Faithful pointed maps induce embeddings on loop spaces
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  where
+
+  is-emb-map-Ω :
+    (f : A →∗ B) → is-faithful (map-pointed-map f) → is-emb (map-Ω f)
+  is-emb-map-Ω f H =
+    is-emb-comp
+      ( tr-type-Ω (preserves-point-pointed-map f))
+      ( ap (map-pointed-map f))
+      ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
+      ( H (point-Pointed-Type A) (point-Pointed-Type A))
+
+  emb-Ω :
+    faithful-pointed-map A B → type-Ω A ↪ type-Ω B
+  pr1 (emb-Ω f) =
+    map-Ω (pointed-map-faithful-pointed-map f)
+  pr2 (emb-Ω f) =
+    is-emb-map-Ω
+      ( pointed-map-faithful-pointed-map f)
+      ( is-faithful-faithful-pointed-map f)
+```
+
+### Pointed embeddings induce pointed equivalences on loop spaces
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (f : A →∗ B) (is-emb-f : is-emb (map-pointed-map f))
+  where
+
+  is-equiv-map-Ω-is-emb : is-equiv (map-Ω f)
+  is-equiv-map-Ω-is-emb =
+    is-equiv-comp
+      ( tr-type-Ω (preserves-point-pointed-map f))
+      ( ap (map-pointed-map f))
+      ( is-emb-f (point-Pointed-Type A) (point-Pointed-Type A))
+      ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
+
+  equiv-map-Ω-is-emb : type-Ω A ≃ type-Ω B
+  pr1 equiv-map-Ω-is-emb = map-Ω f
+  pr2 equiv-map-Ω-is-emb = is-equiv-map-Ω-is-emb
+
+  pointed-equiv-pointed-map-Ω-is-emb : Ω A ≃∗ Ω B
+  pr1 pointed-equiv-pointed-map-Ω-is-emb = equiv-map-Ω-is-emb
+  pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
+```
+
