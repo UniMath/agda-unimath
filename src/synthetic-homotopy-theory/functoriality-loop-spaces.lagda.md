@@ -270,38 +270,6 @@ module _
     ( preserves-comp-map-Ω g f , coherence-point-comp-map-Ω g f)
 ```
 
-### The operator `pointed-map-Ω` preserves equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (e : A ≃∗ B)
-  where
-
-  equiv-map-Ω-pointed-equiv :
-    type-Ω A ≃ type-Ω B
-  equiv-map-Ω-pointed-equiv =
-    equiv-map-Ω-is-emb
-      ( pointed-map-pointed-equiv e)
-      ( is-emb-is-equiv (is-equiv-map-pointed-equiv e))
-```
-
-### The operator `pointed-map-Ω` preserves pointed equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (e : A ≃∗ B)
-  where
-
-  pointed-equiv-Ω-pointed-equiv :
-    Ω A ≃∗ Ω B
-  pr1 pointed-equiv-Ω-pointed-equiv =
-    equiv-map-Ω-pointed-equiv e
-  pr2 pointed-equiv-Ω-pointed-equiv =
-    preserves-refl-map-Ω (pointed-map-pointed-equiv e)
-```
-
 ### The operator `pointed-map-Ω` preserves pointed sections
 
 ```agda
@@ -320,7 +288,6 @@ module _
           ( pointed-htpy-Ω (f ∘∗ s) id-pointed-map H)
           ( preserves-id-pointed-map-Ω)))
 ```
-
 
 ### (𝑛+1)-truncated pointed maps induce 𝑛-truncated maps on loop spaces
 
@@ -388,12 +355,43 @@ module _
       ( is-emb-f (point-Pointed-Type A) (point-Pointed-Type A))
       ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
 
-  equiv-map-Ω-is-emb : type-Ω A ≃ type-Ω B
-  pr1 equiv-map-Ω-is-emb = map-Ω f
-  pr2 equiv-map-Ω-is-emb = is-equiv-map-Ω-is-emb
+  equiv-Ω-is-emb : type-Ω A ≃ type-Ω B
+  pr1 equiv-Ω-is-emb = map-Ω f
+  pr2 equiv-Ω-is-emb = is-equiv-map-Ω-is-emb
 
-  pointed-equiv-pointed-map-Ω-is-emb : Ω A ≃∗ Ω B
-  pr1 pointed-equiv-pointed-map-Ω-is-emb = equiv-map-Ω-is-emb
-  pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
+  pointed-equiv-Ω-is-emb : Ω A ≃∗ Ω B
+  pr1 pointed-equiv-Ω-is-emb = equiv-Ω-is-emb
+  pr2 pointed-equiv-Ω-is-emb = preserves-refl-map-Ω f
 ```
 
+### The operator `pointed-map-Ω` preserves equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  equiv-Ω-pointed-equiv :
+    type-Ω A ≃ type-Ω B
+  equiv-Ω-pointed-equiv =
+    equiv-Ω-is-emb
+      ( pointed-map-pointed-equiv e)
+      ( is-emb-is-equiv (is-equiv-map-pointed-equiv e))
+```
+
+### The operator `pointed-map-Ω` preserves pointed equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  pointed-equiv-Ω-pointed-equiv :
+    Ω A ≃∗ Ω B
+  pr1 pointed-equiv-Ω-pointed-equiv =
+    equiv-Ω-pointed-equiv e
+  pr2 pointed-equiv-Ω-pointed-equiv =
+    preserves-refl-map-Ω (pointed-map-pointed-equiv e)
+```
