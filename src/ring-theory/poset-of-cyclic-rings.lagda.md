@@ -18,7 +18,9 @@ open import ring-theory.category-of-cyclic-rings
 
 ## Idea
 
-The **large poset** of [cyclic rings](ring-theory.cyclic-rings.md) is just the
+The
+{{#concept "large poset" Disambiguation="of cyclic rings" Agda=Cyclic-Ring-Large-Poset}}
+of [cyclic rings](ring-theory.cyclic-rings.md) is the
 [large category of cyclic rings](ring-theory.category-of-cyclic-rings.md), which
 happens to be a [large poset](order-theory.large-posets.md).
 

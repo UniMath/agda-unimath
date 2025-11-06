@@ -73,8 +73,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The orbit of a point `x` for a permutation `f` is the set of point obtained by
-iterating `f` on `x`.
+The {{#concept "orbit" Disambiguation="of an element under a permutation"}} of
+an element `x` under a permutation `f` is the [set](foundation-core.sets.md) of
+elements obtained by [iterating](foundation.iterating-functions.md) `f` on `x`.
+In other words, it is the [image](foundation.images.md) of the function
+
+```text
+  n ↦ fⁿ(x).
+```
 
 ## Definition
 

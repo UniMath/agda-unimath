@@ -18,25 +18,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **directed graph** consists of a type of vertices equipped with a binary, type
-valued relation of edges. Alternatively, one can define a directed graph to
-consist of a type `V` of **vertices**, a type `E` of **edges**, and a map
-`E → V × V` determining the **source** and **target** of each edge.
+A
+{{#concept "directed graph" WD="directed graph" WDID=Q1137726 Agda=Directed-Graph}}
+consists of a type of vertices equipped with a binary, type valued relation of
+edges. Alternatively, one can define a directed graph to consist of a type `V`
+of **vertices**, a type `E` of **edges**, and a map `E → V × V` determining the
+**source** and **target** of each edge.
 
 To see that these two definitions are
 [equivalent](foundation-core.equivalences.md), recall that
-[$\Sigma$-types](foundation.dependent-pair-types.md) preserve equivalences and a
-type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$ by
+[$Σ$-types](foundation.dependent-pair-types.md) preserve equivalences and a type
+family $A → U$ is equivalent to $∑_{(C : U)} C → A$ by
 [type duality](foundation.type-duality.md). Using these two observations we make
 the following calculation:
 
 $$
 \begin{equation}
 \begin{split}
-\sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
- (V \times V \to \mathcal{U}) \\
- &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
-&\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
+∑_{(V : 𝒰)} (V → V → 𝒰)
+  & ≃ ∑_{(V : 𝒰)} (V × V → 𝒰) \\
+  & ≃ ∑_{(V,E : 𝒰)} (E → (V × V)) \\
+  & ≃ ∑_{(V,E : 𝒰)} ((E → V) × (E → V))
 \end{split}
 \end{equation}
 $$

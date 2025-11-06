@@ -18,7 +18,9 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-A {{#concept "displayed large reflexive graph"}} `H` a over a base
+A
+{{#concept "displayed large reflexive graph" Agda=Displayed-Large-Reflexive-Graph}}
+`H` a over a base
 [large reflexive graph](graph-theory.large-reflexive-graphs.md) `G` is the
 [structure](foundation.structure.md) of a dependent large reflexive graph over
 `G`. It consists of

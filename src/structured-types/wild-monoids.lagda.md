@@ -21,9 +21,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **wild monoid** is a first–order approximation to an ∞-monoid, i.e. a
-∞-monoid-like structure whose laws hold at least up to the first homotopy level,
-but may fail at higher levels.
+A {{#concept "wild monoid" Agda=Wild-Monoid}} is a first–order approximation to
+an ∞-monoid, i.e. a ∞-monoid-like structure whose laws hold at least up to the
+first homotopy level, but may fail at higher levels.
 
 A wild monoid consists of
 
@@ -39,7 +39,7 @@ We call such an associator **unital**. It may be described as a coherence of the
 following diagram
 
 ```text
-          map-associative-product
+        map-associative-product
      (A × A) × A ----> A × (A × A)
              |           |
   (_*_ , id) |           | (id, _*_)

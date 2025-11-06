@@ -30,9 +30,10 @@ open import structured-types.types-equipped-with-endomorphisms
 
 Consider two
 [types equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
-`(X,f)` and `(Y,g)`. A **morphism** from `(X,f)` to `(Y,g)` consists of a map
-`h : X → Y` equipped with a [homotopy](foundation-core.homotopies.md) witnessing
-that the square
+`(X, f)` and `(Y, g)`. A
+{{#concept "morphism" Disambiguation="types equipped with an endomorphism" Agda=hom-Type-With-Endomorphism}}
+from `(X, f)` to `(Y, g)` consists of a map `h : X → Y` equipped with a
+[homotopy](foundation-core.homotopies.md) witnessing that the square
 
 ```text
       h

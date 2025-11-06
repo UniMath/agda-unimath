@@ -15,7 +15,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **pointed type** is a type `A` equipped with an element `a : A`.
+A {{#concept "pointed type" WDID=Q1419329 WD="pointed space" Agda=Pointed-Type}}
+is a type `A` [equipped](foundation.structure.md) with an element `a : A`.
 
 ## Definition
 
@@ -51,3 +52,5 @@ ev-point-Pointed-Type A f = f (point-Pointed-Type A)
   [`foundation.empty-types`](foundation.empty-types.md).
 - The notion of _inhabited types_ is treated in
   [`foundation.inhabited-types`](foundation.inhabited-types.md).
+- [Retractive types](structured-types.retractive-types.md) for parametrized
+  pointed types.

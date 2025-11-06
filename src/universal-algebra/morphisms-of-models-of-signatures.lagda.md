@@ -34,12 +34,14 @@ open import universal-algebra.signatures
 ## Idea
 
 A
-{{#concept "morphism" Disambiguation="of models over a signature" Agda=hom-Model-Signature}}
-of [`σ`-models](universal-algebra.models-of-signatures.md) `A` and `B` is a
-function `f : A → B` between their underlying sets that preserves the operations
-of `σ`, in the sense that for `op ∈ σ` an abstract operation with arity `n ∈ ℕ`,
-and `assign-A` and `assign-B` the semantics of `σ` in `A` and `B` respectively,
-and for a `v ∈ tuple A n`, we have
+{{#concept "morphism" Disambiguation="of models over a single-sorted finitary algebraic signature" Agda=hom-Model-Of-Signature}}
+of `σ`-[models](universal-algebra.models-of-signatures.md) `A` and `B` over a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` is a function `f : A → B` between their underlying
+[sets](foundation-core.sets.md) that preserves the operations of `σ`, in the
+sense that for `op ∈ σ` an abstract operation with arity `n : ℕ`, and `assign-A`
+and `assign-B` the semantics of `σ` in `A` and `B` respectively, and for a
+`v : tuple A n`, we have
 
 ```text
   f (assign-A op v) = assign-B op (f v).
@@ -51,63 +53,59 @@ and for a `v ∈ tuple A n`, we have
 
 ```agda
 module _
-  {l1 : Level} (σ : signature l1)
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (X'@((X , is-set-X) , assign-X) : Model-Of-Signature l2 σ)
+  (Y'@((Y , is-set-Y) , assign-Y) : Model-Of-Signature l3 σ)
+  (f : type-Model-Of-Signature σ X' → type-Model-Of-Signature σ Y')
   where
 
-  preserves-operations-Model-Signature :
-    {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
-    (f : hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y)) →
+  preserves-operations-Model-Of-Signature :
     UU (l1 ⊔ l2 ⊔ l3)
-  preserves-operations-Model-Signature ((X , _) , assign-X) (Y , assign-Y) f =
+  preserves-operations-Model-Of-Signature =
     ( op : operation-signature σ)
     ( v : tuple X (arity-operation-signature σ op)) →
     f (assign-X op v) ＝ assign-Y op (map-tuple f v)
 
-  is-prop-preserves-operations-Model-Signature :
-    {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
-    (f : hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y)) →
-    is-prop (preserves-operations-Model-Signature X Y f)
-  is-prop-preserves-operations-Model-Signature
-    (X , assign-X) ((Y , set-Y) , assign-Y) f =
-    is-prop-Π
-      ( λ op →
-        is-prop-Π
-          ( λ v →
-            set-Y
-              ( f (assign-X op v))
-              ( assign-Y op (map-tuple f v))))
+  abstract
+    is-prop-preserves-operations-Model-Of-Signature :
+      is-prop preserves-operations-Model-Of-Signature
+    is-prop-preserves-operations-Model-Of-Signature =
+      is-prop-Π
+        ( λ op →
+          is-prop-Π
+            ( λ v →
+              is-set-Y
+                ( f (assign-X op v))
+                ( assign-Y op (map-tuple f v))))
 
-  prop-preserves-operations-Model-Signature :
-    {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
-    (f : hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y)) →
-    Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 (prop-preserves-operations-Model-Signature X Y f) =
-    preserves-operations-Model-Signature X Y f
-  pr2 (prop-preserves-operations-Model-Signature X Y f) =
-    is-prop-preserves-operations-Model-Signature X Y f
+  prop-preserves-operations-Model-Of-Signature : Prop (l1 ⊔ l2 ⊔ l3)
+  prop-preserves-operations-Model-Of-Signature =
+    ( preserves-operations-Model-Of-Signature ,
+      is-prop-preserves-operations-Model-Of-Signature)
 ```
 
 ### The type of morphisms of models of a signature
 
 ```agda
-  hom-Model-Signature :
-    {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3) →
-    UU (l1 ⊔ l2 ⊔ l3)
-  hom-Model-Signature X Y =
-    Σ ( hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y))
-      ( preserves-operations-Model-Signature X Y)
+module _
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (X : Model-Of-Signature l2 σ) (Y : Model-Of-Signature l3 σ)
+  where
 
-  map-hom-Model-Signature :
-    {l2 l3 : Level} (X : Model-Signature σ l2) (Y : Model-Signature σ l3) →
-    hom-Model-Signature X Y →
-    hom-Set (set-Model-Signature σ X) (set-Model-Signature σ Y)
-  map-hom-Model-Signature X Y (f , _) = f
+  hom-Model-Of-Signature : UU (l1 ⊔ l2 ⊔ l3)
+  hom-Model-Of-Signature =
+    Σ ( type-Model-Of-Signature σ X → type-Model-Of-Signature σ Y)
+      ( preserves-operations-Model-Of-Signature σ X Y)
 
-  preserves-operations-hom-Model-Signature :
-    {l2 l3 : Level} {X : Model-Signature σ l2} {Y : Model-Signature σ l3} →
-    (f : hom-Model-Signature X Y) →
-    preserves-operations-Model-Signature X Y (map-hom-Model-Signature X Y f)
-  preserves-operations-hom-Model-Signature (f , p) = p
+  map-hom-Model-Of-Signature :
+    hom-Model-Of-Signature →
+    type-Model-Of-Signature σ X → type-Model-Of-Signature σ Y
+  map-hom-Model-Of-Signature (f , _) = f
+
+  preserves-operations-hom-Model-Of-Signature :
+    (f : hom-Model-Of-Signature) →
+    preserves-operations-Model-Of-Signature σ X Y (map-hom-Model-Of-Signature f)
+  preserves-operations-hom-Model-Of-Signature (f , p) = p
 ```
 
 ## Properties
@@ -115,19 +113,20 @@ module _
 ### The identity morphism of a model
 
 ```agda
-preserves-operations-id-Model-Signature :
-  {l1 l2 : Level} (σ : signature l1) (X : Model-Signature σ l2) →
-  preserves-operations-Model-Signature σ X X id
-preserves-operations-id-Model-Signature σ ((X , _) , assign-X) op v =
-  ap
-    ( assign-X op)
-    ( preserves-id-map-tuple (arity-operation-signature σ op) v)
+module _
+  {l1 l2 : Level} (σ : signature l1)
+  (X'@((X , _) , assign-X) : Model-Of-Signature l2 σ)
+  where
 
-id-hom-Model-Signature :
-  {l1 l2 : Level} (σ : signature l1) (X : Model-Signature σ l2) →
-  hom-Model-Signature σ X X
-pr1 (id-hom-Model-Signature σ X) = id
-pr2 (id-hom-Model-Signature σ X) = preserves-operations-id-Model-Signature σ X
+  preserves-operations-id-Model-Of-Signature :
+    preserves-operations-Model-Of-Signature σ X' X' id
+  preserves-operations-id-Model-Of-Signature op v =
+    ap
+      ( assign-X op)
+      ( preserves-id-map-tuple (arity-operation-signature σ op) v)
+
+  id-hom-Model-Of-Signature : hom-Model-Of-Signature σ X' X'
+  id-hom-Model-Of-Signature = (id , preserves-operations-id-Model-Of-Signature)
 ```
 
 ### Characterizing the identity type of morphisms of models
@@ -135,26 +134,41 @@ pr2 (id-hom-Model-Signature σ X) = preserves-operations-id-Model-Signature σ X
 ```agda
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
-  (X : Model-Signature σ l2) (Y : Model-Signature σ l3)
+  (X : Model-Of-Signature l2 σ) (Y : Model-Of-Signature l3 σ)
   where
 
-  htpy-hom-Model-Signature : (f g : hom-Model-Signature σ X Y) → UU (l2 ⊔ l3)
-  htpy-hom-Model-Signature (f , _) (g , _) =
-    ( x : type-Model-Signature σ X) → f x ＝ g x
+  htpy-hom-Model-Of-Signature :
+    (f g : hom-Model-Of-Signature σ X Y) → UU (l2 ⊔ l3)
+  htpy-hom-Model-Of-Signature (f , _) (g , _) =
+    ( x : type-Model-Of-Signature σ X) → f x ＝ g x
 
-  htpy-eq-hom-Model-Signature :
-    ( f g : hom-Model-Signature σ X Y) →
-    f ＝ g → htpy-hom-Model-Signature f g
-  htpy-eq-hom-Model-Signature f .f refl = refl-htpy
+  htpy-eq-hom-Model-Of-Signature :
+    (f g : hom-Model-Of-Signature σ X Y) →
+    f ＝ g → htpy-hom-Model-Of-Signature f g
+  htpy-eq-hom-Model-Of-Signature f .f refl = refl-htpy
 
-  is-equiv-htpy-eq-hom-Model-Signature :
-    (f g : hom-Model-Signature σ X Y) →
-    is-equiv (htpy-eq-hom-Model-Signature f g)
-  is-equiv-htpy-eq-hom-Model-Signature (f , hom-f) =
-    subtype-identity-principle
-      ( is-prop-preserves-operations-Model-Signature σ X Y)
-      ( hom-f)
-      ( refl-htpy)
-      ( htpy-eq-hom-Model-Signature (f , hom-f))
-      ( funext f)
+  abstract
+    is-equiv-htpy-eq-hom-Model-Of-Signature :
+      (f g : hom-Model-Of-Signature σ X Y) →
+      is-equiv (htpy-eq-hom-Model-Of-Signature f g)
+    is-equiv-htpy-eq-hom-Model-Of-Signature (f , hom-f) =
+      subtype-identity-principle
+        ( is-prop-preserves-operations-Model-Of-Signature σ X Y)
+        ( hom-f)
+        ( refl-htpy)
+        ( htpy-eq-hom-Model-Of-Signature (f , hom-f))
+        ( funext f)
+
+  extensionality-hom-Model-Of-Signature :
+    (f g : hom-Model-Of-Signature σ X Y) →
+    (f ＝ g) ≃ htpy-hom-Model-Of-Signature f g
+  extensionality-hom-Model-Of-Signature f g =
+    ( htpy-eq-hom-Model-Of-Signature f g ,
+      is-equiv-htpy-eq-hom-Model-Of-Signature f g)
+
+  eq-htpy-hom-Model-Of-Signature :
+    (f g : hom-Model-Of-Signature σ X Y) →
+    htpy-hom-Model-Of-Signature f g → f ＝ g
+  eq-htpy-hom-Model-Of-Signature f g =
+    map-inv-equiv (extensionality-hom-Model-Of-Signature f g)
 ```

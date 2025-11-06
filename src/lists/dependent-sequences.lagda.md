@@ -18,8 +18,8 @@ open import foundation-core.function-types
 
 ## Idea
 
-A **dependent sequence** of elements in a family of types `A : ℕ → UU` is a
-dependent map `(n : ℕ) → A n`.
+A {{#concept "dependent sequence" Agda=dependent-sequence}} of elements in a
+family of types `A : ℕ → Type` is a dependent map `(n : ℕ) → A n`.
 
 ## Definition
 
