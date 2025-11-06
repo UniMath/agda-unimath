@@ -99,6 +99,13 @@ module _
   is-trunc-map-equiv e = is-trunc-map-is-equiv (is-equiv-map-equiv e)
 ```
 
+### The identity function is `k`-truncated
+
+```agda
+is-trunc-map-id : {l : Level} (k : 𝕋) {X : UU l} → is-trunc-map k (id' X)
+is-trunc-map-id k = is-trunc-map-is-equiv k is-equiv-id
+```
+
 ### A map is `k+1`-truncated if and only if its action on identifications is `k`-truncated
 
 ```agda

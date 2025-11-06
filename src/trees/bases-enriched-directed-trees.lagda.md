@@ -27,8 +27,10 @@ open import trees.enriched-directed-trees
 
 ## Idea
 
-The **base** of an enriched directed tree consists of its nodes equipped with an
-edge to the root.
+The
+{{#concept "base" Disambiguation="of an enriched directed tree" Agda=base-Enriched-Directed-Tree}}
+of an [enriched directed tree](trees.enriched-directed-trees.md) consists of its
+nodes equipped with an edge to the root.
 
 ## Definition
 

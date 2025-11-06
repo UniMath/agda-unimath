@@ -567,3 +567,13 @@ abstract
       ( left-unit-law-add-ℝ x)
       ( leq-transpose-right-diff-ℝ _ _ _ 0≤y-x)
 ```
+
+### If a nonnegative real number `x` is less than or equal to a real number `y`, `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-leq-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁰⁺ x) y →
+    is-nonnegative-ℝ y
+  is-nonnegative-leq-ℝ⁰⁺ (x , 0≤x) y x≤y = transitive-leq-ℝ zero-ℝ x y x≤y 0≤x
+```

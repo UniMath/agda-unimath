@@ -26,9 +26,11 @@ open import structured-types.wild-monoids
 ## Idea
 
 Given a family of [wild monoids](structured-types.wild-monoids.md) `Mᵢ` indexed
-by `i : I`, the dependent product `Π(i : I), Mᵢ` is a wild monoid consisting of
-dependent functions taking `i : I` to an element of the underlying type of `Mᵢ`.
-Every component of the structure is given pointwise.
+by `i : I`, the
+{{#concept "dependent product" Disambiguation="wild monoid" Agda=Π-Wild-Monoid}}
+`Π(i : I), Mᵢ` is a wild monoid consisting of dependent functions taking `i : I`
+to an element of the underlying type of `Mᵢ`. Every component of the structure
+is given pointwise.
 
 ## Definition
 

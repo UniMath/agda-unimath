@@ -30,9 +30,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed type equipped with an automorphism is a pair consisting of a pointed
-type `A` and an automorphism on the underlying type of `A`. The base point is
-not required to be preserved.
+A
+{{#concept "pointed type equipped with an automorphism" Agda=Pointed-Type-With-Aut}}
+is a pair consisting of a [pointed type](structured-types.pointed-types.md) `A`
+and an [automorphism](foundation.automorphisms.md) on the underlying type of
+`A`. The base point is not required to be preserved.
 
 ## Definitions
 

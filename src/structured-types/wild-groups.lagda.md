@@ -16,6 +16,14 @@ open import structured-types.wild-monoids
 
 </details>
 
+## Idea
+
+A {{#concept "wild group" Agda=Wild-Group}} is a type
+[equipped](foundation.structure.md) with a unital binary operation which is a
+[binary equivalence](foundation.binary-equivalences.md).
+
+## Definition
+
 ```agda
 is-wild-group-Wild-Monoid :
   {l : Level} (M : Wild-Monoid l) → UU l

@@ -20,8 +20,9 @@ open import structured-types.magmas
 
 ## Idea
 
-A wild quasigroup is a type `A` equipped with a binary equivalence
-`μ : A → A → A`.
+A {{#concept "wild quasigroup" Agda=Wild-Quasigroup}} is a type `A`
+[equipped](foundation.structure.md) with a
+[binary equivalence](foundation.binary-equivalences.md) `μ : A → A → A`.
 
 ## Definition
 

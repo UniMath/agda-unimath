@@ -19,13 +19,14 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
@@ -36,16 +37,21 @@ open import metric-spaces.totally-bounded-metric-spaces
 
 open import order-theory.upper-bounds-large-posets
 
+open import real-numbers.absolute-value-closed-intervals-real-numbers
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
+open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.infima-and-suprema-families-real-numbers
 open import real-numbers.infima-families-real-numbers
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
@@ -88,6 +94,14 @@ module _
     subset-inhabited-totally-bounded-subspace-Metric-Space
       ( metric-space-ℝ l2)
       ( S)
+
+  is-in-inhabited-totally-bounded-subset-ℝ : ℝ l2 → UU l1
+  is-in-inhabited-totally-bounded-subset-ℝ =
+    is-in-subtype subset-inhabited-totally-bounded-subset-ℝ
+
+  type-inhabited-totally-bounded-subset-ℝ : UU (l1 ⊔ lsuc l2)
+  type-inhabited-totally-bounded-subset-ℝ =
+    type-subtype subset-inhabited-totally-bounded-subset-ℝ
 
   subspace-inhabited-totally-bounded-subset-ℝ :
     Metric-Space (l1 ⊔ lsuc l2) l2
@@ -142,8 +156,11 @@ module _
     net δ =
       im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( inhabited-finitely-enumerable-subtype-net-Metric-Space
-          ( metric-space-subset-ℝ S) |S| δ (M δ))
+        ( inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space
+          ( metric-space-subset-ℝ S)
+          ( δ)
+          ( M δ)
+          ( |S|))
 
     is-net :
       (δ : ℚ⁺) →
@@ -384,6 +401,101 @@ module _
     has-infimum-inhabited-totally-bounded-subset-ℝ =
       ( inf-inhabited-totally-bounded-subset-ℝ ,
         is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
+```
+
+### Any totally bounded subset of `ℝ` is propositionally decidable
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    is-inhabited-or-empty-totally-bounded-subset-ℝ :
+      is-inhabited-or-empty (type-totally-bounded-subset-ℝ S)
+    is-inhabited-or-empty-totally-bounded-subset-ℝ =
+      is-inhabited-or-empty-totally-bounded-subspace-Metric-Space
+        ( metric-space-ℝ l2)
+        ( S)
+```
+
+### The infimum of an inhabited totally bounded subset of `ℝ` is less than or equal to the supremum
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : inhabited-totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    leq-inf-sup-inhabited-totally-bounded-subset-ℝ :
+      leq-ℝ
+        ( inf-inhabited-totally-bounded-subset-ℝ S)
+        ( sup-inhabited-totally-bounded-subset-ℝ S)
+    leq-inf-sup-inhabited-totally-bounded-subset-ℝ =
+      leq-inf-sup-subset-ℝ
+        ( subset-inhabited-totally-bounded-subset-ℝ S)
+        ( inf-inhabited-totally-bounded-subset-ℝ S)
+        ( is-infimum-inf-inhabited-totally-bounded-subset-ℝ S)
+        ( sup-inhabited-totally-bounded-subset-ℝ S)
+        ( is-supremum-sup-inhabited-totally-bounded-subset-ℝ S)
+```
+
+### An inhabited totally bounded subset `S` of `ℝ` is a subset of the closed interval `[inf S , sup S]`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : inhabited-totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ :
+    closed-interval-ℝ l2 l2
+  enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ =
+    ( ( inf-inhabited-totally-bounded-subset-ℝ S ,
+        sup-inhabited-totally-bounded-subset-ℝ S) ,
+      leq-inf-sup-inhabited-totally-bounded-subset-ℝ S)
+
+  subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ :
+    subset-inhabited-totally-bounded-subset-ℝ S ⊆
+    subtype-closed-interval-ℝ
+      ( l2)
+      ( enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ)
+  subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ s s∈S =
+    ( is-lower-bound-is-infimum-family-ℝ _ _
+        ( is-infimum-inf-inhabited-totally-bounded-subset-ℝ S)
+        ( s , s∈S) ,
+      is-upper-bound-is-supremum-family-ℝ _ _
+        ( is-supremum-sup-inhabited-totally-bounded-subset-ℝ S)
+        ( s , s∈S))
+```
+
+### There is a nonnegative upper bound on the absolute value of an element of an inhabited totally bounded subset of `ℝ`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : inhabited-totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ :
+      Σ ( ℝ⁰⁺ l2)
+        ( λ b →
+          (s : type-inhabited-totally-bounded-subset-ℝ S) →
+          leq-ℝ⁰⁺ (nonnegative-abs-ℝ (pr1 s)) b)
+    nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ =
+      ( nonnegative-max-abs-closed-interval-ℝ
+          ( enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ S) ,
+        ( λ (s , s∈S) →
+          leq-max-abs-is-in-closed-interval-ℝ
+            ( enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ S)
+            ( s)
+            ( subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ
+              ( S)
+              ( s)
+              ( s∈S))))
 ```
 
 ## References

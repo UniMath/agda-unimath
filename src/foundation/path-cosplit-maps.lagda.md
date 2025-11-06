@@ -364,7 +364,7 @@ Given a triangle of the form
          C,
 ```
 
-if the left map is is `k`-path-cosplit then so is the top map.
+if the left map is `k`-path-cosplit then so is the top map.
 
 ```agda
 is-path-cosplit-top-map-triangle' :
@@ -508,7 +508,7 @@ is-path-cosplit-tot {k = succ-𝕋 k} {f = f} F x y =
   is-path-cosplit-equiv-arrow
     ( equiv-pair-eq-Σ x y ,
       equiv-pair-eq-Σ (tot f x) (tot f y) ,
-      compute-ap-tot f)
+      coh-ap-tot f)
     ( is-path-cosplit-tot
       { f = λ p q → inv (preserves-tr f p (pr2 x)) ∙ ap (f (pr1 y)) q}
       ( λ where refl → F (pr1 y) (pr2 x) (pr2 y)))

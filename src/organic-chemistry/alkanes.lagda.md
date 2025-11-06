@@ -17,8 +17,10 @@ open import organic-chemistry.saturated-carbons
 
 ## Idea
 
-An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does
-not have any double or triple carbon-carbon bonds.
+An {{#concept "alkane" WD="alkane" WDID=Q41581 Agda=is-alkane-hydrocarbon}} is a
+[hydrocarbon](organic-chemistry.hydrocarbons.md) that only has
+[saturated carbons](organic-chemistry.saturated-carbons.md), i.e., it does not
+have any double or triple carbon-carbon bonds.
 
 ## Definition
 

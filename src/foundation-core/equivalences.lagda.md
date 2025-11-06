@@ -323,7 +323,7 @@ only assume maps `g : B → X` and `h : A → B`. In this special case, we set
 
 [André Joyal](https://en.wikipedia.org/wiki/André_Joyal) proposed calling this
 property the 3-for-2 property, despite most mathematicians calling it the
-_2-out-of-3 property_. The story goes that on the produce market is is common to
+_2-out-of-3 property_. The story goes that on the produce market it is common to
 advertise a discount as "3-for-2". If you buy two apples, then you get the third
 for free. Similarly, if you prove that two maps in a commuting triangle are
 equivalences, then you get the third for free.

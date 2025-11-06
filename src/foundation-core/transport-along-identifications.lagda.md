@@ -69,6 +69,11 @@ module _
     f j (tr A p x) ＝ tr B p (f i x)
   preserves-tr refl x = refl
 
+  inv-preserves-tr :
+    {i j : I} (p : i ＝ j) (x : A i) →
+    tr B p (f i x) ＝ f j (tr A p x)
+  inv-preserves-tr p x = inv (preserves-tr p x)
+
   compute-preserves-tr :
     {i j : I} (p : i ＝ j) (x : A i) →
     preserves-tr p x ＝

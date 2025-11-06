@@ -139,7 +139,7 @@ module _
         ( equiv-tot
           ( λ p → equiv-total-is-in-subuniverse-Σ-Decomposition P (X , p))))) ∘e
     ( inv-associative-Σ) ∘e
-    ( equiv-tot (λ p → inv-equiv (equiv-is-small (C1 S T (X , p)))))
+    ( equiv-tot (λ p → inv-equiv-is-small (C1 S T (X , p))))
 ```
 
 ### Unit laws for Cauchy composition of species-subuniverse
