@@ -89,7 +89,7 @@ module _
 
   compute-action-on-loops-conjugation-Pointed-Type' :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
-    conjugation-Ω' p ~∗ action-on-loops-conjugation-Pointed-Type p
+    tr-Ω p ~∗ action-on-loops-conjugation-Pointed-Type p
   pr1 (compute-action-on-loops-conjugation-Pointed-Type' refl) ω = inv (ap-id ω)
   pr2 (compute-action-on-loops-conjugation-Pointed-Type' refl) = refl
 
@@ -103,7 +103,7 @@ module _
 
   htpy-compute-action-on-loops-conjugation-Pointed-Type :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
-    map-conjugation-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
+    conjugation-type-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
   htpy-compute-action-on-loops-conjugation-Pointed-Type p =
     pr1 (compute-action-on-loops-conjugation-Pointed-Type p)
 ```
