@@ -219,6 +219,11 @@ module _
   pointed-htpy-Ω f g H = (htpy-map-Ω f g H , coherence-point-htpy-map-Ω f g H)
 ```
 
+**Comment.** There should be a nicer construction of
+`coherence-point-htpy-map-Ω` by designing the appropriate lemmas. Since it is
+undesirable to compute with the current construction, it is marked as
+`abstract`.
+
 ## Properties
 
 ### Faithful pointed maps induce embeddings on loop spaces
