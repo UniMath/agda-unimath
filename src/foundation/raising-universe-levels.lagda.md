@@ -172,9 +172,10 @@ module _
             ( equiv-concat' (raise l2 A') (inv p))))
         ( is-torsorial-equiv' A)
 
-  is-prop-map-raise : is-prop-map (raise l2 {l1})
-  is-prop-map-raise X =
-    is-prop-is-proof-irrelevant (is-proof-irrelevant-map-raise X)
+  abstract
+    is-prop-map-raise : is-prop-map (raise l2 {l1})
+    is-prop-map-raise X =
+      is-prop-is-proof-irrelevant (is-proof-irrelevant-map-raise X)
 
   abstract
     is-emb-raise : is-emb (raise l2 {l1})
