@@ -32,6 +32,9 @@ open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers publ
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
+open import real-numbers.large-additive-group-of-real-numbers public
+open import real-numbers.large-multiplicative-monoid-of-real-numbers public
+open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public

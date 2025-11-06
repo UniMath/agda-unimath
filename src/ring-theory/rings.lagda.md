@@ -52,7 +52,8 @@ The concept of a _ring_ vastly generalizes the
 [set](foundation-core.sets.md) [equipped](foundation.structure.md) with addition
 and multiplication, where the addition operation gives the ring the structure of
 an [abelian group](group-theory.abelian-groups.md), and the multiplication is
-associative, unital, and distributive over addition.
+associative, unital, and distributive over addition, forming the structure of a
+[monoid](group-theory.monoids.md).
 
 ## Definitions
 

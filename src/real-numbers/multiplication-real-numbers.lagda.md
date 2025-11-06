@@ -1191,6 +1191,20 @@ module _
         ( commutative-mul-ℝ x z)
         ( commutative-mul-ℝ y z)
         ( preserves-sim-right-mul-ℝ x~y)
+
+abstract
+  preserves-sim-mul-ℝ :
+    {l1 l2 l3 l4 : Level} →
+    (a : ℝ l1) (a' : ℝ l2) → sim-ℝ a a' →
+    (b : ℝ l3) (b' : ℝ l4) → sim-ℝ b b' →
+    sim-ℝ (a *ℝ b) (a' *ℝ b')
+  preserves-sim-mul-ℝ a a' a~a' b b' b~b' =
+    transitive-sim-ℝ
+      ( a *ℝ b)
+      ( a *ℝ b')
+      ( a' *ℝ b')
+      ( preserves-sim-right-mul-ℝ b' a a' a~a')
+      ( preserves-sim-left-mul-ℝ a b b' b~b')
 ```
 
 ### Swapping laws for multiplication on real numbers
