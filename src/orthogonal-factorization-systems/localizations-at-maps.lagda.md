@@ -81,8 +81,8 @@ module _
     pr1 is-localization-Y
   pr1 (pr2 (is-subuniverse-localization-is-localization is-localization-Y)) = η
   pr2 (pr2 (is-subuniverse-localization-is-localization is-localization-Y))
-    (Z , is-local-Z) =
-    pr2 is-localization-Y Z is-local-Z
+    Z is-local-Z =
+      pr2 is-localization-Y Z is-local-Z
 ```
 
 It remains to construct a converse.
