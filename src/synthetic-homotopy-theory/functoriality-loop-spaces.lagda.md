@@ -301,7 +301,7 @@ module _
     coherence-point-unpointed-htpy-pointed-Π
       ( pointed-map-Ω (g ∘∗ f))
       ( pointed-map-Ω g ∘∗ pointed-map-Ω f)
-       (preserves-comp-map-Ω g f)
+      ( preserves-comp-map-Ω g f)
   coherence-point-comp-map-Ω g∗@(g , refl) f∗@(f , refl) = refl
 
   preserves-comp-pointed-map-Ω :
