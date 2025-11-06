@@ -48,6 +48,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -256,6 +257,22 @@ abstract
       ( λ y → sim-ℝ y zero-ℝ)
       ( commutative-add-ℝ x (neg-ℝ x))
       ( right-inverse-law-add-ℝ x)
+
+  eq-right-inverse-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-ℝ l zero-ℝ
+  eq-right-inverse-law-add-ℝ x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ _ zero-ℝ)
+        ( right-inverse-law-add-ℝ x))
+
+  eq-left-inverse-law-add-ℝ :
+    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-ℝ l zero-ℝ
+  eq-left-inverse-law-add-ℝ x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ _ zero-ℝ)
+        ( left-inverse-law-add-ℝ x))
 ```
 
 ### Addition on the real numbers preserves similarity
