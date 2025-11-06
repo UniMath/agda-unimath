@@ -160,10 +160,12 @@ module _
   htpy-map-Ω : (f g : A →∗ B) (H : f ~∗ g) → map-Ω f ~ map-Ω g
   htpy-map-Ω f'@(f , p) g'@(g , refl) (H , refl) ω =
     equational-reasoning
-    tr-type-Ω (H a∗ ∙ refl) (ap f ω)
-    ＝ tr-type-Ω (H a∗) (ap f ω) by ap (λ u → tr-type-Ω u (ap f ω)) right-unit
-    ＝ inv (H a∗) ∙ (ap f ω ∙ H a∗) by eq-conjugation-tr-type-Ω (H a∗) (ap f ω)
-    ＝ ap g ω by compute-conjugate-htpy-ap H ω
+      tr-type-Ω (H a∗ ∙ refl) (ap f ω)
+      ＝ tr-type-Ω (H a∗) (ap f ω)
+        by ap (λ u → tr-type-Ω u (ap f ω)) right-unit
+      ＝ inv (H a∗) ∙ (ap f ω ∙ H a∗)
+        by eq-conjugation-tr-type-Ω (H a∗) (ap f ω)
+      ＝ ap g ω by compute-conjugate-htpy-ap H ω
 
   abstract
     coherence-point-htpy-map-Ω :
