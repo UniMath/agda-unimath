@@ -17,6 +17,7 @@ open import foundation.universe-levels
 open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
@@ -129,8 +130,10 @@ module _
   associative-mul-Ω :
     (x y z : type-Ω A) →
     mul-Ω A (mul-Ω A x y) z ＝ mul-Ω A x (mul-Ω A y z)
-  associative-mul-Ω x y z = assoc x y z
+  associative-mul-Ω = assoc
 ```
+
+### Transport
 
 We compute transport of `type-Ω`.
 
@@ -149,6 +152,9 @@ module _
   tr-type-Ω : x ＝ y → type-Ω (A , x) → type-Ω (A , y)
   tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
 
+  tr-Ω : x ＝ y → Ω (A , x) →∗ Ω (A , y)
+  tr-Ω p = pointed-map-pointed-equiv (equiv-tr-Ω p)
+
   is-equiv-tr-type-Ω : (p : x ＝ y) → is-equiv (tr-type-Ω p)
   is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
 
@@ -163,13 +169,19 @@ module _
 
   preserves-inv-tr-Ω :
     (p : x ＝ y) (u : type-Ω (A , x)) →
-    tr-type-Ω p (inv-Ω (A , x) u) ＝ inv-Ω (A , y) (tr-type-Ω p u)
+    tr-type-Ω p (inv-Ω (A , x) u) ＝
+    inv-Ω (A , y) (tr-type-Ω p u)
   preserves-inv-tr-Ω refl u = refl
 
-  eq-tr-type-Ω :
+  eq-conjugation-tr-type-Ω :
     (p : x ＝ y) (q : type-Ω (A , x)) →
     tr-type-Ω p q ＝ inv p ∙ (q ∙ p)
-  eq-tr-type-Ω refl q = inv right-unit
+  eq-conjugation-tr-type-Ω refl q = inv right-unit
+
+  compute-eq-conjugation-tr-type-Ω-refl :
+    (p : x ＝ y) →
+    preserves-refl-tr-Ω p ∙ inv (left-inv p) ＝ eq-conjugation-tr-type-Ω p refl
+  compute-eq-conjugation-tr-type-Ω-refl refl = refl
 ```
 
 ## Properties

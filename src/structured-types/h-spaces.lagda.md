@@ -15,7 +15,9 @@ open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -73,7 +75,7 @@ using `make-H-Space`.
 ```agda
 H-Space : (l : Level) → UU (lsuc l)
 H-Space l =
-  Σ ( Pointed-Type l) coherent-unital-mul-Pointed-Type
+  Σ (Pointed-Type l) coherent-unital-mul-Pointed-Type
 
 make-H-Space :
   {l : Level} →
@@ -162,15 +164,19 @@ module _
 ```agda
 h-space-Noncoherent-H-Space :
   {l : Level} → Noncoherent-H-Space l → H-Space l
-pr1 (h-space-Noncoherent-H-Space A) = pointed-type-Noncoherent-H-Space A
-pr1 (pr2 (h-space-Noncoherent-H-Space A)) = mul-Noncoherent-H-Space A
+pr1 (h-space-Noncoherent-H-Space A) =
+  pointed-type-Noncoherent-H-Space A
+pr1 (pr2 (h-space-Noncoherent-H-Space A)) =
+  mul-Noncoherent-H-Space A
 pr2 (pr2 (h-space-Noncoherent-H-Space A)) =
   coherent-unit-laws-unit-laws
     ( mul-Noncoherent-H-Space A)
     ( unit-laws-mul-Noncoherent-H-Space A)
 ```
 
-### The type of H-space structures on `A` is equivalent to the type of sections of `ev-point : (A → A) →∗ A`
+### The type of H-space structures on `A` is equivalent to the type of sections of `ev-point : (A → A, id) →∗ A`
+
+This is Proposition 2.2 (1)⇔(2) {{#cite BCFR23}}.
 
 ```agda
 module _
@@ -189,10 +195,34 @@ module _
     pointed-section-ev-point-Pointed-Type ≃ coherent-unital-mul-Pointed-Type A
   compute-pointed-section-ev-point-Pointed-Type =
     ( equiv-tot
-      ( λ _ →
-        equiv-Σ _
+      ( λ x →
+        equiv-Σ
+          ( λ α →
+            Σ ( right-unit-law x (point-Pointed-Type A))
+              ( coh-unit-laws x (point-Pointed-Type A) α))
           ( equiv-funext)
-          ( λ _ →
-            equiv-tot (λ _ → inv-equiv (equiv-right-whisker-concat refl))))) ∘e
+          ( λ _ → equiv-tot (λ _ → equiv-right-unwhisker-concat refl)))) ∘e
     ( associative-Σ)
+
+module _
+  {l : Level} (A : H-Space l)
+  where
+
+  ev-endo-H-Space :
+    endo-Pointed-Type (type-H-Space A) →∗ pointed-type-H-Space A
+  ev-endo-H-Space = ev-endo-Pointed-Type (pointed-type-H-Space A)
+
+  pointed-section-ev-endo-H-Space : pointed-section ev-endo-H-Space
+  pointed-section-ev-endo-H-Space =
+    map-inv-equiv
+      ( compute-pointed-section-ev-point-Pointed-Type (pointed-type-H-Space A))
+      ( coherent-unital-mul-H-Space A)
+
+  section-ev-endo-H-Space : section (map-pointed-map ev-endo-H-Space)
+  section-ev-endo-H-Space =
+    section-pointed-section ev-endo-H-Space pointed-section-ev-endo-H-Space
 ```
+
+## References
+
+{{#bibliography}}
