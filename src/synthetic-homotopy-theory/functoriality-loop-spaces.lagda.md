@@ -214,8 +214,9 @@ module _
         ap (λ u → tr-type-Ω u refl) right-unit ∙ preserves-refl-tr-Ω p
       lemma refl = refl
 
-  htpy-Ω : (f g : A →∗ B) (H : f ~∗ g) → pointed-map-Ω f ~∗ pointed-map-Ω g
-  htpy-Ω f g H = (htpy-map-Ω f g H , coherence-point-htpy-map-Ω f g H)
+  pointed-htpy-Ω :
+    (f g : A →∗ B) (H : f ~∗ g) → pointed-map-Ω f ~∗ pointed-map-Ω g
+  pointed-htpy-Ω f g H = (htpy-map-Ω f g H , coherence-point-htpy-map-Ω f g H)
 ```
 
 ## Properties
@@ -360,6 +361,6 @@ module _
       concat-pointed-htpy
         ( inv-pointed-htpy (preserves-comp-pointed-map-Ω f s))
         ( concat-pointed-htpy
-          ( htpy-Ω (f ∘∗ s) id-pointed-map H)
+          ( pointed-htpy-Ω (f ∘∗ s) id-pointed-map H)
           ( preserves-id-pointed-map-Ω)))
 ```
