@@ -1269,7 +1269,7 @@ module _
                     ( eq-counting-equivalence-class-R n)
                     ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( inv
-                  ( eq-tr-type-Ω
+                  ( eq-conjugation-tr-type-Ω
                     ( eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop))
