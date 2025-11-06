@@ -73,6 +73,7 @@ open import ring-theory.poset-of-cyclic-rings public
 open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
 open import ring-theory.poset-of-right-ideals-rings public
+open import ring-theory.powers-of-elements-large-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public

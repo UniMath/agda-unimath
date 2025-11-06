@@ -61,6 +61,7 @@ open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
+open import real-numbers.powers-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public

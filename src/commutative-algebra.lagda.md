@@ -48,6 +48,7 @@ open import commutative-algebra.poset-of-ideals-commutative-rings public
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-semirings public
+open import commutative-algebra.powers-of-elements-large-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public
