@@ -10,6 +10,8 @@ module synthetic-homotopy-theory.loop-spaces where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
@@ -23,10 +25,12 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-The **loop space** of a [pointed type](structured-types.pointed-types.md) `A` is
-the pointed type of self-[identifications](foundation-core.identity-types.md) of
-the base point of `A`. The loop space comes equipped with a group-like structure
-induced by the groupoidal-like structure on identifications.
+The
+{{#concept "loop space" Disambiguation="of a pointed type" Agda=Ω WD="loop space" WDID=Q2066070}}
+of a [pointed type](structured-types.pointed-types.md) `A` is the pointed type
+of self-[identifications](foundation-core.identity-types.md) of the base point
+of `A`. The loop space comes equipped with a group-like structure induced by the
+groupoidal-like structure on identifications.
 
 ## Table of files directly related to loop spaces
 
@@ -48,7 +52,7 @@ module _
   refl-Ω = refl
 
   Ω : Pointed-Type l
-  Ω = pair type-Ω refl-Ω
+  Ω = (type-Ω , refl-Ω)
 ```
 
 ### The magma of loops on a pointed space
@@ -84,11 +88,12 @@ module _
   coherence-unit-laws-mul-Ω = refl
 
   Ω-H-Space : H-Space l
-  pr1 Ω-H-Space = Ω A
-  pr1 (pr2 Ω-H-Space) = mul-Ω A
-  pr1 (pr2 (pr2 Ω-H-Space)) = left-unit-law-mul-Ω
-  pr1 (pr2 (pr2 (pr2 Ω-H-Space))) = right-unit-law-mul-Ω
-  pr2 (pr2 (pr2 (pr2 Ω-H-Space))) = coherence-unit-laws-mul-Ω
+  Ω-H-Space =
+    ( Ω A ,
+      mul-Ω A ,
+      left-unit-law-mul-Ω ,
+      right-unit-law-mul-Ω ,
+      coherence-unit-laws-mul-Ω)
 ```
 
 ### The wild quasigroup of loops on a pointed space
@@ -134,14 +139,14 @@ module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
 
-  equiv-tr-Ω : x ＝ y → Ω (pair A x) ≃∗ Ω (pair A y)
-  equiv-tr-Ω refl = pair id-equiv refl
+  equiv-tr-Ω : x ＝ y → Ω (A , x) ≃∗ Ω (A , y)
+  equiv-tr-Ω refl = (id-equiv , refl)
 
-  equiv-tr-type-Ω : x ＝ y → type-Ω (pair A x) ≃ type-Ω (pair A y)
+  equiv-tr-type-Ω : x ＝ y → type-Ω (A , x) ≃ type-Ω (A , y)
   equiv-tr-type-Ω p =
     equiv-pointed-equiv (equiv-tr-Ω p)
 
-  tr-type-Ω : x ＝ y → type-Ω (pair A x) → type-Ω (pair A y)
+  tr-type-Ω : x ＝ y → type-Ω (A , x) → type-Ω (A , y)
   tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
 
   is-equiv-tr-type-Ω : (p : x ＝ y) → is-equiv (tr-type-Ω p)
@@ -151,21 +156,18 @@ module _
   preserves-refl-tr-Ω refl = refl
 
   preserves-mul-tr-Ω :
-    (p : x ＝ y) (u v : type-Ω (pair A x)) →
-    Id
-      ( tr-type-Ω p (mul-Ω (pair A x) u v))
-      ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+    (p : x ＝ y) (u v : type-Ω (A , x)) →
+    tr-type-Ω p (mul-Ω (A , x) u v) ＝
+    mul-Ω (A , y) (tr-type-Ω p u) (tr-type-Ω p v)
   preserves-mul-tr-Ω refl u v = refl
 
   preserves-inv-tr-Ω :
-    (p : x ＝ y) (u : type-Ω (pair A x)) →
-    Id
-      ( tr-type-Ω p (inv-Ω (pair A x) u))
-      ( inv-Ω (pair A y) (tr-type-Ω p u))
+    (p : x ＝ y) (u : type-Ω (A , x)) →
+    tr-type-Ω p (inv-Ω (A , x) u) ＝ inv-Ω (A , y) (tr-type-Ω p u)
   preserves-inv-tr-Ω refl u = refl
 
   eq-tr-type-Ω :
-    (p : x ＝ y) (q : type-Ω (pair A x)) →
+    (p : x ＝ y) (q : type-Ω (A , x)) →
     tr-type-Ω p q ＝ inv p ∙ (q ∙ p)
   eq-tr-type-Ω refl q = inv right-unit
 ```
@@ -181,9 +183,18 @@ module _
   where
 
   pointed-equiv-loop-pointed-identity :
-    ( pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω A
-  pr1 pointed-equiv-loop-pointed-identity =
-    equiv-concat' (point-Pointed-Type A) (inv p)
-  pr2 pointed-equiv-loop-pointed-identity =
-    right-inv p
+    ( (point-Pointed-Type A ＝ x) , p) ≃∗ Ω A
+  pointed-equiv-loop-pointed-identity =
+    ( equiv-concat' (point-Pointed-Type A) (inv p) , right-inv p)
+```
+
+### The loop space of a (𝑘+1)-truncated type is 𝑘-truncated
+
+```agda
+module _
+  {l : Level} (k : 𝕋) (A : Pointed-Type l)
+  where
+
+  is-trunc-Ω : is-trunc (succ-𝕋 k) (type-Pointed-Type A) → is-trunc k (type-Ω A)
+  is-trunc-Ω H = H (point-Pointed-Type A) (point-Pointed-Type A)
 ```
