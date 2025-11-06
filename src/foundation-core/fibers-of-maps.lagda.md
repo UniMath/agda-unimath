@@ -461,9 +461,9 @@ module _
   is-equiv-map-inv-equiv-fiber-htpy : is-equiv map-inv-equiv-fiber-htpy
   is-equiv-map-inv-equiv-fiber-htpy =
     is-equiv-is-invertible
-      map-equiv-fiber-htpy
-      is-retraction-map-inv-equiv-fiber-htpy
-      is-section-map-inv-equiv-fiber-htpy
+      ( map-equiv-fiber-htpy)
+      ( is-retraction-map-inv-equiv-fiber-htpy)
+      ( is-section-map-inv-equiv-fiber-htpy)
 
   inv-equiv-fiber-htpy : fiber g y ≃ fiber f y
   inv-equiv-fiber-htpy =

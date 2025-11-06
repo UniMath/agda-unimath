@@ -477,8 +477,7 @@ the canonical maps `X → X ⋊∗ Y` and `Y → X ⋉∗ Y`, i.e., we have push
 
 ### The smash product as a bipointed pushout
 
-Given two pointed types `X` and `Y`, the smash product is the pushout
-{{#cite Ljungström24}}
+Given two pointed types `X` and `Y`, the smash product `X ∧ Y` is the pushout
 
 ```text
   X + Y ------> X × Y
@@ -487,6 +486,8 @@ Given two pointed types `X` and `Y`, the smash product is the pushout
     ∨           ⌜ ∨
   1 + 1 ------> X ∧ Y.
 ```
+
+This is mentioned in {{#cite Ljungström24}}.
 
 > This remains to be formalized.
 
