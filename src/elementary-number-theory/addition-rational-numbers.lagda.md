@@ -325,9 +325,9 @@ abstract
 
 ```agda
 abstract
-  succ-rational-int-ℕ :
-    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
-  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
+  succ-rational-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℕ n) ＝ rational-ℕ (succ-ℕ n)
+  succ-rational-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also
