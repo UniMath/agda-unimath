@@ -348,7 +348,8 @@ module _
     (f : A →¬¬ B) → ε-operator-map (map-double-negation-eliminating-map f)
   ε-operator-double-negation-eliminating-map f =
     ε-operator-map-is-double-negation-eliminating-map
-      ( is-double-negation-eliminating-map-map-double-negation-eliminating-map f)
+      ( is-double-negation-eliminating-map-map-double-negation-eliminating-map
+        ( f))
 ```
 
 ## See also
