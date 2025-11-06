@@ -8,6 +8,7 @@ module foundation.surjective-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.coinhabited-pairs-of-types
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -246,6 +247,21 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-empty A → is-empty B
   is-empty-surjection A↠B ¬A b =
     rec-trunc-Prop empty-Prop (¬A ∘ pr1) (is-surjective-map-surjection A↠B b)
+```
+
+### If a type `A` has a surjection into `B`, `A` and `B` are coinhabited
+
+```agda
+abstract
+  is-coinhabited-surjection :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-coinhabited A B
+  pr1 (is-coinhabited-surjection A↠B) = map-is-inhabited (map-surjection A↠B)
+  pr2 (is-coinhabited-surjection A↠B) |B| =
+    let open do-syntax-trunc-Prop (is-inhabited-Prop _)
+    in do
+      b ← |B|
+      (a , fa=b) ← is-surjective-map-surjection A↠B b
+      unit-trunc-Prop a
 ```
 
 ### Any split surjective map is surjective
