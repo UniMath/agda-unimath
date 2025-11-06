@@ -155,9 +155,9 @@ module _
     is-emb-is-double-negation-stable-emb
       is-double-negation-stable-emb-map-double-negation-stable-emb
 
-  is-double-negation-eliminating-map-double-negation-stable-emb :
+  is-double-negation-eliminating-map-map-double-negation-stable-emb :
     is-double-negation-eliminating-map map-double-negation-stable-emb
-  is-double-negation-eliminating-map-double-negation-stable-emb =
+  is-double-negation-eliminating-map-map-double-negation-stable-emb =
     is-double-negation-eliminating-map-is-double-negation-stable-emb
       is-double-negation-stable-emb-map-double-negation-stable-emb
 

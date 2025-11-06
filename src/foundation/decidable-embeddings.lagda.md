@@ -128,18 +128,18 @@ module _
   map-decidable-emb : X → Y
   map-decidable-emb = pr1 e
 
-  is-decidable-emb-decidable-emb :
+  is-decidable-emb-map-decidable-emb :
     is-decidable-emb map-decidable-emb
-  is-decidable-emb-decidable-emb = pr2 e
+  is-decidable-emb-map-decidable-emb = pr2 e
 
   is-emb-map-decidable-emb : is-emb map-decidable-emb
   is-emb-map-decidable-emb =
-    is-emb-is-decidable-emb is-decidable-emb-decidable-emb
+    is-emb-is-decidable-emb is-decidable-emb-map-decidable-emb
 
-  is-decidable-map-decidable-emb :
+  is-decidable-map-map-decidable-emb :
     is-decidable-map map-decidable-emb
-  is-decidable-map-decidable-emb =
-    is-decidable-map-is-decidable-emb is-decidable-emb-decidable-emb
+  is-decidable-map-map-decidable-emb =
+    is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
 
   emb-decidable-emb : X ↪ Y
   emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
@@ -387,7 +387,7 @@ abstract
       ( is-prop-is-decidable-emb)
       ( map-decidable-emb f)
       ( refl-htpy)
-      ( is-decidable-emb-decidable-emb f)
+      ( is-decidable-emb-map-decidable-emb f)
 
 abstract
   is-equiv-htpy-eq-decidable-emb :
@@ -465,7 +465,7 @@ module _
   decidable-emb-tot : ((x : A) → B x ↪ᵈ C x) → Σ A B ↪ᵈ Σ A C
   decidable-emb-tot f =
     ( tot (λ x → map-decidable-emb (f x)) ,
-      is-decidable-emb-tot (λ x → is-decidable-emb-decidable-emb (f x)))
+      is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x)))
 ```
 
 ### The map on total spaces induced by a decidable embedding on the base is a decidable embedding
@@ -485,7 +485,7 @@ module _
     (f : A ↪ᵈ B) → Σ A (C ∘ map-decidable-emb f) ↪ᵈ Σ B C
   decidable-emb-map-Σ-map-base f =
     ( map-Σ-map-base (map-decidable-emb f) C ,
-      is-decidable-emb-map-Σ-map-base ((is-decidable-emb-decidable-emb f)))
+      is-decidable-emb-map-Σ-map-base ((is-decidable-emb-map-decidable-emb f)))
 ```
 
 ### The functoriality of dependent pair types preserves decidable embeddings
@@ -513,8 +513,8 @@ module _
   decidable-emb-Σ f g =
     ( ( map-Σ D (map-decidable-emb f) (λ x → map-decidable-emb (g x))) ,
       ( is-decidable-emb-map-Σ
-        ( is-decidable-emb-decidable-emb f)
-        ( λ x → is-decidable-emb-decidable-emb (g x))))
+        ( is-decidable-emb-map-decidable-emb f)
+        ( λ x → is-decidable-emb-map-decidable-emb (g x))))
 ```
 
 ### Products of decidable embeddings are decidable embeddings

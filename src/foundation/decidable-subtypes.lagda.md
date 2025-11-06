@@ -168,7 +168,7 @@ module _
     fiber (map-decidable-emb f) y
   pr2 (decidable-subtype-decidable-emb y) =
     is-decidable-prop-map-is-decidable-emb
-      ( is-decidable-emb-decidable-emb f)
+      ( is-decidable-emb-map-decidable-emb f)
       ( y)
 
   compute-type-decidable-subtype-decidable-emb :

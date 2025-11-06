@@ -150,8 +150,8 @@ module _
   is-emb-map-de-morgan-emb =
     is-emb-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
 
-  is-de-morgan-map-de-morgan-emb : is-de-morgan-map map-de-morgan-emb
-  is-de-morgan-map-de-morgan-emb =
+  is-de-morgan-map-map-de-morgan-emb : is-de-morgan-map map-de-morgan-emb
+  is-de-morgan-map-map-de-morgan-emb =
     is-de-morgan-map-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
 
   emb-de-morgan-emb : X ↪ Y
@@ -530,7 +530,7 @@ module _
   de-morgan-emb-Σ f g =
     ( ( map-Σ D (map-decidable-emb f) (map-de-morgan-emb ∘ g)) ,
       ( is-de-morgan-emb-map-Σ
-        ( is-decidable-emb-decidable-emb f)
+        ( is-decidable-emb-map-decidable-emb f)
         ( is-de-morgan-emb-map-de-morgan-emb ∘ g)))
 ```
 

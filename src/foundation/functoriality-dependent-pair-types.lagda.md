@@ -219,10 +219,10 @@ module _
     where
 
     abstract
-      is-contr-map-Σ :
+      is-contr-map-map-Σ :
         is-contr-map f → ((x : A) → is-contr-map (g x)) →
         is-contr-map (map-Σ D f g)
-      is-contr-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
+      is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
 
     abstract
       is-prop-map-map-Σ :
