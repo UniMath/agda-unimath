@@ -303,6 +303,10 @@ abstract
           ( is-zero-limit-reciprocal-rational-succ-ℕ))
 ```
 
+## References
+
+{{#bibliography}}
+
 ## External references
 
 - [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at

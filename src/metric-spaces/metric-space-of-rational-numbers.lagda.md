@@ -386,7 +386,7 @@ uniformly-continuous-neg-ℚ :
 uniformly-continuous-neg-ℚ = (neg-ℚ , is-uniformly-continuous-neg-ℚ)
 ```
 
-### The difference of rational numbers is an isometry
+### Subtracting from a fixed rational number is an isometry
 
 ```agda
 module _
