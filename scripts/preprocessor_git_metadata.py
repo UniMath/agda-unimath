@@ -102,7 +102,7 @@ def get_recent_changes(contributors, *args, recent_changes_count=RECENT_CHANGES_
     return (recent_changes, skipped_authors)
 
 
-def get_author_element_for_file(filename, include_contributors, contributors, contributors_file):
+def get_author_element_for_file(filename, include_contributors, contributors, contributors_file, recent_changes_count):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -150,7 +150,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     modified_date = file_log_output[0]
 
     recent_changes, recent_skipped_authors = get_recent_changes(
-        contributors, '--', filename, recent_changes_count=metadata_config['recent_changes_count'])
+        contributors, '--', filename, recent_changes_count=recent_changes_count)
     skipped_authors.update(recent_skipped_authors)
 
     if skipped_authors:
@@ -202,7 +202,8 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
         any((source_file_name.endswith(ext)
             for ext in config['attribute_file_extensions'])),
         contributors,
-        config['contributors_file'])
+        config['contributors_file'],
+        config['recent_changes_count'])
 
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
