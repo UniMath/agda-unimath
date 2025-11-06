@@ -174,37 +174,37 @@ module _
         ( htpy-map-Ω f g H)
     coherence-point-htpy-map-Ω f'@(f , p) g'@(g , refl) (H , refl) =
       equational-reasoning
-      preserves-refl-tr-Ω (H a∗ ∙ refl)
-      ＝ ap (λ u → tr-type-Ω u refl) right-unit ∙ preserves-refl-tr-Ω (H a∗)
-        by lemma (H a∗)
-      ＝
-        ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
-        ( eq-conjugation-tr-type-Ω (H a∗) refl ∙ left-inv (H a∗))
-        by
-        ap
-          ( (ap (λ u → tr-type-Ω u refl) right-unit) ∙_)
-          ( inv
-            ( is-section-inv-concat'
-              ( left-inv (H a∗))
-              ( preserves-refl-tr-Ω (H a∗))) ∙
-            ap
-              ( _∙ left-inv (H a∗))
-              ( compute-eq-conjugation-tr-type-Ω-refl (H a∗)))
-      ＝
-        ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
-        ( eq-conjugation-tr-type-Ω (H a∗) refl) ∙
-        ( left-inv (H a∗))
-        by
-        inv-assoc
-          ( ap (λ u → tr-type-Ω u refl) right-unit)
-          ( eq-conjugation-tr-type-Ω (H a∗) refl)
+        preserves-refl-tr-Ω (H a∗ ∙ refl)
+        ＝ ap (λ u → tr-type-Ω u refl) right-unit ∙ preserves-refl-tr-Ω (H a∗)
+          by lemma (H a∗)
+        ＝
+          ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
+          ( eq-conjugation-tr-type-Ω (H a∗) refl ∙ left-inv (H a∗))
+          by
+          ap
+            ( (ap (λ u → tr-type-Ω u refl) right-unit) ∙_)
+            ( inv
+              ( is-section-inv-concat'
+                ( left-inv (H a∗))
+                ( preserves-refl-tr-Ω (H a∗))) ∙
+              ap
+                ( _∙ left-inv (H a∗))
+                ( compute-eq-conjugation-tr-type-Ω-refl (H a∗)))
+        ＝
+          ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
+          ( eq-conjugation-tr-type-Ω (H a∗) refl) ∙
           ( left-inv (H a∗))
-      ＝
-        ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
-        ( eq-conjugation-tr-type-Ω (H a∗) refl) ∙
-        ( left-inv (H a∗)) ∙
-        ( refl)
-        by inv right-unit
+          by
+          inv-assoc
+            ( ap (λ u → tr-type-Ω u refl) right-unit)
+            ( eq-conjugation-tr-type-Ω (H a∗) refl)
+            ( left-inv (H a∗))
+        ＝
+          ( ap (λ u → tr-type-Ω u refl) right-unit) ∙
+          ( eq-conjugation-tr-type-Ω (H a∗) refl) ∙
+          ( left-inv (H a∗)) ∙
+          ( refl)
+          by inv right-unit
       where
       lemma :
         {x y : type-Pointed-Type B} (p : x ＝ y) →

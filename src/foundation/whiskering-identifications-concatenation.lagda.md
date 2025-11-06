@@ -83,7 +83,7 @@ module _
     is-equiv-right-whisker-concat
 ```
 
-### Right unwhiskering of identifications is an equivalence
+### Left unwhiskering of identifications is an equivalence
 
 ```agda
 module _
