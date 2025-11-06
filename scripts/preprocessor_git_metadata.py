@@ -148,8 +148,9 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
 
-    recent_changes, skipped_authors = get_recent_changes(
+    recent_changes, recent_skipped_authors = get_recent_changes(
         contributors, '--', filename)
+    skipped_authors.update(recent_skipped_authors)
 
     if skipped_authors:
         print_skipping_contributors_warning(skipped_authors, contributors_file)
