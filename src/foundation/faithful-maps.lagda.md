@@ -107,12 +107,12 @@ module _
 
   is-0-map-is-faithful : is-faithful f → is-0-map f
   is-0-map-is-faithful H =
-    is-trunc-map-succ-is-trunc-map-ap neg-one-𝕋 f
+    is-trunc-map-is-trunc-map-ap neg-one-𝕋 f
       ( λ x y → is-prop-map-is-emb (H x y))
 
   is-faithful-is-0-map : is-0-map f → is-faithful f
   is-faithful-is-0-map H x y =
-    is-emb-is-prop-map (is-trunc-map-ap-is-trunc-map-succ neg-one-𝕋 f H x y)
+    is-emb-is-prop-map (is-trunc-map-ap-is-trunc-map neg-one-𝕋 f H x y)
 ```
 
 ## Properties

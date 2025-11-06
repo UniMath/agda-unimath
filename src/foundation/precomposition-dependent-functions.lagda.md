@@ -232,7 +232,7 @@ is-trunc-map-succ-precomp-Π :
   ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
   is-trunc-map (succ-𝕋 k) (precomp-Π f C)
 is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
-  is-trunc-map-succ-is-trunc-map-ap k (precomp-Π f C)
+  is-trunc-map-is-trunc-map-ap k (precomp-Π f C)
     ( λ g h →
       is-trunc-map-top-is-trunc-map-bottom-is-equiv k
         ( ap (precomp-Π f C))
