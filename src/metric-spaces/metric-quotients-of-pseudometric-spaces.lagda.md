@@ -70,7 +70,7 @@ of a [pseudometric space](metric-spaces.pseudometric-spaces.md) is the
 [metric space](metric-spaces.metric-spaces.md) whose points are
 [quotient classes](foundation.set-quotients.md) of `M` by the
 [similarity relation](metric-spaces.similarity-of-elements-pseudometric-spaces.md)
-and [neighborhoods](metric-spaces.rational-neighborhood-relations.md) given by
+and [neighborhoods](metric-spaces.rational-neighborhood-relations.md) are
 neighborhoods of inhabitants of the quotient classes: two quotient classes `X`,
 `Y` are in a `d`-neighborhood if for all `x ∈ X` and `y ∈ Y`, `x` and `y` are
 `d`-neighbors in the pseudometric space.
@@ -81,8 +81,11 @@ quotient; if `M` is a metric space, this is an
 [isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
 Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
-isometry) from a pseudometric space to a metric space factors as a short map
-(resp. isometry) through the metric quotient of its domain.
+isometry) from a pseudometric space to a metric space factors uniquely as a
+short map (resp. isometry) through the metric quotient of its domain. This is
+the
+{{#concept "universal property" Disambiguation="of the metric space quotient of a pseudometric space"}}
+of the metric space quotient.
 
 ## Definitions
 
@@ -296,7 +299,7 @@ module _
   abstract
     is-tight-pseudometric-metric-quotient-Pseudometric-Space :
       is-tight-Pseudometric-Space
-        (pseudometric-metric-quotient-Pseudometric-Space M)
+        ( pseudometric-metric-quotient-Pseudometric-Space M)
     is-tight-pseudometric-metric-quotient-Pseudometric-Space X Y X~Y =
       let
         open
@@ -592,7 +595,7 @@ module _
           ( metric-quotient-Pseudometric-Space M)))
 ```
 
-### Induced short function from the quotient metric space into a metric space
+### The induced short function from the quotient metric space into a metric space
 
 ```agda
 module _

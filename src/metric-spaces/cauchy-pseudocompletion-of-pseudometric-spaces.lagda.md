@@ -794,7 +794,7 @@ module _
       is-short-map-short-function-cauchy-approximation-Pseudometric-Space)
 ```
 
-### The pointwise image of a Cauchy approximation in a pseudometric space by the inclusion in its Cauchy pseudocompletion is convergent
+### The image of a Cauchy approximation in the Cauchy pseudocompletion is convergent
 
 ```agda
 module _

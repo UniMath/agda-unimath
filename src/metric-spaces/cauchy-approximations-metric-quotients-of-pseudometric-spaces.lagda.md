@@ -75,7 +75,7 @@ by the
 of the [pseudometric space](metric-spaces.pseudometric-spaces.md) are Cauchy
 approximations in the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md). A
-Cauchy approximation in a the metric quotient of a pseudometric space has a
+Cauchy approximation in the metric quotient of a pseudometric space has a
 {{#concept "lift up to similarity" Agda=has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space}}
 if it is similar (in the
 [Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md)
