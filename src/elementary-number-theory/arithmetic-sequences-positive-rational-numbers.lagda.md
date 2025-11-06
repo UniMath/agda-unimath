@@ -153,7 +153,7 @@ module _
     compute-standard-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       ( ap
         ( add-ℚ (rational-ℚ⁺ a))
-        ( ( ap (mul-ℚ' (rational-ℚ⁺ d)) (inv (succ-rational-int-ℕ n))) ∙
+        ( ( ap (mul-ℚ' (rational-ℚ⁺ d)) (inv (succ-rational-ℕ n))) ∙
           ( mul-left-succ-ℚ (rational-ℕ n) (rational-ℚ⁺ d)) ∙
           ( commutative-add-ℚ
             ( rational-ℚ⁺ d)

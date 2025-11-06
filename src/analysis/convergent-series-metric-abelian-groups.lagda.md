@@ -39,6 +39,15 @@ module _
   {l1 l2 : Level} (G : Metric-Ab l1 l2) (σ : series-Metric-Ab G)
   where
 
+  is-sum-prop-series-Metric-Ab : type-Metric-Ab G → Prop l2
+  is-sum-prop-series-Metric-Ab =
+    is-limit-prop-sequence-Metric-Space
+      ( metric-space-Metric-Ab G)
+      ( partial-sum-series-Metric-Ab G σ)
+
+  is-sum-series-Metric-Ab : type-Metric-Ab G → UU l2
+  is-sum-series-Metric-Ab s = type-Prop (is-sum-prop-series-Metric-Ab s)
+
   is-convergent-prop-series-Metric-Ab : Prop (l1 ⊔ l2)
   is-convergent-prop-series-Metric-Ab =
     subtype-convergent-sequence-Metric-Space

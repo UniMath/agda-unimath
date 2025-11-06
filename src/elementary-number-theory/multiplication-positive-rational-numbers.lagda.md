@@ -28,10 +28,10 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

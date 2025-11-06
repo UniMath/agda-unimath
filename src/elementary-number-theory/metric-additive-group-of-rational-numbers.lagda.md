@@ -7,16 +7,17 @@ module elementary-number-theory.metric-additive-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import metric-spaces.metric-space-of-rational-numbers
-open import metric-spaces.metric-spaces
 open import analysis.metric-abelian-groups
+
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.addition-rational-numbers
+
 open import foundation.dependent-pair-types
-open import elementary-number-theory.isometry-addition-rational-numbers
 open import foundation.universe-levels
-open import elementary-number-theory.isometry-negation-rational-numbers
+
+open import metric-spaces.metric-space-of-rational-numbers
+open import metric-spaces.metric-spaces
 ```
 
 </details>

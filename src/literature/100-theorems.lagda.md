@@ -46,6 +46,15 @@ open import foundation.cantor-schroder-bernstein-decidable-embeddings using
   ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
+### 42. Sum of the Reciprocals of the Triangular Numbers
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.triangular-numbers using
+  ( sum-reciprocal-triangular-number-ℕ)
+```
+
 ### 44. The binomial theorem {#44}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)

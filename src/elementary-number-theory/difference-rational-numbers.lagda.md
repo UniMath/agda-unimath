@@ -187,3 +187,19 @@ abstract
       ＝ rational-ℤ (x -ℤ y)
         by add-rational-ℤ x (neg-ℤ y)
 ```
+
+### The difference of the successor of a rational number and the rational number is one
+
+```agda
+abstract
+  diff-succ-ℚ : (q : ℚ) → succ-ℚ q -ℚ q ＝ one-ℚ
+  diff-succ-ℚ q =
+    equational-reasoning
+      (one-ℚ +ℚ q) -ℚ q
+      ＝ one-ℚ +ℚ (q -ℚ q)
+        by associative-add-ℚ _ _ _
+      ＝ one-ℚ +ℚ zero-ℚ
+        by ap-add-ℚ refl (right-inverse-law-add-ℚ q)
+      ＝ one-ℚ
+        by right-unit-law-add-ℚ _
+```
