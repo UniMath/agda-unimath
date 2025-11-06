@@ -25,7 +25,7 @@ open import ring-theory.large-rings
 
 ## Idea
 
-A {{#concept "large commutative ring" Agda=Large-Ring}} is a
+A {{#concept "large commutative ring" Agda=Large-Commutative-Ring}} is a
 [large ring](ring-theory.large-rings.md) with a commutative multiplicative
 operation.
 
