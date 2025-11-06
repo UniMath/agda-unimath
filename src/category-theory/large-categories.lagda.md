@@ -55,6 +55,9 @@ is-large-category-Large-Precategory C =
 record
   Large-Category (α : Level → Level) (β : Level → Level → Level) : UUω
   where
+
+  eta-equality
+
   constructor
     make-Large-Category
 

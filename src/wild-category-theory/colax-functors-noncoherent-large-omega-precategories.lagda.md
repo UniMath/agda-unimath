@@ -209,6 +209,8 @@ record
   (ℬ : Noncoherent-Large-ω-Precategory α2 β2) : UUω
   where
 
+  eta-equality
+
   constructor
     make-colax-functor-Noncoherent-Large-ω-Precategory
 ```

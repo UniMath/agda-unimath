@@ -73,6 +73,8 @@ record
     (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
 
+  eta-equality
+
   field
     reflexive-globular-type-Discrete-Reflexive-Globular-Type :
       Reflexive-Globular-Type l1 l2
