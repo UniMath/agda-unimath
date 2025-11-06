@@ -365,7 +365,7 @@ module _
 ```
 
 ### The operator `pointed-map-Ω` preserves equivalences
- 
+
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
