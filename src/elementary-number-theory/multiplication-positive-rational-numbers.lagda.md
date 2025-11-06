@@ -298,6 +298,14 @@ abstract
       ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
 ```
 
+### `2q = q + q`
+
+```agda
+abstract
+  mul-two-ℚ⁺ : (q : ℚ⁺) → two-ℚ⁺ *ℚ⁺ q ＝ q +ℚ⁺ q
+  mul-two-ℚ⁺ (q , _) = eq-ℚ⁺ (mul-two-ℚ q)
+```
+
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
 
 ```agda
