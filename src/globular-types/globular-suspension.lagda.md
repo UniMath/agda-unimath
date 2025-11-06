@@ -28,7 +28,7 @@ of a [globular type](globular-types.globular-types.md) `G` is a globular type
 
 ## Definition
 
-### The suspension of globular sets of a fixed universe level `l1`
+### The suspension of globular types of a fixed universe level `l1`
 
 Note: Allowing globular types with separate universe levels for 0-cells and
 higher cells complicates the definition of suspension.
