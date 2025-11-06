@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -150,27 +151,36 @@ module _
   pr2 equiv-raise = is-equiv-map-equiv-raise
 ```
 
-### Raising universe levels from `l1` to `l ⊔ l1` is an embedding from `UU l1` to `UU (l ⊔ l1)`
+### Raising universe levels from `l1` to `l1 ⊔ l2` is an embedding from `UU l1` to `UU (l1 ⊔ l2)`
 
 ```agda
-abstract
-  is-emb-raise : (l : Level) {l1 : Level} → is-emb (raise l {l1})
-  is-emb-raise l {l1} =
-    is-emb-is-prop-map
-      ( λ X →
-        is-prop-is-proof-irrelevant
-          ( λ (A , p) →
-            is-contr-equiv
-              ( Σ (UU l1) (λ A' → A' ≃ A))
-              ( equiv-tot
-                ( λ A' →
-                  ( equiv-postcomp-equiv (inv-equiv (compute-raise l A)) A') ∘e
-                  ( equiv-precomp-equiv (compute-raise l A') (raise l A)) ∘e
-                  ( equiv-univalence) ∘e
-                  ( equiv-concat' (raise l A') (inv p))))
-              ( is-torsorial-equiv' A)))
+module _
+  (l2 : Level) {l1 : Level}
+  where
 
-emb-raise : (l : Level) {l1 : Level} → UU l1 ↪ UU (l1 ⊔ l)
-pr1 (emb-raise l) = raise l
-pr2 (emb-raise l) = is-emb-raise l
+  abstract
+    is-proof-irrelevant-map-raise :
+      (X : UU (l1 ⊔ l2)) → is-proof-irrelevant (fiber (raise l2 {l1}) X)
+    is-proof-irrelevant-map-raise X (A , p) =
+      is-contr-equiv
+        ( Σ (UU l1) (λ A' → A' ≃ A))
+        ( equiv-tot
+          ( λ A' →
+            ( equiv-postcomp-equiv (inv-compute-raise l2 A) A') ∘e
+            ( equiv-precomp-equiv (compute-raise l2 A') (raise l2 A)) ∘e
+            ( equiv-univalence) ∘e
+            ( equiv-concat' (raise l2 A') (inv p))))
+        ( is-torsorial-equiv' A)
+
+  abstract
+    is-prop-map-raise : is-prop-map (raise l2 {l1})
+    is-prop-map-raise X =
+      is-prop-is-proof-irrelevant (is-proof-irrelevant-map-raise X)
+
+  abstract
+    is-emb-raise : is-emb (raise l2 {l1})
+    is-emb-raise = is-emb-is-prop-map is-prop-map-raise
+
+  emb-raise : UU l1 ↪ UU (l1 ⊔ l2)
+  emb-raise = (raise l2 , is-emb-raise)
 ```

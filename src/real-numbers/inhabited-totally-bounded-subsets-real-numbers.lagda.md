@@ -19,13 +19,14 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
@@ -155,8 +156,11 @@ module _
     net δ =
       im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( inhabited-finitely-enumerable-subtype-net-Metric-Space
-          ( metric-space-subset-ℝ S) |S| δ (M δ))
+        ( inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space
+          ( metric-space-subset-ℝ S)
+          ( δ)
+          ( M δ)
+          ( |S|))
 
     is-net :
       (δ : ℚ⁺) →
@@ -397,6 +401,23 @@ module _
     has-infimum-inhabited-totally-bounded-subset-ℝ =
       ( inf-inhabited-totally-bounded-subset-ℝ ,
         is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
+```
+
+### Any totally bounded subset of `ℝ` is propositionally decidable
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    is-inhabited-or-empty-totally-bounded-subset-ℝ :
+      is-inhabited-or-empty (type-totally-bounded-subset-ℝ S)
+    is-inhabited-or-empty-totally-bounded-subset-ℝ =
+      is-inhabited-or-empty-totally-bounded-subspace-Metric-Space
+        ( metric-space-ℝ l2)
+        ( S)
 ```
 
 ### The infimum of an inhabited totally bounded subset of `ℝ` is less than or equal to the supremum
