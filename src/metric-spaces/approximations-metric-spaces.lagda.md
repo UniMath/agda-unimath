@@ -10,10 +10,12 @@ module metric-spaces.approximations-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-products-subtypes
+open import foundation.coinhabited-pairs-of-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.images
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
@@ -92,6 +94,11 @@ module _
   type-approximation-Metric-Space : UU (l1 ⊔ l3)
   type-approximation-Metric-Space =
     type-subtype subset-approximation-Metric-Space
+
+  inclusion-approximation-Metric-Space :
+    type-approximation-Metric-Space → type-Metric-Space X
+  inclusion-approximation-Metric-Space =
+    inclusion-subtype subset-approximation-Metric-Space
 
   is-approximation-approximation-Metric-Space :
     is-approximation-Metric-Space X ε subset-approximation-Metric-Space
@@ -243,24 +250,31 @@ module _
       is-approximation-im-isometric-equiv-approximation-Metric-Space)
 ```
 
-### If a metric space is inhabited, so is any approximation
+### A metric space and any approximation of it are coinhabited
+
+A metric space is inhabited if and only if any approximation of it is inhabited.
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (X : Metric-Space l1 l2) (|X| : is-inhabited (type-Metric-Space X))
-  (ε : ℚ⁺) (S : subset-Metric-Space l3 X)
+  {l1 l2 l3 : Level} (X : Metric-Space l1 l2) (ε : ℚ⁺)
+  (S : approximation-Metric-Space l3 X ε)
   where
 
   abstract
-    is-inhabited-is-approximation-inhabited-Metric-Space :
-      is-approximation-Metric-Space X ε S →
-      is-inhabited-subtype S
-    is-inhabited-is-approximation-inhabited-Metric-Space is-approx =
-      let open do-syntax-trunc-Prop (is-inhabited-subtype-Prop S)
+    is-coinhabited-approximation-Metric-Space :
+      is-coinhabited
+        ( type-approximation-Metric-Space X ε S)
+        ( type-Metric-Space X)
+    pr1 is-coinhabited-approximation-Metric-Space =
+      map-is-inhabited (inclusion-approximation-Metric-Space X ε S)
+    pr2 is-coinhabited-approximation-Metric-Space |X| =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-inhabited-Prop (type-approximation-Metric-Space X ε S))
       in do
         x ← |X|
-        (s , Nεsx) ← is-approx x
+        (s , _) ← is-approximation-approximation-Metric-Space X ε S x
         unit-trunc-Prop s
 ```
 
