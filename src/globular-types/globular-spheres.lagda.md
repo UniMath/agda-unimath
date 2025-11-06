@@ -25,7 +25,7 @@ open import globular-types.globular-types
 ## Idea
 
 The
-{{#concept "globular `n`-sphere" Disambiguation="globular type" Agda=globular-disk}}
+{{#concept "globular `n`-sphere" Disambiguation="globular type" Agda=globular-sphere}}
 is a [globular type](globular-types.globular-types.md) defined by iterated
 [globular suspension](globular-types.globular-suspension.md) of the
 [empty globular type](globular-types.empty-globular-types.md).

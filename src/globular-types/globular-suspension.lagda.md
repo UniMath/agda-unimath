@@ -20,7 +20,7 @@ open import globular-types.globular-types
 ## Idea
 
 The
-{{#concept "globular suspension" Disambiguation="globular type" Agda="suspension-Globular-Type}}
+{{#concept "globular suspension" Disambiguation="globular type" Agda=suspension-Globular-Type}}
 of a [globular type](globular-types.globular-types.md) `G` is a globular type
 `ΣG` with exactly two `0`-cells called north and south, and a
 [globular map](globular-types.globular-maps.md) from G to the globular type of
