@@ -766,6 +766,23 @@ abstract
           ( pr2 (has-finite-cardinality-is-finite H)))
 ```
 
+### The finite types are propositionally decidable
+
+```agda
+module _
+  {l : Level} (X : Finite-Type l)
+  where
+
+  is-inhabited-or-empty-type-Finite-Type :
+    is-inhabited-or-empty (type-Finite-Type X)
+  is-inhabited-or-empty-type-Finite-Type =
+    rec-trunc-Prop
+      ( is-inhabited-or-empty-Prop (type-Finite-Type X))
+      ( λ (n , Fin-n≃X) →
+        is-inhabited-or-empty-equiv' Fin-n≃X (is-inhabited-or-empty-Fin n))
+      ( is-finite-type-Finite-Type X)
+```
+
 ## External links
 
 - [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),
