@@ -53,7 +53,7 @@ module _
   map-conjugation-∞-Group = map-hom-∞-Group G G conjugation-∞-Group
 
   compute-map-conjugation-∞-Group :
-    map-conjugation-Ω g ~ map-conjugation-∞-Group
+    conjugation-type-Ω g ~ map-conjugation-∞-Group
   compute-map-conjugation-∞-Group =
     htpy-compute-action-on-loops-conjugation-Pointed-Type
       ( g)

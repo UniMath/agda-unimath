@@ -256,7 +256,7 @@ module _
               ( equational-reasoning
                 p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
                 ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-int-ℕ n)))
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-ℕ n)))
                 ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
                   by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
                 ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε

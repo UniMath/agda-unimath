@@ -27,7 +27,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The power operation on a ring is the map `n x ↦ xⁿ`, which is defined by
+The {{#concept "power operation" Disambiguation="on a ring" Agda=power-Ring}} on
+a [ring](ring-theory.rings.md) is the map `n x ↦ xⁿ`, which is defined by
 iteratively multiplying `x` with itself `n` times.
 
 ## Definition

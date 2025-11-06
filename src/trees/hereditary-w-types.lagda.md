@@ -26,7 +26,7 @@ open import trees.binary-w-types
 ## Idea
 
 Consider a type `A` and two type families `B` and `C` over `A`. Then we obtain
-the polynomial functor
+the [polynomial functor](trees.multivariable-polynomial-functors.md)
 
 ```text
   X Y ↦ Σ (a : A), (B a → X) × (C a → Y)

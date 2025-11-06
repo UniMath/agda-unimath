@@ -61,7 +61,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, a
+$P ≐ (A \mathbin{◃} B)$ and $Q ≐ (C \mathbin{◃} D)$, a
 [morphism](trees.morphisms-polynomial-endofunctors.md) $α : P → Q$ is
 {{#concept "cartesian" Disambiguation="morphism of polynomial endofunctors of types" Agda=is-cartesian-hom-polynomial-endofunctor Agda=cartesian-hom-polynomial-endofunctor}}
 if the family of maps
