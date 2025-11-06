@@ -500,6 +500,12 @@ module _
     htpy-map-inv-is-invertible H
       ( is-invertible-is-equiv F)
       ( is-invertible-is-equiv G)
+
+is-equiv-htpy-id : {l : Level} {A : UU l} {f : A → A} → f ~ id → is-equiv f
+is-equiv-htpy-id H = is-equiv-htpy id H is-equiv-id
+
+is-equiv-htpy-id' : {l : Level} {A : UU l} {f : A → A} → id ~ f → is-equiv f
+is-equiv-htpy-id' H = is-equiv-htpy' id H is-equiv-id
 ```
 
 ### Any retraction of an equivalence is an equivalence
