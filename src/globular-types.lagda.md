@@ -11,6 +11,7 @@ module globular-types where
 
 open import globular-types.base-change-dependent-globular-types public
 open import globular-types.base-change-dependent-reflexive-globular-types public
+open import globular-types.batanin-systems-globular-types public
 open import globular-types.binary-dependent-globular-types public
 open import globular-types.binary-dependent-reflexive-globular-types public
 open import globular-types.binary-globular-maps public
@@ -28,8 +29,13 @@ open import globular-types.empty-globular-types public
 open import globular-types.equality-globular-types public
 open import globular-types.exponentials-globular-types public
 open import globular-types.fibers-globular-maps public
+open import globular-types.globular-disks public
 open import globular-types.globular-equivalences public
 open import globular-types.globular-maps public
+open import globular-types.globular-pasting-diagrams public
+open import globular-types.globular-pasting-schemes public
+open import globular-types.globular-spheres public
+open import globular-types.globular-suspension public
 open import globular-types.globular-types public
 open import globular-types.large-colax-reflexive-globular-maps public
 open import globular-types.large-colax-transitive-globular-maps public
