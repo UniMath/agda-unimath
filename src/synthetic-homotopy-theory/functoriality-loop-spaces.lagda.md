@@ -15,6 +15,8 @@ open import foundation.faithful-maps
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.truncated-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
@@ -75,6 +77,30 @@ module _
     ( preserves-inv-tr-Ω
       ( preserves-point-pointed-map f)
       ( ap (map-pointed-map f) x))
+```
+
+### (𝑛+1)-truncated pointed maps induce 𝑛-truncated maps on loop spaces
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : Pointed-Type l1} {B : Pointed-Type l2}
+  where
+
+  is-trunc-map-map-Ω :
+    (f : A →∗ B) →
+    is-trunc-map (succ-𝕋 k) (map-pointed-map f) →
+    is-trunc-map k (map-Ω f)
+  is-trunc-map-map-Ω f H =
+    is-trunc-map-comp k
+      ( tr-type-Ω (preserves-point-pointed-map f))
+      ( ap (map-pointed-map f))
+      ( is-trunc-map-is-equiv k
+        ( is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
+      ( is-trunc-map-ap-is-trunc-map k
+        ( map-pointed-map f)
+        ( H)
+        ( point-Pointed-Type A)
+        ( point-Pointed-Type A))
 ```
 
 ### Faithful pointed maps induce embeddings on loop spaces
