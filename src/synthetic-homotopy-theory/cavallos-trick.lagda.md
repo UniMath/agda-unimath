@@ -39,7 +39,7 @@ unpointed [homotopy](foundation.homotopies.md) between
 Originally, this trick was formulated by [Evan Cavallo](https://ecavallo.net/)
 for homogeneous spaces, but it works as soon as the evaluation map
 `(id ~ id) → Ω B` has a [section](foundation-core.sections.md). This
-generalization was found by Buchholtz, Christensen, Rijke, and Taxerås Flaten,
+generalization was found by Buchholtz, Christensen, Taxerås Flaten, and Rijke,
 and appears as Lemma 2.7 (2)⇒(3) in {{#cite BCFR23}}.
 
 ## Theorem
@@ -67,14 +67,14 @@ module _
     htpy-cavallos-trick f g s H a∗
   compute-htpy-cavallos-trick (f , refl) (g , q) (K , α) H =
     equational-reasoning
-    inv q
-    ＝ inv q ∙ inv (H a∗) ∙ H a∗
-      by inv (is-section-inv-concat' (H a∗) (inv q))
-    ＝ K (inv q ∙ inv (H a∗) ∙ refl) b∗ ∙ H a∗
-      by
-      right-whisker-concat
-        ( inv (α (inv q ∙ inv (H a∗) ∙ refl) ∙ right-unit))
-        ( H a∗)
+      inv q
+      ＝ inv q ∙ inv (H a∗) ∙ H a∗
+        by inv (is-section-inv-concat' (H a∗) (inv q))
+      ＝ K (inv q ∙ inv (H a∗) ∙ refl) b∗ ∙ H a∗
+        by
+        right-whisker-concat
+          ( inv (α (inv q ∙ inv (H a∗) ∙ refl) ∙ right-unit))
+          ( H a∗)
 
   coherence-point-cavallos-trick :
     (f g : A →∗ B) (s : section (λ (H : id ~ id) → H b∗)) →
@@ -83,14 +83,14 @@ module _
       ( htpy-cavallos-trick f g s H)
   coherence-point-cavallos-trick (f , p) (g , q) (K , α) H =
     equational-reasoning
-    p
-    ＝ p ∙ inv q ∙ q
-      by inv (is-section-inv-concat' q p)
-    ＝ K (inv q ∙ inv (H a∗) ∙ p) (f a∗) ∙ H a∗ ∙ q
-      by
-      right-whisker-concat
-        ( compute-htpy-cavallos-trick (f , p) (g , q) (K , α) H)
-        ( q)
+      p
+      ＝ p ∙ inv q ∙ q
+        by inv (is-section-inv-concat' q p)
+      ＝ K (inv q ∙ inv (H a∗) ∙ p) (f a∗) ∙ H a∗ ∙ q
+        by
+        right-whisker-concat
+          ( compute-htpy-cavallos-trick (f , p) (g , q) (K , α) H)
+          ( q)
 
   cavallos-trick :
     (f g : A →∗ B) → section (λ (H : id ~ id) → H b∗) →
