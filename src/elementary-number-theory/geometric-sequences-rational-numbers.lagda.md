@@ -197,6 +197,8 @@ module _
                   ( refl))
 ```
 
+### If `|r| < 1`, the sum of the standard geometric sequence `n ↦ arⁿ` is `a/(1-r)`
+
 ## External links
 
 - [Geometric progressions](https://en.wikipedia.org/wiki/Geometric_progression)

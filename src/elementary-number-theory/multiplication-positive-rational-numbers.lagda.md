@@ -28,6 +28,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -107,6 +108,10 @@ mul-ℚ⁺ = mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
+
+ap-mul-ℚ⁺ :
+  {x x' : ℚ⁺} → x ＝ x' → {y y' : ℚ⁺} → y ＝ y' → mul-ℚ⁺ x y ＝ mul-ℚ⁺ x' y'
+ap-mul-ℚ⁺ = ap-binary mul-ℚ⁺
 ```
 
 ## Properties
