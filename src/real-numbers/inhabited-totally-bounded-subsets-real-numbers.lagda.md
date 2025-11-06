@@ -403,7 +403,7 @@ module _
         is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
 ```
 
-### It is decidable whether a totally bounded subset of `ℝ` is inhabited
+### Any totally bounded subset of `ℝ` is propositionally decidable
 
 ```agda
 module _

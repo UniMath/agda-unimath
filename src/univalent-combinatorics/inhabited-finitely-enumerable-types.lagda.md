@@ -7,10 +7,8 @@ module univalent-combinatorics.inhabited-finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -25,10 +23,7 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import logic.propositionally-decidable-types
-
 open import univalent-combinatorics.finitely-enumerable-types
-open import univalent-combinatorics.inhabited-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

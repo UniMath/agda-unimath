@@ -8,18 +8,12 @@ module univalent-combinatorics.inhabited-finite-types where
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.decidable-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.subuniverses
@@ -29,7 +23,6 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
