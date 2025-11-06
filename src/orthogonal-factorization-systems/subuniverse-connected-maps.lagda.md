@@ -495,30 +495,30 @@ module _
       ( refl-htpy-subuniverse-connected-map f)
       ( is-subuniverse-connected-map-subuniverse-connected-map K f)
 
-  htpy-eq-connected-map :
+  htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     f ＝ g → htpy-subuniverse-connected-map f g
-  htpy-eq-connected-map f .f refl = refl-htpy-subuniverse-connected-map f
+  htpy-eq-subuniverse-connected-map f .f refl = refl-htpy-subuniverse-connected-map f
 
-  is-equiv-htpy-eq-connected-map :
+  is-equiv-htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
-    is-equiv (htpy-eq-connected-map f g)
-  is-equiv-htpy-eq-connected-map f =
+    is-equiv (htpy-eq-subuniverse-connected-map f g)
+  is-equiv-htpy-eq-subuniverse-connected-map f =
     fundamental-theorem-id
       ( is-torsorial-htpy-subuniverse-connected-map f)
-      ( htpy-eq-connected-map f)
+      ( htpy-eq-subuniverse-connected-map f)
 
-  extensionality-connected-map :
+  extensionality-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     (f ＝ g) ≃ htpy-subuniverse-connected-map f g
-  pr1 (extensionality-connected-map f g) = htpy-eq-connected-map f g
-  pr2 (extensionality-connected-map f g) = is-equiv-htpy-eq-connected-map f g
+  pr1 (extensionality-subuniverse-connected-map f g) = htpy-eq-subuniverse-connected-map f g
+  pr2 (extensionality-subuniverse-connected-map f g) = is-equiv-htpy-eq-subuniverse-connected-map f g
 
   eq-htpy-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     htpy-subuniverse-connected-map f g → (f ＝ g)
   eq-htpy-subuniverse-connected-map f g =
-    map-inv-equiv (extensionality-connected-map f g)
+    map-inv-equiv (extensionality-subuniverse-connected-map f g)
 ```
 
 ### All maps are `Contr`-connected
