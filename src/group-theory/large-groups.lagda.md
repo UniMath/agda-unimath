@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -73,6 +74,11 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
 
   unit-Large-Group : type-Large-Group lzero
   unit-Large-Group = unit-Large-Monoid large-monoid-Large-Group
+
+  large-similarity-relation-Large-Group :
+    Large-Similarity-Relation β type-Large-Group
+  large-similarity-relation-Large-Group =
+    large-similarity-relation-Large-Monoid large-monoid-Large-Group
 
   sim-prop-Large-Group : Large-Relation-Prop β type-Large-Group
   sim-prop-Large-Group = sim-prop-Large-Monoid large-monoid-Large-Group
