@@ -31,6 +31,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -107,6 +108,10 @@ mul-ℚ⁺ = mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
+
+ap-mul-ℚ⁺ :
+  {x x' : ℚ⁺} → x ＝ x' → {y y' : ℚ⁺} → y ＝ y' → mul-ℚ⁺ x y ＝ mul-ℚ⁺ x' y'
+ap-mul-ℚ⁺ = ap-binary mul-ℚ⁺
 ```
 
 ## Properties
@@ -291,6 +296,14 @@ abstract
       ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
       ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
       ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+```
+
+### `2q = q + q`
+
+```agda
+abstract
+  mul-two-ℚ⁺ : (q : ℚ⁺) → two-ℚ⁺ *ℚ⁺ q ＝ q +ℚ⁺ q
+  mul-two-ℚ⁺ (q , _) = eq-ℚ⁺ (mul-two-ℚ q)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map

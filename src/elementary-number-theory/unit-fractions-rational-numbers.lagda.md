@@ -22,6 +22,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-integers
@@ -298,4 +299,14 @@ module _
         ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
         ( rational-ℤ (numerator-ℚ x))) ∙
       ( eq-mul-numerator-reciprocal-denominator-ℚ)
+```
+
+### The difference of `1/n` and `1/(n+1)` is `1/(n(n+1))`
+
+```agda
+abstract
+  difference-succ-reciprocal-ℕ⁺ :
+    (n : ℕ⁺) →
+    reciprocal-rational-ℕ⁺ n -ℚ reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n) ＝
+    reciprocal-rational-ℕ⁺ (n *ℕ⁺ succ-ℕ⁺ n)
 ```
