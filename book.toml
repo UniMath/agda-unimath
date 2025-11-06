@@ -49,12 +49,14 @@ suppress_processing = [
   "docs/ART.md",
   "docs/CONTRIBUTORS.md",
   "docs/GRANT-ACKNOWLEDGMENTS.md",
-  "docs/HOME.md",
   "docs/MAINTAINERS.md",
   "docs/PROJECTS.md",
   "docs/STATEMENT-OF-INCLUSIVITY.md",
   "docs/SUMMARY.md",
   "docs/VISUALIZATION.md"
+]
+sitewide_changes = [
+  "docs/HOME.md"
 ]
 
 [preprocessor.concepts]

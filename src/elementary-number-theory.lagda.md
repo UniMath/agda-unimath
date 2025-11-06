@@ -123,6 +123,7 @@ open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
+open import elementary-number-theory.metric-additive-group-of-rational-numbers public
 open import elementary-number-theory.minima-and-maxima-rational-numbers public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-positive-rational-numbers public
