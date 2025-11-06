@@ -19,6 +19,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -168,6 +169,26 @@ module _
     A ↔ B → is-inhabited-or-empty A ↔ is-inhabited-or-empty B
   iff-is-inhabited-or-empty e =
     is-inhabited-or-empty-iff' e , is-inhabited-or-empty-iff' (inv-iff e)
+```
+
+### Propositionally decidable types are closed under surjections
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-inhabited-or-empty-surjection :
+      (A ↠ B) → is-inhabited-or-empty A → is-inhabited-or-empty B
+    is-inhabited-or-empty-surjection A↠B =
+      is-inhabited-or-empty-is-coinhabited (is-coinhabited-surjection A↠B)
+
+    is-inhabited-or-empty-surjection' :
+      (A ↠ B) → is-inhabited-or-empty B → is-inhabited-or-empty A
+    is-inhabited-or-empty-surjection' A↠B =
+      is-inhabited-or-empty-is-coinhabited
+        ( is-symmetric-is-coinhabited (is-coinhabited-surjection A↠B))
 ```
 
 ### Propositionally decidable types are closed under retracts
