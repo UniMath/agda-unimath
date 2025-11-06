@@ -30,7 +30,7 @@ open import real-numbers.similarity-real-numbers
 ## Idea
 
 The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
-[large commutative mopnoid](group-theory.large-commutative-monoids.md) under
+[large commutative monoid](group-theory.large-commutative-monoids.md) under
 [multiplication](real-numbers.multiplication-real-numbers.md).
 
 ## Definition
@@ -43,7 +43,7 @@ large-semigroup-mul-ℝ =
     ( mul-ℝ)
     ( associative-mul-ℝ)
 
-large-monoid-mul-ℝ : Large-Monoid lsuc _⊔_
+large-monoid-mul-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-mul-ℝ =
   make-Large-Monoid
     ( large-semigroup-mul-ℝ)
@@ -55,7 +55,7 @@ large-monoid-mul-ℝ =
     ( left-unit-law-mul-ℝ)
     ( right-unit-law-mul-ℝ)
 
-large-commutative-monoid-mul-ℝ : Large-Commutative-Monoid lsuc _⊔_
+large-commutative-monoid-mul-ℝ : Large-Commutative-Monoid lsuc (_⊔_)
 large-commutative-monoid-mul-ℝ =
   make-Large-Commutative-Monoid
     ( large-monoid-mul-ℝ)
