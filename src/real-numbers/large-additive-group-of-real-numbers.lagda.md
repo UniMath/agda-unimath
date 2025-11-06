@@ -44,7 +44,7 @@ large-semigroup-add-ℝ =
     ( add-ℝ)
     ( associative-add-ℝ)
 
-large-monoid-add-ℝ : Large-Monoid lsuc _⊔_
+large-monoid-add-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℝ =
   make-Large-Monoid
     ( large-semigroup-add-ℝ)
@@ -56,13 +56,13 @@ large-monoid-add-ℝ =
     ( left-unit-law-add-ℝ)
     ( right-unit-law-add-ℝ)
 
-large-commutative-monoid-add-ℝ : Large-Commutative-Monoid lsuc _⊔_
+large-commutative-monoid-add-ℝ : Large-Commutative-Monoid lsuc (_⊔_)
 large-commutative-monoid-add-ℝ =
   make-Large-Commutative-Monoid
     ( large-monoid-add-ℝ)
     ( commutative-add-ℝ)
 
-large-group-add-ℝ : Large-Group lsuc _⊔_
+large-group-add-ℝ : Large-Group lsuc (_⊔_)
 large-group-add-ℝ =
   make-Large-Group
     ( large-monoid-add-ℝ)
@@ -71,7 +71,7 @@ large-group-add-ℝ =
     ( eq-left-inverse-law-add-ℝ)
     ( eq-right-inverse-law-add-ℝ)
 
-large-ab-add-ℝ : Large-Ab lsuc _⊔_
+large-ab-add-ℝ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℝ =
   make-Large-Ab
     ( large-group-add-ℝ)

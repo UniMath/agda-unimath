@@ -33,7 +33,7 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ## Definition
 
 ```agda
-large-ring-ℝ : Large-Ring lsuc _⊔_
+large-ring-ℝ : Large-Ring lsuc (_⊔_)
 large-ring-ℝ =
   make-Large-Ring
     ( large-ab-add-ℝ)
@@ -46,7 +46,7 @@ large-ring-ℝ =
     ( left-distributive-mul-add-ℝ)
     ( right-distributive-mul-add-ℝ)
 
-large-commutative-ring-ℝ : Large-Commutative-Ring lsuc _⊔_
+large-commutative-ring-ℝ : Large-Commutative-Ring lsuc (_⊔_)
 large-commutative-ring-ℝ =
   make-Large-Commutative-Ring
     ( large-ring-ℝ)
