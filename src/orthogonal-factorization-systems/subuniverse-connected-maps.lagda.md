@@ -498,7 +498,8 @@ module _
   htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     f ＝ g → htpy-subuniverse-connected-map f g
-  htpy-eq-subuniverse-connected-map f .f refl = refl-htpy-subuniverse-connected-map f
+  htpy-eq-subuniverse-connected-map f .f refl =
+    refl-htpy-subuniverse-connected-map f
 
   is-equiv-htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
@@ -511,8 +512,10 @@ module _
   extensionality-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     (f ＝ g) ≃ htpy-subuniverse-connected-map f g
-  pr1 (extensionality-subuniverse-connected-map f g) = htpy-eq-subuniverse-connected-map f g
-  pr2 (extensionality-subuniverse-connected-map f g) = is-equiv-htpy-eq-subuniverse-connected-map f g
+  pr1 (extensionality-subuniverse-connected-map f g) =
+    htpy-eq-subuniverse-connected-map f g
+  pr2 (extensionality-subuniverse-connected-map f g) =
+    is-equiv-htpy-eq-subuniverse-connected-map f g
 
   eq-htpy-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →

@@ -22,7 +22,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.injective-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
@@ -54,7 +53,6 @@ open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
 open import orthogonal-factorization-systems.extensions-maps
-open import orthogonal-factorization-systems.postcomposition-extensions-maps
 ```
 
 </details>
@@ -822,25 +820,25 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
 
-  is-split-surjective-postcomp-extension-surjective-map :
+  is-surjective-postcomp-extension-surjective-map :
     (f : A → B) (i : A → X) (g : X → Y) →
-    is-surjective f →
-    is-emb g →
-    is-split-surjective (postcomp-extension f i g)
-  is-split-surjective-postcomp-extension-surjective-map f i g H K (h , L) =
-    ( ( j , N) ,
-      ( eq-htpy-extension f
-        ( g ∘ i)
-        ( postcomp-extension f i g (j , N))
-        ( h , L)
-        ( M)
-        ( λ a →
-          ( ap
-            ( concat' (g (i a)) (M (f a)))
-            ( is-section-map-inv-is-equiv
-              ( K (i a) (j (f a)))
-              ( L a ∙ inv (M (f a))))) ∙
-          ( is-section-inv-concat' (M (f a)) (L a)))))
+    is-surjective f → is-emb g →
+    is-surjective (postcomp-extension f i g)
+  is-surjective-postcomp-extension-surjective-map f i g H K (h , L) =
+    unit-trunc-Prop
+      ( ( j , N) ,
+        ( eq-htpy-extension f
+          ( g ∘ i)
+          ( postcomp-extension f i g (j , N))
+          ( h , L)
+          ( M)
+          ( λ a →
+            ( ap
+              ( concat' (g (i a)) (M (f a)))
+              ( is-section-map-inv-is-equiv
+                ( K (i a) (j (f a)))
+                ( L a ∙ inv (M (f a))))) ∙
+            ( is-section-inv-concat' (M (f a)) (L a)))))
     where
 
     J : (b : B) → fiber g (h b)
@@ -852,29 +850,20 @@ module _
     j : B → X
     j b = pr1 (J b)
 
-    M : g ∘ j ~ h
+    M : (g ∘ j) ~ h
     M b = pr2 (J b)
 
-    N : i ~ j ∘ f
-    N a = is-injective-is-emb K (L a ∙ inv (M (f a)))
-
-  is-surjective-postcomp-extension-surjective-map :
-    (f : A → B) (i : A → X) (g : X → Y) →
-    is-surjective f → is-emb g →
-    is-surjective (postcomp-extension f i g)
-  is-surjective-postcomp-extension-surjective-map f i g H K =
-    is-surjective-is-split-surjective
-      ( is-split-surjective-postcomp-extension-surjective-map f i g H K)
+    N : i ~ (j ∘ f)
+    N a = map-inv-is-equiv (K (i a) (j (f a))) (L a ∙ inv (M (f a)))
 
   is-equiv-postcomp-extension-is-surjective :
     (f : A → B) (i : A → X) (g : X → Y) →
     is-surjective f → is-emb g →
     is-equiv (postcomp-extension f i g)
   is-equiv-postcomp-extension-is-surjective f i g H K =
-    is-equiv-is-split-surjective-is-injective
-      ( postcomp-extension f i g)
-      ( is-injective-is-emb (is-emb-postcomp-extension f i g K))
-      ( is-split-surjective-postcomp-extension-surjective-map f i g H K)
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-postcomp-extension-surjective-map f i g H K)
+      ( is-emb-postcomp-extension f i g K)
 
   equiv-postcomp-extension-surjection :
     (f : A ↠ B) (i : A → X) (g : X ↪ Y) →

@@ -56,7 +56,6 @@ open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
-open import orthogonal-factorization-systems.postcomposition-extensions-maps public
 open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.raise-modalities public
@@ -64,8 +63,6 @@ open import orthogonal-factorization-systems.reflective-global-subuniverses publ
 open import orthogonal-factorization-systems.reflective-modalities public
 open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.regular-cd-structures public
-open import orthogonal-factorization-systems.relative-separations-types-global-subuniverses public
-open import orthogonal-factorization-systems.relative-separations-types-subuniverses public
 open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public

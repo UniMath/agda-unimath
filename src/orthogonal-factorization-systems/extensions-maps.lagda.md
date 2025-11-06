@@ -16,24 +16,19 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
-open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
-open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -216,6 +211,20 @@ module _
   is-extension-right-whisker F h = F ∘ h
 ```
 
+### Postcomposition of extensions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  postcomp-extension :
+    (f : A → B) (i : A → X) (g : X → Y) →
+    extension f i → extension f (g ∘ i)
+  postcomp-extension f i g =
+    map-Σ (is-extension f (g ∘ i)) (postcomp B g) (λ j H → g ·l H)
+```
+
 ## Properties
 
 ### Characterizing identifications of extensions of maps
@@ -275,78 +284,6 @@ module _
     map-inv-equiv (extensionality-extension e e') (H , K)
 ```
 
-### Computing extension types as a dependent product
-
-Extension types are equivalent to fibers of precomposition maps, which in turn
-have a Π-type characterization. Given `i : A → B` and `g : B → C`, then
-
-```text
-  extension i g ≃ ((y : B) → Σ (c : C), (x : X) → (i x ＝ y) → (c ＝ g y)).
-```
-
-We give 4 different formulations of this equivalence for both the nondependent
-and dependent extension type.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-  {C : UU l3} (g : A → C)
-  where
-
-  equiv-fiber-Π-curry-precomp-extension :
-    extension i g ≃ ((b : B) → Σ C (λ u → (a : A) → i a ＝ b → g a ＝ u))
-  equiv-fiber-Π-curry-precomp-extension =
-    ( compute-fiber-Π-curry-precomp i g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp i g))
-
-  equiv-fiber-Π-curry-precomp-extension' :
-    extension i g ≃ ((b : B) → Σ C (λ u → (a : A) → b ＝ i a → u ＝ g a))
-  equiv-fiber-Π-curry-precomp-extension' =
-    ( compute-fiber-Π-curry-precomp' i g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp i g))
-
-  equiv-fiber-Π-precomp-extension :
-    extension i g ≃ fiber-Π-precomp i g
-  equiv-fiber-Π-precomp-extension =
-    ( compute-fiber-Π-precomp i g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp i g))
-
-  equiv-fiber-Π-precomp-extension' :
-    extension i g ≃ fiber-Π-precomp' i g
-  equiv-fiber-Π-precomp-extension' =
-    ( compute-fiber-Π-precomp' i g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp i g))
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-  {P : B → UU l3} (g : (x : A) → P (i x))
-  where
-
-  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type :
-    extension-dependent-type i P g ≃ fiber-Π-curry-precomp-Π i P g
-  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type =
-    ( compute-fiber-Π-curry-precomp-Π i P g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
-
-  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type' :
-    extension-dependent-type i P g ≃ fiber-Π-curry-precomp-Π' i P g
-  equiv-fiber-Π-curry-precomp-Π-extension-dependent-type' =
-    ( compute-fiber-Π-curry-precomp-Π' i P g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
-
-  equiv-fiber-Π-precomp-Π-extension-dependent-type :
-    extension-dependent-type i P g ≃ fiber-Π-precomp-Π i P g
-  equiv-fiber-Π-precomp-Π-extension-dependent-type =
-    ( compute-fiber-Π-precomp-Π i P g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
-
-  equiv-fiber-Π-precomp-Π-extension-dependent-type' :
-    extension-dependent-type i P g ≃ fiber-Π-precomp-Π' i P g
-  equiv-fiber-Π-precomp-Π-extension-dependent-type' =
-    ( compute-fiber-Π-precomp-Π' i P g) ∘e
-    ( inv-equiv (compute-extension-fiber-precomp-Π i P g))
-```
-
 ### The total type of extensions is equivalent to `(y : B) → P y`
 
 ```agda
@@ -386,7 +323,7 @@ module _
     ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
     (g : (x : B) → P x) → is-trunc k (is-extension i f g)
   is-trunc-is-extension-dependent-type f is-trunc-P g =
-    is-trunc-Π k (λ x → is-trunc-P x (f x) (g (i x)))
+    is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
 
   is-trunc-extension-dependent-type :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
@@ -416,7 +353,7 @@ module _
     ((x : A) → is-prop (P (i x))) →
     (g : (x : B) → P x) → is-contr (is-extension i f g)
   is-contr-is-extension f is-prop-P g =
-    is-contr-Π (λ x → is-prop-P x (f x) (g (i x)))
+    is-contr-Π λ x → is-prop-P x (f x) (g (i x))
 
   is-prop-is-extension :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
@@ -439,7 +376,7 @@ module _
   is-extension-self = refl-htpy
 
   extension-self : extension-dependent-type id P f
-  extension-self = (f , is-extension-self)
+  extension-self = f , is-extension-self
 ```
 
 ### The identity is an extension of every map along themselves
@@ -453,7 +390,27 @@ module _
   is-extension-along-self = refl-htpy
 
   extension-along-self : extension f f
-  extension-along-self = (id , is-extension-along-self)
+  extension-along-self = id , is-extension-along-self
+```
+
+### Postcomposition of extensions by an embedding is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  is-emb-postcomp-extension :
+    (f : A → B) (i : A → X) (g : X → Y) → is-emb g →
+    is-emb (postcomp-extension f i g)
+  is-emb-postcomp-extension f i g H =
+    is-emb-map-Σ
+      ( is-extension f (g ∘ i))
+      ( is-mono-is-emb g H B)
+      ( λ j →
+        is-emb-is-equiv
+          ( is-equiv-map-Π-is-fiberwise-equiv
+            ( λ x → H (i x) (j (f x)))))
 ```
 
 ## See also
