@@ -19,7 +19,6 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -157,13 +156,11 @@ module _
     net δ =
       im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( finitely-enumerable-subset-net-Metric-Space
-            ( metric-space-subset-ℝ S)
-            ( δ)
-            ( M δ) ,
-          backward-implication
-            ( is-coinhabited-net-Metric-Space (metric-space-subset-ℝ S) δ (M δ))
-            ( |S|))
+        ( inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space
+          ( metric-space-subset-ℝ S)
+          ( δ)
+          ( M δ)
+          ( |S|))
 
     is-net :
       (δ : ℚ⁺) →

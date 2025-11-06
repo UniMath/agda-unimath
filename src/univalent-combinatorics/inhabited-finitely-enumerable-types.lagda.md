@@ -97,23 +97,3 @@ abstract
         (succ-ℕ n , Fin-sn↠X) → (n , Fin-sn↠X))
       ( ∃eX)
 ```
-
-### The finitely enumerable types are propositionally decidable
-
-```agda
-module _
-  {l : Level} (X : Finitely-Enumerable-Type l)
-  where
-
-  abstract
-    is-inhabited-or-empty-type-Finitely-Enumerable-Type :
-      is-inhabited-or-empty (type-Finitely-Enumerable-Type X)
-    is-inhabited-or-empty-type-Finitely-Enumerable-Type =
-      rec-trunc-Prop
-        ( is-inhabited-or-empty-Prop (type-Finitely-Enumerable-Type X))
-        ( λ (n , Fin-n↠X) →
-          is-inhabited-or-empty-surjection
-            ( Fin-n↠X)
-            ( is-inhabited-or-empty-Fin n))
-        ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
-```

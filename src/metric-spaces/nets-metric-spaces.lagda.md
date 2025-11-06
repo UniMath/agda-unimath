@@ -13,6 +13,7 @@ open import foundation.coinhabited-pairs-of-types
 open import foundation.dependent-pair-types
 open import foundation.images
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -120,9 +121,28 @@ module _
         ( X)
         ( ε)
         ( approximation-net-Metric-Space X ε S)
+
+    is-inhabited-type-is-inhabited-net-Metric-Space :
+      is-inhabited (type-net-Metric-Space X ε S) →
+      is-inhabited (type-Metric-Space X)
+    is-inhabited-type-is-inhabited-net-Metric-Space =
+      forward-implication is-coinhabited-net-Metric-Space
+
+    is-inhabited-net-is-inhabited-type-Metric-Space :
+      is-inhabited (type-Metric-Space X) →
+      is-inhabited (type-net-Metric-Space X ε S)
+    is-inhabited-net-is-inhabited-type-Metric-Space =
+      backward-implication is-coinhabited-net-Metric-Space
+
+  inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space :
+    is-inhabited (type-Metric-Space X) →
+    inhabited-finitely-enumerable-subtype l3 (type-Metric-Space X)
+  inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space |S| =
+    ( finitely-enumerable-subset-net-Metric-Space X ε S ,
+      is-inhabited-net-is-inhabited-type-Metric-Space |S|)
 ```
 
-### Given any net for a metric space `X`, it is propositionally decidable whether `X` is inhabited
+### Given any net for a metric space `X`, `X` is propositionally decidable
 
 ```agda
 module _
