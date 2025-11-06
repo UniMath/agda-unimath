@@ -15,7 +15,7 @@ from utils.contributors import parse_contributors_file, format_multiple_authors_
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
-RECENT_SITEWIDE_CHANGES_COUNT = 10
+RECENT_SITEWIDE_CHANGES_COUNT = 8
 
 
 def does_support(backend):

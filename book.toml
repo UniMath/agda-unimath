@@ -59,7 +59,7 @@ sitewide_changes = [
   "docs/HOME.md"
 ]
 recent_changes_count = 5
-recent_sitewide_changes_count = 10
+recent_sitewide_changes_count = 8
 
 [preprocessor.concepts]
 command = "python3 ./scripts/preprocessor_concepts.py"
