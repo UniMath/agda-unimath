@@ -10,9 +10,9 @@ module synthetic-homotopy-theory.multivariable-loop-spaces where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-triangles-of-identifications
+open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.constant-maps
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -34,16 +34,16 @@ open import foundation.universe-levels
 open import structured-types.h-spaces
 open import structured-types.left-invertible-magmas
 open import structured-types.magmas
-open import structured-types.pointed-types
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
-open import structured-types.pointed-equivalences
+open import structured-types.pointed-types
 
+open import synthetic-homotopy-theory.cavallos-trick
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.cavallos-trick
 ```
 
 </details>
