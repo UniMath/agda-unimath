@@ -841,6 +841,17 @@ module _
             le-real-is-in-upper-cut-ℚ r y y<r)
 ```
 
+### Zero is strictly less than one
+
+```agda
+le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
+le-zero-one-ℝ =
+  preserves-le-real-ℚ
+    ( zero-ℚ)
+    ( one-ℚ)
+    ( le-zero-one-ℚ)
+```
+
 ## References
 
 {{#bibliography}}
