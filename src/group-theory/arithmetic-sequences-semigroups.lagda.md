@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -186,6 +187,32 @@ module _
       ( u)
       ( refl)
       ( refl)
+```
+
+### The tail of a standard arithmetic sequence is another standard arithmetic sequence
+
+```agda
+module _
+  {l : Level} (G : Semigroup l) (a d : type-Semigroup G)
+  where
+
+  abstract
+    htpy-tail-standard-arithmetric-sequence-Semigroup :
+      tail-sequence
+        ( seq-standard-arithmetic-sequence-Semigroup G a d) ~
+      seq-standard-arithmetic-sequence-Semigroup G (mul-Semigroup G a d) d
+    htpy-tail-standard-arithmetric-sequence-Semigroup 0 = refl
+    htpy-tail-standard-arithmetric-sequence-Semigroup (succ-ℕ n) =
+      ap-mul-Semigroup G
+        ( htpy-tail-standard-arithmetric-sequence-Semigroup n)
+        ( refl)
+
+    eq-tail-standard-arithmetric-sequence-Semigroup :
+      tail-sequence
+        ( seq-standard-arithmetic-sequence-Semigroup G a d) ＝
+      seq-standard-arithmetic-sequence-Semigroup G (mul-Semigroup G a d) d
+    eq-tail-standard-arithmetric-sequence-Semigroup =
+      eq-htpy htpy-tail-standard-arithmetric-sequence-Semigroup
 ```
 
 ## External links
