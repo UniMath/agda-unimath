@@ -69,6 +69,7 @@ open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
+open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public

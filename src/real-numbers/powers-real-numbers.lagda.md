@@ -16,6 +16,8 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.powers-positive-rational-numbers
 open import elementary-number-theory.powers-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
@@ -24,9 +26,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.propositional-truncations
 
 open import order-theory.large-posets
 
@@ -41,13 +43,14 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
-open import real-numbers.real-sequences-approximating-zero
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -183,6 +186,9 @@ abstract
   is-positive-power-ℝ⁺ 1 (_ , is-pos-x) = is-pos-x
   is-positive-power-ℝ⁺ (succ-ℕ n@(succ-ℕ _)) x⁺@(x , is-pos-x) =
     is-positive-mul-ℝ (is-positive-power-ℝ⁺ n x⁺) is-pos-x
+
+power-ℝ⁺ : {l : Level} → ℕ → ℝ⁺ l → ℝ⁺ l
+power-ℝ⁺ n x⁺@(x , _) = (power-ℝ n x , is-positive-power-ℝ⁺ n x⁺)
 ```
 
 ### Powers of nonnegative real numbers are nonnegative
@@ -378,7 +384,7 @@ abstract
         by leq-eq-ℝ _ _ (inv (power-succ-ℝ n y))
 ```
 
-### If `|r| < 1`, `|r|ⁿ` approaches 0
+### If `|r| < 1`, `rⁿ` approaches 0
 
 ```agda
 abstract
@@ -389,11 +395,36 @@ abstract
     let
       open
         do-syntax-trunc-Prop (is-zero-limit-prop-sequence-ℝ (λ n → power-ℝ n r))
+      open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in do
       (ε , |r|<ε , ε<1ℝ) ← dense-rational-le-ℝ _ _ |r|<1
-      let ε<1 = reflects-le-real-ℚ ε one-ℚ ε<1ℝ
+      let
+        is-pos-ε =
+          reflects-is-positive-real-ℚ
+            ( ε)
+            ( is-positive-le-ℝ⁰⁺ (nonnegative-abs-ℝ r) (real-ℚ ε) |r|<ε)
+        ε⁺ = (ε , is-pos-ε)
       is-zero-limit-sequence-leq-abs-rational-zero-limit-sequence-ℝ
         ( λ n → power-ℝ n r)
-        ( {! λ n → power-ℚ n ε  !} , {!   !})
-        {!   !}
+        ( (λ n → rational-ℚ⁺ (power-ℚ⁺ n ε⁺)) ,
+          is-zero-limit-power-le-one-ℚ⁺ ε⁺ (reflects-le-real-ℚ ε one-ℚ ε<1ℝ))
+        ( λ n →
+          chain-of-inequalities
+            abs-ℝ (power-ℝ n r)
+            ≤ abs-ℝ (power-ℝ n (real-ℚ ε))
+              by
+                preserves-leq-abs-power-ℝ
+                  ( n)
+                  ( r)
+                  ( real-ℚ ε)
+                  ( inv-tr
+                    ( leq-ℝ (abs-ℝ r))
+                    ( abs-real-ℝ⁺ (positive-real-ℚ⁺ ε⁺))
+                    ( leq-le-ℝ _ _ |r|<ε))
+            ≤ power-ℝ n (real-ℚ ε)
+              by leq-eq-ℝ _ _ (abs-real-ℝ⁺ (power-ℝ⁺ n (positive-real-ℚ⁺ ε⁺)))
+            ≤ real-ℚ (power-ℚ n ε)
+              by leq-eq-ℝ _ _ (power-real-ℚ n ε)
+            ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
+              by leq-eq-ℝ _ _ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
 ```

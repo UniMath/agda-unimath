@@ -130,6 +130,11 @@ abstract
   is-nonnegative-real-ℚ⁰⁺ (q , nonneg-q) =
     preserves-leq-real-ℚ zero-ℚ q (leq-zero-is-nonnegative-ℚ nonneg-q)
 
+  reflects-is-nonnegative-real-ℚ :
+    (q : ℚ) → is-nonnegative-ℝ (real-ℚ q) → is-nonnegative-ℚ q
+  reflects-is-nonnegative-real-ℚ q 0≤qℝ =
+    is-nonnegative-leq-zero-ℚ (reflects-leq-real-ℚ zero-ℚ q 0≤qℝ)
+
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ q = (real-ℚ⁰⁺ q , is-nonnegative-real-ℚ⁰⁺ q)
 
@@ -577,6 +582,12 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁰⁺ x) y →
     is-nonnegative-ℝ y
   is-nonnegative-leq-ℝ⁰⁺ (x , 0≤x) y x≤y = transitive-leq-ℝ zero-ℝ x y x≤y 0≤x
+
+  is-nonnegative-le-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
+    is-nonnegative-ℝ y
+  is-nonnegative-le-ℝ⁰⁺ x y x<y =
+    is-nonnegative-leq-ℝ⁰⁺ x y (leq-le-ℝ (real-ℝ⁰⁺ x) y x<y)
 ```
 
 ### Nonnegativity is preserved by similarity

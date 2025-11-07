@@ -266,10 +266,16 @@ abstract
 ### The canonical embedding of rational numbers preserves positivity
 
 ```agda
-preserves-is-positive-real-ℚ :
-  (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
-preserves-is-positive-real-ℚ q pos-q =
-  preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ pos-q)
+abstract
+  preserves-is-positive-real-ℚ :
+    (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
+  preserves-is-positive-real-ℚ q pos-q =
+    preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ pos-q)
+
+  reflects-is-positive-real-ℚ :
+    (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
+  reflects-is-positive-real-ℚ q 0<qℝ =
+    is-positive-le-zero-ℚ (reflects-le-real-ℚ zero-ℚ q 0<qℝ)
 
 opaque
   unfolding le-ℝ real-ℚ
