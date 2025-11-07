@@ -43,16 +43,16 @@ open import univalent-combinatorics.standard-finite-types
 
 A
 {{#concept "geometric sequence" Disambiguation="in a commutative semiring" Agda=geometric-sequence-Commutative-Semiring}}
-in a [semiring](ring-theory.semirings.md) is an
+in a [commutative semiring](ring-theory.commutative-semirings.md) is an
 [geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
-semiring multiplicative [semigroup](group-theory.semigroups.md).
+semiring's multiplicative [semigroup](group-theory.semigroups.md).
 
 These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
 semiring.
 
 ## Definitions
 
-### Geometric sequences in semirings
+### Geometric sequences in commutative semirings
 
 ```agda
 module _
@@ -116,7 +116,7 @@ module _
       ( u)
 ```
 
-### The standard geometric sequences in a semiring
+### The standard geometric sequences in a commutative semiring
 
 The standard geometric sequence with initial term `a` and common factor `r` is
 the sequence `u` defined by:
@@ -182,7 +182,7 @@ module _
 
 ## Properties
 
-### Any geometric sequence in a semiring is homotopic to a standard geometric sequence
+### Any geometric sequence is homotopic to a standard geometric sequence
 
 ```agda
 module _
