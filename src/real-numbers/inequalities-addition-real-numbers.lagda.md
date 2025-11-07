@@ -73,10 +73,6 @@ module _
     reflects-leq-right-add-ℝ : leq-ℝ (x +ℝ z) (y +ℝ z) → leq-ℝ x y
     reflects-leq-right-add-ℝ x+z≤y+z =
       preserves-leq-sim-ℝ
-        ( (x +ℝ z) -ℝ z)
-        ( x)
-        ( (y +ℝ z) -ℝ z)
-        ( y)
         ( cancel-right-add-diff-ℝ x z)
         ( cancel-right-add-diff-ℝ y z)
         ( preserves-leq-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)

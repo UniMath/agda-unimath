@@ -83,11 +83,13 @@ nonnegative-dist-ℝ x y = (dist-ℝ x y , is-nonnegative-dist-ℝ x y)
 
 ### Relationship to the metric space of real numbers
 
-Two real numbers `x` and `y` are in an `ε`-neighborhood of each other if and
-only if their distance is at most `ε`.
+Two real numbers `x` and `y` are in an `ε`-neighborhood of each other in the
+[metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)
+[if and only if](foundation.logical-equivalences.md) their distance is
+[at most](real-numbers.inequality-real-numbers.md) `ε`.
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ neighborhood-ℝ
 
   diff-bound-neighborhood-ℝ :
@@ -125,8 +127,6 @@ abstract
     dist-ℝ x y ≤-ℝ real-ℚ⁺ d
   leq-dist-neighborhood-ℝ d⁺@(d , _) x y H =
     leq-abs-leq-leq-neg-ℝ
-      ( x -ℝ y)
-      ( real-ℚ d)
       ( diff-bound-neighborhood-ℝ d⁺ x y H)
       ( inv-tr
         ( λ z → leq-ℝ z (real-ℚ d))
@@ -236,8 +236,6 @@ abstract
     dist-ℝ x y ≤-ℝ z
   leq-dist-leq-diff-ℝ x y z x-y≤z y-x≤z =
     leq-abs-leq-leq-neg-ℝ
-      ( _)
-      ( z)
       ( x-y≤z)
       ( inv-tr (λ w → leq-ℝ w z) (distributive-neg-diff-ℝ _ _) y-x≤z)
 
@@ -259,7 +257,7 @@ abstract
   preserves-dist-left-add-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     sim-ℝ
-      ( dist-ℝ (add-ℝ x y) (add-ℝ x z))
+      ( dist-ℝ (x +ℝ y) (x +ℝ z))
       ( dist-ℝ y z)
   preserves-dist-left-add-ℝ x y z =
     similarity-reasoning-ℝ
@@ -280,7 +278,7 @@ abstract
   preserves-dist-right-add-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     sim-ℝ
-      ( dist-ℝ (add-ℝ x z) (add-ℝ y z))
+      ( dist-ℝ (x +ℝ z) (y +ℝ z))
       ( dist-ℝ x y)
   preserves-dist-right-add-ℝ z x y =
     similarity-reasoning-ℝ

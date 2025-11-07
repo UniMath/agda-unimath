@@ -153,7 +153,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ real-ℚ
 
     exists-ℚ⁺-in-lower-cut-is-positive-ℝ :
@@ -186,7 +186,7 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positiv
 ### Addition with a positive real number is a strictly inflationary map
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℝ le-ℝ
 
   le-left-add-real-ℝ⁺ :

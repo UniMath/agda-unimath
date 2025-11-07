@@ -123,7 +123,7 @@ abstract
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → le-ℝ y z
   reflects-le-left-mul-ℝ⁺ x y z xy<xz =
-    preserves-le-sim-ℝ _ _ _ _
+    preserves-le-sim-ℝ
       ( cancel-left-div-mul-ℝ⁺ x y)
       ( cancel-left-div-mul-ℝ⁺ x z)
       ( preserves-le-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy<xz)
@@ -169,7 +169,7 @@ abstract
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → leq-ℝ y z
   reflects-leq-left-mul-ℝ⁺ x y z xy≤xz =
-    preserves-leq-sim-ℝ _ _ _ _
+    preserves-leq-sim-ℝ
       ( cancel-left-div-mul-ℝ⁺ x y)
       ( cancel-left-div-mul-ℝ⁺ x z)
       ( preserves-leq-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy≤xz)

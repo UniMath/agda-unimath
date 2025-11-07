@@ -24,7 +24,9 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.function-types
+open import foundation.inhabited-subtypes
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -43,10 +45,8 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.subsets-real-numbers
 ```
 
 </details>
@@ -102,8 +102,12 @@ upper-cut-ℝ⁰⁺ (x , _) = upper-cut-ℝ x
 is-in-upper-cut-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → ℚ → UU l
 is-in-upper-cut-ℝ⁰⁺ (x , _) = is-in-upper-cut-ℝ x
 
+is-inhabited-upper-cut-ℝ⁰⁺ :
+  {l : Level} (x : ℝ⁰⁺ l) → is-inhabited-subtype (upper-cut-ℝ⁰⁺ x)
+is-inhabited-upper-cut-ℝ⁰⁺ (x , _) = is-inhabited-upper-cut-ℝ x
+
 is-rounded-upper-cut-ℝ⁰⁺ :
-  {l : Level} → (x : ℝ⁰⁺ l) (r : ℚ) →
+  {l : Level} (x : ℝ⁰⁺ l) (r : ℚ) →
   (is-in-upper-cut-ℝ⁰⁺ x r ↔ exists ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-ℝ⁰⁺ x q))
 is-rounded-upper-cut-ℝ⁰⁺ (x , _) = is-rounded-upper-cut-ℝ x
 ```
@@ -163,8 +167,8 @@ abstract
           ( 0≤x)
           ( le-real-is-in-upper-cut-ℚ x x<q)))
 
-opaque
-  unfolding leq-ℝ leq-ℝ' real-ℚ
+abstract opaque
+  unfolding leq-ℝ' real-ℚ
 
   is-nonnegative-is-positive-upper-cut-ℝ :
     {l : Level} → (x : ℝ l) → (upper-cut-ℝ x ⊆ is-positive-prop-ℚ) →
@@ -176,7 +180,7 @@ opaque
 ### A real number is nonnegative if and only if every negative rational number is in its lower cut
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ real-ℚ
 
   is-nonnegative-leq-negative-lower-cut-ℝ :
@@ -200,10 +204,9 @@ abstract
     {l : Level} → (x : ℝ⁰⁺ l) →
     exists ℚ⁺ (λ q → upper-cut-ℝ⁰⁺ x (rational-ℚ⁺ q))
   exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x =
-    let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → upper-cut-ℝ⁰⁺ x (rational-ℚ⁺ q)))
-    in do
-      (q , x<q) ← is-inhabited-upper-cut-ℝ (real-ℝ⁰⁺ x)
-      intro-exists (q , is-positive-is-in-upper-cut-ℝ⁰⁺ x x<q) x<q
+    map-trunc-Prop
+      ( λ (q , x<q) → ((q , is-positive-is-in-upper-cut-ℝ⁰⁺ x x<q) , x<q))
+      ( is-inhabited-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Nonpositive rational numbers are not less than or equal to nonnegative real numbers
@@ -219,9 +222,9 @@ module _
     not-le-leq-zero-rational-ℝ⁰⁺ q≤0 x<q =
       irreflexive-le-ℝ
         ( real-ℝ⁰⁺ x)
-        ( concatenate-le-leq-ℝ _ (real-ℚ q) _
+        ( concatenate-le-leq-ℝ _ _ _
           ( x<q)
-          ( transitive-leq-ℝ (real-ℚ q) zero-ℝ (real-ℝ⁰⁺ x)
+          ( transitive-leq-ℝ _ _ _
             ( is-nonnegative-real-ℝ⁰⁺ x)
             ( preserves-leq-real-ℚ q≤0)))
 ```

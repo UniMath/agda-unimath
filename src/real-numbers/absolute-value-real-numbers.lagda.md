@@ -66,7 +66,7 @@ opaque
 ### The absolute value of zero is zero
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   abs-zero-ℝ : abs-ℝ zero-ℝ ＝ zero-ℝ
@@ -76,7 +76,7 @@ opaque
 ### The absolute value preserves similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   preserves-sim-abs-ℝ :
@@ -89,7 +89,7 @@ opaque
 ### The absolute value of a real number is nonnegative
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ leq-ℝ max-ℝ neg-ℚ neg-ℝ real-ℚ
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
@@ -210,10 +210,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding abs-ℝ
 
     leq-abs-leq-leq-neg-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ x) y → leq-ℝ (abs-ℝ x) y
@@ -231,8 +231,6 @@ module _
     triangle-inequality-abs-ℝ : leq-ℝ (abs-ℝ (x +ℝ y)) (abs-ℝ x +ℝ abs-ℝ y)
     triangle-inequality-abs-ℝ =
       leq-abs-leq-leq-neg-ℝ
-        ( x +ℝ y)
-        ( abs-ℝ x +ℝ abs-ℝ y)
         ( preserves-leq-add-ℝ (leq-abs-ℝ x) (leq-abs-ℝ y))
         ( inv-tr
           ( λ z → leq-ℝ z (abs-ℝ x +ℝ abs-ℝ y))
@@ -259,8 +257,6 @@ module _
         ( abs-ℝ x)
         ( abs-ℝ y)
         ( leq-abs-leq-leq-neg-ℝ
-          ( x)
-          ( abs-ℝ y +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( x)
             ( y +ℝ real-ℚ⁺ d)
@@ -286,8 +282,6 @@ module _
               ( x)
               ( right-leq-real-bound-neighborhood-ℝ d x y I))))
         ( leq-abs-leq-leq-neg-ℝ
-          ( y)
-          ( abs-ℝ x +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( y)
             ( x +ℝ real-ℚ⁺ d)

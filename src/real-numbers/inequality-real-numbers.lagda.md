@@ -337,7 +337,7 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level}
-  (x1 : ℝ l1) (x2 : ℝ l2) (y1 : ℝ l3) (y2 : ℝ l4)
+  {x1 : ℝ l1} {x2 : ℝ l2} {y1 : ℝ l3} {y2 : ℝ l4}
   (x1~x2 : sim-ℝ x1 x2) (y1~y2 : sim-ℝ y1 y2)
   where
 

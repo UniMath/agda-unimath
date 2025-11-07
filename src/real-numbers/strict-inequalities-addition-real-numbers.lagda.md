@@ -131,10 +131,6 @@ module _
     reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
     reflects-le-right-add-ℝ x+z<y+z =
       preserves-le-sim-ℝ
-        ( (x +ℝ z) +ℝ neg-ℝ z)
-        ( x)
-        ( (y +ℝ z) +ℝ neg-ℝ z)
-        ( y)
         ( cancel-right-add-diff-ℝ x z)
         ( cancel-right-add-diff-ℝ y z)
         ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
