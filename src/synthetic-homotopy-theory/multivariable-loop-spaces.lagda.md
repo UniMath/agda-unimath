@@ -52,15 +52,18 @@ Given a type `I` and a [pointed type](structured-types.pointed-types.md)
 `A` as the type `Σ (a : A), (I → (a ＝ a∗))`. This type is canonically pointed
 at `(a∗ , refl-htpy)`. We recover the
 [standard loop space](synthetic-homotopy-theory.loop-spaces.md) `ΩA` as the
-binary loops, the type `A` itself as the `∅`-ary loops, and there is a unique
-unary loop. The `𝕊¹`-ary loops correspond to
-[loops of loops](synthetic-homotopy-theory.double-loop-spaces.md).
+`1+1`-ary loops, the type `A` itself as the `∅`-ary loops, and there is a unique
+`1`-ary loop. The `𝕊¹`-ary loops correspond to
+[loops of loops](synthetic-homotopy-theory.double-loop-spaces.md). Observe that
+among pointed types `1+1` represents elements, and so we should interpret
+`1+1`-ary as _unary_ loops rather than binary ones, which is consistent with the
+fact that `1+1`-ary loops yields the standard loops.
 
 For every point `x` of `I` there is a coherent, associative, and invertible
 [H-space structure](structured-types.h-spaces.md) on `I`-ary loops, and moreover
 any point `x` of `I` gives a
 [pointed equivalence](structured-types.pointed-equivalences.md) between `I`-ary
-loops of `A` and `(I , x) →∗ ΩA`.
+loops of `A` and `(I,x) →∗ ΩA`.
 
 ## Table of files directly related to loop spaces
 
