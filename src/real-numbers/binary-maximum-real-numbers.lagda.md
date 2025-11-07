@@ -22,6 +22,9 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.large-semigroups
+open import group-theory.semigroups
+
 open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 
@@ -198,6 +201,78 @@ module _
             ( x)
             ( max-ℝ y x)
             ( is-least-binary-upper-bound-max-ℝ y x)))
+```
+
+### The binary maximum is associative
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
+  where
+
+  abstract
+    associative-max-ℝ : max-ℝ (max-ℝ x y) z ＝ max-ℝ x (max-ℝ y z)
+    associative-max-ℝ =
+      antisymmetric-leq-ℝ
+        ( max-ℝ (max-ℝ x y) z)
+        ( max-ℝ x (max-ℝ y z))
+        ( leq-max-leq-leq-ℝ
+          ( max-ℝ x y)
+          ( z)
+          ( max-ℝ x (max-ℝ y z))
+          ( leq-max-leq-leq-ℝ
+            ( x)
+            ( y)
+            ( max-ℝ x (max-ℝ y z))
+            ( leq-left-max-ℝ x (max-ℝ y z))
+            ( transitive-leq-ℝ
+              ( y)
+              ( max-ℝ y z)
+              ( max-ℝ x (max-ℝ y z))
+              ( leq-right-max-ℝ x (max-ℝ y z))
+              ( leq-left-max-ℝ y z)))
+          ( transitive-leq-ℝ
+            ( z)
+            ( max-ℝ y z)
+            ( max-ℝ x (max-ℝ y z))
+            ( leq-right-max-ℝ x (max-ℝ y z))
+            ( leq-right-max-ℝ y z)))
+        ( leq-max-leq-leq-ℝ
+          ( x)
+          ( max-ℝ y z)
+          ( max-ℝ (max-ℝ x y) z)
+          ( transitive-leq-ℝ
+            ( x)
+            ( max-ℝ x y)
+            ( max-ℝ (max-ℝ x y) z)
+            ( leq-left-max-ℝ (max-ℝ x y) z)
+            ( leq-left-max-ℝ x y))
+          ( leq-max-leq-leq-ℝ
+            ( y)
+            ( z)
+            ( max-ℝ (max-ℝ x y) z)
+            ( transitive-leq-ℝ
+              ( y)
+              ( max-ℝ x y)
+              ( max-ℝ (max-ℝ x y) z)
+              ( leq-left-max-ℝ (max-ℝ x y) z)
+              ( leq-right-max-ℝ x y))
+            ( leq-right-max-ℝ (max-ℝ x y) z)))
+```
+
+### The large semigroup of real numbers under the maximum operator
+
+```agda
+large-semigroup-max-ℝ : Large-Semigroup lsuc
+large-semigroup-max-ℝ = make-Large-Semigroup ℝ-Set max-ℝ associative-max-ℝ
+```
+
+### The semigroup of real numbers under the maximum operator at a given level
+
+```agda
+semigroup-max-ℝ : (l : Level) → Semigroup (lsuc l)
+semigroup-max-ℝ = semigroup-Large-Semigroup large-semigroup-max-ℝ
 ```
 
 ### The large poset of real numbers has joins
