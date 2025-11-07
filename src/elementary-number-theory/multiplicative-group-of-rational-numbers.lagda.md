@@ -9,6 +9,8 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
@@ -26,6 +28,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -86,6 +89,9 @@ _*ℚˣ_ = mul-ℚˣ
 
 inv-ℚˣ : ℚˣ → ℚˣ
 inv-ℚˣ = inv-group-of-units-Ring ring-ℚ
+
+rational-inv-ℚˣ : ℚˣ → ℚ
+rational-inv-ℚˣ q = rational-ℚˣ (inv-ℚˣ q)
 ```
 
 ### Inverse laws in the multiplicative group of rational numbers
@@ -168,4 +174,36 @@ invertible-ℚ⁺ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁺
 
 invertible-ℚ⁻ : ℚ⁻ → ℚˣ
 invertible-ℚ⁻ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁻
+```
+
+### If `a ≠ b`, `b - a` is invertible
+
+```agda
+abstract
+  is-invertible-diff-neq-ℚ :
+    (a b : ℚ) → a ≠ b → is-invertible-element-Ring ring-ℚ (b -ℚ a)
+  is-invertible-diff-neq-ℚ a b a≠b =
+    is-invertible-element-ring-is-nonzero-ℚ
+      ( b -ℚ a)
+      ( λ b-a=0 → a≠b (inv (eq-is-unit-right-div-Group group-add-ℚ b-a=0)))
+
+invertible-diff-neq-ℚ : (a b : ℚ) → a ≠ b → ℚˣ
+invertible-diff-neq-ℚ a b a≠b = (b -ℚ a , is-invertible-diff-neq-ℚ a b a≠b)
+```
+
+### Cancellation laws
+
+```agda
+abstract
+  cancel-right-mul-div-ℚˣ :
+    (p : ℚ) (q : ℚˣ) → (p *ℚ rational-ℚˣ q) *ℚ rational-inv-ℚˣ q ＝ p
+  cancel-right-mul-div-ℚˣ p q =
+    equational-reasoning
+      p *ℚ rational-ℚˣ q *ℚ rational-inv-ℚˣ q
+      ＝ p *ℚ (rational-ℚˣ q *ℚ rational-inv-ℚˣ q)
+        by associative-mul-ℚ _ _ _
+      ＝ p *ℚ rational-ℚˣ one-ℚˣ
+        by ap-mul-ℚ refl (ap rational-ℚˣ (right-inverse-law-mul-ℚˣ q))
+      ＝ p
+        by right-unit-law-mul-ℚ p
 ```
