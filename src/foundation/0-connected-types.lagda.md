@@ -79,7 +79,7 @@ abstract
       ( unit-trunc-Prop)
 ```
 
-### All elements of 0-connected types are merely equal
+### Elements of 0-connected types are all merely equal
 
 ```agda
 abstract
@@ -89,7 +89,7 @@ abstract
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
 ```
 
-### A type is 0-connected if and only if it is inhabited and all elements are merely equal
+### A type is 0-connected if it is inhabited and all elements are merely equal
 
 ```agda
 abstract
@@ -144,8 +144,8 @@ abstract
 ```agda
 is-trunc-map-ev-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
-    is-0-connected A → is-trunc (succ-𝕋 k) B →
-    is-trunc-map k (ev-function B a)
+  is-0-connected A → is-trunc (succ-𝕋 k) B →
+  is-trunc-map k (ev-function B a)
 is-trunc-map-ev-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
     ( ev-function B star)
@@ -322,7 +322,7 @@ module _
   is-0-connected-im-point a = is-0-connected-im-point' (point a)
 ```
 
-### Coproducts of -1-connected types are not 0-connected
+### Coproducts of inhabited types are not 0-connected
 
 ```agda
 module _
