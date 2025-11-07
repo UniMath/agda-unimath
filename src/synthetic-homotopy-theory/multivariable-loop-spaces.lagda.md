@@ -88,7 +88,7 @@ module _
 
 ## Properties
 
-### Characterizing equality
+### Characterizing equality in `I`-ary loop spaces
 
 ```agda
 module _
@@ -132,7 +132,7 @@ module _
     map-inv-equiv (extensionality-multivar-Ω x y)
 ```
 
-### Characterizing equality of equality
+### Characterizing equality of equality in `I`-ary loop spaces
 
 ```agda
 module _
@@ -487,7 +487,8 @@ module _
       ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a))
         by associative-mul-multivar-Ω I∗ A∗ x a (inv-multivar-Ω I∗ A∗ a)
       ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
-        by ap (mul-multivar-Ω I∗ A∗ x) (right-inverse-law-mul-multivar-Ω I∗ A∗ a)
+        by
+        ap (mul-multivar-Ω I∗ A∗ x) (right-inverse-law-mul-multivar-Ω I∗ A∗ a)
       ＝ x
         by right-unit-law-mul-multivar-Ω I∗ A∗ x
 
