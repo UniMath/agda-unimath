@@ -41,6 +41,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -576,4 +577,23 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁰⁺ x) y →
     is-nonnegative-ℝ y
   is-nonnegative-leq-ℝ⁰⁺ (x , 0≤x) y x≤y = transitive-leq-ℝ zero-ℝ x y x≤y 0≤x
+```
+
+### Nonnegativity is preserved by similarity
+
+```agda
+abstract
+  is-nonnegative-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-nonnegative-ℝ x → sim-ℝ x y →
+    is-nonnegative-ℝ y
+  is-nonnegative-sim-ℝ {x = x} {y = y} 0≤x x~y =
+    preserves-leq-right-sim-ℝ zero-ℝ x y x~y 0≤x
+```
+
+### Raising the universe levels of nonnegative real numbers
+
+```agda
+raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
+raise-ℝ⁰⁺ l (x , is-nonneg-x) =
+  (raise-ℝ l x , is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x))
 ```

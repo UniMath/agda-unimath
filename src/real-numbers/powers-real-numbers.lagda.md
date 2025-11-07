@@ -26,6 +26,7 @@ open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.propositional-truncations
 
 open import order-theory.large-posets
 
@@ -43,8 +44,10 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.real-sequences-approximating-zero
 ```
 
 </details>
@@ -180,6 +183,24 @@ abstract
   is-positive-power-ℝ⁺ 1 (_ , is-pos-x) = is-pos-x
   is-positive-power-ℝ⁺ (succ-ℕ n@(succ-ℕ _)) x⁺@(x , is-pos-x) =
     is-positive-mul-ℝ (is-positive-power-ℝ⁺ n x⁺) is-pos-x
+```
+
+### Powers of nonnegative real numbers are nonnegative
+
+```agda
+abstract
+  is-nonnegative-power-ℝ⁰⁺ :
+    {l : Level} (n : ℕ) (x : ℝ⁰⁺ l) → is-nonnegative-ℝ (power-ℝ n (real-ℝ⁰⁺ x))
+  is-nonnegative-power-ℝ⁰⁺ {l} 0 _ =
+    is-nonnegative-real-ℝ⁰⁺ (raise-ℝ⁰⁺ l one-ℝ⁰⁺)
+  is-nonnegative-power-ℝ⁰⁺ 1 (x , is-nonneg-x) = is-nonneg-x
+  is-nonnegative-power-ℝ⁰⁺ (succ-ℕ n@(succ-ℕ _)) x⁰⁺@(x , is-nonneg-x) =
+    is-nonnegative-mul-ℝ
+      ( is-nonnegative-power-ℝ⁰⁺ n x⁰⁺)
+      ( is-nonneg-x)
+
+power-ℝ⁰⁺ : {l : Level} → ℕ → ℝ⁰⁺ l → ℝ⁰⁺ l
+power-ℝ⁰⁺ n x⁰⁺@(x , _) = (power-ℝ n x , is-nonnegative-power-ℝ⁰⁺ n x⁰⁺)
 ```
 
 ### Even powers of negative real numbers are positive
@@ -322,4 +343,57 @@ abstract
         by leq-eq-ℝ _ _ (inv (abs-mul-ℝ _ _))
       ≤ abs-ℝ (power-ℝ (succ-ℕ n) y)
         by leq-eq-ℝ _ _ (ap abs-ℝ (inv (power-succ-ℝ n y)))
+```
+
+### If `x` and `y` are nonnegative, and `x ≤ y`, `xⁿ ≤ yⁿ`
+
+```agda
+abstract
+  preserves-leq-power-real-ℝ⁰⁺ :
+    {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ (power-ℝ n (real-ℝ⁰⁺ x)) (power-ℝ n (real-ℝ⁰⁺ y))
+  preserves-leq-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
+    leq-sim-ℝ _ _
+      ( transitive-sim-ℝ _ one-ℝ _
+        ( sim-raise-ℝ l2 one-ℝ)
+        ( symmetric-sim-ℝ (sim-raise-ℝ l1 one-ℝ)))
+  preserves-leq-power-real-ℝ⁰⁺ (succ-ℕ n) x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
+    let
+      open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+      chain-of-inequalities
+      power-ℝ (succ-ℕ n) x
+      ≤ power-ℝ n x *ℝ x
+        by leq-eq-ℝ _ _ (power-succ-ℝ n x)
+      ≤ power-ℝ n y *ℝ y
+        by
+          preserves-leq-mul-ℝ⁰⁺
+            ( power-ℝ⁰⁺ n x⁰⁺)
+            ( power-ℝ⁰⁺ n y⁰⁺)
+            ( x⁰⁺)
+            ( y⁰⁺)
+            ( preserves-leq-power-real-ℝ⁰⁺ n x⁰⁺ y⁰⁺ x≤y)
+            ( x≤y)
+      ≤ power-ℝ (succ-ℕ n) y
+        by leq-eq-ℝ _ _ (inv (power-succ-ℝ n y))
+```
+
+### If `|r| < 1`, `|r|ⁿ` approaches 0
+
+```agda
+abstract
+  is-zero-lim-power-le-one-abs-ℝ :
+    {l : Level} (r : ℝ l) → le-ℝ (abs-ℝ r) one-ℝ →
+    is-zero-limit-sequence-ℝ (λ n → power-ℝ n r)
+  is-zero-lim-power-le-one-abs-ℝ r |r|<1 =
+    let
+      open
+        do-syntax-trunc-Prop (is-zero-limit-prop-sequence-ℝ (λ n → power-ℝ n r))
+    in do
+      (ε , |r|<ε , ε<1ℝ) ← dense-rational-le-ℝ _ _ |r|<1
+      let ε<1 = reflects-le-real-ℚ ε one-ℚ ε<1ℝ
+      is-zero-limit-sequence-leq-abs-rational-zero-limit-sequence-ℝ
+        ( λ n → power-ℝ n r)
+        ( {! λ n → power-ℚ n ε  !} , {!   !})
+        {!   !}
 ```

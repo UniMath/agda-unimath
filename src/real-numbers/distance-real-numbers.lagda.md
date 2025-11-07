@@ -303,7 +303,7 @@ abstract
         by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
 ```
 
-## Distributivity laws
+### Distributivity laws
 
 ```agda
 module _
@@ -330,4 +330,40 @@ module _
           by inv (abs-mul-ℝ (x -ℝ y) z)
         ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
           by ap abs-ℝ (right-distributive-mul-diff-ℝ x y z)
+```
+
+### Zero laws
+
+```agda
+abstract
+  right-zero-law-dist-ℝ : {l : Level} (x : ℝ l) → dist-ℝ x zero-ℝ ＝ abs-ℝ x
+  right-zero-law-dist-ℝ x = ap abs-ℝ (right-unit-law-diff-ℝ x)
+
+  left-zero-law-dist-ℝ : {l : Level} (x : ℝ l) → dist-ℝ zero-ℝ x ＝ abs-ℝ x
+  left-zero-law-dist-ℝ x = commutative-dist-ℝ zero-ℝ x ∙ right-zero-law-dist-ℝ x
+```
+
+### Distance is preserved by similarity
+
+```agda
+abstract
+  preserves-dist-left-sim-ℝ :
+    {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} → sim-ℝ x y →
+    sim-ℝ (dist-ℝ x z) (dist-ℝ y z)
+  preserves-dist-left-sim-ℝ {z = z} {x = x} {y = y} x~y =
+    preserves-sim-abs-ℝ (preserves-sim-right-add-ℝ (neg-ℝ z) x y x~y)
+
+  preserves-dist-right-sim-ℝ :
+    {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} → sim-ℝ x y →
+    sim-ℝ (dist-ℝ z x) (dist-ℝ z y)
+  preserves-dist-right-sim-ℝ {z = z} x~y =
+    preserves-sim-abs-ℝ (preserves-sim-diff-ℝ (refl-sim-ℝ z) x~y)
+
+  preserves-dist-sim-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
+    sim-ℝ x x' → sim-ℝ y y' → sim-ℝ (dist-ℝ x y) (dist-ℝ x' y')
+  preserves-dist-sim-ℝ x~x' y~y' =
+    transitive-sim-ℝ _ _ _
+      ( preserves-dist-right-sim-ℝ y~y')
+      ( preserves-dist-left-sim-ℝ x~x')
 ```
