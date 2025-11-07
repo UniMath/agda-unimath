@@ -22,10 +22,11 @@ open import structured-types.magmas
 A [magma](structured-types.magmas.md) `A` is
 {{#concept "left-invertible" Disambiguation="magma" Agda=is-left-invertible-Magma}}
 if the multiplication map `μ(a,-) : A → A` is an
-[equivalence](foundation-core.equivalences.md) for every `a : A`.
+[equivalence](foundation-core.equivalences.md) for every `a : A`. In other
+words, if multiplying by a fixed element on the left is always an equivalence.
 
-Left-invertibility in the context of [H-spaces](structured-types.h-spaces.md)
-appears as Definition 2.1(4) of {{#cite BCFR23}}.
+Left-invertibility appears as Definition 2.1(4) of {{#cite BCFR23}} in the
+context of [H-spaces](structured-types.h-spaces.md).
 
 ## Definition
 

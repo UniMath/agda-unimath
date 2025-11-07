@@ -14,7 +14,6 @@ open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -41,8 +40,6 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.cavallos-trick
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspension-structures
-open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
 ```
 
