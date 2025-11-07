@@ -477,9 +477,9 @@ module _
                         r<y ,
                         y<s))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ _ _ (right-leq-max-ℕ _ _)
+                by preserves-leq-rational-ℕ (right-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ _ _ (succ-leq-ℕ N)
+                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
           max|p||q|≤sN =
             chain-of-inequalities
               max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
@@ -495,9 +495,9 @@ module _
                         p<x ,
                         x<q))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ _ _ (left-leq-max-ℕ _ _)
+                by preserves-leq-rational-ℕ (left-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ _ _ (succ-leq-ℕ N)
+                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
           [p,q] = ((p , q) , p≤q)
           [r,s] = ((r , s) , r≤s)
           a = lower-bound-mul-closed-interval-ℚ [p,q] [r,s]
@@ -531,7 +531,7 @@ module _
               ≤ ( rational-ℚ⁺ εx +ℚ rational-ℚ⁺ εy) *ℚ
                 rational-ℕ (succ-ℕ N)
                 by
-                  leq-eq-ℚ _ _
+                  leq-eq-ℚ
                     ( inv (right-distributive-mul-add-ℚ _ _ _))
               ≤ rational-ℚ⁺
                   ( ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N) +ℚ⁺
@@ -551,7 +551,7 @@ module _
                         ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
-                  leq-eq-ℚ _ _
+                  leq-eq-ℚ
                     ( ap-mul-ℚ
                       ( inv (right-distributive-mul-add-ℚ _ _ _))
                       ( refl) ∙

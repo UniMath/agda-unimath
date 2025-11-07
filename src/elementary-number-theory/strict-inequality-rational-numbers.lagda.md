@@ -148,19 +148,15 @@ irreflexive-le-ℚ =
 ### Strict inequality on the rationals is transitive
 
 ```agda
-module _
-  (x y z : ℚ)
-  where
+abstract opaque
+  unfolding le-ℚ-Prop
 
-  opaque
-    unfolding le-ℚ-Prop
-
-    transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
-    transitive-le-ℚ =
-      transitive-le-fraction-ℤ
-        ( fraction-ℚ x)
-        ( fraction-ℚ y)
-        ( fraction-ℚ z)
+  transitive-le-ℚ : (x y z : ℚ) → le-ℚ y z → le-ℚ x y → le-ℚ x z
+  transitive-le-ℚ x y z =
+    transitive-le-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ y)
+      ( fraction-ℚ z)
 ```
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers
@@ -297,7 +293,7 @@ module _
 
 ```agda
 module _
-  (x y : ℤ)
+  {x y : ℤ}
   where
 
   opaque
@@ -322,12 +318,12 @@ module _
 
 ```agda
 module _
-  (m n : ℕ)
+  {m n : ℕ}
   where
 
   abstract
     iff-le-rational-ℕ : le-ℕ m n ↔ le-ℚ (rational-ℕ m) (rational-ℕ n)
-    iff-le-rational-ℕ = iff-le-rational-ℤ _ _ ∘iff iff-le-int-ℕ m n
+    iff-le-rational-ℕ = iff-le-rational-ℤ ∘iff iff-le-int-ℕ m n
 
     preserves-le-rational-ℕ : le-ℕ m n → le-ℚ (rational-ℕ m) (rational-ℕ n)
     preserves-le-rational-ℕ = forward-implication iff-le-rational-ℕ
@@ -344,9 +340,7 @@ module _
   where
 
   opaque
-    unfolding add-ℚ
-    unfolding le-ℚ-Prop
-    unfolding neg-ℚ
+    unfolding add-ℚ le-ℚ-Prop neg-ℚ
 
     iff-translate-diff-le-zero-ℚ : le-ℚ zero-ℚ (y -ℚ x) ↔ le-ℚ x y
     iff-translate-diff-le-zero-ℚ =
@@ -478,8 +472,7 @@ module _
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding leq-ℚ-Prop
+  unfolding le-ℚ-Prop leq-ℚ-Prop
 
   decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
   decide-le-leq-ℚ x y =

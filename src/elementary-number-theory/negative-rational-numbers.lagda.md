@@ -198,7 +198,7 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
   opaque
@@ -209,7 +209,7 @@ module _
       inv-tr
         ( is-positive-ℚ)
         ( distributive-neg-diff-ℚ x y)
-        ( is-positive-diff-le-ℚ x y H)
+        ( is-positive-diff-le-ℚ H)
 
   negative-diff-le-ℚ : ℚ⁻
   negative-diff-le-ℚ = x -ℚ y , is-negative-diff-le-ℚ

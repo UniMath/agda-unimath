@@ -39,6 +39,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -132,8 +133,7 @@ module _
   abstract
     is-positive-iff-zero-in-lower-cut-ℝ :
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-    is-positive-iff-zero-in-lower-cut-ℝ =
-      inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
+    is-positive-iff-zero-in-lower-cut-ℝ = inv-iff (le-real-iff-lower-cut-ℚ x)
 
     is-positive-zero-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
@@ -254,24 +254,19 @@ abstract
 ### The canonical embedding of rational numbers preserves positivity
 
 ```agda
-preserves-is-positive-real-ℚ :
-  (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
-preserves-is-positive-real-ℚ q pos-q =
-  preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ pos-q)
+abstract
+  preserves-is-positive-real-ℚ :
+    {q : ℚ} → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
+  preserves-is-positive-real-ℚ pos-q =
+    preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
-opaque
-  unfolding le-ℝ real-ℚ
-
-  is-positive-rational-is-positive-real-ℚ :
-    (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
-  is-positive-rational-is-positive-real-ℚ q =
-    elim-exists
-      ( is-positive-prop-ℚ q)
-      ( λ r (0<r , r<q) →
-        is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ r q r<q 0<r))
+  reflects-is-positive-real-ℚ :
+    {q : ℚ} → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
+  reflects-is-positive-real-ℚ {q} 0<qℝ =
+    is-positive-le-zero-ℚ (reflects-le-real-ℚ 0<qℝ)
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
-positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ q pos-q)
+positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ pos-q)
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
@@ -286,14 +281,4 @@ abstract
   is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) q x<q =
     is-positive-le-zero-ℚ
       ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
-```
-
-### Similarity of positive real numbers
-
-```agda
-sim-prop-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → Prop (l1 ⊔ l2)
-sim-prop-ℝ⁺ (x , _) (y , _) = sim-prop-ℝ x y
-
-sim-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → UU (l1 ⊔ l2)
-sim-ℝ⁺ (x , _) (y , _) = sim-ℝ x y
 ```

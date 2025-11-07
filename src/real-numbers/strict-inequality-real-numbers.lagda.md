@@ -81,20 +81,16 @@ le-prop-ℝ x y = (le-ℝ x y , is-prop-le-ℝ x y)
 ### Strict inequality on the reals implies inequality
 
 ```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
-  where
+opaque
+  unfolding le-ℝ leq-ℝ
 
-  opaque
-    unfolding le-ℝ leq-ℝ
-
-    leq-le-ℝ : le-ℝ x y → leq-ℝ x y
-    leq-le-ℝ x<y p p<x =
-      elim-exists
-        ( lower-cut-ℝ y p)
-        ( λ q (x<q , q<y) →
-          le-lower-cut-ℝ y p q (le-lower-upper-cut-ℝ x p q p<x x<q) q<y)
-        ( x<y)
+  leq-le-ℝ : {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → leq-ℝ x y
+  leq-le-ℝ {x = x} {y = y} x<y p p<x =
+    elim-exists
+      ( lower-cut-ℝ y p)
+      ( λ q (x<q , q<y) →
+        le-lower-cut-ℝ y p q (le-lower-upper-cut-ℝ x p q p<x x<q) q<y)
+      ( x<y)
 ```
 
 ### Strict inequality on the reals is irreflexive
@@ -119,9 +115,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
   opaque
@@ -176,7 +170,7 @@ module _
 
 ```agda
 module _
-  (x y : ℚ)
+  {x y : ℚ}
   where
 
   opaque
@@ -226,7 +220,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (q : ℚ) (x : ℝ l)
+  {l : Level} {q : ℚ} (x : ℝ l)
   where
 
   opaque
@@ -247,7 +241,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (q : ℚ) (x : ℝ l)
+  {l : Level} {q : ℚ} (x : ℝ l)
   where
 
   opaque
@@ -276,9 +270,9 @@ module _
   is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
   is-located-le-ℝ =
     map-disjunction
-      ( le-real-is-in-lower-cut-ℚ p x)
-      ( le-real-is-in-upper-cut-ℚ q x)
-      ( is-located-lower-upper-cut-ℝ x p q p<q)
+      ( le-real-is-in-lower-cut-ℚ x)
+      ( le-real-is-in-upper-cut-ℚ x)
+      ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
 ### Every real is less than a rational number
@@ -292,7 +286,7 @@ module _
     le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
     le-some-rational-ℝ =
       map-tot-exists
-        ( λ q → le-real-is-in-upper-cut-ℚ q x)
+        ( λ q → le-real-is-in-upper-cut-ℚ x)
         ( is-inhabited-upper-cut-ℝ x)
 ```
 
@@ -311,7 +305,7 @@ module _
         open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-prop-ℝ y x))
       in do
         ( q , q<x) ← is-inhabited-lower-cut-ℝ x
-        intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℚ q x q<x)
+        intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℚ x q<x)
 
     exists-greater-ℝ : exists (ℝ lzero) (λ y → le-prop-ℝ x y)
     exists-greater-ℝ =
@@ -319,7 +313,7 @@ module _
         open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-prop-ℝ x))
       in do
         ( q , x<q) ← is-inhabited-upper-cut-ℝ x
-        intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℚ q x x<q)
+        intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℚ x x<q)
 ```
 
 ### Negation reverses the strict ordering of real numbers
@@ -327,8 +321,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {x : ℝ l1} {y : ℝ l2}
   where
 
   opaque
@@ -385,7 +378,7 @@ module _
           ( lower-cut-ℝ x p)
           ( id)
           ( λ x<q → reductio-ad-absurdum (intro-exists q (x<q , q<y)) x≮y)
-          ( is-located-lower-upper-cut-ℝ x p q p<q)
+          ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
 ### If `x` is less than or equal to `y`, then `y` is not less than `x`
@@ -476,7 +469,7 @@ opaque
       map-disjunction
         ( λ p<z → intro-exists p (x<p , p<z))
         ( λ z<q → intro-exists q (z<q , q<y))
-        ( is-located-lower-upper-cut-ℝ z p q p<q)
+        ( is-located-lower-upper-cut-ℝ z p<q)
 ```
 
 ### Strict inequality on the real numbers is invariant under similarity
@@ -517,265 +510,6 @@ module _
       ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
 ```
 
-### Strict inequality on the real numbers is translation invariant
-
-```agda
-module _
-  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
-  where
-
-  opaque
-    unfolding add-ℝ le-ℝ
-
-    preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
-    preserves-le-right-add-ℝ x<y =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃ ℚ (λ r → upper-cut-ℝ (x +ℝ z) r ∧ lower-cut-ℝ (y +ℝ z) r))
-      in do
-        ( p , x<p , p<y) ← x<y
-        ( q , p<q , q<y) ← forward-implication (is-rounded-lower-cut-ℝ y p) p<y
-        ( (r , s) , s<r+q-p , r<z , z<s) ←
-          is-arithmetically-located-ℝ
-            ( z)
-            ( positive-diff-le-ℚ p q p<q)
-        let
-          p-q+s<r : le-ℚ ((p -ℚ q) +ℚ s) r
-          p-q+s<r =
-            tr
-              ( le-ℚ ((p -ℚ q) +ℚ s))
-              ( equational-reasoning
-                  (p -ℚ q) +ℚ (r +ℚ (q -ℚ p))
-                  ＝ (p -ℚ q) +ℚ (r -ℚ (p -ℚ q))
-                    by
-                      ap
-                        ( λ t → (p -ℚ q) +ℚ (r +ℚ t))
-                        ( inv (distributive-neg-diff-ℚ p q))
-                  ＝ r by is-identity-right-conjugation-add-ℚ (p -ℚ q) r)
-              ( preserves-le-right-add-ℚ (p -ℚ q) s (r +ℚ (q -ℚ p)) s<r+q-p)
-        intro-exists
-          ( p +ℚ s)
-          ( intro-exists (p , s) (x<p , z<s , refl) ,
-            intro-exists
-              ( q , (p -ℚ q) +ℚ s)
-              ( q<y ,
-                le-lower-cut-ℝ z ((p -ℚ q) +ℚ s) r p-q+s<r r<z ,
-                ( equational-reasoning
-                    p +ℚ s
-                    ＝ (q +ℚ (p -ℚ q)) +ℚ s
-                      by
-                        ap
-                          ( _+ℚ s)
-                          ( inv (is-identity-right-conjugation-add-ℚ q p))
-                    ＝ q +ℚ ((p -ℚ q) +ℚ s) by associative-add-ℚ _ _ _)))
-
-    preserves-le-left-add-ℝ : le-ℝ x y → le-ℝ (z +ℝ x) (z +ℝ y)
-    preserves-le-left-add-ℝ x<y =
-      binary-tr
-        ( le-ℝ)
-        ( commutative-add-ℝ x z)
-        ( commutative-add-ℝ y z)
-        ( preserves-le-right-add-ℝ x<y)
-
-abstract
-  preserves-le-diff-ℝ :
-    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
-    le-ℝ x y → le-ℝ (x -ℝ z) (y -ℝ z)
-  preserves-le-diff-ℝ z = preserves-le-right-add-ℝ (neg-ℝ z)
-
-  reverses-le-diff-ℝ :
-    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
-    le-ℝ x y → le-ℝ (z -ℝ y) (z -ℝ x)
-  reverses-le-diff-ℝ z x y x<y =
-    preserves-le-left-add-ℝ z _ _ (neg-le-ℝ _ _ x<y)
-
-module _
-  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
-  where
-
-  abstract
-    reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
-    reflects-le-right-add-ℝ x+z<y+z =
-      preserves-le-sim-ℝ
-        ( (x +ℝ z) +ℝ neg-ℝ z)
-        ( x)
-        ( (y +ℝ z) +ℝ neg-ℝ z)
-        ( y)
-        ( cancel-right-add-diff-ℝ x z)
-        ( cancel-right-add-diff-ℝ y z)
-        ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
-
-    reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
-    reflects-le-left-add-ℝ z+x<z+y =
-      reflects-le-right-add-ℝ
-        ( binary-tr
-          ( le-ℝ)
-          ( commutative-add-ℝ z x)
-          ( commutative-add-ℝ z y)
-          ( z+x<z+y))
-
-module _
-  {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
-  where
-
-  iff-translate-right-le-ℝ : le-ℝ x y ↔ le-ℝ (x +ℝ z) (y +ℝ z)
-  pr1 iff-translate-right-le-ℝ = preserves-le-right-add-ℝ z x y
-  pr2 iff-translate-right-le-ℝ = reflects-le-right-add-ℝ z x y
-
-  iff-translate-left-le-ℝ : le-ℝ x y ↔ le-ℝ (z +ℝ x) (z +ℝ y)
-  pr1 iff-translate-left-le-ℝ = preserves-le-left-add-ℝ z x y
-  pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
-
-abstract
-  preserves-le-add-ℝ :
-    {l1 l2 l3 l4 : Level} (a : ℝ l1) (b : ℝ l2) (c : ℝ l3) (d : ℝ l4) →
-    le-ℝ a b → le-ℝ c d → le-ℝ (a +ℝ c) (b +ℝ d)
-  preserves-le-add-ℝ a b c d a≤b c≤d =
-    transitive-le-ℝ
-      ( a +ℝ c)
-      ( a +ℝ d)
-      ( b +ℝ d)
-      ( preserves-le-right-add-ℝ d a b a≤b)
-      ( preserves-le-left-add-ℝ a c d c≤d)
-```
-
-### `x + y < z` if and only if `x < z - y`
-
-```agda
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    le-transpose-left-add-ℝ : le-ℝ (x +ℝ y) z → le-ℝ x (z -ℝ y)
-    le-transpose-left-add-ℝ x+y<z =
-      preserves-le-left-sim-ℝ
-        ( z -ℝ y)
-        ( (x +ℝ y) -ℝ y)
-        ( x)
-        ( cancel-right-add-diff-ℝ x y)
-        ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    le-transpose-left-add-ℝ' : le-ℝ (x +ℝ y) z → le-ℝ y (z -ℝ x)
-    le-transpose-left-add-ℝ' x+y<z =
-      le-transpose-left-add-ℝ y x z
-        ( tr (λ w → le-ℝ w z) (commutative-add-ℝ _ _) x+y<z)
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
-    le-transpose-right-diff-ℝ x<y-z =
-      preserves-le-right-sim-ℝ
-        ( x +ℝ z)
-        ( (y -ℝ z) +ℝ z)
-        ( y)
-        ( cancel-right-diff-add-ℝ y z)
-        ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
-
-    le-transpose-right-diff-ℝ' : le-ℝ x (y -ℝ z) → le-ℝ (z +ℝ x) y
-    le-transpose-right-diff-ℝ' x<y-z =
-      tr
-        ( λ w → le-ℝ w y)
-        ( commutative-add-ℝ _ _)
-        ( le-transpose-right-diff-ℝ x<y-z)
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  iff-diff-right-le-ℝ : le-ℝ (x +ℝ y) z ↔ le-ℝ x (z -ℝ y)
-  iff-diff-right-le-ℝ =
-    (le-transpose-left-add-ℝ x y z , le-transpose-right-diff-ℝ x z y)
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    iff-add-right-le-ℝ : le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ y)
-    iff-add-right-le-ℝ =
-      tr
-        ( λ w → le-ℝ (x -ℝ y) z ↔ le-ℝ x (z +ℝ w))
-        ( neg-neg-ℝ y)
-        ( iff-diff-right-le-ℝ x (neg-ℝ y) z)
-
-    le-transpose-left-diff-ℝ : le-ℝ (x -ℝ y) z → le-ℝ x (z +ℝ y)
-    le-transpose-left-diff-ℝ = forward-implication iff-add-right-le-ℝ
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    le-transpose-right-add-ℝ : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ z) y
-    le-transpose-right-add-ℝ = backward-implication (iff-add-right-le-ℝ x z y)
-
-module _
-  {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    le-transpose-right-add-ℝ' : le-ℝ x (y +ℝ z) → le-ℝ (x -ℝ y) z
-    le-transpose-right-add-ℝ' x<y+z =
-      le-transpose-right-add-ℝ x z y (tr (le-ℝ x) (commutative-add-ℝ _ _) x<y+z)
-```
-
-### If `x < y`, then there is some `ε : ℚ⁺` with `x + ε < y`
-
-```agda
-module _
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} (x<y : le-ℝ x y)
-  where
-
-  abstract
-    exists-positive-rational-separation-le-ℝ :
-      exists ℚ⁺ (λ q → le-prop-ℝ (x +ℝ real-ℚ⁺ q) y)
-    exists-positive-rational-separation-le-ℝ =
-      let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → le-prop-ℝ (x +ℝ real-ℚ⁺ q) y))
-      in do
-        (q , 0<q , q<y-x) ←
-          dense-rational-le-ℝ zero-ℝ (y -ℝ x)
-            ( preserves-le-left-sim-ℝ
-              ( y -ℝ x)
-              ( x -ℝ x)
-              ( zero-ℝ)
-              ( right-inverse-law-add-ℝ x)
-              ( preserves-le-right-add-ℝ (neg-ℝ x) x y x<y))
-        intro-exists
-          ( q , is-positive-le-zero-ℚ (reflects-le-real-ℚ _ _ 0<q))
-          ( le-transpose-right-diff-ℝ' _ _ _ q<y-x)
-```
-
-### If `x < y + ε` for every positive rational `ε`, then `x ≤ y`
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
-  where
-
-  abstract
-    saturated-le-ℝ : ((ε : ℚ⁺) → le-ℝ x (y +ℝ real-ℚ⁺ ε)) → leq-ℝ x y
-    saturated-le-ℝ H =
-      leq-not-le-ℝ y x
-        ( λ y<x →
-          let open do-syntax-trunc-Prop empty-Prop
-          in do
-            (ε , y+ε<x) ←
-              exists-positive-rational-separation-le-ℝ {x = y} {y = x} y<x
-            irreflexive-le-ℝ
-              ( x)
-              ( transitive-le-ℝ x (y +ℝ real-ℚ⁺ ε) x y+ε<x (H ε)))
-```
-
 ### If `x` is less than each rational number `y` is less than, then `x ≤ y`
 
 ```agda
@@ -791,8 +525,8 @@ module _
     leq-le-rational-ℝ H =
       leq-leq'-ℝ _ _
         ( λ q y<q →
-          is-in-upper-cut-le-real-ℚ q x
-            ( H q (le-real-is-in-upper-cut-ℚ q y y<q)))
+          is-in-upper-cut-le-real-ℚ x
+            ( H q (le-real-is-in-upper-cut-ℚ y y<q)))
 ```
 
 ### Two real numbers are similar if they are less than the same rational numbers
@@ -832,13 +566,12 @@ module _
     le-split-add-rational-ℝ x+y<p =
       let open do-syntax-trunc-Prop (∃ _ _)
       in do
-        ((q , r) , x<q , y<r , p=q+r) ←
-          is-in-upper-cut-le-real-ℚ p (x +ℝ y) x+y<p
+        ((q , r) , x<q , y<r , p=q+r) ← is-in-upper-cut-le-real-ℚ (x +ℝ y) x+y<p
         intro-exists
           ( q , r)
           ( p=q+r ,
-            le-real-is-in-upper-cut-ℚ q x x<q ,
-            le-real-is-in-upper-cut-ℚ r y y<r)
+            le-real-is-in-upper-cut-ℚ x x<q ,
+            le-real-is-in-upper-cut-ℚ y y<r)
 ```
 
 ## References

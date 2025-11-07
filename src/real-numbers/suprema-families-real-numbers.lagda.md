@@ -42,6 +42,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 ```
@@ -151,7 +152,7 @@ module _
                 ( x-ε<yᵢ)
                 ( le-transpose-left-add-ℝ' _ _ _
                   ( le-transpose-right-diff-ℝ _ _ _
-                    ( le-real-is-in-lower-cut-ℚ ε (x -ℝ z) ε<x-z))))
+                    ( le-real-is-in-lower-cut-ℚ (x -ℝ z) ε<x-z))))
               ( yᵢ≤z i))
     pr2 (is-least-upper-bound-is-supremum-family-ℝ z) x≤z i =
       transitive-leq-ℝ (y i) x z x≤z
@@ -258,7 +259,7 @@ module _
             ( x-ε<yᵢ)
             ( le-transpose-left-add-ℝ' _ _ _
               ( le-transpose-right-diff-ℝ _ _ _
-                ( le-real-is-in-lower-cut-ℚ ε (x -ℝ z) ε<x-z))))
+                ( le-real-is-in-lower-cut-ℚ (x -ℝ z) ε<x-z))))
 
     le-supremum-iff-le-element-family-ℝ :
       {l4 : Level} → (z : ℝ l4) →

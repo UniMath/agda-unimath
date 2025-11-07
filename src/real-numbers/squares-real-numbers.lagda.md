@@ -193,7 +193,7 @@ abstract
       ( square-ℝ x)
       ( x *ℝ y)
       ( square-ℝ y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x y (leq-le-ℝ x y x<y))
+      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x y (leq-le-ℝ x<y))
       ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x y x<y)
 ```
 
@@ -207,10 +207,9 @@ abstract
   is-in-lower-cut-square-ℝ x q⁰⁺@(q , _) q∈Lx =
     let
       qℝ = nonnegative-real-ℚ⁰⁺ q⁰⁺
-      q<x = le-real-is-in-lower-cut-ℚ q x q∈Lx
+      q<x = le-real-is-in-lower-cut-ℚ x q∈Lx
     in
       is-in-lower-cut-le-real-ℚ
-        ( square-ℚ q)
         ( square-ℝ x)
         ( tr
           ( λ y → le-ℝ y (square-ℝ x))
@@ -230,7 +229,6 @@ abstract
     is-in-upper-cut-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℚ q)
   is-in-upper-cut-square-ℝ x⁰⁺@(x , _) q q∈Ux =
     is-in-upper-cut-le-real-ℚ
-      ( square-ℚ q)
       ( square-ℝ x)
       ( tr
         ( le-ℝ (square-ℝ x))
@@ -238,8 +236,8 @@ abstract
         ( preserves-le-square-ℝ⁰⁺
           ( x⁰⁺)
           ( nonnegative-real-ℚ⁺
-            ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q q∈Ux))
-          ( le-real-is-in-upper-cut-ℚ q x q∈Ux)))
+            ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))
+          ( le-real-is-in-upper-cut-ℚ x q∈Ux)))
 ```
 
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`

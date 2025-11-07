@@ -28,7 +28,9 @@ open import metric-spaces.short-functions-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -96,7 +98,7 @@ opaque
       ( lower-cut-ℝ (abs-ℝ x) q)
       ( id)
       ( λ (x<0 , 0<x) → ex-falso (is-disjoint-cut-ℝ x zero-ℚ (0<x , x<0)))
-      ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q zero-ℚ q<0)
+      ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q<0)
 
 nonnegative-abs-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
 nonnegative-abs-ℝ x = (abs-ℝ x , is-nonnegative-abs-ℝ x)
@@ -134,10 +136,10 @@ module _
       tr
         ( leq-ℝ (neg-ℝ (abs-ℝ x)))
         ( neg-neg-ℝ x)
-        ( neg-leq-ℝ (neg-ℝ x) (abs-ℝ x) neg-leq-abs-ℝ)
+        ( neg-leq-ℝ neg-leq-abs-ℝ)
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
-    neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+    neg-leq-neg-abs-ℝ = neg-leq-ℝ leq-abs-ℝ
 ```
 
 ### If `|x| ＝ 0` then `x ＝ 0`
@@ -231,23 +233,11 @@ module _
       leq-abs-leq-leq-neg-ℝ
         ( x +ℝ y)
         ( abs-ℝ x +ℝ abs-ℝ y)
-        ( preserves-leq-add-ℝ
-          ( x)
-          ( abs-ℝ x)
-          ( y)
-          ( abs-ℝ y)
-          ( leq-abs-ℝ x)
-          ( leq-abs-ℝ y))
+        ( preserves-leq-add-ℝ (leq-abs-ℝ x) (leq-abs-ℝ y))
         ( inv-tr
           ( λ z → leq-ℝ z (abs-ℝ x +ℝ abs-ℝ y))
           ( distributive-neg-add-ℝ x y)
-          ( preserves-leq-add-ℝ
-            ( neg-ℝ x)
-            ( abs-ℝ x)
-            ( neg-ℝ y)
-            ( abs-ℝ y)
-            ( neg-leq-abs-ℝ x)
-            ( neg-leq-abs-ℝ y)))
+          ( preserves-leq-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
 ```
 
 ### The absolute value is a short function
@@ -354,7 +344,7 @@ module _
     leq-abs-sqrt-square-ℝ' :
       leq-ℝ' (real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)) (abs-ℝ x)
     leq-abs-sqrt-square-ℝ' q |x|<q@(x<q , -x<q) =
-      ( is-positive-is-in-upper-cut-ℝ⁰⁺ (nonnegative-abs-ℝ x) q (x<q , -x<q) ,
+      ( is-positive-is-in-upper-cut-ℝ⁰⁺ (nonnegative-abs-ℝ x) (x<q , -x<q) ,
         is-in-upper-cut-square-pos-neg-ℝ x q x<q -x<q)
 
     eq-abs-sqrt-square-ℝ : abs-ℝ x ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)

@@ -54,6 +54,7 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 ```
@@ -184,7 +185,7 @@ module _
         (p , p<r² , x<p) ←
           forward-implication (is-rounded-upper-cut-ℝ⁰⁺ x (r *ℚ r)) x<r²
         let
-          is-pos-p = is-positive-is-in-upper-cut-ℝ⁰⁺ x p x<p
+          is-pos-p = is-positive-is-in-upper-cut-ℝ⁰⁺ x x<p
         (q⁺@(q , is-pos-q) , q<r , p<q²) ←
           rounded-above-square-le-ℚ⁺ (r , is-pos-r) (p , is-pos-p) p<r²
         intro-exists
@@ -270,8 +271,6 @@ module _
             ( λ x<q² → (is-positive-le-ℚ⁰⁺ (p , is-nonneg-p) q p<q , x<q²))
             ( is-located-lower-upper-cut-ℝ
               ( real-ℝ⁰⁺ x)
-              ( p *ℚ p)
-              ( q *ℚ q)
               ( preserves-le-square-ℚ⁰⁺
                 ( p , is-nonneg-p)
                 ( q , is-nonnegative-le-ℚ⁰⁺ (p , is-nonneg-p) q p<q)
@@ -533,7 +532,7 @@ opaque
     leq-ℝ' (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
   leq-unique-sqrt-ℝ⁰⁺' x⁰⁺@(x , _) y⁰⁺@(y , is-nonneg-y) (_ , x≤y²) q y<q =
     let
-      is-pos-q = is-positive-is-in-upper-cut-ℝ⁰⁺ y⁰⁺ q y<q
+      is-pos-q = is-positive-is-in-upper-cut-ℝ⁰⁺ y⁰⁺ y<q
       q⁺ = (q , is-pos-q)
       p⁻@(p , is-neg-p) = neg-ℚ⁺ q⁺
       p≤q = leq-negative-positive-ℚ p⁻ q⁺
@@ -554,7 +553,7 @@ opaque
               ( ([p,q] , p<y , y<q) , ([p,q] , p<y , y<q))
               ( leq-max-leq-both-ℚ _ _ _
                 ( leq-max-leq-both-ℚ _ _ _
-                  ( leq-eq-ℚ _ _ (negative-law-mul-ℚ q q))
+                  ( leq-eq-ℚ (negative-law-mul-ℚ q q))
                   ( leq-negative-positive-ℚ
                     ( mul-negative-positive-ℚ p⁻ q⁺)
                     ( q⁺ *ℚ⁺ q⁺)))

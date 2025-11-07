@@ -32,6 +32,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
@@ -96,8 +97,8 @@ module _
           map-disjunction
             ( λ p<y → inr-disjunction p<y)
             ( x<q ,_)
-            ( is-located-lower-upper-cut-ℝ y p q p<q))
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
+            ( is-located-lower-upper-cut-ℝ y p<q))
+        ( is-located-lower-upper-cut-ℝ x p<q)
       where
         claim : Prop (l1 ⊔ l2)
         claim =
@@ -331,8 +332,6 @@ module _
             ( max-ℝ x z)
             ( max-ℝ x z +ℝ real-ℚ⁺ d)
             ( leq-le-ℝ
-              ( max-ℝ x z)
-              ( max-ℝ x z +ℝ real-ℚ⁺ d)
               ( le-left-add-real-ℝ⁺
                 ( max-ℝ x z)
                 ( positive-real-ℚ⁺ d)))
@@ -453,14 +452,14 @@ module _
             ( max-ℝ x y)
             ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
         (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
-        let q<r = reflects-le-real-ℚ q r q-<ℝ-r
+        let q<r = reflects-le-real-ℚ q-<ℝ-r
         map-disjunction
           ( λ q<x →
             transitive-le-ℝ
               ( max-ℝ x y -ℝ real-ℚ ε)
               ( real-ℚ q)
               ( x)
-              ( le-real-is-in-lower-cut-ℚ q x q<x)
+              ( le-real-is-in-lower-cut-ℚ x q<x)
               ( max-ε<q))
           ( λ x<r →
             elim-disjunction
@@ -470,7 +469,7 @@ module _
                   ( max-ℝ x y -ℝ real-ℚ ε)
                   ( real-ℚ q)
                   ( y)
-                  ( le-real-is-in-lower-cut-ℚ q y q<y)
+                  ( le-real-is-in-lower-cut-ℚ y q<y)
                   ( max-ε<q))
               ( λ y<r →
                 ex-falso
@@ -478,11 +477,9 @@ module _
                     ( max-ℝ x y)
                     ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
                       ( leq-max-leq-leq-ℝ x y (real-ℚ r)
-                        ( leq-le-ℝ x (real-ℚ r)
-                          ( le-real-is-in-upper-cut-ℚ r x x<r))
-                        ( leq-le-ℝ y (real-ℚ r)
-                          ( le-real-is-in-upper-cut-ℚ r y y<r)))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ x x<r))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ y y<r)))
                       ( r<max))))
-              ( is-located-lower-upper-cut-ℝ y q r q<r))
-          ( is-located-lower-upper-cut-ℝ x q r q<r)
+              ( is-located-lower-upper-cut-ℝ y q<r))
+          ( is-located-lower-upper-cut-ℝ x q<r)
 ```

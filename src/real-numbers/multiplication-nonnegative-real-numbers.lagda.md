@@ -27,6 +27,7 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -62,8 +63,8 @@ opaque
               ([c,d]@((c , d) , _) , c<y , y<d)) ,
             [a,b][c,d]<q) ← xy<q
           let
-            b⁺ = (b , is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) b x<b)
-            d⁺ = (d , is-positive-is-in-upper-cut-ℝ⁰⁺ (y , 0≤y) d y<d)
+            b⁺ = (b , is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) x<b)
+            d⁺ = (d , is-positive-is-in-upper-cut-ℝ⁰⁺ (y , 0≤y) y<d)
           is-positive-le-ℚ⁺
             ( b⁺ *ℚ⁺ d⁺)
             ( q)

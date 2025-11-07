@@ -43,7 +43,7 @@ On this page, we outline basic relations between
 abstract
   is-nonnegative-is-positive-ℝ :
     {l : Level} {x : ℝ l} → is-positive-ℝ x → is-nonnegative-ℝ x
-  is-nonnegative-is-positive-ℝ = leq-le-ℝ _ _
+  is-nonnegative-is-positive-ℝ = leq-le-ℝ
 
 nonnegative-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁰⁺ l
 nonnegative-ℝ⁺ (x , is-pos-x) = (x , is-nonnegative-is-positive-ℝ is-pos-x)
@@ -59,7 +59,7 @@ abstract
     tr
       ( le-ℝ (neg-ℝ x))
       ( neg-zero-ℝ)
-      ( neg-le-ℝ zero-ℝ x 0<x)
+      ( neg-le-ℝ 0<x)
 
 neg-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁻ l
 neg-ℝ⁺ (x , is-pos-x) = (neg-ℝ x , neg-is-positive-ℝ x is-pos-x)
@@ -75,7 +75,7 @@ abstract
     tr
       ( λ z → le-ℝ z (neg-ℝ x))
       ( neg-zero-ℝ)
-      ( neg-le-ℝ x zero-ℝ x<0)
+      ( neg-le-ℝ x<0)
 
 neg-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 neg-ℝ⁻ (x , is-neg-x) = (neg-ℝ x , neg-is-negative-ℝ x is-neg-x)

@@ -79,10 +79,8 @@ module _
       tr
         ( λ w → leq-ℝ w (min-ℝ x y))
         ( neg-neg-ℝ z)
-        ( neg-leq-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y)) (neg-ℝ z)
-          ( leq-max-leq-leq-ℝ _ _ (neg-ℝ z)
-            ( neg-leq-ℝ z x z≤x)
-            ( neg-leq-ℝ z y z≤y)))
+        ( neg-leq-ℝ
+          ( leq-max-leq-leq-ℝ _ _ (neg-ℝ z) (neg-leq-ℝ z≤x) (neg-leq-ℝ z≤y)))
     pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min =
       let
         case :
@@ -93,7 +91,7 @@ module _
             ( tr
               ( leq-ℝ (min-ℝ x y))
               ( neg-neg-ℝ _)
-              ( neg-leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) -w≤max))
+              ( neg-leq-ℝ -w≤max))
             ( z≤min)
       in (case x (leq-left-max-ℝ _ _) , case y (leq-right-max-ℝ _ _))
 
@@ -172,10 +170,11 @@ module _
           le-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε) (neg-ℝ w) →
           le-ℝ w (min-ℝ x y +ℝ real-ℚ⁺ ε)
         case w max-ε<-w =
-          binary-tr le-ℝ
+          binary-tr
+            ( le-ℝ)
             ( neg-neg-ℝ w)
             ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ _ (neg-ℝ w) max-ε<-w)
+            ( neg-le-ℝ max-ε<-w)
       in
         elim-disjunction
           ( (le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨

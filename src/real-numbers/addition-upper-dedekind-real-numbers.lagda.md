@@ -111,7 +111,7 @@ module _
         (p , p<q , x+y<p) ← ∃p
         ((px , py) , (x<px , y<py , p=px+py)) ← x+y<p
         let
-          q-p⁺ = positive-diff-le-ℚ p q p<q
+          q-p⁺ = positive-diff-le-ℚ p<q
           ε⁺@(ε , _) = mediant-zero-ℚ⁺ q-p⁺
         intro-exists
           ( px +ℚ ε , q -ℚ (px +ℚ ε))

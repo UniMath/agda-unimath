@@ -28,6 +28,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -138,14 +139,12 @@ abstract
     lower-neighborhood-ℝ d y x
   lower-neighborhood-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
     is-in-lower-cut-le-real-ℚ
-      ( q)
       ( y)
       ( concatenate-le-leq-ℝ
         ( real-ℚ q)
         ( x -ℝ real-ℚ d)
         ( y)
         ( le-real-is-in-lower-cut-ℚ
-          ( q)
           ( x -ℝ real-ℚ d)
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
@@ -213,9 +212,6 @@ abstract
     dist-ℝ x z ≤-ℝ dist-ℝ x y +ℝ dist-ℝ y z
   triangle-inequality-dist-ℝ x y z =
     preserves-leq-left-sim-ℝ
-      ( dist-ℝ x y +ℝ dist-ℝ y z)
-      ( abs-ℝ (x -ℝ y +ℝ y -ℝ z))
-      ( abs-ℝ (x -ℝ z))
       ( preserves-sim-abs-ℝ
         ( similarity-reasoning-ℝ
           x -ℝ y +ℝ y -ℝ z

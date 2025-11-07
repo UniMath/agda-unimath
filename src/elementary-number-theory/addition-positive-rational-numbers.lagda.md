@@ -169,7 +169,7 @@ module _
   where
 
   le-diff-ℚ⁺ : ℚ⁺
-  le-diff-ℚ⁺ = positive-diff-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) H
+  le-diff-ℚ⁺ = positive-diff-le-ℚ H
 
   left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
   left-diff-law-add-ℚ⁺ =
@@ -342,15 +342,8 @@ module _
             ( le-right-mediant-ℚ y x I)
             ( tr
               ( leq-ℚ x)
-              ( right-law-positive-diff-le-ℚ
-                ( y)
-                ( mediant-ℚ y x)
-                ( le-left-mediant-ℚ y x I))
-              ( H
-                ( positive-diff-le-ℚ
-                  ( y)
-                  ( mediant-ℚ y x)
-                  ( le-left-mediant-ℚ y x I))))))
+              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y x I))
+              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y x I))))))
       ( id)
       ( decide-le-leq-ℚ y x)
 

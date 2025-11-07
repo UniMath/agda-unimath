@@ -235,7 +235,7 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
   abstract

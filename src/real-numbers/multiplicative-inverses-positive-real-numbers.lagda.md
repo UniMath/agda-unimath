@@ -58,6 +58,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -439,8 +440,6 @@ module _
                         ( x<p⁻¹))))
               ( is-located-lower-upper-cut-ℝ
                 ( real-ℝ⁺ x)
-                ( rational-ℚ⁺ (inv-ℚ⁺ q⁺))
-                ( rational-ℚ⁺ (inv-ℚ⁺ p⁺))
                 ( inv-le-ℚ⁺ p⁺ q⁺ p<q)))
         ( λ is-nonpos-p →
           inl-disjunction

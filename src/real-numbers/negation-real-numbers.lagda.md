@@ -83,7 +83,7 @@ module _
       ( disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r))
       ( inr-disjunction)
       ( inl-disjunction)
-      ( is-located-lower-upper-cut-ℝ x (neg-ℚ r) (neg-ℚ q) (neg-le-ℚ q<r))
+      ( is-located-lower-upper-cut-ℝ x (neg-le-ℚ q<r))
 
   opaque
     neg-ℝ : ℝ l
