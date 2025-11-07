@@ -12,6 +12,7 @@ open import foundation.cartesian-product-types
 open import foundation.commuting-triangles-of-identifications
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.constant-maps
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -34,11 +35,15 @@ open import structured-types.h-spaces
 open import structured-types.left-invertible-magmas
 open import structured-types.magmas
 open import structured-types.pointed-types
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-equivalences
 
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.cavallos-trick
 ```
 
 </details>
@@ -537,6 +542,83 @@ module _
       by inv-associative-Σ
     ≃ (I → type-Ω A∗)
       by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
+```
+
+### If `I` is pointed then `I`-ary loops are pointed equivalent to pointed maps `I →∗ ΩA`
+
+First we demonstrate the equivalence directly as a composite of simple
+equivalences, then we construct the explicit map and demonstrate that it is also
+pointed.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I∗ : Pointed-Type l1) (A∗ : Pointed-Type l2)
+  (let I = type-Pointed-Type I∗) (let i∗ = point-Pointed-Type I∗)
+  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
+  where
+
+  compute-type-multivar-Ω-pointed' :
+    type-multivar-Ω I A∗ ≃ (I∗ →∗ Ω A∗)
+  compute-type-multivar-Ω-pointed' =
+    equivalence-reasoning
+      Σ A (λ a → I → a ＝ a∗)
+      ≃ Σ A (λ a → Σ (I → a ＝ a∗) (λ f → Σ (a ＝ a∗) (f i∗ ＝_)))
+        by
+        equiv-tot
+          ( λ a → inv-right-unit-law-Σ-is-contr (λ f → is-torsorial-Id (f i∗)))
+      ≃ Σ (Σ A (_＝ a∗)) (λ (a , p) → Σ (I → a ＝ a∗) (λ a → a i∗ ＝ p))
+        by inv-associative-Σ ∘e equiv-tot (λ a → equiv-left-swap-Σ)
+      ≃ Σ (I → a∗ ＝ a∗) (λ f → f i∗ ＝ refl)
+        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
+
+  map-compute-multivar-Ω-pointed :
+    type-multivar-Ω I A∗ → (I∗ →∗ Ω A∗)
+  map-compute-multivar-Ω-pointed (a , p) =
+    ( (λ i → inv (p i∗) ∙ p i) , left-inv (p i∗))
+
+  map-inv-compute-multivar-Ω-pointed :
+    (I∗ →∗ Ω A∗) → type-multivar-Ω I A∗
+  map-inv-compute-multivar-Ω-pointed (f , p) = (a∗ , f)
+
+  is-section-map-inv-compute-multivar-Ω-pointed :
+    is-section map-compute-multivar-Ω-pointed map-inv-compute-multivar-Ω-pointed
+  is-section-map-inv-compute-multivar-Ω-pointed (f , p) =
+    eq-pointed-htpy _ _
+      ( cavallos-trick-H-Space' I∗ (Ω-H-Space A∗) _ _
+        ( λ x → ap (λ u → inv u ∙ f x) p))
+
+  is-retraction-map-inv-compute-multivar-Ω-pointed :
+    is-retraction
+      ( map-compute-multivar-Ω-pointed)
+      ( map-inv-compute-multivar-Ω-pointed)
+  is-retraction-map-inv-compute-multivar-Ω-pointed (a , p) =
+    eq-Eq-multivar-Ω _ _ (inv (p i∗) , refl-htpy)
+
+  preserves-point-map-compute-multivar-Ω-pointed :
+    map-compute-multivar-Ω-pointed (refl-multivar-Ω I A∗) ＝
+    ( const I (refl-Ω A∗) , refl)
+  preserves-point-map-compute-multivar-Ω-pointed = refl
+
+  is-equiv-map-compute-multivar-Ω-pointed :
+    is-equiv map-compute-multivar-Ω-pointed
+  is-equiv-map-compute-multivar-Ω-pointed =
+    is-equiv-is-invertible
+      ( map-inv-compute-multivar-Ω-pointed)
+      ( is-section-map-inv-compute-multivar-Ω-pointed)
+      ( is-retraction-map-inv-compute-multivar-Ω-pointed)
+
+  compute-type-multivar-Ω-pointed :
+    type-multivar-Ω I A∗ ≃ (I∗ →∗ Ω A∗)
+  compute-type-multivar-Ω-pointed =
+    ( map-compute-multivar-Ω-pointed ,
+      is-equiv-map-compute-multivar-Ω-pointed)
+
+  compute-multivar-Ω-pointed :
+    multivar-Ω I A∗ ≃∗ (I∗ →∗ Ω A∗ , (const I (refl-Ω A∗) , refl))
+  compute-multivar-Ω-pointed =
+    ( compute-type-multivar-Ω-pointed ,
+      preserves-point-map-compute-multivar-Ω-pointed)
 ```
 
 ### `ΣI`-ary loops are `I`-ary loops of loops
