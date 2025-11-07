@@ -119,7 +119,6 @@ opaque
               in
                 is-positive-le-ℚ⁺
                   ( a'⁻ *ℚ⁻ a'⁻)
-                  ( q)
                   ( concatenate-leq-le-ℚ
                     ( a' *ℚ a')
                     ( upper-bound-mul-closed-interval-ℚ [a',b'] [a',b'])
@@ -134,7 +133,6 @@ opaque
               in
                 is-positive-le-ℚ⁺
                   ( b'⁺ *ℚ⁺ b'⁺)
-                  ( q)
                   ( concatenate-leq-le-ℚ
                     ( b' *ℚ b')
                     ( upper-bound-mul-closed-interval-ℚ [a',b'] [a',b'])

@@ -47,7 +47,7 @@ nonnegative.
 ## Definition
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ
 
   is-nonnegative-mul-ℝ :
@@ -67,7 +67,6 @@ opaque
             d⁺ = (d , is-positive-is-in-upper-cut-ℝ⁰⁺ (y , 0≤y) y<d)
           is-positive-le-ℚ⁺
             ( b⁺ *ℚ⁺ d⁺)
-            ( q)
             ( concatenate-leq-le-ℚ
               ( b *ℚ d)
               ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])

@@ -177,10 +177,7 @@ module _
     unfolding le-ℝ real-ℚ
 
     preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
-    preserves-le-real-ℚ x<y =
-      intro-exists
-        ( mediant-ℚ x y)
-        ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+    preserves-le-real-ℚ = dense-le-ℚ
 
     reflects-le-real-ℚ : le-ℝ (real-ℚ x) (real-ℚ y) → le-ℚ x y
     reflects-le-real-ℚ =

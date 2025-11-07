@@ -201,7 +201,7 @@ module _
   {x y : ℚ} (H : le-ℚ x y)
   where
 
-  opaque
+  abstract opaque
     unfolding is-negative-ℚ
 
     is-negative-diff-le-ℚ : is-negative-ℚ (x -ℚ y)
@@ -218,7 +218,7 @@ module _
 ### Negative rational numbers are nonzero
 
 ```agda
-opaque
+abstract opaque
   unfolding is-negative-ℚ
 
   is-nonzero-is-negative-ℚ : {x : ℚ} → is-negative-ℚ x → is-nonzero-ℚ x
@@ -247,30 +247,30 @@ le-ℚ⁻ p q = le-ℚ (rational-ℚ⁻ p) (rational-ℚ⁻ q)
 ```agda
 abstract
   is-negative-leq-ℚ⁻ :
-    (q : ℚ⁻) (p : ℚ) → leq-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
-  is-negative-leq-ℚ⁻ (q , neg-q) p p≤q =
+    (q : ℚ⁻) {p : ℚ} → leq-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-leq-ℚ⁻ (q , neg-q) {p} p≤q =
     is-negative-le-zero-ℚ
       ( concatenate-leq-le-ℚ p q zero-ℚ p≤q (le-zero-is-negative-ℚ neg-q))
 
   is-negative-le-ℚ⁻ :
-    (q : ℚ⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
-  is-negative-le-ℚ⁻ q p p<q = is-negative-leq-ℚ⁻ q p (leq-le-ℚ p<q)
+    (q : ℚ⁻) {p : ℚ} → le-ℚ p (rational-ℚ⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁻ q p<q = is-negative-leq-ℚ⁻ q (leq-le-ℚ p<q)
 ```
 
 ### There is no greatest negative rational number
 
 ```agda
-opaque
+abstract opaque
   mediant-zero-ℚ⁻ : ℚ⁻ → ℚ⁻
   mediant-zero-ℚ⁻ (q , is-neg-q) =
     ( mediant-ℚ q zero-ℚ ,
       is-negative-le-zero-ℚ
-      ( le-right-mediant-ℚ _ _ (le-zero-is-negative-ℚ is-neg-q)))
+      ( le-right-mediant-ℚ (le-zero-is-negative-ℚ is-neg-q)))
 
   le-mediant-zero-ℚ⁻ :
     (q : ℚ⁻) → le-ℚ (rational-ℚ⁻ q) (rational-ℚ⁻ (mediant-zero-ℚ⁻ q))
   le-mediant-zero-ℚ⁻ (q , is-neg-q) =
-    le-left-mediant-ℚ _ _ (le-zero-is-negative-ℚ is-neg-q)
+    le-left-mediant-ℚ (le-zero-is-negative-ℚ is-neg-q)
 
 rational-mediant-zero-ℚ⁻ : ℚ⁻ → ℚ
 rational-mediant-zero-ℚ⁻ q = rational-ℚ⁻ (mediant-zero-ℚ⁻ q)

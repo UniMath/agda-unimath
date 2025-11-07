@@ -137,8 +137,7 @@ module _
           let
             r = mediant-ℚ p q
             p⁺ = (p , is-positive-le-zero-ℚ 0<p)
-            p<r = le-left-mediant-ℚ p q p<q
-            r<q = le-right-mediant-ℚ p q p<q
+            p<r = le-left-mediant-ℚ p<q
             r⁺ =
               ( r ,
                 is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ p r p<r 0<p))
@@ -150,7 +149,7 @@ module _
                   ((ε⁺@(ε , _) , Nεxy) , ε<p) ← p∈U
                   ¬Npxy
                     ( monotonic-neighborhood-Metric-Space M x y ε⁺ p⁺ ε<p Nεxy))
-              ( λ Nrxy → intro-exists (r⁺ , Nrxy) r<q)
+              ( λ Nrxy → intro-exists (r⁺ , Nrxy) (le-right-mediant-ℚ p<q))
               ( L x y p⁺ r⁺ p<r))
         ( λ p≤0 →
           inl-disjunction

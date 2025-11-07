@@ -53,7 +53,7 @@ module _
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding mul-ℝ
 
     is-positive-mul-ℝ :
@@ -67,9 +67,9 @@ module _
         (d , y<d) ← is-inhabited-upper-cut-ℝ y
         let
           a<b = le-lower-upper-cut-ℝ x a b a<x x<b
-          b⁺ = (b , is-positive-le-ℚ⁺ a⁺ b a<b)
+          b⁺ = (b , is-positive-le-ℚ⁺ a⁺ a<b)
           c<d = le-lower-upper-cut-ℝ y c d c<y y<d
-          d⁺ = (d , is-positive-le-ℚ⁺ c⁺ d c<d)
+          d⁺ = (d , is-positive-le-ℚ⁺ c⁺ c<d)
           [a,b] = ((a , b) , leq-le-ℚ a<b)
           [c,d] = ((c , d) , leq-le-ℚ c<d)
         is-positive-exists-ℚ⁺-in-lower-cut-ℝ

@@ -11,7 +11,6 @@ module real-numbers.addition-real-numbers where
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -20,10 +19,8 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
-open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -33,12 +30,6 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
-
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.addition-lower-dedekind-real-numbers
@@ -46,7 +37,6 @@ open import real-numbers.addition-upper-dedekind-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -156,48 +146,41 @@ ap-add-ℝ x=x' y=y' = ap-binary add-ℝ x=x' y=y'
 ### Addition is commutative
 
 ```agda
-module _
-  {l1 l2 : Level}
-  (x : ℝ l1) (y : ℝ l2)
-  where
+abstract opaque
+  unfolding add-ℝ
 
-  opaque
-    unfolding add-ℝ
-
-    commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
-    commutative-add-ℝ =
-      eq-eq-lower-real-ℝ
-        ( x +ℝ y)
-        ( y +ℝ x)
-        ( commutative-add-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
+  commutative-add-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x +ℝ y ＝ y +ℝ x
+  commutative-add-ℝ x y =
+    eq-eq-lower-real-ℝ
+      ( x +ℝ y)
+      ( y +ℝ x)
+      ( commutative-add-lower-ℝ (lower-real-ℝ x) (lower-real-ℝ y))
 ```
 
 ### Addition is associative
 
 ```agda
-module _
-  {l1 l2 l3 : Level}
-  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
+abstract opaque
+  unfolding add-ℝ
 
-  opaque
-    unfolding add-ℝ
-
-    associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
-    associative-add-ℝ =
-      eq-eq-lower-real-ℝ
-        ( (x +ℝ y) +ℝ z)
-        ( x +ℝ (y +ℝ z))
-        ( associative-add-lower-ℝ
-          ( lower-real-ℝ x)
-          ( lower-real-ℝ y)
-          ( lower-real-ℝ z))
+  associative-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
+  associative-add-ℝ x y z =
+    eq-eq-lower-real-ℝ
+      ( (x +ℝ y) +ℝ z)
+      ( x +ℝ (y +ℝ z))
+      ( associative-add-lower-ℝ
+        ( lower-real-ℝ x)
+        ( lower-real-ℝ y)
+        ( lower-real-ℝ z))
 ```
 
 ### Unit laws for addition
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℝ real-ℚ
 
   left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → zero-ℝ +ℝ x ＝ x
@@ -218,7 +201,7 @@ opaque
 ### Inverse laws for addition
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
@@ -283,7 +266,7 @@ module _
   (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding add-ℝ sim-ℝ
 
     preserves-sim-right-add-ℝ : sim-ℝ x y → sim-ℝ (x +ℝ z) (y +ℝ z)
@@ -406,7 +389,7 @@ module _
 ### The inclusion of rational numbers preserves addition
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℝ real-ℚ
 
   add-real-ℚ : (p q : ℚ) → real-ℚ p +ℝ real-ℚ q ＝ real-ℚ (p +ℚ q)
@@ -500,41 +483,6 @@ module _
                   ( left-inverse-law-add-ℝ _))
           ~ℝ neg-ℝ x +ℝ neg-ℝ y
             by sim-eq-ℝ (ap (_+ℝ neg-ℝ y) (left-unit-law-add-ℝ _)))
-```
-
-### The Abelian group of real numbers at `lzero` under addition
-
-```agda
-semigroup-add-ℝ-lzero : Semigroup (lsuc lzero)
-semigroup-add-ℝ-lzero =
-  ( ℝ-Set lzero ,
-    add-ℝ ,
-    associative-add-ℝ)
-
-monoid-add-ℝ-lzero : Monoid (lsuc lzero)
-monoid-add-ℝ-lzero =
-  ( semigroup-add-ℝ-lzero ,
-    zero-ℝ ,
-    left-unit-law-add-ℝ ,
-    right-unit-law-add-ℝ)
-
-commutative-monoid-add-ℝ-lzero : Commutative-Monoid (lsuc lzero)
-commutative-monoid-add-ℝ-lzero =
-  ( monoid-add-ℝ-lzero ,
-    commutative-add-ℝ)
-
-group-add-ℝ-lzero : Group (lsuc lzero)
-group-add-ℝ-lzero =
-  ( ( semigroup-add-ℝ-lzero) ,
-    ( zero-ℝ , left-unit-law-add-ℝ , right-unit-law-add-ℝ) ,
-    ( neg-ℝ ,
-      eq-sim-ℝ ∘ left-inverse-law-add-ℝ ,
-      eq-sim-ℝ ∘ right-inverse-law-add-ℝ))
-
-abelian-group-add-ℝ-lzero : Ab (lsuc lzero)
-abelian-group-add-ℝ-lzero =
-  ( group-add-ℝ-lzero ,
-    commutative-add-ℝ)
 ```
 
 ### If `x + y` is similar to `0`, then `y` is similar to `-x` and `x` is similar to `-y`

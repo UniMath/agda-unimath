@@ -188,7 +188,7 @@ module _
               ( is-rounded-lower-cut-ℝ⁺ x (rational-inv-ℚ⁺ q⁺))
               ( q⁻¹<x)
           intro-exists
-            ( r , is-positive-le-ℚ⁺ (inv-ℚ⁺ q⁺) r q⁻¹<r)
+            ( r , is-positive-le-ℚ⁺ (inv-ℚ⁺ q⁺) q⁻¹<r)
             ( r<x ,
               tr
                 ( λ s → le-ℚ s (q *ℚ r))
@@ -316,7 +316,7 @@ module _
       in do
         (q' , q<q' , q'∈L) ← ∃q'
         (r'⁺@(r' , _) , x<r' , q'r'<1) ←
-          q'∈L (is-positive-le-ℚ⁺ (q , is-pos-q) q' q<q')
+          q'∈L (is-positive-le-ℚ⁺ (q , is-pos-q) q<q')
         intro-exists
           ( r'⁺)
           ( x<r' ,
@@ -347,7 +347,7 @@ module _
         (r⁺@(r , _) , r<x , 1<qr) ← ∃r
         (r' , r<r' , r'<x) ←
           forward-implication (is-rounded-lower-cut-ℝ⁺ x r) r<x
-        let r'⁺ = (r' , is-positive-le-ℚ⁺ r⁺ r' r<r')
+        let r'⁺ = (r' , is-positive-le-ℚ⁺ r⁺ r<r')
         intro-exists
           ( rational-ℚ⁺ (inv-ℚ⁺ r'⁺))
           ( transitive-le-ℚ
@@ -379,7 +379,7 @@ module _
       in do
         (q' , q'<q , is-pos-q' , ∃r') ← ∃q'
         (r'⁺@(r' , _) , x<r' , 1<q'r') ← ∃r'
-        ( is-positive-le-ℚ⁺ (q' , is-pos-q') q q'<q ,
+        ( is-positive-le-ℚ⁺ (q' , is-pos-q') q'<q ,
           intro-exists
             ( r'⁺)
             ( x<r' ,
@@ -421,7 +421,7 @@ module _
         ( λ is-pos-p →
           let
             p⁺ = (p , is-pos-p)
-            is-pos-q = is-positive-le-ℚ⁺ p⁺ q p<q
+            is-pos-q = is-positive-le-ℚ⁺ p⁺ p<q
             q⁺ = (q , is-pos-q)
           in
             elim-disjunction
@@ -513,8 +513,7 @@ module _
         a' = max-ℚ a (rational-inv-ℚ⁺ d⁺)
         a'<x =
           is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a (rational-inv-ℚ⁺ d⁺) a<x d⁻¹<x
-        is-pos-a' =
-          is-positive-leq-ℚ⁺ (inv-ℚ⁺ d⁺) a' (leq-right-max-ℚ _ _)
+        is-pos-a' = is-positive-leq-ℚ⁺ (inv-ℚ⁺ d⁺) (leq-right-max-ℚ _ _)
         a'⁺ = (a' , is-pos-a')
         c⁺ = (c , is-pos-c)
         x<c⁻¹ : is-in-upper-cut-ℝ⁺ x (rational-inv-ℚ⁺ c⁺)
@@ -635,10 +634,10 @@ module _
             (c'⁺@(c' , is-pos-c') , c'<x⁻¹) ← exists-ℚ⁺-in-lower-cut-inv-ℝ⁺ x
             let
               a'' = max-ℚ a a'
-              is-pos-a'' = is-positive-leq-ℚ⁺ a'⁺ a'' (leq-right-max-ℚ _ _)
+              is-pos-a'' = is-positive-leq-ℚ⁺ a'⁺ (leq-right-max-ℚ _ _)
               a''<x = is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a a' a<x a'<x
               c'' = max-ℚ c c'
-              is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ c'' (leq-right-max-ℚ _ _)
+              is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ (leq-right-max-ℚ _ _)
               c''<x⁻¹ = is-in-lower-cut-max-ℚ (real-inv-ℝ⁺ x) c c' c<x⁻¹ c'<x⁻¹
               [a'',b] =
                 ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'' b a''<x x<b)

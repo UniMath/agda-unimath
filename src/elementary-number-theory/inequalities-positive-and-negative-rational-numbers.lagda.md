@@ -101,8 +101,8 @@ abstract
 ```agda
 abstract
   is-positive-le-ℚ⁰⁺ :
-    (p : ℚ⁰⁺) (q : ℚ) → le-ℚ (rational-ℚ⁰⁺ p) q → is-positive-ℚ q
-  is-positive-le-ℚ⁰⁺ (p , nonneg-p) q p<q =
+    (p : ℚ⁰⁺) {q : ℚ} → le-ℚ (rational-ℚ⁰⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁰⁺ (p , nonneg-p) p<q =
     is-positive-le-zero-ℚ
       ( concatenate-leq-le-ℚ _ _ _ (leq-zero-is-nonnegative-ℚ nonneg-p) p<q)
 ```
@@ -112,8 +112,8 @@ abstract
 ```agda
 abstract
   is-negative-le-ℚ⁰⁻ :
-    (q : ℚ⁰⁻) (p : ℚ) → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
-  is-negative-le-ℚ⁰⁻ (q , nonpos-q) p p<q =
+    (q : ℚ⁰⁻) {p : ℚ} → le-ℚ p (rational-ℚ⁰⁻ q) → is-negative-ℚ p
+  is-negative-le-ℚ⁰⁻ (q , nonpos-q) {p} p<q =
     is-negative-le-zero-ℚ
       ( concatenate-le-leq-ℚ p q zero-ℚ
         ( p<q)

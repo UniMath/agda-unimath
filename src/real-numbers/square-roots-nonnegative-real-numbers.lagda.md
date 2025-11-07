@@ -164,7 +164,6 @@ module _
                 is-pos-p =
                   is-positive-le-ℚ⁺
                     ( q *ℚ q , is-positive-mul-ℚ is-pos-q is-pos-q)
-                    ( p)
                     ( q²<p)
               (q'⁺@(q' , _) , q<q' , q'²<p) ←
                 rounded-below-square-le-ℚ⁺ (q , is-pos-q) (p , is-pos-p) q²<p
@@ -203,7 +202,7 @@ module _
         let
           is-nonneg-r =
             is-nonnegative-is-positive-ℚ
-              ( is-positive-le-ℚ⁰⁺ (q , is-nonneg-q) r q<r)
+              ( is-positive-le-ℚ⁰⁺ (q , is-nonneg-q) q<r)
         le-lower-cut-ℝ
           ( real-ℝ⁰⁺ x)
           ( q *ℚ q)
@@ -218,7 +217,7 @@ module _
       let open do-syntax-trunc-Prop (upper-cut-sqrt-ℝ⁰⁺ r)
       in do
         (q , q<r , is-pos-q , x<q²) ← ∃q
-        let is-pos-r = is-positive-le-ℚ⁺ (q , is-pos-q) r q<r
+        let is-pos-r = is-positive-le-ℚ⁺ (q , is-pos-q) q<r
         ( is-pos-r ,
           le-upper-cut-ℝ
             ( real-ℝ⁰⁺ x)
@@ -268,7 +267,7 @@ module _
         ( λ is-nonneg-p →
           map-disjunction
             ( λ p²<x _ → p²<x)
-            ( λ x<q² → (is-positive-le-ℚ⁰⁺ (p , is-nonneg-p) q p<q , x<q²))
+            ( λ x<q² → (is-positive-le-ℚ⁰⁺ (p , is-nonneg-p) p<q , x<q²))
             ( is-located-lower-upper-cut-ℝ
               ( real-ℝ⁰⁺ x)
               ( preserves-le-square-ℚ⁰⁺
@@ -338,7 +337,6 @@ module _
               is-pos-xy x y {r} lb1 lb2 =
                 is-positive-le-ℚ⁰⁺
                   ( q , is-nonneg-q)
-                  ( x *ℚ y)
                   ( concatenate-le-leq-ℚ
                     ( q)
                     ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])

@@ -519,12 +519,11 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
-  opaque
-    unfolding le-ℚ-Prop
-    unfolding mediant-ℚ
+  abstract opaque
+    unfolding le-ℚ-Prop mediant-ℚ
 
     le-left-mediant-ℚ : le-ℚ x (mediant-ℚ x y)
     le-left-mediant-ℚ =
@@ -543,7 +542,7 @@ module _
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (x<y : le-ℚ x y)
   where
 
   abstract
@@ -551,7 +550,7 @@ module _
     dense-le-ℚ =
       intro-exists
         ( mediant-ℚ x y)
-        ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
+        ( le-left-mediant-ℚ x<y , le-right-mediant-ℚ x<y)
 ```
 
 ### Strict inequality on the rational numbers is located

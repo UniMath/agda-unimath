@@ -22,7 +22,6 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
@@ -36,7 +35,6 @@ open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
@@ -52,19 +50,16 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.groups
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.large-posets
 open import order-theory.posets
 
 open import real-numbers.addition-real-numbers
@@ -77,7 +72,6 @@ open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -255,7 +249,7 @@ module _
           do-syntax-trunc-Prop (∃ ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-mul-ℝ r))
       in do
         ((a<x<b , c<y<d) , q<[a,b][c,d]) ← q∈L
-        (r , q<r , r<[a,b][c,d]) ← dense-le-ℚ q _ q<[a,b][c,d]
+        (r , q<r , r<[a,b][c,d]) ← dense-le-ℚ q<[a,b][c,d]
         intro-exists r (q<r , intro-exists (a<x<b , c<y<d) r<[a,b][c,d])
 
     forward-implication-is-rounded-upper-cut-mul-ℝ :
@@ -267,7 +261,7 @@ module _
           do-syntax-trunc-Prop (∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-mul-ℝ q))
       in do
         ((a<x<b , c<y<d) , [a,b][c,d]<r) ← r∈U
-        (q , [a,b][c,d]<q , q<r) ← dense-le-ℚ _ r [a,b][c,d]<r
+        (q , [a,b][c,d]<q , q<r) ← dense-le-ℚ [a,b][c,d]<r
         intro-exists q (q<r , intro-exists (a<x<b , c<y<d) [a,b][c,d]<q)
 
     backward-implication-is-rounded-lower-cut-mul-ℝ :
@@ -616,7 +610,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding mul-ℝ
 
     enclosing-rational-range-mul-ℝ :
@@ -717,13 +711,13 @@ module _
 ### Commutativity of multiplication
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ mul-ℝ
 
-  leq-commute-ℝ :
+  leq-commute-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
     leq-ℝ (x *ℝ y) (y *ℝ x)
-  leq-commute-ℝ x y q q<xy =
+  leq-commute-mul-ℝ x y q q<xy =
     let open do-syntax-trunc-Prop (lower-cut-mul-ℝ y x q)
     in do
       ((a<x<b@([a,b] , _ , _) , c<y<d@([c,d] , _ , _)) , q<[a,b][c,d]) ← q<xy
@@ -737,7 +731,7 @@ opaque
 abstract
   commutative-mul-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ y ＝ y *ℝ x
   commutative-mul-ℝ x y =
-    antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
+    antisymmetric-leq-ℝ _ _ (leq-commute-mul-ℝ x y) (leq-commute-mul-ℝ y x)
 ```
 
 ### Associativity of multiplication
@@ -747,7 +741,7 @@ module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ mul-ℝ
 
     leq-associative-mul-ℝ : leq-ℝ ((x *ℝ y) *ℝ z) (x *ℝ (y *ℝ z))
@@ -811,7 +805,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
 
     leq-right-unit-law-mul-ℝ : leq-ℝ (x *ℝ one-ℝ) x
@@ -875,7 +869,7 @@ module _
 ### Distributivity of multiplication over addition
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ leq-ℝ' mul-ℝ add-ℝ
 
   leq-left-distributive-mul-add-ℝ :
@@ -1044,7 +1038,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
 
     leq-left-zero-law-mul-ℝ : leq-ℝ (zero-ℝ *ℝ x) zero-ℝ
@@ -1109,7 +1103,7 @@ module _
 ### The inclusion of rational numbers preserves multiplication
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ real-ℚ
 
   mul-real-ℚ : (p q : ℚ) → real-ℚ p *ℝ real-ℚ q ＝ real-ℚ (p *ℚ q)
@@ -1157,7 +1151,7 @@ opaque
 ### Multiplication on the real numbers preserves similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ
 
   leq-sim-right-mul-ℝ :

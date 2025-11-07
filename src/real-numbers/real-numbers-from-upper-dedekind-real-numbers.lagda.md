@@ -41,7 +41,8 @@ open import real-numbers.upper-dedekind-real-numbers
 Given an
 [upper Dedekind real number](real-numbers.upper-dedekind-real-numbers.md) `x`,
 we can convert `x` to a
-[Dedekind real number](real-numbers.dedekind-real-numbers.md) if and only if the
+[Dedekind real number](real-numbers.dedekind-real-numbers.md)
+[if and only if](foundation.logical-equivalences.md) the
 [complement](foundation.complements-subtypes.md) of the cut of `x` is
 [inhabited](foundation.inhabited-subtypes.md) and for any `p q : ℚ` with
 `p < q`, `p` is in the [complement](foundation.complements-subtypes.md) of the
@@ -89,8 +90,8 @@ module _
         (r , q<r , r∉U) ← q∈L
         intro-exists
           ( mediant-ℚ q r)
-          ( le-left-mediant-ℚ q r q<r ,
-            intro-exists r (le-right-mediant-ℚ q r q<r , r∉U))
+          ( le-left-mediant-ℚ q<r ,
+            intro-exists r (le-right-mediant-ℚ q<r , r∉U))
     pr2 (is-rounded-lower-cut-real-upper-ℝ q) ∃r =
       let open do-syntax-trunc-Prop (lower-cut-real-upper-ℝ q)
       in do
@@ -125,9 +126,9 @@ module _
         elim-disjunction
           (lower-cut-real-upper-ℝ p ∨ cut-upper-ℝ x q)
           ( λ r∉U →
-            inl-disjunction (intro-exists r (le-left-mediant-ℚ p q p<q , r∉U)))
+            inl-disjunction (intro-exists r (le-left-mediant-ℚ p<q , r∉U)))
           ( inr-disjunction)
-          ( L r q (le-right-mediant-ℚ p q p<q))
+          ( L r q (le-right-mediant-ℚ p<q))
 
   real-upper-ℝ : ℝ l
   real-upper-ℝ =

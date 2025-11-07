@@ -334,16 +334,16 @@ module _
     ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
   leq-leq-add-positive-ℚ H =
     rec-coproduct
-      ( λ I →
+      ( λ y<x →
         ex-falso
           ( not-leq-le-ℚ
             ( mediant-ℚ y x)
             ( x)
-            ( le-right-mediant-ℚ y x I)
+            ( le-right-mediant-ℚ y<x)
             ( tr
               ( leq-ℚ x)
-              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y x I))
-              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y x I))))))
+              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
+              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x))))))
       ( id)
       ( decide-le-leq-ℚ y x)
 
