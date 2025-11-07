@@ -197,7 +197,7 @@ module _
   multivar-Ω-Magma = (type-multivar-Ω I A∗ , mul-multivar-Ω)
 ```
 
-### The coherent H-space of `I`-ary loops on a pointed type
+### The coherent H-space of `I`-ary loops, for pointed `I`
 
 ```agda
 module _
@@ -259,7 +259,7 @@ module _
       coherence-unit-laws-mul-multivar-Ω)
 ```
 
-### Associativity
+### Associativity of multiplication
 
 ```agda
 module _
@@ -274,10 +274,9 @@ module _
     Eq-multivar-Ω
       ( mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x y) z)
       ( mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ y z))
-  Eq-associative-mul-multivar-Ω (a , p) (b , q) (c , r) =
-    ( refl ,
-      λ x →
-      equational-reasoning
+  pr1 (Eq-associative-mul-multivar-Ω (a , p) (b , q) (c , r)) = refl
+  pr2 (Eq-associative-mul-multivar-Ω (a , p) (b , q) (c , r)) x =
+    equational-reasoning
       (((p x ∙ inv (q i∗)) ∙ q x) ∙ inv (r i∗)) ∙ r x
       ＝ (p x ∙ inv (q i∗)) ∙ ((q x ∙ inv (r i∗)) ∙ r x)
         by
@@ -286,7 +285,7 @@ module _
         by
         ap
           ( λ u → (p x ∙ inv u) ∙ (q x ∙ inv (r i∗) ∙ r x))
-          ( inv (is-section-inv-concat' (r i∗) (q i∗))))
+          ( inv (is-section-inv-concat' (r i∗) (q i∗)))
 
   associative-mul-multivar-Ω :
     (x y z : type-multivar-Ω I A∗) →
@@ -299,7 +298,10 @@ module _
       ( Eq-associative-mul-multivar-Ω x y z)
 ```
 
-### The inverse
+### The multiplicative inverse
+
+Given `i∗ : I` and `a∗ : A`, then any `I`-ary loop `(a , p)` has a
+multiplicative inverse given by `(a∗ , (i ↦ (p i)⁻¹ ∙ p i∗)`.
 
 ```agda
 module _
@@ -317,20 +319,19 @@ module _
     Eq-multivar-Ω
       ( mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω x))
       ( refl-multivar-Ω I A∗)
-  Eq-right-inverse-law-mul-multivar-Ω (a , p) =
-    ( p i∗ ,
-      λ x →
-      equational-reasoning
-        (p x ∙ inv (inv (p i∗) ∙ p i∗)) ∙ (inv (p x) ∙ p i∗)
-        ＝ p x ∙ (inv (p x) ∙ p i∗)
-          by
-          ap
-            ( _∙ (inv (p x) ∙ p i∗))
-            ( ap (p x ∙_) (ap inv (left-inv (p i∗))) ∙ right-unit)
-        ＝ p i∗
-          by is-section-inv-concat (p x) (p i∗)
-        ＝ p i∗ ∙ refl
-          by inv right-unit)
+  pr1 (Eq-right-inverse-law-mul-multivar-Ω (a , p)) = p i∗
+  pr2 (Eq-right-inverse-law-mul-multivar-Ω (a , p)) x =
+    equational-reasoning
+      (p x ∙ inv (inv (p i∗) ∙ p i∗)) ∙ (inv (p x) ∙ p i∗)
+      ＝ p x ∙ (inv (p x) ∙ p i∗)
+        by
+        ap
+          ( _∙ (inv (p x) ∙ p i∗))
+          ( ap (p x ∙_) (ap inv (left-inv (p i∗))) ∙ right-unit)
+      ＝ p i∗
+        by is-section-inv-concat (p x) (p i∗)
+      ＝ p i∗ ∙ refl
+        by inv right-unit
 
   right-inverse-law-mul-multivar-Ω :
     (x : type-multivar-Ω I A∗) →
@@ -347,14 +348,13 @@ module _
     Eq-multivar-Ω
       ( mul-multivar-Ω I∗ A∗ (inv-multivar-Ω x) x)
       ( refl-multivar-Ω I A∗)
-  Eq-left-inverse-law-mul-multivar-Ω (a , p) =
-    ( refl ,
-      ( λ i →
-        equational-reasoning
-        ((inv (p i) ∙ p i∗) ∙ inv (p i∗)) ∙ p i
-        ＝ inv (p i) ∙ p i
-          by ap (_∙ p i) (is-retraction-inv-concat' (p i∗) (inv (p i)))
-        ＝ refl by left-inv (p i)))
+  pr1 (Eq-left-inverse-law-mul-multivar-Ω (a , p)) = refl
+  pr2 (Eq-left-inverse-law-mul-multivar-Ω (a , p)) i =
+    equational-reasoning
+      ((inv (p i) ∙ p i∗) ∙ inv (p i∗)) ∙ p i
+      ＝ inv (p i) ∙ p i
+        by ap (_∙ p i) (is-retraction-inv-concat' (p i∗) (inv (p i)))
+      ＝ refl by left-inv (p i)
 
   left-inverse-law-mul-multivar-Ω :
     (x : type-multivar-Ω I A∗) →
@@ -387,36 +387,36 @@ module _
     is-section (mul-multivar-Ω I∗ A∗ a) (left-mul-inv-multivar-Ω a)
   is-section-left-mul-inv-multivar-Ω a x =
     equational-reasoning
-    mul-multivar-Ω I∗ A∗ a (mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) x)
-    ＝ mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a)) x
-      by inv (associative-mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a) x)
-    ＝ mul-multivar-Ω I∗ A∗ (refl-multivar-Ω I A∗) x
-      by
-      ap
-        ( λ u → mul-multivar-Ω I∗ A∗ u x)
-        ( right-inverse-law-mul-multivar-Ω I∗ A∗ a)
-    ＝ x
-      by left-unit-law-mul-multivar-Ω I∗ A∗ x
+      mul-multivar-Ω I∗ A∗ a (mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) x)
+      ＝ mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a)) x
+        by inv (associative-mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a) x)
+      ＝ mul-multivar-Ω I∗ A∗ (refl-multivar-Ω I A∗) x
+        by
+        ap
+          ( λ u → mul-multivar-Ω I∗ A∗ u x)
+          ( right-inverse-law-mul-multivar-Ω I∗ A∗ a)
+      ＝ x
+        by left-unit-law-mul-multivar-Ω I∗ A∗ x
 
   is-retraction-left-mul-inv-multivar-Ω :
     (a : type-multivar-Ω I A∗) →
     is-retraction (mul-multivar-Ω I∗ A∗ a) (left-mul-inv-multivar-Ω a)
   is-retraction-left-mul-inv-multivar-Ω a x =
     equational-reasoning
-    mul-multivar-Ω I∗ A∗
-      ( inv-multivar-Ω I∗ A∗ a)
-      ( mul-multivar-Ω I∗ A∗ a x)
-    ＝ mul-multivar-Ω I∗ A∗
-        ( mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a)
-        ( x)
-      by
-      inv (associative-mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a x)
-    ＝ mul-multivar-Ω I∗ A∗ (refl-multivar-Ω I A∗) x
-      by
-      ap
-        ( λ u → mul-multivar-Ω I∗ A∗ u x)
-        ( left-inverse-law-mul-multivar-Ω I∗ A∗ a)
-    ＝ x by left-unit-law-mul-multivar-Ω I∗ A∗ x
+      mul-multivar-Ω I∗ A∗
+        ( inv-multivar-Ω I∗ A∗ a)
+        ( mul-multivar-Ω I∗ A∗ a x)
+      ＝ mul-multivar-Ω I∗ A∗
+          ( mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a)
+          ( x)
+        by
+        inv (associative-mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a x)
+      ＝ mul-multivar-Ω I∗ A∗ (refl-multivar-Ω I A∗) x
+        by
+        ap
+          ( λ u → mul-multivar-Ω I∗ A∗ u x)
+          ( left-inverse-law-mul-multivar-Ω I∗ A∗ a)
+      ＝ x by left-unit-law-mul-multivar-Ω I∗ A∗ x
 
   section-left-mul-multivar-Ω :
     (a : type-multivar-Ω I A∗) → section (mul-multivar-Ω I∗ A∗ a)
@@ -468,13 +468,13 @@ module _
       ( right-mul-inv-multivar-Ω a)
   is-section-right-mul-inv-multivar-Ω a x =
     equational-reasoning
-    mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω I∗ A∗ a)) a
-    ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a)
-      by associative-mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω I∗ A∗ a) a
-    ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
-      by ap (mul-multivar-Ω I∗ A∗ x) (left-inverse-law-mul-multivar-Ω I∗ A∗ a)
-    ＝ x
-      by right-unit-law-mul-multivar-Ω I∗ A∗ x
+      mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω I∗ A∗ a)) a
+      ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ (inv-multivar-Ω I∗ A∗ a) a)
+        by associative-mul-multivar-Ω I∗ A∗ x (inv-multivar-Ω I∗ A∗ a) a
+      ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
+        by ap (mul-multivar-Ω I∗ A∗ x) (left-inverse-law-mul-multivar-Ω I∗ A∗ a)
+      ＝ x
+        by right-unit-law-mul-multivar-Ω I∗ A∗ x
 
   is-retraction-right-mul-inv-multivar-Ω :
     (a : type-multivar-Ω I A∗) →
@@ -483,13 +483,13 @@ module _
       ( right-mul-inv-multivar-Ω a)
   is-retraction-right-mul-inv-multivar-Ω a x =
     equational-reasoning
-    mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x a) (inv-multivar-Ω I∗ A∗ a)
-    ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a))
-      by associative-mul-multivar-Ω I∗ A∗ x a (inv-multivar-Ω I∗ A∗ a)
-    ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
-      by ap (mul-multivar-Ω I∗ A∗ x) (right-inverse-law-mul-multivar-Ω I∗ A∗ a)
-    ＝ x
-      by right-unit-law-mul-multivar-Ω I∗ A∗ x
+      mul-multivar-Ω I∗ A∗ (mul-multivar-Ω I∗ A∗ x a) (inv-multivar-Ω I∗ A∗ a)
+      ＝ mul-multivar-Ω I∗ A∗ x (mul-multivar-Ω I∗ A∗ a (inv-multivar-Ω I∗ A∗ a))
+        by associative-mul-multivar-Ω I∗ A∗ x a (inv-multivar-Ω I∗ A∗ a)
+      ＝ mul-multivar-Ω I∗ A∗ x (refl-multivar-Ω I A∗)
+        by ap (mul-multivar-Ω I∗ A∗ x) (right-inverse-law-mul-multivar-Ω I∗ A∗ a)
+      ＝ x
+        by right-unit-law-mul-multivar-Ω I∗ A∗ x
 
   section-right-mul-multivar-Ω :
     (a : type-multivar-Ω I A∗) →
@@ -535,15 +535,15 @@ module _
     type-multivar-Ω (I + unit) A∗ ≃ (I → type-Ω A∗)
   equiv-type-isolated-point-multivar-Ω =
     equivalence-reasoning
-    Σ A (λ a → I + unit → a ＝ a∗)
-    ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
-      by equiv-tot (λ a → equiv-universal-property-Maybe)
-    ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
-      by equiv-tot (λ a → commutative-product)
-    ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
-      by inv-associative-Σ
-    ≃ (I → type-Ω A∗)
-      by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
+      Σ A (λ a → I + unit → a ＝ a∗)
+      ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
+        by equiv-tot (λ a → equiv-universal-property-Maybe)
+      ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
+        by equiv-tot (λ a → commutative-product)
+      ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
+        by inv-associative-Σ
+      ≃ (I → type-Ω A∗)
+        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
 ```
 
 ### If `I` is pointed then `I`-ary loops are pointed equivalent to pointed maps `I →∗ ΩA`
