@@ -27,9 +27,9 @@ open import trees.plane-trees
 
 A
 {{#concept "Batanin system" Disambiguation="globular types" Agda=batanin-system-Globular-Type}}
-is an internal definition of a
+is similar to a
 [pasting diagram](globular-types.globular-pasting-diagrams.md) of
-[globular types](globular-types.globular-types.md).
+[globular types](globular-types.globular-types.md), but it is defined directly in terms of its cells and not as a [globular map](globular-types.globular-maps.md) from a representing object.
 
 ## Definition
 
