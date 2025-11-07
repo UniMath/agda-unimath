@@ -133,7 +133,7 @@ module _
             by right-zero-law-mul-ℚ a)
     compute-sum-standard-geometric-fin-sequence-ℚ (succ-ℕ n) =
       let
-        1/1-r = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
+        1/⟨1-r⟩ = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
       in
         equational-reasoning
           sum-standard-geometric-fin-sequence-ℚ a r (succ-ℕ n)
@@ -148,7 +148,7 @@ module _
                 ( refl)
           ＝
             ( a *ℚ
-              ( (one-ℚ -ℚ power-ℚ n r) *ℚ 1/1-r)) +ℚ
+              ( (one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩)) +ℚ
             ( a *ℚ power-ℚ n r)
             by
               ap-add-ℚ
@@ -156,12 +156,12 @@ module _
                 ( compute-standard-geometric-sequence-ℚ a r n)
           ＝
             a *ℚ
-            (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/1-r) +ℚ power-ℚ n r)
+            (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ power-ℚ n r)
             by inv (left-distributive-mul-add-ℚ a _ _)
           ＝
             a *ℚ
-            ( (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/1-r) +ℚ
-              (power-ℚ n r *ℚ (one-ℚ -ℚ r)) *ℚ 1/1-r))
+            ( (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ
+              (power-ℚ n r *ℚ (one-ℚ -ℚ r)) *ℚ 1/⟨1-r⟩))
             by
               ap-mul-ℚ
                 ( refl)
@@ -173,16 +173,16 @@ module _
           ＝
             a *ℚ
             ( ( (one-ℚ -ℚ power-ℚ n r) +ℚ (power-ℚ n r *ℚ (one-ℚ -ℚ r))) *ℚ
-              1/1-r)
+              1/⟨1-r⟩)
             by
               ap-mul-ℚ
                 ( refl)
-                ( inv (right-distributive-mul-add-ℚ _ _ 1/1-r))
+                ( inv (right-distributive-mul-add-ℚ _ _ 1/⟨1-r⟩))
           ＝
             a *ℚ
             ( ( one-ℚ -ℚ power-ℚ n r +ℚ
                 ((power-ℚ n r *ℚ one-ℚ) -ℚ (power-ℚ n r *ℚ r))) *ℚ
-              1/1-r)
+              1/⟨1-r⟩)
             by
               ap-mul-ℚ
                 ( refl)
@@ -193,7 +193,7 @@ module _
             a *ℚ
             ( ( one-ℚ -ℚ power-ℚ n r +ℚ
                 ((power-ℚ n r -ℚ power-ℚ (succ-ℕ n) r))) *ℚ
-              1/1-r)
+              1/⟨1-r⟩)
             by
               ap-mul-ℚ
                 ( refl)
@@ -204,7 +204,7 @@ module _
                       ( right-unit-law-mul-ℚ _)
                       ( inv (power-succ-ℚ n r))))
                   ( refl))
-          ＝ a *ℚ ((one-ℚ -ℚ power-ℚ (succ-ℕ n) r) *ℚ 1/1-r)
+          ＝ a *ℚ ((one-ℚ -ℚ power-ℚ (succ-ℕ n) r) *ℚ 1/⟨1-r⟩)
             by
               ap-mul-ℚ
                 ( refl)

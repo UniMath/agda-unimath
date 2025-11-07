@@ -37,17 +37,16 @@ open import lists.sequences
 ## Ideas
 
 A
-{{#concept "geometric sequence" Disambiguation="in a commutative semiring" Agda=geometric-sequence-Commutative-Ring}}
-in a [semiring](ring-theory.semirings.md) is an
-[geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
-semiring multiplicative [semigroup](group-theory.semigroups.md).
+{{#concept "geometric sequence" Disambiguation="in a commutative ring" Agda=geometric-sequence-Commutative-Ring}}
+in a [commutative ring](commutative-algebra.commutative-rings.md) is an
+[geometric sequence](ring-theory.geometric-sequences-semirings.md) in the ring's
+multiplicative [semigroup](group-theory.semigroups.md).
 
-These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
-semiring.
+These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the ring.
 
 ## Definitions
 
-### Geometric sequences in semirings
+### Geometric sequences in commutative rings
 
 ```agda
 module _
@@ -112,7 +111,7 @@ module _
       ( u)
 ```
 
-### The standard geometric sequences in a semiring
+### The standard geometric sequences in a commutative ring
 
 The standard geometric sequence with initial term `a` and common factor `r` is
 the sequence `u` defined by:
@@ -180,7 +179,7 @@ module _
 
 ## Properties
 
-### Any geometric sequence in a semiring is homotopic to a standard geometric sequence
+### Any geometric sequence is homotopic to a standard geometric sequence
 
 ```agda
 module _
