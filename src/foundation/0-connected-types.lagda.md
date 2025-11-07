@@ -289,6 +289,14 @@ module _
               ( map-trunc-Set f (unit-trunc-Set a)))
             ( λ where refl → refl)))
 
+  is-0-connected-im-is-0-connected-domain' :
+    A → all-elements-merely-equal A → is-0-connected (im f)
+  is-0-connected-im-is-0-connected-domain' a C =
+    is-contr-equiv'
+      ( im (map-trunc-Set f))
+      ( equiv-trunc-im-Set f)
+      ( is-contr-im-map-trunc-Set-is-0-connected-domain' a C)
+
   is-0-connected-im-is-0-connected-domain :
     is-0-connected A → is-0-connected (im f)
   is-0-connected-im-is-0-connected-domain C =
@@ -296,12 +304,7 @@ module _
       ( is-inhabited-is-0-connected C)
       ( is-contr-Prop _)
       ( λ a →
-        is-contr-equiv'
-          ( im (map-trunc-Set f))
-          ( equiv-trunc-im-Set f)
-          ( is-contr-im-map-trunc-Set-is-0-connected-domain'
-            ( a)
-            ( mere-eq-is-0-connected C)))
+        is-0-connected-im-is-0-connected-domain' a (mere-eq-is-0-connected C))
 ```
 
 ### The image of a point is 0-connected
