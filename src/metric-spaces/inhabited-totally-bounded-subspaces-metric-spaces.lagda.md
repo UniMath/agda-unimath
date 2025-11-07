@@ -7,6 +7,8 @@ module metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -15,10 +17,14 @@ open import foundation.images
 open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.nets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 open import metric-spaces.totally-bounded-subspaces-metric-spaces
@@ -134,4 +140,26 @@ product-inhabited-totally-bounded-subspace-Metric-Space
           ( subset-totally-bounded-subspace-Metric-Space X S)
           ( subset-totally-bounded-subspace-Metric-Space Y T)))
       ( is-inhabited-Σ |S| (λ _ → |T|)))
+```
+
+### It is decidable whether or not a totally bounded subspace of a metric space is inhabited
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2)
+  (S : totally-bounded-subspace-Metric-Space l3 l4 X)
+  where
+
+  abstract
+    is-inhabited-or-empty-totally-bounded-subspace-Metric-Space :
+      is-inhabited-or-empty (type-totally-bounded-subspace-Metric-Space X S)
+    is-inhabited-or-empty-totally-bounded-subspace-Metric-Space =
+      rec-trunc-Prop
+        ( is-inhabited-or-empty-Prop _)
+        ( λ M →
+          is-inhabited-or-empty-type-is-inhabited-or-empty-net-Metric-Space
+            ( subspace-totally-bounded-subspace-Metric-Space X S)
+            ( one-ℚ⁺)
+            ( M one-ℚ⁺))
+        ( is-totally-bounded-subspace-totally-bounded-subspace-Metric-Space X S)
 ```

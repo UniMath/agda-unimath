@@ -30,7 +30,9 @@ open import univalent-combinatorics.standard-finite-types
 
 Any map `f : A → B` determines a map between
 [finite sequences](lists.finite-sequences.md)
-`fin-sequence A n → fin-sequence B n` for every `n`.
+`fin-sequence A n → fin-sequence B n` for every `n`. This is the
+{{#concept "functorial action" Disambiguation="of finite sequences" Agda=map-fin-sequence}}
+of finite sequences.
 
 ## Definition
 

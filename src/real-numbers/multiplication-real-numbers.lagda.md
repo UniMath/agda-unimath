@@ -593,6 +593,9 @@ module _
         ( is-disjoint-lower-upper-cut-mul-ℝ x y)
         ( is-located-mul-ℝ)
 
+mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
+mul-ℝ' y x = mul-ℝ x y
+
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _*ℝ_ = mul-ℝ
@@ -1188,6 +1191,20 @@ module _
         ( commutative-mul-ℝ x z)
         ( commutative-mul-ℝ y z)
         ( preserves-sim-right-mul-ℝ x~y)
+
+abstract
+  preserves-sim-mul-ℝ :
+    {l1 l2 l3 l4 : Level} →
+    (a : ℝ l1) (a' : ℝ l2) → sim-ℝ a a' →
+    (b : ℝ l3) (b' : ℝ l4) → sim-ℝ b b' →
+    sim-ℝ (a *ℝ b) (a' *ℝ b')
+  preserves-sim-mul-ℝ a a' a~a' b b' b~b' =
+    transitive-sim-ℝ
+      ( a *ℝ b)
+      ( a *ℝ b')
+      ( a' *ℝ b')
+      ( preserves-sim-right-mul-ℝ b' a a' a~a')
+      ( preserves-sim-left-mul-ℝ a b b' b~b')
 ```
 
 ### Swapping laws for multiplication on real numbers

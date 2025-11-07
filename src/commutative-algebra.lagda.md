@@ -22,6 +22,8 @@ open import commutative-algebra.formal-power-series-commutative-semirings public
 open import commutative-algebra.full-ideals-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
+open import commutative-algebra.geometric-sequences-commutative-rings public
+open import commutative-algebra.geometric-sequences-commutative-semirings public
 open import commutative-algebra.groups-of-units-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-semirings public
@@ -36,6 +38,7 @@ open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.joins-ideals-commutative-rings public
 open import commutative-algebra.joins-radical-ideals-commutative-rings public
+open import commutative-algebra.large-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.multiples-of-elements-commutative-rings public

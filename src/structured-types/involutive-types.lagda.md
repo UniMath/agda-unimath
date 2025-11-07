@@ -18,11 +18,13 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-Involutive types are types equipped with a `ℤ/2`-action. In other words,
-involutive types are type families over `2-Element-Type lzero`.
+{{#concept "Involutive types" Agda=Involutive-Type}} are types equipped with a
+`ℤ/2`-action. In other words, involutive types are type families over
+`2-Element-Type lzero`.
 
 Similarly, an involutive structure on a type `X` consists of a type family `Y`
-over `2-Element-Type lzero` equipped with an equivalence `X ≃ Y (Fin 2)`.
+over `2-Element-Type lzero` equipped with an
+[equivalence](foundation-core.equivalences.md) `X ≃ Y (Fin 2)`.
 
 ## Definitions
 

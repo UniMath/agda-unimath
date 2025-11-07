@@ -85,6 +85,7 @@ open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
+open import elementary-number-theory.geometric-sequences-rational-numbers public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
@@ -122,6 +123,7 @@ open import elementary-number-theory.maximum-rational-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
+open import elementary-number-theory.metric-additive-group-of-rational-numbers public
 open import elementary-number-theory.minima-and-maxima-rational-numbers public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-positive-rational-numbers public
@@ -148,6 +150,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.multiplicative-group-of-rational-numbers public
 open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-nonnegative-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
@@ -178,8 +181,10 @@ open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.positive-rational-numbers public
 open import elementary-number-theory.powers-integers public
+open import elementary-number-theory.powers-nonnegative-rational-numbers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.powers-positive-rational-numbers public
+open import elementary-number-theory.powers-rational-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-closed-intervals-rational-numbers public

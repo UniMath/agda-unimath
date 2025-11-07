@@ -7,6 +7,7 @@ module elementary-number-theory.strict-inequality-nonnegative-rational-numbers w
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -36,4 +37,25 @@ le-prop-ℚ⁰⁺ p q = le-ℚ-Prop (rational-ℚ⁰⁺ p) (rational-ℚ⁰⁺ q
 
 le-ℚ⁰⁺ : (p q : ℚ⁰⁺) → UU lzero
 le-ℚ⁰⁺ p q = type-Prop (le-prop-ℚ⁰⁺ p q)
+```
+
+## Properties
+
+### Strict inequality on the nonnegative rational numbers is transitive
+
+```agda
+abstract
+  transitive-le-ℚ⁰⁺ : (p q r : ℚ⁰⁺) → le-ℚ⁰⁺ q r → le-ℚ⁰⁺ p q → le-ℚ⁰⁺ p r
+  transitive-le-ℚ⁰⁺ (p , _) (q , _) (r , _) = transitive-le-ℚ p q r
+```
+
+### Concatenation laws with inequality
+
+```agda
+abstract
+  concatenate-le-leq-ℚ⁰⁺ : (p q r : ℚ⁰⁺) → le-ℚ⁰⁺ p q → leq-ℚ⁰⁺ q r → le-ℚ⁰⁺ p r
+  concatenate-le-leq-ℚ⁰⁺ (p , _) (q , _) (r , _) = concatenate-le-leq-ℚ p q r
+
+  concatenate-leq-le-ℚ⁰⁺ : (p q r : ℚ⁰⁺) → leq-ℚ⁰⁺ p q → le-ℚ⁰⁺ q r → le-ℚ⁰⁺ p r
+  concatenate-leq-le-ℚ⁰⁺ (p , _) (q , _) (r , _) = concatenate-leq-le-ℚ p q r
 ```

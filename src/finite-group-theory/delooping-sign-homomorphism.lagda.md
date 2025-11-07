@@ -84,9 +84,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Ideas
 
-The delooping of a group homomorphism `f : G → H` is a pointed map
-`Bf : BG → BH` equipped with a homotopy witnessing that the following square
-commutes :
+The delooping of a
+[group homomorphism](group-theory.homomorphisms-concrete-groups.md) `f : G → H`
+is a pointed map `Bf : BG → BH` equipped with a
+[homotopy](foundation-core.homotopies.md) witnessing that the following square
+commutes:
 
 ```text
         f
@@ -95,13 +97,14 @@ commutes :
  ≅|           |≅
   |           |
   ∨           ∨
-  BG ------> BH
+  BG ------> BH.
        ΩBf
 ```
 
-In this file, we study the delooping of the sign homomorphism, and, more
-precisely, how to detect that a pointed map between `BSn` and `BS2` is a
-delooping of the sign homomorphism.
+On this page, we study the
+{{#concept "delooping of the sign homomorphism" Agda=delooping-sign}}, and, more
+precisely, how to detect that a [pointed map](structured-types.pointed-maps.md)
+between `BSn` and `BS2` is a delooping of the sign homomorphism.
 
 ## Definition
 
@@ -1266,7 +1269,7 @@ module _
                     ( eq-counting-equivalence-class-R n)
                     ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( inv
-                  ( eq-tr-type-Ω
+                  ( eq-conjugation-tr-type-Ω
                     ( eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop))
