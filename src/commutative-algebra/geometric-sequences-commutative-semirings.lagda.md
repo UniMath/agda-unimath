@@ -309,9 +309,18 @@ module _
           ( succ-ℕ n)
         ＝
           add-Commutative-Semiring R
-            ( term-Fin a r (succ-ℕ n) (zero-Fin n))
+            ( standard-geometric-fin-sequence-Commutative-Semiring R
+              ( a)
+              ( r)
+              ( succ-ℕ n)
+              ( zero-Fin n))
             ( sum-fin-sequence-type-Commutative-Semiring R n
-              ( λ i → term-Fin a r (succ-ℕ n) (inr-Fin n i)))
+              ( λ i →
+                standard-geometric-fin-sequence-Commutative-Semiring R
+                  ( a)
+                  ( r)
+                  ( succ-ℕ n)
+                  ( inr-Fin n i)))
           by
             snoc-sum-fin-sequence-type-Commutative-Semiring R n
               ( standard-geometric-fin-sequence-Commutative-Semiring R
@@ -321,16 +330,25 @@ module _
               ( refl)
         ＝
           add-Commutative-Semiring R
-            ( term a r 0)
+            ( seq-standard-geometric-sequence-Commutative-Semiring R a r 0)
             ( sum-fin-sequence-type-Commutative-Semiring R n
-              ( λ i → term a r (succ-ℕ (nat-Fin n i))))
+              ( λ i →
+                seq-standard-geometric-sequence-Commutative-Semiring R
+                  ( a)
+                  ( r)
+                  ( succ-ℕ (nat-Fin n i))))
           by
             ap-add-Commutative-Semiring R
               ( ap
                 ( seq-standard-geometric-sequence-Commutative-Semiring R a r)
                 ( is-zero-nat-zero-Fin {n}))
               ( htpy-sum-fin-sequence-type-Commutative-Semiring R n
-                ( λ i → ap (term a r) (nat-inr-Fin n i)))
+                ( λ i →
+                  ap
+                    ( seq-standard-geometric-sequence-Commutative-Semiring R
+                      ( a)
+                      ( r))
+                    ( nat-inr-Fin n i)))
         ＝
           add-Commutative-Semiring R
             ( a)
@@ -425,15 +443,4 @@ module _
                       ( a)
                       ( r) ∘
                     nat-Fin n)))
-      where
-        term :
-          type-Commutative-Semiring R → type-Commutative-Semiring R →
-          sequence (type-Commutative-Semiring R)
-        term a' r' =
-          seq-standard-geometric-sequence-Commutative-Semiring R a' r'
-        term-Fin :
-          type-Commutative-Semiring R → type-Commutative-Semiring R →
-          (n : ℕ) → fin-sequence (type-Commutative-Semiring R) n
-        term-Fin a' r' =
-          standard-geometric-fin-sequence-Commutative-Semiring R a' r'
 ```
