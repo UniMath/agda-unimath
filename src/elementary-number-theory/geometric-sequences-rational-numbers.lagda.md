@@ -117,7 +117,7 @@ module _
             by right-zero-law-mul-ℚ a)
     compute-sum-standard-geometric-fin-sequence-ℚ (succ-ℕ n) =
       let
-        1/1-r = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
+        1/⟨1-r⟩ = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
       in
         equational-reasoning
           sum-standard-geometric-fin-sequence-ℚ a r (succ-ℕ n)

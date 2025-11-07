@@ -34,12 +34,12 @@ open import ring-theory.rings
 
 A
 {{#concept "geometric sequence" Disambiguation="in a ring" Agda=geometric-sequence-Ring}}
-in a [ring](ring-theory.semirings.md) is a
+in a [ring](ring-theory.rings.md) is a
 [geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
 underlying [semiring](ring-theory.semirings.md).
 
 These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
-semiring.
+ring.
 
 ## Definitions
 
@@ -86,7 +86,7 @@ module _
       ( u)
 ```
 
-### The standard geometric sequences in a semiring
+### The standard geometric sequences in a ring
 
 The standard geometric sequence with initial term `a` and common factor `r` is
 the sequence `u` defined by:
@@ -138,7 +138,7 @@ module _
 
 ## Properties
 
-### Any geometric sequence in a semiring is homotopic to a standard geometric sequence
+### Any geometric sequence is homotopic to a standard geometric sequence
 
 ```agda
 module _
