@@ -1,4 +1,4 @@
-# `0`-Connected types
+# 0-Connected types
 
 ```agda
 module foundation.0-connected-types where
@@ -12,6 +12,7 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fiber-inclusions
+open import foundation.evaluation-functions
 open import foundation.functoriality-set-truncation
 open import foundation.images
 open import foundation.inhabited-types
@@ -61,7 +62,13 @@ is-0-connected A = type-Prop (is-0-connected-Prop A)
 
 is-prop-is-0-connected : {l : Level} (A : UU l) → is-prop (is-0-connected A)
 is-prop-is-0-connected A = is-prop-type-Prop (is-0-connected-Prop A)
+```
 
+## Properties
+
+### 0-connected types are inhabited
+
+```agda
 abstract
   is-inhabited-is-0-connected :
     {l : Level} {A : UU l} → is-0-connected A → is-inhabited A
@@ -70,13 +77,21 @@ abstract
       ( center C)
       ( set-Prop (trunc-Prop A))
       ( unit-trunc-Prop)
+```
 
+### All elements of 0-connected types are merely equal
+
+```agda
 abstract
   mere-eq-is-0-connected :
     {l : Level} {A : UU l} → is-0-connected A → all-elements-merely-equal A
   mere-eq-is-0-connected {A = A} H x y =
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
+```
 
+### A type is 0-connected if and only if it is inhabited and all elements are merely equal
+
+```agda
 abstract
   is-0-connected-mere-eq :
     {l : Level} {A : UU l} (a : A) →
@@ -96,17 +111,22 @@ abstract
     apply-universal-property-trunc-Prop H
       ( is-0-connected-Prop _)
       ( λ a → is-0-connected-mere-eq a (K a))
+```
 
-is-0-connected-is-surjective-point :
-  {l1 : Level} {A : UU l1} (a : A) →
-  is-surjective (point a) → is-0-connected A
-is-0-connected-is-surjective-point a H =
-  is-0-connected-mere-eq a
-    ( λ x →
-      apply-universal-property-trunc-Prop
-        ( H x)
-        ( mere-eq-Prop a x)
-        ( λ u → unit-trunc-Prop (pr2 u)))
+### A type is 0-connected iff any point inclusion is surjective
+
+```agda
+abstract
+  is-0-connected-is-surjective-point :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-surjective (point a) → is-0-connected A
+  is-0-connected-is-surjective-point a H =
+    is-0-connected-mere-eq a
+      ( λ x →
+        apply-universal-property-trunc-Prop
+          ( H x)
+          ( mere-eq-Prop a x)
+          ( λ u → unit-trunc-Prop (pr2 u)))
 
 abstract
   is-surjective-point-is-0-connected :
@@ -117,21 +137,29 @@ abstract
       ( mere-eq-is-0-connected H a x)
       ( trunc-Prop (fiber (point a) x))
       ( λ where refl → unit-trunc-Prop (star , refl))
+```
 
-is-trunc-map-ev-point-is-connected :
+### If `A` is 0-connected and `B` is `k+1`-truncated then every evaluation map `(A → B) → B` is `k`-truncated
+
+```agda
+is-trunc-map-ev-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
-  is-0-connected A → is-trunc (succ-𝕋 k) B →
-  is-trunc-map k (ev-point' a {B})
-is-trunc-map-ev-point-is-connected k {A} {B} a H K =
+    is-0-connected A → is-trunc (succ-𝕋 k) B →
+    is-trunc-map k (ev-function B a)
+is-trunc-map-ev-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
-    ( ev-point' star {B})
+    ( ev-function B star)
     ( precomp (point a) B)
     ( is-trunc-map-is-equiv k
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k
       ( is-surjective-point-is-0-connected a H)
       ( λ _ → (B , K)))
+```
 
+### The dependent universal property of 0-connected types
+
+```agda
 equiv-dependent-universal-property-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
   ( {l : Level} (P : A → Prop l) →
@@ -148,7 +176,11 @@ apply-dependent-universal-property-is-0-connected :
   {l : Level} (P : A → Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
 apply-dependent-universal-property-is-0-connected a H P =
   map-inv-equiv (equiv-dependent-universal-property-is-0-connected a H P)
+```
 
+### A type `A` is 0-connected if and only if every fiber inclusion `B a → Σ A B` is surjective
+
+```agda
 abstract
   is-surjective-fiber-inclusion :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -177,7 +209,11 @@ abstract
     is-0-connected A
   is-0-connected-is-surjective-fiber-inclusion a H =
     is-0-connected-mere-eq a (mere-eq-is-surjective-fiber-inclusion a H)
+```
 
+### 0-connected types are closed under equivalences
+
+```agda
 is-0-connected-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → is-0-connected B → is-0-connected A
@@ -189,7 +225,7 @@ is-0-connected-equiv' :
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```
 
-### `0`-connected types are closed under cartesian products
+### 0-connected types are closed under cartesian products
 
 ```agda
 module _
@@ -205,7 +241,7 @@ module _
       ( is-contr-product p1 p2)
 ```
 
-### The unit type is `0`-connected
+### The unit type is 0-connected
 
 ```agda
 abstract
@@ -214,7 +250,7 @@ abstract
     is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 ```
 
-### A contractible type is `0`-connected
+### Contractible types are 0-connected
 
 ```agda
 is-0-connected-is-contr :
@@ -224,16 +260,16 @@ is-0-connected-is-contr X p =
   is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
 ```
 
-### The image of a function with a `0`-connected domain is `0`-connected
+### The image of a function with a 0-connected domain is 0-connected
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where abstract
 
-  is-0-connected-im-is-0-connected-domain' :
+  is-contr-im-map-trunc-Set-is-0-connected-domain' :
     A → all-elements-merely-equal A → is-contr (im (map-trunc-Set f))
-  is-0-connected-im-is-0-connected-domain' a C =
+  is-contr-im-map-trunc-Set-is-0-connected-domain' a C =
     is-contr-im
       ( trunc-Set B)
       ( unit-trunc-Set a)
@@ -263,18 +299,23 @@ module _
         is-contr-equiv'
           ( im (map-trunc-Set f))
           ( equiv-trunc-im-Set f)
-          ( is-0-connected-im-is-0-connected-domain'
+          ( is-contr-im-map-trunc-Set-is-0-connected-domain'
             ( a)
             ( mere-eq-is-0-connected C)))
+```
 
-abstract
-  is-0-connected-im-point' :
-    {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
+### The image of a point is 0-connected
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where abstract
+
+  is-0-connected-im-point' : (f : unit → A) → is-0-connected (im f)
   is-0-connected-im-point' f =
     is-0-connected-im-is-0-connected-domain f is-0-connected-unit
 
-  is-0-connected-im-point :
-    {l1 : Level} {A : UU l1} (a : A) → is-0-connected (im (point a))
+  is-0-connected-im-point : (a : A) → is-0-connected (im (point a))
   is-0-connected-im-point a = is-0-connected-im-point' (point a)
 ```
 
