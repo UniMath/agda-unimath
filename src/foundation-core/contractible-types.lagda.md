@@ -27,8 +27,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Contractible types are types that have, up to identification, exactly one
-element.
+{{#concept "Contractible types" Agda=is-contr}} are types that have, up to
+[identification](foundation-core.identity-types.md), exactly one element.
 
 ## Definition
 
@@ -93,8 +93,7 @@ module _
 
   abstract
     is-contr-equiv : A ≃ B → is-contr B → is-contr A
-    is-contr-equiv (e , is-equiv-e) is-contr-B =
-      is-contr-is-equiv e is-equiv-e is-contr-B
+    is-contr-equiv (e , is-equiv-e) = is-contr-is-equiv e is-equiv-e
 
 module _
   {l1 l2 : Level} (A : UU l1) {B : UU l2}
@@ -103,16 +102,14 @@ module _
   abstract
     is-contr-is-equiv' :
       (f : A → B) → is-equiv f → is-contr A → is-contr B
-    is-contr-is-equiv' f is-equiv-f is-contr-A =
+    is-contr-is-equiv' f is-equiv-f =
       is-contr-is-equiv A
         ( map-inv-is-equiv is-equiv-f)
         ( is-equiv-map-inv-is-equiv is-equiv-f)
-        ( is-contr-A)
 
   abstract
     is-contr-equiv' : (e : A ≃ B) → is-contr A → is-contr B
-    is-contr-equiv' (pair e is-equiv-e) is-contr-A =
-      is-contr-is-equiv' e is-equiv-e is-contr-A
+    is-contr-equiv' (e , is-equiv-e) = is-contr-is-equiv' e is-equiv-e
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -128,7 +125,8 @@ module _
         ( contraction is-contr-A)
 
   equiv-is-contr : is-contr A → is-contr B → A ≃ B
-  pr1 (equiv-is-contr is-contr-A is-contr-B) a = center is-contr-B
+  pr1 (equiv-is-contr is-contr-A is-contr-B) a =
+    center is-contr-B
   pr2 (equiv-is-contr is-contr-A is-contr-B) =
     is-equiv-is-contr _ is-contr-A is-contr-B
 ```

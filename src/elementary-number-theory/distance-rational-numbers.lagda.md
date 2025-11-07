@@ -64,6 +64,22 @@ abstract
     inv (abs-neg-ℚ _) ∙ ap abs-ℚ (distributive-neg-diff-ℚ _ _)
 ```
 
+### Negation preserves distance
+
+```agda
+abstract
+  dist-neg-ℚ : (p q : ℚ) → dist-ℚ (neg-ℚ p) (neg-ℚ q) ＝ dist-ℚ p q
+  dist-neg-ℚ p q =
+    equational-reasoning
+      abs-ℚ (neg-ℚ p -ℚ neg-ℚ q)
+      ＝ abs-ℚ (neg-ℚ p +ℚ q)
+        by ap abs-ℚ (ap-add-ℚ refl (neg-neg-ℚ q))
+      ＝ abs-ℚ (q -ℚ p)
+        by ap abs-ℚ (commutative-add-ℚ _ _)
+      ＝ dist-ℚ p q
+        by commutative-dist-ℚ q p
+```
+
 ### A rational number's distance from itself is zero
 
 ```agda
