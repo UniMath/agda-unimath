@@ -51,14 +51,19 @@ open import synthetic-homotopy-theory.suspensions-of-types
 ## Idea
 
 Given a type `I` and a [pointed type](structured-types.pointed-types.md)
-`a∗ : A`, we can form the `I`-ary loop space in `A` as the type
-`Σ (a : A), (I → (a ＝ a∗))`. We recover the
-[standard loops](synthetic-homotopy-theory.loop-spaces.md) as the binary loops,
-`A` as the `∅`-ary loops, and there is a unique unary loop. The `𝕊¹`-ary loops
-correspond to [loops of loops](synthetic-homotopy-theory.double-loop-spaces.md).
+`a∗ : A`, we can form the {{#concept "`I`-ary loop space" Agda=multivar-Ω}} in
+`A` as the type `Σ (a : A), (I → (a ＝ a∗))`. This type is canonically pointed
+at `(a∗ , refl-htpy)`. We recover the
+[standard loop space](synthetic-homotopy-theory.loop-spaces.md) `ΩA` as the
+binary loops, the type `A` itself as the `∅`-ary loops, and there is a unique
+unary loop. The `𝕊¹`-ary loops correspond to
+[loops of loops](synthetic-homotopy-theory.double-loop-spaces.md).
 
-For every point of `I` there is a coherent, associative, and invertible H-space
-structure on `I`-ary loops.
+For every point `x` of `I` there is a coherent, associative, and invertible
+[H-space structure](structured-types.h-spaces.md) on `I`-ary loops, and moreover
+any point `x` of `I` gives a
+[pointed equivalence](structured-types.pointed-equivalences.md) between `I`-ary
+loops of `A` and `(I , x) →∗ ΩA`.
 
 ## Table of files directly related to loop spaces
 
@@ -623,9 +628,12 @@ module _
 
 ### `ΣI`-ary loops are `I`-ary loops of loops
 
-For every type $I$ we have the equivalence
+For every type $I$ we have an equivalence
 
-$$Ω_{ΣI}(A) ≃ Ω_I(Ω(A)).$$
+$$Ω_{ΣI}(A) ≃ Ω_I(Ω(A))$$
+
+where $ΣI$ denotes the
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) of $I$.
 
 ```agda
 module _
@@ -637,11 +645,11 @@ module _
     type-multivar-Ω (suspension I) A∗ ≃ type-multivar-Ω I (Ω A∗)
   compute-type-multivar-Ω-suspension =
     equivalence-reasoning
-    Σ A (λ a → suspension I → a ＝ a∗)
-    ≃ Σ A (λ a → Σ (a ＝ a∗) (λ S → Σ (a ＝ a∗) (λ N → I → N ＝ S)))
-      by equiv-tot (λ a → equiv-left-swap-Σ ∘e equiv-up-suspension)
-    ≃ Σ (Σ A (λ a → a ＝ a∗)) (λ (a , S) → Σ (a ＝ a∗) (λ N → I → N ＝ S))
-      by inv-associative-Σ
-    ≃ Σ (a∗ ＝ a∗) (λ N → I → N ＝ refl)
-      by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl-Ω A∗)
+      Σ A (λ a → suspension I → a ＝ a∗)
+      ≃ Σ A (λ a → Σ (a ＝ a∗) (λ S → Σ (a ＝ a∗) (λ N → I → N ＝ S)))
+        by equiv-tot (λ a → equiv-left-swap-Σ ∘e equiv-up-suspension)
+      ≃ Σ (Σ A (λ a → a ＝ a∗)) (λ (a , S) → Σ (a ＝ a∗) (λ N → I → N ＝ S))
+        by inv-associative-Σ
+      ≃ Σ (a∗ ＝ a∗) (λ N → I → N ＝ refl)
+        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl-Ω A∗)
 ```
