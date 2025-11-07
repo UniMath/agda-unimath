@@ -85,6 +85,7 @@ open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
+open import elementary-number-theory.geometric-sequences-rational-numbers public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
