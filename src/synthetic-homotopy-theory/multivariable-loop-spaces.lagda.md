@@ -13,6 +13,7 @@ open import foundation.commuting-triangles-of-identifications
 open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -27,6 +28,7 @@ open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universal-property-empty-type
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
@@ -524,32 +526,6 @@ module _
     ((λ x → mul-multivar-Ω I∗ A∗ x a) , is-equiv-right-mul-multivar-Ω a)
 ```
 
-### `I+1`-ary loops
-
-`(I + 1)`-ary loops are equivalent to families `I → ΩA`, where `Ω` is the
-standard loop type.
-
-```agda
-module _
-  {l1 l2 : Level} {I : UU l1} (A∗ : Pointed-Type l1)
-  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
-  where
-
-  equiv-type-isolated-point-multivar-Ω :
-    type-multivar-Ω (I + unit) A∗ ≃ (I → type-Ω A∗)
-  equiv-type-isolated-point-multivar-Ω =
-    equivalence-reasoning
-      Σ A (λ a → I + unit → a ＝ a∗)
-      ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
-        by equiv-tot (λ a → equiv-universal-property-Maybe)
-      ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
-        by equiv-tot (λ a → commutative-product)
-      ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
-        by inv-associative-Σ
-      ≃ (I → type-Ω A∗)
-        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
-```
-
 ### If `I` is pointed then `I`-ary loops are pointed equivalent to pointed maps `I →∗ ΩA`
 
 First we demonstrate the equivalence directly as a composite of simple
@@ -625,6 +601,53 @@ module _
   compute-multivar-Ω-pointed =
     ( compute-type-multivar-Ω-pointed ,
       preserves-point-map-compute-multivar-Ω-pointed)
+```
+
+### ∅-ary loops
+
+```agda
+module _
+  {l : Level} (A∗ : Pointed-Type l)
+  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
+  where
+
+  compute-type-multivar-Ω-empty : type-multivar-Ω empty A∗ ≃ A
+  compute-type-multivar-Ω-empty =
+    right-unit-law-Σ-is-contr (λ a → universal-property-empty' (a ＝ a∗))
+
+  preserves-point-map-compute-multivar-Ω-empty :
+    map-equiv compute-type-multivar-Ω-empty (refl-multivar-Ω empty A∗) ＝ a∗
+  preserves-point-map-compute-multivar-Ω-empty = refl
+
+  compute-multivar-Ω-empty : multivar-Ω empty A∗ ≃∗ A∗
+  pr1 compute-multivar-Ω-empty = compute-type-multivar-Ω-empty
+  pr2 compute-multivar-Ω-empty = preserves-point-map-compute-multivar-Ω-empty
+```
+
+### `I+1`-ary loops
+
+`(I + 1)`-ary loops are equivalent to families of loops `I → ΩA`, where `Ω` is
+the standard loop type.
+
+```agda
+module _
+  {l1 l2 : Level} {I : UU l1} (A∗ : Pointed-Type l2)
+  (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
+  where
+
+  compute-type-multivar-Ω-isolated-point :
+    type-multivar-Ω (I + unit) A∗ ≃ (I → type-Ω A∗)
+  compute-type-multivar-Ω-isolated-point =
+    equivalence-reasoning
+      Σ A (λ a → I + unit → a ＝ a∗)
+      ≃ Σ A (λ a → (I → a ＝ a∗) × (a ＝ a∗))
+        by equiv-tot (λ a → equiv-universal-property-Maybe)
+      ≃ Σ A (λ a → (a ＝ a∗) × (I → a ＝ a∗))
+        by equiv-tot (λ a → commutative-product)
+      ≃ Σ (Σ A (λ a → (a ＝ a∗))) (λ u → (I → pr1 u ＝ a∗))
+        by inv-associative-Σ
+      ≃ (I → type-Ω A∗)
+        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
 ```
 
 ### `ΣI`-ary loops are `I`-ary loops of loops
