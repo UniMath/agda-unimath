@@ -43,7 +43,7 @@ open import univalent-combinatorics.standard-finite-types
 
 A
 {{#concept "geometric sequence" Disambiguation="in a commutative semiring" Agda=geometric-sequence-Commutative-Semiring}}
-in a [commutative semiring](ring-theory.commutative-semirings.md) is an
+in a [commutative semiring](commutative-algebra.commutative-semirings.md) is an
 [geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
 semiring's multiplicative [semigroup](group-theory.semigroups.md).
 

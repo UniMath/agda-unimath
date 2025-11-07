@@ -38,8 +38,7 @@ in a [ring](ring-theory.rings.md) is a
 [geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
 underlying [semiring](ring-theory.semirings.md).
 
-These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
-ring.
+These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the ring.
 
 ## Definitions
 

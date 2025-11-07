@@ -38,12 +38,11 @@ open import lists.sequences
 
 A
 {{#concept "geometric sequence" Disambiguation="in a commutative ring" Agda=geometric-sequence-Commutative-Ring}}
-in a [commutative ring](ring-theory.commutative-rings.md) is an
-[geometric sequence](ring-theory.geometric-sequences-semirings.md) in the
-ring's multiplicative [semigroup](group-theory.semigroups.md).
+in a [commutative ring](commutative-algebra.commutative-rings.md) is an
+[geometric sequence](ring-theory.geometric-sequences-semirings.md) in the ring's
+multiplicative [semigroup](group-theory.semigroups.md).
 
-These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the
-ring.
+These are sequences of the form `n ↦ a * rⁿ`, for elements `a`, `r` in the ring.
 
 ## Definitions
 
