@@ -16,11 +16,16 @@ open import foundation.functoriality-set-truncation
 open import foundation.images
 open import foundation.inhabited-types
 open import foundation.mere-equality
+open import foundation.empty-types
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.negation
+open import foundation.coproduct-types
+open import foundation.equality-coproduct-types
 open import foundation.surjective-maps
 open import foundation.unit-type
+open import foundation.mere-equality
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -222,11 +227,35 @@ is-0-connected-is-contr X p =
 ### The image of a function with a `0`-connected domain is `0`-connected
 
 ```agda
-abstract
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where abstract
+
+  is-0-connected-im-is-0-connected-domain' :
+    A → all-elements-merely-equal A → is-contr (im (map-trunc-Set f))
+  is-0-connected-im-is-0-connected-domain' a C =
+    is-contr-im
+      ( trunc-Set B)
+      ( unit-trunc-Set a)
+      ( apply-dependent-universal-property-trunc-Set'
+        ( λ x →
+          set-Prop
+            ( Id-Prop
+              ( trunc-Set B)
+              ( map-trunc-Set f x)
+              ( map-trunc-Set f (unit-trunc-Set a))))
+        ( λ a' →
+          apply-universal-property-trunc-Prop
+            ( C a' a)
+            ( Id-Prop
+              ( trunc-Set B)
+              ( map-trunc-Set f (unit-trunc-Set a'))
+              ( map-trunc-Set f (unit-trunc-Set a)))
+            ( λ where refl → refl)))
+
   is-0-connected-im-is-0-connected-domain :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-0-connected A → is-0-connected (im f)
-  is-0-connected-im-is-0-connected-domain {A = A} {B} f C =
+  is-0-connected-im-is-0-connected-domain C =
     apply-universal-property-trunc-Prop
       ( is-inhabited-is-0-connected C)
       ( is-contr-Prop _)
@@ -234,28 +263,40 @@ abstract
         is-contr-equiv'
           ( im (map-trunc-Set f))
           ( equiv-trunc-im-Set f)
-          ( is-contr-im
-            ( trunc-Set B)
-            ( unit-trunc-Set a)
-            ( apply-dependent-universal-property-trunc-Set'
-              ( λ x →
-                set-Prop
-                  ( Id-Prop
-                    ( trunc-Set B)
-                    ( map-trunc-Set f x)
-                    ( map-trunc-Set f (unit-trunc-Set a))))
-              ( λ a' →
-                apply-universal-property-trunc-Prop
-                  ( mere-eq-is-0-connected C a' a)
-                  ( Id-Prop
-                    ( trunc-Set B)
-                    ( map-trunc-Set f (unit-trunc-Set a'))
-                    ( map-trunc-Set f (unit-trunc-Set a)))
-                  ( λ where refl → refl)))))
+          ( is-0-connected-im-is-0-connected-domain'
+            ( a)
+            ( mere-eq-is-0-connected C)))
 
 abstract
   is-0-connected-im-point' :
     {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
   is-0-connected-im-point' f =
     is-0-connected-im-is-0-connected-domain f is-0-connected-unit
+
+  is-0-connected-im-point :
+    {l1 : Level} {A : UU l1} (a : A) → is-0-connected (im (point a))
+  is-0-connected-im-point a = is-0-connected-im-point' (point a)
+```
+
+### Coproducts of -1-connected types are not 0-connected
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where abstract
+
+  is-not-0-connected-coproduct-has-element :
+    A → B → ¬ is-0-connected (A + B)
+  is-not-0-connected-coproduct-has-element a b H =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-is-0-connected H (inl a) (inr b))
+      ( empty-Prop)
+      ( is-empty-eq-coproduct-inl-inr a b)
+
+  is-not-0-connected-coproduct-is-inhabited :
+    is-inhabited A → is-inhabited B → ¬ is-0-connected (A + B)
+  is-not-0-connected-coproduct-is-inhabited |a| |b| =
+    apply-twice-universal-property-trunc-Prop |a| |b|
+      ( neg-type-Prop (is-0-connected (A + B)))
+      ( is-not-0-connected-coproduct-has-element)
 ```
