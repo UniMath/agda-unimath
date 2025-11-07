@@ -14,6 +14,7 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.families-of-equivalences
@@ -28,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-maps
@@ -316,27 +318,36 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  section-is-local-domains' : section (precomp f X) → is-local f Y → section f
-  pr1 (section-is-local-domains' section-precomp-X is-local-Y) =
+  section-is-local-domains'' :
+    section (precomp f X) → is-emb (precomp f Y) → section f
+  pr1 (section-is-local-domains'' section-precomp-X _) =
     pr1 section-precomp-X id
-  pr2 (section-is-local-domains' section-precomp-X is-local-Y) =
+  pr2 (section-is-local-domains'' section-precomp-X is-emb-precomp-Y) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 (section-is-local-domains' section-precomp-X is-local-Y)) ,
+        { ( f ∘ pr1 section-precomp-X id) ,
           ( ap (postcomp X f) (pr2 section-precomp-X id))}
         { id , refl}
-        ( eq-is-contr (is-contr-map-is-equiv is-local-Y f)))
+        ( eq-is-prop (is-prop-map-is-emb is-emb-precomp-Y f)))
 
-  is-equiv-is-local-domains' : section (precomp f X) → is-local f Y → is-equiv f
-  pr1 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
-    section-is-local-domains' section-precomp-X is-local-Y
-  pr2 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
+  section-is-local-domains' :
+    section (precomp f X) → is-local f Y → section f
+  section-is-local-domains' section-precomp-X is-local-Y =
+    section-is-local-domains'' section-precomp-X (is-emb-is-equiv is-local-Y)
+
+  is-equiv-is-local-domains' :
+    section (precomp f X) → is-emb (precomp f Y) → is-equiv f
+  pr1 (is-equiv-is-local-domains' section-precomp-X is-emb-precomp-Y) =
+    section-is-local-domains'' section-precomp-X is-emb-precomp-Y
+  pr2 (is-equiv-is-local-domains' section-precomp-X is-emb-precomp-Y) =
     retraction-map-section-precomp f section-precomp-X
 
   is-equiv-is-local-domains : is-local f X → is-local f Y → is-equiv f
-  is-equiv-is-local-domains is-local-X =
-    is-equiv-is-local-domains' (pr1 is-local-X)
+  is-equiv-is-local-domains is-local-X is-local-Y =
+    is-equiv-is-local-domains'
+      ( section-is-equiv is-local-X)
+      ( is-emb-is-equiv is-local-Y)
 ```
 
 ### If `f` has a retraction and the codomain of `f` is `f`-local, then `f` is an equivalence
