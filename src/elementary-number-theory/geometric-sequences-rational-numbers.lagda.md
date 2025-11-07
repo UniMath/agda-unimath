@@ -36,6 +36,21 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.transport-along-identifications
+open import commutative-algebra.geometric-sequences-commutative-rings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
+
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-rational-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.powers-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.ring-of-rational-numbers
+
+open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import group-theory.groups
