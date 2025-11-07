@@ -7,11 +7,12 @@ module real-numbers.similarity-positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
+open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.universe-levels
+
 open import real-numbers.positive-real-numbers
 open import real-numbers.similarity-real-numbers
-open import foundation.dependent-pair-types
 ```
 
 </details>

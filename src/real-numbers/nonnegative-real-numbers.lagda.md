@@ -24,10 +24,10 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.functoriality-propositional-truncation
 open import foundation.function-types
-open import foundation.inhabited-subtypes
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
