@@ -302,3 +302,11 @@ raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
 ```
+
+### Raising the universe level of positive real numbers
+
+```agda
+raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
+raise-ℝ⁺ l (x , 0<x) =
+  ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
+```

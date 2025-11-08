@@ -320,6 +320,29 @@ abstract
         ( right-leq-left-least-upper-bound-Large-Poset ℝ-Large-Poset x y y≤x))
 ```
 
+### The binary maximum preserves lower neighborhoods
+
+```agda
+abstract
+  left-leq-right-max-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
+    sim-ℝ (max-ℝ x y) y
+  left-leq-right-max-ℝ {x = x} {y = y} x≤y =
+    sim-sim-leq-ℝ
+      ( sim-is-least-binary-upper-bound-Large-Poset ℝ-Large-Poset x y
+        ( is-least-binary-upper-bound-max-ℝ x y)
+        ( left-leq-right-least-upper-bound-Large-Poset ℝ-Large-Poset x y x≤y))
+
+  right-leq-left-max-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ y x →
+    sim-ℝ (max-ℝ x y) x
+  right-leq-left-max-ℝ {x = x} {y = y} y≤x =
+    sim-sim-leq-ℝ
+      ( sim-is-least-binary-upper-bound-Large-Poset ℝ-Large-Poset x y
+        ( is-least-binary-upper-bound-max-ℝ x y)
+        ( right-leq-left-least-upper-bound-Large-Poset ℝ-Large-Poset x y y≤x))
+```
+
 ### For any `ε : ℚ⁺`, `(max-ℝ x y - ε < x) ∨ (max-ℝ x y - ε < y)`
 
 ```agda
