@@ -191,10 +191,7 @@ abstract
       ( rational-dist-ℚ p q)
       ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
       ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-      ( leq-eq-ℚ
-        ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-        ( ap (add-ℚ (rational-abs-ℚ p) ∘ rational-ℚ⁰⁺) (abs-neg-ℚ q)))
+      ( leq-eq-ℚ (ap (add-ℚ (rational-abs-ℚ p) ∘ rational-ℚ⁰⁺) (abs-neg-ℚ q)))
       ( triangle-inequality-abs-ℚ p (neg-ℚ q))
 ```
 

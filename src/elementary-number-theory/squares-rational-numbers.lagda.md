@@ -236,7 +236,7 @@ abstract
       ( p *ℚ q)
       ( square-ℚ q)
       ( preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ p q (leq-le-ℚ p<q))
-      ( preserves-le-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ q p<q) p q p<q)
+      ( preserves-le-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ p<q) p q p<q)
 ```
 
 ### Squaring nonnegative rational numbers reflects inequality

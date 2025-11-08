@@ -94,8 +94,8 @@ module _
         (p , p<q , p∉L) ← q∈U
         intro-exists
           ( mediant-ℚ p q)
-          ( le-right-mediant-ℚ p q p<q ,
-            intro-exists p (le-left-mediant-ℚ p q p<q , p∉L))
+          ( le-right-mediant-ℚ p<q ,
+            intro-exists p (le-left-mediant-ℚ p<q , p∉L))
     pr2 (is-rounded-upper-cut-real-lower-ℝ q) ∃p =
       let open do-syntax-trunc-Prop (upper-cut-real-lower-ℝ q)
       in do
@@ -131,8 +131,8 @@ module _
       in
         map-disjunction
           ( id)
-          ( λ r∉L → intro-exists r ( le-right-mediant-ℚ p q p<q , r∉L))
-          ( L p r (le-left-mediant-ℚ p q p<q))
+          ( λ r∉L → intro-exists r ( le-right-mediant-ℚ p<q , r∉L))
+          ( L p r (le-left-mediant-ℚ p<q))
 
   real-lower-ℝ : ℝ l
   real-lower-ℝ =

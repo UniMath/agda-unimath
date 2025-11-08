@@ -53,7 +53,7 @@ module _
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding mul-ℝ
 
     is-positive-mul-ℝ :
@@ -66,10 +66,10 @@ module _
         (c⁺@(c , _) , c<y) ← exists-ℚ⁺-in-lower-cut-is-positive-ℝ y 0<y
         (d , y<d) ← is-inhabited-upper-cut-ℝ y
         let
-          a<b = le-lower-upper-cut-ℝ x a b a<x x<b
-          b⁺ = (b , is-positive-le-ℚ⁺ a⁺ b a<b)
-          c<d = le-lower-upper-cut-ℝ y c d c<y y<d
-          d⁺ = (d , is-positive-le-ℚ⁺ c⁺ d c<d)
+          a<b = le-lower-upper-cut-ℝ x a<x x<b
+          b⁺ = (b , is-positive-le-ℚ⁺ a⁺ a<b)
+          c<d = le-lower-upper-cut-ℝ y c<y y<d
+          d⁺ = (d , is-positive-le-ℚ⁺ c⁺ c<d)
           [a,b] = ((a , b) , leq-le-ℚ a<b)
           [c,d] = ((c , d) , leq-le-ℚ c<d)
         is-positive-exists-ℚ⁺-in-lower-cut-ℝ
@@ -110,9 +110,9 @@ abstract
 ```agda
 abstract
   preserves-le-left-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → le-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → le-ℝ y z →
     le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
-  preserves-le-left-mul-ℝ⁺ x⁺@(x , 0<x) y z y<z =
+  preserves-le-left-mul-ℝ⁺ x⁺@(x , 0<x) {y} {z} y<z =
     le-is-positive-diff-ℝ
       ( tr
         ( is-positive-ℝ)
@@ -120,29 +120,29 @@ abstract
         ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y<z)))
 
   reflects-le-left-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
     le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → le-ℝ y z
-  reflects-le-left-mul-ℝ⁺ x y z xy<xz =
-    preserves-le-sim-ℝ _ _ _ _
+  reflects-le-left-mul-ℝ⁺ x {y} {z} xy<xz =
+    preserves-le-sim-ℝ
       ( cancel-left-div-mul-ℝ⁺ x y)
       ( cancel-left-div-mul-ℝ⁺ x z)
-      ( preserves-le-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy<xz)
+      ( preserves-le-left-mul-ℝ⁺ (inv-ℝ⁺ x) xy<xz)
 
   preserves-le-right-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → le-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → le-ℝ y z →
     le-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
-  preserves-le-right-mul-ℝ⁺ x y z y<z =
+  preserves-le-right-mul-ℝ⁺ x y<z =
     binary-tr
       ( le-ℝ)
       ( commutative-mul-ℝ _ _)
       ( commutative-mul-ℝ _ _)
-      ( preserves-le-left-mul-ℝ⁺ x y z y<z)
+      ( preserves-le-left-mul-ℝ⁺ x y<z)
 
   reflects-le-right-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
     le-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x) → le-ℝ y z
-  reflects-le-right-mul-ℝ⁺ x y z yx<zx =
-    reflects-le-left-mul-ℝ⁺ x y z
+  reflects-le-right-mul-ℝ⁺ x yx<zx =
+    reflects-le-left-mul-ℝ⁺ x
       ( binary-tr
         ( le-ℝ)
         ( commutative-mul-ℝ _ _)
@@ -155,12 +155,12 @@ abstract
 ```agda
 abstract
   preserves-leq-left-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
   preserves-leq-left-mul-ℝ⁺ x⁺ = preserves-leq-left-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
 
   preserves-leq-right-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
   preserves-leq-right-mul-ℝ⁺ x⁺ =
     preserves-leq-right-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
@@ -169,10 +169,10 @@ abstract
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → leq-ℝ y z
   reflects-leq-left-mul-ℝ⁺ x y z xy≤xz =
-    preserves-leq-sim-ℝ _ _ _ _
+    preserves-leq-sim-ℝ
       ( cancel-left-div-mul-ℝ⁺ x y)
       ( cancel-left-div-mul-ℝ⁺ x z)
-      ( preserves-leq-left-mul-ℝ⁺ (inv-ℝ⁺ x) _ _ xy≤xz)
+      ( preserves-leq-left-mul-ℝ⁺ (inv-ℝ⁺ x) xy≤xz)
 
   reflects-leq-right-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →

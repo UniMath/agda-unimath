@@ -45,6 +45,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -206,8 +207,6 @@ module _
             ( ε⁺ , θ⁺)
             ( le-lower-cut-ℝ
               ( xε)
-              ( q +ℚ (ε +ℚ θ))
-              ( r +ℚ (ε +ℚ θ))
               ( preserves-le-left-add-ℚ (ε +ℚ θ) q r q<r)
               ( r+ε+θ<xε))
 
@@ -273,8 +272,6 @@ module _
             ( ε⁺ , θ⁺)
             ( le-upper-cut-ℝ
               ( xε)
-              ( p -ℚ (ε +ℚ θ))
-              ( q -ℚ (ε +ℚ θ))
               ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
               ( xε<p-ε-θ))
 
@@ -302,7 +299,7 @@ module _
     is-inhabited-upper-cut-lim-cauchy-approximation-ℝ ,
     is-rounded-upper-cut-lim-cauchy-approximation-ℝ
 
-  opaque
+  abstract opaque
     unfolding neighborhood-ℝ
 
     is-disjoint-cut-lim-cauchy-approximation-ℝ :
@@ -343,8 +340,6 @@ module _
           ( q -ℚ εu)
           ( le-lower-cut-ℝ
               ( xεu)
-              ( q -ℚ εu)
-              ( (q -ℚ εu) +ℚ θl)
               ( le-right-add-rational-ℚ⁺ (q -ℚ εu) θl⁺)
               ( q-εu+θl<xεu) ,
             tr
@@ -358,8 +353,6 @@ module _
                 ＝ q -ℚ εu by is-section-diff-ℚ θu _)
               ( le-upper-cut-ℝ
                 ( xεu)
-                ( q -ℚ (εu +ℚ θu))
-                ( (q -ℚ (εu +ℚ θu)) +ℚ θu)
                 ( le-right-add-rational-ℚ⁺ (q -ℚ (εu +ℚ θu)) θu⁺)
                 ( xεu<q-εu-θu)))
 
@@ -369,10 +362,8 @@ module _
         ( upper-real-lim-cauchy-approximation-ℝ)
     is-located-lower-upper-cut-lim-cauchy-approximation-ℝ p q p<q =
       let
-        ε'⁺@(ε' , _) , 2ε'⁺<q-p =
-          bound-double-le-ℚ⁺ (positive-diff-le-ℚ p q p<q)
-        ε⁺@(ε , _) , 2ε⁺<ε'⁺ =
-          bound-double-le-ℚ⁺ ε'⁺
+        ε'⁺@(ε' , _) , 2ε'⁺<q-p = bound-double-le-ℚ⁺ (positive-diff-le-ℚ p<q)
+        ε⁺@(ε , _) , 2ε⁺<ε'⁺ = bound-double-le-ℚ⁺ ε'⁺
         2ε' = ε' +ℚ ε'
         2ε = ε +ℚ ε
         4ε = 2ε +ℚ 2ε
@@ -383,8 +374,6 @@ module _
           ( intro-exists (ε⁺ , ε⁺))
           ( is-located-lower-upper-cut-ℝ
             ( map-cauchy-approximation-ℝ x ε⁺)
-            ( p +ℚ 2ε)
-            ( q -ℚ 2ε)
             ( le-transpose-left-add-ℚ
               ( p +ℚ 2ε)
               ( 2ε)
@@ -422,7 +411,7 @@ module _
   {l : Level} (x : cauchy-approximation-ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ lim-cauchy-approximation-ℝ
 
     is-limit-lim-cauchy-approximation-ℝ :
@@ -479,8 +468,6 @@ module _
               ( ε+θ)
               ( lim)
               ( leq-le-ℝ
-                ( xε -ℝ ε+θ)
-                ( lim)
                 ( intro-exists
                   ( q)
                   ( xε-ε-θ<q ,
@@ -500,8 +487,6 @@ module _
                 ( xε)
                 ( ε+θ)
                 ( leq-le-ℝ
-                  ( lim)
-                  ( xε +ℝ ε+θ)
                   ( intro-exists
                     ( r)
                     ( intro-exists

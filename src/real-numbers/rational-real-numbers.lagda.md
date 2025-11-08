@@ -66,12 +66,10 @@ the [image](foundation.images.md) of this embedding
 ```agda
 is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
-  is-dedekind-lower-upper-ℝ
-    ( lower-real-ℚ x)
-    ( upper-real-ℚ x)
+  is-dedekind-lower-upper-ℝ (lower-real-ℚ x) (upper-real-ℚ x)
 is-dedekind-lower-upper-real-ℚ x =
-  (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
-  located-le-ℚ x
+  ( (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
+    located-le-ℚ x)
 ```
 
 ### The canonical map from `ℚ` to `ℝ lzero`
@@ -161,7 +159,7 @@ all-eq-is-rational-ℝ x p q H H' =
         ( empty-Prop)
         ( pr1 H)
         ( pr2 H')
-        ( is-located-lower-upper-cut-ℝ x p q I))
+        ( is-located-lower-upper-cut-ℝ x I))
 
   right-case : le-ℚ q p → p ＝ q
   right-case I =
@@ -170,7 +168,7 @@ all-eq-is-rational-ℝ x p q H H' =
         ( empty-Prop)
         ( pr1 H')
         ( pr2 H)
-        ( is-located-lower-upper-cut-ℝ x q p I))
+        ( is-located-lower-upper-cut-ℝ x I))
 
 is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
 is-prop-rational-real x =
@@ -234,13 +232,13 @@ opaque
       ( q)
       ( id)
       ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
-      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
+      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q<p p∈lx)))
   pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
     elim-disjunction
       ( lower-cut-ℝ x p)
       ( id)
       ( ex-falso ∘ q∉ux)
-      ( is-located-lower-upper-cut-ℝ x p q p<q)
+      ( is-located-lower-upper-cut-ℝ x p<q)
 
 eq-real-rational-is-rational-ℝ :
   (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
