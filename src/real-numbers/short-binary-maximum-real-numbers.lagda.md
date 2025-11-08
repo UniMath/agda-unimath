@@ -1,4 +1,4 @@
-## The binary maximum of real numbers is a short function
+# The binary maximum of real numbers is a short function
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
