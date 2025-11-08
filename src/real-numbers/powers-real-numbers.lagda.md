@@ -65,6 +65,8 @@ defined by [iteratively](foundation.iterating-functions.md)
 [multiplying](real-numbers.multiplication-real-numbers.md) `x` with itself `n`
 times.
 
+Note that this operation defines`0⁰` to be the empty product, `1`.
+
 ## Definition
 
 ```agda
@@ -291,7 +293,7 @@ abstract
           by ap neg-ℝ (ap (λ m → power-ℝ m x) k2+1=n)
 ```
 
-### `|x|ⁿ=|xⁿ|`
+### `|x|ⁿ = |xⁿ|`
 
 ```agda
 abstract
@@ -330,8 +332,10 @@ abstract
         ( sim-raise-ℝ _ one-ℝ))
       ( refl-leq-ℝ one-ℝ)
   preserves-leq-abs-power-ℝ (succ-ℕ n) x y |x|≤|y| =
-    let open inequality-reasoning-Large-Poset ℝ-Large-Poset
-    in chain-of-inequalities
+    let
+      open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+    chain-of-inequalities
       abs-ℝ (power-ℝ (succ-ℕ n) x)
       ≤ abs-ℝ (power-ℝ n x *ℝ x)
         by leq-eq-ℝ (ap abs-ℝ (power-succ-ℝ n x))
