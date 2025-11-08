@@ -276,7 +276,6 @@ This theorem is the [42nd](literature.100-theorems.md#42) theorem on
 abstract
   sum-reciprocal-triangular-number-ℕ :
     is-sum-series-Metric-Ab
-      ( metric-ab-add-ℚ)
       ( series-reciprocal-triangular-number-ℕ)
       ( rational-ℕ 2)
   sum-reciprocal-triangular-number-ℕ =
