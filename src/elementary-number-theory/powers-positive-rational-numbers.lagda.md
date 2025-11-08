@@ -288,11 +288,11 @@ abstract
           by leq-eq-ℚ⁺ (distributive-power-add-ℚ⁺ k m ε)
         ≤ rational-power-ℚ⁺ k one-ℚ⁺ *ℚ rational-power-ℚ⁺ m ε
           by
-            preserves-leq-right-mul-ℚ⁺
-              ( power-ℚ⁺ m ε)
-              ( _)
-              ( _)
-              ( preserves-leq-power-ℚ⁺ k ε one-ℚ⁺ ε≤1)
+          preserves-leq-right-mul-ℚ⁺
+            ( power-ℚ⁺ m ε)
+            ( _)
+            ( _)
+            ( preserves-leq-power-ℚ⁺ k ε one-ℚ⁺ ε≤1)
         ≤ one-ℚ *ℚ rational-power-ℚ⁺ m ε
           by leq-eq-ℚ _ _ (ap-mul-ℚ (ap rational-ℚ⁺ (power-one-ℚ⁺ k)) refl)
         ≤ rational-power-ℚ⁺ m ε
@@ -327,12 +327,12 @@ abstract
                   rational-dist-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε)) zero-ℚ
                   ≤ rational-abs-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε))
                     by
-                      leq-eq-ℚ _ _ (ap rational-ℚ⁰⁺ (right-zero-law-dist-ℚ _))
+                    leq-eq-ℚ _ _ (ap rational-ℚ⁰⁺ (right-zero-law-dist-ℚ _))
                   ≤ rational-ℚ⁺ (power-ℚ⁺ n ε)
                     by
-                      leq-eq-ℚ _ _
-                        ( ap rational-ℚ⁰⁺
-                          ( abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ (power-ℚ⁺ n ε))))
+                    leq-eq-ℚ _ _
+                      ( ap rational-ℚ⁰⁺
+                        ( abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ (power-ℚ⁺ n ε))))
                   ≤ rational-ℚ⁺ (power-ℚ⁺ m ε)
                     by leq-power-leq-one-ℚ⁺ ε (leq-le-ℚ ε<1) m n m≤n
                   ≤ rational-ℚ⁺ δ
