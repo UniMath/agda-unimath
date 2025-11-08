@@ -52,11 +52,6 @@ open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.positive-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.similarity-real-numbers
-open import real-numbers.squares-real-numbers
 ```
 
 </details>
