@@ -59,7 +59,7 @@ module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding add-ℝ le-ℝ
 
     preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
