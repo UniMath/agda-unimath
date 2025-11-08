@@ -97,7 +97,7 @@ module _
       let
         open
           do-syntax-trunc-Prop
-            (∃
+            ( ∃
               ( ℚ × ℚ)
               ( close-bounds-lower-upper-ℝ
                 ( lower-real-add-ℝ)
