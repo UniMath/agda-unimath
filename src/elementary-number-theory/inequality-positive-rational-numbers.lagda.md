@@ -97,5 +97,5 @@ antisymmetric-leq-ℚ⁺ = antisymmetric-leq-Poset poset-ℚ⁺
 
 ```agda
 leq-eq-ℚ⁺ : {x y : ℚ⁺} → x ＝ y → leq-ℚ⁺ x y
-leq-eq-ℚ⁺ x=y = leq-eq-ℚ _ _ (ap rational-ℚ⁺ x=y)
+leq-eq-ℚ⁺ x=y = leq-eq-ℚ (ap rational-ℚ⁺ x=y)
 ```

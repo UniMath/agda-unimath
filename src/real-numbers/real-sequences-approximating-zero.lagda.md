@@ -37,6 +37,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -59,10 +60,7 @@ the
 ```agda
 is-zero-limit-prop-sequence-ℝ : {l : Level} → sequence (ℝ l) → Prop l
 is-zero-limit-prop-sequence-ℝ {l} σ =
-  is-limit-prop-sequence-Metric-Space
-    ( metric-space-ℝ l)
-    ( σ)
-    ( raise-ℝ l zero-ℝ)
+  is-limit-prop-sequence-ℝ σ (raise-ℝ l zero-ℝ)
 
 is-zero-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU l
 is-zero-limit-sequence-ℝ σ = type-Prop (is-zero-limit-prop-sequence-ℝ σ)
@@ -93,24 +91,24 @@ abstract
               dist-ℝ (a n) (raise-ℝ l zero-ℝ)
               ≤ dist-ℝ (a n) zero-ℝ
                 by
-                  leq-sim-ℝ _ _
+                  leq-sim-ℝ
                     ( preserves-dist-right-sim-ℝ
                       ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ)))
               ≤ abs-ℝ (a n)
-                by leq-eq-ℝ _ _ (right-zero-law-dist-ℝ (a n))
+                by leq-eq-ℝ (right-zero-law-dist-ℝ (a n))
               ≤ real-ℚ (b n)
                 by H n
               ≤ real-ℚ (rational-abs-ℚ (b n))
-                by preserves-leq-real-ℚ _ _ (leq-abs-ℚ (b n))
+                by preserves-leq-real-ℚ (leq-abs-ℚ (b n))
               ≤ real-ℚ (rational-dist-ℚ (b n) zero-ℚ)
                 by
-                  leq-eq-ℝ _ _
+                  leq-eq-ℝ
                     ( ap
                       ( real-ℚ ∘ rational-ℚ⁰⁺)
                       ( inv (right-zero-law-dist-ℚ (b n))))
               ≤ real-ℚ⁺ ε
                 by
-                  preserves-leq-real-ℚ _ _
+                  preserves-leq-real-ℚ
                     ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
       ( lim-b=0)
 ```

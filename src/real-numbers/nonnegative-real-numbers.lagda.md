@@ -40,6 +40,7 @@ open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -130,9 +131,9 @@ abstract
     preserves-leq-real-ℚ (leq-zero-is-nonnegative-ℚ is-nonneg-q)
 
   reflects-is-nonnegative-real-ℚ :
-    (q : ℚ) → is-nonnegative-ℝ (real-ℚ q) → is-nonnegative-ℚ q
-  reflects-is-nonnegative-real-ℚ q 0≤qℝ =
-    is-nonnegative-leq-zero-ℚ (reflects-leq-real-ℚ zero-ℚ q 0≤qℝ)
+    {q : ℚ} → is-nonnegative-ℝ (real-ℚ q) → is-nonnegative-ℚ q
+  reflects-is-nonnegative-real-ℚ 0≤qℝ =
+    is-nonnegative-leq-zero-ℚ (reflects-leq-real-ℚ 0≤qℝ)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ (q , is-nonneg-q) =
@@ -290,7 +291,7 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
     is-nonnegative-ℝ y
   is-nonnegative-le-ℝ⁰⁺ x y x<y =
-    is-nonnegative-leq-ℝ⁰⁺ x y (leq-le-ℝ (real-ℝ⁰⁺ x) y x<y)
+    is-nonnegative-leq-ℝ⁰⁺ x y (leq-le-ℝ x<y)
 ```
 
 ### Nonnegativity is preserved by similarity
@@ -301,7 +302,7 @@ abstract
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-nonnegative-ℝ x → sim-ℝ x y →
     is-nonnegative-ℝ y
   is-nonnegative-sim-ℝ {x = x} {y = y} 0≤x x~y =
-    preserves-leq-right-sim-ℝ zero-ℝ x y x~y 0≤x
+    preserves-leq-right-sim-ℝ x~y 0≤x
 ```
 
 ### Raising the universe levels of nonnegative real numbers

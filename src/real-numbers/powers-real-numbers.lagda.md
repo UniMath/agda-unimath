@@ -34,6 +34,7 @@ open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
@@ -318,7 +319,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) (x : ℝ l1) (y : ℝ l2) → leq-ℝ (abs-ℝ x) (abs-ℝ y) →
     leq-ℝ (abs-ℝ (power-ℝ n x)) (abs-ℝ (power-ℝ n y))
   preserves-leq-abs-power-ℝ 0 _ _ _ =
-    preserves-leq-sim-ℝ _ _ _ _
+    preserves-leq-sim-ℝ
       ( inv-tr
         ( sim-ℝ one-ℝ)
         ( abs-real-ℝ⁺ (raise-ℝ⁺ _ one-ℝ⁺))
@@ -333,9 +334,9 @@ abstract
     in chain-of-inequalities
       abs-ℝ (power-ℝ (succ-ℕ n) x)
       ≤ abs-ℝ (power-ℝ n x *ℝ x)
-        by leq-eq-ℝ _ _ (ap abs-ℝ (power-succ-ℝ n x))
+        by leq-eq-ℝ (ap abs-ℝ (power-succ-ℝ n x))
       ≤ abs-ℝ (power-ℝ n x) *ℝ abs-ℝ x
-        by leq-eq-ℝ _ _ (abs-mul-ℝ _ _)
+        by leq-eq-ℝ (abs-mul-ℝ _ _)
       ≤ abs-ℝ (power-ℝ n y) *ℝ abs-ℝ y
         by
           preserves-leq-mul-ℝ⁰⁺
@@ -346,9 +347,9 @@ abstract
             ( preserves-leq-abs-power-ℝ n x y |x|≤|y|)
             ( |x|≤|y|)
       ≤ abs-ℝ (power-ℝ n y *ℝ y)
-        by leq-eq-ℝ _ _ (inv (abs-mul-ℝ _ _))
+        by leq-eq-ℝ (inv (abs-mul-ℝ _ _))
       ≤ abs-ℝ (power-ℝ (succ-ℕ n) y)
-        by leq-eq-ℝ _ _ (ap abs-ℝ (inv (power-succ-ℝ n y)))
+        by leq-eq-ℝ (ap abs-ℝ (inv (power-succ-ℝ n y)))
 ```
 
 ### If `x` and `y` are nonnegative, and `x ≤ y`, `xⁿ ≤ yⁿ`
@@ -359,7 +360,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ (power-ℝ n (real-ℝ⁰⁺ x)) (power-ℝ n (real-ℝ⁰⁺ y))
   preserves-leq-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
-    leq-sim-ℝ _ _
+    leq-sim-ℝ
       ( transitive-sim-ℝ _ one-ℝ _
         ( sim-raise-ℝ l2 one-ℝ)
         ( symmetric-sim-ℝ (sim-raise-ℝ l1 one-ℝ)))
@@ -370,7 +371,7 @@ abstract
       chain-of-inequalities
       power-ℝ (succ-ℕ n) x
       ≤ power-ℝ n x *ℝ x
-        by leq-eq-ℝ _ _ (power-succ-ℝ n x)
+        by leq-eq-ℝ (power-succ-ℝ n x)
       ≤ power-ℝ n y *ℝ y
         by
           preserves-leq-mul-ℝ⁰⁺
@@ -381,7 +382,7 @@ abstract
             ( preserves-leq-power-real-ℝ⁰⁺ n x⁰⁺ y⁰⁺ x≤y)
             ( x≤y)
       ≤ power-ℝ (succ-ℕ n) y
-        by leq-eq-ℝ _ _ (inv (power-succ-ℝ n y))
+        by leq-eq-ℝ (inv (power-succ-ℝ n y))
 ```
 
 ### If `|r| < 1`, `rⁿ` approaches 0
@@ -401,13 +402,12 @@ abstract
       let
         is-pos-ε =
           reflects-is-positive-real-ℚ
-            ( ε)
             ( is-positive-le-ℝ⁰⁺ (nonnegative-abs-ℝ r) (real-ℚ ε) |r|<ε)
         ε⁺ = (ε , is-pos-ε)
       is-zero-limit-sequence-leq-abs-rational-zero-limit-sequence-ℝ
         ( λ n → power-ℝ n r)
         ( (λ n → rational-ℚ⁺ (power-ℚ⁺ n ε⁺)) ,
-          is-zero-limit-power-le-one-ℚ⁺ ε⁺ (reflects-le-real-ℚ ε one-ℚ ε<1ℝ))
+          is-zero-limit-power-le-one-ℚ⁺ ε⁺ (reflects-le-real-ℚ ε<1ℝ))
         ( λ n →
           chain-of-inequalities
             abs-ℝ (power-ℝ n r)
@@ -420,11 +420,11 @@ abstract
                   ( inv-tr
                     ( leq-ℝ (abs-ℝ r))
                     ( abs-real-ℝ⁺ (positive-real-ℚ⁺ ε⁺))
-                    ( leq-le-ℝ _ _ |r|<ε))
+                    ( leq-le-ℝ |r|<ε))
             ≤ power-ℝ n (real-ℚ ε)
-              by leq-eq-ℝ _ _ (abs-real-ℝ⁺ (power-ℝ⁺ n (positive-real-ℚ⁺ ε⁺)))
+              by leq-eq-ℝ (abs-real-ℝ⁺ (power-ℝ⁺ n (positive-real-ℚ⁺ ε⁺)))
             ≤ real-ℚ (power-ℚ n ε)
-              by leq-eq-ℝ _ _ (power-real-ℚ n ε)
+              by leq-eq-ℝ (power-real-ℚ n ε)
             ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
-              by leq-eq-ℝ _ _ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
+              by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
 ```

@@ -132,7 +132,7 @@ abstract opaque
           ( zero-ℝ)
           ( x)
           ( 0≤x)
-          ( tr (leq-ℝ (neg-ℝ x)) neg-zero-ℝ (neg-leq-ℝ _ _ 0≤x))))
+          ( tr (leq-ℝ (neg-ℝ x)) neg-zero-ℝ (neg-leq-ℝ 0≤x))))
 
   abs-real-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → abs-ℝ (real-ℝ⁺ x) ＝ real-ℝ⁺ x
   abs-real-ℝ⁺ x = abs-real-ℝ⁰⁺ (nonnegative-ℝ⁺ x)

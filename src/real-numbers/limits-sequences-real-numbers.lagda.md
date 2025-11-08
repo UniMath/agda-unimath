@@ -11,6 +11,7 @@ module real-numbers.limits-sequences-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -36,6 +37,10 @@ On this page, we describe properties of
 ## Definition
 
 ```agda
+is-limit-prop-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → Prop l
+is-limit-prop-sequence-ℝ {l} =
+  is-limit-prop-sequence-Metric-Space (metric-space-ℝ l)
+
 is-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → UU l
 is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
