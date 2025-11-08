@@ -200,7 +200,7 @@ invertible-diff-neq-ℚ : (a b : ℚ) → a ≠ b → ℚˣ
 invertible-diff-neq-ℚ a b a≠b = (b -ℚ a , is-invertible-diff-neq-ℚ a b a≠b)
 ```
 
-### If `|a| < b` for positive `b`, `b - a` is invertible
+### If `|a| < b` and `b` is positive then `b - a` is invertible
 
 ```agda
 is-invertible-diff-le-abs-ℚ :

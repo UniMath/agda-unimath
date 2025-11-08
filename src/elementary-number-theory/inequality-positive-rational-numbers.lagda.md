@@ -93,7 +93,7 @@ antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
 antisymmetric-leq-ℚ⁺ = antisymmetric-leq-Poset poset-ℚ⁺
 ```
 
-### If `x ＝ y`, `x ≤ y`
+### If `x ＝ y` then `x ≤ y`
 
 ```agda
 leq-eq-ℚ⁺ : {x y : ℚ⁺} → x ＝ y → leq-ℚ⁺ x y
