@@ -432,3 +432,18 @@ module _
   emb-right-add-Large-Ab =
     emb-right-mul-Large-Group (large-group-Large-Ab G) l2 x
 ```
+
+### The raise operation is an abelian group homomorphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  (l1 l2 : Level)
+  where
+
+  hom-raise-Large-Ab :
+    hom-Ab
+      ( ab-Large-Ab G l1)
+      ( ab-Large-Ab G (l1 ⊔ l2))
+  hom-raise-Large-Ab = hom-raise-Large-Group (large-group-Large-Ab G) l1 l2
+```

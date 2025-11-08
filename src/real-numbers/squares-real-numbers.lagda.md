@@ -1,6 +1,8 @@
 # Squares of real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.squares-real-numbers where
 ```
 
@@ -42,8 +44,10 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -179,6 +183,32 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
     square-ℝ (x *ℝ y) ＝ square-ℝ x *ℝ square-ℝ y
   distributive-square-mul-ℝ x y = interchange-law-mul-mul-ℝ x y x y
+```
+
+### The square of a positive real number is positive
+
+```agda
+abstract
+  is-positive-square-ℝ⁺ :
+    {l : Level} (x : ℝ⁺ l) → is-positive-ℝ (square-ℝ (real-ℝ⁺ x))
+  is-positive-square-ℝ⁺ (x , is-pos-x) =
+    is-positive-mul-ℝ is-pos-x is-pos-x
+```
+
+### The square of a negative real number is positive
+
+```agda
+abstract
+  is-positive-square-ℝ⁻ :
+    {l : Level} (x : ℝ⁻ l) → is-positive-ℝ (square-ℝ (real-ℝ⁻ x))
+  is-positive-square-ℝ⁻ x⁻@(x , _) =
+    tr
+      ( is-positive-ℝ)
+      ( square-neg-ℝ x)
+      ( is-positive-square-ℝ⁺ (neg-ℝ⁻ x⁻))
+
+square-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
+square-ℝ⁻ x⁻@(x , _) = (square-ℝ x , is-positive-square-ℝ⁻ x⁻)
 ```
 
 ### For nonnegative real numbers, squaring preserves strict inequality

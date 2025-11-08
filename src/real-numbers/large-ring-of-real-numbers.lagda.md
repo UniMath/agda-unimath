@@ -10,12 +10,22 @@ module real-numbers.large-ring-of-real-numbers where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.large-commutative-rings
 
+open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.ring-of-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
+
+open import group-theory.large-monoids
 
 open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 
 open import ring-theory.large-rings
@@ -61,4 +71,22 @@ large-commutative-ring-ℝ =
 commutative-ring-ℝ : (l : Level) → Commutative-Ring (lsuc l)
 commutative-ring-ℝ =
   commutative-ring-Large-Commutative-Ring large-commutative-ring-ℝ
+```
+
+### The canonical embedding of rational numbers in the real numbers is a ring homomorphism
+
+```agda
+hom-ring-real-ℚ :
+  hom-Commutative-Ring commutative-ring-ℚ (commutative-ring-ℝ lzero)
+hom-ring-real-ℚ =
+  ( hom-ab-add-real-ℚ , inv (mul-real-ℚ _ _) , eq-raise-ℝ _)
+```
+
+### Raising the universe level of real numbers is a ring homomorphism
+
+```agda
+hom-ring-raise-ℝ :
+  (l1 l2 : Level) →
+  hom-Commutative-Ring (commutative-ring-ℝ l1) (commutative-ring-ℝ (l1 ⊔ l2))
+hom-ring-raise-ℝ = hom-raise-Large-Commutative-Ring large-commutative-ring-ℝ
 ```

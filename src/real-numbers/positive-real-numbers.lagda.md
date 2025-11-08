@@ -37,6 +37,7 @@ open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -79,6 +80,17 @@ is-positive-real-ℝ⁺ = pr2
 ```
 
 ## Properties
+
+### Positivity is preserved by similarity
+
+```agda
+abstract
+  is-positive-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    is-positive-ℝ x → sim-ℝ x y → is-positive-ℝ y
+  is-positive-sim-ℝ {x = x} {y = y} 0<x x~y =
+    preserves-le-right-sim-ℝ zero-ℝ x y x~y 0<x
+```
 
 ### Dedekind cuts of positive real numbers
 
@@ -296,4 +308,12 @@ sim-prop-ℝ⁺ (x , _) (y , _) = sim-prop-ℝ x y
 
 sim-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → UU (l1 ⊔ l2)
 sim-ℝ⁺ (x , _) (y , _) = sim-ℝ x y
+```
+
+### Raising the universe level of positive real numbers
+
+```agda
+raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
+raise-ℝ⁺ l (x , 0<x) =
+  ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
 ```

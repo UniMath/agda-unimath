@@ -19,6 +19,7 @@ open import group-theory.large-monoids
 open import group-theory.large-semigroups
 open import group-theory.monoids
 
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -288,4 +289,26 @@ module _
         ( monoid-Large-Monoid (multiplicative-large-monoid-Large-Ring R) l) ,
       left-distributive-mul-add-Large-Ring R ,
       right-distributive-mul-add-Large-Ring R)
+```
+
+### The raise operation is a ring homomorphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  (l1 l2 : Level)
+  where
+
+  hom-raise-Large-Ring :
+    hom-Ring
+      ( ring-Large-Ring R l1)
+      ( ring-Large-Ring R (l1 ⊔ l2))
+  hom-raise-Large-Ring =
+    ( hom-raise-Large-Ab (large-ab-Large-Ring R) l1 l2 ,
+      inv
+        ( raise-mul-Large-Monoid
+          ( multiplicative-large-monoid-Large-Ring R)
+          ( _)
+          ( _)) ,
+      raise-raise-Large-Ring R _)
 ```
