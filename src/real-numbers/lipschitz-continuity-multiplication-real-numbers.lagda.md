@@ -45,6 +45,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -155,16 +156,12 @@ module _
         ( is-lipschitz-left-mul-ℝ l2 c)
 
   uniformly-continuous-right-mul-ℝ :
-    uniformly-continuous-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
+    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-right-mul-ℝ =
     ( mul-ℝ c , is-uniformly-continuous-right-mul-ℝ)
 
   uniformly-continuous-left-mul-ℝ :
-    uniformly-continuous-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
+    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-left-mul-ℝ =
     ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
 ```

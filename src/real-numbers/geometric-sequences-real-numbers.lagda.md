@@ -44,6 +44,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.series-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -231,13 +232,8 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( uniformly-continuous-map-limit-sequence-Metric-Space
-            ( metric-space-ℝ l)
-            ( metric-space-ℝ l)
-            ( comp-uniformly-continuous-function-Metric-Space
-              ( metric-space-ℝ l)
-              ( metric-space-ℝ l)
-              ( metric-space-ℝ l)
+          ( uniformly-continuous-map-limit-sequence-ℝ
+            ( comp-uniformly-continuous-function-ℝ
               ( uniformly-continuous-right-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))
