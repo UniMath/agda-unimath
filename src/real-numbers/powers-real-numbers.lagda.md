@@ -58,6 +58,8 @@ defined by [iteratively](foundation.iterating-functions.md)
 [multiplying](real-numbers.multiplication-real-numbers.md) `x` with itself `n`
 times.
 
+Note that this operation defines`0⁰` to be the empty product, `1`.
+
 ## Definition
 
 ```agda
