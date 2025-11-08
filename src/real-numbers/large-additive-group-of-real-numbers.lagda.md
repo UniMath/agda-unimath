@@ -9,9 +9,16 @@ module real-numbers.large-additive-group-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-groups
@@ -85,4 +92,18 @@ large-ab-add-ℝ =
 ```agda
 ab-add-ℝ : (l : Level) → Ab (lsuc l)
 ab-add-ℝ = ab-Large-Ab large-ab-add-ℝ
+```
+
+### The canonical embedding of rational numbers in the real numbers is an abelian group homomorphism
+
+```agda
+hom-ab-add-real-ℚ : hom-Ab abelian-group-add-ℚ (ab-add-ℝ lzero)
+hom-ab-add-real-ℚ = (real-ℚ , inv (add-real-ℚ _ _))
+```
+
+### Raising the universe levels of real numbers is an abelian group homomorphism
+
+```agda
+hom-ab-add-raise-ℝ : (l1 l2 : Level) → hom-Ab (ab-add-ℝ l1) (ab-add-ℝ (l1 ⊔ l2))
+hom-ab-add-raise-ℝ = hom-raise-Large-Ab large-ab-add-ℝ
 ```
