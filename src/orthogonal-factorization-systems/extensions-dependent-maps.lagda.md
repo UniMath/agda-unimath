@@ -39,22 +39,23 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An **extension** of a dependent map `f : (x : A) → P x` along a map `i : A → B`
-is a map `g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g`
-restricts along `i` to `f`.
+An
+{{#concept "extension" Disambiguation="of a dependent map along a map, types" Agda=extension-dependent-type}}
+of a dependent map `f : (x : A) → P (i x)` along a map `i : A → B` is a map
+`g : (y : B) → P y` such that `g` restricts along `i` to `f`.
 
 ```text
-  A
-  |  \
-  i    f
-  |      \
-  ∨       ∨
-  B - g -> P
+      A
+      |  \
+    i |    \ f
+      |      \
+      ∨   g   ∨
+  b ∈ B -----> P b
 ```
 
 ## Definition
 
-### Extensions of dependent functions
+### Extensions of dependent maps
 
 ```agda
 module _
@@ -64,22 +65,12 @@ module _
   is-extension :
     {P : B → UU l3} →
     ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
-  is-extension f g = f ~ (g ∘ i)
-
-  is-extension' :
-    {P : B → UU l3} →
-    ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
-  is-extension' f g = (g ∘ i) ~ f
+  is-extension f g = (f ~ g ∘ i)
 
   extension-dependent-type :
     (P : B → UU l3) →
     ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
   extension-dependent-type P f = Σ ((y : B) → P y) (is-extension f)
-
-  extension-dependent-type' :
-    (P : B → UU l3) →
-    ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
-  extension-dependent-type' P f = Σ ((y : B) → P y) (is-extension' f)
 
   total-extension-dependent-type : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-extension-dependent-type P =
@@ -96,6 +87,40 @@ module _
   is-extension-map-extension :
     (E : extension-dependent-type i P f) → is-extension i f (map-extension E)
   is-extension-map-extension = pr2
+```
+
+### Extensions of dependent maps with homotopies going the other way
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  where
+
+  is-extension' :
+    {P : B → UU l3} →
+    ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
+  is-extension' f g = (g ∘ i ~ f)
+
+  extension-dependent-type' :
+    (P : B → UU l3) →
+    ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
+  extension-dependent-type' P f = Σ ((y : B) → P y) (is-extension' f)
+
+  total-extension-dependent-type' : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-extension-dependent-type' P =
+    Σ ((x : A) → P (i x)) (extension-dependent-type' P)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
+  {P : B → UU l3} {f : (x : A) → P (i x)}
+  where
+
+  map-extension' : extension-dependent-type' i P f → (y : B) → P y
+  map-extension' = pr1
+
+  is-extension-map-extension' :
+    (E : extension-dependent-type' i P f) → is-extension' i f (map-extension' E)
+  is-extension-map-extension' = pr2
 ```
 
 ## Operations
@@ -255,6 +280,68 @@ module _
     coherence-htpy-extension e e' H → e ＝ e'
   eq-htpy-extension e e' H K =
     map-inv-equiv (extensionality-extension e e') (H , K)
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {P : B → UU l3}
+  (f : (x : A) → P (i x))
+  where
+
+  coherence-htpy-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) →
+    map-extension' e ~ map-extension' e' → UU (l1 ⊔ l3)
+  coherence-htpy-extension-dependent-type' e e' K =
+    is-extension-map-extension' e ~ (K ·r i) ∙h is-extension-map-extension' e'
+
+  htpy-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-extension-dependent-type' e e' =
+    Σ ( map-extension' e ~ map-extension' e')
+      ( coherence-htpy-extension-dependent-type' e e')
+
+  refl-htpy-extension-dependent-type' :
+    (e : extension-dependent-type' i P f) → htpy-extension-dependent-type' e e
+  pr1 (refl-htpy-extension-dependent-type' e) = refl-htpy
+  pr2 (refl-htpy-extension-dependent-type' e) = refl-htpy
+
+  htpy-eq-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) →
+    e ＝ e' → htpy-extension-dependent-type' e e'
+  htpy-eq-extension-dependent-type' e .e refl =
+    refl-htpy-extension-dependent-type' e
+
+  is-torsorial-htpy-extension-dependent-type' :
+    (e : extension-dependent-type' i P f) →
+    is-torsorial (htpy-extension-dependent-type' e)
+  is-torsorial-htpy-extension-dependent-type' e =
+    is-torsorial-Eq-structure
+      ( is-torsorial-htpy (map-extension' e))
+      ( map-extension' e , refl-htpy)
+      ( is-torsorial-htpy (is-extension-map-extension' e))
+
+  is-equiv-htpy-eq-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) →
+    is-equiv (htpy-eq-extension-dependent-type' e e')
+  is-equiv-htpy-eq-extension-dependent-type' e =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-extension-dependent-type' e)
+      ( htpy-eq-extension-dependent-type' e)
+
+  extensionality-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) →
+    (e ＝ e') ≃ (htpy-extension-dependent-type' e e')
+  pr1 (extensionality-extension-dependent-type' e e') =
+    htpy-eq-extension-dependent-type' e e'
+  pr2 (extensionality-extension-dependent-type' e e') =
+    is-equiv-htpy-eq-extension-dependent-type' e e'
+
+  eq-htpy-extension-dependent-type' :
+    (e e' : extension-dependent-type' i P f) →
+    htpy-extension-dependent-type' e e' → e ＝ e'
+  eq-htpy-extension-dependent-type' e e' =
+    map-inv-equiv (extensionality-extension-dependent-type' e e')
 ```
 
 ### The total type of extensions is equivalent to `(y : B) → P y`

@@ -2,6 +2,8 @@
 
 ```agda
 module orthogonal-factorization-systems.extensions-maps where
+
+open import orthogonal-factorization-systems.extensions-dependent-maps public
 ```
 
 <details><summary>Imports</summary>
@@ -34,29 +36,29 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
 
-open import orthogonal-factorization-systems.extensions-dependent-maps
 ```
 
 </details>
 
 ## Idea
 
-An **extension** of a map `f : (x : A) → P x` along a map `i : A → B` is a map
-`g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g` restricts
-along `i` to `f`.
+An
+{{#concept "extension" Disambiguation="of a map along a map, types" Agda=extension}}
+of a map `f : A → X` along a map `i : A → B` is a map `g : B → X` such that `g`
+restricts along `i` to `f`.
 
 ```text
-  A
-  |  \
-  i    f
-  |      \
-  ∨       ∨
-  B - g -> P
+    A
+    |  \
+  i |    \ f
+    |      \
+    ∨   g   ∨
+    B -----> X
 ```
 
 ## Definition
 
-### Extensions of dependent functions
+### Extensions of functions
 
 ```agda
 module _

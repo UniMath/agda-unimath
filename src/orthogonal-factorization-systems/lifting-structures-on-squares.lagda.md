@@ -33,7 +33,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
-open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.lifts-maps
 open import orthogonal-factorization-systems.pullback-hom

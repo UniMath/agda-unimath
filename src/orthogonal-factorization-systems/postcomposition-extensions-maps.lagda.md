@@ -36,7 +36,6 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
 
-open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 ```
 
