@@ -298,8 +298,6 @@ module _
             ( p<x)
             ( le-upper-cut-ℝ
               ( x)
-              ( q)
-              ( p +ℚ (nℚ *ℚ ε'))
               ( tr
                 ( le-ℚ q)
                 ( commutative-add-ℚ (nℚ *ℚ ε') p)
