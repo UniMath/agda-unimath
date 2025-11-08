@@ -39,9 +39,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An **extension** of a map `f : (x : A) → P x` along a map `i : A → B` is a map
-`g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g` restricts
-along `i` to `f`.
+An **extension** of a dependent map `f : (x : A) → P x` along a map `i : A → B`
+is a map `g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g`
+restricts along `i` to `f`.
 
 ```text
   A
@@ -100,7 +100,7 @@ module _
 
 ## Operations
 
-### Vertical composition of extensions of maps
+### Vertical composition of extensions of dependent maps
 
 ```text
   A
@@ -128,7 +128,7 @@ module _
   is-extension-comp-vertical H G x = G x ∙ H (i x)
 ```
 
-### Horizontal composition of extensions of maps
+### Horizontal composition of extensions of dependent maps
 
 ```text
            A
@@ -138,8 +138,6 @@ module _
    ∨       ∨       ∨
   B - i -> C - j -> P
 ```
-
-#### Horizontal composition of extensions of dependent functions
 
 ```agda
 module _
@@ -155,7 +153,7 @@ module _
     ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
-### Left whiskering of extensions of maps
+### Left whiskering of extensions of dependent maps
 
 ```text
   A
@@ -178,7 +176,7 @@ module _
   is-extension-left-whisker h F = apd h ∘ F
 ```
 
-### Right whiskering of extensions of maps
+### Right whiskering of extensions of dependent maps
 
 ```text
   X - h -> A
@@ -202,7 +200,7 @@ module _
 
 ## Properties
 
-### Characterizing identifications of extensions of maps
+### Characterizing equality of extensions of dependent maps
 
 ```agda
 module _
@@ -278,7 +276,7 @@ module _
     inv-equiv (inv-compute-total-extension-dependent-type)
 ```
 
-### The truncation level of the type of extensions is bounded by the truncation level of the codomains
+### The truncation level of the type of extensions is bounded by the truncation level of the codomain
 
 ```agda
 module _
@@ -332,7 +330,7 @@ module _
 
 ## Examples
 
-### Every map is an extension of itself along the identity
+### Every dependent map is an extension of itself along the identity
 
 ```agda
 module _
