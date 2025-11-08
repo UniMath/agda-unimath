@@ -9,12 +9,14 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -76,6 +78,13 @@ one-ℚˣ = unit-group-of-units-Ring ring-ℚ
 
 rational-ℚˣ : ℚˣ → ℚ
 rational-ℚˣ = pr1
+```
+
+### Equality of invertible rational numbers
+
+```agda
+eq-ℚˣ : (x y : ℚˣ) → rational-ℚˣ x ＝ rational-ℚˣ y → x ＝ y
+eq-ℚˣ _ _ = eq-type-subtype (subtype-group-of-units-Ring ring-ℚ)
 ```
 
 ### Operations of the multiplicative group of rational numbers
@@ -189,6 +198,29 @@ abstract
 
 invertible-diff-neq-ℚ : (a b : ℚ) → a ≠ b → ℚˣ
 invertible-diff-neq-ℚ a b a≠b = (b -ℚ a , is-invertible-diff-neq-ℚ a b a≠b)
+```
+
+### If `|a| < b` and `b` is positive then `b - a` is invertible
+
+```agda
+is-invertible-diff-le-abs-ℚ :
+  (a : ℚ) (b : ℚ⁺) → le-ℚ (rational-abs-ℚ a) (rational-ℚ⁺ b) →
+  is-invertible-element-Ring ring-ℚ (rational-ℚ⁺ b -ℚ a)
+is-invertible-diff-le-abs-ℚ a b⁺@(b , _) |a|<b =
+  is-invertible-diff-neq-ℚ
+    ( a)
+    ( b)
+    ( nonequal-map
+      ( rational-abs-ℚ)
+      ( inv-tr
+        ( rational-abs-ℚ a ≠_)
+        ( rational-abs-rational-ℚ⁺ b⁺)
+        ( nonequal-le-ℚ |a|<b)))
+
+invertible-diff-le-abs-ℚ :
+  (a : ℚ) (b : ℚ⁺) → le-ℚ (rational-abs-ℚ a) (rational-ℚ⁺ b) → ℚˣ
+invertible-diff-le-abs-ℚ a b |a|<b =
+  ( rational-ℚ⁺ b -ℚ a , is-invertible-diff-le-abs-ℚ a b |a|<b)
 ```
 
 ### Cancellation laws
