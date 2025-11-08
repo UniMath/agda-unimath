@@ -44,7 +44,7 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-This file describes lemmas about
+On this page we describe lemmas about
 [strict inequalities](real-numbers.strict-inequality-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) related to
 [addition](real-numbers.addition-real-numbers.md) and
