@@ -32,7 +32,7 @@ open import order-theory.large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
-open import real-numbers.inequalities-addition-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers

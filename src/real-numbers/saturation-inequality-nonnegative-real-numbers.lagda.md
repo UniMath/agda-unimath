@@ -36,7 +36,7 @@ Despite being a property of
 [inequality of nonnegative real numbers](real-numbers.inequality-nonnegative-real-numbers.md),
 this is much easier to prove via
 [strict inequality](real-numbers.strict-inequality-nonnegative-real-numbers.md),
-so it is moved to its own file to prevent circular dependency.
+so this page is dedicated to just this property to prevent circular dependency.
 
 ## Definition
 

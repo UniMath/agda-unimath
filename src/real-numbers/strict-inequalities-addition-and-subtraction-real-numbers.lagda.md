@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.strict-inequalities-addition-real-numbers where
+module real-numbers.strict-inequalities-addition-and-subtraction-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -44,7 +44,7 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-This file describes lemmas about
+On this page we describe lemmas about
 [strict inequalities](real-numbers.strict-inequality-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) related to
 [addition](real-numbers.addition-real-numbers.md) and
@@ -59,7 +59,7 @@ module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding add-ℝ le-ℝ
 
     preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
@@ -293,7 +293,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (p : ℚ)
   where
 
-  opaque
+  abstract opaque
     unfolding add-ℝ
 
     le-split-add-rational-ℝ :
