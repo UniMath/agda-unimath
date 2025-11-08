@@ -44,7 +44,7 @@ abstract
       ( x *ℝ zero-ℝ)
       ( zero-ℝ)
       ( right-zero-law-mul-ℝ x)
-      ( preserves-le-left-mul-ℝ⁺ (x , is-pos-x) y zero-ℝ is-neg-y)
+      ( preserves-le-left-mul-ℝ⁺ (x , is-pos-x) is-neg-y)
 
 mul-positive-negative-ℝ :
   {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁻ l2 → ℝ⁻ (l1 ⊔ l2)

@@ -293,7 +293,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) (x : ℝ l1) (y : ℝ l2) → leq-ℝ (abs-ℝ x) (abs-ℝ y) →
     leq-ℝ (abs-ℝ (power-ℝ n x)) (abs-ℝ (power-ℝ n y))
   preserves-leq-abs-power-ℝ 0 _ _ _ =
-    preserves-leq-sim-ℝ _ _ _ _
+    preserves-leq-sim-ℝ
       ( inv-tr
         ( sim-ℝ one-ℝ)
         ( abs-real-ℝ⁺ (raise-ℝ⁺ _ one-ℝ⁺))
@@ -310,9 +310,9 @@ abstract
     chain-of-inequalities
       abs-ℝ (power-ℝ (succ-ℕ n) x)
       ≤ abs-ℝ (power-ℝ n x *ℝ x)
-        by leq-eq-ℝ _ _ (ap abs-ℝ (power-succ-ℝ n x))
+        by leq-eq-ℝ (ap abs-ℝ (power-succ-ℝ n x))
       ≤ abs-ℝ (power-ℝ n x) *ℝ abs-ℝ x
-        by leq-eq-ℝ _ _ (abs-mul-ℝ _ _)
+        by leq-eq-ℝ (abs-mul-ℝ _ _)
       ≤ abs-ℝ (power-ℝ n y) *ℝ abs-ℝ y
         by
           preserves-leq-mul-ℝ⁰⁺
@@ -323,7 +323,7 @@ abstract
             ( preserves-leq-abs-power-ℝ n x y |x|≤|y|)
             ( |x|≤|y|)
       ≤ abs-ℝ (power-ℝ n y *ℝ y)
-        by leq-eq-ℝ _ _ (inv (abs-mul-ℝ _ _))
+        by leq-eq-ℝ (inv (abs-mul-ℝ _ _))
       ≤ abs-ℝ (power-ℝ (succ-ℕ n) y)
-        by leq-eq-ℝ _ _ (ap abs-ℝ (inv (power-succ-ℝ n y)))
+        by leq-eq-ℝ (ap abs-ℝ (inv (power-succ-ℝ n y)))
 ```
