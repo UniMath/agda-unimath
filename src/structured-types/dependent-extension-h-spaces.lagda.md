@@ -31,11 +31,13 @@ open import structured-types.pointed-types
 
 Given a map `h : A → B` and a family of [H-spaces](structured-types.h-spaces.md)
 `M i` indexed by `B`, the
-{{#concept "dependent extension" Disambiguation="H-space" Agda=extension-Π-H-Space}}
+{{#concept "dependent extension H-space" Agda=extension-Π-H-Space}}
 `extension-Π h M` is an H-space consisting of
-[dependent extensions](orthogonal-factorization-systems.extensions-maps.md) in
-`M` along `h`. The multiplication is given pointwise, and along the restriction
-of `h` by the
+[dependent extensions](orthogonal-factorization-systems.extensions-dependent-maps.md)
+of the family of units `η : (i : A) → M (h i)` in `M` along `h`. I.e., maps
+`f : (i : B) → M i` [equipped](foundation.structure.md) with a
+[homotopy](foundation-core.homotopies.md) `f ∘ h ~ η`. The multiplication is
+given pointwise, and on the homotopy by the
 [binary action on identifications](foundation.action-on-identifications-binary-functions.md)
 of the pointwise multiplication operation of `M`.
 

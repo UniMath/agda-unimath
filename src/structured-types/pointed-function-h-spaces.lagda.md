@@ -100,3 +100,8 @@ module _
   coherent-unital-mul-pointed-function-H-Space =
     coherent-unital-mul-H-Space pointed-function-H-Space
 ```
+
+## See also
+
+- Pointed function H-spaces are a special case of
+  [extension H-spaces](structured-types.extension-h-spaces.md)

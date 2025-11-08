@@ -28,6 +28,7 @@ open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-retractive-types public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
+open import structured-types.extension-h-spaces public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
 open import structured-types.finite-multiplication-magmas public
