@@ -215,6 +215,17 @@ module _
       map-is-inhabited
         ( tot tr-is-modulus-leq-abs-zero-limit-sequence-ℚ)
         ( is-zero-limit-seq-zero-limit-sequence-ℚ v)
+
+abstract
+  is-zero-limit-is-zero-limit-abs-sequence-ℚ :
+    ( u : sequence ℚ) →
+    is-zero-limit-sequence-ℚ (rational-abs-ℚ ∘ u) →
+    is-zero-limit-sequence-ℚ u
+  is-zero-limit-is-zero-limit-abs-sequence-ℚ u H =
+    is-zero-limit-leq-abs-zero-limit-sequence-ℚ
+      ( u)
+      ( rational-abs-ℚ ∘ u , H)
+      ( λ n → refl-leq-ℚ (rational-abs-ℚ (u n)))
 ```
 
 ### Any rational approximation of zero defines a sequence approximating zero

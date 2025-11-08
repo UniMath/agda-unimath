@@ -10,6 +10,7 @@ module elementary-number-theory.powers-rational-numbers where
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -34,11 +35,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
 open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.powers-of-elements-monoids
+
+open import metric-spaces.limits-of-sequences-metric-spaces
+open import metric-spaces.metric-space-of-rational-numbers
+open import metric-spaces.rational-sequences-approximating-zero
 ```
 
 </details>
@@ -99,6 +105,14 @@ abstract
 abstract
   power-succ-ℚ : (n : ℕ) (q : ℚ) → power-ℚ (succ-ℕ n) q ＝ power-ℚ n q *ℚ q
   power-succ-ℚ = power-succ-Monoid monoid-mul-ℚ
+```
+
+### `0ⁿ = 0` when `1 ≤ n`
+
+```agda
+abstract
+  power-zero-ℚ : (n : ℕ) → leq-ℕ 1 n → power-ℚ n zero-ℚ ＝ zero-ℚ
+  power-zero-ℚ (succ-ℕ n) _ = power-succ-ℚ n _ ∙ right-zero-law-mul-ℚ _
 ```
 
 ### `qⁿ⁺¹ = qqⁿ`
@@ -390,6 +404,64 @@ abstract
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
             ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
+```
+
+### If `|ε| < 1`, `εⁿ` approaches 0
+
+```agda
+abstract
+  is-zero-limit-power-le-one-abs-ℚ :
+    (ε : ℚ) → le-ℚ (rational-abs-ℚ ε) one-ℚ →
+    is-zero-limit-sequence-ℚ (λ n → power-ℚ n ε)
+  is-zero-limit-power-le-one-abs-ℚ ε |ε|<1 =
+    trichotomy-sign-ℚ ε
+      ( λ is-neg-ε →
+        let
+          ε⁻ = (ε , is-neg-ε)
+        in
+          is-zero-limit-is-zero-limit-abs-sequence-ℚ
+            ( _)
+            ( inv-tr
+              ( is-zero-limit-sequence-ℚ)
+              ( eq-htpy
+                ( λ n →
+                  equational-reasoning
+                    rational-abs-ℚ (power-ℚ n ε)
+                    ＝ power-ℚ n (rational-abs-ℚ ε)
+                      by inv (power-rational-abs-ℚ n ε)
+                    ＝ power-ℚ n (neg-ℚ ε)
+                      by
+                        ap (power-ℚ n) (rational-abs-rational-ℚ⁻ ε⁻)
+                    ＝ rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ ε⁻))
+                      by power-rational-ℚ⁺ n (neg-ℚ⁻ ε⁻)))
+            ( is-zero-limit-power-le-one-ℚ⁺
+              ( neg-ℚ⁻ ε⁻)
+              ( tr
+                ( λ q → le-ℚ q one-ℚ)
+                ( rational-abs-rational-ℚ⁻ ε⁻)
+                ( |ε|<1)))))
+      ( λ ε=0 →
+        is-limit-bound-modulus-sequence-Metric-Space
+          ( metric-space-ℚ)
+          ( λ n → power-ℚ n ε)
+          ( zero-ℚ)
+          ( λ δ →
+            ( 1 ,
+              λ n 1≤n →
+                inv-tr
+                  ( λ z → neighborhood-ℚ δ z zero-ℚ)
+                  ( ap (power-ℚ n) ε=0 ∙ power-zero-ℚ n 1≤n)
+                  ( is-reflexive-neighborhood-ℚ δ zero-ℚ))))
+      ( λ is-pos-ε →
+        inv-tr
+          ( is-zero-limit-sequence-ℚ)
+          ( eq-htpy (λ n → power-rational-ℚ⁺ n (ε , is-pos-ε)))
+          ( is-zero-limit-power-le-one-ℚ⁺
+            ( ε , is-pos-ε)
+            ( tr
+              ( λ q → le-ℚ q one-ℚ)
+              ( rational-abs-rational-ℚ⁺ (ε , is-pos-ε))
+              ( |ε|<1))))
 ```
 
 ## See also

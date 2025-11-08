@@ -18,6 +18,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
@@ -140,6 +141,16 @@ abstract
     (q : ℚ⁺) → rational-abs-ℚ (rational-ℚ⁺ q) ＝ rational-ℚ⁺ q
   rational-abs-rational-ℚ⁺ q =
     ap rational-ℚ⁰⁺ (abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ q))
+```
+
+### The absolute value of a negative rational number is the negation of the number
+
+```agda
+abstract
+  rational-abs-rational-ℚ⁻ :
+    (q : ℚ⁻) → rational-abs-ℚ (rational-ℚ⁻ q) ＝ neg-ℚ (rational-ℚ⁻ q)
+  rational-abs-rational-ℚ⁻ q⁻@(q , _) =
+    inv (rational-abs-neg-ℚ q) ∙ rational-abs-rational-ℚ⁺ (neg-ℚ⁻ q⁻)
 ```
 
 ### `q` is less than or equal to `abs-ℚ q`

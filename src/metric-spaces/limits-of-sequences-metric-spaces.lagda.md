@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
@@ -99,6 +100,25 @@ module _
 ```
 
 ## Properties
+
+### Proving the limit of a sequence in a metric space
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (u : sequence-type-Metric-Space M)
+  (lim : type-Metric-Space M)
+  where
+
+  is-limit-bound-modulus-sequence-Metric-Space :
+    ( (δ : ℚ⁺) →
+      Σ ( ℕ)
+        ( λ (N : ℕ) →
+          (n : ℕ) → leq-ℕ N n → neighborhood-Metric-Space M δ (u n) lim)) →
+    is-limit-sequence-Metric-Space M u lim
+  is-limit-bound-modulus-sequence-Metric-Space H =
+    intro-exists (pr1 ∘ H) (pr2 ∘ H)
+```
 
 ### The limit of a sequence in a metric space is unique
 

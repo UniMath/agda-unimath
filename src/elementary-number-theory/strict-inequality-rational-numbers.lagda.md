@@ -47,6 +47,7 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -143,6 +144,10 @@ opaque
 irreflexive-le-ℚ : (x : ℚ) → ¬ (le-ℚ x x)
 irreflexive-le-ℚ =
   is-irreflexive-is-asymmetric le-ℚ asymmetric-le-ℚ
+
+abstract
+  nonequal-le-ℚ : {x y : ℚ} → le-ℚ x y → x ≠ y
+  nonequal-le-ℚ {x} x<x refl = irreflexive-le-ℚ x x<x
 ```
 
 ### Strict inequality on the rationals is transitive

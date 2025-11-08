@@ -510,10 +510,27 @@ module _
         ( mul-ℚ x)
         ( is-lipschitz-left-mul-ℚ)
 
+    is-uniformly-continuous-right-mul-ℚ :
+      is-uniformly-continuous-function-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℚ)
+        ( mul-ℚ' x)
+    is-uniformly-continuous-right-mul-ℚ =
+      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℚ)
+        ( mul-ℚ' x)
+        ( is-lipschitz-right-mul-ℚ)
+
   uniformly-continuous-left-mul-ℚ :
     uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
   uniformly-continuous-left-mul-ℚ =
     ( mul-ℚ x , is-uniformly-continuous-left-mul-ℚ)
+
+  uniformly-continuous-right-mul-ℚ :
+    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
+  uniformly-continuous-right-mul-ℚ =
+    ( mul-ℚ' x , is-uniformly-continuous-right-mul-ℚ)
 ```
 
 ### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
