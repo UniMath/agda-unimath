@@ -20,11 +20,15 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.path-algebra
+open import foundation.propositional-truncations
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -54,8 +58,8 @@ Given a type `I` and a [pointed type](structured-types.pointed-types.md)
 `A` as the type `Σ (a : A), (I → (a ＝ a∗))`. This type is canonically pointed
 at `(a∗ , refl-htpy)`. We recover the
 [standard loop space](synthetic-homotopy-theory.loop-spaces.md) `ΩA` as the
-`1+1`-ary loops, the type `A` itself as the `∅`-ary loops, and there is a unique
-`1`-ary loop. The `𝕊¹`-ary loops correspond to
+`1+1`-ary loops, there is a unique `1`-ary loop, and we recover `A` itself as
+the `∅`-loops. The `𝕊¹`-ary loops correspond to
 [loops of loops](synthetic-homotopy-theory.double-loop-spaces.md). Observe that
 among pointed types `1+1` represents elements, and so we should interpret
 `1+1`-ary as _unary_ loops rather than binary ones, which is consistent with the
@@ -540,19 +544,21 @@ module _
   (let A = type-Pointed-Type A∗) (let a∗ = point-Pointed-Type A∗)
   where
 
-  compute-type-multivar-Ω-pointed' :
-    type-multivar-Ω I A∗ ≃ (I∗ →∗ Ω A∗)
-  compute-type-multivar-Ω-pointed' =
-    equivalence-reasoning
-      Σ A (λ a → I → a ＝ a∗)
-      ≃ Σ A (λ a → Σ (I → a ＝ a∗) (λ f → Σ (a ＝ a∗) (f i∗ ＝_)))
-        by
-        equiv-tot
-          ( λ a → inv-right-unit-law-Σ-is-contr (λ f → is-torsorial-Id (f i∗)))
-      ≃ Σ (Σ A (_＝ a∗)) (λ (a , p) → Σ (I → a ＝ a∗) (λ a → a i∗ ＝ p))
-        by inv-associative-Σ ∘e equiv-tot (λ a → equiv-left-swap-Σ)
-      ≃ Σ (I → a∗ ＝ a∗) (λ f → f i∗ ＝ refl)
-        by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
+  abstract
+    compute-type-multivar-Ω-pointed' :
+      type-multivar-Ω I A∗ ≃ (I∗ →∗ Ω A∗)
+    compute-type-multivar-Ω-pointed' =
+      equivalence-reasoning
+        Σ A (λ a → I → a ＝ a∗)
+        ≃ Σ A (λ a → Σ (I → a ＝ a∗) (λ f → Σ (a ＝ a∗) (f i∗ ＝_)))
+          by
+          equiv-tot
+            ( λ a →
+              inv-right-unit-law-Σ-is-contr (λ f → is-torsorial-Id (f i∗)))
+        ≃ Σ (Σ A (_＝ a∗)) (λ (a , p) → Σ (I → a ＝ a∗) (λ a → a i∗ ＝ p))
+          by inv-associative-Σ ∘e equiv-tot (λ a → equiv-left-swap-Σ)
+        ≃ Σ (I → a∗ ＝ a∗) (λ f → f i∗ ＝ refl)
+          by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl)
 
   map-compute-multivar-Ω-pointed :
     type-multivar-Ω I A∗ → (I∗ →∗ Ω A∗)
@@ -676,4 +682,30 @@ module _
         by inv-associative-Σ
       ≃ Σ (a∗ ＝ a∗) (λ N → I → N ＝ refl)
         by left-unit-law-Σ-is-contr (is-torsorial-Id' a∗) (a∗ , refl-Ω A∗)
+```
+
+### Truncatedness of `I`-ary loops
+
+```agda
+module _
+  {l1 l2 : Level} (I : UU l1) (A∗ : Pointed-Type l2)
+  where abstract
+
+  is-trunc-type-multivar-Ω-has-element :
+    (k : 𝕋) → I → is-trunc (succ-𝕋 k) (type-Pointed-Type A∗) →
+    is-trunc k (type-multivar-Ω I A∗)
+  is-trunc-type-multivar-Ω-has-element k i∗ K =
+    is-trunc-equiv k ((I , i∗) →∗ Ω A∗)
+      ( compute-type-multivar-Ω-pointed (I , i∗) A∗)
+      ( is-trunc-pointed-function-type k
+        ( K (point-Pointed-Type A∗) (point-Pointed-Type A∗)))
+
+  is-trunc-type-multivar-Ω-is-inhabited :
+    (k : 𝕋) → is-inhabited I → is-trunc (succ-𝕋 k) (type-Pointed-Type A∗) →
+    is-trunc k (type-multivar-Ω I A∗)
+  is-trunc-type-multivar-Ω-is-inhabited k H K =
+    rec-trunc-Prop
+      ( is-trunc-Prop k (type-multivar-Ω I A∗))
+      ( λ i∗ → is-trunc-type-multivar-Ω-has-element k i∗ K)
+      ( H)
 ```
