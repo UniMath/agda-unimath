@@ -24,7 +24,7 @@ open import real-numbers.series-real-numbers
 
 A [series](real-numbers.series-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md)
-{{#concepts "converges" Disambiguation="series of real numbers" Agda=is-sum-series-ℝ}}
+{{#concept "converges" Disambiguation="series of real numbers" Agda=is-sum-series-ℝ}}
 to `x` if the sequence of its partial sums
 [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to `x` in the
 [standard metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
