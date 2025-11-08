@@ -23,7 +23,7 @@ open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
-open import real-numbers.inequalities-addition-real-numbers public
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
 open import real-numbers.inequality-positive-real-numbers public
@@ -75,13 +75,13 @@ open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
-open import real-numbers.short-binary-maximum-real-numbers public
+open import real-numbers.short-function-binary-maximum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
 open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public
 open import real-numbers.squares-real-numbers public
-open import real-numbers.strict-inequalities-addition-real-numbers public
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public

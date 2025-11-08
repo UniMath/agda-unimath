@@ -44,7 +44,7 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequalities-addition-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-and-suprema-families-real-numbers
@@ -55,7 +55,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequalities-addition-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers

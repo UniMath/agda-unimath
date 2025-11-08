@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.strict-inequalities-addition-real-numbers where
+module real-numbers.strict-inequalities-addition-and-subtraction-real-numbers where
 ```
 
 <details><summary>Imports</summary>
