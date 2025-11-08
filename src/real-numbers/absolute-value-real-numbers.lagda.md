@@ -28,7 +28,9 @@ open import metric-spaces.short-functions-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -67,7 +69,7 @@ opaque
 ### The absolute value of zero is zero
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   abs-zero-ℝ : abs-ℝ zero-ℝ ＝ zero-ℝ
@@ -77,7 +79,7 @@ opaque
 ### The absolute value preserves similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   preserves-sim-abs-ℝ :
@@ -90,7 +92,7 @@ opaque
 ### The absolute value of a real number is nonnegative
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ leq-ℝ max-ℝ neg-ℚ neg-ℝ real-ℚ
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
@@ -99,7 +101,7 @@ opaque
       ( lower-cut-ℝ (abs-ℝ x) q)
       ( id)
       ( λ (x<0 , 0<x) → ex-falso (is-disjoint-cut-ℝ x zero-ℚ (0<x , x<0)))
-      ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q zero-ℚ q<0)
+      ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q<0)
 
 nonnegative-abs-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
 nonnegative-abs-ℝ x = (abs-ℝ x , is-nonnegative-abs-ℝ x)
@@ -108,7 +110,7 @@ nonnegative-abs-ℝ x = (abs-ℝ x , is-nonnegative-abs-ℝ x)
 ### The absolute value of the negation of a real number is its absolute value
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   abs-neg-ℝ : {l : Level} → (x : ℝ l) → abs-ℝ (neg-ℝ x) ＝ abs-ℝ x
@@ -158,10 +160,10 @@ module _
       tr
         ( leq-ℝ (neg-ℝ (abs-ℝ x)))
         ( neg-neg-ℝ x)
-        ( neg-leq-ℝ (neg-ℝ x) (abs-ℝ x) neg-leq-abs-ℝ)
+        ( neg-leq-ℝ neg-leq-abs-ℝ)
 
     neg-leq-neg-abs-ℝ : leq-ℝ (neg-ℝ (abs-ℝ x)) (neg-ℝ x)
-    neg-leq-neg-abs-ℝ = neg-leq-ℝ x (abs-ℝ x) leq-abs-ℝ
+    neg-leq-neg-abs-ℝ = neg-leq-ℝ leq-abs-ℝ
 ```
 
 ### If `|x| ＝ 0` then `x ＝ 0`
@@ -232,10 +234,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding abs-ℝ
 
     leq-abs-leq-leq-neg-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ x) y → leq-ℝ (abs-ℝ x) y
@@ -253,25 +255,11 @@ module _
     triangle-inequality-abs-ℝ : leq-ℝ (abs-ℝ (x +ℝ y)) (abs-ℝ x +ℝ abs-ℝ y)
     triangle-inequality-abs-ℝ =
       leq-abs-leq-leq-neg-ℝ
-        ( x +ℝ y)
-        ( abs-ℝ x +ℝ abs-ℝ y)
-        ( preserves-leq-add-ℝ
-          ( x)
-          ( abs-ℝ x)
-          ( y)
-          ( abs-ℝ y)
-          ( leq-abs-ℝ x)
-          ( leq-abs-ℝ y))
+        ( preserves-leq-add-ℝ (leq-abs-ℝ x) (leq-abs-ℝ y))
         ( inv-tr
           ( λ z → leq-ℝ z (abs-ℝ x +ℝ abs-ℝ y))
           ( distributive-neg-add-ℝ x y)
-          ( preserves-leq-add-ℝ
-            ( neg-ℝ x)
-            ( abs-ℝ x)
-            ( neg-ℝ y)
-            ( abs-ℝ y)
-            ( neg-leq-abs-ℝ x)
-            ( neg-leq-abs-ℝ y)))
+          ( preserves-leq-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
 ```
 
 ### The absolute value is a short function
@@ -293,8 +281,6 @@ module _
         ( abs-ℝ x)
         ( abs-ℝ y)
         ( leq-abs-leq-leq-neg-ℝ
-          ( x)
-          ( abs-ℝ y +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( x)
             ( y +ℝ real-ℚ⁺ d)
@@ -320,8 +306,6 @@ module _
               ( x)
               ( right-leq-real-bound-neighborhood-ℝ d x y I))))
         ( leq-abs-leq-leq-neg-ℝ
-          ( y)
-          ( abs-ℝ x +ℝ real-ℚ⁺ d)
           ( transitive-leq-ℝ
             ( y)
             ( x +ℝ real-ℚ⁺ d)
@@ -378,7 +362,7 @@ module _
     leq-abs-sqrt-square-ℝ' :
       leq-ℝ' (real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)) (abs-ℝ x)
     leq-abs-sqrt-square-ℝ' q |x|<q@(x<q , -x<q) =
-      ( is-positive-is-in-upper-cut-ℝ⁰⁺ (nonnegative-abs-ℝ x) q (x<q , -x<q) ,
+      ( is-positive-is-in-upper-cut-ℝ⁰⁺ (nonnegative-abs-ℝ x) (x<q , -x<q) ,
         is-in-upper-cut-square-pos-neg-ℝ x q x<q -x<q)
 
     eq-abs-sqrt-square-ℝ : abs-ℝ x ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)

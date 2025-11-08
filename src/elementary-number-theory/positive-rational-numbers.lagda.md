@@ -235,7 +235,7 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
   abstract
@@ -284,13 +284,12 @@ nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ```agda
 abstract
   is-positive-leq-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
+    (p : ℚ⁺) {q : ℚ} → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-leq-ℚ⁺ (p , pos-p) p≤q =
     is-positive-le-zero-ℚ
       ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ pos-p) p≤q)
 
   is-positive-le-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-le-ℚ⁺ p q p<q =
-    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
+    (p : ℚ⁺) {q : ℚ} → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁺ p p<q = is-positive-leq-ℚ⁺ p (leq-le-ℚ p<q)
 ```

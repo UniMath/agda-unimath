@@ -114,7 +114,7 @@ module _
         (r , q<r , r<x+y) ← ∃r
         ((rx , ry) , (rx<x , ry<y , r=rx+ry)) ← r<x+y
         let
-          r-q⁺ = positive-diff-le-ℚ q r q<r
+          r-q⁺ = positive-diff-le-ℚ q<r
           ε⁺@(ε , _) = mediant-zero-ℚ⁺ r-q⁺
         intro-exists
           ( rx -ℚ ε , q -ℚ (rx -ℚ ε))

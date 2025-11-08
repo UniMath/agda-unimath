@@ -28,6 +28,12 @@ open import metric-spaces.metrics
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.saturation-inequality-nonnegative-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -158,10 +164,10 @@ module _
                     ( r⁺)
                     ( backward-implication
                       ( is-metric-M-ρ r⁺ y z)
-                      ( leq-le-ℝ _ _ ρyz<r))
+                      ( leq-le-ℝ ρyz<r))
                     ( backward-implication
                       ( is-metric-M-ρ q⁺ x y)
-                      ( leq-le-ℝ _ _ ρxy<q)))))
+                      ( leq-le-ℝ ρxy<q)))))
               ( d'<d))
 
     is-extensional-is-metric-of-Metric-Space :

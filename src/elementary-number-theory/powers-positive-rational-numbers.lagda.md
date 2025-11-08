@@ -212,8 +212,8 @@ abstract
     Σ ℕ (λ n → le-ℚ b (rational-ℚ⁺ (power-ℚ⁺ n q)))
   bound-unbounded-power-greater-than-one-ℚ⁺ q⁺@(q , _) b 1<q =
     let
-      q-1⁺ = positive-diff-le-ℚ one-ℚ q 1<q
-      (n , b<⟨1+q-1⟩ⁿ) = bound-unbounded-power-one-plus-ℚ⁺ q-1⁺ b
+      (n , b<⟨1+q-1⟩ⁿ) =
+        bound-unbounded-power-one-plus-ℚ⁺ (positive-diff-le-ℚ 1<q) b
     in
       ( n ,
         tr
