@@ -34,6 +34,8 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -111,6 +113,27 @@ opaque
   abs-neg-ℝ : {l : Level} → (x : ℝ l) → abs-ℝ (neg-ℝ x) ＝ abs-ℝ x
   abs-neg-ℝ x =
     ap (max-ℝ (neg-ℝ x)) (neg-neg-ℝ x) ∙ commutative-max-ℝ _ _
+```
+
+### The absolute value of a nonnegative real number is itself
+
+```agda
+abstract opaque
+  unfolding abs-ℝ
+
+  abs-real-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → abs-ℝ (real-ℝ⁰⁺ x) ＝ real-ℝ⁰⁺ x
+  abs-real-ℝ⁰⁺ (x , 0≤x) =
+    eq-sim-ℝ
+      ( right-leq-left-max-ℝ
+        ( transitive-leq-ℝ
+          ( neg-ℝ x)
+          ( zero-ℝ)
+          ( x)
+          ( 0≤x)
+          ( tr (leq-ℝ (neg-ℝ x)) neg-zero-ℝ (neg-leq-ℝ _ _ 0≤x))))
+
+  abs-real-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → abs-ℝ (real-ℝ⁺ x) ＝ real-ℝ⁺ x
+  abs-real-ℝ⁺ x = abs-real-ℝ⁰⁺ (nonnegative-ℝ⁺ x)
 ```
 
 ### `x` is between `-|x|` and `|x|`
