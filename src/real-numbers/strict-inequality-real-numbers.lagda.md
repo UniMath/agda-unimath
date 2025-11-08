@@ -9,16 +9,9 @@ module real-numbers.strict-inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -28,26 +21,19 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-disjunction
-open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-
 open import logic.functoriality-existential-quantification
 
-open import real-numbers.addition-real-numbers
-open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
@@ -81,34 +67,28 @@ le-prop-ℝ x y = (le-ℝ x y , is-prop-le-ℝ x y)
 ### Strict inequality on the reals implies inequality
 
 ```agda
-opaque
+abstract opaque
   unfolding le-ℝ leq-ℝ
 
   leq-le-ℝ : {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → leq-ℝ x y
   leq-le-ℝ {x = x} {y = y} x<y p p<x =
     elim-exists
       ( lower-cut-ℝ y p)
-      ( λ q (x<q , q<y) →
-        le-lower-cut-ℝ y p q (le-lower-upper-cut-ℝ x p q p<x x<q) q<y)
+      ( λ q (x<q , q<y) → le-lower-cut-ℝ y (le-lower-upper-cut-ℝ x p<x x<q) q<y)
       ( x<y)
 ```
 
 ### Strict inequality on the reals is irreflexive
 
 ```agda
-module _
-  {l : Level}
-  (x : ℝ l)
-  where
+abstract opaque
+  unfolding le-ℝ
 
-  opaque
-    unfolding le-ℝ
-
-    irreflexive-le-ℝ : ¬ (le-ℝ x x)
-    irreflexive-le-ℝ =
-      elim-exists
-        ( empty-Prop)
-        ( λ q (x<q , q<x) → is-disjoint-cut-ℝ x q (q<x , x<q))
+  irreflexive-le-ℝ : {l : Level} (x : ℝ l) → ¬ (le-ℝ x x)
+  irreflexive-le-ℝ x =
+    elim-exists
+      ( empty-Prop)
+      ( λ q (x<q , q<x) → is-disjoint-cut-ℝ x q (q<x , x<q))
 ```
 
 ### Strict inequality on the reals is asymmetric
@@ -118,7 +98,7 @@ module _
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ
 
     asymmetric-le-ℝ : le-ℝ x y → ¬ (le-ℝ y x)
@@ -132,11 +112,11 @@ module _
           ( asymmetric-le-ℚ
             ( q)
             ( p)
-            ( le-lower-upper-cut-ℝ x q p q<x x<p))
+            ( le-lower-upper-cut-ℝ x q<x x<p))
           ( not-leq-le-ℚ
             ( p)
             ( q)
-            ( le-lower-upper-cut-ℝ y p q p<y y<q))
+            ( le-lower-upper-cut-ℝ y p<y y<q))
           ( decide-le-leq-ℚ p q)
 ```
 
@@ -150,7 +130,7 @@ module _
   (z : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ
 
     transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
@@ -162,8 +142,7 @@ module _
         ( q , y<q , q<z) ← y<z
         intro-exists
           ( p)
-          ( x<p ,
-            le-lower-cut-ℝ z p q (le-lower-upper-cut-ℝ y p q p<y y<q) q<z)
+          ( x<p , le-lower-cut-ℝ z (le-lower-upper-cut-ℝ y p<y y<q) q<z)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality
@@ -173,7 +152,7 @@ module _
   {x y : ℚ}
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ real-ℚ
 
     preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
@@ -200,7 +179,7 @@ module _
   (z : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ leq-ℝ leq-ℝ'
 
     concatenate-le-leq-ℝ : le-ℝ x y → leq-ℝ y z → le-ℝ x z
@@ -220,13 +199,12 @@ module _
   {l : Level} {q : ℚ} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ real-ℚ
 
     le-real-iff-lower-cut-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
     le-real-iff-lower-cut-ℚ = is-rounded-lower-cut-ℝ x q
 
-  abstract
     le-real-is-in-lower-cut-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
     le-real-is-in-lower-cut-ℚ = forward-implication le-real-iff-lower-cut-ℚ
 
@@ -241,7 +219,7 @@ module _
   {l : Level} {q : ℚ} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ real-ℚ
 
     le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
@@ -249,7 +227,6 @@ module _
       iff-tot-exists (λ _ → iff-equiv commutative-product) ∘iff
       is-rounded-upper-cut-ℝ x q
 
-  abstract
     le-real-is-in-upper-cut-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
     le-real-is-in-upper-cut-ℚ = forward-implication le-iff-upper-cut-real-ℚ
 
@@ -264,12 +241,13 @@ module _
   {l : Level} (x : ℝ l) (p q : ℚ) (p<q : le-ℚ p q)
   where
 
-  is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
-  is-located-le-ℝ =
-    map-disjunction
-      ( le-real-is-in-lower-cut-ℚ x)
-      ( le-real-is-in-upper-cut-ℚ x)
-      ( is-located-lower-upper-cut-ℝ x p<q)
+  abstract
+    is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
+    is-located-le-ℝ =
+      map-disjunction
+        ( le-real-is-in-lower-cut-ℚ x)
+        ( le-real-is-in-upper-cut-ℚ x)
+        ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
 ### Every real is less than a rational number
@@ -321,7 +299,7 @@ module _
   {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ neg-ℝ
 
     neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
@@ -343,7 +321,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ leq-ℝ
 
     not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
@@ -361,7 +339,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ leq-ℝ
 
     leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
@@ -410,24 +388,18 @@ module _
   (y : ℝ l2)
   where
 
-  opaque
-    unfolding le-ℝ real-ℚ
+  abstract opaque
+    unfolding le-ℝ
 
     dense-rational-le-ℝ :
       le-ℝ x y →
       exists ℚ (λ z → le-prop-ℝ x (real-ℚ z) ∧ le-prop-ℝ (real-ℚ z) y)
-    dense-rational-le-ℝ x<y =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( ∃ ℚ (λ z → le-prop-ℝ x (real-ℚ z) ∧ le-prop-ℝ (real-ℚ z) y))
-      in do
-        ( q , x<q , q<y) ← x<y
-        ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
-        ( r , q<r , r<y) ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
-        intro-exists
-          ( q)
-          ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+    dense-rational-le-ℝ =
+      map-tot-exists
+        ( λ q →
+          map-product
+            ( le-real-is-in-upper-cut-ℚ x)
+            ( le-real-is-in-lower-cut-ℚ y))
 ```
 
 ### Strict inequality on the real numbers is dense
@@ -453,7 +425,7 @@ module _
 ### Strict inequality on the real numbers is cotransitive
 
 ```agda
-opaque
+abstract opaque
   unfolding le-ℝ
 
   cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-prop-ℝ
@@ -476,7 +448,7 @@ module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) (x~y : sim-ℝ x y)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ sim-ℝ
 
     preserves-le-left-sim-ℝ : le-ℝ x z → le-ℝ y z
@@ -514,7 +486,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ'
 
     leq-le-rational-ℝ :
@@ -540,35 +512,6 @@ module _
       sim-sim-leq-ℝ
         ( leq-le-rational-ℝ x y (backward-implication ∘ H) ,
           leq-le-rational-ℝ y x (forward-implication ∘ H))
-```
-
-### If `x + y < p` for some rational `p`, then there exist `q r : ℚ` such that `p = q + r`, `x < q`, `y < r`
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (p : ℚ)
-  where
-
-  opaque
-    unfolding add-ℝ
-
-    le-split-add-rational-ℝ :
-      le-ℝ (x +ℝ y) (real-ℚ p) →
-      exists
-        ( ℚ × ℚ)
-        ( λ (q , r) →
-          Id-Prop ℚ-Set p (q +ℚ r) ∧
-          le-prop-ℝ x (real-ℚ q) ∧
-          le-prop-ℝ y (real-ℚ r))
-    le-split-add-rational-ℝ x+y<p =
-      let open do-syntax-trunc-Prop (∃ _ _)
-      in do
-        ((q , r) , x<q , y<r , p=q+r) ← is-in-upper-cut-le-real-ℚ (x +ℝ y) x+y<p
-        intro-exists
-          ( q , r)
-          ( p=q+r ,
-            le-real-is-in-upper-cut-ℚ x x<q ,
-            le-real-is-in-upper-cut-ℚ y y<r)
 ```
 
 ## References

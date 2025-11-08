@@ -107,7 +107,7 @@ nonnegative-abs-ℝ x = (abs-ℝ x , is-nonnegative-abs-ℝ x)
 ### The absolute value of the negation of a real number is its absolute value
 
 ```agda
-opaque
+abstract opaque
   unfolding abs-ℝ
 
   abs-neg-ℝ : {l : Level} → (x : ℝ l) → abs-ℝ (neg-ℝ x) ＝ abs-ℝ x

@@ -358,7 +358,7 @@ abstract
                 ( chain-of-inequalities
                     a
                     ≤ q
-                      by leq-lower-upper-cut-ℝ x a q a<x x<q
+                      by leq-lower-upper-cut-ℝ x a<x x<q
                     ≤ rational-abs-ℚ q
                       by leq-abs-ℚ q
                     ≤ ε +ℚ rational-abs-ℚ q
@@ -387,7 +387,7 @@ abstract
                           ( neg-ℚ b)
                           ( neg-ℚ p)
                           ( neg-leq-ℚ
-                            ( leq-lower-upper-cut-ℝ x p b p<x x<b))
+                            ( leq-lower-upper-cut-ℝ x p<x x<b))
                     ≤ rational-abs-ℚ (ε -ℚ p)
                       by leq-abs-ℚ _
                     ≤ rational-abs-ℚ ε +ℚ rational-abs-ℚ p
@@ -419,7 +419,7 @@ abstract
                 ( chain-of-inequalities
                     neg-ℚ b
                     ≤ neg-ℚ a
-                      by neg-leq-ℚ (leq-lower-upper-cut-ℝ x a b a<x x<b)
+                      by neg-leq-ℚ (leq-lower-upper-cut-ℝ x a<x x<b)
                     ≤ rational-abs-ℚ a
                       by neg-leq-abs-ℚ a
                     ≤ rational-abs-ℚ a +ℚ ε

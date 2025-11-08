@@ -105,7 +105,7 @@ module _
         (p⁺@(p , is-pos-p) , q<p²) ← square-le-ℚ⁺' q⁺
         intro-exists
           ( p)
-          ( is-pos-p , le-upper-cut-ℝ (real-ℝ⁰⁺ x) q (p *ℚ p) q<p² x<q)
+          ( is-pos-p , le-upper-cut-ℝ (real-ℝ⁰⁺ x) q<p² x<q)
 
     forward-implication-is-rounded-lower-cut-sqrt-ℝ⁰⁺ :
       (q : ℚ) → is-in-subtype lower-cut-sqrt-ℝ⁰⁺ q →
@@ -152,8 +152,7 @@ module _
                     ( λ r → le-ℚ r p)
                     ( q=0)
                     ( le-zero-is-positive-ℚ is-pos-p) ,
-                  λ _ →
-                    le-lower-cut-ℝ (real-ℝ⁰⁺ x) (p *ℚ p) q' p²<q' q'<x))
+                  λ _ → le-lower-cut-ℝ (real-ℝ⁰⁺ x) p²<q' q'<x))
           ( λ is-pos-q →
             do
               (p , q²<p , p<x) ←
@@ -169,8 +168,7 @@ module _
                 rounded-below-square-le-ℚ⁺ (q , is-pos-q) (p , is-pos-p) q²<p
               intro-exists
                 ( q')
-                ( q<q' ,
-                  λ _ → le-lower-cut-ℝ (real-ℝ⁰⁺ x) (q' *ℚ q') p q'²<p p<x))
+                ( q<q' , λ _ → le-lower-cut-ℝ (real-ℝ⁰⁺ x) q'²<p p<x))
 
     forward-implication-is-rounded-upper-cut-sqrt-ℝ⁰⁺ :
       (r : ℚ) → is-in-subtype upper-cut-sqrt-ℝ⁰⁺ r →
@@ -189,7 +187,7 @@ module _
           rounded-above-square-le-ℚ⁺ (r , is-pos-r) (p , is-pos-p) p<r²
         intro-exists
           ( q)
-          ( q<r , is-pos-q , le-upper-cut-ℝ (real-ℝ⁰⁺ x) p (q *ℚ q) p<q² x<p)
+          ( q<r , is-pos-q , le-upper-cut-ℝ (real-ℝ⁰⁺ x) p<q² x<p)
 
     backward-implication-is-rounded-lower-cut-sqrt-ℝ⁰⁺ :
       (q : ℚ) → exists ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-sqrt-ℝ⁰⁺ r) →
@@ -205,8 +203,6 @@ module _
               ( is-positive-le-ℚ⁰⁺ (q , is-nonneg-q) q<r)
         le-lower-cut-ℝ
           ( real-ℝ⁰⁺ x)
-          ( q *ℚ q)
-          ( r *ℚ r)
           ( preserves-le-square-ℚ⁰⁺ (q , is-nonneg-q) (r , is-nonneg-r) q<r)
           ( r<√x is-nonneg-r)
 
@@ -221,8 +217,6 @@ module _
         ( is-pos-r ,
           le-upper-cut-ℝ
             ( real-ℝ⁰⁺ x)
-            ( q *ℚ q)
-            ( r *ℚ r)
             ( preserves-le-square-ℚ⁰⁺
               ( q , is-nonnegative-is-positive-ℚ is-pos-q)
               ( r , is-nonnegative-is-positive-ℚ is-pos-r)
@@ -298,7 +292,7 @@ module _
   {l : Level} (x : ℝ⁰⁺ l)
   where
 
-  opaque
+  abstract opaque
     unfolding real-ℚ real-sqrt-ℝ⁰⁺
 
     is-nonnegative-real-sqrt-ℝ⁰⁺ : is-nonnegative-ℝ (real-sqrt-ℝ⁰⁺ x)
@@ -316,7 +310,7 @@ module _
   {l : Level} (x : ℝ⁰⁺ l)
   where
 
-  opaque
+  abstract opaque
     unfolding mul-ℝ real-sqrt-ℝ⁰⁺ leq-ℝ leq-ℝ'
 
     leq-square-sqrt-ℝ⁰⁺ :
@@ -390,8 +384,6 @@ module _
                   ( linear-leq-ℚ a c)
             le-lower-cut-ℝ
               ( real-ℝ⁰⁺ x)
-              ( q)
-              ( a' *ℚ a')
               ( concatenate-le-leq-ℚ
                 ( q)
                 ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -406,15 +398,11 @@ module _
                     ( leq-left-max-ℚ a c ,
                       leq-lower-upper-cut-ℝ
                         ( real-sqrt-ℝ⁰⁺ x)
-                        ( a')
-                        ( b)
                         ( λ _ → a'²<x)
                         ( √x<b))
                     ( leq-right-max-ℚ a c ,
                       leq-lower-upper-cut-ℝ
                         ( real-sqrt-ℝ⁰⁺ x)
-                        ( a')
-                        ( d)
                         ( λ _ → a'²<x)
                         ( √x<d)))))
               ( a'²<x))
@@ -459,8 +447,6 @@ module _
           √x<b' = (is-pos-b' , x<b'²)
         le-upper-cut-ℝ
           ( real-ℝ⁰⁺ x)
-          ( b' *ℚ b')
-          ( q)
           ( concatenate-leq-le-ℚ
             ( b' *ℚ b')
             ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -471,9 +457,9 @@ module _
                 ( [c,d])
                 ( b')
                 ( b')
-                ( leq-lower-upper-cut-ℝ (real-sqrt-ℝ⁰⁺ x) a b' a<√x √x<b' ,
+                ( leq-lower-upper-cut-ℝ (real-sqrt-ℝ⁰⁺ x) a<√x √x<b' ,
                   leq-left-min-ℚ b d)
-                ( leq-lower-upper-cut-ℝ (real-sqrt-ℝ⁰⁺ x) c b' c<√x √x<b' ,
+                ( leq-lower-upper-cut-ℝ (real-sqrt-ℝ⁰⁺ x) c<√x √x<b' ,
                   leq-right-min-ℚ b d)))
             ( [a,b][c,d]<q))
           ( x<b'²)
@@ -491,7 +477,7 @@ module _
 ### Square roots of nonnegative real numbers are unique
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ real-sqrt-ℝ⁰⁺
 
   leq-unique-sqrt-ℝ⁰⁺ :
@@ -504,7 +490,7 @@ opaque
     in do
       (r , y<r) ← is-inhabited-upper-cut-ℝ y
       let
-        q≤r = leq-lower-upper-cut-ℝ y q r q<y y<r
+        q≤r = leq-lower-upper-cut-ℝ y q<y y<r
         [q,r] = ((q , r) , q≤r)
         q⁰⁺ = (q , is-nonneg-q)
         r⁰⁺ = (r , is-nonnegative-leq-ℚ⁰⁺ q⁰⁺ r q≤r)

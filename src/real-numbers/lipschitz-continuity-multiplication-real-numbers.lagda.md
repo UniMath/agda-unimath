@@ -258,8 +258,6 @@ module _
                   by
                     preserves-leq-right-mul-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε)
-                      ( my +ℝ mx)
-                      ( real-ℚ q)
                       ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ (my +ℝ mx) my+mx<q))
                 ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
                   by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))

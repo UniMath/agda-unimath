@@ -232,7 +232,7 @@ opaque
       ( q)
       ( id)
       ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
-      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
+      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q<p p∈lx)))
   pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
     elim-disjunction
       ( lower-cut-ℝ x p)

@@ -222,7 +222,7 @@ abstract
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (p q : ℚ)
+  {l : Level} (x : ℝ l) {p q : ℚ}
   where
 
   le-lower-cut-ℝ :
@@ -254,7 +254,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (p q : ℚ)
+  {l : Level} (x : ℝ l) {p q : ℚ}
   where
 
   abstract
@@ -265,10 +265,7 @@ module _
     le-lower-upper-cut-ℝ H H' =
       rec-coproduct
         ( id)
-        ( λ I →
-          ex-falso
-            ( is-disjoint-cut-ℝ x p
-                ( H , leq-upper-cut-ℝ x q p I H')))
+        ( λ I → ex-falso (is-disjoint-cut-ℝ x p (H , leq-upper-cut-ℝ x I H')))
         ( decide-le-leq-ℚ p q)
 
     leq-lower-upper-cut-ℝ :

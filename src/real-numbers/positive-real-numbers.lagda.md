@@ -111,7 +111,7 @@ is-rounded-upper-cut-ℝ⁺ :
 is-rounded-upper-cut-ℝ⁺ (x , _) = is-rounded-upper-cut-ℝ x
 
 le-lower-upper-cut-ℝ⁺ :
-  {l : Level} (x : ℝ⁺ l) (p q : ℚ) →
+  {l : Level} (x : ℝ⁺ l) {p q : ℚ} →
   is-in-lower-cut-ℝ⁺ x p → is-in-upper-cut-ℝ⁺ x q → le-ℚ p q
 le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ```
@@ -277,8 +277,8 @@ one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
 ```agda
 abstract
   is-positive-is-in-upper-cut-ℝ⁺ :
-    {l : Level} (x : ℝ⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
-  is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) q x<q =
+    {l : Level} (x : ℝ⁺ l) {q : ℚ} → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
+  is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) x<q =
     is-positive-le-zero-ℚ
-      ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
+      ( le-lower-upper-cut-ℝ x (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
 ```

@@ -18,6 +18,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -25,6 +26,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -93,7 +95,7 @@ module _
             intro-exists
               ( q , (p -ℚ q) +ℚ s)
               ( q<y ,
-                le-lower-cut-ℝ z ((p -ℚ q) +ℚ s) r p-q+s<r r<z ,
+                le-lower-cut-ℝ z p-q+s<r r<z ,
                 ( equational-reasoning
                     p +ℚ s
                     ＝ (q +ℚ (p -ℚ q)) +ℚ s
@@ -282,4 +284,33 @@ module _
         intro-exists
           ( q , is-positive-le-zero-ℚ (reflects-le-real-ℚ 0<q))
           ( le-transpose-right-diff-ℝ' _ _ _ q<y-x)
+```
+
+### If `x + y < p` for some rational `p`, then there exist `q r : ℚ` such that `p = q + r`, `x < q`, `y < r`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (p : ℚ)
+  where
+
+  opaque
+    unfolding add-ℝ
+
+    le-split-add-rational-ℝ :
+      le-ℝ (x +ℝ y) (real-ℚ p) →
+      exists
+        ( ℚ × ℚ)
+        ( λ (q , r) →
+          Id-Prop ℚ-Set p (q +ℚ r) ∧
+          le-prop-ℝ x (real-ℚ q) ∧
+          le-prop-ℝ y (real-ℚ r))
+    le-split-add-rational-ℝ x+y<p =
+      let open do-syntax-trunc-Prop (∃ _ _)
+      in do
+        ((q , r) , x<q , y<r , p=q+r) ← is-in-upper-cut-le-real-ℚ (x +ℝ y) x+y<p
+        intro-exists
+          ( q , r)
+          ( p=q+r ,
+            le-real-is-in-upper-cut-ℚ x x<q ,
+            le-real-is-in-upper-cut-ℚ y y<r)
 ```

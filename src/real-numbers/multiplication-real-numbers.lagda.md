@@ -160,8 +160,8 @@ module _
               ( [c',d'])
               ( a<a' , b'<b)
               ( c<c' , d'<d)
-              ( le-lower-upper-cut-ℝ x a' b' a'<x x<b')
-              ( le-lower-upper-cut-ℝ y c' d' c'<y y<d')))
+              ( le-lower-upper-cut-ℝ x a'<x x<b')
+              ( le-lower-upper-cut-ℝ y c'<y y<d')))
 
     leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ : upper-cut-mul-ℝ' ⊆ upper-cut-mul-ℝ
     leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ q q∈U' =
@@ -190,8 +190,8 @@ module _
               ( [c',d'])
               ( a<a' , b'<b)
               ( c<c' , d'<d)
-              ( le-lower-upper-cut-ℝ x a' b' a'<x x<b')
-              ( le-lower-upper-cut-ℝ y c' d' c'<y y<d'))
+              ( le-lower-upper-cut-ℝ x a'<x x<b')
+              ( le-lower-upper-cut-ℝ y c'<y y<d'))
             ( [a,b][c,d]≤q))
 
     eq-lower-cut-mul-ℝ' : lower-cut-mul-ℝ ＝ lower-cut-mul-ℝ'
@@ -336,11 +336,11 @@ module _
                     ( c'')
                     ( leq-right-max-ℚ a a' ,
                       leq-max-leq-both-ℚ b' a a'
-                        ( leq-lower-upper-cut-ℝ x a b' a<x x<b')
+                        ( leq-lower-upper-cut-ℝ x a<x x<b')
                         ( a'≤b'))
                     ( leq-right-max-ℚ c c' ,
                       leq-max-leq-both-ℚ d' c c'
-                        ( leq-lower-upper-cut-ℝ y c d' c<y y<d')
+                        ( leq-lower-upper-cut-ℝ y c<y y<d')
                         ( c'≤d'))))
                 ( pr1
                   ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
@@ -351,11 +351,11 @@ module _
                     ( leq-left-max-ℚ a a' ,
                       leq-max-leq-both-ℚ b a a'
                         ( a≤b)
-                        ( leq-lower-upper-cut-ℝ x a' b a'<x x<b))
+                        ( leq-lower-upper-cut-ℝ x a'<x x<b))
                     ( leq-left-max-ℚ c c' ,
                       leq-max-leq-both-ℚ d c c'
                         ( c≤d)
-                        ( leq-lower-upper-cut-ℝ y c' d c'<y y<d)))))
+                        ( leq-lower-upper-cut-ℝ y c'<y y<d)))))
               ( [a',b'][c',d']<q))
             ( q<[a,b][c,d]))
 
@@ -427,8 +427,8 @@ module _
         ((p , q) , q<p+εx , p<x , x<q) ← is-arithmetically-located-ℝ x εx
         ((r , s) , s<r+εy , r<y , y<s) ← is-arithmetically-located-ℝ y εy
         let
-          p≤q = leq-lower-upper-cut-ℝ x p q p<x x<q
-          r≤s = leq-lower-upper-cut-ℝ y r s r<y y<s
+          p≤q = leq-lower-upper-cut-ℝ x p<x x<q
+          r≤s = leq-lower-upper-cut-ℝ y r<y y<s
           q-p<εx : le-ℚ (q -ℚ p) (rational-ℚ⁺ εx)
           q-p<εx =
             le-transpose-right-add-ℚ _ _ _
@@ -815,7 +815,7 @@ module _
         ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
             a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
           q<[ax,bx][a₁,b₁]) ← q<x1
-        le-lower-cut-ℝ x q ax
+        le-lower-cut-ℝ x
           ( concatenate-le-leq-ℚ _ _ _
             ( q<[ax,bx][a₁,b₁])
             ( tr
@@ -840,7 +840,7 @@ module _
             ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
                 a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
               [ax,bx][a₁,b₁]<q) ← x1<q
-            le-upper-cut-ℝ x bx q
+            le-upper-cut-ℝ x
               ( concatenate-leq-le-ℚ _ _ _
                 ( tr
                   ( λ p →

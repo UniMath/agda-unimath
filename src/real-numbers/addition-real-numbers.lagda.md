@@ -88,8 +88,8 @@ module _
               { qx}
               { py}
               { qy}
-              ( le-lower-upper-cut-ℝ x px qx px<x x<qx)
-              ( le-lower-upper-cut-ℝ y py qy py<y y<qy)))
+              ( le-lower-upper-cut-ℝ x px<x x<qx)
+              ( le-lower-upper-cut-ℝ y py<y y<qy)))
 
     is-arithmetically-located-lower-upper-add-ℝ :
       is-arithmetically-located-lower-upper-ℝ lower-real-add-ℝ upper-real-add-ℝ

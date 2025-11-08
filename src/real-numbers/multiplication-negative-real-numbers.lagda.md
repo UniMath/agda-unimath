@@ -69,14 +69,14 @@ _*ℝ⁻_ = mul-ℝ⁻
 ```agda
 abstract
   reverses-le-left-mul-ℝ⁻ :
-    {l1 l2 l3 : Level} (x : ℝ⁻ l1) (y : ℝ l2) (z : ℝ l3) → le-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁻ l1) {y : ℝ l2} {z : ℝ l3} → le-ℝ y z →
     le-ℝ (real-ℝ⁻ x *ℝ z) (real-ℝ⁻ x *ℝ y)
-  reverses-le-left-mul-ℝ⁻ x y z y<z =
+  reverses-le-left-mul-ℝ⁻ x y<z =
     binary-tr
       ( le-ℝ)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
-      ( neg-le-ℝ (preserves-le-left-mul-ℝ⁺ (neg-ℝ⁻ x) y z y<z))
+      ( neg-le-ℝ (preserves-le-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
 ```
 
 ### Multiplication by a negative real number reverses inequality
@@ -84,12 +84,12 @@ abstract
 ```agda
 abstract
   reverses-leq-left-mul-ℝ⁻ :
-    {l1 l2 l3 : Level} (x : ℝ⁻ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁻ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (real-ℝ⁻ x *ℝ z) (real-ℝ⁻ x *ℝ y)
-  reverses-leq-left-mul-ℝ⁻ x y z y<z =
+  reverses-leq-left-mul-ℝ⁻ x y<z =
     binary-tr
       ( leq-ℝ)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
-      ( neg-leq-ℝ (preserves-leq-left-mul-ℝ⁺ (neg-ℝ⁻ x) y z y<z))
+      ( neg-leq-ℝ (preserves-leq-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
 ```

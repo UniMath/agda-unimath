@@ -28,6 +28,7 @@ open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```

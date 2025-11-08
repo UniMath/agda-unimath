@@ -87,7 +87,7 @@ module _
 ### The negation function on real numbers is an involution
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℝ
 
   neg-neg-ℝ : {l : Level} → (x : ℝ l) → neg-ℝ (neg-ℝ x) ＝ x
@@ -130,7 +130,7 @@ abstract
 ### Negation preserves similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℝ
 
   preserves-sim-neg-ℝ :

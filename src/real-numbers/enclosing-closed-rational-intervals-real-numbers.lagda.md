@@ -8,15 +8,11 @@ module real-numbers.enclosing-closed-rational-intervals-real-numbers where
 
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
-open import elementary-number-theory.maximum-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.conjunction
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types
@@ -24,7 +20,6 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -81,7 +76,7 @@ module _
         (p , p<x) ← is-inhabited-lower-cut-ℝ x
         (q , x<q) ← is-inhabited-upper-cut-ℝ x
         intro-exists
-          ( (p , q) , leq-lower-upper-cut-ℝ x p q p<x x<q)
+          ( (p , q) , leq-lower-upper-cut-ℝ x p<x x<q)
           ( p<x , x<q)
 ```
 
@@ -117,7 +112,7 @@ module _
         (b' , b'<b , x<b') ←
           forward-implication (is-rounded-upper-cut-ℝ x b) x<b
         intro-exists
-          ( (a' , b') , leq-lower-upper-cut-ℝ x a' b' a'<x x<b')
+          ( (a' , b') , leq-lower-upper-cut-ℝ x a'<x x<b')
           ( ( a'<x , x<b') , (a<a' , b'<b))
 ```
 
@@ -136,8 +131,8 @@ module _
       intersect-closed-interval-ℚ [a,b] [c,d]
     intersect-enclosing-closed-rational-interval-ℝ
       [a,b]@((a , b) , _) [c,d]@((c , d) , _) (a<x , x<b) (c<x , x<d) =
-      ( leq-lower-upper-cut-ℝ x a d a<x x<d ,
-        leq-lower-upper-cut-ℝ x c b c<x x<b)
+      ( leq-lower-upper-cut-ℝ x a<x x<d ,
+        leq-lower-upper-cut-ℝ x c<x x<b)
 
     is-enclosing-intersection-enclosing-closed-rational-interval-ℝ :
       ([a,b] [c,d] : closed-interval-ℚ) →

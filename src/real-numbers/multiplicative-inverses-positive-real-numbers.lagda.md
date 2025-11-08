@@ -117,8 +117,6 @@ module _
         (r⁺@(r , _) , x<r , qr<1) ← q∈L is-pos-q
         le-upper-cut-ℝ
           ( real-ℝ⁺ x)
-          ( r)
-          ( rational-inv-ℚ⁺ q⁺)
           ( reflects-le-left-mul-ℚ⁺
             ( q⁺)
             ( r)
@@ -140,8 +138,6 @@ module _
           (r⁺@(r , _) , r<x , 1<qr) ← ∃r
           le-lower-cut-ℝ
             ( real-ℝ⁺ x)
-            ( rational-inv-ℚ⁺ q⁺)
-            ( r)
             ( reflects-le-left-mul-ℚ⁺
               ( q⁺)
               ( rational-inv-ℚ⁺ q⁺)
@@ -166,7 +162,7 @@ module _
             ( is-rounded-upper-cut-ℝ⁺ x (rational-inv-ℚ⁺ q⁺))
             ( q∈L' is-pos-q)
         intro-exists
-          ( r , is-positive-is-in-upper-cut-ℝ⁺ x r x<r)
+          ( r , is-positive-is-in-upper-cut-ℝ⁺ x x<r)
           ( x<r ,
             tr
               ( le-ℚ (q *ℚ r))
@@ -216,7 +212,7 @@ module _
       let open do-syntax-trunc-Prop (∃ ℚ⁺ (lower-cut-inv-ℝ⁺ ∘ rational-ℚ⁺))
       in do
         (q , x<q) ← is-inhabited-upper-cut-ℝ⁺ x
-        let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x q x<q)
+        let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x x<q)
         intro-exists
           ( inv-ℚ⁺ q⁺)
           ( leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
@@ -274,7 +270,7 @@ module _
                 forward-implication (is-rounded-upper-cut-ℝ⁺ x r) x<r
               let
                 r⁻¹ = inv-ℚ⁺ r⁺
-                r'⁺ = (r' , is-positive-is-in-upper-cut-ℝ⁺ x r' x<r')
+                r'⁺ = (r' , is-positive-is-in-upper-cut-ℝ⁺ x x<r')
                 r'⁻¹ = inv-ℚ⁺ r'⁺
               intro-exists
                 ( rational-ℚ⁺ r'⁻¹)
@@ -411,7 +407,7 @@ module _
             ( _)
             ( _)
             ( transitive-le-ℚ (q *ℚ rₗ) one-ℚ (q *ℚ rᵤ) 1<qrᵤ qrₗ<1))
-          ( le-lower-upper-cut-ℝ⁺ x rᵤ rₗ rᵤ<x x<rₗ)
+          ( le-lower-upper-cut-ℝ⁺ x rᵤ<x x<rₗ)
 
     is-located-lower-upper-cut-inv-ℝ⁺ :
       (p q : ℚ) → le-ℚ p q →
@@ -506,7 +502,7 @@ module _
       [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) (a<x , x<b) (c<x⁻¹ , x⁻¹<d)
       is-pos-a is-pos-c =
       let
-        is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+        is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x x<b
         (is-pos-d , d⁻¹<x) =
           leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
         d⁺ = (d , is-pos-d)
@@ -531,12 +527,7 @@ module _
             ( inv-leq-ℚ⁺
               ( a'⁺)
               ( inv-ℚ⁺ c⁺)
-              ( leq-lower-upper-cut-ℝ
-                ( real-ℝ⁺ x)
-                ( a')
-                ( rational-inv-ℚ⁺ c⁺)
-                ( a'<x)
-                ( x<c⁻¹)))
+              ( leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'<x x<c⁻¹))
       in
         tr
           ( is-in-closed-interval-ℚ
@@ -548,7 +539,7 @@ module _
             ( a')
             ( rational-inv-ℚ⁺ a'⁺)
             ( leq-left-max-ℚ _ _ ,
-              leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a' b a'<x x<b)
+              leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'<x x<b)
             ( c≤a'⁻¹ , a'⁻¹≤d))
 
     leq-real-right-inverse-law-mul-ℝ⁺ :
@@ -560,7 +551,7 @@ module _
             ([c,d]@((c , d) , c≤d) , c<x⁻¹ , x⁻¹<d)) ,
           q<[a,b][c,d]) ← q<xx⁻¹
         let
-          is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+          is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x x<b
           (is-pos-d , d⁻¹<x) =
             leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
           case-is-nonpos-a is-nonpos-a =
@@ -640,10 +631,10 @@ module _
               is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ (leq-right-max-ℚ _ _)
               c''<x⁻¹ = is-in-lower-cut-max-ℚ (real-inv-ℝ⁺ x) c c' c<x⁻¹ c'<x⁻¹
               [a'',b] =
-                ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'' b a''<x x<b)
+                ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a''<x x<b)
               [c'',d] =
                 ( (c'' , d) ,
-                  leq-lower-upper-cut-ℝ (real-inv-ℝ⁺ x) c'' d c''<x⁻¹ x⁻¹<d)
+                leq-lower-upper-cut-ℝ (real-inv-ℝ⁺ x) c''<x⁻¹ x⁻¹<d)
             concatenate-leq-le-ℚ
               ( one-ℚ)
               ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -718,7 +709,7 @@ opaque
     let open do-syntax-trunc-Prop (le-prop-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x))
     in do
       (q , x<q , q<y) ← x<y
-      let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x q x<q)
+      let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x x<q)
       intro-exists
         ( rational-inv-ℚ⁺ q⁺)
         ( leq-upper-cut-inv-ℝ⁺'-upper-cut-inv-ℝ⁺

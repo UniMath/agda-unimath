@@ -149,7 +149,7 @@ abstract
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
-opaque
+abstract opaque
   unfolding neighborhood-ℝ
 
   neighborhood-dist-ℝ :

@@ -132,10 +132,7 @@ module _
       diagonal-product
         ( (r : ℚ) →
           is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
-        ( λ r →
-          le-lower-cut-ℝ x r
-            ( r +ℚ rational-ℚ⁺ d)
-            ( le-right-add-rational-ℚ⁺ r d))
+        ( λ r → le-lower-cut-ℝ x (le-right-add-rational-ℚ⁺ r d))
 
     is-symmetric-neighborhood-ℝ :
       is-symmetric-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)

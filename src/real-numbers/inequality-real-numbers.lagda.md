@@ -10,20 +10,15 @@ module real-numbers.inequality-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -33,25 +28,18 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.similarity-of-elements-large-posets
 
-open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
-open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.negation-lower-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -62,7 +50,7 @@ The {{#concept "standard ordering" Disambiguation="real numbers" Agda=leq-ℝ}} 
 the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
 [lower cut](real-numbers.lower-dedekind-real-numbers.md) of one being a
 [subset](foundation-core.subtypes.md) of the lower cut of the other. I.e.,
-`x ≤ y` if `lower-cut x ⊆ lower-cut y `. This is the definition used in
+`x ≤ y` if `lower-cut-ℝ x ⊆ lower-cut-ℝ y `. This is the definition used in
 {{#cite UF13}}, section 11.2.1.
 
 Inequality of the real numbers is equivalently described by the _upper_ cut of

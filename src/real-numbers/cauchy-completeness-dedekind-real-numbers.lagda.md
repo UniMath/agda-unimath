@@ -207,8 +207,6 @@ module _
             ( ε⁺ , θ⁺)
             ( le-lower-cut-ℝ
               ( xε)
-              ( q +ℚ (ε +ℚ θ))
-              ( r +ℚ (ε +ℚ θ))
               ( preserves-le-left-add-ℚ (ε +ℚ θ) q r q<r)
               ( r+ε+θ<xε))
 
@@ -274,8 +272,6 @@ module _
             ( ε⁺ , θ⁺)
             ( le-upper-cut-ℝ
               ( xε)
-              ( p -ℚ (ε +ℚ θ))
-              ( q -ℚ (ε +ℚ θ))
               ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
               ( xε<p-ε-θ))
 
@@ -344,8 +340,6 @@ module _
           ( q -ℚ εu)
           ( le-lower-cut-ℝ
               ( xεu)
-              ( q -ℚ εu)
-              ( (q -ℚ εu) +ℚ θl)
               ( le-right-add-rational-ℚ⁺ (q -ℚ εu) θl⁺)
               ( q-εu+θl<xεu) ,
             tr
@@ -359,8 +353,6 @@ module _
                 ＝ q -ℚ εu by is-section-diff-ℚ θu _)
               ( le-upper-cut-ℝ
                 ( xεu)
-                ( q -ℚ (εu +ℚ θu))
-                ( (q -ℚ (εu +ℚ θu)) +ℚ θu)
                 ( le-right-add-rational-ℚ⁺ (q -ℚ (εu +ℚ θu)) θu⁺)
                 ( xεu<q-εu-θu)))
 
