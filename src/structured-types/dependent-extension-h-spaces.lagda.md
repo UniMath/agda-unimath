@@ -61,7 +61,9 @@ module _
     ( type-extension-Π-H-Space , unit-extension-Π-H-Space)
 
   mul-extension-Π-H-Space :
-    type-extension-Π-H-Space → type-extension-Π-H-Space → type-extension-Π-H-Space
+    type-extension-Π-H-Space →
+    type-extension-Π-H-Space →
+    type-extension-Π-H-Space
   pr1 (mul-extension-Π-H-Space (f , f∗) (g , g∗)) i =
     mul-H-Space (M i) (f i) (g i)
   pr2 (mul-extension-Π-H-Space (f , f∗) (g , g∗)) i =
