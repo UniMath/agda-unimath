@@ -14,15 +14,19 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -36,6 +40,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -133,6 +138,16 @@ le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ```agda
 eq-ℝ⁺ : {l : Level} (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) → x ＝ y
 eq-ℝ⁺ _ _ = eq-type-subtype is-positive-prop-ℝ
+```
+
+### A real number is positive if it is greater than a positive real number
+
+```agda
+abstract
+  is-positive-le-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁺ x) y →
+    is-positive-ℝ y
+  is-positive-le-ℝ⁺ (x , 0<x) y x<y = transitive-le-ℝ zero-ℝ x y x<y 0<x
 ```
 
 ### A real number is positive if and only if zero is in its lower cut
@@ -282,6 +297,40 @@ positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ 
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+```
+
+### `x` is positive if and only if there exists a positive rational number it is not less than or equal to
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-positive-exists-not-le-positive-rational-ℝ :
+      exists ℚ⁺ (λ q → ¬' (leq-prop-ℝ x (real-ℚ⁺ q))) →
+      is-positive-ℝ x
+    is-positive-exists-not-le-positive-rational-ℝ ∃q =
+      let open do-syntax-trunc-Prop (is-positive-prop-ℝ x)
+      in do
+        (q⁺@(q , _) , x≰q) ← ∃q
+        let p⁺@(p , _) = mediant-zero-ℚ⁺ q⁺
+        elim-disjunction
+          ( is-positive-prop-ℝ x)
+          ( is-positive-le-ℝ⁺ (positive-real-ℚ⁺ p⁺) x)
+          ( λ x<q → ex-falso (x≰q (leq-le-ℝ x<q)))
+          ( is-located-le-ℝ x p q (le-mediant-zero-ℚ⁺ q⁺))
+
+    exists-not-le-positive-rational-is-positive-ℝ :
+      is-positive-ℝ x →
+      exists ℚ⁺ (λ q → ¬' (leq-prop-ℝ x (real-ℚ⁺ q)))
+    exists-not-le-positive-rational-is-positive-ℝ 0<x =
+      let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → ¬' (leq-prop-ℝ x (real-ℚ⁺ q))))
+      in do
+        (q , 0<q , q<x) ← dense-rational-le-ℝ _ _ 0<x
+        intro-exists
+          ( q , is-positive-le-zero-ℚ (reflects-le-real-ℚ 0<q))
+          ( not-leq-le-ℝ _ _ q<x)
 ```
 
 ### Any rational number in the upper cut of a positive real number is positive

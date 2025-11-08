@@ -7,40 +7,39 @@ module real-numbers.apartness-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.apartness-relations
+open import foundation.binary-relations
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
-open import foundation.dependent-pair-types
-open import foundation.binary-relations
-open import foundation.identity-types
-open import foundation.existential-quantification
 open import foundation.large-apartness-relations
-open import foundation.propositional-truncations
 open import foundation.large-binary-relations
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.apartness-located-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.negation-real-numbers
-open import real-numbers.similarity-real-numbers
-open import logic.functoriality-existential-quantification
-open import metric-spaces.apartness-located-metric-spaces
-
-open import real-numbers.addition-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.nonzero-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 ```
 
 </details>
@@ -204,6 +203,63 @@ abstract
         ( x#y))
 ```
 
+### Two real numbers are apart if and only if their difference is nonzero
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    is-nonzero-diff-is-apart-ℝ : apart-ℝ x y → is-nonzero-ℝ (x -ℝ y)
+    is-nonzero-diff-is-apart-ℝ x#y =
+      apart-right-sim-ℝ
+        ( x -ℝ y)
+        ( y -ℝ y)
+        ( zero-ℝ)
+        ( right-inverse-law-add-ℝ y)
+        ( preserves-apart-right-add-ℝ (neg-ℝ y) x y x#y)
+
+    apart-is-nonzero-diff-ℝ : is-nonzero-ℝ (x -ℝ y) → apart-ℝ x y
+    apart-is-nonzero-diff-ℝ x-y#0 =
+      apart-sim-ℝ
+        ( cancel-right-diff-add-ℝ x y)
+        ( sim-eq-ℝ (left-unit-law-add-ℝ y))
+        ( preserves-apart-right-add-ℝ y _ _ x-y#0)
+
+  nonzero-diff-apart-ℝ : apart-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
+  nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
+```
+
+### Apartness on the real numbers is equivalent to having a positive distance
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    apart-is-positive-dist-ℝ : is-positive-ℝ (dist-ℝ x y) → apart-ℝ x y
+    apart-is-positive-dist-ℝ 0<|x-y| =
+      apart-is-nonzero-diff-ℝ
+        ( x)
+        ( y)
+        ( is-nonzero-is-positive-abs-ℝ (x -ℝ y) 0<|x-y|)
+
+    is-positive-dist-apart-ℝ : apart-ℝ x y → is-positive-ℝ (dist-ℝ x y)
+    is-positive-dist-apart-ℝ x#y =
+      is-positive-abs-is-nonzero-ℝ
+        ( x -ℝ y)
+        ( is-nonzero-diff-is-apart-ℝ x y x#y)
+
+  apart-iff-is-positive-dist-ℝ :
+    apart-ℝ x y ↔ is-positive-ℝ (dist-ℝ x y)
+  apart-iff-is-positive-dist-ℝ =
+    ( is-positive-dist-apart-ℝ , apart-is-positive-dist-ℝ)
+```
+
 ### Apartness on the real numbers is equivalent to apartness in the located metric space of real numbers
 
 ```agda
@@ -216,10 +272,11 @@ apart-located-metric-space-ℝ {l} =
   apart-Located-Metric-Space (located-metric-space-ℝ l)
 
 module _
-  {l : Level} (x y : ℝ l)
+  {l : Level}
+  (x y : ℝ l)
   where
 
-  abstract opaque
+  abstract
     apart-located-metric-space-apart-ℝ :
       apart-ℝ x y → apart-located-metric-space-ℝ x y
     apart-located-metric-space-apart-ℝ =
@@ -247,11 +304,17 @@ module _
     apart-apart-located-metric-space-ℝ :
       apart-located-metric-space-ℝ x y → apart-ℝ x y
     apart-apart-located-metric-space-ℝ x#y =
-      let
-        motive = apart-prop-ℝ x y
-        open do-syntax-trunc-Prop motive
-      in do
-        ( ε , ¬Nεxy) ← x#y
-        {!   !}
+      apart-is-positive-dist-ℝ
+        ( x)
+        ( y)
+        ( is-positive-exists-not-le-positive-rational-ℝ
+          ( dist-ℝ x y)
+          ( map-tot-exists
+            ( λ ε ¬Nεxy |x-y|≤ε → ¬Nεxy (neighborhood-dist-ℝ ε x y |x-y|≤ε))
+            ( x#y)))
 
+  apart-iff-apart-located-metric-space-ℝ :
+    apart-ℝ x y ↔ apart-located-metric-space-ℝ x y
+  apart-iff-apart-located-metric-space-ℝ =
+    ( apart-located-metric-space-apart-ℝ , apart-apart-located-metric-space-ℝ)
 ```

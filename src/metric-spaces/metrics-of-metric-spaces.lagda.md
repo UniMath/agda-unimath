@@ -25,12 +25,11 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.nonnegative-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.strict-inequalities-addition-real-numbers
@@ -235,22 +234,16 @@ module _
             ( real-ℚ⁺ δ)
             ( forward-implication (is-metric-M-ρ δ x y) Nδxy)
             ( le-real-is-in-lower-cut-ℚ
-              ( rational-ℚ⁺ δ)
               ( real-ℝ⁰⁺ (ρ x y))
               ( δ<ρxy)))
         ( λ ρxy<ε →
           backward-implication
             ( is-metric-M-ρ ε x y)
-            ( leq-le-ℝ _ _
+            ( leq-le-ℝ
               ( le-real-is-in-upper-cut-ℚ
-                ( rational-ℚ⁺ ε)
                 ( real-ℝ⁰⁺ (ρ x y))
                 ( ρxy<ε))))
-        ( is-located-lower-upper-cut-ℝ
-          ( real-ℝ⁰⁺ (ρ x y))
-          ( rational-ℚ⁺ δ)
-          ( rational-ℚ⁺ ε)
-          ( δ<ε))
+        ( is-located-lower-upper-cut-ℝ (real-ℝ⁰⁺ (ρ x y)) δ<ε)
 ```
 
 ### If `ρ` is a metric for a metric space `M` at the appropriate universe level, then `M` is equal to the metric space induced by `ρ`

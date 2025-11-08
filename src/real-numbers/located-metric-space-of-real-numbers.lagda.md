@@ -9,13 +9,17 @@ module real-numbers.located-metric-space-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metrics-of-metric-spaces
+
 open import real-numbers.distance-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
 ```
+
+</details>
 
 ## Idea
 
