@@ -31,7 +31,6 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequalities-addition-real-numbers
 open import logic.functoriality-existential-quantification
 open import metric-spaces.apartness-located-metric-spaces
 
@@ -163,8 +162,8 @@ abstract
   preserves-apart-neg-ℝ x y =
     elim-disjunction
       ( apart-prop-ℝ _ _)
-      ( inr-disjunction ∘ neg-le-ℝ)
-      ( inl-disjunction ∘ neg-le-ℝ)
+      ( inr-disjunction ∘ neg-le-ℝ _ _)
+      ( inl-disjunction ∘ neg-le-ℝ _ _)
 ```
 
 ### Apartness is preserved by similarity
@@ -246,12 +245,12 @@ module _
 
     apart-apart-located-metric-space-ℝ :
       apart-located-metric-space-ℝ x y → apart-ℝ x y
-    apart-apart-located-metric-space-ℝ =
+    apart-apart-located-metric-space-ℝ x#y =
       let
         motive = apart-prop-ℝ x y
         open do-syntax-trunc-Prop motive
       in do
-        ( ε , ¬Nεxy) ← ?
+        ( ε , ¬Nεxy) ← x#y
         {!   !}
 
 ```
