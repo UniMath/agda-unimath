@@ -35,7 +35,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
-
 ```
 
 </details>

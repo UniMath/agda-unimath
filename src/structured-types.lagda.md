@@ -18,6 +18,7 @@ open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
+open import structured-types.dependent-extension-h-spaces public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public

@@ -151,3 +151,8 @@ module _
   coherent-unital-mul-pointed-Π-H-Space =
     coherent-unital-mul-H-Space pointed-Π-H-Space
 ```
+
+## See also
+
+- Pointed dependent function H-spaces are a special case of
+  [dependent extension H-spaces](structured-types.dependent-extension-h-spaces.md)
