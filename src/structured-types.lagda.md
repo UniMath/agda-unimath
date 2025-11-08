@@ -54,10 +54,12 @@ open import structured-types.noncoherent-h-spaces public
 open import structured-types.opposite-pointed-spans public
 open import structured-types.pointed-2-homotopies public
 open import structured-types.pointed-cartesian-product-types public
+open import structured-types.pointed-dependent-function-h-spaces public
 open import structured-types.pointed-dependent-functions public
 open import structured-types.pointed-dependent-pair-types public
 open import structured-types.pointed-equivalences public
 open import structured-types.pointed-families-of-types public
+open import structured-types.pointed-function-h-spaces public
 open import structured-types.pointed-homotopies public
 open import structured-types.pointed-isomorphisms public
 open import structured-types.pointed-maps public
