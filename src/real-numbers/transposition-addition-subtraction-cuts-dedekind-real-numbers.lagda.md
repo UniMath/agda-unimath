@@ -24,6 +24,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -56,7 +57,6 @@ module _
       is-in-lower-cut-ℝ (x -ℝ real-ℚ q) p
     transpose-add-is-in-lower-cut-ℝ p+q<x =
       is-in-lower-cut-le-real-ℚ
-        ( p)
         ( x -ℝ real-ℚ q)
         ( le-transpose-left-add-ℝ
           ( real-ℚ p)
@@ -65,13 +65,12 @@ module _
           ( inv-tr
             ( λ y → le-ℝ y x)
             ( add-real-ℚ p q)
-            ( le-real-is-in-lower-cut-ℚ (p +ℚ q) x p+q<x)))
+            ( le-real-is-in-lower-cut-ℚ x p+q<x)))
 
     transpose-is-in-lower-cut-diff-ℝ :
       is-in-lower-cut-ℝ (x -ℝ real-ℚ p) q → is-in-lower-cut-ℝ x (q +ℚ p)
     transpose-is-in-lower-cut-diff-ℝ x-p<q =
       is-in-lower-cut-le-real-ℚ
-        ( q +ℚ p)
         ( x)
         ( tr
           ( λ y → le-ℝ y x)
@@ -80,7 +79,7 @@ module _
             ( real-ℚ q)
             ( x)
             ( real-ℚ p)
-            ( le-real-is-in-lower-cut-ℚ q (x -ℝ real-ℚ p) x-p<q)))
+            ( le-real-is-in-lower-cut-ℚ (x -ℝ real-ℚ p) x-p<q)))
 
 module _
   {l : Level} (x : ℝ l) (p q : ℚ)
@@ -127,7 +126,6 @@ module _
       is-in-upper-cut-ℝ (x -ℝ real-ℚ q) p
     transpose-add-is-in-upper-cut-ℝ x<p+q =
       is-in-upper-cut-le-real-ℚ
-        ( p)
         ( x -ℝ real-ℚ q)
         ( le-transpose-right-add-ℝ
           ( x)
@@ -136,13 +134,12 @@ module _
           ( inv-tr
             ( le-ℝ x)
             ( add-real-ℚ p q)
-            ( le-real-is-in-upper-cut-ℚ (p +ℚ q) x x<p+q)))
+            ( le-real-is-in-upper-cut-ℚ x x<p+q)))
 
     transpose-is-in-upper-cut-diff-ℝ :
       is-in-upper-cut-ℝ (x -ℝ real-ℚ p) q → is-in-upper-cut-ℝ x (q +ℚ p)
     transpose-is-in-upper-cut-diff-ℝ x-p<q =
       is-in-upper-cut-le-real-ℚ
-        ( q +ℚ p)
         ( x)
         ( tr
           ( le-ℝ x)
@@ -151,7 +148,7 @@ module _
             ( x)
             ( real-ℚ p)
             ( real-ℚ q)
-            ( le-real-is-in-upper-cut-ℚ q (x -ℝ real-ℚ p) x-p<q)))
+            ( le-real-is-in-upper-cut-ℚ (x -ℝ real-ℚ p) x-p<q)))
 
 module _
   {l : Level} (x : ℝ l) (p q : ℚ)

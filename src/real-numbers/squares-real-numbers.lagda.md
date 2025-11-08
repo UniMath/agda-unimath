@@ -74,7 +74,7 @@ square-ℝ x = x *ℝ x
 ### The square of a real number is nonnegative
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ
 
   is-nonnegative-square-ℝ :
@@ -123,7 +123,6 @@ opaque
               in
                 is-positive-le-ℚ⁺
                   ( a'⁻ *ℚ⁻ a'⁻)
-                  ( q)
                   ( concatenate-leq-le-ℚ
                     ( a' *ℚ a')
                     ( upper-bound-mul-closed-interval-ℚ [a',b'] [a',b'])
@@ -138,7 +137,6 @@ opaque
               in
                 is-positive-le-ℚ⁺
                   ( b'⁺ *ℚ⁺ b'⁺)
-                  ( q)
                   ( concatenate-leq-le-ℚ
                     ( b' *ℚ b')
                     ( upper-bound-mul-closed-interval-ℚ [a',b'] [a',b'])
@@ -148,7 +146,7 @@ opaque
                       ( leq-right-max-ℚ _ _))
                     ( [a',b'][a',b']<q)))
             ( located-le-ℚ zero-ℚ a' b'
-              ( le-lower-upper-cut-ℝ x a' b' a'<x x<b')))
+              ( le-lower-upper-cut-ℝ x a'<x x<b')))
 
 nonnegative-square-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
 nonnegative-square-ℝ x = (square-ℝ x , is-nonnegative-square-ℝ x)
@@ -223,8 +221,8 @@ abstract
       ( square-ℝ x)
       ( x *ℝ y)
       ( square-ℝ y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x y (leq-le-ℝ x y x<y))
-      ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x y x<y)
+      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ (leq-le-ℝ x<y))
+      ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x<y)
 ```
 
 ### If a nonnegative rational `q` is in the lower cut of `x`, `q²` is in the lower cut of `x²`
@@ -237,10 +235,9 @@ abstract
   is-in-lower-cut-square-ℝ x q⁰⁺@(q , _) q∈Lx =
     let
       qℝ = nonnegative-real-ℚ⁰⁺ q⁰⁺
-      q<x = le-real-is-in-lower-cut-ℚ q x q∈Lx
+      q<x = le-real-is-in-lower-cut-ℚ x q∈Lx
     in
       is-in-lower-cut-le-real-ℚ
-        ( square-ℚ q)
         ( square-ℝ x)
         ( tr
           ( λ y → le-ℝ y (square-ℝ x))
@@ -260,7 +257,6 @@ abstract
     is-in-upper-cut-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℚ q)
   is-in-upper-cut-square-ℝ x⁰⁺@(x , _) q q∈Ux =
     is-in-upper-cut-le-real-ℚ
-      ( square-ℚ q)
       ( square-ℝ x)
       ( tr
         ( le-ℝ (square-ℝ x))
@@ -268,8 +264,8 @@ abstract
         ( preserves-le-square-ℝ⁰⁺
           ( x⁰⁺)
           ( nonnegative-real-ℚ⁺
-            ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q q∈Ux))
-          ( le-real-is-in-upper-cut-ℚ q x q∈Ux)))
+            ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))
+          ( le-real-is-in-upper-cut-ℚ x q∈Ux)))
 ```
 
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`
@@ -284,7 +280,7 @@ abstract opaque
     is-in-upper-cut-ℝ (square-ℝ x) (square-ℚ q)
   is-in-upper-cut-square-pos-neg-ℝ x q x<q -q<x =
     let
-      [-q,q] = ((neg-ℚ q , q) , leq-lower-upper-cut-ℝ x (neg-ℚ q) q -q<x x<q)
+      [-q,q] = ((neg-ℚ q , q) , leq-lower-upper-cut-ℝ x -q<x x<q)
     in
       leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ x x (square-ℚ q)
         ( intro-exists

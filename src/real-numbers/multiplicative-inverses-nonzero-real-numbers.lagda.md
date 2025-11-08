@@ -9,6 +9,8 @@ module real-numbers.multiplicative-inverses-nonzero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.invertible-elements-commutative-rings
+
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
@@ -36,12 +38,14 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-negative-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -124,13 +128,27 @@ module _
   right-inverse-law-mul-nonzero-ℝ = pr2 has-nonzero-inv-nonzero-ℝ
 
   abstract
-    left-inverse-law-nonzero-ℝ :
+    left-inverse-law-mul-nonzero-ℝ :
       sim-ℝ (real-inv-nonzero-ℝ *ℝ real-nonzero-ℝ x) one-ℝ
-    left-inverse-law-nonzero-ℝ =
+    left-inverse-law-mul-nonzero-ℝ =
       tr
         ( λ y → sim-ℝ y one-ℝ)
         ( commutative-mul-ℝ _ _)
         ( right-inverse-law-mul-nonzero-ℝ)
+
+is-invertible-is-nonzero-ℝ :
+  {l : Level} (x : ℝ l) → is-nonzero-ℝ x →
+  is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x
+is-invertible-is-nonzero-ℝ x x≠0 =
+  ( real-inv-nonzero-ℝ (x , x≠0) ,
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ _ _)
+        ( right-inverse-law-mul-nonzero-ℝ (x , x≠0))) ,
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ _ _)
+        ( left-inverse-law-mul-nonzero-ℝ (x , x≠0))))
 ```
 
 ### If a real number has a multiplicative inverse, it is nonzero
@@ -228,4 +246,25 @@ abstract
   unique-left-inv-nonzero-ℝ x y xy=1 =
     unique-right-inv-nonzero-ℝ y x
       ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy=1)
+```
+
+### If two nonzero real numbers are similar, so are their inverses
+
+```agda
+abstract
+  preserves-sim-inv-nonzero-ℝ :
+    {l1 l2 : Level} (x : nonzero-ℝ l1) (y : nonzero-ℝ l2) →
+    sim-ℝ (real-nonzero-ℝ x) (real-nonzero-ℝ y) →
+    sim-ℝ (real-inv-nonzero-ℝ x) (real-inv-nonzero-ℝ y)
+  preserves-sim-inv-nonzero-ℝ (x , x≠0) (y , y≠0) x~y =
+    symmetric-sim-ℝ
+      ( unique-right-inv-nonzero-ℝ
+        ( x , x≠0)
+        ( inv-nonzero-ℝ (y , y≠0))
+        ( similarity-reasoning-ℝ
+          x *ℝ real-inv-nonzero-ℝ (y , y≠0)
+          ~ℝ y *ℝ real-inv-nonzero-ℝ (y , y≠0)
+            by preserves-sim-right-mul-ℝ _ _ _ x~y
+          ~ℝ one-ℝ
+            by right-inverse-law-mul-nonzero-ℝ (y , y≠0)))
 ```

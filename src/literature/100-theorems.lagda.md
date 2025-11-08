@@ -116,6 +116,15 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
+### 66. Sum of a Geometric Series {#66}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.geometric-sequences-real-numbers using
+  ( compute-sum-standard-geometric-series-ℝ)
+```
+
 ### 68. Sum of an arithmetic series {#68}
 
 **Author:** [malarbol](http://www.github.com/malarbol)

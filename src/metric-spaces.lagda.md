@@ -57,6 +57,7 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-located-metric-spaces public
+open import metric-spaces.apartness-located-metric-spaces public
 open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
 open import metric-spaces.bounded-distance-decompositions-of-metric-spaces public

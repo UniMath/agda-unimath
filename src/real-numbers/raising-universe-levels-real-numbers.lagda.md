@@ -154,7 +154,7 @@ module _
       map-disjunction
         ( map-raise)
         ( map-raise)
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
+        ( is-located-lower-upper-cut-ℝ x p<q)
 
   raise-ℝ : ℝ (l0 ⊔ l)
   raise-ℝ =

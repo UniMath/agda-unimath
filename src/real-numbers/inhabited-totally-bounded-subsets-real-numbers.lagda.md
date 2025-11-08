@@ -44,6 +44,8 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-and-suprema-families-real-numbers
 open import real-numbers.infima-families-real-numbers
@@ -53,6 +55,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
@@ -220,14 +223,14 @@ module _
                 ( max-net η +ℝ real-ℚ⁺ η)
                 ( max-net η +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
                 ( preserves-leq-left-add-ℝ (max-net η) _ _
-                  ( preserves-leq-real-ℚ _ _ (leq-left-add-rational-ℚ⁺ _ ε)))
+                  ( preserves-leq-real-ℚ (leq-left-add-rational-ℚ⁺ _ ε)))
                 ( bound ε η))
               ( transitive-leq-ℝ
                 ( max-net η)
                 ( max-net ε +ℝ real-ℚ⁺ ε)
                 ( max-net ε +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
                 ( preserves-leq-left-add-ℝ (max-net ε) _ _
-                  ( preserves-leq-real-ℚ _ _ (leq-right-add-rational-ℚ⁺ _ η)))
+                  ( preserves-leq-real-ℚ (leq-right-add-rational-ℚ⁺ _ η)))
                 ( bound η ε)))
 
     sup-modulated-totally-bounded-subset-ℝ : ℝ l2
@@ -281,7 +284,7 @@ module _
                               ( pr1 ∘ pr1)
                               ( (y , y∈S) , y∈net-ε'))))))
                     ( preserves-le-left-add-ℝ sup _ _
-                      ( preserves-le-real-ℚ _ _ ε'+ε'<ε))))))
+                      ( preserves-le-real-ℚ ε'+ε'<ε))))))
 
     is-approximated-below-sup-modulated-totally-bounded-subset-ℝ :
       is-approximated-below-family-ℝ
@@ -315,7 +318,7 @@ module _
               ( sup -ℝ real-ℚ⁺ ε)
               ( sup -ℝ real-ℚ⁺ (ε' +ℚ⁺ ε'))
               ( max-net ε' -ℝ real-ℚ⁺ ε')
-              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ _ _ ε'+ε'<ε))
+              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ ε'+ε'<ε))
               ( tr
                 ( λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
                 ( associative-add-ℝ _ _ _ ∙

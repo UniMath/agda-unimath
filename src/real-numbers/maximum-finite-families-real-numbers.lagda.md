@@ -43,6 +43,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.suprema-families-real-numbers
 

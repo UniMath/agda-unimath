@@ -28,6 +28,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -82,11 +83,13 @@ nonnegative-dist-ℝ x y = (dist-ℝ x y , is-nonnegative-dist-ℝ x y)
 
 ### Relationship to the metric space of real numbers
 
-Two real numbers `x` and `y` are in an `ε`-neighborhood of each other if and
-only if their distance is at most `ε`.
+Two real numbers `x` and `y` are in an `ε`-neighborhood of each other in the
+[metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)
+[if and only if](foundation.logical-equivalences.md) their distance is
+[at most](real-numbers.inequality-real-numbers.md) `ε`.
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ neighborhood-ℝ
 
   diff-bound-neighborhood-ℝ :
@@ -124,8 +127,6 @@ abstract
     dist-ℝ x y ≤-ℝ real-ℚ⁺ d
   leq-dist-neighborhood-ℝ d⁺@(d , _) x y H =
     leq-abs-leq-leq-neg-ℝ
-      ( x -ℝ y)
-      ( real-ℚ d)
       ( diff-bound-neighborhood-ℝ d⁺ x y H)
       ( inv-tr
         ( λ z → leq-ℝ z (real-ℚ d))
@@ -138,19 +139,17 @@ abstract
     lower-neighborhood-ℝ d y x
   lower-neighborhood-diff-ℝ d⁺@(d , _) x y x-y≤d q q+d<x =
     is-in-lower-cut-le-real-ℚ
-      ( q)
       ( y)
       ( concatenate-le-leq-ℝ
         ( real-ℚ q)
         ( x -ℝ real-ℚ d)
         ( y)
         ( le-real-is-in-lower-cut-ℚ
-          ( q)
           ( x -ℝ real-ℚ d)
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
 
-opaque
+abstract opaque
   unfolding neighborhood-ℝ
 
   neighborhood-dist-ℝ :
@@ -213,9 +212,6 @@ abstract
     dist-ℝ x z ≤-ℝ dist-ℝ x y +ℝ dist-ℝ y z
   triangle-inequality-dist-ℝ x y z =
     preserves-leq-left-sim-ℝ
-      ( dist-ℝ x y +ℝ dist-ℝ y z)
-      ( abs-ℝ (x -ℝ y +ℝ y -ℝ z))
-      ( abs-ℝ (x -ℝ z))
       ( preserves-sim-abs-ℝ
         ( similarity-reasoning-ℝ
           x -ℝ y +ℝ y -ℝ z
@@ -240,8 +236,6 @@ abstract
     dist-ℝ x y ≤-ℝ z
   leq-dist-leq-diff-ℝ x y z x-y≤z y-x≤z =
     leq-abs-leq-leq-neg-ℝ
-      ( _)
-      ( z)
       ( x-y≤z)
       ( inv-tr (λ w → leq-ℝ w z) (distributive-neg-diff-ℝ _ _) y-x≤z)
 
@@ -263,7 +257,7 @@ abstract
   preserves-dist-left-add-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     sim-ℝ
-      ( dist-ℝ (add-ℝ x y) (add-ℝ x z))
+      ( dist-ℝ (x +ℝ y) (x +ℝ z))
       ( dist-ℝ y z)
   preserves-dist-left-add-ℝ x y z =
     similarity-reasoning-ℝ
@@ -284,7 +278,7 @@ abstract
   preserves-dist-right-add-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     sim-ℝ
-      ( dist-ℝ (add-ℝ x z) (add-ℝ y z))
+      ( dist-ℝ (x +ℝ z) (y +ℝ z))
       ( dist-ℝ x y)
   preserves-dist-right-add-ℝ z x y =
     similarity-reasoning-ℝ
@@ -303,7 +297,7 @@ abstract
         by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
 ```
 
-## Distributivity laws
+### Distributivity laws
 
 ```agda
 module _
@@ -330,4 +324,40 @@ module _
           by inv (abs-mul-ℝ (x -ℝ y) z)
         ＝ dist-ℝ (x *ℝ z) (y *ℝ z)
           by ap abs-ℝ (right-distributive-mul-diff-ℝ x y z)
+```
+
+### Zero laws
+
+```agda
+abstract
+  right-zero-law-dist-ℝ : {l : Level} (x : ℝ l) → dist-ℝ x zero-ℝ ＝ abs-ℝ x
+  right-zero-law-dist-ℝ x = ap abs-ℝ (right-unit-law-diff-ℝ x)
+
+  left-zero-law-dist-ℝ : {l : Level} (x : ℝ l) → dist-ℝ zero-ℝ x ＝ abs-ℝ x
+  left-zero-law-dist-ℝ x = commutative-dist-ℝ zero-ℝ x ∙ right-zero-law-dist-ℝ x
+```
+
+### Distance is preserved by similarity
+
+```agda
+abstract
+  preserves-dist-left-sim-ℝ :
+    {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} → sim-ℝ x y →
+    sim-ℝ (dist-ℝ x z) (dist-ℝ y z)
+  preserves-dist-left-sim-ℝ {z = z} {x = x} {y = y} x~y =
+    preserves-sim-abs-ℝ (preserves-sim-right-add-ℝ (neg-ℝ z) x y x~y)
+
+  preserves-dist-right-sim-ℝ :
+    {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} → sim-ℝ x y →
+    sim-ℝ (dist-ℝ z x) (dist-ℝ z y)
+  preserves-dist-right-sim-ℝ {z = z} x~y =
+    preserves-sim-abs-ℝ (preserves-sim-diff-ℝ (refl-sim-ℝ z) x~y)
+
+  preserves-dist-sim-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →
+    sim-ℝ x x' → sim-ℝ y y' → sim-ℝ (dist-ℝ x y) (dist-ℝ x' y')
+  preserves-dist-sim-ℝ x~x' y~y' =
+    transitive-sim-ℝ _ _ _
+      ( preserves-dist-right-sim-ℝ y~y')
+      ( preserves-dist-left-sim-ℝ x~x')
 ```
