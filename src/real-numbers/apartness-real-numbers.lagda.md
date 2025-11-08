@@ -13,8 +13,12 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
+open import foundation.dependent-pair-types
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.existential-quantification
 open import foundation.large-apartness-relations
+open import foundation.propositional-truncations
 open import foundation.large-binary-relations
 open import foundation.negated-equality
 open import foundation.negation
@@ -28,7 +32,15 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-real-numbers
+open import logic.functoriality-existential-quantification
+open import metric-spaces.apartness-located-metric-spaces
+
+open import real-numbers.addition-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.located-metric-space-of-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 ```
 
 </details>
@@ -190,4 +202,56 @@ abstract
         ( y')
         ( y~y')
         ( x#y))
+```
+
+### Apartness on the real numbers is equivalent to apartness in the located metric space of real numbers
+
+```agda
+apart-prop-located-metric-space-ℝ : {l : Level} → Relation-Prop l (ℝ l)
+apart-prop-located-metric-space-ℝ {l} =
+  apart-prop-Located-Metric-Space (located-metric-space-ℝ l)
+
+apart-located-metric-space-ℝ : {l : Level} → Relation l (ℝ l)
+apart-located-metric-space-ℝ {l} =
+  apart-Located-Metric-Space (located-metric-space-ℝ l)
+
+module _
+  {l : Level} (x y : ℝ l)
+  where
+
+  abstract opaque
+    apart-located-metric-space-apart-ℝ :
+      apart-ℝ x y → apart-located-metric-space-ℝ x y
+    apart-located-metric-space-apart-ℝ =
+      elim-disjunction
+        ( apart-prop-located-metric-space-ℝ x y)
+        ( λ x<y →
+          map-tot-exists
+            ( λ ε x+ε<y Nεxy →
+              not-leq-le-ℝ
+                ( x +ℝ real-ℚ⁺ ε)
+                ( y)
+                ( x+ε<y)
+                ( right-leq-real-bound-neighborhood-ℝ ε x y Nεxy))
+            ( exists-positive-rational-separation-le-ℝ x<y))
+        ( λ y<x →
+          map-tot-exists
+            ( λ ε y+ε<x Nεxy →
+              not-leq-le-ℝ
+                ( y +ℝ real-ℚ⁺ ε)
+                ( x)
+                ( y+ε<x)
+                ( left-leq-real-bound-neighborhood-ℝ ε x y Nεxy))
+            ( exists-positive-rational-separation-le-ℝ y<x))
+
+    apart-apart-located-metric-space-ℝ :
+      apart-located-metric-space-ℝ x y → apart-ℝ x y
+    apart-apart-located-metric-space-ℝ =
+      let
+        motive = apart-prop-ℝ x y
+        open do-syntax-trunc-Prop motive
+      in do
+        ( ε , ¬Nεxy) ← ?
+        {!   !}
+
 ```
