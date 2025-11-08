@@ -38,6 +38,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
+open import real-numbers.strict-inequalities-addition-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 ```
@@ -162,8 +163,8 @@ abstract
   preserves-apart-neg-ℝ x y =
     elim-disjunction
       ( apart-prop-ℝ _ _)
-      ( inr-disjunction ∘ neg-le-ℝ _ _)
-      ( inl-disjunction ∘ neg-le-ℝ _ _)
+      ( inr-disjunction ∘ neg-le-ℝ)
+      ( inl-disjunction ∘ neg-le-ℝ)
 ```
 
 ### Apartness is preserved by similarity

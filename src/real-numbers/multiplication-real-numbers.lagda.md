@@ -1189,10 +1189,10 @@ module _
 abstract
   preserves-sim-mul-ℝ :
     {l1 l2 l3 l4 : Level} →
-    (a : ℝ l1) (a' : ℝ l2) → sim-ℝ a a' →
-    (b : ℝ l3) (b' : ℝ l4) → sim-ℝ b b' →
+    {a : ℝ l1} {a' : ℝ l2} → sim-ℝ a a' →
+    {b : ℝ l3} {b' : ℝ l4} → sim-ℝ b b' →
     sim-ℝ (a *ℝ b) (a' *ℝ b')
-  preserves-sim-mul-ℝ a a' a~a' b b' b~b' =
+  preserves-sim-mul-ℝ {a = a} {a' = a'} a~a' {b = b} {b' = b'} b~b' =
     transitive-sim-ℝ
       ( a *ℝ b)
       ( a *ℝ b')

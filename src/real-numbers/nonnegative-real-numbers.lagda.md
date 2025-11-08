@@ -38,7 +38,9 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -127,6 +129,11 @@ abstract
     {q : ℚ} → is-nonnegative-ℚ q → is-nonnegative-ℝ (real-ℚ q)
   preserves-is-nonnegative-real-ℚ is-nonneg-q =
     preserves-leq-real-ℚ (leq-zero-is-nonnegative-ℚ is-nonneg-q)
+
+  reflects-is-nonnegative-real-ℚ :
+    {q : ℚ} → is-nonnegative-ℝ (real-ℚ q) → is-nonnegative-ℚ q
+  reflects-is-nonnegative-real-ℚ 0≤qℝ =
+    is-nonnegative-leq-zero-ℚ (reflects-leq-real-ℚ 0≤qℝ)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ (q , is-nonneg-q) =
@@ -279,4 +286,29 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁰⁺ x) y →
     is-nonnegative-ℝ y
   is-nonnegative-leq-ℝ⁰⁺ (x , 0≤x) y x≤y = transitive-leq-ℝ zero-ℝ x y x≤y 0≤x
+
+  is-nonnegative-le-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
+    is-nonnegative-ℝ y
+  is-nonnegative-le-ℝ⁰⁺ x y x<y =
+    is-nonnegative-leq-ℝ⁰⁺ x y (leq-le-ℝ x<y)
+```
+
+### Nonnegativity is preserved by similarity
+
+```agda
+abstract
+  is-nonnegative-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-nonnegative-ℝ x → sim-ℝ x y →
+    is-nonnegative-ℝ y
+  is-nonnegative-sim-ℝ {x = x} {y = y} 0≤x x~y =
+    preserves-leq-right-sim-ℝ x~y 0≤x
+```
+
+### Raising the universe levels of nonnegative real numbers
+
+```agda
+raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
+raise-ℝ⁰⁺ l (x , is-nonneg-x) =
+  (raise-ℝ l x , is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x))
 ```
