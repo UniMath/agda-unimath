@@ -127,7 +127,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ'
 
     leq'-leq-ℝ : leq-ℝ x y → leq-ℝ' x y
@@ -175,7 +175,7 @@ module _
 ### Inequality on the real numbers is reflexive
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ
 
   refl-leq-ℝ : {l : Level} (x : ℝ l) → leq-ℝ x x
@@ -184,7 +184,7 @@ opaque
   leq-eq-ℝ : {l : Level} {x y : ℝ l} → x ＝ y → leq-ℝ x y
   leq-eq-ℝ {x = x} refl = refl-leq-ℝ x
 
-opaque
+abstract opaque
   unfolding leq-ℝ sim-ℝ
 
   leq-sim-ℝ : {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y → leq-ℝ x y
@@ -194,7 +194,7 @@ opaque
 ### Inequality on the real numbers is antisymmetric
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ sim-ℝ
 
   sim-antisymmetric-leq-ℝ :
@@ -215,7 +215,7 @@ module _
   (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ
 
     transitive-leq-ℝ : leq-ℝ y z → leq-ℝ x y → leq-ℝ x z
@@ -244,7 +244,7 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 ### Similarity in the large poset of real numbers is equivalent to similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ sim-ℝ
 
   sim-sim-leq-ℝ :
@@ -280,7 +280,7 @@ module _
   {x y : ℚ}
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ real-ℚ
 
     preserves-leq-real-ℚ : leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
@@ -300,7 +300,7 @@ module _
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ' neg-ℝ
 
     neg-leq-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ y) (neg-ℝ x)
@@ -314,7 +314,7 @@ module _
   {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} (x~y : sim-ℝ x y)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ sim-ℝ
 
     preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
@@ -343,7 +343,7 @@ module _
   {l : Level} (x : ℝ l) (q : ℚ)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ' real-ℚ
 
     not-in-lower-cut-leq-ℝ : leq-ℝ x (real-ℚ q) → ¬ (is-in-lower-cut-ℝ x q)
@@ -376,7 +376,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ'
 
     leq-leq-rational-ℝ :

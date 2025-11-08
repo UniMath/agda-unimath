@@ -66,7 +66,7 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ min-ℝ
 
     is-greatest-binary-lower-bound-min-ℝ :
@@ -155,7 +155,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding min-ℝ
 
     approximate-above-min-ℝ :

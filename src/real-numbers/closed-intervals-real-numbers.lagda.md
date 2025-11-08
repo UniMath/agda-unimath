@@ -90,7 +90,7 @@ unit-closed-interval-ℝ =
 ### Closed intervals in the real numbers are closed in the metric space of real numbers
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ neighborhood-ℝ
 
   is-closed-subset-closed-interval-ℝ :

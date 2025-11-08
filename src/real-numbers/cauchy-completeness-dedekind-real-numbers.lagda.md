@@ -299,7 +299,7 @@ module _
     is-inhabited-upper-cut-lim-cauchy-approximation-ℝ ,
     is-rounded-upper-cut-lim-cauchy-approximation-ℝ
 
-  opaque
+  abstract opaque
     unfolding neighborhood-ℝ
 
     is-disjoint-cut-lim-cauchy-approximation-ℝ :
@@ -411,7 +411,7 @@ module _
   {l : Level} (x : cauchy-approximation-ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ lim-cauchy-approximation-ℝ
 
     is-limit-lim-cauchy-approximation-ℝ :
