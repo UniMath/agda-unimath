@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.short-binary-maximum-real-numbers where
+module real-numbers.short-function-binary-maximum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -23,7 +23,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequalities-addition-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers

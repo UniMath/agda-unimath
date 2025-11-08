@@ -44,12 +44,12 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequalities-addition-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequalities-addition-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```

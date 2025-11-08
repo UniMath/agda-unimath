@@ -312,7 +312,7 @@ module _
           ( lower-cut-ℝ x p)
           ( upper-cut-ℝ x q)
           ( pr2 I)
-          ( is-located-lower-upper-cut-ℝ x ( pr1 I)))
+          ( is-located-lower-upper-cut-ℝ x (pr1 I)))
 
   subset-lower-complement-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-complement-upper-cut-ℝ x

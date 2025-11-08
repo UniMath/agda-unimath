@@ -29,7 +29,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequalities-addition-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.metric-space-of-real-numbers
