@@ -293,7 +293,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) (p : ℚ)
   where
 
-  opaque
+  abstract opaque
     unfolding add-ℝ
 
     le-split-add-rational-ℝ :
