@@ -133,6 +133,14 @@ module _
   triangular-neighborhood-Located-Metric-Space =
     triangular-neighborhood-Metric-Space metric-space-Located-Metric-Space
 
+  monotonic-neighborhood-Located-Metric-Space :
+    (x y : type-Located-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    le-ℚ⁺ d₁ d₂ →
+    neighborhood-Located-Metric-Space d₁ x y →
+    neighborhood-Located-Metric-Space d₂ x y
+  monotonic-neighborhood-Located-Metric-Space =
+    monotonic-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
   is-located-Located-Metric-Space :
     is-located-Metric-Space metric-space-Located-Metric-Space
   is-located-Located-Metric-Space = pr2 X

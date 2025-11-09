@@ -7,15 +7,18 @@ module metric-spaces.accumulation-points-subsets-located-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.intersections-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -227,4 +230,76 @@ module _
                 ( a))
               ( x)
               ( lim-a=x)))
+```
+
+### If `x` is a sequential accumulation point of `S`, it is an accumulation point of `S`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  (x : type-Located-Metric-Space X)
+  where
+
+  abstract
+    is-accumulation-point-is-sequential-accumulation-point-subset-Located-Metric-Space :
+      is-sequential-accumulation-point-subset-Located-Metric-Space X S x →
+      is-accumulation-point-subset-Located-Metric-Space X S x
+    is-accumulation-point-is-sequential-accumulation-point-subset-Located-Metric-Space
+      is-seq-acc-x =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-accumulation-point-prop-subset-Located-Metric-Space X S x)
+      in do
+        (σ , σ#x , lim-σ=x) ← is-seq-acc-x
+        μ@(mod-μ , is-mod-μ) ← lim-σ=x
+        intro-exists
+          ( cauchy-approximation-cauchy-sequence-Metric-Space
+            ( subspace-Located-Metric-Space X S)
+            ( σ ,
+              is-cauchy-has-limit-modulus-sequence-Metric-Space
+                ( metric-space-Located-Metric-Space X)
+                ( pr1 ∘ σ)
+                ( x)
+                ( μ)))
+          ( ( λ ε → σ#x _) ,
+            ( λ ε δ →
+              let ε' = modulus-le-double-le-ℚ⁺ ε
+              in
+                monotonic-neighborhood-Located-Metric-Space
+                  ( X)
+                  ( pr1 (σ (mod-μ ε')))
+                  ( x)
+                  ( ε')
+                  ( ε +ℚ⁺ δ)
+                  ( transitive-le-ℚ _ _ _
+                    ( le-left-add-ℚ⁺ ε δ)
+                    ( le-modulus-le-double-le-ℚ⁺ ε))
+                  ( is-mod-μ ε' (mod-μ ε') (refl-leq-ℕ (mod-μ ε')))))
+```
+
+### Being an accumulation point is equivalent to being a sequential accumulation point
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  (x : type-Located-Metric-Space X)
+  where
+
+  is-accumulation-point-iff-is-sequential-accumulation-point-subset-Located-Metric-Space :
+    is-accumulation-point-subset-Located-Metric-Space X S x ↔
+    is-sequential-accumulation-point-subset-Located-Metric-Space X S x
+  is-accumulation-point-iff-is-sequential-accumulation-point-subset-Located-Metric-Space =
+    ( is-sequential-accumulation-point-is-accumulation-point-subset-Located-Metric-Space
+        ( X)
+        ( S)
+        ( x) ,
+      is-accumulation-point-is-sequential-accumulation-point-subset-Located-Metric-Space
+        ( X)
+        ( S)
+        ( x))
 ```
