@@ -9,9 +9,7 @@ module elementary-number-theory.metric-additive-group-of-rational-numbers where
 ```agda
 open import analysis.metric-abelian-groups
 
-open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
