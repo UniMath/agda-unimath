@@ -11,9 +11,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences

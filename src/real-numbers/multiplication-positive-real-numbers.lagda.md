@@ -9,7 +9,6 @@ module real-numbers.multiplication-positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
