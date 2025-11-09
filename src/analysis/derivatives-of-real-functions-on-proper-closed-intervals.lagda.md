@@ -414,6 +414,11 @@ module _
   is-differentiable-prop-real-function-proper-closed-interval-ℝ =
     ( is-differentiable-real-function-proper-closed-interval-ℝ ,
       is-prop-is-differentiable-real-function-proper-closed-interval-ℝ)
+
+  derivative-is-differentiable-real-function-proper-closed-interval-ℝ :
+    is-differentiable-real-function-proper-closed-interval-ℝ →
+    type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2)
+  derivative-is-differentiable-real-function-proper-closed-interval-ℝ = pr1
 ```
 
 ### The derivative of `f + g` is `f' + g'`
