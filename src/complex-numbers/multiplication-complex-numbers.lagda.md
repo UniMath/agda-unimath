@@ -13,6 +13,7 @@ open import complex-numbers.similarity-complex-numbers
 
 open import elementary-number-theory.rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -20,9 +21,11 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -45,6 +48,11 @@ mul-ℂ (a , b) (c , d) = (a *ℝ c -ℝ b *ℝ d , a *ℝ d +ℝ b *ℝ c)
 infixl 40 _*ℂ_
 _*ℂ_ : {l1 l2 : Level} → ℂ l1 → ℂ l2 → ℂ (l1 ⊔ l2)
 _*ℂ_ = mul-ℂ
+
+ap-mul-ℂ :
+  {l1 l2 : Level} {z z' : ℂ l1} → z ＝ z' → {w w' : ℂ l2} → w ＝ w' →
+  mul-ℂ z w ＝ mul-ℂ z' w'
+ap-mul-ℂ = ap-binary mul-ℂ
 ```
 
 ## Properties
@@ -254,4 +262,46 @@ opaque
                 ( right-zero-law-mul-ℝ _))
         ＝ zero-ℝ
           by left-unit-law-add-ℝ zero-ℝ)
+```
+
+### The canonical embedding of real numbers in the complex numbers preserves multiplication
+
+```agda
+abstract
+  mul-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x *ℂ complex-ℝ y ＝ complex-ℝ (x *ℝ y)
+  mul-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( equational-reasoning
+        x *ℝ y -ℝ raise-ℝ l1 zero-ℝ *ℝ raise-ℝ l2 zero-ℝ
+        ＝ x *ℝ y -ℝ zero-ℝ *ℝ zero-ℝ
+          by
+            eq-sim-ℝ
+              ( preserves-sim-diff-ℝ
+                ( refl-sim-ℝ (x *ℝ y))
+                ( symmetric-sim-ℝ
+                  ( preserves-sim-mul-ℝ (sim-raise-ℝ _ _) (sim-raise-ℝ _ _))))
+        ＝ x *ℝ y -ℝ zero-ℝ
+          by ap-diff-ℝ refl (eq-sim-ℝ (right-zero-law-mul-ℝ _))
+        ＝ x *ℝ y
+          by right-unit-law-diff-ℝ (x *ℝ y))
+      ( eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          x *ℝ raise-ℝ l2 zero-ℝ +ℝ raise-ℝ l1 zero-ℝ *ℝ y
+          ~ℝ x *ℝ zero-ℝ +ℝ zero-ℝ *ℝ y
+            by
+              symmetric-sim-ℝ
+                ( preserves-sim-add-ℝ
+                  ( preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l2 zero-ℝ))
+                  ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ l1 zero-ℝ)))
+          ~ℝ zero-ℝ +ℝ zero-ℝ
+            by
+              preserves-sim-add-ℝ
+                ( right-zero-law-mul-ℝ x)
+                ( left-zero-law-mul-ℝ y)
+          ~ℝ zero-ℝ
+            by sim-eq-ℝ (left-unit-law-add-ℝ zero-ℝ)
+          ~ℝ raise-ℝ (l1 ⊔ l2) zero-ℝ
+            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ))
 ```

@@ -7,17 +7,19 @@ module complex-numbers.apartness-complex-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.negation
 open import complex-numbers.complex-numbers
-open import foundation.function-types
-open import foundation.large-apartness-relations
+
 open import foundation.dependent-pair-types
-open import foundation.functoriality-disjunction
-open import real-numbers.apartness-real-numbers
-open import foundation.empty-types
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.function-types
+open import foundation.functoriality-disjunction
+open import foundation.large-apartness-relations
+open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import real-numbers.apartness-real-numbers
 ```
 
 </details>
@@ -66,7 +68,7 @@ abstract
   symmetric-apart-ℂ :
     {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) → apart-ℂ z w → apart-ℂ w z
   symmetric-apart-ℂ (a , b) (c , d) =
-    map-disjunction (symmetric-apart-ℝ a c) (symmetric-apart-ℝ b d)
+    map-disjunction symmetric-apart-ℝ symmetric-apart-ℝ
 ```
 
 ### Apartness is cotransitive

@@ -15,6 +15,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
 
@@ -45,6 +48,9 @@ sim-ℂ a+bi c+di = type-Prop (sim-prop-ℂ a+bi c+di)
 abstract
   refl-sim-ℂ : {l : Level} (z : ℂ l) → sim-ℂ z z
   refl-sim-ℂ (a , b) = (refl-sim-ℝ a , refl-sim-ℝ b)
+
+  sim-eq-ℂ : {l : Level} {z w : ℂ l} → z ＝ w → sim-ℂ z w
+  sim-eq-ℂ {z = z} refl = refl-sim-ℂ z
 ```
 
 ### Similarity is symmetric
@@ -73,4 +79,49 @@ abstract
 abstract
   eq-sim-ℂ : {l : Level} {x y : ℂ l} → sim-ℂ x y → x ＝ y
   eq-sim-ℂ (a~c , b~d) = eq-ℂ (eq-sim-ℝ a~c) (eq-sim-ℝ b~d)
+```
+
+### The canonical embedding of real numbers in the complex numbers preserves similarity
+
+```agda
+abstract
+  preserves-sim-complex-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℂ (complex-ℝ x) (complex-ℝ y)
+  preserves-sim-complex-ℝ {l1} {l2} x~y =
+    ( x~y ,
+      transitive-sim-ℝ
+        ( raise-ℝ l1 zero-ℝ)
+        ( zero-ℝ)
+        ( raise-ℝ l2 zero-ℝ)
+        ( sim-raise-ℝ l2 zero-ℝ)
+        ( symmetric-sim-ℝ (sim-raise-ℝ l1 zero-ℝ)))
+```
+
+### Similarity reasoning
+
+Similarities between complex numbers can be constructed by similarity reasoning
+in the following way:
+
+```text
+similarity-reasoning-ℂ
+  x ~ℂ y by sim-1
+    ~ℂ z by sim-2
+```
+
+```agda
+infixl 1 similarity-reasoning-ℂ_
+infixl 0 step-similarity-reasoning-ℂ
+
+abstract
+  similarity-reasoning-ℂ_ :
+    {l : Level} → (x : ℂ l) → sim-ℂ x x
+  similarity-reasoning-ℂ x = refl-sim-ℂ x
+
+  step-similarity-reasoning-ℂ :
+    {l1 l2 : Level} {x : ℂ l1} {y : ℂ l2} →
+    sim-ℂ x y → {l3 : Level} → (u : ℂ l3) → sim-ℂ y u → sim-ℂ x u
+  step-similarity-reasoning-ℂ {x = x} {y = y} p u q = transitive-sim-ℂ x y u q p
+
+  syntax step-similarity-reasoning-ℂ p u q = p ~ℂ u by q
 ```

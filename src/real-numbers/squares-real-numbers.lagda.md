@@ -20,6 +20,7 @@ open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.square-roots-positive-rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -33,6 +34,7 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -216,6 +218,25 @@ abstract
       ( square-ℝ y)
       ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ (leq-le-ℝ x<y))
       ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x<y)
+```
+
+### For nonnegative real numbers, squaring reflects inequality
+
+```agda
+abstract
+  reflects-leq-square-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y) → leq-ℝ⁰⁺ x y
+  reflects-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x²≤y² =
+    leq-not-le-ℝ
+      ( y)
+      ( x)
+      ( λ y<x →
+        not-leq-le-ℝ
+          ( square-ℝ y)
+          ( square-ℝ x)
+          ( preserves-le-square-ℝ⁰⁺ y⁰⁺ x⁰⁺ y<x)
+          ( x²≤y²))
 ```
 
 ### If a nonnegative rational `q` is in the lower cut of `x`, `q²` is in the lower cut of `x²`
