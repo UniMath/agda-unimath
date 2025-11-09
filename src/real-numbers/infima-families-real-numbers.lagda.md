@@ -41,6 +41,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
@@ -149,7 +150,7 @@ module _
             not-leq-le-ℝ (y i) z
               ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
                 ( le-transpose-right-diff-ℝ' _ z _
-                  ( le-real-is-in-lower-cut-ℚ ε (z -ℝ x) ε<z-x))
+                  ( le-real-is-in-lower-cut-ℚ (z -ℝ x) ε<z-x))
                 ( yᵢ<x+ε))
               ( z≤yᵢ i))
     pr2 (is-greatest-lower-bound-is-infimum-family-ℝ z) z≤x i =
@@ -257,7 +258,7 @@ module _
         ( i)
         ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
           ( le-transpose-right-diff-ℝ' _ z _
-            ( le-real-is-in-lower-cut-ℚ ε (z -ℝ x) ε<z-x))
+            ( le-real-is-in-lower-cut-ℚ (z -ℝ x) ε<z-x))
           ( yᵢ<x+ε))
 
   le-infimum-iff-le-element-family-ℝ :
@@ -284,7 +285,7 @@ module _
       tr
         ( leq-ℝ (neg-ℝ x))
         ( neg-neg-ℝ (y i))
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-upper-bound-is-supremum-family-ℝ
             ( neg-ℝ ∘ y)
             ( x)
@@ -299,7 +300,7 @@ module _
           binary-tr le-ℝ
             ( neg-neg-ℝ _)
             ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ (x -ℝ real-ℚ⁺ ε) (neg-ℝ (y i)) x-ε<-yᵢ))
+            ( neg-le-ℝ x-ε<-yᵢ))
         ( is-approximated-below-is-supremum-family-ℝ
           ( neg-ℝ ∘ y)
           ( x)
@@ -327,7 +328,7 @@ module _
       tr
         ( λ w → leq-ℝ w (neg-ℝ x))
         ( neg-neg-ℝ (y i))
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-lower-bound-is-infimum-family-ℝ
             ( neg-ℝ ∘ y)
             ( x)
@@ -342,7 +343,7 @@ module _
           binary-tr le-ℝ
             ( distributive-neg-add-ℝ _ _)
             ( neg-neg-ℝ (y i))
-            ( neg-le-ℝ (neg-ℝ (y i)) (x +ℝ real-ℚ⁺ ε) -yᵢ<x+ε))
+            ( neg-le-ℝ -yᵢ<x+ε))
         ( is-approximated-above-is-infimum-family-ℝ
           ( neg-ℝ ∘ y)
           ( x)
@@ -373,7 +374,7 @@ module _
       tr
         ( leq-ℝ (neg-ℝ x))
         ( neg-neg-ℝ s)
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-upper-bound-is-supremum-family-ℝ
             ( inclusion-subset-ℝ (neg-subset-ℝ S))
             ( x)
@@ -397,7 +398,7 @@ module _
             ( le-ℝ)
             ( refl)
             ( distributive-neg-diff-ℝ x (real-ℚ⁺ ε) ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ _ _ x-ε<s))
+            ( neg-le-ℝ x-ε<s))
 
     is-infimum-neg-supremum-neg-subset-ℝ : is-infimum-subset-ℝ S (neg-ℝ x)
     is-infimum-neg-supremum-neg-subset-ℝ =

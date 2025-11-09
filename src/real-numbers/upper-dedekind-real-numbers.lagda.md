@@ -24,7 +24,6 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.similarity-subtypes

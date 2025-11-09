@@ -23,7 +23,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.retractions
 open import foundation.sections

@@ -19,23 +19,19 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-negative-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
@@ -136,8 +132,8 @@ module _
 ### If a real number has a multiplicative inverse, it is nonzero
 
 ```agda
-opaque
-  unfolding leq-ℝ mul-ℝ real-ℚ sim-ℝ
+abstract opaque
+  unfolding mul-ℝ real-ℚ sim-ℝ
 
   is-nonzero-has-right-inverse-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →

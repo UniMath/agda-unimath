@@ -44,10 +44,12 @@ open import metric-spaces.triangular-rational-neighborhood-relations
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
@@ -130,10 +132,7 @@ module _
       diagonal-product
         ( (r : ℚ) →
           is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
-        ( λ r →
-          le-lower-cut-ℝ x r
-            ( r +ℚ rational-ℚ⁺ d)
-            ( le-right-add-rational-ℚ⁺ r d))
+        ( λ r → le-lower-cut-ℝ x (le-right-add-rational-ℚ⁺ r d))
 
     is-symmetric-neighborhood-ℝ :
       is-symmetric-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
@@ -170,15 +169,11 @@ module _
         elim-exists
           ( lower-cut-ℝ x r)
           ( λ r' (K , I') →
-            H ( positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' K)
+            H ( positive-diff-le-ℚ K)
               ( r)
               ( tr
                 ( is-in-lower-cut-ℝ y)
-                ( ( inv
-                    ( right-law-positive-diff-le-ℚ
-                      ( r +ℚ rational-ℚ⁺ ε)
-                      ( r')
-                      ( K))) ∙
+                ( ( inv (right-law-positive-diff-le-ℚ K)) ∙
                   ( associative-add-ℚ
                     ( r)
                     ( rational-ℚ⁺ ε)
@@ -221,11 +216,11 @@ module _
               ( lower-cut-ℝ y r)
               ( λ s (r<s , Lxs) →
                 pr2
-                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( H (positive-diff-le-ℚ r<s))
                   ( r)
                   ( inv-tr
                     ( λ u → is-in-lower-cut-ℝ x u)
-                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( right-law-positive-diff-le-ℚ r<s)
                     ( Lxs)))
               ( forward-implication (is-rounded-lower-cut-ℝ x r) Lxr))
           ( λ r Lyr →
@@ -233,11 +228,11 @@ module _
               ( lower-cut-ℝ x r)
               ( λ s (r<s , Lys) →
                 pr1
-                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( H (positive-diff-le-ℚ r<s))
                   ( r)
                   ( inv-tr
                     ( λ u → is-in-lower-cut-ℝ y u)
-                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( right-law-positive-diff-le-ℚ r<s)
                     ( Lys)))
               ( forward-implication (is-rounded-lower-cut-ℝ y r) Lyr)))
 
@@ -284,7 +279,6 @@ module _
       lower-neighborhood-ℝ d x y
     lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
       is-in-lower-cut-le-real-ℚ
-        ( q)
         ( x)
         ( concatenate-le-leq-ℝ
           ( real-ℚ q)
@@ -297,7 +291,7 @@ module _
             ( inv-tr
               ( λ z → le-ℝ z y)
               ( add-real-ℚ q d)
-              ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+              ( le-real-is-in-lower-cut-ℚ y q+d<y)))
           ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
   opaque
@@ -358,10 +352,6 @@ module _
       ( x')
       ( y')
       ( preserves-leq-sim-ℝ
-        ( x)
-        ( x')
-        ( y +ℝ real-ℚ⁺ d)
-        ( y' +ℝ real-ℚ⁺ d)
         ( x~x')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)
@@ -370,10 +360,6 @@ module _
           ( y~y'))
         ( left-leq-real-bound-neighborhood-ℝ d x y H))
       ( preserves-leq-sim-ℝ
-        ( y)
-        ( y')
-        ( x +ℝ real-ℚ⁺ d)
-        ( x' +ℝ real-ℚ⁺ d)
         ( y~y')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)

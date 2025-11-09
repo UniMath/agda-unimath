@@ -11,14 +11,10 @@ module real-numbers.cauchy-sequences-real-numbers where
 ```agda
 open import foundation.universe-levels
 
-open import lists.sequences
-
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
-open import metric-spaces.convergent-sequences-metric-spaces
 
-open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers

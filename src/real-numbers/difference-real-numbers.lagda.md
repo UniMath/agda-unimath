@@ -14,7 +14,6 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 

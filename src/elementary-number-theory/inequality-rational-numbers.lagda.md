@@ -126,8 +126,8 @@ opaque
     refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
 
 abstract
-  leq-eq-ℚ : (x y : ℚ) → x ＝ y → leq-ℚ x y
-  leq-eq-ℚ x y x=y = tr (leq-ℚ x) x=y (refl-leq-ℚ x)
+  leq-eq-ℚ : {x y : ℚ} → x ＝ y → leq-ℚ x y
+  leq-eq-ℚ {x} refl = refl-leq-ℚ x
 ```
 
 ### Inequality on the rational numbers is antisymmetric
@@ -294,8 +294,8 @@ opaque
   unfolding leq-ℚ-Prop
 
   preserves-leq-rational-ℤ :
-    (x y : ℤ) → leq-ℤ x y → leq-ℚ (rational-ℤ x) (rational-ℤ y)
-  preserves-leq-rational-ℤ x y =
+    {x y : ℤ} → leq-ℤ x y → leq-ℚ (rational-ℤ x) (rational-ℤ y)
+  preserves-leq-rational-ℤ {x} {y} =
     binary-tr leq-ℤ
       ( inv (right-unit-law-mul-ℤ x))
       ( inv (right-unit-law-mul-ℤ y))
@@ -309,7 +309,7 @@ opaque
 
   iff-leq-rational-ℤ :
     (x y : ℤ) → leq-ℤ x y ↔ leq-ℚ (rational-ℤ x) (rational-ℤ y)
-  pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ x y
+  pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ
   pr2 (iff-leq-rational-ℤ x y) = reflects-leq-rational-ℤ x y
 ```
 
@@ -324,8 +324,9 @@ abstract
     iff-leq-int-ℕ x y
 
   preserves-leq-rational-ℕ :
-    (x y : ℕ) → leq-ℕ x y → leq-ℚ (rational-ℕ x) (rational-ℕ y)
-  preserves-leq-rational-ℕ x y = forward-implication (iff-leq-rational-ℕ x y)
+    {x y : ℕ} → leq-ℕ x y → leq-ℚ (rational-ℕ x) (rational-ℕ y)
+  preserves-leq-rational-ℕ {x} {y} =
+    forward-implication (iff-leq-rational-ℕ x y)
 
   reflects-leq-rational-ℕ :
     (x y : ℕ) → leq-ℚ (rational-ℕ x) (rational-ℕ y) → leq-ℕ x y

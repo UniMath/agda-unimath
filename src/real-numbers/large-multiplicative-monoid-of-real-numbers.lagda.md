@@ -11,9 +11,7 @@ module real-numbers.large-multiplicative-monoid-of-real-numbers where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-monoids
 open import group-theory.large-semigroups

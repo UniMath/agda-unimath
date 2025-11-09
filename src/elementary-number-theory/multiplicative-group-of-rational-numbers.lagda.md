@@ -16,7 +16,6 @@ open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -27,7 +26,6 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality

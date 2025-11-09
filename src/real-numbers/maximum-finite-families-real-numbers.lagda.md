@@ -9,7 +9,6 @@ module real-numbers.maximum-finite-families-real-numbers where
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -30,7 +29,6 @@ open import lists.finite-sequences
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.join-semilattices
 open import order-theory.joins-finite-families-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
@@ -40,9 +38,9 @@ open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.suprema-families-real-numbers
 

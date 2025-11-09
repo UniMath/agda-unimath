@@ -18,8 +18,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.logical-equivalences
-open import foundation.negation
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unit-type

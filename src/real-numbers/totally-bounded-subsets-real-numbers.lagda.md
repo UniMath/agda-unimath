@@ -9,8 +9,6 @@ module real-numbers.totally-bounded-subsets-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -21,7 +19,6 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 
-open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-negation-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.subsets-real-numbers

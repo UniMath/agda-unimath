@@ -13,15 +13,11 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.large-commutative-rings
 
-open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
-
-open import group-theory.large-monoids
 
 open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.multiplication-real-numbers

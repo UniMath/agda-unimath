@@ -11,9 +11,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
@@ -26,7 +23,6 @@ open import foundation.universe-levels
 open import metric-spaces.closed-subsets-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 
 open import order-theory.closed-intervals-large-posets
 
@@ -84,13 +80,13 @@ upper-bound-closed-interval-ℝ =
 ```agda
 unit-closed-interval-ℝ : closed-interval-ℝ lzero lzero
 unit-closed-interval-ℝ =
-  ((zero-ℝ , one-ℝ) , preserves-leq-real-ℚ zero-ℚ one-ℚ leq-zero-one-ℚ)
+  ((zero-ℝ , one-ℝ) , preserves-leq-real-ℚ leq-zero-one-ℚ)
 ```
 
 ### Closed intervals in the real numbers are closed in the metric space of real numbers
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ neighborhood-ℝ
 
   is-closed-subset-closed-interval-ℝ :
@@ -103,7 +99,7 @@ opaque
         let open do-syntax-trunc-Prop (lower-cut-ℝ x q)
         in do
           (r , q<r , r<a) ← forward-implication (is-rounded-lower-cut-ℝ a q) q<a
-          let ε⁺@(ε , _) = positive-diff-le-ℚ q r q<r
+          let ε⁺@(ε , _) = positive-diff-le-ℚ q<r
           (y , Nεxy , a≤y , _) ← H ε⁺
           pr1 Nεxy
             ( q)
@@ -117,7 +113,7 @@ opaque
         let open do-syntax-trunc-Prop (lower-cut-ℝ b q)
         in do
           (r , q<r , r<x) ← forward-implication (is-rounded-lower-cut-ℝ x q) q<x
-          let ε⁺@(ε , _) = positive-diff-le-ℚ q r q<r
+          let ε⁺@(ε , _) = positive-diff-le-ℚ q<r
           (y , Nεxy , _ , y≤b) ← H ε⁺
           y≤b
             ( q)

@@ -29,9 +29,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negated-equality
@@ -45,8 +43,6 @@ open import lists.sequences
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
-
-open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
 
 </details>
