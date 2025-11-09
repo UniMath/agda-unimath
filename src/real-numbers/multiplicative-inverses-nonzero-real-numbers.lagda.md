@@ -132,8 +132,8 @@ module _
 ### If a real number has a multiplicative inverse, it is nonzero
 
 ```agda
-opaque
-  unfolding leq-ℝ mul-ℝ real-ℚ sim-ℝ
+abstract opaque
+  unfolding mul-ℝ real-ℚ sim-ℝ
 
   is-nonzero-has-right-inverse-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
