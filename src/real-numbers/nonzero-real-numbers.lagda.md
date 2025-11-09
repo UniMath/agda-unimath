@@ -9,18 +9,28 @@ module real-numbers.nonzero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.apartness-real-numbers
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -38,7 +48,7 @@ equivalently if it is [negative](real-numbers.negative-real-numbers.md)
 
 ```agda
 is-nonzero-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-nonzero-prop-ℝ x = apart-prop-ℝ x zero-ℝ
+is-nonzero-prop-ℝ x = is-negative-prop-ℝ x ∨ is-positive-prop-ℝ x
 
 is-nonzero-ℝ : {l : Level} → ℝ l → UU l
 is-nonzero-ℝ x = type-Prop (is-nonzero-prop-ℝ x)
@@ -85,4 +95,70 @@ eq-nonzero-ℝ :
   {l : Level} (x y : nonzero-ℝ l) → (real-nonzero-ℝ x ＝ real-nonzero-ℝ y) →
   x ＝ y
 eq-nonzero-ℝ _ _ = eq-type-subtype is-nonzero-prop-ℝ
+```
+
+### If `x < y`, then `y - x` is nonzero
+
+```agda
+nonzero-diff-le-ℝ :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
+nonzero-diff-le-ℝ {x = x} {y = y} x<y = nonzero-ℝ⁺ (positive-diff-le-ℝ x<y)
+```
+
+### If `|x| < y`, then `y - x` is nonzero
+
+```agda
+nonzero-diff-le-abs-ℝ :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ (abs-ℝ x) y → nonzero-ℝ (l1 ⊔ l2)
+nonzero-diff-le-abs-ℝ {x = x} {y = y} |x|<y =
+  nonzero-diff-le-ℝ (concatenate-leq-le-ℝ x (abs-ℝ x) y (leq-abs-ℝ x) |x|<y)
+```
+
+### `x` is nonzero if and only if `|x|` is positive
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract opaque
+    unfolding abs-ℝ
+
+    is-positive-abs-is-nonzero-ℝ : is-nonzero-ℝ x → is-positive-ℝ (abs-ℝ x)
+    is-positive-abs-is-nonzero-ℝ =
+      elim-disjunction
+        ( is-positive-prop-ℝ (abs-ℝ x))
+        ( λ is-neg-x →
+          inv-tr
+            ( is-positive-ℝ)
+            ( abs-real-ℝ⁻ (x , is-neg-x))
+            ( neg-is-negative-ℝ x is-neg-x))
+        ( λ is-pos-x →
+          inv-tr
+            ( is-positive-ℝ)
+            ( abs-real-ℝ⁺ (x , is-pos-x))
+            ( is-pos-x))
+
+    is-nonzero-is-positive-abs-ℝ : is-positive-ℝ (abs-ℝ x) → is-nonzero-ℝ x
+    is-nonzero-is-positive-abs-ℝ 0<|x| =
+      let
+        open do-syntax-trunc-Prop (is-nonzero-prop-ℝ x)
+      in do
+        (ε , 0+ε<|x|) ← exists-positive-rational-separation-le-ℝ 0<|x|
+        let
+          0<|x|-ε = le-transpose-left-add-ℝ zero-ℝ (real-ℚ⁺ ε) (abs-ℝ x) 0+ε<|x|
+        elim-disjunction
+          ( is-nonzero-prop-ℝ x)
+          ( λ |x|-ε<x →
+            is-nonzero-is-positive-ℝ (transitive-le-ℝ _ _ _ |x|-ε<x 0<|x|-ε))
+          ( λ |x|-ε<-x →
+            is-nonzero-is-negative-ℝ
+              ( binary-tr
+                ( le-ℝ)
+                ( neg-neg-ℝ x)
+                ( neg-zero-ℝ)
+                ( transitive-le-ℝ _ _ _
+                  ( neg-le-ℝ 0<|x|-ε)
+                  ( neg-le-ℝ |x|-ε<-x))))
+          ( approximate-below-abs-ℝ x ε)
 ```

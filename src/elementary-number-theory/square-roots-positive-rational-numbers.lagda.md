@@ -14,7 +14,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -102,7 +101,7 @@ module _
               ( le-ℚ)
               ( inv q=1)
               ( inv (mul-rational-ℕ 2 2))
-              ( preserves-le-rational-ℕ 1 4 _)))
+              ( preserves-le-rational-ℕ {1} {4} _)))
         ( λ 1<q →
           ( q , le-left-mul-greater-than-one-ℚ⁺ q 1<q q))
 
@@ -120,7 +119,7 @@ abstract
   bound-rounded-below-square-le-ℚ⁺ p⁺@(p , _) q⁺@(q , _) p²<q =
     let
       (δ₁⁺@(δ₁ , _) , δ₁+δ₁<⟨q-p²⟩/p) =
-        bound-double-le-ℚ⁺ (positive-diff-le-ℚ (p *ℚ p) q p²<q *ℚ⁺ inv-ℚ⁺ p⁺)
+        bound-double-le-ℚ⁺ (positive-diff-le-ℚ p²<q *ℚ⁺ inv-ℚ⁺ p⁺)
       (δ₂⁺@(δ₂ , _) , δ₂+δ₂<δ₁) = bound-double-le-ℚ⁺ δ₁⁺
       δ₃⁺@(δ₃ , _) = min-ℚ⁺ δ₂⁺ p⁺
       δ₂<δ₁ : le-ℚ δ₂ δ₁
@@ -141,22 +140,22 @@ abstract
           ( chain-of-inequalities
             (p +ℚ δ₃) *ℚ (p +ℚ δ₃)
             ≤ (p +ℚ δ₃) *ℚ p +ℚ (p +ℚ δ₃) *ℚ δ₃
-              by leq-eq-ℚ _ _ (left-distributive-mul-add-ℚ (p +ℚ δ₃) p δ₃)
+              by leq-eq-ℚ (left-distributive-mul-add-ℚ (p +ℚ δ₃) p δ₃)
             ≤ (p +ℚ δ₃) *ℚ p +ℚ ((p *ℚ δ₃) +ℚ (δ₃ *ℚ δ₃))
-              by leq-eq-ℚ _ _
+              by leq-eq-ℚ
                 ( ap-add-ℚ refl (right-distributive-mul-add-ℚ _ _ _))
             ≤ (p +ℚ δ₃) *ℚ p +ℚ ((δ₃ *ℚ p) +ℚ (δ₃ *ℚ p))
               by
                 preserves-leq-right-add-ℚ _ _ _
                   ( preserves-leq-add-ℚ
-                    ( leq-eq-ℚ _ _ (commutative-mul-ℚ _ _))
+                    ( leq-eq-ℚ (commutative-mul-ℚ _ _))
                     ( preserves-leq-left-mul-ℚ⁺
                       ( δ₃⁺)
                       ( δ₃)
                       ( p)
                       ( leq-right-min-ℚ⁺ _ _)))
             ≤ (p +ℚ (δ₃ +ℚ δ₃ +ℚ δ₃)) *ℚ p
-              by leq-eq-ℚ _ _
+              by leq-eq-ℚ
                 ( equational-reasoning
                   (p +ℚ δ₃) *ℚ p +ℚ (δ₃ *ℚ p +ℚ δ₃ *ℚ p)
                   ＝ (p +ℚ δ₃) *ℚ p +ℚ (δ₃ +ℚ δ₃) *ℚ p
@@ -185,7 +184,7 @@ abstract
                       ( leq-le-ℚ δ₂+δ₂<δ₁)
                       ( leq-le-ℚ δ₂<δ₁)))
             ≤ p *ℚ p +ℚ (δ₁ +ℚ δ₁) *ℚ p
-              by leq-eq-ℚ _ _ (right-distributive-mul-add-ℚ _ _ _))
+              by leq-eq-ℚ (right-distributive-mul-add-ℚ _ _ _))
           ( tr
             ( le-ℚ (p *ℚ p +ℚ (δ₁ +ℚ δ₁) *ℚ p))
             ( equational-reasoning
@@ -200,7 +199,7 @@ abstract
                       ( is-section-right-div-Group
                         ( group-mul-ℚ⁺)
                         ( p⁺)
-                        ( positive-diff-le-ℚ _ _ p²<q)))
+                        ( positive-diff-le-ℚ p²<q)))
               ＝ q
                 by is-identity-right-conjugation-add-ℚ (p *ℚ p) q)
             ( preserves-le-right-add-ℚ (p *ℚ p) _ _
@@ -223,7 +222,7 @@ abstract
   bound-rounded-above-square-le-ℚ⁺ p⁺@(p , _) q⁺@(q , _) q<p² =
     let
       (δ⁺@(δ , _) , δ+δ<⟨p²-q⟩/p) =
-        bound-double-le-ℚ⁺ ( positive-diff-le-ℚ _ _ q<p² *ℚ⁺ inv-ℚ⁺ p⁺)
+        bound-double-le-ℚ⁺ ( positive-diff-le-ℚ q<p² *ℚ⁺ inv-ℚ⁺ p⁺)
       δ<p =
         transitive-le-ℚ δ (δ +ℚ δ) p
           ( transitive-le-ℚ
@@ -238,7 +237,7 @@ abstract
             ( δ+δ<⟨p²-q⟩/p))
           ( le-right-add-rational-ℚ⁺ δ δ⁺)
     in
-      ( positive-diff-le-ℚ _ _ δ<p ,
+      ( positive-diff-le-ℚ δ<p ,
         le-diff-rational-ℚ⁺ p δ⁺ ,
         transitive-le-ℚ
           ( q)
@@ -271,7 +270,7 @@ abstract
                     ( is-section-right-div-Group
                       ( group-mul-ℚ⁺)
                       ( p⁺)
-                      ( positive-diff-le-ℚ _ _ q<p²)))
+                      ( positive-diff-le-ℚ q<p²)))
                   ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
 
   rounded-above-square-le-ℚ⁺ :

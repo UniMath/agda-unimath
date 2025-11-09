@@ -9,28 +9,41 @@ module elementary-number-theory.geometric-sequences-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import analysis.convergent-series-metric-abelian-groups
+open import analysis.series-metric-abelian-groups
+
 open import commutative-algebra.geometric-sequences-commutative-rings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.metric-additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.binary-transport
+open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negated-equality
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
 
 open import lists.sequences
 
-open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
+open import metric-spaces.limits-of-sequences-metric-spaces
+open import metric-spaces.metric-space-of-rational-numbers
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -99,102 +112,69 @@ module _
     compute-sum-standard-geometric-fin-sequence-ℚ :
       (n : ℕ) →
       sum-standard-geometric-fin-sequence-ℚ a r n ＝
-      ( a *ℚ
-        ( (one-ℚ -ℚ power-ℚ n r) *ℚ
-          rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
-    compute-sum-standard-geometric-fin-sequence-ℚ 0 =
-      inv
-        ( equational-reasoning
-          a *ℚ ((one-ℚ -ℚ one-ℚ) *ℚ _)
-          ＝ a *ℚ (zero-ℚ *ℚ _)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ (right-inverse-law-add-ℚ one-ℚ) refl)
-          ＝ a *ℚ zero-ℚ
-            by ap-mul-ℚ refl (left-zero-law-mul-ℚ _)
-          ＝ zero-ℚ
-            by right-zero-law-mul-ℚ a)
-    compute-sum-standard-geometric-fin-sequence-ℚ (succ-ℕ n) =
+      ( (a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)) *ℚ
+        (one-ℚ -ℚ power-ℚ n r))
+    compute-sum-standard-geometric-fin-sequence-ℚ =
+      compute-sum-standard-geometric-fin-sequence-Commutative-Ring
+        ( commutative-ring-ℚ)
+        ( a)
+        ( r)
+        ( pr2 (invertible-diff-neq-ℚ r one-ℚ r≠1))
+```
+
+### If `|r| < 1`, the sum of the standard geometric sequence `n ↦ arⁿ` is `a/(1-r)`
+
+```agda
+module _
+  (a r : ℚ)
+  where
+
+  standard-geometric-series-ℚ : series-Metric-Ab metric-ab-add-ℚ
+  standard-geometric-series-ℚ =
+    series-terms-Metric-Ab (seq-standard-geometric-sequence-ℚ a r)
+
+  abstract
+    sum-standard-geometric-sequence-ℚ :
+      (|r|<1 : le-ℚ (rational-abs-ℚ r) one-ℚ) →
+      is-sum-series-Metric-Ab
+        ( standard-geometric-series-ℚ)
+        ( a *ℚ rational-inv-ℚˣ (invertible-diff-le-abs-ℚ r one-ℚ⁺ |r|<1))
+    sum-standard-geometric-sequence-ℚ |r|<1 =
       let
-        1/⟨1-r⟩ = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
+        r≠1 =
+          nonequal-map
+            ( rational-abs-ℚ)
+            ( inv-tr
+              ( rational-abs-ℚ r ≠_)
+              ( rational-abs-rational-ℚ⁺ one-ℚ⁺)
+              ( nonequal-le-ℚ |r|<1))
       in
-        equational-reasoning
-          sum-standard-geometric-fin-sequence-ℚ a r (succ-ℕ n)
-          ＝
-            sum-standard-geometric-fin-sequence-ℚ a r n +ℚ
-            seq-standard-geometric-sequence-ℚ a r n
-            by
-              cons-sum-fin-sequence-type-Commutative-Ring
-                ( commutative-ring-ℚ)
-                ( n)
-                ( _)
-                ( refl)
-          ＝
-            ( a *ℚ
-              ( (one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩)) +ℚ
-            ( a *ℚ power-ℚ n r)
-            by
-              ap-add-ℚ
-                ( compute-sum-standard-geometric-fin-sequence-ℚ n)
-                ( compute-standard-geometric-sequence-ℚ a r n)
-          ＝
-            a *ℚ
-            (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ power-ℚ n r)
-            by inv (left-distributive-mul-add-ℚ a _ _)
-          ＝
-            a *ℚ
-            ( (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ
-              (power-ℚ n r *ℚ (one-ℚ -ℚ r)) *ℚ 1/⟨1-r⟩))
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-add-ℚ
-                  ( refl)
-                  ( inv
-                    ( cancel-right-mul-div-ℚˣ _
-                      ( invertible-diff-neq-ℚ r one-ℚ r≠1))))
-          ＝
-            a *ℚ
-            ( ( (one-ℚ -ℚ power-ℚ n r) +ℚ (power-ℚ n r *ℚ (one-ℚ -ℚ r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( inv (right-distributive-mul-add-ℚ _ _ 1/⟨1-r⟩))
-          ＝
-            a *ℚ
-            ( ( one-ℚ -ℚ power-ℚ n r +ℚ
-                ((power-ℚ n r *ℚ one-ℚ) -ℚ (power-ℚ n r *ℚ r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( ap-add-ℚ refl (left-distributive-mul-diff-ℚ _ _ _))
-                  ( refl))
-          ＝
-            a *ℚ
-            ( ( one-ℚ -ℚ power-ℚ n r +ℚ
-                ((power-ℚ n r -ℚ power-ℚ (succ-ℕ n) r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( ap-add-ℚ
-                    ( refl)
-                    ( ap-diff-ℚ
-                      ( right-unit-law-mul-ℚ _)
-                      ( inv (power-succ-ℚ n r))))
-                  ( refl))
-          ＝ a *ℚ ((one-ℚ -ℚ power-ℚ (succ-ℕ n) r) *ℚ 1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( mul-right-div-Group group-add-ℚ _ _ _)
-                  ( refl))
+        binary-tr
+          ( is-limit-sequence-Metric-Space metric-space-ℚ)
+          ( inv
+            ( eq-htpy (compute-sum-standard-geometric-fin-sequence-ℚ a r r≠1)))
+          ( equational-reasoning
+            a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1) *ℚ
+            (one-ℚ -ℚ zero-ℚ)
+            ＝
+              a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1) *ℚ one-ℚ
+              by ap-mul-ℚ refl (right-zero-law-diff-ℚ _)
+            ＝
+              a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
+              by right-unit-law-mul-ℚ _)
+          ( uniformly-continuous-map-limit-sequence-Metric-Space
+            ( metric-space-ℚ)
+            ( metric-space-ℚ)
+            ( comp-uniformly-continuous-function-Metric-Space
+              ( metric-space-ℚ)
+              ( metric-space-ℚ)
+              ( metric-space-ℚ)
+              ( uniformly-continuous-left-mul-ℚ
+                ( a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
+              ( uniformly-continuous-diff-ℚ one-ℚ))
+            ( λ n → power-ℚ n r)
+            ( zero-ℚ)
+            ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))
 ```
 
 ## External links

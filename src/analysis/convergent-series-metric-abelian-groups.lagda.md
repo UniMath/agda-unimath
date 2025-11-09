@@ -36,7 +36,7 @@ associated [metric space](metric-spaces.metric-spaces.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Metric-Ab l1 l2) (σ : series-Metric-Ab G)
+  {l1 l2 : Level} {G : Metric-Ab l1 l2} (σ : series-Metric-Ab G)
   where
 
   is-sum-prop-series-Metric-Ab : type-Metric-Ab G → Prop l2
@@ -61,7 +61,7 @@ module _
 convergent-series-Metric-Ab :
   {l1 l2 : Level} (G : Metric-Ab l1 l2) → UU (l1 ⊔ l2)
 convergent-series-Metric-Ab G =
-  type-subtype (is-convergent-prop-series-Metric-Ab G)
+  type-subtype (is-convergent-prop-series-Metric-Ab {G = G})
 ```
 
 ## Properties
