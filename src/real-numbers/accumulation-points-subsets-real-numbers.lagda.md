@@ -28,7 +28,7 @@ An
 {{#concept "accumulation point" Disambiguation="of a subset of ℝ" Agda=accumulation-point-subset-ℝ}}
 of a [subset](real-numbers.subsets-real-numbers.md) `S` of the
 [real numbers](real-numbers.dedekind-real-numbers.md) is an
-[accumulation point](metric-spaces.accumulation-points-located-metric-spaces.md)
+[accumulation point](metric-spaces.accumulation-points-subsets-located-metric-spaces.md)
 of `S` in the
 [located metric space of the real numbers](real-numbers.located-metric-space-of-real-numbers.md).
 
