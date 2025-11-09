@@ -367,3 +367,17 @@ abstract
       ( preserves-dist-right-sim-ℝ y~y')
       ( preserves-dist-left-sim-ℝ x~x')
 ```
+
+### The distance from a real number to itself is 0
+
+```agda
+abstract
+  diagonal-dist-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (dist-ℝ x x) zero-ℝ
+  diagonal-dist-ℝ x =
+    similarity-reasoning-ℝ
+      dist-ℝ x x
+      ~ℝ abs-ℝ zero-ℝ
+        by preserves-sim-abs-ℝ (right-inverse-law-add-ℝ x)
+      ~ℝ zero-ℝ
+        by sim-eq-ℝ abs-zero-ℝ
+```
