@@ -12,6 +12,7 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
+open import structured-types.magmas
 open import structured-types.pointed-dependent-function-h-spaces
 open import structured-types.pointed-types
 ```
@@ -99,6 +100,9 @@ module _
     coherent-unital-mul-Pointed-Type pointed-type-pointed-function-H-Space
   coherent-unital-mul-pointed-function-H-Space =
     coherent-unital-mul-H-Space pointed-function-H-Space
+
+  magma-pointed-function-H-Space : Magma (l1 ⊔ l2)
+  magma-pointed-function-H-Space = magma-H-Space pointed-function-H-Space
 ```
 
 ## See also

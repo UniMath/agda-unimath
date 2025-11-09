@@ -19,6 +19,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.extensions-maps
 
 open import structured-types.h-spaces
+open import structured-types.magmas
 open import structured-types.noncoherent-h-spaces
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-homotopies
@@ -169,4 +170,7 @@ module _
     coherent-unital-mul-Pointed-Type pointed-type-extension-Π-H-Space
   coherent-unital-mul-extension-Π-H-Space =
     coherent-unital-mul-H-Space extension-Π-H-Space
+
+  magma-extension-Π-H-Space : Magma (l1 ⊔ l2 ⊔ l3)
+  magma-extension-Π-H-Space = magma-H-Space extension-Π-H-Space
 ```

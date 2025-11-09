@@ -13,6 +13,7 @@ open import foundation.universe-levels
 
 open import structured-types.dependent-extension-h-spaces
 open import structured-types.h-spaces
+open import structured-types.magmas
 open import structured-types.pointed-types
 ```
 
@@ -99,4 +100,7 @@ module _
     coherent-unital-mul-Pointed-Type pointed-type-extension-H-Space
   coherent-unital-mul-extension-H-Space =
     coherent-unital-mul-H-Space extension-H-Space
+
+  magma-extension-H-Space : Magma (l1 ⊔ l2 ⊔ l3)
+  magma-extension-H-Space = magma-H-Space extension-H-Space
 ```
