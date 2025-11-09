@@ -22,7 +22,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers

@@ -21,7 +21,6 @@ open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -34,7 +33,6 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers

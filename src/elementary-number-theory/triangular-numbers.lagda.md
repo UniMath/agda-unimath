@@ -35,12 +35,9 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport-along-identifications
 
 open import group-theory.abelian-groups
 open import group-theory.groups
-
-open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
@@ -48,7 +45,6 @@ open import metric-spaces.rational-sequences-approximating-zero
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import ring-theory.partial-sums-sequences-semirings
-open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 ```
 
 </details>

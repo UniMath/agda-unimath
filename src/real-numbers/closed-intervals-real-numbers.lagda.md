@@ -11,9 +11,6 @@ open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
@@ -26,7 +23,6 @@ open import foundation.universe-levels
 open import metric-spaces.closed-subsets-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 
 open import order-theory.closed-intervals-large-posets
 

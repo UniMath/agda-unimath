@@ -28,7 +28,6 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>

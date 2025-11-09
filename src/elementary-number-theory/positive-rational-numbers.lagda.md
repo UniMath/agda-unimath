@@ -15,17 +15,13 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.nonzero-rational-numbers
-open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types

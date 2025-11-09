@@ -25,10 +25,8 @@ open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
-open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers

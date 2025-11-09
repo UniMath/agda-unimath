@@ -13,13 +13,11 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
-open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.absolute-value-real-numbers
