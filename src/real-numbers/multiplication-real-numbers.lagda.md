@@ -56,6 +56,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.groups
 
 open import logic.functoriality-existential-quantification
@@ -68,8 +69,10 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -1038,62 +1041,20 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  abstract opaque
-    unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
-
-    leq-left-zero-law-mul-ℝ : leq-ℝ (zero-ℝ *ℝ x) zero-ℝ
-    leq-left-zero-law-mul-ℝ q q<0x =
-      let open do-syntax-trunc-Prop (le-ℚ-Prop q zero-ℚ)
-      in do
-        ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
-          q<[a₀,b₀][ax,bx]) ← q<0x
-        concatenate-le-leq-ℚ
-          ( q)
-          ( lower-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
-          ( zero-ℚ)
-          ( q<[a₀,b₀][ax,bx])
-          ( tr
-            ( leq-ℚ _)
-            ( left-zero-law-mul-ℚ ax)
-            ( pr1
-              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                ( [a₀,b₀])
-                ( [ax,bx])
-                ( zero-ℚ)
-                ( ax)
-                ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
-                ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
-
-    leq-left-zero-law-mul-ℝ' : leq-ℝ zero-ℝ (zero-ℝ *ℝ x)
-    leq-left-zero-law-mul-ℝ' =
-      leq-leq'-ℝ zero-ℝ (zero-ℝ *ℝ x)
-        ( λ q 0x<q →
-          let open do-syntax-trunc-Prop (le-ℚ-Prop zero-ℚ q)
-          in do
-            ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
-              [a₀,b₀][ax,bx]<q) ← 0x<q
-            concatenate-leq-le-ℚ
-              ( zero-ℚ)
-              ( upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
-              ( q)
-              ( tr
-                ( λ p →
-                  leq-ℚ p (upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx]))
-                ( left-zero-law-mul-ℚ ax)
-                ( pr2
-                  ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                    ( [a₀,b₀])
-                    ( [ax,bx])
-                    ( zero-ℚ)
-                    ( ax)
-                    ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
-                    ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
-              ( [a₀,b₀][ax,bx]<q))
-
   abstract
     left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
     left-zero-law-mul-ℝ =
-      sim-sim-leq-ℝ (leq-left-zero-law-mul-ℝ , leq-left-zero-law-mul-ℝ')
+      inv-tr
+        ( λ y → sim-ℝ y zero-ℝ)
+        ( is-zero-is-idempotent-Ab
+          ( ab-add-ℝ l)
+          ( equational-reasoning
+            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
+            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
+              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
+            ＝ zero-ℝ *ℝ x
+              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
 
     right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
     right-zero-law-mul-ℝ =
