@@ -35,7 +35,6 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import real-numbers.raising-universe-levels-real-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -75,12 +74,13 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
