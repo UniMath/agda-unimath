@@ -12,7 +12,6 @@ module real-numbers.inequality-positive-real-numbers where
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.positive-real-numbers
 ```

@@ -13,10 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-integer-fractions
-open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
@@ -26,7 +23,6 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integer-fractions
@@ -36,7 +32,6 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -153,19 +148,15 @@ abstract
 ### Strict inequality on the rationals is transitive
 
 ```agda
-module _
-  (x y z : ℚ)
-  where
+abstract opaque
+  unfolding le-ℚ-Prop
 
-  opaque
-    unfolding le-ℚ-Prop
-
-    transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
-    transitive-le-ℚ =
-      transitive-le-fraction-ℤ
-        ( fraction-ℚ x)
-        ( fraction-ℚ y)
-        ( fraction-ℚ z)
+  transitive-le-ℚ : (x y z : ℚ) → le-ℚ y z → le-ℚ x y → le-ℚ x z
+  transitive-le-ℚ x y z =
+    transitive-le-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ y)
+      ( fraction-ℚ z)
 ```
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers
@@ -302,7 +293,7 @@ module _
 
 ```agda
 module _
-  (x y : ℤ)
+  {x y : ℤ}
   where
 
   opaque
@@ -327,12 +318,12 @@ module _
 
 ```agda
 module _
-  (m n : ℕ)
+  {m n : ℕ}
   where
 
   abstract
     iff-le-rational-ℕ : le-ℕ m n ↔ le-ℚ (rational-ℕ m) (rational-ℕ n)
-    iff-le-rational-ℕ = iff-le-rational-ℤ _ _ ∘iff iff-le-int-ℕ m n
+    iff-le-rational-ℕ = iff-le-rational-ℤ ∘iff iff-le-int-ℕ m n
 
     preserves-le-rational-ℕ : le-ℕ m n → le-ℚ (rational-ℕ m) (rational-ℕ n)
     preserves-le-rational-ℕ = forward-implication iff-le-rational-ℕ
@@ -349,9 +340,7 @@ module _
   where
 
   opaque
-    unfolding add-ℚ
-    unfolding le-ℚ-Prop
-    unfolding neg-ℚ
+    unfolding add-ℚ le-ℚ-Prop neg-ℚ
 
     iff-translate-diff-le-zero-ℚ : le-ℚ zero-ℚ (y -ℚ x) ↔ le-ℚ x y
     iff-translate-diff-le-zero-ℚ =
@@ -483,8 +472,7 @@ module _
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop
-  unfolding leq-ℚ-Prop
+  unfolding le-ℚ-Prop leq-ℚ-Prop
 
   decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
   decide-le-leq-ℚ x y =
@@ -531,12 +519,11 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
-  opaque
-    unfolding le-ℚ-Prop
-    unfolding mediant-ℚ
+  abstract opaque
+    unfolding le-ℚ-Prop mediant-ℚ
 
     le-left-mediant-ℚ : le-ℚ x (mediant-ℚ x y)
     le-left-mediant-ℚ =
@@ -555,7 +542,7 @@ module _
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (x<y : le-ℚ x y)
   where
 
   abstract
@@ -563,7 +550,7 @@ module _
     dense-le-ℚ =
       intro-exists
         ( mediant-ℚ x y)
-        ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
+        ( le-left-mediant-ℚ x<y , le-right-mediant-ℚ x<y)
 ```
 
 ### Strict inequality on the rational numbers is located

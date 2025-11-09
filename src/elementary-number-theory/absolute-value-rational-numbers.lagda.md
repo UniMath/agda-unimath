@@ -177,7 +177,7 @@ abstract
         ( q)
         ( rational-abs-ℚ q)
         ( zero-ℚ)
-        ( leq-eq-ℚ _ _ (ap rational-ℚ⁰⁺ abs=0))
+        ( leq-eq-ℚ (ap rational-ℚ⁰⁺ abs=0))
         ( leq-abs-ℚ q))
       ( binary-tr
         ( leq-ℚ)
