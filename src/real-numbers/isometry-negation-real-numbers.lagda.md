@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -122,4 +123,22 @@ module _
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l1)
   isometry-neg-ℝ = (neg-ℝ , is-isometry-neg-ℝ)
+```
+
+### Negation on the real numbers is short
+
+```agda
+abstract
+  is-short-neg-ℝ :
+    {l : Level} →
+    is-short-function-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-ℝ l)
+      ( neg-ℝ)
+  is-short-neg-ℝ =
+    is-short-is-isometry-Metric-Space
+      ( metric-space-ℝ _)
+      ( metric-space-ℝ _)
+      ( neg-ℝ)
+      ( is-isometry-neg-ℝ)
 ```

@@ -38,7 +38,7 @@ open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequalities-addition-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -66,6 +66,10 @@ module _
 apart-le-ℝ :
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → apart-ℝ x y
 apart-le-ℝ = inl-disjunction
+
+apart-le-ℝ' :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ y x → apart-ℝ x y
+apart-le-ℝ' = inr-disjunction
 ```
 
 ## Properties
