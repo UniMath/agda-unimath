@@ -179,26 +179,26 @@ module _
   (x : type-Located-Metric-Space X)
   where
 
-  is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space :
+  is-sequence-approaching-point-prop-subset-Located-Metric-Space :
     subtype l2 (sequence (type-subtype S))
-  is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space a =
+  is-sequence-approaching-point-prop-subset-Located-Metric-Space a =
     Π-Prop ℕ (λ n → apart-prop-Located-Metric-Space X (pr1 (a n)) x) ∧
     is-limit-prop-sequence-Metric-Space
       ( metric-space-Located-Metric-Space X)
       ( pr1 ∘ a)
       ( x)
 
-  is-sequence-accumulating-to-point-subset-Located-Metric-Space :
+  is-sequence-approaching-point-subset-Located-Metric-Space :
     sequence (type-subtype S) → UU l2
-  is-sequence-accumulating-to-point-subset-Located-Metric-Space =
+  is-sequence-approaching-point-subset-Located-Metric-Space =
     is-in-subtype
-      ( is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space)
+      ( is-sequence-approaching-point-prop-subset-Located-Metric-Space)
 
   is-sequential-accumulation-point-prop-subset-Located-Metric-Space :
     Prop (l1 ⊔ l2 ⊔ l3)
   is-sequential-accumulation-point-prop-subset-Located-Metric-Space =
     ∃ ( sequence (type-subtype S))
-      ( is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space)
+      ( is-sequence-approaching-point-prop-subset-Located-Metric-Space)
 
   is-sequential-accumulation-point-subset-Located-Metric-Space :
     UU (l1 ⊔ l2 ⊔ l3)

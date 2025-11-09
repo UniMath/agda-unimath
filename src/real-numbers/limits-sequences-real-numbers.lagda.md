@@ -10,6 +10,7 @@ module real-numbers.limits-sequences-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -47,6 +48,23 @@ is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
 
 ## Properties
+
+### Any two limits of a sequence of real numbers are equal
+
+```agda
+module _
+  {l : Level}
+  (σ : sequence (ℝ l))
+  where
+
+  abstract
+    eq-is-limit-sequence-ℝ :
+      (a b : ℝ l) → is-limit-sequence-ℝ σ a → is-limit-sequence-ℝ σ b → a ＝ b
+    eq-is-limit-sequence-ℝ =
+      eq-limit-sequence-Metric-Space
+        ( metric-space-ℝ l)
+        ( σ)
+```
 
 ### If two sequences have a limit, their sum has a limit equal to the sum of the limits
 
