@@ -25,7 +25,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequalities-addition-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
