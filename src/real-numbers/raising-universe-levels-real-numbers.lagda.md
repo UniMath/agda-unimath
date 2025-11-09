@@ -28,9 +28,6 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-of-rational-numbers
-
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers

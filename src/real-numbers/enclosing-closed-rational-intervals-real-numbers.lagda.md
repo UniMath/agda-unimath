@@ -10,7 +10,6 @@ module real-numbers.enclosing-closed-rational-intervals-real-numbers where
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.interior-closed-intervals-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types

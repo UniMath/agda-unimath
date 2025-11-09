@@ -11,25 +11,20 @@ module real-numbers.isometry-addition-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
-open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>

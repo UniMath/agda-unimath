@@ -12,14 +12,10 @@ module real-numbers.lipschitz-continuity-multiplication-real-numbers where
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
@@ -28,14 +24,11 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets
 
-open import real-numbers.absolute-value-closed-intervals-real-numbers
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
-open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
-open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers

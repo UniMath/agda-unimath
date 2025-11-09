@@ -7,19 +7,12 @@ module real-numbers.similarity-nonnegative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>

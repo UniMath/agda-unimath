@@ -7,26 +7,17 @@ module real-numbers.similarity-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.strict-inequality-rational-numbers
-
-open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.similarity-subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import order-theory.large-posets
 open import order-theory.large-preorders
-open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
 ```

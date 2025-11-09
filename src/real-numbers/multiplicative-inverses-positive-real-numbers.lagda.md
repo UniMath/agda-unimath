@@ -12,9 +12,7 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.maximum-positive-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
-open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
@@ -39,7 +37,6 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
