@@ -26,7 +26,6 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers

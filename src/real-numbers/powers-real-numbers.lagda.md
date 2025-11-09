@@ -24,7 +24,6 @@ open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications

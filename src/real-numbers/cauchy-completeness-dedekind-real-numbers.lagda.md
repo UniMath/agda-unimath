@@ -21,7 +21,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.functoriality-disjunction
@@ -34,19 +33,16 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 
-open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers

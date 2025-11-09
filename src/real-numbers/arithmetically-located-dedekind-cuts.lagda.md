@@ -27,7 +27,6 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -37,7 +36,6 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
