@@ -23,6 +23,8 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.apartness-located-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
@@ -38,7 +40,7 @@ open import metric-spaces.subspaces-metric-spaces
 ## Idea
 
 An
-{{#concept "accumulation point" WDID=Q858223 WD="limit point" Disambiguation="of a metric space" Agda=accumulation-point-Metric-Space}}
+{{#concept "accumulation point" WDID=Q858223 WD="limit point" Disambiguation="of a metric space" Agda=accumulation-point-subset-Located-Metric-Space}}
 of a subset `S` of a
 [located metric space](metric-spaces.located-metric-spaces.md) `X` is a point
 `x : X` such that there exists a
@@ -164,6 +166,65 @@ module _
               y∈S))
 ```
 
-### To show `x` is an accumulation point of a subset `S` of a located metric space, it suffices to exhibit a sequence in `S` apart from `x` with limit `x`
+### The property of being a sequential accumulation point
 
-This remains to be shown.
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  (x : type-Located-Metric-Space X)
+  where
+
+  is-sequential-accumulation-point-prop-subset-Located-Metric-Space :
+    Prop (l1 ⊔ l2 ⊔ l3)
+  is-sequential-accumulation-point-prop-subset-Located-Metric-Space =
+    ∃ ( sequence (type-subtype S))
+      ( λ a →
+        Π-Prop ℕ (λ n → apart-prop-Located-Metric-Space X (pr1 (a n)) x) ∧
+        is-limit-prop-sequence-Metric-Space
+          ( metric-space-Located-Metric-Space X)
+          ( pr1 ∘ a)
+          ( x))
+
+  is-sequential-accumulation-point-subset-Located-Metric-Space :
+    UU (l1 ⊔ l2 ⊔ l3)
+  is-sequential-accumulation-point-subset-Located-Metric-Space =
+    type-Prop is-sequential-accumulation-point-prop-subset-Located-Metric-Space
+```
+
+### If `x` is an accumulation point of `S`, it is a sequential accumulation point of `S`
+
+The converse has yet to be proved.
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  (x : type-Located-Metric-Space X)
+  where
+
+  abstract
+    is-sequential-accumulation-point-is-accumulation-point-subset-Located-Metric-Space :
+      is-accumulation-point-subset-Located-Metric-Space X S x →
+      is-sequential-accumulation-point-subset-Located-Metric-Space X S x
+    is-sequential-accumulation-point-is-accumulation-point-subset-Located-Metric-Space =
+      map-exists
+        ( _)
+        ( map-cauchy-sequence-cauchy-approximation-Metric-Space
+          ( subspace-Located-Metric-Space X S))
+        ( λ a (a#x , lim-a=x) →
+          ( ( λ n → a#x _) ,
+            is-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+              ( metric-space-Located-Metric-Space X)
+              ( map-short-function-cauchy-approximation-Metric-Space
+                ( subspace-Located-Metric-Space X S)
+                ( metric-space-Located-Metric-Space X)
+                ( short-inclusion-subspace-Metric-Space
+                  ( metric-space-Located-Metric-Space X)
+                  ( S))
+                ( a))
+              ( x)
+              ( lim-a=x)))
+```
