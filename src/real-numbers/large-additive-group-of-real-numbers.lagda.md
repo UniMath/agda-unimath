@@ -9,10 +9,8 @@ module real-numbers.large-additive-group-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels

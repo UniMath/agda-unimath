@@ -13,10 +13,7 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
-open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
-open import elementary-number-theory.inequality-integer-fractions
-open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
@@ -26,7 +23,6 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integer-fractions
@@ -36,7 +32,6 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions

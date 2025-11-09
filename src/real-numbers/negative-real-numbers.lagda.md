@@ -10,7 +10,6 @@ module real-numbers.negative-real-numbers where
 
 ```agda
 open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification

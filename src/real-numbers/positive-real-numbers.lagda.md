@@ -9,15 +9,11 @@ module real-numbers.positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -33,11 +29,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-
 open import real-numbers.addition-real-numbers
-open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers

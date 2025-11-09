@@ -17,7 +17,6 @@ open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-nonnegative-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -27,7 +26,6 @@ open import foundation.empty-types
 open import foundation.identity-types
 
 open import group-theory.powers-of-elements-commutative-monoids
-open import group-theory.powers-of-elements-monoids
 ```
 
 </details>
