@@ -30,6 +30,7 @@ open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negated-equality
