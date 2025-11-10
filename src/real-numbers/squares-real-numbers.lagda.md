@@ -32,7 +32,9 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
@@ -303,4 +305,52 @@ abstract opaque
             ( λ r → leq-ℚ r (q *ℚ q))
             ( upper-bound-square-even-interval-ℚ [-q,q] refl)
             ( refl-leq-ℚ (q *ℚ q))))
+```
+
+### `(a + b)² = a² + 2ab + b²`
+
+```agda
+abstract
+  square-add-ℝ :
+    {l1 : Level} {l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    square-ℝ (x +ℝ y) ＝ square-ℝ x +ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
+  square-add-ℝ x y =
+    equational-reasoning
+      square-ℝ (x +ℝ y)
+      ＝ (x +ℝ y) *ℝ x +ℝ (x +ℝ y) *ℝ y
+        by left-distributive-mul-add-ℝ (x +ℝ y) x y
+      ＝ (x *ℝ x +ℝ y *ℝ x) +ℝ (x *ℝ y +ℝ y *ℝ y)
+        by
+          ap-add-ℝ
+            ( right-distributive-mul-add-ℝ x y x)
+            ( right-distributive-mul-add-ℝ x y y)
+      ＝ (x *ℝ x +ℝ x *ℝ y) +ℝ (x *ℝ y +ℝ y *ℝ y)
+        by ap-add-ℝ (ap-add-ℝ refl (commutative-mul-ℝ y x)) refl
+      ＝ ((x *ℝ x +ℝ x *ℝ y) +ℝ x *ℝ y) +ℝ y *ℝ y
+        by inv (associative-add-ℝ _ _ _)
+      ＝ x *ℝ x +ℝ (x *ℝ y +ℝ x *ℝ y) +ℝ y *ℝ y
+        by ap-add-ℝ (associative-add-ℝ _ _ _) refl
+      ＝ square-ℝ x +ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
+        by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 (x *ℝ y)))) refl
+```
+
+### `(a - b)² = a² - 2ab + b²`
+
+```agda
+abstract
+  square-diff-ℝ :
+    {l1 : Level} {l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    square-ℝ (x -ℝ y) ＝ square-ℝ x -ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
+  square-diff-ℝ x y =
+    equational-reasoning
+      square-ℝ (x -ℝ y)
+      ＝ square-ℝ x +ℝ real-ℕ 2 *ℝ (x *ℝ neg-ℝ y) +ℝ square-ℝ (neg-ℝ y)
+        by square-add-ℝ x (neg-ℝ y)
+      ＝ square-ℝ x +ℝ real-ℕ 2 *ℝ neg-ℝ (x *ℝ y) +ℝ square-ℝ y
+        by
+          ap-add-ℝ
+            ( ap-add-ℝ refl (ap-mul-ℝ refl (right-negative-law-mul-ℝ x y)))
+            ( square-neg-ℝ y)
+      ＝ square-ℝ x -ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
+        by ap-add-ℝ (ap-add-ℝ refl (right-negative-law-mul-ℝ _ _)) refl
 ```

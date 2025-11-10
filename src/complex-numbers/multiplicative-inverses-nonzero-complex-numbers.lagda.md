@@ -8,7 +8,7 @@ module complex-numbers.multiplicative-inverses-nonzero-complex-numbers where
 
 ```agda
 open import complex-numbers.complex-numbers
--- open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.magnitude-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
 open import complex-numbers.nonzero-complex-numbers

@@ -60,6 +60,7 @@ open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
+open import real-numbers.multiplication-nonzero-real-numbers public
 open import real-numbers.multiplication-positive-and-negative-real-numbers public
 open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
