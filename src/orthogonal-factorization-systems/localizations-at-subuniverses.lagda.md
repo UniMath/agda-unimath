@@ -31,7 +31,7 @@ at `P`, or **`P`-localization**, is a type `Y` in `P` and a `P`-equivalence
 ```
 
 is an [equivalence](foundation-core.equivalences.md). In other words, every type
-in `P` is `η`[-local](orthogonal-factorization-systems.types-local-at-maps.md).
+in `P` is `η`-[local](orthogonal-factorization-systems.types-local-at-maps.md).
 
 ## Definition
 
