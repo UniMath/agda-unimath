@@ -152,38 +152,6 @@ module _
     emb-subtype (is-subuniverse-connected-map-Prop K)
 ```
 
-### The type of `K`-connected maps into a type
-
-```agda
-Subuniverse-Connected-Map :
-  {l1 l2 l3 : Level} (l4 : Level) (K : subuniverse l1 l2) (A : UU l3) →
-  UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
-Subuniverse-Connected-Map l2 K A = Σ (UU l2) (subuniverse-connected-map K A)
-
-module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
-  {A : UU l3} (f : Subuniverse-Connected-Map l4 K A)
-  where
-
-  type-Subuniverse-Connected-Map : UU l4
-  type-Subuniverse-Connected-Map = pr1 f
-
-  subuniverse-connected-map-Subuniverse-Connected-Map :
-    subuniverse-connected-map K A type-Subuniverse-Connected-Map
-  subuniverse-connected-map-Subuniverse-Connected-Map = pr2 f
-
-  map-Subuniverse-Connected-Map : A → type-Subuniverse-Connected-Map
-  map-Subuniverse-Connected-Map =
-    map-subuniverse-connected-map K
-      ( subuniverse-connected-map-Subuniverse-Connected-Map)
-
-  is-subuniverse-connected-map-Subuniverse-Connected-Map :
-    is-subuniverse-connected-map K map-Subuniverse-Connected-Map
-  is-subuniverse-connected-map-Subuniverse-Connected-Map =
-    is-subuniverse-connected-map-subuniverse-connected-map K
-      ( subuniverse-connected-map-Subuniverse-Connected-Map)
-```
-
 ### The extension condition of `K`-connected maps
 
 ```agda
@@ -587,63 +555,6 @@ module _
     htpy-subuniverse-connected-map f g → (f ＝ g)
   eq-htpy-subuniverse-connected-map f g =
     map-inv-equiv (extensionality-subuniverse-connected-map f g)
-```
-
-### Characterization of the identity type of `Subuniverse-Connected-Map l4 K A`
-
-```agda
-equiv-Subuniverse-Connected-Map :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} →
-  (f g : Subuniverse-Connected-Map l4 K A) → UU (l3 ⊔ l4)
-equiv-Subuniverse-Connected-Map K f g =
-  Σ ( type-Subuniverse-Connected-Map K f ≃ type-Subuniverse-Connected-Map K g)
-    ( λ e →
-      map-equiv e ∘ map-Subuniverse-Connected-Map K f ~
-      map-Subuniverse-Connected-Map K g)
-
-module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3}
-  (f : Subuniverse-Connected-Map l4 K A)
-  where
-
-  id-equiv-Subuniverse-Connected-Map : equiv-Subuniverse-Connected-Map K f f
-  id-equiv-Subuniverse-Connected-Map = (id-equiv , refl-htpy)
-
-  is-torsorial-equiv-Subuniverse-Connected-Map :
-    is-torsorial (equiv-Subuniverse-Connected-Map K f)
-  is-torsorial-equiv-Subuniverse-Connected-Map =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-Subuniverse-Connected-Map K f))
-      ( type-Subuniverse-Connected-Map K f , id-equiv)
-      ( is-torsorial-htpy-subuniverse-connected-map K
-        ( subuniverse-connected-map-Subuniverse-Connected-Map K f))
-
-  equiv-eq-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l4 K A) →
-    f ＝ g → equiv-Subuniverse-Connected-Map K f g
-  equiv-eq-Subuniverse-Connected-Map .f refl =
-    id-equiv-Subuniverse-Connected-Map
-
-  is-equiv-equiv-eq-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l4 K A) →
-    is-equiv (equiv-eq-Subuniverse-Connected-Map g)
-  is-equiv-equiv-eq-Subuniverse-Connected-Map =
-    fundamental-theorem-id
-      ( is-torsorial-equiv-Subuniverse-Connected-Map)
-      ( equiv-eq-Subuniverse-Connected-Map)
-
-  extensionality-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l4 K A) →
-    (f ＝ g) ≃ equiv-Subuniverse-Connected-Map K f g
-  extensionality-Subuniverse-Connected-Map g =
-    ( equiv-eq-Subuniverse-Connected-Map g ,
-      is-equiv-equiv-eq-Subuniverse-Connected-Map g)
-
-  eq-equiv-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l4 K A) →
-    equiv-Subuniverse-Connected-Map K f g → f ＝ g
-  eq-equiv-Subuniverse-Connected-Map g =
-    map-inv-equiv (extensionality-Subuniverse-Connected-Map g)
 ```
 
 ### All maps are `Contr`-connected
