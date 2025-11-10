@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.subuniverse-connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-types
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -61,9 +62,9 @@ open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 
+open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
 open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.relative-separations-types-subuniverses
 open import orthogonal-factorization-systems.subuniverse-equivalences
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -100,24 +101,25 @@ Equivalently, a `K`-connected map `f : A → B` is a map that is
 ### The predicate on maps of being `K`-connected
 
 ```agda
-is-subuniverse-connected-map-Prop :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2} →
-  (A → B) → Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
-is-subuniverse-connected-map-Prop K {B = B} f =
-  Π-Prop (B → type-subuniverse K) λ U → is-equiv-Prop (precomp-Π f (pr1 ∘ U))
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  (f : A → B)
+  where
 
-is-subuniverse-connected-map :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2} →
-  (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
-is-subuniverse-connected-map K {B = B} f =
-  (U : B → type-subuniverse K) → is-equiv (precomp-Π f (pr1 ∘ U))
+  is-subuniverse-connected-map-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map-Prop =
+    Π-Prop
+      ( B → type-subuniverse K)
+      ( λ U → is-equiv-Prop (precomp-Π f (pr1 ∘ U)))
 
-is-prop-is-subuniverse-connected-map :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-subuniverse-connected-map K f)
-is-prop-is-subuniverse-connected-map K f =
-  is-prop-type-Prop (is-subuniverse-connected-map-Prop K f)
+  is-subuniverse-connected-map : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map =
+    (U : B → type-subuniverse K) → is-equiv (precomp-Π f (pr1 ∘ U))
+
+  is-prop-is-subuniverse-connected-map :
+    is-prop is-subuniverse-connected-map
+  is-prop-is-subuniverse-connected-map =
+    is-prop-type-Prop is-subuniverse-connected-map-Prop
 ```
 
 ### The type of `K`-connected maps between two types
@@ -179,6 +181,33 @@ module _
   is-subuniverse-connected-map-Subuniverse-Connected-Map =
     is-subuniverse-connected-map-subuniverse-connected-map K
       ( subuniverse-connected-map-Subuniverse-Connected-Map)
+```
+
+### The extension condition of `K`-connected maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-subuniverse-connected-map-extension-condition :
+    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map-extension-condition =
+    (U : B → type-subuniverse K) (u : (x : A) → pr1 (U (f x))) →
+    is-contr (extension-dependent-type f (pr1 ∘ U) u)
+
+  abstract
+    is-prop-is-subuniverse-connected-map-extension-condition :
+      is-prop is-subuniverse-connected-map-extension-condition
+    is-prop-is-subuniverse-connected-map-extension-condition =
+      is-prop-Π (λ U → is-prop-Π (λ u → is-property-is-contr))
+
+  is-subuniverse-connected-map-extension-condition-Prop :
+    Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map-extension-condition-Prop =
+    ( is-subuniverse-connected-map-extension-condition ,
+      is-prop-is-subuniverse-connected-map-extension-condition)
 ```
 
 ## Properties
@@ -253,13 +282,13 @@ sections and the fibers have `K`-localizations.
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (Kfib : B → UU l3) (η : (b : B) → fiber f b → Kfib b)
-  ( is-htpy-injective-precomp-η-Kfib :
-      (b : B) {g h : Kfib b → Kfib b} →
-      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
+  (is-htpy-injective-precomp-η-Kfib :
+    (b : B) {g h : Kfib b → Kfib b} →
+    precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
   where
 
   is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' :
-    ( fiber-Π-precomp-Π' f Kfib (λ a → η (f a) (a , refl))) →
+    ( dependent-product-fiber-precomp-Π' f Kfib (λ a → η (f a) (a , refl))) →
     ((b : B) → is-contr (Kfib b))
   is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' Fη b =
       ( pr1 (Fη b) ,
@@ -338,18 +367,20 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (Kfib : B → UU l3)
   (η : (b : B) → fiber f b → Kfib b)
-  ( is-htpy-injective-precomp-η-Kfib :
-      (b : B) {g h : Kfib b → Kfib b} →
-      precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
+  (is-htpy-injective-precomp-η-Kfib :
+    (b : B) {g h : Kfib b → Kfib b} →
+    precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
   where
 
   abstract
-    is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π' :
+    is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π' :
       ( (b : B) →
         is-inhabited
-          ( family-fiber-Π-precomp-Π' f Kfib (λ a → η (f a) (a , refl)) b)) →
+          ( family-dependent-product-fiber-precomp-Π' f Kfib
+            ( λ a → η (f a) (a , refl))
+            ( b))) →
       ((b : B) → is-contr (Kfib b))
-    is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π'
+    is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π'
       Fη b =
       rec-trunc-Prop
         ( is-contr-Prop (Kfib b))
@@ -377,16 +408,16 @@ module _
   (Kfib : (b : B) → subuniverse-localization K (fiber f b))
   where
 
-  is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π :
+  is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π :
     ( (b : B) →
       is-inhabited
-        ( family-fiber-Π-precomp-Π' f
+        ( family-dependent-product-fiber-precomp-Π' f
           ( type-subuniverse-localization K ∘ Kfib)
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
           ( b))) →
     ((b : B) → is-contr (type-subuniverse-localization K (Kfib b)))
-  is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π =
-    is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π'
+  is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π =
+    is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π'
       ( f)
       ( type-subuniverse-localization K ∘ Kfib)
       ( unit-subuniverse-localization K ∘ Kfib)
@@ -397,15 +428,15 @@ module _
               ( type-subuniverse-subuniverse-localization K (Kfib b)))
             ( eq-htpy H)))
 
-  is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π :
+  is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-dependent-product-fiber-precomp-Π :
     ( (b : B) →
       is-inhabited
-        ( family-fiber-Π-precomp-Π' f
+        ( family-dependent-product-fiber-precomp-Π' f
           ( type-subuniverse-localization K ∘ Kfib)
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
           ( b))) →
     (b : B) → is-subuniverse-equiv K (terminal-map (fiber f b))
-  is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π
+  is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-dependent-product-fiber-precomp-Π
     s b =
     is-subuniverse-equiv-comp K
       ( terminal-map (type-subuniverse-localization K (Kfib b)))
@@ -414,20 +445,21 @@ module _
       ( is-subuniverse-equiv-is-equiv K
         ( terminal-map (type-subuniverse-localization K (Kfib b)))
         ( is-equiv-terminal-map-is-contr
-          ( is-contr-subuniverse-localization-fiber-is-inhabited-family-fiber-Π-precomp-Π
+          ( is-contr-subuniverse-localization-fiber-is-inhabited-family-dependent-product-fiber-precomp-Π
             s b)))
 
-  is-subuniverse-connected-map-is-inhabited-family-fiber-Π-precomp-Π :
+  is-subuniverse-connected-map-is-inhabited-family-dependent-product-fiber-precomp-Π :
     ( (b : B) →
       is-inhabited
-        ( family-fiber-Π-precomp-Π' f
+        ( family-dependent-product-fiber-precomp-Π' f
           ( type-subuniverse-localization K ∘ Kfib)
           ( λ a → unit-subuniverse-localization K (Kfib (f a)) (a , refl))
           ( b))) →
     is-subuniverse-connected-map K f
-  is-subuniverse-connected-map-is-inhabited-family-fiber-Π-precomp-Π Fη =
+  is-subuniverse-connected-map-is-inhabited-family-dependent-product-fiber-precomp-Π
+    Fη =
     is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
-      ( is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-fiber-Π-precomp-Π
+      ( is-subuniverse-equiv-terminal-map-fibers-is-inhabited-family-dependent-product-fiber-precomp-Π
         ( Fη))
 
   is-contr-subuniverse-localization-fiber-is-surjective-precomp-Π :
@@ -468,6 +500,41 @@ module _
       ( is-subuniverse-equiv-terminal-map-fibers-is-surjective-precomp-Π H)
 ```
 
+#### Extension condition for `K`-connected maps
+
+A map `f : A → B` is `K`-connected if and only if, for every `K`-valued family
+`U` over `B` and every map `u : (x : A) → U (f x)`, the type of dependent
+extensions of `u` along `f` is contractible.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition :
+    is-subuniverse-connected-map-extension-condition K f →
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition
+    H U =
+    is-equiv-is-contr-map
+      ( λ u →
+        is-contr-equiv
+          ( extension-dependent-type f (pr1 ∘ U) u)
+          ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
+          ( H U u))
+
+  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map :
+    is-subuniverse-connected-map K f →
+    is-subuniverse-connected-map-extension-condition K f
+  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map
+    H U u =
+    is-contr-equiv'
+      ( fiber (precomp-Π f (pr1 ∘ U)) u)
+      ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
+      ( is-contr-map-is-equiv (H U) u)
+```
+
 ### Characterizing equality of `K`-connected maps
 
 ```agda
@@ -498,8 +565,7 @@ module _
   htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     f ＝ g → htpy-subuniverse-connected-map f g
-  htpy-eq-subuniverse-connected-map f .f refl =
-    refl-htpy-subuniverse-connected-map f
+  htpy-eq-subuniverse-connected-map f g H = htpy-eq (ap pr1 H)
 
   is-equiv-htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
@@ -762,12 +828,6 @@ module _
       ( map-Π (λ i → precomp-Π (f i) (pr1 ∘ U ∘ (i ,_))))
       ( equiv-ev-pair , equiv-ev-pair , refl-htpy)
       ( is-equiv-map-Π-is-fiberwise-equiv (λ i → H i (U ∘ (i ,_))))
-
-  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot :
-  --   is-subuniverse-connected-map K (tot f) →
-  --   (x : A) → is-subuniverse-connected-map K (f x)
-  -- is-fiberwise-subuniverse-connected-map-is-subuniverse-connected-map-tot H = {!   !}
-  --   -- is-subuniverse-connected-equiv (inv-compute-fiber-tot f (x , y)) (H (x , y))
 ```
 
 ### Coproducts of `K`-connected maps
@@ -828,3 +888,7 @@ module _
       ( is-subuniverse-connected-map-subuniverse-connected-map K f
         ( λ y → ((P y → pr1 U) , H (P y) U)))
 ```
+
+## References
+
+{{#bibliography}}

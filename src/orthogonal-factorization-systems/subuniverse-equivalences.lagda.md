@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.precomposition-functions-into-subuniverses
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types
@@ -37,6 +38,8 @@ open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -87,7 +90,62 @@ module _
   is-subuniverse-equiv-subuniverse-equiv = pr2 f
 ```
 
+### The extension condition for subuniverse equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
+  where
+
+  is-subuniverse-equiv-extension-condition : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-subuniverse-equiv-extension-condition =
+    (U : type-subuniverse K) (u : A → pr1 U) → is-contr (extension f u)
+
+  is-prop-is-subuniverse-equiv-extension-condition :
+    is-prop is-subuniverse-equiv-extension-condition
+  is-prop-is-subuniverse-equiv-extension-condition =
+    is-prop-Π (λ U → is-prop-Π (λ u → is-property-is-contr))
+
+  is-subuniverse-equiv-extension-condition-Prop : Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-subuniverse-equiv-extension-condition-Prop =
+    ( is-subuniverse-equiv-extension-condition ,
+      is-prop-is-subuniverse-equiv-extension-condition)
+```
+
 ## Properties
+
+### A map is a `K`-equivalence if and only if it satisfies the extension condition
+
+A map `f : A → B` is a `K`-equivalence if and only if, for every `U` in `K` and
+every map `u : A → U`, the type of extensions of `u` along `f` is contractible.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
+  where abstract
+
+  is-subuniverse-equiv-is-subuniverse-equiv-extension-condition :
+    is-subuniverse-equiv-extension-condition K f →
+    is-subuniverse-equiv K f
+  is-subuniverse-equiv-is-subuniverse-equiv-extension-condition H U =
+    is-equiv-is-contr-map
+      ( λ u →
+        is-contr-equiv
+          ( extension f u)
+          ( compute-extension-fiber-precomp f u)
+          ( H U u))
+
+  is-subuniverse-equiv-extension-condition-is-subuniverse-equiv :
+    is-subuniverse-equiv K f →
+    is-subuniverse-equiv-extension-condition K f
+  is-subuniverse-equiv-extension-condition-is-subuniverse-equiv H U u =
+    is-contr-equiv'
+      ( fiber (precomp f (pr1 U)) u)
+      ( compute-extension-fiber-precomp f u)
+      ( is-contr-map-is-equiv (H U) u)
+```
 
 ### Equivalences are `K`-equivalences for all `K`
 
@@ -289,11 +347,8 @@ module _
 
 ## References
 
-- The notion of `K`-equivalence is a special case of the notion of
+- The notion of `K`-equivalence is a generalization of the notion of
   `L`-equivalence, where `L` is a reflective subuniverse. These were studied in
-  {{#cite CORS20}}.
-- The class of `K`-equivalences is
-  [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to the
-  class of `K`-étale maps. This was shown in {{#cite CR21}}.
+  {{#cite CORS20}} and {{#cite CR21}}.
 
 {{#bibliography}}
