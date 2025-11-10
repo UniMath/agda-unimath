@@ -357,6 +357,6 @@ abstract
   leq-left-mul-leq-one-ℚ⁺ p⁺@(p , _) p≤1 q⁺@(q , _) =
     trichotomy-le-ℚ p one-ℚ
       ( λ p<1 → leq-le-ℚ (le-left-mul-less-than-one-ℚ⁺ p⁺ p<1 q⁺))
-      ( λ p=1 → leq-eq-ℚ _ _ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
+      ( λ p=1 → leq-eq-ℚ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
       ( λ 1<p → ex-falso (not-leq-le-ℚ one-ℚ p 1<p p≤1))
 ```

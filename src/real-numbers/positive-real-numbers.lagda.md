@@ -9,36 +9,29 @@ module real-numbers.positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-open import group-theory.groups
-
 open import real-numbers.addition-real-numbers
-open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -80,6 +73,17 @@ is-positive-real-ℝ⁺ = pr2
 
 ## Properties
 
+### Positivity is preserved by similarity
+
+```agda
+abstract
+  is-positive-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    is-positive-ℝ x → sim-ℝ x y → is-positive-ℝ y
+  is-positive-sim-ℝ {x = x} {y = y} 0<x x~y =
+    preserves-le-right-sim-ℝ zero-ℝ x y x~y 0<x
+```
+
 ### Dedekind cuts of positive real numbers
 
 ```agda
@@ -110,7 +114,7 @@ is-rounded-upper-cut-ℝ⁺ :
 is-rounded-upper-cut-ℝ⁺ (x , _) = is-rounded-upper-cut-ℝ x
 
 le-lower-upper-cut-ℝ⁺ :
-  {l : Level} (x : ℝ⁺ l) (p q : ℚ) →
+  {l : Level} (x : ℝ⁺ l) {p q : ℚ} →
   is-in-lower-cut-ℝ⁺ x p → is-in-upper-cut-ℝ⁺ x q → le-ℚ p q
 le-lower-upper-cut-ℝ⁺ (x , _) = le-lower-upper-cut-ℝ x
 ```
@@ -132,8 +136,7 @@ module _
   abstract
     is-positive-iff-zero-in-lower-cut-ℝ :
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-    is-positive-iff-zero-in-lower-cut-ℝ =
-      inv-iff (le-real-iff-lower-cut-ℚ zero-ℚ x)
+    is-positive-iff-zero-in-lower-cut-ℝ = inv-iff (le-real-iff-lower-cut-ℚ x)
 
     is-positive-zero-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
@@ -153,7 +156,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℝ real-ℚ
 
     exists-ℚ⁺-in-lower-cut-is-positive-ℝ :
@@ -186,7 +189,7 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positiv
 ### Addition with a positive real number is a strictly inflationary map
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℝ le-ℝ
 
   le-left-add-real-ℝ⁺ :
@@ -254,24 +257,19 @@ abstract
 ### The canonical embedding of rational numbers preserves positivity
 
 ```agda
-preserves-is-positive-real-ℚ :
-  (q : ℚ) → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
-preserves-is-positive-real-ℚ q pos-q =
-  preserves-le-real-ℚ zero-ℚ q (le-zero-is-positive-ℚ pos-q)
+abstract
+  preserves-is-positive-real-ℚ :
+    {q : ℚ} → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
+  preserves-is-positive-real-ℚ pos-q =
+    preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
-opaque
-  unfolding le-ℝ real-ℚ
-
-  is-positive-rational-is-positive-real-ℚ :
-    (q : ℚ) → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
-  is-positive-rational-is-positive-real-ℚ q =
-    elim-exists
-      ( is-positive-prop-ℚ q)
-      ( λ r (0<r , r<q) →
-        is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ r q r<q 0<r))
+  reflects-is-positive-real-ℚ :
+    {q : ℚ} → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
+  reflects-is-positive-real-ℚ {q} 0<qℝ =
+    is-positive-le-zero-ℚ (reflects-le-real-ℚ 0<qℝ)
 
 positive-real-ℚ⁺ : ℚ⁺ → ℝ⁺ lzero
-positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ q pos-q)
+positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ pos-q)
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
@@ -282,18 +280,16 @@ one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
 ```agda
 abstract
   is-positive-is-in-upper-cut-ℝ⁺ :
-    {l : Level} (x : ℝ⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
-  is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) q x<q =
+    {l : Level} (x : ℝ⁺ l) {q : ℚ} → is-in-upper-cut-ℝ⁺ x q → is-positive-ℚ q
+  is-positive-is-in-upper-cut-ℝ⁺ x⁺@(x , _) x<q =
     is-positive-le-zero-ℚ
-      ( le-lower-upper-cut-ℝ x zero-ℚ q (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
+      ( le-lower-upper-cut-ℝ x (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
 ```
 
-### Similarity of positive real numbers
+### Raising the universe level of positive real numbers
 
 ```agda
-sim-prop-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → Prop (l1 ⊔ l2)
-sim-prop-ℝ⁺ (x , _) (y , _) = sim-prop-ℝ x y
-
-sim-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → UU (l1 ⊔ l2)
-sim-ℝ⁺ (x , _) (y , _) = sim-ℝ x y
+raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
+raise-ℝ⁺ l (x , 0<x) =
+  ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
 ```

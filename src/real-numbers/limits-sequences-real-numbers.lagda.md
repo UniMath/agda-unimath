@@ -10,7 +10,6 @@ module real-numbers.limits-sequences-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -19,7 +18,6 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 
 open import real-numbers.addition-real-numbers
-open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.metric-space-of-real-numbers

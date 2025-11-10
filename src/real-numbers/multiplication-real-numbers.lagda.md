@@ -22,7 +22,6 @@ open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
@@ -36,7 +35,6 @@ open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
@@ -52,19 +50,17 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.univalence
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.groups
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.large-posets
 open import order-theory.posets
 
 open import real-numbers.addition-real-numbers
@@ -73,11 +69,12 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -166,8 +163,8 @@ module _
               ( [c',d'])
               ( a<a' , b'<b)
               ( c<c' , d'<d)
-              ( le-lower-upper-cut-ℝ x a' b' a'<x x<b')
-              ( le-lower-upper-cut-ℝ y c' d' c'<y y<d')))
+              ( le-lower-upper-cut-ℝ x a'<x x<b')
+              ( le-lower-upper-cut-ℝ y c'<y y<d')))
 
     leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ : upper-cut-mul-ℝ' ⊆ upper-cut-mul-ℝ
     leq-upper-cut-mul-ℝ'-upper-cut-mul-ℝ q q∈U' =
@@ -196,8 +193,8 @@ module _
               ( [c',d'])
               ( a<a' , b'<b)
               ( c<c' , d'<d)
-              ( le-lower-upper-cut-ℝ x a' b' a'<x x<b')
-              ( le-lower-upper-cut-ℝ y c' d' c'<y y<d'))
+              ( le-lower-upper-cut-ℝ x a'<x x<b')
+              ( le-lower-upper-cut-ℝ y c'<y y<d'))
             ( [a,b][c,d]≤q))
 
     eq-lower-cut-mul-ℝ' : lower-cut-mul-ℝ ＝ lower-cut-mul-ℝ'
@@ -255,7 +252,7 @@ module _
           do-syntax-trunc-Prop (∃ ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-mul-ℝ r))
       in do
         ((a<x<b , c<y<d) , q<[a,b][c,d]) ← q∈L
-        (r , q<r , r<[a,b][c,d]) ← dense-le-ℚ q _ q<[a,b][c,d]
+        (r , q<r , r<[a,b][c,d]) ← dense-le-ℚ q<[a,b][c,d]
         intro-exists r (q<r , intro-exists (a<x<b , c<y<d) r<[a,b][c,d])
 
     forward-implication-is-rounded-upper-cut-mul-ℝ :
@@ -267,7 +264,7 @@ module _
           do-syntax-trunc-Prop (∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-mul-ℝ q))
       in do
         ((a<x<b , c<y<d) , [a,b][c,d]<r) ← r∈U
-        (q , [a,b][c,d]<q , q<r) ← dense-le-ℚ _ r [a,b][c,d]<r
+        (q , [a,b][c,d]<q , q<r) ← dense-le-ℚ [a,b][c,d]<r
         intro-exists q (q<r , intro-exists (a<x<b , c<y<d) [a,b][c,d]<q)
 
     backward-implication-is-rounded-lower-cut-mul-ℝ :
@@ -342,11 +339,11 @@ module _
                     ( c'')
                     ( leq-right-max-ℚ a a' ,
                       leq-max-leq-both-ℚ b' a a'
-                        ( leq-lower-upper-cut-ℝ x a b' a<x x<b')
+                        ( leq-lower-upper-cut-ℝ x a<x x<b')
                         ( a'≤b'))
                     ( leq-right-max-ℚ c c' ,
                       leq-max-leq-both-ℚ d' c c'
-                        ( leq-lower-upper-cut-ℝ y c d' c<y y<d')
+                        ( leq-lower-upper-cut-ℝ y c<y y<d')
                         ( c'≤d'))))
                 ( pr1
                   ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
@@ -357,11 +354,11 @@ module _
                     ( leq-left-max-ℚ a a' ,
                       leq-max-leq-both-ℚ b a a'
                         ( a≤b)
-                        ( leq-lower-upper-cut-ℝ x a' b a'<x x<b))
+                        ( leq-lower-upper-cut-ℝ x a'<x x<b))
                     ( leq-left-max-ℚ c c' ,
                       leq-max-leq-both-ℚ d c c'
                         ( c≤d)
-                        ( leq-lower-upper-cut-ℝ y c' d c'<y y<d)))))
+                        ( leq-lower-upper-cut-ℝ y c'<y y<d)))))
               ( [a',b'][c',d']<q))
             ( q<[a,b][c,d]))
 
@@ -433,8 +430,8 @@ module _
         ((p , q) , q<p+εx , p<x , x<q) ← is-arithmetically-located-ℝ x εx
         ((r , s) , s<r+εy , r<y , y<s) ← is-arithmetically-located-ℝ y εy
         let
-          p≤q = leq-lower-upper-cut-ℝ x p q p<x x<q
-          r≤s = leq-lower-upper-cut-ℝ y r s r<y y<s
+          p≤q = leq-lower-upper-cut-ℝ x p<x x<q
+          r≤s = leq-lower-upper-cut-ℝ y r<y y<s
           q-p<εx : le-ℚ (q -ℚ p) (rational-ℚ⁺ εx)
           q-p<εx =
             le-transpose-right-add-ℚ _ _ _
@@ -477,9 +474,9 @@ module _
                         r<y ,
                         y<s))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ _ _ (right-leq-max-ℕ _ _)
+                by preserves-leq-rational-ℕ (right-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ _ _ (succ-leq-ℕ N)
+                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
           max|p||q|≤sN =
             chain-of-inequalities
               max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
@@ -495,9 +492,9 @@ module _
                         p<x ,
                         x<q))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ _ _ (left-leq-max-ℕ _ _)
+                by preserves-leq-rational-ℕ (left-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ _ _ (succ-leq-ℕ N)
+                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
           [p,q] = ((p , q) , p≤q)
           [r,s] = ((r , s) , r≤s)
           a = lower-bound-mul-closed-interval-ℚ [p,q] [r,s]
@@ -531,7 +528,7 @@ module _
               ≤ ( rational-ℚ⁺ εx +ℚ rational-ℚ⁺ εy) *ℚ
                 rational-ℕ (succ-ℕ N)
                 by
-                  leq-eq-ℚ _ _
+                  leq-eq-ℚ
                     ( inv (right-distributive-mul-add-ℚ _ _ _))
               ≤ rational-ℚ⁺
                   ( ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N) +ℚ⁺
@@ -551,7 +548,7 @@ module _
                         ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)))
               ≤ rational-ℚ⁺ ε
                 by
-                  leq-eq-ℚ _ _
+                  leq-eq-ℚ
                     ( ap-mul-ℚ
                       ( inv (right-distributive-mul-add-ℚ _ _ _))
                       ( refl) ∙
@@ -616,7 +613,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding mul-ℝ
 
     enclosing-rational-range-mul-ℝ :
@@ -717,13 +714,13 @@ module _
 ### Commutativity of multiplication
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ mul-ℝ
 
-  leq-commute-ℝ :
+  leq-commute-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
     leq-ℝ (x *ℝ y) (y *ℝ x)
-  leq-commute-ℝ x y q q<xy =
+  leq-commute-mul-ℝ x y q q<xy =
     let open do-syntax-trunc-Prop (lower-cut-mul-ℝ y x q)
     in do
       ((a<x<b@([a,b] , _ , _) , c<y<d@([c,d] , _ , _)) , q<[a,b][c,d]) ← q<xy
@@ -737,7 +734,7 @@ opaque
 abstract
   commutative-mul-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → x *ℝ y ＝ y *ℝ x
   commutative-mul-ℝ x y =
-    antisymmetric-leq-ℝ _ _ (leq-commute-ℝ x y) (leq-commute-ℝ y x)
+    antisymmetric-leq-ℝ _ _ (leq-commute-mul-ℝ x y) (leq-commute-mul-ℝ y x)
 ```
 
 ### Associativity of multiplication
@@ -747,7 +744,7 @@ module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ mul-ℝ
 
     leq-associative-mul-ℝ : leq-ℝ ((x *ℝ y) *ℝ z) (x *ℝ (y *ℝ z))
@@ -811,7 +808,7 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
 
     leq-right-unit-law-mul-ℝ : leq-ℝ (x *ℝ one-ℝ) x
@@ -821,7 +818,7 @@ module _
         ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
             a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
           q<[ax,bx][a₁,b₁]) ← q<x1
-        le-lower-cut-ℝ x q ax
+        le-lower-cut-ℝ x
           ( concatenate-le-leq-ℚ _ _ _
             ( q<[ax,bx][a₁,b₁])
             ( tr
@@ -846,7 +843,7 @@ module _
             ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
                 a₁<1<b₁@([a₁,b₁]@((a₁ , b₁) , _) , a₁<1 , 1<b₁)) ,
               [ax,bx][a₁,b₁]<q) ← x1<q
-            le-upper-cut-ℝ x bx q
+            le-upper-cut-ℝ x
               ( concatenate-leq-le-ℚ _ _ _
                 ( tr
                   ( λ p →
@@ -875,7 +872,7 @@ module _
 ### Distributivity of multiplication over addition
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ leq-ℝ' mul-ℝ add-ℝ
 
   leq-left-distributive-mul-add-ℝ :
@@ -1044,62 +1041,20 @@ module _
   {l : Level} (x : ℝ l)
   where
 
-  opaque
-    unfolding leq-ℝ leq-ℝ' mul-ℝ real-ℚ
-
-    leq-left-zero-law-mul-ℝ : leq-ℝ (zero-ℝ *ℝ x) zero-ℝ
-    leq-left-zero-law-mul-ℝ q q<0x =
-      let open do-syntax-trunc-Prop (le-ℚ-Prop q zero-ℚ)
-      in do
-        ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
-          q<[a₀,b₀][ax,bx]) ← q<0x
-        concatenate-le-leq-ℚ
-          ( q)
-          ( lower-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
-          ( zero-ℚ)
-          ( q<[a₀,b₀][ax,bx])
-          ( tr
-            ( leq-ℚ _)
-            ( left-zero-law-mul-ℚ ax)
-            ( pr1
-              ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                ( [a₀,b₀])
-                ( [ax,bx])
-                ( zero-ℚ)
-                ( ax)
-                ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
-                ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
-
-    leq-left-zero-law-mul-ℝ' : leq-ℝ zero-ℝ (zero-ℝ *ℝ x)
-    leq-left-zero-law-mul-ℝ' =
-      leq-leq'-ℝ zero-ℝ (zero-ℝ *ℝ x)
-        ( λ q 0x<q →
-          let open do-syntax-trunc-Prop (le-ℚ-Prop zero-ℚ q)
-          in do
-            ( (([a₀,b₀] , a₀<0 , 0<b₀) , ([ax,bx]@((ax , bx) , _) , _)) ,
-              [a₀,b₀][ax,bx]<q) ← 0x<q
-            concatenate-leq-le-ℚ
-              ( zero-ℚ)
-              ( upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx])
-              ( q)
-              ( tr
-                ( λ p →
-                  leq-ℚ p (upper-bound-mul-closed-interval-ℚ [a₀,b₀] [ax,bx]))
-                ( left-zero-law-mul-ℚ ax)
-                ( pr2
-                  ( is-in-mul-interval-mul-is-in-closed-interval-ℚ
-                    ( [a₀,b₀])
-                    ( [ax,bx])
-                    ( zero-ℚ)
-                    ( ax)
-                    ( leq-le-ℚ a₀<0 , leq-le-ℚ 0<b₀)
-                    ( lower-bound-is-in-closed-interval-ℚ [ax,bx]))))
-              ( [a₀,b₀][ax,bx]<q))
-
   abstract
     left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
     left-zero-law-mul-ℝ =
-      sim-sim-leq-ℝ (leq-left-zero-law-mul-ℝ , leq-left-zero-law-mul-ℝ')
+      inv-tr
+        ( λ y → sim-ℝ y zero-ℝ)
+        ( is-zero-is-idempotent-Ab
+          ( ab-add-ℝ l)
+          ( equational-reasoning
+            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
+            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
+              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
+            ＝ zero-ℝ *ℝ x
+              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
 
     right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
     right-zero-law-mul-ℝ =
@@ -1109,7 +1064,7 @@ module _
 ### The inclusion of rational numbers preserves multiplication
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ real-ℚ
 
   mul-real-ℚ : (p q : ℚ) → real-ℚ p *ℝ real-ℚ q ＝ real-ℚ (p *ℚ q)
@@ -1157,7 +1112,7 @@ opaque
 ### Multiplication on the real numbers preserves similarity
 
 ```agda
-opaque
+abstract opaque
   unfolding leq-ℝ leq-ℝ' mul-ℝ sim-ℝ
 
   leq-sim-right-mul-ℝ :

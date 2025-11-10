@@ -32,6 +32,7 @@ open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
 open import ring-theory.generating-elements-rings public
+open import ring-theory.geometric-sequences-rings public
 open import ring-theory.geometric-sequences-semirings public
 open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-cyclic-rings public
@@ -73,6 +74,7 @@ open import ring-theory.poset-of-cyclic-rings public
 open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
 open import ring-theory.poset-of-right-ideals-rings public
+open import ring-theory.powers-of-elements-large-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public
