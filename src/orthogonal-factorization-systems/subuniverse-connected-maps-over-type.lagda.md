@@ -1,4 +1,4 @@
-# Connected maps with respect to a subuniverse over a type
+# `K`-connected maps over a type with respect to a subuniverse
 
 ```agda
 module orthogonal-factorization-systems.subuniverse-connected-maps-over-type where
@@ -38,7 +38,7 @@ Given a [subuniverse](foundation.subuniverses.md) `K` we consider the type of
 Subuniverse-Connected-Map :
   {l1 l2 l3 : Level} (l4 : Level) (K : subuniverse l1 l2) (A : UU l3) →
   UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
-Subuniverse-Connected-Map l2 K A = Σ (UU l2) (subuniverse-connected-map K A)
+Subuniverse-Connected-Map l4 K A = Σ (UU l4) (subuniverse-connected-map K A)
 
 module _
   {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
@@ -66,7 +66,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of `Subuniverse-Connected-Map l4 K A`
+### Characterization of equality
 
 ```agda
 equiv-Subuniverse-Connected-Map :

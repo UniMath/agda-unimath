@@ -71,7 +71,7 @@ module _
     inv-htpy htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
 ```
 
-### If the exponent has an element then diagonal map is injective
+### If the exponent has an element then the diagonal map is injective
 
 ```agda
 module _
