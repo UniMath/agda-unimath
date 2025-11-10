@@ -71,6 +71,7 @@ open import orthogonal-factorization-systems.subuniverse-connected-maps public
 open import orthogonal-factorization-systems.subuniverse-connected-maps-over-type public
 open import orthogonal-factorization-systems.subuniverse-connected-types public
 open import orthogonal-factorization-systems.subuniverse-equivalences public
+open import orthogonal-factorization-systems.subuniverse-orthogonal-maps public
 open import orthogonal-factorization-systems.types-colocal-at-maps public
 open import orthogonal-factorization-systems.types-local-at-maps public
 open import orthogonal-factorization-systems.types-separated-at-maps public
