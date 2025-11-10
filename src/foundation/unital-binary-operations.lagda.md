@@ -82,12 +82,12 @@ is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 
 Given a pair of unit laws `λ` and `ρ` we construct a new coherent pair of unit
 laws where the left unit law is the same, `λ`, and the right unit law is
-replaced by `ρ'(x) := ap (μ x (-)) (ρ(e)⁻¹ ∙ λ(e)) ∙ ρ(x)`.
+replaced by `ρ'(x) := (ap (μ x (-)) (ρ(e)))⁻¹ ∙ ap (μ x (-)) (λ(e)) ∙ ρ(x)`.
 
 Evaluating at the unit element we obtain
 
 ```text
-  ρ'(e) ≐ ap (μ e (-)) (ρ(e)⁻¹ ∙ λ(e)) ∙ ρ(e)
+  ρ'(e) ≐ (ap (μ e (-)) (ρ(e)))⁻¹ ∙ ap (μ e (-)) (λ(e)) ∙ ρ(e)
 ```
 
 which is equal to `λ(e)` by naturality of `λ` at `ρ(e)`.
@@ -122,12 +122,12 @@ module _
 
 Given a pair of unit laws `λ` and `ρ` we construct a new coherent pair of unit
 laws where the right unit law is the same, `ρ`, and the left unit law is
-replaced by `λ'(x) := ap (μ (-) x) (λ(e)⁻¹ ∙ ρ(e)) ∙ λ(x)`.
+replaced by `λ'(x) := (ap (μ (-) x) (λ(e)))⁻¹ ∙ ap (μ (-) x) (ρ(e)) ∙ λ(x)`.
 
 Evaluating at the unit element we obtain
 
 ```text
-  λ'(e) ≐ ap (μ (-) e) (λ(e)⁻¹ ∙ ρ(e)) ∙ λ(e)
+  λ'(e) ≐ (ap (μ (-) e) (λ(e)))⁻¹ ∙ ap (μ (-) e) (ρ(e)) ∙ λ(e)
 ```
 
 which is equal to `ρ(e)` by naturality of `ρ` at `λ(e)`.
