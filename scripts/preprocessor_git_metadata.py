@@ -15,6 +15,7 @@ from utils.contributors import parse_contributors_file, format_multiple_authors_
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
+RECENT_SITEWIDE_CHANGES_COUNT = 8
 
 
 def does_support(backend):
@@ -57,14 +58,14 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
-def get_recent_changes(contributors, *args):
+def get_recent_changes(contributors, *args, recent_changes_count=RECENT_CHANGES_COUNT):
     """
-    Returns a markdown list of the most recent RECENT_CHANGES_COUNT commits.
+    Returns a markdown list of the most recent commits.
     """
     recent_changes_output = subprocess.run([
         'git', 'log',
-        # Show only last RECENT_CHANGES_COUNT commits
-        '-n', str(RECENT_CHANGES_COUNT),
+        # Show only last `recent_changes_count` commits
+        '-n', str(recent_changes_count),
         # Get hash, date, message, author and coauthors, separated by tabs
         # NB When there are no trailers, the line ends with a tab
         # NB Coauthors usually have the format "name <email>" and there is
@@ -101,7 +102,7 @@ def get_recent_changes(contributors, *args):
     return (recent_changes, skipped_authors)
 
 
-def get_author_element_for_file(filename, include_contributors, contributors, contributors_file):
+def get_author_element_for_file(filename, include_contributors, contributors, contributors_file, recent_changes_count):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -149,7 +150,7 @@ def get_author_element_for_file(filename, include_contributors, contributors, co
     modified_date = file_log_output[0]
 
     recent_changes, recent_skipped_authors = get_recent_changes(
-        contributors, '--', filename)
+        contributors, '--', filename, recent_changes_count=recent_changes_count)
     skipped_authors.update(recent_skipped_authors)
 
     if skipped_authors:
@@ -186,7 +187,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     if source_file_name in config['sitewide_changes']:
         # Insert recent sitewide changes on page
         footer_recent_sitewide, skipped_authors = get_recent_changes(
-            contributors, '--invert-grep', '--grep=^chore:')
+            contributors, '--invert-grep', '--grep=^chore:', recent_changes_count=config['recent_sitewide_changes_count'])
 
         if skipped_authors:
             print_skipping_contributors_warning(
@@ -201,7 +202,8 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
         any((source_file_name.endswith(ext)
             for ext in config['attribute_file_extensions'])),
         contributors,
-        config['contributors_file'])
+        config['contributors_file'],
+        config['recent_changes_count'])
 
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
@@ -260,6 +262,10 @@ if __name__ == '__main__':
         'sitewide_changes', [])
     metadata_config['contributors_file'] = metadata_config.get(
         'contributors_file', 'CONTRIBUTORS.toml')
+    metadata_config['recent_changes_count'] = metadata_config.get(
+        'recent_changes_count', RECENT_CHANGES_COUNT)
+    metadata_config['recent_sitewide_changes_count'] = metadata_config.get(
+        'recent_sitewide_changes_count', RECENT_SITEWIDE_CHANGES_COUNT)
 
     # Load the contributors data
     contributors_data = parse_contributors_file(

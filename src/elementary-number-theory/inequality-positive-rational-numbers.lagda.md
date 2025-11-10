@@ -11,8 +11,9 @@ open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
-open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -89,4 +90,11 @@ transitive-leq-ℚ⁺ = transitive-leq-Poset poset-ℚ⁺
 
 antisymmetric-leq-ℚ⁺ : is-antisymmetric leq-ℚ⁺
 antisymmetric-leq-ℚ⁺ = antisymmetric-leq-Poset poset-ℚ⁺
+```
+
+### If `x ＝ y` then `x ≤ y`
+
+```agda
+leq-eq-ℚ⁺ : {x y : ℚ⁺} → x ＝ y → leq-ℚ⁺ x y
+leq-eq-ℚ⁺ x=y = leq-eq-ℚ (ap rational-ℚ⁺ x=y)
 ```
