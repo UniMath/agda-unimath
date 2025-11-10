@@ -44,7 +44,7 @@ large-ring-ℝ =
   make-Large-Ring
     ( large-ab-add-ℝ)
     ( mul-ℝ)
-    ( preserves-sim-mul-ℝ)
+    ( λ _ _ a~a' _ _ → preserves-sim-mul-ℝ a~a')
     ( one-ℝ)
     ( associative-mul-ℝ)
     ( left-unit-law-mul-ℝ)

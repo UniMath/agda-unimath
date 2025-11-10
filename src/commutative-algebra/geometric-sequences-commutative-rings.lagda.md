@@ -10,7 +10,10 @@ module commutative-algebra.geometric-sequences-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.geometric-sequences-commutative-semirings
+open import commutative-algebra.groups-of-units-commutative-rings
+open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
@@ -288,6 +291,11 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l) (a r : type-Commutative-Ring R)
+  (let _*R_ = mul-Commutative-Ring R)
+  (let _+R_ = add-Commutative-Ring R)
+  (let _-R_ = right-subtraction-Commutative-Ring R)
+  (let zero-R = zero-Commutative-Ring R)
+  (let one-R = one-Commutative-Ring R)
   where
 
   abstract
@@ -307,4 +315,141 @@ module _
         ( commutative-semiring-Commutative-Ring R)
         ( a)
         ( r)
+
+  abstract
+    compute-sum-standard-geometric-fin-sequence-Commutative-Ring :
+      (H :
+        is-invertible-element-Commutative-Ring R
+          ( right-subtraction-Commutative-Ring R (one-Commutative-Ring R) r)) →
+      (n : ℕ) →
+      sum-standard-geometric-fin-sequence-Commutative-Ring R a r n ＝
+      mul-Commutative-Ring R
+        ( mul-Commutative-Ring R
+          ( a)
+          ( inv-is-invertible-element-Commutative-Ring R H))
+        ( right-subtraction-Commutative-Ring R
+          ( one-Commutative-Ring R)
+          ( power-Commutative-Ring R n r))
+    compute-sum-standard-geometric-fin-sequence-Commutative-Ring
+      (1/⟨1-r⟩ , H) 0 =
+      inv
+        ( equational-reasoning
+          (a *R 1/⟨1-r⟩) *R (one-R -R one-R)
+          ＝ (a *R 1/⟨1-r⟩) *R zero-R
+            by
+              ap-mul-Commutative-Ring R
+                ( refl)
+                ( right-inverse-law-add-Commutative-Ring R one-R)
+          ＝ zero-R
+            by right-zero-law-mul-Commutative-Ring R _)
+    compute-sum-standard-geometric-fin-sequence-Commutative-Ring
+      (1/⟨1-r⟩ , H) (succ-ℕ n) =
+      equational-reasoning
+        sum-standard-geometric-fin-sequence-Commutative-Ring R a r (succ-ℕ n)
+        ＝
+          sum-standard-geometric-fin-sequence-Commutative-Ring R a r n +R
+          seq-standard-geometric-sequence-Commutative-Ring R a r n
+          by
+            cons-sum-fin-sequence-type-Commutative-Ring R
+              ( n)
+              ( standard-geometric-fin-sequence-Commutative-Ring R
+                ( a)
+                ( r)
+                ( succ-ℕ n))
+              ( refl)
+        ＝
+          ( (a *R 1/⟨1-r⟩) *R (one-R -R power-Commutative-Ring R n r)) +R
+          ( a *R power-Commutative-Ring R n r)
+          by
+            ap-add-Commutative-Ring R
+              ( compute-sum-standard-geometric-fin-sequence-Commutative-Ring
+                ( 1/⟨1-r⟩ , H)
+                ( n))
+              ( inv
+                ( htpy-mul-pow-standard-geometric-sequence-Commutative-Ring R
+                  ( a)
+                  ( r)
+                  ( n)))
+        ＝
+          ( a *R (1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r))) +R
+          ( a *R (one-R *R power-Commutative-Ring R n r))
+          by
+            ap-add-Commutative-Ring R
+              ( associative-mul-Commutative-Ring R _ _ _)
+              ( ap-mul-Commutative-Ring R
+                ( refl)
+                ( inv (left-unit-law-mul-Commutative-Ring R _)))
+        ＝
+          a *R
+          ( (1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            (one-R *R power-Commutative-Ring R n r))
+          by inv (left-distributive-mul-add-Commutative-Ring R a _ _)
+        ＝
+          a *R
+          ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            ( (1/⟨1-r⟩ *R (one-R -R r)) *R power-Commutative-Ring R n r))
+            by
+              ap-mul-Commutative-Ring R
+                ( refl)
+                ( ap-add-Commutative-Ring R
+                  ( refl)
+                  ( ap-mul-Commutative-Ring R (inv (pr2 H)) refl))
+        ＝
+          a *R
+          ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            ( 1/⟨1-r⟩ *R ((one-R -R r) *R power-Commutative-Ring R n r)))
+          by
+            ap-mul-Commutative-Ring R
+              ( refl)
+              ( ap-add-Commutative-Ring R
+                ( refl)
+                ( associative-mul-Commutative-Ring R _ _ _))
+        ＝
+          a *R
+          ( 1/⟨1-r⟩ *R
+            ( ( one-R -R power-Commutative-Ring R n r) +R
+              ( (one-R -R r) *R power-Commutative-Ring R n r)))
+          by
+            ap-mul-Commutative-Ring R
+              ( refl)
+              ( inv (left-distributive-mul-add-Commutative-Ring R _ _ _))
+        ＝
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( (one-R -R r) *R power-Commutative-Ring R n r))
+          by inv (associative-mul-Commutative-Ring R _ _ _)
+        ＝
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( (one-R *R power-Commutative-Ring R n r) -R
+              (r *R power-Commutative-Ring R n r)))
+          by
+            ap-mul-Commutative-Ring R
+              ( refl)
+              ( ap-add-Commutative-Ring R
+                ( refl)
+                ( right-distributive-mul-right-subtraction-Commutative-Ring R
+                  ( _)
+                  ( _)
+                  ( _)))
+        ＝
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( power-Commutative-Ring R n r -R
+              power-Commutative-Ring R (succ-ℕ n) r))
+          by
+            ap-mul-Commutative-Ring R
+              ( refl)
+              ( ap-add-Commutative-Ring R
+                ( refl)
+                ( ap-right-subtraction-Commutative-Ring R
+                  ( left-unit-law-mul-Commutative-Ring R _)
+                  ( inv (power-succ-Commutative-Ring' R n r))))
+        ＝
+          ( a *R 1/⟨1-r⟩) *R
+          ( one-R -R power-Commutative-Ring R (succ-ℕ n) r)
+          by
+            ap-mul-Commutative-Ring R
+              ( refl)
+              ( add-right-subtraction-Commutative-Ring R _ _ _)
 ```
