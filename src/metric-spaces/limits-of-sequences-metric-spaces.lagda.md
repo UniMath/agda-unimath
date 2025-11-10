@@ -292,7 +292,7 @@ module _
             ( n)
             ( N≤n)))
 
-    modulated-ucont-map-limit-sequence-Metric-Space :
+    preserves-limit-sequence-modulated-ucont-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -300,7 +300,7 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    modulated-ucont-map-limit-sequence-Metric-Space =
+    preserves-limit-sequence-modulated-ucont-map-Metric-Space =
       map-is-inhabited modulated-ucont-map-limit-modulus-sequence-Metric-Space
 ```
 
@@ -317,7 +317,7 @@ module _
   where
 
   abstract
-    uniformly-continuous-map-limit-sequence-Metric-Space :
+    preserves-limit-sequence-uniformly-continuous-function-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -325,11 +325,12 @@ module _
           ( map-uniformly-continuous-function-Metric-Space A B f)
           ( u))
         ( map-uniformly-continuous-function-Metric-Space A B f lim)
-    uniformly-continuous-map-limit-sequence-Metric-Space is-limit-lim =
+    preserves-limit-sequence-uniformly-continuous-function-Metric-Space
+      is-limit-lim =
       rec-trunc-Prop
         ( is-limit-prop-sequence-Metric-Space B _ _)
         ( λ m →
-          modulated-ucont-map-limit-sequence-Metric-Space
+          preserves-limit-sequence-modulated-ucont-map-Metric-Space
             ( A)
             ( B)
             ( map-uniformly-continuous-function-Metric-Space A B f , m)
@@ -370,7 +371,7 @@ module _
       ( u)
       ( lim)
 
-  short-map-limit-sequence-Metric-Space :
+  preserves-limit-sequence-short-function-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
     is-limit-sequence-Metric-Space
       ( B)
@@ -378,7 +379,7 @@ module _
         ( map-short-function-Metric-Space A B f)
         ( u))
       ( map-short-function-Metric-Space A B f lim)
-  short-map-limit-sequence-Metric-Space =
+  preserves-limit-sequence-short-function-Metric-Space =
     map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
 ```
 

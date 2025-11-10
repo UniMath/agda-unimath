@@ -130,7 +130,7 @@ nonzero-diff-le-ℝ :
 nonzero-diff-le-ℝ {x = x} {y = y} x<y = nonzero-ℝ⁺ (positive-diff-le-ℝ x<y)
 ```
 
-### If `|x| < y`, then `y - x` is nonzero
+### The nonzero difference of a pair of real numbers `x` and `y` such that `|x| < y`
 
 ```agda
 nonzero-diff-le-abs-ℝ :

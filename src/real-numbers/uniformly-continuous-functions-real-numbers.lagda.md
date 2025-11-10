@@ -26,8 +26,9 @@ A
 from the [real numbers](real-numbers.dedekind-real-numbers.md) to the real
 numbers is a function `f : ℝ → ℝ` such that there
 [exists](foundation.existential-quantification.md) a modulus `μ : ℚ⁺ → ℚ⁺` such
-that for all `x y : ℝ` within a `μ ε`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each other,
-`f x` and `f y` are within an `ε`-neighborhood.
+that for all `x y : ℝ` within a
+`μ ε`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
+other, `f x` and `f y` are within an `ε`-neighborhood.
 
 ## Definition
 
