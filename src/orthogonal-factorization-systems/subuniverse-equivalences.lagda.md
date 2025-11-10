@@ -30,7 +30,7 @@ open import orthogonal-factorization-systems.extensions-maps
 
 ## Idea
 
-Given a [subuniverse](foundation.subuniverses.md) `K`, A map `f : A → B` is said
+Given a [subuniverse](foundation.subuniverses.md) `K`, a map `f : A → B` is said
 to be a
 {{#concept "`K`-equivalence" Disambiguation="map of types, with respect to a subuniverse" Agda=is-subuniverse-equiv}}
 if it satisfies the
