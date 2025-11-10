@@ -52,11 +52,11 @@ is an [equivalence](foundation-core.equivalences.md).
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
-  is-subuniverse-equiv : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-equiv : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-equiv =
     (U : type-subuniverse K) → is-equiv (precomp f (pr1 U))
 
@@ -64,7 +64,7 @@ module _
   is-prop-is-subuniverse-equiv =
     is-prop-Π (λ U → is-property-is-equiv (precomp f (pr1 U)))
 
-  is-subuniverse-equiv-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-equiv-Prop : Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-equiv-Prop =
     ( is-subuniverse-equiv , is-prop-is-subuniverse-equiv)
 ```
@@ -73,13 +73,13 @@ module _
 
 ```agda
 subuniverse-equiv :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) →
-  UU l1 → UU l2 → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) →
+  UU l3 → UU l4 → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
 subuniverse-equiv K A B = Σ (A → B) (is-subuniverse-equiv K)
 
 module _
   {l1 l2 l3 l4 : Level}
-  (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
   (f : subuniverse-equiv K A B)
   where
 
@@ -152,8 +152,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
   is-subuniverse-equiv-is-equiv : is-equiv f → is-subuniverse-equiv K f
@@ -164,7 +164,7 @@ module _
 
 ```agda
 is-subuniverse-equiv-id :
-  {l1 l2 l3 : Level} (K : subuniverse l2 l3) {A : UU l1} →
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3} →
   is-subuniverse-equiv K (id' A)
 is-subuniverse-equiv-id K = is-subuniverse-equiv-is-equiv K id is-equiv-id
 ```
@@ -173,8 +173,8 @@ is-subuniverse-equiv-id K = is-subuniverse-equiv-is-equiv K id is-equiv-id
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} {f g : A → B}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {f g : A → B}
   where
 
   is-subuniverse-equiv-htpy :
@@ -192,8 +192,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5}
   where
 
   is-subuniverse-equiv-comp :
@@ -222,8 +222,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5}
   (g : B → C) (f : A → B) (GF : is-subuniverse-equiv K (g ∘ f))
   where
 
@@ -242,8 +242,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {X : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {X : UU l5}
   (f : A → X) (g : B → X) (h : A → B) (p : f ~ g ∘ h)
   where
 
@@ -275,14 +275,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {f : A → B}
   where
 
   is-subuniverse-equiv-map-section :
-    (K : subuniverse l3 l4) (s : section f) →
+    (s : section f) →
     is-subuniverse-equiv K f →
     is-subuniverse-equiv K (map-section f s)
-  is-subuniverse-equiv-map-section K (s , h) =
+  is-subuniverse-equiv-map-section (s , h) =
     is-subuniverse-equiv-right-factor K f s
       ( is-subuniverse-equiv-is-equiv K (f ∘ s) (is-equiv-htpy-id h))
 ```
@@ -291,14 +292,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {f : A → B}
   where
 
   is-subuniverse-equiv-map-retraction :
-    (K : subuniverse l3 l4) (r : retraction f) →
+    (r : retraction f) →
     is-subuniverse-equiv K f →
     is-subuniverse-equiv K (map-retraction f r)
-  is-subuniverse-equiv-map-retraction K (r , h) =
+  is-subuniverse-equiv-map-retraction (r , h) =
     is-subuniverse-equiv-left-factor K r f
       ( is-subuniverse-equiv-is-equiv K (r ∘ f) (is-equiv-htpy-id h))
 ```
@@ -307,8 +309,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5}
   where
 
   is-subuniverse-equiv-is-equiv-is-subuniverse-equiv :
