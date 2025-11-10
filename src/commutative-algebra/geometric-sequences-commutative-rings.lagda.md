@@ -291,9 +291,9 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l) (a r : type-Commutative-Ring R)
-  (let _*_ = mul-Commutative-Ring R)
-  (let _+_ = add-Commutative-Ring R)
-  (let _-_ = right-subtraction-Commutative-Ring R)
+  (let _*R_ = mul-Commutative-Ring R)
+  (let _+R_ = add-Commutative-Ring R)
+  (let _-R_ = right-subtraction-Commutative-Ring R)
   (let zero-R = zero-Commutative-Ring R)
   (let one-R = one-Commutative-Ring R)
   where
