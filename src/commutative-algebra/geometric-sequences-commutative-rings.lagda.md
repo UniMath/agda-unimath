@@ -334,8 +334,8 @@ module _
       (1/⟨1-r⟩ , H) 0 =
       inv
         ( equational-reasoning
-          (a * 1/⟨1-r⟩) * (one-R - one-R)
-          ＝ (a * 1/⟨1-r⟩) * zero-R
+          (a *R 1/⟨1-r⟩) *R (one-R -R one-R)
+          ＝ (a *R 1/⟨1-r⟩) *R zero-R
             by
               ap-mul-Commutative-Ring R
                 ( refl)
@@ -347,7 +347,7 @@ module _
       equational-reasoning
         sum-standard-geometric-fin-sequence-Commutative-Ring R a r (succ-ℕ n)
         ＝
-          sum-standard-geometric-fin-sequence-Commutative-Ring R a r n +
+          sum-standard-geometric-fin-sequence-Commutative-Ring R a r n +R
           seq-standard-geometric-sequence-Commutative-Ring R a r n
           by
             cons-sum-fin-sequence-type-Commutative-Ring R
@@ -358,8 +358,8 @@ module _
                 ( succ-ℕ n))
               ( refl)
         ＝
-          ( (a * 1/⟨1-r⟩) * (one-R - power-Commutative-Ring R n r)) +
-          ( a * power-Commutative-Ring R n r)
+          ( (a *R 1/⟨1-r⟩) *R (one-R -R power-Commutative-Ring R n r)) +R
+          ( a *R power-Commutative-Ring R n r)
           by
             ap-add-Commutative-Ring R
               ( compute-sum-standard-geometric-fin-sequence-Commutative-Ring
@@ -371,8 +371,8 @@ module _
                   ( r)
                   ( n)))
         ＝
-          ( a * (1/⟨1-r⟩ * (one-R - power-Commutative-Ring R n r))) +
-          ( a * (one-R * power-Commutative-Ring R n r))
+          ( a *R (1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r))) +R
+          ( a *R (one-R *R power-Commutative-Ring R n r))
           by
             ap-add-Commutative-Ring R
               ( associative-mul-Commutative-Ring R _ _ _)
@@ -380,14 +380,14 @@ module _
                 ( refl)
                 ( inv (left-unit-law-mul-Commutative-Ring R _)))
         ＝
-          a *
-          ( (1/⟨1-r⟩ * (one-R - power-Commutative-Ring R n r)) +
-            (one-R * power-Commutative-Ring R n r))
+          a *R
+          ( (1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            (one-R *R power-Commutative-Ring R n r))
           by inv (left-distributive-mul-add-Commutative-Ring R a _ _)
         ＝
-          a *
-          ( ( 1/⟨1-r⟩ * (one-R - power-Commutative-Ring R n r)) +
-            ( (1/⟨1-r⟩ * (one-R - r)) * power-Commutative-Ring R n r))
+          a *R
+          ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            ( (1/⟨1-r⟩ *R (one-R -R r)) *R power-Commutative-Ring R n r))
             by
               ap-mul-Commutative-Ring R
                 ( refl)
@@ -395,9 +395,9 @@ module _
                   ( refl)
                   ( ap-mul-Commutative-Ring R (inv (pr2 H)) refl))
         ＝
-          a *
-          ( ( 1/⟨1-r⟩ * (one-R - power-Commutative-Ring R n r)) +
-            ( 1/⟨1-r⟩ * ((one-R - r) * power-Commutative-Ring R n r)))
+          a *R
+          ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
+            ( 1/⟨1-r⟩ *R ((one-R -R r) *R power-Commutative-Ring R n r)))
           by
             ap-mul-Commutative-Ring R
               ( refl)
@@ -405,24 +405,24 @@ module _
                 ( refl)
                 ( associative-mul-Commutative-Ring R _ _ _))
         ＝
-          a *
-            ( 1/⟨1-r⟩ *
-              ( ( one-R - power-Commutative-Ring R n r) +
-                ( (one-R - r) * power-Commutative-Ring R n r)))
+          a *R
+            ( 1/⟨1-r⟩ *R
+              ( ( one-R -R power-Commutative-Ring R n r) +R
+                ( (one-R -R r) *R power-Commutative-Ring R n r)))
           by
             ap-mul-Commutative-Ring R
               ( refl)
               ( inv (left-distributive-mul-add-Commutative-Ring R _ _ _))
         ＝
-          ( a * 1/⟨1-r⟩) *
-          ( ( one-R - power-Commutative-Ring R n r) +
-            ( (one-R - r) * power-Commutative-Ring R n r))
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( (one-R -R r) *R power-Commutative-Ring R n r))
           by inv (associative-mul-Commutative-Ring R _ _ _)
         ＝
-          ( a * 1/⟨1-r⟩) *
-          ( ( one-R - power-Commutative-Ring R n r) +
-            ( (one-R * power-Commutative-Ring R n r) -
-              (r * power-Commutative-Ring R n r)))
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( (one-R *R power-Commutative-Ring R n r) -R
+              (r *R power-Commutative-Ring R n r)))
           by
             ap-mul-Commutative-Ring R
               ( refl)
@@ -433,9 +433,9 @@ module _
                   ( _)
                   ( _)))
         ＝
-          ( a * 1/⟨1-r⟩) *
-          ( ( one-R - power-Commutative-Ring R n r) +
-            ( power-Commutative-Ring R n r -
+          ( a *R 1/⟨1-r⟩) *R
+          ( ( one-R -R power-Commutative-Ring R n r) +R
+            ( power-Commutative-Ring R n r -R
               power-Commutative-Ring R (succ-ℕ n) r))
           by
             ap-mul-Commutative-Ring R
@@ -446,8 +446,8 @@ module _
                   ( left-unit-law-mul-Commutative-Ring R _)
                   ( inv (power-succ-Commutative-Ring' R n r))))
         ＝
-          ( a * 1/⟨1-r⟩) *
-          ( one-R - power-Commutative-Ring R (succ-ℕ n) r)
+          ( a *R 1/⟨1-r⟩) *R
+          ( one-R -R power-Commutative-Ring R (succ-ℕ n) r)
           by
             ap-mul-Commutative-Ring R
               ( refl)
