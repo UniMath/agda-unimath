@@ -61,13 +61,13 @@ module _
   where
 
   abstract
-    preserves-limit-add-sequence-ℝ :
+    preserves-limits-add-sequence-ℝ :
       is-limit-sequence-Metric-Space
         ( metric-space-ℝ (l1 ⊔ l2))
         ( binary-map-sequence add-ℝ u v)
         ( lim-u +ℝ lim-v)
-    preserves-limit-add-sequence-ℝ =
-      preserves-limit-sequence-modulated-ucont-map-Metric-Space
+    preserves-limits-add-sequence-ℝ =
+      preserves-limits-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-add-pair-ℝ l1 l2)
@@ -91,15 +91,15 @@ module _
   where
 
   abstract
-    preserves-limit-sequence-uniformly-continuous-function-ℝ :
+    preserves-limits-sequence-uniformly-continuous-function-ℝ :
       is-limit-sequence-ℝ u lim →
       is-limit-sequence-ℝ
         ( map-sequence
           ( map-uniformly-continuous-function-ℝ f)
           ( u))
         ( map-uniformly-continuous-function-ℝ f lim)
-    preserves-limit-sequence-uniformly-continuous-function-ℝ =
-      preserves-limit-sequence-uniformly-continuous-function-Metric-Space
+    preserves-limits-sequence-uniformly-continuous-function-ℝ =
+      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)

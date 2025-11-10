@@ -232,7 +232,7 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( preserves-limit-sequence-uniformly-continuous-function-ℝ
+          ( preserves-limits-sequence-uniformly-continuous-function-ℝ
             ( comp-uniformly-continuous-function-ℝ
               ( uniformly-continuous-right-mul-ℝ
                 ( l)
