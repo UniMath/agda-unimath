@@ -110,5 +110,5 @@ abstract
                 by
                   preserves-leq-real-ℚ
                     ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
-      ( lim-b=0)
+        ( lim-b=0)
 ```

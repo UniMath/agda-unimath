@@ -122,7 +122,7 @@ module _
   nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
 ```
 
-### If `x < y`, then `y - x` is nonzero
+### The nonzero difference of a pair of real numbers `x` and `y` such that `x < y`
 
 ```agda
 nonzero-diff-le-ℝ :
