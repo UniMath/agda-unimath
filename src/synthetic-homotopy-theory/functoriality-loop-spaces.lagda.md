@@ -306,7 +306,7 @@ module _
       ( ap (map-pointed-map f))
       ( is-trunc-map-is-equiv k
         ( is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
-      ( is-trunc-map-ap-is-trunc-map k
+      ( is-trunc-map-ap-is-trunc-map-succ k
         ( map-pointed-map f)
         ( H)
         ( point-Pointed-Type A)

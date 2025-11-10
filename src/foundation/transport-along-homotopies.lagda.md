@@ -11,11 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
 open import foundation.transport-along-higher-identifications
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -40,6 +40,10 @@ module _
   tr-htpy :
     (f ~ g) → ((x : A) → C x (f x)) → ((x : A) → C x (g x))
   tr-htpy H f' x = tr (C x) (H x) (f' x)
+
+  inv-tr-htpy :
+    (f ~ g) → ((x : A) → C x (g x)) → ((x : A) → C x (f x))
+  inv-tr-htpy H f' x = inv-tr (C x) (H x) (f' x)
 
   tr-htpy² :
     {H K : f ~ g} (L : H ~ K) (f' : (x : A) → C x (f x)) →
@@ -81,4 +85,38 @@ module _
       compute-ind-htpy f
         ( λ _ → statement-compute-tr-htpy)
         ( base-case-compute-tr-htpy)
+```
+
+### Inverse transport along a homotopy `H` is homotopic to inverse transport along the identification `eq-htpy H`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  where
+
+  statement-compute-inv-tr-htpy :
+    {f g : (x : A) → B x} (H : f ~ g) → UU (l1 ⊔ l3)
+  statement-compute-inv-tr-htpy H =
+    inv-tr (λ u → (x : A) → C x (u x)) (eq-htpy H) ~ inv-tr-htpy C H
+
+  base-case-compute-inv-tr-htpy :
+    {f : (x : A) → B x} → statement-compute-inv-tr-htpy (refl-htpy' f)
+  base-case-compute-inv-tr-htpy =
+    htpy-eq (ap (inv-tr (λ u → (x : A) → C x (u x))) (eq-htpy-refl-htpy _))
+
+  abstract
+    compute-inv-tr-htpy :
+      {f g : (x : A) → B x} (H : f ~ g) → statement-compute-inv-tr-htpy H
+    compute-inv-tr-htpy {f} =
+      ind-htpy f
+        ( λ _ → statement-compute-inv-tr-htpy)
+        ( base-case-compute-inv-tr-htpy)
+
+    compute-inv-tr-htpy-refl-htpy :
+      {f : (x : A) → B x} →
+      compute-inv-tr-htpy (refl-htpy' f) ＝ base-case-compute-inv-tr-htpy
+    compute-inv-tr-htpy-refl-htpy {f} =
+      compute-ind-htpy f
+        ( λ _ → statement-compute-inv-tr-htpy)
+        ( base-case-compute-inv-tr-htpy)
 ```
