@@ -7,37 +7,21 @@ module orthogonal-factorization-systems.subuniverse-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.connected-maps
-open import foundation.connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.functoriality-truncation
-open import foundation.identity-types
 open import foundation.precomposition-functions
-open import foundation.precomposition-functions-into-subuniverses
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.truncations
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
-open import foundation.universal-property-truncation
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.transport-along-identifications
-open import foundation-core.truncated-maps
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
 
 open import orthogonal-factorization-systems.extensions-maps
 ```

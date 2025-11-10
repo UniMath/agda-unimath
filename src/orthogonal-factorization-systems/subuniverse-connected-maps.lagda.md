@@ -8,11 +8,8 @@ module orthogonal-factorization-systems.subuniverse-connected-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.connected-types
-open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
@@ -24,24 +21,16 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.inhabited-types
-open import foundation.iterated-successors-truncation-levels
-open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
-open import foundation.precomposition-type-families
 open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
 open import foundation.sections
 open import foundation.split-surjective-maps
-open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subuniverses
 open import foundation.surjective-maps
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.truncations
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-family-of-fibers-of-maps
@@ -56,15 +45,12 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.postcomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
-open import foundation-core.truncated-maps
 
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
-open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.subuniverse-connected-types
 open import orthogonal-factorization-systems.subuniverse-equivalences
 
