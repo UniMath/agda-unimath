@@ -15,7 +15,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
-open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.function-extensionality
@@ -31,6 +30,7 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.precomposition-type-families
 open import foundation.propositional-truncations
+open import foundation.retracts-of-maps
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
@@ -65,6 +65,7 @@ open import foundation-core.truncated-maps
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.subuniverse-connected-types
 open import orthogonal-factorization-systems.subuniverse-equivalences
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -76,9 +77,9 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a [subuniverse](foundation.subuniverses.md) `K`, A map `f : A → B` is said
+Given a [subuniverse](foundation.subuniverses.md) `K`, a map `f : A → B` is said
 to be
-{{#concept "`K`-connected" Disambiguation="map of types" Agda=is-subuniverse-connected-map}}
+{{#concept "`K`-connected" Disambiguation="map of types, with respect to a subuniverse" Agda=is-subuniverse-connected-map}}
 if it satisfies the
 {{#concept "universal property" Disambiguation="subuniverse connected map of types"}}
 of `K`-connected maps:
@@ -102,17 +103,17 @@ Equivalently, a `K`-connected map `f : A → B` is a map that is
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
   (f : A → B)
   where
 
-  is-subuniverse-connected-map-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map-Prop : Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-connected-map-Prop =
     Π-Prop
       ( B → type-subuniverse K)
       ( λ U → is-equiv-Prop (precomp-Π f (pr1 ∘ U)))
 
-  is-subuniverse-connected-map : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-connected-map : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-connected-map =
     (U : B → type-subuniverse K) → is-equiv (precomp-Π f (pr1 ∘ U))
 
@@ -126,13 +127,13 @@ module _
 
 ```agda
 subuniverse-connected-map :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) →
-  UU l1 → UU l2 → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) →
+  UU l3 → UU l4 → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
 subuniverse-connected-map K A B =
   type-subtype (is-subuniverse-connected-map-Prop K {A} {B})
 
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
   where
 
   map-subuniverse-connected-map : subuniverse-connected-map K A B → A → B
@@ -155,16 +156,16 @@ module _
 
 ```agda
 Subuniverse-Connected-Map :
-  {l1 l3 l4 : Level} (l2 : Level) (K : subuniverse l3 l4) (A : UU l1) →
-  UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l2)
+  {l1 l2 l3 : Level} (l4 : Level) (K : subuniverse l1 l2) (A : UU l3) →
+  UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
 Subuniverse-Connected-Map l2 K A = Σ (UU l2) (subuniverse-connected-map K A)
 
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} (f : Subuniverse-Connected-Map l2 K A)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} (f : Subuniverse-Connected-Map l4 K A)
   where
 
-  type-Subuniverse-Connected-Map : UU l2
+  type-Subuniverse-Connected-Map : UU l4
   type-Subuniverse-Connected-Map = pr1 f
 
   subuniverse-connected-map-Subuniverse-Connected-Map :
@@ -187,12 +188,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
   is-subuniverse-connected-map-extension-condition :
-    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+    UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-connected-map-extension-condition =
     (U : B → type-subuniverse K) (u : (x : A) → pr1 (U (f x))) →
     is-contr (extension-dependent-type f (pr1 ∘ U) u)
@@ -204,7 +205,7 @@ module _
       is-prop-Π (λ U → is-prop-Π (λ u → is-property-is-contr))
 
   is-subuniverse-connected-map-extension-condition-Prop :
-    Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+    Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-connected-map-extension-condition-Prop =
     ( is-subuniverse-connected-map-extension-condition ,
       is-prop-is-subuniverse-connected-map-extension-condition)
@@ -216,7 +217,7 @@ module _
 
 #### Contractible fiber-localization condition
 
-Given a subuniverse `K` then a map `f` is `K`-connected if if the fibers are
+Given a subuniverse `K` then a map `f` is `K`-connected if the fibers are
 `K`-equivalent to contractible types.
 
 **Proof.** We have an equivalence of arrows
@@ -237,8 +238,8 @@ map is a `K`-equivalence then this is an equivalence as well. ∎
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
   is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers :
@@ -255,22 +256,20 @@ module _
       ( is-equiv-map-Π-is-fiberwise-equiv (λ b → H b (U b)))
 ```
 
-#### Constant map condition on fibers
+#### Fiber condition
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
-  is-subuniverse-connected-map-is-equiv-diagonal-exponential-fibers :
-    ( (b : B) (U : type-subuniverse K) →
-      is-equiv (diagonal-exponential (pr1 U) (fiber f b))) →
+  is-subuniverse-connected-map-is-subuniverse-connected-fibers :
+    ( (b : B) → is-subuniverse-connected K (fiber f b)) →
     is-subuniverse-connected-map K f
-  is-subuniverse-connected-map-is-equiv-diagonal-exponential-fibers H =
+  is-subuniverse-connected-map-is-subuniverse-connected-fibers H =
     is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
-      ( λ b U →
-        is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential (H b U))
+      ( is-subuniverse-equiv-terminal-map-is-subuniverse-connected K ∘ H)
 ```
 
 #### Section condition
@@ -303,8 +302,8 @@ module _
       is-htpy-injective-precomp-η-Kfib b (λ where (a , refl) → htpy-eq H a))
 
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   (Kfib : (b : B) → subuniverse-localization K (fiber f b))
   (s : (U : B → type-subuniverse K) → section (precomp-Π f (pr1 ∘ U)))
   where
@@ -359,8 +358,8 @@ In fact, it suffices that the fibers have `K`-localizations and the family
         dependent-identification (b ↦ K(fiber f b)) p u (η (f a) (a , refl)))
 ```
 
-is inhabited, which is a slightly weaker condition than inhabitedness of the
-fiber of `precomp-Π f` over the map `a ↦ η (f a) (a , refl)`.
+is inhabited, which is in turn a slightly weaker condition than inhabitedness of
+the fiber of `precomp-Π f` over the map `a ↦ η (f a) (a , refl)`.
 
 ```agda
 module _
@@ -403,8 +402,8 @@ module _
       ( s)
 
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   (Kfib : (b : B) → subuniverse-localization K (fiber f b))
   where
 
@@ -508,8 +507,8 @@ extensions of `u` along `f` is contractible.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
   is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition :
@@ -539,11 +538,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
   where
 
   htpy-subuniverse-connected-map :
-    (f g : subuniverse-connected-map K A B) → UU (l1 ⊔ l2)
+    (f g : subuniverse-connected-map K A B) → UU (l3 ⊔ l4)
   htpy-subuniverse-connected-map f g =
     map-subuniverse-connected-map K f ~ map-subuniverse-connected-map K g
 
@@ -590,6 +589,63 @@ module _
     map-inv-equiv (extensionality-subuniverse-connected-map f g)
 ```
 
+### Characterization of the identity type of `Subuniverse-Connected-Map l4 K A`
+
+```agda
+equiv-Subuniverse-Connected-Map :
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} →
+  (f g : Subuniverse-Connected-Map l4 K A) → UU (l3 ⊔ l4)
+equiv-Subuniverse-Connected-Map K f g =
+  Σ ( type-Subuniverse-Connected-Map K f ≃ type-Subuniverse-Connected-Map K g)
+    ( λ e →
+      map-equiv e ∘ map-Subuniverse-Connected-Map K f ~
+      map-Subuniverse-Connected-Map K g)
+
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3}
+  (f : Subuniverse-Connected-Map l4 K A)
+  where
+
+  id-equiv-Subuniverse-Connected-Map : equiv-Subuniverse-Connected-Map K f f
+  id-equiv-Subuniverse-Connected-Map = (id-equiv , refl-htpy)
+
+  is-torsorial-equiv-Subuniverse-Connected-Map :
+    is-torsorial (equiv-Subuniverse-Connected-Map K f)
+  is-torsorial-equiv-Subuniverse-Connected-Map =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (type-Subuniverse-Connected-Map K f))
+      ( type-Subuniverse-Connected-Map K f , id-equiv)
+      ( is-torsorial-htpy-subuniverse-connected-map K
+        ( subuniverse-connected-map-Subuniverse-Connected-Map K f))
+
+  equiv-eq-Subuniverse-Connected-Map :
+    (g : Subuniverse-Connected-Map l4 K A) →
+    f ＝ g → equiv-Subuniverse-Connected-Map K f g
+  equiv-eq-Subuniverse-Connected-Map .f refl =
+    id-equiv-Subuniverse-Connected-Map
+
+  is-equiv-equiv-eq-Subuniverse-Connected-Map :
+    (g : Subuniverse-Connected-Map l4 K A) →
+    is-equiv (equiv-eq-Subuniverse-Connected-Map g)
+  is-equiv-equiv-eq-Subuniverse-Connected-Map =
+    fundamental-theorem-id
+      ( is-torsorial-equiv-Subuniverse-Connected-Map)
+      ( equiv-eq-Subuniverse-Connected-Map)
+
+  extensionality-Subuniverse-Connected-Map :
+    (g : Subuniverse-Connected-Map l4 K A) →
+    (f ＝ g) ≃ equiv-Subuniverse-Connected-Map K f g
+  extensionality-Subuniverse-Connected-Map g =
+    ( equiv-eq-Subuniverse-Connected-Map g ,
+      is-equiv-equiv-eq-Subuniverse-Connected-Map g)
+
+  eq-equiv-Subuniverse-Connected-Map :
+    (g : Subuniverse-Connected-Map l4 K A) →
+    equiv-Subuniverse-Connected-Map K f g → f ＝ g
+  eq-equiv-Subuniverse-Connected-Map g =
+    map-inv-equiv (extensionality-Subuniverse-Connected-Map g)
+```
+
 ### All maps are `Contr`-connected
 
 ```agda
@@ -609,7 +665,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
   where
 
   is-subuniverse-connected-map-is-equiv :
@@ -632,8 +688,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
   where
 
   is-subuniverse-equiv-is-subuniverse-connected-map :
@@ -645,8 +701,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5}
   where
 
   is-subuniverse-connected-map-comp :
@@ -677,8 +733,8 @@ module _
 
 ```agda
 is-subuniverse-connected-map-left-factor :
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : UU l2} {C : UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5}
   {g : B → C} {h : A → B} →
   is-subuniverse-connected-map K h →
   is-subuniverse-connected-map K (g ∘ h) →
@@ -691,70 +747,13 @@ is-subuniverse-connected-map-left-factor K {g = g} {h} H GH U =
     ( GH U)
 ```
 
-### Characterization of the identity type of `Subuniverse-Connected-Map l2 K A`
-
-```agda
-equiv-Subuniverse-Connected-Map :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} →
-  (f g : Subuniverse-Connected-Map l2 K A) → UU (l1 ⊔ l2)
-equiv-Subuniverse-Connected-Map K f g =
-  Σ ( type-Subuniverse-Connected-Map K f ≃ type-Subuniverse-Connected-Map K g)
-    ( λ e →
-      map-equiv e ∘ map-Subuniverse-Connected-Map K f ~
-      map-Subuniverse-Connected-Map K g)
-
-module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1}
-  (f : Subuniverse-Connected-Map l2 K A)
-  where
-
-  id-equiv-Subuniverse-Connected-Map : equiv-Subuniverse-Connected-Map K f f
-  id-equiv-Subuniverse-Connected-Map = (id-equiv , refl-htpy)
-
-  is-torsorial-equiv-Subuniverse-Connected-Map :
-    is-torsorial (equiv-Subuniverse-Connected-Map K f)
-  is-torsorial-equiv-Subuniverse-Connected-Map =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-Subuniverse-Connected-Map K f))
-      ( type-Subuniverse-Connected-Map K f , id-equiv)
-      ( is-torsorial-htpy-subuniverse-connected-map K
-        ( subuniverse-connected-map-Subuniverse-Connected-Map K f))
-
-  equiv-eq-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l2 K A) →
-    f ＝ g → equiv-Subuniverse-Connected-Map K f g
-  equiv-eq-Subuniverse-Connected-Map .f refl =
-    id-equiv-Subuniverse-Connected-Map
-
-  is-equiv-equiv-eq-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l2 K A) →
-    is-equiv (equiv-eq-Subuniverse-Connected-Map g)
-  is-equiv-equiv-eq-Subuniverse-Connected-Map =
-    fundamental-theorem-id
-      ( is-torsorial-equiv-Subuniverse-Connected-Map)
-      ( equiv-eq-Subuniverse-Connected-Map)
-
-  extensionality-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l2 K A) →
-    (f ＝ g) ≃ equiv-Subuniverse-Connected-Map K f g
-  extensionality-Subuniverse-Connected-Map g =
-    ( equiv-eq-Subuniverse-Connected-Map g ,
-      is-equiv-equiv-eq-Subuniverse-Connected-Map g)
-
-  eq-equiv-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l2 K A) →
-    equiv-Subuniverse-Connected-Map K f g → f ＝ g
-  eq-equiv-Subuniverse-Connected-Map g =
-    map-inv-equiv (extensionality-Subuniverse-Connected-Map g)
-```
-
 ### `K`-connected maps are closed under cobase change
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l5 l6)
-  {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l1 l2)
+  {S : UU l3} {A : UU l4} {B : UU l5}
+  (f : S → A) (g : S → B) {X : UU l6} (c : cocone f g X)
   where
 
   is-subuniverse-connected-map-cobase-change' :
@@ -805,17 +804,34 @@ functoriality an induced retract of dependent precomposition maps
 and since equivalences are closed under retracts of maps, if `f` is
 `K`-connected then so is `f'`. ∎
 
-Note that, since equivalences are already closed under noncoherent retracts of
-maps, we are not obligated to produce the higher coherence of this retract.
-
 > This remains to be formalized.
+
+The formalization below takes a shortcut via the fibers.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {C : UU l5} {D : UU l6}
+  {f : A → B} {g : C → D} (R : f retract-of-map g)
+  where
+
+  is-subuniverse-connected-map-retract-map' :
+    ((y : D) → is-subuniverse-connected K (fiber g y)) →
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-retract-map' H =
+    is-subuniverse-connected-map-is-subuniverse-connected-fibers K f
+    ( λ b →
+      is-subuniverse-connected-retract K
+        ( retract-fiber-retract-map f g R b)
+        ( H (map-codomain-inclusion-retract-map f g R b)))
+```
 
 ### The total map induced by a family of maps is `K`-connected if and only if all maps in the family are `K`-connected
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l4 l5)
-  {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : A → UU l4} {C : A → UU l5}
   (f : (x : A) → B x → C x)
   where
 
@@ -834,8 +850,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l5 l6)
-  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
+  {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} {A' : UU l5} {B' : UU l6}
   {f : A → B} {f' : A' → B'}
   where
 
@@ -868,8 +884,9 @@ particular $K$-connected.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (K : subuniverse l3 l4)
-  {A : UU l1} {B : UU l2} (f : subuniverse-connected-map K A B) (P : B → UU l3)
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : subuniverse-connected-map K A B)
+  (P : B → UU l1)
   where
 
   map-Σ-map-base-subuniverse-connected-map :
@@ -878,7 +895,7 @@ module _
     map-Σ-map-base (map-subuniverse-connected-map K f) P
 
   is-subuniverse-equiv-map-Σ-map-base-subuniverse-connected-map :
-    ((V : UU l3) (U : type-subuniverse K) → is-in-subuniverse K (V → pr1 U)) →
+    ((V : UU l1) (U : type-subuniverse K) → is-in-subuniverse K (V → pr1 U)) →
     is-subuniverse-equiv K map-Σ-map-base-subuniverse-connected-map
   is-subuniverse-equiv-map-Σ-map-base-subuniverse-connected-map H U =
     is-equiv-source-is-equiv-target-equiv-arrow

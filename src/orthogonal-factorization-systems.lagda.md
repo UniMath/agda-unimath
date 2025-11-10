@@ -68,6 +68,7 @@ open import orthogonal-factorization-systems.sigma-closed-reflective-modalities 
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.subuniverse-connected-maps public
+open import orthogonal-factorization-systems.subuniverse-connected-types public
 open import orthogonal-factorization-systems.subuniverse-equivalences public
 open import orthogonal-factorization-systems.types-colocal-at-maps public
 open import orthogonal-factorization-systems.types-local-at-maps public

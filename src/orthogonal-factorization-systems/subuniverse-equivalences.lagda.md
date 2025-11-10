@@ -48,7 +48,7 @@ open import orthogonal-factorization-systems.extensions-maps
 
 Given a [subuniverse](foundation.subuniverses.md) `K`, A map `f : A → B` is said
 to be a
-{{#concept "`K`-equivalence" Disambiguation="map of types" Agda=is-subuniverse-equiv}}
+{{#concept "`K`-equivalence" Disambiguation="map of types, with respect to a subuniverse" Agda=is-subuniverse-equiv}}
 if it satisfies the
 {{#concept "universal property" Disambiguation="subuniverse connected map of types"}}
 of `K`-equivalences:

@@ -1,0 +1,260 @@
+# Connected types with respect to a subuniverse
+
+```agda
+module orthogonal-factorization-systems.subuniverse-connected-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.action-on-identifications-functions
+open import foundation.connected-types
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-identifications
+open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
+open import foundation.diagonal-maps-of-types
+open import foundation.equivalences
+open import foundation.equivalences-arrows
+open import foundation.function-extensionality
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopy-induction
+open import foundation.inhabited-types
+open import foundation.iterated-successors-truncation-levels
+open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
+open import foundation.precomposition-functions
+open import foundation.precomposition-type-families
+open import foundation.propositional-truncations
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
+open import foundation.sections
+open import foundation.split-surjective-maps
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.subuniverses
+open import foundation.surjective-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.truncations
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-family-of-fibers-of-maps
+open import foundation.universal-property-unit-type
+open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.postcomposition-dependent-functions
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
+open import foundation-core.truncated-maps
+
+open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.localizations-at-subuniverses
+open import orthogonal-factorization-systems.subuniverse-equivalences
+```
+
+</details>
+
+## Idea
+
+Given a [subuniverse](foundation.subuniverses.md) `K`, a type `A` is said to be
+{{#concept "`K`-connected" Disambiguation="type, with respect to a subuniverse" Agda=is-subuniverse-connected}}
+if it satisfies the
+{{#concept "universal property" Disambiguation="subuniverse connected map of types"}}
+of `K`-connected types:
+
+For every `U` in `K`, the [diagonal map](foundation.diagonal-maps-of-types.md)
+
+```text
+ U → (A → U)
+```
+
+is an [equivalence](foundation-core.equivalences.md).
+
+## Definitions
+
+### The predicate on types of being `K`-connected
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) (A : UU l3)
+  where
+
+  is-subuniverse-connected-Prop : Prop (lsuc l1 ⊔ l2 ⊔ l3)
+  is-subuniverse-connected-Prop =
+    Π-Prop
+      ( type-subuniverse K)
+      ( λ U → is-equiv-Prop (diagonal-exponential (pr1 U) A))
+
+  is-subuniverse-connected : UU (lsuc l1 ⊔ l2 ⊔ l3)
+  is-subuniverse-connected =
+    (U : type-subuniverse K) → is-equiv (diagonal-exponential (pr1 U) A)
+
+  is-prop-is-subuniverse-connected :
+    is-prop is-subuniverse-connected
+  is-prop-is-subuniverse-connected =
+    is-prop-type-Prop is-subuniverse-connected-Prop
+```
+
+### The universe of `K`-connected types
+
+```agda
+subuniverse-connected-type :
+  {l1 l2 : Level} (l3 : Level) (K : subuniverse l1 l2) →
+  UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+subuniverse-connected-type l3 K =
+  type-subtype (is-subuniverse-connected-Prop {l3 = l3} K)
+
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2)
+  where
+
+  type-subuniverse-connected-type : subuniverse-connected-type l3 K → UU l3
+  type-subuniverse-connected-type =
+    inclusion-subtype (is-subuniverse-connected-Prop K)
+
+  is-subuniverse-connected-type-subuniverse-connected-type :
+    (A : subuniverse-connected-type l3 K) →
+    is-subuniverse-connected K (type-subuniverse-connected-type A)
+  is-subuniverse-connected-type-subuniverse-connected-type =
+    is-in-subtype-inclusion-subtype (is-subuniverse-connected-Prop K)
+
+  emb-inclusion-subuniverse-connected-type :
+    subuniverse-connected-type l3 K ↪ UU l3
+  emb-inclusion-subuniverse-connected-type =
+    emb-subtype (is-subuniverse-connected-Prop K)
+```
+
+### The constancy condition of `K`-connected types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) (A : UU l3)
+  where
+
+  is-subuniverse-connected-const-condition :
+    UU (lsuc l1 ⊔ l2 ⊔ l3)
+  is-subuniverse-connected-const-condition =
+    (U : type-subuniverse K) (u : A → pr1 U) →
+    is-contr (Σ (pr1 U) (λ v → (x : A) → v ＝ u x))
+
+  abstract
+    is-prop-is-subuniverse-connected-const-condition :
+      is-prop is-subuniverse-connected-const-condition
+    is-prop-is-subuniverse-connected-const-condition =
+      is-prop-Π (λ U → is-prop-Π (λ u → is-property-is-contr))
+
+  is-subuniverse-connected-const-condition-Prop :
+    Prop (lsuc l1 ⊔ l2 ⊔ l3)
+  is-subuniverse-connected-const-condition-Prop =
+    ( is-subuniverse-connected-const-condition ,
+      is-prop-is-subuniverse-connected-const-condition)
+```
+
+## Properties
+
+### A type is `K`-connected if and only if it satisfies the constancy condition
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
+  where abstract
+
+  is-subuniverse-connected-is-subuniverse-connected-const-condition :
+    is-subuniverse-connected-const-condition K A →
+    is-subuniverse-connected K A
+  is-subuniverse-connected-is-subuniverse-connected-const-condition H U =
+    is-equiv-is-contr-map
+      ( λ u →
+        is-contr-equiv
+          ( Σ (pr1 U) (λ v → (x : A) → v ＝ u x))
+          ( compute-fiber-diagonal-exponential u)
+          ( H U u))
+
+  is-subuniverse-connected-const-condition-is-subuniverse-connected :
+    is-subuniverse-connected K A →
+    is-subuniverse-connected-const-condition K A
+  is-subuniverse-connected-const-condition-is-subuniverse-connected H U u =
+    is-contr-equiv'
+      ( fiber (diagonal-exponential (pr1 U) A) u)
+      ( compute-fiber-diagonal-exponential u)
+      ( is-contr-map-is-equiv (H U) u)
+```
+
+### A type is `K`-connected if and only if it the terminal map is a `K`-equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
+  where
+
+  is-subuniverse-connected-is-subuniverse-equiv-terminal-map :
+    is-subuniverse-equiv K (terminal-map A) →
+    is-subuniverse-connected K A
+  is-subuniverse-connected-is-subuniverse-equiv-terminal-map H U =
+    is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map (H U)
+
+  is-subuniverse-equiv-terminal-map-is-subuniverse-connected :
+    is-subuniverse-connected K A →
+    is-subuniverse-equiv K (terminal-map A)
+  is-subuniverse-equiv-terminal-map-is-subuniverse-connected H U =
+    is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential (H U)
+```
+
+### All types are `Contr`-connected
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  is-Contr-connected : is-subuniverse-connected (is-contr-Prop {l2}) A
+  is-Contr-connected U = is-equiv-diagonal-exponential-is-contr' (pr2 U) A
+```
+
+### Contractible types are `K`-connected
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
+  where
+
+  is-subuniverse-connected-is-contr :
+    is-contr A → is-subuniverse-connected K A
+  is-subuniverse-connected-is-contr H U =
+    is-equiv-diagonal-exponential-is-contr H (pr1 U)
+```
+
+### `K`-connected types are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
+  where
+
+  is-subuniverse-connected-retract :
+    A retract-of B →
+    is-subuniverse-connected K B →
+    is-subuniverse-connected K A
+  is-subuniverse-connected-retract R H U =
+    is-equiv-retract-map-is-equiv
+      ( diagonal-exponential (pr1 U) A)
+      ( diagonal-exponential (pr1 U) B)
+      ( retract-map-diagonal-exponential-retract id-retract R)
+      ( H U)
+```
