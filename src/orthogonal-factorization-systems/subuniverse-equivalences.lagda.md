@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.subuniverse-equivalences where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.subuniverses
@@ -16,7 +17,6 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -48,13 +48,30 @@ is an [equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
-```agda
-is-subuniverse-equiv :
-  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) {A : UU l1} {B : UU l2} →
-  (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
-is-subuniverse-equiv K f =
-  (U : type-subuniverse K) → is-equiv (precomp f (pr1 U))
+### The predicate on maps of being `K`-equivalences
 
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4)
+  {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-subuniverse-equiv : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-equiv =
+    (U : type-subuniverse K) → is-equiv (precomp f (pr1 U))
+
+  is-prop-is-subuniverse-equiv : is-prop is-subuniverse-equiv
+  is-prop-is-subuniverse-equiv =
+    is-prop-Π (λ U → is-property-is-equiv (precomp f (pr1 U)))
+
+  is-subuniverse-equiv-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+  is-subuniverse-equiv-Prop =
+    ( is-subuniverse-equiv , is-prop-is-subuniverse-equiv)
+```
+
+### The type of `K`-equivalences
+
+```agda
 subuniverse-equiv :
   {l1 l2 l3 l4 : Level} (K : subuniverse l3 l4) →
   UU l1 → UU l2 → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
