@@ -40,12 +40,12 @@ of a dependent map `f : (x : A) → P (i x)` along a map `i : A → B` is a map
 `g : (y : B) → P y` such that `g` restricts along `i` to `f`.
 
 ```text
-      A
-      |  \
-    i |    \ f
-      |      \
-      ∨   g   ∨
-  b ∈ B -----> P b
+    A
+    |  \
+  i |    \ f
+    |      \
+    ∨   g   ∨
+    B -----> P b
 ```
 
 ## Definition
