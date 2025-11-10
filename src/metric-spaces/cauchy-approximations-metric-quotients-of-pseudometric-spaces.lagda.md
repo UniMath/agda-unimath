@@ -206,12 +206,12 @@ module _
     is-limit-cauchy-approximation-Pseudometric-Space M u lim)
   where
 
-  preserves-limit-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
+  preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
       ( map-metric-quotient-cauchy-approximation-Pseudometric-Space M u)
       ( map-metric-quotient-Pseudometric-Space M lim)
-  preserves-limit-map-metric-quotient-cauchy-approximation-Pseudometric-Space
+  preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space
     ε δ (x , x∈uε) (y , y∈lim) =
     let
       lim~y : sim-Pseudometric-Space M lim y

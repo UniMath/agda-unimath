@@ -30,6 +30,7 @@ open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.negated-equality
@@ -111,102 +112,14 @@ module _
     compute-sum-standard-geometric-fin-sequence-ℚ :
       (n : ℕ) →
       sum-standard-geometric-fin-sequence-ℚ a r n ＝
-      ( a *ℚ
-        ( (one-ℚ -ℚ power-ℚ n r) *ℚ
-          rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
-    compute-sum-standard-geometric-fin-sequence-ℚ 0 =
-      inv
-        ( equational-reasoning
-          a *ℚ ((one-ℚ -ℚ one-ℚ) *ℚ _)
-          ＝ a *ℚ (zero-ℚ *ℚ _)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ (right-inverse-law-add-ℚ one-ℚ) refl)
-          ＝ a *ℚ zero-ℚ
-            by ap-mul-ℚ refl (left-zero-law-mul-ℚ _)
-          ＝ zero-ℚ
-            by right-zero-law-mul-ℚ a)
-    compute-sum-standard-geometric-fin-sequence-ℚ (succ-ℕ n) =
-      let
-        1/⟨1-r⟩ = rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
-      in
-        equational-reasoning
-          sum-standard-geometric-fin-sequence-ℚ a r (succ-ℕ n)
-          ＝
-            sum-standard-geometric-fin-sequence-ℚ a r n +ℚ
-            seq-standard-geometric-sequence-ℚ a r n
-            by
-              cons-sum-fin-sequence-type-Commutative-Ring
-                ( commutative-ring-ℚ)
-                ( n)
-                ( _)
-                ( refl)
-          ＝
-            ( a *ℚ
-              ( (one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩)) +ℚ
-            ( a *ℚ power-ℚ n r)
-            by
-              ap-add-ℚ
-                ( compute-sum-standard-geometric-fin-sequence-ℚ n)
-                ( compute-standard-geometric-sequence-ℚ a r n)
-          ＝
-            a *ℚ
-            (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ power-ℚ n r)
-            by inv (left-distributive-mul-add-ℚ a _ _)
-          ＝
-            a *ℚ
-            ( (((one-ℚ -ℚ power-ℚ n r) *ℚ 1/⟨1-r⟩) +ℚ
-              (power-ℚ n r *ℚ (one-ℚ -ℚ r)) *ℚ 1/⟨1-r⟩))
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-add-ℚ
-                  ( refl)
-                  ( inv
-                    ( cancel-right-mul-div-ℚˣ _
-                      ( invertible-diff-neq-ℚ r one-ℚ r≠1))))
-          ＝
-            a *ℚ
-            ( ( (one-ℚ -ℚ power-ℚ n r) +ℚ (power-ℚ n r *ℚ (one-ℚ -ℚ r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( inv (right-distributive-mul-add-ℚ _ _ 1/⟨1-r⟩))
-          ＝
-            a *ℚ
-            ( ( one-ℚ -ℚ power-ℚ n r +ℚ
-                ((power-ℚ n r *ℚ one-ℚ) -ℚ (power-ℚ n r *ℚ r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( ap-add-ℚ refl (left-distributive-mul-diff-ℚ _ _ _))
-                  ( refl))
-          ＝
-            a *ℚ
-            ( ( one-ℚ -ℚ power-ℚ n r +ℚ
-                ((power-ℚ n r -ℚ power-ℚ (succ-ℕ n) r))) *ℚ
-              1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( ap-add-ℚ
-                    ( refl)
-                    ( ap-diff-ℚ
-                      ( right-unit-law-mul-ℚ _)
-                      ( inv (power-succ-ℚ n r))))
-                  ( refl))
-          ＝ a *ℚ ((one-ℚ -ℚ power-ℚ (succ-ℕ n) r) *ℚ 1/⟨1-r⟩)
-            by
-              ap-mul-ℚ
-                ( refl)
-                ( ap-mul-ℚ
-                  ( mul-right-div-Group group-add-ℚ _ _ _)
-                  ( refl))
+      ( (a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)) *ℚ
+        (one-ℚ -ℚ power-ℚ n r))
+    compute-sum-standard-geometric-fin-sequence-ℚ =
+      compute-sum-standard-geometric-fin-sequence-Commutative-Ring
+        ( commutative-ring-ℚ)
+        ( a)
+        ( r)
+        ( pr2 (invertible-diff-neq-ℚ r one-ℚ r≠1))
 ```
 
 ### If `|r| < 1`, the sum of the standard geometric sequence `n ↦ arⁿ` is `a/(1-r)`
@@ -241,30 +154,24 @@ module _
           ( inv
             ( eq-htpy (compute-sum-standard-geometric-fin-sequence-ℚ a r r≠1)))
           ( equational-reasoning
-            a *ℚ
-            ( (one-ℚ -ℚ zero-ℚ) *ℚ
-              rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1))
+            a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1) *ℚ
+            (one-ℚ -ℚ zero-ℚ)
             ＝
-              a *ℚ
-              ( one-ℚ *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1))
-              by ap-mul-ℚ refl (ap-mul-ℚ (right-zero-law-diff-ℚ one-ℚ) refl)
-            ＝ a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
-              by ap-mul-ℚ refl (left-unit-law-mul-ℚ _))
-          ( uniformly-continuous-map-limit-sequence-Metric-Space
+              a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1) *ℚ one-ℚ
+              by ap-mul-ℚ refl (right-zero-law-diff-ℚ _)
+            ＝
+              a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
+              by right-unit-law-mul-ℚ _)
+          ( preserves-limits-sequence-uniformly-continuous-function-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℚ)
             ( comp-uniformly-continuous-function-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℚ)
               ( metric-space-ℚ)
-              ( uniformly-continuous-left-mul-ℚ a)
-              ( comp-uniformly-continuous-function-Metric-Space
-                ( metric-space-ℚ)
-                ( metric-space-ℚ)
-                ( metric-space-ℚ)
-                ( uniformly-continuous-right-mul-ℚ
-                  ( rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
-                ( uniformly-continuous-diff-ℚ one-ℚ)))
+              ( uniformly-continuous-left-mul-ℚ
+                ( a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
+              ( uniformly-continuous-diff-ℚ one-ℚ))
             ( λ n → power-ℚ n r)
             ( zero-ℚ)
             ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))
