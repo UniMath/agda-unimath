@@ -240,3 +240,43 @@ module _
   is-subuniverse-connected-equiv' e =
     is-subuniverse-connected-retract K (retract-inv-equiv e)
 ```
+
+### `K`-connected types are closed under `K`-equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2) {A : UU l3} {B : UU l4}
+  where
+
+  is-subuniverse-connected-is-subuniverse-equiv :
+    (f : A → B) → is-subuniverse-equiv K f →
+    is-subuniverse-connected K B → is-subuniverse-connected K A
+  is-subuniverse-connected-is-subuniverse-equiv f F H =
+    is-subuniverse-connected-is-subuniverse-equiv-terminal-map K
+      ( is-subuniverse-equiv-comp K (terminal-map B) f
+        ( F)
+        ( is-subuniverse-equiv-terminal-map-is-subuniverse-connected K H))
+
+  is-subuniverse-connected-is-subuniverse-equiv' :
+    (f : A → B) → is-subuniverse-equiv K f →
+    is-subuniverse-connected K A → is-subuniverse-connected K B
+  is-subuniverse-connected-is-subuniverse-equiv' f F H =
+    is-subuniverse-connected-is-subuniverse-equiv-terminal-map K
+      ( is-subuniverse-equiv-left-factor K (terminal-map B) f
+        ( is-subuniverse-equiv-terminal-map-is-subuniverse-connected K H)
+        ( F))
+
+  is-subuniverse-connected-subuniverse-equiv :
+    subuniverse-equiv K A B →
+    is-subuniverse-connected K B →
+    is-subuniverse-connected K A
+  is-subuniverse-connected-subuniverse-equiv (f , F) =
+    is-subuniverse-connected-is-subuniverse-equiv f F
+
+  is-subuniverse-connected-subuniverse-equiv' :
+    subuniverse-equiv K A B →
+    is-subuniverse-connected K A →
+    is-subuniverse-connected K B
+  is-subuniverse-connected-subuniverse-equiv' (f , F) =
+    is-subuniverse-connected-is-subuniverse-equiv' f F
+```
