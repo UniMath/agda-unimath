@@ -102,7 +102,7 @@ module _
 ### A map is a `K`-equivalence if and only if it satisfies the extension condition
 
 A map `f : A → B` is a `K`-equivalence if and only if, for every `U` in `K` and
-every map `u : A → U`, the type of extensions of `u` along `f` is contractible.
+every map `u : A → U`, there is a unique extension of `u` along `f`.
 
 ```agda
 module _
