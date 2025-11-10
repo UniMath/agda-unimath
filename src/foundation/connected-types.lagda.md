@@ -271,7 +271,8 @@ is-connected-Σ k H K =
                     ≃ ║A║ₖ                  by the right unit law of Σ
 ```
 
-and so, in particular, if the total space is `k`-connected so is the base. ∎
+and so, in particular, if the total space is `k`-connected then so is the base.
+∎
 
 ```agda
 is-connected-base :

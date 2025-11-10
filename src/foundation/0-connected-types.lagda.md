@@ -264,46 +264,49 @@ is-0-connected-is-contr X p =
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where abstract
+  where
 
-  is-contr-im-map-trunc-Set-is-0-connected-domain' :
-    A → all-elements-merely-equal A → is-contr (im (map-trunc-Set f))
-  is-contr-im-map-trunc-Set-is-0-connected-domain' a C =
-    is-contr-im
-      ( trunc-Set B)
-      ( unit-trunc-Set a)
-      ( apply-dependent-universal-property-trunc-Set'
-        ( λ x →
-          set-Prop
-            ( Id-Prop
-              ( trunc-Set B)
-              ( map-trunc-Set f x)
-              ( map-trunc-Set f (unit-trunc-Set a))))
-        ( λ a' →
-          apply-universal-property-trunc-Prop
-            ( C a' a)
-            ( Id-Prop
-              ( trunc-Set B)
-              ( map-trunc-Set f (unit-trunc-Set a'))
-              ( map-trunc-Set f (unit-trunc-Set a)))
-            ( λ where refl → refl)))
+  abstract
+    is-contr-im-map-trunc-Set-is-0-connected-domain' :
+      A → all-elements-merely-equal A → is-contr (im (map-trunc-Set f))
+    is-contr-im-map-trunc-Set-is-0-connected-domain' a C =
+      is-contr-im
+        ( trunc-Set B)
+        ( unit-trunc-Set a)
+        ( apply-dependent-universal-property-trunc-Set'
+          ( λ x →
+            set-Prop
+              ( Id-Prop
+                ( trunc-Set B)
+                ( map-trunc-Set f x)
+                ( map-trunc-Set f (unit-trunc-Set a))))
+          ( λ a' →
+            apply-universal-property-trunc-Prop
+              ( C a' a)
+              ( Id-Prop
+                ( trunc-Set B)
+                ( map-trunc-Set f (unit-trunc-Set a'))
+                ( map-trunc-Set f (unit-trunc-Set a)))
+              ( λ where refl → refl)))
 
-  is-0-connected-im-is-0-connected-domain' :
-    A → all-elements-merely-equal A → is-0-connected (im f)
-  is-0-connected-im-is-0-connected-domain' a C =
-    is-contr-equiv'
-      ( im (map-trunc-Set f))
-      ( equiv-trunc-im-Set f)
-      ( is-contr-im-map-trunc-Set-is-0-connected-domain' a C)
+  abstract
+    is-0-connected-im-is-0-connected-domain' :
+      A → all-elements-merely-equal A → is-0-connected (im f)
+    is-0-connected-im-is-0-connected-domain' a C =
+      is-contr-equiv'
+        ( im (map-trunc-Set f))
+        ( equiv-trunc-im-Set f)
+        ( is-contr-im-map-trunc-Set-is-0-connected-domain' a C)
 
-  is-0-connected-im-is-0-connected-domain :
-    is-0-connected A → is-0-connected (im f)
-  is-0-connected-im-is-0-connected-domain C =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-is-0-connected C)
-      ( is-contr-Prop _)
-      ( λ a →
-        is-0-connected-im-is-0-connected-domain' a (mere-eq-is-0-connected C))
+  abstract
+    is-0-connected-im-is-0-connected-domain :
+      is-0-connected A → is-0-connected (im f)
+    is-0-connected-im-is-0-connected-domain C =
+      apply-universal-property-trunc-Prop
+        ( is-inhabited-is-0-connected C)
+        ( is-contr-Prop _)
+        ( λ a →
+          is-0-connected-im-is-0-connected-domain' a (mere-eq-is-0-connected C))
 ```
 
 ### The image of a point is 0-connected
@@ -311,14 +314,16 @@ module _
 ```agda
 module _
   {l1 : Level} {A : UU l1}
-  where abstract
+  where
 
-  is-0-connected-im-point' : (f : unit → A) → is-0-connected (im f)
-  is-0-connected-im-point' f =
-    is-0-connected-im-is-0-connected-domain f is-0-connected-unit
+  abstract
+    is-0-connected-im-point' : (f : unit → A) → is-0-connected (im f)
+    is-0-connected-im-point' f =
+      is-0-connected-im-is-0-connected-domain f is-0-connected-unit
 
-  is-0-connected-im-point : (a : A) → is-0-connected (im (point a))
-  is-0-connected-im-point a = is-0-connected-im-point' (point a)
+  abstract
+    is-0-connected-im-point : (a : A) → is-0-connected (im (point a))
+    is-0-connected-im-point a = is-0-connected-im-point' (point a)
 ```
 
 ### Coproducts of inhabited types are not 0-connected
@@ -326,20 +331,22 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where abstract
+  where
 
-  is-not-0-connected-coproduct-has-element :
-    A → B → ¬ is-0-connected (A + B)
-  is-not-0-connected-coproduct-has-element a b H =
-    apply-universal-property-trunc-Prop
-      ( mere-eq-is-0-connected H (inl a) (inr b))
-      ( empty-Prop)
-      ( is-empty-eq-coproduct-inl-inr a b)
+  abstract
+    is-not-0-connected-coproduct-has-element :
+      A → B → ¬ is-0-connected (A + B)
+    is-not-0-connected-coproduct-has-element a b H =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-is-0-connected H (inl a) (inr b))
+        ( empty-Prop)
+        ( is-empty-eq-coproduct-inl-inr a b)
 
-  is-not-0-connected-coproduct-is-inhabited :
-    is-inhabited A → is-inhabited B → ¬ is-0-connected (A + B)
-  is-not-0-connected-coproduct-is-inhabited |a| |b| =
-    apply-twice-universal-property-trunc-Prop |a| |b|
-      ( neg-type-Prop (is-0-connected (A + B)))
-      ( is-not-0-connected-coproduct-has-element)
+  abstract
+    is-not-0-connected-coproduct-is-inhabited :
+      is-inhabited A → is-inhabited B → ¬ is-0-connected (A + B)
+    is-not-0-connected-coproduct-is-inhabited |a| |b| =
+      apply-twice-universal-property-trunc-Prop |a| |b|
+        ( neg-type-Prop (is-0-connected (A + B)))
+        ( is-not-0-connected-coproduct-has-element)
 ```

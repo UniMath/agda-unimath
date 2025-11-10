@@ -94,7 +94,7 @@ module _
   we compute the fiber family of dependent precomposition maps as a dependent
   product
   ```text
-    compute-fiber-Π-precomp-Π :
+    dependent-product-characterization-fiber-precomp-Π :
       fiber (precomp-Π f U) g ≃
       ( (b : B) →
         Σ (u : U b),

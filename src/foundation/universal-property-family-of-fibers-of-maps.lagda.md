@@ -538,15 +538,17 @@ module _
   (g : (a : A) → U (f a))
   where
 
-  family-fiber-Π-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp-Π b =
+  family-dependent-product-fiber-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-dependent-product-fiber-precomp-Π b =
     Σ (U b) (λ u → ((a , p) : fiber f b) → dependent-identification U p (g a) u)
 
-  fiber-Π-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp-Π = (b : B) → family-fiber-Π-precomp-Π b
+  dependent-product-fiber-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
+  dependent-product-fiber-precomp-Π =
+    (b : B) → family-dependent-product-fiber-precomp-Π b
 
-  compute-fiber-Π-precomp-Π : fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π
-  compute-fiber-Π-precomp-Π =
+  dependent-product-characterization-fiber-precomp-Π :
+    fiber (precomp-Π f U) g ≃ dependent-product-fiber-precomp-Π
+  dependent-product-characterization-fiber-precomp-Π =
     equivalence-reasoning
       fiber (precomp-Π f U) g
       ≃ Σ ((b : B) → U b) (λ h → (a : A) → g a ＝ (h ∘ f) a)
@@ -565,30 +567,33 @@ module _
               ((a , p) : fiber f b) → dependent-identification U p (g a) u))
         by inv-distributive-Π-Σ
 
-  family-fiber-Π-curry-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-curry-precomp-Π b =
+  family-fiber-dependent-product-curry-precomp-Π : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-dependent-product-curry-precomp-Π b =
     Σ ( U b)
       ( λ u → (a : A) (p : f a ＝ b) → dependent-identification U p (g a) u)
 
-  fiber-Π-curry-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-curry-precomp-Π = (b : B) → family-fiber-Π-curry-precomp-Π b
+  fiber-dependent-product-curry-precomp-Π : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-dependent-product-curry-precomp-Π =
+    (b : B) → family-fiber-dependent-product-curry-precomp-Π b
 
-  compute-fiber-Π-curry-precomp-Π :
-    fiber (precomp-Π f U) g ≃ fiber-Π-curry-precomp-Π
-  compute-fiber-Π-curry-precomp-Π =
+  curried-dependent-product-characterization-fiber-precomp-Π :
+    fiber (precomp-Π f U) g ≃ fiber-dependent-product-curry-precomp-Π
+  curried-dependent-product-characterization-fiber-precomp-Π =
     ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
-    ( compute-fiber-Π-precomp-Π)
+    ( dependent-product-characterization-fiber-precomp-Π)
 
-  family-fiber-Π-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp-Π' b =
+  family-dependent-product-fiber-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-dependent-product-fiber-precomp-Π' b =
     Σ ( U b)
       ( λ u → ((a , p) : fiber' f b) → dependent-identification U p u (g a))
 
-  fiber-Π-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp-Π' = (b : B) → family-fiber-Π-precomp-Π' b
+  dependent-product-fiber-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
+  dependent-product-fiber-precomp-Π' =
+    (b : B) → family-dependent-product-fiber-precomp-Π' b
 
-  compute-fiber-Π-precomp-Π' : fiber (precomp-Π f U) g ≃ fiber-Π-precomp-Π'
-  compute-fiber-Π-precomp-Π' =
+  dependent-product-characterization-fiber-precomp-Π' :
+    fiber (precomp-Π f U) g ≃ dependent-product-fiber-precomp-Π'
+  dependent-product-characterization-fiber-precomp-Π' =
     equivalence-reasoning
       fiber (precomp-Π f U) g
       ≃ Σ ((b : B) → U b) (λ h → (a : A) → (h ∘ f) a ＝ g a)
@@ -607,21 +612,22 @@ module _
               ((a , p) : fiber' f b) → dependent-identification U p u (g a)))
         by inv-distributive-Π-Σ
 
-  family-fiber-Π-curry-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-curry-precomp-Π' b =
+  family-fiber-dependent-product-curry-precomp-Π' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-fiber-dependent-product-curry-precomp-Π' b =
     Σ (U b) (λ u → (a : A) (p : b ＝ f a) → dependent-identification U p u (g a))
 
-  fiber-Π-curry-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-curry-precomp-Π' = (b : B) → family-fiber-Π-curry-precomp-Π' b
+  fiber-dependent-product-curry-precomp-Π' : UU (l1 ⊔ l2 ⊔ l3)
+  fiber-dependent-product-curry-precomp-Π' =
+    (b : B) → family-fiber-dependent-product-curry-precomp-Π' b
 
-  compute-fiber-Π-curry-precomp-Π' :
-    fiber (precomp-Π f U) g ≃ fiber-Π-curry-precomp-Π'
-  compute-fiber-Π-curry-precomp-Π' =
+  curried-dependent-product-characterization-fiber-precomp-Π' :
+    fiber (precomp-Π f U) g ≃ fiber-dependent-product-curry-precomp-Π'
+  curried-dependent-product-characterization-fiber-precomp-Π' =
     ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
-    ( compute-fiber-Π-precomp-Π')
+    ( dependent-product-characterization-fiber-precomp-Π')
 ```
 
-### Computing the fibers of precomposition functions as dependent products
+### Fibers of precomposition functions as dependent products
 
 We give four equivalences for the fibers of precomposition functions as
 dependent products:
@@ -640,15 +646,17 @@ module _
   (g : A → U)
   where
 
-  family-fiber-Π-precomp : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp b =
+  family-dependent-product-fiber-precomp : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-dependent-product-fiber-precomp b =
     Σ U (λ u → ((a , _) : fiber f b) → g a ＝ u)
 
-  fiber-Π-precomp : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp = (b : B) → family-fiber-Π-precomp b
+  dependent-product-fiber-precomp : UU (l1 ⊔ l2 ⊔ l3)
+  dependent-product-fiber-precomp =
+    (b : B) → family-dependent-product-fiber-precomp b
 
-  compute-fiber-Π-precomp : fiber (precomp f U) g ≃ fiber-Π-precomp
-  compute-fiber-Π-precomp =
+  dependent-product-characterization-fiber-precomp :
+    fiber (precomp f U) g ≃ dependent-product-fiber-precomp
+  dependent-product-characterization-fiber-precomp =
     equivalence-reasoning
       fiber (precomp f U) g
       ≃ Σ (B → U) (λ h → (a : A) → g a ＝ (h ∘ f) a)
@@ -663,21 +671,23 @@ module _
       ≃ ( (b : B) → Σ U (λ u → ((a , _) : fiber f b) → g a ＝ u))
         by inv-distributive-Π-Σ
 
-  compute-fiber-Π-curry-precomp :
+  curried-dependent-product-characterization-fiber-precomp :
     fiber (precomp f U) g ≃ ((b : B) → Σ U (λ u → (a : A) → f a ＝ b → g a ＝ u))
-  compute-fiber-Π-curry-precomp =
+  curried-dependent-product-characterization-fiber-precomp =
     ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
-    ( compute-fiber-Π-precomp)
+    ( dependent-product-characterization-fiber-precomp)
 
-  family-fiber-Π-precomp' : B → UU (l1 ⊔ l2 ⊔ l3)
-  family-fiber-Π-precomp' b =
+  family-dependent-product-fiber-precomp' : B → UU (l1 ⊔ l2 ⊔ l3)
+  family-dependent-product-fiber-precomp' b =
     Σ U (λ u → ((a , _) : fiber' f b) → u ＝ g a)
 
-  fiber-Π-precomp' : UU (l1 ⊔ l2 ⊔ l3)
-  fiber-Π-precomp' = (b : B) → family-fiber-Π-precomp' b
+  dependent-product-fiber-precomp' : UU (l1 ⊔ l2 ⊔ l3)
+  dependent-product-fiber-precomp' =
+    (b : B) → family-dependent-product-fiber-precomp' b
 
-  compute-fiber-Π-precomp' : fiber (precomp f U) g ≃ fiber-Π-precomp'
-  compute-fiber-Π-precomp' =
+  dependent-product-characterization-fiber-precomp' :
+    fiber (precomp f U) g ≃ dependent-product-fiber-precomp'
+  dependent-product-characterization-fiber-precomp' =
     equivalence-reasoning
       fiber (precomp f U) g
       ≃ Σ (B → U) (λ h → (h ∘ f) ~ g)
@@ -692,9 +702,9 @@ module _
       ≃ ( (b : B) → Σ U (λ u → ((a , _) : fiber' f b) → u ＝ g a))
         by inv-distributive-Π-Σ
 
-  compute-fiber-Π-curry-precomp' :
+  curried-dependent-product-characterization-fiber-precomp' :
     fiber (precomp f U) g ≃ ((b : B) → Σ U (λ u → (a : A) → b ＝ f a → u ＝ g a))
-  compute-fiber-Π-curry-precomp' =
+  curried-dependent-product-characterization-fiber-precomp' =
     ( equiv-Π-equiv-family (λ b → equiv-tot (λ u → equiv-ev-pair))) ∘e
-    ( compute-fiber-Π-precomp')
+    ( dependent-product-characterization-fiber-precomp')
 ```
