@@ -80,10 +80,10 @@ module _
   map-extension-dependent-type : extension-dependent-type i P f → (y : B) → P y
   map-extension-dependent-type = pr1
 
-  is-extension-dependent-type-map-extension-dependent-type :
+  is-extension-map-extension-dependent-type :
     (E : extension-dependent-type i P f) →
     is-extension-dependent-type i f (map-extension-dependent-type E)
-  is-extension-dependent-type-map-extension-dependent-type = pr2
+  is-extension-map-extension-dependent-type = pr2
 ```
 
 ### Extensions of dependent maps with homotopies going the other way
@@ -117,10 +117,10 @@ module _
     extension-dependent-type' i P f → (y : B) → P y
   map-extension-dependent-type' = pr1
 
-  is-extension-dependent-type-map-extension-dependent-type' :
+  is-extension-map-extension-dependent-type' :
     (E : extension-dependent-type' i P f) →
     is-extension-dependent-type' i f (map-extension-dependent-type' E)
-  is-extension-dependent-type-map-extension-dependent-type' = pr2
+  is-extension-map-extension-dependent-type' = pr2
 ```
 
 ## Operations

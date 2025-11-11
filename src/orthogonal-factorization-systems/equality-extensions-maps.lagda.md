@@ -56,8 +56,8 @@ module _
     map-extension-dependent-type e ~ map-extension-dependent-type e' →
     UU (l1 ⊔ l3)
   coherence-htpy-extension e e' K =
-    ( is-extension-dependent-type-map-extension-dependent-type e ∙h (K ·r i)) ~
-    ( is-extension-dependent-type-map-extension-dependent-type e')
+    ( is-extension-map-extension-dependent-type e ∙h (K ·r i)) ~
+    ( is-extension-map-extension-dependent-type e')
 
   htpy-extension : (e e' : extension-dependent-type i P f) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-extension e e' =
@@ -83,8 +83,8 @@ module _
     map-extension-dependent-type' e ~ map-extension-dependent-type' e' →
     UU (l1 ⊔ l3)
   coherence-htpy-extension' e e' K =
-    ( is-extension-dependent-type-map-extension-dependent-type' e) ~
-    ( K ·r i ∙h is-extension-dependent-type-map-extension-dependent-type' e')
+    ( is-extension-map-extension-dependent-type' e) ~
+    ( K ·r i ∙h is-extension-map-extension-dependent-type' e')
 
   htpy-extension' :
     (e e' : extension-dependent-type' i P f) → UU (l1 ⊔ l2 ⊔ l3)
@@ -120,7 +120,7 @@ module _
         ( is-torsorial-htpy (map-extension-dependent-type e))
         ( map-extension-dependent-type e , refl-htpy)
         ( is-torsorial-htpy
-          ( is-extension-dependent-type-map-extension-dependent-type e ∙h
+          ( is-extension-map-extension-dependent-type e ∙h
             refl-htpy))
 
   abstract
@@ -169,7 +169,7 @@ module _
         ( is-torsorial-htpy (map-extension-dependent-type' e))
         ( map-extension-dependent-type' e , refl-htpy)
         ( is-torsorial-htpy
-          ( is-extension-dependent-type-map-extension-dependent-type' e))
+          ( is-extension-map-extension-dependent-type' e))
 
   abstract
     is-equiv-htpy-eq-extension' :
