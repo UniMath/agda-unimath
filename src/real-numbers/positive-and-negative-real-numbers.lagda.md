@@ -12,6 +12,8 @@ module real-numbers.positive-and-negative-real-numbers where
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
 open import foundation.logical-equivalences
+open import foundation.cartesian-product-types
+open import foundation.negation
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -119,4 +121,14 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
     is-positive-ℝ y
   is-positive-le-ℝ⁰⁺ (x , 0≤x) y = concatenate-leq-le-ℝ zero-ℝ x y 0≤x
+```
+
+### Real numbers are not both negative and nonnegative
+
+```agda
+abstract
+  is-not-negative-and-nonnegative-ℝ :
+    {l : Level} {x : ℝ l} → ¬ (is-negative-ℝ x × is-nonnegative-ℝ x)
+  is-not-negative-and-nonnegative-ℝ {x = x} (x<0 , 0≤x) =
+    not-leq-le-ℝ x zero-ℝ x<0 0≤x
 ```

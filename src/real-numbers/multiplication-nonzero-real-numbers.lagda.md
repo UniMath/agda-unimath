@@ -10,6 +10,9 @@ module real-numbers.multiplication-nonzero-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.functoriality-cartesian-product-types
 open import foundation.disjunction
 open import foundation.function-types
 open import foundation.universe-levels
@@ -19,7 +22,6 @@ open import real-numbers.multiplication-negative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
-open import real-numbers.multiplicative-inverses-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 ```
 
@@ -65,4 +67,38 @@ mul-nonzero-ℝ :
   {l1 l2 : Level} → nonzero-ℝ l1 → nonzero-ℝ l2 → nonzero-ℝ (l1 ⊔ l2)
 mul-nonzero-ℝ (x , x#0) (y , y#0) =
   ( x *ℝ y , is-nonzero-mul-ℝ x#0 y#0)
+```
+
+## Properties
+
+### If the product of two real numbers is nonzero, they are both nonzero
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    is-nonzero-factors-is-nonzero-mul-ℝ :
+      is-nonzero-ℝ (x *ℝ y) → is-nonzero-ℝ x × is-nonzero-ℝ y
+    is-nonzero-factors-is-nonzero-mul-ℝ =
+      let
+        motive = is-nonzero-prop-ℝ x ∧ is-nonzero-prop-ℝ y
+      in
+        elim-disjunction
+          ( motive)
+          ( λ xy<0 →
+            elim-disjunction
+              ( motive)
+              ( map-product inr-disjunction inl-disjunction)
+              ( map-product inl-disjunction inr-disjunction)
+              ( different-signs-is-negative-mul-ℝ x y xy<0))
+          ( λ 0<xy →
+            elim-disjunction
+              ( motive)
+              ( map-product inl-disjunction inl-disjunction)
+              ( map-product inr-disjunction inr-disjunction)
+              ( same-sign-is-positive-mul-ℝ x y 0<xy))
 ```

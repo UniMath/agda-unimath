@@ -19,6 +19,8 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.disjunction
 open import foundation.functoriality-disjunction
 open import foundation.propositional-truncations
@@ -35,6 +37,7 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -143,17 +146,17 @@ abstract
   different-signs-is-negative-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-negative-ℝ (x *ℝ y) →
     type-disjunction-Prop
-      ( is-negative-prop-ℝ x ∧ is-positive-prop-ℝ y)
       ( is-positive-prop-ℝ x ∧ is-negative-prop-ℝ y)
+      ( is-negative-prop-ℝ x ∧ is-positive-prop-ℝ y)
   different-signs-is-negative-mul-ℝ x y xy<0 =
     map-disjunction
-      {!   !}
-      {!   !}
+      ( map-product (is-positive-is-negative-neg-ℝ x) id)
+      ( map-product (is-negative-is-positive-neg-ℝ x) id)
       ( same-sign-is-positive-mul-ℝ
         ( neg-ℝ x)
         ( y)
         ( inv-tr
           ( is-positive-ℝ)
           ( left-negative-law-mul-ℝ x y)
-          {!   !}))
+          ( neg-is-negative-ℝ (x *ℝ y) xy<0)))
 ```

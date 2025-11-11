@@ -25,6 +25,7 @@ open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -96,4 +97,25 @@ positive-squared-magnitude-nonzero-ℂ :
   {l : Level} (z : nonzero-ℂ l) → ℝ⁺ l
 positive-squared-magnitude-nonzero-ℂ (z , z≠0) =
   ( squared-magnitude-ℂ z , is-positive-squared-magnitude-is-nonzero-ℂ z z≠0)
+```
+
+### A complex number is nonzero if and only if its magnitude is positive
+
+```agda
+abstract
+  is-nonzero-is-positive-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → is-positive-ℝ ∥ z ∥ℂ → is-nonzero-ℂ z
+  is-nonzero-is-positive-magnitude-ℂ z 0<|z| =
+    is-nonzero-is-positive-squared-magnitude-ℂ
+      ( z)
+      ( is-positive-is-positive-sqrt-ℝ⁰⁺
+        ( nonnegative-squared-magnitude-ℂ z)
+        ( 0<|z|))
+
+  is-positive-magnitude-is-nonzero-ℂ :
+    {l : Level} (z : ℂ l) → is-nonzero-ℂ z → is-positive-ℝ ∥ z ∥ℂ
+  is-positive-magnitude-is-nonzero-ℂ z z≠0 =
+    is-positive-sqrt-is-positive-ℝ⁰⁺
+      ( nonnegative-squared-magnitude-ℂ z)
+      ( is-positive-squared-magnitude-is-nonzero-ℂ z z≠0)
 ```

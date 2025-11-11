@@ -40,6 +40,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-negative-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negative-real-numbers
+open import real-numbers.multiplication-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -151,65 +152,26 @@ is-invertible-is-nonzero-ℝ x x≠0 =
 ### If a real number has a multiplicative inverse, it is nonzero
 
 ```agda
-abstract opaque
-  unfolding mul-ℝ real-ℚ sim-ℝ
-
+abstract
   is-nonzero-has-right-inverse-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
     is-nonzero-ℝ x
-  is-nonzero-has-right-inverse-mul-ℝ x y (_ , L1⊆Lxy) =
-    let open do-syntax-trunc-Prop (is-nonzero-prop-ℝ x)
-    in do
-      ( ( ([a,b]@((a , b) , a≤b) , a<x , x<b) ,
-          ([c,d]@((c , d) , c≤d) , c<y , y<d)) ,
-        0<[a,b][c,d]) ← L1⊆Lxy zero-ℚ le-zero-one-ℚ
-      let
-        is-positive-mul p q {r} lb1 lb2 =
-          is-positive-le-zero-ℚ
-            ( concatenate-le-leq-ℚ
-              ( zero-ℚ)
-              ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
-              ( p *ℚ q)
-              ( 0<[a,b][c,d])
-              ( transitive-leq-ℚ
-                ( lower-bound-mul-closed-interval-ℚ [a,b] [c,d])
-                ( r)
-                ( p *ℚ q)
-                ( lb1)
-                ( lb2)))
-      rec-coproduct
-        ( λ (is-neg-a , is-neg-c) →
-          rec-coproduct
-            ( λ (is-neg-b , is-neg-d) →
-              inl-disjunction
-                ( is-negative-exists-ℚ⁻-in-upper-cut-ℝ
-                  ( x)
-                  ( intro-exists (b , is-neg-b) x<b)))
-            ( λ (is-pos-b , is-pos-d) →
-              ex-falso
-                ( is-not-negative-and-positive-ℚ
-                  ( is-negative-mul-negative-positive-ℚ is-neg-a is-pos-d ,
-                    is-positive-mul a d
-                      ( leq-right-min-ℚ _ _)
-                      ( leq-left-min-ℚ _ _))))
-            ( same-sign-is-positive-mul-ℚ
-              ( is-positive-mul b d
-                ( leq-right-min-ℚ _ _)
-                ( leq-right-min-ℚ _ _))))
-        ( λ (is-pos-a , is-pos-c) →
-          inr-disjunction
-            ( is-positive-exists-ℚ⁺-in-lower-cut-ℝ
-              ( x)
-              ( intro-exists (a , is-pos-a) a<x)))
-        ( same-sign-is-positive-mul-ℚ
-          ( is-positive-mul a c (leq-left-min-ℚ _ _) (leq-left-min-ℚ _ _)))
+  is-nonzero-has-right-inverse-mul-ℝ x y xy=1 =
+    pr1
+      ( is-nonzero-factors-is-nonzero-mul-ℝ
+        ( x)
+        ( y)
+        ( is-nonzero-is-positive-ℝ
+          ( is-positive-sim-ℝ
+            ( is-positive-one-ℝ)
+            ( symmetric-sim-ℝ xy=1))))
 
   is-nonzero-has-left-inverse-mul-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
     is-nonzero-ℝ y
   is-nonzero-has-left-inverse-mul-ℝ x y xy=1 =
     is-nonzero-has-right-inverse-mul-ℝ y x
-      ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy=1)
+      ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ x y) xy=1)
 ```
 
 ### The multiplicative inverse is unique

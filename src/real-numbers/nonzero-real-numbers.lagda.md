@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.functoriality-disjunction
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -99,34 +100,6 @@ eq-nonzero-ℝ :
   {l : Level} (x y : nonzero-ℝ l) → (real-nonzero-ℝ x ＝ real-nonzero-ℝ y) →
   x ＝ y
 eq-nonzero-ℝ _ _ = eq-type-subtype is-nonzero-prop-ℝ
-```
-
-### Two real numbers are apart if and only if their difference is nonzero
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
-  where
-
-  abstract
-    is-nonzero-diff-is-apart-ℝ : apart-ℝ x y → is-nonzero-ℝ (x -ℝ y)
-    is-nonzero-diff-is-apart-ℝ x#y =
-      apart-right-sim-ℝ
-        ( x -ℝ y)
-        ( y -ℝ y)
-        ( zero-ℝ)
-        ( right-inverse-law-add-ℝ y)
-        ( preserves-apart-right-add-ℝ (neg-ℝ y) x y x#y)
-
-    is-apart-is-nonzero-diff-ℝ : is-nonzero-ℝ (x -ℝ y) → apart-ℝ x y
-    is-apart-is-nonzero-diff-ℝ x-y#0 =
-      apart-sim-ℝ
-        ( cancel-right-diff-add-ℝ x y)
-        ( sim-eq-ℝ (left-unit-law-add-ℝ y))
-        ( preserves-apart-right-add-ℝ y _ _ x-y#0)
-
-  nonzero-diff-apart-ℝ : apart-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
-  nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
 ```
 
 ### The nonzero difference of a pair of real numbers `x` and `y` such that `x < y`
@@ -229,5 +202,16 @@ module _
                     ( nonnegative-square-ℝ x)
                     ( refl))
             ＝ abs-ℝ x by inv (eq-abs-sqrt-square-ℝ x))
-          ( is-positive-sqrt-ℝ⁺ (square-ℝ x , 0<x²)))
+          ( is-positive-sqrt-is-positive-ℝ⁰⁺ _ 0<x²))
+```
+
+### Being nonzero is preserved by similarity
+
+```agda
+abstract
+  is-nonzero-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → is-nonzero-ℝ x → is-nonzero-ℝ y
+  is-nonzero-sim-ℝ x~y =
+    map-disjunction (is-negative-sim-ℝ x~y) (is-positive-sim-ℝ x~y)
 ```
