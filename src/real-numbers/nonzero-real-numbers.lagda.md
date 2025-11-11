@@ -52,7 +52,7 @@ equivalently if it is [negative](real-numbers.negative-real-numbers.md)
 
 ```agda
 is-nonzero-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-nonzero-prop-ℝ x = is-negative-prop-ℝ x ∨ is-positive-prop-ℝ x
+is-nonzero-prop-ℝ x = (is-negative-prop-ℝ x) ∨ (is-positive-prop-ℝ x)
 
 is-nonzero-ℝ : {l : Level} → ℝ l → UU l
 is-nonzero-ℝ x = type-Prop (is-nonzero-prop-ℝ x)
@@ -101,7 +101,7 @@ eq-nonzero-ℝ :
 eq-nonzero-ℝ _ _ = eq-type-subtype is-nonzero-prop-ℝ
 ```
 
-### If `x < y`, then `y - x` is nonzero
+### The nonzero difference of a pair of real numbers `x` and `y` such that `x < y`
 
 ```agda
 nonzero-diff-le-ℝ :
@@ -109,7 +109,7 @@ nonzero-diff-le-ℝ :
 nonzero-diff-le-ℝ {x = x} {y = y} x<y = nonzero-ℝ⁺ (positive-diff-le-ℝ x<y)
 ```
 
-### If `|x| < y`, then `y - x` is nonzero
+### The nonzero difference of a pair of real numbers `x` and `y` such that `|x| < y`
 
 ```agda
 nonzero-diff-le-abs-ℝ :

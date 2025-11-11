@@ -88,7 +88,7 @@ abstract
     is-trunc-is-equiv k (fiber (ap f) p)
       ( fiber-ap-fiber-diagonal-map f (triple x y p))
       ( is-equiv-fiber-ap-fiber-diagonal-map f (triple x y p))
-      ( is-trunc-map-ap-is-trunc-map k f is-trunc-f x y p)
+      ( is-trunc-map-ap-is-trunc-map-succ k f is-trunc-f x y p)
 
 abstract
   is-trunc-map-is-trunc-diagonal-map :
