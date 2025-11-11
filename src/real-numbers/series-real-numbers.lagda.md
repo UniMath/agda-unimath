@@ -25,7 +25,7 @@ open import real-numbers.metric-abelian-group-of-real-numbers
 
 A {{#concept "series" Disambiguation="of real numbers" Agda=series-ℝ}} of
 [real numbers](real-numbers.dedekind-real-numbers.md) is an infinite sum
-$$\Sigma_{n=0}^∞ a_n$$, which is evaluated for convergence in the
+$$∑_{n=0}^∞ a_n$$, which is evaluated for convergence in the
 [metric abelian group of real numbers](real-numbers.metric-abelian-group-of-real-numbers.md).
 
 ## Definition
