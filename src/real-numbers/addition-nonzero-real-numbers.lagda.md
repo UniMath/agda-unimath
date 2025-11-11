@@ -9,15 +9,16 @@ module real-numbers.addition-nonzero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.nonzero-real-numbers
-open import real-numbers.addition-positive-real-numbers
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.functoriality-disjunction
+open import foundation.universe-levels
+
 open import real-numbers.addition-negative-real-numbers
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import foundation.functoriality-disjunction
-open import foundation.disjunction
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
+open import real-numbers.nonzero-real-numbers
 ```
 
 </details>

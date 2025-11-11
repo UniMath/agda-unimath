@@ -7,13 +7,15 @@ module complex-numbers.addition-nonzero-complex-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import complex-numbers.nonzero-complex-numbers
 open import complex-numbers.addition-complex-numbers
-open import foundation.functoriality-disjunction
 open import complex-numbers.complex-numbers
-open import real-numbers.addition-nonzero-real-numbers
+open import complex-numbers.nonzero-complex-numbers
+
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.universe-levels
+
+open import real-numbers.addition-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 ```
 

@@ -7,9 +7,11 @@ module linear-algebra.real-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.local-ring-of-real-numbers
-open import linear-algebra.vector-spaces
 open import foundation.universe-levels
+
+open import linear-algebra.vector-spaces
+
+open import real-numbers.local-ring-of-real-numbers
 ```
 
 </details>

@@ -7,10 +7,13 @@ module linear-algebra.vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.local-commutative-rings
+
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
-open import commutative-algebra.local-commutative-rings
+
 open import linear-algebra.left-modules-commutative-rings
 ```
 

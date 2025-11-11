@@ -9,21 +9,22 @@ module real-numbers.addition-negative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.negative-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import foundation.transport-along-identifications
-open import real-numbers.rational-real-numbers
-open import real-numbers.negation-real-numbers
-open import foundation.functoriality-disjunction
-open import real-numbers.addition-positive-real-numbers
-open import foundation.disjunction
-open import real-numbers.addition-real-numbers
-open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
-open import real-numbers.positive-real-numbers
-open import real-numbers.positive-and-negative-real-numbers
-open import foundation.universe-levels
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.functoriality-disjunction
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.negative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>

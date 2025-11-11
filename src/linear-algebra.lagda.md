@@ -33,6 +33,7 @@ open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
 open import linear-algebra.preimages-of-left-module-structures-along-homomorphisms-of-rings public
 open import linear-algebra.rational-modules public
+open import linear-algebra.real-vector-spaces public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
@@ -46,4 +47,5 @@ open import linear-algebra.tuples-on-euclidean-domains public
 open import linear-algebra.tuples-on-monoids public
 open import linear-algebra.tuples-on-rings public
 open import linear-algebra.tuples-on-semirings public
+open import linear-algebra.vector-spaces public
 ```

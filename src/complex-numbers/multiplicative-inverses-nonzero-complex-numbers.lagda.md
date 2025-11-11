@@ -7,19 +7,19 @@ module complex-numbers.multiplicative-inverses-nonzero-complex-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.invertible-elements-commutative-rings
+
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
-open import complex-numbers.magnitude-complex-numbers
-open import commutative-algebra.invertible-elements-commutative-rings
-open import complex-numbers.multiplication-complex-numbers
-open import complex-numbers.raising-universe-levels-complex-numbers
-open import complex-numbers.nonzero-complex-numbers
-open import complex-numbers.similarity-complex-numbers
 open import complex-numbers.large-ring-of-complex-numbers
+open import complex-numbers.magnitude-complex-numbers
+open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.nonzero-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
+open import complex-numbers.similarity-complex-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.logical-equivalences
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -150,10 +150,10 @@ abstract
   is-nonzero-complex-inv-nonzero-ℂ :
     {l : Level} (z : nonzero-ℂ l) → is-nonzero-ℂ (complex-inv-nonzero-ℂ z)
   is-nonzero-complex-inv-nonzero-ℂ z =
-    is-nonzero-has-right-inverse-mul-ℂ
+    is-nonzero-has-left-inverse-mul-ℂ
       ( _)
       ( _)
-      ( right-inverse-law-mul-ℂ z)
+      ( right-inverse-law-mul-nonzero-ℂ z)
 
 inv-nonzero-ℂ : {l : Level} → nonzero-ℂ l → nonzero-ℂ l
 inv-nonzero-ℂ z = (complex-inv-nonzero-ℂ z , is-nonzero-complex-inv-nonzero-ℂ z)
@@ -163,27 +163,35 @@ inv-nonzero-ℂ z = (complex-inv-nonzero-ℂ z , is-nonzero-complex-inv-nonzero-
 
 ```agda
 abstract
-  is-invertible-iff-is-nonzero-ℂ :
+  is-nonzero-is-invertible-ℂ :
     {l : Level} (z : ℂ l) →
-    ( is-invertible-element-Commutative-Ring
-      ( commutative-ring-ℂ l)
-      ( z)) ↔
-    ( is-nonzero-ℂ z)
-  is-invertible-iff-is-nonzero-ℂ z =
-    ( ( λ (w , zw=1 , _) →
-        is-nonzero-has-right-inverse-mul-ℂ
-          ( z)
-          ( w)
-          ( transitive-sim-ℂ _ _ _
-            ( symmetric-sim-ℂ (sim-raise-ℂ _ one-ℂ))
-            ( sim-eq-ℂ zw=1))) ,
-      ( λ z≠0 →
-        ( complex-inv-nonzero-ℂ (z , z≠0) ,
-          eq-sim-ℂ
-            ( similarity-reasoning-ℂ
-              z *ℂ complex-inv-nonzero-ℂ (z , z≠0)
-              ~ℂ one-ℂ
-                by left-inverse-law-mul-ℂ (z , z≠0)
-              ~ℂ {!   !} by {!   !}) ,
-          {!   !})))
+    is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z →
+    is-nonzero-ℂ z
+  is-nonzero-is-invertible-ℂ z (w , zw=1 , _) =
+    is-nonzero-has-right-inverse-mul-ℂ
+      ( z)
+      ( w)
+      ( transitive-sim-ℂ _ _ _
+        ( symmetric-sim-ℂ (sim-raise-ℂ _ one-ℂ))
+        ( sim-eq-ℂ zw=1))
+
+  is-invertible-is-nonzero-ℂ :
+    {l : Level} (z : ℂ l) → is-nonzero-ℂ z →
+    is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z
+  is-invertible-is-nonzero-ℂ z z≠0 =
+    ( complex-inv-nonzero-ℂ (z , z≠0) ,
+      eq-sim-ℂ
+        ( similarity-reasoning-ℂ
+          z *ℂ complex-inv-nonzero-ℂ (z , z≠0)
+          ~ℂ one-ℂ
+            by right-inverse-law-mul-nonzero-ℂ (z , z≠0)
+          ~ℂ raise-ℂ _ one-ℂ
+            by sim-raise-ℂ _ one-ℂ) ,
+      eq-sim-ℂ
+        ( similarity-reasoning-ℂ
+          complex-inv-nonzero-ℂ (z , z≠0) *ℂ z
+          ~ℂ one-ℂ
+            by left-inverse-law-mul-nonzero-ℂ (z , z≠0)
+          ~ℂ raise-ℂ _ one-ℂ
+            by sim-raise-ℂ _ one-ℂ))
 ```
