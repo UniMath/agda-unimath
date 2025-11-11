@@ -255,3 +255,19 @@ opaque
         ＝ zero-ℝ
           by left-unit-law-add-ℝ zero-ℝ)
 ```
+
+### Similarity is preserved by multiplication
+
+```agda
+abstract
+  preserves-sim-mul-ℂ :
+    {l1 l2 l3 l4 : Level} {x : ℂ l1} {x' : ℂ l2} {y : ℂ l3} {y' : ℂ l4} →
+    sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x *ℂ y) (x' *ℂ y')
+  preserves-sim-mul-ℂ (a~a' , b~b') (c~c' , d~d') =
+    ( preserves-sim-diff-ℝ
+        ( preserves-sim-mul-ℝ a~a' c~c')
+        ( preserves-sim-mul-ℝ b~b' d~d') ,
+      preserves-sim-add-ℝ
+        ( preserves-sim-mul-ℝ a~a' d~d')
+        ( preserves-sim-mul-ℝ b~b' c~c'))
+```
