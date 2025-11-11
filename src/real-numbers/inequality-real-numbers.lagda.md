@@ -21,7 +21,6 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -31,7 +30,6 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
