@@ -20,6 +20,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
+open import foundation.double-negation-stable-equality
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.existential-quantification
