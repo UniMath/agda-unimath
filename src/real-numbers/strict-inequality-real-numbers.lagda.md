@@ -16,6 +16,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -355,6 +356,16 @@ module _
           ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
+### If `x` is less than `y`, `x` is not similar to `y`
+
+```agda
+abstract
+  not-sim-le-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → ¬ (sim-ℝ x y)
+  not-sim-le-ℝ {x = x} {y = y} x<y x~y =
+    not-leq-le-ℝ x y x<y (leq-sim-ℝ (symmetric-sim-ℝ x~y))
+```
+
 ### If `x` is less than or equal to `y`, then `y` is not less than `x`
 
 ```agda
@@ -511,6 +522,75 @@ module _
       sim-sim-leq-ℝ
         ( leq-le-rational-ℝ x y (backward-implication ∘ H) ,
           leq-le-rational-ℝ y x (forward-implication ∘ H))
+```
+
+### For any real numbers `a` and `b`, `¬¬ (a < b ∨ a ~ b ∨ b < a)`
+
+```agda
+abstract
+  double-neg-trichotomy-le-ℝ :
+    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
+    ¬¬ (disjunction-type (le-ℝ a b) (disjunction-type (sim-ℝ a b) (le-ℝ b a)))
+  double-neg-trichotomy-le-ℝ a b ¬a<b∨a~b∨b<a =
+    ¬a<b∨a~b∨b<a
+      ( inr-disjunction
+        ( inl-disjunction
+          ( sim-sim-leq-ℝ
+            ( leq-not-le-ℝ
+                ( b)
+                ( a)
+                ( map-neg (inr-disjunction ∘ inr-disjunction) ¬a<b∨a~b∨b<a) ,
+              leq-not-le-ℝ
+                ( a)
+                ( b)
+                ( map-neg inl-disjunction ¬a<b∨a~b∨b<a)))))
+```
+
+### For any real numbers `a` and `b`, `a ≤ b` if and only if `¬¬ (a ~ b ∨ a < b)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (a : ℝ l1)
+  (b : ℝ l2)
+  where
+
+  abstract
+    leq-not-not-sim-or-le-ℝ :
+      ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b)) → leq-ℝ a b
+    leq-not-not-sim-or-le-ℝ ¬¬a~b∨a<b =
+      leq-not-le-ℝ
+        ( b)
+        ( a)
+        ( map-neg
+          ( λ b<a →
+            elim-disjunction
+              ( empty-Prop)
+              ( not-sim-le-ℝ b<a ∘ symmetric-sim-ℝ)
+              ( asymmetric-le-ℝ b<a))
+          ( ¬¬a~b∨a<b))
+
+    not-not-sim-or-le-leq-ℝ :
+      leq-ℝ a b → ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b))
+    not-not-sim-or-le-leq-ℝ a≤b =
+      let
+        motive = (sim-prop-ℝ a b ∨ le-prop-ℝ a b)
+      in
+        map-neg
+          ( map-neg
+            ( elim-disjunction
+              ( motive)
+              ( inr-disjunction)
+              ( elim-disjunction
+                ( motive)
+                ( inl-disjunction)
+                ( ex-falso ∘ not-le-leq-ℝ a b a≤b))))
+          ( double-neg-trichotomy-le-ℝ a b)
+
+  leq-iff-not-not-sim-or-le-ℝ :
+    leq-ℝ a b ↔ ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b))
+  leq-iff-not-not-sim-or-le-ℝ =
+    ( not-not-sim-or-le-leq-ℝ , leq-not-not-sim-or-le-ℝ)
 ```
 
 ## References
