@@ -10,6 +10,8 @@ module real-numbers.apartness-real-numbers where
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.apartness-relations
+open import foundation.binary-transport
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
@@ -37,6 +39,10 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
