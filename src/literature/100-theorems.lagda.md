@@ -122,7 +122,8 @@ open import foundation.cantors-theorem using
 
 ```agda
 open import real-numbers.geometric-sequences-real-numbers using
-  ( compute-sum-standard-geometric-series-ℝ)
+  ( compute-sum-standard-geometric-fin-sequence-ℝ ;
+    compute-sum-standard-geometric-series-ℝ)
 ```
 
 ### 68. Sum of an arithmetic series {#68}

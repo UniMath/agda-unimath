@@ -22,10 +22,17 @@ open import foundation-core.identity-types
 
 ## Idea
 
-A binary operation of type `A → A → A` is **unital** if there is a unit of type
-`A` that satisfies both the left and right unit laws. Furthermore, a binary
-operation is **coherently unital** if the proofs of the left and right unit laws
-agree on the case where both arguments of the operation are the unit.
+A binary operation of type `μ : A → A → A` is
+{{#concept "unital" Disambiguation="binary operation on type" Agda=is-unital}}
+if there is a unit element `e` of type `A` that satisfies both the left and
+right unit laws. Furthermore, a binary operation is
+{{#concept "coherently unital" Disambiguation="binary operation on type" Agda=is-coherently-unital}}
+if the proofs of the left and right unit laws agree on the case where both
+arguments of the operation are the unit.
+
+We demonstrate that every unital binary operation may be upgraded to a coherent
+one in two dual ways. One by replacing the right unit law, and the other by
+replacing the left unit law.
 
 ## Definitions
 
@@ -71,29 +78,84 @@ is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 
 ### The unit laws for an operation `μ` with unit `e` can be upgraded to coherent unit laws
 
+#### Preserving the underlying left unit law
+
+Given a pair of unit laws `λ` and `ρ` we construct a new coherent pair of unit
+laws where the left unit law is the same, `λ`, and the right unit law is
+replaced by `ρ'(x) := (ap (μ x (-)) (ρ(e)))⁻¹ ∙ ap (μ x (-)) (λ(e)) ∙ ρ(x)`.
+
+Evaluating at the unit element we obtain
+
+```text
+  ρ'(e) ≐ (ap (μ e (-)) (ρ(e)))⁻¹ ∙ ap (μ e (-)) (λ(e)) ∙ ρ(e)
+```
+
+which is equal to `λ(e)` by naturality of `λ` at `ρ(e)`.
+
 ```agda
 module _
   {l : Level} {A : UU l} (μ : A → A → A) {e : A}
   where
 
   coherent-unit-laws-unit-laws : unit-laws μ e → coherent-unit-laws μ e
-  pr1 (coherent-unit-laws-unit-laws (pair H K)) = H
-  pr1 (pr2 (coherent-unit-laws-unit-laws (pair H K))) x =
-    ( inv (ap (μ x) (K e))) ∙ (( ap (μ x) (H e)) ∙ (K x))
-  pr2 (pr2 (coherent-unit-laws-unit-laws (pair H K))) =
+  pr1 (coherent-unit-laws-unit-laws (H , K)) =
+    H
+  pr1 (pr2 (coherent-unit-laws-unit-laws (H , K))) x =
+    inv (ap (μ x) (K e)) ∙ (ap (μ x) (H e) ∙ K x)
+  pr2 (pr2 (coherent-unit-laws-unit-laws (H , K))) =
     left-transpose-eq-concat
       ( ap (μ e) (K e))
       ( H e)
-      ( (ap (μ e) (H e)) ∙ (K e))
-      ( ( inv-nat-htpy-id (H) (K e)) ∙
-        ( right-whisker-concat (coh-htpy-id (H) e) (K e)))
+      ( ap (μ e) (H e) ∙ K e)
+      ( inv-nat-htpy-id H (K e) ∙ right-whisker-concat (coh-htpy-id H e) (K e))
 
 module _
   {l : Level} {A : UU l} {μ : A → A → A}
   where
 
   is-coherently-unital-is-unital : is-unital μ → is-coherently-unital μ
-  pr1 (is-coherently-unital-is-unital (pair e H)) = e
-  pr2 (is-coherently-unital-is-unital (pair e H)) =
-    coherent-unit-laws-unit-laws μ H
+  is-coherently-unital-is-unital (e , H) =
+    ( e , coherent-unit-laws-unit-laws μ H)
+```
+
+#### Preserving the underlying right unit law
+
+Given a pair of unit laws `λ` and `ρ` we construct a new coherent pair of unit
+laws where the right unit law is the same, `ρ`, and the left unit law is
+replaced by `λ'(x) := (ap (μ (-) x) (λ(e)))⁻¹ ∙ ap (μ (-) x) (ρ(e)) ∙ λ(x)`.
+
+Evaluating at the unit element we obtain
+
+```text
+  λ'(e) ≐ (ap (μ (-) e) (λ(e)))⁻¹ ∙ ap (μ (-) e) (ρ(e)) ∙ λ(e)
+```
+
+which is equal to `ρ(e)` by naturality of `ρ` at `λ(e)`.
+
+```agda
+module _
+  {l : Level} {A : UU l} (μ : A → A → A) {e : A}
+  where
+
+  coherent-unit-laws-unit-laws' : unit-laws μ e → coherent-unit-laws μ e
+  pr1 (coherent-unit-laws-unit-laws' (H , K)) x =
+    inv (ap (λ y → μ y x) (H e)) ∙ (ap (λ y → μ y x) (K e) ∙ H x)
+  pr1 (pr2 (coherent-unit-laws-unit-laws' (H , K))) =
+    K
+  pr2 (pr2 (coherent-unit-laws-unit-laws' (H , K))) =
+    inv
+      ( left-transpose-eq-concat
+        ( ap (λ z → μ z e) (H e))
+        ( K e)
+        ( ap (λ y → μ y e) (K e) ∙ H e)
+        ( ( inv-nat-htpy-id K (H e)) ∙
+          ( right-whisker-concat (coh-htpy-id K e) (H e))))
+
+module _
+  {l : Level} {A : UU l} {μ : A → A → A}
+  where
+
+  is-coherently-unital-is-unital' : is-unital μ → is-coherently-unital μ
+  is-coherently-unital-is-unital' (e , H) =
+    ( e , coherent-unit-laws-unit-laws' μ H)
 ```

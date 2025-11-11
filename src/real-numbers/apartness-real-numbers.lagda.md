@@ -7,6 +7,7 @@ module real-numbers.apartness-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types

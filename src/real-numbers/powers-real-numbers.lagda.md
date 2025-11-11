@@ -355,7 +355,7 @@ abstract
         by leq-eq-ℝ (ap abs-ℝ (inv (power-succ-ℝ n y)))
 ```
 
-### If `x` and `y` are nonnegative, and `x ≤ y`, `xⁿ ≤ yⁿ`
+### If `x` and `y` are nonnegative such that `x ≤ y`, then `xⁿ ≤ yⁿ`
 
 ```agda
 abstract
@@ -388,7 +388,7 @@ abstract
         by leq-eq-ℝ (inv (power-succ-ℝ n y))
 ```
 
-### If `|r| < 1`, `rⁿ` approaches 0
+### If `|r| < 1`, then `rⁿ` approaches 0
 
 ```agda
 abstract
