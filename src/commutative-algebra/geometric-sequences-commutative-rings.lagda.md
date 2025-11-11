@@ -406,9 +406,9 @@ module _
                 ( associative-mul-Commutative-Ring R _ _ _))
         ＝
           a *R
-            ( 1/⟨1-r⟩ *R
-              ( ( one-R -R power-Commutative-Ring R n r) +R
-                ( (one-R -R r) *R power-Commutative-Ring R n r)))
+          ( 1/⟨1-r⟩ *R
+            ( ( one-R -R power-Commutative-Ring R n r) +R
+              ( (one-R -R r) *R power-Commutative-Ring R n r)))
           by
             ap-mul-Commutative-Ring R
               ( refl)
