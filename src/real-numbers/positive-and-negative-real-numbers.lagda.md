@@ -9,11 +9,11 @@ module real-numbers.positive-and-negative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.logical-equivalences
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers

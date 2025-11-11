@@ -36,11 +36,11 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
+open import real-numbers.multiplication-nonzero-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-negative-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negative-real-numbers
-open import real-numbers.multiplication-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers

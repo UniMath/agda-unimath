@@ -19,25 +19,25 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.disjunction
 open import foundation.functoriality-disjunction
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.existential-quantification
 
 open import order-theory.posets
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
-open import real-numbers.negative-real-numbers
-open import real-numbers.positive-real-numbers
 open import real-numbers.negation-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.negative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 

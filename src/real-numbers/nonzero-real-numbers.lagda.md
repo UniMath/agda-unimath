@@ -13,13 +13,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import foundation.functoriality-disjunction
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers

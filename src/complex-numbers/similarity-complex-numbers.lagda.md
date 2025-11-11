@@ -161,7 +161,3 @@ abstract
 
   syntax step-similarity-reasoning-ℂ p u q = p ~ℂ u by q
 ```
-
-# <<<<<<< HEAD
-
-> > > > > > > Stashed changes complex-ring
