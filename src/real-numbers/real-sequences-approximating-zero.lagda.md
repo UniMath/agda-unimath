@@ -50,7 +50,7 @@ open import real-numbers.similarity-real-numbers
 
 A [sequence](lists.sequences.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) is an
-{{#concept "approximation of zero" Disambiguation="sequence of real numbers" Agda=zero-limit-sequence-ℝ}}
+{{#concept "approximation of zero" Disambiguation="sequence of real numbers" Agda=is-zero-limit-sequence-ℝ}}
 if it [converges](metric-spaces.limits-of-sequences-metric-spaces.md) to 0 in
 the
 [standard metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
