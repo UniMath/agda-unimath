@@ -30,7 +30,6 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
