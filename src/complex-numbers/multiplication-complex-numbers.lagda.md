@@ -265,9 +265,9 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x *ℂ y) (x' *ℂ y')
   preserves-sim-mul-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-diff-ℝ
-        ( preserves-sim-mul-ℝ _ _ a~a' _ _ c~c')
-        ( preserves-sim-mul-ℝ _ _ b~b' _ _ d~d') ,
+        ( preserves-sim-mul-ℝ a~a' c~c')
+        ( preserves-sim-mul-ℝ b~b' d~d') ,
       preserves-sim-add-ℝ
-        ( preserves-sim-mul-ℝ _ _ a~a' _ _ d~d')
-        ( preserves-sim-mul-ℝ _ _ b~b' _ _ c~c'))
+        ( preserves-sim-mul-ℝ a~a' d~d')
+        ( preserves-sim-mul-ℝ b~b' c~c'))
 ```
