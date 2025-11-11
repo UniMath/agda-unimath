@@ -833,8 +833,8 @@ module _
           ( g ∘ i)
           ( postcomp-extension f i g (j , N))
           ( h , L)
-          ( M)
-          ( λ a →
+          ( M ,
+            λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
               ( is-section-map-inv-is-equiv
