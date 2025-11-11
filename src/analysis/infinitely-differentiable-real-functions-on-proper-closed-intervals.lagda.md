@@ -135,3 +135,7 @@ module _
 ### The sum of infinitely differentiable functions is infinitely differentiable
 
 This has yet to be proved.
+
+### Scalar multiples of infinitely differentiable functions are infinitely differentiable
+
+This has yet to be proved.
