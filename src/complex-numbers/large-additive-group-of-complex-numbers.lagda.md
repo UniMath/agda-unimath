@@ -92,7 +92,7 @@ large-ab-add-ℂ =
 
 ## Properties
 
-### The small abelian group of complex numbers at a universe level
+### The abelian group of complex numbers at a universe level
 
 ```agda
 ab-add-ℂ : (l : Level) → Ab (lsuc l)
