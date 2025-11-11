@@ -28,9 +28,6 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-of-rational-numbers
-
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -154,7 +151,7 @@ module _
       map-disjunction
         ( map-raise)
         ( map-raise)
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
+        ( is-located-lower-upper-cut-ℝ x p<q)
 
   raise-ℝ : ℝ (l0 ⊔ l)
   raise-ℝ =

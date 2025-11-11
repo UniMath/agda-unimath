@@ -10,13 +10,10 @@ module real-numbers.positive-and-negative-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -43,7 +40,7 @@ On this page, we outline basic relations between
 abstract
   is-nonnegative-is-positive-ℝ :
     {l : Level} {x : ℝ l} → is-positive-ℝ x → is-nonnegative-ℝ x
-  is-nonnegative-is-positive-ℝ = leq-le-ℝ _ _
+  is-nonnegative-is-positive-ℝ = leq-le-ℝ
 
 nonnegative-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁰⁺ l
 nonnegative-ℝ⁺ (x , is-pos-x) = (x , is-nonnegative-is-positive-ℝ is-pos-x)
@@ -59,7 +56,7 @@ abstract
     tr
       ( le-ℝ (neg-ℝ x))
       ( neg-zero-ℝ)
-      ( neg-le-ℝ zero-ℝ x 0<x)
+      ( neg-le-ℝ 0<x)
 
 neg-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁻ l
 neg-ℝ⁺ (x , is-pos-x) = (neg-ℝ x , neg-is-positive-ℝ x is-pos-x)
@@ -75,7 +72,7 @@ abstract
     tr
       ( λ z → le-ℝ z (neg-ℝ x))
       ( neg-zero-ℝ)
-      ( neg-le-ℝ x zero-ℝ x<0)
+      ( neg-le-ℝ x<0)
 
 neg-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 neg-ℝ⁻ (x , is-neg-x) = (neg-ℝ x , neg-is-negative-ℝ x is-neg-x)
@@ -89,10 +86,4 @@ abstract
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
     is-positive-ℝ y
   is-positive-le-ℝ⁰⁺ (x , 0≤x) y = concatenate-leq-le-ℝ zero-ℝ x y 0≤x
-
-  is-nonnegative-le-ℝ⁰⁺ :
-    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁰⁺ x) y →
-    is-nonnegative-ℝ y
-  is-nonnegative-le-ℝ⁰⁺ x y x<y =
-    is-nonnegative-is-positive-ℝ (is-positive-le-ℝ⁰⁺ x y x<y)
 ```
