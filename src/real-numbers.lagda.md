@@ -43,6 +43,7 @@ open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
+open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
