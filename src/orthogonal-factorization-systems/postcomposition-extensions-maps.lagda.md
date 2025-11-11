@@ -94,7 +94,7 @@ module _
       ( λ j →
         is-emb-is-equiv
           ( is-equiv-map-Π-is-fiberwise-equiv
-            ( λ x → H (i x) (j (f x)))))
+            (λ x → H (i x) (j (f x)))))
 
   emb-postcomp-extension :
     (f : A → B) (i : A → X) (g : X ↪ Y) →
@@ -120,11 +120,7 @@ module _
       ( λ j →
         is-trunc-map-map-Π k
           ( λ a → ap g)
-          ( λ a →
-          is-trunc-map-ap-is-trunc-map k g
-            ( is-trunc-map-succ-is-trunc-map k G)
-            ( i a)
-            ( j (f a))))
+          ( λ a → is-trunc-map-ap-is-trunc-map k g G (i a) (j (f a))))
 
   trunc-map-postcomp-extension :
     (f : A → B) (i : A → X) (g : trunc-map k X Y) →
