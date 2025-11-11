@@ -79,9 +79,36 @@ For every `K`-valued family `U` over `B`, the
 
 is an [equivalence](foundation-core.equivalences.md).
 
-Equivalently, a `K`-connected map `f : A → B` is a map that is
-[left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to maps
-`h : C → B` whose fibers are in `K`.
+We give a series of increasingly stronger conditions for a map `f` to be a
+`K`-connected.
+
+1.  The map `f` is `K`-connected.
+2.  For every `K`-valued family `U` over `B` and every map
+    `u : (x : A) → U (f x)`, the type of dependent extensions of `u` along `f`
+    is contractible.
+3.  The map `f` is
+    [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to
+    maps `h : C → B` whose fibers are in `K`.
+4.  The terminal projections of the fibers of `f` are `K`-equivalences.
+5.  The fibers of `f` are `K`-connected in the sense that for every `U` in `K`,
+    the diagonal map `U → (fiber f y → U)` is an equivalence.
+6.  Every fiber of `f` satisfies the condition that for every `U` in `K` and
+    every function `u : fiber f y → U` there exists a unique `v : U` such that
+    `const v ~ u`.
+7.  The fibers of `f` have `K`-localizations, and there merely exists a
+    `u : K(fiber f y)` such that for all `a` and `p : f a ＝ y` we have a
+    dependent identification over `p`
+    ```text
+      u ＝ₚ^[y ↦ K(fiber f y)] (η (f a) (a , refl))
+    ```
+8.  The fibers of `f` have `K`-localizations, and the dependent precomposition
+    map of `f` is surjective at every `K`-valued family `U` over `B`.
+9.  The fibers of `f` have `K`-localizations, and the dependent precomposition
+    map of `f` has a section at every `K`-valued family `U` over `B`.
+
+If the fibers of `f` have `K`-localizations then these conditions are all
+equivalent. More generally we always have that conditions 1-3 are equivalent,
+conditions 4-6 are equivalent, and conditions 7-9 are equivalent.
 
 ## Definitions
 
@@ -169,6 +196,41 @@ module _
 
 ### Equivalent characterizations of `K`-connected maps
 
+#### Extension condition
+
+A map `f : A → B` is `K`-connected if and only if, for every `K`-valued family
+`U` over `B` and every map `u : (x : A) → U (f x)`, the type of dependent
+extensions of `u` along `f` is contractible.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
+  where
+
+  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition :
+    is-subuniverse-connected-map-extension-condition K f →
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition
+    H U =
+    is-equiv-is-contr-map
+      ( λ u →
+        is-contr-equiv
+          ( extension-dependent-type f (pr1 ∘ U) u)
+          ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
+          ( H U u))
+
+  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map :
+    is-subuniverse-connected-map K f →
+    is-subuniverse-connected-map-extension-condition K f
+  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map
+    H U u =
+    is-contr-equiv'
+      ( fiber (precomp-Π f (pr1 ∘ U)) u)
+      ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
+      ( is-contr-map-is-equiv (H U) u)
+```
+
 #### Contractible fiber-localization condition
 
 Given a subuniverse `K` then a map `f` is `K`-connected if the fibers are
@@ -224,6 +286,25 @@ module _
   is-subuniverse-connected-map-is-subuniverse-connected-fibers H =
     is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
       ( is-subuniverse-equiv-terminal-map-is-subuniverse-connected K ∘ H)
+```
+
+#### Constancy condition on fibers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
+  {A : UU l3} {B : UU l4} (f : A → B)
+  where
+
+  is-subuniverse-connected-map-is-subuniverse-connected-const-condition-fibers :
+    ( (b : B) → is-subuniverse-connected-const-condition K (fiber f b)) →
+    is-subuniverse-connected-map K f
+  is-subuniverse-connected-map-is-subuniverse-connected-const-condition-fibers
+    H =
+    is-subuniverse-connected-map-is-subuniverse-connected-fibers K f
+      ( λ b →
+        is-subuniverse-connected-is-subuniverse-connected-const-condition K
+          ( H b))
 ```
 
 #### Section condition
@@ -451,41 +532,6 @@ module _
   is-subuniverse-connected-map-is-surjective-precomp-Π H =
     is-subuniverse-connected-map-is-subuniverse-equiv-terminal-map-fibers K f
       ( is-subuniverse-equiv-terminal-map-fibers-is-surjective-precomp-Π H)
-```
-
-#### Extension condition for `K`-connected maps
-
-A map `f : A → B` is `K`-connected if and only if, for every `K`-valued family
-`U` over `B` and every map `u : (x : A) → U (f x)`, the type of dependent
-extensions of `u` along `f` is contractible.
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
-  {A : UU l3} {B : UU l4} (f : A → B)
-  where
-
-  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition :
-    is-subuniverse-connected-map-extension-condition K f →
-    is-subuniverse-connected-map K f
-  is-subuniverse-connected-map-is-subuniverse-connected-map-extension-condition
-    H U =
-    is-equiv-is-contr-map
-      ( λ u →
-        is-contr-equiv
-          ( extension-dependent-type f (pr1 ∘ U) u)
-          ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
-          ( H U u))
-
-  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map :
-    is-subuniverse-connected-map K f →
-    is-subuniverse-connected-map-extension-condition K f
-  is-subuniverse-connected-map-extension-condition-is-subuniverse-connected-map
-    H U u =
-    is-contr-equiv'
-      ( fiber (precomp-Π f (pr1 ∘ U)) u)
-      ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
-      ( is-contr-map-is-equiv (H U) u)
 ```
 
 ### Characterizing equality of `K`-connected maps
