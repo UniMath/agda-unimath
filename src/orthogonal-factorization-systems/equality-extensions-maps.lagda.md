@@ -139,11 +139,10 @@ module _
   pr2 (extensionality-extension e e') = is-equiv-htpy-eq-extension e e'
 
   eq-htpy-extension :
-    (e e' : extension-dependent-type i P f)
-    (H : map-extension-dependent-type e ~ map-extension-dependent-type e') →
-    coherence-htpy-extension i f e e' H → e ＝ e'
-  eq-htpy-extension e e' H K =
-    map-inv-equiv (extensionality-extension e e') (H , K)
+    (e e' : extension-dependent-type i P f) →
+    htpy-extension i f e e' → e ＝ e'
+  eq-htpy-extension e e' =
+    map-inv-equiv (extensionality-extension e e')
 ```
 
 ### Characterizing equality of extensions of dependent maps with homotopies going the other way
