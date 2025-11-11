@@ -11,7 +11,6 @@ module real-numbers.positive-and-negative-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
-open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -77,38 +76,6 @@ abstract
 
 neg-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 neg-ℝ⁻ (x , is-neg-x) = (neg-ℝ x , neg-is-negative-ℝ x is-neg-x)
-```
-
-### A real number is negative if and only if its negation is positive
-
-```agda
-abstract
-  is-negative-is-positive-neg-ℝ :
-    {l : Level} (x : ℝ l) → is-positive-ℝ (neg-ℝ x) → is-negative-ℝ x
-  is-negative-is-positive-neg-ℝ x 0<-x =
-    tr is-negative-ℝ (neg-neg-ℝ x) (neg-is-positive-ℝ (neg-ℝ x) 0<-x)
-
-is-negative-iff-neg-is-positive-ℝ :
-  {l : Level} (x : ℝ l) → is-negative-ℝ x ↔ is-positive-ℝ (neg-ℝ x)
-is-negative-iff-neg-is-positive-ℝ x =
-  ( neg-is-negative-ℝ x ,
-    is-negative-is-positive-neg-ℝ x)
-```
-
-### A real number is positive if and only if its negation is negative
-
-```agda
-abstract
-  is-positive-is-negative-neg-ℝ :
-    {l : Level} (x : ℝ l) → is-negative-ℝ (neg-ℝ x) → is-positive-ℝ x
-  is-positive-is-negative-neg-ℝ x -x<0 =
-    tr is-positive-ℝ (neg-neg-ℝ x) (neg-is-negative-ℝ (neg-ℝ x) -x<0)
-
-is-positive-iff-neg-is-negative-ℝ :
-  {l : Level} (x : ℝ l) → is-positive-ℝ x ↔ is-negative-ℝ (neg-ℝ x)
-is-positive-iff-neg-is-negative-ℝ x =
-  ( neg-is-positive-ℝ x ,
-    is-positive-is-negative-neg-ℝ x)
 ```
 
 ### If a nonnegative real number `x` is less than a real number `y`, `y` is positive
