@@ -7,20 +7,22 @@ module real-numbers.multiplication-positive-and-negative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
-open import foundation.disjunction
-open import foundation.coproduct-types
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.minimum-rational-numbers
-open import foundation.conjunction
-open import order-theory.posets
 open import elementary-number-theory.inequality-rational-numbers
-open import foundation.propositional-truncations
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
-open import foundation.universe-levels
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import order-theory.posets
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
