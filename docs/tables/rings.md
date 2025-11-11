@@ -1,6 +1,6 @@
 | Ring                                  | File                                                                                                        |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Complex numbers                       | [`complex-numbers.ring-of-complex-numbers`](complex-numbers.ring-of-complex-numbers.md)                     |
+| Complex numbers                       | [`complex-numbers.large-ring-of-complex-numbers`](complex-numbers.large-ring-of-complex-numbers.md)         |
 | Eisenstein integers                   | [`complex-numbers.eisenstein-integers`](complex-numbers.eisenstein-integers.md)                             |
 | Endomorphism ring of an abelian group | [`group-theory.endomorphism-rings-abelian-groups`](group-theory.endomorphism-rings-abelian-groups.md)       |
 | Gaussian integers                     | [`complex-numbers.gaussian-integers`](complex-numbers.gaussian-integers.md)                                 |
