@@ -15,5 +15,9 @@ open import complex-numbers.multiplication-complex-numbers public
 open import complex-numbers.multiplicative-inverses-nonzero-complex-numbers public
 open import complex-numbers.nonzero-complex-numbers public
 open import complex-numbers.ring-of-complex-numbers public
+open import complex-numbers.large-additive-group-of-complex-numbers public
+open import complex-numbers.large-ring-of-complex-numbers public
+open import complex-numbers.multiplication-complex-numbers public
+open import complex-numbers.raising-universe-levels-complex-numbers public
 open import complex-numbers.similarity-complex-numbers public
 ```
