@@ -190,3 +190,9 @@ abstract opaque
 
   syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q
 ```
+
+## See also
+
+- In
+  [`real-numbers.equality-real-numbers`](real-numbers.equality-real-numbers.md)
+  it is demonstrated that similarity is double negation stable.

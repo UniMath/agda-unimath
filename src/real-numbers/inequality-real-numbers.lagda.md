@@ -16,6 +16,8 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -189,6 +191,9 @@ abstract opaque
 
   leq-sim-ℝ : {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y → leq-ℝ x y
   leq-sim-ℝ = pr1
+
+  leq-sim-ℝ' : {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y → leq-ℝ y x
+  leq-sim-ℝ' = pr2
 ```
 
 ### Inequality on the real numbers is antisymmetric
@@ -411,6 +416,39 @@ module _
       sim-sim-leq-ℝ
         ( leq-leq-rational-ℝ x y (λ q → backward-implication (H q)) ,
           leq-leq-rational-ℝ y x (λ q → forward-implication (H q)))
+```
+
+### Double negation elimination of inequality
+
+Given two Dedekind real numbers `x` and `y` such that `¬¬(x ≤ y)`, then `x ≤ y`.
+
+We follow the proof of Proposition 5.2 in {{#cite BH25}}.
+
+**Proof.** Assume `¬¬(x ≤ y)`, and let `q : ℚ` such that `q ∈ Lx`. Then by
+roundedness of `Lx` there exists an `r : ℚ` such that `q < r` and `r ∈ Lx`.
+Because `y` is located, we have that `q ∈ Ly` or `r ∈ Uy`. In the first case we
+are already done, so assume `r ∈ Uy`. By `¬¬(x ≤ y)` we also know that
+`¬¬ (r ∈ Ly)`, but the lower and upper cuts of `y` are disjoint, so we have
+reached a contradiction. ∎
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where abstract opaque
+
+  unfolding leq-ℝ
+
+  double-negation-elim-leq-ℝ : ¬¬ (leq-ℝ x y) → leq-ℝ x y
+  double-negation-elim-leq-ℝ H q Q =
+    rec-trunc-Prop
+      ( lower-cut-ℝ y q)
+      ( λ (r , q<r , R) →
+        elim-disjunction
+          ( lower-cut-ℝ y q)
+          ( id)
+          ( λ r∈Uy → ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
+          ( is-located-lower-upper-cut-ℝ y q<r))
+      ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
 ```
 
 ## References
