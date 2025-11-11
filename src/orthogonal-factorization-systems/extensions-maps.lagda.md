@@ -54,6 +54,18 @@ module _
 
   total-extension : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-extension X = total-extension-dependent-type i (λ _ → X)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
+  {X : UU l3} {f : A → X}
+  where
+
+  map-extension : extension i f → B → X
+  map-extension = pr1
+
+  is-extension-map-extension :
+    (E : extension i f) → is-extension i f (map-extension E)
+  is-extension-map-extension = pr2
 ```
 
 ## Operations
