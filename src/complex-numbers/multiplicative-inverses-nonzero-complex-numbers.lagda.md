@@ -47,9 +47,9 @@ complex-inv-nonzero-ℂ (z , z≠0) =
 
 ```agda
 abstract
-  left-inverse-law-mul-ℂ : {l : Level} (z : nonzero-ℂ l) →
+  right-inverse-law-mul-nonzero-ℂ : {l : Level} (z : nonzero-ℂ l) →
     sim-ℂ (complex-nonzero-ℂ z *ℂ complex-inv-nonzero-ℂ z) one-ℂ
-  left-inverse-law-mul-ℂ (z@(a +iℂ b) , z≠0) =
+  right-inverse-law-mul-nonzero-ℂ (z@(a +iℂ b) , z≠0) =
     similarity-reasoning-ℂ
       z *ℂ
       ( conjugate-ℂ z *ℂ
@@ -78,8 +78,11 @@ abstract
       ~ℂ one-ℂ
         by sim-eq-ℂ eq-complex-one-ℝ
 
-  right-inverse-law-mul-ℂ : {l : Level} (z : nonzero-ℂ l) →
+  left-inverse-law-mul-nonzero-ℂ : {l : Level} (z : nonzero-ℂ l) →
     sim-ℂ (complex-inv-nonzero-ℂ z *ℂ complex-nonzero-ℂ z) one-ℂ
-  right-inverse-law-mul-ℂ z =
-    tr (λ w → sim-ℂ w one-ℂ) (commutative-mul-ℂ _ _) (left-inverse-law-mul-ℂ z)
+  left-inverse-law-mul-nonzero-ℂ z =
+    tr
+      ( λ w → sim-ℂ w one-ℂ)
+      ( commutative-mul-ℂ _ _)
+      ( right-inverse-law-mul-nonzero-ℂ z)
 ```
