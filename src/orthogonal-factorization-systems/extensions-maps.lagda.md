@@ -2,8 +2,6 @@
 
 ```agda
 module orthogonal-factorization-systems.extensions-maps where
-
-open import orthogonal-factorization-systems.extensions-dependent-maps public
 ```
 
 <details><summary>Imports</summary>
@@ -16,6 +14,8 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.extensions-dependent-maps
 ```
 
 </details>
@@ -45,6 +45,9 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
+  is-extension : {X : UU l3} → (A → X) → (B → X) → UU (l1 ⊔ l3)
+  is-extension = is-extension-dependent-type i
+
   extension :
     {X : UU l3} → (A → X) → UU (l1 ⊔ l2 ⊔ l3)
   extension {X} = extension-dependent-type i (λ _ → X)
@@ -66,7 +69,7 @@ module _
 
   is-extension-comp-horizontal :
     (I : is-extension f g i) → is-extension g h j → is-extension f h (j ∘ i)
-  is-extension-comp-horizontal I J x = (J x) ∙ ap j (I x)
+  is-extension-comp-horizontal I J x = J x ∙ ap j (I x)
 ```
 
 ## Properties
@@ -100,7 +103,7 @@ module _
   is-extension-along-self = refl-htpy
 
   extension-along-self : extension f f
-  extension-along-self = id , is-extension-along-self
+  extension-along-self = (id , is-extension-along-self)
 ```
 
 ## See also
