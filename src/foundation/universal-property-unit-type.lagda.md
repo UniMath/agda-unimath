@@ -18,7 +18,10 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -41,7 +44,7 @@ ev-star P f = f star
 
 ev-star' :
   {l : Level} (Y : UU l) → (unit → Y) → Y
-ev-star' Y = ev-star (λ t → Y)
+ev-star' Y = ev-star (λ _ → Y)
 
 abstract
   dependent-universal-property-unit :
@@ -55,20 +58,35 @@ pr1 (equiv-dependent-universal-property-unit P) = ev-star P
 pr2 (equiv-dependent-universal-property-unit P) =
   dependent-universal-property-unit P
 
-abstract
-  universal-property-unit :
-    {l : Level} (Y : UU l) → is-equiv (ev-star' Y)
-  universal-property-unit Y = dependent-universal-property-unit (λ t → Y)
+module _
+  {l : Level} (Y : UU l)
+  where
 
-equiv-universal-property-unit :
-  {l : Level} (Y : UU l) → (unit → Y) ≃ Y
-pr1 (equiv-universal-property-unit Y) = ev-star' Y
-pr2 (equiv-universal-property-unit Y) = universal-property-unit Y
+  is-section-const-unit : is-section (ev-star' Y) (const unit)
+  is-section-const-unit = refl-htpy
 
-inv-equiv-universal-property-unit :
-  {l : Level} (Y : UU l) → Y ≃ (unit → Y)
-inv-equiv-universal-property-unit Y =
-  inv-equiv (equiv-universal-property-unit Y)
+  is-retraction-const-unit : is-retraction (ev-star' Y) (const unit)
+  is-retraction-const-unit = refl-htpy
+
+  universal-property-unit : is-equiv (ev-star' Y)
+  universal-property-unit =
+    is-equiv-is-invertible
+      ( const unit)
+      ( is-section-const-unit)
+      ( is-retraction-const-unit)
+
+  equiv-universal-property-unit : (unit → Y) ≃ Y
+  equiv-universal-property-unit = (ev-star' Y , universal-property-unit)
+
+  is-equiv-const-unit : is-equiv (const unit)
+  is-equiv-const-unit =
+    is-equiv-is-invertible
+      ( ev-star' Y)
+      ( is-retraction-const-unit)
+      ( is-section-const-unit)
+
+  inv-equiv-universal-property-unit : Y ≃ (unit → Y)
+  inv-equiv-universal-property-unit = (const unit , is-equiv-const-unit)
 
 abstract
   is-equiv-point-is-contr :
@@ -122,4 +140,22 @@ abstract
     is-equiv-is-section
       ( universal-property-unit-is-equiv-point x is-equiv-point Y)
       ( refl-htpy)
+```
+
+### Precomposition with the terminal map is an equivalence if and only if the diagonal exponential is
+
+```agda
+is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential :
+  {l1 l2 : Level} {X : UU l1} {U : UU l2} →
+  is-equiv (diagonal-exponential U X) →
+  is-equiv (precomp (terminal-map X) U)
+is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential H =
+  is-equiv-left-factor _ _ H (is-equiv-const-unit _)
+
+is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map :
+  {l1 l2 : Level} {X : UU l1} {U : UU l2} →
+  is-equiv (precomp (terminal-map X) U) →
+  is-equiv (diagonal-exponential U X)
+is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map H =
+  is-equiv-comp _ _ (is-equiv-const-unit _) H
 ```

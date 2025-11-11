@@ -187,7 +187,7 @@ module _
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →
     {l : Level} (X : Truncated-Type l k) →
-    is-equiv (diagonal-into-fibers-precomp f (type-Truncated-Type X))
+    is-equiv (diagonal-into-fibers-precomp f)
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type e X =
     is-equiv-map-section-family
       ( λ g → g , refl)
@@ -202,11 +202,10 @@ module _
     is-equiv (diagonal-into-cocone f (type-Truncated-Type X))
   is-equiv-diagonal-into-cocone-is-epimorphism-Truncated-Type e X =
     is-equiv-comp
-      ( map-equiv (compute-total-fiber-precomp f (type-Truncated-Type X)))
-      ( diagonal-into-fibers-precomp f (type-Truncated-Type X))
+      ( map-equiv (compute-total-fiber-precomp f))
+      ( diagonal-into-fibers-precomp f)
       ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism-Truncated-Type e X)
-      ( is-equiv-map-equiv
-        ( compute-total-fiber-precomp f (type-Truncated-Type X)))
+      ( is-equiv-map-equiv (compute-total-fiber-precomp f))
 
   is-equiv-horizontal-map-cocone-is-epimorphism-Truncated-Type :
     is-epimorphism-Truncated-Type k f →
@@ -241,7 +240,7 @@ module _
         is-contr-equiv
           ( Σ ( B → (type-Truncated-Type X))
               ( λ h → coherence-square-maps f f h g))
-          ( compute-fiber-precomp f (type-Truncated-Type X) g)
+          ( compute-fiber-precomp f g)
           ( is-contr-is-equiv-pr1 (h X) g))
 
   is-epimorphism-is-equiv-vertical-map-cocone-Truncated-Type :
