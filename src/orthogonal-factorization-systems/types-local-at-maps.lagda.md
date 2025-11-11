@@ -41,6 +41,7 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 ```
 
