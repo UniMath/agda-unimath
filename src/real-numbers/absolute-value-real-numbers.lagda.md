@@ -419,7 +419,7 @@ abstract
         by inv (ap-mul-ℝ (eq-abs-sqrt-square-ℝ x) (eq-abs-sqrt-square-ℝ y))
 ```
 
-### For any `ε : ℚ⁺`, `(abs-ℝ x - ε < x) ∨ (abs-ℝ x - ε < -x)`
+### For any `ε : ℚ⁺`, `|x| - ε < x` or `|x| - ε < -x`
 
 ```agda
 abstract opaque

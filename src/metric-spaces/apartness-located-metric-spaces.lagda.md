@@ -47,7 +47,7 @@ module _
   apart-prop-Located-Metric-Space :
     Relation-Prop l2 (type-Located-Metric-Space M)
   apart-prop-Located-Metric-Space x y =
-    ∃ ℚ⁺ (λ ε → ¬' (neighborhood-prop-Located-Metric-Space M ε x y))
+    ∃ ℚ⁺ (λ ε → ¬' neighborhood-prop-Located-Metric-Space M ε x y)
 
   apart-Located-Metric-Space : Relation l2 (type-Located-Metric-Space M)
   apart-Located-Metric-Space =
@@ -101,8 +101,8 @@ module _
     is-cotransitive-apart-Located-Metric-Space x y z x#y =
       let
         motive =
-          apart-prop-Located-Metric-Space M x z ∨
-          apart-prop-Located-Metric-Space M y z
+          ( apart-prop-Located-Metric-Space M x z) ∨
+          ( apart-prop-Located-Metric-Space M y z)
         open do-syntax-trunc-Prop motive
       in do
         (dxy , ¬Ndxy) ← x#y
