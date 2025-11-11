@@ -222,7 +222,8 @@ module _
   where
 
   is-extension-dependent-type-right-whisker :
-    (F : is-extension-dependent-type i f g) (h : X → A) →
+    is-extension-dependent-type i f g →
+    (h : X → A) →
     is-extension-dependent-type (i ∘ h) (f ∘ h) g
   is-extension-dependent-type-right-whisker F h = F ∘ h
 ```

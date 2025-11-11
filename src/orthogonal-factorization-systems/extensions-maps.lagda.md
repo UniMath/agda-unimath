@@ -80,7 +80,7 @@ module _
   where
 
   is-extension-comp-horizontal :
-    (I : is-extension f g i) → is-extension g h j → is-extension f h (j ∘ i)
+    is-extension f g i → is-extension g h j → is-extension f h (j ∘ i)
   is-extension-comp-horizontal I J x = J x ∙ ap j (I x)
 ```
 
