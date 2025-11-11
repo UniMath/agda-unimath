@@ -10,14 +10,16 @@ module real-numbers.local-ring-of-real-numbers where
 
 ```agda
 open import commutative-algebra.local-commutative-rings
-open import real-numbers.addition-real-numbers
-open import real-numbers.nonzero-real-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.functoriality-disjunction
+open import foundation.universe-levels
+
 open import real-numbers.addition-nonzero-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
-open import foundation.universe-levels
+open import real-numbers.nonzero-real-numbers
 ```
 
 </details>
