@@ -23,7 +23,7 @@ open import real-numbers.similarity-real-numbers
 ## Idea
 
 We record that [equality](foundation-core.identity-types.md) and
-[similarity](real-numbers.similarity-dedekind-real-numbers.md) of
+[similarity](real-numbers.similarity-real-numbers.md) of
 [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) is
 [double negation stable](foundation.double-negation-stable-equality.md).
 
