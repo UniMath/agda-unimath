@@ -25,7 +25,6 @@ open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -327,12 +326,12 @@ abstract
                   rational-dist-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε)) zero-ℚ
                   ≤ rational-abs-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε))
                     by
-                      leq-eq-ℚ (ap rational-ℚ⁰⁺ (right-zero-law-dist-ℚ _))
+                    leq-eq-ℚ (ap rational-ℚ⁰⁺ (right-zero-law-dist-ℚ _))
                   ≤ rational-ℚ⁺ (power-ℚ⁺ n ε)
                     by
-                      leq-eq-ℚ
-                        ( ap rational-ℚ⁰⁺
-                          ( abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ (power-ℚ⁺ n ε))))
+                    leq-eq-ℚ
+                      ( ap rational-ℚ⁰⁺
+                        ( abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ (power-ℚ⁺ n ε))))
                   ≤ rational-ℚ⁺ (power-ℚ⁺ m ε)
                     by leq-power-leq-one-ℚ⁺ ε (leq-le-ℚ ε<1) m n m≤n
                   ≤ rational-ℚ⁺ δ

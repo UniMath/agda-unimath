@@ -9,30 +9,23 @@ module real-numbers.squares-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-negative-rational-numbers
-open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.nonpositive-rational-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications

@@ -21,26 +21,21 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
-
-open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers

@@ -32,7 +32,6 @@ open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.nets-metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 
 open import order-theory.upper-bounds-large-posets

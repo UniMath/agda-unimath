@@ -350,9 +350,8 @@ module _
         by
         equiv-tot
           ( λ (a , p) →
-            compute-coherence-triangle-fiber-precomp'
+            compute-extension-fiber-precomp'
               ( α₁ a)
-              ( X)
               ( inv-tr (λ c' → Q₁ c' → X) p x))
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →

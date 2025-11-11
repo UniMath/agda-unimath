@@ -24,7 +24,6 @@ open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
@@ -356,7 +355,7 @@ abstract
         by leq-eq-ℝ (ap abs-ℝ (inv (power-succ-ℝ n y)))
 ```
 
-### If `x` and `y` are nonnegative, and `x ≤ y`, `xⁿ ≤ yⁿ`
+### If `x` and `y` are nonnegative such that `x ≤ y`, then `xⁿ ≤ yⁿ`
 
 ```agda
 abstract
@@ -389,7 +388,7 @@ abstract
         by leq-eq-ℝ (inv (power-succ-ℝ n y))
 ```
 
-### If `|r| < 1`, `rⁿ` approaches 0
+### If `|r| < 1`, then `rⁿ` approaches 0
 
 ```agda
 abstract

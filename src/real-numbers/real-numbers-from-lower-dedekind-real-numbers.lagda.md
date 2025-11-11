@@ -9,8 +9,6 @@ module real-numbers.real-numbers-from-lower-dedekind-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -27,7 +25,6 @@ open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 

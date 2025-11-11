@@ -21,7 +21,6 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 
 open import real-numbers.addition-real-numbers
-open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -80,13 +79,13 @@ module _
   where
 
   abstract
-    is-limit-add-sequence-ℝ :
+    preserves-limits-add-sequence-ℝ :
       is-limit-sequence-Metric-Space
         ( metric-space-ℝ (l1 ⊔ l2))
         ( binary-map-sequence add-ℝ u v)
         ( lim-u +ℝ lim-v)
-    is-limit-add-sequence-ℝ =
-      modulated-ucont-map-limit-sequence-Metric-Space
+    preserves-limits-add-sequence-ℝ =
+      preserves-limits-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-add-pair-ℝ l1 l2)
@@ -110,15 +109,15 @@ module _
   where
 
   abstract
-    uniformly-continuous-map-limit-sequence-ℝ :
+    preserves-limits-sequence-uniformly-continuous-function-ℝ :
       is-limit-sequence-ℝ u lim →
       is-limit-sequence-ℝ
         ( map-sequence
           ( map-uniformly-continuous-function-ℝ f)
           ( u))
         ( map-uniformly-continuous-function-ℝ f lim)
-    uniformly-continuous-map-limit-sequence-ℝ =
-      uniformly-continuous-map-limit-sequence-Metric-Space
+    preserves-limits-sequence-uniformly-continuous-function-ℝ =
+      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)

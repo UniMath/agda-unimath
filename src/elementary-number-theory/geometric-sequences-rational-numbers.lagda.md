@@ -29,7 +29,6 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -45,8 +44,6 @@ open import lists.sequences
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
-
-open import order-theory.strictly-increasing-sequences-strictly-preordered-sets
 ```
 
 </details>
@@ -165,7 +162,7 @@ module _
             ＝
               a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
               by right-unit-law-mul-ℚ _)
-          ( uniformly-continuous-map-limit-sequence-Metric-Space
+          ( preserves-limits-sequence-uniformly-continuous-function-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℚ)
             ( comp-uniformly-continuous-function-Metric-Space
@@ -175,67 +172,6 @@ module _
               ( uniformly-continuous-left-mul-ℚ
                 ( a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
               ( uniformly-continuous-diff-ℚ one-ℚ))
-            ( λ n → power-ℚ n r)
-            ( zero-ℚ)
-            ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))
-```
-
-### If `|r| < 1`, the sum of the standard geometric sequence `n ↦ arⁿ` is `a/(1-r)`
-
-```agda
-module _
-  (a r : ℚ)
-  where
-
-  standard-geometric-series-ℚ : series-Metric-Ab metric-ab-add-ℚ
-  standard-geometric-series-ℚ =
-    series-terms-Metric-Ab (seq-standard-geometric-sequence-ℚ a r)
-
-  abstract
-    sum-standard-geometric-sequence-ℚ :
-      (|r|<1 : le-ℚ (rational-abs-ℚ r) one-ℚ) →
-      is-sum-series-Metric-Ab
-        ( standard-geometric-series-ℚ)
-        ( a *ℚ rational-inv-ℚˣ (invertible-diff-le-abs-ℚ r one-ℚ⁺ |r|<1))
-    sum-standard-geometric-sequence-ℚ |r|<1 =
-      let
-        r≠1 =
-          nonequal-map
-            ( rational-abs-ℚ)
-            ( inv-tr
-              ( rational-abs-ℚ r ≠_)
-              ( rational-abs-rational-ℚ⁺ one-ℚ⁺)
-              ( nonequal-le-ℚ |r|<1))
-      in
-        binary-tr
-          ( is-limit-sequence-Metric-Space metric-space-ℚ)
-          ( inv
-            ( eq-htpy (compute-sum-standard-geometric-fin-sequence-ℚ a r r≠1)))
-          ( equational-reasoning
-            a *ℚ
-            ( (one-ℚ -ℚ zero-ℚ) *ℚ
-              rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1))
-            ＝
-              a *ℚ
-              ( one-ℚ *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1))
-              by ap-mul-ℚ refl (ap-mul-ℚ (right-zero-law-diff-ℚ one-ℚ) refl)
-            ＝ a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
-              by ap-mul-ℚ refl (left-unit-law-mul-ℚ _))
-          ( uniformly-continuous-map-limit-sequence-Metric-Space
-            ( metric-space-ℚ)
-            ( metric-space-ℚ)
-            ( comp-uniformly-continuous-function-Metric-Space
-              ( metric-space-ℚ)
-              ( metric-space-ℚ)
-              ( metric-space-ℚ)
-              ( uniformly-continuous-left-mul-ℚ a)
-              ( comp-uniformly-continuous-function-Metric-Space
-                ( metric-space-ℚ)
-                ( metric-space-ℚ)
-                ( metric-space-ℚ)
-                ( uniformly-continuous-right-mul-ℚ
-                  ( rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
-                ( uniformly-continuous-diff-ℚ one-ℚ)))
             ( λ n → power-ℚ n r)
             ( zero-ℚ)
             ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))

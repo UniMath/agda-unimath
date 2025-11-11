@@ -17,7 +17,6 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.rational-real-numbers
