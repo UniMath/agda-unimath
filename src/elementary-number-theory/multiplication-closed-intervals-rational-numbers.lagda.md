@@ -34,12 +34,14 @@ open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negation-closed-intervals-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
+open import foundation.functoriality-coproduct-types
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -54,6 +56,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images-subtypes
+open import foundation.coproduct-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -1286,4 +1289,80 @@ abstract
             ( leq-nonpositive-nonnegative-ℚ
               ( neg-ℚ⁰⁺ (nonnegative-square-ℚ q))
               ( nonnegative-square-ℚ q))
+```
+
+### If the lower bound of the product of `[a, b]` and `[c, d]` is positive, then `a`, `b`, `c`, and `d` are all positive or all negative
+
+```agda
+abstract
+  same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-ℚ (lower-bound-mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
+        is-negative-ℚ (lower-bound-closed-interval-ℚ [c,d]) ×
+        is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])) +
+      ( is-positive-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-positive-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
+        is-positive-ℚ (lower-bound-closed-interval-ℚ [c,d]) ×
+        is-positive-ℚ (upper-bound-closed-interval-ℚ [c,d])))
+  same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
+    let
+      same-sign-a-c =
+        same-sign-is-positive-mul-ℚ
+          ( is-positive-leq-ℚ⁺
+            ( _ , is-pos-lb)
+            ( transitive-leq-ℚ _ _ _ (leq-left-min-ℚ _ _) (leq-left-min-ℚ _ _)))
+      same-sign-a-d =
+        same-sign-is-positive-mul-ℚ
+          ( is-positive-leq-ℚ⁺
+            ( _ , is-pos-lb)
+            ( transitive-leq-ℚ _ _ _
+              ( leq-right-min-ℚ _ _)
+              ( leq-left-min-ℚ _ _)))
+      same-sign-b-d =
+        same-sign-is-positive-mul-ℚ
+          ( is-positive-leq-ℚ⁺
+            ( _ , is-pos-lb)
+            ( transitive-leq-ℚ _ _ _
+              ( leq-right-min-ℚ _ _)
+              ( leq-right-min-ℚ _ _)))
+    in
+      map-coproduct
+        ( λ (is-neg-a , is-neg-c) →
+          let
+            is-neg-d =
+              rec-coproduct
+                ( pr2)
+                ( λ (is-pos-a , _) →
+                  ex-falso
+                    ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
+                ( same-sign-a-d)
+            is-neg-b =
+              rec-coproduct
+                ( pr1)
+                ( λ (_ , is-pos-d) →
+                  ex-falso
+                    ( is-not-negative-and-positive-ℚ (is-neg-d , is-pos-d)))
+                ( same-sign-b-d)
+          in (is-neg-a , is-neg-b , is-neg-c , is-neg-d))
+        ( λ (is-pos-a , is-pos-c) →
+          let
+            is-pos-d =
+              rec-coproduct
+                ( λ (is-neg-a , _) →
+                  ex-falso
+                    ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
+                ( pr2)
+                ( same-sign-a-d)
+            is-pos-b =
+              rec-coproduct
+                ( λ (_ , is-neg-d) →
+                  ex-falso
+                    ( is-not-negative-and-positive-ℚ (is-neg-d , is-pos-d)))
+                ( pr1)
+                ( same-sign-b-d)
+          in (is-pos-a , is-pos-b , is-pos-c , is-pos-d))
+        ( same-sign-a-c)
 ```

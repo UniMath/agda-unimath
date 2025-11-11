@@ -1,6 +1,8 @@
 # Multiplication by positive, negative, and nonnegative real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.multiplication-positive-and-negative-real-numbers where
 ```
 
@@ -18,9 +20,11 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.existential-quantification
 
 open import order-theory.posets
 
@@ -29,6 +33,7 @@ open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -108,31 +113,47 @@ abstract opaque
       ( ( ax<x<bx@([ax,bx]@((ax , bx) , _) , ax<x , x<bx) ,
           ay<y<by@([ay,by]@((ay , by) , _) , ay<y , y<by)) ,
           q<[ax,bx][ay,by]) ← q<xy
-      let
-        is-positive-axay =
-          is-positive-leq-ℚ⁺
-            ( q⁺)
-            ( chain-of-inequalities
-              q
-              ≤ lower-bound-mul-closed-interval-ℚ [ax,bx] [ay,by]
-                by leq-le-ℚ q<[ax,bx][ay,by]
-              ≤ min-ℚ (ax *ℚ ay) (ax *ℚ by)
-                by leq-left-min-ℚ _ _
-              ≤ ax *ℚ ay
-                by leq-left-min-ℚ _ _)
-        is-positive-bxby =
-          is-positive-leq-ℚ⁺
-            ( q⁺)
-            ( chain-of-inequalities
-              q
-              ≤ lower-bound-mul-closed-interval-ℚ [ax,bx] [ay,by]
-                by leq-le-ℚ q<[ax,bx][ay,by]
-              ≤ min-ℚ (bx *ℚ ay) (bx *ℚ by)
-                by leq-right-min-ℚ _ _
-              ≤ bx *ℚ by
-                by leq-right-min-ℚ _ _)
       rec-coproduct
-        {!   !}
-        {!   !}
-        {!  same-sign !}
+        ( λ (_ , is-neg-bx , _ , is-neg-by) →
+          inl-disjunction
+            ( is-negative-exists-ℚ⁻-in-upper-cut-ℝ
+                ( x)
+                ( intro-exists (bx , is-neg-bx) x<bx) ,
+              is-negative-exists-ℚ⁻-in-upper-cut-ℝ
+                ( y)
+                ( intro-exists (by , is-neg-by) y<by)))
+        ( λ (is-pos-ax , _ , is-pos-ay , _) →
+          inr-disjunction
+            ( is-positive-exists-ℚ⁺-in-lower-cut-ℝ
+                ( x)
+                ( intro-exists (ax , is-pos-ax) ax<x) ,
+              is-positive-exists-ℚ⁺-in-lower-cut-ℝ
+                ( y)
+                ( intro-exists (ay , is-pos-ay) ay<y)))
+        ( same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ
+          ( [ax,bx])
+          ( [ay,by])
+          ( is-positive-le-ℚ⁺ q⁺ q<[ax,bx][ay,by]))
+```
+
+### If the product of two real numbers is negative, one is positive and the other negative
+
+```agda
+abstract
+  different-signs-is-negative-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-negative-ℝ (x *ℝ y) →
+    type-disjunction-Prop
+      ( is-negative-prop-ℝ x ∧ is-positive-prop-ℝ y)
+      ( is-positive-prop-ℝ x ∧ is-negative-prop-ℝ y)
+  different-signs-is-negative-mul-ℝ x y xy<0 =
+    map-disjunction
+      {!   !}
+      {!   !}
+      ( same-sign-is-positive-mul-ℝ
+        ( neg-ℝ x)
+        ( y)
+        ( inv-tr
+          ( is-positive-ℝ)
+          ( left-negative-law-mul-ℝ x y)
+          {!   !}))
 ```
