@@ -66,4 +66,24 @@ module _
   is-local-commutative-ring-Local-Commutative-Ring :
     is-local-Commutative-Ring commutative-ring-Local-Commutative-Ring
   is-local-commutative-ring-Local-Commutative-Ring = pr2 A
+
+  zero-Local-Commutative-Ring : type-Local-Commutative-Ring
+  zero-Local-Commutative-Ring = zero-Ring ring-Local-Commutative-Ring
+
+  one-Local-Commutative-Ring : type-Local-Commutative-Ring
+  one-Local-Commutative-Ring = one-Ring ring-Local-Commutative-Ring
+
+  add-Local-Commutative-Ring :
+    type-Local-Commutative-Ring → type-Local-Commutative-Ring →
+    type-Local-Commutative-Ring
+  add-Local-Commutative-Ring = add-Ring ring-Local-Commutative-Ring
+
+  mul-Local-Commutative-Ring :
+    type-Local-Commutative-Ring → type-Local-Commutative-Ring →
+    type-Local-Commutative-Ring
+  mul-Local-Commutative-Ring = mul-Ring ring-Local-Commutative-Ring
+
+  neg-Local-Commutative-Ring :
+    type-Local-Commutative-Ring → type-Local-Commutative-Ring
+  neg-Local-Commutative-Ring = neg-Ring ring-Local-Commutative-Ring
 ```
