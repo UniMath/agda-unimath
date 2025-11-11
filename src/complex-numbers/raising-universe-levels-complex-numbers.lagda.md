@@ -8,10 +8,12 @@ module complex-numbers.raising-universe-levels-complex-numbers where
 
 ```agda
 open import complex-numbers.complex-numbers
-open import real-numbers.raising-universe-levels-real-numbers
-open import foundation.dependent-pair-types
 open import complex-numbers.similarity-complex-numbers
+
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import real-numbers.raising-universe-levels-real-numbers
 ```
 
 </details>

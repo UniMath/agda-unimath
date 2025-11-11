@@ -255,50 +255,6 @@ opaque
         ＝ zero-ℝ
           by left-unit-law-add-ℝ zero-ℝ)
 ```
-<<<<<<< Updated upstream
-=======
-
-### The canonical embedding of real numbers in the complex numbers preserves multiplication
-
-```agda
-abstract
-  mul-complex-ℝ :
-    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
-    complex-ℝ x *ℂ complex-ℝ y ＝ complex-ℝ (x *ℝ y)
-  mul-complex-ℝ {l1} {l2} x y =
-    eq-ℂ
-      ( equational-reasoning
-        x *ℝ y -ℝ raise-ℝ l1 zero-ℝ *ℝ raise-ℝ l2 zero-ℝ
-        ＝ x *ℝ y -ℝ zero-ℝ *ℝ zero-ℝ
-          by
-            eq-sim-ℝ
-              ( preserves-sim-diff-ℝ
-                ( refl-sim-ℝ (x *ℝ y))
-                ( symmetric-sim-ℝ
-                  ( preserves-sim-mul-ℝ (sim-raise-ℝ _ _) (sim-raise-ℝ _ _))))
-        ＝ x *ℝ y -ℝ zero-ℝ
-          by ap-diff-ℝ refl (eq-sim-ℝ (right-zero-law-mul-ℝ _))
-        ＝ x *ℝ y
-          by right-unit-law-diff-ℝ (x *ℝ y))
-      ( eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          x *ℝ raise-ℝ l2 zero-ℝ +ℝ raise-ℝ l1 zero-ℝ *ℝ y
-          ~ℝ x *ℝ zero-ℝ +ℝ zero-ℝ *ℝ y
-            by
-              symmetric-sim-ℝ
-                ( preserves-sim-add-ℝ
-                  ( preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l2 zero-ℝ))
-                  ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ l1 zero-ℝ)))
-          ~ℝ zero-ℝ +ℝ zero-ℝ
-            by
-              preserves-sim-add-ℝ
-                ( right-zero-law-mul-ℝ x)
-                ( left-zero-law-mul-ℝ y)
-          ~ℝ zero-ℝ
-            by sim-eq-ℝ (left-unit-law-add-ℝ zero-ℝ)
-          ~ℝ raise-ℝ (l1 ⊔ l2) zero-ℝ
-            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ))
-```
 
 ### Similarity is preserved by multiplication
 
@@ -309,10 +265,9 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x *ℂ y) (x' *ℂ y')
   preserves-sim-mul-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-diff-ℝ
-        ( preserves-sim-mul-ℝ a~a' c~c')
-        ( preserves-sim-mul-ℝ b~b' d~d') ,
+        ( preserves-sim-mul-ℝ _ _ a~a' _ _ c~c')
+        ( preserves-sim-mul-ℝ _ _ b~b' _ _ d~d') ,
       preserves-sim-add-ℝ
-        ( preserves-sim-mul-ℝ a~a' d~d')
-        ( preserves-sim-mul-ℝ b~b' c~c'))
+        ( preserves-sim-mul-ℝ _ _ a~a' _ _ d~d')
+        ( preserves-sim-mul-ℝ _ _ b~b' _ _ c~c'))
 ```
->>>>>>> Stashed changes

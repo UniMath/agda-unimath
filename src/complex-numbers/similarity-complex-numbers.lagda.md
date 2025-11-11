@@ -11,19 +11,16 @@ open import complex-numbers.complex-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-<<<<<<< Updated upstream
-=======
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
->>>>>>> Stashed changes
 open import real-numbers.similarity-real-numbers
 ```
 
@@ -83,8 +80,6 @@ abstract
   eq-sim-ℂ : {l : Level} {x y : ℂ l} → sim-ℂ x y → x ＝ y
   eq-sim-ℂ (a~c , b~d) = eq-ℂ (eq-sim-ℝ a~c) (eq-sim-ℝ b~d)
 ```
-<<<<<<< Updated upstream
-=======
 
 ### Similarity is a large equivalence relation
 
@@ -163,4 +158,5 @@ abstract
 
   syntax step-similarity-reasoning-ℂ p u q = p ~ℂ u by q
 ```
->>>>>>> Stashed changes
+
+> > > > > > > Stashed changes

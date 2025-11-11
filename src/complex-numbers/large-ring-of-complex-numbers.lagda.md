@@ -7,12 +7,16 @@ module complex-numbers.large-ring-of-complex-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import ring-theory.large-rings
+open import commutative-algebra.commutative-rings
 open import commutative-algebra.large-commutative-rings
-open import complex-numbers.large-additive-group-of-complex-numbers
+
 open import complex-numbers.complex-numbers
-open import foundation.universe-levels
+open import complex-numbers.large-additive-group-of-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
+
+open import foundation.universe-levels
+
+open import ring-theory.large-rings
 ```
 
 </details>
@@ -45,4 +49,14 @@ large-commutative-ring-ℂ =
   make-Large-Commutative-Ring
     ( large-ring-ℂ)
     ( commutative-mul-ℂ)
+```
+
+## Properties
+
+### The small commutative ring of complex numbers at a universe level
+
+```agda
+commutative-ring-ℂ : (l : Level) → Commutative-Ring (lsuc l)
+commutative-ring-ℂ =
+  commutative-ring-Large-Commutative-Ring large-commutative-ring-ℂ
 ```

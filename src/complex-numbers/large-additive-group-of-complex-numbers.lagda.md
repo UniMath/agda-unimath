@@ -9,18 +9,19 @@ module complex-numbers.large-additive-group-of-complex-numbers where
 ```agda
 open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.universe-levels
-open import complex-numbers.raising-universe-levels-complex-numbers
 
-open import group-theory.large-semigroups
-open import group-theory.large-monoids
+open import group-theory.abelian-groups
+open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-groups
-open import group-theory.large-abelian-groups
+open import group-theory.large-monoids
+open import group-theory.large-semigroups
 ```
 
 </details>
@@ -87,4 +88,13 @@ large-ab-add-ℂ =
   make-Large-Ab
     ( large-group-add-ℂ)
     ( commutative-add-ℂ)
+```
+
+## Properties
+
+### The small abelian group of complex numbers at a universe level
+
+```agda
+ab-add-ℂ : (l : Level) → Ab (lsuc l)
+ab-add-ℂ = ab-Large-Ab large-ab-add-ℂ
 ```

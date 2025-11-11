@@ -99,8 +99,6 @@ abstract
   preserves-sim-add-ℂ :
     {l1 l2 l3 l4 : Level} {x : ℂ l1} {x' : ℂ l2} {y : ℂ l3} {y' : ℂ l4} →
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x +ℂ y) (x' +ℂ y')
-  preserves-sim-add-ℂ
-    { x = a +iℂ b} {x' = a' +iℂ b'} {y = c +iℂ d} {y' = c' +iℂ d'}
-    ( a~a' , b~b') (c~c' , d~d') =
+  preserves-sim-add-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-add-ℝ a~a' c~c' , preserves-sim-add-ℝ b~b' d~d')
 ```
