@@ -48,7 +48,7 @@ large-monoid-mul-ℝ =
     ( large-similarity-relation-sim-ℝ)
     ( raise-ℝ)
     ( sim-raise-ℝ)
-    ( preserves-sim-mul-ℝ)
+    ( λ _ _ x~x' _ _ y~y' → preserves-sim-mul-ℝ x~x' y~y')
     ( one-ℝ)
     ( left-unit-law-mul-ℝ)
     ( right-unit-law-mul-ℝ)

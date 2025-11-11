@@ -111,7 +111,7 @@ module _
         ( seq-modulated-ucont-map-convergent-sequence-Metric-Space)
         ( limit-seq-modulated-ucont-map-convergent-sequence-Metric-Space)
     is-limit-seq-modulated-ucont-map-convergent-sequence-Metric-Space =
-      modulated-ucont-map-limit-sequence-Metric-Space
+      preserves-limits-sequence-modulated-ucont-map-Metric-Space
         ( A)
         ( B)
         ( f)
@@ -162,7 +162,7 @@ module _
         ( seq-uniformly-continuous-map-convergent-sequence-Metric-Space)
         ( limit-seq-uniformly-continuous-map-convergent-sequence-Metric-Space)
     is-limit-seq-uniformly-continuous-map-convergent-sequence-Metric-Space =
-      uniformly-continuous-map-limit-sequence-Metric-Space
+      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
         ( A)
         ( B)
         ( f)
@@ -206,7 +206,7 @@ module _
   has-limit-seq-short-map-convergent-sequence-Metric-Space =
     ( map-short-function-Metric-Space A B f
       ( limit-convergent-sequence-Metric-Space A u)) ,
-    ( short-map-limit-sequence-Metric-Space
+    ( preserves-limits-sequence-short-function-Metric-Space
       ( A)
       ( B)
       ( f)
