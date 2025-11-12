@@ -27,6 +27,7 @@ open import metric-spaces.short-functions-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.isometry-negation-real-numbers
@@ -34,6 +35,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
@@ -42,6 +44,7 @@ open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -132,9 +135,22 @@ abstract opaque
           ( x)
           ( 0≤x)
           ( tr (leq-ℝ (neg-ℝ x)) neg-zero-ℝ (neg-leq-ℝ 0≤x))))
+```
 
+### The absolute value of a positive real number is itself
+
+```agda
+abstract
   abs-real-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → abs-ℝ (real-ℝ⁺ x) ＝ real-ℝ⁺ x
   abs-real-ℝ⁺ x = abs-real-ℝ⁰⁺ (nonnegative-ℝ⁺ x)
+```
+
+### The absolute value of a negative real number is its negation
+
+```agda
+abstract
+  abs-real-ℝ⁻ : {l : Level} (x : ℝ⁻ l) → abs-ℝ (real-ℝ⁻ x) ＝ neg-ℝ (real-ℝ⁻ x)
+  abs-real-ℝ⁻ x⁻@(x , _) = inv (abs-neg-ℝ x) ∙ abs-real-ℝ⁺ (neg-ℝ⁻ x⁻)
 ```
 
 ### `x` is between `-|x|` and `|x|`
@@ -401,4 +417,18 @@ abstract
         by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
       ＝ abs-ℝ x *ℝ abs-ℝ y
         by inv (ap-mul-ℝ (eq-abs-sqrt-square-ℝ x) (eq-abs-sqrt-square-ℝ y))
+```
+
+### For any `ε : ℚ⁺`, `|x| - ε < x` or `|x| - ε < -x`
+
+```agda
+abstract opaque
+  unfolding abs-ℝ
+
+  approximate-below-abs-ℝ :
+    {l : Level} (x : ℝ l) (ε : ℚ⁺) →
+    disjunction-type
+      ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) x)
+      ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) (neg-ℝ x))
+  approximate-below-abs-ℝ x = approximate-below-max-ℝ x (neg-ℝ x)
 ```

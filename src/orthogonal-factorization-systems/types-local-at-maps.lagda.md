@@ -43,6 +43,7 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 ```
 
@@ -120,39 +121,39 @@ module _
   {l : Level} (P : B → UU l)
   where
 
-  equiv-fiber'-precomp-extension-dependent-type :
+  equiv-fiber'-precomp-extension-dependent-map :
     (f : (x : A) → P (i x)) →
-    fiber' (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber'-precomp-extension-dependent-type f =
+    fiber' (precomp-Π i P) f ≃ extension-dependent-map i P f
+  equiv-fiber'-precomp-extension-dependent-map f =
     equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
 
-  equiv-fiber-precomp-extension-dependent-type :
+  equiv-fiber-precomp-extension-dependent-map :
     (f : (x : A) → P (i x)) →
-    fiber (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber-precomp-extension-dependent-type f =
-    ( equiv-fiber'-precomp-extension-dependent-type f) ∘e
+    fiber (precomp-Π i P) f ≃ extension-dependent-map i P f
+  equiv-fiber-precomp-extension-dependent-map f =
+    ( equiv-fiber'-precomp-extension-dependent-map f) ∘e
     ( equiv-fiber (precomp-Π i P) f)
 
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type :
+  equiv-is-contr-extension-dependent-map-is-local-dependent-type :
     is-local-dependent-type i P ≃
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type =
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f))
+  equiv-is-contr-extension-dependent-map-is-local-dependent-type =
     ( equiv-Π-equiv-family
-      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-type)) ∘e
+      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-map)) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
-  is-contr-extension-dependent-type-is-local-dependent-type :
+  is-contr-extension-dependent-map-is-local-dependent-type :
     is-local-dependent-type i P →
-    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
-  is-contr-extension-dependent-type-is-local-dependent-type =
-    map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
+    (f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f)
+  is-contr-extension-dependent-map-is-local-dependent-type =
+    map-equiv equiv-is-contr-extension-dependent-map-is-local-dependent-type
 
-  is-local-dependent-type-is-contr-extension-dependent-type :
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
+  is-local-dependent-type-is-contr-extension-dependent-map :
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f)) →
     is-local-dependent-type i P
-  is-local-dependent-type-is-contr-extension-dependent-type =
+  is-local-dependent-type-is-contr-extension-dependent-map =
     map-inv-equiv
-      equiv-is-contr-extension-dependent-type-is-local-dependent-type
+      equiv-is-contr-extension-dependent-map-is-local-dependent-type
 ```
 
 ### Every map has a unique extension along `i` if and only if `P` is `i`-local
@@ -163,15 +164,15 @@ module _
   {l : Level} {C : UU l}
   where
 
-  is-contr-extension-is-local :
-    is-local i C → (f : A → C) → is-contr (extension i f)
-  is-contr-extension-is-local =
-    is-contr-extension-dependent-type-is-local-dependent-type i (λ _ → C)
+  is-contr-extension-map-is-local :
+    is-local i C → (f : A → C) → is-contr (extension-map i f)
+  is-contr-extension-map-is-local =
+    is-contr-extension-dependent-map-is-local-dependent-type i (λ _ → C)
 
-  is-local-is-contr-extension :
-    ((f : A → C) → is-contr (extension i f)) → is-local i C
-  is-local-is-contr-extension =
-    is-local-dependent-type-is-contr-extension-dependent-type i (λ _ → C)
+  is-local-is-contr-extension-map :
+    ((f : A → C) → is-contr (extension-map i f)) → is-local i C
+  is-local-is-contr-extension-map =
+    is-local-dependent-type-is-contr-extension-dependent-map i (λ _ → C)
 ```
 
 ### Local types are closed under equivalences

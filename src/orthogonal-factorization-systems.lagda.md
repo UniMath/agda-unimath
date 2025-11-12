@@ -16,6 +16,9 @@ open import orthogonal-factorization-systems.closed-modalities public
 open import orthogonal-factorization-systems.continuation-modalities public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.double-negation-sheaves public
+open import orthogonal-factorization-systems.equality-extensions-dependent-maps public
+open import orthogonal-factorization-systems.equality-extensions-maps public
+open import orthogonal-factorization-systems.extensions-dependent-maps public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-maps public
@@ -56,6 +59,7 @@ open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
+open import orthogonal-factorization-systems.postcomposition-extensions-maps public
 open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.raise-modalities public
