@@ -11,6 +11,7 @@ module real-numbers.limits-sequences-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -19,10 +20,10 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 
 open import real-numbers.addition-real-numbers
-open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -36,6 +37,10 @@ On this page, we describe properties of
 ## Definition
 
 ```agda
+is-limit-prop-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → Prop l
+is-limit-prop-sequence-ℝ {l} =
+  is-limit-prop-sequence-Metric-Space (metric-space-ℝ l)
+
 is-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → UU l
 is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
@@ -56,13 +61,13 @@ module _
   where
 
   abstract
-    is-limit-add-sequence-ℝ :
+    preserves-limits-add-sequence-ℝ :
       is-limit-sequence-Metric-Space
         ( metric-space-ℝ (l1 ⊔ l2))
         ( binary-map-sequence add-ℝ u v)
         ( lim-u +ℝ lim-v)
-    is-limit-add-sequence-ℝ =
-      modulated-ucont-map-limit-sequence-Metric-Space
+    preserves-limits-add-sequence-ℝ =
+      preserves-limits-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-add-pair-ℝ l1 l2)
@@ -73,4 +78,31 @@ module _
           ( metric-space-ℝ l2)
           ( Hu)
           ( Hv))
+```
+
+### Uniformly continuous functions from `ℝ` to `ℝ` preserve limits
+
+```agda
+module _
+  {l1 l2 : Level}
+  (f : uniformly-continuous-function-ℝ l1 l2)
+  (u : sequence (ℝ l1))
+  (lim : ℝ l1)
+  where
+
+  abstract
+    preserves-limits-sequence-uniformly-continuous-function-ℝ :
+      is-limit-sequence-ℝ u lim →
+      is-limit-sequence-ℝ
+        ( map-sequence
+          ( map-uniformly-continuous-function-ℝ f)
+          ( u))
+        ( map-uniformly-continuous-function-ℝ f lim)
+    preserves-limits-sequence-uniformly-continuous-function-ℝ =
+      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+        ( metric-space-ℝ l1)
+        ( metric-space-ℝ l2)
+        ( f)
+        ( u)
+        ( lim)
 ```
