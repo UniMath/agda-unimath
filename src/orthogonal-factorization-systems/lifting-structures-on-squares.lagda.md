@@ -163,7 +163,7 @@ module _
   is-lift-diagonal-map-lifting-structure-square = pr1 ∘ (pr2 ∘ pr2)
 
   lift-lifting-structure-square :
-    lifting-structure-square → lift g (map-codomain-hom-arrow f g α)
+    lifting-structure-square → lift-map g (map-codomain-hom-arrow f g α)
   pr1 (lift-lifting-structure-square L) =
     diagonal-map-lifting-structure-square L
   pr2 (lift-lifting-structure-square L) =
