@@ -142,7 +142,7 @@ abstract
       ( refl-htpy)
 ```
 
-### Precomposition with the terminal map is equivalent to the diagonal exponential
+### Precomposition with the terminal map is an equivalence if and only if the diagonal exponential is
 
 ```agda
 is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential :

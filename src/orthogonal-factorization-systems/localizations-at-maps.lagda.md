@@ -21,7 +21,7 @@ open import orthogonal-factorization-systems.types-local-at-maps
 
 Let `f` be a map of type `A → B` and let `X` be a type. The **localization** of
 `X` at `f`, or **`f`-localization**, is an
-`f`[-local](orthogonal-factorization-systems.types-local-at-maps.md) type `Y`
+`f`-[local](orthogonal-factorization-systems.types-local-at-maps.md) type `Y`
 together with a map `η : X → Y` with the property that every type that is
 `f`-local is also `η`-local.
 

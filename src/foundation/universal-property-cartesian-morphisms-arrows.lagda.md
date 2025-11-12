@@ -131,7 +131,8 @@ module _
     (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   has-unique-lifts-hom-arrow-Level l1 l2 =
     {A : UU l1} {A' : UU l2} (f : A → A') (α : hom-arrow f h) →
-    (δ : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
+    (δ :
+      lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
     is-contr (lift-hom-arrow-of-lift-codomain-hom-arrow f g h β α δ)
 
   has-unique-lifts-hom-arrow : UUω

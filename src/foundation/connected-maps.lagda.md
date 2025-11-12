@@ -7,6 +7,7 @@ module foundation.connected-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -184,7 +185,7 @@ module _
 
   htpy-eq-connected-map :
     (f g : connected-map k A B) → f ＝ g → htpy-connected-map f g
-  htpy-eq-connected-map f .f refl = refl-htpy-connected-map f
+  htpy-eq-connected-map f g H = htpy-eq (ap pr1 H)
 
   is-equiv-htpy-eq-connected-map :
     (f g : connected-map k A B) → is-equiv (htpy-eq-connected-map f g)

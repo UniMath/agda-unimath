@@ -200,6 +200,13 @@ module _
   right-subtraction-Commutative-Ring =
     right-subtraction-Ring ring-Commutative-Ring
 
+  ap-right-subtraction-Commutative-Ring :
+    {x x' y y' : type-Commutative-Ring} → x ＝ x' → y ＝ y' →
+    right-subtraction-Commutative-Ring x y ＝
+    right-subtraction-Commutative-Ring x' y'
+  ap-right-subtraction-Commutative-Ring =
+    ap-right-subtraction-Ring ring-Commutative-Ring
+
   is-section-right-subtraction-Commutative-Ring :
     (x : type-Commutative-Ring) →
     ( add-Commutative-Ring' x ∘
@@ -658,4 +665,21 @@ module _
       ( add-list-Commutative-Ring l2)
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
+```
+
+### The sum of `x - y` and `y - z` is `x - z`
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  add-right-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring R) →
+    add-Commutative-Ring R
+      ( right-subtraction-Commutative-Ring R x y)
+      ( right-subtraction-Commutative-Ring R y z) ＝
+    right-subtraction-Commutative-Ring R x z
+  add-right-subtraction-Commutative-Ring =
+    add-right-subtraction-Ab (ab-Commutative-Ring R)
 ```

@@ -11,9 +11,7 @@ module real-numbers.large-multiplicative-monoid-of-real-numbers where
 ```agda
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-monoids
 open import group-theory.large-semigroups
@@ -50,7 +48,7 @@ large-monoid-mul-ℝ =
     ( large-similarity-relation-sim-ℝ)
     ( raise-ℝ)
     ( sim-raise-ℝ)
-    ( preserves-sim-mul-ℝ)
+    ( λ _ _ x~x' _ _ y~y' → preserves-sim-mul-ℝ x~x' y~y')
     ( one-ℝ)
     ( left-unit-law-mul-ℝ)
     ( right-unit-law-mul-ℝ)

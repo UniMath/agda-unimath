@@ -18,7 +18,6 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
-open import elementary-number-theory.multiplication-nonpositive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
@@ -31,7 +30,6 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -236,7 +234,7 @@ abstract
       ( p *ℚ q)
       ( square-ℚ q)
       ( preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ p q (leq-le-ℚ p<q))
-      ( preserves-le-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ q p<q) p q p<q)
+      ( preserves-le-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ p<q) p q p<q)
 ```
 
 ### Squaring nonnegative rational numbers reflects inequality

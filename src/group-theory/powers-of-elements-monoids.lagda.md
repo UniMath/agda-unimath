@@ -326,13 +326,14 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
-  preserves-powers-hom-Monoid :
-    (n : ℕ) (x : type-Monoid M) →
-    map-hom-Monoid M N f (power-Monoid M n x) ＝
-    power-Monoid N n (map-hom-Monoid M N f x)
-  preserves-powers-hom-Monoid zero-ℕ x = preserves-unit-hom-Monoid M N f
-  preserves-powers-hom-Monoid (succ-ℕ zero-ℕ) x = refl
-  preserves-powers-hom-Monoid (succ-ℕ (succ-ℕ n)) x =
-    ( preserves-mul-hom-Monoid M N f) ∙
-    ( ap (mul-Monoid' N _) (preserves-powers-hom-Monoid (succ-ℕ n) x))
+  abstract
+    preserves-powers-hom-Monoid :
+      (n : ℕ) (x : type-Monoid M) →
+      map-hom-Monoid M N f (power-Monoid M n x) ＝
+      power-Monoid N n (map-hom-Monoid M N f x)
+    preserves-powers-hom-Monoid zero-ℕ x = preserves-unit-hom-Monoid M N f
+    preserves-powers-hom-Monoid (succ-ℕ zero-ℕ) x = refl
+    preserves-powers-hom-Monoid (succ-ℕ (succ-ℕ n)) x =
+      ( preserves-mul-hom-Monoid M N f) ∙
+      ( ap (mul-Monoid' N _) (preserves-powers-hom-Monoid (succ-ℕ n) x))
 ```
