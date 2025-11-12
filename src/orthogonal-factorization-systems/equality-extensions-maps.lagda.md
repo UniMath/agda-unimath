@@ -41,6 +41,10 @@ We characterize equality of
 ([dependent](orthogonal-factorization-systems.extensions-dependent-maps.md))
 maps.
 
+On this page we conflate extensions of dependent maps and extensions of
+nondependent maps, as the characterization of equality coincides for the two
+notions.
+
 ## Definition
 
 ### Homotopies of extensions
