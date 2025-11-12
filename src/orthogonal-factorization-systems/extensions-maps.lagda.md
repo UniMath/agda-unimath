@@ -106,7 +106,7 @@ module _
 
 ## Examples
 
-### The identity is an extension-map of every map along themselves
+### The identity is an extension of every map along themselves
 
 ```agda
 module _

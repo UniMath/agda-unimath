@@ -208,7 +208,7 @@ module _
     is-contr (extension (inclusion-extension-type-global-subuniverse 𝒫 LX) f)
   forward-implication-iff-unique-extensions-universal-property-localization-global-subuniverse
     H Z =
-    is-contr-extension-is-local
+    is-contr-extension-map-is-local
       ( inclusion-extension-type-global-subuniverse 𝒫 LX)
       ( H Z)
 

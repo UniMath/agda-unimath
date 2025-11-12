@@ -162,9 +162,9 @@ module _
   {l : Level} {C : UU l}
   where
 
-  is-contr-extension-is-local :
+  is-contr-extension-map-is-local :
     is-local i C → (f : A → C) → is-contr (extension-map i f)
-  is-contr-extension-is-local =
+  is-contr-extension-map-is-local =
     is-contr-extension-dependent-map-is-local-dependent-type i (λ _ → C)
 
   is-local-is-contr-extension-map :
