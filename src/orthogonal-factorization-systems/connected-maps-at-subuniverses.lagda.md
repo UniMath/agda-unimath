@@ -1,7 +1,7 @@
 # Connected maps with respect to a subuniverse
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-connected-maps where
+module orthogonal-factorization-systems.connected-maps-at-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -49,10 +49,10 @@ open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 
+open import orthogonal-factorization-systems.connected-types-at-subuniverses
+open import orthogonal-factorization-systems.equivalences-at-subuniverses
 open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
-open import orthogonal-factorization-systems.subuniverse-connected-types
-open import orthogonal-factorization-systems.subuniverse-equivalences
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
@@ -95,7 +95,7 @@ as a map whose [fibers](foundation-core.fibers-of-maps.md) have
     [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to
     maps `h : C → B` whose fibers are in `K`.
 4.  The [terminal projections](foundation.unit-type.md) of the fibers of `f` are
-    `K`-[equivalences](orthogonal-factorization-systems.subuniverse-equivalences.md).
+    `K`-[equivalences](orthogonal-factorization-systems.equivalences-at-subuniverses.md).
 5.  The fibers of `f` are `K`-connected in the sense that for every `U` in `K`,
     the [diagonal map](foundation.diagonal-maps-of-types.md)
     `U → (fiber f y → U)` is an equivalence.

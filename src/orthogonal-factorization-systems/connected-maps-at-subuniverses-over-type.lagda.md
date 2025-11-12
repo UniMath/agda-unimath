@@ -1,7 +1,7 @@
 # `K`-connected maps over a type with respect to a subuniverse
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-connected-maps-over-type where
+module orthogonal-factorization-systems.connected-maps-at-subuniverses-over-type where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
 
-open import orthogonal-factorization-systems.subuniverse-connected-maps
+open import orthogonal-factorization-systems.connected-maps-at-subuniverses
 ```
 
 </details>
@@ -28,7 +28,7 @@ open import orthogonal-factorization-systems.subuniverse-connected-maps
 ## Idea
 
 Given a [subuniverse](foundation.subuniverses.md) `K` we consider the type of
-`K`-[connected maps](orthogonal-factorization-systems.subuniverse-connected-maps.md)
+`K`-[connected maps](orthogonal-factorization-systems.connected-maps-at-subuniverses.md)
 into a type `X`. I.e., the collection of types `A`
 [equipped](foundation.structure.md) with `K`-connected maps from `A` into `X`.
 

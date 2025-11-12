@@ -1,7 +1,7 @@
 # Equivalences with respect to a subuniverse
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-equivalences where
+module orthogonal-factorization-systems.equivalences-at-subuniverses where
 ```
 
 <details><summary>Imports</summary>

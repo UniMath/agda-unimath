@@ -1,7 +1,7 @@
 # Connected types with respect to a subuniverse
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-connected-types where
+module orthogonal-factorization-systems.connected-types-at-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -25,7 +25,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 
-open import orthogonal-factorization-systems.subuniverse-equivalences
+open import orthogonal-factorization-systems.equivalences-at-subuniverses
 ```
 
 </details>
@@ -49,7 +49,7 @@ is an [equivalence](foundation-core.equivalences.md).
 Equivalently, a type is `K`-connected if
 
 1. Its [terminal projection map](foundation.unit-type.md) is a
-   `K`-[equivalence](orthogonal-factorization-systems.subuniverse-equivalences.md).
+   `K`-[equivalence](orthogonal-factorization-systems.equivalences-at-subuniverses.md).
 2. For every `U` in `K` and `u : A → U` there
    [uniquely exists](foundation.uniqueness-quantification.md) an element `v : U`
    and a [homotopy](foundation-core.homotopies.md) `const v ~ u`. I.e., every

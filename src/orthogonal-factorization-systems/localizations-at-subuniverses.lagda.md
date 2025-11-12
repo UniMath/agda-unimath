@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.subuniverse-equivalences
+open import orthogonal-factorization-systems.equivalences-at-subuniverses
 open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
