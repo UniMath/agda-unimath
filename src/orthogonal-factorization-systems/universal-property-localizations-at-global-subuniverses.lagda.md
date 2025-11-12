@@ -205,10 +205,11 @@ module _
     universal-property-localization-global-subuniverse 𝒫 X LX →
     {l : Level} (Z : type-global-subuniverse 𝒫 l)
     (f : X → inclusion-global-subuniverse 𝒫 Z) →
-    is-contr (extension (inclusion-extension-type-global-subuniverse 𝒫 LX) f)
+    is-contr
+      ( extension-map (inclusion-extension-type-global-subuniverse 𝒫 LX) f)
   forward-implication-iff-unique-extensions-universal-property-localization-global-subuniverse
     H Z =
-    is-contr-extension-is-local
+    is-contr-extension-map-is-local
       ( inclusion-extension-type-global-subuniverse 𝒫 LX)
       ( H Z)
 
@@ -216,11 +217,11 @@ module _
     ( {l : Level} (Z : type-global-subuniverse 𝒫 l)
       (f : X → inclusion-global-subuniverse 𝒫 Z) →
       is-contr
-        ( extension (inclusion-extension-type-global-subuniverse 𝒫 LX) f)) →
+        ( extension-map (inclusion-extension-type-global-subuniverse 𝒫 LX) f)) →
     universal-property-localization-global-subuniverse 𝒫 X LX
   backward-implication-iff-unique-extensions-universal-property-localization-global-subuniverse
     H Z =
-    is-local-is-contr-extension
+    is-local-is-contr-extension-map
       ( inclusion-extension-type-global-subuniverse 𝒫 LX)
       ( H Z)
 ```
@@ -242,7 +243,7 @@ module _
   where
 
   extension-map-essentially-unique-universal-property-localization-global-subuniverse :
-    extension
+    extension-map
       ( inclusion-extension-type-global-subuniverse 𝒫 LX)
       ( inclusion-extension-type-global-subuniverse 𝒫 LX')
   extension-map-essentially-unique-universal-property-localization-global-subuniverse =
@@ -256,7 +257,7 @@ module _
         ( inclusion-extension-type-global-subuniverse 𝒫 LX'))
 
   extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse :
-    extension
+    extension-map
       ( inclusion-extension-type-global-subuniverse 𝒫 LX')
       ( inclusion-extension-type-global-subuniverse 𝒫 LX)
   extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse =
@@ -273,14 +274,14 @@ module _
     type-extension-type-global-subuniverse 𝒫 LX →
     type-extension-type-global-subuniverse 𝒫 LX'
   map-essentially-unique-universal-property-localization-global-subuniverse =
-    map-extension
+    map-extension-map
       extension-map-essentially-unique-universal-property-localization-global-subuniverse
 
   map-inv-essentially-unique-universal-property-localization-global-subuniverse :
     type-extension-type-global-subuniverse 𝒫 LX' →
     type-extension-type-global-subuniverse 𝒫 LX
   map-inv-essentially-unique-universal-property-localization-global-subuniverse =
-    map-extension
+    map-extension-map
       extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse
 
   abstract
@@ -291,7 +292,7 @@ module _
     is-section-map-inv-essentially-unique-universal-property-localization-global-subuniverse =
       htpy-eq
         ( ap
-          ( map-extension)
+          ( map-extension-map)
           ( eq-is-contr
             ( forward-implication-iff-unique-extensions-universal-property-localization-global-subuniverse
               ( 𝒫)
@@ -302,17 +303,17 @@ module _
               ( inclusion-extension-type-global-subuniverse 𝒫 LX'))
             { map-essentially-unique-universal-property-localization-global-subuniverse ∘
               map-inv-essentially-unique-universal-property-localization-global-subuniverse ,
-              is-extension-comp-horizontal
+              is-extension-of-map-comp-horizontal
                 { f = inclusion-extension-type-global-subuniverse 𝒫 LX'}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX'}
                 { map-inv-essentially-unique-universal-property-localization-global-subuniverse}
                 { map-essentially-unique-universal-property-localization-global-subuniverse}
-                ( is-extension-map-extension
+                ( is-extension-map-extension-map
                     extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse)
-                ( is-extension-map-extension
+                ( is-extension-map-extension-map
                     extension-map-essentially-unique-universal-property-localization-global-subuniverse)}
-            { extension-along-self
+            { self-extension-map
               ( inclusion-extension-type-global-subuniverse 𝒫 LX')}))
 
   abstract
@@ -323,7 +324,7 @@ module _
     is-retraction-map-inv-essentially-unique-universal-property-localization-global-subuniverse =
       htpy-eq
         ( ap
-          ( map-extension)
+          ( map-extension-map)
           ( eq-is-contr
             ( forward-implication-iff-unique-extensions-universal-property-localization-global-subuniverse
               ( 𝒫)
@@ -334,17 +335,17 @@ module _
               ( inclusion-extension-type-global-subuniverse 𝒫 LX))
             { map-inv-essentially-unique-universal-property-localization-global-subuniverse ∘
               map-essentially-unique-universal-property-localization-global-subuniverse ,
-              is-extension-comp-horizontal
+              is-extension-of-map-comp-horizontal
                 { f = inclusion-extension-type-global-subuniverse 𝒫 LX}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX'}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX}
                 { map-essentially-unique-universal-property-localization-global-subuniverse}
                 { map-inv-essentially-unique-universal-property-localization-global-subuniverse}
-                ( is-extension-map-extension
+                ( is-extension-map-extension-map
                     extension-map-essentially-unique-universal-property-localization-global-subuniverse)
-                ( is-extension-map-extension
+                ( is-extension-map-extension-map
                     extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse)}
-            { extension-along-self
+            { self-extension-map
               ( inclusion-extension-type-global-subuniverse 𝒫 LX)}))
 
   is-equiv-map-essentially-unique-universal-property-localization-global-subuniverse :
@@ -367,7 +368,7 @@ module _
     equiv-extension-type-global-subuniverse 𝒫 LX LX'
   essentially-unique-extension-type-universal-property-localization-global-subuniverse =
     essentially-unique-type-universal-property-localization-global-subuniverse ,
-    is-extension-map-extension
+    is-extension-map-extension-map
       extension-map-essentially-unique-universal-property-localization-global-subuniverse
 ```
 
