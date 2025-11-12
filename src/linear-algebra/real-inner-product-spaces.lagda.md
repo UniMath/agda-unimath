@@ -500,6 +500,109 @@ module _
             by ap-mul-ℝ (inv (eq-abs-sqrt-square-ℝ c)) refl
 ```
 
+### The norm of `-v` is the norm of `v`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    squared-norm-neg-ℝ-Inner-Product-Space :
+      (v : type-ℝ-Inner-Product-Space V) →
+      squared-norm-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V v) ＝
+      squared-norm-ℝ-Inner-Product-Space V v
+    squared-norm-neg-ℝ-Inner-Product-Space v =
+      equational-reasoning
+        squared-norm-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V v)
+        ＝
+          squared-norm-ℝ-Inner-Product-Space V
+            ( mul-ℝ-Inner-Product-Space
+              ( V)
+              ( neg-ℝ (raise-ℝ l1 one-ℝ))
+              ( v))
+          by
+            ap
+              ( squared-norm-ℝ-Inner-Product-Space V)
+              ( inv (mul-neg-one-ℝ-Inner-Product-Space V v))
+        ＝
+          square-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
+          squared-norm-ℝ-Inner-Product-Space V v
+          by squared-norm-mul-ℝ-Inner-Product-Space V _ _
+        ＝
+          square-ℝ (raise-ℝ l1 one-ℝ) *ℝ
+          squared-norm-ℝ-Inner-Product-Space V v
+          by ap-mul-ℝ (square-neg-ℝ _) refl
+        ＝
+          raise-ℝ l1 (square-ℝ one-ℝ) *ℝ
+          squared-norm-ℝ-Inner-Product-Space V v
+          by ap-mul-ℝ (square-raise-ℝ l1 one-ℝ) refl
+        ＝ raise-ℝ l1 one-ℝ *ℝ squared-norm-ℝ-Inner-Product-Space V v
+          by ap-mul-ℝ (ap (raise-ℝ l1) (left-unit-law-mul-ℝ one-ℝ)) refl
+        ＝ raise-ℝ l1 (one-ℝ *ℝ squared-norm-ℝ-Inner-Product-Space V v)
+          by mul-left-raise-ℝ _ _ _
+        ＝ one-ℝ *ℝ squared-norm-ℝ-Inner-Product-Space V v
+          by inv (eq-raise-ℝ _)
+        ＝ squared-norm-ℝ-Inner-Product-Space V v
+          by left-unit-law-mul-ℝ _
+```
+
+### The norm of the difference of two vectors
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    squared-norm-diff-ℝ-Inner-Product-Space :
+      (v w : type-ℝ-Inner-Product-Space V) →
+      squared-norm-ℝ-Inner-Product-Space V (diff-ℝ-Inner-Product-Space V v w) ＝
+      ( squared-norm-ℝ-Inner-Product-Space V v -ℝ
+        real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V v w +ℝ
+        squared-norm-ℝ-Inner-Product-Space V w)
+    squared-norm-diff-ℝ-Inner-Product-Space v w =
+      equational-reasoning
+        squared-norm-ℝ-Inner-Product-Space V (diff-ℝ-Inner-Product-Space V v w)
+        ＝
+          squared-norm-ℝ-Inner-Product-Space V v +ℝ
+          ( real-ℕ 2 *ℝ
+            inner-product-ℝ-Inner-Product-Space V
+              ( v)
+              ( neg-ℝ-Inner-Product-Space V w))
+          +ℝ
+          squared-norm-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V w)
+          by squared-norm-add-ℝ-Inner-Product-Space V _ _
+        ＝
+          squared-norm-ℝ-Inner-Product-Space V v +ℝ
+          ( real-ℕ 2 *ℝ
+            neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)) +ℝ
+          squared-norm-ℝ-Inner-Product-Space V w
+          by
+            ap-add-ℝ
+              ( ap-add-ℝ
+                ( refl)
+                ( ap-mul-ℝ
+                  ( refl)
+                  ( right-negative-law-inner-product-ℝ-Inner-Product-Space
+                    ( V)
+                    ( v)
+                    ( w))))
+              ( squared-norm-neg-ℝ-Inner-Product-Space V w)
+        ＝
+          squared-norm-ℝ-Inner-Product-Space V v -ℝ
+          real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V v w +ℝ
+          squared-norm-ℝ-Inner-Product-Space V w
+          by
+            ap-add-ℝ
+              ( ap-add-ℝ
+                ( refl)
+                ( right-negative-law-mul-ℝ _ _))
+              ( refl)
+```
+
 ### The Pythagorean theorem for real inner product spaces
 
 The Pythagorean theorem for real inner product spaces asserts that for
@@ -575,68 +678,22 @@ module _
   where
 
   abstract
+    cauchy-schwarz-inequality-norm-leq-one-ℝ-Inner-Product-Space :
+      (u v : type-ℝ-Inner-Product-Space V) →
+      leq-ℝ (squared-norm-ℝ-Inner-Product-Space V u) one-ℝ →
+      leq-ℝ (squared-norm-ℝ-Inner-Product-Space V v) one-ℝ →
+      leq-ℝ (abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)) one-ℝ
+    cauchy-schwarz-inequality-norm-leq-one-ℝ-Inner-Product-Space
+      u v ∥u∥²≤1 ∥v∥²≤1 =
+      {!   !}
+
     cauchy-schwarz-inequality-ℝ-Inner-Product-Space :
       (u v : type-ℝ-Inner-Product-Space V) →
       leq-ℝ
         ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
         ( norm-ℝ-Inner-Product-Space V u *ℝ norm-ℝ-Inner-Product-Space V v)
     cauchy-schwarz-inequality-ℝ-Inner-Product-Space u v =
-      let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
-        _+V_ = add-ℝ-Inner-Product-Space V
-        _-V_ = diff-ℝ-Inner-Product-Space V
-        _*V_ = mul-ℝ-Inner-Product-Space V
-        norm-V = norm-ℝ-Inner-Product-Space V
-        squared-norm-V = squared-norm-ℝ-Inner-Product-Space V
-        z =
-          ((norm-V u *ℝ squared-norm-V v) *V u) -V
-          ((norm-V u *ℝ (u ∙V v)) *V v)
-        orthogonal-z-v : is-orthogonal-ℝ-Inner-Product-Space V z v
-        orthogonal-z-v =
-          equational-reasoning
-            z ∙V v
-            ＝
-              (((norm-V u *ℝ squared-norm-V v) *V u) ∙V v) -ℝ
-              (((norm-V u *ℝ (u ∙V v)) *V v) ∙V v)
-              by
-                right-distributive-inner-product-diff-ℝ-Inner-Product-Space
-                  ( V)
-                  ( _)
-                  ( _)
-                  ( _)
-            ＝
-              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
-              (norm-V u *ℝ (u ∙V v)) *ℝ (v ∙V v)
-              by
-                ap-diff-ℝ
-                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
-                    ( V)
-                    ( _)
-                    ( _)
-                    ( _))
-                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
-                    ( V)
-                    ( _)
-                    ( _)
-                    ( _))
-            ＝
-              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
-              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v)
-              by ap-diff-ℝ refl (right-swap-mul-ℝ _ _ _)
-            ＝ raise-ℝ l1 zero-ℝ
-              by
-                eq-sim-ℝ
-                  ( transitive-sim-ℝ _ _ _
-                    ( sim-raise-ℝ l1 zero-ℝ)
-                    ( right-inverse-law-add-ℝ _))
-        open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in
-        chain-of-inequalities
-          abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
-          ≤ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (u ∙V v))
-            by leq-eq-ℝ (eq-abs-sqrt-square-ℝ _)
-          ≤
-          ≤ {!   !} by {!   !}
+      {!   !}
 ```
 
 ## References

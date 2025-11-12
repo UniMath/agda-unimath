@@ -34,6 +34,7 @@ open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
@@ -46,6 +47,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -353,4 +355,31 @@ abstract
             ( square-neg-ℝ y)
       ＝ square-ℝ x -ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
         by ap-add-ℝ (ap-add-ℝ refl (right-negative-law-mul-ℝ _ _)) refl
+```
+
+### Squaring preserves similarity
+
+```agda
+abstract
+  preserves-sim-square-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℝ (square-ℝ x) (square-ℝ y)
+  preserves-sim-square-ℝ x~y = preserves-sim-mul-ℝ x~y x~y
+```
+
+### Squaring commutes with raising the universe level of a real number
+
+```agda
+abstract
+  square-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) →
+    square-ℝ (raise-ℝ l x) ＝ raise-ℝ l (square-ℝ x)
+  square-raise-ℝ l x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        square-ℝ (raise-ℝ l x)
+        ~ℝ square-ℝ x
+          by preserves-sim-square-ℝ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (square-ℝ x)
+          by sim-raise-ℝ l _)
 ```

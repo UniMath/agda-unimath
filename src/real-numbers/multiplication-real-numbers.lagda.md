@@ -1292,3 +1292,20 @@ abstract
       ＝ multiple-Ab (ab-add-ℝ _) n x +ℝ x
         by ap-add-ℝ (left-mul-real-ℕ n x) (left-unit-law-mul-ℝ x)
 ```
+
+### Multiplication by a raised real number
+
+```agda
+abstract
+  mul-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l x *ℝ y ＝ raise-ℝ l (x *ℝ y)
+  mul-left-raise-ℝ l x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l x *ℝ y
+        ~ℝ x *ℝ y
+          by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (x *ℝ y)
+          by sim-raise-ℝ l (x *ℝ y))
+```
