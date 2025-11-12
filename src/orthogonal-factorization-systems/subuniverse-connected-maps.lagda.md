@@ -79,36 +79,49 @@ For every `K`-valued family `U` over `B`, the
 
 is an [equivalence](foundation-core.equivalences.md).
 
-We give a series of increasingly stronger conditions for a map `f` to be a
-`K`-connected.
+We give a series of increasingly stronger conditions for a map `f` to be
+`K`-connected. In particular, if `unit ∈ K`, then condition 4 recovers the usual
+definition of a `K`-connected map as in Definition 5.5.1 {{#cite Rij19}}, i.e.,
+as a map whose [fibers](foundation-core.fibers-of-maps.md) have
+[contractible](foundation-core.contractible-types.md)
+`K`-[localizations](orthogonal-factorization-systems.localizations-at-subuniverses.md).
 
 1.  The map `f` is `K`-connected.
 2.  For every `K`-valued family `U` over `B` and every map
-    `u : (x : A) → U (f x)`, the type of dependent extensions of `u` along `f`
-    is contractible.
+    `u : (x : A) → U (f x)`, the type of
+    [extensions](orthogonal-factorization-systems.extensions-dependent-maps.md)
+    of `u` along `f` is contractible.
 3.  The map `f` is
     [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to
     maps `h : C → B` whose fibers are in `K`.
-4.  The terminal projections of the fibers of `f` are `K`-equivalences.
+4.  The [terminal projections](foundation.unit-type.md) of the fibers of `f` are
+    `K`-[equivalences](orthogonal-factorization-systems.subuniverse-equivalences.md).
 5.  The fibers of `f` are `K`-connected in the sense that for every `U` in `K`,
-    the diagonal map `U → (fiber f y → U)` is an equivalence.
+    the [diagonal map](foundation.diagonal-maps-of-types.md)
+    `U → (fiber f y → U)` is an equivalence.
 6.  Every fiber of `f` satisfies the condition that for every `U` in `K` and
-    every function `u : fiber f y → U` there exists a unique `v : U` such that
-    `const v ~ u`.
-7.  The fibers of `f` have `K`-localizations, and there merely exists a
+    every function `u : fiber f y → U` there
+    [uniquely exists](foundation.uniqueness-quantification.md) an element
+    `v : U` such that `const v ~ u`.
+7.  The fibers of `f` have `K`-localizations, and there
+    [merely exists](foundation.existential-quantification.md) a
     `u : K(fiber f y)` such that for all `a` and `p : f a ＝ y` we have a
-    dependent identification over `p`
+    [dependent identification](foundation-core.dependent-identifications.md)
+    over `p`
     ```text
       u ＝ₚ^[y ↦ K(fiber f y)] (η (f a) (a , refl))
     ```
 8.  The fibers of `f` have `K`-localizations, and the dependent precomposition
-    map of `f` is surjective at every `K`-valued family `U` over `B`.
+    map of `f` is [surjective](foundation.surjective-maps.md) at every
+    `K`-valued family `U` over `B`.
 9.  The fibers of `f` have `K`-localizations, and the dependent precomposition
-    map of `f` has a section at every `K`-valued family `U` over `B`.
+    map of `f` has a [section](foundation-core.sections.md) at every `K`-valued
+    family `U` over `B`.
 
 If the fibers of `f` have `K`-localizations then these conditions are all
-equivalent. More generally we always have that conditions 1-3 are equivalent,
-conditions 4-6 are equivalent, and conditions 7-9 are equivalent.
+[equivalent](foundation.logical-equivalences.md). More generally we always have
+that conditions 1-3 are equivalent, conditions 4-6 are equivalent, and
+conditions 7-9 are equivalent.
 
 ## Definitions
 

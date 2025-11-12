@@ -28,7 +28,9 @@ open import orthogonal-factorization-systems.subuniverse-connected-maps
 ## Idea
 
 Given a [subuniverse](foundation.subuniverses.md) `K` we consider the type of
-`K`-connected maps over a type `X`.
+`K`-[connected maps](orthogonal-factorization-systems.subuniverse-connected-maps.md)
+into a type `X`. I.e., the collection of types `A`
+[equipped](foundation.structure.md) with `K`-connected maps from `A` into `X`.
 
 ## Definitions
 
@@ -86,14 +88,15 @@ module _
   id-equiv-Subuniverse-Connected-Map : equiv-Subuniverse-Connected-Map K f f
   id-equiv-Subuniverse-Connected-Map = (id-equiv , refl-htpy)
 
-  is-torsorial-equiv-Subuniverse-Connected-Map :
-    is-torsorial (equiv-Subuniverse-Connected-Map K f)
-  is-torsorial-equiv-Subuniverse-Connected-Map =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-Subuniverse-Connected-Map K f))
-      ( type-Subuniverse-Connected-Map K f , id-equiv)
-      ( is-torsorial-htpy-subuniverse-connected-map K
-        ( subuniverse-connected-map-Subuniverse-Connected-Map K f))
+  abstract
+    is-torsorial-equiv-Subuniverse-Connected-Map :
+      is-torsorial (equiv-Subuniverse-Connected-Map K f)
+    is-torsorial-equiv-Subuniverse-Connected-Map =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (type-Subuniverse-Connected-Map K f))
+        ( type-Subuniverse-Connected-Map K f , id-equiv)
+        ( is-torsorial-htpy-subuniverse-connected-map K
+          ( subuniverse-connected-map-Subuniverse-Connected-Map K f))
 
   equiv-eq-Subuniverse-Connected-Map :
     (g : Subuniverse-Connected-Map l4 K A) →
@@ -101,13 +104,14 @@ module _
   equiv-eq-Subuniverse-Connected-Map .f refl =
     id-equiv-Subuniverse-Connected-Map
 
-  is-equiv-equiv-eq-Subuniverse-Connected-Map :
-    (g : Subuniverse-Connected-Map l4 K A) →
-    is-equiv (equiv-eq-Subuniverse-Connected-Map g)
-  is-equiv-equiv-eq-Subuniverse-Connected-Map =
-    fundamental-theorem-id
-      ( is-torsorial-equiv-Subuniverse-Connected-Map)
-      ( equiv-eq-Subuniverse-Connected-Map)
+  abstract
+    is-equiv-equiv-eq-Subuniverse-Connected-Map :
+      (g : Subuniverse-Connected-Map l4 K A) →
+      is-equiv (equiv-eq-Subuniverse-Connected-Map g)
+    is-equiv-equiv-eq-Subuniverse-Connected-Map =
+      fundamental-theorem-id
+        ( is-torsorial-equiv-Subuniverse-Connected-Map)
+        ( equiv-eq-Subuniverse-Connected-Map)
 
   extensionality-Subuniverse-Connected-Map :
     (g : Subuniverse-Connected-Map l4 K A) →

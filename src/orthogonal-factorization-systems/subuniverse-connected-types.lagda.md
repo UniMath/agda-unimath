@@ -35,7 +35,7 @@ open import orthogonal-factorization-systems.subuniverse-equivalences
 Given a [subuniverse](foundation.subuniverses.md) `K`, a type `A` is said to be
 {{#concept "`K`-connected" Disambiguation="type, with respect to a subuniverse" Agda=is-subuniverse-connected}}
 if it satisfies the
-{{#concept "universal property" Disambiguation="subuniverse connected map of types"}}
+{{#concept "universal property" Disambiguation="subuniverse connected types"}}
 of `K`-connected types:
 
 For every `U` in `K`, the [diagonal map](foundation.diagonal-maps-of-types.md)
