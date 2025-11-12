@@ -7,15 +7,10 @@ module orthogonal-factorization-systems.equality-extensions-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
 
