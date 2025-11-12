@@ -119,7 +119,7 @@ module _
       ( map-nat-Semiring m)
       ( map-nat-Semiring n)
   preserves-mul-map-nat-Semiring m n =
-    htpy-comp-mul-nat-mul-Semiring R m n (one-Semiring R) ∙
+    right-distributive-multiple-mul-Semiring R m n (one-Semiring R) ∙
     inv (htpy-mul-map-multiple-Semiring m (map-nat-Semiring n))
 
 module _

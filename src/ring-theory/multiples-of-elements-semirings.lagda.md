@@ -140,11 +140,11 @@ module _
         ( m)
         ( n)
 
-    htpy-comp-mul-nat-mul-Semiring :
+    right-distributive-multiple-mul-Semiring :
       ( m n : ℕ) →
       ( multiple-Semiring R (m *ℕ n)) ~
       ( multiple-Semiring R m ∘ multiple-Semiring R n)
-    htpy-comp-mul-nat-mul-Semiring m n x =
+    right-distributive-multiple-mul-Semiring m n x =
       ( ap (λ k → multiple-Semiring R k x) (commutative-mul-ℕ m n)) ∙
       ( power-mul-Commutative-Monoid
         ( additive-commutative-monoid-Semiring R)
