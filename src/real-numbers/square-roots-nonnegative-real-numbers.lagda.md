@@ -29,6 +29,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -58,6 +59,7 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -676,4 +678,22 @@ abstract
   real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
   real-sqrt-zero-ℝ⁰⁺ =
     inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
+```
+
+### The square root of a nonnegative real number preserves inequality
+
+```agda
+abstract
+  preserves-leq-sqrt-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) (sqrt-ℝ⁰⁺ y)
+  preserves-leq-sqrt-ℝ⁰⁺ x y x≤y =
+    reflects-leq-square-ℝ⁰⁺
+      ( sqrt-ℝ⁰⁺ x)
+      ( sqrt-ℝ⁰⁺ y)
+      ( binary-tr
+        ( leq-ℝ)
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ x))
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ y))
+        ( x≤y))
 ```
