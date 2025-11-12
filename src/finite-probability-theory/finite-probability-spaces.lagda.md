@@ -58,45 +58,45 @@ equal to 1.
 ### Finite probability spaces
 
 ```agda
-Finite-Probability-Space : (l : Level) → UU (lsuc l)
-Finite-Probability-Space l =
-  Σ ( Finite-Type l)
-    ( probability-distribution-Finite-Type)
+Finite-Probability-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Finite-Probability-Space l1 l2 =
+  Σ ( Finite-Type l1)
+    ( probability-distribution-Finite-Type l2)
 
-module _
-  {l : Level} (Ω : Finite-Probability-Space l)
-  where
+-- module _
+--   {l : Level} (Ω : Finite-Probability-Space l)
+--   where
 
-  finite-type-Finite-Probability-Space : Finite-Type l
-  finite-type-Finite-Probability-Space = pr1 Ω
+--   finite-type-Finite-Probability-Space : Finite-Type l
+--   finite-type-Finite-Probability-Space = pr1 Ω
 
-  type-Finite-Probability-Space : UU l
-  type-Finite-Probability-Space =
-    type-Finite-Type finite-type-Finite-Probability-Space
+--   type-Finite-Probability-Space : UU l
+--   type-Finite-Probability-Space =
+--     type-Finite-Type finite-type-Finite-Probability-Space
 
-  is-finite-type-Finite-Probability-Space :
-    is-finite type-Finite-Probability-Space
-  is-finite-type-Finite-Probability-Space =
-    is-finite-type-Finite-Type finite-type-Finite-Probability-Space
+--   is-finite-type-Finite-Probability-Space :
+--     is-finite type-Finite-Probability-Space
+--   is-finite-type-Finite-Probability-Space =
+--     is-finite-type-Finite-Type finite-type-Finite-Probability-Space
 
-  distribution-Finite-Probability-Space :
-    positive-distribution-Finite-Type finite-type-Finite-Probability-Space
-  distribution-Finite-Probability-Space = pr1 (pr2 Ω)
+--   distribution-Finite-Probability-Space :
+--     positive-distribution-Finite-Type finite-type-Finite-Probability-Space
+--   distribution-Finite-Probability-Space = pr1 (pr2 Ω)
 
-  real-distribution-Finite-Probability-Space :
-    type-Finite-Probability-Space → ℝ lzero
-  real-distribution-Finite-Probability-Space =
-    real-positive-distribution-Finite-Type
-      ( finite-type-Finite-Probability-Space)
-      ( distribution-Finite-Probability-Space)
+--   real-distribution-Finite-Probability-Space :
+--     type-Finite-Probability-Space → ℝ lzero
+--   real-distribution-Finite-Probability-Space =
+--     real-positive-distribution-Finite-Type
+--       ( finite-type-Finite-Probability-Space)
+--       ( distribution-Finite-Probability-Space)
 
-  eq-one-total-measure-distribution-Finite-Probability-Space :
-    ( total-measure-positive-distribution-Finite-Type
-      ( finite-type-Finite-Probability-Space)
-      ( distribution-Finite-Probability-Space)) ＝
-    one-ℝ
-  eq-one-total-measure-distribution-Finite-Probability-Space =
-    pr2 (pr2 Ω)
+--   eq-one-total-measure-distribution-Finite-Probability-Space :
+--     ( total-measure-positive-distribution-Finite-Type
+--       ( finite-type-Finite-Probability-Space)
+--       ( distribution-Finite-Probability-Space)) ＝
+--     one-ℝ
+--   eq-one-total-measure-distribution-Finite-Probability-Space =
+--     pr2 (pr2 Ω)
 ```
 
 ## Properties
@@ -104,52 +104,52 @@ module _
 ### A finite probability space is nonempty
 
 ```agda
-module _
-  {l : Level} (Ω : Finite-Probability-Space l)
-  where
+-- module _
+--   {l : Level} (Ω : Finite-Probability-Space l)
+--   where
 
-  is-nonempty-type-Finite-Probability-Space :
-    is-nonempty (type-Finite-Probability-Space Ω)
-  is-nonempty-type-Finite-Probability-Space =
-    zero-is-not-one-ℝ ∘ absurd-is-empty-Finite-Probability-Space
-    where
+--   is-nonempty-type-Finite-Probability-Space :
+--     is-nonempty (type-Finite-Probability-Space Ω)
+--   is-nonempty-type-Finite-Probability-Space =
+--     zero-is-not-one-ℝ ∘ absurd-is-empty-Finite-Probability-Space
+--     where
 
-    absurd-is-empty-Finite-Probability-Space :
-      is-empty (type-Finite-Probability-Space Ω) →
-      zero-ℝ ＝ one-ℝ
-    absurd-is-empty-Finite-Probability-Space H =
-      ( inv
-        ( is-zero-total-measure-positive-distribution-is-empty-Finite-Type
-          ( finite-type-Finite-Probability-Space Ω)
-          ( distribution-Finite-Probability-Space Ω)
-          ( H))) ∙
-      ( eq-one-total-measure-distribution-Finite-Probability-Space Ω)
+--     absurd-is-empty-Finite-Probability-Space :
+--       is-empty (type-Finite-Probability-Space Ω) →
+--       zero-ℝ ＝ one-ℝ
+--     absurd-is-empty-Finite-Probability-Space H =
+--       ( inv
+--         ( is-zero-total-measure-positive-distribution-is-empty-Finite-Type
+--           ( finite-type-Finite-Probability-Space Ω)
+--           ( distribution-Finite-Probability-Space Ω)
+--           ( H))) ∙
+--       ( eq-one-total-measure-distribution-Finite-Probability-Space Ω)
 ```
 
 ### A finite probability space is inhabited
 
 ```agda
-module _
-  {l : Level} (Ω : Finite-Probability-Space l)
-  where
+-- module _
+--   {l : Level} (Ω : Finite-Probability-Space l)
+--   where
 
-  is-inhabited-type-Finite-Probability-Space :
-    is-inhabited (type-Finite-Probability-Space Ω)
-  is-inhabited-type-Finite-Probability-Space =
-    prop-double-negation-elim-is-inhabited-or-empty
-      ( is-inhabited-or-empty-is-finite
-        ( is-finite-type-Finite-Probability-Space Ω))
-      ( is-nonempty-type-Finite-Probability-Space Ω)
+--   is-inhabited-type-Finite-Probability-Space :
+--     is-inhabited (type-Finite-Probability-Space Ω)
+--   is-inhabited-type-Finite-Probability-Space =
+--     prop-double-negation-elim-is-inhabited-or-empty
+--       ( is-inhabited-or-empty-is-finite
+--         ( is-finite-type-Finite-Probability-Space Ω))
+--       ( is-nonempty-type-Finite-Probability-Space Ω)
 
-  inhabited-type-Finite-Probability-Space : Inhabited-Type l
-  inhabited-type-Finite-Probability-Space =
-    ( type-Finite-Probability-Space Ω ,
-      is-inhabited-type-Finite-Probability-Space)
+--   inhabited-type-Finite-Probability-Space : Inhabited-Type l
+--   inhabited-type-Finite-Probability-Space =
+--     ( type-Finite-Probability-Space Ω ,
+--       is-inhabited-type-Finite-Probability-Space)
 
-  inhabited-finite-type-Finite-Probability-Space : Inhabited-Finite-Type l
-  inhabited-finite-type-Finite-Probability-Space =
-    ( finite-type-Finite-Probability-Space Ω ,
-      is-inhabited-type-Finite-Probability-Space)
+--   inhabited-finite-type-Finite-Probability-Space : Inhabited-Finite-Type l
+--   inhabited-finite-type-Finite-Probability-Space =
+--     ( finite-type-Finite-Probability-Space Ω ,
+--       is-inhabited-type-Finite-Probability-Space)
 ```
 
 ## References

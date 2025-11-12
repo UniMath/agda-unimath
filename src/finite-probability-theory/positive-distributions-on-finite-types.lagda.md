@@ -7,15 +7,19 @@ module finite-probability-theory.positive-distributions-on-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.sums-of-finite-families-of-elements-commutative-rings
+
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-families-of-elements-abelian-groups
+open import ring-theory.large-rings
+open import ring-theory.rings
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 
@@ -47,29 +51,33 @@ $$
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Type l)
+  {l1 : Level} (l2 : Level) (Ω : Finite-Type l1)
   where
 
-  positive-distribution-Finite-Type : UU (lsuc lzero ⊔ l)
-  positive-distribution-Finite-Type = type-Finite-Type Ω → ℝ⁺ lzero
+  positive-distribution-Finite-Type : UU (l1 ⊔ lsuc l2)
+  positive-distribution-Finite-Type = type-Finite-Type Ω → ℝ⁺ l2
 
-  real-positive-distribution-Finite-Type :
-    positive-distribution-Finite-Type → type-Finite-Type Ω → ℝ lzero
-  real-positive-distribution-Finite-Type Pr = real-ℝ⁺ ∘ Pr
+module _
+  {l1 l2 : Level} (Ω : Finite-Type l1)
+  (Pr : positive-distribution-Finite-Type l2 Ω)
+  where
+
+  real-positive-distribution-Finite-Type : type-Finite-Type Ω → ℝ l2
+  real-positive-distribution-Finite-Type = real-ℝ⁺ ∘ Pr
 ```
 
 ### The total measure of a positive distribution on a finite type
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Type l)
-  (Pr : positive-distribution-Finite-Type Ω)
+  {l1 l2 : Level} (Ω : Finite-Type l1)
+  (Pr : positive-distribution-Finite-Type l2 Ω)
   where
 
-  total-measure-positive-distribution-Finite-Type : ℝ lzero
+  total-measure-positive-distribution-Finite-Type : ℝ l2
   total-measure-positive-distribution-Finite-Type =
-    sum-finite-Ab
-      ( abelian-group-add-ℝ-lzero)
+    sum-finite-Commutative-Ring
+      ( commutative-ring-ℝ l2)
       ( Ω)
       ( real-positive-distribution-Finite-Type Ω Pr)
 ```
@@ -80,15 +88,17 @@ module _
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Type l) (Pr : positive-distribution-Finite-Type Ω)
+  {l1 l2 : Level} (Ω : Finite-Type l1)
+  (Pr : positive-distribution-Finite-Type l2 Ω)
   where
 
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type :
     is-empty (type-Finite-Type Ω) →
-    total-measure-positive-distribution-Finite-Type Ω Pr ＝ zero-ℝ
+    total-measure-positive-distribution-Finite-Type Ω Pr ＝
+    zero-ring-ℝ l2
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type H =
-    eq-zero-sum-finite-is-empty-Ab
-      ( abelian-group-add-ℝ-lzero)
+    eq-zero-sum-finite-is-empty-Commutative-Ring
+      ( commutative-ring-ℝ l2)
       ( Ω)
       ( H)
       ( real-positive-distribution-Finite-Type Ω Pr)
