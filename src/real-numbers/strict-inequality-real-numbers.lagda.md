@@ -356,12 +356,12 @@ module _
           ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
-### If `x` is less than `y`, `x` is not similar to `y`
+### If `x` is less than `y`, then `x` is not similar to `y`
 
 ```agda
 abstract
   not-sim-le-ℝ :
-    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → ¬ (sim-ℝ x y)
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → ¬ sim-ℝ x y
   not-sim-le-ℝ {x = x} {y = y} x<y x~y =
     not-leq-le-ℝ x y x<y (leq-sim-ℝ (symmetric-sim-ℝ x~y))
 ```
@@ -524,13 +524,13 @@ module _
           leq-le-rational-ℝ y x (forward-implication ∘ H))
 ```
 
-### For any real numbers `a` and `b`, `¬¬ (a < b ∨ a ~ b ∨ b < a)`
+### It is irrefutable that either `a < b`, `a ~ b`, or `a > b`
 
 ```agda
 abstract
   double-neg-trichotomy-le-ℝ :
     {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
-    ¬¬ (disjunction-type (le-ℝ a b) (disjunction-type (sim-ℝ a b) (le-ℝ b a)))
+    ¬¬ disjunction-type (le-ℝ a b) (disjunction-type (sim-ℝ a b) (le-ℝ b a))
   double-neg-trichotomy-le-ℝ a b ¬a<b∨a~b∨b<a =
     ¬a<b∨a~b∨b<a
       ( inr-disjunction
@@ -546,7 +546,7 @@ abstract
                 ( map-neg inl-disjunction ¬a<b∨a~b∨b<a)))))
 ```
 
-### For any real numbers `a` and `b`, `a ≤ b` if and only if `¬¬ (a ~ b ∨ a < b)`
+### For any real numbers `a` and `b`, `a ≤ b` if and only if it is irrefutable that `a ~ b` or `a < b`
 
 ```agda
 module _
@@ -557,7 +557,7 @@ module _
 
   abstract
     leq-not-not-sim-or-le-ℝ :
-      ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b)) → leq-ℝ a b
+      ¬¬ disjunction-type (sim-ℝ a b) (le-ℝ a b) → leq-ℝ a b
     leq-not-not-sim-or-le-ℝ ¬¬a~b∨a<b =
       leq-not-le-ℝ
         ( b)
@@ -571,7 +571,7 @@ module _
           ( ¬¬a~b∨a<b))
 
     not-not-sim-or-le-leq-ℝ :
-      leq-ℝ a b → ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b))
+      leq-ℝ a b → ¬¬ disjunction-type (sim-ℝ a b) (le-ℝ a b)
     not-not-sim-or-le-leq-ℝ a≤b =
       let
         motive = (sim-prop-ℝ a b ∨ le-prop-ℝ a b)
