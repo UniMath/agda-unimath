@@ -101,7 +101,7 @@ abstract
     ( commutative-add-ℤ (mul-ℤ (inl k) l) (neg-ℤ l)) ∙
     ( inv (left-predecessor-law-mul-ℤ (inl k) l))
   compute-integer-multiple-ℤ-Ring (inr (inl _)) l =
-    ( integer-multiple-zero-Ring ℤ-Ring l) ∙
+    ( integer-right-zero-law-multiple-Ring ℤ-Ring l) ∙
     ( inv (left-zero-law-mul-ℤ l))
   compute-integer-multiple-ℤ-Ring (inr (inr zero-ℕ)) l =
     ( integer-multiple-one-Ring ℤ-Ring l) ∙

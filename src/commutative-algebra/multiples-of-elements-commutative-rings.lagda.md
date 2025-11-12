@@ -40,8 +40,14 @@ module _
 
   multiple-Commutative-Ring :
     ℕ → type-Commutative-Ring A → type-Commutative-Ring A
-  multiple-Commutative-Ring =
-    multiple-Ring (ring-Commutative-Ring A)
+  multiple-Commutative-Ring = multiple-Ring (ring-Commutative-Ring A)
+
+  ap-multiple-Commutative-Ring :
+    {m n : ℕ} {x y : type-Commutative-Ring A} →
+    (m ＝ n) → (x ＝ y) →
+    multiple-Commutative-Ring m x ＝
+    multiple-Commutative-Ring n y
+  ap-multiple-Commutative-Ring = ap-multiple-Ring (ring-Commutative-Ring A)
 ```
 
 ## Properties
@@ -53,12 +59,39 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  multiple-zero-Commutative-Ring :
+  right-zero-law-multiple-Commutative-Ring :
     (n : ℕ) →
     multiple-Commutative-Ring A n (zero-Commutative-Ring A) ＝
     zero-Commutative-Ring A
-  multiple-zero-Commutative-Ring =
-    multiple-zero-Ring (ring-Commutative-Ring A)
+  right-zero-law-multiple-Commutative-Ring =
+    right-zero-law-multiple-Ring (ring-Commutative-Ring A)
+```
+
+### `0 · n ＝ 0`
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  left-zero-law-multiple-Commutative-Ring :
+    (r : type-Commutative-Ring A) →
+    multiple-Commutative-Ring A 0 r ＝ zero-Commutative-Ring A
+  left-zero-law-multiple-Commutative-Ring _ = refl
+```
+
+### Left unit law
+
+```agda
+module _
+  {l : Level}
+  (R : Commutative-Ring l)
+  where
+
+  left-unit-law-multiple-Commutative-Ring :
+    (x : type-Commutative-Ring R) →
+    multiple-Commutative-Ring R 1 x ＝ x
+  left-unit-law-multiple-Commutative-Ring x = refl
 ```
 
 ### `(n + 1) · x = n · x + x`
@@ -138,4 +171,36 @@ module _
     multiple-Commutative-Ring A n (multiple-Commutative-Ring A m x)
   multiple-mul-Commutative-Ring =
     multiple-mul-Ring (ring-Commutative-Ring A)
+```
+
+### `(n ∙ x) * y ＝ n ∙ (x * y)`
+
+```agda
+module _
+  {l : Level}
+  (R : Commutative-Ring l)
+  where
+
+  left-mul-multiple-Commutative-Ring :
+    (n : ℕ) (x y : type-Commutative-Ring R) →
+    mul-Commutative-Ring R (multiple-Commutative-Ring R n x) y ＝
+    multiple-Commutative-Ring R n (mul-Commutative-Ring R x y)
+  left-mul-multiple-Commutative-Ring =
+    left-mul-multiple-Ring (ring-Commutative-Ring R)
+```
+
+### `x * (n ∙ y) * y ＝ n ∙ (x * y)`
+
+```agda
+module _
+  {l : Level}
+  (R : Commutative-Ring l)
+  where
+
+  right-mul-multiple-Commutative-Ring :
+    (n : ℕ) (x y : type-Commutative-Ring R) →
+    mul-Commutative-Ring R x (multiple-Commutative-Ring R n y) ＝
+    multiple-Commutative-Ring R n (mul-Commutative-Ring R x y)
+  right-mul-multiple-Commutative-Ring =
+    right-mul-multiple-Ring (ring-Commutative-Ring R)
 ```

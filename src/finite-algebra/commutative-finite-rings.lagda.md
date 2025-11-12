@@ -589,38 +589,38 @@ module _
     left-unit-law-mul-nat-scalar-Finite-Ring
       finite-ring-Finite-Commutative-Ring
 
-  left-nat-scalar-law-mul-Finite-Commutative-Ring :
+  left-mul-multiple-Finite-Commutative-Ring :
     (n : ℕ) (x y : type-Finite-Commutative-Ring) →
     mul-Finite-Commutative-Ring (mul-nat-scalar-Finite-Commutative-Ring n x) y ＝
     mul-nat-scalar-Finite-Commutative-Ring n (mul-Finite-Commutative-Ring x y)
-  left-nat-scalar-law-mul-Finite-Commutative-Ring =
-    left-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Commutative-Ring
+  left-mul-multiple-Finite-Commutative-Ring =
+    left-mul-multiple-Finite-Ring finite-ring-Finite-Commutative-Ring
 
-  right-nat-scalar-law-mul-Finite-Commutative-Ring :
+  right-mul-multiple-Finite-Commutative-Ring :
     (n : ℕ) (x y : type-Finite-Commutative-Ring) →
     mul-Finite-Commutative-Ring x (mul-nat-scalar-Finite-Commutative-Ring n y) ＝
     mul-nat-scalar-Finite-Commutative-Ring n (mul-Finite-Commutative-Ring x y)
-  right-nat-scalar-law-mul-Finite-Commutative-Ring =
-    right-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Commutative-Ring
+  right-mul-multiple-Finite-Commutative-Ring =
+    right-mul-multiple-Finite-Ring finite-ring-Finite-Commutative-Ring
 
-  left-distributive-mul-nat-scalar-add-Finite-Commutative-Ring :
-    (n : ℕ) (x y : type-Finite-Commutative-Ring) →
+  left-distributive-multiple-add-Finite-Commutative-Ring :
+    (n : ℕ) {x y : type-Finite-Commutative-Ring} →
     mul-nat-scalar-Finite-Commutative-Ring n (add-Finite-Commutative-Ring x y) ＝
     add-Finite-Commutative-Ring
       ( mul-nat-scalar-Finite-Commutative-Ring n x)
       ( mul-nat-scalar-Finite-Commutative-Ring n y)
-  left-distributive-mul-nat-scalar-add-Finite-Commutative-Ring =
-    left-distributive-mul-nat-scalar-add-Finite-Ring
+  left-distributive-multiple-add-Finite-Commutative-Ring =
+    left-distributive-multiple-add-Finite-Ring
       finite-ring-Finite-Commutative-Ring
 
-  right-distributive-mul-nat-scalar-add-Finite-Commutative-Ring :
-    (m n : ℕ) (x : type-Finite-Commutative-Ring) →
+  right-distributive-multiple-add-Finite-Commutative-Ring :
+    (m n : ℕ) {x : type-Finite-Commutative-Ring} →
     mul-nat-scalar-Finite-Commutative-Ring (m +ℕ n) x ＝
     add-Finite-Commutative-Ring
       ( mul-nat-scalar-Finite-Commutative-Ring m x)
       ( mul-nat-scalar-Finite-Commutative-Ring n x)
-  right-distributive-mul-nat-scalar-add-Finite-Commutative-Ring =
-    right-distributive-mul-nat-scalar-add-Finite-Ring
+  right-distributive-multiple-add-Finite-Commutative-Ring =
+    right-distributive-multiple-add-Finite-Ring
       finite-ring-Finite-Commutative-Ring
 ```
 

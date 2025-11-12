@@ -495,37 +495,37 @@ module _
   left-unit-law-mul-nat-scalar-Finite-Field =
     left-unit-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
 
-  left-nat-scalar-law-mul-Finite-Field :
+  left-mul-multiple-Finite-Field :
     (n : ℕ) (x y : type-Finite-Field) →
     mul-Finite-Field (mul-nat-scalar-Finite-Field n x) y ＝
     mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
-  left-nat-scalar-law-mul-Finite-Field =
-    left-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Field
+  left-mul-multiple-Finite-Field =
+    left-mul-multiple-Finite-Ring finite-ring-Finite-Field
 
-  right-nat-scalar-law-mul-Finite-Field :
+  right-mul-multiple-Finite-Field :
     (n : ℕ) (x y : type-Finite-Field) →
     mul-Finite-Field x (mul-nat-scalar-Finite-Field n y) ＝
     mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
-  right-nat-scalar-law-mul-Finite-Field =
-    right-nat-scalar-law-mul-Finite-Ring finite-ring-Finite-Field
+  right-mul-multiple-Finite-Field =
+    right-mul-multiple-Finite-Ring finite-ring-Finite-Field
 
-  left-distributive-mul-nat-scalar-add-Finite-Field :
-    (n : ℕ) (x y : type-Finite-Field) →
+  left-distributive-multiple-add-Finite-Field :
+    (n : ℕ) {x y : type-Finite-Field} →
     mul-nat-scalar-Finite-Field n (add-Finite-Field x y) ＝
     add-Finite-Field
       ( mul-nat-scalar-Finite-Field n x)
       ( mul-nat-scalar-Finite-Field n y)
-  left-distributive-mul-nat-scalar-add-Finite-Field =
-    left-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Field
+  left-distributive-multiple-add-Finite-Field =
+    left-distributive-multiple-add-Finite-Ring finite-ring-Finite-Field
 
-  right-distributive-mul-nat-scalar-add-Finite-Field :
-    (m n : ℕ) (x : type-Finite-Field) →
+  right-distributive-multiple-add-Finite-Field :
+    (m n : ℕ) {x : type-Finite-Field} →
     mul-nat-scalar-Finite-Field (m +ℕ n) x ＝
     add-Finite-Field
       ( mul-nat-scalar-Finite-Field m x)
       ( mul-nat-scalar-Finite-Field n x)
-  right-distributive-mul-nat-scalar-add-Finite-Field =
-    right-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Field
+  right-distributive-multiple-add-Finite-Field =
+    right-distributive-multiple-add-Finite-Ring finite-ring-Finite-Field
 ```
 
 ### Addition of a list of elements in a finite field

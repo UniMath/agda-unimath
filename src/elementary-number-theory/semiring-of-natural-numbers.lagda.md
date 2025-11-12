@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-commutative-monoids
 
 open import ring-theory.homomorphisms-semirings
+open import ring-theory.multiples-of-elements-semirings
 open import ring-theory.semirings
 ```
 
@@ -81,15 +82,15 @@ module _
   where
 
   map-nat-Semiring : ℕ → type-Semiring R
-  map-nat-Semiring n = mul-nat-scalar-Semiring R n (one-Semiring R)
+  map-nat-Semiring n = multiple-Semiring R n (one-Semiring R)
 
-  htpy-mul-map-mul-nat-scalar-Semiring :
+  htpy-mul-map-multiple-Semiring :
     (n : ℕ) →
     mul-Semiring R (map-nat-Semiring n) ~
-    mul-nat-scalar-Semiring R n
-  htpy-mul-map-mul-nat-scalar-Semiring n x =
-    ( left-nat-scalar-law-mul-Semiring R n (one-Semiring R) x) ∙
-    ( ap (mul-nat-scalar-Semiring R n) (left-unit-law-mul-Semiring R x))
+    multiple-Semiring R n
+  htpy-mul-map-multiple-Semiring n x =
+    ( left-mul-multiple-Semiring R n (one-Semiring R) x) ∙
+    ( ap (multiple-Semiring R n) (left-unit-law-mul-Semiring R x))
 
   preserves-add-map-nat-Semiring :
     (m n : ℕ) →
@@ -99,7 +100,7 @@ module _
       ( map-nat-Semiring m)
       ( map-nat-Semiring n)
   preserves-add-map-nat-Semiring m n =
-    right-distributive-mul-nat-scalar-add-Semiring
+    right-distributive-multiple-add-Semiring
       ( R)
       ( m)
       ( n)
@@ -108,7 +109,7 @@ module _
   preserves-one-map-nat-Semiring :
     map-nat-Semiring 1 ＝ one-Semiring R
   preserves-one-map-nat-Semiring =
-    left-unit-law-mul-nat-scalar-Semiring R (one-Semiring R)
+    left-unit-law-multiple-Semiring R (one-Semiring R)
 
   preserves-mul-map-nat-Semiring :
     (m n : ℕ) →
@@ -119,7 +120,7 @@ module _
       ( map-nat-Semiring n)
   preserves-mul-map-nat-Semiring m n =
     htpy-comp-mul-nat-mul-Semiring R m n (one-Semiring R) ∙
-    inv (htpy-mul-map-mul-nat-scalar-Semiring m (map-nat-Semiring n))
+    inv (htpy-mul-map-multiple-Semiring m (map-nat-Semiring n))
 
 module _
   {l : Level} (R : Semiring l)
@@ -130,7 +131,7 @@ module _
     ( map-nat-Semiring R ,
       λ {m n} → preserves-add-map-nat-Semiring R m n)
   pr2 (pr1 initial-hom-Semiring) =
-    left-zero-law-mul-nat-scalar-Semiring R (one-Semiring R)
+    left-zero-law-multiple-Semiring R (one-Semiring R)
   pr1 (pr2 initial-hom-Semiring) {m} {n} =
     preserves-mul-map-nat-Semiring R m n
   pr2 (pr2 initial-hom-Semiring) =
@@ -146,14 +147,27 @@ module _
 
   htpy-map-nat-hom-Semiring :
     map-nat-Semiring R ~ map-hom-Semiring ℕ-Semiring R f
-  htpy-map-nat-hom-Semiring zero-ℕ =
+  htpy-map-nat-hom-Semiring 0 =
     inv (preserves-zero-hom-Semiring ℕ-Semiring R f)
   htpy-map-nat-hom-Semiring (succ-ℕ n) =
-    ( ap-add-Semiring
-      ( R)
-      ( htpy-map-nat-hom-Semiring n)
-      ( inv (preserves-unit-hom-Semiring ℕ-Semiring R f))) ∙
-    ( inv (preserves-addition-hom-Semiring ℕ-Semiring R f))
+    equational-reasoning
+      multiple-Semiring R (succ-ℕ n) (one-Semiring R)
+      ＝
+        add-Semiring R
+          ( multiple-Semiring R n (one-Semiring R))
+          ( one-Semiring R)
+        by
+          multiple-succ-Semiring R n (one-Semiring R)
+      ＝
+        add-Semiring R
+          ( map-hom-Semiring ℕ-Semiring R f n)
+          ( map-hom-Semiring ℕ-Semiring R f 1)
+        by
+          ap-add-Semiring R
+            ( htpy-map-nat-hom-Semiring n)
+            ( inv (preserves-unit-hom-Semiring ℕ-Semiring R f))
+      ＝ map-hom-Semiring ℕ-Semiring R f (succ-ℕ n)
+        by inv (preserves-addition-hom-Semiring ℕ-Semiring R f)
 ```
 
 ### The type of semiring homomorphisms from `ℕ` to a semiring is contractible

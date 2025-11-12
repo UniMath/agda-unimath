@@ -20,6 +20,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import group-theory.monoids
+open import group-theory.powers-of-elements-monoids
 
 open import linear-algebra.finite-sequences-in-monoids
 
@@ -206,4 +207,20 @@ split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
     ( mul-Monoid' M (f (inr star)))
     ( split-sum-fin-sequence-type-Monoid M n m (f ∘ inl))) ∙
   ( associative-mul-Monoid M _ _ _)
+```
+
+### Constant sums are the power operation
+
+```agda
+abstract
+  constant-sum-fin-sequence-type-Monoid :
+    {l : Level} (M : Monoid l) (n : ℕ) (x : type-Monoid M) →
+    sum-fin-sequence-type-Monoid M n (λ _ → x) ＝ power-Monoid M n x
+  constant-sum-fin-sequence-type-Monoid M 0 x = refl
+  constant-sum-fin-sequence-type-Monoid M 1 x =
+    compute-sum-one-element-Monoid M (λ _ → x)
+  constant-sum-fin-sequence-type-Monoid M (succ-ℕ n@(succ-ℕ _)) x =
+    ap-mul-Monoid M
+      ( constant-sum-fin-sequence-type-Monoid M n x)
+      ( refl)
 ```
