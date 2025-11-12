@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -70,7 +71,7 @@ module _
     inv-htpy htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
 ```
 
-### Given an element of the exponent the diagonal map is injective
+### If the exponent has an element then the diagonal map is injective
 
 ```agda
 module _
@@ -86,7 +87,7 @@ module _
   pr2 diagonal-exponential-injection = is-injective-diagonal-exponential
 ```
 
-### The action on identifications of an (exponential) diagonal is a diagonal
+### The action on identifications of a diagonal is a diagonal
 
 ```agda
 module _
