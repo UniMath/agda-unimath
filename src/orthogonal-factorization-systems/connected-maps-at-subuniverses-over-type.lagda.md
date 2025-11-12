@@ -1,4 +1,4 @@
-# `K`-connected maps over a type with respect to a subuniverse
+# `K`-connected maps over a type, with respect to a subuniverse `K`
 
 ```agda
 module orthogonal-factorization-systems.connected-maps-at-subuniverses-over-type where

@@ -1,4 +1,4 @@
-# Equivalences with respect to a subuniverse
+# `K`-Equivalences, with respect to a subuniverse `K`
 
 ```agda
 module orthogonal-factorization-systems.equivalences-at-subuniverses where

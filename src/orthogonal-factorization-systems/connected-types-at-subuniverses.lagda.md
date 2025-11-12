@@ -1,4 +1,4 @@
-# Connected types with respect to a subuniverse
+# `K`-Connected types, with respect to a subuniverse `K`
 
 ```agda
 module orthogonal-factorization-systems.connected-types-at-subuniverses where

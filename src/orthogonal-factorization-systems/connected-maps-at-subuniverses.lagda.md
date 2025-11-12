@@ -1,4 +1,4 @@
-# Connected maps with respect to a subuniverse
+# `K`-Connected maps, with respect to a subuniverse `K`
 
 ```agda
 module orthogonal-factorization-systems.connected-maps-at-subuniverses where
