@@ -24,7 +24,7 @@ open import foundation.universe-levels
 For any [integral domain](commutative-algebra.integral-domains.md) `R` there is
 a multiplication operation `ℕ → R → R`, which we write informally as
 `n x ↦ n · x`, called taking a
-{{#concept "multiple" Disambiguation="of an element of a commutative semiring, natural number" Agda=multiple-Commutative-Semiring}}
+{{#concept "multiple" Disambiguation="of an element of an integral domain, natural number" Agda=multiple-Integral-Domain}}
 of `x`. This operation is defined by
 [iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
 times.
