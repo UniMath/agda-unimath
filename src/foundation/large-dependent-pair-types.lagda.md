@@ -23,6 +23,7 @@ depends on the first component.
 
 ```agda
 record Σω (A : UUω) (B : A → UUω) : UUω where
+  eta-equality
   constructor pairω
   field
     prω1 : A
