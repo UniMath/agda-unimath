@@ -528,25 +528,30 @@ module _
 
 ```agda
 abstract
-  double-neg-trichotomy-le-ℝ :
+
+  irrefutable-trichotomy-le-ℝ :
     {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
-    ¬¬ disjunction-type (le-ℝ a b) (disjunction-type (sim-ℝ a b) (le-ℝ b a))
-  double-neg-trichotomy-le-ℝ a b ¬a<b∨a~b∨b<a =
-    ¬a<b∨a~b∨b<a
-      ( inr-disjunction
-        ( inl-disjunction
+    ¬¬ (le-ℝ a b + sim-ℝ a b + le-ℝ b a)
+  irrefutable-trichotomy-le-ℝ a b ¬a<b+a~b+b<a =
+    ¬a<b+a~b+b<a
+      ( inr
+        ( inl
           ( sim-sim-leq-ℝ
-            ( leq-not-le-ℝ
-                ( b)
-                ( a)
-                ( map-neg (inr-disjunction ∘ inr-disjunction) ¬a<b∨a~b∨b<a) ,
-              leq-not-le-ℝ
-                ( a)
-                ( b)
-                ( map-neg inl-disjunction ¬a<b∨a~b∨b<a)))))
+            ( leq-not-le-ℝ b a (¬a<b+a~b+b<a ∘ inr ∘ inr) ,
+              leq-not-le-ℝ a b (¬a<b+a~b+b<a ∘ inl)))))
+
+  irrefutable-trichotomy-le-ℝ' :
+    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
+    ¬¬ disjunction-type (disjunction-type (le-ℝ a b) (sim-ℝ a b)) (le-ℝ b a)
+  irrefutable-trichotomy-le-ℝ' a b =
+    map-double-negation
+      ( rec-coproduct
+        ( inl-disjunction ∘ inl-disjunction)
+        ( rec-coproduct (inl-disjunction ∘ inr-disjunction) inr-disjunction))
+      ( irrefutable-trichotomy-le-ℝ a b)
 ```
 
-### For any real numbers `a` and `b`, `a ≤ b` if and only if it is irrefutable that `a ~ b` or `a < b`
+### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable
 
 ```agda
 module _
@@ -556,41 +561,34 @@ module _
   where
 
   abstract
-    leq-not-not-sim-or-le-ℝ :
-      ¬¬ disjunction-type (sim-ℝ a b) (le-ℝ a b) → leq-ℝ a b
-    leq-not-not-sim-or-le-ℝ ¬¬a~b∨a<b =
+    leq-irrefutable-sim-or-le-ℝ :
+      ¬¬ (sim-ℝ a b + le-ℝ a b) → leq-ℝ a b
+    leq-irrefutable-sim-or-le-ℝ ¬¬a~b∨a<b =
       leq-not-le-ℝ
         ( b)
         ( a)
         ( map-neg
           ( λ b<a →
-            elim-disjunction
-              ( empty-Prop)
-              ( not-sim-le-ℝ b<a ∘ symmetric-sim-ℝ)
+            rec-coproduct
+              ( λ a~b → not-le-leq-ℝ a b (leq-sim-ℝ a~b) b<a)
               ( asymmetric-le-ℝ b<a))
           ( ¬¬a~b∨a<b))
 
-    not-not-sim-or-le-leq-ℝ :
-      leq-ℝ a b → ¬¬ disjunction-type (sim-ℝ a b) (le-ℝ a b)
-    not-not-sim-or-le-leq-ℝ a≤b =
-      let
-        motive = (sim-prop-ℝ a b ∨ le-prop-ℝ a b)
-      in
-        map-neg
-          ( map-neg
-            ( elim-disjunction
-              ( motive)
-              ( inr-disjunction)
-              ( elim-disjunction
-                ( motive)
-                ( inl-disjunction)
-                ( ex-falso ∘ not-le-leq-ℝ a b a≤b))))
-          ( double-neg-trichotomy-le-ℝ a b)
+    irrefutable-sim-or-le-leq-ℝ :
+      leq-ℝ a b → ¬¬ (sim-ℝ a b + le-ℝ a b)
+    irrefutable-sim-or-le-leq-ℝ a≤b =
+      map-double-negation
+        ( rec-coproduct
+          ( inr)
+          ( rec-coproduct
+            ( inl)
+            ( ex-falso ∘ not-le-leq-ℝ a b a≤b)))
+        ( irrefutable-trichotomy-le-ℝ a b)
 
-  leq-iff-not-not-sim-or-le-ℝ :
-    leq-ℝ a b ↔ ¬¬ (disjunction-type (sim-ℝ a b) (le-ℝ a b))
-  leq-iff-not-not-sim-or-le-ℝ =
-    ( not-not-sim-or-le-leq-ℝ , leq-not-not-sim-or-le-ℝ)
+  leq-iff-irrefutable-sim-or-le-ℝ :
+    leq-ℝ a b ↔ ¬¬ (sim-ℝ a b + le-ℝ a b)
+  leq-iff-irrefutable-sim-or-le-ℝ =
+    ( irrefutable-sim-or-le-leq-ℝ , leq-irrefutable-sim-or-le-ℝ)
 ```
 
 ## References
