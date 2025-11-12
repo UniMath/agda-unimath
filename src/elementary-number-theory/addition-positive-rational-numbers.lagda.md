@@ -226,6 +226,16 @@ module _
     eq-add-split-ℚ⁺
 
   abstract
+    le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
+    le-left-summand-split-ℚ⁺ = le-mediant-zero-ℚ⁺ x
+
+    le-right-summand-split-ℚ⁺ : le-ℚ⁺ right-summand-split-ℚ⁺ x
+    le-right-summand-split-ℚ⁺ =
+      tr
+        ( le-ℚ⁺ right-summand-split-ℚ⁺)
+        ( eq-add-split-ℚ⁺)
+        ( le-right-add-ℚ⁺ left-summand-split-ℚ⁺ right-summand-split-ℚ⁺)
+
     le-add-split-ℚ⁺ :
       (p q r s : ℚ) →
       le-ℚ p (q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺) →
