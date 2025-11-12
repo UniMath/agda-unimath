@@ -118,7 +118,7 @@ module _
 
   is-subuniverse-equiv-extension-condition : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-equiv-extension-condition =
-    (U : type-subuniverse K) (u : A → pr1 U) → is-contr (extension f u)
+    (U : type-subuniverse K) (u : A → pr1 U) → is-contr (extension-map f u)
 
   is-prop-is-subuniverse-equiv-extension-condition :
     is-prop is-subuniverse-equiv-extension-condition
@@ -151,7 +151,7 @@ module _
     is-equiv-is-contr-map
       ( λ u →
         is-contr-equiv
-          ( extension f u)
+          ( extension-map f u)
           ( compute-extension-fiber-precomp f u)
           ( H U u))
 

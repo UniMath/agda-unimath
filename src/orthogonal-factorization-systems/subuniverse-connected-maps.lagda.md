@@ -49,7 +49,7 @@ open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 
-open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
 open import orthogonal-factorization-systems.subuniverse-connected-types
 open import orthogonal-factorization-systems.subuniverse-equivalences
@@ -190,7 +190,7 @@ module _
     UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subuniverse-connected-map-extension-condition =
     (U : B → type-subuniverse K) (u : (x : A) → pr1 (U (f x))) →
-    is-contr (extension-dependent-type f (pr1 ∘ U) u)
+    is-contr (extension-dependent-map f (pr1 ∘ U) u)
 
   abstract
     is-prop-is-subuniverse-connected-map-extension-condition :
@@ -229,7 +229,7 @@ module _
     is-equiv-is-contr-map
       ( λ u →
         is-contr-equiv
-          ( extension-dependent-type f (pr1 ∘ U) u)
+          ( extension-dependent-map f (pr1 ∘ U) u)
           ( compute-extension-fiber-precomp-Π f (pr1 ∘ U) u)
           ( H U u))
 
