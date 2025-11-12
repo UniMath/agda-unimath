@@ -23,6 +23,7 @@ open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
+open import real-numbers.equality-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
@@ -43,6 +44,7 @@ open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
+open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
