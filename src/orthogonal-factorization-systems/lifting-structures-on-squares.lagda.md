@@ -108,7 +108,7 @@ module _
   is-extension-is-diagonal-lift-square = pr1
 
   is-lift-is-diagonal-lift-square :
-    is-diagonal-lift-square → is-lift g (map-codomain-hom-arrow f g α) j
+    is-diagonal-lift-square → is-lift-of-map g (map-codomain-hom-arrow f g α) j
   is-lift-is-diagonal-lift-square = pr1 ∘ pr2
 
   coherence-is-diagonal-lift-square :
@@ -157,7 +157,7 @@ module _
 
   is-lift-diagonal-map-lifting-structure-square :
     (l : lifting-structure-square) →
-    is-lift g
+    is-lift-of-map g
       ( map-codomain-hom-arrow f g α)
       ( diagonal-map-lifting-structure-square l)
   is-lift-diagonal-map-lifting-structure-square = pr1 ∘ (pr2 ∘ pr2)
