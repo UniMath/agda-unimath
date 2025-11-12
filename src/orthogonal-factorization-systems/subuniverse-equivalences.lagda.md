@@ -52,7 +52,7 @@ Equivalently, a map `f : A → B` is a `K`-equivalence if
    [unique](foundation-core.contractible-types.md)
    [extension](orthogonal-factorization-systems.extensions-maps.md) along `f`.
    I.e., the type of maps `u' : B → U` such that the following triangle
-   [commutes](foundation.commuting-triangles-maps.md)
+   [commutes](foundation-core.commuting-triangles-of-maps.md)
    ```text
         A
         |  \
