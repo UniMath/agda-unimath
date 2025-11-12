@@ -535,9 +535,84 @@ real-inner-product-space-ℝ l =
     is-inner-product-bilinear-form-mul-ℝ l)
 ```
 
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    cauchy-schwarz-inequality-ℝ-Inner-Product-Space :
+      (u v : type-ℝ-Inner-Product-Space V) →
+      leq-ℝ
+        ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
+        ( norm-ℝ-Inner-Product-Space V u *ℝ norm-ℝ-Inner-Product-Space V v)
+    cauchy-schwarz-inequality-ℝ-Inner-Product-Space u v =
+      let
+        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _-V_ = diff-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+        norm-V = norm-ℝ-Inner-Product-Space V
+        squared-norm-V = squared-norm-ℝ-Inner-Product-Space V
+        z =
+          ((norm-V u *ℝ squared-norm-V v) *V u) -V
+          ((norm-V u *ℝ (u ∙V v)) *V v)
+        orthogonal-z-v : is-orthogonal-ℝ-Inner-Product-Space V z v
+        orthogonal-z-v =
+          equational-reasoning
+            z ∙V v
+            ＝
+              (((norm-V u *ℝ squared-norm-V v) *V u) ∙V v) -ℝ
+              (((norm-V u *ℝ (u ∙V v)) *V v) ∙V v)
+              by
+                right-distributive-inner-product-diff-ℝ-Inner-Product-Space
+                  ( V)
+                  ( _)
+                  ( _)
+                  ( _)
+            ＝
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
+              (norm-V u *ℝ (u ∙V v)) *ℝ (v ∙V v)
+              by
+                ap-diff-ℝ
+                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( V)
+                    ( _)
+                    ( _)
+                    ( _))
+                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( V)
+                    ( _)
+                    ( _)
+                    ( _))
+            ＝
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v)
+              by ap-diff-ℝ refl (right-swap-mul-ℝ _ _ _)
+            ＝ raise-ℝ l1 zero-ℝ
+              by
+                eq-sim-ℝ
+                  ( transitive-sim-ℝ _ _ _
+                    ( sim-raise-ℝ l1 zero-ℝ)
+                    ( right-inverse-law-add-ℝ _))
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in
+        chain-of-inequalities
+          abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
+          ≤ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (u ∙V v))
+            by leq-eq-ℝ (eq-abs-sqrt-square-ℝ _)
+          ≤
+          ≤ {!   !} by {!   !}
+```
+
 ## External links
 
 - [Inner product space](https://en.wikipedia.org/wiki/Inner_product_space) on
   Wikipedia
 - [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
   $n$Lab
+
+## References
+
+{{#bibliography}}
