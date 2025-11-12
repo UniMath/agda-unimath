@@ -52,7 +52,9 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
+open import orthogonal-factorization-systems.equality-extensions-maps
 open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.postcomposition-extensions-maps
 ```
 
 </details>
@@ -831,8 +833,8 @@ module _
           ( g ∘ i)
           ( postcomp-extension f i g (j , N))
           ( h , L)
-          ( M)
-          ( λ a →
+          ( M ,
+            λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
               ( is-section-map-inv-is-equiv
