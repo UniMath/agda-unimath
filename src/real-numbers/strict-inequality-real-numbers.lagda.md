@@ -553,6 +553,8 @@ abstract
 
 ### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable
 
+This follows {{#cite Saving25}}.
+
 ```agda
 module _
   {l1 l2 : Level}
