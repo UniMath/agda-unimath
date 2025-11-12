@@ -30,7 +30,7 @@ open import foundation.universe-levels
 ## Idea
 
 An
-{{#concept "extension" Disambiguation="of a dependent map along a map, types" Agda=extension-dependent-type}}
+{{#concept "extension" Disambiguation="of a dependent map along a map, types" Agda=extension-dependent-map}}
 of a dependent map `f : (x : A) → P (i x)` along a map `i : A → B` is a map
 `g : (y : B) → P y` such that `g` restricts along `i` to `f`.
 
@@ -52,33 +52,33 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-extension-dependent-type :
+  is-extension-of-dependent-map :
     {P : B → UU l3} →
     ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
-  is-extension-dependent-type f g = (f ~ g ∘ i)
+  is-extension-of-dependent-map f g = (f ~ g ∘ i)
 
-  extension-dependent-type :
+  extension-dependent-map :
     (P : B → UU l3) →
     ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
-  extension-dependent-type P f =
-    Σ ((y : B) → P y) (is-extension-dependent-type f)
+  extension-dependent-map P f =
+    Σ ((y : B) → P y) (is-extension-of-dependent-map f)
 
-  total-extension-dependent-type : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  total-extension-dependent-type P =
-    Σ ((x : A) → P (i x)) (extension-dependent-type P)
+  total-extension-dependent-map : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-extension-dependent-map P =
+    Σ ((x : A) → P (i x)) (extension-dependent-map P)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
   {P : B → UU l3} {f : (x : A) → P (i x)}
   where
 
-  map-extension-dependent-type : extension-dependent-type i P f → (y : B) → P y
-  map-extension-dependent-type = pr1
+  map-extension-dependent-map : extension-dependent-map i P f → (y : B) → P y
+  map-extension-dependent-map = pr1
 
-  is-extension-map-extension-dependent-type :
-    (E : extension-dependent-type i P f) →
-    is-extension-dependent-type i f (map-extension-dependent-type E)
-  is-extension-map-extension-dependent-type = pr2
+  is-extension-map-extension-dependent-map :
+    (E : extension-dependent-map i P f) →
+    is-extension-of-dependent-map i f (map-extension-dependent-map E)
+  is-extension-map-extension-dependent-map = pr2
 ```
 
 ### Extensions of dependent maps with homotopies going the other way
@@ -88,34 +88,34 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-extension-dependent-type' :
+  is-extension-of-dependent-map' :
     {P : B → UU l3} →
     ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
-  is-extension-dependent-type' f g = (g ∘ i ~ f)
+  is-extension-of-dependent-map' f g = (g ∘ i ~ f)
 
-  extension-dependent-type' :
+  extension-dependent-map' :
     (P : B → UU l3) →
     ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
-  extension-dependent-type' P f =
-    Σ ((y : B) → P y) (is-extension-dependent-type' f)
+  extension-dependent-map' P f =
+    Σ ((y : B) → P y) (is-extension-of-dependent-map' f)
 
-  total-extension-dependent-type' : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  total-extension-dependent-type' P =
-    Σ ((x : A) → P (i x)) (extension-dependent-type' P)
+  total-extension-dependent-map' : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-extension-dependent-map' P =
+    Σ ((x : A) → P (i x)) (extension-dependent-map' P)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
   {P : B → UU l3} {f : (x : A) → P (i x)}
   where
 
-  map-extension-dependent-type' :
-    extension-dependent-type' i P f → (y : B) → P y
-  map-extension-dependent-type' = pr1
+  map-extension-dependent-map' :
+    extension-dependent-map' i P f → (y : B) → P y
+  map-extension-dependent-map' = pr1
 
-  is-extension-map-extension-dependent-type' :
-    (E : extension-dependent-type' i P f) →
-    is-extension-dependent-type' i f (map-extension-dependent-type' E)
-  is-extension-map-extension-dependent-type' = pr2
+  is-extension-map-extension-dependent-map' :
+    (E : extension-dependent-map' i P f) →
+    is-extension-of-dependent-map' i f (map-extension-dependent-map' E)
+  is-extension-map-extension-dependent-map' = pr2
 ```
 
 ## Operations
@@ -143,11 +143,11 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
 
-  is-extension-dependent-type-comp-vertical :
-    is-extension-dependent-type j g h →
-    is-extension-dependent-type i f g →
-    is-extension-dependent-type (j ∘ i) f h
-  is-extension-dependent-type-comp-vertical H G x = G x ∙ H (i x)
+  is-extension-of-dependent-map-comp-vertical :
+    is-extension-of-dependent-map j g h →
+    is-extension-of-dependent-map i f g →
+    is-extension-of-dependent-map (j ∘ i) f h
+  is-extension-of-dependent-map-comp-vertical H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions of dependent maps
@@ -168,11 +168,11 @@ module _
   {i : B → C} {j : (z : C) → P z}
   where
 
-  is-extension-dependent-type-comp-horizontal :
-    (I : is-extension-dependent-type f g i) →
-    is-extension-dependent-type g h j →
-    is-extension-dependent-type f (λ x → tr P (I x) (h x)) (j ∘ i)
-  is-extension-dependent-type-comp-horizontal I J x =
+  is-extension-of-dependent-map-comp-horizontal :
+    (I : is-extension-of-dependent-map f g i) →
+    is-extension-of-dependent-map g h j →
+    is-extension-of-dependent-map f (λ x → tr P (I x) (h x)) (j ∘ i)
+  is-extension-of-dependent-map-comp-horizontal I J x =
     ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
@@ -193,10 +193,10 @@ module _
   {i : A → B} {f : A → C} {g : B → C}
   where
 
-  is-extension-dependent-type-left-whisker :
-    (h : (x : C) → P x) (F : is-extension-dependent-type i f g) →
-    is-extension-dependent-type i (λ x → tr P (F x) (h (f x))) (h ∘ g)
-  is-extension-dependent-type-left-whisker h F = apd h ∘ F
+  is-extension-of-dependent-map-left-whisker :
+    (h : (x : C) → P x) (F : is-extension-of-dependent-map i f g) →
+    is-extension-of-dependent-map i (λ x → tr P (F x) (h (f x))) (h ∘ g)
+  is-extension-of-dependent-map-left-whisker h F = apd h ∘ F
 ```
 
 ### Right whiskering of extensions of dependent maps
@@ -217,11 +217,11 @@ module _
   {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y}
   where
 
-  is-extension-dependent-type-right-whisker :
-    is-extension-dependent-type i f g →
+  is-extension-of-dependent-map-right-whisker :
+    is-extension-of-dependent-map i f g →
     (h : X → A) →
-    is-extension-dependent-type (i ∘ h) (f ∘ h) g
-  is-extension-dependent-type-right-whisker F h = F ∘ h
+    is-extension-of-dependent-map (i ∘ h) (f ∘ h) g
+  is-extension-of-dependent-map-right-whisker F h = F ∘ h
 ```
 
 ## Properties
@@ -233,16 +233,16 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  inv-compute-total-extension-dependent-type :
-    {P : B → UU l3} → total-extension-dependent-type i P ≃ ((y : B) → P y)
-  inv-compute-total-extension-dependent-type =
+  inv-compute-total-extension-dependent-map :
+    {P : B → UU l3} → total-extension-dependent-map i P ≃ ((y : B) → P y)
+  inv-compute-total-extension-dependent-map =
     ( right-unit-law-Σ-is-contr (λ f → is-torsorial-htpy' (f ∘ i))) ∘e
     ( equiv-left-swap-Σ)
 
-  compute-total-extension-dependent-type :
-    {P : B → UU l3} → ((y : B) → P y) ≃ total-extension-dependent-type i P
-  compute-total-extension-dependent-type =
-    inv-equiv (inv-compute-total-extension-dependent-type)
+  compute-total-extension-dependent-map :
+    {P : B → UU l3} → ((y : B) → P y) ≃ total-extension-dependent-map i P
+  compute-total-extension-dependent-map =
+    inv-equiv (inv-compute-total-extension-dependent-map)
 ```
 
 ### The truncation level of the type of extensions is bounded by the truncation level of the codomain
@@ -252,48 +252,48 @@ module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-trunc-is-extension-dependent-type :
+  is-trunc-is-extension-of-dependent-map :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
-    (g : (x : B) → P x) → is-trunc k (is-extension-dependent-type i f g)
-  is-trunc-is-extension-dependent-type f is-trunc-P g =
+    (g : (x : B) → P x) → is-trunc k (is-extension-of-dependent-map i f g)
+  is-trunc-is-extension-of-dependent-map f is-trunc-P g =
     is-trunc-Π k (λ x → is-trunc-P x (f x) (g (i x)))
 
-  is-trunc-extension-dependent-type :
+  is-trunc-extension-dependent-map :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
-    ((x : B) → is-trunc k (P x)) → is-trunc k (extension-dependent-type i P f)
-  is-trunc-extension-dependent-type f is-trunc-P =
+    ((x : B) → is-trunc k (P x)) → is-trunc k (extension-dependent-map i P f)
+  is-trunc-extension-dependent-map f is-trunc-P =
     is-trunc-Σ
       ( is-trunc-Π k is-trunc-P)
-      ( is-trunc-is-extension-dependent-type f
+      ( is-trunc-is-extension-of-dependent-map f
         ( is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
 
-  is-trunc-total-extension-dependent-type :
+  is-trunc-total-extension-dependent-map :
     {P : B → UU l3} →
     ((x : B) → is-trunc k (P x)) →
-    is-trunc k (total-extension-dependent-type i P)
-  is-trunc-total-extension-dependent-type {P} is-trunc-P =
+    is-trunc k (total-extension-dependent-map i P)
+  is-trunc-total-extension-dependent-map {P} is-trunc-P =
     is-trunc-equiv' k
       ( (y : B) → P y)
-      ( compute-total-extension-dependent-type i)
+      ( compute-total-extension-dependent-map i)
       ( is-trunc-Π k is-trunc-P)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-contr-is-extension-dependent-type :
+  is-contr-is-extension-of-dependent-map :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-prop (P (i x))) →
-    (g : (x : B) → P x) → is-contr (is-extension-dependent-type i f g)
-  is-contr-is-extension-dependent-type f is-prop-P g =
+    (g : (x : B) → P x) → is-contr (is-extension-of-dependent-map i f g)
+  is-contr-is-extension-of-dependent-map f is-prop-P g =
     is-contr-Π (λ x → is-prop-P x (f x) (g (i x)))
 
-  is-prop-is-extension-dependent-type :
+  is-prop-is-extension-of-dependent-map :
     {P : B → UU l3} (f : (x : A) → P (i x)) →
     ((x : A) → is-set (P (i x))) →
-    (g : (x : B) → P x) → is-prop (is-extension-dependent-type i f g)
-  is-prop-is-extension-dependent-type f is-set-P g =
+    (g : (x : B) → P x) → is-prop (is-extension-of-dependent-map i f g)
+  is-prop-is-extension-of-dependent-map f is-set-P g =
     is-prop-Π (λ x → is-set-P x (f x) (g (i x)))
 ```
 
@@ -306,11 +306,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2} (f : (x : A) → P x)
   where
 
-  is-extension-dependent-type-self : is-extension-dependent-type id f f
-  is-extension-dependent-type-self = refl-htpy
+  is-extension-of-dependent-map-self : is-extension-of-dependent-map id f f
+  is-extension-of-dependent-map-self = refl-htpy
 
-  extension-self : extension-dependent-type id P f
-  extension-self = (f , is-extension-dependent-type-self)
+  self-extension-dependent-map : extension-dependent-map id P f
+  self-extension-dependent-map = (f , is-extension-of-dependent-map-self)
 ```
 
 ## See also
