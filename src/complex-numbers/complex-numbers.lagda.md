@@ -45,6 +45,8 @@ re-ℂ = pr1
 
 im-ℂ : {l : Level} → ℂ l → ℝ l
 im-ℂ = pr2
+
+pattern _+iℂ_ a b = (a , b)
 ```
 
 ## Properties

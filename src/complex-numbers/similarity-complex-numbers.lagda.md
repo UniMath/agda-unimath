@@ -12,10 +12,13 @@ open import complex-numbers.complex-numbers
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-equivalence-relations
+open import foundation.large-similarity-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -81,6 +84,28 @@ abstract
   eq-sim-ℂ (a~c , b~d) = eq-ℂ (eq-sim-ℝ a~c) (eq-sim-ℝ b~d)
 ```
 
+### Similarity is a large equivalence relation
+
+```agda
+large-equivalence-relation-sim-ℂ : Large-Equivalence-Relation (_⊔_) ℂ
+large-equivalence-relation-sim-ℂ =
+  make-Large-Equivalence-Relation
+    ( sim-prop-ℂ)
+    ( refl-sim-ℂ)
+    ( λ _ _ → symmetric-sim-ℂ)
+    ( transitive-sim-ℂ)
+```
+
+### Similarity is a large similarity relation
+
+```agda
+large-similarity-relation-ℂ : Large-Similarity-Relation (_⊔_) ℂ
+large-similarity-relation-ℂ =
+  make-Large-Similarity-Relation
+    ( large-equivalence-relation-sim-ℂ)
+    ( λ _ _ → eq-sim-ℂ)
+```
+
 ### The canonical embedding of real numbers in the complex numbers preserves similarity
 
 ```agda
@@ -96,6 +121,17 @@ abstract
         ( raise-ℝ l2 zero-ℝ)
         ( sim-raise-ℝ l2 zero-ℝ)
         ( symmetric-sim-ℝ (sim-raise-ℝ l1 zero-ℝ)))
+```
+
+### Similarity is preserved by negation
+
+```agda
+abstract
+  preserves-sim-neg-ℂ :
+    {l1 l2 : Level} {x : ℂ l1} {y : ℂ l2} →
+    sim-ℂ x y → sim-ℂ (neg-ℂ x) (neg-ℂ y)
+  preserves-sim-neg-ℂ (a~c , b~d) =
+    ( preserves-sim-neg-ℝ a~c , preserves-sim-neg-ℝ b~d)
 ```
 
 ### Similarity reasoning
