@@ -15,17 +15,21 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import order-theory.large-posets
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
+open import foundation.transport-along-identifications
 open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
@@ -203,18 +207,27 @@ module _
   is-orthogonal-ℝ-Inner-Product-Space v w =
     type-Prop (is-orthogonal-prop-ℝ-Inner-Product-Space v w)
 
+  commutative-inner-product-ℝ-Inner-Product-Space :
+    (v w : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space v w ＝
+    inner-product-ℝ-Inner-Product-Space w v
+  commutative-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 (pr2 V))
+
+  symmetric-is-orthogonal-ℝ-Inner-Product-Space :
+    (v w : type-ℝ-Inner-Product-Space) →
+    is-orthogonal-ℝ-Inner-Product-Space v w →
+    is-orthogonal-ℝ-Inner-Product-Space w v
+  symmetric-is-orthogonal-ℝ-Inner-Product-Space v w =
+    tr
+      ( _＝ raise-ℝ l1 zero-ℝ)
+      ( commutative-inner-product-ℝ-Inner-Product-Space v w)
+
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space :
     (v : type-ℝ-Inner-Product-Space) →
     is-orthogonal-ℝ-Inner-Product-Space v v →
     v ＝ zero-ℝ-Inner-Product-Space
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr2 (pr2 (pr2 (pr2 V)))
-
-  commutative-inner-product-ℝ-Inner-Product-Space :
-    (v w : type-ℝ-Inner-Product-Space) →
-    inner-product-ℝ-Inner-Product-Space v w ＝
-    inner-product-ℝ-Inner-Product-Space w v
-  commutative-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 (pr2 V))
 
   nonnegative-squared-norm-ℝ-Inner-Product-Space :
     type-ℝ-Inner-Product-Space → ℝ⁰⁺ l1
@@ -308,6 +321,76 @@ module _
           by ap neg-ℝ (commutative-inner-product-ℝ-Inner-Product-Space V w v)
 ```
 
+### The inner product is distributive over subtraction
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    right-distributive-inner-product-diff-ℝ-Inner-Product-Space :
+      (u v w : type-ℝ-Inner-Product-Space V) →
+      inner-product-ℝ-Inner-Product-Space V
+        ( diff-ℝ-Inner-Product-Space V u v)
+        ( w) ＝
+      ( inner-product-ℝ-Inner-Product-Space V u w -ℝ
+        inner-product-ℝ-Inner-Product-Space V v w)
+    right-distributive-inner-product-diff-ℝ-Inner-Product-Space u v w =
+      let
+        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _-V_ = diff-ℝ-Inner-Product-Space V
+        neg-V = neg-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          (u -V v) ∙V w
+          ＝ (u ∙V w) +ℝ (neg-V v ∙V w)
+            by is-left-additive-inner-product-ℝ-Inner-Product-Space V _ _ _
+          ＝ (u ∙V w) -ℝ (v ∙V w)
+            by
+              ap-add-ℝ
+                ( refl)
+                ( left-negative-law-inner-product-ℝ-Inner-Product-Space V _ _)
+```
+
+### Orthogonality is preserved by scalar multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
+      is-orthogonal-ℝ-Inner-Product-Space V v w →
+      is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v∙w=0 =
+      let
+        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          (c *V v) ∙V w
+          ＝ c *ℝ (v ∙V w)
+            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+          ＝ c *ℝ raise-ℝ l1 zero-ℝ
+            by ap-mul-ℝ refl v∙w=0
+          ＝ c *ℝ zero-ℝ
+            by
+              eq-sim-ℝ (preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ' l1 zero-ℝ))
+          ＝ raise-ℝ l1 zero-ℝ
+            by
+              eq-sim-ℝ
+                ( transitive-sim-ℝ _ _ _
+                  ( sim-raise-ℝ l1 zero-ℝ)
+                  ( right-zero-law-mul-ℝ c))
+```
+
 ### The norm of the sum of two vectors
 
 ```agda
@@ -352,6 +435,68 @@ module _
                 ( refl)
           ＝ (v ∙V v) +ℝ real-ℕ 2 *ℝ (v ∙V w) +ℝ (w ∙V w)
             by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 _))) refl
+```
+
+### The norm is absolutely homogeneous
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    squared-norm-mul-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v : type-ℝ-Inner-Product-Space V) →
+      squared-norm-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) ＝
+      square-ℝ c *ℝ squared-norm-ℝ-Inner-Product-Space V v
+    squared-norm-mul-ℝ-Inner-Product-Space c v =
+      let
+        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          (c *V v) ∙V (c *V v)
+          ＝ c *ℝ (v ∙V (c *V v))
+            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+          ＝ c *ℝ (c *ℝ (v ∙V v))
+            by
+              ap-mul-ℝ
+                ( refl)
+                ( is-right-homogeneous-inner-product-ℝ-Inner-Product-Space
+                  ( V)
+                  ( _)
+                  ( _)
+                  ( _))
+          ＝ (c *ℝ c) *ℝ (v ∙V v)
+            by inv (associative-mul-ℝ _ _ _)
+
+    is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v : type-ℝ-Inner-Product-Space V) →
+      norm-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) ＝
+      abs-ℝ c *ℝ norm-ℝ-Inner-Product-Space V v
+    is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space c v =
+      let
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          real-sqrt-ℝ⁰⁺
+            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V (c *V v))
+          ＝
+            real-sqrt-ℝ⁰⁺
+              ( nonnegative-square-ℝ c *ℝ⁰⁺
+                nonnegative-squared-norm-ℝ-Inner-Product-Space V v)
+            by
+              ap
+                ( real-sqrt-ℝ⁰⁺)
+                ( eq-ℝ⁰⁺ _ _ (squared-norm-mul-ℝ-Inner-Product-Space c v))
+          ＝
+            real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ c) *ℝ
+            norm-ℝ-Inner-Product-Space V v
+            by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
+          ＝ abs-ℝ c *ℝ norm-ℝ-Inner-Product-Space V v
+            by ap-mul-ℝ (inv (eq-abs-sqrt-square-ℝ c)) refl
 ```
 
 ### The Pythagorean theorem for real inner product spaces
@@ -418,6 +563,78 @@ module _
         ( real-sqrt-ℝ⁰⁺)
         ( eq-ℝ⁰⁺ _ _
           ( squared-pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
+```
+
+### The Cauchy-Schwarz inequality
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    cauchy-schwarz-inequality-ℝ-Inner-Product-Space :
+      (u v : type-ℝ-Inner-Product-Space V) →
+      leq-ℝ
+        ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
+        ( norm-ℝ-Inner-Product-Space V u *ℝ norm-ℝ-Inner-Product-Space V v)
+    cauchy-schwarz-inequality-ℝ-Inner-Product-Space u v =
+      let
+        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _-V_ = diff-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+        norm-V = norm-ℝ-Inner-Product-Space V
+        squared-norm-V = squared-norm-ℝ-Inner-Product-Space V
+        z =
+          ((norm-V u *ℝ squared-norm-V v) *V u) -V
+          ((norm-V u *ℝ (u ∙V v)) *V v)
+        orthogonal-z-v : is-orthogonal-ℝ-Inner-Product-Space V z v
+        orthogonal-z-v =
+          equational-reasoning
+            z ∙V v
+            ＝
+              (((norm-V u *ℝ squared-norm-V v) *V u) ∙V v) -ℝ
+              (((norm-V u *ℝ (u ∙V v)) *V v) ∙V v)
+              by
+                right-distributive-inner-product-diff-ℝ-Inner-Product-Space
+                  ( V)
+                  ( _)
+                  ( _)
+                  ( _)
+            ＝
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
+              (norm-V u *ℝ (u ∙V v)) *ℝ (v ∙V v)
+              by
+                ap-diff-ℝ
+                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( V)
+                    ( _)
+                    ( _)
+                    ( _))
+                  ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( V)
+                    ( _)
+                    ( _)
+                    ( _))
+            ＝
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v) -ℝ
+              (norm-V u *ℝ (v ∙V v)) *ℝ (u ∙V v)
+              by ap-diff-ℝ refl (right-swap-mul-ℝ _ _ _)
+            ＝ raise-ℝ l1 zero-ℝ
+              by
+                eq-sim-ℝ
+                  ( transitive-sim-ℝ _ _ _
+                    ( sim-raise-ℝ l1 zero-ℝ)
+                    ( right-inverse-law-add-ℝ _))
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in
+        chain-of-inequalities
+          abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
+          ≤ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (u ∙V v))
+            by leq-eq-ℝ (eq-abs-sqrt-square-ℝ _)
+          ≤ {!   !} by {!   !}
 ```
 
 ## References
