@@ -39,6 +39,7 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -88,6 +89,23 @@ abstract opaque
     sim-ℝ (abs-ℝ x) (abs-ℝ x')
   preserves-sim-abs-ℝ x~x' =
     preserves-sim-max-ℝ _ _ x~x' _ _ (preserves-sim-neg-ℝ x~x')
+```
+
+### The absolute value commutes with raising the universe level of a real number
+
+```agda
+abstract
+  abs-raise-ℝ :
+    {l1 : Level} (l2 : Level) (x : ℝ l1) →
+    abs-ℝ (raise-ℝ l2 x) ＝ raise-ℝ l2 (abs-ℝ x)
+  abs-raise-ℝ l2 x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        abs-ℝ (raise-ℝ l2 x)
+        ~ℝ abs-ℝ x
+          by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
+        ~ℝ raise-ℝ l2 (abs-ℝ x)
+          by sim-raise-ℝ l2 (abs-ℝ x))
 ```
 
 ### The absolute value of a real number is nonnegative

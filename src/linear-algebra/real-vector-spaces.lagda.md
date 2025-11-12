@@ -1,17 +1,24 @@
 # Real vector spaces
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module linear-algebra.real-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.multiples-of-elements-abelian-groups
 
 open import linear-algebra.vector-spaces
 
@@ -63,11 +70,22 @@ module _
   zero-ℝ-Vector-Space : type-ℝ-Vector-Space
   zero-ℝ-Vector-Space = zero-Ab ab-ℝ-Vector-Space
 
+  is-zero-prop-ℝ-Vector-Space : subtype l2 type-ℝ-Vector-Space
+  is-zero-prop-ℝ-Vector-Space = is-zero-prop-Ab ab-ℝ-Vector-Space
+
+  is-zero-ℝ-Vector-Space : type-ℝ-Vector-Space → UU l2
+  is-zero-ℝ-Vector-Space = is-zero-Ab ab-ℝ-Vector-Space
+
   neg-ℝ-Vector-Space : type-ℝ-Vector-Space → type-ℝ-Vector-Space
   neg-ℝ-Vector-Space = neg-Ab ab-ℝ-Vector-Space
 
   mul-ℝ-Vector-Space : ℝ l1 → type-ℝ-Vector-Space → type-ℝ-Vector-Space
   mul-ℝ-Vector-Space = mul-Vector-Space (local-commutative-ring-ℝ l1) V
+
+  diff-ℝ-Vector-Space :
+    type-ℝ-Vector-Space → type-ℝ-Vector-Space → type-ℝ-Vector-Space
+  diff-ℝ-Vector-Space v w =
+    add-ℝ-Vector-Space v (neg-ℝ-Vector-Space w)
 
   associative-add-ℝ-Vector-Space :
     (v w x : type-ℝ-Vector-Space) →
@@ -99,6 +117,16 @@ module _
     (v w : type-ℝ-Vector-Space) →
     add-ℝ-Vector-Space v w ＝ add-ℝ-Vector-Space w v
   commutative-add-ℝ-Vector-Space = commutative-add-Ab ab-ℝ-Vector-Space
+
+  add-diff-ℝ-Vector-Space :
+    (v w x : type-ℝ-Vector-Space) →
+    add-ℝ-Vector-Space (diff-ℝ-Vector-Space v w) (diff-ℝ-Vector-Space w x) ＝
+    diff-ℝ-Vector-Space v x
+  add-diff-ℝ-Vector-Space = add-right-subtraction-Ab ab-ℝ-Vector-Space
+
+  neg-neg-ℝ-Vector-Space :
+    (v : type-ℝ-Vector-Space) → neg-ℝ-Vector-Space (neg-ℝ-Vector-Space v) ＝ v
+  neg-neg-ℝ-Vector-Space = neg-neg-Ab ab-ℝ-Vector-Space
 
   left-unit-law-mul-ℝ-Vector-Space :
     (v : type-ℝ-Vector-Space) →
@@ -158,4 +186,54 @@ module _
     mul-ℝ-Vector-Space (neg-ℝ (raise-ℝ l1 one-ℝ)) v ＝ neg-ℝ-Vector-Space v
   mul-neg-one-ℝ-Vector-Space =
     mul-neg-one-Vector-Space (local-commutative-ring-ℝ l1) V
+
+  ap-add-ℝ-Vector-Space :
+    {x x' y y' : type-ℝ-Vector-Space} → x ＝ x' → y ＝ y' →
+    add-ℝ-Vector-Space x y ＝ add-ℝ-Vector-Space x' y'
+  ap-add-ℝ-Vector-Space = ap-add-Ab ab-ℝ-Vector-Space
+```
+
+## Properties
+
+### Multiplication by a natural number is iterated addition
+
+```agda
+module _
+  {l1 l2 : Level} (V : ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    left-mul-real-ℕ-ℝ-Vector-Space :
+      (n : ℕ) (v : type-ℝ-Vector-Space V) →
+      mul-ℝ-Vector-Space V (raise-ℝ l1 (real-ℕ n)) v ＝
+      multiple-Ab (ab-ℝ-Vector-Space V) n v
+    left-mul-real-ℕ-ℝ-Vector-Space 0 v =
+      left-zero-law-mul-ℝ-Vector-Space V v
+    left-mul-real-ℕ-ℝ-Vector-Space 1 v =
+      left-unit-law-mul-ℝ-Vector-Space V v
+    left-mul-real-ℕ-ℝ-Vector-Space (succ-ℕ n@(succ-ℕ _)) v =
+      equational-reasoning
+        mul-ℝ-Vector-Space V (raise-ℝ l1 (real-ℕ (succ-ℕ n))) v
+        ＝ mul-ℝ-Vector-Space V (raise-ℝ l1 (real-ℕ n) +ℝ raise-ℝ l1 one-ℝ) v
+          by
+            ap
+              ( λ c → mul-ℝ-Vector-Space V c v)
+              ( equational-reasoning
+                raise-ℝ l1 (real-ℕ (succ-ℕ n))
+                ＝ raise-ℝ l1 (real-ℕ n +ℝ one-ℝ)
+                  by ap (raise-ℝ l1) (inv (add-real-ℕ n 1))
+                ＝ raise-ℝ l1 (real-ℕ n) +ℝ raise-ℝ l1 one-ℝ
+                  by distributive-raise-add-ℝ l1 (real-ℕ n) one-ℝ)
+        ＝
+          add-ℝ-Vector-Space V
+            ( mul-ℝ-Vector-Space V (raise-ℝ l1 (real-ℕ n)) v)
+            ( mul-ℝ-Vector-Space V (raise-ℝ l1 one-ℝ) v)
+          by right-distributive-mul-add-ℝ-Vector-Space V _ _ _
+        ＝
+          multiple-Ab (ab-ℝ-Vector-Space V) (succ-ℕ n) v
+          by
+            ap-add-ℝ-Vector-Space
+              ( V)
+              ( left-mul-real-ℕ-ℝ-Vector-Space n v)
+              ( left-unit-law-mul-ℝ-Vector-Space V v)
 ```
