@@ -9,30 +9,32 @@ module linear-algebra.real-inner-product-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.dedekind-real-numbers
-open import foundation.propositions
-open import linear-algebra.real-vector-spaces
-open import foundation.dependent-pair-types
-open import real-numbers.difference-real-numbers
-open import real-numbers.squares-real-numbers
-open import real-numbers.negation-real-numbers
 open import foundation.action-on-identifications-functions
-open import foundation.universe-levels
-open import foundation.identity-types
-open import real-numbers.similarity-real-numbers
-open import foundation.sets
-open import real-numbers.addition-nonnegative-real-numbers
 open import foundation.conjunction
-open import linear-algebra.bilinear-forms-real-vector-spaces
-open import real-numbers.square-roots-nonnegative-real-numbers
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.universe-levels
+
+open import linear-algebra.bilinear-forms-real-vector-spaces
 open import linear-algebra.normed-real-vector-spaces
+open import linear-algebra.real-vector-spaces
+
+open import real-numbers.addition-nonnegative-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.nonnegative-real-numbers
-open import real-numbers.addition-real-numbers
-open import real-numbers.multiplication-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
 ```
 
 </details>
