@@ -13,10 +13,15 @@ open import orthogonal-factorization-systems.anodyne-maps public
 open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
+open import orthogonal-factorization-systems.connected-maps-at-subuniverses public
+open import orthogonal-factorization-systems.connected-maps-at-subuniverses-over-type public
+open import orthogonal-factorization-systems.connected-types-at-subuniverses public
 open import orthogonal-factorization-systems.continuation-modalities public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.double-negation-sheaves public
+open import orthogonal-factorization-systems.equality-extensions-dependent-maps public
 open import orthogonal-factorization-systems.equality-extensions-maps public
+open import orthogonal-factorization-systems.equivalences-at-subuniverses public
 open import orthogonal-factorization-systems.extensions-dependent-maps public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-lifts-families-of-elements public
