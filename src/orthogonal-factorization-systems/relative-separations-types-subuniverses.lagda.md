@@ -37,12 +37,12 @@ module _
   where
 
   is-rel-separated' : (A : UU l1) → UU (l1 ⊔ l2)
-  is-rel-separated' A = (f : X → A) → is-in-subuniverse K (extension δ f)
+  is-rel-separated' A = (f : X → A) → is-in-subuniverse K (extension-map δ f)
 
   is-prop-is-rel-separated' :
     (A : UU l1) → is-prop (is-rel-separated' A)
   is-prop-is-rel-separated' A =
-    is-prop-Π (λ f → is-prop-is-in-subuniverse K (extension δ f))
+    is-prop-Π (λ f → is-prop-is-in-subuniverse K (extension-map δ f))
 
   is-rel-separated'-Prop :
     (A : UU l1) → Prop (l1 ⊔ l2)

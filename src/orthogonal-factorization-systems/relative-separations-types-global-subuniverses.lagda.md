@@ -44,12 +44,12 @@ module _
 
   is-rel-separated : (A : UU l3) → UU (α (l1 ⊔ l2 ⊔ l3) ⊔ l1 ⊔ l3)
   is-rel-separated A =
-    (f : X → A) → is-in-global-subuniverse K (extension δ f)
+    (f : X → A) → is-in-global-subuniverse K (extension-map δ f)
 
   is-prop-is-rel-separated :
     (A : UU l3) → is-prop (is-rel-separated A)
   is-prop-is-rel-separated A =
-    is-prop-Π (λ f → is-prop-is-in-global-subuniverse K (extension δ f))
+    is-prop-Π (λ f → is-prop-is-in-global-subuniverse K (extension-map δ f))
 
   is-rel-separated-Prop :
     (A : UU l3) → Prop (α (l1 ⊔ l2 ⊔ l3) ⊔ l1 ⊔ l3)
@@ -74,9 +74,9 @@ module _
       ( l5)
   is-closed-under-equiv-rel-separated-global-subuniverse A B e H f =
     is-closed-under-equiv-global-subuniverse K
-      ( extension δ (map-inv-equiv e ∘ f))
-      ( extension δ f)
-      ( inv-equiv (equiv-postcomp-extension δ f (inv-equiv e)))
+      ( extension-map δ (map-inv-equiv e ∘ f))
+      ( extension-map δ f)
+      ( inv-equiv (equiv-postcomp-extension-map δ f (inv-equiv e)))
       ( H (map-inv-equiv e ∘ f))
 
   rel-separated-global-subuniverse :
