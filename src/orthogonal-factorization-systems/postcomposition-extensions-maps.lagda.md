@@ -32,7 +32,8 @@ open import orthogonal-factorization-systems.extensions-maps
 Given a map `i : A → B` and a map `f : A → X`, then we may
 {{#concept "postcompose" Disambiguation="extension of map by map" Agda=postcomp-extension}}
 any [extension](orthogonal-factorization-systems.extensions-maps.md)
-`α : extension i f` by `g` to obtain an extension `g ∘ α : extension i (g ∘ f)`.
+`α : extension i f` by a map `g : X → Y` to obtain an extension of `g ∘ f` along
+`i`, `gα : extension i (g ∘ f)`.
 
 ## Definition
 
