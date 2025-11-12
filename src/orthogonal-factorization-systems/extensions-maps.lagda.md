@@ -23,7 +23,7 @@ open import orthogonal-factorization-systems.extensions-dependent-maps
 ## Idea
 
 An
-{{#concept "extension" Disambiguation="of a map along a map, types" Agda=extension}}
+{{#concept "extension" Disambiguation="of a map along a map, types" Agda=extension-map}}
 of a map `f : A → X` along a map `i : A → B` is a map `g : B → X` such that `g`
 restricts along `i` to `f`.
 
@@ -45,27 +45,27 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-extension : {X : UU l3} → (A → X) → (B → X) → UU (l1 ⊔ l3)
-  is-extension = is-extension-dependent-type i
+  is-extension-of-map : {X : UU l3} → (A → X) → (B → X) → UU (l1 ⊔ l3)
+  is-extension-of-map = is-extension-of-dependent-map i
 
-  extension :
+  extension-map :
     {X : UU l3} → (A → X) → UU (l1 ⊔ l2 ⊔ l3)
-  extension {X} = extension-dependent-type i (λ _ → X)
+  extension-map {X} = extension-dependent-map i (λ _ → X)
 
-  total-extension : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  total-extension X = total-extension-dependent-type i (λ _ → X)
+  total-extension-map : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-extension-map X = total-extension-dependent-map i (λ _ → X)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
   {X : UU l3} {f : A → X}
   where
 
-  map-extension : extension i f → B → X
-  map-extension = pr1
+  map-extension-map : extension-map i f → B → X
+  map-extension-map = pr1
 
-  is-extension-map-extension :
-    (E : extension i f) → is-extension i f (map-extension E)
-  is-extension-map-extension = pr2
+  is-extension-map-extension-map :
+    (E : extension-map i f) → is-extension-of-map i f (map-extension-map E)
+  is-extension-map-extension-map = pr2
 ```
 
 ## Operations
@@ -79,9 +79,11 @@ module _
   {i : B → C} {j : C → X}
   where
 
-  is-extension-comp-horizontal :
-    is-extension f g i → is-extension g h j → is-extension f h (j ∘ i)
-  is-extension-comp-horizontal I J x = J x ∙ ap j (I x)
+  is-extension-of-map-comp-horizontal :
+    is-extension-of-map f g i →
+    is-extension-of-map g h j →
+    is-extension-of-map f h (j ∘ i)
+  is-extension-of-map-comp-horizontal I J x = J x ∙ ap j (I x)
 ```
 
 ## Properties
@@ -93,29 +95,29 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  inv-compute-total-extension :
-    {X : UU l3} → total-extension i X ≃ (B → X)
-  inv-compute-total-extension = inv-compute-total-extension-dependent-type i
+  inv-compute-total-extension-map :
+    {X : UU l3} → total-extension-map i X ≃ (B → X)
+  inv-compute-total-extension-map = inv-compute-total-extension-dependent-map i
 
-  compute-total-extension :
-    {X : UU l3} → (B → X) ≃ total-extension i X
-  compute-total-extension = compute-total-extension-dependent-type i
+  compute-total-extension-map :
+    {X : UU l3} → (B → X) ≃ total-extension-map i X
+  compute-total-extension-map = compute-total-extension-dependent-map i
 ```
 
 ## Examples
 
-### The identity is an extension of every map along themselves
+### The identity is an extension-map of every map along themselves
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-extension-along-self : is-extension f f id
-  is-extension-along-self = refl-htpy
+  is-extension-of-map-along-self : is-extension-of-map f f id
+  is-extension-of-map-along-self = refl-htpy
 
-  extension-along-self : extension f f
-  extension-along-self = (id , is-extension-along-self)
+  self-extension-map : extension-map f f
+  self-extension-map = (id , is-extension-of-map-along-self)
 ```
 
 ## See also

@@ -302,7 +302,7 @@ module _
               ( inclusion-extension-type-global-subuniverse 𝒫 LX'))
             { map-essentially-unique-universal-property-localization-global-subuniverse ∘
               map-inv-essentially-unique-universal-property-localization-global-subuniverse ,
-              is-extension-comp-horizontal
+              is-extension-of-map-comp-horizontal
                 { f = inclusion-extension-type-global-subuniverse 𝒫 LX'}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX'}
@@ -312,7 +312,7 @@ module _
                     extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse)
                 ( is-extension-map-extension
                     extension-map-essentially-unique-universal-property-localization-global-subuniverse)}
-            { extension-along-self
+            { self-extension-map
               ( inclusion-extension-type-global-subuniverse 𝒫 LX')}))
 
   abstract
@@ -334,7 +334,7 @@ module _
               ( inclusion-extension-type-global-subuniverse 𝒫 LX))
             { map-inv-essentially-unique-universal-property-localization-global-subuniverse ∘
               map-essentially-unique-universal-property-localization-global-subuniverse ,
-              is-extension-comp-horizontal
+              is-extension-of-map-comp-horizontal
                 { f = inclusion-extension-type-global-subuniverse 𝒫 LX}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX'}
                 { inclusion-extension-type-global-subuniverse 𝒫 LX}
@@ -344,7 +344,7 @@ module _
                     extension-map-essentially-unique-universal-property-localization-global-subuniverse)
                 ( is-extension-map-extension
                     extension-map-inv-essentially-unique-universal-property-localization-global-subuniverse)}
-            { extension-along-self
+            { self-extension-map
               ( inclusion-extension-type-global-subuniverse 𝒫 LX)}))
 
   is-equiv-map-essentially-unique-universal-property-localization-global-subuniverse :

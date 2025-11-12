@@ -104,7 +104,7 @@ module _
 
   is-extension-is-diagonal-lift-square :
     is-diagonal-lift-square →
-    is-extension f (map-domain-hom-arrow f g α) j
+    is-extension-of-map f (map-domain-hom-arrow f g α) j
   is-extension-is-diagonal-lift-square = pr1
 
   is-lift-is-diagonal-lift-square :
@@ -143,13 +143,13 @@ module _
 
   is-extension-diagonal-map-lifting-structure-square :
     (l : lifting-structure-square) →
-    is-extension f
+    is-extension-of-map f
       ( map-domain-hom-arrow f g α)
       ( diagonal-map-lifting-structure-square l)
   is-extension-diagonal-map-lifting-structure-square = pr1 ∘ pr2
 
   extension-lifting-structure-square :
-    lifting-structure-square → extension f (map-domain-hom-arrow f g α)
+    lifting-structure-square → extension-map f (map-domain-hom-arrow f g α)
   pr1 (extension-lifting-structure-square L) =
     diagonal-map-lifting-structure-square L
   pr2 (extension-lifting-structure-square L) =
