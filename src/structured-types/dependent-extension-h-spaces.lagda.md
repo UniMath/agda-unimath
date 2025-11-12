@@ -16,7 +16,7 @@ open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.equality-extensions-maps
+open import orthogonal-factorization-systems.equality-extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-dependent-maps
 
 open import structured-types.h-spaces
@@ -53,7 +53,7 @@ module _
 
   type-extension-Π-H-Space : UU (l1 ⊔ l2 ⊔ l3)
   type-extension-Π-H-Space =
-    extension-dependent-type' h (type-H-Space ∘ M) (unit-H-Space ∘ M ∘ h)
+    extension-dependent-map' h (type-H-Space ∘ M) (unit-H-Space ∘ M ∘ h)
 
   unit-extension-Π-H-Space : type-extension-Π-H-Space
   unit-extension-Π-H-Space = (unit-H-Space ∘ M , refl-htpy)
@@ -74,7 +74,7 @@ module _
 
   htpy-left-unit-law-mul-extension-Π-H-Space :
     (f : type-extension-Π-H-Space) →
-    htpy-extension'
+    htpy-extension-dependent-map'
       ( h)
       ( unit-H-Space ∘ M ∘ h)
       ( mul-extension-Π-H-Space unit-extension-Π-H-Space f)
@@ -88,7 +88,7 @@ module _
     (f : type-extension-Π-H-Space) →
     mul-extension-Π-H-Space unit-extension-Π-H-Space f ＝ f
   left-unit-law-mul-extension-Π-H-Space f =
-    eq-htpy-extension'
+    eq-htpy-extension-dependent-map'
       ( h)
       ( unit-H-Space ∘ M ∘ h)
       ( mul-extension-Π-H-Space unit-extension-Π-H-Space f)
@@ -97,7 +97,7 @@ module _
 
   htpy-right-unit-law-mul-extension-Π-H-Space' :
     (f : type-extension-Π-H-Space) →
-    htpy-extension'
+    htpy-extension-dependent-map'
       ( h)
       ( unit-H-Space ∘ M ∘ h)
       ( mul-extension-Π-H-Space f unit-extension-Π-H-Space)
@@ -121,7 +121,7 @@ module _
     (f : type-extension-Π-H-Space) →
     mul-extension-Π-H-Space f unit-extension-Π-H-Space ＝ f
   right-unit-law-mul-extension-Π-H-Space' f =
-    eq-htpy-extension'
+    eq-htpy-extension-dependent-map'
       ( h)
       ( unit-H-Space ∘ M ∘ h)
       ( mul-extension-Π-H-Space f unit-extension-Π-H-Space)
