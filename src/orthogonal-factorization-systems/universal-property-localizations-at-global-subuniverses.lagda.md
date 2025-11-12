@@ -28,6 +28,7 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.types-local-at-maps
 ```
