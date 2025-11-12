@@ -672,7 +672,7 @@ module _
           ( P)))
 ```
 
-### Cauchy approximations similar to pointwise quotient of Cauchy approximations in the Cauchy pseudocompletion are convergent
+### A Cauchy approximation in the Cauchy precompletion of a pseudometric space is convergent if and only if it has a lift its Cauchy pseudocompletion
 
 ```agda
 module _
@@ -719,7 +719,7 @@ module _
               ( v))
             ( lim-u)
         is-lim[v]-lim-u =
-          preserves-limit-map-metric-quotient-cauchy-approximation-Pseudometric-Space
+          preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space
             ( cauchy-pseudocompletion-Pseudometric-Space P)
             ( v)
             ( lim-v)
@@ -798,4 +798,30 @@ module _
         ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( u))
       ( is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space)
+```
+
+### The Cauchy precompletion of a pseudometric space is complete if and only if all its Cauchy approximations have a lift in its Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space :
+    is-complete-Metric-Space (cauchy-precompletion-Pseudometric-Space P) ↔
+    ( (u : cauchy-approximation-Metric-Space
+         ( cauchy-precompletion-Pseudometric-Space P)) →
+       has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+         ( cauchy-pseudocompletion-Pseudometric-Space P)
+         ( u))
+  pr1 iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space H u =
+    has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+      ( H u)
+  pr2 iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space K u =
+    is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( u)
+      ( K u)
 ```
