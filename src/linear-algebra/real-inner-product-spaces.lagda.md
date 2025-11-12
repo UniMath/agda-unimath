@@ -634,6 +634,7 @@ module _
           abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
           ≤ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (u ∙V v))
             by leq-eq-ℝ (eq-abs-sqrt-square-ℝ _)
+          ≤
           ≤ {!   !} by {!   !}
 ```
 
