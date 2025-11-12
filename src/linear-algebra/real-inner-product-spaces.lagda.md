@@ -15,25 +15,23 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import order-theory.large-posets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
-open import foundation.transport-along-identifications
 open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
-open import real-numbers.addition-nonnegative-real-numbers
+open import order-theory.large-posets
+
 open import real-numbers.absolute-value-real-numbers
-open import real-numbers.addition-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.difference-real-numbers
-open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
