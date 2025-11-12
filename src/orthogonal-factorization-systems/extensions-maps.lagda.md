@@ -32,8 +32,8 @@ restricts along `i` to `f`.
     |  \
   i |    \ f
     |      \
-    ∨   g   ∨
-    B -----> X
+    ∨    g   ∨
+    B ------> X
 ```
 
 ## Definition

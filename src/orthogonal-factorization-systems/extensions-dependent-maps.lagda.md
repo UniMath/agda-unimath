@@ -128,17 +128,17 @@ module _
 ### Vertical composition of extensions of dependent maps
 
 ```text
-  A
-  |  \
-  i    f
-  |      \
-  ∨       ∨
-  B - g -> P
-  |       ∧
-  j      /
-  |    h
-  ∨  /
-  C
+    A
+    |  \
+  i |    \ f
+    |      \
+    ∨   g    ∨
+    B ------> P
+    |        ∧
+  j |      /
+    |    / h
+    ∨  /
+    C
 ```
 
 ```agda
@@ -158,12 +158,12 @@ module _
 ### Horizontal composition of extensions of dependent maps
 
 ```text
-           A
-        /  |  \
-      f    g    h
-    /      |      \
-   ∨       ∨       ∨
-  B - i -> C - j -> P
+            A
+         /  |  \
+     f /  g |    \ h
+     /      |      \
+   ∨   i    ∨    j   ∨
+  B ------> C ------> P
 ```
 
 ```agda
@@ -184,12 +184,12 @@ module _
 ### Left whiskering of extensions of dependent maps
 
 ```text
-  A
-  |  \
-  i    f
-  |      \
-  ∨       ∨
-  B - g -> C - h -> P
+    A
+    |  \
+  i |    \ f
+    |      \
+    ∨    g   ∨     h
+    B ------> C ------> P
 ```
 
 ```agda
@@ -207,12 +207,13 @@ module _
 ### Right whiskering of extensions of dependent maps
 
 ```text
-  X - h -> A
-           |  \
-           i    f
-           |      \
-           ∨       ∨
-           B - g -> P
+       h
+  X ------> A
+            |  \
+          i |    \ f
+            |      \
+            ∨    g   ∨
+            B ------> P
 ```
 
 ```agda
