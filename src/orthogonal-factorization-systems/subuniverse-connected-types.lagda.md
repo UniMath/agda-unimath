@@ -46,6 +46,15 @@ For every `U` in `K`, the [diagonal map](foundation.diagonal-maps-of-types.md)
 
 is an [equivalence](foundation-core.equivalences.md).
 
+Equivalently, a type is `K`-connected if
+
+1. Its [terminal projection map](foundation.unit-type.md) is a
+   `K`-[equivalence](orthogonal-factorization-systems.subuniverse-equivalences.md).
+2. For every `U` in `K` and `u : A → U` there
+   [uniquely exists](foundation.uniqueness-quantification.md) an element `v : U`
+   and a [homotopy](foundation-core.homotopies.md) `const v ~ u`. I.e., every
+   function out of `A` into a `K`-type is uniquely constant.
+
 ## Definitions
 
 ### The predicate on types of being `K`-connected
@@ -128,6 +137,26 @@ module _
 
 ## Properties
 
+### A type is `K`-connected if and only if the terminal map is a `K`-equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
+  where
+
+  is-subuniverse-connected-is-subuniverse-equiv-terminal-map :
+    is-subuniverse-equiv K (terminal-map A) →
+    is-subuniverse-connected K A
+  is-subuniverse-connected-is-subuniverse-equiv-terminal-map H U =
+    is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map (H U)
+
+  is-subuniverse-equiv-terminal-map-is-subuniverse-connected :
+    is-subuniverse-connected K A →
+    is-subuniverse-equiv K (terminal-map A)
+  is-subuniverse-equiv-terminal-map-is-subuniverse-connected H U =
+    is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential (H U)
+```
+
 ### A type is `K`-connected if and only if it satisfies the constancy condition
 
 ```agda
@@ -154,26 +183,6 @@ module _
       ( fiber (diagonal-exponential (pr1 U) A) u)
       ( compute-fiber-diagonal-exponential u)
       ( is-contr-map-is-equiv (H U) u)
-```
-
-### A type is `K`-connected if and only if the terminal map is a `K`-equivalence
-
-```agda
-module _
-  {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
-  where
-
-  is-subuniverse-connected-is-subuniverse-equiv-terminal-map :
-    is-subuniverse-equiv K (terminal-map A) →
-    is-subuniverse-connected K A
-  is-subuniverse-connected-is-subuniverse-equiv-terminal-map H U =
-    is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map (H U)
-
-  is-subuniverse-equiv-terminal-map-is-subuniverse-connected :
-    is-subuniverse-connected K A →
-    is-subuniverse-equiv K (terminal-map A)
-  is-subuniverse-equiv-terminal-map-is-subuniverse-connected H U =
-    is-equiv-precomp-terminal-map-is-equiv-diagonal-exponential (H U)
 ```
 
 ### All types are `Contr`-connected
@@ -253,8 +262,7 @@ module _
     is-subuniverse-connected K B → is-subuniverse-connected K A
   is-subuniverse-connected-is-subuniverse-equiv f F H =
     is-subuniverse-connected-is-subuniverse-equiv-terminal-map K
-      ( is-subuniverse-equiv-comp K (terminal-map B) f
-        ( F)
+      ( is-subuniverse-equiv-comp K (terminal-map B) f F
         ( is-subuniverse-equiv-terminal-map-is-subuniverse-connected K H))
 
   is-subuniverse-connected-is-subuniverse-equiv' :

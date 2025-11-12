@@ -46,6 +46,23 @@ For every `K`-type `U`, the
 
 is an [equivalence](foundation-core.equivalences.md).
 
+Equivalently, a map `f : A → B` is a `K`-equivalence if
+
+1. For every `U` in `K` and every `u : A → U` has a
+   [unique](foundation-core.contractible-types.md)
+   [extension](orthogonal-factorization-systems.extensions-maps.md) along `f`.
+   I.e., the type of maps `u' : B → U` such that the following triangle
+   [commutes](foundation.commuting-triangles-maps.md)
+   ```text
+        A
+        |  \
+      f |    \ u
+        |      \
+        ∨   u'   ∨
+        B ------> U
+   ```
+   is contractible.
+
 ## Definition
 
 ### The predicate on maps of being `K`-equivalences
@@ -91,7 +108,7 @@ module _
   is-subuniverse-equiv-subuniverse-equiv = pr2 f
 ```
 
-### The extension condition for subuniverse equivalences
+### The extension condition for `K`-equivalences
 
 ```agda
 module _
@@ -352,6 +369,6 @@ module _
 
 - The notion of `K`-equivalence is a generalization of the notion of
   `L`-equivalence, where `L` is a reflective subuniverse. These were studied in
-  {{#cite CORS20}} and {{#cite CR21}}.
+  {{#cite CORS20}}.
 
 {{#bibliography}}

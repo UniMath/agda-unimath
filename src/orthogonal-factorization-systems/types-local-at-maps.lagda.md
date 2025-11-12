@@ -313,41 +313,42 @@ module _
 
 ### If the domain and codomain of `f` is `f`-local, then `f` is an equivalence
 
+More generally, this is true as soon as the precomposition map of `f` has a
+section at `X` and is an embedding at `Y`.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  section-is-local-domains'' :
+  section-is-epi-at-codomain-section-precomp-domain :
     section (precomp f X) → is-emb (precomp f Y) → section f
-  pr1 (section-is-local-domains'' section-precomp-X _) =
-    pr1 section-precomp-X id
-  pr2 (section-is-local-domains'' section-precomp-X is-emb-precomp-Y) =
+  pr1 (section-is-epi-at-codomain-section-precomp-domain sX _) =
+    pr1 sX id
+  pr2 (section-is-epi-at-codomain-section-precomp-domain sX eY) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 section-precomp-X id) ,
-          ( ap (postcomp X f) (pr2 section-precomp-X id))}
+        { f ∘ pr1 sX id , ap (postcomp X f) (pr2 sX id)}
         { id , refl}
-        ( eq-is-prop (is-prop-map-is-emb is-emb-precomp-Y f)))
+        ( eq-is-prop (is-prop-map-is-emb eY f)))
 
-  section-is-local-domains' :
+  section-is-local-at-codomain-section-precomp-domain :
     section (precomp f X) → is-local f Y → section f
-  section-is-local-domains' section-precomp-X is-local-Y =
-    section-is-local-domains'' section-precomp-X (is-emb-is-equiv is-local-Y)
+  section-is-local-at-codomain-section-precomp-domain sX lY =
+    section-is-epi-at-codomain-section-precomp-domain sX (is-emb-is-equiv lY)
 
-  is-equiv-is-local-domains' :
+  is-equiv-is-epi-at-codomain-section-precomp-domain :
     section (precomp f X) → is-emb (precomp f Y) → is-equiv f
-  pr1 (is-equiv-is-local-domains' section-precomp-X is-emb-precomp-Y) =
-    section-is-local-domains'' section-precomp-X is-emb-precomp-Y
-  pr2 (is-equiv-is-local-domains' section-precomp-X is-emb-precomp-Y) =
-    retraction-map-section-precomp f section-precomp-X
+  is-equiv-is-epi-at-codomain-section-precomp-domain sX eY =
+    ( section-is-epi-at-codomain-section-precomp-domain sX eY ,
+      retraction-map-section-precomp f sX)
 
   is-equiv-is-local-domains : is-local f X → is-local f Y → is-equiv f
-  is-equiv-is-local-domains is-local-X is-local-Y =
-    is-equiv-is-local-domains'
-      ( section-is-equiv is-local-X)
-      ( is-emb-is-equiv is-local-Y)
+  is-equiv-is-local-domains lX lY =
+    is-equiv-is-epi-at-codomain-section-precomp-domain
+      ( section-is-equiv lX)
+      ( is-emb-is-equiv lY)
 ```
 
 ### If `f` has a retraction and the codomain of `f` is `f`-local, then `f` is an equivalence
@@ -360,7 +361,7 @@ module _
   is-equiv-retraction-is-local-codomain :
     retraction f → is-local f Y → is-equiv f
   is-equiv-retraction-is-local-codomain r is-local-Y =
-    section-is-local-domains' f
+    section-is-local-at-codomain-section-precomp-domain f
       ( section-precomp-retraction-map f r)
       ( is-local-Y) ,
     r

@@ -103,7 +103,7 @@ as a map whose [fibers](foundation-core.fibers-of-maps.md) have
     every function `u : fiber f y → U` there
     [uniquely exists](foundation.uniqueness-quantification.md) an element
     `v : U` such that `const v ~ u`.
-7.  The fibers of `f` have `K`-localizations, and there
+7.  The fibers of `f` have `K`-localizations, and for every `y` there
     [merely exists](foundation.existential-quantification.md) a
     `u : K(fiber f y)` such that for all `a` and `p : f a ＝ y` we have a
     [dependent identification](foundation-core.dependent-identifications.md)
@@ -334,20 +334,22 @@ module _
     precomp (η b) (Kfib b) g ~ precomp (η b) (Kfib b) h → g ~ h)
   where
 
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' :
-    ( dependent-product-fiber-precomp-Π' f Kfib (λ a → η (f a) (a , refl))) →
-    ((b : B) → is-contr (Kfib b))
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' Fη b =
-      ( pr1 (Fη b) ,
-        is-htpy-injective-precomp-η-Kfib b
-          ( λ where (a , refl) → pr2 (Fη b) (a , refl)))
+  abstract
+    is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' :
+      ( dependent-product-fiber-precomp-Π' f Kfib (λ a → η (f a) (a , refl))) →
+      ((b : B) → is-contr (Kfib b))
+    is-contr-subuniverse-localization-fiber-has-section-precomp-Π'' Fη b =
+        ( pr1 (Fη b) ,
+          is-htpy-injective-precomp-η-Kfib b
+            ( λ where (a , refl) → pr2 (Fη b) (a , refl)))
 
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π' :
-    fiber (precomp-Π f Kfib) (λ a → η (f a) (a , refl)) →
-    ((b : B) → is-contr (Kfib b))
-  is-contr-subuniverse-localization-fiber-has-section-precomp-Π' (s , H) b =
-    ( s b ,
-      is-htpy-injective-precomp-η-Kfib b (λ where (a , refl) → htpy-eq H a))
+  abstract
+    is-contr-subuniverse-localization-fiber-has-section-precomp-Π' :
+      fiber (precomp-Π f Kfib) (λ a → η (f a) (a , refl)) →
+      ((b : B) → is-contr (Kfib b))
+    is-contr-subuniverse-localization-fiber-has-section-precomp-Π' (s , H) b =
+      ( s b ,
+        is-htpy-injective-precomp-η-Kfib b (λ where (a , refl) → htpy-eq H a))
 
 module _
   {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
@@ -394,20 +396,19 @@ module _
 
 #### Surjection condition
 
-A map is `K`-connected if and only if its dependent precomposition maps are
-surjective and the fibers have `K`-localizations.
+A map is `K`-connected if its dependent precomposition maps are surjective and
+the fibers have `K`-localizations.
 
-In fact, it suffices that the fibers have `K`-localizations and the family
+In fact, it suffices that the fibers have `K`-localizations and that for every
+`y` there merely exists a `u : K(fiber f y)` such that for all `a` and
+`p : f a ＝ y` we have a dependent identification over `p`
 
 ```text
-  b ↦
-    Σ ( u : K(fiber f b)),
-      ( ((a , p) : fiber f b) →
-        dependent-identification (b ↦ K(fiber f b)) p u (η (f a) (a , refl)))
+  u ＝ₚ^[y ↦ K(fiber f y)] (η (f a) (a , refl)).
 ```
 
-is inhabited, which is in turn a slightly weaker condition than inhabitedness of
-the fiber of `precomp-Π f` over the map `a ↦ η (f a) (a , refl)`.
+This is in turn a slightly weaker condition than inhabitedness of the fiber of
+`precomp-Π f` over the map `a ↦ η (f a) (a , refl)`.
 
 ```agda
 module _
@@ -563,29 +564,31 @@ module _
     (f : subuniverse-connected-map K A B) → htpy-subuniverse-connected-map f f
   refl-htpy-subuniverse-connected-map f = refl-htpy
 
-  is-torsorial-htpy-subuniverse-connected-map :
-    (f : subuniverse-connected-map K A B) →
-    is-torsorial (htpy-subuniverse-connected-map f)
-  is-torsorial-htpy-subuniverse-connected-map f =
-    is-torsorial-Eq-subtype
-      ( is-torsorial-htpy (map-subuniverse-connected-map K f))
-      ( is-prop-is-subuniverse-connected-map K)
-      ( map-subuniverse-connected-map K f)
-      ( refl-htpy-subuniverse-connected-map f)
-      ( is-subuniverse-connected-map-subuniverse-connected-map K f)
+  abstract
+    is-torsorial-htpy-subuniverse-connected-map :
+      (f : subuniverse-connected-map K A B) →
+      is-torsorial (htpy-subuniverse-connected-map f)
+    is-torsorial-htpy-subuniverse-connected-map f =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-htpy (map-subuniverse-connected-map K f))
+        ( is-prop-is-subuniverse-connected-map K)
+        ( map-subuniverse-connected-map K f)
+        ( refl-htpy-subuniverse-connected-map f)
+        ( is-subuniverse-connected-map-subuniverse-connected-map K f)
 
   htpy-eq-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
     f ＝ g → htpy-subuniverse-connected-map f g
   htpy-eq-subuniverse-connected-map f g H = htpy-eq (ap pr1 H)
 
-  is-equiv-htpy-eq-subuniverse-connected-map :
-    (f g : subuniverse-connected-map K A B) →
-    is-equiv (htpy-eq-subuniverse-connected-map f g)
-  is-equiv-htpy-eq-subuniverse-connected-map f =
-    fundamental-theorem-id
-      ( is-torsorial-htpy-subuniverse-connected-map f)
-      ( htpy-eq-subuniverse-connected-map f)
+  abstract
+    is-equiv-htpy-eq-subuniverse-connected-map :
+      (f g : subuniverse-connected-map K A B) →
+      is-equiv (htpy-eq-subuniverse-connected-map f g)
+    is-equiv-htpy-eq-subuniverse-connected-map f =
+      fundamental-theorem-id
+        ( is-torsorial-htpy-subuniverse-connected-map f)
+        ( htpy-eq-subuniverse-connected-map f)
 
   extensionality-subuniverse-connected-map :
     (f g : subuniverse-connected-map K A B) →
@@ -762,7 +765,7 @@ and since equivalences are closed under retracts of maps, if `f` is
 
 > This remains to be formalized.
 
-The formalization below takes a shortcut via the fibers.
+The formalization below takes a shortcut via the fiber condition.
 
 ```agda
 module _
@@ -776,10 +779,10 @@ module _
     is-subuniverse-connected-map K f
   is-subuniverse-connected-map-retract-map' H =
     is-subuniverse-connected-map-is-subuniverse-connected-fibers K f
-    ( λ b →
-      is-subuniverse-connected-retract K
-        ( retract-fiber-retract-map f g R b)
-        ( H (map-codomain-inclusion-retract-map f g R b)))
+      ( λ b →
+        is-subuniverse-connected-retract K
+          ( retract-fiber-retract-map f g R b)
+          ( H (map-codomain-inclusion-retract-map f g R b)))
 ```
 
 ### The total map induced by a family of maps is `K`-connected if and only if all maps in the family are `K`-connected
