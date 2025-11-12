@@ -12,14 +12,10 @@ module real-numbers.lipschitz-continuity-multiplication-real-numbers where
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
@@ -28,13 +24,12 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets
 
-open import real-numbers.absolute-value-closed-intervals-real-numbers
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
-open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
-open import real-numbers.enclosing-closed-rational-intervals-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -43,6 +38,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -90,7 +86,7 @@ module _
               ( chain-of-inequalities
                 dist-ℝ (c *ℝ x) (c *ℝ y)
                 ≤ abs-ℝ c *ℝ dist-ℝ x y
-                  by leq-eq-ℝ _ _ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
+                  by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
                 ≤ real-ℚ⁺ q *ℝ real-ℚ⁺ ε
                   by
                     preserves-leq-mul-ℝ⁰⁺
@@ -98,14 +94,10 @@ module _
                       ( nonnegative-real-ℚ⁺ q)
                       ( nonnegative-dist-ℝ x y)
                       ( nonnegative-real-ℚ⁺ ε)
-                      ( leq-le-ℝ _ _
-                        ( le-real-is-in-upper-cut-ℚ
-                          ( rational-ℚ⁺ q)
-                          ( abs-ℝ c)
-                          ( |c|<q)))
+                      ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ (abs-ℝ c) |c|<q))
                       ( leq-dist-neighborhood-ℝ ε x y Nεxy)
                 ≤ real-ℚ⁺ (q *ℚ⁺ ε)
-                  by leq-eq-ℝ _ _ (mul-real-ℚ _ _)))
+                  by leq-eq-ℝ (mul-real-ℚ _ _)))
 
     is-lipschitz-left-mul-ℝ :
       is-lipschitz-function-Metric-Space
@@ -157,16 +149,12 @@ module _
         ( is-lipschitz-left-mul-ℝ l2 c)
 
   uniformly-continuous-right-mul-ℝ :
-    uniformly-continuous-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
+    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-right-mul-ℝ =
     ( mul-ℝ c , is-uniformly-continuous-right-mul-ℝ)
 
   uniformly-continuous-left-mul-ℝ :
-    uniformly-continuous-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
+    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-left-mul-ℝ =
     ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
 ```
@@ -228,14 +216,14 @@ module _
                   by triangle-inequality-dist-ℝ _ _ _
                 ≤ dist-ℝ x₁ x₂ *ℝ abs-ℝ y₁ +ℝ abs-ℝ x₂ *ℝ dist-ℝ y₁ y₂
                   by
-                    leq-eq-ℝ _ _
+                    leq-eq-ℝ
                       ( inv
                         ( ap-add-ℝ
                           ( right-distributive-abs-mul-dist-ℝ x₁ x₂ y₁)
                           ( left-distributive-abs-mul-dist-ℝ x₂ y₁ y₂)))
                 ≤ real-ℚ⁺ ε *ℝ my +ℝ mx *ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-add-ℝ _ _ _ _
+                    preserves-leq-add-ℝ
                       ( preserves-leq-mul-ℝ⁰⁺
                         ( nonnegative-dist-ℝ x₁ x₂)
                         ( nonnegative-real-ℚ⁺ ε)
@@ -251,23 +239,18 @@ module _
                         ( is-max-mx (x₂ , x₂∈X))
                         ( leq-dist-neighborhood-ℝ ε y₁ y₂ Nεy₁y₂))
                 ≤ my *ℝ real-ℚ⁺ ε +ℝ mx *ℝ real-ℚ⁺ ε
-                  by
-                    leq-eq-ℝ _ _
-                      ( ap-add-ℝ (commutative-mul-ℝ _ _) refl)
+                  by leq-eq-ℝ (ap-add-ℝ (commutative-mul-ℝ _ _) refl)
                 ≤ (my +ℝ mx) *ℝ real-ℚ⁺ ε
                   by
-                    leq-eq-ℝ _ _
+                    leq-eq-ℝ
                       ( inv (right-distributive-mul-add-ℝ my mx (real-ℚ⁺ ε)))
                 ≤ real-ℚ q *ℝ real-ℚ⁺ ε
                   by
                     preserves-leq-right-mul-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε)
-                      ( my +ℝ mx)
-                      ( real-ℚ q)
-                      ( leq-le-ℝ _ _
-                        ( le-real-is-in-upper-cut-ℚ q (my +ℝ mx) my+mx<q))
+                      ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ (my +ℝ mx) my+mx<q))
                 ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
-                  by leq-eq-ℝ _ _ (mul-real-ℚ q (rational-ℚ⁺ ε))))
+                  by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))
 
   lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
     lipschitz-function-Metric-Space
