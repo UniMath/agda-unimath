@@ -22,7 +22,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.injective-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
@@ -853,19 +852,11 @@ module _
     j : B → X
     j b = pr1 (J b)
 
-    M : g ∘ j ~ h
+    M : (g ∘ j) ~ h
     M b = pr2 (J b)
 
-    N : i ~ j ∘ f
-    N a = is-injective-is-emb K (L a ∙ inv (M (f a)))
-
-  is-surjective-postcomp-extension-surjective-map :
-    (f : A → B) (i : A → X) (g : X → Y) →
-    is-surjective f → is-emb g →
-    is-surjective (postcomp-extension f i g)
-  is-surjective-postcomp-extension-surjective-map f i g H K =
-    is-surjective-is-split-surjective
-      ( is-split-surjective-postcomp-extension-surjective-map f i g H K)
+    N : i ~ (j ∘ f)
+    N a = map-inv-is-equiv (K (i a) (j (f a))) (L a ∙ inv (M (f a)))
 
   is-equiv-postcomp-extension-map-is-surjective :
     (f : A → B) (i : A → X) (g : X → Y) →
