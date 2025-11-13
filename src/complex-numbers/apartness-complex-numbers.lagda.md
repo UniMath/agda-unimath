@@ -30,7 +30,7 @@ Two [complex numbers](complex-numbers.complex-numbers.md) are
 {{#concept "apart" Agda=apart-ℂ}} if their
 [real](real-numbers.dedekind-real-numbers.md) parts are
 [apart](real-numbers.apartness-real-numbers.md) [or](foundation.disjunction.md)
-their complex parts are [apart].
+their imaginary parts are [apart].
 
 ## Definition
 
