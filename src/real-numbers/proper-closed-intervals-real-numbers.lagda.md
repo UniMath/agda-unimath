@@ -359,146 +359,18 @@ abstract
       ( subtype-proper-closed-interval-ℝ l [a,b])
       ( x)
   is-accumulation-point-is-in-proper-closed-interval-ℝ
-    {l} [a,b]@(a , b , a<b) x (a≤x , x≤b) =
-    let
-      open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      motive =
-        is-accumulation-point-prop-subset-ℝ
-          ( subtype-proper-closed-interval-ℝ _ [a,b])
-          ( x)
-      short-clamp-diff =
-        comp-short-function-Metric-Space
-          ( metric-space-ℚ)
-          ( metric-space-ℝ lzero)
-          ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( comp-short-function-Metric-Space
-            ( metric-space-ℝ lzero)
-            ( metric-space-ℝ l)
-            ( metric-space-proper-closed-interval-ℝ l [a,b])
-            ( short-clamp-proper-closed-interval-ℝ [a,b])
-            ( short-diff-ℝ x))
-          ( short-isometry-Metric-Space
-            ( metric-space-ℚ)
-            ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
-      short-clamp-add =
-        comp-short-function-Metric-Space
-          ( metric-space-ℚ)
-          ( metric-space-ℝ lzero)
-          ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( comp-short-function-Metric-Space
-            ( metric-space-ℝ lzero)
-            ( metric-space-ℝ l)
-            ( metric-space-proper-closed-interval-ℝ l [a,b])
-            ( short-clamp-proper-closed-interval-ℝ [a,b])
-            ( short-left-add-ℝ x))
-          ( short-isometry-Metric-Space
-            ( metric-space-ℚ)
-            ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
-      short-inclusion =
-        short-inclusion-subspace-Metric-Space
-          ( metric-space-ℝ l)
-          ( subtype-proper-closed-interval-ℝ l [a,b])
-      approx-clamp-diff =
-        map-short-function-cauchy-approximation-Metric-Space
-          ( metric-space-ℚ)
-          ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( short-clamp-diff)
-          ( cauchy-approximation-rational-ℚ⁺)
-      approx-clamp-add =
-        map-short-function-cauchy-approximation-Metric-Space
-          ( metric-space-ℚ)
-          ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( short-clamp-add)
-          ( cauchy-approximation-rational-ℚ⁺)
-    in
-      elim-disjunction
-        ( motive)
-        ( λ a<x →
-          intro-exists
-            ( approx-clamp-diff)
-            ( ( λ ε →
-                apart-located-metric-space-apart-ℝ _ _
-                  ( apart-le-ℝ
-                    ( le-max-le-le-ℝ
-                      ( a<x)
-                      ( concatenate-leq-le-ℝ
-                        ( min-ℝ b (x -ℝ real-ℚ⁺ ε))
-                        ( x -ℝ real-ℚ⁺ ε)
-                        ( x)
-                        ( leq-right-min-ℝ _ _)
-                        ( le-diff-real-ℝ⁺ x (positive-real-ℚ⁺ ε)))))) ,
-              tr
-                ( is-limit-cauchy-approximation-Metric-Space
-                  ( metric-space-ℝ l)
-                  ( map-short-function-cauchy-approximation-Metric-Space
-                    ( metric-space-proper-closed-interval-ℝ l [a,b])
-                    ( metric-space-ℝ l)
-                    ( short-inclusion)
-                    ( approx-clamp-diff)))
-                ( equational-reasoning
-                  max-ℝ a (min-ℝ b (x -ℝ zero-ℝ))
-                  ＝ max-ℝ a (min-ℝ b x)
-                    by ap-max-ℝ refl (ap-min-ℝ refl (right-unit-law-diff-ℝ x))
-                  ＝ max-ℝ a x
-                    by
-                      ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
-                  ＝ x
-                    by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-                ( preserves-limit-cauchy-approximation-map-short-function-Metric-Space
-                  ( metric-space-ℚ)
-                  ( metric-space-ℝ l)
-                  ( comp-short-function-Metric-Space
-                    ( metric-space-ℚ)
-                    ( metric-space-proper-closed-interval-ℝ l [a,b])
-                    ( metric-space-ℝ l)
-                    ( short-inclusion)
-                    ( short-clamp-diff))
-                  ( cauchy-approximation-rational-ℚ⁺)
-                  ( zero-ℚ)
-                  ( is-zero-limit-rational-ℚ⁺))))
-        ( λ x<b →
-          intro-exists
-            ( approx-clamp-add)
-            ( ( λ ε →
-                apart-located-metric-space-apart-ℝ _ _
-                  ( apart-le-ℝ'
-                    ( concatenate-le-leq-ℝ
-                      ( x)
-                      ( min-ℝ b (x +ℝ real-ℚ⁺ ε))
-                      ( max-ℝ a (min-ℝ b (x +ℝ real-ℚ⁺ ε)))
-                      ( le-min-le-le-ℝ
-                        ( x<b)
-                        ( le-left-add-real-ℝ⁺ x (positive-real-ℚ⁺ ε)))
-                      ( leq-right-max-ℝ _ _)))) ,
-              tr
-                ( is-limit-cauchy-approximation-Metric-Space
-                  ( metric-space-ℝ l)
-                  ( map-short-function-cauchy-approximation-Metric-Space
-                    ( metric-space-proper-closed-interval-ℝ l [a,b])
-                    ( metric-space-ℝ l)
-                    ( short-inclusion)
-                    ( approx-clamp-add)))
-                ( equational-reasoning
-                  max-ℝ a (min-ℝ b (x +ℝ zero-ℝ))
-                  ＝ max-ℝ a (min-ℝ b x)
-                    by ap-max-ℝ refl (ap-min-ℝ refl (right-unit-law-add-ℝ x))
-                  ＝ max-ℝ a x
-                    by ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
-                  ＝ x
-                    by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-                ( preserves-limit-cauchy-approximation-map-short-function-Metric-Space
-                  ( metric-space-ℚ)
-                  ( metric-space-ℝ l)
-                  ( comp-short-function-Metric-Space
-                    ( metric-space-ℚ)
-                    ( metric-space-proper-closed-interval-ℝ l [a,b])
-                    ( metric-space-ℝ l)
-                    ( short-inclusion)
-                    ( short-clamp-add))
-                  ( cauchy-approximation-rational-ℚ⁺)
-                  ( zero-ℚ)
-                  ( is-zero-limit-rational-ℚ⁺))))
-        ( cotransitive-le-ℝ a b x a<b)
+    {l} [a,b]@(a , b , a<b) x a≤x≤b =
+    elim-disjunction
+      ( is-accumulation-point-prop-subset-ℝ
+        ( subtype-proper-closed-interval-ℝ _ [a,b])
+        ( x))
+      ( is-accumulation-point-le-lower-bound-proper-closed-interval-ℝ
+        ( [a,b])
+        ( x)
+        ( a≤x≤b))
+      ( is-accumulation-point-le-upper-bound-proper-closed-interval-ℝ
+        ( [a,b])
+        ( x)
+        ( a≤x≤b))
+      ( cotransitive-le-ℝ a b x a<b)
 ```
