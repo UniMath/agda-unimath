@@ -39,6 +39,7 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.functions-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
@@ -825,3 +826,12 @@ module _
       ( u)
       ( K u)
 ```
+
+-- TODO
+
+-- ### Any isometry from a pseudometric space into a complete metric space
+extends to its Cauchy precompletion
+
+-- ### If ACC holds then cauchy precompletions are complete
+
+-- ### Cauchy completeness of the Cauchy precompletion is irrefutable
