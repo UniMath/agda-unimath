@@ -34,6 +34,7 @@ open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
@@ -827,10 +828,69 @@ module _
       ( K u)
 ```
 
+### Induced short map from the Cauchy precompletion to a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space C) →
+    short-function-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+        ( metric-space-Complete-Metric-Space C)
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+    f =
+    short-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+      ( comp-short-function-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space C))
+        ( pseudometric-space-Complete-Metric-Space C)
+        ( short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( metric-space-Complete-Metric-Space C)
+          ( is-complete-metric-space-Complete-Metric-Space C))
+        ( short-map-short-function-cauchy-approximation-Pseudometric-Space
+          ( P)
+          ( pseudometric-space-Complete-Metric-Space C)
+          ( f)))
+```
+
 -- TODO
 
--- ### Any isometry from a pseudometric space into a complete metric space
-extends to its Cauchy precompletion
+-- ### Induced isometry from the Cauchy precompletion into a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  -- isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
+  --   isometry-Pseudometric-Space
+  --     ( P)
+  --     ( pseudometric-space-Complete-Metric-Space C) →
+  --   isometry-Metric-Space
+  --     ( cauchy-precompletion-Pseudometric-Space P)
+  --     ( metric-space-Complete-Metric-Space C)
+  -- isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space f =
+  --   isometry-map-isometry-metric-quotient-Pseudometric-Space
+  --     ( cauchy-pseudocompletion-Pseudometric-Space P)
+  --     ( metric-space-Complete-Metric-Space C)
+  --     ( comp-isometry-Pseudometric-Space
+  --       ( cauchy-pseudocompletion-Pseudometric-Space P)
+  --       ( cauchy-pseudocompletion-Metric-Space
+  --         ( metric-space-Complete-Metric-Space C))
+  --       ( pseudometric-space-Complete-Metric-Space C)
+  --       ( {!!})
+  --       ( {!!}))
+```
 
 -- ### If ACC holds then cauchy precompletions are complete
 
