@@ -124,7 +124,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-additive-order-element-Ring R y l)
       ( λ (k , q) →
-        ( inv (left-zero-law-integer-multiple-Ring R k)) ∙
+        ( inv (right-zero-law-integer-multiple-Ring R k)) ∙
         ( ap (integer-multiple-Ring R k) p) ∙
         ( swap-integer-multiple-Ring R k l x ∙
         ( ap (integer-multiple-Ring R l) q)))

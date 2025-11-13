@@ -122,7 +122,7 @@ module _
   integer-right-zero-law-multiple-Commutative-Ring :
     integer-multiple-Commutative-Ring A zero-ℤ a ＝ zero-Commutative-Ring A
   integer-right-zero-law-multiple-Commutative-Ring =
-    integer-right-zero-law-multiple-Ring (ring-Commutative-Ring A) a
+    left-zero-law-integer-multiple-Ring (ring-Commutative-Ring A) a
 ```
 
 ### `1x ＝ x`
@@ -243,7 +243,7 @@ module _
     integer-multiple-Commutative-Ring A k (zero-Commutative-Ring A) ＝
     zero-Commutative-Ring A
   right-zero-law-integer-multiple-Commutative-Ring =
-    left-zero-law-integer-multiple-Ring (ring-Commutative-Ring A)
+    right-zero-law-integer-multiple-Ring (ring-Commutative-Ring A)
 ```
 
 ### Integer multiples distribute over the sum of `x` and `y`
