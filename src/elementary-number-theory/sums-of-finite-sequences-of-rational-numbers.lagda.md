@@ -31,7 +31,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite sequence of rational numbers" Agda=sum-fin-sequence-ℝ}}
+{{#concept "sum operation" Disambiguation="of a finite sequence of rational numbers" Agda=sum-fin-sequence-ℚ}}
 extends [addition](elementary-number-theory.addition-rational-numbers.md) on the
 [rational numbers](elementary-number-theory.rational-numbers.md) to any
 [finite sequence](lists.finite-sequences.md) of rational numbers.
