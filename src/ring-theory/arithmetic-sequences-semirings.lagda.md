@@ -140,7 +140,7 @@ module _
   where
 
   add-mul-nat-Semiring : ℕ → type-Semiring R
-  add-mul-nat-Semiring n =
+  add-multiple-Semiring n =
     add-Semiring R a (multiple-Semiring R n d)
 
   is-common-difference-add-mul-nat-Semiring :

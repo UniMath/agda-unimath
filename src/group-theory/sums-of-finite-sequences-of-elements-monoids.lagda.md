@@ -209,7 +209,7 @@ split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
   ( associative-mul-Monoid M _ _ _)
 ```
 
-### Constant sums are the power operation
+### Constant sums are powers
 
 ```agda
 abstract

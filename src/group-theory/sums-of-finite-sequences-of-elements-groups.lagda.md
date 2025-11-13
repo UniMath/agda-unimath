@@ -180,7 +180,7 @@ split-sum-fin-sequence-type-Group G =
   split-sum-fin-sequence-type-Monoid (monoid-Group G)
 ```
 
-### Constant sums are the power operation
+### Constant sums are powers
 
 ```agda
 abstract

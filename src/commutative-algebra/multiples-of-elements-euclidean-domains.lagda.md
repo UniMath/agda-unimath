@@ -78,7 +78,7 @@ module _
       ( integral-domain-Euclidean-Domain R)
 ```
 
-### `1 ∙ x = x`
+### `1 · x = x`
 
 ```agda
 module _
@@ -94,7 +94,7 @@ module _
       ( integral-domain-Euclidean-Domain R)
 ```
 
-### `(n ∙ x) * y = n ∙ (x * y)`
+### `(n · x) * y = n · (x * y)`
 
 ```agda
 module _
@@ -111,7 +111,7 @@ module _
       ( integral-domain-Euclidean-Domain R)
 ```
 
-### `x * (n ∙ y) = n ∙ (x * y)`
+### `x * (n · y) = n · (x * y)`
 
 ```agda
 module _
