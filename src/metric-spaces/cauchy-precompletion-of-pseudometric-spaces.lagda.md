@@ -809,11 +809,11 @@ module _
 
   iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space :
     is-complete-Metric-Space (cauchy-precompletion-Pseudometric-Space P) ↔
-    ( (u : cauchy-approximation-Metric-Space
-         ( cauchy-precompletion-Pseudometric-Space P)) →
-       has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
-         ( cauchy-pseudocompletion-Pseudometric-Space P)
-         ( u))
+    ( ( u : cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)) →
+      has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
   pr1 iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space H u =
     has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
