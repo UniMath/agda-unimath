@@ -156,13 +156,14 @@ module _
   where
 
   abstract
-    map-short-function-is-limit-cauchy-approximation-Metric-Space :
+    preserves-limit-cauchy-approximation-map-short-function-Metric-Space :
       is-limit-cauchy-approximation-Metric-Space A a lim →
       is-limit-cauchy-approximation-Metric-Space
         ( B)
         ( map-short-function-cauchy-approximation-Metric-Space A B f a)
         ( map-short-function-Metric-Space A B f lim)
-    map-short-function-is-limit-cauchy-approximation-Metric-Space is-lim-a ε δ =
+    preserves-limit-cauchy-approximation-map-short-function-Metric-Space
+      is-lim-a ε δ =
       is-short-map-short-function-Metric-Space A B
         ( f)
         ( ε +ℚ⁺ δ)

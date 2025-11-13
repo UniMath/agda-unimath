@@ -52,8 +52,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-A **Euclidean domain** is an
-[integral domain](commutative-algebra.integral-domains.md) `R` that has a
+A
+{{#concept "Euclidean domain" Agda=Euclidean-Domain WDID=Q867345 WD="Euclidean domain"}}
+is an [integral domain](commutative-algebra.integral-domains.md) `R` that has a
 **Euclidean valuation**, i.e., a function `v : R → ℕ` such that for every
 `x y : R`, if `y` is nonzero then there are `q r : R` with `x = q y + r` and
 `v r < v y`.
@@ -541,83 +542,6 @@ module _
     mul-Euclidean-Domain x y
   mul-neg-Euclidean-Domain =
     mul-neg-Integral-Domain
-      integral-domain-Euclidean-Domain
-```
-
-### Scalar multiplication of elements of a Euclidean domain by natural numbers
-
-```agda
-  mul-nat-scalar-Euclidean-Domain :
-    ℕ → type-Euclidean-Domain → type-Euclidean-Domain
-  mul-nat-scalar-Euclidean-Domain =
-    mul-nat-scalar-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  ap-mul-nat-scalar-Euclidean-Domain :
-    {m n : ℕ} {x y : type-Euclidean-Domain} →
-    (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Euclidean-Domain m x ＝
-    mul-nat-scalar-Euclidean-Domain n y
-  ap-mul-nat-scalar-Euclidean-Domain =
-    ap-mul-nat-scalar-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  left-zero-law-mul-nat-scalar-Euclidean-Domain :
-    (x : type-Euclidean-Domain) →
-    mul-nat-scalar-Euclidean-Domain 0 x ＝ zero-Euclidean-Domain
-  left-zero-law-mul-nat-scalar-Euclidean-Domain =
-    left-zero-law-mul-nat-scalar-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  right-zero-law-mul-nat-scalar-Euclidean-Domain :
-    (n : ℕ) →
-    mul-nat-scalar-Euclidean-Domain n zero-Euclidean-Domain ＝
-    zero-Euclidean-Domain
-  right-zero-law-mul-nat-scalar-Euclidean-Domain =
-    right-zero-law-mul-nat-scalar-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  left-unit-law-mul-nat-scalar-Euclidean-Domain :
-    (x : type-Euclidean-Domain) →
-    mul-nat-scalar-Euclidean-Domain 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Euclidean-Domain =
-    left-unit-law-mul-nat-scalar-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  left-nat-scalar-law-mul-Euclidean-Domain :
-    (n : ℕ) (x y : type-Euclidean-Domain) →
-    mul-Euclidean-Domain (mul-nat-scalar-Euclidean-Domain n x) y ＝
-    mul-nat-scalar-Euclidean-Domain n (mul-Euclidean-Domain x y)
-  left-nat-scalar-law-mul-Euclidean-Domain =
-    left-nat-scalar-law-mul-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  right-nat-scalar-law-mul-Euclidean-Domain :
-    (n : ℕ) (x y : type-Euclidean-Domain) →
-    mul-Euclidean-Domain x (mul-nat-scalar-Euclidean-Domain n y) ＝
-    mul-nat-scalar-Euclidean-Domain n (mul-Euclidean-Domain x y)
-  right-nat-scalar-law-mul-Euclidean-Domain =
-    right-nat-scalar-law-mul-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  left-distributive-mul-nat-scalar-add-Euclidean-Domain :
-    (n : ℕ) (x y : type-Euclidean-Domain) →
-    mul-nat-scalar-Euclidean-Domain n (add-Euclidean-Domain x y) ＝
-    add-Euclidean-Domain
-      ( mul-nat-scalar-Euclidean-Domain n x)
-      ( mul-nat-scalar-Euclidean-Domain n y)
-  left-distributive-mul-nat-scalar-add-Euclidean-Domain =
-    left-distributive-mul-nat-scalar-add-Integral-Domain
-      integral-domain-Euclidean-Domain
-
-  right-distributive-mul-nat-scalar-add-Euclidean-Domain :
-    (m n : ℕ) (x : type-Euclidean-Domain) →
-    mul-nat-scalar-Euclidean-Domain (m +ℕ n) x ＝
-    add-Euclidean-Domain
-      ( mul-nat-scalar-Euclidean-Domain m x)
-      ( mul-nat-scalar-Euclidean-Domain n x)
-  right-distributive-mul-nat-scalar-add-Euclidean-Domain =
-    right-distributive-mul-nat-scalar-add-Integral-Domain
       integral-domain-Euclidean-Domain
 ```
 

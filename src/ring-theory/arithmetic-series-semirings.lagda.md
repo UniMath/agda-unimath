@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import lists.finite-sequences
 
 open import ring-theory.arithmetic-sequences-semirings
+open import ring-theory.multiples-of-elements-semirings
 open import ring-theory.partial-sums-sequences-semirings
 open import ring-theory.semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
@@ -145,14 +146,14 @@ module _
     compute-sum-one-element-Semiring
       ( R)
       ( λ _ → zero-Semiring R) ∙
-      ( inv (left-zero-law-mul-nat-scalar-Semiring R (one-Semiring R)))
+      ( inv (left-zero-law-multiple-Semiring R (one-Semiring R)))
   compute-sum-map-nat-Semiring (succ-ℕ n) =
     ap-binary
       ( add-Semiring R)
       ( compute-sum-map-nat-Semiring n)
       ( inv (eq-fin-sequence-sequence (map-nat-Semiring R) (succ-ℕ n))) ∙
     inv
-      ( right-distributive-mul-nat-scalar-add-Semiring
+      ( right-distributive-multiple-add-Semiring
         ( R)
         ( sum-leq-ℕ n)
         ( succ-ℕ n)
@@ -170,8 +171,8 @@ module _
     ( n : ℕ) →
     add-Semiring
       ( R)
-      ( mul-nat-scalar-Semiring R (succ-ℕ n) a)
-      ( mul-nat-scalar-Semiring
+      ( multiple-Semiring R (succ-ℕ n) a)
+      ( multiple-Semiring
         ( R)
         ( triangular-number-ℕ n)
         ( d)) ＝
@@ -179,12 +180,12 @@ module _
   compute-sum-add-mul-nat-Semiring n =
     ap-binary
       ( add-Semiring R)
-      ( inv (eq-mul-nat-scalar-sum-const-fin-sequence-Semiring R a (succ-ℕ n)))
+      ( inv (constant-sum-fin-sequence-type-Semiring R (succ-ℕ n) a))
       ( ( ap
-          ( λ i → mul-nat-scalar-Semiring R i d)
+          ( λ i → multiple-Semiring R i d)
           ( htpy-sum-leq-triangular-ℕ n)) ∙
         ( inv
-          ( htpy-mul-map-mul-nat-scalar-Semiring R (sum-leq-ℕ n) d)) ∙
+          ( htpy-mul-map-multiple-Semiring R (sum-leq-ℕ n) d)) ∙
         ( ap
           ( mul-Semiring' R d)
           ( inv (compute-sum-map-nat-Semiring R n))) ∙
@@ -194,14 +195,14 @@ module _
       ( succ-ℕ n)
       ( fin-sequence-sequence (λ _ → a) (succ-ℕ n))
       ( fin-sequence-sequence
-        ( λ k → mul-nat-scalar-Semiring R k d)
+        ( λ k → multiple-Semiring R k d)
         ( succ-ℕ n)))
     where
 
     lemma-seq-sum-mul-nat :
       ( seq-sum-sequence-Semiring
         ( R)
-        ( λ i → mul-nat-scalar-Semiring R i d)
+        ( λ i → multiple-Semiring R i d)
         ( n)) ＝
       ( mul-Semiring
         ( R)
@@ -221,7 +222,7 @@ module _
               ( d)) ∙
           ( htpy-seq-sum-sequence-Semiring
             ( R)
-            ( λ i → htpy-mul-map-mul-nat-scalar-Semiring R i d)
+            ( λ i → htpy-mul-map-multiple-Semiring R i d)
             ( n)))
 ```
 
@@ -236,11 +237,11 @@ module _
     (n : ℕ) →
     add-Semiring
       ( R)
-      ( mul-nat-scalar-Semiring
+      ( multiple-Semiring
         ( R)
         ( succ-ℕ n)
         ( initial-term-arithmetic-sequence-Semiring R u))
-      ( mul-nat-scalar-Semiring
+      ( multiple-Semiring
         ( R)
         ( triangular-number-ℕ n)
         ( common-difference-arithmetic-sequence-Semiring R u)) ＝
