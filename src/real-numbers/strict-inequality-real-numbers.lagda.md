@@ -16,6 +16,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -355,6 +356,16 @@ module _
           ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
+### If `x` is less than `y`, then `x` is not similar to `y`
+
+```agda
+abstract
+  not-sim-le-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → ¬ sim-ℝ x y
+  not-sim-le-ℝ {x = x} {y = y} x<y x~y =
+    not-leq-le-ℝ x y x<y (leq-sim-ℝ (symmetric-sim-ℝ x~y))
+```
+
 ### If `x` is less than or equal to `y`, then `y` is not less than `x`
 
 ```agda
@@ -511,6 +522,77 @@ module _
       sim-sim-leq-ℝ
         ( leq-le-rational-ℝ x y (backward-implication ∘ H) ,
           leq-le-rational-ℝ y x (forward-implication ∘ H))
+```
+
+### It is irrefutable that either `a < b`, `a ~ b`, or `a > b`
+
+```agda
+abstract
+
+  irrefutable-trichotomy-le-ℝ :
+    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
+    ¬¬ (le-ℝ a b + sim-ℝ a b + le-ℝ b a)
+  irrefutable-trichotomy-le-ℝ a b ¬a<b+a~b+b<a =
+    ¬a<b+a~b+b<a
+      ( inr
+        ( inl
+          ( sim-sim-leq-ℝ
+            ( leq-not-le-ℝ b a (¬a<b+a~b+b<a ∘ inr ∘ inr) ,
+              leq-not-le-ℝ a b (¬a<b+a~b+b<a ∘ inl)))))
+
+  irrefutable-trichotomy-le-ℝ' :
+    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
+    ¬¬ disjunction-type (disjunction-type (le-ℝ a b) (sim-ℝ a b)) (le-ℝ b a)
+  irrefutable-trichotomy-le-ℝ' a b =
+    map-double-negation
+      ( rec-coproduct
+        ( inl-disjunction ∘ inl-disjunction)
+        ( rec-coproduct (inl-disjunction ∘ inr-disjunction) inr-disjunction))
+      ( irrefutable-trichotomy-le-ℝ a b)
+```
+
+### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable {#MSEq5107860}
+
+We reproduce a proof given by
+[Mark Saving](https://math.stackexchange.com/users/798694/mark-saving) in this
+Mathematics Stack Exchange answer: <https://math.stackexchange.com/q/5107860>.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (a : ℝ l1)
+  (b : ℝ l2)
+  where
+
+  abstract
+    leq-irrefutable-sim-or-le-ℝ :
+      ¬¬ (sim-ℝ a b + le-ℝ a b) → leq-ℝ a b
+    leq-irrefutable-sim-or-le-ℝ ¬¬a~b∨a<b =
+      leq-not-le-ℝ
+        ( b)
+        ( a)
+        ( map-neg
+          ( λ b<a →
+            rec-coproduct
+              ( λ a~b → not-le-leq-ℝ a b (leq-sim-ℝ a~b) b<a)
+              ( asymmetric-le-ℝ b<a))
+          ( ¬¬a~b∨a<b))
+
+    irrefutable-sim-or-le-leq-ℝ :
+      leq-ℝ a b → ¬¬ (sim-ℝ a b + le-ℝ a b)
+    irrefutable-sim-or-le-leq-ℝ a≤b =
+      map-double-negation
+        ( rec-coproduct
+          ( inr)
+          ( rec-coproduct
+            ( inl)
+            ( ex-falso ∘ not-le-leq-ℝ a b a≤b)))
+        ( irrefutable-trichotomy-le-ℝ a b)
+
+  leq-iff-irrefutable-sim-or-le-ℝ :
+    leq-ℝ a b ↔ ¬¬ (sim-ℝ a b + le-ℝ a b)
+  leq-iff-irrefutable-sim-or-le-ℝ =
+    ( irrefutable-sim-or-le-leq-ℝ , leq-irrefutable-sim-or-le-ℝ)
 ```
 
 ## References
