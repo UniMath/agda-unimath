@@ -53,7 +53,7 @@ large-commutative-ring-ℂ =
 
 ## Properties
 
-### The small commutative ring of complex numbers at a universe level
+### The commutative ring of complex numbers at a universe level
 
 ```agda
 commutative-ring-ℂ : (l : Level) → Commutative-Ring (lsuc l)

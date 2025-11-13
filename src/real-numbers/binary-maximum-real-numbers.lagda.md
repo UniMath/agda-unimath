@@ -385,7 +385,7 @@ module _
           ( is-located-lower-upper-cut-ℝ x q<r)
 ```
 
-### If `x < z` and `y < z`, then `max-ℝ x y < x`
+### If `x < z` and `y < z`, then `max-ℝ x y < z`
 
 ```agda
 abstract

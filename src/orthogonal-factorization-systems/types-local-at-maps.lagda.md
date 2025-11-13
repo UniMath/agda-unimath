@@ -14,6 +14,7 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.families-of-equivalences
@@ -28,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-maps
@@ -41,6 +43,7 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.extensions-dependent-maps
 open import orthogonal-factorization-systems.extensions-maps
 ```
 
@@ -118,39 +121,39 @@ module _
   {l : Level} (P : B → UU l)
   where
 
-  equiv-fiber'-precomp-extension-dependent-type :
+  equiv-fiber'-precomp-extension-dependent-map :
     (f : (x : A) → P (i x)) →
-    fiber' (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber'-precomp-extension-dependent-type f =
+    fiber' (precomp-Π i P) f ≃ extension-dependent-map i P f
+  equiv-fiber'-precomp-extension-dependent-map f =
     equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
 
-  equiv-fiber-precomp-extension-dependent-type :
+  equiv-fiber-precomp-extension-dependent-map :
     (f : (x : A) → P (i x)) →
-    fiber (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber-precomp-extension-dependent-type f =
-    ( equiv-fiber'-precomp-extension-dependent-type f) ∘e
+    fiber (precomp-Π i P) f ≃ extension-dependent-map i P f
+  equiv-fiber-precomp-extension-dependent-map f =
+    ( equiv-fiber'-precomp-extension-dependent-map f) ∘e
     ( equiv-fiber (precomp-Π i P) f)
 
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type :
+  equiv-is-contr-extension-dependent-map-is-local-dependent-type :
     is-local-dependent-type i P ≃
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type =
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f))
+  equiv-is-contr-extension-dependent-map-is-local-dependent-type =
     ( equiv-Π-equiv-family
-      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-type)) ∘e
+      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-map)) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
-  is-contr-extension-dependent-type-is-local-dependent-type :
+  is-contr-extension-dependent-map-is-local-dependent-type :
     is-local-dependent-type i P →
-    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
-  is-contr-extension-dependent-type-is-local-dependent-type =
-    map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
+    (f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f)
+  is-contr-extension-dependent-map-is-local-dependent-type =
+    map-equiv equiv-is-contr-extension-dependent-map-is-local-dependent-type
 
-  is-local-dependent-type-is-contr-extension-dependent-type :
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
+  is-local-dependent-type-is-contr-extension-dependent-map :
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-map i P f)) →
     is-local-dependent-type i P
-  is-local-dependent-type-is-contr-extension-dependent-type =
+  is-local-dependent-type-is-contr-extension-dependent-map =
     map-inv-equiv
-      equiv-is-contr-extension-dependent-type-is-local-dependent-type
+      equiv-is-contr-extension-dependent-map-is-local-dependent-type
 ```
 
 ### Every map has a unique extension along `i` if and only if `P` is `i`-local
@@ -161,15 +164,15 @@ module _
   {l : Level} {C : UU l}
   where
 
-  is-contr-extension-is-local :
-    is-local i C → (f : A → C) → is-contr (extension i f)
-  is-contr-extension-is-local =
-    is-contr-extension-dependent-type-is-local-dependent-type i (λ _ → C)
+  is-contr-extension-map-is-local :
+    is-local i C → (f : A → C) → is-contr (extension-map i f)
+  is-contr-extension-map-is-local =
+    is-contr-extension-dependent-map-is-local-dependent-type i (λ _ → C)
 
-  is-local-is-contr-extension :
-    ((f : A → C) → is-contr (extension i f)) → is-local i C
-  is-local-is-contr-extension =
-    is-local-dependent-type-is-contr-extension-dependent-type i (λ _ → C)
+  is-local-is-contr-extension-map :
+    ((f : A → C) → is-contr (extension-map i f)) → is-local i C
+  is-local-is-contr-extension-map =
+    is-local-dependent-type-is-contr-extension-dependent-map i (λ _ → C)
 ```
 
 ### Local types are closed under equivalences
@@ -311,32 +314,42 @@ module _
 
 ### If the domain and codomain of `f` is `f`-local, then `f` is an equivalence
 
+More generally, this is true as soon as the precomposition map of `f` has a
+section at `X` and is an embedding at `Y`.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  section-is-local-domains' : section (precomp f X) → is-local f Y → section f
-  pr1 (section-is-local-domains' section-precomp-X is-local-Y) =
-    pr1 section-precomp-X id
-  pr2 (section-is-local-domains' section-precomp-X is-local-Y) =
+  section-is-epi-at-codomain-section-precomp-domain :
+    section (precomp f X) → is-emb (precomp f Y) → section f
+  pr1 (section-is-epi-at-codomain-section-precomp-domain sX _) =
+    pr1 sX id
+  pr2 (section-is-epi-at-codomain-section-precomp-domain sX eY) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 (section-is-local-domains' section-precomp-X is-local-Y)) ,
-          ( ap (postcomp X f) (pr2 section-precomp-X id))}
+        { f ∘ pr1 sX id , ap (postcomp X f) (pr2 sX id)}
         { id , refl}
-        ( eq-is-contr (is-contr-map-is-equiv is-local-Y f)))
+        ( eq-is-prop (is-prop-map-is-emb eY f)))
 
-  is-equiv-is-local-domains' : section (precomp f X) → is-local f Y → is-equiv f
-  pr1 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
-    section-is-local-domains' section-precomp-X is-local-Y
-  pr2 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
-    retraction-map-section-precomp f section-precomp-X
+  section-is-local-at-codomain-section-precomp-domain :
+    section (precomp f X) → is-local f Y → section f
+  section-is-local-at-codomain-section-precomp-domain sX lY =
+    section-is-epi-at-codomain-section-precomp-domain sX (is-emb-is-equiv lY)
+
+  is-equiv-is-epi-at-codomain-section-precomp-domain :
+    section (precomp f X) → is-emb (precomp f Y) → is-equiv f
+  is-equiv-is-epi-at-codomain-section-precomp-domain sX eY =
+    ( section-is-epi-at-codomain-section-precomp-domain sX eY ,
+      retraction-map-section-precomp f sX)
 
   is-equiv-is-local-domains : is-local f X → is-local f Y → is-equiv f
-  is-equiv-is-local-domains is-local-X =
-    is-equiv-is-local-domains' (pr1 is-local-X)
+  is-equiv-is-local-domains lX lY =
+    is-equiv-is-epi-at-codomain-section-precomp-domain
+      ( section-is-equiv lX)
+      ( is-emb-is-equiv lY)
 ```
 
 ### If `f` has a retraction and the codomain of `f` is `f`-local, then `f` is an equivalence
@@ -349,7 +362,7 @@ module _
   is-equiv-retraction-is-local-codomain :
     retraction f → is-local f Y → is-equiv f
   is-equiv-retraction-is-local-codomain r is-local-Y =
-    section-is-local-domains' f
+    section-is-local-at-codomain-section-precomp-domain f
       ( section-precomp-retraction-map f r)
       ( is-local-Y) ,
     r

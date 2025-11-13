@@ -511,23 +511,23 @@ module _
           in
             ( nat-nonzero-ℕ n⁺ ,
               λ m n≤m →
-                monotonic-neighborhood-Metric-Space M
-                  ( map-cauchy-sequence-cauchy-approximation-Metric-Space M x m)
+              monotonic-neighborhood-Metric-Space M
+                ( map-cauchy-sequence-cauchy-approximation-Metric-Space M x m)
+                ( lim)
+                ( positive-reciprocal-rational-succ-ℕ m)
+                ( ε)
+                ( transitive-le-ℚ _ (reciprocal-rational-ℕ⁺ n⁺) _
+                  ( 1/n⁺<ε)
+                  ( inv-le-ℚ⁺
+                    ( positive-rational-ℕ⁺ n⁺)
+                    ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' m))
+                    ( preserves-le-rational-ℕ
+                      ( le-succ-leq-ℕ _ _ n≤m))))
+                ( saturated-is-limit-cauchy-approximation-Metric-Space M
+                  ( x)
                   ( lim)
-                  ( positive-reciprocal-rational-succ-ℕ m)
-                  ( ε)
-                  ( transitive-le-ℚ _ (reciprocal-rational-ℕ⁺ n⁺) _
-                    ( 1/n⁺<ε)
-                    ( inv-le-ℚ⁺
-                      ( positive-rational-ℕ⁺ n⁺)
-                      ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' m))
-                      ( preserves-le-rational-ℕ
-                        ( le-succ-leq-ℕ _ _ n≤m))))
-                  ( saturated-is-limit-cauchy-approximation-Metric-Space M
-                    ( x)
-                    ( lim)
-                    ( is-lim)
-                    ( positive-reciprocal-rational-succ-ℕ m))))
+                  ( is-lim)
+                  ( positive-reciprocal-rational-succ-ℕ m))))
 ```
 
 ### If the Cauchy sequence associated with a Cauchy approximation has a limit modulus at `l`, its associated approximation converges to `l`
