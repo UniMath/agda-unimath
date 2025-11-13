@@ -23,6 +23,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -197,7 +198,7 @@ module _
       is-equiv-is-invertible
         ( ev-point' (center H))
         ( λ f → eq-htpy (λ x → ap f (contraction H x)))
-        ( λ x → refl)
+        ( refl-htpy)
 
   equiv-diagonal-exponential-is-contr :
     {l : Level} (X : UU l) → is-contr A → X ≃ (A → X)
@@ -205,4 +206,26 @@ module _
     diagonal-exponential X A
   pr2 (equiv-diagonal-exponential-is-contr X H) =
     is-equiv-diagonal-exponential-is-contr H X
+
+  abstract
+    is-equiv-diagonal-exponential-is-contr' :
+      is-contr A →
+      {l : Level} (X : UU l) → is-equiv (diagonal-exponential A X)
+    is-equiv-diagonal-exponential-is-contr' H X =
+      is-equiv-is-invertible
+        ( λ _ → center H)
+        ( λ x → eq-htpy (contraction H ∘ x))
+        ( contraction H)
+
+  equiv-diagonal-exponential-is-contr' :
+    {l : Level} (X : UU l) → is-contr A → A ≃ (X → A)
+  equiv-diagonal-exponential-is-contr' X H =
+    ( diagonal-exponential A X , is-equiv-diagonal-exponential-is-contr' H X)
+
+  abstract
+    is-contr-is-equiv-diagonal-exponential' :
+      ({l : Level} (X : UU l) → is-equiv (diagonal-exponential A X)) →
+      is-contr A
+    is-contr-is-equiv-diagonal-exponential' H =
+      is-contr-is-equiv-self-diagonal-exponential (H A)
 ```
