@@ -214,7 +214,7 @@ module _
         ( commutative-monoid-Ab G)
 ```
 
-### Constant sums are the multiplication operation
+### Constant sums are multiples
 
 ```agda
 abstract

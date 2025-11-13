@@ -174,7 +174,7 @@ module _
   multiple-mul-Ring = multiple-mul-Ab (ab-Ring R)
 ```
 
-### `(n ∙ x) * y ＝ n ∙ (x * y)`
+### `(n · x) * y ＝ n · (x * y)`
 
 ```agda
 module _
@@ -188,7 +188,7 @@ module _
   left-mul-multiple-Ring = left-mul-multiple-Semiring (semiring-Ring R)
 ```
 
-### `x * (n ∙ y) * y ＝ n ∙ (x * y)`
+### `x * (n · y) * y ＝ n · (x * y)`
 
 ```agda
 module _

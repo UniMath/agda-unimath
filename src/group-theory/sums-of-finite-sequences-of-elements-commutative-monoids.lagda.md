@@ -256,7 +256,7 @@ module _
             ( f ∘ map-equiv σ))
 ```
 
-### Constant sums are the power operation
+### Constant sums are powers
 
 ```agda
 abstract

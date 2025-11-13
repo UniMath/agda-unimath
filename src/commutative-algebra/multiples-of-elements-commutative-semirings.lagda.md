@@ -91,7 +91,7 @@ module _
     left-unit-law-multiple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### `(n ∙ x) * y ＝ n ∙ (x * y)`
+### `(n · x) * y ＝ n · (x * y)`
 
 ```agda
 module _
@@ -107,7 +107,7 @@ module _
     left-mul-multiple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### `x * (n ∙ y) * y ＝ n ∙ (x * y)`
+### `x * (n · y) * y ＝ n · (x * y)`
 
 ```agda
 module _
