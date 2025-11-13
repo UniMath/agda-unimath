@@ -258,9 +258,9 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  right-zero-law-integer-multiple-Ring :
+  left-zero-law-integer-multiple-Ring :
     (k : ℤ) → integer-multiple-Ring R k (zero-Ring R) ＝ zero-Ring R
-  right-zero-law-integer-multiple-Ring =
+  left-zero-law-integer-multiple-Ring =
     right-zero-law-integer-multiple-Ab (ab-Ring R)
 ```
 
