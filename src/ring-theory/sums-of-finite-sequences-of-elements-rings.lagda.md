@@ -26,8 +26,8 @@ open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
 
-open import ring-theory.rings
 open import ring-theory.multiples-of-elements-rings
+open import ring-theory.rings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
 open import univalent-combinatorics.coproduct-types
@@ -259,12 +259,12 @@ module _
 
 ```agda
 abstract
-  constant-sum-fin-sequence-type-Ring :
+  sum-constant-fin-sequence-type-Ring :
     {l : Level} (R : Ring l) (n : ℕ) (x : type-Ring R) →
     sum-fin-sequence-type-Ring R n (λ _ → x) ＝
     multiple-Ring R n x
-  constant-sum-fin-sequence-type-Ring R =
-    constant-sum-fin-sequence-type-Semiring ( semiring-Ring R)
+  sum-constant-fin-sequence-type-Ring R =
+    sum-constant-fin-sequence-type-Semiring ( semiring-Ring R)
 ```
 
 ## See also

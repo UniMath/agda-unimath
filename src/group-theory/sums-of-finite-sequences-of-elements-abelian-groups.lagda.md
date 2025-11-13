@@ -218,11 +218,11 @@ module _
 
 ```agda
 abstract
-  constant-sum-fin-sequence-type-Ab :
+  sum-constant-fin-sequence-type-Ab :
     {l : Level} (G : Ab l) (n : ℕ) (x : type-Ab G) →
     sum-fin-sequence-type-Ab G n (λ _ → x) ＝ multiple-Ab G n x
-  constant-sum-fin-sequence-type-Ab G =
-    constant-sum-fin-sequence-type-Group (group-Ab G)
+  sum-constant-fin-sequence-type-Ab G =
+    sum-constant-fin-sequence-type-Group (group-Ab G)
 ```
 
 ## See also
