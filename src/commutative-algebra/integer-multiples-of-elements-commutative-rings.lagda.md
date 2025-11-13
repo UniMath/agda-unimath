@@ -119,10 +119,10 @@ module _
   {l : Level} (A : Commutative-Ring l) (a : type-Commutative-Ring A)
   where
 
-  integer-multiple-zero-Commutative-Ring :
+  integer-right-zero-law-multiple-Commutative-Ring :
     integer-multiple-Commutative-Ring A zero-ℤ a ＝ zero-Commutative-Ring A
-  integer-multiple-zero-Commutative-Ring =
-    integer-multiple-zero-Ring (ring-Commutative-Ring A) a
+  integer-right-zero-law-multiple-Commutative-Ring =
+    left-zero-law-integer-multiple-Ring (ring-Commutative-Ring A) a
 ```
 
 ### `1x ＝ x`
