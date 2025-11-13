@@ -551,9 +551,11 @@ abstract
       ( irrefutable-trichotomy-le-ℝ a b)
 ```
 
-### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable
+### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable {#MSEq5107860}
 
-This follows {{#cite Saving25}}.
+We reproduce a proof given by
+[Mark Saving](https://math.stackexchange.com/users/798694/mark-saving) in this
+Mathematics Stack Exchange answer: <https://math.stackexchange.com/q/5107860>.
 
 ```agda
 module _
