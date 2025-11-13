@@ -173,7 +173,7 @@ module _
     multiple-mul-Ring (ring-Commutative-Ring A)
 ```
 
-### `(n ∙ x) * y ＝ n ∙ (x * y)`
+### `(n · x) * y ＝ n · (x * y)`
 
 ```agda
 module _
@@ -189,7 +189,7 @@ module _
     left-mul-multiple-Ring (ring-Commutative-Ring R)
 ```
 
-### `x * (n ∙ y) * y ＝ n ∙ (x * y)`
+### `x * (n · y) * y ＝ n · (x * y)`
 
 ```agda
 module _
