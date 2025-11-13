@@ -24,6 +24,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
@@ -253,6 +254,19 @@ module _
             ( M)
             ( n)
             ( f ∘ map-equiv σ))
+```
+
+### Constant sums are powers
+
+```agda
+abstract
+  constant-sum-fin-sequence-type-Commutative-Monoid :
+    {l : Level} (M : Commutative-Monoid l) (n : ℕ) →
+    (x : type-Commutative-Monoid M) →
+    sum-fin-sequence-type-Commutative-Monoid M n (λ _ → x) ＝
+    power-Commutative-Monoid M n x
+  constant-sum-fin-sequence-type-Commutative-Monoid M =
+    constant-sum-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ## See also

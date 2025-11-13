@@ -42,6 +42,9 @@ open import commutative-algebra.large-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.multiples-of-elements-commutative-rings public
+open import commutative-algebra.multiples-of-elements-commutative-semirings public
+open import commutative-algebra.multiples-of-elements-euclidean-domains public
+open import commutative-algebra.multiples-of-elements-integral-domains public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
 open import commutative-algebra.polynomials-commutative-rings public
