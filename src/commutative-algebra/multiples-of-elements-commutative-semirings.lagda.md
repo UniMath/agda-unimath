@@ -107,7 +107,7 @@ module _
     left-mul-multiple-Semiring (semiring-Commutative-Semiring R)
 ```
 
-### `x * (n · y) * y ＝ n · (x * y)`
+### `x * (n · y) ＝ n · (x * y)`
 
 ```agda
 module _
