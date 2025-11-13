@@ -463,60 +463,60 @@ module _
   {l : Level} (R : Finite-Ring l)
   where
 
-  mul-nat-scalar-Finite-Ring : ℕ → type-Finite-Ring R → type-Finite-Ring R
-  mul-nat-scalar-Finite-Ring = multiple-Ring (ring-Finite-Ring R)
+  multiple-Finite-Ring : ℕ → type-Finite-Ring R → type-Finite-Ring R
+  multiple-Finite-Ring = multiple-Ring (ring-Finite-Ring R)
 
-  ap-mul-nat-scalar-Finite-Ring :
+  ap-multiple-Finite-Ring :
     {m n : ℕ} {x y : type-Finite-Ring R} →
     (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Finite-Ring m x ＝ mul-nat-scalar-Finite-Ring n y
-  ap-mul-nat-scalar-Finite-Ring = ap-multiple-Ring (ring-Finite-Ring R)
+    multiple-Finite-Ring m x ＝ multiple-Finite-Ring n y
+  ap-multiple-Finite-Ring = ap-multiple-Ring (ring-Finite-Ring R)
 
-  left-zero-law-mul-nat-scalar-Finite-Ring :
+  left-zero-law-multiple-Finite-Ring :
     (x : type-Finite-Ring R) →
-    mul-nat-scalar-Finite-Ring 0 x ＝ zero-Finite-Ring R
-  left-zero-law-mul-nat-scalar-Finite-Ring =
+    multiple-Finite-Ring 0 x ＝ zero-Finite-Ring R
+  left-zero-law-multiple-Finite-Ring =
     left-zero-law-multiple-Ring (ring-Finite-Ring R)
 
-  right-zero-law-mul-nat-scalar-Finite-Ring :
+  right-zero-law-multiple-Finite-Ring :
     (n : ℕ) →
-    mul-nat-scalar-Finite-Ring n (zero-Finite-Ring R) ＝ zero-Finite-Ring R
-  right-zero-law-mul-nat-scalar-Finite-Ring =
+    multiple-Finite-Ring n (zero-Finite-Ring R) ＝ zero-Finite-Ring R
+  right-zero-law-multiple-Finite-Ring =
     right-zero-law-multiple-Ring (ring-Finite-Ring R)
 
-  left-unit-law-mul-nat-scalar-Finite-Ring :
-    (x : type-Finite-Ring R) → mul-nat-scalar-Finite-Ring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Finite-Ring x = refl
+  left-unit-law-multiple-Finite-Ring :
+    (x : type-Finite-Ring R) → multiple-Finite-Ring 1 x ＝ x
+  left-unit-law-multiple-Finite-Ring x = refl
 
   left-mul-multiple-Finite-Ring :
     (n : ℕ) (x y : type-Finite-Ring R) →
-    mul-Finite-Ring R (mul-nat-scalar-Finite-Ring n x) y ＝
-    mul-nat-scalar-Finite-Ring n (mul-Finite-Ring R x y)
+    mul-Finite-Ring R (multiple-Finite-Ring n x) y ＝
+    multiple-Finite-Ring n (mul-Finite-Ring R x y)
   left-mul-multiple-Finite-Ring =
     left-mul-multiple-Ring (ring-Finite-Ring R)
 
   right-mul-multiple-Finite-Ring :
     (n : ℕ) (x y : type-Finite-Ring R) →
-    mul-Finite-Ring R x (mul-nat-scalar-Finite-Ring n y) ＝
-    mul-nat-scalar-Finite-Ring n (mul-Finite-Ring R x y)
+    mul-Finite-Ring R x (multiple-Finite-Ring n y) ＝
+    multiple-Finite-Ring n (mul-Finite-Ring R x y)
   right-mul-multiple-Finite-Ring =
     right-mul-multiple-Ring (ring-Finite-Ring R)
 
   left-distributive-multiple-add-Finite-Ring :
     (n : ℕ) {x y : type-Finite-Ring R} →
-    mul-nat-scalar-Finite-Ring n (add-Finite-Ring R x y) ＝
+    multiple-Finite-Ring n (add-Finite-Ring R x y) ＝
     add-Finite-Ring R
-      ( mul-nat-scalar-Finite-Ring n x)
-      ( mul-nat-scalar-Finite-Ring n y)
+      ( multiple-Finite-Ring n x)
+      ( multiple-Finite-Ring n y)
   left-distributive-multiple-add-Finite-Ring =
     left-distributive-multiple-add-Ring (ring-Finite-Ring R)
 
   right-distributive-multiple-add-Finite-Ring :
     (m n : ℕ) {x : type-Finite-Ring R} →
-    mul-nat-scalar-Finite-Ring (m +ℕ n) x ＝
+    multiple-Finite-Ring (m +ℕ n) x ＝
     add-Finite-Ring R
-      ( mul-nat-scalar-Finite-Ring m x)
-      ( mul-nat-scalar-Finite-Ring n x)
+      ( multiple-Finite-Ring m x)
+      ( multiple-Finite-Ring n x)
   right-distributive-multiple-add-Finite-Ring =
     right-distributive-multiple-add-Ring (ring-Finite-Ring R)
 ```

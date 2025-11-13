@@ -463,67 +463,67 @@ module _
 ### Scalar multiplication of elements of a commutative finite ring by natural numbers
 
 ```agda
-  mul-nat-scalar-Finite-Field :
+  multiple-Finite-Field :
     ℕ → type-Finite-Field → type-Finite-Field
-  mul-nat-scalar-Finite-Field =
-    mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
+  multiple-Finite-Field =
+    multiple-Finite-Ring finite-ring-Finite-Field
 
-  ap-mul-nat-scalar-Finite-Field :
+  ap-multiple-Finite-Field :
     {m n : ℕ} {x y : type-Finite-Field} →
     (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Finite-Field m x ＝
-    mul-nat-scalar-Finite-Field n y
-  ap-mul-nat-scalar-Finite-Field =
-    ap-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
+    multiple-Finite-Field m x ＝
+    multiple-Finite-Field n y
+  ap-multiple-Finite-Field =
+    ap-multiple-Finite-Ring finite-ring-Finite-Field
 
-  left-zero-law-mul-nat-scalar-Finite-Field :
+  left-zero-law-multiple-Finite-Field :
     (x : type-Finite-Field) →
-    mul-nat-scalar-Finite-Field 0 x ＝ zero-Finite-Field
-  left-zero-law-mul-nat-scalar-Finite-Field =
-    left-zero-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
+    multiple-Finite-Field 0 x ＝ zero-Finite-Field
+  left-zero-law-multiple-Finite-Field =
+    left-zero-law-multiple-Finite-Ring finite-ring-Finite-Field
 
-  right-zero-law-mul-nat-scalar-Finite-Field :
+  right-zero-law-multiple-Finite-Field :
     (n : ℕ) →
-    mul-nat-scalar-Finite-Field n zero-Finite-Field ＝
+    multiple-Finite-Field n zero-Finite-Field ＝
     zero-Finite-Field
-  right-zero-law-mul-nat-scalar-Finite-Field =
-    right-zero-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
+  right-zero-law-multiple-Finite-Field =
+    right-zero-law-multiple-Finite-Ring finite-ring-Finite-Field
 
-  left-unit-law-mul-nat-scalar-Finite-Field :
+  left-unit-law-multiple-Finite-Field :
     (x : type-Finite-Field) →
-    mul-nat-scalar-Finite-Field 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Finite-Field =
-    left-unit-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Field
+    multiple-Finite-Field 1 x ＝ x
+  left-unit-law-multiple-Finite-Field =
+    left-unit-law-multiple-Finite-Ring finite-ring-Finite-Field
 
   left-mul-multiple-Finite-Field :
     (n : ℕ) (x y : type-Finite-Field) →
-    mul-Finite-Field (mul-nat-scalar-Finite-Field n x) y ＝
-    mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
+    mul-Finite-Field (multiple-Finite-Field n x) y ＝
+    multiple-Finite-Field n (mul-Finite-Field x y)
   left-mul-multiple-Finite-Field =
     left-mul-multiple-Finite-Ring finite-ring-Finite-Field
 
   right-mul-multiple-Finite-Field :
     (n : ℕ) (x y : type-Finite-Field) →
-    mul-Finite-Field x (mul-nat-scalar-Finite-Field n y) ＝
-    mul-nat-scalar-Finite-Field n (mul-Finite-Field x y)
+    mul-Finite-Field x (multiple-Finite-Field n y) ＝
+    multiple-Finite-Field n (mul-Finite-Field x y)
   right-mul-multiple-Finite-Field =
     right-mul-multiple-Finite-Ring finite-ring-Finite-Field
 
   left-distributive-multiple-add-Finite-Field :
     (n : ℕ) {x y : type-Finite-Field} →
-    mul-nat-scalar-Finite-Field n (add-Finite-Field x y) ＝
+    multiple-Finite-Field n (add-Finite-Field x y) ＝
     add-Finite-Field
-      ( mul-nat-scalar-Finite-Field n x)
-      ( mul-nat-scalar-Finite-Field n y)
+      ( multiple-Finite-Field n x)
+      ( multiple-Finite-Field n y)
   left-distributive-multiple-add-Finite-Field =
     left-distributive-multiple-add-Finite-Ring finite-ring-Finite-Field
 
   right-distributive-multiple-add-Finite-Field :
     (m n : ℕ) {x : type-Finite-Field} →
-    mul-nat-scalar-Finite-Field (m +ℕ n) x ＝
+    multiple-Finite-Field (m +ℕ n) x ＝
     add-Finite-Field
-      ( mul-nat-scalar-Finite-Field m x)
-      ( mul-nat-scalar-Finite-Field n x)
+      ( multiple-Finite-Field m x)
+      ( multiple-Finite-Field n x)
   right-distributive-multiple-add-Finite-Field =
     right-distributive-multiple-add-Finite-Ring finite-ring-Finite-Field
 ```
