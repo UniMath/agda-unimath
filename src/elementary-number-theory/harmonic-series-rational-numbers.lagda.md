@@ -266,7 +266,9 @@ abstract
                 ( λ n →
                   hom-Prop
                     ( leq-ℕ-Prop N n)
-                    ( leq-ℚ-Prop q (partial-sum-series-ℚ harmonic-series-ℚ n)))))
+                    ( leq-ℚ-Prop
+                      ( q)
+                      ( partial-sum-series-ℚ harmonic-series-ℚ n)))))
       open inequality-reasoning-Poset ℚ-Poset
     in do
       (n , 2q<n) ← exists-greater-natural-ℚ (rational-ℕ 2 *ℚ q)
