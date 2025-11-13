@@ -9,6 +9,7 @@ module commutative-algebra.binomial-theorem-commutative-rings where
 ```agda
 open import commutative-algebra.binomial-theorem-commutative-semirings
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.multiples-of-elements-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
 
@@ -168,7 +169,7 @@ is-linear-combination-power-add-Commutative-Ring :
       ( power-Commutative-Ring A m y)
       ( sum-fin-sequence-type-Commutative-Ring A n
         ( λ i →
-          mul-nat-scalar-Commutative-Ring A
+          multiple-Commutative-Ring A
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Commutative-Ring A
               ( power-Commutative-Ring A (nat-Fin n i) x)
@@ -178,7 +179,7 @@ is-linear-combination-power-add-Commutative-Ring :
       ( sum-fin-sequence-type-Commutative-Ring A
         ( succ-ℕ m)
         ( λ i →
-          mul-nat-scalar-Commutative-Ring A
+          multiple-Commutative-Ring A
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
               ( n +ℕ (nat-Fin (succ-ℕ m) i)))

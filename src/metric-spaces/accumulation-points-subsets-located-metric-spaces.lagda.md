@@ -43,14 +43,15 @@ open import metric-spaces.subspaces-metric-spaces
 ## Idea
 
 An
-{{#concept "accumulation point" WDID=Q858223 WD="limit point" Disambiguation="of a metric space" Agda=accumulation-point-subset-Located-Metric-Space}}
+{{#concept "accumulation point" WDID=Q858223 WD="limit point" Disambiguation="of a subset of a located metric space" Agda=accumulation-point-subset-Located-Metric-Space}}
 of a subset `S` of a
 [located metric space](metric-spaces.located-metric-spaces.md) `X` is a point
 `x : X` such that there exists a
 [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md) `a`
 with [limit](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) `x`
 such that for every `ε : ℚ⁺`, `a ε` is in `S` and is
-[apart](metric-spaces.apartness-located-metric-spaces.md) from `x`.
+[apart](metric-spaces.apartness-located-metric-spaces.md) from `x`. In
+particular, this implies an accumulation point is not isolated.
 
 ## Definition
 
@@ -313,3 +314,8 @@ module _
         ( S)
         ( x))
 ```
+
+## External links
+
+- [Accumulation point](https://en.wikipedia.org/wiki/Accumulation_point) on
+  Wikipedia

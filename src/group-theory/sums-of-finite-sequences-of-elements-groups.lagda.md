@@ -20,6 +20,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import group-theory.groups
+open import group-theory.powers-of-elements-groups
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
 open import linear-algebra.finite-sequences-in-groups
@@ -177,4 +178,15 @@ split-sum-fin-sequence-type-Group :
     ( sum-fin-sequence-type-Group G m (f ∘ inr-coproduct-Fin n m))
 split-sum-fin-sequence-type-Group G =
   split-sum-fin-sequence-type-Monoid (monoid-Group G)
+```
+
+### Constant sums are powers
+
+```agda
+abstract
+  constant-sum-fin-sequence-type-Group :
+    {l : Level} (G : Group l) (n : ℕ) (x : type-Group G) →
+    sum-fin-sequence-type-Group G n (λ _ → x) ＝ power-Group G n x
+  constant-sum-fin-sequence-type-Group G =
+    constant-sum-fin-sequence-type-Monoid (monoid-Group G)
 ```
