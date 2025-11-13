@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import linear-algebra.normed-real-vector-spaces
 
 open import metric-spaces.complete-metric-spaces
+open import analysis.complete-metric-abelian-groups
 ```
 
 </details>
