@@ -102,7 +102,7 @@ isometry) from a pseudometric space in a complete metric space factors as a
 short map (resp. isometry) through the Cauchy precompletion of its domain. This
 is the
 {{#concept "universal property" Disambiguation="of the Cauchy precompletion of a pseudometric space"}}
-of Cauchy precompletion.
+of the Cauchy precompletion.
 
 ## Definition
 
