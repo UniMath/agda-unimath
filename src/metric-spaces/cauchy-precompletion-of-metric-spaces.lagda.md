@@ -32,6 +32,7 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-precompletion-of-pseudometric-spaces
@@ -81,10 +82,10 @@ is an [equivalence](foundation.equivalences.md) if and only if `M` is
 [complete](metric-spaces.complete-metric-spaces.md).
 
 Any [short map](metric-spaces.short-functions-metric-spaces.md) (resp.
-[isometry](metric-spaces.isometries-metric-spaces.md)) from a pseudometric space
-in a [complete metric space](metric-spaces.complete-metric-spaces.md) factors as
-a short map (resp. isometry) through the Cauchy precompletion of its domain.
-This is the
+[isometry](metric-spaces.isometries-metric-spaces.md)) from a metric space in a
+[complete metric space](metric-spaces.complete-metric-spaces.md) factors as a
+short map (resp. isometry) through the Cauchy precompletion of its domain. This
+is the
 {{#concept "universal property" Disambiguation="of the Cauchy precompletion of a metric space"}}
 of the Cauchy precompletion.
 
@@ -385,6 +386,47 @@ module _
               ( map-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space
                 ( M)
                 ( u)))))
+```
+
+### If the Cauchy precompletion of a metric space is complete, then it is its own Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (H : is-complete-Metric-Space (cauchy-precompletion-Metric-Space M))
+  where
+
+  eq-cauchy-precompletion-is-complete-cauchy-precompletion-Metric-Space :
+    cauchy-precompletion-Metric-Space (cauchy-precompletion-Metric-Space M) ＝
+    cauchy-precompletion-Metric-Space M
+  eq-cauchy-precompletion-is-complete-cauchy-precompletion-Metric-Space =
+    inv
+      ( eq-isometric-equiv-Metric-Space'
+        ( cauchy-precompletion-Metric-Space M)
+        ( cauchy-precompletion-Metric-Space
+          ( cauchy-precompletion-Metric-Space M))
+        ( isometric-equiv-cauchy-precompletion-is-complete-Metric-Space'
+          ( cauchy-precompletion-Metric-Space M)
+          ( H)))
+```
+
+### The Cauchy precompletion of a metric space is complete if and only if all its Cauchy approximations have a lift in is Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  iff-all-has-lift-is-complete-cauchy-precompletion-Metric-Space :
+    is-complete-Metric-Space (cauchy-precompletion-Metric-Space M) ↔
+    ( ( u : cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Metric-Space M)) →
+      has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( u))
+  iff-all-has-lift-is-complete-cauchy-precompletion-Metric-Space =
+    iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
 ### Induced short map from the Cauchy precompletion to a complete metric space
