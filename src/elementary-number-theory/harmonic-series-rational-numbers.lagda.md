@@ -256,17 +256,7 @@ abstract
     let
       open
         do-syntax-trunc-Prop
-          ( ∃
-            ( ℕ)
-            ( λ N →
-              Π-Prop
-                ( ℕ)
-                ( λ n →
-                  hom-Prop
-                    ( leq-ℕ-Prop N n)
-                    ( leq-ℚ-Prop
-                      ( q)
-                      ( partial-sum-series-ℚ harmonic-series-ℚ n)))))
+          ( ∃ ℕ (partial-sum-stays-above-prop-series-ℚ harmonic-series-ℚ q))
       open inequality-reasoning-Poset ℚ-Poset
     in do
       (n , 2q<n) ← exists-greater-natural-ℚ (rational-ℕ 2 *ℚ q)
