@@ -96,26 +96,25 @@ abstract
     in
       chain-of-inequalities
         one-ℚ +ℚ reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ (succ-ℕ n)
-        ≤ one-ℚ +ℚ
-          (reciprocal-rational-succ-ℕ 1 *ℚ succ-ℚ (rational-ℕ n))
+        ≤ one-ℚ +ℚ reciprocal-rational-succ-ℕ 1 *ℚ succ-ℚ (rational-ℕ n)
           by leq-eq-ℚ (ap-add-ℚ refl (ap-mul-ℚ refl (inv (succ-rational-ℕ n))))
-        ≤ one-ℚ +ℚ
+        ≤ ( one-ℚ) +ℚ
           ( reciprocal-rational-succ-ℕ 1 +ℚ
             reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n)
           by leq-eq-ℚ (ap-add-ℚ refl (mul-right-succ-ℚ _ _))
-        ≤ reciprocal-rational-succ-ℕ 1 +ℚ
+        ≤ ( reciprocal-rational-succ-ℕ 1) +ℚ
           ( one-ℚ +ℚ
             reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n)
           by leq-eq-ℚ (left-swap-add-ℚ _ _ _)
-        ≤ reciprocal-rational-succ-ℕ 1 +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+        ≤ ( reciprocal-rational-succ-ℕ 1) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
             preserves-leq-right-add-ℚ _ _ _
               ( lower-bound-sum-harmonic-series-power-of-two-ℚ n)
-        ≤ ( rational-ℕ (exp-ℕ 2 n) *ℚ
-            reciprocal-rational-succ-ℕ 1 *ℚ
-            reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n)) +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+        ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
+            ( reciprocal-rational-succ-ℕ 1) *ℚ
+            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n))) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
             leq-eq-ℚ
               ( ap-add-ℚ
@@ -127,19 +126,19 @@ abstract
                       ( positive-rational-ℕ⁺ (exp-ℕ⁺ (2 , λ ()) n))
                       ( positive-reciprocal-rational-succ-ℕ 1))))
                 ( refl))
-        ≤ ( rational-ℕ (exp-ℕ 2 n) *ℚ
-            ( reciprocal-rational-succ-ℕ 1 *ℚ
-              reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n))) +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+        ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
+            ( ( reciprocal-rational-succ-ℕ 1) *ℚ
+              ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n)))) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (associative-mul-ℚ _ _ _) refl)
-        ≤ ( rational-ℕ (exp-ℕ 2 n) *ℚ
-            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n) *ℚ
-              reciprocal-rational-succ-ℕ 1)) +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+        ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
+            ( ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n)) *ℚ
+              ( reciprocal-rational-succ-ℕ 1))) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (ap-mul-ℚ refl (commutative-mul-ℚ _ _)) refl)
-        ≤ ( rational-ℕ (exp-ℕ 2 n) *ℚ
-            reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , λ ()) (succ-ℕ n))) +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+        ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
+            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , λ ()) (succ-ℕ n)))) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
             leq-eq-ℚ
               ( ap-add-ℚ
@@ -156,21 +155,21 @@ abstract
                         { exp-ℕ⁺ (2 , (λ ())) (succ-ℕ n)}
                         ( refl)))))
                 ( refl))
-        ≤ sum-fin-sequence-ℚ
+        ≤ ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
-            ( λ _ → reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) (succ-ℕ n))) +ℚ
-          partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n)
+            ( λ _ → reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) (succ-ℕ n)))) +ℚ
+          ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (inv (sum-constant-fin-sequence-ℚ _ _)) refl)
-        ≤ sum-fin-sequence-ℚ
+        ≤ ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
             ( λ k →
               reciprocal-rational-succ-ℕ
                 ( nat-Fin
                   ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)
-                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k))) +ℚ
-          sum-fin-sequence-ℚ
+                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k)))) +ℚ
+          ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
-            ( λ k → reciprocal-rational-succ-ℕ (nat-Fin (exp-ℕ 2 n) k))
+            ( λ k → reciprocal-rational-succ-ℕ (nat-Fin (exp-ℕ 2 n) k)))
           by
             preserves-leq-left-add-ℚ _ _ _
               ( preserves-leq-sum-fin-sequence-ℚ
@@ -187,20 +186,20 @@ abstract
                           ( le-ℕ _)
                           ( right-two-law-mul-ℕ _)
                           ( strict-upper-bound-nat-Fin _ _))))))
-        ≤ sum-fin-sequence-ℚ
+        ≤ ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
             ( λ k →
               reciprocal-rational-succ-ℕ
                 ( nat-Fin
                   ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)
-                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k))) +ℚ
-          sum-fin-sequence-ℚ
+                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k)))) +ℚ
+          ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
             ( λ k →
               reciprocal-rational-succ-ℕ
                 ( nat-Fin
                   ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)
-                  ( inl-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k)))
+                  ( inl-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k))))
           by
             leq-eq-ℚ
               ( ap-add-ℚ
@@ -212,20 +211,20 @@ abstract
                       ap
                         ( reciprocal-rational-succ-ℕ)
                         ( inv (nat-inl-coproduct-Fin _ _ k))))))
-        ≤ sum-fin-sequence-ℚ
+        ≤ ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
             ( λ k →
               reciprocal-rational-succ-ℕ
                 ( nat-Fin
                   ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)
-                  ( inl-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k))) +ℚ
-          sum-fin-sequence-ℚ
+                  ( inl-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k)))) +ℚ
+          ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
             ( λ k →
               reciprocal-rational-succ-ℕ
                 ( nat-Fin
                   ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)
-                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k)))
+                  ( inr-coproduct-Fin (exp-ℕ 2 n) (exp-ℕ 2 n) k))))
           by leq-eq-ℚ (commutative-add-ℚ _ _)
         ≤ sum-fin-sequence-ℚ
             ( exp-ℕ 2 n +ℕ exp-ℕ 2 n)

@@ -165,13 +165,12 @@ module _
       diff-Metric-Ab G
         ( partial-sum-series-Metric-Ab σ (n +ℕ i))
         ( partial-sum-series-Metric-Ab σ n)
-    partial-sum-drop-series-Metric-Ab n (series-terms-Metric-Ab σ) i =
+    partial-sum-drop-series-Metric-Ab n s@(series-terms-Metric-Ab σ) i =
       inv
         ( equational-reasoning
           diff-Metric-Ab G
-            ( partial-sum-series-Metric-Ab (series-terms-Metric-Ab {G = G} σ)
-              ( n +ℕ i))
-            ( partial-sum-series-Metric-Ab (series-terms-Metric-Ab {G = G} σ) n)
+            ( partial-sum-series-Metric-Ab s (n +ℕ i))
+            ( partial-sum-series-Metric-Ab s n)
           ＝
             diff-Metric-Ab G
               ( add-Metric-Ab G
@@ -179,9 +178,7 @@ module _
                   ( σ ∘ nat-Fin (n +ℕ i) ∘ inl-coproduct-Fin n i))
                 ( sum-fin-sequence-type-Ab (ab-Metric-Ab G) i
                   ( σ ∘ nat-Fin (n +ℕ i) ∘ inr-coproduct-Fin n i)))
-              ( partial-sum-series-Metric-Ab
-                ( series-terms-Metric-Ab {G = G} σ)
-                ( n))
+              ( partial-sum-series-Metric-Ab s n)
             by
               ap-diff-Metric-Ab G
                 ( split-sum-fin-sequence-type-Ab
@@ -193,15 +190,11 @@ module _
           ＝
             diff-Metric-Ab G
               ( add-Metric-Ab G
-                ( partial-sum-series-Metric-Ab
-                  ( series-terms-Metric-Ab {G = G} σ)
-                  ( n))
+                ( partial-sum-series-Metric-Ab s n)
                 ( partial-sum-series-Metric-Ab
                   ( series-terms-Metric-Ab {G = G} (σ ∘ add-ℕ n))
                   ( i)))
-              ( partial-sum-series-Metric-Ab
-                ( series-terms-Metric-Ab {G = G} σ)
-                ( n))
+              ( partial-sum-series-Metric-Ab s n)
             by
               ap-diff-Metric-Ab G
                 ( ap-add-Metric-Ab G

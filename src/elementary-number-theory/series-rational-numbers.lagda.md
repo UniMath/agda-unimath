@@ -71,19 +71,13 @@ is-sum-series-ℚ = is-sum-series-Metric-Ab
 ### The proposition that a series grows without bound
 
 ```agda
+partial-sum-stays-above-prop-series-ℚ : series-ℚ → ℚ → ℕ → Prop lzero
+partial-sum-stays-above-prop-series-ℚ σ q n =
+  Π-Prop ℕ (λ k → leq-ℕ-Prop n k ⇒ leq-ℚ-Prop q (partial-sum-series-ℚ σ k))
+
 grows-without-bound-prop-series-ℚ : series-ℚ → Prop lzero
 grows-without-bound-prop-series-ℚ σ =
-  Π-Prop
-    ( ℚ)
-    ( λ q →
-      ∃ ( ℕ)
-        ( λ n →
-          Π-Prop
-            ( ℕ)
-            ( λ k →
-              hom-Prop
-                ( leq-ℕ-Prop n k)
-                ( leq-ℚ-Prop q (partial-sum-series-ℚ σ k)))))
+  Π-Prop ℚ (λ q → ∃ ℕ (partial-sum-stays-above-prop-series-ℚ σ q))
 
 grows-without-bound-series-ℚ : series-ℚ → UU lzero
 grows-without-bound-series-ℚ σ =
