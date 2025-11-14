@@ -102,6 +102,7 @@ open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-descent-data-pushouts public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
+open import synthetic-homotopy-theory.multivariable-loop-spaces public
 open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
