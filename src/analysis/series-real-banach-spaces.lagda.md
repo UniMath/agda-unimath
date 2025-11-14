@@ -52,7 +52,5 @@ module _
 
   partial-sum-series-ℝ-Banach-Space :
     series-ℝ-Banach-Space → sequence (type-ℝ-Banach-Space V)
-  partial-sum-series-ℝ-Banach-Space =
-    partial-sum-series-Metric-Ab
-      ( metric-ab-Normed-ℝ-Vector-Space (normed-vector-space-ℝ-Banach-Space V))
+  partial-sum-series-ℝ-Banach-Space = partial-sum-series-Metric-Ab
 ```

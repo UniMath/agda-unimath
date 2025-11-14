@@ -28,7 +28,9 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -201,6 +203,15 @@ module _
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
+  triangular-Normed-ℝ-Vector-Space :
+    (v w : type-Normed-ℝ-Vector-Space) →
+    leq-ℝ
+      ( map-norm-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w))
+      ( map-norm-Normed-ℝ-Vector-Space v +ℝ map-norm-Normed-ℝ-Vector-Space w)
+  triangular-Normed-ℝ-Vector-Space =
+    triangular-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
   is-extensional-norm-Normed-ℝ-Metric-Space :
     (v : type-Normed-ℝ-Vector-Space) →
     map-norm-Normed-ℝ-Vector-Space v ＝ raise-ℝ l1 zero-ℝ →
@@ -357,4 +368,21 @@ module _
                   ( u)
                   ( v)
                   ( w)))))
+```
+
+### The norm of the zero vector is zero
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    is-zero-norm-zero-Normed-ℝ-Vector-Space :
+      map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
+      raise-ℝ l1 zero-ℝ
+    is-zero-norm-zero-Normed-ℝ-Vector-Space =
+      is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
 ```

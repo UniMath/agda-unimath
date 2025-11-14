@@ -45,6 +45,5 @@ module _
 
   partial-sum-series-Complete-Metric-Ab :
     series-Complete-Metric-Ab → sequence (type-Complete-Metric-Ab G)
-  partial-sum-series-Complete-Metric-Ab =
-    partial-sum-series-Metric-Ab (metric-ab-Complete-Metric-Ab G)
+  partial-sum-series-Complete-Metric-Ab = partial-sum-series-Metric-Ab
 ```
