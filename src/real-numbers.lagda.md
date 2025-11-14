@@ -55,7 +55,7 @@ open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
-open import real-numbers.metric-abelian-group-of-real-numbers public
+open import real-numbers.metric-additive-group-of-real-numbers public
 open import real-numbers.metric-space-of-nonnegative-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public

@@ -1,12 +1,15 @@
 # Normed real vector spaces
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module linear-algebra.normed-real-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -19,9 +22,11 @@ open import group-theory.abelian-groups
 open import linear-algebra.real-vector-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
+open import metric-spaces.metrics-of-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -87,6 +92,10 @@ module _
   vector-space-Normed-ℝ-Vector-Space : ℝ-Vector-Space l1 l2
   vector-space-Normed-ℝ-Vector-Space = pr1 V
 
+  ab-Normed-ℝ-Vector-Space : Ab l2
+  ab-Normed-ℝ-Vector-Space =
+    ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
   norm-Normed-ℝ-Vector-Space :
     norm-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
   norm-Normed-ℝ-Vector-Space = pr2 V
@@ -114,15 +123,64 @@ module _
   add-Normed-ℝ-Vector-Space =
     add-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
 
+  commutative-add-Normed-ℝ-Vector-Space :
+    (u v : type-Normed-ℝ-Vector-Space) →
+    add-Normed-ℝ-Vector-Space u v ＝ add-Normed-ℝ-Vector-Space v u
+  commutative-add-Normed-ℝ-Vector-Space =
+    commutative-add-Ab ab-Normed-ℝ-Vector-Space
+
   diff-Normed-ℝ-Vector-Space :
     type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space →
     type-Normed-ℝ-Vector-Space
   diff-Normed-ℝ-Vector-Space =
     diff-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
 
+  neg-Normed-ℝ-Vector-Space :
+    type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space
+  neg-Normed-ℝ-Vector-Space =
+    neg-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  neg-neg-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    neg-Normed-ℝ-Vector-Space (neg-Normed-ℝ-Vector-Space v) ＝ v
+  neg-neg-Normed-ℝ-Vector-Space =
+    neg-neg-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  distributive-neg-add-Normed-ℝ-Vector-Space :
+    (v w : type-Normed-ℝ-Vector-Space) →
+    neg-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w) ＝
+    add-Normed-ℝ-Vector-Space
+      ( neg-Normed-ℝ-Vector-Space v)
+      ( neg-Normed-ℝ-Vector-Space w)
+  distributive-neg-add-Normed-ℝ-Vector-Space =
+    distributive-neg-add-Ab ab-Normed-ℝ-Vector-Space
+
+  interchange-add-add-Normed-ℝ-Vector-Space :
+    (u v w x : type-Normed-ℝ-Vector-Space) →
+    add-Normed-ℝ-Vector-Space
+      ( add-Normed-ℝ-Vector-Space u v)
+      ( add-Normed-ℝ-Vector-Space w x) ＝
+    add-Normed-ℝ-Vector-Space
+      ( add-Normed-ℝ-Vector-Space u w)
+      ( add-Normed-ℝ-Vector-Space v x)
+  interchange-add-add-Normed-ℝ-Vector-Space =
+    interchange-add-add-Ab ab-Normed-ℝ-Vector-Space
+
   zero-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space
   zero-Normed-ℝ-Vector-Space =
     zero-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  left-unit-law-add-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    add-Normed-ℝ-Vector-Space zero-Normed-ℝ-Vector-Space v ＝ v
+  left-unit-law-add-Normed-ℝ-Vector-Space =
+    left-unit-law-add-Ab ab-Normed-ℝ-Vector-Space
+
+  right-inverse-law-add-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    diff-Normed-ℝ-Vector-Space v v ＝ zero-Normed-ℝ-Vector-Space
+  right-inverse-law-add-Normed-ℝ-Vector-Space =
+    right-inverse-law-add-Ab ab-Normed-ℝ-Vector-Space
 
   map-norm-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space → ℝ l1
   map-norm-Normed-ℝ-Vector-Space = pr1 (pr1 norm-Normed-ℝ-Vector-Space)
@@ -214,4 +272,89 @@ module _
     located-metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
       ( metric-Normed-ℝ-Metric-Space)
+```
+
+### Negation is an isometry in the metric space of a normed vector space
+
+```agda
+module _
+  {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    is-isometry-neg-Normed-ℝ-Vector-Space :
+      is-isometry-Metric-Space
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( neg-Normed-ℝ-Vector-Space V)
+    is-isometry-neg-Normed-ℝ-Vector-Space =
+      is-isometry-sim-metric-Metric-Space
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( nonnegative-dist-Normed-ℝ-Vector-Space V)
+        ( nonnegative-dist-Normed-ℝ-Vector-Space V)
+        ( is-metric-metric-space-Metric
+          ( set-Normed-ℝ-Vector-Space V)
+          ( metric-Normed-ℝ-Metric-Space V))
+        ( is-metric-metric-space-Metric
+          ( set-Normed-ℝ-Vector-Space V)
+          ( metric-Normed-ℝ-Metric-Space V))
+        ( neg-Normed-ℝ-Vector-Space V)
+        ( λ x y →
+          sim-eq-ℝ
+            ( inv
+              ( equational-reasoning
+                dist-Normed-ℝ-Vector-Space V
+                  ( neg-Normed-ℝ-Vector-Space V x)
+                  ( neg-Normed-ℝ-Vector-Space V y)
+                ＝ dist-Normed-ℝ-Vector-Space V y x
+                  by
+                    ap
+                      ( map-norm-Normed-ℝ-Vector-Space V)
+                      ( right-subtraction-neg-Ab
+                        ( ab-Normed-ℝ-Vector-Space V)
+                        ( _)
+                        ( _))
+                ＝ dist-Normed-ℝ-Vector-Space V x y
+                  by commutative-dist-Normed-ℝ-Vector-Space V y x)))
+```
+
+### Addition is an isometry in the metric space of a normed vector space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  (u : type-Normed-ℝ-Vector-Space V)
+  where
+
+  abstract
+    is-isometry-left-add-Normed-ℝ-Vector-Space :
+      is-isometry-Metric-Space
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( add-Normed-ℝ-Vector-Space V u)
+    is-isometry-left-add-Normed-ℝ-Vector-Space =
+      is-isometry-sim-metric-Metric-Space
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( nonnegative-dist-Normed-ℝ-Vector-Space V)
+        ( nonnegative-dist-Normed-ℝ-Vector-Space V)
+        ( is-metric-metric-space-Metric
+          ( set-Normed-ℝ-Vector-Space V)
+          ( metric-Normed-ℝ-Metric-Space V))
+        ( is-metric-metric-space-Metric
+          ( set-Normed-ℝ-Vector-Space V)
+          ( metric-Normed-ℝ-Metric-Space V))
+        ( add-Normed-ℝ-Vector-Space V u)
+        ( λ v w →
+          sim-eq-ℝ
+            ( ap
+              ( map-norm-Normed-ℝ-Vector-Space V)
+              ( inv
+                ( right-subtraction-left-add-Ab
+                  ( ab-Normed-ℝ-Vector-Space V)
+                  ( u)
+                  ( v)
+                  ( w)))))
 ```
