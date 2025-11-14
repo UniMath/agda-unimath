@@ -2,7 +2,6 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-{-# OPTIONS --allow-unsolved-metas #-} -- DO NOT SUBMIT
 
 module linear-algebra.real-inner-product-spaces where
 ```
@@ -686,6 +685,14 @@ module _
 ```
 
 ### The Cauchy-Schwarz inequality
+
+The Cauchy-Schwarz inequality states that for any `u` and `v` in an inner
+product space, the absolute value of the inner product of `u` and `v` is at most
+the product of the norms of `u` and `v`.
+
+The Cauchy-Schwarz inequality is the [78th](literature.100-theorems.md#78)
+theorem on [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
 module _
