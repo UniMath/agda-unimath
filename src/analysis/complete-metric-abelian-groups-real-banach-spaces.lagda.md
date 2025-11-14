@@ -1,7 +1,7 @@
 # Complete metric abelian groups of real Banach spaces
 
 ```agda
-module analysis.complete-metric-abelian-groups-banach-spaces where
+module analysis.complete-metric-abelian-groups-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
