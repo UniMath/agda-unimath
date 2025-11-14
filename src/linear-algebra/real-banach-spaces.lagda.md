@@ -35,7 +35,7 @@ is a [normed](linear-algebra.normed-real-vector-spaces.md)
 is-banach-prop-Normed-ℝ-Vector-Space :
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2) → Prop (l1 ⊔ l2)
 is-banach-prop-Normed-ℝ-Vector-Space V =
-  is-complete-prop-Metric-Space (metric-space-Normed-ℝ-Metric-Space V)
+  is-complete-prop-Metric-Space (metric-space-Normed-ℝ-Vector-Space V)
 
 is-banach-Normed-ℝ-Vector-Space :
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2) → UU (l1 ⊔ l2)
