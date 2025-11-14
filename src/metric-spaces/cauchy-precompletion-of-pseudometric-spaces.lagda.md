@@ -94,8 +94,8 @@ of some
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 `g : C (C M)`. So the Cauchy precompletion of a pseudometric space is
 [complete](metric-spaces.complete-metric-spaces.md) if and only if all its
-Cauchy approximations have a lift up to similarity in the Cauchy
-pseudocompletion of its Cauchy pseudocompletion.
+Cauchy approximations have a lift up to similarity in its Cauchy
+pseudocompletion.
 
 Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
 isometry) from a pseudometric space in a complete metric space factors as a
