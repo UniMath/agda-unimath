@@ -561,6 +561,19 @@ abstract opaque
       leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
 ```
 
+### The square root of 1 is 1
+
+```agda
+real-sqrt-one-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ
+real-sqrt-one-ℝ⁰⁺ =
+  eq-sim-ℝ
+    ( symmetric-sim-ℝ
+      ( unique-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ one-ℝ⁰⁺ (sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+
+sqrt-one-ℝ⁰⁺ : sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
+```
+
 ### Squaring is an automorphism on the nonnegative real numbers
 
 ```agda

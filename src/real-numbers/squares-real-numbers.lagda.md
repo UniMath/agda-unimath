@@ -34,10 +34,10 @@ open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.similarity-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -49,6 +49,8 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -209,6 +211,22 @@ square-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 square-ℝ⁻ x⁻@(x , _) = (square-ℝ x , is-positive-square-ℝ⁻ x⁻)
 ```
 
+### For nonnegative real numbers, squaring preserves inequality
+
+```agda
+abstract
+  preserves-leq-square-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
+  preserves-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
+    transitive-leq-ℝ
+      ( square-ℝ x)
+      ( x *ℝ y)
+      ( square-ℝ y)
+      ( preserves-leq-right-mul-ℝ⁰⁺ y⁰⁺ x≤y)
+      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x≤y)
+```
+
 ### For nonnegative real numbers, squaring preserves strict inequality
 
 ```agda
@@ -254,7 +272,7 @@ abstract
   is-in-lower-cut-square-ℝ x q⁰⁺@(q , _) q∈Lx =
     let
       qℝ = nonnegative-real-ℚ⁰⁺ q⁰⁺
-      q<x = le-real-is-in-lower-cut-ℚ x q∈Lx
+      q<x = le-real-is-in-lower-cut-ℝ x q∈Lx
     in
       is-in-lower-cut-le-real-ℚ
         ( square-ℝ x)
@@ -284,7 +302,7 @@ abstract
           ( x⁰⁺)
           ( nonnegative-real-ℚ⁺
             ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))
-          ( le-real-is-in-upper-cut-ℚ x q∈Ux)))
+          ( le-real-is-in-upper-cut-ℝ x q∈Ux)))
 ```
 
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`
