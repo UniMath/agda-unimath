@@ -2,7 +2,6 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-{-# OPTIONS --allow-unsolved-metas #-} -- DO NOT SUBMIT
 
 module real-numbers.lipschitz-continuity-multiplication-real-numbers where
 ```

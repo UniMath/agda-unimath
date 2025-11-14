@@ -2,7 +2,6 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-{-# OPTIONS --allow-unsolved-metas #-} -- DO NOT SUBMIT
 
 module linear-algebra.real-inner-product-spaces where
 ```
