@@ -80,6 +80,14 @@ M → [C M]
 is an [equivalence](foundation.equivalences.md) if and only if `M` is
 [complete](metric-spaces.complete-metric-spaces.md).
 
+Any [short map](metric-spaces.short-functions-metric-spaces.md) (resp.
+[isometry](metric-spaces.isometries-metric-spaces.md)) from a pseudometric space
+in a [complete metric space](metric-spaces.complete-metric-spaces.md) factors as
+a short map (resp. isometry) through the Cauchy precompletion of its domain.
+This is the
+{{#concept "universal property" Disambiguation="of the Cauchy precompletion of a metric space"}}
+of the Cauchy precompletion.
+
 ## Definitions
 
 ### The Cauchy precompletion of a metric space
@@ -377,4 +385,48 @@ module _
               ( map-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space
                 ( M)
                 ( u)))))
+```
+
+### Induced short map from the Cauchy precompletion to a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (M : Metric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Metric-Space :
+    short-function-Metric-Space
+      ( M)
+      ( metric-space-Complete-Metric-Space C) →
+    short-function-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+        ( metric-space-Complete-Metric-Space C)
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Metric-Space
+    =
+    short-map-short-function-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( C)
+```
+
+### Induced isometry from the Cauchy precompletion into a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (M : Metric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Metric-Space :
+    isometry-Metric-Space
+      ( M)
+      ( metric-space-Complete-Metric-Space C) →
+    isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-Complete-Metric-Space C)
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Metric-Space
+    =
+    isometry-map-isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( C)
 ```
