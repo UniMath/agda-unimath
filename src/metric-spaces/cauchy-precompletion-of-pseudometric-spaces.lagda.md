@@ -33,8 +33,8 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
@@ -92,7 +92,17 @@ and only if it is
 [pointwise quotient](metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces.md)
 of some
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-`g : C (C M)`.
+`g : C (C M)`. So the Cauchy precompletion of a pseudometric space is
+[complete](metric-spaces.complete-metric-spaces.md) if and only if all its
+Cauchy approximations have a lift up to similarity in the Cauchy
+pseudocompletion of its Cauchy pseudocompletion.
+
+Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
+isometry) from a pseudometric space in a complete metric space factors as a
+short map (resp. isometry) through the Cauchy precompletion of its domain. This
+is the
+{{#concept "universal property" Disambiguation="of the Cauchy precompletion of a pseudometric space"}}
+of Cauchy precompletion.
 
 ## Definition
 
@@ -862,9 +872,7 @@ module _
           ( f)))
 ```
 
--- TODO
-
--- ### Induced isometry from the Cauchy precompletion into a complete metric space
+### Induced isometry from the Cauchy precompletion into a complete metric space
 
 ```agda
 module _
@@ -872,26 +880,32 @@ module _
   ( C : Complete-Metric-Space l3 l4)
   where
 
-  -- isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
-  --   isometry-Pseudometric-Space
-  --     ( P)
-  --     ( pseudometric-space-Complete-Metric-Space C) →
-  --   isometry-Metric-Space
-  --     ( cauchy-precompletion-Pseudometric-Space P)
-  --     ( metric-space-Complete-Metric-Space C)
-  -- isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space f =
-  --   isometry-map-isometry-metric-quotient-Pseudometric-Space
-  --     ( cauchy-pseudocompletion-Pseudometric-Space P)
-  --     ( metric-space-Complete-Metric-Space C)
-  --     ( comp-isometry-Pseudometric-Space
-  --       ( cauchy-pseudocompletion-Pseudometric-Space P)
-  --       ( cauchy-pseudocompletion-Metric-Space
-  --         ( metric-space-Complete-Metric-Space C))
-  --       ( pseudometric-space-Complete-Metric-Space C)
-  --       ( {!!})
-  --       ( {!!}))
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space C) →
+    isometry-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+    f =
+    isometry-map-isometry-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+      ( comp-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space C))
+        ( pseudometric-space-Complete-Metric-Space C)
+        ( isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( metric-space-Complete-Metric-Space C)
+          ( is-complete-metric-space-Complete-Metric-Space C))
+        ( isometry-map-isometry-cauchy-approximation-Pseudometric-Space
+          ( P)
+          ( pseudometric-space-Complete-Metric-Space C)
+          ( f)))
 ```
 
--- ### If ACC holds then cauchy precompletions are complete
+-- TODO
 
--- ### Cauchy completeness of the Cauchy precompletion is irrefutable
+-- ### If ACC holds then cauchy precompletions are complete
