@@ -124,7 +124,8 @@ module _
 ```agda
 abstract
   distributive-reciprocal-mul-ℕ⁺ :
-    (m n : ℕ⁺) → reciprocal-rational-ℕ⁺ (m *ℕ⁺ n) ＝
+    (m n : ℕ⁺) →
+    reciprocal-rational-ℕ⁺ (m *ℕ⁺ n) ＝
     reciprocal-rational-ℕ⁺ m *ℚ reciprocal-rational-ℕ⁺ n
   distributive-reciprocal-mul-ℕ⁺ m⁺@(m , _) n⁺@(n , _) =
     ap rational-inv-ℚ⁺ (eq-ℚ⁺ (inv (mul-rational-ℕ m n))) ∙
