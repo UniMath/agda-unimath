@@ -20,8 +20,9 @@ open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
-open import order-theory.large-posets
 open import metric-spaces.metric-spaces
+
+open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
@@ -173,5 +174,5 @@ module _
 
   metric-space-ℝ-Inner-Product-Space : Metric-Space l2 l1
   metric-space-ℝ-Inner-Product-Space =
-    metric-space-Normed-ℝ-Metric-Space ?
+    metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Inner-Product-Space
 ```

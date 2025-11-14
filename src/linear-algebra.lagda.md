@@ -38,6 +38,7 @@ open import linear-algebra.preimages-of-left-module-structures-along-homomorphis
 open import linear-algebra.pythagorean-theorem-real-inner-product-spaces public
 open import linear-algebra.rational-modules public
 open import linear-algebra.real-banach-spaces public
+open import linear-algebra.real-hilbert-spaces public
 open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
