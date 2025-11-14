@@ -3,7 +3,6 @@
 ```agda
 module analysis where
 
-open import analysis.absolute-convergence-test-series-real-banach-spaces public
 open import analysis.complete-metric-abelian-groups public
 open import analysis.complete-metric-abelian-groups-banach-spaces public
 open import analysis.convergent-series-complete-metric-abelian-groups public
