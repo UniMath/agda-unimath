@@ -175,8 +175,8 @@ module _
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2)
   where
 
-  metric-Normed-ℝ-Metric-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
-  metric-Normed-ℝ-Metric-Space =
+  metric-Normed-ℝ-Vector-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
+  metric-Normed-ℝ-Vector-Space =
     ( nonnegative-dist-Normed-ℝ-Vector-Space V ,
       ( λ v →
         similarity-reasoning-ℝ
@@ -203,15 +203,15 @@ module _
               ~ℝ raise-ℝ l1 zero-ℝ
                 by sim-raise-ℝ l1 zero-ℝ))))
 
-  metric-space-Normed-ℝ-Metric-Space : Metric-Space l2 l1
-  metric-space-Normed-ℝ-Metric-Space =
+  metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
+  metric-space-Normed-ℝ-Vector-Space =
     metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
-      ( metric-Normed-ℝ-Metric-Space)
+      ( metric-Normed-ℝ-Vector-Space)
 
-  located-metric-space-Normed-ℝ-Metric-Space : Located-Metric-Space l2 l1
-  located-metric-space-Normed-ℝ-Metric-Space =
+  located-metric-space-Normed-ℝ-Vector-Space : Located-Metric-Space l2 l1
+  located-metric-space-Normed-ℝ-Vector-Space =
     located-metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
-      ( metric-Normed-ℝ-Metric-Space)
+      ( metric-Normed-ℝ-Vector-Space)
 ```
