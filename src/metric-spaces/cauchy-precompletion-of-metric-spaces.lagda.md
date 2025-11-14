@@ -81,8 +81,8 @@ M → [C M]
 is an [equivalence](foundation.equivalences.md) if and only if `M` is
 [complete](metric-spaces.complete-metric-spaces.md).
 
-Any [short map](metric-spaces.short-functions-metric-spaces.md) (resp.
-[isometry](metric-spaces.isometries-metric-spaces.md)) from a metric space in a
+Any [short map](metric-spaces.short-functions-metric-spaces.md) (resp. isometry)
+from a metric space in a
 [complete metric space](metric-spaces.complete-metric-spaces.md) factors as a
 short map (resp. isometry) through the Cauchy precompletion of its domain. This
 is the
