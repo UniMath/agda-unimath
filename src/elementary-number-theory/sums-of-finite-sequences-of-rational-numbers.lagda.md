@@ -57,7 +57,7 @@ abstract
     inv (left-mul-rational-nat-ℚ n q)
 ```
 
-### If `aₙ ≤ bₙ` for each `n`, `Σ aₙ ≤ Σ bₙ`
+### If `aₙ ≤ bₙ` for each `n`, then `Σ aₙ ≤ Σ bₙ`
 
 ```agda
 abstract
