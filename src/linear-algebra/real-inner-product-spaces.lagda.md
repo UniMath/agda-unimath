@@ -349,7 +349,3 @@ module _
           ＝ (v ∙V v) +ℝ real-ℕ 2 *ℝ (v ∙V w) +ℝ (w ∙V w)
             by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 _))) refl
 ```
-
-## References
-
-{{#bibliography}}

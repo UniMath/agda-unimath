@@ -94,3 +94,7 @@ module _
         ( eq-ℝ⁰⁺ _ _
           ( squared-pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
 ```
+
+## References
+
+{{#bibliography}}
