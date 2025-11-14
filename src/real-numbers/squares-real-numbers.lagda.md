@@ -400,3 +400,11 @@ abstract
         ~ℝ raise-ℝ l (square-ℝ x)
           by sim-raise-ℝ l _)
 ```
+
+### The square of zero is zero
+
+```agda
+abstract
+  square-zero-ℝ : square-ℝ zero-ℝ ＝ zero-ℝ
+  square-zero-ℝ = eq-sim-ℝ (left-zero-law-mul-ℝ zero-ℝ)
+```
