@@ -31,6 +31,7 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -86,29 +87,19 @@ mul-negative-positive-ℝ (x , is-neg-x) (y , is-pos-y) =
   ( x *ℝ y , is-negative-mul-negative-positive-ℝ is-neg-x is-pos-y)
 ```
 
-### For every nonnegative real number `x`, there is a `q : ℚ⁺` such that `qx < 1`
+### If `x` is positive and `xy` is nonnegative, `y` is nonnegative
 
 ```agda
 abstract
-  exists-ℚ⁺-mul-le-one-ℝ⁰⁺ :
-    {l : Level} (x : ℝ⁰⁺ l) →
-    exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ (nonnegative-real-ℚ⁺ q *ℝ⁰⁺ x) one-ℝ⁰⁺)
-  exists-ℚ⁺-mul-le-one-ℝ⁰⁺ x⁰⁺@(x , _) =
-    let
-      open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → le-prop-ℝ (real-ℚ⁺ q *ℝ x) one-ℝ))
-    in do
-      (p , x<p) ← exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x⁰⁺
-      intro-exists
-        ( inv-ℚ⁺ p)
-        ( tr
-          ( le-ℝ _)
-          ( equational-reasoning
-            real-ℚ⁺ (inv-ℚ⁺ p) *ℝ real-ℚ⁺ p
-            ＝ real-ℚ⁺ (inv-ℚ⁺ p *ℚ⁺ p)
-              by mul-real-ℚ _ _
-            ＝ one-ℝ
-              by ap real-ℚ⁺ (left-inverse-law-mul-ℚ⁺ p))
-          ( preserves-le-left-mul-ℝ⁺
-            ( positive-real-ℚ⁺ (inv-ℚ⁺ p))
-            ( le-real-is-in-upper-cut-ℚ x x<p)))
+  is-nonnegative-is-nonnegative-left-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) {y : ℝ l2} → is-nonnegative-ℝ (real-ℝ⁺ x *ℝ y) →
+    is-nonnegative-ℝ y
+  is-nonnegative-is-nonnegative-left-mul-ℝ⁺ x⁺@(x , 0<x) {y = y} 0≤xy =
+    reflects-leq-left-mul-ℝ⁺
+      ( x⁺)
+      ( zero-ℝ)
+      ( y)
+      ( preserves-leq-left-sim-ℝ
+        ( symmetric-sim-ℝ (right-zero-law-mul-ℝ _))
+        ( 0≤xy))
 ```

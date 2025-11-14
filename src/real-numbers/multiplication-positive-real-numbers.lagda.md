@@ -31,6 +31,8 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -183,4 +185,30 @@ abstract
         ( commutative-mul-ℝ _ _)
         ( commutative-mul-ℝ _ _)
         ( yx≤zx))
+```
+
+### The multiplicative inverse is distributive over multiplication
+
+```agda
+abstract
+  distributive-real-inv-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) →
+    real-inv-ℝ⁺ (x *ℝ⁺ y) ＝ real-inv-ℝ⁺ x *ℝ real-inv-ℝ⁺ y
+  distributive-real-inv-mul-ℝ⁺ x⁺@(x , _) y⁺@(y , _) =
+    eq-sim-ℝ
+      ( symmetric-sim-ℝ
+        ( unique-right-inv-ℝ⁺
+          ( x⁺ *ℝ⁺ y⁺)
+          ( inv-ℝ⁺ x⁺ *ℝ⁺ inv-ℝ⁺ y⁺)
+          ( similarity-reasoning-ℝ
+            (x *ℝ y) *ℝ (real-inv-ℝ⁺ x⁺ *ℝ real-inv-ℝ⁺ y⁺)
+            ~ℝ (x *ℝ real-inv-ℝ⁺ x⁺) *ℝ (y *ℝ real-inv-ℝ⁺ y⁺)
+              by sim-eq-ℝ (interchange-law-mul-mul-ℝ _ _ _ _)
+            ~ℝ one-ℝ *ℝ one-ℝ
+              by
+                preserves-sim-mul-ℝ
+                  ( right-inverse-law-mul-ℝ⁺ x⁺)
+                  ( right-inverse-law-mul-ℝ⁺ y⁺)
+            ~ℝ one-ℝ
+              by sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
 ```
