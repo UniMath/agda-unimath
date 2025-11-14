@@ -27,6 +27,7 @@ open import linear-algebra.finite-sequences-in-semirings
 
 open import lists.finite-sequences
 
+open import ring-theory.multiples-of-elements-semirings
 open import ring-theory.semirings
 
 open import univalent-combinatorics.coproduct-types
@@ -284,19 +285,14 @@ module _
 ### The sum of a constant finite sequence in a semiring is scalar multiplication by the length of the sequence
 
 ```agda
-module _
-  {l : Level} (R : Semiring l) (x : type-Semiring R)
-  where
-
-  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring :
-    (n : ℕ) →
+abstract
+  constant-sum-fin-sequence-type-Semiring :
+    {l : Level} (R : Semiring l) (n : ℕ) (x : type-Semiring R) →
     sum-fin-sequence-type-Semiring R n (λ _ → x) ＝
-    mul-nat-scalar-Semiring R n x
-  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring zero-ℕ = refl
-  eq-mul-nat-scalar-sum-const-fin-sequence-Semiring (succ-ℕ n) =
-    ap
-      ( add-Semiring' R x)
-      ( eq-mul-nat-scalar-sum-const-fin-sequence-Semiring n)
+    multiple-Semiring R n x
+  constant-sum-fin-sequence-type-Semiring R =
+    constant-sum-fin-sequence-type-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
 ```
 
 ## See also
