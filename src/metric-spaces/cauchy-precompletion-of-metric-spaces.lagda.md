@@ -210,17 +210,6 @@ module _
       ( M)
       ( short-map-lim-cauchy-precompletion-is-complete-Metric-Space)
 
-  is-short-map-lim-cauchy-precompletion-is-completr-Metric-Space :
-    is-short-function-Metric-Space
-      ( cauchy-precompletion-Metric-Space M)
-      ( M)
-      ( map-lim-cauchy-precompletion-is-complete-Metric-Space)
-  is-short-map-lim-cauchy-precompletion-is-completr-Metric-Space =
-    is-short-map-short-function-Metric-Space
-      ( cauchy-precompletion-Metric-Space M)
-      ( M)
-      ( short-map-lim-cauchy-precompletion-is-complete-Metric-Space)
-
   compute-map-lim-cauchy-precompletion-is-complete-Metric-Space :
     (X : type-cauchy-precompletion-Metric-Space M) →
     (x : cauchy-approximation-Metric-Space M) →
@@ -240,100 +229,102 @@ module _
         ( M)
         (is-complete-M))
 
-  is-section-map-cauchy-precompletion-is-complete-Metric-Space :
-    ( map-cauchy-precompletion-Metric-Space M ∘
-      map-lim-cauchy-precompletion-is-complete-Metric-Space) ~
-    ( id)
-  is-section-map-cauchy-precompletion-is-complete-Metric-Space U =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Metric-Space
-                ( cauchy-precompletion-Metric-Space M))
-            ( map-cauchy-precompletion-Metric-Space M
-              ( map-lim-cauchy-precompletion-is-complete-Metric-Space U))
-            ( U))
-        in do
-          (u , u∈U) ←
-            is-inhabited-class-metric-quotient-Pseudometric-Space
-              ( cauchy-pseudocompletion-Metric-Space M)
-              ( U)
-          let
-            lim-u : type-Metric-Space M
-            lim-u =
-              limit-cauchy-approximation-Complete-Metric-Space
-                ( M , is-complete-M)
-                ( u)
-
-            compute-map-lim-U :
-              map-lim-cauchy-precompletion-is-complete-Metric-Space U ＝ lim-u
-            compute-map-lim-U =
-              compute-map-lim-cauchy-precompletion-is-complete-Metric-Space
+  abstract
+    is-section-map-cauchy-precompletion-is-complete-Metric-Space :
+      ( map-cauchy-precompletion-Metric-Space M ∘
+        map-lim-cauchy-precompletion-is-complete-Metric-Space) ~
+      ( id)
+    is-section-map-cauchy-precompletion-is-complete-Metric-Space U =
+        let
+          open
+            do-syntax-trunc-Prop
+              ( Id-Prop
+                ( set-Metric-Space
+                  ( cauchy-precompletion-Metric-Space M))
+              ( map-cauchy-precompletion-Metric-Space M
+                ( map-lim-cauchy-precompletion-is-complete-Metric-Space U))
+              ( U))
+          in do
+            (u , u∈U) ←
+              is-inhabited-class-metric-quotient-Pseudometric-Space
+                ( cauchy-pseudocompletion-Metric-Space M)
                 ( U)
-                ( u)
-                ( u∈U)
+            let
+              lim-u : type-Metric-Space M
+              lim-u =
+                limit-cauchy-approximation-Complete-Metric-Space
+                  ( M , is-complete-M)
+                  ( u)
 
-            sim-u-lim-u :
-              sim-Pseudometric-Space
-                ( cauchy-pseudocompletion-Metric-Space M)
-                ( u)
-                ( const-cauchy-approximation-Metric-Space
-                  ( M)
-                  ( lim-u))
-            sim-u-lim-u =
-              sim-const-is-limit-cauchy-approximation-Metric-Space
-                ( M)
-                ( u)
-                ( lim-u)
-                ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-                  ( M)
-                  ( is-complete-M)
-                  ( u))
+              compute-map-lim-U :
+                map-lim-cauchy-precompletion-is-complete-Metric-Space U ＝ lim-u
+              compute-map-lim-U =
+                compute-map-lim-cauchy-precompletion-is-complete-Metric-Space
+                  ( U)
+                  ( u)
+                  ( u∈U)
 
-            [u]=[lim-u] :
-              ( map-metric-quotient-Pseudometric-Space
-                ( cauchy-pseudocompletion-Metric-Space M)
-                ( u)) ＝
-              ( map-cauchy-precompletion-Metric-Space M lim-u)
-            [u]=[lim-u] =
-              apply-effectiveness-quotient-map'
+              sim-u-lim-u :
+                sim-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Metric-Space M)
+                  ( u)
+                  ( const-cauchy-approximation-Metric-Space
+                    ( M)
+                    ( lim-u))
+              sim-u-lim-u =
+                sim-const-is-limit-cauchy-approximation-Metric-Space
+                  ( M)
+                  ( u)
+                  ( lim-u)
+                  ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+                    ( M)
+                    ( is-complete-M)
+                    ( u))
+
+              [u]=[lim-u] :
+                ( map-metric-quotient-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Metric-Space M)
+                  ( u)) ＝
+                ( map-cauchy-precompletion-Metric-Space M lim-u)
+              [u]=[lim-u] =
+                apply-effectiveness-quotient-map'
+                  ( equivalence-relation-sim-Pseudometric-Space
+                    ( cauchy-pseudocompletion-Metric-Space M))
+                  ( sim-u-lim-u)
+
+            ( ( ap
+                ( map-cauchy-precompletion-Metric-Space M)
+                ( compute-map-lim-U)) ∙
+              ( inv [u]=[lim-u]) ∙
+              ( eq-set-quotient-equivalence-class-set-quotient
                 ( equivalence-relation-sim-Pseudometric-Space
-                  ( cauchy-pseudocompletion-Metric-Space M))
-                ( sim-u-lim-u)
-          ( ( ap
-              ( map-cauchy-precompletion-Metric-Space M)
-              ( compute-map-lim-U)) ∙
-            ( inv [u]=[lim-u]) ∙
-            ( eq-set-quotient-equivalence-class-set-quotient
-              ( equivalence-relation-sim-Pseudometric-Space
-              ( cauchy-pseudocompletion-Metric-Space M))
-              ( U)
-              ( u∈U)))
+                ( cauchy-pseudocompletion-Metric-Space M))
+                ( U)
+                ( u∈U)))
 
-  is-retraction-map-cauchy-precompletion-is-complete-Metric-Space :
-    ( map-lim-cauchy-precompletion-is-complete-Metric-Space ∘
-      map-cauchy-precompletion-Metric-Space M) ~
-    ( id)
-  is-retraction-map-cauchy-precompletion-is-complete-Metric-Space x =
-    ( compute-map-lim-cauchy-precompletion-is-complete-Metric-Space
-      ( map-cauchy-precompletion-Metric-Space M x)
-      ( const-cauchy-approximation-Metric-Space M x)
-      ( is-in-class-map-quotient-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        ( const-cauchy-approximation-Metric-Space M x))) ∙
-    ( is-retraction-limit-cauchy-approximation-Complete-Metric-Space
-      ( M , is-complete-M)
-      ( x))
+    is-retraction-map-cauchy-precompletion-is-complete-Metric-Space :
+      ( map-lim-cauchy-precompletion-is-complete-Metric-Space ∘
+        map-cauchy-precompletion-Metric-Space M) ~
+      ( id)
+    is-retraction-map-cauchy-precompletion-is-complete-Metric-Space x =
+      ( compute-map-lim-cauchy-precompletion-is-complete-Metric-Space
+        ( map-cauchy-precompletion-Metric-Space M x)
+        ( const-cauchy-approximation-Metric-Space M x)
+        ( is-in-class-map-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Metric-Space M)
+          ( const-cauchy-approximation-Metric-Space M x))) ∙
+      ( is-retraction-limit-cauchy-approximation-Complete-Metric-Space
+        ( M , is-complete-M)
+        ( x))
 
-  is-equiv-map-cauchy-precompletion-is-complete-Metric-Space :
-    is-equiv
-      ( map-cauchy-precompletion-Metric-Space M)
-  is-equiv-map-cauchy-precompletion-is-complete-Metric-Space =
-    is-equiv-is-invertible
-      ( map-lim-cauchy-precompletion-is-complete-Metric-Space)
-      ( is-section-map-cauchy-precompletion-is-complete-Metric-Space)
-      ( is-retraction-map-cauchy-precompletion-is-complete-Metric-Space)
+    is-equiv-map-cauchy-precompletion-is-complete-Metric-Space :
+      is-equiv
+        ( map-cauchy-precompletion-Metric-Space M)
+    is-equiv-map-cauchy-precompletion-is-complete-Metric-Space =
+      is-equiv-is-invertible
+        ( map-lim-cauchy-precompletion-is-complete-Metric-Space)
+        ( is-section-map-cauchy-precompletion-is-complete-Metric-Space)
+        ( is-retraction-map-cauchy-precompletion-is-complete-Metric-Space)
 
   isometric-equiv-cauchy-precompletion-is-complete-Metric-Space' :
     isometric-equiv-Metric-Space'
