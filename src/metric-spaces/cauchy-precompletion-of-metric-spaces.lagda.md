@@ -401,7 +401,7 @@ module _
           ( H)))
 ```
 
-### The Cauchy precompletion of a metric space is complete if and only if all its Cauchy approximations have a lift in is Cauchy pseudocompletion
+### The Cauchy precompletion of a metric space is complete if and only if all its Cauchy approximations have a lift in its Cauchy pseudocompletion
 
 ```agda
 module _
