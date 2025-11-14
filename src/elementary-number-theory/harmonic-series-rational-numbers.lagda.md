@@ -103,8 +103,7 @@ abstract
             reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n)
           by leq-eq-ℚ (ap-add-ℚ refl (mul-right-succ-ℚ _ _))
         ≤ ( reciprocal-rational-succ-ℕ 1) +ℚ
-          ( one-ℚ +ℚ
-            reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n)
+          ( one-ℚ +ℚ reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n)
           by leq-eq-ℚ (left-swap-add-ℚ _ _ _)
         ≤ ( reciprocal-rational-succ-ℕ 1) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
