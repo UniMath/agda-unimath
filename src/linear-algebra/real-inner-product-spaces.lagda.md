@@ -598,7 +598,3 @@ module _
                 ( right-negative-law-mul-ℝ _ _))
               ( refl)
 ```
-
-## References
-
-{{#bibliography}}
