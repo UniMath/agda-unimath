@@ -9,14 +9,10 @@ module linear-algebra.real-inner-product-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -39,28 +35,17 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
-open import real-numbers.addition-nonnegative-real-numbers
-open import real-numbers.addition-positive-and-negative-real-numbers
-open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.distance-real-numbers
-open import real-numbers.inequalities-addition-and-subtraction-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.lipschitz-continuity-multiplication-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
-open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers

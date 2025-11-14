@@ -6,6 +6,7 @@
 module linear-algebra where
 
 open import linear-algebra.bilinear-forms-real-vector-spaces public
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces public
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
@@ -36,6 +37,7 @@ open import linear-algebra.preimages-of-left-module-structures-along-homomorphis
 open import linear-algebra.pythagorean-theorem-real-inner-product-spaces public
 open import linear-algebra.rational-modules public
 open import linear-algebra.real-inner-product-spaces public
+open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-matrices public
