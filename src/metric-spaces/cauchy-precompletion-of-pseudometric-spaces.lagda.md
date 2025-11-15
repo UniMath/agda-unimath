@@ -9,7 +9,9 @@ module metric-spaces.cauchy-precompletion-of-pseudometric-spaces where
 ```agda
 open import category-theory.isomorphisms-in-precategories
 
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -958,6 +960,145 @@ module _
           ( P)
           ( pseudometric-space-Complete-Metric-Space C)
           ( f)))
+```
+
+### The image of a Cauchy approximation in the Cauchy precompletion converges to its image by the quotient map
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P))
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( const-cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( map-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P)
+          ( u)))
+  sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space d α β =
+    preserves-neighborhood-map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+      ( isometry-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( const-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( map-cauchy-approximation-Pseudometric-Space P u α))
+      ( u)
+      ( λ ε δ →
+        monotonic-neighborhood-Pseudometric-Space
+          ( P)
+          ( map-cauchy-approximation-Pseudometric-Space P u α)
+          ( map-cauchy-approximation-Pseudometric-Space P u δ)
+          ( α +ℚ⁺ δ)
+          ( ( ε +ℚ⁺ δ) +ℚ⁺ (α +ℚ⁺ β +ℚ⁺ d))
+          ( lemma-le α δ ε β d)
+          ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+            ( P)
+            ( u)
+            ( α)
+            ( δ)))
+      where
+
+      lemma-le :
+        (a b c d e : ℚ⁺) →
+        le-ℚ⁺
+          ( a +ℚ⁺ b)
+          ( (c +ℚ⁺ b) +ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e))
+      lemma-le a b c d e =
+        tr
+          ( λ u → le-ℚ⁺ u ((c +ℚ⁺ b) +ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e)))
+          ( commutative-add-ℚ⁺ b a)
+          ( preserves-le-add-ℚ
+            { rational-ℚ⁺ b}
+            { rational-ℚ⁺ (c +ℚ⁺ b)}
+            { rational-ℚ⁺ a}
+            { rational-ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e)}
+            ( le-right-add-ℚ⁺ c b)
+            ( transitive-le-ℚ⁺
+              ( a)
+              ( a +ℚ⁺ d)
+              ( a +ℚ⁺ d +ℚ⁺ e)
+              ( le-left-add-ℚ⁺ (a +ℚ⁺ d) e)
+              ( le-left-add-ℚ⁺ a d)))
+
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+    =
+    is-limit-sim-const-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( map-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+          ( P))
+        ( u))
+      ( sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space)
+```
+
+### Any point of the Cauchy precompletion is the limit of the image of a Cauchy approximation
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  is-limit-is-in-class-cauchy-precompletion-Pseudometric-Space :
+    (X : type-cauchy-precompletion-Pseudometric-Space P) →
+    (x : cauchy-approximation-Pseudometric-Space P) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( X)
+      ( x) →
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( x))
+      ( X)
+  is-limit-is-in-class-cauchy-precompletion-Pseudometric-Space X x x∈X =
+    tr
+      ( is-limit-cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( map-isometry-cauchy-approximation-Pseudometric-Space
+          ( P)
+          ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+          ( isometry-cauchy-precompletion-Pseudometric-Space P)
+          ( x)))
+      ( eq-map-is-in-class-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( X)
+        ( x∈X))
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+        ( P)
+        ( x))
 ```
 
 -- TODO
