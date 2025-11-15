@@ -24,6 +24,7 @@ open import linear-algebra.real-vector-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.extensionality-squares-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -31,6 +32,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
 ```
 
 </details>
@@ -77,6 +79,10 @@ module _
     is-commutative-prop-bilinear-form-ℝ-Vector-Space V B ∧
     is-semidefinite-prop-bilinear-form-ℝ-Vector-Space ∧
     is-extensional-prop-bilinear-form-ℝ-Vector-Space
+
+  is-inner-product-bilinear-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  is-inner-product-bilinear-form-ℝ-Vector-Space =
+    type-Prop is-inner-product-prop-bilinear-form-ℝ-Vector-Space
 
 inner-product-ℝ-Vector-Space :
   {l1 l2 : Level} → ℝ-Vector-Space l1 l2 → UU (lsuc l1 ⊔ l2)
@@ -348,4 +354,33 @@ module _
                 ( refl)
           ＝ (v ∙V v) +ℝ real-ℕ 2 *ℝ (v ∙V w) +ℝ (w ∙V w)
             by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 _))) refl
+```
+
+### The real inner product space of the real numbers
+
+```agda
+bilinear-form-mul-ℝ :
+  (l : Level) → bilinear-form-ℝ-Vector-Space (real-vector-space-ℝ l)
+bilinear-form-mul-ℝ l =
+  ( mul-ℝ ,
+    right-distributive-mul-add-ℝ ,
+    associative-mul-ℝ ,
+    left-distributive-mul-add-ℝ ,
+    λ c x y → left-swap-mul-ℝ x c y)
+
+is-inner-product-bilinear-form-mul-ℝ :
+  (l : Level) →
+  is-inner-product-bilinear-form-ℝ-Vector-Space
+    ( real-vector-space-ℝ l)
+    ( bilinear-form-mul-ℝ l)
+is-inner-product-bilinear-form-mul-ℝ l =
+  ( commutative-mul-ℝ ,
+    is-nonnegative-square-ℝ ,
+    eq-zero-eq-zero-square-ℝ)
+
+real-inner-product-space-ℝ : (l : Level) → ℝ-Inner-Product-Space l (lsuc l)
+real-inner-product-space-ℝ l =
+  ( real-vector-space-ℝ l ,
+    bilinear-form-mul-ℝ l ,
+    is-inner-product-bilinear-form-mul-ℝ l)
 ```
