@@ -237,3 +237,12 @@ module _
               ( left-mul-real-ℕ-ℝ-Vector-Space n v)
               ( left-unit-law-mul-ℝ-Vector-Space V v)
 ```
+
+### The real numbers are a real vector space
+
+```agda
+real-vector-space-ℝ : (l : Level) → ℝ-Vector-Space l (lsuc l)
+real-vector-space-ℝ l =
+  vector-space-local-commutative-ring-Local-Commutative-Ring
+    ( local-commutative-ring-ℝ l)
+```

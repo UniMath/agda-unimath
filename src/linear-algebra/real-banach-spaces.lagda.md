@@ -9,13 +9,17 @@ module linear-algebra.real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import linear-algebra.normed-real-vector-spaces
 
 open import metric-spaces.complete-metric-spaces
+
+open import real-numbers.cauchy-completeness-dedekind-real-numbers
 ```
 
 </details>
@@ -45,4 +49,18 @@ is-banach-Normed-ℝ-Vector-Space V =
 ℝ-Banach-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 ℝ-Banach-Space l1 l2 =
   type-subtype (is-banach-prop-Normed-ℝ-Vector-Space {l1} {l2})
+```
+
+## Properties
+
+### The real numbers are a real Banach space with norm `x ↦ |x|`
+
+```agda
+real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
+real-banach-space-ℝ l =
+  ( normed-real-vector-space-ℝ l ,
+    inv-tr
+      ( is-complete-Metric-Space)
+      ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
+      ( is-complete-metric-space-ℝ l))
 ```
