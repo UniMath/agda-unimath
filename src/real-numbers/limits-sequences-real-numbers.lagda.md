@@ -43,6 +43,9 @@ is-limit-prop-sequence-ℝ {l} =
 
 is-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → UU l
 is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
+
+has-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU (lsuc l)
+has-limit-sequence-ℝ {l} = has-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
 
 ## Properties
