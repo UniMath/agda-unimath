@@ -668,3 +668,12 @@ abstract opaque
           ( left-zero-law-mul-ℚ zero-ℚ)
           ( zero-in-lower-cut-ℝ⁺ x⁺))
 ```
+
+### The square root of zero is zero
+
+```agda
+abstract
+  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
+  real-sqrt-zero-ℝ⁰⁺ =
+    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
+```

@@ -29,6 +29,7 @@ open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
 open import real-numbers.equality-real-numbers public
 open import real-numbers.field-of-real-numbers public
+open import real-numbers.extensionality-squares-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
