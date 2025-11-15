@@ -51,6 +51,9 @@ sim-ℂ a+bi c+di = type-Prop (sim-prop-ℂ a+bi c+di)
 abstract
   refl-sim-ℂ : {l : Level} (z : ℂ l) → sim-ℂ z z
   refl-sim-ℂ (a , b) = (refl-sim-ℝ a , refl-sim-ℝ b)
+
+  sim-eq-ℂ : {l : Level} {z w : ℂ l} → z ＝ w → sim-ℂ z w
+  sim-eq-ℂ {z = z} refl = refl-sim-ℂ z
 ```
 
 ### Similarity is symmetric
