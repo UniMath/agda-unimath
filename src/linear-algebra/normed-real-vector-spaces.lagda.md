@@ -30,12 +30,11 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.absolute-value-real-numbers
-open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
