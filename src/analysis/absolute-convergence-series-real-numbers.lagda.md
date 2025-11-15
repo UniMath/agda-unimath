@@ -7,6 +7,7 @@ module analysis.absolute-convergence-series-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import analysis.absolute-convergence-series-real-banach-spaces
 open import analysis.convergent-series-real-banach-spaces
 open import analysis.convergent-series-real-numbers
 open import analysis.series-real-banach-spaces
@@ -14,6 +15,8 @@ open import analysis.series-real-numbers
 
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import linear-algebra.real-banach-spaces
 ```
 
 </details>
@@ -43,4 +46,28 @@ module _
   is-absolutely-convergent-series-ℝ : UU (lsuc l)
   is-absolutely-convergent-series-ℝ =
     type-Prop is-absolutely-convergent-prop-series-ℝ
+```
+
+## Properties
+
+### If a series of real numbers is absolutely convergent, it is convergent
+
+```agda
+module _
+  {l : Level}
+  (σ : series-ℝ l)
+  where
+
+  is-convergent-is-absolutely-convergent-series-ℝ :
+    is-absolutely-convergent-series-ℝ σ →
+    is-convergent-series-ℝ σ
+  is-convergent-is-absolutely-convergent-series-ℝ H =
+    is-convergent-real-is-convergent-real-banach-space-ℝ
+      ( term-series-ℝ σ)
+      ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space
+        ( real-banach-space-ℝ l)
+        ( series-terms-ℝ-Banach-Space
+          ( real-banach-space-ℝ l)
+          ( term-series-ℝ σ))
+        ( H))
 ```
