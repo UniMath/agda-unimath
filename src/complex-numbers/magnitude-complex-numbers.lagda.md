@@ -43,7 +43,7 @@ open import real-numbers.squares-real-numbers
 The
 {{#concept "magnitude" WD="magnitude of a complex number" WDID=Q3317982 Agda=magnitude-ℂ}}
 of a [complex number](complex-numbers.complex-numbers.md) `a + bi` is defined as
-$$\sqrt{a^2 + b^2}}$$.
+$$\sqrt{a^2 + b^2}$$.
 
 ## Definition
 
