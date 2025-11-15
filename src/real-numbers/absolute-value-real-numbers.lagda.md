@@ -14,6 +14,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -202,20 +203,29 @@ module _
 
 ```agda
 module _
+  {l : Level} (x : ℝ l) (|x|~0 : sim-ℝ (abs-ℝ x) zero-ℝ)
+  where
+
+  abstract
+    sim-zero-sim-zero-abs-ℝ : sim-ℝ x zero-ℝ
+    sim-zero-sim-zero-abs-ℝ =
+      sim-sim-leq-ℝ
+        ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (leq-abs-ℝ x) ,
+          binary-tr
+            ( leq-ℝ)
+            ( neg-zero-ℝ)
+            ( neg-neg-ℝ x)
+            ( neg-leq-ℝ
+              ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (neg-leq-abs-ℝ x))))
+
+module _
   (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
   where
 
   abstract
     is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
     is-zero-is-zero-abs-ℝ =
-      antisymmetric-leq-ℝ
-        ( x)
-        ( zero-ℝ)
-        ( tr (leq-ℝ x) |x|=0 (leq-abs-ℝ x))
-        ( tr
-          ( λ y → leq-ℝ y x)
-          ( (ap neg-ℝ |x|=0) ∙ neg-zero-ℝ)
-          ( leq-neg-abs-ℝ x))
+      eq-sim-ℝ (sim-zero-sim-zero-abs-ℝ x (sim-eq-ℝ |x|=0))
 ```
 
 ### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
