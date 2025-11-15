@@ -1,7 +1,7 @@
-# The absolute convergence test in real Banach spaces
+# Absolute convergence of series in real Banach spaces
 
 ```agda
-module analysis.absolute-convergence-test-real-banach-spaces where
+module analysis.absolute-convergence-series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -49,8 +49,6 @@ A [series](analysis.series-real-banach-spaces.md) `Σ aₙ` in a
 if the series of norms `Σ ∥aₙ∥` is a
 [convergent series](analysis.convergent-series-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md).
-
-If a series is absolutely convergent, it is convergent.
 
 ## Definition
 
