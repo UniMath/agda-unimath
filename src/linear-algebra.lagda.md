@@ -39,7 +39,6 @@ open import linear-algebra.pythagorean-theorem-real-inner-product-spaces public
 open import linear-algebra.rational-modules public
 open import linear-algebra.real-banach-spaces public
 open import linear-algebra.real-inner-product-spaces public
-open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-matrices public
