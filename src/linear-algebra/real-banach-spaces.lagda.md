@@ -67,7 +67,7 @@ module _
 
   metric-space-ℝ-Banach-Space : Metric-Space l2 l1
   metric-space-ℝ-Banach-Space =
-    metric-space-Normed-ℝ-Metric-Space normed-vector-space-ℝ-Banach-Space
+    metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   is-complete-metric-space-ℝ-Banach-Space :
     is-complete-Metric-Space metric-space-ℝ-Banach-Space
