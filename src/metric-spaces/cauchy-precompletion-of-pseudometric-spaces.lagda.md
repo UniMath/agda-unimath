@@ -812,6 +812,60 @@ module _
       ( is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space)
 ```
 
+### Images of Cauchy approximations in a pseudometric space converge in its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+  is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( has-lift-map-quotient-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( map-isometry-cauchy-approximation-Pseudometric-Space
+          ( P)
+          ( cauchy-pseudocompletion-Pseudometric-Space P)
+          ( isometry-cauchy-pseudocompletion-Pseudometric-Space P)
+          ( u)))
+
+  lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    type-cauchy-precompletion-Pseudometric-Space P
+  lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space =
+    pr1
+      is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+
+  is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space)
+  is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    pr2
+      is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+```
+
 ### The Cauchy precompletion of a pseudometric space is complete if and only if all its Cauchy approximations have a lift in its Cauchy pseudocompletion
 
 ```agda
