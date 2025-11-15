@@ -209,8 +209,6 @@ module _
 
 ### If `x` is an accumulation point of `S`, it is a sequential accumulation point of `S`
 
-The converse has yet to be proved.
-
 ```agda
 module _
   {l1 l2 l3 : Level}
