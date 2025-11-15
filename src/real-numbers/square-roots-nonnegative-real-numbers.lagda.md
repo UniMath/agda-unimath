@@ -53,10 +53,14 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -645,4 +649,22 @@ abstract
                       ( ap-mul-ℝ⁰⁺
                         ( is-section-square-ℝ⁰⁺ x)
                         ( is-section-square-ℝ⁰⁺ y)))))))
+```
+
+### The square root of a positive real number is positive
+
+```agda
+abstract opaque
+  unfolding real-sqrt-ℝ⁰⁺
+
+  is-positive-sqrt-ℝ⁺ :
+    {l : Level} (x : ℝ⁺ l) → is-positive-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x))
+  is-positive-sqrt-ℝ⁺ x⁺@(x , _) =
+    is-positive-zero-in-lower-cut-ℝ
+      ( real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺))
+      ( λ _ →
+        inv-tr
+          ( is-in-lower-cut-ℝ x)
+          ( left-zero-law-mul-ℚ zero-ℚ)
+          ( zero-in-lower-cut-ℝ⁺ x⁺))
 ```

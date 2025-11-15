@@ -11,12 +11,15 @@ module real-numbers.multiplication-real-numbers where
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-closed-intervals-rational-numbers
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
@@ -58,6 +61,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.groups
+open import group-theory.multiples-of-elements-abelian-groups
 
 open import logic.functoriality-existential-quantification
 
@@ -1261,4 +1265,30 @@ abstract
       (x -ℝ y) *ℝ z
       ＝ x *ℝ z +ℝ neg-ℝ y *ℝ z by right-distributive-mul-add-ℝ _ _ _
       ＝ x *ℝ z -ℝ y *ℝ z by ap (x *ℝ z +ℝ_) (left-negative-law-mul-ℝ y z)
+```
+
+### Multiplication by a natural number is repeated addition
+
+```agda
+abstract
+  left-mul-real-ℕ :
+    {l : Level} (n : ℕ) (x : ℝ l) →
+    real-ℕ n *ℝ x ＝ multiple-Ab (ab-add-ℝ l) n x
+  left-mul-real-ℕ 0 x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _ (sim-raise-ℝ _ zero-ℝ) (left-zero-law-mul-ℝ x))
+  left-mul-real-ℕ 1 x = left-unit-law-mul-ℝ x
+  left-mul-real-ℕ (succ-ℕ n@(succ-ℕ _)) x =
+    equational-reasoning
+      real-ℕ (n +ℕ 1) *ℝ x
+      ＝ real-ℤ (int-ℕ n +ℤ one-ℤ) *ℝ x
+        by ap-mul-ℝ (ap real-ℤ (inv (add-int-ℕ n 1))) refl
+      ＝ real-ℚ (rational-ℕ n +ℚ one-ℚ) *ℝ x
+        by ap-mul-ℝ (ap real-ℚ (inv (add-rational-ℤ _ _))) refl
+      ＝ (real-ℕ n +ℝ one-ℝ) *ℝ x
+        by ap-mul-ℝ (inv (add-real-ℚ _ _)) refl
+      ＝ real-ℕ n *ℝ x +ℝ one-ℝ *ℝ x
+        by right-distributive-mul-add-ℝ _ _ _
+      ＝ multiple-Ab (ab-add-ℝ _) n x +ℝ x
+        by ap-add-ℝ (left-mul-real-ℕ n x) (left-unit-law-mul-ℝ x)
 ```

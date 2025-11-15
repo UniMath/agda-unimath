@@ -33,6 +33,7 @@ open import foundation.universe-levels
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
