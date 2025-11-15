@@ -217,20 +217,20 @@ module _
     triangular-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
-  is-extensional-norm-Normed-ℝ-Metric-Space :
+  is-extensional-norm-Normed-ℝ-Vector-Space :
     (v : type-Normed-ℝ-Vector-Space) →
     map-norm-Normed-ℝ-Vector-Space v ＝ raise-ℝ l1 zero-ℝ →
     v ＝ zero-Normed-ℝ-Vector-Space
-  is-extensional-norm-Normed-ℝ-Metric-Space = pr2 norm-Normed-ℝ-Vector-Space
+  is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
 
-  is-extensional-dist-Normed-ℝ-Metric-Space :
+  is-extensional-dist-Normed-ℝ-Vector-Space :
     (v w : type-Normed-ℝ-Vector-Space) →
     dist-Normed-ℝ-Vector-Space v w ＝ raise-ℝ l1 zero-ℝ →
     v ＝ w
-  is-extensional-dist-Normed-ℝ-Metric-Space v w |v-w|=0 =
+  is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
     eq-is-zero-right-subtraction-Ab
       ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
-      ( is-extensional-norm-Normed-ℝ-Metric-Space
+      ( is-extensional-norm-Normed-ℝ-Vector-Space
         ( diff-Normed-ℝ-Vector-Space v w)
         ( |v-w|=0))
 
@@ -268,7 +268,7 @@ module _
       triangular-dist-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V) ,
       ( λ v w 0~dvw →
-        is-extensional-dist-Normed-ℝ-Metric-Space V v w
+        is-extensional-dist-Normed-ℝ-Vector-Space V v w
           ( eq-sim-ℝ
             ( similarity-reasoning-ℝ
               dist-Normed-ℝ-Vector-Space V v w
@@ -333,21 +333,21 @@ module _
   abstract
     is-isometry-neg-Normed-ℝ-Vector-Space :
       is-isometry-Metric-Space
-        ( metric-space-Normed-ℝ-Metric-Space V)
-        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
         ( neg-Normed-ℝ-Vector-Space V)
     is-isometry-neg-Normed-ℝ-Vector-Space =
       is-isometry-sim-metric-Metric-Space
-        ( metric-space-Normed-ℝ-Metric-Space V)
-        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
         ( nonnegative-dist-Normed-ℝ-Vector-Space V)
         ( nonnegative-dist-Normed-ℝ-Vector-Space V)
         ( is-metric-metric-space-Metric
           ( set-Normed-ℝ-Vector-Space V)
-          ( metric-Normed-ℝ-Metric-Space V))
+          ( metric-Normed-ℝ-Vector-Space V))
         ( is-metric-metric-space-Metric
           ( set-Normed-ℝ-Vector-Space V)
-          ( metric-Normed-ℝ-Metric-Space V))
+          ( metric-Normed-ℝ-Vector-Space V))
         ( neg-Normed-ℝ-Vector-Space V)
         ( λ x y →
           sim-eq-ℝ
@@ -380,21 +380,21 @@ module _
   abstract
     is-isometry-left-add-Normed-ℝ-Vector-Space :
       is-isometry-Metric-Space
-        ( metric-space-Normed-ℝ-Metric-Space V)
-        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
         ( add-Normed-ℝ-Vector-Space V u)
     is-isometry-left-add-Normed-ℝ-Vector-Space =
       is-isometry-sim-metric-Metric-Space
-        ( metric-space-Normed-ℝ-Metric-Space V)
-        ( metric-space-Normed-ℝ-Metric-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
         ( nonnegative-dist-Normed-ℝ-Vector-Space V)
         ( nonnegative-dist-Normed-ℝ-Vector-Space V)
         ( is-metric-metric-space-Metric
           ( set-Normed-ℝ-Vector-Space V)
-          ( metric-Normed-ℝ-Metric-Space V))
+          ( metric-Normed-ℝ-Vector-Space V))
         ( is-metric-metric-space-Metric
           ( set-Normed-ℝ-Vector-Space V)
-          ( metric-Normed-ℝ-Metric-Space V))
+          ( metric-Normed-ℝ-Vector-Space V))
         ( add-Normed-ℝ-Vector-Space V u)
         ( λ v w →
           sim-eq-ℝ
