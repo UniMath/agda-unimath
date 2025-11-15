@@ -14,6 +14,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -21,6 +22,7 @@ open import lists.sequences
 
 open import order-theory.monotonic-sequences-posets
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -69,6 +71,18 @@ abstract
       ( ℝ-Poset l)
       ( partial-sum-series-ℝ σ)
       ( λ n → leq-left-add-real-ℝ⁰⁺ _ (term-series-ℝ σ n , H n))
+```
+
+### The series of absolute values
+
+```agda
+module _
+  {l : Level}
+  (σ : series-ℝ l)
+  where
+
+  map-abs-series-ℝ : series-ℝ l
+  map-abs-series-ℝ = series-terms-ℝ (abs-ℝ ∘ term-series-ℝ σ)
 ```
 
 ### Dropping terms from a series
