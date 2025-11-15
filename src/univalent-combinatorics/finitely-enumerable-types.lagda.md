@@ -7,6 +7,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -42,6 +43,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
+open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -152,9 +154,7 @@ finite-enumeration-count (n , Fin-n≃X) = (n , surjection-equiv Fin-n≃X)
 is-finitely-enumerable-is-finite :
   {l : Level} {X : UU l} → is-finite X → is-finitely-enumerable X
 is-finitely-enumerable-is-finite {X = X} =
-  rec-trunc-Prop
-    ( is-finitely-enumerable-prop X)
-    ( unit-trunc-Prop ∘ finite-enumeration-count)
+  map-trunc-Prop finite-enumeration-count
 
 is-finitely-enumerable-type-Finite-Type :
   {l : Level} (X : Finite-Type l) → is-finitely-enumerable (type-Finite-Type X)
@@ -244,7 +244,7 @@ abstract
     finite-enumeration (X + Y) → finite-enumeration Y
   finite-enumeration-right-summand eX+Y =
     finite-enumeration-left-summand
-      ( finite-enumeration-equiv eX+Y (commutative-coproduct _ _))
+      ( finite-enumeration-equiv eX+Y commutative-coproduct)
 
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
@@ -419,6 +419,26 @@ module _
   im-Finitely-Enumerable-Type =
     ( im f ,
       is-finitely-enumerable-im-Finitely-Enumerable-Type)
+```
+
+### The finitely enumerable types are propositionally decidable
+
+```agda
+module _
+  {l : Level} (X : Finitely-Enumerable-Type l)
+  where
+
+  abstract
+    is-inhabited-or-empty-type-Finitely-Enumerable-Type :
+      is-inhabited-or-empty (type-Finitely-Enumerable-Type X)
+    is-inhabited-or-empty-type-Finitely-Enumerable-Type =
+      rec-trunc-Prop
+        ( is-inhabited-or-empty-Prop (type-Finitely-Enumerable-Type X))
+        ( λ (n , Fin-n↠X) →
+          is-inhabited-or-empty-surjection
+            ( Fin-n↠X)
+            ( is-inhabited-or-empty-Fin n))
+        ( is-finitely-enumerable-type-Finitely-Enumerable-Type X)
 ```
 
 ## See also

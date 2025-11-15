@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -74,6 +75,11 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   unit-Large-Group : type-Large-Group lzero
   unit-Large-Group = unit-Large-Monoid large-monoid-Large-Group
 
+  large-similarity-relation-Large-Group :
+    Large-Similarity-Relation β type-Large-Group
+  large-similarity-relation-Large-Group =
+    large-similarity-relation-Large-Monoid large-monoid-Large-Group
+
   sim-prop-Large-Group : Large-Relation-Prop β type-Large-Group
   sim-prop-Large-Group = sim-prop-Large-Monoid large-monoid-Large-Group
 
@@ -97,6 +103,15 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
     sim-Large-Group x y → sim-Large-Group y x
   symmetric-sim-Large-Group =
     symmetric-sim-Large-Monoid large-monoid-Large-Group
+
+  transitive-sim-Large-Group :
+    {l1 l2 l3 : Level}
+    (x : type-Large-Group l1)
+    (y : type-Large-Group l2)
+    (z : type-Large-Group l3) →
+    sim-Large-Group y z → sim-Large-Group x y → sim-Large-Group x z
+  transitive-sim-Large-Group =
+    transitive-sim-Large-Monoid large-monoid-Large-Group
 
   preserves-sim-left-mul-Large-Group :
     {l1 l2 l3 : Level} (y : type-Large-Group l1)
@@ -188,6 +203,11 @@ module _
     {l1 : Level} (l2 : Level) (x : type-Large-Group G l1) →
     sim-Large-Group G (raise-Large-Group G l2 x) x
   sim-raise-Large-Group' = sim-raise-Large-Monoid' (large-monoid-Large-Group G)
+
+  eq-raise-Large-Group :
+    (l1 : Level) {l2 : Level} (x : type-Large-Group G (l1 ⊔ l2)) →
+    raise-Large-Group G l2 x ＝ x
+  eq-raise-Large-Group = eq-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-raise-Large-Group :
     {l1 l2 l3 : Level} (x : type-Large-Group G l1) →

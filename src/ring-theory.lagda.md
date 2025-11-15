@@ -1,12 +1,15 @@
 # Ring theory
 
+## Examples of rings
+
+{{#include tables/rings.md}}
+
 ## Modules in the ring theory namespace
 
 ```agda
 module ring-theory where
 
 open import ring-theory.additive-orders-of-elements-rings public
-open import ring-theory.algebras-rings public
 open import ring-theory.arithmetic-sequences-semirings public
 open import ring-theory.arithmetic-series-semirings public
 open import ring-theory.binomial-theorem-rings public
@@ -29,6 +32,7 @@ open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
 open import ring-theory.generating-elements-rings public
+open import ring-theory.geometric-sequences-rings public
 open import ring-theory.geometric-sequences-semirings public
 open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-cyclic-rings public
@@ -50,16 +54,20 @@ open import ring-theory.joins-ideals-rings public
 open import ring-theory.joins-left-ideals-rings public
 open import ring-theory.joins-right-ideals-rings public
 open import ring-theory.kernels-of-ring-homomorphisms public
+open import ring-theory.large-rings public
 open import ring-theory.left-ideals-generated-by-subsets-rings public
 open import ring-theory.left-ideals-rings public
 open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
 open import ring-theory.multiples-of-elements-rings public
+open import ring-theory.multiples-of-elements-semirings public
 open import ring-theory.multiplicative-orders-of-units-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
+open import ring-theory.nontrivial-rings public
+open import ring-theory.nonunital-left-algebras-rings public
 open import ring-theory.opposite-ring-extensions-rational-numbers public
 open import ring-theory.opposite-rings public
 open import ring-theory.partial-sums-sequences-semirings public
@@ -67,6 +75,7 @@ open import ring-theory.poset-of-cyclic-rings public
 open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
 open import ring-theory.poset-of-right-ideals-rings public
+open import ring-theory.powers-of-elements-large-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public
@@ -83,6 +92,7 @@ open import ring-theory.right-ideals-rings public
 open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.subrings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-of-finite-families-of-elements-rings public

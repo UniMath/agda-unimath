@@ -144,10 +144,10 @@ module _
     ( equiv-tot
       ( λ D →
         ( equiv-product-right inv-distributive-Π-Σ) ∘e
-        ( inv-equiv right-distributive-product-Σ) ∘e
-        ( equiv-tot (λ _ → inv-equiv left-distributive-product-Σ)) ∘e
-        ( associative-Σ _ _ _))) ∘e
-    ( associative-Σ _ _ _) ∘e
+        ( inv-right-distributive-product-Σ) ∘e
+        ( equiv-tot (λ _ → inv-left-distributive-product-Σ)) ∘e
+        ( associative-Σ))) ∘e
+    ( associative-Σ) ∘e
     ( equiv-Σ-equiv-base
       ( _)
       ( ( equiv-remove-redundant-prop
@@ -166,7 +166,7 @@ module _
         ( commutative-product) ∘e
         ( equiv-tot
           ( λ p → equiv-total-is-in-subuniverse-Σ-Decomposition P (X , p))))) ∘e
-    ( inv-associative-Σ _ _ _)
+    ( inv-associative-Σ)
 ```
 
 ### Unit laws for Cauchy composition of species-subuniverse

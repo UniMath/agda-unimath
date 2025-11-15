@@ -30,18 +30,21 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-A **morphism** of algebras of a polynomial endofunctor `P A B` consists of a map
+A
+{{#concept "morphism" Disambiguation="of algebras of a polynomial endofunctor" Agda=hom-algebra-polynomial-endofunctor}}
+of [algebras](trees.algebras-polynomial-endofunctors.md) of a
+[polynomial endofunctor](trees.polynomial-endofunctors.md) `P` consists of a map
 `f : X → Y` between the underlying types, equipped with a homotopy witnessing
 that the square
 
 ```text
-           P A B f
-  P A B X ---------> P A B Y
-      |                |
-      |                |
-      ∨                ∨
-      X -------------> Y
-               f
+            P f
+   P X -----------> P Y
+    |                |
+    |                |
+    ∨                ∨
+    X -------------> Y
+             f
 ```
 
 commutes.
@@ -51,38 +54,36 @@ commutes.
 ### Morphisms of algebras for polynomial endofunctors
 
 ```agda
-hom-algebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
-  (Y : algebra-polynomial-endofunctor l4 A B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-hom-algebra-polynomial-endofunctor {A = A} {B} X Y =
-  Σ ( type-algebra-polynomial-endofunctor X →
-      type-algebra-polynomial-endofunctor Y)
-    ( λ f →
-      ( f ∘ (structure-algebra-polynomial-endofunctor X)) ~
-      ( ( structure-algebra-polynomial-endofunctor Y) ∘
-        ( map-polynomial-endofunctor A B f)))
+module _
+  {l1 l2 l3 l4 : Level}
+  {P : polynomial-endofunctor l1 l2}
+  (X : algebra-polynomial-endofunctor l3 P)
+  (Y : algebra-polynomial-endofunctor l4 P)
+  where
 
-map-hom-algebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
-  (Y : algebra-polynomial-endofunctor l4 A B) →
-  hom-algebra-polynomial-endofunctor X Y →
-  type-algebra-polynomial-endofunctor X →
-  type-algebra-polynomial-endofunctor Y
-map-hom-algebra-polynomial-endofunctor X Y f = pr1 f
+  hom-algebra-polynomial-endofunctor : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-algebra-polynomial-endofunctor =
+    Σ ( type-algebra-polynomial-endofunctor X →
+        type-algebra-polynomial-endofunctor Y)
+      ( λ f →
+        ( f ∘ (structure-algebra-polynomial-endofunctor X)) ~
+        ( ( structure-algebra-polynomial-endofunctor Y) ∘
+          ( map-polynomial-endofunctor P f)))
 
-structure-hom-algebra-polynomial-endofunctor :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
-  (Y : algebra-polynomial-endofunctor l4 A B) →
-  (f : hom-algebra-polynomial-endofunctor X Y) →
-  ( ( map-hom-algebra-polynomial-endofunctor X Y f) ∘
-    ( structure-algebra-polynomial-endofunctor X)) ~
-  ( ( structure-algebra-polynomial-endofunctor Y) ∘
-    ( map-polynomial-endofunctor A B
-      ( map-hom-algebra-polynomial-endofunctor X Y f)))
-structure-hom-algebra-polynomial-endofunctor X Y f = pr2 f
+  map-hom-algebra-polynomial-endofunctor :
+    hom-algebra-polynomial-endofunctor →
+    type-algebra-polynomial-endofunctor X →
+    type-algebra-polynomial-endofunctor Y
+  map-hom-algebra-polynomial-endofunctor f = pr1 f
+
+  structure-hom-algebra-polynomial-endofunctor :
+    (f : hom-algebra-polynomial-endofunctor) →
+    ( ( map-hom-algebra-polynomial-endofunctor f) ∘
+      ( structure-algebra-polynomial-endofunctor X)) ~
+    ( ( structure-algebra-polynomial-endofunctor Y) ∘
+      ( map-polynomial-endofunctor P
+        ( map-hom-algebra-polynomial-endofunctor f)))
+  structure-hom-algebra-polynomial-endofunctor f = pr2 f
 ```
 
 ## Properties
@@ -91,9 +92,10 @@ structure-hom-algebra-polynomial-endofunctor X Y f = pr2 f
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B)
-  (Y : algebra-polynomial-endofunctor l4 A B)
+  {l1 l2 l3 l4 : Level}
+  {P : polynomial-endofunctor l1 l2}
+  (X : algebra-polynomial-endofunctor l3 P)
+  (Y : algebra-polynomial-endofunctor l4 P)
   (f : hom-algebra-polynomial-endofunctor X Y)
   where
 
@@ -105,7 +107,7 @@ module _
       ( λ H →
         ( ( structure-hom-algebra-polynomial-endofunctor X Y f) ∙h
           ( ( structure-algebra-polynomial-endofunctor Y) ·l
-            ( htpy-polynomial-endofunctor A B H))) ~
+            ( htpy-polynomial-endofunctor P H))) ~
         ( ( H ·r structure-algebra-polynomial-endofunctor X) ∙h
           ( structure-hom-algebra-polynomial-endofunctor X Y g)))
 
@@ -118,10 +120,10 @@ module _
         concat
           ( structure-hom-algebra-polynomial-endofunctor X Y f z)
           ( structure-algebra-polynomial-endofunctor Y
-            ( map-polynomial-endofunctor A B
+            ( map-polynomial-endofunctor P
               ( map-hom-algebra-polynomial-endofunctor X Y f) z))
           ( ap (structure-algebra-polynomial-endofunctor Y) t))
-      ( coh-refl-htpy-polynomial-endofunctor A B
+      ( coh-refl-htpy-polynomial-endofunctor P
         ( map-hom-algebra-polynomial-endofunctor X Y f) z)) ∙
     ( right-unit)
 
@@ -139,7 +141,7 @@ module _
       ( pair (map-hom-algebra-polynomial-endofunctor X Y f) refl-htpy)
       ( is-contr-equiv'
         ( Σ ( ( (pr1 f) ∘ pr2 X) ~
-              ( pr2 Y ∘ map-polynomial-endofunctor A B (pr1 f)))
+              ( pr2 Y ∘ map-polynomial-endofunctor P (pr1 f)))
             ( λ H → (pr2 f) ~ H))
         ( equiv-tot
           ( λ H →
@@ -149,10 +151,10 @@ module _
                   ( concat
                     ( pr2 f x)
                     ( structure-algebra-polynomial-endofunctor Y
-                      ( map-polynomial-endofunctor A B (pr1 f) x)))
+                      ( map-polynomial-endofunctor P (pr1 f) x)))
                   ( ap
                     ( ap (pr2 Y))
-                    ( coh-refl-htpy-polynomial-endofunctor A B (pr1 f) x)))
+                    ( coh-refl-htpy-polynomial-endofunctor P (pr1 f) x)))
               ( H)) ∘e
             ( equiv-concat-htpy right-unit-htpy H)))
         ( is-torsorial-htpy (pr2 f)))

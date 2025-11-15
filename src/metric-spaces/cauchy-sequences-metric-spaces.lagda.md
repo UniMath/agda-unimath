@@ -19,6 +19,7 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
@@ -27,6 +28,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -36,12 +39,14 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
@@ -397,7 +402,7 @@ module _
     map-cauchy-approximation-Metric-Space
       ( M)
       ( x)
-      ( positive-reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n))
+      ( positive-reciprocal-rational-succ-ℕ n)
 
   modulus-of-convergence-cauchy-sequence-cauchy-approximation-Metric-Space :
     ℚ⁺ → ℕ
@@ -480,6 +485,49 @@ module _
   cauchy-sequence-cauchy-approximation-Metric-Space =
     map-cauchy-sequence-cauchy-approximation-Metric-Space ,
     is-cauchy-sequence-cauchy-sequence-cauchy-approximation-Metric-Space
+```
+
+### If a Cauchy approximation has a limit, its corresponding Cauchy sequence has the same limit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (x : cauchy-approximation-Metric-Space M)
+  (lim : type-Metric-Space M)
+  (is-lim : is-limit-cauchy-approximation-Metric-Space M x lim)
+  where
+
+  abstract
+    is-limit-cauchy-sequence-cauchy-approximation-Metric-Space :
+      is-limit-cauchy-sequence-Metric-Space
+        ( M)
+        ( cauchy-sequence-cauchy-approximation-Metric-Space M x)
+        ( lim)
+    is-limit-cauchy-sequence-cauchy-approximation-Metric-Space =
+      is-limit-bound-modulus-sequence-Metric-Space M _ _
+        ( λ ε →
+          let
+            (n⁺ , 1/n⁺<ε) = smaller-reciprocal-ℚ⁺ ε
+          in
+            ( nat-nonzero-ℕ n⁺ ,
+              λ m n≤m →
+              monotonic-neighborhood-Metric-Space M
+                ( map-cauchy-sequence-cauchy-approximation-Metric-Space M x m)
+                ( lim)
+                ( positive-reciprocal-rational-succ-ℕ m)
+                ( ε)
+                ( transitive-le-ℚ _ (reciprocal-rational-ℕ⁺ n⁺) _
+                  ( 1/n⁺<ε)
+                  ( inv-le-ℚ⁺
+                    ( positive-rational-ℕ⁺ n⁺)
+                    ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' m))
+                    ( preserves-le-rational-ℕ
+                      ( le-succ-leq-ℕ _ _ n≤m))))
+                ( saturated-is-limit-cauchy-approximation-Metric-Space M
+                  ( x)
+                  ( lim)
+                  ( is-lim)
+                  ( positive-reciprocal-rational-succ-ℕ m))))
 ```
 
 ### If the Cauchy sequence associated with a Cauchy approximation has a limit modulus at `l`, its associated approximation converges to `l`
@@ -612,6 +660,53 @@ module _
             ( lim))
 ```
 
+### Modulated uniformly continuous maps between metric spaces preserve Cauchy sequences
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : modulated-ucont-map-Metric-Space A B)
+  (u : cauchy-sequence-Metric-Space A)
+  where
+
+  seq-modulated-ucont-map-cauchy-sequence-Metric-Space :
+    sequence-type-Metric-Space B
+  seq-modulated-ucont-map-cauchy-sequence-Metric-Space =
+    map-sequence
+      ( map-modulated-ucont-map-Metric-Space A B f)
+      ( map-cauchy-sequence-Metric-Space A u)
+
+  abstract
+    is-cauchy-seq-modulated-ucont-map-cauchy-sequence-Metric-Space :
+      is-cauchy-sequence-Metric-Space B
+        ( seq-modulated-ucont-map-cauchy-sequence-Metric-Space)
+    is-cauchy-seq-modulated-ucont-map-cauchy-sequence-Metric-Space ε =
+      ( modulus-of-convergence-cauchy-sequence-Metric-Space A u
+          (modulus-modulated-ucont-map-Metric-Space A B f ε) ,
+        λ m n M≤m M≤n →
+          is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+            ( A)
+            ( B)
+            ( f)
+            ( map-cauchy-sequence-Metric-Space A u m)
+            ( ε)
+            ( map-cauchy-sequence-Metric-Space A u n)
+            ( neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+              ( A)
+              ( u)
+              ( modulus-modulated-ucont-map-Metric-Space A B f ε)
+              ( m)
+              ( n)
+              ( M≤m)
+              ( M≤n)))
+
+  map-modulated-ucont-map-cauchy-sequence-Metric-Space :
+    cauchy-sequence-Metric-Space B
+  map-modulated-ucont-map-cauchy-sequence-Metric-Space =
+    ( seq-modulated-ucont-map-cauchy-sequence-Metric-Space ,
+      is-cauchy-seq-modulated-ucont-map-cauchy-sequence-Metric-Space)
+```
+
 ### Short maps between metric spaces preserve Cauchy sequences
 
 ```agda
@@ -621,27 +716,60 @@ module _
   (u : cauchy-sequence-Metric-Space A)
   where
 
-  seq-short-map-cauchy-sequence-Metric-Space : sequence-type-Metric-Space B
-  seq-short-map-cauchy-sequence-Metric-Space =
-    map-sequence
-      ( map-short-function-Metric-Space A B f)
-      ( map-cauchy-sequence-Metric-Space A u)
-
-  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space :
-    is-cauchy-sequence-Metric-Space B seq-short-map-cauchy-sequence-Metric-Space
-  is-cauchy-seq-short-map-cauchy-sequence-Metric-Space ε =
-    tot
-      ( λ n H m k I J →
-        is-short-map-short-function-Metric-Space A B f ε
-          ( map-cauchy-sequence-Metric-Space A u m)
-          ( map-cauchy-sequence-Metric-Space A u k)
-          ( H m k I J))
-      ( is-cauchy-sequence-cauchy-sequence-Metric-Space A u ε)
-
   map-short-map-cauchy-sequence-Metric-Space : cauchy-sequence-Metric-Space B
   map-short-map-cauchy-sequence-Metric-Space =
-    seq-short-map-cauchy-sequence-Metric-Space ,
-    is-cauchy-seq-short-map-cauchy-sequence-Metric-Space
+    map-modulated-ucont-map-cauchy-sequence-Metric-Space A B
+      ( modulated-ucont-map-short-function-Metric-Space A B f)
+      ( u)
+```
+
+### Pairing of Cauchy sequences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (u : cauchy-sequence-Metric-Space A) (v : cauchy-sequence-Metric-Space B)
+  where
+
+  sequence-pair-cauchy-sequence-Metric-Space :
+    sequence-type-Metric-Space (product-Metric-Space A B)
+  sequence-pair-cauchy-sequence-Metric-Space =
+    pair-sequence
+      ( map-cauchy-sequence-Metric-Space A u)
+      ( map-cauchy-sequence-Metric-Space B v)
+
+  abstract
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space :
+      is-cauchy-sequence-Metric-Space
+        ( product-Metric-Space A B)
+        ( sequence-pair-cauchy-sequence-Metric-Space)
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space ε =
+      ( max-ℕ
+        ( modulus-of-convergence-cauchy-sequence-Metric-Space A u ε)
+        ( modulus-of-convergence-cauchy-sequence-Metric-Space B v ε) ,
+        λ m n N≤m N≤n →
+          ( neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+              ( A)
+              ( u)
+              ( ε)
+              ( m)
+              ( n)
+              ( transitive-leq-ℕ _ _ _ N≤m (left-leq-max-ℕ _ _))
+              ( transitive-leq-ℕ _ _ _ N≤n (left-leq-max-ℕ _ _)) ,
+            neighborhood-modulus-of-convergence-cauchy-sequence-Metric-Space
+              ( B)
+              ( v)
+              ( ε)
+              ( m)
+              ( n)
+              ( transitive-leq-ℕ _ _ _ N≤m (right-leq-max-ℕ _ _))
+              ( transitive-leq-ℕ _ _ _ N≤n (right-leq-max-ℕ _ _))))
+
+  pair-cauchy-sequence-Metric-Space :
+    cauchy-sequence-Metric-Space (product-Metric-Space A B)
+  pair-cauchy-sequence-Metric-Space =
+    ( sequence-pair-cauchy-sequence-Metric-Space ,
+      is-cauchy-sequence-pair-cauchy-sequence-Metric-Space)
 ```
 
 ## See also

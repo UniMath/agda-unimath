@@ -24,8 +24,11 @@ open import ring-theory.rings
 
 ## Idea
 
-Given two ringrs R1 and R2, we define a ring structure on the product of R1 and
-R2.
+Given two [rings](ring-theory.rings.md) `R1` and `R2`, the
+{{#concept "product" Disambiguation="of a pair of rings" WD="product ring" WDID=Q3406712 Agda=product-Ring}}
+ring `R1 × R2` is a ring structure on the
+[cartesian product](foundation.cartesian-product-types.md) of `R1` and `R2`
+given by componentwise operations.
 
 ## Definition
 
@@ -56,39 +59,38 @@ module _
   pr2 (neg-product-Ring (x , y)) = neg-Ring R2 y
 
   left-unit-law-add-product-Ring :
-    (x : type-product-Ring) → Id (add-product-Ring zero-product-Ring x) x
+    (x : type-product-Ring) → add-product-Ring zero-product-Ring x ＝ x
   left-unit-law-add-product-Ring (x , y) =
     eq-pair (left-unit-law-add-Ring R1 x) (left-unit-law-add-Ring R2 y)
 
   right-unit-law-add-product-Ring :
-    (x : type-product-Ring) → Id (add-product-Ring x zero-product-Ring) x
+    (x : type-product-Ring) → add-product-Ring x zero-product-Ring ＝ x
   right-unit-law-add-product-Ring (x , y) =
     eq-pair (right-unit-law-add-Ring R1 x) (right-unit-law-add-Ring R2 y)
 
   left-inverse-law-add-product-Ring :
     (x : type-product-Ring) →
-    Id (add-product-Ring (neg-product-Ring x) x) zero-product-Ring
+    add-product-Ring (neg-product-Ring x) x ＝ zero-product-Ring
   left-inverse-law-add-product-Ring (x , y) =
     eq-pair (left-inverse-law-add-Ring R1 x) (left-inverse-law-add-Ring R2 y)
 
   right-inverse-law-add-product-Ring :
     (x : type-product-Ring) →
-    Id (add-product-Ring x (neg-product-Ring x)) zero-product-Ring
+    add-product-Ring x (neg-product-Ring x) ＝ zero-product-Ring
   right-inverse-law-add-product-Ring (x , y) =
     eq-pair (right-inverse-law-add-Ring R1 x) (right-inverse-law-add-Ring R2 y)
 
   associative-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( add-product-Ring (add-product-Ring x y) z)
-      ( add-product-Ring x (add-product-Ring y z))
+    add-product-Ring (add-product-Ring x y) z ＝
+    add-product-Ring x (add-product-Ring y z)
   associative-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( associative-add-Ring R1 x1 x2 x3)
       ( associative-add-Ring R2 y1 y2 y3)
 
   commutative-add-product-Ring :
-    (x y : type-product-Ring) → Id (add-product-Ring x y) (add-product-Ring y x)
+    (x y : type-product-Ring) → add-product-Ring x y ＝ add-product-Ring y x
   commutative-add-product-Ring (x1 , y1) (x2 , y2) =
     eq-pair
       ( commutative-add-Ring R1 x1 x2)
@@ -104,29 +106,27 @@ module _
 
   associative-mul-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring (mul-product-Ring x y) z)
-      ( mul-product-Ring x (mul-product-Ring y z))
+    mul-product-Ring (mul-product-Ring x y) z ＝
+    mul-product-Ring x (mul-product-Ring y z)
   associative-mul-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( associative-mul-Ring R1 x1 x2 x3)
       ( associative-mul-Ring R2 y1 y2 y3)
 
   left-unit-law-mul-product-Ring :
-    (x : type-product-Ring) → Id (mul-product-Ring one-product-Ring x) x
+    (x : type-product-Ring) → mul-product-Ring one-product-Ring x ＝ x
   left-unit-law-mul-product-Ring (x , y) =
     eq-pair (left-unit-law-mul-Ring R1 x) (left-unit-law-mul-Ring R2 y)
 
   right-unit-law-mul-product-Ring :
-    (x : type-product-Ring) → Id (mul-product-Ring x one-product-Ring) x
+    (x : type-product-Ring) → mul-product-Ring x one-product-Ring ＝ x
   right-unit-law-mul-product-Ring (x , y) =
     eq-pair (right-unit-law-mul-Ring R1 x) (right-unit-law-mul-Ring R2 y)
 
   left-distributive-mul-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring x (add-product-Ring y z))
-      ( add-product-Ring (mul-product-Ring x y) (mul-product-Ring x z))
+    mul-product-Ring x (add-product-Ring y z) ＝
+    add-product-Ring (mul-product-Ring x y) (mul-product-Ring x z)
   left-distributive-mul-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( left-distributive-mul-add-Ring R1 x1 x2 x3)
@@ -134,9 +134,8 @@ module _
 
   right-distributive-mul-add-product-Ring :
     (x y z : type-product-Ring) →
-    Id
-      ( mul-product-Ring (add-product-Ring x y) z)
-      ( add-product-Ring (mul-product-Ring x z) (mul-product-Ring y z))
+    mul-product-Ring (add-product-Ring x y) z ＝
+    add-product-Ring (mul-product-Ring x z) (mul-product-Ring y z)
   right-distributive-mul-add-product-Ring (x1 , y1) (x2 , y2) (x3 , y3) =
     eq-pair
       ( right-distributive-mul-add-Ring R1 x1 x2 x3)

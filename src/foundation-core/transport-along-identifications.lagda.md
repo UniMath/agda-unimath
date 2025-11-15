@@ -32,9 +32,15 @@ recorded in
 ### Transport
 
 ```agda
-tr :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : x ＝ y) → B x → B y
-tr B refl b = b
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
+  where
+
+  tr : x ＝ y → B x → B y
+  tr refl b = b
+
+  inv-tr : y ＝ x → B x → B y
+  inv-tr p = tr (inv p)
 ```
 
 ## Properties
@@ -62,6 +68,11 @@ module _
     {i j : I} (p : i ＝ j) (x : A i) →
     f j (tr A p x) ＝ tr B p (f i x)
   preserves-tr refl x = refl
+
+  inv-preserves-tr :
+    {i j : I} (p : i ＝ j) (x : A i) →
+    tr B p (f i x) ＝ f j (tr A p x)
+  inv-preserves-tr p x = inv (preserves-tr p x)
 
   compute-preserves-tr :
     {i j : I} (p : i ＝ j) (x : A i) →
@@ -91,6 +102,11 @@ module _
     {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
     tr B (p ∙ q) b ＝ tr B q (tr B p b)
   tr-concat refl q b = refl
+
+  comp-tr :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
+    tr B q (tr B p b) ＝ tr B (p ∙ q) b
+  comp-tr p q b = inv (tr-concat p q b)
 ```
 
 ### Transposing transport along the inverse of an identification

@@ -17,7 +17,6 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
-open import foundation.interchange-law
 ```
 
 </details>
@@ -183,7 +182,23 @@ abstract
     equational-reasoning
       rational-ℤ x -ℚ rational-ℤ y
       ＝ rational-ℤ x +ℚ rational-ℤ (neg-ℤ y)
-        by ap (rational-ℤ x +ℚ_) (inv (preserves-neg-rational-ℤ y))
+        by ap (rational-ℤ x +ℚ_) (inv (neg-rational-ℤ y))
       ＝ rational-ℤ (x -ℤ y)
         by add-rational-ℤ x (neg-ℤ y)
+```
+
+### The difference of the successor of a rational number and the rational number is one
+
+```agda
+abstract
+  diff-succ-ℚ : (q : ℚ) → succ-ℚ q -ℚ q ＝ one-ℚ
+  diff-succ-ℚ q =
+    equational-reasoning
+      (one-ℚ +ℚ q) -ℚ q
+      ＝ one-ℚ +ℚ (q -ℚ q)
+        by associative-add-ℚ _ _ _
+      ＝ one-ℚ +ℚ zero-ℚ
+        by ap-add-ℚ refl (right-inverse-law-add-ℚ q)
+      ＝ one-ℚ
+        by right-unit-law-add-ℚ _
 ```

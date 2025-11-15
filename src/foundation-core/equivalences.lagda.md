@@ -323,7 +323,7 @@ only assume maps `g : B → X` and `h : A → B`. In this special case, we set
 
 [André Joyal](https://en.wikipedia.org/wiki/André_Joyal) proposed calling this
 property the 3-for-2 property, despite most mathematicians calling it the
-_2-out-of-3 property_. The story goes that on the produce market is is common to
+_2-out-of-3 property_. The story goes that on the produce market it is common to
 advertise a discount as "3-for-2". If you buy two apples, then you get the third
 for free. Similarly, if you prove that two maps in a commuting triangle are
 equivalences, then you get the third for free.
@@ -500,6 +500,12 @@ module _
     htpy-map-inv-is-invertible H
       ( is-invertible-is-equiv F)
       ( is-invertible-is-equiv G)
+
+is-equiv-htpy-id : {l : Level} {A : UU l} {f : A → A} → f ~ id → is-equiv f
+is-equiv-htpy-id H = is-equiv-htpy id H is-equiv-id
+
+is-equiv-htpy-id' : {l : Level} {A : UU l} {f : A → A} → id ~ f → is-equiv f
+is-equiv-htpy-id' H = is-equiv-htpy' id H is-equiv-id
 ```
 
 ### Any retraction of an equivalence is an equivalence

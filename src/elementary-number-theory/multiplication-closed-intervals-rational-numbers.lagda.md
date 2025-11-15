@@ -18,11 +18,13 @@ open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.decidable-total-order-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -37,6 +39,7 @@ open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -921,7 +924,7 @@ abstract
           rational-dist-ℚ (a *ℚ q) (b *ℚ q)
           ≤ rational-dist-ℚ a b *ℚ rational-abs-ℚ q
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ( ap
                     ( rational-abs-ℚ)
                     ( inv (right-distributive-mul-diff-ℚ _ _ _))) ∙
@@ -936,7 +939,7 @@ abstract
           ≤ width-closed-interval-ℚ [a,b] *ℚ
             rational-max-abs-closed-interval-ℚ [c,d]
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-mul-ℚ
                   ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [a,b])
                   ( refl))
@@ -948,7 +951,7 @@ abstract
           rational-dist-ℚ (p *ℚ c) (p *ℚ d)
           ≤ rational-dist-ℚ c d *ℚ rational-abs-ℚ p
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ( ap
                     ( rational-abs-ℚ)
                     ( inv (left-distributive-mul-diff-ℚ _ _ _))) ∙
@@ -963,7 +966,7 @@ abstract
                 ( leq-max-abs-is-in-closed-interval-ℚ [a,b] p p∈[a,b])
           ≤ _
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-mul-ℚ
                   ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [c,d])
                   ( refl))
@@ -980,7 +983,7 @@ abstract
           rational-dist-ℚ (a *ℚ c) (b *ℚ d)
           ≤ rational-abs-ℚ ((a *ℚ c -ℚ b *ℚ c) +ℚ (b *ℚ c -ℚ b *ℚ d))
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap
                   ( rational-abs-ℚ)
                   ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
@@ -993,7 +996,7 @@ abstract
           rational-dist-ℚ (a *ℚ d) (b *ℚ c)
           ≤ rational-abs-ℚ ((a *ℚ d -ℚ b *ℚ d) +ℚ (b *ℚ d -ℚ b *ℚ c))
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap
                   ( rational-abs-ℚ)
                   ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
@@ -1003,7 +1006,7 @@ abstract
           ≤ rational-dist-ℚ (a *ℚ d) (b *ℚ d) +ℚ
             rational-dist-ℚ (b *ℚ c) (b *ℚ d)
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-add-ℚ refl (ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _)))
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by preserves-leq-add-ℚ |ad-bd|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
@@ -1039,7 +1042,7 @@ abstract
         chain-of-inequalities
           rational-dist-ℚ q q
           ≤ zero-ℚ
-            by leq-eq-ℚ _ _ (rational-dist-self-ℚ q)
+            by leq-eq-ℚ (rational-dist-self-ℚ q)
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by
               leq-zero-rational-ℚ⁰⁺ (<b-a><max|c||d|>⁰⁺ +ℚ⁰⁺ <d-c><max|a||b|>⁰⁺)
@@ -1245,4 +1248,42 @@ abstract
         ( [c,d])
         ( [c',d'])
         ( [c,d]⊆[c',d']))
+```
+
+### The upper bound of `[-q,q]²` is `q²`
+
+```agda
+abstract
+  upper-bound-square-even-interval-ℚ :
+    ([-q,q] : closed-interval-ℚ) →
+    ( lower-bound-closed-interval-ℚ [-q,q] ＝
+      neg-ℚ (upper-bound-closed-interval-ℚ [-q,q])) →
+    upper-bound-mul-closed-interval-ℚ [-q,q] [-q,q] ＝
+    square-ℚ (upper-bound-closed-interval-ℚ [-q,q])
+  upper-bound-square-even-interval-ℚ ((_ , q) , _) refl =
+    equational-reasoning
+      max-ℚ
+        ( max-ℚ (neg-ℚ q *ℚ neg-ℚ q) (neg-ℚ q *ℚ q))
+        ( max-ℚ (q *ℚ neg-ℚ q) (q *ℚ q))
+      ＝
+        max-ℚ
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+          ( max-ℚ (neg-ℚ (q *ℚ q)) (q *ℚ q))
+        by
+          ap-max-ℚ
+            ( ap-max-ℚ (square-neg-ℚ q) (left-negative-law-mul-ℚ q q))
+            ( ap-max-ℚ (right-negative-law-mul-ℚ q q) refl)
+      ＝
+        max-ℚ
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+          ( max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q)))
+        by ap-max-ℚ refl (commutative-max-ℚ _ _)
+      ＝ max-ℚ (q *ℚ q) (neg-ℚ (q *ℚ q))
+        by idempotent-max-ℚ _
+      ＝ q *ℚ q
+        by
+          right-leq-left-max-ℚ _ _
+            ( leq-nonpositive-nonnegative-ℚ
+              ( neg-ℚ⁰⁺ (nonnegative-square-ℚ q))
+              ( nonnegative-square-ℚ q))
 ```

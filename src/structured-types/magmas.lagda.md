@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "magma" Agda=Magma}} is a type [equipped](foundation.structure.md)
-with a binary operation.
+A {{#concept "magma" WD="magma" WDID=Q679903 Agda=Magma}} is a type
+[equipped](foundation.structure.md) with a binary operation.
 
 ## Definition
 
@@ -67,7 +67,7 @@ is-unital-magma-Unital-Magma M = pr2 M
 is-semigroup-Magma : {l : Level} → Magma l → UU l
 is-semigroup-Magma M =
   (x y z : type-Magma M) →
-  Id (mul-Magma M (mul-Magma M x y) z) (mul-Magma M x (mul-Magma M y z))
+  mul-Magma M (mul-Magma M x y) z ＝ mul-Magma M x (mul-Magma M y z)
 ```
 
 ### Commutative magmas
@@ -75,7 +75,7 @@ is-semigroup-Magma M =
 ```agda
 is-commutative-Magma : {l : Level} → Magma l → UU l
 is-commutative-Magma M =
-  (x y : type-Magma M) → Id (mul-Magma M x y) (mul-Magma M y x)
+  (x y : type-Magma M) → mul-Magma M x y ＝ mul-Magma M y x
 ```
 
 ### The structure of a commutative monoid on magmas

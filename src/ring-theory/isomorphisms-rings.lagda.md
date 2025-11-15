@@ -46,6 +46,12 @@ open import ring-theory.rings
 
 </details>
 
+## Idea
+
+{{#concept "Ring isomorphisms" WD="ring isomorphism" WDID=Q135670074 Agda=iso-Ring}}
+are [ring homomorphisms](ring-theory.homomorphisms-rings.md) with a two-sided
+inverse homomorphism.
+
 ## Definition
 
 ### The predicate of being an isomorphism of rings
@@ -446,16 +452,9 @@ module _
 
   equiv-iso-ab-iso-Ring : iso-Ring R S ≃ iso-ab-Ring
   equiv-iso-ab-iso-Ring =
-    ( inv-equiv
-      ( associative-Σ
-        ( hom-Ab (ab-Ring R) (ab-Ring S))
-        ( is-iso-Ab (ab-Ring R) (ab-Ring S))
-        ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ f → commutative-product)) ∘e
-    ( associative-Σ
-      ( hom-Ab (ab-Ring R) (ab-Ring S))
-      ( is-ring-homomorphism-hom-Ab R S)
-      ( λ f → is-iso-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
+    ( associative-Σ) ∘e
     ( equiv-type-subtype
       ( is-prop-is-iso-Ring R S)
       ( λ f → is-prop-is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f))

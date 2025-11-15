@@ -469,7 +469,19 @@ module _
       is-retraction-map-inv-equiv-fiber-htpy
 
   equiv-fiber-htpy : fiber f y ≃ fiber g y
-  equiv-fiber-htpy = map-equiv-fiber-htpy , is-equiv-map-equiv-fiber-htpy
+  equiv-fiber-htpy =
+    ( map-equiv-fiber-htpy , is-equiv-map-equiv-fiber-htpy)
+
+  is-equiv-map-inv-equiv-fiber-htpy : is-equiv map-inv-equiv-fiber-htpy
+  is-equiv-map-inv-equiv-fiber-htpy =
+    is-equiv-is-invertible
+      ( map-equiv-fiber-htpy)
+      ( is-retraction-map-inv-equiv-fiber-htpy)
+      ( is-section-map-inv-equiv-fiber-htpy)
+
+  inv-equiv-fiber-htpy : fiber g y ≃ fiber f y
+  inv-equiv-fiber-htpy =
+    ( map-inv-equiv-fiber-htpy , is-equiv-map-inv-equiv-fiber-htpy)
 ```
 
 We repeat the construction for `fiber'`.

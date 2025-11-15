@@ -26,7 +26,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -46,7 +46,7 @@ nonnegative.
 ## Definition
 
 ```agda
-opaque
+abstract opaque
   unfolding mul-ℝ
 
   is-nonnegative-mul-ℝ :
@@ -62,11 +62,10 @@ opaque
               ([c,d]@((c , d) , _) , c<y , y<d)) ,
             [a,b][c,d]<q) ← xy<q
           let
-            b⁺ = (b , is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) b x<b)
-            d⁺ = (d , is-positive-is-in-upper-cut-ℝ⁰⁺ (y , 0≤y) d y<d)
+            b⁺ = (b , is-positive-is-in-upper-cut-ℝ⁰⁺ (x , 0≤x) x<b)
+            d⁺ = (d , is-positive-is-in-upper-cut-ℝ⁰⁺ (y , 0≤y) y<d)
           is-positive-le-ℚ⁺
             ( b⁺ *ℚ⁺ d⁺)
-            ( q)
             ( concatenate-leq-le-ℚ
               ( b *ℚ d)
               ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -96,9 +95,9 @@ ap-mul-ℝ⁰⁺ = ap-binary mul-ℝ⁰⁺
 ```agda
 abstract
   preserves-leq-left-mul-ℝ⁰⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (real-ℝ⁰⁺ x *ℝ y) (real-ℝ⁰⁺ x *ℝ z)
-  preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺@(x , 0≤x) y z y≤z =
+  preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺@(x , 0≤x) {y} {z} y≤z =
     leq-is-nonnegative-diff-ℝ
       ( x *ℝ y)
       ( x *ℝ z)
@@ -110,12 +109,21 @@ abstract
           ( is-nonnegative-diff-leq-ℝ y≤z)))
 
   preserves-leq-right-mul-ℝ⁰⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ l2) (z : ℝ l3) → leq-ℝ y z →
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (y *ℝ real-ℝ⁰⁺ x) (z *ℝ real-ℝ⁰⁺ x)
-  preserves-leq-right-mul-ℝ⁰⁺ x y z y≤z =
+  preserves-leq-right-mul-ℝ⁰⁺ x y≤z =
     binary-tr
       ( leq-ℝ)
       ( commutative-mul-ℝ _ _)
       ( commutative-mul-ℝ _ _)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x y z y≤z)
+      ( preserves-leq-left-mul-ℝ⁰⁺ x y≤z)
+
+  preserves-leq-mul-ℝ⁰⁺ :
+    {l1 l2 l3 l4 : Level} →
+    (x : ℝ⁰⁺ l1) (x' : ℝ⁰⁺ l2) (y : ℝ⁰⁺ l3) (y' : ℝ⁰⁺ l4) →
+    leq-ℝ⁰⁺ x x' → leq-ℝ⁰⁺ y y' → leq-ℝ⁰⁺ (x *ℝ⁰⁺ y) (x' *ℝ⁰⁺ y')
+  preserves-leq-mul-ℝ⁰⁺ x x' y y' x≤x' y≤y' =
+    transitive-leq-ℝ _ _ _
+      ( preserves-leq-right-mul-ℝ⁰⁺ y' x≤x')
+      ( preserves-leq-left-mul-ℝ⁰⁺ x y≤y')
 ```

@@ -1,4 +1,4 @@
-# Multiplication of positive, negative, and nonnegative rational numbers
+# Multiplication by positive, negative, and nonnegative rational numbers
 
 ```agda
 module elementary-number-theory.multiplication-positive-and-negative-rational-numbers where
@@ -30,8 +30,9 @@ open import foundation.transport-along-identifications
 ## Idea
 
 When we have information about the sign of the factors of a
-[rational product](elementary-number-theory.multiplication-rational-numbers.md),
-we can deduce the sign of their product too.
+[product](elementary-number-theory.multiplication-rational-numbers.md) of
+[rational numbers](elementary-number-theory.rational-numbers.md), we can deduce
+the sign of their product too.
 
 ## Lemmas
 
@@ -39,7 +40,7 @@ we can deduce the sign of their product too.
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ mul-ℚ
 
   is-negative-mul-positive-negative-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-negative-ℚ y → is-negative-ℚ (x *ℚ y)
@@ -75,7 +76,7 @@ mul-negative-positive-ℚ (p , neg-p) (q , pos-q) =
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-nonnegative-ℚ is-positive-ℚ mul-ℚ
 
   is-nonnegative-mul-nonnegative-positive-ℚ :
     {x y : ℚ} → is-nonnegative-ℚ x → is-positive-ℚ y → is-nonnegative-ℚ (x *ℚ y)
@@ -87,7 +88,9 @@ opaque
 ### The product of a nonpositive and a positive rational number is nonpositive
 
 ```agda
-abstract
+opaque
+  unfolding is-nonpositive-ℚ
+
   is-nonpositive-mul-nonpositive-positive-ℚ :
     {x y : ℚ} → is-nonpositive-ℚ x → is-positive-ℚ y → is-nonpositive-ℚ (x *ℚ y)
   is-nonpositive-mul-nonpositive-positive-ℚ is-nonneg-neg-x is-pos-y =
@@ -146,7 +149,6 @@ abstract
             ( λ is-pos-y →
               ex-falso
                 ( is-not-negative-and-positive-ℚ
-                  ( x *ℚ y)
                   ( is-negative-mul-negative-positive-ℚ is-neg-x is-pos-y ,
                     is-pos-xy))))
         ( λ x=0 →
@@ -162,7 +164,6 @@ abstract
             ( λ is-neg-y →
               ex-falso
                 ( is-not-negative-and-positive-ℚ
-                  ( x *ℚ y)
                   ( is-negative-mul-positive-negative-ℚ is-pos-x is-neg-y ,
                     is-pos-xy)))
             ( y≠0)

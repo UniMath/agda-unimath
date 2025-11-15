@@ -24,6 +24,7 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets
@@ -31,7 +32,9 @@ open import order-theory.large-posets
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.metric-space-of-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 ```
@@ -78,15 +81,15 @@ module _
           ≤ ρ' x y' +ℝ ρ' y' y
             by is-triangular-is-metric-of-Metric-Space M ρ H x y' y
           ≤ ρ' y' y +ℝ ρ' x y'
-            by leq-eq-ℝ _ _ (commutative-add-ℝ _ _)
+            by leq-eq-ℝ (commutative-add-ℝ _ _)
           ≤ ρ' y y' +ℝ ρ' x y'
-            by leq-eq-ℝ _ _ (ap-add-ℝ (commutative-ρ' y' y) refl))
+            by leq-eq-ℝ (ap-add-ℝ (commutative-ρ' y' y) refl))
         ( chain-of-inequalities
           ρ' x y'
           ≤ ρ' x y +ℝ ρ' y y'
             by is-triangular-is-metric-of-Metric-Space M ρ H x y y'
           ≤ ρ' y y' +ℝ ρ' x y
-            by leq-eq-ℝ _ _ (commutative-add-ℝ _ _))
+            by leq-eq-ℝ (commutative-add-ℝ _ _))
 
     modulus-of-uniform-continuity-metric-of-Metric-Space : ℚ⁺ → ℚ⁺
     modulus-of-uniform-continuity-metric-of-Metric-Space =
@@ -111,7 +114,7 @@ module _
               by triangle-inequality-dist-ℝ _ _ _
             ≤ dist-ℝ (ρ' x y) (ρ' x y') +ℝ dist-ℝ (ρ' y' x) (ρ' y' x')
               by
-                leq-eq-ℝ _ _
+                leq-eq-ℝ
                   ( ap-add-ℝ
                     ( refl)
                     ( ap-binary
@@ -120,18 +123,18 @@ module _
                       ( commutative-ρ' x' y')))
             ≤ ρ' y y' +ℝ ρ' x x'
               by
-                preserves-leq-add-ℝ _ _ _ _
+                preserves-leq-add-ℝ
                   ( dist-metric-leq-metric-of-Metric-Space x y y')
                   ( dist-metric-leq-metric-of-Metric-Space y' x x')
             ≤ real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε'
               by
-                preserves-leq-add-ℝ _ _ _ _
+                preserves-leq-add-ℝ
                   ( forward-implication (H ε' y y') Nε'yy')
                   ( forward-implication (H ε' x x') Nε'xx')
             ≤ real-ℚ⁺ (ε' +ℚ⁺ ε')
-              by leq-eq-ℝ _ _ (add-real-ℚ _ _)
+              by leq-eq-ℝ (add-real-ℚ _ _)
             ≤ real-ℚ⁺ ε
-              by preserves-leq-real-ℚ _ _ (leq-le-ℚ 2ε'<ε))
+              by preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε))
 
     is-uniformly-continuous-metric-of-Metric-Space :
       is-uniformly-continuous-function-Metric-Space

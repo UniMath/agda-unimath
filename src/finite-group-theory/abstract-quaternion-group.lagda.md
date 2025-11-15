@@ -34,8 +34,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The abstract quaternion group of order 8 is the group of the quaternions `1`,
-`-1`, `i`, `-i`, `j`, `-j`, `k`, and `-k`.
+The [abstract](group-theory.groups.md)
+{{#concept "quaternion group of order 8" Disambiguation="abstract" WD="quaternion group" WDID=Q1335680 Agda=Q8-Group}}
+is the [group](group-theory.groups.md) of the quaternions `1`, `-1`, `i`, `-i`,
+`j`, `-j`, `k`, and `-k`.
 
 ## Definition
 
@@ -126,7 +128,7 @@ inv-Q8 -j-Q8 = j-Q8
 inv-Q8 k-Q8 = -k-Q8
 inv-Q8 -k-Q8 = k-Q8
 
-left-unit-law-mul-Q8 : (x : Q8) → Id (mul-Q8 e-Q8 x) x
+left-unit-law-mul-Q8 : (x : Q8) → mul-Q8 e-Q8 x ＝ x
 left-unit-law-mul-Q8 e-Q8 = refl
 left-unit-law-mul-Q8 -e-Q8 = refl
 left-unit-law-mul-Q8 i-Q8 = refl
@@ -136,7 +138,7 @@ left-unit-law-mul-Q8 -j-Q8 = refl
 left-unit-law-mul-Q8 k-Q8 = refl
 left-unit-law-mul-Q8 -k-Q8 = refl
 
-right-unit-law-mul-Q8 : (x : Q8) → Id (mul-Q8 x e-Q8) x
+right-unit-law-mul-Q8 : (x : Q8) → mul-Q8 x e-Q8 ＝ x
 right-unit-law-mul-Q8 e-Q8 = refl
 right-unit-law-mul-Q8 -e-Q8 = refl
 right-unit-law-mul-Q8 i-Q8 = refl
@@ -147,7 +149,7 @@ right-unit-law-mul-Q8 k-Q8 = refl
 right-unit-law-mul-Q8 -k-Q8 = refl
 
 associative-mul-Q8 :
-  (x y z : Q8) → Id (mul-Q8 (mul-Q8 x y) z) (mul-Q8 x (mul-Q8 y z))
+  (x y z : Q8) → mul-Q8 (mul-Q8 x y) z ＝ mul-Q8 x (mul-Q8 y z)
 associative-mul-Q8 e-Q8 e-Q8 e-Q8 = refl
 associative-mul-Q8 e-Q8 e-Q8 -e-Q8 = refl
 associative-mul-Q8 e-Q8 e-Q8 i-Q8 = refl
@@ -661,7 +663,7 @@ associative-mul-Q8 -k-Q8 -k-Q8 -j-Q8 = refl
 associative-mul-Q8 -k-Q8 -k-Q8 k-Q8 = refl
 associative-mul-Q8 -k-Q8 -k-Q8 -k-Q8 = refl
 
-left-inverse-law-mul-Q8 : (x : Q8) → Id (mul-Q8 (inv-Q8 x) x) e-Q8
+left-inverse-law-mul-Q8 : (x : Q8) → mul-Q8 (inv-Q8 x) x ＝ e-Q8
 left-inverse-law-mul-Q8 e-Q8 = refl
 left-inverse-law-mul-Q8 -e-Q8 = refl
 left-inverse-law-mul-Q8 i-Q8 = refl
@@ -671,7 +673,7 @@ left-inverse-law-mul-Q8 -j-Q8 = refl
 left-inverse-law-mul-Q8 k-Q8 = refl
 left-inverse-law-mul-Q8 -k-Q8 = refl
 
-right-inverse-law-mul-Q8 : (x : Q8) → Id (mul-Q8 x (inv-Q8 x)) e-Q8
+right-inverse-law-mul-Q8 : (x : Q8) → mul-Q8 x (inv-Q8 x) ＝ e-Q8
 right-inverse-law-mul-Q8 e-Q8 = refl
 right-inverse-law-mul-Q8 -e-Q8 = refl
 right-inverse-law-mul-Q8 i-Q8 = refl
@@ -757,10 +759,10 @@ refl-Eq-Q8 -j-Q8 = star
 refl-Eq-Q8 k-Q8 = star
 refl-Eq-Q8 -k-Q8 = star
 
-Eq-eq-Q8 : {x y : Q8} → Id x y → Eq-Q8 x y
+Eq-eq-Q8 : {x y : Q8} → x ＝ y → Eq-Q8 x y
 Eq-eq-Q8 {x} refl = refl-Eq-Q8 x
 
-eq-Eq-Q8 : (x y : Q8) → Eq-Q8 x y → Id x y
+eq-Eq-Q8 : (x y : Q8) → Eq-Q8 x y → x ＝ y
 eq-Eq-Q8 e-Q8 e-Q8 e = refl
 eq-Eq-Q8 -e-Q8 -e-Q8 e = refl
 eq-Eq-Q8 i-Q8 i-Q8 e = refl
@@ -862,7 +864,7 @@ Q8-Group =
       ( pair inv-Q8 (pair left-inverse-law-mul-Q8 right-inverse-law-mul-Q8)))
 
 is-noncommutative-mul-Q8 :
-  ¬ ((x y : Q8) → Id (mul-Q8 x y) (mul-Q8 y x))
+  ¬ ((x y : Q8) → mul-Q8 x y ＝ mul-Q8 y x)
 is-noncommutative-mul-Q8 f = Eq-eq-Q8 (f i-Q8 j-Q8)
 
 map-equiv-count-Q8 : Fin 8 → Q8

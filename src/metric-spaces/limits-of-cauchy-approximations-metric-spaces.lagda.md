@@ -7,6 +7,7 @@ module metric-spaces.limits-of-cauchy-approximations-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -121,6 +123,53 @@ module _
       ( x)
       ( y)
       ( all-sim-is-limit-cauchy-approximation-Metric-Space lim-x lim-y)
+```
+
+### The value of a constant Cauchy approximation is its limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  is-limit-const-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( A)
+      ( const-cauchy-approximation-Metric-Space A x)
+      ( x)
+  is-limit-const-cauchy-approximation-Metric-Space =
+    is-limit-const-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( x)
+```
+
+### The action of short maps on Cauchy approximations preserves limits
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-function-Metric-Space A B)
+  (a : cauchy-approximation-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where
+
+  abstract
+    preserves-limit-cauchy-approximation-map-short-function-Metric-Space :
+      is-limit-cauchy-approximation-Metric-Space A a lim →
+      is-limit-cauchy-approximation-Metric-Space
+        ( B)
+        ( map-short-function-cauchy-approximation-Metric-Space A B f a)
+        ( map-short-function-Metric-Space A B f lim)
+    preserves-limit-cauchy-approximation-map-short-function-Metric-Space
+      is-lim-a ε δ =
+      is-short-map-short-function-Metric-Space A B
+        ( f)
+        ( ε +ℚ⁺ δ)
+        ( map-cauchy-approximation-Metric-Space A a ε)
+        ( lim)
+        ( is-lim-a ε δ)
 ```
 
 ## See also

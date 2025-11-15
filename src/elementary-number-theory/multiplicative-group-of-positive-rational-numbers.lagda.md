@@ -245,3 +245,11 @@ abstract
       ( is-retraction-left-div-ℚ⁺ p⁺ r)
       ( preserves-le-left-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _ pq<pr)
 ```
+
+### The inverse of 1 is 1
+
+```agda
+abstract
+  inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
+  inv-one-ℚ⁺ = inv-unit-Group group-mul-ℚ⁺
+```

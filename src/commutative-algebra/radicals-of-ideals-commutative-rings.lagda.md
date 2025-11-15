@@ -71,7 +71,7 @@ module _
       ( ideal-radical-ideal-Commutative-Ring A K)
 ```
 
-### The radical Galois connection on ideals of a commutative ring
+### The radical Galois connection on ideals in a commutative ring
 
 #### The radical of an ideal
 
@@ -105,30 +105,26 @@ module _
     is-closed-under-addition-subset-Commutative-Ring A
       ( subset-radical-of-ideal-Commutative-Ring)
   is-closed-under-addition-radical-of-ideal-Commutative-Ring {x} {y} H K =
-    apply-universal-property-trunc-Prop H
+    apply-twice-universal-property-trunc-Prop H K
       ( subset-radical-of-ideal-Commutative-Ring (add-Commutative-Ring A x y))
-      ( λ (n , p) →
-        apply-universal-property-trunc-Prop K
-          ( subset-radical-of-ideal-Commutative-Ring
-            ( add-Commutative-Ring A x y))
-          ( λ (m , q) →
-            intro-exists
-              ( n +ℕ m)
-              ( is-closed-under-eq-ideal-Commutative-Ring' A I
-                ( is-closed-under-addition-ideal-Commutative-Ring A I
-                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
-                    ( A)
-                    ( I)
-                    ( _)
-                    ( _)
-                    ( q))
-                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
-                    ( A)
-                    ( I)
-                    ( _)
-                    ( _)
-                    ( p)))
-                ( is-linear-combination-power-add-Commutative-Ring A n m x y))))
+      ( λ (n , p) (m , q) →
+        intro-exists
+          ( n +ℕ m)
+          ( is-closed-under-eq-ideal-Commutative-Ring' A I
+            ( is-closed-under-addition-ideal-Commutative-Ring A I
+              ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                ( A)
+                ( I)
+                ( _)
+                ( _)
+                ( q))
+              ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                ( A)
+                ( I)
+                ( _)
+                ( _)
+                ( p)))
+            ( is-linear-combination-power-add-Commutative-Ring A n m x y)))
 
   is-closed-under-negatives-radical-of-ideal-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring A

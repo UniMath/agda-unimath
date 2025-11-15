@@ -1,4 +1,4 @@
-# Multiplication of positive rational numbers
+# Multiplication by positive rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -28,6 +28,7 @@ open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -61,7 +62,7 @@ itself positive.
 
 ```agda
 opaque
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ mul-ℚ
 
   is-positive-mul-ℚ :
     {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
@@ -107,6 +108,10 @@ mul-ℚ⁺ = mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
+
+ap-mul-ℚ⁺ :
+  {x x' : ℚ⁺} → x ＝ x' → {y y' : ℚ⁺} → y ＝ y' → mul-ℚ⁺ x y ＝ mul-ℚ⁺ x' y'
+ap-mul-ℚ⁺ = ap-binary mul-ℚ⁺
 ```
 
 ## Properties
@@ -149,7 +154,7 @@ module _
   where
 
   opaque
-    unfolding mul-ℚ
+    unfolding is-positive-ℚ mul-ℚ
 
     inv-is-positive-ℚ : ℚ
     pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
@@ -217,7 +222,7 @@ module _
 
 ```agda
 opaque
-  unfolding le-ℚ-Prop mul-ℚ
+  unfolding is-positive-ℚ le-ℚ-Prop mul-ℚ
 
   preserves-le-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
@@ -257,8 +262,7 @@ opaque
 
 ```agda
 opaque
-  unfolding leq-ℚ-Prop
-  unfolding mul-ℚ
+  unfolding is-positive-ℚ leq-ℚ-Prop mul-ℚ
 
   preserves-leq-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
@@ -292,6 +296,14 @@ abstract
       ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
       ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
       ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+```
+
+### `2q = q + q`
+
+```agda
+abstract
+  mul-two-ℚ⁺ : (q : ℚ⁺) → two-ℚ⁺ *ℚ⁺ q ＝ q +ℚ⁺ q
+  mul-two-ℚ⁺ (q , _) = eq-ℚ⁺ (mul-two-ℚ q)
 ```
 
 ### Multiplication of a positive rational by another positive rational less than 1 is a strictly deflationary map
@@ -345,6 +357,6 @@ abstract
   leq-left-mul-leq-one-ℚ⁺ p⁺@(p , _) p≤1 q⁺@(q , _) =
     trichotomy-le-ℚ p one-ℚ
       ( λ p<1 → leq-le-ℚ (le-left-mul-less-than-one-ℚ⁺ p⁺ p<1 q⁺))
-      ( λ p=1 → leq-eq-ℚ _ _ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
+      ( λ p=1 → leq-eq-ℚ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
       ( λ 1<p → ex-falso (not-leq-le-ℚ one-ℚ p 1<p p≤1))
 ```

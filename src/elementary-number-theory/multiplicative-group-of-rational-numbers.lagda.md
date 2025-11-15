@@ -9,6 +9,9 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
@@ -23,9 +26,9 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -37,7 +40,7 @@ open import group-theory.submonoids-commutative-monoids
 
 open import ring-theory.groups-of-units-rings
 open import ring-theory.invertible-elements-rings
-open import ring-theory.trivial-rings
+open import ring-theory.nontrivial-rings
 ```
 
 </details>
@@ -75,6 +78,13 @@ rational-ℚˣ : ℚˣ → ℚ
 rational-ℚˣ = pr1
 ```
 
+### Equality of invertible rational numbers
+
+```agda
+eq-ℚˣ : (x y : ℚˣ) → rational-ℚˣ x ＝ rational-ℚˣ y → x ＝ y
+eq-ℚˣ _ _ = eq-type-subtype (subtype-group-of-units-Ring ring-ℚ)
+```
+
 ### Operations of the multiplicative group of rational numbers
 
 ```agda
@@ -86,6 +96,9 @@ _*ℚˣ_ = mul-ℚˣ
 
 inv-ℚˣ : ℚˣ → ℚˣ
 inv-ℚˣ = inv-group-of-units-Ring ring-ℚ
+
+rational-inv-ℚˣ : ℚˣ → ℚ
+rational-inv-ℚˣ q = rational-ℚˣ (inv-ℚˣ q)
 ```
 
 ### Inverse laws in the multiplicative group of rational numbers
@@ -138,7 +151,9 @@ module _
       ( H)
       ( inv K)
 
-  abstract
+  opaque
+    unfolding is-negative-ℚ
+
     is-invertible-element-ring-is-nonzero-ℚ :
       is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
     is-invertible-element-ring-is-nonzero-ℚ H =
@@ -166,4 +181,59 @@ invertible-ℚ⁺ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁺
 
 invertible-ℚ⁻ : ℚ⁻ → ℚˣ
 invertible-ℚ⁻ = invertible-nonzero-ℚ ∘ nonzero-ℚ⁻
+```
+
+### If `a ≠ b`, `b - a` is invertible
+
+```agda
+abstract
+  is-invertible-diff-neq-ℚ :
+    (a b : ℚ) → a ≠ b → is-invertible-element-Ring ring-ℚ (b -ℚ a)
+  is-invertible-diff-neq-ℚ a b a≠b =
+    is-invertible-element-ring-is-nonzero-ℚ
+      ( b -ℚ a)
+      ( λ b-a=0 → a≠b (inv (eq-is-unit-right-div-Group group-add-ℚ b-a=0)))
+
+invertible-diff-neq-ℚ : (a b : ℚ) → a ≠ b → ℚˣ
+invertible-diff-neq-ℚ a b a≠b = (b -ℚ a , is-invertible-diff-neq-ℚ a b a≠b)
+```
+
+### If `|a| < b` and `b` is positive then `b - a` is invertible
+
+```agda
+is-invertible-diff-le-abs-ℚ :
+  (a : ℚ) (b : ℚ⁺) → le-ℚ (rational-abs-ℚ a) (rational-ℚ⁺ b) →
+  is-invertible-element-Ring ring-ℚ (rational-ℚ⁺ b -ℚ a)
+is-invertible-diff-le-abs-ℚ a b⁺@(b , _) |a|<b =
+  is-invertible-diff-neq-ℚ
+    ( a)
+    ( b)
+    ( nonequal-map
+      ( rational-abs-ℚ)
+      ( inv-tr
+        ( rational-abs-ℚ a ≠_)
+        ( rational-abs-rational-ℚ⁺ b⁺)
+        ( nonequal-le-ℚ |a|<b)))
+
+invertible-diff-le-abs-ℚ :
+  (a : ℚ) (b : ℚ⁺) → le-ℚ (rational-abs-ℚ a) (rational-ℚ⁺ b) → ℚˣ
+invertible-diff-le-abs-ℚ a b |a|<b =
+  ( rational-ℚ⁺ b -ℚ a , is-invertible-diff-le-abs-ℚ a b |a|<b)
+```
+
+### Cancellation laws
+
+```agda
+abstract
+  cancel-right-mul-div-ℚˣ :
+    (p : ℚ) (q : ℚˣ) → (p *ℚ rational-ℚˣ q) *ℚ rational-inv-ℚˣ q ＝ p
+  cancel-right-mul-div-ℚˣ p q =
+    equational-reasoning
+      p *ℚ rational-ℚˣ q *ℚ rational-inv-ℚˣ q
+      ＝ p *ℚ (rational-ℚˣ q *ℚ rational-inv-ℚˣ q)
+        by associative-mul-ℚ _ _ _
+      ＝ p *ℚ rational-ℚˣ one-ℚˣ
+        by ap-mul-ℚ refl (ap rational-ℚˣ (right-inverse-law-mul-ℚˣ q))
+      ＝ p
+        by right-unit-law-mul-ℚ p
 ```

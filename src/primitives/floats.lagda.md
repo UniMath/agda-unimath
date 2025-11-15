@@ -21,9 +21,9 @@ open import primitives.strings
 
 ## Idea
 
-The `Float` type represents IEEE754 floats. Agda provides primitive functions to
-manipulate them. Floats can be written as usual, using dots as separators, e.g.
-`3.14`.
+The `Float` type represents {{#concept "IEEE754 floats" Agda=Float}}. Agda
+provides primitive functions to manipulate them. Floats can be written as in
+usual programming languages, using dots as separators, e.g. `3.14`.
 
 ## Definitions
 

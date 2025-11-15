@@ -22,7 +22,8 @@ open import ring-theory.rings
 ## Idea
 
 Two elements `x` and `y` of a [ring](ring-theory.rings.md) `R` are said to
-**commute** if `xy ＝ yx`.
+{{#concept "commute" Disambiguation="pair of elements of a ring" Agda=commute-Ring}}
+if `xy ＝ yx`.
 
 ## Definitions
 

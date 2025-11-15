@@ -45,10 +45,15 @@ open import ring-theory.semirings
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the
-integers. A ring consists of a set equipped with addition and multiplication,
-where the addition operation gives the ring the structure of an abelian group,
-and the multiplication is associative, unital, and distributive over addition.
+The concept of a _ring_ vastly generalizes the
+[arithmetical structure](elementary-number-theory.ring-of-integers.md) on the
+[integers](elementary-number-theory.integers.md). A
+{{#concept "ring" WD="ring" WDID=Q161172 Agda=Ring}} consists of a
+[set](foundation-core.sets.md) [equipped](foundation.structure.md) with addition
+and multiplication, where the addition operation gives the ring the structure of
+an [abelian group](group-theory.abelian-groups.md), and the multiplication is
+associative, unital, and distributive over addition, forming the structure of a
+[monoid](group-theory.monoids.md).
 
 ## Definitions
 
@@ -61,9 +66,9 @@ has-mul-Ab A =
     ( λ μ →
       ( is-unital (pr1 μ)) ×
       ( ( (a b c : type-Ab A) →
-          Id (pr1 μ a (add-Ab A b c)) (add-Ab A (pr1 μ a b) (pr1 μ a c))) ×
+          pr1 μ a (add-Ab A b c) ＝ add-Ab A (pr1 μ a b) (pr1 μ a c)) ×
         ( (a b c : type-Ab A) →
-          Id (pr1 μ (add-Ab A a b) c) (add-Ab A (pr1 μ a c) (pr1 μ b c)))))
+          pr1 μ (add-Ab A a b) c ＝ add-Ab A (pr1 μ a c) (pr1 μ b c))))
 
 Ring : (l1 : Level) → UU (lsuc l1)
 Ring l1 = Σ (Ab l1) has-mul-Ab
@@ -115,19 +120,19 @@ module _
 
   ap-add-Ring :
     {x y x' y' : type-Ring R} →
-    Id x x' → Id y y' → Id (add-Ring x y) (add-Ring x' y')
+    x ＝ x' → y ＝ y' → add-Ring x y ＝ add-Ring x' y'
   ap-add-Ring = ap-add-Ab (ab-Ring R)
 
   associative-add-Ring :
     (x y z : type-Ring R) →
-    Id (add-Ring (add-Ring x y) z) (add-Ring x (add-Ring y z))
+    add-Ring (add-Ring x y) z ＝ add-Ring x (add-Ring y z)
   associative-add-Ring = associative-add-Ab (ab-Ring R)
 
   is-group-additive-semigroup-Ring :
     is-group-Semigroup (additive-semigroup-Ring R)
   is-group-additive-semigroup-Ring = is-group-Ab (ab-Ring R)
 
-  commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
+  commutative-add-Ring : (x y : type-Ring R) → add-Ring x y ＝ add-Ring y x
   commutative-add-Ring = commutative-add-Ab (ab-Ring R)
 
   interchange-add-add-Ring :
@@ -265,7 +270,7 @@ module _
   zero-Ring = zero-Ab (ab-Ring R)
 
   is-zero-Ring : type-Ring R → UU l
-  is-zero-Ring x = Id x zero-Ring
+  is-zero-Ring x = x ＝ zero-Ring
 
   is-nonzero-Ring : type-Ring R → UU l
   is-nonzero-Ring x = ¬ (is-zero-Ring x)
@@ -276,10 +281,10 @@ module _
   is-nonzero-ring-Prop : type-Ring R → Prop l
   is-nonzero-ring-Prop x = neg-Prop (is-zero-ring-Prop x)
 
-  left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
+  left-unit-law-add-Ring : (x : type-Ring R) → add-Ring R zero-Ring x ＝ x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
 
-  right-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R x zero-Ring) x
+  right-unit-law-add-Ring : (x : type-Ring R) → add-Ring R x zero-Ring ＝ x
   right-unit-law-add-Ring = right-unit-law-add-Ab (ab-Ring R)
 ```
 
@@ -298,11 +303,11 @@ module _
   neg-Ring = neg-Ab (ab-Ring R)
 
   left-inverse-law-add-Ring :
-    (x : type-Ring R) → Id (add-Ring R (neg-Ring x) x) (zero-Ring R)
+    (x : type-Ring R) → add-Ring R (neg-Ring x) x ＝ zero-Ring R
   left-inverse-law-add-Ring = left-inverse-law-add-Ab (ab-Ring R)
 
   right-inverse-law-add-Ring :
-    (x : type-Ring R) → Id (add-Ring R x (neg-Ring x)) (zero-Ring R)
+    (x : type-Ring R) → add-Ring R x (neg-Ring x) ＝ zero-Ring R
   right-inverse-law-add-Ring = right-inverse-law-add-Ab (ab-Ring R)
 
   neg-neg-Ring : (x : type-Ring R) → neg-Ring (neg-Ring x) ＝ x
@@ -367,13 +372,13 @@ module _
   mul-Ring' x y = mul-Ring y x
 
   ap-mul-Ring :
-    {x x' y y' : type-Ring R} (p : Id x x') (q : Id y y') →
-    Id (mul-Ring x y) (mul-Ring x' y')
+    {x x' y y' : type-Ring R} (p : x ＝ x') (q : y ＝ y') →
+    mul-Ring x y ＝ mul-Ring x' y'
   ap-mul-Ring p q = ap-binary mul-Ring p q
 
   associative-mul-Ring :
     (x y z : type-Ring R) →
-    Id (mul-Ring (mul-Ring x y) z) (mul-Ring x (mul-Ring y z))
+    mul-Ring (mul-Ring x y) z ＝ mul-Ring x (mul-Ring y z)
   associative-mul-Ring = pr2 has-associative-mul-Ring
 
   multiplicative-semigroup-Ring : Semigroup l
@@ -410,10 +415,10 @@ module _
   one-Ring : type-Ring R
   one-Ring = unit-Monoid multiplicative-monoid-Ring
 
-  left-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R one-Ring x) x
+  left-unit-law-mul-Ring : (x : type-Ring R) → mul-Ring R one-Ring x ＝ x
   left-unit-law-mul-Ring = left-unit-law-mul-Monoid multiplicative-monoid-Ring
 
-  right-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R x one-Ring) x
+  right-unit-law-mul-Ring : (x : type-Ring R) → mul-Ring R x one-Ring ＝ x
   right-unit-law-mul-Ring = right-unit-law-mul-Monoid multiplicative-monoid-Ring
 ```
 
@@ -425,7 +430,7 @@ module _
   where
 
   left-zero-law-mul-Ring :
-    (x : type-Ring R) → Id (mul-Ring R (zero-Ring R) x) (zero-Ring R)
+    (x : type-Ring R) → mul-Ring R (zero-Ring R) x ＝ zero-Ring R
   left-zero-law-mul-Ring x =
     is-zero-is-idempotent-Ab
       ( ab-Ring R)
@@ -434,7 +439,7 @@ module _
         ( ap (mul-Ring' R x) (left-unit-law-add-Ring R (zero-Ring R))))
 
   right-zero-law-mul-Ring :
-    (x : type-Ring R) → Id (mul-Ring R x (zero-Ring R)) (zero-Ring R)
+    (x : type-Ring R) → mul-Ring R x (zero-Ring R) ＝ zero-Ring R
   right-zero-law-mul-Ring x =
     is-zero-is-idempotent-Ab
       ( ab-Ring R)
@@ -615,66 +620,7 @@ module _
     bidistributive-mul-add-Semiring (semiring-Ring R)
 ```
 
-### Scalar multiplication of ring elements by a natural number
-
-```agda
-module _
-  {l : Level} (R : Ring l)
-  where
-
-  mul-nat-scalar-Ring : ℕ → type-Ring R → type-Ring R
-  mul-nat-scalar-Ring = mul-nat-scalar-Semiring (semiring-Ring R)
-
-  ap-mul-nat-scalar-Ring :
-    {m n : ℕ} {x y : type-Ring R} →
-    (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring m x ＝ mul-nat-scalar-Ring n y
-  ap-mul-nat-scalar-Ring = ap-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-zero-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) → mul-nat-scalar-Ring 0 x ＝ zero-Ring R
-  left-zero-law-mul-nat-scalar-Ring =
-    left-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  right-zero-law-mul-nat-scalar-Ring :
-    (n : ℕ) → mul-nat-scalar-Ring n (zero-Ring R) ＝ zero-Ring R
-  right-zero-law-mul-nat-scalar-Ring =
-    right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-unit-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) → mul-nat-scalar-Ring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Ring =
-    left-unit-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-nat-scalar-law-mul-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-Ring R (mul-nat-scalar-Ring n x) y ＝
-    mul-nat-scalar-Ring n (mul-Ring R x y)
-  left-nat-scalar-law-mul-Ring =
-    left-nat-scalar-law-mul-Semiring (semiring-Ring R)
-
-  right-nat-scalar-law-mul-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-Ring R x (mul-nat-scalar-Ring n y) ＝
-    mul-nat-scalar-Ring n (mul-Ring R x y)
-  right-nat-scalar-law-mul-Ring =
-    right-nat-scalar-law-mul-Semiring (semiring-Ring R)
-
-  left-distributive-mul-nat-scalar-add-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-nat-scalar-Ring n (add-Ring R x y) ＝
-    add-Ring R (mul-nat-scalar-Ring n x) (mul-nat-scalar-Ring n y)
-  left-distributive-mul-nat-scalar-add-Ring =
-    left-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)
-
-  right-distributive-mul-nat-scalar-add-Ring :
-    (m n : ℕ) (x : type-Ring R) →
-    mul-nat-scalar-Ring (m +ℕ n) x ＝
-    add-Ring R (mul-nat-scalar-Ring m x) (mul-nat-scalar-Ring n x)
-  right-distributive-mul-nat-scalar-add-Ring =
-    right-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)
-```
-
-### Addition of a list of elements in an abelian group
+### Addition of a list of elements in a ring
 
 ```agda
 module _
@@ -686,9 +632,8 @@ module _
 
   preserves-concat-add-list-Ring :
     (l1 l2 : list (type-Ring R)) →
-    Id
-      ( add-list-Ring (concat-list l1 l2))
-      ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
+    add-list-Ring (concat-list l1 l2) ＝
+    add-Ring R (add-list-Ring l1) (add-list-Ring l2)
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
 ```
 
@@ -706,3 +651,7 @@ ring-structure-ring :
 pr1 (ring-structure-ring X (p , q)) = abelian-group-structure-abelian-group X p
 pr2 (ring-structure-ring X (p , q)) = q
 ```
+
+## Examples of rings
+
+{{#include tables/rings.md}}

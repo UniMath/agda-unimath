@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.monoids
+open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.semigroups
 ```
 
@@ -33,13 +34,14 @@ open import group-theory.semigroups
 
 ## Idea
 
-The concept of a _semiring_ vastly generalizes the arithmetical structure on the
-[natural numbers](elementary-number-theory.natural-numbers.md). A
-{{#concept "semiring" Agda=Semiring}} consists of a
-[set](foundation-core.sets.md) equipped with addition and multiplication, where
-the addition operation gives the semiring the structure of a
-[commutative monoid](group-theory.commutative-monoids.md), and the
-multiplication is associative, unital, and distributive over addition.
+The concept of a _semiring_ vastly generalizes the
+[arithmetical structure](elementary-number-theory.semiring-of-natural-numbers.md)
+on the [natural numbers](elementary-number-theory.natural-numbers.md). A
+{{#concept "semiring" WD="semiring" WDID=Q1333055 Agda=Semiring}} consists of a
+[set](foundation-core.sets.md) [equipped](foundation.structure.md) with addition
+and multiplication, where the addition operation gives the semiring the
+structure of a [commutative monoid](group-theory.commutative-monoids.md), and
+the multiplication is associative, unital, and distributive over addition.
 
 ## Definitions
 
@@ -181,7 +183,7 @@ module _
     unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
   is-zero-Semiring : type-Semiring R → UU l
-  is-zero-Semiring x = Id x zero-Semiring
+  is-zero-Semiring x = x ＝ zero-Semiring
 
   is-nonzero-Semiring : type-Semiring R → UU l
   is-nonzero-Semiring x = ¬ (is-zero-Semiring x)
@@ -190,13 +192,13 @@ module _
   is-zero-prop-Semiring x = Id-Prop (set-Semiring R) x zero-Semiring
 
   left-unit-law-add-Semiring :
-    (x : type-Semiring R) → Id (add-Semiring R zero-Semiring x) x
+    (x : type-Semiring R) → add-Semiring R zero-Semiring x ＝ x
   left-unit-law-add-Semiring =
     left-unit-law-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   right-unit-law-add-Semiring :
-    (x : type-Semiring R) → Id (add-Semiring R x zero-Semiring) x
+    (x : type-Semiring R) → add-Semiring R x zero-Semiring ＝ x
   right-unit-law-add-Semiring =
     right-unit-law-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
@@ -219,13 +221,13 @@ module _
   mul-Semiring' x y = mul-Semiring y x
 
   ap-mul-Semiring :
-    {x x' y y' : type-Semiring R} (p : Id x x') (q : Id y y') →
-    Id (mul-Semiring x y) (mul-Semiring x' y')
+    {x x' y y' : type-Semiring R} (p : x ＝ x') (q : y ＝ y') →
+    mul-Semiring x y ＝ mul-Semiring x' y'
   ap-mul-Semiring p q = ap-binary mul-Semiring p q
 
   associative-mul-Semiring :
     (x y z : type-Semiring R) →
-    Id (mul-Semiring (mul-Semiring x y) z) (mul-Semiring x (mul-Semiring y z))
+    mul-Semiring (mul-Semiring x y) z ＝ mul-Semiring x (mul-Semiring y z)
   associative-mul-Semiring = pr2 has-associative-mul-Semiring
 
   multiplicative-semigroup-Semiring : Semigroup l
@@ -285,114 +287,12 @@ module _
   one-Semiring = unit-Monoid multiplicative-monoid-Semiring
 
   left-unit-law-mul-Semiring :
-    (x : type-Semiring R) → Id (mul-Semiring R one-Semiring x) x
+    (x : type-Semiring R) → mul-Semiring R one-Semiring x ＝ x
   left-unit-law-mul-Semiring =
     left-unit-law-mul-Monoid multiplicative-monoid-Semiring
 
   right-unit-law-mul-Semiring :
-    (x : type-Semiring R) → Id (mul-Semiring R x one-Semiring) x
+    (x : type-Semiring R) → mul-Semiring R x one-Semiring ＝ x
   right-unit-law-mul-Semiring =
     right-unit-law-mul-Monoid multiplicative-monoid-Semiring
-```
-
-### Scalar multiplication of semiring elements by natural numbers
-
-```agda
-module _
-  {l : Level} (R : Semiring l)
-  where
-
-  mul-nat-scalar-Semiring : ℕ → type-Semiring R → type-Semiring R
-  mul-nat-scalar-Semiring zero-ℕ x = zero-Semiring R
-  mul-nat-scalar-Semiring (succ-ℕ n) x =
-    add-Semiring R (mul-nat-scalar-Semiring n x) x
-
-  ap-mul-nat-scalar-Semiring :
-    {m n : ℕ} {x y : type-Semiring R} →
-    (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Semiring m x ＝ mul-nat-scalar-Semiring n y
-  ap-mul-nat-scalar-Semiring p q = ap-binary mul-nat-scalar-Semiring p q
-
-  left-zero-law-mul-nat-scalar-Semiring :
-    (x : type-Semiring R) → mul-nat-scalar-Semiring 0 x ＝ zero-Semiring R
-  left-zero-law-mul-nat-scalar-Semiring x = refl
-
-  right-zero-law-mul-nat-scalar-Semiring :
-    (n : ℕ) → mul-nat-scalar-Semiring n (zero-Semiring R) ＝ zero-Semiring R
-  right-zero-law-mul-nat-scalar-Semiring zero-ℕ = refl
-  right-zero-law-mul-nat-scalar-Semiring (succ-ℕ n) =
-    ( right-unit-law-add-Semiring R _) ∙
-    ( right-zero-law-mul-nat-scalar-Semiring n)
-
-  left-unit-law-mul-nat-scalar-Semiring :
-    (x : type-Semiring R) → mul-nat-scalar-Semiring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Semiring x = left-unit-law-add-Semiring R x
-
-  left-nat-scalar-law-mul-Semiring :
-    (n : ℕ) (x y : type-Semiring R) →
-    mul-Semiring R (mul-nat-scalar-Semiring n x) y ＝
-    mul-nat-scalar-Semiring n (mul-Semiring R x y)
-  left-nat-scalar-law-mul-Semiring zero-ℕ x y =
-    left-zero-law-mul-Semiring R y
-  left-nat-scalar-law-mul-Semiring (succ-ℕ n) x y =
-    ( right-distributive-mul-add-Semiring R
-      ( mul-nat-scalar-Semiring n x)
-      ( x)
-      ( y)) ∙
-    ( ap
-      ( add-Semiring' R (mul-Semiring R x y))
-      ( left-nat-scalar-law-mul-Semiring n x y))
-
-  right-nat-scalar-law-mul-Semiring :
-    (n : ℕ) (x y : type-Semiring R) →
-    mul-Semiring R x (mul-nat-scalar-Semiring n y) ＝
-    mul-nat-scalar-Semiring n (mul-Semiring R x y)
-  right-nat-scalar-law-mul-Semiring zero-ℕ x y =
-    right-zero-law-mul-Semiring R x
-  right-nat-scalar-law-mul-Semiring (succ-ℕ n) x y =
-    ( left-distributive-mul-add-Semiring R x
-      ( mul-nat-scalar-Semiring n y)
-      ( y)) ∙
-    ( ap
-      ( add-Semiring' R (mul-Semiring R x y))
-      ( right-nat-scalar-law-mul-Semiring n x y))
-
-  left-distributive-mul-nat-scalar-add-Semiring :
-    (n : ℕ) (x y : type-Semiring R) →
-    mul-nat-scalar-Semiring n (add-Semiring R x y) ＝
-    add-Semiring R (mul-nat-scalar-Semiring n x) (mul-nat-scalar-Semiring n y)
-  left-distributive-mul-nat-scalar-add-Semiring zero-ℕ x y =
-    inv (left-unit-law-add-Semiring R (zero-Semiring R))
-  left-distributive-mul-nat-scalar-add-Semiring (succ-ℕ n) x y =
-    ( ap
-      ( add-Semiring' R (add-Semiring R x y))
-      ( left-distributive-mul-nat-scalar-add-Semiring n x y)) ∙
-    ( interchange-add-add-Semiring R
-      ( mul-nat-scalar-Semiring n x)
-      ( mul-nat-scalar-Semiring n y)
-      ( x)
-      ( y))
-
-  right-distributive-mul-nat-scalar-add-Semiring :
-    (m n : ℕ) (x : type-Semiring R) →
-    mul-nat-scalar-Semiring (m +ℕ n) x ＝
-    add-Semiring R (mul-nat-scalar-Semiring m x) (mul-nat-scalar-Semiring n x)
-  right-distributive-mul-nat-scalar-add-Semiring m zero-ℕ x =
-    inv (right-unit-law-add-Semiring R (mul-nat-scalar-Semiring m x))
-  right-distributive-mul-nat-scalar-add-Semiring m (succ-ℕ n) x =
-    ( ap
-      ( add-Semiring' R x)
-      ( right-distributive-mul-nat-scalar-add-Semiring m n x)) ∙
-    ( associative-add-Semiring R
-      ( mul-nat-scalar-Semiring m x)
-      ( mul-nat-scalar-Semiring n x) x)
-
-  htpy-comp-mul-nat-mul-Semiring :
-    ( m n : ℕ) →
-    ( mul-nat-scalar-Semiring (m *ℕ n)) ~
-    ( mul-nat-scalar-Semiring m ∘ mul-nat-scalar-Semiring n)
-  htpy-comp-mul-nat-mul-Semiring zero-ℕ n x = refl
-  htpy-comp-mul-nat-mul-Semiring (succ-ℕ m) n x =
-    ( right-distributive-mul-nat-scalar-add-Semiring (m *ℕ n) n x) ∙
-    ( ap (add-Semiring' R _) (htpy-comp-mul-nat-mul-Semiring m n x))
 ```

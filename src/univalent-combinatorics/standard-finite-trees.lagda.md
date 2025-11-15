@@ -59,5 +59,5 @@ is-leaf-Tree-Fin (tree-Fin (succ-ℕ n) _) = empty
 is-full-binary-Tree-Fin : Tree-Fin → UU lzero
 is-full-binary-Tree-Fin (tree-Fin zero-ℕ f) = unit
 is-full-binary-Tree-Fin (tree-Fin (succ-ℕ n) f) =
-  (Id 2 n) × ((k : Fin (succ-ℕ n)) → is-full-binary-Tree-Fin (f k))
+  (2 ＝ n) × ((k : Fin (succ-ℕ n)) → is-full-binary-Tree-Fin (f k))
 ```

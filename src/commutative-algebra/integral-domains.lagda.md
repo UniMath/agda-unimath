@@ -49,10 +49,13 @@ open import ring-theory.semirings
 
 ## Idea
 
-An **integral domain** is a nonzero commutative ring `R` such that the product
-of any two nonzero elements in `R` is nonzero. Equivalently, a commutative ring
-`R` is an integral domain if and only if multiplication by any nonzero element
-`a` satisfies the cancellation property: `ax = ay ⇒ x = y`.
+An
+{{#concept "integral domain" Agda=Integral-Domain WDID=Q628792 WD="integral domain"}}
+is a [nontrivial](commutative-algebra.trivial-commutative-rings.md)
+[commutative ring](commutative-algebra.commutative-rings.md) `R` such that the
+product of any two nonzero elements in `R` is nonzero. Equivalently, a
+commutative ring `R` is an integral domain if and only if multiplication by any
+nonzero element `a` satisfies the cancellation property: `ax = ay ⇒ x = y`.
 
 ## Definition
 
@@ -147,7 +150,7 @@ module _
 
   commutative-add-Integral-Domain :
     (x y : type-Integral-Domain) →
-    Id (add-Integral-Domain x y) (add-Integral-Domain y x)
+    add-Integral-Domain x y ＝ add-Integral-Domain y x
   commutative-add-Integral-Domain = commutative-add-Ab ab-Integral-Domain
 
   interchange-add-add-Integral-Domain :
@@ -303,8 +306,8 @@ module _
     mul-Commutative-Ring' commutative-ring-Integral-Domain
 
   ap-mul-Integral-Domain :
-    {x x' y y' : type-Integral-Domain} (p : Id x x') (q : Id y y') →
-    Id (mul-Integral-Domain x y) (mul-Integral-Domain x' y')
+    {x x' y y' : type-Integral-Domain} (p : x ＝ x') (q : y ＝ y') →
+    mul-Integral-Domain x y ＝ mul-Integral-Domain x' y'
   ap-mul-Integral-Domain p q = ap-binary mul-Integral-Domain p q
 
   associative-mul-Integral-Domain :
@@ -321,20 +324,16 @@ module _
 
   left-distributive-mul-add-Integral-Domain :
     (x y z : type-Integral-Domain) →
-    ( mul-Integral-Domain x (add-Integral-Domain y z)) ＝
-    ( add-Integral-Domain
-      ( mul-Integral-Domain x y)
-      ( mul-Integral-Domain x z))
+    mul-Integral-Domain x (add-Integral-Domain y z) ＝
+    add-Integral-Domain (mul-Integral-Domain x y) (mul-Integral-Domain x z)
   left-distributive-mul-add-Integral-Domain =
     left-distributive-mul-add-Commutative-Ring
       commutative-ring-Integral-Domain
 
   right-distributive-mul-add-Integral-Domain :
     (x y z : type-Integral-Domain) →
-    ( mul-Integral-Domain (add-Integral-Domain x y) z) ＝
-    ( add-Integral-Domain
-      ( mul-Integral-Domain x z)
-      ( mul-Integral-Domain y z))
+    mul-Integral-Domain (add-Integral-Domain x y) z ＝
+    add-Integral-Domain (mul-Integral-Domain x z) (mul-Integral-Domain y z)
   right-distributive-mul-add-Integral-Domain =
     right-distributive-mul-add-Commutative-Ring
       commutative-ring-Integral-Domain
@@ -517,83 +516,6 @@ module _
       commutative-ring-Integral-Domain
 ```
 
-### Scalar multiplication of elements of a integral domain by natural numbers
-
-```agda
-  mul-nat-scalar-Integral-Domain :
-    ℕ → type-Integral-Domain → type-Integral-Domain
-  mul-nat-scalar-Integral-Domain =
-    mul-nat-scalar-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  ap-mul-nat-scalar-Integral-Domain :
-    {m n : ℕ} {x y : type-Integral-Domain} →
-    (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Integral-Domain m x ＝
-    mul-nat-scalar-Integral-Domain n y
-  ap-mul-nat-scalar-Integral-Domain =
-    ap-mul-nat-scalar-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  left-zero-law-mul-nat-scalar-Integral-Domain :
-    (x : type-Integral-Domain) →
-    mul-nat-scalar-Integral-Domain 0 x ＝ zero-Integral-Domain
-  left-zero-law-mul-nat-scalar-Integral-Domain =
-    left-zero-law-mul-nat-scalar-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  right-zero-law-mul-nat-scalar-Integral-Domain :
-    (n : ℕ) →
-    mul-nat-scalar-Integral-Domain n zero-Integral-Domain ＝
-    zero-Integral-Domain
-  right-zero-law-mul-nat-scalar-Integral-Domain =
-    right-zero-law-mul-nat-scalar-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  left-unit-law-mul-nat-scalar-Integral-Domain :
-    (x : type-Integral-Domain) →
-    mul-nat-scalar-Integral-Domain 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Integral-Domain =
-    left-unit-law-mul-nat-scalar-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  left-nat-scalar-law-mul-Integral-Domain :
-    (n : ℕ) (x y : type-Integral-Domain) →
-    mul-Integral-Domain (mul-nat-scalar-Integral-Domain n x) y ＝
-    mul-nat-scalar-Integral-Domain n (mul-Integral-Domain x y)
-  left-nat-scalar-law-mul-Integral-Domain =
-    left-nat-scalar-law-mul-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  right-nat-scalar-law-mul-Integral-Domain :
-    (n : ℕ) (x y : type-Integral-Domain) →
-    mul-Integral-Domain x (mul-nat-scalar-Integral-Domain n y) ＝
-    mul-nat-scalar-Integral-Domain n (mul-Integral-Domain x y)
-  right-nat-scalar-law-mul-Integral-Domain =
-    right-nat-scalar-law-mul-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  left-distributive-mul-nat-scalar-add-Integral-Domain :
-    (n : ℕ) (x y : type-Integral-Domain) →
-    mul-nat-scalar-Integral-Domain n (add-Integral-Domain x y) ＝
-    add-Integral-Domain
-      ( mul-nat-scalar-Integral-Domain n x)
-      ( mul-nat-scalar-Integral-Domain n y)
-  left-distributive-mul-nat-scalar-add-Integral-Domain =
-    left-distributive-mul-nat-scalar-add-Commutative-Ring
-      commutative-ring-Integral-Domain
-
-  right-distributive-mul-nat-scalar-add-Integral-Domain :
-    (m n : ℕ) (x : type-Integral-Domain) →
-    mul-nat-scalar-Integral-Domain (m +ℕ n) x ＝
-    add-Integral-Domain
-      ( mul-nat-scalar-Integral-Domain m x)
-      ( mul-nat-scalar-Integral-Domain n x)
-  right-distributive-mul-nat-scalar-add-Integral-Domain =
-    right-distributive-mul-nat-scalar-add-Commutative-Ring
-      commutative-ring-Integral-Domain
-```
-
 ### Addition of a list of elements in an integral domain
 
 ```agda
@@ -604,11 +526,10 @@ module _
 
   preserves-concat-add-list-Integral-Domain :
     (l1 l2 : list type-Integral-Domain) →
-    Id
-      ( add-list-Integral-Domain (concat-list l1 l2))
-      ( add-Integral-Domain
-        ( add-list-Integral-Domain l1)
-        ( add-list-Integral-Domain l2))
+    add-list-Integral-Domain (concat-list l1 l2) ＝
+    add-Integral-Domain
+      ( add-list-Integral-Domain l1)
+      ( add-list-Integral-Domain l2)
   preserves-concat-add-list-Integral-Domain =
     preserves-concat-add-list-Commutative-Ring
       commutative-ring-Integral-Domain

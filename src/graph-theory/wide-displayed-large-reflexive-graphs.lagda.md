@@ -26,7 +26,7 @@ A
 is a
 [displayed large reflexive graph](graph-theory.displayed-large-reflexive-graphs.md)
 over a base [large reflexive graph](graph-theory.large-reflexive-graphs.md) `G`
-that does not add structure on the vertices, but only the edges.
+that only adds structure on the edges.
 
 **Terminology.** The use of the term "wide" here is motivated by the idea that a
 "wide displayed graph" should generalize "wide subgraphs", i.e., a subgraph

@@ -1,5 +1,9 @@
 # Set theory
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Idea
 
 In univalent type theory, what we refer to formally as a _set_ is only in one
@@ -15,8 +19,8 @@ _sets_ and a propositionally valued _elementhood relation_, or _membership
 relation_, `∈` on them.
 
 While this elementhood relation is not built into Martin–Löf type theory as a
-fundamental construct, there is one important instance of it present in Agda —
-namely, the [smallness](foundation-core.small-types.md) predicate:
+fundamental construct, there is one important instance of it present — namely,
+the [smallness](foundation-core.small-types.md) predicate:
 
 ```text
   is-small l A := Σ (X : UU l), (A ≃ X).
@@ -27,9 +31,9 @@ this sense. Indeed, that `is-small l` is a predicate is equivalent to the
 [univalence axiom](foundation-core.univalence.md). This highlights a second
 connection between set theory and univalent type theory that is not directly
 compatible with the preconception that "set theory is a study of set-level
-mathematics". Namely, the universe of sets need not itself be a set-level
-structure. In fact, with univalence it is a proper
-[1-type](foundation-core.1-types.md), meaning it is a 1-type and not a set.
+mathematics". More concretely, the universe of sets need not itself be a
+set-level structure. In fact, assuming univalence, it is a proper
+[groupoid](foundation-core.1-types.md).
 
 In this module, we consider ideas historically related to the study of set
 theories both as foundations of set-level mathematics, but also as a study of
@@ -46,6 +50,7 @@ module set-theory where
 
 open import set-theory.addition-cardinals public
 open import set-theory.baire-space public
+open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinality-projective-sets public
@@ -62,9 +67,21 @@ open import set-theory.inhabited-cardinals public
 open import set-theory.russells-paradox public
 open import set-theory.strict-complemented-boundedness-cardinalities public
 open import set-theory.strict-complemented-inequality-cardinalities public
+open import set-theory.finite-elements-increasing-binary-sequences public
+open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
+open import set-theory.increasing-binary-sequences public
+open import set-theory.inequality-increasing-binary-sequences public
+open import set-theory.infinite-sets public
+open import set-theory.positive-elements-increasing-binary-sequences public
+open import set-theory.russells-paradox public
+open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
 open import set-theory.zero-cardinal public
 ```
+
+## See also
+
+- The [`trees`](trees.md) namespace
 
 ## References
 

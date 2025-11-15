@@ -14,10 +14,12 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -115,7 +117,7 @@ module _
   is-merely-decidable-is-inhabited-or-empty :
     is-inhabited-or-empty A → is-merely-decidable A
   is-merely-decidable-is-inhabited-or-empty (inl |x|) =
-    rec-trunc-Prop (is-merely-decidable-Prop A) (unit-trunc-Prop ∘ inl) |x|
+    map-trunc-Prop inl |x|
   is-merely-decidable-is-inhabited-or-empty (inr y) =
     unit-trunc-Prop (inr y)
 
@@ -151,8 +153,9 @@ module _
   is-inhabited-or-empty-iff :
     (A → B) → (B → A) → is-inhabited-or-empty A → is-inhabited-or-empty B
   is-inhabited-or-empty-iff f g (inl |a|) =
-    inl (rec-trunc-Prop (trunc-Prop B) (unit-trunc-Prop ∘ f) |a|)
-  is-inhabited-or-empty-iff f g (inr na) = inr (na ∘ g)
+    inl (map-trunc-Prop f |a|)
+  is-inhabited-or-empty-iff f g (inr na) =
+    inr (na ∘ g)
 
   is-inhabited-or-empty-iff' :
     A ↔ B → is-inhabited-or-empty A → is-inhabited-or-empty B
@@ -166,6 +169,26 @@ module _
     A ↔ B → is-inhabited-or-empty A ↔ is-inhabited-or-empty B
   iff-is-inhabited-or-empty e =
     is-inhabited-or-empty-iff' e , is-inhabited-or-empty-iff' (inv-iff e)
+```
+
+### Propositionally decidable types are closed under surjections
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-inhabited-or-empty-surjection :
+      (A ↠ B) → is-inhabited-or-empty A → is-inhabited-or-empty B
+    is-inhabited-or-empty-surjection A↠B =
+      is-inhabited-or-empty-is-coinhabited (is-coinhabited-surjection A↠B)
+
+    is-inhabited-or-empty-surjection' :
+      (A ↠ B) → is-inhabited-or-empty B → is-inhabited-or-empty A
+    is-inhabited-or-empty-surjection' A↠B =
+      is-inhabited-or-empty-is-coinhabited
+        ( is-symmetric-is-coinhabited (is-coinhabited-surjection A↠B))
 ```
 
 ### Propositionally decidable types are closed under retracts
@@ -294,7 +317,7 @@ is-inhabited-or-empty-function-type :
   is-inhabited-or-empty B →
   is-inhabited-or-empty (A → B)
 is-inhabited-or-empty-function-type (inl a) (inl b) =
-  inl (rec-trunc-Prop (trunc-Prop _) (λ y → unit-trunc-Prop (λ _ → y)) b)
+  inl (map-trunc-Prop (λ y _ → y) b)
 is-inhabited-or-empty-function-type (inl a) (inr nb) =
   inr (λ f → rec-trunc-Prop empty-Prop (λ x → nb (f x)) a)
 is-inhabited-or-empty-function-type (inr na) dB =
@@ -305,10 +328,11 @@ is-inhabited-or-empty-function-type' :
   is-inhabited-or-empty A → (A → is-inhabited-or-empty B) →
   is-inhabited-or-empty (A → B)
 is-inhabited-or-empty-function-type' (inl a) dB =
-  rec-trunc-Prop (is-inhabited-or-empty-Prop _)
+  rec-trunc-Prop
+    ( is-inhabited-or-empty-Prop _)
     ( λ x →
       rec-coproduct
-        ( inl ∘ rec-trunc-Prop (trunc-Prop _) (λ y → unit-trunc-Prop (λ _ → y)))
+        ( inl ∘ map-trunc-Prop (λ y _ → y))
         ( λ nb → inr (λ f → nb (f x)))
         ( dB x))
     ( a)

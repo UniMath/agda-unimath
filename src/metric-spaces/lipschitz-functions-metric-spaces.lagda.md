@@ -21,6 +21,7 @@ open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -41,6 +42,7 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
@@ -292,27 +294,11 @@ module _
     is-lipschitz-function-Metric-Space B C g →
     is-lipschitz-function-Metric-Space A B f →
     is-lipschitz-function-Metric-Space A C (g ∘ f)
-  comp-is-lipschitz-function-Metric-Space g f Hg Hf =
-    rec-trunc-Prop
-      ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
-      ( λ (α , Lg) →
-        rec-trunc-Prop
-          ( is-lipschitz-function-prop-Metric-Space A C (g ∘ f))
-          ( λ (β , Lf) →
-            unit-trunc-Prop
-              ( ( α *ℚ⁺ β) ,
-                ( mul-comp-lipschitz-constant-function-Metric-Space
-                  ( A)
-                  ( B)
-                  ( C)
-                  ( g)
-                  ( f)
-                  ( α)
-                  ( β)
-                  ( Lg)
-                  ( Lf))))
-          ( Hf))
-      ( Hg)
+  comp-is-lipschitz-function-Metric-Space g f =
+    map-binary-trunc-Prop
+      ( λ (α , Lg) (β , Lf) →
+        α *ℚ⁺ β ,
+        mul-comp-lipschitz-constant-function-Metric-Space A B C g f α β Lg Lf)
 ```
 
 ### Composition of Lipschitz functions

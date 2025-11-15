@@ -27,7 +27,6 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -37,7 +36,6 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -204,7 +202,7 @@ module _
                       ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
-        ( arithmetically-located (positive-diff-le-ℚ p q p<q))
+        ( arithmetically-located (positive-diff-le-ℚ p<q))
 
     is-located-is-weakly-arithmetically-located-lower-upper-ℝ :
       is-weakly-arithmetically-located-lower-upper-ℝ x y →
@@ -256,7 +254,7 @@ module _
               ( equational-reasoning
                 p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
                 ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-int-ℕ n)))
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-ℕ n)))
                 ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
                   by ap (p +ℚ_) (mul-left-succ-ℚ _ _)
                 ＝ (p +ℚ ε) +ℚ rational-ℤ (int-ℕ n) *ℚ ε
@@ -270,11 +268,7 @@ module _
                 ( is-in-upper-cut-ℝ x)
                 ( associative-add-ℚ p ε ε)
                 ( x<p+2ε)))
-        ( is-located-lower-upper-cut-ℝ
-          ( x)
-          ( p +ℚ ε)
-          ( (p +ℚ ε) +ℚ ε)
-          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
+        ( is-located-lower-upper-cut-ℝ x (le-right-add-rational-ℚ⁺ (p +ℚ ε) ε⁺))
 
     is-arithmetically-located-ℝ :
       is-arithmetically-located-lower-upper-ℝ (lower-real-ℝ x) (upper-real-ℝ x)
@@ -302,8 +296,6 @@ module _
             ( p<x)
             ( le-upper-cut-ℝ
               ( x)
-              ( q)
-              ( p +ℚ (nℚ *ℚ ε'))
               ( tr
                 ( le-ℚ q)
                 ( commutative-add-ℚ (nℚ *ℚ ε') p)
@@ -362,7 +354,7 @@ abstract
                 ( chain-of-inequalities
                     a
                     ≤ q
-                      by leq-lower-upper-cut-ℝ x a q a<x x<q
+                      by leq-lower-upper-cut-ℝ x a<x x<q
                     ≤ rational-abs-ℚ q
                       by leq-abs-ℚ q
                     ≤ ε +ℚ rational-abs-ℚ q
@@ -376,22 +368,22 @@ abstract
                     ≤ rational-ℕ m +ℚ rational-ℕ n
                       by preserves-leq-right-add-ℚ _ _ _ (leq-le-ℚ max|p||q|<n)
                     ≤ rational-ℕ (m +ℕ n)
-                      by leq-eq-ℚ _ _ (add-rational-ℕ _ _))
+                      by leq-eq-ℚ (add-rational-ℕ _ _))
                 ( chain-of-inequalities
                     neg-ℚ a
                     ≤ neg-ℚ (b -ℚ ε)
                       by
-                        neg-leq-ℚ _ _
+                        neg-leq-ℚ
                           ( leq-transpose-right-add-ℚ _ _ _ (leq-le-ℚ b<a+ε))
                     ≤ ε -ℚ b
-                      by leq-eq-ℚ _ _ (distributive-neg-diff-ℚ _ _)
+                      by leq-eq-ℚ (distributive-neg-diff-ℚ _ _)
                     ≤ ε -ℚ p
                       by
                         preserves-leq-right-add-ℚ ε
                           ( neg-ℚ b)
                           ( neg-ℚ p)
-                          ( neg-leq-ℚ _ _
-                            ( leq-lower-upper-cut-ℝ x p b p<x x<b))
+                          ( neg-leq-ℚ
+                            ( leq-lower-upper-cut-ℝ x p<x x<b))
                     ≤ rational-abs-ℚ (ε -ℚ p)
                       by leq-abs-ℚ _
                     ≤ rational-abs-ℚ ε +ℚ rational-abs-ℚ p
@@ -399,7 +391,7 @@ abstract
                     ≤ ε +ℚ max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
                       by
                         preserves-leq-add-ℚ
-                          ( leq-eq-ℚ _ _ (rational-abs-rational-ℚ⁺ ε⁺))
+                          ( leq-eq-ℚ (rational-abs-rational-ℚ⁺ ε⁺))
                           ( leq-left-max-ℚ _ _)
                     ≤ rational-ℕ m +ℚ rational-ℕ n
                       by
@@ -407,7 +399,7 @@ abstract
                           ( leq-le-ℚ ε<m)
                           ( leq-le-ℚ max|p||q|<n)
                     ≤ rational-ℕ (m +ℕ n)
-                      by leq-eq-ℚ _ _ (add-rational-ℕ _ _))
+                      by leq-eq-ℚ (add-rational-ℕ _ _))
             |b|≤|a|+ε =
               leq-abs-leq-leq-neg-ℚ b (rational-abs-ℚ a +ℚ ε)
                 ( chain-of-inequalities
@@ -419,13 +411,11 @@ abstract
                     ≤ rational-abs-ℚ a +ℚ rational-abs-ℚ ε
                       by triangle-inequality-abs-ℚ _ _
                     ≤ rational-abs-ℚ a +ℚ ε
-                      by
-                        leq-eq-ℚ _ _
-                          ( ap-add-ℚ refl (rational-abs-rational-ℚ⁺ ε⁺)))
+                      by leq-eq-ℚ (ap-add-ℚ refl (rational-abs-rational-ℚ⁺ ε⁺)))
                 ( chain-of-inequalities
                     neg-ℚ b
                     ≤ neg-ℚ a
-                      by neg-leq-ℚ _ _ (leq-lower-upper-cut-ℝ x a b a<x x<b)
+                      by neg-leq-ℚ (leq-lower-upper-cut-ℝ x a<x x<b)
                     ≤ rational-abs-ℚ a
                       by neg-leq-abs-ℚ a
                     ≤ rational-abs-ℚ a +ℚ ε

@@ -211,10 +211,7 @@ module _
         equiv-tot
           ( λ e →
             equiv-eq (ap (is-isometry-Pseudometric-Space A B) refl)))) ∘e
-    ( associative-Σ
-      ( type-function-Pseudometric-Space A B)
-      ( is-equiv)
-      ( is-isometry-Pseudometric-Space A B ∘ map-equiv))
+    ( associative-Σ)
 ```
 
 ### Isometric equivalences between pseudometric spaces characterize their equality

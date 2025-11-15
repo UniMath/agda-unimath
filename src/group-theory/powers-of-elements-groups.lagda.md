@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -173,6 +174,30 @@ module _
     (m n : ℕ) {x : type-Group G} →
     power-Group G (m *ℕ n) x ＝ power-Group G n (power-Group G m x)
   power-mul-Group = power-mul-Monoid (monoid-Group G)
+```
+
+### The inverse of `x`, raised to the power `n`, is the inverse of `x` raised to the power `n`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  abstract
+    power-inv-Group :
+      (n : ℕ) (x : type-Group G) →
+      power-Group G n (inv-Group G x) ＝ inv-Group G (power-Group G n x)
+    power-inv-Group 0 _ = inv (inv-unit-Group G)
+    power-inv-Group 1 _ = refl
+    power-inv-Group (succ-ℕ n@(succ-ℕ _)) x =
+      equational-reasoning
+        mul-Group G (power-Group G n (inv-Group G x)) (inv-Group G x)
+        ＝ mul-Group G (inv-Group G (power-Group G n x)) (inv-Group G x)
+          by ap-mul-Group G (power-inv-Group n x) refl
+        ＝ inv-Group G (mul-Group G x (power-Group G n x))
+          by inv (distributive-inv-mul-Group G)
+        ＝ inv-Group G (power-Group G (succ-ℕ n) x)
+          by ap (inv-Group G) (inv (power-succ-Group' G n x))
 ```
 
 ### Group homomorphisms preserve powers

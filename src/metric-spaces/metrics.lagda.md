@@ -1,6 +1,8 @@
 # Metrics
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.metrics where
 ```
 
@@ -36,9 +38,14 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-nonnegative-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -337,9 +344,7 @@ module _
         ( not-leq-le-ℝ
           ( real-ℚ⁺ δ)
           ( real-ℝ⁰⁺ (dist-Metric X μ x y)))
-        ( leq-le-ℝ
-          ( real-ℝ⁰⁺ (dist-Metric X μ x y))
-          ( real-ℚ⁺ ε))
+        ( leq-le-ℝ)
         ( is-located-le-ℝ
           ( real-ℝ⁰⁺ (dist-Metric X μ x y))
           ( rational-ℚ⁺ δ)
@@ -364,6 +369,6 @@ module _
       bounded-dist-Metric-Space (metric-space-Metric X μ) x y
     bounded-dist-metric-space-Metric x y =
       map-tot-exists
-        ( λ ε → leq-le-ℝ (real-ℝ⁰⁺ (dist-Metric X μ x y)) (real-ℚ⁺ ε))
+        ( λ ε → leq-le-ℝ)
         ( le-some-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y))
 ```

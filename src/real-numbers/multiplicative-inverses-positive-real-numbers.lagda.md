@@ -10,10 +10,9 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 
 ```agda
 open import elementary-number-theory.closed-intervals-rational-numbers
+open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.maximum-positive-rational-numbers
 open import elementary-number-theory.maximum-rational-numbers
-open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
@@ -38,7 +37,6 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
@@ -57,6 +55,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -115,8 +114,6 @@ module _
         (r⁺@(r , _) , x<r , qr<1) ← q∈L is-pos-q
         le-upper-cut-ℝ
           ( real-ℝ⁺ x)
-          ( r)
-          ( rational-inv-ℚ⁺ q⁺)
           ( reflects-le-left-mul-ℚ⁺
             ( q⁺)
             ( r)
@@ -138,8 +135,6 @@ module _
           (r⁺@(r , _) , r<x , 1<qr) ← ∃r
           le-lower-cut-ℝ
             ( real-ℝ⁺ x)
-            ( rational-inv-ℚ⁺ q⁺)
-            ( r)
             ( reflects-le-left-mul-ℚ⁺
               ( q⁺)
               ( rational-inv-ℚ⁺ q⁺)
@@ -164,7 +159,7 @@ module _
             ( is-rounded-upper-cut-ℝ⁺ x (rational-inv-ℚ⁺ q⁺))
             ( q∈L' is-pos-q)
         intro-exists
-          ( r , is-positive-is-in-upper-cut-ℝ⁺ x r x<r)
+          ( r , is-positive-is-in-upper-cut-ℝ⁺ x x<r)
           ( x<r ,
             tr
               ( le-ℚ (q *ℚ r))
@@ -186,7 +181,7 @@ module _
               ( is-rounded-lower-cut-ℝ⁺ x (rational-inv-ℚ⁺ q⁺))
               ( q⁻¹<x)
           intro-exists
-            ( r , is-positive-le-ℚ⁺ (inv-ℚ⁺ q⁺) r q⁻¹<r)
+            ( r , is-positive-le-ℚ⁺ (inv-ℚ⁺ q⁺) q⁻¹<r)
             ( r<x ,
               tr
                 ( λ s → le-ℚ s (q *ℚ r))
@@ -214,7 +209,7 @@ module _
       let open do-syntax-trunc-Prop (∃ ℚ⁺ (lower-cut-inv-ℝ⁺ ∘ rational-ℚ⁺))
       in do
         (q , x<q) ← is-inhabited-upper-cut-ℝ⁺ x
-        let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x q x<q)
+        let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x x<q)
         intro-exists
           ( inv-ℚ⁺ q⁺)
           ( leq-lower-cut-inv-ℝ⁺'-lower-cut-inv-ℝ⁺
@@ -272,7 +267,7 @@ module _
                 forward-implication (is-rounded-upper-cut-ℝ⁺ x r) x<r
               let
                 r⁻¹ = inv-ℚ⁺ r⁺
-                r'⁺ = (r' , is-positive-is-in-upper-cut-ℝ⁺ x r' x<r')
+                r'⁺ = (r' , is-positive-is-in-upper-cut-ℝ⁺ x x<r')
                 r'⁻¹ = inv-ℚ⁺ r'⁺
               intro-exists
                 ( rational-ℚ⁺ r'⁻¹)
@@ -314,7 +309,7 @@ module _
       in do
         (q' , q<q' , q'∈L) ← ∃q'
         (r'⁺@(r' , _) , x<r' , q'r'<1) ←
-          q'∈L (is-positive-le-ℚ⁺ (q , is-pos-q) q' q<q')
+          q'∈L (is-positive-le-ℚ⁺ (q , is-pos-q) q<q')
         intro-exists
           ( r'⁺)
           ( x<r' ,
@@ -345,7 +340,7 @@ module _
         (r⁺@(r , _) , r<x , 1<qr) ← ∃r
         (r' , r<r' , r'<x) ←
           forward-implication (is-rounded-lower-cut-ℝ⁺ x r) r<x
-        let r'⁺ = (r' , is-positive-le-ℚ⁺ r⁺ r' r<r')
+        let r'⁺ = (r' , is-positive-le-ℚ⁺ r⁺ r<r')
         intro-exists
           ( rational-ℚ⁺ (inv-ℚ⁺ r'⁺))
           ( transitive-le-ℚ
@@ -377,7 +372,7 @@ module _
       in do
         (q' , q'<q , is-pos-q' , ∃r') ← ∃q'
         (r'⁺@(r' , _) , x<r' , 1<q'r') ← ∃r'
-        ( is-positive-le-ℚ⁺ (q' , is-pos-q') q q'<q ,
+        ( is-positive-le-ℚ⁺ (q' , is-pos-q') q'<q ,
           intro-exists
             ( r'⁺)
             ( x<r' ,
@@ -409,7 +404,7 @@ module _
             ( _)
             ( _)
             ( transitive-le-ℚ (q *ℚ rₗ) one-ℚ (q *ℚ rᵤ) 1<qrᵤ qrₗ<1))
-          ( le-lower-upper-cut-ℝ⁺ x rᵤ rₗ rᵤ<x x<rₗ)
+          ( le-lower-upper-cut-ℝ⁺ x rᵤ<x x<rₗ)
 
     is-located-lower-upper-cut-inv-ℝ⁺ :
       (p q : ℚ) → le-ℚ p q →
@@ -419,7 +414,7 @@ module _
         ( λ is-pos-p →
           let
             p⁺ = (p , is-pos-p)
-            is-pos-q = is-positive-le-ℚ⁺ p⁺ q p<q
+            is-pos-q = is-positive-le-ℚ⁺ p⁺ p<q
             q⁺ = (q , is-pos-q)
           in
             elim-disjunction
@@ -438,12 +433,12 @@ module _
                         ( x<p⁻¹))))
               ( is-located-lower-upper-cut-ℝ
                 ( real-ℝ⁺ x)
-                ( rational-ℚ⁺ (inv-ℚ⁺ q⁺))
-                ( rational-ℚ⁺ (inv-ℚ⁺ p⁺))
                 ( inv-le-ℚ⁺ p⁺ q⁺ p<q)))
         ( λ is-nonpos-p →
           inl-disjunction
-            ( ex-falso ∘ not-is-positive-is-nonpositive-ℚ is-nonpos-p))
+            ( λ is-pos-p →
+              ex-falso
+                ( is-not-positive-and-nonpositive-ℚ (is-pos-p , is-nonpos-p))))
         ( decide-is-positive-is-nonpositive-ℚ p)
 
   opaque
@@ -504,15 +499,14 @@ module _
       [a,b]@((a , b) , a≤b) [c,d]@((c , d) , c≤d) (a<x , x<b) (c<x⁻¹ , x⁻¹<d)
       is-pos-a is-pos-c =
       let
-        is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+        is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x x<b
         (is-pos-d , d⁻¹<x) =
           leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
         d⁺ = (d , is-pos-d)
         a' = max-ℚ a (rational-inv-ℚ⁺ d⁺)
         a'<x =
           is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a (rational-inv-ℚ⁺ d⁺) a<x d⁻¹<x
-        is-pos-a' =
-          is-positive-leq-ℚ⁺ (inv-ℚ⁺ d⁺) a' (leq-right-max-ℚ _ _)
+        is-pos-a' = is-positive-leq-ℚ⁺ (inv-ℚ⁺ d⁺) (leq-right-max-ℚ _ _)
         a'⁺ = (a' , is-pos-a')
         c⁺ = (c , is-pos-c)
         x<c⁻¹ : is-in-upper-cut-ℝ⁺ x (rational-inv-ℚ⁺ c⁺)
@@ -530,12 +524,7 @@ module _
             ( inv-leq-ℚ⁺
               ( a'⁺)
               ( inv-ℚ⁺ c⁺)
-              ( leq-lower-upper-cut-ℝ
-                ( real-ℝ⁺ x)
-                ( a')
-                ( rational-inv-ℚ⁺ c⁺)
-                ( a'<x)
-                ( x<c⁻¹)))
+              ( leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'<x x<c⁻¹))
       in
         tr
           ( is-in-closed-interval-ℚ
@@ -547,7 +536,7 @@ module _
             ( a')
             ( rational-inv-ℚ⁺ a'⁺)
             ( leq-left-max-ℚ _ _ ,
-              leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a' b a'<x x<b)
+              leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'<x x<b)
             ( c≤a'⁻¹ , a'⁻¹≤d))
 
     leq-real-right-inverse-law-mul-ℝ⁺ :
@@ -559,7 +548,7 @@ module _
             ([c,d]@((c , d) , c≤d) , c<x⁻¹ , x⁻¹<d)) ,
           q<[a,b][c,d]) ← q<xx⁻¹
         let
-          is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x b x<b
+          is-pos-b = is-positive-is-in-upper-cut-ℝ⁺ x x<b
           (is-pos-d , d⁻¹<x) =
             leq-upper-cut-inv-ℝ⁺-upper-cut-inv-ℝ⁺' x d x⁻¹<d
           case-is-nonpos-a is-nonpos-a =
@@ -633,16 +622,16 @@ module _
             (c'⁺@(c' , is-pos-c') , c'<x⁻¹) ← exists-ℚ⁺-in-lower-cut-inv-ℝ⁺ x
             let
               a'' = max-ℚ a a'
-              is-pos-a'' = is-positive-leq-ℚ⁺ a'⁺ a'' (leq-right-max-ℚ _ _)
+              is-pos-a'' = is-positive-leq-ℚ⁺ a'⁺ (leq-right-max-ℚ _ _)
               a''<x = is-in-lower-cut-max-ℚ (real-ℝ⁺ x) a a' a<x a'<x
               c'' = max-ℚ c c'
-              is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ c'' (leq-right-max-ℚ _ _)
+              is-pos-c'' = is-positive-leq-ℚ⁺ c'⁺ (leq-right-max-ℚ _ _)
               c''<x⁻¹ = is-in-lower-cut-max-ℚ (real-inv-ℝ⁺ x) c c' c<x⁻¹ c'<x⁻¹
               [a'',b] =
-                ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a'' b a''<x x<b)
+                ( (a'' , b) , leq-lower-upper-cut-ℝ (real-ℝ⁺ x) a''<x x<b)
               [c'',d] =
                 ( (c'' , d) ,
-                  leq-lower-upper-cut-ℝ (real-inv-ℝ⁺ x) c'' d c''<x⁻¹ x⁻¹<d)
+                leq-lower-upper-cut-ℝ (real-inv-ℝ⁺ x) c''<x⁻¹ x⁻¹<d)
             concatenate-leq-le-ℚ
               ( one-ℚ)
               ( upper-bound-mul-closed-interval-ℚ [a,b] [c,d])
@@ -717,7 +706,7 @@ opaque
     let open do-syntax-trunc-Prop (le-prop-ℝ⁺ (inv-ℝ⁺ y) (inv-ℝ⁺ x))
     in do
       (q , x<q , q<y) ← x<y
-      let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x q x<q)
+      let q⁺ = (q , is-positive-is-in-upper-cut-ℝ⁺ x x<q)
       intro-exists
         ( rational-inv-ℚ⁺ q⁺)
         ( leq-upper-cut-inv-ℝ⁺'-upper-cut-inv-ℝ⁺
