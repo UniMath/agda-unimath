@@ -178,3 +178,13 @@ module _
       ( commutative-ring-Local-Commutative-Ring R)
       ( V)
 ```
+
+### Any local commutative ring is a vector space over itself
+
+```agda
+vector-space-local-commutative-ring-Local-Commutative-Ring :
+  {l : Level} (R : Local-Commutative-Ring l) → Vector-Space l R
+vector-space-local-commutative-ring-Local-Commutative-Ring R =
+  left-module-commutative-ring-Commutative-Ring
+    ( commutative-ring-Local-Commutative-Ring R)
+```

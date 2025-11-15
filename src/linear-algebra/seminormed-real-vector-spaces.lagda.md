@@ -597,3 +597,12 @@ module _
     ( type-Seminormed-ℝ-Vector-Space V ,
       pseudometric-structure-Seminormed-ℝ-Vector-Space)
 ```
+
+### The real numbers are a seminormed vector space over themselves with seminorm `x ↦ |x|`
+
+```agda
+seminormed-real-vector-space-ℝ :
+  (l : Level) → Seminormed-ℝ-Vector-Space l (lsuc l)
+seminormed-real-vector-space-ℝ l =
+  ( real-vector-space-ℝ l , abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ)
+```
