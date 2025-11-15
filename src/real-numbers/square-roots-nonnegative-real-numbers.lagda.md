@@ -29,6 +29,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -49,14 +50,19 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -555,6 +561,19 @@ abstract opaque
       leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
 ```
 
+### The square root of 1 is 1
+
+```agda
+real-sqrt-one-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ
+real-sqrt-one-ℝ⁰⁺ =
+  eq-sim-ℝ
+    ( symmetric-sim-ℝ
+      ( unique-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ one-ℝ⁰⁺ (sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+
+sqrt-one-ℝ⁰⁺ : sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
+```
+
 ### Squaring is an automorphism on the nonnegative real numbers
 
 ```agda
@@ -645,4 +664,49 @@ abstract
                       ( ap-mul-ℝ⁰⁺
                         ( is-section-square-ℝ⁰⁺ x)
                         ( is-section-square-ℝ⁰⁺ y)))))))
+```
+
+### The square root of a positive real number is positive
+
+```agda
+abstract opaque
+  unfolding real-sqrt-ℝ⁰⁺
+
+  is-positive-sqrt-ℝ⁺ :
+    {l : Level} (x : ℝ⁺ l) → is-positive-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x))
+  is-positive-sqrt-ℝ⁺ x⁺@(x , _) =
+    is-positive-zero-in-lower-cut-ℝ
+      ( real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺))
+      ( λ _ →
+        inv-tr
+          ( is-in-lower-cut-ℝ x)
+          ( left-zero-law-mul-ℚ zero-ℚ)
+          ( zero-in-lower-cut-ℝ⁺ x⁺))
+```
+
+### The square root of a nonnegative real number preserves inequality
+
+```agda
+abstract
+  preserves-leq-sqrt-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) (sqrt-ℝ⁰⁺ y)
+  preserves-leq-sqrt-ℝ⁰⁺ x y x≤y =
+    reflects-leq-square-ℝ⁰⁺
+      ( sqrt-ℝ⁰⁺ x)
+      ( sqrt-ℝ⁰⁺ y)
+      ( binary-tr
+        ( leq-ℝ)
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ x))
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ y))
+        ( x≤y))
+```
+
+### The square root of zero is zero
+
+```agda
+abstract
+  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
+  real-sqrt-zero-ℝ⁰⁺ =
+    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
 ```

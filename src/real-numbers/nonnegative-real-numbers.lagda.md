@@ -163,7 +163,7 @@ abstract
       ( reflects-le-real-ℚ
         ( concatenate-leq-le-ℝ zero-ℝ x _
           ( 0≤x)
-          ( le-real-is-in-upper-cut-ℚ x x<q)))
+          ( le-real-is-in-upper-cut-ℝ x x<q)))
 
 abstract opaque
   unfolding leq-ℝ' real-ℚ
