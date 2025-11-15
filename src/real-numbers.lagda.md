@@ -7,6 +7,7 @@ module real-numbers where
 
 open import real-numbers.absolute-value-closed-intervals-real-numbers public
 open import real-numbers.absolute-value-real-numbers public
+open import real-numbers.accumulation-points-subsets-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
 open import real-numbers.addition-real-numbers public
@@ -73,6 +74,7 @@ open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
+open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
@@ -84,6 +86,7 @@ open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.series-real-numbers public
 open import real-numbers.short-function-binary-maximum-real-numbers public
+open import real-numbers.short-function-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
 open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
