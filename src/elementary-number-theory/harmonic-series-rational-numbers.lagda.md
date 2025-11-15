@@ -57,7 +57,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "harmonic series" WDID=Q464100 WD="harmonic series" Agda=harmonic-series-ℚ}}
-is the sum $$Σ_{n=0}^{∞} \frac{1}{n}$$.
+is the sum $$∑_{n=0}^{∞} \frac{1}{n}.$$
 
 ## Definition
 
