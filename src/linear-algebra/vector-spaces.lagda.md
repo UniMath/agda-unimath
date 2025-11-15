@@ -1,4 +1,4 @@
-m# Vector spaces
+# Vector spaces
 
 ```agda
 module linear-algebra.vector-spaces where
