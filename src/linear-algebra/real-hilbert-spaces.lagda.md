@@ -11,8 +11,8 @@ module linear-algebra.real-hilbert-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import linear-algebra.normed-real-vector-spaces

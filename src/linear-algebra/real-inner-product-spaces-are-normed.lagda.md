@@ -12,6 +12,7 @@ module linear-algebra.real-inner-product-spaces-are-normed where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -20,9 +21,8 @@ open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
-open import metric-spaces.metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import foundation.logical-equivalences
+open import metric-spaces.metric-spaces
 
 open import order-theory.large-posets
 
@@ -31,13 +31,13 @@ open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```
