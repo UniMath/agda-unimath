@@ -412,6 +412,64 @@ module _
         ( λ d → H d α β)
 ```
 
+### Similarity in the Cauchy pseudocompletion preserves and reflects limits
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (u v : cauchy-approximation-Pseudometric-Space M)
+  (x : type-Pseudometric-Space M)
+  where
+
+  has-same-limit-sim-cauchy-approximation-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( u)
+      ( v) →
+    is-limit-cauchy-approximation-Pseudometric-Space M u x →
+    is-limit-cauchy-approximation-Pseudometric-Space M v x
+  has-same-limit-sim-cauchy-approximation-Pseudometric-Space u~v lim-u =
+    is-limit-sim-const-cauchy-approximation-Pseudometric-Space
+      ( M)
+      ( v)
+      ( x)
+      ( transitive-sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( v)
+        ( u)
+        ( const-cauchy-approximation-Pseudometric-Space M x)
+        ( sim-const-is-limit-cauchy-approximation-Pseudometric-Space
+          ( M)
+          ( u)
+          ( x)
+          ( lim-u))
+        ( inv-sim-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space M)
+          ( u~v)))
+
+  sim-has-same-limit-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space M u x →
+    is-limit-cauchy-approximation-Pseudometric-Space M v x →
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( u)
+      ( v)
+  sim-has-same-limit-cauchy-approximation-Pseudometric-Space lim-u lim-v =
+    transitive-sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( u)
+      ( const-cauchy-approximation-Pseudometric-Space M x)
+      ( v)
+      ( inv-sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space M)
+        ( sim-const-is-limit-cauchy-approximation-Pseudometric-Space
+          ( M)
+          ( v)
+          ( x)
+          ( lim-v)))
+      ( sim-const-is-limit-cauchy-approximation-Pseudometric-Space M u x lim-u)
+```
+
 ### Any Cauchy approximation in the Cauchy pseudocompletion of a pseudometric space has a limit
 
 ```agda
