@@ -23,8 +23,8 @@ open import group-theory.abelian-groups
 open import linear-algebra.real-vector-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
