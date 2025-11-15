@@ -7,7 +7,7 @@ module analysis.convergent-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.complete-metric-abelian-groups-banach-spaces
+open import analysis.complete-metric-abelian-groups-real-banach-spaces
 open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-real-banach-spaces

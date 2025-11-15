@@ -10,6 +10,7 @@ module linear-algebra.real-banach-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -107,4 +108,19 @@ module _
   has-limit-cauchy-sequence-ℝ-Banach-Space =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-ℝ-Banach-Space)
+
+  dist-ℝ-Banach-Space : (u v : type-ℝ-Banach-Space) → ℝ l1
+  dist-ℝ-Banach-Space =
+    dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  commutative-dist-ℝ-Banach-Space :
+    (u v : type-ℝ-Banach-Space) →
+    dist-ℝ-Banach-Space u v ＝ dist-ℝ-Banach-Space v u
+  commutative-dist-ℝ-Banach-Space =
+    commutative-dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  diff-ℝ-Banach-Space :
+    type-ℝ-Banach-Space → type-ℝ-Banach-Space → type-ℝ-Banach-Space
+  diff-ℝ-Banach-Space =
+    diff-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 ```
