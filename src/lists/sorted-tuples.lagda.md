@@ -33,8 +33,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define a sorted tuple to be a tuple such that for every pair of consecutive
-elements `x` and `y`, the inequality `x ≤ y` holds.
+We define a {{#concept "sorted tuple" Agda=is-sorted-tuple}} to be a
+[tuple](lists.tuples.md) such that for every pair of consecutive elements `x`
+and `y`, the [inequality](order-theory.decidable-total-orders.md) `x ≤ y` holds.
 
 ## Definitions
 

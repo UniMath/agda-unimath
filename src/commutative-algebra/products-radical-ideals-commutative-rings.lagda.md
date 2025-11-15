@@ -1,4 +1,4 @@
-# Products of radical ideals of a commutative ring
+# Products of radical ideals in a commutative ring
 
 ```agda
 module commutative-algebra.products-radical-ideals-commutative-rings where

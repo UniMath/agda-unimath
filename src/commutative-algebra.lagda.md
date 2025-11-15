@@ -22,6 +22,8 @@ open import commutative-algebra.formal-power-series-commutative-semirings public
 open import commutative-algebra.full-ideals-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
+open import commutative-algebra.geometric-sequences-commutative-rings public
+open import commutative-algebra.geometric-sequences-commutative-semirings public
 open import commutative-algebra.groups-of-units-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-semirings public
@@ -36,9 +38,13 @@ open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.joins-ideals-commutative-rings public
 open import commutative-algebra.joins-radical-ideals-commutative-rings public
+open import commutative-algebra.large-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.multiples-of-elements-commutative-rings public
+open import commutative-algebra.multiples-of-elements-commutative-semirings public
+open import commutative-algebra.multiples-of-elements-euclidean-domains public
+open import commutative-algebra.multiples-of-elements-integral-domains public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
 open import commutative-algebra.polynomials-commutative-rings public
@@ -47,6 +53,7 @@ open import commutative-algebra.poset-of-ideals-commutative-rings public
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-semirings public
+open import commutative-algebra.powers-of-elements-large-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public

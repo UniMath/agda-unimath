@@ -32,7 +32,9 @@ open import lists.tuples
 ## Idea
 
 Given a function `f : A → B`, we obtain a function
-`map-list f : list A → list B`.
+`map-list f : list A → list B`. This is the
+{{#concept "functorial action" Disambiguation="of lists" Agda=map-list}} of
+[lists](lists.lists.md).
 
 ## Definition
 

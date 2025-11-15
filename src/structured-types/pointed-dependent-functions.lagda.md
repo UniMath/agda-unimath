@@ -21,9 +21,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed dependent function of a pointed family `B` over `A` is a dependent
-function of the underlying family taking the base point of `A` to the base point
-of `B`.
+A
+{{#concept "pointed dependent function" Disambiguation="into a pointed family" Agda=pointed-Π}}
+into a [pointed family](structured-types.pointed-families-of-types.md) `B` over
+`A` is a dependent function of the underlying family taking the base point of
+`A` to the base point of `B`.
 
 ```agda
 module _

@@ -19,6 +19,7 @@ open import foundation.universe-levels
 open import linear-algebra.finite-sequences-in-rings
 
 open import ring-theory.binomial-theorem-semirings
+open import ring-theory.multiples-of-elements-rings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.rings
 open import ring-theory.sums-of-finite-sequences-of-elements-rings
@@ -30,9 +31,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial theorem for rings asserts that for any two elements `x` and `y` of
-a commutative ring `R` and any natural number `n`, if `xy ＝ yx` holds then we
-have
+The
+{{#concept "binomial theorem" Disambiguation="for rings" WD="binomial theorem" WDID=Q26708 Agda=binomial-theorem-Ring}}
+for [rings](ring-theory.rings.md) asserts that for any two elements `x` and `y`
+of a ring `R` such that `xy = yx` and any
+[natural number](elementary-number-theory.natural-numbers.md) `n` we have
 
 ```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
@@ -149,7 +152,7 @@ is-linear-combination-power-add-Ring :
       ( power-Ring R m y)
       ( sum-fin-sequence-type-Ring R n
         ( λ i →
-          mul-nat-scalar-Ring R
+          multiple-Ring R
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Ring R
               ( power-Ring R (nat-Fin n i) x)
@@ -159,7 +162,7 @@ is-linear-combination-power-add-Ring :
       ( sum-fin-sequence-type-Ring R
         ( succ-ℕ m)
         ( λ i →
-          mul-nat-scalar-Ring R
+          multiple-Ring R
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
               ( n +ℕ (nat-Fin (succ-ℕ m) i)))

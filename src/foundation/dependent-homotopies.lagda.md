@@ -45,6 +45,11 @@ module _
     ((x : A) → C x (f x)) → ((x : A) → C x (g x)) → UU (l1 ⊔ l3)
   dependent-homotopy f' g' =
     (x : A) → dependent-identification (C x) (H x) (f' x) (g' x)
+
+  dependent-homotopy' :
+    ((x : A) → C x (f x)) → ((x : A) → C x (g x)) → UU (l1 ⊔ l3)
+  dependent-homotopy' f' g' =
+    (x : A) → dependent-identification' (C x) (H x) (f' x) (g' x)
 ```
 
 ### The reflexive dependent homotopy
@@ -57,7 +62,11 @@ module _
 
   refl-dependent-homotopy :
     {f' : (x : A) → C x (f x)} → dependent-homotopy C refl-htpy f' f'
-  refl-dependent-homotopy = refl-htpy
+  refl-dependent-homotopy x = refl-dependent-identification (C x)
+
+  refl-dependent-homotopy' :
+    {f' : (x : A) → C x (f x)} → dependent-homotopy' C refl-htpy f' f'
+  refl-dependent-homotopy' x = refl-dependent-identification' (C x)
 ```
 
 ### Iterated dependent homotopies

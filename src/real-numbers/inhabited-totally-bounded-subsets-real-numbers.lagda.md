@@ -19,7 +19,6 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.inhabited-subtypes
-open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -27,11 +26,12 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.nets-metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 
 open import order-theory.upper-bounds-large-posets
@@ -43,6 +43,8 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-and-suprema-families-real-numbers
 open import real-numbers.infima-families-real-numbers
@@ -52,6 +54,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
@@ -155,8 +158,11 @@ module _
     net δ =
       im-inhabited-finitely-enumerable-subtype
         ( inclusion-subset-ℝ S)
-        ( inhabited-finitely-enumerable-subtype-net-Metric-Space
-          ( metric-space-subset-ℝ S) |S| δ (M δ))
+        ( inhabited-finitely-enumerable-subset-net-is-inhabited-Metric-Space
+          ( metric-space-subset-ℝ S)
+          ( δ)
+          ( M δ)
+          ( |S|))
 
     is-net :
       (δ : ℚ⁺) →
@@ -216,14 +222,14 @@ module _
                 ( max-net η +ℝ real-ℚ⁺ η)
                 ( max-net η +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
                 ( preserves-leq-left-add-ℝ (max-net η) _ _
-                  ( preserves-leq-real-ℚ _ _ (leq-left-add-rational-ℚ⁺ _ ε)))
+                  ( preserves-leq-real-ℚ (leq-left-add-rational-ℚ⁺ _ ε)))
                 ( bound ε η))
               ( transitive-leq-ℝ
                 ( max-net η)
                 ( max-net ε +ℝ real-ℚ⁺ ε)
                 ( max-net ε +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
                 ( preserves-leq-left-add-ℝ (max-net ε) _ _
-                  ( preserves-leq-real-ℚ _ _ (leq-right-add-rational-ℚ⁺ _ η)))
+                  ( preserves-leq-real-ℚ (leq-right-add-rational-ℚ⁺ _ η)))
                 ( bound η ε)))
 
     sup-modulated-totally-bounded-subset-ℝ : ℝ l2
@@ -277,7 +283,7 @@ module _
                               ( pr1 ∘ pr1)
                               ( (y , y∈S) , y∈net-ε'))))))
                     ( preserves-le-left-add-ℝ sup _ _
-                      ( preserves-le-real-ℚ _ _ ε'+ε'<ε))))))
+                      ( preserves-le-real-ℚ ε'+ε'<ε))))))
 
     is-approximated-below-sup-modulated-totally-bounded-subset-ℝ :
       is-approximated-below-family-ℝ
@@ -311,7 +317,7 @@ module _
               ( sup -ℝ real-ℚ⁺ ε)
               ( sup -ℝ real-ℚ⁺ (ε' +ℚ⁺ ε'))
               ( max-net ε' -ℝ real-ℚ⁺ ε')
-              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ _ _ ε'+ε'<ε))
+              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ ε'+ε'<ε))
               ( tr
                 ( λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
                 ( associative-add-ℝ _ _ _ ∙
@@ -397,6 +403,23 @@ module _
     has-infimum-inhabited-totally-bounded-subset-ℝ =
       ( inf-inhabited-totally-bounded-subset-ℝ ,
         is-infimum-inf-inhabited-totally-bounded-subset-ℝ)
+```
+
+### Any totally bounded subset of `ℝ` is propositionally decidable
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (S : totally-bounded-subset-ℝ l1 l2 l3)
+  where
+
+  abstract
+    is-inhabited-or-empty-totally-bounded-subset-ℝ :
+      is-inhabited-or-empty (type-totally-bounded-subset-ℝ S)
+    is-inhabited-or-empty-totally-bounded-subset-ℝ =
+      is-inhabited-or-empty-totally-bounded-subspace-Metric-Space
+        ( metric-space-ℝ l2)
+        ( S)
 ```
 
 ### The infimum of an inhabited totally bounded subset of `ℝ` is less than or equal to the supremum

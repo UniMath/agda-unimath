@@ -11,24 +11,22 @@ module real-numbers.isometry-addition-real-numbers where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
-open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -98,6 +96,16 @@ module _
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
   isometry-right-add-ℝ = ( (λ y → add-ℝ y x) , is-isometry-right-add-ℝ)
+
+  short-left-add-ℝ :
+    short-function-Metric-Space
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
+  short-left-add-ℝ =
+    short-isometry-Metric-Space
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
+      ( isometry-left-add-ℝ)
 ```
 
 ### Addition is an isometry from `ℝ` to the metric space of isometries `ℝ → ℝ`

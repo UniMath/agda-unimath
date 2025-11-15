@@ -9,7 +9,9 @@ module elementary-number-theory.unit-fractions-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
@@ -36,6 +38,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
 
+open import group-theory.abelian-groups
 open import group-theory.groups
 ```
 
@@ -298,4 +301,60 @@ module _
         ( reciprocal-rational-ℤ⁺ (positive-denominator-ℚ x))
         ( rational-ℤ (numerator-ℚ x))) ∙
       ( eq-mul-numerator-reciprocal-denominator-ℚ)
+```
+
+### The difference of `1/n` and `1/(n+1)` is `1/(n(n+1))`
+
+```agda
+abstract
+  diff-succ-reciprocal-ℕ⁺ :
+    (n : ℕ⁺) →
+    reciprocal-rational-ℕ⁺ n -ℚ reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n) ＝
+    reciprocal-rational-ℕ⁺ (n *ℕ⁺ succ-ℕ⁺ n)
+  diff-succ-reciprocal-ℕ⁺ n⁺@(n , _) =
+    equational-reasoning
+      reciprocal-rational-ℕ⁺ n⁺ -ℚ reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n⁺)
+      ＝
+        ( rational-ℕ (succ-ℕ n) *ℚ
+          ( reciprocal-rational-ℕ⁺ n⁺ *ℚ
+            reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n⁺))) -ℚ
+        ( rational-ℕ n *ℚ
+          ( reciprocal-rational-ℕ⁺ n⁺ *ℚ reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n⁺)))
+        by
+          ap-diff-ℚ
+            ( ap
+              ( rational-ℚ⁺)
+              ( inv
+                ( is-identity-right-conjugation-Ab
+                  ( abelian-group-mul-ℚ⁺)
+                  ( positive-rational-ℕ⁺ (succ-ℕ⁺ n⁺))
+                  ( positive-reciprocal-rational-ℕ⁺ n⁺))))
+            ( ap
+              ( rational-ℚ⁺)
+              ( inv
+                ( is-section-left-div-Group
+                  ( group-mul-ℚ⁺)
+                  ( positive-rational-ℕ⁺ n⁺)
+                  ( positive-reciprocal-rational-succ-ℕ n))))
+      ＝
+        ( rational-ℕ (succ-ℕ n) -ℚ rational-ℕ n) *ℚ
+        ( reciprocal-rational-ℕ⁺ n⁺ *ℚ reciprocal-rational-ℕ⁺ (succ-ℕ⁺ n⁺))
+        by inv (right-distributive-mul-diff-ℚ _ _ _)
+      ＝
+        ( succ-ℚ (rational-ℕ n) -ℚ rational-ℕ n) *ℚ
+        ( rational-inv-ℚ⁺
+          ( positive-rational-ℕ⁺ n⁺ *ℚ⁺ positive-rational-ℕ⁺ (succ-ℕ⁺ n⁺)))
+        by
+          ap-mul-ℚ
+            ( ap-add-ℚ (inv (succ-rational-ℕ n)) refl)
+            ( ap rational-ℚ⁺ (inv (distributive-inv-mul-ℚ⁺ _ _)))
+      ＝
+        one-ℚ *ℚ
+        rational-inv-ℚ⁺ (positive-rational-ℕ⁺ (n⁺ *ℕ⁺ succ-ℕ⁺ n⁺))
+        by
+          ap-mul-ℚ
+            ( diff-succ-ℚ _)
+            ( ap rational-inv-ℚ⁺ (eq-ℚ⁺ (mul-rational-ℕ _ _)))
+      ＝ reciprocal-rational-ℕ⁺ (n⁺ *ℕ⁺ succ-ℕ⁺ n⁺)
+        by left-unit-law-mul-ℚ _
 ```

@@ -8,7 +8,6 @@ module real-numbers.infima-and-suprema-families-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -17,7 +16,6 @@ open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.infima-families-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 ```

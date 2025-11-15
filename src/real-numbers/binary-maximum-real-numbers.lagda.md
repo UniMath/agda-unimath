@@ -9,9 +9,11 @@ module real-numbers.binary-maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.binary-transport
+open import foundation.action-on-identifications-binary-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -22,21 +24,16 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.metric-space-of-short-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-
 open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
-open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.maximum-upper-dedekind-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -96,8 +93,8 @@ module _
           map-disjunction
             ( λ p<y → inr-disjunction p<y)
             ( x<q ,_)
-            ( is-located-lower-upper-cut-ℝ y p q p<q))
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
+            ( is-located-lower-upper-cut-ℝ y p<q))
+        ( is-located-lower-upper-cut-ℝ x p<q)
       where
         claim : Prop (l1 ⊔ l2)
         claim =
@@ -112,6 +109,11 @@ module _
         ( upper-real-max-ℝ)
         ( is-disjoint-lower-upper-max-ℝ)
         ( is-located-lower-upper-max-ℝ)
+
+ap-max-ℝ :
+  {l1 l2 : Level} → {x x' : ℝ l1} → x ＝ x' →
+  {y y' : ℝ l2} → y ＝ y' → max-ℝ x y ＝ max-ℝ x' y'
+ap-max-ℝ = ap-binary max-ℝ
 ```
 
 ## Properties
@@ -124,7 +126,7 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ max-ℝ
 
     is-least-binary-upper-bound-max-ℝ :
@@ -176,28 +178,24 @@ module _
 ### The binary maximum is commutative
 
 ```agda
-module _
-  {l1 l2 : Level}
-  (x : ℝ l1) (y : ℝ l2)
-  where
+abstract opaque
+  unfolding leq-ℝ sim-ℝ
 
-  opaque
-    unfolding leq-ℝ sim-ℝ
-
-    commutative-max-ℝ : max-ℝ x y ＝ max-ℝ y x
-    commutative-max-ℝ =
-      eq-sim-ℝ
-        ( sim-is-least-binary-upper-bound-Large-Poset
+  commutative-max-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → max-ℝ x y ＝ max-ℝ y x
+  commutative-max-ℝ x y =
+    eq-sim-ℝ
+      ( sim-is-least-binary-upper-bound-Large-Poset
+        ( ℝ-Large-Poset)
+        ( x)
+        ( y)
+        ( is-least-binary-upper-bound-max-ℝ x y)
+        ( is-binary-least-upper-bound-swap-Large-Poset
           ( ℝ-Large-Poset)
-          ( x)
           ( y)
-          ( is-least-binary-upper-bound-max-ℝ x y)
-          ( is-binary-least-upper-bound-swap-Large-Poset
-            ( ℝ-Large-Poset)
-            ( y)
-            ( x)
-            ( max-ℝ y x)
-            ( is-least-binary-upper-bound-max-ℝ y x)))
+          ( x)
+          ( max-ℝ y x)
+          ( is-least-binary-upper-bound-max-ℝ y x)))
 ```
 
 ### The large poset of real numbers has joins
@@ -305,126 +303,27 @@ abstract
   preserves-sim-right-max-ℝ a = preserves-sim-max-ℝ a a (refl-sim-ℝ a)
 ```
 
-### The binary maximum preserves lower neighborhoods
+### If `x ≤ y`, the maximum of `x` and `y` is similar to `y`
 
 ```agda
-module _
-  {l1 l2 l3 : Level} (d : ℚ⁺)
-  (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
-  where
-
-  abstract
-    preserves-lower-neighborhood-leq-left-max-ℝ :
-      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
-      leq-ℝ
-        ( max-ℝ x y)
-        ( (max-ℝ x z) +ℝ real-ℚ⁺ d)
-    preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d =
-      leq-is-least-binary-upper-bound-Large-Poset
-        ( ℝ-Large-Poset)
-        ( x)
-        ( y)
+abstract
+  left-leq-right-max-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
+    sim-ℝ (max-ℝ x y) y
+  left-leq-right-max-ℝ {x = x} {y = y} x≤y =
+    sim-sim-leq-ℝ
+      ( sim-is-least-binary-upper-bound-Large-Poset ℝ-Large-Poset x y
         ( is-least-binary-upper-bound-max-ℝ x y)
-        ( (max-ℝ x z) +ℝ real-ℚ⁺ d)
-        ( ( transitive-leq-ℝ
-            ( x)
-            ( max-ℝ x z)
-            ( max-ℝ x z +ℝ real-ℚ⁺ d)
-            ( leq-le-ℝ
-              ( max-ℝ x z)
-              ( max-ℝ x z +ℝ real-ℚ⁺ d)
-              ( le-left-add-real-ℝ⁺
-                ( max-ℝ x z)
-                ( positive-real-ℚ⁺ d)))
-            ( leq-left-max-ℝ x z)) ,
-          ( transitive-leq-ℝ
-            ( y)
-            ( z +ℝ real-ℚ⁺ d)
-            ( max-ℝ x z +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
-              ( real-ℚ⁺ d)
-              ( z)
-              ( max-ℝ x z)
-              ( leq-right-max-ℝ x z))
-            ( z≤y+d)))
+        ( left-leq-right-least-upper-bound-Large-Poset ℝ-Large-Poset x y x≤y))
 
-    preserves-lower-neighborhood-leq-right-max-ℝ :
-      leq-ℝ y (z +ℝ real-ℚ⁺ d) →
-      leq-ℝ
-        ( max-ℝ y x)
-        ( (max-ℝ z x) +ℝ real-ℚ⁺ d)
-    preserves-lower-neighborhood-leq-right-max-ℝ z≤y+d =
-      binary-tr
-        ( λ u v → leq-ℝ u (v +ℝ real-ℚ⁺ d))
-        ( commutative-max-ℝ x y)
-        ( commutative-max-ℝ x z)
-        ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
-```
-
-### The maximum with a real number is a short function `ℝ → ℝ`
-
-```agda
-module _
-  {l1 l2 : Level} (x : ℝ l1)
-  where
-
-  abstract
-    is-short-function-left-max-ℝ :
-      is-short-function-Metric-Space
-        ( metric-space-ℝ l2)
-        ( metric-space-ℝ (l1 ⊔ l2))
-        ( max-ℝ x)
-    is-short-function-left-max-ℝ d y z Nyz =
-      neighborhood-real-bound-each-leq-ℝ
-        ( d)
-        ( max-ℝ x y)
-        ( max-ℝ x z)
-        ( preserves-lower-neighborhood-leq-left-max-ℝ d x y z
-          ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
-        ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
-          ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
-
-  short-left-max-ℝ :
-    short-function-Metric-Space
-      ( metric-space-ℝ l2)
-      ( metric-space-ℝ (l1 ⊔ l2))
-  short-left-max-ℝ =
-    (max-ℝ x , is-short-function-left-max-ℝ)
-```
-
-### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  abstract
-    is-short-function-short-left-max-ℝ :
-      is-short-function-Metric-Space
-        ( metric-space-ℝ l1)
-        ( metric-space-of-short-functions-Metric-Space
-          ( metric-space-ℝ l2)
-          ( metric-space-ℝ (l1 ⊔ l2)))
-        ( short-left-max-ℝ)
-    is-short-function-short-left-max-ℝ d x y Nxy z =
-      neighborhood-real-bound-each-leq-ℝ
-        ( d)
-        ( max-ℝ x z)
-        ( max-ℝ y z)
-        ( preserves-lower-neighborhood-leq-right-max-ℝ d z x y
-          ( left-leq-real-bound-neighborhood-ℝ d x y Nxy))
-        ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
-          ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
-
-  short-max-ℝ :
-    short-function-Metric-Space
-      ( metric-space-ℝ l1)
-      ( metric-space-of-short-functions-Metric-Space
-        ( metric-space-ℝ l2)
-        ( metric-space-ℝ (l1 ⊔ l2)))
-  short-max-ℝ =
-    (short-left-max-ℝ , is-short-function-short-left-max-ℝ)
+  right-leq-left-max-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ y x →
+    sim-ℝ (max-ℝ x y) x
+  right-leq-left-max-ℝ {x = x} {y = y} y≤x =
+    sim-sim-leq-ℝ
+      ( sim-is-least-binary-upper-bound-Large-Poset ℝ-Large-Poset x y
+        ( is-least-binary-upper-bound-max-ℝ x y)
+        ( right-leq-left-least-upper-bound-Large-Poset ℝ-Large-Poset x y y≤x))
 ```
 
 ### For any `ε : ℚ⁺`, `(max-ℝ x y - ε < x) ∨ (max-ℝ x y - ε < y)`
@@ -453,14 +352,14 @@ module _
             ( max-ℝ x y)
             ( le-diff-real-ℝ⁺ (max-ℝ x y) (positive-real-ℚ⁺ ε⁺))
         (r , q-<ℝ-r , r<max) ← dense-rational-le-ℝ (real-ℚ q) (max-ℝ x y) q<max
-        let q<r = reflects-le-real-ℚ q r q-<ℝ-r
+        let q<r = reflects-le-real-ℚ q-<ℝ-r
         map-disjunction
           ( λ q<x →
             transitive-le-ℝ
               ( max-ℝ x y -ℝ real-ℚ ε)
               ( real-ℚ q)
               ( x)
-              ( le-real-is-in-lower-cut-ℚ q x q<x)
+              ( le-real-is-in-lower-cut-ℚ x q<x)
               ( max-ε<q))
           ( λ x<r →
             elim-disjunction
@@ -470,7 +369,7 @@ module _
                   ( max-ℝ x y -ℝ real-ℚ ε)
                   ( real-ℚ q)
                   ( y)
-                  ( le-real-is-in-lower-cut-ℚ q y q<y)
+                  ( le-real-is-in-lower-cut-ℚ y q<y)
                   ( max-ε<q))
               ( λ y<r →
                 ex-falso
@@ -478,11 +377,59 @@ module _
                     ( max-ℝ x y)
                     ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
                       ( leq-max-leq-leq-ℝ x y (real-ℚ r)
-                        ( leq-le-ℝ x (real-ℚ r)
-                          ( le-real-is-in-upper-cut-ℚ r x x<r))
-                        ( leq-le-ℝ y (real-ℚ r)
-                          ( le-real-is-in-upper-cut-ℚ r y y<r)))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ x x<r))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ y y<r)))
                       ( r<max))))
-              ( is-located-lower-upper-cut-ℝ y q r q<r))
-          ( is-located-lower-upper-cut-ℝ x q r q<r)
+              ( is-located-lower-upper-cut-ℝ y q<r))
+          ( is-located-lower-upper-cut-ℝ x q<r)
+```
+
+### If `x < z` and `y < z`, then `max-ℝ x y < z`
+
+```agda
+abstract
+  le-max-le-le-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} → le-ℝ x z → le-ℝ y z →
+    le-ℝ (max-ℝ x y) z
+  le-max-le-le-ℝ {x = x} {y = y} {z = z} x<z y<z =
+    let open do-syntax-trunc-Prop (le-prop-ℝ (max-ℝ x y) z)
+    in do
+      (p , x<p , p<z) ← dense-rational-le-ℝ x z x<z
+      (q , y<q , q<z) ← dense-rational-le-ℝ y z y<z
+      rec-coproduct
+        ( λ p≤q →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ q)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ q)
+              ( transitive-leq-ℝ
+                ( x)
+                ( real-ℚ p)
+                ( real-ℚ q)
+                ( preserves-leq-real-ℚ p≤q)
+                ( leq-le-ℝ x<p))
+              ( leq-le-ℝ y<q))
+            ( q<z))
+        ( λ q≤p →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ p)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ p)
+              ( leq-le-ℝ x<p)
+              ( transitive-leq-ℝ
+                ( y)
+                ( real-ℚ q)
+                ( real-ℚ p)
+                ( preserves-leq-real-ℚ q≤p)
+                ( leq-le-ℝ y<q)))
+            ( p<z))
+        ( linear-leq-ℚ p q)
 ```

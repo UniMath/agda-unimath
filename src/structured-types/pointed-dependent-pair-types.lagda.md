@@ -18,8 +18,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a pointed type `(A , a)` and a pointed family over it `(B , b)`, then the
-dependent pair type `Σ A B` is again canonically pointed at `(a , b)`.
+Given a [pointed type](structured-types.pointed-types.md) `(A , a)` and a
+[pointed family](structured-types.pointed-families-of-types.md) over it
+`(B , b)`, then we may form the
+{{#concept "pointed dependent pair type" Agda=Σ-Pointed-Type}} `Σ A B`, which is
+canonically pointed at `(a , b)`.
 
 ## Definition
 
@@ -29,10 +32,10 @@ module _
   where
 
   Σ-Pointed-Type :
-    (A : Pointed-Type l1) (B : Pointed-Fam l2 A) → Pointed-Type (l1 ⊔ l2)
-  pr1 (Σ-Pointed-Type (A , a) (B , b)) = Σ A B
-  pr2 (Σ-Pointed-Type (A , a) (B , b)) = a , b
+    (A : Pointed-Type l1) → Pointed-Fam l2 A → Pointed-Type (l1 ⊔ l2)
+  Σ-Pointed-Type (A , a) (B , b) = (Σ A B , (a , b))
 
+  Σ∗ : (A : Pointed-Type l1) → Pointed-Fam l2 A → Pointed-Type (l1 ⊔ l2)
   Σ∗ = Σ-Pointed-Type
 ```
 

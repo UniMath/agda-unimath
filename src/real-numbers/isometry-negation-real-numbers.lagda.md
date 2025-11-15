@@ -11,19 +11,25 @@ module real-numbers.isometry-negation-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -35,6 +41,30 @@ open import real-numbers.negation-real-numbers
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ## Definitions
+
+### Negation of real numbers reverses lower neighborhoods
+
+```agda
+module _
+  {l1 l2 : Level} (d : ℚ⁺)
+  (x : ℝ l1) (y : ℝ l2)
+  where
+
+  reverses-lower-neighborhood-neg-ℝ :
+    leq-ℝ x (y +ℝ real-ℚ⁺ d) →
+    leq-ℝ (neg-ℝ y) (neg-ℝ x +ℝ real-ℚ⁺ d)
+  reverses-lower-neighborhood-neg-ℝ x≤y+d =
+    tr
+      ( leq-ℝ (neg-ℝ y))
+      ( ( distributive-neg-add-ℝ x ((neg-ℝ ∘ real-ℚ ∘ rational-ℚ⁺) d)) ∙
+        ( ap (add-ℝ (neg-ℝ x)) (neg-neg-ℝ (real-ℚ⁺ d))))
+      ( neg-leq-ℝ
+        ( leq-transpose-right-add-ℝ
+          ( x)
+          ( y)
+          ( real-ℚ⁺ d)
+          ( x≤y+d)))
+```
 
 ### Negation of a real number preserves neighborhoods
 
@@ -93,4 +123,22 @@ module _
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l1)
   isometry-neg-ℝ = (neg-ℝ , is-isometry-neg-ℝ)
+```
+
+### Negation on the real numbers is short
+
+```agda
+abstract
+  is-short-neg-ℝ :
+    {l : Level} →
+    is-short-function-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-ℝ l)
+      ( neg-ℝ)
+  is-short-neg-ℝ =
+    is-short-is-isometry-Metric-Space
+      ( metric-space-ℝ _)
+      ( metric-space-ℝ _)
+      ( neg-ℝ)
+      ( is-isometry-neg-ℝ)
 ```

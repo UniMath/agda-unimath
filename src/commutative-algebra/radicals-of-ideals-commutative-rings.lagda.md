@@ -71,7 +71,7 @@ module _
       ( ideal-radical-ideal-Commutative-Ring A K)
 ```
 
-### The radical Galois connection on ideals of a commutative ring
+### The radical Galois connection on ideals in a commutative ring
 
 #### The radical of an ideal
 

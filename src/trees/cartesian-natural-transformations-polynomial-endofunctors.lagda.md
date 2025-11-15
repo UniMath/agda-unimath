@@ -55,7 +55,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, then a
+$P ≐ (A \mathbin{◃} B)$ and $Q ≐ (C \mathbin{◃} D)$, then a
 [natural transformation](trees.natural-transformations-polynomial-endofunctors.md)
 $α$ between them is
 {{#concept "cartesian" Disambiguation="natural transformations between polynomial endofunctors of types" Agda=is-cartesian-natural-transformation-polynomial-endofunctor}}
