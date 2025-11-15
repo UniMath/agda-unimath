@@ -46,6 +46,15 @@ open import foundation.cantor-schroder-bernstein-decidable-embeddings using
   ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
+### 34. Divergence of the Harmonic Series {#34}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.harmonic-series-rational-numbers using
+  ( grows-without-bound-harmonic-series-ℚ)
+```
+
 ### 42. Sum of the Reciprocals of the Triangular Numbers {#42}
 
 **Author:** [Louis Wasserman](https://github.com/lowasser)

@@ -260,13 +260,13 @@ module _
 
 ```agda
 abstract
-  constant-sum-fin-sequence-type-Commutative-Monoid :
+  sum-constant-fin-sequence-type-Commutative-Monoid :
     {l : Level} (M : Commutative-Monoid l) (n : ℕ) →
     (x : type-Commutative-Monoid M) →
     sum-fin-sequence-type-Commutative-Monoid M n (λ _ → x) ＝
     power-Commutative-Monoid M n x
-  constant-sum-fin-sequence-type-Commutative-Monoid M =
-    constant-sum-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
+  sum-constant-fin-sequence-type-Commutative-Monoid M =
+    sum-constant-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ## See also

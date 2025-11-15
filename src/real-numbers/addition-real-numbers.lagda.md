@@ -9,8 +9,12 @@ module real-numbers.addition-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -385,6 +389,23 @@ module _
   pr2 iff-translate-left-sim-ℝ = reflects-sim-left-add-ℝ z x y
 ```
 
+### Raising the universe level of real numbers distributes over addition
+
+```agda
+abstract
+  distributive-raise-add-ℝ :
+    {l1 l2 : Level} (l3 : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l3 (x +ℝ y) ＝ raise-ℝ l3 x +ℝ raise-ℝ l3 y
+  distributive-raise-add-ℝ l3 x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 (x +ℝ y)
+        ~ℝ x +ℝ y
+          by sim-raise-ℝ' l3 (x +ℝ y)
+        ~ℝ raise-ℝ l3 x +ℝ raise-ℝ l3 y
+          by preserves-sim-add-ℝ (sim-raise-ℝ l3 x) (sim-raise-ℝ l3 y))
+```
+
 ### The inclusion of rational numbers preserves addition
 
 ```agda
@@ -425,6 +446,34 @@ abstract
       x +ℝ real-ℚ p +ℝ real-ℚ q
       ＝ x +ℝ (real-ℚ p +ℝ real-ℚ q) by associative-add-ℝ _ _ _
       ＝ x +ℝ real-ℚ (p +ℚ q) by ap (x +ℝ_) (add-real-ℚ p q)
+```
+
+### The inclusion of integers preserves addition
+
+```agda
+abstract
+  add-real-ℤ : (x y : ℤ) → real-ℤ x +ℝ real-ℤ y ＝ real-ℤ (x +ℤ y)
+  add-real-ℤ x y =
+    equational-reasoning
+      real-ℤ x +ℝ real-ℤ y
+      ＝ real-ℚ (rational-ℤ x +ℚ rational-ℤ y)
+        by add-real-ℚ _ _
+      ＝ real-ℤ (x +ℤ y)
+        by ap real-ℚ (add-rational-ℤ x y)
+```
+
+### The inclusion of natural numbers preserves addition
+
+```agda
+abstract
+  add-real-ℕ : (x y : ℕ) → real-ℕ x +ℝ real-ℕ y ＝ real-ℕ (x +ℕ y)
+  add-real-ℕ x y =
+    equational-reasoning
+      real-ℕ x +ℝ real-ℕ y
+      ＝ real-ℤ (int-ℕ x +ℤ int-ℕ y)
+        by add-real-ℤ _ _
+      ＝ real-ℕ (x +ℕ y)
+        by ap real-ℤ (add-int-ℕ x y)
 ```
 
 ### Interchange laws for addition on real numbers
