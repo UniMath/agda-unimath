@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import linear-algebra.normed-real-vector-spaces
@@ -25,6 +26,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 
+open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 ```
 
@@ -45,7 +47,7 @@ is a [normed](linear-algebra.normed-real-vector-spaces.md)
 is-banach-prop-Normed-ℝ-Vector-Space :
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2) → Prop (l1 ⊔ l2)
 is-banach-prop-Normed-ℝ-Vector-Space V =
-  is-complete-prop-Metric-Space (metric-space-Normed-ℝ-Metric-Space V)
+  is-complete-prop-Metric-Space (metric-space-Normed-ℝ-Vector-Space V)
 
 is-banach-Normed-ℝ-Vector-Space :
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2) → UU (l1 ⊔ l2)
@@ -123,4 +125,18 @@ module _
     type-ℝ-Banach-Space → type-ℝ-Banach-Space → type-ℝ-Banach-Space
   diff-ℝ-Banach-Space =
     diff-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+```
+
+## Properties
+
+### The real numbers are a real Banach space with norm `x ↦ |x|`
+
+```agda
+real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
+real-banach-space-ℝ l =
+  ( normed-real-vector-space-ℝ l ,
+    inv-tr
+      ( is-complete-Metric-Space)
+      ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
+      ( is-complete-metric-space-ℝ l))
 ```

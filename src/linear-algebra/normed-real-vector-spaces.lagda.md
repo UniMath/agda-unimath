@@ -12,6 +12,7 @@ module linear-algebra.normed-real-vector-spaces where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -22,6 +23,7 @@ open import group-theory.abelian-groups
 open import linear-algebra.real-vector-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
+open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
@@ -31,6 +33,10 @@ open import metric-spaces.metrics-of-metric-spaces
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -244,8 +250,8 @@ module _
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2)
   where
 
-  metric-Normed-ℝ-Metric-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
-  metric-Normed-ℝ-Metric-Space =
+  metric-Normed-ℝ-Vector-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
+  metric-Normed-ℝ-Vector-Space =
     ( nonnegative-dist-Normed-ℝ-Vector-Space V ,
       ( λ v →
         similarity-reasoning-ℝ
@@ -272,17 +278,50 @@ module _
               ~ℝ raise-ℝ l1 zero-ℝ
                 by sim-raise-ℝ l1 zero-ℝ))))
 
-  metric-space-Normed-ℝ-Metric-Space : Metric-Space l2 l1
-  metric-space-Normed-ℝ-Metric-Space =
+  metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
+  metric-space-Normed-ℝ-Vector-Space =
     metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
-      ( metric-Normed-ℝ-Metric-Space)
+      ( metric-Normed-ℝ-Vector-Space)
 
-  located-metric-space-Normed-ℝ-Metric-Space : Located-Metric-Space l2 l1
-  located-metric-space-Normed-ℝ-Metric-Space =
+  located-metric-space-Normed-ℝ-Vector-Space : Located-Metric-Space l2 l1
+  located-metric-space-Normed-ℝ-Vector-Space =
     located-metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
-      ( metric-Normed-ℝ-Metric-Space)
+      ( metric-Normed-ℝ-Vector-Space)
+```
+
+## Properties
+
+### The real numbers are a normed vector space over themselves with norm `x ↦ |x|`
+
+```agda
+normed-real-vector-space-ℝ :
+  (l : Level) → Normed-ℝ-Vector-Space l (lsuc l)
+normed-real-vector-space-ℝ l =
+  ( real-vector-space-ℝ l ,
+    ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
+    λ x |x|=0 →
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          x
+          ~ℝ zero-ℝ
+            by
+              sim-zero-sim-zero-abs-ℝ x
+                ( transitive-sim-ℝ _ _ _
+                  ( sim-raise-ℝ' l zero-ℝ)
+                  ( sim-eq-ℝ |x|=0))
+          ~ℝ raise-ℝ l zero-ℝ
+            by sim-raise-ℝ l zero-ℝ))
+
+abstract
+  eq-metric-space-normed-real-vector-space-metric-space-ℝ :
+    (l : Level) →
+    metric-space-Normed-ℝ-Vector-Space (normed-real-vector-space-ℝ l) ＝
+    metric-space-ℝ l
+  eq-metric-space-normed-real-vector-space-metric-space-ℝ l =
+    eq-isometric-eq-Metric-Space _ _
+      ( refl , λ d x y → inv-iff (neighborhood-iff-leq-dist-ℝ d x y))
 ```
 
 ### Negation is an isometry in the metric space of a normed vector space
