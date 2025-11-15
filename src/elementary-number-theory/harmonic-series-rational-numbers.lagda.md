@@ -68,7 +68,7 @@ harmonic-series-ℚ = series-terms-ℚ reciprocal-rational-succ-ℕ
 
 ## Properties
 
-### For any `k`, the `2ᵏ`th partial sum of the harmonic series is at least `1 + k/2`
+### For any `k`, the `2ᵏ`'th partial sum of the harmonic series is at least `1 + k/2`
 
 ```agda
 abstract
