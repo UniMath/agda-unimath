@@ -159,3 +159,12 @@ module _
   mul-neg-one-ℝ-Vector-Space =
     mul-neg-one-Vector-Space (local-commutative-ring-ℝ l1) V
 ```
+
+### The real numbers are a real vector space
+
+```agda
+real-vector-space-ℝ : (l : Level) → ℝ-Vector-Space l (lsuc l)
+real-vector-space-ℝ l =
+  vector-space-local-commutative-ring-Local-Commutative-Ring
+    ( local-commutative-ring-ℝ l)
+```
