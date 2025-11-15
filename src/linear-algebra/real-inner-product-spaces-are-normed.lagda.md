@@ -21,6 +21,8 @@ open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.equality-of-metric-spaces
+open import foundation.logical-equivalences
 
 open import order-theory.large-posets
 
@@ -35,6 +37,7 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```
@@ -175,4 +178,25 @@ module _
   metric-space-ℝ-Inner-Product-Space : Metric-Space l2 l1
   metric-space-ℝ-Inner-Product-Space =
     metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Inner-Product-Space
+```
+
+## Properties
+
+### The metric space of the inner product space of `ℝ` over itself is the standard metric space of `ℝ`
+
+```agda
+abstract
+  eq-metric-space-real-inner-product-space-ℝ :
+    (l : Level) →
+    metric-space-ℝ-Inner-Product-Space (real-inner-product-space-ℝ l) ＝
+    metric-space-ℝ l
+  eq-metric-space-real-inner-product-space-ℝ l =
+    ( eq-isometric-eq-Metric-Space _ _
+      ( refl ,
+        λ d x y →
+          iff-eq
+            ( ap
+              ( λ m → leq-prop-ℝ m (real-ℚ⁺ d))
+              ( inv (eq-abs-sqrt-square-ℝ _))))) ∙
+    ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
 ```

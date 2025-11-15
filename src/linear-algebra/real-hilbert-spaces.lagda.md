@@ -11,6 +11,7 @@ module linear-algebra.real-hilbert-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -21,6 +22,8 @@ open import linear-algebra.real-inner-product-spaces-are-normed
 
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.metric-spaces
+
+open import real-numbers.cauchy-completeness-dedekind-real-numbers
 ```
 
 </details>
@@ -77,4 +80,16 @@ module _
   banach-space-ℝ-Hilbert-Space : ℝ-Banach-Space l1 l2
   banach-space-ℝ-Hilbert-Space =
     ( normed-vector-space-ℝ-Hilbert-Space , pr2 V)
+```
+
+### The real numbers are a real Hilbert space with multiplication as the inner product
+
+```agda
+real-hilbert-space-ℝ : (l : Level) → ℝ-Hilbert-Space l (lsuc l)
+real-hilbert-space-ℝ l =
+  ( real-inner-product-space-ℝ l ,
+    inv-tr
+      ( is-complete-Metric-Space)
+      ( eq-metric-space-real-inner-product-space-ℝ l)
+      ( is-complete-metric-space-ℝ l))
 ```
