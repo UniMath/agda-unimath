@@ -202,44 +202,6 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ :
 exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 
-### Addition with a positive real number is a strictly inflationary map
-
-```agda
-abstract opaque
-  unfolding add-ℝ le-ℝ
-
-  le-left-add-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
-  le-left-add-real-ℝ⁺ x d⁺@(d , pos-d) =
-    tr
-      ( λ y → le-ℝ y (x +ℝ d))
-      ( right-unit-law-add-ℝ x)
-      ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
-
-le-right-add-real-ℝ⁺ :
-  {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
-le-right-add-real-ℝ⁺ x d =
-  tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
-```
-
-### Subtraction by a positive real number is a strictly deflationary map
-
-```agda
-abstract
-  le-diff-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ (x -ℝ real-ℝ⁺ d) x
-  le-diff-real-ℝ⁺ x d⁺@(d , _) =
-    preserves-le-right-sim-ℝ
-      ( x -ℝ d)
-      ( (x -ℝ d) +ℝ d)
-      ( x)
-      ( tr
-        ( λ y → sim-ℝ y x)
-        ( right-swap-add-ℝ x d (neg-ℝ d))
-        ( cancel-right-add-diff-ℝ x d))
-      ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
-```
-
 ### `x < y` if and only if `y - x` is positive
 
 ```agda

@@ -10,6 +10,7 @@ module real-numbers.rational-real-numbers where
 
 ```agda
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -81,6 +82,13 @@ real-ℚ⁰⁺ q = real-ℚ (rational-ℚ⁰⁺ q)
 ```agda
 real-ℤ : ℤ → ℝ lzero
 real-ℤ x = real-ℚ (rational-ℤ x)
+```
+
+### The canonical map from `ℕ` to `ℝ lzero`
+
+```agda
+real-ℕ : ℕ → ℝ lzero
+real-ℕ n = real-ℤ (int-ℕ n)
 ```
 
 ### Zero as a real number
