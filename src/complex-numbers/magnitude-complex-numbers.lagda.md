@@ -42,8 +42,8 @@ open import real-numbers.squares-real-numbers
 
 The
 {{#concept "magnitude" WD="magnitude of a complex number" WDID=Q3317982 Agda=magnitude-ℂ}}
-of a [complex number](complex-numbers.complex-numbers.md) `a + bi` is defined as
-$$\sqrt{a^2 + b^2}$$.
+of a [complex number](complex-numbers.complex-numbers.md) $a + bi$ is defined as
+$\sqrt{a^2 + b^2}$.
 
 ## Definition
 
@@ -55,17 +55,11 @@ nonnegative-squared-magnitude-ℂ (a +iℂ b) =
 squared-magnitude-ℂ : {l : Level} → ℂ l → ℝ l
 squared-magnitude-ℂ z = real-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
-∥_∥²ℂ : {l : Level} → ℂ l → ℝ l
-∥ z ∥²ℂ = squared-magnitude-ℂ z
-
 nonnegative-magnitude-ℂ : {l : Level} → ℂ l → ℝ⁰⁺ l
 nonnegative-magnitude-ℂ z = sqrt-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
 magnitude-ℂ : {l : Level} → ℂ l → ℝ l
 magnitude-ℂ z = real-ℝ⁰⁺ (nonnegative-magnitude-ℂ z)
-
-∥_∥ℂ : {l : Level} → ℂ l → ℝ l
-∥ z ∥ℂ = magnitude-ℂ z
 ```
 
 ## Properties
