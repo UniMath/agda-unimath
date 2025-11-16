@@ -1,7 +1,7 @@
 # Strict complemented boundedness on cardinals
 
 ```agda
-module set-theory.strict-complemented-boundedness-cardinalities where
+module set-theory.strict-complemented-boundedness-cardinals where
 ```
 
 <details><summary>Imports</summary>

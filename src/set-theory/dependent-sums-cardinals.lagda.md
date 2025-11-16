@@ -138,7 +138,7 @@ module _
 
   is-inhabited-Σ-Cardinal :
     (K : type-X → Cardinal l2) →
-    (is-inhabited-K : (x : type-X) → is-inhabited-Cardinal (K x)) →
+    ((x : type-X) → is-inhabited-Cardinal (K x)) →
     is-inhabited-Cardinal (Σ-Cardinal X K)
   is-inhabited-Σ-Cardinal =
     ind-Cardinality-Projective-Set X

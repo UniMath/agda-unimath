@@ -27,7 +27,7 @@ open import foundation.universe-levels
 open import set-theory.cardinals
 open import set-theory.complemented-inequality-cardinals
 open import set-theory.inequality-cardinals
-open import set-theory.strict-complemented-boundedness-cardinalities
+open import set-theory.strict-complemented-boundedness-cardinals
 ```
 
 </details>
