@@ -72,3 +72,7 @@ module _
       ( complete-metric-ab-add-ℝ l)
       ( σ)
 ```
+
+## External links
+
+- [Convergent series](https://en.wikipedia.org/wiki/Ratio_test) on Wikipedia
