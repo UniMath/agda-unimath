@@ -146,15 +146,15 @@ module _
     distributive-trunc-Π-count-Set :
       count A →
       is-contr
-        ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
-              ( (x : A) → type-trunc-Set (B x)))
+        ( Σ ( ║ ((x : A) → B x) ║₀ ≃
+              ( (x : A) → ║ B x ║₀))
             ( λ e →
               ( map-equiv e ∘ unit-trunc-Set) ~
               ( map-Π (λ x → unit-trunc-Set))))
     distributive-trunc-Π-count-Set (pair k e) =
       is-contr-equiv
-        ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
-              ( (x : Fin k) → type-trunc-Set (B (map-equiv e x))))
+        ( Σ ( ( ║ ((x : A) → B x) ║₀) ≃
+              ( (x : Fin k) → ║ B (map-equiv e x) ║₀))
             ( λ f →
               ( map-equiv f ∘ unit-trunc-Set) ~
               ( map-Π (λ x → unit-trunc-Set) ∘ precomp-Π (map-equiv e) B)))
@@ -164,7 +164,7 @@ module _
             ( map-Π (λ x → unit-trunc-Set) ∘ precomp-Π (map-equiv e) B))
           ( equiv-postcomp-equiv
             ( equiv-precomp-Π e (type-trunc-Set ∘ B))
-            ( type-trunc-Set ((x : A) → B x)))
+            ( ║ ((x : A) → B x) ║₀))
           ( λ f →
             equiv-Π-equiv-family
               ( λ h →
@@ -175,8 +175,8 @@ module _
                       map-Π (λ y → unit-trunc-Set) h x))) ∘e
                 ( equiv-funext))))
         ( is-contr-equiv'
-          ( Σ ( ( type-trunc-Set ((x : Fin k) → B (map-equiv e x))) ≃
-                ( (x : Fin k) → type-trunc-Set (B (map-equiv e x))))
+          ( Σ ( ( ║ ((x : Fin k) → B (map-equiv e x)) ║₀) ≃
+                ( (x : Fin k) → ║ B (map-equiv e x) ║₀))
               ( λ f →
                 ( map-equiv f ∘ unit-trunc-Set) ~
                 ( map-Π (λ x → unit-trunc-Set))))
@@ -186,7 +186,7 @@ module _
               ( map-Π (λ x → unit-trunc-Set) ∘ precomp-Π (map-equiv e) B))
             ( equiv-precomp-equiv
               ( equiv-trunc-Set (equiv-precomp-Π e B))
-              ( (x : Fin k) → type-trunc-Set (B (map-equiv e x))))
+              ( (x : Fin k) → ║ B (map-equiv e x) ║₀))
             ( λ f →
               equiv-Π
                 ( λ h →
@@ -248,12 +248,12 @@ module _
   where
 
   equiv-distributive-trunc-Π-count-Set :
-    ( type-trunc-Set ((x : A) → B x)) ≃ ((x : A) → type-trunc-Set (B x))
+    ║ ((x : A) → B x) ║₀ ≃ ((x : A) → ║ B x ║₀)
   equiv-distributive-trunc-Π-count-Set =
     pr1 (center (distributive-trunc-Π-count-Set B c))
 
   map-equiv-distributive-trunc-Π-count-Set :
-    ( type-trunc-Set ((x : A) → B x)) → ((x : A) → type-trunc-Set (B x))
+    ║ ((x : A) → B x) ║₀ → ((x : A) → ║ B x ║₀)
   map-equiv-distributive-trunc-Π-count-Set =
     map-equiv equiv-distributive-trunc-Π-count-Set
 
@@ -270,8 +270,8 @@ module _
   abstract
     distributive-trunc-Π-is-finite-Set :
       is-contr
-        ( Σ ( ( type-trunc-Set ((x : A) → B x)) ≃
-              ( (x : A) → type-trunc-Set (B x)))
+        ( Σ ( ( ║ ((x : A) → B x) ║₀) ≃
+              ( (x : A) → ║ B x ║₀))
             ( λ e →
               ( map-equiv e ∘ unit-trunc-Set) ~
               ( map-Π (λ x → unit-trunc-Set))))
@@ -281,12 +281,12 @@ module _
         ( distributive-trunc-Π-count-Set B)
 
   equiv-distributive-trunc-Π-is-finite-Set :
-    ( type-trunc-Set ((x : A) → B x)) ≃ ((x : A) → type-trunc-Set (B x))
+    ║ ((x : A) → B x) ║₀ ≃ ((x : A) → ║ B x ║₀)
   equiv-distributive-trunc-Π-is-finite-Set =
     pr1 (center distributive-trunc-Π-is-finite-Set)
 
   map-equiv-distributive-trunc-Π-is-finite-Set :
-    ( type-trunc-Set ((x : A) → B x)) → ((x : A) → type-trunc-Set (B x))
+    ║ ((x : A) → B x) ║₀ → ((x : A) → ║ B x ║₀)
   map-equiv-distributive-trunc-Π-is-finite-Set =
     map-equiv equiv-distributive-trunc-Π-is-finite-Set
 
@@ -296,3 +296,8 @@ module _
   triangle-distributive-trunc-Π-is-finite-Set =
     pr2 (center distributive-trunc-Π-is-finite-Set)
 ```
+
+## See also
+
+- This in particular means that finite sets are
+  [cardinality-projective](set-theory.cardinality-projective-sets.md).

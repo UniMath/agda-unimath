@@ -12,12 +12,12 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.subtypes
 open import foundation.inhabited-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
 

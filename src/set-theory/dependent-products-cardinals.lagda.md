@@ -39,7 +39,7 @@ open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 
-open import set-theory.cardinality-projective-sets
+open import set-theory.cardinality-inductive-sets
 open import set-theory.cardinals
 ```
 
@@ -58,32 +58,32 @@ representing sets $Kᵢ$.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
+  {l1 l2 : Level} (X : Cardinality-Inductive-Set l1 l2)
   where
 
   Π-Cardinal :
-    (type-Cardinality-Projective-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+    (type-Cardinality-Inductive-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
   Π-Cardinal Y =
     map-trunc-Set
-      ( Π-Set (set-Cardinality-Projective-Set X))
-      ( map-section-Cardinality-Projective-Set X Y)
+      ( Π-Set (set-Cardinality-Inductive-Set X))
+      ( unit-Cardinality-Inductive-Set X Y)
 
   compute-Π-Cardinal :
-    (K : type-Cardinality-Projective-Set X → Set l2) →
+    (K : type-Cardinality-Inductive-Set X → Set l2) →
     Π-Cardinal (cardinality ∘ K) ＝
-    cardinality (Π-Set (set-Cardinality-Projective-Set X) K)
+    cardinality (Π-Set (set-Cardinality-Inductive-Set X) K)
   compute-Π-Cardinal K =
     equational-reasoning
       map-trunc-Set
-        ( Π-Set (set-Cardinality-Projective-Set X))
-        ( map-section-Cardinality-Projective-Set X (cardinality ∘ K))
+        ( Π-Set (set-Cardinality-Inductive-Set X))
+        ( unit-Cardinality-Inductive-Set X (cardinality ∘ K))
       ＝ map-trunc-Set (Π-Set (pr1 X)) (unit-trunc-Set K)
         by
           ap
-            ( map-trunc-Set (Π-Set (set-Cardinality-Projective-Set X)))
-            ( compute-map-section-at-cardinality-Cardinality-Projective-Set X K)
+            ( map-trunc-Set (Π-Set (set-Cardinality-Inductive-Set X)))
+            ( compute-unit-Cardinality-Inductive-Set X K)
       ＝ cardinality
-          ( Π-Set (set-Cardinality-Projective-Set X) K)
+          ( Π-Set (set-Cardinality-Inductive-Set X) K)
         by
-          naturality-unit-trunc-Set (Π-Set (set-Cardinality-Projective-Set X)) K
+          naturality-unit-trunc-Set (Π-Set (set-Cardinality-Inductive-Set X)) K
 ```

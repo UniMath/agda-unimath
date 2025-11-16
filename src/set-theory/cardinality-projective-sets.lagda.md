@@ -7,16 +7,29 @@ module set-theory.cardinality-projective-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-maps
+open import foundation.action-on-identifications-functions
+open import foundation.connected-maps
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-truncation
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.mere-equivalences
-open import foundation.sections
+open import foundation.postcomposition-functions
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.surjective-maps
+open import foundation.truncated-types
+open import foundation.truncation-equivalences
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.universe-levels
 
 open import set-theory.cardinals
@@ -26,26 +39,24 @@ open import set-theory.cardinals
 
 ## Idea
 
-For every type $X$ there is a map $║ X → Set ║₀ → (X → Cardinal)$. We call sets
-$X$ for which this map has a section
-{{#concept "cardinality-projective" Disamibguation="sets"}}. Over such types we
-may form [dependent sum](set-theory.dependent-sums-cardinals.md) and
-[dependent product](set-theory.dependent-products-cardinals.md) cardinals.
+A set $I$ is
+{{#concept "cardinality-projective" Disamibguation="sets" Agda=Cardinality-Projective-Set}}
+if it is projective and the postcomposition map
+$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$ is
+0-connected.
 
-Note that classically, the universe of sets is itself a set, and so trivially
-$║ X → Set ║₀ → (X → ║ Set ║₀)$ is an equivalence. However, with univalence,
-meaning that $║ Set ║₀$ is itself the type of cardinalities, this is no longer
-the case.
+## Definitions
 
-**Terminology.** This is nonstandard terminology and is subject to change.
-
-## Definition
+### The predicate of being cardinality-projective at a universe level
 
 ```agda
-is-cardinality-projective-set-Level :
-  {l1 : Level} (l2 : Level) (X : Set l1) → UU (l1 ⊔ lsuc l2)
-is-cardinality-projective-set-Level l2 X =
-  section (map-distributive-trunc-function-type zero-𝕋 (type-Set X) (Set l2))
+module _
+  {l1 : Level} (l2 : Level) (I : Set l1)
+  where
+
+  is-cardinality-projective-set-Level : UU (l1 ⊔ lsuc l2)
+  is-cardinality-projective-set-Level =
+    is-0-connected-map (postcomp (type-Set I) (cardinality {l2}))
 ```
 
 ### The universe of cardinality-projective sets at a universe level
@@ -56,11 +67,11 @@ Cardinality-Projective-Set l1 l2 =
   Σ (Set l1) (is-cardinality-projective-set-Level l2)
 
 module _
-  {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
+  {l1 l2 : Level} (I : Cardinality-Projective-Set l1 l2)
   where
 
   set-Cardinality-Projective-Set : Set l1
-  set-Cardinality-Projective-Set = pr1 X
+  set-Cardinality-Projective-Set = pr1 I
 
   type-Cardinality-Projective-Set : UU l1
   type-Cardinality-Projective-Set = type-Set set-Cardinality-Projective-Set
@@ -72,66 +83,183 @@ module _
 
   is-cardinality-projective-Cardinality-Projective-Set :
     is-cardinality-projective-set-Level l2 set-Cardinality-Projective-Set
-  is-cardinality-projective-Cardinality-Projective-Set = pr2 X
+  is-cardinality-projective-Cardinality-Projective-Set = pr2 I
 
-  map-section-Cardinality-Projective-Set :
-    ( type-Cardinality-Projective-Set → Cardinal l2) →
-    ║ (type-Cardinality-Projective-Set → Set l2) ║₀
-  map-section-Cardinality-Projective-Set =
-    map-section
-      ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Projective-Set)
-        ( Set l2))
+  is-set-equivalence-postcomp-cardinality-type-Cardinality-Projective-Set :
+    is-truncation-equivalence zero-𝕋
+      ( postcomp type-Cardinality-Projective-Set (cardinality {l2}))
+  is-set-equivalence-postcomp-cardinality-type-Cardinality-Projective-Set =
+    is-truncation-equivalence-is-connected-map
+      ( postcomp type-Cardinality-Projective-Set cardinality)
       ( is-cardinality-projective-Cardinality-Projective-Set)
 
-  is-section-map-section-Cardinality-Projective-Set :
-    is-section
-      ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Projective-Set)
-        ( Set l2))
-      ( map-section-Cardinality-Projective-Set)
-  is-section-map-section-Cardinality-Projective-Set =
-    is-section-map-section
-      ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Projective-Set)
-        ( Set l2))
-      ( is-cardinality-projective-Cardinality-Projective-Set)
+  constr-Cardinality-Projective-Set :
+    {l : Level} →
+    ((type-Cardinality-Projective-Set → Set l2) → Cardinal l) →
+    (type-Cardinality-Projective-Set → Cardinal l2) →
+    Cardinal l
+  constr-Cardinality-Projective-Set {l} =
+    rec-is-truncation-equivalence
+      ( is-set-equivalence-postcomp-cardinality-type-Cardinality-Projective-Set)
+      ( Cardinal-Set l)
+
+  compute-constr-Cardinality-Projective-Set :
+    {l : Level} →
+    (T : (type-Cardinality-Projective-Set → Set l2) → Cardinal l)
+    (Y : pr1 set-Cardinality-Projective-Set → Set l2) →
+    constr-Cardinality-Projective-Set T (cardinality ∘ Y) ＝ T Y
+  compute-constr-Cardinality-Projective-Set {l} =
+    compute-rec-is-truncation-equivalence
+      ( is-set-equivalence-postcomp-cardinality-type-Cardinality-Projective-Set)
+      ( Cardinal-Set l)
 ```
+
+## Properties
+
+### Distributive property of cardinality-projective sets
+
+A set `I` is cardinality-projective if and only if the distributive map
 
 ```text
-  (X → Set)      ↖
-     |      \     \
-     |        \    \
-     ∨          ∨   \
-  (X → Card) -> ║ X → Set ║₀
-
-              - ∘ η
-  (X → Set)
-     |      \
-   η |        \   - ∘ η
-     ∨          ↘
-  ║X → Set║₀ ---> (X → Card)
-             <---
-              𝓈
+  ║I → Set║₀ → (I → Cardinal)
 ```
 
-Naturality says
+is an equivalence.
+
+**Proof.** We have the commuting triangle
 
 ```text
-             ev x
-  (X → Set) -----> Set
-    |               |
-  η |               | η
-    ∨       ║ev x║₀ ∨
-  ║X → Set║₀ ----> Card
+            (I → Set)
+            /       \
+           /         \
+          ∨           ∨
+  ║I → Set║₀ -----> (I → Cardinal)
 ```
+
+where the left vertical map is 0-connected hence by the cancellation/composition
+property of 0-connected maps, `I` is cardinality-projective if and only if the
+bottom horizontal map is. But the horizontal map is a map between sets, and so
+is 0-connected if and only if it is an equivalence. ∎
 
 ```agda
-  compute-map-section-at-cardinality-Cardinality-Projective-Set :
-    (K : type-Cardinality-Projective-Set → Set l2) →
-    map-section-Cardinality-Projective-Set (cardinality ∘ K) ＝ unit-trunc-Set K
-  compute-map-section-at-cardinality-Cardinality-Projective-Set = TODO
-    where postulate TODO : _
+module _
+  {l1 l2 : Level} (I : Set l1)
+  where
+
+  is-set-equivalence-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set :
+    is-truncation-equivalence zero-𝕋
+      ( postcomp (type-Set I) (cardinality {l2})) →
+    is-truncation-equivalence zero-𝕋
+      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
+  is-set-equivalence-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
+    H =
+    is-truncation-equivalence-right-map-triangle
+      ( postcomp (type-Set I) cardinality)
+      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
+      ( unit-trunc-Set)
+      ( λ f → inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)))
+      ( H)
+      ( is-truncation-equivalence-unit-trunc)
+
+  is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set :
+    is-truncation-equivalence zero-𝕋
+      ( postcomp (type-Set I) (cardinality {l2})) →
+    is-equiv (map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
+  is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
+    H =
+    is-equiv-is-truncation-equivalence
+      ( is-set-type-trunc-Set)
+      ( is-set-function-type is-set-Cardinal)
+      ( is-set-equivalence-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
+        ( H))
+
+  is-equiv-map-distributive-trunc-set-is-cardinality-projective-set :
+    is-cardinality-projective-set-Level l2 I →
+    is-equiv (map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
+  is-equiv-map-distributive-trunc-set-is-cardinality-projective-set H =
+    is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
+      ( is-truncation-equivalence-is-connected-map _ H)
+
+  is-cardinality-projective-set-is-is-equiv-map-distributive-trunc-set :
+    is-equiv
+      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2)) →
+    is-cardinality-projective-set-Level l2 I
+  is-cardinality-projective-set-is-is-equiv-map-distributive-trunc-set H =
+    is-connected-map-left-map-triangle
+      ( postcomp (type-Set I) cardinality)
+      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
+      ( unit-trunc-Set)
+      ( λ f → inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)))
+      ( is-connected-map-unit-trunc zero-𝕋)
+      ( is-connected-map-is-equiv H)
+
+is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set :
+  {l1 l2 : Level} (I : Cardinality-Projective-Set l1 l2) →
+  is-equiv
+    ( map-distributive-trunc-function-type zero-𝕋
+      ( type-Cardinality-Projective-Set I)
+      ( Set l2))
+is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set (I , H) =
+  is-equiv-map-distributive-trunc-set-is-cardinality-projective-set I H
+```
+
+We call the inverse map to the distributive law the "unit map" of the
+cardinality-projective set.
+
+```agda
+module _
+  {l1 l2 : Level} (I : Cardinality-Projective-Set l1 l2)
+  (let I' = type-Cardinality-Projective-Set I)
+  where
+
+  unit-Cardinality-Projective-Set :
+    (I' → Cardinal l2) → ║ (I' → Set l2) ║₀
+  unit-Cardinality-Projective-Set =
+    map-inv-is-equiv
+      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+
+  is-retraction-unit-Cardinality-Projective-Set :
+    is-retraction
+      ( map-distributive-trunc-function-type zero-𝕋 I' (Set l2))
+      ( unit-Cardinality-Projective-Set)
+  is-retraction-unit-Cardinality-Projective-Set =
+    is-retraction-map-inv-is-equiv
+      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+
+  compute-unit-Cardinality-Projective-Set :
+    (K : I' → Set l2) →
+    unit-Cardinality-Projective-Set (cardinality ∘ K) ＝ unit-trunc-Set K
+  compute-unit-Cardinality-Projective-Set K =
+    equational-reasoning
+      unit-Cardinality-Projective-Set (cardinality ∘ K)
+      ＝ unit-Cardinality-Projective-Set
+        ( map-distributive-trunc-function-type zero-𝕋 I'
+          ( Set l2)
+          ( unit-trunc K))
+        by
+          ap
+            ( unit-Cardinality-Projective-Set)
+            ( inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 K)))
+      ＝ unit-trunc K
+        by is-retraction-unit-Cardinality-Projective-Set (unit-trunc K)
+```
+
+### A set is cardinality-projective if the postcomposition map is a set-truncation equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (I : Set l1)
+  where
+
+  is-cardinality-projective-set-is-set-equivalence-postcomp-cardinality-Set :
+    is-truncation-equivalence zero-𝕋
+      ( postcomp (type-Set I) (cardinality {l2})) →
+    is-cardinality-projective-set-Level l2 I
+  is-cardinality-projective-set-is-set-equivalence-postcomp-cardinality-Set H =
+    is-cardinality-projective-set-is-is-equiv-map-distributive-trunc-set I
+    ( is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
+      ( I)
+      ( H))
 ```
 
 ## See also
