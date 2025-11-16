@@ -453,11 +453,12 @@ module _
           ( left-summand-split-ℚ⁺ p)
           ( right-summand-split-ℚ⁺ p))
 
-    bound-double-le-ℚ⁺ :
-      Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-    bound-double-le-ℚ⁺ =
-      ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
+  bound-double-le-ℚ⁺ :
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ =
+    ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
 
+  abstract
     double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
     double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺
 ```
