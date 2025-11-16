@@ -32,6 +32,7 @@ open import metric-spaces.subspaces-metric-spaces
 open import order-theory.large-posets
 
 open import real-numbers.accumulation-points-subsets-real-numbers
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.binary-maximum-real-numbers
