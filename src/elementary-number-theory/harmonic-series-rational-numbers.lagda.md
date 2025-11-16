@@ -112,7 +112,7 @@ abstract
               ( lower-bound-sum-harmonic-series-power-of-two-ℚ n)
         ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
             ( reciprocal-rational-succ-ℕ 1) *ℚ
-            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n))) +ℚ
+            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ n))) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
             leq-eq-ℚ
@@ -122,21 +122,21 @@ abstract
                     ( rational-ℚ⁺)
                     ( is-identity-left-conjugation-Ab
                       ( abelian-group-mul-ℚ⁺)
-                      ( positive-rational-ℕ⁺ (exp-ℕ⁺ (2 , λ ()) n))
+                      ( positive-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ n))
                       ( positive-reciprocal-rational-succ-ℕ 1))))
                 ( refl))
         ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
             ( ( reciprocal-rational-succ-ℕ 1) *ℚ
-              ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n)))) +ℚ
+              ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ n)))) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (associative-mul-ℚ _ _ _) refl)
         ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
-            ( ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) n)) *ℚ
+            ( ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ n)) *ℚ
               ( reciprocal-rational-succ-ℕ 1))) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (ap-mul-ℚ refl (commutative-mul-ℚ _ _)) refl)
         ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
-            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , λ ()) (succ-ℕ n)))) +ℚ
+            ( reciprocal-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ (succ-ℕ n)))) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
             leq-eq-ℚ
@@ -145,18 +145,18 @@ abstract
                   ( refl)
                   ( ( inv
                       ( distributive-reciprocal-mul-ℕ⁺
-                        ( exp-ℕ⁺ (2 , λ ()) n)
-                        ( 2 , λ ()))) ∙
+                        ( exp-ℕ⁺ two-ℕ⁺ n)
+                        ( two-ℕ⁺))) ∙
                     ( ap
                       ( reciprocal-rational-ℕ⁺)
                       ( eq-nonzero-ℕ
-                        { exp-ℕ⁺ (2 , λ ()) n *ℕ⁺ (2 , λ ())}
-                        { exp-ℕ⁺ (2 , (λ ())) (succ-ℕ n)}
+                        { exp-ℕ⁺ two-ℕ⁺ n *ℕ⁺ two-ℕ⁺}
+                        { exp-ℕ⁺ two-ℕ⁺ (succ-ℕ n)}
                         ( refl)))))
                 ( refl))
         ≤ ( sum-fin-sequence-ℚ
             ( exp-ℕ 2 n)
-            ( λ _ → reciprocal-rational-ℕ⁺ (exp-ℕ⁺ (2 , (λ ())) (succ-ℕ n)))) +ℚ
+            ( λ _ → reciprocal-rational-ℕ⁺ (exp-ℕ⁺ two-ℕ⁺ (succ-ℕ n)))) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by leq-eq-ℚ (ap-add-ℚ (inv (sum-constant-fin-sequence-ℚ _ _)) refl)
         ≤ ( sum-fin-sequence-ℚ
@@ -270,7 +270,7 @@ abstract
                 leq-eq-ℚ
                   ( inv
                     ( is-retraction-left-div-ℚ⁺
-                      ( positive-rational-ℕ⁺ (2 , λ ()))
+                      ( positive-rational-ℕ⁺ two-ℕ⁺)
                       ( q)))
             ≤ reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n
               by
