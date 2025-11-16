@@ -424,3 +424,14 @@ module _
       is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
 ```
+
+## See also
+
+- [Real Banach spaces](linear-algebra.real-banach-spaces.md), normed real vector
+  spaces for which the induced metric space is
+  [complete](metric-spaces.complete-metric-spaces.md)
+
+## External links
+
+- [Normed vector space](https://en.wikipedia.org/wiki/Normed_vector_space) on
+  Wikipedia
