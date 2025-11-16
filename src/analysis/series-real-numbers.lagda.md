@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -58,13 +59,24 @@ partial-sum-series-ℝ {l} = partial-sum-series-Metric-Ab
 
 ## Properties
 
+### The proposition that the terms of a series are nonnegative
+
+```agda
+is-nonnegative-prop-series-ℝ : {l : Level} → series-ℝ l → Prop l
+is-nonnegative-prop-series-ℝ σ =
+  Π-Prop ℕ (λ n → is-nonnegative-prop-ℝ (term-series-ℝ σ n))
+
+is-nonnegative-series-ℝ : {l : Level} → series-ℝ l → UU l
+is-nonnegative-series-ℝ σ = type-Prop (is-nonnegative-prop-series-ℝ σ)
+```
+
 ### If the terms of a series of real numbers are nonnegative, the partial sums are monotonic
 
 ```agda
 abstract
   is-monotonic-partial-sum-is-nonnegative-term-series-ℝ :
     {l : Level} (σ : series-ℝ l) →
-    ((n : ℕ) → is-nonnegative-ℝ (term-series-ℝ σ n)) →
+    is-nonnegative-series-ℝ σ →
     is-monotonic-sequence-Poset (ℝ-Poset l) (partial-sum-series-ℝ σ)
   is-monotonic-partial-sum-is-nonnegative-term-series-ℝ {l} σ H =
     is-monotonic-sequence-is-increasing-Poset

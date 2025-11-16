@@ -8,6 +8,7 @@ module analysis.ratio-test-series-real-numbers where
 
 ```agda
 open import analysis.absolute-convergence-series-real-numbers
+open import analysis.comparison-test-series-real-numbers
 open import analysis.convergent-series-real-numbers
 open import analysis.series-real-numbers
 
@@ -131,3 +132,7 @@ module _
                             ( r)
                             ( succ-ℕ n))))))
 ```
+
+## External links
+
+- [Ratio test](https://en.wikipedia.org/wiki/Ratio_test) on Wikipedia
