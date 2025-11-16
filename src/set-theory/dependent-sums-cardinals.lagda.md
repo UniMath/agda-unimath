@@ -23,6 +23,7 @@ open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-truncation
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.isolated-elements
 open import foundation.logical-equivalences
 open import foundation.mere-embeddings
@@ -35,6 +36,7 @@ open import foundation.sections
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
@@ -43,9 +45,11 @@ open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 
-open import set-theory.cardinality-inductive-sets
+open import set-theory.cardinality-projective-sets
+open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
 open import set-theory.inequality-cardinals
+open import set-theory.inhabited-cardinals
 ```
 
 </details>
@@ -53,13 +57,15 @@ open import set-theory.inequality-cardinals
 ## Idea
 
 Given a family of cardinals $κ : I → \mathrm{Cardinal}$ over a
-[cardinality-inductive set](set-theory.cardinality-inductive-sets.md) $I$, then
-we may define the {{#concept "dependent sum cardinal" Agda=Σ-Cardinal}}
+[cardinality-recursive set](set-theory.cardinality-recursive-sets.md) $I$, then
+we may define the {{#concept "dependent sum cardinal" Agda=Σ-Cardinal'}}
 $Σ_{i∈I}κᵢ$, as the cardinality of the
 [dependent sum](foundation.dependent-pair-types.md) of any family of
 representing sets $Kᵢ$.
 
 ## Definitions
+
+### The cardinality of a dependent sum of sets
 
 ```agda
 module _
@@ -68,34 +74,94 @@ module _
 
   cardinality-Σ : (type-Set X → Set l2) → Cardinal (l1 ⊔ l2)
   cardinality-Σ Y = cardinality (Σ-Set X Y)
+```
 
+### Dependent sums of cardinals over cardinality-recursive sets
+
+```agda
 module _
-  {l1 l2 : Level} (X : Cardinality-Inductive-Set l1 l2)
-  (let set-X = set-Cardinality-Inductive-Set X)
-  (let type-X = type-Cardinality-Inductive-Set X)
+  {l1 l2 : Level} (X : Cardinality-Recursive-Set l1 l2)
+  (let set-X = set-Cardinality-Recursive-Set X)
+  (let type-X = type-Cardinality-Recursive-Set X)
   where
 
-  Σ-Cardinal :
+  Σ-Cardinal' :
     (type-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
-  Σ-Cardinal K =
-    map-trunc-Set (Σ-Set set-X) (unit-Cardinality-Inductive-Set X K)
+  Σ-Cardinal' K =
+    map-trunc-Set (Σ-Set set-X) (unit-Cardinality-Recursive-Set X K)
 
-  compute-Σ-Cardinal :
+  compute-Σ-Cardinal' :
     (Y : type-X → Set l2) →
-    Σ-Cardinal (cardinality ∘ Y) ＝ cardinality (Σ-Set set-X Y)
-  compute-Σ-Cardinal Y =
+    Σ-Cardinal' (cardinality ∘ Y) ＝ cardinality (Σ-Set set-X Y)
+  compute-Σ-Cardinal' Y =
     equational-reasoning
-      Σ-Cardinal (cardinality ∘ Y)
+      Σ-Cardinal' (cardinality ∘ Y)
       ＝ map-trunc-Set (Σ-Set set-X) (unit-trunc-Set Y)
         by
           ap
             ( map-trunc-Set (Σ-Set set-X))
-            ( compute-unit-Cardinality-Inductive-Set X Y)
+            ( compute-unit-Cardinality-Recursive-Set X Y)
       ＝ cardinality (Σ-Set set-X Y)
         by naturality-unit-trunc-Set (Σ-Set set-X) Y
 ```
 
+### Dependent sums of cardinals over cardinality-projective sets
+
+```agda
+module _
+  {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
+  where
+
+  Σ-Cardinal :
+    (type-Cardinality-Projective-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+  Σ-Cardinal =
+    Σ-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
+
+  compute-Σ-Cardinal :
+    (Y : type-Cardinality-Projective-Set X → Set l2) →
+    Σ-Cardinal (cardinality ∘ Y) ＝
+    cardinality (Σ-Set (set-Cardinality-Projective-Set X) Y)
+  compute-Σ-Cardinal =
+    compute-Σ-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
+```
+
 ## Properties
+
+### Dependent sums of inhabited cardinals are inhabited
+
+```agda
+module _
+  {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
+  (let type-X = type-Cardinality-Projective-Set X)
+  (|x| : is-inhabited type-X)
+  where
+
+  is-inhabited-Σ-Cardinal :
+    (K : type-X → Cardinal l2) →
+    (is-inhabited-K : (x : type-X) → is-inhabited-Cardinal (K x)) →
+    is-inhabited-Cardinal (Σ-Cardinal X K)
+  is-inhabited-Σ-Cardinal =
+    ind-Cardinality-Projective-Set X
+      ( λ K →
+        set-Prop
+          ( function-Prop
+            ( (x : type-X) → is-inhabited-Cardinal (K x))
+            ( is-inhabited-prop-Cardinal (Σ-Cardinal X K))))
+      ( λ Y y →
+        inv-tr
+          ( is-inhabited-Cardinal)
+          ( compute-Σ-Cardinal X Y)
+          ( unit-is-inhabited-cardinality
+            ( Σ-Set (set-Cardinality-Projective-Set X) Y)
+            ( is-inhabited-Σ
+              ( |x|)
+              ( λ x → inv-unit-is-inhabited-cardinality (Y x) (y x)))))
+
+  Σ-Inhabited-Cardinal :
+    (type-X → Inhabited-Cardinal l2) → Inhabited-Cardinal (l1 ⊔ l2)
+  Σ-Inhabited-Cardinal K =
+    ( Σ-Cardinal X (pr1 ∘ K) , is-inhabited-Σ-Cardinal (pr1 ∘ K) (pr2 ∘ K))
+```
 
 ### Inequality is preserved under dependent sums over projective types
 
@@ -116,17 +182,21 @@ module _
       ( mere-emb-tot
         ( is-projective-X)
         ( λ x → inv-unit-leq-cardinality (K x) (P x) (f x)))
+```
 
+TODO
+
+```text
 module _
-  {l1 l2 : Level} (X : Cardinality-Inductive-Set l1 l2)
-  (let type-X = type-Cardinality-Inductive-Set X)
-  (is-projective-X : is-projective-Level' l2 (type-Cardinality-Inductive-Set X))
+  {l1 l2 : Level} (X : Cardinality-Recursive-Set l1 l2)
+  (let type-X = type-Cardinality-Recursive-Set X)
+  (is-projective-X : is-projective-Level' l2 (type-Cardinality-Recursive-Set X))
   where
 
-  leq-Σ-Cardinal :
+  leq-Σ-Cardinal' :
     (K P : type-X → Cardinal l2) →
     ((i : type-X) → leq-Cardinal (K i) (P i)) →
-    leq-Cardinal (Σ-Cardinal X K) (Σ-Cardinal X P)
-  leq-Σ-Cardinal K P f = {!   !}
-  -- proof somehow proceeds by using that since `X` is cardinality-inductive, it suffices to show this for families of sets, and then it's just an easy fact of dependent sums.
+    leq-Cardinal (Σ-Cardinal' X K) (Σ-Cardinal' X P)
+  leq-Σ-Cardinal' K P f = {!   !}
+  -- proof somehow proceeds by using that since `X` is cardinality-recursive, it suffices to show this for families of sets, and then it's just an easy fact of dependent sums.
 ```
