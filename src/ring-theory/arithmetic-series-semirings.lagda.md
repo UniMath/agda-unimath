@@ -180,7 +180,7 @@ module _
   compute-sum-add-mul-nat-Semiring n =
     ap-binary
       ( add-Semiring R)
-      ( inv (constant-sum-fin-sequence-type-Semiring R (succ-ℕ n) a))
+      ( inv (sum-constant-fin-sequence-type-Semiring R (succ-ℕ n) a))
       ( ( ap
           ( λ i → multiple-Semiring R i d)
           ( htpy-sum-leq-triangular-ℕ n)) ∙

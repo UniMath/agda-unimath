@@ -12,10 +12,12 @@ open import commutative-algebra.powers-of-elements-commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.semiring-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
 
@@ -103,6 +105,9 @@ abstract
   is-nonzero-exp-ℕ m zero-ℕ p = is-nonzero-one-ℕ
   is-nonzero-exp-ℕ m (succ-ℕ n) p =
     is-nonzero-mul-ℕ (m ^ℕ n) m (is-nonzero-exp-ℕ m n p) p
+
+exp-ℕ⁺ : ℕ⁺ → ℕ → ℕ⁺
+exp-ℕ⁺ (n , n≠0) m = (exp-ℕ n m , is-nonzero-exp-ℕ n m n≠0)
 ```
 
 ### The exponent $m^n$ is equal to the $n$-fold product of $m$

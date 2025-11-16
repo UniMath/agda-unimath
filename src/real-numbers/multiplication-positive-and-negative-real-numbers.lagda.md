@@ -8,6 +8,7 @@ module real-numbers.multiplication-positive-and-negative-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -30,7 +31,7 @@ their product too.
 
 ## Lemmas
 
-### The product of a positive and a negative rational number is negative
+### The product of a positive and a negative real number is negative
 
 ```agda
 abstract
@@ -49,4 +50,23 @@ mul-positive-negative-ℝ :
   {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁻ l2 → ℝ⁻ (l1 ⊔ l2)
 mul-positive-negative-ℝ (x , is-pos-x) (y , is-neg-y) =
   ( x *ℝ y , is-negative-mul-positive-negative-ℝ is-pos-x is-neg-y)
+```
+
+### The product of a negative and a positive real number is negative
+
+```agda
+abstract
+  is-negative-mul-negative-positive-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-negative-ℝ x → is-positive-ℝ y →
+    is-negative-ℝ (x *ℝ y)
+  is-negative-mul-negative-positive-ℝ {x = x} {y = y} x<0 0<y =
+    tr
+      ( is-negative-ℝ)
+      ( commutative-mul-ℝ y x)
+      ( is-negative-mul-positive-negative-ℝ 0<y x<0)
+
+mul-negative-positive-ℝ :
+  {l1 l2 : Level} → ℝ⁻ l1 → ℝ⁺ l2 → ℝ⁻ (l1 ⊔ l2)
+mul-negative-positive-ℝ (x , is-neg-x) (y , is-pos-y) =
+  ( x *ℝ y , is-negative-mul-negative-positive-ℝ is-neg-x is-pos-y)
 ```
