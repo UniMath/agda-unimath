@@ -191,3 +191,12 @@ module _
                 ( lemma' ε b a με≤b)
                 ( linear-leq-ℕ a b)))
 ```
+
+## See also
+
+- [Absolute convergence of series of real numbers](analysis.absolute-convergence-series-real-numbers.md)
+
+## External links
+
+- [Absolute convergence of series in Banach spaces](https://en.wikipedia.org/wiki/Absolute_convergence#Proof_that_any_absolutely_convergent_series_in_a_Banach_space_is_convergent)
+  on Wikipedia
