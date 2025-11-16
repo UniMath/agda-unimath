@@ -133,6 +133,10 @@ module _
                             ( succ-ℕ n))))))
 ```
 
+## See also
+
+- [The ratio test for series in real Banach spaces](analysis.ratio-test-series-real-banach-spaces.md)
+
 ## External links
 
 - [Ratio test](https://en.wikipedia.org/wiki/Ratio_test) on Wikipedia
