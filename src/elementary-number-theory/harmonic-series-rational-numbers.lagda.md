@@ -285,7 +285,7 @@ abstract
               by lower-bound-sum-harmonic-series-power-of-two-ℚ n
             ≤ partial-sum-series-ℚ harmonic-series-ℚ k
               by
-                is-monotonic-partial-sum-is-nonnegative-term-series-ℚ
+                is-increasing-partial-sum-is-nonnegative-term-series-ℚ
                   ( harmonic-series-ℚ)
                   ( λ m →
                     is-nonnegative-is-positive-ℚ
