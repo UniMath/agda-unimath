@@ -9,6 +9,7 @@ module elementary-number-theory.irrationality-square-root-of-two where
 
 ```agda
 open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
@@ -19,13 +20,18 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.squares-integers
 open import elementary-number-theory.squares-natural-numbers
 open import elementary-number-theory.squares-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 ```
 
@@ -90,7 +96,27 @@ abstract opaque
             ＝ square-ℕ qℕ *ℕ 2
               by |p|²=qℕ²2)
       (l , l2=qℕ) = is-even-is-even-square-ℕ qℕ (square-ℕ k , k²2=qℕ²)
-    in {!   !}
-
--- (k²2)=qℕ²
+    in
+      ex-falso
+        ( rec-coproduct
+          ( λ ())
+          ( λ ())
+          ( is-one-or-neg-one-is-unit-ℤ
+            ( int-ℕ 2)
+            ( is-unit-div-relatively-prime-ℤ
+              ( p)
+              ( q)
+              ( int-ℕ 2)
+              ( coprime-p-q)
+              ( rec-coproduct
+                  ( λ p=|p| →
+                    ( int-ℕ k , mul-int-ℕ k 2 ∙ ap int-ℕ k2=|p| ∙ inv p=|p|))
+                  ( λ p=-|p| →
+                    ( neg-ℤ (int-ℕ k) ,
+                      ( left-negative-law-mul-ℤ _ _) ∙
+                      ( ap neg-ℤ (mul-int-ℕ k 2)) ∙
+                      ( ap (neg-ℤ ∘ int-ℕ) k2=|p|) ∙
+                      ( inv p=-|p|)))
+                  ( is-pos-or-neg-abs-ℤ p) ,
+                ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q)))))
 ```
