@@ -7,7 +7,6 @@ module set-theory.cardinality-projective-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-connected-maps
 open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
@@ -56,7 +55,7 @@ module _
 
   is-cardinality-projective-set-Level : UU (l1 ⊔ lsuc l2)
   is-cardinality-projective-set-Level =
-    is-0-connected-map (postcomp (type-Set I) (cardinality {l2}))
+    is-connected-map zero-𝕋 (postcomp (type-Set I) (cardinality {l2}))
 ```
 
 ### The universe of cardinality-projective sets at a universe level
