@@ -1,16 +1,31 @@
 # The irrationality of the square root of two
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
 module elementary-number-theory.irrationality-square-root-of-two where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import foundation.dependent-pair-types
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.positive-integers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.squares-integers
+open import elementary-number-theory.squares-natural-numbers
 open import elementary-number-theory.squares-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.negated-equality
 ```
 
@@ -24,8 +39,58 @@ whose [square](elementary-number-theory.squares-rational-numbers.md) is two.
 ## Proof
 
 ```agda
-abstract
-  not-two-square-ℚ : (q : ℚ) → square-ℚ q ≠ rational-ℕ 2
-  not-two-square-ℚ ((p , q⁺@(q , is-pos-q)) , coprime-p-q) p/q²=2 =
-    {!   !}
+abstract opaque
+  unfolding rational-fraction-ℤ mul-ℚ
+
+  neq-two-square-ℚ : (q : ℚ) → square-ℚ q ≠ rational-ℕ 2
+  neq-two-square-ℚ (p/q@(p , q⁺@(q , is-pos-q)) , coprime-p-q) p²/q²=2 =
+    let
+      qℕ = succ-ℕ (nat-positive-ℤ q⁺)
+      qℕ=q : int-ℕ qℕ ＝ q
+      qℕ=q =
+        inv (int-positive-int-ℕ _) ∙ ap int-ℤ⁺ (is-section-nat-positive-ℤ q⁺)
+      |p|²=qℕ²2 : square-ℕ (abs-ℤ p) ＝ square-ℕ qℕ *ℕ 2
+      |p|²=qℕ²2 =
+        is-injective-int-ℕ
+          ( equational-reasoning
+              int-ℕ (square-ℕ (abs-ℤ p))
+              ＝ square-ℤ p
+                by square-abs-ℤ p
+              ＝ square-ℤ p *ℤ one-ℤ
+                by inv (right-unit-law-mul-ℤ _)
+              ＝ int-ℕ 2 *ℤ square-ℤ q
+                by
+                  sim-fraction-ℤ-eq-ℚ
+                    ( mul-fraction-ℤ p/q p/q)
+                    ( in-fraction-ℤ (int-ℕ 2))
+                    ( ( p²/q²=2) ∙
+                      ( inv (is-retraction-rational-fraction-ℚ (rational-ℕ 2))))
+              ＝ int-ℕ 2 *ℤ square-ℤ (int-ℕ qℕ)
+                by ap-mul-ℤ refl (ap square-ℤ (inv qℕ=q))
+              ＝ int-ℕ 2 *ℤ int-ℕ (square-ℕ qℕ)
+                by ap-mul-ℤ refl (square-int-ℕ qℕ)
+              ＝ int-ℕ (2 *ℕ square-ℕ qℕ)
+                by mul-int-ℕ _ _
+              ＝ int-ℕ (square-ℕ qℕ *ℕ 2)
+                by ap int-ℕ (commutative-mul-ℕ 2 (square-ℕ qℕ)))
+      (k , k2=|p|) =
+        is-even-is-even-square-ℕ (abs-ℤ p) (square-ℕ qℕ , inv |p|²=qℕ²2)
+      k²2=qℕ² : square-ℕ k *ℕ 2 ＝ square-ℕ qℕ
+      k²2=qℕ² =
+        is-injective-right-mul-succ-ℕ
+          ( 1)
+          ( equational-reasoning
+            square-ℕ k *ℕ 2 *ℕ 2
+            ＝ square-ℕ k *ℕ square-ℕ 2
+              by associative-mul-ℕ (square-ℕ k) 2 2
+            ＝ square-ℕ (k *ℕ 2)
+              by inv (distributive-square-mul-ℕ k 2)
+            ＝ square-ℕ (abs-ℤ p)
+              by ap square-ℕ k2=|p|
+            ＝ square-ℕ qℕ *ℕ 2
+              by |p|²=qℕ²2)
+      (l , l2=qℕ) = is-even-is-even-square-ℕ qℕ (square-ℕ k , k²2=qℕ²)
+    in {!   !}
+
+-- (k²2)=qℕ²
 ```

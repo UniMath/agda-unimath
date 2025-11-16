@@ -91,6 +91,9 @@ module _
   int-positive-ℤ : ℤ
   int-positive-ℤ = pr1 p
 
+  int-ℤ⁺ : ℤ
+  int-ℤ⁺ = int-positive-ℤ
+
   is-positive-int-positive-ℤ : is-positive-ℤ int-positive-ℤ
   is-positive-int-positive-ℤ = pr2 p
 ```
@@ -191,6 +194,11 @@ abstract
 ```agda
 positive-int-ℕ : ℕ → positive-ℤ
 positive-int-ℕ = rec-ℕ one-positive-ℤ (λ _ → succ-positive-ℤ)
+
+abstract
+  int-positive-int-ℕ : (n : ℕ) → int-positive-ℤ (positive-int-ℕ n) ＝ in-pos-ℤ n
+  int-positive-int-ℕ 0 = refl
+  int-positive-int-ℕ (succ-ℕ n) = ap succ-ℤ (int-positive-int-ℕ n)
 
 nat-positive-ℤ : positive-ℤ → ℕ
 nat-positive-ℤ (inr (inr x) , H) = x
