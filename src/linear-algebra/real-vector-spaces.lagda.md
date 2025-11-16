@@ -168,3 +168,7 @@ real-vector-space-ℝ l =
   vector-space-local-commutative-ring-Local-Commutative-Ring
     ( local-commutative-ring-ℝ l)
 ```
+
+## See also
+
+- [Vector spaces](linear-algebra.vector-spaces.md)
