@@ -1101,6 +1101,44 @@ module _
         ( x))
 ```
 
+### The limit in the Cauchy precompletion of a Cauchy approximation in a Pseudometric space is its quotient
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  eq-map-quotient-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( u)) ＝
+    ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+  eq-map-quotient-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    all-eq-is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( u))
+      ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+      ( is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( u))
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+        ( P)
+        ( u))
+```
+
 -- TODO
 
 -- ### If ACC holds then cauchy precompletions are complete
