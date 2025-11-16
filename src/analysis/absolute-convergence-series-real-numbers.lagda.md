@@ -24,9 +24,7 @@ open import linear-algebra.real-banach-spaces
 ## Idea
 
 A [series](analysis.series-real-numbers.md) `Σ aₙ` of
-[real numbers](real-numbers.dedekind-real-numbers.md)
-
-is said to
+[real numbers](real-numbers.dedekind-real-numbers.md) is said to
 {{#concept "absolutely converge" WDID=Q332465 WD="absolute convergence" Agda=is-absolutely-convergent-prop-series-ℝ Disambiguation="series of real numbers"}}
 if the series of absolute values `Σ |aₙ|`
 [converges](analysis.convergent-series-real-numbers.md).
@@ -71,6 +69,10 @@ module _
           ( term-series-ℝ σ))
         ( H))
 ```
+
+## See also
+
+- [Absolute convergence of series in real Banach spaces](analysis.absolute-convergence-series-real-banach-spaces.md)
 
 ## External links
 
