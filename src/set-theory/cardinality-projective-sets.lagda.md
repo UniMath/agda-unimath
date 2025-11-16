@@ -7,6 +7,8 @@ module set-theory.cardinality-projective-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.connected-maps
@@ -22,6 +24,8 @@ open import foundation.injective-maps
 open import foundation.mere-equivalences
 open import foundation.postcomposition-functions
 open import foundation.projective-types
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.set-truncations
@@ -35,6 +39,12 @@ open import foundation.universe-levels
 
 open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -59,6 +69,16 @@ module _
   is-cardinality-preprojective-set-Level : UU (l1 ⊔ lsuc l2)
   is-cardinality-preprojective-set-Level =
     is-connected-map zero-𝕋 (postcomp (type-Set I) (cardinality {l2}))
+
+  is-prop-is-cardinality-preprojective-set-Level :
+    is-prop is-cardinality-preprojective-set-Level
+  is-prop-is-cardinality-preprojective-set-Level =
+    is-prop-is-connected-map zero-𝕋 (postcomp (type-Set I) cardinality)
+
+  is-cardinality-preprojective-set-prop-Level : Prop (l1 ⊔ lsuc l2)
+  is-cardinality-preprojective-set-prop-Level =
+    ( is-cardinality-preprojective-set-Level ,
+      is-prop-is-cardinality-preprojective-set-Level)
 ```
 
 ### The predicate of being cardinality-projective at a universe level
@@ -72,6 +92,18 @@ module _
   is-cardinality-projective-set-Level =
     is-connected-map zero-𝕋 (postcomp (type-Set I) (cardinality {l2})) ×
     is-projective-Level' l2 (type-Set I)
+
+  is-prop-is-cardinality-projective-set-Level :
+    is-prop is-cardinality-projective-set-Level
+  is-prop-is-cardinality-projective-set-Level =
+    is-prop-product
+      ( is-prop-is-cardinality-preprojective-set-Level l2 I)
+      ( is-prop-is-projective-Level' l2 (type-Set I))
+
+  is-cardinality-projective-set-prop-Level : Prop (l1 ⊔ lsuc l2)
+  is-cardinality-projective-set-prop-Level =
+    ( is-cardinality-projective-set-Level ,
+      is-prop-is-cardinality-projective-set-Level)
 ```
 
 ### The universe of cardinality-projective sets at a universe level
@@ -295,7 +327,7 @@ module _
       ( cardinality-recursive-set-Cardinality-Projective-Set)
 ```
 
-### A set is cardinality-preprojective if the postcomposition map is a set-truncation equivalence
+### A set is cardinality-preprojective if the postcomposition map is a set-equivalence
 
 ```agda
 module _
@@ -312,6 +344,92 @@ module _
     ( is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
       ( I)
       ( H))
+```
+
+### The standard finite sets are cardinality-projective
+
+```agda
+module _
+  {l : Level} (n : ℕ)
+  where
+
+  abstract
+    is-cardinality-preprojective-Fin :
+      is-cardinality-preprojective-set-Level l (Fin-Set n)
+    is-cardinality-preprojective-Fin =
+      is-connected-map-left-map-triangle
+        ( postcomp (Fin n) cardinality)
+        ( map-equiv-distributive-trunc-Π-Fin-Set n (λ _ → Set l))
+        ( unit-trunc-Set)
+        ( inv-htpy (triangle-distributive-trunc-Π-Fin-Set n (λ _ → Set l)))
+        ( is-connected-map-unit-trunc zero-𝕋)
+        ( is-connected-map-is-equiv
+          ( is-equiv-map-equiv-distributive-trunc-Π-Fin-Set n (λ _ → Set l)))
+
+  is-cardinality-projective-Fin :
+      is-cardinality-projective-set-Level l (Fin-Set n)
+  is-cardinality-projective-Fin =
+    ( is-cardinality-preprojective-Fin , (λ P → finite-choice-Fin n))
+
+  cardinality-projective-set-Fin : Cardinality-Projective-Set lzero l
+  cardinality-projective-set-Fin = (Fin-Set n , is-cardinality-projective-Fin)
+```
+
+### Sets equipped with counting are cardinality-projective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (c : count A)
+  where
+
+  abstract
+    is-cardinality-preprojective-set-count :
+      is-cardinality-preprojective-set-Level l2 (set-type-count c)
+    is-cardinality-preprojective-set-count =
+      is-connected-map-left-map-triangle
+        ( postcomp A cardinality)
+        ( map-equiv-distributive-trunc-Π-count-Set c (λ _ → Set l2))
+        ( unit-trunc-Set)
+        ( inv-htpy (triangle-distributive-trunc-Π-count-Set c (λ _ → Set l2)))
+        ( is-connected-map-unit-trunc zero-𝕋)
+        ( is-connected-map-is-equiv
+          ( is-equiv-map-equiv-distributive-trunc-Π-count-Set c (λ _ → Set l2)))
+
+  is-cardinality-projective-set-count :
+    is-cardinality-projective-set-Level l2 (set-type-count c)
+  is-cardinality-projective-set-count =
+    ( is-cardinality-preprojective-set-count , (λ P → finite-choice-count c))
+
+  cardinality-projective-set-count : Cardinality-Projective-Set l1 l2
+  cardinality-projective-set-count =
+    ( set-type-count c , is-cardinality-projective-set-count)
+```
+
+### Finite sets are cardinality-projective
+
+```agda
+module _
+  {l1 l2 : Level} (A : Finite-Type l1)
+  where
+
+  abstract
+    is-cardinality-preprojective-set-Finite-Type :
+      is-cardinality-preprojective-set-Level l2 (set-Finite-Type A)
+    is-cardinality-preprojective-set-Finite-Type =
+      rec-trunc-Prop
+        ( is-cardinality-preprojective-set-prop-Level l2 (set-Finite-Type A))
+        ( is-cardinality-preprojective-set-count)
+        ( is-finite-type-Finite-Type A)
+
+  is-cardinality-projective-set-Finite-Type :
+    is-cardinality-projective-set-Level l2 (set-Finite-Type A)
+  is-cardinality-projective-set-Finite-Type =
+    ( is-cardinality-preprojective-set-Finite-Type ,
+      ( λ P → finite-choice (is-finite-type-Finite-Type A)))
+
+  cardinality-projective-set-Finite-Type : Cardinality-Projective-Set l1 l2
+  cardinality-projective-set-Finite-Type =
+    ( set-Finite-Type A , is-cardinality-projective-set-Finite-Type)
 ```
 
 ## See also
