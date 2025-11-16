@@ -64,11 +64,11 @@ reciprocal-rational-ℕ⁺ n = rational-ℚ⁺ (positive-reciprocal-rational-ℕ
 
 positive-reciprocal-rational-succ-ℕ : ℕ → ℚ⁺
 positive-reciprocal-rational-succ-ℕ n =
-  positive-reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
+  positive-reciprocal-rational-ℕ⁺ (succ-ℕ n , λ ())
 
 reciprocal-rational-succ-ℕ : ℕ → ℚ
 reciprocal-rational-succ-ℕ n =
-  reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
+  reciprocal-rational-ℕ⁺ (succ-ℕ n , λ ())
 ```
 
 ### Reciprocals of positive integers
@@ -117,6 +117,19 @@ module _
       eq-type-subtype
         ( subtype-positive-ℤ)
         ( eq-denominator-reciprocal-rational-ℤ⁺)
+```
+
+### Taking the reciprocal of a nonzero natural number distributes over multiplication
+
+```agda
+abstract
+  distributive-reciprocal-mul-ℕ⁺ :
+    (m n : ℕ⁺) →
+    reciprocal-rational-ℕ⁺ (m *ℕ⁺ n) ＝
+    reciprocal-rational-ℕ⁺ m *ℚ reciprocal-rational-ℕ⁺ n
+  distributive-reciprocal-mul-ℕ⁺ m⁺@(m , _) n⁺@(n , _) =
+    ap rational-inv-ℚ⁺ (eq-ℚ⁺ (inv (mul-rational-ℕ m n))) ∙
+    ap rational-ℚ⁺ (distributive-inv-mul-ℚ⁺ _ _)
 ```
 
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`

@@ -9,6 +9,7 @@ module real-numbers.nonzero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -25,10 +26,13 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -161,4 +165,41 @@ module _
                   ( neg-le-ℝ 0<|x|-ε)
                   ( neg-le-ℝ |x|-ε<-x))))
           ( approximate-below-abs-ℝ x ε)
+```
+
+### `x` is nonzero if and only if `x²` is positive
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-positive-square-is-nonzero-ℝ :
+      is-nonzero-ℝ x → is-positive-ℝ (square-ℝ x)
+    is-positive-square-is-nonzero-ℝ =
+      elim-disjunction
+        ( is-positive-prop-ℝ (square-ℝ x))
+        ( λ is-neg-x → is-positive-square-ℝ⁻ (x , is-neg-x))
+        ( λ is-pos-x → is-positive-square-ℝ⁺ (x , is-pos-x))
+
+    is-nonzero-square-is-positive-ℝ :
+      is-positive-ℝ (square-ℝ x) → is-nonzero-ℝ x
+    is-nonzero-square-is-positive-ℝ 0<x² =
+      is-nonzero-is-positive-abs-ℝ
+        ( x)
+        ( tr
+          ( is-positive-ℝ)
+          ( equational-reasoning
+            real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ (square-ℝ x , 0<x²))
+            ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)
+              by
+                ap
+                  ( real-sqrt-ℝ⁰⁺)
+                  ( eq-ℝ⁰⁺
+                    ( nonnegative-ℝ⁺ (square-ℝ x , 0<x²))
+                    ( nonnegative-square-ℝ x)
+                    ( refl))
+            ＝ abs-ℝ x by inv (eq-abs-sqrt-square-ℝ x))
+          ( is-positive-sqrt-ℝ⁺ (square-ℝ x , 0<x²)))
 ```
