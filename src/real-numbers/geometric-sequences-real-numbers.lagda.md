@@ -9,12 +9,16 @@ module real-numbers.geometric-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import analysis.convergent-series-real-numbers
+open import analysis.series-real-numbers
+
 open import commutative-algebra.geometric-sequences-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -27,7 +31,6 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
-open import real-numbers.convergent-series-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.isometry-difference-real-numbers
@@ -41,7 +44,6 @@ open import real-numbers.nonzero-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.series-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.uniformly-continuous-functions-real-numbers
@@ -241,6 +243,13 @@ module _
             ( λ n → power-ℝ n r)
             ( raise-ℝ l zero-ℝ)
             ( is-zero-lim-power-le-one-abs-ℝ r |r|<1))
+
+  convergent-standard-geometric-series-ℝ :
+    le-ℝ (abs-ℝ r) one-ℝ → convergent-series-ℝ l
+  convergent-standard-geometric-series-ℝ |r|<1 =
+    ( standard-geometric-series-ℝ ,
+      a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1) ,
+      compute-sum-standard-geometric-series-ℝ |r|<1)
 ```
 
 ## References
