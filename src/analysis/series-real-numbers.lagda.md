@@ -40,5 +40,5 @@ term-series-ℝ : {l : Level} → series-ℝ l → sequence (ℝ l)
 term-series-ℝ = term-series-Metric-Ab
 
 partial-sum-series-ℝ : {l : Level} → series-ℝ l → sequence (ℝ l)
-partial-sum-series-ℝ {l} = partial-sum-series-Metric-Ab (metric-ab-add-ℝ l)
+partial-sum-series-ℝ {l} = partial-sum-series-Metric-Ab
 ```
