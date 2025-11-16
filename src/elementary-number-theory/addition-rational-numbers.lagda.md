@@ -185,6 +185,13 @@ abstract
       ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
       ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
       ＝ neg-ℚ q by left-unit-law-add-ℚ _
+
+  unique-right-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → q ＝ neg-ℚ p
+  unique-right-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      q
+      ＝ neg-ℚ (neg-ℚ q) by inv (neg-neg-ℚ q)
+      ＝ neg-ℚ p by ap neg-ℚ (inv (unique-left-neg-ℚ p q p+q=0))
 ```
 
 ### The negatives of rational numbers distribute over addition

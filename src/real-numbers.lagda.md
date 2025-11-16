@@ -10,6 +10,7 @@ open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.accumulation-points-subsets-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
+open import real-numbers.addition-positive-real-numbers public
 open import real-numbers.addition-real-numbers public
 open import real-numbers.addition-upper-dedekind-real-numbers public
 open import real-numbers.apartness-real-numbers public
@@ -60,6 +61,7 @@ open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
+open import real-numbers.multiplication-nonzero-real-numbers public
 open import real-numbers.multiplication-positive-and-negative-real-numbers public
 open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
