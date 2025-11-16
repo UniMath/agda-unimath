@@ -42,9 +42,7 @@ is-weakly-constant-map-precomp-unit-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : type-trunc-Prop A → B) →
   is-weakly-constant-map (g ∘ unit-trunc-Prop)
 is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
-  ap
-    ( g)
-    ( eq-is-prop (is-prop-type-trunc-Prop))
+  ap g (eq-is-prop (is-prop-type-trunc-Prop))
 
 precomp-universal-property-set-quotient-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →
