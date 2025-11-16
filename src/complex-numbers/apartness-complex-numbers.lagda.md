@@ -41,7 +41,7 @@ module _
 
   apart-prop-ℂ : Prop (l1 ⊔ l2)
   apart-prop-ℂ =
-    apart-prop-ℝ (re-ℂ z) (re-ℂ w) ∨ apart-prop-ℝ (im-ℂ z) (im-ℂ w)
+    (apart-prop-ℝ (re-ℂ z) (re-ℂ w)) ∨ (apart-prop-ℝ (im-ℂ z) (im-ℂ w))
 
   apart-ℂ : UU (l1 ⊔ l2)
   apart-ℂ = type-Prop apart-prop-ℂ
