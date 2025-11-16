@@ -217,3 +217,19 @@ module _
                 ( μ ε)
                 ( is-mod'-μ ε)))
 ```
+
+### A series converges if it converges after dropping a finite number of terms
+
+```agda
+module _
+  {l : Level}
+  (σ : series-ℝ l)
+  (k : ℕ)
+  where
+
+  is-convergent-is-convergent-drop-series-ℝ :
+    is-convergent-series-ℝ (drop-series-ℝ k σ) →
+    is-convergent-series-ℝ σ
+  is-convergent-is-convergent-drop-series-ℝ =
+    is-convergent-is-convergent-drop-series-Metric-Ab σ k
+```

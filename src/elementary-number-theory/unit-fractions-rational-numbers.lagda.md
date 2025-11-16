@@ -64,11 +64,11 @@ reciprocal-rational-ℕ⁺ n = rational-ℚ⁺ (positive-reciprocal-rational-ℕ
 
 positive-reciprocal-rational-succ-ℕ : ℕ → ℚ⁺
 positive-reciprocal-rational-succ-ℕ n =
-  positive-reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
+  positive-reciprocal-rational-ℕ⁺ (succ-ℕ n , λ ())
 
 reciprocal-rational-succ-ℕ : ℕ → ℚ
 reciprocal-rational-succ-ℕ n =
-  reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n)
+  reciprocal-rational-ℕ⁺ (succ-ℕ n , λ ())
 ```
 
 ### Reciprocals of positive integers

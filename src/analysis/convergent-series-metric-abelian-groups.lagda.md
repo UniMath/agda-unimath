@@ -122,7 +122,7 @@ module _
       ( has-limit-partial-sum-convergent-series-Metric-Ab)
 ```
 
-### A series converges if and only if it converges after dropping a finite number of terms
+### A series converges if it converges after dropping a finite number of terms
 
 ```agda
 module _
@@ -132,10 +132,10 @@ module _
   (k : ℕ)
   where
 
-  is-convergent-is-convergent-drop-series-ℝ :
+  is-convergent-is-convergent-drop-series-Metric-Ab :
     is-convergent-series-Metric-Ab (drop-series-Metric-Ab k σ) →
     is-convergent-series-Metric-Ab σ
-  is-convergent-is-convergent-drop-series-ℝ (lim-drop , is-lim-drop) =
+  is-convergent-is-convergent-drop-series-Metric-Ab (lim-drop , is-lim-drop) =
     ( add-Metric-Ab G (partial-sum-series-Metric-Ab σ k) lim-drop ,
       map-trunc-Prop
         ( λ (μ , is-mod-μ) →
