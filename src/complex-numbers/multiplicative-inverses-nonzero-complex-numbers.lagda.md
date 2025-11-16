@@ -22,6 +22,14 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
+open import complex-numbers.complex-numbers
+open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.magnitude-complex-numbers
+open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.nonzero-complex-numbers
+open import complex-numbers.similarity-complex-numbers
+
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -35,6 +43,9 @@ open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>

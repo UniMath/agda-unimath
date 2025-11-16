@@ -106,7 +106,7 @@ positive-squared-magnitude-nonzero-ℂ (z , z≠0) =
 ```agda
 abstract
   is-nonzero-is-positive-magnitude-ℂ :
-    {l : Level} (z : ℂ l) → is-positive-ℝ ∥ z ∥ℂ → is-nonzero-ℂ z
+    {l : Level} (z : ℂ l) → is-positive-ℝ (magnitude-ℂ z) → is-nonzero-ℂ z
   is-nonzero-is-positive-magnitude-ℂ z 0<|z| =
     is-nonzero-is-positive-squared-magnitude-ℂ
       ( z)
@@ -115,7 +115,7 @@ abstract
         ( 0<|z|))
 
   is-positive-magnitude-is-nonzero-ℂ :
-    {l : Level} (z : ℂ l) → is-nonzero-ℂ z → is-positive-ℝ ∥ z ∥ℂ
+    {l : Level} (z : ℂ l) → is-nonzero-ℂ z → is-positive-ℝ (magnitude-ℂ z)
   is-positive-magnitude-is-nonzero-ℂ z z≠0 =
     is-positive-sqrt-is-positive-ℝ⁰⁺
       ( nonnegative-squared-magnitude-ℂ z)

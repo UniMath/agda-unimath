@@ -15,6 +15,9 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -22,6 +25,7 @@ open import real-numbers.multiplication-negative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 ```
 
