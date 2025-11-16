@@ -93,3 +93,12 @@ real-hilbert-space-ℝ l =
       ( eq-metric-space-real-inner-product-space-ℝ l)
       ( is-complete-metric-space-ℝ l))
 ```
+
+## See also
+
+- [Real Banach spaces](linear-algebra.real-banach-spaces.md)
+
+## External links
+
+- [Hilbert space](https://en.wikipedia.org/wiki/Hilbert_space) on Wikipedia
+- [Hilbert space](https://ncatlab.org/nlab/show/Hilbert+space) on $n$Lab
