@@ -42,6 +42,13 @@ open import foundation.negated-equality
 There is no [rational number](elementary-number-theory.rational-numbers.md)
 whose [square](elementary-number-theory.squares-rational-numbers.md) is two.
 
+The irrationality of the square root of two is the
+[1st](literature.100-theorems.md#1) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
+This file proves that two is not the square of any rational number.
+
 ## Proof
 
 ```agda
@@ -120,3 +127,7 @@ abstract opaque
                   ( is-pos-or-neg-abs-ℤ p) ,
                 ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q)))))
 ```
+
+## See also
+
+- [The square root of 2 as a real number is not a rational real number](real-numbers.irrationality-square-root-of-two.md)

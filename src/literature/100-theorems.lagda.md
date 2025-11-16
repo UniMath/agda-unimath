@@ -11,6 +11,17 @@ module literature.100-theorems where
 
 ## The list
 
+### 1. The irrationality of the square root of 2 {#1}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.irrationality-square-root-of-two using
+  ( neq-two-square-ℚ)
+open import real-numbers.irrationality-square-root-of-two using
+  ( irrational-sqrt-two-ℝ)
+```
+
 ### 3. The denumerability of the rational numbers {#3}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)

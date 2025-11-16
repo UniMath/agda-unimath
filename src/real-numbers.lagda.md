@@ -38,6 +38,7 @@ open import real-numbers.infima-and-suprema-families-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
+open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-difference-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
