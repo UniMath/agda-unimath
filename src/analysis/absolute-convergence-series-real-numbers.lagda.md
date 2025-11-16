@@ -71,3 +71,8 @@ module _
           ( term-series-ℝ σ))
         ( H))
 ```
+
+## External links
+
+- [Absolute convergence](https://en.wikipedia.org/wiki/Absolute_convergence) on
+  Wikipedia
