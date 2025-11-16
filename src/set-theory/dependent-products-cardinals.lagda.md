@@ -48,8 +48,8 @@ open import set-theory.cardinals
 ## Idea
 
 Given a family of cardinals $κ : I → \mathrm{Cardinal}$ over a
-[cardinality-projective set](set-theory.cardinality-projective-sets.md) $I$,
-then we may define the {{#concept "dependent product cardinal" Agda=Π-Cardinal}}
+[cardinality-inductive set](set-theory.cardinality-inductive-sets.md) $I$, then
+we may define the {{#concept "dependent product cardinal" Agda=Π-Cardinal}}
 $Π_{i∈I}κᵢ$, as the cardinality of the
 [dependent product](foundation.dependent-function-types.md) of any family of
 representing sets $Kᵢ$.
@@ -59,31 +59,27 @@ representing sets $Kᵢ$.
 ```agda
 module _
   {l1 l2 : Level} (X : Cardinality-Inductive-Set l1 l2)
+  (let set-X = set-Cardinality-Inductive-Set X)
   where
 
   Π-Cardinal :
-    (type-Cardinality-Inductive-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+    (type-Set set-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
   Π-Cardinal Y =
-    map-trunc-Set
-      ( Π-Set (set-Cardinality-Inductive-Set X))
-      ( unit-Cardinality-Inductive-Set X Y)
+    map-trunc-Set (Π-Set set-X) (unit-Cardinality-Inductive-Set X Y)
 
   compute-Π-Cardinal :
     (K : type-Cardinality-Inductive-Set X → Set l2) →
-    Π-Cardinal (cardinality ∘ K) ＝
-    cardinality (Π-Set (set-Cardinality-Inductive-Set X) K)
+    Π-Cardinal (cardinality ∘ K) ＝ cardinality (Π-Set set-X K)
   compute-Π-Cardinal K =
     equational-reasoning
       map-trunc-Set
-        ( Π-Set (set-Cardinality-Inductive-Set X))
+        ( Π-Set set-X)
         ( unit-Cardinality-Inductive-Set X (cardinality ∘ K))
-      ＝ map-trunc-Set (Π-Set (pr1 X)) (unit-trunc-Set K)
+      ＝ map-trunc-Set (Π-Set set-X) (unit-trunc-Set K)
         by
           ap
-            ( map-trunc-Set (Π-Set (set-Cardinality-Inductive-Set X)))
+            ( map-trunc-Set (Π-Set set-X))
             ( compute-unit-Cardinality-Inductive-Set X K)
-      ＝ cardinality
-          ( Π-Set (set-Cardinality-Inductive-Set X) K)
-        by
-          naturality-unit-trunc-Set (Π-Set (set-Cardinality-Inductive-Set X)) K
+      ＝ cardinality (Π-Set set-X K)
+        by naturality-unit-trunc-Set (Π-Set set-X) K
 ```

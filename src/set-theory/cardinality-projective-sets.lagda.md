@@ -8,13 +8,12 @@ module set-theory.cardinality-projective-sets where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.cartesian-product-types
-open import foundation.projective-types
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.homotopies
@@ -22,6 +21,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.mere-equivalences
 open import foundation.postcomposition-functions
+open import foundation.projective-types
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.set-truncations
@@ -104,12 +104,10 @@ module _
   is-cardinality-preprojective-Cardinality-Projective-Set =
     pr1 is-cardinality-projective-Cardinality-Projective-Set
 
-
   is-projective-Cardinality-Projective-Set :
     is-projective-Level' l2 type-Cardinality-Projective-Set
   is-projective-Cardinality-Projective-Set =
     pr2 is-cardinality-projective-Cardinality-Projective-Set
-
 
   is-set-equivalence-postcomp-cardinality-type-Cardinality-Projective-Set :
     is-truncation-equivalence zero-𝕋
@@ -281,7 +279,8 @@ module _
     is-truncation-equivalence zero-𝕋
       ( postcomp (type-Set I) (cardinality {l2})) →
     is-cardinality-preprojective-set-Level l2 I
-  is-cardinality-preprojective-set-is-set-equivalence-postcomp-cardinality-Set H =
+  is-cardinality-preprojective-set-is-set-equivalence-postcomp-cardinality-Set
+    H =
     is-cardinality-preprojective-set-is-is-equiv-map-distributive-trunc-set I
     ( is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
       ( I)
