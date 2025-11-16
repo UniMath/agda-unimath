@@ -56,9 +56,6 @@ nonnegative-magnitude-ℂ z = sqrt-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ 
 
 magnitude-ℂ : {l : Level} → ℂ l → ℝ l
 magnitude-ℂ z = real-ℝ⁰⁺ (nonnegative-magnitude-ℂ z)
-
-∥_∥ℂ : {l : Level} → ℂ l → ℝ l
-∥ z ∥ℂ = magnitude-ℂ z
 ```
 
 ## Properties
