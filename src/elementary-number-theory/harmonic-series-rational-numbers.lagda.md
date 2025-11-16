@@ -57,7 +57,7 @@ open import univalent-combinatorics.standard-finite-types
 
 The
 {{#concept "harmonic series" WDID=Q464100 WD="harmonic series" Agda=harmonic-series-ℚ}}
-is the sum $$Σ_{n=0}^{∞} \frac{1}{n}$$.
+is the sum $$∑_{n=0}^{∞} \frac{1}{n}.$$
 
 ## Definition
 
@@ -68,7 +68,7 @@ harmonic-series-ℚ = series-terms-ℚ reciprocal-rational-succ-ℕ
 
 ## Properties
 
-### For any `k`, the `2ᵏ`th partial sum of the harmonic series is at least `1 + k/2`
+### For any `k`, the `2ᵏ`'th partial sum of the harmonic series is at least `1 + k/2`
 
 ```agda
 abstract

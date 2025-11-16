@@ -67,6 +67,10 @@ module _
 apart-le-ℝ :
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y → apart-ℝ x y
 apart-le-ℝ = inl-disjunction
+
+apart-le-ℝ' :
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ y x → apart-ℝ x y
+apart-le-ℝ' = inr-disjunction
 ```
 
 ## Properties
