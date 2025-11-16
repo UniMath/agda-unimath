@@ -64,7 +64,7 @@ abstract
   is-relatively-prime-is-relatively-prime-abs-ℤ {a} {b} H = ap int-ℕ H
 ```
 
-### For two relatively prime integers `x` and `y` and any integer `d`, `d` divides `x` and `y` if and only if `d` is a unit
+### For two relatively prime integers `x` and `y` and any integer `d`, if `d` divides `x` and `y`, `d` is a unit
 
 ```agda
 abstract
