@@ -166,7 +166,7 @@ module _
       (Y : type-Cardinality-Projective-Set → Set l2) →
       type-Set (P (cardinality ∘ Y)))
     (Y : type-Cardinality-Projective-Set → Set l2) →
-     ind-Cardinality-Projective-Set P T (cardinality ∘ Y) ＝ T Y
+    ind-Cardinality-Projective-Set P T (cardinality ∘ Y) ＝ T Y
   compute-ind-Cardinality-Projective-Set =
     compute-ind-is-connected-map
       ( is-cardinality-preprojective-Cardinality-Projective-Set)
