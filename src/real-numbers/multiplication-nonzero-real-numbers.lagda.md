@@ -9,28 +9,29 @@ module real-numbers.multiplication-nonzero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.invertible-elements-commutative-rings
+
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.function-types
-open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.large-ring-of-real-numbers
 open import foundation.functoriality-cartesian-product-types
-open import foundation.universe-levels
-open import commutative-algebra.invertible-elements-commutative-rings
 open import foundation.transport-along-identifications
+open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-negative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
-open import real-numbers.similarity-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
