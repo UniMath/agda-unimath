@@ -1,7 +1,7 @@
-# Cardinality-inductive sets
+# Cardinality-recursive sets
 
 ```agda
-module set-theory.cardinality-inductive-sets where
+module set-theory.cardinality-recursive-sets where
 ```
 
 <details><summary>Imports</summary>
@@ -34,7 +34,7 @@ open import set-theory.cardinals
 
 For every type $X$ there is a map $║X → Set║₀ → (X → \mathrm{Cardinal})$. We
 call [sets](foundation-core.sets.md) $X$ for which this map is a retract
-{{#concept "cardinality-inductive" Disamibguation="sets" Agda=Cardinality-Inductive-Set}}.
+{{#concept "cardinality-recursive" Disamibguation="sets" Agda=Cardinality-Recursive-Set}}.
 Over such sets we may form
 [dependent sum](set-theory.dependent-sums-cardinals.md) and
 [dependent product](set-theory.dependent-products-cardinals.md)
@@ -63,92 +63,92 @@ module _
   {l1 : Level} (l2 : Level) (X : Set l1)
   where
 
-  is-cardinality-inductive-set-Level : UU (l1 ⊔ lsuc l2)
-  is-cardinality-inductive-set-Level =
+  is-cardinality-recursive-set-Level : UU (l1 ⊔ lsuc l2)
+  is-cardinality-recursive-set-Level =
     retraction
       ( map-distributive-trunc-function-type zero-𝕋 (type-Set X) (Set l2))
 ```
 
-### The universe of cardinality-inductive sets at a universe level
+### The universe of cardinality-recursive sets at a universe level
 
 ```agda
-Cardinality-Inductive-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Cardinality-Inductive-Set l1 l2 =
-  Σ (Set l1) (is-cardinality-inductive-set-Level l2)
+Cardinality-Recursive-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Cardinality-Recursive-Set l1 l2 =
+  Σ (Set l1) (is-cardinality-recursive-set-Level l2)
 
 module _
-  {l1 l2 : Level} (X : Cardinality-Inductive-Set l1 l2)
+  {l1 l2 : Level} (X : Cardinality-Recursive-Set l1 l2)
   where
 
-  set-Cardinality-Inductive-Set : Set l1
-  set-Cardinality-Inductive-Set = pr1 X
+  set-Cardinality-Recursive-Set : Set l1
+  set-Cardinality-Recursive-Set = pr1 X
 
-  type-Cardinality-Inductive-Set : UU l1
-  type-Cardinality-Inductive-Set = type-Set set-Cardinality-Inductive-Set
+  type-Cardinality-Recursive-Set : UU l1
+  type-Cardinality-Recursive-Set = type-Set set-Cardinality-Recursive-Set
 
-  is-set-type-Cardinality-Inductive-Set :
-    is-set type-Cardinality-Inductive-Set
-  is-set-type-Cardinality-Inductive-Set =
-    is-set-type-Set set-Cardinality-Inductive-Set
+  is-set-type-Cardinality-Recursive-Set :
+    is-set type-Cardinality-Recursive-Set
+  is-set-type-Cardinality-Recursive-Set =
+    is-set-type-Set set-Cardinality-Recursive-Set
 
-  is-cardinality-inductive-Cardinality-Inductive-Set :
-    is-cardinality-inductive-set-Level l2 set-Cardinality-Inductive-Set
-  is-cardinality-inductive-Cardinality-Inductive-Set = pr2 X
+  is-cardinality-recursive-Cardinality-Recursive-Set :
+    is-cardinality-recursive-set-Level l2 set-Cardinality-Recursive-Set
+  is-cardinality-recursive-Cardinality-Recursive-Set = pr2 X
 
-  unit-Cardinality-Inductive-Set :
-    ( type-Cardinality-Inductive-Set → Cardinal l2) →
-    ║ (type-Cardinality-Inductive-Set → Set l2) ║₀
-  unit-Cardinality-Inductive-Set =
+  unit-Cardinality-Recursive-Set :
+    ( type-Cardinality-Recursive-Set → Cardinal l2) →
+    ║ (type-Cardinality-Recursive-Set → Set l2) ║₀
+  unit-Cardinality-Recursive-Set =
     map-retraction
       ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Inductive-Set)
+        ( type-Cardinality-Recursive-Set)
         ( Set l2))
-      ( is-cardinality-inductive-Cardinality-Inductive-Set)
+      ( is-cardinality-recursive-Cardinality-Recursive-Set)
 
-  is-retraction-unit-Cardinality-Inductive-Set :
+  is-retraction-unit-Cardinality-Recursive-Set :
     is-retraction
       ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Inductive-Set)
+        ( type-Cardinality-Recursive-Set)
         ( Set l2))
-      ( unit-Cardinality-Inductive-Set)
-  is-retraction-unit-Cardinality-Inductive-Set =
+      ( unit-Cardinality-Recursive-Set)
+  is-retraction-unit-Cardinality-Recursive-Set =
     is-retraction-map-retraction
       ( map-distributive-trunc-function-type zero-𝕋
-        ( type-Cardinality-Inductive-Set)
+        ( type-Cardinality-Recursive-Set)
         ( Set l2))
-      ( is-cardinality-inductive-Cardinality-Inductive-Set)
+      ( is-cardinality-recursive-Cardinality-Recursive-Set)
 
-  retract-Cardinality-Inductive-Set :
-    ║ (type-Cardinality-Inductive-Set → Set l2) ║₀ retract-of
-    ( type-Cardinality-Inductive-Set → Cardinal l2)
-  retract-Cardinality-Inductive-Set =
+  retract-Cardinality-Recursive-Set :
+    ║ (type-Cardinality-Recursive-Set → Set l2) ║₀ retract-of
+    ( type-Cardinality-Recursive-Set → Cardinal l2)
+  retract-Cardinality-Recursive-Set =
     ( ( map-distributive-trunc-function-type
         ( zero-𝕋)
-        ( type-Cardinality-Inductive-Set)
+        ( type-Cardinality-Recursive-Set)
         ( Set l2)) ,
-      ( is-cardinality-inductive-Cardinality-Inductive-Set))
+      ( is-cardinality-recursive-Cardinality-Recursive-Set))
 
-  compute-unit-Cardinality-Inductive-Set :
-    (K : type-Cardinality-Inductive-Set → Set l2) →
-    unit-Cardinality-Inductive-Set (cardinality ∘ K) ＝ unit-trunc-Set K
-  compute-unit-Cardinality-Inductive-Set K =
+  compute-unit-Cardinality-Recursive-Set :
+    (K : type-Cardinality-Recursive-Set → Set l2) →
+    unit-Cardinality-Recursive-Set (cardinality ∘ K) ＝ unit-trunc-Set K
+  compute-unit-Cardinality-Recursive-Set K =
     equational-reasoning
-      unit-Cardinality-Inductive-Set (cardinality ∘ K)
-      ＝ unit-Cardinality-Inductive-Set
+      unit-Cardinality-Recursive-Set (cardinality ∘ K)
+      ＝ unit-Cardinality-Recursive-Set
           ( map-distributive-trunc-function-type zero-𝕋
-            ( type-Cardinality-Inductive-Set)
+            ( type-Cardinality-Recursive-Set)
             ( Set l2)
             ( unit-trunc K))
         by
           ap
-            ( unit-Cardinality-Inductive-Set)
+            ( unit-Cardinality-Recursive-Set)
             ( inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 K)))
       ＝ unit-trunc K
-        by is-retraction-unit-Cardinality-Inductive-Set (unit-trunc K)
+        by is-retraction-unit-Cardinality-Recursive-Set (unit-trunc K)
 ```
 
 ## See also
 
 - In
   [Distributivity of set truncation over finite products](univalent-combinatorics.distributivity-of-set-truncation-over-finite-products.md)
-  it is demonstrated that finite types are cardinality-inductive.
+  it is demonstrated that finite types are cardinality-recursive.

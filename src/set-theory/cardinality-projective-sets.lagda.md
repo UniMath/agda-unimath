@@ -34,6 +34,7 @@ open import foundation.truncations
 open import foundation.universe-levels
 
 open import set-theory.cardinals
+open import set-theory.cardinality-recursive-sets
 ```
 
 </details>
@@ -117,6 +118,27 @@ module _
       ( postcomp type-Cardinality-Projective-Set cardinality)
       ( is-cardinality-preprojective-Cardinality-Projective-Set)
 
+  ind-Cardinality-Projective-Set :
+    {l3 : Level}
+    (P : (type-Cardinality-Projective-Set → Cardinal l2) → Set l3) →
+    ( (Y : type-Cardinality-Projective-Set → Set l2) →
+      type-Set (P (cardinality ∘ Y))) →
+    (X : type-Cardinality-Projective-Set → Cardinal l2) → type-Set (P X)
+  ind-Cardinality-Projective-Set =
+    ind-is-connected-map is-cardinality-preprojective-Cardinality-Projective-Set
+
+  compute-ind-Cardinality-Projective-Set :
+   {l3 : Level}
+     (P : (type-Cardinality-Projective-Set → Cardinal l2) → Set l3)
+     (T :
+        (Y : type-Cardinality-Projective-Set → Set l2) →
+        type-Set (P (cardinality ∘ Y)))
+     (Y : type-Cardinality-Projective-Set → Set l2) →
+     ind-Cardinality-Projective-Set P T (cardinality ∘ Y) ＝ T Y
+  compute-ind-Cardinality-Projective-Set =
+    compute-ind-is-connected-map
+      ( is-cardinality-preprojective-Cardinality-Projective-Set)
+
   constr-Cardinality-Projective-Set :
     {l : Level} →
     ((type-Cardinality-Projective-Set → Set l2) → Cardinal l) →
@@ -130,7 +152,7 @@ module _
   compute-constr-Cardinality-Projective-Set :
     {l : Level} →
     (T : (type-Cardinality-Projective-Set → Set l2) → Cardinal l)
-    (Y : pr1 set-Cardinality-Projective-Set → Set l2) →
+    (Y : type-Cardinality-Projective-Set → Set l2) →
     constr-Cardinality-Projective-Set T (cardinality ∘ Y) ＝ T Y
   compute-constr-Cardinality-Projective-Set {l} =
     compute-rec-is-truncation-equivalence
@@ -227,8 +249,11 @@ is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set (I , (H , _)) =
   is-equiv-map-distributive-trunc-set-is-cardinality-preprojective-set I H
 ```
 
+### Cardinality-projective sets are cardinality-recursive
+
 We call the inverse map to the distributive law the "unit map" of the
-cardinality-projective set.
+cardinality-projective set, and this map gives an induction principle for
+constructing cardinals over $I$.
 
 ```agda
 module _
@@ -236,36 +261,38 @@ module _
   (let I' = type-Cardinality-Projective-Set I)
   where
 
+  is-cardinality-recursive-Cardinality-Projective-Set :
+    is-cardinality-recursive-set-Level l2 (set-Cardinality-Projective-Set I)
+  is-cardinality-recursive-Cardinality-Projective-Set =
+    retraction-is-equiv
+      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+
+  cardinality-recursive-set-Cardinality-Projective-Set :
+    Cardinality-Recursive-Set l1 l2
+  cardinality-recursive-set-Cardinality-Projective-Set =
+    ( set-Cardinality-Projective-Set I ,
+      is-cardinality-recursive-Cardinality-Projective-Set)
+
   unit-Cardinality-Projective-Set :
     (I' → Cardinal l2) → ║ (I' → Set l2) ║₀
   unit-Cardinality-Projective-Set =
-    map-inv-is-equiv
-      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+    unit-Cardinality-Recursive-Set
+      ( cardinality-recursive-set-Cardinality-Projective-Set)
 
   is-retraction-unit-Cardinality-Projective-Set :
     is-retraction
       ( map-distributive-trunc-function-type zero-𝕋 I' (Set l2))
       ( unit-Cardinality-Projective-Set)
   is-retraction-unit-Cardinality-Projective-Set =
-    is-retraction-map-inv-is-equiv
-      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+    is-retraction-unit-Cardinality-Recursive-Set
+      ( cardinality-recursive-set-Cardinality-Projective-Set)
 
   compute-unit-Cardinality-Projective-Set :
     (K : I' → Set l2) →
     unit-Cardinality-Projective-Set (cardinality ∘ K) ＝ unit-trunc-Set K
-  compute-unit-Cardinality-Projective-Set K =
-    equational-reasoning
-      unit-Cardinality-Projective-Set (cardinality ∘ K)
-      ＝ unit-Cardinality-Projective-Set
-        ( map-distributive-trunc-function-type zero-𝕋 I'
-          ( Set l2)
-          ( unit-trunc K))
-        by
-          ap
-            ( unit-Cardinality-Projective-Set)
-            ( inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 K)))
-      ＝ unit-trunc K
-        by is-retraction-unit-Cardinality-Projective-Set (unit-trunc K)
+  compute-unit-Cardinality-Projective-Set =
+    compute-unit-Cardinality-Recursive-Set
+      ( cardinality-recursive-set-Cardinality-Projective-Set)
 ```
 
 ### A set is cardinality-preprojective if the postcomposition map is a set-truncation equivalence
