@@ -64,3 +64,7 @@ real-banach-space-ℝ l =
       ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
       ( is-complete-metric-space-ℝ l))
 ```
+
+## External links
+
+- [Banach space](https://en.wikipedia.org/wiki/Banach_space) on Wikipedia
