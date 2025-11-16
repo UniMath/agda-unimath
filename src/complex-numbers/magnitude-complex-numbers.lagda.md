@@ -20,11 +20,6 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import real-numbers.absolute-value-real-numbers
-
-open import foundation.action-on-identifications-functions
-open import foundation.identity-types
-open import foundation.universe-levels
-
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
