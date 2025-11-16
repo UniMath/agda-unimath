@@ -14,16 +14,23 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.function-types
+open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import foundation.functoriality-cartesian-product-types
 open import foundation.universe-levels
+open import commutative-algebra.invertible-elements-commutative-rings
+open import foundation.transport-along-identifications
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.multiplication-negative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.nonzero-real-numbers
+open import real-numbers.positive-real-numbers
 ```
 
 </details>
@@ -102,4 +109,43 @@ module _
               ( map-product inl-disjunction inl-disjunction)
               ( map-product inr-disjunction inr-disjunction)
               ( same-sign-is-positive-mul-ℝ x y 0<xy))
+```
+
+### If a real number has a multiplicative inverse, it is nonzero
+
+```agda
+abstract
+  is-nonzero-has-right-inverse-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
+    is-nonzero-ℝ x
+  is-nonzero-has-right-inverse-mul-ℝ x y xy=1 =
+    pr1
+      ( is-nonzero-factors-is-nonzero-mul-ℝ
+        ( x)
+        ( y)
+        ( is-nonzero-is-positive-ℝ
+          ( is-positive-sim-ℝ
+            ( symmetric-sim-ℝ xy=1)
+            ( is-positive-one-ℝ))))
+
+  is-nonzero-has-left-inverse-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x *ℝ y) one-ℝ →
+    is-nonzero-ℝ y
+  is-nonzero-has-left-inverse-mul-ℝ x y xy=1 =
+    is-nonzero-has-right-inverse-mul-ℝ y x
+      ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ x y) xy=1)
+
+  is-nonzero-is-invertible-ℝ :
+    {l : Level} (x : ℝ l) →
+    is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
+    is-nonzero-ℝ x
+  is-nonzero-is-invertible-ℝ {l} x (y , xy=1 , _) =
+    is-nonzero-has-right-inverse-mul-ℝ x y
+      ( inv-tr
+        ( λ z → sim-ℝ z one-ℝ)
+        ( xy=1)
+        ( symmetric-sim-ℝ
+          { x = one-ℝ}
+          { y = raise-ℝ l one-ℝ}
+          ( sim-raise-ℝ l one-ℝ)))
 ```

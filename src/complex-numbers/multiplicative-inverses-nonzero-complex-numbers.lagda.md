@@ -111,7 +111,7 @@ abstract
     is-nonzero-is-positive-magnitude-ℂ
       ( z)
       ( elim-disjunction
-        ( is-positive-prop-ℝ ∥ z ∥ℂ)
+        ( is-positive-prop-ℝ (magnitude-ℂ z))
         ( λ |z|<0 →
           ex-falso
             ( is-not-negative-and-nonnegative-ℝ
@@ -119,15 +119,15 @@ abstract
         ( id)
         ( pr1
           ( is-nonzero-factors-is-nonzero-mul-ℝ
-            ( ∥ z ∥ℂ)
-            ( ∥ w ∥ℂ)
+            ( (magnitude-ℂ z))
+            ( (magnitude-ℂ w))
             ( is-nonzero-sim-ℝ
               ( symmetric-sim-ℝ
                 ( similarity-reasoning-ℝ
-                  ∥ z ∥ℂ *ℝ ∥ w ∥ℂ
-                  ~ℝ ∥ z *ℂ w ∥ℂ
+                  (magnitude-ℂ z) *ℝ (magnitude-ℂ w)
+                  ~ℝ magnitude-ℂ (z *ℂ w)
                     by sim-eq-ℝ (inv (distributive-magnitude-mul-ℂ z w))
-                  ~ℝ ∥ one-ℂ ∥ℂ
+                  ~ℝ magnitude-ℂ one-ℂ
                     by preserves-sim-magnitude-ℂ zw=1
                   ~ℝ one-ℝ
                     by sim-eq-ℝ magnitude-one-ℂ))
