@@ -253,3 +253,14 @@ abstract
     eq-isometric-eq-Metric-Space _ _
       ( refl , λ d x y → inv-iff (neighborhood-iff-leq-dist-ℝ d x y))
 ```
+
+## See also
+
+- [Real Banach spaces](linear-algebra.real-banach-spaces.md), normed real vector
+  spaces for which the induced metric space is
+  [complete](metric-spaces.complete-metric-spaces.md)
+
+## External links
+
+- [Normed vector space](https://en.wikipedia.org/wiki/Normed_vector_space) on
+  Wikipedia

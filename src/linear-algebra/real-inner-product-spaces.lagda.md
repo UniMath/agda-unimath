@@ -632,3 +632,10 @@ real-inner-product-space-ℝ l =
     bilinear-form-mul-ℝ l ,
     is-inner-product-bilinear-form-mul-ℝ l)
 ```
+
+## External links
+
+- [Inner product space](https://en.wikipedia.org/wiki/Inner_product_space) on
+  Wikipedia
+- [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
+  $n$Lab
