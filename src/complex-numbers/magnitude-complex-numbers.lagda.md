@@ -51,9 +51,6 @@ nonnegative-squared-magnitude-ℂ (a +iℂ b) =
 squared-magnitude-ℂ : {l : Level} → ℂ l → ℝ l
 squared-magnitude-ℂ z = real-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
-∥_∥²ℂ : {l : Level} → ℂ l → ℝ l
-∥ z ∥²ℂ = squared-magnitude-ℂ z
-
 nonnegative-magnitude-ℂ : {l : Level} → ℂ l → ℝ⁰⁺ l
 nonnegative-magnitude-ℂ z = sqrt-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
