@@ -33,8 +33,8 @@ open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.universe-levels
 
-open import set-theory.cardinals
 open import set-theory.cardinality-recursive-sets
+open import set-theory.cardinals
 ```
 
 </details>
@@ -128,12 +128,12 @@ module _
     ind-is-connected-map is-cardinality-preprojective-Cardinality-Projective-Set
 
   compute-ind-Cardinality-Projective-Set :
-   {l3 : Level}
-     (P : (type-Cardinality-Projective-Set → Cardinal l2) → Set l3)
-     (T :
-        (Y : type-Cardinality-Projective-Set → Set l2) →
-        type-Set (P (cardinality ∘ Y)))
-     (Y : type-Cardinality-Projective-Set → Set l2) →
+    {l3 : Level}
+    (P : (type-Cardinality-Projective-Set → Cardinal l2) → Set l3)
+    (T :
+      (Y : type-Cardinality-Projective-Set → Set l2) →
+      type-Set (P (cardinality ∘ Y)))
+    (Y : type-Cardinality-Projective-Set → Set l2) →
      ind-Cardinality-Projective-Set P T (cardinality ∘ Y) ＝ T Y
   compute-ind-Cardinality-Projective-Set =
     compute-ind-is-connected-map

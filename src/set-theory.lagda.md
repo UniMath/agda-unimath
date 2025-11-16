@@ -53,8 +53,8 @@ open import set-theory.baire-space public
 open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
-open import set-theory.cardinality-recursive-sets public
 open import set-theory.cardinality-projective-sets public
+open import set-theory.cardinality-recursive-sets public
 open import set-theory.cardinals public
 open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
