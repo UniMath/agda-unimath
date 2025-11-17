@@ -23,9 +23,6 @@ open import linear-algebra.bilinear-forms-real-vector-spaces
 open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
-open import real-numbers.absolute-value-real-numbers
-open import linear-algebra.real-vector-spaces
-
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
@@ -647,7 +644,3 @@ real-inner-product-space-ℝ l =
   Wikipedia
 - [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
   $n$Lab
-
-## References
-
-{{#bibliography}}
