@@ -25,6 +25,7 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.squares-integers
 open import elementary-number-theory.squares-natural-numbers
 open import elementary-number-theory.squares-rational-numbers
+open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -106,8 +107,8 @@ abstract opaque
       (l , l2=qℕ) = is-even-is-even-square-ℕ qℕ (square-ℕ k , k²2=qℕ²)
     in
       rec-coproduct
-        ( 2≠1)
-        ( 2≠-1)
+        ( neq-le-ℤ' (int-ℕ 2) one-ℤ _)
+        ( neq-le-ℤ' (int-ℕ 2) neg-one-ℤ _)
         ( is-one-or-neg-one-is-unit-ℤ
           ( int-ℕ 2)
           ( is-unit-div-relatively-prime-ℤ
@@ -126,11 +127,6 @@ abstract opaque
                     ( inv p=-|p|)))
                 ( is-pos-or-neg-abs-ℤ p) ,
               ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q))))
-    where
-      2≠1 : int-ℕ 2 ≠ one-ℤ
-      2≠1 ()
-      2≠-1 : int-ℕ 2 ≠ neg-one-ℤ
-      2≠-1 ()
 ```
 
 ## See also
