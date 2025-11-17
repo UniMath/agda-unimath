@@ -46,8 +46,6 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.similarity-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
