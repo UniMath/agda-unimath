@@ -1,7 +1,7 @@
 # Strict complemented inequality on cardinals
 
 ```agda
-module set-theory.strict-complemented-inequality-cardinalities where
+module set-theory.strict-complemented-inequality-cardinals where
 ```
 
 <details><summary>Imports</summary>
@@ -99,17 +99,16 @@ module _
 
   le-complemented-prop-cardinality : Set l1 → Set l2 → Prop (l1 ⊔ l2)
   le-complemented-prop-cardinality X Y =
-    ( leq-complemented-prop-cardinality X Y) ∧
-    ( strictly-complemented-bounded-prop-cardinality X Y)
+    le-complemented-prop-Cardinal (cardinality X) (cardinality Y)
 
-  le-complemented-cardinality' : Set l1 → Set l2 → UU (l1 ⊔ l2)
-  le-complemented-cardinality' X Y =
-    type-Prop (le-complemented-prop-cardinality' X Y)
+  le-complemented-cardinality : Set l1 → Set l2 → UU (l1 ⊔ l2)
+  le-complemented-cardinality X Y =
+    type-Prop (le-complemented-prop-cardinality X Y)
 
-  is-prop-le-complemented-cardinality' :
-    (X : Set l1) (Y : Set l2) → is-prop (le-complemented-cardinality' X Y)
-  is-prop-le-complemented-cardinality' X Y =
-    is-prop-type-Prop (le-complemented-prop-cardinality' X Y)
+  is-prop-le-complemented-cardinality :
+    (X : Set l1) (Y : Set l2) → is-prop (le-complemented-cardinality X Y)
+  is-prop-le-complemented-cardinality X Y =
+    is-prop-type-Prop (le-complemented-prop-cardinality X Y)
 ```
 
 ### Inequality on cardinals is reflexive

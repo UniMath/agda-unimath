@@ -171,6 +171,21 @@ module _
     compute-ind-is-connected-map
       ( is-cardinality-preprojective-Cardinality-Projective-Set)
 
+  apply-twice-ind-Cardinality-Projective-Set :
+    {l3 : Level}
+    (P : (X Y : type-Cardinality-Projective-Set → Cardinal l2) → Set l3) →
+    ( (X Y : type-Cardinality-Projective-Set → Set l2) →
+      type-Set (P (cardinality ∘ X) (cardinality ∘ Y))) →
+    (X Y : type-Cardinality-Projective-Set → Cardinal l2) → type-Set (P X Y)
+  apply-twice-ind-Cardinality-Projective-Set P h X =
+    ind-Cardinality-Projective-Set
+      ( P X)
+      ( λ Y →
+        ind-Cardinality-Projective-Set
+          ( λ X → P X (cardinality ∘ Y))
+          ( λ X → h X Y)
+          ( X))
+
   constr-Cardinality-Projective-Set :
     {l : Level} →
     ((type-Cardinality-Projective-Set → Set l2) → Cardinal l) →

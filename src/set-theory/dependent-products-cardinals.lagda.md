@@ -60,6 +60,15 @@ representing sets $Kᵢ$.
 
 ## Definitions
 
+```agda
+module _
+  {l1 l2 : Level} (X : Set l1)
+  where
+
+  cardinality-Π : (type-Set X → Set l2) → Cardinal (l1 ⊔ l2)
+  cardinality-Π Y = cardinality (Π-Set X Y)
+```
+
 ### Dependent products of cardinals over cardinality-recursive sets
 
 ```agda
