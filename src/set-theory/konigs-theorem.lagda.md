@@ -30,7 +30,7 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 ## Idea
 
-{{#concept "Kőnig's theorem" WD="König's theorem" WDID=Q1077462 Disambiguation="for cardinals" Agda=Kőnigs-Theorem}}
+{{#concept "Kőnig's theorem" WD="König's theorem" WDID=Q1077462 Disambiguation="for cardinals" Agda=Königs-Theorem}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
 and $B$ over $I$ such that $Aᵢ < Bᵢ$ for all $i$, we have that
 $$∑_{i:I}Aᵢ < ∏_{i:I}Bᵢ.$$
@@ -74,23 +74,23 @@ module _
   (is-projective-I : is-projective-Level' l2 (type-Set I))
   where
 
-  cardinality-Kőnigs-Theorem' :
+  cardinality-Königs-Theorem' :
     (A B : type-Set I → Set l2) →
     ((i : type-Set I) → le-indexed-cardinality' (A i) (B i)) →
     le-indexed-cardinality' (Σ-Set I A) (Π-Set I B)
-  cardinality-Kőnigs-Theorem' A B p =
+  cardinality-Königs-Theorem' A B p =
     ( is-projective-I (type-Set ∘ B) (pr1 ∘ p) ,
       is-nonsurjective-map-Σ-Π-is-projective-base' is-projective-I (pr2 ∘ p))
 
-  cardinality-Kőnigs-Theorem :
+  cardinality-Königs-Theorem :
     (A B : type-Set I → Set l2) →
     ((i : type-Set I) → le-indexed-cardinality (A i) (B i)) →
     le-indexed-cardinality (Σ-Set I A) (Π-Set I B)
-  cardinality-Kőnigs-Theorem A B p =
+  cardinality-Königs-Theorem A B p =
     unit-le-indexed-cardinality
       ( Σ-Set I A)
       ( Π-Set I B)
-      ( cardinality-Kőnigs-Theorem' A B
+      ( cardinality-Königs-Theorem' A B
         ( λ i → inv-unit-le-indexed-cardinality (A i) (B i) (p i)))
 
 module _
@@ -100,11 +100,11 @@ module _
   (let set-I = set-Cardinality-Projective-Set I)
   where
 
-  Kőnigs-Theorem :
+  Königs-Theorem :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → le-indexed-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
-  Kőnigs-Theorem =
+  Königs-Theorem =
     apply-twice-ind-Cardinality-Projective-Set I
       ( λ A B →
         set-Prop
@@ -115,7 +115,7 @@ module _
         binary-tr le-indexed-Cardinal
           ( inv (compute-Σ-Cardinal I A))
           ( inv (compute-Π-Cardinal I B))
-          ( cardinality-Kőnigs-Theorem
+          ( cardinality-Königs-Theorem
             ( set-I)
             ( is-projective-Cardinality-Projective-Set I)
             ( A)
@@ -125,8 +125,8 @@ module _
 
 ## Comments
 
-More generally, for every localization `L` there is an `L`-modal Kőnig's
-theorem.
+More generally, for every localization `L` contained in `Set` there is an
+`L`-modal Kőnig's theorem.
 
 ## External links
 
