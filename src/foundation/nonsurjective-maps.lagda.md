@@ -7,63 +7,33 @@ module foundation.nonsurjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.connected-maps
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-maps
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
 open import foundation.disjunction
 open import foundation.double-negation
-open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equality-cartesian-product-types
 open import foundation.existential-quantification
-open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.negation
-open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
-open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
-open import foundation.truncated-types
-open import foundation.univalence
-open import foundation.universal-property-family-of-fibers-of-maps
-open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.homotopies
-open import foundation-core.precomposition-dependent-functions
-open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.retracts-of-types
-open import foundation-core.sections
-open import foundation-core.sets
-open import foundation-core.subtypes
-open import foundation-core.torsorial-type-families
-open import foundation-core.truncated-maps
-open import foundation-core.truncation-levels
 
 open import logic.propositionally-decidable-maps
-
-open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
