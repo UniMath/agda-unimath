@@ -27,7 +27,7 @@ open import real-numbers.apartness-real-numbers
 ## Idea
 
 Two [complex numbers](complex-numbers.complex-numbers.md) are
-{{#concept "apart" Agda=apart-ℂ}} if their
+{{#concept "apart" Disambiguation="complex numbers" Agda=apart-ℂ}} if their
 [real](real-numbers.dedekind-real-numbers.md) parts are
 [apart](real-numbers.apartness-real-numbers.md) [or](foundation.disjunction.md)
 their imaginary parts are [apart].
@@ -41,7 +41,7 @@ module _
 
   apart-prop-ℂ : Prop (l1 ⊔ l2)
   apart-prop-ℂ =
-    apart-prop-ℝ (re-ℂ z) (re-ℂ w) ∨ apart-prop-ℝ (im-ℂ z) (im-ℂ w)
+    (apart-prop-ℝ (re-ℂ z) (re-ℂ w)) ∨ (apart-prop-ℝ (im-ℂ z) (im-ℂ w))
 
   apart-ℂ : UU (l1 ⊔ l2)
   apart-ℂ = type-Prop apart-prop-ℂ
