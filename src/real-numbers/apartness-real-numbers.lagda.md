@@ -81,38 +81,41 @@ apart-le-ℝ' = inr-disjunction
 ### Apartness is antireflexive
 
 ```agda
-antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
-antireflexive-apart-ℝ x =
-  elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
+abstract
+  antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
+  antireflexive-apart-ℝ x =
+    elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
 ```
 
 ### Apartness is symmetric
 
 ```agda
-symmetric-apart-ℝ :
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
-symmetric-apart-ℝ {x = x} {y = y} =
-  elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
+abstract
+  symmetric-apart-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
+  symmetric-apart-ℝ {x = x} {y = y} =
+    elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
 ```
 
 ### Apartness is cotransitive
 
 ```agda
-cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
-cotransitive-apart-ℝ x y z =
-  elim-disjunction
-    ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-    ( λ x<y →
-      map-disjunction
-        ( inl-disjunction)
-        ( inl-disjunction)
-        ( cotransitive-le-ℝ x y z x<y))
-    ( λ y<x →
-      elim-disjunction
-        ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-        ( inr-disjunction ∘ inr-disjunction)
-        ( inl-disjunction ∘ inr-disjunction)
-        ( cotransitive-le-ℝ y x z y<x))
+abstract
+  cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
+  cotransitive-apart-ℝ x y z =
+    elim-disjunction
+      ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
+      ( λ x<y →
+        map-disjunction
+          ( inl-disjunction)
+          ( inl-disjunction)
+          ( cotransitive-le-ℝ x y z x<y))
+      ( λ y<x →
+        elim-disjunction
+          ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
+          ( inr-disjunction ∘ inr-disjunction)
+          ( inl-disjunction ∘ inr-disjunction)
+          ( cotransitive-le-ℝ y x z y<x))
 ```
 
 ### Apartness on the reals is a large apartness relation
@@ -171,10 +174,11 @@ abstract
 ### The apartness relation of real numbers is tight
 
 ```agda
-is-tight-apartness-relation-ℝ :
-  (l : Level) → is-tight-Apartness-Relation (apartness-relation-ℝ l)
-is-tight-apartness-relation-ℝ l x y =
-  backward-implication (eq-iff-nonapart-ℝ x y)
+abstract
+  is-tight-apartness-relation-ℝ :
+    (l : Level) → is-tight-Apartness-Relation (apartness-relation-ℝ l)
+  is-tight-apartness-relation-ℝ l x y =
+    backward-implication (eq-iff-nonapart-ℝ x y)
 
 tight-apartness-relation-ℝ :
   (l : Level) → Tight-Apartness-Relation l (ℝ l)
