@@ -10,10 +10,10 @@ module linear-algebra.normed-real-vector-spaces where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.transport-along-identifications
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
