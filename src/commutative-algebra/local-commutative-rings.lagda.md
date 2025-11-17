@@ -70,6 +70,10 @@ module _
   zero-Local-Commutative-Ring : type-Local-Commutative-Ring
   zero-Local-Commutative-Ring = zero-Ring ring-Local-Commutative-Ring
 
+  is-zero-prop-Local-Commutative-Ring : type-Local-Commutative-Ring → Prop l
+  is-zero-prop-Local-Commutative-Ring =
+    is-zero-ring-Prop ring-Local-Commutative-Ring
+
   one-Local-Commutative-Ring : type-Local-Commutative-Ring
   one-Local-Commutative-Ring = one-Ring ring-Local-Commutative-Ring
 

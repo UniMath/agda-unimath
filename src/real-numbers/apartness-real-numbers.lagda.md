@@ -32,6 +32,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
@@ -132,6 +133,18 @@ cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
 nonequal-apart-ℝ : {l : Level} (x y : ℝ l) → apart-ℝ x y → x ≠ y
 nonequal-apart-ℝ x y =
   nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
+### Nonapart real numbers are similar
+
+```agda
+abstract
+  sim-nonapart-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → ¬ (apart-ℝ x y) → sim-ℝ x y
+  sim-nonapart-ℝ x y ¬x#y =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ y x ( ¬x#y ∘ apart-le-ℝ') ,
+        leq-not-le-ℝ x y ( ¬x#y ∘ apart-le-ℝ))
 ```
 
 ### Apartness is preserved by translation
