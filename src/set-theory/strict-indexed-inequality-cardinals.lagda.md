@@ -174,7 +174,7 @@ module _
 
 ## Properties
 
-## Strict indexed inequality is irreflexive
+### Strict indexed inequality is irreflexive
 
 ```agda
 module _
