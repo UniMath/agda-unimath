@@ -88,7 +88,7 @@ module _
 
 ## Properties
 
-### Maps out of the natural numbers that preserve order by induction
+### Sequences that are increasing by induction
 
 ```agda
 module _
