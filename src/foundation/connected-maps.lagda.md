@@ -325,7 +325,7 @@ is-connected-map-left-factor k {g = g} {h} H GH z =
     ( is-connected-equiv' (compute-fiber-comp g h z) (GH z))
 ```
 
-### The class of `k`-equivalences has the 3-for-2 property
+### Composition and cancellation in commuting triangles
 
 ```agda
 module _
@@ -416,23 +416,6 @@ module _
       is-equiv-precomp-Π-fiber-condition
         ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
 
-  ind-is-connected-map :
-    {l3 : Level} (P : B → Truncated-Type l3 k) →
-    ((a : A) → type-Truncated-Type (P (f a))) →
-    (b : B) → type-Truncated-Type (P b)
-  ind-is-connected-map P =
-    map-inv-is-equiv (dependent-universal-property-is-connected-map P)
-
-  compute-ind-is-connected-map :
-    {l3 : Level} (P : B → Truncated-Type l3 k) →
-    (g : (a : A) → type-Truncated-Type (P (f a))) →
-    (x : A) → ind-is-connected-map P g (f x) ＝ g x
-  compute-ind-is-connected-map P f =
-    htpy-eq
-      ( is-section-map-inv-is-equiv
-        ( dependent-universal-property-is-connected-map P)
-        ( f))
-
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : connected-map k A B)
   where
@@ -442,19 +425,6 @@ module _
   dup-connected-map =
     dependent-universal-property-is-connected-map
       ( is-connected-map-connected-map f)
-
-  ind-connected-map :
-    {l3 : Level} (P : B → Truncated-Type l3 k) →
-    ((a : A) → type-Truncated-Type (P (map-connected-map f a))) →
-    (b : B) → type-Truncated-Type (P b)
-  ind-connected-map = ind-is-connected-map (is-connected-map-connected-map f)
-
-  compute-ind-connected-map :
-    {l3 : Level} (P : B → Truncated-Type l3 k) →
-    (g : (a : A) → type-Truncated-Type (P (map-connected-map f a))) →
-    (x : A) → ind-connected-map P g (map-connected-map f x) ＝ g x
-  compute-ind-connected-map =
-    compute-ind-is-connected-map (is-connected-map-connected-map f)
 
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : connected-map k A B)
@@ -470,6 +440,49 @@ module _
     dependent-universal-property-is-connected-map
       ( is-connected-map-connected-map f)
       ( P)
+```
+
+### The induction principle for connected maps
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-connected-map k f)
+  where
+
+  ind-is-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    ((a : A) → type-Truncated-Type (P (f a))) →
+    (b : B) → type-Truncated-Type (P b)
+  ind-is-connected-map P =
+    map-inv-is-equiv (dependent-universal-property-is-connected-map H P)
+
+  compute-ind-is-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    (g : (a : A) → type-Truncated-Type (P (f a))) →
+    (x : A) → ind-is-connected-map P g (f x) ＝ g x
+  compute-ind-is-connected-map P f =
+    htpy-eq
+      ( is-section-map-inv-is-equiv
+        ( dependent-universal-property-is-connected-map H P)
+        ( f))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : connected-map k A B)
+  where
+
+  ind-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    ((a : A) → type-Truncated-Type (P (map-connected-map f a))) →
+    (b : B) → type-Truncated-Type (P b)
+  ind-connected-map = ind-is-connected-map (is-connected-map-connected-map f)
+
+  compute-ind-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    (g : (a : A) → type-Truncated-Type (P (map-connected-map f a))) →
+    (x : A) → ind-connected-map P g (map-connected-map f x) ＝ g x
+  compute-ind-connected-map =
+    compute-ind-is-connected-map (is-connected-map-connected-map f)
 ```
 
 ### A map that satisfies the dependent universal property for connected maps is a connected map

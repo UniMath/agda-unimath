@@ -102,7 +102,7 @@ is-set-projective-AC0 :
 is-set-projective-AC0 ac X A B f h =
   map-trunc-Prop
     ( ( map-Σ
-        ( λ g → (map-surjection f ∘ g) ＝ h)
+        ( λ g → map-surjection f ∘ g ＝ h)
         ( precomp h A)
         ( λ s H → htpy-postcomp X H h)) ∘
       ( section-is-split-surjective (map-surjection f)))
