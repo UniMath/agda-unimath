@@ -30,14 +30,14 @@ asserts that any [proposition](foundation-core.propositions.md) `P` is
 ## Definition
 
 ```agda
-LEM : (l : Level) → UU (lsuc l)
-LEM l = (P : Prop l) → is-decidable (type-Prop P)
+level-LEM : (l : Level) → UU (lsuc l)
+level-LEM l = (P : Prop l) → is-decidable (type-Prop P)
 
-LEMω : UUω
-LEMω = {l : Level} → LEM l
+LEM : UUω
+LEM = {l : Level} → level-LEM l
 
-prop-LEM : (l : Level) → Prop (lsuc l)
-prop-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
+prop-level-LEM : (l : Level) → Prop (lsuc l)
+prop-level-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 ```
 
 ## Properties
@@ -46,7 +46,7 @@ prop-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 
 ```agda
 decidable-prop-Prop :
-  {l : Level} → LEM l → Prop l → Decidable-Prop l
+  {l : Level} → level-LEM l → Prop l → Decidable-Prop l
 pr1 (decidable-prop-Prop lem P) = type-Prop P
 pr1 (pr2 (decidable-prop-Prop lem P)) = is-prop-type-Prop P
 pr2 (pr2 (decidable-prop-Prop lem P)) = lem P
