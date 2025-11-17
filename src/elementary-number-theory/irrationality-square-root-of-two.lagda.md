@@ -104,28 +104,27 @@ abstract opaque
               by |p|²=qℕ²2)
       (l , l2=qℕ) = is-even-is-even-square-ℕ qℕ (square-ℕ k , k²2=qℕ²)
     in
-      ex-falso
-        ( rec-coproduct
-          ( λ ())
-          ( λ ())
-          ( is-one-or-neg-one-is-unit-ℤ
+      rec-coproduct
+        ( λ ())
+        ( λ ())
+        ( is-one-or-neg-one-is-unit-ℤ
+          ( int-ℕ 2)
+          ( is-unit-div-relatively-prime-ℤ
+            ( p)
+            ( q)
             ( int-ℕ 2)
-            ( is-unit-div-relatively-prime-ℤ
-              ( p)
-              ( q)
-              ( int-ℕ 2)
-              ( coprime-p-q)
-              ( rec-coproduct
-                  ( λ p=|p| →
-                    ( int-ℕ k , mul-int-ℕ k 2 ∙ ap int-ℕ k2=|p| ∙ inv p=|p|))
-                  ( λ p=-|p| →
-                    ( neg-ℤ (int-ℕ k) ,
-                      ( left-negative-law-mul-ℤ _ _) ∙
-                      ( ap neg-ℤ (mul-int-ℕ k 2)) ∙
-                      ( ap (neg-ℤ ∘ int-ℕ) k2=|p|) ∙
-                      ( inv p=-|p|)))
-                  ( is-pos-or-neg-abs-ℤ p) ,
-                ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q)))))
+            ( coprime-p-q)
+            ( rec-coproduct
+                ( λ p=|p| →
+                  ( int-ℕ k , mul-int-ℕ k 2 ∙ ap int-ℕ k2=|p| ∙ inv p=|p|))
+                ( λ p=-|p| →
+                  ( neg-ℤ (int-ℕ k) ,
+                    ( left-negative-law-mul-ℤ _ _) ∙
+                    ( ap neg-ℤ (mul-int-ℕ k 2)) ∙
+                    ( ap (neg-ℤ ∘ int-ℕ) k2=|p|) ∙
+                    ( inv p=-|p|)))
+                ( is-pos-or-neg-abs-ℤ p) ,
+              ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q))))
 ```
 
 ## See also
