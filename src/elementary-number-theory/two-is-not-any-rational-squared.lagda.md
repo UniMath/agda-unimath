@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.two-is-not-any-rational-squared where
 ```
 
@@ -129,4 +130,4 @@ abstract opaque
 
 ## See also
 
-- [The square root of 2 as a real number is not a rational real number](real-numbers.irrationality-square-root-of-two.md)
+- [The square root of 2 as a real number is irrational](real-numbers.irrationality-square-root-of-two.md)
