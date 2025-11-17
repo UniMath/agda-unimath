@@ -7,39 +7,17 @@ module set-theory.dependent-products-cardinals where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
-open import foundation.double-negation
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-set-truncation
 open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.isolated-elements
-open import foundation.logical-equivalences
-open import foundation.negated-equality
-open import foundation.negation
-open import foundation.powersets
-open import foundation.propositional-truncations
-open import foundation.sections
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.empty-types
-open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
-
-open import logic.propositionally-decidable-types
 
 open import set-theory.cardinality-projective-sets
 open import set-theory.cardinality-recursive-sets
