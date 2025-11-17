@@ -15,12 +15,14 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
@@ -127,6 +129,14 @@ cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
   cotransitive-apart-ℝ
 ```
 
+### Apartness on a particular universe level of the reals
+
+```agda
+apartness-relation-ℝ : (l : Level) → Apartness-Relation l (ℝ l)
+apartness-relation-ℝ =
+  apartness-relation-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
 ### Apart real numbers are nonequal
 
 ```agda
@@ -145,6 +155,32 @@ abstract
     sim-sim-leq-ℝ
       ( leq-not-le-ℝ y x ( ¬x#y ∘ apart-le-ℝ') ,
         leq-not-le-ℝ x y ( ¬x#y ∘ apart-le-ℝ))
+```
+
+### Real numbers at the same universe level are equal if and only if they are not apart
+
+```agda
+abstract
+  eq-iff-nonapart-ℝ :
+    {l : Level} (x y : ℝ l) → (x ＝ y) ↔ ¬ (apart-ℝ x y)
+  eq-iff-nonapart-ℝ x y =
+    ( ( λ x=y x#y → nonequal-apart-ℝ x y x#y x=y) ,
+      eq-sim-ℝ ∘ sim-nonapart-ℝ x y)
+```
+
+### The apartness relation of real numbers is tight
+
+```agda
+is-tight-apartness-relation-ℝ :
+  (l : Level) → is-tight-Apartness-Relation (apartness-relation-ℝ l)
+is-tight-apartness-relation-ℝ l x y =
+  backward-implication (eq-iff-nonapart-ℝ x y)
+
+tight-apartness-relation-ℝ :
+  (l : Level) → Tight-Apartness-Relation l (ℝ l)
+tight-apartness-relation-ℝ l =
+  ( apartness-relation-ℝ l ,
+    is-tight-apartness-relation-ℝ l)
 ```
 
 ### Apartness is preserved by translation
