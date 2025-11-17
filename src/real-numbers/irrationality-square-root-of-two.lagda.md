@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 
+open import real-numbers.irrational-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -42,7 +43,7 @@ The irrationality of the square root of two is the
 ```agda
 abstract
   irrational-sqrt-two-ℝ :
-    ¬ Σ ℚ (is-rational-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2)))
+    is-irrational-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2))
   irrational-sqrt-two-ℝ (q , √2=q) =
     neq-two-square-ℚ
       ( q)
