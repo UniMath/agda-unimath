@@ -292,8 +292,8 @@ module _
               ( inner-product-ℝ-Inner-Product-Space V v)
               ( inv (mul-neg-one-ℝ-Inner-Product-Space V w))
         ＝
-          neg-ℝ (raise-ℝ l1 one-ℝ) *ℝ
-          inner-product-ℝ-Inner-Product-Space V v w
+          ( neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
+          ( inner-product-ℝ-Inner-Product-Space V v w)
           by is-right-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
         ＝
           neg-ℝ (raise-ℝ l1 one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
@@ -498,8 +498,8 @@ module _
                 ( real-sqrt-ℝ⁰⁺)
                 ( eq-ℝ⁰⁺ _ _ (squared-norm-mul-ℝ-Inner-Product-Space c v))
           ＝
-            real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ c) *ℝ
-            norm-ℝ-Inner-Product-Space V v
+            ( real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ c)) *ℝ
+            ( norm-ℝ-Inner-Product-Space V v)
             by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
           ＝ abs-ℝ c *ℝ norm-ℝ-Inner-Product-Space V v
             by ap-mul-ℝ (inv (eq-abs-sqrt-square-ℝ c)) refl
@@ -532,16 +532,16 @@ module _
               ( squared-norm-ℝ-Inner-Product-Space V)
               ( inv (mul-neg-one-ℝ-Inner-Product-Space V v))
         ＝
-          square-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
-          squared-norm-ℝ-Inner-Product-Space V v
+          ( square-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ))) *ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V v)
           by squared-norm-mul-ℝ-Inner-Product-Space V _ _
         ＝
-          square-ℝ (raise-ℝ l1 one-ℝ) *ℝ
-          squared-norm-ℝ-Inner-Product-Space V v
+          ( square-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V v)
           by ap-mul-ℝ (square-neg-ℝ _) refl
         ＝
-          raise-ℝ l1 (square-ℝ one-ℝ) *ℝ
-          squared-norm-ℝ-Inner-Product-Space V v
+          ( raise-ℝ l1 (square-ℝ one-ℝ)) *ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V v)
           by ap-mul-ℝ (square-raise-ℝ l1 one-ℝ) refl
         ＝ raise-ℝ l1 one-ℝ *ℝ squared-norm-ℝ-Inner-Product-Space V v
           by ap-mul-ℝ (ap (raise-ℝ l1) (left-unit-law-mul-ℝ one-ℝ)) refl
@@ -572,19 +572,19 @@ module _
       equational-reasoning
         squared-norm-ℝ-Inner-Product-Space V (diff-ℝ-Inner-Product-Space V v w)
         ＝
-          squared-norm-ℝ-Inner-Product-Space V v +ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V v) +ℝ
           ( real-ℕ 2 *ℝ
             inner-product-ℝ-Inner-Product-Space V
               ( v)
-              ( neg-ℝ-Inner-Product-Space V w))
-          +ℝ
-          squared-norm-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V w)
+              ( neg-ℝ-Inner-Product-Space V w)) +ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V
+            ( neg-ℝ-Inner-Product-Space V w))
           by squared-norm-add-ℝ-Inner-Product-Space V _ _
         ＝
-          squared-norm-ℝ-Inner-Product-Space V v +ℝ
-          ( real-ℕ 2 *ℝ
-            neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)) +ℝ
-          squared-norm-ℝ-Inner-Product-Space V w
+          ( squared-norm-ℝ-Inner-Product-Space V v) +ℝ
+          ( ( real-ℕ 2) *ℝ
+            ( neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w))) +ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V w)
           by
             ap-add-ℝ
               ( ap-add-ℝ
@@ -597,9 +597,9 @@ module _
                     ( w))))
               ( squared-norm-neg-ℝ-Inner-Product-Space V w)
         ＝
-          squared-norm-ℝ-Inner-Product-Space V v -ℝ
-          real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V v w +ℝ
-          squared-norm-ℝ-Inner-Product-Space V w
+          ( squared-norm-ℝ-Inner-Product-Space V v) -ℝ
+          ( real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V v w) +ℝ
+          ( squared-norm-ℝ-Inner-Product-Space V w)
           by
             ap-add-ℝ
               ( ap-add-ℝ
