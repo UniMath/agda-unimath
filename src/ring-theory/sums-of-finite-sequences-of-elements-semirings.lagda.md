@@ -286,12 +286,12 @@ module _
 
 ```agda
 abstract
-  constant-sum-fin-sequence-type-Semiring :
+  sum-constant-fin-sequence-type-Semiring :
     {l : Level} (R : Semiring l) (n : ℕ) (x : type-Semiring R) →
     sum-fin-sequence-type-Semiring R n (λ _ → x) ＝
     multiple-Semiring R n x
-  constant-sum-fin-sequence-type-Semiring R =
-    constant-sum-fin-sequence-type-Commutative-Monoid
+  sum-constant-fin-sequence-type-Semiring R =
+    sum-constant-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
