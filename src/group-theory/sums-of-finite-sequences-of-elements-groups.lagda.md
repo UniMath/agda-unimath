@@ -184,9 +184,9 @@ split-sum-fin-sequence-type-Group G =
 
 ```agda
 abstract
-  constant-sum-fin-sequence-type-Group :
+  sum-constant-fin-sequence-type-Group :
     {l : Level} (G : Group l) (n : ℕ) (x : type-Group G) →
     sum-fin-sequence-type-Group G n (λ _ → x) ＝ power-Group G n x
-  constant-sum-fin-sequence-type-Group G =
-    constant-sum-fin-sequence-type-Monoid (monoid-Group G)
+  sum-constant-fin-sequence-type-Group G =
+    sum-constant-fin-sequence-type-Monoid (monoid-Group G)
 ```
