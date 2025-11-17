@@ -135,11 +135,11 @@ module _
     (a : type-trunc-Set A) (b : type-trunc-Set (B a)) → type-Set (C a b)
   apply-twice-dependent-universal-property-trunc-Set' =
     apply-dependent-universal-property-trunc-Set'
-    ( λ x → Π-Set (trunc-Set (B x)) (C x))
-    ( λ x →
-      apply-dependent-universal-property-trunc-Set'
-        ( C (unit-trunc-Set x))
-        ( f x))
+      ( λ x → Π-Set (trunc-Set (B x)) (C x))
+      ( λ x →
+        apply-dependent-universal-property-trunc-Set'
+          ( C (unit-trunc-Set x))
+          ( f x))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : type-trunc-Set A → UU l2}

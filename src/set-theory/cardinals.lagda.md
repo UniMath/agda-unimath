@@ -28,13 +28,13 @@ isomorphism classes of sets by [set truncating](foundation.set-truncations.md)
 the universe of sets of any given
 [universe level](foundation.universe-levels.md), and such an isomorphism class
 is called a
-{{#concept "cardinal" Disambiguation="sets" WD="cardinal number" WDID=Q163875}}.
+{{#concept "cardinal" Disambiguation="of sets" WD="cardinal number" WDID=Q163875}}.
 
 Note that this definition takes advantage of the
 [univalence axiom](foundation.univalence.md): By the univalence axiom
 [isomorphic sets](foundation.isomorphisms-of-sets.md) are
 [equal](foundation-core.identity-types.md), and will be mapped to the same
-element in the set truncation of the universe of all sets. S
+element in the set truncation of the universe of all sets.
 
 ## Definition
 

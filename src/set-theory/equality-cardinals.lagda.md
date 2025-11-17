@@ -32,10 +32,10 @@ open import set-theory.cardinals
 
 Two [cardinals of sets](set-theory.cardinals.md) `X` and `Y` are
 {{#concept "similar" Disambiguation="cardinals" Agda=sim-Cardinal}} if there
-[merely](foundation.inhabited-types.md) is an
-[equivalence](foundation-core.equivalences.md) between any two representing two
-types. This characterizes [equality](foundation-core.identity-types.md) of
-cardinals.
+[merely exists](foundation.inhabited-types.md) an
+[equivalence](foundation-core.equivalences.md) between any two representing
+[sets](foundation-core.sets.md). This characterizes
+[equality](foundation-core.identity-types.md) of cardinals.
 
 ## Definition
 
@@ -311,8 +311,3 @@ large-similarity-relation-Cardinal =
     .eq-sim-Large-Similarity-Relation →
       eq-sim-Cardinal
 ```
-
-## External links
-
-- [Cardinality](https://en.wikipedia.org/wiki/Cardinality) at Wikipedia
-- [cardinal number](https://ncatlab.org/nlab/show/cardinal+number) at $n$Lab

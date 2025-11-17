@@ -37,7 +37,7 @@ We may say a [cardinal](set-theory.cardinals.md) `X` is
 {{#concept "less than or equal to" Agda=leq-complemented-Cardinal}} a cardinal
 `Y` if any [set](foundation-core.sets.md) in the isomorphism class represented
 by `X` [embeds](foundation-core.embeddings.md) as a
-[complemented subtype](foundation.decidable-subtypes.md) into any set in the
+[decidable subtype](foundation.decidable-subtypes.md) into any set in the
 isomorphism class represented by `Y`. In other words, if there is a
 [decidable embedding](foundation.decidable-embeddings.md) from the first to the
 second. This defines the
@@ -211,6 +211,9 @@ module _
 
 ### Assuming the weak limited principle of omniscience, then complemented inequality forms a partial order
 
+This is a direct consequence of the
+[Cantor–Schröder–Bernstein theorem for decidable embeddings](foundation.cantor-schroder-bernstein-decidable-embeddings.md).
+
 ```agda
 module _
   {l : Level} (wlpo : level-WLPO l)
@@ -260,3 +263,7 @@ large-poset-complemented-Cardinal wlpo =
   .large-preorder-Large-Poset → large-preorder-complemented-Cardinal
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-complemented-Cardinal wlpo
 ```
+
+## See also
+
+- [Inequality of cardinals](set-theory.inequality-cardinals.md)

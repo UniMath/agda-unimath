@@ -186,7 +186,7 @@ that `leq-Cardinal` is antisymmetric and hence a partial order.
 
 ```agda
 module _
-  {l : Level} (lem : LEM l)
+  {l : Level} (lem : level-LEM l)
   where
 
   antisymmetric-leq-cardinality :
@@ -225,7 +225,7 @@ large-preorder-Cardinal =
   .refl-leq-Large-Preorder → refl-leq-Cardinal
   .transitive-leq-Large-Preorder → transitive-leq-Cardinal
 
-large-poset-Cardinal : LEMω → Large-Poset lsuc (_⊔_)
+large-poset-Cardinal : LEM → Large-Poset lsuc (_⊔_)
 large-poset-Cardinal lem =
   λ where
   .large-preorder-Large-Poset → large-preorder-Cardinal
@@ -235,8 +235,3 @@ large-poset-Cardinal lem =
 ## See also
 
 - [Complemented inequality of cardinals](set-theory.complemented-inequality-cardinals.md)
-
-## External links
-
-- [Cardinality](https://en.wikipedia.org/wiki/Cardinality) at Wikipedia
-- [cardinal number](https://ncatlab.org/nlab/show/cardinal+number) at $n$Lab

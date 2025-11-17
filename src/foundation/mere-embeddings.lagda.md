@@ -69,7 +69,7 @@ mere-emb-Large-Preorder =
 ```agda
 antisymmetric-mere-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
+  level-LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
 antisymmetric-mere-emb lem =
   map-binary-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem)
 ```
