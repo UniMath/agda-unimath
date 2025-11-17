@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.irrationality-square-root-of-two where
 ```
 
