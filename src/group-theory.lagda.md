@@ -121,6 +121,11 @@ open import group-theory.kernels-homomorphisms-concrete-groups public
 open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-abelian-groups public
 open import group-theory.large-commutative-monoids public
+open import group-theory.large-function-abelian-groups public
+open import group-theory.large-function-commutative-monoids public
+open import group-theory.large-function-groups public
+open import group-theory.large-function-monoids public
+open import group-theory.large-function-semigroups public
 open import group-theory.large-groups public
 open import group-theory.large-monoids public
 open import group-theory.large-semigroups public

@@ -213,6 +213,8 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.function-large-equivalence-relations public
+open import foundation.function-large-similarity-relations public
 open import foundation.function-types public
 open import foundation.function-types-with-apartness-relations public
 open import foundation.functional-correspondences public
