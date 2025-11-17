@@ -12,6 +12,7 @@ module elementary-number-theory.multiplication-rational-numbers where
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
@@ -30,6 +31,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.interchange-law
+
+open import group-theory.multiples-of-elements-abelian-groups
 ```
 
 </details>
@@ -452,17 +455,33 @@ abstract
         by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
 ```
 
+### Multiplication by a natural number is repeated addition
+
+```agda
+abstract
+  left-mul-rational-nat-ℚ :
+    (n : ℕ) (q : ℚ) → rational-ℕ n *ℚ q ＝ multiple-Ab abelian-group-add-ℚ n q
+  left-mul-rational-nat-ℚ 0 q = left-zero-law-mul-ℚ q
+  left-mul-rational-nat-ℚ 1 q = left-unit-law-mul-ℚ q
+  left-mul-rational-nat-ℚ (succ-ℕ n@(succ-ℕ _)) q =
+    equational-reasoning
+      rational-ℕ (succ-ℕ n) *ℚ q
+      ＝ succ-ℚ (rational-ℕ n) *ℚ q
+        by ap-mul-ℚ (inv (succ-rational-ℕ n)) refl
+      ＝ q +ℚ rational-ℕ n *ℚ q by
+        mul-left-succ-ℚ _ _
+      ＝ q +ℚ multiple-Ab abelian-group-add-ℚ n q
+        by ap-add-ℚ refl (left-mul-rational-nat-ℚ n q)
+      ＝ multiple-Ab abelian-group-add-ℚ (succ-ℕ n) q
+        by inv (multiple-succ-Ab' abelian-group-add-ℚ n q)
+```
+
 ### `2q = q + q`
 
 ```agda
 abstract
   mul-two-ℚ : (q : ℚ) → rational-ℕ 2 *ℚ q ＝ q +ℚ q
-  mul-two-ℚ q =
-    equational-reasoning
-      rational-ℤ (one-ℤ +ℤ one-ℤ) *ℚ q
-      ＝ (one-ℚ +ℚ one-ℚ) *ℚ q by ap (_*ℚ q) (inv (add-rational-ℤ one-ℤ one-ℤ))
-      ＝ (one-ℚ *ℚ q) +ℚ (one-ℚ *ℚ q) by right-distributive-mul-add-ℚ _ _ _
-      ＝ q +ℚ q by ap-add-ℚ (left-unit-law-mul-ℚ q) (left-unit-law-mul-ℚ q)
+  mul-two-ℚ = left-mul-rational-nat-ℚ 2
 ```
 
 ### The product of a rational number and its denominator is its numerator

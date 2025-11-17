@@ -43,7 +43,7 @@ module _
   is-sum-prop-series-Metric-Ab =
     is-limit-prop-sequence-Metric-Space
       ( metric-space-Metric-Ab G)
-      ( partial-sum-series-Metric-Ab G σ)
+      ( partial-sum-series-Metric-Ab σ)
 
   is-sum-series-Metric-Ab : type-Metric-Ab G → UU l2
   is-sum-series-Metric-Ab s = type-Prop (is-sum-prop-series-Metric-Ab s)
@@ -52,7 +52,7 @@ module _
   is-convergent-prop-series-Metric-Ab =
     subtype-convergent-sequence-Metric-Space
       ( metric-space-Metric-Ab G)
-      ( partial-sum-series-Metric-Ab G σ)
+      ( partial-sum-series-Metric-Ab σ)
 
   is-convergent-series-Metric-Ab : UU (l1 ⊔ l2)
   is-convergent-series-Metric-Ab =
@@ -76,7 +76,7 @@ module _
 
   partial-sum-convergent-series-Metric-Ab : sequence (type-Metric-Ab G)
   partial-sum-convergent-series-Metric-Ab =
-    partial-sum-series-Metric-Ab G series-convergent-series-Metric-Ab
+    partial-sum-series-Metric-Ab series-convergent-series-Metric-Ab
 ```
 
 ## The partial sums of a convergent series have a limit, the sum of the series

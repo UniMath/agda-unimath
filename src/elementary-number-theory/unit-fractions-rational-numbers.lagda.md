@@ -119,6 +119,19 @@ module _
         ( eq-denominator-reciprocal-rational-ℤ⁺)
 ```
 
+### Taking the reciprocal of a nonzero natural number distributes over multiplication
+
+```agda
+abstract
+  distributive-reciprocal-mul-ℕ⁺ :
+    (m n : ℕ⁺) →
+    reciprocal-rational-ℕ⁺ (m *ℕ⁺ n) ＝
+    reciprocal-rational-ℕ⁺ m *ℚ reciprocal-rational-ℕ⁺ n
+  distributive-reciprocal-mul-ℕ⁺ m⁺@(m , _) n⁺@(n , _) =
+    ap rational-inv-ℚ⁺ (eq-ℚ⁺ (inv (mul-rational-ℕ m n))) ∙
+    ap rational-ℚ⁺ (distributive-inv-mul-ℚ⁺ _ _)
+```
+
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda

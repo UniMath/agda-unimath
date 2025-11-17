@@ -77,6 +77,14 @@ one-ℕ⁺ : ℕ⁺
 one-ℕ⁺ = one-nonzero-ℕ
 ```
 
+### The nonzero natural number `2`
+
+```agda
+two-ℕ⁺ : ℕ⁺
+pr1 two-ℕ⁺ = 2
+pr2 two-ℕ⁺ ()
+```
+
 ### The successor function on the nonzero natural numbers
 
 ```agda
