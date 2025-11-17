@@ -17,7 +17,7 @@ open import linear-algebra.vector-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.local-ring-of-real-numbers
+open import real-numbers.field-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -31,13 +31,13 @@ open import real-numbers.rational-real-numbers
 A
 {{#concept "real vector space" WD="real vector space" WDID=Q46996054 Agda=ℝ-Vector-Space}}
 is a [vector space](linear-algebra.vector-spaces.md) over the
-[local commutative ring of real numbers](real-numbers.local-ring-of-real-numbers.md).
+[Heyting field of real numbers](real-numbers.field-of-real-numbers.md).
 
 ## Definition
 
 ```agda
 ℝ-Vector-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-ℝ-Vector-Space l1 l2 = Vector-Space l2 (local-commutative-ring-ℝ l1)
+ℝ-Vector-Space l1 l2 = Vector-Space l2 (heyting-field-ℝ l1)
 ```
 
 ## Properties
@@ -48,7 +48,7 @@ module _
   where
 
   ab-ℝ-Vector-Space : Ab l2
-  ab-ℝ-Vector-Space = ab-Vector-Space (local-commutative-ring-ℝ l1) V
+  ab-ℝ-Vector-Space = ab-Vector-Space (heyting-field-ℝ l1) V
 
   set-ℝ-Vector-Space : Set l2
   set-ℝ-Vector-Space = set-Ab ab-ℝ-Vector-Space
@@ -67,7 +67,7 @@ module _
   neg-ℝ-Vector-Space = neg-Ab ab-ℝ-Vector-Space
 
   mul-ℝ-Vector-Space : ℝ l1 → type-ℝ-Vector-Space → type-ℝ-Vector-Space
-  mul-ℝ-Vector-Space = mul-Vector-Space (local-commutative-ring-ℝ l1) V
+  mul-ℝ-Vector-Space = mul-Vector-Space (heyting-field-ℝ l1) V
 
   associative-add-ℝ-Vector-Space :
     (v w x : type-ℝ-Vector-Space) →
@@ -104,60 +104,60 @@ module _
     (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (raise-ℝ l1 one-ℝ) v ＝ v
   left-unit-law-mul-ℝ-Vector-Space =
-    left-unit-law-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    left-unit-law-mul-Vector-Space (heyting-field-ℝ l1) V
 
   left-distributive-mul-add-ℝ-Vector-Space :
     (r : ℝ l1) (v w : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space r (add-ℝ-Vector-Space v w) ＝
     add-ℝ-Vector-Space (mul-ℝ-Vector-Space r v) (mul-ℝ-Vector-Space r w)
   left-distributive-mul-add-ℝ-Vector-Space =
-    left-distributive-mul-add-Vector-Space (local-commutative-ring-ℝ l1) V
+    left-distributive-mul-add-Vector-Space (heyting-field-ℝ l1) V
 
   right-distributive-mul-add-ℝ-Vector-Space :
     (r s : ℝ l1) (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (r +ℝ s) v ＝
     add-ℝ-Vector-Space (mul-ℝ-Vector-Space r v) (mul-ℝ-Vector-Space s v)
   right-distributive-mul-add-ℝ-Vector-Space =
-    right-distributive-mul-add-Vector-Space (local-commutative-ring-ℝ l1) V
+    right-distributive-mul-add-Vector-Space (heyting-field-ℝ l1) V
 
   associative-mul-ℝ-Vector-Space :
     (r s : ℝ l1) (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (r *ℝ s) v ＝
     mul-ℝ-Vector-Space r (mul-ℝ-Vector-Space s v)
   associative-mul-ℝ-Vector-Space =
-    associative-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    associative-mul-Vector-Space (heyting-field-ℝ l1) V
 
   left-zero-law-mul-ℝ-Vector-Space :
     (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (raise-ℝ l1 zero-ℝ) v ＝ zero-ℝ-Vector-Space
   left-zero-law-mul-ℝ-Vector-Space =
-    left-zero-law-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    left-zero-law-mul-Vector-Space (heyting-field-ℝ l1) V
 
   right-zero-law-mul-ℝ-Vector-Space :
     (r : ℝ l1) →
     mul-ℝ-Vector-Space r zero-ℝ-Vector-Space ＝ zero-ℝ-Vector-Space
   right-zero-law-mul-ℝ-Vector-Space =
-    right-zero-law-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    right-zero-law-mul-Vector-Space (heyting-field-ℝ l1) V
 
   left-negative-law-mul-ℝ-Vector-Space :
     (r : ℝ l1) (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (neg-ℝ r) v ＝
     neg-ℝ-Vector-Space (mul-ℝ-Vector-Space r v)
   left-negative-law-mul-ℝ-Vector-Space =
-    left-negative-law-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    left-negative-law-mul-Vector-Space (heyting-field-ℝ l1) V
 
   right-negative-law-mul-ℝ-Vector-Space :
     (r : ℝ l1) (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space r (neg-ℝ-Vector-Space v) ＝
     neg-ℝ-Vector-Space (mul-ℝ-Vector-Space r v)
   right-negative-law-mul-ℝ-Vector-Space =
-    right-negative-law-mul-Vector-Space (local-commutative-ring-ℝ l1) V
+    right-negative-law-mul-Vector-Space (heyting-field-ℝ l1) V
 
   mul-neg-one-ℝ-Vector-Space :
     (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (neg-ℝ (raise-ℝ l1 one-ℝ)) v ＝ neg-ℝ-Vector-Space v
   mul-neg-one-ℝ-Vector-Space =
-    mul-neg-one-Vector-Space (local-commutative-ring-ℝ l1) V
+    mul-neg-one-Vector-Space (heyting-field-ℝ l1) V
 ```
 
 ### The real numbers are a real vector space
@@ -165,8 +165,8 @@ module _
 ```agda
 real-vector-space-ℝ : (l : Level) → ℝ-Vector-Space l (lsuc l)
 real-vector-space-ℝ l =
-  vector-space-local-commutative-ring-Local-Commutative-Ring
-    ( local-commutative-ring-ℝ l)
+  vector-space-heyting-field-Heyting-Field
+    ( heyting-field-ℝ l)
 ```
 
 ## See also

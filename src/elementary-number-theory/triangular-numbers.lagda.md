@@ -9,15 +9,11 @@ module elementary-number-theory.triangular-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-metric-abelian-groups
-open import analysis.series-metric-abelian-groups
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.metric-additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -27,6 +23,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.semiring-of-natural-numbers
+open import elementary-number-theory.series-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
@@ -203,15 +200,14 @@ abstract
                 ( eq-nonzero-ℕ
                   ( compute-double-triangular-number-ℕ (succ-ℕ n)))))
 
-series-reciprocal-triangular-number-ℕ : series-Metric-Ab metric-ab-add-ℚ
+series-reciprocal-triangular-number-ℕ : series-ℚ
 series-reciprocal-triangular-number-ℕ =
-  series-terms-Metric-Ab reciprocal-triangular-number-succ-ℕ
+  series-terms-ℚ reciprocal-triangular-number-succ-ℕ
 
 abstract
   compute-partial-sum-series-reciprocal-triangular-number-ℕ :
     (n : ℕ) →
-    partial-sum-series-Metric-Ab
-      ( metric-ab-add-ℚ)
+    partial-sum-series-ℚ
       ( series-reciprocal-triangular-number-ℕ)
       ( n) ＝
     rational-ℕ 2 *ℚ (one-ℚ -ℚ reciprocal-rational-succ-ℕ n)
@@ -227,8 +223,7 @@ abstract
           by right-zero-law-mul-ℚ _)
   compute-partial-sum-series-reciprocal-triangular-number-ℕ (succ-ℕ n) =
     equational-reasoning
-      partial-sum-series-Metric-Ab
-        ( metric-ab-add-ℚ)
+      partial-sum-series-ℚ
         ( series-reciprocal-triangular-number-ℕ)
         ( n) +ℚ
       reciprocal-triangular-number-succ-ℕ n
@@ -271,7 +266,7 @@ This theorem is the [42nd](literature.100-theorems.md#42) theorem on
 ```agda
 abstract
   sum-reciprocal-triangular-number-ℕ :
-    is-sum-series-Metric-Ab
+    is-sum-series-ℚ
       ( series-reciprocal-triangular-number-ℕ)
       ( rational-ℕ 2)
   sum-reciprocal-triangular-number-ℕ =
