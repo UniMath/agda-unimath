@@ -24,11 +24,19 @@ open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
 open import real-numbers.absolute-value-real-numbers
+open import linear-algebra.real-vector-spaces
+
+open import order-theory.large-posets
+
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.extensionality-squares-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-positive-and-negative-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -639,3 +647,7 @@ real-inner-product-space-ℝ l =
   Wikipedia
 - [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
   $n$Lab
+
+## References
+
+{{#bibliography}}
