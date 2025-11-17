@@ -35,7 +35,7 @@ with the properties:
 - it is [nontrivial](commutative-algebra.trivial-commutative-rings.md): 0 ≠ 1
 - any
   [non](foundation.negation.md)-[invertible](commutative-algebra.invertible-elements-commutative-rings.md)
-  elements are [equal](foundation.identity-types.md) to zero
+  element is [equal](foundation.identity-types.md) to zero
 
 Note that this is distinct from the classical notion of a field, called
 [discrete field](commutative-algebra.discrete-fields.md) in constructive
