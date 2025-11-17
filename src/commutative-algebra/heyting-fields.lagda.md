@@ -34,7 +34,7 @@ with the properties:
 
 - it is [nontrivial](commutative-algebra.trivial-commutative-rings.md): 0 ≠ 1
 - any
-  [non](foundation.negation.md)[invertible](commutative-algebra.invertible-elements-commutative-rings.md)
+  [non](foundation.negation.md)-[invertible](commutative-algebra.invertible-elements-commutative-rings.md)
   elements are [equal](foundation.identity-types.md) to zero
 
 ## Definition
