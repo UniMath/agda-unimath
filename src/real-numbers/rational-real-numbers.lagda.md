@@ -24,6 +24,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
@@ -281,4 +282,28 @@ pr2 equiv-rational-real =
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
     (rational-real-ℚ , is-retraction-rational-real-ℚ)
+```
+
+### The canonical embedding of the rational numbers in the real numbers is injective
+
+```agda
+abstract opaque
+  unfolding real-ℚ
+
+  is-injective-real-ℚ : is-injective real-ℚ
+  is-injective-real-ℚ {p} {q} pℝ=qℝ =
+    trichotomy-le-ℚ
+      ( p)
+      ( q)
+      ( λ p<q →
+        ex-falso
+          ( irreflexive-le-ℚ
+            ( p)
+            ( inv-tr (λ x → is-in-lower-cut-ℝ x p) pℝ=qℝ p<q)))
+      ( id)
+      ( λ q<p →
+        ex-falso
+          ( irreflexive-le-ℚ
+            ( q)
+            ( tr (λ x → is-in-lower-cut-ℝ x q) pℝ=qℝ q<p)))
 ```
