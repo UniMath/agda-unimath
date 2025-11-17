@@ -30,7 +30,7 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 ## Idea
 
-{{#concept "Kőnig's theorem" WD="König's theorem" WDID=Q1077462 Disambiguation="for cardinals" Agda=Königs-Theorem}}
+{{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=Königs-Theorem}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
 and $B$ over $I$ such that $Aᵢ < Bᵢ$ for all $i$, we have that
 $$∑_{i:I}Aᵢ < ∏_{i:I}Bᵢ.$$
