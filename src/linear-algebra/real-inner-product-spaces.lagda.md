@@ -19,7 +19,6 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
-open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
 open import real-numbers.addition-real-numbers
