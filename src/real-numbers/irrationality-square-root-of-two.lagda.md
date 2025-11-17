@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module real-numbers.irrationality-square-root-of-two where
 ```
 
