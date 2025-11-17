@@ -106,8 +106,8 @@ abstract opaque
       (l , l2=qℕ) = is-even-is-even-square-ℕ qℕ (square-ℕ k , k²2=qℕ²)
     in
       rec-coproduct
-        ( λ ())
-        ( λ ())
+        ( 2≠1)
+        ( 2≠-1)
         ( is-one-or-neg-one-is-unit-ℤ
           ( int-ℕ 2)
           ( is-unit-div-relatively-prime-ℤ
@@ -126,6 +126,11 @@ abstract opaque
                     ( inv p=-|p|)))
                 ( is-pos-or-neg-abs-ℤ p) ,
               ( int-ℕ l , mul-int-ℕ l 2 ∙ ap int-ℕ l2=qℕ ∙ qℕ=q))))
+    where
+      2≠1 : int-ℕ 2 ≠ one-ℤ
+      2≠1 ()
+      2≠-1 : int-ℕ 2 ≠ neg-one-ℤ
+      2≠-1 ()
 ```
 
 ## See also
