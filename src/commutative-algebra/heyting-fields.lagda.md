@@ -106,3 +106,7 @@ module _
   neg-Heyting-Field : type-Heyting-Field → type-Heyting-Field
   neg-Heyting-Field = neg-Ring ring-Heyting-Field
 ```
+
+## External links
+
+- [Heyting field](https://ncatlab.org/nlab/show/Heyting+field) at $n$Lab
