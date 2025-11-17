@@ -8,9 +8,9 @@ module real-numbers.irrationality-square-root-of-two where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.irrationality-square-root-of-two
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
+open import elementary-number-theory.two-is-not-any-rational-squared
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -66,4 +66,4 @@ abstract
 
 ## See also
 
-- [Two is not the square of any rational number](elementary-number-theory.irrationality-square-root-of-two.md)
+- [Two is not the square of any rational number](elementary-number-theory.two-is-not-any-rational-squared.md)

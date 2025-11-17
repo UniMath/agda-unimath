@@ -16,7 +16,7 @@ module literature.100-theorems where
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import elementary-number-theory.irrationality-square-root-of-two using
+open import elementary-number-theory.two-is-not-any-rational-squared using
   ( neq-two-square-ℚ)
 open import real-numbers.irrationality-square-root-of-two using
   ( irrational-sqrt-two-ℝ)

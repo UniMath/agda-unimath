@@ -113,7 +113,6 @@ open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
 open import elementary-number-theory.interior-closed-intervals-rational-numbers public
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers public
-open import elementary-number-theory.irrationality-square-root-of-two public
 open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
@@ -229,6 +228,7 @@ open import elementary-number-theory.taxicab-numbers public
 open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
+open import elementary-number-theory.two-is-not-any-rational-squared public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-fractions-rational-numbers public

@@ -2,7 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-module elementary-number-theory.irrationality-square-root-of-two where
+module elementary-number-theory.two-is-not-any-rational-squared where
 ```
 
 <details><summary>Imports</summary>
