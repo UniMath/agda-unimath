@@ -167,7 +167,7 @@ module _
 ### Reals are similar to their raised-universe equivalents
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   sim-raise-ℝ : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)

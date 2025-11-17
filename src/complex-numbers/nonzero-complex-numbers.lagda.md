@@ -64,10 +64,11 @@ complex-nonzero-ℂ = pr1
 ```agda
 abstract
   is-positive-squared-magnitude-is-nonzero-ℂ :
-    {l : Level} (z : ℂ l) → is-nonzero-ℂ z → is-positive-ℝ ∥ z ∥²ℂ
+    {l : Level} (z : ℂ l) → is-nonzero-ℂ z →
+    is-positive-ℝ (squared-magnitude-ℂ z)
   is-positive-squared-magnitude-is-nonzero-ℂ (a +iℂ b) =
     elim-disjunction
-      ( is-positive-prop-ℝ ∥ a +iℂ b ∥²ℂ)
+      ( is-positive-prop-ℝ (squared-magnitude-ℂ (a +iℂ b)))
       ( λ a≠0 →
         concatenate-le-leq-ℝ
           ( zero-ℝ)
@@ -84,7 +85,8 @@ abstract
           ( leq-right-add-real-ℝ⁰⁺ _ (nonnegative-square-ℝ a)))
 
   is-nonzero-is-positive-squared-magnitude-ℂ :
-    {l : Level} (z : ℂ l) → is-positive-ℝ ∥ z ∥²ℂ → is-nonzero-ℂ z
+    {l : Level} (z : ℂ l) → is-positive-ℝ (squared-magnitude-ℂ z) →
+    is-nonzero-ℂ z
   is-nonzero-is-positive-squared-magnitude-ℂ (a +iℂ b) 0<a²+b² =
     elim-disjunction
       ( is-nonzero-prop-ℂ (a +iℂ b))

@@ -22,10 +22,12 @@ open import ring-theory.rings
 
 ## Idea
 
-A **local ring** is a ring such that whenever a sum of elements is invertible,
-then one of its summands is invertible. This implies that the noninvertible
-elements form an ideal. However, the law of excluded middle is needed to show
-that any ring of which the noninvertible elements form an ideal is a local ring.
+A {{#concept "local commutative ring" Agda=Local-Commutative-Ring}} is a
+[local](ring-theory.local-rings.md)
+[commutative ring](commutative-algebra.commutative-rings.md).
+
+A local commutative ring is one limited version of the classical notion of field
+that applies usefully in constructive contexts.
 
 ## Definition
 
@@ -70,6 +72,10 @@ module _
   zero-Local-Commutative-Ring : type-Local-Commutative-Ring
   zero-Local-Commutative-Ring = zero-Ring ring-Local-Commutative-Ring
 
+  is-zero-prop-Local-Commutative-Ring : type-Local-Commutative-Ring → Prop l
+  is-zero-prop-Local-Commutative-Ring =
+    is-zero-ring-Prop ring-Local-Commutative-Ring
+
   one-Local-Commutative-Ring : type-Local-Commutative-Ring
   one-Local-Commutative-Ring = one-Ring ring-Local-Commutative-Ring
 
@@ -87,3 +93,8 @@ module _
     type-Local-Commutative-Ring → type-Local-Commutative-Ring
   neg-Local-Commutative-Ring = neg-Ring ring-Local-Commutative-Ring
 ```
+
+## See also
+
+- [Heyting fields](commutative-algebra.heyting-fields.md), a local commutative
+  ring with stronger constraints on invertibility
