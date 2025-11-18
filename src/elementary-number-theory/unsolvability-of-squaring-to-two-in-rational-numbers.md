@@ -1,9 +1,9 @@
-# The irrationality of the square root of two
+# Unsolvability of squaring to two in the rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.two-is-not-any-rational-squared where
+module elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers where
 ```
 
 <details><summary>Imports</summary>

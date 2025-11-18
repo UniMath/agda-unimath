@@ -11,7 +11,7 @@ module real-numbers.irrationality-square-root-of-two where
 ```agda
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
-open import elementary-number-theory.two-is-not-any-rational-squared
+open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -67,4 +67,4 @@ abstract
 
 ## See also
 
-- [Two is not the square of any rational number](elementary-number-theory.two-is-not-any-rational-squared.md)
+- [Two is not the square of any rational number](elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers.md)
