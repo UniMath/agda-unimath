@@ -277,8 +277,8 @@ module _
                     ( g x *ℝ (pr1 (pr1 y n) -ℝ pr1 x)) *ℝ
                   abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n))
                   by leq-eq-ℝ (inv (right-distributive-abs-mul-dist-ℝ _ _ _))
-                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 (pr1 y n)) *ℝ
-                  abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n))
+                ≤ ( real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 (pr1 y n))) *ℝ
+                  ( abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n)))
                   by
                     preserves-leq-right-mul-ℝ⁰⁺
                       ( nonnegative-abs-ℝ _)
@@ -291,20 +291,20 @@ module _
                           ( pr1 (pr1 y n))
                           ( pr1 x)
                           ( is-mod-μ (ν ε) n N≤n)))
-                ≤ real-ℚ⁺ ε *ℝ
-                  ( abs-ℝ (pr1 x -ℝ pr1 (pr1 y n)) *ℝ
-                    abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n)))
+                ≤ ( real-ℚ⁺ ε) *ℝ
+                  ( ( abs-ℝ (pr1 x -ℝ pr1 (pr1 y n))) *ℝ
+                    ( abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n))))
                   by leq-eq-ℝ (associative-mul-ℝ _ _ _)
-                ≤ real-ℚ⁺ ε *ℝ
-                  ( abs-ℝ (pr1 (pr1 y n) -ℝ pr1 x) *ℝ
-                    abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n)))
+                ≤ ( real-ℚ⁺ ε) *ℝ
+                  ( ( abs-ℝ (pr1 (pr1 y n) -ℝ pr1 x)) *ℝ
+                    ( abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n))))
                   by
                     leq-eq-ℝ
                       ( ap-mul-ℝ refl (ap-mul-ℝ (commutative-dist-ℝ _ _) refl))
-                ≤ real-ℚ⁺ ε *ℝ
-                  abs-ℝ
-                    ( (pr1 (pr1 y n) -ℝ pr1 x) *ℝ
-                      real-inv-nonzero-ℝ (nonzero-diff n))
+                ≤ ( real-ℚ⁺ ε) *ℝ
+                  ( abs-ℝ
+                    ( ( pr1 (pr1 y n) -ℝ pr1 x) *ℝ
+                      ( real-inv-nonzero-ℝ (nonzero-diff n)))
                   by leq-eq-ℝ (ap-mul-ℝ refl (inv (abs-mul-ℝ _ _)))
                 ≤ real-ℚ⁺ ε *ℝ abs-ℝ one-ℝ
                   by
@@ -459,26 +459,26 @@ module _
                 λ x y Nxy →
                   chain-of-inequalities
                     dist-ℝ
-                      ((f y +ℝ g y) -ℝ (f x +ℝ g x))
-                      ((f' x +ℝ g' x) *ℝ (pr1 y -ℝ pr1 x))
+                      ( (f y +ℝ g y) -ℝ (f x +ℝ g x))
+                      ( (f' x +ℝ g' x) *ℝ (pr1 y -ℝ pr1 x))
                     ≤ dist-ℝ
-                        ((f y -ℝ f x) +ℝ (g y -ℝ g x))
-                        (f' x *ℝ (pr1 y -ℝ pr1 x) +ℝ g' x *ℝ (pr1 y -ℝ pr1 x))
+                        ( (f y -ℝ f x) +ℝ (g y -ℝ g x))
+                        ( f' x *ℝ (pr1 y -ℝ pr1 x) +ℝ g' x *ℝ (pr1 y -ℝ pr1 x))
                       by
                         leq-eq-ℝ
                           ( ap-dist-ℝ
                             ( interchange-law-diff-add-ℝ _ _ _ _)
                             ( right-distributive-mul-add-ℝ _ _ _))
                     ≤ abs-ℝ
-                        ( ((f y -ℝ f x) -ℝ f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
-                          ((g y -ℝ g x) -ℝ g' x *ℝ (pr1 y -ℝ pr1 x)))
+                        ( ( (f y -ℝ f x) -ℝ f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
+                          ( (g y -ℝ g x) -ℝ g' x *ℝ (pr1 y -ℝ pr1 x)))
                       by
                         leq-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _))
-                    ≤ dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
-                      dist-ℝ (g y -ℝ g x) (g' x *ℝ (pr1 y -ℝ pr1 x))
+                    ≤ ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
+                      ( dist-ℝ (g y -ℝ g x) (g' x *ℝ (pr1 y -ℝ pr1 x)))
                       by triangle-inequality-abs-ℝ _ _
-                    ≤ real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y) +ℝ
-                      real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y)
+                    ≤ ( real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
+                      ( real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y))
                       by
                         preserves-leq-add-ℝ
                           ( is-mod-μ
@@ -558,8 +558,8 @@ module _
                           ( associative-mul-ℝ _ _ _))
                   ≤ abs-ℝ c *ℝ dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))
                     by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
-                  ≤ real-ℚ⁺ q *ℝ
-                    (real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
+                  ≤ ( real-ℚ⁺ q) *ℝ
+                    ( real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
                     by
                       preserves-leq-mul-ℝ⁰⁺
                         ( nonnegative-abs-ℝ c)
