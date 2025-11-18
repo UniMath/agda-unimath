@@ -39,9 +39,9 @@ with the properties:
 
 Note that this is distinct from the classical notion of a field, called
 [discrete field](commutative-algebra.discrete-fields.md) in constructive
-contexts, which asserts that every element is invertible
-[xor](foundation.exclusive-disjunction.md) it is equal to zero. A Heyting field
-is a discrete field if and only if its equality relation is
+contexts, which asserts that every element is
+[either](foundation.exclusive-disjunction.md) invertible or equal to zero. A
+Heyting field is a discrete field if and only if its equality relation is
 [decidable](foundation.decidable-equality.md), which would not include e.g. the
 [real numbers](real-numbers.dedekind-real-numbers.md).
 
