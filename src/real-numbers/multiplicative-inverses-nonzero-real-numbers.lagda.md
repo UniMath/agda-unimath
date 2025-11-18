@@ -27,6 +27,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -224,6 +225,17 @@ abstract opaque
           { x = one-ℝ}
           { y = raise-ℝ l one-ℝ}
           ( sim-raise-ℝ l one-ℝ)))
+```
+
+### A real number is invertible iff it is nonzero
+
+```agda
+is-invertible-iff-is-nonzero-ℝ :
+  {l : Level} (x : ℝ l) →
+  (is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x) ↔
+  (is-nonzero-ℝ x)
+is-invertible-iff-is-nonzero-ℝ x =
+  ( is-nonzero-is-invertible-ℝ x , is-invertible-is-nonzero-ℝ x)
 ```
 
 ### The multiplicative inverse is unique
