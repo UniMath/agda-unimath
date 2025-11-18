@@ -32,8 +32,7 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 {{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=Königs-Theorem}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
-and $B$ over $I$ such that $Aᵢ < Bᵢ$ for all $i$, we have that
-$$∑_{i:I}Aᵢ < ∏_{i:I}Bᵢ.$$
+and $B$ over $I$ such that $Aᵢ < Bᵢ$ for all $i$, we have that $$ΣᵢAᵢ < ΠᵢBᵢ.$$
 
 In constructive mathematics we have to be more mindful of our statements. Here
 $I$ is any
@@ -57,7 +56,7 @@ module _
   where
 
   is-nonsurjective-map-Σ-Π-is-projective-base' :
-    (H : (i : I) → (f : A i → B i) → is-nonsurjective f)
+    (H : (i : I) (f : A i → B i) → is-nonsurjective f)
     (g : Σ I A → ((i : I) → B i)) → is-nonsurjective g
   is-nonsurjective-map-Σ-Π-is-projective-base' H g =
     map-trunc-Prop
@@ -112,7 +111,8 @@ module _
             ( (i : type-I) → le-indexed-Cardinal (A i) (B i))
             ( le-indexed-prop-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B))))
       ( λ A B p →
-        binary-tr le-indexed-Cardinal
+        binary-tr
+          ( le-indexed-Cardinal)
           ( inv (compute-Σ-Cardinal I A))
           ( inv (compute-Π-Cardinal I B))
           ( cardinality-Königs-Theorem
