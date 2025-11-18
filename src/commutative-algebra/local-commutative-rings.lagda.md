@@ -23,8 +23,7 @@ open import ring-theory.rings
 ## Idea
 
 A {{#concept "local commutative ring" Agda=Local-Commutative-Ring}} is a
-[local](ring-theory.local-rings.md)
-[commutative ring](commutative-algebra.commutative-rings.md).
+[commutative ring](commutative-algebra.commutative-rings.md) that is [local](ring-theory.local-rings.md).
 
 A local commutative ring is one limited version of the classical notion of field
 that applies usefully in constructive contexts.
