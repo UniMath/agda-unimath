@@ -235,6 +235,7 @@ open import elementary-number-theory.unit-similarity-standard-finite-types publi
 open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public
+open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
