@@ -231,7 +231,3 @@ large-poset-Cardinal lem =
   .large-preorder-Large-Poset → large-preorder-Cardinal
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-Cardinal lem
 ```
-
-## See also
-
-- [Complemented inequality of cardinals](set-theory.complemented-inequality-cardinals.md)
