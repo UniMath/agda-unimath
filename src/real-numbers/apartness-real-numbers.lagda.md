@@ -8,6 +8,7 @@ module real-numbers.apartness-real-numbers where
 
 ```agda
 open import foundation.apartness-relations
+open import foundation.coproduct-types
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -20,6 +21,7 @@ open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -30,6 +32,7 @@ open import metric-spaces.apartness-located-metric-spaces
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
@@ -134,6 +137,18 @@ nonequal-apart-ℝ x y =
   nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
 ```
 
+### Zero is apart from one
+
+```agda
+apart-zero-one-ℝ : apart-ℝ zero-ℝ one-ℝ
+apart-zero-one-ℝ = unit-trunc-Prop (inl le-zero-one-ℝ)
+```
+
+### Zero is not equal to one
+
+```agda
+zero-is-not-one-ℝ : zero-ℝ ≠ one-ℝ
+zero-is-not-one-ℝ = nonequal-apart-ℝ zero-ℝ one-ℝ apart-zero-one-ℝ
 ### Apartness is preserved by translation
 
 ```agda
