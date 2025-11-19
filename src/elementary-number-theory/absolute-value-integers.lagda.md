@@ -250,3 +250,14 @@ abstract
   double-negative-law-mul-abs-ℤ x y =
     ap abs-ℤ (inv (double-negative-law-mul-ℤ x y))
 ```
+
+### `x = |x|` or `x = -|x|`
+
+```agda
+abstract
+  is-pos-or-neg-abs-ℤ :
+    (x : ℤ) → (x ＝ int-ℕ (abs-ℤ x)) + (x ＝ neg-ℤ (int-ℕ (abs-ℤ x)))
+  is-pos-or-neg-abs-ℤ (inr (inl unit)) = inl refl
+  is-pos-or-neg-abs-ℤ (inr (inr n)) = inl refl
+  is-pos-or-neg-abs-ℤ (inl n) = inr refl
+```

@@ -129,6 +129,29 @@ connected-le-ℤ x y H =
     ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
 ```
 
+### Strict inequality on the integers is irreflexive
+
+```agda
+abstract
+  irreflexive-le-ℤ : (x : ℤ) → ¬ (le-ℤ x x)
+  irreflexive-le-ℤ x =
+    inv-tr
+      ( λ z → ¬ (is-positive-ℤ z))
+      ( right-inverse-law-add-ℤ x)
+      ( not-is-positive-zero-ℤ)
+```
+
+### If `x < y`, `x ≠ y`
+
+```agda
+abstract
+  neq-le-ℤ : (x y : ℤ) → le-ℤ x y → x ≠ y
+  neq-le-ℤ x _ x<x refl = irreflexive-le-ℤ x x<x
+
+  neq-le-ℤ' : (x y : ℤ) → le-ℤ y x → x ≠ y
+  neq-le-ℤ' _ y y<y refl = irreflexive-le-ℤ y y<y
+```
+
 ### Any integer is strictly greater than its predecessor
 
 ```agda

@@ -8,12 +8,16 @@ module elementary-number-theory.relatively-prime-integers where
 
 ```agda
 open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -58,6 +62,20 @@ abstract
     {a b : ℤ} → is-relatively-prime-ℕ (abs-ℤ a) (abs-ℤ b) →
     is-relatively-prime-ℤ a b
   is-relatively-prime-is-relatively-prime-abs-ℤ {a} {b} H = ap int-ℕ H
+```
+
+### For two relatively prime integers `x` and `y` and any integer `d`, if `d` divides `x` and `y`, `d` is a unit
+
+```agda
+abstract
+  is-unit-div-relatively-prime-ℤ :
+    (x y : ℤ) (d : ℤ) → is-relatively-prime-ℤ x y →
+    is-common-divisor-ℤ x y d → is-unit-ℤ d
+  is-unit-div-relatively-prime-ℤ x y d gcd=1 d|x∧d|y =
+    tr
+      ( λ k → div-ℤ d k)
+      ( gcd=1)
+      ( forward-implication (pr2 (is-gcd-gcd-ℤ x y) d) d|x∧d|y)
 ```
 
 ### For any two integers `a` and `b` that are not both `0`, the integers `a/gcd(a,b)` and `b/gcd(a,b)` are relatively prime
