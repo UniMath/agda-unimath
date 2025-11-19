@@ -169,7 +169,7 @@ module _
   where
 
   le-diff-ℚ⁺ : ℚ⁺
-  le-diff-ℚ⁺ = positive-diff-le-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) H
+  le-diff-ℚ⁺ = positive-diff-le-ℚ H
 
   left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
   left-diff-law-add-ℚ⁺ =
@@ -226,6 +226,16 @@ module _
     eq-add-split-ℚ⁺
 
   abstract
+    le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
+    le-left-summand-split-ℚ⁺ = le-mediant-zero-ℚ⁺ x
+
+    le-right-summand-split-ℚ⁺ : le-ℚ⁺ right-summand-split-ℚ⁺ x
+    le-right-summand-split-ℚ⁺ =
+      tr
+        ( le-ℚ⁺ right-summand-split-ℚ⁺)
+        ( eq-add-split-ℚ⁺)
+        ( le-right-add-ℚ⁺ left-summand-split-ℚ⁺ right-summand-split-ℚ⁺)
+
     le-add-split-ℚ⁺ :
       (p q r s : ℚ) →
       le-ℚ p (q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺) →
@@ -334,23 +344,16 @@ module _
     ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
   leq-leq-add-positive-ℚ H =
     rec-coproduct
-      ( λ I →
+      ( λ y<x →
         ex-falso
           ( not-leq-le-ℚ
             ( mediant-ℚ y x)
             ( x)
-            ( le-right-mediant-ℚ y x I)
+            ( le-right-mediant-ℚ y<x)
             ( tr
               ( leq-ℚ x)
-              ( right-law-positive-diff-le-ℚ
-                ( y)
-                ( mediant-ℚ y x)
-                ( le-left-mediant-ℚ y x I))
-              ( H
-                ( positive-diff-le-ℚ
-                  ( y)
-                  ( mediant-ℚ y x)
-                  ( le-left-mediant-ℚ y x I))))))
+              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
+              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x))))))
       ( id)
       ( decide-le-leq-ℚ y x)
 
@@ -450,11 +453,12 @@ module _
           ( left-summand-split-ℚ⁺ p)
           ( right-summand-split-ℚ⁺ p))
 
-    bound-double-le-ℚ⁺ :
-      Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-    bound-double-le-ℚ⁺ =
-      ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
+  bound-double-le-ℚ⁺ :
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  bound-double-le-ℚ⁺ =
+    ( modulus-le-double-le-ℚ⁺ , le-double-le-modulus-le-double-le-ℚ⁺)
 
+  abstract
     double-le-ℚ⁺ : exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
     double-le-ℚ⁺ = unit-trunc-Prop bound-double-le-ℚ⁺
 ```

@@ -38,11 +38,15 @@ are numbers of the form `a + bi`, where `a` and `b` are
 ℂ : (l : Level) → UU (lsuc l)
 ℂ l = ℝ l × ℝ l
 
+pattern _+iℂ_ x y = (x , y)
+
 re-ℂ : {l : Level} → ℂ l → ℝ l
 re-ℂ = pr1
 
 im-ℂ : {l : Level} → ℂ l → ℝ l
 im-ℂ = pr2
+
+pattern _+iℂ_ a b = (a , b)
 ```
 
 ## Properties
@@ -79,13 +83,6 @@ complex-ℤ[i] : ℤ[i] → ℂ lzero
 complex-ℤ[i] (a , b) = (real-ℤ a , real-ℤ b)
 ```
 
-### The conjugate of a complex number
-
-```agda
-conjugate-ℂ : {l : Level} → ℂ l → ℂ l
-conjugate-ℂ (a , b) = (a , neg-ℝ b)
-```
-
 ### Important complex numbers
 
 ```agda
@@ -107,4 +104,12 @@ i-ℂ = (zero-ℝ , one-ℝ)
 ```agda
 neg-ℂ : {l : Level} → ℂ l → ℂ l
 neg-ℂ (a , b) = (neg-ℝ a , neg-ℝ b)
+```
+
+### `complex-ℝ one-ℝ` is equal to `one-ℂ`
+
+```agda
+abstract
+  eq-complex-one-ℝ : complex-ℝ one-ℝ ＝ one-ℂ
+  eq-complex-one-ℝ = eq-ℂ refl (inv (eq-raise-ℝ zero-ℝ))
 ```
