@@ -17,7 +17,7 @@ module literature.100-theorems where
 
 ```agda
 open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers using
-  ( neq-two-square-ℚ)
+  ( is-not-square-two-ℚ)
 open import real-numbers.irrationality-square-root-of-two using
   ( irrational-sqrt-two-ℝ)
 ```
