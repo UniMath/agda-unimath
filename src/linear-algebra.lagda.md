@@ -22,6 +22,7 @@ open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
+open import linear-algebra.large-left-modules-large-rings public
 open import linear-algebra.left-modules-commutative-rings public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-rings public
