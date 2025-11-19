@@ -46,6 +46,7 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.metric-extensions-of-pseudometric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions
@@ -183,6 +184,12 @@ module _
       ( isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
         ( P))
       ( isometry-cauchy-pseudocompletion-Pseudometric-Space P)
+
+  metric-extension-cauchy-precompletion-Pseudometric-Space :
+    Metric-Extension (l1 ⊔ l2) (l1 ⊔ l2) P
+  metric-extension-cauchy-precompletion-Pseudometric-Space =
+    ( ( cauchy-precompletion-Pseudometric-Space P) ,
+      ( isometry-cauchy-precompletion-Pseudometric-Space))
 ```
 
 ### The isometry from the Cauchy pseudocompletion of the Cauchy pseudocompletion into the Cauchy precompletion

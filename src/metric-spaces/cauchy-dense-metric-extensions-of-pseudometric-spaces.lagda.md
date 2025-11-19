@@ -479,3 +479,19 @@ module _
     ( map-cauchy-precompletion-is-cauchy-dense-Metric-Extension ,
       is-isometry-map-cauchy-precompletion-is-dense-Metric-Extension)
 ```
+
+### The Cauchy precompletion of a pseudometric space is Cauchy dense
+
+```agda
+module _
+  {l1 l2 : Level}
+  (P : Pseudometric-Space l1 l2)
+  where
+
+  is-cauchy-dense-metric-extension-cauchy-precompletion-Pseudometric-Space :
+    is-cauchy-dense-Metric-Extension
+      ( P)
+      ( metric-extension-cauchy-precompletion-Pseudometric-Space P)
+  is-cauchy-dense-metric-extension-cauchy-precompletion-Pseudometric-Space X =
+    ( X , is-limit-is-in-class-cauchy-precompletion-Pseudometric-Space P X)
+```
