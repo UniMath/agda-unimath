@@ -68,7 +68,6 @@ open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-dense-metric-extensions-of-pseudometric-spaces public
-open import metric-spaces.cauchy-precompletion-of-metric-spaces public
 open import metric-spaces.cauchy-precompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
