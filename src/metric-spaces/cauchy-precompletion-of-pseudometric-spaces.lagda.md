@@ -1032,7 +1032,7 @@ module _
               ( le-left-add-ℚ⁺ (a +ℚ⁺ d) e)
               ( le-left-add-ℚ⁺ a d)))
 
-  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space :
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
       ( map-isometry-cauchy-approximation-Pseudometric-Space
@@ -1043,7 +1043,7 @@ module _
       ( map-metric-quotient-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( u))
-  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
     =
     is-limit-sim-const-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
@@ -1096,7 +1096,7 @@ module _
         ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( X)
         ( x∈X))
-      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
         ( P)
         ( x))
 ```
@@ -1134,7 +1134,7 @@ module _
       ( is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
         ( P)
         ( u))
-      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-recompletion-Pseudometric-Space
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
         ( P)
         ( u))
 ```
