@@ -1,4 +1,4 @@
-# Large left modules over rings
+# Large left modules over large rings
 
 ```agda
 module linear-algebra.large-left-modules-large-rings where
