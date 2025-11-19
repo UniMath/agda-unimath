@@ -46,23 +46,16 @@ abstract
   irrational-sqrt-two-ℝ :
     is-irrational-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2))
   irrational-sqrt-two-ℝ (q , √2=q) =
-    neq-two-square-ℚ
-      ( q)
-      ( is-injective-real-ℚ
-        ( equational-reasoning
-          real-ℚ (square-ℚ q)
-          ＝ square-ℝ (real-ℚ q)
-            by inv (square-real-ℚ q)
-          ＝ square-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2))
-            by
-              ap
-                ( square-ℝ)
-                ( inv
-                  ( eq-sim-ℝ
-                    ( sim-rational-ℝ
-                      ( real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2) , q , √2=q))))
-          ＝ real-ℕ 2
-            by eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2)))
+    is-not-square-two-ℚ
+      ( q ,
+        is-injective-real-ℚ
+          ( ( inv (eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2))) ∙
+            ( ap
+              ( square-ℝ)
+              ( eq-sim-ℝ
+                ( sim-rational-ℝ
+                  ( real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ 2) , q , √2=q)))) ∙
+            ( square-real-ℚ q)))
 ```
 
 ## See also

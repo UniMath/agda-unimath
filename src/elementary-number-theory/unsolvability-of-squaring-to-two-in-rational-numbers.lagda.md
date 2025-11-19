@@ -34,7 +34,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.negated-equality
+open import foundation.negation
 ```
 
 </details>
@@ -57,8 +57,8 @@ This file proves that two is not the square of any rational number.
 abstract opaque
   unfolding rational-fraction-ℤ mul-ℚ
 
-  neq-two-square-ℚ : (q : ℚ) → square-ℚ q ≠ rational-ℕ 2
-  neq-two-square-ℚ (p/q@(p , q⁺@(q , is-pos-q)) , coprime-p-q) p²/q²=2 =
+  is-not-square-two-ℚ : ¬ (is-square-ℚ (rational-ℕ 2))
+  is-not-square-two-ℚ ((p/q@(p , q⁺@(q , is-pos-q)) , coprime-p-q) , 2=p²/q²) =
     let
       qℕ = succ-ℕ (nat-positive-ℤ q⁺)
       qℕ=q : int-ℕ qℕ ＝ q
@@ -78,7 +78,7 @@ abstract opaque
                   sim-fraction-ℤ-eq-ℚ
                     ( mul-fraction-ℤ p/q p/q)
                     ( in-fraction-ℤ (int-ℕ 2))
-                    ( ( p²/q²=2) ∙
+                    ( ( inv 2=p²/q²) ∙
                       ( inv (is-retraction-rational-fraction-ℚ (rational-ℕ 2))))
               ＝ int-ℕ 2 *ℤ square-ℤ (int-ℕ qℕ)
                 by ap-mul-ℤ refl (ap square-ℤ (inv qℕ=q))
