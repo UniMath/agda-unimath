@@ -8,6 +8,7 @@ module commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semi
 
 ```agda
 open import commutative-algebra.commutative-semirings
+open import commutative-algebra.multiples-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -259,4 +260,17 @@ module _
   preserves-sum-permutation-Commutative-Semiring =
     preserves-sum-permutation-fin-sequence-type-Semiring
       ( semiring-Commutative-Semiring R)
+```
+
+### The sum of a constant finite sequence in a commutative semiring is scalar multiplication by the length of the sequence
+
+```agda
+abstract
+  sum-constant-fin-sequence-type-Commutative-Semiring :
+    {l : Level} (R : Commutative-Semiring l) (n : ℕ) →
+    (x : type-Commutative-Semiring R) →
+    sum-fin-sequence-type-Commutative-Semiring R n (λ _ → x) ＝
+    multiple-Commutative-Semiring R n x
+  sum-constant-fin-sequence-type-Commutative-Semiring R =
+    sum-constant-fin-sequence-type-Semiring (semiring-Commutative-Semiring R)
 ```

@@ -8,6 +8,7 @@ module commutative-algebra.sums-of-finite-sequences-of-elements-commutative-ring
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.multiples-of-elements-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -242,6 +243,19 @@ module _
     sum-fin-sequence-type-Commutative-Ring A n (f ∘ map-equiv σ)
   preserves-sum-permutation-fin-sequence-type-Commutative-Ring =
     preserves-sum-permutation-fin-sequence-type-Ring (ring-Commutative-Ring A)
+```
+
+### The sum of a constant finite sequence in a commutative ring is scalar multiplication by the length of the sequence
+
+```agda
+abstract
+  sum-constant-fin-sequence-type-Commutative-Ring :
+    {l : Level} (R : Commutative-Ring l) (n : ℕ) →
+    (x : type-Commutative-Ring R) →
+    sum-fin-sequence-type-Commutative-Ring R n (λ _ → x) ＝
+    multiple-Commutative-Ring R n x
+  sum-constant-fin-sequence-type-Commutative-Ring R =
+    sum-constant-fin-sequence-type-Ring (ring-Commutative-Ring R)
 ```
 
 ## See also
