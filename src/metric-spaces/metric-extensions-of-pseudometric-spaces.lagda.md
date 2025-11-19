@@ -61,7 +61,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 A
 {{#concept "metric extension" Disambiguation="of a pseudometric space" Agda=Metric-Extension}}
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is a
-[metric space](metric-spaces.metric-space.md) `M` together with an
+[metric space](metric-spaces.metric-spaces.md) `M` together with an
 [isometry](metric-spaces.isometries-pseudometric-spaces.md) `f : P → M`.
 
 ## Definition
