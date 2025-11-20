@@ -8,6 +8,7 @@ module trees.cartesian-product-polynomial-endofunctors where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -21,7 +22,7 @@ open import trees.polynomial-endofunctors
 For every pair of polynomial endofunctor `𝑃` and `𝑄` there is a
 {{#concept "cartesian product polynomial endofunctor" Disambiguation="on types" Agda=product-polynomial-endofunctor}}
 `𝑃 × 𝑄` given on shapes by `(𝑃 × 𝑄)₀ := 𝑃₀ × 𝑄₀` and on positions by
-`(𝑃 × 𝑄)₁(a , c) := 𝑃₁(a) × 𝑄₁(c)`.
+`(𝑃 × 𝑄)₁(a , c) := 𝑃₁(a) + 𝑄₁(c)`.
 
 ## Definition
 
@@ -37,7 +38,7 @@ module _
 
   position-product-polynomial-endofunctor :
     shape-product-polynomial-endofunctor → UU (l2 ⊔ l4)
-  position-product-polynomial-endofunctor (a , c) = B a × D c
+  position-product-polynomial-endofunctor (a , c) = B a + D c
 
   product-polynomial-endofunctor : polynomial-endofunctor (l1 ⊔ l3) (l2 ⊔ l4)
   product-polynomial-endofunctor =
