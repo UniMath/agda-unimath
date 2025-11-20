@@ -35,6 +35,7 @@ open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
 open import trees.full-binary-trees public
+open import trees.function-polynomial-endofunctors public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public
 open import trees.functoriality-w-types public

@@ -10,6 +10,11 @@ module trees.cartesian-product-polynomial-endofunctors where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import trees.polynomial-endofunctors
@@ -19,10 +24,16 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-For every pair of polynomial endofunctor `𝑃` and `𝑄` there is a
+For every pair of [polynomial endofunctors](trees.polynomial-endofunctors.md)
+`𝑃` and `𝑄` there is a
 {{#concept "cartesian product polynomial endofunctor" Disambiguation="on types" Agda=product-polynomial-endofunctor}}
 `𝑃 × 𝑄` given on shapes by `(𝑃 × 𝑄)₀ := 𝑃₀ × 𝑄₀` and on positions by
-`(𝑃 × 𝑄)₁(a , c) := 𝑃₁(a) + 𝑄₁(c)`.
+`(𝑃 × 𝑄)₁(a , c) := 𝑃₁(a) + 𝑄₁(c)`. This polynomial endofunctor satisfies the
+[equivalence](foundation-core.equivalences.md)
+
+```text
+  (𝑃 × 𝑄)(X) ≃ 𝑃(X) × 𝑄(X).
+```
 
 ## Definition
 
@@ -44,4 +55,12 @@ module _
   product-polynomial-endofunctor =
     ( shape-product-polynomial-endofunctor ,
       position-product-polynomial-endofunctor)
+
+  compute-type-product-polynomial-endofunctor :
+    {l : Level} {X : UU l} →
+    type-polynomial-endofunctor product-polynomial-endofunctor X ≃
+    type-polynomial-endofunctor P X × type-polynomial-endofunctor Q X
+  compute-type-product-polynomial-endofunctor {X = X} =
+    ( inv-distributive-product-Σ) ∘e
+    ( equiv-tot (λ x → equiv-universal-property-coproduct X))
 ```
