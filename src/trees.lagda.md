@@ -16,6 +16,7 @@ open import trees.binary-w-types public
 open import trees.bounded-multisets public
 open import trees.cartesian-morphisms-polynomial-endofunctors public
 open import trees.cartesian-natural-transformations-polynomial-endofunctors public
+open import trees.cartesian-product-polynomial-endofunctors public
 open import trees.coalgebra-of-directed-trees public
 open import trees.coalgebra-of-enriched-directed-trees public
 open import trees.coalgebras-polynomial-endofunctors public

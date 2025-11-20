@@ -19,7 +19,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 For every pair of polynomial endofunctor `𝑃` and `𝑄` there is a
-{{#concept "coproduct polynomial endofunctor" Agda=coproduct-polynomial-endofunctor}}
+{{#concept "coproduct polynomial endofunctor" Disambiguation="on types" Agda=coproduct-polynomial-endofunctor}}
 `𝑃 + 𝑄` given on shapes by `(𝑃 + 𝑄)₀ := 𝑃₀ + 𝑄₀` and on positions by
 `(𝑃 + 𝑄)₁(inl a) := 𝑃₁(a)` and `(𝑃 + 𝑄)₁(inr c) := 𝑄₁(c)`.
 
