@@ -1,8 +1,6 @@
 # Equivalences of polynomial endofunctors
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module trees.equivalences-polynomial-endofunctors where
 ```
 
