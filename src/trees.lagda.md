@@ -21,6 +21,7 @@ open import trees.coalgebra-of-enriched-directed-trees public
 open import trees.coalgebras-polynomial-endofunctors public
 open import trees.combinator-directed-trees public
 open import trees.combinator-enriched-directed-trees public
+open import trees.coproduct-polynomial-endofunctors public
 open import trees.directed-trees public
 open import trees.elementhood-relation-coalgebras-polynomial-endofunctors public
 open import trees.elementhood-relation-w-types public
