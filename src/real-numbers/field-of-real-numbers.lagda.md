@@ -41,21 +41,6 @@ The [real numbers](real-numbers.dedekind-real-numbers.md) form a
 
 ```agda
 abstract
-  is-nontrivial-commutative-ring-ℝ :
-    (l : Level) → is-nontrivial-Commutative-Ring (commutative-ring-ℝ l)
-  is-nontrivial-commutative-ring-ℝ l 0=1ℝ =
-    neq-zero-one-ℚ
-      ( is-injective-real-ℚ
-        ( eq-sim-ℝ
-          ( similarity-reasoning-ℝ
-              zero-ℝ
-              ~ℝ raise-ℝ l zero-ℝ
-                by sim-raise-ℝ l zero-ℝ
-              ~ℝ raise-ℝ l one-ℝ
-                by sim-eq-ℝ 0=1ℝ
-              ~ℝ one-ℝ
-                by sim-raise-ℝ' l one-ℝ)))
-
   is-zero-is-noninvertible-commutative-ring-ℝ :
     (l : Level) (x : ℝ l) →
     ¬ is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
@@ -78,7 +63,7 @@ abstract
     (l : Level) →
     is-heyting-field-Local-Commutative-Ring (local-commutative-ring-ℝ l)
   is-heyting-field-local-commutative-ring-ℝ l =
-    ( is-nontrivial-commutative-ring-ℝ l ,
+    ( neq-raise-zero-one-ℝ l ,
       is-zero-is-noninvertible-commutative-ring-ℝ l)
 
 heyting-field-ℝ : (l : Level) → Heyting-Field (lsuc l)
