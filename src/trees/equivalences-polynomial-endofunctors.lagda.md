@@ -97,7 +97,11 @@ equiv-polynomial-endofunctor :
 equiv-polynomial-endofunctor P Q =
   Σ ( hom-polynomial-endofunctor P Q)
     ( is-equiv-hom-polynomial-endofunctor P Q)
+```
 
+The underlying morphism.
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   (P : polynomial-endofunctor l1 l2)
@@ -123,13 +127,6 @@ module _
     position-polynomial-endofunctor P a
   position-equiv-polynomial-endofunctor =
     position-hom-polynomial-endofunctor P Q
-      hom-equiv-polynomial-endofunctor
-
-  type-equiv-polynomial-endofunctor :
-    {l5 : Level} {X : UU l5} →
-    type-polynomial-endofunctor P X → type-polynomial-endofunctor Q X
-  type-equiv-polynomial-endofunctor =
-    type-hom-polynomial-endofunctor P Q
       hom-equiv-polynomial-endofunctor
 
   is-equiv-hom-equiv-polynomial-endofunctor :
@@ -168,6 +165,17 @@ module _
   equiv-position-equiv-polynomial-endofunctor a =
     ( position-equiv-polynomial-endofunctor a ,
       is-cartesian-hom-equiv-polynomial-endofunctor a)
+```
+
+The underlying natural transformation.
+
+```agda
+  type-equiv-polynomial-endofunctor :
+    {l5 : Level} {X : UU l5} →
+    type-polynomial-endofunctor P X → type-polynomial-endofunctor Q X
+  type-equiv-polynomial-endofunctor =
+    type-hom-polynomial-endofunctor P Q
+      hom-equiv-polynomial-endofunctor
 
   naturality-equiv-polynomial-endofunctor :
     {l5 l6 : Level} {X : UU l5} {Y : UU l6} (f : X → Y) →
