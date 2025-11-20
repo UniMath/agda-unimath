@@ -25,8 +25,9 @@ open import ring-theory.large-rings
 
 ## Idea
 
-A {{#concept "large left module" Disambiguation="over a large ring" Agda=Large-Left-Module-Large-Ring}} over a
-[large ring](ring-theory.large-rings.md) `R` is a
+A
+{{#concept "large left module" Disambiguation="over a large ring" Agda=Large-Left-Module-Large-Ring}}
+over a [large ring](ring-theory.large-rings.md) `R` is a
 [large abelian group](group-theory.large-abelian-groups.md) `M` endowed with an
 action `R → M → M` such that
 
