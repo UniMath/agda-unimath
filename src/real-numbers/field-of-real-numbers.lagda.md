@@ -58,7 +58,7 @@ abstract
 
   is-zero-is-noninvertible-commutative-ring-ℝ :
     (l : Level) (x : ℝ l) →
-    ¬ (is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x) →
+    ¬ is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
     x ＝ raise-ℝ l zero-ℝ
   is-zero-is-noninvertible-commutative-ring-ℝ l x ¬inv-x =
     eq-sim-ℝ
