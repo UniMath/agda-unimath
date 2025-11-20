@@ -43,7 +43,7 @@ Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
 $P ≐ (A \mathbin{◃} B)$ and $Q ≐ (C \mathbin{◃} D)$, a
 [morphism](trees.morphisms-polynomial-endofunctors.md) $α : P → Q$ is an
 {{#concept "equivalence" Disambiguation="of polynomial endofunctors of types" Agda=is-equiv-hom-polynomial-endofunctor Agda=equiv-polynomial-endofunctor}}
-if the map on shapes $α : A → B$ is an equivalence and the family of maps on
+if the map on shapes $α₀ : A → B$ is an equivalence and the family of maps on
 positions
 
 $$α₁ : (a : A) → D (α₀ a) → B a$$
