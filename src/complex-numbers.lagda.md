@@ -9,6 +9,7 @@ open import complex-numbers.apartness-complex-numbers public
 open import complex-numbers.complex-numbers public
 open import complex-numbers.conjugation-complex-numbers public
 open import complex-numbers.eisenstein-integers public
+open import complex-numbers.field-of-complex-numbers public
 open import complex-numbers.gaussian-integers public
 open import complex-numbers.large-additive-group-of-complex-numbers public
 open import complex-numbers.large-ring-of-complex-numbers public

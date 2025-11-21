@@ -23,6 +23,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -162,36 +163,47 @@ inv-nonzero-ℂ z = (complex-inv-nonzero-ℂ z , is-nonzero-complex-inv-nonzero-
 ### A complex number is invertible if and only if it is nonzero
 
 ```agda
-abstract
-  is-nonzero-is-invertible-ℂ :
-    {l : Level} (z : ℂ l) →
-    is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z →
-    is-nonzero-ℂ z
-  is-nonzero-is-invertible-ℂ z (w , zw=1 , _) =
-    is-nonzero-has-right-inverse-mul-ℂ
-      ( z)
-      ( w)
-      ( transitive-sim-ℂ _ _ _
-        ( symmetric-sim-ℂ (sim-raise-ℂ _ one-ℂ))
-        ( sim-eq-ℂ zw=1))
+module _
+  {l : Level}
+  (z : ℂ l)
+  where
 
-  is-invertible-is-nonzero-ℂ :
-    {l : Level} (z : ℂ l) → is-nonzero-ℂ z →
-    is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z
-  is-invertible-is-nonzero-ℂ z z≠0 =
-    ( complex-inv-nonzero-ℂ (z , z≠0) ,
-      eq-sim-ℂ
-        ( similarity-reasoning-ℂ
-          z *ℂ complex-inv-nonzero-ℂ (z , z≠0)
-          ~ℂ one-ℂ
-            by right-inverse-law-mul-nonzero-ℂ (z , z≠0)
-          ~ℂ raise-ℂ _ one-ℂ
-            by sim-raise-ℂ _ one-ℂ) ,
-      eq-sim-ℂ
-        ( similarity-reasoning-ℂ
-          complex-inv-nonzero-ℂ (z , z≠0) *ℂ z
-          ~ℂ one-ℂ
-            by left-inverse-law-mul-nonzero-ℂ (z , z≠0)
-          ~ℂ raise-ℂ _ one-ℂ
-            by sim-raise-ℂ _ one-ℂ))
+  abstract
+    is-nonzero-is-invertible-ℂ :
+      is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z →
+      is-nonzero-ℂ z
+    is-nonzero-is-invertible-ℂ (w , zw=1 , _) =
+      is-nonzero-has-right-inverse-mul-ℂ
+        ( z)
+        ( w)
+        ( transitive-sim-ℂ _ _ _
+          ( symmetric-sim-ℂ (sim-raise-ℂ _ one-ℂ))
+          ( sim-eq-ℂ zw=1))
+
+    is-invertible-is-nonzero-ℂ :
+      is-nonzero-ℂ z →
+      is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z
+    is-invertible-is-nonzero-ℂ z≠0 =
+      ( complex-inv-nonzero-ℂ (z , z≠0) ,
+        eq-sim-ℂ
+          ( similarity-reasoning-ℂ
+            z *ℂ complex-inv-nonzero-ℂ (z , z≠0)
+            ~ℂ one-ℂ
+              by right-inverse-law-mul-nonzero-ℂ (z , z≠0)
+            ~ℂ raise-ℂ _ one-ℂ
+              by sim-raise-ℂ _ one-ℂ) ,
+        eq-sim-ℂ
+          ( similarity-reasoning-ℂ
+            complex-inv-nonzero-ℂ (z , z≠0) *ℂ z
+            ~ℂ one-ℂ
+              by left-inverse-law-mul-nonzero-ℂ (z , z≠0)
+            ~ℂ raise-ℂ _ one-ℂ
+              by sim-raise-ℂ _ one-ℂ))
+
+  is-invertible-iff-is-nonzero-ℂ :
+    (is-invertible-element-Commutative-Ring (commutative-ring-ℂ l) z) ↔
+    (is-nonzero-ℂ z)
+  is-invertible-iff-is-nonzero-ℂ =
+    ( is-nonzero-is-invertible-ℂ ,
+      is-invertible-is-nonzero-ℂ)
 ```

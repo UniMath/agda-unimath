@@ -7,9 +7,17 @@ module linear-algebra.complex-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import complex-numbers.local-ring-of-complex-numbers
+open import complex-numbers.addition-complex-numbers
+open import complex-numbers.complex-numbers
+open import complex-numbers.field-of-complex-numbers
+open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
 
 open import linear-algebra.vector-spaces
 ```
@@ -20,7 +28,7 @@ open import linear-algebra.vector-spaces
 
 ```agda
 ℂ-Vector-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-ℂ-Vector-Space l1 l2 = Vector-Space l2 (local-commutative-ring-ℂ l1)
+ℂ-Vector-Space l1 l2 = Vector-Space l2 (heyting-field-ℂ l1)
 ```
 
 ## Properties
@@ -31,7 +39,7 @@ module _
   where
 
   ab-ℂ-Vector-Space : Ab l2
-  ab-ℂ-Vector-Space = ab-Vector-Space (local-commutative-ring-ℂ l1) V
+  ab-ℂ-Vector-Space = ab-Vector-Space (heyting-field-ℂ l1) V
 
   set-ℂ-Vector-Space : Set l2
   set-ℂ-Vector-Space = set-Ab ab-ℂ-Vector-Space
@@ -50,7 +58,7 @@ module _
   neg-ℂ-Vector-Space = neg-Ab ab-ℂ-Vector-Space
 
   mul-ℂ-Vector-Space : ℂ l1 → type-ℂ-Vector-Space → type-ℂ-Vector-Space
-  mul-ℂ-Vector-Space = mul-Vector-Space (local-commutative-ring-ℂ l1) V
+  mul-ℂ-Vector-Space = mul-Vector-Space (heyting-field-ℂ l1) V
 
   associative-add-ℂ-Vector-Space :
     (v w x : type-ℂ-Vector-Space) →
@@ -87,58 +95,67 @@ module _
     (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (raise-ℂ l1 one-ℂ) v ＝ v
   left-unit-law-mul-ℂ-Vector-Space =
-    left-unit-law-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    left-unit-law-mul-Vector-Space (heyting-field-ℂ l1) V
 
   left-distributive-mul-add-ℂ-Vector-Space :
     (r : ℂ l1) (v w : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space r (add-ℂ-Vector-Space v w) ＝
     add-ℂ-Vector-Space (mul-ℂ-Vector-Space r v) (mul-ℂ-Vector-Space r w)
   left-distributive-mul-add-ℂ-Vector-Space =
-    left-distributive-mul-add-Vector-Space (local-commutative-ring-ℂ l1) V
+    left-distributive-mul-add-Vector-Space (heyting-field-ℂ l1) V
 
   right-distributive-mul-add-ℂ-Vector-Space :
     (r s : ℂ l1) (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (r +ℂ s) v ＝
     add-ℂ-Vector-Space (mul-ℂ-Vector-Space r v) (mul-ℂ-Vector-Space s v)
   right-distributive-mul-add-ℂ-Vector-Space =
-    right-distributive-mul-add-Vector-Space (local-commutative-ring-ℂ l1) V
+    right-distributive-mul-add-Vector-Space (heyting-field-ℂ l1) V
 
   associative-mul-ℂ-Vector-Space :
     (r s : ℂ l1) (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (r *ℂ s) v ＝
     mul-ℂ-Vector-Space r (mul-ℂ-Vector-Space s v)
   associative-mul-ℂ-Vector-Space =
-    associative-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    associative-mul-Vector-Space (heyting-field-ℂ l1) V
 
   left-zero-law-mul-ℂ-Vector-Space :
     (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (raise-ℂ l1 zero-ℂ) v ＝ zero-ℂ-Vector-Space
   left-zero-law-mul-ℂ-Vector-Space =
-    left-zero-law-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    left-zero-law-mul-Vector-Space (heyting-field-ℂ l1) V
 
   right-zero-law-mul-ℂ-Vector-Space :
     (r : ℂ l1) →
     mul-ℂ-Vector-Space r zero-ℂ-Vector-Space ＝ zero-ℂ-Vector-Space
   right-zero-law-mul-ℂ-Vector-Space =
-    right-zero-law-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    right-zero-law-mul-Vector-Space (heyting-field-ℂ l1) V
 
   left-negative-law-mul-ℂ-Vector-Space :
     (r : ℂ l1) (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (neg-ℂ r) v ＝
     neg-ℂ-Vector-Space (mul-ℂ-Vector-Space r v)
   left-negative-law-mul-ℂ-Vector-Space =
-    left-negative-law-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    left-negative-law-mul-Vector-Space (heyting-field-ℂ l1) V
 
   right-negative-law-mul-ℂ-Vector-Space :
     (r : ℂ l1) (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space r (neg-ℂ-Vector-Space v) ＝
     neg-ℂ-Vector-Space (mul-ℂ-Vector-Space r v)
   right-negative-law-mul-ℂ-Vector-Space =
-    right-negative-law-mul-Vector-Space (local-commutative-ring-ℂ l1) V
+    right-negative-law-mul-Vector-Space (heyting-field-ℂ l1) V
 
   mul-neg-one-ℂ-Vector-Space :
     (v : type-ℂ-Vector-Space) →
     mul-ℂ-Vector-Space (neg-ℂ (raise-ℂ l1 one-ℂ)) v ＝ neg-ℂ-Vector-Space v
   mul-neg-one-ℂ-Vector-Space =
-    mul-neg-one-Vector-Space (local-commutative-ring-ℂ l1) V
+    mul-neg-one-Vector-Space (heyting-field-ℂ l1) V
+```
+
+### The complex numbers are a complex vector space
+
+```agda
+complex-vector-space-ℂ : (l : Level) → ℂ-Vector-Space l (lsuc l)
+complex-vector-space-ℂ l =
+  vector-space-heyting-field-Heyting-Field
+    ( heyting-field-ℂ l)
 ```
