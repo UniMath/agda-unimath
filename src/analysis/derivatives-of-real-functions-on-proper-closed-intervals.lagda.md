@@ -70,9 +70,10 @@ open import real-numbers.strict-inequality-real-numbers
 Given a function `f` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` of [real numbers](real-numbers.dedekind-real-numbers.md) to the real
-numbers, `g` is a {{#concept "derivative" WD="derivative" WDID=Q29175}} of `f`
-if there [exists](foundation.existential-quantification.md) a modulus function
-`μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
+numbers, `g` is a
+{{#concept "derivative" Disambiguation="of a real-valued function on a proper closed interval" WD="derivative" WDID=Q29175 Agda=is-derivative-real-function-proper-closed-interval-ℝ}}
+of `f` if there [exists](foundation.existential-quantification.md) a modulus
+function `μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
 `μ(ε)`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
 other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|.$$
 
