@@ -11,6 +11,8 @@ module real-numbers.cauchy-sequences-real-numbers where
 ```agda
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
@@ -39,6 +41,9 @@ is a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in the
 ## Definition
 
 ```agda
+is-cauchy-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU l
+is-cauchy-sequence-ℝ {l} = is-cauchy-sequence-Metric-Space (metric-space-ℝ l)
+
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
 cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
 ```
