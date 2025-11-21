@@ -69,21 +69,21 @@ module _
       ( located-metric-space-ℝ l2)
       ( S)
 
-  is-sequence-approaching-point-prop-subset-ℝ :
+  is-sequence-accumulating-to-point-prop-subset-ℝ :
     ℝ l2 → subtype l2 (sequence (type-subtype S))
-  is-sequence-approaching-point-prop-subset-ℝ =
+  is-sequence-accumulating-to-point-prop-subset-ℝ =
     is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space
       ( located-metric-space-ℝ l2)
       ( S)
 
-  is-sequence-approaching-point-subset-ℝ :
+  is-sequence-accumulating-to-point-subset-ℝ :
     ℝ l2 → sequence (type-subtype S) → UU l2
-  is-sequence-approaching-point-subset-ℝ x =
-    is-in-subtype (is-sequence-approaching-point-prop-subset-ℝ x)
+  is-sequence-accumulating-to-point-subset-ℝ x =
+    is-in-subtype (is-sequence-accumulating-to-point-prop-subset-ℝ x)
 
-  sequence-approaching-point-subset-ℝ : ℝ l2 → UU (l1 ⊔ lsuc l2)
-  sequence-approaching-point-subset-ℝ x =
-    type-subtype (is-sequence-approaching-point-prop-subset-ℝ x)
+  sequence-accumulating-to-point-subset-ℝ : ℝ l2 → UU (l1 ⊔ lsuc l2)
+  sequence-accumulating-to-point-subset-ℝ x =
+    type-subtype (is-sequence-accumulating-to-point-prop-subset-ℝ x)
 
   accumulation-point-subset-ℝ : UU (l1 ⊔ lsuc l2)
   accumulation-point-subset-ℝ = type-subtype is-accumulation-point-prop-subset-ℝ
@@ -91,30 +91,30 @@ module _
 
 ## Properties
 
-### Properties of a sequence approaching a point
+### Properties of a sequence accumulating to a point
 
 ```agda
 module _
   {l1 l2 : Level}
   (S : subset-ℝ l1 l2)
   (x : ℝ l2)
-  (y : sequence-approaching-point-subset-ℝ S x)
+  (y : sequence-accumulating-to-point-subset-ℝ S x)
   where
 
-  map-sequence-approaching-point-subset-ℝ : sequence (type-subtype S)
-  map-sequence-approaching-point-subset-ℝ = pr1 y
+  map-sequence-accumulating-to-point-subset-ℝ : sequence (type-subtype S)
+  map-sequence-accumulating-to-point-subset-ℝ = pr1 y
 
-  real-sequence-approaching-point-subset-ℝ : sequence (ℝ l2)
-  real-sequence-approaching-point-subset-ℝ = pr1 ∘ pr1 y
+  real-sequence-accumulating-to-point-subset-ℝ : sequence (ℝ l2)
+  real-sequence-accumulating-to-point-subset-ℝ = pr1 ∘ pr1 y
 
   abstract
-    apart-sequence-approaching-point-subset-ℝ :
-      (n : ℕ) → apart-ℝ (real-sequence-approaching-point-subset-ℝ n) x
-    apart-sequence-approaching-point-subset-ℝ n =
+    apart-sequence-accumulating-to-point-subset-ℝ :
+      (n : ℕ) → apart-ℝ (real-sequence-accumulating-to-point-subset-ℝ n) x
+    apart-sequence-accumulating-to-point-subset-ℝ n =
       apart-apart-located-metric-space-ℝ _ _ (pr1 (pr2 y) n)
 
-    is-limit-sequence-approaching-point-subset-ℝ :
-      is-limit-sequence-ℝ real-sequence-approaching-point-subset-ℝ x
-    is-limit-sequence-approaching-point-subset-ℝ =
+    is-limit-sequence-accumulating-to-point-subset-ℝ :
+      is-limit-sequence-ℝ real-sequence-accumulating-to-point-subset-ℝ x
+    is-limit-sequence-accumulating-to-point-subset-ℝ =
       pr2 (pr2 y)
 ```

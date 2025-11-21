@@ -106,9 +106,9 @@ module _
                       ( g (x , x∈[a,b]) *ℝ (y -ℝ x)))
                     ( real-ℚ⁺ ε *ℝ dist-ℝ x y)))))
 
-  is-modulus-derivative-real-function-proper-closed-interval-ℝ :
+  is-modulus-of-derivative-real-function-proper-closed-interval-ℝ :
     (ℚ⁺ → ℚ⁺) → UU (lsuc l1 ⊔ l2)
-  is-modulus-derivative-real-function-proper-closed-interval-ℝ =
+  is-modulus-of-derivative-real-function-proper-closed-interval-ℝ =
     is-in-subtype
       ( is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ)
 
@@ -135,7 +135,7 @@ module _
   (g : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
   where
 
-  is-derivative-modulus-real-function-proper-closed-interval-ℝ :
+  is-derivative-modulus-of-real-function-proper-closed-interval-ℝ :
     ( (ε : ℚ⁺) →
       Σ ( ℚ⁺)
         ( λ δ →
@@ -145,7 +145,7 @@ module _
             ( dist-ℝ (f y -ℝ f x) (g x *ℝ (pr1 y -ℝ pr1 x)))
             ( real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)))) →
     is-derivative-real-function-proper-closed-interval-ℝ [a,b] f g
-  is-derivative-modulus-real-function-proper-closed-interval-ℝ μ =
+  is-derivative-modulus-of-real-function-proper-closed-interval-ℝ μ =
     intro-exists (pr1 ∘ μ) (pr2 ∘ μ)
 ```
 
@@ -158,24 +158,24 @@ module _
   (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
   (x : type-proper-closed-interval-ℝ l1 [a,b])
   (y :
-    sequence-approaching-point-subset-ℝ
+    sequence-accumulating-to-point-subset-ℝ
       ( subtype-proper-closed-interval-ℝ l1 [a,b])
       ( pr1 x))
   where
 
-  sequence-derivative-approaching-point-proper-closed-interval-ℝ :
+  sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ :
     sequence (ℝ (l1 ⊔ l2))
-  sequence-derivative-approaching-point-proper-closed-interval-ℝ n =
+  sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ n =
     (f (pr1 y n) -ℝ f x) *ℝ
     real-inv-nonzero-ℝ
       ( nonzero-diff-apart-ℝ
-        ( real-sequence-approaching-point-subset-ℝ
+        ( real-sequence-accumulating-to-point-subset-ℝ
           ( subtype-proper-closed-interval-ℝ l1 [a,b])
           ( pr1 x)
           ( y)
           ( n))
         ( pr1 x)
-        ( apart-sequence-approaching-point-subset-ℝ
+        ( apart-sequence-accumulating-to-point-subset-ℝ
           ( subtype-proper-closed-interval-ℝ l1 [a,b])
           ( pr1 x)
           ( y)
@@ -188,27 +188,28 @@ module _
   (g : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
   (x : type-proper-closed-interval-ℝ l1 [a,b])
   (y :
-    sequence-approaching-point-subset-ℝ
+    sequence-accumulating-to-point-subset-ℝ
       ( subtype-proper-closed-interval-ℝ l1 [a,b])
       ( pr1 x))
   where
 
   abstract
-    is-limit-sequence-derivative-approaching-point-proper-closed-interval-ℝ :
+    is-limit-sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ :
       is-derivative-real-function-proper-closed-interval-ℝ [a,b] f g →
       is-limit-sequence-ℝ
-        ( sequence-derivative-approaching-point-proper-closed-interval-ℝ
+        ( sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
           ( [a,b])
           ( f)
           ( x)
           ( y))
         ( g x)
-    is-limit-sequence-derivative-approaching-point-proper-closed-interval-ℝ H =
+    is-limit-sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
+      H =
       let
         open
           do-syntax-trunc-Prop
             ( is-limit-prop-sequence-ℝ
-              ( sequence-derivative-approaching-point-proper-closed-interval-ℝ
+              ( sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
                 ( [a,b])
                 ( f)
                 ( x)
@@ -216,20 +217,20 @@ module _
               ( g x))
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         seq-deriv =
-          sequence-derivative-approaching-point-proper-closed-interval-ℝ
+          sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
             ( [a,b])
             ( f)
             ( x)
             ( y)
         nonzero-diff n =
           nonzero-diff-apart-ℝ
-            ( real-sequence-approaching-point-subset-ℝ
+            ( real-sequence-accumulating-to-point-subset-ℝ
               ( subtype-proper-closed-interval-ℝ l1 [a,b])
               ( pr1 x)
               ( y)
               ( n))
             ( pr1 x)
-            ( apart-sequence-approaching-point-subset-ℝ
+            ( apart-sequence-accumulating-to-point-subset-ℝ
               ( subtype-proper-closed-interval-ℝ l1 [a,b])
               ( pr1 x)
               ( y)
@@ -237,7 +238,7 @@ module _
         real-nonzero-diff n = real-nonzero-ℝ (nonzero-diff n)
       in do
         (μ , is-mod-μ) ←
-          is-limit-sequence-approaching-point-subset-ℝ
+          is-limit-sequence-accumulating-to-point-subset-ℝ
             ( subtype-proper-closed-interval-ℝ l1 [a,b])
             ( pr1 x)
             ( y)
@@ -349,21 +350,21 @@ module _
               ( x)
               ( x∈[a,b]))
         eq-is-limit-sequence-ℝ
-          ( sequence-derivative-approaching-point-proper-closed-interval-ℝ
+          ( sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
             ( [a,b])
             ( f)
             ( x')
             ( y))
           ( g x')
           ( h x')
-          ( is-limit-sequence-derivative-approaching-point-proper-closed-interval-ℝ
+          ( is-limit-sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
             ( [a,b])
             ( f)
             ( g)
             ( x')
             ( y)
             ( G))
-          ( is-limit-sequence-derivative-approaching-point-proper-closed-interval-ℝ
+          ( is-limit-sequence-derivative-accumulating-to-point-proper-closed-interval-ℝ
             ( [a,b])
             ( f)
             ( h)
@@ -459,7 +460,9 @@ module _
       in do
         (μ , is-mod-μ) ← is-derivative-f-f'
         (ν , is-mod-ν) ← is-derivative-g-g'
-        is-derivative-modulus-real-function-proper-closed-interval-ℝ [a,b] _ _
+        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+          ( _)
+          ( _)
           ( λ ε →
             let
               (ε₁ , ε₂ , ε₁+ε₂=ε) = split-ℚ⁺ ε
@@ -553,7 +556,9 @@ module _
       in do
         (μ , is-mod-μ) ← is-derivative-f-f'
         (q , |c|<q) ← exists-ℚ⁺-le-ℝ⁰⁺ (nonnegative-abs-ℝ c)
-        is-derivative-modulus-real-function-proper-closed-interval-ℝ [a,b] _ _
+        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+          ( _)
+          ( _)
           ( λ ε →
             ( μ (ε *ℚ⁺ inv-ℚ⁺ q) ,
               λ x y N⟨ε/q⟩xy →
@@ -616,7 +621,9 @@ module _
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        is-derivative-modulus-real-function-proper-closed-interval-ℝ [a,b] _ _
+        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+          ( _)
+          ( _)
           ( λ ε →
             ( one-ℚ⁺ ,
               λ x y _ →
@@ -661,7 +668,9 @@ module _
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        is-derivative-modulus-real-function-proper-closed-interval-ℝ [a,b] _ _
+        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+          ( _)
+          ( _)
           ( λ ε →
             ( one-ℚ⁺ ,
               λ x y _ →

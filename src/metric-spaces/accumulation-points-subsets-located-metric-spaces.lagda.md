@@ -189,9 +189,9 @@ module _
       ( pr1 ∘ a)
       ( x)
 
-  is-sequence-approaching-point-subset-Located-Metric-Space :
+  is-sequence-accumulating-to-point-subset-Located-Metric-Space :
     sequence (type-subtype S) → UU l2
-  is-sequence-approaching-point-subset-Located-Metric-Space =
+  is-sequence-accumulating-to-point-subset-Located-Metric-Space =
     is-in-subtype
       ( is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space)
 
