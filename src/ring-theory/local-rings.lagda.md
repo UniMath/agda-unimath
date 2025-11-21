@@ -71,3 +71,7 @@ module _
   is-local-ring-Local-Ring : is-local-Ring ring-Local-Ring
   is-local-ring-Local-Ring = pr2 R
 ```
+
+## External links
+
+- [Local ring](https://ncatlab.org/nlab/show/local+ring) at $n$Lab

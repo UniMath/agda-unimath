@@ -210,6 +210,20 @@ abstract opaque
   is-nonzero-has-left-inverse-mul-ℝ x y xy=1 =
     is-nonzero-has-right-inverse-mul-ℝ y x
       ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy=1)
+
+  is-nonzero-is-invertible-ℝ :
+    {l : Level} (x : ℝ l) →
+    is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
+    is-nonzero-ℝ x
+  is-nonzero-is-invertible-ℝ {l} x (y , xy=1 , _) =
+    is-nonzero-has-right-inverse-mul-ℝ x y
+      ( inv-tr
+        ( λ z → sim-ℝ z one-ℝ)
+        ( xy=1)
+        ( symmetric-sim-ℝ
+          { x = one-ℝ}
+          { y = raise-ℝ l one-ℝ}
+          ( sim-raise-ℝ l one-ℝ)))
 ```
 
 ### The multiplicative inverse is unique
