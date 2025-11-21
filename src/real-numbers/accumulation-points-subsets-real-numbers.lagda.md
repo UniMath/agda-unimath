@@ -72,7 +72,7 @@ module _
   is-sequence-approaching-point-prop-subset-ℝ :
     ℝ l2 → subtype l2 (sequence (type-subtype S))
   is-sequence-approaching-point-prop-subset-ℝ =
-    is-sequence-approaching-point-prop-subset-Located-Metric-Space
+    is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space
       ( located-metric-space-ℝ l2)
       ( S)
 

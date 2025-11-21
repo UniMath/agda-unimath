@@ -88,7 +88,7 @@ module _
 
   is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ :
     (ℚ⁺ → ℚ⁺) → Prop (lsuc l1 ⊔ l2)
-  is-modulus-derivative-prop-real-function-proper-closed-interval-ℝ μ =
+  is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ μ =
     Π-Prop
       ( ℚ⁺)
       ( λ ε →
@@ -110,13 +110,13 @@ module _
     (ℚ⁺ → ℚ⁺) → UU (lsuc l1 ⊔ l2)
   is-modulus-derivative-real-function-proper-closed-interval-ℝ =
     is-in-subtype
-      ( is-modulus-derivative-prop-real-function-proper-closed-interval-ℝ)
+      ( is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ)
 
   is-derivative-prop-real-function-proper-closed-interval-ℝ :
     Prop (lsuc l1 ⊔ l2)
   is-derivative-prop-real-function-proper-closed-interval-ℝ =
     is-inhabited-subtype-Prop
-      ( is-modulus-derivative-prop-real-function-proper-closed-interval-ℝ)
+      ( is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ)
 
   is-derivative-real-function-proper-closed-interval-ℝ : UU (lsuc l1 ⊔ l2)
   is-derivative-real-function-proper-closed-interval-ℝ =
@@ -149,7 +149,7 @@ module _
     intro-exists (pr1 ∘ μ) (pr2 ∘ μ)
 ```
 
-### If `g` is a derivative of `f`, and `aₙ` is a sequence accumulating to `x`, and the limit exists, then `g x` is equal to the limit of `(f aₙ - f x)/(aₙ - x)` as `n → ∞` 
+### If `g` is a derivative of `f`, and `aₙ` is a sequence accumulating to `x`, and the limit exists, then `g x` is equal to the limit of `(f aₙ - f x)/(aₙ - x)` as `n → ∞`
 
 ```agda
 module _
@@ -305,7 +305,7 @@ module _
                 ≤ ( real-ℚ⁺ ε) *ℝ
                   ( abs-ℝ
                     ( ( pr1 (pr1 y n) -ℝ pr1 x) *ℝ
-                      ( real-inv-nonzero-ℝ (nonzero-diff n)))
+                      ( real-inv-nonzero-ℝ (nonzero-diff n))))
                   by leq-eq-ℝ (ap-mul-ℝ refl (inv (abs-mul-ℝ _ _)))
                 ≤ real-ℚ⁺ ε *ℝ abs-ℝ one-ℝ
                   by
@@ -388,6 +388,21 @@ module _
       ( is-derivative-real-function-proper-closed-interval-ℝ [a,b] f)
 
   abstract
+    eq-is-derivative-real-function-proper-closed-interval-ℝ :
+      (g h : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2)) →
+      is-derivative-real-function-proper-closed-interval-ℝ [a,b] f g →
+      is-derivative-real-function-proper-closed-interval-ℝ [a,b] f h →
+      g ＝ h
+    eq-is-derivative-real-function-proper-closed-interval-ℝ g h G H =
+      eq-htpy
+        ( htpy-is-derivative-real-function-proper-closed-interval-ℝ
+          ( [a,b])
+          ( f)
+          ( g)
+          ( h)
+          ( G)
+          ( H))
+
     all-elements-equal-is-differentiable-real-function-proper-closed-interval-ℝ :
       all-elements-equal
         ( is-differentiable-real-function-proper-closed-interval-ℝ)
@@ -395,14 +410,7 @@ module _
       (g , G) (h , H) =
       eq-type-subtype
         ( is-derivative-prop-real-function-proper-closed-interval-ℝ [a,b] f)
-        ( eq-htpy
-          ( htpy-is-derivative-real-function-proper-closed-interval-ℝ
-            ( [a,b])
-            ( f)
-            ( g)
-            ( h)
-            ( G)
-            ( H)))
+        ( eq-is-derivative-real-function-proper-closed-interval-ℝ g h G H)
 
     is-prop-is-differentiable-real-function-proper-closed-interval-ℝ :
       is-prop is-differentiable-real-function-proper-closed-interval-ℝ
