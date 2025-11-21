@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module analysis.derivatives-of-real-functions-on-proper-closed-intervals where
 ```
 
