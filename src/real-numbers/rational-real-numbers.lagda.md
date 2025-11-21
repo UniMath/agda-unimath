@@ -25,8 +25,8 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.negation
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
