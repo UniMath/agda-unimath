@@ -16,6 +16,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -238,33 +239,30 @@ module _
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2)
   where
 
+  refl-norm-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space V) →
+    sim-ℝ zero-ℝ (dist-Normed-ℝ-Vector-Space V v v)
+  refl-norm-Normed-ℝ-Vector-Space v =
+    inv-tr
+      ( sim-ℝ zero-ℝ)
+      ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+        ( v))
+      ( sim-raise-ℝ l1 zero-ℝ)
+
   metric-Normed-ℝ-Vector-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
   metric-Normed-ℝ-Vector-Space =
     ( nonnegative-dist-Normed-ℝ-Vector-Space V ,
-      ( λ v →
-        similarity-reasoning-ℝ
-          zero-ℝ
-          ~ℝ raise-ℝ l1 zero-ℝ
-            by sim-raise-ℝ l1 zero-ℝ
-          ~ℝ dist-Normed-ℝ-Vector-Space V v v
-            by
-              sim-eq-ℝ
-                ( inv
-                  ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
-                    ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
-                    ( v)))) ,
+      refl-norm-Normed-ℝ-Vector-Space ,
       ( λ v w → eq-ℝ⁰⁺ _ _ (commutative-dist-Normed-ℝ-Vector-Space V v w)) ,
       triangular-dist-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V) ,
       ( λ v w 0~dvw →
         is-extensional-dist-Normed-ℝ-Vector-Space V v w
           ( eq-sim-ℝ
-            ( similarity-reasoning-ℝ
-              dist-Normed-ℝ-Vector-Space V v w
-              ~ℝ zero-ℝ
-                by symmetric-sim-ℝ 0~dvw
-              ~ℝ raise-ℝ l1 zero-ℝ
-                by sim-raise-ℝ l1 zero-ℝ))))
+            ( transitive-sim-ℝ _ _ _
+              ( sim-raise-ℝ l1 zero-ℝ)
+              ( symmetric-sim-ℝ 0~dvw)))))
 
   metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
   metric-space-Normed-ℝ-Vector-Space =
@@ -289,18 +287,7 @@ normed-real-vector-space-ℝ :
 normed-real-vector-space-ℝ l =
   ( real-vector-space-ℝ l ,
     ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
-    λ x |x|=0 →
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          x
-          ~ℝ zero-ℝ
-            by
-              sim-zero-sim-zero-abs-ℝ x
-                ( transitive-sim-ℝ _ _ _
-                  ( sim-raise-ℝ' l zero-ℝ)
-                  ( sim-eq-ℝ |x|=0))
-          ~ℝ raise-ℝ l zero-ℝ
-            by sim-raise-ℝ l zero-ℝ))
+    eq-raise-zero-eq-raise-zero-abs-ℝ)
 
 abstract
   eq-metric-space-normed-real-vector-space-metric-space-ℝ :
