@@ -10,6 +10,7 @@ module real-numbers.nonnegative-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
@@ -143,6 +144,13 @@ nonnegative-real-ℚ⁰⁺ (q , is-nonneg-q) =
 
 nonnegative-real-ℚ⁺ : ℚ⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁺ q = nonnegative-real-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
+```
+
+### The canonical embedding of natural numbers in the nonnegative real numbers
+
+```agda
+nonnegative-real-ℕ : ℕ → ℝ⁰⁺ lzero
+nonnegative-real-ℕ n = nonnegative-real-ℚ⁰⁺ (nonnegative-rational-ℕ n)
 ```
 
 ### Important nonnegative real numbers
