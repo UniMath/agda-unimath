@@ -73,8 +73,8 @@ Given a function `f` from a
 numbers, `g` is a {{#concept "derivative" WD="derivative" WDID=Q29175}} of `f`
 if there [exists](foundation.existential-quantification.md) a modulus function
 `μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
-`μ ε`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
-other, $$|f(y) - f(x) - g(x)(y - x)| \leq ε|y - x|$$.
+`μ(ε)`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
+other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|.$$
 
 ## Definition
 
@@ -86,7 +86,7 @@ module _
   (g : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
   where
 
-  is-modulus-derivative-prop-real-function-proper-closed-interval-ℝ :
+  is-modulus-of-derivative-prop-real-function-proper-closed-interval-ℝ :
     (ℚ⁺ → ℚ⁺) → Prop (lsuc l1 ⊔ l2)
   is-modulus-derivative-prop-real-function-proper-closed-interval-ℝ μ =
     Π-Prop
@@ -149,7 +149,7 @@ module _
     intro-exists (pr1 ∘ μ) (pr2 ∘ μ)
 ```
 
-### If `g` is a derivative of `f`, and `aₙ` is a sequence apart from but approaching `x`, and the limit exists, `g x` is equal to the limit as `n → ∞` of `(f aₙ - f x)/(aₙ - x)`
+### If `g` is a derivative of `f`, and `aₙ` is a sequence accumulating to `x`, and the limit exists, then `g x` is equal to the limit of `(f aₙ - f x)/(aₙ - x)` as `n → ∞` 
 
 ```agda
 module _
@@ -458,60 +458,60 @@ module _
             in
               ( min-ℚ⁺ (μ ε₁) (ν ε₂) ,
                 λ x y Nxy →
-                  chain-of-inequalities
-                    dist-ℝ
-                      ( (f y +ℝ g y) -ℝ (f x +ℝ g x))
-                      ( (f' x +ℝ g' x) *ℝ (pr1 y -ℝ pr1 x))
-                    ≤ dist-ℝ
-                        ( (f y -ℝ f x) +ℝ (g y -ℝ g x))
-                        ( f' x *ℝ (pr1 y -ℝ pr1 x) +ℝ g' x *ℝ (pr1 y -ℝ pr1 x))
-                      by
-                        leq-eq-ℝ
-                          ( ap-dist-ℝ
-                            ( interchange-law-diff-add-ℝ _ _ _ _)
-                            ( right-distributive-mul-add-ℝ _ _ _))
-                    ≤ abs-ℝ
-                        ( ( (f y -ℝ f x) -ℝ f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
-                          ( (g y -ℝ g x) -ℝ g' x *ℝ (pr1 y -ℝ pr1 x)))
-                      by
-                        leq-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _))
-                    ≤ ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
-                      ( dist-ℝ (g y -ℝ g x) (g' x *ℝ (pr1 y -ℝ pr1 x)))
-                      by triangle-inequality-abs-ℝ _ _
-                    ≤ ( real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
-                      ( real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y))
-                      by
-                        preserves-leq-add-ℝ
-                          ( is-mod-μ
-                            ( ε₁)
-                            ( x)
-                            ( y)
-                            ( weakly-monotonic-neighborhood-Metric-Space
-                              ( metric-space-ℝ l1)
-                              ( pr1 x)
-                              ( pr1 y)
-                              ( min-ℚ⁺ (μ ε₁) (ν ε₂))
-                              ( μ ε₁)
-                              ( leq-left-min-ℚ⁺ _ _)
-                              ( Nxy)))
-                          ( is-mod-ν
-                            ( ε₂)
-                            ( x)
-                            ( y)
-                            ( weakly-monotonic-neighborhood-Metric-Space
-                              ( metric-space-ℝ l1)
-                              ( pr1 x)
-                              ( pr1 y)
-                              ( min-ℚ⁺ (μ ε₁) (ν ε₂))
-                              ( ν ε₂)
-                              ( leq-right-min-ℚ⁺ _ _)
-                              ( Nxy)))
-                    ≤ (real-ℚ⁺ ε₁ +ℝ real-ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
-                      by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
-                    ≤ real-ℚ⁺ (ε₁ +ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
-                      by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
-                    ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                      by leq-eq-ℝ (ap-mul-ℝ (ap real-ℚ⁺ ε₁+ε₂=ε) refl)))
+                chain-of-inequalities
+                  dist-ℝ
+                    ( (f y +ℝ g y) -ℝ (f x +ℝ g x))
+                    ( (f' x +ℝ g' x) *ℝ (pr1 y -ℝ pr1 x))
+                  ≤ dist-ℝ
+                      ( (f y -ℝ f x) +ℝ (g y -ℝ g x))
+                      ( f' x *ℝ (pr1 y -ℝ pr1 x) +ℝ g' x *ℝ (pr1 y -ℝ pr1 x))
+                    by
+                      leq-eq-ℝ
+                        ( ap-dist-ℝ
+                          ( interchange-law-diff-add-ℝ _ _ _ _)
+                          ( right-distributive-mul-add-ℝ _ _ _))
+                  ≤ abs-ℝ
+                      ( ( (f y -ℝ f x) -ℝ f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
+                        ( (g y -ℝ g x) -ℝ g' x *ℝ (pr1 y -ℝ pr1 x)))
+                    by
+                      leq-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _))
+                  ≤ ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
+                    ( dist-ℝ (g y -ℝ g x) (g' x *ℝ (pr1 y -ℝ pr1 x)))
+                    by triangle-inequality-abs-ℝ _ _
+                  ≤ ( real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
+                    ( real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y))
+                    by
+                      preserves-leq-add-ℝ
+                        ( is-mod-μ
+                          ( ε₁)
+                          ( x)
+                          ( y)
+                          ( weakly-monotonic-neighborhood-Metric-Space
+                            ( metric-space-ℝ l1)
+                            ( pr1 x)
+                            ( pr1 y)
+                            ( min-ℚ⁺ (μ ε₁) (ν ε₂))
+                            ( μ ε₁)
+                            ( leq-left-min-ℚ⁺ _ _)
+                            ( Nxy)))
+                        ( is-mod-ν
+                          ( ε₂)
+                          ( x)
+                          ( y)
+                          ( weakly-monotonic-neighborhood-Metric-Space
+                            ( metric-space-ℝ l1)
+                            ( pr1 x)
+                            ( pr1 y)
+                            ( min-ℚ⁺ (μ ε₁) (ν ε₂))
+                            ( ν ε₂)
+                            ( leq-right-min-ℚ⁺ _ _)
+                            ( Nxy)))
+                  ≤ (real-ℚ⁺ ε₁ +ℝ real-ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
+                    by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+                  ≤ real-ℚ⁺ (ε₁ +ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
+                    by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
+                  ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
+                    by leq-eq-ℝ (ap-mul-ℝ (ap real-ℚ⁺ ε₁+ε₂=ε) refl)))
 ```
 
 ### The derivative of `cf` is `cf'`
@@ -549,44 +549,44 @@ module _
           ( λ ε →
             ( μ (ε *ℚ⁺ inv-ℚ⁺ q) ,
               λ x y N⟨ε/q⟩xy →
-                chain-of-inequalities
-                  dist-ℝ (c *ℝ f y -ℝ c *ℝ f x) (c *ℝ f' x *ℝ (pr1 y -ℝ pr1 x))
-                  ≤ dist-ℝ (c *ℝ (f y -ℝ f x)) (c *ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)))
-                    by
-                      leq-eq-ℝ
-                        ( ap-dist-ℝ
-                          ( inv (left-distributive-mul-diff-ℝ _ _ _))
-                          ( associative-mul-ℝ _ _ _))
-                  ≤ abs-ℝ c *ℝ dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))
-                    by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
-                  ≤ ( real-ℚ⁺ q) *ℝ
-                    ( real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
-                    by
-                      preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-abs-ℝ c)
-                        ( nonnegative-real-ℚ⁺ q)
-                        ( nonnegative-dist-ℝ _ _)
-                        ( nonnegative-real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ⁰⁺
-                          nonnegative-dist-ℝ _ _)
-                        ( leq-le-ℝ |c|<q)
-                        ( is-mod-μ
-                          ( ε *ℚ⁺ inv-ℚ⁺ q)
-                          ( x)
-                          ( y)
-                          ( N⟨ε/q⟩xy))
-                  ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                    by
-                      leq-eq-ℝ
-                        ( ( inv (associative-mul-ℝ _ _ _)) ∙
-                          ( ap-mul-ℝ
-                            ( ( mul-real-ℚ _ _) ∙
-                              ( ap
-                                ( real-ℚ⁺)
-                                ( is-identity-right-conjugation-Ab
-                                  ( abelian-group-mul-ℚ⁺)
-                                  ( q)
-                                  ( ε))))
-                            ( refl)))))
+              chain-of-inequalities
+                dist-ℝ (c *ℝ f y -ℝ c *ℝ f x) (c *ℝ f' x *ℝ (pr1 y -ℝ pr1 x))
+                ≤ dist-ℝ (c *ℝ (f y -ℝ f x)) (c *ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)))
+                  by
+                    leq-eq-ℝ
+                      ( ap-dist-ℝ
+                        ( inv (left-distributive-mul-diff-ℝ _ _ _))
+                        ( associative-mul-ℝ _ _ _))
+                ≤ abs-ℝ c *ℝ dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))
+                  by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
+                ≤ ( real-ℚ⁺ q) *ℝ
+                  ( real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
+                  by
+                    preserves-leq-mul-ℝ⁰⁺
+                      ( nonnegative-abs-ℝ c)
+                      ( nonnegative-real-ℚ⁺ q)
+                      ( nonnegative-dist-ℝ _ _)
+                      ( nonnegative-real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ⁰⁺
+                        nonnegative-dist-ℝ _ _)
+                      ( leq-le-ℝ |c|<q)
+                      ( is-mod-μ
+                        ( ε *ℚ⁺ inv-ℚ⁺ q)
+                        ( x)
+                        ( y)
+                        ( N⟨ε/q⟩xy))
+                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
+                  by
+                    leq-eq-ℝ
+                      ( ( inv (associative-mul-ℝ _ _ _)) ∙
+                        ( ap-mul-ℝ
+                          ( ( mul-real-ℚ _ _) ∙
+                            ( ap
+                              ( real-ℚ⁺)
+                              ( is-identity-right-conjugation-Ab
+                                ( abelian-group-mul-ℚ⁺)
+                                ( q)
+                                ( ε))))
+                          ( refl)))))
 ```
 
 ### The derivative of a constant function is 0
@@ -657,21 +657,21 @@ module _
           ( λ ε →
             ( one-ℚ⁺ ,
               λ x y _ →
-                chain-of-inequalities
-                  dist-ℝ (pr1 y -ℝ pr1 x) (raise-ℝ l one-ℝ *ℝ (pr1 y -ℝ pr1 x))
-                  ≤ dist-ℝ (pr1 y -ℝ pr1 x) (pr1 y -ℝ pr1 x)
-                    by
-                      leq-eq-ℝ
-                        ( ap-dist-ℝ
-                          ( refl)
-                          ( ( eq-sim-ℝ
-                              ( preserves-sim-right-mul-ℝ _ _ _
-                                ( symmetric-sim-ℝ (sim-raise-ℝ _ _)))) ∙
-                            ( left-unit-law-mul-ℝ _)))
-                  ≤ zero-ℝ
-                    by leq-sim-ℝ (diagonal-dist-ℝ _)
-                  ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                    by
-                      is-nonnegative-real-ℝ⁰⁺
-                        ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
+              chain-of-inequalities
+                dist-ℝ (pr1 y -ℝ pr1 x) (raise-ℝ l one-ℝ *ℝ (pr1 y -ℝ pr1 x))
+                ≤ dist-ℝ (pr1 y -ℝ pr1 x) (pr1 y -ℝ pr1 x)
+                  by
+                    leq-eq-ℝ
+                      ( ap-dist-ℝ
+                        ( refl)
+                        ( ( eq-sim-ℝ
+                            ( preserves-sim-right-mul-ℝ _ _ _
+                              ( symmetric-sim-ℝ (sim-raise-ℝ _ _)))) ∙
+                          ( left-unit-law-mul-ℝ _)))
+                ≤ zero-ℝ
+                  by leq-sim-ℝ (diagonal-dist-ℝ _)
+                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
+                  by
+                    is-nonnegative-real-ℝ⁰⁺
+                      ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
 ```
