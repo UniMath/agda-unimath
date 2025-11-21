@@ -643,7 +643,3 @@ real-inner-product-space-ℝ l =
   Wikipedia
 - [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
   $n$Lab
-
-## References
-
-{{#bibliography}}
