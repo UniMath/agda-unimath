@@ -54,6 +54,9 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
     type-Large-Ring l1 → type-Large-Ring l2 → type-Large-Ring (l1 ⊔ l2)
   add-Large-Ring = add-Large-Ab large-ab-Large-Ring
 
+  neg-Large-Ring : {l : Level} → type-Large-Ring l → type-Large-Ring l
+  neg-Large-Ring = neg-Large-Ab large-ab-Large-Ring
+
   zero-Large-Ring : type-Large-Ring lzero
   zero-Large-Ring = zero-Large-Ab large-ab-Large-Ring
 
@@ -267,6 +270,18 @@ module _
     add-Large-Ring R x (zero-Large-Ring R) ＝ x
   right-unit-law-add-Large-Ring =
     right-unit-law-add-Large-Ab (large-ab-Large-Ring R)
+
+  left-inverse-law-add-Large-Ring :
+    {l : Level} (x : type-Large-Ring R l) →
+    add-Large-Ring R (neg-Large-Ring R x) x ＝ raise-zero-Large-Ring R l
+  left-inverse-law-add-Large-Ring =
+    left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+
+  right-inverse-law-add-Large-Ring :
+    {l : Level} (x : type-Large-Ring R l) →
+    add-Large-Ring R x (neg-Large-Ring R x) ＝ raise-zero-Large-Ring R l
+  right-inverse-law-add-Large-Ring =
+    right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
 
   commutative-add-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →

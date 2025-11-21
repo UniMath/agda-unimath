@@ -292,26 +292,26 @@ module _
                   ( map-seminorm-Seminormed-ℝ-Vector-Space V)
                   ( inv (left-zero-law-mul-Seminormed-ℝ-Vector-Space V _)))
           ~ℝ
-            abs-ℝ (raise-ℝ l1 zero-ℝ) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
+            ( abs-ℝ (raise-ℝ l1 zero-ℝ)) *ℝ
+            ( map-seminorm-Seminormed-ℝ-Vector-Space
               ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
+              ( zero-Seminormed-ℝ-Vector-Space V))
             by
               sim-eq-ℝ
                 ( is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _)
           ~ℝ
-            abs-ℝ zero-ℝ *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
+            ( abs-ℝ zero-ℝ) *ℝ
+            ( map-seminorm-Seminormed-ℝ-Vector-Space
               ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
+              ( zero-Seminormed-ℝ-Vector-Space V))
             by
               preserves-sim-right-mul-ℝ _ _ _
                 ( preserves-sim-abs-ℝ (sim-raise-ℝ' l1 zero-ℝ))
           ~ℝ
-            zero-ℝ *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
+            ( zero-ℝ) *ℝ
+            ( map-seminorm-Seminormed-ℝ-Vector-Space
               ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
+              ( zero-Seminormed-ℝ-Vector-Space V))
             by sim-eq-ℝ (ap-mul-ℝ abs-zero-ℝ refl)
           ~ℝ zero-ℝ
             by left-zero-law-mul-ℝ _
@@ -362,14 +362,14 @@ module _
                   ( map-seminorm-Seminormed-ℝ-Vector-Space V)
                   ( inv (mul-neg-one-Seminormed-ℝ-Vector-Space V v)))
           ~ℝ
-            abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space V v
+            ( abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ))) *ℝ
+            ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
             by
               sim-eq-ℝ
                 ( is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _)
           ~ℝ
-            abs-ℝ (raise-ℝ l1 one-ℝ) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space V v
+            ( abs-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
+            ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
             by sim-eq-ℝ (ap-mul-ℝ (abs-neg-ℝ _) refl)
           ~ℝ abs-ℝ one-ℝ *ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
             by
@@ -425,8 +425,8 @@ module _
                 ( ap
                   ( map-seminorm-Seminormed-ℝ-Vector-Space V)
                   ( inv (add-diff-Seminormed-ℝ-Vector-Space V v w x)))
-          ≤ dist-Seminormed-ℝ-Vector-Space V v w +ℝ
-            dist-Seminormed-ℝ-Vector-Space V w x
+          ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
+            ( dist-Seminormed-ℝ-Vector-Space V w x)
             by triangular-Seminormed-ℝ-Vector-Space V _ _
 ```
 
@@ -460,13 +460,13 @@ module _
                 by
                   leq-eq-ℝ
                     ( inv (is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
-              ≤ map-seminorm-Seminormed-ℝ-Vector-Space V v +ℝ
-                map-seminorm-Seminormed-ℝ-Vector-Space
+              ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
+                ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
-                  ( neg-Seminormed-ℝ-Vector-Space V v)
+                  ( neg-Seminormed-ℝ-Vector-Space V v))
                 by triangular-Seminormed-ℝ-Vector-Space V _ _
-              ≤ map-seminorm-Seminormed-ℝ-Vector-Space V v +ℝ
-                map-seminorm-Seminormed-ℝ-Vector-Space V v
+              ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
+                ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
                 by
                   leq-eq-ℝ
                     ( ap-add-ℝ
@@ -561,8 +561,8 @@ module _
       in
         chain-of-inequalities
         dist-Seminormed-ℝ-Vector-Space V v x
-        ≤ dist-Seminormed-ℝ-Vector-Space V v w +ℝ
-          dist-Seminormed-ℝ-Vector-Space V w x
+        ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
+          ( dist-Seminormed-ℝ-Vector-Space V w x)
           by triangular-dist-Seminormed-ℝ-Vector-Space V v w x
         ≤ real-ℚ⁺ d1 +ℝ real-ℚ⁺ d2
           by preserves-leq-add-ℝ Nd1vw Nd2wx

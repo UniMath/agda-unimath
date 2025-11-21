@@ -119,8 +119,8 @@ module _
       antirefl-Large-Apartness-Relation R ,
       symmetric-Large-Apartness-Relation R ,
       λ a b c a#b →
-        map-disjunction
-          ( id)
-          ( symmetric-Large-Apartness-Relation R c b)
-          ( cotransitive-Large-Apartness-Relation R a b c a#b))
+      map-disjunction
+        ( id)
+        ( symmetric-Large-Apartness-Relation R c b)
+        ( cotransitive-Large-Apartness-Relation R a b c a#b))
 ```
