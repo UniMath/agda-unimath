@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -201,5 +202,16 @@ module _
                     ( nonnegative-square-ℝ x)
                     ( refl))
             ＝ abs-ℝ x by inv (eq-abs-sqrt-square-ℝ x))
-          ( is-positive-sqrt-ℝ⁺ (square-ℝ x , 0<x²)))
+          ( is-positive-sqrt-is-positive-ℝ⁰⁺ _ 0<x²))
+```
+
+### Being nonzero is preserved by similarity
+
+```agda
+abstract
+  is-nonzero-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → is-nonzero-ℝ x → is-nonzero-ℝ y
+  is-nonzero-sim-ℝ x~y =
+    map-disjunction (is-negative-sim-ℝ x~y) (is-positive-sim-ℝ x~y)
 ```

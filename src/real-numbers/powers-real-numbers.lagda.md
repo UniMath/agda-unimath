@@ -184,7 +184,7 @@ abstract
   is-positive-power-ℝ⁺ :
     {l : Level} (n : ℕ) (x : ℝ⁺ l) → is-positive-ℝ (power-ℝ n (real-ℝ⁺ x))
   is-positive-power-ℝ⁺ 0 _ =
-    is-positive-sim-ℝ (is-positive-real-ℝ⁺ one-ℝ⁺) (sim-raise-ℝ _ _)
+    is-positive-sim-ℝ (sim-raise-ℝ _ _) (is-positive-real-ℝ⁺ one-ℝ⁺)
   is-positive-power-ℝ⁺ 1 (_ , is-pos-x) = is-pos-x
   is-positive-power-ℝ⁺ (succ-ℕ n@(succ-ℕ _)) x⁺@(x , is-pos-x) =
     is-positive-mul-ℝ (is-positive-power-ℝ⁺ n x⁺) is-pos-x
