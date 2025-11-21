@@ -179,7 +179,7 @@ module _
       ( V)
 ```
 
-### Any local commutative ring is a vector space over itself
+### Any Heyting field is a vector space over itself
 
 ```agda
 vector-space-heyting-field-Heyting-Field :

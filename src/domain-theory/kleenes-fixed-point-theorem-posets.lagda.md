@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import order-theory.bottom-elements-posets
 open import order-theory.chains-posets
+open import order-theory.increasing-sequences-posets
 open import order-theory.inflattices
 open import order-theory.inhabited-chains-posets
 open import order-theory.least-upper-bounds-posets
