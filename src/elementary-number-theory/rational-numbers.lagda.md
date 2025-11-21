@@ -24,6 +24,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
@@ -140,6 +141,9 @@ one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+
+neq-zero-one-ℚ : zero-ℚ ≠ one-ℚ
+neq-zero-one-ℚ ()
 ```
 
 ### The negative of a rational number
