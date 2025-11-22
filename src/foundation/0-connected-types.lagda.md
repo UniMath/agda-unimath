@@ -159,22 +159,24 @@ is-trunc-map-ev-is-connected k {A} {B} a H K =
 ### The dependent universal property of 0-connected types
 
 ```agda
-equiv-dependent-universal-property-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  ( {l : Level} (P : A → Prop l) →
-    ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
-equiv-dependent-universal-property-is-0-connected a H P =
-  ( equiv-universal-property-unit (type-Prop (P a))) ∘e
-  ( equiv-dependent-universal-property-surjection-is-surjective
-    ( point a)
-    ( is-surjective-point-is-0-connected a H)
-    ( P))
+module _
+  {l1 : Level} {A : UU l1} (a : A) (H : is-0-connected A)
+  {l : Level} (P : A → Prop l)
+  where
 
-apply-dependent-universal-property-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  {l : Level} (P : A → Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
-apply-dependent-universal-property-is-0-connected a H P =
-  map-inv-equiv (equiv-dependent-universal-property-is-0-connected a H P)
+  equiv-dependent-universal-property-is-0-connected :
+    ((x : A) → type-Prop (P x)) ≃ type-Prop (P a)
+  equiv-dependent-universal-property-is-0-connected =
+    ( equiv-universal-property-unit (type-Prop (P a))) ∘e
+    ( equiv-dependent-universal-property-surjection-is-surjective
+      ( point a)
+      ( is-surjective-point-is-0-connected a H)
+      ( P))
+
+  apply-dependent-universal-property-is-0-connected :
+    type-Prop (P a) → (x : A) → type-Prop (P x)
+  apply-dependent-universal-property-is-0-connected =
+    map-inv-equiv equiv-dependent-universal-property-is-0-connected
 ```
 
 ### A type `A` is 0-connected if and only if every fiber inclusion `B a → Σ A B` is surjective
