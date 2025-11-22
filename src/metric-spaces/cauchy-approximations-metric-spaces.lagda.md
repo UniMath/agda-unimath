@@ -123,7 +123,7 @@ module _
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
   map-short-function-cauchy-approximation-Metric-Space =
-    map-short-function-cauchy-approximation-Pseudometric-Space
+    map-cauchy-approximation-short-function-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( f)

@@ -1,0 +1,1151 @@
+# The Cauchy precompletion of a pseudometric space
+
+```agda
+module metric-spaces.cauchy-precompletion-of-pseudometric-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import category-theory.isomorphisms-in-precategories
+
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
+open import foundation.binary-transport
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.complete-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.functions-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.metric-extensions-of-pseudometric-spaces
+open import metric-spaces.metric-quotients-of-pseudometric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.precategory-of-metric-spaces-and-short-functions
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
+```
+
+</details>
+
+## Idea
+
+Let `M` be a [pseudometric space](metric-spaces.pseudometric-spaces.md) and
+`C M` denote its
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md);
+the
+{{#concept "Cauchy precompletion" Disambiguation="of a pseudometric space" Agda=cauchy-precompletion-Pseudometric-Space}}
+of `M` is the
+[metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
+
+```text
+[C M] = C M / ~
+```
+
+There are [isometries](metric-spaces.isometries-pseudometric-spaces.md)
+
+```text
+M → C M → [C M]
+```
+
+The Cauchy precompletion of the Cauchy pseudocompletion of a pseudometric space
+is the Cauchy precompletion of the pseudometric space:
+
+```text
+[C (C M)] ＝ [C M]
+```
+
+A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
+in `[C M]`, `f : C [C M]` is
+[convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) if
+and only if it is
+[similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) in
+`C [C M]` to the
+[pointwise quotient](metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces.md)
+of some
+[Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+`g : C (C M)`. So the Cauchy precompletion of a pseudometric space is
+[complete](metric-spaces.complete-metric-spaces.md) if and only if all its
+Cauchy approximations have a lift up to similarity in its Cauchy
+pseudocompletion.
+
+Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
+isometry) from a pseudometric space in a complete metric space factors as a
+short map (resp. isometry) through the Cauchy precompletion of its domain. This
+is the
+{{#concept "universal property" Disambiguation="of the Cauchy precompletion of a pseudometric space"}}
+of the Cauchy precompletion.
+
+## Definition
+
+### The Cauchy precompletion of a pseudometric space
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  cauchy-precompletion-Pseudometric-Space :
+    Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)
+  cauchy-precompletion-Pseudometric-Space =
+    metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+
+  pseudometric-cauchy-precompletion-Pseudometric-Space :
+    Pseudometric-Space (l1 ⊔ l2) (l1 ⊔ l2)
+  pseudometric-cauchy-precompletion-Pseudometric-Space =
+    pseudometric-Metric-Space
+      cauchy-precompletion-Pseudometric-Space
+
+  type-cauchy-precompletion-Pseudometric-Space : UU (l1 ⊔ l2)
+  type-cauchy-precompletion-Pseudometric-Space =
+    type-Metric-Space cauchy-precompletion-Pseudometric-Space
+```
+
+### The Cauchy precompletion of the Cauchy pseudocompletion of a pseudometric space
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)
+  cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    cauchy-precompletion-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+```
+
+## Properties
+
+### The isometry from the Cauchy pseudocompletion of a pseudometric space into its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+  isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    isometry-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+```
+
+### The isometry from a pseudometric space into its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  isometry-cauchy-precompletion-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+  isometry-cauchy-precompletion-Pseudometric-Space =
+    comp-isometry-Pseudometric-Space
+      ( P)
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+      ( isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+        ( P))
+      ( isometry-cauchy-pseudocompletion-Pseudometric-Space P)
+
+  metric-extension-cauchy-precompletion-Pseudometric-Space :
+    Metric-Extension (l1 ⊔ l2) (l1 ⊔ l2) P
+  metric-extension-cauchy-precompletion-Pseudometric-Space =
+    ( ( cauchy-precompletion-Pseudometric-Space P) ,
+      ( isometry-cauchy-precompletion-Pseudometric-Space))
+```
+
+### The isometry from the Cauchy pseudocompletion of the Cauchy pseudocompletion into the Cauchy precompletion
+
+```agda
+module _
+  { l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  isometry-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+  isometry-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space =
+    comp-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+      ( isometry-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( isometry-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+        ( P))
+
+  short-map-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+  short-map-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space =
+    short-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+      ( isometry-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space)
+```
+
+### The short isomorphism from the Cauchy precompletion of the Cauchy pseudocompletion of a pseudometric space into its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    short-function-Metric-Space
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-Pseudometric-Space P)
+  short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    short-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( short-map-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space
+        ( P))
+
+  map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    type-function-Metric-Space
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-Pseudometric-Space P)
+  map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    map-short-function-Metric-Space
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+
+  compute-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    ( X :
+      type-cauchy-precompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)) →
+    ( x :
+      cauchy-approximation-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( X)
+      ( x) →
+    map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space X ＝
+    map-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( x))
+  compute-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    compute-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( short-map-cauchy-precompletion-cauchy-pseudocompletion²-Pseudometric-Space
+        ( P))
+
+  short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    short-function-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+  short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    short-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( comp-short-function-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P))
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P))
+        ( short-map-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)))
+        ( short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P)))
+
+  map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    type-function-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+  map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    map-short-function-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+
+  compute-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    (X : type-cauchy-precompletion-Pseudometric-Space P) →
+    (x : cauchy-approximation-Pseudometric-Space P) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( X)
+      ( x) →
+    map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+      ( X) ＝
+    map-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( map-cauchy-pseudocompletion-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( x))
+  compute-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    compute-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( comp-short-function-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P))
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P))
+        ( short-map-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)))
+        ( short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P)))
+
+  is-section-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space ∘
+      map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space) ~
+    id
+  is-section-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    X =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( Id-Prop
+            ( set-Metric-Space
+              ( cauchy-precompletion-Pseudometric-Space P))
+            ( map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+              ( map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+                ( X)))
+            ( X))
+    in do
+      ( x , x∈X) ←
+        is-inhabited-class-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P)
+          ( X)
+      let
+        map-inv-X =
+          map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( X)
+
+        compute-map-inv-X :
+          map-inv-X ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( map-cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( x))
+        compute-map-inv-X =
+          compute-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( X)
+            ( x)
+            ( x∈X)
+
+        is-in-class-x :
+          is-in-class-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( map-inv-X)
+            ( map-cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( x))
+        is-in-class-x =
+          inv-tr
+            ( λ Y →
+              is-in-class-metric-quotient-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Pseudometric-Space P))
+                ( Y)
+                ( map-cauchy-pseudocompletion-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Pseudometric-Space P)
+                  ( x)))
+            ( compute-map-inv-X)
+            ( is-in-class-map-quotient-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P))
+              ( map-cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x)))
+
+        compute-map :
+          map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( map-inv-X) ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( map-cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x)))
+        compute-map =
+          compute-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( map-inv-X)
+            ( map-cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( x))
+            ( is-in-class-x)
+
+        compute-quotient-lim :
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( map-cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x))) ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( x)
+        compute-quotient-lim =
+          apply-effectiveness-quotient-map'
+            ( equivalence-relation-sim-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( all-sim-is-limit-cauchy-approximation-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( map-cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x))
+              ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)
+                ( map-cauchy-pseudocompletion-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Pseudometric-Space P)
+                  ( x)))
+              ( x)
+              ( is-limit-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)
+                ( map-cauchy-pseudocompletion-Pseudometric-Space
+                  ( cauchy-pseudocompletion-Pseudometric-Space P)
+                  ( x)))
+              ( is-limit-const-cauchy-approximation-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x)))
+
+        compute-quotient-x :
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( x) ＝ X
+        compute-quotient-x =
+          eq-set-quotient-equivalence-class-set-quotient
+            ( equivalence-relation-sim-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( X)
+            ( x∈X)
+
+      ( compute-map ∙
+        compute-quotient-lim ∙
+        compute-quotient-x)
+
+  is-retraction-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space ∘
+      map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+      ~
+    id
+  is-retraction-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    X =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( Id-Prop
+            ( set-Metric-Space
+              ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)))
+            ( map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+              ( map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+                ( X)))
+            ( X))
+
+    in do
+      ( x , x∈X) ←
+        is-inhabited-class-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P))
+          ( X)
+      let
+        map-X =
+          map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( X)
+
+        compute-map-X :
+          map-X ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( x))
+        compute-map-X =
+          compute-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( X)
+            ( x)
+            ( x∈X)
+
+        is-in-class-map-X :
+          is-in-class-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( map-X)
+            ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( x))
+        is-in-class-map-X =
+          inv-tr
+            ( λ Y →
+              is-in-class-metric-quotient-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( Y)
+                ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                  ( P)
+                  ( x)))
+            ( compute-map-X)
+            ( is-in-class-map-quotient-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)
+                ( x)))
+
+        compute-map-inv :
+          map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( map-X) ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( map-cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)
+                ( x)))
+        compute-map-inv =
+          compute-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( map-X)
+            ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( x))
+            ( is-in-class-map-X)
+
+        compute-map-quotient-lim :
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( map-cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                ( P)
+                ( x))) ＝
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( x)
+        compute-map-quotient-lim =
+          apply-effectiveness-quotient-map'
+            ( equivalence-relation-sim-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)))
+            ( symmetric-sim-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P))
+              ( x)
+              ( map-cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                  ( P)
+                  ( x)))
+              ( sim-const-is-limit-cauchy-approximation-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( x)
+                ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                  ( P)
+                  ( x))
+                ( is-limit-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+                  ( P)
+                  ( x))))
+
+        compute-quotient-x :
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( x) ＝
+          X
+        compute-quotient-x =
+          eq-set-quotient-equivalence-class-set-quotient
+            ( equivalence-relation-sim-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)))
+            ( X)
+            ( x∈X)
+
+      ( compute-map-inv ∙
+        compute-map-quotient-lim ∙
+        compute-quotient-x)
+
+  is-iso-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    is-iso-Precategory
+      precategory-short-function-Metric-Space
+      { cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P}
+      { cauchy-precompletion-Pseudometric-Space P}
+      short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+  pr1
+    is-iso-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+  pr2
+    is-iso-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    ( ( eq-htpy-map-short-function-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( comp-short-function-Metric-Space
+          ( cauchy-precompletion-Pseudometric-Space P)
+          ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( P))
+          ( cauchy-precompletion-Pseudometric-Space P)
+          ( short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+          ( short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space))
+        ( short-id-Metric-Space
+          ( cauchy-precompletion-Pseudometric-Space P))
+        ( is-section-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)) ,
+      ( eq-htpy-map-short-function-Metric-Space
+        ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+        ( comp-short-function-Metric-Space
+          ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( P))
+          ( cauchy-precompletion-Pseudometric-Space P)
+            ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+              ( P))
+          ( short-map-inv-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+          ( short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space))
+        ( short-id-Metric-Space
+          ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+            ( P)))
+        ( is-retraction-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)))
+
+  iso-metric-pseudocompeletion-cauchy-pseudocompletion-Pseudometric-Space :
+    iso-Precategory
+      ( precategory-short-function-Metric-Space)
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-Pseudometric-Space P)
+  iso-metric-pseudocompeletion-cauchy-pseudocompletion-Pseudometric-Space =
+    ( short-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space ,
+      is-iso-map-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space)
+```
+
+### The equality between the Cauchy precompletion of the Cauchy pseudocompletion of a pseudometric space and its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  eq-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space :
+    ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P) ＝
+    ( cauchy-precompletion-Pseudometric-Space P)
+  eq-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space =
+    eq-isometric-equiv-Metric-Space'
+      ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-equiv-isometric-equiv-iso-short-function-Metric-Space'
+        ( cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( iso-metric-pseudocompeletion-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)))
+```
+
+### A Cauchy approximation in the Cauchy precompletion of a pseudometric space is convergent if and only if it has a lift its Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  ( u :
+    cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P))
+  where
+
+  is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u) →
+    is-convergent-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( u)
+  is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    sim-lift =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( is-convergent-prop-cauchy-approximation-Metric-Space
+            ( cauchy-precompletion-Pseudometric-Space P)
+            ( u))
+    in do
+      ( v , u~[v]) ← sim-lift
+      let
+        ( lim-v , is-lim-v) =
+          has-limit-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+            ( P)
+            ( v)
+
+        lim-u =
+          map-metric-quotient-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( lim-v)
+
+        is-lim[v]-lim-u :
+          is-limit-cauchy-approximation-Metric-Space
+            ( metric-quotient-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P))
+            ( map-metric-quotient-cauchy-approximation-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( v))
+            ( lim-u)
+        is-lim[v]-lim-u =
+          preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space P)
+            ( v)
+            ( lim-v)
+            ( is-lim-v)
+
+        [lim-u] =
+          const-cauchy-approximation-Metric-Space
+            ( cauchy-precompletion-Pseudometric-Space P)
+            ( lim-u)
+
+        u~[lim-u] :
+          sim-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( pseudometric-cauchy-precompletion-Pseudometric-Space P))
+            ( u)
+            ( [lim-u])
+        u~[lim-u] =
+          transitive-sim-Pseudometric-Space
+            ( cauchy-pseudocompletion-Pseudometric-Space
+              ( pseudometric-cauchy-precompletion-Pseudometric-Space P))
+            ( u)
+            ( map-metric-quotient-cauchy-approximation-Pseudometric-Space
+              ( cauchy-pseudocompletion-Pseudometric-Space P)
+              ( v))
+            ( [lim-u])
+            ( sim-const-is-limit-cauchy-approximation-Pseudometric-Space
+              ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+              ( map-metric-quotient-cauchy-approximation-Pseudometric-Space
+                ( cauchy-pseudocompletion-Pseudometric-Space P)
+                ( v))
+              ( lim-u)
+              ( is-lim[v]-lim-u))
+            ( u~[v])
+      ( ( lim-u) ,
+        ( is-limit-sim-const-cauchy-approximation-Pseudometric-Space
+          ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+          ( u)
+          ( lim-u)
+          ( u~[lim-u])))
+
+  iff-has-lift-is-convergent-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( u) ↔
+    has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+  pr1
+    iff-has-lift-is-convergent-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+  pr2
+    iff-has-lift-is-convergent-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+
+  equiv-has-lift-is-convergent-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( u) ≃
+    has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+  equiv-has-lift-is-convergent-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    equiv-iff
+      ( is-convergent-prop-cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( has-lift-prop-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+      ( has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+      ( is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space)
+```
+
+### Images of Cauchy approximations in a pseudometric space converge in its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-convergent-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+  is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( has-lift-map-quotient-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( map-cauchy-approximation-isometry-Pseudometric-Space
+          ( P)
+          ( cauchy-pseudocompletion-Pseudometric-Space P)
+          ( isometry-cauchy-pseudocompletion-Pseudometric-Space P)
+          ( u)))
+
+  lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    type-cauchy-precompletion-Pseudometric-Space P
+  lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space =
+    pr1
+      is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+
+  is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space)
+  is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    pr2
+      is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+```
+
+### The Cauchy precompletion of a pseudometric space is complete if and only if all its Cauchy approximations have a lift in its Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space :
+    is-complete-Metric-Space (cauchy-precompletion-Pseudometric-Space P) ↔
+    ( ( u : cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)) →
+      has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+  pr1 iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space H u =
+    has-lift-is-convergent-cauchy-approximation-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+      ( H u)
+  pr2 iff-all-has-lift-is-complete-cauchy-precompletion-Pseudometric-Space K u =
+    is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( u)
+      ( K u)
+```
+
+### Induced short map from the Cauchy precompletion to a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
+    short-function-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space C) →
+    short-function-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+        ( metric-space-Complete-Metric-Space C)
+  short-map-short-function-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+    f =
+    short-map-short-function-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+      ( comp-short-function-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space C))
+        ( pseudometric-space-Complete-Metric-Space C)
+        ( short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( metric-space-Complete-Metric-Space C)
+          ( is-complete-metric-space-Complete-Metric-Space C))
+        ( short-map-cauchy-approximation-short-function-Pseudometric-Space
+          ( P)
+          ( pseudometric-space-Complete-Metric-Space C)
+          ( f)))
+```
+
+### Induced isometry from the Cauchy precompletion into a complete metric space
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
+  ( C : Complete-Metric-Space l3 l4)
+  where
+
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space C) →
+    isometry-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+  isometry-map-isometry-complete-metric-space-cauchy-precompletion-Pseudometric-Space
+    f =
+    isometry-map-isometry-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( metric-space-Complete-Metric-Space C)
+      ( comp-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space C))
+        ( pseudometric-space-Complete-Metric-Space C)
+        ( isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( metric-space-Complete-Metric-Space C)
+          ( is-complete-metric-space-Complete-Metric-Space C))
+        ( isometry-map-cauchy-approximation-isometry-Pseudometric-Space
+          ( P)
+          ( pseudometric-space-Complete-Metric-Space C)
+          ( f)))
+```
+
+### The image of a Cauchy approximation in the Cauchy precompletion converges to its image by the quotient map
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P))
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( const-cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( map-metric-quotient-Pseudometric-Space
+          ( cauchy-pseudocompletion-Pseudometric-Space P)
+          ( u)))
+  sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space d α β =
+    preserves-neighborhood-map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+      ( isometry-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P))
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( const-cauchy-approximation-Pseudometric-Space
+        ( P)
+        ( map-cauchy-approximation-Pseudometric-Space P u α))
+      ( u)
+      ( λ ε δ →
+        monotonic-neighborhood-Pseudometric-Space
+          ( P)
+          ( map-cauchy-approximation-Pseudometric-Space P u α)
+          ( map-cauchy-approximation-Pseudometric-Space P u δ)
+          ( α +ℚ⁺ δ)
+          ( ( ε +ℚ⁺ δ) +ℚ⁺ (α +ℚ⁺ β +ℚ⁺ d))
+          ( lemma-le α δ ε β d)
+          ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+            ( P)
+            ( u)
+            ( α)
+            ( δ)))
+      where
+
+      lemma-le :
+        (a b c d e : ℚ⁺) →
+        le-ℚ⁺
+          ( a +ℚ⁺ b)
+          ( (c +ℚ⁺ b) +ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e))
+      lemma-le a b c d e =
+        tr
+          ( λ u → le-ℚ⁺ u ((c +ℚ⁺ b) +ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e)))
+          ( commutative-add-ℚ⁺ b a)
+          ( preserves-le-add-ℚ
+            { rational-ℚ⁺ b}
+            { rational-ℚ⁺ (c +ℚ⁺ b)}
+            { rational-ℚ⁺ a}
+            { rational-ℚ⁺ (a +ℚ⁺ d +ℚ⁺ e)}
+            ( le-right-add-ℚ⁺ c b)
+            ( transitive-le-ℚ⁺
+              ( a)
+              ( a +ℚ⁺ d)
+              ( a +ℚ⁺ d +ℚ⁺ e)
+              ( le-left-add-ℚ⁺ (a +ℚ⁺ d) e)
+              ( le-left-add-ℚ⁺ a d)))
+
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+  is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
+    =
+    is-limit-sim-const-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( map-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
+          ( P))
+        ( u))
+      ( sim-const-map-isometry-cauchy-precompletion-Pseudometric-Space)
+```
+
+### Any point of the Cauchy precompletion is the limit of the image of a Cauchy approximation
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where
+
+  is-limit-is-in-class-cauchy-precompletion-Pseudometric-Space :
+    (X : type-cauchy-precompletion-Pseudometric-Space P) →
+    (x : cauchy-approximation-Pseudometric-Space P) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( X)
+      ( x) →
+    is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( x))
+      ( X)
+  is-limit-is-in-class-cauchy-precompletion-Pseudometric-Space X x x∈X =
+    tr
+      ( is-limit-cauchy-approximation-Metric-Space
+        ( cauchy-precompletion-Pseudometric-Space P)
+        ( map-cauchy-approximation-isometry-Pseudometric-Space
+          ( P)
+          ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+          ( isometry-cauchy-precompletion-Pseudometric-Space P)
+          ( x)))
+      ( eq-map-is-in-class-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( X)
+        ( x∈X))
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( x))
+```
+
+### The limit in the Cauchy precompletion of a Cauchy approximation in a Pseudometric space is its quotient
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  (u : cauchy-approximation-Pseudometric-Space P)
+  where
+
+  eq-map-quotient-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
+    ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+      ( P)
+      ( u)) ＝
+    ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+  eq-map-quotient-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+    =
+    all-eq-is-limit-cauchy-approximation-Metric-Space
+      ( cauchy-precompletion-Pseudometric-Space P)
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
+        ( isometry-cauchy-precompletion-Pseudometric-Space P)
+        ( u))
+      ( lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( u))
+      ( map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
+        ( u))
+      ( is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( u))
+      ( is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space
+        ( P)
+        ( u))
+```
+
+-- TODO
+
+-- ### If ACC holds then cauchy precompletions are complete
