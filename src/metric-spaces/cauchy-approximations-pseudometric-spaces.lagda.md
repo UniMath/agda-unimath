@@ -113,10 +113,10 @@ module _
   (f : short-function-Pseudometric-Space A B)
   where
 
-  map-short-function-cauchy-approximation-Pseudometric-Space :
+  map-cauchy-approximation-short-function-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space A →
     cauchy-approximation-Pseudometric-Space B
-  map-short-function-cauchy-approximation-Pseudometric-Space (u , H) =
+  map-cauchy-approximation-short-function-Pseudometric-Space (u , H) =
     ( map-short-function-Pseudometric-Space A B f ∘ u ,
       λ ε δ →
         is-short-map-short-function-Pseudometric-Space
@@ -138,11 +138,11 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where
 
-  map-isometry-cauchy-approximation-Pseudometric-Space :
+  map-cauchy-approximation-isometry-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space A →
     cauchy-approximation-Pseudometric-Space B
-  map-isometry-cauchy-approximation-Pseudometric-Space =
-    map-short-function-cauchy-approximation-Pseudometric-Space
+  map-cauchy-approximation-isometry-Pseudometric-Space =
+    map-cauchy-approximation-short-function-Pseudometric-Space
       ( A)
       ( B)
       ( short-isometry-Pseudometric-Space A B f)

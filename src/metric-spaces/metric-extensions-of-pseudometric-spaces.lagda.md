@@ -117,7 +117,7 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-Metric-Extension P M))
   isometry-metric-extension-cauchy-approximation-Pseudometric-Space =
-    isometry-map-isometry-cauchy-approximation-Pseudometric-Space
+    isometry-map-cauchy-approximation-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-Metric-Extension P M)
       ( isometry-Metric-Extension P M)

@@ -832,7 +832,7 @@ module _
   is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
     is-convergent-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -841,14 +841,14 @@ module _
     =
     is-convergent-has-lift-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
       ( P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
         ( u))
       ( has-lift-map-quotient-cauchy-approximation-metric-quotient-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
-        ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( map-cauchy-approximation-isometry-Pseudometric-Space
           ( P)
           ( cauchy-pseudocompletion-Pseudometric-Space P)
           ( isometry-cauchy-pseudocompletion-Pseudometric-Space P)
@@ -863,7 +863,7 @@ module _
   is-limit-lim-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -929,7 +929,7 @@ module _
         ( short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
           ( metric-space-Complete-Metric-Space C)
           ( is-complete-metric-space-Complete-Metric-Space C))
-        ( short-map-short-function-cauchy-approximation-Pseudometric-Space
+        ( short-map-cauchy-approximation-short-function-Pseudometric-Space
           ( P)
           ( pseudometric-space-Complete-Metric-Space C)
           ( f)))
@@ -963,7 +963,7 @@ module _
         ( isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
           ( metric-space-Complete-Metric-Space C)
           ( is-complete-metric-space-Complete-Metric-Space C))
-        ( isometry-map-isometry-cauchy-approximation-Pseudometric-Space
+        ( isometry-map-cauchy-approximation-isometry-Pseudometric-Space
           ( P)
           ( pseudometric-space-Complete-Metric-Space C)
           ( f)))
@@ -981,7 +981,7 @@ module _
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
         ( cauchy-precompletion-Pseudometric-Space P))
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -1042,7 +1042,7 @@ module _
   is-limit-map-isometry-cauchy-pseudocompletion-cauchy-precompletion-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -1054,7 +1054,7 @@ module _
     =
     is-limit-sim-const-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -1084,7 +1084,7 @@ module _
       ( x) →
     is-limit-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -1094,7 +1094,7 @@ module _
     tr
       ( is-limit-cauchy-approximation-Metric-Space
         ( cauchy-precompletion-Pseudometric-Space P)
-        ( map-isometry-cauchy-approximation-Pseudometric-Space
+        ( map-cauchy-approximation-isometry-Pseudometric-Space
           ( P)
           ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
           ( isometry-cauchy-precompletion-Pseudometric-Space P)
@@ -1127,7 +1127,7 @@ module _
     =
     all-eq-is-limit-cauchy-approximation-Metric-Space
       ( cauchy-precompletion-Pseudometric-Space P)
-      ( map-isometry-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-isometry-Pseudometric-Space
         ( P)
         ( pseudometric-cauchy-precompletion-Pseudometric-Space P)
         ( isometry-cauchy-precompletion-Pseudometric-Space P)
