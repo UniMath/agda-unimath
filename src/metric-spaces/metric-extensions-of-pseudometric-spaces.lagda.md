@@ -177,25 +177,25 @@ module _
       is-limit-map-cauchy-pseudocompletion-prop-Metric-Extension
 ```
 
-### Cauchy approximations converging to the same image in a metric extension are similar in the Cauchy pseudocompletion
+### Similarity in the Cauchy pseudocompletion of a pseudometric space preserves and reflects limits in a metric extension
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Extension l3 l4 P)
-  (y : type-metric-space-Metric-Extension P M)
   (u v : cauchy-approximation-Pseudometric-Space P)
+  (y : type-metric-space-Metric-Extension P M)
   where
 
-  lemma-sim-is-limit-map-cauchy-pseudocompletion-Metric-Extension :
+  sim-has-same-limit-map-cauchy-pseudocompletion-Metric-Extension :
     is-limit-map-cauchy-pseudocompletion-Metric-Extension P M u y →
     is-limit-map-cauchy-pseudocompletion-Metric-Extension P M v y →
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( u)
       ( v)
-  lemma-sim-is-limit-map-cauchy-pseudocompletion-Metric-Extension lim-u lim-v =
+  sim-has-same-limit-map-cauchy-pseudocompletion-Metric-Extension lim-u lim-v =
     reflects-sim-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( cauchy-pseudocompletion-Metric-Space
@@ -203,29 +203,33 @@ module _
       ( isometry-cauchy-pseudocompletion-Metric-Extension P M)
       ( u)
       ( v)
-      ( transitive-sim-Pseudometric-Space
+      ( sim-has-same-limit-cauchy-approximation-Pseudometric-Space
+        ( pseudometric-space-Metric-Extension P M)
+        ( map-cauchy-pseudocompletion-Metric-Extension P M u)
+        ( map-cauchy-pseudocompletion-Metric-Extension P M v)
+        ( y)
+        ( lim-u)
+        ( lim-v))
+
+  has-same-limit-map-cauchy-sim-pseudocompletion-Metric-Extension :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( u)
+      ( v) →
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M u y →
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M v y
+  has-same-limit-map-cauchy-sim-pseudocompletion-Metric-Extension u~v =
+    has-same-limit-sim-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-space-Metric-Extension P M)
+      ( map-cauchy-pseudocompletion-Metric-Extension P M u)
+      ( map-cauchy-pseudocompletion-Metric-Extension P M v)
+      ( y)
+      ( preserves-sim-map-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( cauchy-pseudocompletion-Metric-Space
           ( metric-space-Metric-Extension P M))
-        ( map-cauchy-pseudocompletion-Metric-Extension P M u)
-        ( const-cauchy-approximation-Metric-Space
-          ( metric-space-Metric-Extension P M)
-          ( y))
-        ( map-cauchy-pseudocompletion-Metric-Extension P M v)
-        ( symmetric-sim-Pseudometric-Space
-          ( cauchy-pseudocompletion-Metric-Space
-            ( metric-space-Metric-Extension P M))
-          ( map-cauchy-pseudocompletion-Metric-Extension P M v)
-          ( const-cauchy-approximation-Metric-Space
-            ( metric-space-Metric-Extension P M)
-            ( y))
-          ( sim-const-is-limit-cauchy-approximation-Metric-Space
-            ( metric-space-Metric-Extension P M)
-            ( map-cauchy-pseudocompletion-Metric-Extension P M v)
-            ( y)
-            ( lim-v)))
-        ( sim-const-is-limit-cauchy-approximation-Metric-Space
-          ( metric-space-Metric-Extension P M)
-          ( map-cauchy-pseudocompletion-Metric-Extension P M u)
-          ( y)
-          ( lim-u)))
+        ( isometry-cauchy-pseudocompletion-Metric-Extension P M)
+        ( u)
+        ( v)
+        ( u~v))
 ```

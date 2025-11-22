@@ -327,7 +327,7 @@ module _
     is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
 ```
 
-### Isometries between pseudometric spaces reflect similarity
+### Isometries between pseudometric spaces preserve and reflect similarity
 
 ```agda
 module _
@@ -336,6 +336,18 @@ module _
   ( B : Pseudometric-Space l1' l2')
   ( f : isometry-Pseudometric-Space A B)
   where abstract
+
+  preserves-sim-map-isometry-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) →
+    ( sim-Pseudometric-Space B
+      ( map-isometry-Pseudometric-Space A B f x)
+      ( map-isometry-Pseudometric-Space A B f y))
+  preserves-sim-map-isometry-Pseudometric-Space =
+    preserves-sim-map-short-function-Pseudometric-Space
+      ( A)
+      ( B)
+      ( short-isometry-Pseudometric-Space A B f)
 
   reflects-sim-map-isometry-Pseudometric-Space :
     ( x y : type-Pseudometric-Space A) →
