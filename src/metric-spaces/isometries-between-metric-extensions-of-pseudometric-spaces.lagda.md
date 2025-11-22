@@ -60,11 +60,12 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-Given a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, an
+An
 {{#concept "isometry" Disambiguation="between metric extensions of a pseudometric space Agda=hom-isometry-Metric-Extension}}
 between two
 [metric extensions](metric-spaces.metric-extensions-of-pseudometric-spaces.md)
-`i : P → M` and `j : P → N` of `P` is an
+`(M , i : P → M)` and `(N , j : P → N)` of a
+[pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is an
 [isometry](metric-spaces.isometries-metric-spaces.md) `f : M → N` such that
 
 ```text
