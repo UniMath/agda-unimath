@@ -9,17 +9,13 @@ module metric-spaces.cauchy-pseudocompletion-of-metric-spaces where
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -27,7 +23,6 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
