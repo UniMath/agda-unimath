@@ -107,7 +107,7 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
   short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space =
-    short-map-short-function-cauchy-approximation-Pseudometric-Space
+    short-map-cauchy-approximation-short-function-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
       ( short-map-metric-quotient-Pseudometric-Space M)
