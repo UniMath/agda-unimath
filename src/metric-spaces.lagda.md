@@ -97,6 +97,7 @@ open import metric-spaces.images-uniformly-continuous-functions-metric-spaces pu
 open import metric-spaces.indexed-sums-metric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
+open import metric-spaces.isometries-between-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public

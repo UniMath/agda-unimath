@@ -99,6 +99,14 @@ module _
   isometry-Metric-Extension :
     isometry-Pseudometric-Space P pseudometric-space-Metric-Extension
   isometry-Metric-Extension = pr2 M
+
+  map-isometry-Metric-Extension :
+    type-Pseudometric-Space P → type-metric-space-Metric-Extension
+  map-isometry-Metric-Extension =
+    map-isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Metric-Extension)
+      ( isometry-Metric-Extension)
 ```
 
 ## Properties
