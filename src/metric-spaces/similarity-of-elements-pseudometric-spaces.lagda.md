@@ -22,6 +22,7 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.short-functions-pseudometric-spaces
@@ -314,15 +315,34 @@ module _
   ( A : Pseudometric-Space l1 l2)
   ( B : Pseudometric-Space l1' l2')
   ( f : short-function-Pseudometric-Space A B)
-  where
+  where abstract
 
-  abstract
-    preserves-sim-map-short-function-Pseudometric-Space :
-      ( x y : type-Pseudometric-Space A) →
-      ( sim-Pseudometric-Space A x y) →
-      ( sim-Pseudometric-Space B
-        ( map-short-function-Pseudometric-Space A B f x)
-        ( map-short-function-Pseudometric-Space A B f y))
-    preserves-sim-map-short-function-Pseudometric-Space x y x~y d =
-      is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
+  preserves-sim-map-short-function-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) →
+    ( sim-Pseudometric-Space B
+      ( map-short-function-Pseudometric-Space A B f x)
+      ( map-short-function-Pseudometric-Space A B f y))
+  preserves-sim-map-short-function-Pseudometric-Space x y x~y d =
+    is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
+```
+
+### Isometries between pseudometric spaces reflect similarity
+
+```agda
+module _
+  { l1 l2 l1' l2' : Level}
+  ( A : Pseudometric-Space l1 l2)
+  ( B : Pseudometric-Space l1' l2')
+  ( f : isometry-Pseudometric-Space A B)
+  where abstract
+
+  reflects-sim-map-isometry-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space B
+      ( map-isometry-Pseudometric-Space A B f x)
+      ( map-isometry-Pseudometric-Space A B f y)) →
+    ( sim-Pseudometric-Space A x y)
+  reflects-sim-map-isometry-Pseudometric-Space x y fx~fy d =
+    reflects-neighborhood-map-isometry-Pseudometric-Space A B f d x y (fx~fy d)
 ```
