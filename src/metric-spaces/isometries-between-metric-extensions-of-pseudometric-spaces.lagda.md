@@ -65,7 +65,7 @@ Given a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, an
 between two
 [metric extensions](metric-spaces.metric-extensions-of-pseudometric-spaces.md)
 `i : P → M` and `j : P → N` of `P` is an
-[isometry](metric-spaces.isometry-metric-spaces.md) `f : M → N` such that
+[isometry](metric-spaces.isometries-metric-spaces.md) `f : M → N` such that
 
 ```text
 f ∘ i ~ j.
