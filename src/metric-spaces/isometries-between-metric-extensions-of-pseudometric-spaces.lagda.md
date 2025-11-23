@@ -61,7 +61,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ## Idea
 
 An
-{{#concept "isometry" Disambiguation="between metric extensions of a pseudometric space Agda=hom-isometry-Metric-Extension}}
+{{#concept "isometry" Disambiguation="between metric extensions of a pseudometric space" Agda=hom-isometry-Metric-Extension}}
 between two
 [metric extensions](metric-spaces.metric-extensions-of-pseudometric-spaces.md)
 `(M , i : P → M)` and `(N , j : P → N)` of a
