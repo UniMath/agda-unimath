@@ -68,7 +68,7 @@ of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, `i : P → 
 [isometry](metric-spaces.isometries-metric-spaces.md) `f : M → N` such that
 
 ```text
-f ∘ i ~ j.
+  f ∘ i ~ j.
 ```
 
 ## Definitions
