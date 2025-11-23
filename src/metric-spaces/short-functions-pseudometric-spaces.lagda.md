@@ -116,9 +116,10 @@ module _
     is-short-function-Pseudometric-Space A A (id-Pseudometric-Space A)
   is-short-id-Pseudometric-Space d x y H = H
 
-  short-id-Pseudometric-Space : short-function-Pseudometric-Space A A
-  short-id-Pseudometric-Space =
-    id-Pseudometric-Space A , is-short-id-Pseudometric-Space
+  id-short-function-Pseudometric-Space :
+    short-function-Pseudometric-Space A A
+  id-short-function-Pseudometric-Space =
+    ( id-Pseudometric-Space A , is-short-id-Pseudometric-Space)
 ```
 
 ### Equality of short functions between pseudometric spaces is characterized by homotopy of their carrier maps
@@ -192,7 +193,7 @@ module _
 
   left-unit-law-comp-short-function-Pseudometric-Space :
     ( comp-short-function-Pseudometric-Space A B B
-      ( short-id-Pseudometric-Space B)
+      ( id-short-function-Pseudometric-Space B)
       ( f)) ＝
     ( f)
   left-unit-law-comp-short-function-Pseudometric-Space =
@@ -203,7 +204,7 @@ module _
         ( A)
         ( B)
         ( B)
-        ( short-id-Pseudometric-Space B)
+        ( id-short-function-Pseudometric-Space B)
         ( f))
       ( f)
       ( λ x → refl)
@@ -211,7 +212,7 @@ module _
   right-unit-law-comp-short-function-Pseudometric-Space :
     ( comp-short-function-Pseudometric-Space A A B
       ( f)
-      ( short-id-Pseudometric-Space A)) ＝
+      ( id-short-function-Pseudometric-Space A)) ＝
     ( f)
   right-unit-law-comp-short-function-Pseudometric-Space =
     eq-htpy-map-short-function-Pseudometric-Space
@@ -223,7 +224,7 @@ module _
         ( A)
         ( B)
         ( f)
-        ( short-id-Pseudometric-Space A))
+        ( id-short-function-Pseudometric-Space A))
       ( λ x → refl)
 ```
 
