@@ -390,10 +390,7 @@ module _
   eq-map-is-in-class-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space M) →
     {x : type-Pseudometric-Space M} →
-    is-in-class-metric-quotient-Pseudometric-Space
-      ( M)
-      ( X)
-      ( x) →
+    is-in-class-metric-quotient-Pseudometric-Space M X x →
     map-metric-quotient-Pseudometric-Space x ＝ X
   eq-map-is-in-class-metric-quotient-Pseudometric-Space X {x} x∈X =
     eq-set-quotient-equivalence-class-set-quotient

@@ -442,7 +442,7 @@ module _
   where
 
   abstract
-    reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+    reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
       (δ : ℚ⁺) →
       (u v : cauchy-approximation-Metric-Space M) →
       neighborhood-Metric-Space
@@ -461,7 +461,7 @@ module _
         ( δ)
         ( u)
         ( v)
-    reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+    reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
       δ x y Nδ =
       reflects-neighborhood-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
@@ -517,7 +517,7 @@ module _
           ( d)
           ( x)
           ( y)) ,
-        ( reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+        ( reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
           ( d)
           ( x)
           ( y)))
