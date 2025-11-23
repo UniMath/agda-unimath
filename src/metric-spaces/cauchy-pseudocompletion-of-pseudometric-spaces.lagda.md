@@ -730,7 +730,7 @@ module _
   where
 
   abstract
-    reflects-neighborhood-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space :
+    reflects-neighborhoods-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space :
       ( d : ℚ⁺) →
       ( u v :
         cauchy-approximation-Pseudometric-Space
@@ -750,7 +750,7 @@ module _
         ( d)
         ( u)
         ( v)
-    reflects-neighborhood-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+    reflects-neighborhoods-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
       d u v N-lim =
       reflects-neighborhood-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space
@@ -798,7 +798,7 @@ module _
           ( d)
           ( x)
           ( y)) ,
-        ( reflects-neighborhood-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
+        ( reflects-neighborhoods-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
           ( d)
           ( x)
           ( y)))
@@ -853,7 +853,7 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where abstract
 
-  preserves-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space :
+  preserves-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space :
     (d : ℚ⁺) →
     (x y : cauchy-approximation-Pseudometric-Space A) →
     neighborhood-Pseudometric-Space
@@ -866,13 +866,13 @@ module _
       ( d)
       ( map-cauchy-approximation-isometry-Pseudometric-Space A B f x)
       ( map-cauchy-approximation-isometry-Pseudometric-Space A B f y)
-  preserves-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space =
+  preserves-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space =
     is-short-map-cauchy-approximation-short-function-Pseudometric-Space
       ( A)
       ( B)
       ( short-isometry-Pseudometric-Space A B f)
 
-  reflects-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space :
+  reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space :
     (d : ℚ⁺) →
     (x y : cauchy-approximation-Pseudometric-Space A) →
     neighborhood-Pseudometric-Space
@@ -885,7 +885,7 @@ module _
       ( d)
       ( x)
       ( y)
-  reflects-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space
+  reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space
     d x y Nxy α β =
     reflects-neighborhood-map-isometry-Pseudometric-Space
       ( A)
@@ -902,11 +902,11 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space B)
       ( map-cauchy-approximation-isometry-Pseudometric-Space A B f)
   is-isometry-map-cauchy-approximation-isometry-Pseudometric-Space d x y =
-    ( ( preserves-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space
+    ( ( preserves-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space
         ( d)
         ( x)
         ( y)) ,
-      ( reflects-neighborhood-map-cauchy-approximation-isometry-Pseudometric-Space
+      ( reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space
         ( d)
         ( x)
         ( y)))

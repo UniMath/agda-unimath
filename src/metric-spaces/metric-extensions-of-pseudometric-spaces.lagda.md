@@ -96,17 +96,17 @@ module _
   type-metric-space-Metric-Extension =
     type-Metric-Space metric-space-Metric-Extension
 
-  isometry-Metric-Extension :
+  isometry-metric-space-Metric-Extension :
     isometry-Pseudometric-Space P pseudometric-space-Metric-Extension
-  isometry-Metric-Extension = pr2 M
+  isometry-metric-space-Metric-Extension = pr2 M
 
-  map-isometry-Metric-Extension :
+  map-isometry-metric-space-Metric-Extension :
     type-Pseudometric-Space P → type-metric-space-Metric-Extension
-  map-isometry-Metric-Extension =
+  map-isometry-metric-space-Metric-Extension =
     map-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-Metric-Extension)
-      ( isometry-Metric-Extension)
+      ( isometry-metric-space-Metric-Extension)
 ```
 
 ## Properties
@@ -128,7 +128,7 @@ module _
     isometry-map-cauchy-approximation-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-Metric-Extension P M)
-      ( isometry-Metric-Extension P M)
+      ( isometry-metric-space-Metric-Extension P M)
 
   map-cauchy-pseudocompletion-Metric-Extension :
     cauchy-approximation-Pseudometric-Space P →
