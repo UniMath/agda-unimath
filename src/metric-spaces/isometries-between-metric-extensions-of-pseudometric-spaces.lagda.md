@@ -219,16 +219,10 @@ module _
           ( metric-space-Metric-Extension P W)
           ( isometry-metric-space-isometry-Metric-Extension P V W g)
           ( isometry-metric-space-isometry-Metric-Extension P U V f))
-    coh-comp-isometry-Metric-Extension x =
-      ( ap
-        ( map-metric-space-isometry-Metric-Extension P V W g)
-        ( coh-isometry-Metric-Extension
-          ( P)
-          ( U)
-          ( V)
-          ( f)
-          ( x))) ∙
-      ( coh-isometry-Metric-Extension P V W g x)
+    coh-comp-isometry-Metric-Extension =
+      ( ( map-metric-space-isometry-Metric-Extension P V W g) ·l
+        ( coh-isometry-Metric-Extension P U V f)) ∙h
+      ( coh-isometry-Metric-Extension P V W g)
 
   comp-isometry-Metric-Extension : isometry-Metric-Extension P U W
   pr1 comp-isometry-Metric-Extension =
