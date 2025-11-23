@@ -32,9 +32,11 @@ open import set-theory.cardinals
 
 ## Idea
 
-For every type $X$ there is a map $║X → Set║₀ → (X → \mathrm{Cardinal})$. We
-call [sets](foundation-core.sets.md) $X$ for which this map is a retract
-{{#concept "cardinality-recursive" Disamibguation="sets" Agda=Cardinality-Recursive-Set}}.
+For every type $X$ there is a map
+$$║X → \mathrm{Set}║₀ → (X → \mathrm{Cardinal}).$$ We call
+[sets](foundation-core.sets.md) $X$ for which this map has a
+[retraction](foundation.retractions.md)
+{{#concept "cardinality-recursive" Disambiguation="sets" Agda=Cardinality-Recursive-Set}}.
 Over such sets we may form
 [dependent sum](set-theory.dependent-sums-cardinals.md) and
 [dependent product](set-theory.dependent-products-cardinals.md)

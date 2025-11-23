@@ -32,10 +32,10 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 {{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=Königs-Theorem}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
-and $B$ over $I$ such that $Aᵢ < Bᵢ$ for all $i$, we have that $$ΣᵢAᵢ < ΠᵢBᵢ.$$
+and $B$ over $I$, $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
 
-In constructive mathematics we have to be more mindful of our statements. Here
-$I$ is any
+In constructive mathematics we have to be more mindful of our statements than
+usual. Here $I$ is any
 [cardinality-projective set](set-theory.cardinality-projective-sets.md) and by
 $Aᵢ < Bᵢ$ we mean that $Bᵢ$ is [inhabited](foundation.inhabited-types.md) and
 that for every map $f : Aᵢ → Bᵢ$ there

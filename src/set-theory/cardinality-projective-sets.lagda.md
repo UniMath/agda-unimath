@@ -51,10 +51,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set $I$ is
-{{#concept "cardinality-projective" Disamibguation="sets" Agda=Cardinality-Projective-Set}}
-if it is projective and the postcomposition map
-$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$ is
+A [set](foundation-core.sets.md) $I$ is
+{{#concept "cardinality-projective" Disambiguation="sets" Agda=Cardinality-Projective-Set}}
+if it is [projective](foundation.projective-types.md) and the
+[postcomposition map](foundation.postcomposition-functions.md)
+$$\mathrm{cardinality} ∘ {-} : (I → \mathrm{Set}) → (I → \mathrm{Cardinal})$$ is
 0-connected.
 
 ## Definitions
