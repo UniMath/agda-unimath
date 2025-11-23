@@ -81,9 +81,10 @@ module _
   ( P : Pseudometric-Space l1 l2)
   ( M : Metric-Extension l3 l4 P)
   ( N : Metric-Extension l5 l6 P)
-  ( f : isometry-Metric-Space
-    ( metric-space-Metric-Extension P M)
-    ( metric-space-Metric-Extension P N))
+  ( f :
+    isometry-Metric-Space
+      ( metric-space-Metric-Extension P M)
+      ( metric-space-Metric-Extension P N))
   where
 
   is-hom-prop-isometry-metric-space-Metric-Extension : Prop (l1 ⊔ l5)
