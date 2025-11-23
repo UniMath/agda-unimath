@@ -64,8 +64,7 @@ An
 {{#concept "isometry" Disambiguation="between metric extensions of a pseudometric space" Agda=hom-isometry-Metric-Extension}}
 between two
 [metric extensions](metric-spaces.metric-extensions-of-pseudometric-spaces.md)
-`(M , i : P → M)` and `(N , j : P → N)` of a
-[pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is an
+of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, `i : P → M` and `j : P → N`, is an
 [isometry](metric-spaces.isometries-metric-spaces.md) `f : M → N` such that
 
 ```text
