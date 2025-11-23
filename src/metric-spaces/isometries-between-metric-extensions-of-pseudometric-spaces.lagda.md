@@ -193,8 +193,7 @@ module _
 
   id-isometry-Metric-Extension : isometry-Metric-Extension P M M
   pr1 id-isometry-Metric-Extension =
-    isometry-id-Metric-Space
-      ( metric-space-Metric-Extension P M)
+    id-isometry-Metric-Space (metric-space-Metric-Extension P M)
   pr2 id-isometry-Metric-Extension = refl-htpy
 ```
 
