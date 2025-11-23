@@ -34,20 +34,21 @@ open import set-theory.equality-cardinals
 ## Idea
 
 We may say a [cardinal](set-theory.cardinals.md) `X` is
-{{#concept "less than or equal to" Agda=leq-complemented-Cardinal}} a cardinal
-`Y` if any [set](foundation-core.sets.md) in the isomorphism class represented
-by `X` [embeds](foundation-core.embeddings.md) as a
+{{#concept "(complemented) less than or equal to" Agda=leq-complemented-Cardinal}}
+a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
+`X` [embeds](foundation-core.embeddings.md) as a
 [decidable subtype](foundation.decidable-subtypes.md) into any set in the
-isomorphism class represented by `Y`. In other words, if there is a
+isomorphism class of `Y`. In other words, if there is a
 [decidable embedding](foundation.decidable-embeddings.md) from the first to the
 second. This defines the
-{{#concept "complemented ordering" Disambiguation="on cardinalities of sets"}}
-on cardinalities of sets.
+{{#concept "complemented ordering" Disambiguation="on set-cardinals" Agda=large-preorder-complemented-Cardinal}}
+on cardinals.
 
 Under the assumption of the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md),
 this relation is antisymmetric and hence defines a
-[partial order](order-theory.posets.md) on cardinals.
+[partial order](order-theory.posets.md) on cardinals, due to the
+[Cantor–Schröder–Bernstein theorem for decidable embeddings](foundation.cantor-schroder-bernstein-decidable-embeddings.md).
 
 ## Definition
 
@@ -210,9 +211,6 @@ module _
 ## Properties
 
 ### Assuming the weak limited principle of omniscience, then complemented inequality forms a partial order
-
-This is a direct consequence of the
-[Cantor–Schröder–Bernstein theorem for decidable embeddings](foundation.cantor-schroder-bernstein-decidable-embeddings.md).
 
 ```agda
 module _
