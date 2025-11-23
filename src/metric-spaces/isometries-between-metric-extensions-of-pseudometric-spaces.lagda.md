@@ -170,13 +170,13 @@ module _
       ( metric-space-Metric-Extension P N)
       ( isometry-metric-space-isometry-Metric-Extension)
 
-  coh-triangle-isometry-metric-space-isometry-Metric-Extension :
+  coh-isometry-Metric-Extension :
     coherence-triangle-isometry-metric-space-Metric-Extension
       ( P)
       ( M)
       ( N)
       ( isometry-metric-space-isometry-Metric-Extension)
-  coh-triangle-isometry-metric-space-isometry-Metric-Extension = pr2 f
+  coh-isometry-Metric-Extension = pr2 f
 ```
 
 ## Properties
@@ -222,13 +222,13 @@ module _
     coh-comp-isometry-Metric-Extension x =
       ( ap
         ( map-metric-space-isometry-Metric-Extension P V W g)
-        ( coh-triangle-isometry-metric-space-isometry-Metric-Extension
+        ( coh-isometry-Metric-Extension
           ( P)
           ( U)
           ( V)
           ( f)
           ( x))) ∙
-      ( coh-triangle-isometry-metric-space-isometry-Metric-Extension P V W g x)
+      ( coh-isometry-Metric-Extension P V W g x)
 
   comp-isometry-Metric-Extension : isometry-Metric-Extension P U W
   pr1 comp-isometry-Metric-Extension =
