@@ -30,6 +30,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
