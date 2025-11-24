@@ -26,6 +26,13 @@ open import linear-algebra.vector-spaces
 
 ## Idea
 
+A
+{{#concept "complex vector space" WD="complex vector space" WDID=Q5156614 Agda=ℂ-Vector-Space}}
+is a [vector space](linear-algebra.vector-spaces.md) over the
+[Heyting field of complex numbers](complex-numbers.field-of-complex-numbers.md).
+
+## Definition
+
 ```agda
 ℂ-Vector-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 ℂ-Vector-Space l1 l2 = Vector-Space l2 (heyting-field-ℂ l1)

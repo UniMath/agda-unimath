@@ -33,10 +33,12 @@ open import elementary-number-theory.multiplicative-group-of-positive-rational-n
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negation-closed-intervals-rational-numbers
+open import elementary-number-theory.negative-closed-intervals-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -1291,22 +1293,18 @@ abstract
               ( nonnegative-square-ℚ q))
 ```
 
-### If the lower bound of the product of `[a, b]` and `[c, d]` is positive, then `a`, `b`, `c`, and `d` are all positive or all negative
+### If the product of `[a, b]` and `[c, d]` is positive, then `[a, b]` and `[c, d]` are both positive or both negative
 
 ```agda
 abstract
-  same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ :
+  same-sign-is-positive-mul-closed-interval-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →
-    is-positive-ℚ (lower-bound-mul-closed-interval-ℚ [a,b] [c,d]) →
-    ( ( is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
-        is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
-        is-negative-ℚ (lower-bound-closed-interval-ℚ [c,d]) ×
-        is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])) +
-      ( is-positive-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
-        is-positive-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
-        is-positive-ℚ (lower-bound-closed-interval-ℚ [c,d]) ×
-        is-positive-ℚ (upper-bound-closed-interval-ℚ [c,d])))
-  same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-closed-interval-ℚ [a,b] ×
+        is-negative-closed-interval-ℚ [c,d]) +
+      ( is-positive-closed-interval-ℚ [a,b] ×
+        is-positive-closed-interval-ℚ [c,d]))
+  same-sign-is-positive-mul-closed-interval-ℚ
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
     let
       same-sign-a-c =
@@ -1346,23 +1344,7 @@ abstract
                   ex-falso
                     ( is-not-negative-and-positive-ℚ (is-neg-d , is-pos-d)))
                 ( same-sign-b-d)
-          in (is-neg-a , is-neg-b , is-neg-c , is-neg-d))
-        ( λ (is-pos-a , is-pos-c) →
-          let
-            is-pos-d =
-              rec-coproduct
-                ( λ (is-neg-a , _) →
-                  ex-falso
-                    ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
-                ( pr2)
-                ( same-sign-a-d)
-            is-pos-b =
-              rec-coproduct
-                ( λ (_ , is-neg-d) →
-                  ex-falso
-                    ( is-not-negative-and-positive-ℚ (is-neg-d , is-pos-d)))
-                ( pr1)
-                ( same-sign-b-d)
-          in (is-pos-a , is-pos-b , is-pos-c , is-pos-d))
+          in (is-neg-b , is-neg-d))
+        ( id)
         ( same-sign-a-c)
 ```

@@ -117,7 +117,7 @@ abstract opaque
           ay<y<by@([ay,by]@((ay , by) , _) , ay<y , y<by)) ,
           q<[ax,bx][ay,by]) ← q<xy
       rec-coproduct
-        ( λ (_ , is-neg-bx , _ , is-neg-by) →
+        ( λ (is-neg-bx , is-neg-by) →
           inl-disjunction
             ( is-negative-exists-ℚ⁻-in-upper-cut-ℝ
                 ( x)
@@ -125,7 +125,7 @@ abstract opaque
               is-negative-exists-ℚ⁻-in-upper-cut-ℝ
                 ( y)
                 ( intro-exists (by , is-neg-by) y<by)))
-        ( λ (is-pos-ax , _ , is-pos-ay , _) →
+        ( λ (is-pos-ax , is-pos-ay) →
           inr-disjunction
             ( is-positive-exists-ℚ⁺-in-lower-cut-ℝ
                 ( x)
@@ -133,7 +133,7 @@ abstract opaque
               is-positive-exists-ℚ⁺-in-lower-cut-ℝ
                 ( y)
                 ( intro-exists (ay , is-pos-ay) ay<y)))
-        ( same-sign-bounds-is-positive-lower-bound-mul-closed-interval-ℚ
+        ( same-sign-is-positive-mul-closed-interval-ℚ
           ( [ax,bx])
           ( [ay,by])
           ( is-positive-le-ℚ⁺ q⁺ q<[ax,bx][ay,by]))
