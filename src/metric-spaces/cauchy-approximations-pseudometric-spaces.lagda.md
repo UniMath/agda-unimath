@@ -166,7 +166,7 @@ module _
       ( eq-htpy f~g)
 ```
 
-### The action of isometries on preserves homotopies
+### The action of isometries preserves homotopies
 
 ```agda
 module _
