@@ -133,7 +133,7 @@ module _
     map-short-function-cauchy-approximation-Metric-Space
       ( A)
       ( A)
-      ( short-id-Metric-Space A) ＝
+      ( id-short-function-Metric-Space A) ＝
     id
   eq-id-map-short-function-cauchy-approximation-Metric-Space = refl
 
