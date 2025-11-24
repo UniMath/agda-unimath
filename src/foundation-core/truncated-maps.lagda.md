@@ -311,7 +311,7 @@ module _
   {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (i : C → D)
   (H : coherence-square-maps f g h i)
-  where
+  where abstract
 
   is-trunc-map-top-is-trunc-map-bottom-is-equiv :
     is-equiv g → is-equiv h → is-trunc-map k i → is-trunc-map k f

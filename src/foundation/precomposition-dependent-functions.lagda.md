@@ -226,23 +226,40 @@ module _
 ### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
 
 ```agda
-is-trunc-map-succ-precomp-Π :
+module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
-  {C : B → UU l3} →
-  ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
-  is-trunc-map (succ-𝕋 k) (precomp-Π f C)
-is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
-  is-trunc-map-succ-is-trunc-map-ap k (precomp-Π f C)
-    ( λ g h →
-      is-trunc-map-top-is-trunc-map-bottom-is-equiv k
-        ( ap (precomp-Π f C))
-        ( htpy-eq)
-        ( htpy-eq)
-        ( precomp-Π f (eq-value g h))
-        ( coherence-htpy-eq-ap-precomp-Π f)
-        ( funext g h)
-        ( funext (g ∘ f) (h ∘ f))
-        ( H g h))
+  {C : B → UU l3}
+  where abstract
+
+  is-trunc-map-succ-precomp-Π :
+    ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
+    is-trunc-map (succ-𝕋 k) (precomp-Π f C)
+  is-trunc-map-succ-precomp-Π H =
+    is-trunc-map-succ-is-trunc-map-ap k (precomp-Π f C)
+      ( λ g h →
+        is-trunc-map-top-is-trunc-map-bottom-is-equiv k
+          ( ap (precomp-Π f C))
+          ( htpy-eq)
+          ( htpy-eq)
+          ( precomp-Π f (eq-value g h))
+          ( coherence-htpy-eq-ap-precomp-Π f)
+          ( funext g h)
+          ( funext (g ∘ f) (h ∘ f))
+          ( H g h))
+
+  is-trunc-map-precomp-Π-eq-value-is-trunc-map-succ-precomp-Π :
+    is-trunc-map (succ-𝕋 k) (precomp-Π f C) →
+    (g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))
+  is-trunc-map-precomp-Π-eq-value-is-trunc-map-succ-precomp-Π H g h =
+    is-trunc-map-top-is-trunc-map-bottom-is-equiv k
+      ( precomp-Π f (eq-value g h))
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp-Π f C))
+      ( coherence-eq-htpy-ap-precomp-Π f)
+      ( is-equiv-eq-htpy g h)
+      ( is-equiv-eq-htpy (g ∘ f) (h ∘ f))
+      ( is-trunc-map-ap-is-trunc-map-succ k (precomp-Π f C) H g h)
 ```
 
 ### The dependent precomposition map at a dependent pair type
