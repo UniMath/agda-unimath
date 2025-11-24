@@ -184,6 +184,32 @@ module _
       ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
 ```
 
+### The action of isometries preserves composition
+
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Pseudometric-Space la la')
+  (B : Pseudometric-Space lb lb')
+  (C : Pseudometric-Space lc lc')
+  (g : isometry-Pseudometric-Space B C)
+  (f : isometry-Pseudometric-Space A B)
+  where
+
+  htpy-map-cauchy-approximation-comp-isometry-Pseudometric-Space :
+    ( map-cauchy-approximation-isometry-Pseudometric-Space B C g ∘
+      map-cauchy-approximation-isometry-Pseudometric-Space A B f) ~
+    ( map-cauchy-approximation-isometry-Pseudometric-Space A C
+      ( comp-isometry-Pseudometric-Space
+        ( A)
+        ( B)
+        ( C)
+        ( g)
+        ( f)))
+  htpy-map-cauchy-approximation-comp-isometry-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space C refl-htpy
+```
+
 ## References
 
 Our definition of Cauchy approximation follows Definition 4.5.5 of
