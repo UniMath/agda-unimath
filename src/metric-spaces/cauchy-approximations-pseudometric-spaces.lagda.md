@@ -166,6 +166,24 @@ module _
       ( eq-htpy f~g)
 ```
 
+### The action of isometries on preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space A B)
+  where
+
+  htpy-map-cauchy-approximation-isometry-Pseudometric-Space :
+    htpy-isometry-Pseudometric-Space A B f g →
+    map-cauchy-approximation-isometry-Pseudometric-Space A B f ~
+    map-cauchy-approximation-isometry-Pseudometric-Space A B g
+  htpy-map-cauchy-approximation-isometry-Pseudometric-Space f~g u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
 ## References
 
 Our definition of Cauchy approximation follows Definition 4.5.5 of
