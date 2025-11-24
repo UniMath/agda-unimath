@@ -273,7 +273,5 @@ module _
       ( eq-htpy-map-isometry-Metric-Space
         ( metric-space-Metric-Extension P M)
         ( metric-space-Metric-Extension P N)
-        ( isometry-metric-space-isometry-Metric-Extension P M N f)
-        ( isometry-metric-space-isometry-Metric-Extension P M N g)
         ( f~g))
 ```
