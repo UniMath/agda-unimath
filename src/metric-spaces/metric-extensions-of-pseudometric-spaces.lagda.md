@@ -155,6 +155,26 @@ module _
       ( isometry-cauchy-pseudocompletion-Metric-Extension)
 ```
 
+### The action of metric extensions on Cauchy approximations is natural w.r.t. Cauchy pseudocompletions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
+  (M : Metric-Extension l3 l4 P)
+  where
+
+  htpy-map-cauchy-pseudocompletion-Metric-Extension :
+    ( map-cauchy-pseudocompletion-Metric-Extension P M ∘
+      map-cauchy-pseudocompletion-Pseudometric-Space P) ~
+    ( ( map-cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Metric-Extension P M)) ∘
+      ( map-isometry-metric-space-Metric-Extension P M))
+  htpy-map-cauchy-pseudocompletion-Metric-Extension x =
+    eq-htpy-cauchy-approximation-Metric-Space
+      ( metric-space-Metric-Extension P M)
+      ( refl-htpy)
+```
+
 ### Limit points in metric extensions
 
 ```agda
