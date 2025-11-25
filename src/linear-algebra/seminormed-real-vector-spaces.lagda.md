@@ -451,7 +451,7 @@ module _
           ( zero-ℝ)
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
           ( chain-of-inequalities
-              real-ℝ⁺ (positive-real-ℕ⁺ (2 , (λ ()))) *ℝ zero-ℝ
+              real-ℕ 2 *ℝ zero-ℝ
               ≤ zero-ℝ
                 by leq-sim-ℝ (right-zero-law-mul-ℝ _)
               ≤ raise-ℝ l1 zero-ℝ
