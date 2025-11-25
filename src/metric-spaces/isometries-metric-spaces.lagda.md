@@ -171,7 +171,7 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  preserves-neighborhood-map-isometry-Metric-Space :
+  preserves-neighborhoods-map-isometry-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space A) →
     neighborhood-Metric-Space A d x y →
     neighborhood-Metric-Space
@@ -179,11 +179,11 @@ module _
       ( d)
       ( map-isometry-Metric-Space A B f x)
       ( map-isometry-Metric-Space A B f y)
-  preserves-neighborhood-map-isometry-Metric-Space d x y =
+  preserves-neighborhoods-map-isometry-Metric-Space d x y =
     forward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
 
-  reflects-neighborhood-map-isometry-Metric-Space :
+  reflects-neighborhoods-map-isometry-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space A) →
     neighborhood-Metric-Space
       ( B)
@@ -191,7 +191,7 @@ module _
       ( map-isometry-Metric-Space A B f x)
       ( map-isometry-Metric-Space A B f y) →
     neighborhood-Metric-Space A d x y
-  reflects-neighborhood-map-isometry-Metric-Space d x y =
+  reflects-neighborhoods-map-isometry-Metric-Space d x y =
     backward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
 ```
