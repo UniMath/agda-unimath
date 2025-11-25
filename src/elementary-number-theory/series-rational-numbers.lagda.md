@@ -27,7 +27,7 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import order-theory.monotonic-sequences-posets
+open import order-theory.increasing-sequences-posets
 open import order-theory.order-preserving-maps-posets
 ```
 
@@ -84,15 +84,15 @@ grows-without-bound-series-ℚ σ =
   type-Prop (grows-without-bound-prop-series-ℚ σ)
 ```
 
-### If all elements of a series are nonnegative, its partial sums are monotonic
+### If all elements of a series are nonnegative, its partial sums are increasing
 
 ```agda
 abstract
-  is-monotonic-partial-sum-is-nonnegative-term-series-ℚ :
+  is-increasing-partial-sum-is-nonnegative-term-series-ℚ :
     (σ : series-ℚ) → ((n : ℕ) → is-nonnegative-ℚ (term-series-ℚ σ n)) →
-    is-monotonic-sequence-Poset ℚ-Poset (partial-sum-series-ℚ σ)
-  is-monotonic-partial-sum-is-nonnegative-term-series-ℚ σ H =
-    is-monotonic-sequence-is-increasing-Poset
+    is-increasing-sequence-Poset ℚ-Poset (partial-sum-series-ℚ σ)
+  is-increasing-partial-sum-is-nonnegative-term-series-ℚ σ H =
+    is-increasing-leq-succ-sequence-Poset
       ( ℚ-Poset)
       ( partial-sum-series-ℚ σ)
       ( λ n →

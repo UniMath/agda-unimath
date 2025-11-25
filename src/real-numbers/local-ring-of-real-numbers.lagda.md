@@ -28,9 +28,7 @@ open import real-numbers.nonzero-real-numbers
 
 The [ring of real numbers](real-numbers.large-ring-of-real-numbers.md) is a
 [local](commutative-algebra.local-commutative-rings.md)
-[commutative ring](commutative-algebra.commutative-rings.md). Notably, this is
-one of the strongest alternatives for the concept of field that applies to the
-[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) constructively.
+[commutative ring](commutative-algebra.commutative-rings.md).
 
 ## Definition
 
