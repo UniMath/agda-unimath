@@ -173,31 +173,6 @@ module _
     pr2 (pr2 (pr2 (pr2 B)))
 ```
 
-## Properties
+## External links
 
-### Symmetry of a bilinear form
-
-```agda
-module _
-  {l1 l2 : Level}
-  (V : ℝ-Vector-Space l1 l2)
-  (B : bilinear-form-ℝ-Vector-Space V)
-  where
-
-  is-symmetric-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
-  is-symmetric-prop-bilinear-form-ℝ-Vector-Space =
-    Π-Prop
-      ( type-ℝ-Vector-Space V)
-      ( λ x →
-        Π-Prop
-          ( type-ℝ-Vector-Space V)
-          ( λ y →
-            Id-Prop
-              ( ℝ-Set l1)
-              ( map-bilinear-form-ℝ-Vector-Space V B x y)
-              ( map-bilinear-form-ℝ-Vector-Space V B y x)))
-
-  is-symmetric-bilinear-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
-  is-symmetric-bilinear-form-ℝ-Vector-Space =
-    type-Prop is-symmetric-prop-bilinear-form-ℝ-Vector-Space
-```
+- [Bilinear form](https://en.wikipedia.org/wiki/Bilinear_form) on Wikipedia

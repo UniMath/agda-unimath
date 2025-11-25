@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
 open import linear-algebra.real-vector-spaces
+open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -41,7 +42,8 @@ open import real-numbers.squares-real-numbers
 An
 {{#concept "inner product" WDID=Q23924662 WD="inner product" Disambiguation="on a real vector space" Agda=inner-product-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
-symmetric [bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
+[symmetric](linear-algebra.symmetric-bilinear-forms-real-vector-spaces.md)
+[bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
 `i : V → V → ℝ` such that for all `v : V`, `i v v` is
 [nonnegative](real-numbers.nonnegative-real-numbers.md), and if `i v v = 0`,
 then `v` is the zero vector.
