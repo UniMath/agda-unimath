@@ -56,13 +56,20 @@ is-banach-Normed-ℝ-Vector-Space V =
 ### The real numbers are a real Banach space with norm `x ↦ |x|`
 
 ```agda
-real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
-real-banach-space-ℝ l =
-  ( normed-real-vector-space-ℝ l ,
+abstract
+  is-banach-normed-real-vector-space-ℝ :
+    (l : Level) →
+    is-banach-Normed-ℝ-Vector-Space (normed-real-vector-space-ℝ l)
+  is-banach-normed-real-vector-space-ℝ l =
     inv-tr
       ( is-complete-Metric-Space)
       ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
-      ( is-complete-metric-space-ℝ l))
+      ( is-complete-metric-space-ℝ l)
+
+real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
+real-banach-space-ℝ l =
+  ( normed-real-vector-space-ℝ l ,
+    is-banach-normed-real-vector-space-ℝ l)
 ```
 
 ## External links
