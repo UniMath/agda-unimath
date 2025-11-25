@@ -1,8 +1,6 @@
 # Metric extensions of pseudometric spaces
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module metric-spaces.metric-extensions-of-pseudometric-spaces where
 ```
 
