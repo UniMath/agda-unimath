@@ -349,7 +349,7 @@ module _
         ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
   is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
     d x y =
-      preserves-neighborhood-sim-Pseudometric-Space
+      preserves-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         { x}
         { const-cauchy-approximation-Metric-Space
@@ -463,7 +463,7 @@ module _
         ( v)
     reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
       δ x y Nδ =
-      reflects-neighborhood-sim-Pseudometric-Space
+      reflects-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
           { x}
           { const-cauchy-approximation-Metric-Space
@@ -488,7 +488,7 @@ module _
           ( is-complete-M)
           ( y))
         ( δ)
-        ( preserves-neighborhood-map-isometry-Pseudometric-Space
+        ( preserves-neighborhoods-map-isometry-Pseudometric-Space
           ( pseudometric-Metric-Space M)
           ( cauchy-pseudocompletion-Metric-Space M)
           ( isometry-cauchy-pseudocompletion-Metric-Space M)

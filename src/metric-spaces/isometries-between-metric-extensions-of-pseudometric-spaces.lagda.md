@@ -1,6 +1,8 @@
 # Isometries between metric extensions of a pseudometric space
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.isometries-between-metric-extensions-of-pseudometric-spaces where
 ```
 
@@ -181,6 +183,24 @@ module _
 ```
 
 ## Properties
+
+### Isometries of metric spaces are isometries of metric extensions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (N : Metric-Space l3 l4)
+  (f : isometry-Metric-Space M N)
+  where
+
+  forgetful-isometry-Metric-Extension :
+    isometry-Metric-Extension
+      ( pseudometric-Metric-Space M)
+      ( forgetful-Metric-Extension M)
+      ( N , f)
+  forgetful-isometry-Metric-Extension = (f , refl-htpy)
+```
 
 ### The identity isometry of a metric extension
 

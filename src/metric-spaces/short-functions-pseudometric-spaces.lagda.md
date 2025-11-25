@@ -296,7 +296,7 @@ module _
     is-isometry-Pseudometric-Space A B f →
     is-short-function-Pseudometric-Space A B f
   is-short-is-isometry-Pseudometric-Space I =
-    preserves-neighborhood-map-isometry-Pseudometric-Space A B (f , I)
+    preserves-neighborhoods-map-isometry-Pseudometric-Space A B (f , I)
 ```
 
 ### The embedding of isometries of pseudometric spaces into short maps

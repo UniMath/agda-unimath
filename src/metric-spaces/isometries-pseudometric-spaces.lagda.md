@@ -167,7 +167,7 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where
 
-  preserves-neighborhood-map-isometry-Pseudometric-Space :
+  preserves-neighborhoods-map-isometry-Pseudometric-Space :
     (d : ℚ⁺) (x y : type-Pseudometric-Space A) →
     neighborhood-Pseudometric-Space A d x y →
     neighborhood-Pseudometric-Space
@@ -175,11 +175,11 @@ module _
       ( d)
       ( map-isometry-Pseudometric-Space A B f x)
       ( map-isometry-Pseudometric-Space A B f y)
-  preserves-neighborhood-map-isometry-Pseudometric-Space d x y =
+  preserves-neighborhoods-map-isometry-Pseudometric-Space d x y =
     forward-implication
       ( is-isometry-map-isometry-Pseudometric-Space A B f d x y)
 
-  reflects-neighborhood-map-isometry-Pseudometric-Space :
+  reflects-neighborhoods-map-isometry-Pseudometric-Space :
     (d : ℚ⁺) (x y : type-Pseudometric-Space A) →
     neighborhood-Pseudometric-Space
       ( B)
@@ -187,7 +187,7 @@ module _
       ( map-isometry-Pseudometric-Space A B f x)
       ( map-isometry-Pseudometric-Space A B f y) →
     neighborhood-Pseudometric-Space A d x y
-  reflects-neighborhood-map-isometry-Pseudometric-Space d x y =
+  reflects-neighborhoods-map-isometry-Pseudometric-Space d x y =
     backward-implication
       ( is-isometry-map-isometry-Pseudometric-Space A B f d x y)
 ```

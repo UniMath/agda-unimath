@@ -408,7 +408,7 @@ module _
   where
 
   abstract
-    preserves-neighborhood-map-metric-quotient-Pseudometric-Space :
+    preserves-neighborhoods-map-metric-quotient-Pseudometric-Space :
       (d : ℚ⁺) (x y : type-Pseudometric-Space M) →
       neighborhood-Pseudometric-Space M d x y →
       neighborhood-metric-quotient-Pseudometric-Space
@@ -416,7 +416,7 @@ module _
         ( d)
         ( map-metric-quotient-Pseudometric-Space M x)
         ( map-metric-quotient-Pseudometric-Space M y)
-    preserves-neighborhood-map-metric-quotient-Pseudometric-Space
+    preserves-neighborhoods-map-metric-quotient-Pseudometric-Space
       d x y d⟨x,y⟩ (x' , x≈x') (y' , y≈y') =
       let
         x~x' =
@@ -434,15 +434,15 @@ module _
             ( y≈y')
 
       in
-        preserves-neighborhood-right-sim-Pseudometric-Space M y~y' d x'
-          ( preserves-neighborhood-left-sim-Pseudometric-Space
+        preserves-neighborhoods-right-sim-Pseudometric-Space M y~y' d x'
+          ( preserves-neighborhoods-left-sim-Pseudometric-Space
             ( M)
             ( x~x')
             ( d)
             ( y)
             ( d⟨x,y⟩))
 
-    reflects-neighborhood-map-metric-quotient-Pseudometric-Space :
+    reflects-neighborhoods-map-metric-quotient-Pseudometric-Space :
       (d : ℚ⁺) (x y : type-Pseudometric-Space M) →
       neighborhood-metric-quotient-Pseudometric-Space
         ( M)
@@ -450,7 +450,7 @@ module _
         ( map-metric-quotient-Pseudometric-Space M x)
         ( map-metric-quotient-Pseudometric-Space M y) →
       neighborhood-Pseudometric-Space M d x y
-    reflects-neighborhood-map-metric-quotient-Pseudometric-Space
+    reflects-neighborhoods-map-metric-quotient-Pseudometric-Space
       d x y Nxy =
         Nxy
           ( map-subtype-metric-quotient-Pseudometric-Space M x)
@@ -462,8 +462,8 @@ module _
         ( pseudometric-metric-quotient-Pseudometric-Space M)
         ( map-metric-quotient-Pseudometric-Space M)
     is-isometry-map-metric-quotient-Pseudometric-Space d x y =
-      ( preserves-neighborhood-map-metric-quotient-Pseudometric-Space d x y ,
-        reflects-neighborhood-map-metric-quotient-Pseudometric-Space d x y)
+      ( preserves-neighborhoods-map-metric-quotient-Pseudometric-Space d x y ,
+        reflects-neighborhoods-map-metric-quotient-Pseudometric-Space d x y)
 ```
 
 ### The isometry from a pseudometric space to its quotient metric space
@@ -769,7 +769,7 @@ module _
         ( f))
 
   abstract
-    preserves-neighborhood-map-isometry-metric-quotient-Pseudometric-Space :
+    preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space :
       (d : ℚ⁺) →
       (x y : type-metric-quotient-Pseudometric-Space A) →
       neighborhood-metric-quotient-Pseudometric-Space
@@ -782,7 +782,7 @@ module _
         ( d)
         ( map-isometry-metric-quotient-Pseudometric-Space x)
         ( map-isometry-metric-quotient-Pseudometric-Space y)
-    preserves-neighborhood-map-isometry-metric-quotient-Pseudometric-Space =
+    preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space =
       is-short-map-short-function-metric-quotient-Pseudometric-Space
         ( A)
         ( B)
@@ -791,7 +791,7 @@ module _
           ( pseudometric-Metric-Space B)
           ( f))
 
-    reflects-neighborhood-map-isometry-metric-quotient-Pseudometric-Space :
+    reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space :
       (d : ℚ⁺) →
       (x y : type-metric-quotient-Pseudometric-Space A) →
       neighborhood-Metric-Space
@@ -804,9 +804,9 @@ module _
         ( d)
         ( x)
         ( y)
-    reflects-neighborhood-map-isometry-metric-quotient-Pseudometric-Space
+    reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
       d X Y N⟨fX,fY⟩ (x , x∈X) (y , y∈Y) =
-      reflects-neighborhood-map-isometry-Pseudometric-Space
+      reflects-neighborhoods-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)
@@ -825,11 +825,11 @@ module _
         ( B)
         ( map-isometry-metric-quotient-Pseudometric-Space)
     is-isometry-map-isometry-metric-quotient-Pseudometric-Space d x y =
-      ( preserves-neighborhood-map-isometry-metric-quotient-Pseudometric-Space
+      ( preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
         ( d)
         ( x)
         ( y) ,
-        reflects-neighborhood-map-isometry-metric-quotient-Pseudometric-Space
+        reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
           ( d)
           ( x)
           ( y))

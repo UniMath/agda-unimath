@@ -233,7 +233,7 @@ module _
           ( x)
           ( x∈uε)
     in
-      preserves-neighborhood-sim-Pseudometric-Space
+      preserves-neighborhoods-sim-Pseudometric-Space
         ( M)
         ( uε~x)
         ( lim~y)

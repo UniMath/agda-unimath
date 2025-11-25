@@ -295,7 +295,7 @@ module _
     const-cauchy-approximation-Pseudometric-Space M
 
   abstract
-    preserves-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space :
+    preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space :
       (d : ℚ⁺) (x y : type-Pseudometric-Space M) →
       neighborhood-Pseudometric-Space M d x y →
       neighborhood-cauchy-pseudocompletion-Pseudometric-Space
@@ -303,13 +303,13 @@ module _
         ( d)
         ( map-cauchy-pseudocompletion-Pseudometric-Space x)
         ( map-cauchy-pseudocompletion-Pseudometric-Space y)
-    preserves-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+    preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
       d x y Nxy δ ε =
       monotonic-neighborhood-Pseudometric-Space M x y d (δ +ℚ⁺ ε +ℚ⁺ d)
         ( le-right-add-ℚ⁺ (δ +ℚ⁺ ε) d)
         ( Nxy)
 
-    reflects-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space :
+    reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space :
       (d : ℚ⁺) (x y : type-Pseudometric-Space M) →
       neighborhood-cauchy-pseudocompletion-Pseudometric-Space
         ( M)
@@ -317,7 +317,7 @@ module _
         ( map-cauchy-pseudocompletion-Pseudometric-Space x)
         ( map-cauchy-pseudocompletion-Pseudometric-Space y) →
       neighborhood-Pseudometric-Space M d x y
-    reflects-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+    reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
       d x y Nxy =
       saturated-neighborhood-Pseudometric-Space M d x y
         ( λ δ →
@@ -335,11 +335,11 @@ module _
         ( cauchy-pseudocompletion-Pseudometric-Space M)
         ( map-cauchy-pseudocompletion-Pseudometric-Space)
     is-isometry-map-cauchy-pseudocompletion-Pseudometric-Space d x y =
-      ( ( preserves-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( ( preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
           ( d)
           ( x)
           ( y)) ,
-        (reflects-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+        (reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
           ( d)
           ( x)
           ( y)))
@@ -666,7 +666,7 @@ module _
             ( M)))
     is-short-function-const-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
       d u v =
-      preserves-neighborhood-sim-Pseudometric-Space
+      preserves-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space
           ( cauchy-pseudocompletion-Pseudometric-Space M))
         { u}
@@ -697,7 +697,7 @@ module _
         ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space M)
     is-short-function-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space
       d u v Nuv =
-      reflects-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+      reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M)
         ( d)
         ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
@@ -752,7 +752,7 @@ module _
         ( v)
     reflects-neighborhoods-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
       d u v N-lim =
-      reflects-neighborhood-sim-Pseudometric-Space
+      reflects-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space
           ( cauchy-pseudocompletion-Pseudometric-Space M))
         { u}
@@ -774,7 +774,7 @@ module _
           ( M)
           ( v))
         ( d)
-        ( preserves-neighborhood-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
           ( cauchy-pseudocompletion-Pseudometric-Space M)
           ( d)
           ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
@@ -887,7 +887,7 @@ module _
       ( y)
   reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space
     d x y Nxy α β =
-    reflects-neighborhood-map-isometry-Pseudometric-Space
+    reflects-neighborhoods-map-isometry-Pseudometric-Space
       ( A)
       ( B)
       ( f)
