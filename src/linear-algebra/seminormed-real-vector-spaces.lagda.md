@@ -319,10 +319,10 @@ module _
         ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v)) ∙
       ( is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
 
-    sim-zero-diagonal-dist-Semiormed-ℝ-Vector-Space :
+    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
       sim-ℝ (dist-Seminormed-ℝ-Vector-Space V v v) zero-ℝ
-    sim-zero-diagonal-dist-Semiormed-ℝ-Vector-Space v =
+    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
       inv-tr
         ( λ x → sim-ℝ x zero-ℝ)
         ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v)
@@ -451,12 +451,11 @@ module _
               real-ℕ 2 *ℝ zero-ℝ
               ≤ zero-ℝ
                 by leq-sim-ℝ (right-zero-law-mul-ℝ _)
-              ≤ raise-ℝ l1 zero-ℝ
-                by leq-sim-ℝ (sim-raise-ℝ l1 zero-ℝ)
               ≤ dist-Seminormed-ℝ-Vector-Space V v v
                 by
-                  leq-eq-ℝ
-                    ( inv (is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
+                  leq-sim-ℝ
+                    ( symmetric-sim-ℝ
+                      ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
               ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
                 ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
@@ -515,7 +514,7 @@ module _
           ( zero-ℝ)
           ( dist-Seminormed-ℝ-Vector-Space V v v)
           ( symmetric-sim-ℝ
-            ( sim-zero-diagonal-dist-Semiormed-ℝ-Vector-Space V v))
+            ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
           ( preserves-is-positive-real-ℚ (is-positive-rational-ℚ⁺ ε)))
 
     symmetric-neighborhood-Seminormed-ℝ-Vector-Space :
