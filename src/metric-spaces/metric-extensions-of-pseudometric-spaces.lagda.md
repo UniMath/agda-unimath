@@ -1,6 +1,8 @@
 # Metric extensions of pseudometric spaces
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.metric-extensions-of-pseudometric-spaces where
 ```
 
@@ -110,6 +112,18 @@ module _
 ```
 
 ## Properties
+
+### The forgetful metric extension of a metric space into itself
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  forgetful-Metric-Extension :
+    Metric-Extension l1 l2 (pseudometric-Metric-Space M)
+  forgetful-Metric-Extension = (M , id-isometry-Metric-Space M)
+```
 
 ### Action of metric extensions on Cauchy approximations
 
