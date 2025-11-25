@@ -79,3 +79,4 @@ morphsims->morphisms
 outout->output
 ringr->ring
 ringrs->rings
+semiorm->seminorm
