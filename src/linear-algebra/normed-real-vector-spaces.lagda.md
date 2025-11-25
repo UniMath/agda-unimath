@@ -50,7 +50,7 @@ A
 {{#concept "norm" WDID=Q956437 WD="norm" Disambiguation="on a real vector space" Agda=norm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [seminorm](linear-algebra.seminormed-real-vector-spaces.md) `p` on `V` that is
-**extensional**: if `p v = 0`, then `v` is the zero vector.
+**extensional**: if `p(v) = 0`, then `v` is the zero vector.
 
 A real vector space equipped with such a norm is called a
 {{#concept "normed vector space" Disambiguation="normed real vector space" WDID=Q726210 WD="normed vector space" Agda=Normed-ℝ-Vector-Space}}.
@@ -59,7 +59,7 @@ A norm on a real vector space induces a
 [located](metric-spaces.located-metric-spaces.md)
 [metric space](metric-spaces.metric-spaces.md) on the vector space, defined by
 the neighborhood relation that `v` and `w` are in an `ε`-neighborhood of each
-other if `p (v - w) ≤ ε`.
+other if `p(v - w) ≤ ε`.
 
 ## Definition
 
