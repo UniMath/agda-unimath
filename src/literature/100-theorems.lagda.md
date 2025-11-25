@@ -36,7 +36,7 @@ open import elementary-number-theory.rational-numbers using
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import linear-algebra.pythagorean-theorem-real-inner-product-spaces using
+open import linear-algebra.orthogonality-real-inner-product-spaces using
   ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 

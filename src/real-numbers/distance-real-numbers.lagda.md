@@ -13,6 +13,7 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -57,6 +58,11 @@ they are apart. It is the
 ```agda
 dist-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 dist-ℝ x y = abs-ℝ (x -ℝ y)
+
+ap-dist-ℝ :
+  {l1 l2 : Level} {x x' : ℝ l1} → x ＝ x' → {y y' : ℝ l2} → y ＝ y' →
+  dist-ℝ x y ＝ dist-ℝ x' y'
+ap-dist-ℝ = ap-binary dist-ℝ
 ```
 
 ### The distance function is commutative
@@ -410,4 +416,18 @@ abstract
     sim-ℝ (dist-ℝ x (x +ℝ real-ℝ⁺ y)) (real-ℝ⁺ y)
   dist-right-add-ℝ⁺ x y⁺@(y , _) =
     tr (sim-ℝ _) (abs-real-ℝ⁺ y⁺) (dist-right-add-ℝ x y)
+```
+
+### The distance from a real number to itself is 0
+
+```agda
+abstract
+  diagonal-dist-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (dist-ℝ x x) zero-ℝ
+  diagonal-dist-ℝ x =
+    similarity-reasoning-ℝ
+      dist-ℝ x x
+      ~ℝ abs-ℝ zero-ℝ
+        by preserves-sim-abs-ℝ (right-inverse-law-add-ℝ x)
+      ~ℝ zero-ℝ
+        by sim-eq-ℝ abs-zero-ℝ
 ```

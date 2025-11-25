@@ -1,9 +1,9 @@
-# Extensionality of squares of real numbers
+# Extensionality of multiplication of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.extensionality-squares-real-numbers where
+module real-numbers.extensionality-multiplication-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -30,7 +30,10 @@ open import real-numbers.squares-real-numbers
 If the [square](real-numbers.squares-real-numbers.md) of a
 [real number](real-numbers.dedekind-real-numbers.md) is
 [similar](real-numbers.similarity-real-numbers.md) to 0, the real number is
-similar to 0.
+similar to 0. This property is extensionality of multiplication as a
+[bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md) over the
+[vector space of real numbers](linear-algebra.real-vector-spaces.md) over
+themselves.
 
 ## Proof
 

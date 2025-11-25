@@ -63,8 +63,8 @@ module _
   is-left-additive-form-ℝ-Vector-Space =
     type-Prop is-left-additive-prop-form-ℝ-Vector-Space
 
-  is-left-homogeneous-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
-  is-left-homogeneous-prop-form-ℝ-Vector-Space =
+  preserves-scalar-mul-left-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  preserves-scalar-mul-left-prop-form-ℝ-Vector-Space =
     Π-Prop
       ( ℝ l1)
       ( λ a →
@@ -79,9 +79,9 @@ module _
                   ( B (mul-ℝ-Vector-Space V a x) y)
                   ( a *ℝ B x y))))
 
-  is-left-homogeneous-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
-  is-left-homogeneous-form-ℝ-Vector-Space =
-    type-Prop is-left-homogeneous-prop-form-ℝ-Vector-Space
+  preserves-scalar-mul-left-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  preserves-scalar-mul-left-form-ℝ-Vector-Space =
+    type-Prop preserves-scalar-mul-left-prop-form-ℝ-Vector-Space
 
   is-right-additive-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
   is-right-additive-prop-form-ℝ-Vector-Space =
@@ -103,8 +103,8 @@ module _
   is-right-additive-form-ℝ-Vector-Space =
     type-Prop is-right-additive-prop-form-ℝ-Vector-Space
 
-  is-right-homogeneous-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
-  is-right-homogeneous-prop-form-ℝ-Vector-Space =
+  preserves-scalar-mul-right-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  preserves-scalar-mul-right-prop-form-ℝ-Vector-Space =
     Π-Prop
       ( ℝ l1)
       ( λ a →
@@ -119,16 +119,16 @@ module _
                   ( B x (mul-ℝ-Vector-Space V a y))
                   ( a *ℝ B x y))))
 
-  is-right-homogeneous-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
-  is-right-homogeneous-form-ℝ-Vector-Space =
-    type-Prop is-right-homogeneous-prop-form-ℝ-Vector-Space
+  preserves-scalar-mul-right-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  preserves-scalar-mul-right-form-ℝ-Vector-Space =
+    type-Prop preserves-scalar-mul-right-prop-form-ℝ-Vector-Space
 
   is-bilinear-prop-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
   is-bilinear-prop-form-ℝ-Vector-Space =
     is-left-additive-prop-form-ℝ-Vector-Space ∧
-    is-left-homogeneous-prop-form-ℝ-Vector-Space ∧
+    preserves-scalar-mul-left-prop-form-ℝ-Vector-Space ∧
     is-right-additive-prop-form-ℝ-Vector-Space ∧
-    is-right-homogeneous-prop-form-ℝ-Vector-Space
+    preserves-scalar-mul-right-prop-form-ℝ-Vector-Space
 
   is-bilinear-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
   is-bilinear-form-ℝ-Vector-Space =
@@ -153,45 +153,26 @@ module _
     is-left-additive-form-ℝ-Vector-Space V map-bilinear-form-ℝ-Vector-Space
   is-left-additive-map-bilinear-form-ℝ-Vector-Space = pr1 (pr2 B)
 
-  is-left-homogeneous-map-bilinear-form-ℝ-Vector-Space :
-    is-left-homogeneous-form-ℝ-Vector-Space V map-bilinear-form-ℝ-Vector-Space
-  is-left-homogeneous-map-bilinear-form-ℝ-Vector-Space = pr1 (pr2 (pr2 B))
+  preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space :
+    preserves-scalar-mul-left-form-ℝ-Vector-Space
+      ( V)
+      ( map-bilinear-form-ℝ-Vector-Space)
+  preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space = pr1 (pr2 (pr2 B))
 
   is-right-additive-map-bilinear-form-ℝ-Vector-Space :
-    is-right-additive-form-ℝ-Vector-Space V map-bilinear-form-ℝ-Vector-Space
+    is-right-additive-form-ℝ-Vector-Space
+      ( V)
+      ( map-bilinear-form-ℝ-Vector-Space)
   is-right-additive-map-bilinear-form-ℝ-Vector-Space = pr1 (pr2 (pr2 (pr2 B)))
 
-  is-right-homogeneous-map-bilinear-form-ℝ-Vector-Space :
-    is-right-homogeneous-form-ℝ-Vector-Space V map-bilinear-form-ℝ-Vector-Space
-  is-right-homogeneous-map-bilinear-form-ℝ-Vector-Space =
+  preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space :
+    preserves-scalar-mul-right-form-ℝ-Vector-Space
+      ( V)
+      ( map-bilinear-form-ℝ-Vector-Space)
+  preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space =
     pr2 (pr2 (pr2 (pr2 B)))
 ```
 
-## Properties
+## External links
 
-### Commutativity of a bilinear form
-
-```agda
-module _
-  {l1 l2 : Level}
-  (V : ℝ-Vector-Space l1 l2)
-  (B : bilinear-form-ℝ-Vector-Space V)
-  where
-
-  is-commutative-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
-  is-commutative-prop-bilinear-form-ℝ-Vector-Space =
-    Π-Prop
-      ( type-ℝ-Vector-Space V)
-      ( λ x →
-        Π-Prop
-          ( type-ℝ-Vector-Space V)
-          ( λ y →
-            Id-Prop
-              ( ℝ-Set l1)
-              ( map-bilinear-form-ℝ-Vector-Space V B x y)
-              ( map-bilinear-form-ℝ-Vector-Space V B y x)))
-
-  is-commutative-bilinear-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
-  is-commutative-bilinear-form-ℝ-Vector-Space =
-    type-Prop is-commutative-prop-bilinear-form-ℝ-Vector-Space
-```
+- [Bilinear form](https://en.wikipedia.org/wiki/Bilinear_form) on Wikipedia

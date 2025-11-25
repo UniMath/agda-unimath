@@ -32,6 +32,10 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.metric-spaces
+
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -213,6 +217,19 @@ abstract
     map-trunc-Prop
       ( λ (q , x<q) → ((q , is-positive-is-in-upper-cut-ℝ⁰⁺ x x<q) , x<q))
       ( is-inhabited-upper-cut-ℝ⁰⁺ x)
+```
+
+### Every nonnegative real number is less than some positive rational number
+
+```agda
+abstract
+  exists-ℚ⁺-le-ℝ⁰⁺ :
+    {l : Level} → (x : ℝ⁰⁺ l) →
+    exists ℚ⁺ (λ q → le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q))
+  exists-ℚ⁺-le-ℝ⁰⁺ x =
+    map-tot-exists
+      ( λ _ → le-real-is-in-upper-cut-ℚ (real-ℝ⁰⁺ x))
+      ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Nonpositive rational numbers are not less than or equal to nonnegative real numbers

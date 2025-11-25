@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
 open import linear-algebra.real-vector-spaces
+open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces
 
 open import order-theory.large-posets
 
@@ -29,10 +30,10 @@ open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.extensionality-squares-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
+open import real-numbers.extensionality-multiplication-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -50,7 +51,8 @@ open import real-numbers.squares-real-numbers
 An
 {{#concept "inner product" WDID=Q23924662 WD="inner product" Disambiguation="on a real vector space" Agda=inner-product-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
-commutative [bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
+[symmetric](linear-algebra.symmetric-bilinear-forms-real-vector-spaces.md)
+[bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
 `i : V → V → ℝ` such that for all `v : V`, `i v v` is
 [nonnegative](real-numbers.nonnegative-real-numbers.md), and if `i v v = 0`,
 then `v` is the zero vector.
@@ -84,7 +86,7 @@ module _
 
   is-inner-product-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
   is-inner-product-prop-bilinear-form-ℝ-Vector-Space =
-    is-commutative-prop-bilinear-form-ℝ-Vector-Space V B ∧
+    is-symmetric-prop-bilinear-form-ℝ-Vector-Space V B ∧
     is-semidefinite-prop-bilinear-form-ℝ-Vector-Space ∧
     is-extensional-prop-bilinear-form-ℝ-Vector-Space
 
@@ -168,11 +170,11 @@ module _
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
   is-left-homogeneous-inner-product-ℝ-Inner-Product-Space :
-    is-left-homogeneous-form-ℝ-Vector-Space
+    preserves-scalar-mul-left-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
   is-left-homogeneous-inner-product-ℝ-Inner-Product-Space =
-    is-left-homogeneous-map-bilinear-form-ℝ-Vector-Space
+    preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
@@ -186,11 +188,11 @@ module _
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
   is-right-homogeneous-inner-product-ℝ-Inner-Product-Space :
-    is-right-homogeneous-form-ℝ-Vector-Space
+    preserves-scalar-mul-right-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
   is-right-homogeneous-inner-product-ℝ-Inner-Product-Space =
-    is-right-homogeneous-map-bilinear-form-ℝ-Vector-Space
+    preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
@@ -234,6 +236,12 @@ module _
     v ＝ zero-ℝ-Inner-Product-Space
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr2 (pr2 (pr2 (pr2 V)))
+
+  symmetric-inner-product-ℝ-Inner-Product-Space :
+    (v w : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space v w ＝
+    inner-product-ℝ-Inner-Product-Space w v
+  symmetric-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 (pr2 V))
 
   nonnegative-squared-norm-ℝ-Inner-Product-Space :
     type-ℝ-Inner-Product-Space → ℝ⁰⁺ l1
@@ -320,11 +328,11 @@ module _
             ( V)
             ( w)
             ( neg-ℝ-Inner-Product-Space V v)
-          by commutative-inner-product-ℝ-Inner-Product-Space V _ _
+          by symmetric-inner-product-ℝ-Inner-Product-Space V _ _
         ＝ neg-ℝ (inner-product-ℝ-Inner-Product-Space V w v)
           by right-negative-law-inner-product-ℝ-Inner-Product-Space w v
         ＝ neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)
-          by ap neg-ℝ (commutative-inner-product-ℝ-Inner-Product-Space V w v)
+          by ap neg-ℝ (symmetric-inner-product-ℝ-Inner-Product-Space V w v)
 ```
 
 ### The inner product is distributive over subtraction
@@ -414,32 +422,32 @@ module _
         squared-norm-ℝ-Inner-Product-Space V w)
     squared-norm-add-ℝ-Inner-Product-Space v w =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (v +V w) ∙V (v +V w)
-          ＝ (v ∙V (v +V w)) +ℝ (w ∙V (v +V w))
+          ⟨ v +V w ,V v +V w ⟩
+          ＝ ⟨ v ,V v +V w ⟩ +ℝ ⟨ w ,V v +V w ⟩
             by is-left-additive-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ ((v ∙V v) +ℝ (v ∙V w)) +ℝ ((w ∙V v) +ℝ (w ∙V w))
+          ＝ (⟨ v ,V v ⟩ +ℝ ⟨ v ,V w ⟩) +ℝ (⟨ w ,V v ⟩ +ℝ ⟨ w ,V w ⟩)
             by
               ap-add-ℝ
                 ( is-right-additive-inner-product-ℝ-Inner-Product-Space V _ _ _)
                 ( is-right-additive-inner-product-ℝ-Inner-Product-Space V _ _ _)
-          ＝ (v ∙V v) +ℝ (v ∙V w) +ℝ (w ∙V v) +ℝ (w ∙V w)
+          ＝ ⟨ v ,V v ⟩ +ℝ ⟨ v ,V w ⟩ +ℝ ⟨ w ,V v ⟩ +ℝ ⟨ w ,V w ⟩
             by inv (associative-add-ℝ _ _ _)
-          ＝ (v ∙V v) +ℝ ((v ∙V w) +ℝ (w ∙V v)) +ℝ (w ∙V w)
+          ＝ ⟨ v ,V v ⟩ +ℝ (⟨ v ,V w ⟩ +ℝ ⟨ w ,V v ⟩) +ℝ ⟨ w ,V w ⟩
             by ap-add-ℝ (associative-add-ℝ _ _ _) refl
-          ＝ (v ∙V v) +ℝ ((v ∙V w) +ℝ (v ∙V w)) +ℝ (w ∙V w)
+          ＝ ⟨ v ,V v ⟩ +ℝ (⟨ v ,V w ⟩ +ℝ ⟨ v ,V w ⟩) +ℝ ⟨ w ,V w ⟩
             by
               ap-add-ℝ
                 ( ap-add-ℝ
                   ( refl)
                   ( ap-add-ℝ
                     ( refl)
-                    ( commutative-inner-product-ℝ-Inner-Product-Space V w v)))
+                    ( symmetric-inner-product-ℝ-Inner-Product-Space V w v)))
                 ( refl)
-          ＝ (v ∙V v) +ℝ real-ℕ 2 *ℝ (v ∙V w) +ℝ (w ∙V w)
+          ＝ ⟨ v ,V v ⟩ +ℝ real-ℕ 2 *ℝ ⟨ v ,V w ⟩ +ℝ ⟨ w ,V w ⟩
             by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 _))) refl
 ```
 
