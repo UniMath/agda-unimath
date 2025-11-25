@@ -81,6 +81,17 @@ open import group-theory.cayleys-theorem using
   ( Cayleys-theorem)
 ```
 
+### Cauchy-Schwarz inequality {#Q190546}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+**Author:** [malarbol](http://www.github.com/malarbol)
+
+```agda
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
+```
+
 ### Diaconescu's theorem {#Q3527059}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)

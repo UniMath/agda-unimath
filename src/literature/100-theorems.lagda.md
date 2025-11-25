@@ -189,6 +189,8 @@ open import elementary-number-theory.natural-numbers using
 
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
+**Author:** [malarbol](http://www.github.com/malarbol)
+
 ```agda
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
   ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
