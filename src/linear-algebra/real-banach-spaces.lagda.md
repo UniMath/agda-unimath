@@ -26,8 +26,8 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 
 ## Idea
 
-A real
-{{#concept "Banach space" WDID=Q194397 WD="Banach space" Disambiguation="over ℝ" Agda=ℝ-Banach-Space}}
+A
+{{#concept "real Banach space" WDID=Q194397 WD="Banach space" Agda=ℝ-Banach-Space}}
 is a [normed](linear-algebra.normed-real-vector-spaces.md)
 [real vector space](linear-algebra.real-vector-spaces.md) such that the
 [metric space](metric-spaces.metric-spaces.md) induced by the norm is

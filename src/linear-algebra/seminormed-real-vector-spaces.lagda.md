@@ -56,17 +56,17 @@ A
 {{#concept "seminorm" WDID=Q1416088 WD="seminorm" Disambiguation="on a real vector space" Agda=seminorm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [real](real-numbers.dedekind-real-numbers.md)-valued function `p` on the vector
-space such that `p (x + y) ≤ p x + p y` for all `x` and `y` in `V`, and
-`p (c * x) = |c| * p x` for all real numbers `c` and `x` in `V`.
+space such that `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
+`p(c * x) = |c| * p(x)` for all real numbers `c` and `x` in `V`.
 
-These conditions imply that `p 0 = 0` and that `p` is nonnegative.
+These conditions imply that `p(0) = 0` and that `p` is nonnegative.
 
 A real vector space equipped with such a seminorm is called a
 {{#concept "seminormed space" WD="seminormed space" WDID=Q63793693 Agda=Seminormed-ℝ-Vector-Space}}.
 A seminormed space has an induced
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) defined by the
 neighborhood relation that `v` and `w` are in an `ε`-neighborhood of each other
-if `p (v - w) ≤ ε`.
+if `p(v - w) ≤ ε`.
 
 ## Definition
 
@@ -259,7 +259,7 @@ module _
       ( diff-Seminormed-ℝ-Vector-Space v w)
 ```
 
-### The seminorm of the zero vector in a seminormed real vector space is zero
+### The seminorm of the zero vector is zero
 
 ```agda
 module _
@@ -427,7 +427,7 @@ module _
             by triangular-Seminormed-ℝ-Vector-Space V _ _
 ```
 
-### The seminorm of a vector in a seminormed vector space is nonnegative
+### The seminorm of a vector is nonnegative
 
 ```agda
 module _
@@ -448,7 +448,7 @@ module _
           ( zero-ℝ)
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
           ( chain-of-inequalities
-              real-ℝ⁺ (positive-real-ℕ⁺ (2 , (λ ()))) *ℝ zero-ℝ
+              real-ℕ 2 *ℝ zero-ℝ
               ≤ zero-ℝ
                 by leq-sim-ℝ (right-zero-law-mul-ℝ _)
               ≤ raise-ℝ l1 zero-ℝ
