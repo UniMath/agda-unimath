@@ -34,8 +34,8 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-A real
-{{#concept "Banach space" WDID=Q194397 WD="Banach space" Disambiguation="over ℝ" Agda=ℝ-Banach-Space}}
+A
+{{#concept "real Banach space" WDID=Q194397 WD="Banach space" Agda=ℝ-Banach-Space}}
 is a [normed](linear-algebra.normed-real-vector-spaces.md)
 [real vector space](linear-algebra.real-vector-spaces.md) such that the
 [metric space](metric-spaces.metric-spaces.md) induced by the norm is
@@ -132,13 +132,20 @@ module _
 ### The real numbers are a real Banach space with norm `x ↦ |x|`
 
 ```agda
-real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
-real-banach-space-ℝ l =
-  ( normed-real-vector-space-ℝ l ,
+abstract
+  is-banach-normed-real-vector-space-ℝ :
+    (l : Level) →
+    is-banach-Normed-ℝ-Vector-Space (normed-real-vector-space-ℝ l)
+  is-banach-normed-real-vector-space-ℝ l =
     inv-tr
       ( is-complete-Metric-Space)
       ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
-      ( is-complete-metric-space-ℝ l))
+      ( is-complete-metric-space-ℝ l)
+
+real-banach-space-ℝ : (l : Level) → ℝ-Banach-Space l (lsuc l)
+real-banach-space-ℝ l =
+  ( normed-real-vector-space-ℝ l ,
+    is-banach-normed-real-vector-space-ℝ l)
 ```
 
 ## External links
