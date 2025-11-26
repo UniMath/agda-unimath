@@ -1,7 +1,7 @@
 # Decidable retracts of types
 
 ```agda
-module foundation-core.decidable-retracts-of-types where
+module foundation.decidable-retracts-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -45,12 +45,12 @@ is the data of pair of maps
 
 such that `r ∘ i ~ id`, where `i` is a
 [decidable embedding](foundation.decidable-embeddings.md). Equivalently, it is a
-display of `B` as a [coproduct](foundation.coproduct-types.md) `A + C` together
-with a map `C → A`.
+decomposition of `B` as a [coproduct](foundation.coproduct-types.md) `A + C`
+together with a map `C → A`.
 
 ## Definitions
 
-### The type of witnesses that `A` is a retract of `B`
+### The type of witnesses that `A` is a decidable retract of `B`
 
 ```agda
 decidable-retract : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)

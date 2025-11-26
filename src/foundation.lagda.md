@@ -115,6 +115,7 @@ open import foundation.decidable-equivalence-relations public
 open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
+open import foundation.decidable-retracts-of-types public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-type-families public
 open import foundation.decidable-types public
