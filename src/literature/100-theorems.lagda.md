@@ -31,6 +31,15 @@ open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
 ```
 
+### 4. The Pythagorean Theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
 ### 11. The infinitude of primes {#11}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
