@@ -30,7 +30,7 @@ open import real-numbers.square-roots-nonnegative-real-numbers
 ## Idea
 
 Two vectors are
-{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=are-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
+{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=is-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
 in a [real inner product space](linear-algebra.real-inner-product-spaces.md) if
 they are
 [orthogonal](linear-algebra.orthogonality-bilinear-forms-real-vector-spaces.md)
@@ -45,17 +45,17 @@ module _
   (V : ℝ-Inner-Product-Space l1 l2)
   where
 
-  are-orthogonal-prop-ℝ-Inner-Product-Space :
+  is-orthogonal-prop-ℝ-Inner-Product-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-prop-ℝ-Inner-Product-Space =
-    are-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+  is-orthogonal-prop-ℝ-Inner-Product-Space =
+    is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space V)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space V)
 
-  are-orthogonal-ℝ-Inner-Product-Space :
+  is-orthogonal-ℝ-Inner-Product-Space :
     Relation (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-ℝ-Inner-Product-Space =
-    type-Relation-Prop are-orthogonal-prop-ℝ-Inner-Product-Space
+  is-orthogonal-ℝ-Inner-Product-Space =
+    type-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
 ```
 
 ## Properties
