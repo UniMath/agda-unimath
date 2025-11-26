@@ -109,7 +109,7 @@ module _
     is-reflexive-is-metric-of-Metric-Space :
       is-reflexive-distance-function (set-Metric-Space M) ρ
     is-reflexive-is-metric-of-Metric-Space x =
-      sim-zero-le-positive-rational-ℝ⁰⁺
+      sim-zero-leq-positive-rational-ℝ⁰⁺
         ( ρ x x)
         ( λ ε →
           forward-implication
