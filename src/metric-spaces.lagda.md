@@ -76,6 +76,7 @@ open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
+open import metric-spaces.complete-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
