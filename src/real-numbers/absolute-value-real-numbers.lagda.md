@@ -222,6 +222,18 @@ module _
             ( neg-leq-ℝ
               ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (neg-leq-abs-ℝ x))))
 
+abstract
+  eq-raise-zero-eq-raise-zero-abs-ℝ :
+    {l : Level} (x : ℝ l) → abs-ℝ x ＝ raise-ℝ l zero-ℝ → x ＝ raise-ℝ l zero-ℝ
+  eq-raise-zero-eq-raise-zero-abs-ℝ {l} x |x|=0 =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ l zero-ℝ)
+        ( sim-zero-sim-zero-abs-ℝ x
+          ( transitive-sim-ℝ _ _ _
+            ( sim-raise-ℝ' l zero-ℝ)
+            ( sim-eq-ℝ |x|=0))))
+
 module _
   (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
   where
