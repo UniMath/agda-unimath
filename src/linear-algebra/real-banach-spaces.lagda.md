@@ -27,9 +27,6 @@ open import metric-spaces.metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import metric-spaces.complete-metric-spaces
-
-open import real-numbers.cauchy-completeness-dedekind-real-numbers
 ```
 
 </details>

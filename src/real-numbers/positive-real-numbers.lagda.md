@@ -286,32 +286,6 @@ positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
 positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
 ```
 
-### The canonical embedding of integers preserves positivity
-
-```agda
-abstract
-  preserves-is-positive-real-ℤ :
-    {x : ℤ} → is-positive-ℤ x → is-positive-ℝ (real-ℤ x)
-  preserves-is-positive-real-ℤ pos-x =
-    preserves-is-positive-real-ℚ (is-positive-rational-ℤ pos-x)
-
-positive-real-ℤ⁺ : ℤ⁺ → ℝ⁺ lzero
-positive-real-ℤ⁺ (x , pos-x) = (real-ℤ x , preserves-is-positive-real-ℤ pos-x)
-```
-
-### The canonical embedding of a nonzero natural number is positive
-
-```agda
-abstract
-  is-positive-real-is-nonzero-ℕ :
-    {n : ℕ} → is-nonzero-ℕ n → is-positive-ℝ (real-ℕ n)
-  is-positive-real-is-nonzero-ℕ n≠0 =
-    preserves-is-positive-real-ℤ (is-positive-int-is-nonzero-ℕ _ n≠0)
-
-positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
-positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
-```
-
 ### `x` is positive if and only if there exists a positive rational number it is not less than or equal to
 
 ```agda
