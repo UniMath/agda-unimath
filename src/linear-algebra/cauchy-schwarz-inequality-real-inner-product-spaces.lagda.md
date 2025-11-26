@@ -175,7 +175,7 @@ module _
           ( ∥v∥²≤1))
 ```
 
-### If `∥u∥² ≤ 1` and `∥v∥² ≤ 1`, then `|⟨u,v⟩| ≤ 1`
+### If `∥u∥ ≤ 1` and `∥v∥ ≤ 1`, then `|⟨u,v⟩| ≤ 1`
 
 ```agda
 module _
