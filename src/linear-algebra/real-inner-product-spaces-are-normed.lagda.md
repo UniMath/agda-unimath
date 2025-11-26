@@ -158,10 +158,8 @@ module _
                   ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v))
           ＝ square-ℝ (raise-ℝ l1 zero-ℝ)
             by ap square-ℝ ∥v∥=0
-          ＝ raise-ℝ l1 (square-ℝ zero-ℝ)
-            by square-raise-ℝ l1 _
           ＝ raise-ℝ l1 zero-ℝ
-            by ap (raise-ℝ l1) square-zero-ℝ)
+            by square-raise-zero-ℝ l1)
 
   norm-normed-vector-space-ℝ-Inner-Product-Space :
     norm-ℝ-Vector-Space (vector-space-ℝ-Inner-Product-Space V)

@@ -30,8 +30,8 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 
 ## Idea
 
-A real
-{{#concept "Hilbert space" WDID=Q190056 WD="Hilbert space" Agda=ℝ-Hilbert-Space}}
+A
+{{#concept "real Hilbert space" WDID=Q190056 WD="Hilbert space" Agda=ℝ-Hilbert-Space}}
 is a [real inner product space](linear-algebra.real-inner-product-spaces.md)
 whose [induced](linear-algebra.real-inner-product-spaces-are-normed.md)
 [metric space](metric-spaces.metric-spaces.md) is
@@ -85,13 +85,20 @@ module _
 ### The real numbers are a real Hilbert space with multiplication as the inner product
 
 ```agda
-real-hilbert-space-ℝ : (l : Level) → ℝ-Hilbert-Space l (lsuc l)
-real-hilbert-space-ℝ l =
-  ( real-inner-product-space-ℝ l ,
+abstract
+  is-complete-real-inner-product-space-ℝ :
+    (l : Level) →
+    is-complete-ℝ-Inner-Product-Space (real-inner-product-space-ℝ l)
+  is-complete-real-inner-product-space-ℝ l =
     inv-tr
       ( is-complete-Metric-Space)
       ( eq-metric-space-real-inner-product-space-ℝ l)
-      ( is-complete-metric-space-ℝ l))
+      ( is-complete-metric-space-ℝ l)
+
+real-hilbert-space-ℝ : (l : Level) → ℝ-Hilbert-Space l (lsuc l)
+real-hilbert-space-ℝ l =
+  ( real-inner-product-space-ℝ l ,
+    is-complete-real-inner-product-space-ℝ l)
 ```
 
 ## See also
