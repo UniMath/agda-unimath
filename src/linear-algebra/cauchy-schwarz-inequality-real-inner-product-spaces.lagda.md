@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import linear-algebra.orthogonality-real-inner-product-spaces
 open import linear-algebra.real-inner-product-spaces
 
 open import order-theory.large-posets
