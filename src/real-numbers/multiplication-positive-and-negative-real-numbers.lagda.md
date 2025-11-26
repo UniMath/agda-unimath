@@ -102,7 +102,7 @@ mul-negative-positive-ℝ (x , is-neg-x) (y , is-pos-y) =
   ( x *ℝ y , is-negative-mul-negative-positive-ℝ is-neg-x is-pos-y)
 ```
 
-### If `x` is positive and `xy` is nonnegative, `y` is nonnegative
+### If `x` is positive and `xy` is nonnegative, then `y` is nonnegative
 
 ```agda
 abstract
