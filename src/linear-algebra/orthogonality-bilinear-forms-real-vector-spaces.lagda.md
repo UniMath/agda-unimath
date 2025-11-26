@@ -39,16 +39,16 @@ module _
   (B : bilinear-form-ℝ-Vector-Space V)
   where
 
-  are-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
+  is-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Vector-Space V)
-  are-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
+  is-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
     Id-Prop
       ( ℝ-Set l1)
       ( map-bilinear-form-ℝ-Vector-Space V B v w)
       ( raise-zero-ℝ l1)
 
-  are-orthogonal-bilinear-form-ℝ-Vector-Space :
+  is-orthogonal-bilinear-form-ℝ-Vector-Space :
     Relation (lsuc l1) (type-ℝ-Vector-Space V)
-  are-orthogonal-bilinear-form-ℝ-Vector-Space =
-    type-Relation-Prop are-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+  is-orthogonal-bilinear-form-ℝ-Vector-Space =
+    type-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
 ```
