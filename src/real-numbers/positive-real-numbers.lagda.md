@@ -89,9 +89,9 @@ is-positive-real-ℝ⁺ = pr2
 abstract
   is-positive-sim-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-    is-positive-ℝ x → sim-ℝ x y → is-positive-ℝ y
-  is-positive-sim-ℝ {x = x} {y = y} 0<x x~y =
-    preserves-le-right-sim-ℝ zero-ℝ x y x~y 0<x
+    sim-ℝ x y → is-positive-ℝ x → is-positive-ℝ y
+  is-positive-sim-ℝ {x = x} {y = y} =
+    preserves-le-right-sim-ℝ zero-ℝ x y
 ```
 
 ### Dedekind cuts of positive real numbers
@@ -255,6 +255,35 @@ positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ 
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+
+is-positive-one-ℝ : is-positive-ℝ one-ℝ
+is-positive-one-ℝ = is-positive-real-ℝ⁺ one-ℝ⁺
+```
+
+### The canonical embedding of integers preserves positivity
+
+```agda
+abstract
+  preserves-is-positive-real-ℤ :
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℝ (real-ℤ x)
+  preserves-is-positive-real-ℤ pos-x =
+    preserves-is-positive-real-ℚ (is-positive-rational-ℤ pos-x)
+
+positive-real-ℤ⁺ : ℤ⁺ → ℝ⁺ lzero
+positive-real-ℤ⁺ (x , pos-x) = (real-ℤ x , preserves-is-positive-real-ℤ pos-x)
+```
+
+### The canonical embedding of a nonzero natural number is positive
+
+```agda
+abstract
+  is-positive-real-is-nonzero-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-positive-ℝ (real-ℕ n)
+  is-positive-real-is-nonzero-ℕ n≠0 =
+    preserves-is-positive-real-ℤ (is-positive-int-is-nonzero-ℕ _ n≠0)
+
+positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
+positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
 ```
 
 ### The canonical embedding of integers preserves positivity

@@ -56,10 +56,13 @@ A
 {{#concept "seminorm" WDID=Q1416088 WD="seminorm" Disambiguation="on a real vector space" Agda=seminorm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [real](real-numbers.dedekind-real-numbers.md)-valued function `p` on the vector
-space such that `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
-`p(c * x) = |c| * p(x)` for all real numbers `c` and `x` in `V`.
+space which is
 
-These conditions imply that `p(0) = 0` and that `p` is nonnegative.
+- **Triangular.** `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
+- **Absolutely homogeneous.** `p(c * x) = |c| * p(x)` for all real numbers `c`
+  and `x` in `V`.
+
+These conditions together imply that `p(x) ≥ 0` for any `x`, and `p(0) = 0`.
 
 A real vector space equipped with such a seminorm is called a
 {{#concept "seminormed space" WD="seminormed space" WDID=Q63793693 Agda=Seminormed-ℝ-Vector-Space}}.
@@ -67,6 +70,14 @@ A seminormed space has an induced
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) defined by the
 neighborhood relation that `v` and `w` are in an `ε`-neighborhood of each other
 if `p(v - w) ≤ ε`.
+
+**Terminology.** The term _absolute homogeneity_ comes from the more general
+concept of
+[homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function). A
+multivariable function `f` on real vector spaces is said to be _homogeneous of
+degree `k`_ if for every scalar `s` we have that
+`f(sx₀,sx₁,…,sxₙ) = sᵏf(x₀,x₁,…,xₙ)`. In particular, you may note that any
+homogeneous bilinear form must be homogeneous of degree one.
 
 ## Definition
 
@@ -234,22 +245,22 @@ module _
     neg-right-subtraction-Ab
       ( ab-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space)
 
-  triangular-Seminormed-ℝ-Vector-Space :
+  triangular-seminorm-Seminormed-ℝ-Vector-Space :
     (v w : type-Seminormed-ℝ-Vector-Space) →
     leq-ℝ
       ( map-seminorm-Seminormed-ℝ-Vector-Space
         ( add-Seminormed-ℝ-Vector-Space v w))
       ( map-seminorm-Seminormed-ℝ-Vector-Space v +ℝ
         map-seminorm-Seminormed-ℝ-Vector-Space w)
-  triangular-Seminormed-ℝ-Vector-Space =
+  triangular-seminorm-Seminormed-ℝ-Vector-Space =
     pr1 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space :
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space :
     (c : ℝ l1) (v : type-Seminormed-ℝ-Vector-Space) →
     map-seminorm-Seminormed-ℝ-Vector-Space
       ( mul-Seminormed-ℝ-Vector-Space c v) ＝
     abs-ℝ c *ℝ map-seminorm-Seminormed-ℝ-Vector-Space v
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space =
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space =
     pr2 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
   dist-Seminormed-ℝ-Vector-Space :
@@ -294,7 +305,7 @@ module _
           ( map-seminorm-Seminormed-ℝ-Vector-Space
             ( V)
             ( zero-Seminormed-ℝ-Vector-Space V))
-          by is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
         ＝
           ( raise-ℝ l1 (abs-ℝ zero-ℝ)) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space
@@ -363,7 +374,7 @@ module _
         ＝
           ( abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ))) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
-          by is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
         ＝
           ( abs-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
@@ -424,7 +435,7 @@ module _
                   ( inv (add-diff-Seminormed-ℝ-Vector-Space V v w x)))
           ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
             ( dist-Seminormed-ℝ-Vector-Space V w x)
-            by triangular-Seminormed-ℝ-Vector-Space V _ _
+            by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
 ```
 
 ### The seminorm of a vector is nonnegative
@@ -460,7 +471,7 @@ module _
                 ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
                   ( neg-Seminormed-ℝ-Vector-Space V v))
-                by triangular-Seminormed-ℝ-Vector-Space V _ _
+                by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
               ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
                 ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
                 by

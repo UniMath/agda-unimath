@@ -30,6 +30,9 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
+open import metric-spaces.located-metric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.metrics
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -220,7 +223,7 @@ module _
   is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
     eq-is-zero-right-subtraction-Ab
       ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
-      ( is-extensional-norm-Normed-ℝ-Vector-Space
+      ( is-extensional-norm-Normed-ℝ-Metric-Space
         ( diff-Normed-ℝ-Vector-Space v w)
         ( |v-w|=0))
 
