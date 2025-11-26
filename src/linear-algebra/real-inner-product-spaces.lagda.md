@@ -1,0 +1,381 @@
+# Real inner product spaces
+
+```agda
+{-# OPTIONS --lossy-unification #-}
+
+module linear-algebra.real-inner-product-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.action-on-identifications-functions
+open import foundation.conjunction
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import linear-algebra.bilinear-forms-real-vector-spaces
+open import linear-algebra.real-vector-spaces
+open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces
+
+open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.extensionality-multiplication-bilinear-form-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
+```
+
+</details>
+
+## Idea
+
+An
+{{#concept "inner product" WDID=Q23924662 WD="inner product" Disambiguation="on a real vector space" Agda=inner-product-ℝ-Vector-Space}}
+on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
+[symmetric](linear-algebra.symmetric-bilinear-forms-real-vector-spaces.md)
+[bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
+`i : V → V → ℝ` such that for all `v : V`, `i v v` is
+[nonnegative](real-numbers.nonnegative-real-numbers.md), and if `i v v = 0`,
+then `v` is the zero vector.
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  (B : bilinear-form-ℝ-Vector-Space V)
+  where
+
+  is-semidefinite-prop-bilinear-form-ℝ-Vector-Space : Prop (l1 ⊔ l2)
+  is-semidefinite-prop-bilinear-form-ℝ-Vector-Space =
+    Π-Prop
+      ( type-ℝ-Vector-Space V)
+      ( λ v → is-nonnegative-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v v))
+
+  is-extensional-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  is-extensional-prop-bilinear-form-ℝ-Vector-Space =
+    Π-Prop
+      ( type-ℝ-Vector-Space V)
+      ( λ v →
+        hom-Prop
+          ( Id-Prop
+            ( ℝ-Set l1)
+            ( map-bilinear-form-ℝ-Vector-Space V B v v)
+            ( raise-ℝ l1 zero-ℝ))
+          ( is-zero-prop-ℝ-Vector-Space V v))
+
+  is-inner-product-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  is-inner-product-prop-bilinear-form-ℝ-Vector-Space =
+    is-symmetric-prop-bilinear-form-ℝ-Vector-Space V B ∧
+    is-semidefinite-prop-bilinear-form-ℝ-Vector-Space ∧
+    is-extensional-prop-bilinear-form-ℝ-Vector-Space
+
+  is-inner-product-bilinear-form-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  is-inner-product-bilinear-form-ℝ-Vector-Space =
+    type-Prop is-inner-product-prop-bilinear-form-ℝ-Vector-Space
+
+inner-product-ℝ-Vector-Space :
+  {l1 l2 : Level} → ℝ-Vector-Space l1 l2 → UU (lsuc l1 ⊔ l2)
+inner-product-ℝ-Vector-Space V =
+  type-subtype (is-inner-product-prop-bilinear-form-ℝ-Vector-Space V)
+
+ℝ-Inner-Product-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+ℝ-Inner-Product-Space l1 l2 =
+  Σ (ℝ-Vector-Space l1 l2) inner-product-ℝ-Vector-Space
+
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  vector-space-ℝ-Inner-Product-Space : ℝ-Vector-Space l1 l2
+  vector-space-ℝ-Inner-Product-Space = pr1 V
+
+  bilinear-form-inner-product-ℝ-Inner-Product-Space :
+    bilinear-form-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+  bilinear-form-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 V)
+
+  type-ℝ-Inner-Product-Space : UU l2
+  type-ℝ-Inner-Product-Space =
+    type-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  inner-product-ℝ-Inner-Product-Space :
+    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space → ℝ l1
+  inner-product-ℝ-Inner-Product-Space =
+    map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  zero-ℝ-Inner-Product-Space : type-ℝ-Inner-Product-Space
+  zero-ℝ-Inner-Product-Space =
+    zero-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  is-zero-prop-ℝ-Inner-Product-Space : subtype l2 type-ℝ-Inner-Product-Space
+  is-zero-prop-ℝ-Inner-Product-Space =
+    is-zero-prop-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  is-zero-ℝ-Inner-Product-Space : type-ℝ-Inner-Product-Space → UU l2
+  is-zero-ℝ-Inner-Product-Space =
+    is-zero-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  add-ℝ-Inner-Product-Space :
+    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space →
+    type-ℝ-Inner-Product-Space
+  add-ℝ-Inner-Product-Space =
+    add-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  neg-ℝ-Inner-Product-Space :
+    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space
+  neg-ℝ-Inner-Product-Space =
+    neg-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  diff-ℝ-Inner-Product-Space :
+    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space →
+    type-ℝ-Inner-Product-Space
+  diff-ℝ-Inner-Product-Space =
+    diff-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  mul-ℝ-Inner-Product-Space :
+    ℝ l1 → type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space
+  mul-ℝ-Inner-Product-Space =
+    mul-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+
+  is-left-additive-inner-product-ℝ-Inner-Product-Space :
+    is-left-additive-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( inner-product-ℝ-Inner-Product-Space)
+  is-left-additive-inner-product-ℝ-Inner-Product-Space =
+    is-left-additive-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space :
+    preserves-scalar-mul-left-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( inner-product-ℝ-Inner-Product-Space)
+  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space =
+    preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  is-right-additive-inner-product-ℝ-Inner-Product-Space :
+    is-right-additive-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( inner-product-ℝ-Inner-Product-Space)
+  is-right-additive-inner-product-ℝ-Inner-Product-Space =
+    is-right-additive-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space :
+    preserves-scalar-mul-right-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( inner-product-ℝ-Inner-Product-Space)
+  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space =
+    preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  is-nonnegative-diagonal-inner-product-ℝ-Inner-Product-Space :
+    (v : type-ℝ-Inner-Product-Space) →
+    is-nonnegative-ℝ (inner-product-ℝ-Inner-Product-Space v v)
+  is-nonnegative-diagonal-inner-product-ℝ-Inner-Product-Space =
+    pr1 (pr2 (pr2 (pr2 V)))
+
+  is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space :
+    (v : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space v v ＝ raise-zero-ℝ l1 →
+    v ＝ zero-ℝ-Inner-Product-Space
+  is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
+    pr2 (pr2 (pr2 (pr2 V)))
+
+  symmetric-inner-product-ℝ-Inner-Product-Space :
+    (v w : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space v w ＝
+    inner-product-ℝ-Inner-Product-Space w v
+  symmetric-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 (pr2 V))
+
+  nonnegative-squared-norm-ℝ-Inner-Product-Space :
+    type-ℝ-Inner-Product-Space → ℝ⁰⁺ l1
+  nonnegative-squared-norm-ℝ-Inner-Product-Space v =
+    ( inner-product-ℝ-Inner-Product-Space v v ,
+      is-nonnegative-diagonal-inner-product-ℝ-Inner-Product-Space v)
+
+  squared-norm-ℝ-Inner-Product-Space : type-ℝ-Inner-Product-Space → ℝ l1
+  squared-norm-ℝ-Inner-Product-Space v =
+    real-ℝ⁰⁺ (nonnegative-squared-norm-ℝ-Inner-Product-Space v)
+
+  nonnegative-norm-ℝ-Inner-Product-Space : type-ℝ-Inner-Product-Space → ℝ⁰⁺ l1
+  nonnegative-norm-ℝ-Inner-Product-Space v =
+    sqrt-ℝ⁰⁺ (nonnegative-squared-norm-ℝ-Inner-Product-Space v)
+
+  norm-ℝ-Inner-Product-Space : type-ℝ-Inner-Product-Space → ℝ l1
+  norm-ℝ-Inner-Product-Space v =
+    real-ℝ⁰⁺ (nonnegative-norm-ℝ-Inner-Product-Space v)
+
+  mul-neg-one-ℝ-Inner-Product-Space :
+    (v : type-ℝ-Inner-Product-Space) →
+    mul-ℝ-Inner-Product-Space (neg-ℝ (raise-ℝ l1 one-ℝ)) v ＝
+    neg-ℝ-Inner-Product-Space v
+  mul-neg-one-ℝ-Inner-Product-Space =
+    mul-neg-one-ℝ-Vector-Space vector-space-ℝ-Inner-Product-Space
+```
+
+## Properties
+
+### Negative laws of the inner product
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    right-negative-law-inner-product-ℝ-Inner-Product-Space :
+      (v w : type-ℝ-Inner-Product-Space V) →
+      inner-product-ℝ-Inner-Product-Space V v (neg-ℝ-Inner-Product-Space V w) ＝
+      neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)
+    right-negative-law-inner-product-ℝ-Inner-Product-Space v w =
+      equational-reasoning
+        inner-product-ℝ-Inner-Product-Space V v (neg-ℝ-Inner-Product-Space V w)
+        ＝
+          inner-product-ℝ-Inner-Product-Space
+            ( V)
+            ( v)
+            ( mul-ℝ-Inner-Product-Space
+              ( V)
+              ( neg-ℝ (raise-ℝ l1 one-ℝ))
+              ( w))
+          by
+            ap
+              ( inner-product-ℝ-Inner-Product-Space V v)
+              ( inv (mul-neg-one-ℝ-Inner-Product-Space V w))
+        ＝
+          neg-ℝ (raise-ℝ l1 one-ℝ) *ℝ
+          inner-product-ℝ-Inner-Product-Space V v w
+          by is-right-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+        ＝
+          neg-ℝ (raise-ℝ l1 one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
+          by left-negative-law-mul-ℝ _ _
+        ＝
+          neg-ℝ (one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
+          by
+            ap
+              ( neg-ℝ)
+              ( eq-sim-ℝ
+                ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l1 one-ℝ)))
+        ＝ neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)
+          by ap neg-ℝ (left-unit-law-mul-ℝ _)
+
+    left-negative-law-inner-product-ℝ-Inner-Product-Space :
+      (v w : type-ℝ-Inner-Product-Space V) →
+      inner-product-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V v) w ＝
+      neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)
+    left-negative-law-inner-product-ℝ-Inner-Product-Space v w =
+      equational-reasoning
+        inner-product-ℝ-Inner-Product-Space V (neg-ℝ-Inner-Product-Space V v) w
+        ＝
+          inner-product-ℝ-Inner-Product-Space
+            ( V)
+            ( w)
+            ( neg-ℝ-Inner-Product-Space V v)
+          by symmetric-inner-product-ℝ-Inner-Product-Space V _ _
+        ＝ neg-ℝ (inner-product-ℝ-Inner-Product-Space V w v)
+          by right-negative-law-inner-product-ℝ-Inner-Product-Space w v
+        ＝ neg-ℝ (inner-product-ℝ-Inner-Product-Space V v w)
+          by ap neg-ℝ (symmetric-inner-product-ℝ-Inner-Product-Space V w v)
+```
+
+### The norm of the sum of two vectors
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    squared-norm-add-ℝ-Inner-Product-Space :
+      (v w : type-ℝ-Inner-Product-Space V) →
+      squared-norm-ℝ-Inner-Product-Space V (add-ℝ-Inner-Product-Space V v w) ＝
+      ( squared-norm-ℝ-Inner-Product-Space V v +ℝ
+        real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V v w +ℝ
+        squared-norm-ℝ-Inner-Product-Space V w)
+    squared-norm-add-ℝ-Inner-Product-Space v w =
+      let
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          ⟨ v +V w ,V v +V w ⟩
+          ＝ ⟨ v ,V v +V w ⟩ +ℝ ⟨ w ,V v +V w ⟩
+            by is-left-additive-inner-product-ℝ-Inner-Product-Space V _ _ _
+          ＝ (⟨ v ,V v ⟩ +ℝ ⟨ v ,V w ⟩) +ℝ (⟨ w ,V v ⟩ +ℝ ⟨ w ,V w ⟩)
+            by
+              ap-add-ℝ
+                ( is-right-additive-inner-product-ℝ-Inner-Product-Space V _ _ _)
+                ( is-right-additive-inner-product-ℝ-Inner-Product-Space V _ _ _)
+          ＝ ⟨ v ,V v ⟩ +ℝ ⟨ v ,V w ⟩ +ℝ ⟨ w ,V v ⟩ +ℝ ⟨ w ,V w ⟩
+            by inv (associative-add-ℝ _ _ _)
+          ＝ ⟨ v ,V v ⟩ +ℝ (⟨ v ,V w ⟩ +ℝ ⟨ w ,V v ⟩) +ℝ ⟨ w ,V w ⟩
+            by ap-add-ℝ (associative-add-ℝ _ _ _) refl
+          ＝ ⟨ v ,V v ⟩ +ℝ (⟨ v ,V w ⟩ +ℝ ⟨ v ,V w ⟩) +ℝ ⟨ w ,V w ⟩
+            by
+              ap-add-ℝ
+                ( ap-add-ℝ
+                  ( refl)
+                  ( ap-add-ℝ
+                    ( refl)
+                    ( symmetric-inner-product-ℝ-Inner-Product-Space V w v)))
+                ( refl)
+          ＝ ⟨ v ,V v ⟩ +ℝ real-ℕ 2 *ℝ ⟨ v ,V w ⟩ +ℝ ⟨ w ,V w ⟩
+            by ap-add-ℝ (ap-add-ℝ refl (inv (left-mul-real-ℕ 2 _))) refl
+```
+
+### The real inner product space of the real numbers
+
+```agda
+bilinear-form-mul-ℝ :
+  (l : Level) → bilinear-form-ℝ-Vector-Space (real-vector-space-ℝ l)
+bilinear-form-mul-ℝ l =
+  ( mul-ℝ ,
+    right-distributive-mul-add-ℝ ,
+    associative-mul-ℝ ,
+    left-distributive-mul-add-ℝ ,
+    λ c x y → left-swap-mul-ℝ x c y)
+
+is-inner-product-bilinear-form-mul-ℝ :
+  (l : Level) →
+  is-inner-product-bilinear-form-ℝ-Vector-Space
+    ( real-vector-space-ℝ l)
+    ( bilinear-form-mul-ℝ l)
+is-inner-product-bilinear-form-mul-ℝ l =
+  ( commutative-mul-ℝ ,
+    is-nonnegative-square-ℝ ,
+    eq-zero-eq-zero-square-ℝ)
+
+real-inner-product-space-ℝ : (l : Level) → ℝ-Inner-Product-Space l (lsuc l)
+real-inner-product-space-ℝ l =
+  ( real-vector-space-ℝ l ,
+    bilinear-form-mul-ℝ l ,
+    is-inner-product-bilinear-form-mul-ℝ l)
+```
+
+## External links
+
+- [Inner product space](https://en.wikipedia.org/wiki/Inner_product_space) on
+  Wikipedia
+- [inner product space](https://ncatlab.org/nlab/show/inner+product+space) on
+  $n$Lab
