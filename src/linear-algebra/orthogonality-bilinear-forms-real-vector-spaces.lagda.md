@@ -25,7 +25,7 @@ open import real-numbers.rational-real-numbers
 
 Two elements `u` and `v` of a
 [real vector space](linear-algebra.real-vector-spaces.md) `V` are
-{{#concept "orthogonal" Disambiguation="relative to a bilinear form over a real vector space" Agda=are-orthogonal-bilinear-form-ℝ-Vector-Space}}
+{{#concept "orthogonal" Disambiguation="relative to a bilinear form over a real vector space" Agda=is-orthogonal-bilinear-form-ℝ-Vector-Space}}
 relative to a
 [bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
 `B : V → V → ℝ` if `B u v = 0`.

@@ -193,22 +193,9 @@ module _
   is-nonnegative-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr1 (pr2 (pr2 (pr2 V)))
 
-  is-orthogonal-prop-ℝ-Inner-Product-Space :
-    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space → Prop (lsuc l1)
-  is-orthogonal-prop-ℝ-Inner-Product-Space v w =
-    Id-Prop
-      ( ℝ-Set l1)
-      ( inner-product-ℝ-Inner-Product-Space v w)
-      ( raise-ℝ l1 zero-ℝ)
-
-  is-orthogonal-ℝ-Inner-Product-Space :
-    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space → UU (lsuc l1)
-  is-orthogonal-ℝ-Inner-Product-Space v w =
-    type-Prop (is-orthogonal-prop-ℝ-Inner-Product-Space v w)
-
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space :
     (v : type-ℝ-Inner-Product-Space) →
-    is-orthogonal-ℝ-Inner-Product-Space v v →
+    inner-product-ℝ-Inner-Product-Space v v ＝ raise-zero-ℝ l1 →
     v ＝ zero-ℝ-Inner-Product-Space
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr2 (pr2 (pr2 (pr2 V)))

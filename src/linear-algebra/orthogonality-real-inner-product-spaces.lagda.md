@@ -30,7 +30,7 @@ open import real-numbers.square-roots-nonnegative-real-numbers
 ## Idea
 
 Two vectors are
-{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=are-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
+{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=is-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
 in a [real inner product space](linear-algebra.real-inner-product-spaces.md) if
 they are
 [orthogonal](linear-algebra.orthogonality-bilinear-forms-real-vector-spaces.md)
