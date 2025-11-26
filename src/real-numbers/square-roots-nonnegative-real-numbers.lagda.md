@@ -686,3 +686,12 @@ is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
   ( is-positive-is-positive-sqrt-ℝ⁰⁺ x ,
     is-positive-sqrt-is-positive-ℝ⁰⁺ x)
 ```
+
+### The square root of zero is zero
+
+```agda
+abstract
+  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
+  real-sqrt-zero-ℝ⁰⁺ =
+    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
+```
