@@ -9,6 +9,10 @@ module real-numbers.positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -254,6 +258,32 @@ one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
 
 is-positive-one-ℝ : is-positive-ℝ one-ℝ
 is-positive-one-ℝ = is-positive-real-ℝ⁺ one-ℝ⁺
+```
+
+### The canonical embedding of integers preserves positivity
+
+```agda
+abstract
+  preserves-is-positive-real-ℤ :
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℝ (real-ℤ x)
+  preserves-is-positive-real-ℤ pos-x =
+    preserves-is-positive-real-ℚ (is-positive-rational-ℤ pos-x)
+
+positive-real-ℤ⁺ : ℤ⁺ → ℝ⁺ lzero
+positive-real-ℤ⁺ (x , pos-x) = (real-ℤ x , preserves-is-positive-real-ℤ pos-x)
+```
+
+### The canonical embedding of a nonzero natural number is positive
+
+```agda
+abstract
+  is-positive-real-is-nonzero-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-positive-ℝ (real-ℕ n)
+  is-positive-real-is-nonzero-ℕ n≠0 =
+    preserves-is-positive-real-ℤ (is-positive-int-is-nonzero-ℕ _ n≠0)
+
+positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
+positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
 ```
 
 ### `x` is positive if and only if there exists a positive rational number it is not less than or equal to
