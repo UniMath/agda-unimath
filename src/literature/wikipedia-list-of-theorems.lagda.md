@@ -83,9 +83,7 @@ open import group-theory.cayleys-theorem using
 
 ### Cauchy-Schwarz inequality {#Q190546}
 
-**Author:** [Louis Wasserman](https://github.com/lowasser)
-
-**Author:** [malarbol](http://www.github.com/malarbol)
+**Author:** [Louis Wasserman](https://github.com/lowasser) and [malarbol](http://www.github.com/malarbol)
 
 ```agda
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
