@@ -10,6 +10,7 @@ module real-numbers.nonnegative-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
@@ -30,6 +31,10 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -141,6 +146,13 @@ nonnegative-real-ℚ⁺ : ℚ⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁺ q = nonnegative-real-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
 ```
 
+### The canonical embedding of natural numbers in the nonnegative real numbers
+
+```agda
+nonnegative-real-ℕ : ℕ → ℝ⁰⁺ lzero
+nonnegative-real-ℕ n = nonnegative-real-ℚ⁰⁺ (nonnegative-rational-ℕ n)
+```
+
 ### Important nonnegative real numbers
 
 ```agda
@@ -205,6 +217,19 @@ abstract
     map-trunc-Prop
       ( λ (q , x<q) → ((q , is-positive-is-in-upper-cut-ℝ⁰⁺ x x<q) , x<q))
       ( is-inhabited-upper-cut-ℝ⁰⁺ x)
+```
+
+### Every nonnegative real number is less than some positive rational number
+
+```agda
+abstract
+  exists-ℚ⁺-le-ℝ⁰⁺ :
+    {l : Level} → (x : ℝ⁰⁺ l) →
+    exists ℚ⁺ (λ q → le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q))
+  exists-ℚ⁺-le-ℝ⁰⁺ x =
+    map-tot-exists
+      ( λ _ → le-real-is-in-upper-cut-ℚ (real-ℝ⁰⁺ x))
+      ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Nonpositive rational numbers are not less than or equal to nonnegative real numbers

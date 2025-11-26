@@ -39,6 +39,7 @@ open import foundation.universe-levels
 
 open import foundation-core.identity-types
 
+open import order-theory.increasing-sequences-posets
 open import order-theory.order-preserving-maps-posets
 
 open import set-theory.cantor-space

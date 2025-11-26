@@ -81,6 +81,17 @@ open import group-theory.cayleys-theorem using
   ( Cayleys-theorem)
 ```
 
+### Cauchy-Schwarz inequality {#Q190546}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+**Author:** [malarbol](http://www.github.com/malarbol)
+
+```agda
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
+```
+
 ### Diaconescu's theorem {#Q3527059}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -147,6 +158,15 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
 ### Yoneda lemma {#Q320577}

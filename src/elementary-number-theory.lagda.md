@@ -92,6 +92,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers pub
 open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
+open import elementary-number-theory.harmonic-series-rational-numbers public
 open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers public
 open import elementary-number-theory.inequality-arithmetic-geometric-means-integers public
@@ -200,6 +201,7 @@ open import elementary-number-theory.ring-extension-rational-numbers-of-rational
 open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.semiring-of-natural-numbers public
+open import elementary-number-theory.series-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.square-roots-positive-rational-numbers public
@@ -219,6 +221,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strict-inequality-standard-finite-types public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
+open import elementary-number-theory.sums-of-finite-sequences-of-rational-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.sylvesters-sequence public
 open import elementary-number-theory.taxicab-numbers public
@@ -232,6 +235,7 @@ open import elementary-number-theory.unit-similarity-standard-finite-types publi
 open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public
+open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
