@@ -162,64 +162,64 @@ module _
   (P : Pseudometric-Space l1 l2)
   where
 
-  cauchy-Metric-Extension : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
-  cauchy-Metric-Extension =
+  Cauchy-Metric-Extension : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
+  Cauchy-Metric-Extension =
     Σ ( Metric-Extension l3 l4 P)
       ( is-cauchy-Metric-Extension P)
 
 module _
   {l1 l2 l3 l4 : Level}
   (P : Pseudometric-Space l1 l2)
-  (M : cauchy-Metric-Extension l3 l4 P)
+  (M : Cauchy-Metric-Extension l3 l4 P)
   where
 
-  extension-cauchy-Metric-Extension : Metric-Extension l3 l4 P
-  extension-cauchy-Metric-Extension = pr1 M
+  extension-Cauchy-Metric-Extension : Metric-Extension l3 l4 P
+  extension-Cauchy-Metric-Extension = pr1 M
 
-  metric-space-cauchy-Metric-Extension : Metric-Space l3 l4
-  metric-space-cauchy-Metric-Extension =
-    metric-space-Metric-Extension P extension-cauchy-Metric-Extension
+  metric-space-Cauchy-Metric-Extension : Metric-Space l3 l4
+  metric-space-Cauchy-Metric-Extension =
+    metric-space-Metric-Extension P extension-Cauchy-Metric-Extension
 
-  pseudometric-space-cauchy-Metric-Extension : Pseudometric-Space l3 l4
-  pseudometric-space-cauchy-Metric-Extension =
+  pseudometric-space-Cauchy-Metric-Extension : Pseudometric-Space l3 l4
+  pseudometric-space-Cauchy-Metric-Extension =
     pseudometric-space-Metric-Extension P
-      extension-cauchy-Metric-Extension
+      extension-Cauchy-Metric-Extension
 
-  isometry-metric-space-cauchy-Metric-Extension :
+  isometry-metric-space-Cauchy-Metric-Extension :
     isometry-Pseudometric-Space
       ( P)
-      ( pseudometric-space-cauchy-Metric-Extension)
-  isometry-metric-space-cauchy-Metric-Extension =
+      ( pseudometric-space-Cauchy-Metric-Extension)
+  isometry-metric-space-Cauchy-Metric-Extension =
     isometry-metric-space-Metric-Extension
       ( P)
-      ( extension-cauchy-Metric-Extension)
+      ( extension-Cauchy-Metric-Extension)
 
-  is-cauchy-metric-extension-cauchy-Metric-Extension :
+  is-cauchy-metric-extension-Cauchy-Metric-Extension :
     is-cauchy-Metric-Extension
       ( P)
-      ( extension-cauchy-Metric-Extension)
-  is-cauchy-metric-extension-cauchy-Metric-Extension = pr2 M
+      ( extension-Cauchy-Metric-Extension)
+  is-cauchy-metric-extension-Cauchy-Metric-Extension = pr2 M
 
-  isometry-cauchy-pseudocompletion-cauchy-Metric-Extension :
+  isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension :
     isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-space-cauchy-Metric-Extension)
-  isometry-cauchy-pseudocompletion-cauchy-Metric-Extension =
-    pr1 is-cauchy-metric-extension-cauchy-Metric-Extension
+      ( pseudometric-space-Cauchy-Metric-Extension)
+  isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension =
+    pr1 is-cauchy-metric-extension-Cauchy-Metric-Extension
 
-  coh-isometry-cauchy-pseudocompletion-cauchy-Metric-Extension :
+  coh-isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension :
     coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension
       ( P)
-      ( extension-cauchy-Metric-Extension)
-      ( isometry-cauchy-pseudocompletion-cauchy-Metric-Extension)
-  coh-isometry-cauchy-pseudocompletion-cauchy-Metric-Extension =
-    pr2 is-cauchy-metric-extension-cauchy-Metric-Extension
+      ( extension-Cauchy-Metric-Extension)
+      ( isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension)
+  coh-isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension =
+    pr2 is-cauchy-metric-extension-Cauchy-Metric-Extension
 
-  extension-cauchy-pseudocompletion-cauchy-Metric-Extension :
+  extension-cauchy-pseudocompletion-Cauchy-Metric-Extension :
     Metric-Extension l3 l4 (cauchy-pseudocompletion-Pseudometric-Space P)
-  extension-cauchy-pseudocompletion-cauchy-Metric-Extension =
-    ( metric-space-cauchy-Metric-Extension ,
-      isometry-cauchy-pseudocompletion-cauchy-Metric-Extension)
+  extension-cauchy-pseudocompletion-Cauchy-Metric-Extension =
+    ( metric-space-Cauchy-Metric-Extension ,
+      isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension)
 ```
 
 ## Properties
@@ -397,13 +397,13 @@ module _
     coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension P M h)
   where abstract
 
-  all-htpy-cauchy-extension-Metric-Space :
+  all-htpy-is-cauchy-extension-Metric-Space :
     htpy-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-space-Metric-Extension P M)
       ( g)
       ( h)
-  all-htpy-cauchy-extension-Metric-Space u =
+  all-htpy-is-cauchy-extension-Metric-Space u =
     all-eq-is-limit-cauchy-approximation-Metric-Space
       ( metric-space-Metric-Extension P M)
       ( map-cauchy-pseudocompletion-Metric-Extension P M u)
@@ -451,7 +451,7 @@ module _
       ( eq-htpy-map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( pseudometric-space-Metric-Extension P M)
-        ( all-htpy-cauchy-extension-Metric-Space
+        ( all-htpy-is-cauchy-extension-Metric-Space
           ( P)
           ( M)
           ( g)
@@ -519,7 +519,7 @@ module _
   pr2 is-cauchy-extension-cauchy-pseudocompletion-Metric-Extension = refl-htpy
 
   cauchy-extension-cauchy-pseudocompletion-Metric-Extension :
-    cauchy-Metric-Extension l3 l4 P
+    Cauchy-Metric-Extension l3 l4 P
   cauchy-extension-cauchy-pseudocompletion-Metric-Extension =
     ( extension-cauchy-pseudocompletion-Metric-Extension ,
       is-cauchy-extension-cauchy-pseudocompletion-Metric-Extension)
@@ -533,29 +533,29 @@ module _
   (P : Pseudometric-Space l1 l2)
   where
 
-  is-section-extension-cauchy-pseudocompletion-cauchy-Metric-Extension :
-    ( M : cauchy-Metric-Extension l3 l4 P) →
+  is-section-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension :
+    ( M : Cauchy-Metric-Extension l3 l4 P) →
     ( cauchy-extension-cauchy-pseudocompletion-Metric-Extension
       ( P)
-      ( extension-cauchy-pseudocompletion-cauchy-Metric-Extension P M)) ＝
+      ( extension-cauchy-pseudocompletion-Cauchy-Metric-Extension P M)) ＝
     ( M)
-  is-section-extension-cauchy-pseudocompletion-cauchy-Metric-Extension M =
+  is-section-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension M =
     eq-type-subtype
       ( is-cauchy-prop-Metric-Extension P)
       ( eq-pair-eq-fiber
         ( eq-htpy-map-isometry-Pseudometric-Space
           ( P)
-          ( pseudometric-space-cauchy-Metric-Extension P M)
-          ( coh-isometry-cauchy-pseudocompletion-cauchy-Metric-Extension P M)))
+          ( pseudometric-space-Cauchy-Metric-Extension P M)
+          ( coh-isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension P M)))
 
-  is-retraction-extension-cauchy-pseudocompletion-cauchy-Metric-Extension :
+  is-retraction-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension :
     ( N :
       Metric-Extension l3 l4
         ( cauchy-pseudocompletion-Pseudometric-Space P)) →
-    ( extension-cauchy-pseudocompletion-cauchy-Metric-Extension P
+    ( extension-cauchy-pseudocompletion-Cauchy-Metric-Extension P
       ( cauchy-extension-cauchy-pseudocompletion-Metric-Extension P N)) ＝
     ( N)
-  is-retraction-extension-cauchy-pseudocompletion-cauchy-Metric-Extension N =
+  is-retraction-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension N =
     refl
 
 module _
@@ -564,17 +564,17 @@ module _
   (P : Pseudometric-Space l1 l2)
   where
 
-  equiv-cauchy-Metric-Extension :
+  equiv-Cauchy-Metric-Extension :
     Metric-Extension l3 l4 (cauchy-pseudocompletion-Pseudometric-Space P) ≃
-    cauchy-Metric-Extension l3 l4 P
-  pr1 equiv-cauchy-Metric-Extension =
+    Cauchy-Metric-Extension l3 l4 P
+  pr1 equiv-Cauchy-Metric-Extension =
     cauchy-extension-cauchy-pseudocompletion-Metric-Extension P
-  pr2 equiv-cauchy-Metric-Extension =
+  pr2 equiv-Cauchy-Metric-Extension =
     is-equiv-is-invertible
-      ( extension-cauchy-pseudocompletion-cauchy-Metric-Extension
+      ( extension-cauchy-pseudocompletion-Cauchy-Metric-Extension
         ( P))
-      ( is-section-extension-cauchy-pseudocompletion-cauchy-Metric-Extension
+      ( is-section-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension
         ( P))
-      ( is-retraction-extension-cauchy-pseudocompletion-cauchy-Metric-Extension
+      ( is-retraction-extension-cauchy-pseudocompletion-Cauchy-Metric-Extension
         ( P))
 ```
