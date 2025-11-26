@@ -1,9 +1,9 @@
-# Extensionality of multiplication of real numbers
+# Extensionality of multiplication of real numbers as a bilinear form
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.extensionality-multiplication-real-numbers where
+module real-numbers.extensionality-multiplication-bilinear-form-real-numbers where
 ```
 
 <details><summary>Imports</summary>

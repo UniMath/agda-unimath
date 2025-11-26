@@ -24,7 +24,7 @@ open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.extensionality-multiplication-real-numbers
+open import real-numbers.extensionality-multiplication-bilinear-form-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
