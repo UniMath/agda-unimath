@@ -234,22 +234,22 @@ module _
     neg-right-subtraction-Ab
       ( ab-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space)
 
-  triangular-Seminormed-ℝ-Vector-Space :
+  triangular-seminorm-Seminormed-ℝ-Vector-Space :
     (v w : type-Seminormed-ℝ-Vector-Space) →
     leq-ℝ
       ( map-seminorm-Seminormed-ℝ-Vector-Space
         ( add-Seminormed-ℝ-Vector-Space v w))
       ( map-seminorm-Seminormed-ℝ-Vector-Space v +ℝ
         map-seminorm-Seminormed-ℝ-Vector-Space w)
-  triangular-Seminormed-ℝ-Vector-Space =
+  triangular-seminorm-Seminormed-ℝ-Vector-Space =
     pr1 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space :
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space :
     (c : ℝ l1) (v : type-Seminormed-ℝ-Vector-Space) →
     map-seminorm-Seminormed-ℝ-Vector-Space
       ( mul-Seminormed-ℝ-Vector-Space c v) ＝
     abs-ℝ c *ℝ map-seminorm-Seminormed-ℝ-Vector-Space v
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space =
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space =
     pr2 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
   dist-Seminormed-ℝ-Vector-Space :
@@ -294,7 +294,7 @@ module _
           ( map-seminorm-Seminormed-ℝ-Vector-Space
             ( V)
             ( zero-Seminormed-ℝ-Vector-Space V))
-          by is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
         ＝
           ( raise-ℝ l1 (abs-ℝ zero-ℝ)) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space
@@ -363,7 +363,7 @@ module _
         ＝
           ( abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ))) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
-          by is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
         ＝
           ( abs-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
@@ -424,7 +424,7 @@ module _
                   ( inv (add-diff-Seminormed-ℝ-Vector-Space V v w x)))
           ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
             ( dist-Seminormed-ℝ-Vector-Space V w x)
-            by triangular-Seminormed-ℝ-Vector-Space V _ _
+            by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
 ```
 
 ### The seminorm of a vector is nonnegative
@@ -460,7 +460,7 @@ module _
                 ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
                   ( neg-Seminormed-ℝ-Vector-Space V v))
-                by triangular-Seminormed-ℝ-Vector-Space V _ _
+                by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
               ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
                 ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
                 by
