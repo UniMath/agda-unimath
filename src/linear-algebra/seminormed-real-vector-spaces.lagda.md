@@ -52,17 +52,19 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
+
 A
 {{#concept "seminorm" WDID=Q1416088 WD="seminorm" Disambiguation="on a real vector space" Agda=seminorm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [real](real-numbers.dedekind-real-numbers.md)-valued function `p` on the vector
-space such that `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
-`p(c * x) = |c| * p(x)` for all real numbers `c` and `x` in `V`. This latter
-condition is referred to as absolute homogeneity, and is related to the more
-general concept of
-[homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function).
+space which is
 
-These conditions imply that `p(0) = 0` and that `p` is nonnegative.
+- **Triangular.** `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
+- **Absolutely homogeneous.** `p(c * x) = |c| * p(x)` for all real numbers `c`
+  and `x` in `V`.
+
+These conditions together imply that `p` is extensional and semidefinite, in
+other words, that `p(0) = 0` and `p(x) ≥ 0`.
 
 A real vector space equipped with such a seminorm is called a
 {{#concept "seminormed space" WD="seminormed space" WDID=Q63793693 Agda=Seminormed-ℝ-Vector-Space}}.
@@ -70,6 +72,14 @@ A seminormed space has an induced
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) defined by the
 neighborhood relation that `v` and `w` are in an `ε`-neighborhood of each other
 if `p(v - w) ≤ ε`.
+
+**Terminology.** The term _absolute homogeneity_ comes from the more general
+concept of
+[homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function). A
+multivariable function `f` on real vector spaces is said to be _homogeneous of
+degree `k`_ if for every scalar `s` we have that
+`f(sx₀,sx₁,…,sxₙ) = sᵏf(x₀,x₁,…,xₙ)`. In particular, you may note that any
+homogeneous bilinear form must be homogeneous of degree one.
 
 ## Definition
 
