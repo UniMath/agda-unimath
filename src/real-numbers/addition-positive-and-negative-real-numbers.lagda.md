@@ -24,7 +24,7 @@ open import real-numbers.positive-real-numbers
 
 ## Idea
 
-This file describes properties of
+On this page we describe properties of
 [addition](real-numbers.addition-real-numbers.md) of
 [positive](real-numbers.positive-real-numbers.md),
 [negative](real-numbers.negative-real-numbers.md), and
