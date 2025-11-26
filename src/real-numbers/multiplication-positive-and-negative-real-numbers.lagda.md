@@ -9,21 +9,16 @@ module real-numbers.multiplication-positive-and-negative-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-positive-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-
-open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.identity-types
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -32,6 +27,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
