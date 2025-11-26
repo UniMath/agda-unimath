@@ -17,7 +17,11 @@ open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.logical-equivalences
 open import foundation.retracts-of-types
+open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -90,6 +94,12 @@ module _
   decidable-emb-inclusion-decidable-retract =
     ( inclusion-decidable-retract ,
       is-decidable-emb-inclusion-decidable-retract)
+
+  iff-decidable-retract : A ↔ B
+  iff-decidable-retract = iff-retract retract-decidable-retract
+
+  iff-decidable-retract' : B ↔ A
+  iff-decidable-retract' = iff-retract' retract-decidable-retract
 ```
 
 ### The type of decidable retracts of a type
@@ -157,6 +167,61 @@ comp-decidable-retract (r , H) (r' , H') =
 ```
 
 ## Properties
+
+### Characterization of equality of decidable retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  htpy-decidable-retract :
+    (R S : decidable-retract B A) → UU (l1 ⊔ l2)
+  htpy-decidable-retract R S =
+    htpy-retract (retract-decidable-retract R) (retract-decidable-retract S)
+
+  refl-htpy-decidable-retract :
+    (R : decidable-retract B A) → htpy-decidable-retract R R
+  refl-htpy-decidable-retract R =
+    refl-htpy-retract (retract-decidable-retract R)
+
+  htpy-eq-decidable-retract :
+    (R S : decidable-retract B A) → R ＝ S → htpy-decidable-retract R S
+  htpy-eq-decidable-retract R S p =
+    htpy-eq-retract
+      ( retract-decidable-retract R)
+      ( retract-decidable-retract S)
+      ( ap retract-decidable-retract p)
+
+  abstract
+    is-torsorial-htpy-decidable-retract :
+      (R : decidable-retract B A) → is-torsorial (htpy-decidable-retract R)
+    is-torsorial-htpy-decidable-retract R =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-htpy-retract (retract-decidable-retract R))
+        ( λ S → is-prop-is-decidable-emb (inclusion-retract S))
+        ( retract-decidable-retract R)
+        ( refl-htpy-decidable-retract R)
+        ( is-decidable-emb-inclusion-decidable-retract R)
+
+  abstract
+    is-equiv-htpy-eq-decidable-retract :
+      (R S : decidable-retract B A) → is-equiv (htpy-eq-decidable-retract R S)
+    is-equiv-htpy-eq-decidable-retract R =
+      fundamental-theorem-id
+        ( is-torsorial-htpy-decidable-retract R)
+        ( htpy-eq-decidable-retract R)
+
+  extensionality-decidable-retract :
+    (R S : decidable-retract B A) → (R ＝ S) ≃ htpy-decidable-retract R S
+  extensionality-decidable-retract R S =
+    ( htpy-eq-decidable-retract R S , is-equiv-htpy-eq-decidable-retract R S)
+
+  eq-htpy-decidable-retract :
+    (R S : decidable-retract B A) → htpy-decidable-retract R S → R ＝ S
+  eq-htpy-decidable-retract R S =
+    map-inv-is-equiv (is-equiv-htpy-eq-decidable-retract R S)
+```
 
 ### The associated coproduct decomposition of a decidable retract
 
