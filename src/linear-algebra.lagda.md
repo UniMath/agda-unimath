@@ -6,6 +6,7 @@
 module linear-algebra where
 
 open import linear-algebra.bilinear-forms-real-vector-spaces public
+open import linear-algebra.complex-vector-spaces public
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
