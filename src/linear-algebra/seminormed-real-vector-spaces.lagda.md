@@ -52,7 +52,6 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-
 A
 {{#concept "seminorm" WDID=Q1416088 WD="seminorm" Disambiguation="on a real vector space" Agda=seminorm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
