@@ -14,6 +14,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -39,6 +40,7 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -88,6 +90,23 @@ abstract opaque
     sim-ℝ (abs-ℝ x) (abs-ℝ x')
   preserves-sim-abs-ℝ x~x' =
     preserves-sim-max-ℝ _ _ x~x' _ _ (preserves-sim-neg-ℝ x~x')
+```
+
+### The absolute value commutes with raising the universe level of a real number
+
+```agda
+abstract
+  abs-raise-ℝ :
+    {l1 : Level} (l2 : Level) (x : ℝ l1) →
+    abs-ℝ (raise-ℝ l2 x) ＝ raise-ℝ l2 (abs-ℝ x)
+  abs-raise-ℝ l2 x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        abs-ℝ (raise-ℝ l2 x)
+        ~ℝ abs-ℝ x
+          by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
+        ~ℝ raise-ℝ l2 (abs-ℝ x)
+          by sim-raise-ℝ l2 (abs-ℝ x))
 ```
 
 ### The absolute value of a real number is nonnegative
@@ -184,20 +203,29 @@ module _
 
 ```agda
 module _
+  {l : Level} (x : ℝ l) (|x|~0 : sim-ℝ (abs-ℝ x) zero-ℝ)
+  where
+
+  abstract
+    sim-zero-sim-zero-abs-ℝ : sim-ℝ x zero-ℝ
+    sim-zero-sim-zero-abs-ℝ =
+      sim-sim-leq-ℝ
+        ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (leq-abs-ℝ x) ,
+          binary-tr
+            ( leq-ℝ)
+            ( neg-zero-ℝ)
+            ( neg-neg-ℝ x)
+            ( neg-leq-ℝ
+              ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (neg-leq-abs-ℝ x))))
+
+module _
   (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
   where
 
   abstract
     is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
     is-zero-is-zero-abs-ℝ =
-      antisymmetric-leq-ℝ
-        ( x)
-        ( zero-ℝ)
-        ( tr (leq-ℝ x) |x|=0 (leq-abs-ℝ x))
-        ( tr
-          ( λ y → leq-ℝ y x)
-          ( (ap neg-ℝ |x|=0) ∙ neg-zero-ℝ)
-          ( leq-neg-abs-ℝ x))
+      eq-sim-ℝ (sim-zero-sim-zero-abs-ℝ x (sim-eq-ℝ |x|=0))
 ```
 
 ### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
