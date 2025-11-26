@@ -45,17 +45,17 @@ module _
   (V : ℝ-Inner-Product-Space l1 l2)
   where
 
-  are-orthogonal-prop-ℝ-Inner-Product-Space :
+  is-orthogonal-prop-ℝ-Inner-Product-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-prop-ℝ-Inner-Product-Space =
-    are-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+  is-orthogonal-prop-ℝ-Inner-Product-Space =
+    is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space V)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space V)
 
-  are-orthogonal-ℝ-Inner-Product-Space :
+  is-orthogonal-ℝ-Inner-Product-Space :
     Relation (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-ℝ-Inner-Product-Space =
-    type-Relation-Prop are-orthogonal-prop-ℝ-Inner-Product-Space
+  is-orthogonal-ℝ-Inner-Product-Space =
+    type-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
 ```
 
 ## Properties
