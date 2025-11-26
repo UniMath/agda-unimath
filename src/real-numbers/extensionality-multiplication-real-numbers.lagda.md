@@ -32,8 +32,7 @@ If the [square](real-numbers.squares-real-numbers.md) of a
 [similar](real-numbers.similarity-real-numbers.md) to 0, the real number is
 similar to 0. This property is extensionality of multiplication as a
 [bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md) over the
-[vector space of real numbers](linear-algebra.real-vector-spaces.md) over
-themselves.
+[real vector space of real numbers](linear-algebra.real-vector-spaces.md).
 
 ## Proof
 
