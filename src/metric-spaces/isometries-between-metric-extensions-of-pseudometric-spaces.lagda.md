@@ -97,9 +97,8 @@ module _
     Π-Prop
       ( type-Pseudometric-Space P)
       ( λ x →
-        Id-Prop
-          ( set-Metric-Space
-            ( metric-space-Metric-Extension P N))
+        eq-prop-Metric-Space
+          ( metric-space-Metric-Extension P N)
           ( map-isometry-Pseudometric-Space
             ( P)
             ( pseudometric-space-Metric-Extension P N)
