@@ -57,7 +57,10 @@ A
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [real](real-numbers.dedekind-real-numbers.md)-valued function `p` on the vector
 space such that `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
-`p(c * x) = |c| * p(x)` for all real numbers `c` and `x` in `V`.
+`p(c * x) = |c| * p(x)` for all real numbers `c` and `x` in `V`. This latter
+condition is referred to as absolute homogeneity, and is related to the more
+general concept of
+[homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function).
 
 These conditions imply that `p(0) = 0` and that `p` is nonnegative.
 
