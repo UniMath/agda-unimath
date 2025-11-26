@@ -1343,6 +1343,46 @@ abstract
           ( leq-right-min-ℚ _ _)
           ( leq-right-min-ℚ _ _)))
 
+  is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) →
+    is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])
+  is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
+    rec-coproduct
+      ( pr2)
+      ( λ (is-pos-a , _) →
+        ex-falso
+          ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
+      ( same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( is-pos-lb))
+
+  is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) →
+    is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b])
+  is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
+    rec-coproduct
+      ( pr1)
+      ( λ (_ , is-pos-d) →
+        ex-falso
+          ( is-not-negative-and-positive-ℚ
+            ( is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+              ( [a,b])
+              ( [c,d])
+              ( is-pos-lb)
+              ( is-neg-a) ,
+            is-pos-d)))
+      ( same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( is-pos-lb))
+
   same-sign-is-positive-mul-closed-interval-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →
     is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
@@ -1354,28 +1394,16 @@ abstract
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
     map-coproduct
       ( λ (is-neg-a , is-neg-c) →
-        let
-          is-neg-d =
-            rec-coproduct
-              ( pr2)
-              ( λ (is-pos-a , _) →
-                ex-falso
-                  ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
-              ( same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
-                ( [a,b])
-                ( [c,d])
-                ( is-pos-lb))
-          is-neg-b =
-            rec-coproduct
-              ( pr1)
-              ( λ (_ , is-pos-d) →
-                ex-falso
-                  ( is-not-negative-and-positive-ℚ (is-neg-d , is-pos-d)))
-              ( same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
-                ( [a,b])
-                ( [c,d])
-                ( is-pos-lb))
-        in (is-neg-b , is-neg-d))
+        ( is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ
+            ( [a,b])
+            ( [c,d])
+            ( is-pos-lb)
+            ( is-neg-a) ,
+          is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+            ( [a,b])
+            ( [c,d])
+            ( is-pos-lb)
+            ( is-neg-a)))
       ( id)
       ( same-sign-lower-bounds-is-positive-mul-closed-interval-ℚ
         ( [a,b])
