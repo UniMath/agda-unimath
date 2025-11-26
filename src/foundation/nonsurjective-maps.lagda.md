@@ -7,6 +7,7 @@ module foundation.nonsurjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.complements-images
 open import foundation.coproduct-types
 open import foundation.decidable-maps
 open import foundation.dependent-pair-types
@@ -46,17 +47,6 @@ A map `f : A → B` is {{#concept "nonsurjective"}} if there
 inhabited.
 
 ## Definitions
-
-### The nonimage of a map
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  nonim : UU (l1 ⊔ l2)
-  nonim = Σ B (λ y → ¬ fiber f y)
-```
 
 ### Nonsurjectivity of a map
 
