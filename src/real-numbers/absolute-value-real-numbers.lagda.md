@@ -96,17 +96,21 @@ abstract opaque
 
 ```agda
 abstract
+  sim-abs-raise-ℝ :
+    {l1 : Level} (l2 : Level) (x : ℝ l1) →
+    sim-ℝ (abs-ℝ (raise-ℝ l2 x)) (raise-ℝ l2 (abs-ℝ x))
+  sim-abs-raise-ℝ l2 x =
+    similarity-reasoning-ℝ
+      abs-ℝ (raise-ℝ l2 x)
+      ~ℝ abs-ℝ x
+        by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
+      ~ℝ raise-ℝ l2 (abs-ℝ x)
+        by sim-raise-ℝ l2 (abs-ℝ x)
+
   abs-raise-ℝ :
     {l1 : Level} (l2 : Level) (x : ℝ l1) →
     abs-ℝ (raise-ℝ l2 x) ＝ raise-ℝ l2 (abs-ℝ x)
-  abs-raise-ℝ l2 x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        abs-ℝ (raise-ℝ l2 x)
-        ~ℝ abs-ℝ x
-          by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
-        ~ℝ raise-ℝ l2 (abs-ℝ x)
-          by sim-raise-ℝ l2 (abs-ℝ x))
+  abs-raise-ℝ l2 x = eq-sim-ℝ (sim-abs-raise-ℝ l2 x)
 ```
 
 ### The absolute value of a real number is nonnegative
