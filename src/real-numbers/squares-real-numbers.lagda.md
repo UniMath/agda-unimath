@@ -46,6 +46,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -353,4 +354,22 @@ abstract
             ( square-neg-ℝ y)
       ＝ square-ℝ x -ℝ real-ℕ 2 *ℝ (x *ℝ y) +ℝ square-ℝ y
         by ap-add-ℝ (ap-add-ℝ refl (right-negative-law-mul-ℝ _ _)) refl
+```
+
+### Squaring preserves similarity
+
+```agda
+abstract
+  preserves-sim-square-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → sim-ℝ (square-ℝ x) (square-ℝ y)
+  preserves-sim-square-ℝ x~y = preserves-sim-mul-ℝ x~y x~y
+```
+
+### `0² = 0`
+
+```agda
+abstract
+  square-zero-ℝ : square-ℝ zero-ℝ ＝ zero-ℝ
+  square-zero-ℝ = eq-sim-ℝ (left-zero-law-mul-ℝ zero-ℝ)
 ```

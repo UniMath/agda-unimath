@@ -10,10 +10,13 @@ module complex-numbers.raising-universe-levels-complex-numbers where
 open import complex-numbers.complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -43,4 +46,16 @@ raise-ℂ l (a +iℂ b) = raise-ℝ l a +iℂ raise-ℝ l b
 abstract
   sim-raise-ℂ : {l1 : Level} (l2 : Level) (z : ℂ l1) → sim-ℂ z (raise-ℂ l2 z)
   sim-raise-ℂ l (a +iℂ b) = ( sim-raise-ℝ l a , sim-raise-ℝ l b)
+
+abstract
+  sim-raise-ℂ' : {l1 : Level} (l2 : Level) (z : ℂ l1) → sim-ℂ (raise-ℂ l2 z) z
+  sim-raise-ℂ' l2 z = symmetric-sim-ℂ (sim-raise-ℂ l2 z)
+```
+
+### `raise-ℂ l zero-ℂ ≠ raise-ℂ l one-ℂ`
+
+```agda
+abstract
+  neq-raise-zero-one-ℂ : (l : Level) → raise-ℂ l zero-ℂ ≠ raise-ℂ l one-ℂ
+  neq-raise-zero-one-ℂ l 0=1ℂ = neq-raise-zero-one-ℝ l (ap re-ℂ 0=1ℂ)
 ```
