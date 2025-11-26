@@ -62,8 +62,7 @@ space which is
 - **Absolutely homogeneous.** `p(c * x) = |c| * p(x)` for all real numbers `c`
   and `x` in `V`.
 
-These conditions together imply that `p` is semidefinite and sends the zero
-vector to zero, i.e., `p(x) ≥ 0` and `p(0) = 0`.
+These conditions together imply that `p(x) ≥ 0` for any `x`, and `p(0) = 0`.
 
 A real vector space equipped with such a seminorm is called a
 {{#concept "seminormed space" WD="seminormed space" WDID=Q63793693 Agda=Seminormed-ℝ-Vector-Space}}.
