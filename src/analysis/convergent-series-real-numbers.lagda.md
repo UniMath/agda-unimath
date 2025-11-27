@@ -24,7 +24,7 @@ open import real-numbers.metric-additive-group-of-real-numbers
 ## Idea
 
 A [series of real numbers](analysis.series-real-numbers.md) is
-{{#concept "convergent" Disambiguation="series in 𝐑" Agda=is-convergent-series-ℝ Agda=convergent-series-ℝ WDID=Q1211057 WD="convergent series"}}
+{{#concept "convergent" Disambiguation="series in ℝ" Agda=is-convergent-series-ℝ Agda=convergent-series-ℝ WDID=Q1211057 WD="convergent series"}}
 if its partial sums converge in the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
