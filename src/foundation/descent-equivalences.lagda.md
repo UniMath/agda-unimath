@@ -99,3 +99,7 @@ module _
   descent-equiv i j h c d =
     descent-is-equiv (map-equiv i) j h c d (is-equiv-map-equiv i)
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

@@ -135,3 +135,7 @@ module _
     map-inv-equiv
       ( equiv-descent-data-family-cocone-sequential-diagram)
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

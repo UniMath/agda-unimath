@@ -56,3 +56,7 @@ module _
       (p : C → empty) (q : C → B) → is-pullback ex-falso g (cone-empty p q)
     descent-empty' p q = descent-empty (cone-empty p q)
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

@@ -227,3 +227,7 @@ module _
       ( λ is-pb-dsq →
         ( descent-coproduct-inl is-pb-dsq , descent-coproduct-inr is-pb-dsq)))
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

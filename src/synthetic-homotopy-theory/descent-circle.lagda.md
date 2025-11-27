@@ -394,3 +394,11 @@ module _
   pr2 (pr2 (family-with-descent-data-circle-descent-data P)) =
     pr2 (family-for-descent-data-circle-descent-data P)
 ```
+
+## See also
+
+We also have a series of files for descent on the circle of particular forms.
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

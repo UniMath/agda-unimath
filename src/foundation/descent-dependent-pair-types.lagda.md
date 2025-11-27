@@ -131,3 +131,7 @@ module _
     is-pullback (rec-Σ f) h cone-descent-Σ
   iff-descent-Σ = (descent-Σ , descent-Σ')
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

@@ -299,3 +299,7 @@ module _
   pr2 (pr2 family-with-descent-data-pushout-descent-data-pushout) =
     equiv-family-cocone-descent-data-pushout
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}
