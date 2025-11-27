@@ -37,6 +37,7 @@ open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -285,7 +286,11 @@ module _
         ＝
           ( neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
           ( inner-product-ℝ-Inner-Product-Space V v w)
-          by preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space V _ _ _
+          by
+            preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space V
+              ( _)
+              ( _)
+              ( _)
         ＝
           neg-ℝ (raise-ℝ l1 one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
           by left-negative-law-mul-ℝ _ _
@@ -420,7 +425,11 @@ module _
         equational-reasoning
           ⟨ c *V v ,V c *V v ⟩
           ＝ c *ℝ ⟨ v ,V c *V v ⟩
-            by preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space V _ _ _
+            by
+              preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space V
+                ( _)
+                ( _)
+                ( _)
           ＝ c *ℝ (c *ℝ ⟨ v ,V v ⟩)
             by
               ap-mul-ℝ
@@ -458,6 +467,15 @@ module _
             by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
           ＝ abs-ℝ c *ℝ norm-ℝ-Inner-Product-Space V v
             by ap-mul-ℝ (inv (eq-abs-sqrt-square-ℝ c)) refl
+
+    is-positively-homogeneous-norm-ℝ-Inner-Product-Space :
+      (c : ℝ⁺ l1) (v : type-ℝ-Inner-Product-Space V) →
+      norm-ℝ-Inner-Product-Space V
+        ( mul-ℝ-Inner-Product-Space V (real-ℝ⁺ c) v) ＝
+      real-ℝ⁺ c *ℝ norm-ℝ-Inner-Product-Space V v
+    is-positively-homogeneous-norm-ℝ-Inner-Product-Space c⁺@(c , _) v =
+      ( is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space c v) ∙
+      ( ap-mul-ℝ (abs-real-ℝ⁺ c⁺) refl)
 ```
 
 ### The norm of `-v` is the norm of `v`

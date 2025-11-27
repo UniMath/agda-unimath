@@ -175,7 +175,7 @@ module _
           ( ∥v∥²≤1))
 ```
 
-### If `∥u∥² ≤ 1` and `∥v∥² ≤ 1`, then `|⟨u,v⟩| ≤ 1`
+### If `∥u∥ ≤ 1` and `∥v∥ ≤ 1`, then `|⟨u,v⟩| ≤ 1`
 
 ```agda
 module _
@@ -195,24 +195,12 @@ module _
         ( V)
         ( u)
         ( v)
-        ( binary-tr
-          ( leq-ℝ)
-          ( eq-real-square-sqrt-ℝ⁰⁺
-            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V u))
-          ( left-unit-law-mul-ℝ one-ℝ)
-          ( preserves-leq-square-ℝ⁰⁺
-            ( nonnegative-norm-ℝ-Inner-Product-Space V u)
-            ( one-ℝ⁰⁺)
-            ( ∥u∥≤1)))
-        ( binary-tr
-          ( leq-ℝ)
-          ( eq-real-square-sqrt-ℝ⁰⁺
-            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v))
-          ( left-unit-law-mul-ℝ one-ℝ)
-          ( preserves-leq-square-ℝ⁰⁺
-            ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-            ( one-ℝ⁰⁺)
-            ( ∥v∥≤1)))
+        ( leq-one-leq-one-sqrt-ℝ⁰⁺
+          ( nonnegative-squared-norm-ℝ-Inner-Product-Space V u)
+          ( ∥u∥≤1))
+        ( leq-one-leq-one-sqrt-ℝ⁰⁺
+          ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v)
+          ( ∥v∥≤1))
 ```
 
 ### For any `v` in an inner product space, the norm of `(∥v∥ + ε)⁻¹ v` is at most `1`
@@ -247,15 +235,6 @@ module _
                   ( nonnegative-norm-ℝ-Inner-Product-Space V v)
                   ( positive-real-ℚ⁺ ε)))
               ( v))
-          ≤ ( abs-ℝ
-              ( real-inv-ℝ⁺
-                ( add-nonnegative-positive-ℝ
-                  ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                  ( positive-real-ℚ⁺ ε)))) *ℝ
-            ( norm-ℝ-Inner-Product-Space V v)
-            by
-              leq-eq-ℝ
-                ( is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space V _ _)
           ≤ ( real-inv-ℝ⁺
               ( add-nonnegative-positive-ℝ
                 ( nonnegative-norm-ℝ-Inner-Product-Space V v)
@@ -263,32 +242,17 @@ module _
             ( norm-ℝ-Inner-Product-Space V v)
             by
               leq-eq-ℝ
-                ( ap-mul-ℝ
-                  ( abs-real-ℝ⁺
-                    ( inv-ℝ⁺
-                      ( add-nonnegative-positive-ℝ
-                        ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                        ( positive-real-ℚ⁺ ε))))
-                  ( refl))
-          ≤ ( real-inv-ℝ⁺
-              ( add-nonnegative-positive-ℝ
-                ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                ( positive-real-ℚ⁺ ε))) *ℝ
-            ( norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ ε)
-            by
-              preserves-leq-left-mul-ℝ⁺
-                ( inv-ℝ⁺
-                  ( add-nonnegative-positive-ℝ
-                    ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                    ( positive-real-ℚ⁺ ε)))
-                ( leq-left-add-real-ℝ⁺ _ (positive-real-ℚ⁺ ε))
+                ( is-positively-homogeneous-norm-ℝ-Inner-Product-Space V
+                  ( inv-ℝ⁺
+                    ( add-nonnegative-positive-ℝ
+                      ( nonnegative-norm-ℝ-Inner-Product-Space V v)
+                      ( positive-real-ℚ⁺ ε)))
+                  ( v))
           ≤ one-ℝ
             by
-              leq-sim-ℝ
-                ( left-inverse-law-mul-ℝ⁺
-                  ( add-nonnegative-positive-ℝ
-                    ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                    ( positive-real-ℚ⁺ ε)))
+              leq-one-mul-inv-add-positive-ℝ⁰⁺
+                ( nonnegative-norm-ℝ-Inner-Product-Space V v)
+                ( positive-real-ℚ⁺ ε)
 ```
 
 ### For any `u`, `v` in a real inner product space and any positive rational `δ`, `ε`, `|⟨u,v⟩| ≤ (∥u∥ + δ)(∥v∥ + ε)`

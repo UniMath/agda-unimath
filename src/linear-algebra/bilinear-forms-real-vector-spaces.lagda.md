@@ -11,10 +11,10 @@ module linear-algebra.bilinear-forms-real-vector-spaces where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import linear-algebra.real-vector-spaces
@@ -199,7 +199,6 @@ module _
                 ( _))
         ＝ (a *ℝ b) *ℝ map-bilinear-form-ℝ-Vector-Space u v
           by inv (associative-mul-ℝ _ _ _)
-
 ```
 
 ## External links

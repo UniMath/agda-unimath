@@ -728,3 +728,20 @@ abstract
         ( inv (eq-real-square-sqrt-ℝ⁰⁺ y))
         ( x≤y))
 ```
+
+### If `√x ≤ 1`, `x ≤ 1`
+
+```agda
+abstract
+  leq-one-leq-one-sqrt-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ (real-sqrt-ℝ⁰⁺ x) one-ℝ → leq-ℝ⁰⁺ x one-ℝ⁰⁺
+  leq-one-leq-one-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) √x≤1 =
+    binary-tr
+      ( leq-ℝ)
+      ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( left-unit-law-mul-ℝ one-ℝ)
+      ( preserves-leq-square-ℝ⁰⁺
+        ( sqrt-ℝ⁰⁺ x⁰⁺)
+        ( one-ℝ⁰⁺)
+        ( √x≤1))
+```
