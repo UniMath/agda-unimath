@@ -9,12 +9,15 @@ module foundation.decidable-embeddings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
+open import foundation.complements-images
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-coproduct-types
 open import foundation.fibers-of-maps
+open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -26,6 +29,7 @@ open import foundation.propositions
 open import foundation.retracts-of-maps
 open import foundation.small-maps
 open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
@@ -544,10 +548,6 @@ module _
 ### Coproducts of decidable embeddings are decidable embeddings
 
 ```agda
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  where
-
 abstract
   is-decidable-emb-map-coproduct :
     {l1 l2 l3 l4 : Level}
@@ -558,6 +558,20 @@ abstract
     is-decidable-emb (map-coproduct f g)
   is-decidable-emb-map-coproduct {f = f} {g} (eF , dF) (eG , dG) =
     ( is-emb-map-coproduct eF eG , is-decidable-map-coproduct dF dG)
+```
+
+### The inclusion maps of coproducts are decidable embeddings
+
+```agda
+module _
+    {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-emb-inl : is-decidable-emb (inl {A = A} {B = B})
+  is-decidable-emb-inl = (is-emb-inl , is-decidable-map-inl)
+
+  is-decidable-emb-inr : is-decidable-emb (inr {A = A} {B = B})
+  is-decidable-emb-inr = (is-emb-inr , is-decidable-map-inr)
 ```
 
 ### Decidable embeddings are closed under base change
@@ -668,6 +682,30 @@ module _
   is-small-map-decidable-emb :
     (f : A ↪ᵈ B) → is-small-map lzero (map-decidable-emb f)
   is-small-map-decidable-emb (f , H) = is-small-map-is-decidable-emb H
+```
+
+## The coproduct decomposition of the codomain of a decidable embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  coproduct-decomposition-codomain-decidable-emb :
+    (f'@(f , F) : decidable-emb A B) →
+    B ≃ A + nonim f
+  coproduct-decomposition-codomain-decidable-emb (f , F) =
+    equivalence-reasoning
+    B
+    ≃ Σ B (λ y → is-decidable (fiber f y))
+      by inv-equiv-inclusion-is-full-subtype
+        ( λ y →
+          is-decidable-Prop (fiber f y , (is-prop-map-is-decidable-emb F y)))
+        ( is-decidable-map-is-decidable-emb F)
+    ≃ Σ B (fiber f) + nonim f
+      by left-distributive-Σ-coproduct
+    ≃ A + nonim f
+      by equiv-coproduct (equiv-total-fiber f) id-equiv
 ```
 
 ## References
