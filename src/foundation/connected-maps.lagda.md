@@ -530,8 +530,7 @@ module _
       is-trunc-map-precomp-Π-is-connected-map k n H
         ( λ x →
           ( type-Truncated-Type (P x)) ,
-          ( tr
-            ( λ p → is-trunc p (type-Truncated-Type (P x)))
+          ( is-trunc-eq
             ( commutative-add+2-𝕋 n k)
             ( is-trunc-type-Truncated-Type (P x))))
 ```
