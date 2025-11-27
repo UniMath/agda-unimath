@@ -513,7 +513,8 @@ module _
       {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 k n)) →
       is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
     is-trunc-map-precomp-Π-is-connected-map k neg-two-𝕋 H P =
-      is-contr-map-is-equiv (dependent-universal-property-is-connected-map k H P)
+      is-contr-map-is-equiv
+        ( dependent-universal-property-is-connected-map k H P)
     is-trunc-map-precomp-Π-is-connected-map k (succ-𝕋 n) H P =
       is-trunc-map-succ-precomp-Π
         ( λ g h →

@@ -447,7 +447,8 @@ module _
           elim-disjunction
             ( lower-cut-ℝ y q)
             ( id)
-            ( λ r∈Uy → ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
+            ( λ r∈Uy →
+              ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
             ( is-located-lower-upper-cut-ℝ y q<r))
         ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
 ```

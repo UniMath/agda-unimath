@@ -147,7 +147,8 @@ module _
   abstract
     is-equiv-iterate : (n : ℕ) → is-equiv f → is-equiv (iterate n f)
     is-equiv-iterate =
-      is-in-function-class-iterate is-equiv-id (λ h g H G → is-equiv-comp h g G H)
+      is-in-function-class-iterate is-equiv-id
+        ( λ h g H G → is-equiv-comp h g G H)
 ```
 
 ### Iterates of embeddings are embeddings

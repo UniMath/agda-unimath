@@ -306,10 +306,12 @@ module _
       α = map-inv-is-equiv
             ( up-i
               ( Σ B ( λ b →
-                      type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b)))
+                      type-trunc-Prop
+                        ( fiber (map-hom-slice f (map-emb i) q) b)))
               ( g , is-emb-g))
             ( map-unit-im (pr1 q) , pr2 q)
-      β : type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
+      β :
+        type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
       β = pr2 (pr1 α b)
       γ :
         fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
