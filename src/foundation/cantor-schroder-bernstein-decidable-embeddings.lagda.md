@@ -284,8 +284,8 @@ module _
 ## Theorem
 
 It follows from the weak limited principle of omniscience that, for every pair
-of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable
-for every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
+of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`, it is decidable for
+every element `x : A` whether `x` is a perfect image of `g` relative to `f`.
 Applying this fact to the Cantor-Schröder-Bernstein construction, we conclude
 with the main result.
 
