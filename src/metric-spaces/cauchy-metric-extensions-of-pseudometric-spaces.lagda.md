@@ -101,9 +101,9 @@ module _
       ( pseudometric-space-Metric-Extension P M))
   where
 
-  coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension :
+  coherence-triangle-cauchy-Metric-Extension :
     UU (l1 ⊔ l3)
-  coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension =
+  coherence-triangle-cauchy-Metric-Extension =
     htpy-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-Metric-Extension P M)
@@ -115,9 +115,9 @@ module _
         ( isometry-cauchy-pseudocompletion-Pseudometric-Space P))
       ( isometry-metric-space-Metric-Extension P M)
 
-  is-prop-coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension :
-    is-prop coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension
-  is-prop-coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension =
+  is-prop-coherence-triangle-cauchy-Metric-Extension :
+    is-prop coherence-triangle-cauchy-Metric-Extension
+  is-prop-coherence-triangle-cauchy-Metric-Extension =
     is-prop-Π
       ( λ x →
         is-set-type-Metric-Space
@@ -129,11 +129,11 @@ module _
             ( map-cauchy-pseudocompletion-Pseudometric-Space P x))
           ( map-isometry-metric-space-Metric-Extension P M x))
 
-  coherence-triangle-prop-isometry-cauchy-pseudocompletion-Metric-Space :
+  coherence-triangle-prop-cauchy-Metric-Extension :
     Prop (l1 ⊔ l3)
-  coherence-triangle-prop-isometry-cauchy-pseudocompletion-Metric-Space =
-    ( coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension ,
-      is-prop-coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension)
+  coherence-triangle-prop-cauchy-Metric-Extension =
+    ( coherence-triangle-cauchy-Metric-Extension ,
+      is-prop-coherence-triangle-cauchy-Metric-Extension)
 ```
 
 ### The condition of being a Cauchy metric extension
@@ -148,7 +148,7 @@ module _
   is-cauchy-Metric-Extension : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-cauchy-Metric-Extension =
     type-subtype
-      ( coherence-triangle-prop-isometry-cauchy-pseudocompletion-Metric-Space
+      ( coherence-triangle-prop-cauchy-Metric-Extension
         ( P)
         ( M))
 ```
@@ -208,7 +208,7 @@ module _
     pr1 is-cauchy-metric-extension-Cauchy-Metric-Extension
 
   coh-isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension :
-    coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension
+    coherence-triangle-cauchy-Metric-Extension
       ( P)
       ( extension-Cauchy-Metric-Extension)
       ( isometry-cauchy-pseudocompletion-Cauchy-Metric-Extension)
@@ -236,7 +236,7 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-space-Metric-Extension P M))
   ( coh-g :
-    coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension P M g)
+    coherence-triangle-cauchy-Metric-Extension P M g)
   ( u : cauchy-approximation-Pseudometric-Space P)
   where abstract
 
@@ -392,9 +392,9 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-space-Metric-Extension P M))
   ( coh-g :
-    coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension P M g)
+    coherence-triangle-cauchy-Metric-Extension P M g)
   ( coh-h :
-    coherence-triangle-isometry-cauchy-pseudocompletion-Metric-Extension P M h)
+    coherence-triangle-cauchy-Metric-Extension P M h)
   where abstract
 
   all-htpy-is-cauchy-extension-Metric-Space :
@@ -439,13 +439,13 @@ module _
   all-eq-is-cauchy-Metric-Extension :
     ( g h :
       type-subtype
-        ( coherence-triangle-prop-isometry-cauchy-pseudocompletion-Metric-Space
+        ( coherence-triangle-prop-cauchy-Metric-Extension
           ( P)
           ( M))) →
     ( g ＝ h)
   all-eq-is-cauchy-Metric-Extension (g , coh-g) (h , coh-h) =
     eq-type-subtype
-      ( coherence-triangle-prop-isometry-cauchy-pseudocompletion-Metric-Space
+      ( coherence-triangle-prop-cauchy-Metric-Extension
         ( P)
         ( M))
       ( eq-htpy-map-isometry-Pseudometric-Space
