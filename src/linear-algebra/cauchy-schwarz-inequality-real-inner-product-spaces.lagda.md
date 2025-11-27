@@ -52,9 +52,12 @@ open import real-numbers.squares-real-numbers
 
 ## Idea
 
-The Cauchy-Schwarz inequality states that for any `u` and `v` in an inner
-product space, the absolute value of the inner product of `u` and `v` is at most
-the product of the norms of `u` and `v`.
+The
+{{#concept "Cauchy-Schwarz inequality" WDID=Q190546 WD="Cauchy-Schwarz inequality" Agda=cauchy-schwarz-inequality-ℝ-Inner-Product-Space}}
+states that for any `u` and `v` in a
+[real inner product space](linear-algebra.real-inner-product-spaces.md), the
+[absolute value](real-numbers.absolute-value-real-numbers.md) of the inner
+product of `u` and `v` is at most the product of the norms of `u` and `v`.
 
 The Cauchy-Schwarz inequality is the [78th](literature.100-theorems.md#78)
 theorem on [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
