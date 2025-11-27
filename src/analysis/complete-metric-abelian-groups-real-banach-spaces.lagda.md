@@ -1,4 +1,4 @@
-# Complete metric abelian groups of real Banach spaces
+# The complete metric abelian groups of real Banach spaces
 
 ```agda
 module analysis.complete-metric-abelian-groups-real-banach-spaces where

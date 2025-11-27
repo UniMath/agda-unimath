@@ -12,6 +12,7 @@ open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-complete-metric-abelian-groups
 
 open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -76,4 +77,29 @@ module _
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ , H)
+```
+
+### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+
+```agda
+module _
+  {l1 l2 : Level}
+  (G : Complete-Metric-Ab l1 l2)
+  (σ : series-Complete-Metric-Ab G)
+  where
+
+  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab :
+    is-convergent-series-Complete-Metric-Ab G σ →
+    is-inhabited
+      ( is-cauchy-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Ab G)
+        ( partial-sum-series-Complete-Metric-Ab G σ))
+  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab
+    (lim , is-lim) =
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Ab G)
+        ( partial-sum-series-Complete-Metric-Ab G σ)
+        ( lim))
+      ( is-lim)
 ```

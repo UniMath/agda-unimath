@@ -12,6 +12,8 @@ open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-real-banach-spaces
 
+open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -30,8 +32,8 @@ A [series](analysis.series-real-banach-spaces.md)
 form a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md).
 
 A slightly modified converse is also true: if a series converges, there
-[exists](foundation.existential-quantification.md) a modulus making it a Cauchy
-sequence.
+[exists](foundation.existential-quantification.md) a modulus making its partial
+sums a Cauchy sequence.
 
 ## Definition
 
@@ -76,4 +78,29 @@ module _
     is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
       ( complete-metric-ab-add-ℝ-Banach-Space V)
       ( σ)
+```
+
+### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Banach-Space l1 l2)
+  (σ : series-ℝ-Banach-Space V)
+  where
+
+  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space :
+    is-convergent-series-ℝ-Banach-Space V σ →
+    is-inhabited
+      ( is-cauchy-sequence-Metric-Space
+        ( metric-space-ℝ-Banach-Space V)
+        ( partial-sum-series-ℝ-Banach-Space V σ))
+  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space
+    (lim , is-lim) =
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-ℝ-Banach-Space V)
+        ( partial-sum-series-ℝ-Banach-Space V σ)
+        ( lim))
+      ( is-lim)
 ```
