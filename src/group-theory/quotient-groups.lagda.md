@@ -61,8 +61,8 @@ from group homomorphisms `G/N → H` to
 group homomorphism is said to be `N`-nullifying if `N` is contained in the
 [kernel](group-theory.kernels-homomorphisms-groups.md) of `f`.
 
-That the quotient group satisfies its universal property is also referred to as
-the
+The fact that the quotient group satisfies its universal property is commonly
+known as the
 {{#concept "fundamental theorem on homomorphisms" Disambiguation="of groups" WD="fundamental theorem on homomorphisms" WDID=Q1187646 Agda=is-quotient-group-quotient-Group}},
 or **first isomorphism theorem**.
 
