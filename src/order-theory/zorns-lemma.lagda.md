@@ -105,7 +105,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (lem : LEM (l1 ⊔ l3))
+  {l1 l2 l3 : Level} (lem : level-LEM (l1 ⊔ l3))
   where
 
   inhabited-zorns-lemma-zorns-lemma :
