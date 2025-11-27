@@ -504,34 +504,36 @@ module _
 module _
   {l1 l2 : Level}
   {A : UU l1} {B : UU l2} {f : A → B}
-  where abstract
+  where
 
-  is-trunc-map-precomp-Π-is-connected-map :
-    (k n : 𝕋) →
-    is-connected-map k f →
-    {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 k n)) →
-    is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
-  is-trunc-map-precomp-Π-is-connected-map k neg-two-𝕋 H P =
-    is-contr-map-is-equiv (dependent-universal-property-is-connected-map k H P)
-  is-trunc-map-precomp-Π-is-connected-map k (succ-𝕋 n) H P =
-    is-trunc-map-succ-precomp-Π
-      ( λ g h →
-        is-trunc-map-precomp-Π-is-connected-map k n H
-          ( λ b → Id-Truncated-Type (P b) (g b) (h b)))
+  abstract
+    is-trunc-map-precomp-Π-is-connected-map :
+      (k n : 𝕋) →
+      is-connected-map k f →
+      {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 k n)) →
+      is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
+    is-trunc-map-precomp-Π-is-connected-map k neg-two-𝕋 H P =
+      is-contr-map-is-equiv (dependent-universal-property-is-connected-map k H P)
+    is-trunc-map-precomp-Π-is-connected-map k (succ-𝕋 n) H P =
+      is-trunc-map-succ-precomp-Π
+        ( λ g h →
+          is-trunc-map-precomp-Π-is-connected-map k n H
+            ( λ b → Id-Truncated-Type (P b) (g b) (h b)))
 
-  is-trunc-map-precomp-Π-is-connected-map' :
-    (k n : 𝕋) →
-    is-connected-map k f →
-    {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 n k)) →
-    is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
-  is-trunc-map-precomp-Π-is-connected-map' k n H P =
-    is-trunc-map-precomp-Π-is-connected-map k n H
-      ( λ x →
-        ( type-Truncated-Type (P x)) ,
-        ( tr
-          ( λ p → is-trunc p (type-Truncated-Type (P x)))
-          ( commutative-add+2-𝕋 n k)
-          ( is-trunc-type-Truncated-Type (P x))))
+  abstract
+    is-trunc-map-precomp-Π-is-connected-map' :
+      (k n : 𝕋) →
+      is-connected-map k f →
+      {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 n k)) →
+      is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
+    is-trunc-map-precomp-Π-is-connected-map' k n H P =
+      is-trunc-map-precomp-Π-is-connected-map k n H
+        ( λ x →
+          ( type-Truncated-Type (P x)) ,
+          ( tr
+            ( λ p → is-trunc p (type-Truncated-Type (P x)))
+            ( commutative-add+2-𝕋 n k)
+            ( is-trunc-type-Truncated-Type (P x))))
 ```
 
 ### Characterization of the identity type of `Connected-Map l2 k A`
