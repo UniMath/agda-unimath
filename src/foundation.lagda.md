@@ -136,7 +136,7 @@ open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
-open import foundation.descent-surjections public
+open import foundation.descent-surjective-maps public
 open import foundation.diaconescus-theorem public
 open import foundation.diagonal-maps-cartesian-products-of-types public
 open import foundation.diagonal-maps-of-types public

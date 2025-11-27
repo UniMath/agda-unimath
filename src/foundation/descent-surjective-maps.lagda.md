@@ -1,7 +1,7 @@
-# Descent for surjections
+# Descent for surjective maps
 
 ```agda
-module foundation.descent-surjections where
+module foundation.descent-surjective-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -9,11 +9,9 @@ module foundation.descent-surjections where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.functoriality-fibers-of-maps
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
@@ -26,8 +24,8 @@ open import foundation-core.pullbacks
 ## Idea
 
 The
-{{#concept "descent property" Disambiguation="of surjections" Agda=iff-descent-surjection}}
-of [surjections](foundation.surjective-maps.md) asserts that in a commuting
+{{#concept "descent property" Disambiguation="of surjective maps" Agda=iff-descent-surjection}}
+of [surjective maps](foundation.surjective-maps.md) asserts that in a commuting
 diagram of the form
 
 ```text
@@ -48,8 +46,8 @@ This descent property appears as Theorem 2.3 in {{#cite CR21}}.
 
 ## Theorem
 
-In the formalization we don't presuppose that `p` is surjective, as this follows
-by base change stability of surjections.
+In the formalization we do not presuppose that `p` is surjective, as this
+follows by base change stability of surjections.
 
 ```agda
 module _
