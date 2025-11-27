@@ -142,27 +142,29 @@ every map `u : A → U`, there is a unique extension of `u` along `f`.
 module _
   {l1 l2 l3 l4 : Level} (K : subuniverse l1 l2)
   {A : UU l3} {B : UU l4} (f : A → B)
-  where abstract
+  where
 
-  is-subuniverse-equiv-is-subuniverse-equiv-extension-condition :
-    is-subuniverse-equiv-extension-condition K f →
-    is-subuniverse-equiv K f
-  is-subuniverse-equiv-is-subuniverse-equiv-extension-condition H U =
-    is-equiv-is-contr-map
-      ( λ u →
-        is-contr-equiv
-          ( extension-map f u)
-          ( compute-extension-fiber-precomp f u)
-          ( H U u))
+  abstract
+    is-subuniverse-equiv-is-subuniverse-equiv-extension-condition :
+      is-subuniverse-equiv-extension-condition K f →
+      is-subuniverse-equiv K f
+    is-subuniverse-equiv-is-subuniverse-equiv-extension-condition H U =
+      is-equiv-is-contr-map
+        ( λ u →
+          is-contr-equiv
+            ( extension-map f u)
+            ( compute-extension-fiber-precomp f u)
+            ( H U u))
 
-  is-subuniverse-equiv-extension-condition-is-subuniverse-equiv :
-    is-subuniverse-equiv K f →
-    is-subuniverse-equiv-extension-condition K f
-  is-subuniverse-equiv-extension-condition-is-subuniverse-equiv H U u =
-    is-contr-equiv'
-      ( fiber (precomp f (pr1 U)) u)
-      ( compute-extension-fiber-precomp f u)
-      ( is-contr-map-is-equiv (H U) u)
+  abstract
+    is-subuniverse-equiv-extension-condition-is-subuniverse-equiv :
+      is-subuniverse-equiv K f →
+      is-subuniverse-equiv-extension-condition K f
+    is-subuniverse-equiv-extension-condition-is-subuniverse-equiv H U u =
+      is-contr-equiv'
+        ( fiber (precomp f (pr1 U)) u)
+        ( compute-extension-fiber-precomp f u)
+        ( is-contr-map-is-equiv (H U) u)
 ```
 
 ### Equivalences are `K`-equivalences for all `K`
