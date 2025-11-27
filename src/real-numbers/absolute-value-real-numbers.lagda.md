@@ -463,6 +463,17 @@ abstract
         by inv (ap-mul-ℝ (eq-abs-sqrt-square-ℝ x) (eq-abs-sqrt-square-ℝ y))
 ```
 
+### For positive `x`, `|xy| = x|y|`
+
+```agda
+abstract
+  abs-left-mul-positive-ℝ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) →
+    abs-ℝ (real-ℝ⁺ x *ℝ y) ＝ real-ℝ⁺ x *ℝ abs-ℝ y
+  abs-left-mul-positive-ℝ x⁺@(x , _) y =
+    abs-mul-ℝ x y ∙ ap-mul-ℝ (abs-real-ℝ⁺ x⁺) refl
+```
+
 ### For any `ε : ℚ⁺`, `|x| - ε < x` or `|x| - ε < -x`
 
 ```agda

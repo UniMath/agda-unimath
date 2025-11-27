@@ -141,7 +141,7 @@ module _
       (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
       is-orthogonal-ℝ-Inner-Product-Space V v w →
       is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
-    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v∙w=0 =
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v·w=0 =
       let
         ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
@@ -150,18 +150,16 @@ module _
         equational-reasoning
           ⟨ c *V v ,V w ⟩
           ＝ c *ℝ ⟨ v ,V w ⟩
-            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+            by
+              preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space
+                ( V)
+                ( _)
+                ( _)
+                ( _)
           ＝ c *ℝ raise-ℝ l1 zero-ℝ
-            by ap-mul-ℝ refl v∙w=0
-          ＝ c *ℝ zero-ℝ
-            by
-              eq-sim-ℝ (preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ' l1 zero-ℝ))
+            by ap-mul-ℝ refl v·w=0
           ＝ raise-ℝ l1 zero-ℝ
-            by
-              eq-sim-ℝ
-                ( transitive-sim-ℝ _ _ _
-                  ( sim-raise-ℝ l1 zero-ℝ)
-                  ( right-zero-law-mul-ℝ c))
+            by right-raise-zero-law-mul-ℝ c
 ```
 
 ## References

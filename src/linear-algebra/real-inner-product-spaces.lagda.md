@@ -169,11 +169,11 @@ module _
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
-  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space :
+  preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space :
     preserves-scalar-mul-left-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
-  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space =
+  preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space =
     preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
@@ -187,12 +187,23 @@ module _
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
-  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space :
+  preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space :
     preserves-scalar-mul-right-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
-  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space =
+  preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space =
     preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space :
+    (a b : ℝ l1) (u v : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space
+      ( mul-ℝ-Inner-Product-Space a u)
+      ( mul-ℝ-Inner-Product-Space b v) ＝
+    (a *ℝ b) *ℝ inner-product-ℝ-Inner-Product-Space u v
+  preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space =
+    preserves-scalar-mul-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
@@ -274,7 +285,7 @@ module _
         ＝
           ( neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
           ( inner-product-ℝ-Inner-Product-Space V v w)
-          by is-right-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+          by preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space V _ _ _
         ＝
           neg-ℝ (raise-ℝ l1 one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
           by left-negative-law-mul-ℝ _ _
@@ -409,12 +420,12 @@ module _
         equational-reasoning
           ⟨ c *V v ,V c *V v ⟩
           ＝ c *ℝ ⟨ v ,V c *V v ⟩
-            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+            by preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space V _ _ _
           ＝ c *ℝ (c *ℝ ⟨ v ,V v ⟩)
             by
               ap-mul-ℝ
                 ( refl)
-                ( is-right-homogeneous-inner-product-ℝ-Inner-Product-Space
+                ( preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space
                   ( V)
                   ( _)
                   ( _)

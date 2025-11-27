@@ -329,49 +329,19 @@ module _
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ) *ℝ
-                  ( inner-product-ℝ-Inner-Product-Space V
-                    ( u)
-                    ( mul-ℝ-Inner-Product-Space V (real-inv-ℝ⁺ ∥v∥+ε) v))))
+                ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
+                  ( inner-product-ℝ-Inner-Product-Space V u v)))
               by
                 ap-mul-ℝ
                   ( refl)
                   ( ap
                     ( abs-ℝ)
-                    ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space
                       ( V)
                       ( _)
                       ( _)
+                      ( _)
                       ( _)))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ) *ℝ
-                  ( ( real-inv-ℝ⁺ ∥v∥+ε) *ℝ
-                    ( inner-product-ℝ-Inner-Product-Space V u v))))
-              by
-                ap-mul-ℝ
-                  ( refl)
-                  ( ap
-                    ( abs-ℝ)
-                    ( ap-mul-ℝ
-                      ( refl)
-                      ( is-right-homogeneous-inner-product-ℝ-Inner-Product-Space
-                        ( V)
-                        ( _)
-                        ( _)
-                        ( _))))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
-                  ( inner-product-ℝ-Inner-Product-Space V u v)))
-              by ap-mul-ℝ refl (ap abs-ℝ (inv (associative-mul-ℝ _ _ _)))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( ( abs-ℝ (real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε)) *ℝ
-                ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)))
-              by ap-mul-ℝ refl (abs-mul-ℝ _ _)
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
@@ -379,7 +349,7 @@ module _
               by
                 ap-mul-ℝ
                   ( refl)
-                  ( ap-mul-ℝ (abs-real-ℝ⁺ (inv-ℝ⁺ ∥u∥+δ *ℝ⁺ inv-ℝ⁺ ∥v∥+ε)) refl)
+                  ( abs-left-mul-positive-ℝ (inv-ℝ⁺ ∥u∥+δ *ℝ⁺ inv-ℝ⁺ ∥v∥+ε) _)
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( ( real-inv-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ

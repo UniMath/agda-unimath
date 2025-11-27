@@ -1161,8 +1161,7 @@ module _
               by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
         ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
 
-    left-raise-zero-law-mul-ℝ :
-      raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
+    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
     left-raise-zero-law-mul-ℝ =
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
@@ -1182,6 +1181,10 @@ module _
     right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
     right-zero-law-mul-ℝ =
       tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
+
+    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l ＝ raise-zero-ℝ l
+    right-raise-zero-law-mul-ℝ =
+      commutative-mul-ℝ _ _ ∙ left-raise-zero-law-mul-ℝ
 ```
 
 ### Swapping laws for multiplication on real numbers
