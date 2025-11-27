@@ -49,8 +49,8 @@ open import foundation-core.type-theoretic-principle-of-choice
 ### Any equivalence is an embedding
 
 We already proved in `foundation-core.equivalences` that equivalences are
-embeddings. Here we have `_↪_` available, so we record the map from
-equivalences to embeddings.
+embeddings. Here we have `_↪_` available, so we record the map from equivalences
+to embeddings.
 
 ```agda
 module _
