@@ -189,19 +189,21 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X)
-  where abstract
+  where
 
-  forward-implication-is-image-subtype-subtype-im :
-    {l : Level} (B : subtype l X) →
-    subtype-im f ⊆ B → (a : A) → is-in-subtype B (f a)
-  forward-implication-is-image-subtype-subtype-im B H a =
-    H (f a) (unit-trunc-Prop (a , refl))
+  abstract
+    forward-implication-is-image-subtype-subtype-im :
+      {l : Level} (B : subtype l X) →
+      subtype-im f ⊆ B → (a : A) → is-in-subtype B (f a)
+    forward-implication-is-image-subtype-subtype-im B H a =
+      H (f a) (unit-trunc-Prop (a , refl))
 
-  backward-implication-is-image-subtype-subtype-im :
-    {l : Level} (B : subtype l X) →
-    ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B
-  backward-implication-is-image-subtype-subtype-im B H x K =
-    apply-universal-property-trunc-Prop K (B x) (λ where (a , refl) → H a)
+  abstract
+    backward-implication-is-image-subtype-subtype-im :
+      {l : Level} (B : subtype l X) →
+      ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B
+    backward-implication-is-image-subtype-subtype-im B H x K =
+      apply-universal-property-trunc-Prop K (B x) (λ where (a , refl) → H a)
 
   is-image-subtype-subtype-im : is-image-subtype f (subtype-im f)
   pr1 (is-image-subtype-subtype-im B) =
@@ -242,17 +244,18 @@ abstract
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X)
   (m : B ↪ X) (h : hom-slice f (map-emb m))
-  where abstract
+  where
 
-  fiberwise-map-is-image-im :
-    (x : X) → type-trunc-Prop (fiber f x) → fiber (map-emb m) x
-  fiberwise-map-is-image-im x =
-    map-universal-property-trunc-Prop
-      { A = fiber f x}
-      ( fiber-emb-Prop m x)
-      ( λ t →
-        ( map-hom-slice f (map-emb m) h (pr1 t)) ,
-        ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙ ( pr2 t)))
+  abstract
+    fiberwise-map-is-image-im :
+      (x : X) → type-trunc-Prop (fiber f x) → fiber (map-emb m) x
+    fiberwise-map-is-image-im x =
+      map-universal-property-trunc-Prop
+        { A = fiber f x}
+        ( fiber-emb-Prop m x)
+        ( λ t →
+          ( map-hom-slice f (map-emb m) h (pr1 t)) ,
+          ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙ ( pr2 t)))
 
   map-is-image-im : im f → B
   map-is-image-im (x , t) = pr1 (fiberwise-map-is-image-im x t)
@@ -283,62 +286,65 @@ abstract
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i))
-  where abstract
+  where
 
-  is-surjective-is-image :
-    is-image f i q → is-surjective (map-hom-slice f (map-emb i) q)
-  is-surjective-is-image up-i b =
-    apply-universal-property-trunc-Prop β
-      ( trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b))
-      ( γ)
-    where
-    g : type-subtype (trunc-Prop ∘ fiber (map-hom-slice f (map-emb i) q)) → X
-    g = map-emb i ∘ pr1
-    is-emb-g : is-emb g
-    is-emb-g = is-emb-comp (map-emb i) pr1
-      ( is-emb-map-emb i)
-      ( is-emb-inclusion-subtype (λ x → trunc-Prop _))
-    α : hom-slice (map-emb i) g
-    α = map-inv-is-equiv
-          ( up-i
-            ( Σ B ( λ b →
-                    type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b)))
-            ( g , is-emb-g))
-          ( map-unit-im (pr1 q) , pr2 q)
-    β : type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
-    β = pr2 (pr1 α b)
-    γ :
-      fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
-      type-Prop (trunc-Prop (fiber (pr1 q) b))
-    γ (a , p) =
-      unit-trunc-Prop
-        ( a , p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b)))
+  abstract
+    is-surjective-is-image :
+      is-image f i q → is-surjective (map-hom-slice f (map-emb i) q)
+    is-surjective-is-image up-i b =
+      apply-universal-property-trunc-Prop β
+        ( trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b))
+        ( γ)
+      where
+      g : type-subtype (trunc-Prop ∘ fiber (map-hom-slice f (map-emb i) q)) → X
+      g = map-emb i ∘ pr1
+      is-emb-g : is-emb g
+      is-emb-g = is-emb-comp (map-emb i) pr1
+        ( is-emb-map-emb i)
+        ( is-emb-inclusion-subtype (λ x → trunc-Prop _))
+      α : hom-slice (map-emb i) g
+      α = map-inv-is-equiv
+            ( up-i
+              ( Σ B ( λ b →
+                      type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b)))
+              ( g , is-emb-g))
+            ( map-unit-im (pr1 q) , pr2 q)
+      β : type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
+      β = pr2 (pr1 α b)
+      γ :
+        fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
+        type-Prop (trunc-Prop (fiber (pr1 q) b))
+      γ (a , p) =
+        unit-trunc-Prop
+          ( a , p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b)))
 
-  is-image-is-surjective' :
-    is-surjective (map-hom-slice f (map-emb i) q) →
-    is-image' f i q
-  is-image-is-surjective' H B' m =
-    map-equiv
-      ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
-        ( inv-equiv
-          ( equiv-universal-property-family-of-fibers
-            ( map-emb i)
-            ( fiber (map-emb m)))) ∘e
-        ( inv-equiv
-          ( equiv-dependent-universal-property-surjection-is-surjective
-            ( pr1 q)
-            ( H)
-            ( λ b →
-              ( fiber (map-emb m) (pr1 i b)) ,
-              ( is-prop-map-emb m (pr1 i b))))) ∘e
-        ( equiv-Π-equiv-family
-          ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
-        ( equiv-universal-property-family-of-fibers f (fiber (map-emb m))) ∘e
-        ( equiv-fiberwise-hom-hom-slice f (map-emb m)))
+  abstract
+    is-image-is-surjective' :
+      is-surjective (map-hom-slice f (map-emb i) q) →
+      is-image' f i q
+    is-image-is-surjective' H B' m =
+      map-equiv
+        ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
+          ( inv-equiv
+            ( equiv-universal-property-family-of-fibers
+              ( map-emb i)
+              ( fiber (map-emb m)))) ∘e
+          ( inv-equiv
+            ( equiv-dependent-universal-property-surjection-is-surjective
+              ( pr1 q)
+              ( H)
+              ( λ b →
+                ( fiber (map-emb m) (pr1 i b)) ,
+                ( is-prop-map-emb m (pr1 i b))))) ∘e
+          ( equiv-Π-equiv-family
+            ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
+          ( equiv-universal-property-family-of-fibers f (fiber (map-emb m))) ∘e
+          ( equiv-fiberwise-hom-hom-slice f (map-emb m)))
 
-  is-image-is-surjective :
-    is-surjective (map-hom-slice f (map-emb i) q) →
-    is-image f i q
-  is-image-is-surjective H =
-    is-image-is-image' f i q (is-image-is-surjective' H)
+  abstract
+    is-image-is-surjective :
+      is-surjective (map-hom-slice f (map-emb i) q) →
+      is-image f i q
+    is-image-is-surjective H =
+      is-image-is-image' f i q (is-image-is-surjective' H)
 ```

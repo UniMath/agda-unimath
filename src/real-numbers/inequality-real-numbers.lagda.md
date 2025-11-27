@@ -434,21 +434,22 @@ reached a contradiction. ∎
 ```agda
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
-  where abstract opaque
+  where
 
-  unfolding leq-ℝ
+  abstract opaque
+    unfolding leq-ℝ
 
-  double-negation-elim-leq-ℝ : ¬¬ (leq-ℝ x y) → leq-ℝ x y
-  double-negation-elim-leq-ℝ H q Q =
-    rec-trunc-Prop
-      ( lower-cut-ℝ y q)
-      ( λ (r , q<r , R) →
-        elim-disjunction
-          ( lower-cut-ℝ y q)
-          ( id)
-          ( λ r∈Uy → ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
-          ( is-located-lower-upper-cut-ℝ y q<r))
-      ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
+    double-negation-elim-leq-ℝ : ¬¬ (leq-ℝ x y) → leq-ℝ x y
+    double-negation-elim-leq-ℝ H q Q =
+      rec-trunc-Prop
+        ( lower-cut-ℝ y q)
+        ( λ (r , q<r , R) →
+          elim-disjunction
+            ( lower-cut-ℝ y q)
+            ( id)
+            ( λ r∈Uy → ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
+            ( is-located-lower-upper-cut-ℝ y q<r))
+        ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
 ```
 
 ## References
