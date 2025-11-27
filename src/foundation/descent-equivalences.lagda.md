@@ -21,21 +21,24 @@ open import foundation-core.pullbacks
 
 ## Idea
 
-The descent property of equivalences is a somewhat degenerate form of a descent
-property. It asserts that in a commuting diagram of the form
+The
+{{#concept "descent property" Disambiguation="of equivalences" Agda=descent-is-equiv Agda=descent-equiv}}
+of [equivalences](foundation-core.equivalences.md) is a somewhat degenerate form
+of a descent property. It asserts that in a commuting diagram of the form
 
 ```text
-     p        q
- A -----> B -----> C
- |        |        |
-f|       g|        |h
- ∨        ∨        ∨
- X -----> Y -----> Z,
-     i        j
+       p        q
+   A -----> B -----> C
+   |        |        |
+  f|       g|        |h
+   ∨        ∨        ∨
+   X -----> Y -----> Z,
+       i        j
 ```
 
-if the maps `i` and `p` are equivalences, then the right square is a pullback if
-and only if the outer rectangle is a pullback.
+if the maps `i` and `p` are equivalences, then the right square is a
+[pullback](foundation-core.pullbacks.md) if and only if the outer rectangle is a
+pullback.
 
 ## Theorem
 

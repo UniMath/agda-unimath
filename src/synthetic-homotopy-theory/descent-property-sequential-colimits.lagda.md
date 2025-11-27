@@ -1,4 +1,4 @@
-# Descent property of sequential colimits
+# Descent for sequential colimits
 
 ```agda
 module synthetic-homotopy-theory.descent-property-sequential-colimits where

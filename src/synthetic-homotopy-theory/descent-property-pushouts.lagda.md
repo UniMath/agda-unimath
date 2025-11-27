@@ -1,4 +1,4 @@
-# Descent property of pushouts
+# Descent for pushouts
 
 ```agda
 module synthetic-homotopy-theory.descent-property-pushouts where
@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 The
-{{#concept "descent property" Disambiguation="pushouts" Agda=uniqueness-family-cocone-descent-data-pushout WDID=Q5263725 WD="descent"}}
+{{#concept "descent property" Disambiguation="of pushouts" Agda=uniqueness-family-cocone-descent-data-pushout WDID=Q5263725 WD="descent"}}
 of [pushouts](synthetic-homotopy-theory.pushouts.md) states that given a pushout
 
 ```text
