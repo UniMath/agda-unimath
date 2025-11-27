@@ -397,7 +397,13 @@ module _
 
 ## See also
 
-We also have a series of files for descent on the circle of particular forms.
+- [Dependent descent for the circle](synthetic-homotopy-theory.dependent-descent-circle.md)
+- [Descent data for constant type families over the circle](synthetic-homotopy-theory.descent-circle-constant-families.md)
+- [Descent data for families of dependent pair types over the circle](synthetic-homotopy-theory.descent-circle-dependent-pair-types.md)
+- [Descent data for families of equivalence types over the circle](synthetic-homotopy-theory.descent-circle-equivalence-types.md)
+- [Descent data for families of function types over the circle](synthetic-homotopy-theory.descent-circle-function-types.md)
+- [Sections of families over the circle](synthetic-homotopy-theory.sections-descent-circle.md)
+- [Subtypes of descent data for the circle](synthetic-homotopy-theory.descent-circle-subtypes.md)
 
 ## Table of descent properties
 
