@@ -105,7 +105,7 @@ module _
 
   cone-descent-coproduct :
     cone (rec-coproduct f g) i (A' + B')
-  pr1 (cone-descent-coproduct) = map-coproduct h k
+  pr1 cone-descent-coproduct = map-coproduct h k
   pr1 (pr2 cone-descent-coproduct) (inl a') = f' a'
   pr1 (pr2 cone-descent-coproduct) (inr b') = g' b'
   pr2 (pr2 cone-descent-coproduct) (inl a') = H a'
@@ -152,10 +152,7 @@ module _
     descent-coproduct :
       is-pullback f i α →
       is-pullback g i β →
-      is-pullback
-        ( rec-coproduct f g)
-        ( i)
-        ( cone-descent-coproduct)
+      is-pullback (rec-coproduct f g) i cone-descent-coproduct
     descent-coproduct is-pb-α is-pb-β =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( rec-coproduct f g)
@@ -167,10 +164,7 @@ module _
 
   abstract
     descent-coproduct-inl :
-      is-pullback
-        ( rec-coproduct f g)
-        ( i)
-        ( cone-descent-coproduct) →
+      is-pullback (rec-coproduct f g) i cone-descent-coproduct →
       is-pullback f i α
     descent-coproduct-inl is-pb-dsq =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone f i
@@ -194,10 +188,7 @@ module _
 
   abstract
     descent-coproduct-inr :
-      is-pullback
-        ( rec-coproduct f g)
-        ( i)
-        ( cone-descent-coproduct) →
+      is-pullback (rec-coproduct f g) i cone-descent-coproduct →
       is-pullback g i β
     descent-coproduct-inr is-pb-dsq =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone g i
