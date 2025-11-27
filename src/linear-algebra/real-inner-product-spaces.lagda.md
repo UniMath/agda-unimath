@@ -325,16 +325,16 @@ module _
         inner-product-ℝ-Inner-Product-Space V v w)
     right-distributive-inner-product-diff-ℝ-Inner-Product-Space u v w =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
         _-V_ = diff-ℝ-Inner-Product-Space V
         neg-V = neg-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (u -V v) ∙V w
-          ＝ (u ∙V w) +ℝ (neg-V v ∙V w)
+          ⟨ u -V v ,V w ⟩
+          ＝ ⟨ u ,V w ⟩ +ℝ ⟨ neg-V v ,V w ⟩
             by is-left-additive-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ (u ∙V w) -ℝ (v ∙V w)
+          ＝ ⟨ u ,V w ⟩ -ℝ ⟨ v ,V w ⟩
             by
               ap-add-ℝ
                 ( refl)
@@ -402,15 +402,15 @@ module _
       square-ℝ c *ℝ squared-norm-ℝ-Inner-Product-Space V v
     squared-norm-mul-ℝ-Inner-Product-Space c v =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
         _*V_ = mul-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (c *V v) ∙V (c *V v)
-          ＝ c *ℝ (v ∙V (c *V v))
+          ⟨ c *V v ,V c *V v ⟩
+          ＝ c *ℝ ⟨ v ,V c *V v ⟩
             by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ c *ℝ (c *ℝ (v ∙V v))
+          ＝ c *ℝ (c *ℝ ⟨ v ,V v ⟩)
             by
               ap-mul-ℝ
                 ( refl)
@@ -419,7 +419,7 @@ module _
                   ( _)
                   ( _)
                   ( _))
-          ＝ (c *ℝ c) *ℝ (v ∙V v)
+          ＝ (c *ℝ c) *ℝ ⟨ v ,V v ⟩
             by inv (associative-mul-ℝ _ _ _)
 
     is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space :

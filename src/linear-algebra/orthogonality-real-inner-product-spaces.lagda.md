@@ -143,13 +143,13 @@ module _
       is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
     preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v∙w=0 =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
         _*V_ = mul-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (c *V v) ∙V w
-          ＝ c *ℝ (v ∙V w)
+          ⟨ c *V v ,V w ⟩
+          ＝ c *ℝ ⟨ v ,V w ⟩
             by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
           ＝ c *ℝ raise-ℝ l1 zero-ℝ
             by ap-mul-ℝ refl v∙w=0
