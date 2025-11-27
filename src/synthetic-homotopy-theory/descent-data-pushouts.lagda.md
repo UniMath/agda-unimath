@@ -39,8 +39,7 @@ is a triple `(PA, PB, PS)`, where `PA : A → 𝒰` is a type family over `A`,
   PS : (s : S) → PA (f a) ≃ PB (g a).
 ```
 
-In
-[`descent-property-pushouts`](synthetic-homotopy-theory.descent-property-pushouts.md),
+In [`descent-property-pushouts`](synthetic-homotopy-theory.descent-pushouts.md),
 we show that this is exactly the data one needs to "glue together" a type family
 `P : X → 𝒰` over the pushout `X` of `𝒮`.
 

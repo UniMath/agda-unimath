@@ -1,7 +1,7 @@
 # Descent for sequential colimits
 
 ```agda
-module synthetic-homotopy-theory.descent-property-sequential-colimits where
+module synthetic-homotopy-theory.descent-sequential-colimits where
 ```
 
 <details><summary>Imports</summary>

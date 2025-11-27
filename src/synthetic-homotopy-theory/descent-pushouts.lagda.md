@@ -1,7 +1,7 @@
 # Descent for pushouts
 
 ```agda
-module synthetic-homotopy-theory.descent-property-pushouts where
+module synthetic-homotopy-theory.descent-pushouts where
 ```
 
 <details><summary>Imports</summary>
