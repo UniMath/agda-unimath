@@ -344,7 +344,7 @@ module _
                   by commutative-dist-Normed-ℝ-Vector-Space V y x)))
 ```
 
-### Addition is an isometry in the metric space of a normed vector space
+### Left addition is an isometry in the metric space of a normed vector space
 
 ```agda
 module _
