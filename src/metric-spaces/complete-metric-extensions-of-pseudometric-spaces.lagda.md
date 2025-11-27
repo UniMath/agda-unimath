@@ -69,10 +69,7 @@ of a [pseudometric space](metric-spaces.pseudometric-spaces.md) is a
 such that the target [metric space](metric-spaces.metric-spaces.md) is
 [complete](metric-spaces.complete-metric-spaces.md).
 
-Any **complete metric extension** of a pseudometric space induces a metric
-extension of its
-[cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
-hence a
+Any **complete metric extension** of a pseudometric space is a
 [Cauchy metric extension](metric-spaces.cauchy-metric-extensions-of-pseudometric-spaces.md).
 
 ## Definitions
@@ -145,7 +142,7 @@ module _
 
 ## Properties
 
-### Any complete metric extension induces a metric extension of the Cauchy pseudocompletion
+### Any complete metric extension is Cauchy
 
 ```agda
 module _
@@ -171,24 +168,37 @@ module _
         ( P)
         ( extension-Complete-Metric-Extension P M))
 
-  extension-cauchy-pseudocompletion-Complete-Metric-Extension :
-    Metric-Extension l3 l4 (cauchy-pseudocompletion-Pseudometric-Space P)
-  extension-cauchy-pseudocompletion-Complete-Metric-Extension =
-    ( metric-space-Complete-Metric-Extension P M ,
-      isometry-cauchy-pseudocompletion-Complete-Metric-Extension)
-```
+  coh-isometry-cauchy-pseudocompletion-Complete-Metric-Extension :
+    coherence-triangle-cauchy-Metric-Extension
+      ( P)
+      ( extension-Complete-Metric-Extension P M)
+      ( isometry-cauchy-pseudocompletion-Complete-Metric-Extension)
+  coh-isometry-cauchy-pseudocompletion-Complete-Metric-Extension u =
+    ( ap
+      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+        ( metric-space-Complete-Metric-Extension P M)
+        ( is-complete-metric-space-Complete-Metric-Extension P M))
+      ( htpy-map-cauchy-pseudocompletion-Metric-Extension
+        ( P)
+        ( extension-Complete-Metric-Extension P M)
+        ( u))) ∙
+    ( is-retraction-limit-cauchy-approximation-Complete-Metric-Space
+      ( complete-metric-space-Complete-Metric-Extension P M)
+      ( map-isometry-metric-space-Metric-Extension
+        ( P)
+        ( extension-Complete-Metric-Extension P M)
+        ( u)))
 
-### Any complete metric extension induces a Cauchy metric extension
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Complete-Metric-Extension l3 l4 P)
-  where
+  is-cauchy-metric-extension-Complete-Metric-Extension :
+    is-cauchy-Metric-Extension
+      ( P)
+      ( extension-Complete-Metric-Extension P M)
+  is-cauchy-metric-extension-Complete-Metric-Extension =
+    ( isometry-cauchy-pseudocompletion-Complete-Metric-Extension ,
+      coh-isometry-cauchy-pseudocompletion-Complete-Metric-Extension)
 
   cauchy-extension-Complete-Metric-Extension : Cauchy-Metric-Extension l3 l4 P
   cauchy-extension-Complete-Metric-Extension =
-    cauchy-extension-cauchy-pseudocompletion-Metric-Extension P
-      ( extension-cauchy-pseudocompletion-Complete-Metric-Extension P M)
+    ( extension-Complete-Metric-Extension P M ,
+      is-cauchy-metric-extension-Complete-Metric-Extension)
 ```
