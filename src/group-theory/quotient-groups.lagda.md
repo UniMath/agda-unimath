@@ -46,10 +46,11 @@ Given a [normal subgroup](group-theory.normal-subgroups.md) `N` of `G`, the
 `G/N` is a [group](group-theory.groups.md) equipped with a
 [group homomorphism](group-theory.homomorphisms-groups.md) `q : G → G/N` such
 that `N ⊆ ker q`, and such that `q` satisfies the
-{{#concept "universal property of the quotient group" Agda=universal-property-quotient-Group}},
-which asserts that any group homomorphism `f : G → H` such that `N ⊆ ker f`
-extends uniquely along `q` to a group homomorphism `G/N → H`. In other words,
-the universal property of the quotient group `G/N` asserts that the map
+{{#concept "universal property" Disambiguation="of the quotient group" Agda=universal-property-quotient-Group}}
+of the quotient group, which asserts that any group homomorphism `f : G → H`
+such that `N ⊆ ker f` extends uniquely along `q` to a group homomorphism
+`G/N → H`. In other words, the universal property of the quotient group `G/N`
+asserts that the map
 
 ```text
   hom-Group G/N H → nullifying-hom-Group G H N
