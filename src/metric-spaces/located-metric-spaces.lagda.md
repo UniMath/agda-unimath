@@ -133,6 +133,14 @@ module _
   triangular-neighborhood-Located-Metric-Space =
     triangular-neighborhood-Metric-Space metric-space-Located-Metric-Space
 
+  monotonic-neighborhood-Located-Metric-Space :
+    (x y : type-Located-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    le-ℚ⁺ d₁ d₂ →
+    neighborhood-Located-Metric-Space d₁ x y →
+    neighborhood-Located-Metric-Space d₂ x y
+  monotonic-neighborhood-Located-Metric-Space =
+    monotonic-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
   is-located-Located-Metric-Space :
     is-located-Metric-Space metric-space-Located-Metric-Space
   is-located-Located-Metric-Space = pr2 X
@@ -222,4 +230,23 @@ module _
   nonnegative-real-dist-Metric-Space =
     ( real-dist-located-Metric-Space ,
       is-nonnegative-real-dist-located-Metric-Space)
+```
+
+### Located metric subspaces
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  where
+
+  subspace-Located-Metric-Space : Metric-Space (l1 ⊔ l3) l2
+  subspace-Located-Metric-Space =
+    subspace-Metric-Space (metric-space-Located-Metric-Space X) S
+
+  located-subspace-Located-Metric-Space : Located-Metric-Space (l1 ⊔ l3) l2
+  located-subspace-Located-Metric-Space =
+    ( subspace-Located-Metric-Space ,
+      λ (x , _) (y , _) → is-located-Located-Metric-Space X x y)
 ```

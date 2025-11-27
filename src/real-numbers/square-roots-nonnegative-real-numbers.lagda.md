@@ -51,12 +51,17 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -645,4 +650,48 @@ abstract
                       ( ap-mul-ℝ⁰⁺
                         ( is-section-square-ℝ⁰⁺ x)
                         ( is-section-square-ℝ⁰⁺ y)))))))
+```
+
+### The square root of a nonnegative real number is positive if and only if the real number is positive
+
+```agda
+abstract opaque
+  unfolding real-sqrt-ℝ⁰⁺
+
+  is-positive-sqrt-is-positive-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → is-positive-ℝ (real-ℝ⁰⁺ x) →
+    is-positive-ℝ (real-sqrt-ℝ⁰⁺ x)
+  is-positive-sqrt-is-positive-ℝ⁰⁺ x⁰⁺@(x , _) 0<x =
+    is-positive-zero-in-lower-cut-ℝ
+      ( real-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( λ _ →
+        inv-tr
+          ( is-in-lower-cut-ℝ x)
+          ( left-zero-law-mul-ℚ zero-ℚ)
+          ( zero-in-lower-cut-ℝ⁺ (x , 0<x)))
+
+  is-positive-is-positive-sqrt-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) →
+    is-positive-ℝ (real-sqrt-ℝ⁰⁺ x) → is-positive-ℝ (real-ℝ⁰⁺ x)
+  is-positive-is-positive-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) 0<√x =
+    tr
+      ( is-positive-ℝ)
+      ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( is-positive-mul-ℝ 0<√x 0<√x)
+
+is-positive-sqrt-iff-is-positive-ℝ⁰⁺ :
+  {l : Level} (x : ℝ⁰⁺ l) →
+  is-positive-ℝ (real-sqrt-ℝ⁰⁺ x) ↔ is-positive-ℝ (real-ℝ⁰⁺ x)
+is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
+  ( is-positive-is-positive-sqrt-ℝ⁰⁺ x ,
+    is-positive-sqrt-is-positive-ℝ⁰⁺ x)
+```
+
+### The square root of zero is zero
+
+```agda
+abstract
+  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
+  real-sqrt-zero-ℝ⁰⁺ =
+    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
 ```

@@ -9,6 +9,10 @@ module real-numbers.positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -85,9 +89,9 @@ is-positive-real-ℝ⁺ = pr2
 abstract
   is-positive-sim-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-    is-positive-ℝ x → sim-ℝ x y → is-positive-ℝ y
-  is-positive-sim-ℝ {x = x} {y = y} 0<x x~y =
-    preserves-le-right-sim-ℝ zero-ℝ x y x~y 0<x
+    sim-ℝ x y → is-positive-ℝ x → is-positive-ℝ y
+  is-positive-sim-ℝ {x = x} {y = y} =
+    preserves-le-right-sim-ℝ zero-ℝ x y
 ```
 
 ### Dedekind cuts of positive real numbers
@@ -202,44 +206,6 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ :
 exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 
-### Addition with a positive real number is a strictly inflationary map
-
-```agda
-abstract opaque
-  unfolding add-ℝ le-ℝ
-
-  le-left-add-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
-  le-left-add-real-ℝ⁺ x d⁺@(d , pos-d) =
-    tr
-      ( λ y → le-ℝ y (x +ℝ d))
-      ( right-unit-law-add-ℝ x)
-      ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
-
-le-right-add-real-ℝ⁺ :
-  {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
-le-right-add-real-ℝ⁺ x d =
-  tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
-```
-
-### Subtraction by a positive real number is a strictly deflationary map
-
-```agda
-abstract
-  le-diff-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ (x -ℝ real-ℝ⁺ d) x
-  le-diff-real-ℝ⁺ x d⁺@(d , _) =
-    preserves-le-right-sim-ℝ
-      ( x -ℝ d)
-      ( (x -ℝ d) +ℝ d)
-      ( x)
-      ( tr
-        ( λ y → sim-ℝ y x)
-        ( right-swap-add-ℝ x d (neg-ℝ d))
-        ( cancel-right-add-diff-ℝ x d))
-      ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
-```
-
 ### `x < y` if and only if `y - x` is positive
 
 ```agda
@@ -289,6 +255,35 @@ positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ 
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+
+is-positive-one-ℝ : is-positive-ℝ one-ℝ
+is-positive-one-ℝ = is-positive-real-ℝ⁺ one-ℝ⁺
+```
+
+### The canonical embedding of integers preserves positivity
+
+```agda
+abstract
+  preserves-is-positive-real-ℤ :
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℝ (real-ℤ x)
+  preserves-is-positive-real-ℤ pos-x =
+    preserves-is-positive-real-ℚ (is-positive-rational-ℤ pos-x)
+
+positive-real-ℤ⁺ : ℤ⁺ → ℝ⁺ lzero
+positive-real-ℤ⁺ (x , pos-x) = (real-ℤ x , preserves-is-positive-real-ℤ pos-x)
+```
+
+### The canonical embedding of a nonzero natural number is positive
+
+```agda
+abstract
+  is-positive-real-is-nonzero-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-positive-ℝ (real-ℕ n)
+  is-positive-real-is-nonzero-ℕ n≠0 =
+    preserves-is-positive-real-ℤ (is-positive-int-is-nonzero-ℕ _ n≠0)
+
+positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
+positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
 ```
 
 ### `x` is positive if and only if there exists a positive rational number it is not less than or equal to

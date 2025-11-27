@@ -17,9 +17,11 @@ open import foundation.universe-levels
 
 open import metric-spaces.metric-space-of-short-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.least-upper-bounds-large-posets
 
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -29,6 +31,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -128,6 +131,13 @@ module _
       ( metric-space-ℝ (l1 ⊔ l2))
   short-left-max-ℝ =
     (max-ℝ x , is-short-function-left-max-ℝ)
+
+  uniformly-continuous-left-max-ℝ : uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-left-max-ℝ =
+    uniformly-continuous-short-function-Metric-Space
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
+      ( short-left-max-ℝ)
 ```
 
 ### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`

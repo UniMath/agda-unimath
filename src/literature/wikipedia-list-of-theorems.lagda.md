@@ -176,6 +176,15 @@ open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```
 
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
 ### Yoneda lemma {#Q320577}
 
 **Author:** [Emily Riehl](https://emilyriehl.github.io/)

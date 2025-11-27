@@ -9,8 +9,11 @@ module real-numbers.binary-maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -25,6 +28,7 @@ open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -106,6 +110,11 @@ module _
         ( upper-real-max-ℝ)
         ( is-disjoint-lower-upper-max-ℝ)
         ( is-located-lower-upper-max-ℝ)
+
+ap-max-ℝ :
+  {l1 l2 : Level} → {x x' : ℝ l1} → x ＝ x' →
+  {y y' : ℝ l2} → y ＝ y' → max-ℝ x y ＝ max-ℝ x' y'
+ap-max-ℝ = ap-binary max-ℝ
 ```
 
 ## Properties
@@ -374,4 +383,54 @@ module _
                       ( r<max))))
               ( is-located-lower-upper-cut-ℝ y q<r))
           ( is-located-lower-upper-cut-ℝ x q<r)
+```
+
+### If `x < z` and `y < z`, then `max-ℝ x y < z`
+
+```agda
+abstract
+  le-max-le-le-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} → le-ℝ x z → le-ℝ y z →
+    le-ℝ (max-ℝ x y) z
+  le-max-le-le-ℝ {x = x} {y = y} {z = z} x<z y<z =
+    let open do-syntax-trunc-Prop (le-prop-ℝ (max-ℝ x y) z)
+    in do
+      (p , x<p , p<z) ← dense-rational-le-ℝ x z x<z
+      (q , y<q , q<z) ← dense-rational-le-ℝ y z y<z
+      rec-coproduct
+        ( λ p≤q →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ q)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ q)
+              ( transitive-leq-ℝ
+                ( x)
+                ( real-ℚ p)
+                ( real-ℚ q)
+                ( preserves-leq-real-ℚ p≤q)
+                ( leq-le-ℝ x<p))
+              ( leq-le-ℝ y<q))
+            ( q<z))
+        ( λ q≤p →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ p)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ p)
+              ( leq-le-ℝ x<p)
+              ( transitive-leq-ℝ
+                ( y)
+                ( real-ℚ q)
+                ( real-ℚ p)
+                ( preserves-leq-real-ℚ q≤p)
+                ( leq-le-ℝ y<q)))
+            ( p<z))
+        ( linear-leq-ℚ p q)
 ```
