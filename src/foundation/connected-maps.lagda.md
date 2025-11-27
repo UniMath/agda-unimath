@@ -54,19 +54,19 @@ if its [fibers](foundation-core.fibers-of-maps.md) are
 ### Connected maps
 
 ```agda
-is-connected-map-Prop :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-connected-map-Prop k {B = B} f =
-  Π-Prop B (λ b → is-connected-Prop k (fiber f b))
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-is-connected-map :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-connected-map k f = type-Prop (is-connected-map-Prop k f)
+  is-connected-map-Prop : Prop (l1 ⊔ l2)
+  is-connected-map-Prop =
+    Π-Prop B (λ b → is-connected-Prop k (fiber f b))
 
-is-prop-is-connected-map :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-connected-map k f)
-is-prop-is-connected-map k f = is-prop-type-Prop (is-connected-map-Prop k f)
+  is-connected-map : UU (l1 ⊔ l2)
+  is-connected-map = type-Prop is-connected-map-Prop
+
+  is-prop-is-connected-map : is-prop is-connected-map
+  is-prop-is-connected-map = is-prop-type-Prop is-connected-map-Prop
 ```
 
 ### The type of connected maps between two types
@@ -325,6 +325,34 @@ is-connected-map-left-factor k {g = g} {h} H GH z =
     ( is-connected-equiv' (compute-fiber-comp g h z) (GH z))
 ```
 
+### Composition and cancellation in commuting triangles
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (K : f ~ g ∘ h)
+  where
+
+  abstract
+    is-connected-map-left-map-triangle :
+      is-connected-map k h →
+      is-connected-map k g →
+      is-connected-map k f
+    is-connected-map-left-map-triangle H G =
+      is-connected-map-htpy k K
+        ( is-connected-map-comp k G H)
+
+  abstract
+    is-connected-map-right-map-triangle :
+      is-connected-map k f →
+      is-connected-map k h →
+      is-connected-map k g
+    is-connected-map-right-map-triangle F H =
+      is-connected-map-left-factor k
+        ( H)
+        ( is-connected-map-htpy' k K F)
+```
+
 ### The total map induced by a family of maps is `k`-connected if and only if all maps in the family are `k`-connected
 
 ```agda
@@ -377,14 +405,26 @@ module _
     is-equiv (precomp-Π f (λ b → type-Truncated-Type (P b)))
 
 module _
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-connected-map k f)
   where
 
-  dependent-universal-property-is-connected-map :
-    is-connected-map k f → dependent-universal-property-connected-map k f
-  dependent-universal-property-is-connected-map H P =
-    is-equiv-precomp-Π-fiber-condition
-      ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
+  abstract
+    dependent-universal-property-is-connected-map :
+      dependent-universal-property-connected-map k f
+    dependent-universal-property-is-connected-map P =
+      is-equiv-precomp-Π-fiber-condition
+        ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : connected-map k A B)
+  where
+
+  dup-connected-map :
+    dependent-universal-property-connected-map k (map-connected-map f)
+  dup-connected-map =
+    dependent-universal-property-is-connected-map
+      ( is-connected-map-connected-map f)
 
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : connected-map k A B)
@@ -397,9 +437,52 @@ module _
   pr1 (equiv-dependent-universal-property-is-connected-map P) =
     precomp-Π (map-connected-map f) (λ b → type-Truncated-Type (P b))
   pr2 (equiv-dependent-universal-property-is-connected-map P) =
-    dependent-universal-property-is-connected-map k
+    dependent-universal-property-is-connected-map
       ( is-connected-map-connected-map f)
       ( P)
+```
+
+### The induction principle for connected maps
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-connected-map k f)
+  where
+
+  ind-is-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    ((a : A) → type-Truncated-Type (P (f a))) →
+    (b : B) → type-Truncated-Type (P b)
+  ind-is-connected-map P =
+    map-inv-is-equiv (dependent-universal-property-is-connected-map H P)
+
+  compute-ind-is-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    (g : (a : A) → type-Truncated-Type (P (f a))) →
+    (x : A) → ind-is-connected-map P g (f x) ＝ g x
+  compute-ind-is-connected-map P f =
+    htpy-eq
+      ( is-section-map-inv-is-equiv
+        ( dependent-universal-property-is-connected-map H P)
+        ( f))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : connected-map k A B)
+  where
+
+  ind-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    ((a : A) → type-Truncated-Type (P (map-connected-map f a))) →
+    (b : B) → type-Truncated-Type (P b)
+  ind-connected-map = ind-is-connected-map (is-connected-map-connected-map f)
+
+  compute-ind-connected-map :
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    (g : (a : A) → type-Truncated-Type (P (map-connected-map f a))) →
+    (x : A) → ind-connected-map P g (map-connected-map f x) ＝ g x
+  compute-ind-connected-map =
+    compute-ind-is-connected-map (is-connected-map-connected-map f)
 ```
 
 ### A map that satisfies the dependent universal property for connected maps is a connected map
@@ -510,7 +593,7 @@ abstract
       ( precomp-Π f (λ b → type-Truncated-Type (P b)))
   is-trunc-map-precomp-Π-is-connected-map k neg-two-𝕋 H P =
     is-contr-map-is-equiv
-      ( dependent-universal-property-is-connected-map k H
+      ( dependent-universal-property-is-connected-map H
         ( λ b →
           pair
             ( type-Truncated-Type (P b))
