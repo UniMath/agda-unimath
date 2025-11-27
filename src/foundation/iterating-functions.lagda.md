@@ -21,6 +21,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopy-algebra
 open import foundation.propositional-maps
 open import foundation.subtypes
 open import foundation.truncated-maps
@@ -29,6 +30,7 @@ open import foundation.universe-levels
 
 open import foundation-core.endomorphisms
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
 
@@ -111,6 +113,24 @@ module _
   pr2 (pr1 (pr2 iterative-action-Monoid)) {k} {l} =
     eq-htpy (λ f → eq-htpy (λ x → iterate-mul-ℕ k l f x))
   pr2 (pr2 iterative-action-Monoid) = refl
+```
+
+### Homotopies of iterates
+
+```agda
+module _
+  {l : Level} {X : UU l} {f g : X → X}
+  where
+
+  htpy-iterate :
+    (n : ℕ) → f ~ g → iterate n f ~ iterate n g
+  htpy-iterate zero-ℕ H = refl-htpy
+  htpy-iterate (succ-ℕ n) H = horizontal-concat-htpy H (htpy-iterate n H)
+
+  htpy-iterate' :
+    (n : ℕ) → f ~ g → iterate' n f ~ iterate' n g
+  htpy-iterate' zero-ℕ H = refl-htpy
+  htpy-iterate' (succ-ℕ n) H = horizontal-concat-htpy (htpy-iterate' n H) H
 ```
 
 ### If `f : X → X` satisfies a property of endofunctions on `X`, and the property is closed under composition then iterates of `f` satisfy the property

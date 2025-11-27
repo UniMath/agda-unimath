@@ -276,6 +276,7 @@ open import foundation.irrefutable-equality public
 open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
+open import foundation.iterate-confluent-maps public
 open import foundation.iterated-cartesian-product-types public
 open import foundation.iterated-dependent-pair-types public
 open import foundation.iterated-dependent-product-types public
