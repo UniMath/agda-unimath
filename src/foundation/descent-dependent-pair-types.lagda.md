@@ -54,6 +54,8 @@ for every `i`, then the family is a family of
 
 is a pullback cone.
 
+This descent property appears as Theorem 2.2 in {{#cite CR21}}.
+
 ## Theorem
 
 ```agda
@@ -131,6 +133,10 @@ module _
     is-pullback (rec-Σ f) h cone-descent-Σ
   iff-descent-Σ = (descent-Σ , descent-Σ')
 ```
+
+## References
+
+{{#bibliography}}
 
 ## Table of descent properties
 
