@@ -117,6 +117,15 @@ open import foundation.fundamental-theorem-of-equivalence-relations using
   ( equiv-equivalence-relation-partition)
 ```
 
+### Fundamental theorem on homomorphisms {#Q1187646}
+
+**Author:** [Egbert Rijke](https://egbertrijke.github.io)
+
+```agda
+open import group-theory.quotient-groups using
+  ( is-quotient-group-quotient-Group)
+```
+
 ### Kleene's fixed point theorem {#Q3527263}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -147,6 +156,24 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Triangle inequality theorem {#Q208216}
+
+**Author:** [malarbol](https://github.com/malarbol)
+
+```agda
+open import real-numbers.metric-space-of-real-numbers using
+  ( is-triangular-neighborhood-ℝ)
+```
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.absolute-value-real-numbers using
+  ( triangle-inequality-abs-ℝ)
+open import real-numbers.distance-real-numbers using
+  ( triangle-inequality-dist-ℝ)
 ```
 
 ### Pythagorean theorem {#Q11518}
