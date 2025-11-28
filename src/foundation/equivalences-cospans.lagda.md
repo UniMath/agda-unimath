@@ -125,21 +125,23 @@ module _
   equiv-eq-cospan : (c d : cospan l3 A B) → c ＝ d → equiv-cospan c d
   equiv-eq-cospan c .c refl = id-equiv-cospan c
 
-  is-torsorial-equiv-cospan :
-    (c : cospan l3 A B) → is-torsorial (equiv-cospan c)
-  is-torsorial-equiv-cospan c =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (pr1 c))
-      ( cospanning-type-cospan c , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy' (left-map-cospan c))
-        ( left-map-cospan c , refl-htpy)
-        ( is-torsorial-htpy' (right-map-cospan c)))
+  abstract
+    is-torsorial-equiv-cospan :
+      (c : cospan l3 A B) → is-torsorial (equiv-cospan {l1} {l2} {l3} {l3} c)
+    is-torsorial-equiv-cospan c =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (pr1 c))
+        ( cospanning-type-cospan c , id-equiv)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-htpy' (left-map-cospan c))
+          ( left-map-cospan c , refl-htpy)
+          ( is-torsorial-htpy' (right-map-cospan c)))
 
-  is-equiv-equiv-eq-cospan :
-    (c d : cospan l3 A B) → is-equiv (equiv-eq-cospan c d)
-  is-equiv-equiv-eq-cospan c =
-    fundamental-theorem-id (is-torsorial-equiv-cospan c) (equiv-eq-cospan c)
+  abstract
+    is-equiv-equiv-eq-cospan :
+      (c d : cospan l3 A B) → is-equiv (equiv-eq-cospan c d)
+    is-equiv-equiv-eq-cospan c =
+      fundamental-theorem-id (is-torsorial-equiv-cospan c) (equiv-eq-cospan c)
 
   extensionality-cospan :
     (c d : cospan l3 A B) → (c ＝ d) ≃ (equiv-cospan c d)
