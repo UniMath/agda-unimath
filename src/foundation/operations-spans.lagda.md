@@ -93,8 +93,7 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g`
-as indicated in the diagram
+and a equivalence of arrows `h : equiv-arrow g' g` as indicated in the diagram
 
 ```text
                g'
