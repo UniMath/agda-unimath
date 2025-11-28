@@ -7,8 +7,11 @@ module foundation.idempotent-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.homotopy-algebra
+open import foundation.iterate-confluent-maps
+open import foundation.pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -77,7 +80,7 @@ is-idempotent f = f ∘ f ~ f
 ### The type of idempotent maps on a type
 
 ```agda
-idempotent-map : {l : Level} (A : UU l) → UU l
+idempotent-map : {l : Level} → UU l → UU l
 idempotent-map A = Σ (A → A) (is-idempotent)
 
 module _
@@ -150,6 +153,36 @@ module _
   is-idempotent-inv-htpy : f ~ g → is-idempotent g
   is-idempotent-inv-htpy H =
     horizontal-concat-htpy (inv-htpy H) (inv-htpy H) ∙h F ∙h H
+```
+
+### Pullback presentation of idempotent maps
+
+The type of idempotent maps on a type `A` is the pullback
+
+```text
+     ∙ -------------> (A → A)
+     | ⌟                 |
+     |                   | iterate 2 × id
+     ∨                   ∨
+  (A → A) -----> (A → A) × (A → A).
+            Δ
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  cone-idempotent-map :
+    cone (λ f → f , f ∘ f) (λ g → g , g) (idempotent-map A)
+  cone-idempotent-map =
+    cone-iterate-confluent-map 2 1
+
+  abstract
+    is-pullback-cone-idempotent-map :
+      is-pullback (λ f → f , f ∘ f) (λ g → g , g) cone-idempotent-map
+    is-pullback-cone-idempotent-map =
+      is-pullback-cone-iterate-confluent-map 2 1
 ```
 
 ## See also
