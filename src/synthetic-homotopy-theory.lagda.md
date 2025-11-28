@@ -54,8 +54,8 @@ open import synthetic-homotopy-theory.descent-data-function-types-over-pushouts 
 open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
-open import synthetic-homotopy-theory.descent-property-pushouts public
-open import synthetic-homotopy-theory.descent-property-sequential-colimits public
+open import synthetic-homotopy-theory.descent-pushouts public
+open import synthetic-homotopy-theory.descent-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
 open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
