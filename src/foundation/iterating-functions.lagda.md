@@ -18,12 +18,17 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.propositional-maps
 open import foundation.subtypes
+open import foundation.truncated-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.endomorphisms
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
 
@@ -113,31 +118,77 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {f : X → X}
-  (P : subtype l2 (X → X))
+  {P : (X → X) → UU l2}
   where
 
-  is-in-subtype-iterate-succ-ℕ :
-    (F : is-in-subtype P f) →
-    ( (h g : X → X) →
-      is-in-subtype P h →
-      is-in-subtype P g →
-      is-in-subtype P (h ∘ g)) →
-    (n : ℕ) → is-in-subtype P (iterate (succ-ℕ n) f)
-  is-in-subtype-iterate-succ-ℕ F H zero-ℕ = F
-  is-in-subtype-iterate-succ-ℕ F H (succ-ℕ n) =
-    H f (iterate (succ-ℕ n) f) F (is-in-subtype-iterate-succ-ℕ F H n)
+  is-in-function-class-iterate-succ-ℕ :
+    ( (h g : X → X) → P h → P g → P (h ∘ g)) →
+    (n : ℕ) → (F : P f) → P (iterate (succ-ℕ n) f)
+  is-in-function-class-iterate-succ-ℕ H zero-ℕ F = F
+  is-in-function-class-iterate-succ-ℕ H (succ-ℕ n) F =
+    H f (iterate (succ-ℕ n) f) F (is-in-function-class-iterate-succ-ℕ H n F)
 
-  is-in-subtype-iterate :
-    (I : is-in-subtype P (id {A = X})) →
-    (F : is-in-subtype P f) →
-    ( (h g : X → X) →
-      is-in-subtype P h →
-      is-in-subtype P g →
-      is-in-subtype P (h ∘ g)) →
-    (n : ℕ) → is-in-subtype P (iterate n f)
-  is-in-subtype-iterate I F H zero-ℕ = I
-  is-in-subtype-iterate I F H (succ-ℕ n) =
-    H f (iterate n f) F (is-in-subtype-iterate I F H n)
+  is-in-function-class-iterate :
+    (I : P (id {A = X})) →
+    ((h g : X → X) → P h → P g → P (h ∘ g)) →
+    (n : ℕ) → (F : P f) → P (iterate n f)
+  is-in-function-class-iterate I H zero-ℕ F = I
+  is-in-function-class-iterate I H (succ-ℕ n) F =
+    H f (iterate n f) F (is-in-function-class-iterate I H n F)
+```
+
+### Iterates of equivalences are equivalences
+
+```agda
+module _
+  {l : Level} {X : UU l} {f : X → X}
+  where
+
+  abstract
+    is-equiv-iterate : (n : ℕ) → is-equiv f → is-equiv (iterate n f)
+    is-equiv-iterate =
+      is-in-function-class-iterate is-equiv-id
+        ( λ h g H G → is-equiv-comp h g G H)
+```
+
+### Iterates of embeddings are embeddings
+
+```agda
+module _
+  {l : Level} {X : UU l} {f : X → X}
+  where
+
+  abstract
+    is-emb-iterate : (n : ℕ) → is-emb f → is-emb (iterate n f)
+    is-emb-iterate = is-in-function-class-iterate is-emb-id is-emb-comp
+```
+
+### Iterates of truncated maps are truncated
+
+```agda
+module _
+  {l : Level} (k : 𝕋) {X : UU l} {f : X → X}
+  where
+
+  abstract
+    is-trunc-map-iterate :
+      (n : ℕ) → is-trunc-map k f → is-trunc-map k (iterate n f)
+    is-trunc-map-iterate =
+      is-in-function-class-iterate (is-trunc-map-id k) (is-trunc-map-comp k)
+```
+
+### Iterates of propositional maps are propositional
+
+```agda
+module _
+  {l : Level} (k : 𝕋) {X : UU l} {f : X → X}
+  where
+
+  abstract
+    is-prop-map-iterate :
+      (n : ℕ) → is-prop-map f → is-prop-map (iterate n f)
+    is-prop-map-iterate =
+      is-in-function-class-iterate is-prop-map-id is-prop-map-comp
 ```
 
 ## External links

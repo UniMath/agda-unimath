@@ -28,9 +28,6 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-of-rational-numbers
-
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -154,7 +151,7 @@ module _
       map-disjunction
         ( map-raise)
         ( map-raise)
-        ( is-located-lower-upper-cut-ℝ x p q p<q)
+        ( is-located-lower-upper-cut-ℝ x p<q)
 
   raise-ℝ : ℝ (l0 ⊔ l)
   raise-ℝ =
@@ -170,12 +167,16 @@ module _
 ### Reals are similar to their raised-universe equivalents
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
-  sim-raise-ℝ : {l0 : Level} → (l : Level) → (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
+  sim-raise-ℝ : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
   pr1 (sim-raise-ℝ l x) _ = map-raise
   pr2 (sim-raise-ℝ l x) _ = map-inv-raise
+
+abstract
+  sim-raise-ℝ' : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ (raise-ℝ l x) x
+  sim-raise-ℝ' l x = symmetric-sim-ℝ (sim-raise-ℝ l x)
 ```
 
 ### Raising a real to its own level is the identity

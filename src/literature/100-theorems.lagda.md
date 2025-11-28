@@ -11,6 +11,17 @@ module literature.100-theorems where
 
 ## The list
 
+### 1. The irrationality of the square root of 2 {#1}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers using
+  ( is-not-square-two-ℚ)
+open import real-numbers.irrationality-square-root-of-two using
+  ( irrational-sqrt-two-ℝ)
+```
+
 ### 3. The denumerability of the rational numbers {#3}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -18,6 +29,15 @@ module literature.100-theorems where
 ```agda
 open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
+```
+
+### 4. The Pythagorean Theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
 ### 11. The infinitude of primes {#11}
@@ -33,16 +53,35 @@ open import elementary-number-theory.infinitude-of-primes using
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
 
-**Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
-agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martin-Escardó,
-hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
-theorem.
-
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
+```
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import foundation.cantor-schroder-bernstein-decidable-embeddings using
+  ( Cantor-Schröder-Bernstein-WLPO)
+```
+
+### 34. Divergence of the Harmonic Series {#34}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.harmonic-series-rational-numbers using
+  ( grows-without-bound-harmonic-series-ℚ)
+```
+
+### 42. Sum of the Reciprocals of the Triangular Numbers {#42}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import elementary-number-theory.triangular-numbers using
+  ( sum-reciprocal-triangular-number-ℕ)
 ```
 
 ### 44. The binomial theorem {#44}
@@ -106,6 +145,16 @@ open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
+### 66. Sum of a Geometric Series {#66}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.geometric-sequences-real-numbers using
+  ( compute-sum-standard-geometric-fin-sequence-ℝ ;
+    compute-sum-standard-geometric-series-ℝ)
+```
+
 ### 68. Sum of an arithmetic series {#68}
 
 **Author:** [malarbol](http://www.github.com/malarbol)
@@ -159,7 +208,6 @@ open import real-numbers.metric-space-of-real-numbers using
 ```agda
 open import real-numbers.absolute-value-real-numbers using
   ( triangle-inequality-abs-ℝ)
-
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```

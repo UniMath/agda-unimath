@@ -10,7 +10,6 @@ module real-numbers.negative-real-numbers where
 
 ```agda
 open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -92,4 +92,14 @@ module _
     is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ =
       ( exists-ℚ⁻-in-upper-cut-is-negative-ℝ ,
         is-negative-exists-ℚ⁻-in-upper-cut-ℝ)
+```
+
+### Being nonnegative is preserved by similarity
+
+```agda
+abstract
+  is-negative-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → is-negative-ℝ x → is-negative-ℝ y
+  is-negative-sim-ℝ = preserves-le-left-sim-ℝ _ _ _
 ```

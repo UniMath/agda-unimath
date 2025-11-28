@@ -8,6 +8,7 @@ module foundation.surjective-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.coinhabited-pairs-of-types
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -51,7 +52,9 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
+open import orthogonal-factorization-systems.equality-extensions-maps
 open import orthogonal-factorization-systems.extensions-maps
+open import orthogonal-factorization-systems.postcomposition-extensions-maps
 ```
 
 </details>
@@ -246,6 +249,21 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-empty A → is-empty B
   is-empty-surjection A↠B ¬A b =
     rec-trunc-Prop empty-Prop (¬A ∘ pr1) (is-surjective-map-surjection A↠B b)
+```
+
+### If a type `A` has a surjection into `B`, `A` and `B` are coinhabited
+
+```agda
+abstract
+  is-coinhabited-surjection :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ↠ B → is-coinhabited A B
+  pr1 (is-coinhabited-surjection A↠B) = map-is-inhabited (map-surjection A↠B)
+  pr2 (is-coinhabited-surjection A↠B) |B| =
+    let open do-syntax-trunc-Prop (is-inhabited-Prop _)
+    in do
+      b ← |B|
+      (a , fa=b) ← is-surjective-map-surjection A↠B b
+      unit-trunc-Prop a
 ```
 
 ### Any split surjective map is surjective
@@ -613,7 +631,7 @@ is-trunc-map-precomp-Π-is-surjective :
   (P : B → Truncated-Type l3 (succ-𝕋 k)) →
   is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
 is-trunc-map-precomp-Π-is-surjective k H =
-  is-trunc-map-precomp-Π-is-connected-map
+  is-trunc-map-precomp-Π-is-connected-map'
     ( neg-one-𝕋)
     ( k)
     ( is-neg-one-connected-map-is-surjective H)
@@ -804,19 +822,19 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
 
-  is-surjective-postcomp-extension-surjective-map :
+  is-surjective-postcomp-extension-map-surjective-map :
     (f : A → B) (i : A → X) (g : X → Y) →
     is-surjective f → is-emb g →
-    is-surjective (postcomp-extension f i g)
-  is-surjective-postcomp-extension-surjective-map f i g H K (h , L) =
+    is-surjective (postcomp-extension-map f i g)
+  is-surjective-postcomp-extension-map-surjective-map f i g H K (h , L) =
     unit-trunc-Prop
       ( ( j , N) ,
-        ( eq-htpy-extension f
+        ( eq-htpy-extension-map f
           ( g ∘ i)
-          ( postcomp-extension f i g (j , N))
+          ( postcomp-extension-map f i g (j , N))
           ( h , L)
-          ( M)
-          ( λ a →
+          ( M ,
+            λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
               ( is-section-map-inv-is-equiv
@@ -840,23 +858,23 @@ module _
     N : i ~ (j ∘ f)
     N a = map-inv-is-equiv (K (i a) (j (f a))) (L a ∙ inv (M (f a)))
 
-  is-equiv-postcomp-extension-is-surjective :
+  is-equiv-postcomp-extension-map-is-surjective :
     (f : A → B) (i : A → X) (g : X → Y) →
     is-surjective f → is-emb g →
-    is-equiv (postcomp-extension f i g)
-  is-equiv-postcomp-extension-is-surjective f i g H K =
+    is-equiv (postcomp-extension-map f i g)
+  is-equiv-postcomp-extension-map-is-surjective f i g H K =
     is-equiv-is-emb-is-surjective
-      ( is-surjective-postcomp-extension-surjective-map f i g H K)
-      ( is-emb-postcomp-extension f i g K)
+      ( is-surjective-postcomp-extension-map-surjective-map f i g H K)
+      ( is-emb-postcomp-extension-map f i g K)
 
-  equiv-postcomp-extension-surjection :
+  equiv-postcomp-extension-map-surjection :
     (f : A ↠ B) (i : A → X) (g : X ↪ Y) →
-    extension (map-surjection f) i ≃
-    extension (map-surjection f) (map-emb g ∘ i)
-  pr1 (equiv-postcomp-extension-surjection f i g) =
-    postcomp-extension (map-surjection f) i (map-emb g)
-  pr2 (equiv-postcomp-extension-surjection f i g) =
-    is-equiv-postcomp-extension-is-surjective
+    extension-map (map-surjection f) i ≃
+    extension-map (map-surjection f) (map-emb g ∘ i)
+  pr1 (equiv-postcomp-extension-map-surjection f i g) =
+    postcomp-extension-map (map-surjection f) i (map-emb g)
+  pr2 (equiv-postcomp-extension-map-surjection f i g) =
+    is-equiv-postcomp-extension-map-is-surjective
       ( map-surjection f)
       ( i)
       ( map-emb g)

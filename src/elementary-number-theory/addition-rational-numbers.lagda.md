@@ -23,7 +23,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.retractions
 open import foundation.sections
@@ -186,6 +185,13 @@ abstract
       ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
       ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
       ＝ neg-ℚ q by left-unit-law-add-ℚ _
+
+  unique-right-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → q ＝ neg-ℚ p
+  unique-right-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      q
+      ＝ neg-ℚ (neg-ℚ q) by inv (neg-neg-ℚ q)
+      ＝ neg-ℚ p by ap neg-ℚ (inv (unique-left-neg-ℚ p q p+q=0))
 ```
 
 ### The negatives of rational numbers distribute over addition
@@ -325,9 +331,9 @@ abstract
 
 ```agda
 abstract
-  succ-rational-int-ℕ :
-    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
-  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
+  succ-rational-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℕ n) ＝ rational-ℕ (succ-ℕ n)
+  succ-rational-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also

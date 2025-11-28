@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -20,10 +21,18 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 
+open import real-numbers.addition-nonnegative-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-nonnegative-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -100,7 +109,7 @@ module _
     is-reflexive-is-metric-of-Metric-Space :
       is-reflexive-distance-function (set-Metric-Space M) ρ
     is-reflexive-is-metric-of-Metric-Space x =
-      sim-zero-le-positive-rational-ℝ⁰⁺
+      sim-zero-leq-positive-rational-ℝ⁰⁺
         ( ρ x x)
         ( λ ε →
           forward-implication
@@ -154,10 +163,10 @@ module _
                     ( r⁺)
                     ( backward-implication
                       ( is-metric-M-ρ r⁺ y z)
-                      ( leq-le-ℝ _ _ ρyz<r))
+                      ( leq-le-ℝ ρyz<r))
                     ( backward-implication
                       ( is-metric-M-ρ q⁺ x y)
-                      ( leq-le-ℝ _ _ ρxy<q)))))
+                      ( leq-le-ℝ ρxy<q)))))
               ( d'<d))
 
     is-extensional-is-metric-of-Metric-Space :
@@ -204,6 +213,37 @@ module _
         ( set-Metric-Space M)
         ( metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ))
   isometric-equiv-metric-is-metric-of-Metric-Space = (id-equiv , is-metric-M-ρ)
+```
+
+### If `ρ` is a metric for a metric space `M`, then `M` is located
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (ρ : distance-function l2 (set-Metric-Space M))
+  (is-metric-M-ρ : is-metric-of-Metric-Space M ρ)
+  where
+
+  abstract
+    is-located-is-metric-of-Metric-Space : is-located-Metric-Space M
+    is-located-is-metric-of-Metric-Space x y δ ε δ<ε =
+      map-disjunction
+        ( λ δ<ρxy Nδxy →
+          not-le-leq-ℝ
+            ( real-ℝ⁰⁺ (ρ x y))
+            ( real-ℚ⁺ δ)
+            ( forward-implication (is-metric-M-ρ δ x y) Nδxy)
+            ( le-real-is-in-lower-cut-ℚ
+              ( real-ℝ⁰⁺ (ρ x y))
+              ( δ<ρxy)))
+        ( λ ρxy<ε →
+          backward-implication
+            ( is-metric-M-ρ ε x y)
+            ( leq-le-ℝ
+              ( le-real-is-in-upper-cut-ℚ
+                ( real-ℝ⁰⁺ (ρ x y))
+                ( ρxy<ε))))
+        ( is-located-lower-upper-cut-ℝ (real-ℝ⁰⁺ (ρ x y)) δ<ε)
 ```
 
 ### If `ρ` is a metric for a metric space `M` at the appropriate universe level, then `M` is equal to the metric space induced by `ρ`

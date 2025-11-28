@@ -45,10 +45,15 @@ open import ring-theory.semirings
 
 ## Idea
 
-The concept of ring vastly generalizes the arithmetical structure on the
-integers. A ring consists of a set equipped with addition and multiplication,
-where the addition operation gives the ring the structure of an abelian group,
-and the multiplication is associative, unital, and distributive over addition.
+The concept of a _ring_ vastly generalizes the
+[arithmetical structure](elementary-number-theory.ring-of-integers.md) on the
+[integers](elementary-number-theory.integers.md). A
+{{#concept "ring" WD="ring" WDID=Q161172 Agda=Ring}} consists of a
+[set](foundation-core.sets.md) [equipped](foundation.structure.md) with addition
+and multiplication, where the addition operation gives the ring the structure of
+an [abelian group](group-theory.abelian-groups.md), and the multiplication is
+associative, unital, and distributive over addition, forming the structure of a
+[monoid](group-theory.monoids.md).
 
 ## Definitions
 
@@ -615,66 +620,7 @@ module _
     bidistributive-mul-add-Semiring (semiring-Ring R)
 ```
 
-### Scalar multiplication of ring elements by a natural number
-
-```agda
-module _
-  {l : Level} (R : Ring l)
-  where
-
-  mul-nat-scalar-Ring : ℕ → type-Ring R → type-Ring R
-  mul-nat-scalar-Ring = mul-nat-scalar-Semiring (semiring-Ring R)
-
-  ap-mul-nat-scalar-Ring :
-    {m n : ℕ} {x y : type-Ring R} →
-    (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring m x ＝ mul-nat-scalar-Ring n y
-  ap-mul-nat-scalar-Ring = ap-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-zero-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) → mul-nat-scalar-Ring 0 x ＝ zero-Ring R
-  left-zero-law-mul-nat-scalar-Ring =
-    left-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  right-zero-law-mul-nat-scalar-Ring :
-    (n : ℕ) → mul-nat-scalar-Ring n (zero-Ring R) ＝ zero-Ring R
-  right-zero-law-mul-nat-scalar-Ring =
-    right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-unit-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) → mul-nat-scalar-Ring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Ring =
-    left-unit-law-mul-nat-scalar-Semiring (semiring-Ring R)
-
-  left-nat-scalar-law-mul-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-Ring R (mul-nat-scalar-Ring n x) y ＝
-    mul-nat-scalar-Ring n (mul-Ring R x y)
-  left-nat-scalar-law-mul-Ring =
-    left-nat-scalar-law-mul-Semiring (semiring-Ring R)
-
-  right-nat-scalar-law-mul-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-Ring R x (mul-nat-scalar-Ring n y) ＝
-    mul-nat-scalar-Ring n (mul-Ring R x y)
-  right-nat-scalar-law-mul-Ring =
-    right-nat-scalar-law-mul-Semiring (semiring-Ring R)
-
-  left-distributive-mul-nat-scalar-add-Ring :
-    (n : ℕ) (x y : type-Ring R) →
-    mul-nat-scalar-Ring n (add-Ring R x y) ＝
-    add-Ring R (mul-nat-scalar-Ring n x) (mul-nat-scalar-Ring n y)
-  left-distributive-mul-nat-scalar-add-Ring =
-    left-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)
-
-  right-distributive-mul-nat-scalar-add-Ring :
-    (m n : ℕ) (x : type-Ring R) →
-    mul-nat-scalar-Ring (m +ℕ n) x ＝
-    add-Ring R (mul-nat-scalar-Ring m x) (mul-nat-scalar-Ring n x)
-  right-distributive-mul-nat-scalar-add-Ring =
-    right-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)
-```
-
-### Addition of a list of elements in an abelian group
+### Addition of a list of elements in a ring
 
 ```agda
 module _

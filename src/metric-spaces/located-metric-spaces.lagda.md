@@ -7,12 +7,14 @@ module metric-spaces.located-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -101,9 +103,47 @@ module _
   type-Located-Metric-Space =
     type-Metric-Space metric-space-Located-Metric-Space
 
-  is-located-metric-space-Located-Metric-Space :
+  neighborhood-prop-Located-Metric-Space :
+    ℚ⁺ → Relation-Prop l2 type-Located-Metric-Space
+  neighborhood-prop-Located-Metric-Space =
+    neighborhood-prop-Metric-Space metric-space-Located-Metric-Space
+
+  neighborhood-Located-Metric-Space : ℚ⁺ → Relation l2 type-Located-Metric-Space
+  neighborhood-Located-Metric-Space =
+    neighborhood-Metric-Space metric-space-Located-Metric-Space
+
+  refl-neighborhood-Located-Metric-Space :
+    (d : ℚ⁺) (x : type-Located-Metric-Space) →
+    neighborhood-Located-Metric-Space d x x
+  refl-neighborhood-Located-Metric-Space =
+    refl-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
+  symmetric-neighborhood-Located-Metric-Space :
+    (d : ℚ⁺) (x y : type-Located-Metric-Space) →
+    neighborhood-Located-Metric-Space d x y →
+    neighborhood-Located-Metric-Space d y x
+  symmetric-neighborhood-Located-Metric-Space =
+    symmetric-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
+  triangular-neighborhood-Located-Metric-Space :
+    (x y z : type-Located-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    neighborhood-Located-Metric-Space d₂ y z →
+    neighborhood-Located-Metric-Space d₁ x y →
+    neighborhood-Located-Metric-Space (d₁ +ℚ⁺ d₂) x z
+  triangular-neighborhood-Located-Metric-Space =
+    triangular-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
+  monotonic-neighborhood-Located-Metric-Space :
+    (x y : type-Located-Metric-Space) (d₁ d₂ : ℚ⁺) →
+    le-ℚ⁺ d₁ d₂ →
+    neighborhood-Located-Metric-Space d₁ x y →
+    neighborhood-Located-Metric-Space d₂ x y
+  monotonic-neighborhood-Located-Metric-Space =
+    monotonic-neighborhood-Metric-Space metric-space-Located-Metric-Space
+
+  is-located-Located-Metric-Space :
     is-located-Metric-Space metric-space-Located-Metric-Space
-  is-located-metric-space-Located-Metric-Space = pr2 X
+  is-located-Located-Metric-Space = pr2 X
 
   set-Located-Metric-Space : Set l1
   set-Located-Metric-Space = set-Metric-Space metric-space-Located-Metric-Space
@@ -137,8 +177,7 @@ module _
           let
             r = mediant-ℚ p q
             p⁺ = (p , is-positive-le-zero-ℚ 0<p)
-            p<r = le-left-mediant-ℚ p q p<q
-            r<q = le-right-mediant-ℚ p q p<q
+            p<r = le-left-mediant-ℚ p<q
             r⁺ =
               ( r ,
                 is-positive-le-zero-ℚ (transitive-le-ℚ zero-ℚ p r p<r 0<p))
@@ -150,7 +189,7 @@ module _
                   ((ε⁺@(ε , _) , Nεxy) , ε<p) ← p∈U
                   ¬Npxy
                     ( monotonic-neighborhood-Metric-Space M x y ε⁺ p⁺ ε<p Nεxy))
-              ( λ Nrxy → intro-exists (r⁺ , Nrxy) r<q)
+              ( λ Nrxy → intro-exists (r⁺ , Nrxy) (le-right-mediant-ℚ p<q))
               ( L x y p⁺ r⁺ p<r))
         ( λ p≤0 →
           inl-disjunction
@@ -191,4 +230,23 @@ module _
   nonnegative-real-dist-Metric-Space =
     ( real-dist-located-Metric-Space ,
       is-nonnegative-real-dist-located-Metric-Space)
+```
+
+### Located metric subspaces
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Located-Metric-Space l1 l2)
+  (S : subset-Located-Metric-Space l3 X)
+  where
+
+  subspace-Located-Metric-Space : Metric-Space (l1 ⊔ l3) l2
+  subspace-Located-Metric-Space =
+    subspace-Metric-Space (metric-space-Located-Metric-Space X) S
+
+  located-subspace-Located-Metric-Space : Located-Metric-Space (l1 ⊔ l3) l2
+  located-subspace-Located-Metric-Space =
+    ( subspace-Located-Metric-Space ,
+      λ (x , _) (y , _) → is-located-Located-Metric-Space X x y)
 ```

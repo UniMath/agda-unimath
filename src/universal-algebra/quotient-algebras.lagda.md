@@ -27,7 +27,7 @@ open import foundation.universe-levels
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
-open import universal-algebra.algebras-of-theories
+open import universal-algebra.algebras
 open import universal-algebra.congruences
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
@@ -37,9 +37,12 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The quotient of an algebra by a congruence is the set quotient by that
-congruence. This quotient again has the structure of an algebra inherited by the
-original one.
+The
+{{#concept "quotient" Disambiguation="of an algebra of an algebraic theory, single-sorted, finitary" WD="quotient algebra" WDID=Q2589508}}
+of an [algebra](universal-algebra.algebras.md) by a
+[congruence](universal-algebra.congruences.md) is the
+[set quotient](foundation.set-quotients.md) by that congruence. This quotient
+again has the structure of an algebra inherited by the original one.
 
 ## Definitions
 
@@ -47,9 +50,9 @@ original one.
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
-  (T : Theory σ l2)
-  (A : Algebra σ T l3)
-  (R : congruence-Algebra σ T A l4)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (R : congruence-Algebra l4 σ T A)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
@@ -64,15 +67,15 @@ module _
 
   compute-quotient-Algebra :
     equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R) ≃
-      (type-quotient-Algebra)
+      ( equivalence-relation-congruence-Algebra σ T A R) ≃
+    type-quotient-Algebra
   compute-quotient-Algebra =
     compute-set-quotient
       ( equivalence-relation-congruence-Algebra σ T A R)
 
   set-quotient-equivalence-class-Algebra :
     equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R) →
+      ( equivalence-relation-congruence-Algebra σ T A R) →
     type-quotient-Algebra
   set-quotient-equivalence-class-Algebra =
     map-equiv compute-quotient-Algebra
@@ -80,45 +83,51 @@ module _
   equivalence-class-set-quotient-Algebra :
     type-quotient-Algebra →
     equivalence-class
-      (equivalence-relation-congruence-Algebra σ T A R)
+      ( equivalence-relation-congruence-Algebra σ T A R)
   equivalence-class-set-quotient-Algebra =
     map-inv-equiv compute-quotient-Algebra
 
-  tuple-type-quotient-tuple-type-Algebra :
+  is-inhabited-tuple-type-quotient-Algebra :
     {n : ℕ} →
     tuple type-quotient-Algebra n →
     type-trunc-Prop (tuple (type-Algebra σ T A) n)
-  tuple-type-quotient-tuple-type-Algebra empty-tuple =
+  is-inhabited-tuple-type-quotient-Algebra empty-tuple =
     unit-trunc-Prop empty-tuple
-  tuple-type-quotient-tuple-type-Algebra (x ∷ v) =
+  is-inhabited-tuple-type-quotient-Algebra (x ∷ v) =
     map-universal-property-trunc-Prop
       ( trunc-Prop _)
       ( λ (z , p) →
         map-trunc-Prop
-          (λ v' → z ∷ v')
-          ( tuple-type-quotient-tuple-type-Algebra v))
+          ( λ v' → z ∷ v')
+          ( is-inhabited-tuple-type-quotient-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-all-tuple-all-sim-equivalence-relation :
+  relation-holds-for-all-tuples-sim-quotient-Algebra :
     {n : ℕ}
     (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
-    (type-Prop
-      (prop-equivalence-relation
-        (all-sim-equivalence-relation n
-          (λ _ → type-Algebra σ T A)
-          (λ _ → equivalence-relation-congruence-Algebra σ T A R)) v v')) →
-    relation-holds-all-tuple σ T A
-      (equivalence-relation-congruence-Algebra σ T A R)
-      (tuple-multivariable-input n (type-Algebra σ T A) v)
-      (tuple-multivariable-input n (type-Algebra σ T A) v')
-  relation-holds-all-tuple-all-sim-equivalence-relation {zero-ℕ} v v' p =
+    sim-equivalence-relation
+      ( all-sim-equivalence-relation n
+        ( λ _ → type-Algebra σ T A)
+        ( λ _ → equivalence-relation-congruence-Algebra σ T A R))
+      ( v)
+      ( v') →
+    relation-holds-for-all-tuples-equivalence-relation-Algebra σ T A
+      ( equivalence-relation-congruence-Algebra σ T A R)
+      ( tuple-multivariable-input n (type-Algebra σ T A) v)
+      ( tuple-multivariable-input n (type-Algebra σ T A) v')
+  relation-holds-for-all-tuples-sim-quotient-Algebra
+    {zero-ℕ} v v' p =
     raise-star
-  relation-holds-all-tuple-all-sim-equivalence-relation
+  relation-holds-for-all-tuples-sim-quotient-Algebra
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    p , (relation-holds-all-tuple-all-sim-equivalence-relation v v' p')
+    ( p ,
+      relation-holds-for-all-tuples-sim-quotient-Algebra
+        ( v)
+        ( v')
+        ( p'))
 
   is-model-set-quotient-Algebra :
-    is-model-signature σ set-quotient-Algebra
+    is-model-of-signature σ set-quotient-Algebra
   is-model-set-quotient-Algebra op v =
     multivariable-map-set-quotient
       ( arity-operation-signature σ op)
@@ -142,9 +151,16 @@ module _
               ( arity-operation-signature σ op)
               ( type-Algebra σ T A)
               ( v'))
-            (relation-holds-all-tuple-all-sim-equivalence-relation v v' p)))
+            ( relation-holds-for-all-tuples-sim-quotient-Algebra
+              ( v)
+              ( v')
+              ( p))))
       ( multivariable-input-tuple
         ( arity-operation-signature σ op)
         ( type-quotient-Algebra)
         ( v))
+
+  model-quotient-Algebra : Model-Of-Signature (l3 ⊔ l4) σ
+  model-quotient-Algebra =
+    ( set-quotient-Algebra , is-model-set-quotient-Algebra)
 ```

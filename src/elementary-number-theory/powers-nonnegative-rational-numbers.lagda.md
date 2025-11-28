@@ -17,7 +17,6 @@ open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-nonnegative-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-nonnegative-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -27,7 +26,6 @@ open import foundation.empty-types
 open import foundation.identity-types
 
 open import group-theory.powers-of-elements-commutative-monoids
-open import group-theory.powers-of-elements-monoids
 ```
 
 </details>
@@ -122,7 +120,7 @@ abstract
       ( power-ℚ⁰⁺ (succ-ℕ n) q)
       ( preserves-leq-left-mul-ℚ⁰⁺ (power-ℚ⁰⁺ n p) _ _ (leq-le-ℚ p<q))
       ( preserves-le-right-mul-ℚ⁺
-        ( rational-ℚ⁰⁺ q , is-positive-le-ℚ⁰⁺ p _ p<q)
+        ( rational-ℚ⁰⁺ q , is-positive-le-ℚ⁰⁺ p p<q)
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n p))
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n q))
         ( preserves-le-power-ℚ⁰⁺ n p q p<q (is-nonzero-succ-ℕ _)))

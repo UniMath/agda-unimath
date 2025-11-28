@@ -7,26 +7,17 @@ module real-numbers.similarity-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.strict-inequality-rational-numbers
-
-open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.empty-types
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.similarity-subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import order-theory.large-posets
 open import order-theory.large-preorders
-open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
 ```
@@ -70,7 +61,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding sim-ℝ
 
     sim-lower-cut-iff-sim-ℝ :
@@ -85,7 +76,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding sim-ℝ
 
     sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ~ℝ y)
@@ -102,7 +93,7 @@ module _
 ### Reflexivity
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ~ℝ x
@@ -115,7 +106,7 @@ opaque
 ### Symmetry
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
@@ -127,7 +118,7 @@ opaque
 ### Transitivity
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   transitive-sim-ℝ :
@@ -141,7 +132,7 @@ opaque
 ### Similar real numbers in the same universe are equal
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
@@ -185,7 +176,7 @@ similarity-reasoning-ℝ
 infixl 1 similarity-reasoning-ℝ_
 infixl 0 step-similarity-reasoning-ℝ
 
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   similarity-reasoning-ℝ_ :
@@ -199,3 +190,9 @@ opaque
 
   syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q
 ```
+
+## See also
+
+- In
+  [`real-numbers.equality-real-numbers`](real-numbers.equality-real-numbers.md)
+  it is demonstrated that similarity is double negation stable.

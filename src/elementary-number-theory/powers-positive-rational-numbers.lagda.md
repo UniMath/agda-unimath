@@ -7,20 +7,25 @@ module elementary-number-theory.powers-positive-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers
 open import elementary-number-theory.bernoullis-inequality-positive-rational-numbers
+open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -38,6 +43,12 @@ open import foundation.transport-along-identifications
 
 open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.powers-of-elements-groups
+
+open import metric-spaces.limits-of-sequences-metric-spaces
+open import metric-spaces.metric-space-of-rational-numbers
+open import metric-spaces.rational-sequences-approximating-zero
+
+open import order-theory.posets
 ```
 
 </details>
@@ -58,6 +69,9 @@ times. This file covers the case where `n` is a
 ```agda
 power-ℚ⁺ : ℕ → ℚ⁺ → ℚ⁺
 power-ℚ⁺ = power-Group group-mul-ℚ⁺
+
+rational-power-ℚ⁺ : ℕ → ℚ⁺ → ℚ
+rational-power-ℚ⁺ n q = rational-ℚ⁺ (power-ℚ⁺ n q)
 ```
 
 ## Properties
@@ -197,8 +211,8 @@ abstract
     Σ ℕ (λ n → le-ℚ b (rational-ℚ⁺ (power-ℚ⁺ n q)))
   bound-unbounded-power-greater-than-one-ℚ⁺ q⁺@(q , _) b 1<q =
     let
-      q-1⁺ = positive-diff-le-ℚ one-ℚ q 1<q
-      (n , b<⟨1+q-1⟩ⁿ) = bound-unbounded-power-one-plus-ℚ⁺ q-1⁺ b
+      (n , b<⟨1+q-1⟩ⁿ) =
+        bound-unbounded-power-one-plus-ℚ⁺ (positive-diff-le-ℚ 1<q) b
     in
       ( n ,
         tr
@@ -251,6 +265,77 @@ abstract
     exists ℕ (λ n → le-prop-ℚ⁺ (power-ℚ⁺ n ε) δ)
   arbitrarily-small-power-le-one-ℚ⁺ ε δ 1<ε =
     unit-trunc-Prop (bound-arbitrarily-small-power-le-one-ℚ⁺ ε δ 1<ε)
+```
+
+### If `ε` is a positive rational number less than or equal to 1 and `m ≤ n`, then `εⁿ ≤ εᵐ`
+
+```agda
+abstract
+  leq-power-leq-one-ℚ⁺ :
+    (ε : ℚ⁺) → leq-ℚ⁺ ε one-ℚ⁺ → (m n : ℕ) → leq-ℕ m n →
+    leq-ℚ⁺ (power-ℚ⁺ n ε) (power-ℚ⁺ m ε)
+  leq-power-leq-one-ℚ⁺ ε ε≤1 m n m≤n =
+    let
+      (k , k+m=n) = subtraction-leq-ℕ m n m≤n
+      open inequality-reasoning-Poset ℚ-Poset
+    in
+      chain-of-inequalities
+        rational-power-ℚ⁺ n ε
+        ≤ rational-power-ℚ⁺ (k +ℕ m) ε
+          by leq-eq-ℚ⁺ (ap (λ x → power-ℚ⁺ x ε) (inv k+m=n))
+        ≤ rational-power-ℚ⁺ k ε *ℚ rational-power-ℚ⁺ m ε
+          by leq-eq-ℚ⁺ (distributive-power-add-ℚ⁺ k m ε)
+        ≤ rational-power-ℚ⁺ k one-ℚ⁺ *ℚ rational-power-ℚ⁺ m ε
+          by
+          preserves-leq-right-mul-ℚ⁺
+            ( power-ℚ⁺ m ε)
+            ( _)
+            ( _)
+            ( preserves-leq-power-ℚ⁺ k ε one-ℚ⁺ ε≤1)
+        ≤ one-ℚ *ℚ rational-power-ℚ⁺ m ε
+          by leq-eq-ℚ (ap-mul-ℚ (ap rational-ℚ⁺ (power-one-ℚ⁺ k)) refl)
+        ≤ rational-power-ℚ⁺ m ε
+          by leq-eq-ℚ (left-unit-law-mul-ℚ _)
+```
+
+### If `ε` is a positive rational number less than 1, `εⁿ` approaches 0
+
+```agda
+abstract
+  is-zero-limit-power-le-one-ℚ⁺ :
+    (ε : ℚ⁺) → le-ℚ⁺ ε one-ℚ⁺ →
+    is-zero-limit-sequence-ℚ (λ n → rational-ℚ⁺ (power-ℚ⁺ n ε))
+  is-zero-limit-power-le-one-ℚ⁺ ε ε<1 =
+    is-limit-bound-modulus-sequence-Metric-Space
+      ( metric-space-ℚ)
+      ( _)
+      ( zero-ℚ)
+      ( λ δ →
+        let
+          (m , εᵐ<δ) =
+            bound-arbitrarily-small-power-le-one-ℚ⁺ ε δ ε<1
+          open inequality-reasoning-Poset ℚ-Poset
+        in
+          ( m ,
+            λ n m≤n →
+              neighborhood-leq-dist-ℚ
+                ( δ)
+                ( rational-power-ℚ⁺ n ε)
+                ( zero-ℚ)
+                ( chain-of-inequalities
+                  rational-dist-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε)) zero-ℚ
+                  ≤ rational-abs-ℚ (rational-ℚ⁺ (power-ℚ⁺ n ε))
+                    by
+                    leq-eq-ℚ (ap rational-ℚ⁰⁺ (right-zero-law-dist-ℚ _))
+                  ≤ rational-ℚ⁺ (power-ℚ⁺ n ε)
+                    by
+                    leq-eq-ℚ
+                      ( ap rational-ℚ⁰⁺
+                        ( abs-rational-ℚ⁰⁺ (nonnegative-ℚ⁺ (power-ℚ⁺ n ε))))
+                  ≤ rational-ℚ⁺ (power-ℚ⁺ m ε)
+                    by leq-power-leq-one-ℚ⁺ ε (leq-le-ℚ ε<1) m n m≤n
+                  ≤ rational-ℚ⁺ δ
+                    by leq-le-ℚ εᵐ<δ)))
 ```
 
 ## See also

@@ -50,16 +50,17 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
 
-**Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
-agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martin-Escardó,
-hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
-theorem.
-
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
+```
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import foundation.cantor-schroder-bernstein-decidable-embeddings using
+  ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
 ### Cantor's theorem {#Q474881}
@@ -116,6 +117,15 @@ open import foundation.fundamental-theorem-of-equivalence-relations using
   ( equiv-equivalence-relation-partition)
 ```
 
+### Fundamental theorem on homomorphisms {#Q1187646}
+
+**Author:** [Egbert Rijke](https://egbertrijke.github.io)
+
+```agda
+open import group-theory.quotient-groups using
+  ( is-quotient-group-quotient-Group)
+```
+
 ### Kleene's fixed point theorem {#Q3527263}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -146,6 +156,33 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Triangle inequality theorem {#Q208216}
+
+**Author:** [malarbol](https://github.com/malarbol)
+
+```agda
+open import real-numbers.metric-space-of-real-numbers using
+  ( is-triangular-neighborhood-ℝ)
+```
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.absolute-value-real-numbers using
+  ( triangle-inequality-abs-ℝ)
+open import real-numbers.distance-real-numbers using
+  ( triangle-inequality-dist-ℝ)
+```
+
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
 ### Yoneda lemma {#Q320577}

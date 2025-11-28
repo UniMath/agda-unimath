@@ -30,8 +30,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **polygon** is an [undirected graph](graph-theory.undirected-graphs.md) that
-is [merely equivalent](graph-theory.mere-equivalences-undirected-graphs.md) to a
+A {{#concept "polygon" WD="polygon" WDID=Q37555 Agda=Polygon}} is an
+[undirected graph](graph-theory.undirected-graphs.md) that is
+[merely equivalent](graph-theory.mere-equivalences-undirected-graphs.md) to a
 graph with vertices the underlying type of the
 [standard cyclic group](elementary-number-theory.standard-cyclic-groups.md)
 `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each

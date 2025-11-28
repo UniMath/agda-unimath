@@ -25,9 +25,11 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-The **kernel** of a [ring homomorphism](ring-theory.homomorphisms-rings.md)
-`f : R → S` is the [ideal](ring-theory.ideals-rings.md) of `R` consisting of all
-elements `x : R` equipped with an identification `f x ＝ 0`.
+The
+{{#concept "kernel" Disambiguation="of a ring homomorphism" Agda=kernel-hom-Ring}}
+of a [ring homomorphism](ring-theory.homomorphisms-rings.md) `f : R → S` is the
+[ideal](ring-theory.ideals-rings.md) of `R` consisting of all elements `x : R`
+equipped with an [identification](foundation-core.identity-types.md) `f x ＝ 0`.
 
 ## Definitions
 

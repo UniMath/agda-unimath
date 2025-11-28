@@ -19,7 +19,6 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.retractions
 open import foundation.sections
 open import foundation.similarity-subtypes
@@ -29,8 +28,6 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import real-numbers.inequality-lower-dedekind-real-numbers
-open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
@@ -177,16 +174,18 @@ abstract
           (λ p → tr (is-in-cut-upper-ℝ x) (inv (neg-neg-ℚ p)))))
 
   is-equiv-neg-lower-ℝ : (l : Level) → is-equiv (neg-lower-ℝ {l})
-  pr1 (pr1 (is-equiv-neg-lower-ℝ l)) = neg-upper-ℝ
-  pr1 (pr2 (is-equiv-neg-lower-ℝ l)) = neg-upper-ℝ
-  pr2 (pr1 (is-equiv-neg-lower-ℝ l)) = is-section-neg-upper-ℝ l
-  pr2 (pr2 (is-equiv-neg-lower-ℝ l)) = is-retraction-neg-upper-ℝ l
+  is-equiv-neg-lower-ℝ l =
+    is-equiv-is-invertible
+      ( neg-upper-ℝ)
+      ( is-section-neg-upper-ℝ l)
+      ( is-retraction-neg-upper-ℝ l)
 
   is-equiv-neg-upper-ℝ : (l : Level) → is-equiv (neg-upper-ℝ {l})
-  pr1 (pr1 (is-equiv-neg-upper-ℝ l)) = neg-lower-ℝ
-  pr1 (pr2 (is-equiv-neg-upper-ℝ l)) = neg-lower-ℝ
-  pr2 (pr1 (is-equiv-neg-upper-ℝ l)) = is-retraction-neg-upper-ℝ l
-  pr2 (pr2 (is-equiv-neg-upper-ℝ l)) = is-section-neg-upper-ℝ l
+  is-equiv-neg-upper-ℝ l =
+    is-equiv-is-invertible
+      ( neg-lower-ℝ)
+      ( is-retraction-neg-upper-ℝ l)
+      ( is-section-neg-upper-ℝ l)
 ```
 
 ### The negation of a rational projected to a lower real is the projection of its negation as an upper real
