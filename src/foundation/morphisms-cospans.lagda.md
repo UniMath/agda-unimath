@@ -47,13 +47,13 @@ module _
   where
 
   coherence-hom-cospan :
-    (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l4)
+    (cospanning-type-cospan c → cospanning-type-cospan d) → UU (l1 ⊔ l2 ⊔ l4)
   coherence-hom-cospan h =
     ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
     ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
 
   hom-cospan : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-cospan =
-    Σ ( codomain-cospan c → codomain-cospan d)
+    Σ ( cospanning-type-cospan c → cospanning-type-cospan d)
       ( coherence-hom-cospan)
 ```
