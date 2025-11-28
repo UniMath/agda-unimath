@@ -295,7 +295,7 @@ module _
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
       is-short-emb-fiber-indexed-sum-Metric-Space)
 
-  reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space :
+  reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space :
     (d : ℚ⁺) (px px' : type-Metric-Space (P x)) →
     neighborhood-Metric-Space
       ( indexed-sum-Metric-Space A P)
@@ -307,7 +307,8 @@ module _
       ( d)
       ( px)
       ( px')
-  reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space d px px' (e , Nxx') =
+  reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space
+    d px px' (e , Nxx') =
     inv-tr
       ( λ e' →
         neighborhood-Metric-Space
@@ -328,7 +329,7 @@ module _
       ( map-emb-fiber-indexed-sum-Metric-Space A P x)
   is-isometry-emb-fiber-indexed-sum-Metric-Space d px px' =
     ( is-short-emb-fiber-indexed-sum-Metric-Space d px px' ,
-      reflects-neighborhood-emb-fiber-indexed-sum-Metric-Space d px px')
+      reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space d px px')
 
   isometry-emb-fiber-indexed-Metric-Space :
     isometry-Metric-Space (P x) (indexed-sum-Metric-Space A P)
