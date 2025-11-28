@@ -386,6 +386,20 @@ module _
   map-subtype-metric-quotient-Pseudometric-Space =
     inhabitant-equivalence-class-quotient-map-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space M)
+
+  eq-map-is-in-class-metric-quotient-Pseudometric-Space :
+    (X : type-metric-quotient-Pseudometric-Space M) →
+    {x : type-Pseudometric-Space M} →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( M)
+      ( X)
+      ( x) →
+    map-metric-quotient-Pseudometric-Space x ＝ X
+  eq-map-is-in-class-metric-quotient-Pseudometric-Space X {x} x∈X =
+    eq-set-quotient-equivalence-class-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space M)
+      ( X)
+      ( x∈X)
 ```
 
 ### The mapping from a pseudometric space its quotient metric space is an isometry

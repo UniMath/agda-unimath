@@ -437,3 +437,103 @@ module _
       ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
       ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
 ```
+
+### The isometry from the Cauchy pseudocompletion of a complete metric space to its limit
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (is-complete-M : is-complete-Metric-Space M)
+  where
+
+  abstract
+    reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+      (δ : ℚ⁺) →
+      (u v : cauchy-approximation-Metric-Space M) →
+      neighborhood-Metric-Space
+        ( M)
+        ( δ)
+        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M)
+          ( u))
+        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M)
+          ( v)) →
+      neighborhood-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( δ)
+        ( u)
+        ( v)
+    reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+      δ x y Nδ =
+      reflects-neighborhood-sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+          { x}
+          { const-cauchy-approximation-Metric-Space
+            ( M)
+            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+              ( M)
+              ( is-complete-M)
+              ( x))}
+          { y}
+          { const-cauchy-approximation-Metric-Space
+            ( M)
+            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+              ( M)
+              ( is-complete-M)
+              ( y))}
+        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M)
+          ( x))
+        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M)
+          ( y))
+        ( δ)
+        ( preserves-neighborhood-map-isometry-Pseudometric-Space
+          ( pseudometric-Metric-Space M)
+          ( cauchy-pseudocompletion-Metric-Space M)
+          ( isometry-cauchy-pseudocompletion-Metric-Space M)
+          ( δ)
+          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+            ( M)
+            ( is-complete-M)
+            ( x))
+          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+            ( M)
+            ( is-complete-M)
+            ( y))
+          ( Nδ))
+
+    is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+      is-isometry-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( pseudometric-Metric-Space M)
+        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M))
+    is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space d x y =
+      ( ( is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( M)
+          ( is-complete-M)
+          ( d)
+          ( x)
+          ( y)) ,
+        ( reflects-neighborhood-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( d)
+          ( x)
+          ( y)))
+
+  isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+    isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( pseudometric-Metric-Space M)
+  isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
+    ( ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+        ( M)
+        ( is-complete-M)) ,
+      ( is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
+```
