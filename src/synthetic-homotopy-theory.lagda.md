@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.cofibers-of-maps public
 open import synthetic-homotopy-theory.cofibers-of-pointed-maps public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
+open import synthetic-homotopy-theory.composition-cospans public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.connective-prespectra public
