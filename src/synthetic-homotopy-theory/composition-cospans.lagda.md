@@ -7,19 +7,8 @@ module synthetic-homotopy-theory.composition-cospans where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps
 open import foundation.cospans
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.equivalences-cospans
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.morphisms-arrows
-open import foundation.morphisms-cospans
-open import foundation.pullbacks
-open import foundation.standard-pullbacks
-open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -46,15 +35,15 @@ two cospans by forming the [pushout](synthetic-homotopy-theory.pushouts.md) of
 the middle [cospan diagram](foundation.cospan-diagrams.md)
 
 ```text
-                       C
-                       |
-                       |
-                       ∨
-             B ------> T
-             |         |
-             |         |
-             ∨       ⌜ ∨
-   A ------> S ------> ∙
+                      C
+                      |
+                      |
+                      ∨
+            B ------> T
+            |         |
+            |         |
+            ∨       ⌜ ∨
+  A ------> S ------> ∙
 ```
 
 giving us a cospan `G ∘ F` from `A` to `C`.
