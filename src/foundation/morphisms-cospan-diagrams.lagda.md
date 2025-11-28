@@ -58,25 +58,25 @@ module _
   (h : hom-cospan-diagram 𝒮 𝒯)
   where
 
-  left-map-hom-cospan-diagram :
+  map-domain-hom-cospan-diagram :
     domain-cospan-diagram 𝒮 → domain-cospan-diagram 𝒯
-  left-map-hom-cospan-diagram = pr1 h
+  map-domain-hom-cospan-diagram = pr1 h
 
-  right-map-hom-cospan-diagram :
+  map-codomain-hom-cospan-diagram :
     codomain-cospan-diagram 𝒮 → codomain-cospan-diagram 𝒯
-  right-map-hom-cospan-diagram = pr1 (pr2 h)
+  map-codomain-hom-cospan-diagram = pr1 (pr2 h)
 
   cospanning-map-hom-cospan-diagram :
     cospanning-type-cospan-diagram 𝒮 → cospanning-type-cospan-diagram 𝒯
   cospanning-map-hom-cospan-diagram = pr1 (pr2 (pr2 h))
 
   left-square-hom-cospan-diagram :
-    left-map-cospan-diagram 𝒯 ∘ left-map-hom-cospan-diagram ~
+    left-map-cospan-diagram 𝒯 ∘ map-domain-hom-cospan-diagram ~
     cospanning-map-hom-cospan-diagram ∘ left-map-cospan-diagram 𝒮
   left-square-hom-cospan-diagram = pr1 (pr2 (pr2 (pr2 h)))
 
   right-square-hom-cospan-diagram :
-    right-map-cospan-diagram 𝒯 ∘ right-map-hom-cospan-diagram ~
+    right-map-cospan-diagram 𝒯 ∘ map-codomain-hom-cospan-diagram ~
     cospanning-map-hom-cospan-diagram ∘ right-map-cospan-diagram 𝒮
   right-square-hom-cospan-diagram = pr2 (pr2 (pr2 (pr2 h)))
 ```
@@ -134,8 +134,8 @@ module _
       ( domain-cospan-diagram 𝒯 ,
         domain-cospan-diagram ℛ ,
         domain-cospan-diagram 𝒮 ,
-        left-map-hom-cospan-diagram 𝒯 𝒮 h ,
-        left-map-hom-cospan-diagram ℛ 𝒮 h')
+        map-domain-hom-cospan-diagram 𝒯 𝒮 h ,
+        map-domain-hom-cospan-diagram ℛ 𝒮 h')
       ( codomain-hom-cospan-diagram-rotate h h')
   hom-cospan-diagram-rotate
     ( hA , hB , hX , HA , HB)
@@ -152,8 +152,8 @@ module _
       ( codomain-cospan-diagram 𝒯 ,
         codomain-cospan-diagram ℛ ,
         codomain-cospan-diagram 𝒮 ,
-        right-map-hom-cospan-diagram 𝒯 𝒮 h ,
-        right-map-hom-cospan-diagram ℛ 𝒮 h')
+        map-codomain-hom-cospan-diagram 𝒯 𝒮 h ,
+        map-codomain-hom-cospan-diagram ℛ 𝒮 h')
       ( codomain-hom-cospan-diagram-rotate h h')
   hom-cospan-diagram-rotate'
     ( hA , hB , hX , HA , HB)
