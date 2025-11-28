@@ -138,5 +138,5 @@ module _
 
 ## See also
 
-- [Composition of cospans](foundation.composition-cospans.md)
+- [Composition of cospans](synthetic-homotopy-theory.composition-cospans.md)
 - [Opposite cospans](foundation.opposite-cospans.md)
