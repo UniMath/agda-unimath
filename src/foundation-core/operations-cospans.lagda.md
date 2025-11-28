@@ -98,7 +98,7 @@ of `s` by `j` is the cospan
 
 ```text
         f       g ∘ j
-  A' <------ S ------> B.
+  A' ------> S <------ B.
 ```
 
 ```agda
@@ -117,8 +117,8 @@ module _
 Consider a cospan `s` given by
 
 ```text
-       f       g
-  A -----> S <----- B
+       f         g
+  A ------> S <------ B
 ```
 
 and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f f'`

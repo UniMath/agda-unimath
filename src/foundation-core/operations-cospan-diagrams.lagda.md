@@ -52,15 +52,15 @@ module _
 
   concat-cospan-diagram :
     (𝒮 : cospan-diagram l1 l2 l3)
-    {A' : UU l4} (f : A' → domain-cospan-diagram 𝒮)
-    {B' : UU l5} (g : B' → codomain-cospan-diagram 𝒮) →
+    {A' : UU l4} (i : A' → domain-cospan-diagram 𝒮)
+    {B' : UU l5} (j : B' → codomain-cospan-diagram 𝒮) →
     cospan-diagram l4 l5 l3
-  pr1 (concat-cospan-diagram 𝒮 {A'} f {B'} g) =
+  pr1 (concat-cospan-diagram 𝒮 {A'} i {B'} j) =
     A'
-  pr1 (pr2 (concat-cospan-diagram 𝒮 {A'} f {B'} g)) =
+  pr1 (pr2 (concat-cospan-diagram 𝒮 {A'} i {B'} j)) =
     B'
-  pr2 (pr2 (concat-cospan-diagram 𝒮 {A'} f {B'} g)) =
-    concat-cospan (cospan-cospan-diagram 𝒮) f g
+  pr2 (pr2 (concat-cospan-diagram 𝒮 {A'} i {B'} j)) =
+    concat-cospan (cospan-cospan-diagram 𝒮) i j
 ```
 
 ### Concatenating cospan diagrams and maps on the left
