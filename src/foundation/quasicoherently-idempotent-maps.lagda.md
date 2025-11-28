@@ -9,23 +9,23 @@ module foundation.quasicoherently-idempotent-maps where
 ```agda
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-homotopies
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.idempotent-maps
-open import foundation.equality-cartesian-product-types
-open import foundation.cartesian-product-types
 open import foundation.identity-types
-open import foundation.function-extensionality
-open import foundation.negated-equality
-open import foundation.cones-over-cospan-diagrams
-open import foundation.standard-pullbacks
 open import foundation.iterate-confluent-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -527,12 +527,6 @@ pullback
   Idem₍₃,₂₎(A) ----> Idem₍₃,₂₎(A) × Idem₍₃,₂₎(A).
                  Δ
 ```
-
-{{#concept "universal property" Disambiguation="of the quotient group" Agda=universal-property-quotient-Group}}
-of the quotient group, which asserts that any group homomorphism `f : G → H`
-such that `N ⊆ ker f` extends uniquely along `q` to a group homomorphism
-`G/N → H`. In other words, the universal property of the quotient group `G/N`
-asserts that the map
 
 ```agda
 module _
