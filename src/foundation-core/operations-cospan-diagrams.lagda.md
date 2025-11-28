@@ -41,8 +41,8 @@ and maps `i : A' → A` and `j : B' → B`. The
 of `𝒮`, `i`, and `j` is the cospan diagram
 
 ```text
-       f ∘ i     g ∘ j
-  A' <------- S -------> B'.
+      f ∘ i     g ∘ j
+  A' ------> S <------ B'.
 ```
 
 ```agda
@@ -77,8 +77,8 @@ and a map `i : A' → A`. The
 of `𝒮` and `i` is the cospan diagram
 
 ```text
-       f ∘ i      g
-  A' <------- S -----> B.
+      f ∘ i       g
+  A' ------> S <------ B.
 ```
 
 ```agda
@@ -106,8 +106,8 @@ and a map `j : B' → B`. The
 of `𝒮` by `j` is the cospan diagram
 
 ```text
-        f      g ∘ j
-  A' <----- S -------> B'.
+        f       g ∘ j
+  A' ------> S <------ B'.
 ```
 
 ```agda
@@ -139,7 +139,7 @@ as indicated in the diagram
      |         |
   h₀ |         | h₁
      ∨         ∨
-     A' <----- S'
+     A' -----> S'
           f'
 ```
 
