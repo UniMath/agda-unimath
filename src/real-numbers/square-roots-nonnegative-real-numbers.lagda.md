@@ -29,6 +29,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -49,6 +50,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -560,6 +562,19 @@ abstract opaque
       leq-leq'-ℝ (real-sqrt-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (leq-unique-sqrt-ℝ⁰⁺' x y y²=x))
 ```
 
+### The square root of 1 is 1
+
+```agda
+real-sqrt-one-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ
+real-sqrt-one-ℝ⁰⁺ =
+  eq-sim-ℝ
+    ( symmetric-sim-ℝ
+      ( unique-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ one-ℝ⁰⁺ (sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+
+sqrt-one-ℝ⁰⁺ : sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
+```
+
 ### Squaring is an automorphism on the nonnegative real numbers
 
 ```agda
@@ -694,4 +709,39 @@ abstract
   real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
   real-sqrt-zero-ℝ⁰⁺ =
     inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
+```
+
+### The square root of a nonnegative real number preserves inequality
+
+```agda
+abstract
+  preserves-leq-sqrt-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) (sqrt-ℝ⁰⁺ y)
+  preserves-leq-sqrt-ℝ⁰⁺ x y x≤y =
+    reflects-leq-square-ℝ⁰⁺
+      ( sqrt-ℝ⁰⁺ x)
+      ( sqrt-ℝ⁰⁺ y)
+      ( binary-tr
+        ( leq-ℝ)
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ x))
+        ( inv (eq-real-square-sqrt-ℝ⁰⁺ y))
+        ( x≤y))
+```
+
+### If `√x ≤ 1`, `x ≤ 1`
+
+```agda
+abstract
+  leq-one-leq-one-sqrt-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ (real-sqrt-ℝ⁰⁺ x) one-ℝ → leq-ℝ⁰⁺ x one-ℝ⁰⁺
+  leq-one-leq-one-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) √x≤1 =
+    binary-tr
+      ( leq-ℝ)
+      ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( left-unit-law-mul-ℝ one-ℝ)
+      ( preserves-leq-square-ℝ⁰⁺
+        ( sqrt-ℝ⁰⁺ x⁰⁺)
+        ( one-ℝ⁰⁺)
+        ( √x≤1))
 ```

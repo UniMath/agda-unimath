@@ -175,7 +175,7 @@ abstract
       ( reflects-le-real-ℚ
         ( concatenate-leq-le-ℝ zero-ℝ x _
           ( 0≤x)
-          ( le-real-is-in-upper-cut-ℚ x x<q)))
+          ( le-real-is-in-upper-cut-ℝ x x<q)))
 
 abstract opaque
   unfolding leq-ℝ' real-ℚ
@@ -228,7 +228,7 @@ abstract
     exists ℚ⁺ (λ q → le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q))
   exists-ℚ⁺-le-ℝ⁰⁺ x =
     map-tot-exists
-      ( λ _ → le-real-is-in-upper-cut-ℚ (real-ℝ⁰⁺ x))
+      ( λ _ → le-real-is-in-upper-cut-ℝ (real-ℝ⁰⁺ x))
       ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
