@@ -51,7 +51,7 @@ then the coproduct cone
 ```text
   A' + B' -----> X'
      |           |
-     |    α+β    | i
+     |   [α,β]   | i
      ∨           ∨
    A + B ------> X
 ```
