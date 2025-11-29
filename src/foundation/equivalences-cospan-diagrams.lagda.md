@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-cospans
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.morphisms-cospan-diagrams
 open import foundation.morphisms-cospans
 open import foundation.operations-cospans
@@ -175,100 +176,100 @@ module _
           ( map-codomain-equiv-cospan-diagram))
         ( equiv-cospan-equiv-cospan-diagram)
 
-    -- left-square-equiv-cospan-diagram :
-    --   coherence-square-maps
-    --     ( cospanning-map-equiv-cospan-diagram)
-    --     ( left-map-cospan-diagram 𝒮)
-    --     ( left-map-cospan-diagram 𝒯)
-    --     ( map-domain-equiv-cospan-diagram)
-    -- left-square-equiv-cospan-diagram =
-    --   left-triangle-equiv-cospan
-    --     ( concat-cospan
-    --       ( cospan-cospan-diagram 𝒮)
-    --       ( map-domain-equiv-cospan-diagram)
-    --       ( map-codomain-equiv-cospan-diagram))
-    --     ( cospan-cospan-diagram 𝒯)
-    --     ( equiv-cospan-equiv-cospan-diagram)
+    left-square-equiv-cospan-diagram :
+      coherence-square-maps
+        ( left-map-cospan-diagram 𝒮)
+        ( map-domain-equiv-cospan-diagram)
+        ( cospanning-map-equiv-cospan-diagram)
+        ( left-map-cospan-diagram 𝒯)
+    left-square-equiv-cospan-diagram =
+      left-triangle-equiv-cospan
+        ( cospan-cospan-diagram 𝒮)
+        ( concat-cospan
+          ( cospan-cospan-diagram 𝒯)
+          ( map-domain-equiv-cospan-diagram)
+          ( map-codomain-equiv-cospan-diagram))
+        ( equiv-cospan-equiv-cospan-diagram)
 
-    -- equiv-left-arrow-equiv-cospan-diagram :
-    --   equiv-arrow (left-map-cospan-diagram 𝒮) (left-map-cospan-diagram 𝒯)
-    -- pr1 equiv-left-arrow-equiv-cospan-diagram =
-    --   cospanning-equiv-equiv-cospan-diagram
-    -- pr1 (pr2 equiv-left-arrow-equiv-cospan-diagram) =
-    --   equiv-domain-equiv-cospan-diagram
-    -- pr2 (pr2 equiv-left-arrow-equiv-cospan-diagram) =
-    --   left-square-equiv-cospan-diagram
+    equiv-left-arrow-equiv-cospan-diagram :
+      equiv-arrow (left-map-cospan-diagram 𝒮) (left-map-cospan-diagram 𝒯)
+    pr1 equiv-left-arrow-equiv-cospan-diagram =
+      equiv-domain-equiv-cospan-diagram
+    pr1 (pr2 equiv-left-arrow-equiv-cospan-diagram) =
+      cospanning-equiv-equiv-cospan-diagram
+    pr2 (pr2 equiv-left-arrow-equiv-cospan-diagram) =
+      inv-htpy left-square-equiv-cospan-diagram
 
-    -- right-square-equiv-cospan-diagram :
-    --   coherence-square-maps
-    --     ( cospanning-map-equiv-cospan-diagram)
-    --     ( right-map-cospan-diagram 𝒮)
-    --     ( right-map-cospan-diagram 𝒯)
-    --     ( map-codomain-equiv-cospan-diagram)
-    -- right-square-equiv-cospan-diagram =
-    --   right-triangle-equiv-cospan
-    --     ( concat-cospan
-    --       ( cospan-cospan-diagram 𝒮)
-    --       ( map-domain-equiv-cospan-diagram)
-    --       ( map-codomain-equiv-cospan-diagram))
-    --     ( cospan-cospan-diagram 𝒯)
-    --     ( equiv-cospan-equiv-cospan-diagram)
+    right-square-equiv-cospan-diagram :
+      coherence-square-maps
+        ( right-map-cospan-diagram 𝒮)
+        ( map-codomain-equiv-cospan-diagram)
+        ( cospanning-map-equiv-cospan-diagram)
+        ( right-map-cospan-diagram 𝒯)
+    right-square-equiv-cospan-diagram =
+      right-triangle-equiv-cospan
+        ( cospan-cospan-diagram 𝒮)
+        ( concat-cospan
+          ( cospan-cospan-diagram 𝒯)
+          ( map-domain-equiv-cospan-diagram)
+          ( map-codomain-equiv-cospan-diagram))
+        ( equiv-cospan-equiv-cospan-diagram)
 
-    -- equiv-right-arrow-equiv-cospan-diagram :
-    --   equiv-arrow (right-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒯)
-    -- pr1 equiv-right-arrow-equiv-cospan-diagram =
-    --   cospanning-equiv-equiv-cospan-diagram
-    -- pr1 (pr2 equiv-right-arrow-equiv-cospan-diagram) =
-    --   equiv-codomain-equiv-cospan-diagram
-    -- pr2 (pr2 equiv-right-arrow-equiv-cospan-diagram) =
-    --   right-square-equiv-cospan-diagram
+    equiv-right-arrow-equiv-cospan-diagram :
+      equiv-arrow (right-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒯)
+    pr1 equiv-right-arrow-equiv-cospan-diagram =
+      equiv-codomain-equiv-cospan-diagram
+    pr1 (pr2 equiv-right-arrow-equiv-cospan-diagram) =
+      cospanning-equiv-equiv-cospan-diagram
+    pr2 (pr2 equiv-right-arrow-equiv-cospan-diagram) =
+      inv-htpy right-square-equiv-cospan-diagram
 
-    -- hom-cospan-equiv-cospan-diagram :
-    --   hom-cospan
-    --     ( concat-cospan
-    --       ( cospan-cospan-diagram 𝒮)
-    --       ( map-domain-equiv-cospan-diagram)
-    --       ( map-codomain-equiv-cospan-diagram))
-    --     ( cospan-cospan-diagram 𝒯)
-    -- hom-cospan-equiv-cospan-diagram =
-    --   hom-equiv-cospan
-    --     ( concat-cospan
-    --       ( cospan-cospan-diagram 𝒮)
-    --       ( map-domain-equiv-cospan-diagram)
-    --       ( map-codomain-equiv-cospan-diagram))
-    --     ( cospan-cospan-diagram 𝒯)
-    --     ( equiv-cospan-equiv-cospan-diagram)
+    hom-cospan-equiv-cospan-diagram :
+      hom-cospan
+        ( cospan-cospan-diagram 𝒮)
+        ( concat-cospan
+          ( cospan-cospan-diagram 𝒯)
+          ( map-domain-equiv-cospan-diagram)
+          ( map-codomain-equiv-cospan-diagram))
+    hom-cospan-equiv-cospan-diagram =
+      hom-equiv-cospan
+        ( cospan-cospan-diagram 𝒮)
+        ( concat-cospan
+          ( cospan-cospan-diagram 𝒯)
+          ( map-domain-equiv-cospan-diagram)
+          ( map-codomain-equiv-cospan-diagram))
+        ( equiv-cospan-equiv-cospan-diagram)
 
-    -- hom-equiv-cospan-diagram : hom-cospan-diagram 𝒮 𝒯
-    -- pr1 hom-equiv-cospan-diagram = map-domain-equiv-cospan-diagram
-    -- pr1 (pr2 hom-equiv-cospan-diagram) = map-codomain-equiv-cospan-diagram
-    -- pr2 (pr2 hom-equiv-cospan-diagram) = hom-cospan-equiv-cospan-diagram
+    hom-equiv-cospan-diagram : hom-cospan-diagram 𝒮 𝒯
+    pr1 hom-equiv-cospan-diagram = map-domain-equiv-cospan-diagram
+    pr1 (pr2 hom-equiv-cospan-diagram) = map-codomain-equiv-cospan-diagram
+    pr2 (pr2 hom-equiv-cospan-diagram) = hom-cospan-equiv-cospan-diagram
 
-    -- is-equiv-equiv-cospan-diagram :
-    --   is-equiv-hom-cospan-diagram 𝒮 𝒯 hom-equiv-cospan-diagram
-    -- pr1 is-equiv-equiv-cospan-diagram =
-    --   is-equiv-map-domain-equiv-cospan-diagram
-    -- pr1 (pr2 is-equiv-equiv-cospan-diagram) =
-    --   is-equiv-map-codomain-equiv-cospan-diagram
-    -- pr2 (pr2 is-equiv-equiv-cospan-diagram) =
-    --   is-equiv-cospanning-map-equiv-cospan-diagram
+    is-equiv-equiv-cospan-diagram :
+      is-equiv-hom-cospan-diagram 𝒮 𝒯 hom-equiv-cospan-diagram
+    pr1 is-equiv-equiv-cospan-diagram =
+      is-equiv-map-domain-equiv-cospan-diagram
+    pr1 (pr2 is-equiv-equiv-cospan-diagram) =
+      is-equiv-map-codomain-equiv-cospan-diagram
+    pr2 (pr2 is-equiv-equiv-cospan-diagram) =
+      is-equiv-cospanning-map-equiv-cospan-diagram
 
-    -- compute-equiv-cospan-diagram :
-    --   Σ (hom-cospan-diagram 𝒮 𝒯) (is-equiv-hom-cospan-diagram 𝒮 𝒯) ≃
-    --   equiv-cospan-diagram
-    -- compute-equiv-cospan-diagram =
-    --   ( equiv-tot
-    --     ( λ e →
-    --       ( equiv-tot
-    --         ( λ f →
-    --           compute-equiv-cospan
-    --             ( concat-cospan
-    --               ( cospan-cospan-diagram 𝒮)
-    --               ( map-equiv e)
-    --               ( map-equiv f))
-    --             ( cospan-cospan-diagram 𝒯))) ∘e
-    --       ( interchange-Σ-Σ _))) ∘e
-    --   ( interchange-Σ-Σ _)
+  compute-equiv-cospan-diagram :
+    Σ (hom-cospan-diagram 𝒮 𝒯) (is-equiv-hom-cospan-diagram 𝒮 𝒯) ≃
+    equiv-cospan-diagram
+  compute-equiv-cospan-diagram =
+    ( equiv-tot
+      ( λ a →
+        ( equiv-tot
+          ( λ b →
+            compute-equiv-cospan
+              ( cospan-cospan-diagram 𝒮)
+              ( concat-cospan
+                ( cospan-cospan-diagram 𝒯)
+                ( map-equiv a)
+                ( map-equiv b)))) ∘e
+        ( interchange-Σ-Σ _))) ∘e
+    ( interchange-Σ-Σ _)
 ```
 
 ### The identity equivalence of cospan diagrams

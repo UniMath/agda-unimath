@@ -9,6 +9,7 @@ module foundation.morphisms-cospan-diagrams where
 ```agda
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -79,6 +80,36 @@ module _
     right-map-cospan-diagram 𝒯 ∘ map-codomain-hom-cospan-diagram ~
     cospanning-map-hom-cospan-diagram ∘ right-map-cospan-diagram 𝒮
   right-square-hom-cospan-diagram = pr2 (pr2 (pr2 (pr2 h)))
+
+  hom-left-arrow-hom-cospan-diagram' :
+    hom-arrow' (left-map-cospan-diagram 𝒮) (left-map-cospan-diagram 𝒯)
+  hom-left-arrow-hom-cospan-diagram' =
+    ( map-domain-hom-cospan-diagram ,
+      cospanning-map-hom-cospan-diagram ,
+      left-square-hom-cospan-diagram)
+
+  hom-right-arrow-hom-cospan-diagram' :
+    hom-arrow' (right-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒯)
+  hom-right-arrow-hom-cospan-diagram' =
+    ( map-codomain-hom-cospan-diagram ,
+      cospanning-map-hom-cospan-diagram ,
+      right-square-hom-cospan-diagram)
+
+  hom-left-arrow-hom-cospan-diagram :
+    hom-arrow (left-map-cospan-diagram 𝒮) (left-map-cospan-diagram 𝒯)
+  hom-left-arrow-hom-cospan-diagram =
+    hom-arrow-hom-arrow'
+      ( left-map-cospan-diagram 𝒮)
+      ( left-map-cospan-diagram 𝒯)
+      ( hom-left-arrow-hom-cospan-diagram')
+
+  hom-right-arrow-hom-cospan-diagram :
+    hom-arrow (right-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒯)
+  hom-right-arrow-hom-cospan-diagram =
+    hom-arrow-hom-arrow'
+      ( right-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒯)
+      ( hom-right-arrow-hom-cospan-diagram')
 ```
 
 ### Identity morphisms of cospan diagrams
