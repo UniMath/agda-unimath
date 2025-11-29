@@ -148,7 +148,7 @@ module _
   [unstraightened](foundation.type-duality.md) version of the
   [flattening lemma for pushouts](synthetic-homotopy-theory.flattening-lemma-pushouts.md)
 - The
-  [descent property for pushouts](synthetic-homotopy-theory.descent-property-pushouts.md).
+  [descent property for pushouts](synthetic-homotopy-theory.descent-pushouts.md).
 
 ## External links
 
