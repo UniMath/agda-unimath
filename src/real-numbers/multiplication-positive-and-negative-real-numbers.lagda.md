@@ -12,10 +12,13 @@ module real-numbers.multiplication-positive-and-negative-real-numbers where
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-closed-intervals-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -24,6 +27,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -31,13 +35,19 @@ open import foundation.universe-levels
 open import order-theory.posets
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -90,6 +100,23 @@ mul-negative-positive-ℝ :
   {l1 l2 : Level} → ℝ⁻ l1 → ℝ⁺ l2 → ℝ⁻ (l1 ⊔ l2)
 mul-negative-positive-ℝ (x , is-neg-x) (y , is-pos-y) =
   ( x *ℝ y , is-negative-mul-negative-positive-ℝ is-neg-x is-pos-y)
+```
+
+### If `x` is positive and `xy` is nonnegative, then `y` is nonnegative
+
+```agda
+abstract
+  is-nonnegative-is-nonnegative-left-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) {y : ℝ l2} → is-nonnegative-ℝ (real-ℝ⁺ x *ℝ y) →
+    is-nonnegative-ℝ y
+  is-nonnegative-is-nonnegative-left-mul-ℝ⁺ x⁺@(x , 0<x) {y = y} 0≤xy =
+    reflects-leq-left-mul-ℝ⁺
+      ( x⁺)
+      ( zero-ℝ)
+      ( y)
+      ( preserves-leq-left-sim-ℝ
+        ( symmetric-sim-ℝ (right-zero-law-mul-ℝ _))
+        ( 0≤xy))
 ```
 
 ### If the product of two real numbers is positive, both are negative or both are positive

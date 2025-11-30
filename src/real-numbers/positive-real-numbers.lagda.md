@@ -156,7 +156,8 @@ module _
   abstract
     is-positive-iff-zero-in-lower-cut-ℝ :
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-    is-positive-iff-zero-in-lower-cut-ℝ = inv-iff (le-real-iff-lower-cut-ℚ x)
+    is-positive-iff-zero-in-lower-cut-ℝ =
+      inv-iff (le-real-iff-is-in-lower-cut-ℝ x)
 
     is-positive-zero-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x

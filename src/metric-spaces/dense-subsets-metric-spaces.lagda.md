@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.pointwise-continuous-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
 
@@ -46,6 +47,24 @@ module _
 
   is-dense-subset-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
   is-dense-subset-Metric-Space = type-Prop is-dense-prop-subset-Metric-Space
+
+dense-subset-Metric-Space :
+  {l1 l2 : Level} (l3 : Level) (X : Metric-Space l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+dense-subset-Metric-Space l3 X =
+  type-subtype (is-dense-prop-subset-Metric-Space {l3 = l3} X)
+
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2)
+  (S : dense-subset-Metric-Space l3 X)
+  where
+
+  subset-dense-subset-Metric-Space : subset-Metric-Space l3 X
+  subset-dense-subset-Metric-Space = pr1 S
+
+  is-dense-subset-dense-subset-Metric-Space :
+    is-dense-subset-Metric-Space X subset-dense-subset-Metric-Space
+  is-dense-subset-dense-subset-Metric-Space = pr2 S
 ```
 
 ## Properties

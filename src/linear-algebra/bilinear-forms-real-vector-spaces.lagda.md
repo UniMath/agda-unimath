@@ -11,6 +11,7 @@ module linear-algebra.bilinear-forms-real-vector-spaces where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -171,6 +172,33 @@ module _
       ( map-bilinear-form-ℝ-Vector-Space)
   preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space =
     pr2 (pr2 (pr2 (pr2 B)))
+
+  abstract
+    preserves-scalar-mul-map-bilinear-form-ℝ-Vector-Space :
+      (a b : ℝ l1) (u v : type-ℝ-Vector-Space V) →
+      map-bilinear-form-ℝ-Vector-Space
+        ( mul-ℝ-Vector-Space V a u)
+        ( mul-ℝ-Vector-Space V b v) ＝
+      (a *ℝ b) *ℝ map-bilinear-form-ℝ-Vector-Space u v
+    preserves-scalar-mul-map-bilinear-form-ℝ-Vector-Space a b u v =
+      equational-reasoning
+        map-bilinear-form-ℝ-Vector-Space
+          ( mul-ℝ-Vector-Space V a u)
+          ( mul-ℝ-Vector-Space V b v)
+        ＝
+          a *ℝ map-bilinear-form-ℝ-Vector-Space u (mul-ℝ-Vector-Space V b v)
+          by preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space a _ _
+        ＝
+          a *ℝ (b *ℝ map-bilinear-form-ℝ-Vector-Space u v)
+          by
+            ap-mul-ℝ
+              ( refl)
+              ( preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space
+                ( b)
+                ( _)
+                ( _))
+        ＝ (a *ℝ b) *ℝ map-bilinear-form-ℝ-Vector-Space u v
+          by inv (associative-mul-ℝ _ _ _)
 ```
 
 ## External links

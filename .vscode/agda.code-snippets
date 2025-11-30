@@ -35,5 +35,10 @@
     "body": ["retract-reasoning ? retract-of ? by ?"],
     "description": "Retract reasoning",
     "prefix": ["retract-reasoning"]
+  },
+  "Inequality reasoning": {
+    "body": ["chain-of-inequalities ? ≤ ? by ?"],
+    "description": "Inequality reasoning",
+    "prefix": ["chain-of-inequalities"]
   }
 }

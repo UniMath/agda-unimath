@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
@@ -83,10 +84,19 @@ abstract opaque
       ( right-unit-law-add-ℝ x)
       ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
 
-le-right-add-real-ℝ⁺ :
-  {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
-le-right-add-real-ℝ⁺ x d =
-  tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
+abstract
+  le-right-add-real-ℝ⁺ :
+    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
+  le-right-add-real-ℝ⁺ x d =
+    tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
+
+  leq-left-add-real-ℝ⁺ :
+    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁺ d)
+  leq-left-add-real-ℝ⁺ x d = leq-le-ℝ (le-left-add-real-ℝ⁺ x d)
+
+  leq-right-add-real-ℝ⁺ :
+    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ x (real-ℝ⁺ d +ℝ x)
+  leq-right-add-real-ℝ⁺ x d = leq-le-ℝ (le-right-add-real-ℝ⁺ x d)
 ```
 
 ### Subtraction by a positive real number is a strictly deflationary map

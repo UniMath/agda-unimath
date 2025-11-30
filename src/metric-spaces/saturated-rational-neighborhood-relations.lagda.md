@@ -209,5 +209,5 @@ module _
       neighborhood-Rational-Neighborhood-Relation N δ x y)
   iff-le-neighborhood-saturated-monotonic-Rational-Neighborhood-Relation ε x y =
     ( λ Nxy δ ε<δ → monotonic-N x y ε δ ε<δ Nxy) ,
-    ( λ H → saturated-N ε x y λ δ → H (ε +ℚ⁺ δ) (le-left-add-ℚ⁺ ε δ))
+    ( λ H → saturated-N ε x y λ δ → H (ε +ℚ⁺ δ) (le-right-add-ℚ⁺ ε δ))
 ```
