@@ -10,8 +10,10 @@ module real-numbers.dense-subsets-real-numbers where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -27,22 +29,21 @@ open import logic.functoriality-existential-quantification
 
 open import metric-spaces.dense-subsets-metric-spaces
 
+open import order-theory.large-posets
+
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-approximations-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
-open import real-numbers.negation-real-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
-open import real-numbers.addition-positive-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.positive-real-numbers
-open import order-theory.large-posets
-open import foundation.binary-transport
-open import real-numbers.inequality-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers

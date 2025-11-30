@@ -7,28 +7,28 @@ module metric-spaces.pointwise-continuous-functions-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
-open import elementary-number-theory.minimum-positive-rational-numbers
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-functions-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -389,4 +389,9 @@ module _
     is-pointwise-continuous-id-Metric-Space =
       is-pointwise-continuous-is-isometry-Metric-Space X X id
         ( is-isometry-id-Metric-Space X)
+
+  pointwise-continuous-id-Metric-Space :
+    pointwise-continuous-function-Metric-Space X X
+  pointwise-continuous-id-Metric-Space =
+    ( id , is-pointwise-continuous-id-Metric-Space)
 ```

@@ -1,7 +1,7 @@
-# Monotonic functions on the real numbers
+# Increasing functions on the real numbers
 
 ```agda
-module real-numbers.monotonic-functions-real-numbers where
+module real-numbers.increasing-functions-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -52,7 +52,7 @@ open import real-numbers.subsets-real-numbers
 
 A function `f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
 themselves is
-{{#concept "monotonic" WDID=Q194404 WD="monotonic function" Disambiguation="function from ℝ to ℝ" Agda=is-monotonic-function-ℝ}}
+{{#concept "increasing" Disambiguation="function from ℝ to ℝ" Agda=is-increasing-function-ℝ}}
 if for all `x ≤ y`, `f x ≤ f y`; in other words, it is an
 [order-preserving map](order-theory.order-preserving-maps-posets.md) on the
 [poset of real numbers](real-numbers.inequality-real-numbers.md).
@@ -60,19 +60,19 @@ if for all `x ≤ y`, `f x ≤ f y`; in other words, it is an
 ## Definition
 
 ```agda
-is-monotonic-prop-function-ℝ :
+is-increasing-prop-function-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → Prop (lsuc l1 ⊔ l2)
-is-monotonic-prop-function-ℝ {l1} {l2} =
+is-increasing-prop-function-ℝ {l1} {l2} =
   preserves-order-prop-Poset (ℝ-Poset l1) (ℝ-Poset l2)
 
-is-monotonic-function-ℝ :
+is-increasing-function-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → UU (lsuc l1 ⊔ l2)
-is-monotonic-function-ℝ f = type-Prop (is-monotonic-prop-function-ℝ f)
+is-increasing-function-ℝ f = type-Prop (is-increasing-prop-function-ℝ f)
 
-is-monotonic-on-subset-function-ℝ :
+is-increasing-on-subset-function-ℝ :
   {l1 l2 l3 : Level} (f : ℝ l1 → ℝ l2) (S : subset-ℝ l3 l1) →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-is-monotonic-on-subset-function-ℝ f S =
+is-increasing-on-subset-function-ℝ f S =
   preserves-order-Poset
     ( poset-Subposet (ℝ-Poset _) S)
     ( ℝ-Poset _)
@@ -81,7 +81,7 @@ is-monotonic-on-subset-function-ℝ f S =
 
 ## Properties
 
-### If `x < y` implies `f x ≤ f y`, then `f` is monotonic
+### If `x < y` implies `f x ≤ f y`, then `f` is increasing
 
 ```agda
 module _
@@ -90,10 +90,10 @@ module _
   where
 
   abstract
-    strengthen-is-monotonic-function-ℝ :
+    strengthen-is-increasing-function-ℝ :
       ((x y : ℝ l1) → le-ℝ x y → leq-ℝ (f x) (f y)) →
-      is-monotonic-function-ℝ f
-    strengthen-is-monotonic-function-ℝ H x y x≤y =
+      is-increasing-function-ℝ f
+    strengthen-is-increasing-function-ℝ H x y x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -110,11 +110,11 @@ module _
   where
 
   abstract
-    strengthen-is-monotonic-on-subset-function-ℝ :
+    strengthen-is-increasing-on-subset-function-ℝ :
       ( ((x y : type-subset-ℝ S) →
         le-ℝ (pr1 x) (pr1 y) → leq-ℝ (f (pr1 x)) (f (pr1 y)))) →
-      is-monotonic-on-subset-function-ℝ f S
-    strengthen-is-monotonic-on-subset-function-ℝ H (x , x∈S) (y , y∈S) x≤y =
+      is-increasing-on-subset-function-ℝ f S
+    strengthen-is-increasing-on-subset-function-ℝ H (x , x∈S) (y , y∈S) x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -125,7 +125,7 @@ module _
           ( irrefutable-sim-or-le-leq-ℝ x y x≤y))
 ```
 
-### If a pointwise continuous function `f` is monotonic on a dense subset of `ℝ`, then it is monotonic on `ℝ`
+### If a pointwise continuous function `f` is increasing on a dense subset of `ℝ`, then it is increasing on `ℝ`
 
 ```agda
 module _
@@ -135,18 +135,18 @@ module _
   where
 
   abstract
-    is-monotonic-is-monotonic-dense-subset-pointwise-continuous-function-ℝ :
-      is-monotonic-on-subset-function-ℝ
+    is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ :
+      is-increasing-on-subset-function-ℝ
         ( map-pointwise-continuous-function-ℝ f)
         ( subset-dense-subset-ℝ S) →
-      is-monotonic-function-ℝ (map-pointwise-continuous-function-ℝ f)
-    is-monotonic-is-monotonic-dense-subset-pointwise-continuous-function-ℝ H =
+      is-increasing-function-ℝ (map-pointwise-continuous-function-ℝ f)
+    is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ H =
       let
         f' = map-pointwise-continuous-function-ℝ f
         open do-syntax-trunc-Prop empty-Prop
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        strengthen-is-monotonic-function-ℝ
+        strengthen-is-increasing-function-ℝ
           ( map-pointwise-continuous-function-ℝ f)
           ( λ x y x<y →
             leq-not-le-ℝ
@@ -216,7 +216,7 @@ module _
                                       ( commutative-add-ℚ⁺ εy εx ∙ εx+εy=ε))))))
 ```
 
-### If `f` is pointwise continuous and monotonic on the rational real numbers, it is monotonic on the real numbers
+### If `f` is pointwise continuous and increasing on the rational real numbers, it is increasing on the real numbers
 
 ```agda
 module _
@@ -225,14 +225,14 @@ module _
   where
 
   abstract
-    is-monotonic-is-monotonic-rational-ℝ :
+    is-increasing-is-increasing-rational-ℝ :
       preserves-order-Poset
         ( ℚ-Poset)
         ( ℝ-Poset l2)
         ( map-pointwise-continuous-function-ℝ f ∘ raise-real-ℚ l1) →
-      is-monotonic-function-ℝ (map-pointwise-continuous-function-ℝ f)
-    is-monotonic-is-monotonic-rational-ℝ H =
-      is-monotonic-is-monotonic-dense-subset-pointwise-continuous-function-ℝ
+      is-increasing-function-ℝ (map-pointwise-continuous-function-ℝ f)
+    is-increasing-is-increasing-rational-ℝ H =
+      is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ
         ( f)
         ( dense-subset-rational-real-ℝ l1)
         ( λ (x , p , x~p) (y , q , y~q) x≤y →

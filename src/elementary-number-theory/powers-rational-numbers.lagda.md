@@ -33,13 +33,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
-
-open import foundation.empty-types
 open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.powers-of-elements-monoids
 
