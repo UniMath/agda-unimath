@@ -57,6 +57,10 @@ if for all `x ≤ y`, `f x ≤ f y`; in other words, it is an
 [order-preserving map](order-theory.order-preserving-maps-posets.md) on the
 [poset of real numbers](real-numbers.inequality-real-numbers.md).
 
+Several arguments on this page are due to
+[Mark Saving](https://math.stackexchange.com/users/798694/mark-saving) in this
+Mathematics Stack Exchange answer: <https://math.stackexchange.com/q/5107860>.
+
 ## Definition
 
 ```agda

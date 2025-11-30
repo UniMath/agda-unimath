@@ -36,6 +36,10 @@ themselves is
 {{#concept "strictly increasing" WDID=Q78055984 WD="strictly increasing function" Disambiguation="function from ℝ to ℝ" Agda=is-strictly-increasing-function-ℝ}}
 if for all `x < y`, `f x < f y`.
 
+Several arguments on this page are due to
+[Mark Saving](https://math.stackexchange.com/users/798694/mark-saving) in this
+Mathematics Stack Exchange answer: <https://math.stackexchange.com/q/5107860>.
+
 ## Definition
 
 ```agda
