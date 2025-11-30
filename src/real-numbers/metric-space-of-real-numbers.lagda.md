@@ -42,11 +42,13 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -292,7 +294,7 @@ module _
             ( inv-tr
               ( λ z → le-ℝ z y)
               ( add-real-ℚ q d)
-              ( le-real-is-in-lower-cut-ℚ y q+d<y)))
+              ( le-real-is-in-lower-cut-ℝ y q+d<y)))
           ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
   opaque
@@ -335,6 +337,21 @@ module _
       neighborhood-ℝ l d x y → leq-ℝ y (x +ℝ real-ℚ⁺ d)
     right-leq-real-bound-neighborhood-ℝ (H , _) =
       real-bound-leq-lower-neighborhood-ℝ d x y H
+```
+
+### `x + real-ℚ⁺ d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-right-add-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) →
+    neighborhood-ℝ l d x (x +ℝ real-ℚ⁺ d)
+  neighborhood-right-add-real-ℚ⁺ x d =
+    neighborhood-real-bound-each-leq-ℝ d _ _
+      ( transitive-leq-ℝ _ _ _
+        ( leq-left-add-real-ℝ⁰⁺ _ (nonnegative-real-ℚ⁺ d))
+        ( leq-left-add-real-ℝ⁰⁺ _ (nonnegative-real-ℚ⁺ d)))
+      ( refl-leq-ℝ _)
 ```
 
 ### Similarity of real numbers preserves neighborhoods
