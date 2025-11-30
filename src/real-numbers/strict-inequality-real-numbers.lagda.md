@@ -37,6 +37,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
 
@@ -487,6 +488,23 @@ module _
       ( x2)
       ( x1~x2)
       ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
+```
+
+### `x < y` iff `raise-ℝ l x < raise-ℝ l y`
+
+```agda
+abstract
+  le-le-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    le-ℝ (raise-ℝ l x) (raise-ℝ l y) → le-ℝ x y
+  le-le-raise-ℝ l {x} {y} =
+    preserves-le-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
+
+  le-raise-le-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    le-ℝ x y → le-ℝ (raise-ℝ l x) (raise-ℝ l y)
+  le-raise-le-ℝ l {x} {y} =
+    preserves-le-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
 ```
 
 ### If `x` is less than each rational number `y` is less than, then `x ≤ y`

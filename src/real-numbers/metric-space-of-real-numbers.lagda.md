@@ -12,6 +12,7 @@ module real-numbers.metric-space-of-real-numbers where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
@@ -367,6 +368,17 @@ module _
           ( x')
           ( x~x'))
         ( right-leq-real-bound-neighborhood-ℝ d x y H))
+```
+
+### The neighborhood relation on the real numbers is weakly monotonic
+
+```agda
+abstract
+  weakly-monotonic-neighborhood-ℝ :
+    {l : Level} (x y : ℝ l) (d₁ d₂ : ℚ⁺) → leq-ℚ⁺ d₁ d₂ →
+    neighborhood-ℝ l d₁ x y → neighborhood-ℝ l d₂ x y
+  weakly-monotonic-neighborhood-ℝ {l} =
+    weakly-monotonic-neighborhood-Metric-Space (metric-space-ℝ l)
 ```
 
 ### The canonical embedding from rational to real numbers is an isometry between metric spaces

@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.continuous-functions-metric-spaces
+open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces

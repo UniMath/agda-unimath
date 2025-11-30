@@ -38,6 +38,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
@@ -51,6 +52,11 @@ open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.strictly-monotonic-functions-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.pointwise-continuous-functions-metric-spaces
+open import real-numbers.pointwise-continuous-functions-real-numbers
 ```
 
 </details>
@@ -88,6 +94,34 @@ abstract
         ( hom-ring-real-ℚ)
         ( n)
         ( q))
+```
+
+### The power operation preserves similarity
+
+```agda
+abstract
+  preserves-sim-power-ℝ :
+    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℝ (power-ℝ n x) (power-ℝ n y)
+  preserves-sim-power-ℝ n =
+    preserves-sim-power-Large-Commutative-Ring large-commutative-ring-ℝ n _ _
+```
+
+### The power operation commutes with raising universe level
+
+```agda
+abstract
+  power-raise-ℝ :
+    {l0 : Level} (l : Level) (n : ℕ) (x : ℝ l0) →
+    power-ℝ n (raise-ℝ l x) ＝ raise-ℝ l (power-ℝ n x)
+  power-raise-ℝ l n x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        power-ℝ n (raise-ℝ l x)
+        ~ℝ power-ℝ n x
+          by preserves-sim-power-ℝ n (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (power-ℝ n x)
+          by sim-raise-ℝ l _)
 ```
 
 ### `1ⁿ ＝ 1`
@@ -430,4 +464,41 @@ abstract
               by leq-eq-ℝ (power-real-ℚ n ε)
             ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
               by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
+```
+
+### For any `n`, `power-ℝ n` is pointwise continuous
+
+```agda
+abstract
+  is-pointwise-continuous-power-ℝ :
+    {l : Level} (n : ℕ) → is-pointwise-continuous-function-ℝ {l} (power-ℝ n)
+  is-pointwise-continuous-power-ℝ 0 =
+    is-pointwise-continuous-constant-function-Metric-Space _ _ _
+  is-pointwise-continuous-power-ℝ 1 =
+    is-pointwise-continuous-id-Metric-Space _
+  is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
+    is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space
+      ( metric-space-ℝ l)
+      ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+      ( metric-space-ℝ l)
+      {! ind-Σ   !}
+      {!   !}
+```
+
+### Odd powers of real numbers preserve strict inequality
+
+```agda
+abstract
+  preserves-le-odd-power-ℝ :
+    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → le-ℝ x y →
+    le-ℝ (power-ℝ n x) (power-ℝ n y)
+  preserves-le-odd-power-ℝ {l1} {l2} n {x} {y} odd-n x<y =
+    le-le-raise-ℝ
+      ( l1 ⊔ l2)
+      ( is-strictly-monotonic-is-strictly-monotonic-rational-ℝ
+        {!   !}
+        {!   !}
+        {!   !}
+        {!   !}
+        {!   !})
 ```
