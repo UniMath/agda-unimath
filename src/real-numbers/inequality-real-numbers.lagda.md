@@ -342,6 +342,23 @@ module _
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
+### Raising either side of an inequality to another universe level
+
+```agda
+abstract
+  preserves-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
+  preserves-leq-left-raise-ℝ l {x} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
+
+  preserves-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
+  preserves-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+```
+
 ### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
 
 ```agda
@@ -390,6 +407,29 @@ module _
 
   leq-iff-not-in-lower-cut-ℝ : leq-ℝ x (real-ℚ q) ↔ ¬ (is-in-lower-cut-ℝ x q)
   leq-iff-not-in-lower-cut-ℝ = (not-in-lower-cut-leq-ℝ , leq-not-in-lower-cut-ℝ)
+```
+
+### If `q` is in the lower cut of `x`, `real-ℚ q ≤ x`
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ l)
+  where
+
+  abstract opaque
+    unfolding leq-ℝ real-ℚ
+
+    leq-real-is-in-lower-cut-ℝ :
+      {q : ℚ} → is-in-lower-cut-ℝ x q → leq-ℝ (real-ℚ q) x
+    leq-real-is-in-lower-cut-ℝ q<x p p<q = le-lower-cut-ℝ x p<q q<x
+
+abstract
+  leq-raise-real-is-in-lower-cut-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
+    is-in-lower-cut-ℝ x q → leq-ℝ (raise-real-ℚ l q) x
+  leq-raise-real-is-in-lower-cut-ℝ l x q<x =
+    preserves-leq-left-raise-ℝ l (leq-real-is-in-lower-cut-ℝ x q<x)
 ```
 
 ### If `y ≤ q ⇒ x ≤ q` for every rational `q`, then `x ≤ y`
