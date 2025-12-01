@@ -31,7 +31,7 @@ open import metric-spaces.short-functions-pseudometric-spaces
 ## Idea
 
 [Short maps](metric-spaces.short-functions-pseudometric-spaces.md) between
-[premetric spaces](metric-spaces.premetric-spaces.md) act on their
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on their
 [cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 and induce a short map between their
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
