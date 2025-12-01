@@ -40,7 +40,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-[Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces)
+[Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 in the
 [Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) have a
