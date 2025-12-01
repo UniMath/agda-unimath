@@ -33,6 +33,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.equality-of-metric-spaces

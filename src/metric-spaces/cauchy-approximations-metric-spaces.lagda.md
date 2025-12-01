@@ -106,54 +106,6 @@ module _
       ( x)
 ```
 
-### The action of short maps on Cauchy approximations
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-function-Metric-Space A B)
-  where
-
-  map-short-function-cauchy-approximation-Metric-Space :
-    cauchy-approximation-Metric-Space A →
-    cauchy-approximation-Metric-Space B
-  map-short-function-cauchy-approximation-Metric-Space =
-    map-cauchy-approximation-short-function-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
-
-module _
-  {l1 l2 : Level}
-  (A : Metric-Space l1 l2)
-  where
-
-  eq-id-map-short-function-cauchy-approximation-Metric-Space :
-    map-short-function-cauchy-approximation-Metric-Space
-      ( A)
-      ( A)
-      ( id-short-function-Metric-Space A) ＝
-    id
-  eq-id-map-short-function-cauchy-approximation-Metric-Space = refl
-
-module _
-  {l1a l2a l1b l2b l1c l2c : Level}
-  (A : Metric-Space l1a l2a)
-  (B : Metric-Space l1b l2b)
-  (C : Metric-Space l1c l2c)
-  (g : short-function-Metric-Space B C)
-  (f : short-function-Metric-Space A B)
-  where
-
-  eq-comp-map-short-function-cauchy-approximation-Metric-Space :
-    ( map-short-function-cauchy-approximation-Metric-Space B C g ∘
-      map-short-function-cauchy-approximation-Metric-Space A B f) ＝
-    ( map-short-function-cauchy-approximation-Metric-Space A C
-      (comp-short-function-Metric-Space A B C g f))
-  eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
-```
-
 ### Homotopic Cauchy approximations are equal
 
 ```agda

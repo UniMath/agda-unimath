@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces

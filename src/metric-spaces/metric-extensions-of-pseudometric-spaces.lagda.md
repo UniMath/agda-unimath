@@ -30,6 +30,7 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.action-of-isometries-on-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces

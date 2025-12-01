@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces

@@ -104,50 +104,6 @@ module _
     refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x
 ```
 
-### The action of short maps on Cauchy approximations
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A B)
-  where
-
-  map-cauchy-approximation-short-function-Pseudometric-Space :
-    cauchy-approximation-Pseudometric-Space A →
-    cauchy-approximation-Pseudometric-Space B
-  map-cauchy-approximation-short-function-Pseudometric-Space (u , H) =
-    ( map-short-function-Pseudometric-Space A B f ∘ u ,
-      λ ε δ →
-        is-short-map-short-function-Pseudometric-Space
-          ( A)
-          ( B)
-          ( f)
-          ( ε +ℚ⁺ δ)
-          ( u ε)
-          ( u δ)
-          ( H ε δ))
-```
-
-### The action of isometries on Cauchy approximations
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : isometry-Pseudometric-Space A B)
-  where
-
-  map-cauchy-approximation-isometry-Pseudometric-Space :
-    cauchy-approximation-Pseudometric-Space A →
-    cauchy-approximation-Pseudometric-Space B
-  map-cauchy-approximation-isometry-Pseudometric-Space =
-    map-cauchy-approximation-short-function-Pseudometric-Space
-      ( A)
-      ( B)
-      ( short-isometry-Pseudometric-Space A B f)
-```
-
 ### Homotopic Cauchy approximations are equal
 
 ```agda
