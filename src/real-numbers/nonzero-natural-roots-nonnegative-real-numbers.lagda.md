@@ -30,6 +30,8 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
 open import real-numbers.powers-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```
@@ -47,12 +49,15 @@ on the [nonnegative](real-numbers.nonnegative-real-numbers.md)
 ## Definition
 
 ```agda
-root-pair-expansion-ℝ⁰⁺ :
-  {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) → ℝ⁰⁺ l
+root-pair-expansion-ℝ⁰⁺ : {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) → ℝ⁰⁺ l
 root-pair-expansion-ℝ⁰⁺ 0 v x =
   odd-root-ℝ⁰⁺ (succ-ℕ (v *ℕ 2)) (is-odd-has-odd-expansion _ (v , refl)) x
 root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
   root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x)
+
+real-root-pair-expansion-ℝ⁰⁺ : {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) → ℝ l
+real-root-pair-expansion-ℝ⁰⁺ u v x =
+  real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v x)
 
 nonzero-nat-root-ℝ⁰⁺ : {l : Level} (n : ℕ⁺) → ℝ⁰⁺ l → ℝ⁰⁺ l
 nonzero-nat-root-ℝ⁰⁺ (succ-ℕ n , H) =
@@ -72,7 +77,7 @@ abstract
     {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) →
     power-ℝ
       ( map-pair-expansion u v)
-      ( real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v x)) ＝
+      ( real-root-pair-expansion-ℝ⁰⁺ u v x) ＝
     real-ℝ⁰⁺ x
   power-root-pair-expansion-ℝ⁰⁺ 0 v (x , _) =
     equational-reasoning
@@ -95,11 +100,11 @@ abstract
     equational-reasoning
       power-ℝ
         ( map-pair-expansion (succ-ℕ u) v)
-        ( real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺)))
+        ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺))
       ＝
         power-ℝ
           ( map-pair-expansion u v *ℕ 2)
-          ( real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺)))
+          ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺))
         by
           ap-binary
             ( power-ℝ)
@@ -109,7 +114,7 @@ abstract
         square-ℝ
           ( power-ℝ
             ( map-pair-expansion u v)
-            ( real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺))))
+            ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺)))
         by power-mul-ℝ (map-pair-expansion u v) 2
       ＝ square-ℝ (real-sqrt-ℝ⁰⁺ x⁰⁺)
         by ap square-ℝ (power-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x⁰⁺))
@@ -166,44 +171,39 @@ abstract
             ( x)
   root-power-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x⁰⁺@(x , _) =
     equational-reasoning
-      real-ℝ⁰⁺
-        ( root-pair-expansion-ℝ⁰⁺
+      real-root-pair-expansion-ℝ⁰⁺
+        ( u)
+        ( v)
+        ( sqrt-ℝ⁰⁺
+          ( power-ℝ⁰⁺ (map-pair-expansion (succ-ℕ u) v) x⁰⁺))
+      ＝
+        real-root-pair-expansion-ℝ⁰⁺
           ( u)
           ( v)
           ( sqrt-ℝ⁰⁺
-            ( power-ℝ⁰⁺ (map-pair-expansion (succ-ℕ u) v) x⁰⁺)))
-      ＝
-        real-ℝ⁰⁺
-          ( root-pair-expansion-ℝ⁰⁺
-            ( u)
-            ( v)
-            ( sqrt-ℝ⁰⁺
-              ( power-ℝ⁰⁺ (map-pair-expansion u v *ℕ 2) x⁰⁺)))
+            ( power-ℝ⁰⁺ (map-pair-expansion u v *ℕ 2) x⁰⁺))
         by
           ap
             ( λ n →
-              real-ℝ⁰⁺
-                ( root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ (power-ℝ⁰⁺ n x⁰⁺))))
+              real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ (power-ℝ⁰⁺ n x⁰⁺)))
             ( map-pair-expansion-succ-ℕ u v)
       ＝
-        real-ℝ⁰⁺
-          ( root-pair-expansion-ℝ⁰⁺
-            ( u)
-            ( v)
-            ( sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ (power-ℝ⁰⁺ (map-pair-expansion u v) x⁰⁺))))
+        real-root-pair-expansion-ℝ⁰⁺
+          ( u)
+          ( v)
+          ( sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ (power-ℝ⁰⁺ (map-pair-expansion u v) x⁰⁺)))
         by
           ap
-            ( λ y → real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ y)))
+            ( λ y → real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ y))
             ( eq-ℝ⁰⁺ _ _ (power-mul-ℝ (map-pair-expansion u v) 2))
       ＝
-        real-ℝ⁰⁺
-          ( root-pair-expansion-ℝ⁰⁺
-            ( u)
-            ( v)
-            ( power-ℝ⁰⁺ (map-pair-expansion u v) x⁰⁺))
+        real-root-pair-expansion-ℝ⁰⁺
+          ( u)
+          ( v)
+          ( power-ℝ⁰⁺ (map-pair-expansion u v) x⁰⁺)
         by
           ap
-            ( real-ℝ⁰⁺ ∘ root-pair-expansion-ℝ⁰⁺ u v)
+            ( real-root-pair-expansion-ℝ⁰⁺ u v)
             ( is-retraction-square-ℝ⁰⁺ _)
       ＝ x
         by root-power-pair-expansion-ℝ⁰⁺ u v x⁰⁺
@@ -217,7 +217,7 @@ abstract
     in
       eq-ℝ⁰⁺ _ _
         ( ( ap
-            ( λ k → real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v (power-ℝ⁰⁺ k x)))
+            ( λ k → real-root-pair-expansion-ℝ⁰⁺ u v (power-ℝ⁰⁺ k x))
             ( inv H)) ∙
           ( root-power-pair-expansion-ℝ⁰⁺ u v x))
   is-retraction-nonzero-nat-power-ℝ⁰⁺ (0 , H) x = ex-falso (H refl)
