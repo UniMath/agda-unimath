@@ -700,6 +700,13 @@ is-positive-sqrt-iff-is-positive-ℝ⁰⁺ :
 is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
   ( is-positive-is-positive-sqrt-ℝ⁰⁺ x ,
     is-positive-sqrt-is-positive-ℝ⁰⁺ x)
+
+sqrt-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁺ l
+sqrt-ℝ⁺ x⁺@(x , 0<x) =
+  let
+    x⁰⁺ = nonnegative-ℝ⁺ x⁺
+  in
+    ( real-sqrt-ℝ⁰⁺ x⁰⁺ , is-positive-sqrt-is-positive-ℝ⁰⁺ x⁰⁺ 0<x)
 ```
 
 ### The square root of zero is zero
