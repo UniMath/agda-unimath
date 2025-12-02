@@ -25,6 +25,7 @@ open import elementary-number-theory.ring-of-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
@@ -40,6 +41,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.increasing-functions-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -60,6 +62,7 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.strictly-increasing-functions-real-numbers
+open import real-numbers.unbounded-functions-real-numbers
 ```
 
 </details>
@@ -580,4 +583,125 @@ abstract
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
+```
+
+### Odd powers of real numbers reflect inequality
+
+```agda
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
+
+  abstract
+    reflects-leq-odd-power-ℝ :
+      {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+      leq-ℝ (power-ℝ n x) (power-ℝ n y) →
+      leq-ℝ x y
+    reflects-leq-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+      leq-leq-raise-ℝ
+        ( l1 ⊔ l2)
+        ( reflects-leq-is-strictly-increasing-function-ℝ
+          ( power-ℝ n)
+          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+          ( raise-ℝ (l1 ⊔ l2) x)
+          ( raise-ℝ (l1 ⊔ l2) y)
+          ( preserves-leq-sim-ℝ
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ (l1 ⊔ l2) x))
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ (l1 ⊔ l2) y))
+            ( xⁿ≤yⁿ)))
+```
+
+### Odd powers of real numbers reflect strict inequality
+
+```agda
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
+
+  abstract
+    reflects-le-odd-power-ℝ :
+      {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+      le-ℝ (power-ℝ n x) (power-ℝ n y) →
+      le-ℝ x y
+    reflects-le-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+      le-le-raise-ℝ
+        ( l1 ⊔ l2)
+        ( reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ
+          ( pointwise-continuous-power-ℝ (l1 ⊔ l2) n)
+          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+          ( raise-ℝ (l1 ⊔ l2) x)
+          ( raise-ℝ (l1 ⊔ l2) y)
+          ( preserves-le-sim-ℝ
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ (l1 ⊔ l2) x))
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ (l1 ⊔ l2) y))
+            ( xⁿ≤yⁿ)))
+```
+
+### For odd `n`, `x ↦ xⁿ` is unbounded above and below
+
+```agda
+module _
+  (l : Level)
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
+
+  abstract
+    is-unbounded-below-odd-power-ℝ :
+      is-unbounded-below-function-ℝ (power-ℝ {l} n)
+    is-unbounded-below-odd-power-ℝ q =
+      let
+        (p , pⁿ<q) = unbounded-below-odd-power-ℚ n q odd-n
+      in
+        intro-exists
+          ( raise-real-ℚ l p)
+          ( preserves-le-left-sim-ℝ _ _ _
+            ( similarity-reasoning-ℝ
+              real-ℚ (power-ℚ n p)
+              ~ℝ power-ℝ n (real-ℚ p)
+                by sim-eq-ℝ (inv (power-real-ℚ n p))
+              ~ℝ power-ℝ n (raise-real-ℚ l p)
+                by preserves-sim-power-ℝ n (sim-raise-ℝ l _))
+            ( preserves-le-real-ℚ pⁿ<q))
+
+    is-unbounded-above-odd-power-ℝ :
+      is-unbounded-above-function-ℝ (power-ℝ {l} n)
+    is-unbounded-above-odd-power-ℝ q =
+      let
+        (p , q<pⁿ) = unbounded-above-odd-power-ℚ n q odd-n
+      in
+        intro-exists
+          ( raise-real-ℚ l p)
+          ( preserves-le-right-sim-ℝ _ _ _
+            ( similarity-reasoning-ℝ
+              real-ℚ (power-ℚ n p)
+              ~ℝ power-ℝ n (real-ℚ p)
+                by sim-eq-ℝ (inv (power-real-ℚ n p))
+              ~ℝ power-ℝ n (raise-real-ℚ l p)
+                by preserves-sim-power-ℝ n (sim-raise-ℝ l _))
+            ( preserves-le-real-ℚ q<pⁿ))
+```
+
+### For odd `n`, `x ↦ xⁿ` is strictly increasing, pointwise continuous, and unbounded
+
+```agda
+module _
+  (l : Level)
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
+
+  abstract
+    is-SIPCUB-odd-power-ℝ :
+      is-SIPCUB-function-ℝ (power-ℝ {l} n)
+    is-SIPCUB-odd-power-ℝ =
+      ( is-strictly-increasing-odd-power-ℝ l n odd-n ,
+        is-pointwise-continuous-power-ℝ n ,
+        is-unbounded-above-odd-power-ℝ l n odd-n ,
+        is-unbounded-below-odd-power-ℝ l n odd-n)
+
+  SIPCUB-odd-power-ℝ : SIPCUB-function-ℝ l l
+  SIPCUB-odd-power-ℝ = (power-ℝ n , is-SIPCUB-odd-power-ℝ)
 ```

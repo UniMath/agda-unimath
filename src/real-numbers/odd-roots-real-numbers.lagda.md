@@ -7,39 +7,20 @@ module real-numbers.odd-roots-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-positive-rational-numbers
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
-open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
-open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.metric-space-of-rational-numbers
-
-open import order-theory.posets
-
-open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.metric-space-of-real-numbers
-open import real-numbers.pointwise-continuous-functions-real-numbers
+open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers
 open import real-numbers.powers-real-numbers
-open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -59,90 +40,70 @@ module _
   {l : Level}
   (n : ℕ)
   (odd-n : is-odd-ℕ n)
-  (x : ℝ l)
   where
 
-  lower-cut-odd-root-ℝ : subtype l ℚ
-  lower-cut-odd-root-ℝ q = lower-cut-ℝ x (power-ℚ n q)
+  odd-root-ℝ : ℝ l → ℝ l
+  odd-root-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
 
-  upper-cut-odd-root-ℝ : subtype l ℚ
-  upper-cut-odd-root-ℝ q = upper-cut-ℝ x (power-ℚ n q)
+  odd-power-odd-root-ℝ :
+    (x : ℝ l) → power-ℝ n (odd-root-ℝ x) ＝ x
+  odd-power-odd-root-ℝ =
+    is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+
+  odd-root-odd-power-ℝ :
+    (x : ℝ l) → odd-root-ℝ (power-ℝ n x) ＝ x
+  odd-root-odd-power-ℝ =
+    is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+```
+
+## Properties
+
+### Odd roots preserve strict inequality
+
+```agda
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
 
   abstract
-    is-inhabited-lower-cut-odd-root-ℝ :
-      is-inhabited-subtype lower-cut-odd-root-ℝ
-    is-inhabited-lower-cut-odd-root-ℝ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-inhabited-subtype-Prop lower-cut-odd-root-ℝ)
-      in do
-        (q , q<x) ← is-inhabited-lower-cut-ℝ x
-        let (p , pⁿ<q) = unbounded-below-odd-power-ℚ n q odd-n
-        intro-exists p (le-lower-cut-ℝ x pⁿ<q q<x)
+    preserves-le-odd-root-ℝ :
+      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y →
+      le-ℝ (odd-root-ℝ n odd-n x) (odd-root-ℝ n odd-n y)
+    preserves-le-odd-root-ℝ {x = x} {y = y} x<y =
+      reflects-le-odd-power-ℝ
+        ( n)
+        ( odd-n)
+        ( _)
+        ( _)
+        ( binary-tr
+          ( le-ℝ)
+          ( inv (odd-power-odd-root-ℝ n odd-n x))
+          ( inv (odd-power-odd-root-ℝ n odd-n y))
+          ( x<y))
+```
 
-    is-inhabited-upper-cut-odd-root-ℝ :
-      is-inhabited-subtype upper-cut-odd-root-ℝ
-    is-inhabited-upper-cut-odd-root-ℝ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-inhabited-subtype-Prop upper-cut-odd-root-ℝ)
-      in do
-        (q , x<q) ← is-inhabited-upper-cut-ℝ x
-        let (p , q<pⁿ) = unbounded-above-odd-power-ℚ n q odd-n
-        intro-exists p (le-upper-cut-ℝ x q<pⁿ x<q)
+### Odd roots preserve inequality
 
-    forward-implication-is-rounded-lower-cut-odd-root-ℝ :
-      (q : ℚ) →
-      is-in-subtype lower-cut-odd-root-ℝ q →
-      exists ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-odd-root-ℝ r)
-    forward-implication-is-rounded-lower-cut-odd-root-ℝ q qⁿ<x =
-      let
-        open inequality-reasoning-Poset ℚ-Poset
-        open
-          do-syntax-trunc-Prop
-            ( ∃ ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-odd-root-ℝ r))
-      in do
-        (p , qⁿ<p , p<x) ←
-          forward-implication (is-rounded-lower-cut-ℝ x (power-ℚ n q)) qⁿ<x
-        let
-          ε = positive-diff-le-ℚ qⁿ<p
-        (δ , H) ←
-          is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
-            ( pointwise-continuous-power-ℝ lzero n)
-            ( real-ℚ q)
-            ( ε)
-        intro-exists
-          ( q +ℚ rational-ℚ⁺ δ)
-          ( le-right-add-rational-ℚ⁺ q δ ,
-            leq-lower-cut-ℝ
-              ( x)
-              ( chain-of-inequalities
-                power-ℚ n (q +ℚ rational-ℚ⁺ δ)
-                ≤ power-ℚ n q +ℚ rational-ℚ⁺ ε
-                  by
-                    reflects-leq-real-ℚ
-                      ( binary-tr
-                        ( leq-ℝ)
-                        ( power-real-ℚ n _)
-                        ( ( ap-add-ℝ (power-real-ℚ n q) refl) ∙
-                          ( add-real-ℚ _ _))
-                        ( right-leq-real-bound-neighborhood-ℝ ε _ _
-                          ( H
-                            ( real-ℚ (q +ℚ rational-ℚ⁺ δ))
-                            ( forward-implication
-                              ( is-isometry-metric-space-real-ℚ
-                                ( δ)
-                                ( q)
-                                ( q +ℚ rational-ℚ⁺ δ))
-                                ( neighborhood-add-ℚ q δ)))))
-                ≤ p
-                  by leq-eq-ℚ (is-identity-right-conjugation-add-ℚ _ _))
-              ( p<x))
+```agda
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
 
-    forward-implication-is-rounded-upper-cut-odd-root-ℝ :
-      (q : ℚ) →
-      is-in-subtype upper-cut-odd-root-ℝ q →
-      exists ℚ (λ p → le-ℚ-Prop p q ∧ upper-cut-odd-root-ℝ r)
+  abstract
+    preserves-leq-odd-root-ℝ :
+      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
+      leq-ℝ (odd-root-ℝ n odd-n x) (odd-root-ℝ n odd-n y)
+    preserves-leq-odd-root-ℝ {x = x} {y = y} x≤y =
+      reflects-leq-odd-power-ℝ
+        ( n)
+        ( odd-n)
+        ( _)
+        ( _)
+        ( binary-tr
+          ( leq-ℝ)
+          ( inv (odd-power-odd-root-ℝ n odd-n x))
+          ( inv (odd-power-odd-root-ℝ n odd-n y))
+          ( x≤y))
 ```
