@@ -116,6 +116,9 @@ pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
 ```agda
 rational-ℕ : ℕ → ℚ
 rational-ℕ n = rational-ℤ (int-ℕ n)
+
+two-ℚ : ℚ
+two-ℚ = rational-ℕ 2
 ```
 
 ### Negative one, zero and one

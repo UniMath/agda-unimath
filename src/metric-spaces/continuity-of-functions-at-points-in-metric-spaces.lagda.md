@@ -1,7 +1,7 @@
-# Continuous functions between metric spaces
+# Continuity of functions at points in metric spaces
 
 ```agda
-module metric-spaces.continuous-functions-metric-spaces where
+module metric-spaces.continuity-of-functions-at-points-in-metric-spaces where
 ```
 
 <details><summary>Imports</summary>

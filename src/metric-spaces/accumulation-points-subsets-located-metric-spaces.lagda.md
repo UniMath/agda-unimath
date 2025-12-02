@@ -284,7 +284,7 @@ module _
                   ( ε')
                   ( ε +ℚ⁺ δ)
                   ( transitive-le-ℚ _ _ _
-                    ( le-left-add-ℚ⁺ ε δ)
+                    ( le-right-add-ℚ⁺ ε δ)
                     ( le-modulus-le-double-le-ℚ⁺ ε))
                   ( is-mod-μ ε' (mod-μ ε') (refl-leq-ℕ (mod-μ ε')))))
 ```
