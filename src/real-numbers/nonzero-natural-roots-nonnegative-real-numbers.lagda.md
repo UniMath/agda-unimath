@@ -23,6 +23,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.injective-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -240,3 +241,26 @@ aut-nonzero-power-ℝ : {l : Level} (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
 aut-nonzero-power-ℝ n⁺@(n , _) =
   ( power-ℝ⁰⁺ n , is-equiv-nonzero-power-ℝ n⁺)
 ```
+
+### The `1`st root of `x` is `x`
+
+```agda
+abstract
+  root-one-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → nonzero-nat-root-ℝ⁰⁺ one-ℕ⁺ x ＝ x
+  root-one-ℝ⁰⁺ x =
+    is-injective-is-equiv
+      ( is-equiv-nonzero-power-ℝ one-ℕ⁺)
+      ( ( is-section-nonzero-nat-power-ℝ⁰⁺ one-ℕ⁺ x) ∙
+        ( eq-ℝ⁰⁺ _ _ (refl {x = real-ℝ⁰⁺ x})))
+```
+
+### Roots and powers commute
+
+```agda
+abstract
+  commute-root-power-ℝ
+```
+
+## See also
+
+- [Nonzero natural roots of positive real numbers](real-numbers.nonzero-natural-roots-positive-real-numbers.md)

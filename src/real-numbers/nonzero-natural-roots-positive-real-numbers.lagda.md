@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.action-on-identifications-functions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -28,6 +29,12 @@ open import real-numbers.square-roots-nonnegative-real-numbers
 </details>
 
 ## Idea
+
+For any [nonzero](elementary-number-theory.nonzero-natural-numbers.md)
+[natural number](elementary-number-theory.natural-numbers.md) `n`, there exists
+an inverse to the [power function](real-numbers.powers-real-numbers.md) `x ↦ xⁿ`
+on the [positive](real-numbers.positive-real-numbers.md)
+[real numbers](real-numbers.dedekind-real-numbers.md).
 
 ## Definition
 
@@ -59,3 +66,18 @@ nonzero-nat-root-ℝ⁺ n x⁺@(x , 0<x) =
   ( real-nonzero-nat-root-ℝ⁰⁺ n (nonnegative-ℝ⁺ x⁺) ,
     preserves-is-positive-nonzero-nat-root-ℝ⁰⁺ n _ 0<x)
 ```
+
+## Properties
+
+### The `1`st root of `x` is `x`
+
+```agda
+abstract
+  root-one-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → nonzero-nat-root-ℝ⁺ one-ℕ⁺ x ＝ x
+  root-one-ℝ⁺ x =
+    eq-ℝ⁺ _ _ (ap real-ℝ⁰⁺ (root-one-ℝ⁰⁺ (nonnegative-ℝ⁺ x)))
+```
+
+## See also
+
+- [Nonzero natural roots of nonnegative real numbers](real-numbers.nonzero-natural-roots-nonnegative-real-numbers.md)
