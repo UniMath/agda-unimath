@@ -729,3 +729,14 @@ module _
   SIPCUB-odd-power-ℝ : SIPCUB-function-ℝ l l
   SIPCUB-odd-power-ℝ = (power-ℝ n , is-SIPCUB-odd-power-ℝ)
 ```
+
+### `(xᵐ)ⁿ = (xⁿ)ᵐ`
+
+```agda
+abstract
+  commute-power-ℝ :
+    {l : Level} (m n : ℕ) (x : ℝ l) →
+    power-ℝ m (power-ℝ n x) ＝ power-ℝ n (power-ℝ m x)
+  commute-power-ℝ =
+    commute-power-Large-Commutative-Ring large-commutative-ring-ℝ
+```

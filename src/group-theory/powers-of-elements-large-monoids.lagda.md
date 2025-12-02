@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -316,4 +317,27 @@ module _
       power-Large-Monoid M (m *ℕ n) x ＝
       power-Large-Monoid M n (power-Large-Monoid M m x)
     power-mul-Large-Monoid {l} = power-mul-Monoid (monoid-Large-Monoid M l)
+```
+
+### Iterated powers commute
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (M : Large-Monoid α β)
+  where
+
+  abstract
+    commute-power-Large-Monoid :
+      {l : Level} (m n : ℕ) (x : type-Large-Monoid M l) →
+      power-Large-Monoid M m (power-Large-Monoid M n x) ＝
+      power-Large-Monoid M n (power-Large-Monoid M m x)
+    commute-power-Large-Monoid m n x =
+      equational-reasoning
+        power-Large-Monoid M m (power-Large-Monoid M n x)
+        ＝ power-Large-Monoid M (n *ℕ m) x
+          by inv (power-mul-Large-Monoid M n m)
+        ＝ power-Large-Monoid M (m *ℕ n) x
+          by ap (λ k → power-Large-Monoid M k x) (commutative-mul-ℕ n m)
+        ＝ power-Large-Monoid M n (power-Large-Monoid M m x)
+          by power-mul-Large-Monoid M m n
 ```

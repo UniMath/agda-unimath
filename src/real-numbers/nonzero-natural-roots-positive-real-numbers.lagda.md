@@ -10,6 +10,7 @@ module real-numbers.nonzero-natural-roots-positive-real-numbers where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.dependent-pair-types
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-positive-real-numbers
+open import real-numbers.integer-powers-positive-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
@@ -76,6 +78,18 @@ abstract
   root-one-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → nonzero-nat-root-ℝ⁺ one-ℕ⁺ x ＝ x
   root-one-ℝ⁺ x =
     eq-ℝ⁺ _ _ (ap real-ℝ⁰⁺ (root-one-ℝ⁰⁺ (nonnegative-ℝ⁺ x)))
+```
+
+### Integer powers and roots commute
+
+```agda
+abstract
+  commute-root-int-power-ℝ⁺ :
+    {l : Level} (n : ℕ⁺) (k : ℤ) (x : ℝ⁺ l) →
+    nonzero-nat-root-ℝ⁺ n (int-power-ℝ⁺ k x) ＝
+    int-power-ℝ⁺ k (nonzero-nat-root-ℝ⁺ n x)
+  commute-root-int-power-ℝ⁺ n k x =
+    {!   !}
 ```
 
 ## See also

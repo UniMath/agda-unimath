@@ -249,16 +249,9 @@ abstract
   root-one-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → nonzero-nat-root-ℝ⁰⁺ one-ℕ⁺ x ＝ x
   root-one-ℝ⁰⁺ x =
     is-injective-is-equiv
-      ( is-equiv-nonzero-power-ℝ one-ℕ⁺)
+      ( is-equiv-nonzero-power-ℝ⁰⁺ one-ℕ⁺)
       ( ( is-section-nonzero-nat-power-ℝ⁰⁺ one-ℕ⁺ x) ∙
         ( eq-ℝ⁰⁺ _ _ (refl {x = real-ℝ⁰⁺ x})))
-```
-
-### Roots and powers commute
-
-```agda
-abstract
-  commute-root-power-ℝ
 ```
 
 ## See also

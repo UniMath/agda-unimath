@@ -173,3 +173,20 @@ module _
       power-mul-Large-Monoid
         ( multiplicative-large-monoid-Large-Ring R)
 ```
+
+### Iterated powers commute
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    commute-power-Large-Ring :
+      {l : Level} (m n : ℕ) (x : type-Large-Ring R l) →
+      power-Large-Ring R m (power-Large-Ring R n x) ＝
+      power-Large-Ring R n (power-Large-Ring R m x)
+    commute-power-Large-Ring =
+      commute-power-Large-Monoid
+        ( multiplicative-large-monoid-Large-Ring R)
+```

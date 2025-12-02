@@ -554,6 +554,29 @@ module _
       integer-power-mul-Group (group-Large-Group G l1)
 ```
 
+### Iterated integer powers commute
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  abstract
+    commute-int-power-Large-Group :
+      {l1 : Level} (k l : ℤ) (x : type-Large-Group G l1) →
+      int-power-Large-Group G k (int-power-Large-Group G l x) ＝
+      int-power-Large-Group G l (int-power-Large-Group G k x)
+    commute-int-power-Large-Group k l x =
+      equational-reasoning
+        int-power-Large-Group G k (int-power-Large-Group G l x)
+        ＝ int-power-Large-Group G (l *ℤ k) x
+          by inv (int-power-mul-Large-Group G l k x)
+        ＝ int-power-Large-Group G (k *ℤ l) x
+          by ap (λ n → int-power-Large-Group G n x) (commutative-mul-ℤ l k)
+        ＝ int-power-Large-Group G l (int-power-Large-Group G k x)
+          by int-power-mul-Large-Group G k l x
+```
+
 ## See also
 
 - [Natural powers of elements of large groups](group-theory.powers-of-elements-large-groups.md)
