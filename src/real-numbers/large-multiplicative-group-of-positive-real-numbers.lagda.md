@@ -29,7 +29,7 @@ open import real-numbers.similarity-positive-real-numbers
 
 ## Idea
 
-The [real numbers](real-numbers.dedekind-real-numbers.md) form a
+The [positive real numbers](real-numbers.positive-real-numbers.md) form a
 [large abelian group](group-theory.large-abelian-groups.md) under
 [multiplication](real-numbers.multiplication-positive-real-numbers.md).
 
