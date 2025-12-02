@@ -65,10 +65,9 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 An
 {{#concept "isometry" Disambiguation="between metric extensions of a pseudometric space" Agda=isometry-Metric-Extension}}
-between two
-[metric extensions](metric-spaces.metric-extensions-of-pseudometric-spaces.md)
-of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, `i : P → M`
-and `j : P → N`, is an [isometry](metric-spaces.isometries-metric-spaces.md)
+between two [metric extensions](metric-spaces.metric-extensions.md) of a
+[pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, `i : P → M` and
+`j : P → N`, is an [isometry](metric-spaces.isometries-metric-spaces.md)
 `f : M → N` such that
 
 ```text
