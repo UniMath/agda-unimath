@@ -45,6 +45,7 @@ open import real-numbers.infima-and-suprema-families-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
+open import real-numbers.integer-fraction-powers-positive-real-numbers public
 open import real-numbers.integer-powers-positive-real-numbers public
 open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers public
 open import real-numbers.irrational-real-numbers public
@@ -87,8 +88,10 @@ open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers public
+open import real-numbers.nonzero-natural-roots-positive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.odd-roots-nonnegative-real-numbers public
+open import real-numbers.odd-roots-positive-real-numbers public
 open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-functions-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public

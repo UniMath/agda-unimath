@@ -26,12 +26,11 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
 open import real-numbers.powers-real-numbers
-open import real-numbers.positive-real-numbers
-open import real-numbers.dedekind-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```
@@ -59,12 +58,15 @@ real-root-pair-expansion-ℝ⁰⁺ : {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) �
 real-root-pair-expansion-ℝ⁰⁺ u v x =
   real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v x)
 
-nonzero-nat-root-ℝ⁰⁺ : {l : Level} (n : ℕ⁺) → ℝ⁰⁺ l → ℝ⁰⁺ l
+nonzero-nat-root-ℝ⁰⁺ : {l : Level} → ℕ⁺ → ℝ⁰⁺ l → ℝ⁰⁺ l
 nonzero-nat-root-ℝ⁰⁺ (succ-ℕ n , H) =
   let
     ((u , v) , _) = has-pair-expansion n
   in root-pair-expansion-ℝ⁰⁺ u v
 nonzero-nat-root-ℝ⁰⁺ (0 , H) = ex-falso (H refl)
+
+real-nonzero-nat-root-ℝ⁰⁺ : {l : Level} → ℕ⁺ → ℝ⁰⁺ l → ℝ l
+real-nonzero-nat-root-ℝ⁰⁺ n x = real-ℝ⁰⁺ (nonzero-nat-root-ℝ⁰⁺ n x)
 ```
 
 ## Properties
@@ -237,16 +239,4 @@ is-equiv-nonzero-power-ℝ n =
 aut-nonzero-power-ℝ : {l : Level} (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
 aut-nonzero-power-ℝ n⁺@(n , _) =
   ( power-ℝ⁰⁺ n , is-equiv-nonzero-power-ℝ n⁺)
-```
-
-### For positive `x` and nonzero `n`, the `n`th root of `x` is positive
-
-```agda
-abstract
-  preserves-is-positive-root-pair-expansion-ℝ⁰⁺ :
-    {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) →
-    is-positive-ℝ (real-ℝ⁰⁺ x) →
-    is-positive-ℝ (real-root-pair-expansion-ℝ⁰⁺ u v x)
-  preserves-is-positive-root-pair-expansion-ℝ⁰⁺ 0 v x⁰⁺@(x , _) 0<x =
-    {!   !}
 ```
