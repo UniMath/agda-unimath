@@ -48,7 +48,7 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
-open import metric-spaces.metric-extensions-of-pseudometric-spaces
+open import metric-spaces.metric-extensions
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions
@@ -77,107 +77,99 @@ and `j : P → N`, is an [isometry](metric-spaces.isometries-metric-spaces.md)
 
 ## Definitions
 
-### The property of being an isometry between metric extensions
+### The property of being an isometry between metric extensions of a pseudometric space
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  ( P : Pseudometric-Space l1 l2)
-  ( M : Metric-Extension l3 l4 P)
-  ( N : Metric-Extension l5 l6 P)
-  ( f :
-    isometry-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( metric-space-Metric-Extension P N))
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  (N : Metric-Space l5 l6)
+  (i : Metric-Extension P M)
+  (j : Metric-Extension P N)
+  (f : isometry-Metric-Space M N)
   where
 
-  coherence-triangle-prop-isometry-metric-space-Metric-Extension :
-    Prop (l1 ⊔ l5)
-  coherence-triangle-prop-isometry-metric-space-Metric-Extension =
+  coherence-triangle-prop-isometry-Metric-Extension : Prop (l1 ⊔ l5)
+  coherence-triangle-prop-isometry-Metric-Extension =
     Π-Prop
       ( type-Pseudometric-Space P)
       ( λ x →
-        Id-Prop
-          ( set-Metric-Space
-            ( metric-space-Metric-Extension P N))
+        eq-prop-Metric-Space N
           ( map-isometry-Pseudometric-Space
             ( P)
-            ( pseudometric-space-Metric-Extension P N)
+            ( pseudometric-Metric-Space N)
             ( comp-isometry-Pseudometric-Space
               ( P)
-              ( pseudometric-space-Metric-Extension P M)
-              ( pseudometric-space-Metric-Extension P N)
+              ( pseudometric-Metric-Space M)
+              ( pseudometric-Metric-Space N)
               ( f)
-              ( isometry-metric-space-Metric-Extension P M))
+              ( i))
             ( x))
-          ( map-isometry-metric-space-Metric-Extension P N x))
+          ( map-Metric-Extension P N j x))
 
-  coherence-triangle-isometry-metric-space-Metric-Extension : UU (l1 ⊔ l5)
-  coherence-triangle-isometry-metric-space-Metric-Extension =
+  coherence-triangle-isometry-Metric-Extension : UU (l1 ⊔ l5)
+  coherence-triangle-isometry-Metric-Extension =
     type-Prop
-      coherence-triangle-prop-isometry-metric-space-Metric-Extension
+      coherence-triangle-prop-isometry-Metric-Extension
 
-  is-prop-coherence-triangle-isometry-metric-space-Metric-Extension :
-    is-prop coherence-triangle-isometry-metric-space-Metric-Extension
-  is-prop-coherence-triangle-isometry-metric-space-Metric-Extension =
+  is-prop-coherence-triangle-isometry-Metric-Extension :
+    is-prop coherence-triangle-isometry-Metric-Extension
+  is-prop-coherence-triangle-isometry-Metric-Extension =
     is-prop-type-Prop
-      coherence-triangle-prop-isometry-metric-space-Metric-Extension
+      coherence-triangle-prop-isometry-Metric-Extension
 ```
 
 ### The type of isometries between metric extensions of a pseudometric space
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  ( P : Pseudometric-Space l1 l2)
-  ( M : Metric-Extension l3 l4 P)
-  ( N : Metric-Extension l5 l6 P)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  (N : Metric-Space l5 l6)
+  (i : Metric-Extension P M)
+  (j : Metric-Extension P N)
   where
 
   isometry-Metric-Extension : UU (l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   isometry-Metric-Extension =
     type-subtype
-      ( coherence-triangle-prop-isometry-metric-space-Metric-Extension P M N)
+      ( coherence-triangle-prop-isometry-Metric-Extension P M N i j)
 
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  ( P : Pseudometric-Space l1 l2)
-  ( M : Metric-Extension l3 l4 P)
-  ( N : Metric-Extension l5 l6 P)
-  ( f : isometry-Metric-Extension P M N)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  (N : Metric-Space l5 l6)
+  (i : Metric-Extension P M)
+  (j : Metric-Extension P N)
+  (f : isometry-Metric-Extension P M N i j)
   where
 
-  isometry-metric-space-isometry-Metric-Extension :
-    isometry-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( metric-space-Metric-Extension P N)
+  isometry-metric-space-isometry-Metric-Extension : isometry-Metric-Space M N
   isometry-metric-space-isometry-Metric-Extension = pr1 f
 
   map-metric-space-isometry-Metric-Extension :
-    type-metric-space-Metric-Extension P M →
-    type-metric-space-Metric-Extension P N
+    type-Metric-Space M → type-Metric-Space N
   map-metric-space-isometry-Metric-Extension =
-    map-isometry-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( metric-space-Metric-Extension P N)
+    map-isometry-Metric-Space M N
       ( isometry-metric-space-isometry-Metric-Extension)
 
   is-isometry-map-metric-space-isometry-Metric-Extension :
-    is-isometry-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( metric-space-Metric-Extension P N)
+    is-isometry-Metric-Space M N
       ( map-metric-space-isometry-Metric-Extension)
   is-isometry-map-metric-space-isometry-Metric-Extension =
-    is-isometry-map-isometry-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( metric-space-Metric-Extension P N)
+    is-isometry-map-isometry-Metric-Space M N
       ( isometry-metric-space-isometry-Metric-Extension)
 
   coh-isometry-Metric-Extension :
-    coherence-triangle-isometry-metric-space-Metric-Extension
+    coherence-triangle-isometry-Metric-Extension
       ( P)
       ( M)
       ( N)
+      ( i)
+      ( j)
       ( isometry-metric-space-isometry-Metric-Extension)
   coh-isometry-Metric-Extension = pr2 f
 ```
@@ -197,8 +189,10 @@ module _
   forgetful-isometry-Metric-Extension :
     isometry-Metric-Extension
       ( pseudometric-Metric-Space M)
+      ( M)
+      ( N)
       ( forgetful-Metric-Extension M)
-      ( N , f)
+      ( f)
   forgetful-isometry-Metric-Extension = (f , refl-htpy)
 ```
 
@@ -208,13 +202,12 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : Pseudometric-Space l1 l2)
-  (M : Metric-Extension l3 l4 P)
+  (M : Metric-Space l3 l4)
+  (i : Metric-Extension P M)
   where
 
-  id-isometry-Metric-Extension : isometry-Metric-Extension P M M
-  pr1 id-isometry-Metric-Extension =
-    id-isometry-Metric-Space (metric-space-Metric-Extension P M)
-  pr2 id-isometry-Metric-Extension = refl-htpy
+  id-isometry-Metric-Extension : isometry-Metric-Extension P M M i i
+  id-isometry-Metric-Extension = (id-isometry-Metric-Space M , refl-htpy)
 ```
 
 ### Composition of isometries between metric extensions
@@ -223,35 +216,32 @@ module _
 module _
   {l l' lu lu' lv lv' lw lw' : Level}
   (P : Pseudometric-Space l l')
-  (U : Metric-Extension lu lu' P)
-  (V : Metric-Extension lv lv' P)
-  (W : Metric-Extension lw lw' P)
-  (g : isometry-Metric-Extension P V W)
-  (f : isometry-Metric-Extension P U V)
+  (U : Metric-Space lu lu')
+  (V : Metric-Space lv lv')
+  (W : Metric-Space lw lw')
+  (i : Metric-Extension P U)
+  (j : Metric-Extension P V)
+  (k : Metric-Extension P W)
+  (g : isometry-Metric-Extension P V W j k)
+  (f : isometry-Metric-Extension P U V i j)
   where
 
   abstract
     coh-comp-isometry-Metric-Extension :
-      coherence-triangle-isometry-metric-space-Metric-Extension P U W
-        ( comp-isometry-Metric-Space
-          ( metric-space-Metric-Extension P U)
-          ( metric-space-Metric-Extension P V)
-          ( metric-space-Metric-Extension P W)
-          ( isometry-metric-space-isometry-Metric-Extension P V W g)
-          ( isometry-metric-space-isometry-Metric-Extension P U V f))
+      coherence-triangle-isometry-Metric-Extension P U W i k
+        ( comp-isometry-Metric-Space U V W
+          ( isometry-metric-space-isometry-Metric-Extension P V W j k g)
+          ( isometry-metric-space-isometry-Metric-Extension P U V i j f))
     coh-comp-isometry-Metric-Extension =
-      ( ( map-metric-space-isometry-Metric-Extension P V W g) ·l
-        ( coh-isometry-Metric-Extension P U V f)) ∙h
-      ( coh-isometry-Metric-Extension P V W g)
+      ( ( map-metric-space-isometry-Metric-Extension P V W j k g) ·l
+        ( coh-isometry-Metric-Extension P U V i j f)) ∙h
+      ( coh-isometry-Metric-Extension P V W j k g)
 
-  comp-isometry-Metric-Extension : isometry-Metric-Extension P U W
+  comp-isometry-Metric-Extension : isometry-Metric-Extension P U W i k
   pr1 comp-isometry-Metric-Extension =
-    comp-isometry-Metric-Space
-      ( metric-space-Metric-Extension P U)
-      ( metric-space-Metric-Extension P V)
-      ( metric-space-Metric-Extension P W)
-      ( isometry-metric-space-isometry-Metric-Extension P V W g)
-      ( isometry-metric-space-isometry-Metric-Extension P U V f)
+    comp-isometry-Metric-Space U V W
+      ( isometry-metric-space-isometry-Metric-Extension P V W j k g)
+      ( isometry-metric-space-isometry-Metric-Extension P U V i j f)
   pr2 comp-isometry-Metric-Extension = coh-comp-isometry-Metric-Extension
 ```
 
@@ -259,27 +249,28 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  ( P : Pseudometric-Space l1 l2)
-  ( M : Metric-Extension l3 l4 P)
-  ( N : Metric-Extension l5 l6 P)
-  ( f g : isometry-Metric-Extension P M N)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  (N : Metric-Space l5 l6)
+  (i : Metric-Extension P M)
+  (j : Metric-Extension P N)
+  (f g : isometry-Metric-Extension P M N i j)
   where
 
   htpy-isometry-Metric-Extension : UU (l3 ⊔ l5)
   htpy-isometry-Metric-Extension =
-    ( map-metric-space-isometry-Metric-Extension P M N f ~
-      map-metric-space-isometry-Metric-Extension P M N g)
+    ( map-metric-space-isometry-Metric-Extension P M N i j f ~
+      map-metric-space-isometry-Metric-Extension P M N i j g)
 
   is-prop-htpy-isometry-Metric-Extension :
     is-prop htpy-isometry-Metric-Extension
   is-prop-htpy-isometry-Metric-Extension =
     is-prop-Π
       ( λ x →
-        is-set-type-Metric-Space
-          ( metric-space-Metric-Extension P N)
-          ( map-metric-space-isometry-Metric-Extension P M N f x)
-          ( map-metric-space-isometry-Metric-Extension P M N g x))
+        is-set-type-Metric-Space N
+          ( map-metric-space-isometry-Metric-Extension P M N i j f x)
+          ( map-metric-space-isometry-Metric-Extension P M N i j g x))
 
   htpy-prop-isometry-Metric-Extension : Prop (l3 ⊔ l5)
   htpy-prop-isometry-Metric-Extension =
@@ -289,11 +280,9 @@ module _
     htpy-isometry-Metric-Extension → f ＝ g
   eq-htpy-isometry-Metric-Extension f~g =
     eq-type-subtype
-      ( coherence-triangle-prop-isometry-metric-space-Metric-Extension P M N)
-      ( eq-htpy-map-isometry-Metric-Space
-        ( metric-space-Metric-Extension P M)
-        ( metric-space-Metric-Extension P N)
-        ( isometry-metric-space-isometry-Metric-Extension P M N f)
-        ( isometry-metric-space-isometry-Metric-Extension P M N g)
+      ( coherence-triangle-prop-isometry-Metric-Extension P M N i j)
+      ( eq-htpy-map-isometry-Metric-Space M N
+        ( isometry-metric-space-isometry-Metric-Extension P M N i j f)
+        ( isometry-metric-space-isometry-Metric-Extension P M N i j g)
         ( f~g))
 ```

@@ -1,7 +1,7 @@
-# Metric extensions of pseudometric spaces
+# Metric extensions
 
 ```agda
-module metric-spaces.metric-extensions-of-pseudometric-spaces where
+module metric-spaces.metric-extensions where
 ```
 
 <details><summary>Imports</summary>
@@ -59,55 +59,40 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-A
-{{#concept "metric extension" Disambiguation="of a pseudometric space" Agda=Metric-Extension}}
-of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is a
-[metric space](metric-spaces.metric-spaces.md) `M` together with an
-[isometry](metric-spaces.isometries-pseudometric-spaces.md) `f : P → M`.
+A {{#concept "metric extension" Agda=Metric-Extension}} between a
+[pseudometric space](metric-spaces.pseudometric-spaces.md) `P` and a
+[metric space](metric-spaces.metric-spaces.md) `M` is an
+[isometry](metric-spaces.isometries-pseudometric-spaces.md) `f : P → M` between
+`P` and the underlying pseudometric space of `M`.
 
 ## Definition
 
-### Metric extensions of pseudometric spaces
+### Metric extensions
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 l4 : Level) (P : Pseudometric-Space l1 l2)
+  {l1 l2 l3 l4 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
   where
 
-  Metric-Extension : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
+  Metric-Extension : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   Metric-Extension =
-    Σ ( Metric-Space l3 l4)
-      ( isometry-Pseudometric-Space P ∘ pseudometric-Metric-Space)
-```
+    isometry-Pseudometric-Space P (pseudometric-Metric-Space M)
 
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
-  (M : Metric-Extension l3 l4 P)
-  where
+  map-Metric-Extension :
+    Metric-Extension →
+    type-Pseudometric-Space P →
+    type-Metric-Space M
+  map-Metric-Extension = pr1
 
-  metric-space-Metric-Extension : Metric-Space l3 l4
-  metric-space-Metric-Extension = pr1 M
-
-  pseudometric-space-Metric-Extension : Pseudometric-Space l3 l4
-  pseudometric-space-Metric-Extension =
-    pseudometric-Metric-Space metric-space-Metric-Extension
-
-  type-metric-space-Metric-Extension : UU l3
-  type-metric-space-Metric-Extension =
-    type-Metric-Space metric-space-Metric-Extension
-
-  isometry-metric-space-Metric-Extension :
-    isometry-Pseudometric-Space P pseudometric-space-Metric-Extension
-  isometry-metric-space-Metric-Extension = pr2 M
-
-  map-isometry-metric-space-Metric-Extension :
-    type-Pseudometric-Space P → type-metric-space-Metric-Extension
-  map-isometry-metric-space-Metric-Extension =
-    map-isometry-Pseudometric-Space
+  is-isometry-map-Metric-Extension :
+    (f : Metric-Extension) →
+    is-isometry-Pseudometric-Space
       ( P)
-      ( pseudometric-space-Metric-Extension)
-      ( isometry-metric-space-Metric-Extension)
+      ( pseudometric-Metric-Space M)
+      ( map-Metric-Extension f)
+  is-isometry-map-Metric-Extension = pr2
 ```
 
 ## Properties
@@ -120,51 +105,48 @@ module _
   where
 
   forgetful-Metric-Extension :
-    Metric-Extension l1 l2 (pseudometric-Metric-Space M)
-  forgetful-Metric-Extension = (M , id-isometry-Metric-Space M)
+    Metric-Extension (pseudometric-Metric-Space M) M
+  forgetful-Metric-Extension = id-isometry-Metric-Space M
 ```
 
 ### Action of metric extensions on Cauchy approximations
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : Pseudometric-Space l1 l2)
-  (M : Metric-Extension l3 l4 P)
+  {l1 l2 l3 l4 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  (f : Metric-Extension P M)
   where
 
   isometry-cauchy-pseudocompletion-Metric-Extension :
     isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space
-        ( metric-space-Metric-Extension P M))
+      ( cauchy-pseudocompletion-Metric-Space M)
   isometry-cauchy-pseudocompletion-Metric-Extension =
     isometry-map-cauchy-approximation-isometry-Pseudometric-Space
       ( P)
-      ( pseudometric-space-Metric-Extension P M)
-      ( isometry-metric-space-Metric-Extension P M)
+      ( pseudometric-Metric-Space M)
+      ( f)
 
-  map-cauchy-pseudocompletion-Metric-Extension :
+  map-cauchy-approximation-Metric-Extension :
     cauchy-approximation-Pseudometric-Space P →
-    cauchy-approximation-Metric-Space
-      ( metric-space-Metric-Extension P M)
-  map-cauchy-pseudocompletion-Metric-Extension =
+    cauchy-approximation-Metric-Space M
+  map-cauchy-approximation-Metric-Extension =
     map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space
-        ( metric-space-Metric-Extension P M))
+      ( cauchy-pseudocompletion-Metric-Space M)
       ( isometry-cauchy-pseudocompletion-Metric-Extension)
 
-  is-isometry-map-cauchy-pseudocompletion-Metric-Extension :
+  is-isometry-map-cauchy-approximation-Metric-Extension :
     is-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space
-        ( metric-space-Metric-Extension P M))
-      ( map-cauchy-pseudocompletion-Metric-Extension)
-  is-isometry-map-cauchy-pseudocompletion-Metric-Extension =
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( map-cauchy-approximation-Metric-Extension)
+  is-isometry-map-cauchy-approximation-Metric-Extension =
     is-isometry-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space
-        ( metric-space-Metric-Extension P M))
+      ( cauchy-pseudocompletion-Metric-Space M)
       ( isometry-cauchy-pseudocompletion-Metric-Extension)
 ```
 
@@ -174,16 +156,17 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : Pseudometric-Space l1 l2)
-  (M : Metric-Extension l3 l4 P)
+  (M : Metric-Space l3 l4)
+  (f : Metric-Extension P M)
   (u : cauchy-approximation-Pseudometric-Space P)
-  (y : type-metric-space-Metric-Extension P M)
+  (y : type-Metric-Space M)
   where
 
   is-limit-map-cauchy-pseudocompletion-prop-Metric-Extension : Prop l4
   is-limit-map-cauchy-pseudocompletion-prop-Metric-Extension =
     is-limit-cauchy-approximation-prop-Metric-Space
-      ( metric-space-Metric-Extension P M)
-      ( map-cauchy-pseudocompletion-Metric-Extension P M u)
+      ( M)
+      ( map-cauchy-approximation-Metric-Extension P M f u)
       ( y)
 
   is-limit-map-cauchy-pseudocompletion-Metric-Extension : UU l4
@@ -204,14 +187,15 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : Pseudometric-Space l1 l2)
-  (M : Metric-Extension l3 l4 P)
+  (M : Metric-Space l3 l4)
+  (f : Metric-Extension P M)
   (u v : cauchy-approximation-Pseudometric-Space P)
-  (y : type-metric-space-Metric-Extension P M)
+  (y : type-Metric-Space M)
   where
 
   sim-has-same-limit-map-cauchy-pseudocompletion-Metric-Extension :
-    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M u y →
-    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M v y →
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M f u y →
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M f v y →
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( u)
@@ -219,15 +203,14 @@ module _
   sim-has-same-limit-map-cauchy-pseudocompletion-Metric-Extension lim-u lim-v =
     reflects-sim-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space
-        ( metric-space-Metric-Extension P M))
-      ( isometry-cauchy-pseudocompletion-Metric-Extension P M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( isometry-cauchy-pseudocompletion-Metric-Extension P M f)
       ( u)
       ( v)
       ( sim-has-same-limit-cauchy-approximation-Pseudometric-Space
-        ( pseudometric-space-Metric-Extension P M)
-        ( map-cauchy-pseudocompletion-Metric-Extension P M u)
-        ( map-cauchy-pseudocompletion-Metric-Extension P M v)
+        ( pseudometric-Metric-Space M)
+        ( map-cauchy-approximation-Metric-Extension P M f u)
+        ( map-cauchy-approximation-Metric-Extension P M f v)
         ( y)
         ( lim-u)
         ( lim-v))
@@ -237,19 +220,18 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( u)
       ( v) →
-    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M u y →
-    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M v y
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M f u y →
+    is-limit-map-cauchy-pseudocompletion-Metric-Extension P M f v y
   has-same-limit-map-cauchy-sim-pseudocompletion-Metric-Extension u~v =
     has-same-limit-sim-cauchy-approximation-Pseudometric-Space
-      ( pseudometric-space-Metric-Extension P M)
-      ( map-cauchy-pseudocompletion-Metric-Extension P M u)
-      ( map-cauchy-pseudocompletion-Metric-Extension P M v)
+      ( pseudometric-Metric-Space M)
+      ( map-cauchy-approximation-Metric-Extension P M f u)
+      ( map-cauchy-approximation-Metric-Extension P M f v)
       ( y)
       ( preserves-sim-map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
-        ( cauchy-pseudocompletion-Metric-Space
-          ( metric-space-Metric-Extension P M))
-        ( isometry-cauchy-pseudocompletion-Metric-Extension P M)
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( isometry-cauchy-pseudocompletion-Metric-Extension P M f)
         ( u)
         ( v)
         ( u~v))
