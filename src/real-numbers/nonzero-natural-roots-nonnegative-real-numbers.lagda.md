@@ -226,15 +226,15 @@ abstract
 ### For nonzero `n`, `power-ℕ n` is an automorphism on the nonnegative real numbers
 
 ```agda
-is-equiv-nonzero-power-ℝ :
+is-equiv-nonzero-power-ℝ⁰⁺ :
   {l : Level} (n : ℕ⁺) → is-equiv (power-ℝ⁰⁺ {l} (nat-nonzero-ℕ n))
-is-equiv-nonzero-power-ℝ n =
+is-equiv-nonzero-power-ℝ⁰⁺ n =
   is-equiv-is-invertible
     ( nonzero-nat-root-ℝ⁰⁺ n)
     ( is-section-nonzero-nat-power-ℝ⁰⁺ n)
     ( is-retraction-nonzero-nat-power-ℝ⁰⁺ n)
 
-aut-nonzero-power-ℝ : {l : Level} (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
-aut-nonzero-power-ℝ n⁺@(n , _) =
-  ( power-ℝ⁰⁺ n , is-equiv-nonzero-power-ℝ n⁺)
+aut-nonzero-power-ℝ⁰⁺ : {l : Level} (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
+aut-nonzero-power-ℝ⁰⁺ n⁺@(n , _) =
+  ( power-ℝ⁰⁺ n , is-equiv-nonzero-power-ℝ⁰⁺ n⁺)
 ```
