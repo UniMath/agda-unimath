@@ -223,7 +223,7 @@ abstract
   is-retraction-nonzero-nat-power-ℝ⁰⁺ (0 , H) x = ex-falso (H refl)
 ```
 
-### For nonzero `n`, `power-ℕ n` is an automorphism on the nonnegative real numbers
+### For nonzero `n`, `power-ℝ⁰⁺ n` is an automorphism on the nonnegative real numbers
 
 ```agda
 is-equiv-nonzero-power-ℝ⁰⁺ :
