@@ -15,6 +15,7 @@ open import commutative-algebra.powers-of-elements-large-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
@@ -27,6 +28,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -143,6 +145,16 @@ abstract
 abstract
   power-one-ℝ : (n : ℕ) → power-ℝ n one-ℝ ＝ one-ℝ
   power-one-ℝ = power-one-Large-Commutative-Ring large-commutative-ring-ℝ
+```
+
+### `0ⁿ = 0` for nonzero `n`
+
+```agda
+abstract
+  nonzero-power-zero-ℝ :
+    (n : ℕ⁺) → power-ℝ (nat-nonzero-ℕ n) zero-ℝ ＝ zero-ℝ
+  nonzero-power-zero-ℝ =
+    nonzero-power-zero-Large-Commutative-Ring large-commutative-ring-ℝ
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -552,6 +564,18 @@ abstract
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( le-raise-le-ℝ (l1 ⊔ l2) x<y)))
+```
+
+### Odd powers of real numbers are injective
+
+```agda
+abstract
+  is-injective-odd-power-ℝ :
+    {l : Level} (n : ℕ) → is-odd-ℕ n → is-injective (power-ℝ {l} n)
+  is-injective-odd-power-ℝ {l} n odd-n =
+    is-injective-is-strictly-increasing-function-ℝ
+      ( power-ℝ n)
+      ( is-strictly-increasing-odd-power-ℝ l n odd-n)
 ```
 
 ### Odd powers of real numbers preserve inequality

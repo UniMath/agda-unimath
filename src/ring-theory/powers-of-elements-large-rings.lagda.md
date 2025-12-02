@@ -10,7 +10,10 @@ module ring-theory.powers-of-elements-large-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -83,6 +86,24 @@ module _
     power-one-Large-Ring =
       power-unit-Large-Monoid
         ( multiplicative-large-monoid-Large-Ring R)
+```
+
+### `0ⁿ = 0` for nonzero `n`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    nonzero-power-zero-Large-Ring :
+      (n : ℕ⁺) →
+      ( power-Large-Ring R (nat-nonzero-ℕ n) (zero-Large-Ring R) ＝
+        zero-Large-Ring R)
+    nonzero-power-zero-Large-Ring (0 , H) = ex-falso (H refl)
+    nonzero-power-zero-Large-Ring (1 , H) = refl
+    nonzero-power-zero-Large-Ring (succ-ℕ n@(succ-ℕ _) , H) =
+      eq-sim-Large-Ring R (sim-right-zero-law-Large-Ring R _)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`

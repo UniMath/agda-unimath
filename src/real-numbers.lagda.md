@@ -84,7 +84,9 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
+open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.odd-roots-nonnegative-real-numbers public
 open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-functions-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
