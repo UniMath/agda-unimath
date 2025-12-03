@@ -54,12 +54,18 @@ is-metric-ab-prop-Ab-Pseudometric-Structure G M =
       ( type-Ab G)
       ( λ x → is-isometry-prop-Pseudometric-Space MS MS (add-Ab G x))
 
+is-metric-ab-Ab-Pseudometric-Structure :
+  {l1 l2 : Level} (G : Ab l1) (M : Pseudometric-Structure l2 (type-Ab G)) →
+  UU (l1 ⊔ l2)
+is-metric-ab-Ab-Pseudometric-Structure G M =
+  type-Prop (is-metric-ab-prop-Ab-Pseudometric-Structure G M)
+
 Metric-Ab : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Ab l1 l2 =
   Σ ( Ab l1)
     ( λ G →
       Σ ( Pseudometric-Structure l2 (type-Ab G))
-        ( λ M → type-Prop (is-metric-ab-prop-Ab-Pseudometric-Structure G M)))
+        ( is-metric-ab-Ab-Pseudometric-Structure G))
 
 module _
   {l1 l2 : Level} (MG : Metric-Ab l1 l2)

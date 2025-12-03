@@ -7,7 +7,7 @@ module analysis.convergent-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.complete-metric-abelian-groups-real-banach-spaces
+open import analysis.additive-complete-metric-abelian-groups-real-banach-spaces
 open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
 open import analysis.convergent-series-real-numbers
@@ -16,6 +16,7 @@ open import analysis.series-real-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
@@ -47,8 +48,8 @@ A [series](analysis.series-real-banach-spaces.md)
 form a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md).
 
 A slightly modified converse is also true: if a series converges, there
-[exists](foundation.existential-quantification.md) a modulus making it a Cauchy
-sequence.
+[exists](foundation.existential-quantification.md) a modulus making its partial
+sums a Cauchy sequence.
 
 ## Definition
 
@@ -137,4 +138,29 @@ module _
         ( λ n → sum-fin-sequence-ℝ n (σ ∘ nat-Fin n))
         ( lim)
         ( is-lim))
+```
+
+### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Banach-Space l1 l2)
+  (σ : series-ℝ-Banach-Space V)
+  where
+
+  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space :
+    is-convergent-series-ℝ-Banach-Space V σ →
+    is-inhabited
+      ( is-cauchy-sequence-Metric-Space
+        ( metric-space-ℝ-Banach-Space V)
+        ( partial-sum-series-ℝ-Banach-Space V σ))
+  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space
+    (lim , is-lim) =
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-ℝ-Banach-Space V)
+        ( partial-sum-series-ℝ-Banach-Space V σ)
+        ( lim))
+      ( is-lim)
 ```

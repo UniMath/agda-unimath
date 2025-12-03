@@ -345,6 +345,39 @@ module _
         ( λ z → sim-ℝ z x)
         ( right-swap-add-ℝ x y (neg-ℝ y))
         ( cancel-right-add-diff-ℝ)
+
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    cancel-left-conjugation-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ x) y
+    cancel-left-conjugation-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( ap-add-ℝ (commutative-add-ℝ y x) refl)
+        ( cancel-right-add-diff-ℝ y x)
+
+    cancel-right-conjugation-ℝ : sim-ℝ (x +ℝ (y +ℝ neg-ℝ x)) y
+    cancel-right-conjugation-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( commutative-add-ℝ _ _)
+        ( cancel-right-diff-add-ℝ y x)
+
+    cancel-left-add-diff-ℝ : sim-ℝ (x +ℝ (neg-ℝ x +ℝ y)) y
+    cancel-left-add-diff-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( ap-add-ℝ refl (commutative-add-ℝ _ _))
+        ( cancel-right-conjugation-ℝ)
+
+    cancel-left-diff-add-ℝ : sim-ℝ (neg-ℝ x +ℝ (x +ℝ y)) y
+    cancel-left-diff-add-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( commutative-add-ℝ _ _)
+        ( cancel-left-conjugation-ℝ)
 ```
 
 ### Addition reflects similarity
