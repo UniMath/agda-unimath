@@ -88,7 +88,7 @@ module _
               preserves-leq-right-add-ℝ _ _ _
                 ( preserves-leq-left-add-ℝ _ _ _
                   ( preserves-leq-left-mul-ℝ⁺
-                    ( positive-real-ℕ⁺ (2 , λ ()))
+                    ( positive-real-ℕ⁺ two-ℕ⁺)
                     ( transitive-leq-ℝ _ _ _
                       ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space V u v)
                       ( leq-abs-ℝ _))))
