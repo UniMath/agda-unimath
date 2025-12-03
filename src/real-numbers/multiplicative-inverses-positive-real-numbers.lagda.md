@@ -790,3 +790,38 @@ is-equiv-left-mul-ℝ⁺ x =
 aut-left-mul-ℝ⁺ : (l : Level) → ℝ⁺ l → Aut (ℝ l)
 aut-left-mul-ℝ⁺ l x = (real-ℝ⁺ x *ℝ_ , is-equiv-left-mul-ℝ⁺ x)
 ```
+
+### The multiplicative inverse is unique up to similarity
+
+```agda
+abstract
+  unique-right-inv-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) →
+    sim-ℝ (real-ℝ⁺ x *ℝ real-ℝ⁺ y) one-ℝ →
+    sim-ℝ (real-ℝ⁺ y) (real-inv-ℝ⁺ x)
+  unique-right-inv-ℝ⁺ x⁺@(x , _) y⁺@(y , _) xy=1 =
+    similarity-reasoning-ℝ
+      y
+      ~ℝ one-ℝ *ℝ y
+        by sim-eq-ℝ (inv (left-unit-law-mul-ℝ y))
+      ~ℝ (x *ℝ real-inv-ℝ⁺ x⁺) *ℝ y
+        by
+          preserves-sim-right-mul-ℝ y _ _
+            ( symmetric-sim-ℝ (right-inverse-law-mul-ℝ⁺ x⁺))
+      ~ℝ (x *ℝ y) *ℝ real-inv-ℝ⁺ x⁺
+        by sim-eq-ℝ (right-swap-mul-ℝ _ _ _)
+      ~ℝ one-ℝ *ℝ real-inv-ℝ⁺ x⁺
+        by preserves-sim-right-mul-ℝ _ _ _ xy=1
+      ~ℝ real-inv-ℝ⁺ x⁺
+        by sim-eq-ℝ (left-unit-law-mul-ℝ _)
+
+  unique-left-inv-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) →
+    sim-ℝ (real-ℝ⁺ x *ℝ real-ℝ⁺ y) one-ℝ →
+    sim-ℝ (real-ℝ⁺ x) (real-inv-ℝ⁺ y)
+  unique-left-inv-ℝ⁺ x y xy~1 =
+    unique-right-inv-ℝ⁺
+      ( y)
+      ( x)
+      ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy~1)
+```

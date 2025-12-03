@@ -13,6 +13,7 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -21,6 +22,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metrics-of-metric-spaces
+
+open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -32,6 +35,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -54,6 +58,11 @@ they are apart. It is the
 ```agda
 dist-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 dist-ℝ x y = abs-ℝ (x -ℝ y)
+
+ap-dist-ℝ :
+  {l1 l2 : Level} {x x' : ℝ l1} → x ＝ x' → {y y' : ℝ l2} → y ＝ y' →
+  dist-ℝ x y ＝ dist-ℝ x' y'
+ap-dist-ℝ = ap-binary dist-ℝ
 ```
 
 ### The distance function is commutative
@@ -142,7 +151,7 @@ abstract
         ( real-ℚ q)
         ( x -ℝ real-ℚ d)
         ( y)
-        ( le-real-is-in-lower-cut-ℚ
+        ( le-real-is-in-lower-cut-ℝ
           ( x -ℝ real-ℚ d)
           ( transpose-add-is-in-lower-cut-ℝ x q d q+d<x))
         ( swap-right-diff-leq-ℝ x y (real-ℚ d) x-y≤d))
@@ -358,4 +367,67 @@ abstract
     transitive-sim-ℝ _ _ _
       ( preserves-dist-right-sim-ℝ y~y')
       ( preserves-dist-left-sim-ℝ x~x')
+```
+
+### For any `x, y : ℝ`, `x ≤ |y| + |y - x|`
+
+```agda
+abstract
+  leq-add-abs-dist-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ x (abs-ℝ y +ℝ dist-ℝ y x)
+  leq-add-abs-dist-ℝ x y =
+    let open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+      chain-of-inequalities
+      x
+      ≤ abs-ℝ x
+        by leq-abs-ℝ x
+      ≤ abs-ℝ ((x -ℝ y) +ℝ y)
+        by
+          leq-sim-ℝ
+            ( symmetric-sim-ℝ
+              ( preserves-sim-abs-ℝ (cancel-right-diff-add-ℝ x y)))
+      ≤ dist-ℝ x y +ℝ abs-ℝ y
+        by triangle-inequality-abs-ℝ _ _
+      ≤ abs-ℝ y +ℝ dist-ℝ x y
+        by leq-eq-ℝ (commutative-add-ℝ _ _)
+      ≤ abs-ℝ y +ℝ dist-ℝ y x
+        by leq-eq-ℝ (ap-add-ℝ refl (commutative-dist-ℝ x y))
+```
+
+### The distance between `x` and `x + y` is `|y|`
+
+```agda
+abstract
+  dist-right-add-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    sim-ℝ (dist-ℝ x (x +ℝ y)) (abs-ℝ y)
+  dist-right-add-ℝ x y =
+    similarity-reasoning-ℝ
+      dist-ℝ x (x +ℝ y)
+      ~ℝ dist-ℝ (x +ℝ y) x
+        by sim-eq-ℝ (commutative-dist-ℝ _ _)
+      ~ℝ abs-ℝ y
+        by preserves-sim-abs-ℝ (cancel-left-conjugation-ℝ x y)
+
+  dist-right-add-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ⁺ l2) →
+    sim-ℝ (dist-ℝ x (x +ℝ real-ℝ⁺ y)) (real-ℝ⁺ y)
+  dist-right-add-ℝ⁺ x y⁺@(y , _) =
+    tr (sim-ℝ _) (abs-real-ℝ⁺ y⁺) (dist-right-add-ℝ x y)
+```
+
+### The distance from a real number to itself is 0
+
+```agda
+abstract
+  diagonal-dist-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (dist-ℝ x x) zero-ℝ
+  diagonal-dist-ℝ x =
+    similarity-reasoning-ℝ
+      dist-ℝ x x
+      ~ℝ abs-ℝ zero-ℝ
+        by preserves-sim-abs-ℝ (right-inverse-law-add-ℝ x)
+      ~ℝ zero-ℝ
+        by sim-eq-ℝ abs-zero-ℝ
 ```

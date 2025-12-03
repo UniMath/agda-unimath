@@ -19,6 +19,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
+open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -28,6 +30,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+
+open import foundation.universe-levels
 
 open import ring-theory.rings
 ```

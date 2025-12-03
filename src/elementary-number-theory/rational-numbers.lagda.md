@@ -23,6 +23,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -32,6 +33,7 @@ open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import set-theory.countable-sets
@@ -177,20 +179,50 @@ opaque
 
 ## Properties
 
-### The rational images of two similar integer fractions are equal
+### Two integer fractions are similar if and only if they are equal as rational numbers
 
 ```agda
-opaque
-  unfolding rational-fraction-ℤ
+module _
+  (x y : fraction-ℤ)
+  where
 
-  eq-ℚ-sim-fraction-ℤ :
-    (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-    rational-fraction-ℤ x ＝ rational-fraction-ℤ y
-  eq-ℚ-sim-fraction-ℤ x y H =
-    eq-pair-Σ'
-      ( pair
-        ( unique-reduce-fraction-ℤ x y H)
-        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+  abstract opaque
+    unfolding rational-fraction-ℤ
+
+    eq-ℚ-sim-fraction-ℤ :
+      sim-fraction-ℤ x y → rational-fraction-ℤ x ＝ rational-fraction-ℤ y
+    eq-ℚ-sim-fraction-ℤ H =
+      eq-pair-Σ'
+        ( pair
+          ( unique-reduce-fraction-ℤ x y H)
+          ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+
+    sim-fraction-ℤ-eq-ℚ :
+      rational-fraction-ℤ x ＝ rational-fraction-ℤ y → sim-fraction-ℤ x y
+    sim-fraction-ℤ-eq-ℚ H =
+      transitive-sim-fraction-ℤ
+        ( x)
+        ( reduce-fraction-ℤ y)
+        ( y)
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y))
+        ( transitive-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( reduce-fraction-ℤ y)
+          ( tr
+            ( sim-fraction-ℤ (reduce-fraction-ℤ x))
+            ( ap fraction-ℚ H)
+            ( refl-sim-fraction-ℤ (reduce-fraction-ℤ x)))
+          ( sim-reduced-fraction-ℤ x))
+
+    eq-ℚ-iff-sim-fraction-ℤ :
+      (sim-fraction-ℤ x y) ↔ (rational-fraction-ℤ x ＝ rational-fraction-ℤ y)
+    eq-ℚ-iff-sim-fraction-ℤ =
+      ( eq-ℚ-sim-fraction-ℤ ,
+        sim-fraction-ℤ-eq-ℚ)
 ```
 
 ### The type of rationals is a set
