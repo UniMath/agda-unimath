@@ -9,6 +9,7 @@ module real-numbers.pointwise-continuous-functions-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.axiom-of-countable-choice
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -66,9 +67,29 @@ module _
   is-pointwise-continuous-map-pointwise-continuous-function-ℝ = pr2 f
 ```
 
+### The classical definition of pointwise continuity
+
+```agda
+module _
+  {l1 l2 : Level}
+  (f : ℝ l1 → ℝ l2)
+  where
+
+  is-classically-pointwise-continuous-prop-function-ℝ : Prop (lsuc l1 ⊔ l2)
+  is-classically-pointwise-continuous-prop-function-ℝ =
+    is-classically-pointwise-continuous-prop-function-Metric-Space
+      ( metric-space-ℝ l1)
+      ( metric-space-ℝ l2)
+      ( f)
+
+  is-classically-pointwise-continuous-function-ℝ : UU (lsuc l1 ⊔ l2)
+  is-classically-pointwise-continuous-function-ℝ =
+    type-Prop is-classically-pointwise-continuous-prop-function-ℝ
+```
+
 ## Properties
 
-### The classical epsilon-delta definition of continuity
+### Constructively pointwise continuous functions are classically pointwise continuous
 
 ```agda
 module _
@@ -78,13 +99,31 @@ module _
 
   abstract
     is-classically-pointwise-continuous-pointwise-continuous-function-ℝ :
-      (x : ℝ l1) →
-      is-classical-limit-function-ℝ
+      is-classically-pointwise-continuous-function-ℝ
         ( map-pointwise-continuous-function-ℝ f)
-        ( x)
-        ( map-pointwise-continuous-function-ℝ f x)
     is-classically-pointwise-continuous-pointwise-continuous-function-ℝ =
       is-classically-pointwise-continuous-pointwise-continuous-function-Metric-Space
+        ( metric-space-ℝ l1)
+        ( metric-space-ℝ l2)
+        ( f)
+```
+
+### Assuming countable choice, the classical definition of continuity implies the constructive definition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (acω : ACω)
+  (f : ℝ l1 → ℝ l2)
+  where
+
+  abstract
+    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ :
+      is-classically-pointwise-continuous-function-ℝ f →
+      is-pointwise-continuous-function-ℝ f
+    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ =
+      is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space
+        ( acω)
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)

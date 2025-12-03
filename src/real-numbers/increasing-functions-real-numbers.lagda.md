@@ -94,10 +94,10 @@ module _
   where
 
   abstract
-    strengthen-is-increasing-function-ℝ :
+    is-increasing-leq-le-ℝ :
       ((x y : ℝ l1) → le-ℝ x y → leq-ℝ (f x) (f y)) →
       is-increasing-function-ℝ f
-    strengthen-is-increasing-function-ℝ H x y x≤y =
+    is-increasing-leq-le-ℝ H x y x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -114,11 +114,11 @@ module _
   where
 
   abstract
-    strengthen-is-increasing-on-subset-function-ℝ :
+    is-increasing-leq-le-on-subset-function-ℝ :
       ( ((x y : type-subset-ℝ S) →
         le-ℝ (pr1 x) (pr1 y) → leq-ℝ (f (pr1 x)) (f (pr1 y)))) →
       is-increasing-on-subset-function-ℝ f S
-    strengthen-is-increasing-on-subset-function-ℝ H (x , x∈S) (y , y∈S) x≤y =
+    is-increasing-leq-le-on-subset-function-ℝ H (x , x∈S) (y , y∈S) x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -150,7 +150,7 @@ module _
         open do-syntax-trunc-Prop empty-Prop
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        strengthen-is-increasing-function-ℝ
+        is-increasing-leq-le-ℝ
           ( map-pointwise-continuous-function-ℝ f)
           ( λ x y x<y →
             leq-not-le-ℝ

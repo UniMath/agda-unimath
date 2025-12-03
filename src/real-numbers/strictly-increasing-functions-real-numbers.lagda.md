@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
@@ -90,7 +91,7 @@ module _
     is-increasing-is-strictly-increasing-function-ℝ :
       is-strictly-increasing-function-ℝ f → is-increasing-function-ℝ f
     is-increasing-is-strictly-increasing-function-ℝ H =
-      strengthen-is-increasing-function-ℝ f (λ x y x<y → leq-le-ℝ (H x y x<y))
+      is-increasing-leq-le-ℝ f (λ x y x<y → leq-le-ℝ (H x y x<y))
 ```
 
 ### If a pointwise continuous function is strictly increasing on a dense subset of ℝ, then it is strictly increasing on ℝ
@@ -115,7 +116,7 @@ module _
           is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ
             ( f)
             ( S)
-            ( strengthen-is-increasing-on-subset-function-ℝ
+            ( is-increasing-leq-le-on-subset-function-ℝ
               ( map-pointwise-continuous-function-ℝ f)
               ( subset-dense-subset-ℝ S)
               ( λ a b a<b → leq-le-ℝ (H a b a<b)))
@@ -282,4 +283,22 @@ module _
       is-emb-is-injective
         ( is-set-ℝ l2)
         ( is-injective-is-strictly-increasing-function-ℝ)
+```
+
+### The composition of strictly increasing functions is strictly increasing
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (f : ℝ l2 → ℝ l3)
+  (g : ℝ l1 → ℝ l2)
+  where
+
+  abstract
+    is-strictly-increasing-comp-is-strictly-increasing-function-ℝ :
+      is-strictly-increasing-function-ℝ f →
+      is-strictly-increasing-function-ℝ g →
+      is-strictly-increasing-function-ℝ (f ∘ g)
+    is-strictly-increasing-comp-is-strictly-increasing-function-ℝ H K x y x<y =
+      H (g x) (g y) (K x y x<y)
 ```
