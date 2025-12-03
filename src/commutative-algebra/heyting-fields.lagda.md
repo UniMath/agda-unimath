@@ -240,28 +240,24 @@ module _
 
     symmetric-apart-Heyting-Field : is-symmetric apart-Heyting-Field
     symmetric-apart-Heyting-Field x y (z , ⟨x-y⟩z=1 , z⟨x-y⟩=1) =
-      let
-        ⟨y-x⟩⟨-z⟩=1 =
-          equational-reasoning
+      ( neg-Heyting-Field F z ,
+        ( equational-reasoning
+          mul-Heyting-Field F
+            ( diff-Heyting-Field F y x)
+            ( neg-Heyting-Field F z)
+          ＝
             mul-Heyting-Field F
-              ( diff-Heyting-Field F y x)
+              ( neg-Heyting-Field F (diff-Heyting-Field F x y))
               ( neg-Heyting-Field F z)
-            ＝
-              mul-Heyting-Field F
-                ( neg-Heyting-Field F (diff-Heyting-Field F x y))
-                ( neg-Heyting-Field F z)
-              by
-                ap-mul-Heyting-Field F
-                  ( inv (distributive-neg-diff-Heyting-Field F x y))
-                  ( refl)
-            ＝ mul-Heyting-Field F (diff-Heyting-Field F x y) z
-              by mul-neg-Heyting-Field F _ _
-            ＝ one-Heyting-Field F
-              by ⟨x-y⟩z=1
-      in
-        ( neg-Heyting-Field F z ,
-          ⟨y-x⟩⟨-z⟩=1 ,
-          commutative-mul-Heyting-Field F _ _ ∙ ⟨y-x⟩⟨-z⟩=1)
+            by
+              ap-mul-Heyting-Field F
+                ( inv (distributive-neg-diff-Heyting-Field F x y))
+                ( refl)
+          ＝ mul-Heyting-Field F (diff-Heyting-Field F x y) z
+            by mul-neg-Heyting-Field F _ _
+          ＝ one-Heyting-Field F
+            by ⟨x-y⟩z=1) ,
+        commutative-mul-Heyting-Field F _ _ ∙ ⟨y-x⟩⟨-z⟩=1)
 
     cotransitive-apart-Heyting-Field :
       is-cotransitive apart-prop-Heyting-Field
