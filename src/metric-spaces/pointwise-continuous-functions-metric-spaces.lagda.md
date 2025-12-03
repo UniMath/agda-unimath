@@ -10,6 +10,7 @@ module metric-spaces.pointwise-continuous-functions-metric-spaces where
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.axiom-of-countable-choice
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -87,9 +88,31 @@ module _
   is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space = pr2 f
 ```
 
+### The classical definition of pointwise continuity
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y)
+  where
+
+  is-classically-pointwise-continuous-prop-function-Metric-Space :
+    Prop (l1 ⊔ l2 ⊔ l4)
+  is-classically-pointwise-continuous-prop-function-Metric-Space =
+    Π-Prop
+      ( type-Metric-Space X)
+      ( λ x → is-classical-limit-prop-function-Metric-Space X Y f x (f x))
+
+  is-classically-pointwise-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-classically-pointwise-continuous-function-Metric-Space =
+    type-Prop is-classically-pointwise-continuous-prop-function-Metric-Space
+```
+
 ## Properties
 
-### The classical epsilon-delta definition of pointwise continuity
+### Constructively pointwise continuous functions are classically pointwise continuous
 
 ```agda
 module _
@@ -101,13 +124,10 @@ module _
 
   abstract
     is-classically-pointwise-continuous-pointwise-continuous-function-Metric-Space :
-      (x : type-Metric-Space X) →
-      is-classical-limit-function-Metric-Space
+      is-classically-pointwise-continuous-function-Metric-Space
         ( X)
         ( Y)
         ( map-pointwise-continuous-function-Metric-Space X Y f)
-        ( x)
-        ( map-pointwise-continuous-function-Metric-Space X Y f x)
     is-classically-pointwise-continuous-pointwise-continuous-function-Metric-Space
       x =
       is-classical-limit-is-limit-function-Metric-Space
@@ -121,6 +141,33 @@ module _
           ( Y)
           ( f)
           ( x))
+```
+
+### Assuming countable choice, classically pointwise continuous functions are continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (acω : ACω)
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y)
+  where
+
+  abstract
+    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space :
+      is-classically-pointwise-continuous-function-Metric-Space X Y f →
+      is-pointwise-continuous-function-Metric-Space X Y f
+    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space
+      H x =
+      is-limit-is-classical-limit-ACω-function-Metric-Space
+        ( acω)
+        ( X)
+        ( Y)
+        ( f)
+        ( x)
+        ( f x)
+        ( H x)
 ```
 
 ### The Cartesian product of pointwise continuous functions on metric spaces
