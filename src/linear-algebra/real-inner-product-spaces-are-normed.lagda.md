@@ -9,6 +9,8 @@ module linear-algebra.real-inner-product-spaces-are-normed where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.nonzero-natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -184,17 +186,34 @@ module _
 
 ```agda
 abstract
+  isometric-eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ :
+    (l : Level) →
+    isometric-eq-Metric-Space
+      ( metric-space-ℝ-Inner-Product-Space (real-inner-product-space-ℝ l))
+      ( metric-space-Normed-ℝ-Vector-Space (normed-real-vector-space-ℝ l))
+  isometric-eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ
+    l =
+    ( refl ,
+      λ d x y →
+        iff-eq
+          ( ap
+            ( λ m → leq-prop-ℝ m (real-ℚ⁺ d))
+            ( inv (eq-abs-sqrt-square-ℝ _))))
+
+  eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ :
+    (l : Level) →
+    metric-space-ℝ-Inner-Product-Space (real-inner-product-space-ℝ l) ＝
+    metric-space-Normed-ℝ-Vector-Space (normed-real-vector-space-ℝ l)
+  eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ l =
+    eq-isometric-eq-Metric-Space _ _
+      ( isometric-eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ
+        ( l))
+
   eq-metric-space-real-inner-product-space-ℝ :
     (l : Level) →
     metric-space-ℝ-Inner-Product-Space (real-inner-product-space-ℝ l) ＝
     metric-space-ℝ l
   eq-metric-space-real-inner-product-space-ℝ l =
-    ( eq-isometric-eq-Metric-Space _ _
-      ( refl ,
-        λ d x y →
-          iff-eq
-            ( ap
-              ( λ m → leq-prop-ℝ m (real-ℚ⁺ d))
-              ( inv (eq-abs-sqrt-square-ℝ _))))) ∙
+    ( eq-metric-space-real-inner-product-space-normed-real-vector-space-ℝ l) ∙
     ( eq-metric-space-normed-real-vector-space-metric-space-ℝ l)
 ```
