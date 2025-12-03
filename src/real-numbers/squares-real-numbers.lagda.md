@@ -24,6 +24,7 @@ open import elementary-number-theory.square-roots-positive-rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -407,4 +408,9 @@ abstract
 abstract
   square-zero-ℝ : square-ℝ zero-ℝ ＝ zero-ℝ
   square-zero-ℝ = eq-sim-ℝ (left-zero-law-mul-ℝ zero-ℝ)
+
+  square-raise-zero-ℝ :
+    (l : Level) → square-ℝ (raise-zero-ℝ l) ＝ raise-zero-ℝ l
+  square-raise-zero-ℝ l =
+    square-raise-ℝ l _ ∙ ap (raise-ℝ l) square-zero-ℝ
 ```
