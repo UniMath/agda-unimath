@@ -12,6 +12,7 @@ open import real-numbers.addition-lower-dedekind-real-numbers public
 open import real-numbers.addition-negative-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
 open import real-numbers.addition-nonzero-real-numbers public
+open import real-numbers.addition-positive-and-negative-real-numbers public
 open import real-numbers.addition-positive-real-numbers public
 open import real-numbers.addition-real-numbers public
 open import real-numbers.addition-upper-dedekind-real-numbers public
@@ -27,6 +28,7 @@ open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
 open import real-numbers.equality-real-numbers public
+open import real-numbers.extensionality-multiplication-bilinear-form-real-numbers public
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public

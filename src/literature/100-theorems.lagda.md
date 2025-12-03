@@ -31,6 +31,15 @@ open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
 ```
 
+### 4. The Pythagorean Theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
 ### 11. The infinitude of primes {#11}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
@@ -174,6 +183,16 @@ open import
 ```agda
 open import elementary-number-theory.natural-numbers using
   ( ind-ℕ)
+```
+
+### 78. The Cauchy-Schwarz inequality {#78}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser) and
+[malarbol](http://www.github.com/malarbol)
+
+```agda
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
 ```
 
 ### 80. The fundamental theorem of arithmetic {#80}

@@ -631,7 +631,7 @@ is-trunc-map-precomp-Π-is-surjective :
   (P : B → Truncated-Type l3 (succ-𝕋 k)) →
   is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
 is-trunc-map-precomp-Π-is-surjective k H =
-  is-trunc-map-precomp-Π-is-connected-map
+  is-trunc-map-precomp-Π-is-connected-map'
     ( neg-one-𝕋)
     ( k)
     ( is-neg-one-connected-map-is-surjective H)

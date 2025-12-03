@@ -1,7 +1,7 @@
-# Complete metric abelian groups of real Banach spaces
+# The underlying additive complete metric abelian groups of real Banach spaces
 
 ```agda
-module analysis.complete-metric-abelian-groups-real-banach-spaces where
+module analysis.additive-complete-metric-abelian-groups-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
