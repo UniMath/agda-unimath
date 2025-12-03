@@ -26,6 +26,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.local-ring-of-real-numbers
+open import real-numbers.multiplication-nonzero-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -46,7 +47,7 @@ The [real numbers](real-numbers.dedekind-real-numbers.md) form a
 abstract
   is-zero-is-noninvertible-commutative-ring-ℝ :
     (l : Level) (x : ℝ l) →
-    ¬ (is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x) →
+    ¬ is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
     x ＝ raise-ℝ l zero-ℝ
   is-zero-is-noninvertible-commutative-ring-ℝ l x ¬inv-x =
     eq-sim-ℝ
