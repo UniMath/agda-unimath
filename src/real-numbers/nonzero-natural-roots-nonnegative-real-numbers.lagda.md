@@ -26,12 +26,12 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
-open import real-numbers.powers-real-numbers
 open import real-numbers.positive-real-numbers
-open import real-numbers.dedekind-real-numbers
+open import real-numbers.powers-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```

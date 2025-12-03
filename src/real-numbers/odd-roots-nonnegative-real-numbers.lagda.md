@@ -1,4 +1,4 @@
-# Nonzero natural roots of nonnegative real numbers
+# Odd roots of nonnegative real numbers
 
 ```agda
 module real-numbers.odd-roots-nonnegative-real-numbers where
