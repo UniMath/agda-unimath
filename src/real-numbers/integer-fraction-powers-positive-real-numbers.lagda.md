@@ -301,3 +301,14 @@ abstract
       ＝ inv-ℝ⁺ (nonzero-nat-root-ℝ⁺ (positive-nat-ℤ⁺ q⁺) (int-power-ℝ⁺ p x))
         by inv (commute-inv-nonzero-nat-root-ℝ⁺ _ _)
 ```
+
+### `1ᵃ = 1`
+
+```agda
+abstract
+  int-fraction-power-one-ℝ⁺ :
+    (q : fraction-ℤ) → int-fraction-power-ℝ⁺ q one-ℝ⁺ ＝ one-ℝ⁺
+  int-fraction-power-one-ℝ⁺ (p , q⁺) =
+    ( ap (nonzero-nat-root-ℝ⁺ _) (int-power-one-ℝ⁺ _)) ∙
+    ( nonzero-nat-root-one-ℝ⁺ _)
+```

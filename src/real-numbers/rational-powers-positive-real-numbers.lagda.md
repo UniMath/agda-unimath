@@ -197,3 +197,12 @@ abstract opaque
       ( is-retraction-positive-nat-ℤ⁺ n)
       ( int-one-power-ℝ⁺ x)
 ```
+
+### `1ᵃ = 1`
+
+```agda
+abstract
+  rational-power-one-ℝ⁺ :
+    (q : ℚ) → rational-power-ℝ⁺ q one-ℝ⁺ ＝ one-ℝ⁺
+  rational-power-one-ℝ⁺ q = int-fraction-power-one-ℝ⁺ (fraction-ℚ q)
+```

@@ -33,6 +33,7 @@ open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-positive-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 ```
@@ -224,6 +225,20 @@ abstract
         by inv (commute-root-int-power-ℝ⁺ n neg-one-ℤ x)
       ＝ nonzero-nat-root-ℝ⁺ n (inv-ℝ⁺ x)
         by ap (nonzero-nat-root-ℝ⁺ n) (int-neg-one-power-ℝ⁺ x)
+```
+
+### Any root of 1 is 1
+
+```agda
+abstract
+  nonzero-nat-root-one-ℝ⁺ :
+    (n : ℕ⁺) → nonzero-nat-root-ℝ⁺ n one-ℝ⁺ ＝ one-ℝ⁺
+  nonzero-nat-root-one-ℝ⁺ n =
+    eq-ℝ⁺ _ _
+      ( ap real-ℝ⁰⁺
+        ( ( ap (nonzero-nat-root-ℝ⁰⁺ n) (eq-ℝ⁰⁺ _ _ (refl {x = one-ℝ}))) ∙
+          ( nonzero-nat-root-one-ℝ⁰⁺ n)))
+
 ```
 
 ## See also

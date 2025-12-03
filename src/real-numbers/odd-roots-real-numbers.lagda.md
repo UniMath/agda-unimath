@@ -144,3 +144,16 @@ abstract
         ＝ power-ℝ n zero-ℝ
           by inv (nonzero-power-zero-ℝ (n , is-nonzero-is-odd-ℕ odd-n)))
 ```
+
+### Any odd root of 1 is 1
+
+```agda
+abstract
+  odd-root-one-ℝ :
+    (n : ℕ) (odd-n : is-odd-ℕ n) → odd-root-ℝ n odd-n one-ℝ ＝ one-ℝ
+  odd-root-one-ℝ n odd-n =
+    is-injective-odd-power-ℝ
+      ( n)
+      ( odd-n)
+      ( odd-power-odd-root-ℝ n odd-n one-ℝ ∙ inv (power-one-ℝ n))
+```

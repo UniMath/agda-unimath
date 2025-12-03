@@ -113,6 +113,13 @@ abstract
     int-power-ℝ⁺ k (raise-ℝ⁺ l one-ℝ⁺) ＝ raise-ℝ⁺ l one-ℝ⁺
   int-power-raise-one-ℝ⁺ =
     right-zero-law-int-multiple-Large-Ab large-ab-mul-ℝ⁺
+
+  int-power-one-ℝ⁺ :
+    (k : ℤ) → int-power-ℝ⁺ k one-ℝ⁺ ＝ one-ℝ⁺
+  int-power-one-ℝ⁺ k =
+    ( ap (int-power-ℝ⁺ k) (eq-raise-ℝ⁺ one-ℝ⁺)) ∙
+    ( int-power-raise-one-ℝ⁺ lzero k) ∙
+    ( inv (eq-raise-ℝ⁺ one-ℝ⁺))
 ```
 
 ### `xⁿ⁺¹ = xⁿx = xxⁿ`

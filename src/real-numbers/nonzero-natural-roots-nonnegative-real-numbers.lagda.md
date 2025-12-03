@@ -324,6 +324,23 @@ abstract
           by inv (distributive-power-mul-ℝ⁰⁺ _ _ _))
 ```
 
+### Any root of 1 is 1
+
+```agda
+abstract
+  root-pair-expansion-one-ℝ⁰⁺ :
+    (u v : ℕ) → root-pair-expansion-ℝ⁰⁺ u v one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+  root-pair-expansion-one-ℝ⁰⁺ 0 v = eq-ℝ⁰⁺ _ _ (odd-root-one-ℝ _ _)
+  root-pair-expansion-one-ℝ⁰⁺ (succ-ℕ u) v =
+    ( ap (root-pair-expansion-ℝ⁰⁺ u v) sqrt-one-ℝ⁰⁺) ∙
+    ( root-pair-expansion-one-ℝ⁰⁺ u v)
+
+  nonzero-nat-root-one-ℝ⁰⁺ :
+    (n : ℕ⁺) → nonzero-nat-root-ℝ⁰⁺ n one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+  nonzero-nat-root-one-ℝ⁰⁺ (succ-ℕ n , H) = root-pair-expansion-one-ℝ⁰⁺ _ _
+  nonzero-nat-root-one-ℝ⁰⁺ (0 , H) = ex-falso (H refl)
+```
+
 ## See also
 
 - [Nonzero natural roots of positive real numbers](real-numbers.nonzero-natural-roots-positive-real-numbers.md)
