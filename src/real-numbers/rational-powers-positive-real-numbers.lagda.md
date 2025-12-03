@@ -1,4 +1,4 @@
-# Integer fraction powers of positive real numbers
+# Rational powers of positive real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
