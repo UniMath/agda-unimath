@@ -223,41 +223,25 @@ module _
 
   abstract
     antirefl-apart-Heyting-Field : is-antireflexive apart-prop-Heyting-Field
-    antirefl-apart-Heyting-Field x (y , ⟨x-x⟩y=1 , _) =
+    antirefl-apart-Heyting-Field x is-invertible-x-x =
       is-nontrivial-commutative-ring-Heyting-Field
         ( F)
-        ( equational-reasoning
-          zero-Heyting-Field F
-          ＝ mul-Heyting-Field F (zero-Heyting-Field F) y
-            by inv (left-zero-law-mul-Heyting-Field F y)
-          ＝ mul-Heyting-Field F (diff-Heyting-Field F x x) y
-            by
-              ap-mul-Heyting-Field F
-                ( inv (right-inverse-law-add-Heyting-Field F x))
-                ( refl)
-          ＝ one-Heyting-Field F
-            by ⟨x-x⟩y=1)
+        ( is-trivial-is-invertible-zero-Commutative-Ring
+          ( commutative-ring-Heyting-Field F)
+          ( tr
+            ( is-invertible-element-Heyting-Field F)
+            ( right-inverse-law-add-Heyting-Field F x)
+            ( is-invertible-x-x)))
 
     symmetric-apart-Heyting-Field : is-symmetric apart-Heyting-Field
-    symmetric-apart-Heyting-Field x y (z , ⟨x-y⟩z=1 , z⟨x-y⟩=1) =
-      ( neg-Heyting-Field F z ,
-        ( equational-reasoning
-          mul-Heyting-Field F
-            ( diff-Heyting-Field F y x)
-            ( neg-Heyting-Field F z)
-          ＝
-            mul-Heyting-Field F
-              ( neg-Heyting-Field F (diff-Heyting-Field F x y))
-              ( neg-Heyting-Field F z)
-            by
-              ap-mul-Heyting-Field F
-                ( inv (distributive-neg-diff-Heyting-Field F x y))
-                ( refl)
-          ＝ mul-Heyting-Field F (diff-Heyting-Field F x y) z
-            by mul-neg-Heyting-Field F _ _
-          ＝ one-Heyting-Field F
-            by ⟨x-y⟩z=1) ,
-        commutative-mul-Heyting-Field F _ _ ∙ ⟨y-x⟩⟨-z⟩=1)
+    symmetric-apart-Heyting-Field x y is-invertible-⟨x-y⟩ =
+      tr
+        ( is-invertible-element-Heyting-Field F)
+        ( distributive-neg-diff-Heyting-Field F x y)
+        ( is-invertible-element-neg-is-invertible-element-Commutative-Ring
+          ( commutative-ring-Heyting-Field F)
+          ( _)
+          ( is-invertible-⟨x-y⟩))
 
     cotransitive-apart-Heyting-Field :
       is-cotransitive apart-prop-Heyting-Field
