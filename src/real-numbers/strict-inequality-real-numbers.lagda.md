@@ -202,14 +202,16 @@ module _
   abstract opaque
     unfolding le-ℝ real-ℚ
 
-    le-real-iff-lower-cut-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
-    le-real-iff-lower-cut-ℚ = is-rounded-lower-cut-ℝ x q
+    le-real-iff-is-in-lower-cut-ℝ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
+    le-real-iff-is-in-lower-cut-ℝ = is-rounded-lower-cut-ℝ x q
 
-    le-real-is-in-lower-cut-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
-    le-real-is-in-lower-cut-ℚ = forward-implication le-real-iff-lower-cut-ℚ
+    le-real-is-in-lower-cut-ℝ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+    le-real-is-in-lower-cut-ℝ =
+      forward-implication le-real-iff-is-in-lower-cut-ℝ
 
     is-in-lower-cut-le-real-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
-    is-in-lower-cut-le-real-ℚ = backward-implication le-real-iff-lower-cut-ℚ
+    is-in-lower-cut-le-real-ℚ =
+      backward-implication le-real-iff-is-in-lower-cut-ℝ
 ```
 
 ### A rational is in the upper cut of `x` iff its real projection is greater than `x`
@@ -222,16 +224,21 @@ module _
   abstract opaque
     unfolding le-ℝ real-ℚ
 
-    le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
-    le-iff-upper-cut-real-ℚ =
+    le-real-iff-is-in-upper-cut-ℝ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+    le-real-iff-is-in-upper-cut-ℝ =
       iff-tot-exists (λ _ → iff-equiv commutative-product) ∘iff
       is-rounded-upper-cut-ℝ x q
 
-    le-real-is-in-upper-cut-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
-    le-real-is-in-upper-cut-ℚ = forward-implication le-iff-upper-cut-real-ℚ
+    le-real-is-in-upper-cut-ℝ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+    le-real-is-in-upper-cut-ℝ =
+      forward-implication le-real-iff-is-in-upper-cut-ℝ
 
     is-in-upper-cut-le-real-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
-    is-in-upper-cut-le-real-ℚ = backward-implication le-iff-upper-cut-real-ℚ
+    is-in-upper-cut-le-real-ℚ =
+      backward-implication le-real-iff-is-in-upper-cut-ℝ
+
+    leq-real-is-in-upper-cut-ℝ : is-in-upper-cut-ℝ x q → leq-ℝ x (real-ℚ q)
+    leq-real-is-in-upper-cut-ℝ x<q = leq-le-ℝ (le-real-is-in-upper-cut-ℝ x<q)
 ```
 
 ### The real numbers are located
@@ -245,8 +252,8 @@ module _
     is-located-le-ℝ : disjunction-type (le-ℝ (real-ℚ p) x) (le-ℝ x (real-ℚ q))
     is-located-le-ℝ =
       map-disjunction
-        ( le-real-is-in-lower-cut-ℚ x)
-        ( le-real-is-in-upper-cut-ℚ x)
+        ( le-real-is-in-lower-cut-ℝ x)
+        ( le-real-is-in-upper-cut-ℝ x)
         ( is-located-lower-upper-cut-ℝ x p<q)
 ```
 
@@ -261,7 +268,7 @@ module _
     le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
     le-some-rational-ℝ =
       map-tot-exists
-        ( λ q → le-real-is-in-upper-cut-ℚ x)
+        ( λ q → le-real-is-in-upper-cut-ℝ x)
         ( is-inhabited-upper-cut-ℝ x)
 ```
 
@@ -280,7 +287,7 @@ module _
         open do-syntax-trunc-Prop (∃ (ℝ lzero) (λ y → le-prop-ℝ y x))
       in do
         ( q , q<x) ← is-inhabited-lower-cut-ℝ x
-        intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℚ x q<x)
+        intro-exists (real-ℚ q) (le-real-is-in-lower-cut-ℝ x q<x)
 
     exists-greater-ℝ : exists (ℝ lzero) (λ y → le-prop-ℝ x y)
     exists-greater-ℝ =
@@ -288,7 +295,7 @@ module _
         open do-syntax-trunc-Prop (∃ (ℝ lzero) (le-prop-ℝ x))
       in do
         ( q , x<q) ← is-inhabited-upper-cut-ℝ x
-        intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℚ x x<q)
+        intro-exists (real-ℚ q) (le-real-is-in-upper-cut-ℝ x x<q)
 ```
 
 ### Negation reverses the strict ordering of real numbers
@@ -408,8 +415,8 @@ module _
       map-tot-exists
         ( λ q →
           map-product
-            ( le-real-is-in-upper-cut-ℚ x)
-            ( le-real-is-in-lower-cut-ℚ y))
+            ( le-real-is-in-upper-cut-ℝ x)
+            ( le-real-is-in-lower-cut-ℝ y))
 ```
 
 ### Strict inequality on the real numbers is dense
@@ -505,7 +512,7 @@ module _
       leq-leq'-ℝ _ _
         ( λ q y<q →
           is-in-upper-cut-le-real-ℚ x
-            ( H q (le-real-is-in-upper-cut-ℚ y y<q)))
+            ( H q (le-real-is-in-upper-cut-ℝ y y<q)))
 ```
 
 ### Two real numbers are similar if they are less than the same rational numbers

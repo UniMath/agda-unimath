@@ -309,6 +309,6 @@ module _
         intro-exists
           ( q , r)
           ( p=q+r ,
-            le-real-is-in-upper-cut-ℚ x x<q ,
-            le-real-is-in-upper-cut-ℚ y y<r)
+            le-real-is-in-upper-cut-ℝ x x<q ,
+            le-real-is-in-upper-cut-ℝ y y<r)
 ```

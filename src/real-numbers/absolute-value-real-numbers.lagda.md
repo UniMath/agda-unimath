@@ -96,17 +96,21 @@ abstract opaque
 
 ```agda
 abstract
+  sim-abs-raise-ℝ :
+    {l1 : Level} (l2 : Level) (x : ℝ l1) →
+    sim-ℝ (abs-ℝ (raise-ℝ l2 x)) (raise-ℝ l2 (abs-ℝ x))
+  sim-abs-raise-ℝ l2 x =
+    similarity-reasoning-ℝ
+      abs-ℝ (raise-ℝ l2 x)
+      ~ℝ abs-ℝ x
+        by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
+      ~ℝ raise-ℝ l2 (abs-ℝ x)
+        by sim-raise-ℝ l2 (abs-ℝ x)
+
   abs-raise-ℝ :
     {l1 : Level} (l2 : Level) (x : ℝ l1) →
     abs-ℝ (raise-ℝ l2 x) ＝ raise-ℝ l2 (abs-ℝ x)
-  abs-raise-ℝ l2 x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        abs-ℝ (raise-ℝ l2 x)
-        ~ℝ abs-ℝ x
-          by preserves-sim-abs-ℝ (sim-raise-ℝ' l2 x)
-        ~ℝ raise-ℝ l2 (abs-ℝ x)
-          by sim-raise-ℝ l2 (abs-ℝ x))
+  abs-raise-ℝ l2 x = eq-sim-ℝ (sim-abs-raise-ℝ l2 x)
 ```
 
 ### The absolute value of a real number is nonnegative
@@ -457,6 +461,17 @@ abstract
         by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
       ＝ abs-ℝ x *ℝ abs-ℝ y
         by inv (ap-mul-ℝ (eq-abs-sqrt-square-ℝ x) (eq-abs-sqrt-square-ℝ y))
+```
+
+### For positive `x`, `|xy| = x|y|`
+
+```agda
+abstract
+  abs-left-mul-positive-ℝ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) →
+    abs-ℝ (real-ℝ⁺ x *ℝ y) ＝ real-ℝ⁺ x *ℝ abs-ℝ y
+  abs-left-mul-positive-ℝ x⁺@(x , _) y =
+    abs-mul-ℝ x y ∙ ap-mul-ℝ (abs-real-ℝ⁺ x⁺) refl
 ```
 
 ### For any `ε : ℚ⁺`, `|x| - ε < x` or `|x| - ε < -x`

@@ -17,6 +17,7 @@ open import linear-algebra.real-inner-product-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -125,6 +126,40 @@ module _
         ( real-sqrt-ℝ⁰⁺)
         ( eq-ℝ⁰⁺ _ _
           ( pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
+```
+
+### Orthogonality is preserved by scalar multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
+      is-orthogonal-ℝ-Inner-Product-Space V v w →
+      is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v·w=0 =
+      let
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          ⟨ c *V v ,V w ⟩
+          ＝ c *ℝ ⟨ v ,V w ⟩
+            by
+              preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space
+                ( V)
+                ( _)
+                ( _)
+                ( _)
+          ＝ c *ℝ raise-ℝ l1 zero-ℝ
+            by ap-mul-ℝ refl v·w=0
+          ＝ raise-ℝ l1 zero-ℝ
+            by right-raise-zero-law-mul-ℝ c
 ```
 
 ## References
