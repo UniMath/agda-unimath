@@ -27,6 +27,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes

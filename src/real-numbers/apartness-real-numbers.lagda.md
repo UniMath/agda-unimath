@@ -285,6 +285,10 @@ module _
         ( sim-eq-ℝ (left-unit-law-add-ℝ y))
         ( preserves-apart-right-add-ℝ y _ _ x-y#0)
 
+  apart-iff-is-nonzero-diff-ℝ : (apart-ℝ x y) ↔ (is-nonzero-ℝ (x -ℝ y))
+  apart-iff-is-nonzero-diff-ℝ =
+    ( is-nonzero-diff-is-apart-ℝ , apart-is-nonzero-diff-ℝ)
+
   nonzero-diff-apart-ℝ : apart-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
   nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
 ```
