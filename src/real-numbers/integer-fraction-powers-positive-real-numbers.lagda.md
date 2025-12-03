@@ -31,6 +31,7 @@ open import foundation.universe-levels
 
 open import real-numbers.integer-powers-positive-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.nonzero-natural-roots-positive-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.powers-real-numbers
@@ -282,4 +283,21 @@ abstract
   distributive-int-fraction-power-mul-ℝ⁺ (p , q⁺) x y =
     ( ap (nonzero-nat-root-ℝ⁺ _) (distributive-int-power-mul-ℝ⁺ p x y)) ∙
     ( distributive-nonzero-nat-root-mul-ℝ⁺ _ _ _)
+```
+
+### `x⁻ᵃ` is the multiplicative inverse of `xᵃ`
+
+```agda
+abstract
+  neg-int-fraction-power-ℝ⁺ :
+    {l : Level} (q : fraction-ℤ) (x : ℝ⁺ l) →
+    int-fraction-power-ℝ⁺ (neg-fraction-ℤ q) x ＝
+    inv-ℝ⁺ (int-fraction-power-ℝ⁺ q x)
+  neg-int-fraction-power-ℝ⁺ (p , q⁺) x =
+    equational-reasoning
+      nonzero-nat-root-ℝ⁺ (positive-nat-ℤ⁺ q⁺) (int-power-ℝ⁺ (neg-ℤ p) x)
+      ＝ nonzero-nat-root-ℝ⁺ (positive-nat-ℤ⁺ q⁺) (inv-ℝ⁺ (int-power-ℝ⁺ p x))
+        by ap (nonzero-nat-root-ℝ⁺ _) (int-neg-power-ℝ⁺ p x)
+      ＝ inv-ℝ⁺ (nonzero-nat-root-ℝ⁺ (positive-nat-ℤ⁺ q⁺) (int-power-ℝ⁺ p x))
+        by inv (commute-inv-nonzero-nat-root-ℝ⁺ _ _)
 ```

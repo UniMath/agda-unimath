@@ -105,7 +105,7 @@ abstract opaque
         by mul-int-fraction-power-ℝ⁺ _ _ x
 ```
 
-### `(xy)ᵖ = xᵖyᵖ`
+### `(xy)ᵃ = xᵃyᵃ`
 
 ```agda
 abstract
@@ -115,6 +115,19 @@ abstract
     rational-power-ℝ⁺ q x *ℝ⁺ rational-power-ℝ⁺ q y
   distributive-rational-power-mul-ℝ⁺ q =
     distributive-int-fraction-power-mul-ℝ⁺ (fraction-ℚ q)
+```
+
+### `x⁻ᵃ` is the multiplicative inverse of `xᵃ`
+
+```agda
+abstract opaque
+  unfolding neg-ℚ
+
+  neg-rational-power-ℝ⁺ :
+    {l : Level} (q : ℚ) (x : ℝ⁺ l) →
+    rational-power-ℝ⁺ (neg-ℚ q) x ＝ inv-ℝ⁺ (rational-power-ℝ⁺ q x)
+  neg-rational-power-ℝ⁺ q =
+    neg-int-fraction-power-ℝ⁺ (fraction-ℚ q)
 ```
 
 ### The canonical embedding of integers in the rational numbers preserves powers of positive real numbers
@@ -174,11 +187,11 @@ abstract
 abstract opaque
   unfolding is-positive-rational-ℤ inv-ℚ⁺
 
-  reciprocal-ℕ⁺-power-ℝ⁺ :
+  reciprocal-rational-ℕ⁺-power-ℝ⁺ :
     {l : Level} (n : ℕ⁺) (x : ℝ⁺ l) →
     rational-power-ℝ⁺ (reciprocal-rational-ℕ⁺ n) x ＝
     nonzero-nat-root-ℝ⁺ n x
-  reciprocal-ℕ⁺-power-ℝ⁺ n x =
+  reciprocal-rational-ℕ⁺-power-ℝ⁺ n x =
     ap-binary
       ( nonzero-nat-root-ℝ⁺)
       ( is-retraction-positive-nat-ℤ⁺ n)

@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import real-numbers.integer-powers-positive-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-positive-real-numbers
@@ -205,6 +206,24 @@ abstract
             ( n)
             ( nonnegative-ℝ⁺ x⁺)
             ( nonnegative-ℝ⁺ y⁺))))
+```
+
+### Nonzero natural roots and multiplicative inverses commute
+
+```agda
+abstract
+  commute-inv-nonzero-nat-root-ℝ⁺ :
+    {l : Level} (n : ℕ⁺) (x : ℝ⁺ l) →
+    inv-ℝ⁺ (nonzero-nat-root-ℝ⁺ n x) ＝ nonzero-nat-root-ℝ⁺ n (inv-ℝ⁺ x)
+  commute-inv-nonzero-nat-root-ℝ⁺ n x =
+    equational-reasoning
+      inv-ℝ⁺ (nonzero-nat-root-ℝ⁺ n x)
+      ＝ int-power-ℝ⁺ neg-one-ℤ (nonzero-nat-root-ℝ⁺ n x)
+        by inv (int-neg-one-power-ℝ⁺ _)
+      ＝ nonzero-nat-root-ℝ⁺ n (int-power-ℝ⁺ neg-one-ℤ x)
+        by inv (commute-root-int-power-ℝ⁺ n neg-one-ℤ x)
+      ＝ nonzero-nat-root-ℝ⁺ n (inv-ℝ⁺ x)
+        by ap (nonzero-nat-root-ℝ⁺ n) (int-neg-one-power-ℝ⁺ x)
 ```
 
 ## See also
