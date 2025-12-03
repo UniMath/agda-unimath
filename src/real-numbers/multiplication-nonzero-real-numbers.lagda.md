@@ -17,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -149,4 +150,15 @@ abstract
           { x = one-ℝ}
           { y = raise-ℝ l one-ℝ}
           ( sim-raise-ℝ l one-ℝ)))
+```
+
+### A real number is invertible iff it is nonzero
+
+```agda
+is-invertible-iff-is-nonzero-ℝ :
+  {l : Level} (x : ℝ l) →
+  (is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x) ↔
+  (is-nonzero-ℝ x)
+is-invertible-iff-is-nonzero-ℝ x =
+  ( is-nonzero-is-invertible-ℝ x , is-invertible-is-nonzero-ℝ x)
 ```
