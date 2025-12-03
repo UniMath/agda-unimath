@@ -33,8 +33,8 @@ open import real-numbers.nonzero-natural-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-positive-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.powers-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 ```
 
@@ -238,7 +238,6 @@ abstract
       ( ap real-ℝ⁰⁺
         ( ( ap (nonzero-nat-root-ℝ⁰⁺ n) (eq-ℝ⁰⁺ _ _ (refl {x = one-ℝ}))) ∙
           ( nonzero-nat-root-one-ℝ⁰⁺ n)))
-
 ```
 
 ## See also
