@@ -620,3 +620,73 @@ module _
   aut-SIPCUB-function-ℝ =
     ( map-SIPCUB-function-ℝ f , is-equiv-SIPCUB-function-ℝ)
 ```
+
+### The inverse of a SIPCUB function is unbounded
+
+```agda
+module _
+  {l : Level}
+  (f : SIPCUB-function-ℝ l l)
+  where
+
+  abstract
+    is-unbounded-above-map-inv-SIPCUB-function-ℝ :
+      is-unbounded-above-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+    is-unbounded-above-map-inv-SIPCUB-function-ℝ q =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℝ l)
+              ( λ x → le-prop-ℝ (real-ℚ q) (map-inv-SIPCUB-function-ℝ f x)))
+      in do
+        (r , fq<r) ←
+          is-inhabited-upper-cut-ℝ (map-SIPCUB-function-ℝ f (raise-real-ℚ l q))
+        (x , r<fx) ← is-unbounded-above-SIPCUB-function-ℝ f r
+        intro-exists
+          ( map-SIPCUB-function-ℝ f x)
+          ( reflects-le-left-raise-ℝ l
+            ( reflects-le-SIPCUB-function-ℝ
+              ( f)
+              ( raise-real-ℚ l q)
+              ( map-inv-SIPCUB-function-ℝ f (map-SIPCUB-function-ℝ f x))
+              ( inv-tr
+                ( le-ℝ _)
+                ( is-section-map-inv-SIPCUB-function-ℝ f _)
+                ( transitive-le-ℝ
+                  ( map-SIPCUB-function-ℝ f (raise-real-ℚ l q))
+                  ( real-ℚ r)
+                  ( map-SIPCUB-function-ℝ f x)
+                  ( r<fx)
+                  ( le-real-is-in-upper-cut-ℝ _ fq<r)))))
+
+    is-unbounded-below-map-inv-SIPCUB-function-ℝ :
+      is-unbounded-below-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+    is-unbounded-below-map-inv-SIPCUB-function-ℝ q =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℝ l)
+              ( λ x → le-prop-ℝ (map-inv-SIPCUB-function-ℝ f x) (real-ℚ q)))
+      in do
+        (r , r<fq) ←
+          is-inhabited-lower-cut-ℝ (map-SIPCUB-function-ℝ f (raise-real-ℚ l q))
+        (x , fx<r) ← is-unbounded-below-SIPCUB-function-ℝ f r
+        intro-exists
+          ( map-SIPCUB-function-ℝ f x)
+          ( reflects-le-right-raise-ℝ l
+            ( reflects-le-SIPCUB-function-ℝ
+              ( f)
+              ( map-inv-SIPCUB-function-ℝ f (map-SIPCUB-function-ℝ f x))
+              ( raise-ℝ l (real-ℚ q))
+              ( inv-tr
+                ( λ z → le-ℝ z (map-SIPCUB-function-ℝ f (raise-real-ℚ l q)))
+                ( is-section-map-inv-SIPCUB-function-ℝ f _)
+                ( transitive-le-ℝ
+                  ( map-SIPCUB-function-ℝ f x)
+                  ( real-ℚ r)
+                  ( map-SIPCUB-function-ℝ f (raise-real-ℚ l q))
+                  ( le-real-is-in-lower-cut-ℝ _ r<fq)
+                  ( fx<r)))))
+```

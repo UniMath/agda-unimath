@@ -199,6 +199,12 @@ abstract
     le-ℝ (raise-ℝ l x) y → le-ℝ x y
   reflects-le-left-raise-ℝ l {x} {y} =
     preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ' l x)
+
+  reflects-le-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    le-ℝ x (raise-ℝ l y) → le-ℝ x y
+  reflects-le-right-raise-ℝ l {x} {y} =
+    preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ' l y)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality

@@ -42,18 +42,22 @@ module _
   (odd-n : is-odd-ℕ n)
   where
 
-  odd-root-ℝ : ℝ l → ℝ l
-  odd-root-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+  opaque
+    odd-root-ℝ : ℝ l → ℝ l
+    odd-root-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
 
-  odd-power-odd-root-ℝ :
-    (x : ℝ l) → power-ℝ n (odd-root-ℝ x) ＝ x
-  odd-power-odd-root-ℝ =
-    is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+  abstract opaque
+    unfolding odd-root-ℝ
 
-  odd-root-odd-power-ℝ :
-    (x : ℝ l) → odd-root-ℝ (power-ℝ n x) ＝ x
-  odd-root-odd-power-ℝ =
-    is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    odd-power-odd-root-ℝ :
+      (x : ℝ l) → power-ℝ n (odd-root-ℝ x) ＝ x
+    odd-power-odd-root-ℝ =
+      is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+
+    odd-root-odd-power-ℝ :
+      (x : ℝ l) → odd-root-ℝ (power-ℝ n x) ＝ x
+    odd-root-odd-power-ℝ =
+      is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
 ```
 
 ## Properties
