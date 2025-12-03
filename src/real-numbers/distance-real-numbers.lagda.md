@@ -396,7 +396,7 @@ abstract
         by leq-eq-ℝ (ap-add-ℝ refl (commutative-dist-ℝ x y))
 ```
 
-### For any `x, y : ℝ`, the distance between `x` and `x + y` is similar to `|y|`
+### The distance between `x` and `x + y` is `|y|`
 
 ```agda
 abstract

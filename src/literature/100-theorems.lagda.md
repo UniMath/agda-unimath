@@ -187,9 +187,8 @@ open import elementary-number-theory.natural-numbers using
 
 ### 78. The Cauchy-Schwarz inequality {#78}
 
-**Author:** [Louis Wasserman](https://github.com/lowasser)
-
-**Author:** [malarbol](http://www.github.com/malarbol)
+**Author:** [Louis Wasserman](https://github.com/lowasser) and
+[malarbol](http://www.github.com/malarbol)
 
 ```agda
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using

@@ -24,11 +24,17 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.large-posets
+
+open import real-numbers.addition-positive-and-negative-real-numbers
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
@@ -211,4 +217,28 @@ abstract
                   ( right-inverse-law-mul-ℝ⁺ y⁺)
             ~ℝ one-ℝ
               by sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+```
+
+### For nonnegative `x`, `(x + ε)⁻¹ x ≤ 1`
+
+```agda
+abstract
+  leq-one-mul-inv-add-positive-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁺ l2) →
+    leq-ℝ (real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x y) *ℝ real-ℝ⁰⁺ x) one-ℝ
+  leq-one-mul-inv-add-positive-ℝ⁰⁺ x⁰⁺@(x , _) y⁺@(y , _) =
+    let
+      open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+      chain-of-inequalities
+      real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ x
+      ≤ real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ (x +ℝ y)
+        by
+          preserves-leq-left-mul-ℝ⁺
+            ( inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺))
+            ( leq-left-add-real-ℝ⁺ x y⁺)
+      ≤ one-ℝ
+        by
+          leq-sim-ℝ
+            ( left-inverse-law-mul-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺))
 ```

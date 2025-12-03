@@ -34,13 +34,14 @@ We record that [equality](foundation-core.identity-types.md) and
 ```agda
 module _
   {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
-  where abstract
+  where
 
-  double-negation-elim-sim-ℝ : ¬¬ (x ~ℝ y) → x ~ℝ y
-  double-negation-elim-sim-ℝ H =
-    sim-antisymmetric-leq-ℝ x y
-      ( double-negation-elim-leq-ℝ x y (map-double-negation leq-sim-ℝ H))
-      ( double-negation-elim-leq-ℝ y x (map-double-negation leq-sim-ℝ' H))
+  abstract
+    double-negation-elim-sim-ℝ : ¬¬ (x ~ℝ y) → x ~ℝ y
+    double-negation-elim-sim-ℝ H =
+      sim-antisymmetric-leq-ℝ x y
+        ( double-negation-elim-leq-ℝ x y (map-double-negation leq-sim-ℝ H))
+        ( double-negation-elim-leq-ℝ y x (map-double-negation leq-sim-ℝ' H))
 ```
 
 ### Equality of Dedekind real numbers is double negation stable
@@ -48,11 +49,12 @@ module _
 ```agda
 module _
   {l : Level} {x y : ℝ l}
-  where abstract
+  where
 
-  double-negation-elim-eq-ℝ : ¬¬ (x ＝ y) → x ＝ y
-  double-negation-elim-eq-ℝ H =
-    eq-sim-ℝ (double-negation-elim-sim-ℝ (map-double-negation sim-eq-ℝ H))
+  abstract
+    double-negation-elim-eq-ℝ : ¬¬ (x ＝ y) → x ＝ y
+    double-negation-elim-eq-ℝ H =
+      eq-sim-ℝ (double-negation-elim-sim-ℝ (map-double-negation sim-eq-ℝ H))
 ```
 
 ### The Dedekind real numbers form a set

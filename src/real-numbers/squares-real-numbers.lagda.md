@@ -402,7 +402,7 @@ abstract
           by sim-raise-ℝ l _)
 ```
 
-### The square of zero is zero
+### `0² = 0`
 
 ```agda
 abstract

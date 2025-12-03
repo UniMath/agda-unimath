@@ -31,13 +31,14 @@ open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.extensionality-multiplication-real-numbers
+open import real-numbers.extensionality-multiplication-bilinear-form-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -170,11 +171,11 @@ module _
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
-  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space :
+  preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space :
     preserves-scalar-mul-left-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
-  is-left-homogeneous-inner-product-ℝ-Inner-Product-Space =
+  preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space =
     preserves-scalar-mul-left-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
@@ -188,12 +189,23 @@ module _
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
-  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space :
+  preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space :
     preserves-scalar-mul-right-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( inner-product-ℝ-Inner-Product-Space)
-  is-right-homogeneous-inner-product-ℝ-Inner-Product-Space =
+  preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space =
     preserves-scalar-mul-right-map-bilinear-form-ℝ-Vector-Space
+      ( vector-space-ℝ-Inner-Product-Space)
+      ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
+
+  preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space :
+    (a b : ℝ l1) (u v : type-ℝ-Inner-Product-Space) →
+    inner-product-ℝ-Inner-Product-Space
+      ( mul-ℝ-Inner-Product-Space a u)
+      ( mul-ℝ-Inner-Product-Space b v) ＝
+    (a *ℝ b) *ℝ inner-product-ℝ-Inner-Product-Space u v
+  preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space =
+    preserves-scalar-mul-map-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space)
 
@@ -203,37 +215,9 @@ module _
   is-nonnegative-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr1 (pr2 (pr2 (pr2 V)))
 
-  is-orthogonal-prop-ℝ-Inner-Product-Space :
-    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space → Prop (lsuc l1)
-  is-orthogonal-prop-ℝ-Inner-Product-Space v w =
-    Id-Prop
-      ( ℝ-Set l1)
-      ( inner-product-ℝ-Inner-Product-Space v w)
-      ( raise-ℝ l1 zero-ℝ)
-
-  is-orthogonal-ℝ-Inner-Product-Space :
-    type-ℝ-Inner-Product-Space → type-ℝ-Inner-Product-Space → UU (lsuc l1)
-  is-orthogonal-ℝ-Inner-Product-Space v w =
-    type-Prop (is-orthogonal-prop-ℝ-Inner-Product-Space v w)
-
-  commutative-inner-product-ℝ-Inner-Product-Space :
-    (v w : type-ℝ-Inner-Product-Space) →
-    inner-product-ℝ-Inner-Product-Space v w ＝
-    inner-product-ℝ-Inner-Product-Space w v
-  commutative-inner-product-ℝ-Inner-Product-Space = pr1 (pr2 (pr2 V))
-
-  symmetric-is-orthogonal-ℝ-Inner-Product-Space :
-    (v w : type-ℝ-Inner-Product-Space) →
-    is-orthogonal-ℝ-Inner-Product-Space v w →
-    is-orthogonal-ℝ-Inner-Product-Space w v
-  symmetric-is-orthogonal-ℝ-Inner-Product-Space v w =
-    tr
-      ( _＝ raise-ℝ l1 zero-ℝ)
-      ( commutative-inner-product-ℝ-Inner-Product-Space v w)
-
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space :
     (v : type-ℝ-Inner-Product-Space) →
-    is-orthogonal-ℝ-Inner-Product-Space v v →
+    inner-product-ℝ-Inner-Product-Space v v ＝ raise-zero-ℝ l1 →
     v ＝ zero-ℝ-Inner-Product-Space
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr2 (pr2 (pr2 (pr2 V)))
@@ -303,7 +287,11 @@ module _
         ＝
           ( neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
           ( inner-product-ℝ-Inner-Product-Space V v w)
-          by is-right-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
+          by
+            preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space V
+              ( _)
+              ( _)
+              ( _)
         ＝
           neg-ℝ (raise-ℝ l1 one-ℝ *ℝ inner-product-ℝ-Inner-Product-Space V v w)
           by left-negative-law-mul-ℝ _ _
@@ -354,56 +342,20 @@ module _
         inner-product-ℝ-Inner-Product-Space V v w)
     right-distributive-inner-product-diff-ℝ-Inner-Product-Space u v w =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
         _-V_ = diff-ℝ-Inner-Product-Space V
         neg-V = neg-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (u -V v) ∙V w
-          ＝ (u ∙V w) +ℝ (neg-V v ∙V w)
+          ⟨ u -V v ,V w ⟩
+          ＝ ⟨ u ,V w ⟩ +ℝ ⟨ neg-V v ,V w ⟩
             by is-left-additive-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ (u ∙V w) -ℝ (v ∙V w)
+          ＝ ⟨ u ,V w ⟩ -ℝ ⟨ v ,V w ⟩
             by
               ap-add-ℝ
                 ( refl)
                 ( left-negative-law-inner-product-ℝ-Inner-Product-Space V _ _)
-```
-
-### Orthogonality is preserved by scalar multiplication
-
-```agda
-module _
-  {l1 l2 : Level}
-  (V : ℝ-Inner-Product-Space l1 l2)
-  where
-
-  abstract
-    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space :
-      (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
-      is-orthogonal-ℝ-Inner-Product-Space V v w →
-      is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
-    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v∙w=0 =
-      let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
-        _+V_ = add-ℝ-Inner-Product-Space V
-        _*V_ = mul-ℝ-Inner-Product-Space V
-      in
-        equational-reasoning
-          (c *V v) ∙V w
-          ＝ c *ℝ (v ∙V w)
-            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ c *ℝ raise-ℝ l1 zero-ℝ
-            by ap-mul-ℝ refl v∙w=0
-          ＝ c *ℝ zero-ℝ
-            by
-              eq-sim-ℝ (preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ' l1 zero-ℝ))
-          ＝ raise-ℝ l1 zero-ℝ
-            by
-              eq-sim-ℝ
-                ( transitive-sim-ℝ _ _ _
-                  ( sim-raise-ℝ l1 zero-ℝ)
-                  ( right-zero-law-mul-ℝ c))
 ```
 
 ### The norm of the sum of two vectors
@@ -467,24 +419,28 @@ module _
       square-ℝ c *ℝ squared-norm-ℝ-Inner-Product-Space V v
     squared-norm-mul-ℝ-Inner-Product-Space c v =
       let
-        _∙V_ = inner-product-ℝ-Inner-Product-Space V
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
         _+V_ = add-ℝ-Inner-Product-Space V
         _*V_ = mul-ℝ-Inner-Product-Space V
       in
         equational-reasoning
-          (c *V v) ∙V (c *V v)
-          ＝ c *ℝ (v ∙V (c *V v))
-            by is-left-homogeneous-inner-product-ℝ-Inner-Product-Space V _ _ _
-          ＝ c *ℝ (c *ℝ (v ∙V v))
+          ⟨ c *V v ,V c *V v ⟩
+          ＝ c *ℝ ⟨ v ,V c *V v ⟩
+            by
+              preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space V
+                ( _)
+                ( _)
+                ( _)
+          ＝ c *ℝ (c *ℝ ⟨ v ,V v ⟩)
             by
               ap-mul-ℝ
                 ( refl)
-                ( is-right-homogeneous-inner-product-ℝ-Inner-Product-Space
+                ( preserves-scalar-mul-right-inner-product-ℝ-Inner-Product-Space
                   ( V)
                   ( _)
                   ( _)
                   ( _))
-          ＝ (c *ℝ c) *ℝ (v ∙V v)
+          ＝ (c *ℝ c) *ℝ ⟨ v ,V v ⟩
             by inv (associative-mul-ℝ _ _ _)
 
     is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space :
@@ -512,6 +468,15 @@ module _
             by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
           ＝ abs-ℝ c *ℝ norm-ℝ-Inner-Product-Space V v
             by ap-mul-ℝ (inv (eq-abs-sqrt-square-ℝ c)) refl
+
+    is-positively-homogeneous-norm-ℝ-Inner-Product-Space :
+      (c : ℝ⁺ l1) (v : type-ℝ-Inner-Product-Space V) →
+      norm-ℝ-Inner-Product-Space V
+        ( mul-ℝ-Inner-Product-Space V (real-ℝ⁺ c) v) ＝
+      real-ℝ⁺ c *ℝ norm-ℝ-Inner-Product-Space V v
+    is-positively-homogeneous-norm-ℝ-Inner-Product-Space c⁺@(c , _) v =
+      ( is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space c v) ∙
+      ( ap-mul-ℝ (abs-real-ℝ⁺ c⁺) refl)
 ```
 
 ### The norm of `-v` is the norm of `v`

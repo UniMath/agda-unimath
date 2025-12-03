@@ -25,7 +25,7 @@ open import real-numbers.rational-real-numbers
 
 Two elements `u` and `v` of a
 [real vector space](linear-algebra.real-vector-spaces.md) `V` are
-{{#concept "orthogonal" Disambiguation="relative to a bilinear form over a real vector space" Agda=are-orthogonal-bilinear-form-ℝ-Vector-Space}}
+{{#concept "orthogonal" Disambiguation="relative to a bilinear form over a real vector space" Agda=is-orthogonal-bilinear-form-ℝ-Vector-Space}}
 relative to a
 [bilinear form](linear-algebra.bilinear-forms-real-vector-spaces.md)
 `B : V → V → ℝ` if `B u v = 0`.
@@ -39,16 +39,16 @@ module _
   (B : bilinear-form-ℝ-Vector-Space V)
   where
 
-  are-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
+  is-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Vector-Space V)
-  are-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
+  is-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
     Id-Prop
       ( ℝ-Set l1)
       ( map-bilinear-form-ℝ-Vector-Space V B v w)
       ( raise-zero-ℝ l1)
 
-  are-orthogonal-bilinear-form-ℝ-Vector-Space :
+  is-orthogonal-bilinear-form-ℝ-Vector-Space :
     Relation (lsuc l1) (type-ℝ-Vector-Space V)
-  are-orthogonal-bilinear-form-ℝ-Vector-Space =
-    type-Relation-Prop are-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+  is-orthogonal-bilinear-form-ℝ-Vector-Space =
+    type-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
 ```

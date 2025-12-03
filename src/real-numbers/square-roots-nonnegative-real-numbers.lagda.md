@@ -53,6 +53,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
@@ -666,22 +667,39 @@ abstract
                         ( is-section-square-ℝ⁰⁺ y)))))))
 ```
 
-### The square root of a positive real number is positive
+### The square root of a nonnegative real number is positive if and only if the real number is positive
 
 ```agda
 abstract opaque
   unfolding real-sqrt-ℝ⁰⁺
 
-  is-positive-sqrt-ℝ⁺ :
-    {l : Level} (x : ℝ⁺ l) → is-positive-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x))
-  is-positive-sqrt-ℝ⁺ x⁺@(x , _) =
+  is-positive-sqrt-is-positive-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → is-positive-ℝ (real-ℝ⁰⁺ x) →
+    is-positive-ℝ (real-sqrt-ℝ⁰⁺ x)
+  is-positive-sqrt-is-positive-ℝ⁰⁺ x⁰⁺@(x , _) 0<x =
     is-positive-zero-in-lower-cut-ℝ
-      ( real-sqrt-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺))
+      ( real-sqrt-ℝ⁰⁺ x⁰⁺)
       ( λ _ →
         inv-tr
           ( is-in-lower-cut-ℝ x)
           ( left-zero-law-mul-ℚ zero-ℚ)
-          ( zero-in-lower-cut-ℝ⁺ x⁺))
+          ( zero-in-lower-cut-ℝ⁺ (x , 0<x)))
+
+  is-positive-is-positive-sqrt-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) →
+    is-positive-ℝ (real-sqrt-ℝ⁰⁺ x) → is-positive-ℝ (real-ℝ⁰⁺ x)
+  is-positive-is-positive-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) 0<√x =
+    tr
+      ( is-positive-ℝ)
+      ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( is-positive-mul-ℝ 0<√x 0<√x)
+
+is-positive-sqrt-iff-is-positive-ℝ⁰⁺ :
+  {l : Level} (x : ℝ⁰⁺ l) →
+  is-positive-ℝ (real-sqrt-ℝ⁰⁺ x) ↔ is-positive-ℝ (real-ℝ⁰⁺ x)
+is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
+  ( is-positive-is-positive-sqrt-ℝ⁰⁺ x ,
+    is-positive-sqrt-is-positive-ℝ⁰⁺ x)
 ```
 
 ### The square root of a nonnegative real number preserves inequality
@@ -709,4 +727,21 @@ abstract
   real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
   real-sqrt-zero-ℝ⁰⁺ =
     inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
+```
+
+### If `√x ≤ 1`, `x ≤ 1`
+
+```agda
+abstract
+  leq-one-leq-one-sqrt-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ (real-sqrt-ℝ⁰⁺ x) one-ℝ → leq-ℝ⁰⁺ x one-ℝ⁰⁺
+  leq-one-leq-one-sqrt-ℝ⁰⁺ x⁰⁺@(x , _) √x≤1 =
+    binary-tr
+      ( leq-ℝ)
+      ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
+      ( left-unit-law-mul-ℝ one-ℝ)
+      ( preserves-leq-square-ℝ⁰⁺
+        ( sqrt-ℝ⁰⁺ x⁰⁺)
+        ( one-ℝ⁰⁺)
+        ( √x≤1))
 ```

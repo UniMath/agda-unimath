@@ -56,17 +56,28 @@ A
 {{#concept "seminorm" WDID=Q1416088 WD="seminorm" Disambiguation="on a real vector space" Agda=seminorm-ℝ-Vector-Space}}
 on a [real vector space](linear-algebra.real-vector-spaces.md) `V` is a
 [real](real-numbers.dedekind-real-numbers.md)-valued function `p` on the vector
-space such that `p (x + y) ≤ p x + p y` for all `x` and `y` in `V`, and
-`p (c * x) = |c| * p x` for all real numbers `c` and `x` in `V`.
+space which is
 
-These conditions imply that `p 0 = 0` and that `p` is nonnegative.
+- **Triangular.** `p(x + y) ≤ p(x) + p(y)` for all `x` and `y` in `V`, and
+- **Absolutely homogeneous.** `p(c * x) = |c| * p(x)` for all real numbers `c`
+  and `x` in `V`.
+
+These conditions together imply that `p(x) ≥ 0` for any `x`, and `p(0) = 0`.
 
 A real vector space equipped with such a seminorm is called a
 {{#concept "seminormed space" WD="seminormed space" WDID=Q63793693 Agda=Seminormed-ℝ-Vector-Space}}.
 A seminormed space has an induced
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) defined by the
 neighborhood relation that `v` and `w` are in an `ε`-neighborhood of each other
-if `p (v - w) ≤ ε`.
+if `p(v - w) ≤ ε`.
+
+**Terminology.** The term _absolute homogeneity_ comes from the more general
+concept of
+[homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function). A
+multivariable function `f` on real vector spaces is said to be _homogeneous of
+degree `k`_ if for every scalar `s` we have that
+`f(sx₀,sx₁,…,sxₙ) = sᵏf(x₀,x₁,…,xₙ)`. In particular, you may note that any
+homogeneous bilinear form must be homogeneous of degree one.
 
 ## Definition
 
@@ -234,22 +245,22 @@ module _
     neg-right-subtraction-Ab
       ( ab-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space)
 
-  triangular-Seminormed-ℝ-Vector-Space :
+  triangular-seminorm-Seminormed-ℝ-Vector-Space :
     (v w : type-Seminormed-ℝ-Vector-Space) →
     leq-ℝ
       ( map-seminorm-Seminormed-ℝ-Vector-Space
         ( add-Seminormed-ℝ-Vector-Space v w))
       ( map-seminorm-Seminormed-ℝ-Vector-Space v +ℝ
         map-seminorm-Seminormed-ℝ-Vector-Space w)
-  triangular-Seminormed-ℝ-Vector-Space =
+  triangular-seminorm-Seminormed-ℝ-Vector-Space =
     pr1 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space :
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space :
     (c : ℝ l1) (v : type-Seminormed-ℝ-Vector-Space) →
     map-seminorm-Seminormed-ℝ-Vector-Space
       ( mul-Seminormed-ℝ-Vector-Space c v) ＝
     abs-ℝ c *ℝ map-seminorm-Seminormed-ℝ-Vector-Space v
-  is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space =
+  is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space =
     pr2 (pr2 seminorm-Seminormed-ℝ-Vector-Space)
 
   dist-Seminormed-ℝ-Vector-Space :
@@ -259,7 +270,7 @@ module _
       ( diff-Seminormed-ℝ-Vector-Space v w)
 ```
 
-### The seminorm of the zero vector in a seminormed real vector space is zero
+### The seminorm of the zero vector is zero
 
 ```agda
 module _
@@ -274,49 +285,41 @@ module _
         ( zero-Seminormed-ℝ-Vector-Space V) ＝
       raise-ℝ l1 zero-ℝ
     is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
+      equational-reasoning
+        map-seminorm-Seminormed-ℝ-Vector-Space
+          ( V)
+          ( zero-Seminormed-ℝ-Vector-Space V)
+        ＝
           map-seminorm-Seminormed-ℝ-Vector-Space
-            ( V)
-            ( zero-Seminormed-ℝ-Vector-Space V)
-          ~ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
               ( V)
               ( mul-Seminormed-ℝ-Vector-Space
                 ( V)
                 ( raise-ℝ l1 zero-ℝ)
                 ( zero-Seminormed-ℝ-Vector-Space V))
-            by
-              sim-eq-ℝ
-                ( ap
-                  ( map-seminorm-Seminormed-ℝ-Vector-Space V)
-                  ( inv (left-zero-law-mul-Seminormed-ℝ-Vector-Space V _)))
-          ~ℝ
-            abs-ℝ (raise-ℝ l1 zero-ℝ) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
-              ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
-            by
-              sim-eq-ℝ
-                ( is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _)
-          ~ℝ
-            abs-ℝ zero-ℝ *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
-              ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
-            by
-              preserves-sim-right-mul-ℝ _ _ _
-                ( preserves-sim-abs-ℝ (sim-raise-ℝ' l1 zero-ℝ))
-          ~ℝ
-            zero-ℝ *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
-              ( V)
-              ( zero-Seminormed-ℝ-Vector-Space V)
-            by sim-eq-ℝ (ap-mul-ℝ abs-zero-ℝ refl)
-          ~ℝ zero-ℝ
-            by left-zero-law-mul-ℝ _
-          ~ℝ raise-ℝ l1 zero-ℝ
-            by sim-raise-ℝ l1 zero-ℝ)
+          by
+            ap
+              ( map-seminorm-Seminormed-ℝ-Vector-Space V)
+              ( inv (left-zero-law-mul-Seminormed-ℝ-Vector-Space V _))
+        ＝
+          ( abs-ℝ (raise-ℝ l1 zero-ℝ)) *ℝ
+          ( map-seminorm-Seminormed-ℝ-Vector-Space
+            ( V)
+            ( zero-Seminormed-ℝ-Vector-Space V))
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
+        ＝
+          ( raise-ℝ l1 (abs-ℝ zero-ℝ)) *ℝ
+          ( map-seminorm-Seminormed-ℝ-Vector-Space
+            ( V)
+            ( zero-Seminormed-ℝ-Vector-Space V))
+          by ap-mul-ℝ (abs-raise-ℝ l1 _) refl
+        ＝
+          ( raise-zero-ℝ l1) *ℝ
+          ( map-seminorm-Seminormed-ℝ-Vector-Space
+            ( V)
+            ( zero-Seminormed-ℝ-Vector-Space V))
+          by ap-mul-ℝ (ap (raise-ℝ l1) abs-zero-ℝ) refl
+        ＝ raise-zero-ℝ l1
+          by left-raise-zero-law-mul-ℝ _
 
     is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
@@ -326,6 +329,15 @@ module _
         ( map-seminorm-Seminormed-ℝ-Vector-Space V)
         ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v)) ∙
       ( is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
+
+    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
+      (v : type-Seminormed-ℝ-Vector-Space V) →
+      sim-ℝ (dist-Seminormed-ℝ-Vector-Space V v v) zero-ℝ
+    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
+      inv-tr
+        ( λ x → sim-ℝ x zero-ℝ)
+        ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v)
+        ( sim-raise-ℝ' l1 zero-ℝ)
 ```
 
 ### The seminorm of the negation of a vector is equal to the seminorm of the vector
@@ -344,42 +356,38 @@ module _
         ( neg-Seminormed-ℝ-Vector-Space V v) ＝
       map-seminorm-Seminormed-ℝ-Vector-Space V v
     seminorm-neg-Seminormed-ℝ-Vector-Space v =
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
+      equational-reasoning
+        map-seminorm-Seminormed-ℝ-Vector-Space
+          ( V)
+          ( neg-Seminormed-ℝ-Vector-Space V v)
+        ＝
           map-seminorm-Seminormed-ℝ-Vector-Space
             ( V)
-            ( neg-Seminormed-ℝ-Vector-Space V v)
-          ~ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space
+            ( mul-Seminormed-ℝ-Vector-Space
               ( V)
-              ( mul-Seminormed-ℝ-Vector-Space
-                ( V)
-                ( neg-ℝ (raise-ℝ l1 one-ℝ))
-                ( v))
-            by
-              sim-eq-ℝ
-                ( ap
-                  ( map-seminorm-Seminormed-ℝ-Vector-Space V)
-                  ( inv (mul-neg-one-Seminormed-ℝ-Vector-Space V v)))
-          ~ℝ
-            abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space V v
-            by
-              sim-eq-ℝ
-                ( is-absolutely-homogeneous-Seminormed-ℝ-Vector-Space V _ _)
-          ~ℝ
-            abs-ℝ (raise-ℝ l1 one-ℝ) *ℝ
-            map-seminorm-Seminormed-ℝ-Vector-Space V v
-            by sim-eq-ℝ (ap-mul-ℝ (abs-neg-ℝ _) refl)
-          ~ℝ abs-ℝ one-ℝ *ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
-            by
-              preserves-sim-right-mul-ℝ _ _ _
-                ( preserves-sim-abs-ℝ (sim-raise-ℝ' l1 one-ℝ))
-          ~ℝ one-ℝ *ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
-            by
-              sim-eq-ℝ (ap-mul-ℝ (abs-real-ℝ⁺ one-ℝ⁺) refl)
-          ~ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
-            by sim-eq-ℝ (left-unit-law-mul-ℝ _))
+              ( neg-ℝ (raise-ℝ l1 one-ℝ))
+              ( v))
+          by
+            ap
+              ( map-seminorm-Seminormed-ℝ-Vector-Space V)
+              ( inv (mul-neg-one-Seminormed-ℝ-Vector-Space V v))
+        ＝
+          ( abs-ℝ (neg-ℝ (raise-ℝ l1 one-ℝ))) *ℝ
+          ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
+          by is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space V _ _
+        ＝
+          ( abs-ℝ (raise-ℝ l1 one-ℝ)) *ℝ
+          ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
+          by ap-mul-ℝ (abs-neg-ℝ _) refl
+        ＝ abs-ℝ one-ℝ *ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
+          by
+            eq-sim-ℝ
+              ( preserves-sim-right-mul-ℝ _ _ _
+                ( preserves-sim-abs-ℝ (sim-raise-ℝ' l1 one-ℝ)))
+        ＝ one-ℝ *ℝ map-seminorm-Seminormed-ℝ-Vector-Space V v
+          by ap-mul-ℝ (abs-real-ℝ⁺ one-ℝ⁺) refl
+        ＝ map-seminorm-Seminormed-ℝ-Vector-Space V v
+          by left-unit-law-mul-ℝ _
 
     commutative-dist-Seminormed-ℝ-Vector-Space :
       (v w : type-Seminormed-ℝ-Vector-Space V) →
@@ -425,12 +433,12 @@ module _
                 ( ap
                   ( map-seminorm-Seminormed-ℝ-Vector-Space V)
                   ( inv (add-diff-Seminormed-ℝ-Vector-Space V v w x)))
-          ≤ dist-Seminormed-ℝ-Vector-Space V v w +ℝ
-            dist-Seminormed-ℝ-Vector-Space V w x
-            by triangular-Seminormed-ℝ-Vector-Space V _ _
+          ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
+            ( dist-Seminormed-ℝ-Vector-Space V w x)
+            by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
 ```
 
-### The seminorm of a vector in a seminormed vector space is nonnegative
+### The seminorm of a vector is nonnegative
 
 ```agda
 module _
@@ -451,22 +459,21 @@ module _
           ( zero-ℝ)
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
           ( chain-of-inequalities
-              real-ℝ⁺ (positive-real-ℕ⁺ (2 , (λ ()))) *ℝ zero-ℝ
+              real-ℕ 2 *ℝ zero-ℝ
               ≤ zero-ℝ
                 by leq-sim-ℝ (right-zero-law-mul-ℝ _)
-              ≤ raise-ℝ l1 zero-ℝ
-                by leq-sim-ℝ (sim-raise-ℝ l1 zero-ℝ)
               ≤ dist-Seminormed-ℝ-Vector-Space V v v
                 by
-                  leq-eq-ℝ
-                    ( inv (is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
-              ≤ map-seminorm-Seminormed-ℝ-Vector-Space V v +ℝ
-                map-seminorm-Seminormed-ℝ-Vector-Space
+                  leq-sim-ℝ
+                    ( symmetric-sim-ℝ
+                      ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
+              ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
+                ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
-                  ( neg-Seminormed-ℝ-Vector-Space V v)
-                by triangular-Seminormed-ℝ-Vector-Space V _ _
-              ≤ map-seminorm-Seminormed-ℝ-Vector-Space V v +ℝ
-                map-seminorm-Seminormed-ℝ-Vector-Space V v
+                  ( neg-Seminormed-ℝ-Vector-Space V v))
+                by triangular-seminorm-Seminormed-ℝ-Vector-Space V _ _
+              ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
+                ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
                 by
                   leq-eq-ℝ
                     ( ap-add-ℝ
@@ -517,27 +524,8 @@ module _
           ( real-ℚ⁺ ε)
           ( zero-ℝ)
           ( dist-Seminormed-ℝ-Vector-Space V v v)
-          ( similarity-reasoning-ℝ
-            zero-ℝ
-            ~ℝ raise-ℝ l1 zero-ℝ
-              by sim-raise-ℝ l1 zero-ℝ
-            ~ℝ
-              map-seminorm-Seminormed-ℝ-Vector-Space
-                ( V)
-                ( zero-Seminormed-ℝ-Vector-Space V)
-              by
-                sim-eq-ℝ
-                  ( inv (is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space V))
-            ~ℝ
-              map-seminorm-Seminormed-ℝ-Vector-Space
-                ( V)
-                ( diff-Seminormed-ℝ-Vector-Space V v v)
-              by
-                sim-eq-ℝ
-                  ( ap
-                    ( map-seminorm-Seminormed-ℝ-Vector-Space V)
-                    ( inv
-                      ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v))))
+          ( symmetric-sim-ℝ
+            ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
           ( preserves-is-positive-real-ℚ (is-positive-rational-ℚ⁺ ε)))
 
     symmetric-neighborhood-Seminormed-ℝ-Vector-Space :
@@ -561,8 +549,8 @@ module _
       in
         chain-of-inequalities
         dist-Seminormed-ℝ-Vector-Space V v x
-        ≤ dist-Seminormed-ℝ-Vector-Space V v w +ℝ
-          dist-Seminormed-ℝ-Vector-Space V w x
+        ≤ ( dist-Seminormed-ℝ-Vector-Space V v w) +ℝ
+          ( dist-Seminormed-ℝ-Vector-Space V w x)
           by triangular-dist-Seminormed-ℝ-Vector-Space V v w x
         ≤ real-ℚ⁺ d1 +ℝ real-ℚ⁺ d2
           by preserves-leq-add-ℝ Nd1vw Nd2wx

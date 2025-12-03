@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import linear-algebra.orthogonality-real-inner-product-spaces
 open import linear-algebra.real-inner-product-spaces
 
 open import order-theory.large-posets
@@ -51,9 +52,12 @@ open import real-numbers.squares-real-numbers
 
 ## Idea
 
-The Cauchy-Schwarz inequality states that for any `u` and `v` in an inner
-product space, the absolute value of the inner product of `u` and `v` is at most
-the product of the norms of `u` and `v`.
+The
+{{#concept "Cauchy-Schwarz inequality" WDID=Q190546 WD="Cauchy-Schwarz inequality" Agda=cauchy-schwarz-inequality-ℝ-Inner-Product-Space}}
+states that for any `u` and `v` in a
+[real inner product space](linear-algebra.real-inner-product-spaces.md), the
+[absolute value](real-numbers.absolute-value-real-numbers.md) of the inner
+product of `u` and `v` is at most the product of the norms of `u` and `v`.
 
 The Cauchy-Schwarz inequality is the [78th](literature.100-theorems.md#78)
 theorem on [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
@@ -174,7 +178,7 @@ module _
           ( ∥v∥²≤1))
 ```
 
-### If `∥u∥² ≤ 1` and `∥v∥² ≤ 1`, then `|⟨u,v⟩| ≤ 1`
+### If `∥u∥ ≤ 1` and `∥v∥ ≤ 1`, then `|⟨u,v⟩| ≤ 1`
 
 ```agda
 module _
@@ -194,24 +198,12 @@ module _
         ( V)
         ( u)
         ( v)
-        ( binary-tr
-          ( leq-ℝ)
-          ( eq-real-square-sqrt-ℝ⁰⁺
-            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V u))
-          ( left-unit-law-mul-ℝ one-ℝ)
-          ( preserves-leq-square-ℝ⁰⁺
-            ( nonnegative-norm-ℝ-Inner-Product-Space V u)
-            ( one-ℝ⁰⁺)
-            ( ∥u∥≤1)))
-        ( binary-tr
-          ( leq-ℝ)
-          ( eq-real-square-sqrt-ℝ⁰⁺
-            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v))
-          ( left-unit-law-mul-ℝ one-ℝ)
-          ( preserves-leq-square-ℝ⁰⁺
-            ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-            ( one-ℝ⁰⁺)
-            ( ∥v∥≤1)))
+        ( leq-one-leq-one-sqrt-ℝ⁰⁺
+          ( nonnegative-squared-norm-ℝ-Inner-Product-Space V u)
+          ( ∥u∥≤1))
+        ( leq-one-leq-one-sqrt-ℝ⁰⁺
+          ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v)
+          ( ∥v∥≤1))
 ```
 
 ### For any `v` in an inner product space, the norm of `(∥v∥ + ε)⁻¹ v` is at most `1`
@@ -246,15 +238,6 @@ module _
                   ( nonnegative-norm-ℝ-Inner-Product-Space V v)
                   ( positive-real-ℚ⁺ ε)))
               ( v))
-          ≤ ( abs-ℝ
-              ( real-inv-ℝ⁺
-                ( add-nonnegative-positive-ℝ
-                  ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                  ( positive-real-ℚ⁺ ε)))) *ℝ
-            ( norm-ℝ-Inner-Product-Space V v)
-            by
-              leq-eq-ℝ
-                ( is-absolutely-homogeneous-norm-ℝ-Inner-Product-Space V _ _)
           ≤ ( real-inv-ℝ⁺
               ( add-nonnegative-positive-ℝ
                 ( nonnegative-norm-ℝ-Inner-Product-Space V v)
@@ -262,32 +245,17 @@ module _
             ( norm-ℝ-Inner-Product-Space V v)
             by
               leq-eq-ℝ
-                ( ap-mul-ℝ
-                  ( abs-real-ℝ⁺
-                    ( inv-ℝ⁺
-                      ( add-nonnegative-positive-ℝ
-                        ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                        ( positive-real-ℚ⁺ ε))))
-                  ( refl))
-          ≤ ( real-inv-ℝ⁺
-              ( add-nonnegative-positive-ℝ
-                ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                ( positive-real-ℚ⁺ ε))) *ℝ
-            ( norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ ε)
-            by
-              preserves-leq-left-mul-ℝ⁺
-                ( inv-ℝ⁺
-                  ( add-nonnegative-positive-ℝ
-                    ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                    ( positive-real-ℚ⁺ ε)))
-                ( leq-left-add-real-ℝ⁺ _ (positive-real-ℚ⁺ ε))
+                ( is-positively-homogeneous-norm-ℝ-Inner-Product-Space V
+                  ( inv-ℝ⁺
+                    ( add-nonnegative-positive-ℝ
+                      ( nonnegative-norm-ℝ-Inner-Product-Space V v)
+                      ( positive-real-ℚ⁺ ε)))
+                  ( v))
           ≤ one-ℝ
             by
-              leq-sim-ℝ
-                ( left-inverse-law-mul-ℝ⁺
-                  ( add-nonnegative-positive-ℝ
-                    ( nonnegative-norm-ℝ-Inner-Product-Space V v)
-                    ( positive-real-ℚ⁺ ε)))
+              leq-one-mul-inv-add-positive-ℝ⁰⁺
+                ( nonnegative-norm-ℝ-Inner-Product-Space V v)
+                ( positive-real-ℚ⁺ ε)
 ```
 
 ### For any `u`, `v` in a real inner product space and any positive rational `δ`, `ε`, `|⟨u,v⟩| ≤ (∥u∥ + δ)(∥v∥ + ε)`
@@ -328,49 +296,19 @@ module _
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ) *ℝ
-                  ( inner-product-ℝ-Inner-Product-Space V
-                    ( u)
-                    ( mul-ℝ-Inner-Product-Space V (real-inv-ℝ⁺ ∥v∥+ε) v))))
+                ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
+                  ( inner-product-ℝ-Inner-Product-Space V u v)))
               by
                 ap-mul-ℝ
                   ( refl)
                   ( ap
                     ( abs-ℝ)
-                    ( is-left-homogeneous-inner-product-ℝ-Inner-Product-Space
+                    ( preserves-scalar-mul-inner-product-ℝ-Inner-Product-Space
                       ( V)
                       ( _)
                       ( _)
+                      ( _)
                       ( _)))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ) *ℝ
-                  ( ( real-inv-ℝ⁺ ∥v∥+ε) *ℝ
-                    ( inner-product-ℝ-Inner-Product-Space V u v))))
-              by
-                ap-mul-ℝ
-                  ( refl)
-                  ( ap
-                    ( abs-ℝ)
-                    ( ap-mul-ℝ
-                      ( refl)
-                      ( is-right-homogeneous-inner-product-ℝ-Inner-Product-Space
-                        ( V)
-                        ( _)
-                        ( _)
-                        ( _))))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( abs-ℝ
-                ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
-                  ( inner-product-ℝ-Inner-Product-Space V u v)))
-              by ap-mul-ℝ refl (ap abs-ℝ (inv (associative-mul-ℝ _ _ _)))
-            ＝
-              ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
-              ( ( abs-ℝ (real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε)) *ℝ
-                ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)))
-              by ap-mul-ℝ refl (abs-mul-ℝ _ _)
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( ( real-inv-ℝ⁺ ∥u∥+δ *ℝ real-inv-ℝ⁺ ∥v∥+ε) *ℝ
@@ -378,7 +316,7 @@ module _
               by
                 ap-mul-ℝ
                   ( refl)
-                  ( ap-mul-ℝ (abs-real-ℝ⁺ (inv-ℝ⁺ ∥u∥+δ *ℝ⁺ inv-ℝ⁺ ∥v∥+ε)) refl)
+                  ( abs-left-mul-positive-ℝ (inv-ℝ⁺ ∥u∥+δ *ℝ⁺ inv-ℝ⁺ ∥v∥+ε) _)
             ＝
               ( real-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ
               ( ( real-inv-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε)) *ℝ

@@ -17,6 +17,7 @@ open import linear-algebra.real-inner-product-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -30,7 +31,7 @@ open import real-numbers.square-roots-nonnegative-real-numbers
 ## Idea
 
 Two vectors are
-{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=are-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
+{{#concept "orthogonal" WDID=Q215067 WD="orthogonality" Agda=is-orthogonal-ℝ-Inner-Product-Space  Disambiguation="in a real inner product space"}}
 in a [real inner product space](linear-algebra.real-inner-product-spaces.md) if
 they are
 [orthogonal](linear-algebra.orthogonality-bilinear-forms-real-vector-spaces.md)
@@ -45,17 +46,17 @@ module _
   (V : ℝ-Inner-Product-Space l1 l2)
   where
 
-  are-orthogonal-prop-ℝ-Inner-Product-Space :
+  is-orthogonal-prop-ℝ-Inner-Product-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-prop-ℝ-Inner-Product-Space =
-    are-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+  is-orthogonal-prop-ℝ-Inner-Product-Space =
+    is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space V)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space V)
 
-  are-orthogonal-ℝ-Inner-Product-Space :
+  is-orthogonal-ℝ-Inner-Product-Space :
     Relation (lsuc l1) (type-ℝ-Inner-Product-Space V)
-  are-orthogonal-ℝ-Inner-Product-Space =
-    type-Relation-Prop are-orthogonal-prop-ℝ-Inner-Product-Space
+  is-orthogonal-ℝ-Inner-Product-Space =
+    type-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
 ```
 
 ## Properties
@@ -125,6 +126,40 @@ module _
         ( real-sqrt-ℝ⁰⁺)
         ( eq-ℝ⁰⁺ _ _
           ( pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
+```
+
+### Orthogonality is preserved by scalar multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
+      is-orthogonal-ℝ-Inner-Product-Space V v w →
+      is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v·w=0 =
+      let
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
+        _+V_ = add-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        equational-reasoning
+          ⟨ c *V v ,V w ⟩
+          ＝ c *ℝ ⟨ v ,V w ⟩
+            by
+              preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space
+                ( V)
+                ( _)
+                ( _)
+                ( _)
+          ＝ c *ℝ raise-ℝ l1 zero-ℝ
+            by ap-mul-ℝ refl v·w=0
+          ＝ raise-ℝ l1 zero-ℝ
+            by right-raise-zero-law-mul-ℝ c
 ```
 
 ## References
