@@ -9,6 +9,9 @@ module real-numbers.geometric-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import analysis.convergent-series-real-numbers
+open import analysis.series-real-numbers
+
 open import commutative-algebra.geometric-sequences-commutative-rings
 
 open import elementary-number-theory.natural-numbers
@@ -27,7 +30,6 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
-open import real-numbers.convergent-series-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.isometry-difference-real-numbers
@@ -41,7 +43,6 @@ open import real-numbers.nonzero-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.series-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.uniformly-continuous-functions-real-numbers
