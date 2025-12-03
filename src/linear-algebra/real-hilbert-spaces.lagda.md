@@ -32,10 +32,10 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers
 
 A
 {{#concept "real Hilbert space" WDID=Q190056 WD="Hilbert space" Agda=ℝ-Hilbert-Space}}
-is a [real inner product space](linear-algebra.real-inner-product-spaces.md)
-whose [induced](linear-algebra.real-inner-product-spaces-are-normed.md)
-[metric space](metric-spaces.metric-spaces.md) is
-[complete](metric-spaces.complete-metric-spaces.md).
+is a [real inner product space](linear-algebra.real-inner-product-spaces.md) for
+which the [metric space](metric-spaces.metric-spaces.md)
+[induced](linear-algebra.real-inner-product-spaces-are-normed.md) by the inner
+product is [complete](metric-spaces.complete-metric-spaces.md).
 
 ## Definition
 
