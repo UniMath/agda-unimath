@@ -157,7 +157,7 @@ module _
                     ( neg-zero-ℝ)
                     ( neg-leq-ℝ
                       ( is-nonnegative-diff-leq-ℝ
-                        ( is-monotonic-partial-sum-is-nonnegative-term-series-ℝ
+                        ( is-increasing-partial-sum-is-nonnegative-term-series-ℝ
                           ( σ)
                           ( 0≤σₙ)
                           ( n)
