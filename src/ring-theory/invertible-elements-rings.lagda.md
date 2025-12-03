@@ -328,27 +328,28 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  is-invertible-element-neg-Ring :
-    (x : type-Ring R) →
-    is-invertible-element-Ring R x →
-    is-invertible-element-Ring R (neg-Ring R x)
-  is-invertible-element-neg-Ring x =
-    map-Σ _
-      ( neg-Ring R)
-      ( λ y →
-        map-product
-          ( mul-neg-Ring R x y ∙_)
-          ( mul-neg-Ring R y x ∙_))
+  abstract
+    is-invertible-element-neg-Ring :
+      (x : type-Ring R) →
+      is-invertible-element-Ring R x →
+      is-invertible-element-Ring R (neg-Ring R x)
+    is-invertible-element-neg-Ring x =
+      map-Σ _
+        ( neg-Ring R)
+        ( λ y →
+          map-product
+            ( mul-neg-Ring R x y ∙_)
+            ( mul-neg-Ring R y x ∙_))
 
-  is-invertible-element-neg-Ring' :
-    (x : type-Ring R) →
-    is-invertible-element-Ring R (neg-Ring R x) →
-    is-invertible-element-Ring R x
-  is-invertible-element-neg-Ring' x H =
-    tr
-      ( is-invertible-element-Ring R)
-      ( neg-neg-Ring R x)
-      ( is-invertible-element-neg-Ring (neg-Ring R x) H)
+    is-invertible-element-neg-Ring' :
+      (x : type-Ring R) →
+      is-invertible-element-Ring R (neg-Ring R x) →
+      is-invertible-element-Ring R x
+    is-invertible-element-neg-Ring' x H =
+      tr
+        ( is-invertible-element-Ring R)
+        ( neg-neg-Ring R x)
+        ( is-invertible-element-neg-Ring (neg-Ring R x) H)
 ```
 
 ### The inverse of an invertible element is invertible
