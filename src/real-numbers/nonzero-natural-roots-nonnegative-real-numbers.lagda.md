@@ -32,9 +32,6 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
-open import real-numbers.nonnegative-real-numbers
-open import real-numbers.odd-roots-nonnegative-real-numbers
-open import real-numbers.odd-roots-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
