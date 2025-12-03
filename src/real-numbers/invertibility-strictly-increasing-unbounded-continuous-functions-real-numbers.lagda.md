@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -20,6 +21,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.axiom-of-countable-choice
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -147,6 +149,15 @@ module _
     is-unbounded-above-SIPCUB-function-ℝ :
       is-unbounded-above-function-ℝ map-SIPCUB-function-ℝ
     is-unbounded-above-SIPCUB-function-ℝ = pr1 (pr2 (pr2 (pr2 f)))
+
+    reflects-leq-SIPCUB-function-ℝ :
+      (x x' : ℝ l1) →
+      leq-ℝ (map-SIPCUB-function-ℝ x) (map-SIPCUB-function-ℝ x') →
+      leq-ℝ x x'
+    reflects-leq-SIPCUB-function-ℝ =
+      reflects-leq-is-strictly-increasing-function-ℝ
+        ( map-SIPCUB-function-ℝ)
+        ( is-strictly-increasing-SIPCUB-function-ℝ)
 
     reflects-le-SIPCUB-function-ℝ :
       (x x' : ℝ l1) →
@@ -689,4 +700,163 @@ module _
                   ( map-SIPCUB-function-ℝ f (raise-real-ℚ l q))
                   ( le-real-is-in-lower-cut-ℝ _ r<fq)
                   ( fx<r)))))
+```
+
+### The inverse of a SIPCUB function is classically pointwise continuous
+
+```agda
+module _
+  {l : Level}
+  (f : SIPCUB-function-ℝ l l)
+  where
+
+  abstract
+    is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ :
+      is-classically-pointwise-continuous-function-ℝ
+        ( map-inv-SIPCUB-function-ℝ f)
+    is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ x ε =
+      let
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        open
+          do-syntax-trunc-Prop
+            ( ∃
+              ( ℚ⁺)
+              ( λ δ →
+                Π-Prop
+                  ( ℝ l)
+                  ( λ y →
+                    neighborhood-prop-ℝ l δ x y ⇒
+                    neighborhood-prop-ℝ l ε
+                      ( map-inv-SIPCUB-function-ℝ f x)
+                      ( map-inv-SIPCUB-function-ℝ f y))))
+        x-hi =
+          map-SIPCUB-function-ℝ f
+            ( map-inv-SIPCUB-function-ℝ f x +ℝ real-ℚ⁺ ε)
+        x-lo =
+          map-SIPCUB-function-ℝ f
+            ( map-inv-SIPCUB-function-ℝ f x -ℝ real-ℚ⁺ ε)
+        x<x-hi =
+          tr
+            ( λ y → le-ℝ y x-hi)
+            ( is-section-map-inv-SIPCUB-function-ℝ f _)
+            ( is-strictly-increasing-SIPCUB-function-ℝ
+              ( f)
+              ( map-inv-SIPCUB-function-ℝ f x)
+              ( map-inv-SIPCUB-function-ℝ f x +ℝ real-ℚ⁺ ε)
+              ( le-left-add-real-ℝ⁺
+                ( map-inv-SIPCUB-function-ℝ f x)
+                ( positive-real-ℚ⁺ ε)))
+        x-lo<x =
+          tr
+            ( le-ℝ x-lo)
+            ( is-section-map-inv-SIPCUB-function-ℝ f _)
+            ( is-strictly-increasing-SIPCUB-function-ℝ
+              ( f)
+              ( map-inv-SIPCUB-function-ℝ f x -ℝ real-ℚ⁺ ε)
+              ( map-inv-SIPCUB-function-ℝ f x)
+              ( le-diff-real-ℝ⁺
+                ( map-inv-SIPCUB-function-ℝ f x)
+                ( positive-real-ℚ⁺ ε)))
+      in do
+        (δ₁ , x+δ₁<x-hi) ← exists-positive-rational-separation-le-ℝ x<x-hi
+        (δ₂ , x-lo+δ₂<x) ← exists-positive-rational-separation-le-ℝ x-lo<x
+        intro-exists
+          ( min-ℚ⁺ δ₁ δ₂)
+          ( λ x' Nδxx' →
+            neighborhood-real-bound-each-leq-ℝ
+              ( ε)
+              ( map-inv-SIPCUB-function-ℝ f x)
+              ( map-inv-SIPCUB-function-ℝ f x')
+              ( leq-transpose-left-diff-ℝ _ _ _
+                ( reflects-leq-SIPCUB-function-ℝ
+                  ( f)
+                  ( _)
+                  ( _)
+                  ( chain-of-inequalities
+                    x-lo
+                    ≤ x -ℝ real-ℚ⁺ δ₂
+                      by leq-le-ℝ (le-transpose-left-add-ℝ _ _ _ x-lo+δ₂<x)
+                    ≤ x -ℝ real-ℚ⁺ (min-ℚ⁺ δ₁ δ₂)
+                      by
+                        preserves-leq-left-add-ℝ _ _ _
+                          ( neg-leq-ℝ
+                            ( preserves-leq-real-ℚ
+                              ( leq-right-min-ℚ⁺ δ₁ δ₂)))
+                    ≤ x'
+                      by
+                        leq-transpose-right-add-ℝ _ _ _
+                          ( left-leq-real-bound-neighborhood-ℝ
+                            ( min-ℚ⁺ δ₁ δ₂)
+                            ( _)
+                            ( _)
+                            ( Nδxx'))
+                    ≤ map-SIPCUB-function-ℝ
+                        ( f)
+                        ( map-inv-SIPCUB-function-ℝ f x')
+                      by
+                        leq-eq-ℝ
+                          ( inv (is-section-map-inv-SIPCUB-function-ℝ f x')))))
+              ( reflects-leq-SIPCUB-function-ℝ
+                ( f)
+                ( _)
+                ( _)
+                ( chain-of-inequalities
+                  map-SIPCUB-function-ℝ f (map-inv-SIPCUB-function-ℝ f x')
+                  ≤ x'
+                    by leq-eq-ℝ (is-section-map-inv-SIPCUB-function-ℝ f x')
+                  ≤ x +ℝ real-ℚ⁺ (min-ℚ⁺ δ₁ δ₂)
+                    by
+                      right-leq-real-bound-neighborhood-ℝ
+                        ( min-ℚ⁺ δ₁ δ₂)
+                        ( _)
+                        ( _)
+                        ( Nδxx')
+                  ≤ x +ℝ real-ℚ⁺ δ₁
+                    by
+                      preserves-leq-left-add-ℝ _ _ _
+                        ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δ₁ δ₂))
+                  ≤ x-hi
+                    by leq-le-ℝ x+δ₁<x-hi)))
+```
+
+### Assuming countable choice, the inverse of a SIPCUB function is pointwise continuous
+
+```agda
+module _
+  {l : Level}
+  (acω : ACω)
+  (f : SIPCUB-function-ℝ l l)
+  where
+
+  abstract
+    is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ :
+      is-pointwise-continuous-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+    is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ =
+      is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ
+        ( acω)
+        ( map-inv-SIPCUB-function-ℝ f)
+        ( is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ f)
+```
+
+### Assuming countable choice, the inverse of a SIPCUB function is SIPCUB
+
+```agda
+module _
+  {l : Level}
+  (acω : ACω)
+  (f : SIPCUB-function-ℝ l l)
+  where
+
+  abstract
+    is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ :
+      is-SIPCUB-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+    is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ =
+      ( is-strictly-increasing-map-inv-SIPCUB-function-ℝ f ,
+        is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ acω f ,
+        is-unbounded-above-map-inv-SIPCUB-function-ℝ f ,
+        is-unbounded-below-map-inv-SIPCUB-function-ℝ f)
+
+  ACω-inv-SIPCUB-function-ℝ : SIPCUB-function-ℝ l l
+  ACω-inv-SIPCUB-function-ℝ =
+    ( map-inv-SIPCUB-function-ℝ f , is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ)
 ```
