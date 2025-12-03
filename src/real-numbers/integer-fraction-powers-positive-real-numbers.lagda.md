@@ -75,7 +75,7 @@ abstract
             ( λ l → nonzero-nat-root-ℝ⁺ l (int-power-ℝ⁺ k x))
             ( eq-nonzero-ℕ (refl {x = 1}))
       ＝ int-power-ℝ⁺ k x
-        by root-one-ℝ⁺ _
+        by one-ℕ⁺-root-ℝ⁺ _
 ```
 
 ### Powers by products of integer fractions are iterated integer fraction powers

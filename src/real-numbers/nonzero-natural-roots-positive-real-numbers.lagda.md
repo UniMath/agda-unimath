@@ -83,8 +83,8 @@ nonzero-nat-root-ℝ⁺ n x⁺@(x , 0<x) =
 
 ```agda
 abstract
-  root-one-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → nonzero-nat-root-ℝ⁺ one-ℕ⁺ x ＝ x
-  root-one-ℝ⁺ x =
+  one-ℕ⁺-root-ℝ⁺ : {l : Level} (x : ℝ⁺ l) → nonzero-nat-root-ℝ⁺ one-ℕ⁺ x ＝ x
+  one-ℕ⁺-root-ℝ⁺ x =
     eq-ℝ⁺ _ _ (ap real-ℝ⁰⁺ (root-one-ℝ⁰⁺ (nonnegative-ℝ⁺ x)))
 ```
 
