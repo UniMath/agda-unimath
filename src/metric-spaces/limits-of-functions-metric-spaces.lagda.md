@@ -9,11 +9,15 @@ module metric-spaces.limits-of-functions-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.axiom-of-countable-choice
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -70,4 +74,110 @@ module _
   is-point-limit-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-point-limit-function-Metric-Space =
     type-Prop is-point-limit-prop-function-Metric-Space
+```
+
+## The classical `(ε, δ)` definition of a limit
+
+The
+{{#concept "classical definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-classical-limit-function-Metric-Space}}
+states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for any
+`ε : ℚ⁺`, there [exists](foundation.existential-quantification.md) a `δ : ℚ⁺`
+such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
+are in a `ε`-neighborhood of each other.
+
+The constructive definition implies the classical definition, but the other
+direction requires the
+[axiom of countable choice](foundation.axiom-of-countable-choice.md).
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y)
+  (x : type-Metric-Space X)
+  (y : type-Metric-Space Y)
+  where
+
+  is-classical-limit-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-classical-limit-prop-function-Metric-Space =
+    Π-Prop
+      ( ℚ⁺)
+      ( λ ε →
+        ∃ ( ℚ⁺)
+          ( λ δ →
+            Π-Prop
+              ( type-Metric-Space X)
+              ( λ x' →
+                neighborhood-prop-Metric-Space X δ x x' ⇒
+                neighborhood-prop-Metric-Space Y ε y (f x'))))
+
+  is-classical-limit-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-classical-limit-function-Metric-Space =
+    type-Prop is-classical-limit-prop-function-Metric-Space
+```
+
+## Properties
+
+### Constructive limits are classical limits
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y)
+  (x : type-Metric-Space X)
+  (y : type-Metric-Space Y)
+  where
+
+  abstract
+    is-classical-limit-is-limit-function-Metric-Space :
+      is-point-limit-function-Metric-Space X Y f x y →
+      is-classical-limit-function-Metric-Space X Y f x y
+    is-classical-limit-is-limit-function-Metric-Space H ε =
+      map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
+```
+
+### Assuming countable choice, classical limits are constructive limits
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (acω : ACω)
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : type-function-Metric-Space X Y)
+  (x : type-Metric-Space X)
+  (y : type-Metric-Space Y)
+  where
+
+  abstract
+    is-limit-is-classical-limit-ACω-function-Metric-Space :
+      is-classical-limit-function-Metric-Space X Y f x y →
+      is-point-limit-function-Metric-Space X Y f x y
+    is-limit-is-classical-limit-ACω-function-Metric-Space H =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-point-limit-prop-function-Metric-Space X Y f x y)
+      in do
+        μ ←
+          choice-countable-discrete-set-ACω
+            ( set-ℚ⁺)
+            ( is-countable-set-ℚ⁺)
+            ( has-decidable-equality-ℚ⁺)
+            ( acω)
+            ( λ ε →
+              Σ-Set
+                ( set-ℚ⁺)
+                ( λ δ →
+                  set-Prop
+                    ( Π-Prop
+                      ( type-Metric-Space X)
+                      ( λ x' →
+                        neighborhood-prop-Metric-Space X δ x x' ⇒
+                        neighborhood-prop-Metric-Space Y ε y (f x')))))
+            ( H)
+        intro-exists (pr1 ∘ μ) (pr2 ∘ μ)
 ```

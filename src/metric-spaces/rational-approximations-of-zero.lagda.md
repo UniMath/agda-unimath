@@ -182,7 +182,7 @@ module _
             ( f ε -ℚ zero-ℚ))
           ( rational-ℚ⁺ ε)
           ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-          ( leq-le-ℚ⁺ {ε} {ε +ℚ⁺ δ} (le-left-add-ℚ⁺ ε δ))
+          ( leq-le-ℚ⁺ {ε} {ε +ℚ⁺ δ} (le-right-add-ℚ⁺ ε δ))
           ( inv-tr
             ( λ y → leq-ℚ (rational-ℚ⁰⁺ y) (rational-ℚ⁺ ε))
               ( right-zero-law-dist-ℚ

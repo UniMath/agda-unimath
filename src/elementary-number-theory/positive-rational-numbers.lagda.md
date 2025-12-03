@@ -12,6 +12,7 @@ module elementary-number-theory.positive-rational-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.equality-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
@@ -22,6 +23,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
@@ -288,4 +290,12 @@ abstract
   is-positive-le-ℚ⁺ :
     (p : ℚ⁺) {q : ℚ} → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
   is-positive-le-ℚ⁺ p p<q = is-positive-leq-ℚ⁺ p (leq-le-ℚ p<q)
+```
+
+### Equality on the positive rational numbers is decidable
+
+```agda
+has-decidable-equality-ℚ⁺ : has-decidable-equality ℚ⁺
+has-decidable-equality-ℚ⁺ =
+  has-decidable-equality-subtype is-positive-prop-ℚ has-decidable-equality-ℚ
 ```

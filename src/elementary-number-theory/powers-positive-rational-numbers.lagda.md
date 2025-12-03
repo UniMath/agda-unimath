@@ -338,6 +338,23 @@ abstract
                     by leq-le-ℚ εᵐ<δ)))
 ```
 
+### If `1 ≤ q` and `1 ≤ n`, then `q ≤ power-ℚ⁺ n q`
+
+```agda
+abstract
+  power-at-least-one-ℚ⁺ :
+    (n : ℕ) (q : ℚ⁺) → leq-ℕ 1 n → leq-ℚ⁺ one-ℚ⁺ q →
+    leq-ℚ⁺ q (power-ℚ⁺ n q)
+  power-at-least-one-ℚ⁺ 1 q H 1≤q = refl-leq-ℚ (rational-ℚ⁺ q)
+  power-at-least-one-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) q H 1≤q =
+    transitive-leq-ℚ
+      ( rational-ℚ⁺ q)
+      ( rational-power-ℚ⁺ n q)
+      ( rational-power-ℚ⁺ (succ-ℕ n) q)
+      ( leq-right-mul-geq-one-ℚ⁺ q 1≤q (power-ℚ⁺ n q))
+      ( power-at-least-one-ℚ⁺ n q _ 1≤q)
+```
+
 ## See also
 
 - [Powers of elements of a group](group-theory.powers-of-elements-groups.md)
