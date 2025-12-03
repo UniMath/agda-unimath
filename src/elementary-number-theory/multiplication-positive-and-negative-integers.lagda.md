@@ -15,14 +15,17 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 ```
@@ -367,6 +370,10 @@ int-mul-nonpositive-ℤ' x y = y *ℤ int-nonpositive-ℤ x
 ```agda
 mul-positive-ℤ : positive-ℤ → positive-ℤ → positive-ℤ
 mul-positive-ℤ (x , H) (y , K) = (mul-ℤ x y , is-positive-mul-ℤ H K)
+
+infixl 40 _*ℤ⁺_
+_*ℤ⁺_ : ℤ⁺ → ℤ⁺ → ℤ⁺
+_*ℤ⁺_ = mul-positive-ℤ
 ```
 
 ### Multiplication of nonnegative integers
@@ -453,4 +460,44 @@ module _
     is-nonnegative-eq-ℤ
       ( right-distributive-mul-diff-ℤ y x (int-nonnegative-ℤ z))
       ( is-nonnegative-mul-ℤ K (is-nonnegative-int-nonnegative-ℤ z))
+```
+
+### The canonical embedding of positive integers in the nonzero natural numbers preserves multiplication
+
+```agda
+abstract
+  mul-positive-nat-ℤ⁺ :
+    (k l : ℤ⁺) →
+    positive-nat-ℤ⁺ k *ℕ⁺ positive-nat-ℤ⁺ l ＝ positive-nat-ℤ⁺ (k *ℤ⁺ l)
+  mul-positive-nat-ℤ⁺ k⁺@(k , _) l⁺@(l , _) =
+    inv
+      ( is-injective-is-equiv
+        ( is-equiv-positive-int-ℕ⁺)
+        ( ( is-section-positive-nat-ℤ⁺ _) ∙
+          ( eq-ℤ⁺
+            ( k⁺ *ℤ⁺ l⁺)
+            ( positive-int-ℕ⁺ (positive-nat-ℤ⁺ k⁺ *ℕ⁺ positive-nat-ℤ⁺ l⁺))
+            ( equational-reasoning
+              k *ℤ l
+              ＝
+                int-ℕ (nat-ℕ⁺ (positive-nat-ℤ⁺ k⁺)) *ℤ
+                int-ℕ (nat-ℕ⁺ (positive-nat-ℤ⁺ l⁺))
+                by
+                  ap-mul-ℤ
+                    ( inv (ap int-ℤ⁺ (is-section-positive-nat-ℤ⁺ k⁺)))
+                    ( inv (ap int-ℤ⁺ (is-section-positive-nat-ℤ⁺ l⁺)))
+              ＝
+                int-ℕ (nat-ℕ⁺ (positive-nat-ℤ⁺ k⁺ *ℕ⁺ positive-nat-ℤ⁺ l⁺))
+                by
+                  mul-int-ℕ
+                    ( nat-ℕ⁺ (positive-nat-ℤ⁺ k⁺))
+                    ( nat-ℕ⁺ (positive-nat-ℤ⁺ l⁺))))))
+```
+
+### Multiplication of positive integers is commutative
+
+```agda
+abstract
+  commutative-mul-ℤ⁺ : (k l : ℤ⁺) → k *ℤ⁺ l ＝ l *ℤ⁺ k
+  commutative-mul-ℤ⁺ (k , _) (l , _) = eq-ℤ⁺ _ _ (commutative-mul-ℤ k l)
 ```

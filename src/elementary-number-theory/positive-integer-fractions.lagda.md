@@ -58,52 +58,56 @@ decidable-subtype-positive-fraction-ℤ x =
 ### An integer fraction similar to a positive integer fraction is positive
 
 ```agda
-is-positive-sim-fraction-ℤ :
-  (x y : fraction-ℤ) (S : sim-fraction-ℤ x y) →
-  is-positive-fraction-ℤ x →
-  is-positive-fraction-ℤ y
-is-positive-sim-fraction-ℤ x y S P =
-  is-positive-left-factor-mul-ℤ
-    ( is-positive-eq-ℤ
-      ( S)
-      ( is-positive-mul-ℤ P (is-positive-denominator-fraction-ℤ y)))
-    ( is-positive-denominator-fraction-ℤ x)
+abstract
+  is-positive-sim-fraction-ℤ :
+    (x y : fraction-ℤ) (S : sim-fraction-ℤ x y) →
+    is-positive-fraction-ℤ x →
+    is-positive-fraction-ℤ y
+  is-positive-sim-fraction-ℤ x y S P =
+    is-positive-left-factor-mul-ℤ
+      ( is-positive-eq-ℤ
+        ( S)
+        ( is-positive-mul-ℤ P (is-positive-denominator-fraction-ℤ y)))
+      ( is-positive-denominator-fraction-ℤ x)
 ```
 
 ### The reduced fraction of a positive integer fraction is positive
 
 ```agda
-is-positive-reduce-fraction-ℤ :
-  {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
-  is-positive-fraction-ℤ (reduce-fraction-ℤ x)
-is-positive-reduce-fraction-ℤ {x} =
-  is-positive-sim-fraction-ℤ
-    ( x)
-    ( reduce-fraction-ℤ x)
-    ( sim-reduced-fraction-ℤ x)
+abstract
+  is-positive-reduce-fraction-ℤ :
+    {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
+    is-positive-fraction-ℤ (reduce-fraction-ℤ x)
+  is-positive-reduce-fraction-ℤ {x} =
+    is-positive-sim-fraction-ℤ
+      ( x)
+      ( reduce-fraction-ℤ x)
+      ( sim-reduced-fraction-ℤ x)
 ```
 
 ### The sum of two positive integer fractions is positive
 
 ```agda
-is-positive-add-fraction-ℤ :
-  {x y : fraction-ℤ} →
-  is-positive-fraction-ℤ x →
-  is-positive-fraction-ℤ y →
-  is-positive-fraction-ℤ (add-fraction-ℤ x y)
-is-positive-add-fraction-ℤ {x} {y} P Q =
-  is-positive-add-ℤ
-    ( is-positive-mul-ℤ P (is-positive-denominator-fraction-ℤ y))
-    ( is-positive-mul-ℤ Q (is-positive-denominator-fraction-ℤ x))
+abstract
+  is-positive-add-fraction-ℤ :
+    {x y : fraction-ℤ} →
+    is-positive-fraction-ℤ x →
+    is-positive-fraction-ℤ y →
+    is-positive-fraction-ℤ (add-fraction-ℤ x y)
+  is-positive-add-fraction-ℤ {x} {y} P Q =
+    is-positive-add-ℤ
+      ( is-positive-mul-ℤ P (is-positive-denominator-fraction-ℤ y))
+      ( is-positive-mul-ℤ Q (is-positive-denominator-fraction-ℤ x))
 ```
 
 ### The product of two positive integer fractions is positive
 
 ```agda
-is-positive-mul-fraction-ℤ :
-  {x y : fraction-ℤ} →
-  is-positive-fraction-ℤ x →
-  is-positive-fraction-ℤ y →
-  is-positive-fraction-ℤ (mul-fraction-ℤ x y)
-is-positive-mul-fraction-ℤ {x} {y} = is-positive-mul-ℤ
+abstract
+  is-positive-mul-fraction-ℤ :
+    {x y : fraction-ℤ} →
+    is-positive-fraction-ℤ x →
+    is-positive-fraction-ℤ y →
+    is-positive-fraction-ℤ (mul-fraction-ℤ x y)
+  is-positive-mul-fraction-ℤ {x} {y} = is-positive-mul-ℤ
 ```

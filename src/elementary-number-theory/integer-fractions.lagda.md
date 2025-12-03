@@ -20,6 +20,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.negation
@@ -109,6 +110,19 @@ neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
 ```
 
 ## Properties
+
+### Equality of integer fractions
+
+```agda
+abstract
+  eq-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    numerator-fraction-ℤ x ＝ numerator-fraction-ℤ y →
+    denominator-fraction-ℤ x ＝ denominator-fraction-ℤ y →
+    x ＝ y
+  eq-fraction-ℤ (p , q , pos-q) (_ , _ , _) refl refl =
+    eq-pair-eq-fiber (eq-pair-eq-fiber (eq-is-prop (is-prop-is-positive-ℤ q)))
+```
 
 ### The double negation of an integer fraction is the original fraction
 

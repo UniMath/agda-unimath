@@ -175,67 +175,6 @@ abstract
   power-succ-ℝ' = power-succ-Large-Commutative-Ring' large-commutative-ring-ℝ
 ```
 
-### Powers by sums of natural numbers are products of powers
-
-```agda
-abstract
-  distributive-power-add-ℝ :
-    {l : Level} (m n : ℕ) {x : ℝ l} →
-    power-ℝ (m +ℕ n) x ＝ power-ℝ m x *ℝ power-ℝ n x
-  distributive-power-add-ℝ =
-    distributive-power-add-Large-Commutative-Ring large-commutative-ring-ℝ
-```
-
-### Powers by products of natural numbers are iterated powers
-
-```agda
-abstract
-  power-mul-ℝ :
-    {l : Level} (m n : ℕ) {x : ℝ l} →
-    power-ℝ (m *ℕ n) x ＝ power-ℝ n (power-ℝ m x)
-  power-mul-ℝ =
-    power-mul-Large-Commutative-Ring large-commutative-ring-ℝ
-
-  power-mul-ℝ' :
-    {l : Level} (m n : ℕ) {x : ℝ l} →
-    power-ℝ (m *ℕ n) x ＝ power-ℝ m (power-ℝ n x)
-  power-mul-ℝ' m n {x = x} =
-    equational-reasoning
-      power-ℝ (m *ℕ n) x
-      ＝ power-ℝ (n *ℕ m) x
-        by ap (λ k → power-ℝ k x) (commutative-mul-ℕ m n)
-      ＝ power-ℝ m (power-ℝ n x)
-        by power-mul-ℝ n m
-```
-
-### `(xy)ⁿ = xⁿyⁿ`
-
-```agda
-abstract
-  distributive-power-mul-ℝ :
-    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} →
-    power-ℝ n (x *ℝ y) ＝ power-ℝ n x *ℝ power-ℝ n y
-  distributive-power-mul-ℝ =
-    distributive-power-mul-Large-Commutative-Ring large-commutative-ring-ℝ
-```
-
-### Even powers of real numbers are nonnegative
-
-```agda
-abstract
-  is-nonnegative-even-power-ℝ :
-    {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n → is-nonnegative-ℝ (power-ℝ n x)
-  is-nonnegative-even-power-ℝ _ x (k , refl) =
-    inv-tr
-      ( is-nonnegative-ℝ)
-      ( power-mul-ℝ k 2)
-      ( is-nonnegative-square-ℝ (power-ℝ k x))
-
-nonnegative-even-power-ℝ : {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n → ℝ⁰⁺ l
-nonnegative-even-power-ℝ n x even-n =
-  ( power-ℝ n x , is-nonnegative-even-power-ℝ n x even-n)
-```
-
 ### Powers of positive real numbers are positive
 
 ```agda
@@ -268,6 +207,78 @@ abstract
 
 power-ℝ⁰⁺ : {l : Level} → ℕ → ℝ⁰⁺ l → ℝ⁰⁺ l
 power-ℝ⁰⁺ n x⁰⁺@(x , _) = (power-ℝ n x , is-nonnegative-power-ℝ⁰⁺ n x⁰⁺)
+```
+
+### Powers by products of natural numbers are iterated powers
+
+```agda
+abstract
+  power-mul-ℝ :
+    {l : Level} (m n : ℕ) {x : ℝ l} →
+    power-ℝ (m *ℕ n) x ＝ power-ℝ n (power-ℝ m x)
+  power-mul-ℝ =
+    power-mul-Large-Commutative-Ring large-commutative-ring-ℝ
+
+  power-mul-ℝ' :
+    {l : Level} (m n : ℕ) {x : ℝ l} →
+    power-ℝ (m *ℕ n) x ＝ power-ℝ m (power-ℝ n x)
+  power-mul-ℝ' m n {x = x} =
+    equational-reasoning
+      power-ℝ (m *ℕ n) x
+      ＝ power-ℝ (n *ℕ m) x
+        by ap (λ k → power-ℝ k x) (commutative-mul-ℕ m n)
+      ＝ power-ℝ m (power-ℝ n x)
+        by power-mul-ℝ n m
+
+  power-mul-ℝ⁰⁺ :
+    {l : Level} (m n : ℕ) (x : ℝ⁰⁺ l) →
+    power-ℝ⁰⁺ (m *ℕ n) x ＝ power-ℝ⁰⁺ n (power-ℝ⁰⁺ m x)
+  power-mul-ℝ⁰⁺ m n x = eq-ℝ⁰⁺ _ _ (power-mul-ℝ m n)
+```
+
+### Powers by sums of natural numbers are products of powers
+
+```agda
+abstract
+  distributive-power-add-ℝ :
+    {l : Level} (m n : ℕ) {x : ℝ l} →
+    power-ℝ (m +ℕ n) x ＝ power-ℝ m x *ℝ power-ℝ n x
+  distributive-power-add-ℝ =
+    distributive-power-add-Large-Commutative-Ring large-commutative-ring-ℝ
+```
+
+### `(xy)ⁿ = xⁿyⁿ`
+
+```agda
+abstract
+  distributive-power-mul-ℝ :
+    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} →
+    power-ℝ n (x *ℝ y) ＝ power-ℝ n x *ℝ power-ℝ n y
+  distributive-power-mul-ℝ =
+    distributive-power-mul-Large-Commutative-Ring large-commutative-ring-ℝ
+
+  distributive-power-mul-ℝ⁰⁺ :
+    {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    power-ℝ⁰⁺ n (x *ℝ⁰⁺ y) ＝ power-ℝ⁰⁺ n x *ℝ⁰⁺ power-ℝ⁰⁺ n y
+  distributive-power-mul-ℝ⁰⁺ n _ _ =
+    eq-ℝ⁰⁺ _ _ (distributive-power-mul-ℝ n)
+```
+
+### Even powers of real numbers are nonnegative
+
+```agda
+abstract
+  is-nonnegative-even-power-ℝ :
+    {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n → is-nonnegative-ℝ (power-ℝ n x)
+  is-nonnegative-even-power-ℝ _ x (k , refl) =
+    inv-tr
+      ( is-nonnegative-ℝ)
+      ( power-mul-ℝ k 2)
+      ( is-nonnegative-square-ℝ (power-ℝ k x))
+
+nonnegative-even-power-ℝ : {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n → ℝ⁰⁺ l
+nonnegative-even-power-ℝ n x even-n =
+  ( power-ℝ n x , is-nonnegative-even-power-ℝ n x even-n)
 ```
 
 ### Even powers of negative real numbers are positive

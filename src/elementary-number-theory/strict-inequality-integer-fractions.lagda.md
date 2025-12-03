@@ -67,8 +67,9 @@ le-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
 le-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 le-fraction-ℤ x y = type-Prop (le-fraction-ℤ-Prop x y)
 
-is-prop-le-fraction-ℤ : (x y : fraction-ℤ) → is-prop (le-fraction-ℤ x y)
-is-prop-le-fraction-ℤ x y = is-prop-type-Prop (le-fraction-ℤ-Prop x y)
+abstract
+  is-prop-le-fraction-ℤ : (x y : fraction-ℤ) → is-prop (le-fraction-ℤ x y)
+  is-prop-le-fraction-ℤ x y = is-prop-type-Prop (le-fraction-ℤ-Prop x y)
 ```
 
 ## Properties
@@ -104,11 +105,13 @@ decide-le-leq-fraction-ℤ x y =
 ### Strict inequality on the integer fractions implies inequality
 
 ```agda
-leq-le-fraction-ℤ : {x y : fraction-ℤ} → le-fraction-ℤ x y → leq-fraction-ℤ x y
-leq-le-fraction-ℤ {x} {y} =
-  leq-le-ℤ
-    { mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y)}
-    { mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x)}
+abstract
+  leq-le-fraction-ℤ :
+    {x y : fraction-ℤ} → le-fraction-ℤ x y → leq-fraction-ℤ x y
+  leq-le-fraction-ℤ {x} {y} =
+    leq-le-ℤ
+      { mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y)}
+      { mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x)}
 ```
 
 ### Strict inequality on the integer fractions is asymmetric
@@ -118,38 +121,40 @@ module _
   (x y : fraction-ℤ)
   where
 
-  asymmetric-le-fraction-ℤ :
-    le-fraction-ℤ x y → ¬ (le-fraction-ℤ y x)
-  asymmetric-le-fraction-ℤ =
-    asymmetric-le-ℤ
-      ( mul-ℤ
-        ( numerator-fraction-ℤ x)
-        ( denominator-fraction-ℤ y))
-      ( mul-ℤ
-        ( numerator-fraction-ℤ y)
-        ( denominator-fraction-ℤ x))
+  abstract
+    asymmetric-le-fraction-ℤ :
+      le-fraction-ℤ x y → ¬ (le-fraction-ℤ y x)
+    asymmetric-le-fraction-ℤ =
+      asymmetric-le-ℤ
+        ( mul-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ y))
+        ( mul-ℤ
+          ( numerator-fraction-ℤ y)
+          ( denominator-fraction-ℤ x))
 ```
 
 ### Strict inequality on the integer fractions is transitive
 
 ```agda
-transitive-le-fraction-ℤ :
-  (p q r : fraction-ℤ) →
-  le-fraction-ℤ q r →
-  le-fraction-ℤ p q →
-  le-fraction-ℤ p r
-transitive-le-fraction-ℤ p q r H H' =
-  is-positive-right-factor-mul-ℤ
-    ( is-positive-eq-ℤ
-      ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-      ( is-positive-add-ℤ
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ p)
-          ( H))
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ r)
-          ( H'))))
-      ( is-positive-denominator-fraction-ℤ q)
+abstract
+  transitive-le-fraction-ℤ :
+    (p q r : fraction-ℤ) →
+    le-fraction-ℤ q r →
+    le-fraction-ℤ p q →
+    le-fraction-ℤ p r
+  transitive-le-fraction-ℤ p q r H H' =
+    is-positive-right-factor-mul-ℤ
+      ( is-positive-eq-ℤ
+        ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
+        ( is-positive-add-ℤ
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ p)
+            ( H))
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ r)
+            ( H'))))
+        ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### Chaining rules for inequality and strict inequality on the integer fractions
@@ -204,31 +209,32 @@ module _
   (p q r : fraction-ℤ)
   where
 
-  concatenate-sim-le-fraction-ℤ :
-    sim-fraction-ℤ p q →
-    le-fraction-ℤ q r →
-    le-fraction-ℤ p r
-  concatenate-sim-le-fraction-ℤ H H' =
-    is-positive-right-factor-mul-ℤ
-      ( is-positive-eq-ℤ
-        ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ p)
-          ( H')))
-      ( is-positive-denominator-fraction-ℤ q)
+  abstract
+    concatenate-sim-le-fraction-ℤ :
+      sim-fraction-ℤ p q →
+      le-fraction-ℤ q r →
+      le-fraction-ℤ p r
+    concatenate-sim-le-fraction-ℤ H H' =
+      is-positive-right-factor-mul-ℤ
+        ( is-positive-eq-ℤ
+          ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ p)
+            ( H')))
+        ( is-positive-denominator-fraction-ℤ q)
 
-  concatenate-le-sim-fraction-ℤ :
-    le-fraction-ℤ p q →
-    sim-fraction-ℤ q r →
-    le-fraction-ℤ p r
-  concatenate-le-sim-fraction-ℤ H H' =
-    is-positive-right-factor-mul-ℤ
-      ( is-positive-eq-ℤ
-        ( inv ( lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
-        ( is-positive-mul-ℤ
-          ( is-positive-denominator-fraction-ℤ r)
-          ( H)))
-      ( is-positive-denominator-fraction-ℤ q)
+    concatenate-le-sim-fraction-ℤ :
+      le-fraction-ℤ p q →
+      sim-fraction-ℤ q r →
+      le-fraction-ℤ p r
+    concatenate-le-sim-fraction-ℤ H H' =
+      is-positive-right-factor-mul-ℤ
+        ( is-positive-eq-ℤ
+          ( inv ( lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
+          ( is-positive-mul-ℤ
+            ( is-positive-denominator-fraction-ℤ r)
+            ( H)))
+        ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### The similarity of integer fractions preserves strict inequality
@@ -238,11 +244,12 @@ module _
   (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
   where
 
-  preserves-le-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
-  preserves-le-sim-fraction-ℤ I =
-    concatenate-sim-le-fraction-ℤ p' p q'
-      ( symmetric-sim-fraction-ℤ p p' H)
-      ( concatenate-le-sim-fraction-ℤ p q q' I K)
+  abstract
+    preserves-le-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
+    preserves-le-sim-fraction-ℤ I =
+      concatenate-sim-le-fraction-ℤ p' p q'
+        ( symmetric-sim-fraction-ℤ p p' H)
+        ( concatenate-le-sim-fraction-ℤ p q q' I K)
 ```
 
 ### The similarity of integer fractions reflects strict inequality
@@ -252,11 +259,12 @@ module _
   (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
   where
 
-  reflects-le-sim-fraction-ℤ : le-fraction-ℤ p' q' → le-fraction-ℤ p q
-  reflects-le-sim-fraction-ℤ =
-    preserves-le-sim-fraction-ℤ p' q' p q
-      ( symmetric-sim-fraction-ℤ p p' H)
-      ( symmetric-sim-fraction-ℤ q q' K)
+  abstract
+    reflects-le-sim-fraction-ℤ : le-fraction-ℤ p' q' → le-fraction-ℤ p q
+    reflects-le-sim-fraction-ℤ =
+      preserves-le-sim-fraction-ℤ p' q' p q
+        ( symmetric-sim-fraction-ℤ p p' H)
+        ( symmetric-sim-fraction-ℤ q q' K)
 ```
 
 ### Fractions with equal denominator compare the same as their numerators
@@ -266,21 +274,22 @@ module _
   (x y : fraction-ℤ) (H : denominator-fraction-ℤ x ＝ denominator-fraction-ℤ y)
   where
 
-  le-fraction-le-numerator-fraction-ℤ :
-    le-ℤ (numerator-fraction-ℤ x) (numerator-fraction-ℤ y) →
-    le-fraction-ℤ x y
-  le-fraction-le-numerator-fraction-ℤ H' =
-    tr
-      ( λ (k : ℤ) →
-        le-ℤ
-          ( numerator-fraction-ℤ x *ℤ k)
-          ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
-      ( H)
-      ( preserves-le-left-mul-positive-ℤ
-        ( positive-denominator-fraction-ℤ x)
-        ( numerator-fraction-ℤ x)
-        ( numerator-fraction-ℤ y)
-        ( H'))
+  abstract
+    le-fraction-le-numerator-fraction-ℤ :
+      le-ℤ (numerator-fraction-ℤ x) (numerator-fraction-ℤ y) →
+      le-fraction-ℤ x y
+    le-fraction-le-numerator-fraction-ℤ H' =
+      tr
+        ( λ (k : ℤ) →
+          le-ℤ
+            ( numerator-fraction-ℤ x *ℤ k)
+            ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
+        ( H)
+        ( preserves-le-left-mul-positive-ℤ
+          ( positive-denominator-fraction-ℤ x)
+          ( numerator-fraction-ℤ x)
+          ( numerator-fraction-ℤ y)
+          ( H'))
 ```
 
 ### The mediant of two distinct fractions lies strictly between them
@@ -290,17 +299,18 @@ module _
   (x y : fraction-ℤ)
   where
 
-  le-left-mediant-fraction-ℤ :
-    le-fraction-ℤ x y →
-    le-fraction-ℤ x (mediant-fraction-ℤ x y)
-  le-left-mediant-fraction-ℤ =
-    is-positive-eq-ℤ (cross-mul-diff-left-mediant-fraction-ℤ x y)
+  abstract
+    le-left-mediant-fraction-ℤ :
+      le-fraction-ℤ x y →
+      le-fraction-ℤ x (mediant-fraction-ℤ x y)
+    le-left-mediant-fraction-ℤ =
+      is-positive-eq-ℤ (cross-mul-diff-left-mediant-fraction-ℤ x y)
 
-  le-right-mediant-fraction-ℤ :
-    le-fraction-ℤ x y →
-    le-fraction-ℤ (mediant-fraction-ℤ x y) y
-  le-right-mediant-fraction-ℤ =
-    is-positive-eq-ℤ (cross-mul-diff-right-mediant-fraction-ℤ x y)
+    le-right-mediant-fraction-ℤ :
+      le-fraction-ℤ x y →
+      le-fraction-ℤ (mediant-fraction-ℤ x y) y
+    le-right-mediant-fraction-ℤ =
+      is-positive-eq-ℤ (cross-mul-diff-right-mediant-fraction-ℤ x y)
 ```
 
 ### Strict inequality on the integer fractions is dense
@@ -310,12 +320,13 @@ module _
   (x y : fraction-ℤ) (H : le-fraction-ℤ x y)
   where
 
-  dense-le-fraction-ℤ :
-    exists fraction-ℤ (λ r → le-fraction-ℤ-Prop x r ∧ le-fraction-ℤ-Prop r y)
-  dense-le-fraction-ℤ =
-    intro-exists
-      ( mediant-fraction-ℤ x y)
-      ( le-left-mediant-fraction-ℤ x y H , le-right-mediant-fraction-ℤ x y H)
+  abstract
+    dense-le-fraction-ℤ :
+      exists fraction-ℤ (λ r → le-fraction-ℤ-Prop x r ∧ le-fraction-ℤ-Prop r y)
+    dense-le-fraction-ℤ =
+      intro-exists
+        ( mediant-fraction-ℤ x y)
+        ( le-left-mediant-fraction-ℤ x y H , le-right-mediant-fraction-ℤ x y H)
 ```
 
 ### Strict inequality on the integer fractions is located
@@ -325,15 +336,16 @@ module _
   (x y z : fraction-ℤ)
   where
 
-  located-le-fraction-ℤ :
-    le-fraction-ℤ y z →
-    type-disjunction-Prop (le-fraction-ℤ-Prop y x) (le-fraction-ℤ-Prop x z)
-  located-le-fraction-ℤ H =
-    unit-trunc-Prop
-      ( map-coproduct
-        ( id)
-        ( λ p → concatenate-leq-le-fraction-ℤ x y z p H)
-        ( decide-le-leq-fraction-ℤ y x))
+  abstract
+    located-le-fraction-ℤ :
+      le-fraction-ℤ y z →
+      type-disjunction-Prop (le-fraction-ℤ-Prop y x) (le-fraction-ℤ-Prop x z)
+    located-le-fraction-ℤ H =
+      unit-trunc-Prop
+        ( map-coproduct
+          ( id)
+          ( λ p → concatenate-leq-le-fraction-ℤ x y z p H)
+          ( decide-le-leq-fraction-ℤ y x))
 ```
 
 ### `x < y` if and only if `0 < y - x`
@@ -343,32 +355,34 @@ module _
   (x y : fraction-ℤ)
   where
 
-  eq-translate-diff-le-zero-fraction-ℤ :
-    le-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
-    le-fraction-ℤ x y
-  eq-translate-diff-le-zero-fraction-ℤ =
-    ap
-      ( is-positive-ℤ)
-      ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
-        ( ap
-          ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
-          ( left-negative-law-mul-ℤ
-            ( numerator-fraction-ℤ x)
-            ( denominator-fraction-ℤ y))))
+  abstract
+    eq-translate-diff-le-zero-fraction-ℤ :
+      le-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
+      le-fraction-ℤ x y
+    eq-translate-diff-le-zero-fraction-ℤ =
+      ap
+        ( is-positive-ℤ)
+        ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
+          ( ap
+            ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
+            ( left-negative-law-mul-ℤ
+              ( numerator-fraction-ℤ x)
+              ( denominator-fraction-ℤ y))))
 ```
 
 ### Negation reverses the order of strict inequality on integer fractions
 
 ```agda
-neg-le-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  le-fraction-ℤ x y →
-  le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
-neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
-  binary-tr le-ℤ
-    ( inv (left-negative-law-mul-ℤ m' n))
-    ( inv (left-negative-law-mul-ℤ m n'))
-    ( neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
+abstract
+  neg-le-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    le-fraction-ℤ x y →
+    le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
+  neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
+    binary-tr le-ℤ
+      ( inv (left-negative-law-mul-ℤ m' n))
+      ( inv (left-negative-law-mul-ℤ m n'))
+      ( neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```
 
 ### The canonical embedding of integers preserves and reflects strict inequality

@@ -23,11 +23,12 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.injective-maps
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
@@ -240,6 +241,13 @@ is-equiv-nonzero-power-ℝ⁰⁺ n =
 aut-nonzero-power-ℝ⁰⁺ : {l : Level} (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
 aut-nonzero-power-ℝ⁰⁺ n⁺@(n , _) =
   ( power-ℝ⁰⁺ n , is-equiv-nonzero-power-ℝ⁰⁺ n⁺)
+
+abstract
+  is-injective-nonzero-power-ℝ⁰⁺ :
+    {l : Level} (n : ℕ⁺) → is-injective (power-ℝ⁰⁺ {l} (nat-nonzero-ℕ n))
+  is-injective-nonzero-power-ℝ⁰⁺ n =
+    is-injective-is-equiv
+      ( is-equiv-nonzero-power-ℝ⁰⁺ n)
 ```
 
 ### The `1`st root of `x` is `x`
@@ -248,10 +256,72 @@ aut-nonzero-power-ℝ⁰⁺ n⁺@(n , _) =
 abstract
   root-one-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → nonzero-nat-root-ℝ⁰⁺ one-ℕ⁺ x ＝ x
   root-one-ℝ⁰⁺ x =
-    is-injective-is-equiv
-      ( is-equiv-nonzero-power-ℝ⁰⁺ one-ℕ⁺)
+    is-injective-nonzero-power-ℝ⁰⁺
+      ( one-ℕ⁺)
       ( ( is-section-nonzero-nat-power-ℝ⁰⁺ one-ℕ⁺ x) ∙
         ( eq-ℝ⁰⁺ _ _ (refl {x = real-ℝ⁰⁺ x})))
+```
+
+### Roots by products of nonzero natural numbers are iterated roots
+
+```agda
+abstract
+  mul-nonzero-nat-root-ℝ⁰⁺ :
+    {l : Level} (m n : ℕ⁺) (x : ℝ⁰⁺ l) →
+    nonzero-nat-root-ℝ⁰⁺ (m *ℕ⁺ n) x ＝
+    nonzero-nat-root-ℝ⁰⁺ m (nonzero-nat-root-ℝ⁰⁺ n x)
+  mul-nonzero-nat-root-ℝ⁰⁺ m⁺@(m , _) n⁺@(n , _) x =
+    inv
+      ( is-injective-nonzero-power-ℝ⁰⁺
+        ( m⁺ *ℕ⁺ n⁺)
+        ( equational-reasoning
+          power-ℝ⁰⁺
+            ( m *ℕ n)
+            ( nonzero-nat-root-ℝ⁰⁺ m⁺ (nonzero-nat-root-ℝ⁰⁺ n⁺ x))
+          ＝
+            power-ℝ⁰⁺
+              ( n)
+              ( power-ℝ⁰⁺
+                ( m)
+                ( nonzero-nat-root-ℝ⁰⁺ m⁺ (nonzero-nat-root-ℝ⁰⁺ n⁺ x)))
+            by power-mul-ℝ⁰⁺ m n _
+          ＝
+            power-ℝ⁰⁺
+              ( n)
+              ( nonzero-nat-root-ℝ⁰⁺ n⁺ x)
+            by ap (power-ℝ⁰⁺ n) (is-section-nonzero-nat-power-ℝ⁰⁺ m⁺ _)
+          ＝ x
+            by is-section-nonzero-nat-power-ℝ⁰⁺ n⁺ x
+          ＝ power-ℝ⁰⁺ (m *ℕ n) (nonzero-nat-root-ℝ⁰⁺ (m⁺ *ℕ⁺ n⁺) x)
+            by inv (is-section-nonzero-nat-power-ℝ⁰⁺ (m⁺ *ℕ⁺ n⁺) x)))
+```
+
+### Nonzero natural roots distribute over multiplication
+
+```agda
+abstract
+  distributive-nonzero-nat-root-mul-ℝ⁰⁺ :
+    {l1 l2 : Level} (n : ℕ⁺) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    nonzero-nat-root-ℝ⁰⁺ n (x *ℝ⁰⁺ y) ＝
+    nonzero-nat-root-ℝ⁰⁺ n x *ℝ⁰⁺ nonzero-nat-root-ℝ⁰⁺ n y
+  distributive-nonzero-nat-root-mul-ℝ⁰⁺ n x y =
+    is-injective-nonzero-power-ℝ⁰⁺ n
+      ( equational-reasoning
+        power-ℝ⁰⁺ (nat-nonzero-ℕ n) (nonzero-nat-root-ℝ⁰⁺ n (x *ℝ⁰⁺ y))
+        ＝ x *ℝ⁰⁺ y
+          by is-section-nonzero-nat-power-ℝ⁰⁺ n (x *ℝ⁰⁺ y)
+        ＝
+          ( power-ℝ⁰⁺ (nat-nonzero-ℕ n) (nonzero-nat-root-ℝ⁰⁺ n x)) *ℝ⁰⁺
+          ( power-ℝ⁰⁺ (nat-nonzero-ℕ n) (nonzero-nat-root-ℝ⁰⁺ n y))
+          by
+            ap-mul-ℝ⁰⁺
+              ( inv (is-section-nonzero-nat-power-ℝ⁰⁺ n x))
+              ( inv (is-section-nonzero-nat-power-ℝ⁰⁺ n y))
+        ＝
+          power-ℝ⁰⁺
+            ( nat-nonzero-ℕ n)
+            ( nonzero-nat-root-ℝ⁰⁺ n x *ℝ⁰⁺ nonzero-nat-root-ℝ⁰⁺ n y)
+          by inv (distributive-power-mul-ℝ⁰⁺ _ _ _))
 ```
 
 ## See also

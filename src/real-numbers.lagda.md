@@ -101,6 +101,7 @@ open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-approximations-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
+open import real-numbers.rational-powers-positive-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
