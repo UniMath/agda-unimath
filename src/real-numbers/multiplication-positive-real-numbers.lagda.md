@@ -25,11 +25,17 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.large-posets
+
+open import real-numbers.addition-positive-and-negative-real-numbers
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -253,4 +259,54 @@ module _
         ( transitive-sim-ℝ _ _ _
           ( sim-raise-ℝ l one-ℝ)
           ( left-inverse-law-mul-ℝ⁺ x))
+```
+
+### The multiplicative inverse is distributive over multiplication
+
+```agda
+abstract
+  distributive-real-inv-mul-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ⁺ l2) →
+    real-inv-ℝ⁺ (x *ℝ⁺ y) ＝ real-inv-ℝ⁺ x *ℝ real-inv-ℝ⁺ y
+  distributive-real-inv-mul-ℝ⁺ x⁺@(x , _) y⁺@(y , _) =
+    eq-sim-ℝ
+      ( symmetric-sim-ℝ
+        ( unique-right-inv-ℝ⁺
+          ( x⁺ *ℝ⁺ y⁺)
+          ( inv-ℝ⁺ x⁺ *ℝ⁺ inv-ℝ⁺ y⁺)
+          ( similarity-reasoning-ℝ
+            (x *ℝ y) *ℝ (real-inv-ℝ⁺ x⁺ *ℝ real-inv-ℝ⁺ y⁺)
+            ~ℝ (x *ℝ real-inv-ℝ⁺ x⁺) *ℝ (y *ℝ real-inv-ℝ⁺ y⁺)
+              by sim-eq-ℝ (interchange-law-mul-mul-ℝ _ _ _ _)
+            ~ℝ one-ℝ *ℝ one-ℝ
+              by
+                preserves-sim-mul-ℝ
+                  ( right-inverse-law-mul-ℝ⁺ x⁺)
+                  ( right-inverse-law-mul-ℝ⁺ y⁺)
+            ~ℝ one-ℝ
+              by sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+```
+
+### For nonnegative `x`, `(x + ε)⁻¹ x ≤ 1`
+
+```agda
+abstract
+  leq-one-mul-inv-add-positive-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁺ l2) →
+    leq-ℝ (real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x y) *ℝ real-ℝ⁰⁺ x) one-ℝ
+  leq-one-mul-inv-add-positive-ℝ⁰⁺ x⁰⁺@(x , _) y⁺@(y , _) =
+    let
+      open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+      chain-of-inequalities
+      real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ x
+      ≤ real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ (x +ℝ y)
+        by
+          preserves-leq-left-mul-ℝ⁺
+            ( inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺))
+            ( leq-left-add-real-ℝ⁺ x y⁺)
+      ≤ one-ℝ
+        by
+          leq-sim-ℝ
+            ( left-inverse-law-mul-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺))
 ```
