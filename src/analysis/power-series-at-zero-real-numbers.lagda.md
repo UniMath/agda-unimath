@@ -57,11 +57,15 @@ power-series-at-zero-coefficients-ℝ {l} =
 ### The series resulting from evaluating a power series at a point
 
 ```agda
+term-at-point-power-series-at-zero-ℝ :
+  {l : Level} → power-series-at-zero-ℝ l → ℝ l → sequence (ℝ l)
+term-at-point-power-series-at-zero-ℝ σ x n =
+  coefficient-power-series-at-zero-ℝ σ n *ℝ power-ℝ n x
+
 compute-series-at-point-power-series-at-zero-ℝ :
   {l : Level} → power-series-at-zero-ℝ l → ℝ l → series-ℝ l
 compute-series-at-point-power-series-at-zero-ℝ σ x =
-  series-terms-ℝ
-    ( λ n → coefficient-power-series-at-zero-ℝ σ n *ℝ power-ℝ n x)
+  series-terms-ℝ (term-at-point-power-series-at-zero-ℝ σ x)
 ```
 
 ### Convergence of a power series at a point

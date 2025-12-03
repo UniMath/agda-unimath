@@ -215,7 +215,7 @@ module _
       ( map-norm-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w))
       ( map-norm-Normed-ℝ-Vector-Space v +ℝ map-norm-Normed-ℝ-Vector-Space w)
   triangular-Normed-ℝ-Vector-Space =
-    triangular-Seminormed-ℝ-Vector-Space
+    triangular-seminorm-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
   is-extensional-norm-Normed-ℝ-Vector-Space :

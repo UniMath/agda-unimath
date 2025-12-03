@@ -11,6 +11,8 @@ open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-real-numbers
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -96,6 +98,23 @@ module _
     is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
       ( complete-metric-ab-add-ℝ l)
       ( σ)
+```
+
+### A series converges if it converges after dropping a finite number of terms
+
+```agda
+module _
+  {l : Level}
+  (σ : series-ℝ l)
+  (k : ℕ)
+  where
+
+  abstract
+    is-convergent-is-convergent-drop-series-ℝ :
+      is-convergent-series-ℝ (drop-series-ℝ k σ) →
+      is-convergent-series-ℝ σ
+    is-convergent-is-convergent-drop-series-ℝ =
+      is-convergent-is-convergent-drop-series-Metric-Ab σ k
 ```
 
 ## External links

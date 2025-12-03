@@ -122,7 +122,7 @@ module _
       ( has-limit-partial-sum-convergent-series-Metric-Ab)
 ```
 
-### A series converges if and only if it converges after dropping a finite number of terms
+### A series converges if it converges after dropping a finite number of terms
 
 ```agda
 module _
@@ -132,68 +132,69 @@ module _
   (k : ℕ)
   where
 
-  is-convergent-is-convergent-drop-series-ℝ :
-    is-convergent-series-Metric-Ab (drop-series-Metric-Ab k σ) →
-    is-convergent-series-Metric-Ab σ
-  is-convergent-is-convergent-drop-series-ℝ (lim-drop , is-lim-drop) =
-    ( add-Metric-Ab G (partial-sum-series-Metric-Ab σ k) lim-drop ,
-      map-trunc-Prop
-        ( λ (μ , is-mod-μ) →
-          ( ( λ ε → μ ε +ℕ k) ,
-            ( λ ε n με+k≤n →
-              let
-                (l , l+k=n) =
-                  subtraction-leq-ℕ
-                    ( k)
-                    ( n)
-                    ( transitive-leq-ℕ
+  abstract
+    is-convergent-is-convergent-drop-series-Metric-Ab :
+      is-convergent-series-Metric-Ab (drop-series-Metric-Ab k σ) →
+      is-convergent-series-Metric-Ab σ
+    is-convergent-is-convergent-drop-series-Metric-Ab (lim-drop , is-lim-drop) =
+      ( add-Metric-Ab G (partial-sum-series-Metric-Ab σ k) lim-drop ,
+        map-trunc-Prop
+          ( λ (μ , is-mod-μ) →
+            ( ( λ ε → μ ε +ℕ k) ,
+              ( λ ε n με+k≤n →
+                let
+                  (l , l+k=n) =
+                    subtraction-leq-ℕ
                       ( k)
-                      ( μ ε +ℕ k)
                       ( n)
-                      ( με+k≤n)
-                      ( leq-add-ℕ' k (μ ε)))
-              in
-                tr
-                  ( λ x → neighborhood-Metric-Ab G ε x _)
-                  ( equational-reasoning
-                    add-Metric-Ab G
-                      ( partial-sum-series-Metric-Ab σ k)
-                      ( partial-sum-series-Metric-Ab
-                        ( drop-series-Metric-Ab k σ)
-                        ( l))
-                    ＝
+                      ( transitive-leq-ℕ
+                        ( k)
+                        ( μ ε +ℕ k)
+                        ( n)
+                        ( με+k≤n)
+                        ( leq-add-ℕ' k (μ ε)))
+                in
+                  tr
+                    ( λ x → neighborhood-Metric-Ab G ε x _)
+                    ( equational-reasoning
                       add-Metric-Ab G
                         ( partial-sum-series-Metric-Ab σ k)
-                        ( diff-Metric-Ab G
-                          ( partial-sum-series-Metric-Ab σ (k +ℕ l))
-                          ( partial-sum-series-Metric-Ab σ k))
-                      by
-                        ap-add-Metric-Ab G
-                          ( refl)
-                          ( partial-sum-drop-series-Metric-Ab k σ l)
-                    ＝ partial-sum-series-Metric-Ab σ (k +ℕ l)
-                      by is-identity-right-conjugation-Metric-Ab G _ _
-                    ＝ partial-sum-series-Metric-Ab σ n
-                      by
-                        ap
-                          ( partial-sum-series-Metric-Ab σ)
-                          ( commutative-add-ℕ k l ∙ l+k=n))
-                  ( forward-implication
-                    ( is-isometry-add-Metric-Ab
-                      ( G)
-                      ( partial-sum-series-Metric-Ab σ k)
-                      ( ε)
-                      ( partial-sum-series-Metric-Ab
-                        ( drop-series-Metric-Ab k σ)
-                        ( l))
-                      ( lim-drop))
-                      ( is-mod-μ
+                        ( partial-sum-series-Metric-Ab
+                          ( drop-series-Metric-Ab k σ)
+                          ( l))
+                      ＝
+                        add-Metric-Ab G
+                          ( partial-sum-series-Metric-Ab σ k)
+                          ( diff-Metric-Ab G
+                            ( partial-sum-series-Metric-Ab σ (k +ℕ l))
+                            ( partial-sum-series-Metric-Ab σ k))
+                        by
+                          ap-add-Metric-Ab G
+                            ( refl)
+                            ( partial-sum-drop-series-Metric-Ab k σ l)
+                      ＝ partial-sum-series-Metric-Ab σ (k +ℕ l)
+                        by is-identity-right-conjugation-Metric-Ab G _ _
+                      ＝ partial-sum-series-Metric-Ab σ n
+                        by
+                          ap
+                            ( partial-sum-series-Metric-Ab σ)
+                            ( commutative-add-ℕ k l ∙ l+k=n))
+                    ( forward-implication
+                      ( is-isometry-add-Metric-Ab
+                        ( G)
+                        ( partial-sum-series-Metric-Ab σ k)
                         ( ε)
-                        ( l)
-                        ( reflects-leq-left-add-ℕ
-                          ( k)
-                          ( μ ε)
+                        ( partial-sum-series-Metric-Ab
+                          ( drop-series-Metric-Ab k σ)
+                          ( l))
+                        ( lim-drop))
+                        ( is-mod-μ
+                          ( ε)
                           ( l)
-                          ( inv-tr (leq-ℕ (μ ε +ℕ k)) l+k=n με+k≤n)))))))
-        ( is-lim-drop))
+                          ( reflects-leq-left-add-ℕ
+                            ( k)
+                            ( μ ε)
+                            ( l)
+                            ( inv-tr (leq-ℕ (μ ε +ℕ k)) l+k=n με+k≤n)))))))
+          ( is-lim-drop))
 ```
