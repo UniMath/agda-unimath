@@ -23,7 +23,6 @@ open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
-open import real-numbers.convergent-series-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
@@ -60,7 +59,7 @@ open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
-open import real-numbers.metric-abelian-group-of-real-numbers public
+open import real-numbers.metric-additive-group-of-real-numbers public
 open import real-numbers.metric-space-of-nonnegative-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public
@@ -94,7 +93,6 @@ open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
-open import real-numbers.series-real-numbers public
 open import real-numbers.short-function-binary-maximum-real-numbers public
 open import real-numbers.short-function-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
