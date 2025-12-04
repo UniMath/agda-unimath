@@ -30,7 +30,7 @@ open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers
 ## Idea
 
 The
-{{#concept "arithmetic mean" WDID=Q19033 WD="arithmetic mean" Disambiguation="of a finite sequence of real numbers" Agda=mean-fin-sequence-ℝ}}
+{{#concept "arithmetic mean" Disambiguation="of a finite sequence of nonnegative real numbers" Agda=arithmetic-mean-fin-sequence-ℝ⁰⁺}}
 of a nonempty [finite sequence](lists.finite-sequences.md) of
 [nonnegative](real-numbers.nonnegative-real-numbers.md)
 [real numbers](real-numbers.dedekind-real-numbers.md) `a₁, ..., aₙ` is the
