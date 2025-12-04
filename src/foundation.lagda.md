@@ -172,6 +172,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equality-of-equality-cartesian-product-types public
 open import foundation.equality-truncation-levels public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
@@ -211,6 +212,7 @@ open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.finitely-truncated-types public
 open import foundation.fixed-points-endofunctions public
+open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
