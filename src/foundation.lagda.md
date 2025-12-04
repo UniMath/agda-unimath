@@ -324,6 +324,7 @@ open import foundation.morphisms-coalgebras-maybe public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-double-arrows public
+open import foundation.morphisms-forks-over-morphisms-double-arrows public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public

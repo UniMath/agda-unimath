@@ -1,4 +1,4 @@
-# Morphisms of coforks
+# Morphisms of coforks under morphisms of double arrows
 
 ```agda
 module synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows where
@@ -74,36 +74,36 @@ which share the top map `i` and the bottom square, and the coherences of `c` and
 `c'` filling the sides; that gives the homotopies
 
 ```text
-                                                i                 i
-     A                  A                 A --------> U     A --------> U
-     |                  |                             |                 |
-   f |                f |                             | h               | k
-     |                  |                             |                 |
-     ∨                  ∨     j                       ∨                 ∨
-     B         ~        B --------> V       ~         V        ~        V
-     |                              |                 |                 |
-   c |                              | c'              | c'              | c'
-     |                              |                 |                 |
-     ∨                              ∨                 ∨                 ∨
-     X --------> Y                  Y                 Y                 Y
+                                               i                 i
+     A                 A                 A --------> U     A --------> U
+     |                 |                             |                 |
+   f |               f |                             | h               | k
+     |                 |                             |                 |
+     ∨                 ∨     j                       ∨                 ∨
+     B        ~        B --------> V        ~        V        ~        V
+     |                             |                 |                 |
+   c |                             | c'              | c'              | c'
+     |                             |                 |                 |
+     ∨                             ∨                 ∨                 ∨
+     X --------> Y                 Y                 Y                 Y
            m
 ```
 
 and
 
 ```text
-                                                                  i
-     A                 A               A                    A --------> U
-     |                 |               |                                |
-   f |               g |             g |                                | k
-     |                 |               |                                |
-     ∨                 ∨               ∨     j                          ∨
-     B         ~       B       ~       B --------> V           ~        V
-     |                 |                           |                    |
-   c |               c |                           | c'                 | c'
-     |                 |                           |                    |
-     ∨                 ∨                           ∨                    ∨
-     X --------> Y     X --------> Y               Y                    Y ,
+                                                                 i
+     A                 A                 A                 A --------> U
+     |                 |                 |                             |
+   f |               g |               g |                             | k
+     |                 |                 |                             |
+     ∨                 ∨                 ∨     j                       ∨
+     B        ~        B        ~        B --------> V        ~        V
+     |                 |                             |                 |
+   c |               c |                             | c'              | c'
+     |                 |                             |                 |
+     ∨                 ∨                             ∨                 ∨
+     X --------> Y     X --------> Y                 Y                 Y ,
            m                 m
 ```
 
