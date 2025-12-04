@@ -124,7 +124,9 @@ module _
   (odd-n : is-odd-ℕ n)
   where
 
-  abstract
+  abstract opaque
+    unfolding odd-root-ℝ
+
     is-injective-odd-root-ℝ :
       {l : Level} → is-injective (odd-root-ℝ {l} n odd-n)
     is-injective-odd-root-ℝ {l} =
