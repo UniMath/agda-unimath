@@ -339,9 +339,12 @@ open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.noninjective-maps public
 open import foundation.null-homotopic-maps public
+open import foundation.operations-cospan-diagrams public
+open import foundation.operations-cospans public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
+open import foundation.opposite-cospans public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
@@ -458,6 +461,7 @@ open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.transport-split-type-families public
+open import foundation.transposition-cospan-diagrams public
 open import foundation.transposition-identifications-along-equivalences public
 open import foundation.transposition-identifications-along-retractions public
 open import foundation.transposition-identifications-along-sections public
