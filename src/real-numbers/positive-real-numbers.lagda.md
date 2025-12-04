@@ -29,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -82,6 +83,13 @@ is-positive-real-ℝ⁺ = pr2
 ```
 
 ## Properties
+
+### The positive real numbers form a set
+
+```agda
+ℝ⁺-Set : (l : Level) → Set (lsuc l)
+ℝ⁺-Set l = set-subset (ℝ-Set l) is-positive-prop-ℝ
+```
 
 ### Positivity is preserved by similarity
 
@@ -156,7 +164,8 @@ module _
   abstract
     is-positive-iff-zero-in-lower-cut-ℝ :
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-    is-positive-iff-zero-in-lower-cut-ℝ = inv-iff (le-real-iff-lower-cut-ℚ x)
+    is-positive-iff-zero-in-lower-cut-ℝ =
+      inv-iff (le-real-iff-is-in-lower-cut-ℝ x)
 
     is-positive-zero-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
@@ -334,7 +343,22 @@ abstract
 ### Raising the universe level of positive real numbers
 
 ```agda
+abstract
+  preserves-is-positive-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
+    is-positive-ℝ (raise-ℝ l x)
+  preserves-is-positive-raise-ℝ l x 0<x =
+    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
+
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
-  ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
+  ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+```
+
+### Raising a positive real to its own level is the identity
+
+```agda
+abstract
+  eq-raise-ℝ⁺ : {l : Level} → (x : ℝ⁺ l) → x ＝ raise-ℝ⁺ l x
+  eq-raise-ℝ⁺ (x , _) = eq-ℝ⁺ _ _ (eq-raise-ℝ x)
 ```
