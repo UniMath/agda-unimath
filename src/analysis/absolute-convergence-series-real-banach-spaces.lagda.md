@@ -150,57 +150,16 @@ module _
                 ( transitive-leq-ℕ (pr1 (M ε)) n (n +ℕ k) (leq-add-ℕ n k) με≤n)
                 ( με≤n))
 
-    neighborhood-leq-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space :
-      (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (pr1 (M ε)) n → leq-ℕ n k →
-      neighborhood-ℝ-Banach-Space
-        ( V)
-        ( ε)
-        ( partial-sum-series-ℝ-Banach-Space V σ k)
-        ( partial-sum-series-ℝ-Banach-Space V σ n)
-    neighborhood-leq-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space
-      ε n k με≤n n≤k =
-      let
-        (l , l+n=k) = subtraction-leq-ℕ n k n≤k
-      in
-        tr
-          ( λ p →
-            leq-ℝ
-              ( dist-ℝ-Banach-Space V
-                ( partial-sum-series-ℝ-Banach-Space V σ p)
-                ( _))
-              ( _))
-          ( commutative-add-ℕ n l ∙ l+n=k)
-          ( neighborhood-add-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space
-            ( ε)
-            ( n)
-            ( l)
-            ( με≤n))
-
     is-cauchy-partial-sum-is-cauchy-partial-sum-norm-series-ℝ-Banach-Space :
       is-cauchy-sequence-Metric-Space
         ( metric-space-ℝ-Banach-Space V)
         ( partial-sum-series-ℝ-Banach-Space V σ)
-    is-cauchy-partial-sum-is-cauchy-partial-sum-norm-series-ℝ-Banach-Space
-      ε =
-      ( pr1 (M ε) ,
-        λ a b με≤a με≤b →
-          rec-coproduct
-            ( λ a≤b →
-              tr
-                ( λ d → leq-ℝ d (real-ℚ⁺ ε))
-                ( commutative-dist-ℝ-Banach-Space V _ _)
-                ( neighborhood-leq-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space
-                  ( ε)
-                  ( a)
-                  ( b)
-                  ( με≤a)
-                  ( a≤b)))
-            ( neighborhood-leq-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space
-              ( ε)
-              ( b)
-              ( a)
-              ( με≤b))
-            ( linear-leq-ℕ a b))
+    is-cauchy-partial-sum-is-cauchy-partial-sum-norm-series-ℝ-Banach-Space =
+      is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space
+        ( metric-space-ℝ-Banach-Space V)
+        ( partial-sum-series-ℝ-Banach-Space V σ)
+        ( pr1 ∘ M)
+        ( neighborhood-add-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space)
 ```
 
 ### If a series is absolutely convergent, it is convergent
