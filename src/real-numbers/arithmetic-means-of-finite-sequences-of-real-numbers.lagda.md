@@ -30,7 +30,7 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers
 ## Idea
 
 The
-{{#concept "arithmetic mean" WDID=Q19033 WD="arithmetic mean" Disambiguation="of a finite sequence of real numbers" Agda=mean-fin-sequence-ℝ}}
+{{#concept "arithmetic mean" WDID=Q19033 WD="arithmetic mean" Disambiguation="of a finite sequence of real numbers" Agda=arithmetic-mean-fin-sequence-ℝ}}
 of a nonempty [finite sequence](lists.finite-sequences.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) `a₁, ..., aₙ` is the
 [reciprocal](elementary-number-theory.unit-fractions-rational-numbers.md) of `n`
