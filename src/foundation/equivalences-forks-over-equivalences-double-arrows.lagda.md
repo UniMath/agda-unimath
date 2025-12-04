@@ -26,8 +26,8 @@ open import foundation.whiskering-homotopies-composition
 ## Idea
 
 Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
-`h, k : U → V`, equipped with [forks](synthetic-homotopy-theory.forks.md)
-`c : X → A` and `c' : Y → U`, respectively, and an
+`h, k : U → V`, equipped with [forks](foundation.forks.md) `c : X → A` and
+`c' : Y → U`, respectively, and an
 [equivalence of double arrows](foundation.equivalences-double-arrows.md)
 `e : (f, g) ≃ (h, k)`.
 
