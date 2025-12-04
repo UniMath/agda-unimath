@@ -54,6 +54,7 @@ square in the diagram
 datum "filling the inside" --- we have two stacks of squares
 
 ```text
+           m                        m
      X --------> Y            X --------> Y
      |           |            |           |
    c |           | c'       c |           | c'
@@ -152,9 +153,11 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {a : double-arrow l1 l2} {X : UU l3} (c : fork a X)
-  {a' : double-arrow l4 l5} {Y : UU l6} (c' : fork a' Y)
-  {h : hom-double-arrow a a'} (m : hom-fork-hom-double-arrow a a' c c' h)
+  (a : double-arrow l1 l2) (a' : double-arrow l4 l5)
+  {X : UU l3} {Y : UU l6}
+  (c : fork a X) (c' : fork a' Y)
+  (h : hom-double-arrow a a')
+  (m : hom-fork-hom-double-arrow a a' c c' h)
   where
 
   map-hom-fork-hom-double-arrow : X → Y

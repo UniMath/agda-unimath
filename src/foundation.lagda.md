@@ -184,6 +184,7 @@ open import foundation.equivalences-arrows public
 open import foundation.equivalences-cospan-diagrams public
 open import foundation.equivalences-cospans public
 open import foundation.equivalences-double-arrows public
+open import foundation.equivalences-forks-over-equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-span-diagrams public
