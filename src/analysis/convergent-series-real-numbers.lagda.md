@@ -12,6 +12,7 @@ open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-real-numbers
 
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import real-numbers.cauchy-sequences-real-numbers
@@ -48,6 +49,9 @@ module _
 
   is-convergent-series-ℝ : UU (lsuc l)
   is-convergent-series-ℝ = is-convergent-series-Metric-Ab σ
+
+convergent-series-ℝ : (l : Level) → UU (lsuc l)
+convergent-series-ℝ l = type-subtype (is-convergent-prop-series-ℝ {l})
 ```
 
 ## Properties
