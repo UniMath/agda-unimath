@@ -158,5 +158,5 @@ module _
     isometry-Metric-Space X (product-Metric-Space X X)
   diagonal-isometry-product-Metric-Space =
     ( ( λ x → (x , x)) ,
-      ( λ _ _ _ → (( λ N → (N , N)) , pr1)))
+      ( λ _ _ _ → ((λ N → (N , N)) , pr1)))
 ```
