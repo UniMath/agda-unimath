@@ -554,30 +554,32 @@ abstract
 ### Odd powers of real numbers preserve inequality
 
 ```agda
-abstract
-  is-increasing-odd-power-ℝ :
-    (l : Level) (n : ℕ) → is-odd-ℕ n →
-    is-increasing-function-ℝ (power-ℝ {l} n)
-  is-increasing-odd-power-ℝ l n odd-n =
-    is-increasing-is-strictly-increasing-function-ℝ
-      ( power-ℝ n)
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
 
-  preserves-leq-odd-power-ℝ :
-    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → leq-ℝ x y →
-    leq-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-leq-odd-power-ℝ {l1} {l2} n {x} {y} odd-n x≤y =
-    leq-leq-raise-ℝ
-      ( l1 ⊔ l2)
-      ( binary-tr
-        ( leq-ℝ)
-        ( power-raise-ℝ (l1 ⊔ l2) n x)
-        ( power-raise-ℝ (l1 ⊔ l2) n y)
-        ( is-increasing-odd-power-ℝ
-          ( l1 ⊔ l2)
-          ( n)
-          ( odd-n)
-          ( raise-ℝ (l1 ⊔ l2) x)
-          ( raise-ℝ (l1 ⊔ l2) y)
-          ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
+  abstract
+    is-increasing-odd-power-ℝ :
+      (l : Level) → is-increasing-function-ℝ (power-ℝ {l} n)
+    is-increasing-odd-power-ℝ l =
+      is-increasing-is-strictly-increasing-function-ℝ
+        ( power-ℝ n)
+        ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+
+    preserves-leq-odd-power-ℝ :
+      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+      leq-ℝ x y → leq-ℝ (power-ℝ n x) (power-ℝ n y)
+    preserves-leq-odd-power-ℝ {l1} {l2} {x} {y} x≤y =
+      leq-leq-raise-ℝ
+        ( l1 ⊔ l2)
+        ( binary-tr
+          ( leq-ℝ)
+          ( power-raise-ℝ (l1 ⊔ l2) n x)
+          ( power-raise-ℝ (l1 ⊔ l2) n y)
+          ( is-increasing-odd-power-ℝ
+            ( l1 ⊔ l2)
+            ( raise-ℝ (l1 ⊔ l2) x)
+            ( raise-ℝ (l1 ⊔ l2) y)
+            ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
 ```
