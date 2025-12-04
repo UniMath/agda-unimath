@@ -231,7 +231,7 @@ module _
 ### Forks are special cases of cones over cospans
 
 The type of forks of a double arrow `f, g : A → B` is equivalent to the type of
-[cones](synthetic-homotopy-theory.cones-over-cospan-diagrams.md) over the cospan
+[cones](foundation.cones-over-cospan-diagrams.md) over the cospan
 
 ```text
        Δ           (f,g)
