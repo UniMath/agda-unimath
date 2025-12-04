@@ -7,22 +7,22 @@ module foundation.forks where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.codiagonal-maps-of-types
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
-open import foundation-core.diagonal-maps-cartesian-products-of-types
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
-open import foundation.cartesian-product-types
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
+open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.cartesian-product-types
 open import foundation.double-arrows
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-of-equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.equivalences-double-arrows
 open import foundation.equivalences-cospan-diagrams
-open import foundation.equality-cartesian-product-types
+open import foundation.equivalences-double-arrows
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
@@ -30,15 +30,14 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.morphisms-double-arrows
 open import foundation.morphisms-cospan-diagrams
-open import foundation.cospan-diagrams
+open import foundation.morphisms-double-arrows
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation.cones-over-cospan-diagrams
+open import foundation-core.diagonal-maps-cartesian-products-of-types
 ```
 
 </details>
@@ -261,7 +260,7 @@ module _
       ( vertical-map-cospan-cone-fork)
 
 module _
-  {l1 l2 l3 : Level}  (a@(A , B , f , g) : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} (a@(A , B , f , g) : double-arrow l1 l2) {X : UU l3}
   where
 
   fork-cone-diagonal :
@@ -362,7 +361,7 @@ module _
                   by ap (ap pr2) right-unit
                 ＝ ap pr1 (H x) ∙ (inv (ap pr1 (H x)) ∙ ap pr2 (H x))
                   by inv (is-section-inv-concat (ap pr1 (H x)) (ap pr2 (H x)))
-                ＝ ap pr2 (ap (diagonal-product B) (ap pr1 (H x)))  ∙
+                ＝ ap pr2 (ap (diagonal-product B) (ap pr1 (H x))) ∙
                   ap
                     ( pr2)
                     ( ap
@@ -411,7 +410,7 @@ module _
   pr2 equiv-cone-diagonal-fork = is-equiv-fork-cone-diagonal
 
 module _
-  {l1 l2 : Level}  (a@(A , B , f , g) : double-arrow l1 l2)
+  {l1 l2 : Level} (a@(A , B , f , g) : double-arrow l1 l2)
   where
 
   abstract
