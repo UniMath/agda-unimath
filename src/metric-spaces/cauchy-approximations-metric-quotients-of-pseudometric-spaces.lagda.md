@@ -102,12 +102,12 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space :
+  short-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
     short-function-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space =
+  short-map-metric-quotient-cauchy-approximation-Pseudometric-Space =
     short-map-cauchy-approximation-short-function-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
@@ -122,7 +122,7 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
+      ( short-map-metric-quotient-cauchy-approximation-Pseudometric-Space)
 
   is-short-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
     is-short-function-Pseudometric-Space
@@ -135,7 +135,7 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
+      ( short-map-metric-quotient-cauchy-approximation-Pseudometric-Space)
 ```
 
 ### Lifts of Cauchy approximations in the quotient metric space up to similarity
