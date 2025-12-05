@@ -608,8 +608,8 @@ module _
 le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
 le-zero-one-ℝ =
   preserves-le-real-ℚ
-    ( zero-ℚ)
-    ( one-ℚ)
+    { zero-ℚ}
+    { one-ℚ}
     ( le-zero-one-ℚ)
 ```
 
