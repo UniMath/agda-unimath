@@ -105,7 +105,7 @@ module _
       exists ℚ⁺ (λ q → le-prop-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ q))
     le-some-positive-rational-ℝ⁰⁺ =
       map-tot-exists
-        ( λ (q , _) x<q → le-real-is-in-upper-cut-ℚ (real-ℝ⁰⁺ x) x<q)
+        ( λ (q , _) x<q → le-real-is-in-upper-cut-ℝ (real-ℝ⁰⁺ x) x<q)
         ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
