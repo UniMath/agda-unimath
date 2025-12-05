@@ -7,6 +7,8 @@ module finite-probability-theory.expected-value-real-random-variables-finite-pro
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.sums-of-finite-families-of-elements-commutative-rings
+
 open import finite-probability-theory.finite-probability-spaces
 open import finite-probability-theory.positive-distributions-on-finite-types
 open import finite-probability-theory.probability-distributions-on-finite-types
@@ -23,10 +25,9 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-families-of-elements-abelian-groups
-
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
@@ -46,7 +47,7 @@ of a
 `X` in a
 [finite probability space](finite-probability-theory.finite-probability-spaces.md)
 `(Ω , Pr)` is the
-[sum](group-theory.sums-of-finite-families-of-elements-abelian-groups.md)
+[sum](commutative-algebra.sums-of-finite-families-of-elements-commutative-rings.md)
 
 $$
   ∑_{x ∈ Ω} X(x)\operatorname{Pr}(x).
@@ -60,14 +61,14 @@ Our definition follows Definition 2.2 of {{#cite Babai00}}.
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Probability-Space l)
-  (X : real-random-variable-Finite-Probability-Space Ω)
+  {l1 l2 l3 : Level} (Ω : Finite-Probability-Space l1 l2)
+  (X : real-random-variable-Finite-Probability-Space l3 Ω)
   where
 
-  expected-value-real-random-variable-Finite-Probability-Space : ℝ lzero
+  expected-value-real-random-variable-Finite-Probability-Space : ℝ (l2 ⊔ l3)
   expected-value-real-random-variable-Finite-Probability-Space =
-    sum-finite-Ab
-      ( abelian-group-add-ℝ-lzero)
+    sum-finite-Commutative-Ring
+      ( commutative-ring-ℝ (l2 ⊔ l3))
       ( finite-type-Finite-Probability-Space Ω)
       ( λ x →
         mul-ℝ
