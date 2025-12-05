@@ -8,9 +8,9 @@ module real-numbers.apartness-real-numbers where
 
 ```agda
 open import foundation.apartness-relations
-open import foundation.coproduct-types
 open import foundation.binary-relations
 open import foundation.binary-transport
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -34,7 +34,6 @@ open import metric-spaces.apartness-located-metric-spaces
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers

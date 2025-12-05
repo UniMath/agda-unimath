@@ -18,14 +18,14 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import ring-theory.large-rings
-open import ring-theory.rings
-
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
+
+open import ring-theory.large-rings
+open import ring-theory.rings
 
 open import univalent-combinatorics.finite-types
 ```
