@@ -1,7 +1,7 @@
 # The action on Cauchy approximations of short maps between metric spaces
 
 ```agda
-module metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces where
+module metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces

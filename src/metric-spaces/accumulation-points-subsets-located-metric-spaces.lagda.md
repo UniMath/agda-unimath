@@ -28,7 +28,7 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.apartness-located-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
