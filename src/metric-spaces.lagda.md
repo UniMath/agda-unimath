@@ -90,6 +90,7 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
+open import metric-spaces.extensions-metric-spaces public
 open import metric-spaces.extensions-pseudometric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functions-pseudometric-spaces public
