@@ -1,4 +1,4 @@
-# The action of isometries on Cauchy approximations in pseudometric spaces
+# The action on Cauchy approximations of isometries between pseudometric spaces
 
 ```agda
 module metric-spaces.action-of-isometries-on-cauchy-approximations-pseudometric-spaces where
