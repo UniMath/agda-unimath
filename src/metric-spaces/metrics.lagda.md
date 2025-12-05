@@ -297,7 +297,7 @@ module _
       is-tight-Pseudometric-Space (pseudometric-space-Metric X μ)
     is-tight-pseudometric-space-Metric x y H =
       is-extensional-dist-Metric X μ x y
-        ( sim-zero-le-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y) H)
+        ( sim-zero-leq-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y) H)
 ```
 
 ### The pseudometric space induced by a metric is extensional

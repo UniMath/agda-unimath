@@ -64,8 +64,8 @@ of `g`.
 
 This concept is used in the
 [Cantor–Schröder–Bernstein construction](foundation.cantor-schroder-bernstein-decidable-embeddings.md)
-to construct an equivalence of types `A ≃ B` given mutual embeddings
-`f : A ↪ B` and `g : B ↪ A`.
+to construct an equivalence of types `A ≃ B` given mutual embeddings `f : A ↪ B`
+and `g : B ↪ A`.
 
 ## Definitions
 
@@ -478,9 +478,9 @@ module _
 
 It follows from the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
-that, for every pair of mutual decidable embeddings `f : A ↪ B` and
-`g : B ↪ A`, it is decidable for every element `x : A` whether `x` is a perfect
-image of `g` relative to `f`.
+that, for every pair of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`,
+it is decidable for every element `x : A` whether `x` is a perfect image of `g`
+relative to `f`.
 
 ```agda
 module _

@@ -24,6 +24,8 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
@@ -281,4 +283,49 @@ pr2 equiv-rational-real =
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
     (rational-real-ℚ , is-retraction-rational-real-ℚ)
+```
+
+### The canonical embedding of the rational numbers in the real numbers is injective
+
+```agda
+abstract opaque
+  unfolding real-ℚ
+
+  is-injective-real-ℚ : is-injective real-ℚ
+  is-injective-real-ℚ {p} {q} pℝ=qℝ =
+    trichotomy-le-ℚ
+      ( p)
+      ( q)
+      ( λ p<q →
+        ex-falso
+          ( irreflexive-le-ℚ
+            ( p)
+            ( inv-tr (λ x → is-in-lower-cut-ℝ x p) pℝ=qℝ p<q)))
+      ( id)
+      ( λ q<p →
+        ex-falso
+          ( irreflexive-le-ℚ
+            ( q)
+            ( tr (λ x → is-in-lower-cut-ℝ x q) pℝ=qℝ q<p)))
+```
+
+### `0 ≠ 1`
+
+```agda
+neq-zero-one-ℝ : zero-ℝ ≠ one-ℝ
+neq-zero-one-ℝ = neq-zero-one-ℚ ∘ is-injective-real-ℚ
+
+neq-raise-zero-one-ℝ : (l : Level) → raise-zero-ℝ l ≠ raise-one-ℝ l
+neq-raise-zero-one-ℝ l 0=1ℝ =
+  neq-zero-one-ℚ
+    ( is-injective-real-ℚ
+      ( eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+            zero-ℝ
+            ~ℝ raise-ℝ l zero-ℝ
+              by sim-raise-ℝ l zero-ℝ
+            ~ℝ raise-ℝ l one-ℝ
+              by sim-eq-ℝ 0=1ℝ
+            ~ℝ one-ℝ
+              by sim-raise-ℝ' l one-ℝ)))
 ```

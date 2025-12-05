@@ -1038,33 +1038,6 @@ abstract
         by ap-add-ℝ (commutative-mul-ℝ z x) (commutative-mul-ℝ z y)
 ```
 
-### Zero laws
-
-```agda
-module _
-  {l : Level} (x : ℝ l)
-  where
-
-  abstract
-    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
-    left-zero-law-mul-ℝ =
-      inv-tr
-        ( λ y → sim-ℝ y zero-ℝ)
-        ( is-zero-is-idempotent-Ab
-          ( ab-add-ℝ l)
-          ( equational-reasoning
-            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
-            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
-              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
-            ＝ zero-ℝ *ℝ x
-              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
-        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
-
-    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
-    right-zero-law-mul-ℝ =
-      tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
-```
-
 ### The inclusion of rational numbers preserves multiplication
 
 ```agda
@@ -1164,6 +1137,54 @@ abstract
       ( a' *ℝ b')
       ( preserves-sim-right-mul-ℝ b' a a' a~a')
       ( preserves-sim-left-mul-ℝ a b b' b~b')
+```
+
+### Zero laws
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
+    left-zero-law-mul-ℝ =
+      inv-tr
+        ( λ y → sim-ℝ y zero-ℝ)
+        ( is-zero-is-idempotent-Ab
+          ( ab-add-ℝ l)
+          ( equational-reasoning
+            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
+            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
+              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
+            ＝ zero-ℝ *ℝ x
+              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
+
+    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
+    left-raise-zero-law-mul-ℝ =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          raise-zero-ℝ l *ℝ x
+          ~ℝ zero-ℝ *ℝ x
+            by
+              preserves-sim-right-mul-ℝ
+                ( x)
+                ( raise-zero-ℝ l)
+                ( zero-ℝ)
+                ( sim-raise-ℝ' l zero-ℝ)
+          ~ℝ zero-ℝ
+            by left-zero-law-mul-ℝ
+          ~ℝ raise-zero-ℝ l
+            by sim-raise-ℝ l zero-ℝ)
+
+    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
+    right-zero-law-mul-ℝ =
+      tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
+
+    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l ＝ raise-zero-ℝ l
+    right-raise-zero-law-mul-ℝ =
+      commutative-mul-ℝ _ _ ∙ left-raise-zero-law-mul-ℝ
 ```
 
 ### Swapping laws for multiplication on real numbers
@@ -1291,4 +1312,21 @@ abstract
         by right-distributive-mul-add-ℝ _ _ _
       ＝ multiple-Ab (ab-add-ℝ _) n x +ℝ x
         by ap-add-ℝ (left-mul-real-ℕ n x) (left-unit-law-mul-ℝ x)
+```
+
+### Multiplication by a raised real number
+
+```agda
+abstract
+  mul-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l x *ℝ y ＝ raise-ℝ l (x *ℝ y)
+  mul-left-raise-ℝ l x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l x *ℝ y
+        ~ℝ x *ℝ y
+          by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (x *ℝ y)
+          by sim-raise-ℝ l (x *ℝ y))
 ```

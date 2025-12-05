@@ -16,6 +16,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.logical-equivalences
@@ -23,6 +24,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
@@ -35,6 +37,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
@@ -81,38 +84,41 @@ apart-le-ℝ' = inr-disjunction
 ### Apartness is antireflexive
 
 ```agda
-antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
-antireflexive-apart-ℝ x =
-  elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
+abstract
+  antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
+  antireflexive-apart-ℝ x =
+    elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
 ```
 
 ### Apartness is symmetric
 
 ```agda
-symmetric-apart-ℝ :
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
-symmetric-apart-ℝ {x = x} {y = y} =
-  elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
+abstract
+  symmetric-apart-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
+  symmetric-apart-ℝ {x = x} {y = y} =
+    elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
 ```
 
 ### Apartness is cotransitive
 
 ```agda
-cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
-cotransitive-apart-ℝ x y z =
-  elim-disjunction
-    ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-    ( λ x<y →
-      map-disjunction
-        ( inl-disjunction)
-        ( inl-disjunction)
-        ( cotransitive-le-ℝ x y z x<y))
-    ( λ y<x →
-      elim-disjunction
-        ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-        ( inr-disjunction ∘ inr-disjunction)
-        ( inl-disjunction ∘ inr-disjunction)
-        ( cotransitive-le-ℝ y x z y<x))
+abstract
+  cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
+  cotransitive-apart-ℝ x y z =
+    elim-disjunction
+      ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
+      ( λ x<y →
+        map-disjunction
+          ( inl-disjunction)
+          ( inl-disjunction)
+          ( cotransitive-le-ℝ x y z x<y))
+      ( λ y<x →
+        elim-disjunction
+          ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
+          ( inr-disjunction ∘ inr-disjunction)
+          ( inl-disjunction ∘ inr-disjunction)
+          ( cotransitive-le-ℝ y x z y<x))
 ```
 
 ### Apartness on the reals is a large apartness relation
@@ -127,6 +133,14 @@ symmetric-Large-Apartness-Relation large-apartness-relation-ℝ _ _ =
   symmetric-apart-ℝ
 cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
   cotransitive-apart-ℝ
+```
+
+### Apartness on a particular universe level of the reals
+
+```agda
+apartness-relation-ℝ : (l : Level) → Apartness-Relation l (ℝ l)
+apartness-relation-ℝ =
+  apartness-relation-Large-Apartness-Relation large-apartness-relation-ℝ
 ```
 
 ### Apart real numbers are nonequal
@@ -149,6 +163,47 @@ apart-zero-one-ℝ = unit-trunc-Prop (inl le-zero-one-ℝ)
 ```agda
 zero-is-not-one-ℝ : zero-ℝ ≠ one-ℝ
 zero-is-not-one-ℝ = nonequal-apart-ℝ zero-ℝ one-ℝ apart-zero-one-ℝ
+```
+
+### Nonapart real numbers are similar
+
+```agda
+abstract
+  sim-nonapart-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → ¬ (apart-ℝ x y) → sim-ℝ x y
+  sim-nonapart-ℝ x y ¬x#y =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ y x ( ¬x#y ∘ apart-le-ℝ') ,
+        leq-not-le-ℝ x y ( ¬x#y ∘ apart-le-ℝ))
+```
+
+### Real numbers at the same universe level are equal if and only if they are not apart
+
+```agda
+abstract
+  eq-iff-nonapart-ℝ :
+    {l : Level} (x y : ℝ l) → (x ＝ y) ↔ ¬ (apart-ℝ x y)
+  eq-iff-nonapart-ℝ x y =
+    ( ( λ x=y x#y → nonequal-apart-ℝ x y x#y x=y) ,
+      eq-sim-ℝ ∘ sim-nonapart-ℝ x y)
+```
+
+### The apartness relation of real numbers is tight
+
+```agda
+abstract
+  is-tight-apartness-relation-ℝ :
+    (l : Level) → is-tight-Apartness-Relation (apartness-relation-ℝ l)
+  is-tight-apartness-relation-ℝ l x y =
+    backward-implication (eq-iff-nonapart-ℝ x y)
+
+tight-apartness-relation-ℝ :
+  (l : Level) → Tight-Apartness-Relation l (ℝ l)
+tight-apartness-relation-ℝ l =
+  ( apartness-relation-ℝ l ,
+    is-tight-apartness-relation-ℝ l)
+```
+
 ### Apartness is preserved by translation
 
 ```agda
@@ -246,6 +301,10 @@ module _
         ( cancel-right-diff-add-ℝ x y)
         ( sim-eq-ℝ (left-unit-law-add-ℝ y))
         ( preserves-apart-right-add-ℝ y _ _ x-y#0)
+
+  apart-iff-is-nonzero-diff-ℝ : (apart-ℝ x y) ↔ (is-nonzero-ℝ (x -ℝ y))
+  apart-iff-is-nonzero-diff-ℝ =
+    ( is-nonzero-diff-is-apart-ℝ , apart-is-nonzero-diff-ℝ)
 
   nonzero-diff-apart-ℝ : apart-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
   nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
