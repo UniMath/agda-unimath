@@ -26,9 +26,9 @@ open import metric-spaces.metric-spaces
 
 An
 {{#concept "extension" Disambiguation="of a metric space" Agda=extension-Metric-Space}}
-of a [metric space](metric-spaces.metric-spaces.md) `P`is a
-metric space `Q` together with an
-[isometry](metric-spaces.isometries-metric-spaces.md) `i : P → Q`.
+of a [metric space](metric-spaces.metric-spaces.md) `P`is a metric space `Q`
+together with an [isometry](metric-spaces.isometries-metric-spaces.md)
+`i : P → Q`.
 
 ## Definition
 
