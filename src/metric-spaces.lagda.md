@@ -57,6 +57,9 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
 open import metric-spaces.apartness-located-metric-spaces public
 open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
@@ -64,6 +67,7 @@ open import metric-spaces.bounded-distance-decompositions-of-metric-spaces publi
 open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
+open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
@@ -86,6 +90,8 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
+open import metric-spaces.extensions-metric-spaces public
+open import metric-spaces.extensions-pseudometric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
@@ -106,6 +112,7 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
+open import metric-spaces.metric-extensions-pseudometric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
