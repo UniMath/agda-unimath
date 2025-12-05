@@ -56,23 +56,23 @@ Our definition follows Definition 2.1 of {{#cite Babai00}}.
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Probability-Space l)
+  {l1 l2 : Level} (l3 : Level) (Ω : Finite-Probability-Space l1 l2)
   where
 
-  real-random-variable-Finite-Probability-Space : UU (lsuc lzero ⊔ l)
+  real-random-variable-Finite-Probability-Space : UU (l1 ⊔ lsuc l3)
   real-random-variable-Finite-Probability-Space =
-    type-Finite-Probability-Space Ω → ℝ lzero
+    type-Finite-Probability-Space Ω → ℝ l3
 ```
 
 ### Constant random variables in a finite probability space
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Probability-Space l)
+  {l1 l2 : Level} (Ω : Finite-Probability-Space l1 l2)
   where
 
   const-real-random-variable-Finite-Probablity-Space :
-    (x : ℝ lzero) → real-random-variable-Finite-Probability-Space Ω
+    (x : ℝ l2) → real-random-variable-Finite-Probability-Space l2 Ω
   const-real-random-variable-Finite-Probablity-Space x _ = x
 ```
 
@@ -80,12 +80,12 @@ module _
 
 ```agda
 module _
-  {l : Level} (Ω : Finite-Probability-Space l)
+  {l1 l2 : Level} (Ω : Finite-Probability-Space l1 l2)
   (e : type-Finite-Probability-Space Ω)
   where
 
   atomic-real-random-variable-Finite-Probability-Space :
-    real-random-variable-Finite-Probability-Space Ω
+    real-random-variable-Finite-Probability-Space lzero Ω
   atomic-real-random-variable-Finite-Probability-Space e' =
     rec-coproduct
       ( λ _ → one-ℝ)
