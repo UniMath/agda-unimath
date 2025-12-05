@@ -56,7 +56,7 @@ module _
     Id-Prop
       ( ℝ-Set l2)
       ( total-measure-positive-distribution-Finite-Type Ω Pr)
-      ( one-ring-ℝ l2)
+      ( raise-one-ℝ l2)
 
   is-probability-distribution-positive-distribution-Finite-Type :
     UU (lsuc l2)

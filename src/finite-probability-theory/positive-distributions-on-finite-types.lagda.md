@@ -95,7 +95,7 @@ module _
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type :
     is-empty (type-Finite-Type Ω) →
     total-measure-positive-distribution-Finite-Type Ω Pr ＝
-    zero-ring-ℝ l2
+    raise-zero-ℝ l2
   is-zero-total-measure-positive-distribution-is-empty-Finite-Type H =
     eq-zero-sum-finite-is-empty-Commutative-Ring
       ( commutative-ring-ℝ l2)
