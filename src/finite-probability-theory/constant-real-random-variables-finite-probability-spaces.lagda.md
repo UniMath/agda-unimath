@@ -22,7 +22,7 @@ open import real-numbers.dedekind-real-numbers
 ## Idea
 
 Any [real number](real-numbers.dedekind-real-numbers.md) `x` defines a
-{{#concept "constant real random variable" Disambiguation="in a finite probability space" Agda=constant-real-random-variable-Finite-Probability-Space}}
+{{#concept "constant real random variable" Disambiguation="in a finite probability space" Agda=const-real-random-variable-Finite-Probability-Space}}
 on any
 [finite probability space](finite-probability-theory.finite-probability-spaces.md)
 `Ω`: the
