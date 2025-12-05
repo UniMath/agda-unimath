@@ -33,7 +33,7 @@ open import real-numbers.subsets-real-numbers
 
 A function `f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
 themselves is
-{{#concept "strictly increasing" WDID=Q78055984 WD="strictly increasing function" Disambiguation="function from ℝ to ℝ" Agda=is-strictly-increasing-function-ℝ}}
+{{#concept "strictly increasing" Disambiguation="function from ℝ to ℝ" Agda=is-strictly-increasing-function-ℝ}}
 if for all `x < y`, `f x < f y`.
 
 Several arguments on this page are due to

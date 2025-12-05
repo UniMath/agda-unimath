@@ -76,7 +76,7 @@ module _
     type-Prop is-point-limit-prop-function-Metric-Space
 ```
 
-## The classical `(ε, δ)` definition of a limit
+## The classical ε-δ-definition of a limit
 
 The
 {{#concept "classical definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-classical-limit-function-Metric-Space}}
