@@ -1,4 +1,4 @@
-# The action of short maps on Cauchy approximations in pseudometric spaces
+# The action on Cauchy approximations of short maps between pseudometric spaces
 
 ```agda
 module metric-spaces.action-of-short-maps-on-cauchy-approximations-pseudometric-spaces where
