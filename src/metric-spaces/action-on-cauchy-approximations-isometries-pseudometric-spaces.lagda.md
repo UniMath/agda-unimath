@@ -1,7 +1,7 @@
-# The action of isometries on Cauchy approximations in pseudometric spaces
+# The action on Cauchy approximations of isometries between pseudometric spaces
 
 ```agda
-module metric-spaces.action-of-isometries-on-cauchy-approximations-pseudometric-spaces where
+module metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
@@ -32,9 +32,9 @@ open import metric-spaces.short-functions-pseudometric-spaces
 ## Idea
 
 [Isometries](metric-spaces.isometries-pseudometric-spaces.md) between
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on their
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-and induce an isometry between their
+and induce an isometry between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
 
 ## Definitions

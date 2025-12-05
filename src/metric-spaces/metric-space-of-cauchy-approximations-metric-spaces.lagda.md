@@ -17,7 +17,7 @@ open import foundation.involutions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces

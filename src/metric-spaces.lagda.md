@@ -57,9 +57,9 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
-open import metric-spaces.action-of-isometries-on-cauchy-approximations-pseudometric-spaces public
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-metric-spaces public
-open import metric-spaces.action-of-short-maps-on-cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
 open import metric-spaces.apartness-located-metric-spaces public
 open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
@@ -101,7 +101,6 @@ open import metric-spaces.images-uniformly-continuous-functions-metric-spaces pu
 open import metric-spaces.indexed-sums-metric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
-open import metric-spaces.isometries-between-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
@@ -111,7 +110,6 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
-open import metric-spaces.metric-extensions public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
