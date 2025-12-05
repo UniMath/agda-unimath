@@ -71,7 +71,7 @@ of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is a
 
 This is equivalent to the type of
 {{#concept "extensional extensions" Disambiguation="of a pseudometric space" Agda=extensional-extension-Pseudometric-Space}},
-[extensions](metric-spaces.extensions-of-pseudometric-spaces.md) of pseudometric
+[extensions](metric-spaces.extensions-pseudometric-spaces.md) of pseudometric
 spaces `i  : P → Q` such that `Q` is
 [extensional](metric-spaces.extensionality-pseudometric-spaces.md).
 
