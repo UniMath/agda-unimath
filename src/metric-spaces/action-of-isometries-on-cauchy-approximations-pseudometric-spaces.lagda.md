@@ -32,9 +32,9 @@ open import metric-spaces.short-functions-pseudometric-spaces
 ## Idea
 
 [Isometries](metric-spaces.isometries-pseudometric-spaces.md) between
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on their
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-and induce an isometry between their
+and induce an isometry between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
 
 ## Definitions
