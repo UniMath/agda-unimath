@@ -38,7 +38,7 @@ module _
   {l1 l2 : Level} (Ω : Finite-Probability-Space l1 l2)
   where
 
-  const-real-random-variable-Finite-Probablity-Space :
+  const-real-random-variable-Finite-Probability-Space :
     (x : ℝ l2) → real-random-variable-Finite-Probability-Space l2 Ω
-  const-real-random-variable-Finite-Probablity-Space x _ = x
+  const-real-random-variable-Finite-Probability-Space x _ = x
 ```
