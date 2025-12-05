@@ -434,7 +434,7 @@ module _
       ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
 ```
 
-### The isometry from the Cauchy pseudocompletion of a complete metric space to its limit
+### The isometry mapping a Cauchy approximation in a complete metric space to its limit
 
 ```agda
 module _
