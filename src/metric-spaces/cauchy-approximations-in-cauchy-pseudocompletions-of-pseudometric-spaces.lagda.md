@@ -3,7 +3,9 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces where
+module
+  metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
+  where
 ```
 
 <details><summary>Imports</summary>
