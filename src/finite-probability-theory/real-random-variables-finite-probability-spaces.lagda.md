@@ -64,38 +64,6 @@ module _
     type-Finite-Probability-Space Ω → ℝ l3
 ```
 
-### Constant random variables in a finite probability space
-
-```agda
-module _
-  {l1 l2 : Level} (Ω : Finite-Probability-Space l1 l2)
-  where
-
-  const-real-random-variable-Finite-Probablity-Space :
-    (x : ℝ l2) → real-random-variable-Finite-Probability-Space l2 Ω
-  const-real-random-variable-Finite-Probablity-Space x _ = x
-```
-
-### Atomic real random variables in a finite probability space
-
-```agda
-module _
-  {l1 l2 : Level} (Ω : Finite-Probability-Space l1 l2)
-  (e : type-Finite-Probability-Space Ω)
-  where
-
-  atomic-real-random-variable-Finite-Probability-Space :
-    real-random-variable-Finite-Probability-Space lzero Ω
-  atomic-real-random-variable-Finite-Probability-Space e' =
-    rec-coproduct
-      ( λ _ → one-ℝ)
-      ( λ _ → zero-ℝ)
-      ( has-decidable-equality-is-finite
-        ( is-finite-type-Finite-Probability-Space Ω)
-        ( e)
-        ( e'))
-```
-
 ## References
 
 {{#bibliography}}
