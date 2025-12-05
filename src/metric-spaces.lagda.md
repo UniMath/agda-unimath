@@ -90,6 +90,7 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
+open import metric-spaces.extensions-pseudometric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
@@ -110,6 +111,7 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
+open import metric-spaces.metric-extensions-pseudometric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
