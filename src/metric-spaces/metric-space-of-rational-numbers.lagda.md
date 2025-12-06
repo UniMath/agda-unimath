@@ -546,19 +546,19 @@ is-cauchy-approximation-rational-ℚ⁺ ε δ =
       ( rational-ℚ⁺ δ)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
       ( rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-right-add-ℚ⁺
+      ( le-left-add-ℚ⁺
         ( ε)
         ( ε +ℚ⁺ δ))
-      ( le-right-add-ℚ⁺ ε δ))) ,
+      ( le-left-add-ℚ⁺ ε δ))) ,
   ( leq-le-ℚ
     ( transitive-le-ℚ
       ( rational-ℚ⁺ ε)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
       ( rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-right-add-ℚ⁺
+      ( le-left-add-ℚ⁺
         ( δ)
         ( ε +ℚ⁺ δ))
-      ( le-left-add-ℚ⁺ ε δ)))
+      ( le-right-add-ℚ⁺ ε δ)))
 
 cauchy-approximation-rational-ℚ⁺ :
   cauchy-approximation-Metric-Space metric-space-ℚ
@@ -582,7 +582,7 @@ is-zero-limit-rational-ℚ⁺ ε δ =
     ( inv-tr
       ( le-ℚ (rational-ℚ⁺ ε))
       ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-left-add-ℚ⁺ ε δ)))
+      ( le-right-add-ℚ⁺ ε δ)))
 
 convergent-rational-ℚ⁺ :
   convergent-cauchy-approximation-Metric-Space metric-space-ℚ
