@@ -324,7 +324,7 @@ This remains to be shown.
 abstract
   is-pointwise-continuous-mul-ℝ :
     (l1 l2 : Level) →
-    is-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
       ( ind-Σ mul-ℝ)

@@ -481,22 +481,22 @@ abstract
 ```agda
 abstract
   is-pointwise-continuous-power-ℝ :
-    {l : Level} (n : ℕ) → is-pointwise-continuous-function-ℝ {l} (power-ℝ n)
+    {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
   is-pointwise-continuous-power-ℝ 0 =
     is-pointwise-continuous-constant-function-Metric-Space _ _ _
   is-pointwise-continuous-power-ℝ 1 =
     is-pointwise-continuous-id-Metric-Space _
   is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
-    is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
       ( metric-space-ℝ l)
       ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
       ( metric-space-ℝ l)
       ( ind-Σ mul-ℝ , is-pointwise-continuous-mul-ℝ l l)
-      ( comp-pointwise-continuous-function-Metric-Space
+      ( comp-pointwise-continuous-map-Metric-Space
         ( metric-space-ℝ l)
         ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
         ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-        ( product-pointwise-continuous-function-Metric-Space
+        ( product-pointwise-continuous-map-Metric-Space
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
@@ -506,11 +506,11 @@ abstract
         ( pointwise-continuous-isometry-Metric-Space
           ( metric-space-ℝ l)
           ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-          ( diagonal-isometry-product-Metric-Space (metric-space-ℝ l))))
+          ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))
 
-pointwise-continuous-power-ℝ :
-  (l : Level) (n : ℕ) → pointwise-continuous-function-ℝ l l
-pointwise-continuous-power-ℝ l n =
+pointwise-continuous-map-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-continuous-map-ℝ l l
+pointwise-continuous-map-power-ℝ l n =
   ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
 ```
 
@@ -518,12 +518,12 @@ pointwise-continuous-power-ℝ l n =
 
 ```agda
 abstract
-  is-strictly-increasing-odd-power-ℝ :
+  is-strictly-increasing-power-is-odd-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-strictly-increasing-function-ℝ (power-ℝ {l} n)
-  is-strictly-increasing-odd-power-ℝ l n odd-n =
+  is-strictly-increasing-power-is-odd-ℝ l n odd-n =
     is-strictly-increasing-is-strictly-increasing-rational-ℝ
-      ( pointwise-continuous-power-ℝ l n)
+      ( pointwise-continuous-map-power-ℝ l n)
       ( λ p q p<q →
         binary-tr
           ( le-ℝ)
@@ -532,17 +532,17 @@ abstract
           ( le-raise-le-ℝ l
             ( preserves-le-real-ℚ (preserves-le-odd-power-ℚ n p q odd-n p<q))))
 
-  preserves-le-odd-power-ℝ :
+  preserves-le-power-is-odd-ℝ :
     {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → le-ℝ x y →
     le-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-le-odd-power-ℝ {l1} {l2} n {x} {y} odd-n x<y =
+  preserves-le-power-is-odd-ℝ {l1} {l2} n {x} {y} odd-n x<y =
     le-le-raise-ℝ
       ( l1 ⊔ l2)
       ( binary-tr
         ( le-ℝ)
         ( power-raise-ℝ (l1 ⊔ l2) n x)
         ( power-raise-ℝ (l1 ⊔ l2) n y)
-        ( is-strictly-increasing-odd-power-ℝ
+        ( is-strictly-increasing-power-is-odd-ℝ
           ( l1 ⊔ l2)
           ( n)
           ( odd-n)
@@ -560,24 +560,24 @@ module _
   where
 
   abstract
-    is-increasing-odd-power-ℝ :
+    is-increasing-power-is-odd-ℝ :
       (l : Level) → is-increasing-function-ℝ (power-ℝ {l} n)
-    is-increasing-odd-power-ℝ l =
+    is-increasing-power-is-odd-ℝ l =
       is-increasing-is-strictly-increasing-function-ℝ
         ( power-ℝ n)
-        ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+        ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
 
-    preserves-leq-odd-power-ℝ :
+    preserves-leq-power-is-odd-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
       leq-ℝ x y → leq-ℝ (power-ℝ n x) (power-ℝ n y)
-    preserves-leq-odd-power-ℝ {l1} {l2} {x} {y} x≤y =
+    preserves-leq-power-is-odd-ℝ {l1} {l2} {x} {y} x≤y =
       leq-leq-raise-ℝ
         ( l1 ⊔ l2)
         ( binary-tr
           ( leq-ℝ)
           ( power-raise-ℝ (l1 ⊔ l2) n x)
           ( power-raise-ℝ (l1 ⊔ l2) n y)
-          ( is-increasing-odd-power-ℝ
+          ( is-increasing-power-is-odd-ℝ
             ( l1 ⊔ l2)
             ( raise-ℝ (l1 ⊔ l2) x)
             ( raise-ℝ (l1 ⊔ l2) y)

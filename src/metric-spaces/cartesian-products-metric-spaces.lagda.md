@@ -10,6 +10,7 @@ module metric-spaces.cartesian-products-metric-spaces where
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
 open import foundation.function-extensionality
@@ -154,9 +155,9 @@ module _
   (X : Metric-Space l1 l2)
   where
 
-  diagonal-isometry-product-Metric-Space :
+  diagonal-product-isometry-Metric-Space :
     isometry-Metric-Space X (product-Metric-Space X X)
-  diagonal-isometry-product-Metric-Space =
-    ( ( λ x → (x , x)) ,
+  diagonal-product-isometry-Metric-Space =
+    ( diagonal-product (type-Metric-Space X) ,
       ( λ _ _ _ → ((λ N → (N , N)) , pr1)))
 ```
