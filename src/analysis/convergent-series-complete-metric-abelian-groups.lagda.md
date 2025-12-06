@@ -14,6 +14,7 @@ open import analysis.series-complete-metric-abelian-groups
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
@@ -55,6 +56,11 @@ module _
 
   is-convergent-series-Complete-Metric-Ab : UU (l1 ⊔ l2)
   is-convergent-series-Complete-Metric-Ab = is-convergent-series-Metric-Ab σ
+
+convergent-series-Complete-Metric-Ab :
+  {l1 l2 : Level} (G : Complete-Metric-Ab l1 l2) → UU (l1 ⊔ l2)
+convergent-series-Complete-Metric-Ab G =
+  type-subtype (is-convergent-prop-series-Complete-Metric-Ab G)
 ```
 
 ## Properties

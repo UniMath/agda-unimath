@@ -9,6 +9,7 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.archimedean-property-positive-rational-numbers
@@ -84,6 +85,31 @@ module _
   is-cauchy-modulus-sequence-Metric-Space ε N =
     (m k : ℕ) → leq-ℕ N m → leq-ℕ N k →
     neighborhood-Metric-Space M ε (x m) (x k)
+
+  is-cauchy-modulus-sequence-Metric-Space' : ℚ⁺ → ℕ → UU l2
+  is-cauchy-modulus-sequence-Metric-Space' ε N =
+    (m k : ℕ) → leq-ℕ N m →
+    neighborhood-Metric-Space M ε (x (m +ℕ k)) (x m)
+
+  is-cauchy-modulus-is-cauchy-modulus-sequence-Metric-Space' :
+    (ε : ℚ⁺) (N : ℕ) → is-cauchy-modulus-sequence-Metric-Space' ε N →
+    is-cauchy-modulus-sequence-Metric-Space ε N
+  is-cauchy-modulus-is-cauchy-modulus-sequence-Metric-Space' ε N H m k N≤m N≤k =
+    let
+      case a b N≤a a≤b =
+        let
+          ( c , c+a=b) = subtraction-leq-ℕ a b a≤b
+        in
+          tr
+            ( λ d → neighborhood-Metric-Space M ε (x d) (x a))
+            ( commutative-add-ℕ a c ∙ c+a=b)
+            ( H a c N≤a)
+    in
+      rec-coproduct
+        ( λ m≤k →
+          symmetric-neighborhood-Metric-Space M ε _ _ (case m k N≤m m≤k))
+        ( λ k≤m → case k m N≤k k≤m)
+        ( linear-leq-ℕ m k)
 
   is-cauchy-sequence-Metric-Space : UU l2
   is-cauchy-sequence-Metric-Space =
@@ -770,6 +796,56 @@ module _
   pair-cauchy-sequence-Metric-Space =
     ( sequence-pair-cauchy-sequence-Metric-Space ,
       is-cauchy-sequence-pair-cauchy-sequence-Metric-Space)
+```
+
+### To show a sequence `aₙ` is Cauchy, it suffices to have a modulus function such that for any `ε`, `aₙ` and `aₙ₊ₖ` are in an `ε`-neighborhood for sufficiently large `n`
+
+```agda
+module
+  _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  (a : sequence-type-Metric-Space X)
+  (μ : ℚ⁺ → ℕ)
+  where
+
+  abstract
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space :
+      ( (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (μ ε) n →
+        neighborhood-Metric-Space X ε (a (n +ℕ k)) (a n)) →
+      (ε : ℚ⁺) →
+      is-cauchy-modulus-sequence-Metric-Space X a ε (μ ε)
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε p q με≤p με≤q =
+      let
+        lemma :
+          (m n : ℕ) → leq-ℕ (μ ε) m → leq-ℕ m n →
+          neighborhood-Metric-Space X ε (a n) (a m)
+        lemma m n με≤m m≤n =
+          let
+            ( k , k+m=n) = subtraction-leq-ℕ m n m≤n
+          in
+            tr
+              ( λ p → neighborhood-Metric-Space X ε (a p) (a m))
+              ( commutative-add-ℕ m k ∙ k+m=n)
+              ( H ε m k με≤m)
+      in
+        rec-coproduct
+          ( λ p≤q →
+            symmetric-neighborhood-Metric-Space
+              ( X)
+              ( ε)
+              ( a q)
+              ( a p)
+              ( lemma p q με≤p p≤q))
+          ( lemma q p με≤q)
+          ( linear-leq-ℕ p q)
+
+  is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space :
+    ( (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (μ ε) n →
+      neighborhood-Metric-Space X ε (a (n +ℕ k)) (a n)) →
+    is-cauchy-sequence-Metric-Space X a
+  is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space H ε =
+    ( μ ε , is-cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε)
 ```
 
 ## See also
