@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import order-theory.monotonic-sequences-posets
+open import order-theory.increasing-sequences-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
@@ -74,12 +74,12 @@ is-nonnegative-series-ℝ σ = type-Prop (is-nonnegative-prop-series-ℝ σ)
 
 ```agda
 abstract
-  is-monotonic-partial-sum-is-nonnegative-term-series-ℝ :
+  is-increasing-partial-sum-is-nonnegative-term-series-ℝ :
     {l : Level} (σ : series-ℝ l) →
     is-nonnegative-series-ℝ σ →
-    is-monotonic-sequence-Poset (ℝ-Poset l) (partial-sum-series-ℝ σ)
-  is-monotonic-partial-sum-is-nonnegative-term-series-ℝ {l} σ H =
-    is-monotonic-sequence-is-increasing-Poset
+    is-increasing-sequence-Poset (ℝ-Poset l) (partial-sum-series-ℝ σ)
+  is-increasing-partial-sum-is-nonnegative-term-series-ℝ {l} σ H =
+    is-increasing-leq-succ-sequence-Poset
       ( ℝ-Poset l)
       ( partial-sum-series-ℝ σ)
       ( λ n → leq-left-add-real-ℝ⁰⁺ _ (term-series-ℝ σ n , H n))

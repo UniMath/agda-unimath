@@ -9,6 +9,8 @@ module linear-algebra.real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -71,6 +73,15 @@ module _
   metric-space-ℝ-Banach-Space =
     metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
+  type-ℝ-Banach-Space : UU l2
+  type-ℝ-Banach-Space =
+    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  neighborhood-ℝ-Banach-Space :
+    ℚ⁺ → type-ℝ-Banach-Space → type-ℝ-Banach-Space → UU l1
+  neighborhood-ℝ-Banach-Space =
+    neighborhood-Metric-Space metric-space-ℝ-Banach-Space
+
   is-complete-metric-space-ℝ-Banach-Space :
     is-complete-Metric-Space metric-space-ℝ-Banach-Space
   is-complete-metric-space-ℝ-Banach-Space = pr2 V
@@ -78,10 +89,6 @@ module _
   complete-metric-space-ℝ-Banach-Space : Complete-Metric-Space l2 l1
   complete-metric-space-ℝ-Banach-Space =
     ( metric-space-ℝ-Banach-Space , is-complete-metric-space-ℝ-Banach-Space)
-
-  type-ℝ-Banach-Space : UU l2
-  type-ℝ-Banach-Space =
-    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   map-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ l1
   map-norm-ℝ-Banach-Space =

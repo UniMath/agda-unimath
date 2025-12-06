@@ -14,15 +14,19 @@ open import commutative-algebra.trivial-commutative-rings
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.universe-levels
 
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.local-ring-of-real-numbers
+open import real-numbers.multiplication-nonzero-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -70,4 +74,17 @@ heyting-field-ℝ : (l : Level) → Heyting-Field (lsuc l)
 heyting-field-ℝ l =
   ( local-commutative-ring-ℝ l ,
     is-heyting-field-local-commutative-ring-ℝ l)
+```
+
+## Properties
+
+### The apartness relation of the Heyting field of real numbers agrees with the apartness relation of the real numbers
+
+```agda
+apart-iff-apart-heyting-field-ℝ :
+  {l : Level} (x y : ℝ l) →
+  (apart-ℝ x y) ↔ (apart-Heyting-Field (heyting-field-ℝ l) x y)
+apart-iff-apart-heyting-field-ℝ x y =
+  ( inv-iff (is-invertible-iff-is-nonzero-ℝ (x -ℝ y))) ∘iff
+  ( apart-iff-is-nonzero-diff-ℝ x y)
 ```

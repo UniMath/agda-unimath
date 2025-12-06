@@ -84,7 +84,7 @@ module _
                 ( n)
                 ( σ ∘ inl-Fin n))) +ℝ
             ( map-norm-Normed-ℝ-Vector-Space V (σ (neg-one-Fin n)))
-            by triangular-Normed-ℝ-Vector-Space V _ _
+            by triangular-norm-Normed-ℝ-Vector-Space V _ _
           ≤ sum-fin-sequence-ℝ (succ-ℕ n) (map-norm-Normed-ℝ-Vector-Space V ∘ σ)
             by
               preserves-leq-right-add-ℝ _ _ _
