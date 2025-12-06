@@ -22,8 +22,9 @@ open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
+open import real-numbers.classical-limits-of-functions-real-numbers public
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
-open import real-numbers.convergent-series-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -46,12 +47,14 @@ open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers public
+open import real-numbers.integer-powers-positive-real-numbers public
 open import real-numbers.irrational-real-numbers public
 open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-difference-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
 open import real-numbers.large-additive-group-of-real-numbers public
+open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.limits-of-functions-real-numbers public
@@ -64,7 +67,7 @@ open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
-open import real-numbers.metric-abelian-group-of-real-numbers public
+open import real-numbers.metric-additive-group-of-real-numbers public
 open import real-numbers.metric-space-of-nonnegative-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public
@@ -92,7 +95,7 @@ open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
-open import real-numbers.rational-approximations-of-real-numbers public
+open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
@@ -101,7 +104,6 @@ open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
-open import real-numbers.series-real-numbers public
 open import real-numbers.short-function-binary-maximum-real-numbers public
 open import real-numbers.short-function-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public

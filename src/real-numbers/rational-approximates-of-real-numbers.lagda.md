@@ -1,7 +1,7 @@
-# Rational approximations of real numbers
+# Rational approximates of real numbers
 
 ```agda
-module real-numbers.rational-approximations-of-real-numbers where
+module real-numbers.rational-approximates-of-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -35,7 +35,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 A
-{{#concept "rational approximation" Disambiguation="of a real number" Agda=rational-approximation-ℝ}}
+{{#concept "rational approximate" Disambiguation="of a real number" Agda=rational-approximate-ℝ}}
 of a [real number](real-numbers.dedekind-real-numbers.md) `x` to some
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`
 is a [rational number](elementary-number-theory.rational-numbers.md) whose
@@ -46,8 +46,8 @@ is within an `ε`-neighborhood of `x` in the
 ## Definition
 
 ```agda
-rational-approximation-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
-rational-approximation-ℝ {l} x ε =
+rational-approximate-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
+rational-approximate-ℝ {l} x ε =
   Σ ℚ (λ q → neighborhood-ℝ l ε x (raise-real-ℚ l q))
 
 rational-approximation-above-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l

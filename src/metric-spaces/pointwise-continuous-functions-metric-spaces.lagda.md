@@ -37,7 +37,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ## Idea
 
 A
-{{#concept "pointwise continuous function" Disambiguation="between metric spaces" Agda=pointwise-continuous-function-Metric-Space}}
+{{#concept "pointwise continuous function" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
 from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space `Y`
 is a function `f : X → Y` which is
 [continuous at every point](metric-spaces.continuity-of-functions-at-points-in-metric-spaces.md)
@@ -59,33 +59,33 @@ module _
       ( type-Metric-Space X)
       ( is-continuous-at-point-prop-function-Metric-Space X Y f)
 
-  is-pointwise-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-pointwise-continuous-function-Metric-Space =
+  is-pointwise-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-pointwise-continuous-map-Metric-Space =
     type-Prop is-pointwise-continuous-prop-function-Metric-Space
 
-pointwise-continuous-function-Metric-Space :
+pointwise-continuous-map-Metric-Space :
   {l1 l2 l3 l4 : Level} → Metric-Space l1 l2 → Metric-Space l3 l4 →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-pointwise-continuous-function-Metric-Space X Y =
+pointwise-continuous-map-Metric-Space X Y =
   type-subtype (is-pointwise-continuous-prop-function-Metric-Space X Y)
 
 module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : pointwise-continuous-function-Metric-Space X Y)
+  (f : pointwise-continuous-map-Metric-Space X Y)
   where
 
-  map-pointwise-continuous-function-Metric-Space :
+  map-pointwise-continuous-map-Metric-Space :
     type-function-Metric-Space X Y
-  map-pointwise-continuous-function-Metric-Space = pr1 f
+  map-pointwise-continuous-map-Metric-Space = pr1 f
 
-  is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space :
-    is-pointwise-continuous-function-Metric-Space
+  is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space :
+    is-pointwise-continuous-map-Metric-Space
       ( X)
       ( Y)
-      ( map-pointwise-continuous-function-Metric-Space)
-  is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space = pr2 f
+      ( map-pointwise-continuous-map-Metric-Space)
+  is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space = pr2 f
 ```
 
 ### The classical definition of pointwise continuity
@@ -112,64 +112,6 @@ module _
 
 ## Properties
 
-### Constructively pointwise continuous functions are classically pointwise continuous
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (f : pointwise-continuous-function-Metric-Space X Y)
-  where
-
-  abstract
-    is-classically-pointwise-continuous-pointwise-continuous-function-Metric-Space :
-      is-classically-pointwise-continuous-function-Metric-Space
-        ( X)
-        ( Y)
-        ( map-pointwise-continuous-function-Metric-Space X Y f)
-    is-classically-pointwise-continuous-pointwise-continuous-function-Metric-Space
-      x =
-      is-classical-limit-is-limit-function-Metric-Space
-        ( X)
-        ( Y)
-        ( map-pointwise-continuous-function-Metric-Space X Y f)
-        ( x)
-        ( map-pointwise-continuous-function-Metric-Space X Y f x)
-        ( is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space
-          ( X)
-          ( Y)
-          ( f)
-          ( x))
-```
-
-### Assuming countable choice, classically pointwise continuous functions are continuous
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (acω : ACω)
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
-  where
-
-  abstract
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space :
-      is-classically-pointwise-continuous-function-Metric-Space X Y f →
-      is-pointwise-continuous-function-Metric-Space X Y f
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space
-      H x =
-      is-limit-is-classical-limit-ACω-function-Metric-Space
-        ( acω)
-        ( X)
-        ( Y)
-        ( f)
-        ( x)
-        ( f x)
-        ( H x)
-```
-
 ### The Cartesian product of pointwise continuous functions on metric spaces
 
 ```agda
@@ -177,25 +119,25 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
   (C : Metric-Space l5 l6) (D : Metric-Space l7 l8)
-  (f : pointwise-continuous-function-Metric-Space A B)
-  (g : pointwise-continuous-function-Metric-Space C D)
+  (f : pointwise-continuous-map-Metric-Space A B)
+  (g : pointwise-continuous-map-Metric-Space C D)
   where
 
-  map-product-pointwise-continuous-function-Metric-Space :
+  map-product-pointwise-continuous-map-Metric-Space :
     type-Metric-Space A × type-Metric-Space C →
     type-Metric-Space B × type-Metric-Space D
-  map-product-pointwise-continuous-function-Metric-Space =
+  map-product-pointwise-continuous-map-Metric-Space =
     map-product
-      ( map-pointwise-continuous-function-Metric-Space A B f)
-      ( map-pointwise-continuous-function-Metric-Space C D g)
+      ( map-pointwise-continuous-map-Metric-Space A B f)
+      ( map-pointwise-continuous-map-Metric-Space C D g)
 
   abstract
-    is-pointwise-continuous-map-product-pointwise-continuous-function-Metric-Space :
-      is-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-product-pointwise-continuous-map-Metric-Space :
+      is-pointwise-continuous-map-Metric-Space
         ( product-Metric-Space A C)
         ( product-Metric-Space B D)
-        ( map-product-pointwise-continuous-function-Metric-Space)
-    is-pointwise-continuous-map-product-pointwise-continuous-function-Metric-Space
+        ( map-product-pointwise-continuous-map-Metric-Space)
+    is-pointwise-continuous-map-product-pointwise-continuous-map-Metric-Space
       ( a , c) =
       let
         open
@@ -203,18 +145,18 @@ module _
             ( is-point-limit-prop-function-Metric-Space
               ( product-Metric-Space A C)
               ( product-Metric-Space B D)
-              ( map-product-pointwise-continuous-function-Metric-Space)
+              ( map-product-pointwise-continuous-map-Metric-Space)
               ( a , c)
-              ( map-product-pointwise-continuous-function-Metric-Space (a , c)))
+              ( map-product-pointwise-continuous-map-Metric-Space (a , c)))
       in do
         (μf , is-mod-μf) ←
-          is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space
+          is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space
             ( A)
             ( B)
             ( f)
             ( a)
         (μg , is-mod-μg) ←
-          is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space
+          is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space
             ( C)
             ( D)
             ( g)
@@ -245,13 +187,13 @@ module _
                   ( leq-right-min-ℚ⁺ (μf ε) (μg ε))
                   ( Ncc'))))
 
-  product-pointwise-continuous-function-Metric-Space :
-    pointwise-continuous-function-Metric-Space
+  product-pointwise-continuous-map-Metric-Space :
+    pointwise-continuous-map-Metric-Space
       ( product-Metric-Space A C)
       ( product-Metric-Space B D)
-  product-pointwise-continuous-function-Metric-Space =
-    ( map-product-pointwise-continuous-function-Metric-Space ,
-      is-pointwise-continuous-map-product-pointwise-continuous-function-Metric-Space)
+  product-pointwise-continuous-map-Metric-Space =
+    ( map-product-pointwise-continuous-map-Metric-Space ,
+      is-pointwise-continuous-map-product-pointwise-continuous-map-Metric-Space)
 ```
 
 ### The composition of pointwise continuous functions
@@ -262,55 +204,55 @@ module _
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (Z : Metric-Space l5 l6)
-  (f : pointwise-continuous-function-Metric-Space Y Z)
-  (g : pointwise-continuous-function-Metric-Space X Y)
+  (f : pointwise-continuous-map-Metric-Space Y Z)
+  (g : pointwise-continuous-map-Metric-Space X Y)
   where
 
-  map-comp-pointwise-continuous-function-Metric-Space :
+  map-comp-pointwise-continuous-map-Metric-Space :
     type-function-Metric-Space X Z
-  map-comp-pointwise-continuous-function-Metric-Space =
-    map-pointwise-continuous-function-Metric-Space Y Z f ∘
-    map-pointwise-continuous-function-Metric-Space X Y g
+  map-comp-pointwise-continuous-map-Metric-Space =
+    map-pointwise-continuous-map-Metric-Space Y Z f ∘
+    map-pointwise-continuous-map-Metric-Space X Y g
 
   abstract
-    is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space :
-      is-pointwise-continuous-function-Metric-Space X Z
-        ( map-comp-pointwise-continuous-function-Metric-Space)
-    is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space :
+      is-pointwise-continuous-map-Metric-Space X Z
+        ( map-comp-pointwise-continuous-map-Metric-Space)
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
       x =
       let
         open
           do-syntax-trunc-Prop
             ( is-point-limit-prop-function-Metric-Space X Z
-              ( map-comp-pointwise-continuous-function-Metric-Space)
+              ( map-comp-pointwise-continuous-map-Metric-Space)
               ( x)
-              ( map-comp-pointwise-continuous-function-Metric-Space x))
+              ( map-comp-pointwise-continuous-map-Metric-Space x))
       in do
         (μg , is-mod-μg) ←
-          is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space
+          is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space
             ( X)
             ( Y)
             ( g)
             ( x)
         (μf , is-mod-μf) ←
-          is-pointwise-continuous-map-pointwise-continuous-function-Metric-Space
+          is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space
             ( Y)
             ( Z)
             ( f)
-            ( map-pointwise-continuous-function-Metric-Space X Y g x)
+            ( map-pointwise-continuous-map-Metric-Space X Y g x)
         intro-exists
           ( μg ∘ μf)
           ( λ ε x' Nxx' →
             is-mod-μf
               ( ε)
-              ( map-pointwise-continuous-function-Metric-Space X Y g x')
+              ( map-pointwise-continuous-map-Metric-Space X Y g x')
               ( is-mod-μg (μf ε) x' Nxx'))
 
-  comp-pointwise-continuous-function-Metric-Space :
-    pointwise-continuous-function-Metric-Space X Z
-  comp-pointwise-continuous-function-Metric-Space =
-    ( map-comp-pointwise-continuous-function-Metric-Space ,
-      is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space)
+  comp-pointwise-continuous-map-Metric-Space :
+    pointwise-continuous-map-Metric-Space X Z
+  comp-pointwise-continuous-map-Metric-Space =
+    ( map-comp-pointwise-continuous-map-Metric-Space ,
+      is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space)
 ```
 
 ### Uniformly continuous functions are pointwise continuous
@@ -326,13 +268,13 @@ module _
     is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space :
       (f : type-function-Metric-Space X Y) →
       is-uniformly-continuous-function-Metric-Space X Y f →
-      is-pointwise-continuous-function-Metric-Space X Y f
+      is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space
       f H x = map-trunc-Prop (λ (μ , is-mod-μ) → (μ , is-mod-μ x)) H
 
   pointwise-continuous-uniformly-continuous-function-Metric-Space :
     uniformly-continuous-function-Metric-Space X Y →
-    pointwise-continuous-function-Metric-Space X Y
+    pointwise-continuous-map-Metric-Space X Y
   pointwise-continuous-uniformly-continuous-function-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space f H)
@@ -351,7 +293,7 @@ module _
     is-pointwise-continuous-is-short-function-Metric-Space :
       (f : type-function-Metric-Space X Y) →
       is-short-function-Metric-Space X Y f →
-      is-pointwise-continuous-function-Metric-Space X Y f
+      is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-short-function-Metric-Space
       f H =
       is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space
@@ -362,7 +304,7 @@ module _
 
   pointwise-continuous-short-function-Metric-Space :
     short-function-Metric-Space X Y →
-    pointwise-continuous-function-Metric-Space X Y
+    pointwise-continuous-map-Metric-Space X Y
   pointwise-continuous-short-function-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-is-short-function-Metric-Space f H)
@@ -381,7 +323,7 @@ module _
     is-pointwise-continuous-is-isometry-Metric-Space :
       (f : type-function-Metric-Space X Y) →
       is-isometry-Metric-Space X Y f →
-      is-pointwise-continuous-function-Metric-Space X Y f
+      is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-isometry-Metric-Space
       f H =
       is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space
@@ -392,7 +334,7 @@ module _
 
   pointwise-continuous-isometry-Metric-Space :
     isometry-Metric-Space X Y →
-    pointwise-continuous-function-Metric-Space X Y
+    pointwise-continuous-map-Metric-Space X Y
   pointwise-continuous-isometry-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-is-isometry-Metric-Space f H)
@@ -410,13 +352,13 @@ module _
 
   abstract
     is-pointwise-continuous-constant-function-Metric-Space :
-      is-pointwise-continuous-function-Metric-Space X Y (λ _ → y)
+      is-pointwise-continuous-map-Metric-Space X Y (λ _ → y)
     is-pointwise-continuous-constant-function-Metric-Space =
       is-pointwise-continuous-is-short-function-Metric-Space X Y _
         ( is-short-constant-function-Metric-Space X Y y)
 
   pointwise-continuous-constant-function-Metric-Space :
-    pointwise-continuous-function-Metric-Space X Y
+    pointwise-continuous-map-Metric-Space X Y
   pointwise-continuous-constant-function-Metric-Space =
     pointwise-continuous-short-function-Metric-Space X Y
       ( short-constant-function-Metric-Space X Y y)
@@ -432,13 +374,13 @@ module _
 
   abstract
     is-pointwise-continuous-id-Metric-Space :
-      is-pointwise-continuous-function-Metric-Space X X id
+      is-pointwise-continuous-map-Metric-Space X X id
     is-pointwise-continuous-id-Metric-Space =
       is-pointwise-continuous-is-isometry-Metric-Space X X id
         ( is-isometry-id-Metric-Space X)
 
   pointwise-continuous-id-Metric-Space :
-    pointwise-continuous-function-Metric-Space X X
+    pointwise-continuous-map-Metric-Space X X
   pointwise-continuous-id-Metric-Space =
     ( id , is-pointwise-continuous-id-Metric-Space)
 ```

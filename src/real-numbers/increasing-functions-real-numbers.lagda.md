@@ -31,6 +31,7 @@ open import order-theory.posets
 open import order-theory.subposets
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.dense-subsets-real-numbers
 open import real-numbers.difference-real-numbers
@@ -38,7 +39,7 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.pointwise-continuous-functions-real-numbers
-open import real-numbers.rational-approximations-of-real-numbers
+open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
@@ -94,10 +95,10 @@ module _
   where
 
   abstract
-    is-increasing-leq-le-ℝ :
+    is-increasing-is-increasing-on-strict-inequalities-ℝ :
       ((x y : ℝ l1) → le-ℝ x y → leq-ℝ (f x) (f y)) →
       is-increasing-function-ℝ f
-    is-increasing-leq-le-ℝ H x y x≤y =
+    is-increasing-is-increasing-on-strict-inequalities-ℝ H x y x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -114,11 +115,12 @@ module _
   where
 
   abstract
-    is-increasing-leq-le-on-subset-function-ℝ :
+    is-increasing-is-increasing-on-strict-inequalities-on-subset-function-ℝ :
       ( ((x y : type-subset-ℝ S) →
         le-ℝ (pr1 x) (pr1 y) → leq-ℝ (f (pr1 x)) (f (pr1 y)))) →
       is-increasing-on-subset-function-ℝ f S
-    is-increasing-leq-le-on-subset-function-ℝ H (x , x∈S) (y , y∈S) x≤y =
+    is-increasing-is-increasing-on-strict-inequalities-on-subset-function-ℝ
+      H (x , x∈S) (y , y∈S) x≤y =
       double-negation-elim-leq-ℝ
         ( f x)
         ( f y)
@@ -134,24 +136,24 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (f : pointwise-continuous-function-ℝ l1 l2)
+  (f : pointwise-continuous-map-ℝ l1 l2)
   (S : dense-subset-ℝ l3 l1)
   where
 
   abstract
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ :
+    is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ :
       is-increasing-on-subset-function-ℝ
-        ( map-pointwise-continuous-function-ℝ f)
+        ( map-pointwise-continuous-map-ℝ f)
         ( subset-dense-subset-ℝ S) →
-      is-increasing-function-ℝ (map-pointwise-continuous-function-ℝ f)
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ H =
+      is-increasing-function-ℝ (map-pointwise-continuous-map-ℝ f)
+    is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ H =
       let
-        f' = map-pointwise-continuous-function-ℝ f
+        f' = map-pointwise-continuous-map-ℝ f
         open do-syntax-trunc-Prop empty-Prop
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        is-increasing-leq-le-ℝ
-          ( map-pointwise-continuous-function-ℝ f)
+        is-increasing-is-increasing-on-strict-inequalities-ℝ
+          ( map-pointwise-continuous-map-ℝ f)
           ( λ x y x<y →
             leq-not-le-ℝ
               ( f' y)
@@ -162,12 +164,12 @@ module _
                     exists-positive-rational-separation-le-ℝ f'y<f'x
                   let (εx , εy , εx+εy=ε) = split-ℚ⁺ ε
                   (δx , Hδx) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
                       ( f)
                       ( x)
                       ( εx)
                   (δy , Hδy) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
                       ( f)
                       ( y)
                       ( εy)
@@ -225,7 +227,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (f : pointwise-continuous-function-ℝ l1 l2)
+  (f : pointwise-continuous-map-ℝ l1 l2)
   where
 
   abstract
@@ -233,20 +235,20 @@ module _
       preserves-order-Poset
         ( ℚ-Poset)
         ( ℝ-Poset l2)
-        ( map-pointwise-continuous-function-ℝ f ∘ raise-real-ℚ l1) →
-      is-increasing-function-ℝ (map-pointwise-continuous-function-ℝ f)
+        ( map-pointwise-continuous-map-ℝ f ∘ raise-real-ℚ l1) →
+      is-increasing-function-ℝ (map-pointwise-continuous-map-ℝ f)
     is-increasing-is-increasing-rational-ℝ H =
-      is-increasing-is-increasing-dense-subset-pointwise-continuous-function-ℝ
+      is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ
         ( f)
         ( dense-subset-rational-real-ℝ l1)
         ( λ (x , p , x~p) (y , q , y~q) x≤y →
           binary-tr
             ( leq-ℝ)
             ( ap
-              ( map-pointwise-continuous-function-ℝ f)
+              ( map-pointwise-continuous-map-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ x p x~p)))
             ( ap
-              ( map-pointwise-continuous-function-ℝ f)
+              ( map-pointwise-continuous-map-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ y q y~q)))
             ( H
               ( p)
