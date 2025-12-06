@@ -120,6 +120,9 @@ neg-one-ℝ = real-ℚ neg-one-ℚ
 raise-real-ℚ : (l : Level) → ℚ → ℝ l
 raise-real-ℚ l q = raise-ℝ l (real-ℚ q)
 
+raise-real-ℚ⁺ : (l : Level) → ℚ⁺ → ℝ l
+raise-real-ℚ⁺ l q = raise-ℝ l (real-ℚ⁺ q)
+
 raise-zero-ℝ : (l : Level) → ℝ l
 raise-zero-ℝ l = raise-real-ℚ l zero-ℚ
 

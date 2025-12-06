@@ -20,6 +20,7 @@ open import elementary-number-theory.multiplication-positive-and-negative-intege
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-rational-numbers
@@ -359,4 +360,15 @@ abstract
       ( λ p<1 → leq-le-ℚ (le-left-mul-less-than-one-ℚ⁺ p⁺ p<1 q⁺))
       ( λ p=1 → leq-eq-ℚ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
       ( λ 1<p → ex-falso (not-leq-le-ℚ one-ℚ p 1<p p≤1))
+```
+
+### The canonical embedding of nonzero natural numbers in the positive rationals preserves multiplication
+
+```agda
+abstract
+  mul-positive-rational-ℕ⁺ :
+    (m n : ℕ⁺) →
+    positive-rational-ℕ⁺ m *ℚ⁺ positive-rational-ℕ⁺ n ＝
+    positive-rational-ℕ⁺ (m *ℕ⁺ n)
+  mul-positive-rational-ℕ⁺ m n = eq-ℚ⁺ (mul-rational-ℕ _ _)
 ```
