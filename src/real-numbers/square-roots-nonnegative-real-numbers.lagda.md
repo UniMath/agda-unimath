@@ -565,14 +565,16 @@ abstract opaque
 ### The square root of 1 is 1
 
 ```agda
-real-sqrt-one-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ
-real-sqrt-one-ℝ⁰⁺ =
-  eq-sim-ℝ
-    ( symmetric-sim-ℝ
-      ( unique-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ one-ℝ⁰⁺ (sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
+abstract
+  real-sqrt-one-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ
+  real-sqrt-one-ℝ⁰⁺ =
+    eq-sim-ℝ
+      ( symmetric-sim-ℝ
+        ( unique-sqrt-ℝ⁰⁺ one-ℝ⁰⁺ one-ℝ⁰⁺
+          ( sim-eq-ℝ (left-unit-law-mul-ℝ one-ℝ))))
 
-sqrt-one-ℝ⁰⁺ : sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
-sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
+  sqrt-one-ℝ⁰⁺ : sqrt-ℝ⁰⁺ one-ℝ⁰⁺ ＝ one-ℝ⁰⁺
+  sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
 ```
 
 ### Squaring is an automorphism on the nonnegative real numbers
@@ -700,6 +702,19 @@ is-positive-sqrt-iff-is-positive-ℝ⁰⁺ :
 is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
   ( is-positive-is-positive-sqrt-ℝ⁰⁺ x ,
     is-positive-sqrt-is-positive-ℝ⁰⁺ x)
+
+sqrt-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁺ l
+sqrt-ℝ⁺ x⁺@(x , 0<x) =
+  let
+    x⁰⁺ = nonnegative-ℝ⁺ x⁺
+  in
+    ( real-sqrt-ℝ⁰⁺ x⁰⁺ , is-positive-sqrt-is-positive-ℝ⁰⁺ x⁰⁺ 0<x)
+
+abstract
+  sqrt-one-ℝ⁺ : sqrt-ℝ⁺ one-ℝ⁺ ＝ one-ℝ⁺
+  sqrt-one-ℝ⁺ =
+    eq-ℝ⁺ _ _
+      ( ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (refl {x = one-ℝ})) ∙ real-sqrt-one-ℝ⁰⁺)
 ```
 
 ### The square root of a nonnegative real number preserves inequality

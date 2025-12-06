@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.integer-multiples-of-elements-large-abelian-groups
+open import group-theory.integer-powers-of-elements-large-groups
 
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -112,6 +113,13 @@ abstract
     int-power-ℝ⁺ k (raise-ℝ⁺ l one-ℝ⁺) ＝ raise-ℝ⁺ l one-ℝ⁺
   int-power-raise-one-ℝ⁺ =
     right-zero-law-int-multiple-Large-Ab large-ab-mul-ℝ⁺
+
+  int-power-one-ℝ⁺ :
+    (k : ℤ) → int-power-ℝ⁺ k one-ℝ⁺ ＝ one-ℝ⁺
+  int-power-one-ℝ⁺ k =
+    ( ap (int-power-ℝ⁺ k) (eq-raise-ℝ⁺ one-ℝ⁺)) ∙
+    ( int-power-raise-one-ℝ⁺ lzero k) ∙
+    ( inv (eq-raise-ℝ⁺ one-ℝ⁺))
 ```
 
 ### `xⁿ⁺¹ = xⁿx = xxⁿ`
@@ -182,6 +190,17 @@ abstract
     int-power-ℝ⁺ k (x *ℝ⁺ y) ＝ int-power-ℝ⁺ k x *ℝ⁺ int-power-ℝ⁺ k y
   distributive-int-power-mul-ℝ⁺ =
     left-distributive-int-multiple-add-Large-Ab large-ab-mul-ℝ⁺
+```
+
+### `(xⁿ)ᵐ = (xᵐ)ⁿ`
+
+```agda
+abstract
+  commute-int-power-ℝ⁺ :
+    {l : Level} (m n : ℤ) (x : ℝ⁺ l) →
+    int-power-ℝ⁺ m (int-power-ℝ⁺ n x) ＝ int-power-ℝ⁺ n (int-power-ℝ⁺ m x)
+  commute-int-power-ℝ⁺ =
+    commute-int-power-Large-Group large-group-mul-ℝ⁺
 ```
 
 ## See also

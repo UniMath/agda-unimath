@@ -97,6 +97,10 @@ module _
 
   is-positive-int-positive-ℤ : is-positive-ℤ int-positive-ℤ
   is-positive-int-positive-ℤ = pr2 p
+
+abstract
+  eq-ℤ⁺ : (k l : ℤ⁺) → int-ℤ⁺ k ＝ int-ℤ⁺ l → k ＝ l
+  eq-ℤ⁺ _ _ = eq-type-subtype subtype-positive-ℤ
 ```
 
 ### Positive constants
@@ -188,6 +192,9 @@ abstract
       ( positive-nat-ℤ⁺)
       ( is-section-positive-nat-ℤ⁺)
       ( is-retraction-positive-nat-ℤ⁺)
+
+equiv-positive-int-ℕ⁺ : ℕ⁺ ≃ ℤ⁺
+equiv-positive-int-ℕ⁺ = (positive-int-ℕ⁺ , is-equiv-positive-int-ℕ⁺)
 ```
 
 ### The canonical equivalence between natural numbers and positive integers

@@ -236,7 +236,7 @@ module _
         ( x)
         ( α +ℚ⁺ β)
         ( α +ℚ⁺ β +ℚ⁺ d)
-        ( le-left-add-ℚ⁺ (α +ℚ⁺ β) d)
+        ( le-right-add-ℚ⁺ (α +ℚ⁺ β) d)
         ( H α β)
 
     is-limit-sim-const-cauchy-approximation-Metric-Space :

@@ -59,8 +59,9 @@ leq-fraction-ℤ-Prop (m , n , p) (m' , n' , p') =
 leq-fraction-ℤ : fraction-ℤ → fraction-ℤ → UU lzero
 leq-fraction-ℤ x y = type-Prop (leq-fraction-ℤ-Prop x y)
 
-is-prop-leq-fraction-ℤ : (x y : fraction-ℤ) → is-prop (leq-fraction-ℤ x y)
-is-prop-leq-fraction-ℤ x y = is-prop-type-Prop (leq-fraction-ℤ-Prop x y)
+abstract
+  is-prop-leq-fraction-ℤ : (x y : fraction-ℤ) → is-prop (leq-fraction-ℤ x y)
+  is-prop-leq-fraction-ℤ x y = is-prop-type-Prop (leq-fraction-ℤ-Prop x y)
 ```
 
 ## Properties
@@ -89,42 +90,44 @@ module _
   (x y : fraction-ℤ)
   where
 
-  is-sim-antisymmetric-leq-fraction-ℤ :
-    leq-fraction-ℤ x y →
-    leq-fraction-ℤ y x →
-    sim-fraction-ℤ x y
-  is-sim-antisymmetric-leq-fraction-ℤ H H' =
-    sim-is-zero-coss-mul-diff-fraction-ℤ x y
-      ( is-zero-is-nonnegative-is-nonpositive-ℤ
-        ( H)
-        ( is-nonpositive-eq-ℤ
-          ( skew-commutative-cross-mul-diff-fraction-ℤ y x)
-          ( is-nonpositive-neg-is-nonnegative-ℤ
-            ( H'))))
+  abstract
+    is-sim-antisymmetric-leq-fraction-ℤ :
+      leq-fraction-ℤ x y →
+      leq-fraction-ℤ y x →
+      sim-fraction-ℤ x y
+    is-sim-antisymmetric-leq-fraction-ℤ H H' =
+      sim-is-zero-coss-mul-diff-fraction-ℤ x y
+        ( is-zero-is-nonnegative-is-nonpositive-ℤ
+          ( H)
+          ( is-nonpositive-eq-ℤ
+            ( skew-commutative-cross-mul-diff-fraction-ℤ y x)
+            ( is-nonpositive-neg-is-nonnegative-ℤ
+              ( H'))))
 ```
 
 ### Inequality on integer fractions is transitive
 
 ```agda
-transitive-leq-fraction-ℤ :
-  (p q r : fraction-ℤ) →
-  leq-fraction-ℤ q r →
-  leq-fraction-ℤ p q →
-  leq-fraction-ℤ p r
-transitive-leq-fraction-ℤ p q r H H' =
-  is-nonnegative-right-factor-mul-ℤ
-    ( is-nonnegative-eq-ℤ
-      ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
-        ( is-nonnegative-add-ℤ
-          ( is-nonnegative-mul-ℤ
-            ( is-nonnegative-is-positive-ℤ
-              ( is-positive-denominator-fraction-ℤ p))
-            ( H))
-          ( is-nonnegative-mul-ℤ
-            ( is-nonnegative-is-positive-ℤ
-              ( is-positive-denominator-fraction-ℤ r))
-            ( H'))))
-    ( is-positive-denominator-fraction-ℤ q)
+abstract
+  transitive-leq-fraction-ℤ :
+    (p q r : fraction-ℤ) →
+    leq-fraction-ℤ q r →
+    leq-fraction-ℤ p q →
+    leq-fraction-ℤ p r
+  transitive-leq-fraction-ℤ p q r H H' =
+    is-nonnegative-right-factor-mul-ℤ
+      ( is-nonnegative-eq-ℤ
+        ( lemma-add-cross-mul-diff-fraction-ℤ p q r)
+          ( is-nonnegative-add-ℤ
+            ( is-nonnegative-mul-ℤ
+              ( is-nonnegative-is-positive-ℤ
+                ( is-positive-denominator-fraction-ℤ p))
+              ( H))
+            ( is-nonnegative-mul-ℤ
+              ( is-nonnegative-is-positive-ℤ
+                ( is-positive-denominator-fraction-ℤ r))
+              ( H'))))
+      ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### Chaining rules for similarity and inequality on the integer fractions
@@ -134,31 +137,34 @@ module _
   (p q r : fraction-ℤ)
   where
 
-  concatenate-sim-leq-fraction-ℤ :
-    sim-fraction-ℤ p q →
-    leq-fraction-ℤ q r →
-    leq-fraction-ℤ p r
-  concatenate-sim-leq-fraction-ℤ H H' =
-    is-nonnegative-right-factor-mul-ℤ
-      ( is-nonnegative-eq-ℤ
-        ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
-        ( is-nonnegative-mul-ℤ
-          ( is-nonnegative-is-positive-ℤ (is-positive-denominator-fraction-ℤ p))
-          ( H')))
-      ( is-positive-denominator-fraction-ℤ q)
+  abstract
+    concatenate-sim-leq-fraction-ℤ :
+      sim-fraction-ℤ p q →
+      leq-fraction-ℤ q r →
+      leq-fraction-ℤ p r
+    concatenate-sim-leq-fraction-ℤ H H' =
+      is-nonnegative-right-factor-mul-ℤ
+        ( is-nonnegative-eq-ℤ
+          ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
+          ( is-nonnegative-mul-ℤ
+            ( is-nonnegative-is-positive-ℤ
+              ( is-positive-denominator-fraction-ℤ p))
+            ( H')))
+        ( is-positive-denominator-fraction-ℤ q)
 
-  concatenate-leq-sim-fraction-ℤ :
-    leq-fraction-ℤ p q →
-    sim-fraction-ℤ q r →
-    leq-fraction-ℤ p r
-  concatenate-leq-sim-fraction-ℤ H H' =
-    is-nonnegative-right-factor-mul-ℤ
-      ( is-nonnegative-eq-ℤ
-        ( inv (lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
-        ( is-nonnegative-mul-ℤ
-          ( is-nonnegative-is-positive-ℤ (is-positive-denominator-fraction-ℤ r))
-          ( H)))
-      ( is-positive-denominator-fraction-ℤ q)
+    concatenate-leq-sim-fraction-ℤ :
+      leq-fraction-ℤ p q →
+      sim-fraction-ℤ q r →
+      leq-fraction-ℤ p r
+    concatenate-leq-sim-fraction-ℤ H H' =
+      is-nonnegative-right-factor-mul-ℤ
+        ( is-nonnegative-eq-ℤ
+          ( inv (lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
+          ( is-nonnegative-mul-ℤ
+            ( is-nonnegative-is-positive-ℤ
+              ( is-positive-denominator-fraction-ℤ r))
+            ( H)))
+        ( is-positive-denominator-fraction-ℤ q)
 ```
 
 ### The similarity of integer fractions preserves inequality
@@ -168,11 +174,12 @@ module _
   (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
   where
 
-  preserves-leq-sim-fraction-ℤ : leq-fraction-ℤ p q → leq-fraction-ℤ p' q'
-  preserves-leq-sim-fraction-ℤ I =
-    concatenate-sim-leq-fraction-ℤ p' p q'
-      ( symmetric-sim-fraction-ℤ p p' H)
-      ( concatenate-leq-sim-fraction-ℤ p q q' I K)
+  abstract
+    preserves-leq-sim-fraction-ℤ : leq-fraction-ℤ p q → leq-fraction-ℤ p' q'
+    preserves-leq-sim-fraction-ℤ I =
+      concatenate-sim-leq-fraction-ℤ p' p q'
+        ( symmetric-sim-fraction-ℤ p p' H)
+        ( concatenate-leq-sim-fraction-ℤ p q q' I K)
 ```
 
 ### `x ≤ y` if and only if `0 ≤ y - x`
@@ -182,31 +189,33 @@ module _
   (x y : fraction-ℤ)
   where
 
-  eq-translate-diff-leq-zero-fraction-ℤ :
-    leq-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
-    leq-fraction-ℤ x y
-  eq-translate-diff-leq-zero-fraction-ℤ =
-    ap
-      ( is-nonnegative-ℤ)
-      ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
-        ( ap
-          ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
-          ( left-negative-law-mul-ℤ
-            ( numerator-fraction-ℤ x)
-            ( denominator-fraction-ℤ y))))
+  abstract
+    eq-translate-diff-leq-zero-fraction-ℤ :
+      leq-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
+      leq-fraction-ℤ x y
+    eq-translate-diff-leq-zero-fraction-ℤ =
+      ap
+        ( is-nonnegative-ℤ)
+        ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
+          ( ap
+            ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
+            ( left-negative-law-mul-ℤ
+              ( numerator-fraction-ℤ x)
+              ( denominator-fraction-ℤ y))))
 ```
 
 ### Negation reverses the order of inequality on integer fractions
 
 ```agda
-neg-leq-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  leq-fraction-ℤ x y →
-  leq-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
-neg-leq-fraction-ℤ (m , n , p) (m' , n' , p') H =
-  binary-tr
-    ( leq-ℤ)
-    ( inv (left-negative-law-mul-ℤ m' n))
-    ( inv (left-negative-law-mul-ℤ m n'))
-    ( neg-leq-ℤ (m *ℤ n') (m' *ℤ n) H)
+abstract
+  neg-leq-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    leq-fraction-ℤ x y →
+    leq-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
+  neg-leq-fraction-ℤ (m , n , p) (m' , n' , p') H =
+    binary-tr
+      ( leq-ℤ)
+      ( inv (left-negative-law-mul-ℤ m' n))
+      ( inv (left-negative-law-mul-ℤ m n'))
+      ( neg-leq-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```

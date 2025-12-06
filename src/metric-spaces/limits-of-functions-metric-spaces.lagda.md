@@ -9,12 +9,8 @@ module metric-spaces.limits-of-functions-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.inhabited-subtypes
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
@@ -71,3 +67,7 @@ module _
   is-point-limit-function-Metric-Space =
     type-Prop is-point-limit-prop-function-Metric-Space
 ```
+
+## See also
+
+- [Classical limits of functions in metric spaces](metric-spaces.classical-limits-of-functions-metric-spaces.md)

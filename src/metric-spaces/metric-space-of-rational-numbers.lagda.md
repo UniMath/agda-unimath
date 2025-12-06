@@ -12,6 +12,7 @@ module metric-spaces.metric-space-of-rational-numbers where
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
@@ -546,19 +547,19 @@ is-cauchy-approximation-rational-ℚ⁺ ε δ =
       ( rational-ℚ⁺ δ)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
       ( rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-right-add-ℚ⁺
+      ( le-left-add-ℚ⁺
         ( ε)
         ( ε +ℚ⁺ δ))
-      ( le-right-add-ℚ⁺ ε δ))) ,
+      ( le-left-add-ℚ⁺ ε δ))) ,
   ( leq-le-ℚ
     ( transitive-le-ℚ
       ( rational-ℚ⁺ ε)
       ( rational-ℚ⁺ (ε +ℚ⁺ δ))
       ( rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-right-add-ℚ⁺
+      ( le-left-add-ℚ⁺
         ( δ)
         ( ε +ℚ⁺ δ))
-      ( le-left-add-ℚ⁺ ε δ)))
+      ( le-right-add-ℚ⁺ ε δ)))
 
 cauchy-approximation-rational-ℚ⁺ :
   cauchy-approximation-Metric-Space metric-space-ℚ
@@ -582,7 +583,7 @@ is-zero-limit-rational-ℚ⁺ ε δ =
     ( inv-tr
       ( le-ℚ (rational-ℚ⁺ ε))
       ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-left-add-ℚ⁺ ε δ)))
+      ( le-right-add-ℚ⁺ ε δ)))
 
 convergent-rational-ℚ⁺ :
   convergent-cauchy-approximation-Metric-Space metric-space-ℚ
@@ -590,4 +591,30 @@ convergent-rational-ℚ⁺ =
   cauchy-approximation-rational-ℚ⁺ ,
   zero-ℚ ,
   is-zero-limit-rational-ℚ⁺
+```
+
+### `x + d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-add-ℚ :
+    (x : ℚ) (d : ℚ⁺) → neighborhood-ℚ d x (x +ℚ rational-ℚ⁺ d)
+  neighborhood-add-ℚ x d⁺@(d , _) =
+    ( refl-leq-ℚ (x +ℚ d) ,
+      transitive-leq-ℚ x (x +ℚ d) (x +ℚ d +ℚ d)
+        ( leq-right-add-rational-ℚ⁺ (x +ℚ d) d⁺)
+        ( leq-right-add-rational-ℚ⁺ x d⁺))
+```
+
+### `x - d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-diff-ℚ :
+    (x : ℚ) (d : ℚ⁺) → neighborhood-ℚ d x (x -ℚ rational-ℚ⁺ d)
+  neighborhood-diff-ℚ x d⁺@(d , _) =
+    ( transitive-leq-ℚ (x -ℚ d) x (x +ℚ d)
+        ( leq-right-add-rational-ℚ⁺ x d⁺)
+        ( leq-transpose-right-add-ℚ _ _ _ (leq-right-add-rational-ℚ⁺ x d⁺)) ,
+      inv-tr (leq-ℚ x) (is-section-diff-ℚ _ _) (refl-leq-ℚ x))
 ```
