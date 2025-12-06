@@ -50,7 +50,7 @@ module _
   root-is-odd-ℝ⁰⁺ (x , 0≤x) =
     ( root-is-odd-ℝ n odd-n x , is-nonnegative-root-is-odd-ℝ x 0≤x)
 
-  odd-power-root-is-odd-ℝ⁰⁺ :
+  power-root-is-odd-ℝ⁰⁺ :
     (x : ℝ⁰⁺ l) → power-ℝ n (real-ℝ⁰⁺ (root-is-odd-ℝ⁰⁺ x)) ＝ real-ℝ⁰⁺ x
-  odd-power-root-is-odd-ℝ⁰⁺ (x , _) = odd-power-root-is-odd-ℝ n odd-n x
+  power-root-is-odd-ℝ⁰⁺ (x , _) = power-root-is-odd-ℝ n odd-n x
 ```

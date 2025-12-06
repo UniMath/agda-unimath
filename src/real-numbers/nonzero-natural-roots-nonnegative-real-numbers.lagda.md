@@ -92,7 +92,7 @@ abstract
         by ap-binary power-ℝ (left-unit-law-mul-ℕ (succ-ℕ (v *ℕ 2))) refl
       ＝ x
         by
-          odd-power-root-is-odd-ℝ
+          power-root-is-odd-ℝ
             ( succ-ℕ (v *ℕ 2))
             ( is-odd-has-odd-expansion _ (v , refl))
             ( x)
