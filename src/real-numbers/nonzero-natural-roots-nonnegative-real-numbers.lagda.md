@@ -165,7 +165,7 @@ abstract
             ( left-unit-law-mul-ℕ (succ-ℕ (v *ℕ 2)))
       ＝ x
         by
-          odd-root-odd-power-ℝ
+          root-power-is-odd-ℝ
             ( succ-ℕ (v *ℕ 2))
             ( is-odd-has-odd-expansion _ (v , refl))
             ( x)
