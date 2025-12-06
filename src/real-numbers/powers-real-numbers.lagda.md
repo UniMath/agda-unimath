@@ -575,7 +575,7 @@ abstract
   is-injective-odd-power-ℝ {l} n odd-n =
     is-injective-is-strictly-increasing-function-ℝ
       ( power-ℝ n)
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
 ```
 
 ### Odd powers of real numbers preserve inequality

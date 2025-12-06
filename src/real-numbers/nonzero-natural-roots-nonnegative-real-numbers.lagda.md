@@ -51,7 +51,7 @@ on the [nonnegative](real-numbers.nonnegative-real-numbers.md)
 ```agda
 root-pair-expansion-ℝ⁰⁺ : {l : Level} (u v : ℕ) (x : ℝ⁰⁺ l) → ℝ⁰⁺ l
 root-pair-expansion-ℝ⁰⁺ 0 v x =
-  odd-root-ℝ⁰⁺ (succ-ℕ (v *ℕ 2)) (is-odd-has-odd-expansion _ (v , refl)) x
+  root-is-odd-ℝ⁰⁺ (succ-ℕ (v *ℕ 2)) (is-odd-has-odd-expansion _ (v , refl)) x
 root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
   root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x)
 
@@ -85,14 +85,14 @@ abstract
       ＝
         power-ℝ
           ( succ-ℕ (v *ℕ 2))
-          ( odd-root-ℝ
+          ( root-is-odd-ℝ
             ( succ-ℕ (v *ℕ 2))
             ( is-odd-has-odd-expansion _ (v , refl))
             ( x))
         by ap-binary power-ℝ (left-unit-law-mul-ℕ (succ-ℕ (v *ℕ 2))) refl
       ＝ x
         by
-          odd-power-odd-root-ℝ
+          odd-power-root-is-odd-ℝ
             ( succ-ℕ (v *ℕ 2))
             ( is-odd-has-odd-expansion _ (v , refl))
             ( x)
@@ -146,19 +146,19 @@ abstract
     real-ℝ⁰⁺ x
   root-power-pair-expansion-ℝ⁰⁺ 0 v (x , _) =
     equational-reasoning
-      odd-root-ℝ
+      root-is-odd-ℝ
         ( succ-ℕ (v *ℕ 2))
         ( is-odd-has-odd-expansion _ (v , refl))
         ( power-ℝ (1 *ℕ succ-ℕ (v *ℕ 2)) x)
       ＝
-        odd-root-ℝ
+        root-is-odd-ℝ
           ( succ-ℕ (v *ℕ 2))
           ( is-odd-has-odd-expansion _ (v , refl))
           ( power-ℝ (succ-ℕ (v *ℕ 2)) x)
         by
           ap
             ( λ n →
-              odd-root-ℝ
+              root-is-odd-ℝ
                 ( succ-ℕ (v *ℕ 2))
                 ( is-odd-has-odd-expansion _ (v , refl))
                 ( power-ℝ n x))
