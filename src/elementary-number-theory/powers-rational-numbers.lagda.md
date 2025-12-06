@@ -9,12 +9,15 @@ module elementary-number-theory.powers-rational-numbers where
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.natural-numbers
@@ -33,7 +36,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
@@ -308,54 +313,6 @@ abstract
       ( preserves-leq-power-ℚ⁰⁺ n (abs-ℚ p) (abs-ℚ q) |p|≤|q|)
 ```
 
-### Odd powers of rational numbers preserve inequality
-
-```agda
-abstract
-  preserves-leq-odd-power-ℚ :
-    (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
-    leq-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-leq-odd-power-ℚ n p q odd-n p≤q =
-    rec-coproduct
-      ( λ is-neg-p →
-        rec-coproduct
-          ( λ is-neg-q →
-            let
-              p⁻ = (p , is-neg-p)
-              q⁻ = (q , is-neg-q)
-            in
-              binary-tr
-                ( leq-ℚ)
-                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
-                ( neg-leq-ℚ
-                  ( preserves-leq-power-ℚ⁺
-                    ( n)
-                    ( neg-ℚ⁻ q⁻)
-                    ( neg-ℚ⁻ p⁻)
-                    ( neg-leq-ℚ p≤q))))
-          ( λ is-nonneg-q →
-            inv-tr
-              ( leq-ℚ (power-ℚ n p))
-              ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
-              ( leq-negative-nonnegative-ℚ
-                ( power-ℚ n p ,
-                  is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
-                ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
-          ( decide-is-negative-is-nonnegative-ℚ q))
-      ( λ is-nonneg-p →
-        let
-          p⁰⁺ = (p , is-nonneg-p)
-          q⁰⁺ = (q , is-nonnegative-leq-ℚ⁰⁺ p⁰⁺ q p≤q)
-        in
-          binary-tr
-            ( leq-ℚ)
-            ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
-            ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-leq-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p≤q))
-      ( decide-is-negative-is-nonnegative-ℚ p)
-```
-
 ### Odd powers of rational numbers preserve strict inequality
 
 ```agda
@@ -402,6 +359,20 @@ abstract
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
             ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
+```
+
+### Odd powers of rational numbers preserve inequality
+
+```agda
+abstract
+  preserves-leq-odd-power-ℚ :
+    (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
+    leq-ℚ (power-ℚ n p) (power-ℚ n q)
+  preserves-leq-odd-power-ℚ n p q odd-n p≤q =
+    trichotomy-le-ℚ p q
+      ( leq-le-ℚ ∘ preserves-le-odd-power-ℚ n p q odd-n)
+      ( leq-eq-ℚ ∘ ap (power-ℚ n))
+      ( λ q<p → ex-falso (not-leq-le-ℚ q p q<p p≤q))
 ```
 
 ### If `|ε| < 1`, `εⁿ` approaches 0
@@ -460,6 +431,59 @@ abstract
               ( λ q → le-ℚ q one-ℚ)
               ( rational-abs-rational-ℚ⁺ (ε , is-pos-ε))
               ( |ε|<1))))
+```
+
+### Odd powers are unbounded
+
+```agda
+abstract
+  unbounded-above-odd-power-ℚ :
+    (n : ℕ) (q : ℚ) → is-odd-ℕ n → Σ ℚ (λ p → le-ℚ q (power-ℚ n p))
+  unbounded-above-odd-power-ℚ n q odd-n =
+    trichotomy-le-ℚ q one-ℚ
+      ( λ q<1 → ( one-ℚ , inv-tr (le-ℚ q) (power-one-ℚ n) q<1))
+      ( λ q=1 →
+        ( two-ℚ ,
+          tr
+            ( λ z → le-ℚ z (power-ℚ n two-ℚ))
+            ( power-one-ℚ n ∙ inv q=1)
+            ( preserves-le-odd-power-ℚ
+              ( n)
+              ( one-ℚ)
+              ( two-ℚ)
+              ( odd-n)
+              ( preserves-le-rational-ℕ {1} {2} _))))
+      ( λ 1<q →
+        let
+          q⁺ = (q , is-positive-le-ℚ⁺ one-ℚ⁺ 1<q)
+        in
+          ( q +ℚ one-ℚ ,
+            concatenate-le-leq-ℚ
+              ( q)
+              ( q +ℚ one-ℚ)
+              ( power-ℚ n (q +ℚ one-ℚ))
+              ( le-right-add-rational-ℚ⁺ q one-ℚ⁺)
+              ( inv-tr
+                ( leq-ℚ (q +ℚ one-ℚ))
+                ( power-rational-ℚ⁺ n (q⁺ +ℚ⁺ one-ℚ⁺))
+                ( power-at-least-one-ℚ⁺
+                  ( n)
+                  ( q⁺ +ℚ⁺ one-ℚ⁺)
+                  ( leq-one-is-nonzero-ℕ n (is-nonzero-is-odd-ℕ odd-n))
+                  ( leq-left-add-rational-ℚ⁺ one-ℚ q⁺)))))
+
+  unbounded-below-odd-power-ℚ :
+    (n : ℕ) (q : ℚ) → is-odd-ℕ n → Σ ℚ (λ p → le-ℚ (power-ℚ n p) q)
+  unbounded-below-odd-power-ℚ n q odd-n =
+    let
+      (p , -q<pⁿ) = unbounded-above-odd-power-ℚ n (neg-ℚ q) odd-n
+    in
+      ( neg-ℚ p ,
+        binary-tr
+          ( le-ℚ)
+          ( inv (odd-power-neg-ℚ n p odd-n))
+          ( neg-neg-ℚ q)
+          ( neg-le-ℚ -q<pⁿ))
 ```
 
 ## See also
