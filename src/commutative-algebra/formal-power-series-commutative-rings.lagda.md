@@ -60,6 +60,12 @@ formal-power-series-coefficients-Commutative-Ring :
   sequence (type-Commutative-Ring R) → formal-power-series-Commutative-Ring R
 formal-power-series-coefficients-Commutative-Ring R =
   formal-power-series-coefficients-Commutative-Semiring
+
+coefficient-formal-power-series-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l) →
+  formal-power-series-Commutative-Ring R → sequence (type-Commutative-Ring R)
+coefficient-formal-power-series-Commutative-Ring R =
+  coefficient-formal-power-series-Commutative-Semiring
 ```
 
 ## Properties

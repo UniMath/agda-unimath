@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -68,6 +69,9 @@ abstract
       ( succ-ℕ x)
       ( is-nonzero-factorial-ℕ x)
       ( is-nonzero-succ-ℕ x)
+
+nonzero-factorial-ℕ : ℕ → ℕ⁺
+nonzero-factorial-ℕ n = (factorial-ℕ n , is-nonzero-factorial-ℕ n)
 ```
 
 ### `n ≤ n!`

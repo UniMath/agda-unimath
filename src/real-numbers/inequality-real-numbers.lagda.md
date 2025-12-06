@@ -40,6 +40,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -354,6 +355,40 @@ module _
     preserves-leq-left-sim-ℝ
       ( x1~x2)
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
+```
+
+### Raising either side of an inequality to another universe level
+
+```agda
+abstract
+  preserves-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
+  preserves-leq-left-raise-ℝ l {x} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
+
+  preserves-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
+  preserves-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+```
+
+### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
+
+```agda
+abstract
+  leq-leq-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ (raise-ℝ l x) (raise-ℝ l y) → leq-ℝ x y
+  leq-leq-raise-ℝ l {x} {y} =
+    preserves-leq-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
+
+  leq-raise-leq-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) (raise-ℝ l y)
+  leq-raise-leq-ℝ l {x} {y} =
+    preserves-leq-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
 ```
 
 ### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
