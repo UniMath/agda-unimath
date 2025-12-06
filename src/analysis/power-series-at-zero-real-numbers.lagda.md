@@ -34,6 +34,16 @@ open import real-numbers.powers-real-numbers
 
 ## Idea
 
+A
+{{#concept "power series centered at zero" Agda=power-series-at-zero-ℝ Disambiguation="in the real numbers"}}
+is a
+[power series](commutative-algebra.formal-power-series-commutative-rings.md) in
+the
+[commutative ring of real numbers](real-numbers.large-ring-of-real-numbers.md)
+with [convergence](analysis.convergent-series-real-numbers.md) considered with
+respect to the
+[standard metric space on the real numbers](real-numbers.metric-space-of-real-numbers.md).
+
 ## Definition
 
 ```agda
