@@ -204,6 +204,12 @@ abstract
   reflects-le-left-raise-ℝ l {x} {y} =
     preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ' l x)
 
+  preserves-le-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    le-ℝ x y → le-ℝ x (raise-ℝ l y)
+  preserves-le-right-raise-ℝ l {x} {y} =
+    preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ l y)
+
   reflects-le-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x (raise-ℝ l y) → le-ℝ x y

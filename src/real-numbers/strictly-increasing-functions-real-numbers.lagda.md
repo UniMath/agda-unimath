@@ -24,12 +24,12 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
-
-open import real-numbers.addition-positive-real-numbers
-open import real-numbers.addition-real-numbers
 open import order-theory.strict-order-preserving-maps
 open import order-theory.subtypes-strict-preorders
 
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.dense-subsets-real-numbers
 open import real-numbers.increasing-functions-real-numbers
@@ -210,28 +210,28 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (f : pointwise-continuous-function-ℝ l1 l2)
+  (f : pointwise-continuous-map-ℝ l1 l2)
   (H :
-    is-strictly-increasing-function-ℝ (map-pointwise-continuous-function-ℝ f))
+    is-strictly-increasing-function-ℝ (map-pointwise-continuous-map-ℝ f))
   where
 
   abstract
-    reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ :
+    reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ :
       (x y : ℝ l1) →
       le-ℝ
-        ( map-pointwise-continuous-function-ℝ f x)
-        ( map-pointwise-continuous-function-ℝ f y) →
+        ( map-pointwise-continuous-map-ℝ f x)
+        ( map-pointwise-continuous-map-ℝ f y) →
       le-ℝ x y
-    reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ
+    reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
       x y fx<fy =
       let
-        f' = map-pointwise-continuous-function-ℝ f
+        f' = map-pointwise-continuous-map-ℝ f
         open do-syntax-trunc-Prop (le-prop-ℝ x y)
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in do
         (ε , fx+ε<y) ← exists-positive-rational-separation-le-ℝ fx<fy
         (δ , Hδ) ←
-          is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+          is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
             ( f)
             ( x)
             ( ε)
@@ -241,7 +241,7 @@ module _
           ( y)
           ( le-left-add-real-ℝ⁺ x (positive-real-ℚ⁺ δ))
           ( reflects-leq-is-strictly-increasing-function-ℝ
-            ( map-pointwise-continuous-function-ℝ f)
+            ( map-pointwise-continuous-map-ℝ f)
             ( H)
             ( x +ℝ real-ℚ⁺ δ)
             ( y)

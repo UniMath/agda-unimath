@@ -44,7 +44,7 @@ module _
 
   opaque
     root-is-odd-ℝ : ℝ l → ℝ l
-    root-is-odd-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    root-is-odd-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 
   abstract opaque
     unfolding root-is-odd-ℝ
@@ -52,12 +52,12 @@ module _
     odd-power-root-is-odd-ℝ :
       (x : ℝ l) → power-ℝ n (root-is-odd-ℝ x) ＝ x
     odd-power-root-is-odd-ℝ =
-      is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+      is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 
-    odd-root-odd-power-ℝ :
+    odd-root-power-is-odd-ℝ :
       (x : ℝ l) → root-is-odd-ℝ (power-ℝ n x) ＝ x
-    odd-root-odd-power-ℝ =
-      is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    odd-root-power-is-odd-ℝ =
+      is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 ```
 
 ## Properties
@@ -75,7 +75,7 @@ module _
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y →
       le-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
     preserves-le-root-is-odd-ℝ {x = x} {y = y} x<y =
-      reflects-le-odd-power-ℝ
+      reflects-le-power-is-odd-ℝ
         ( n)
         ( odd-n)
         ( _)
@@ -100,7 +100,7 @@ module _
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
       leq-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
     preserves-leq-root-is-odd-ℝ {x = x} {y = y} x≤y =
-      reflects-leq-odd-power-ℝ
+      reflects-leq-power-is-odd-ℝ
         ( n)
         ( odd-n)
         ( _)

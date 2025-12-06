@@ -596,16 +596,16 @@ module _
   where
 
   abstract
-    reflects-leq-odd-power-ℝ :
+    reflects-leq-power-is-odd-ℝ :
       {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
       leq-ℝ (power-ℝ n x) (power-ℝ n y) →
       leq-ℝ x y
-    reflects-leq-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+    reflects-leq-power-is-odd-ℝ {l1} {l2} x y xⁿ≤yⁿ =
       leq-leq-raise-ℝ
         ( l1 ⊔ l2)
         ( reflects-leq-is-strictly-increasing-function-ℝ
           ( power-ℝ n)
-          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+          ( is-strictly-increasing-power-is-odd-ℝ (l1 ⊔ l2) n odd-n)
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( preserves-leq-sim-ℝ
@@ -623,16 +623,16 @@ module _
   where
 
   abstract
-    reflects-le-odd-power-ℝ :
+    reflects-le-power-is-odd-ℝ :
       {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
       le-ℝ (power-ℝ n x) (power-ℝ n y) →
       le-ℝ x y
-    reflects-le-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+    reflects-le-power-is-odd-ℝ {l1} {l2} x y xⁿ≤yⁿ =
       le-le-raise-ℝ
         ( l1 ⊔ l2)
-        ( reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ
-          ( pointwise-continuous-power-ℝ (l1 ⊔ l2) n)
-          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+        ( reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
+          ( pointwise-continuous-map-power-ℝ (l1 ⊔ l2) n)
+          ( is-strictly-increasing-power-is-odd-ℝ (l1 ⊔ l2) n odd-n)
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( preserves-le-sim-ℝ
@@ -651,9 +651,9 @@ module _
   where
 
   abstract
-    is-unbounded-below-odd-power-ℝ :
+    is-unbounded-below-power-is-odd-ℝ :
       is-unbounded-below-function-ℝ (power-ℝ {l} n)
-    is-unbounded-below-odd-power-ℝ q =
+    is-unbounded-below-power-is-odd-ℝ q =
       let
         (p , pⁿ<q) = unbounded-below-odd-power-ℚ n q odd-n
       in
@@ -668,9 +668,9 @@ module _
                 by preserves-sim-power-ℝ n (sim-raise-ℝ l _))
             ( preserves-le-real-ℚ pⁿ<q))
 
-    is-unbounded-above-odd-power-ℝ :
+    is-unbounded-above-power-is-odd-ℝ :
       is-unbounded-above-function-ℝ (power-ℝ {l} n)
-    is-unbounded-above-odd-power-ℝ q =
+    is-unbounded-above-power-is-odd-ℝ q =
       let
         (p , q<pⁿ) = unbounded-above-odd-power-ℚ n q odd-n
       in
@@ -696,14 +696,14 @@ module _
   where
 
   abstract
-    is-SIPCUB-odd-power-ℝ :
+    is-SIPCUB-power-is-odd-ℝ :
       is-SIPCUB-function-ℝ (power-ℝ {l} n)
-    is-SIPCUB-odd-power-ℝ =
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n ,
+    is-SIPCUB-power-is-odd-ℝ =
+      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n ,
         is-pointwise-continuous-power-ℝ n ,
-        is-unbounded-above-odd-power-ℝ l n odd-n ,
-        is-unbounded-below-odd-power-ℝ l n odd-n)
+        is-unbounded-above-power-is-odd-ℝ l n odd-n ,
+        is-unbounded-below-power-is-odd-ℝ l n odd-n)
 
-  SIPCUB-odd-power-ℝ : SIPCUB-function-ℝ l l
-  SIPCUB-odd-power-ℝ = (power-ℝ n , is-SIPCUB-odd-power-ℝ)
+  SIPCUB-power-is-odd-ℝ : SIPCUB-function-ℝ l l
+  SIPCUB-power-is-odd-ℝ = (power-ℝ n , is-SIPCUB-power-is-odd-ℝ)
 ```

@@ -88,28 +88,6 @@ module _
   is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space = pr2 f
 ```
 
-### The classical definition of pointwise continuity
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
-  where
-
-  is-classically-pointwise-continuous-prop-function-Metric-Space :
-    Prop (l1 ⊔ l2 ⊔ l4)
-  is-classically-pointwise-continuous-prop-function-Metric-Space =
-    Π-Prop
-      ( type-Metric-Space X)
-      ( λ x → is-classical-limit-prop-function-Metric-Space X Y f x (f x))
-
-  is-classically-pointwise-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-classically-pointwise-continuous-function-Metric-Space =
-    type-Prop is-classically-pointwise-continuous-prop-function-Metric-Space
-```
-
 ## Properties
 
 ### The Cartesian product of pointwise continuous functions on metric spaces
