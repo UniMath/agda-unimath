@@ -209,12 +209,12 @@ module _
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
-  triangular-Normed-ℝ-Vector-Space :
+  triangular-norm-Normed-ℝ-Vector-Space :
     (v w : type-Normed-ℝ-Vector-Space) →
     leq-ℝ
       ( map-norm-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w))
       ( map-norm-Normed-ℝ-Vector-Space v +ℝ map-norm-Normed-ℝ-Vector-Space w)
-  triangular-Normed-ℝ-Vector-Space =
+  triangular-norm-Normed-ℝ-Vector-Space =
     triangular-seminorm-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 

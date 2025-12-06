@@ -798,6 +798,56 @@ module _
       is-cauchy-sequence-pair-cauchy-sequence-Metric-Space)
 ```
 
+### To show a sequence `aₙ` is Cauchy, it suffices to have a modulus function such that for any `ε`, `aₙ` and `aₙ₊ₖ` are in an `ε`-neighborhood for sufficiently large `n`
+
+```agda
+module
+  _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  (a : sequence-type-Metric-Space X)
+  (μ : ℚ⁺ → ℕ)
+  where
+
+  abstract
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space :
+      ( (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (μ ε) n →
+        neighborhood-Metric-Space X ε (a (n +ℕ k)) (a n)) →
+      (ε : ℚ⁺) →
+      is-cauchy-modulus-sequence-Metric-Space X a ε (μ ε)
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε p q με≤p με≤q =
+      let
+        lemma :
+          (m n : ℕ) → leq-ℕ (μ ε) m → leq-ℕ m n →
+          neighborhood-Metric-Space X ε (a n) (a m)
+        lemma m n με≤m m≤n =
+          let
+            ( k , k+m=n) = subtraction-leq-ℕ m n m≤n
+          in
+            tr
+              ( λ p → neighborhood-Metric-Space X ε (a p) (a m))
+              ( commutative-add-ℕ m k ∙ k+m=n)
+              ( H ε m k με≤m)
+      in
+        rec-coproduct
+          ( λ p≤q →
+            symmetric-neighborhood-Metric-Space
+              ( X)
+              ( ε)
+              ( a q)
+              ( a p)
+              ( lemma p q με≤p p≤q))
+          ( lemma q p με≤q)
+          ( linear-leq-ℕ p q)
+
+  is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space :
+    ( (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (μ ε) n →
+      neighborhood-Metric-Space X ε (a (n +ℕ k)) (a n)) →
+    is-cauchy-sequence-Metric-Space X a
+  is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space H ε =
+    ( μ ε , is-cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε)
+```
+
 ## See also
 
 - [Cauchy sequences in complete metric spaces](metric-spaces.cauchy-sequences-complete-metric-spaces.md)
