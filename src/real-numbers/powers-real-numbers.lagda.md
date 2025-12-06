@@ -507,22 +507,22 @@ abstract
 ```agda
 abstract
   is-pointwise-continuous-power-ℝ :
-    {l : Level} (n : ℕ) → is-pointwise-continuous-function-ℝ {l} (power-ℝ n)
+    {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
   is-pointwise-continuous-power-ℝ 0 =
     is-pointwise-continuous-constant-function-Metric-Space _ _ _
   is-pointwise-continuous-power-ℝ 1 =
     is-pointwise-continuous-id-Metric-Space _
   is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
-    is-pointwise-continuous-map-comp-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
       ( metric-space-ℝ l)
       ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
       ( metric-space-ℝ l)
       ( ind-Σ mul-ℝ , is-pointwise-continuous-mul-ℝ l l)
-      ( comp-pointwise-continuous-function-Metric-Space
+      ( comp-pointwise-continuous-map-Metric-Space
         ( metric-space-ℝ l)
         ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
         ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-        ( product-pointwise-continuous-function-Metric-Space
+        ( product-pointwise-continuous-map-Metric-Space
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
@@ -532,11 +532,11 @@ abstract
         ( pointwise-continuous-isometry-Metric-Space
           ( metric-space-ℝ l)
           ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-          ( diagonal-isometry-product-Metric-Space (metric-space-ℝ l))))
+          ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))
 
-pointwise-continuous-power-ℝ :
-  (l : Level) (n : ℕ) → pointwise-continuous-function-ℝ l l
-pointwise-continuous-power-ℝ l n =
+pointwise-continuous-map-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-continuous-map-ℝ l l
+pointwise-continuous-map-power-ℝ l n =
   ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
 ```
 
@@ -544,12 +544,12 @@ pointwise-continuous-power-ℝ l n =
 
 ```agda
 abstract
-  is-strictly-increasing-odd-power-ℝ :
+  is-strictly-increasing-power-is-odd-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-strictly-increasing-function-ℝ (power-ℝ {l} n)
-  is-strictly-increasing-odd-power-ℝ l n odd-n =
+  is-strictly-increasing-power-is-odd-ℝ l n odd-n =
     is-strictly-increasing-is-strictly-increasing-rational-ℝ
-      ( pointwise-continuous-power-ℝ l n)
+      ( pointwise-continuous-map-power-ℝ l n)
       ( λ p q p<q →
         binary-tr
           ( le-ℝ)
@@ -558,17 +558,17 @@ abstract
           ( le-raise-le-ℝ l
             ( preserves-le-real-ℚ (preserves-le-odd-power-ℚ n p q odd-n p<q))))
 
-  preserves-le-odd-power-ℝ :
+  preserves-le-power-is-odd-ℝ :
     {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → le-ℝ x y →
     le-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-le-odd-power-ℝ {l1} {l2} n {x} {y} odd-n x<y =
+  preserves-le-power-is-odd-ℝ {l1} {l2} n {x} {y} odd-n x<y =
     le-le-raise-ℝ
       ( l1 ⊔ l2)
       ( binary-tr
         ( le-ℝ)
         ( power-raise-ℝ (l1 ⊔ l2) n x)
         ( power-raise-ℝ (l1 ⊔ l2) n y)
-        ( is-strictly-increasing-odd-power-ℝ
+        ( is-strictly-increasing-power-is-odd-ℝ
           ( l1 ⊔ l2)
           ( n)
           ( odd-n)
@@ -586,38 +586,40 @@ abstract
   is-injective-odd-power-ℝ {l} n odd-n =
     is-injective-is-strictly-increasing-function-ℝ
       ( power-ℝ n)
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
 ```
 
 ### Odd powers of real numbers preserve inequality
 
 ```agda
-abstract
-  is-increasing-odd-power-ℝ :
-    (l : Level) (n : ℕ) → is-odd-ℕ n →
-    is-increasing-function-ℝ (power-ℝ {l} n)
-  is-increasing-odd-power-ℝ l n odd-n =
-    is-increasing-is-strictly-increasing-function-ℝ
-      ( power-ℝ n)
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n)
+module _
+  (n : ℕ)
+  (odd-n : is-odd-ℕ n)
+  where
 
-  preserves-leq-odd-power-ℝ :
-    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → leq-ℝ x y →
-    leq-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-leq-odd-power-ℝ {l1} {l2} n {x} {y} odd-n x≤y =
-    leq-leq-raise-ℝ
-      ( l1 ⊔ l2)
-      ( binary-tr
-        ( leq-ℝ)
-        ( power-raise-ℝ (l1 ⊔ l2) n x)
-        ( power-raise-ℝ (l1 ⊔ l2) n y)
-        ( is-increasing-odd-power-ℝ
-          ( l1 ⊔ l2)
-          ( n)
-          ( odd-n)
-          ( raise-ℝ (l1 ⊔ l2) x)
-          ( raise-ℝ (l1 ⊔ l2) y)
-          ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
+  abstract
+    is-increasing-power-is-odd-ℝ :
+      (l : Level) → is-increasing-function-ℝ (power-ℝ {l} n)
+    is-increasing-power-is-odd-ℝ l =
+      is-increasing-is-strictly-increasing-function-ℝ
+        ( power-ℝ n)
+        ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
+
+    preserves-leq-power-is-odd-ℝ :
+      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+      leq-ℝ x y → leq-ℝ (power-ℝ n x) (power-ℝ n y)
+    preserves-leq-power-is-odd-ℝ {l1} {l2} {x} {y} x≤y =
+      leq-leq-raise-ℝ
+        ( l1 ⊔ l2)
+        ( binary-tr
+          ( leq-ℝ)
+          ( power-raise-ℝ (l1 ⊔ l2) n x)
+          ( power-raise-ℝ (l1 ⊔ l2) n y)
+          ( is-increasing-power-is-odd-ℝ
+            ( l1 ⊔ l2)
+            ( raise-ℝ (l1 ⊔ l2) x)
+            ( raise-ℝ (l1 ⊔ l2) y)
+            ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
 ```
 
 ### Odd powers of real numbers reflect inequality
@@ -629,16 +631,16 @@ module _
   where
 
   abstract
-    reflects-leq-odd-power-ℝ :
+    reflects-leq-power-is-odd-ℝ :
       {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
       leq-ℝ (power-ℝ n x) (power-ℝ n y) →
       leq-ℝ x y
-    reflects-leq-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+    reflects-leq-power-is-odd-ℝ {l1} {l2} x y xⁿ≤yⁿ =
       leq-leq-raise-ℝ
         ( l1 ⊔ l2)
         ( reflects-leq-is-strictly-increasing-function-ℝ
           ( power-ℝ n)
-          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+          ( is-strictly-increasing-power-is-odd-ℝ (l1 ⊔ l2) n odd-n)
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( preserves-leq-sim-ℝ
@@ -656,16 +658,16 @@ module _
   where
 
   abstract
-    reflects-le-odd-power-ℝ :
+    reflects-le-power-is-odd-ℝ :
       {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
       le-ℝ (power-ℝ n x) (power-ℝ n y) →
       le-ℝ x y
-    reflects-le-odd-power-ℝ {l1} {l2} x y xⁿ≤yⁿ =
+    reflects-le-power-is-odd-ℝ {l1} {l2} x y xⁿ≤yⁿ =
       le-le-raise-ℝ
         ( l1 ⊔ l2)
-        ( reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ
-          ( pointwise-continuous-power-ℝ (l1 ⊔ l2) n)
-          ( is-strictly-increasing-odd-power-ℝ (l1 ⊔ l2) n odd-n)
+        ( reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
+          ( pointwise-continuous-map-power-ℝ (l1 ⊔ l2) n)
+          ( is-strictly-increasing-power-is-odd-ℝ (l1 ⊔ l2) n odd-n)
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( preserves-le-sim-ℝ
@@ -684,9 +686,9 @@ module _
   where
 
   abstract
-    is-unbounded-below-odd-power-ℝ :
+    is-unbounded-below-power-is-odd-ℝ :
       is-unbounded-below-function-ℝ (power-ℝ {l} n)
-    is-unbounded-below-odd-power-ℝ q =
+    is-unbounded-below-power-is-odd-ℝ q =
       let
         (p , pⁿ<q) = unbounded-below-odd-power-ℚ n q odd-n
       in
@@ -701,9 +703,9 @@ module _
                 by preserves-sim-power-ℝ n (sim-raise-ℝ l _))
             ( preserves-le-real-ℚ pⁿ<q))
 
-    is-unbounded-above-odd-power-ℝ :
+    is-unbounded-above-power-is-odd-ℝ :
       is-unbounded-above-function-ℝ (power-ℝ {l} n)
-    is-unbounded-above-odd-power-ℝ q =
+    is-unbounded-above-power-is-odd-ℝ q =
       let
         (p , q<pⁿ) = unbounded-above-odd-power-ℚ n q odd-n
       in
@@ -729,16 +731,16 @@ module _
   where
 
   abstract
-    is-SIPCUB-odd-power-ℝ :
+    is-SIPCUB-power-is-odd-ℝ :
       is-SIPCUB-function-ℝ (power-ℝ {l} n)
-    is-SIPCUB-odd-power-ℝ =
-      ( is-strictly-increasing-odd-power-ℝ l n odd-n ,
+    is-SIPCUB-power-is-odd-ℝ =
+      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n ,
         is-pointwise-continuous-power-ℝ n ,
-        is-unbounded-above-odd-power-ℝ l n odd-n ,
-        is-unbounded-below-odd-power-ℝ l n odd-n)
+        is-unbounded-above-power-is-odd-ℝ l n odd-n ,
+        is-unbounded-below-power-is-odd-ℝ l n odd-n)
 
-  SIPCUB-odd-power-ℝ : SIPCUB-function-ℝ l l
-  SIPCUB-odd-power-ℝ = (power-ℝ n , is-SIPCUB-odd-power-ℝ)
+  SIPCUB-power-is-odd-ℝ : SIPCUB-function-ℝ l l
+  SIPCUB-power-is-odd-ℝ = (power-ℝ n , is-SIPCUB-power-is-odd-ℝ)
 ```
 
 ### `(xᵐ)ⁿ = (xⁿ)ᵐ`

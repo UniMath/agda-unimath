@@ -20,6 +20,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import linear-algebra.bilinear-forms-real-vector-spaces
+open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces
 

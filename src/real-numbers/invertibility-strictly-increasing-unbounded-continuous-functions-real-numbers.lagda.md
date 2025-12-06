@@ -49,6 +49,8 @@ open import order-theory.large-posets
 
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.classical-limits-of-functions-real-numbers
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.dense-subsets-real-numbers
 open import real-numbers.difference-real-numbers
@@ -60,7 +62,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.rational-approximations-of-real-numbers
+open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
@@ -123,11 +125,11 @@ module _
         ( is-strictly-increasing-SIPCUB-function-ℝ)
 
     is-pointwise-continuous-SIPCUB-function-ℝ :
-      is-pointwise-continuous-function-ℝ map-SIPCUB-function-ℝ
+      is-pointwise-continuous-map-ℝ map-SIPCUB-function-ℝ
     is-pointwise-continuous-SIPCUB-function-ℝ = pr1 (pr2 (pr2 f))
 
     pointwise-continuous-SIPCUB-function-ℝ :
-      pointwise-continuous-function-ℝ l1 l2
+      pointwise-continuous-map-ℝ l1 l2
     pointwise-continuous-SIPCUB-function-ℝ =
       ( map-SIPCUB-function-ℝ ,
         is-pointwise-continuous-SIPCUB-function-ℝ)
@@ -139,7 +141,7 @@ module _
         ( x)
         ( map-SIPCUB-function-ℝ x)
     is-classically-pointwise-continuous-SIPCUB-function-ℝ =
-      is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+      is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
         ( pointwise-continuous-SIPCUB-function-ℝ)
 
     is-unbounded-below-SIPCUB-function-ℝ :
@@ -164,7 +166,7 @@ module _
       le-ℝ (map-SIPCUB-function-ℝ x) (map-SIPCUB-function-ℝ x') →
       le-ℝ x x'
     reflects-le-SIPCUB-function-ℝ =
-      reflects-le-is-strictly-increasing-pointwise-continuous-function-ℝ
+      reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
         ( pointwise-continuous-SIPCUB-function-ℝ)
         ( is-strictly-increasing-SIPCUB-function-ℝ)
 
@@ -261,7 +263,7 @@ module _
       in do
         (ε , fq+ε<y) ← exists-positive-rational-separation-le-ℝ fq<y
         (δ , Hδ) ←
-          is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+          is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
             ( pointwise-continuous-SIPCUB-function-ℝ f)
             ( raise-real-ℚ l q)
             ( ε)
@@ -297,7 +299,7 @@ module _
       in do
         (ε , y+ε<fq) ← exists-positive-rational-separation-le-ℝ y<fq
         (δ , Hδ) ←
-          is-classically-pointwise-continuous-pointwise-continuous-function-ℝ
+          is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
             ( pointwise-continuous-SIPCUB-function-ℝ f)
             ( raise-real-ℚ l q)
             ( ε)
@@ -535,8 +537,8 @@ module _
           exists-positive-rational-separation-le-ℝ {l} {l} {y} {y'} y<y'
         (ε' , 2ε'<ε) ← double-le-ℚ⁺ ε
         (δ , Hδ) ← is-classically-pointwise-continuous-SIPCUB-function-ℝ f x ε'
-        (p , fp<y , Nδxp) ← exists-rational-approximation-below-ℝ x δ
-        (q , y<fq , Nδxq) ← exists-rational-approximation-above-ℝ x δ
+        (p , fp<y , Nδxp) ← exists-rational-approximate-below-ℝ x δ
+        (q , y<fq , Nδxq) ← exists-rational-approximate-above-ℝ x δ
         intro-exists
           ( q)
           ( y<fq ,
@@ -712,7 +714,7 @@ module _
 
   abstract
     is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ :
-      is-classically-pointwise-continuous-function-ℝ
+      is-classically-pointwise-continuous-map-ℝ
         ( map-inv-SIPCUB-function-ℝ f)
     is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ x ε =
       let
@@ -830,7 +832,7 @@ module _
 
   abstract
     is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ :
-      is-pointwise-continuous-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+      is-pointwise-continuous-map-ℝ (map-inv-SIPCUB-function-ℝ f)
     is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ =
       is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ
         ( acω)

@@ -38,19 +38,19 @@ module _
   where
 
   abstract
-    is-nonnegative-odd-root-ℝ :
-      (x : ℝ l) → is-nonnegative-ℝ x → is-nonnegative-ℝ (odd-root-ℝ n odd-n x)
-    is-nonnegative-odd-root-ℝ x 0≤x =
+    is-nonnegative-root-is-odd-ℝ :
+      (x : ℝ l) → is-nonnegative-ℝ x → is-nonnegative-ℝ (root-is-odd-ℝ n odd-n x)
+    is-nonnegative-root-is-odd-ℝ x 0≤x =
       tr
-        ( λ z → leq-ℝ z (odd-root-ℝ n odd-n x))
+        ( λ z → leq-ℝ z (root-is-odd-ℝ n odd-n x))
         ( odd-root-zero-ℝ n odd-n)
-        ( preserves-leq-odd-root-ℝ n odd-n 0≤x)
+        ( preserves-leq-root-is-odd-ℝ n odd-n 0≤x)
 
-  odd-root-ℝ⁰⁺ : ℝ⁰⁺ l → ℝ⁰⁺ l
-  odd-root-ℝ⁰⁺ (x , 0≤x) =
-    ( odd-root-ℝ n odd-n x , is-nonnegative-odd-root-ℝ x 0≤x)
+  root-is-odd-ℝ⁰⁺ : ℝ⁰⁺ l → ℝ⁰⁺ l
+  root-is-odd-ℝ⁰⁺ (x , 0≤x) =
+    ( root-is-odd-ℝ n odd-n x , is-nonnegative-root-is-odd-ℝ x 0≤x)
 
-  odd-power-odd-root-ℝ⁰⁺ :
-    (x : ℝ⁰⁺ l) → power-ℝ n (real-ℝ⁰⁺ (odd-root-ℝ⁰⁺ x)) ＝ real-ℝ⁰⁺ x
-  odd-power-odd-root-ℝ⁰⁺ (x , _) = odd-power-odd-root-ℝ n odd-n x
+  power-root-is-odd-ℝ⁰⁺ :
+    (x : ℝ⁰⁺ l) → power-ℝ n (real-ℝ⁰⁺ (root-is-odd-ℝ⁰⁺ x)) ＝ real-ℝ⁰⁺ x
+  power-root-is-odd-ℝ⁰⁺ (x , _) = power-root-is-odd-ℝ n odd-n x
 ```

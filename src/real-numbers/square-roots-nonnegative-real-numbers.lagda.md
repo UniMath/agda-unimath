@@ -717,15 +717,6 @@ abstract
       ( ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (refl {x = one-ℝ})) ∙ real-sqrt-one-ℝ⁰⁺)
 ```
 
-### The square root of zero is zero
-
-```agda
-abstract
-  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
-  real-sqrt-zero-ℝ⁰⁺ =
-    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
-```
-
 ### The square root of a nonnegative real number preserves inequality
 
 ```agda
@@ -742,6 +733,15 @@ abstract
         ( inv (eq-real-square-sqrt-ℝ⁰⁺ x))
         ( inv (eq-real-square-sqrt-ℝ⁰⁺ y))
         ( x≤y))
+```
+
+### The square root of zero is zero
+
+```agda
+abstract
+  real-sqrt-zero-ℝ⁰⁺ : real-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ ＝ zero-ℝ
+  real-sqrt-zero-ℝ⁰⁺ =
+    inv (eq-sim-ℝ (unique-sqrt-ℝ⁰⁺ zero-ℝ⁰⁺ zero-ℝ⁰⁺ (left-zero-law-mul-ℝ _)))
 ```
 
 ### If `√x ≤ 1`, `x ≤ 1`

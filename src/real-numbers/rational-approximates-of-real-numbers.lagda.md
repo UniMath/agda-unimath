@@ -1,7 +1,7 @@
-# Rational approximations of real numbers
+# Rational approximates of real numbers
 
 ```agda
-module real-numbers.rational-approximations-of-real-numbers where
+module real-numbers.rational-approximates-of-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -35,7 +35,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 A
-{{#concept "rational approximation" Disambiguation="of a real number" Agda=rational-approximation-ℝ}}
+{{#concept "rational approximate" Disambiguation="of a real number" Agda=rational-approximate-ℝ}}
 of a [real number](real-numbers.dedekind-real-numbers.md) `x` to some
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`
 is a [rational number](elementary-number-theory.rational-numbers.md) whose
@@ -46,16 +46,16 @@ is within an `ε`-neighborhood of `x` in the
 ## Definition
 
 ```agda
-rational-approximation-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
-rational-approximation-ℝ {l} x ε =
+rational-approximate-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
+rational-approximate-ℝ {l} x ε =
   Σ ℚ (λ q → neighborhood-ℝ l ε x (raise-real-ℚ l q))
 
-rational-approximation-above-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
-rational-approximation-above-ℝ {l} x ε =
+rational-approximate-above-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
+rational-approximate-above-ℝ {l} x ε =
   Σ ℚ (λ q → is-in-upper-cut-ℝ x q × neighborhood-ℝ l ε x (raise-real-ℚ l q))
 
-rational-approximation-below-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
-rational-approximation-below-ℝ {l} x ε =
+rational-approximate-below-ℝ : {l : Level} → ℝ l → ℚ⁺ → UU l
+rational-approximate-below-ℝ {l} x ε =
   Σ ℚ (λ q → is-in-lower-cut-ℝ x q × neighborhood-ℝ l ε x (raise-real-ℚ l q))
 ```
 
@@ -67,14 +67,14 @@ rational-approximation-below-ℝ {l} x ε =
 abstract opaque
   unfolding neighborhood-ℝ real-ℚ
 
-  exists-rational-approximation-below-ℝ :
+  exists-rational-approximate-below-ℝ :
     {l : Level} (x : ℝ l) (ε : ℚ⁺) →
-    type-trunc-Prop (rational-approximation-below-ℝ x ε)
-  exists-rational-approximation-below-ℝ {l} x ε⁺@(ε , _) =
+    type-trunc-Prop (rational-approximate-below-ℝ x ε)
+  exists-rational-approximate-below-ℝ {l} x ε⁺@(ε , _) =
     let
       open
         do-syntax-trunc-Prop
-          ( trunc-Prop (rational-approximation-below-ℝ x ε⁺))
+          ( trunc-Prop (rational-approximate-below-ℝ x ε⁺))
     in do
       ((p , q) , q<p+ε , p<x , x<q) ← is-arithmetically-located-ℝ x ε⁺
       intro-exists
@@ -110,14 +110,14 @@ abstract opaque
 abstract opaque
   unfolding neighborhood-ℝ real-ℚ
 
-  exists-rational-approximation-above-ℝ :
+  exists-rational-approximate-above-ℝ :
     {l : Level} (x : ℝ l) (ε : ℚ⁺) →
-    type-trunc-Prop (rational-approximation-above-ℝ x ε)
-  exists-rational-approximation-above-ℝ {l} x ε⁺@(ε , _) =
+    type-trunc-Prop (rational-approximate-above-ℝ x ε)
+  exists-rational-approximate-above-ℝ {l} x ε⁺@(ε , _) =
     let
       open
         do-syntax-trunc-Prop
-          ( trunc-Prop (rational-approximation-above-ℝ x ε⁺))
+          ( trunc-Prop (rational-approximate-above-ℝ x ε⁺))
     in do
       ((p , q) , q<p+ε , p<x , x<q) ← is-arithmetically-located-ℝ x ε⁺
       intro-exists
@@ -146,9 +146,9 @@ abstract opaque
 
 ```agda
 abstract
-  exists-rational-approximation-ℝ :
+  exists-rational-approximate-ℝ :
     {l : Level} (x : ℝ l) (ε : ℚ⁺) →
-    type-trunc-Prop (rational-approximation-ℝ x ε)
-  exists-rational-approximation-ℝ x ε =
-    map-tot-exists (λ _ → pr2) (exists-rational-approximation-above-ℝ x ε)
+    type-trunc-Prop (rational-approximate-ℝ x ε)
+  exists-rational-approximate-ℝ x ε =
+    map-tot-exists (λ _ → pr2) (exists-rational-approximate-above-ℝ x ε)
 ```
