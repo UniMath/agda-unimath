@@ -71,6 +71,8 @@ open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
+open import metric-spaces.classical-limits-of-functions-metric-spaces public
+open import metric-spaces.classically-pointwise-continuous-functions-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public

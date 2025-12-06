@@ -33,7 +33,7 @@ open import real-numbers.strict-inequality-real-numbers
 
 For any [odd](elementary-number-theory.parity-natural-numbers.md)
 [natural number](elementary-number-theory.natural-numbers.md) `n`, the `n`th
-{{#concept "root" Disambiguation="odd roots of real numbers" Agda=odd-root-ℝ}}
+{{#concept "root" Disambiguation="odd roots of real numbers" Agda=root-is-odd-ℝ}}
 operation is a map from `ℝ` to `ℝ` that is the inverse operation to the `n`th
 [power](real-numbers.powers-real-numbers.md).
 
@@ -47,21 +47,21 @@ module _
   where
 
   opaque
-    odd-root-ℝ : ℝ l → ℝ l
-    odd-root-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    root-is-odd-ℝ : ℝ l → ℝ l
+    root-is-odd-ℝ = map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 
   abstract opaque
-    unfolding odd-root-ℝ
+    unfolding root-is-odd-ℝ
 
-    odd-power-odd-root-ℝ :
-      (x : ℝ l) → power-ℝ n (odd-root-ℝ x) ＝ x
-    odd-power-odd-root-ℝ =
-      is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    odd-power-root-is-odd-ℝ :
+      (x : ℝ l) → power-ℝ n (root-is-odd-ℝ x) ＝ x
+    odd-power-root-is-odd-ℝ =
+      is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 
-    odd-root-odd-power-ℝ :
-      (x : ℝ l) → odd-root-ℝ (power-ℝ n x) ＝ x
-    odd-root-odd-power-ℝ =
-      is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-odd-power-ℝ l n odd-n)
+    odd-root-power-is-odd-ℝ :
+      (x : ℝ l) → root-is-odd-ℝ (power-ℝ n x) ＝ x
+    odd-root-power-is-odd-ℝ =
+      is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 ```
 
 ## Properties
@@ -75,19 +75,19 @@ module _
   where
 
   abstract
-    preserves-le-odd-root-ℝ :
+    preserves-le-root-is-odd-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → le-ℝ x y →
-      le-ℝ (odd-root-ℝ n odd-n x) (odd-root-ℝ n odd-n y)
-    preserves-le-odd-root-ℝ {x = x} {y = y} x<y =
-      reflects-le-odd-power-ℝ
+      le-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
+    preserves-le-root-is-odd-ℝ {x = x} {y = y} x<y =
+      reflects-le-power-is-odd-ℝ
         ( n)
         ( odd-n)
         ( _)
         ( _)
         ( binary-tr
           ( le-ℝ)
-          ( inv (odd-power-odd-root-ℝ n odd-n x))
-          ( inv (odd-power-odd-root-ℝ n odd-n y))
+          ( inv (odd-power-root-is-odd-ℝ n odd-n x))
+          ( inv (odd-power-root-is-odd-ℝ n odd-n y))
           ( x<y))
 ```
 
@@ -100,19 +100,19 @@ module _
   where
 
   abstract
-    preserves-leq-odd-root-ℝ :
+    preserves-leq-root-is-odd-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
-      leq-ℝ (odd-root-ℝ n odd-n x) (odd-root-ℝ n odd-n y)
-    preserves-leq-odd-root-ℝ {x = x} {y = y} x≤y =
-      reflects-leq-odd-power-ℝ
+      leq-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
+    preserves-leq-root-is-odd-ℝ {x = x} {y = y} x≤y =
+      reflects-leq-power-is-odd-ℝ
         ( n)
         ( odd-n)
         ( _)
         ( _)
         ( binary-tr
           ( leq-ℝ)
-          ( inv (odd-power-odd-root-ℝ n odd-n x))
-          ( inv (odd-power-odd-root-ℝ n odd-n y))
+          ( inv (odd-power-root-is-odd-ℝ n odd-n x))
+          ( inv (odd-power-root-is-odd-ℝ n odd-n y))
           ( x≤y))
 ```
 

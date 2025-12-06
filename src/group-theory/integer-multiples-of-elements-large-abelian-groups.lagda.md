@@ -231,11 +231,11 @@ module _
   where
 
   abstract
-    int-multiple-mul-Large-Group :
+    int-multiple-mul-Large-Ab :
       {l1 : Level} (k l : ℤ) (x : type-Large-Ab G l1) →
       int-multiple-Large-Ab G (k *ℤ l) x ＝
       int-multiple-Large-Ab G l (int-multiple-Large-Ab G k x)
-    int-multiple-mul-Large-Group =
+    int-multiple-mul-Large-Ab =
       int-power-mul-Large-Group (large-group-Large-Ab G)
 ```
 

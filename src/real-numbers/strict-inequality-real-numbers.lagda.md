@@ -33,6 +33,10 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import order-theory.similarity-of-elements-strict-preorders
+open import order-theory.strict-orders
+open import order-theory.strict-preorders
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
@@ -200,11 +204,24 @@ abstract
   reflects-le-left-raise-ℝ l {x} {y} =
     preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ' l x)
 
+  preserves-le-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    le-ℝ x y → le-ℝ x (raise-ℝ l y)
+  preserves-le-right-raise-ℝ l {x} {y} =
+    preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ l y)
+
   reflects-le-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x (raise-ℝ l y) → le-ℝ x y
   reflects-le-right-raise-ℝ l {x} {y} =
     preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ' l y)
+
+  le-iff-le-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    le-ℝ x y ↔ le-ℝ x (raise-ℝ l y)
+  le-iff-le-right-raise-ℝ l x y =
+    ( preserves-le-right-raise-ℝ l ,
+      reflects-le-right-raise-ℝ l)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality
@@ -702,6 +719,34 @@ module _
             ( y)
             ( preserves-le-real-ℚ q<r)
             ( H r (leq-real-is-in-lower-cut-ℝ x r<x)))
+```
+
+### Strict inequality of real numbers at a universe level is a strict order
+
+```agda
+strict-preorder-ℝ : (l : Level) → Strict-Preorder (lsuc l) l
+strict-preorder-ℝ l =
+  ( ℝ l ,
+    le-prop-ℝ ,
+    irreflexive-le-ℝ ,
+    transitive-le-ℝ)
+
+abstract
+  extensionality-principle-strict-preorder-ℝ :
+    (l : Level) →
+    extensionality-principle-Strict-Preorder (strict-preorder-ℝ l)
+  extensionality-principle-strict-preorder-ℝ l x y (_ , x~y) =
+    eq-sim-ℝ
+      ( sim-le-same-rational-ℝ x y
+        ( λ q →
+          ( inv-iff (le-iff-le-right-raise-ℝ l y (real-ℚ q))) ∘iff
+          ( x~y (raise-real-ℚ l q)) ∘iff
+          ( le-iff-le-right-raise-ℝ l x (real-ℚ q))))
+
+strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
+strict-order-ℝ l =
+  ( strict-preorder-ℝ l ,
+    extensionality-principle-strict-preorder-ℝ l)
 ```
 
 ## References

@@ -41,7 +41,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.rational-approximations-of-real-numbers
+open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
@@ -105,7 +105,7 @@ abstract
       ( _)
       ( raise-real-ℚ l)
       ( λ q Nεxq → ( Nεxq , q , is-rational-raise-real-ℚ l q))
-      ( exists-rational-approximation-ℝ x ε)
+      ( exists-rational-approximate-ℝ x ε)
 
 dense-subset-rational-real-ℝ :
   (l : Level) → dense-subset-ℝ l l
@@ -130,7 +130,7 @@ module _
           ( le-prop-ℝ x' y') ∧
           ( neighborhood-prop-ℝ l2 δx x x') ∧
           ( neighborhood-prop-ℝ l2 δy y y'))
-    exist-close-le-elements-dense-subset-ℝ {x = x} {y = y} δx δy x<y =
+    exist-close-le-elements-dense-subset-ℝ {x} {y} δx δy x<y =
       let
         open
           do-syntax-trunc-Prop

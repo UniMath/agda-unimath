@@ -330,6 +330,21 @@ module _
     preserves-leq-right-sim-ℝ z≤x q q<z = pr1 x~y q (z≤x q q<z)
 
 module _
+  {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} (x~y : sim-ℝ x y)
+  where
+
+  abstract
+    leq-iff-left-sim-ℝ : leq-ℝ x z ↔ leq-ℝ y z
+    leq-iff-left-sim-ℝ =
+      ( preserves-leq-left-sim-ℝ x~y ,
+        preserves-leq-left-sim-ℝ (symmetric-sim-ℝ x~y))
+
+    leq-iff-right-sim-ℝ : leq-ℝ z x ↔ leq-ℝ z y
+    leq-iff-right-sim-ℝ =
+      ( preserves-leq-right-sim-ℝ x~y ,
+        preserves-leq-right-sim-ℝ (symmetric-sim-ℝ x~y))
+
+module _
   {l1 l2 l3 l4 : Level}
   {x1 : ℝ l1} {x2 : ℝ l2} {y1 : ℝ l3} {y2 : ℝ l4}
   (x1~x2 : sim-ℝ x1 x2) (y1~y2 : sim-ℝ y1 y2)
