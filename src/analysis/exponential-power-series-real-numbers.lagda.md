@@ -12,6 +12,7 @@ module analysis.exponential-power-series-real-numbers where
 open import analysis.convergent-series-real-numbers
 open import analysis.power-series-at-zero-real-numbers
 open import analysis.ratio-test-series-real-numbers
+open import analysis.series-real-numbers
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers
@@ -34,6 +35,7 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -72,10 +74,14 @@ This page describes properties of the power series.
 ## Definition
 
 ```agda
+coefficient-exp-power-series-at-zero-ℝ : (l : Level) → sequence (ℝ l)
+coefficient-exp-power-series-at-zero-ℝ l n =
+  raise-real-ℚ l (reciprocal-rational-ℕ⁺ (nonzero-factorial-ℕ n))
+
 exp-power-series-at-zero-ℝ : (l : Level) → power-series-at-zero-ℝ l
 exp-power-series-at-zero-ℝ l =
   power-series-at-zero-coefficients-ℝ
-    ( λ n → raise-real-ℚ l (reciprocal-rational-ℕ⁺ (nonzero-factorial-ℕ n)))
+    ( coefficient-exp-power-series-at-zero-ℝ l)
 
 term-at-point-exp-power-series-at-zero-ℝ : {l : Level} → ℝ l → sequence (ℝ l)
 term-at-point-exp-power-series-at-zero-ℝ =
@@ -323,6 +329,49 @@ abstract
                   by
                     leq-sim-ℝ
                       ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ l _)))))
+```
+
+### The exponential power series absolutely converges everywhere
+
+```agda
+abstract
+  is-absolutely-convergent-everywhere-exp-power-series-at-zero-ℝ :
+    {l : Level} (x : ℝ l) →
+    is-absolutely-convergent-at-point-power-series-at-zero-ℝ
+      ( exp-power-series-at-zero-ℝ l)
+      ( x)
+  is-absolutely-convergent-everywhere-exp-power-series-at-zero-ℝ {l} x =
+    inv-tr
+      ( is-convergent-series-ℝ ∘ series-terms-ℝ)
+      ( eq-htpy
+        ( λ n →
+          equational-reasoning
+            abs-ℝ
+              ( ( raise-real-ℚ
+                  ( l)
+                  ( reciprocal-rational-ℕ⁺ (nonzero-factorial-ℕ n)) *ℝ
+                ( power-ℝ n x)))
+            ＝
+              ( abs-ℝ
+                ( raise-real-ℚ
+                  ( l)
+                  ( reciprocal-rational-ℕ⁺ (nonzero-factorial-ℕ n)))) *ℝ
+              ( abs-ℝ (power-ℝ n x))
+              by abs-mul-ℝ _ _
+            ＝
+              ( raise-real-ℚ
+                ( l)
+                ( reciprocal-rational-ℕ⁺ (nonzero-factorial-ℕ n))) *ℝ
+              ( power-ℝ n (abs-ℝ x))
+              by
+                ap-mul-ℝ
+                  ( abs-real-ℝ⁺
+                    ( raise-ℝ⁺ l
+                      ( positive-real-ℚ⁺
+                        ( positive-reciprocal-rational-ℕ⁺
+                          ( nonzero-factorial-ℕ n)))))
+                  ( inv (power-abs-ℝ n x))))
+      ( is-convergent-everywhere-exp-power-series-at-zero-ℝ l (abs-ℝ x))
 ```
 
 ### The convergent power series of the exponential function

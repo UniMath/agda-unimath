@@ -9,6 +9,7 @@ module analysis.power-series-at-zero-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import analysis.absolute-convergence-series-real-numbers
 open import analysis.convergent-series-real-numbers
 open import analysis.series-real-numbers
 
@@ -91,6 +92,21 @@ is-convergent-at-point-power-series-at-zero-ℝ :
   {l : Level} → power-series-at-zero-ℝ l → ℝ l → UU (lsuc l)
 is-convergent-at-point-power-series-at-zero-ℝ σ x =
   type-Prop (is-convergent-at-point-prop-power-series-at-zero-ℝ σ x)
+```
+
+### Absolute convergence of a power series at a point
+
+```agda
+is-absolutely-convergent-at-point-prop-power-series-at-zero-ℝ :
+  {l : Level} → power-series-at-zero-ℝ l → ℝ l → Prop (lsuc l)
+is-absolutely-convergent-at-point-prop-power-series-at-zero-ℝ σ x =
+  is-absolutely-convergent-prop-series-ℝ
+    ( compute-series-at-point-power-series-at-zero-ℝ σ x)
+
+is-absolutely-convergent-at-point-power-series-at-zero-ℝ :
+  {l : Level} → power-series-at-zero-ℝ l → ℝ l → UU (lsuc l)
+is-absolutely-convergent-at-point-power-series-at-zero-ℝ σ x =
+  type-Prop (is-absolutely-convergent-at-point-prop-power-series-at-zero-ℝ σ x)
 ```
 
 ### Convergence of a power series everywhere
