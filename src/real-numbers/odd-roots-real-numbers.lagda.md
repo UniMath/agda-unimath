@@ -53,14 +53,14 @@ module _
   abstract opaque
     unfolding root-is-odd-ℝ
 
-    odd-power-root-is-odd-ℝ :
+    power-root-is-odd-ℝ :
       (x : ℝ l) → power-ℝ n (root-is-odd-ℝ x) ＝ x
-    odd-power-root-is-odd-ℝ =
+    power-root-is-odd-ℝ =
       is-section-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 
-    odd-root-power-is-odd-ℝ :
+    root-power-is-odd-ℝ :
       (x : ℝ l) → root-is-odd-ℝ (power-ℝ n x) ＝ x
-    odd-root-power-is-odd-ℝ =
+    root-power-is-odd-ℝ =
       is-retraction-map-inv-SIPCUB-function-ℝ (SIPCUB-power-is-odd-ℝ l n odd-n)
 ```
 
@@ -86,8 +86,8 @@ module _
         ( _)
         ( binary-tr
           ( le-ℝ)
-          ( inv (odd-power-root-is-odd-ℝ n odd-n x))
-          ( inv (odd-power-root-is-odd-ℝ n odd-n y))
+          ( inv (power-root-is-odd-ℝ n odd-n x))
+          ( inv (power-root-is-odd-ℝ n odd-n y))
           ( x<y))
 ```
 
@@ -111,8 +111,8 @@ module _
         ( _)
         ( binary-tr
           ( leq-ℝ)
-          ( inv (odd-power-root-is-odd-ℝ n odd-n x))
-          ( inv (odd-power-root-is-odd-ℝ n odd-n y))
+          ( inv (power-root-is-odd-ℝ n odd-n x))
+          ( inv (power-root-is-odd-ℝ n odd-n y))
           ( x≤y))
 ```
 
@@ -146,7 +146,7 @@ abstract
       ( equational-reasoning
         power-ℝ n (root-is-odd-ℝ n odd-n zero-ℝ)
         ＝ zero-ℝ
-          by odd-power-root-is-odd-ℝ n odd-n zero-ℝ
+          by power-root-is-odd-ℝ n odd-n zero-ℝ
         ＝ power-ℝ n zero-ℝ
           by inv (nonzero-power-zero-ℝ (n , is-nonzero-is-odd-ℕ odd-n)))
 ```
