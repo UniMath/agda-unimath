@@ -72,7 +72,7 @@ module _
 
 ## Properties
 
-### A Cauchy modulus for the sequence of partial sums of norms of terms in a series is a Cauchy modulus for the series
+### Given a Cauchy modulus for the sequence of partial sums of norms of terms in a series, there is a Cauchy modulus of the series
 
 ```agda
 module _
@@ -86,56 +86,60 @@ module _
 
   abstract
     neighborhood-add-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space :
-      (ε : ℚ⁺) (n k : ℕ) → leq-ℕ (pr1 (M ε)) n →
+      (ε : ℚ⁺) (k : ℕ) →
       neighborhood-ℝ-Banach-Space
         ( V)
         ( ε)
-        ( partial-sum-series-ℝ-Banach-Space V σ (n +ℕ k))
-        ( partial-sum-series-ℝ-Banach-Space V σ n)
+        ( partial-sum-series-ℝ-Banach-Space V σ (pr1 (M ε)))
+        ( partial-sum-series-ℝ-Banach-Space V σ (pr1 (M ε) +ℕ k))
     neighborhood-add-cauchy-modulus-partial-sum-norm-series-ℝ-Banach-Space
-      ε n k με≤n =
+      ε k =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        με = pr1 (M ε)
       in
         chain-of-inequalities
         dist-ℝ-Banach-Space V
-          ( partial-sum-series-ℝ-Banach-Space V σ (n +ℕ k))
-          ( partial-sum-series-ℝ-Banach-Space V σ n)
+          ( partial-sum-series-ℝ-Banach-Space V σ με)
+          ( partial-sum-series-ℝ-Banach-Space V σ (με +ℕ k))
+        ≤ dist-ℝ-Banach-Space V
+            ( partial-sum-series-ℝ-Banach-Space V σ (με +ℕ k))
+            ( partial-sum-series-ℝ-Banach-Space V σ με)
+          by leq-eq-ℝ (commutative-dist-ℝ-Banach-Space V _ _)
         ≤ map-norm-ℝ-Banach-Space V
             ( partial-sum-series-ℝ-Banach-Space V
-              ( drop-series-ℝ-Banach-Space V n σ)
-              ( k))
+              ( drop-series-ℝ-Banach-Space V με σ) k)
           by
             leq-eq-ℝ
               ( ap
                 ( map-norm-ℝ-Banach-Space V)
-                ( inv (partial-sum-drop-series-ℝ-Banach-Space V n σ k)))
+                ( inv
+                  ( partial-sum-drop-series-ℝ-Banach-Space V με σ k)))
         ≤ partial-sum-series-ℝ
-            ( map-norm-series-ℝ-Banach-Space V
-              ( drop-series-ℝ-Banach-Space V n σ))
-            ( k)
-          by
-            triangle-inequality-norm-sum-fin-sequence-type-ℝ-Banach-Space
+            ( map-norm-series-ℝ-Banach-Space
               ( V)
-              ( k)
-              ( _)
+              ( drop-series-ℝ-Banach-Space V με σ))
+            ( k)
+          by triangle-inequality-norm-sum-fin-sequence-type-ℝ-Banach-Space V k _
         ≤ ( partial-sum-series-ℝ
             ( map-norm-series-ℝ-Banach-Space V σ)
-            ( n +ℕ k)) -ℝ
-          ( partial-sum-series-ℝ (map-norm-series-ℝ-Banach-Space V σ) n)
+            ( με +ℕ k)) -ℝ
+          ( partial-sum-series-ℝ
+            ( map-norm-series-ℝ-Banach-Space V σ)
+            ( με))
           by
             leq-eq-ℝ
               ( partial-sum-drop-series-ℝ
-                ( n)
+                ( με)
                 ( map-norm-series-ℝ-Banach-Space V σ)
                 ( k))
         ≤ dist-ℝ
             ( partial-sum-series-ℝ
               ( map-norm-series-ℝ-Banach-Space V σ)
-              ( n +ℕ k))
+              ( με +ℕ k))
             ( partial-sum-series-ℝ
               ( map-norm-series-ℝ-Banach-Space V σ)
-              ( n))
+              ( με))
           by leq-diff-dist-ℝ _ _
         ≤ real-ℚ⁺ ε
           by
@@ -143,12 +147,7 @@ module _
               ( ε)
               ( _)
               ( _)
-              ( pr2
-                ( M ε)
-                ( n +ℕ k)
-                ( n)
-                ( transitive-leq-ℕ (pr1 (M ε)) n (n +ℕ k) (leq-add-ℕ n k) με≤n)
-                ( με≤n))
+              ( pr2 (M ε) _ _ (leq-add-ℕ με k) (refl-leq-ℕ με))
 
     is-cauchy-partial-sum-is-cauchy-partial-sum-norm-series-ℝ-Banach-Space :
       is-cauchy-sequence-Metric-Space
