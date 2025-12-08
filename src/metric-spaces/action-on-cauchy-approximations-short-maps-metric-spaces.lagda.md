@@ -29,7 +29,8 @@ open import metric-spaces.short-functions-metric-spaces
 
 ## Idea
 
-[metric spaces](metric-spaces.metric-spaces.md) act on
+[Short maps](metric-spaces)(metric-spaces.short-functions-metric-spaces.md)
+between [metric spaces](metric-spaces.metric-spaces.md) act on
 [cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
 and induce a short map between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md).
