@@ -17,7 +17,6 @@ open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-action-on-identifications-functions
@@ -47,6 +46,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.equivalences-arrows
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions

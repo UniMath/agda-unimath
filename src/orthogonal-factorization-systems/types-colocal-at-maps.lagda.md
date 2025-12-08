@@ -14,7 +14,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -30,6 +29,7 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.equivalences-arrows
 open import foundation-core.fibers-of-maps
 ```
 
