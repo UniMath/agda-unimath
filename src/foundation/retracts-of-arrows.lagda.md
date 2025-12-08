@@ -174,10 +174,10 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  infix 6 _retract-of-map_
+  infix 6 _retract-of-arrow_
 
-  _retract-of-map_ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  _retract-of-map_ = retract-arrow g f
+  _retract-of-arrow_ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  _retract-of-arrow_ = retract-arrow g f
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -209,7 +209,9 @@ module _
 
   hom-retraction-retract-arrow : hom-arrow g f
   hom-retraction-retract-arrow =
-    hom-retraction-hom-arrow f g inclusion-retract-arrow retraction-retract-arrow
+    hom-retraction-hom-arrow f g
+      ( inclusion-retract-arrow)
+      ( retraction-retract-arrow)
 
   map-domain-hom-retraction-retract-arrow : X → A
   map-domain-hom-retraction-retract-arrow =
@@ -229,7 +231,9 @@ module _
     coh-hom-arrow g f hom-retraction-retract-arrow
 
   is-retraction-hom-retraction-retract-arrow :
-    is-retraction-hom-arrow f g inclusion-retract-arrow hom-retraction-retract-arrow
+    is-retraction-hom-arrow f g
+      ( inclusion-retract-arrow)
+      ( hom-retraction-retract-arrow)
   is-retraction-hom-retraction-retract-arrow =
     is-retraction-hom-retraction-hom-arrow f g
       ( inclusion-retract-arrow)
@@ -241,7 +245,9 @@ module _
       ( map-domain-hom-retraction-retract-arrow)
   is-retraction-map-domain-hom-retraction-retract-arrow =
     htpy-domain-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-arrow inclusion-retract-arrow)
+      ( comp-hom-arrow f g f
+        ( hom-retraction-retract-arrow)
+        ( inclusion-retract-arrow))
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-arrow)
 
@@ -260,7 +266,9 @@ module _
       ( map-codomain-hom-retraction-retract-arrow)
   is-retraction-map-codomain-hom-retraction-retract-arrow =
     htpy-codomain-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-arrow inclusion-retract-arrow)
+      ( comp-hom-arrow f g f
+        ( hom-retraction-retract-arrow)
+        ( inclusion-retract-arrow))
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-arrow)
 
@@ -280,7 +288,9 @@ module _
       ( is-retraction-map-codomain-hom-retraction-retract-arrow)
   coh-retract-arrow =
     coh-htpy-hom-arrow f f
-      ( comp-hom-arrow f g f hom-retraction-retract-arrow inclusion-retract-arrow)
+      ( comp-hom-arrow f g f
+        ( hom-retraction-retract-arrow)
+        ( inclusion-retract-arrow))
       ( id-hom-arrow)
       ( is-retraction-hom-retraction-retract-arrow)
 ```
@@ -659,7 +669,8 @@ module _
             ( inclusion-fiber f)
             ( inclusion-fiber f)
             ( tr-hom-arrow-inclusion-fiber f
-              ( is-retraction-map-codomain-hom-retraction-retract-arrow f g R b))
+              ( is-retraction-map-codomain-hom-retraction-retract-arrow f g R
+                ( b)))
             ( hom-arrow-fiber f f
               ( comp-hom-arrow f g f
                 ( hom-retraction-retract-arrow f g R)
@@ -734,7 +745,9 @@ module _
         ( precomp f S)
         ( hom-retraction-precomp-retract-arrow))
   is-retraction-map-domain-precomp-retract-arrow =
-    htpy-precomp (is-retraction-map-codomain-hom-retraction-retract-arrow f g R) S
+    htpy-precomp
+      ( is-retraction-map-codomain-hom-retraction-retract-arrow f g R)
+      ( S)
 
   is-retraction-map-codomain-precomp-retract-arrow :
     is-retraction
@@ -802,7 +815,8 @@ module _
   pr2 retraction-precomp-retract-arrow =
     is-retraction-hom-retraction-precomp-retract-arrow
 
-  retract-arrow-precomp-retract-arrow : (precomp f S) retract-of-arrow (precomp g S)
+  retract-arrow-precomp-retract-arrow :
+    (precomp f S) retract-of-arrow (precomp g S)
   pr1 retract-arrow-precomp-retract-arrow = inclusion-precomp-retract-arrow
   pr2 retract-arrow-precomp-retract-arrow = retraction-precomp-retract-arrow
 ```
@@ -819,7 +833,8 @@ module _
   inclusion-postcomp-retract-arrow =
     postcomp-hom-arrow f g (inclusion-retract-arrow f g R) S
 
-  hom-retraction-postcomp-retract-arrow : hom-arrow (postcomp S g) (postcomp S f)
+  hom-retraction-postcomp-retract-arrow :
+    hom-arrow (postcomp S g) (postcomp S f)
   hom-retraction-postcomp-retract-arrow =
     postcomp-hom-arrow g f (hom-retraction-retract-arrow f g R) S
 
@@ -834,7 +849,8 @@ module _
         ( postcomp S f)
         ( hom-retraction-postcomp-retract-arrow))
   is-retraction-map-domain-postcomp-retract-arrow =
-    htpy-postcomp S (is-retraction-map-domain-hom-retraction-retract-arrow f g R)
+    htpy-postcomp S
+      ( is-retraction-map-domain-hom-retraction-retract-arrow f g R)
 
   is-retraction-map-codomain-postcomp-retract-arrow :
     is-retraction
