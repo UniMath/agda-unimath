@@ -28,7 +28,7 @@ open import metric-spaces.pseudometric-spaces
 
 ## Idea
 
-A [extension of a metric space](metric-spaces.extensions-metric-spaces.md)
+An [extension of a metric space](metric-spaces.extensions-metric-spaces.md)
 induces an isometry between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md),
 hence, an
