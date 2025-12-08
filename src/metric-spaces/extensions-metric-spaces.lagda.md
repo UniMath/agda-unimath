@@ -10,14 +10,17 @@ module metric-spaces.extensions-metric-spaces where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.pseudometric-spaces
 ```
 
 </details>
@@ -54,6 +57,14 @@ module _
 
   metric-space-extension-Metric-Space : Metric-Space l3 l4
   metric-space-extension-Metric-Space = pr1 E
+
+  pseudometric-space-extension-Metric-Space : Pseudometric-Space l3 l4
+  pseudometric-space-extension-Metric-Space =
+    pseudometric-Metric-Space metric-space-extension-Metric-Space
+
+  type-metric-space-extension-Metric-Space : UU l3
+  type-metric-space-extension-Metric-Space =
+    type-Metric-Space metric-space-extension-Metric-Space
 
   isometry-metric-space-extension-Metric-Space :
     isometry-Metric-Space

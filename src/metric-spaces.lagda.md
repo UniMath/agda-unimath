@@ -57,6 +57,7 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
@@ -105,6 +106,7 @@ open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces publ
 open import metric-spaces.interior-subsets-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
+open import metric-spaces.limit-points-extensions-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.limits-of-functions-metric-spaces public
@@ -112,7 +114,6 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
-open import metric-spaces.metric-extensions-pseudometric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
