@@ -192,8 +192,8 @@ module _
     ( map-retraction-map-product f g H K ,
       retraction-map-retraction-map-product f g H K)
 
-  retract-map-product : A retract-of C → B retract-of D → A × B retract-of C × D
-  retract-map-product (f , retraction-f) (g , retraction-g) =
+  retract-product : A retract-of C → B retract-of D → A × B retract-of C × D
+  retract-product (f , retraction-f) (g , retraction-g) =
     ( map-product f g , retraction-map-product f g retraction-f retraction-g)
 ```
 

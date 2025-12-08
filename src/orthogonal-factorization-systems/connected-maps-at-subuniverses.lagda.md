@@ -24,7 +24,7 @@ open import foundation.inhabited-types
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositional-truncations
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.subtype-identity-principle
@@ -734,7 +734,7 @@ module _
       ( dependent-pullback-property-pushout-is-pushout f g c H)
 ```
 
-### `K`-connected maps are closed under retracts of maps
+### `K`-connected maps are closed under retracts of arrows
 
 **Proof.** Given a retract of maps
 
@@ -760,7 +760,7 @@ functoriality an induced retract of dependent precomposition maps
      Π(B'),U <--------- Π(B'),(U∘r'∘i') <----- Π(B),(U∘r') <--- Π(B'),(U),
 ```
 
-and since equivalences are closed under retracts of maps, if `f` is
+and since equivalences are closed under retracts of arrows, if `f` is
 `K`-connected then so is `f'`. ∎
 
 > This remains to be formalized.
@@ -771,18 +771,18 @@ The formalization below takes a shortcut via the fiber condition.
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (K : subuniverse l1 l2)
   {A : UU l3} {B : UU l4} {C : UU l5} {D : UU l6}
-  {f : A → B} {g : C → D} (R : f retract-of-map g)
+  {f : A → B} {g : C → D} (R : f retract-of-arrow g)
   where
 
-  is-subuniverse-connected-map-retract-map' :
+  is-subuniverse-connected-map-retract-arrow' :
     ((y : D) → is-subuniverse-connected K (fiber g y)) →
     is-subuniverse-connected-map K f
-  is-subuniverse-connected-map-retract-map' H =
+  is-subuniverse-connected-map-retract-arrow' H =
     is-subuniverse-connected-map-is-subuniverse-connected-fibers K f
       ( λ b →
         is-subuniverse-connected-retract K
-          ( retract-fiber-retract-map f g R b)
-          ( H (map-codomain-inclusion-retract-map f g R b)))
+          ( retract-fiber-retract-arrow f g R b)
+          ( H (map-codomain-inclusion-retract-arrow f g R b)))
 ```
 
 ### The total map induced by a family of maps is `K`-connected if and only if all maps in the family are `K`-connected

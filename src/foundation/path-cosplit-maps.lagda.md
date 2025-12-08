@@ -38,7 +38,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -337,7 +337,7 @@ is-path-cosplit-is-path-cosplit-on-domain-hom-arrow :
   is-path-cosplit k f
 is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
   {k = neg-two-𝕋} f g α I =
-  retraction-retract-map-retraction' f g
+  retraction-retract-arrow-retraction' f g
     ( map-domain-hom-arrow f g α , I)
     ( map-codomain-hom-arrow f g α)
     ( coh-hom-arrow f g α)
