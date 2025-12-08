@@ -65,6 +65,62 @@ module _
     is-prop-type-Prop is-complete-prop-extension-Metric-Space
 ```
 
+### The type of complete metric extensions of a metric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (l3 l4 : Level)
+  (M : Metric-Space l1 l2)
+  where
+
+  complete-extension-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
+  complete-extension-Metric-Space =
+    Σ ( extension-Metric-Space l3 l4 M)
+      ( is-complete-extension-Metric-Space M)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (C : complete-extension-Metric-Space l3 l4 M)
+  where
+
+  extension-complete-extension-Metric-Space : extension-Metric-Space l3 l4 M
+  extension-complete-extension-Metric-Space = pr1 C
+
+  metric-space-complete-extension-Metric-Space : Metric-Space l3 l4
+  metric-space-complete-extension-Metric-Space =
+    metric-space-extension-Metric-Space M
+      extension-complete-extension-Metric-Space
+
+  is-complete-metric-space-complete-extension-Metric-Space :
+    is-complete-Metric-Space
+      metric-space-complete-extension-Metric-Space
+  is-complete-metric-space-complete-extension-Metric-Space = pr2 C
+
+  complete-metric-space-complete-extension-Metric-Space :
+    Complete-Metric-Space l3 l4
+  complete-metric-space-complete-extension-Metric-Space =
+    ( metric-space-complete-extension-Metric-Space ,
+      is-complete-metric-space-complete-extension-Metric-Space)
+
+  isometry-metric-space-complete-extension-Metric-Space :
+    isometry-Metric-Space
+      ( M)
+      ( metric-space-complete-extension-Metric-Space)
+  isometry-metric-space-complete-extension-Metric-Space =
+    isometry-metric-space-extension-Metric-Space
+      ( M)
+      ( extension-complete-extension-Metric-Space)
+
+  map-metric-space-complete-extension-Metric-Space :
+    type-Metric-Space M →
+    type-Metric-Space metric-space-complete-extension-Metric-Space
+  map-metric-space-complete-extension-Metric-Space =
+    map-metric-space-extension-Metric-Space M
+      extension-complete-extension-Metric-Space
+```
+
 ## Properties
 
 ### Any complete extension is precomplete
