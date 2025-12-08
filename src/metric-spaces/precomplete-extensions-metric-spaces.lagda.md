@@ -33,7 +33,7 @@ An [extension of a metric space](metric-spaces.extensions-metric-spaces.md]
 `i : M → N` is called
 {{#concept "precomplete" Disambiguation="extension of metric space" Agda=is-precomplete-prop-extension-Metric-Space}}
 if the
-[images](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces)
+[images](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces.md)
 of all
 [Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md) in
 `M` are

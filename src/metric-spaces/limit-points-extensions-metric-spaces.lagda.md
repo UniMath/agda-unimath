@@ -66,7 +66,7 @@ Given an [extension of metric spaces](metric-spaces.extensions-metric-spaces.md)
 if there [exists](foundation.existential-quantification.md) a
 [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md) in
 `M` whose image under the
-[action of metric extensions](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces)
+[action of metric extensions](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces.md)
 has [limit](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) `y`
 in `N`.
 

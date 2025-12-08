@@ -34,9 +34,9 @@ An [extension of a metric space](metric-spaces.extensions-metric-spaces.md]
 `i : M → N` is called
 {{#concept "Cauchy-dense" Disambiguation="extension of metric space" Agda=is-cauchy-dense-prop-extension-Metric-Space}}
 if all points in `N` are
-[limit points](metrics-spaces.limit-points-extensions-metric-spaces.md) of the
+[limit points](metric-spaces.limit-points-extensions-metric-spaces.md) of the
 extension, i.e. limit of the
-[image](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces)
+[image](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces.md)
 of some
 [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md) in
 `M`.
