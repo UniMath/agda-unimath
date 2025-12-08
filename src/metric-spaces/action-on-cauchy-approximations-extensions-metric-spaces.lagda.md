@@ -56,24 +56,24 @@ module _
       ( pseudometric-space-extension-Metric-Space M E)
       ( isometry-metric-space-extension-Metric-Space M E)
 
-  map-cauchy-pseudocompletion-extension-Metric-Space :
+  map-cauchy-approximation-extension-Metric-Space :
     cauchy-approximation-Metric-Space M →
     cauchy-approximation-Metric-Space
       ( metric-space-extension-Metric-Space M E)
-  map-cauchy-pseudocompletion-extension-Metric-Space =
+  map-cauchy-approximation-extension-Metric-Space =
     map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Metric-Space)
 
-  is-isometry-map-cauchy-pseudocompletion-extension-Metric-Space :
+  is-isometry-map-cauchy-approximation-extension-Metric-Space :
     is-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
-      ( map-cauchy-pseudocompletion-extension-Metric-Space)
-  is-isometry-map-cauchy-pseudocompletion-extension-Metric-Space =
+      ( map-cauchy-approximation-extension-Metric-Space)
+  is-isometry-map-cauchy-approximation-extension-Metric-Space =
     is-isometry-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space

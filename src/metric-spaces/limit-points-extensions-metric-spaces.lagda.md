@@ -87,7 +87,7 @@ module _
   is-limit-map-cauchy-pseudocompletion-prop-extension-Metric-Space u =
     is-limit-cauchy-approximation-prop-Metric-Space
       ( metric-space-extension-Metric-Space M E)
-      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
+      ( map-cauchy-approximation-extension-Metric-Space M E u)
       ( y)
 
   is-limit-map-cauchy-pseudocompletion-extension-Metric-Space :
@@ -148,8 +148,8 @@ module _
       ( v)
       ( sim-has-same-limit-cauchy-approximation-Pseudometric-Space
         ( pseudometric-space-extension-Metric-Space M E)
-        ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
-        ( map-cauchy-pseudocompletion-extension-Metric-Space M E v)
+        ( map-cauchy-approximation-extension-Metric-Space M E u)
+        ( map-cauchy-approximation-extension-Metric-Space M E v)
         ( y)
         ( lim-u)
         ( lim-v))
@@ -164,8 +164,8 @@ module _
   has-same-limit-map-cauchy-sim-pseudocompletion-extension-Metric-Space u~v =
     has-same-limit-sim-cauchy-approximation-Pseudometric-Space
       ( pseudometric-space-extension-Metric-Space M E)
-      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
-      ( map-cauchy-pseudocompletion-extension-Metric-Space M E v)
+      ( map-cauchy-approximation-extension-Metric-Space M E u)
+      ( map-cauchy-approximation-extension-Metric-Space M E v)
       ( y)
       ( preserves-sim-map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
