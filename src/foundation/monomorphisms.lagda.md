@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.small-types
 ```
 
 </details>
@@ -54,13 +55,20 @@ module _
       ( is-equiv-precomp-is-equiv map-raise is-equiv-map-raise B)
       ( H (raise l4 X))
 
-  is-small-is-mono :
-    {l3 : Level} → Σ (UU (l1 ⊔ l2)) (λ P → is-mono l3 f ≃ P)
-  is-small-is-mono {l3} =
-    ( is-emb f ,
-      equiv-iff
-        ( is-mono-Prop l3 f)
-        ( is-emb-Prop f)
-        ( λ H → is-emb-is-mono-lzero f (is-mono-is-mono-lub lzero l3 H))
-        ( λ H → is-mono-is-emb f H))
+  is-emb-is-mono-Level : {l3 : Level} → is-mono l3 f → is-emb f
+  is-emb-is-mono-Level {l3} H =
+    is-emb-is-mono-lzero f (is-mono-is-mono-lub lzero l3 H)
+
+  is-emb-iff-is-mono : {l3 : Level} → is-mono l3 f ↔ is-emb f
+  is-emb-iff-is-mono = (is-emb-is-mono-Level , (λ H → is-mono-is-emb f H))
+
+  equiv-is-emb-is-mono : {l3 : Level} → is-mono l3 f ≃ is-emb f
+  equiv-is-emb-is-mono {l3} =
+    equiv-iff'
+      ( is-mono-Prop l3 f)
+      ( is-emb-Prop f)
+      ( is-emb-iff-is-mono)
+
+  is-small-is-mono : {l3 : Level} → is-small (l1 ⊔ l2) (is-mono l3 f)
+  is-small-is-mono = (is-emb f , equiv-is-emb-is-mono)
 ```
