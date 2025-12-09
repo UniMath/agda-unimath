@@ -64,10 +64,7 @@ module _
 
   equiv-is-emb-is-mono : {l3 : Level} → is-mono l3 f ≃ is-emb f
   equiv-is-emb-is-mono {l3} =
-    equiv-iff'
-      ( is-mono-Prop l3 f)
-      ( is-emb-Prop f)
-      ( is-emb-iff-is-mono)
+    equiv-iff' (is-mono-Prop l3 f) (is-emb-Prop f) (is-emb-iff-is-mono)
 
   is-small-is-mono : {l3 : Level} → is-small (l1 ⊔ l2) (is-mono l3 f)
   is-small-is-mono = (is-emb f , equiv-is-emb-is-mono)
