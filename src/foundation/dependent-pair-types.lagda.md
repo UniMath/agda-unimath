@@ -26,6 +26,7 @@ Consider a type family `B` over `A`. The
 
 ```agda
 record Σ {l1 l2 : Level} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
+  eta-equality
   constructor pair
   field
     pr1 : A
