@@ -38,7 +38,7 @@ module _
   (f : type-function-Metric-Space X Y)
   where
 
-  is-classically-pointwise-continuous-prop-function-Metric-Space :
+  is-classically-pointwise-continuous-prop-map-Metric-Space :
     Prop (l1 ⊔ l2 ⊔ l4)
   is-classically-pointwise-continuous-prop-function-Metric-Space =
     Π-Prop
@@ -95,7 +95,7 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space :
+    is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space :
       is-classically-pointwise-continuous-map-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space

@@ -51,7 +51,7 @@ module _
   (y : type-Metric-Space Y)
   where
 
-  is-classical-limit-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-classical-limit-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-classical-limit-prop-function-Metric-Space =
     Π-Prop
       ( ℚ⁺)
@@ -84,7 +84,7 @@ module _
   where
 
   abstract
-    is-classical-limit-is-limit-function-Metric-Space :
+    is-classical-limit-is-limit-map-Metric-Space :
       is-point-limit-function-Metric-Space X Y f x y →
       is-classical-limit-function-Metric-Space X Y f x y
     is-classical-limit-is-limit-function-Metric-Space H ε =
@@ -105,7 +105,7 @@ module _
   where
 
   abstract
-    is-limit-is-classical-limit-ACω-function-Metric-Space :
+    is-limit-is-classical-limit-map-acω-Metric-Space :
       is-classical-limit-function-Metric-Space X Y f x y →
       is-point-limit-function-Metric-Space X Y f x y
     is-limit-is-classical-limit-ACω-function-Metric-Space H =

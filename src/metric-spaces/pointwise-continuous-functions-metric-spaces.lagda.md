@@ -52,7 +52,7 @@ module _
   (f : type-function-Metric-Space X Y)
   where
 
-  is-pointwise-continuous-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-pointwise-continuous-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-pointwise-continuous-prop-function-Metric-Space =
     Π-Prop
       ( type-Metric-Space X)
@@ -164,7 +164,7 @@ module _
                   ( leq-right-min-ℚ⁺ (μf ε) (μg ε))
                   ( Ncc'))))
 
-  product-pointwise-continuous-map-Metric-Space :
+  pointwise-continuous-map-product-Metric-Space :
     pointwise-continuous-map-Metric-Space
       ( product-Metric-Space A C)
       ( product-Metric-Space B D)
@@ -350,13 +350,13 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-id-Metric-Space :
+    is-pointwise-continuous-map-id-Metric-Space :
       is-pointwise-continuous-map-Metric-Space X X id
     is-pointwise-continuous-id-Metric-Space =
       is-pointwise-continuous-is-isometry-Metric-Space X X id
         ( is-isometry-id-Metric-Space X)
 
-  pointwise-continuous-id-Metric-Space :
+  id-pointwise-continuous-map-Metric-Space :
     pointwise-continuous-map-Metric-Space X X
   pointwise-continuous-id-Metric-Space =
     ( id , is-pointwise-continuous-id-Metric-Space)
