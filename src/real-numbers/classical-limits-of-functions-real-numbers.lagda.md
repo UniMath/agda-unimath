@@ -35,7 +35,7 @@ are in a `ε`-neighborhood of each other.
 is-classical-limit-prop-function-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → ℝ l1 → ℝ l2 → Prop (lsuc l1 ⊔ l2)
 is-classical-limit-prop-function-ℝ {l1} {l2} =
-  is-classical-limit-prop-function-Metric-Space
+  is-classical-limit-prop-map-Metric-Space
     ( metric-space-ℝ l1)
     ( metric-space-ℝ l2)
 
@@ -61,7 +61,7 @@ module _
     is-classical-limit-is-limit-function-ℝ :
       is-limit-function-ℝ f x y → is-classical-limit-function-ℝ f x y
     is-classical-limit-is-limit-function-ℝ =
-      is-classical-limit-is-limit-function-Metric-Space
+      is-classical-limit-is-limit-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)
@@ -84,7 +84,7 @@ module _
     is-limit-is-classical-limit-ACω-function-ℝ :
       is-classical-limit-function-ℝ f x y → is-limit-function-ℝ f x y
     is-limit-is-classical-limit-ACω-function-ℝ =
-      is-limit-is-classical-limit-ACω-function-Metric-Space
+      is-limit-is-classical-limit-map-acω-Metric-Space
         ( acω)
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)

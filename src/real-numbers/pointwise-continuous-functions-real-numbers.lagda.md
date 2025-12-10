@@ -41,7 +41,7 @@ itself.
 is-pointwise-continuous-prop-function-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → Prop (lsuc l1 ⊔ l2)
 is-pointwise-continuous-prop-function-ℝ {l1} {l2} =
-  is-pointwise-continuous-prop-function-Metric-Space
+  is-pointwise-continuous-prop-map-Metric-Space
     ( metric-space-ℝ l1)
     ( metric-space-ℝ l2)
 

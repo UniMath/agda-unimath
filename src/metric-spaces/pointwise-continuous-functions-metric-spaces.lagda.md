@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.axiom-of-countable-choice
 open import foundation.cartesian-product-types
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -53,21 +54,21 @@ module _
   (f : type-function-Metric-Space X Y)
   where
 
-  is-pointwise-continuous-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
-  is-pointwise-continuous-prop-function-Metric-Space =
+  is-pointwise-continuous-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-pointwise-continuous-prop-map-Metric-Space =
     Π-Prop
       ( type-Metric-Space X)
       ( is-continuous-at-point-prop-function-Metric-Space X Y f)
 
   is-pointwise-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-pointwise-continuous-map-Metric-Space =
-    type-Prop is-pointwise-continuous-prop-function-Metric-Space
+    type-Prop is-pointwise-continuous-prop-map-Metric-Space
 
 pointwise-continuous-map-Metric-Space :
   {l1 l2 l3 l4 : Level} → Metric-Space l1 l2 → Metric-Space l3 l4 →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 pointwise-continuous-map-Metric-Space X Y =
-  type-subtype (is-pointwise-continuous-prop-function-Metric-Space X Y)
+  type-subtype (is-pointwise-continuous-prop-map-Metric-Space X Y)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -165,11 +166,11 @@ module _
                   ( leq-right-min-ℚ⁺ (μf ε) (μg ε))
                   ( Ncc'))))
 
-  product-pointwise-continuous-map-Metric-Space :
+  pointwise-continuous-map-product-Metric-Space :
     pointwise-continuous-map-Metric-Space
       ( product-Metric-Space A C)
       ( product-Metric-Space B D)
-  product-pointwise-continuous-map-Metric-Space =
+  pointwise-continuous-map-product-Metric-Space =
     ( map-product-pointwise-continuous-map-Metric-Space ,
       is-pointwise-continuous-map-product-pointwise-continuous-map-Metric-Space)
 ```
@@ -329,15 +330,18 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-constant-function-Metric-Space :
-      is-pointwise-continuous-map-Metric-Space X Y (λ _ → y)
-    is-pointwise-continuous-constant-function-Metric-Space =
+    is-pointwise-continuous-const-Metric-Space :
+      is-pointwise-continuous-map-Metric-Space
+        ( X)
+        ( Y)
+        ( const (type-Metric-Space X) y)
+    is-pointwise-continuous-const-Metric-Space =
       is-pointwise-continuous-is-short-function-Metric-Space X Y _
         ( is-short-constant-function-Metric-Space X Y y)
 
-  pointwise-continuous-constant-function-Metric-Space :
+  const-pointwise-continuous-map-Metric-Space :
     pointwise-continuous-map-Metric-Space X Y
-  pointwise-continuous-constant-function-Metric-Space =
+  const-pointwise-continuous-map-Metric-Space =
     pointwise-continuous-short-function-Metric-Space X Y
       ( short-constant-function-Metric-Space X Y y)
 ```
@@ -351,14 +355,14 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-id-Metric-Space :
+    is-pointwise-continuous-map-id-Metric-Space :
       is-pointwise-continuous-map-Metric-Space X X id
-    is-pointwise-continuous-id-Metric-Space =
+    is-pointwise-continuous-map-id-Metric-Space =
       is-pointwise-continuous-is-isometry-Metric-Space X X id
         ( is-isometry-id-Metric-Space X)
 
-  pointwise-continuous-id-Metric-Space :
+  id-pointwise-continuous-map-Metric-Space :
     pointwise-continuous-map-Metric-Space X X
-  pointwise-continuous-id-Metric-Space =
-    ( id , is-pointwise-continuous-id-Metric-Space)
+  id-pointwise-continuous-map-Metric-Space =
+    ( id , is-pointwise-continuous-map-id-Metric-Space)
 ```

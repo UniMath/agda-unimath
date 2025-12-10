@@ -41,7 +41,7 @@ module _
 
   is-classically-pointwise-continuous-prop-function-ℝ : Prop (lsuc l1 ⊔ l2)
   is-classically-pointwise-continuous-prop-function-ℝ =
-    is-classically-pointwise-continuous-prop-function-Metric-Space
+    is-classically-pointwise-continuous-prop-map-Metric-Space
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l2)
       ( f)
@@ -86,7 +86,7 @@ module _
       is-classically-pointwise-continuous-map-ℝ f →
       is-pointwise-continuous-map-ℝ f
     is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ =
-      is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space
+      is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space
         ( acω)
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)

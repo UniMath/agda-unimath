@@ -38,16 +38,16 @@ module _
   (f : type-function-Metric-Space X Y)
   where
 
-  is-classically-pointwise-continuous-prop-function-Metric-Space :
+  is-classically-pointwise-continuous-prop-map-Metric-Space :
     Prop (l1 ⊔ l2 ⊔ l4)
-  is-classically-pointwise-continuous-prop-function-Metric-Space =
+  is-classically-pointwise-continuous-prop-map-Metric-Space =
     Π-Prop
       ( type-Metric-Space X)
-      ( λ x → is-classical-limit-prop-function-Metric-Space X Y f x (f x))
+      ( λ x → is-classical-limit-prop-map-Metric-Space X Y f x (f x))
 
   is-classically-pointwise-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-classically-pointwise-continuous-map-Metric-Space =
-    type-Prop is-classically-pointwise-continuous-prop-function-Metric-Space
+    type-Prop is-classically-pointwise-continuous-prop-map-Metric-Space
 ```
 
 ## Properties
@@ -70,7 +70,7 @@ module _
         ( map-pointwise-continuous-map-Metric-Space X Y f)
     is-classically-pointwise-continuous-pointwise-continuous-map-Metric-Space
       x =
-      is-classical-limit-is-limit-function-Metric-Space
+      is-classical-limit-is-limit-map-Metric-Space
         ( X)
         ( Y)
         ( map-pointwise-continuous-map-Metric-Space X Y f)
@@ -95,12 +95,12 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space :
+    is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space :
       is-classically-pointwise-continuous-map-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-Metric-Space
+    is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space
       H x =
-      is-limit-is-classical-limit-ACω-function-Metric-Space
+      is-limit-is-classical-limit-map-acω-Metric-Space
         ( acω)
         ( X)
         ( Y)
