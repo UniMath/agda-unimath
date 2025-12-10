@@ -29,7 +29,7 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 The
-{{#concept "classical definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-classical-limit-function-Metric-Space}}
+{{#concept "classical definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-classical-limit-map-Metric-Space}}
 states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for any
 `ε : ℚ⁺`, there [exists](foundation.existential-quantification.md) a `δ : ℚ⁺`
 such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
@@ -52,7 +52,7 @@ module _
   where
 
   is-classical-limit-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
-  is-classical-limit-prop-function-Metric-Space =
+  is-classical-limit-prop-map-Metric-Space =
     Π-Prop
       ( ℚ⁺)
       ( λ ε →
@@ -64,9 +64,9 @@ module _
                 neighborhood-prop-Metric-Space X δ x x' ⇒
                 neighborhood-prop-Metric-Space Y ε y (f x'))))
 
-  is-classical-limit-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-classical-limit-function-Metric-Space =
-    type-Prop is-classical-limit-prop-function-Metric-Space
+  is-classical-limit-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-classical-limit-map-Metric-Space =
+    type-Prop is-classical-limit-prop-map-Metric-Space
 ```
 
 ## Properties
@@ -86,8 +86,8 @@ module _
   abstract
     is-classical-limit-is-limit-map-Metric-Space :
       is-point-limit-function-Metric-Space X Y f x y →
-      is-classical-limit-function-Metric-Space X Y f x y
-    is-classical-limit-is-limit-function-Metric-Space H ε =
+      is-classical-limit-map-Metric-Space X Y f x y
+    is-classical-limit-is-limit-map-Metric-Space H ε =
       map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
 ```
 
@@ -106,9 +106,9 @@ module _
 
   abstract
     is-limit-is-classical-limit-map-acω-Metric-Space :
-      is-classical-limit-function-Metric-Space X Y f x y →
+      is-classical-limit-map-Metric-Space X Y f x y →
       is-point-limit-function-Metric-Space X Y f x y
-    is-limit-is-classical-limit-ACω-function-Metric-Space H =
+    is-limit-is-classical-limit-map-acω-Metric-Space H =
       let
         open
           do-syntax-trunc-Prop
