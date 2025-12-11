@@ -32,6 +32,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 ```
 
@@ -261,63 +262,74 @@ abstract
 ### Any divisor of `gcd a b` is a common divisor of `a` and `b`
 
 ```agda
-div-left-factor-div-gcd-ℕ :
-  (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x a
-div-left-factor-div-gcd-ℕ a b x d with
-  is-decidable-is-zero-ℕ (a +ℕ b)
-... | inl p =
-  concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-left-is-zero-add-ℕ a b p))
-... | inr np =
-  transitive-div-ℕ x (gcd-ℕ a b) a
-    ( pair q
-      ( ( ( α) ∙
-          ( ap
-            ( dist-ℕ a)
-            ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
-              ( λ x H →
-                div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
-                  ( div-mul-ℕ q x (gcd-ℕ a b)
-                    ( div-gcd-is-common-divisor-ℕ a b x H))
-                  ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
-        ( right-unit-law-dist-ℕ a)))
-    ( d)
-  where
-  r = remainder-euclidean-division-ℕ (gcd-ℕ a b) a
-  q = quotient-euclidean-division-ℕ (gcd-ℕ a b) a
-  α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) a
-  B =
-    strict-upper-bound-remainder-euclidean-division-ℕ
-      (gcd-ℕ a b) a (is-nonzero-gcd-ℕ a b np)
-  β = eq-euclidean-division-ℕ (gcd-ℕ a b) a
+opaque
+  div-left-factor-div-gcd-ℕ :
+    (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x a
+  div-left-factor-div-gcd-ℕ a b x d with
+    is-decidable-is-zero-ℕ (a +ℕ b)
+  ... | inl p =
+    concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-left-is-zero-add-ℕ a b p))
+  ... | inr np =
+    transitive-div-ℕ x (gcd-ℕ a b) a
+      ( pair q
+        ( ( ( α) ∙
+            ( ap
+              ( dist-ℕ a)
+              ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
+                ( λ x H →
+                  div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
+                    ( div-mul-ℕ q x (gcd-ℕ a b)
+                      ( div-gcd-is-common-divisor-ℕ a b x H))
+                    ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
+          ( right-unit-law-dist-ℕ a)))
+      ( d)
+    where
+    r : ℕ
+    r = remainder-euclidean-division-ℕ (gcd-ℕ a b) a
+    q : ℕ
+    q = quotient-euclidean-division-ℕ (gcd-ℕ a b) a
+    α : (q *ℕ gcd-ℕ a b) ＝ dist-ℕ a r
+    α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) a
+    B : le-ℕ r (gcd-ℕ a b)
+    B =
+      strict-upper-bound-remainder-euclidean-division-ℕ
+        (gcd-ℕ a b) a (is-nonzero-gcd-ℕ a b np)
+    β : q *ℕ gcd-ℕ a b +ℕ r ＝ a
+    β = eq-euclidean-division-ℕ (gcd-ℕ a b) a
 
-div-right-factor-div-gcd-ℕ :
-  (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x b
-div-right-factor-div-gcd-ℕ a b x d with
-  is-decidable-is-zero-ℕ (a +ℕ b)
-... | inl p =
-  concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
-... | inr np =
-  transitive-div-ℕ x (gcd-ℕ a b) b
-    ( pair q
-      ( ( α ∙
-          ( ap
-            ( dist-ℕ b)
-            ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
-              ( λ x H →
-                div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
-                  ( div-mul-ℕ q x (gcd-ℕ a b)
-                    ( div-gcd-is-common-divisor-ℕ a b x H))
-                  ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
-        ( right-unit-law-dist-ℕ b)))
-    ( d)
-  where
-  r = remainder-euclidean-division-ℕ (gcd-ℕ a b) b
-  q = quotient-euclidean-division-ℕ (gcd-ℕ a b) b
-  α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) b
-  B =
-    strict-upper-bound-remainder-euclidean-division-ℕ
-      (gcd-ℕ a b) b (is-nonzero-gcd-ℕ a b np)
-  β = eq-euclidean-division-ℕ (gcd-ℕ a b) b
+  div-right-factor-div-gcd-ℕ :
+    (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x b
+  div-right-factor-div-gcd-ℕ a b x d with
+    is-decidable-is-zero-ℕ (a +ℕ b)
+  ... | inl p =
+    concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
+  ... | inr np =
+    transitive-div-ℕ x (gcd-ℕ a b) b
+      ( pair q
+        ( ( α ∙
+            ( ap
+              ( dist-ℕ b)
+              ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
+                ( λ x H →
+                  div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
+                    ( div-mul-ℕ q x (gcd-ℕ a b)
+                      ( div-gcd-is-common-divisor-ℕ a b x H))
+                    ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
+          ( right-unit-law-dist-ℕ b)))
+      ( d)
+    where
+    r : ℕ
+    r = remainder-euclidean-division-ℕ (gcd-ℕ a b) b
+    q : ℕ
+    q = quotient-euclidean-division-ℕ (gcd-ℕ a b) b
+    α : q *ℕ gcd-ℕ a b ＝ dist-ℕ b r
+    α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) b
+    B : le-ℕ r (gcd-ℕ a b)
+    B =
+      strict-upper-bound-remainder-euclidean-division-ℕ
+        (gcd-ℕ a b) b (is-nonzero-gcd-ℕ a b np)
+    β : q *ℕ gcd-ℕ a b +ℕ r ＝ b
+    β = eq-euclidean-division-ℕ (gcd-ℕ a b) b
 
 is-common-divisor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → is-common-divisor-ℕ a b x
@@ -330,17 +342,18 @@ pr2 (is-common-divisor-div-gcd-ℕ a b x d) =
 ### The gcd of `a` and `b` is a common divisor
 
 ```agda
-div-left-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) a
-div-left-factor-gcd-ℕ a b =
-  div-left-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+opaque
+  div-left-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) a
+  div-left-factor-gcd-ℕ a b =
+    div-left-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
 
-div-right-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) b
-div-right-factor-gcd-ℕ a b =
-  div-right-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+  div-right-factor-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) b
+  div-right-factor-gcd-ℕ a b =
+    div-right-factor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
 
-is-common-divisor-gcd-ℕ : (a b : ℕ) → is-common-divisor-ℕ a b (gcd-ℕ a b)
-is-common-divisor-gcd-ℕ a b =
-  is-common-divisor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+  is-common-divisor-gcd-ℕ : (a b : ℕ) → is-common-divisor-ℕ a b (gcd-ℕ a b)
+  is-common-divisor-gcd-ℕ a b =
+    is-common-divisor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
 ```
 
 ### The gcd of `a` and `b` is a greatest common divisor
@@ -360,12 +373,12 @@ abstract
     antisymmetric-div-ℕ
       ( gcd-ℕ a b)
       ( gcd-ℕ b a)
-      ( pr1 (is-gcd-gcd-ℕ b a (gcd-ℕ a b)) (σ (is-common-divisor-gcd-ℕ a b)))
-      ( pr1 (is-gcd-gcd-ℕ a b (gcd-ℕ b a)) (σ (is-common-divisor-gcd-ℕ b a)))
-    where
-    σ : {A B : UU lzero} → A × B → B × A
-    pr1 (σ (pair x y)) = y
-    pr2 (σ (pair x y)) = x
+      ( pr1
+        ( is-gcd-gcd-ℕ b a (gcd-ℕ a b))
+        ( map-commutative-product (is-common-divisor-gcd-ℕ a b)))
+      ( pr1
+        ( is-gcd-gcd-ℕ a b (gcd-ℕ b a))
+        ( map-commutative-product (is-common-divisor-gcd-ℕ b a)))
 ```
 
 ### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`
@@ -438,34 +451,35 @@ abstract
 ### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`
 
 ```agda
-is-common-divisor-quotients-div-quotient-ℕ :
-  {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
-  (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
-  (M : is-common-divisor-ℕ a b e) →
-  is-common-divisor-ℕ
-    ( quotient-div-ℕ e a (pr1 M))
-    ( quotient-div-ℕ e b (pr2 M))
-    ( n)
-pr1 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
-  div-quotient-div-div-quotient-div-ℕ nz (pr1 H) K (pr1 M) L
-pr2 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
-  div-quotient-div-div-quotient-div-ℕ nz (pr2 H) K (pr2 M) L
+opaque
+  is-common-divisor-quotients-div-quotient-ℕ :
+    {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
+    (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
+    (M : is-common-divisor-ℕ a b e) →
+    is-common-divisor-ℕ
+      ( quotient-div-ℕ e a (pr1 M))
+      ( quotient-div-ℕ e b (pr2 M))
+      ( n)
+  pr1 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+    div-quotient-div-div-quotient-div-ℕ nz (pr1 H) K (pr1 M) L
+  pr2 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+    div-quotient-div-div-quotient-div-ℕ nz (pr2 H) K (pr2 M) L
 
-simplify-is-common-divisor-quotient-div-ℕ :
-  {a b d x : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
-  is-common-divisor-ℕ
-    ( quotient-div-ℕ d a (pr1 H))
-    ( quotient-div-ℕ d b (pr2 H))
-    ( x) ↔
-  is-common-divisor-ℕ a b (x *ℕ d)
-pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
-  forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
-pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
-  forward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
-pr1 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
-  backward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
-pr2 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
-  backward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
+  simplify-is-common-divisor-quotient-div-ℕ :
+    {a b d x : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+    is-common-divisor-ℕ
+      ( quotient-div-ℕ d a (pr1 H))
+      ( quotient-div-ℕ d b (pr2 H))
+      ( x) ↔
+    is-common-divisor-ℕ a b (x *ℕ d)
+  pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+    forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+  pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+    forward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
+  pr1 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+    backward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+  pr2 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+    backward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
 ```
 
 ### The greatest common divisor of `a/d` and `b/d` is `gcd(a,b)/d`

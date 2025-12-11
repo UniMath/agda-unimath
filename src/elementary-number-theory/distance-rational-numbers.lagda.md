@@ -109,7 +109,7 @@ abstract
 ### Zero laws
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℚ
 
   right-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ q zero-ℚ ＝ abs-ℚ q
