@@ -15,11 +15,12 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
 </details>
@@ -142,32 +143,45 @@ module _
       ( x)
 ```
 
-### The action of short maps on Cauchy approximations preserves limits
+### Convergent Cauchy approximations are similar to constant Cauchy approximations in the Cauchy pseudocompletion
 
 ```agda
 module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-function-Metric-Space A B)
-  (a : cauchy-approximation-Metric-Space A)
-  (lim : type-Metric-Space A)
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  (u : cauchy-approximation-Metric-Space M)
+  (x : type-Metric-Space M)
   where
 
   abstract
-    preserves-limit-cauchy-approximation-map-short-function-Metric-Space :
-      is-limit-cauchy-approximation-Metric-Space A a lim →
-      is-limit-cauchy-approximation-Metric-Space
-        ( B)
-        ( map-short-function-cauchy-approximation-Metric-Space A B f a)
-        ( map-short-function-Metric-Space A B f lim)
-    preserves-limit-cauchy-approximation-map-short-function-Metric-Space
-      is-lim-a ε δ =
-      is-short-map-short-function-Metric-Space A B
-        ( f)
-        ( ε +ℚ⁺ δ)
-        ( map-cauchy-approximation-Metric-Space A a ε)
-        ( lim)
-        ( is-lim-a ε δ)
+    sim-const-is-limit-cauchy-approximation-Metric-Space :
+      is-limit-cauchy-approximation-Metric-Space M u x →
+      sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( u)
+        ( const-cauchy-approximation-Metric-Space M x)
+    sim-const-is-limit-cauchy-approximation-Metric-Space H d α β =
+      monotonic-neighborhood-Metric-Space
+        ( M)
+        ( map-cauchy-approximation-Metric-Space M u α)
+        ( x)
+        ( α +ℚ⁺ β)
+        ( α +ℚ⁺ β +ℚ⁺ d)
+        ( le-left-add-ℚ⁺ (α +ℚ⁺ β) d)
+        ( H α β)
+
+    is-limit-sim-const-cauchy-approximation-Metric-Space :
+      sim-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( u)
+        ( const-cauchy-approximation-Metric-Space M x) →
+      is-limit-cauchy-approximation-Metric-Space M u x
+    is-limit-sim-const-cauchy-approximation-Metric-Space H α β =
+      saturated-neighborhood-Metric-Space
+        ( M)
+        ( α +ℚ⁺ β)
+        ( map-cauchy-approximation-Metric-Space M u α)
+        ( x)
+        ( λ d → H d α β)
 ```
 
 ## See also
