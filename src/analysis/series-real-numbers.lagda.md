@@ -21,15 +21,10 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import order-theory.increasing-sequences-posets
-
 open import real-numbers.absolute-value-real-numbers
-open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-additive-group-of-real-numbers
-open import real-numbers.nonnegative-real-numbers
 ```
 
 </details>
@@ -45,7 +40,7 @@ A {{#concept "series" Disambiguation="of real numbers" Agda=series-ℝ}} in the
 
 ```agda
 series-ℝ : (l : Level) → UU (lsuc l)
-series-ℝ l = series-Complete-Metric-Ab (complete-metric-ab-add-ℝ l)
+series-ℝ l = series-Metric-Ab (metric-ab-add-ℝ l)
 
 series-terms-ℝ : {l : Level} → sequence (ℝ l) → series-ℝ l
 series-terms-ℝ = series-terms-Metric-Ab
@@ -58,44 +53,6 @@ partial-sum-series-ℝ {l} = partial-sum-series-Metric-Ab
 ```
 
 ## Properties
-
-### The proposition that the terms of a series are nonnegative
-
-```agda
-is-nonnegative-prop-series-ℝ : {l : Level} → series-ℝ l → Prop l
-is-nonnegative-prop-series-ℝ σ =
-  Π-Prop ℕ (λ n → is-nonnegative-prop-ℝ (term-series-ℝ σ n))
-
-is-nonnegative-series-ℝ : {l : Level} → series-ℝ l → UU l
-is-nonnegative-series-ℝ σ = type-Prop (is-nonnegative-prop-series-ℝ σ)
-```
-
-### If the terms of a series of real numbers are nonnegative, the partial sums are monotonic
-
-```agda
-abstract
-  is-increasing-partial-sum-is-nonnegative-term-series-ℝ :
-    {l : Level} (σ : series-ℝ l) →
-    is-nonnegative-series-ℝ σ →
-    is-increasing-sequence-Poset (ℝ-Poset l) (partial-sum-series-ℝ σ)
-  is-increasing-partial-sum-is-nonnegative-term-series-ℝ {l} σ H =
-    is-increasing-leq-succ-sequence-Poset
-      ( ℝ-Poset l)
-      ( partial-sum-series-ℝ σ)
-      ( λ n → leq-left-add-real-ℝ⁰⁺ _ (term-series-ℝ σ n , H n))
-```
-
-### The series of absolute values
-
-```agda
-module _
-  {l : Level}
-  (σ : series-ℝ l)
-  where
-
-  map-abs-series-ℝ : series-ℝ l
-  map-abs-series-ℝ = series-terms-ℝ (abs-ℝ ∘ term-series-ℝ σ)
-```
 
 ### Dropping terms from a series
 

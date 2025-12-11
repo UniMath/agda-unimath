@@ -13,10 +13,13 @@ open import analysis.convergent-series-real-numbers
 open import analysis.series-real-banach-spaces
 open import analysis.series-real-numbers
 
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import linear-algebra.real-banach-spaces
+
+open import real-numbers.absolute-value-real-numbers
 ```
 
 </details>
@@ -37,9 +40,12 @@ module _
   (σ : series-ℝ l)
   where
 
+  map-abs-series-ℝ : series-ℝ l
+  map-abs-series-ℝ = series-terms-ℝ (abs-ℝ ∘ term-series-ℝ σ)
+
   is-absolutely-convergent-prop-series-ℝ : Prop (lsuc l)
   is-absolutely-convergent-prop-series-ℝ =
-    is-convergent-prop-series-ℝ (map-abs-series-ℝ σ)
+    is-convergent-prop-series-ℝ map-abs-series-ℝ
 
   is-absolutely-convergent-series-ℝ : UU (lsuc l)
   is-absolutely-convergent-series-ℝ =
