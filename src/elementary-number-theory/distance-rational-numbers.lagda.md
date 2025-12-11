@@ -113,7 +113,7 @@ abstract opaque
   unfolding neg-ℚ
 
   right-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ q zero-ℚ ＝ abs-ℚ q
-  right-zero-law-dist-ℚ q = ap abs-ℚ (right-unit-law-add-ℚ _)
+  right-zero-law-dist-ℚ q = ap abs-ℚ (right-zero-law-diff-ℚ _)
 
   left-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ zero-ℚ q ＝ abs-ℚ q
   left-zero-law-dist-ℚ q = commutative-dist-ℚ _ _ ∙ right-zero-law-dist-ℚ q

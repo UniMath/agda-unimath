@@ -302,7 +302,9 @@ opaque
   div-right-factor-div-gcd-ℕ a b x d with
     is-decidable-is-zero-ℕ (a +ℕ b)
   ... | inl p =
-    concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
+    concatenate-div-eq-ℕ
+      ( div-zero-ℕ x)
+      ( inv (is-zero-right-is-zero-add-ℕ a b p))
   ... | inr np =
     transitive-div-ℕ x (gcd-ℕ a b) b
       ( pair q

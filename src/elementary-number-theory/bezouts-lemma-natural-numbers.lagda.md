@@ -11,6 +11,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-integers
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-modular-arithmetic
@@ -142,7 +143,8 @@ abstract
           ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℕ x y)
             by inv (ap (λ p → mul-ℤ-Mod x p (mod-ℕ x y)) (mod-int-ℕ x l))
           ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℤ x (int-ℕ y))
-            by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y))
+            by
+              inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y))
           ＝ mod-ℤ x ((int-ℕ l) *ℤ (int-ℕ y))
             by inv (preserves-mul-mod-ℤ x (int-ℕ l) (int-ℕ y))
           ＝ mod-ℤ x ((int-ℕ z) +ℤ ((int-ℕ k) *ℤ (int-ℕ x)))
@@ -456,7 +458,8 @@ abstract
               ( int-ℕ y)))
       ＝ add-ℤ
           ( ((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
-          ( ((int-ℤ-Mod (succ-ℕ x) u) +ℤ (neg-ℤ (int-ℕ (succ-ℕ x)))) *ℤ (int-ℕ y))
+          ( ( ( int-ℤ-Mod (succ-ℕ x) u) +ℤ
+              ( neg-ℤ (int-ℕ (succ-ℕ x)))) *ℤ (int-ℕ y))
         by
         ap
           ( λ p →
@@ -713,7 +716,8 @@ abstract
             (inv (abs-neg-ℤ a))
           ＝ dist-ℤ (((neg-ℤ a) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
             (mul-ℤ
-              ( (int-ℕ (succ-ℕ x)) +ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
+              ( int-ℕ (succ-ℕ x) -ℤ int-ℤ-Mod (succ-ℕ x) u)
+              ( int-ℕ y))
           by ap (λ p → dist-ℤ ((p +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
             (((int-ℕ (succ-ℕ x)) +ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) *ℤ
               (int-ℕ y)))
@@ -1063,7 +1067,9 @@ abstract
             (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
             by
             inv
-              ( is-retraction-right-add-neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))) (int-ℕ d))
+              ( is-retraction-right-add-neg-ℤ
+                ( int-ℕ (s *ℕ (succ-ℕ x)))
+                ( int-ℕ d))
           ＝ (int-ℕ (d +ℕ (s *ℕ (succ-ℕ x)))) +ℤ
             (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
             by
@@ -1341,7 +1347,11 @@ abstract
 
         leq-d-x : leq-ℕ d (succ-ℕ x)
         leq-d-x =
-          minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) x-pos-dist
+          minimal-positive-distance-is-minimal
+            ( succ-ℕ x)
+            ( y)
+            ( succ-ℕ x)
+            ( x-pos-dist)
 
       min-dist-succ-x-coeff-nonzero : is-nonzero-ℕ s
       min-dist-succ-x-coeff-nonzero iszero =
@@ -1397,7 +1407,9 @@ abstract
               ap
                 ( _+ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
                 ( inv (left-negative-law-mul-ℤ (int-ℕ t) (int-ℕ y)))
-          ＝ ((neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ ((int-ℕ s) *ℤ (int-ℕ (succ-ℕ x)))
+          ＝
+            ( (neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ
+            ( (int-ℕ s) *ℤ (int-ℕ (succ-ℕ x)))
             by
               ap
                 ( ((neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ_)
