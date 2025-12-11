@@ -103,6 +103,14 @@ module _
       ( map-cauchy-approximation-Metric-Space A x δ)
       ( map-cauchy-approximation-Metric-Space A y δ)
       ( Nxy δ)
+
+  short-map-cauchy-approximation-short-function-Metric-Space :
+    short-function-Metric-Space
+      ( metric-space-of-cauchy-approximations-Metric-Space A)
+      ( metric-space-of-cauchy-approximations-Metric-Space B)
+  short-map-cauchy-approximation-short-function-Metric-Space =
+    map-cauchy-approximation-short-function-Metric-Space A B f ,
+    is-short-map-cauchy-approximation-short-function-Metric-Space
 ```
 
 ### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation

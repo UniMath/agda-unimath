@@ -52,11 +52,11 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  short-map-cauchy-approximation-short-function-Metric-Space :
+  short-map-cauchy-pseudocompletion-short-function-Metric-Space :
     short-function-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-  short-map-cauchy-approximation-short-function-Metric-Space =
+  short-map-cauchy-pseudocompletion-short-function-Metric-Space =
     short-map-cauchy-approximation-short-function-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
@@ -69,7 +69,7 @@ module _
     map-short-function-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-      ( short-map-cauchy-approximation-short-function-Metric-Space)
+        ( short-map-cauchy-pseudocompletion-short-function-Metric-Space)
 
   preserves-neighborhoods-map-cauchy-approximation-short-function-Metric-Space :
     is-short-function-Pseudometric-Space
@@ -80,7 +80,7 @@ module _
     is-short-map-short-function-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-      ( short-map-cauchy-approximation-short-function-Metric-Space)
+      ( short-map-cauchy-pseudocompletion-short-function-Metric-Space)
 ```
 
 ## Properties
