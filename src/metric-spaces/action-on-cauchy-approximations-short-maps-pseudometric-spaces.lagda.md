@@ -67,18 +67,19 @@ module _
   (f : short-function-Pseudometric-Space A B)
   where
 
-  preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space :
-    is-short-function-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space A)
-      ( cauchy-pseudocompletion-Pseudometric-Space B)
-      ( map-cauchy-approximation-short-function-Pseudometric-Space A B f)
-  preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space
-    d x y Nxy α β =
-    is-short-map-short-function-Pseudometric-Space A B f
-      ( α +ℚ⁺ β +ℚ⁺ d)
-      ( map-cauchy-approximation-Pseudometric-Space A x α)
-      ( map-cauchy-approximation-Pseudometric-Space A y β)
-      ( Nxy α β)
+  abstract
+    preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space :
+      is-short-function-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space A)
+        ( cauchy-pseudocompletion-Pseudometric-Space B)
+        ( map-cauchy-approximation-short-function-Pseudometric-Space A B f)
+    preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space
+      d x y Nxy α β =
+      is-short-map-short-function-Pseudometric-Space A B f
+        ( α +ℚ⁺ β +ℚ⁺ d)
+        ( map-cauchy-approximation-Pseudometric-Space A x α)
+        ( map-cauchy-approximation-Pseudometric-Space A y β)
+        ( Nxy α β)
 
   short-map-cauchy-approximation-short-function-Pseudometric-Space :
     short-function-Pseudometric-Space

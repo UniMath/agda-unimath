@@ -74,6 +74,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-completions-metric-spaces public
 open import metric-spaces.cauchy-dense-extensions-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
