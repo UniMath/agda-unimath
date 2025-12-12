@@ -10,9 +10,6 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.constant-maps
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -20,7 +17,6 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-metric-spaces
@@ -123,7 +119,7 @@ module _
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
   map-short-function-cauchy-approximation-Metric-Space =
-    map-short-function-cauchy-approximation-Pseudometric-Space
+    map-cauchy-approximation-short-function-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( f)
@@ -137,7 +133,7 @@ module _
     map-short-function-cauchy-approximation-Metric-Space
       ( A)
       ( A)
-      ( short-id-Metric-Space A) ＝
+      ( id-short-function-Metric-Space A) ＝
     id
   eq-id-map-short-function-cauchy-approximation-Metric-Space = refl
 

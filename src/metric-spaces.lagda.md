@@ -67,6 +67,7 @@ open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.cauchy-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
@@ -75,6 +76,7 @@ open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
+open import metric-spaces.complete-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
@@ -96,7 +98,9 @@ open import metric-spaces.images-short-functions-metric-spaces public
 open import metric-spaces.images-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
+open import metric-spaces.initial-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
+open import metric-spaces.isometries-between-metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
@@ -106,6 +110,7 @@ open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
 open import metric-spaces.located-metric-spaces public
+open import metric-spaces.metric-extensions-of-pseudometric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
