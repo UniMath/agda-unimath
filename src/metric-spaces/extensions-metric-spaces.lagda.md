@@ -99,3 +99,32 @@ module _
   id-extension-Metric-Space =
     (M , id-isometry-Metric-Space M)
 ```
+
+### Composition of extensions of metric spaces
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level}
+  ( M : Metric-Space l1 l2)
+  ( E : extension-Metric-Space l3 l4 M)
+  ( F : extension-Metric-Space l5 l6
+    ( metric-space-extension-Metric-Space M E))
+  where
+
+  comp-extension-Metric-Space : extension-Metric-Space l5 l6 M
+  pr1 comp-extension-Metric-Space =
+    metric-space-extension-Metric-Space
+      ( metric-space-extension-Metric-Space M E)
+      ( F)
+  pr2 comp-extension-Metric-Space =
+    comp-isometry-Metric-Space
+      ( M)
+      ( metric-space-extension-Metric-Space M E)
+      ( metric-space-extension-Metric-Space
+        ( metric-space-extension-Metric-Space M E)
+        ( F))
+      ( isometry-metric-space-extension-Metric-Space
+        ( metric-space-extension-Metric-Space M E)
+        ( F))
+      ( isometry-metric-space-extension-Metric-Space M E)
+```
