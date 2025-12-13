@@ -57,4 +57,13 @@ module _
     Π-Prop
       ( type-metric-space-extension-Metric-Space M E)
       ( is-limit-prop-point-extension-Metric-Space M E)
+
+  is-cauchy-dense-extension-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-cauchy-dense-extension-Metric-Space =
+    type-Prop is-cauchy-dense-prop-extension-Metric-Space
+
+  is-prop-is-cauchy-dense-extension-Metric-Space :
+    is-prop is-cauchy-dense-extension-Metric-Space
+  is-prop-is-cauchy-dense-extension-Metric-Space =
+    is-prop-type-Prop is-cauchy-dense-prop-extension-Metric-Space
 ```

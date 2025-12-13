@@ -8,6 +8,8 @@ module metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces wh
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
@@ -79,4 +81,27 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Metric-Space)
+```
+
+## Properties
+
+### The action of metric extensions on Cauchy approximations is natural w.r.t. Cauchy pseudocompletions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (E : extension-Metric-Space l3 l4 M)
+  where
+
+  htpy-map-cauchy-approximation-extension-Metric-Space :
+    ( map-cauchy-approximation-extension-Metric-Space M E ∘
+      map-cauchy-pseudocompletion-Metric-Space M) ~
+    ( ( map-cauchy-pseudocompletion-Metric-Space
+        ( metric-space-extension-Metric-Space M E)) ∘
+      ( map-metric-space-extension-Metric-Space M E))
+  htpy-map-cauchy-approximation-extension-Metric-Space x =
+    eq-htpy-cauchy-approximation-Metric-Space
+      ( metric-space-extension-Metric-Space M E)
+      ( refl-htpy)
 ```

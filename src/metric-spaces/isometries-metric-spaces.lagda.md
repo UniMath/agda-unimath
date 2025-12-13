@@ -139,25 +139,43 @@ module _
   (f g : isometry-Metric-Space A B)
   where
 
+  htpy-isometry-Metric-Space : UU (l1 ⊔ l1')
+  htpy-isometry-Metric-Space =
+    map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g
+
+  is-prop-htpy-isometry-Metric-Space :
+    is-prop htpy-isometry-Metric-Space
+  is-prop-htpy-isometry-Metric-Space =
+    is-prop-Π
+      ( λ x →
+        is-set-type-Metric-Space B
+          ( map-isometry-Metric-Space A B f x)
+          ( map-isometry-Metric-Space A B g x))
+
+  htpy-prop-isometry-Metric-Space : Prop (l1 ⊔ l1')
+  htpy-prop-isometry-Metric-Space =
+    ( htpy-isometry-Metric-Space , is-prop-htpy-isometry-Metric-Space)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  {f g : isometry-Metric-Space A B}
+  where
+
   equiv-eq-htpy-map-isometry-Metric-Space :
-    (f ＝ g) ≃
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) ≃ htpy-isometry-Metric-Space A B f g
   equiv-eq-htpy-map-isometry-Metric-Space =
     equiv-eq-htpy-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
-      ( f)
-      ( g)
 
   htpy-eq-map-isometry-Metric-Space :
-    (f ＝ g) →
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) → htpy-isometry-Metric-Space A B f g
   htpy-eq-map-isometry-Metric-Space =
     map-equiv equiv-eq-htpy-map-isometry-Metric-Space
 
   eq-htpy-map-isometry-Metric-Space :
-    ( map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g) →
-    (f ＝ g)
+    htpy-isometry-Metric-Space A B f g → (f ＝ g)
   eq-htpy-map-isometry-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```

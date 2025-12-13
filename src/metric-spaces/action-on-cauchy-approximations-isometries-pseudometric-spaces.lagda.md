@@ -11,6 +11,8 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
@@ -134,4 +136,48 @@ module _
   isometry-map-cauchy-approximation-isometry-Pseudometric-Space =
     ( map-cauchy-approximation-isometry-Pseudometric-Space A B f ,
       is-isometry-map-cauchy-approximation-isometry-Pseudometric-Space A B f)
+```
+
+### The action of isometries preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space A B)
+  where
+
+  htpy-map-cauchy-approximation-isometry-Pseudometric-Space :
+    htpy-isometry-Pseudometric-Space A B f g →
+    map-cauchy-approximation-isometry-Pseudometric-Space A B f ~
+    map-cauchy-approximation-isometry-Pseudometric-Space A B g
+  htpy-map-cauchy-approximation-isometry-Pseudometric-Space f~g u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
+### The action of isometries preserves composition
+
+```agda
+module _
+  {la la' lb lb' lc lc' : Level}
+  (A : Pseudometric-Space la la')
+  (B : Pseudometric-Space lb lb')
+  (C : Pseudometric-Space lc lc')
+  (g : isometry-Pseudometric-Space B C)
+  (f : isometry-Pseudometric-Space A B)
+  where
+
+  htpy-map-cauchy-approximation-comp-isometry-Pseudometric-Space :
+    ( map-cauchy-approximation-isometry-Pseudometric-Space B C g ∘
+      map-cauchy-approximation-isometry-Pseudometric-Space A B f) ~
+    ( map-cauchy-approximation-isometry-Pseudometric-Space A C
+      ( comp-isometry-Pseudometric-Space
+        ( A)
+        ( B)
+        ( C)
+        ( g)
+        ( f)))
+  htpy-map-cauchy-approximation-comp-isometry-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space C refl-htpy
 ```
