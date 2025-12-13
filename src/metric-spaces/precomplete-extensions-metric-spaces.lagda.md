@@ -718,7 +718,7 @@ module _
       coherence-triangle-cauchy-pseudocompletion-precomplete-extension-Metric-Space)
 ```
 
-### An extension of metric space is precomplete if and only if it admits an coherent isometry from the Cauchy pseudocompletion
+### An extension of metric space is precomplete if and only if it admits a coherent isometry from the Cauchy pseudocompletion
 
 ```agda
 module _
