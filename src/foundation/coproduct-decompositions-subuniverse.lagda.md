@@ -82,10 +82,25 @@ module _
 
   matching-correspondence-binary-coproduct-Decomposition-subuniverse :
     inclusion-subuniverse P X ≃
-    ( type-left-summand-binary-coproduct-Decomposition-subuniverse +
-      type-right-summand-binary-coproduct-Decomposition-subuniverse)
+    type-left-summand-binary-coproduct-Decomposition-subuniverse +
+    type-right-summand-binary-coproduct-Decomposition-subuniverse
   matching-correspondence-binary-coproduct-Decomposition-subuniverse =
     pr2 (pr2 d)
+
+  map-matching-correspondence-binary-coproduct-Decomposition-subuniverse :
+    inclusion-subuniverse P X →
+    type-left-summand-binary-coproduct-Decomposition-subuniverse +
+    type-right-summand-binary-coproduct-Decomposition-subuniverse
+  map-matching-correspondence-binary-coproduct-Decomposition-subuniverse =
+    map-equiv matching-correspondence-binary-coproduct-Decomposition-subuniverse
+
+  map-inv-matching-correspondence-binary-coproduct-Decomposition-subuniverse :
+    type-left-summand-binary-coproduct-Decomposition-subuniverse +
+    type-right-summand-binary-coproduct-Decomposition-subuniverse →
+    inclusion-subuniverse P X
+  map-inv-matching-correspondence-binary-coproduct-Decomposition-subuniverse =
+    map-inv-equiv
+      ( matching-correspondence-binary-coproduct-Decomposition-subuniverse)
 ```
 
 ### Iterated binary coproduct decompositions
@@ -179,12 +194,10 @@ equiv-binary-coproduct-Decomposition-subuniverse P A X Y =
           type-right-summand-binary-coproduct-Decomposition-subuniverse P A Y)
         ( λ er →
           ( map-coproduct (map-equiv el) (map-equiv er) ∘
-            map-equiv
-              ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
-                  P A X)) ~
-          ( map-equiv
-            ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
-                P A Y))))
+            map-matching-correspondence-binary-coproduct-Decomposition-subuniverse
+              P A X) ~
+          ( map-matching-correspondence-binary-coproduct-Decomposition-subuniverse
+              P A Y)))
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (A : type-subuniverse P)
@@ -231,10 +244,8 @@ module _
     id-map-coproduct
       ( type-left-summand-binary-coproduct-Decomposition-subuniverse P A X)
       ( type-right-summand-binary-coproduct-Decomposition-subuniverse P A X)
-      ( map-equiv
-        ( matching-correspondence-binary-coproduct-Decomposition-subuniverse
-          P A X)
-        ( x))
+      ( map-matching-correspondence-binary-coproduct-Decomposition-subuniverse
+          P A X x)
 
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse :
     is-torsorial (equiv-binary-coproduct-Decomposition-subuniverse P A X)
