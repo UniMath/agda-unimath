@@ -10,8 +10,10 @@ module metric-spaces.precomplete-extensions-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -217,6 +219,22 @@ module _
 ```
 
 ## Properties
+
+### Complete metric spaces are metric spaces where the identity extension is precomplete
+
+```agda
+module _
+  { l1 l2 : Level}
+  ( M : Metric-Space l1 l2)
+  where abstract
+
+  eq-is-complete-is-precomplete-id-extension-Metric-Space :
+    is-precomplete-extension-Metric-Space
+      ( M)
+      ( id-extension-Metric-Space M) ＝
+    is-complete-Metric-Space M
+  eq-is-complete-is-precomplete-id-extension-Metric-Space = refl
+```
 
 ### The values of a coherent isometries are the limits of images of Cauchy approximations
 
@@ -501,6 +519,12 @@ module _
   is-prop-coh-isometry-cauchy-pseudocompletion-extension-Metric-Space =
     is-prop-all-elements-equal
       ( all-eq-coh-isometry-cauchy-pseudocompletion-extension-Metric-Space M E)
+
+  coh-isometry-cauchy-pseudocompletion-prop-extension-Metric-Space :
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  coh-isometry-cauchy-pseudocompletion-prop-extension-Metric-Space =
+    ( coh-isometry-cauchy-pseudocompletion-extension-Metric-Space M E ,
+      is-prop-coh-isometry-cauchy-pseudocompletion-extension-Metric-Space)
 ```
 
 ### A precomplete extension induces a coherent isometry from the Cauchy pseudocompletion
@@ -684,4 +708,76 @@ module _
         ( is-limit-const-cauchy-approximation-Metric-Space
           ( metric-space-precomplete-extension-Metric-Space M E)
           ( map-metric-space-precomplete-extension-Metric-Space M E x))
+
+  coh-isometry-cauchy-pseudocompletion-precomplete-extension-Metric-Space :
+    coh-isometry-cauchy-pseudocompletion-extension-Metric-Space
+      ( M)
+      ( extension-precomplete-extension-Metric-Space M E)
+  coh-isometry-cauchy-pseudocompletion-precomplete-extension-Metric-Space =
+    ( isometry-cauchy-pseudocompletion-precomplete-extension-Metric-Space ,
+      coherence-triangle-cauchy-pseudocompletion-precomplete-extension-Metric-Space)
+```
+
+### An extension of metric space is precomplete if and only if it admits an coherent isometry from the Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (E : extension-Metric-Space l3 l4 M)
+  where abstract
+
+  iff-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space :
+    is-precomplete-extension-Metric-Space M E ↔
+    coh-isometry-cauchy-pseudocompletion-extension-Metric-Space M E
+  pr1
+    iff-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space
+    H =
+    coh-isometry-cauchy-pseudocompletion-precomplete-extension-Metric-Space
+      ( M)
+      ( E , H)
+  pr2
+    iff-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space
+    (g , coh-g) =
+    is-precomplete-has-coh-isometry-cauchy-pseudocompletion-extension-Metric-Space
+      ( M)
+      ( E)
+      ( g)
+      ( coh-g)
+
+  equiv-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space :
+    is-precomplete-extension-Metric-Space M E ≃
+    coh-isometry-cauchy-pseudocompletion-extension-Metric-Space M E
+  equiv-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space
+    =
+    equiv-iff'
+      ( is-precomplete-prop-extension-Metric-Space M E)
+      ( coh-isometry-cauchy-pseudocompletion-prop-extension-Metric-Space M E)
+      ( iff-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space)
+```
+
+### A metric space is complete if and only if it admits a coherent isometry from its Cauchy pseudocompletion into itself
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Metric-Space l1 l2)
+  where
+
+  equiv-coh-isometry-cauchy-pseudocompletion-is-complete-Metric-Space :
+    is-complete-Metric-Space M ≃
+    coh-isometry-cauchy-pseudocompletion-extension-Metric-Space
+      ( M)
+      ( id-extension-Metric-Space M)
+  equiv-coh-isometry-cauchy-pseudocompletion-is-complete-Metric-Space =
+    tr
+      ( λ X →
+        X ≃
+        coh-isometry-cauchy-pseudocompletion-extension-Metric-Space
+          ( M)
+          ( id-extension-Metric-Space M))
+      ( eq-is-complete-is-precomplete-id-extension-Metric-Space M)
+      ( equiv-coh-isometry-cauchy-pseudocompletion-is-precomplete-extension-Metric-Space
+        ( M)
+        ( id-extension-Metric-Space M))
 ```

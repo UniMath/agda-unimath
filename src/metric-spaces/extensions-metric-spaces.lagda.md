@@ -84,3 +84,18 @@ module _
       ( metric-space-extension-Metric-Space)
       ( isometry-metric-space-extension-Metric-Space)
 ```
+
+## Properties
+
+### The identity extension
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Metric-Space l1 l2)
+  where
+
+  id-extension-Metric-Space : extension-Metric-Space l1 l2 M
+  id-extension-Metric-Space =
+    (M , id-isometry-Metric-Space M)
+```
