@@ -52,6 +52,17 @@ of all
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
 `N`.
 
+This is equivalent to the existence of an isometry `j : C M → N` from the
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md)
+of `M` into `N` such that
+
+```text
+  j ∘ κ ~ i
+```
+
+where `κ : M → C M` is the natural isometry of cauchy pseudocompletions (i.e.
+the constant mapping).
+
 ## Definitions
 
 ### The property of being a precomplete extension of metric spaces
