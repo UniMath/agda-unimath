@@ -413,4 +413,11 @@ abstract
     (l : Level) → square-ℝ (raise-zero-ℝ l) ＝ raise-zero-ℝ l
   square-raise-zero-ℝ l =
     square-raise-ℝ l _ ∙ ap (raise-ℝ l) square-zero-ℝ
+
+  is-zero-square-is-zero-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ x → is-zero-ℝ (square-ℝ x)
+  is-zero-square-is-zero-ℝ {l} {x} x~0 =
+    transitive-sim-ℝ _ _ _
+      ( right-zero-law-mul-ℝ _)
+      ( preserves-sim-mul-ℝ x~0 x~0)
 ```
