@@ -1002,6 +1002,7 @@ abstract
                   ( minimal-positive-distance (succ-ℕ x) y)
                   ( succ-ℕ x))
 
+abstract
   remainder-min-dist-succ-x-le-min-dist :
     (x y : ℕ) →
     le-ℕ
@@ -1021,6 +1022,7 @@ abstract
           ( inv (left-successor-law-add-ℕ x y))
           ( is-nonzero-succ-ℕ (x +ℕ y))))
 
+abstract
   remainder-min-dist-succ-x-is-distance :
     (x y : ℕ) →
     (is-distance-between-multiples-ℕ
@@ -1729,6 +1731,7 @@ abstract
                 (int-ℕ s)) (neg-ℤ one-ℤ)))
               (succ-ℕ x))
 
+abstract
   remainder-min-dist-succ-x-is-not-nonzero :
     (x y : ℕ) →
     ¬ ( is-nonzero-ℕ

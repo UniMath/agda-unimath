@@ -123,7 +123,7 @@ abstract
       ( associative-add-ℚ x (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
       ( transitive-leq-ℚ
         ( z)
-        ( y +ℚ ( rational-ℚ⁺ d₂))
+        ( y +ℚ (rational-ℚ⁺ d₂))
         ( x +ℚ (rational-ℚ⁺ d₁) +ℚ (rational-ℚ⁺ d₂))
         ( preserves-leq-left-add-ℚ
           ( rational-ℚ⁺ d₂)
