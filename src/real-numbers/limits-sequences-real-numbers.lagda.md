@@ -85,7 +85,7 @@ module _
         ( binary-map-sequence add-ℝ u v)
         ( lim-u +ℝ lim-v)
     preserves-limits-add-sequence-ℝ =
-      preserves-limits-sequence-modulated-ucont-map-Metric-Space
+      preserves-is-limit-modulated-ucont-map-sequence-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-add-pair-ℝ l1 l2)
@@ -117,7 +117,7 @@ module _
           ( u))
         ( map-uniformly-continuous-function-ℝ f lim)
     preserves-limits-sequence-uniformly-continuous-function-ℝ =
-      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+      preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)
