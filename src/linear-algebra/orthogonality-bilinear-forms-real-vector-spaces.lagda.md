@@ -42,10 +42,7 @@ module _
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
     Relation-Prop (lsuc l1) (type-ℝ-Vector-Space V)
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
-    Id-Prop
-      ( ℝ-Set l1)
-      ( map-bilinear-form-ℝ-Vector-Space V B v w)
-      ( raise-zero-ℝ l1)
+    is-zero-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v w)
 
   is-orthogonal-bilinear-form-ℝ-Vector-Space :
     Relation (lsuc l1) (type-ℝ-Vector-Space V)

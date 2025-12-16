@@ -74,7 +74,7 @@ module _
       ( type-ℝ-Vector-Space V)
       ( λ v →
         hom-Prop
-          ( Id-Prop (ℝ-Set l1) (pr1 p v) (raise-ℝ l1 zero-ℝ))
+          ( is-zero-prop-ℝ (pr1 p v))
           ( is-zero-prop-ℝ-Vector-Space V v))
 
   is-norm-seminorm-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
@@ -209,13 +209,13 @@ module _
 
   is-extensional-norm-Normed-ℝ-Vector-Space :
     (v : type-Normed-ℝ-Vector-Space) →
-    map-norm-Normed-ℝ-Vector-Space v ＝ raise-ℝ l1 zero-ℝ →
+    is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
     v ＝ zero-Normed-ℝ-Vector-Space
   is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
 
   is-extensional-dist-Normed-ℝ-Vector-Space :
     (v w : type-Normed-ℝ-Vector-Space) →
-    dist-Normed-ℝ-Vector-Space v w ＝ raise-ℝ l1 zero-ℝ →
+    is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
     v ＝ w
   is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
     eq-is-zero-right-subtraction-Ab
@@ -224,11 +224,11 @@ module _
         ( diff-Normed-ℝ-Vector-Space v w)
         ( |v-w|=0))
 
-  commutative-dist-Normed-ℝ-Vector-Space :
+  symmetric-dist-Normed-ℝ-Vector-Space :
     (v w : type-Normed-ℝ-Vector-Space) →
     dist-Normed-ℝ-Vector-Space v w ＝ dist-Normed-ℝ-Vector-Space w v
-  commutative-dist-Normed-ℝ-Vector-Space =
-    commutative-dist-Seminormed-ℝ-Vector-Space
+  symmetric-dist-Normed-ℝ-Vector-Space =
+    symmetric-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 ```
 
@@ -241,28 +241,21 @@ module _
 
   refl-norm-Normed-ℝ-Vector-Space :
     (v : type-Normed-ℝ-Vector-Space V) →
-    sim-ℝ zero-ℝ (dist-Normed-ℝ-Vector-Space V v v)
-  refl-norm-Normed-ℝ-Vector-Space v =
-    inv-tr
-      ( sim-ℝ zero-ℝ)
-      ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
-        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
-        ( v))
-      ( sim-raise-ℝ l1 zero-ℝ)
+    is-zero-ℝ (dist-Normed-ℝ-Vector-Space V v v)
+  refl-norm-Normed-ℝ-Vector-Space =
+    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
 
   metric-Normed-ℝ-Vector-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
   metric-Normed-ℝ-Vector-Space =
     ( nonnegative-dist-Normed-ℝ-Vector-Space V ,
       refl-norm-Normed-ℝ-Vector-Space ,
-      ( λ v w → eq-ℝ⁰⁺ _ _ (commutative-dist-Normed-ℝ-Vector-Space V v w)) ,
+      ( λ v w → eq-ℝ⁰⁺ _ _ (symmetric-dist-Normed-ℝ-Vector-Space V v w)) ,
       triangular-dist-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V) ,
-      ( λ v w 0~dvw →
+      ( λ v w dvw~0 →
         is-extensional-dist-Normed-ℝ-Vector-Space V v w
-          ( eq-sim-ℝ
-            ( transitive-sim-ℝ _ _ _
-              ( sim-raise-ℝ l1 zero-ℝ)
-              ( symmetric-sim-ℝ 0~dvw)))))
+          ?))
 
   metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
   metric-space-Normed-ℝ-Vector-Space =
@@ -287,7 +280,7 @@ normed-real-vector-space-ℝ :
 normed-real-vector-space-ℝ l =
   ( real-vector-space-ℝ l ,
     ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
-    eq-raise-zero-eq-raise-zero-abs-ℝ)
+    eq-zero-eq-zero-abs-ℝ)
 
 abstract
   eq-metric-space-normed-real-vector-space-metric-space-ℝ :
@@ -341,7 +334,7 @@ module _
                         ( _)
                         ( _))
                 ＝ dist-Normed-ℝ-Vector-Space V x y
-                  by commutative-dist-Normed-ℝ-Vector-Space V y x)))
+                  by symmetric-dist-Normed-ℝ-Vector-Space V y x)))
 ```
 
 ### Left addition is an isometry in the metric space of a normed vector space
