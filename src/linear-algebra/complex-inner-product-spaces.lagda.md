@@ -12,10 +12,12 @@ module linear-algebra.complex-inner-product-spaces where
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.real-complex-numbers
 open import complex-numbers.raising-universe-levels-complex-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -127,4 +129,15 @@ module _
     map-sesquilinear-form-ℂ-Vector-Space
       ( vector-space-ℂ-Inner-Product-Space)
       ( sesquilinear-form-inner-product-ℂ-Inner-Product-Space)
+
+  is-conjugate-symmetric-inner-product-ℂ-Inner-Product-Space :
+    (x y : type-ℂ-Inner-Product-Space) →
+    inner-product-ℂ-Inner-Product-Space x y ＝
+    conjugate-ℂ (inner-product-ℂ-Inner-Product-Space y x)
+  is-conjugate-symmetric-inner-product-ℂ-Inner-Product-Space = pr1 (pr2 (pr2 V))
+
+  abstract
+    is-real-diagonal-inner-product-ℂ-Inner-Product-Space :
+      (x : type-ℂ-Inner-Product-Space) →
+      is-real-ℂ (inner-product-ℂ-Inner-Product-Space x x)
 ```
