@@ -119,7 +119,9 @@ abstract
 ### For any two natural numbers `a` and `b` such that `a + b ≠ 0`, the numbers `a/gcd(a,b)` and `b/gcd(a,b)` are relatively prime
 
 ```agda
-abstract
+abstract opaque
+  unfolding is-common-divisor-gcd-ℕ
+
   is-relatively-prime-quotient-div-gcd-ℕ :
     (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) →
     is-relatively-prime-ℕ
