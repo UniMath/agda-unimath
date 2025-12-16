@@ -409,4 +409,7 @@ module _
     is-zero-eq-raise-zero-ℝ : x ＝ raise-zero-ℝ l → is-zero-ℝ x
     is-zero-eq-raise-zero-ℝ =
       backward-implication is-zero-iff-eq-raise-zero-ℝ
+
+is-zero-raise-zero-ℝ : (l : Level) → is-zero-ℝ (raise-zero-ℝ l)
+is-zero-raise-zero-ℝ _ = is-zero-eq-raise-zero-ℝ refl
 ```

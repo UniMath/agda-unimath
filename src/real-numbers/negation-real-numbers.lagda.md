@@ -155,8 +155,8 @@ abstract opaque
   unfolding neg-ℝ
 
   is-rational-zero-eq-neg-ℝ :
-    {l : Level} (x : ℝ l) → (neg-ℝ x ＝ x) → is-rational-ℝ x zero-ℚ
-  is-rational-zero-eq-neg-ℝ x -x=x =
+    {l : Level} {x : ℝ l} → (neg-ℝ x ＝ x) → is-rational-ℝ x zero-ℚ
+  is-rational-zero-eq-neg-ℝ {l} {x} -x=x =
     ( ( λ 0<x →
         is-disjoint-cut-ℝ
           ( x)
@@ -182,10 +182,23 @@ abstract opaque
                 ( x<0)) ,
             x<0)))
 
-  eq-zero-eq-neg-ℝ :
-    {l : Level} (x : ℝ l) → (neg-ℝ x ＝ x) → x ＝ raise-ℝ l zero-ℝ
-  eq-zero-eq-neg-ℝ x -x=x =
-    eq-raise-real-is-rational-ℝ (is-rational-zero-eq-neg-ℝ x -x=x)
+  is-zero-eq-neg-ℝ :
+    {l : Level} {x : ℝ l} → neg-ℝ x ＝ x → is-zero-ℝ x
+  is-zero-eq-neg-ℝ -x=x =
+    sim-rational-is-rational-ℝ (is-rational-zero-eq-neg-ℝ -x=x)
+
+  eq-neg-is-zero-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ x → neg-ℝ x ＝ x
+  eq-neg-is-zero-ℝ {_} {x} x~0 =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        neg-ℝ x
+        ~ℝ neg-ℝ zero-ℝ
+          by preserves-sim-neg-ℝ x~0
+        ~ℝ zero-ℝ
+          by sim-eq-ℝ neg-zero-ℝ
+        ~ℝ x
+          by symmetric-sim-ℝ x~0)
 ```
 
 ## See also
