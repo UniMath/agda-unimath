@@ -279,12 +279,12 @@ module _
   where
 
   abstract
-    is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space :
+    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space :
       map-seminorm-Seminormed-ℝ-Vector-Space
         ( V)
         ( zero-Seminormed-ℝ-Vector-Space V) ＝
       raise-ℝ l1 zero-ℝ
-    is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
+    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
       equational-reasoning
         map-seminorm-Seminormed-ℝ-Vector-Space
           ( V)
@@ -321,23 +321,21 @@ module _
         ＝ raise-zero-ℝ l1
           by left-raise-zero-law-mul-ℝ _
 
-    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
+    eq-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
       dist-Seminormed-ℝ-Vector-Space V v v ＝ raise-ℝ l1 zero-ℝ
-    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
+    eq-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
       ( ap
         ( map-seminorm-Seminormed-ℝ-Vector-Space V)
         ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v)) ∙
-      ( is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
+      ( eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
 
-    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
+    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
-      sim-ℝ (dist-Seminormed-ℝ-Vector-Space V v v) zero-ℝ
-    sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
-      inv-tr
-        ( λ x → sim-ℝ x zero-ℝ)
-        ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v)
-        ( sim-raise-ℝ' l1 zero-ℝ)
+      is-zero-ℝ (dist-Seminormed-ℝ-Vector-Space V v v)
+    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v =
+      is-zero-eq-raise-zero-ℝ
+        ( eq-zero-diagonal-dist-Seminormed-ℝ-Vector-Space v)
 ```
 
 ### The seminorm of the negation of a vector is equal to the seminorm of the vector
@@ -389,11 +387,11 @@ module _
         ＝ map-seminorm-Seminormed-ℝ-Vector-Space V v
           by left-unit-law-mul-ℝ _
 
-    commutative-dist-Seminormed-ℝ-Vector-Space :
+    symmetric-dist-Seminormed-ℝ-Vector-Space :
       (v w : type-Seminormed-ℝ-Vector-Space V) →
       dist-Seminormed-ℝ-Vector-Space V v w ＝
       dist-Seminormed-ℝ-Vector-Space V w v
-    commutative-dist-Seminormed-ℝ-Vector-Space v w =
+    symmetric-dist-Seminormed-ℝ-Vector-Space v w =
       ( inv
         ( ap
           ( map-seminorm-Seminormed-ℝ-Vector-Space V)
@@ -466,7 +464,7 @@ module _
                 by
                   leq-sim-ℝ
                     ( symmetric-sim-ℝ
-                      ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
+                      ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
               ≤ ( map-seminorm-Seminormed-ℝ-Vector-Space V v) +ℝ
                 ( map-seminorm-Seminormed-ℝ-Vector-Space
                   ( V)
@@ -525,7 +523,7 @@ module _
           ( zero-ℝ)
           ( dist-Seminormed-ℝ-Vector-Space V v v)
           ( symmetric-sim-ℝ
-            ( sim-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
+            ( is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space V v))
           ( preserves-is-positive-real-ℚ (is-positive-rational-ℚ⁺ ε)))
 
     symmetric-neighborhood-Seminormed-ℝ-Vector-Space :
@@ -535,7 +533,7 @@ module _
     symmetric-neighborhood-Seminormed-ℝ-Vector-Space d v w =
       tr
         ( λ z → leq-ℝ z (real-ℚ⁺ d))
-        ( commutative-dist-Seminormed-ℝ-Vector-Space V v w)
+        ( symmetric-dist-Seminormed-ℝ-Vector-Space V v w)
 
     triangular-neighborhood-Seminormed-ℝ-Vector-Space :
       (v w x : type-Seminormed-ℝ-Vector-Space V) (d1 d2 : ℚ⁺) →

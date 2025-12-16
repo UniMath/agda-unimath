@@ -38,10 +38,10 @@ similar to 0. This property is extensionality of multiplication as a
 
 ```agda
 abstract
-  sim-zero-sim-zero-square-ℝ :
-    {l : Level} (x : ℝ l) → sim-ℝ (square-ℝ x) zero-ℝ → sim-ℝ x zero-ℝ
-  sim-zero-sim-zero-square-ℝ x x²~0 =
-    sim-zero-sim-zero-abs-ℝ
+  is-zero-is-zero-square-ℝ :
+    {l : Level} (x : ℝ l) → is-zero-ℝ (square-ℝ x) → is-zero-ℝ x
+  is-zero-is-zero-square-ℝ x x²~0 =
+    is-zero-is-zero-abs-ℝ
       ( x)
       ( inv-tr
         ( λ y → sim-ℝ y zero-ℝ)
@@ -54,13 +54,13 @@ abstract
             ( x²~0))))
 
   eq-zero-eq-zero-square-ℝ :
-    {l : Level} (x : ℝ l) → square-ℝ x ＝ raise-ℝ l zero-ℝ →
-    x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → square-ℝ x ＝ raise-zero-ℝ l →
+    x ＝ raise-zero-ℝ l
   eq-zero-eq-zero-square-ℝ {l} x x²=0 =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
         ( sim-raise-ℝ l zero-ℝ)
-        ( sim-zero-sim-zero-square-ℝ
+        ( is-zero-is-zero-square-ℝ
           ( x)
           ( transitive-sim-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ) (sim-eq-ℝ x²=0))))
 ```
