@@ -30,6 +30,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -218,7 +219,7 @@ opaque
 ### Rational real numbers are embedded rationals
 
 ```agda
-opaque
+abstract opaque
   unfolding real-ℚ sim-ℝ
 
   sim-rational-ℝ :
@@ -328,4 +329,20 @@ neq-raise-zero-one-ℝ l 0=1ℝ =
               by sim-eq-ℝ 0=1ℝ
             ~ℝ one-ℝ
               by sim-raise-ℝ' l one-ℝ)))
+```
+
+### If `x` is a rational `q`, it is equal to `raise-real-ℚ l q` for the appropriate universe level `l`
+
+```agda
+abstract
+  eq-raise-real-is-rational-ℝ :
+    {l : Level} {x : ℝ l} {q : ℚ} → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
+  eq-raise-real-is-rational-ℝ {l} {x} {q} x~q =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ
+        ( x)
+        ( real-ℚ q)
+        ( raise-real-ℚ l q)
+        ( sim-raise-ℝ l (real-ℚ q))
+        ( sim-rational-ℝ (x , q , x~q)))
 ```

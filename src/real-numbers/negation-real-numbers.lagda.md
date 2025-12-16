@@ -19,6 +19,7 @@ open import foundation.disjunction
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -26,6 +27,7 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -144,6 +146,46 @@ abstract opaque
       forward-implication
         ( sim-upper-cut-iff-sim-ℝ _ _)
         ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
+```
+
+### `x = -x` if and only if `x = 0`
+
+```agda
+abstract opaque
+  unfolding neg-ℝ
+
+  is-rational-zero-eq-neg-ℝ :
+    {l : Level} (x : ℝ l) → (neg-ℝ x ＝ x) → is-rational-ℝ x zero-ℚ
+  is-rational-zero-eq-neg-ℝ x -x=x =
+    ( ( λ 0<x →
+        is-disjoint-cut-ℝ
+          ( x)
+          ( zero-ℚ)
+          ( 0<x ,
+            tr
+              ( is-in-upper-cut-ℝ x)
+              ( neg-zero-ℚ)
+              ( inv-tr
+                ( λ y → is-in-lower-cut-ℝ y zero-ℚ)
+                ( -x=x)
+                ( 0<x)))) ,
+      ( λ x<0 →
+        is-disjoint-cut-ℝ
+          ( x)
+          ( zero-ℚ)
+          ( tr
+              ( is-in-lower-cut-ℝ x)
+              ( neg-zero-ℚ)
+              ( inv-tr
+                ( λ y → is-in-upper-cut-ℝ y zero-ℚ)
+                ( -x=x)
+                ( x<0)) ,
+            x<0)))
+
+  eq-zero-eq-neg-ℝ :
+    {l : Level} (x : ℝ l) → (neg-ℝ x ＝ x) → x ＝ raise-ℝ l zero-ℝ
+  eq-zero-eq-neg-ℝ x -x=x =
+    eq-raise-real-is-rational-ℝ (is-rational-zero-eq-neg-ℝ x -x=x)
 ```
 
 ## See also
