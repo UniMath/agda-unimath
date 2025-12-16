@@ -40,12 +40,12 @@ module _
   where
 
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
-    Relation-Prop (lsuc l1) (type-ℝ-Vector-Space V)
+    Relation-Prop l1 (type-ℝ-Vector-Space V)
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
     is-zero-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v w)
 
   is-orthogonal-bilinear-form-ℝ-Vector-Space :
-    Relation (lsuc l1) (type-ℝ-Vector-Space V)
+    Relation l1 (type-ℝ-Vector-Space V)
   is-orthogonal-bilinear-form-ℝ-Vector-Space =
     type-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
 ```

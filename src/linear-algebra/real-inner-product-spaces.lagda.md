@@ -74,16 +74,13 @@ module _
       ( type-ℝ-Vector-Space V)
       ( λ v → is-nonnegative-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v v))
 
-  is-extensional-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  is-extensional-prop-bilinear-form-ℝ-Vector-Space : Prop (l1 ⊔ l2)
   is-extensional-prop-bilinear-form-ℝ-Vector-Space =
     Π-Prop
       ( type-ℝ-Vector-Space V)
       ( λ v →
         hom-Prop
-          ( Id-Prop
-            ( ℝ-Set l1)
-            ( map-bilinear-form-ℝ-Vector-Space V B v v)
-            ( raise-ℝ l1 zero-ℝ))
+          ( is-zero-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v v))
           ( is-zero-prop-ℝ-Vector-Space V v))
 
   is-inner-product-prop-bilinear-form-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
@@ -217,7 +214,7 @@ module _
 
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space :
     (v : type-ℝ-Inner-Product-Space) →
-    inner-product-ℝ-Inner-Product-Space v v ＝ raise-zero-ℝ l1 →
+    is-zero-ℝ (inner-product-ℝ-Inner-Product-Space v v) →
     v ＝ zero-ℝ-Inner-Product-Space
   is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space =
     pr2 (pr2 (pr2 (pr2 V)))
@@ -602,7 +599,7 @@ is-inner-product-bilinear-form-mul-ℝ :
 is-inner-product-bilinear-form-mul-ℝ l =
   ( commutative-mul-ℝ ,
     is-nonnegative-square-ℝ ,
-    eq-zero-eq-zero-square-ℝ)
+    λ x x²=0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-square-ℝ x x²=0))
 
 real-inner-product-space-ℝ : (l : Level) → ℝ-Inner-Product-Space l (lsuc l)
 real-inner-product-space-ℝ l =

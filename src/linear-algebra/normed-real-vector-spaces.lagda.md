@@ -11,6 +11,7 @@ module linear-algebra.normed-real-vector-spaces where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -68,7 +69,7 @@ module _
   {l1 l2 : Level} (V : ℝ-Vector-Space l1 l2) (p : seminorm-ℝ-Vector-Space V)
   where
 
-  is-norm-prop-seminorm-ℝ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  is-norm-prop-seminorm-ℝ-Vector-Space : Prop (l1 ⊔ l2)
   is-norm-prop-seminorm-ℝ-Vector-Space =
     Π-Prop
       ( type-ℝ-Vector-Space V)
@@ -77,7 +78,7 @@ module _
           ( is-zero-prop-ℝ (pr1 p v))
           ( is-zero-prop-ℝ-Vector-Space V v))
 
-  is-norm-seminorm-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  is-norm-seminorm-ℝ-Vector-Space : UU (l1 ⊔ l2)
   is-norm-seminorm-ℝ-Vector-Space =
     type-Prop is-norm-prop-seminorm-ℝ-Vector-Space
 
@@ -253,9 +254,7 @@ module _
       ( λ v w → eq-ℝ⁰⁺ _ _ (symmetric-dist-Normed-ℝ-Vector-Space V v w)) ,
       triangular-dist-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V) ,
-      ( λ v w dvw~0 →
-        is-extensional-dist-Normed-ℝ-Vector-Space V v w
-          ?))
+      is-extensional-dist-Normed-ℝ-Vector-Space V)
 
   metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
   metric-space-Normed-ℝ-Vector-Space =
@@ -280,7 +279,7 @@ normed-real-vector-space-ℝ :
 normed-real-vector-space-ℝ l =
   ( real-vector-space-ℝ l ,
     ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
-    eq-zero-eq-zero-abs-ℝ)
+    λ x |x|~0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-abs-ℝ x |x|~0))
 
 abstract
   eq-metric-space-normed-real-vector-space-metric-space-ℝ :

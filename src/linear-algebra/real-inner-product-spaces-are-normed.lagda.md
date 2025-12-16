@@ -145,23 +145,17 @@ module _
   abstract
     is-extensional-norm-ℝ-Inner-Product-Space :
       (v : type-ℝ-Inner-Product-Space V) →
-      (norm-ℝ-Inner-Product-Space V v ＝ raise-ℝ l1 zero-ℝ) →
+      is-zero-ℝ (norm-ℝ-Inner-Product-Space V v) →
       is-zero-ℝ-Inner-Product-Space V v
     is-extensional-norm-ℝ-Inner-Product-Space v ∥v∥=0 =
       is-extensional-diagonal-inner-product-ℝ-Inner-Product-Space
         ( V)
         ( v)
-        ( equational-reasoning
-          squared-norm-ℝ-Inner-Product-Space V v
-          ＝ square-ℝ (norm-ℝ-Inner-Product-Space V v)
-            by
-              inv
-                ( eq-real-square-sqrt-ℝ⁰⁺
-                  ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v))
-          ＝ square-ℝ (raise-ℝ l1 zero-ℝ)
-            by ap square-ℝ ∥v∥=0
-          ＝ raise-ℝ l1 zero-ℝ
-            by square-raise-zero-ℝ l1)
+        ( tr
+          ( is-zero-ℝ)
+          ( eq-real-square-sqrt-ℝ⁰⁺
+            ( nonnegative-squared-norm-ℝ-Inner-Product-Space V v))
+          ( is-zero-square-is-zero-ℝ ∥v∥=0))
 
   norm-normed-vector-space-ℝ-Inner-Product-Space :
     norm-ℝ-Vector-Space (vector-space-ℝ-Inner-Product-Space V)
