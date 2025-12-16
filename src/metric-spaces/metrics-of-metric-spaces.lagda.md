@@ -36,6 +36,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -184,7 +185,7 @@ module _
               ( nonnegative-real-ℚ⁺ ε)
               ( zero-ℝ⁰⁺)
               ( ρ x y)
-              ( ρxy~0)
+              ( symmetric-sim-ℝ ρxy~0)
               ( leq-zero-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))))
 
   is-metric-is-metric-of-Metric-Space :
