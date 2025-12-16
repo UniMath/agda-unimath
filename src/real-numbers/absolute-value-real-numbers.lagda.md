@@ -47,6 +47,7 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>

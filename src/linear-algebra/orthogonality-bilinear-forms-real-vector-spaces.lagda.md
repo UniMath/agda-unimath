@@ -17,6 +17,7 @@ open import linear-algebra.real-vector-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
