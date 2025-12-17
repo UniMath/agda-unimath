@@ -205,6 +205,18 @@ abstract
       ＝ q
         by right-unit-law-mul-ℚ q
 
+  is-section-left-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ q) ＝ q
+  is-section-left-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      p *ℚ (rational-inv-ℚ⁺ p⁺ *ℚ q)
+      ＝ (p *ℚ rational-inv-ℚ⁺ p⁺) *ℚ q
+        by inv (associative-mul-ℚ _ _ _)
+      ＝ one-ℚ *ℚ q
+        by ap-mul-ℚ (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ p⁺)) refl
+      ＝ q
+        by left-unit-law-mul-ℚ q
+
   is-retraction-left-div-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ (inv-ℚ⁺ p) *ℚ (rational-ℚ⁺ p *ℚ q) ＝ q
   is-retraction-left-div-ℚ⁺ p⁺@(p , _) q =

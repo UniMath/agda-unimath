@@ -9,7 +9,10 @@ module linear-algebra.real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -27,6 +30,7 @@ open import metric-spaces.metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.nonnegative-real-numbers
 ```
 
 </details>
@@ -69,6 +73,15 @@ module _
   metric-space-ℝ-Banach-Space =
     metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
+  type-ℝ-Banach-Space : UU l2
+  type-ℝ-Banach-Space =
+    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  neighborhood-ℝ-Banach-Space :
+    ℚ⁺ → type-ℝ-Banach-Space → type-ℝ-Banach-Space → UU l1
+  neighborhood-ℝ-Banach-Space =
+    neighborhood-Metric-Space metric-space-ℝ-Banach-Space
+
   is-complete-metric-space-ℝ-Banach-Space :
     is-complete-Metric-Space metric-space-ℝ-Banach-Space
   is-complete-metric-space-ℝ-Banach-Space = pr2 V
@@ -77,13 +90,13 @@ module _
   complete-metric-space-ℝ-Banach-Space =
     ( metric-space-ℝ-Banach-Space , is-complete-metric-space-ℝ-Banach-Space)
 
-  type-ℝ-Banach-Space : UU l2
-  type-ℝ-Banach-Space =
-    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
-
   map-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ l1
   map-norm-ℝ-Banach-Space =
     map-norm-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  nonnegative-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ⁰⁺ l1
+  nonnegative-norm-ℝ-Banach-Space =
+    nonnegative-norm-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   cauchy-sequence-ℝ-Banach-Space : UU (l1 ⊔ l2)
   cauchy-sequence-ℝ-Banach-Space =
@@ -109,6 +122,21 @@ module _
   has-limit-cauchy-sequence-ℝ-Banach-Space =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-ℝ-Banach-Space)
+
+  dist-ℝ-Banach-Space : (u v : type-ℝ-Banach-Space) → ℝ l1
+  dist-ℝ-Banach-Space =
+    dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  commutative-dist-ℝ-Banach-Space :
+    (u v : type-ℝ-Banach-Space) →
+    dist-ℝ-Banach-Space u v ＝ dist-ℝ-Banach-Space v u
+  commutative-dist-ℝ-Banach-Space =
+    commutative-dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  diff-ℝ-Banach-Space :
+    type-ℝ-Banach-Space → type-ℝ-Banach-Space → type-ℝ-Banach-Space
+  diff-ℝ-Banach-Space =
+    diff-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 ```
 
 ## Properties
