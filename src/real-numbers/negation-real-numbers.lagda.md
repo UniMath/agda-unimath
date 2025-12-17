@@ -9,6 +9,7 @@ module real-numbers.negation-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -31,6 +32,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -129,6 +131,15 @@ abstract
   eq-neg-one-ℝ = neg-real-ℚ one-ℚ ∙ ap real-ℚ eq-neg-one-ℚ
 ```
 
+### The negation of the embeddings of integers in the real numbers
+
+```agda
+abstract
+  neg-real-ℤ : (k : ℤ) → neg-ℝ (real-ℤ k) ＝ real-ℤ (neg-ℤ k)
+  neg-real-ℤ k =
+    neg-real-ℚ (rational-ℤ k) ∙ ap real-ℚ (inv (neg-rational-ℤ k))
+```
+
 ### Negation preserves similarity
 
 ```agda
@@ -146,6 +157,15 @@ abstract opaque
       forward-implication
         ( sim-upper-cut-iff-sim-ℝ _ _)
         ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
+
+  neg-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) →
+    neg-ℝ (raise-ℝ l x) ＝ raise-ℝ l (neg-ℝ x)
+  neg-raise-ℝ l x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ l (neg-ℝ x))
+        ( preserves-sim-neg-ℝ (sim-raise-ℝ' l x)))
 ```
 
 ### `x = -x` if and only if `x = 0`

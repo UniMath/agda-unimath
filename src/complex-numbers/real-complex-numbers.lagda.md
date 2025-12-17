@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -62,10 +63,14 @@ abstract
 
 ```agda
 abstract
+  eq-complex-re-is-real-ℂ :
+    {l : Level} (z : ℂ l) → is-real-ℂ z → complex-ℝ (re-ℂ z) ＝ z
+  eq-complex-re-is-real-ℂ (a +iℂ b) b=0 =
+    eq-ℂ refl (inv (eq-raise-zero-is-zero-ℝ b=0))
+
   fiber-complex-is-real-ℂ :
     {l : Level} (z : ℂ l) → is-real-ℂ z → fiber complex-ℝ z
-  fiber-complex-is-real-ℂ (a +iℂ b) b=0 =
-    ( a , eq-ℂ refl (inv (eq-raise-zero-is-zero-ℝ b=0)))
+  fiber-complex-is-real-ℂ z imz=0 = (re-ℂ z , eq-complex-re-is-real-ℂ z imz=0)
 
   is-in-im-complex-is-real-ℂ :
     {l : Level} (z : ℂ l) → is-real-ℂ z → is-in-im complex-ℝ z

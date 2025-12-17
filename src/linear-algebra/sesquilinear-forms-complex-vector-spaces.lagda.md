@@ -14,6 +14,7 @@ open import complex-numbers.multiplication-complex-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -154,6 +155,35 @@ module _
   map-sesquilinear-form-ℂ-Vector-Space :
     type-ℂ-Vector-Space V → type-ℂ-Vector-Space V → ℂ l1
   map-sesquilinear-form-ℂ-Vector-Space = pr1 f
+
+  abstract
+    is-left-additive-sesquilinear-form-ℂ-Vector-Space :
+      (u v w : type-ℂ-Vector-Space V) →
+      map-sesquilinear-form-ℂ-Vector-Space (add-ℂ-Vector-Space V u v) w ＝
+      ( map-sesquilinear-form-ℂ-Vector-Space u w) +ℂ
+      ( map-sesquilinear-form-ℂ-Vector-Space v w)
+    is-left-additive-sesquilinear-form-ℂ-Vector-Space = pr1 (pr2 f)
+
+    is-right-additive-sesquilinear-form-ℂ-Vector-Space :
+      (u v w : type-ℂ-Vector-Space V) →
+      map-sesquilinear-form-ℂ-Vector-Space u (add-ℂ-Vector-Space V v w) ＝
+      ( map-sesquilinear-form-ℂ-Vector-Space u v) +ℂ
+      ( map-sesquilinear-form-ℂ-Vector-Space u w)
+    is-right-additive-sesquilinear-form-ℂ-Vector-Space = pr1 (pr2 (pr2 (pr2 f)))
+
+    preserves-scalar-mul-left-sesquilinear-form-ℂ-Vector-Space :
+      (a : ℂ l1) (u v : type-ℂ-Vector-Space V) →
+      map-sesquilinear-form-ℂ-Vector-Space (mul-ℂ-Vector-Space V a u) v ＝
+      a *ℂ map-sesquilinear-form-ℂ-Vector-Space u v
+    preserves-scalar-mul-left-sesquilinear-form-ℂ-Vector-Space =
+      pr1 (pr2 (pr2 f))
+
+    conjugates-scalar-mul-right-sesquilinear-form-ℂ-Vector-Space :
+      (a : ℂ l1) (u v : type-ℂ-Vector-Space V) →
+      map-sesquilinear-form-ℂ-Vector-Space u (mul-ℂ-Vector-Space V a v) ＝
+      conjugate-ℂ a *ℂ map-sesquilinear-form-ℂ-Vector-Space u v
+    conjugates-scalar-mul-right-sesquilinear-form-ℂ-Vector-Space =
+      pr2 (pr2 (pr2 (pr2 f)))
 ```
 
 ## External links

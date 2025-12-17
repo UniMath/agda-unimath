@@ -205,16 +205,6 @@ module _
   is-rational-rational-ℝ = pr2 (pr2 x)
 ```
 
-### The property of a real number of being zero
-
-```agda
-is-zero-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-zero-prop-ℝ x = sim-prop-ℝ x zero-ℝ
-
-is-zero-ℝ : {l : Level} → ℝ l → UU l
-is-zero-ℝ x = sim-ℝ x zero-ℝ
-```
-
 ## Properties
 
 ### The real embedding of a rational number is rational
@@ -386,30 +376,4 @@ neq-raise-zero-one-ℝ l 0=1ℝ =
               by sim-eq-ℝ 0=1ℝ
             ~ℝ one-ℝ
               by sim-raise-ℝ' l one-ℝ)))
-```
-
-### A real number `x` is zero if and only if it equals `raise-zero-ℝ l` for the appropriate universe level `l`
-
-```agda
-module _
-  {l : Level}
-  {x : ℝ l}
-  where
-
-  abstract
-    is-zero-iff-eq-raise-zero-ℝ : (is-zero-ℝ x) ↔ (x ＝ raise-zero-ℝ l)
-    is-zero-iff-eq-raise-zero-ℝ =
-      ( is-rational-iff-eq-raise-real-ℝ) ∘iff
-      ( inv-iff is-rational-iff-sim-rational-ℝ)
-
-    eq-raise-zero-is-zero-ℝ : is-zero-ℝ x → x ＝ raise-zero-ℝ l
-    eq-raise-zero-is-zero-ℝ =
-      forward-implication is-zero-iff-eq-raise-zero-ℝ
-
-    is-zero-eq-raise-zero-ℝ : x ＝ raise-zero-ℝ l → is-zero-ℝ x
-    is-zero-eq-raise-zero-ℝ =
-      backward-implication is-zero-iff-eq-raise-zero-ℝ
-
-is-zero-raise-zero-ℝ : (l : Level) → is-zero-ℝ (raise-zero-ℝ l)
-is-zero-raise-zero-ℝ _ = is-zero-eq-raise-zero-ℝ refl
 ```
