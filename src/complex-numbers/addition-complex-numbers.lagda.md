@@ -114,7 +114,7 @@ abstract
   right-add-conjugate-ℂ (a +iℂ b) = eq-ℂ refl (eq-right-inverse-law-add-ℝ b)
 ```
 
-### Swapping laws for addition on real numbers
+### Swapping laws for addition on complex numbers
 
 ```agda
 module _
@@ -141,7 +141,7 @@ module _
         ＝ y +ℂ (x +ℂ z) by associative-add-ℂ y x z
 ```
 
-### Interchange laws for addition on real numbers
+### Interchange laws for addition on complex numbers
 
 ```agda
 module _
