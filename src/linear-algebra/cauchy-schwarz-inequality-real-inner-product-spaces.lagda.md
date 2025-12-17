@@ -53,7 +53,7 @@ open import real-numbers.squares-real-numbers
 ## Idea
 
 The
-{{#concept "Cauchy-Schwarz inequality" WDID=Q190546 WD="Cauchy-Schwarz inequality" Agda=cauchy-schwarz-inequality-ℝ-Inner-Product-Space}}
+{{#concept "Cauchy-Schwarz inequality" WDID=Q190546 WD="Cauchy-Schwarz inequality" Disambiguation="in real inner product spaces" Agda=cauchy-schwarz-inequality-ℝ-Inner-Product-Space}}
 states that for any `u` and `v` in a
 [real inner product space](linear-algebra.real-inner-product-spaces.md), the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of the inner
@@ -267,13 +267,13 @@ module _
   where
 
   abstract
-    approx-cauchy-schwarz-inequality-squared-ℝ-Inner-Product-Space :
+    approx-cauchy-schwarz-inequality-ℝ-Inner-Product-Space :
       (u v : type-ℝ-Inner-Product-Space V) (δ ε : ℚ⁺) →
       leq-ℝ
         ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
         ( (norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
           (norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ ε))
-    approx-cauchy-schwarz-inequality-squared-ℝ-Inner-Product-Space
+    approx-cauchy-schwarz-inequality-ℝ-Inner-Product-Space
       u v δ ε =
       let
         ∥u∥+δ =
@@ -362,78 +362,16 @@ module _
         ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
           ( norm-ℝ-Inner-Product-Space V v))
     cauchy-schwarz-inequality-ℝ-Inner-Product-Space u v =
-      saturated-leq-ℝ
-        ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
-        ( norm-ℝ-Inner-Product-Space V u *ℝ
-          norm-ℝ-Inner-Product-Space V v)
-        ( λ ε →
-          let
-            open inequality-reasoning-Large-Poset ℝ-Large-Poset
-            open
-              do-syntax-trunc-Prop
-                ( leq-prop-ℝ
-                  ( abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
-                  ( ( ( norm-ℝ-Inner-Product-Space V u *ℝ
-                        norm-ℝ-Inner-Product-Space V v)) +ℝ
-                    ( real-ℚ⁺ ε)))
-          in do
-            (μ , is-mod-μ) ←
-              is-pointwise-continuous-mul-ℝ _ _
-                ( norm-ℝ-Inner-Product-Space V u ,
-                  norm-ℝ-Inner-Product-Space V v)
-            let δ = μ ε
-            chain-of-inequalities
-              abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
-              ≤ ( (norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
-                  (norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ δ))
-                by
-                  approx-cauchy-schwarz-inequality-squared-ℝ-Inner-Product-Space
-                    ( V)
-                    ( u)
-                    ( v)
-                    ( δ)
-                    ( δ)
-              ≤ ( abs-ℝ
-                  ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                    ( norm-ℝ-Inner-Product-Space V v))) +ℝ
-                ( dist-ℝ
-                  ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                    ( norm-ℝ-Inner-Product-Space V v))
-                  ( ( norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
-                    ( norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ δ)))
-                by
-                  leq-add-abs-dist-ℝ
-                    ( ( norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
-                      ( norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ δ))
-                    ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                      ( norm-ℝ-Inner-Product-Space V v))
-              ≤ ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                  ( norm-ℝ-Inner-Product-Space V v)) +ℝ
-                ( dist-ℝ
-                  ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                    ( norm-ℝ-Inner-Product-Space V v))
-                  ( ( norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
-                    ( norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ δ)))
-                by
-                  leq-eq-ℝ
-                    ( ap-add-ℝ
-                      ( abs-real-ℝ⁰⁺
-                        ( ( nonnegative-norm-ℝ-Inner-Product-Space V u) *ℝ⁰⁺
-                          ( nonnegative-norm-ℝ-Inner-Product-Space V v)))
-                      ( refl))
-              ≤ ( ( norm-ℝ-Inner-Product-Space V u) *ℝ
-                  ( norm-ℝ-Inner-Product-Space V v)) +ℝ
-                ( real-ℚ⁺ ε)
-                by
-                  preserves-leq-left-add-ℝ _ _ _
-                    ( leq-dist-neighborhood-ℝ ε _ _
-                      ( is-mod-μ
-                        ( ε)
-                        ( norm-ℝ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ ,
-                          norm-ℝ-Inner-Product-Space V v +ℝ real-ℚ⁺ δ)
-                        ( neighborhood-right-add-real-ℚ⁺ _ δ ,
-                          neighborhood-right-add-real-ℚ⁺ _ δ))))
+      saturated-leq-mul-ℝ⁰⁺
+        ( nonnegative-abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v))
+        ( nonnegative-norm-ℝ-Inner-Product-Space V u)
+        ( nonnegative-norm-ℝ-Inner-Product-Space V v)
+        ( approx-cauchy-schwarz-inequality-ℝ-Inner-Product-Space V u v)
 ```
+
+## See also
+
+- [The Cauchy-Schwarz inequality in complex inner product spaces](linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces.md)
 
 ## External links
 

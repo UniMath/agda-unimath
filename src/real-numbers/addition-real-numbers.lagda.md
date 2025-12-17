@@ -45,6 +45,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -208,7 +209,7 @@ abstract opaque
   unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
-    {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+    {l : Level} → (x : ℝ l) → is-zero-ℝ (x +ℝ neg-ℝ x)
   right-inverse-law-add-ℝ x =
     sim-rational-ℝ
       ( x +ℝ neg-ℝ x ,
@@ -237,15 +238,15 @@ abstract opaque
                 x<p)))
 
 abstract
-  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → is-zero-ℝ (neg-ℝ x +ℝ x)
   left-inverse-law-add-ℝ x =
     tr
-      ( λ y → sim-ℝ y zero-ℝ)
+      ( is-zero-ℝ)
       ( commutative-add-ℝ x (neg-ℝ x))
       ( right-inverse-law-add-ℝ x)
 
   eq-right-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-zero-ℝ l
   eq-right-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
@@ -253,7 +254,7 @@ abstract
         ( right-inverse-law-add-ℝ x))
 
   eq-left-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-zero-ℝ l
   eq-left-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
@@ -294,6 +295,20 @@ abstract
     transitive-sim-ℝ _ _ _
       ( preserves-sim-right-add-ℝ _ _ _ x~x')
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
+```
+
+### Raised unit laws for addition
+
+```agda
+abstract
+  right-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ raise-zero-ℝ l ＝ x
+  right-raise-zero-law-add-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (x +ℝ raise-zero-ℝ l))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
 ```
 
 ### Swapping laws for addition on real numbers

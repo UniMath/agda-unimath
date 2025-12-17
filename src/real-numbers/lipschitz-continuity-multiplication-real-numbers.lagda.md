@@ -42,6 +42,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -49,6 +50,7 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.uniformly-continuous-functions-real-numbers
@@ -489,4 +491,50 @@ abstract
       intro-exists
         ( pr1 ∘ modulus)
         ( λ ε (x' , y') (Nδxx' , Nδyy') → pr2 (modulus ε) x' y' Nδxx' Nδyy')
+```
+
+### Given nonnegative real numbers `x`, `y`, `z`, if `x ≤ (y + δ)(z + ε)` for all positive `δ` and `ε`, then `x ≤ yz`
+
+```agda
+abstract
+  saturated-leq-mul-ℝ⁰⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3) →
+    ( (δ ε : ℚ⁺) →
+      leq-ℝ⁰⁺
+        ( x)
+        ((y +ℝ⁰⁺ nonnegative-real-ℚ⁺ δ) *ℝ⁰⁺ (z +ℝ⁰⁺ nonnegative-real-ℚ⁺ ε))) →
+    leq-ℝ⁰⁺ x (y *ℝ⁰⁺ z)
+  saturated-leq-mul-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) z⁰⁺@(z , _) H =
+    saturated-leq-ℝ
+      ( x)
+      ( y *ℝ z)
+      ( λ η →
+        let
+          open inequality-reasoning-Large-Poset ℝ-Large-Poset
+          open do-syntax-trunc-Prop (leq-prop-ℝ x (y *ℝ z +ℝ real-ℚ⁺ η))
+        in do
+          (μ , is-mod-μ) ← is-pointwise-continuous-mul-ℝ _ _ (y , z)
+          let δ = μ η
+          chain-of-inequalities
+            x
+            ≤ (y +ℝ real-ℚ⁺ δ) *ℝ (z +ℝ real-ℚ⁺ δ)
+              by H δ δ
+            ≤ ( abs-ℝ (y *ℝ z)) +ℝ
+              ( dist-ℝ (y *ℝ z) ((y +ℝ real-ℚ⁺ δ) *ℝ (z +ℝ real-ℚ⁺ δ)))
+              by leq-add-abs-dist-ℝ _ _
+            ≤ ( y *ℝ z) +ℝ
+              ( dist-ℝ (y *ℝ z) ((y +ℝ real-ℚ⁺ δ) *ℝ (z +ℝ real-ℚ⁺ δ)))
+              by leq-eq-ℝ (ap-add-ℝ (abs-real-ℝ⁰⁺ (y⁰⁺ *ℝ⁰⁺ z⁰⁺)) refl)
+            ≤ y *ℝ z +ℝ real-ℚ⁺ η
+              by
+                preserves-leq-left-add-ℝ _ _ _
+                  ( leq-dist-neighborhood-ℝ
+                    ( η)
+                    ( _)
+                    ( _)
+                    ( is-mod-μ
+                      ( η)
+                      ( y +ℝ real-ℚ⁺ δ , z +ℝ real-ℚ⁺ δ)
+                      ( neighborhood-right-add-real-ℚ⁺ y δ ,
+                        neighborhood-right-add-real-ℚ⁺ z δ))))
 ```
