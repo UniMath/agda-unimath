@@ -21,13 +21,17 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
+open import metric-spaces.short-functions-metric-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
@@ -109,7 +113,7 @@ module _
     is-reflexive-is-metric-of-Metric-Space :
       is-reflexive-distance-function (set-Metric-Space M) ρ
     is-reflexive-is-metric-of-Metric-Space x =
-      sim-zero-le-positive-rational-ℝ⁰⁺
+      sim-zero-leq-positive-rational-ℝ⁰⁺
         ( ρ x x)
         ( λ ε →
           forward-implication
@@ -233,14 +237,14 @@ module _
             ( real-ℝ⁰⁺ (ρ x y))
             ( real-ℚ⁺ δ)
             ( forward-implication (is-metric-M-ρ δ x y) Nδxy)
-            ( le-real-is-in-lower-cut-ℚ
+            ( le-real-is-in-lower-cut-ℝ
               ( real-ℝ⁰⁺ (ρ x y))
               ( δ<ρxy)))
         ( λ ρxy<ε →
           backward-implication
             ( is-metric-M-ρ ε x y)
             ( leq-le-ℝ
-              ( le-real-is-in-upper-cut-ℚ
+              ( le-real-is-in-upper-cut-ℝ
                 ( real-ℝ⁰⁺ (ρ x y))
                 ( ρxy<ε))))
         ( is-located-lower-upper-cut-ℝ (real-ℝ⁰⁺ (ρ x y)) δ<ε)
@@ -264,6 +268,109 @@ module _
     eq-metric-is-metric-of-Metric-Space =
       eq-isometric-equiv-Metric-Space _ _
         ( isometric-equiv-metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
+```
+
+### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a function `f : M → N` is an isometry if and only if `dM x y` is similar to `dN (f x) (f y)` for all `x, y : M`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (M : Metric-Space l1 l2)
+  (N : Metric-Space l3 l4)
+  (dM : distance-function l5 (set-Metric-Space M))
+  (dN : distance-function l6 (set-Metric-Space N))
+  (is-metric-dM : is-metric-of-Metric-Space M dM)
+  (is-metric-dN : is-metric-of-Metric-Space N dN)
+  (f : type-function-Metric-Space M N)
+  where
+
+  abstract
+    is-isometry-sim-metric-Metric-Space :
+      ((x y : type-Metric-Space M) → sim-ℝ⁰⁺ (dM x y) (dN (f x) (f y))) →
+      is-isometry-Metric-Space M N f
+    is-isometry-sim-metric-Metric-Space H d x y =
+      logical-equivalence-reasoning
+        neighborhood-Metric-Space M d x y
+        ↔ leq-ℝ (real-ℝ⁰⁺ (dM x y)) (real-ℚ⁺ d)
+          by is-metric-dM d x y
+        ↔ leq-ℝ (real-ℝ⁰⁺ (dN (f x) (f y))) (real-ℚ⁺ d)
+          by leq-iff-left-sim-ℝ (H x y)
+        ↔ neighborhood-Metric-Space N d (f x) (f y)
+          by inv-iff (is-metric-dN d (f x) (f y))
+
+    sim-metric-is-isometry-Metric-Space :
+      is-isometry-Metric-Space M N f →
+      (x y : type-Metric-Space M) →
+      sim-ℝ⁰⁺ (dM x y) (dN (f x) (f y))
+    sim-metric-is-isometry-Metric-Space H x y =
+      sim-leq-same-positive-rational-ℝ⁰⁺
+        ( dM x y)
+        ( dN (f x) (f y))
+        ( λ d →
+          logical-equivalence-reasoning
+            leq-ℝ (real-ℝ⁰⁺ (dM x y)) (real-ℚ⁺ d)
+            ↔ neighborhood-Metric-Space M d x y
+              by inv-iff (is-metric-dM d x y)
+            ↔ neighborhood-Metric-Space N d (f x) (f y)
+              by H d x y
+            ↔ leq-ℝ (real-ℝ⁰⁺ (dN (f x) (f y))) (real-ℚ⁺ d)
+              by is-metric-dN d (f x) (f y))
+
+  is-isometry-iff-sim-metric-Metric-Space :
+    is-isometry-Metric-Space M N f ↔
+    ((x y : type-Metric-Space M) → sim-ℝ⁰⁺ (dM x y) (dN (f x) (f y)))
+  is-isometry-iff-sim-metric-Metric-Space =
+    ( sim-metric-is-isometry-Metric-Space ,
+      is-isometry-sim-metric-Metric-Space)
+```
+
+### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a function `f : M → N` is short if and only if `dN (f x) (f y) ≤ dM x y` for all `x, y : M`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (M : Metric-Space l1 l2)
+  (N : Metric-Space l3 l4)
+  (dM : distance-function l5 (set-Metric-Space M))
+  (dN : distance-function l6 (set-Metric-Space N))
+  (is-metric-dM : is-metric-of-Metric-Space M dM)
+  (is-metric-dN : is-metric-of-Metric-Space N dN)
+  (f : type-function-Metric-Space M N)
+  where
+
+  abstract
+    is-short-function-leq-metric-Metric-Space :
+      ((x y : type-Metric-Space M) → leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y)) →
+      is-short-function-Metric-Space M N f
+    is-short-function-leq-metric-Metric-Space H d x y Ndxy =
+      backward-implication
+        ( is-metric-dN d (f x) (f y))
+        ( transitive-leq-ℝ
+          ( real-ℝ⁰⁺ (dN (f x) (f y)))
+          ( real-ℝ⁰⁺ (dM x y))
+          ( real-ℚ⁺ d)
+          ( forward-implication (is-metric-dM d x y) Ndxy)
+          ( H x y))
+
+    leq-metric-is-short-function-Metric-Space :
+      is-short-function-Metric-Space M N f →
+      (x y : type-Metric-Space M) →
+      leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y)
+    leq-metric-is-short-function-Metric-Space H x y =
+      leq-leq-positive-rational-ℝ⁰⁺
+        ( dN (f x) (f y))
+        ( dM x y)
+        ( λ d dMxy≤d →
+          forward-implication
+            ( is-metric-dN d (f x) (f y))
+            ( H d x y (backward-implication (is-metric-dM d x y) dMxy≤d)))
+
+  is-short-function-iff-leq-metric-Metric-Space :
+    is-short-function-Metric-Space M N f ↔
+    ((x y : type-Metric-Space M) → leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y))
+  is-short-function-iff-leq-metric-Metric-Space =
+    ( leq-metric-is-short-function-Metric-Space ,
+      is-short-function-leq-metric-Metric-Space)
 ```
 
 ## See also
