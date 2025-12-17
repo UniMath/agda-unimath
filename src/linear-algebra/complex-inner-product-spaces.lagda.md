@@ -29,6 +29,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import linear-algebra.complex-vector-spaces
+open import linear-algebra.conjugate-symmetric-sesquilinear-forms-complex-vector-spaces
 open import linear-algebra.sesquilinear-forms-complex-vector-spaces
 
 open import real-numbers.absolute-value-real-numbers
@@ -53,10 +54,11 @@ A {{#concept "complex inner product space" Agda=ℂ-Inner-Product-Space}} is a
 [sesquilinear form](linear-algebra.sesquilinear-forms-complex-vector-spaces.md),
 called its inner product, satisfying the following properties:
 
-- **Conjugate symmetry**: for all `u` and `v`, the inner product of `u` and `v`
-  is the [conjugate](complex-numbers.conjugation-complex-numbers.md) of the
-  inner product of `v` and `u`. Note that this implies the inner product of `v`
-  and `v` is a [real complex number](complex-numbers.real-complex-numbers.md).
+- [**Conjugate symmetry**](linear-algebra.conjugate-symmetric-sesquilinear-forms-complex-vector-spaces.md):
+  for all `u` and `v`, the inner product of `u` and `v` is the
+  [conjugate](complex-numbers.conjugation-complex-numbers.md) of the inner
+  product of `v` and `u`. Note that this implies the inner product of `v` and
+  `v` is a [real complex number](complex-numbers.real-complex-numbers.md).
 - **Semidefiniteness**: for all `v`, the inner product of `v` and `v`, as a
   [real number](real-numbers.dedekind-real-numbers.md), is
   [nonnegative](real-numbers.nonnegative-real-numbers.md).
@@ -71,24 +73,6 @@ module _
   (V : ℂ-Vector-Space l1 l2)
   (f : sesquilinear-form-ℂ-Vector-Space V)
   where
-
-  is-conjugate-symmetric-prop-sesquilinear-form-ℂ-Vector-Space :
-    Prop (lsuc l1 ⊔ l2)
-  is-conjugate-symmetric-prop-sesquilinear-form-ℂ-Vector-Space =
-    Π-Prop
-      ( type-ℂ-Vector-Space V)
-      ( λ x →
-        Π-Prop
-          ( type-ℂ-Vector-Space V)
-          ( λ y →
-            Id-Prop
-              ( ℂ-Set l1)
-              ( map-sesquilinear-form-ℂ-Vector-Space V f x y)
-              ( conjugate-ℂ (map-sesquilinear-form-ℂ-Vector-Space V f y x))))
-
-  is-conjugate-symmetric-sesquilinear-form-ℂ-Vector-Space : UU (lsuc l1 ⊔ l2)
-  is-conjugate-symmetric-sesquilinear-form-ℂ-Vector-Space =
-    type-Prop is-conjugate-symmetric-prop-sesquilinear-form-ℂ-Vector-Space
 
   is-semidefinite-prop-sesquilinear-form-ℂ-Vector-Space : Prop (l1 ⊔ l2)
   is-semidefinite-prop-sesquilinear-form-ℂ-Vector-Space =
@@ -122,7 +106,7 @@ module _
 
   is-inner-product-prop-sesquilinear-form-ℂ-Vector-Space : Prop (lsuc l1 ⊔ l2)
   is-inner-product-prop-sesquilinear-form-ℂ-Vector-Space =
-    ( is-conjugate-symmetric-prop-sesquilinear-form-ℂ-Vector-Space) ∧
+    ( is-conjugate-symmetric-prop-sesquilinear-form-ℂ-Vector-Space V f) ∧
     ( is-semidefinite-prop-sesquilinear-form-ℂ-Vector-Space) ∧
     ( is-extensional-prop-sesquilinear-form-ℂ-Vector-Space)
 
@@ -172,10 +156,11 @@ module _
     is-real-diagonal-inner-product-ℂ-Inner-Product-Space :
       (x : type-ℂ-Inner-Product-Space) →
       is-real-ℂ (inner-product-ℂ-Inner-Product-Space x x)
-    is-real-diagonal-inner-product-ℂ-Inner-Product-Space x =
-      is-real-eq-conjugate-ℂ
-        ( inner-product-ℂ-Inner-Product-Space x x)
-        ( inv (is-conjugate-symmetric-inner-product-ℂ-Inner-Product-Space x x))
+    is-real-diagonal-inner-product-ℂ-Inner-Product-Space =
+      is-real-diagonal-is-conjugate-symmetric-sesquilinear-form-ℂ-Vector-Space
+        ( vector-space-ℂ-Inner-Product-Space)
+        ( sesquilinear-form-inner-product-ℂ-Inner-Product-Space)
+        ( is-conjugate-symmetric-inner-product-ℂ-Inner-Product-Space)
 
   squared-norm-ℂ-Inner-Product-Space : type-ℂ-Inner-Product-Space → ℝ l1
   squared-norm-ℂ-Inner-Product-Space v =
