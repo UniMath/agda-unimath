@@ -9,18 +9,24 @@ module real-numbers.nonpositive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
-open import foundation.subtypes
-open import foundation.propositions
-open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import real-numbers.rational-real-numbers
 ```
 
 </details>
 
 ## Idea
+
+A [real number](real-numbers.dedekind-real-numbers.md) is
+{{#concept "nonpositive" Disambiguation="real numbers" Agda=is-nonpositive-ℝ}}
+if it is [less than or equal to](real-numbers.inequality-real-numbers.md)
+[zero](real-numbers.rational-real-numbers.md).
 
 ## Definition
 

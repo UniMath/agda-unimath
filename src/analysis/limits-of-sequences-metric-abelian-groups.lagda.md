@@ -8,21 +8,33 @@ module analysis.limits-of-sequences-metric-abelian-groups where
 
 ```agda
 open import analysis.metric-abelian-groups
-open import foundation.universe-levels
-open import metric-spaces.cartesian-products-metric-spaces
-open import foundation.subtypes
-open import elementary-number-theory.positive-rational-numbers
+open import analysis.sequences-metric-abelian-groups
+
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
 open import lists.sequences
-open import analysis.sequences-metric-abelian-groups
+
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 ```
 
 </details>
 
 ## Idea
+
+A
+{{#concept "limit" Disambiguation="of a sequence in a metric abelian group" Agda=is-limit-sequence-Metric-Ab}}
+of a
+[sequence in a metric abelian group](analysis.sequences-metric-abelian-groups.md)
+is a [limit](metric-spaces.limits-of-sequences-metric-spaces.md) of the
+[sequence](lists.sequences.md) in the corresponding
+[metric space](metric-spaces.metric-spaces.md).
 
 ## Definition
 
@@ -110,5 +122,4 @@ module _
         ( isometry-neg-Metric-Ab G)
         ( u)
         ( lim-u)
-
 ```

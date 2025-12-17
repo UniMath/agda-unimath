@@ -7,14 +7,20 @@ module analysis.sequences-metric-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import lists.sequences
 open import analysis.metric-abelian-groups
+
 open import foundation.universe-levels
+
+open import lists.sequences
 ```
 
 </details>
 
 ## Idea
+
+A [sequence](lists.sequences.md) in a
+[metric abelian group](analysis.metric-abelian-groups.md) inherits the
+operations of the group.
 
 ## Definition
 
