@@ -118,14 +118,19 @@ abstract
 
 ```agda
 abstract opaque
-  unfolding abs-ℝ leq-ℝ max-ℝ neg-ℚ neg-ℝ real-ℚ
+  unfolding abs-ℝ leq-ℝ max-ℝ neg-ℝ real-ℚ
 
   is-nonnegative-abs-ℝ : {l : Level} → (x : ℝ l) → is-nonnegative-ℝ (abs-ℝ x)
   is-nonnegative-abs-ℝ x q q<0 =
     elim-disjunction
       ( lower-cut-ℝ (abs-ℝ x) q)
       ( id)
-      ( λ (x<0 , 0<x) → ex-falso (is-disjoint-cut-ℝ x zero-ℚ (0<x , x<0)))
+      ( λ (x<0 , 0<x) →
+        ex-falso
+          ( is-disjoint-cut-ℝ
+            ( x)
+            ( zero-ℚ)
+            ( tr (is-in-lower-cut-ℝ x) neg-zero-ℚ 0<x , x<0)))
       ( is-located-lower-upper-cut-ℝ (abs-ℝ x) q<0)
 
 nonnegative-abs-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
