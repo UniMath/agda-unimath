@@ -43,11 +43,11 @@ infix 6 _~ℝ⁰⁺_
 _~ℝ⁰⁺_ : {l1 l2 : Level} → ℝ⁰⁺ l1 → ℝ⁰⁺ l2 → UU (l1 ⊔ l2)
 _~ℝ⁰⁺_ = sim-ℝ⁰⁺
 
-sim-zero-prop-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → Prop l
-sim-zero-prop-ℝ⁰⁺ = sim-prop-ℝ⁰⁺ zero-ℝ⁰⁺
+is-zero-prop-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → Prop l
+is-zero-prop-ℝ⁰⁺ x = sim-prop-ℝ⁰⁺ x zero-ℝ⁰⁺
 
-sim-zero-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → UU l
-sim-zero-ℝ⁰⁺ = sim-ℝ⁰⁺ zero-ℝ⁰⁺
+is-zero-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → UU l
+is-zero-ℝ⁰⁺ x = sim-ℝ⁰⁺ x zero-ℝ⁰⁺
 
 eq-sim-ℝ⁰⁺ : {l : Level} (x y : ℝ⁰⁺ l) → sim-ℝ⁰⁺ x y → x ＝ y
 eq-sim-ℝ⁰⁺ x y x~y = eq-ℝ⁰⁺ x y (eq-sim-ℝ {x = real-ℝ⁰⁺ x} {y = real-ℝ⁰⁺ y} x~y)
