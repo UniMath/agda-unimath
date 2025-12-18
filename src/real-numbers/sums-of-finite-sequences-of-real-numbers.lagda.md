@@ -7,30 +7,31 @@ module real-numbers.sums-of-finite-sequences-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
+
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.equivalences
 open import foundation.function-types
-open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings
-open import foundation.identity-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
 
-open import real-numbers.addition-real-numbers
 open import lists.finite-sequences
 
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-additive-group-of-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.large-ring-of-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -13,21 +13,27 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.sums-of-finite-sequences-of-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
@@ -95,19 +101,40 @@ abstract
     preserves-leq-sum-fin-sequence-ℝ n (real-ℝ⁰⁺ ∘ a) (real-ℝ⁰⁺ ∘ b) aᵢ≤bᵢ
 ```
 
+### If `aₙ` is nonnegative for all `n`, `aᵢ ≤ ∑ aₙ`
+
+```agda
+abstract
+  leq-term-sum-fin-sequence-ℝ⁰⁺ :
+    {l : Level} (n : ℕ) (a : fin-sequence (ℝ⁰⁺ l) n) (i : Fin n) →
+    leq-ℝ⁰⁺ (a i) (sum-fin-sequence-ℝ⁰⁺ n a)
+  leq-term-sum-fin-sequence-ℝ⁰⁺ (succ-ℕ n) a (inr star) =
+    leq-right-add-real-ℝ⁰⁺
+      ( real-ℝ⁰⁺ (a (neg-one-Fin n)))
+      ( sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl-Fin n))
+  leq-term-sum-fin-sequence-ℝ⁰⁺ (succ-ℕ n) a (inl i) =
+    transitive-leq-ℝ
+      ( real-ℝ⁰⁺ (a (inl i)))
+      ( real-sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl))
+      ( real-sum-fin-sequence-ℝ⁰⁺ (succ-ℕ n) a)
+      ( leq-left-add-real-ℝ⁰⁺
+        ( real-sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl))
+        ( a (inr star)))
+      ( leq-term-sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl) i)
+```
+
 ### If `aₙ` is nonnegative for all `n`, and `∑ aₙ = 0`, then `aₙ = 0` for all `n`
 
 ```agda
 abstract
   is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺ :
     {l : Level} (n : ℕ) (a : fin-sequence (ℝ⁰⁺ l) n) →
-    (sum-fin-sequence-ℝ⁰⁺ n a ＝ raise-ℝ⁰⁺ l zero-ℝ⁰⁺) →
-    (i : Fin n) → a i ＝ raise-ℝ⁰⁺ l zero-ℝ⁰⁺
-  is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺ {l} n a ∑aₙ=0 i =
-    eq-ℝ⁰⁺ _ _
-      ( antisymmetric-leq-ℝ
-        ( real-ℝ⁰⁺ (a i))
-        ( raise-zero-ℝ l)
-        {!   !}
-        {!  preserves-leq-left-sim-ℝ (sim-raise-ℝ l zero-ℝ) !})
+    (sum-fin-sequence-ℝ⁰⁺ n a ＝ raise-zero-ℝ⁰⁺ l) →
+    (i : Fin n) → a i ＝ raise-zero-ℝ⁰⁺ l
+  is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺ {l} n a ∑aᵢ=0 i =
+    eq-zero-leq-zero-ℝ⁰⁺
+      ( a i)
+      ( preserves-leq-right-sim-ℝ
+        ( inv-tr (λ z → sim-ℝ z _) (ap real-ℝ⁰⁺ ∑aᵢ=0) (sim-raise-ℝ' l zero-ℝ))
+        ( leq-term-sum-fin-sequence-ℝ⁰⁺ n a i))
 ```

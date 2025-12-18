@@ -341,4 +341,7 @@ abstract
 raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
 raise-ℝ⁰⁺ l (x , is-nonneg-x) =
   (raise-ℝ l x , preserves-is-nonnegative-raise-ℝ l x is-nonneg-x)
+
+raise-zero-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
+raise-zero-ℝ⁰⁺ l = raise-ℝ⁰⁺ l zero-ℝ⁰⁺
 ```
