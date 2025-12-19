@@ -12,6 +12,7 @@ module linear-algebra.dot-product-standard-euclidean-vector-spaces where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -30,6 +31,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers
 open import real-numbers.sums-of-finite-sequences-of-real-numbers
@@ -135,6 +137,12 @@ abstract
     is-nonnegative-real-sum-fin-sequence-ℝ⁰⁺
       ( n)
       ( λ i → nonnegative-square-ℝ (v i))
+
+nonnegative-diagonal-dot-product-ℝ^ :
+  (n : ℕ) {l : Level} (v : type-ℝ^ n l) → ℝ⁰⁺ l
+nonnegative-diagonal-dot-product-ℝ^ n v =
+  ( dot-product-ℝ^ n v v ,
+    is-nonnegative-diagonal-dot-product-ℝ^ n v)
 ```
 
 ### If `v · v = 0`, `v` is the zero vector
@@ -190,6 +198,37 @@ abstract
                 ( |vᵢ|≤ε i))
       ≤ real-ℕ n *ℝ square-ℝ (real-ℝ⁰⁺ ε)
         by leq-eq-ℝ (sum-constant-fin-sequence-ℝ n (square-ℝ (real-ℝ⁰⁺ ε)))
+```
+
+### The square of every coordinate of `v` is at most `v · v`
+
+```agda
+abstract
+  leq-square-diagonal-dot-product-ℝ^ :
+    (n : ℕ) {l : Level} (v : type-ℝ^ n l) (i : Fin n) →
+    leq-ℝ (square-ℝ (v i)) (dot-product-ℝ^ n v v)
+  leq-square-diagonal-dot-product-ℝ^ n v =
+    leq-term-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (v i))
+```
+
+### The absolute value of every coordinate of $v$ is at most $\sqrt{v · v}$
+
+```agda
+abstract
+  leq-abs-sqrt-diagonal-dot-product :
+    (n : ℕ) {l : Level} (v : type-ℝ^ n l) (i : Fin n) →
+    leq-ℝ
+      ( abs-ℝ (v i))
+      ( real-sqrt-ℝ⁰⁺ (nonnegative-diagonal-dot-product-ℝ^ n v))
+  leq-abs-sqrt-diagonal-dot-product n v i =
+    binary-tr
+      ( leq-ℝ)
+      ( inv (eq-abs-sqrt-square-ℝ (v i)))
+      ( refl)
+      ( preserves-leq-sqrt-ℝ⁰⁺
+        ( nonnegative-square-ℝ (v i))
+        ( nonnegative-diagonal-dot-product-ℝ^ n v)
+        ( leq-square-diagonal-dot-product-ℝ^ n v i))
 ```
 
 ## See also
