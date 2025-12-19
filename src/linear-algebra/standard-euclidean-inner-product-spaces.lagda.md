@@ -25,7 +25,7 @@ The standard Euclidean
 [inner product space](linear-algebra.real-inner-product-spaces.md) is the
 [standard Euclidean vector space](linear-algebra.standard-euclidean-vector-spaces.md),
 with inner product the
-[dot product](lienar-algebra.dot-product-standard-euclidean-vector-spaces.md).
+[dot product](linear-algebra.dot-product-standard-euclidean-vector-spaces.md).
 
 ## Definition
 

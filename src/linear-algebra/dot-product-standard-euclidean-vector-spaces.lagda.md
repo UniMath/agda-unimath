@@ -20,9 +20,13 @@ open import foundation.universe-levels
 open import linear-algebra.bilinear-forms-real-vector-spaces
 open import linear-algebra.standard-euclidean-vector-spaces
 
+open import order-theory.large-posets
+
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.extensionality-multiplication-bilinear-form-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
@@ -157,6 +161,35 @@ abstract
     is-zero-ℝ (dot-product-ℝ^ n v v) → v ＝ zero-ℝ^ n l
   extensionality-dot-product-ℝ^ n v v·v=0 =
     eq-htpy (htpy-zero-is-zero-diagonal-dot-product-ℝ^ n v v·v=0)
+```
+
+### If every coordinate of `v : ℝⁿ` has absolute value at most `ε`, `v · v ≤ nε²`
+
+```agda
+abstract
+  leq-mul-dimension-bound-dot-product-ℝ^ :
+    (n : ℕ) {l1 l2 : Level} (v : type-ℝ^ n l1) (ε : ℝ⁰⁺ l2) →
+    ((i : Fin n) → leq-ℝ (abs-ℝ (v i)) (real-ℝ⁰⁺ ε)) →
+    leq-ℝ (dot-product-ℝ^ n v v) (real-ℕ n *ℝ square-ℝ (real-ℝ⁰⁺ ε))
+  leq-mul-dimension-bound-dot-product-ℝ^ n v ε |vᵢ|≤ε =
+    let open inequality-reasoning-Large-Poset ℝ-Large-Poset
+    in
+      chain-of-inequalities
+      real-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (v i))
+      ≤ real-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (abs-ℝ (v i)))
+        by
+          leq-eq-ℝ
+            ( htpy-sum-fin-sequence-ℝ n (λ i → (inv (square-abs-ℝ (v i)))))
+      ≤ real-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (real-ℝ⁰⁺ ε))
+        by
+          preserves-leq-sum-fin-sequence-ℝ⁰⁺ n _ _
+            ( λ i →
+              preserves-leq-square-ℝ⁰⁺
+                ( nonnegative-abs-ℝ (v i))
+                ( ε)
+                ( |vᵢ|≤ε i))
+      ≤ real-ℕ n *ℝ square-ℝ (real-ℝ⁰⁺ ε)
+        by leq-eq-ℝ (sum-constant-fin-sequence-ℝ n (square-ℝ (real-ℝ⁰⁺ ε)))
 ```
 
 ## See also

@@ -9,7 +9,11 @@ module real-numbers.inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -296,6 +300,38 @@ module _
 
     iff-leq-real-ℚ : leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
+```
+
+### The canonical map from integers to the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℤ}
+  where
+
+  abstract
+    preserves-leq-real-ℤ : leq-ℤ x y → leq-ℝ (real-ℤ x) (real-ℤ y)
+    preserves-leq-real-ℤ x≤y =
+      preserves-leq-real-ℚ (preserves-leq-rational-ℤ x≤y)
+
+    reflects-leq-real-ℤ : leq-ℝ (real-ℤ x) (real-ℤ y) → leq-ℤ x y
+    reflects-leq-real-ℤ x≤y =
+      reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
+```
+
+### The canonical map from natural numbers to the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℕ}
+  where
+
+  abstract
+    preserves-leq-real-ℕ : leq-ℕ x y → leq-ℝ (real-ℕ x) (real-ℕ y)
+    preserves-leq-real-ℕ x≤y = preserves-leq-real-ℤ (leq-int-ℕ x y x≤y)
+
+    reflects-leq-real-ℕ : leq-ℝ (real-ℕ x) (real-ℕ y) → leq-ℕ x y
+    reflects-leq-real-ℕ x≤y = reflects-leq-int-ℕ x y (reflects-leq-real-ℤ x≤y)
 ```
 
 ### Negation reverses inequality on the real numbers
