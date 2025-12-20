@@ -6,7 +6,7 @@
 module group-theory.products-of-finite-families-of-elements-commutative-semigroups where
 ```
 
-<details><productmary>Imports</productmary>
+<details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers

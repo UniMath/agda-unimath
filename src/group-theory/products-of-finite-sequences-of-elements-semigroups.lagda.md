@@ -4,7 +4,7 @@
 module group-theory.products-of-finite-sequences-of-elements-semigroups where
 ```
 
-<details><productmary>Imports</productmary>
+<details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
