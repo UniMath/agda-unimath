@@ -76,7 +76,7 @@ module _
     (f : unit → type-Commutative-Ring A) →
     sum-finite-Commutative-Ring A unit-Finite-Type f ＝ f star
   sum-unit-finite-Commutative-Ring =
-    sum-unit-finite-Ring (ring-Commutative-Ring A)
+    sum-unit-finite-type-Ring (ring-Commutative-Ring A)
 ```
 
 ### Sums are homotopy invariant
@@ -197,7 +197,7 @@ module _
     (f : type-Finite-Type A → type-Commutative-Ring R) →
     is-zero-Commutative-Ring R (sum-finite-Commutative-Ring R A f)
   eq-zero-sum-finite-is-empty-Commutative-Ring =
-    eq-zero-sum-finite-is-empty-Ring (ring-Commutative-Ring R) A H
+    is-zero-sum-finite-is-empty-Ring (ring-Commutative-Ring R) A H
 ```
 
 ### The sum over a finite type is the sum over any count for that type

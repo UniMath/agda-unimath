@@ -1,10 +1,10 @@
-# Sums of finite sequences of elements in semigroups
+# Products of finite sequences of elements in semigroups
 
 ```agda
-module group-theory.sums-of-finite-sequences-of-elements-semigroups where
+module group-theory.products-of-finite-sequences-of-elements-semigroups where
 ```
 
-<details><summary>Imports</summary>
+<details><productmary>Imports</productmary>
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
@@ -33,62 +33,58 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite sequence in a semigroup" WD="sum" WDID=Q218005 Agda=sum-fin-sequence-type-Semigroup}}
+{{#concept "product operation" Disambiguation="of a finite sequence in a semigroup" WD="product" WDID=Q218005 Agda=product-fin-sequence-type-Semigroup}}
 extends the binary operation on a [semigroup](group-theory.semigroups.md) `G` to
 any nonempty [finite sequence](lists.finite-sequences.md) of elements of `G`.
-
-We use additive terminology consistently with the linear algebra definition of
-[finite sequences in semigroups](linear-algebra.finite-sequences-in-semigroups.md)
-despite the use of multiplicative terminology for semigroups in general.
 
 ## Definition
 
 ```agda
-sum-fin-sequence-type-Semigroup :
+product-fin-sequence-type-Semigroup :
   {l : Level} (G : Semigroup l) (n : ℕ) →
   fin-sequence-type-Semigroup G (succ-ℕ n) → type-Semigroup G
-sum-fin-sequence-type-Semigroup G zero-ℕ f = f (inr star)
-sum-fin-sequence-type-Semigroup G (succ-ℕ n) f =
+product-fin-sequence-type-Semigroup G zero-ℕ f = f (inr star)
+product-fin-sequence-type-Semigroup G (succ-ℕ n) f =
   mul-Semigroup G
-    ( sum-fin-sequence-type-Semigroup G n (f ∘ inl-Fin (succ-ℕ n)))
+    ( product-fin-sequence-type-Semigroup G n (f ∘ inl-Fin (succ-ℕ n)))
     ( f (inr star))
 ```
 
 ## Properties
 
-### Sums are homotopy invariant
+### Products are homotopy invariant
 
 ```agda
 module _
   {l : Level} (G : Semigroup l)
   where
 
-  htpy-sum-fin-sequence-type-Semigroup :
+  htpy-product-fin-sequence-type-Semigroup :
     (n : ℕ) → {f g : fin-sequence-type-Semigroup G (succ-ℕ n)} →
     f ~ g →
-    sum-fin-sequence-type-Semigroup G n f ＝
-    sum-fin-sequence-type-Semigroup G n g
-  htpy-sum-fin-sequence-type-Semigroup n f~g =
-    ap (sum-fin-sequence-type-Semigroup G n) (eq-htpy f~g)
+    product-fin-sequence-type-Semigroup G n f ＝
+    product-fin-sequence-type-Semigroup G n g
+  htpy-product-fin-sequence-type-Semigroup n f~g =
+    ap (product-fin-sequence-type-Semigroup G n) (eq-htpy f~g)
 ```
 
-### Splitting sums of `succ-ℕ n + succ-ℕ m` elements into a sum of `succ-ℕ n` elements and a sum of `succ-ℕ m` elements
+### Splitting products of `succ-ℕ n + succ-ℕ m` elements into a product of `succ-ℕ n` elements and a product of `succ-ℕ m` elements
 
 ```agda
 abstract
-  split-sum-fin-sequence-type-Semigroup :
+  split-product-fin-sequence-type-Semigroup :
     {l : Level} (G : Semigroup l)
     (n m : ℕ) (f : fin-sequence-type-Semigroup G (succ-ℕ n +ℕ succ-ℕ m)) →
-    sum-fin-sequence-type-Semigroup G (succ-ℕ n +ℕ m) f ＝
+    product-fin-sequence-type-Semigroup G (succ-ℕ n +ℕ m) f ＝
     mul-Semigroup G
-      ( sum-fin-sequence-type-Semigroup G n
+      ( product-fin-sequence-type-Semigroup G n
         ( f ∘ inl-coproduct-Fin (succ-ℕ n) (succ-ℕ m)))
-      ( sum-fin-sequence-type-Semigroup G m
+      ( product-fin-sequence-type-Semigroup G m
         ( f ∘ inr-coproduct-Fin (succ-ℕ n) (succ-ℕ m)))
-  split-sum-fin-sequence-type-Semigroup G n zero-ℕ f = refl
-  split-sum-fin-sequence-type-Semigroup G n (succ-ℕ m) f =
+  split-product-fin-sequence-type-Semigroup G n zero-ℕ f = refl
+  split-product-fin-sequence-type-Semigroup G n (succ-ℕ m) f =
     ap-mul-Semigroup G
-      ( split-sum-fin-sequence-type-Semigroup G n m (f ∘ inl))
+      ( split-product-fin-sequence-type-Semigroup G n m (f ∘ inl))
       ( refl) ∙
     associative-mul-Semigroup G _ _ _
 ```
