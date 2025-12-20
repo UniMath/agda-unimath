@@ -171,7 +171,7 @@ module _
       in do
         (μXY , is-mod-μXY) ←
           is-uniformly-continuous-map-uniform-homeomorphism-Metric-Space X Y f
-        (μYX , is-mod-μYX) ←
+        mod-YX ←
           is-uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space
             ( X)
             ( Y)
@@ -185,9 +185,7 @@ module _
                 map-modulated-ucont-map-cauchy-sequence-Metric-Space
                   ( Y)
                   ( X)
-                  ( map-inv-uniform-homeomorphism-Metric-Space X Y f ,
-                    μYX ,
-                    is-mod-μYX)
+                  ( map-inv-uniform-homeomorphism-Metric-Space X Y f , mod-YX)
                   ( uY)
               lim-uX = limit-cauchy-sequence-Complete-Metric-Space (X , H) uX
               (μ-uX , is-mod-lim-μ-uX) =
