@@ -52,4 +52,10 @@ mul-ℝ^ n {l} = mul-ℝ-Vector-Space (vector-space-ℝ^ n l)
 
 zero-ℝ^ : (n : ℕ) (l : Level) → type-ℝ^ n l
 zero-ℝ^ n l = zero-ℝ-Vector-Space (vector-space-ℝ^ n l)
+
+neg-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l
+neg-ℝ^ n {l} = neg-ℝ-Vector-Space (vector-space-ℝ^ n l)
+
+diff-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l → type-ℝ^ n l
+diff-ℝ^ n u v = add-ℝ^ n u (neg-ℝ^ n v)
 ```

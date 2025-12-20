@@ -215,12 +215,12 @@ abstract
 
 ```agda
 abstract
-  leq-abs-sqrt-diagonal-dot-product :
+  leq-abs-sqrt-diagonal-dot-product-ℝ^ :
     (n : ℕ) {l : Level} (v : type-ℝ^ n l) (i : Fin n) →
     leq-ℝ
       ( abs-ℝ (v i))
       ( real-sqrt-ℝ⁰⁺ (nonnegative-diagonal-dot-product-ℝ^ n v))
-  leq-abs-sqrt-diagonal-dot-product n v i =
+  leq-abs-sqrt-diagonal-dot-product-ℝ^ n v i =
     binary-tr
       ( leq-ℝ)
       ( inv (eq-abs-sqrt-square-ℝ (v i)))
