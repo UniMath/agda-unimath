@@ -174,10 +174,11 @@ module _
       ( R)
       ( geometric-mul-pow-nat-Commutative-Semiring)
 
-  eq-initial-term-mul-pow-nat-Commutative-Semiring :
-    initial-term-mul-pow-nat-Commutative-Semiring ＝ a
-  eq-initial-term-mul-pow-nat-Commutative-Semiring =
-    right-unit-law-mul-Commutative-Semiring R a
+  abstract
+    eq-initial-term-mul-pow-nat-Commutative-Semiring :
+      initial-term-mul-pow-nat-Commutative-Semiring ＝ a
+    eq-initial-term-mul-pow-nat-Commutative-Semiring =
+      right-unit-law-mul-Commutative-Semiring R a
 ```
 
 ## Properties
@@ -190,16 +191,17 @@ module _
   (u : geometric-sequence-Commutative-Semiring R)
   where
 
-  htpy-seq-standard-geometric-sequence-Commutative-Semiring :
-    ( seq-geometric-sequence-Commutative-Semiring R
-      ( standard-geometric-sequence-Commutative-Semiring R
-        ( initial-term-geometric-sequence-Commutative-Semiring R u)
-        ( common-ratio-geometric-sequence-Commutative-Semiring R u))) ~
-    ( seq-geometric-sequence-Commutative-Semiring R u)
-  htpy-seq-standard-geometric-sequence-Commutative-Semiring =
-    htpy-seq-standard-geometric-sequence-Semiring
-      ( semiring-Commutative-Semiring R)
-      ( u)
+  abstract
+    htpy-seq-standard-geometric-sequence-Commutative-Semiring :
+      ( seq-geometric-sequence-Commutative-Semiring R
+        ( standard-geometric-sequence-Commutative-Semiring R
+          ( initial-term-geometric-sequence-Commutative-Semiring R u)
+          ( common-ratio-geometric-sequence-Commutative-Semiring R u))) ~
+      ( seq-geometric-sequence-Commutative-Semiring R u)
+    htpy-seq-standard-geometric-sequence-Commutative-Semiring =
+      htpy-seq-standard-geometric-sequence-Semiring
+        ( semiring-Commutative-Semiring R)
+        ( u)
 ```
 
 ### The nth term of a geometric sequence with initial term `a` and common ratio `r` is `a * rⁿ`
@@ -218,11 +220,12 @@ module _
       ( a)
       ( r)
 
-  initial-term-standard-geometric-sequence-Commutative-Semiring :
-    seq-standard-geometric-sequence-Commutative-Semiring R a r 0 ＝ a
-  initial-term-standard-geometric-sequence-Commutative-Semiring =
-    ( inv (htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring 0)) ∙
-    ( eq-initial-term-mul-pow-nat-Commutative-Semiring R a r)
+  abstract
+    initial-term-standard-geometric-sequence-Commutative-Semiring :
+      seq-standard-geometric-sequence-Commutative-Semiring R a r 0 ＝ a
+    initial-term-standard-geometric-sequence-Commutative-Semiring =
+      ( inv (htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring 0)) ∙
+      ( eq-initial-term-mul-pow-nat-Commutative-Semiring R a r)
 ```
 
 ```agda
@@ -231,22 +234,23 @@ module _
   (u : geometric-sequence-Commutative-Semiring R)
   where
 
-  htpy-mul-pow-geometric-sequence-Commutative-Semiring :
-    mul-pow-nat-Commutative-Semiring
-      ( R)
-      ( initial-term-geometric-sequence-Commutative-Semiring R u)
-      ( common-ratio-geometric-sequence-Commutative-Semiring R u) ~
-    seq-geometric-sequence-Commutative-Semiring R u
-  htpy-mul-pow-geometric-sequence-Commutative-Semiring n =
-    ( htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
-      ( R)
-      ( initial-term-geometric-sequence-Commutative-Semiring R u)
-      ( common-ratio-geometric-sequence-Commutative-Semiring R u)
-      ( n)) ∙
-    ( htpy-seq-standard-geometric-sequence-Semiring
-      ( semiring-Commutative-Semiring R)
-      ( u)
-      ( n))
+  abstract
+    htpy-mul-pow-geometric-sequence-Commutative-Semiring :
+      mul-pow-nat-Commutative-Semiring
+        ( R)
+        ( initial-term-geometric-sequence-Commutative-Semiring R u)
+        ( common-ratio-geometric-sequence-Commutative-Semiring R u) ~
+      seq-geometric-sequence-Commutative-Semiring R u
+    htpy-mul-pow-geometric-sequence-Commutative-Semiring n =
+      ( htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
+        ( R)
+        ( initial-term-geometric-sequence-Commutative-Semiring R u)
+        ( common-ratio-geometric-sequence-Commutative-Semiring R u)
+        ( n)) ∙
+      ( htpy-seq-standard-geometric-sequence-Semiring
+        ( semiring-Commutative-Semiring R)
+        ( u)
+        ( n))
 ```
 
 ### Constant sequences are geometric with common ratio one
@@ -437,9 +441,9 @@ module _
               ( ap-mul-Commutative-Semiring R
                 ( refl)
                 ( htpy-sum-fin-sequence-type-Commutative-Semiring R n
-                  ( htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
+                  ( ( htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
                       ( R)
                       ( a)
-                      ( r) ∘
-                    nat-Fin n)))
+                      ( r)) ∘
+                    ( nat-Fin n))))
 ```
