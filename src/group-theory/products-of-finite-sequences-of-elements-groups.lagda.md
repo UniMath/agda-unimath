@@ -100,17 +100,17 @@ module _
   abstract
     cons-product-fin-sequence-type-Group :
       (n : ℕ) (f : fin-sequence-type-Group G (succ-ℕ n)) →
-      {x : type-Group G} → head-fin-sequence-type-Group G n f ＝ x →
       product-fin-sequence-type-Group G (succ-ℕ n) f ＝
-      mul-Group G (product-fin-sequence-type-Group G n (f ∘ inl-Fin n)) x
-    cons-product-fin-sequence-type-Group n f refl = refl
+      mul-Group G
+        ( product-fin-sequence-type-Group G n (f ∘ inl-Fin n))
+        ( head-fin-sequence-type-Group G n f)
+    cons-product-fin-sequence-type-Group n f = refl
 
     snoc-product-fin-sequence-type-Group :
       (n : ℕ) (f : fin-sequence-type-Group G (succ-ℕ n)) →
-      {x : type-Group G} → f (zero-Fin n) ＝ x →
       product-fin-sequence-type-Group G (succ-ℕ n) f ＝
       mul-Group G
-        ( x)
+        ( f (zero-Fin n))
         ( product-fin-sequence-type-Group G n (f ∘ inr-Fin n))
     snoc-product-fin-sequence-type-Group =
       snoc-product-fin-sequence-type-Monoid (monoid-Group G)

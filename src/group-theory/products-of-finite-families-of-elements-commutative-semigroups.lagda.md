@@ -88,8 +88,7 @@ module _
 
   abstract
     htpy-product-count-Commutative-Semigroup :
-      (c : count A) →
-      {f g : A → type-Commutative-Semigroup G} → (f ~ g) →
+      (c : count A) {f g : A → type-Commutative-Semigroup G} → (f ~ g) →
       product-count-Commutative-Semigroup G A |A| c f ＝
       product-count-Commutative-Semigroup G A |A| c g
     htpy-product-count-Commutative-Semigroup cA@(zero-ℕ , _) _ =
@@ -111,7 +110,7 @@ module _
 
   abstract
     eq-product-count-equiv-Commutative-Semigroup :
-      (n : ℕ) → (equiv1 equiv2 : Fin (succ-ℕ n) ≃ A) →
+      (n : ℕ) (equiv1 equiv2 : Fin (succ-ℕ n) ≃ A) →
       (f : A → type-Commutative-Semigroup G) →
       product-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv1) f ＝
       product-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv2) f

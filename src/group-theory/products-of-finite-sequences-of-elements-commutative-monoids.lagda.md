@@ -112,13 +112,14 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  htpy-product-fin-sequence-type-Commutative-Monoid :
-    (n : ℕ) {f g : fin-sequence-type-Commutative-Monoid M n} →
-    (f ~ g) →
-    product-fin-sequence-type-Commutative-Monoid M n f ＝
-    product-fin-sequence-type-Commutative-Monoid M n g
-  htpy-product-fin-sequence-type-Commutative-Monoid =
-    htpy-product-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
+  abstract
+    htpy-product-fin-sequence-type-Commutative-Monoid :
+      (n : ℕ) {f g : fin-sequence-type-Commutative-Monoid M n} →
+      (f ~ g) →
+      product-fin-sequence-type-Commutative-Monoid M n f ＝
+      product-fin-sequence-type-Commutative-Monoid M n g
+    htpy-product-fin-sequence-type-Commutative-Monoid =
+      htpy-product-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### Products are equal to the zero-th term plus the rest
@@ -238,7 +239,7 @@ module _
 
   abstract
     preserves-product-permutation-fin-sequence-type-Commutative-Monoid :
-      (n : ℕ) → (σ : Permutation n) →
+      (n : ℕ) (σ : Permutation n) →
       (f : fin-sequence-type-Commutative-Monoid M n) →
       product-fin-sequence-type-Commutative-Monoid M n f ＝
       product-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv σ)

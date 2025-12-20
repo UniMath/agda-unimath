@@ -108,22 +108,20 @@ module _
 
   abstract
     cons-sum-fin-sequence-type-Ab :
-      (n : ℕ) (f : fin-sequence-type-Ab G (succ-ℕ n)) {x : type-Ab G} →
-      head-fin-sequence-type-Ab G n f ＝ x →
+      (n : ℕ) (f : fin-sequence-type-Ab G (succ-ℕ n)) →
       sum-fin-sequence-type-Ab G (succ-ℕ n) f ＝
       add-Ab G
         ( sum-fin-sequence-type-Ab G n (f ∘ inl-Fin n))
-        ( x)
+        ( head-fin-sequence-type-Ab G n f)
     cons-sum-fin-sequence-type-Ab =
       cons-product-fin-sequence-type-Commutative-Monoid
         ( commutative-monoid-Ab G)
 
     snoc-sum-fin-sequence-type-Ab :
       (n : ℕ) (f : fin-sequence-type-Ab G (succ-ℕ n)) →
-      {x : type-Ab G} → f (zero-Fin n) ＝ x →
       sum-fin-sequence-type-Ab G (succ-ℕ n) f ＝
       add-Ab G
-        ( x)
+        ( f (zero-Fin n))
         ( sum-fin-sequence-type-Ab G n (f ∘ inr-Fin n))
     snoc-sum-fin-sequence-type-Ab =
       snoc-product-fin-sequence-type-Commutative-Monoid

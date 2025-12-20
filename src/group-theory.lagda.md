@@ -179,6 +179,7 @@ open import group-theory.products-of-finite-families-of-elements-commutative-mon
 open import group-theory.products-of-finite-families-of-elements-commutative-semigroups public
 open import group-theory.products-of-finite-sequences-of-elements-commutative-monoids public
 open import group-theory.products-of-finite-sequences-of-elements-commutative-semigroups public
+open import group-theory.products-of-finite-sequences-of-elements-groups public
 open import group-theory.products-of-finite-sequences-of-elements-monoids public
 open import group-theory.products-of-finite-sequences-of-elements-semigroups public
 open import group-theory.pullbacks-subgroups public
@@ -213,7 +214,6 @@ open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups public
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups public
-open import group-theory.sums-of-finite-sequences-of-elements-groups public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public

@@ -76,7 +76,7 @@ module _
       (f : unit → type-Semiring R) →
       sum-finite-Semiring R unit-Finite-Type f ＝ f star
     sum-unit-finite-type-Semiring =
-      product-finite-unit-type-Commutative-Monoid
+      product-unit-finite-type-Commutative-Monoid
         ( additive-commutative-monoid-Semiring R)
 ```
 

@@ -71,7 +71,7 @@ module _
       (f : unit → type-Ab G) →
       sum-finite-Ab G unit-Finite-Type f ＝ f star
     sum-unit-finite-type-Ab =
-      product-finite-unit-type-Commutative-Monoid (commutative-monoid-Ab G)
+      product-unit-finite-type-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
 ### Sums are homotopy invariant

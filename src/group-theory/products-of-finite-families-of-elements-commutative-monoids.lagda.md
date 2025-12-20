@@ -80,8 +80,8 @@ product-count-Commutative-Monoid M A (n , Fin-n≃A) f =
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Commutative-Monoid l1) (A : UU l2)
-  (|A| : is-inhabited A)
+  {l1 l2 : Level} (M : Commutative-Monoid l1)
+  (A : UU l2) (|A| : is-inhabited A)
   where
 
   abstract
@@ -168,22 +168,22 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (M : Commutative-Monoid l1)
-  (A : UU l2) (B : UU l3) (H : A ≃ B)
+  (A : UU l2) (B : UU l3) (A≃B : A ≃ B)
   where
 
   abstract
     product-equiv-count-Commutative-Monoid :
       (cA : count A) (cB : count B) (f : A → type-Commutative-Monoid M) →
       product-count-Commutative-Monoid M A cA f ＝
-      product-count-Commutative-Monoid M B cB (f ∘ map-inv-equiv H)
+      product-count-Commutative-Monoid M B cB (f ∘ map-inv-equiv A≃B)
     product-equiv-count-Commutative-Monoid
       cA@(nA , Fin-nA≃A) cB@(_ , Fin-nB≃B) f
-      with double-counting-equiv cA cB H
+      with double-counting-equiv cA cB A≃B
     ... | refl =
       ( preserves-product-permutation-fin-sequence-type-Commutative-Monoid
         ( M)
         ( nA)
-        ( inv-equiv Fin-nA≃A ∘e inv-equiv H ∘e Fin-nB≃B)
+        ( inv-equiv Fin-nA≃A ∘e inv-equiv A≃B ∘e Fin-nB≃B)
         ( _)) ∙
       ( htpy-product-fin-sequence-type-Commutative-Monoid
         ( M)
@@ -548,7 +548,6 @@ module _
             ( M)
             ( n)
             ( λ k → product-finite-Commutative-Monoid M (B k) (f k))
-            ( refl)
       ＝
         mul-Commutative-Monoid
           ( M)
@@ -586,11 +585,11 @@ module _
         product-finite-Commutative-Monoid
           ( M)
           ( Σ-Finite-Type (Fin-Finite-Type (succ-ℕ n)) B)
-          ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star)) ∘
-            map-coproduct
+          ( ( rec-coproduct (ind-Σ (f ∘ inl)) (f (inr star))) ∘
+            ( map-coproduct
               ( id)
-              ( map-left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr)) ∘
-            map-right-distributive-Σ-coproduct (type-Finite-Type ∘ B))
+              ( map-left-unit-law-Σ (type-Finite-Type ∘ B ∘ inr))) ∘
+            ( map-right-distributive-Σ-coproduct (type-Finite-Type ∘ B)))
         by
           product-equiv-finite-Commutative-Monoid
             ( M)
@@ -691,25 +690,16 @@ module _
   where
 
   abstract
-    product-finite-unit-type-Commutative-Monoid :
+    product-unit-finite-type-Commutative-Monoid :
       (f : unit → type-Commutative-Monoid M) →
       product-finite-Commutative-Monoid M unit-Finite-Type f ＝ f star
-    product-finite-unit-type-Commutative-Monoid f =
-      equational-reasoning
-        product-finite-Commutative-Monoid M unit-Finite-Type f
-        ＝
-          product-count-Commutative-Monoid
-            ( M)
-            ( unit)
-            ( count-unit)
-            ( f)
-          by
-            eq-product-finite-product-count-Commutative-Monoid
-              ( M)
-              ( unit-Finite-Type)
-              ( count-unit)
-              ( f)
-        ＝ f star by compute-product-one-element-Commutative-Monoid M _
+    product-unit-finite-type-Commutative-Monoid f =
+      ( eq-product-finite-product-count-Commutative-Monoid
+        ( M)
+        ( unit-Finite-Type)
+        ( count-unit)
+        ( f)) ∙
+      ( compute-product-one-element-Commutative-Monoid M _)
 ```
 
 #### Products over contractible types
@@ -731,7 +721,7 @@ module _
         ( unit-Finite-Type)
         ( equiv-unit-is-contr is-contr-I)
         ( f)) ∙
-      ( product-finite-unit-type-Commutative-Monoid M _) ∙
+      ( product-unit-finite-type-Commutative-Monoid M _) ∙
       ( ap f (eq-is-contr is-contr-I))
 ```
 

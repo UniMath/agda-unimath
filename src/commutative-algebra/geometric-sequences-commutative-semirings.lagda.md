@@ -327,7 +327,6 @@ module _
                 ( a)
                 ( r)
                 ( succ-ℕ n))
-              ( refl)
         ＝
           add-Commutative-Semiring R
             ( seq-standard-geometric-sequence-Commutative-Semiring R a r 0)
