@@ -17,6 +17,7 @@ open import foundation.involutions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
@@ -92,24 +93,24 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  is-short-map-short-function-cauchy-approximation-Metric-Space :
+  is-short-map-cauchy-approximation-short-function-Metric-Space :
     is-short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Metric-Space A)
       ( metric-space-of-cauchy-approximations-Metric-Space B)
-      ( map-short-function-cauchy-approximation-Metric-Space A B f)
-  is-short-map-short-function-cauchy-approximation-Metric-Space ε x y Nxy δ =
+      ( map-cauchy-approximation-short-function-Metric-Space A B f)
+  is-short-map-cauchy-approximation-short-function-Metric-Space ε x y Nxy δ =
     is-short-map-short-function-Metric-Space A B f ε
       ( map-cauchy-approximation-Metric-Space A x δ)
       ( map-cauchy-approximation-Metric-Space A y δ)
       ( Nxy δ)
 
-  short-map-short-function-cauchy-approximation-Metric-Space :
+  short-map-cauchy-approximation-short-function-Metric-Space :
     short-function-Metric-Space
       ( metric-space-of-cauchy-approximations-Metric-Space A)
       ( metric-space-of-cauchy-approximations-Metric-Space B)
-  short-map-short-function-cauchy-approximation-Metric-Space =
-    map-short-function-cauchy-approximation-Metric-Space A B f ,
-    is-short-map-short-function-cauchy-approximation-Metric-Space
+  short-map-cauchy-approximation-short-function-Metric-Space =
+    map-cauchy-approximation-short-function-Metric-Space A B f ,
+    is-short-map-cauchy-approximation-short-function-Metric-Space
 ```
 
 ### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation

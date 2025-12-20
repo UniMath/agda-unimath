@@ -125,8 +125,8 @@ module _
     is-isometry-Metric-Space A A (id-Metric-Space A)
   is-isometry-id-Metric-Space d x y = id-iff
 
-  isometry-id-Metric-Space : isometry-Metric-Space A A
-  isometry-id-Metric-Space =
+  id-isometry-Metric-Space : isometry-Metric-Space A A
+  id-isometry-Metric-Space =
     id-Metric-Space A , is-isometry-id-Metric-Space
 ```
 
@@ -139,25 +139,43 @@ module _
   (f g : isometry-Metric-Space A B)
   where
 
+  htpy-isometry-Metric-Space : UU (l1 ⊔ l1')
+  htpy-isometry-Metric-Space =
+    map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g
+
+  is-prop-htpy-isometry-Metric-Space :
+    is-prop htpy-isometry-Metric-Space
+  is-prop-htpy-isometry-Metric-Space =
+    is-prop-Π
+      ( λ x →
+        is-set-type-Metric-Space B
+          ( map-isometry-Metric-Space A B f x)
+          ( map-isometry-Metric-Space A B g x))
+
+  htpy-prop-isometry-Metric-Space : Prop (l1 ⊔ l1')
+  htpy-prop-isometry-Metric-Space =
+    ( htpy-isometry-Metric-Space , is-prop-htpy-isometry-Metric-Space)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  {f g : isometry-Metric-Space A B}
+  where
+
   equiv-eq-htpy-map-isometry-Metric-Space :
-    (f ＝ g) ≃
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) ≃ htpy-isometry-Metric-Space A B f g
   equiv-eq-htpy-map-isometry-Metric-Space =
     equiv-eq-htpy-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
-      ( f)
-      ( g)
 
   htpy-eq-map-isometry-Metric-Space :
-    (f ＝ g) →
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) → htpy-isometry-Metric-Space A B f g
   htpy-eq-map-isometry-Metric-Space =
     map-equiv equiv-eq-htpy-map-isometry-Metric-Space
 
   eq-htpy-map-isometry-Metric-Space :
-    ( map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g) →
-    (f ＝ g)
+    htpy-isometry-Metric-Space A B f g → (f ＝ g)
   eq-htpy-map-isometry-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
@@ -171,7 +189,7 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  preserves-neighborhood-map-isometry-Metric-Space :
+  preserves-neighborhoods-map-isometry-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space A) →
     neighborhood-Metric-Space A d x y →
     neighborhood-Metric-Space
@@ -179,11 +197,11 @@ module _
       ( d)
       ( map-isometry-Metric-Space A B f x)
       ( map-isometry-Metric-Space A B f y)
-  preserves-neighborhood-map-isometry-Metric-Space d x y =
+  preserves-neighborhoods-map-isometry-Metric-Space d x y =
     forward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
 
-  reflects-neighborhood-map-isometry-Metric-Space :
+  reflects-neighborhoods-map-isometry-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space A) →
     neighborhood-Metric-Space
       ( B)
@@ -191,7 +209,7 @@ module _
       ( map-isometry-Metric-Space A B f x)
       ( map-isometry-Metric-Space A B f y) →
     neighborhood-Metric-Space A d x y
-  reflects-neighborhood-map-isometry-Metric-Space d x y =
+  reflects-neighborhoods-map-isometry-Metric-Space d x y =
     backward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
 ```
@@ -238,7 +256,7 @@ module _
 
   left-unit-law-comp-isometry-Metric-Space :
     ( comp-isometry-Metric-Space A B B
-      (isometry-id-Metric-Space B)
+      ( id-isometry-Metric-Space B)
       ( f)) ＝
     ( f)
   left-unit-law-comp-isometry-Metric-Space =
@@ -250,7 +268,7 @@ module _
   right-unit-law-comp-isometry-Metric-Space :
     ( comp-isometry-Metric-Space A A B
       ( f)
-      ( isometry-id-Metric-Space A)) ＝
+      ( id-isometry-Metric-Space A)) ＝
     ( f)
   right-unit-law-comp-isometry-Metric-Space =
     right-unit-law-comp-isometry-Pseudometric-Space
@@ -335,7 +353,7 @@ module _
       B
       f
       isometry-inv-is-equiv-isometry-Metric-Space) ＝
-    ( isometry-id-Metric-Space B)
+    ( id-isometry-Metric-Space B)
   is-section-isometry-inv-is-equiv-isometry-Metric-Space =
     is-section-isometry-inv-is-equiv-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
@@ -350,7 +368,7 @@ module _
       A
       isometry-inv-is-equiv-isometry-Metric-Space
       f) ＝
-    ( isometry-id-Metric-Space A)
+    ( id-isometry-Metric-Space A)
   is-retraction-isometry-inv-is-equiv-isometry-Metric-Space =
     is-retraction-isometry-inv-is-equiv-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
