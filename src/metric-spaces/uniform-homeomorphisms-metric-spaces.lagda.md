@@ -164,8 +164,7 @@ module _
 
   abstract
     preserves-is-complete-uniform-homeomorphism-Metric-Space :
-      is-complete-Metric-Space X →
-      is-complete-Metric-Space Y
+      is-complete-Metric-Space X → is-complete-Metric-Space Y
     preserves-is-complete-uniform-homeomorphism-Metric-Space H =
       let
         open do-syntax-trunc-Prop (is-complete-prop-Metric-Space Y)
