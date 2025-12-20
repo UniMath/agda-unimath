@@ -33,7 +33,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "product operation" Disambiguation="of a finite sequence in a monoid" WD="product" WDID=Q218005 Agda=product-fin-sequence-type-Monoid}}
+{{#concept "product operation" Disambiguation="of a finite sequence in a monoid" Agda=product-fin-sequence-type-Monoid}}
 operation extends the binary operation on a [monoid](group-theory.monoids.md)
 `M` to any [finite sequence](lists.finite-sequences.md) of elements of `M`.
 

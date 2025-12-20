@@ -52,7 +52,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "product operation" Disambiguation="of a finite family of elements of a commutative semigroup" WD="product" WDID=Q218005 Agda=product-finite-Commutative-Semigroup}}
+{{#concept "product operation" Disambiguation="of a finite family of elements of a commutative semigroup" Agda=product-finite-Commutative-Semigroup}}
 extends the binary operation on a
 [commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
 family of elements of `G` indexed by an

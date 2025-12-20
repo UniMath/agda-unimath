@@ -33,7 +33,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "product operation" Disambiguation="of a finite sequence in a semigroup" WD="product" WDID=Q218005 Agda=product-fin-sequence-type-Semigroup}}
+{{#concept "product operation" Disambiguation="of a finite sequence in a semigroup" Agda=product-fin-sequence-type-Semigroup}}
 extends the binary operation on a [semigroup](group-theory.semigroups.md) `G` to
 any nonempty [finite sequence](lists.finite-sequences.md) of elements of `G`.
 
