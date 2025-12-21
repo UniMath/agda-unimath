@@ -8,8 +8,8 @@ module complex-numbers.addition-complex-numbers where
 
 ```agda
 open import complex-numbers.complex-numbers
-open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions

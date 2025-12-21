@@ -54,9 +54,9 @@ open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
 open import linear-algebra.seminormed-real-vector-spaces public
+open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
 open import linear-algebra.standard-euclidean-inner-product-spaces public
 open import linear-algebra.standard-euclidean-vector-spaces public
-open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
 open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
 open import linear-algebra.transposition-matrices public
