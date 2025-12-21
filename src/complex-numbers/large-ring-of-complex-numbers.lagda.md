@@ -8,13 +8,18 @@ module complex-numbers.large-ring-of-complex-numbers where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.large-commutative-rings
 
 open import complex-numbers.complex-numbers
 open import complex-numbers.large-additive-group-of-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
 
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
+
+open import real-numbers.large-ring-of-real-numbers
 
 open import ring-theory.large-rings
 ```
@@ -59,4 +64,13 @@ large-commutative-ring-ℂ =
 commutative-ring-ℂ : (l : Level) → Commutative-Ring (lsuc l)
 commutative-ring-ℂ =
   commutative-ring-Large-Commutative-Ring large-commutative-ring-ℂ
+```
+
+### The canonical ring homomorphism from the real numbers to the complex numbers
+
+```agda
+hom-ring-ℝ-ℂ :
+  (l : Level) →
+  hom-Commutative-Ring (commutative-ring-ℝ l) (commutative-ring-ℂ l)
+hom-ring-ℝ-ℂ l = (hom-ab-add-ℝ-ℂ l , inv (mul-complex-ℝ _ _) , refl)
 ```
