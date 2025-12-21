@@ -44,10 +44,10 @@ open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
-open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>
