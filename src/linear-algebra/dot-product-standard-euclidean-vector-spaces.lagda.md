@@ -154,14 +154,12 @@ abstract
     is-zero-ℝ (dot-product-ℝ^ n v v) →
     (i : Fin n) → v i ＝ raise-zero-ℝ l
   htpy-zero-is-zero-diagonal-dot-product-ℝ^ n v v·v=0 i =
-    eq-zero-eq-zero-square-ℝ
-      ( v i)
-      ( ap
-        ( real-ℝ⁰⁺)
-        ( is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺
+    eq-raise-zero-is-zero-ℝ
+      ( is-zero-is-zero-square-ℝ
+        ( is-all-zero-is-zero-sum-fin-sequence-ℝ⁰⁺
           ( n)
           ( λ i → nonnegative-square-ℝ (v i))
-          ( eq-ℝ⁰⁺ _ _ (eq-raise-zero-is-zero-ℝ (v·v=0)))
+          ( v·v=0)
           ( i)))
 
   extensionality-dot-product-ℝ^ :

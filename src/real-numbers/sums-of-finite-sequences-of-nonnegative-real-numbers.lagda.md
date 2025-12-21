@@ -35,6 +35,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.sums-of-finite-sequences-of-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -127,14 +128,17 @@ abstract
 
 ```agda
 abstract
-  is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺ :
+  is-all-zero-is-zero-sum-fin-sequence-ℝ⁰⁺ :
     {l : Level} (n : ℕ) (a : fin-sequence (ℝ⁰⁺ l) n) →
-    (sum-fin-sequence-ℝ⁰⁺ n a ＝ raise-zero-ℝ⁰⁺ l) →
-    (i : Fin n) → a i ＝ raise-zero-ℝ⁰⁺ l
-  is-all-zero-eq-zero-sum-fin-sequence-ℝ⁰⁺ {l} n a ∑aᵢ=0 i =
-    eq-zero-leq-zero-ℝ⁰⁺
+    is-zero-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n a) →
+    (i : Fin n) → is-zero-ℝ⁰⁺ (a i)
+  is-all-zero-is-zero-sum-fin-sequence-ℝ⁰⁺ {l} n a ∑aᵢ=0 i =
+    is-zero-leq-zero-ℝ⁰⁺
       ( a i)
-      ( preserves-leq-right-sim-ℝ
-        ( inv-tr (λ z → sim-ℝ z _) (ap real-ℝ⁰⁺ ∑aᵢ=0) (sim-raise-ℝ' l zero-ℝ))
+      ( transitive-leq-ℝ⁰⁺
+        ( a i)
+        ( sum-fin-sequence-ℝ⁰⁺ n a)
+        ( zero-ℝ⁰⁺)
+        ( leq-zero-is-zero-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n a) ∑aᵢ=0)
         ( leq-term-sum-fin-sequence-ℝ⁰⁺ n a i))
 ```
