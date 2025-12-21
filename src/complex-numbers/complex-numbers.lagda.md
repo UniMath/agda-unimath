@@ -9,6 +9,8 @@ module complex-numbers.complex-numbers where
 ```agda
 open import complex-numbers.gaussian-integers
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -20,6 +22,7 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 ```
@@ -68,6 +71,9 @@ eq-ℂ = eq-pair
 ```agda
 complex-ℝ : {l : Level} → ℝ l → ℂ l
 complex-ℝ {l} a = (a , raise-zero-ℝ l)
+
+complex-ℝ⁺ : {l : Level} → ℝ⁺ l → ℂ l
+complex-ℝ⁺ a = complex-ℝ (real-ℝ⁺ a)
 ```
 
 ### The imaginary embedding of real numbers into the complex numbers
@@ -82,6 +88,13 @@ im-complex-ℝ {l} a = (raise-zero-ℝ l , a)
 ```agda
 complex-ℤ[i] : ℤ[i] → ℂ lzero
 complex-ℤ[i] (a , b) = (real-ℤ a , real-ℤ b)
+```
+
+### The canonical embedding of natural numbers into the complex numbers
+
+```agda
+complex-ℕ : ℕ → ℂ lzero
+complex-ℕ n = complex-ℝ (real-ℕ n)
 ```
 
 ### Important complex numbers
@@ -113,6 +126,14 @@ abstract
 ```agda
 neg-ℂ : {l : Level} → ℂ l → ℂ l
 neg-ℂ (a , b) = (neg-ℝ a , neg-ℝ b)
+```
+
+### Negation is an involution
+
+```agda
+abstract
+  neg-neg-ℂ : {l : Level} (z : ℂ l) → neg-ℂ (neg-ℂ z) ＝ z
+  neg-neg-ℂ (a +iℂ b) = eq-ℂ (neg-neg-ℝ a) (neg-neg-ℝ b)
 ```
 
 ### `complex-ℝ zero-ℝ` is equal to `zero-ℂ`
