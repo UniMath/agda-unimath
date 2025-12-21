@@ -9,6 +9,7 @@ module linear-algebra.standard-euclidean-vector-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.sets
 open import foundation.universe-levels
 
 open import linear-algebra.dependent-products-left-modules-commutative-rings
@@ -40,6 +41,9 @@ vector-space-ℝ^ n l =
     ( Fin n)
     ( λ _ →
       left-module-commutative-ring-Commutative-Ring (commutative-ring-ℝ l))
+
+set-ℝ^ : ℕ → (l : Level) → Set (lsuc l)
+set-ℝ^ n l = set-ℝ-Vector-Space (vector-space-ℝ^ n l)
 
 type-ℝ^ : ℕ → (l : Level) → UU (lsuc l)
 type-ℝ^ n l = type-ℝ-Vector-Space (vector-space-ℝ^ n l)

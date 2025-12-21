@@ -152,3 +152,14 @@ abstract
     sum-zero-fin-sequence-type-Commutative-Ring
       ( commutative-ring-ℝ l)
 ```
+
+### The sum of a finite sequence of two real numbers is the result of adding them
+
+```agda
+abstract
+  compute-sum-two-ℝ :
+    {l : Level} (f : fin-sequence (ℝ l) 2) →
+    sum-fin-sequence-ℝ 2 f ＝ f (zero-Fin 1) +ℝ f (one-Fin 1)
+  compute-sum-two-ℝ {l} =
+    compute-sum-two-elements-Commutative-Ring (commutative-ring-ℝ l)
+```
