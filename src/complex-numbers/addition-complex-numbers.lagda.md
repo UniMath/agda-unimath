@@ -187,3 +187,13 @@ abstract
       ( refl)
       ( add-raise-ℝ ∙ ap (raise-ℝ _) (left-unit-law-add-ℝ _))
 ```
+
+### The conjugate of `z + w` is the conjugate of `z` plus the conjugate of `w`
+
+```agda
+abstract
+  conjugate-add-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    conjugate-ℂ (z +ℂ w) ＝ conjugate-ℂ z +ℂ conjugate-ℂ w
+  conjugate-add-ℂ (a +iℂ b) (c +iℂ d) = eq-ℂ refl (distributive-neg-add-ℝ b d)
+```

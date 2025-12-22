@@ -16,6 +16,8 @@ open import complex-numbers.magnitude-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
 open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.real-complex-numbers
+open import complex-numbers.sesquilinear-product-complex-numbers
+open import complex-numbers.zero-complex-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
@@ -24,6 +26,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -43,6 +46,8 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -86,21 +91,19 @@ module _
   is-semidefinite-sesquilinear-form-ℂ-Vector-Space =
     type-Prop is-semidefinite-prop-sesquilinear-form-ℂ-Vector-Space
 
-  is-extensional-prop-sesquilinear-form-ℂ-Vector-Space : Prop (lsuc l1 ⊔ l2)
+  is-extensional-prop-sesquilinear-form-ℂ-Vector-Space : Prop (l1 ⊔ l2)
   is-extensional-prop-sesquilinear-form-ℂ-Vector-Space =
     Π-Prop
       ( type-ℂ-Vector-Space V)
       ( λ x →
-        ( Id-Prop
-          ( ℂ-Set l1)
-          ( map-sesquilinear-form-ℂ-Vector-Space V f x x)
-          ( raise-ℂ l1 zero-ℂ)) ⇒
+        ( is-zero-prop-ℂ
+          ( map-sesquilinear-form-ℂ-Vector-Space V f x x)) ⇒
         ( Id-Prop
           ( set-ℂ-Vector-Space V)
           ( x)
           ( zero-ℂ-Vector-Space V)))
 
-  is-extensional-sesquilinear-form-ℂ-Vector-Space : UU (lsuc l1 ⊔ l2)
+  is-extensional-sesquilinear-form-ℂ-Vector-Space : UU (l1 ⊔ l2)
   is-extensional-sesquilinear-form-ℂ-Vector-Space =
     type-Prop is-extensional-prop-sesquilinear-form-ℂ-Vector-Space
 
@@ -192,8 +195,8 @@ module _
   nonnegative-norm-ℂ-Inner-Product-Space v =
     sqrt-ℝ⁰⁺ (nonnegative-squared-norm-ℂ-Inner-Product-Space v)
 
-  norm-ℂ-Inner-Product-Space : type-ℂ-Inner-Product-Space → ℝ l1
-  norm-ℂ-Inner-Product-Space v =
+  map-norm-ℂ-Inner-Product-Space : type-ℂ-Inner-Product-Space → ℝ l1
+  map-norm-ℂ-Inner-Product-Space v =
     real-ℝ⁰⁺ (nonnegative-norm-ℂ-Inner-Product-Space v)
 
   ab-ℂ-Inner-Product-Space : Ab l2
@@ -228,6 +231,13 @@ module _
   neg-ℂ-Inner-Product-Space = neg-Ab ab-ℂ-Inner-Product-Space
 
   abstract
+    is-extensional-diagonal-inner-product-ℂ-Inner-Product-Space :
+      (v : type-ℂ-Inner-Product-Space) →
+      is-zero-ℂ (inner-product-ℂ-Inner-Product-Space v v) →
+      v ＝ zero-ℂ-Inner-Product-Space
+    is-extensional-diagonal-inner-product-ℂ-Inner-Product-Space =
+      pr2 (pr2 (pr2 (pr2 V)))
+
     mul-neg-one-ℂ-Inner-Product-Space :
       (v : type-ℂ-Inner-Product-Space) →
       mul-ℂ-Inner-Product-Space (neg-ℂ (raise-ℂ l1 one-ℂ)) v ＝
@@ -279,7 +289,8 @@ module _
         ( u)
         ( mul-real-ℂ-Inner-Product-Space a v) ＝
       complex-ℝ a *ℂ inner-product-ℂ-Inner-Product-Space u v
-    preserves-scalar-mul-real-right-inner-product-ℂ-Inner-Product-Space a u v =
+    preserves-scalar-mul-real-right-inner-product-ℂ-Inner-Product-Space
+      a u v =
       ( conjugates-scalar-mul-right-inner-product-ℂ-Inner-Product-Space _ u v) ∙
       ( ap-mul-ℂ (conjugate-complex-ℝ a) refl)
 ```
@@ -352,8 +363,8 @@ module _
   abstract
     norm-mul-ℂ-Inner-Product-Space :
       (a : ℂ l1) (v : type-ℂ-Inner-Product-Space V) →
-      norm-ℂ-Inner-Product-Space V (mul-ℂ-Inner-Product-Space V a v) ＝
-      magnitude-ℂ a *ℝ norm-ℂ-Inner-Product-Space V v
+      map-norm-ℂ-Inner-Product-Space V (mul-ℂ-Inner-Product-Space V a v) ＝
+      magnitude-ℂ a *ℝ map-norm-ℂ-Inner-Product-Space V v
     norm-mul-ℂ-Inner-Product-Space a v =
       ( ap
         ( real-sqrt-ℝ⁰⁺)
@@ -372,8 +383,8 @@ module _
 
     norm-mul-real-ℂ-Inner-Product-Space :
       (a : ℝ l1) (v : type-ℂ-Inner-Product-Space V) →
-      norm-ℂ-Inner-Product-Space V (mul-real-ℂ-Inner-Product-Space V a v) ＝
-      abs-ℝ a *ℝ norm-ℂ-Inner-Product-Space V v
+      map-norm-ℂ-Inner-Product-Space V (mul-real-ℂ-Inner-Product-Space V a v) ＝
+      abs-ℝ a *ℝ map-norm-ℂ-Inner-Product-Space V v
     norm-mul-real-ℂ-Inner-Product-Space a v =
       ( norm-mul-ℂ-Inner-Product-Space (complex-ℝ a) v) ∙
       ( ap-mul-ℝ (magnitude-complex-ℝ a) refl)
@@ -432,7 +443,10 @@ module _
       neg-ℂ (inner-product-ℂ-Inner-Product-Space V u v)
     left-negative-law-inner-product-ℂ-Inner-Product-Space u v =
       equational-reasoning
-        inner-product-ℂ-Inner-Product-Space V (neg-ℂ-Inner-Product-Space V u) v
+        inner-product-ℂ-Inner-Product-Space
+          ( V)
+          ( neg-ℂ-Inner-Product-Space V u)
+          ( v)
         ＝
           conjugate-ℂ
             ( inner-product-ℂ-Inner-Product-Space
@@ -466,7 +480,9 @@ module _
       inner-product-ℂ-Inner-Product-Space V u v
     negative-law-inner-product-ℂ-Inner-Product-Space u v =
       ( left-negative-law-inner-product-ℂ-Inner-Product-Space _ _) ∙
-      ( ap neg-ℂ (right-negative-law-inner-product-ℂ-Inner-Product-Space _ _)) ∙
+      ( ap
+        ( neg-ℂ)
+        ( right-negative-law-inner-product-ℂ-Inner-Product-Space _ _)) ∙
       ( neg-neg-ℂ _)
 ```
 
@@ -597,4 +613,62 @@ module _
           ( neg-ℝ ( real-ℕ 2 *ℝ re-ℂ (u ·V v))) +ℝ
           ( squared-norm-ℂ-Inner-Product-Space V v)
           by ap-add-ℝ (ap-add-ℝ refl (right-negative-law-mul-ℝ _ _)) refl
+```
+
+### The norm on a complex inner product space is extensional
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℂ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    is-extensional-norm-ℂ-Inner-Product-Space :
+      (v : type-ℂ-Inner-Product-Space V) →
+      is-zero-ℝ (map-norm-ℂ-Inner-Product-Space V v) →
+      v ＝ zero-ℂ-Inner-Product-Space V
+    is-extensional-norm-ℂ-Inner-Product-Space v ∥v∥=0 =
+      is-extensional-diagonal-inner-product-ℂ-Inner-Product-Space
+        ( V)
+        ( v)
+        ( is-extensional-magnitude-ℂ
+          ( inner-product-ℂ-Inner-Product-Space V v v)
+          ( tr
+            ( is-zero-ℝ)
+            ( equational-reasoning
+              square-ℝ (map-norm-ℂ-Inner-Product-Space V v)
+              ＝ squared-norm-ℂ-Inner-Product-Space V v
+                by
+                  eq-real-square-sqrt-ℝ⁰⁺
+                    ( nonnegative-squared-norm-ℂ-Inner-Product-Space V v)
+              ＝ abs-ℝ (squared-norm-ℂ-Inner-Product-Space V v)
+                by
+                  inv
+                    ( abs-real-ℝ⁰⁺
+                      ( nonnegative-squared-norm-ℂ-Inner-Product-Space V v))
+              ＝
+                magnitude-ℂ (complex-ℝ (squared-norm-ℂ-Inner-Product-Space V v))
+                by inv (magnitude-complex-ℝ _)
+              ＝ magnitude-ℂ (inner-product-ℂ-Inner-Product-Space V v v)
+                by
+                  ap
+                    ( magnitude-ℂ)
+                    ( eq-inner-product-squared-norm-ℂ-Inner-Product-Space V v))
+            ( is-zero-square-is-zero-ℝ ∥v∥=0)))
+```
+
+## Properties
+
+### The complex numbers are an inner product space over themselves
+
+```agda
+complex-inner-product-space-ℂ : (l : Level) → ℂ-Inner-Product-Space l (lsuc l)
+complex-inner-product-space-ℂ l =
+  ( complex-vector-space-ℂ l ,
+    sesquilinear-form-sesquilinear-mul-ℂ l ,
+    is-conjugate-symmetric-sesquilinear-mul-ℂ ,
+    is-semidefinite-sesquilinear-mul-ℂ ,
+    λ z zz*=0 →
+      eq-raise-zero-is-zero-ℂ (is-extensional-sesquilinear-mul-ℂ z zz*=0))
 ```

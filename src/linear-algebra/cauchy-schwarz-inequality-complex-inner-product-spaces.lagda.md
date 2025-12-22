@@ -183,8 +183,8 @@ module _
   abstract
     leq-one-magnitude-inner-product-leq-one-norm-ℂ-Inner-Product-Space :
       (u v : type-ℂ-Inner-Product-Space V) →
-      leq-ℝ (norm-ℂ-Inner-Product-Space V u) one-ℝ →
-      leq-ℝ (norm-ℂ-Inner-Product-Space V v) one-ℝ →
+      leq-ℝ (map-norm-ℂ-Inner-Product-Space V u) one-ℝ →
+      leq-ℝ (map-norm-ℂ-Inner-Product-Space V v) one-ℝ →
       leq-ℝ
         ( magnitude-ℂ (inner-product-ℂ-Inner-Product-Space V u v))
         ( one-ℝ)
@@ -221,7 +221,7 @@ module _
     leq-norm-mul-inv-norm-plus-positive-rational-ℂ-Inner-Product-Space :
       (v : type-ℂ-Inner-Product-Space V) (ε : ℚ⁺) →
       leq-ℝ
-        ( norm-ℂ-Inner-Product-Space
+        ( map-norm-ℂ-Inner-Product-Space
           ( V)
           ( mul-real-ℂ-Inner-Product-Space
             ( V)
@@ -236,7 +236,7 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
         chain-of-inequalities
-        norm-ℂ-Inner-Product-Space V
+        map-norm-ℂ-Inner-Product-Space V
           ( mul-real-ℂ-Inner-Product-Space V
             ( real-inv-ℝ⁺
               ( add-nonnegative-positive-ℝ
@@ -248,13 +248,13 @@ module _
               ( add-nonnegative-positive-ℝ
                 ( nonnegative-norm-ℂ-Inner-Product-Space V v)
                 ( positive-real-ℚ⁺ ε)))) *ℝ
-          ( norm-ℂ-Inner-Product-Space V v)
+          ( map-norm-ℂ-Inner-Product-Space V v)
           by leq-eq-ℝ (norm-mul-real-ℂ-Inner-Product-Space V _ v)
         ≤ ( real-inv-ℝ⁺
             ( add-nonnegative-positive-ℝ
               ( nonnegative-norm-ℂ-Inner-Product-Space V v)
               ( positive-real-ℚ⁺ ε))) *ℝ
-          ( norm-ℂ-Inner-Product-Space V v)
+          ( map-norm-ℂ-Inner-Product-Space V v)
           by leq-eq-ℝ (ap-mul-ℝ (abs-real-ℝ⁺ (inv-ℝ⁺ _)) refl)
         ≤ one-ℝ
           by
@@ -276,8 +276,8 @@ module _
       (u v : type-ℂ-Inner-Product-Space V) (δ ε : ℚ⁺) →
       leq-ℝ
         ( magnitude-ℂ (inner-product-ℂ-Inner-Product-Space V u v))
-        ( (norm-ℂ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
-          (norm-ℂ-Inner-Product-Space V v +ℝ real-ℚ⁺ ε))
+        ( ( map-norm-ℂ-Inner-Product-Space V u +ℝ real-ℚ⁺ δ) *ℝ
+          ( map-norm-ℂ-Inner-Product-Space V v +ℝ real-ℚ⁺ ε))
     approx-cauchy-schwarz-inequality-ℂ-Inner-Product-Space u v δ ε =
       let
         ∥u∥+δ =
@@ -391,7 +391,8 @@ module _
       (u v : type-ℂ-Inner-Product-Space V) →
       leq-ℝ
         ( magnitude-ℂ (inner-product-ℂ-Inner-Product-Space V u v))
-        ( norm-ℂ-Inner-Product-Space V u *ℝ norm-ℂ-Inner-Product-Space V v)
+        ( ( map-norm-ℂ-Inner-Product-Space V) u *ℝ
+          ( map-norm-ℂ-Inner-Product-Space V v))
     cauchy-schwarz-inequality-ℂ-Inner-Product-Space u v =
       saturated-leq-mul-ℝ⁰⁺
         ( nonnegative-magnitude-ℂ (inner-product-ℂ-Inner-Product-Space V u v))

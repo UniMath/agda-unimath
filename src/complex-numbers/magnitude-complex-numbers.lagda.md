@@ -66,6 +66,12 @@ nonnegative-squared-magnitude-ℂ (a +iℂ b) =
 squared-magnitude-ℂ : {l : Level} → ℂ l → ℝ l
 squared-magnitude-ℂ z = real-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
+abstract
+  is-nonnegative-squared-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → is-nonnegative-ℝ (squared-magnitude-ℂ z)
+  is-nonnegative-squared-magnitude-ℂ z =
+    is-nonnegative-real-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
+
 nonnegative-magnitude-ℂ : {l : Level} → ℂ l → ℝ⁰⁺ l
 nonnegative-magnitude-ℂ z = sqrt-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z)
 
@@ -337,20 +343,6 @@ abstract
           by sim-raise-ℝ l _)
 ```
 
-### The magnitude of `-z` is equal to the magnitude of `z`
-
-```agda
-abstract
-  squared-magnitude-neg-ℂ :
-    {l : Level} (z : ℂ l) →
-    squared-magnitude-ℂ (neg-ℂ z) ＝ squared-magnitude-ℂ z
-  squared-magnitude-neg-ℂ (a +iℂ b) = ap-add-ℝ (square-neg-ℝ a) (square-neg-ℝ b)
-
-  magnitude-neg-ℂ :
-    {l : Level} (z : ℂ l) → magnitude-ℂ (neg-ℂ z) ＝ magnitude-ℂ z
-  magnitude-neg-ℂ z = ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (squared-magnitude-neg-ℂ z))
-```
-
 ### The magnitude of `one-ℂ` is `one-ℝ`
 
 ```agda
@@ -448,6 +440,40 @@ abstract
           ( is-extensional-euclidean-norm-ℝ^ 2
             ( map-ℂ-ℝ² z)
             ( tr is-zero-ℝ (eq-magnitude-ℂ-norm-ℝ² z) |z|=0))))
+
+  is-extensional-squared-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → is-zero-ℝ (squared-magnitude-ℂ z) → is-zero-ℂ z
+  is-extensional-squared-magnitude-ℂ z |z|²=0 =
+    is-extensional-magnitude-ℂ
+      ( z)
+      ( is-zero-sqrt-is-zero-ℝ⁰⁺ (nonnegative-squared-magnitude-ℂ z) |z|²=0)
+```
+
+### `|a| ≤ |a + bi|`
+
+```agda
+abstract
+  leq-abs-re-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → leq-ℝ (abs-ℝ (re-ℂ z)) (magnitude-ℂ z)
+  leq-abs-re-magnitude-ℂ (a +iℂ b) =
+    binary-tr
+      ( leq-ℝ)
+      ( inv (eq-abs-sqrt-square-ℝ a))
+      ( refl)
+      ( preserves-leq-sqrt-ℝ⁰⁺
+        ( nonnegative-square-ℝ a)
+        ( nonnegative-square-ℝ a +ℝ⁰⁺ nonnegative-square-ℝ b)
+        ( leq-left-add-real-ℝ⁰⁺ _ (nonnegative-square-ℝ b)))
+
+  leq-re-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → leq-ℝ (re-ℂ z) (magnitude-ℂ z)
+  leq-re-magnitude-ℂ z@(a +iℂ b) =
+    transitive-leq-ℝ
+      ( a)
+      ( abs-ℝ a)
+      ( magnitude-ℂ z)
+      ( leq-abs-re-magnitude-ℂ z)
+      ( leq-abs-ℝ a)
 ```
 
 ## See also

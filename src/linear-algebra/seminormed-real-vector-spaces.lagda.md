@@ -28,6 +28,7 @@ open import group-theory.abelian-groups
 open import linear-algebra.real-vector-spaces
 
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
 
 open import order-theory.large-posets
 
@@ -502,11 +503,11 @@ module _
       is-nonnegative-seminorm-Seminormed-ℝ-Vector-Space V _)
 
   neighborhood-prop-Seminormed-ℝ-Vector-Space :
-    ℚ⁺ → Relation-Prop l1 (type-Seminormed-ℝ-Vector-Space V)
-  neighborhood-prop-Seminormed-ℝ-Vector-Space ε v w =
+    Rational-Neighborhood-Relation l1 (type-Seminormed-ℝ-Vector-Space V)
+  neighborhood-prop-Seminormed-ℝ-Vector-Space d v w =
     leq-prop-ℝ
       ( dist-Seminormed-ℝ-Vector-Space V v w)
-      ( real-ℚ⁺ ε)
+      ( real-ℚ⁺ d)
 
   neighborhood-Seminormed-ℝ-Vector-Space :
     ℚ⁺ → Relation l1 (type-Seminormed-ℝ-Vector-Space V)

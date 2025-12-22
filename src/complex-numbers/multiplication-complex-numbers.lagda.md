@@ -9,6 +9,7 @@ module complex-numbers.multiplication-complex-numbers where
 ```agda
 open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
+open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
@@ -383,4 +384,34 @@ abstract
     {l : Level} (z : ℂ l) → z *ℂ raise-ℂ l one-ℂ ＝ z
   right-raise-one-law-mul-ℂ z =
     commutative-mul-ℂ _ _ ∙ left-raise-one-law-mul-ℂ z
+```
+
+### Conjugation laws
+
+```agda
+abstract
+  conjugate-mul-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    conjugate-ℂ (z *ℂ w) ＝ conjugate-ℂ z *ℂ conjugate-ℂ w
+  conjugate-mul-ℂ (a +iℂ b) (c +iℂ d) =
+    eq-ℂ
+      ( ap-diff-ℝ refl (inv (negative-law-mul-ℝ b d)))
+      ( ( distributive-neg-add-ℝ _ _) ∙
+        ( inv
+          ( ap-add-ℝ
+            ( right-negative-law-mul-ℝ a d)
+            ( left-negative-law-mul-ℝ b c))))
+```
+
+### Swapping laws
+
+```agda
+abstract
+  left-swap-mul-ℂ :
+    {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
+    x *ℂ (y *ℂ z) ＝ y *ℂ (x *ℂ z)
+  left-swap-mul-ℂ x y z =
+    ( inv (associative-mul-ℂ x y z)) ∙
+    ( ap-mul-ℂ (commutative-mul-ℂ x y) refl) ∙
+    ( associative-mul-ℂ y x z)
 ```

@@ -64,6 +64,8 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -764,4 +766,26 @@ abstract
           ( right-unit-law-mul-ℝ x)
           ( refl)
           ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ 1≤x)))
+```
+
+### `x` is zero if and only if `√x` is zero
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ⁰⁺ l)
+  where
+
+  abstract
+    is-zero-is-zero-sqrt-ℝ⁰⁺ : is-zero-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) → is-zero-ℝ⁰⁺ x
+    is-zero-is-zero-sqrt-ℝ⁰⁺ √x=0 =
+      tr
+        ( is-zero-ℝ)
+        ( eq-real-square-sqrt-ℝ⁰⁺ x)
+        ( is-zero-square-is-zero-ℝ √x=0)
+
+    is-zero-sqrt-is-zero-ℝ⁰⁺ : is-zero-ℝ⁰⁺ x → is-zero-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x)
+    is-zero-sqrt-is-zero-ℝ⁰⁺ x=0 =
+      is-zero-is-zero-square-ℝ
+        ( inv-tr is-zero-ℝ (eq-real-square-sqrt-ℝ⁰⁺ x) x=0)
 ```
