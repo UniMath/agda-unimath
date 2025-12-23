@@ -115,57 +115,58 @@ is-symmetric-neighborhood-ℚ :
   is-symmetric-Rational-Neighborhood-Relation neighborhood-prop-ℚ
 is-symmetric-neighborhood-ℚ d x y (H , K) = (K , H)
 
-is-triangular-neighborhood-ℚ :
-  is-triangular-Rational-Neighborhood-Relation neighborhood-prop-ℚ
-pr1 (is-triangular-neighborhood-ℚ x y z d₁ d₂ Hyz Hxy) =
-  tr
-    ( leq-ℚ z)
-    ( associative-add-ℚ x (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
-    ( transitive-leq-ℚ
-      ( z)
-      ( y +ℚ ( rational-ℚ⁺ d₂))
-      ( x +ℚ (rational-ℚ⁺ d₁) +ℚ (rational-ℚ⁺ d₂))
-      ( preserves-leq-left-add-ℚ
-        ( rational-ℚ⁺ d₂)
-        ( y)
-        ( x +ℚ (rational-ℚ⁺ d₁))
-        ( pr1 Hxy))
-      ( pr1 Hyz))
-pr2 (is-triangular-neighborhood-ℚ x y z d₁ d₂ Hyz Hxy) =
-  tr
-    ( leq-ℚ x)
-    ( ap (z +ℚ_) (commutative-add-ℚ (rational-ℚ⁺ d₂) (rational-ℚ⁺ d₁)))
-    ( tr
-      ( leq-ℚ x)
-      ( associative-add-ℚ z (rational-ℚ⁺ d₂) (rational-ℚ⁺ d₁))
+abstract
+  is-triangular-neighborhood-ℚ :
+    is-triangular-Rational-Neighborhood-Relation neighborhood-prop-ℚ
+  pr1 (is-triangular-neighborhood-ℚ x y z d₁ d₂ Hyz Hxy) =
+    tr
+      ( leq-ℚ z)
+      ( associative-add-ℚ x (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
       ( transitive-leq-ℚ
-        ( x)
-        ( y +ℚ (rational-ℚ⁺ d₁))
-        ( z +ℚ (rational-ℚ⁺ d₂) +ℚ (rational-ℚ⁺ d₁))
-        ( ( preserves-leq-left-add-ℚ
-          ( rational-ℚ⁺ d₁)
+        ( z)
+        ( y +ℚ (rational-ℚ⁺ d₂))
+        ( x +ℚ (rational-ℚ⁺ d₁) +ℚ (rational-ℚ⁺ d₂))
+        ( preserves-leq-left-add-ℚ
+          ( rational-ℚ⁺ d₂)
           ( y)
-          ( z +ℚ (rational-ℚ⁺ d₂))
-          ( pr2 Hyz)))
-        ( pr2 Hxy)))
-
-is-saturated-neighborhood-ℚ :
-  is-saturated-Rational-Neighborhood-Relation neighborhood-prop-ℚ
-is-saturated-neighborhood-ℚ ε x y H =
-  map-inv-equiv
-    ( equiv-leq-leq-add-positive-ℚ y (x +ℚ rational-ℚ⁺ ε))
-    ( λ δ →
-      inv-tr
-        ( leq-ℚ y)
-        ( associative-add-ℚ x (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
-        ( pr1 (H δ))) ,
-  map-inv-equiv
-    ( equiv-leq-leq-add-positive-ℚ x (y +ℚ rational-ℚ⁺ ε))
-    ( λ δ →
-      inv-tr
+          ( x +ℚ (rational-ℚ⁺ d₁))
+          ( pr1 Hxy))
+        ( pr1 Hyz))
+  pr2 (is-triangular-neighborhood-ℚ x y z d₁ d₂ Hyz Hxy) =
+    tr
+      ( leq-ℚ x)
+      ( ap (z +ℚ_) (commutative-add-ℚ (rational-ℚ⁺ d₂) (rational-ℚ⁺ d₁)))
+      ( tr
         ( leq-ℚ x)
-        ( associative-add-ℚ y (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
-        ( pr2 (H δ)))
+        ( associative-add-ℚ z (rational-ℚ⁺ d₂) (rational-ℚ⁺ d₁))
+        ( transitive-leq-ℚ
+          ( x)
+          ( y +ℚ (rational-ℚ⁺ d₁))
+          ( z +ℚ (rational-ℚ⁺ d₂) +ℚ (rational-ℚ⁺ d₁))
+          ( ( preserves-leq-left-add-ℚ
+            ( rational-ℚ⁺ d₁)
+            ( y)
+            ( z +ℚ (rational-ℚ⁺ d₂))
+            ( pr2 Hyz)))
+          ( pr2 Hxy)))
+
+  is-saturated-neighborhood-ℚ :
+    is-saturated-Rational-Neighborhood-Relation neighborhood-prop-ℚ
+  is-saturated-neighborhood-ℚ ε x y H =
+    map-inv-equiv
+      ( equiv-leq-leq-add-positive-ℚ y (x +ℚ rational-ℚ⁺ ε))
+      ( λ δ →
+        inv-tr
+          ( leq-ℚ y)
+          ( associative-add-ℚ x (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
+          ( pr1 (H δ))) ,
+    map-inv-equiv
+      ( equiv-leq-leq-add-positive-ℚ x (y +ℚ rational-ℚ⁺ ε))
+      ( λ δ →
+        inv-tr
+          ( leq-ℚ x)
+          ( associative-add-ℚ y (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
+          ( pr2 (H δ)))
 
 pseudometric-space-ℚ : Pseudometric-Space lzero lzero
 pr1 pseudometric-space-ℚ = ℚ
@@ -176,21 +177,22 @@ pr2 pseudometric-space-ℚ =
     is-triangular-neighborhood-ℚ ,
     is-saturated-neighborhood-ℚ)
 
-is-tight-pseudometric-space-ℚ :
-  is-tight-Pseudometric-Space pseudometric-space-ℚ
-is-tight-pseudometric-space-ℚ x y H =
-  antisymmetric-leq-ℚ
-    ( x)
-    ( y)
-    ( map-inv-equiv (equiv-leq-leq-add-positive-ℚ x y) (pr2 ∘ H))
-    ( map-inv-equiv (equiv-leq-leq-add-positive-ℚ y x) (pr1 ∘ H))
+abstract
+  is-tight-pseudometric-space-ℚ :
+    is-tight-Pseudometric-Space pseudometric-space-ℚ
+  is-tight-pseudometric-space-ℚ x y H =
+    antisymmetric-leq-ℚ
+      ( x)
+      ( y)
+      ( map-inv-equiv (equiv-leq-leq-add-positive-ℚ x y) (pr2 ∘ H))
+      ( map-inv-equiv (equiv-leq-leq-add-positive-ℚ y x) (pr1 ∘ H))
 
-is-extensional-pseudometric-space-ℚ :
-  is-extensional-Pseudometric-Space pseudometric-space-ℚ
-is-extensional-pseudometric-space-ℚ =
-  is-extensional-is-tight-Pseudometric-Space
-    ( pseudometric-space-ℚ)
-    ( is-tight-pseudometric-space-ℚ)
+  is-extensional-pseudometric-space-ℚ :
+    is-extensional-Pseudometric-Space pseudometric-space-ℚ
+  is-extensional-pseudometric-space-ℚ =
+    is-extensional-is-tight-Pseudometric-Space
+      ( pseudometric-space-ℚ)
+      ( is-tight-pseudometric-space-ℚ)
 ```
 
 ### The standard metric space of rational numbers
@@ -275,25 +277,26 @@ module _
   (x u v : ℚ) (d : ℚ⁺)
   where
 
-  preserves-lower-neighborhood-add-ℚ :
-    lower-neighborhood-ℚ d u v →
-    lower-neighborhood-ℚ d (x +ℚ u) (x +ℚ v)
-  preserves-lower-neighborhood-add-ℚ H =
-    inv-tr
-      ( leq-ℚ (x +ℚ v))
-      ( associative-add-ℚ x u (rational-ℚ⁺ d))
-      ( preserves-leq-right-add-ℚ
-        ( x)
-        ( v)
-        ( u +ℚ rational-ℚ⁺ d)
-        ( H))
+  abstract
+    preserves-lower-neighborhood-add-ℚ :
+      lower-neighborhood-ℚ d u v →
+      lower-neighborhood-ℚ d (x +ℚ u) (x +ℚ v)
+    preserves-lower-neighborhood-add-ℚ H =
+      inv-tr
+        ( leq-ℚ (x +ℚ v))
+        ( associative-add-ℚ x u (rational-ℚ⁺ d))
+        ( preserves-leq-right-add-ℚ
+          ( x)
+          ( v)
+          ( u +ℚ rational-ℚ⁺ d)
+          ( H))
 
-  reflects-lower-neighborhood-add-ℚ :
-    lower-neighborhood-ℚ d (x +ℚ u) (x +ℚ v) →
-    lower-neighborhood-ℚ d u v
-  reflects-lower-neighborhood-add-ℚ =
-    ( reflects-leq-right-add-ℚ x v (u +ℚ rational-ℚ⁺ d)) ∘
-    ( tr (leq-ℚ (x +ℚ v)) (associative-add-ℚ x u (rational-ℚ⁺ d)))
+    reflects-lower-neighborhood-add-ℚ :
+      lower-neighborhood-ℚ d (x +ℚ u) (x +ℚ v) →
+      lower-neighborhood-ℚ d u v
+    reflects-lower-neighborhood-add-ℚ =
+      ( reflects-leq-right-add-ℚ x v (u +ℚ rational-ℚ⁺ d)) ∘
+      ( tr (leq-ℚ (x +ℚ v)) (associative-add-ℚ x u (rational-ℚ⁺ d)))
 ```
 
 ```agda
@@ -537,53 +540,55 @@ module _
 ### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
 
 ```agda
-is-cauchy-approximation-rational-ℚ⁺ :
-  is-cauchy-approximation-Metric-Space
-    metric-space-ℚ
-    rational-ℚ⁺
-is-cauchy-approximation-rational-ℚ⁺ ε δ =
-  ( leq-le-ℚ
-    ( transitive-le-ℚ
-      ( rational-ℚ⁺ δ)
-      ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-      ( rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-left-add-ℚ⁺
-        ( ε)
-        ( ε +ℚ⁺ δ))
-      ( le-left-add-ℚ⁺ ε δ))) ,
-  ( leq-le-ℚ
-    ( transitive-le-ℚ
-      ( rational-ℚ⁺ ε)
-      ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-      ( rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-left-add-ℚ⁺
-        ( δ)
-        ( ε +ℚ⁺ δ))
-      ( le-right-add-ℚ⁺ ε δ)))
+abstract
+  is-cauchy-approximation-rational-ℚ⁺ :
+    is-cauchy-approximation-Metric-Space
+      metric-space-ℚ
+      rational-ℚ⁺
+  is-cauchy-approximation-rational-ℚ⁺ ε δ =
+    ( leq-le-ℚ
+      ( transitive-le-ℚ
+        ( rational-ℚ⁺ δ)
+        ( rational-ℚ⁺ (ε +ℚ⁺ δ))
+        ( rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+        ( le-right-add-ℚ⁺
+          ( ε)
+          ( ε +ℚ⁺ δ))
+        ( le-right-add-ℚ⁺ ε δ))) ,
+    ( leq-le-ℚ
+      ( transitive-le-ℚ
+        ( rational-ℚ⁺ ε)
+        ( rational-ℚ⁺ (ε +ℚ⁺ δ))
+        ( rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+        ( le-right-add-ℚ⁺
+          ( δ)
+          ( ε +ℚ⁺ δ))
+        ( le-left-add-ℚ⁺ ε δ)))
 
 cauchy-approximation-rational-ℚ⁺ :
   cauchy-approximation-Metric-Space metric-space-ℚ
 cauchy-approximation-rational-ℚ⁺ =
   rational-ℚ⁺ , is-cauchy-approximation-rational-ℚ⁺
 
-is-zero-limit-rational-ℚ⁺ :
-  is-limit-cauchy-approximation-Metric-Space
-    ( metric-space-ℚ)
-    ( cauchy-approximation-rational-ℚ⁺)
-    ( zero-ℚ)
-is-zero-limit-rational-ℚ⁺ ε δ =
-  ( leq-le-ℚ
-    { zero-ℚ}
-    { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
-    ( le-zero-is-positive-ℚ
-      ( is-positive-rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
-  ( leq-le-ℚ
-    { rational-ℚ⁺ ε}
-    { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}
-    ( inv-tr
-      ( le-ℚ (rational-ℚ⁺ ε))
-      ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
-      ( le-right-add-ℚ⁺ ε δ)))
+abstract
+  is-zero-limit-rational-ℚ⁺ :
+    is-limit-cauchy-approximation-Metric-Space
+      ( metric-space-ℚ)
+      ( cauchy-approximation-rational-ℚ⁺)
+      ( zero-ℚ)
+  is-zero-limit-rational-ℚ⁺ ε δ =
+    ( leq-le-ℚ
+      { zero-ℚ}
+      { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
+      ( le-zero-is-positive-ℚ
+        ( is-positive-rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
+    ( leq-le-ℚ
+      { rational-ℚ⁺ ε}
+      { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}
+      ( inv-tr
+        ( le-ℚ (rational-ℚ⁺ ε))
+        ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+        ( le-left-add-ℚ⁺ ε δ)))
 
 convergent-rational-ℚ⁺ :
   convergent-cauchy-approximation-Metric-Space metric-space-ℚ
