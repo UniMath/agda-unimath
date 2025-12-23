@@ -177,6 +177,12 @@ abstract opaque
 abstract
   sim-raise-ℝ' : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ (raise-ℝ l x) x
   sim-raise-ℝ' l x = symmetric-sim-ℝ (sim-raise-ℝ l x)
+
+  sim-raise-raise-ℝ :
+    {l0 : Level} (l1 l2 : Level) (x : ℝ l0) →
+    sim-ℝ (raise-ℝ l1 x) (raise-ℝ l2 x)
+  sim-raise-raise-ℝ l1 l2 x =
+    transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 x) (sim-raise-ℝ' l1 x)
 ```
 
 ### Raising a real to its own level is the identity

@@ -14,12 +14,17 @@ open import complex-numbers.multiplication-complex-numbers
 open import complex-numbers.raising-universe-levels-complex-numbers
 
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import linear-algebra.real-vector-spaces
 open import linear-algebra.vector-spaces
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.field-of-real-numbers
 ```
 
 </details>
@@ -61,11 +66,21 @@ module _
   zero-ℂ-Vector-Space : type-ℂ-Vector-Space
   zero-ℂ-Vector-Space = zero-Ab ab-ℂ-Vector-Space
 
+  is-zero-prop-ℂ-Vector-Space : type-ℂ-Vector-Space → Prop l2
+  is-zero-prop-ℂ-Vector-Space v =
+    Id-Prop set-ℂ-Vector-Space v zero-ℂ-Vector-Space
+
+  is-zero-ℂ-Vector-Space : type-ℂ-Vector-Space → UU l2
+  is-zero-ℂ-Vector-Space v = type-Prop (is-zero-prop-ℂ-Vector-Space v)
+
   neg-ℂ-Vector-Space : type-ℂ-Vector-Space → type-ℂ-Vector-Space
   neg-ℂ-Vector-Space = neg-Ab ab-ℂ-Vector-Space
 
   mul-ℂ-Vector-Space : ℂ l1 → type-ℂ-Vector-Space → type-ℂ-Vector-Space
   mul-ℂ-Vector-Space = mul-Vector-Space (heyting-field-ℂ l1) V
+
+  mul-real-ℂ-Vector-Space : ℝ l1 → type-ℂ-Vector-Space → type-ℂ-Vector-Space
+  mul-real-ℂ-Vector-Space c = mul-ℂ-Vector-Space (complex-ℝ c)
 
   associative-add-ℂ-Vector-Space :
     (v w x : type-ℂ-Vector-Space) →
@@ -165,4 +180,16 @@ complex-vector-space-ℂ : (l : Level) → ℂ-Vector-Space l (lsuc l)
 complex-vector-space-ℂ l =
   vector-space-heyting-field-Heyting-Field
     ( heyting-field-ℂ l)
+```
+
+### Every complex vector space is a real vector space
+
+```agda
+real-vector-space-ℂ-Vector-Space :
+  {l1 l2 : Level} → ℂ-Vector-Space l1 l2 → ℝ-Vector-Space l1 l2
+real-vector-space-ℂ-Vector-Space {l1} =
+  vector-space-hom-Vector-Space
+    ( heyting-field-ℝ l1)
+    ( heyting-field-ℂ l1)
+    ( hom-heyting-field-ℝ-ℂ l1)
 ```

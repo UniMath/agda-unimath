@@ -6,13 +6,20 @@
 module linear-algebra where
 
 open import linear-algebra.bilinear-forms-real-vector-spaces public
+open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces public
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces public
+open import linear-algebra.complex-banach-spaces public
+open import linear-algebra.complex-hilbert-spaces public
+open import linear-algebra.complex-inner-product-spaces public
+open import linear-algebra.complex-inner-product-spaces-are-normed public
 open import linear-algebra.complex-vector-spaces public
+open import linear-algebra.conjugate-symmetric-sesquilinear-forms-complex-vector-spaces public
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
+open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public
@@ -35,6 +42,7 @@ open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
+open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
 open import linear-algebra.orthogonality-bilinear-forms-real-vector-spaces public
 open import linear-algebra.orthogonality-real-inner-product-spaces public
@@ -49,7 +57,11 @@ open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
+open import linear-algebra.seminormed-complex-vector-spaces public
 open import linear-algebra.seminormed-real-vector-spaces public
+open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
+open import linear-algebra.standard-euclidean-inner-product-spaces public
+open import linear-algebra.standard-euclidean-vector-spaces public
 open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
 open import linear-algebra.transposition-matrices public

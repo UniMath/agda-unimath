@@ -31,6 +31,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>
@@ -153,4 +154,35 @@ leq-right-add-real-ℝ⁰⁺ :
   {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (real-ℝ⁰⁺ d +ℝ x)
 leq-right-add-real-ℝ⁰⁺ x d =
   tr (leq-ℝ x) (commutative-add-ℝ x (real-ℝ⁰⁺ d)) (leq-left-add-real-ℝ⁰⁺ x d)
+```
+
+### If the sum of two nonnegative real numbers is zero, both are zero
+
+```agda
+abstract
+  is-zero-left-is-zero-add-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    is-zero-ℝ⁰⁺ (x +ℝ⁰⁺ y) → is-zero-ℝ⁰⁺ x
+  is-zero-left-is-zero-add-ℝ⁰⁺ x y x+y=0 =
+    is-zero-leq-zero-ℝ⁰⁺
+      ( x)
+      ( transitive-leq-ℝ⁰⁺
+        ( x)
+        ( x +ℝ⁰⁺ y)
+        ( zero-ℝ⁰⁺)
+        ( leq-zero-is-zero-ℝ⁰⁺ (x +ℝ⁰⁺ y) x+y=0)
+        ( leq-left-add-real-ℝ⁰⁺ _ y))
+
+  is-zero-right-is-zero-add-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    is-zero-ℝ⁰⁺ (x +ℝ⁰⁺ y) → is-zero-ℝ⁰⁺ y
+  is-zero-right-is-zero-add-ℝ⁰⁺ x y x+y=0 =
+    is-zero-leq-zero-ℝ⁰⁺
+      ( y)
+      ( transitive-leq-ℝ⁰⁺
+        ( y)
+        ( x +ℝ⁰⁺ y)
+        ( zero-ℝ⁰⁺)
+        ( leq-zero-is-zero-ℝ⁰⁺ (x +ℝ⁰⁺ y) x+y=0)
+        ( leq-right-add-real-ℝ⁰⁺ _ x))
 ```

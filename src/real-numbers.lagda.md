@@ -85,6 +85,7 @@ open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
+open import real-numbers.product-metric-space-of-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
@@ -107,9 +108,13 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
+open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
+open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.uniformly-continuous-functions-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
+open import real-numbers.zero-nonnegative-real-numbers public
+open import real-numbers.zero-real-numbers public
 ```

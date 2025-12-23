@@ -47,6 +47,7 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -212,12 +213,12 @@ module _
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (|x|~0 : sim-ℝ (abs-ℝ x) zero-ℝ)
+  {l : Level} (x : ℝ l) (|x|~0 : is-zero-ℝ (abs-ℝ x))
   where
 
   abstract
-    sim-zero-sim-zero-abs-ℝ : sim-ℝ x zero-ℝ
-    sim-zero-sim-zero-abs-ℝ =
+    is-zero-is-zero-abs-ℝ : is-zero-ℝ x
+    is-zero-is-zero-abs-ℝ =
       sim-sim-leq-ℝ
         ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (leq-abs-ℝ x) ,
           binary-tr
@@ -228,58 +229,48 @@ module _
               ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (neg-leq-abs-ℝ x))))
 
 abstract
-  eq-raise-zero-eq-raise-zero-abs-ℝ :
-    {l : Level} (x : ℝ l) → abs-ℝ x ＝ raise-ℝ l zero-ℝ → x ＝ raise-ℝ l zero-ℝ
-  eq-raise-zero-eq-raise-zero-abs-ℝ {l} x |x|=0 =
+  eq-zero-eq-zero-abs-ℝ :
+    {l : Level} (x : ℝ l) → abs-ℝ x ＝ raise-zero-ℝ l → x ＝ raise-zero-ℝ l
+  eq-zero-eq-zero-abs-ℝ {l} x |x|=0 =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
         ( sim-raise-ℝ l zero-ℝ)
-        ( sim-zero-sim-zero-abs-ℝ x
+        ( is-zero-is-zero-abs-ℝ x
           ( transitive-sim-ℝ _ _ _
             ( sim-raise-ℝ' l zero-ℝ)
             ( sim-eq-ℝ |x|=0))))
-
-module _
-  (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
-  where
-
-  abstract
-    is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
-    is-zero-is-zero-abs-ℝ =
-      eq-sim-ℝ (sim-zero-sim-zero-abs-ℝ x (sim-eq-ℝ |x|=0))
 ```
 
 ### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
 
 ```agda
 module _
-  (x : ℝ lzero) (|x|≤0 : leq-ℝ (abs-ℝ x) zero-ℝ)
+  {l : Level}
+  (x : ℝ l)
   where
 
   abstract
-    is-zero-abs-leq-zero-abs-ℝ : abs-ℝ x ＝ zero-ℝ
-    is-zero-abs-leq-zero-abs-ℝ =
-      antisymmetric-leq-ℝ
-        ( abs-ℝ x)
-        ( zero-ℝ)
-        ( |x|≤0)
-        ( is-nonnegative-abs-ℝ x)
+    is-zero-abs-leq-zero-abs-ℝ :
+      leq-ℝ (abs-ℝ x) zero-ℝ → is-zero-ℝ (abs-ℝ x)
+    is-zero-abs-leq-zero-abs-ℝ |x|≤0 =
+      sim-sim-leq-ℝ (|x|≤0 , is-nonnegative-abs-ℝ x)
 
-    is-zero-leq-zero-abs-ℝ : x ＝ zero-ℝ
-    is-zero-leq-zero-abs-ℝ =
-      is-zero-is-zero-abs-ℝ x is-zero-abs-leq-zero-abs-ℝ
+    is-zero-leq-zero-abs-ℝ : leq-ℝ (abs-ℝ x) zero-ℝ → is-zero-ℝ x
+    is-zero-leq-zero-abs-ℝ |x|≤0 =
+      is-zero-is-zero-abs-ℝ x (is-zero-abs-leq-zero-abs-ℝ |x|≤0)
 ```
 
 ### If `|x| ≤ ε` for all `ε : ℚ⁺` then `x ＝ 0`
 
 ```agda
 module _
-  (x : ℝ lzero)
+  {l : Level}
+  (x : ℝ l)
   (is-infinitesimal-x : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
   where
 
   abstract
-    is-zero-is-infinitesimal-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-infinitesimal-abs-ℝ : is-zero-ℝ x
     is-zero-is-infinitesimal-abs-ℝ =
       is-zero-leq-zero-abs-ℝ
         ( x)
@@ -491,4 +482,14 @@ abstract opaque
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) x)
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) (neg-ℝ x))
   approximate-below-abs-ℝ x = approximate-below-max-ℝ x (neg-ℝ x)
+```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℝ : {l : Level} (x : ℝ l) → square-ℝ (abs-ℝ x) ＝ square-ℝ x
+  square-abs-ℝ x =
+    ( ap square-ℝ (eq-abs-sqrt-square-ℝ x)) ∙
+    ( eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
 ```
