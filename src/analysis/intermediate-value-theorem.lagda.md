@@ -13,6 +13,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 open import foundation.function-types
@@ -29,7 +30,7 @@ open import foundation.propositions
 open import lists.sequences
 
 open import logic.functoriality-existential-quantification
-
+open import real-numbers.negation-real-numbers
 open import order-theory.decreasing-sequences-posets
 open import order-theory.increasing-sequences-posets
 
@@ -47,6 +48,7 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import foundation.functoriality-cartesian-product-types
 open import real-numbers.negative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.positive-real-numbers
@@ -104,31 +106,6 @@ module _
       sequence (type-closed-interval-ℝ l unit-closed-interval-ℝ)
 
     shift-sequence-intermediate-value-theorem-ℝ : sequence (ℝ⁰⁺ l)
-
-    lemma-prop-intermediate-value-theorem-ℝ :
-      (m : ℕ) → Prop l
-    lemma-prop-intermediate-value-theorem-ℝ m =
-      ( ∃
-        ( ℕ)
-        ( λ n →
-          ( leq-ℕ-Prop n m) ∧
-          ( leq-prop-ℝ
-            ( abs-ℝ
-              ( map-pointwise-continuous-map-ℝ
-                ( f)
-                ( sequence-intermediate-value-theorem-ℝ n)))
-            ( real-ℚ⁺ ε)))) ∨
-      ( ( is-negative-prop-ℝ
-          ( map-pointwise-continuous-map-ℝ
-            ( f)
-            ( lower-bound-sequence-intermediate-value-theorem-ℝ m))) ∧
-        ( is-positive-prop-ℝ
-          ( map-pointwise-continuous-map-ℝ
-            ( f)
-            ( upper-bound-sequence-intermediate-value-theorem-ℝ m))))
-
-    lemma-intermediate-value-theorem-ℝ :
-      (m : ℕ) → type-Prop (lemma-prop-intermediate-value-theorem-ℝ m)
 
     diff-upper-lower-bound-sequence-intermediate-value-theorem-ℝ :
       (n : ℕ) →
@@ -198,18 +175,82 @@ module _
       preserves-leq-right-add-ℝ _ _ _
         ( is-upper-bound-sequence-intermediate-value-theorem-ℝ n)
 
-    lemma-intermediate-value-theorem-ℝ 0 = inr-disjunction (fa<0 , 0<fb)
-    lemma-intermediate-value-theorem-ℝ (succ-ℕ m) =
-      elim-disjunction
-        ( lemma-prop-intermediate-value-theorem-ℝ (succ-ℕ m))
-        ( ( inl-disjunction) ∘
-          ( map-tot-exists
-            ( λ n →
-              map-product (transitive-leq-ℕ n m (succ-ℕ m) (succ-leq-ℕ m)) id)))
-        {!   !}
-        ( lemma-intermediate-value-theorem-ℝ m)
+  lemma-prop-intermediate-value-theorem-ℝ : (m : ℕ) → Prop l
+  lemma-prop-intermediate-value-theorem-ℝ m =
+    ( ∃
+      ( ℕ)
+      ( λ n →
+        ( leq-ℕ-Prop n m) ∧
+        ( leq-prop-ℝ
+          ( abs-ℝ
+            ( map-pointwise-continuous-map-ℝ
+              ( f)
+              ( sequence-intermediate-value-theorem-ℝ n)))
+          ( real-ℚ⁺ ε)))) ∨
+    ( ( is-negative-prop-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( lower-bound-sequence-intermediate-value-theorem-ℝ m))) ∧
+      ( is-positive-prop-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( upper-bound-sequence-intermediate-value-theorem-ℝ m))))
 
   abstract
+    lemma-intermediate-value-theorem-ℝ :
+      (m : ℕ) → type-Prop (lemma-prop-intermediate-value-theorem-ℝ m)
+    lemma-intermediate-value-theorem-ℝ 0 = inr-disjunction (fa<0 , 0<fb)
+    lemma-intermediate-value-theorem-ℝ (succ-ℕ m) =
+      let
+        motive = lemma-prop-intermediate-value-theorem-ℝ (succ-ℕ m)
+        ε' = one-half-ℚ⁺ *ℚ⁺ ε
+        ε'<ε = {!   !}
+        fcₘ =
+          map-pointwise-continuous-map-ℝ
+            ( f)
+            ( sequence-intermediate-value-theorem-ℝ m)
+      in
+        elim-disjunction
+          ( motive)
+          ( ( inl-disjunction) ∘
+            ( map-tot-exists
+              ( λ n →
+                map-product
+                  ( transitive-leq-ℕ n m (succ-ℕ m) (succ-leq-ℕ m)) id)))
+          ( λ (faₘ<0 , 0<fbₘ) →
+            elim-disjunction
+              ( motive)
+              ( λ -ε<fcₘ →
+                elim-disjunction
+                  ( motive)
+                  ( λ ε'<fcₘ →
+                    inr-disjunction
+                      ( {!   !} ,
+                        {!   !}))
+                  ( λ fcₘ<ε →
+                    inl-disjunction
+                      ( intro-exists
+                        ( m)
+                        ( succ-leq-ℕ m ,
+                          leq-abs-leq-leq-neg-ℝ'
+                            ( leq-le-ℝ fcₘ<ε)
+                            ( leq-le-ℝ -ε<fcₘ))))
+                  ( cotransitive-le-ℝ
+                    ( real-ℚ⁺ ε')
+                    ( real-ℚ⁺ ε)
+                    ( fcₘ)
+                    ( preserves-le-real-ℚ ε'<ε)))
+              ( λ fcₘ<-ε' →
+                inr-disjunction
+                  ( {!   !} ,
+                    {!   !}))
+              ( cotransitive-le-ℝ
+                ( neg-ℝ (real-ℚ⁺ ε))
+                ( neg-ℝ (real-ℚ⁺ ε'))
+                ( fcₘ)
+                ( neg-le-ℝ (preserves-le-real-ℚ ε'<ε))))
+          ( lemma-intermediate-value-theorem-ℝ m)
+
     is-increasing-lower-bound-sequence-intermediate-value-theorem-ℝ :
       is-increasing-sequence-Poset
         ( ℝ-Poset l)

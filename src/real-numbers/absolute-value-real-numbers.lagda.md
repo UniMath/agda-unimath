@@ -305,6 +305,12 @@ module _
 
     leq-abs-leq-leq-neg-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ x) y → leq-ℝ (abs-ℝ x) y
     leq-abs-leq-leq-neg-ℝ = leq-max-leq-leq-ℝ x (neg-ℝ x) y
+
+    leq-abs-leq-leq-neg-ℝ' : leq-ℝ x y → leq-ℝ (neg-ℝ y) x → leq-ℝ (abs-ℝ x) y
+    leq-abs-leq-leq-neg-ℝ' x≤y -y≤x =
+      leq-abs-leq-leq-neg-ℝ
+        ( x≤y)
+        ( tr (leq-ℝ (neg-ℝ x)) (neg-neg-ℝ y) (neg-leq-ℝ -y≤x))
 ```
 
 ### Triangle inequality
