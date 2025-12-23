@@ -10,7 +10,6 @@ module foundation.equivalences-span-diagrams where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.morphisms-span-diagrams
@@ -24,6 +23,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.equivalences-arrows
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families

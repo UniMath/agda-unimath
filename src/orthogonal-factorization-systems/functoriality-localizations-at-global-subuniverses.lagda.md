@@ -24,7 +24,7 @@ open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.subuniverses
 open import foundation.unit-type
@@ -360,7 +360,7 @@ module _
       ( 𝒫)
       ( reflection-localization-global-subuniverse LX)
       ( up-localization-global-subuniverse LX)
-      ( is-equiv-retract-map-is-equiv'
+      ( is-equiv-retract-arrow-is-equiv'
         ( unit-localization-global-subuniverse LX)
         ( unit-localization-global-subuniverse LY)
         ( R)

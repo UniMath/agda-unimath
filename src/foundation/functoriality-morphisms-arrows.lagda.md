@@ -31,7 +31,7 @@ open import foundation.precomposition-functions
 open import foundation.pullback-cones
 open import foundation.pullbacks
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.sections
 open import foundation.standard-pullbacks
 open import foundation.universe-levels

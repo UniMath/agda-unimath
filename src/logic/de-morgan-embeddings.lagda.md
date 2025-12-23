@@ -25,7 +25,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -603,7 +603,7 @@ module _
         ( is-de-morgan-prop-map-is-de-morgan-emb F))
 ```
 
-### De Morgan embeddings are closed under retracts of maps
+### De Morgan embeddings are closed under retracts of arrows
 
 ```agda
 module _
@@ -611,22 +611,22 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-de-morgan-prop-map-retract-map :
-    f retract-of-map g →
+  is-de-morgan-prop-map-retract-arrow :
+    f retract-of-arrow g →
     is-de-morgan-prop-map g →
     is-de-morgan-prop-map f
-  is-de-morgan-prop-map-retract-map R G x =
+  is-de-morgan-prop-map-retract-arrow R G x =
     is-de-morgan-prop-retract-of
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 
-  is-de-morgan-emb-retract-map :
-    f retract-of-map g →
+  is-de-morgan-emb-retract-arrow :
+    f retract-of-arrow g →
     is-de-morgan-emb g →
     is-de-morgan-emb f
-  is-de-morgan-emb-retract-map R G =
+  is-de-morgan-emb-retract-arrow R G =
     is-de-morgan-emb-is-de-morgan-prop-map
-      ( is-de-morgan-prop-map-retract-map R
+      ( is-de-morgan-prop-map-retract-arrow R
         ( is-de-morgan-prop-map-is-de-morgan-emb G))
 ```
 

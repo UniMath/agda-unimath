@@ -236,4 +236,4 @@ syntax step-retract-reasoning e Z f = e retract-of Z by f
 
 ## See also
 
-- [Retracts of maps](foundation.retracts-of-maps.md)
+- [Retracts of arrows](foundation.retracts-of-arrows.md)
