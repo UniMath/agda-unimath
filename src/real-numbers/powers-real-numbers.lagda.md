@@ -37,11 +37,11 @@ open import metric-spaces.pointwise-continuous-functions-metric-spaces
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.increasing-functions-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -62,6 +62,7 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.strictly-increasing-functions-real-numbers
+open import real-numbers.strictly-increasing-unbounded-classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.unbounded-functions-real-numbers
 ```
 
@@ -484,12 +485,12 @@ abstract
 ```agda
 abstract
   is-pointwise-continuous-power-ℝ :
-    {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
-  is-pointwise-continuous-power-ℝ 0 =
+    (l : Level) (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
+  is-pointwise-continuous-power-ℝ _ 0 =
     is-pointwise-continuous-const-Metric-Space _ _ _
-  is-pointwise-continuous-power-ℝ 1 =
+  is-pointwise-continuous-power-ℝ _ 1 =
     is-pointwise-continuous-map-id-Metric-Space _
-  is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
+  is-pointwise-continuous-power-ℝ l (succ-ℕ n@(succ-ℕ _)) =
     is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
       ( metric-space-ℝ l)
       ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
@@ -504,7 +505,7 @@ abstract
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
-          ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
+          ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
           ( id-pointwise-continuous-map-Metric-Space (metric-space-ℝ l)))
         ( pointwise-continuous-isometry-Metric-Space
           ( metric-space-ℝ l)
@@ -514,7 +515,20 @@ abstract
 pointwise-continuous-map-power-ℝ :
   (l : Level) (n : ℕ) → pointwise-continuous-map-ℝ l l
 pointwise-continuous-map-power-ℝ l n =
-  ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
+  ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+
+abstract
+  is-classically-pointwise-continuous-power-ℝ :
+    (l : Level) (n : ℕ) →
+    is-classically-pointwise-continuous-map-ℝ {l} (power-ℝ n)
+  is-classically-pointwise-continuous-power-ℝ l n =
+    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+      ( pointwise-continuous-map-power-ℝ l n)
+
+classically-pointwise-continuous-map-power-ℝ :
+  (l : Level) (n : ℕ) → classically-pointwise-continuous-map-ℝ l l
+classically-pointwise-continuous-map-power-ℝ l n =
+  ( power-ℝ n , is-classically-pointwise-continuous-power-ℝ l n)
 ```
 
 ### Odd powers of real numbers preserve strict inequality
@@ -526,7 +540,7 @@ abstract
     is-strictly-increasing-function-ℝ (power-ℝ {l} n)
   is-strictly-increasing-power-is-odd-ℝ l n odd-n =
     is-strictly-increasing-is-strictly-increasing-rational-ℝ
-      ( pointwise-continuous-map-power-ℝ l n)
+      ( classically-pointwise-continuous-map-power-ℝ l n)
       ( λ p q p<q →
         binary-tr
           ( le-ℝ)
@@ -630,8 +644,8 @@ module _
     reflects-le-power-is-odd-ℝ {l1} {l2} x y xⁿ≤yⁿ =
       le-le-raise-ℝ
         ( l1 ⊔ l2)
-        ( reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
-          ( pointwise-continuous-map-power-ℝ (l1 ⊔ l2) n)
+        ( reflects-le-is-strictly-increasing-classically-pointwise-continuous-map-ℝ
+          ( classically-pointwise-continuous-map-power-ℝ (l1 ⊔ l2) n)
           ( is-strictly-increasing-power-is-odd-ℝ (l1 ⊔ l2) n odd-n)
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
@@ -700,7 +714,7 @@ module _
       is-SIPCUB-function-ℝ (power-ℝ {l} n)
     is-SIPCUB-power-is-odd-ℝ =
       ( is-strictly-increasing-power-is-odd-ℝ l n odd-n ,
-        is-pointwise-continuous-power-ℝ n ,
+        is-classically-pointwise-continuous-power-ℝ l n ,
         is-unbounded-above-power-is-odd-ℝ l n odd-n ,
         is-unbounded-below-power-is-odd-ℝ l n odd-n)
 

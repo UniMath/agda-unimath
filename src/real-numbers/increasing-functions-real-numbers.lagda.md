@@ -131,29 +131,30 @@ module _
           ( irrefutable-sim-or-le-leq-ℝ x y x≤y))
 ```
 
-### If a pointwise continuous function `f` is increasing on a dense subset of `ℝ`, then it is increasing on `ℝ`
+### If a classically pointwise continuous function `f` is increasing on a dense subset of `ℝ`, then it is increasing on `ℝ`
 
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (f : pointwise-continuous-map-ℝ l1 l2)
+  (f : classically-pointwise-continuous-map-ℝ l1 l2)
   (S : dense-subset-ℝ l3 l1)
   where
 
   abstract
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ :
+    is-increasing-is-increasing-dense-subset-classically-pointwise-continuous-map-ℝ :
       is-increasing-on-subset-function-ℝ
-        ( map-pointwise-continuous-map-ℝ f)
+        ( map-classically-pointwise-continuous-map-ℝ f)
         ( subset-dense-subset-ℝ S) →
-      is-increasing-function-ℝ (map-pointwise-continuous-map-ℝ f)
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ H =
+      is-increasing-function-ℝ (map-classically-pointwise-continuous-map-ℝ f)
+    is-increasing-is-increasing-dense-subset-classically-pointwise-continuous-map-ℝ
+      H =
       let
-        f' = map-pointwise-continuous-map-ℝ f
+        f' = map-classically-pointwise-continuous-map-ℝ f
         open do-syntax-trunc-Prop empty-Prop
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
         is-increasing-is-increasing-on-strict-inequalities-ℝ
-          ( map-pointwise-continuous-map-ℝ f)
+          ( map-classically-pointwise-continuous-map-ℝ f)
           ( λ x y x<y →
             leq-not-le-ℝ
               ( f' y)
@@ -164,12 +165,12 @@ module _
                     exists-positive-rational-separation-le-ℝ f'y<f'x
                   let (εx , εy , εx+εy=ε) = split-ℚ⁺ ε
                   (δx , Hδx) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+                    is-classically-pointwise-continuous-map-classically-pointwise-continuous-map-ℝ
                       ( f)
                       ( x)
                       ( εx)
                   (δy , Hδy) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+                    is-classically-pointwise-continuous-map-classically-pointwise-continuous-map-ℝ
                       ( f)
                       ( y)
                       ( εy)
@@ -222,12 +223,12 @@ module _
                                       ( commutative-add-ℚ⁺ εy εx ∙ εx+εy=ε))))))
 ```
 
-### If `f` is pointwise continuous and increasing on the rational real numbers, it is increasing on the real numbers
+### If `f` is classically pointwise continuous and increasing on the rational real numbers, it is increasing on the real numbers
 
 ```agda
 module _
   {l1 l2 : Level}
-  (f : pointwise-continuous-map-ℝ l1 l2)
+  (f : classically-pointwise-continuous-map-ℝ l1 l2)
   where
 
   abstract
@@ -235,20 +236,20 @@ module _
       preserves-order-Poset
         ( ℚ-Poset)
         ( ℝ-Poset l2)
-        ( map-pointwise-continuous-map-ℝ f ∘ raise-real-ℚ l1) →
-      is-increasing-function-ℝ (map-pointwise-continuous-map-ℝ f)
+        ( map-classically-pointwise-continuous-map-ℝ f ∘ raise-real-ℚ l1) →
+      is-increasing-function-ℝ (map-classically-pointwise-continuous-map-ℝ f)
     is-increasing-is-increasing-rational-ℝ H =
-      is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ
+      is-increasing-is-increasing-dense-subset-classically-pointwise-continuous-map-ℝ
         ( f)
         ( dense-subset-rational-real-ℝ l1)
         ( λ (x , p , x~p) (y , q , y~q) x≤y →
           binary-tr
             ( leq-ℝ)
             ( ap
-              ( map-pointwise-continuous-map-ℝ f)
+              ( map-classically-pointwise-continuous-map-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ x p x~p)))
             ( ap
-              ( map-pointwise-continuous-map-ℝ f)
+              ( map-classically-pointwise-continuous-map-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ y q y~q)))
             ( H
               ( p)
