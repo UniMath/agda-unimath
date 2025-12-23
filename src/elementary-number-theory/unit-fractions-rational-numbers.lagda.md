@@ -83,6 +83,16 @@ reciprocal-rational-ℤ⁺ k =
   rational-ℚ⁺ (positive-reciprocal-rational-ℤ⁺ k)
 ```
 
+### The fraction ½
+
+```agda
+one-half-ℚ⁺ : ℚ⁺
+one-half-ℚ⁺ = positive-reciprocal-rational-succ-ℕ 1
+
+one-half-ℚ : ℚ
+one-half-ℚ = reciprocal-rational-succ-ℕ 1
+```
+
 ## Properties
 
 ### The numerator of a unit fraction is one

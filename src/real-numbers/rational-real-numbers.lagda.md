@@ -15,6 +15,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
@@ -113,6 +114,13 @@ one-ℝ = real-ℚ one-ℚ
 ```agda
 neg-one-ℝ : ℝ lzero
 neg-one-ℝ = real-ℚ neg-one-ℚ
+```
+
+### ½ as a real number
+
+```agda
+one-half-ℝ : ℝ lzero
+one-half-ℝ = real-ℚ one-half-ℚ
 ```
 
 ### The canonical map from `ℚ` to `ℝ l`

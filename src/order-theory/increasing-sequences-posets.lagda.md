@@ -95,42 +95,44 @@ module _
   {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
-  preserves-order-ind-ℕ-Preorder :
-    (f : ℕ → type-Preorder P) →
-    ((n : ℕ) → leq-Preorder P (f n) (f (succ-ℕ n))) →
-    preserves-order-Preorder ℕ-Preorder P f
-  preserves-order-ind-ℕ-Preorder f H zero-ℕ zero-ℕ p =
-    refl-leq-Preorder P (f zero-ℕ)
-  preserves-order-ind-ℕ-Preorder f H zero-ℕ (succ-ℕ m) p =
-    transitive-leq-Preorder P (f 0) (f m) (f (succ-ℕ m))
-      ( H m)
-      ( preserves-order-ind-ℕ-Preorder f H zero-ℕ m star)
-  preserves-order-ind-ℕ-Preorder f H (succ-ℕ n) zero-ℕ ()
-  preserves-order-ind-ℕ-Preorder f H (succ-ℕ n) (succ-ℕ m) =
-    preserves-order-ind-ℕ-Preorder (f ∘ succ-ℕ) (H ∘ succ-ℕ) n m
+  abstract
+    preserves-order-ind-ℕ-Preorder :
+      (f : ℕ → type-Preorder P) →
+      ((n : ℕ) → leq-Preorder P (f n) (f (succ-ℕ n))) →
+      preserves-order-Preorder ℕ-Preorder P f
+    preserves-order-ind-ℕ-Preorder f H zero-ℕ zero-ℕ p =
+      refl-leq-Preorder P (f zero-ℕ)
+    preserves-order-ind-ℕ-Preorder f H zero-ℕ (succ-ℕ m) p =
+      transitive-leq-Preorder P (f 0) (f m) (f (succ-ℕ m))
+        ( H m)
+        ( preserves-order-ind-ℕ-Preorder f H zero-ℕ m star)
+    preserves-order-ind-ℕ-Preorder f H (succ-ℕ n) zero-ℕ ()
+    preserves-order-ind-ℕ-Preorder f H (succ-ℕ n) (succ-ℕ m) =
+      preserves-order-ind-ℕ-Preorder (f ∘ succ-ℕ) (H ∘ succ-ℕ) n m
 
-  hom-ind-ℕ-Preorder :
-    (f : ℕ → type-Preorder P) →
-    ((n : ℕ) → leq-Preorder P (f n) (f (succ-ℕ n))) →
-    hom-Preorder (ℕ-Preorder) P
-  hom-ind-ℕ-Preorder f H = f , preserves-order-ind-ℕ-Preorder f H
+    hom-ind-ℕ-Preorder :
+      (f : ℕ → type-Preorder P) →
+      ((n : ℕ) → leq-Preorder P (f n) (f (succ-ℕ n))) →
+      hom-Preorder (ℕ-Preorder) P
+    hom-ind-ℕ-Preorder f H = f , preserves-order-ind-ℕ-Preorder f H
 
 module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  preserves-order-ind-ℕ-Poset :
-    (f : ℕ → type-Poset P) →
-    ((n : ℕ) → leq-Poset P (f n) (f (succ-ℕ n))) →
-    preserves-order-Poset ℕ-Poset P f
-  preserves-order-ind-ℕ-Poset =
-    preserves-order-ind-ℕ-Preorder (preorder-Poset P)
+  abstract
+    preserves-order-ind-ℕ-Poset :
+      (f : ℕ → type-Poset P) →
+      ((n : ℕ) → leq-Poset P (f n) (f (succ-ℕ n))) →
+      preserves-order-Poset ℕ-Poset P f
+    preserves-order-ind-ℕ-Poset =
+      preserves-order-ind-ℕ-Preorder (preorder-Poset P)
 
-  hom-ind-ℕ-Poset :
-    (f : ℕ → type-Poset P) →
-    ((n : ℕ) → leq-Poset P (f n) (f (succ-ℕ n))) →
-    hom-Poset (ℕ-Poset) P
-  hom-ind-ℕ-Poset = hom-ind-ℕ-Preorder (preorder-Poset P)
+    hom-ind-ℕ-Poset :
+      (f : ℕ → type-Poset P) →
+      ((n : ℕ) → leq-Poset P (f n) (f (succ-ℕ n))) →
+      hom-Poset (ℕ-Poset) P
+    hom-ind-ℕ-Poset = hom-ind-ℕ-Preorder (preorder-Poset P)
 ```
 
 ### A sequence `u` in a poset is increasing if and only if `uₙ ≤ uₙ₊₁` for all `n : ℕ`
@@ -140,15 +142,16 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-type-Poset P)
   where
 
-  is-increasing-leq-succ-sequence-Poset :
-    ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n))) →
-    is-increasing-sequence-Poset P u
-  is-increasing-leq-succ-sequence-Poset =
-    preserves-order-ind-ℕ-Poset P u
+  abstract
+    is-increasing-leq-succ-sequence-Poset :
+      ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n))) →
+      is-increasing-sequence-Poset P u
+    is-increasing-leq-succ-sequence-Poset =
+      preserves-order-ind-ℕ-Poset P u
 
-  leq-succ-is-increasing-sequence-Poset :
-    is-increasing-sequence-Poset P u →
-    ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n)))
-  leq-succ-is-increasing-sequence-Poset H n =
-    H n (succ-ℕ n) (succ-leq-ℕ n)
+    leq-succ-is-increasing-sequence-Poset :
+      is-increasing-sequence-Poset P u →
+      ((n : ℕ) → leq-Poset P (u n) (u (succ-ℕ n)))
+    leq-succ-is-increasing-sequence-Poset H n =
+      H n (succ-ℕ n) (succ-leq-ℕ n)
 ```
