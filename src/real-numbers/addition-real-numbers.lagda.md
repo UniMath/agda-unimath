@@ -45,6 +45,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -208,7 +209,7 @@ abstract opaque
   unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
-    {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+    {l : Level} → (x : ℝ l) → is-zero-ℝ (x +ℝ neg-ℝ x)
   right-inverse-law-add-ℝ x =
     sim-rational-ℝ
       ( x +ℝ neg-ℝ x ,
@@ -237,15 +238,15 @@ abstract opaque
                 x<p)))
 
 abstract
-  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → is-zero-ℝ (neg-ℝ x +ℝ x)
   left-inverse-law-add-ℝ x =
     tr
-      ( λ y → sim-ℝ y zero-ℝ)
+      ( is-zero-ℝ)
       ( commutative-add-ℝ x (neg-ℝ x))
       ( right-inverse-law-add-ℝ x)
 
   eq-right-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-zero-ℝ l
   eq-right-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
@@ -253,7 +254,7 @@ abstract
         ( right-inverse-law-add-ℝ x))
 
   eq-left-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-zero-ℝ l
   eq-left-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _

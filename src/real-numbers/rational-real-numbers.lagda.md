@@ -25,11 +25,13 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -218,31 +220,77 @@ opaque
 ### Rational real numbers are embedded rationals
 
 ```agda
-opaque
-  unfolding real-ℚ sim-ℝ
+module _
+  {l : Level}
+  {x : ℝ l}
+  {q : ℚ}
+  where
 
+  abstract opaque
+    unfolding real-ℚ sim-ℝ
+
+    is-rational-sim-rational-ℝ : sim-ℝ x (real-ℚ q) → is-rational-ℝ x q
+    pr1 (is-rational-sim-rational-ℝ x~q) q<x =
+      irreflexive-le-ℚ q (pr1 x~q q q<x)
+    pr2 (is-rational-sim-rational-ℝ x~q) x<q =
+      irreflexive-le-ℚ q (pr1 (sim-upper-cut-sim-ℝ x (real-ℚ q) x~q) q x<q)
+
+    sim-rational-is-rational-ℝ : is-rational-ℝ x q → sim-ℝ x (real-ℚ q)
+    pr1 (sim-rational-is-rational-ℝ (q≮x , x≮q)) r r<x =
+      trichotomy-le-ℚ
+        ( q)
+        ( r)
+        ( λ q<r → ex-falso (q≮x (le-lower-cut-ℝ x q<r r<x)))
+        ( λ q=r → ex-falso (q≮x (inv-tr (is-in-lower-cut-ℝ x) q=r r<x)))
+        ( id)
+    pr2 (sim-rational-is-rational-ℝ (q≮x , x≮q)) r r<q =
+      elim-disjunction
+        ( lower-cut-ℝ x r)
+        ( id)
+        ( ex-falso ∘ x≮q)
+        ( is-located-lower-upper-cut-ℝ x r<q)
+
+  is-rational-iff-sim-rational-ℝ :
+    (is-rational-ℝ x q) ↔ (sim-ℝ x (real-ℚ q))
+  is-rational-iff-sim-rational-ℝ =
+    ( sim-rational-is-rational-ℝ ,
+      is-rational-sim-rational-ℝ)
+
+abstract
   sim-rational-ℝ :
     {l : Level} →
     (x : Rational-ℝ l) →
     sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
-  pr1 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p∈lx =
-    trichotomy-le-ℚ
-      ( p)
-      ( q)
-      ( id)
-      ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
-      ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q<p p∈lx)))
-  pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
-    elim-disjunction
-      ( lower-cut-ℝ x p)
-      ( id)
-      ( ex-falso ∘ q∉ux)
-      ( is-located-lower-upper-cut-ℝ x p<q)
+  sim-rational-ℝ (x , q , x~q) = sim-rational-is-rational-ℝ x~q
 
-eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
-eq-real-rational-is-rational-ℝ x q H =
-  inv (eq-sim-ℝ {lzero} {x} {real-ℚ q} (sim-rational-ℝ (x , q , H)))
+  eq-real-rational-is-rational-ℝ :
+    (x : ℝ lzero) (q : ℚ) → is-rational-ℝ x q → real-ℚ q ＝ x
+  eq-real-rational-is-rational-ℝ x q H =
+    inv (eq-sim-ℝ {lzero} {x} {real-ℚ q} (sim-rational-ℝ (x , q , H)))
+
+  eq-raise-real-rational-is-rational-ℝ :
+    {l : Level} {x : ℝ l} {q : ℚ} → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
+  eq-raise-real-rational-is-rational-ℝ {l} {x} {q} x~q =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ
+        ( x)
+        ( real-ℚ q)
+        ( raise-real-ℚ l q)
+        ( sim-raise-ℝ l (real-ℚ q))
+        ( sim-rational-ℝ (x , q , x~q)))
+
+  is-rational-eq-raise-real-rational-ℝ :
+    {l : Level} {x : ℝ l} {q : ℚ} → x ＝ raise-real-ℚ l q → is-rational-ℝ x q
+  is-rational-eq-raise-real-rational-ℝ {l} {x} {q} x=q =
+    is-rational-sim-rational-ℝ
+      ( inv-tr (λ y → sim-ℝ y (real-ℚ q)) x=q (sim-raise-ℝ' l (real-ℚ q)))
+
+is-rational-iff-eq-raise-real-ℝ :
+  {l : Level} {x : ℝ l} {q : ℚ} →
+  (is-rational-ℝ x q) ↔ (x ＝ raise-real-ℚ l q)
+is-rational-iff-eq-raise-real-ℝ =
+  ( eq-raise-real-rational-is-rational-ℝ ,
+    is-rational-eq-raise-real-rational-ℝ)
 ```
 
 ### The canonical map from rationals to rational reals
@@ -322,7 +370,7 @@ neq-raise-zero-one-ℝ l 0=1ℝ =
       ( eq-sim-ℝ
         ( similarity-reasoning-ℝ
             zero-ℝ
-            ~ℝ raise-ℝ l zero-ℝ
+            ~ℝ raise-zero-ℝ l
               by sim-raise-ℝ l zero-ℝ
             ~ℝ raise-ℝ l one-ℝ
               by sim-eq-ℝ 0=1ℝ

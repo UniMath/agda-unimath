@@ -17,6 +17,7 @@ open import linear-algebra.real-vector-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -40,15 +41,12 @@ module _
   where
 
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space :
-    Relation-Prop (lsuc l1) (type-ℝ-Vector-Space V)
+    Relation-Prop l1 (type-ℝ-Vector-Space V)
   is-orthogonal-prop-bilinear-form-ℝ-Vector-Space v w =
-    Id-Prop
-      ( ℝ-Set l1)
-      ( map-bilinear-form-ℝ-Vector-Space V B v w)
-      ( raise-zero-ℝ l1)
+    is-zero-prop-ℝ (map-bilinear-form-ℝ-Vector-Space V B v w)
 
   is-orthogonal-bilinear-form-ℝ-Vector-Space :
-    Relation (lsuc l1) (type-ℝ-Vector-Space V)
+    Relation l1 (type-ℝ-Vector-Space V)
   is-orthogonal-bilinear-form-ℝ-Vector-Space =
     type-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
 ```
