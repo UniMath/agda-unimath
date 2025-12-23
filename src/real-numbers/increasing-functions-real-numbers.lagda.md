@@ -38,7 +38,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
--- open import real-numbers.pointwise-continuous-functions-real-numbers
+open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers

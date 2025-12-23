@@ -113,7 +113,8 @@ module _
       is-strictly-increasing-on-subset-function-ℝ
         ( map-classically-pointwise-continuous-map-ℝ f)
         ( subset-dense-subset-ℝ S) →
-      is-strictly-increasing-function-ℝ (map-classically-pointwise-continuous-map-ℝ f)
+      is-strictly-increasing-function-ℝ
+        ( map-classically-pointwise-continuous-map-ℝ f)
     is-strictly-increasing-is-strictly-increasing-dense-subset-classically-pointwise-continuous-map-ℝ
       H x y x<y =
       let
@@ -160,7 +161,8 @@ module _
         le-ℝ
           ( map-classically-pointwise-continuous-map-ℝ f (raise-real-ℚ l1 p))
           ( map-classically-pointwise-continuous-map-ℝ f (raise-real-ℚ l1 q))) →
-      is-strictly-increasing-function-ℝ (map-classically-pointwise-continuous-map-ℝ f)
+      is-strictly-increasing-function-ℝ
+        ( map-classically-pointwise-continuous-map-ℝ f)
     is-strictly-increasing-is-strictly-increasing-rational-ℝ H =
       is-strictly-increasing-is-strictly-increasing-dense-subset-classically-pointwise-continuous-map-ℝ
         ( f)

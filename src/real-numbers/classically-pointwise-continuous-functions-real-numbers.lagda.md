@@ -8,10 +8,10 @@ module real-numbers.classically-pointwise-continuous-functions-real-numbers wher
 
 ```agda
 open import foundation.axiom-of-countable-choice
-open import foundation.propositions
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
+open import foundation.propositions
 open import foundation.subtypes
+open import foundation.universe-levels
 
 open import metric-spaces.classically-pointwise-continuous-functions-metric-spaces
 
