@@ -104,7 +104,7 @@ abstract
     map-exists
       ( _)
       ( raise-real-ℚ l)
-      ( λ q Nεxq → ( Nεxq , q , is-rational-raise-real-ℚ l q))
+      ( λ q Nεxq → (Nεxq , q , is-rational-raise-real-ℚ l q))
       ( exists-rational-approximate-ℝ x ε)
 
 dense-subset-rational-real-ℝ :
