@@ -38,6 +38,7 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-real-numbers
@@ -456,8 +457,6 @@ module _
       in
         reflects-leq-left-mul-ℝ⁺
           ( positive-real-ℕ⁺ (2 , λ ()))
-          ( zero-ℝ)
-          ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
           ( chain-of-inequalities
               real-ℕ 2 *ℝ zero-ℝ
               ≤ zero-ℝ

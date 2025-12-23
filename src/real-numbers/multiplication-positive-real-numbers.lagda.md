@@ -19,6 +19,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -130,7 +131,11 @@ abstract
     eq-ℝ⁺ _ _ (associative-mul-ℝ x y z)
 ```
 
-### Multiplication by a positive real number preserves and reflects strict inequality
+### Multiplication by a positive real number preserves strict inequality
+
+The fact that multiplication reflects strict inequality as well requires
+multiplicative inverses to prove, and is recorded with
+[multiplicative inverses of positive real numbers](real-numbers.multiplicative-inverses-positive-real-numbers.md).
 
 ```agda
 abstract
@@ -160,15 +165,33 @@ abstract
 ```agda
 abstract
   preserves-leq-left-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
-    leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
+    leq-ℝ y z → leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
   preserves-leq-left-mul-ℝ⁺ x⁺ = preserves-leq-left-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
 
   preserves-leq-right-mul-ℝ⁺ :
-    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
-    leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
+    leq-ℝ y z → leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
   preserves-leq-right-mul-ℝ⁺ x⁺ =
     preserves-leq-right-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
+
+  reflects-leq-left-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
+    leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → leq-ℝ y z
+  reflects-leq-left-mul-ℝ⁺ x⁺@(x , _) {y} {z} xy≤xz =
+    leq-not-le-ℝ
+      ( z)
+      ( y)
+      ( λ z<y →
+        not-leq-le-ℝ (x *ℝ z) (x *ℝ y) (preserves-le-left-mul-ℝ⁺ x⁺ z<y) xy≤xz)
+
+  reflects-leq-right-mul-ℝ⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} →
+    leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x) → leq-ℝ y z
+  reflects-leq-right-mul-ℝ⁺ x⁺@(x , _) {y} {z} yx≤zx =
+    reflects-leq-left-mul-ℝ⁺
+      ( x⁺)
+      ( binary-tr leq-ℝ (commutative-mul-ℝ y x) (commutative-mul-ℝ z x) yx≤zx)
 ```
 
 ### Multiplication preserves similarity

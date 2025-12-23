@@ -15,28 +15,16 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
 open import foundation.binary-transport
-open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjoint-subtypes
-open import foundation.disjunction
 open import foundation.double-negation
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import logic.functoriality-existential-quantification
 
 open import order-theory.large-posets
 
@@ -62,7 +50,6 @@ open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.strictly-increasing-functions-real-numbers
 open import real-numbers.unbounded-functions-real-numbers
 ```
 
@@ -75,8 +62,6 @@ If a [real number](real-numbers.dedekind-real-numbers.md) `x` is
 {{#concept "multiplicative inverse" Disambiguation="positive real numbers" Agda=inv-ℝ⁺}},
 a unique, positive real number `y` such that the
 [product](real-numbers.multiplication-real-numbers.md) of `x` and `y` is 1.
-
-This definition is adapted from Lemma 11.2.4 of {{#cite UF13}}.
 
 ## Definition
 
@@ -159,6 +144,10 @@ module _
     ( mul-ℝ (real-ℝ⁺ x) , is-SIPCUB-left-mul-real-ℝ⁺)
 
   opaque
+    is-equiv-left-mul-real-ℝ⁺ : is-equiv (mul-ℝ {l} {l} (real-ℝ⁺ x))
+    is-equiv-left-mul-real-ℝ⁺ =
+      is-equiv-SIPCUB-function-ℝ SIPCUB-function-left-mul-real-ℝ⁺
+
     real-inv-ℝ⁺ : ℝ l
     real-inv-ℝ⁺ =
       map-inv-SIPCUB-function-ℝ
