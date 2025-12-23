@@ -39,6 +39,7 @@ open import order-theory.large-posets
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
@@ -49,6 +50,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -74,12 +76,12 @@ module _
   where
 
   abstract
-    is-lipschitz-right-mul-ℝ :
+    is-lipschitz-function-left-mul-ℝ :
       is-lipschitz-function-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-    is-lipschitz-right-mul-ℝ =
+    is-lipschitz-function-left-mul-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
@@ -113,19 +115,19 @@ module _
                 ≤ real-ℚ⁺ (q *ℚ⁺ ε)
                   by leq-eq-ℝ (mul-real-ℚ _ _)))
 
-    is-lipschitz-left-mul-ℝ :
+    is-lipschitz-function-right-mul-ℝ :
       is-lipschitz-function-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-    is-lipschitz-left-mul-ℝ =
+    is-lipschitz-function-right-mul-ℝ =
       is-lipschitz-htpy-function-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
         ( mul-ℝ' c)
         ( commutative-mul-ℝ c)
-        ( is-lipschitz-right-mul-ℝ)
+        ( is-lipschitz-function-left-mul-ℝ)
 ```
 
 ## Corollaries
@@ -138,39 +140,83 @@ module _
   where
 
   abstract
-    is-uniformly-continuous-right-mul-ℝ :
-      is-uniformly-continuous-function-Metric-Space
-        ( metric-space-ℝ l2)
-        ( metric-space-ℝ (l1 ⊔ l2))
-        ( mul-ℝ c)
-    is-uniformly-continuous-right-mul-ℝ =
+    is-uniformly-continous-map-left-mul-ℝ :
+      is-uniformly-continuous-function-ℝ {l2} {l1 ⊔ l2} (mul-ℝ c)
+    is-uniformly-continous-map-left-mul-ℝ =
       is-uniformly-continuous-is-lipschitz-function-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-        ( is-lipschitz-right-mul-ℝ l2 c)
+        ( is-lipschitz-function-left-mul-ℝ l2 c)
 
-    is-uniformly-continuous-left-mul-ℝ :
-      is-uniformly-continuous-function-Metric-Space
-        ( metric-space-ℝ l2)
-        ( metric-space-ℝ (l1 ⊔ l2))
-        ( mul-ℝ' c)
-    is-uniformly-continuous-left-mul-ℝ =
+    is-uniformly-continous-map-right-mul-ℝ :
+      is-uniformly-continuous-function-ℝ {l2} {l1 ⊔ l2} (mul-ℝ' c)
+    is-uniformly-continous-map-right-mul-ℝ =
       is-uniformly-continuous-is-lipschitz-function-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-        ( is-lipschitz-left-mul-ℝ l2 c)
+        ( is-lipschitz-function-right-mul-ℝ l2 c)
 
-  uniformly-continuous-right-mul-ℝ :
+  uniformly-continuous-map-left-mul-ℝ :
     uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-right-mul-ℝ =
-    ( mul-ℝ c , is-uniformly-continuous-right-mul-ℝ)
+  uniformly-continuous-map-left-mul-ℝ =
+    ( mul-ℝ c , is-uniformly-continous-map-left-mul-ℝ)
 
-  uniformly-continuous-left-mul-ℝ :
+  uniformly-continuous-map-right-mul-ℝ :
     uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-left-mul-ℝ =
-    ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
+  uniformly-continuous-map-right-mul-ℝ =
+    ( mul-ℝ' c , is-uniformly-continous-map-right-mul-ℝ)
+```
+
+### Multiplication is pointwise continuous in each argument
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (c : ℝ l1)
+  where
+
+  abstract
+    is-pointwise-continuous-left-mul-ℝ :
+      is-pointwise-continuous-map-ℝ {l2} {l1 ⊔ l2} (mul-ℝ c)
+    is-pointwise-continuous-left-mul-ℝ =
+      is-pointwise-continuous-map-uniformly-continuous-function-ℝ
+        ( uniformly-continuous-map-left-mul-ℝ l2 c)
+
+    is-pointwise-continuous-right-mul-ℝ :
+      is-pointwise-continuous-map-ℝ {l2} {l1 ⊔ l2} (mul-ℝ' c)
+    is-pointwise-continuous-right-mul-ℝ =
+      is-pointwise-continuous-map-uniformly-continuous-function-ℝ
+        ( uniformly-continuous-map-right-mul-ℝ l2 c)
+
+  pointwise-continuous-map-left-mul-ℝ : pointwise-continuous-map-ℝ l2 (l1 ⊔ l2)
+  pointwise-continuous-map-left-mul-ℝ =
+    ( mul-ℝ c , is-pointwise-continuous-left-mul-ℝ)
+
+  pointwise-continuous-map-right-mul-ℝ : pointwise-continuous-map-ℝ l2 (l1 ⊔ l2)
+  pointwise-continuous-map-right-mul-ℝ =
+    ( mul-ℝ' c , is-pointwise-continuous-right-mul-ℝ)
+```
+
+### Multiplication is classically pointwise continuous in each argument
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (c : ℝ l1)
+  where
+
+  abstract
+    is-classically-pointwise-continuous-left-mul-ℝ :
+      is-classically-pointwise-continuous-map-ℝ {l2} {l1 ⊔ l2} (mul-ℝ c)
+    is-classically-pointwise-continuous-left-mul-ℝ =
+      is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+        ( pointwise-continuous-map-left-mul-ℝ l2 c)
+
+    is-classically-pointwise-continuous-right-mul-ℝ :
+      is-classically-pointwise-continuous-map-ℝ {l2} {l1 ⊔ l2} (mul-ℝ' c)
+    is-classically-pointwise-continuous-right-mul-ℝ =
+      is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+        ( pointwise-continuous-map-right-mul-ℝ l2 c)
 ```
 
 ### Multiplication is Lipschitz on the Cartesian product of two inhabited totally bounded subsets of ℝ

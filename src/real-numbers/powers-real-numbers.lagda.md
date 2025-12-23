@@ -15,6 +15,7 @@ open import commutative-algebra.powers-of-elements-large-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
@@ -27,6 +28,7 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -144,6 +146,16 @@ abstract
 abstract
   power-one-ℝ : (n : ℕ) → power-ℝ n one-ℝ ＝ one-ℝ
   power-one-ℝ = power-one-Large-Commutative-Ring large-commutative-ring-ℝ
+```
+
+### `0ⁿ = 0` for nonzero `n`
+
+```agda
+abstract
+  nonzero-power-zero-ℝ :
+    (n : ℕ⁺) → power-ℝ (nat-nonzero-ℕ n) zero-ℝ ＝ zero-ℝ
+  nonzero-power-zero-ℝ =
+    nonzero-power-zero-Large-Commutative-Ring large-commutative-ring-ℝ
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -485,12 +497,12 @@ abstract
 ```agda
 abstract
   is-pointwise-continuous-power-ℝ :
-    (l : Level) (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
-  is-pointwise-continuous-power-ℝ _ 0 =
+    {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
+  is-pointwise-continuous-power-ℝ 0 =
     is-pointwise-continuous-const-Metric-Space _ _ _
-  is-pointwise-continuous-power-ℝ _ 1 =
+  is-pointwise-continuous-power-ℝ 1 =
     is-pointwise-continuous-map-id-Metric-Space _
-  is-pointwise-continuous-power-ℝ l (succ-ℕ n@(succ-ℕ _)) =
+  is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
     is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
       ( metric-space-ℝ l)
       ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
@@ -505,7 +517,7 @@ abstract
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
           ( metric-space-ℝ l)
-          ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+          ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
           ( id-pointwise-continuous-map-Metric-Space (metric-space-ℝ l)))
         ( pointwise-continuous-isometry-Metric-Space
           ( metric-space-ℝ l)
@@ -515,12 +527,16 @@ abstract
 pointwise-continuous-map-power-ℝ :
   (l : Level) (n : ℕ) → pointwise-continuous-map-ℝ l l
 pointwise-continuous-map-power-ℝ l n =
-  ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+  ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
+```
 
+### For any `n`, `power-ℝ n` is classically pointwise continuous
+
+```agda
 abstract
   is-classically-pointwise-continuous-power-ℝ :
     (l : Level) (n : ℕ) →
-    is-classically-pointwise-continuous-map-ℝ {l} (power-ℝ n)
+    is-classically-pointwise-continuous-map-ℝ (power-ℝ {l} n)
   is-classically-pointwise-continuous-power-ℝ l n =
     is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
       ( pointwise-continuous-map-power-ℝ l n)
@@ -528,7 +544,8 @@ abstract
 classically-pointwise-continuous-map-power-ℝ :
   (l : Level) (n : ℕ) → classically-pointwise-continuous-map-ℝ l l
 classically-pointwise-continuous-map-power-ℝ l n =
-  ( power-ℝ n , is-classically-pointwise-continuous-power-ℝ l n)
+  ( power-ℝ n ,
+    is-classically-pointwise-continuous-power-ℝ l n)
 ```
 
 ### Odd powers of real numbers preserve strict inequality
@@ -566,6 +583,18 @@ abstract
           ( raise-ℝ (l1 ⊔ l2) x)
           ( raise-ℝ (l1 ⊔ l2) y)
           ( le-raise-le-ℝ (l1 ⊔ l2) x<y)))
+```
+
+### Odd powers of real numbers are injective
+
+```agda
+abstract
+  is-injective-power-is-odd-ℝ :
+    {l : Level} (n : ℕ) → is-odd-ℕ n → is-injective (power-ℝ {l} n)
+  is-injective-power-is-odd-ℝ {l} n odd-n =
+    is-injective-is-strictly-increasing-function-ℝ
+      ( power-ℝ n)
+      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
 ```
 
 ### Odd powers of real numbers preserve inequality

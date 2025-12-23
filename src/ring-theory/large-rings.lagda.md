@@ -7,6 +7,7 @@ module ring-theory.large-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
@@ -114,6 +115,13 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
       mul-Large-Ring (add-Large-Ring a b) c ＝
       add-Large-Ring (mul-Large-Ring a c) (mul-Large-Ring b c)
 
+  ap-mul-Large-Ring :
+    {l1 l2 : Level}
+    {x x' : type-Large-Ring l1} → x ＝ x' →
+    {y y' : type-Large-Ring l2} → y ＝ y' →
+    mul-Large-Ring x y ＝ mul-Large-Ring x' y'
+  ap-mul-Large-Ring = ap-binary mul-Large-Ring
+
 open Large-Ring public
 ```
 
@@ -148,6 +156,11 @@ module _
     sim-Large-Ring R y z → sim-Large-Ring R x y → sim-Large-Ring R x z
   transitive-sim-Large-Ring =
     transitive-sim-Large-Ab (large-ab-Large-Ring R)
+
+  eq-sim-Large-Ring :
+    {l : Level} {x y : type-Large-Ring R l} →
+    sim-Large-Ring R x y → x ＝ y
+  eq-sim-Large-Ring = eq-sim-Large-Ab (large-ab-Large-Ring R)
 ```
 
 ### Raising universe levels
@@ -326,4 +339,26 @@ module _
           ( _)
           ( _)) ,
       raise-raise-Large-Ring R _)
+```
+
+### Zero laws of multiplication
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    sim-right-zero-law-Large-Ring :
+      {l : Level} (a : type-Large-Ring R l) →
+      sim-Large-Ring
+        ( R)
+        ( mul-Large-Ring R a (zero-Large-Ring R))
+        ( zero-Large-Ring R)
+    sim-right-zero-law-Large-Ring a =
+      sim-zero-is-idempotent-add-Large-Ab
+        ( large-ab-Large-Ring R)
+        ( mul-Large-Ring R a (zero-Large-Ring R))
+        ( ( inv (left-distributive-mul-add-Large-Ring R _ _ _)) ∙
+          ( ap-mul-Large-Ring R refl (left-unit-law-add-Large-Ring R _)))
 ```

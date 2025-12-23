@@ -235,7 +235,7 @@ module _
               by right-unit-law-mul-ℝ _)
           ( preserves-limits-sequence-uniformly-continuous-function-ℝ
             ( comp-uniformly-continuous-function-ℝ
-              ( uniformly-continuous-right-mul-ℝ
+              ( uniformly-continuous-map-left-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))
               ( uniformly-continuous-diff-ℝ one-ℝ))

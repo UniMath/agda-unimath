@@ -18,6 +18,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -38,7 +39,6 @@ open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -53,6 +53,7 @@ open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.strictly-increasing-unbounded-classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.unbounded-functions-real-numbers
 ```
 
@@ -127,8 +128,7 @@ module _
       is-SIPCUB-function-ℝ (mul-ℝ {l} {l} (real-ℝ⁺ x))
     is-SIPCUB-left-mul-real-ℝ⁺ =
       ( (λ _ _ → preserves-le-left-mul-ℝ⁺ x) ,
-        is-pointwise-continuous-map-uniformly-continuous-function-ℝ
-          ( uniformly-continuous-right-mul-ℝ l (real-ℝ⁺ x)) ,
+        is-classically-pointwise-continuous-left-mul-ℝ l (real-ℝ⁺ x) ,
         is-unbounded-above-left-mul-real-ℝ⁺ ,
         is-unbounded-below-left-mul-real-ℝ⁺)
 
@@ -136,16 +136,12 @@ module _
   SIPCUB-function-left-mul-real-ℝ⁺ =
     ( mul-ℝ (real-ℝ⁺ x) , is-SIPCUB-left-mul-real-ℝ⁺)
 
-  opaque
-    is-equiv-left-mul-real-ℝ⁺ : is-equiv (mul-ℝ {l} {l} (real-ℝ⁺ x))
-    is-equiv-left-mul-real-ℝ⁺ =
-      is-equiv-SIPCUB-function-ℝ SIPCUB-function-left-mul-real-ℝ⁺
+  aut-left-mul-real-ℝ⁺ : Aut (ℝ l)
+  aut-left-mul-real-ℝ⁺ =
+    aut-SIPCUB-function-ℝ SIPCUB-function-left-mul-real-ℝ⁺
 
-    real-inv-ℝ⁺ : ℝ l
-    real-inv-ℝ⁺ =
-      map-inv-SIPCUB-function-ℝ
-        ( SIPCUB-function-left-mul-real-ℝ⁺)
-        ( raise-one-ℝ l)
+  real-inv-ℝ⁺ : ℝ l
+  real-inv-ℝ⁺ = map-inv-equiv aut-left-mul-real-ℝ⁺ (raise-one-ℝ l)
 ```
 
 ## Properties
@@ -157,24 +153,23 @@ module _
   {l : Level} (x : ℝ⁺ l)
   where
 
-  abstract opaque
-    unfolding real-inv-ℝ⁺
-
-    eq-right-inverse-law-mul-ℝ⁺ : real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x ＝ raise-one-ℝ l
-    eq-right-inverse-law-mul-ℝ⁺ =
-      is-section-map-inv-SIPCUB-function-ℝ
-        ( SIPCUB-function-left-mul-real-ℝ⁺ x)
+  abstract
+    eq-right-inverse-law-mul-real-ℝ⁺ :
+      real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x ＝ raise-one-ℝ l
+    eq-right-inverse-law-mul-real-ℝ⁺ =
+      is-section-map-inv-equiv
+        ( aut-left-mul-real-ℝ⁺ x)
         ( raise-one-ℝ l)
 
-    eq-left-inverse-law-mul-ℝ⁺ : real-inv-ℝ⁺ x *ℝ real-ℝ⁺ x ＝ raise-one-ℝ l
-    eq-left-inverse-law-mul-ℝ⁺ =
-      commutative-mul-ℝ _ _ ∙ eq-right-inverse-law-mul-ℝ⁺
+    eq-left-inverse-law-mul-real-ℝ⁺ : real-inv-ℝ⁺ x *ℝ real-ℝ⁺ x ＝ raise-one-ℝ l
+    eq-left-inverse-law-mul-real-ℝ⁺ =
+      commutative-mul-ℝ _ _ ∙ eq-right-inverse-law-mul-real-ℝ⁺
 
     right-inverse-law-mul-ℝ⁺ : sim-ℝ (real-ℝ⁺ x *ℝ real-inv-ℝ⁺ x) one-ℝ
     right-inverse-law-mul-ℝ⁺ =
       inv-tr
         ( λ y → sim-ℝ y one-ℝ)
-        ( eq-right-inverse-law-mul-ℝ⁺)
+        ( eq-right-inverse-law-mul-real-ℝ⁺)
         ( sim-raise-ℝ' l one-ℝ)
 
     left-inverse-law-mul-ℝ⁺ : sim-ℝ (real-inv-ℝ⁺ x *ℝ real-ℝ⁺ x) one-ℝ
@@ -201,11 +196,28 @@ module _
         ( is-positive-real-ℝ⁺ x)
         ( inv-tr
           ( is-positive-ℝ)
-          ( eq-right-inverse-law-mul-ℝ⁺ x)
+          ( eq-right-inverse-law-mul-real-ℝ⁺ x)
           ( is-positive-real-ℝ⁺ (raise-one-ℝ⁺ l)))
 
   inv-ℝ⁺ : ℝ⁺ l
   inv-ℝ⁺ = (real-inv-ℝ⁺ x , is-positive-inv-ℝ⁺)
+```
+
+### The multiplicative inverse is an inverse with respect to multiplication on positive real numbers
+
+```agda
+module _
+  {l : Level} (x : ℝ⁺ l)
+  where
+
+  abstract
+    eq-left-inverse-law-mul-ℝ⁺ : inv-ℝ⁺ x *ℝ⁺ x ＝ raise-one-ℝ⁺ l
+    eq-left-inverse-law-mul-ℝ⁺ =
+      eq-ℝ⁺ _ _ (eq-left-inverse-law-mul-real-ℝ⁺ x)
+
+    eq-right-inverse-law-mul-ℝ⁺ : x *ℝ⁺ inv-ℝ⁺ x ＝ raise-one-ℝ⁺ l
+    eq-right-inverse-law-mul-ℝ⁺ =
+      eq-ℝ⁺ _ _ (eq-right-inverse-law-mul-real-ℝ⁺ x)
 ```
 
 ### Cancellation laws
