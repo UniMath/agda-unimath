@@ -9,7 +9,9 @@ module real-numbers.classically-pointwise-continuous-functions-real-numbers wher
 ```agda
 open import foundation.axiom-of-countable-choice
 open import foundation.propositions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.subtypes
 
 open import metric-spaces.classically-pointwise-continuous-functions-metric-spaces
 
@@ -49,6 +51,25 @@ module _
   is-classically-pointwise-continuous-map-ℝ : UU (lsuc l1 ⊔ l2)
   is-classically-pointwise-continuous-map-ℝ =
     type-Prop is-classically-pointwise-continuous-prop-function-ℝ
+
+classically-pointwise-continuous-map-ℝ :
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+classically-pointwise-continuous-map-ℝ l1 l2 =
+  type-subtype (is-classically-pointwise-continuous-prop-function-ℝ {l1} {l2})
+
+module _
+  {l1 l2 : Level}
+  (f : classically-pointwise-continuous-map-ℝ l1 l2)
+  where
+
+  map-classically-pointwise-continuous-map-ℝ : ℝ l1 → ℝ l2
+  map-classically-pointwise-continuous-map-ℝ = pr1 f
+
+  is-classically-pointwise-continuous-map-classically-pointwise-continuous-map-ℝ :
+    is-classically-pointwise-continuous-map-ℝ
+      ( map-classically-pointwise-continuous-map-ℝ)
+  is-classically-pointwise-continuous-map-classically-pointwise-continuous-map-ℝ =
+    pr2 f
 ```
 
 ## Properties

@@ -41,7 +41,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.increasing-functions-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers
+open import real-numbers.strictly-increasing-unbounded-classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers

@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers where
+module real-numbers.strictly-increasing-unbounded-classically-pointwise-continuous-functions-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -78,7 +78,7 @@ open import real-numbers.unbounded-functions-real-numbers
 
 Any
 [strictly increasing](real-numbers.strictly-increasing-functions-real-numbers.md),
-[pointwise continuous](real-numbers.pointwise-continuous-functions-real-numbers.md),
+[classically pointwise continuous](real-numbers.classically-pointwise-continuous-functions-real-numbers.md),
 [unbounded](real-numbers.unbounded-functions-real-numbers.md) function from the
 [real numbers](real-numbers.dedekind-real-numbers.md) to themselves is an
 [automorphism](foundation.automorphisms.md) of the real numbers. We abbreviate
@@ -95,7 +95,7 @@ module _
   is-SIPCUB-prop-function-ℝ : Prop (lsuc l1 ⊔ l2)
   is-SIPCUB-prop-function-ℝ =
     ( is-strictly-increasing-prop-function-ℝ f) ∧
-    ( is-pointwise-continuous-prop-function-ℝ f) ∧
+    ( is-classically-pointwise-continuous-prop-function-ℝ f) ∧
     ( is-unbounded-prop-function-ℝ f)
 
   is-SIPCUB-function-ℝ : UU (lsuc l1 ⊔ l2)
@@ -124,25 +124,16 @@ module _
         ( map-SIPCUB-function-ℝ)
         ( is-strictly-increasing-SIPCUB-function-ℝ)
 
-    is-pointwise-continuous-SIPCUB-function-ℝ :
-      is-pointwise-continuous-map-ℝ map-SIPCUB-function-ℝ
-    is-pointwise-continuous-SIPCUB-function-ℝ = pr1 (pr2 (pr2 f))
-
-    pointwise-continuous-SIPCUB-function-ℝ :
-      pointwise-continuous-map-ℝ l1 l2
-    pointwise-continuous-SIPCUB-function-ℝ =
-      ( map-SIPCUB-function-ℝ ,
-        is-pointwise-continuous-SIPCUB-function-ℝ)
-
     is-classically-pointwise-continuous-SIPCUB-function-ℝ :
-      (x : ℝ l1) →
-      is-classical-limit-function-ℝ
-        ( map-SIPCUB-function-ℝ)
-        ( x)
-        ( map-SIPCUB-function-ℝ x)
+      is-classically-pointwise-continuous-map-ℝ map-SIPCUB-function-ℝ
     is-classically-pointwise-continuous-SIPCUB-function-ℝ =
-      is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
-        ( pointwise-continuous-SIPCUB-function-ℝ)
+      pr1 (pr2 (pr2 f))
+
+    classically-pointwise-continuous-map-SIPCUB-function-ℝ :
+      classically-pointwise-continuous-map-ℝ l1 l2
+    classically-pointwise-continuous-map-SIPCUB-function-ℝ =
+      ( map-SIPCUB-function-ℝ ,
+        is-classically-pointwise-continuous-SIPCUB-function-ℝ)
 
     is-unbounded-below-SIPCUB-function-ℝ :
       is-unbounded-below-function-ℝ map-SIPCUB-function-ℝ
@@ -166,8 +157,8 @@ module _
       le-ℝ (map-SIPCUB-function-ℝ x) (map-SIPCUB-function-ℝ x') →
       le-ℝ x x'
     reflects-le-SIPCUB-function-ℝ =
-      reflects-le-is-strictly-increasing-pointwise-continuous-map-ℝ
-        ( pointwise-continuous-SIPCUB-function-ℝ)
+      reflects-le-is-strictly-increasing-classically-pointwise-continuous-map-ℝ
+        ( classically-pointwise-continuous-map-SIPCUB-function-ℝ)
         ( is-strictly-increasing-SIPCUB-function-ℝ)
 
     is-injective-SIPCUB-function-ℝ : is-injective map-SIPCUB-function-ℝ
@@ -263,8 +254,8 @@ module _
       in do
         (ε , fq+ε<y) ← exists-positive-rational-separation-le-ℝ fq<y
         (δ , Hδ) ←
-          is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
-            ( pointwise-continuous-SIPCUB-function-ℝ f)
+          is-classically-pointwise-continuous-SIPCUB-function-ℝ
+            ( f)
             ( raise-real-ℚ l q)
             ( ε)
         intro-exists
@@ -299,8 +290,8 @@ module _
       in do
         (ε , y+ε<fq) ← exists-positive-rational-separation-le-ℝ y<fq
         (δ , Hδ) ←
-          is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
-            ( pointwise-continuous-SIPCUB-function-ℝ f)
+          is-classically-pointwise-continuous-SIPCUB-function-ℝ
+            ( f)
             ( raise-real-ℚ l q)
             ( ε)
         intro-exists
@@ -821,6 +812,28 @@ module _
                     by leq-le-ℝ x+δ₁<x-hi)))
 ```
 
+### The inverse of a SIPCUB function is SIPCUB
+
+```agda
+module _
+  {l : Level}
+  (f : SIPCUB-function-ℝ l l)
+  where
+
+  abstract
+    is-SIPCUB-map-inv-SIPCUB-function-ℝ :
+      is-SIPCUB-function-ℝ (map-inv-SIPCUB-function-ℝ f)
+    is-SIPCUB-map-inv-SIPCUB-function-ℝ =
+      ( is-strictly-increasing-map-inv-SIPCUB-function-ℝ f ,
+        is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ f ,
+        is-unbounded-above-map-inv-SIPCUB-function-ℝ f ,
+        is-unbounded-below-map-inv-SIPCUB-function-ℝ f)
+
+  inv-SIPCUB-function-ℝ : SIPCUB-function-ℝ l l
+  inv-SIPCUB-function-ℝ =
+    ( map-inv-SIPCUB-function-ℝ f , is-SIPCUB-map-inv-SIPCUB-function-ℝ)
+```
+
 ### Assuming countable choice, the inverse of a SIPCUB function is pointwise continuous
 
 ```agda
@@ -838,27 +851,4 @@ module _
         ( acω)
         ( map-inv-SIPCUB-function-ℝ f)
         ( is-classically-pointwise-continuous-map-inv-SIPCUB-function-ℝ f)
-```
-
-### Assuming countable choice, the inverse of a SIPCUB function is SIPCUB
-
-```agda
-module _
-  {l : Level}
-  (acω : ACω)
-  (f : SIPCUB-function-ℝ l l)
-  where
-
-  abstract
-    is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ :
-      is-SIPCUB-function-ℝ (map-inv-SIPCUB-function-ℝ f)
-    is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ =
-      ( is-strictly-increasing-map-inv-SIPCUB-function-ℝ f ,
-        is-pointwise-continuous-ACω-map-inv-SIPCUB-function-ℝ acω f ,
-        is-unbounded-above-map-inv-SIPCUB-function-ℝ f ,
-        is-unbounded-below-map-inv-SIPCUB-function-ℝ f)
-
-  ACω-inv-SIPCUB-function-ℝ : SIPCUB-function-ℝ l l
-  ACω-inv-SIPCUB-function-ℝ =
-    ( map-inv-SIPCUB-function-ℝ f , is-SIPCUB-ACω-map-inv-SIPCUB-function-ℝ)
 ```

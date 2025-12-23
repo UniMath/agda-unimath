@@ -47,7 +47,7 @@ open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.integer-powers-positive-real-numbers public
-open import real-numbers.invertibility-strictly-increasing-unbounded-continuous-functions-real-numbers public
+open import real-numbers.strictly-increasing-unbounded-classically-pointwise-continuous-functions-real-numbers public
 open import real-numbers.irrational-real-numbers public
 open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
