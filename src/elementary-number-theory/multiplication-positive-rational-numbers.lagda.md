@@ -348,27 +348,6 @@ abstract
       ( le-left-mul-greater-than-one-ℚ⁺ p 1<p q)
 ```
 
-### Multiplication of a positive rational by another positive rational greater than or equal to 1 is an inflationary map
-
-```agda
-abstract
-  leq-left-mul-geq-one-ℚ⁺ :
-    (p : ℚ⁺) → leq-ℚ⁺ one-ℚ⁺ p → (q : ℚ⁺) → leq-ℚ⁺ q (p *ℚ⁺ q)
-  leq-left-mul-geq-one-ℚ⁺ p 1≤p q =
-    tr
-      ( λ r → leq-ℚ⁺ r (p *ℚ⁺ q))
-      ( left-unit-law-mul-ℚ⁺ q)
-      ( preserves-leq-right-mul-ℚ⁺ q one-ℚ (rational-ℚ⁺ p) 1≤p)
-
-  leq-right-mul-geq-one-ℚ⁺ :
-    (p : ℚ⁺) → leq-ℚ⁺ one-ℚ⁺ p → (q : ℚ⁺) → leq-ℚ⁺ q (q *ℚ⁺ p)
-  leq-right-mul-geq-one-ℚ⁺ p 1≤p q =
-    tr
-      ( leq-ℚ⁺ q)
-      ( commutative-mul-ℚ⁺ p q)
-      ( leq-left-mul-geq-one-ℚ⁺ p 1≤p q)
-```
-
 ### Multiplication of a positive rational number by a positive rational less than or equal to 1 is a deflationary map
 
 ```agda

@@ -16,6 +16,7 @@ open import elementary-number-theory.equality-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-integer-fractions
@@ -298,4 +299,15 @@ abstract
 has-decidable-equality-ℚ⁺ : has-decidable-equality ℚ⁺
 has-decidable-equality-ℚ⁺ =
   has-decidable-equality-subtype is-positive-prop-ℚ has-decidable-equality-ℚ
+```
+
+### `max-ℚ 1 q` is positive
+
+```agda
+abstract
+  is-positive-max-one-ℚ : (q : ℚ) → is-positive-ℚ (max-ℚ one-ℚ q)
+  is-positive-max-one-ℚ q = is-positive-leq-ℚ⁺ one-ℚ⁺ (leq-left-max-ℚ one-ℚ q)
+
+positive-max-one-ℚ : ℚ → ℚ⁺
+positive-max-one-ℚ q = (max-ℚ one-ℚ q , is-positive-max-one-ℚ q)
 ```

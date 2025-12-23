@@ -9,6 +9,9 @@ module real-numbers.multiplicative-inverses-positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -80,37 +83,27 @@ module _
             ( ∃ (ℝ l) (λ y → le-prop-ℝ (real-ℚ q) (real-ℝ⁺ x *ℝ y)))
       in do
         (p , p<x) ← exists-ℚ⁺-in-lower-cut-ℝ⁺ x
-        let
-          q' = max-ℝ one-ℝ (real-ℚ q)
-          q'⁺ =
-            ( q' ,
-              is-positive-leq-ℝ⁺ one-ℝ⁺ q' (leq-left-max-ℝ one-ℝ (real-ℚ q)))
         intro-exists
-          ( raise-ℝ l (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ q'))
-          ( tr
-            ( λ y →
-              le-ℝ y (( real-ℝ⁺ x *ℝ raise-ℝ l (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ q'))))
-            ( equational-reasoning
-              real-ℚ⁺ p *ℝ (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ real-ℚ q)
-              ＝ real-ℚ⁺ p *ℝ real-ℚ (rational-inv-ℚ⁺ p *ℚ q)
-                by ap-mul-ℝ refl (mul-real-ℚ _ _)
-              ＝ real-ℚ (rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ q))
-                by mul-real-ℚ _ _
-              ＝ real-ℚ q
-                by ap real-ℚ (is-section-left-div-ℚ⁺ p q))
-            ( concatenate-leq-le-ℝ
-              ( real-ℚ⁺ p *ℝ (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ real-ℚ q))
-              ( real-ℚ⁺ p *ℝ raise-ℝ l (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ q'))
-              ( real-ℝ⁺ x *ℝ raise-ℝ l (real-ℚ⁺ (inv-ℚ⁺ p) *ℝ q'))
-              ( preserves-leq-left-mul-ℝ⁺
-                ( positive-real-ℚ⁺ p)
-                ( preserves-leq-right-raise-ℝ
-                  ( l)
-                  ( preserves-leq-left-mul-ℝ⁺
-                    ( positive-real-ℚ⁺ (inv-ℚ⁺ p))
-                    ( leq-right-max-ℝ _ _))))
+          ( raise-real-ℚ l (rational-inv-ℚ⁺ p *ℚ max-ℚ one-ℚ q))
+          ( concatenate-leq-le-ℝ
+            ( real-ℚ q)
+            ( real-ℚ (rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ max-ℚ one-ℚ q)))
+            ( real-ℝ⁺ x *ℝ raise-real-ℚ l (rational-inv-ℚ⁺ p *ℚ max-ℚ one-ℚ q))
+            ( preserves-leq-real-ℚ
+              ( tr
+                ( λ z →
+                  leq-ℚ
+                    ( z)
+                    ( rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ max-ℚ one-ℚ q)))
+                ( is-section-left-div-ℚ⁺ p q)
+                ( preserves-leq-left-mul-ℚ⁺ p _ _
+                  ( preserves-leq-left-mul-ℚ⁺ (inv-ℚ⁺ p) _ _
+                    ( leq-right-max-ℚ one-ℚ q)))))
+            ( preserves-le-sim-ℝ
+              ( sim-eq-ℝ (mul-real-ℚ _ _))
+              ( preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l _))
               ( preserves-le-right-mul-ℝ⁺
-                ( raise-ℝ⁺ l (positive-real-ℚ⁺ (inv-ℚ⁺ p) *ℝ⁺ q'⁺))
+                ( positive-real-ℚ⁺ (inv-ℚ⁺ p *ℚ⁺ positive-max-one-ℚ q))
                 ( le-real-is-in-lower-cut-ℝ (real-ℝ⁺ x) p<x))))
 
     is-unbounded-below-left-mul-real-ℝ⁺ :

@@ -199,7 +199,7 @@ abstract
     equational-reasoning
       p *ℚ (rational-inv-ℚ⁺ p⁺ *ℚ q)
       ＝ (p *ℚ rational-inv-ℚ⁺ p⁺) *ℚ q
-        by inv (associative-mul-ℚ _ _ _)
+        by inv (associative-mul-ℚ p _ q)
       ＝ one-ℚ *ℚ q
         by ap-mul-ℚ (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ p⁺)) refl
       ＝ q
