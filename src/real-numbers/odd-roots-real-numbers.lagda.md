@@ -137,9 +137,9 @@ module _
 
 ```agda
 abstract
-  odd-root-zero-ℝ :
+  root-zero-is-odd-ℝ :
     (n : ℕ) (odd-n : is-odd-ℕ n) → root-is-odd-ℝ n odd-n zero-ℝ ＝ zero-ℝ
-  odd-root-zero-ℝ n odd-n =
+  root-zero-is-odd-ℝ n odd-n =
     is-injective-power-is-odd-ℝ
       ( n)
       ( odd-n)
