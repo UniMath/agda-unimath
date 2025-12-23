@@ -552,7 +552,7 @@ module _
             ( θ))
           ( η +ℚ⁺ θ +ℚ⁺ δ)
           ( η +ℚ⁺ θ +ℚ⁺ δ +ℚ⁺ ε)
-          ( le-left-add-ℚ⁺ ( η +ℚ⁺ θ +ℚ⁺ δ) ε)
+          ( le-left-add-ℚ⁺ (η +ℚ⁺ θ +ℚ⁺ δ) ε)
           ( lemma-lim))
 
   has-limit-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space :
