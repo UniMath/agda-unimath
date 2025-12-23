@@ -20,6 +20,7 @@ open import metric-spaces.pointwise-continuous-functions-metric-spaces
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.limits-of-functions-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
 </details>
@@ -65,6 +66,34 @@ module _
   is-pointwise-continuous-map-pointwise-continuous-map-ℝ :
     is-pointwise-continuous-map-ℝ map-pointwise-continuous-map-ℝ
   is-pointwise-continuous-map-pointwise-continuous-map-ℝ = pr2 f
+```
+
+## Properties
+
+### Uniformly continuous functions are pointwise continuous
+
+```agda
+module _
+  {l1 l2 : Level}
+  (f : uniformly-continuous-function-ℝ l1 l2)
+  where
+
+  abstract
+    is-pointwise-continuous-map-uniformly-continuous-function-ℝ :
+      is-pointwise-continuous-map-ℝ
+        ( map-uniformly-continuous-function-ℝ f)
+    is-pointwise-continuous-map-uniformly-continuous-function-ℝ =
+      is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space
+        ( metric-space-ℝ l1)
+        ( metric-space-ℝ l2)
+        ( map-uniformly-continuous-function-ℝ f)
+        ( is-uniformly-continuous-map-uniformly-continuous-function-ℝ f)
+
+  pointwise-continuous-uniformly-continuous-function-ℝ :
+    pointwise-continuous-map-ℝ l1 l2
+  pointwise-continuous-uniformly-continuous-function-ℝ =
+    ( map-uniformly-continuous-function-ℝ f ,
+      is-pointwise-continuous-map-uniformly-continuous-function-ℝ)
 ```
 
 ## See also
