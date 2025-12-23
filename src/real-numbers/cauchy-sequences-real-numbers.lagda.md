@@ -9,6 +9,7 @@ module real-numbers.cauchy-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -20,6 +21,7 @@ open import metric-spaces.cauchy-sequences-metric-spaces
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers
+open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 ```
 
@@ -46,6 +48,10 @@ is-cauchy-sequence-ℝ {l} = is-cauchy-sequence-Metric-Space (metric-space-ℝ l
 
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
 cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
+
+seq-cauchy-sequence-ℝ :
+  {l : Level} → cauchy-sequence-ℝ l → sequence (ℝ l)
+seq-cauchy-sequence-ℝ = pr1
 ```
 
 ## Properties
@@ -53,9 +59,18 @@ cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
 ### All Cauchy sequences in ℝ have a limit
 
 ```agda
-lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
-lim-cauchy-sequence-ℝ {l} =
-  limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
+opaque
+  lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
+  lim-cauchy-sequence-ℝ {l} =
+    limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
+
+  abstract
+    is-limit-lim-cauchy-sequence-ℝ :
+      {l : Level} (s : cauchy-sequence-ℝ l) →
+      is-limit-sequence-ℝ (seq-cauchy-sequence-ℝ s) (lim-cauchy-sequence-ℝ s)
+    is-limit-lim-cauchy-sequence-ℝ {l} =
+      is-limit-limit-cauchy-sequence-Complete-Metric-Space
+        ( complete-metric-space-ℝ l)
 ```
 
 ### The sum of Cauchy sequences is a Cauchy sequence

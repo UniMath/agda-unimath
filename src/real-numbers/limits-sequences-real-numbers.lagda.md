@@ -9,7 +9,12 @@ module real-numbers.limits-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -22,8 +27,14 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.uniformly-continuous-functions-real-numbers
 ```
 
@@ -123,4 +134,97 @@ module _
         ( f)
         ( u)
         ( lim)
+```
+
+### A lower bound on a sequence is a lower bound on its limit
+
+```agda
+module _
+  {l1 l2 : Level}
+  (b : ℝ l1)
+  {u : sequence (ℝ l2)}
+  {lim-u : ℝ l2}
+  where
+
+  abstract
+    lower-bound-lim-lower-bound-sequence-ℝ :
+      ((n : ℕ) → leq-ℝ b (u n)) → is-limit-sequence-ℝ u lim-u →
+      leq-ℝ b lim-u
+    lower-bound-lim-lower-bound-sequence-ℝ H =
+      elim-exists
+        ( leq-prop-ℝ b lim-u)
+        ( λ μ is-mod-μ →
+          leq-not-le-ℝ
+            ( lim-u)
+            ( b)
+            ( λ lim-u<b →
+              let
+                open do-syntax-trunc-Prop empty-Prop
+              in do
+                (ε , lim-u+ε<b) ←
+                  exists-positive-rational-separation-le-ℝ lim-u<b
+                not-leq-le-ℝ
+                  ( u (μ ε))
+                  ( b)
+                  ( concatenate-leq-le-ℝ
+                    ( u (μ ε))
+                    ( lim-u +ℝ real-ℚ⁺ ε)
+                    ( b)
+                    ( left-leq-real-bound-neighborhood-ℝ
+                      ( ε)
+                      ( u (μ ε))
+                      ( lim-u)
+                      ( is-mod-μ
+                        ( ε)
+                        ( μ ε)
+                        ( refl-leq-ℕ (μ ε))))
+                    ( lim-u+ε<b))
+                  ( H (μ ε))))
+```
+
+### An upper bound on a sequence is an upper bound on its limit
+
+```agda
+module _
+  {l1 l2 : Level}
+  (b : ℝ l1)
+  {u : sequence (ℝ l2)}
+  {lim-u : ℝ l2}
+  where
+
+  abstract
+    upper-bound-lim-upper-bound-sequence-ℝ :
+      ((n : ℕ) → leq-ℝ (u n) b) → is-limit-sequence-ℝ u lim-u →
+      leq-ℝ lim-u b
+    upper-bound-lim-upper-bound-sequence-ℝ H =
+      elim-exists
+        ( leq-prop-ℝ lim-u b)
+        ( λ μ is-mod-μ →
+          leq-not-le-ℝ
+            ( b)
+            ( lim-u)
+            ( λ b<lim-u →
+              let
+                open do-syntax-trunc-Prop empty-Prop
+              in do
+                (ε , b+ε<lim-u) ←
+                  exists-positive-rational-separation-le-ℝ b<lim-u
+                not-leq-le-ℝ
+                  ( b)
+                  ( u (μ ε))
+                  ( concatenate-le-leq-ℝ
+                    ( b)
+                    ( lim-u -ℝ real-ℚ⁺ ε)
+                    ( u (μ ε))
+                    ( le-transpose-left-add-ℝ _ _ _ b+ε<lim-u)
+                    ( leq-transpose-right-add-ℝ _ _ _
+                      ( right-leq-real-bound-neighborhood-ℝ
+                        ( ε)
+                        ( u (μ ε))
+                        ( lim-u)
+                        ( is-mod-μ
+                          ( ε)
+                          ( μ ε)
+                          ( refl-leq-ℕ (μ ε))))))
+                  ( H (μ ε))))
 ```

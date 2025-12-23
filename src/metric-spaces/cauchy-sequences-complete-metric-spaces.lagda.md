@@ -59,31 +59,33 @@ module _
   (x : cauchy-sequence-Complete-Metric-Space M)
   where
 
-  limit-cauchy-sequence-Complete-Metric-Space : type-Complete-Metric-Space M
-  limit-cauchy-sequence-Complete-Metric-Space =
-    pr1
-      ( is-complete-metric-space-Complete-Metric-Space
-        ( M)
-        ( cauchy-approximation-cauchy-sequence-Metric-Space
-          ( metric-space-Complete-Metric-Space M)
-          ( x)))
-
-  is-limit-limit-cauchy-sequence-Complete-Metric-Space :
-    is-limit-cauchy-sequence-Complete-Metric-Space
-      ( M)
-      ( x)
-      ( limit-cauchy-sequence-Complete-Metric-Space)
-  is-limit-limit-cauchy-sequence-Complete-Metric-Space =
-    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
-      ( metric-space-Complete-Metric-Space M)
-      ( x)
-      ( limit-cauchy-sequence-Complete-Metric-Space)
-      ( pr2
+  opaque
+    limit-cauchy-sequence-Complete-Metric-Space : type-Complete-Metric-Space M
+    limit-cauchy-sequence-Complete-Metric-Space =
+      pr1
         ( is-complete-metric-space-Complete-Metric-Space
           ( M)
           ( cauchy-approximation-cauchy-sequence-Metric-Space
             ( metric-space-Complete-Metric-Space M)
-            ( x))))
+            ( x)))
+
+    abstract
+      is-limit-limit-cauchy-sequence-Complete-Metric-Space :
+        is-limit-cauchy-sequence-Complete-Metric-Space
+          ( M)
+          ( x)
+          ( limit-cauchy-sequence-Complete-Metric-Space)
+      is-limit-limit-cauchy-sequence-Complete-Metric-Space =
+        is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
+          ( metric-space-Complete-Metric-Space M)
+          ( x)
+          ( limit-cauchy-sequence-Complete-Metric-Space)
+          ( pr2
+            ( is-complete-metric-space-Complete-Metric-Space
+              ( M)
+              ( cauchy-approximation-cauchy-sequence-Metric-Space
+                ( metric-space-Complete-Metric-Space M)
+                ( x))))
 
   has-limit-cauchy-sequence-Complete-Metric-Space :
     has-limit-cauchy-sequence-Metric-Space

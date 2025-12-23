@@ -37,6 +37,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 
 open import group-theory.abelian-groups
 open import group-theory.groups
@@ -91,6 +92,22 @@ one-half-ℚ⁺ = positive-reciprocal-rational-succ-ℕ 1
 
 one-half-ℚ : ℚ
 one-half-ℚ = reciprocal-rational-succ-ℕ 1
+
+abstract
+  le-one-half-one-ℚ : le-ℚ one-half-ℚ one-ℚ
+  le-one-half-one-ℚ =
+    tr
+      ( le-ℚ one-half-ℚ)
+      ( ap rational-ℚ⁺ inv-one-ℚ⁺)
+      ( inv-le-ℚ⁺
+        ( one-ℚ⁺)
+        ( positive-rational-ℕ⁺ two-ℕ⁺)
+        ( preserves-le-rational-ℕ {1} {2} _))
+
+  twice-one-half-ℚ : one-half-ℚ +ℚ one-half-ℚ ＝ one-ℚ
+  twice-one-half-ℚ =
+    ( inv (left-mul-rational-nat-ℚ 2 one-half-ℚ)) ∙
+    ( ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ two-ℕ⁺)))
 ```
 
 ## Properties

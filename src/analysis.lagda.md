@@ -10,6 +10,7 @@ open import analysis.convergent-series-metric-abelian-groups public
 open import analysis.convergent-series-real-banach-spaces public
 open import analysis.convergent-series-real-numbers public
 open import analysis.derivatives-of-real-functions-on-proper-closed-intervals public
+open import analysis.intermediate-value-theorem public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
 open import analysis.series-complete-metric-abelian-groups public
