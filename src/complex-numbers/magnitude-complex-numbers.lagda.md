@@ -239,7 +239,7 @@ abstract
   magnitude-complex-ℝ {l} x =
     equational-reasoning
       real-sqrt-ℝ⁰⁺
-        ( nonnegative-square-ℝ x +ℝ⁰⁺ nonnegative-square-ℝ (raise-ℝ l zero-ℝ))
+        ( nonnegative-square-ℝ x +ℝ⁰⁺ nonnegative-square-ℝ (raise-zero-ℝ l))
       ＝
         real-sqrt-ℝ⁰⁺
           ( nonnegative-square-ℝ x +ℝ⁰⁺ nonnegative-square-ℝ zero-ℝ)
