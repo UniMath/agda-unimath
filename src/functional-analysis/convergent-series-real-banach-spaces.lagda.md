@@ -1,23 +1,23 @@
 # Convergent series in real Banach spaces
 
 ```agda
-module analysis.convergent-series-real-banach-spaces where
+module functional-analysis.convergent-series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.additive-complete-metric-abelian-groups-real-banach-spaces
 open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
-open import analysis.series-real-banach-spaces
 
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.additive-complete-metric-abelian-groups-real-banach-spaces
+open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
 
 open import metric-spaces.cauchy-sequences-metric-spaces
 ```
@@ -26,10 +26,10 @@ open import metric-spaces.cauchy-sequences-metric-spaces
 
 ## Idea
 
-A [series](analysis.series-real-banach-spaces.md)
+A [series](functional-analysis.series-real-banach-spaces.md)
 [converges](analysis.convergent-series-metric-abelian-groups.md) in a
-[real Banach space](linear-algebra.real-banach-spaces.md) if its partial sums
-form a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md).
+[real Banach space](functional-analysis.real-banach-spaces.md) if its partial
+sums form a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md).
 
 A slightly modified converse is also true: if a series converges, there
 [exists](foundation.existential-quantification.md) a modulus making its partial
