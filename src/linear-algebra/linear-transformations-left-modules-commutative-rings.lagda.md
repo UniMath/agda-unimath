@@ -75,10 +75,22 @@ module _
     type-left-module-Commutative-Ring R M
   map-linear-transform-left-module-Commutative-Ring = pr1 f
 
-  is-linear-transform-map-linear-transform-left-module-Commutative-Ring :
+  is-linear-map-linear-transform-left-module-Commutative-Ring :
     is-linear-transform-left-module-Commutative-Ring R M
       ( map-linear-transform-left-module-Commutative-Ring)
-  is-linear-transform-map-linear-transform-left-module-Commutative-Ring = pr2 f
+  is-linear-map-linear-transform-left-module-Commutative-Ring = pr2 f
+
+  is-additive-map-linear-transform-left-module-Commutative-Ring :
+    is-additive-map-left-module-Commutative-Ring R M M
+      ( map-linear-transform-left-module-Commutative-Ring)
+  is-additive-map-linear-transform-left-module-Commutative-Ring =
+    pr1 is-linear-map-linear-transform-left-module-Commutative-Ring
+
+  is-homogeneous-map-linear-transform-left-module-Commutative-Ring :
+    is-homogeneous-map-left-module-Commutative-Ring R M M
+      ( map-linear-transform-left-module-Commutative-Ring)
+  is-homogeneous-map-linear-transform-left-module-Commutative-Ring =
+    pr2 is-linear-map-linear-transform-left-module-Commutative-Ring
 ```
 
 ## Properties
