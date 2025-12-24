@@ -1330,3 +1330,25 @@ abstract
         ~ℝ raise-ℝ l (x *ℝ y)
           by sim-raise-ℝ l (x *ℝ y))
 ```
+
+### Adding `½ x` to itself produces `x`
+
+```agda
+abstract
+  twice-left-mul-one-half-ℝ :
+    {l : Level} (x : ℝ l) →
+    (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x) ＝ x
+  twice-left-mul-one-half-ℝ x =
+    equational-reasoning
+      (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x)
+      ＝ real-ℕ 2 *ℝ (one-half-ℝ *ℝ x)
+        by inv (left-mul-real-ℕ 2 (one-half-ℝ *ℝ x))
+      ＝ (real-ℕ 2 *ℝ one-half-ℝ) *ℝ x
+        by inv (associative-mul-ℝ (real-ℕ 2) one-half-ℝ x)
+      ＝ real-ℚ (rational-ℕ 2 *ℚ one-half-ℚ) *ℝ x
+        by ap-mul-ℝ (mul-real-ℚ _ _) refl
+      ＝ one-ℝ *ℝ x
+        by ap-mul-ℝ (ap real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ two-ℚ⁺)) refl
+      ＝ x
+        by left-unit-law-mul-ℝ x
+```

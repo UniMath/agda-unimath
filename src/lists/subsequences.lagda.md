@@ -100,7 +100,7 @@ module _
       strictly-preordered-set-ℕ
 ```
 
-### The extraction sequence of a subsequence is superlinear
+### The extraction sequence of a subsequence is inflationary
 
 ```agda
 module _
@@ -108,11 +108,11 @@ module _
   where
 
   abstract
-    is-superlinear-extract-subsequence :
+    is-inflationary-extract-subsequence :
       (n : ℕ) → leq-ℕ n (extract-subsequence u v n)
-    is-superlinear-extract-subsequence zero-ℕ =
+    is-inflationary-extract-subsequence zero-ℕ =
       leq-zero-ℕ (extract-subsequence u v zero-ℕ)
-    is-superlinear-extract-subsequence (succ-ℕ n) =
+    is-inflationary-extract-subsequence (succ-ℕ n) =
       leq-succ-le-ℕ
         ( n)
         ( extract-subsequence u v (succ-ℕ n))
@@ -120,10 +120,23 @@ module _
           { n}
           { extract-subsequence u v n}
           { extract-subsequence u v (succ-ℕ n)}
-          ( is-superlinear-extract-subsequence n)
+          ( is-inflationary-extract-subsequence n)
           ( le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
             ( strictly-preordered-set-ℕ)
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)
             ( n)))
+```
+
+### Common subsequences
+
+#### The tail subsequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  tail-subsequence : subsequence u
+  tail-subsequence = (succ-ℕ , λ _ _ → id)
 ```

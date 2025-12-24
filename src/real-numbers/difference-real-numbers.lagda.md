@@ -15,6 +15,7 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
@@ -108,4 +109,104 @@ abstract
     sim-ℝ a a' → sim-ℝ b b' → sim-ℝ (a -ℝ b) (a' -ℝ b')
   preserves-sim-diff-ℝ a~a' b~b' =
     preserves-sim-add-ℝ a~a' (preserves-sim-neg-ℝ b~b')
+```
+
+### `(x - y) + (y - z) = x - z`
+
+```agda
+abstract
+  add-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ ((x -ℝ y) +ℝ (y -ℝ z)) (x -ℝ z)
+  add-diff-ℝ x y z =
+    similarity-reasoning-ℝ
+      (x -ℝ y) +ℝ (y -ℝ z)
+      ~ℝ ((x -ℝ y) +ℝ y) -ℝ z
+        by sim-eq-ℝ (inv (associative-add-ℝ _ _ _))
+      ~ℝ x -ℝ z
+        by preserves-sim-right-add-ℝ _ _ _ (cancel-right-diff-add-ℝ x y)
+```
+
+### `(x + z) - (y + z) = x - y`
+
+```agda
+abstract
+  diff-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ ((x +ℝ z) -ℝ (y +ℝ z)) (x -ℝ y)
+  diff-add-ℝ x y z =
+    similarity-reasoning-ℝ
+    (x +ℝ z) -ℝ (y +ℝ z)
+    ~ℝ (x +ℝ z) +ℝ (neg-ℝ y -ℝ z)
+      by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ y z))
+    ~ℝ (x -ℝ y) +ℝ (z -ℝ z)
+      by sim-eq-ℝ (interchange-law-add-add-ℝ _ _ _ _)
+    ~ℝ (x -ℝ y) +ℝ zero-ℝ
+      by preserves-sim-left-add-ℝ _ _ _ (right-inverse-law-add-ℝ z)
+    ~ℝ x -ℝ y
+      by sim-eq-ℝ (right-unit-law-add-ℝ (x -ℝ y))
+```
+
+### `(x - z) - (y - z) = x - y`
+
+```agda
+abstract
+  diff-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ ((x -ℝ z) -ℝ (y -ℝ z)) (x -ℝ y)
+  diff-diff-ℝ x y z = diff-add-ℝ x y (neg-ℝ z)
+```
+
+### `x - (x - y) = y`
+
+```agda
+abstract
+  right-diff-diff-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x -ℝ (x -ℝ y)) y
+  right-diff-diff-ℝ x y =
+    similarity-reasoning-ℝ
+    x -ℝ (x -ℝ y)
+    ~ℝ x +ℝ (neg-ℝ x +ℝ neg-ℝ (neg-ℝ y))
+      by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ _ _))
+    ~ℝ neg-ℝ (neg-ℝ y)
+      by cancel-left-add-diff-ℝ x _
+    ~ℝ y
+      by sim-eq-ℝ (neg-neg-ℝ y)
+```
+
+### `x + (y - x) = y`
+
+```agda
+abstract
+  add-right-diff-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x +ℝ (y -ℝ x)) y
+  add-right-diff-ℝ x y =
+    similarity-reasoning-ℝ
+      x +ℝ (y -ℝ x)
+      ~ℝ x +ℝ (neg-ℝ x +ℝ y)
+        by sim-eq-ℝ (ap-add-ℝ refl (commutative-add-ℝ _ _))
+      ~ℝ y
+        by cancel-left-add-diff-ℝ x y
+```
+
+### If `x - y = z`, then `x - z = y`
+
+```agda
+abstract
+  transpose-sim-right-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ (x -ℝ y) z → sim-ℝ (x -ℝ z) y
+  transpose-sim-right-diff-ℝ x y z x-y=z =
+    similarity-reasoning-ℝ
+      x -ℝ z
+      ~ℝ x -ℝ (x -ℝ y)
+        by preserves-sim-diff-ℝ (refl-sim-ℝ x) (symmetric-sim-ℝ x-y=z)
+      ~ℝ y
+        by right-diff-diff-ℝ x y
+
+  transpose-eq-right-diff-ℝ :
+    {l : Level} (x : ℝ l) (y : ℝ l) (z : ℝ l) →
+    x -ℝ y ＝ z → x -ℝ z ＝ y
+  transpose-eq-right-diff-ℝ x y z x-y=z =
+    eq-sim-ℝ (transpose-sim-right-diff-ℝ x y z (sim-eq-ℝ x-y=z))
 ```

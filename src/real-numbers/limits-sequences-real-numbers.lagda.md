@@ -21,6 +21,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
+open import lists.subsequences
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
@@ -55,6 +56,13 @@ is-limit-prop-sequence-ℝ {l} =
 
 is-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → ℝ l → UU l
 is-limit-sequence-ℝ {l} = is-limit-sequence-Metric-Space (metric-space-ℝ l)
+
+has-limit-prop-sequence-ℝ : {l : Level} → sequence (ℝ l) → Prop (lsuc l)
+has-limit-prop-sequence-ℝ {l} =
+  has-limit-prop-sequence-Metric-Space (metric-space-ℝ l)
+
+has-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU (lsuc l)
+has-limit-sequence-ℝ u = type-Prop (has-limit-prop-sequence-ℝ u)
 ```
 
 ## Properties
@@ -227,4 +235,24 @@ module _
                           ( μ ε)
                           ( refl-leq-ℕ (μ ε))))))
                   ( H (μ ε))))
+```
+
+### Taking subsequences preserves limits
+
+```agda
+module _
+  {l : Level}
+  {u : sequence (ℝ l)}
+  {lim-u : ℝ l}
+  (v : subsequence u)
+  where
+
+  abstract
+    preserves-is-limit-subsequence-ℝ :
+      is-limit-sequence-ℝ u lim-u →
+      is-limit-sequence-ℝ (seq-subsequence u v) lim-u
+    preserves-is-limit-subsequence-ℝ =
+      preserves-is-limit-subsequence-Metric-Space
+        ( metric-space-ℝ l)
+        ( v)
 ```

@@ -11,9 +11,11 @@ module analysis.intermediate-value-theorem where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
@@ -22,19 +24,34 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.binary-transport
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
+open import elementary-number-theory.addition-positive-rational-numbers
 open import foundation.propositional-truncations
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
+open import group-theory.abelian-groups
+open import foundation.transport-along-identifications
+open import real-numbers.multiplication-positive-real-numbers
 open import foundation.propositions
+open import foundation.functoriality-propositional-truncation
+open import foundation.homotopies
 open import foundation.universe-levels
+open import real-numbers.raising-universe-levels-real-numbers
+open import foundation.action-on-identifications-functions
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.real-sequences-approximating-zero
 
 open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
 open import order-theory.decreasing-sequences-posets
+open import order-theory.large-posets
 open import order-theory.increasing-sequences-posets
 
 open import real-numbers.absolute-value-real-numbers
@@ -47,6 +64,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import lists.subsequences
 open import real-numbers.inequality-real-numbers
 open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
@@ -98,45 +116,46 @@ module _
   where
 
   interleaved mutual
-    lower-bound-sequence-intermediate-value-theorem-ℝ : sequence (ℝ l)
+    lower-bound-seq-intermediate-value-theorem-ℝ : sequence (ℝ l)
 
-    upper-bound-sequence-intermediate-value-theorem-ℝ : sequence (ℝ l)
+    upper-bound-seq-intermediate-value-theorem-ℝ : sequence (ℝ l)
 
-    sequence-intermediate-value-theorem-ℝ : sequence (ℝ l)
+    seq-intermediate-value-theorem-ℝ : sequence (ℝ l)
 
-    sequence-intermediate-value-theorem-ℝ n =
+    seq-intermediate-value-theorem-ℝ n =
       binary-mean-ℝ
-        ( lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
+        ( lower-bound-seq-intermediate-value-theorem-ℝ n)
+        ( upper-bound-seq-intermediate-value-theorem-ℝ n)
 
-    interpolation-sequence-intermediate-value-theorem-ℝ :
+    interpolation-seq-intermediate-value-theorem-ℝ :
       sequence (type-closed-interval-ℝ l unit-closed-interval-ℝ)
-    interpolation-sequence-intermediate-value-theorem-ℝ n =
+    interpolation-seq-intermediate-value-theorem-ℝ n =
       clamp-closed-interval-ℝ
         ( unit-closed-interval-ℝ)
-        ( ( map-pointwise-continuous-map-ℝ
-            ( f)
-            ( sequence-intermediate-value-theorem-ℝ n)) *ℝ
-          real-ℚ⁺ (inv-ℚ⁺ ε))
+        ( ( one-half-ℝ) +ℝ
+          ( ( map-pointwise-continuous-map-ℝ
+              ( f)
+              ( seq-intermediate-value-theorem-ℝ n)) *ℝ
+            ( real-ℚ⁺ (inv-ℚ⁺ ε))))
 
-    shift-sequence-intermediate-value-theorem-ℝ : sequence (ℝ⁰⁺ l)
-    shift-sequence-intermediate-value-theorem-ℝ n =
+    shift-seq-intermediate-value-theorem-ℝ : sequence (ℝ⁰⁺ l)
+    shift-seq-intermediate-value-theorem-ℝ n =
       let
-        (d , 0≤d , _) = interpolation-sequence-intermediate-value-theorem-ℝ n
+        (d , 0≤d , _) = interpolation-seq-intermediate-value-theorem-ℝ n
       in
         ( d , 0≤d) *ℝ⁰⁺
-        ( nonnegative-diff-leq-ℝ a≤b) *ℝ⁰⁺
-        ( nonnegative-real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
+        ( ( nonnegative-diff-leq-ℝ a≤b) *ℝ⁰⁺
+          ( nonnegative-real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺)))
 
-    lower-bound-sequence-intermediate-value-theorem-ℝ 0 = a
-    lower-bound-sequence-intermediate-value-theorem-ℝ (succ-ℕ n) =
-      ( sequence-intermediate-value-theorem-ℝ n) -ℝ
-      ( real-ℝ⁰⁺ (shift-sequence-intermediate-value-theorem-ℝ n))
+    lower-bound-seq-intermediate-value-theorem-ℝ 0 = a
+    lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) =
+      ( seq-intermediate-value-theorem-ℝ n) -ℝ
+      ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
 
-    upper-bound-sequence-intermediate-value-theorem-ℝ 0 = b
-    upper-bound-sequence-intermediate-value-theorem-ℝ (succ-ℕ n) =
-      ( upper-bound-sequence-intermediate-value-theorem-ℝ n) -ℝ
-      ( real-ℝ⁰⁺ (shift-sequence-intermediate-value-theorem-ℝ n))
+    upper-bound-seq-intermediate-value-theorem-ℝ 0 = b
+    upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) =
+      ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+      ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
 ```
 
 ### `aₙ ≤ cₙ ≤ bₙ`
@@ -146,162 +165,542 @@ module _
     leq-lower-upper-bound-sequence-intermediate-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
+        ( lower-bound-seq-intermediate-value-theorem-ℝ n)
+        ( upper-bound-seq-intermediate-value-theorem-ℝ n)
 
-    is-lower-bound-sequence-intermediate-value-theorem-ℝ :
+    is-lower-bound-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( sequence-intermediate-value-theorem-ℝ n)
-    is-lower-bound-sequence-intermediate-value-theorem-ℝ n =
+        ( lower-bound-seq-intermediate-value-theorem-ℝ n)
+        ( seq-intermediate-value-theorem-ℝ n)
+    is-lower-bound-seq-intermediate-value-theorem-ℝ n =
       leq-binary-mean-leq-both-ℝ _ _ _
-        ( refl-leq-ℝ (lower-bound-sequence-intermediate-value-theorem-ℝ n))
+        ( refl-leq-ℝ (lower-bound-seq-intermediate-value-theorem-ℝ n))
         ( leq-lower-upper-bound-sequence-intermediate-theorem-ℝ n)
 
-    is-upper-bound-sequence-intermediate-value-theorem-ℝ :
+    is-upper-bound-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( sequence-intermediate-value-theorem-ℝ n)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
-    is-upper-bound-sequence-intermediate-value-theorem-ℝ n =
+        ( seq-intermediate-value-theorem-ℝ n)
+        ( upper-bound-seq-intermediate-value-theorem-ℝ n)
+    is-upper-bound-seq-intermediate-value-theorem-ℝ n =
       geq-binary-mean-geq-both-ℝ _ _ _
         ( leq-lower-upper-bound-sequence-intermediate-theorem-ℝ n)
-        ( refl-leq-ℝ (upper-bound-sequence-intermediate-value-theorem-ℝ n))
+        ( refl-leq-ℝ (upper-bound-seq-intermediate-value-theorem-ℝ n))
 
     leq-lower-upper-bound-sequence-intermediate-theorem-ℝ 0 = a≤b
     leq-lower-upper-bound-sequence-intermediate-theorem-ℝ (succ-ℕ n) =
       preserves-leq-right-add-ℝ _ _ _
-        ( is-upper-bound-sequence-intermediate-value-theorem-ℝ n)
+        ( is-upper-bound-seq-intermediate-value-theorem-ℝ n)
+```
+
+### `bₙ - aₙ = (b - a)/2ⁿ`
+
+```agda
+  private
+    ⟨b-a⟩/2^ : ℕ → ℝ⁰⁺ l
+    ⟨b-a⟩/2^ n =
+      nonnegative-diff-leq-ℝ a≤b *ℝ⁰⁺
+      nonnegative-real-ℚ⁺ (power-ℚ⁺ n one-half-ℚ⁺)
+
+    ⟨b-a⟩/2^1+ : ℕ → ℝ⁰⁺ l
+    ⟨b-a⟩/2^1+ n = ⟨b-a⟩/2^ (succ-ℕ n)
+
+  abstract
+    interleaved mutual
+      diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ :
+        (n : ℕ) →
+        ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
+        ( real-ℝ⁰⁺ (⟨b-a⟩/2^ n))
+
+      diff-upper-bound-seq-intermediate-value-theorem-ℝ :
+        (n : ℕ) →
+        ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( seq-intermediate-value-theorem-ℝ n)) ＝
+        ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+
+      diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ 0 =
+        inv (right-unit-law-mul-ℝ (b -ℝ a))
+      diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) =
+        ( eq-sim-ℝ
+          ( diff-diff-ℝ
+            ( upper-bound-seq-intermediate-value-theorem-ℝ n)
+            ( seq-intermediate-value-theorem-ℝ n)
+            ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n)))) ∙
+        ( diff-upper-bound-seq-intermediate-value-theorem-ℝ n)
+
+      diff-upper-bound-seq-intermediate-value-theorem-ℝ n =
+        equational-reasoning
+          ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( seq-intermediate-value-theorem-ℝ n)
+          ＝
+            binary-mean-ℝ
+              ( upper-bound-seq-intermediate-value-theorem-ℝ n)
+              ( neg-ℝ (lower-bound-seq-intermediate-value-theorem-ℝ n))
+            by diff-right-binary-mean-ℝ _ _
+          ＝
+            ( one-half-ℝ) *ℝ
+            ( (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ n one-half-ℚ⁺))
+            by
+              ap-mul-ℝ
+                ( refl {x = one-half-ℝ})
+                ( diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ
+                  ( n))
+          ＝
+            ( b -ℝ a) *ℝ
+            ( one-half-ℝ *ℝ real-ℚ (rational-power-ℚ⁺ n one-half-ℚ⁺))
+            by left-swap-mul-ℝ one-half-ℝ (b -ℝ a) _
+          ＝ (b -ℝ a) *ℝ real-ℚ (one-half-ℚ *ℚ rational-power-ℚ⁺ n one-half-ℚ⁺)
+            by ap-mul-ℝ refl (mul-real-ℚ _ _)
+          ＝ (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺)
+            by ap-mul-ℝ refl (ap real-ℚ⁺ (inv (power-succ-ℚ⁺' n one-half-ℚ⁺)))
+
+  abstract
+    diff-lower-bound-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
+        ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
+      ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+    diff-lower-bound-seq-intermediate-value-theorem-ℝ n =
+      ( diff-left-binary-mean-ℝ _ _) ∙
+      ( inv (diff-right-binary-mean-ℝ _ _)) ∙
+      ( diff-upper-bound-seq-intermediate-value-theorem-ℝ n)
 ```
 
 ### `aₙ` is increasing
 
 ```agda
   abstract
-    is-increasing-lower-bound-sequence-intermediate-value-theorem-ℝ :
+    is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ :
       is-increasing-sequence-Poset
         ( ℝ-Poset l)
-        ( lower-bound-sequence-intermediate-value-theorem-ℝ)
-    is-increasing-lower-bound-sequence-intermediate-value-theorem-ℝ = {!   !}
+        ( lower-bound-seq-intermediate-value-theorem-ℝ)
+    is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ =
+      is-increasing-leq-succ-sequence-Poset
+        ( ℝ-Poset l)
+        ( lower-bound-seq-intermediate-value-theorem-ℝ)
+        ( λ n →
+          let
+            open inequality-reasoning-Large-Poset ℝ-Large-Poset
+            (d , 0≤d , d≤1) =
+              interpolation-seq-intermediate-value-theorem-ℝ n
+          in
+            chain-of-inequalities
+            lower-bound-seq-intermediate-value-theorem-ℝ n
+            ≤ ( seq-intermediate-value-theorem-ℝ n) -ℝ
+              ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
+                ( lower-bound-seq-intermediate-value-theorem-ℝ n))
+              by leq-sim-ℝ (symmetric-sim-ℝ (right-diff-diff-ℝ _ _))
+            ≤ ( seq-intermediate-value-theorem-ℝ n) -ℝ
+              ( ( b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
+              by
+                leq-eq-ℝ
+                  ( ap-diff-ℝ
+                    ( refl)
+                    ( diff-lower-bound-seq-intermediate-value-theorem-ℝ n))
+            ≤ ( seq-intermediate-value-theorem-ℝ n) -ℝ
+              ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
+              by
+                preserves-leq-left-add-ℝ _ _ _
+                  ( neg-leq-ℝ
+                    ( leq-left-mul-leq-one-ℝ⁰⁺
+                      ( d , 0≤d)
+                      ( ( nonnegative-diff-leq-ℝ a≤b) *ℝ⁰⁺
+                        ( nonnegative-real-ℚ⁺
+                          ( power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺)))
+                      ( d≤1))))
 ```
 
 ### `bₙ` is decreasing
 
 ```agda
   abstract
-    is-decreasing-upper-bound-sequence-intermediate-value-theorem-ℝ :
+    is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ :
       is-decreasing-sequence-Poset
         ( ℝ-Poset l)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ)
-    is-decreasing-upper-bound-sequence-intermediate-value-theorem-ℝ =
+        ( upper-bound-seq-intermediate-value-theorem-ℝ)
+    is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ =
       is-decreasing-leq-succ-sequence-Poset
         ( ℝ-Poset l)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ)
+        ( upper-bound-seq-intermediate-value-theorem-ℝ)
         ( λ n →
           leq-diff-real-ℝ⁰⁺
-            ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
-            ( shift-sequence-intermediate-value-theorem-ℝ n))
+            ( upper-bound-seq-intermediate-value-theorem-ℝ n)
+            ( shift-seq-intermediate-value-theorem-ℝ n))
 ```
 
 ### `a ≤ cₙ ≤ b`
 
 ```agda
   abstract
-    lower-bound-of-sequence-intermediate-value-theorem-ℝ :
-      (n : ℕ) → leq-ℝ a (sequence-intermediate-value-theorem-ℝ n)
-    lower-bound-of-sequence-intermediate-value-theorem-ℝ n =
+    lower-bound-of-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) → leq-ℝ a (seq-intermediate-value-theorem-ℝ n)
+    lower-bound-of-seq-intermediate-value-theorem-ℝ n =
       transitive-leq-ℝ
         ( a)
-        ( lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( sequence-intermediate-value-theorem-ℝ n)
-        ( is-lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( is-increasing-lower-bound-sequence-intermediate-value-theorem-ℝ
+        ( lower-bound-seq-intermediate-value-theorem-ℝ n)
+        ( seq-intermediate-value-theorem-ℝ n)
+        ( is-lower-bound-seq-intermediate-value-theorem-ℝ n)
+        ( is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ
           ( 0)
           ( n)
           ( leq-zero-ℕ n))
 
-    upper-bound-of-sequence-intermediate-value-theorem-ℝ :
-      (n : ℕ) → leq-ℝ (sequence-intermediate-value-theorem-ℝ n) b
-    upper-bound-of-sequence-intermediate-value-theorem-ℝ n =
+    upper-bound-of-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) → leq-ℝ (seq-intermediate-value-theorem-ℝ n) b
+    upper-bound-of-seq-intermediate-value-theorem-ℝ n =
       transitive-leq-ℝ
-        ( sequence-intermediate-value-theorem-ℝ n)
-        ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
+        ( seq-intermediate-value-theorem-ℝ n)
+        ( upper-bound-seq-intermediate-value-theorem-ℝ n)
         ( b)
-        ( is-decreasing-upper-bound-sequence-intermediate-value-theorem-ℝ
+        ( is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ
           ( 0)
           ( n)
           ( leq-zero-ℕ n))
-        ( is-upper-bound-sequence-intermediate-value-theorem-ℝ n)
-```
-
-### `bₙ - aₙ = (b - a)/2ⁿ`
-
-```agda
-  abstract
-    interleaved mutual
-      diff-upper-lower-bound-sequence-intermediate-value-theorem-ℝ :
-        (n : ℕ) →
-        ( ( upper-bound-sequence-intermediate-value-theorem-ℝ n) -ℝ
-          ( lower-bound-sequence-intermediate-value-theorem-ℝ n)) ＝
-        ( (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ n one-half-ℚ⁺))
-      diff-upper-lower-bound-sequence-intermediate-value-theorem-ℝ = {!   !}
-
-      diff-upper-bound-sequence-intermediate-value-theorem-ℝ :
-        (n : ℕ) →
-        ( ( upper-bound-sequence-intermediate-value-theorem-ℝ n) -ℝ
-          ( sequence-intermediate-value-theorem-ℝ n)) ＝
-        ( (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
-      diff-upper-bound-sequence-intermediate-value-theorem-ℝ = {!   !}
+        ( is-upper-bound-seq-intermediate-value-theorem-ℝ n)
 ```
 
 ### The `cₙ` are a Cauchy sequence with a limit `c`
 
 ```agda
+  private abstract
+    is-zero-limit-⟨b-a⟩/2^ :
+      is-zero-limit-sequence-ℝ (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^)
+    is-zero-limit-⟨b-a⟩/2^ =
+      preserves-is-zero-limit-left-mul-sequence-ℝ
+        ( b -ℝ a)
+        ( _)
+        ( is-zero-limit-real-is-zero-limit-sequence-ℚ _
+          ( is-zero-limit-power-le-one-ℚ⁺
+            ( one-half-ℚ⁺)
+            ( le-one-half-one-ℚ)))
+
+    is-zero-limit-⟨b-a⟩/2^1+ :
+      is-zero-limit-sequence-ℝ (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^1+)
+    is-zero-limit-⟨b-a⟩/2^1+ =
+      preserves-is-limit-subsequence-ℝ
+        ( tail-subsequence (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^))
+        ( is-zero-limit-⟨b-a⟩/2^)
+
   abstract
-    is-cauchy-sequence-intermediate-value-theorem-ℝ :
-      is-cauchy-sequence-ℝ sequence-intermediate-value-theorem-ℝ
-    is-cauchy-sequence-intermediate-value-theorem-ℝ =
-      {!   !}
+    is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ :
+      is-zero-limit-sequence-ℝ
+        ( λ n →
+          ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( lower-bound-seq-intermediate-value-theorem-ℝ n))
+    is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ =
+      preserves-is-zero-limit-htpy-sequence-ℝ
+        ( inv-htpy diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ)
+        ( is-zero-limit-⟨b-a⟩/2^)
 
-  cauchy-sequence-intermediate-value-theorem-ℝ : cauchy-sequence-ℝ l
-  cauchy-sequence-intermediate-value-theorem-ℝ =
-    ( sequence-intermediate-value-theorem-ℝ ,
-      is-cauchy-sequence-intermediate-value-theorem-ℝ)
+    has-limit-seq-intermediate-value-theorem-ℝ :
+      has-limit-sequence-ℝ seq-intermediate-value-theorem-ℝ
+    has-limit-seq-intermediate-value-theorem-ℝ =
+      rec-trunc-Prop
+        ( has-limit-prop-sequence-ℝ seq-intermediate-value-theorem-ℝ)
+        ( λ μ →
+          has-limit-cauchy-sequence-ℝ (seq-intermediate-value-theorem-ℝ , μ))
+        ( exists-cauchy-modulus-narrowing-bounds-sequence-ℝ
+          ( lower-bound-seq-intermediate-value-theorem-ℝ)
+          ( seq-intermediate-value-theorem-ℝ)
+          ( upper-bound-seq-intermediate-value-theorem-ℝ)
+          ( is-lower-bound-seq-intermediate-value-theorem-ℝ)
+          ( is-upper-bound-seq-intermediate-value-theorem-ℝ)
+          ( is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ)
+          ( is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ)
+          ( is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ))
 
-  lim-cauchy-sequence-intermediate-value-theorem-ℝ : ℝ l
-  lim-cauchy-sequence-intermediate-value-theorem-ℝ =
-    lim-cauchy-sequence-ℝ cauchy-sequence-intermediate-value-theorem-ℝ
+  lim-seq-intermediate-value-theorem-ℝ : ℝ l
+  lim-seq-intermediate-value-theorem-ℝ =
+    pr1 has-limit-seq-intermediate-value-theorem-ℝ
 
-  abstract
-    is-limit-lim-cauchy-sequence-intermediate-value-theorem-ℝ :
-      is-limit-sequence-ℝ
-        ( sequence-intermediate-value-theorem-ℝ)
-        ( lim-cauchy-sequence-intermediate-value-theorem-ℝ)
-    is-limit-lim-cauchy-sequence-intermediate-value-theorem-ℝ =
-      is-limit-lim-cauchy-sequence-ℝ
-        ( cauchy-sequence-intermediate-value-theorem-ℝ)
+  is-limit-lim-seq-intermediate-value-theorem-ℝ :
+    is-limit-sequence-ℝ
+      ( seq-intermediate-value-theorem-ℝ)
+      ( lim-seq-intermediate-value-theorem-ℝ)
+  is-limit-lim-seq-intermediate-value-theorem-ℝ =
+    pr2 has-limit-seq-intermediate-value-theorem-ℝ
 ```
 
 ### `a ≤ c ≤ b`
 
 ```agda
   abstract
-    lower-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ :
-      leq-ℝ a lim-cauchy-sequence-intermediate-value-theorem-ℝ
-    lower-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ =
+    lower-bound-lim-seq-intermediate-value-theorem-ℝ :
+      leq-ℝ a lim-seq-intermediate-value-theorem-ℝ
+    lower-bound-lim-seq-intermediate-value-theorem-ℝ =
       lower-bound-lim-lower-bound-sequence-ℝ
         ( a)
-        ( lower-bound-of-sequence-intermediate-value-theorem-ℝ)
-        ( is-limit-lim-cauchy-sequence-intermediate-value-theorem-ℝ)
+        ( lower-bound-of-seq-intermediate-value-theorem-ℝ)
+        ( is-limit-lim-seq-intermediate-value-theorem-ℝ)
 
-    upper-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ :
-      leq-ℝ lim-cauchy-sequence-intermediate-value-theorem-ℝ b
-    upper-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ =
+    upper-bound-lim-seq-intermediate-value-theorem-ℝ :
+      leq-ℝ lim-seq-intermediate-value-theorem-ℝ b
+    upper-bound-lim-seq-intermediate-value-theorem-ℝ =
       upper-bound-lim-upper-bound-sequence-ℝ
         ( b)
-        ( upper-bound-of-sequence-intermediate-value-theorem-ℝ)
-        ( is-limit-lim-cauchy-sequence-intermediate-value-theorem-ℝ)
+        ( upper-bound-of-seq-intermediate-value-theorem-ℝ)
+        ( is-limit-lim-seq-intermediate-value-theorem-ℝ)
+```
+
+### If `ε/2 ≤ f cₙ`, then `aₙ₊₁ = aₙ` and `bₙ₊₁ = cₙ`
+
+```agda
+  abstract
+    sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n)) →
+      sim-ℝ
+        ( pr1 (interpolation-seq-intermediate-value-theorem-ℝ n))
+        ( one-ℝ)
+    sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+      n ε/2≤fcₙ =
+      let
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        ε' = one-half-ℚ⁺ *ℚ⁺ ε
+        fcₙ =
+          map-pointwise-continuous-map-ℝ f (seq-intermediate-value-theorem-ℝ n)
+      in
+        clamp-leq-upper-bound-closed-interval-ℝ
+          ( unit-closed-interval-ℝ)
+          ( one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
+          ( chain-of-inequalities
+            one-ℝ
+            ≤ one-half-ℝ +ℝ one-half-ℝ
+              by leq-eq-ℝ (inv twice-one-half-ℝ)
+            ≤ one-half-ℝ +ℝ real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε *ℚ⁺ inv-ℚ⁺ ε)
+              by
+                leq-eq-ℝ
+                  ( ap-add-ℝ
+                    ( refl)
+                    ( ap
+                      ( real-ℚ)
+                      ( inv
+                        ( is-retraction-right-div-ℚ⁺
+                          ( ε)
+                          ( one-half-ℚ)))))
+            ≤ ( one-half-ℝ) +ℝ
+              ( real-ℚ⁺ ε' *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
+              by leq-eq-ℝ (ap-add-ℝ refl (inv (mul-real-ℚ _ _)))
+            ≤ one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε)
+              by
+                preserves-leq-left-add-ℝ _ _ _
+                  ( preserves-leq-right-mul-ℝ⁺
+                    ( positive-real-ℚ⁺ (inv-ℚ⁺ ε))
+                    ( ε/2≤fcₙ)))
+
+    eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n)) →
+      lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
+      lower-bound-seq-intermediate-value-theorem-ℝ n
+    eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+      n ε/2≤fcₙ =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n)
+          ~ℝ
+            ( seq-intermediate-value-theorem-ℝ n) -ℝ
+            ( one-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+            by
+              preserves-sim-diff-ℝ
+                ( refl-sim-ℝ _)
+                ( preserves-sim-right-mul-ℝ _ _ _
+                  ( sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                    ( n)
+                    ( ε/2≤fcₙ)))
+          ~ℝ
+            ( ( lower-bound-seq-intermediate-value-theorem-ℝ n) +ℝ
+              ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
+                ( lower-bound-seq-intermediate-value-theorem-ℝ n))) -ℝ
+            ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+            by
+              preserves-sim-diff-ℝ
+                ( symmetric-sim-ℝ (add-right-diff-ℝ _ _))
+                ( sim-eq-ℝ (left-unit-law-mul-ℝ _))
+          ~ℝ
+            ( ( lower-bound-seq-intermediate-value-theorem-ℝ n) +ℝ
+              ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))) -ℝ
+            ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+            by
+              sim-eq-ℝ
+                ( ap-diff-ℝ
+                  ( ap-add-ℝ
+                    ( refl)
+                    ( diff-lower-bound-seq-intermediate-value-theorem-ℝ n))
+                  ( refl))
+          ~ℝ lower-bound-seq-intermediate-value-theorem-ℝ n
+            by cancel-right-add-diff-ℝ _ _)
+
+    succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n)) →
+      upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
+      seq-intermediate-value-theorem-ℝ n
+    succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ n ε/2≤fcₙ =
+      equational-reasoning
+      ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+      ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
+      ＝
+        ( ( seq-intermediate-value-theorem-ℝ n) +ℝ
+          ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+            ( seq-intermediate-value-theorem-ℝ n))) -ℝ
+        ( one-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+        by
+          ap-diff-ℝ
+            ( inv (eq-sim-ℝ (add-right-diff-ℝ _ _)))
+            ( eq-sim-ℝ
+              ( preserves-sim-right-mul-ℝ _ _ _
+                ( sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                  ( n)
+                  ( ε/2≤fcₙ))))
+      ＝
+        ( ( seq-intermediate-value-theorem-ℝ n) +ℝ
+          ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))) -ℝ
+        ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+        by
+          ap-diff-ℝ
+            ( ap-add-ℝ
+              ( refl)
+              ( diff-upper-bound-seq-intermediate-value-theorem-ℝ n))
+            ( left-unit-law-mul-ℝ _)
+      ＝ seq-intermediate-value-theorem-ℝ n
+        by eq-sim-ℝ (cancel-right-add-diff-ℝ _ _)
+```
+
+### If `ε/2 ≤ f cₙ`, then `aₙ₊₁ = aₙ` and `bₙ₊₁ = cₙ`
+
+```agda
+  abstract
+    sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n))
+          ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
+      sim-ℝ
+        ( pr1 (interpolation-seq-intermediate-value-theorem-ℝ n))
+        ( zero-ℝ)
+    sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+      n fcₙ≤-ε/2 =
+      let
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        ε' = one-half-ℚ⁺ *ℚ⁺ ε
+        fcₙ =
+          map-pointwise-continuous-map-ℝ
+            ( f)
+            ( seq-intermediate-value-theorem-ℝ n)
+      in
+        clamp-leq-lower-bound-closed-interval-ℝ
+          ( unit-closed-interval-ℝ)
+          ( one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
+          ( chain-of-inequalities
+            one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε)
+            ≤ one-half-ℝ +ℝ (neg-ℝ (real-ℚ⁺ ε') *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
+              by
+                preserves-leq-left-add-ℝ _ _ _
+                  ( preserves-leq-right-mul-ℝ⁺
+                    ( positive-real-ℚ⁺ (inv-ℚ⁺ ε))
+                    ( fcₙ≤-ε/2))
+            ≤ one-half-ℝ -ℝ (real-ℚ⁺ ε' *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
+              by leq-eq-ℝ (ap-add-ℝ refl (left-negative-law-mul-ℝ _ _))
+            ≤ one-half-ℝ -ℝ real-ℚ⁺ (ε' *ℚ⁺ inv-ℚ⁺ ε)
+              by leq-eq-ℝ (ap-diff-ℝ refl (mul-real-ℚ _ _))
+            ≤ one-half-ℝ -ℝ one-half-ℝ
+              by
+                leq-eq-ℝ
+                  ( ap-diff-ℝ
+                    ( refl)
+                    ( ap real-ℚ (is-retraction-right-div-ℚ⁺ ε one-half-ℚ)))
+            ≤ zero-ℝ
+              by leq-sim-ℝ (right-inverse-law-add-ℝ one-half-ℝ))
+
+  abstract
+    is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n))
+          ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
+      sim-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n) zero-ℝ⁰⁺
+    is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+      n fcₙ≤-ε/2 =
+      similarity-reasoning-ℝ
+        real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n)
+        ~ℝ zero-ℝ *ℝ _
+          by
+            preserves-sim-right-mul-ℝ _ _ _
+              ( sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                ( n)
+                ( fcₙ≤-ε/2))
+        ~ℝ zero-ℝ
+          by left-zero-law-mul-ℝ _
+
+  abstract
+    eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n))
+          ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
+      upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
+      upper-bound-seq-intermediate-value-theorem-ℝ n
+    eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+      n fcₙ≤-ε/2 =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
+          ~ℝ upper-bound-seq-intermediate-value-theorem-ℝ n -ℝ zero-ℝ
+            by
+              preserves-sim-diff-ℝ
+                ( refl-sim-ℝ _)
+                ( is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                  ( n)
+                  ( fcₙ≤-ε/2))
+          ~ℝ upper-bound-seq-intermediate-value-theorem-ℝ n
+            by sim-eq-ℝ (right-unit-law-diff-ℝ _))
+
+    succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      leq-ℝ
+        ( map-pointwise-continuous-map-ℝ
+          ( f)
+          ( seq-intermediate-value-theorem-ℝ n))
+          ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
+      lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
+      seq-intermediate-value-theorem-ℝ n
+    succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+      n fcₙ≤-ε/2 =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          ( seq-intermediate-value-theorem-ℝ n) -ℝ
+          ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
+          ~ℝ seq-intermediate-value-theorem-ℝ n -ℝ zero-ℝ
+            by
+              preserves-sim-diff-ℝ
+                ( refl-sim-ℝ _)
+                ( is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                  ( n)
+                  ( fcₙ≤-ε/2))
+          ~ℝ seq-intermediate-value-theorem-ℝ n
+            by sim-eq-ℝ (right-unit-law-diff-ℝ _))
 ```
 
 ### The key lemma
@@ -321,16 +720,16 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
           ( abs-ℝ
             ( map-pointwise-continuous-map-ℝ
               ( f)
-              ( sequence-intermediate-value-theorem-ℝ n)))
+              ( seq-intermediate-value-theorem-ℝ n)))
           ( real-ℚ⁺ ε)))) ∨
     ( ( is-negative-prop-ℝ
         ( map-pointwise-continuous-map-ℝ
           ( f)
-          ( lower-bound-sequence-intermediate-value-theorem-ℝ m))) ∧
+          ( lower-bound-seq-intermediate-value-theorem-ℝ m))) ∧
       ( is-positive-prop-ℝ
         ( map-pointwise-continuous-map-ℝ
           ( f)
-          ( upper-bound-sequence-intermediate-value-theorem-ℝ m))))
+          ( upper-bound-seq-intermediate-value-theorem-ℝ m))))
 
   abstract
     lemma-intermediate-value-theorem-ℝ :
@@ -338,13 +737,14 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
     lemma-intermediate-value-theorem-ℝ 0 = inr-disjunction (fa<0 , 0<fb)
     lemma-intermediate-value-theorem-ℝ (succ-ℕ m) =
       let
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
         motive = lemma-prop-intermediate-value-theorem-ℝ (succ-ℕ m)
         ε' = one-half-ℚ⁺ *ℚ⁺ ε
         ε'<ε = le-left-mul-less-than-one-ℚ⁺ one-half-ℚ⁺ le-one-half-one-ℚ ε
         fcₘ =
           map-pointwise-continuous-map-ℝ
             ( f)
-            ( sequence-intermediate-value-theorem-ℝ m)
+            ( seq-intermediate-value-theorem-ℝ m)
       in
         elim-disjunction
           ( motive)
@@ -360,18 +760,24 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 elim-disjunction
                   ( motive)
                   ( λ ε'<fcₘ →
-                    let
-                      dₘ=1 :
-                        sim-ℝ
-                          ( pr1
-                            ( interpolation-sequence-intermediate-value-theorem-ℝ
-                              ( m)))
-                          ( one-ℝ)
-                      dₘ=1 = {!   !}
-                    in
-                      inr-disjunction
-                        ( {!   !} ,
-                          {!   !}))
+                    inr-disjunction
+                      ( inv-tr
+                          ( ( is-negative-ℝ) ∘
+                            ( map-pointwise-continuous-map-ℝ f))
+                          ( eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                            ( m)
+                            ( leq-le-ℝ ε'<fcₘ))
+                          ( faₘ<0) ,
+                        inv-tr
+                          ( ( is-positive-ℝ) ∘
+                            ( map-pointwise-continuous-map-ℝ f))
+                          ( succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                            ( m)
+                            ( leq-le-ℝ ε'<fcₘ))
+                          ( is-positive-le-ℝ⁺
+                            ( positive-real-ℚ⁺ ε')
+                            ( _)
+                            ( ε'<fcₘ))))
                   ( λ fcₘ<ε →
                     inl-disjunction
                       ( intro-exists
@@ -387,8 +793,23 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                     ( preserves-le-real-ℚ ε'<ε)))
               ( λ fcₘ<-ε' →
                 inr-disjunction
-                  ( {!   !} ,
-                    {!   !}))
+                  ( inv-tr
+                      ( ( is-negative-ℝ) ∘
+                        ( map-pointwise-continuous-map-ℝ f))
+                      ( succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                        ( m)
+                        ( leq-le-ℝ fcₘ<-ε'))
+                      ( is-negative-le-real-ℝ⁻
+                        ( fcₘ)
+                        ( neg-ℝ⁺ (positive-real-ℚ⁺ ε'))
+                        ( fcₘ<-ε')) ,
+                    inv-tr
+                      ( ( is-positive-ℝ) ∘
+                        ( map-pointwise-continuous-map-ℝ f))
+                      ( eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                        ( m)
+                        ( leq-le-ℝ fcₘ<-ε'))
+                      ( 0<fbₘ)))
               ( cotransitive-le-ℝ
                 ( neg-ℝ (real-ℚ⁺ ε))
                 ( neg-ℝ (real-ℚ⁺ ε'))
@@ -416,41 +837,218 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
               leq-prop-ℝ
                 ( abs-ℝ (map-pointwise-continuous-map-ℝ f c))
                 ( real-ℚ⁺ ε))
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open do-syntax-trunc-Prop motive
       in do
         (μf , is-mod-μf) ←
           is-pointwise-continuous-map-pointwise-continuous-map-ℝ
             ( f)
-            ( lim-cauchy-sequence-intermediate-value-theorem-ℝ)
-        let δ = one-half-ℚ⁺ *ℚ⁺ μf ε
+            ( lim-seq-intermediate-value-theorem-ℝ)
+        let (δ₁ , δ₂ , δ₁+δ₂=δ) = split-ℚ⁺ (μf ε)
         (μseq , is-mod-μseq) ←
-          is-limit-lim-cauchy-sequence-ℝ
-            ( cauchy-sequence-intermediate-value-theorem-ℝ)
-        (m₁ , ½ᵐ<δ) ←
-          arbitrarily-small-power-le-one-ℚ⁺
-            ( one-half-ℚ⁺)
-            ( δ)
-            ( le-one-half-one-ℚ)
+          is-limit-lim-seq-intermediate-value-theorem-ℝ
+        (μba , is-mod-μba) ← is-zero-limit-⟨b-a⟩/2^1+
         let
-          m₂ = μseq δ
-          m = max-ℕ m₁ m₂
+          m = max-ℕ (μseq δ₁) (μba δ₂)
+          ⟨b-a⟩/2^¹⁺ᵐ≤δ₂ =
+            chain-of-inequalities
+              real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
+              ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m) -ℝ zero-ℝ
+                by leq-eq-ℝ (inv (right-unit-law-diff-ℝ _))
+              ≤ dist-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)) zero-ℝ
+                by leq-abs-ℝ _
+              ≤ dist-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)) (raise-zero-ℝ l)
+                by
+                  leq-sim-ℝ
+                    ( preserves-dist-right-sim-ℝ (sim-raise-ℝ l zero-ℝ))
+              ≤ real-ℚ⁺ δ₂
+                by
+                  leq-dist-neighborhood-ℝ
+                    ( δ₂)
+                    ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                    ( raise-zero-ℝ l)
+                    ( is-mod-μba
+                      ( δ₂)
+                      ( m)
+                      ( right-leq-max-ℕ (μseq δ₁) (μba δ₂)))
+          Nδ₂cₘbₘ :
+            neighborhood-ℝ
+              ( l)
+              ( δ₂)
+              ( seq-intermediate-value-theorem-ℝ m)
+              ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+          Nδ₂cₘbₘ =
+            neighborhood-dist-ℝ
+              ( δ₂)
+              ( seq-intermediate-value-theorem-ℝ m)
+              ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+              ( chain-of-inequalities
+                dist-ℝ
+                  ( seq-intermediate-value-theorem-ℝ m)
+                  ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+                ≤ dist-ℝ
+                    ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+                    ( seq-intermediate-value-theorem-ℝ m)
+                  by leq-eq-ℝ (commutative-dist-ℝ _ _)
+                ≤ abs-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                  by
+                    leq-eq-ℝ
+                      ( ap
+                        ( abs-ℝ)
+                        ( diff-upper-bound-seq-intermediate-value-theorem-ℝ m))
+                ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
+                  by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ real-ℚ⁺ δ₂
+                  by ⟨b-a⟩/2^¹⁺ᵐ≤δ₂)
+          Nδ₂cₘaₘ :
+            neighborhood-ℝ
+              ( l)
+              ( δ₂)
+              ( seq-intermediate-value-theorem-ℝ m)
+              ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+          Nδ₂cₘaₘ =
+            neighborhood-dist-ℝ
+              ( δ₂)
+              ( seq-intermediate-value-theorem-ℝ m)
+              ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+              ( chain-of-inequalities
+                dist-ℝ
+                  ( seq-intermediate-value-theorem-ℝ m)
+                  ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+                ≤ abs-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                  by
+                    leq-eq-ℝ
+                      ( ap
+                        ( abs-ℝ)
+                        ( diff-lower-bound-seq-intermediate-value-theorem-ℝ m))
+                ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
+                  by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ real-ℚ⁺ δ₂
+                  by ⟨b-a⟩/2^¹⁺ᵐ≤δ₂)
+          Nδ₁ccₘ :
+            neighborhood-ℝ l
+              ( δ₁)
+              ( lim-seq-intermediate-value-theorem-ℝ)
+              ( seq-intermediate-value-theorem-ℝ m)
+          Nδ₁ccₘ =
+            is-symmetric-neighborhood-ℝ
+              ( δ₁)
+              ( seq-intermediate-value-theorem-ℝ m)
+              ( lim-seq-intermediate-value-theorem-ℝ)
+              ( is-mod-μseq
+                ( δ₁)
+                ( m)
+                ( left-leq-max-ℕ (μseq δ₁) (μba δ₂)))
+          Nμfεcbₘ :
+            neighborhood-ℝ
+              ( l)
+              ( μf ε)
+              ( lim-seq-intermediate-value-theorem-ℝ)
+              ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+          Nμfεcbₘ =
+            tr
+              ( λ θ →
+                neighborhood-ℝ l
+                  ( θ)
+                  ( lim-seq-intermediate-value-theorem-ℝ)
+                  ( upper-bound-seq-intermediate-value-theorem-ℝ m))
+              ( δ₁+δ₂=δ)
+              ( is-triangular-neighborhood-ℝ
+                ( lim-seq-intermediate-value-theorem-ℝ)
+                ( seq-intermediate-value-theorem-ℝ m)
+                ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+                ( δ₁)
+                ( δ₂)
+                ( Nδ₂cₘbₘ)
+                ( Nδ₁ccₘ))
+          Nμfεcaₘ :
+            neighborhood-ℝ
+              ( l)
+              ( μf ε)
+              ( lim-seq-intermediate-value-theorem-ℝ)
+              ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+          Nμfεcaₘ =
+            tr
+              ( λ θ →
+                neighborhood-ℝ l
+                  ( θ)
+                  ( lim-seq-intermediate-value-theorem-ℝ)
+                  ( lower-bound-seq-intermediate-value-theorem-ℝ m))
+              ( δ₁+δ₂=δ)
+              ( is-triangular-neighborhood-ℝ
+                ( lim-seq-intermediate-value-theorem-ℝ)
+                ( seq-intermediate-value-theorem-ℝ m)
+                ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+                ( δ₁)
+                ( δ₂)
+                ( Nδ₂cₘaₘ)
+                ( Nδ₁ccₘ))
         elim-disjunction
           ( motive)
           ( λ ∃n:|cₙ|≤ε → do
             (n , n≤m , |cₙ|≤ε) ← ∃n:|cₙ|≤ε
             intro-exists
-              ( sequence-intermediate-value-theorem-ℝ n ,
-                lower-bound-of-sequence-intermediate-value-theorem-ℝ n ,
-                upper-bound-of-sequence-intermediate-value-theorem-ℝ n)
+              ( seq-intermediate-value-theorem-ℝ n ,
+                lower-bound-of-seq-intermediate-value-theorem-ℝ n ,
+                upper-bound-of-seq-intermediate-value-theorem-ℝ n)
               ( |cₙ|≤ε))
           ( λ (faₘ<0 , 0<fbₘ) →
             intro-exists
-              ( lim-cauchy-sequence-intermediate-value-theorem-ℝ ,
-                lower-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ ,
-                upper-bound-lim-cauchy-sequence-intermediate-value-theorem-ℝ)
+              ( lim-seq-intermediate-value-theorem-ℝ ,
+                lower-bound-lim-seq-intermediate-value-theorem-ℝ ,
+                upper-bound-lim-seq-intermediate-value-theorem-ℝ)
               ( leq-abs-leq-leq-neg-ℝ'
-                {!   !}
-                {!   !}))
+                ( chain-of-inequalities
+                  map-pointwise-continuous-map-ℝ
+                    ( f)
+                    ( lim-seq-intermediate-value-theorem-ℝ)
+                  ≤ ( map-pointwise-continuous-map-ℝ
+                      ( f)
+                      ( lower-bound-seq-intermediate-value-theorem-ℝ m)) +ℝ
+                    ( real-ℚ⁺ ε)
+                    by
+                      left-leq-real-bound-neighborhood-ℝ
+                        ( ε)
+                        ( map-pointwise-continuous-map-ℝ
+                          ( f)
+                          ( lim-seq-intermediate-value-theorem-ℝ))
+                        ( map-pointwise-continuous-map-ℝ
+                          ( f)
+                          ( lower-bound-seq-intermediate-value-theorem-ℝ m))
+                        ( is-mod-μf
+                          ( ε)
+                          ( lower-bound-seq-intermediate-value-theorem-ℝ m)
+                          ( Nμfεcaₘ))
+                  ≤ zero-ℝ +ℝ real-ℚ⁺ ε
+                    by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ faₘ<0)
+                  ≤ real-ℚ⁺ ε
+                    by leq-eq-ℝ (left-unit-law-add-ℝ _))
+                ( chain-of-inequalities
+                  neg-ℝ (real-ℚ⁺ ε)
+                  ≤ zero-ℝ -ℝ real-ℚ⁺ ε
+                    by leq-eq-ℝ (inv (left-unit-law-add-ℝ _))
+                  ≤ ( map-pointwise-continuous-map-ℝ
+                      ( f)
+                      ( upper-bound-seq-intermediate-value-theorem-ℝ m)) -ℝ
+                    ( real-ℚ⁺ ε)
+                    by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ 0<fbₘ)
+                  ≤ map-pointwise-continuous-map-ℝ
+                      ( f)
+                      ( lim-seq-intermediate-value-theorem-ℝ)
+                    by
+                      leq-transpose-right-add-ℝ _ _ _
+                        ( right-leq-real-bound-neighborhood-ℝ
+                          ( ε)
+                          ( map-pointwise-continuous-map-ℝ
+                            ( f)
+                            ( lim-seq-intermediate-value-theorem-ℝ))
+                          ( map-pointwise-continuous-map-ℝ
+                            ( f)
+                            ( upper-bound-seq-intermediate-value-theorem-ℝ m))
+                          ( is-mod-μf
+                            ( ε)
+                            ( upper-bound-seq-intermediate-value-theorem-ℝ m)
+                            ( Nμfεcbₘ))))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```
 

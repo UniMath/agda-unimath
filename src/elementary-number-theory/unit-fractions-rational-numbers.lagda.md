@@ -108,6 +108,16 @@ abstract
   twice-one-half-ℚ =
     ( inv (left-mul-rational-nat-ℚ 2 one-half-ℚ)) ∙
     ( ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ two-ℕ⁺)))
+
+  twice-left-mul-one-half-ℚ :
+    (q : ℚ) → (one-half-ℚ *ℚ q) +ℚ (one-half-ℚ *ℚ q) ＝ q
+  twice-left-mul-one-half-ℚ q =
+    equational-reasoning
+    one-half-ℚ *ℚ q +ℚ one-half-ℚ *ℚ q
+    ＝ rational-ℕ 2 *ℚ (one-half-ℚ *ℚ q)
+      by inv (left-mul-rational-nat-ℚ 2 _)
+    ＝ q
+      by is-section-left-div-ℚ⁺ two-ℚ⁺ q
 ```
 
 ## Properties

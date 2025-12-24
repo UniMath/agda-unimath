@@ -21,6 +21,8 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
@@ -107,3 +109,61 @@ module _
 ```
 
 ### `y - binary-mean-ℝ x y = binary-mean-ℝ y (neg-ℝ x)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    diff-right-binary-mean-ℝ :
+      y -ℝ binary-mean-ℝ x y ＝ binary-mean-ℝ y (neg-ℝ x)
+    diff-right-binary-mean-ℝ =
+      equational-reasoning
+      y -ℝ binary-mean-ℝ x y
+      ＝
+        ( one-half-ℝ *ℝ y +ℝ one-half-ℝ *ℝ y) -ℝ
+        ( one-half-ℝ *ℝ x +ℝ one-half-ℝ *ℝ y)
+        by
+          ap-diff-ℝ
+            ( inv (twice-left-mul-one-half-ℝ y))
+            ( left-distributive-mul-add-ℝ one-half-ℝ x y)
+      ＝ one-half-ℝ *ℝ y -ℝ one-half-ℝ *ℝ x
+        by eq-sim-ℝ (diff-add-ℝ _ _ _)
+      ＝ one-half-ℝ *ℝ (y -ℝ x)
+        by inv (left-distributive-mul-diff-ℝ one-half-ℝ y x)
+```
+
+### `binary-mean-ℝ x y -ℝ x = binary-mean-ℝ y (neg-ℝ x)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    diff-left-binary-mean-ℝ :
+      binary-mean-ℝ x y -ℝ x ＝ binary-mean-ℝ y (neg-ℝ x)
+    diff-left-binary-mean-ℝ =
+      equational-reasoning
+      binary-mean-ℝ x y -ℝ x
+      ＝
+        ( one-half-ℝ *ℝ x +ℝ one-half-ℝ *ℝ y) -ℝ
+        ( one-half-ℝ *ℝ x +ℝ one-half-ℝ *ℝ x)
+        by
+          ap-diff-ℝ
+            ( left-distributive-mul-add-ℝ one-half-ℝ x y)
+            ( inv (twice-left-mul-one-half-ℝ x))
+      ＝
+        ( one-half-ℝ *ℝ y +ℝ one-half-ℝ *ℝ x) -ℝ
+        ( one-half-ℝ *ℝ x +ℝ one-half-ℝ *ℝ x)
+        by ap-diff-ℝ (commutative-add-ℝ _ _) refl
+      ＝ one-half-ℝ *ℝ y -ℝ one-half-ℝ *ℝ x
+        by eq-sim-ℝ (diff-add-ℝ _ _ _)
+      ＝ one-half-ℝ *ℝ (y -ℝ x)
+        by inv (left-distributive-mul-diff-ℝ one-half-ℝ y x)
+```

@@ -193,6 +193,18 @@ module _
 
 ```agda
 abstract
+  is-section-left-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ q) ＝ q
+  is-section-left-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      p *ℚ (rational-inv-ℚ⁺ p⁺ *ℚ q)
+      ＝ (p *ℚ rational-inv-ℚ⁺ p⁺) *ℚ q
+        by inv (associative-mul-ℚ _ _ _)
+      ＝ one-ℚ *ℚ q
+        by ap-mul-ℚ (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ p⁺)) refl
+      ＝ q
+        by left-unit-law-mul-ℚ q
+
   is-section-right-div-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → (q *ℚ rational-inv-ℚ⁺ p) *ℚ rational-ℚ⁺ p ＝ q
   is-section-right-div-ℚ⁺ p⁺@(p , _) q =
