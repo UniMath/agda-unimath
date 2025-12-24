@@ -17,7 +17,7 @@ module analysis.classical-intermediate-value-theorem where
 ## Idea
 
 The
-{{#concept "classical intermediate value theorem" Agda=classical-intermediate-value-theorem-LEM-ℝ}}
+{{#concept "classical intermediate value theorem" WDID=Q245098 WD="intermediate value theorem"}}
 states that for a
 [pointwise continuous function](real-numbers.pointwise-continuous-functions-real-numbers.md)
 `f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
