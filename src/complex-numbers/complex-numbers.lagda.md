@@ -67,14 +67,14 @@ eq-ℂ = eq-pair
 
 ```agda
 complex-ℝ : {l : Level} → ℝ l → ℂ l
-complex-ℝ {l} a = (a , raise-ℝ l zero-ℝ)
+complex-ℝ {l} a = (a , raise-zero-ℝ l)
 ```
 
 ### The imaginary embedding of real numbers into the complex numbers
 
 ```agda
 im-complex-ℝ : {l : Level} → ℝ l → ℂ l
-im-complex-ℝ {l} a = (raise-ℝ l zero-ℝ , a)
+im-complex-ℝ {l} a = (raise-zero-ℝ l , a)
 ```
 
 ### The canonical embedding of Gaussian integers into the complex numbers
