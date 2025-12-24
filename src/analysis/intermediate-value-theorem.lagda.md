@@ -842,7 +842,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
         (μba , is-mod-μba) ← is-zero-limit-⟨b-a⟩/2^1+
         let
           m = max-ℕ (μseq δ₁) (μba δ₂)
-          ⟨b-a⟩/2^¹⁺ᵐ≤δ₂ =
+          ⟨b-a⟩/2¹⁺ᵐ≤δ₂ =
             chain-of-inequalities
               real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
               ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m) -ℝ zero-ℝ
@@ -891,7 +891,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
                   by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
                 ≤ real-ℚ⁺ δ₂
-                  by ⟨b-a⟩/2^¹⁺ᵐ≤δ₂)
+                  by ⟨b-a⟩/2¹⁺ᵐ≤δ₂)
           Nδ₂cₘaₘ :
             neighborhood-ℝ
               ( l)
@@ -916,7 +916,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
                   by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
                 ≤ real-ℚ⁺ δ₂
-                  by ⟨b-a⟩/2^¹⁺ᵐ≤δ₂)
+                  by ⟨b-a⟩/2¹⁺ᵐ≤δ₂)
           Nδ₁ccₘ :
             neighborhood-ℝ l
               ( δ₁)
