@@ -210,13 +210,13 @@ module _
         (n : ℕ) →
         ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
           ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
-        ( real-ℝ⁰⁺ (⟨b-a⟩/2^ n))
+        ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ n one-half-ℚ⁺))
 
       diff-upper-bound-seq-intermediate-value-theorem-ℝ :
         (n : ℕ) →
         ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
           ( seq-intermediate-value-theorem-ℝ n)) ＝
-        ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+        ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
 
       diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ 0 =
         inv (right-unit-law-mul-ℝ (b -ℝ a))
@@ -237,9 +237,7 @@ module _
               ( upper-bound-seq-intermediate-value-theorem-ℝ n)
               ( neg-ℝ (lower-bound-seq-intermediate-value-theorem-ℝ n))
             by diff-right-binary-mean-ℝ _ _
-          ＝
-            ( one-half-ℝ) *ℝ
-            ( (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ n one-half-ℚ⁺))
+          ＝ one-half-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^ n)
             by
               ap-mul-ℝ
                 ( refl {x = one-half-ℝ})
@@ -251,7 +249,7 @@ module _
             by left-swap-mul-ℝ one-half-ℝ (b -ℝ a) _
           ＝ (b -ℝ a) *ℝ real-ℚ (one-half-ℚ *ℚ rational-power-ℚ⁺ n one-half-ℚ⁺)
             by ap-mul-ℝ refl (mul-real-ℚ _ _)
-          ＝ (b -ℝ a) *ℝ real-ℚ (rational-power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺)
+          ＝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n)
             by ap-mul-ℝ refl (ap real-ℚ⁺ (inv (power-succ-ℚ⁺' n one-half-ℚ⁺)))
 
   abstract
@@ -259,7 +257,7 @@ module _
       (n : ℕ) →
       ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
         ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
-      ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+      ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
     diff-lower-bound-seq-intermediate-value-theorem-ℝ n =
       ( diff-left-binary-mean-ℝ _ _) ∙
       ( inv (diff-right-binary-mean-ℝ _ _)) ∙

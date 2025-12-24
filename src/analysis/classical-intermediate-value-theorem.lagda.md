@@ -9,24 +9,7 @@ module analysis.classical-intermediate-value-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.intermediate-value-theorem
 
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.law-of-excluded-middle
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
-
-open import real-numbers.closed-intervals-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.negative-real-numbers
-open import real-numbers.pointwise-continuous-functions-real-numbers
-open import real-numbers.positive-real-numbers
-open import real-numbers.rational-real-numbers
-open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 ```
 
 </details>
