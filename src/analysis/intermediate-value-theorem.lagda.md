@@ -90,6 +90,12 @@ there exists a `c` with `a ≤ c ≤ b` such that the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of `f c` is at
 most `ε`.
 
+The
+[classical intermediate value theorem](analysis.classical-intermediate-value-theorem.md)
+is the [79th](literature.100-theorems.md#79) theorem on
+[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ## Proof
 
 This proof is adapted from {{#cite Frank2020}}.
@@ -1039,10 +1045,6 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                             ( Nμfεcbₘ))))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```
-
-## See also
-
-- [The classical intermediate value theorem](analysis.classical-intermediate-value-theorem.md)
 
 ## External links
 
