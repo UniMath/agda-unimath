@@ -93,5 +93,5 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenvectors of linear transformations on left modules over commutative rings](spectral-theory.eigenvalues-eigenvectors-linear-transformations-left-modules-commutative-rings.md)
+- [Eigenvalues and eigenvectors of linear transformations on left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-commutative-rings.md)
 - [Eigenvalues and eigenvectors of linear transformations on vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-transformations-vector-spaces.md)

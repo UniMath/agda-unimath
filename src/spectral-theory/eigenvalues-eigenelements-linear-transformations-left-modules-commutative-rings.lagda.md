@@ -26,7 +26,7 @@ open import spectral-theory.eigenvalues-eigenelements-linear-transformations-lef
 Given a
 [linear transformation](linear-algebra.linear-transformations-left-modules-commutative-rings.md)
 `f` on a [left module](linear-algebra.left-modules-commutative-rings.md) `M`
-over a [commutative ring](commutative-algebra.commutative-ring.md) `R`, an
+over a [commutative ring](commutative-algebra.commutative-rings.md) `R`, an
 element `v : M` is an
 {{#concept "eigenelement" Disambiguation="of a linear transformation of a left module over a commutative ring"}}
 of `f` with

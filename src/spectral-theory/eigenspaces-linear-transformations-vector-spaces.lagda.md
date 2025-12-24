@@ -30,7 +30,7 @@ Given a
 {{#concept "eigenspace" WDID=Q1303223 WD="eigenspace" Disambiguation="of a linear transformation on a vector space" Agda=eigenspace-linear-transform-Vector-Space}}
 of `c : F` is the [subspace](linear-algebra.subspaces-vector-spaces.md) of `V`
 of vectors with
-[eigenvalue](spectral-theory.eigenvalues-eigenvectors-linear-transformations-left-modules-vector-spaces.md)
+[eigenvalue](spectral-theory.eigenvalues-eigenvectors-linear-transformations-vector-spaces.md)
 `c`.
 
 ## Definition
