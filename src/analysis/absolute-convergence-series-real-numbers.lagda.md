@@ -28,7 +28,7 @@ open import real-numbers.absolute-value-real-numbers
 
 A [series](analysis.series-real-numbers.md) `Σ aₙ` of
 [real numbers](real-numbers.dedekind-real-numbers.md) is said to
-{{#concept "absolutely converge" WDID=Q332465 WD="absolute convergence" Agda=is-absolutely-convergent-prop-series-ℝ Disambiguation="series of real numbers"}}
+{{#concept "absolutely converge" Agda=is-absolutely-convergent-prop-series-ℝ Disambiguation="series of real numbers"}}
 if the series of absolute values `Σ |aₙ|`
 [converges](analysis.convergent-series-real-numbers.md).
 
