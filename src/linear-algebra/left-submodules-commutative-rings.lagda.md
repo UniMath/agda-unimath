@@ -22,7 +22,7 @@ open import linear-algebra.subsets-left-modules-commutative-rings
 ## Idea
 
 A
-{{#concept "left submodule" Disambiguation="of a left module over a commutative ring" Agda=is-left-submodule-prop-Ring Agda=left-submodule-Commutative-Ring}}
+{{#concept "left submodule" Disambiguation="of a left module over a commutative ring" Agda=left-submodule-Commutative-Ring}}
 of a [left module](linear-algebra.left-modules-commutative-rings.md) `M` over a
 [commutative ring](commutative-algebra.commutative-rings.md) `R` is a
 [subset](linear-algebra.subsets-left-modules-commutative-rings.md) of `M` that

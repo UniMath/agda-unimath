@@ -8,8 +8,8 @@ module linear-algebra.subsets-left-modules-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import foundation.propositions
 
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
