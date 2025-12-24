@@ -15,9 +15,9 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.unit-fractions-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions

@@ -33,11 +33,11 @@ open import real-numbers.binary-minimum-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.similarity-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.short-function-binary-maximum-real-numbers
 open import real-numbers.short-function-binary-minimum-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>

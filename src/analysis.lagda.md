@@ -4,6 +4,7 @@
 module analysis where
 
 open import analysis.additive-complete-metric-abelian-groups-real-banach-spaces public
+open import analysis.classical-intermediate-value-theorem public
 open import analysis.complete-metric-abelian-groups public
 open import analysis.convergent-series-complete-metric-abelian-groups public
 open import analysis.convergent-series-metric-abelian-groups public

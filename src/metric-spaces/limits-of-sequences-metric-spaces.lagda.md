@@ -30,13 +30,14 @@ open import foundation.universe-levels
 
 open import lists.sequences
 open import lists.subsequences
+
 open import logic.functoriality-existential-quantification
 
 open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.sequences-metric-spaces
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```

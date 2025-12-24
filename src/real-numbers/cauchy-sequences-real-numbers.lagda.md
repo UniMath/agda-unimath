@@ -9,37 +9,38 @@ module real-numbers.cauchy-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import lists.sequences
 
-open import elementary-number-theory.natural-numbers
-open import foundation.identity-types
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import metric-spaces.cartesian-products-metric-spaces
-open import real-numbers.inequalities-addition-and-subtraction-real-numbers
-open import real-numbers.rational-real-numbers
-open import order-theory.large-posets
-open import foundation.inhabited-types
-open import foundation.propositional-truncations
-open import real-numbers.difference-real-numbers
-open import real-numbers.addition-real-numbers
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 
+open import order-theory.large-posets
+
+open import real-numbers.addition-real-numbers
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
+open import real-numbers.decreasing-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.increasing-sequences-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-
 open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.inequality-real-numbers
+open import real-numbers.rational-real-numbers
 open import real-numbers.real-sequences-approximating-zero
-open import real-numbers.increasing-sequences-real-numbers
-open import real-numbers.decreasing-sequences-real-numbers
 ```
 
 </details>

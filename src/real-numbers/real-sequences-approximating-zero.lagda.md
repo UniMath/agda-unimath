@@ -18,11 +18,12 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.homotopies
-open import foundation.function-types
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -33,17 +34,16 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
 
-open import foundation.transport-along-identifications
-open import real-numbers.multiplication-real-numbers
 open import order-theory.large-posets
 
-open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers

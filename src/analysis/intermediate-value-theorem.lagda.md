@@ -9,50 +9,37 @@ module analysis.intermediate-value-theorem where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
-open import foundation.cartesian-product-types
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.binary-transport
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.identity-types
-open import elementary-number-theory.addition-positive-rational-numbers
-open import foundation.propositional-truncations
-open import real-numbers.absolute-value-real-numbers
-open import real-numbers.distance-real-numbers
-open import real-numbers.similarity-nonnegative-real-numbers
-open import group-theory.abelian-groups
-open import foundation.transport-along-identifications
-open import real-numbers.multiplication-positive-real-numbers
-open import foundation.propositions
-open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import real-numbers.raising-universe-levels-real-numbers
-open import foundation.action-on-identifications-functions
-open import real-numbers.metric-space-of-real-numbers
-open import real-numbers.real-sequences-approximating-zero
 
 open import lists.sequences
+open import lists.subsequences
 
 open import logic.functoriality-existential-quantification
 
-open import order-theory.decreasing-sequences-posets
 open import order-theory.large-posets
-open import order-theory.increasing-sequences-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
@@ -60,13 +47,15 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.binary-mean-real-numbers
 open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.closed-intervals-real-numbers
+open import real-numbers.decreasing-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.increasing-sequences-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
-open import lists.subsequences
 open import real-numbers.inequality-real-numbers
 open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
@@ -75,7 +64,10 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.real-sequences-approximating-zero
+open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
@@ -273,12 +265,10 @@ module _
 ```agda
   abstract
     is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ :
-      is-increasing-sequence-Poset
-        ( ℝ-Poset l)
+      is-increasing-sequence-ℝ
         ( lower-bound-seq-intermediate-value-theorem-ℝ)
     is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ =
-      is-increasing-leq-succ-sequence-Poset
-        ( ℝ-Poset l)
+      is-increasing-leq-succ-sequence-ℝ
         ( lower-bound-seq-intermediate-value-theorem-ℝ)
         ( λ n →
           let
@@ -317,12 +307,10 @@ module _
 ```agda
   abstract
     is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ :
-      is-decreasing-sequence-Poset
-        ( ℝ-Poset l)
+      is-decreasing-sequence-ℝ
         ( upper-bound-seq-intermediate-value-theorem-ℝ)
     is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ =
-      is-decreasing-leq-succ-sequence-Poset
-        ( ℝ-Poset l)
+      is-decreasing-leq-succ-sequence-ℝ
         ( upper-bound-seq-intermediate-value-theorem-ℝ)
         ( λ n →
           leq-diff-real-ℝ⁰⁺
@@ -490,8 +478,8 @@ module _
             ≤ one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε)
               by
                 preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-right-mul-ℝ⁺
-                    ( positive-real-ℚ⁺ (inv-ℚ⁺ ε))
+                  ( preserves-leq-right-mul-ℝ⁰⁺
+                    ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ ε))
                     ( ε/2≤fcₙ)))
 
     eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
@@ -613,8 +601,8 @@ module _
             ≤ one-half-ℝ +ℝ (neg-ℝ (real-ℚ⁺ ε') *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
               by
                 preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-right-mul-ℝ⁺
-                    ( positive-real-ℚ⁺ (inv-ℚ⁺ ε))
+                  ( preserves-leq-right-mul-ℝ⁰⁺
+                    ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ ε))
                     ( fcₙ≤-ε/2))
             ≤ one-half-ℝ -ℝ (real-ℚ⁺ ε' *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
               by leq-eq-ℝ (ap-add-ℝ refl (left-negative-law-mul-ℝ _ _))
@@ -1051,6 +1039,10 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                             ( Nμfεcbₘ))))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```
+
+## See also
+
+- [The classical intermediate value theorem](analysis.classical-intermediate-value-theorem.md)
 
 ## External links
 
