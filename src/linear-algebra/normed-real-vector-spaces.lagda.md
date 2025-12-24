@@ -396,11 +396,11 @@ module _
   where
 
   abstract
-    is-zero-norm-zero-Normed-ℝ-Vector-Space :
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space :
       map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
       raise-ℝ l1 zero-ℝ
-    is-zero-norm-zero-Normed-ℝ-Vector-Space =
-      is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space =
+      eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
 ```
 

@@ -70,7 +70,7 @@ module _
           ( sum-fin-sequence-type-Normed-ℝ-Vector-Space V n σ))
         ( sum-fin-sequence-ℝ n (map-norm-Normed-ℝ-Vector-Space V ∘ σ))
     triangle-inequality-norm-sum-fin-sequence-type-Normed-ℝ-Vector-Space 0 σ =
-      leq-eq-ℝ (is-zero-norm-zero-Normed-ℝ-Vector-Space V)
+      leq-eq-ℝ (eq-zero-norm-zero-Normed-ℝ-Vector-Space V)
     triangle-inequality-norm-sum-fin-sequence-type-Normed-ℝ-Vector-Space
       (succ-ℕ n) σ =
       let

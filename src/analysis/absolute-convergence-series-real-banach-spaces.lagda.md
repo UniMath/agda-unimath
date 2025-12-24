@@ -105,7 +105,7 @@ module _
         ≤ dist-ℝ-Banach-Space V
             ( partial-sum-series-ℝ-Banach-Space V σ (με +ℕ k))
             ( partial-sum-series-ℝ-Banach-Space V σ με)
-          by leq-eq-ℝ (commutative-dist-ℝ-Banach-Space V _ _)
+          by leq-eq-ℝ (symmetric-dist-ℝ-Banach-Space V _ _)
         ≤ map-norm-ℝ-Banach-Space V
             ( partial-sum-series-ℝ-Banach-Space V
               ( drop-series-ℝ-Banach-Space V με σ) k)
