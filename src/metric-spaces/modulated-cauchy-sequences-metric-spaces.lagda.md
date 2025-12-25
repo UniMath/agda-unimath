@@ -39,7 +39,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 A
-{{#concept "modulated Cauchy sequence" Disambiguation="in a metric space" Agda=cauchy-modulus-sequence-Metric-Space}}
+{{#concept "modulated Cauchy sequence" Disambiguation="in a metric space" Agda=modulated-cauchy-sequence-Metric-Space}}
 `x` in a [metric space](metric-spaces.metric-spaces.md) is a mapping from the
 [natural numbers](elementary-number-theory.natural-numbers.md) to the underlying
 type of the metric space such that for any

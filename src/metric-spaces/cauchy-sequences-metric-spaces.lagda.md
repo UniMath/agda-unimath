@@ -30,7 +30,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 A
-{{#concept "Cauchy sequence" Disambiguation="in a metric space" WD="cauchy sequence" WDID=Q217847 Agda=cauchy-modulus-sequence-Metric-Space}}
+{{#concept "Cauchy sequence" Disambiguation="in a metric space" WD="cauchy sequence" WDID=Q217847 Agda=cauchy-sequence-Metric-Space}}
 `x` in a [metric space](metric-spaces.metric-spaces.md) `X` is a
 [sequence](metric-spaces.sequences-metric-spaces.md) of elements of `X` such
 that there [exists](foundation.propositional-truncations.md) a
