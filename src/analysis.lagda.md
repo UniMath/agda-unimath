@@ -17,6 +17,7 @@ open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
 open import analysis.ratio-test-series-real-banach-spaces public
 open import analysis.ratio-test-series-real-numbers public
+open import analysis.nonnegative-series-real-numbers public
 open import analysis.series-complete-metric-abelian-groups public
 open import analysis.series-metric-abelian-groups public
 open import analysis.series-real-banach-spaces public

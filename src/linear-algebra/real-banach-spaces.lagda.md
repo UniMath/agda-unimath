@@ -127,11 +127,11 @@ module _
   dist-ℝ-Banach-Space =
     dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
-  commutative-dist-ℝ-Banach-Space :
+  symmetric-dist-ℝ-Banach-Space :
     (u v : type-ℝ-Banach-Space) →
     dist-ℝ-Banach-Space u v ＝ dist-ℝ-Banach-Space v u
-  commutative-dist-ℝ-Banach-Space =
-    commutative-dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+  symmetric-dist-ℝ-Banach-Space =
+    symmetric-dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   diff-ℝ-Banach-Space :
     type-ℝ-Banach-Space → type-ℝ-Banach-Space → type-ℝ-Banach-Space

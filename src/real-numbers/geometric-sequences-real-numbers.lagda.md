@@ -219,7 +219,7 @@ module _
                           ( refl)))))
           ( equational-reasoning
             ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)) *ℝ
-            ( one-ℝ -ℝ raise-ℝ l zero-ℝ)
+            ( one-ℝ -ℝ raise-zero-ℝ l)
             ＝
               ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)) *ℝ
               ( one-ℝ -ℝ zero-ℝ)
@@ -241,7 +241,7 @@ module _
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))
               ( uniformly-continuous-diff-ℝ one-ℝ))
             ( λ n → power-ℝ n r)
-            ( raise-ℝ l zero-ℝ)
+            ( raise-zero-ℝ l)
             ( is-zero-lim-power-le-one-abs-ℝ r |r|<1))
 
   convergent-standard-geometric-series-ℝ :
