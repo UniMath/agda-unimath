@@ -49,7 +49,8 @@ To prove that a [series](analysis.series-real-numbers.md) `∑ aₙ` of
 show that [there exists](foundation.existential-quantification.md) a
 [nonnegative](real-numbers.nonnegative-real-numbers.md) real number `r`
 [less than](real-numbers.strict-inequality-real-numbers.md) 1 such that for all
-`n`, `|aₙ₊₁| ≤ r|aₙ|`.
+`n`, `|aₙ₊₁| ≤ r|aₙ|`. This condition is known as the
+{{#concept "ratio test" WDID=Q165638 WD="ratio test" Agda=is-convergent-ratio-test-series-ℝ}}.
 
 ## Definition
 
