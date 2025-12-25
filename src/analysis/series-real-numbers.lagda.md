@@ -21,10 +21,15 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import order-theory.increasing-sequences-posets
+
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-additive-group-of-real-numbers
+open import real-numbers.nonnegative-real-numbers
 ```
 
 </details>
@@ -53,6 +58,18 @@ partial-sum-series-ℝ {l} = partial-sum-series-Metric-Ab
 ```
 
 ## Properties
+
+### The series of absolute values
+
+```agda
+module _
+  {l : Level}
+  (σ : series-ℝ l)
+  where
+
+  map-abs-series-ℝ : series-ℝ l
+  map-abs-series-ℝ = series-terms-ℝ (abs-ℝ ∘ term-series-ℝ σ)
+```
 
 ### Dropping terms from a series
 

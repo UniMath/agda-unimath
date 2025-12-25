@@ -11,9 +11,12 @@ open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
 open import analysis.series-real-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -52,6 +55,28 @@ module _
 
 convergent-series-ℝ : (l : Level) → UU (lsuc l)
 convergent-series-ℝ l = type-subtype (is-convergent-prop-series-ℝ {l})
+
+module _
+  {l : Level}
+  (σ : convergent-series-ℝ l)
+  where
+
+  series-convergent-series-ℝ : series-ℝ l
+  series-convergent-series-ℝ = pr1 σ
+
+  term-convergent-series-ℝ : sequence (ℝ l)
+  term-convergent-series-ℝ = term-series-ℝ series-convergent-series-ℝ
+
+  sum-convergent-series-ℝ : ℝ l
+  sum-convergent-series-ℝ = pr1 (pr2 σ)
+
+  is-sum-sum-convergent-series-ℝ :
+    is-sum-series-ℝ series-convergent-series-ℝ sum-convergent-series-ℝ
+  is-sum-sum-convergent-series-ℝ = pr2 (pr2 σ)
+
+  partial-sum-convergent-series-ℝ : sequence (ℝ l)
+  partial-sum-convergent-series-ℝ =
+    partial-sum-series-ℝ series-convergent-series-ℝ
 ```
 
 ## Properties

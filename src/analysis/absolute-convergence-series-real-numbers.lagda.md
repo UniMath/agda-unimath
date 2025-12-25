@@ -40,12 +40,9 @@ module _
   (σ : series-ℝ l)
   where
 
-  map-abs-series-ℝ : series-ℝ l
-  map-abs-series-ℝ = series-terms-ℝ (abs-ℝ ∘ term-series-ℝ σ)
-
   is-absolutely-convergent-prop-series-ℝ : Prop (lsuc l)
   is-absolutely-convergent-prop-series-ℝ =
-    is-convergent-prop-series-ℝ map-abs-series-ℝ
+    is-convergent-prop-series-ℝ (map-abs-series-ℝ σ)
 
   is-absolutely-convergent-series-ℝ : UU (lsuc l)
   is-absolutely-convergent-series-ℝ =

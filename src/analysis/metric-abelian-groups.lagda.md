@@ -113,6 +113,11 @@ module _
   commutative-add-Metric-Ab :
     (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
   commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
+
+  is-identity-right-conjugation-Metric-Ab :
+    (x y : type-Metric-Ab MG) → add-Metric-Ab x (diff-Metric-Ab y x) ＝ y
+  is-identity-right-conjugation-Metric-Ab =
+    is-identity-right-conjugation-Ab (ab-Metric-Ab MG)
 ```
 
 ### Metric properties of metric abelian groups
