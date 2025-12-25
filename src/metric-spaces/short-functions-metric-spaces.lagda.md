@@ -140,9 +140,9 @@ module _
     is-short-id-Pseudometric-Space
       ( pseudometric-Metric-Space A)
 
-  short-id-Metric-Space : short-function-Metric-Space A A
-  short-id-Metric-Space =
-    short-id-Pseudometric-Space (pseudometric-Metric-Space A)
+  id-short-function-Metric-Space : short-function-Metric-Space A A
+  id-short-function-Metric-Space =
+    id-short-function-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
 ### Equality of short functions between metric spaces is characterized by homotopy of their carrier maps
@@ -216,7 +216,7 @@ module _
 
   left-unit-law-comp-short-function-Metric-Space :
     ( comp-short-function-Metric-Space A B B
-      ( short-id-Metric-Space B)
+      ( id-short-function-Metric-Space B)
       ( f)) ＝
     ( f)
   left-unit-law-comp-short-function-Metric-Space =
@@ -228,7 +228,7 @@ module _
   right-unit-law-comp-short-function-Metric-Space :
     ( comp-short-function-Metric-Space A A B
       ( f)
-      ( short-id-Metric-Space A)) ＝
+      ( id-short-function-Metric-Space A)) ＝
     ( f)
   right-unit-law-comp-short-function-Metric-Space =
     right-unit-law-comp-short-function-Pseudometric-Space

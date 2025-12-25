@@ -33,6 +33,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
@@ -213,7 +214,7 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space :
+  preserves-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space :
     ( d : ℚ⁺)
     ( x y : type-bounded-distance-decomposition-Metric-Space A) →
     neighborhood-Metric-Space
@@ -224,7 +225,7 @@ module _
     neighborhood-Metric-Space A d
       ( map-equiv-bounded-distance-decomposition-Metric-Space A x)
       ( map-equiv-bounded-distance-decomposition-Metric-Space A y)
-  preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
+  preserves-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space
     d (X , x , x∈X) (Y , y , y∈Y) (X=Y , Nxy) =
     forward-implication
       ( lemma-iff-neighborhood-bounded-distance-decomposition-Metric-Space
@@ -237,7 +238,7 @@ module _
         ( y , y∈Y))
       ( Nxy)
 
-  reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space :
+  reflects-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space :
     ( d : ℚ⁺)
     ( x y : type-bounded-distance-decomposition-Metric-Space A) →
     neighborhood-Metric-Space A d
@@ -248,7 +249,7 @@ module _
       ( d)
       ( x)
       ( y)
-  reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
+  reflects-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space
     d (X , x , x∈X) (Y , y , y∈Y) Nxy =
     ( lemma-eq ,
       backward-implication
@@ -280,11 +281,11 @@ module _
       ( map-equiv-bounded-distance-decomposition-Metric-Space A)
   is-isometry-map-equiv-bounded-distance-decomposition-Metric-Space
     d x y =
-    ( ( preserves-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
+    ( ( preserves-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space
         ( d)
         ( x)
         ( y)) ,
-      ( reflects-neighborhood-map-equiv-bounded-distance-decomposition-Metric-Space
+      ( reflects-neighborhoods-map-equiv-bounded-distance-decomposition-Metric-Space
         ( d)
         ( x)
         ( y)))
@@ -342,7 +343,7 @@ module _
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space :
     cauchy-approximation-Metric-Space A
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space =
-    map-short-function-cauchy-approximation-Metric-Space
+    map-cauchy-approximation-short-function-Metric-Space
       ( subspace-bounded-distance-component-Metric-Space A X)
       ( A)
       ( short-inclusion-subspace-Metric-Space

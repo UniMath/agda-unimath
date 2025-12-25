@@ -56,7 +56,7 @@ module _
       ( Metric-Space l1 l2)
       ( set-short-function-Metric-Space)
       ( λ {A B C} → comp-short-function-Metric-Space A B C)
-      ( short-id-Metric-Space)
+      ( id-short-function-Metric-Space)
       ( λ {A B C D} → associative-comp-short-function-Metric-Space A B C D)
       ( λ {A B} → left-unit-law-comp-short-function-Metric-Space A B)
       ( λ {A B} → right-unit-law-comp-short-function-Metric-Space A B)
@@ -149,7 +149,7 @@ module _
         ( B)
         ( f)
         ( short-inverse))
-      ( short-id-Metric-Space B)
+      ( id-short-function-Metric-Space B)
       ( is-section-map-inv-is-equiv E)) ,
       ( eq-htpy-map-short-function-Metric-Space
         ( A)
@@ -160,7 +160,7 @@ module _
           ( A)
           ( short-inverse)
           ( f))
-        ( short-id-Metric-Space A)
+        ( id-short-function-Metric-Space A)
         ( is-retraction-map-inv-is-equiv E)))
       where
 
