@@ -8,6 +8,7 @@ module analysis.comparison-test-series-real-numbers where
 
 ```agda
 open import analysis.convergent-series-real-numbers
+open import analysis.nonnegative-series-real-numbers
 open import analysis.series-real-numbers
 
 open import elementary-number-theory.addition-natural-numbers
@@ -157,7 +158,7 @@ module _
                     ( neg-zero-ℝ)
                     ( neg-leq-ℝ
                       ( is-nonnegative-diff-leq-ℝ
-                        ( is-monotonic-partial-sum-is-nonnegative-term-series-ℝ
+                        ( is-increasing-partial-sum-is-nonnegative-term-series-ℝ
                           ( σ)
                           ( 0≤σₙ)
                           ( n)
