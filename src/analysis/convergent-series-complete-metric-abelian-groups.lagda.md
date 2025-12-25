@@ -68,18 +68,18 @@ module _
   (σ : series-Complete-Metric-Ab G)
   where
 
-  is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab :
+  is-convergent-cauchy-modulus-partial-sum-series-Complete-Metric-Ab :
     is-cauchy-sequence-Metric-Space
       ( metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ) →
     is-convergent-series-Complete-Metric-Ab G σ
-  is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab H =
+  is-convergent-cauchy-modulus-partial-sum-series-Complete-Metric-Ab H =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ , H)
 ```
 
-### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+### If a series converges, its partial sums are a Cauchy sequence
 
 ```agda
 module _
@@ -88,18 +88,13 @@ module _
   (σ : series-Complete-Metric-Ab G)
   where
 
-  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab :
-    is-convergent-series-Complete-Metric-Ab G σ →
-    is-inhabited
-      ( is-cauchy-sequence-Metric-Space
-        ( metric-space-Complete-Metric-Ab G)
-        ( partial-sum-series-Complete-Metric-Ab G σ))
-  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab
-    (lim , is-lim) =
-    map-is-inhabited
-      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+  abstract
+    is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab :
+      is-convergent-series-Complete-Metric-Ab G σ →
+      is-cauchy-sequence-Metric-Space
         ( metric-space-Complete-Metric-Ab G)
         ( partial-sum-series-Complete-Metric-Ab G σ)
-        ( lim))
-      ( is-lim)
+    is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab =
+      is-cauchy-has-limit-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Ab G)
 ```

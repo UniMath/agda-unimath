@@ -30,11 +30,12 @@ open import logic.functoriality-existential-quantification
 
 open import metric-spaces.apartness-located-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.closed-subsets-located-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.located-metric-spaces
+open import metric-spaces.modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
 
@@ -224,11 +225,11 @@ module _
     is-sequential-accumulation-point-is-accumulation-point-subset-Located-Metric-Space =
       map-exists
         ( _)
-        ( map-cauchy-sequence-cauchy-approximation-Metric-Space
+        ( seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
           ( subspace-Located-Metric-Space X S))
         ( λ a (a#x , lim-a=x) →
           ( ( λ n → a#x _) ,
-            is-limit-cauchy-sequence-cauchy-approximation-Metric-Space
+            is-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
               ( metric-space-Located-Metric-Space X)
               ( map-short-function-cauchy-approximation-Metric-Space
                 ( subspace-Located-Metric-Space X S)
@@ -265,10 +266,10 @@ module _
         (σ , σ#x , lim-σ=x) ← is-seq-acc-x
         μ@(mod-μ , is-mod-μ) ← lim-σ=x
         intro-exists
-          ( cauchy-approximation-cauchy-sequence-Metric-Space
+          ( cauchy-approximation-modulated-cauchy-sequence-Metric-Space
             ( subspace-Located-Metric-Space X S)
             ( σ ,
-              is-cauchy-has-limit-modulus-sequence-Metric-Space
+              has-cauchy-modulus-has-limit-modulus-sequence-Metric-Space
                 ( metric-space-Located-Metric-Space X)
                 ( pr1 ∘ σ)
                 ( x)

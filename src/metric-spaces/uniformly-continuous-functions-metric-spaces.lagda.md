@@ -187,6 +187,22 @@ module _
         ( f)))
 ```
 
+### Modulated uniformly continuous functions are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space l1 l2)
+  (B : Metric-Space l3 l4)
+  where
+
+  uniformly-continuous-modulated-ucont-map-Metric-Space :
+    modulated-ucont-map-Metric-Space A B →
+    uniformly-continuous-function-Metric-Space A B
+  uniformly-continuous-modulated-ucont-map-Metric-Space (f , μf) =
+    (f , unit-trunc-Prop μf)
+```
+
 ### Short maps are uniformly continuous
 
 ```agda

@@ -64,7 +64,7 @@ module _
     is-cauchy-sequence-ℝ (partial-sum-series-ℝ σ) →
     is-convergent-series-ℝ σ
   is-convergent-is-cauchy-sequence-partial-sum-series-ℝ =
-    is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
+    is-convergent-cauchy-modulus-partial-sum-series-Complete-Metric-Ab
       ( complete-metric-ab-add-ℝ l)
       ( σ)
 ```

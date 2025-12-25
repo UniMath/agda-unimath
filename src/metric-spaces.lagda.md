@@ -90,8 +90,10 @@ open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
 open import metric-spaces.images-metric-spaces public
+open import metric-spaces.images-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.images-short-functions-metric-spaces public
 open import metric-spaces.images-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
@@ -101,7 +103,9 @@ open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.limits-of-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-functions-metric-spaces public
+open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-functions-metric-spaces public
 open import metric-spaces.locally-constant-functions-metric-spaces public
@@ -120,6 +124,8 @@ open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public
 open import metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous public
+open import metric-spaces.modulated-cauchy-sequences-complete-metric-spaces public
+open import metric-spaces.modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
 open import metric-spaces.nets-located-metric-spaces public
