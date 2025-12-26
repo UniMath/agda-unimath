@@ -9,13 +9,14 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

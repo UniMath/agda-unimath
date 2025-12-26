@@ -80,19 +80,13 @@ add-cauchy-sequence-ℝ {l1} {l2} u v =
       ( v))
 ```
 
-### If a sequence has a limit, there exists a modulus making it a Cauchy sequence
+### If a sequence has a limit, it is Cauchy
 
 ```agda
 abstract
-  exists-cauchy-modulus-has-limit-sequence-ℝ :
+  is-cauchy-has-limit-sequence-ℝ :
     {l : Level} (σ : sequence (ℝ l)) →
-    has-limit-sequence-ℝ σ →
-    is-inhabited (is-cauchy-sequence-ℝ σ)
-  exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
-    map-is-inhabited
-      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
-        ( metric-space-ℝ l)
-        ( σ)
-        ( lim))
-      ( is-lim)
+    has-limit-sequence-ℝ σ → is-cauchy-sequence-ℝ σ
+  is-cauchy-has-limit-sequence-ℝ {l} σ =
+    is-cauchy-has-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
