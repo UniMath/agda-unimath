@@ -9,7 +9,13 @@ module functional-analysis.series-real-banach-spaces where
 ```agda
 open import analysis.metric-abelian-groups-normed-real-vector-spaces
 open import analysis.series-metric-abelian-groups
+open import analysis.series-real-numbers
 
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import functional-analysis.real-banach-spaces
@@ -53,4 +59,53 @@ module _
   partial-sum-series-ℝ-Banach-Space :
     series-ℝ-Banach-Space → sequence (type-ℝ-Banach-Space V)
   partial-sum-series-ℝ-Banach-Space = partial-sum-series-Metric-Ab
+```
+
+## Properties
+
+### The series of norms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Banach-Space l1 l2)
+  (σ : series-ℝ-Banach-Space V)
+  where
+
+  map-norm-series-ℝ-Banach-Space : series-ℝ l1
+  map-norm-series-ℝ-Banach-Space =
+    series-terms-ℝ (map-norm-ℝ-Banach-Space V ∘ term-series-ℝ-Banach-Space V σ)
+```
+
+### Dropping terms from a series
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Banach-Space l1 l2)
+  where
+
+  drop-series-ℝ-Banach-Space :
+    ℕ → series-ℝ-Banach-Space V → series-ℝ-Banach-Space V
+  drop-series-ℝ-Banach-Space = drop-series-Metric-Ab
+```
+
+### The partial sums of a series after dropping terms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Banach-Space l1 l2)
+  where
+
+  abstract
+    partial-sum-drop-series-ℝ-Banach-Space :
+      (n : ℕ) (σ : series-ℝ-Banach-Space V) (i : ℕ) →
+      partial-sum-series-ℝ-Banach-Space V
+        ( drop-series-ℝ-Banach-Space V n σ)
+        ( i) ＝
+      diff-ℝ-Banach-Space V
+        ( partial-sum-series-ℝ-Banach-Space V σ (n +ℕ i))
+        ( partial-sum-series-ℝ-Banach-Space V σ n)
+    partial-sum-drop-series-ℝ-Banach-Space = partial-sum-drop-series-Metric-Ab
 ```

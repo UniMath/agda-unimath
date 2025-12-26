@@ -9,7 +9,10 @@ module functional-analysis.real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -69,6 +72,15 @@ module _
   metric-space-ℝ-Banach-Space =
     metric-space-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
+  type-ℝ-Banach-Space : UU l2
+  type-ℝ-Banach-Space =
+    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  neighborhood-ℝ-Banach-Space :
+    ℚ⁺ → type-ℝ-Banach-Space → type-ℝ-Banach-Space → UU l1
+  neighborhood-ℝ-Banach-Space =
+    neighborhood-Metric-Space metric-space-ℝ-Banach-Space
+
   is-complete-metric-space-ℝ-Banach-Space :
     is-complete-Metric-Space metric-space-ℝ-Banach-Space
   is-complete-metric-space-ℝ-Banach-Space = pr2 V
@@ -76,10 +88,6 @@ module _
   complete-metric-space-ℝ-Banach-Space : Complete-Metric-Space l2 l1
   complete-metric-space-ℝ-Banach-Space =
     ( metric-space-ℝ-Banach-Space , is-complete-metric-space-ℝ-Banach-Space)
-
-  type-ℝ-Banach-Space : UU l2
-  type-ℝ-Banach-Space =
-    type-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   map-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ l1
   map-norm-ℝ-Banach-Space =
@@ -109,6 +117,21 @@ module _
   has-limit-cauchy-sequence-ℝ-Banach-Space =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-ℝ-Banach-Space)
+
+  dist-ℝ-Banach-Space : (u v : type-ℝ-Banach-Space) → ℝ l1
+  dist-ℝ-Banach-Space =
+    dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  symmetric-dist-ℝ-Banach-Space :
+    (u v : type-ℝ-Banach-Space) →
+    dist-ℝ-Banach-Space u v ＝ dist-ℝ-Banach-Space v u
+  symmetric-dist-ℝ-Banach-Space =
+    symmetric-dist-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  diff-ℝ-Banach-Space :
+    type-ℝ-Banach-Space → type-ℝ-Banach-Space → type-ℝ-Banach-Space
+  diff-ℝ-Banach-Space =
+    diff-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 ```
 
 ## Properties
