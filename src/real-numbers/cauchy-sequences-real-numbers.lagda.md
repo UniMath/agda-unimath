@@ -188,15 +188,19 @@ module _
                   ( bound ε k m με≤k με≤m)))
 ```
 
-### If a sequence has a limit, it is Cauchy
+### If a sequence has a limit, there exists a modulus making it a Cauchy sequence
 
 ```agda
 abstract
-  is-cauchy-has-limit-sequence-ℝ :
+  exists-cauchy-modulus-has-limit-sequence-ℝ :
     {l : Level} (σ : sequence (ℝ l)) →
-    has-limit-sequence-ℝ σ → is-cauchy-sequence-ℝ σ
+    has-limit-sequence-ℝ σ →
+    is-inhabited (is-cauchy-sequence-ℝ σ)
   exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
-    {! is-cauchy-has-limit-sequence-Metric-Space
-      ( metric-space-ℝ l) !}
-
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-ℝ l)
+        ( σ)
+        ( lim))
+      ( is-lim)
 ```
