@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
@@ -21,6 +22,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.coproduct-types
+open import foundation.identity-types
 open import foundation.dependent-pair-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -418,6 +420,72 @@ module _
   pair-modulated-cauchy-sequence-Metric-Space =
     ( seq-pair-modulated-cauchy-sequence-Metric-Space ,
       is-cauchy-seq-pair-modulated-cauchy-sequence-Metric-Space)
+```
+
+### To have a Cauchy modulus for a sequence `a`, it suffices to have a modulus function `μ` such that for any `ε`, `a (μ ε)` and `a (μ ε + k)` are in an `ε`-neighborhood
+
+```agda
+module
+  _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  (a : sequence-type-Metric-Space X)
+  (μ : ℚ⁺ → ℕ)
+  where
+
+  abstract
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space :
+      ( (ε : ℚ⁺) (k : ℕ) →
+        neighborhood-Metric-Space X ε (a (μ ε)) (a (μ ε +ℕ k))) →
+      (ε : ℚ⁺) →
+      is-cauchy-modulus-sequence-Metric-Space
+        ( X)
+        ( a)
+        ( ε)
+        ( μ (pr1 (bound-double-le-ℚ⁺ ε)))
+    is-cauchy-modulus-neighborhood-add-sequence-Metric-Space
+      H ε p q με'≤p με'≤q =
+      let
+        (ε' , ε'+ε'<ε) = bound-double-le-ℚ⁺ ε
+        (k , k+με'=p) = subtraction-leq-ℕ (μ ε') p με'≤p
+        (l , l+με'=q) = subtraction-leq-ℕ (μ ε') q με'≤q
+      in
+        monotonic-neighborhood-Metric-Space
+          ( X)
+          ( a p)
+          ( a q)
+          ( ε' +ℚ⁺ ε')
+          ( ε)
+          ( ε'+ε'<ε)
+          ( triangular-neighborhood-Metric-Space
+            ( X)
+            ( a p)
+            ( a (μ ε'))
+            ( a q)
+            ( ε')
+            ( ε')
+            ( tr
+              ( λ n → neighborhood-Metric-Space X ε' (a (μ ε')) (a n))
+              ( commutative-add-ℕ (μ ε') l ∙ l+με'=q)
+              ( H ε' l))
+            ( tr
+              ( λ n → neighborhood-Metric-Space X ε' (a n) (a (μ ε')))
+              ( commutative-add-ℕ (μ ε') k ∙ k+με'=p)
+              ( symmetric-neighborhood-Metric-Space X ε' _ _ (H ε' k))))
+
+    cauchy-modulus-neighborhood-add-sequence-Metric-Space :
+      ( (ε : ℚ⁺) (k : ℕ) →
+        neighborhood-Metric-Space X ε (a (μ ε)) (a (μ ε +ℕ k))) →
+      cauchy-modulus-sequence-Metric-Space X a
+    cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε =
+      ( _ , is-cauchy-modulus-neighborhood-add-sequence-Metric-Space H ε)
+
+  modulated-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space :
+    ( (ε : ℚ⁺) (k : ℕ) →
+      neighborhood-Metric-Space X ε (a (μ ε)) (a (μ ε +ℕ k))) →
+    modulated-cauchy-sequence-Metric-Space X
+  modulated-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space H =
+    ( a , cauchy-modulus-neighborhood-add-sequence-Metric-Space H)
 ```
 
 ## See also

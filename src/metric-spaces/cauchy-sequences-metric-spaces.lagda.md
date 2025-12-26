@@ -12,6 +12,10 @@ module metric-spaces.cauchy-sequences-metric-spaces where
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -146,6 +150,27 @@ module _
   pair-cauchy-sequence-Metric-Space =
     ( seq-pair-cauchy-sequence-Metric-Space ,
       is-cauchy-seq-pair-cauchy-sequence-Metric-Space)
+```
+
+### To show a sequence `a` is Cauchy, it suffices to have a modulus function `μ` such that for any `ε`, `a (μ ε)` and `a (μ ε + k)` are in an `ε`-neighborhood
+
+```agda
+module
+  _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  (a : sequence-type-Metric-Space X)
+  (μ : ℚ⁺ → ℕ)
+  where
+
+  abstract
+    is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space :
+      ( (ε : ℚ⁺) (k : ℕ) →
+        neighborhood-Metric-Space X ε (a (μ ε)) (a (μ ε +ℕ k))) →
+      is-cauchy-sequence-Metric-Space X a
+    is-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space H =
+      unit-trunc-Prop
+        ( cauchy-modulus-neighborhood-add-sequence-Metric-Space X a μ H)
 ```
 
 ## See also

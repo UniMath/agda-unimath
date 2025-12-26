@@ -9,6 +9,8 @@ module real-numbers.cauchy-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -21,6 +23,7 @@ open import metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metr
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.isometry-addition-real-numbers
+open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 ```
 
@@ -75,4 +78,21 @@ add-cauchy-sequence-ℝ {l1} {l2} u v =
       ( metric-space-ℝ l2)
       ( u)
       ( v))
+```
+
+### If a sequence has a limit, there exists a modulus making it a Cauchy sequence
+
+```agda
+abstract
+  exists-cauchy-modulus-has-limit-sequence-ℝ :
+    {l : Level} (σ : sequence (ℝ l)) →
+    has-limit-sequence-ℝ σ →
+    is-inhabited (is-cauchy-sequence-ℝ σ)
+  exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-ℝ l)
+        ( σ)
+        ( lim))
+      ( is-lim)
 ```
