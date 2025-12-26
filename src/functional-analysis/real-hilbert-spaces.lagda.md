@@ -15,9 +15,9 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import functional-analysis.normed-real-vector-spaces
 open import functional-analysis.real-banach-spaces
 
-open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.real-inner-product-spaces-are-normed
 

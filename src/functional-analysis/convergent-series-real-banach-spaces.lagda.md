@@ -21,10 +21,9 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import functional-analysis.additive-complete-metric-abelian-groups-real-banach-spaces
+open import functional-analysis.normed-real-vector-spaces
 open import functional-analysis.real-banach-spaces
 open import functional-analysis.series-real-banach-spaces
-
-open import linear-algebra.normed-real-vector-spaces
 
 open import lists.sequences
 

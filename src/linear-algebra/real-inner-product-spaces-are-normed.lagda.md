@@ -18,8 +18,9 @@ open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import functional-analysis.normed-real-vector-spaces
+
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces
-open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.seminormed-real-vector-spaces
 
@@ -53,7 +54,7 @@ Given a [real inner product space](linear-algebra.real-inner-product-spaces.md)
 `V`, defining the norm of `v` as the
 [square root](real-numbers.square-roots-nonnegative-real-numbers.md) of the
 inner product of `v` with itself satisfies the conditions of a
-[normed real vector space](linear-algebra.normed-real-vector-spaces.md).
+[normed real vector space](functional-analysis.normed-real-vector-spaces.md).
 
 ## Definition
 

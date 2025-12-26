@@ -16,9 +16,9 @@ open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
+open import functional-analysis.normed-real-vector-spaces
 
-open import linear-algebra.normed-real-vector-spaces
+open import group-theory.abelian-groups
 
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.metric-spaces
@@ -35,7 +35,7 @@ open import real-numbers.metric-additive-group-of-real-numbers
 
 ## Idea
 
-A [normed](linear-algebra.normed-real-vector-spaces.md)
+A [normed](functional-analysis.normed-real-vector-spaces.md)
 [real vector space](linear-algebra.real-vector-spaces.md) forms a
 [metric abelian group](analysis.metric-abelian-groups.md) under addition.
 
