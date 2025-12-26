@@ -38,6 +38,7 @@ open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.modulated-cauchy-sequences-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
@@ -80,7 +81,7 @@ module _
   (V : ℝ-Banach-Space l1 l2)
   (σ : series-ℝ-Banach-Space V)
   (M :
-    is-cauchy-sequence-ℝ
+    cauchy-modulus-sequence-ℝ
       ( partial-sum-series-ℝ (map-norm-series-ℝ-Banach-Space V σ)))
   where
 
@@ -180,7 +181,7 @@ module _
           ( is-convergent-prop-series-ℝ-Banach-Space V σ)
     in do
       cauchy-mod ←
-        exists-cauchy-modulus-has-limit-sequence-ℝ
+        is-cauchy-has-limit-sequence-ℝ
           ( partial-sum-series-ℝ (map-norm-series-ℝ-Banach-Space V σ))
           ( lim-Σnorm , H)
       is-convergent-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space
