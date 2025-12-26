@@ -244,7 +244,13 @@ module _
     monotonic-neighborhood-Pseudometric-Space x y d₁ d₂ d₁≤d₂ Nd₁xy =
       trichotomy-le-ℚ (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂)
         ( λ d₁<d₂ →
-          strictly-monotonic-neighborhood-Pseudometric-Space x y d₁ d₂ d₁<d₂ Nd₁xy)
+          strictly-monotonic-neighborhood-Pseudometric-Space
+            ( x)
+            ( y)
+            ( d₁)
+            ( d₂)
+            ( d₁<d₂)
+            ( Nd₁xy))
         ( λ d₁=d₂ →
           tr (λ d → neighborhood-Pseudometric-Space d x y) (eq-ℚ⁺ d₁=d₂) Nd₁xy)
         ( λ d₂<d₁ → ex-falso (not-leq-le-ℚ _ _ d₂<d₁ d₁≤d₂))

@@ -139,7 +139,8 @@ module _
     neighborhood-Located-Metric-Space d₁ x y →
     neighborhood-Located-Metric-Space d₂ x y
   strictly-monotonic-neighborhood-Located-Metric-Space =
-    strictly-monotonic-neighborhood-Metric-Space metric-space-Located-Metric-Space
+    strictly-monotonic-neighborhood-Metric-Space
+      ( metric-space-Located-Metric-Space)
 
   is-located-Located-Metric-Space :
     is-located-Metric-Space metric-space-Located-Metric-Space
@@ -188,7 +189,14 @@ module _
                 in do
                   ((ε⁺@(ε , _) , Nεxy) , ε<p) ← p∈U
                   ¬Npxy
-                    ( strictly-monotonic-neighborhood-Metric-Space M x y ε⁺ p⁺ ε<p Nεxy))
+                    ( strictly-monotonic-neighborhood-Metric-Space
+                      ( M)
+                      ( x)
+                      ( y)
+                      ( ε⁺)
+                      ( p⁺)
+                      ( ε<p)
+                      ( Nεxy)))
               ( λ Nrxy → intro-exists (r⁺ , Nrxy) (le-right-mediant-ℚ p<q))
               ( L x y p⁺ r⁺ p<r))
         ( λ p≤0 →
