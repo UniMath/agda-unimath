@@ -28,7 +28,7 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers
 The
 {{#concept "sum" Disambiguation="of a finite sequence of elements of a real Banach space" Agda=sum-fin-sequence-type-ℝ-Banach-Space}}
 of a [finite sequence](lists.finite-sequences.md) of elements of a
-[real Banach space](linear-algebra.real-banach-spaces.md) is the
+[real Banach space](functional-analysis.real-banach-spaces.md) is the
 [sum of the sequence](group-theory.sums-of-finite-sequences-of-elements-abelian-groups.md)
 in the [abelian group](group-theory.abelian-groups.md) of the space under
 addition.

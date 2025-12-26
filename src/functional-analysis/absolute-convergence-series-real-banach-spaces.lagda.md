@@ -46,7 +46,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 A [series](analysis.series-real-banach-spaces.md) `Σ aₙ` in a
-[real Banach space](linear-algebra.real-banach-spaces.md) is said to
+[real Banach space](functional-analysis.real-banach-spaces.md) is said to
 {{#concept "absolutely converge" WDID=Q332465 WD="absolute convergence" Agda=is-absolutely-convergent-prop-series-ℝ-Banach-Space Disambiguation="series in a real Banach space"}}
 if the series of norms `Σ ∥aₙ∥` is a
 [convergent series](analysis.convergent-series-real-numbers.md) of
