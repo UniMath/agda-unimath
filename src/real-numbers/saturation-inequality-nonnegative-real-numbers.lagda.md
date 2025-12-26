@@ -58,15 +58,15 @@ module _
 
 ```agda
 abstract
-  sim-zero-leq-positive-rational-ℝ⁰⁺ :
+  is-zero-leq-positive-rational-ℝ⁰⁺ :
     {l : Level} (x : ℝ⁰⁺ l) →
     ((ε : ℚ⁺) → leq-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ ε)) →
-    sim-zero-ℝ⁰⁺ x
-  sim-zero-leq-positive-rational-ℝ⁰⁺ x H =
+    is-zero-ℝ⁰⁺ x
+  is-zero-leq-positive-rational-ℝ⁰⁺ x H =
     sim-sim-leq-ℝ
-      ( leq-zero-ℝ⁰⁺ x ,
-        saturated-leq-ℝ⁰⁺
+      ( saturated-leq-ℝ⁰⁺
           ( x)
           ( zero-ℝ⁰⁺)
-          ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)))
+          ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)) ,
+        leq-zero-ℝ⁰⁺ x)
 ```
