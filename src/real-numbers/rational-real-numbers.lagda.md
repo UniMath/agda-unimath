@@ -29,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
@@ -210,11 +211,27 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-opaque
+abstract opaque
   unfolding real-ℚ
 
   is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
   is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
+```
+
+### A rational real number raised to another universe level is rational
+
+```agda
+abstract
+  is-rational-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
+    is-rational-ℝ x q → is-rational-ℝ (raise-ℝ l x) q
+  is-rational-raise-ℝ l x (q≮x , x≮q) =
+    ( q≮x ∘ map-inv-raise , x≮q ∘ map-inv-raise)
+
+  is-rational-raise-real-ℚ :
+    (l : Level) (p : ℚ) → is-rational-ℝ (raise-real-ℚ l p) p
+  is-rational-raise-real-ℚ l p =
+    is-rational-raise-ℝ l (real-ℚ p) (is-rational-real-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
@@ -263,34 +280,22 @@ abstract
     sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
   sim-rational-ℝ (x , q , x~q) = sim-rational-is-rational-ℝ x~q
 
+abstract
   eq-real-rational-is-rational-ℝ :
-    (x : ℝ lzero) (q : ℚ) → is-rational-ℝ x q → real-ℚ q ＝ x
+    (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
   eq-real-rational-is-rational-ℝ x q H =
     inv (eq-sim-ℝ {lzero} {x} {real-ℚ q} (sim-rational-ℝ (x , q , H)))
 
   eq-raise-real-rational-is-rational-ℝ :
-    {l : Level} {x : ℝ l} {q : ℚ} → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
-  eq-raise-real-rational-is-rational-ℝ {l} {x} {q} x~q =
+    {l : Level} (x : ℝ l) (q : ℚ) → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
+  eq-raise-real-rational-is-rational-ℝ {l} x q H =
     eq-sim-ℝ
       ( transitive-sim-ℝ
         ( x)
         ( real-ℚ q)
         ( raise-real-ℚ l q)
         ( sim-raise-ℝ l (real-ℚ q))
-        ( sim-rational-ℝ (x , q , x~q)))
-
-  is-rational-eq-raise-real-rational-ℝ :
-    {l : Level} {x : ℝ l} {q : ℚ} → x ＝ raise-real-ℚ l q → is-rational-ℝ x q
-  is-rational-eq-raise-real-rational-ℝ {l} {x} {q} x=q =
-    is-rational-sim-rational-ℝ
-      ( inv-tr (λ y → sim-ℝ y (real-ℚ q)) x=q (sim-raise-ℝ' l (real-ℚ q)))
-
-is-rational-iff-eq-raise-real-ℝ :
-  {l : Level} {x : ℝ l} {q : ℚ} →
-  (is-rational-ℝ x q) ↔ (x ＝ raise-real-ℚ l q)
-is-rational-iff-eq-raise-real-ℝ =
-  ( eq-raise-real-rational-is-rational-ℝ ,
-    is-rational-eq-raise-real-rational-ℝ)
+        ( sim-rational-ℝ (x , q , H)))
 ```
 
 ### The canonical map from rationals to rational reals
@@ -298,6 +303,10 @@ is-rational-iff-eq-raise-real-ℝ =
 ```agda
 rational-real-ℚ : ℚ → Rational-ℝ lzero
 rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
+
+raise-rational-real-ℚ : (l : Level) → ℚ → Rational-ℝ l
+raise-rational-real-ℚ l q =
+  ( raise-real-ℚ l q , q , is-rational-raise-real-ℚ l q)
 ```
 
 ### The rationals and rational reals are equivalent
