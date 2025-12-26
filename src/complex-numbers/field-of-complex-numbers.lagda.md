@@ -8,6 +8,7 @@ module complex-numbers.field-of-complex-numbers where
 
 ```agda
 open import commutative-algebra.heyting-fields
+open import commutative-algebra.homomorphisms-heyting-fields
 open import commutative-algebra.invertible-elements-commutative-rings
 
 open import complex-numbers.apartness-complex-numbers
@@ -21,6 +22,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
+
+open import real-numbers.field-of-real-numbers
 ```
 
 </details>
@@ -62,4 +65,14 @@ heyting-field-ℂ : (l : Level) → Heyting-Field (lsuc l)
 heyting-field-ℂ l =
   ( local-commutative-ring-ℂ l ,
     is-heyting-field-local-commutative-ring-ℂ l)
+```
+
+## Properties
+
+### The canonical field homomorphism from the real numbers to the complex numbers
+
+```agda
+hom-heyting-field-complex-ℝ :
+  (l : Level) → hom-Heyting-Field (heyting-field-ℝ l) (heyting-field-ℂ l)
+hom-heyting-field-complex-ℝ l = hom-ring-complex-ℝ l
 ```

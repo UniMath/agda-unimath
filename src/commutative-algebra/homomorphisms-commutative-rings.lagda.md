@@ -28,8 +28,11 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A **homomorphism of commutative rings** is a homomorphism between their
-underlying rings.
+A
+{{#concept "homomorphism" Disambiguation="of commutative rings" Agda=hom-Commutative-Ring}}
+of [commutative rings](commutative-algebra.commutative-rings.md) is a
+[homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
+[rings](ring-theory.rings.md).
 
 ## Definition
 

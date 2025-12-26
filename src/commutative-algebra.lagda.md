@@ -28,6 +28,7 @@ open import commutative-algebra.groups-of-units-commutative-rings public
 open import commutative-algebra.heyting-fields public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-semirings public
+open import commutative-algebra.homomorphisms-heyting-fields public
 open import commutative-algebra.ideals-commutative-rings public
 open import commutative-algebra.ideals-commutative-semirings public
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public
