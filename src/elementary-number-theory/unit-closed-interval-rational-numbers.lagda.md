@@ -1,9 +1,9 @@
-# The unit interval in the rational numbers
+# The unit closed interval in the rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.unit-interval-rational-numbers where
+module elementary-number-theory.unit-closed-interval-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
