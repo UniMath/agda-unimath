@@ -40,12 +40,13 @@ open import order-theory.posets
 ## Idea
 
 The
-{{#concept "floor" Disambiguation="of a nonnegative rational number" Agda=floor-ℚ⁰⁺}}
-of a [nonnegative](elementary-number-theory.nonnegative-rational-numbers.md)
-[rational number](elementary-number-theory.rational-numbers.md) `q` is the
+{{#concept "floor" Disambiguation="of a nonnegative rational number" Agda=floor-is-nonnegative-fraction-ℤ}}
+of a [nonnegative](elementary-number-theory.nonnegative-integer-fractions.md)
+[integer fraction](elementary-number-theory.integer-fractions.md) `q` is the
 [greatest](elementary-number-theory.inequality-integers.md)
-[integer](elementary-number-theory.integers.md) `x` such that `rational-ℤ x` is
-[less than or equal to](elementary-number-theory.inequality-rational-numbers.md)
+[integer](elementary-number-theory.integers.md) `x` such that `in-fraction-ℤ x`
+is
+[less than or equal to](elementary-number-theory.inequality-integer-fractions.md)
 `q`.
 
 The constraint that `q` is nonnegative guarantees that `x` is
