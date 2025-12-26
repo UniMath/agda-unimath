@@ -15,6 +15,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
@@ -29,6 +30,7 @@ open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
@@ -114,6 +116,13 @@ one-ℝ = real-ℚ one-ℚ
 ```agda
 neg-one-ℝ : ℝ lzero
 neg-one-ℝ = real-ℚ neg-one-ℚ
+```
+
+### ½ as a real number
+
+```agda
+one-half-ℝ : ℝ lzero
+one-half-ℝ = real-ℚ one-half-ℚ
 ```
 
 ### The canonical map from `ℚ` to `ℝ l`
@@ -210,11 +219,27 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-opaque
+abstract opaque
   unfolding real-ℚ
 
   is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
   is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
+```
+
+### A rational real number raised to another universe level is rational
+
+```agda
+abstract
+  is-rational-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
+    is-rational-ℝ x q → is-rational-ℝ (raise-ℝ l x) q
+  is-rational-raise-ℝ l x (q≮x , x≮q) =
+    ( q≮x ∘ map-inv-raise , x≮q ∘ map-inv-raise)
+
+  is-rational-raise-real-ℚ :
+    (l : Level) (p : ℚ) → is-rational-ℝ (raise-real-ℚ l p) p
+  is-rational-raise-real-ℚ l p =
+    is-rational-raise-ℝ l (real-ℚ p) (is-rational-real-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
@@ -298,6 +323,10 @@ is-rational-iff-eq-raise-real-ℝ =
 ```agda
 rational-real-ℚ : ℚ → Rational-ℝ lzero
 rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
+
+raise-rational-real-ℚ : (l : Level) → ℚ → Rational-ℝ l
+raise-rational-real-ℚ l q =
+  ( raise-real-ℚ l q , q , is-rational-raise-real-ℚ l q)
 ```
 
 ### The rationals and rational reals are equivalent
