@@ -145,43 +145,61 @@ module _
             leq-ℝ (b m) (b k +ℝ real-ℚ⁺ ε)
           bound ε m k με≤m με≤k =
             chain-of-inequalities
-            b m
-            ≤ c m
-              by b≤c m
-            ≤ c (μ ε)
-              by is-decreasing-c (μ ε) m με≤m
-            ≤ a k +ℝ (c (μ ε) -ℝ a k)
-              by leq-sim-ℝ' (add-right-diff-ℝ (a k) (c (μ ε)))
-            ≤ a k +ℝ (c (μ ε) -ℝ a (μ ε))
-              by
-                preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-left-add-ℝ _ _ _
-                    ( neg-leq-ℝ
-                      ( is-increasing-a (μ ε) k με≤k)))
-            ≤ b k +ℝ (raise-zero-ℝ (l1 ⊔ l3) +ℝ real-ℚ⁺ ε)
-              by
-                preserves-leq-add-ℝ
-                  ( a≤b k)
-                  ( left-leq-real-bound-neighborhood-ℝ
-                    ( ε)
-                    ( c (μ ε) -ℝ a (μ ε))
-                    ( raise-zero-ℝ (l1 ⊔ l3))
-                    ( is-mod-μ ε (μ ε) (refl-leq-ℕ (μ ε))))
-            ≤ b k +ℝ (zero-ℝ +ℝ real-ℚ⁺ ε)
-              by
-                leq-sim-ℝ
-                  ( preserves-sim-left-add-ℝ _ _ _
-                    ( preserves-sim-right-add-ℝ _ _ _ (sim-raise-ℝ' _ zero-ℝ)))
-            ≤ b k +ℝ real-ℚ⁺ ε
-              by leq-eq-ℝ (ap-add-ℝ refl (left-unit-law-add-ℝ _))
+              b m
+              ≤ c m
+                by b≤c m
+              ≤ c (μ ε)
+                by is-decreasing-c (μ ε) m με≤m
+              ≤ a k +ℝ (c (μ ε) -ℝ a k)
+                by leq-sim-ℝ' (add-right-diff-ℝ (a k) (c (μ ε)))
+              ≤ a k +ℝ (c (μ ε) -ℝ a (μ ε))
+                by
+                  preserves-leq-left-add-ℝ _ _ _
+                    ( preserves-leq-left-add-ℝ _ _ _
+                      ( neg-leq-ℝ
+                        ( is-increasing-a (μ ε) k με≤k)))
+              ≤ b k +ℝ (raise-zero-ℝ (l1 ⊔ l3) +ℝ real-ℚ⁺ ε)
+                by
+                  preserves-leq-add-ℝ
+                    ( a≤b k)
+                    ( left-leq-real-bound-neighborhood-ℝ
+                      ( ε)
+                      ( c (μ ε) -ℝ a (μ ε))
+                      ( raise-zero-ℝ (l1 ⊔ l3))
+                      ( is-mod-μ ε (μ ε) (refl-leq-ℕ (μ ε))))
+              ≤ b k +ℝ (zero-ℝ +ℝ real-ℚ⁺ ε)
+                by
+                  leq-sim-ℝ
+                    ( preserves-sim-left-add-ℝ _ _ _
+                      ( preserves-sim-right-add-ℝ _ _ _
+                        ( sim-raise-ℝ' _ zero-ℝ)))
+              ≤ b k +ℝ real-ℚ⁺ ε
+                by leq-eq-ℝ (ap-add-ℝ refl (left-unit-law-add-ℝ _))
         unit-trunc-Prop
           ( λ ε →
             ( μ ε ,
               λ m k με≤m με≤k →
-                neighborhood-real-bound-each-leq-ℝ
-                  ( ε)
-                  ( b m)
-                  ( b k)
-                  ( bound ε m k με≤m με≤k)
-                  ( bound ε k m με≤k με≤m)))
+              neighborhood-real-bound-each-leq-ℝ
+                ( ε)
+                ( b m)
+                ( b k)
+                ( bound ε m k με≤m με≤k)
+                ( bound ε k m με≤k με≤m)))
+```
+
+### If a sequence has a limit, there exists a modulus making it a Cauchy sequence
+
+```agda
+abstract
+  exists-cauchy-modulus-has-limit-sequence-ℝ :
+    {l : Level} (σ : sequence (ℝ l)) →
+    has-limit-sequence-ℝ σ →
+    is-inhabited (is-cauchy-sequence-ℝ σ)
+  exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
+    map-is-inhabited
+      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+        ( metric-space-ℝ l)
+        ( σ)
+        ( lim))
+      ( is-lim)
 ```
