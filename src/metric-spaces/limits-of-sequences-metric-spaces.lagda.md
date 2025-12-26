@@ -431,6 +431,46 @@ module _
       map-is-inhabited isometry-limit-modulus-sequence-Metric-Space
 ```
 
+### Isometries between metric spaces preserve limits
+
+```agda
+module _
+  {la la' lb lb' : Level}
+  (A : Metric-Space la la')
+  (B : Metric-Space lb lb')
+  (f : isometry-Metric-Space A B)
+  (u : sequence-type-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where
+
+  isometry-map-limit-modulus-sequence-Metric-Space :
+    limit-modulus-sequence-Metric-Space A u lim →
+    limit-modulus-sequence-Metric-Space
+      ( B)
+      ( map-sequence
+        ( map-isometry-Metric-Space A B f)
+        ( u))
+      ( map-isometry-Metric-Space A B f lim)
+  isometry-map-limit-modulus-sequence-Metric-Space =
+    short-map-limit-modulus-sequence-Metric-Space
+      ( A)
+      ( B)
+      ( short-isometry-Metric-Space A B f)
+      ( u)
+      ( lim)
+
+  preserves-limits-sequence-isometry-Metric-Space :
+    is-limit-sequence-Metric-Space A u lim →
+    is-limit-sequence-Metric-Space
+      ( B)
+      ( map-sequence
+        ( map-isometry-Metric-Space A B f)
+        ( u))
+      ( map-isometry-Metric-Space A B f lim)
+  preserves-limits-sequence-isometry-Metric-Space =
+    map-is-inhabited isometry-map-limit-modulus-sequence-Metric-Space
+```
+
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space
 
 The converse has yet to be proved.

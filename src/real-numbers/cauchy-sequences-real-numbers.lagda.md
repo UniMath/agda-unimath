@@ -17,6 +17,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.dependent-pair-types
+open import foundation.inhabited-types
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -184,4 +186,17 @@ module _
                   ( b k)
                   ( bound ε m k με≤m με≤k)
                   ( bound ε k m με≤k με≤m)))
+```
+
+### If a sequence has a limit, it is Cauchy
+
+```agda
+abstract
+  is-cauchy-has-limit-sequence-ℝ :
+    {l : Level} (σ : sequence (ℝ l)) →
+    has-limit-sequence-ℝ σ → is-cauchy-sequence-ℝ σ
+  exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
+    {! is-cauchy-has-limit-sequence-Metric-Space
+      ( metric-space-ℝ l) !}
+
 ```
