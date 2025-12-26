@@ -16,6 +16,7 @@ open import real-numbers.addition-positive-and-negative-real-numbers public
 open import real-numbers.addition-positive-real-numbers public
 open import real-numbers.addition-real-numbers public
 open import real-numbers.addition-upper-dedekind-real-numbers public
+open import real-numbers.alternation-sequences-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
 open import real-numbers.binary-maximum-real-numbers public
@@ -81,6 +82,7 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
+open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
@@ -95,6 +97,7 @@ open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
+open import real-numbers.sequences-with-alternating-signs-real-numbers public
 open import real-numbers.short-function-binary-maximum-real-numbers public
 open import real-numbers.short-function-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public

@@ -279,7 +279,7 @@ abstract
           by ap-mul-ℚ refl (right-zero-law-diff-ℚ one-ℚ)
         ＝ rational-ℕ 2
           by right-unit-law-mul-ℚ _)
-      ( preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+      ( preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( comp-uniformly-continuous-function-Metric-Space

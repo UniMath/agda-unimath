@@ -29,6 +29,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.sequences
+open import lists.subsequences
+
+open import logic.functoriality-existential-quantification
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -295,7 +298,7 @@ module _
             ( n)
             ( N≤n)))
 
-    preserves-limits-sequence-modulated-ucont-map-Metric-Space :
+    preserves-is-limit-modulated-ucont-map-sequence-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -303,7 +306,7 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    preserves-limits-sequence-modulated-ucont-map-Metric-Space =
+    preserves-is-limit-modulated-ucont-map-sequence-Metric-Space =
       map-is-inhabited modulated-ucont-map-limit-modulus-sequence-Metric-Space
 ```
 
@@ -320,7 +323,7 @@ module _
   where
 
   abstract
-    preserves-limits-sequence-uniformly-continuous-function-Metric-Space :
+    preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -328,12 +331,12 @@ module _
           ( map-uniformly-continuous-function-Metric-Space A B f)
           ( u))
         ( map-uniformly-continuous-function-Metric-Space A B f lim)
-    preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+    preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space
       is-limit-lim =
       rec-trunc-Prop
         ( is-limit-prop-sequence-Metric-Space B _ _)
         ( λ m →
-          preserves-limits-sequence-modulated-ucont-map-Metric-Space
+          preserves-is-limit-modulated-ucont-map-sequence-Metric-Space
             ( A)
             ( B)
             ( map-uniformly-continuous-function-Metric-Space A B f , m)
@@ -374,7 +377,7 @@ module _
       ( u)
       ( lim)
 
-  preserves-limits-sequence-short-function-Metric-Space :
+  preserves-is-limit-short-map-sequence-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
     is-limit-sequence-Metric-Space
       ( B)
@@ -382,7 +385,7 @@ module _
         ( map-short-function-Metric-Space A B f)
         ( u))
       ( map-short-function-Metric-Space A B f lim)
-  preserves-limits-sequence-short-function-Metric-Space =
+  preserves-is-limit-short-map-sequence-Metric-Space =
     map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
 ```
 
@@ -479,16 +482,52 @@ module _
   (is-lim-v : is-limit-sequence-Metric-Space B v lim-v)
   where
 
-  is-limit-pair-sequence-Metric-Space :
-    is-limit-sequence-Metric-Space
-      ( product-Metric-Space A B)
-      ( pair-sequence u v)
-      ( lim-u , lim-v)
-  is-limit-pair-sequence-Metric-Space =
-    map-binary-trunc-Prop
-      ( limit-modulus-pair-sequence-Metric-Space A B u v lim-u lim-v)
-      ( is-lim-u)
-      ( is-lim-v)
+  abstract
+    is-limit-pair-sequence-Metric-Space :
+      is-limit-sequence-Metric-Space
+        ( product-Metric-Space A B)
+        ( pair-sequence u v)
+        ( lim-u , lim-v)
+    is-limit-pair-sequence-Metric-Space =
+      map-binary-trunc-Prop
+        ( limit-modulus-pair-sequence-Metric-Space A B u v lim-u lim-v)
+        ( is-lim-u)
+        ( is-lim-v)
+```
+
+### Taking subsequences preserves limits
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  {u : sequence-type-Metric-Space X}
+  {lim-u : type-Metric-Space X}
+  (v : subsequence u)
+  where
+
+  abstract
+    preserves-is-limit-modulus-subsequence-Metric-Space :
+      (μ : ℚ⁺ → ℕ) →
+      is-limit-modulus-sequence-Metric-Space X u lim-u μ →
+      is-limit-modulus-sequence-Metric-Space X (seq-subsequence u v) lim-u μ
+    preserves-is-limit-modulus-subsequence-Metric-Space μ is-mod-μ ε n με≤n =
+      is-mod-μ
+        ( ε)
+        ( extract-subsequence u v n)
+        ( transitive-leq-ℕ
+          ( μ ε)
+          ( n)
+          ( extract-subsequence u v n)
+          ( is-inflationary-extract-subsequence u v n)
+          ( με≤n))
+
+    preserves-is-limit-subsequence-Metric-Space :
+      is-limit-sequence-Metric-Space X u lim-u →
+      is-limit-sequence-Metric-Space X (seq-subsequence u v) lim-u
+    preserves-is-limit-subsequence-Metric-Space =
+      map-tot-exists
+        ( preserves-is-limit-modulus-subsequence-Metric-Space)
 ```
 
 ## See also
