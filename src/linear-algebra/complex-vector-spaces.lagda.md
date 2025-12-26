@@ -179,5 +179,5 @@ real-vector-space-ℂ-Vector-Space {l1} =
   vector-space-hom-Vector-Space
     ( heyting-field-ℝ l1)
     ( heyting-field-ℂ l1)
-    ( hom-heyting-field-ℝ-ℂ l1)
+    ( hom-heyting-field-complex-ℝ l1)
 ```

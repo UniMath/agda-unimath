@@ -69,8 +69,8 @@ commutative-ring-ℂ =
 ### The canonical ring homomorphism from the real numbers to the complex numbers
 
 ```agda
-hom-ring-ℝ-ℂ :
+hom-ring-complex-ℝ :
   (l : Level) →
   hom-Commutative-Ring (commutative-ring-ℝ l) (commutative-ring-ℂ l)
-hom-ring-ℝ-ℂ l = (hom-ab-add-ℝ-ℂ l , inv (mul-complex-ℝ _ _) , refl)
+hom-ring-complex-ℝ l = (hom-add-ab-complex-ℝ l , inv (mul-complex-ℝ _ _) , refl)
 ```
