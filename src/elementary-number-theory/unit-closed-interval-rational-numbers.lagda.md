@@ -148,7 +148,7 @@ module _
       is-finitely-enumerable-im-Finitely-Enumerable-Type
         ( finitely-enumerable-type-Finite-Type
           ( finite-type-classical-Fin (n +ℕ 2)))
-          ( element-partition-unit-closed-interval-ℚ)
+        ( element-partition-unit-closed-interval-ℚ)
 
   finitely-enumerable-subtype-partition-unit-closed-interval-ℚ :
     finitely-enumerable-subtype lzero type-unit-closed-interval-ℚ
