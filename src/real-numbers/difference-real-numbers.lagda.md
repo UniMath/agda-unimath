@@ -136,15 +136,15 @@ abstract
     sim-ℝ ((x +ℝ z) -ℝ (y +ℝ z)) (x -ℝ y)
   diff-add-ℝ x y z =
     similarity-reasoning-ℝ
-    (x +ℝ z) -ℝ (y +ℝ z)
-    ~ℝ (x +ℝ z) +ℝ (neg-ℝ y -ℝ z)
-      by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ y z))
-    ~ℝ (x -ℝ y) +ℝ (z -ℝ z)
-      by sim-eq-ℝ (interchange-law-add-add-ℝ _ _ _ _)
-    ~ℝ (x -ℝ y) +ℝ zero-ℝ
-      by preserves-sim-left-add-ℝ _ _ _ (right-inverse-law-add-ℝ z)
-    ~ℝ x -ℝ y
-      by sim-eq-ℝ (right-unit-law-add-ℝ (x -ℝ y))
+      (x +ℝ z) -ℝ (y +ℝ z)
+      ~ℝ (x +ℝ z) +ℝ (neg-ℝ y -ℝ z)
+        by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ y z))
+      ~ℝ (x -ℝ y) +ℝ (z -ℝ z)
+        by sim-eq-ℝ (interchange-law-add-add-ℝ _ _ _ _)
+      ~ℝ (x -ℝ y) +ℝ zero-ℝ
+        by preserves-sim-left-add-ℝ _ _ _ (right-inverse-law-add-ℝ z)
+      ~ℝ x -ℝ y
+        by sim-eq-ℝ (right-unit-law-add-ℝ (x -ℝ y))
 ```
 
 ### `(x - z) - (y - z) = x - y`
@@ -165,13 +165,13 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → sim-ℝ (x -ℝ (x -ℝ y)) y
   right-diff-diff-ℝ x y =
     similarity-reasoning-ℝ
-    x -ℝ (x -ℝ y)
-    ~ℝ x +ℝ (neg-ℝ x +ℝ neg-ℝ (neg-ℝ y))
-      by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ _ _))
-    ~ℝ neg-ℝ (neg-ℝ y)
-      by cancel-left-add-diff-ℝ x _
-    ~ℝ y
-      by sim-eq-ℝ (neg-neg-ℝ y)
+      x -ℝ (x -ℝ y)
+      ~ℝ x +ℝ (neg-ℝ x +ℝ neg-ℝ (neg-ℝ y))
+        by sim-eq-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ _ _))
+      ~ℝ neg-ℝ (neg-ℝ y)
+        by cancel-left-add-diff-ℝ x _
+      ~ℝ y
+        by sim-eq-ℝ (neg-neg-ℝ y)
 ```
 
 ### `x + (y - x) = y`
