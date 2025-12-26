@@ -24,8 +24,9 @@ open import real-numbers.similarity-real-numbers
 
 ## Idea
 
-A [real number](real-numbers.dedekind-real-numbers.md) is zero if it is
-[similar](real-numbers.similarity-real-numbers.md) to
+A [real number](real-numbers.dedekind-real-numbers.md) is
+{{#concept "zero" Disambiguation="property of a real number" WDID=Q204 WD="zero" Agda=is-zero-ℝ}}
+if it is [similar](real-numbers.similarity-real-numbers.md) to
 [zero](real-numbers.rational-real-numbers.md).
 
 ## Definition

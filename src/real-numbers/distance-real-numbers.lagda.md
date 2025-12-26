@@ -257,6 +257,16 @@ abstract
       ( leq-transpose-right-add-ℝ _ _ _ y≤z+x)
 ```
 
+### The difference of two real numbers is at most their distance
+
+```agda
+abstract
+  leq-diff-dist-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ (x -ℝ y) (dist-ℝ x y)
+  leq-diff-dist-ℝ _ _ = leq-abs-ℝ _
+```
+
 ### Addition preserves distance between real numbers
 
 ```agda
