@@ -171,7 +171,8 @@ module _
                 by
                   leq-sim-ℝ
                     ( preserves-sim-left-add-ℝ _ _ _
-                      ( preserves-sim-right-add-ℝ _ _ _ (sim-raise-ℝ' _ zero-ℝ)))
+                      ( preserves-sim-right-add-ℝ _ _ _
+                        ( sim-raise-ℝ' _ zero-ℝ)))
               ≤ b k +ℝ real-ℚ⁺ ε
                 by leq-eq-ℝ (ap-add-ℝ refl (left-unit-law-add-ℝ _))
         unit-trunc-Prop
