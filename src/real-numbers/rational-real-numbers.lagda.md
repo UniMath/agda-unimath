@@ -182,13 +182,13 @@ is-prop-rational-real x =
 ### The subtype of rational reals
 
 ```agda
-subtype-rational-real : {l : Level} → ℝ l → Prop l
-subtype-rational-real x =
+subtype-rational-ℝ : {l : Level} → ℝ l → Prop l
+subtype-rational-ℝ x =
   Σ ℚ (is-rational-ℝ x) , is-prop-rational-real x
 
 Rational-ℝ : (l : Level) → UU (lsuc l)
 Rational-ℝ l =
-  type-subtype subtype-rational-real
+  type-subtype subtype-rational-ℝ
 
 module _
   {l : Level} (x : Rational-ℝ l)
@@ -298,7 +298,7 @@ is-retraction-rational-real-ℚ :
   rational-real-ℚ (rational-rational-ℝ x) ＝ x
 is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
-    subtype-rational-real
+    subtype-rational-ℝ
     ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
