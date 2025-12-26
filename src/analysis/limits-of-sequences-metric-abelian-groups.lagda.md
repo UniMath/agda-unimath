@@ -116,7 +116,7 @@ module _
         ( neg-sequence-type-Metric-Ab G u)
         ( neg-Metric-Ab G lim-u)
     neg-is-limit-sequence-Metric-Ab =
-      preserves-is-limit-isometry-sequence-Metric-Space
+      preserves-limits-sequence-isometry-Metric-Space
         ( metric-space-Metric-Ab G)
         ( metric-space-Metric-Ab G)
         ( isometry-neg-Metric-Ab G)
