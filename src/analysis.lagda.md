@@ -3,6 +3,8 @@
 ```agda
 module analysis where
 
+open import analysis.absolute-convergence-series-real-banach-spaces public
+open import analysis.absolute-convergence-series-real-numbers public
 open import analysis.additive-complete-metric-abelian-groups-real-banach-spaces public
 open import analysis.alternation-sequences-metric-abelian-groups public
 open import analysis.complete-metric-abelian-groups public
@@ -15,6 +17,7 @@ open import analysis.limits-of-sequences-metric-abelian-groups public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
 open import analysis.sequences-metric-abelian-groups public
+open import analysis.nonnegative-series-real-numbers public
 open import analysis.series-complete-metric-abelian-groups public
 open import analysis.series-metric-abelian-groups public
 open import analysis.series-real-banach-spaces public

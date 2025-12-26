@@ -401,7 +401,7 @@ module _
   (lim : type-Metric-Space A)
   where
 
-  isometry-limit-modulus-sequence-Metric-Space :
+  isometry-map-limit-modulus-sequence-Metric-Space :
     limit-modulus-sequence-Metric-Space A u lim →
     limit-modulus-sequence-Metric-Space
       ( B)
@@ -409,7 +409,7 @@ module _
         ( map-isometry-Metric-Space A B f)
         ( u))
       ( map-isometry-Metric-Space A B f lim)
-  isometry-limit-modulus-sequence-Metric-Space =
+  isometry-map-limit-modulus-sequence-Metric-Space =
     short-map-limit-modulus-sequence-Metric-Space
       ( A)
       ( B)
@@ -417,7 +417,7 @@ module _
       ( u)
       ( lim)
 
-  preserves-is-limit-isometry-sequence-Metric-Space :
+  preserves-limits-sequence-isometry-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
     is-limit-sequence-Metric-Space
       ( B)
@@ -425,8 +425,8 @@ module _
         ( map-isometry-Metric-Space A B f)
         ( u))
       ( map-isometry-Metric-Space A B f lim)
-  preserves-is-limit-isometry-sequence-Metric-Space =
-    map-is-inhabited isometry-limit-modulus-sequence-Metric-Space
+  preserves-limits-sequence-isometry-Metric-Space =
+    map-is-inhabited isometry-map-limit-modulus-sequence-Metric-Space
 ```
 
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space
