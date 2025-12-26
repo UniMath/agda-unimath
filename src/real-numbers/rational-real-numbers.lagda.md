@@ -29,6 +29,7 @@ open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
@@ -183,13 +184,13 @@ is-prop-rational-real x =
 ### The subtype of rational reals
 
 ```agda
-subtype-rational-real : {l : Level} → ℝ l → Prop l
-subtype-rational-real x =
+subtype-rational-ℝ : {l : Level} → ℝ l → Prop l
+subtype-rational-ℝ x =
   Σ ℚ (is-rational-ℝ x) , is-prop-rational-real x
 
 Rational-ℝ : (l : Level) → UU (lsuc l)
 Rational-ℝ l =
-  type-subtype subtype-rational-real
+  type-subtype subtype-rational-ℝ
 
 module _
   {l : Level} (x : Rational-ℝ l)
@@ -210,11 +211,27 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-opaque
+abstract opaque
   unfolding real-ℚ
 
   is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
   is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
+```
+
+### A rational real number raised to another universe level is rational
+
+```agda
+abstract
+  is-rational-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
+    is-rational-ℝ x q → is-rational-ℝ (raise-ℝ l x) q
+  is-rational-raise-ℝ l x (q≮x , x≮q) =
+    ( q≮x ∘ map-inv-raise , x≮q ∘ map-inv-raise)
+
+  is-rational-raise-real-ℚ :
+    (l : Level) (p : ℚ) → is-rational-ℝ (raise-real-ℚ l p) p
+  is-rational-raise-real-ℚ l p =
+    is-rational-raise-ℝ l (real-ℚ p) (is-rational-real-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
@@ -298,6 +315,10 @@ is-rational-iff-eq-raise-real-ℝ =
 ```agda
 rational-real-ℚ : ℚ → Rational-ℝ lzero
 rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
+
+raise-rational-real-ℚ : (l : Level) → ℚ → Rational-ℝ l
+raise-rational-real-ℚ l q =
+  ( raise-real-ℚ l q , q , is-rational-raise-real-ℚ l q)
 ```
 
 ### The rationals and rational reals are equivalent
@@ -313,7 +334,7 @@ is-retraction-rational-real-ℚ :
   rational-real-ℚ (rational-rational-ℝ x) ＝ x
 is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
-    subtype-rational-real
+    subtype-rational-ℝ
     ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
@@ -322,15 +343,10 @@ is-retraction-rational-real-ℚ (x , q , H) =
 equiv-rational-real : Rational-ℝ lzero ≃ ℚ
 pr1 equiv-rational-real = rational-rational-ℝ
 pr2 equiv-rational-real =
-  section-rational-rational-ℝ , retraction-rational-rational-ℝ
-  where
-  section-rational-rational-ℝ : section rational-rational-ℝ
-  section-rational-rational-ℝ =
-    (rational-real-ℚ , is-section-rational-real-ℚ)
-
-  retraction-rational-rational-ℝ : retraction rational-rational-ℝ
-  retraction-rational-rational-ℝ =
-    (rational-real-ℚ , is-retraction-rational-real-ℚ)
+  is-equiv-is-invertible
+    ( rational-real-ℚ)
+    ( is-section-rational-real-ℚ)
+    ( is-retraction-rational-real-ℚ)
 ```
 
 ### The canonical embedding of the rational numbers in the real numbers is injective

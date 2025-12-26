@@ -40,6 +40,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -356,6 +357,23 @@ module _
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
+### Inequality on the real numbers is invariant under raising universe levels
+
+```agda
+abstract
+  preserves-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
+  preserves-leq-left-raise-ℝ l {x} {y} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
+
+  preserves-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
+  preserves-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+```
+
 ### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
 
 ```agda
@@ -466,6 +484,13 @@ module _
               ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
             ( is-located-lower-upper-cut-ℝ y q<r))
         ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
+```
+
+### `0 ≤ 1`
+
+```agda
+leq-zero-one-ℝ : leq-ℝ zero-ℝ one-ℝ
+leq-zero-one-ℝ = preserves-leq-real-ℚ leq-zero-one-ℚ
 ```
 
 ## References
