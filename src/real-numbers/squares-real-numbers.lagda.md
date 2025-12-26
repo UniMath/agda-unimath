@@ -421,4 +421,23 @@ abstract
     transitive-sim-ℝ _ _ _
       ( right-zero-law-mul-ℝ _)
       ( preserves-sim-mul-ℝ x~0 x~0)
+
+  is-zero-is-zero-square-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ (square-ℝ x) → is-zero-ℝ x
+  is-zero-is-zero-square-ℝ {l} {x} x²~0 =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ _ _
+          ( λ 0<x →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁺ (x , 0<x))) ,
+        leq-not-le-ℝ _ _
+          ( λ x<0 →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁻ (x , x<0))))
 ```
