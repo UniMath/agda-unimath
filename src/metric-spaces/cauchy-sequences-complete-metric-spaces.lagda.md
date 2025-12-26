@@ -11,12 +11,16 @@ module metric-spaces.cauchy-sequences-complete-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
+
+open import lists.sequences
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -47,6 +51,12 @@ module _
       ( metric-space-Complete-Metric-Space M)
       ( x)
       ( l)
+
+  map-cauchy-sequence-Complete-Metric-Space :
+    cauchy-sequence-Complete-Metric-Space →
+    sequence (type-Complete-Metric-Space M)
+  map-cauchy-sequence-Complete-Metric-Space =
+    map-cauchy-sequence-Metric-Space (metric-space-Complete-Metric-Space M)
 ```
 
 ## Properties
@@ -59,39 +69,48 @@ module _
   (x : cauchy-sequence-Complete-Metric-Space M)
   where
 
-  limit-cauchy-sequence-Complete-Metric-Space : type-Complete-Metric-Space M
-  limit-cauchy-sequence-Complete-Metric-Space =
-    pr1
-      ( is-complete-metric-space-Complete-Metric-Space
-        ( M)
-        ( cauchy-approximation-cauchy-sequence-Metric-Space
-          ( metric-space-Complete-Metric-Space M)
-          ( x)))
-
-  is-limit-limit-cauchy-sequence-Complete-Metric-Space :
-    is-limit-cauchy-sequence-Complete-Metric-Space
-      ( M)
-      ( x)
-      ( limit-cauchy-sequence-Complete-Metric-Space)
-  is-limit-limit-cauchy-sequence-Complete-Metric-Space =
-    is-limit-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
-      ( metric-space-Complete-Metric-Space M)
-      ( x)
-      ( limit-cauchy-sequence-Complete-Metric-Space)
-      ( pr2
+  abstract
+    limit-cauchy-sequence-Complete-Metric-Space : type-Complete-Metric-Space M
+    limit-cauchy-sequence-Complete-Metric-Space =
+      pr1
         ( is-complete-metric-space-Complete-Metric-Space
           ( M)
           ( cauchy-approximation-cauchy-sequence-Metric-Space
             ( metric-space-Complete-Metric-Space M)
-            ( x))))
+            ( x)))
 
-  has-limit-cauchy-sequence-Complete-Metric-Space :
-    has-limit-cauchy-sequence-Metric-Space
-      ( metric-space-Complete-Metric-Space M)
-      ( x)
-  has-limit-cauchy-sequence-Complete-Metric-Space =
-    ( limit-cauchy-sequence-Complete-Metric-Space ,
-      is-limit-limit-cauchy-sequence-Complete-Metric-Space)
+    limit-modulus-limit-cauchy-sequence-Complete-Metric-Space :
+      limit-modulus-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Space M)
+        ( map-cauchy-sequence-Complete-Metric-Space M x)
+        ( limit-cauchy-sequence-Complete-Metric-Space)
+    limit-modulus-limit-cauchy-sequence-Complete-Metric-Space =
+      limit-modulus-cauchy-sequence-limit-cauchy-approximation-cauchy-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Space M)
+        ( x)
+        ( limit-cauchy-sequence-Complete-Metric-Space)
+        ( pr2
+          ( is-complete-metric-space-Complete-Metric-Space
+            ( M)
+            ( cauchy-approximation-cauchy-sequence-Metric-Space
+              ( metric-space-Complete-Metric-Space M)
+              ( x))))
+
+    is-limit-limit-cauchy-sequence-Complete-Metric-Space :
+      is-limit-cauchy-sequence-Complete-Metric-Space
+        ( M)
+        ( x)
+        ( limit-cauchy-sequence-Complete-Metric-Space)
+    is-limit-limit-cauchy-sequence-Complete-Metric-Space =
+      unit-trunc-Prop limit-modulus-limit-cauchy-sequence-Complete-Metric-Space
+
+    has-limit-cauchy-sequence-Complete-Metric-Space :
+      has-limit-cauchy-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Space M)
+        ( x)
+    has-limit-cauchy-sequence-Complete-Metric-Space =
+      ( limit-cauchy-sequence-Complete-Metric-Space ,
+        is-limit-limit-cauchy-sequence-Complete-Metric-Space)
 ```
 
 ### If every Cauchy sequence has a limit in a metric space, the metric space is complete
