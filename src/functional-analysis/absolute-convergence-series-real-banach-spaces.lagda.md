@@ -7,9 +7,7 @@ module functional-analysis.absolute-convergence-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-banach-spaces
 open import analysis.convergent-series-real-numbers
-open import analysis.series-real-banach-spaces
 open import analysis.series-real-numbers
 
 open import elementary-number-theory.addition-natural-numbers
@@ -27,8 +25,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
-open import linear-algebra.sums-of-finite-sequences-of-elements-real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
+open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
+open import functional-analysis.sums-of-finite-sequences-of-elements-real-banach-spaces
 
 open import metric-spaces.cauchy-sequences-metric-spaces
 

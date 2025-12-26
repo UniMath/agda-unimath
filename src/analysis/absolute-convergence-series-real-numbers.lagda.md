@@ -7,9 +7,7 @@ module analysis.absolute-convergence-series-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-banach-spaces
 open import analysis.convergent-series-real-numbers
-open import analysis.series-real-banach-spaces
 open import analysis.series-real-numbers
 
 open import foundation.function-types
@@ -17,8 +15,9 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import functional-analysis.absolute-convergence-series-real-banach-spaces
-
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
+open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
 
 open import real-numbers.absolute-value-real-numbers
 ```

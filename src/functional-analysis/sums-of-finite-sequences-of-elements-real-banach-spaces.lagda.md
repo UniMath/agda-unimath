@@ -1,7 +1,7 @@
 # Sums of finite sequences of elements in real Banach spaces
 
 ```agda
-module linear-algebra.sums-of-finite-sequences-of-elements-real-banach-spaces where
+module functional-analysis.sums-of-finite-sequences-of-elements-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.real-banach-spaces
 open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces
 
 open import lists.finite-sequences
