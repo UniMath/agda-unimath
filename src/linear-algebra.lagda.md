@@ -66,6 +66,8 @@ open import linear-algebra.seminormed-real-vector-spaces public
 open import linear-algebra.subsets-left-modules-commutative-rings public
 open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.subspaces-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-real-banach-spaces public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
 open import linear-algebra.transposition-matrices public
 open import linear-algebra.tuples-on-commutative-monoids public
