@@ -483,3 +483,13 @@ abstract opaque
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) (neg-ℝ x))
   approximate-below-abs-ℝ x = approximate-below-max-ℝ x (neg-ℝ x)
 ```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℝ : {l : Level} (x : ℝ l) → square-ℝ (abs-ℝ x) ＝ square-ℝ x
+  square-abs-ℝ x =
+    ( ap square-ℝ (eq-abs-sqrt-square-ℝ x)) ∙
+    ( eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
+```

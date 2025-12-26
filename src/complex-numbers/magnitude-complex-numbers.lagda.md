@@ -9,21 +9,30 @@ module complex-numbers.magnitude-complex-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.equivalence-complex-numbers-two-dimensional-vector-space-real-numbers
 open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
+open import complex-numbers.zero-complex-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import linear-algebra.standard-euclidean-inner-product-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
@@ -34,6 +43,8 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
+open import real-numbers.sums-of-finite-sequences-of-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -92,6 +103,21 @@ abstract
             by left-inverse-law-add-ℝ (a *ℝ b)
           ~ℝ raise-ℝ _ zero-ℝ
             by sim-raise-ℝ _ _))
+```
+
+### The magnitude of `-z` is the magnitude of `z`
+
+```agda
+abstract
+  squared-magnitude-neg-ℂ :
+    {l : Level} (z : ℂ l) →
+    squared-magnitude-ℂ (neg-ℂ z) ＝ squared-magnitude-ℂ z
+  squared-magnitude-neg-ℂ (a +iℂ b) = ap-add-ℝ (square-neg-ℝ a) (square-neg-ℝ b)
+
+  magnitude-neg-ℂ :
+    {l : Level} (z : ℂ l) → magnitude-ℂ (neg-ℂ z) ＝ magnitude-ℂ z
+  magnitude-neg-ℂ z =
+    ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (squared-magnitude-neg-ℂ z))
 ```
 
 ### The square of the magnitude of `zw` is the product of the squares of the magnitudes of `z` and `w`
@@ -293,3 +319,85 @@ abstract
       ＝ one-ℝ
         by abs-real-ℝ⁺ one-ℝ⁺
 ```
+
+### The magnitude of `zero-ℂ` is `zero-ℝ`
+
+```agda
+abstract
+  magnitude-zero-ℂ : magnitude-ℂ zero-ℂ ＝ zero-ℝ
+  magnitude-zero-ℂ =
+    ( ap magnitude-ℂ (inv eq-complex-zero-ℝ)) ∙
+    ( magnitude-complex-ℝ zero-ℝ) ∙
+    ( abs-zero-ℝ)
+```
+
+### The magnitude of `z` equals the Euclidean norm of the corresponding vector in `ℝ²`
+
+```agda
+abstract
+  eq-magnitude-ℂ-norm-ℝ² :
+    {l : Level} (z : ℂ l) →
+    magnitude-ℂ z ＝ euclidean-norm-ℝ^ 2 (map-ℂ-ℝ² z)
+  eq-magnitude-ℂ-norm-ℝ² {l} z =
+    ap real-sqrt-ℝ⁰⁺ (inv (eq-ℝ⁰⁺ _ _ (compute-sum-two-ℝ _)))
+```
+
+### The triangle inequality of magnitudes in `ℂ`
+
+```agda
+abstract
+  triangular-level-magnitude-ℂ :
+    (l : Level) (z w : ℂ l) →
+    leq-ℝ (magnitude-ℂ (z +ℂ w)) (magnitude-ℂ z +ℝ magnitude-ℂ w)
+  triangular-level-magnitude-ℂ l z w =
+    binary-tr
+      ( leq-ℝ)
+      ( ( ap (euclidean-norm-ℝ^ 2) (inv (map-add-ℂ-ℝ² z w))) ∙
+        ( inv (eq-magnitude-ℂ-norm-ℝ² _)))
+      ( inv
+        ( ap-add-ℝ
+          ( eq-magnitude-ℂ-norm-ℝ² z)
+          ( eq-magnitude-ℂ-norm-ℝ² w)))
+      ( triangular-euclidean-norm-ℝ^ 2 (map-ℂ-ℝ² z) (map-ℂ-ℝ² w))
+
+  triangular-magnitude-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    leq-ℝ (magnitude-ℂ (z +ℂ w)) (magnitude-ℂ z +ℝ magnitude-ℂ w)
+  triangular-magnitude-ℂ {l1} {l2} z w =
+    preserves-leq-sim-ℝ
+      ( preserves-sim-magnitude-ℂ
+        ( preserves-sim-add-ℂ (sim-raise-ℂ' l2 z) (sim-raise-ℂ' l1 w)))
+      ( preserves-sim-add-ℝ
+        ( preserves-sim-magnitude-ℂ (sim-raise-ℂ' l2 z))
+        ( preserves-sim-magnitude-ℂ (sim-raise-ℂ' l1 w)))
+      ( triangular-level-magnitude-ℂ
+        ( l1 ⊔ l2)
+        ( raise-ℂ l2 z)
+        ( raise-ℂ l1 w))
+```
+
+### If `|z| = 0`, `z = 0`
+
+```agda
+abstract
+  is-extensional-magnitude-ℂ :
+    {l : Level} (z : ℂ l) → is-zero-ℝ (magnitude-ℂ z) → is-zero-ℂ z
+  is-extensional-magnitude-ℂ z |z|=0 =
+    is-zero-eq-raise-zero-ℂ
+      ( ( inv (is-retraction-map-inv-ℂ-ℝ² z)) ∙
+        ( ap
+          ( map-inv-ℂ-ℝ²)
+          ( is-extensional-euclidean-norm-ℝ^ 2
+            ( map-ℂ-ℝ² z)
+            ( tr is-zero-ℝ (eq-magnitude-ℂ-norm-ℝ² z) |z|=0))))
+```
+
+## See also
+
+- [Distances between complex numbers](complex-numbers.distance-complex-numbers.md)
+- [Absolute values of real numbers](real-numbers.absolute-value-real-numbers.md)
+
+## External links
+
+- [Absolute values of complex numbers](https://en.wikipedia.org/wiki/Absolute_value#Complex_numbers)
+  on Wikipedia
