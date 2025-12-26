@@ -10,6 +10,7 @@ open import functional-analysis.normed-real-vector-spaces public
 open import functional-analysis.real-banach-spaces public
 open import functional-analysis.real-hilbert-spaces public
 open import functional-analysis.series-real-banach-spaces public
+open import functional-analysis.sums-of-finite-sequences-of-elements-normed-real-vector-spaces public
 open import functional-analysis.sums-of-finite-sequences-of-elements-real-banach-spaces public
 ```
 
