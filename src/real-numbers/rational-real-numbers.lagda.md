@@ -184,13 +184,13 @@ is-prop-rational-real x =
 ### The subtype of rational reals
 
 ```agda
-subtype-rational-real : {l : Level} → ℝ l → Prop l
-subtype-rational-real x =
+subtype-rational-ℝ : {l : Level} → ℝ l → Prop l
+subtype-rational-ℝ x =
   Σ ℚ (is-rational-ℝ x) , is-prop-rational-real x
 
 Rational-ℝ : (l : Level) → UU (lsuc l)
 Rational-ℝ l =
-  type-subtype subtype-rational-real
+  type-subtype subtype-rational-ℝ
 
 module _
   {l : Level} (x : Rational-ℝ l)
@@ -280,22 +280,34 @@ abstract
     sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
   sim-rational-ℝ (x , q , x~q) = sim-rational-is-rational-ℝ x~q
 
-abstract
   eq-real-rational-is-rational-ℝ :
-    (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
+    (x : ℝ lzero) (q : ℚ) → is-rational-ℝ x q → real-ℚ q ＝ x
   eq-real-rational-is-rational-ℝ x q H =
     inv (eq-sim-ℝ {lzero} {x} {real-ℚ q} (sim-rational-ℝ (x , q , H)))
 
   eq-raise-real-rational-is-rational-ℝ :
-    {l : Level} (x : ℝ l) (q : ℚ) → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
-  eq-raise-real-rational-is-rational-ℝ {l} x q H =
+    {l : Level} {x : ℝ l} {q : ℚ} → is-rational-ℝ x q → x ＝ raise-real-ℚ l q
+  eq-raise-real-rational-is-rational-ℝ {l} {x} {q} x~q =
     eq-sim-ℝ
       ( transitive-sim-ℝ
         ( x)
         ( real-ℚ q)
         ( raise-real-ℚ l q)
         ( sim-raise-ℝ l (real-ℚ q))
-        ( sim-rational-ℝ (x , q , H)))
+        ( sim-rational-ℝ (x , q , x~q)))
+
+  is-rational-eq-raise-real-rational-ℝ :
+    {l : Level} {x : ℝ l} {q : ℚ} → x ＝ raise-real-ℚ l q → is-rational-ℝ x q
+  is-rational-eq-raise-real-rational-ℝ {l} {x} {q} x=q =
+    is-rational-sim-rational-ℝ
+      ( inv-tr (λ y → sim-ℝ y (real-ℚ q)) x=q (sim-raise-ℝ' l (real-ℚ q)))
+
+is-rational-iff-eq-raise-real-ℝ :
+  {l : Level} {x : ℝ l} {q : ℚ} →
+  (is-rational-ℝ x q) ↔ (x ＝ raise-real-ℚ l q)
+is-rational-iff-eq-raise-real-ℝ =
+  ( eq-raise-real-rational-is-rational-ℝ ,
+    is-rational-eq-raise-real-rational-ℝ)
 ```
 
 ### The canonical map from rationals to rational reals
@@ -322,7 +334,7 @@ is-retraction-rational-real-ℚ :
   rational-real-ℚ (rational-rational-ℝ x) ＝ x
 is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
-    subtype-rational-real
+    subtype-rational-ℝ
     ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
@@ -331,15 +343,10 @@ is-retraction-rational-real-ℚ (x , q , H) =
 equiv-rational-real : Rational-ℝ lzero ≃ ℚ
 pr1 equiv-rational-real = rational-rational-ℝ
 pr2 equiv-rational-real =
-  section-rational-rational-ℝ , retraction-rational-rational-ℝ
-  where
-  section-rational-rational-ℝ : section rational-rational-ℝ
-  section-rational-rational-ℝ =
-    (rational-real-ℚ , is-section-rational-real-ℚ)
-
-  retraction-rational-rational-ℝ : retraction rational-rational-ℝ
-  retraction-rational-rational-ℝ =
-    (rational-real-ℚ , is-retraction-rational-real-ℚ)
+  is-equiv-is-invertible
+    ( rational-real-ℚ)
+    ( is-section-rational-real-ℚ)
+    ( is-retraction-rational-real-ℚ)
 ```
 
 ### The canonical embedding of the rational numbers in the real numbers is injective
