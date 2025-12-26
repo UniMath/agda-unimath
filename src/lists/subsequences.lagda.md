@@ -128,9 +128,9 @@ module _
             ( n)))
 ```
 
-### Common subsequences
+## Operations
 
-#### The tail subsequence
+### The tail subsequence
 
 ```agda
 module _
