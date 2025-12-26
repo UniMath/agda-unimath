@@ -1,7 +1,7 @@
 # Absolute convergence of series in real Banach spaces
 
 ```agda
-module analysis.absolute-convergence-series-real-banach-spaces where
+module functional-analysis.absolute-convergence-series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
