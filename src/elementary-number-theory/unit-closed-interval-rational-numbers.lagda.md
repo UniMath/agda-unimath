@@ -59,7 +59,7 @@ open import univalent-combinatorics.finitely-enumerable-types
 ## Idea
 
 The
-{{#concept "unit interval" Disambiguation="in the rational numbers" Agda=unit-interval-ℚ}}
+{{#concept "unit interval" Disambiguation="in the rational numbers" Agda=unit-closed-interval-ℚ}}
 in the [rational numbers](elementary-number-theory.rational-numbers.md) is the
 [closed interval](elementary-number-theory.closed-intervals-rational-numbers.md)
 $[0, 1]$.
