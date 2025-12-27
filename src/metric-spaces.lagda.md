@@ -76,11 +76,14 @@ open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
+open import metric-spaces.classical-limits-of-functions-metric-spaces public
+open import metric-spaces.classically-pointwise-continuous-functions-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
+open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
@@ -131,6 +134,7 @@ open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
+open import metric-spaces.pointwise-continuous-functions-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
