@@ -137,60 +137,61 @@ module _
   {l : Level} (x : ℝ l) (p : ℚ)
   where
 
-  is-rational-ℝ-Prop : Prop l
-  is-rational-ℝ-Prop =
+  is-rational-prop-ℝ : Prop l
+  is-rational-prop-ℝ =
     (¬' (lower-cut-ℝ x p)) ∧ (¬' (upper-cut-ℝ x p))
 
   is-rational-ℝ : UU l
-  is-rational-ℝ = type-Prop is-rational-ℝ-Prop
+  is-rational-ℝ = type-Prop is-rational-prop-ℝ
 ```
 
 ```agda
-all-eq-is-rational-ℝ :
-  {l : Level} (x : ℝ l) (p q : ℚ) →
-  is-rational-ℝ x p →
-  is-rational-ℝ x q →
-  p ＝ q
-all-eq-is-rational-ℝ x p q H H' =
-  trichotomy-le-ℚ p q left-case id right-case
-  where
-  left-case : le-ℚ p q → p ＝ q
-  left-case I =
-    ex-falso
-      ( elim-disjunction
-        ( empty-Prop)
-        ( pr1 H)
-        ( pr2 H')
-        ( is-located-lower-upper-cut-ℝ x I))
+abstract
+  all-eq-is-rational-ℝ :
+    {l : Level} (x : ℝ l) (p q : ℚ) →
+    is-rational-ℝ x p →
+    is-rational-ℝ x q →
+    p ＝ q
+  all-eq-is-rational-ℝ x p q H H' =
+    trichotomy-le-ℚ p q left-case id right-case
+    where
+    left-case : le-ℚ p q → p ＝ q
+    left-case I =
+      ex-falso
+        ( elim-disjunction
+          ( empty-Prop)
+          ( pr1 H)
+          ( pr2 H')
+          ( is-located-lower-upper-cut-ℝ x I))
 
-  right-case : le-ℚ q p → p ＝ q
-  right-case I =
-    ex-falso
-      ( elim-disjunction
-        ( empty-Prop)
-        ( pr1 H')
-        ( pr2 H)
-        ( is-located-lower-upper-cut-ℝ x I))
+    right-case : le-ℚ q p → p ＝ q
+    right-case I =
+      ex-falso
+        ( elim-disjunction
+          ( empty-Prop)
+          ( pr1 H')
+          ( pr2 H)
+          ( is-located-lower-upper-cut-ℝ x I))
 
-is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
-is-prop-rational-real x =
-  is-prop-all-elements-equal
-    ( λ p q →
-      eq-type-subtype
-        ( is-rational-ℝ-Prop x)
-        ( all-eq-is-rational-ℝ x (pr1 p) (pr1 q) (pr2 p) (pr2 q)))
+abstract
+  is-prop-is-rational-ℝ :
+    {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
+  is-prop-is-rational-ℝ x =
+    is-prop-all-elements-equal
+      ( λ p q →
+        eq-type-subtype
+          ( is-rational-prop-ℝ x)
+          ( all-eq-is-rational-ℝ x (pr1 p) (pr1 q) (pr2 p) (pr2 q)))
 ```
 
 ### The subtype of rational reals
 
 ```agda
 subtype-rational-ℝ : {l : Level} → ℝ l → Prop l
-subtype-rational-ℝ x =
-  Σ ℚ (is-rational-ℝ x) , is-prop-rational-real x
+subtype-rational-ℝ x = (Σ ℚ (is-rational-ℝ x) , is-prop-is-rational-ℝ x)
 
 Rational-ℝ : (l : Level) → UU (lsuc l)
-Rational-ℝ l =
-  type-subtype subtype-rational-ℝ
+Rational-ℝ l = type-subtype subtype-rational-ℝ
 
 module _
   {l : Level} (x : Rational-ℝ l)
@@ -324,29 +325,30 @@ raise-rational-real-ℚ l q =
 ### The rationals and rational reals are equivalent
 
 ```agda
-is-section-rational-real-ℚ :
-  (q : ℚ) →
-  rational-rational-ℝ (rational-real-ℚ q) ＝ q
-is-section-rational-real-ℚ q = refl
+abstract
+  is-section-rational-real-ℚ :
+    (q : ℚ) →
+    rational-rational-ℝ (rational-real-ℚ q) ＝ q
+  is-section-rational-real-ℚ q = refl
 
-is-retraction-rational-real-ℚ :
-  (x : Rational-ℝ lzero) →
-  rational-real-ℚ (rational-rational-ℝ x) ＝ x
-is-retraction-rational-real-ℚ (x , q , H) =
-  eq-type-subtype
-    subtype-rational-ℝ
-    ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
-  where
-    α : rational-rational-ℝ (x , q , H) ＝ q
-    α = refl
+  is-retraction-rational-real-ℚ :
+    (x : Rational-ℝ lzero) →
+    rational-real-ℚ (rational-rational-ℝ x) ＝ x
+  is-retraction-rational-real-ℚ (x , q , H) =
+    eq-type-subtype
+      subtype-rational-ℝ
+        ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
+    where
+      α : rational-rational-ℝ (x , q , H) ＝ q
+      α = refl
 
-equiv-rational-real : Rational-ℝ lzero ≃ ℚ
-pr1 equiv-rational-real = rational-rational-ℝ
-pr2 equiv-rational-real =
-  is-equiv-is-invertible
-    ( rational-real-ℚ)
-    ( is-section-rational-real-ℚ)
-    ( is-retraction-rational-real-ℚ)
+equiv-rational-ℝ : Rational-ℝ lzero ≃ ℚ
+equiv-rational-ℝ =
+  ( rational-rational-ℝ ,
+    is-equiv-is-invertible
+      ( rational-real-ℚ)
+      ( is-section-rational-real-ℚ)
+      ( is-retraction-rational-real-ℚ))
 ```
 
 ### The canonical embedding of the rational numbers in the real numbers is injective
@@ -376,15 +378,16 @@ abstract opaque
 ### `0 ≠ 1`
 
 ```agda
-neq-zero-one-ℝ : zero-ℝ ≠ one-ℝ
-neq-zero-one-ℝ = neq-zero-one-ℚ ∘ is-injective-real-ℚ
+abstract
+  neq-zero-one-ℝ : zero-ℝ ≠ one-ℝ
+  neq-zero-one-ℝ = neq-zero-one-ℚ ∘ is-injective-real-ℚ
 
-neq-raise-zero-one-ℝ : (l : Level) → raise-zero-ℝ l ≠ raise-one-ℝ l
-neq-raise-zero-one-ℝ l 0=1ℝ =
-  neq-zero-one-ℚ
-    ( is-injective-real-ℚ
-      ( eq-sim-ℝ
-        ( similarity-reasoning-ℝ
+  neq-raise-zero-one-ℝ : (l : Level) → raise-zero-ℝ l ≠ raise-one-ℝ l
+  neq-raise-zero-one-ℝ l 0=1ℝ =
+    neq-zero-one-ℚ
+      ( is-injective-real-ℚ
+        ( eq-sim-ℝ
+          ( similarity-reasoning-ℝ
             zero-ℝ
             ~ℝ raise-zero-ℝ l
               by sim-raise-ℝ l zero-ℝ
