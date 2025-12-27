@@ -50,7 +50,8 @@ A [series](analysis.series-real-numbers.md) `∑ aₙ` of
 [real numbers](real-numbers.dedekind-real-numbers.md)
 [converges](analysis.convergent-series-real-numbers.md) if there
 [exists](foundation.existential-quantification.md) a convergent series `∑ bₙ`
-such that `aₙ ≤ bₙ` for all `n`.
+such that `aₙ ≤ bₙ` for all `n`. This is the
+{{#concept "comparison test" Disambiguation="for series in the real numbers" Agda=comparison-test-series-ℝ Agda=is-convergent-comparison-test-series-ℝ}} for series in the real numbers.
 
 ## Definition
 
