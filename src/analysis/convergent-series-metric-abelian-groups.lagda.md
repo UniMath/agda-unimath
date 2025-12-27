@@ -122,7 +122,7 @@ module _
       ( has-limit-partial-sum-convergent-series-Metric-Ab)
 ```
 
-### A series converges if and only if it converges after dropping a finite number of terms
+### A series converges if it converges after dropping a finite number of terms
 
 ```agda
 module _
