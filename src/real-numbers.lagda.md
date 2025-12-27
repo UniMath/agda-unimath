@@ -115,9 +115,11 @@ open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.strictly-increasing-functions-real-numbers public
 open import real-numbers.subsets-real-numbers public
+open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.uniformly-continuous-functions-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
+open import real-numbers.zero-real-numbers public
 ```
