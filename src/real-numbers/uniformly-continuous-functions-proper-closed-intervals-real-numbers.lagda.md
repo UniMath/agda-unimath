@@ -37,7 +37,7 @@ open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-inter
 ## Idea
 
 A
-{{#concept "uniformly continuous function" Disambiguation="from a proper closed interval in ℝ to ℝ" Agda=uniformly-continuous-function-proper-closed-interval-ℝ}}
+{{#concept "uniformly continuous function" Disambiguation="from a proper closed interval in ℝ to ℝ" Agda=ucont-map-proper-closed-interval-ℝ}}
 from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real numbers
@@ -47,27 +47,27 @@ always has its [image](foundation.images.md) contained in a
 ## Definition
 
 ```agda
-is-uniformly-continuous-prop-function-proper-closed-interval-ℝ :
+is-ucont-prop-map-proper-closed-interval-ℝ :
   {l1 l2 l3 l4 : Level} ([a,b] : proper-closed-interval-ℝ l3 l4) →
   (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) →
   Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
-is-uniformly-continuous-prop-function-proper-closed-interval-ℝ {l1} {l2} [a,b] =
+is-ucont-prop-map-proper-closed-interval-ℝ {l1} {l2} [a,b] =
   is-uniformly-continuous-prop-function-Metric-Space
     ( metric-space-proper-closed-interval-ℝ l1 [a,b])
     ( metric-space-ℝ l2)
 
-is-uniformly-continuous-function-proper-closed-interval-ℝ :
+is-ucont-map-proper-closed-interval-ℝ :
   {l1 l2 l3 l4 : Level} ([a,b] : proper-closed-interval-ℝ l3 l4) →
   (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) →
   UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
-is-uniformly-continuous-function-proper-closed-interval-ℝ [a,b] f =
+is-ucont-map-proper-closed-interval-ℝ [a,b] f =
   type-Prop
-    ( is-uniformly-continuous-prop-function-proper-closed-interval-ℝ [a,b] f)
+    ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f)
 
-uniformly-continuous-function-proper-closed-interval-ℝ :
+ucont-map-proper-closed-interval-ℝ :
   (l1 l2 : Level) {l3 l4 : Level} →
   proper-closed-interval-ℝ l3 l4 → UU (lsuc (l1 ⊔ l2) ⊔ l3 ⊔ l4)
-uniformly-continuous-function-proper-closed-interval-ℝ l1 l2 [a,b] =
+ucont-map-proper-closed-interval-ℝ l1 l2 [a,b] =
   uniformly-continuous-function-Metric-Space
     ( metric-space-proper-closed-interval-ℝ l1 [a,b])
     ( metric-space-ℝ l2)
@@ -81,34 +81,34 @@ uniformly-continuous-function-proper-closed-interval-ℝ l1 l2 [a,b] =
 module _
   {l1 l2 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : uniformly-continuous-function-proper-closed-interval-ℝ l1 l2 [a,b])
+  (f : ucont-map-proper-closed-interval-ℝ l1 l2 [a,b])
   where
 
-  map-uniformly-continuous-function-proper-closed-interval-ℝ :
+  map-ucont-map-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2
-  map-uniformly-continuous-function-proper-closed-interval-ℝ = pr1 f
+  map-ucont-map-proper-closed-interval-ℝ = pr1 f
 
-  is-uniformly-continuous-map-uniformly-continuous-function-proper-closed-interval-ℝ :
-    is-uniformly-continuous-function-proper-closed-interval-ℝ
+  is-ucont-map-ucont-map-proper-closed-interval-ℝ :
+    is-ucont-map-proper-closed-interval-ℝ
       ( [a,b])
-      ( map-uniformly-continuous-function-proper-closed-interval-ℝ)
-  is-uniformly-continuous-map-uniformly-continuous-function-proper-closed-interval-ℝ =
+      ( map-ucont-map-proper-closed-interval-ℝ)
+  is-ucont-map-ucont-map-proper-closed-interval-ℝ =
     pr2 f
 
-  subset-im-uniformly-continuous-function-proper-closed-interval-ℝ :
+  subset-im-ucont-map-proper-closed-interval-ℝ :
     subset-ℝ (lsuc (l1 ⊔ l2)) l2
-  subset-im-uniformly-continuous-function-proper-closed-interval-ℝ =
-    subtype-im map-uniformly-continuous-function-proper-closed-interval-ℝ
+  subset-im-ucont-map-proper-closed-interval-ℝ =
+    subtype-im map-ucont-map-proper-closed-interval-ℝ
 
-  subspace-im-uniformly-continuous-function-proper-closed-interval-ℝ :
+  subspace-im-ucont-map-proper-closed-interval-ℝ :
     Metric-Space (lsuc (l1 ⊔ l2)) l2
-  subspace-im-uniformly-continuous-function-proper-closed-interval-ℝ =
+  subspace-im-ucont-map-proper-closed-interval-ℝ =
     metric-space-subset-ℝ
-      ( subset-im-uniformly-continuous-function-proper-closed-interval-ℝ)
+      ( subset-im-ucont-map-proper-closed-interval-ℝ)
 
-  inhabited-totally-bounded-subset-im-uniformly-continuous-function-proper-closed-interval-ℝ :
+  inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ :
     inhabited-totally-bounded-subset-ℝ (lsuc (l1 ⊔ l2)) l2 (lsuc (l1 ⊔ l2))
-  inhabited-totally-bounded-subset-im-uniformly-continuous-function-proper-closed-interval-ℝ =
+  inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ =
     im-uniformly-continuous-function-inhabited-totally-bounded-Metric-Space
         ( metric-space-proper-closed-interval-ℝ l1 [a,b])
         ( metric-space-ℝ l2)
@@ -116,20 +116,20 @@ module _
         ( is-totally-bounded-proper-closed-interval-ℝ l1 [a,b])
         ( is-inhabited-subtype-proper-closed-interval-ℝ l1 [a,b])
 
-  closed-interval-im-uniformly-continuous-function-proper-closed-interval-ℝ :
+  closed-interval-im-ucont-map-proper-closed-interval-ℝ :
     closed-interval-ℝ l2 l2
-  closed-interval-im-uniformly-continuous-function-proper-closed-interval-ℝ =
+  closed-interval-im-ucont-map-proper-closed-interval-ℝ =
     enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ
-      ( inhabited-totally-bounded-subset-im-uniformly-continuous-function-proper-closed-interval-ℝ)
+      ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ)
 
-  leq-closed-interval-im-uniformly-continuous-function-proper-closed-interval-ℝ :
-    subset-im-uniformly-continuous-function-proper-closed-interval-ℝ ⊆
+  leq-closed-interval-im-ucont-map-proper-closed-interval-ℝ :
+    subset-im-ucont-map-proper-closed-interval-ℝ ⊆
     subtype-closed-interval-ℝ
       ( l2)
-      ( closed-interval-im-uniformly-continuous-function-proper-closed-interval-ℝ)
-  leq-closed-interval-im-uniformly-continuous-function-proper-closed-interval-ℝ =
+      ( closed-interval-im-ucont-map-proper-closed-interval-ℝ)
+  leq-closed-interval-im-ucont-map-proper-closed-interval-ℝ =
     subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ
-      ( inhabited-totally-bounded-subset-im-uniformly-continuous-function-proper-closed-interval-ℝ)
+      ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ)
 ```
 
 ### The absolute value of elements in the image of a uniformly continuous function on a proper closed interval is bounded
@@ -138,32 +138,32 @@ module _
 module _
   {l1 l2 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : uniformly-continuous-function-proper-closed-interval-ℝ l1 l2 [a,b])
+  (f : ucont-map-proper-closed-interval-ℝ l1 l2 [a,b])
   where
 
-  nonnegative-upper-bound-abs-im-uniformly-continuous-function-proper-closed-interval-ℝ :
+  nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ :
     Σ ( ℝ⁰⁺ l2)
       ( λ B →
         (x : type-proper-closed-interval-ℝ l1 [a,b]) →
         leq-ℝ⁰⁺
           ( nonnegative-abs-ℝ
-            ( map-uniformly-continuous-function-proper-closed-interval-ℝ
+            ( map-ucont-map-proper-closed-interval-ℝ
               ( [a,b])
               ( f)
               ( x)))
           ( B))
-  nonnegative-upper-bound-abs-im-uniformly-continuous-function-proper-closed-interval-ℝ =
+  nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ =
     let
       (B , H) =
         nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ
-          ( inhabited-totally-bounded-subset-im-uniformly-continuous-function-proper-closed-interval-ℝ
+          ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ
             ( [a,b])
             ( f))
     in
       ( B ,
         ( H) ∘
         ( map-unit-im
-          ( map-uniformly-continuous-function-proper-closed-interval-ℝ
+          ( map-ucont-map-proper-closed-interval-ℝ
             ( [a,b])
             ( f))))
 ```
