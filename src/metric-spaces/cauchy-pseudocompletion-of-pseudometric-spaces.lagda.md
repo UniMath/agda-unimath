@@ -221,12 +221,12 @@ module _
                   ( monotonic-neighborhood-Pseudometric-Space M yθa zε
                     ( θa +ℚ⁺ ε +ℚ⁺ dyz)
                     ( θa +ℚ⁺ ε +ℚ⁺ dyz +ℚ⁺ θb)
-                    ( le-right-add-ℚ⁺ (θa +ℚ⁺ ε +ℚ⁺ dyz) θb)
+                    ( le-left-add-ℚ⁺ (θa +ℚ⁺ ε +ℚ⁺ dyz) θb)
                     ( Ndyz θa ε))
                   ( monotonic-neighborhood-Pseudometric-Space M xδ yθa
                     ( δ +ℚ⁺ θa +ℚ⁺ dxy)
                     ( δ +ℚ⁺ θa +ℚ⁺ dxy +ℚ⁺ θb)
-                    ( le-right-add-ℚ⁺ (δ +ℚ⁺ θa +ℚ⁺ dxy) θb)
+                    ( le-left-add-ℚ⁺ (δ +ℚ⁺ θa +ℚ⁺ dxy) θb)
                     ( Ndxy δ θa))))
 ```
 
@@ -306,7 +306,7 @@ module _
     preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
       d x y Nxy δ ε =
       monotonic-neighborhood-Pseudometric-Space M x y d (δ +ℚ⁺ ε +ℚ⁺ d)
-        ( le-left-add-ℚ⁺ (δ +ℚ⁺ ε) d)
+        ( le-right-add-ℚ⁺ (δ +ℚ⁺ ε) d)
         ( Nxy)
 
     reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space :
@@ -386,7 +386,7 @@ module _
         ( x)
         ( α +ℚ⁺ β)
         ( α +ℚ⁺ β +ℚ⁺ d)
-        ( le-right-add-ℚ⁺ (α +ℚ⁺ β) d)
+        ( le-left-add-ℚ⁺ (α +ℚ⁺ β) d)
         ( H α β)
 
     is-limit-sim-const-cauchy-approximation-Pseudometric-Space :
