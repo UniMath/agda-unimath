@@ -18,7 +18,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import functional-analysis.normed-real-vector-spaces
+open import linear-algebra.normed-real-vector-spaces
 
 open import lists.sequences
 
@@ -38,7 +38,7 @@ open import real-numbers.dedekind-real-numbers
 
 A
 {{#concept "real Banach space" WDID=Q194397 WD="Banach space" Agda=ℝ-Banach-Space}}
-is a [normed](functional-analysis.normed-real-vector-spaces.md)
+is a [normed](linear-algebra.normed-real-vector-spaces.md)
 [real vector space](linear-algebra.real-vector-spaces.md) such that the
 [metric space](metric-spaces.metric-spaces.md) induced by the norm is
 [complete](metric-spaces.complete-metric-spaces.md).

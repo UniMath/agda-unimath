@@ -33,7 +33,7 @@ is a [series](analysis.series-metric-abelian-groups.md) in the
 [metric abelian group](analysis.metric-abelian-groups.md)
 [associated](analysis.metric-abelian-groups-normed-real-vector-spaces.md) with
 the underlying
-[normed real vector space](functional-analysis.normed-real-vector-spaces.md).
+[normed real vector space](linear-algebra.normed-real-vector-spaces.md).
 
 ## Definition
 

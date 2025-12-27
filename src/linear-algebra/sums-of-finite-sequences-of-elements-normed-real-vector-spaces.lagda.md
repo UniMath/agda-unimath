@@ -12,9 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import functional-analysis.normed-real-vector-spaces
-
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
+
+open import linear-algebra.normed-real-vector-spaces
 
 open import lists.finite-sequences
 
@@ -36,7 +36,7 @@ open import univalent-combinatorics.standard-finite-types
 The
 {{#concept "sum" Disambiguation="of a finite sequence of elements of a normed vector space over ℝ" Agda=sum-fin-sequence-type-Normed-ℝ-Vector-Space}}
 of a [finite sequence](lists.finite-sequences.md) of elements of a
-[normed vector space](functional-analysis.normed-real-vector-spaces.md) over the
+[normed vector space](linear-algebra.normed-real-vector-spaces.md) over the
 [real numbers](real-numbers.dedekind-real-numbers.md) is the
 [sum of the sequence](group-theory.sums-of-finite-sequences-of-elements-abelian-groups.md)
 in the [abelian group](group-theory.abelian-groups.md) of the vector space under
