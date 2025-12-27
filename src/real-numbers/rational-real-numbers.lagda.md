@@ -388,11 +388,11 @@ abstract
       ( is-injective-real-ℚ
         ( eq-sim-ℝ
           ( similarity-reasoning-ℝ
-              zero-ℝ
-              ~ℝ raise-zero-ℝ l
-                by sim-raise-ℝ l zero-ℝ
-              ~ℝ raise-ℝ l one-ℝ
-                by sim-eq-ℝ 0=1ℝ
-              ~ℝ one-ℝ
-                by sim-raise-ℝ' l one-ℝ)))
+            zero-ℝ
+            ~ℝ raise-zero-ℝ l
+              by sim-raise-ℝ l zero-ℝ
+            ~ℝ raise-ℝ l one-ℝ
+              by sim-eq-ℝ 0=1ℝ
+            ~ℝ one-ℝ
+              by sim-raise-ℝ' l one-ℝ)))
 ```
