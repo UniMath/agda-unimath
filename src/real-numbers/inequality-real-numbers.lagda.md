@@ -9,7 +9,11 @@ module real-numbers.inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -40,6 +44,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -298,6 +303,38 @@ module _
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
 ```
 
+### The canonical map from integers to the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℤ}
+  where
+
+  abstract
+    preserves-leq-real-ℤ : leq-ℤ x y → leq-ℝ (real-ℤ x) (real-ℤ y)
+    preserves-leq-real-ℤ x≤y =
+      preserves-leq-real-ℚ (preserves-leq-rational-ℤ x≤y)
+
+    reflects-leq-real-ℤ : leq-ℝ (real-ℤ x) (real-ℤ y) → leq-ℤ x y
+    reflects-leq-real-ℤ x≤y =
+      reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
+```
+
+### The canonical map from natural numbers to the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℕ}
+  where
+
+  abstract
+    preserves-leq-real-ℕ : leq-ℕ x y → leq-ℝ (real-ℕ x) (real-ℕ y)
+    preserves-leq-real-ℕ x≤y = preserves-leq-real-ℤ (leq-int-ℕ x y x≤y)
+
+    reflects-leq-real-ℕ : leq-ℝ (real-ℕ x) (real-ℕ y) → leq-ℕ x y
+    reflects-leq-real-ℕ x≤y = reflects-leq-int-ℕ x y (reflects-leq-real-ℤ x≤y)
+```
+
 ### Negation reverses inequality on the real numbers
 
 ```agda
@@ -354,6 +391,23 @@ module _
     preserves-leq-left-sim-ℝ
       ( x1~x2)
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
+```
+
+### Inequality on the real numbers is invariant under raising universe levels
+
+```agda
+abstract
+  preserves-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
+  preserves-leq-left-raise-ℝ l {x} {y} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
+
+  preserves-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
+  preserves-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
 ```
 
 ### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
@@ -466,6 +520,13 @@ module _
               ex-falso (H (λ L → is-disjoint-cut-ℝ y r (L r R , r∈Uy))))
             ( is-located-lower-upper-cut-ℝ y q<r))
         ( forward-implication (is-rounded-lower-cut-ℝ x q) Q)
+```
+
+### `0 ≤ 1`
+
+```agda
+leq-zero-one-ℝ : leq-ℝ zero-ℝ one-ℝ
+leq-zero-one-ℝ = preserves-leq-real-ℚ leq-zero-one-ℚ
 ```
 
 ## References

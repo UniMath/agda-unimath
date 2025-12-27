@@ -45,6 +45,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -331,7 +332,17 @@ abstract
 ### Raising the universe levels of nonnegative real numbers
 
 ```agda
+abstract
+  preserves-is-nonnegative-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) →
+    is-nonnegative-ℝ x → is-nonnegative-ℝ (raise-ℝ l x)
+  preserves-is-nonnegative-raise-ℝ l x is-nonneg-x =
+    is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x)
+
 raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
 raise-ℝ⁰⁺ l (x , is-nonneg-x) =
-  (raise-ℝ l x , is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x))
+  (raise-ℝ l x , preserves-is-nonnegative-raise-ℝ l x is-nonneg-x)
+
+raise-zero-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
+raise-zero-ℝ⁰⁺ l = raise-ℝ⁰⁺ l zero-ℝ⁰⁺
 ```

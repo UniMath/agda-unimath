@@ -24,6 +24,8 @@ open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
 open import real-numbers.dedekind-real-numbers public
+open import real-numbers.dense-subsets-real-numbers public
+open import real-numbers.density-rationals-proper-closed-intervals-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
@@ -74,6 +76,7 @@ open import real-numbers.multiplication-nonzero-real-numbers public
 open import real-numbers.multiplication-positive-and-negative-real-numbers public
 open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
+open import real-numbers.multiplication-uniformly-continuous-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.multiplicative-inverses-negative-real-numbers public
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers public
 open import real-numbers.multiplicative-inverses-positive-real-numbers public
@@ -85,8 +88,10 @@ open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
+open import real-numbers.product-metric-space-of-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
+open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
@@ -107,11 +112,16 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
+open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
+open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.uniformly-continuous-functions-real-numbers public
+open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
+open import real-numbers.zero-nonnegative-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```

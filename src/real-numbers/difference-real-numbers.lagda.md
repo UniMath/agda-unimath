@@ -22,6 +22,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -108,4 +109,38 @@ abstract
     sim-ℝ a a' → sim-ℝ b b' → sim-ℝ (a -ℝ b) (a' -ℝ b')
   preserves-sim-diff-ℝ a~a' b~b' =
     preserves-sim-add-ℝ a~a' (preserves-sim-neg-ℝ b~b')
+```
+
+### `(x - y) + (y - z) = x - z`
+
+```agda
+abstract
+  add-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ ((x -ℝ y) +ℝ (y -ℝ z)) (x -ℝ z)
+  add-diff-ℝ x y z =
+    similarity-reasoning-ℝ
+      (x -ℝ y) +ℝ (y -ℝ z)
+      ~ℝ ((x -ℝ y) +ℝ y) -ℝ z
+        by sim-eq-ℝ (inv (associative-add-ℝ _ _ _))
+      ~ℝ x -ℝ z
+        by preserves-sim-right-add-ℝ _ _ _ (cancel-right-diff-add-ℝ x y)
+```
+
+### If `x - y = 0`, `x = y`
+
+```agda
+abstract
+  sim-is-zero-diff-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-zero-ℝ (x -ℝ y) → sim-ℝ x y
+  sim-is-zero-diff-ℝ x y x-y~0 =
+    symmetric-sim-ℝ
+      ( similarity-reasoning-ℝ
+        y
+        ~ℝ zero-ℝ +ℝ y
+          by sim-eq-ℝ (inv (left-unit-law-add-ℝ y))
+        ~ℝ (x -ℝ y) +ℝ y
+          by preserves-sim-right-add-ℝ y _ _ (symmetric-sim-ℝ x-y~0)
+        ~ℝ x
+          by cancel-right-diff-add-ℝ x y)
 ```

@@ -35,9 +35,11 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets
 
+open import real-numbers.absolute-value-closed-intervals-real-numbers
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
@@ -172,6 +174,99 @@ module _
     ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
 ```
 
+### Multiplication is Lipschitz on the Cartesian product of two closed intervals of real numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (l5 l6 : Level)
+  ([a,b] : closed-interval-ℝ l1 l2)
+  ([c,d] : closed-interval-ℝ l3 l4)
+  where
+
+  mul-type-closed-interval-ℝ :
+    type-closed-interval-ℝ l5 [a,b] → type-closed-interval-ℝ l6 [c,d] →
+    ℝ (l5 ⊔ l6)
+  mul-type-closed-interval-ℝ (x , _) (y , _) = x *ℝ y
+
+  abstract
+    is-lipschitz-mul-type-closed-interval-ℝ :
+      is-lipschitz-function-Metric-Space
+        ( product-Metric-Space
+          ( metric-space-closed-interval-ℝ l5 [a,b])
+          ( metric-space-closed-interval-ℝ l6 [c,d]))
+        ( metric-space-ℝ (l5 ⊔ l6))
+        ( ind-Σ mul-type-closed-interval-ℝ)
+    is-lipschitz-mul-type-closed-interval-ℝ =
+      let
+        ((a , b) , a≤b) = [a,b]
+        ((c , d) , c≤d) = [c,d]
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        open do-syntax-trunc-Prop
+          ( is-lipschitz-function-prop-Metric-Space
+            ( product-Metric-Space
+              ( metric-space-closed-interval-ℝ l5 [a,b])
+              ( metric-space-closed-interval-ℝ l6 [c,d]))
+            ( metric-space-ℝ (l5 ⊔ l6))
+            ( ind-Σ mul-type-closed-interval-ℝ))
+        mx⁰⁺@(mx , _) = nonnegative-max-abs-closed-interval-ℝ [a,b]
+        my⁰⁺@(my , _) = nonnegative-max-abs-closed-interval-ℝ [c,d]
+      in do
+        (q⁺@(q , _) , my+mx<q) ← exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ (my⁰⁺ +ℝ⁰⁺ mx⁰⁺)
+        intro-exists
+          ( q⁺)
+          ( λ ε ((x₁ , _) , (y₁ , y₁∈[c,d])) ((x₂ , x₂∈[a,b]) , (y₂ , _))
+            (Nεx₁x₂ , Nεy₁y₂) →
+            neighborhood-dist-ℝ
+              ( q⁺ *ℚ⁺ ε)
+              ( x₁ *ℝ y₁)
+              ( x₂ *ℝ y₂)
+              ( chain-of-inequalities
+                dist-ℝ (x₁ *ℝ y₁) (x₂ *ℝ y₂)
+                ≤ dist-ℝ (x₁ *ℝ y₁) (x₂ *ℝ y₁) +ℝ dist-ℝ (x₂ *ℝ y₁) (x₂ *ℝ y₂)
+                  by triangle-inequality-dist-ℝ _ _ _
+                ≤ dist-ℝ x₁ x₂ *ℝ abs-ℝ y₁ +ℝ abs-ℝ x₂ *ℝ dist-ℝ y₁ y₂
+                  by
+                    leq-eq-ℝ
+                      ( inv
+                        ( ap-add-ℝ
+                          ( right-distributive-abs-mul-dist-ℝ x₁ x₂ y₁)
+                          ( left-distributive-abs-mul-dist-ℝ x₂ y₁ y₂)))
+                ≤ real-ℚ⁺ ε *ℝ my +ℝ mx *ℝ real-ℚ⁺ ε
+                  by
+                    preserves-leq-add-ℝ
+                      ( preserves-leq-mul-ℝ⁰⁺
+                        ( nonnegative-dist-ℝ x₁ x₂)
+                        ( nonnegative-real-ℚ⁺ ε)
+                        ( nonnegative-abs-ℝ y₁)
+                        ( my⁰⁺)
+                        ( leq-dist-neighborhood-ℝ ε x₁ x₂ Nεx₁x₂)
+                        ( leq-max-abs-is-in-closed-interval-ℝ
+                          ( [c,d])
+                          ( y₁)
+                          ( y₁∈[c,d])))
+                      ( preserves-leq-mul-ℝ⁰⁺
+                        ( nonnegative-abs-ℝ x₂)
+                        ( mx⁰⁺)
+                        ( nonnegative-dist-ℝ y₁ y₂)
+                        ( nonnegative-real-ℚ⁺ ε)
+                        ( leq-max-abs-is-in-closed-interval-ℝ [a,b] x₂ x₂∈[a,b])
+                        ( leq-dist-neighborhood-ℝ ε y₁ y₂ Nεy₁y₂))
+                ≤ my *ℝ real-ℚ⁺ ε +ℝ mx *ℝ real-ℚ⁺ ε
+                  by leq-eq-ℝ (ap-add-ℝ (commutative-mul-ℝ _ _) refl)
+                ≤ (my +ℝ mx) *ℝ real-ℚ⁺ ε
+                  by
+                    leq-eq-ℝ
+                      ( inv (right-distributive-mul-add-ℝ my mx (real-ℚ⁺ ε)))
+                ≤ real-ℚ q *ℝ real-ℚ⁺ ε
+                  by
+                    preserves-leq-right-mul-ℝ⁰⁺
+                      ( nonnegative-real-ℚ⁺ ε)
+                      ( leq-le-ℝ (le-real-is-in-upper-cut-ℝ (my +ℝ mx) my+mx<q))
+                ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
+                  by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))
+```
+
 ### Multiplication is Lipschitz on the Cartesian product of two inhabited totally bounded subsets of ℝ
 
 ```agda
@@ -197,7 +292,6 @@ module _
         ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ)
     is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
       let
-        open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
           do-syntax-trunc-Prop
             ( is-lipschitz-function-prop-Metric-Space
@@ -206,64 +300,22 @@ module _
                 ( subspace-inhabited-totally-bounded-subset-ℝ Y))
               ( metric-space-ℝ (l2 ⊔ l5))
               ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ))
+        [a,b] = enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ X
+        [c,d] = enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ Y
+        X⊆[a,b] =
+          subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ X
+        Y⊆[c,d] =
+          subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ Y
       in do
-        let
-          (mx⁰⁺@(mx , _) , is-max-mx) =
-            nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ
-              ( X)
-          (my⁰⁺@(my , _) , is-max-my) =
-            nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ
-              ( Y)
-        (q⁺@(q , _) , my+mx<q) ← exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ (my⁰⁺ +ℝ⁰⁺ mx⁰⁺)
+        (q , H) ←
+          is-lipschitz-mul-type-closed-interval-ℝ l2 l5 [a,b] [c,d]
         intro-exists
-          ( q⁺)
-          ( λ ε ((x₁ , _) , (y₁ , y₁∈Y)) ((x₂ , x₂∈X) , (y₂ , _))
-              (Nεx₁x₂ , Nεy₁y₂) →
-            neighborhood-dist-ℝ
-              ( q⁺ *ℚ⁺ ε)
-              ( x₁ *ℝ y₁)
-              ( x₂ *ℝ y₂)
-              ( chain-of-inequalities
-                dist-ℝ (x₁ *ℝ y₁) (x₂ *ℝ y₂)
-                ≤ dist-ℝ (x₁ *ℝ y₁) (x₂ *ℝ y₁) +ℝ dist-ℝ (x₂ *ℝ y₁) (x₂ *ℝ y₂)
-                  by triangle-inequality-dist-ℝ _ _ _
-                ≤ dist-ℝ x₁ x₂ *ℝ abs-ℝ y₁ +ℝ abs-ℝ x₂ *ℝ dist-ℝ y₁ y₂
-                  by
-                    leq-eq-ℝ
-                      ( inv
-                        ( ap-add-ℝ
-                          ( right-distributive-abs-mul-dist-ℝ x₁ x₂ y₁)
-                          ( left-distributive-abs-mul-dist-ℝ x₂ y₁ y₂)))
-                ≤ real-ℚ⁺ ε *ℝ my +ℝ mx *ℝ real-ℚ⁺ ε
-                  by
-                    preserves-leq-add-ℝ
-                      ( preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-dist-ℝ x₁ x₂)
-                        ( nonnegative-real-ℚ⁺ ε)
-                        ( nonnegative-abs-ℝ y₁)
-                        ( my⁰⁺)
-                        ( leq-dist-neighborhood-ℝ ε x₁ x₂ Nεx₁x₂)
-                        ( is-max-my (y₁ , y₁∈Y)))
-                      ( preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-abs-ℝ x₂)
-                        ( mx⁰⁺)
-                        ( nonnegative-dist-ℝ y₁ y₂)
-                        ( nonnegative-real-ℚ⁺ ε)
-                        ( is-max-mx (x₂ , x₂∈X))
-                        ( leq-dist-neighborhood-ℝ ε y₁ y₂ Nεy₁y₂))
-                ≤ my *ℝ real-ℚ⁺ ε +ℝ mx *ℝ real-ℚ⁺ ε
-                  by leq-eq-ℝ (ap-add-ℝ (commutative-mul-ℝ _ _) refl)
-                ≤ (my +ℝ mx) *ℝ real-ℚ⁺ ε
-                  by
-                    leq-eq-ℝ
-                      ( inv (right-distributive-mul-add-ℝ my mx (real-ℚ⁺ ε)))
-                ≤ real-ℚ q *ℝ real-ℚ⁺ ε
-                  by
-                    preserves-leq-right-mul-ℝ⁰⁺
-                      ( nonnegative-real-ℚ⁺ ε)
-                      ( leq-le-ℝ (le-real-is-in-upper-cut-ℝ (my +ℝ mx) my+mx<q))
-                ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
-                  by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))
+          q
+          ( λ ε ((x₁ , x₁∈X) , (y₁ , y₁∈Y)) ((x₂ , x₂∈X) , (y₂ , y₂∈Y)) N →
+            H ( ε)
+              ( (x₁ , X⊆[a,b] x₁ x₁∈X) , (y₁ , Y⊆[c,d] y₁ y₁∈Y))
+              ( (x₂ , X⊆[a,b] x₂ x₂∈X) , (y₂ , Y⊆[c,d] y₂ y₂∈Y))
+              ( N))
 
   lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
     lipschitz-function-Metric-Space

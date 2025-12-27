@@ -10,9 +10,14 @@ module metric-spaces.totally-bounded-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.images
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
@@ -27,7 +32,10 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.nets-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.uniform-homeomorphisms-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
+
+open import univalent-combinatorics.finitely-enumerable-subtypes
 ```
 
 </details>
@@ -234,4 +242,57 @@ product-Totally-Bounded-Metric-Space :
 product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY) =
   ( product-Metric-Space X Y ,
     is-totally-bounded-product-Totally-Bounded-Metric-Space (X , tbX) (Y , tbY))
+```
+
+### The property of being totally bounded is preserved by uniform homeomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : uniform-homeomorphism-Metric-Space X Y)
+  where
+
+  abstract
+    preserves-is-totally-bounded-uniform-homeomorphism-Metric-Space :
+      is-totally-bounded-Metric-Space l5 X →
+      is-totally-bounded-Metric-Space (l1 ⊔ l3 ⊔ l5) Y
+    preserves-is-totally-bounded-uniform-homeomorphism-Metric-Space =
+      map-binary-trunc-Prop
+        ( λ (μf , is-mod-μf) μtbX ε →
+          let
+            (SX , is-net-SX) = μtbX (μf ε)
+            SY :
+              finitely-enumerable-subtype (l1 ⊔ l3 ⊔ l5) (type-Metric-Space Y)
+            SY =
+              im-finitely-enumerable-subtype
+                ( map-uniform-homeomorphism-Metric-Space X Y f)
+                ( SX)
+          in
+            ( SY ,
+              λ y →
+                let
+                  open
+                    do-syntax-trunc-Prop
+                      ( ∃
+                        ( type-finitely-enumerable-subtype SY)
+                        ( λ (y' , _) →
+                          neighborhood-prop-Metric-Space Y ε y' y))
+                in do
+                  let x = map-inv-uniform-homeomorphism-Metric-Space X Y f y
+                  ((x' , x'∈SX) , Nμfεxx') ← is-net-SX x
+                  intro-exists
+                    ( map-unit-im
+                      ( map-uniform-homeomorphism-Metric-Space X Y f ∘ pr1)
+                      ( x' , x'∈SX))
+                    ( tr
+                      ( neighborhood-Metric-Space Y ε _)
+                      ( is-section-map-inv-uniform-homeomorphism-Metric-Space
+                        ( X)
+                        ( Y)
+                        ( f)
+                        ( y))
+                      ( is-mod-μf x' ε x Nμfεxx'))))
+        ( is-uniformly-continuous-map-uniform-homeomorphism-Metric-Space X Y f)
 ```
