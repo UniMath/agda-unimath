@@ -117,7 +117,9 @@ add-cauchy-sequence-ℝ {l1} {l2} u v =
 
 ### Squeeze theorem
 
-If `aₙ ≤ bₙ ≤ cₙ`, where `aₙ` is increasing, `cₙ` is decreasing, and `cₙ - aₙ` approaches 0, then there exists a Cauchy modulus for `bₙ`.
+If `aₙ ≤ bₙ ≤ cₙ`, where `aₙ` is increasing, `cₙ` is decreasing, and `cₙ - aₙ`
+[approaches 0](real-numbers.real-sequences-approximating-zero.md), then there
+exists a Cauchy modulus for `bₙ`.
 
 ```agda
 module _
@@ -133,9 +135,9 @@ module _
   where
 
   abstract
-    squeeze-theorem-sequence-ℝ :
+    is-cauchy-squeeze-theorem-sequence-ℝ :
       is-inhabited (is-cauchy-sequence-ℝ b)
-    squeeze-theorem-sequence-ℝ =
+    is-cauchy-squeeze-theorem-sequence-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open do-syntax-trunc-Prop (is-inhabited-Prop (is-cauchy-sequence-ℝ b))
