@@ -240,16 +240,16 @@ module _
     is-increasing-is-increasing-rational-ℝ H =
       is-increasing-is-increasing-dense-subset-pointwise-continuous-map-ℝ
         ( f)
-        ( dense-subset-rational-real-ℝ l1)
+        ( dense-subset-rational-ℝ l1)
         ( λ (x , p , x~p) (y , q , y~q) x≤y →
           binary-tr
             ( leq-ℝ)
             ( ap
               ( map-pointwise-continuous-map-ℝ f)
-              ( inv (eq-raise-real-rational-is-rational-ℝ x p x~p)))
+              ( inv (eq-raise-real-rational-is-rational-ℝ x~p)))
             ( ap
               ( map-pointwise-continuous-map-ℝ f)
-              ( inv (eq-raise-real-rational-is-rational-ℝ y q y~q)))
+              ( inv (eq-raise-real-rational-is-rational-ℝ y~q)))
             ( H
               ( p)
               ( q)
@@ -257,7 +257,7 @@ module _
                 ( leq-leq-raise-ℝ l1
                   ( binary-tr
                     ( leq-ℝ)
-                    ( eq-raise-real-rational-is-rational-ℝ x p x~p)
-                    ( eq-raise-real-rational-is-rational-ℝ y q y~q)
+                    ( eq-raise-real-rational-is-rational-ℝ x~p)
+                    ( eq-raise-real-rational-is-rational-ℝ y~q)
                     ( x≤y))))))
 ```
