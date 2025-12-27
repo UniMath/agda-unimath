@@ -19,10 +19,14 @@ open import real-numbers.addition-upper-dedekind-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
 open import real-numbers.binary-maximum-real-numbers public
+open import real-numbers.binary-mean-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
+open import real-numbers.classical-limits-of-functions-real-numbers public
+open import real-numbers.classically-pointwise-continuous-functions-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
+open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -33,6 +37,8 @@ open import real-numbers.extensionality-multiplication-bilinear-form-real-number
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
+open import real-numbers.increasing-functions-real-numbers public
+open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
@@ -53,6 +59,7 @@ open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
+open import real-numbers.limits-of-functions-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
@@ -83,6 +90,7 @@ open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.pointwise-continuous-functions-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
@@ -108,6 +116,7 @@ open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbe
 open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
+open import real-numbers.strictly-increasing-functions-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public

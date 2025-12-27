@@ -825,3 +825,24 @@ abstract
       ( x)
       ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy~1)
 ```
+
+### The canonical embedding of rational numbers preserves multiplicative inverses
+
+```agda
+abstract
+  real-inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
+  real-inv-positive-real-ℚ⁺ q =
+    eq-sim-ℝ
+      ( symmetric-sim-ℝ
+        ( unique-right-inv-ℝ⁺
+          ( positive-real-ℚ⁺ q)
+          ( positive-real-ℚ⁺ (inv-ℚ⁺ q))
+          ( sim-eq-ℝ
+            ( mul-real-ℚ _ _ ∙ ap real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)))))
+
+  inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ positive-real-ℚ⁺ (inv-ℚ⁺ q)
+  inv-positive-real-ℚ⁺ q =
+    eq-ℝ⁺ _ _ (real-inv-positive-real-ℚ⁺ q)
+```
