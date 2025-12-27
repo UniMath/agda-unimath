@@ -31,7 +31,7 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 A
 {{#concept "limit" Disambiguation="of a sequence in a metric abelian group" Agda=is-limit-sequence-Metric-Ab}}
 of a
-[sequence in a metric abelian group](analysis.sequences-metric-abelian-groups.md)
+[sequence](analysis.sequences-metric-abelian-groups.md)  in a [metric abelian group](analysis.metric-abelian-groups.md)
 is a [limit](metric-spaces.limits-of-sequences-metric-spaces.md) of the
 [sequence](lists.sequences.md) in the corresponding
 [metric space](metric-spaces.metric-spaces.md).
