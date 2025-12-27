@@ -1,7 +1,7 @@
 # Sums of finite sequences of elements in normed real vector spaces
 
 ```agda
-module functional-analysis.sums-of-finite-sequences-of-elements-normed-real-vector-spaces where
+module linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces where
 ```
 
 <details><summary>Imports</summary>

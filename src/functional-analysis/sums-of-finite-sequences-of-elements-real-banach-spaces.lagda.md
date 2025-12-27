@@ -13,7 +13,8 @@ open import foundation.function-types
 open import foundation.universe-levels
 
 open import functional-analysis.real-banach-spaces
-open import functional-analysis.sums-of-finite-sequences-of-elements-normed-real-vector-spaces
+
+open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces
 
 open import lists.finite-sequences
 
