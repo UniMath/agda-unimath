@@ -298,7 +298,7 @@ module _
     leq-abs-leq-leq-neg-ℝ = leq-max-leq-leq-ℝ x (neg-ℝ x) y
 ```
 
-### If `x < y` and `-x < y`, `|x| < y`
+### If `x < y` and `-x < y`, then `|x| < y`
 
 ```agda
 module _

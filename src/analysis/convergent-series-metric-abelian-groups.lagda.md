@@ -89,7 +89,7 @@ module _
     partial-sum-series-Metric-Ab series-convergent-series-Metric-Ab
 ```
 
-### The partial sums of a convergent series have a limit, the sum of the series
+### The partial sums of a convergent series converge to the sum of the series
 
 ```agda
 module _

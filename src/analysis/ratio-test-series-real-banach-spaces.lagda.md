@@ -99,14 +99,14 @@ module _
             ( λ r (r<1 , K) →
               ( r<1 ,
                 λ n →
-                  binary-tr
-                    ( leq-ℝ)
-                    ( inv (abs-real-ℝ⁰⁺ (nonnegative-norm-ℝ-Banach-Space V _)))
-                    ( ap-mul-ℝ
-                      ( refl)
-                      ( inv
-                        ( abs-real-ℝ⁰⁺ (nonnegative-norm-ℝ-Banach-Space V _))))
-                    ( K n)))
+                binary-tr
+                  ( leq-ℝ)
+                  ( inv (abs-real-ℝ⁰⁺ (nonnegative-norm-ℝ-Banach-Space V _)))
+                  ( ap-mul-ℝ
+                    ( refl)
+                    ( inv
+                      ( abs-real-ℝ⁰⁺ (nonnegative-norm-ℝ-Banach-Space V _))))
+                  ( K n)))
             ( H)))
 ```
 
