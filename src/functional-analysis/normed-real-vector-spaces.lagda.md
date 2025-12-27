@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module functional-analysis.normed-real-vector-spaces where
+module linear-algebra.normed-real-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
