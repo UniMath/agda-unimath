@@ -283,7 +283,8 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space (m , is-mod-m) =
+    preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space
+      (m , is-mod-m) =
       ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
         λ ε n N≤n →
         is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
@@ -307,7 +308,8 @@ module _
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
     preserves-limits-sequences-modulated-ucont-map-Metric-Space =
-      map-is-inhabited preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space
+      map-is-inhabited
+        ( preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space)
 ```
 
 ### Uniformly continuous maps between metric spaces preserve limits
