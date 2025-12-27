@@ -98,19 +98,19 @@ is-in-dense-subset-ℝ S =
 
 ```agda
 abstract
-  is-dense-rational-real-ℝ :
-    (l : Level) → is-dense-subset-ℝ (subtype-rational-real {l})
-  is-dense-rational-real-ℝ l x ε =
+  is-dense-subset-rational-ℝ :
+    (l : Level) → is-dense-subset-ℝ (subtype-rational-ℝ {l})
+  is-dense-subset-rational-ℝ l x ε =
     map-exists
       ( _)
       ( raise-real-ℚ l)
       ( λ q Nεxq → (Nεxq , q , is-rational-raise-real-ℚ l q))
       ( exists-rational-approximate-ℝ x ε)
 
-dense-subset-rational-real-ℝ :
+dense-subset-rational-ℝ :
   (l : Level) → dense-subset-ℝ l l
-dense-subset-rational-real-ℝ l =
-  ( subtype-rational-real , is-dense-rational-real-ℝ l)
+dense-subset-rational-ℝ l =
+  ( subtype-rational-ℝ , is-dense-subset-rational-ℝ l)
 ```
 
 ### Given a dense subset `S ⊆ R`, two reals `x < y`, and positive rationals `δx`, `δy`, there are `x' < y'` with `x' ∈ S`, `y' ∈ S`, `x'` in a `δx`-neighborhood of `x` and correspondingly for `y`
