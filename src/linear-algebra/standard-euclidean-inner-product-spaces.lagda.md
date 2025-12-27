@@ -25,13 +25,10 @@ open import foundation.universe-levels
 
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces
 open import linear-algebra.normed-real-vector-spaces
-open import linear-algebra.real-banach-spaces
-open import linear-algebra.real-hilbert-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.real-inner-product-spaces-are-normed
 open import linear-algebra.standard-euclidean-vector-spaces
 
-open import metric-spaces.complete-metric-spaces
 open import metric-spaces.lipschitz-functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
@@ -301,26 +298,4 @@ uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ n l =
     is-equiv-id ,
     is-uniformly-continuous-map-id-product-euclidean-metric-space-ℝ^ n l ,
     is-uniformly-continuous-map-id-euclidean-product-metric-space-ℝ^ n l)
-```
-
-### The Euclidean metric space `ℝⁿ` is complete
-
-```agda
-abstract
-  is-complete-euclidean-metric-space-ℝ^ :
-    (n : ℕ) (l : Level) →
-    is-complete-Metric-Space (euclidean-metric-space-ℝ^ n l)
-  is-complete-euclidean-metric-space-ℝ^ n l =
-    preserves-is-complete-uniform-homeomorphism-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
-      ( euclidean-metric-space-ℝ^ n l)
-      ( uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ n l)
-      ( is-complete-Π-metric-space-ℝ (Fin n) l)
-
-hilbert-space-ℝ^ : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
-hilbert-space-ℝ^ n l =
-  ( inner-product-space-ℝ^ n l , is-complete-euclidean-metric-space-ℝ^ n l)
-
-banach-space-ℝ^ : (n : ℕ) (l : Level) → ℝ-Banach-Space l (lsuc l)
-banach-space-ℝ^ n l = banach-space-ℝ-Hilbert-Space (hilbert-space-ℝ^ n l)
 ```

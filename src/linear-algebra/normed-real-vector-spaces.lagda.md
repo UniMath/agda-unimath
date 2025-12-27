@@ -210,33 +210,24 @@ module _
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
-  triangular-norm-Normed-ℝ-Vector-Space :
-    (v w : type-Normed-ℝ-Vector-Space) →
-    leq-ℝ
-      ( map-norm-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w))
-      ( map-norm-Normed-ℝ-Vector-Space v +ℝ map-norm-Normed-ℝ-Vector-Space w)
-  triangular-norm-Normed-ℝ-Vector-Space =
-    triangular-seminorm-Seminormed-ℝ-Vector-Space
-      ( seminormed-vector-space-Normed-ℝ-Vector-Space)
-
-  is-extensional-norm-Normed-ℝ-Vector-Space :
-    (v : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
-    v ＝ zero-Normed-ℝ-Vector-Space
-  is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
-
-  is-extensional-dist-Normed-ℝ-Vector-Space :
-    (v w : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
-    v ＝ w
-  is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
-    eq-is-zero-right-subtraction-Ab
-      ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
-      ( is-extensional-norm-Normed-ℝ-Vector-Space
-        ( diff-Normed-ℝ-Vector-Space v w)
-        ( |v-w|=0))
-
   abstract
+    is-extensional-norm-Normed-ℝ-Vector-Space :
+      (v : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
+      v ＝ zero-Normed-ℝ-Vector-Space
+    is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
+
+    is-extensional-dist-Normed-ℝ-Vector-Space :
+      (v w : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
+      v ＝ w
+    is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
+      eq-is-zero-right-subtraction-Ab
+        ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
+        ( is-extensional-norm-Normed-ℝ-Vector-Space
+          ( diff-Normed-ℝ-Vector-Space v w)
+          ( |v-w|=0))
+
     refl-dist-Normed-ℝ-Vector-Space :
       (v : type-Normed-ℝ-Vector-Space) →
       is-zero-ℝ (dist-Normed-ℝ-Vector-Space v v)
