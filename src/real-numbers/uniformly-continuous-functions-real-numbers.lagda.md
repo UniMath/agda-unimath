@@ -9,6 +9,8 @@ module real-numbers.uniformly-continuous-functions-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
@@ -33,6 +35,18 @@ other, `f x` and `f y` are within an `ε`-neighborhood.
 ## Definition
 
 ```agda
+is-uniformly-continuous-prop-function-ℝ :
+  {l1 l2 : Level} → (ℝ l1 → ℝ l2) → Prop (lsuc l1 ⊔ l2)
+is-uniformly-continuous-prop-function-ℝ {l1} {l2} =
+  is-uniformly-continuous-prop-function-Metric-Space
+    ( metric-space-ℝ l1)
+    ( metric-space-ℝ l2)
+
+is-uniformly-continuous-function-ℝ :
+  {l1 l2 : Level} → (ℝ l1 → ℝ l2) → UU (lsuc l1 ⊔ l2)
+is-uniformly-continuous-function-ℝ f =
+  type-Prop (is-uniformly-continuous-prop-function-ℝ f)
+
 uniformly-continuous-function-ℝ : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 uniformly-continuous-function-ℝ l1 l2 =
   uniformly-continuous-function-Metric-Space
@@ -56,4 +70,9 @@ map-uniformly-continuous-function-ℝ {l1} {l2} =
   map-uniformly-continuous-function-Metric-Space
     ( metric-space-ℝ l1)
     ( metric-space-ℝ l2)
+
+is-uniformly-continuous-map-uniformly-continuous-function-ℝ :
+  {l1 l2 : Level} (f : uniformly-continuous-function-ℝ l1 l2) →
+  is-uniformly-continuous-function-ℝ (map-uniformly-continuous-function-ℝ f)
+is-uniformly-continuous-map-uniformly-continuous-function-ℝ = pr2
 ```

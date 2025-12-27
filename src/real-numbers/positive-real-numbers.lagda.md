@@ -152,6 +152,11 @@ abstract
     {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁺ x) y →
     is-positive-ℝ y
   is-positive-le-ℝ⁺ (x , 0<x) y x<y = transitive-le-ℝ zero-ℝ x y x<y 0<x
+
+  is-positive-leq-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) → leq-ℝ (real-ℝ⁺ x) y →
+    is-positive-ℝ y
+  is-positive-leq-ℝ⁺ (x , 0<x) y x≤y = concatenate-le-leq-ℝ zero-ℝ x y 0<x x≤y
 ```
 
 ### A real number is positive if and only if zero is in its lower cut
@@ -353,6 +358,9 @@ abstract
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
+raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
 ```
 
 ### Raising a positive real to its own level is the identity

@@ -23,6 +23,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -112,8 +113,6 @@ abstract
   is-nonnegative-is-nonnegative-left-mul-ℝ⁺ x⁺@(x , 0<x) {y = y} 0≤xy =
     reflects-leq-left-mul-ℝ⁺
       ( x⁺)
-      ( zero-ℝ)
-      ( y)
       ( preserves-leq-left-sim-ℝ
         ( symmetric-sim-ℝ (right-zero-law-mul-ℝ _))
         ( 0≤xy))
@@ -164,6 +163,22 @@ abstract opaque
           ( [ax,bx])
           ( [ay,by])
           ( is-positive-le-ℚ⁺ q⁺ q<[ax,bx][ay,by]))
+```
+
+### If `xy` is positive and `x` is positive, `y` is positive
+
+```agda
+abstract
+  is-positive-right-factor-is-positive-left-factor-is-positive-mul-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    is-positive-ℝ x → is-positive-ℝ (x *ℝ y) → is-positive-ℝ y
+  is-positive-right-factor-is-positive-left-factor-is-positive-mul-ℝ
+    x y 0<x 0<xy =
+    elim-disjunction
+      ( is-positive-prop-ℝ y)
+      ( λ (x<0 , _) → ex-falso (asymmetric-le-ℝ x<0 0<x))
+      ( pr2)
+      ( same-sign-is-positive-mul-ℝ x y 0<xy)
 ```
 
 ### If the product of two real numbers is negative, one is positive and the other negative
