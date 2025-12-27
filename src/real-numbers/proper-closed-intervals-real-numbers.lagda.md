@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -46,6 +47,7 @@ open import real-numbers.isometry-addition-real-numbers
 open import real-numbers.isometry-difference-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -101,6 +103,20 @@ type-proper-closed-interval-ℝ l [a,b] =
 ```
 
 ## Properties
+
+### The subtype of a proper closed interval is inhabited
+
+```agda
+abstract
+  is-inhabited-subtype-proper-closed-interval-ℝ :
+    {l1 l2 : Level} (l3 : Level) ([a,b] : proper-closed-interval-ℝ l1 l2) →
+    is-inhabited-subtype (subtype-proper-closed-interval-ℝ (l1 ⊔ l3) [a,b])
+  is-inhabited-subtype-proper-closed-interval-ℝ l3 (a , b , a<b) =
+    intro-exists
+      ( raise-ℝ l3 a)
+      ( leq-sim-ℝ (sim-raise-ℝ l3 a) ,
+        preserves-leq-left-raise-ℝ l3 (leq-le-ℝ a<b))
+```
 
 ### The metric space associated with a proper closed interval
 

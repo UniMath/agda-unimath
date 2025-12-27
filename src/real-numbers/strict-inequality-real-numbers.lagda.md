@@ -9,6 +9,9 @@ module real-numbers.strict-inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -637,6 +640,31 @@ module _
 ```agda
 le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
 le-zero-one-ℝ = preserves-le-real-ℚ le-zero-one-ℚ
+```
+
+### For any real number, there exists a greater positive rational number
+
+```agda
+abstract
+  exists-greater-positive-rational-ℝ :
+    {l : Level} (x : ℝ l) → exists ℚ⁺ (λ q → le-prop-ℝ x (real-ℚ⁺ q))
+  exists-greater-positive-rational-ℝ x =
+    let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → le-prop-ℝ x (real-ℚ⁺ q)))
+    in do
+      (p , x<p) ← is-inhabited-upper-cut-ℝ x
+      let q = max-ℚ p one-ℚ
+      intro-exists
+        ( q ,
+          is-positive-le-zero-ℚ
+            ( concatenate-le-leq-ℚ
+              ( zero-ℚ)
+              ( one-ℚ)
+              ( q)
+              ( le-zero-one-ℚ)
+              ( leq-right-max-ℚ p one-ℚ)))
+        ( le-real-is-in-upper-cut-ℝ
+          ( x)
+          ( leq-upper-cut-ℝ x (leq-left-max-ℚ p one-ℚ) x<p))
 ```
 
 ## References

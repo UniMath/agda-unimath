@@ -164,8 +164,8 @@ cases-eq-compute-succ-strong-ind-ℕ :
   ( α :
     ( m : ℕ) (p : leq-ℕ m n) →
     ( induction-strong-ind-ℕ P (zero-strong-ind-ℕ P p0)
-      ( λ k z m₁ z₁ →
-        cases-succ-strong-ind-ℕ P pS k z m₁ (cases-leq-succ-ℕ z₁))
+      ( λ k z Mf z₁ →
+        cases-succ-strong-ind-ℕ P pS k z Mf (cases-leq-succ-ℕ z₁))
       n m p) ＝
     ( strong-ind-ℕ P p0 pS m)) →
   ( m : ℕ) (p : leq-ℕ m (succ-ℕ n)) →
@@ -205,8 +205,8 @@ eq-compute-succ-strong-ind-ℕ :
   ( n : ℕ) →
   ( m : ℕ) (p : leq-ℕ m n) →
   ( induction-strong-ind-ℕ P (zero-strong-ind-ℕ P p0)
-    ( λ k z m₁ z₁ →
-      cases-succ-strong-ind-ℕ P pS k z m₁ (cases-leq-succ-ℕ z₁))
+    ( λ k z Mf z₁ →
+      cases-succ-strong-ind-ℕ P pS k z Mf (cases-leq-succ-ℕ z₁))
     n m p) ＝
   ( strong-ind-ℕ P p0 pS m)
 eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ _ = refl

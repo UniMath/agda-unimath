@@ -76,6 +76,7 @@ open import real-numbers.multiplication-nonzero-real-numbers public
 open import real-numbers.multiplication-positive-and-negative-real-numbers public
 open import real-numbers.multiplication-positive-real-numbers public
 open import real-numbers.multiplication-real-numbers public
+open import real-numbers.multiplication-uniformly-continuous-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.multiplicative-inverses-negative-real-numbers public
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers public
 open import real-numbers.multiplicative-inverses-positive-real-numbers public
@@ -116,6 +117,8 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
+open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.uniformly-continuous-functions-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public

@@ -12,7 +12,9 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
@@ -23,6 +25,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuous-functions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -146,21 +149,21 @@ module _
   (Z : Metric-Space l5 l6)
   where
 
-  is-uniformly-continuous-comp-function-Metric-Space :
-    (g : type-function-Metric-Space Y Z) →
-    (f : type-function-Metric-Space X Y) →
-    is-uniformly-continuous-function-Metric-Space Y Z g →
-    is-uniformly-continuous-function-Metric-Space X Y f →
-    is-uniformly-continuous-function-Metric-Space X Z (g ∘ f)
-  is-uniformly-continuous-comp-function-Metric-Space g f H K =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( is-uniformly-continuous-prop-function-Metric-Space X Z (g ∘ f))
-    in
-      do
-        mg , is-modulus-uniform-mg ← H
-        mf , is-modulus-uniform-mf ← K
+  abstract
+    is-uniformly-continuous-comp-function-Metric-Space :
+      (g : type-function-Metric-Space Y Z) →
+      (f : type-function-Metric-Space X Y) →
+      is-uniformly-continuous-function-Metric-Space Y Z g →
+      is-uniformly-continuous-function-Metric-Space X Y f →
+      is-uniformly-continuous-function-Metric-Space X Z (g ∘ f)
+    is-uniformly-continuous-comp-function-Metric-Space g f H K =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-uniformly-continuous-prop-function-Metric-Space X Z (g ∘ f))
+      in do
+        (mg , is-modulus-uniform-mg) ← H
+        (mf , is-modulus-uniform-mf) ← K
         intro-exists
           ( mf ∘ mg)
           ( λ x ε x' →
@@ -231,6 +234,37 @@ module _
     uniformly-continuous-function-Metric-Space A B
   uniformly-continuous-isometry-Metric-Space =
     tot is-uniformly-continuous-is-isometry-Metric-Space
+```
+
+### The Cartesian product of modulated uniformly continuous functions on metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (C : Metric-Space l5 l6) (D : Metric-Space l7 l8)
+  where
+
+  product-uniformly-continuous-function-Metric-Space :
+    uniformly-continuous-function-Metric-Space A B →
+    uniformly-continuous-function-Metric-Space C D →
+    uniformly-continuous-function-Metric-Space
+      ( product-Metric-Space A C)
+      ( product-Metric-Space B D)
+  product-uniformly-continuous-function-Metric-Space (f , ∃μf) (g , ∃μg) =
+    ( map-product f g ,
+      map-binary-trunc-Prop
+        ( λ μf μg →
+          pr2
+            ( product-modulated-ucont-map-Metric-Space
+              ( A)
+              ( B)
+              ( C)
+              ( D)
+              ( f , μf)
+              ( g , μg)))
+        ( ∃μf)
+        ( ∃μg))
 ```
 
 ## See also
