@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module linear-algebra.real-banach-spaces where
+module functional-analysis.real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>

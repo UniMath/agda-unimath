@@ -7,17 +7,17 @@ module analysis.absolute-convergence-series-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.absolute-convergence-series-real-banach-spaces
-open import analysis.convergent-series-real-banach-spaces
 open import analysis.convergent-series-real-numbers
-open import analysis.series-real-banach-spaces
 open import analysis.series-real-numbers
 
 open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.absolute-convergence-series-real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
+open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
 
 open import real-numbers.absolute-value-real-numbers
 ```
@@ -78,7 +78,7 @@ module _
 
 ## See also
 
-- [Absolute convergence of series in real Banach spaces](analysis.absolute-convergence-series-real-banach-spaces.md)
+- [Absolute convergence of series in real Banach spaces](functional-analysis.absolute-convergence-series-real-banach-spaces.md)
 
 ## External links
 

@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module linear-algebra.real-hilbert-spaces where
+module functional-analysis.real-hilbert-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -15,8 +15,9 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import functional-analysis.real-banach-spaces
+
 open import linear-algebra.normed-real-vector-spaces
-open import linear-algebra.real-banach-spaces
 open import linear-algebra.real-inner-product-spaces
 open import linear-algebra.real-inner-product-spaces-are-normed
 
@@ -103,7 +104,7 @@ real-hilbert-space-ℝ l =
 
 ## See also
 
-- [Real Banach spaces](linear-algebra.real-banach-spaces.md)
+- [Real Banach spaces](functional-analysis.real-banach-spaces.md)
 
 ## External links
 

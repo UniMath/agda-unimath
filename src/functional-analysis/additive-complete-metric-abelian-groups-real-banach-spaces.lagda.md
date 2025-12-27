@@ -1,7 +1,7 @@
 # The underlying additive complete metric abelian groups of real Banach spaces
 
 ```agda
-module analysis.additive-complete-metric-abelian-groups-real-banach-spaces where
+module functional-analysis.additive-complete-metric-abelian-groups-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +16,7 @@ open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.real-banach-spaces
 
 open import real-numbers.metric-additive-group-of-real-numbers
 ```
@@ -25,7 +25,7 @@ open import real-numbers.metric-additive-group-of-real-numbers
 
 ## Idea
 
-Every [real Banach space](linear-algebra.real-banach-spaces.md) forms a
+Every [real Banach space](functional-analysis.real-banach-spaces.md) forms a
 [complete metric abelian group](analysis.complete-metric-abelian-groups.md)
 under addition.
 
