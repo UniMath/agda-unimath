@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.continuous-functions-metric-spaces
+open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
@@ -58,7 +58,7 @@ module _
   is-uniformly-continuous-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-prop-function-Metric-Space =
     is-inhabited-Prop
-      (modulus-of-uniform-continuity-function-Metric-Space X Y f)
+      ( modulus-of-uniform-continuity-function-Metric-Space X Y f)
 
   is-uniformly-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-function-Metric-Space =
