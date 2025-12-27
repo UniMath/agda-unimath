@@ -84,7 +84,6 @@ open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces public
-open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dense-subsets-metric-spaces public
