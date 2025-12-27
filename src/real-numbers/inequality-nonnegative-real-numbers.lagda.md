@@ -17,6 +17,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -24,8 +25,10 @@ open import foundation.universe-levels
 
 open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -155,4 +158,18 @@ module _
       sim-sim-leq-ℝ
         ( leq-leq-positive-rational-ℝ⁰⁺ x y (backward-implication ∘ H) ,
           leq-leq-positive-rational-ℝ⁰⁺ y x (forward-implication ∘ H))
+```
+
+### A nonnegative real number less than or equal to zero is zero
+
+```agda
+abstract
+  eq-zero-leq-zero-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ⁰⁺ x zero-ℝ⁰⁺ → x ＝ raise-zero-ℝ⁰⁺ l
+  eq-zero-leq-zero-ℝ⁰⁺ {l} x⁰⁺@(x , 0≤x) x≤0 =
+    eq-ℝ⁰⁺ _ _
+      ( eq-sim-ℝ
+        ( transitive-sim-ℝ _ _ _
+          ( sim-raise-ℝ l zero-ℝ)
+          ( sim-sim-leq-ℝ (x≤0 , 0≤x))))
 ```
