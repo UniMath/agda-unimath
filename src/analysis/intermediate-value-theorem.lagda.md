@@ -393,7 +393,7 @@ module _
         ( has-limit-prop-sequence-ℝ seq-intermediate-value-theorem-ℝ)
         ( λ μ →
           has-limit-cauchy-sequence-ℝ (seq-intermediate-value-theorem-ℝ , μ))
-        ( exists-cauchy-modulus-narrowing-bounds-sequence-ℝ
+        ( is-cauchy-squeeze-theorem-sequence-ℝ
           ( lower-bound-seq-intermediate-value-theorem-ℝ)
           ( seq-intermediate-value-theorem-ℝ)
           ( upper-bound-seq-intermediate-value-theorem-ℝ)
