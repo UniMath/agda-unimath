@@ -1,7 +1,7 @@
 # Series in real Banach spaces
 
 ```agda
-module analysis.series-real-banach-spaces where
+module functional-analysis.series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.real-banach-spaces
 
 open import lists.sequences
 ```
