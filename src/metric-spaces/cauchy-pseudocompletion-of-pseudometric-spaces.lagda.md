@@ -101,7 +101,7 @@ module _
       neighborhood-cauchy-pseudocompletion-Pseudometric-Space M d x x
     is-reflexive-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
       d x δ ε =
-      monotonic-neighborhood-Pseudometric-Space M
+      strictly-monotonic-neighborhood-Pseudometric-Space M
         ( map-cauchy-approximation-Pseudometric-Space M x δ)
         ( map-cauchy-approximation-Pseudometric-Space M x ε)
         ( δ +ℚ⁺ ε)
@@ -173,7 +173,7 @@ module _
               (θa , θb , θa+θb=θ₂) = split-ℚ⁺ θ₂
               yθa = map-cauchy-approximation-Pseudometric-Space M y θa
             in
-              monotonic-neighborhood-Pseudometric-Space
+              strictly-monotonic-neighborhood-Pseudometric-Space
                 ( M)
                 ( xδ)
                 ( zε)
@@ -218,12 +218,12 @@ module _
                 ( triangular-neighborhood-Pseudometric-Space M xδ yθa zε
                   ( δ +ℚ⁺ θa +ℚ⁺ dxy +ℚ⁺ θb)
                   ( θa +ℚ⁺ ε +ℚ⁺ dyz +ℚ⁺ θb)
-                  ( monotonic-neighborhood-Pseudometric-Space M yθa zε
+                  ( strictly-monotonic-neighborhood-Pseudometric-Space M yθa zε
                     ( θa +ℚ⁺ ε +ℚ⁺ dyz)
                     ( θa +ℚ⁺ ε +ℚ⁺ dyz +ℚ⁺ θb)
                     ( le-left-add-ℚ⁺ (θa +ℚ⁺ ε +ℚ⁺ dyz) θb)
                     ( Ndyz θa ε))
-                  ( monotonic-neighborhood-Pseudometric-Space M xδ yθa
+                  ( strictly-monotonic-neighborhood-Pseudometric-Space M xδ yθa
                     ( δ +ℚ⁺ θa +ℚ⁺ dxy)
                     ( δ +ℚ⁺ θa +ℚ⁺ dxy +ℚ⁺ θb)
                     ( le-left-add-ℚ⁺ (δ +ℚ⁺ θa +ℚ⁺ dxy) θb)
@@ -305,7 +305,7 @@ module _
         ( map-cauchy-pseudocompletion-Pseudometric-Space y)
     preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
       d x y Nxy δ ε =
-      monotonic-neighborhood-Pseudometric-Space M x y d (δ +ℚ⁺ ε +ℚ⁺ d)
+      strictly-monotonic-neighborhood-Pseudometric-Space M x y d (δ +ℚ⁺ ε +ℚ⁺ d)
         ( le-right-add-ℚ⁺ (δ +ℚ⁺ ε) d)
         ( Nxy)
 
@@ -380,7 +380,7 @@ module _
         ( u)
         ( const-cauchy-approximation-Pseudometric-Space M x)
     sim-const-is-limit-cauchy-approximation-Pseudometric-Space H d α β =
-      monotonic-neighborhood-Pseudometric-Space
+      strictly-monotonic-neighborhood-Pseudometric-Space
         ( M)
         ( map-cauchy-approximation-Pseudometric-Space M u α)
         ( x)

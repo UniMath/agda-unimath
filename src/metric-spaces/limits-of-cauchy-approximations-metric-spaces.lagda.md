@@ -160,7 +160,7 @@ module _
         ( u)
         ( const-cauchy-approximation-Metric-Space M x)
     sim-const-is-limit-cauchy-approximation-Metric-Space H d α β =
-      monotonic-neighborhood-Metric-Space
+      strictly-monotonic-neighborhood-Metric-Space
         ( M)
         ( map-cauchy-approximation-Metric-Space M u α)
         ( x)

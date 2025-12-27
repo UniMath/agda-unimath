@@ -182,14 +182,14 @@ module _
         ( λ y y∈Nεminx →
           ( NεSx⊆S
             ( y)
-            ( weakly-monotonic-neighborhood-Metric-Space X x y
+            ( monotonic-neighborhood-Metric-Space X x y
               ( εmin)
               ( εS)
               ( leq-left-min-ℚ⁺ εS εT)
               ( y∈Nεminx)) ,
             NεTx⊆T
               ( y)
-              ( weakly-monotonic-neighborhood-Metric-Space X x y
+              ( monotonic-neighborhood-Metric-Space X x y
                 ( εmin)
                 ( εT)
                 ( leq-right-min-ℚ⁺ εS εT)
@@ -261,13 +261,13 @@ module _
           ( min-ℚ⁺ δ ε)
           ( λ (x' , y') (Nminxx' , Nminyy') →
             ( Nδx⊆Ox x'
-              ( weakly-monotonic-neighborhood-Metric-Space X x x'
+              ( monotonic-neighborhood-Metric-Space X x x'
                 ( min-ℚ⁺ δ ε)
                 ( δ)
                 ( leq-left-min-ℚ⁺ δ ε)
                 ( Nminxx')) ,
               Nεy⊆Oy y'
-                ( weakly-monotonic-neighborhood-Metric-Space Y y y'
+                ( monotonic-neighborhood-Metric-Space Y y y'
                   ( min-ℚ⁺ δ ε)
                   ( ε)
                   ( leq-right-min-ℚ⁺ δ ε)

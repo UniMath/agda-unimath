@@ -297,7 +297,7 @@ module _
           ( a)
           ( ε)
           ( a')
-          ( weakly-monotonic-neighborhood-Metric-Space A a a' _ _
+          ( monotonic-neighborhood-Metric-Space A a a' _ _
             ( leq-left-min-ℚ⁺
               ( modulus-modulated-ucont-map-Metric-Space A B f ε)
               ( modulus-modulated-ucont-map-Metric-Space C D g ε))
@@ -309,7 +309,7 @@ module _
           ( c)
           ( ε)
           ( c')
-          ( weakly-monotonic-neighborhood-Metric-Space C c c' _ _
+          ( monotonic-neighborhood-Metric-Space C c c' _ _
             ( leq-right-min-ℚ⁺
               ( modulus-modulated-ucont-map-Metric-Space A B f ε)
               ( modulus-modulated-ucont-map-Metric-Space C D g ε))
@@ -376,13 +376,13 @@ module _
             ( δ)
             ( η)
             ( is-mod-mf₂ b' a η a'
-              ( weakly-monotonic-neighborhood-Metric-Space A a a'
+              ( monotonic-neighborhood-Metric-Space A a a'
                 ( ε')
                 ( mf₂ η)
                 ( leq-right-min-ℚ⁺ (mf₁ δ) (mf₂ η))
                 ( Nε'aa')))
             ( is-mod-mf₁ a b δ b'
-              ( weakly-monotonic-neighborhood-Metric-Space B b b'
+              ( monotonic-neighborhood-Metric-Space B b b'
                 ( ε')
                 ( mf₁ δ)
                 ( leq-left-min-ℚ⁺ (mf₁ δ) (mf₂ η))

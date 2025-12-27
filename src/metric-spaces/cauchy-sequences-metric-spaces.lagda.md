@@ -224,7 +224,7 @@ module _
       in
         modulus-limit-modulus-sequence-Metric-Space M x lim H ε'⁺ ,
         λ m k n≤m n≤k →
-        monotonic-neighborhood-Metric-Space
+        strictly-monotonic-neighborhood-Metric-Space
           ( M)
           ( x m)
           ( x k)
@@ -288,7 +288,7 @@ module _
         in
           rec-coproduct
             ( λ mε≤mδ →
-              monotonic-neighborhood-Metric-Space
+              strictly-monotonic-neighborhood-Metric-Space
                 ( M)
                 ( xmε)
                 ( xmδ)
@@ -302,7 +302,7 @@ module _
                   ( mδ)
                   ( mε≤mδ)))
             ( λ mδ≤mε →
-              monotonic-neighborhood-Metric-Space
+              strictly-monotonic-neighborhood-Metric-Space
                 ( M)
                 ( xmε)
                 ( xmδ)
@@ -370,7 +370,7 @@ module _
       xn = map-cauchy-sequence-Metric-Space M x n
       xm = map-cauchy-sequence-Metric-Space M x m
     in
-      monotonic-neighborhood-Metric-Space
+      strictly-monotonic-neighborhood-Metric-Space
         ( M)
         ( xm)
         ( lim)
@@ -459,7 +459,7 @@ module _
             1/m' = positive-reciprocal-rational-ℕ⁺ m'
             1/k' = positive-reciprocal-rational-ℕ⁺ k'
           in
-            monotonic-neighborhood-Metric-Space
+            strictly-monotonic-neighborhood-Metric-Space
               ( M)
               ( xm)
               ( xk)
@@ -537,7 +537,7 @@ module _
           in
             ( nat-nonzero-ℕ n⁺ ,
               λ m n≤m →
-              monotonic-neighborhood-Metric-Space M
+              strictly-monotonic-neighborhood-Metric-Space M
                 ( map-cauchy-sequence-cauchy-approximation-Metric-Space M x m)
                 ( lim)
                 ( positive-reciprocal-rational-succ-ℕ m)
@@ -610,7 +610,7 @@ module _
             ( n)
             ( right-leq-max-ℕ n₁ n₂)
       in
-        monotonic-neighborhood-Metric-Space
+        strictly-monotonic-neighborhood-Metric-Space
           ( M)
           ( xε)
           ( lim)
@@ -628,7 +628,7 @@ module _
             ( ε⁺ +ℚ⁺ δ'⁺)
             ( δ'⁺)
             ( x1/n'-l-neighborhood)
-            ( monotonic-neighborhood-Metric-Space
+            ( strictly-monotonic-neighborhood-Metric-Space
               ( M)
               ( xε)
               ( x1/n')
@@ -825,7 +825,7 @@ module
         (k , k+με'=p) = subtraction-leq-ℕ (μ ε') p με'≤p
         (l , l+με'=q) = subtraction-leq-ℕ (μ ε') q με'≤q
       in
-        monotonic-neighborhood-Metric-Space
+        strictly-monotonic-neighborhood-Metric-Space
           ( X)
           ( a p)
           ( a q)

@@ -224,27 +224,33 @@ module _
   saturated-neighborhood-Pseudometric-Space =
     pr2 (pr2 (pr2 is-pseudometric-neighborhood-Pseudometric-Space))
 
-  monotonic-neighborhood-Pseudometric-Space :
+  strictly-monotonic-neighborhood-Pseudometric-Space :
     (x y : type-Pseudometric-Space) (d₁ d₂ : ℚ⁺) →
     le-ℚ⁺ d₁ d₂ →
     neighborhood-Pseudometric-Space d₁ x y →
     neighborhood-Pseudometric-Space d₂ x y
-  monotonic-neighborhood-Pseudometric-Space =
+  strictly-monotonic-neighborhood-Pseudometric-Space =
     is-monotonic-is-reflexive-triangular-Rational-Neighborhood-Relation
       neighborhood-prop-Pseudometric-Space
       refl-neighborhood-Pseudometric-Space
       triangular-neighborhood-Pseudometric-Space
 
   abstract
-    weakly-monotonic-neighborhood-Pseudometric-Space :
+    monotonic-neighborhood-Pseudometric-Space :
       (x y : type-Pseudometric-Space) (d₁ d₂ : ℚ⁺) →
       leq-ℚ⁺ d₁ d₂ →
       neighborhood-Pseudometric-Space d₁ x y →
       neighborhood-Pseudometric-Space d₂ x y
-    weakly-monotonic-neighborhood-Pseudometric-Space x y d₁ d₂ d₁≤d₂ Nd₁xy =
+    monotonic-neighborhood-Pseudometric-Space x y d₁ d₂ d₁≤d₂ Nd₁xy =
       trichotomy-le-ℚ (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂)
         ( λ d₁<d₂ →
-          monotonic-neighborhood-Pseudometric-Space x y d₁ d₂ d₁<d₂ Nd₁xy)
+          strictly-monotonic-neighborhood-Pseudometric-Space
+            ( x)
+            ( y)
+            ( d₁)
+            ( d₂)
+            ( d₁<d₂)
+            ( Nd₁xy))
         ( λ d₁=d₂ →
           tr (λ d → neighborhood-Pseudometric-Space d x y) (eq-ℚ⁺ d₁=d₂) Nd₁xy)
         ( λ d₂<d₁ → ex-falso (not-leq-le-ℚ _ _ d₂<d₁ d₁≤d₂))
@@ -256,7 +262,7 @@ module _
   iff-le-neighborhood-Pseudometric-Space =
     iff-le-neighborhood-saturated-monotonic-Rational-Neighborhood-Relation
       neighborhood-prop-Pseudometric-Space
-      monotonic-neighborhood-Pseudometric-Space
+      strictly-monotonic-neighborhood-Pseudometric-Space
       saturated-neighborhood-Pseudometric-Space
 ```
 

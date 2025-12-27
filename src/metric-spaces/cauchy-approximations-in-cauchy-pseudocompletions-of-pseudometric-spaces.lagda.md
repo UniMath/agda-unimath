@@ -184,7 +184,7 @@ module _
             ( η +ℚ⁺ θ)
             ( δ)
             ( ε))
-          ( monotonic-neighborhood-Pseudometric-Space M
+          ( strictly-monotonic-neighborhood-Pseudometric-Space M
             ( map-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
               ( δ)
               ( η))
@@ -426,7 +426,7 @@ module _
       ( (α +ℚ⁺ β) +ℚ⁺ (ε +ℚ⁺ δ))
       ( map-cauchy-approximation-Pseudometric-Space M u β)
       ( map-cauchy-approximation-Pseudometric-Space M u ε)
-      ( monotonic-neighborhood-Pseudometric-Space M
+      ( strictly-monotonic-neighborhood-Pseudometric-Space M
         ( map-cauchy-approximation-Pseudometric-Space M u β)
         ( map-cauchy-approximation-Pseudometric-Space M u ε)
         ( β +ℚ⁺ ε)

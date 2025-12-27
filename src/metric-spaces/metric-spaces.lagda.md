@@ -213,21 +213,21 @@ module _
   triangular-neighborhood-Metric-Space =
     triangular-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  monotonic-neighborhood-Metric-Space :
+  strictly-monotonic-neighborhood-Metric-Space :
     (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
     le-ℚ⁺ d₁ d₂ →
     neighborhood-Metric-Space d₁ x y →
     neighborhood-Metric-Space d₂ x y
-  monotonic-neighborhood-Metric-Space =
-    monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
+  strictly-monotonic-neighborhood-Metric-Space =
+    strictly-monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
-  weakly-monotonic-neighborhood-Metric-Space :
+  monotonic-neighborhood-Metric-Space :
     (x y : type-Metric-Space) (d₁ d₂ : ℚ⁺) →
     leq-ℚ⁺ d₁ d₂ →
     neighborhood-Metric-Space d₁ x y →
     neighborhood-Metric-Space d₂ x y
-  weakly-monotonic-neighborhood-Metric-Space =
-    weakly-monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
+  monotonic-neighborhood-Metric-Space =
+    monotonic-neighborhood-Pseudometric-Space pseudometric-Metric-Space
 
   saturated-neighborhood-Metric-Space :
     (ε : ℚ⁺) (x y : type-Metric-Space) →
