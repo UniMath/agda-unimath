@@ -1,7 +1,7 @@
 # The ratio test for series in real Banach spaces
 
 ```agda
-module analysis.ratio-test-series-real-banach-spaces where
+module functional-analysis.ratio-test-series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
