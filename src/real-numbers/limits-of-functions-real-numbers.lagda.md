@@ -41,7 +41,3 @@ is-limit-function-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → ℝ l1 → ℝ l2 → UU (lsuc l1 ⊔ l2)
 is-limit-function-ℝ f x y = type-Prop (is-limit-prop-function-ℝ f x y)
 ```
-
-## See also
-
-- [Classical limits of functions on the real numbers](real-numbers.classical-limits-of-functions-real-numbers.md)
