@@ -1,15 +1,13 @@
 # Absolute convergence of series in real Banach spaces
 
 ```agda
-module analysis.absolute-convergence-series-real-banach-spaces where
+module functional-analysis.absolute-convergence-series-real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-banach-spaces
 open import analysis.convergent-series-real-numbers
-open import analysis.series-real-banach-spaces
 open import analysis.series-real-numbers
 
 open import elementary-number-theory.addition-natural-numbers
@@ -27,8 +25,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
-open import linear-algebra.sums-of-finite-sequences-of-elements-real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
+open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
+open import functional-analysis.sums-of-finite-sequences-of-elements-real-banach-spaces
 
 open import metric-spaces.cauchy-sequences-metric-spaces
 
@@ -46,8 +46,8 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
-A [series](analysis.series-real-banach-spaces.md) `Σ aₙ` in a
-[real Banach space](linear-algebra.real-banach-spaces.md) is said to
+A [series](functional-analysis.series-real-banach-spaces.md) `Σ aₙ` in a
+[real Banach space](functional-analysis.real-banach-spaces.md) is said to
 {{#concept "absolutely converge" WDID=Q332465 WD="absolute convergence" Agda=is-absolutely-convergent-prop-series-ℝ-Banach-Space Disambiguation="series in a real Banach space"}}
 if the series of norms `Σ ∥aₙ∥` is a
 [convergent series](analysis.convergent-series-real-numbers.md) of
