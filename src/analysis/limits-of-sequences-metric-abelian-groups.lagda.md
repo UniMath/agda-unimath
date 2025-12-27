@@ -30,9 +30,9 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 
 A
 {{#concept "limit" Disambiguation="of a sequence in a metric abelian group" Agda=is-limit-sequence-Metric-Ab}}
-of a
-[sequence](analysis.sequences-metric-abelian-groups.md)  in a [metric abelian group](analysis.metric-abelian-groups.md)
-is a [limit](metric-spaces.limits-of-sequences-metric-spaces.md) of the
+of a [sequence](analysis.sequences-metric-abelian-groups.md) in a
+[metric abelian group](analysis.metric-abelian-groups.md) is a
+[limit](metric-spaces.limits-of-sequences-metric-spaces.md) of the
 [sequence](lists.sequences.md) in the corresponding
 [metric space](metric-spaces.metric-spaces.md).
 
@@ -83,7 +83,7 @@ module _
         ( add-sequence-type-Metric-Ab G u v)
         ( add-Metric-Ab G lim-u lim-v)
     distributive-add-is-limit-sequence-Metric-Ab is-lim-u is-lim-v =
-      preserves-is-limit-modulated-ucont-map-sequence-Metric-Space
+      preserves-limits-sequences-modulated-ucont-map-Metric-Space
         ( product-Metric-Space
           ( metric-space-Metric-Ab G)
           ( metric-space-Metric-Ab G))
@@ -116,7 +116,7 @@ module _
         ( neg-sequence-type-Metric-Ab G u)
         ( neg-Metric-Ab G lim-u)
     neg-is-limit-sequence-Metric-Ab =
-      preserves-limits-sequence-isometry-Metric-Space
+      preserves-limits-sequences-isometry-Metric-Space
         ( metric-space-Metric-Ab G)
         ( metric-space-Metric-Ab G)
         ( isometry-neg-Metric-Ab G)

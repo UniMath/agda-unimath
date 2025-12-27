@@ -275,7 +275,7 @@ module _
   where
 
   abstract
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space :
+    preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space :
       limit-modulus-sequence-Metric-Space A u lim →
       limit-modulus-sequence-Metric-Space
         ( B)
@@ -283,7 +283,7 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space (m , is-mod-m) =
+    preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space (m , is-mod-m) =
       ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
         λ ε n N≤n →
         is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
@@ -298,7 +298,7 @@ module _
             ( n)
             ( N≤n)))
 
-    preserves-is-limit-modulated-ucont-map-sequence-Metric-Space :
+    preserves-limits-sequences-modulated-ucont-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -306,8 +306,8 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    preserves-is-limit-modulated-ucont-map-sequence-Metric-Space =
-      map-is-inhabited modulated-ucont-map-limit-modulus-sequence-Metric-Space
+    preserves-limits-sequences-modulated-ucont-map-Metric-Space =
+      map-is-inhabited preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space
 ```
 
 ### Uniformly continuous maps between metric spaces preserve limits
@@ -323,7 +323,7 @@ module _
   where
 
   abstract
-    preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space :
+    preserves-limits-sequences-uniformly-continuous-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -331,12 +331,12 @@ module _
           ( map-uniformly-continuous-function-Metric-Space A B f)
           ( u))
         ( map-uniformly-continuous-function-Metric-Space A B f lim)
-    preserves-is-limit-uniformly-continuous-map-sequence-Metric-Space
+    preserves-limits-sequences-uniformly-continuous-map-Metric-Space
       is-limit-lim =
       rec-trunc-Prop
         ( is-limit-prop-sequence-Metric-Space B _ _)
         ( λ m →
-          preserves-is-limit-modulated-ucont-map-sequence-Metric-Space
+          preserves-limits-sequences-modulated-ucont-map-Metric-Space
             ( A)
             ( B)
             ( map-uniformly-continuous-function-Metric-Space A B f , m)
@@ -361,7 +361,7 @@ module _
   (lim : type-Metric-Space A)
   where
 
-  short-map-limit-modulus-sequence-Metric-Space :
+  preserves-limit-modulus-sequence-short-map-Metric-Space :
     limit-modulus-sequence-Metric-Space A u lim →
     limit-modulus-sequence-Metric-Space
       ( B)
@@ -369,15 +369,15 @@ module _
         ( map-short-function-Metric-Space A B f)
         ( u))
       ( map-short-function-Metric-Space A B f lim)
-  short-map-limit-modulus-sequence-Metric-Space =
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space
+  preserves-limit-modulus-sequence-short-map-Metric-Space =
+    preserves-limit-modulus-sequence-modulated-ucont-map-Metric-Space
       ( A)
       ( B)
       ( modulated-ucont-map-short-function-Metric-Space A B f)
       ( u)
       ( lim)
 
-  preserves-is-limit-short-map-sequence-Metric-Space :
+  preserves-limits-sequences-short-map-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
     is-limit-sequence-Metric-Space
       ( B)
@@ -385,8 +385,8 @@ module _
         ( map-short-function-Metric-Space A B f)
         ( u))
       ( map-short-function-Metric-Space A B f lim)
-  preserves-is-limit-short-map-sequence-Metric-Space =
-    map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
+  preserves-limits-sequences-short-map-Metric-Space =
+    map-is-inhabited preserves-limit-modulus-sequence-short-map-Metric-Space
 ```
 
 ### Isometries between metric spaces preserve limits
@@ -401,7 +401,7 @@ module _
   (lim : type-Metric-Space A)
   where
 
-  isometry-map-limit-modulus-sequence-Metric-Space :
+  preserves-limit-modulus-sequence-isometry-Metric-Space :
     limit-modulus-sequence-Metric-Space A u lim →
     limit-modulus-sequence-Metric-Space
       ( B)
@@ -409,15 +409,15 @@ module _
         ( map-isometry-Metric-Space A B f)
         ( u))
       ( map-isometry-Metric-Space A B f lim)
-  isometry-map-limit-modulus-sequence-Metric-Space =
-    short-map-limit-modulus-sequence-Metric-Space
+  preserves-limit-modulus-sequence-isometry-Metric-Space =
+    preserves-limit-modulus-sequence-short-map-Metric-Space
       ( A)
       ( B)
       ( short-isometry-Metric-Space A B f)
       ( u)
       ( lim)
 
-  preserves-limits-sequence-isometry-Metric-Space :
+  preserves-limits-sequences-isometry-Metric-Space :
     is-limit-sequence-Metric-Space A u lim →
     is-limit-sequence-Metric-Space
       ( B)
@@ -425,8 +425,8 @@ module _
         ( map-isometry-Metric-Space A B f)
         ( u))
       ( map-isometry-Metric-Space A B f lim)
-  preserves-limits-sequence-isometry-Metric-Space =
-    map-is-inhabited isometry-map-limit-modulus-sequence-Metric-Space
+  preserves-limits-sequences-isometry-Metric-Space =
+    map-is-inhabited preserves-limit-modulus-sequence-isometry-Metric-Space
 ```
 
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space
@@ -522,10 +522,10 @@ module _
           ( is-inflationary-extract-subsequence u v n)
           ( με≤n))
 
-    preserves-is-limit-subsequence-Metric-Space :
+    preserves-limits-subsequence-Metric-Space :
       is-limit-sequence-Metric-Space X u lim-u →
       is-limit-sequence-Metric-Space X (seq-subsequence u v) lim-u
-    preserves-is-limit-subsequence-Metric-Space =
+    preserves-limits-subsequence-Metric-Space =
       map-tot-exists
         ( preserves-is-limit-modulus-subsequence-Metric-Space)
 ```
