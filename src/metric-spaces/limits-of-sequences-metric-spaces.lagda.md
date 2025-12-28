@@ -31,6 +31,7 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
 open import metric-spaces.sequences-metric-spaces
@@ -131,88 +132,89 @@ module _
   (Ly : is-limit-sequence-Metric-Space M u y)
   where
 
-  sim-limit-sequence-Metric-Space : sim-Metric-Space M x y
-  sim-limit-sequence-Metric-Space =
-    rec-trunc-Prop
-      ( sim-prop-Metric-Space M x y)
-      ( λ My →
-        rec-trunc-Prop
-          ( Π-Prop ℚ⁺ (λ d → neighborhood-prop-Metric-Space M d x y))
-          ( λ Mx →
-            lemma-sim-limit-modulus-sequence-Metric-Space Mx My)
-          ( Lx))
-      ( Ly)
-    where
+  abstract
+    sim-limit-sequence-Metric-Space : sim-Metric-Space M x y
+    sim-limit-sequence-Metric-Space =
+      rec-trunc-Prop
+        ( sim-prop-Metric-Space M x y)
+        ( λ My →
+          rec-trunc-Prop
+            ( Π-Prop ℚ⁺ (λ d → neighborhood-prop-Metric-Space M d x y))
+            ( λ Mx →
+              lemma-sim-limit-modulus-sequence-Metric-Space Mx My)
+            ( Lx))
+        ( Ly)
+      where
 
-    lemma-add-limit-modulus-sequence-Metric-Space :
-      (d₁ d₂ : ℚ⁺) →
-      Σ ( ℕ)
-        ( λ N →
-          (n : ℕ) →
-          leq-ℕ N n →
-          neighborhood-Metric-Space M d₁ (u n) x) →
-      Σ ( ℕ)
-        ( λ N →
-          (n : ℕ) →
-          leq-ℕ N n →
-          neighborhood-Metric-Space M d₂ (u n) y) →
-      neighborhood-Metric-Space M (d₁ +ℚ⁺ d₂) x y
-    lemma-add-limit-modulus-sequence-Metric-Space d₁ d₂ (Nx , Mx) (Ny , My) =
-      triangular-neighborhood-Metric-Space M
-        ( x)
-        ( u (max-ℕ Nx Ny))
-        ( y)
-        ( d₁)
-        ( d₂)
-        ( My (max-ℕ Nx Ny) (right-leq-max-ℕ Nx Ny))
-        ( symmetric-neighborhood-Metric-Space M d₁
-          ( u (max-ℕ Nx Ny))
+      lemma-add-limit-modulus-sequence-Metric-Space :
+        (d₁ d₂ : ℚ⁺) →
+        Σ ( ℕ)
+          ( λ N →
+            (n : ℕ) →
+            leq-ℕ N n →
+            neighborhood-Metric-Space M d₁ (u n) x) →
+        Σ ( ℕ)
+          ( λ N →
+            (n : ℕ) →
+            leq-ℕ N n →
+            neighborhood-Metric-Space M d₂ (u n) y) →
+        neighborhood-Metric-Space M (d₁ +ℚ⁺ d₂) x y
+      lemma-add-limit-modulus-sequence-Metric-Space d₁ d₂ (Nx , Mx) (Ny , My) =
+        triangular-neighborhood-Metric-Space M
           ( x)
-          ( Mx (max-ℕ Nx Ny) (left-leq-max-ℕ Nx Ny)))
-
-    lemma-sim-limit-modulus-sequence-Metric-Space :
-      limit-modulus-sequence-Metric-Space M u x →
-      limit-modulus-sequence-Metric-Space M u y →
-      sim-Metric-Space M x y
-    lemma-sim-limit-modulus-sequence-Metric-Space mx my ε =
-      let
-        (δ , η , δ+η=ε) = split-ℚ⁺ ε
-        Nδ = modulus-limit-modulus-sequence-Metric-Space M u x mx δ
-        Nη = modulus-limit-modulus-sequence-Metric-Space M u y my η
-        Nε = max-ℕ Nδ Nη
-        Nδ≤Nε = left-leq-max-ℕ Nδ Nη
-        Nη≤Nε = right-leq-max-ℕ Nδ Nη
-
-        δ-neighborhood : neighborhood-Metric-Space M δ (u Nε) x
-        δ-neighborhood =
-          is-modulus-limit-modulus-sequence-Metric-Space M u x mx δ Nε Nδ≤Nε
-
-        η-neighborhood : neighborhood-Metric-Space M η (u Nε) y
-        η-neighborhood =
-          is-modulus-limit-modulus-sequence-Metric-Space M u y my η Nε Nη≤Nε
-
-      in
-        tr
-          ( is-upper-bound-dist-Metric-Space M x y)
-          ( δ+η=ε)
-          ( triangular-neighborhood-Metric-Space
-            ( M)
+          ( u (max-ℕ Nx Ny))
+          ( y)
+          ( d₁)
+          ( d₂)
+          ( My (max-ℕ Nx Ny) (right-leq-max-ℕ Nx Ny))
+          ( symmetric-neighborhood-Metric-Space M d₁
+            ( u (max-ℕ Nx Ny))
             ( x)
-            ( u Nε)
-            ( y)
-            ( δ)
-            ( η)
-            ( η-neighborhood)
-            ( symmetric-neighborhood-Metric-Space
-              ( M)
-              ( δ)
-              ( u Nε)
-              ( x)
-              ( δ-neighborhood)))
+            ( Mx (max-ℕ Nx Ny) (left-leq-max-ℕ Nx Ny)))
 
-  eq-limit-sequence-Metric-Space : x ＝ y
-  eq-limit-sequence-Metric-Space =
-    eq-sim-Metric-Space M x y sim-limit-sequence-Metric-Space
+      lemma-sim-limit-modulus-sequence-Metric-Space :
+        limit-modulus-sequence-Metric-Space M u x →
+        limit-modulus-sequence-Metric-Space M u y →
+        sim-Metric-Space M x y
+      lemma-sim-limit-modulus-sequence-Metric-Space mx my ε =
+        let
+          (δ , η , δ+η=ε) = split-ℚ⁺ ε
+          Nδ = modulus-limit-modulus-sequence-Metric-Space M u x mx δ
+          Nη = modulus-limit-modulus-sequence-Metric-Space M u y my η
+          Nε = max-ℕ Nδ Nη
+          Nδ≤Nε = left-leq-max-ℕ Nδ Nη
+          Nη≤Nε = right-leq-max-ℕ Nδ Nη
+
+          δ-neighborhood : neighborhood-Metric-Space M δ (u Nε) x
+          δ-neighborhood =
+            is-modulus-limit-modulus-sequence-Metric-Space M u x mx δ Nε Nδ≤Nε
+
+          η-neighborhood : neighborhood-Metric-Space M η (u Nε) y
+          η-neighborhood =
+            is-modulus-limit-modulus-sequence-Metric-Space M u y my η Nε Nη≤Nε
+
+        in
+          tr
+            ( is-upper-bound-dist-Metric-Space M x y)
+            ( δ+η=ε)
+            ( triangular-neighborhood-Metric-Space
+              ( M)
+              ( x)
+              ( u Nε)
+              ( y)
+              ( δ)
+              ( η)
+              ( η-neighborhood)
+              ( symmetric-neighborhood-Metric-Space
+                ( M)
+                ( δ)
+                ( u Nε)
+                ( x)
+                ( δ-neighborhood)))
+
+    eq-limit-sequence-Metric-Space : x ＝ y
+    eq-limit-sequence-Metric-Space =
+      eq-sim-Metric-Space M x y sim-limit-sequence-Metric-Space
 ```
 
 ### Having a limit in a metric space is a proposition
@@ -237,18 +239,19 @@ module _
       (limit-has-limit-sequence-Metric-Space H)
   is-limit-limit-has-limit-sequence-Metric-Space H = pr2 H
 
-  is-prop-has-limit-sequence-Metric-Space :
-    is-prop has-limit-sequence-Metric-Space
-  is-prop-has-limit-sequence-Metric-Space =
-    is-prop-all-elements-equal
-      ( λ x y →
-        eq-type-subtype
-          ( is-limit-prop-sequence-Metric-Space M u)
-          ( eq-limit-sequence-Metric-Space M u
-            ( limit-has-limit-sequence-Metric-Space x)
-            ( limit-has-limit-sequence-Metric-Space y)
-            ( is-limit-limit-has-limit-sequence-Metric-Space x)
-            ( is-limit-limit-has-limit-sequence-Metric-Space y)))
+  abstract
+    is-prop-has-limit-sequence-Metric-Space :
+      is-prop has-limit-sequence-Metric-Space
+    is-prop-has-limit-sequence-Metric-Space =
+      is-prop-all-elements-equal
+        ( λ x y →
+          eq-type-subtype
+            ( is-limit-prop-sequence-Metric-Space M u)
+            ( eq-limit-sequence-Metric-Space M u
+              ( limit-has-limit-sequence-Metric-Space x)
+              ( limit-has-limit-sequence-Metric-Space y)
+              ( is-limit-limit-has-limit-sequence-Metric-Space x)
+              ( is-limit-limit-has-limit-sequence-Metric-Space y)))
 
   has-limit-prop-sequence-Metric-Space : Prop (l1 ⊔ l2)
   has-limit-prop-sequence-Metric-Space =
@@ -381,6 +384,46 @@ module _
       ( map-short-function-Metric-Space A B f lim)
   preserves-limits-sequence-short-function-Metric-Space =
     map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
+```
+
+### Isometries between metric spaces preserve limits
+
+```agda
+module _
+  {la la' lb lb' : Level}
+  (A : Metric-Space la la')
+  (B : Metric-Space lb lb')
+  (f : isometry-Metric-Space A B)
+  (u : sequence-type-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where
+
+  isometry-map-limit-modulus-sequence-Metric-Space :
+    limit-modulus-sequence-Metric-Space A u lim →
+    limit-modulus-sequence-Metric-Space
+      ( B)
+      ( map-sequence
+        ( map-isometry-Metric-Space A B f)
+        ( u))
+      ( map-isometry-Metric-Space A B f lim)
+  isometry-map-limit-modulus-sequence-Metric-Space =
+    short-map-limit-modulus-sequence-Metric-Space
+      ( A)
+      ( B)
+      ( short-isometry-Metric-Space A B f)
+      ( u)
+      ( lim)
+
+  preserves-limits-sequence-isometry-Metric-Space :
+    is-limit-sequence-Metric-Space A u lim →
+    is-limit-sequence-Metric-Space
+      ( B)
+      ( map-sequence
+        ( map-isometry-Metric-Space A B f)
+        ( u))
+      ( map-isometry-Metric-Space A B f lim)
+  preserves-limits-sequence-isometry-Metric-Space =
+    map-is-inhabited isometry-map-limit-modulus-sequence-Metric-Space
 ```
 
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space

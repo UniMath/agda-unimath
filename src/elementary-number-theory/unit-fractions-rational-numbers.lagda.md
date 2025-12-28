@@ -135,9 +135,8 @@ abstract
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda
-opaque
-  unfolding inv-ℚ⁺
-  unfolding leq-ℚ-Prop
+abstract opaque
+  unfolding inv-ℚ⁺ leq-ℚ-Prop
 
   leq-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → leq-ℕ⁺ m n →
@@ -153,9 +152,8 @@ opaque
 ### If `m < n`, the reciprocal of `n` is less than the reciprocal of `n`
 
 ```agda
-opaque
-  unfolding inv-ℚ⁺
-  unfolding le-ℚ-Prop
+abstract opaque
+  unfolding inv-ℚ⁺ le-ℚ-Prop
 
   le-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → le-ℕ⁺ m n →
@@ -173,26 +171,27 @@ opaque
 ### For every positive rational number, there is a smaller unit fraction
 
 ```agda
-smaller-reciprocal-ℚ⁺ :
-  (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
-smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
-  tot
-    ( λ n⁺ 1<nq →
-      binary-tr
-        ( le-ℚ)
-        ( right-unit-law-mul-ℚ _)
-        ( ap
-          ( rational-ℚ⁺)
-          ( is-retraction-left-div-Group
-            ( group-mul-ℚ⁺)
-            ( positive-rational-ℕ⁺ n⁺)
-            ( q⁺)))
-        ( preserves-le-left-mul-ℚ⁺
-          ( positive-reciprocal-rational-ℕ⁺ n⁺)
-          ( one-ℚ)
-          ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
-          ( 1<nq)))
-    ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
+opaque
+  smaller-reciprocal-ℚ⁺ :
+    (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
+  smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
+    tot
+      ( λ n⁺ 1<nq →
+        binary-tr
+          ( le-ℚ)
+          ( right-unit-law-mul-ℚ _)
+          ( ap
+            ( rational-ℚ⁺)
+            ( is-retraction-left-div-Group
+              ( group-mul-ℚ⁺)
+              ( positive-rational-ℕ⁺ n⁺)
+              ( q⁺)))
+          ( preserves-le-left-mul-ℚ⁺
+            ( positive-reciprocal-rational-ℕ⁺ n⁺)
+            ( one-ℚ)
+            ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
+            ( 1<nq)))
+      ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
 ```
 
 ### The reciprocal of `n : ℕ⁺` is a multiplicative inverse of `n`
