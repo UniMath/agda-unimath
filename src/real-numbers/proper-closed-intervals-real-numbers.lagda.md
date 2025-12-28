@@ -8,6 +8,7 @@ module real-numbers.proper-closed-intervals-real-numbers where
 
 ```agda
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.cartesian-product-types
@@ -375,4 +376,27 @@ abstract
         ( x)
         ( a≤x≤b))
       ( cotransitive-le-ℝ a b x a<b)
+```
+
+### Given any two elements `x` and `y` of a proper closed interval in an `ε`-neighborhood of each other, there exists a third point `z` in an `ε`-neighborhood of both `x` and `y` but apart from both of them
+
+```agda
+module _
+  {l1 l2 : Level}
+  (l3 : Level)
+  ([a,b] : proper-closed-interval-ℝ l1 l2)
+  (x y : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
+  (ε : ℚ⁺)
+  (Nεxy : neighborhood-ℝ (l1 ⊔ l2 ⊔ l3) ε (pr1 x) (pr1 y))
+  where
+
+  abstract
+    exists-element-apart-from-both-in-neighborhood-proper-closed-interval-ℝ :
+      exists
+        ( type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
+        ( λ z →
+          apart-prop-ℝ (pr1 z) (pr1 x) ∧
+          apart-prop-ℝ (pr1 z) (pr1 y) ∧
+          neighborhood-prop-ℝ (l1 ⊔ l2 ⊔ l3) ε (pr1 z) (pr1 x) ∧
+          neighborhood-prop-ℝ (l1 ⊔ l2 ⊔ l3) ε (pr1 z) (pr1 y))
 ```
