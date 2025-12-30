@@ -8,6 +8,7 @@ module linear-algebra.vector-spaces where
 
 ```agda
 open import commutative-algebra.heyting-fields
+open import commutative-algebra.homomorphisms-heyting-fields
 
 open import foundation.identity-types
 open import foundation.sets
@@ -187,6 +188,45 @@ vector-space-heyting-field-Heyting-Field :
 vector-space-heyting-field-Heyting-Field R =
   left-module-commutative-ring-Commutative-Ring
     ( commutative-ring-Heyting-Field R)
+```
+
+### Given a vector space over `G`, a field homomorphism `F → G` induces a vector space over `F`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (F : Heyting-Field l1)
+  (G : Heyting-Field l2)
+  (h : hom-Heyting-Field F G)
+  (V : Vector-Space l3 G)
+  where
+
+  vector-space-hom-Vector-Space : Vector-Space l3 F
+  vector-space-hom-Vector-Space =
+    left-module-hom-left-module-Commutative-Ring
+      ( commutative-ring-Heyting-Field F)
+      ( commutative-ring-Heyting-Field G)
+      ( h)
+      ( V)
+```
+
+### A field homomorphism `F → G` induces the structure of a vector space over `F` on `G`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (F : Heyting-Field l1)
+  (G : Heyting-Field l2)
+  (h : hom-Heyting-Field F G)
+  where
+
+  vector-space-hom-Heyting-Field : Vector-Space l2 F
+  vector-space-hom-Heyting-Field =
+    vector-space-hom-Vector-Space
+      ( F)
+      ( G)
+      ( h)
+      ( vector-space-heyting-field-Heyting-Field G)
 ```
 
 ## See also
