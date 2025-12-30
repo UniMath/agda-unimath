@@ -44,6 +44,16 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : Metric-Space l1 l2)
+  (M : Metric-Space l3 l4)
+  where
+
+  extension-isometry-Metric-Space :
+    isometry-Metric-Space P M → extension-Metric-Space l3 l4 P
+  extension-isometry-Metric-Space f = (M , f)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (P : Metric-Space l1 l2)
   (E : extension-Metric-Space l3 l4 P)
   where
 
@@ -97,7 +107,7 @@ module _
 
   id-extension-Metric-Space : extension-Metric-Space l1 l2 M
   id-extension-Metric-Space =
-    (M , id-isometry-Metric-Space M)
+    extension-isometry-Metric-Space M M (id-isometry-Metric-Space M)
 ```
 
 ### Composition of extensions of metric spaces
@@ -112,19 +122,20 @@ module _
   where
 
   comp-extension-Metric-Space : extension-Metric-Space l5 l6 M
-  pr1 comp-extension-Metric-Space =
-    metric-space-extension-Metric-Space
-      ( metric-space-extension-Metric-Space M E)
-      ( F)
-  pr2 comp-extension-Metric-Space =
-    comp-isometry-Metric-Space
+  comp-extension-Metric-Space =
+    extension-isometry-Metric-Space
       ( M)
-      ( metric-space-extension-Metric-Space M E)
       ( metric-space-extension-Metric-Space
         ( metric-space-extension-Metric-Space M E)
         ( F))
-      ( isometry-metric-space-extension-Metric-Space
+      ( comp-isometry-Metric-Space
+        ( M)
         ( metric-space-extension-Metric-Space M E)
-        ( F))
-      ( isometry-metric-space-extension-Metric-Space M E)
+        ( metric-space-extension-Metric-Space
+          ( metric-space-extension-Metric-Space M E)
+          ( F))
+        ( isometry-metric-space-extension-Metric-Space
+          ( metric-space-extension-Metric-Space M E)
+          ( F))
+        ( isometry-metric-space-extension-Metric-Space M E))
 ```
