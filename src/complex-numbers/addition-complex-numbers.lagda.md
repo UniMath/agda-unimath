@@ -11,11 +11,14 @@ open import complex-numbers.complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 ```
 
 </details>
@@ -101,4 +104,17 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x +ℂ y) (x' +ℂ y')
   preserves-sim-add-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-add-ℝ a~a' c~c' , preserves-sim-add-ℝ b~b' d~d')
+```
+
+### The inclusion of real numbers preserves addition
+
+```agda
+abstract
+  add-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x +ℂ complex-ℝ y ＝ complex-ℝ (x +ℝ y)
+  add-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( refl)
+      ( add-raise-ℝ ∙ ap (raise-ℝ _) (left-unit-law-add-ℝ _))
 ```
