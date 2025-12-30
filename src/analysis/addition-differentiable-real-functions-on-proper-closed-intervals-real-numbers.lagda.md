@@ -2,7 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-module analysis.addition-differentiable-functions-on-proper-closed-intervals-real-numbers where
+module analysis.addition-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>

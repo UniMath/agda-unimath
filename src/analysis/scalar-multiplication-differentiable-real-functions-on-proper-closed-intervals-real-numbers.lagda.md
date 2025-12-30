@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.scalar-multiplication-differentiable-functions-on-proper-closed-intervals-real-numbers where
+module analysis.scalar-multiplication-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>

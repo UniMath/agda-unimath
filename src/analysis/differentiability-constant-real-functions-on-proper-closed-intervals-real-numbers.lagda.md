@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-constant-functions-on-proper-closed-intervals-real-numbers where
+module analysis.differentiability-constant-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
