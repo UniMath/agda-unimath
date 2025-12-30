@@ -32,8 +32,6 @@ open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
