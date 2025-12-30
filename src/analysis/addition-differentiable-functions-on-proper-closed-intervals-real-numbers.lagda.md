@@ -1,3 +1,53 @@
+# Addition of differentiable functions on proper closed intervals in the real numbers
+
+```agda
+{-# OPTIONS --lossy-unification #-}
+module analysis.addition-differentiable-functions-on-proper-closed-intervals-real-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.minimum-positive-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.universe-levels
+
+open import order-theory.large-posets
+
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.proper-closed-intervals-real-numbers
+open import real-numbers.rational-real-numbers
+```
+
+</details>
+
+## Idea
+
+Given two
+[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals.md)
+functions `f` and `g` from a
+[proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
+in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real
+numbers, with derivatives `f'` and `g'`, the map `x ↦ f x + g x` is
+differentiable with derivative `x ↦ f' x + g' x`.
+
+## Proof
+
 ```agda
 module _
   {l1 l2 l3 : Level}
@@ -67,8 +117,7 @@ module _
                           ( ε₁)
                           ( x)
                           ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
-                            ( metric-space-ℝ l1)
+                          ( weakly-monotonic-neighborhood-ℝ
                             ( pr1 x)
                             ( pr1 y)
                             ( min-ℚ⁺ (μ ε₁) (ν ε₂))
@@ -79,8 +128,7 @@ module _
                           ( ε₂)
                           ( x)
                           ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
-                            ( metric-space-ℝ l1)
+                          ( weakly-monotonic-neighborhood-ℝ
                             ( pr1 x)
                             ( pr1 y)
                             ( min-ℚ⁺ (μ ε₁) (ν ε₂))
@@ -93,4 +141,22 @@ module _
                     by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
                   ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
                     by leq-eq-ℝ (ap-mul-ℝ (ap real-ℚ⁺ ε₁+ε₂=ε) refl)))
+
+add-differentiable-real-function-proper-closed-interval-ℝ :
+  {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
+  differentiable-real-function-proper-closed-interval-ℝ l3 [a,b] →
+  differentiable-real-function-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
+add-differentiable-real-function-proper-closed-interval-ℝ
+  [a,b] (f , f' , Df=f') (g , g' , Dg=g') =
+  ( ( λ x → f x +ℝ g x) ,
+    ( λ x → f' x +ℝ g' x) ,
+    is-derivative-add-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f)
+      ( g)
+      ( f')
+      ( g')
+      ( Df=f')
+      ( Dg=g'))
 ```

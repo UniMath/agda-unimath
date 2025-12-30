@@ -1,4 +1,55 @@
-### The derivative of `cf` is `cf'`
+# Scalar multiplication of differentiable functions on proper closed intervals in the real numbers
+
+```agda
+{-# OPTIONS --lossy-unification #-}
+
+module analysis.scalar-multiplication-differentiable-functions-on-proper-closed-intervals-real-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+
+open import order-theory.large-posets
+
+open import real-numbers.absolute-value-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.proper-closed-intervals-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+```
+
+</details>
+
+## Idea
+
+Given a
+[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals.md)
+function `f` from a
+[proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
+in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real numbers
+with derivative `f'`, and a real number `c`, the map `x ↦ c * f x` is
+differentiable with derivative `x ↦ c * f' x`.
+
+## Proof
 
 ```agda
 module _
@@ -28,7 +79,7 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in do
         (μ , is-mod-μ) ← is-derivative-f-f'
-        (q , |c|<q) ← exists-ℚ⁺-le-ℝ⁰⁺ (nonnegative-abs-ℝ c)
+        (q , |c|<q) ← exists-greater-positive-rational-ℝ (abs-ℝ c)
         is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
           ( _)
           ( _)
@@ -73,4 +124,19 @@ module _
                                 ( q)
                                 ( ε))))
                           ( refl)))))
+
+scalar-mul-differentiable-real-function-proper-closed-interval-ℝ :
+  {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  ℝ l2 → differentiable-real-function-proper-closed-interval-ℝ l3 [a,b] →
+  differentiable-real-function-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
+scalar-mul-differentiable-real-function-proper-closed-interval-ℝ
+  [a,b] c (f , f' , Df=f') =
+  ( ( λ x → c *ℝ f x) ,
+    ( λ x → c *ℝ f' x) ,
+    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f)
+      ( f')
+      ( Df=f')
+      ( c))
 ```

@@ -219,19 +219,6 @@ abstract
       ( is-inhabited-upper-cut-ℝ⁰⁺ x)
 ```
 
-### Every nonnegative real number is less than some positive rational number
-
-```agda
-abstract
-  exists-ℚ⁺-le-ℝ⁰⁺ :
-    {l : Level} → (x : ℝ⁰⁺ l) →
-    exists ℚ⁺ (λ q → le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q))
-  exists-ℚ⁺-le-ℝ⁰⁺ x =
-    map-tot-exists
-      ( λ _ → le-real-is-in-upper-cut-ℝ (real-ℝ⁰⁺ x))
-      ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
-```
-
 ### Nonpositive rational numbers are not less than or equal to nonnegative real numbers
 
 ```agda
