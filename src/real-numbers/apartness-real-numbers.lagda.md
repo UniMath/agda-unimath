@@ -31,6 +31,8 @@ open import metric-spaces.apartness-located-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
+open import real-numbers.binary-minimum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
@@ -40,6 +42,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
@@ -379,4 +382,67 @@ module _
     apart-ℝ x y ↔ apart-located-metric-space-ℝ x y
   apart-iff-apart-located-metric-space-ℝ =
     ( apart-located-metric-space-apart-ℝ , apart-apart-located-metric-space-ℝ)
+```
+
+### Apartness is preserved by raising the universe level of real numbers
+
+```agda
+abstract
+  preserves-apart-left-raise-ℝ :
+    {l1 l2 : Level} (l3 : Level) {x : ℝ l1} {y : ℝ l2} →
+    apart-ℝ x y → apart-ℝ (raise-ℝ l3 x) y
+  preserves-apart-left-raise-ℝ l3 {x} {y} =
+    apart-left-sim-ℝ _ _ _ (sim-raise-ℝ l3 x)
+
+  preserves-apart-right-raise-ℝ :
+    {l1 l2 : Level} (l3 : Level) {x : ℝ l1} {y : ℝ l2} →
+    apart-ℝ x y → apart-ℝ x (raise-ℝ l3 y)
+  preserves-apart-right-raise-ℝ l3 {x} {y} =
+    apart-right-sim-ℝ _ _ _ (sim-raise-ℝ l3 y)
+```
+
+### If `x` is apart from `y` and `z`, `x` is apart from `max y z`
+
+```agda
+abstract
+  apart-max-apart-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} →
+    apart-ℝ x y → apart-ℝ x z → apart-ℝ x (max-ℝ y z)
+  apart-max-apart-ℝ {x = x} {y = y} {z = z} x#y x#z =
+    elim-disjunction
+      ( apart-prop-ℝ x (max-ℝ y z))
+      ( λ x<y →
+        apart-le-ℝ
+          ( concatenate-le-leq-ℝ x y (max-ℝ y z) x<y (leq-left-max-ℝ y z)))
+      ( λ y<x →
+        elim-disjunction
+          ( apart-prop-ℝ x (max-ℝ y z))
+          ( λ x<z →
+            apart-le-ℝ
+              ( concatenate-le-leq-ℝ x z (max-ℝ y z) x<z (leq-right-max-ℝ y z)))
+          ( λ z<x → apart-le-ℝ' (le-max-le-le-ℝ y<x z<x))
+          ( x#z))
+      ( x#y)
+```
+
+### If `x` is apart from `y` and `x`, `x` is apart from `min y z`
+
+```agda
+abstract
+  apart-min-apart-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} →
+    apart-ℝ x y → apart-ℝ x z → apart-ℝ x (min-ℝ y z)
+  apart-min-apart-ℝ {x = x} {y = y} {z = z} x#y x#z =
+    elim-disjunction
+      ( apart-prop-ℝ x (min-ℝ y z))
+      ( λ x<y →
+        elim-disjunction
+          ( apart-prop-ℝ x (min-ℝ y z))
+          ( λ x<z → apart-le-ℝ (le-min-le-le-ℝ x<y x<z))
+          ( λ z<x →
+            apart-le-ℝ' (concatenate-leq-le-ℝ _ _ _ (leq-right-min-ℝ y z) z<x))
+          ( x#z))
+      ( λ y<x →
+        apart-le-ℝ' (concatenate-leq-le-ℝ _ _ _ (leq-left-min-ℝ y z) y<x))
+      ( x#y)
 ```

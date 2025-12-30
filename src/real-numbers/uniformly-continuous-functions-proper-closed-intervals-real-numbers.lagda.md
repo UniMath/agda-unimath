@@ -9,9 +9,15 @@ module real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.images
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -19,6 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
+open import real-numbers.apartness-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
@@ -99,4 +106,59 @@ module _
   subspace-im-ucont-map-proper-closed-interval-ℝ =
     metric-space-subset-ℝ
       ( subset-im-ucont-map-proper-closed-interval-ℝ)
+```
+
+### To show a function on a proper closed interval of real numbers is uniformly continuous, it suffices to exhibit a modulus that applies when its arguments are apart
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  ([a,b] : proper-closed-interval-ℝ l1 l2)
+  (f : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b] → ℝ l4)
+  (μ : ℚ⁺ → ℚ⁺)
+  (H :
+    (ε : ℚ⁺) (x y : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]) →
+    apart-ℝ (pr1 x) (pr1 y) →
+    neighborhood-ℝ _ (μ ε) (pr1 x) (pr1 y) →
+    neighborhood-ℝ _ ε (f x) (f y))
+  where
+
+  abstract
+    is-ucont-map-modulus-apart-map-proper-closed-interval-ℝ :
+      is-ucont-map-proper-closed-interval-ℝ [a,b] f
+    is-ucont-map-modulus-apart-map-proper-closed-interval-ℝ =
+      intro-exists
+        ( μ ∘ modulus-le-double-le-ℚ⁺)
+        ( λ x ε y Nxy →
+          let
+            (ε' , ε'+ε'<ε) = bound-double-le-ℚ⁺ ε
+            open do-syntax-trunc-Prop (neighborhood-prop-ℝ l4 ε (f x) (f y))
+          in do
+            (z , z#x , z#y , Nεzx , Nεzy) ←
+              exists-element-apart-from-both-in-neighborhood-proper-closed-interval-ℝ
+                ( l3)
+                ( [a,b])
+                ( x)
+                ( y)
+                ( μ ε')
+                ( Nxy)
+            weakly-monotonic-neighborhood-ℝ
+              ( f x)
+              ( f y)
+              ( ε' +ℚ⁺ ε')
+              ( ε)
+              ( leq-le-ℚ ε'+ε'<ε)
+              ( is-triangular-neighborhood-ℝ
+                ( f x)
+                ( f z)
+                ( f y)
+                ( ε')
+                ( ε')
+                ( H ε' z y z#y Nεzy)
+                ( H
+                  ( ε')
+                  ( x)
+                  ( z)
+                  ( symmetric-apart-ℝ z#x)
+                  ( is-symmetric-neighborhood-ℝ (μ ε') (pr1 z) (pr1 x) Nεzx))))
 ```
