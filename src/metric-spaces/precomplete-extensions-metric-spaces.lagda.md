@@ -62,7 +62,7 @@ of `M` into `N` such that
   j ∘ κ ~ i
 ```
 
-where `κ : M → C M` is the natural isometry of cauchy pseudocompletions (i.e.
+where `κ : M → C M` is the natural isometry of Cauchy pseudocompletions (i.e.
 the constant mapping).
 
 ## Definitions
