@@ -23,7 +23,7 @@ open import metric-spaces.metric-spaces
 
 A [function](metric-spaces.functions-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` has a
-{{#concept "limit" Disambiguation="of function between metric spaces at a point" Agda=is-point-limit-function-Metric-Space}}
+{{#concept "limit" Disambiguation="of function between metric spaces at a point" WDID=Q177239 WD="limit" Agda=is-limit-map-Metric-Space}}
 `y : Y` at a point `x : X` if there exists a function `m : ℚ⁺ → ℚ⁺` such that
 whenever `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an
 `ε`-neighborhood of `y`. In this case `m` is called a limit modulus of `f` at
@@ -63,11 +63,16 @@ module _
     is-inhabited-subtype-Prop
       is-modulus-of-point-limit-prop-function-Metric-Space
 
-  is-point-limit-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-point-limit-function-Metric-Space =
+  is-limit-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-limit-map-Metric-Space =
     type-Prop is-point-limit-prop-function-Metric-Space
 ```
 
 ## See also
 
-- [Classical limits of functions in metric spaces](metric-spaces.classical-limits-of-functions-metric-spaces.md)
+- [ε-δ limits of functions in metric spaces](metric-spaces.limits-of-functions-metric-spaces.md)
+
+## External links
+
+- [Limit of a function](https://en.wikipedia.org/wiki/Limit_of_a_function#Functions_on_metric_spaces)
+  at Wikipedia

@@ -58,7 +58,7 @@ module _
   is-uniformly-continuous-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-prop-function-Metric-Space =
     is-inhabited-Prop
-      (modulus-of-uniform-continuity-function-Metric-Space X Y f)
+      ( modulus-of-uniform-continuity-function-Metric-Space X Y f)
 
   is-uniformly-continuous-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-function-Metric-Space =
@@ -196,18 +196,18 @@ module _
   (B : Metric-Space l3 l4)
   where
 
-  is-uniformly-continuous-is-short-function-Metric-Space :
+  is-uniformly-continuous-is-short-map-Metric-Space :
     (f : type-function-Metric-Space A B) →
     is-short-function-Metric-Space A B f →
     is-uniformly-continuous-function-Metric-Space A B f
-  is-uniformly-continuous-is-short-function-Metric-Space f H =
+  is-uniformly-continuous-is-short-map-Metric-Space f H =
     intro-exists id (λ x d → H d x)
 
   uniformly-continuous-short-function-Metric-Space :
     short-function-Metric-Space A B →
     uniformly-continuous-function-Metric-Space A B
   uniformly-continuous-short-function-Metric-Space =
-    tot is-uniformly-continuous-is-short-function-Metric-Space
+    tot is-uniformly-continuous-is-short-map-Metric-Space
 ```
 
 ### Isometries are uniformly continuous
@@ -223,7 +223,7 @@ module _
     is-isometry-Metric-Space A B f →
     is-uniformly-continuous-function-Metric-Space A B f
   is-uniformly-continuous-is-isometry-Metric-Space f =
-    is-uniformly-continuous-is-short-function-Metric-Space A B f ∘
+    is-uniformly-continuous-is-short-map-Metric-Space A B f ∘
     is-short-is-isometry-Metric-Space A B f
 
   uniformly-continuous-isometry-Metric-Space :

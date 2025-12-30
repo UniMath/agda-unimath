@@ -69,4 +69,4 @@ module _
 
 ## See also
 
-- [Classically pointwise continuous functions on the real numbers](real-numbers.classically-pointwise-continuous-functions-real-numbers.md)
+- [Classically pointwise continuous functions on the real numbers](real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers.md)

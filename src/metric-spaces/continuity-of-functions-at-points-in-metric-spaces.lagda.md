@@ -52,7 +52,7 @@ module _
 
   is-continuous-at-point-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-continuous-at-point-function-Metric-Space =
-    is-point-limit-function-Metric-Space X Y f x (f x)
+    is-limit-map-Metric-Space X Y f x (f x)
 
   is-modulus-of-continuity-at-point-prop-function-Metric-Space :
     (ℚ⁺ → ℚ⁺) → Prop (l1 ⊔ l2 ⊔ l4)

@@ -1,7 +1,7 @@
-# Classical limits of functions between metric spaces
+# ε-δ limits of functions between metric spaces
 
 ```agda
-module metric-spaces.classical-limits-of-functions-metric-spaces where
+module metric-spaces.epsilon-delta-limits-of-functions-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -29,14 +29,17 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 The
-{{#concept "classical definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-classical-limit-map-Metric-Space}}
+{{#concept "ε-δ definition of a limit" WDID=Q1042034 WD="(ε, δ)-definition of limit" Disambiguation="in a metric space" Agda=is-ε-δ-limit-map-Metric-Space}}
 states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for any
 `ε : ℚ⁺`, there [exists](foundation.existential-quantification.md) a `δ : ℚ⁺`
 such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
 are in a `ε`-neighborhood of each other.
 
-The constructive definition implies the classical definition, but the other
-direction requires the
+This contrasts the definition of a
+[limit](metric-spaces.limits-of-functions-metric-spaces.md) of a function in a
+metric space, where there must exist a modulus function `μ : ℚ⁺ → ℚ⁺` assigning
+an appropriate `δ` for each possible value of `ε`. A limit is an ε-δ limit, but
+the converse requires the
 [axiom of countable choice](foundation.axiom-of-countable-choice.md).
 
 ## Definition
@@ -51,8 +54,8 @@ module _
   (y : type-Metric-Space Y)
   where
 
-  is-classical-limit-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
-  is-classical-limit-prop-map-Metric-Space =
+  is-ε-δ-limit-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
+  is-ε-δ-limit-prop-map-Metric-Space =
     Π-Prop
       ( ℚ⁺)
       ( λ ε →
@@ -64,9 +67,9 @@ module _
                 neighborhood-prop-Metric-Space X δ x x' ⇒
                 neighborhood-prop-Metric-Space Y ε y (f x'))))
 
-  is-classical-limit-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-classical-limit-map-Metric-Space =
-    type-Prop is-classical-limit-prop-map-Metric-Space
+  is-ε-δ-limit-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
+  is-ε-δ-limit-map-Metric-Space =
+    type-Prop is-ε-δ-limit-prop-map-Metric-Space
 ```
 
 ## Properties
@@ -84,10 +87,10 @@ module _
   where
 
   abstract
-    is-classical-limit-is-limit-map-Metric-Space :
-      is-point-limit-function-Metric-Space X Y f x y →
-      is-classical-limit-map-Metric-Space X Y f x y
-    is-classical-limit-is-limit-map-Metric-Space H ε =
+    is-ε-δ-limit-is-limit-map-Metric-Space :
+      is-limit-map-Metric-Space X Y f x y →
+      is-ε-δ-limit-map-Metric-Space X Y f x y
+    is-ε-δ-limit-is-limit-map-Metric-Space H ε =
       map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
 ```
 
@@ -105,10 +108,10 @@ module _
   where
 
   abstract
-    is-limit-is-classical-limit-map-acω-Metric-Space :
-      is-classical-limit-map-Metric-Space X Y f x y →
-      is-point-limit-function-Metric-Space X Y f x y
-    is-limit-is-classical-limit-map-acω-Metric-Space H =
+    is-limit-is-ε-δ-limit-map-ACω-Metric-Space :
+      is-ε-δ-limit-map-Metric-Space X Y f x y →
+      is-limit-map-Metric-Space X Y f x y
+    is-limit-is-ε-δ-limit-map-ACω-Metric-Space H =
       let
         open
           do-syntax-trunc-Prop
@@ -136,4 +139,4 @@ module _
 
 ## See also
 
-- [Constructive limits of functions in metric spaces](metric-spaces.limits-of-functions-metric-spaces.md)
+- [Limits of functions in metric spaces](metric-spaces.limits-of-functions-metric-spaces.md)
