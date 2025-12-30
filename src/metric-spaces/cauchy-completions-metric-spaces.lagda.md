@@ -23,6 +23,7 @@ open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limit-points-extensions-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.precomplete-extensions-metric-spaces
@@ -85,4 +86,43 @@ module _
   cauchy-completion-Metric-Space =
     Σ ( extension-Metric-Space l3 l4 M)
       ( is-cauchy-completion-extension-Metric-Space M)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (C : cauchy-completion-Metric-Space l3 l4 M)
+  where
+
+  extension-cauchy-completion-Metric-Space :
+    extension-Metric-Space l3 l4 M
+  extension-cauchy-completion-Metric-Space = pr1 C
+
+  is-cauchy-completion-extension-cauchy-completion-Metric-Space :
+    is-cauchy-completion-extension-Metric-Space M
+      extension-cauchy-completion-Metric-Space
+  is-cauchy-completion-extension-cauchy-completion-Metric-Space = pr2 C
+
+  metric-space-cauchy-completion-Metric-Space : Metric-Space l3 l4
+  metric-space-cauchy-completion-Metric-Space =
+    metric-space-extension-Metric-Space M
+      extension-cauchy-completion-Metric-Space
+
+  type-metric-space-cauchy-completion-Metric-Space : UU l3
+  type-metric-space-cauchy-completion-Metric-Space =
+    type-metric-space-extension-Metric-Space M
+      extension-cauchy-completion-Metric-Space
+
+  is-cauchy-dense-extension-cauchy-completion-Metric-Space :
+    (y : type-metric-space-cauchy-completion-Metric-Space) →
+    is-limit-point-extension-Metric-Space
+      ( M)
+      ( extension-cauchy-completion-Metric-Space)
+      ( y)
+  is-cauchy-dense-extension-cauchy-completion-Metric-Space =
+    pr1 is-cauchy-completion-extension-cauchy-completion-Metric-Space
+
+  is-complete-metric-space-cauchy-completion-Metric-Space :
+    is-complete-Metric-Space metric-space-cauchy-completion-Metric-Space
+  is-complete-metric-space-cauchy-completion-Metric-Space =
+    pr2 is-cauchy-completion-extension-cauchy-completion-Metric-Space
 ```
