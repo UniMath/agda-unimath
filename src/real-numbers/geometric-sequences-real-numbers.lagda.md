@@ -18,6 +18,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -242,6 +243,13 @@ module _
             ( λ n → power-ℝ n r)
             ( raise-zero-ℝ l)
             ( is-zero-lim-power-le-one-abs-ℝ r |r|<1))
+
+  convergent-standard-geometric-series-ℝ :
+    le-ℝ (abs-ℝ r) one-ℝ → convergent-series-ℝ l
+  convergent-standard-geometric-series-ℝ |r|<1 =
+    ( standard-geometric-series-ℝ ,
+      a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1) ,
+      compute-sum-standard-geometric-series-ℝ |r|<1)
 ```
 
 ## References
