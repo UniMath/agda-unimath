@@ -164,7 +164,7 @@ module _
   is-precomplete-extension-precomplete-extension-Metric-Space = pr2 E
 ```
 
-### Coherent isometries from the Cauchy pseudocompletion w.r.t. extension of metric space
+### Coherent isometries from the Cauchy pseudocompletion w.r.t. an extension of metric space
 
 ```agda
 module _
@@ -236,7 +236,7 @@ module _
   eq-is-complete-is-precomplete-id-extension-Metric-Space = refl
 ```
 
-### The values of a coherent isometries are the limits of images of Cauchy approximations
+### The values of coherent isometries are the limits of images of Cauchy approximations
 
 ```agda
 module _
