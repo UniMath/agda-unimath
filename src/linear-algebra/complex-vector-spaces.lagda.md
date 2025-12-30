@@ -19,7 +19,10 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import linear-algebra.real-vector-spaces
 open import linear-algebra.vector-spaces
+
+open import real-numbers.field-of-real-numbers
 ```
 
 </details>
@@ -165,4 +168,16 @@ complex-vector-space-ℂ : (l : Level) → ℂ-Vector-Space l (lsuc l)
 complex-vector-space-ℂ l =
   vector-space-heyting-field-Heyting-Field
     ( heyting-field-ℂ l)
+```
+
+### Every complex vector space is a real vector space
+
+```agda
+real-vector-space-ℂ-Vector-Space :
+  {l1 l2 : Level} → ℂ-Vector-Space l1 l2 → ℝ-Vector-Space l1 l2
+real-vector-space-ℂ-Vector-Space {l1} =
+  vector-space-hom-Vector-Space
+    ( heyting-field-ℝ l1)
+    ( heyting-field-ℂ l1)
+    ( hom-heyting-field-complex-ℝ l1)
 ```

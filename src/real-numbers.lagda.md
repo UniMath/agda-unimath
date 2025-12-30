@@ -23,6 +23,7 @@ open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
+open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -33,6 +34,7 @@ open import real-numbers.extensionality-multiplication-bilinear-form-real-number
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
+open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
