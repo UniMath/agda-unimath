@@ -29,6 +29,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.sequences
+open import lists.subsequences
+
+open import logic.functoriality-existential-quantification
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
@@ -358,32 +361,33 @@ module _
   (lim : type-Metric-Space A)
   where
 
-  short-map-limit-modulus-sequence-Metric-Space :
-    limit-modulus-sequence-Metric-Space A u lim →
-    limit-modulus-sequence-Metric-Space
-      ( B)
-      ( map-sequence
-        ( map-short-function-Metric-Space A B f)
-        ( u))
-      ( map-short-function-Metric-Space A B f lim)
-  short-map-limit-modulus-sequence-Metric-Space =
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space
-      ( A)
-      ( B)
-      ( modulated-ucont-map-short-function-Metric-Space A B f)
-      ( u)
-      ( lim)
+  abstract
+    short-map-limit-modulus-sequence-Metric-Space :
+      limit-modulus-sequence-Metric-Space A u lim →
+      limit-modulus-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-short-function-Metric-Space A B f)
+          ( u))
+        ( map-short-function-Metric-Space A B f lim)
+    short-map-limit-modulus-sequence-Metric-Space =
+      modulated-ucont-map-limit-modulus-sequence-Metric-Space
+        ( A)
+        ( B)
+        ( modulated-ucont-map-short-function-Metric-Space A B f)
+        ( u)
+        ( lim)
 
-  preserves-limits-sequence-short-function-Metric-Space :
-    is-limit-sequence-Metric-Space A u lim →
-    is-limit-sequence-Metric-Space
-      ( B)
-      ( map-sequence
-        ( map-short-function-Metric-Space A B f)
-        ( u))
-      ( map-short-function-Metric-Space A B f lim)
-  preserves-limits-sequence-short-function-Metric-Space =
-    map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
+    preserves-limits-sequence-short-function-Metric-Space :
+      is-limit-sequence-Metric-Space A u lim →
+      is-limit-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-short-function-Metric-Space A B f)
+          ( u))
+        ( map-short-function-Metric-Space A B f lim)
+    preserves-limits-sequence-short-function-Metric-Space =
+      map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
 ```
 
 ### Isometries between metric spaces preserve limits
@@ -398,32 +402,33 @@ module _
   (lim : type-Metric-Space A)
   where
 
-  isometry-map-limit-modulus-sequence-Metric-Space :
-    limit-modulus-sequence-Metric-Space A u lim →
-    limit-modulus-sequence-Metric-Space
-      ( B)
-      ( map-sequence
-        ( map-isometry-Metric-Space A B f)
-        ( u))
-      ( map-isometry-Metric-Space A B f lim)
-  isometry-map-limit-modulus-sequence-Metric-Space =
-    short-map-limit-modulus-sequence-Metric-Space
-      ( A)
-      ( B)
-      ( short-isometry-Metric-Space A B f)
-      ( u)
-      ( lim)
+  abstract
+    isometry-limit-modulus-sequence-Metric-Space :
+      limit-modulus-sequence-Metric-Space A u lim →
+      limit-modulus-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-isometry-Metric-Space A B f)
+          ( u))
+        ( map-isometry-Metric-Space A B f lim)
+    isometry-limit-modulus-sequence-Metric-Space =
+      short-map-limit-modulus-sequence-Metric-Space
+        ( A)
+        ( B)
+        ( short-isometry-Metric-Space A B f)
+        ( u)
+        ( lim)
 
-  preserves-limits-sequence-isometry-Metric-Space :
-    is-limit-sequence-Metric-Space A u lim →
-    is-limit-sequence-Metric-Space
-      ( B)
-      ( map-sequence
-        ( map-isometry-Metric-Space A B f)
-        ( u))
-      ( map-isometry-Metric-Space A B f lim)
-  preserves-limits-sequence-isometry-Metric-Space =
-    map-is-inhabited isometry-map-limit-modulus-sequence-Metric-Space
+    preserves-limits-sequence-isometry-Metric-Space :
+      is-limit-sequence-Metric-Space A u lim →
+      is-limit-sequence-Metric-Space
+        ( B)
+        ( map-sequence
+          ( map-isometry-Metric-Space A B f)
+          ( u))
+        ( map-isometry-Metric-Space A B f lim)
+    preserves-limits-sequence-isometry-Metric-Space =
+      map-is-inhabited isometry-limit-modulus-sequence-Metric-Space
 ```
 
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space
@@ -489,6 +494,40 @@ module _
       ( limit-modulus-pair-sequence-Metric-Space A B u v lim-u lim-v)
       ( is-lim-u)
       ( is-lim-v)
+```
+
+### Taking subsequences preserves limits
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  {u : sequence-type-Metric-Space X}
+  {lim-u : type-Metric-Space X}
+  (v : subsequence u)
+  where
+
+  abstract
+    preserves-is-limit-modulus-subsequence-Metric-Space :
+      (μ : ℚ⁺ → ℕ) →
+      is-limit-modulus-sequence-Metric-Space X u lim-u μ →
+      is-limit-modulus-sequence-Metric-Space X (seq-subsequence u v) lim-u μ
+    preserves-is-limit-modulus-subsequence-Metric-Space μ is-mod-μ ε n με≤n =
+      is-mod-μ
+        ( ε)
+        ( extract-subsequence u v n)
+        ( transitive-leq-ℕ
+          ( μ ε)
+          ( n)
+          ( extract-subsequence u v n)
+          ( is-inflationary-extract-subsequence u v n)
+          ( με≤n))
+
+    preserves-is-limit-subsequence-Metric-Space :
+      is-limit-sequence-Metric-Space X u lim-u →
+      is-limit-sequence-Metric-Space X (seq-subsequence u v) lim-u
+    preserves-is-limit-subsequence-Metric-Space =
+      map-tot-exists preserves-is-limit-modulus-subsequence-Metric-Space
 ```
 
 ## See also
