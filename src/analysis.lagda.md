@@ -14,6 +14,7 @@ open import analysis.differentiability-identity-function-on-proper-closed-interv
 open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
+open import analysis.multiplication-differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.nonnegative-series-real-numbers public
 open import analysis.scalar-multiplication-differentiable-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.series-complete-metric-abelian-groups public
