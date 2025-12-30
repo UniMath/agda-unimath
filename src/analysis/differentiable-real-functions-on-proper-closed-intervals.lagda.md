@@ -10,12 +10,9 @@ module analysis.differentiable-real-functions-on-proper-closed-intervals where
 
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
-open import elementary-number-theory.minimum-positive-rational-numbers
-open import elementary-number-theory.multiplication-positive-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -30,13 +27,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-
 open import lists.sequences
-
-open import logic.functoriality-existential-quantification
-
-open import metric-spaces.metric-spaces
 
 open import order-theory.large-posets
 
@@ -46,15 +37,16 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
-open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
@@ -62,6 +54,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers
 ```
 
 </details>
@@ -444,5 +437,113 @@ module _
     is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ :
       is-ucont-map-proper-closed-interval-ℝ [a,b] f'
     is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ =
-      {!   !}
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f')
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in do
+        (δf , is-mod-δf) ← is-derivative-f-f'
+        is-ucont-map-modulus-apart-map-proper-closed-interval-ℝ
+          { l3 = l1}
+          ( [a,b])
+          ( f')
+          ( δf ∘ modulus-le-double-le-ℚ⁺)
+          ( λ ε x y x#y Nxy →
+            let
+              xℝ = pr1 x
+              yℝ = pr1 y
+              (ε' , ε'+ε'<ε) = bound-double-le-ℚ⁺ ε
+            in
+              neighborhood-dist-ℝ
+                ( ε)
+                ( f' x)
+                ( f' y)
+                ( reflects-leq-right-mul-ℝ⁺
+                  ( dist-ℝ xℝ yℝ , is-positive-dist-apart-ℝ _ _ x#y)
+                  ( _)
+                  ( _)
+                  ( chain-of-inequalities
+                    dist-ℝ (f' x) (f' y) *ℝ dist-ℝ xℝ yℝ
+                    ≤ dist-ℝ (f' x) (f' y) *ℝ dist-ℝ yℝ xℝ
+                      by leq-eq-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ xℝ yℝ))
+                    ≤ dist-ℝ (f' x *ℝ (yℝ -ℝ xℝ)) (f' y *ℝ (yℝ -ℝ xℝ))
+                      by leq-eq-ℝ (right-distributive-abs-mul-dist-ℝ _ _ _)
+                    ≤ dist-ℝ
+                      ( neg-ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
+                      ( neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
+                      by leq-eq-ℝ (inv (dist-neg-ℝ _ _))
+                    ≤ dist-ℝ
+                      ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
+                      ( (f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
+                      by
+                        leq-eq-ℝ
+                          ( inv (eq-sim-ℝ (preserves-dist-left-add-ℝ _ _ _)))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( neg-ℝ ((f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))))
+                      by triangle-inequality-abs-ℝ _ _
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( neg-ℝ (f y -ℝ f x) -ℝ neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ))))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap abs-ℝ (distributive-neg-add-ℝ _ _)))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( (f x -ℝ f y) -ℝ f' y *ℝ neg-ℝ (yℝ -ℝ xℝ)))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap
+                              ( abs-ℝ)
+                              ( ap-diff-ℝ
+                                ( distributive-neg-diff-ℝ _ _)
+                                ( inv (right-negative-law-mul-ℝ _ _)))))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( (f x -ℝ f y) -ℝ (f' y *ℝ (xℝ -ℝ yℝ))))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap
+                              ( abs-ℝ)
+                              ( ap-diff-ℝ
+                                ( refl)
+                                ( ap-mul-ℝ
+                                  ( refl)
+                                  ( distributive-neg-diff-ℝ _ _)))))
+                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ yℝ xℝ
+                      by
+                        preserves-leq-add-ℝ
+                          ( is-mod-δf ε' x y Nxy)
+                          ( is-mod-δf
+                            ( ε')
+                            ( y)
+                            ( x)
+                            ( is-symmetric-neighborhood-ℝ _ _ _ Nxy))
+                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap-mul-ℝ refl (commutative-dist-ℝ yℝ xℝ)))
+                    ≤ (real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε') *ℝ dist-ℝ xℝ yℝ
+                      by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+                    ≤ real-ℚ⁺ (ε' +ℚ⁺ ε') *ℝ dist-ℝ xℝ yℝ
+                      by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
+                    ≤ real-ℚ⁺ ε *ℝ dist-ℝ xℝ yℝ
+                      by
+                        preserves-leq-right-mul-ℝ⁰⁺
+                          ( nonnegative-dist-ℝ xℝ yℝ)
+                          ( preserves-leq-real-ℚ
+                            (leq-le-ℚ ε'+ε'<ε)))))
 ```

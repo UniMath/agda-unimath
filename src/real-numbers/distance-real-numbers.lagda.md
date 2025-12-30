@@ -314,6 +314,24 @@ abstract
         by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
 ```
 
+### Negation preserves the distance between real numbers
+
+```agda
+abstract
+  dist-neg-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    dist-ℝ (neg-ℝ x) (neg-ℝ y) ＝ dist-ℝ x y
+  dist-neg-ℝ x y =
+    equational-reasoning
+      abs-ℝ (neg-ℝ x -ℝ neg-ℝ y)
+      ＝ abs-ℝ (neg-ℝ x +ℝ y)
+        by ap abs-ℝ (ap-add-ℝ refl (neg-neg-ℝ y))
+      ＝ dist-ℝ y x
+        by ap abs-ℝ (commutative-add-ℝ _ _)
+      ＝ dist-ℝ x y
+        by commutative-dist-ℝ y x
+```
+
 ### Distributivity laws
 
 ```agda
