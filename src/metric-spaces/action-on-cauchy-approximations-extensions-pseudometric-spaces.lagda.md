@@ -80,6 +80,17 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-space-extension-Pseudometric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Pseudometric-Space)
+
+  extension-cauchy-pseudocompletion-extension-Pseudometric-Space :
+    extension-Pseudometric-Space
+      ( l3 ⊔ l4)
+      ( l4)
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+  pr1 extension-cauchy-pseudocompletion-extension-Pseudometric-Space =
+    cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-space-extension-Pseudometric-Space M E)
+  pr2 extension-cauchy-pseudocompletion-extension-Pseudometric-Space =
+    isometry-cauchy-pseudocompletion-extension-Pseudometric-Space
 ```
 
 ## Properties
