@@ -39,7 +39,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 Given two
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals.md)
+[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
 functions `f` and `g` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real

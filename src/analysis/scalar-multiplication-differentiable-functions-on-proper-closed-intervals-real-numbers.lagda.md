@@ -42,7 +42,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 Given a
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals.md)
+[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
 function `f` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real numbers
