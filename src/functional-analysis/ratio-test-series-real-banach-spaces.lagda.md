@@ -7,10 +7,7 @@ module functional-analysis.ratio-test-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import functional-analysis.absolute-convergence-series-real-banach-spaces
-open import functional-analysis.convergent-series-real-banach-spaces
 open import analysis.ratio-test-series-real-numbers
-open import functional-analysis.series-real-banach-spaces
 
 open import elementary-number-theory.natural-numbers
 
@@ -22,7 +19,10 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import functional-analysis.absolute-convergence-series-real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
 open import functional-analysis.real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
 
 open import logic.functoriality-existential-quantification
 
