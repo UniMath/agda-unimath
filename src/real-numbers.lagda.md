@@ -22,7 +22,6 @@ open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
-open import real-numbers.classically-pointwise-continuous-functions-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
 open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
@@ -89,6 +88,7 @@ open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.pointwise-continuous-functions-real-numbers public
+open import real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public

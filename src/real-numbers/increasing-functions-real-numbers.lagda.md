@@ -31,7 +31,6 @@ open import order-theory.posets
 open import order-theory.subposets
 
 open import real-numbers.addition-real-numbers
-open import real-numbers.classically-pointwise-continuous-functions-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.dense-subsets-real-numbers
 open import real-numbers.difference-real-numbers
@@ -39,6 +38,7 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.pointwise-continuous-functions-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers
 open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -164,12 +164,12 @@ module _
                     exists-positive-rational-separation-le-ℝ f'y<f'x
                   let (εx , εy , εx+εy=ε) = split-ℚ⁺ ε
                   (δx , Hδx) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+                    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-ℝ
                       ( f)
                       ( x)
                       ( εx)
                   (δy , Hδy) ←
-                    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ
+                    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-ℝ
                       ( f)
                       ( y)
                       ( εy)
