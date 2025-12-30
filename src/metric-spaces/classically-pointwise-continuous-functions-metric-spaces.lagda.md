@@ -95,7 +95,7 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space :
+    is-pointwise-continuous-map-is-classically-pointwise-continuous-map-acω-Metric-Space :
       is-classically-pointwise-continuous-map-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-classically-pointwise-continuous-map-acω-Metric-Space

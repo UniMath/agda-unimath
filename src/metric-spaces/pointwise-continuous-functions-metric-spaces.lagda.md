@@ -298,7 +298,7 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-isometry-Metric-Space :
+    is-pointwise-continuous-map-is-isometry-Metric-Space :
       (f : type-function-Metric-Space X Y) →
       is-isometry-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
@@ -310,7 +310,7 @@ module _
         ( f)
         ( is-uniformly-continuous-is-isometry-Metric-Space X Y f H)
 
-  pointwise-continuous-isometry-Metric-Space :
+  pointwise-continuous-map-isometry-Metric-Space :
     isometry-Metric-Space X Y →
     pointwise-continuous-map-Metric-Space X Y
   pointwise-continuous-isometry-Metric-Space (f , H) =
@@ -329,7 +329,7 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-const-Metric-Space :
+    is-pointwise-continuous-map-const-Metric-Space :
       is-pointwise-continuous-map-Metric-Space
         ( X)
         ( Y)

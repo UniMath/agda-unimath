@@ -39,7 +39,7 @@ module _
   (f : ℝ l1 → ℝ l2)
   where
 
-  is-classically-pointwise-continuous-prop-function-ℝ : Prop (lsuc l1 ⊔ l2)
+  is-classically-pointwise-continuous-prop-map-ℝ : Prop (lsuc l1 ⊔ l2)
   is-classically-pointwise-continuous-prop-function-ℝ =
     is-classically-pointwise-continuous-prop-map-Metric-Space
       ( metric-space-ℝ l1)
@@ -62,7 +62,7 @@ module _
   where
 
   abstract
-    is-classically-pointwise-continuous-pointwise-continuous-map-ℝ :
+    is-classically-pointwise-continuous-map-pointwise-continuous-map-ℝ :
       is-classically-pointwise-continuous-map-ℝ
         ( map-pointwise-continuous-map-ℝ f)
     is-classically-pointwise-continuous-pointwise-continuous-map-ℝ =
@@ -82,7 +82,7 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ :
+    is-pointwise-continuous-map-is-classically-pointwise-continuous-map-ACω-ℝ :
       is-classically-pointwise-continuous-map-ℝ f →
       is-pointwise-continuous-map-ℝ f
     is-pointwise-continuous-is-classically-pointwise-continuous-ACω-function-ℝ =
