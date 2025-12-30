@@ -19,6 +19,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
+open import metric-spaces.extensions-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -81,6 +82,17 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Metric-Space)
+
+  extension-cauchy-pseudocompletion-extension-Metric-Space :
+    extension-Pseudometric-Space
+      ( l3 ⊔ l4)
+      ( l4)
+      ( cauchy-pseudocompletion-Metric-Space M)
+  pr1 extension-cauchy-pseudocompletion-extension-Metric-Space =
+    cauchy-pseudocompletion-Metric-Space
+      ( metric-space-extension-Metric-Space M E)
+  pr2 extension-cauchy-pseudocompletion-extension-Metric-Space =
+    isometry-cauchy-pseudocompletion-extension-Metric-Space
 ```
 
 ## Properties
