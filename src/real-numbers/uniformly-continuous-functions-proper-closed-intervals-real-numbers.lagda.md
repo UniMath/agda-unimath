@@ -107,6 +107,12 @@ module _
   subset-im-ucont-map-proper-closed-interval-ℝ =
     subtype-im map-ucont-map-proper-closed-interval-ℝ
 
+  map-unit-im-ucont-map-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 [a,b] →
+    type-subtype subset-im-ucont-map-proper-closed-interval-ℝ
+  map-unit-im-ucont-map-proper-closed-interval-ℝ =
+    map-unit-im map-ucont-map-proper-closed-interval-ℝ
+
   subspace-im-ucont-map-proper-closed-interval-ℝ :
     Metric-Space (lsuc (l1 ⊔ l2)) l2
   subspace-im-ucont-map-proper-closed-interval-ℝ =

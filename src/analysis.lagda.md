@@ -6,6 +6,7 @@ module analysis where
 open import analysis.absolute-convergence-series-real-numbers public
 open import analysis.addition-differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.complete-metric-abelian-groups public
+open import analysis.composition-differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.convergent-series-complete-metric-abelian-groups public
 open import analysis.convergent-series-metric-abelian-groups public
 open import analysis.convergent-series-real-numbers public
