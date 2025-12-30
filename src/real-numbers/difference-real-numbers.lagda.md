@@ -109,3 +109,19 @@ abstract
   preserves-sim-diff-ℝ a~a' b~b' =
     preserves-sim-add-ℝ a~a' (preserves-sim-neg-ℝ b~b')
 ```
+
+### `(x - y) - z = x - (y + z)`
+
+```agda
+abstract
+  associative-diff-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x -ℝ y) -ℝ z ＝ x -ℝ (y +ℝ z)
+  associative-diff-ℝ x y z =
+    equational-reasoning
+      (x -ℝ y) -ℝ z
+      ＝ x +ℝ (neg-ℝ y -ℝ z)
+        by associative-add-ℝ _ _ _
+      ＝ x -ℝ (y +ℝ z)
+        by ap-add-ℝ refl (inv (distributive-neg-add-ℝ y z))
+```
