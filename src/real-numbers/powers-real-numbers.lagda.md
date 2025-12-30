@@ -483,7 +483,7 @@ abstract
   is-pointwise-continuous-power-ℝ :
     {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
   is-pointwise-continuous-power-ℝ 0 =
-    is-pointwise-continuous-const-Metric-Space _ _ _
+    is-pointwise-continuous-map-const-Metric-Space _ _ _
   is-pointwise-continuous-power-ℝ 1 =
     is-pointwise-continuous-map-id-Metric-Space _
   is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
@@ -503,7 +503,7 @@ abstract
           ( metric-space-ℝ l)
           ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
           ( id-pointwise-continuous-map-Metric-Space (metric-space-ℝ l)))
-        ( pointwise-continuous-isometry-Metric-Space
+        ( pointwise-continuous-map-isometry-Metric-Space
           ( metric-space-ℝ l)
           ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
           ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))

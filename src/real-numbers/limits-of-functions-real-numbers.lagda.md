@@ -44,4 +44,4 @@ is-limit-function-ℝ f x y = type-Prop (is-limit-prop-function-ℝ f x y)
 
 ## See also
 
-- [Classical limits of functions on the real numbers](real-numbers.classical-limits-of-functions-real-numbers.md)
+- [Classical limits of functions on the real numbers](real-numbers.epsilon-delta-limits-of-functions-real-numbers.md)
