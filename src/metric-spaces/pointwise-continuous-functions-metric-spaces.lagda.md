@@ -268,24 +268,24 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-is-short-function-Metric-Space :
+    is-pointwise-continuous-map-is-short-function-Metric-Space :
       (f : type-function-Metric-Space X Y) →
       is-short-function-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-is-short-function-Metric-Space
+    is-pointwise-continuous-map-is-short-function-Metric-Space
       f H =
-      is-pointwise-continuous-is-uniformly-continuous-function-Metric-Space
+      is-pointwise-continuous-map-is-uniformly-continuous-function-Metric-Space
         ( X)
         ( Y)
         ( f)
-        ( is-uniformly-continuous-is-short-function-Metric-Space X Y f H)
+        ( is-uniformly-continuous-map-is-short-function-Metric-Space X Y f H)
 
-  pointwise-continuous-short-function-Metric-Space :
+  pointwise-continuous-map-short-function-Metric-Space :
     short-function-Metric-Space X Y →
     pointwise-continuous-map-Metric-Space X Y
-  pointwise-continuous-short-function-Metric-Space (f , H) =
+  pointwise-continuous-map-short-function-Metric-Space (f , H) =
     ( f ,
-      is-pointwise-continuous-is-short-function-Metric-Space f H)
+      is-pointwise-continuous-map-is-short-function-Metric-Space f H)
 ```
 
 ### Isometries are pointwise continuous
