@@ -36,12 +36,13 @@ open import metric-spaces.pseudometric-spaces
 
 A
 {{#concept "Cauchy completion" Disambiguation="of metric space" Agda=cauchy-completion-Metric-Space}}
-of a [metric space](metric-spaces.metric-spaces.md) `M` is an [extension of a
-metric space](metric-spaces.extensions-metric-spaces.md] `i : M → N` that is
-both [Cauchy-dense](metric-spaces.cauchy-dense-extensions-metric-spaces.md)
-(i.e. all Cauchy approximations in `M`
-[converge](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
-`N` under the
+of a [metric space](metric-spaces.metric-spaces.md) `M` is an
+[extension](metric-spaces.extensions-metric-spaces.md) `i : M → N` of `M` that
+is both [Cauchy-dense](metric-spaces.cauchy-dense-extensions-metric-spaces.md)
+(i.e. all points of `N` are
+[limits](metric-spaces.limit-points-extensions-metric-spaces.md) of some
+[Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md) in
+`M` under the
 [action](metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces.md)
 of `i`) and [complete](metric-spaces.complete-extensions-metric-spaces.md) (i.e.
 `N` is a [complete metric space](metric-spaces.complete-metric-spaces.md)).
