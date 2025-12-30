@@ -244,7 +244,14 @@ module _
                 ( neighborhood-prop-Metric-Space M (ε⁺ +ℚ⁺ δ⁺) x y)
           in do
             ((θ , Nθxy) , θ<ε+δ) ← d≤ε (ε +ℚ δ) (le-right-add-rational-ℚ⁺ ε δ⁺)
-            monotonic-neighborhood-Metric-Space M x y θ (ε⁺ +ℚ⁺ δ⁺) θ<ε+δ Nθxy)
+            strictly-monotonic-neighborhood-Metric-Space
+              ( M)
+              ( x)
+              ( y)
+              ( θ)
+              ( ε⁺ +ℚ⁺ δ⁺)
+              ( θ<ε+δ)
+              ( Nθxy))
     pr2 (leq-upper-real-dist-Metric-Space ε⁺) Nεxy _ = intro-exists (ε⁺ , Nεxy)
 
     leq-zero-not-in-cut-upper-real-dist-Metric-Space :

@@ -498,7 +498,7 @@ module _
                           ( ε₁)
                           ( x)
                           ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
+                          ( monotonic-neighborhood-Metric-Space
                             ( metric-space-ℝ l1)
                             ( pr1 x)
                             ( pr1 y)
@@ -510,7 +510,7 @@ module _
                           ( ε₂)
                           ( x)
                           ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
+                          ( monotonic-neighborhood-Metric-Space
                             ( metric-space-ℝ l1)
                             ( pr1 x)
                             ( pr1 y)

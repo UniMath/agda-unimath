@@ -278,7 +278,7 @@ module _
             ( λ ε δ →
               let ε' = modulus-le-double-le-ℚ⁺ ε
               in
-                monotonic-neighborhood-Located-Metric-Space
+                strictly-monotonic-neighborhood-Located-Metric-Space
                   ( X)
                   ( pr1 (σ (mod-μ ε')))
                   ( x)
