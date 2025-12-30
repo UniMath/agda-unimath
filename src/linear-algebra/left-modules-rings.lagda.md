@@ -468,3 +468,40 @@ make-left-module-Ring R A _×_ ldma rdma lulm am =
     ( eq-htpy-hom-Ab A A (am _ _)) ,
     ( eq-htpy-hom-Ab A A lulm))
 ```
+
+### Given a left module over `S`, a ring homomorphism `R → S` induces a left module over `R`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (S : Ring l2)
+  (h : hom-Ring R S)
+  (M : left-module-Ring l3 S)
+  where
+
+  left-module-hom-left-module-Ring : left-module-Ring l3 R
+  left-module-hom-left-module-Ring =
+    ( ab-left-module-Ring S M ,
+      comp-hom-Ring
+        ( R)
+        ( S)
+        ( endomorphism-ring-ab-left-module-Ring S M)
+        ( mul-hom-left-module-Ring S M)
+        ( h))
+```
+
+### A ring homomorphism `R → S` induces the structure of an `R`-left module on `S`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (S : Ring l2)
+  (h : hom-Ring R S)
+  where
+
+  left-module-hom-Ring : left-module-Ring l2 R
+  left-module-hom-Ring =
+    left-module-hom-left-module-Ring R S h (left-module-ring-Ring S)
+```
