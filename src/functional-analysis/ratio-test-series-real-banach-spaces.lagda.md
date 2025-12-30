@@ -7,10 +7,10 @@ module functional-analysis.ratio-test-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.absolute-convergence-series-real-banach-spaces
-open import analysis.convergent-series-real-banach-spaces
+open import functional-analysis.absolute-convergence-series-real-banach-spaces
+open import functional-analysis.convergent-series-real-banach-spaces
 open import analysis.ratio-test-series-real-numbers
-open import analysis.series-real-banach-spaces
+open import functional-analysis.series-real-banach-spaces
 
 open import elementary-number-theory.natural-numbers
 
@@ -22,7 +22,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import linear-algebra.real-banach-spaces
+open import functional-analysis.real-banach-spaces
 
 open import logic.functoriality-existential-quantification
 
@@ -37,8 +37,8 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers
 
 ## Idea
 
-To prove that a [series](analysis.series-real-banach-spaces.md) `∑ aₙ` in a
-[real Banach space](linear-algebra.real-banach-spaces.md)
+To prove that a [series](functional-analysis.series-real-banach-spaces.md)
+`∑ aₙ` in a [real Banach space](functional-analysis.real-banach-spaces.md)
 [converges](analysis.series-real-numbers.md), it is sufficient to show that
 [there exists](foundation.existential-quantification.md) a
 [nonnegative](real-numbers.nonnegative-real-numbers.md) real number `r`
