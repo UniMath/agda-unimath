@@ -95,7 +95,7 @@ abstract
                   ( x)
                   ( b)
                   ( x≤b)
-                  ( leq-le-ℝ (le-raise-real-is-in-lower-cut-ℝ x l q<x)))
+                  ( leq-le-ℝ (le-raise-real-is-in-lower-cut-ℝ l x q<x)))
               ( weakly-monotonic-neighborhood-ℝ
                   ( x)
                   ( raise-real-ℚ l q)

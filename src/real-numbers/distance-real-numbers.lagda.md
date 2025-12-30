@@ -401,16 +401,14 @@ abstract
 
 ```agda
 abstract
-  leq-add-abs-dist-ℝ :
+  leq-abs-add-abs-dist-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
-    leq-ℝ x (abs-ℝ y +ℝ dist-ℝ y x)
-  leq-add-abs-dist-ℝ x y =
+    leq-ℝ (abs-ℝ x) (abs-ℝ y +ℝ dist-ℝ y x)
+  leq-abs-add-abs-dist-ℝ x y =
     let open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in
       chain-of-inequalities
-      x
-      ≤ abs-ℝ x
-        by leq-abs-ℝ x
+      abs-ℝ x
       ≤ abs-ℝ ((x -ℝ y) +ℝ y)
         by
           leq-sim-ℝ
@@ -422,6 +420,12 @@ abstract
         by leq-eq-ℝ (commutative-add-ℝ _ _)
       ≤ abs-ℝ y +ℝ dist-ℝ y x
         by leq-eq-ℝ (ap-add-ℝ refl (commutative-dist-ℝ x y))
+
+  leq-add-abs-dist-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ x (abs-ℝ y +ℝ dist-ℝ y x)
+  leq-add-abs-dist-ℝ x y =
+    transitive-leq-ℝ _ _ _ (leq-abs-add-abs-dist-ℝ x y) (leq-abs-ℝ x)
 ```
 
 ### The distance between `x` and `x + y` is `|y|`

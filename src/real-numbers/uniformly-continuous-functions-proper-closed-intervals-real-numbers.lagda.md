@@ -22,15 +22,21 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inhabited-totally-bounded-subsets-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
 open import real-numbers.subsets-real-numbers
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers
 ```
 
 </details>
@@ -106,6 +112,67 @@ module _
   subspace-im-ucont-map-proper-closed-interval-ℝ =
     metric-space-subset-ℝ
       ( subset-im-ucont-map-proper-closed-interval-ℝ)
+
+  inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ :
+    inhabited-totally-bounded-subset-ℝ (lsuc (l1 ⊔ l2)) l2 (lsuc (l1 ⊔ l2))
+  inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ =
+    im-uniformly-continuous-function-inhabited-totally-bounded-Metric-Space
+        ( metric-space-proper-closed-interval-ℝ l1 [a,b])
+        ( metric-space-ℝ l2)
+        ( f)
+        ( is-totally-bounded-proper-closed-interval-ℝ l1 [a,b])
+        ( is-inhabited-subtype-proper-closed-interval-ℝ l1 [a,b])
+
+  closed-interval-im-ucont-map-proper-closed-interval-ℝ :
+    closed-interval-ℝ l2 l2
+  closed-interval-im-ucont-map-proper-closed-interval-ℝ =
+    enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ
+      ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ)
+
+  leq-closed-interval-im-ucont-map-proper-closed-interval-ℝ :
+    subset-im-ucont-map-proper-closed-interval-ℝ ⊆
+    subtype-closed-interval-ℝ
+      ( l2)
+      ( closed-interval-im-ucont-map-proper-closed-interval-ℝ)
+  leq-closed-interval-im-ucont-map-proper-closed-interval-ℝ =
+    subset-enclosing-closed-interval-inhabited-totally-bounded-subset-ℝ
+      ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ)
+```
+
+### The absolute value of elements in the image of a uniformly continuous function on a proper closed interval is bounded
+
+```agda
+module _
+  {l1 l2 : Level}
+  ([a,b] : proper-closed-interval-ℝ l1 l1)
+  (f : ucont-map-proper-closed-interval-ℝ l1 l2 [a,b])
+  where
+
+  nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ :
+    Σ ( ℝ⁰⁺ l2)
+      ( λ B →
+        (x : type-proper-closed-interval-ℝ l1 [a,b]) →
+        leq-ℝ⁰⁺
+          ( nonnegative-abs-ℝ
+            ( map-ucont-map-proper-closed-interval-ℝ
+              ( [a,b])
+              ( f)
+              ( x)))
+          ( B))
+  nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ =
+    let
+      (B , H) =
+        nonnegative-upper-bound-abs-is-in-inhabited-totally-bounded-subset-ℝ
+          ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f))
+    in
+      ( B ,
+        ( H) ∘
+        ( map-unit-im
+          ( map-ucont-map-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f))))
 ```
 
 ### To show a function on a proper closed interval of real numbers is uniformly continuous, it suffices to exhibit a modulus that applies when its arguments are apart

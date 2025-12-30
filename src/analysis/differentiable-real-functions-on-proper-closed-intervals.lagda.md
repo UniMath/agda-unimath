@@ -10,6 +10,12 @@ module analysis.differentiable-real-functions-on-proper-closed-intervals where
 
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.minimum-positive-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -25,6 +31,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -33,6 +40,7 @@ open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.accumulation-points-subsets-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -69,7 +77,7 @@ numbers, `g` is a
 of `f` if there [exists](foundation.existential-quantification.md) a modulus
 function `μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
 `μ(ε)`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
-other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|.$$
+other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|$$
 
 ## Definition
 
@@ -425,7 +433,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
+  {l1 l2 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
   (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
   (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
@@ -545,5 +553,135 @@ module _
                         preserves-leq-right-mul-ℝ⁰⁺
                           ( nonnegative-dist-ℝ xℝ yℝ)
                           ( preserves-leq-real-ℚ
-                            (leq-le-ℚ ε'+ε'<ε)))))
+                            ( leq-le-ℚ ε'+ε'<ε)))))
+```
+
+### A differentiable real function on a proper closed interval is uniformly continuous
+
+```agda
+module _
+  {l1 l2 : Level}
+  ([a,b] : proper-closed-interval-ℝ l1 l1)
+  (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
+  (is-differentiable-f :
+    is-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
+  where
+
+  abstract
+    is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ :
+      is-ucont-map-proper-closed-interval-ℝ [a,b] f
+    is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ =
+      let
+        (f' , Df=f') = is-differentiable-f
+        is-ucont-f' =
+          is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f)
+            ( f')
+            ( Df=f')
+        open
+          do-syntax-trunc-Prop
+            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f)
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+        (max-|f'|⁰⁺@(max-|f'| , 0≤max-|f'|) , is-max-|f'|) =
+          nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f' , is-ucont-f')
+      in do
+        (q⁺@(q , _) , |f'|+1<q) ←
+          exists-greater-positive-rational-ℝ (max-|f'| +ℝ one-ℝ)
+        (δf' , is-mod-δf') ← Df=f'
+        let
+          ωf ε = mul-ℚ⁺ (inv-ℚ⁺ q⁺) (min-ℚ⁺ ε (δf' (min-ℚ⁺ one-ℚ⁺ ε)))
+          1/q≤1 =
+            tr
+              ( leq-ℚ⁺ (inv-ℚ⁺ q⁺))
+              ( inv-one-ℚ⁺)
+              ( inv-leq-ℚ⁺
+                ( one-ℚ⁺)
+                ( q⁺)
+                ( reflects-leq-real-ℚ
+                  ( chain-of-inequalities
+                    one-ℝ
+                    ≤ max-|f'| +ℝ one-ℝ
+                      by leq-right-add-real-ℝ⁰⁺ one-ℝ max-|f'|⁰⁺
+                    ≤ real-ℚ q
+                      by leq-le-ℝ |f'|+1<q)))
+          ωf≤δf' : (ε : ℚ⁺) → leq-ℚ⁺ (ωf ε) (δf' (min-ℚ⁺ one-ℚ⁺ ε))
+          ωf≤δf' ε =
+            transitive-leq-ℚ _ _ _
+              ( leq-right-min-ℚ⁺ ε (δf' (min-ℚ⁺ one-ℚ⁺ ε)))
+              ( leq-left-mul-leq-one-ℚ⁺
+                ( inv-ℚ⁺ q⁺)
+                ( 1/q≤1)
+                ( min-ℚ⁺ ε (δf' (min-ℚ⁺ one-ℚ⁺ ε))))
+        intro-exists
+          ( ωf)
+          ( λ x ε y Nxy →
+            neighborhood-dist-ℝ _ _ _
+              ( chain-of-inequalities
+                dist-ℝ (f x) (f y)
+                ≤ dist-ℝ (f y) (f x)
+                  by leq-eq-ℝ (commutative-dist-ℝ _ _)
+                ≤ ( abs-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
+                  ( dist-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)) (f y -ℝ f x))
+                  by leq-abs-add-abs-dist-ℝ _ (f' x *ℝ (pr1 y -ℝ pr1 x))
+                ≤ ( abs-ℝ (f' x) *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
+                  ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x)))
+                  by
+                    leq-eq-ℝ (ap-add-ℝ (abs-mul-ℝ _ _) (commutative-dist-ℝ _ _))
+                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
+                  ( real-ℚ⁺ (min-ℚ⁺ one-ℚ⁺ ε) *ℝ dist-ℝ (pr1 x) (pr1 y))
+                  by
+                    preserves-leq-add-ℝ
+                      ( preserves-leq-right-mul-ℝ⁰⁺
+                        ( nonnegative-dist-ℝ _ _)
+                        ( is-max-|f'| x))
+                      ( is-mod-δf'
+                        ( min-ℚ⁺ one-ℚ⁺ ε)
+                        ( x)
+                        ( y)
+                        ( weakly-monotonic-neighborhood-ℝ
+                          ( pr1 x)
+                          ( pr1 y)
+                          ( ωf ε)
+                          ( δf' (min-ℚ⁺ one-ℚ⁺ ε))
+                          ( ωf≤δf' ε)
+                          ( Nxy)))
+                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
+                  ( real-ℚ⁺ (min-ℚ⁺ one-ℚ⁺ ε) *ℝ dist-ℝ (pr1 x) (pr1 y))
+                  by
+                    leq-eq-ℝ
+                      ( ap-add-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ _ _)) refl)
+                ≤ ( max-|f'| +ℝ real-ℚ⁺ (min-ℚ⁺ one-ℚ⁺ ε)) *ℝ
+                  ( dist-ℝ (pr1 x) (pr1 y))
+                  by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+                ≤ (max-|f'| +ℝ one-ℝ) *ℝ real-ℚ⁺ (ωf ε)
+                  by
+                    preserves-leq-mul-ℝ⁰⁺
+                      ( max-|f'|⁰⁺ +ℝ⁰⁺ nonnegative-real-ℚ⁺ (min-ℚ⁺ one-ℚ⁺ ε))
+                      ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
+                      ( nonnegative-dist-ℝ (pr1 x) (pr1 y))
+                      ( nonnegative-real-ℚ⁺ (ωf ε))
+                      ( preserves-leq-left-add-ℝ _ _ _
+                        ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _)))
+                      ( leq-dist-neighborhood-ℝ _ _ _ Nxy)
+                ≤ real-ℚ q *ℝ real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε)
+                  by
+                    preserves-leq-mul-ℝ⁰⁺
+                      ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
+                      ( nonnegative-real-ℚ⁺ q⁺)
+                      ( nonnegative-real-ℚ⁺ (ωf ε))
+                      ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
+                      ( leq-le-ℝ |f'|+1<q)
+                      ( preserves-leq-real-ℚ
+                        ( preserves-leq-left-mul-ℚ⁺
+                          ( inv-ℚ⁺ q⁺)
+                          ( _)
+                          ( _)
+                          ( leq-left-min-ℚ _ _)))
+                ≤ real-ℚ⁺ (q⁺ *ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
+                  by leq-eq-ℝ (mul-real-ℚ _ _)
+                ≤ real-ℚ⁺ ε
+                  by leq-eq-ℝ (ap real-ℚ (is-section-left-div-ℚ⁺ q⁺ _))))
 ```
