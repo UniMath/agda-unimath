@@ -393,7 +393,7 @@ module _
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
-### Raising either side of an inequality to another universe level
+### Inequality on the real numbers is invariant under raising universe levels
 
 ```agda
 abstract
