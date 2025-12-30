@@ -132,10 +132,11 @@ is-zero-is-nonnegative-neg-is-nonnegative-ℤ {inr (inl star)} nonneg nonpos =
 ### The successor of a nonnegative integer is nonnegative
 
 ```agda
-is-nonnegative-succ-is-nonnegative-ℤ :
-  {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ (succ-ℤ x)
-is-nonnegative-succ-is-nonnegative-ℤ {inr (inl x)} H = H
-is-nonnegative-succ-is-nonnegative-ℤ {inr (inr x)} H = H
+abstract
+  is-nonnegative-succ-is-nonnegative-ℤ :
+    {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ (succ-ℤ x)
+  is-nonnegative-succ-is-nonnegative-ℤ {inr (inl x)} H = H
+  is-nonnegative-succ-is-nonnegative-ℤ {inr (inr x)} H = H
 
 succ-nonnegative-ℤ : nonnegative-ℤ → nonnegative-ℤ
 succ-nonnegative-ℤ (x , H) = succ-ℤ x , is-nonnegative-succ-is-nonnegative-ℤ H
@@ -144,9 +145,10 @@ succ-nonnegative-ℤ (x , H) = succ-ℤ x , is-nonnegative-succ-is-nonnegative-�
 ### The integer image of a natural number is nonnegative
 
 ```agda
-is-nonnegative-int-ℕ : (n : ℕ) → is-nonnegative-ℤ (int-ℕ n)
-is-nonnegative-int-ℕ zero-ℕ = star
-is-nonnegative-int-ℕ (succ-ℕ n) = star
+abstract
+  is-nonnegative-int-ℕ : (n : ℕ) → is-nonnegative-ℤ (int-ℕ n)
+  is-nonnegative-int-ℕ zero-ℕ = star
+  is-nonnegative-int-ℕ (succ-ℕ n) = star
 ```
 
 ### The canonical equivalence between natural numbers and nonnegative integers
