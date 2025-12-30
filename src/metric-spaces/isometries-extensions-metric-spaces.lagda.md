@@ -64,7 +64,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ## Idea
 
 An
-{{#concept "isometry" Disambiguation="between metric extensions of a metric space" Agda=isometry-extension-Metric-Space}}
+{{#concept "isometry" Disambiguation="between extensions of a metric space" Agda=isometry-extension-Metric-Space}}
 between two [extensions](metric-spaces.extensions-metric-spaces.md) of a
 [metric space](metric-spaces.metric-spaces.md) `M`, `i : M → U` and `j : M → V`,
 is an [isometry](metric-spaces.isometries-metric-spaces.md) `f : U → V` such

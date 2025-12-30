@@ -20,7 +20,7 @@ open import metric-spaces.pseudometric-spaces
 
 An
 {{#concept "extension" Disambiguation="of a pseudometric space" Agda=extension-Pseudometric-Space}}
-of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`is a
+of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` is a
 pseudometric space `Q` together with an
 [isometry](metric-spaces.isometries-pseudometric-spaces.md) `i : P → Q`.
 

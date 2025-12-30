@@ -60,7 +60,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-Given an [extension of metric spaces](metric-spaces.extensions-metric-spaces.md)
+Given an [extension of metric space](metric-spaces.extensions-metric-spaces.md)
 `i : M → N`, a point `y : N` is called a
 {{#concept "limit point" Disambiguation="of a metric extension" Agda=is-limit-prop-point-extension-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) a
