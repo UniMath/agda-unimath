@@ -1,7 +1,7 @@
 # Cauchy precompletions limit points of extensions of metric spaces
 
 ```agda
-module metric-spaces.limit-points-cauchy-precompletions-pseudometric-spaces where
+module metric-spaces.limit-points-cauchy-precompletions-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
