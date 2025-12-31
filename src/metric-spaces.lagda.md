@@ -116,6 +116,7 @@ open import metric-spaces.interior-subsets-metric-spaces public
 open import metric-spaces.isometries-extensions-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
+open import metric-spaces.limit-points-cauchy-precompletions-pseudometric-spaces public
 open import metric-spaces.limit-points-extensions-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public

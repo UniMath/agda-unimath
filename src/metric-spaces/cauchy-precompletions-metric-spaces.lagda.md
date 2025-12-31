@@ -142,6 +142,15 @@ module _
     isometry-cauchy-precompletion-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
 
+  map-isometry-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space :
+    cauchy-approximation-Metric-Space M →
+    type-cauchy-precompletion-Metric-Space M
+  map-isometry-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space =
+    map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( pseudometric-cauchy-precompletion-Metric-Space M)
+      ( isometry-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space)
+
   extension-cauchy-precompletion-cauchy-pseudocompletion-Metric-Space :
     extension-Pseudometric-Space
       ( l1 ⊔ l2)
@@ -167,6 +176,15 @@ module _
   isometry-cauchy-precompletion-Metric-Space =
     isometry-cauchy-precompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
+
+  map-isometry-cauchy-precompletion-Metric-Space :
+    type-Metric-Space M →
+    type-cauchy-precompletion-Metric-Space M
+  map-isometry-cauchy-precompletion-Metric-Space =
+    map-isometry-Metric-Space
+      ( M)
+      ( cauchy-precompletion-Metric-Space M)
+      ( isometry-cauchy-precompletion-Metric-Space)
 
   extension-cauchy-precompletion-Metric-Space :
     extension-Metric-Space (l1 ⊔ l2) (l1 ⊔ l2) M
@@ -204,6 +222,34 @@ module _
   is-precomplete-extension-cauchy-precompletion-Metric-Space =
     is-convergent-map-isometry-cauchy-approximation-cauchy-precompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
+```
+
+### Any precomplete extension of a metric space extends its Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (U : precomplete-extension-Metric-Space l3 l4 M)
+  where
+
+  isometry-cauchy-precompletion-precomplete-extension-Metric-Space :
+    isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-precomplete-extension-Metric-Space M U)
+  isometry-cauchy-precompletion-precomplete-extension-Metric-Space =
+    isometry-map-isometry-metric-quotient-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( metric-space-precomplete-extension-Metric-Space M U)
+      ( isometry-cauchy-pseudocompletion-precomplete-extension-Metric-Space M U)
+
+  extension-cauchy-precompletion-precomplete-extension-Metric-Space :
+    extension-Metric-Space l3 l4
+      ( cauchy-precompletion-Metric-Space M)
+  pr1 extension-cauchy-precompletion-precomplete-extension-Metric-Space =
+    metric-space-precomplete-extension-Metric-Space M U
+  pr2 extension-cauchy-precompletion-precomplete-extension-Metric-Space =
+    isometry-cauchy-precompletion-precomplete-extension-Metric-Space
 ```
 
 ### The Cauchy precompletion of a metric space is a Cauchy-dense extension of metric spaces
