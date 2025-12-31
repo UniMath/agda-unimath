@@ -31,7 +31,7 @@ open import metric-spaces.pseudometric-spaces
 
 ## Idea
 
-An [extension of a metric space](metric-spaces.extensions-metric-spaces.md]
+An [extension of a metric space](metric-spaces.extensions-metric-spaces.md)
 `i : M → N` is called
 {{#concept "complete" Disambiguation="extension of metric space" Agda=is-complete-prop-extension-Metric-Space}}
 if `N` is [complete](metric-spaces.complete-metric-spaces.md).
