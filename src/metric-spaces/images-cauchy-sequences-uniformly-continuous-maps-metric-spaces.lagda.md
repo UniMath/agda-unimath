@@ -45,13 +45,13 @@ module _
 
   seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space B
-  seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space =
+  sequence-map-cauchy-sequence-uniformly-continuous-function-Metric-Space =
     map-sequence
       ( map-uniformly-continuous-function-Metric-Space A B f)
       ( seq-cauchy-sequence-Metric-Space A x)
 
   abstract
-    is-cauchy-sequence-uniformly-continuous-map-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-map-cauchy-sequence-uniformly-continuous-function-Metric-Space :
       is-cauchy-sequence-Metric-Space
         ( B)
         ( seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space)
@@ -76,7 +76,7 @@ module _
             ( map-uniformly-continuous-function-Metric-Space A B f , μf)
             ( seq-cauchy-sequence-Metric-Space A x , μx))
 
-  map-uniformly-continuous-map-cauchy-sequence-Metric-Space :
+  map-cauchy-sequence-uniformly-continuous-map-Metric-Space :
     cauchy-sequence-Metric-Space B
   map-uniformly-continuous-map-cauchy-sequence-Metric-Space =
     ( seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space ,
@@ -93,7 +93,7 @@ module _
   (u : cauchy-sequence-Metric-Space A)
   where
 
-  map-short-map-cauchy-sequence-Metric-Space : cauchy-sequence-Metric-Space B
+  map-cauchy-sequence-short-function-Metric-Space : cauchy-sequence-Metric-Space B
   map-short-map-cauchy-sequence-Metric-Space =
     map-uniformly-continuous-map-cauchy-sequence-Metric-Space
       ( A)

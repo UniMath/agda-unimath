@@ -74,7 +74,7 @@ module _
   (σ : series-Complete-Metric-Ab G)
   where
 
-  is-convergent-cauchy-modulus-partial-sum-series-Complete-Metric-Ab :
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab :
     is-cauchy-sequence-Metric-Space
       ( metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ) →
@@ -95,7 +95,7 @@ module _
   where
 
   abstract
-    is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab :
+    is-cauchy-sequence-partial-sum-series-is-convergent-series-Complete-Metric-Ab :
       is-convergent-series-Complete-Metric-Ab G σ →
       is-cauchy-sequence-Metric-Space
         ( metric-space-Complete-Metric-Ab G)
