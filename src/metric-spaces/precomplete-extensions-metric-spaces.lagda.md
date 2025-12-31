@@ -704,7 +704,7 @@ module _
               ( extension-precomplete-extension-Metric-Space M E)
               ( map-cauchy-pseudocompletion-Metric-Space M x)) ,
             is-precomplete-extension-precomplete-extension-Metric-Space M E
-              (map-cauchy-pseudocompletion-Metric-Space M x)))
+              ( map-cauchy-pseudocompletion-Metric-Space M x)))
         ( is-limit-const-cauchy-approximation-Metric-Space
           ( metric-space-precomplete-extension-Metric-Space M E)
           ( map-metric-space-precomplete-extension-Metric-Space M E x))
