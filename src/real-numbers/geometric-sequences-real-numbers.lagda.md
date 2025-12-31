@@ -27,7 +27,7 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
@@ -46,7 +46,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-functions-real-numbers
+open import real-numbers.uniformly-continuous-endofunctions-real-numbers
 ```
 
 </details>
@@ -234,8 +234,8 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( preserves-limits-sequence-uniformly-continuous-function-ℝ
-            ( comp-uniformly-continuous-function-ℝ
+          ( preserves-limits-sequence-uniformly-continuous-endo-ℝ
+            ( comp-uniformly-continuous-endo-ℝ
               ( uniformly-continuous-right-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))

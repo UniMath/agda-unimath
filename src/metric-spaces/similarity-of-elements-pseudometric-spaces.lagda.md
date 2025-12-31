@@ -25,7 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
@@ -314,17 +314,17 @@ module _
   { l1 l2 l1' l2' : Level}
   ( A : Pseudometric-Space l1 l2)
   ( B : Pseudometric-Space l1' l2')
-  ( f : short-function-Pseudometric-Space A B)
+  ( f : short-map-Pseudometric-Space A B)
   where abstract
 
-  preserves-sim-map-short-function-Pseudometric-Space :
+  preserves-sim-map-short-map-Pseudometric-Space :
     ( x y : type-Pseudometric-Space A) →
     ( sim-Pseudometric-Space A x y) →
     ( sim-Pseudometric-Space B
-      ( map-short-function-Pseudometric-Space A B f x)
-      ( map-short-function-Pseudometric-Space A B f y))
-  preserves-sim-map-short-function-Pseudometric-Space x y x~y d =
-    is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
+      ( map-short-map-Pseudometric-Space A B f x)
+      ( map-short-map-Pseudometric-Space A B f y))
+  preserves-sim-map-short-map-Pseudometric-Space x y x~y d =
+    is-short-map-short-map-Pseudometric-Space A B f d x y (x~y d)
 ```
 
 ### Isometries between pseudometric spaces preserve and reflect similarity
@@ -344,7 +344,7 @@ module _
       ( map-isometry-Pseudometric-Space A B f x)
       ( map-isometry-Pseudometric-Space A B f y))
   preserves-sim-map-isometry-Pseudometric-Space =
-    preserves-sim-map-short-function-Pseudometric-Space
+    preserves-sim-map-short-map-Pseudometric-Space
       ( A)
       ( B)
       ( short-isometry-Pseudometric-Space A B f)

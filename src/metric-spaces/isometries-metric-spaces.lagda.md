@@ -26,8 +26,8 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
@@ -38,8 +38,7 @@ open import metric-spaces.rational-neighborhood-relations
 
 ## Idea
 
-A [map of metric spaces](metric-spaces.functions-metric-spaces.md) `f : A → B`
-is an
+A [map of metric spaces](metric-spaces.maps-metric-spaces.md) `f : A → B` is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
 if the
 [rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
@@ -57,7 +56,7 @@ the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
   is-isometry-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -88,7 +87,7 @@ module _
   set-isometry-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   set-isometry-Metric-Space =
     set-subset
-      ( set-function-Metric-Space A B)
+      ( set-map-Metric-Space A B)
       ( is-isometry-prop-Metric-Space A B)
 
   isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
@@ -104,7 +103,7 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  map-isometry-Metric-Space : type-function-Metric-Space A B
+  map-isometry-Metric-Space : type-map-Metric-Space A B
   map-isometry-Metric-Space = pr1 f
 
   is-isometry-map-isometry-Metric-Space :
@@ -207,8 +206,8 @@ module _
   where
 
   is-isometry-comp-is-isometry-Metric-Space :
-    (g : type-function-Metric-Space B C) →
-    (f : type-function-Metric-Space A B) →
+    (g : type-map-Metric-Space B C) →
+    (f : type-map-Metric-Space A B) →
     is-isometry-Metric-Space B C g →
     is-isometry-Metric-Space A B f →
     is-isometry-Metric-Space A C (g ∘ f)
@@ -297,7 +296,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   (I : is-isometry-Metric-Space A B f)
   (E : is-equiv f)
   where

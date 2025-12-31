@@ -26,7 +26,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -131,14 +131,14 @@ module _
 
 ```agda
   is-short-pr1-product-Metric-Space :
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( product-Metric-Space)
       ( X)
       ( pr1)
   is-short-pr1-product-Metric-Space _ _ _ = pr1
 
   is-short-pr2-product-Metric-Space :
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( product-Metric-Space)
       ( Y)
       ( pr2)

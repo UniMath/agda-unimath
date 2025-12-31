@@ -27,7 +27,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -46,7 +46,7 @@ product structure if this holds for all the evaluations `f x` and `g x`. I.e.,
 between `f` and `g` are bounded below by the supremum of the distances between
 each `f x` and `g x`. The evaluation functions from the product metric space to
 each projected metric space are
-[short maps](metric-spaces.short-functions-metric-spaces.md).
+[short maps](metric-spaces.short-maps-metric-spaces.md).
 
 ## Definitions
 
@@ -148,14 +148,14 @@ module _
   where
 
   is-short-ev-Π-Metric-Space :
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
       ( ev a)
   is-short-ev-Π-Metric-Space ε x y H = H a
 
   short-ev-Π-Metric-Space :
-    short-function-Metric-Space
+    short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
   short-ev-Π-Metric-Space = (ev a , is-short-ev-Π-Metric-Space)
@@ -172,7 +172,7 @@ module _
   ev-cauchy-approximation-Π-Metric-Space :
     (x : A) → cauchy-approximation-Metric-Space (P x)
   ev-cauchy-approximation-Π-Metric-Space x =
-    map-cauchy-approximation-short-function-Metric-Space
+    map-cauchy-approximation-short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P x)
       ( short-ev-Π-Metric-Space A P x)

@@ -19,7 +19,7 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -76,20 +76,20 @@ module _
 ### The image of a totally bounded subspace under a uniformly continuous function
 
 ```agda
-im-uniformly-continuous-function-totally-bounded-subspace-Metric-Space :
+im-uniformly-continuous-map-totally-bounded-subspace-Metric-Space :
   {l1 l2 l3 l4 l5 l6 : Level} →
   (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
-  (f : uniformly-continuous-function-Metric-Space X Y) →
+  (f : uniformly-continuous-map-Metric-Space X Y) →
   totally-bounded-subspace-Metric-Space l5 l6 X →
   totally-bounded-subspace-Metric-Space (l1 ⊔ l3 ⊔ l5) (l1 ⊔ l3 ⊔ l5 ⊔ l6) Y
-im-uniformly-continuous-function-totally-bounded-subspace-Metric-Space
+im-uniformly-continuous-map-totally-bounded-subspace-Metric-Space
   X Y f (S , tbS) =
-    ( im-subtype (map-uniformly-continuous-function-Metric-Space X Y f) S ,
-      is-totally-bounded-im-uniformly-continuous-function-is-totally-bounded-Metric-Space
+    ( im-subtype (map-uniformly-continuous-map-Metric-Space X Y f) S ,
+      is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space
         ( subspace-Metric-Space X S)
         ( Y)
         ( tbS)
-        ( comp-uniformly-continuous-function-Metric-Space
+        ( comp-uniformly-continuous-map-Metric-Space
           ( subspace-Metric-Space X S)
           ( X)
           ( Y)

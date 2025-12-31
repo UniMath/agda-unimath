@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.lipschitz-functions-metric-spaces where
+module metric-spaces.lipschitz-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -39,12 +39,12 @@ open import lists.sequences
 open import logic.functoriality-existential-quantification
 
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -54,14 +54,14 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 A
 [positive rational number](elementary-number-theory.positive-rational-numbers.md)
 `α : ℚ⁺` is a
-{{#concept "Lipschitz constant" Disambiguation="of a function between metric spaces" Agda=lipschitz-constant-function-Metric-Space}}
-for a [function](metric-spaces.functions-metric-spaces.md) `f : A → B` between
+{{#concept "Lipschitz constant" Disambiguation="of a function between metric spaces" Agda=lipschitz-constant-map-Metric-Space}}
+for a [map](metric-spaces.maps-metric-spaces.md) `f : A → B` between
 [metric spaces](metric-spaces.metric-spaces.md) if for any `x y : A`, if `d` is
 an upper bound of the distance between `x` and `y` in `A`, then `α * d` is an
 upper bound on the distance between `f x` and `f y` in `B`. If `α` is a
 Lipschitz constant for `f`, then `f` is called an **α-Lipschitz** function. A
 function that admits a Lipschitz constant is called a
-{{#concept "Lipschitz function" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
+{{#concept "Lipschitz map" Disambiguation="between metric spaces" WD="Lipschitz function" WDID=Q652707 Agda=lipschitz-function-Metric-Space}}.
 Lipschitz maps between metric spaces preserve
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md).
 
@@ -73,12 +73,12 @@ Lipschitz maps between metric spaces preserve
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
-  is-lipschitz-constant-prop-function-Metric-Space :
+  is-lipschitz-constant-prop-map-Metric-Space :
     ℚ⁺ → Prop (l1 ⊔ l2 ⊔ l2')
-  is-lipschitz-constant-prop-function-Metric-Space α =
+  is-lipschitz-constant-prop-map-Metric-Space α =
     Π-Prop
       ( ℚ⁺)
       ( λ d →
@@ -92,19 +92,20 @@ module _
                 ( neighborhood-prop-Metric-Space A d x y)
                 ( neighborhood-prop-Metric-Space B (α *ℚ⁺ d) (f x) (f y)))))
 
-  is-lipschitz-constant-function-Metric-Space : ℚ⁺ → UU (l1 ⊔ l2 ⊔ l2')
-  is-lipschitz-constant-function-Metric-Space α =
-    type-Prop (is-lipschitz-constant-prop-function-Metric-Space α)
+  is-lipschitz-constant-map-Metric-Space : ℚ⁺ → UU (l1 ⊔ l2 ⊔ l2')
+  is-lipschitz-constant-map-Metric-Space α =
+    type-Prop (is-lipschitz-constant-prop-map-Metric-Space α)
 
-  is-prop-is-lipschitz-constant-function-Metric-Space :
-    (α : ℚ⁺) →
-    is-prop (is-lipschitz-constant-function-Metric-Space α)
-  is-prop-is-lipschitz-constant-function-Metric-Space α =
-    is-prop-type-Prop (is-lipschitz-constant-prop-function-Metric-Space α)
+  abstract
+    is-prop-is-lipschitz-constant-map-Metric-Space :
+      (α : ℚ⁺) →
+      is-prop (is-lipschitz-constant-map-Metric-Space α)
+    is-prop-is-lipschitz-constant-map-Metric-Space α =
+      is-prop-type-Prop (is-lipschitz-constant-prop-map-Metric-Space α)
 
-  lipschitz-constant-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l2')
-  lipschitz-constant-function-Metric-Space =
-    type-subtype is-lipschitz-constant-prop-function-Metric-Space
+  lipschitz-constant-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l2')
+  lipschitz-constant-map-Metric-Space =
+    type-subtype is-lipschitz-constant-prop-map-Metric-Space
 ```
 
 ### The property of being a Lipschitz function
@@ -116,18 +117,18 @@ module _
   where
 
   is-lipschitz-function-prop-Metric-Space :
-    type-function-Metric-Space A B → Prop (l1 ⊔ l2 ⊔ l2')
+    type-map-Metric-Space A B → Prop (l1 ⊔ l2 ⊔ l2')
   is-lipschitz-function-prop-Metric-Space f =
     is-inhabited-subtype-Prop
-      (is-lipschitz-constant-prop-function-Metric-Space A B f)
+      (is-lipschitz-constant-prop-map-Metric-Space A B f)
 
   is-lipschitz-function-Metric-Space :
-    type-function-Metric-Space A B → UU (l1 ⊔ l2 ⊔ l2')
+    type-map-Metric-Space A B → UU (l1 ⊔ l2 ⊔ l2')
   is-lipschitz-function-Metric-Space f =
     type-Prop (is-lipschitz-function-prop-Metric-Space f)
 
   is-prop-is-lipschitz-function-Metric-Space :
-    (f : type-function-Metric-Space A B) →
+    (f : type-map-Metric-Space A B) →
     is-prop (is-lipschitz-function-Metric-Space f)
   is-prop-is-lipschitz-function-Metric-Space f =
     is-prop-type-Prop (is-lipschitz-function-prop-Metric-Space f)
@@ -152,7 +153,7 @@ module _
   where
 
   map-lipschitz-function-Metric-Space :
-    type-function-Metric-Space A B
+    type-map-Metric-Space A B
   map-lipschitz-function-Metric-Space = pr1 f
 
   is-lipschitz-map-lipschitz-function-Metric-Space :
@@ -168,13 +169,13 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
   all-lipschitz-constant-is-constant-function-Metric-Space :
     ( (x y : type-Metric-Space A) → f x ＝ f y) →
     ( α : ℚ⁺) →
-    is-lipschitz-constant-function-Metric-Space A B f α
+    is-lipschitz-constant-map-Metric-Space A B f α
   all-lipschitz-constant-is-constant-function-Metric-Space H α d x y _ =
     sim-eq-Metric-Space B (f x) (f y) (H x y) (α *ℚ⁺ d)
 ```
@@ -185,21 +186,21 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
-  is-one-lipschitz-constant-is-short-function-Metric-Space :
-    is-short-function-Metric-Space A B f →
-    is-lipschitz-constant-function-Metric-Space A B f one-ℚ⁺
-  is-one-lipschitz-constant-is-short-function-Metric-Space H d x y Nxy =
+  is-one-lipschitz-constant-is-short-map-Metric-Space :
+    is-short-map-Metric-Space A B f →
+    is-lipschitz-constant-map-Metric-Space A B f one-ℚ⁺
+  is-one-lipschitz-constant-is-short-map-Metric-Space H d x y Nxy =
     inv-tr
       ( is-upper-bound-dist-Metric-Space B (f x) (f y))
       ( left-unit-law-mul-ℚ⁺ d)
       ( H d x y Nxy)
 
   is-short-is-one-lipshitz-constant-function-Metric-Space :
-    is-lipschitz-constant-function-Metric-Space A B f one-ℚ⁺ →
-    is-short-function-Metric-Space A B f
+    is-lipschitz-constant-map-Metric-Space A B f one-ℚ⁺ →
+    is-short-map-Metric-Space A B f
   is-short-is-one-lipshitz-constant-function-Metric-Space L d x y Nxy =
     tr
       ( is-upper-bound-dist-Metric-Space B (f x) (f y))
@@ -213,13 +214,13 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
-  modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space :
-    lipschitz-constant-function-Metric-Space A B f →
+  modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space :
+    lipschitz-constant-map-Metric-Space A B f →
     modulus-of-uniform-continuity-function-Metric-Space A B f
-  modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
+  modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space
     ( α , L) =
     ( mul-ℚ⁺ (inv-ℚ⁺ α)) ,
     ( λ x d y H →
@@ -232,10 +233,10 @@ module _
 
   is-uniformly-continuous-is-lipschitz-function-Metric-Space :
     is-lipschitz-function-Metric-Space A B f →
-    is-uniformly-continuous-function-Metric-Space A B f
+    is-uniformly-continuous-map-Metric-Space A B f
   is-uniformly-continuous-is-lipschitz-function-Metric-Space =
     map-is-inhabited
-      modulus-of-uniform-continuity-lipschitz-constant-function-Metric-Space
+      modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space
 
 module _
   {l1 l2 l1' l2' : Level}
@@ -244,7 +245,7 @@ module _
 
   uniformly-continuous-lipschitz-function-Metric-Space :
     lipschitz-function-Metric-Space A B →
-    uniformly-continuous-function-Metric-Space A B
+    uniformly-continuous-map-Metric-Space A B
   uniformly-continuous-lipschitz-function-Metric-Space f =
     ( map-lipschitz-function-Metric-Space A B f) ,
     ( is-uniformly-continuous-is-lipschitz-function-Metric-Space
@@ -262,16 +263,16 @@ module _
   (A : Metric-Space la la')
   (B : Metric-Space lb lb')
   (C : Metric-Space lc lc')
-  (g : type-function-Metric-Space B C)
-  (f : type-function-Metric-Space A B)
+  (g : type-map-Metric-Space B C)
+  (f : type-map-Metric-Space A B)
   where
 
-  mul-comp-lipschitz-constant-function-Metric-Space :
+  mul-comp-lipschitz-constant-map-Metric-Space :
     (α β : ℚ⁺) →
-    is-lipschitz-constant-function-Metric-Space B C g α →
-    is-lipschitz-constant-function-Metric-Space A B f β →
-    is-lipschitz-constant-function-Metric-Space A C (g ∘ f) (α *ℚ⁺ β)
-  mul-comp-lipschitz-constant-function-Metric-Space α β Hg Hf d x y Nxy =
+    is-lipschitz-constant-map-Metric-Space B C g α →
+    is-lipschitz-constant-map-Metric-Space A B f β →
+    is-lipschitz-constant-map-Metric-Space A C (g ∘ f) (α *ℚ⁺ β)
+  mul-comp-lipschitz-constant-map-Metric-Space α β Hg Hf d x y Nxy =
     inv-tr
       ( λ ε → neighborhood-Metric-Space C ε (g (f x)) (g (f y)))
       ( associative-mul-ℚ⁺ α β d)
@@ -289,8 +290,8 @@ module _
   where
 
   comp-is-lipschitz-function-Metric-Space :
-    (g : type-function-Metric-Space B C) →
-    (f : type-function-Metric-Space A B) →
+    (g : type-map-Metric-Space B C) →
+    (f : type-map-Metric-Space A B) →
     is-lipschitz-function-Metric-Space B C g →
     is-lipschitz-function-Metric-Space A B f →
     is-lipschitz-function-Metric-Space A C (g ∘ f)
@@ -298,7 +299,7 @@ module _
     map-binary-trunc-Prop
       ( λ (α , Lg) (β , Lf) →
         α *ℚ⁺ β ,
-        mul-comp-lipschitz-constant-function-Metric-Space A B C g f α β Lg Lf)
+        mul-comp-lipschitz-constant-map-Metric-Space A B C g f α β Lg Lf)
 ```
 
 ### Composition of Lipschitz functions
@@ -334,13 +335,13 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f g : type-function-Metric-Space A B)
+  (f g : type-map-Metric-Space A B)
   (f~g : f ~ g)
   where
 
   lipschitz-constant-htpy-function-Metric-Space :
-    lipschitz-constant-function-Metric-Space A B f →
-    lipschitz-constant-function-Metric-Space A B g
+    lipschitz-constant-map-Metric-Space A B f →
+    lipschitz-constant-map-Metric-Space A B g
   lipschitz-constant-htpy-function-Metric-Space =
     tot
       ( λ α H d x y N →
@@ -363,7 +364,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   (Lf : is-lipschitz-function-Metric-Space A B f)
   where
 

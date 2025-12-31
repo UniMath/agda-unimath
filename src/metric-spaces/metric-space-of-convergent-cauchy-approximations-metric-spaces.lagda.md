@@ -23,10 +23,10 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
 
@@ -169,7 +169,7 @@ module _
       ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ))
 
   is-short-limit-convergent-cauchy-approximation-Metric-Space :
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
@@ -182,7 +182,7 @@ module _
       ( lemma-short-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy)
 
   short-limit-convergent-cauchy-approximation-Metric-Space :
-    short-function-Metric-Space
+    short-map-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
   short-limit-convergent-cauchy-approximation-Metric-Space =

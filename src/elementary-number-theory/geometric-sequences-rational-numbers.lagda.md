@@ -43,7 +43,7 @@ open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -162,10 +162,10 @@ module _
             ＝
               a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
               by right-unit-law-mul-ℚ _)
-          ( preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+          ( preserves-limits-sequence-uniformly-continuous-map-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℚ)
-            ( comp-uniformly-continuous-function-Metric-Space
+            ( comp-uniformly-continuous-map-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℚ)
               ( metric-space-ℚ)

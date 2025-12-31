@@ -47,9 +47,9 @@ open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
@@ -738,14 +738,14 @@ module _
 ```agda
 module _
   {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-function-Metric-Space A B)
+  (f : short-map-Metric-Space A B)
   (u : cauchy-sequence-Metric-Space A)
   where
 
   map-short-map-cauchy-sequence-Metric-Space : cauchy-sequence-Metric-Space B
   map-short-map-cauchy-sequence-Metric-Space =
     map-modulated-ucont-map-cauchy-sequence-Metric-Space A B
-      ( modulated-ucont-map-short-function-Metric-Space A B f)
+      ( modulated-ucont-map-short-map-Metric-Space A B f)
       ( u)
 ```
 

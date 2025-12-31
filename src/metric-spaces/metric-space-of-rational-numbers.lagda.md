@@ -44,17 +44,17 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
-open import metric-spaces.lipschitz-functions-metric-spaces
+open import metric-spaces.lipschitz-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -331,7 +331,7 @@ module _
         ( is-isometry-add-ℚ d y z)
 
     is-uniformly-continuous-add-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
@@ -343,7 +343,7 @@ module _
         ( is-isometry-add-ℚ)
 
   uniformly-continuous-add-ℚ :
-    uniformly-continuous-function-Metric-Space
+    uniformly-continuous-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
   uniformly-continuous-add-ℚ =
@@ -371,7 +371,7 @@ abstract
         by leq-dist-iff-neighborhood-ℚ _ _ _
 
   is-uniformly-continuous-neg-ℚ :
-    is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
       ( neg-ℚ)
@@ -383,7 +383,7 @@ abstract
       ( is-isometry-neg-ℚ)
 
 uniformly-continuous-neg-ℚ :
-  uniformly-continuous-function-Metric-Space
+  uniformly-continuous-map-Metric-Space
     ( metric-space-ℚ)
     ( metric-space-ℚ)
 uniformly-continuous-neg-ℚ = (neg-ℚ , is-uniformly-continuous-neg-ℚ)
@@ -413,7 +413,7 @@ module _
         ( is-isometry-neg-ℚ)
 
     is-uniformly-continuous-diff-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
@@ -425,7 +425,7 @@ module _
         ( is-isometry-diff-ℚ)
 
   uniformly-continuous-diff-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
   uniformly-continuous-diff-ℚ =
     ( diff-ℚ q , is-uniformly-continuous-diff-ℚ)
 ```
@@ -439,7 +439,7 @@ module _
 
   abstract
     is-lipschitz-constant-succ-abs-mul-ℚ :
-      is-lipschitz-constant-function-Metric-Space
+      is-lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
@@ -471,7 +471,7 @@ module _
               ( succ-leq-ℚ (rational-abs-ℚ x)))))
 
     lipschitz-constant-succ-abs-mul-ℚ :
-      lipschitz-constant-function-Metric-Space
+      lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
@@ -502,7 +502,7 @@ module _
         ( is-lipschitz-left-mul-ℚ)
 
     is-uniformly-continuous-left-mul-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
@@ -514,7 +514,7 @@ module _
         ( is-lipschitz-left-mul-ℚ)
 
     is-uniformly-continuous-right-mul-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x)
@@ -526,12 +526,12 @@ module _
         ( is-lipschitz-right-mul-ℚ)
 
   uniformly-continuous-left-mul-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
   uniformly-continuous-left-mul-ℚ =
     ( mul-ℚ x , is-uniformly-continuous-left-mul-ℚ)
 
   uniformly-continuous-right-mul-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
   uniformly-continuous-right-mul-ℚ =
     ( mul-ℚ' x , is-uniformly-continuous-right-mul-ℚ)
 ```

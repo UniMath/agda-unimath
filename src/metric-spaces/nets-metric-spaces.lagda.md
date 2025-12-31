@@ -23,16 +23,16 @@ open import logic.propositionally-decidable-types
 open import metric-spaces.approximations-metric-spaces
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
 open import metric-spaces.images-metric-spaces
-open import metric-spaces.images-short-functions-metric-spaces
+open import metric-spaces.images-short-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
@@ -167,19 +167,19 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
+  (f : type-map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
   (is-modulus-ucont-f-μ :
     is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ)
   (ε : ℚ⁺) (N : net-Metric-Space l5 X (μ ε))
   where
 
-  net-im-uniformly-continuous-function-net-Metric-Space :
+  net-im-uniformly-continuous-map-net-Metric-Space :
     net-Metric-Space (l1 ⊔ l3 ⊔ l5) (im-Metric-Space X Y f) ε
-  net-im-uniformly-continuous-function-net-Metric-Space =
+  net-im-uniformly-continuous-map-net-Metric-Space =
     ( im-finitely-enumerable-subtype
       ( map-unit-im f)
       ( finitely-enumerable-subset-net-Metric-Space X (μ ε) N) ,
-      is-approximation-im-uniformly-continuous-function-approximation-Metric-Space
+      is-approximation-im-uniformly-continuous-map-approximation-Metric-Space
         ( X)
         ( Y)
         ( f)
@@ -193,25 +193,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : short-function-Metric-Space X Y)
+  (f : short-map-Metric-Space X Y)
   (ε : ℚ⁺) (N : net-Metric-Space l5 X ε)
   where
 
-  net-im-short-function-net-Metric-Space :
+  net-im-short-map-net-Metric-Space :
     net-Metric-Space
       ( l1 ⊔ l3 ⊔ l5)
-      ( im-short-function-Metric-Space X Y f)
+      ( im-short-map-Metric-Space X Y f)
       ( ε)
-  net-im-short-function-net-Metric-Space =
-    net-im-uniformly-continuous-function-net-Metric-Space
+  net-im-short-map-net-Metric-Space =
+    net-im-uniformly-continuous-map-net-Metric-Space
       ( X)
       ( Y)
-      ( map-short-function-Metric-Space X Y f)
-      ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
+      ( map-short-map-Metric-Space X Y f)
+      ( is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space
         ( X)
         ( Y)
-        ( map-short-function-Metric-Space X Y f)
-        ( is-short-map-short-function-Metric-Space X Y f))
+        ( map-short-map-Metric-Space X Y f)
+        ( is-short-map-short-map-Metric-Space X Y f))
       ( ε)
       ( N)
 ```
@@ -231,7 +231,7 @@ module _
       ( im-isometry-Metric-Space X Y f)
       ( ε)
   net-im-isometry-net-Metric-Space =
-    net-im-short-function-net-Metric-Space X Y
+    net-im-short-map-net-Metric-Space X Y
       ( short-isometry-Metric-Space X Y f)
       ( ε)
       ( N)

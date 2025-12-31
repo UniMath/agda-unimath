@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
@@ -59,7 +59,7 @@ The
 of a [real number](real-numbers.dedekind-real-numbers.md) is the
 [binary maximum](real-numbers.binary-maximum-real-numbers.md) of it and its
 [negation](real-numbers.negation-real-numbers.md). The absolute value is a
-[short function](metric-spaces.short-functions-metric-spaces.md) of the
+[short function](metric-spaces.short-maps-metric-spaces.md) of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ```agda
@@ -339,7 +339,7 @@ module _
 
   abstract
     is-short-abs-ℝ :
-      is-short-function-Metric-Space
+      is-short-map-Metric-Space
         ( metric-space-ℝ l)
         ( metric-space-ℝ l)
         ( abs-ℝ)
@@ -400,7 +400,7 @@ module _
               ( left-leq-real-bound-neighborhood-ℝ d x y I))))
 
   short-abs-ℝ :
-    short-function-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
+    short-map-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
   short-abs-ℝ = (abs-ℝ , is-short-abs-ℝ)
 ```
 

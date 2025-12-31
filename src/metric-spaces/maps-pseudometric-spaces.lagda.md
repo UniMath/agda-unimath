@@ -1,7 +1,7 @@
-# Functions between pseudometric spaces
+# Maps between pseudometric spaces
 
 ```agda
-module metric-spaces.functions-pseudometric-spaces where
+module metric-spaces.maps-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -17,13 +17,13 @@ open import metric-spaces.pseudometric-spaces
 
 ## Idea
 
-{{#concept "Functions" Disambiguation="between pseudometric spaces" Agda=type-function-Pseudometric-Space}}
+{{#concept "Maps" Disambiguation="between pseudometric spaces" Agda=type-map-Pseudometric-Space}}
 between [pseudometric spaces](metric-spaces.pseudometric-spaces.md) are
 functions between their carrier types.
 
 ## Definitions
 
-### The type of functions between pseudometric spaces
+### The type of maps between pseudometric spaces
 
 ```agda
 module _
@@ -31,18 +31,18 @@ module _
   (X : Pseudometric-Space lx lx') (Y : Pseudometric-Space ly ly')
   where
 
-  type-function-Pseudometric-Space : UU (lx ⊔ ly)
-  type-function-Pseudometric-Space =
+  type-map-Pseudometric-Space : UU (lx ⊔ ly)
+  type-map-Pseudometric-Space =
     type-Pseudometric-Space X → type-Pseudometric-Space Y
 ```
 
-### The identity function on a pseudometric space
+### The identity map on a pseudometric space
 
 ```agda
 module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  id-Pseudometric-Space : type-function-Pseudometric-Space M M
+  id-Pseudometric-Space : type-map-Pseudometric-Space M M
   id-Pseudometric-Space = id
 ```

@@ -1,12 +1,13 @@
-# Functions between metric spaces
+# Maps between metric spaces
 
 ```agda
-module metric-spaces.functions-metric-spaces where
+module metric-spaces.maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.sets
@@ -19,7 +20,7 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-{{#concept "Functions" Disambiguation="between metric spaces" Agda=type-function-Metric-Space}}
+{{#concept "Maps" Disambiguation="between metric spaces" Agda=type-map-Metric-Space}}
 between [metric spaces](metric-spaces.metric-spaces.md) are functions between
 their carrier types.
 
@@ -33,22 +34,22 @@ module _
   (X : Metric-Space lx lx') (Y : Metric-Space ly ly')
   where
 
-  set-function-Metric-Space : Set (lx ⊔ ly)
-  set-function-Metric-Space =
+  set-map-Metric-Space : Set (lx ⊔ ly)
+  set-map-Metric-Space =
     hom-set-Set (set-Metric-Space X) (set-Metric-Space Y)
 
-  type-function-Metric-Space : UU (lx ⊔ ly)
-  type-function-Metric-Space =
+  type-map-Metric-Space : UU (lx ⊔ ly)
+  type-map-Metric-Space =
     type-Metric-Space X → type-Metric-Space Y
 ```
 
-### The identity function on a metric space
+### The identity map on a metric space
 
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  id-Metric-Space : type-function-Metric-Space M M
+  id-Metric-Space : type-map-Metric-Space M M
   id-Metric-Space = id
 ```

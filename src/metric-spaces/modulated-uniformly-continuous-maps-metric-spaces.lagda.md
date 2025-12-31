@@ -1,7 +1,7 @@
 # Modulated uniformly continuous functions between metric spaces
 
 ```agda
-module metric-spaces.modulated-uniformly-continuous-functions-metric-spaces where
+module metric-spaces.modulated-uniformly-continuous-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -22,18 +22,18 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuous-functions-metric-spaces
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.continuous-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
 
 ## Idea
 
-Given a [function](metric-spaces.functions-metric-spaces.md) `f` between
+Given a [function](metric-spaces.maps-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y`, a
 {{#concept "modulus of uniform continuity" Disambiguation="function between metric spaces" Agda=modulus-of-uniform-continuity-function-Metric-Space}}
 is a function `m : ℚ⁺ → ℚ⁺` such that for any `x : X`, whenever `x'` is in an
@@ -49,7 +49,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : type-map-Metric-Space X Y)
   where
 
   is-modulus-of-uniform-continuity-prop-function-Metric-Space :
@@ -58,7 +58,7 @@ module _
     Π-Prop
       ( type-Metric-Space X)
       ( λ x →
-        is-modulus-of-continuity-at-point-prop-function-Metric-Space X Y f x m)
+        is-modulus-of-continuity-at-point-prop-map-Metric-Space X Y f x m)
 
   is-modulus-of-uniform-continuity-function-Metric-Space :
     (ℚ⁺ → ℚ⁺) → UU (l1 ⊔ l2 ⊔ l4)
@@ -79,13 +79,13 @@ module _
 
   modulated-ucont-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   modulated-ucont-map-Metric-Space =
-    Σ ( type-function-Metric-Space X Y)
+    Σ ( type-map-Metric-Space X Y)
       ( λ f →
         Σ ( ℚ⁺ → ℚ⁺)
           ( is-modulus-of-uniform-continuity-function-Metric-Space X Y f))
 
   map-modulated-ucont-map-Metric-Space :
-    modulated-ucont-map-Metric-Space → type-function-Metric-Space X Y
+    modulated-ucont-map-Metric-Space → type-map-Metric-Space X Y
   map-modulated-ucont-map-Metric-Space = pr1
 
   modulus-modulated-ucont-map-Metric-Space :
@@ -115,7 +115,7 @@ module _
 
   is-continuous-at-point-map-modulated-ucont-map-Metric-Space :
     (x : type-Metric-Space X) →
-    is-continuous-at-point-function-Metric-Space X Y
+    is-continuous-at-point-map-Metric-Space X Y
       ( map-modulated-ucont-map-Metric-Space X Y f)
       ( x)
   is-continuous-at-point-map-modulated-ucont-map-Metric-Space x =
@@ -151,7 +151,7 @@ module _
   (g : modulated-ucont-map-Metric-Space X Y)
   where
 
-  map-comp-modulated-ucont-map-Metric-Space : type-function-Metric-Space X Z
+  map-comp-modulated-ucont-map-Metric-Space : type-map-Metric-Space X Z
   map-comp-modulated-ucont-map-Metric-Space =
     map-modulated-ucont-map-Metric-Space Y Z f ∘
     map-modulated-ucont-map-Metric-Space X Y g
@@ -195,26 +195,26 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
   is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space :
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id →
-    is-short-function-Metric-Space A B f
+    is-short-map-Metric-Space A B f
   is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space H ε x =
     H x ε
 
-  is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space :
-    is-short-function-Metric-Space A B f →
+  is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space :
+    is-short-map-Metric-Space A B f →
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
-  is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space H x ε =
+  is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space H x ε =
     H ε x
 
   is-short-iff-is-modulus-of-uniform-continuity-id-function-Metric-Space :
-    is-short-function-Metric-Space A B f ↔
+    is-short-map-Metric-Space A B f ↔
     is-modulus-of-uniform-continuity-function-Metric-Space A B f id
   is-short-iff-is-modulus-of-uniform-continuity-id-function-Metric-Space =
-    ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space ,
+    ( is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space ,
       is-short-is-modulus-of-uniform-continuity-id-function-Metric-Space)
 ```
 
@@ -227,13 +227,13 @@ module _
   (B : Metric-Space l3 l4)
   where
 
-  modulated-ucont-map-short-function-Metric-Space :
-    short-function-Metric-Space A B →
+  modulated-ucont-map-short-map-Metric-Space :
+    short-map-Metric-Space A B →
     modulated-ucont-map-Metric-Space A B
-  modulated-ucont-map-short-function-Metric-Space (f , is-short-f) =
+  modulated-ucont-map-short-map-Metric-Space (f , is-short-f) =
     ( f ,
       id ,
-      is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
+      is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space
         ( A)
         ( B)
         ( f)
@@ -251,7 +251,7 @@ module _
   modulated-ucont-map-isometry-Metric-Space :
     isometry-Metric-Space A B → modulated-ucont-map-Metric-Space A B
   modulated-ucont-map-isometry-Metric-Space f =
-    modulated-ucont-map-short-function-Metric-Space A B
+    modulated-ucont-map-short-map-Metric-Space A B
       ( short-isometry-Metric-Space A B f)
 ```
 
@@ -267,7 +267,7 @@ module _
   where
 
   map-product-modulated-ucont-map-Metric-Space :
-    type-function-Metric-Space
+    type-map-Metric-Space
       ( product-Metric-Space A C)
       ( product-Metric-Space B D)
   map-product-modulated-ucont-map-Metric-Space =
@@ -405,10 +405,10 @@ module _
   (f : type-Metric-Space A → type-Metric-Space B → type-Metric-Space C)
   (is-short-fa :
     (a : type-Metric-Space A) →
-    is-short-function-Metric-Space B C (f a))
+    is-short-map-Metric-Space B C (f a))
   (is-short-fb :
     (b : type-Metric-Space B) →
-    is-short-function-Metric-Space A C (λ a → f a b))
+    is-short-map-Metric-Space A C (λ a → f a b))
   where
 
   modulated-ucont-short-binary-map-Metric-Space :
@@ -418,13 +418,13 @@ module _
       ( id)
       ( id)
       ( λ a →
-        is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
+        is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space
           ( B)
           ( C)
           ( f a)
           ( is-short-fa a))
       ( λ b →
-        is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
+        is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space
           ( A)
           ( C)
           ( λ a → f a b)
@@ -454,4 +454,4 @@ module _
 
 ## See also
 
-- [(Unmodulated) uniformly continuous functions on metric spaces](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
+- [(Unmodulated) uniformly continuous functions on metric spaces](metric-spaces.uniformly-continuous-maps-metric-spaces.md)

@@ -13,8 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -63,7 +63,7 @@ module _
   isometry-diff-ℝ = (diff-ℝ x , is-isometry-diff-ℝ)
 
   short-diff-ℝ :
-    short-function-Metric-Space (metric-space-ℝ l2) (metric-space-ℝ (l1 ⊔ l2))
+    short-map-Metric-Space (metric-space-ℝ l2) (metric-space-ℝ (l1 ⊔ l2))
   short-diff-ℝ =
     short-isometry-Metric-Space
       ( metric-space-ℝ l2)
@@ -71,7 +71,7 @@ module _
       ( isometry-diff-ℝ)
 
   uniformly-continuous-diff-ℝ :
-    uniformly-continuous-function-Metric-Space
+    uniformly-continuous-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
   uniformly-continuous-diff-ℝ =

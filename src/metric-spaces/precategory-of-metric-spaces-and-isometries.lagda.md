@@ -28,8 +28,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 

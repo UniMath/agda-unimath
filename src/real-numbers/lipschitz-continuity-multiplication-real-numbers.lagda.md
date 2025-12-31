@@ -29,9 +29,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuous-functions-metric-spaces
-open import metric-spaces.lipschitz-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.continuous-maps-metric-spaces
+open import metric-spaces.lipschitz-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import order-theory.large-posets
 
@@ -51,7 +51,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-functions-real-numbers
+open import real-numbers.uniformly-continuous-endofunctions-real-numbers
 ```
 
 </details>
@@ -60,10 +60,10 @@ open import real-numbers.uniformly-continuous-functions-real-numbers
 
 [Multiplication](real-numbers.multiplication-real-numbers.md) on
 [real numbers](real-numbers.dedekind-real-numbers.md) by a constant is a
-[Lipschitz function](metric-spaces.lipschitz-functions-metric-spaces.md) from
-the [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)
-to itself, specifically implying that it is also
-[uniformly continuous](metric-spaces.uniformly-continuous-functions-metric-spaces.md).
+[Lipschitz function](metric-spaces.lipschitz-maps-metric-spaces.md) from the
+[metric space of real numbers](real-numbers.metric-space-of-real-numbers.md) to
+itself, specifically implying that it is also
+[uniformly continuous](metric-spaces.uniformly-continuous-maps-metric-spaces.md).
 
 ## Proof
 
@@ -138,7 +138,7 @@ module _
 
   abstract
     is-uniformly-continuous-right-mul-ℝ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
@@ -150,7 +150,7 @@ module _
         ( is-lipschitz-right-mul-ℝ l2 c)
 
     is-uniformly-continuous-left-mul-ℝ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
@@ -162,12 +162,12 @@ module _
         ( is-lipschitz-left-mul-ℝ l2 c)
 
   uniformly-continuous-right-mul-ℝ :
-    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
+    uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-right-mul-ℝ =
     ( mul-ℝ c , is-uniformly-continuous-right-mul-ℝ)
 
   uniformly-continuous-left-mul-ℝ :
-    uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
+    uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-left-mul-ℝ =
     ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
 ```
@@ -287,7 +287,7 @@ module _
 
   abstract
     is-uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -303,7 +303,7 @@ module _
         ( is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ X Y)
 
   uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ :
-    uniformly-continuous-function-Metric-Space
+    uniformly-continuous-map-Metric-Space
       ( product-Metric-Space
         ( subspace-inhabited-totally-bounded-subset-ℝ X)
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -323,7 +323,7 @@ This remains to be shown.
 abstract
   is-pointwise-continuous-mul-ℝ :
     (l1 l2 : Level) →
-    is-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
       ( ind-Σ mul-ℝ)
@@ -332,7 +332,7 @@ abstract
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
       open
         do-syntax-trunc-Prop
-          ( is-continuous-at-point-prop-function-Metric-Space
+          ( is-continuous-at-point-prop-map-Metric-Space
             ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
             ( metric-space-ℝ (l1 ⊔ l2))
             ( ind-Σ mul-ℝ)

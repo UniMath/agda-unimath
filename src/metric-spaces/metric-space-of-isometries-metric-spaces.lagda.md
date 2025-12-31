@@ -10,7 +10,7 @@ module metric-spaces.metric-space-of-isometries-metric-spaces where
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.metric-space-of-functions-metric-spaces
+open import metric-spaces.metric-space-of-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -22,7 +22,7 @@ open import metric-spaces.subspaces-metric-spaces
 [Isometries](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) inherit the
 [metric subspace](metric-spaces.subspaces-metric-spaces.md) structure of the
-[function metric space](metric-spaces.metric-space-of-functions-metric-spaces.md).
+[function metric space](metric-spaces.metric-space-of-maps-metric-spaces.md).
 This defines the
 {{#concept "metric space of isometries between metric spaces" Agda=metric-space-of-isometries-Metric-Space}}.
 

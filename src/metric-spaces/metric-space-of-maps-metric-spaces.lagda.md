@@ -1,7 +1,7 @@
-# The metric space of functions between metric spaces
+# The metric space of maps between metric spaces
 
 ```agda
-module metric-spaces.metric-space-of-functions-metric-spaces where
+module metric-spaces.metric-space-of-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -15,9 +15,9 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -25,11 +25,11 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-[Functions](metric-spaces.functions-metric-spaces.md) between
+[Maps](metric-spaces.maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) inherit the
 [product metric structure](metric-spaces.dependent-products-metric-spaces.md) of
 their codomain. This defines the
-{{#concept "metric space of functions between metric spaces" Agda=metric-space-of-functions-Metric-Space}}.
+{{#concept "metric space of maps between metric spaces" Agda=metric-space-of-maps-Metric-Space}}.
 
 ## Definitions
 
@@ -79,7 +79,7 @@ module _
   ( f :
     cauchy-approximation-Metric-Space
       ( metric-space-of-functions-Metric-Space A B))
-  ( g : type-function-Metric-Space A B)
+  ( g : type-map-Metric-Space A B)
   where
 
   is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space :

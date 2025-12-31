@@ -16,17 +16,17 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -148,7 +148,7 @@ module _
   where
 
   inclusion-subspace-Metric-Space :
-    type-function-Metric-Space
+    type-map-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
   inclusion-subspace-Metric-Space = inclusion-subtype S
@@ -189,7 +189,7 @@ module _
   where
 
   short-inclusion-subspace-Metric-Space :
-    short-function-Metric-Space (subspace-Metric-Space A S) A
+    short-map-Metric-Space (subspace-Metric-Space A S) A
   short-inclusion-subspace-Metric-Space =
     short-isometry-Metric-Space
       ( subspace-Metric-Space A S)
@@ -207,7 +207,7 @@ module _
   where
 
   uniformly-continuous-inclusion-subspace-Metric-Space :
-    uniformly-continuous-function-Metric-Space (subspace-Metric-Space A S) A
+    uniformly-continuous-map-Metric-Space (subspace-Metric-Space A S) A
   uniformly-continuous-inclusion-subspace-Metric-Space =
     uniformly-continuous-isometry-Metric-Space
       ( subspace-Metric-Space A S)

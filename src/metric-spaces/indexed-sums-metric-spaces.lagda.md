@@ -28,17 +28,17 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
-open import metric-spaces.locally-constant-functions-metric-spaces
+open import metric-spaces.locally-constant-maps-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
@@ -62,8 +62,8 @@ The pair `(x , x')` is a `d`-neighbor of `(y , y')` if and only if `x` is
 identification is a `d`-neighbor of `y'` in `P y`.
 
 The [projection](foundation.dependent-pair-types.md) on the first component is
-[locally constant](metric-spaces.locally-constant-functions-metric-spaces.md),
-and for any `x : A` the embedding `P x → Σ A P` is an
+[locally constant](metric-spaces.locally-constant-maps-metric-spaces.md), and
+for any `x : A` the embedding `P x → Σ A P` is an
 [isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
@@ -258,7 +258,7 @@ module _
   where
 
   is-locally-constant-base-point-indexed-sum-Metric-Space :
-    is-locally-constant-function-Metric-Space
+    is-locally-constant-map-Metric-Space
       ( indexed-sum-Metric-Space A P)
       ( metric-space-discrete-metric-space-Set A)
       ( base-point-indexed-sum-Metric-Space A P)
@@ -282,7 +282,7 @@ module _
   where
 
   is-short-emb-fiber-indexed-sum-Metric-Space :
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( P x)
       ( indexed-sum-Metric-Space A P)
       ( map-emb-fiber-indexed-sum-Metric-Space A P x)
@@ -290,7 +290,7 @@ module _
     ( refl , Nxx')
 
   short-emb-fiber-indexed-sum-Metric-Space :
-    short-function-Metric-Space (P x) (indexed-sum-Metric-Space A P)
+    short-map-Metric-Space (P x) (indexed-sum-Metric-Space A P)
   short-emb-fiber-indexed-sum-Metric-Space =
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
       is-short-emb-fiber-indexed-sum-Metric-Space)

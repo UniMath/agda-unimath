@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -131,7 +131,7 @@ module _
 abstract
   is-short-neg-ℝ :
     {l : Level} →
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( metric-space-ℝ l)
       ( metric-space-ℝ l)
       ( neg-ℝ)

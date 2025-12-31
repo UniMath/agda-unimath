@@ -26,7 +26,7 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -95,7 +95,7 @@ real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
 real-limit-cauchy-approximation-ℚ f =
   limit-cauchy-approximation-Complete-Metric-Space
     ( complete-metric-space-ℝ lzero)
-    ( map-cauchy-approximation-short-function-Metric-Space
+    ( map-cauchy-approximation-short-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( short-isometry-Metric-Space

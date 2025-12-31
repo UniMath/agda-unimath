@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.functions-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -33,7 +33,7 @@ open import metric-spaces.rational-neighborhood-relations
 
 ## Idea
 
-A [function](metric-spaces.functions-pseudometric-spaces.md) between
+A [function](metric-spaces.maps-pseudometric-spaces.md) between
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between pseudometric spaces" Agda=is-isometry-Pseudometric-Space}}
 if the
@@ -52,7 +52,7 @@ their images in `B`.
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-function-Pseudometric-Space A B)
+  (f : type-map-Pseudometric-Space A B)
   where
 
   is-isometry-prop-Pseudometric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -92,7 +92,7 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where
 
-  map-isometry-Pseudometric-Space : type-function-Pseudometric-Space A B
+  map-isometry-Pseudometric-Space : type-map-Pseudometric-Space A B
   map-isometry-Pseudometric-Space = pr1 f
 
   is-isometry-map-isometry-Pseudometric-Space :
@@ -198,8 +198,8 @@ module _
   where
 
   is-isometry-comp-is-isometry-Pseudometric-Space :
-    (g : type-function-Pseudometric-Space B C) →
-    (f : type-function-Pseudometric-Space A B) →
+    (g : type-map-Pseudometric-Space B C) →
+    (f : type-map-Pseudometric-Space A B) →
     is-isometry-Pseudometric-Space B C g →
     is-isometry-Pseudometric-Space A B f →
     is-isometry-Pseudometric-Space A C (g ∘ f)
@@ -307,7 +307,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-function-Pseudometric-Space A B)
+  (f : type-map-Pseudometric-Space A B)
   (I : is-isometry-Pseudometric-Space A B f)
   (E : is-equiv f)
   where

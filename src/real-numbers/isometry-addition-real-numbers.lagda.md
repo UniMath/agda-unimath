@@ -17,9 +17,9 @@ open import foundation.universe-levels
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -98,7 +98,7 @@ module _
   isometry-right-add-ℝ = ( (λ y → add-ℝ y x) , is-isometry-right-add-ℝ)
 
   short-left-add-ℝ :
-    short-function-Metric-Space
+    short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
   short-left-add-ℝ =

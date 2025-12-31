@@ -36,7 +36,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-functions-real-numbers
+open import real-numbers.uniformly-continuous-endofunctions-real-numbers
 ```
 
 </details>
@@ -122,21 +122,21 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (f : uniformly-continuous-function-ℝ l1 l2)
+  (f : uniformly-continuous-endo-ℝ l1 l2)
   (u : sequence (ℝ l1))
   (lim : ℝ l1)
   where
 
   abstract
-    preserves-limits-sequence-uniformly-continuous-function-ℝ :
+    preserves-limits-sequence-uniformly-continuous-endo-ℝ :
       is-limit-sequence-ℝ u lim →
       is-limit-sequence-ℝ
         ( map-sequence
-          ( map-uniformly-continuous-function-ℝ f)
+          ( map-uniformly-continuous-endo-ℝ f)
           ( u))
-        ( map-uniformly-continuous-function-ℝ f lim)
-    preserves-limits-sequence-uniformly-continuous-function-ℝ =
-      preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+        ( map-uniformly-continuous-endo-ℝ f lim)
+    preserves-limits-sequence-uniformly-continuous-endo-ℝ =
+      preserves-limits-sequence-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)

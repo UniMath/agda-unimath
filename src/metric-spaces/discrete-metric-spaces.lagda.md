@@ -36,15 +36,15 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
-open import metric-spaces.locally-constant-functions-metric-spaces
+open import metric-spaces.locally-constant-maps-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
@@ -65,10 +65,10 @@ the
 {{#concept "standard discrete metric space" Disambiguation="on a set" Agda=discrete-metric-space-Set}}
 on its underlying [set](foundation.sets.md).
 
-Any [map](metric-spaces.functions-metric-spaces.md) from a discrete metric space
-is [short](metric-spaces.short-functions-metric-spaces.md), and a map into a
-discrete metric space is short if and only if it is
-[locally constant](metric-spaces.locally-constant-functions-metric-spaces.md).
+Any [map](metric-spaces.maps-metric-spaces.md) from a discrete metric space is
+[short](metric-spaces.short-maps-metric-spaces.md), and a map into a discrete
+metric space is short if and only if it is
+[locally constant](metric-spaces.locally-constant-maps-metric-spaces.md).
 
 ## Definitions
 
@@ -327,12 +327,12 @@ module _
 ```agda
 module _
   {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-function-Metric-Space A B)
+  (f : type-map-Metric-Space A B)
   where
 
   is-short-is-discrete-domain-function-Metric-Space :
     is-discrete-Metric-Space A →
-    is-short-function-Metric-Space A B f
+    is-short-map-Metric-Space A B f
   is-short-is-discrete-domain-function-Metric-Space H d x y Nxy =
     sim-eq-Metric-Space
       ( B)
@@ -343,8 +343,8 @@ module _
 
   is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space :
     is-discrete-Metric-Space B →
-    is-short-function-Metric-Space A B f →
-    is-locally-constant-function-Metric-Space A B f
+    is-short-map-Metric-Space A B f →
+    is-locally-constant-map-Metric-Space A B f
   is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
     H K x y =
     elim-exists
@@ -353,11 +353,11 @@ module _
 
   iff-is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space :
     is-discrete-Metric-Space B →
-    is-short-function-Metric-Space A B f ↔
-    is-locally-constant-function-Metric-Space A B f
+    is-short-map-Metric-Space A B f ↔
+    is-locally-constant-map-Metric-Space A B f
   iff-is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
     H =
     ( is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
       H) ,
-    ( is-short-is-locally-constant-function-Metric-Space A B f)
+    ( is-short-is-locally-constant-map-Metric-Space A B f)
 ```

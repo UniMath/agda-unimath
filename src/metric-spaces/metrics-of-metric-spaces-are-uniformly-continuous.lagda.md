@@ -24,8 +24,8 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import order-theory.large-posets
 
@@ -45,7 +45,7 @@ open import real-numbers.rational-real-numbers
 
 If `ρ` is a [metric](metric-spaces.metrics-of-metric-spaces.md) of the
 [metric space](metric-spaces.metric-spaces.md) `M`, then it is a
-[uniformly continuous map](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
+[uniformly continuous map](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
 from the
 [product metric space](metric-spaces.cartesian-products-metric-spaces.md)
 `M × M` to the metric space of
@@ -137,7 +137,7 @@ module _
               by preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε))
 
     is-uniformly-continuous-metric-of-Metric-Space :
-      is-uniformly-continuous-function-Metric-Space
+      is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
         ( ind-Σ ρ)
@@ -147,7 +147,7 @@ module _
         ( is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space)
 
   uniformly-continuous-metric-of-Metric-Space :
-    uniformly-continuous-function-Metric-Space
+    uniformly-continuous-map-Metric-Space
       ( product-Metric-Space M M)
       ( metric-space-ℝ⁰⁺ l3)
   uniformly-continuous-metric-of-Metric-Space =

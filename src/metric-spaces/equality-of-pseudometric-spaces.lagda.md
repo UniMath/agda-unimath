@@ -26,8 +26,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 ```
 
@@ -89,7 +89,7 @@ module _
 
   isometric-equiv-Pseudometric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Pseudometric-Space' =
-    Σ (type-function-Pseudometric-Space A B)
+    Σ (type-map-Pseudometric-Space A B)
       (λ f → (is-equiv f) × (is-isometry-Pseudometric-Space A B f))
 ```
 

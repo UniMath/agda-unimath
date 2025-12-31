@@ -25,8 +25,8 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-isometries
-open import metric-spaces.precategory-of-metric-spaces-and-short-functions
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.precategory-of-metric-spaces-and-short-maps
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
@@ -35,11 +35,11 @@ open import metric-spaces.short-functions-metric-spaces
 
 Because every [isometry](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is also
-[short](metric-spaces.short-functions-metric-spaces.md), there's a
+[short](metric-spaces.short-maps-metric-spaces.md), there's a
 [functor](category-theory.functors-precategories.md) between the
 [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md)
 to the
-[category of metric spaces and short maps](metric-spaces.category-of-metric-spaces-and-short-functions.md).
+[category of metric spaces and short maps](metric-spaces.category-of-metric-spaces-and-short-maps.md).
 
 Since this functor is the identity on objects, it is an equivalence on objects.
 Moreover, since the map from isometry to short maps is an
@@ -61,7 +61,7 @@ module _
   functor-short-isometry-Metric-Space :
     functor-Precategory
       (precategory-isometry-Metric-Space {l1} {l2})
-      (precategory-short-function-Metric-Space {l1} {l2})
+      (precategory-short-map-Metric-Space {l1} {l2})
   pr1 functor-short-isometry-Metric-Space A = A
   pr2 functor-short-isometry-Metric-Space =
     ( λ {A B} → short-isometry-Metric-Space A B) ,
@@ -81,7 +81,7 @@ module _
     is-equiv
       ( obj-functor-Precategory
         ( precategory-isometry-Metric-Space)
-        ( precategory-short-function-Metric-Space)
+        ( precategory-short-map-Metric-Space)
         ( functor-short-isometry-Metric-Space l1 l2))
   is-equiv-obj-functor-short-isometry-Metric-Space = is-equiv-id
 ```
@@ -96,7 +96,7 @@ module _
   is-faithful-functor-short-isometry-Metric-Space :
     is-faithful-functor-Precategory
       (precategory-isometry-Metric-Space)
-      (precategory-short-function-Metric-Space)
+      (precategory-short-map-Metric-Space)
       (functor-short-isometry-Metric-Space l1 l2)
   is-faithful-functor-short-isometry-Metric-Space =
     is-emb-short-isometry-Metric-Space
@@ -112,14 +112,14 @@ module _
   is-conservative-functor-short-isometry-Metric-Space :
     is-conservative-functor-Precategory
       (precategory-isometry-Metric-Space)
-      (precategory-short-function-Metric-Space)
+      (precategory-short-map-Metric-Space)
       (functor-short-isometry-Metric-Space l1 l2)
   is-conservative-functor-short-isometry-Metric-Space {A} {B} f H =
     is-iso-is-equiv-isometry-Metric-Space
       ( A)
       ( B)
       ( f)
-      ( is-equiv-is-iso-short-function-Metric-Space
+      ( is-equiv-is-iso-short-map-Metric-Space
         ( A)
         ( B)
         ( short-isometry-Metric-Space A B f)
