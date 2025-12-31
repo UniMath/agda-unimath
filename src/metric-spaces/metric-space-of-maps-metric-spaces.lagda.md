@@ -33,7 +33,7 @@ their codomain. This defines the
 
 ## Definitions
 
-### The metric space of functions between metric spaces
+### The metric space of maps between metric spaces
 
 ```agda
 module _
@@ -41,14 +41,14 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  metric-space-of-functions-Metric-Space : Metric-Space (l1 ⊔ l1') (l1 ⊔ l2')
-  metric-space-of-functions-Metric-Space =
+  metric-space-of-maps-Metric-Space : Metric-Space (l1 ⊔ l1') (l1 ⊔ l2')
+  metric-space-of-maps-Metric-Space =
     Π-Metric-Space (type-Metric-Space A) (λ _ → B)
 ```
 
 ## Properties
 
-### The partial applications of a Cauchy approximation of functions form a Cauchy approximation
+### The partial applications of a Cauchy approximation of maps form a Cauchy approximation
 
 ```agda
 module _
@@ -56,13 +56,13 @@ module _
   ( A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   ( f :
     cauchy-approximation-Metric-Space
-      ( metric-space-of-functions-Metric-Space A B))
+      ( metric-space-of-maps-Metric-Space A B))
   ( x : type-Metric-Space A)
   where
 
-  ev-cauchy-approximation-function-Metric-Space :
+  ev-cauchy-approximation-map-Metric-Space :
     cauchy-approximation-Metric-Space B
-  ev-cauchy-approximation-function-Metric-Space =
+  ev-cauchy-approximation-map-Metric-Space =
     ev-cauchy-approximation-Π-Metric-Space
       ( type-Metric-Space A)
       ( λ _ → B)
@@ -70,7 +70,7 @@ module _
       ( x)
 ```
 
-### A function is the limit of a Cauchy approximation of functions if and only if it is the pointwise limit of its partial applications
+### A function is the limit of a Cauchy approximation of maps if and only if it is the pointwise limit of its partial applications
 
 ```agda
 module _
@@ -78,19 +78,19 @@ module _
   ( A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   ( f :
     cauchy-approximation-Metric-Space
-      ( metric-space-of-functions-Metric-Space A B))
+      ( metric-space-of-maps-Metric-Space A B))
   ( g : type-map-Metric-Space A B)
   where
 
   is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space
-      ( metric-space-of-functions-Metric-Space A B)
+      ( metric-space-of-maps-Metric-Space A B)
       ( f)
       ( g) →
     (x : type-Metric-Space A) →
     is-limit-cauchy-approximation-Metric-Space
       ( B)
-      ( ev-cauchy-approximation-function-Metric-Space A B f x)
+      ( ev-cauchy-approximation-map-Metric-Space A B f x)
       ( g x)
   is-pointwise-limit-is-limit-cauchy-approximation-function-Metric-Space =
     is-pointwise-limit-is-limit-cauchy-approximation-Π-Metric-Space
@@ -103,10 +103,10 @@ module _
     ( (x : type-Metric-Space A) →
       is-limit-cauchy-approximation-Metric-Space
         ( B)
-        ( ev-cauchy-approximation-function-Metric-Space A B f x)
+        ( ev-cauchy-approximation-map-Metric-Space A B f x)
         ( g x)) →
     is-limit-cauchy-approximation-Metric-Space
-      ( metric-space-of-functions-Metric-Space A B)
+      ( metric-space-of-maps-Metric-Space A B)
       ( f)
       ( g)
   is-limit-is-pointwise-limit-cauchy-approximation-function-Metric-Space =

@@ -40,6 +40,6 @@ module _
     Metric-Space (l1 ⊔ l2 ⊔ l1' ⊔ l2') (l1 ⊔ l2')
   metric-space-of-lipschitz-maps-Metric-Space =
     subspace-Metric-Space
-      ( metric-space-of-functions-Metric-Space A B)
+      ( metric-space-of-maps-Metric-Space A B)
       ( is-lipschitz-prop-map-Metric-Space A B)
 ```
