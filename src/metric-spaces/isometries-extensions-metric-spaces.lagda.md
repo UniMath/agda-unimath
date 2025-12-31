@@ -1,4 +1,4 @@
-# Isometries between metric extensions of a metric space
+# Isometries between extensions of a metric space
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
