@@ -1,21 +1,24 @@
-# Derivatives of real functions on proper closed intervals of ℝ
+# Differentiable real functions on proper closed intervals in the real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.derivatives-of-real-functions-on-proper-closed-intervals where
+module analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -28,20 +31,16 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
-
 open import lists.sequences
-
-open import logic.functoriality-existential-quantification
-
-open import metric-spaces.metric-spaces
 
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.accumulation-points-subsets-real-numbers
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -52,8 +51,10 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.limits-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
+open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
@@ -61,6 +62,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers
 ```
 
 </details>
@@ -75,7 +77,7 @@ numbers, `g` is a
 of `f` if there [exists](foundation.existential-quantification.md) a modulus
 function `μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
 `μ(ε)`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
-other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|.$$
+other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|$$
 
 ## Definition
 
@@ -122,6 +124,39 @@ module _
   is-derivative-real-function-proper-closed-interval-ℝ : UU (lsuc l1 ⊔ l2)
   is-derivative-real-function-proper-closed-interval-ℝ =
     type-Prop is-derivative-prop-real-function-proper-closed-interval-ℝ
+
+differentiable-real-function-proper-closed-interval-ℝ :
+  {l1 : Level} (l2 : Level) ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  UU (lsuc (l1 ⊔ l2))
+differentiable-real-function-proper-closed-interval-ℝ {l1} l2 [a,b] =
+  Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
+    ( λ f →
+      Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
+        ( λ f' →
+          is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f'))
+
+module _
+  {l1 l2 : Level}
+  ([a,b] : proper-closed-interval-ℝ l1 l1)
+  (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b])
+  where
+
+  map-differentiable-real-function-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2
+  map-differentiable-real-function-proper-closed-interval-ℝ = pr1 f
+
+  map-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2)
+  map-derivative-differentiable-real-function-proper-closed-interval-ℝ =
+    pr1 (pr2 f)
+
+  is-derivative-map-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+    is-derivative-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( map-differentiable-real-function-proper-closed-interval-ℝ)
+      ( map-derivative-differentiable-real-function-proper-closed-interval-ℝ)
+  is-derivative-map-derivative-differentiable-real-function-proper-closed-interval-ℝ =
+    pr2 (pr2 f)
 ```
 
 ## Properties
@@ -427,269 +462,278 @@ module _
       is-prop-is-differentiable-real-function-proper-closed-interval-ℝ)
 ```
 
-### The derivative of `f + g` is `f' + g'`
-
-```agda
-module _
-  {l1 l2 l3 : Level}
-  ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
-  (g : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l3)
-  (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
-  (g' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l3))
-  (is-derivative-f-f' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f')
-  (is-derivative-g-g' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] g g')
-  where
-
-  abstract
-    is-derivative-add-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
-        ( [a,b])
-        ( λ x → f x +ℝ g x)
-        ( λ x → f' x +ℝ g' x)
-    is-derivative-add-real-function-proper-closed-interval-ℝ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-derivative-prop-real-function-proper-closed-interval-ℝ
-              ( [a,b])
-              ( λ x → f x +ℝ g x)
-              ( λ x → f' x +ℝ g' x))
-        open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in do
-        (μ , is-mod-μ) ← is-derivative-f-f'
-        (ν , is-mod-ν) ← is-derivative-g-g'
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
-          ( _)
-          ( _)
-          ( λ ε →
-            let
-              (ε₁ , ε₂ , ε₁+ε₂=ε) = split-ℚ⁺ ε
-            in
-              ( min-ℚ⁺ (μ ε₁) (ν ε₂) ,
-                λ x y Nxy →
-                chain-of-inequalities
-                  dist-ℝ
-                    ( (f y +ℝ g y) -ℝ (f x +ℝ g x))
-                    ( (f' x +ℝ g' x) *ℝ (pr1 y -ℝ pr1 x))
-                  ≤ dist-ℝ
-                      ( (f y -ℝ f x) +ℝ (g y -ℝ g x))
-                      ( f' x *ℝ (pr1 y -ℝ pr1 x) +ℝ g' x *ℝ (pr1 y -ℝ pr1 x))
-                    by
-                      leq-eq-ℝ
-                        ( ap-dist-ℝ
-                          ( interchange-law-diff-add-ℝ _ _ _ _)
-                          ( right-distributive-mul-add-ℝ _ _ _))
-                  ≤ abs-ℝ
-                      ( ( (f y -ℝ f x) -ℝ f' x *ℝ (pr1 y -ℝ pr1 x)) +ℝ
-                        ( (g y -ℝ g x) -ℝ g' x *ℝ (pr1 y -ℝ pr1 x)))
-                    by
-                      leq-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _))
-                  ≤ ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
-                    ( dist-ℝ (g y -ℝ g x) (g' x *ℝ (pr1 y -ℝ pr1 x)))
-                    by triangle-inequality-abs-ℝ _ _
-                  ≤ ( real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
-                    ( real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y))
-                    by
-                      preserves-leq-add-ℝ
-                        ( is-mod-μ
-                          ( ε₁)
-                          ( x)
-                          ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
-                            ( metric-space-ℝ l1)
-                            ( pr1 x)
-                            ( pr1 y)
-                            ( min-ℚ⁺ (μ ε₁) (ν ε₂))
-                            ( μ ε₁)
-                            ( leq-left-min-ℚ⁺ _ _)
-                            ( Nxy)))
-                        ( is-mod-ν
-                          ( ε₂)
-                          ( x)
-                          ( y)
-                          ( weakly-monotonic-neighborhood-Metric-Space
-                            ( metric-space-ℝ l1)
-                            ( pr1 x)
-                            ( pr1 y)
-                            ( min-ℚ⁺ (μ ε₁) (ν ε₂))
-                            ( ν ε₂)
-                            ( leq-right-min-ℚ⁺ _ _)
-                            ( Nxy)))
-                  ≤ (real-ℚ⁺ ε₁ +ℝ real-ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
-                    by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
-                  ≤ real-ℚ⁺ (ε₁ +ℚ⁺ ε₂) *ℝ dist-ℝ (pr1 x) (pr1 y)
-                    by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
-                  ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                    by leq-eq-ℝ (ap-mul-ℝ (ap real-ℚ⁺ ε₁+ε₂=ε) refl)))
-```
-
-### The derivative of `cf` is `cf'`
-
-```agda
-module _
-  {l1 l2 l3 : Level}
-  ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
-  (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
-  (is-derivative-f-f' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f')
-  (c : ℝ l3)
-  where
-
-  abstract
-    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
-        ( [a,b])
-        ( λ x → c *ℝ f x)
-        ( λ x → c *ℝ f' x)
-    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-derivative-prop-real-function-proper-closed-interval-ℝ
-              ( [a,b])
-              ( λ x → c *ℝ f x)
-              ( λ x → c *ℝ f' x))
-        open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in do
-        (μ , is-mod-μ) ← is-derivative-f-f'
-        (q , |c|<q) ← exists-ℚ⁺-le-ℝ⁰⁺ (nonnegative-abs-ℝ c)
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
-          ( _)
-          ( _)
-          ( λ ε →
-            ( μ (ε *ℚ⁺ inv-ℚ⁺ q) ,
-              λ x y N⟨ε/q⟩xy →
-              chain-of-inequalities
-                dist-ℝ (c *ℝ f y -ℝ c *ℝ f x) (c *ℝ f' x *ℝ (pr1 y -ℝ pr1 x))
-                ≤ dist-ℝ (c *ℝ (f y -ℝ f x)) (c *ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)))
-                  by
-                    leq-eq-ℝ
-                      ( ap-dist-ℝ
-                        ( inv (left-distributive-mul-diff-ℝ _ _ _))
-                        ( associative-mul-ℝ _ _ _))
-                ≤ abs-ℝ c *ℝ dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x))
-                  by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
-                ≤ ( real-ℚ⁺ q) *ℝ
-                  ( real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
-                  by
-                    preserves-leq-mul-ℝ⁰⁺
-                      ( nonnegative-abs-ℝ c)
-                      ( nonnegative-real-ℚ⁺ q)
-                      ( nonnegative-dist-ℝ _ _)
-                      ( nonnegative-real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ⁰⁺
-                        nonnegative-dist-ℝ _ _)
-                      ( leq-le-ℝ |c|<q)
-                      ( is-mod-μ
-                        ( ε *ℚ⁺ inv-ℚ⁺ q)
-                        ( x)
-                        ( y)
-                        ( N⟨ε/q⟩xy))
-                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                  by
-                    leq-eq-ℝ
-                      ( ( inv (associative-mul-ℝ _ _ _)) ∙
-                        ( ap-mul-ℝ
-                          ( ( mul-real-ℚ _ _) ∙
-                            ( ap
-                              ( real-ℚ⁺)
-                              ( is-identity-right-conjugation-Ab
-                                ( abelian-group-mul-ℚ⁺)
-                                ( q)
-                                ( ε))))
-                          ( refl)))))
-```
-
-### The derivative of a constant function is 0
+### A derivative of a real function on a proper closed interval is uniformly continuous
 
 ```agda
 module _
   {l1 l2 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (c : ℝ l2)
+  (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
+  (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
+  (is-derivative-f-f' :
+    is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f')
   where
 
   abstract
-    derivative-constant-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
-        ( [a,b])
-        ( λ _ → c)
-        ( λ _ → raise-ℝ (l1 ⊔ l2) zero-ℝ)
-    derivative-constant-real-function-proper-closed-interval-ℝ =
+    is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ :
+      is-ucont-map-proper-closed-interval-ℝ [a,b] f'
+    is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ =
       let
+        open
+          do-syntax-trunc-Prop
+            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f')
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
-          ( _)
-          ( _)
-          ( λ ε →
-            ( one-ℚ⁺ ,
-              λ x y _ →
-              chain-of-inequalities
-                dist-ℝ (c -ℝ c) (raise-ℝ (l1 ⊔ l2) zero-ℝ *ℝ (pr1 y -ℝ pr1 x))
-                ≤ dist-ℝ zero-ℝ zero-ℝ
-                  by
-                    leq-sim-ℝ
-                      ( preserves-dist-sim-ℝ
-                        ( right-inverse-law-add-ℝ c)
-                        ( similarity-reasoning-ℝ
-                            raise-ℝ (l1 ⊔ l2) zero-ℝ *ℝ (pr1 y -ℝ pr1 x)
-                            ~ℝ zero-ℝ *ℝ (pr1 y -ℝ pr1 x)
-                              by
-                                preserves-sim-right-mul-ℝ _ _ _
-                                  ( symmetric-sim-ℝ (sim-raise-ℝ _ zero-ℝ))
-                            ~ℝ zero-ℝ
-                              by left-zero-law-mul-ℝ _))
-                ≤ zero-ℝ
-                  by leq-sim-ℝ (diagonal-dist-ℝ zero-ℝ)
-                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
-                  by
-                    is-nonnegative-real-ℝ⁰⁺
-                      ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
+      in do
+        (δf , is-mod-δf) ← is-derivative-f-f'
+        is-ucont-map-modulus-apart-map-proper-closed-interval-ℝ
+          { l3 = l1}
+          ( [a,b])
+          ( f')
+          ( δf ∘ modulus-le-double-le-ℚ⁺)
+          ( λ ε x y x#y Nxy →
+            let
+              xℝ = pr1 x
+              yℝ = pr1 y
+              (ε' , ε'+ε'<ε) = bound-double-le-ℚ⁺ ε
+            in
+              neighborhood-dist-ℝ
+                ( ε)
+                ( f' x)
+                ( f' y)
+                ( reflects-leq-right-mul-ℝ⁺
+                  ( dist-ℝ xℝ yℝ , is-positive-dist-apart-ℝ _ _ x#y)
+                  ( _)
+                  ( _)
+                  ( chain-of-inequalities
+                    dist-ℝ (f' x) (f' y) *ℝ dist-ℝ xℝ yℝ
+                    ≤ dist-ℝ (f' x) (f' y) *ℝ dist-ℝ yℝ xℝ
+                      by leq-eq-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ xℝ yℝ))
+                    ≤ dist-ℝ (f' x *ℝ (yℝ -ℝ xℝ)) (f' y *ℝ (yℝ -ℝ xℝ))
+                      by leq-eq-ℝ (right-distributive-abs-mul-dist-ℝ _ _ _)
+                    ≤ dist-ℝ
+                      ( neg-ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
+                      ( neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
+                      by leq-eq-ℝ (inv (dist-neg-ℝ _ _))
+                    ≤ dist-ℝ
+                      ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
+                      ( (f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
+                      by
+                        leq-eq-ℝ
+                          ( inv (eq-sim-ℝ (preserves-dist-left-add-ℝ _ _ _)))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( neg-ℝ ((f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))))
+                      by triangle-inequality-abs-ℝ _ _
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( neg-ℝ (f y -ℝ f x) -ℝ neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ))))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap abs-ℝ (distributive-neg-add-ℝ _ _)))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( (f x -ℝ f y) -ℝ f' y *ℝ neg-ℝ (yℝ -ℝ xℝ)))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap
+                              ( abs-ℝ)
+                              ( ap-diff-ℝ
+                                ( distributive-neg-diff-ℝ _ _)
+                                ( inv (right-negative-law-mul-ℝ _ _)))))
+                    ≤ ( abs-ℝ
+                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                      ( abs-ℝ
+                        ( (f x -ℝ f y) -ℝ (f' y *ℝ (xℝ -ℝ yℝ))))
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap
+                              ( abs-ℝ)
+                              ( ap-diff-ℝ
+                                ( refl)
+                                ( ap-mul-ℝ
+                                  ( refl)
+                                  ( distributive-neg-diff-ℝ _ _)))))
+                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ yℝ xℝ
+                      by
+                        preserves-leq-add-ℝ
+                          ( is-mod-δf ε' x y Nxy)
+                          ( is-mod-δf
+                            ( ε')
+                            ( y)
+                            ( x)
+                            ( is-symmetric-neighborhood-ℝ _ _ _ Nxy))
+                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( refl)
+                            ( ap-mul-ℝ refl (commutative-dist-ℝ yℝ xℝ)))
+                    ≤ (real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε') *ℝ dist-ℝ xℝ yℝ
+                      by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+                    ≤ real-ℚ⁺ (ε' +ℚ⁺ ε') *ℝ dist-ℝ xℝ yℝ
+                      by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
+                    ≤ real-ℚ⁺ ε *ℝ dist-ℝ xℝ yℝ
+                      by
+                        preserves-leq-right-mul-ℝ⁰⁺
+                          ( nonnegative-dist-ℝ xℝ yℝ)
+                          ( preserves-leq-real-ℚ
+                            ( leq-le-ℚ ε'+ε'<ε)))))
+
+abstract
+  is-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+    {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+    (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]) →
+    is-ucont-map-proper-closed-interval-ℝ
+      ( [a,b])
+      ( map-derivative-differentiable-real-function-proper-closed-interval-ℝ
+        ( [a,b])
+        ( f))
+  is-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ
+    [a,b] (f , f' , Df=f') =
+    is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f)
+      ( f')
+      ( Df=f')
+
+ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+  {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
+  ucont-map-proper-closed-interval-ℝ l1 (l1 ⊔ l2) [a,b]
+ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ
+  [a,b] f =
+  ( map-derivative-differentiable-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f) ,
+    is-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f))
 ```
 
-### The derivative of the identity function is 1
+### A differentiable real function on a proper closed interval is uniformly continuous
 
 ```agda
 module _
-  {l : Level}
-  ([a,b] : proper-closed-interval-ℝ l l)
+  {l1 l2 : Level}
+  ([a,b] : proper-closed-interval-ℝ l1 l1)
+  (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
+  (is-differentiable-f :
+    is-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
   where
 
   abstract
-    derivative-id-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
-        ( [a,b])
-        ( pr1)
-        ( λ _ → raise-ℝ l one-ℝ)
-    derivative-id-real-function-proper-closed-interval-ℝ =
+    is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ :
+      is-ucont-map-proper-closed-interval-ℝ [a,b] f
+    is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ =
       let
+        (f' , Df=f') = is-differentiable-f
+        is-ucont-f' =
+          is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f)
+            ( f')
+            ( Df=f')
+        open
+          do-syntax-trunc-Prop
+            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f)
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
-          ( _)
-          ( _)
-          ( λ ε →
-            ( one-ℚ⁺ ,
-              λ x y _ →
-              chain-of-inequalities
-                dist-ℝ (pr1 y -ℝ pr1 x) (raise-ℝ l one-ℝ *ℝ (pr1 y -ℝ pr1 x))
-                ≤ dist-ℝ (pr1 y -ℝ pr1 x) (pr1 y -ℝ pr1 x)
+        (max-|f'|⁰⁺@(max-|f'| , 0≤max-|f'|) , is-max-|f'|) =
+          nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ
+            ( [a,b])
+            ( f' , is-ucont-f')
+      in do
+        (q⁺@(q , _) , |f'|+1<q) ←
+          exists-greater-positive-rational-ℝ (max-|f'| +ℝ one-ℝ)
+        (δf' , is-mod-δf') ← Df=f'
+        let ωf ε = min-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε) (δf' one-ℚ⁺)
+        intro-exists
+          ( ωf)
+          ( λ x ε y Nxy →
+            neighborhood-dist-ℝ _ _ _
+              ( chain-of-inequalities
+                dist-ℝ (f x) (f y)
+                ≤ dist-ℝ (f y) (f x)
+                  by leq-eq-ℝ (commutative-dist-ℝ _ _)
+                ≤ ( abs-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
+                  ( dist-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)) (f y -ℝ f x))
+                  by leq-abs-add-abs-dist-ℝ _ (f' x *ℝ (pr1 y -ℝ pr1 x))
+                ≤ ( abs-ℝ (f' x) *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
+                  ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x)))
+                  by
+                    leq-eq-ℝ (ap-add-ℝ (abs-mul-ℝ _ _) (commutative-dist-ℝ _ _))
+                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
+                  ( one-ℝ *ℝ dist-ℝ (pr1 x) (pr1 y))
+                  by
+                    preserves-leq-add-ℝ
+                      ( preserves-leq-right-mul-ℝ⁰⁺
+                        ( nonnegative-dist-ℝ _ _)
+                        ( is-max-|f'| x))
+                      ( is-mod-δf'
+                        ( one-ℚ⁺)
+                        ( x)
+                        ( y)
+                        ( weakly-monotonic-neighborhood-ℝ
+                          ( pr1 x)
+                          ( pr1 y)
+                          ( ωf ε)
+                          ( δf' one-ℚ⁺)
+                          ( leq-right-min-ℚ⁺ _ _)
+                          ( Nxy)))
+                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
+                  ( one-ℝ *ℝ dist-ℝ (pr1 x) (pr1 y))
                   by
                     leq-eq-ℝ
-                      ( ap-dist-ℝ
-                        ( refl)
-                        ( ( eq-sim-ℝ
-                            ( preserves-sim-right-mul-ℝ _ _ _
-                              ( symmetric-sim-ℝ (sim-raise-ℝ _ _)))) ∙
-                          ( left-unit-law-mul-ℝ _)))
-                ≤ zero-ℝ
-                  by leq-sim-ℝ (diagonal-dist-ℝ _)
-                ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
+                      ( ap-add-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ _ _)) refl)
+                ≤ (max-|f'| +ℝ one-ℝ) *ℝ dist-ℝ (pr1 x) (pr1 y)
+                  by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
+                ≤ (max-|f'| +ℝ one-ℝ) *ℝ real-ℚ⁺ (ωf ε)
                   by
-                    is-nonnegative-real-ℝ⁰⁺
-                      ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
+                    preserves-leq-left-mul-ℝ⁰⁺
+                      ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
+                      ( leq-dist-neighborhood-ℝ _ _ _ Nxy)
+                ≤ real-ℚ q *ℝ real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε)
+                  by
+                    preserves-leq-mul-ℝ⁰⁺
+                      ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
+                      ( nonnegative-real-ℚ⁺ q⁺)
+                      ( nonnegative-real-ℚ⁺ (ωf ε))
+                      ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
+                      ( leq-le-ℝ |f'|+1<q)
+                      ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _))
+                ≤ real-ℚ⁺ (q⁺ *ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
+                  by leq-eq-ℝ (mul-real-ℚ _ _)
+                ≤ real-ℚ⁺ ε
+                  by leq-eq-ℝ (ap real-ℚ (is-section-left-div-ℚ⁺ q⁺ _))))
+
+abstract
+  is-ucont-map-differentiable-real-function-proper-closed-interval-ℝ :
+    {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+    (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]) →
+    is-ucont-map-proper-closed-interval-ℝ
+      ( [a,b])
+      ( map-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
+  is-ucont-map-differentiable-real-function-proper-closed-interval-ℝ
+    [a,b] (f , f' , Df=f') =
+    is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ
+      ( [a,b])
+      ( f)
+      ( f' , Df=f')
+
+ucont-map-differentiable-real-function-proper-closed-interval-ℝ :
+  {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
+  ucont-map-proper-closed-interval-ℝ l1 l2 [a,b]
+ucont-map-differentiable-real-function-proper-closed-interval-ℝ
+  [a,b] f =
+  ( map-differentiable-real-function-proper-closed-interval-ℝ [a,b] f ,
+    is-ucont-map-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
 ```

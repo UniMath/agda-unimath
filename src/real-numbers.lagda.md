@@ -26,6 +26,7 @@ open import real-numbers.closed-intervals-real-numbers public
 open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
+open import real-numbers.density-rationals-proper-closed-intervals-real-numbers public
 open import real-numbers.difference-real-numbers public
 open import real-numbers.distance-real-numbers public
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers public
@@ -115,7 +116,10 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
+open import real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.uniformly-continuous-functions-real-numbers public
+open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```
