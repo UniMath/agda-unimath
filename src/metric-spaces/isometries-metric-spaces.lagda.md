@@ -113,7 +113,7 @@ module _
 
 ## Properties
 
-### The identity function on a metric space is an isometry
+### The identity map on a metric space is an isometry
 
 ```agda
 module _

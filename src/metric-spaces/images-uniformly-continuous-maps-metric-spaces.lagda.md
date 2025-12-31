@@ -51,7 +51,7 @@ module _
 
 ## Properties
 
-### Any modulus of uniform continuity for a function is a modulus of uniform continuity for the unit map of its image
+### Any modulus of uniform continuity for a map is a modulus of uniform continuity for the unit map of its image
 
 ```agda
 module _
@@ -59,19 +59,19 @@ module _
   (f : type-map-Metric-Space X Y)
   where
 
-  is-modulus-of-uniform-continuity-map-unit-im-modulus-of-uniform-continuity-function-Metric-Space :
+  is-modulus-of-uniform-continuity-map-unit-im-modulus-of-uniform-continuity-map-Metric-Space :
     {μ : ℚ⁺ → ℚ⁺} →
-    is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ →
-    is-modulus-of-uniform-continuity-function-Metric-Space
+    is-modulus-of-uniform-continuity-map-Metric-Space X Y f μ →
+    is-modulus-of-uniform-continuity-map-Metric-Space
       ( X)
       ( im-Metric-Space X Y f)
       ( map-unit-im f)
       ( μ)
-  is-modulus-of-uniform-continuity-map-unit-im-modulus-of-uniform-continuity-function-Metric-Space
+  is-modulus-of-uniform-continuity-map-unit-im-modulus-of-uniform-continuity-map-Metric-Space
     is-modulus-μ = is-modulus-μ
 ```
 
-### The unit map of a uniformly continuous function is uniformly continuous
+### The unit map of a uniformly continuous map is uniformly continuous
 
 ```agda
 module _

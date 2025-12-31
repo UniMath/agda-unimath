@@ -270,7 +270,7 @@ module _
       ( f)
 ```
 
-### Constant functions between metric spaces are short
+### Constant maps between metric spaces are short
 
 ```agda
 module _
@@ -287,8 +287,8 @@ module _
       ( pseudometric-Metric-Space B)
       ( b)
 
-  short-constant-function-Metric-Space : short-map-Metric-Space A B
-  short-constant-function-Metric-Space =
+  short-const-map-Metric-Space : short-map-Metric-Space A B
+  short-const-map-Metric-Space =
     short-constant-function-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)

@@ -96,7 +96,7 @@ module _
       modulus-le-double-le-ℚ⁺
 
     is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space :
-      is-modulus-of-uniform-continuity-function-Metric-Space
+      is-modulus-of-uniform-continuity-map-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
         ( ind-Σ ρ)

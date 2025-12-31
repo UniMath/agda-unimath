@@ -336,7 +336,7 @@ module _
         ( metric-space-ℚ)
         ( add-ℚ x)
     is-uniformly-continuous-add-ℚ =
-      is-uniformly-continuous-is-isometry-Metric-Space
+      is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
@@ -376,7 +376,7 @@ abstract
       ( metric-space-ℚ)
       ( neg-ℚ)
   is-uniformly-continuous-neg-ℚ =
-    is-uniformly-continuous-is-isometry-Metric-Space
+    is-uniformly-continuous-map-is-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
       ( neg-ℚ)
@@ -418,7 +418,7 @@ module _
         ( metric-space-ℚ)
         ( diff-ℚ q)
     is-uniformly-continuous-diff-ℚ =
-      is-uniformly-continuous-is-isometry-Metric-Space
+      is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
@@ -480,7 +480,7 @@ module _
       ( is-lipschitz-constant-succ-abs-mul-ℚ)
 
     is-lipschitz-left-mul-ℚ :
-      ( is-lipschitz-function-Metric-Space
+      ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x))
@@ -488,12 +488,12 @@ module _
       unit-trunc-Prop lipschitz-constant-succ-abs-mul-ℚ
 
     is-lipschitz-right-mul-ℚ :
-      ( is-lipschitz-function-Metric-Space
+      ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x))
     is-lipschitz-right-mul-ℚ =
-      is-lipschitz-htpy-function-Metric-Space
+      is-lipschitz-htpy-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
@@ -507,7 +507,7 @@ module _
         ( metric-space-ℚ)
         ( mul-ℚ x)
     is-uniformly-continuous-left-mul-ℚ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      is-uniformly-continuous-is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
@@ -519,7 +519,7 @@ module _
         ( metric-space-ℚ)
         ( mul-ℚ' x)
     is-uniformly-continuous-right-mul-ℚ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      is-uniformly-continuous-is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x)

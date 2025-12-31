@@ -169,7 +169,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (f : type-map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
   (is-modulus-ucont-f-μ :
-    is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ)
+    is-modulus-of-uniform-continuity-map-Metric-Space X Y f μ)
   (ε : ℚ⁺) (N : net-Metric-Space l5 X (μ ε))
   where
 

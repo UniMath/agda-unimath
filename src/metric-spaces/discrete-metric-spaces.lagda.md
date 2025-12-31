@@ -330,10 +330,10 @@ module _
   (f : type-map-Metric-Space A B)
   where
 
-  is-short-is-discrete-domain-function-Metric-Space :
+  is-short-is-discrete-domain-map-Metric-Space :
     is-discrete-Metric-Space A →
     is-short-map-Metric-Space A B f
-  is-short-is-discrete-domain-function-Metric-Space H d x y Nxy =
+  is-short-is-discrete-domain-map-Metric-Space H d x y Nxy =
     sim-eq-Metric-Space
       ( B)
       ( f x)
@@ -341,23 +341,23 @@ module _
       ( ap f (H d x y Nxy))
       ( d)
 
-  is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space :
+  is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space :
     is-discrete-Metric-Space B →
     is-short-map-Metric-Space A B f →
     is-locally-constant-map-Metric-Space A B f
-  is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
+  is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
     H K x y =
     elim-exists
       ( Id-Prop (set-Metric-Space B) (f x) (f y))
       ( λ d → H d (f x) (f y) ∘ (K d x y))
 
-  iff-is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space :
+  iff-is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space :
     is-discrete-Metric-Space B →
     is-short-map-Metric-Space A B f ↔
     is-locally-constant-map-Metric-Space A B f
-  iff-is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
+  iff-is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
     H =
-    ( is-locally-constant-is-short-is-discrete-codomain-function-Metric-Space
+    ( is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
       H) ,
     ( is-short-is-locally-constant-map-Metric-Space A B f)
 ```

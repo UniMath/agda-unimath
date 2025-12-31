@@ -114,7 +114,7 @@ module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (f : type-map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
   (is-modulus-ucont-f-μ :
-    is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ)
+    is-modulus-of-uniform-continuity-map-Metric-Space X Y f μ)
   (ε : ℚ⁺) (A : approximation-Metric-Space l5 X (μ ε))
   where
 
@@ -154,7 +154,7 @@ module _
       is-approximation-im-uniformly-continuous-map-approximation-Metric-Space)
 ```
 
-### If `f : X → Y` is a short function and `A` is an `ε`-approximation of `X`, then `im f A` is an `ε`-approximation of `im f X`
+### If `f : X → Y` is a short map and `A` is an `ε`-approximation of `X`, then `im f A` is an `ε`-approximation of `im f X`
 
 ```agda
 module _

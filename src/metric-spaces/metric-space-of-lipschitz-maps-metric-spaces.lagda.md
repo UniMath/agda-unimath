@@ -22,13 +22,13 @@ open import metric-spaces.subspaces-metric-spaces
 [Lipschitz maps](metric-spaces.lipschitz-maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) inherit the
 [metric subspace](metric-spaces.subspaces-metric-spaces.md) structure of the
-[function metric space](metric-spaces.metric-space-of-maps-metric-spaces.md).
-This defines the
-{{#concept "metric space of Lipschitz functions between metric spaces" Agda=metric-space-of-lipschitz-functions-Metric-Space}}.
+[map metric space](metric-spaces.metric-space-of-maps-metric-spaces.md). This
+defines the
+{{#concept "metric space of Lipschitz maps between metric spaces" Agda=metric-space-of-lipschitz-maps-Metric-Space}}.
 
 ## Definitions
 
-### The metric space of Lipschitz functions between metric spaces
+### The metric space of Lipschitz maps between metric spaces
 
 ```agda
 module _
@@ -36,10 +36,10 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  metric-space-of-lipschitz-functions-Metric-Space :
+  metric-space-of-lipschitz-maps-Metric-Space :
     Metric-Space (l1 ⊔ l2 ⊔ l1' ⊔ l2') (l1 ⊔ l2')
-  metric-space-of-lipschitz-functions-Metric-Space =
+  metric-space-of-lipschitz-maps-Metric-Space =
     subspace-Metric-Space
       ( metric-space-of-functions-Metric-Space A B)
-      ( is-lipschitz-function-prop-Metric-Space A B)
+      ( is-lipschitz-prop-map-Metric-Space A B)
 ```

@@ -74,7 +74,7 @@ module _
 
   abstract
     is-lipschitz-right-mul-ℝ :
-      is-lipschitz-function-Metric-Space
+      is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
@@ -83,7 +83,7 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
           do-syntax-trunc-Prop
-            ( is-lipschitz-function-prop-Metric-Space
+            ( is-lipschitz-prop-map-Metric-Space
               ( metric-space-ℝ l2)
               ( metric-space-ℝ (l1 ⊔ l2))
               ( mul-ℝ c))
@@ -113,12 +113,12 @@ module _
                   by leq-eq-ℝ (mul-real-ℚ _ _)))
 
     is-lipschitz-left-mul-ℝ :
-      is-lipschitz-function-Metric-Space
+      is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
     is-lipschitz-left-mul-ℝ =
-      is-lipschitz-htpy-function-Metric-Space
+      is-lipschitz-htpy-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
@@ -143,7 +143,7 @@ module _
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
     is-uniformly-continuous-right-mul-ℝ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      is-uniformly-continuous-is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
@@ -155,7 +155,7 @@ module _
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
     is-uniformly-continuous-left-mul-ℝ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      is-uniformly-continuous-is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
@@ -189,7 +189,7 @@ module _
 
   abstract
     is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
-      is-lipschitz-function-Metric-Space
+      is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -200,7 +200,7 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
           do-syntax-trunc-Prop
-            ( is-lipschitz-function-prop-Metric-Space
+            ( is-lipschitz-prop-map-Metric-Space
               ( product-Metric-Space
                 ( subspace-inhabited-totally-bounded-subset-ℝ X)
                 ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -266,7 +266,7 @@ module _
                   by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))
 
   lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
-    lipschitz-function-Metric-Space
+    lipschitz-map-Metric-Space
       ( product-Metric-Space
         ( subspace-inhabited-totally-bounded-subset-ℝ X)
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -294,7 +294,7 @@ module _
         ( metric-space-ℝ (l2 ⊔ l5))
         ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y))
     is-uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+      is-uniformly-continuous-is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))

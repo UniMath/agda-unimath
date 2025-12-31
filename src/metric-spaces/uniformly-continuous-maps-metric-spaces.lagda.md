@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
@@ -38,14 +39,14 @@ open import metric-spaces.short-maps-metric-spaces
 
 A [map](metric-spaces.maps-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` is
-{{#concept "uniformly continuous" Disambiguation="function between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-map-Metric-Space}}
+{{#concept "uniformly continuous" Disambiguation="map between metric spaces" WDID=Q741865 WD="uniform continuity" Agda=is-uniformly-continuous-map-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) a
 [modulus of uniform continuity](metric-spaces.modulated-uniformly-continuous-maps-metric-spaces.md)
 for it.
 
 ## Definitions
 
-### The property of being a uniformly continuous function
+### The property of being a uniformly continuous map
 
 ```agda
 module _
@@ -58,7 +59,7 @@ module _
   is-uniformly-continuous-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-prop-map-Metric-Space =
     is-inhabited-Prop
-      (modulus-of-uniform-continuity-function-Metric-Space X Y f)
+      ( modulus-of-uniform-continuity-map-Metric-Space X Y f)
 
   is-uniformly-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-uniformly-continuous-map-Metric-Space =
@@ -109,21 +110,20 @@ module _
   (f : type-map-Metric-Space X Y)
   where
 
-  is-continuous-at-point-is-uniformly-continuous-map-Metric-Space :
+  is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space :
     is-uniformly-continuous-map-Metric-Space X Y f →
-    (x : type-Metric-Space X) →
-    is-continuous-at-point-map-Metric-Space X Y f x
-  is-continuous-at-point-is-uniformly-continuous-map-Metric-Space H x =
+    is-pointwise-continuous-map-Metric-Space X Y f
+  is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space =
     rec-trunc-Prop
-      ( is-continuous-at-point-prop-map-Metric-Space X Y f x)
-      ( λ m →
-        is-continuous-at-point-map-modulated-ucont-map-Metric-Space X Y
-          ( f , m)
-          ( x))
-      ( H)
+      ( is-pointwise-continuous-prop-map-Metric-Space X Y f)
+      ( λ μ →
+        is-pointwise-continuous-map-modulated-ucont-map-Metric-Space
+          ( X)
+          ( Y)
+          ( f , μ))
 ```
 
-### The identity function is uniformly continuous
+### The identity map is uniformly continuous
 
 ```agda
 module _
@@ -136,7 +136,7 @@ module _
     intro-exists id (λ _ _ _ → id)
 ```
 
-### The composition of uniformly continuous functions is uniformly continuous
+### The composition of uniformly continuous maps is uniformly continuous
 
 ```agda
 module _
@@ -146,26 +146,17 @@ module _
   (Z : Metric-Space l5 l6)
   where
 
-  is-uniformly-continuous-comp-function-Metric-Space :
-    (g : type-map-Metric-Space Y Z) →
-    (f : type-map-Metric-Space X Y) →
-    is-uniformly-continuous-map-Metric-Space Y Z g →
-    is-uniformly-continuous-map-Metric-Space X Y f →
-    is-uniformly-continuous-map-Metric-Space X Z (g ∘ f)
-  is-uniformly-continuous-comp-function-Metric-Space g f H K =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( is-uniformly-continuous-prop-map-Metric-Space X Z (g ∘ f))
-    in
-      do
-        mg , is-modulus-uniform-mg ← H
-        mf , is-modulus-uniform-mf ← K
-        intro-exists
-          ( mf ∘ mg)
-          ( λ x ε x' →
-            is-modulus-uniform-mg (f x) ε (f x') ∘
-            is-modulus-uniform-mf x (mg ε) x')
+  abstract
+    is-uniformly-continuous-cont-map-Metric-Space :
+      (g : type-map-Metric-Space Y Z) →
+      (f : type-map-Metric-Space X Y) →
+      is-uniformly-continuous-map-Metric-Space Y Z g →
+      is-uniformly-continuous-map-Metric-Space X Y f →
+      is-uniformly-continuous-map-Metric-Space X Z (g ∘ f)
+    is-uniformly-continuous-cont-map-Metric-Space g f =
+      map-binary-trunc-Prop
+        ( λ μg μf →
+          pr2 (comp-modulated-ucont-map-Metric-Space X Y Z (g , μg) (f , μf)))
 
   comp-uniformly-continuous-map-Metric-Space :
     uniformly-continuous-map-Metric-Space Y Z →
@@ -174,7 +165,7 @@ module _
   comp-uniformly-continuous-map-Metric-Space g f =
     ( map-uniformly-continuous-map-Metric-Space Y Z g ∘
       map-uniformly-continuous-map-Metric-Space X Y f) ,
-    ( is-uniformly-continuous-comp-function-Metric-Space
+    ( is-uniformly-continuous-cont-map-Metric-Space
       ( map-uniformly-continuous-map-Metric-Space Y Z g)
       ( map-uniformly-continuous-map-Metric-Space X Y f)
       ( is-uniformly-continuous-map-uniformly-continuous-map-Metric-Space
@@ -196,18 +187,19 @@ module _
   (B : Metric-Space l3 l4)
   where
 
-  is-uniformly-continuous-is-short-map-Metric-Space :
-    (f : type-map-Metric-Space A B) →
-    is-short-map-Metric-Space A B f →
-    is-uniformly-continuous-map-Metric-Space A B f
-  is-uniformly-continuous-is-short-map-Metric-Space f H =
-    intro-exists id (λ x d → H d x)
+  abstract
+    is-uniformly-continuous-map-is-short-map-Metric-Space :
+      (f : type-map-Metric-Space A B) →
+      is-short-map-Metric-Space A B f →
+      is-uniformly-continuous-map-Metric-Space A B f
+    is-uniformly-continuous-map-is-short-map-Metric-Space f H =
+      intro-exists id (λ x d → H d x)
 
   uniformly-continuous-short-map-Metric-Space :
     short-map-Metric-Space A B →
     uniformly-continuous-map-Metric-Space A B
   uniformly-continuous-short-map-Metric-Space =
-    tot is-uniformly-continuous-is-short-map-Metric-Space
+    tot is-uniformly-continuous-map-is-short-map-Metric-Space
 ```
 
 ### Isometries are uniformly continuous
@@ -218,19 +210,20 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
   where
 
-  is-uniformly-continuous-is-isometry-Metric-Space :
-    (f : type-map-Metric-Space A B) →
-    is-isometry-Metric-Space A B f →
-    is-uniformly-continuous-map-Metric-Space A B f
-  is-uniformly-continuous-is-isometry-Metric-Space f =
-    is-uniformly-continuous-is-short-map-Metric-Space A B f ∘
-    is-short-is-isometry-Metric-Space A B f
+  abstract
+    is-uniformly-continuous-map-is-isometry-Metric-Space :
+      (f : type-map-Metric-Space A B) →
+      is-isometry-Metric-Space A B f →
+      is-uniformly-continuous-map-Metric-Space A B f
+    is-uniformly-continuous-map-is-isometry-Metric-Space f =
+      is-uniformly-continuous-map-is-short-map-Metric-Space A B f ∘
+      is-short-is-isometry-Metric-Space A B f
 
   uniformly-continuous-isometry-Metric-Space :
     isometry-Metric-Space A B →
     uniformly-continuous-map-Metric-Space A B
   uniformly-continuous-isometry-Metric-Space =
-    tot is-uniformly-continuous-is-isometry-Metric-Space
+    tot is-uniformly-continuous-map-is-isometry-Metric-Space
 ```
 
 ## See also

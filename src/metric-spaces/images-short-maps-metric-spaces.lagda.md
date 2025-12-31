@@ -45,7 +45,7 @@ module _
 
 ## Properties
 
-### The unit map of the image of a short function is short
+### The unit map of the image of a short map is short
 
 ```agda
 module _

@@ -51,8 +51,7 @@ following equivalent concepts:
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
   such that the induced map under `map-equiv` is an isometry;
 
-- a function between their carrier types that is both an equivalence and an
-  isometry.
+- a map between their carrier types that is both an equivalence and an isometry.
 
 ## Definitions
 

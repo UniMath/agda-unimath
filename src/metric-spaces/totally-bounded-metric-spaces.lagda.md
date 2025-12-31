@@ -91,7 +91,7 @@ module _
   (μX : modulus-of-total-boundedness-Metric-Space l5 X)
   (f : type-map-Metric-Space X Y)
   {μf : ℚ⁺ → ℚ⁺}
-  (is-muc-μf : is-modulus-of-uniform-continuity-function-Metric-Space X Y f μf)
+  (is-muc-μf : is-modulus-of-uniform-continuity-map-Metric-Space X Y f μf)
   where
 
   modulus-of-total-boundedness-im-modulated-uniformly-continuous-map-Metric-Space :
