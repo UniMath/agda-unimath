@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-dense-extensions-metric-spaces
+open import metric-spaces.cauchy-precompletions-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.complete-extensions-metric-spaces
 open import metric-spaces.complete-metric-spaces
@@ -23,6 +24,7 @@ open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limit-points-cauchy-precompletions-metric-spaces
 open import metric-spaces.limit-points-extensions-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
@@ -126,4 +128,68 @@ module _
     is-complete-Metric-Space metric-space-cauchy-completion-Metric-Space
   is-complete-metric-space-cauchy-completion-Metric-Space =
     pr2 is-cauchy-completion-extension-cauchy-completion-Metric-Space
+
+  complete-extension-cauchy-completion-Metric-Space :
+    complete-extension-Metric-Space l3 l4 M
+  complete-extension-cauchy-completion-Metric-Space =
+    ( extension-cauchy-completion-Metric-Space ,
+      is-complete-metric-space-cauchy-completion-Metric-Space)
+
+  precomplete-extension-cauchy-completion-Metric-Space :
+    precomplete-extension-Metric-Space l3 l4 M
+  precomplete-extension-cauchy-completion-Metric-Space =
+    ( extension-cauchy-completion-Metric-Space ,
+      is-precomplete-is-complete-extension-Metric-Space
+        ( M)
+        ( extension-cauchy-completion-Metric-Space)
+        ( is-complete-metric-space-cauchy-completion-Metric-Space))
+```
+
+## Properties
+
+### The isometries between a Cauchy completion and the Cauchy precompletion of a metric space
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (C : cauchy-completion-Metric-Space l3 l4 M)
+  where
+
+  isometry-cauchy-precompletion-cauchy-completion-Metric-Space :
+    isometry-Metric-Space
+      ( metric-space-cauchy-completion-Metric-Space M C)
+      ( cauchy-precompletion-Metric-Space M)
+  isometry-cauchy-precompletion-cauchy-completion-Metric-Space =
+    isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
+      ( M)
+      ( extension-cauchy-completion-Metric-Space M C)
+      ( is-cauchy-dense-extension-cauchy-completion-Metric-Space M C)
+
+  map-cauchy-precompletion-cauchy-completion-Metric-Space :
+    type-metric-space-cauchy-completion-Metric-Space M C →
+    type-cauchy-precompletion-Metric-Space M
+  map-cauchy-precompletion-cauchy-completion-Metric-Space =
+    map-isometry-Metric-Space
+      ( metric-space-cauchy-completion-Metric-Space M C)
+      ( cauchy-precompletion-Metric-Space M)
+      ( isometry-cauchy-precompletion-cauchy-completion-Metric-Space)
+
+  isometry-cauchy-completion-cauchy-precompletion-Metric-Space :
+    isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-cauchy-completion-Metric-Space M C)
+  isometry-cauchy-completion-cauchy-precompletion-Metric-Space =
+    isometry-cauchy-precompletion-precomplete-extension-Metric-Space
+      ( M)
+      ( precomplete-extension-cauchy-completion-Metric-Space M C)
+
+  map-cauchy-completion-cauchy-precompletion-Metric-Space :
+    type-cauchy-precompletion-Metric-Space M →
+    type-metric-space-cauchy-completion-Metric-Space M C
+  map-cauchy-completion-cauchy-precompletion-Metric-Space =
+    map-isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-cauchy-completion-Metric-Space M C)
+      ( isometry-cauchy-completion-cauchy-precompletion-Metric-Space)
 ```
