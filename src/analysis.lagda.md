@@ -11,6 +11,7 @@ open import analysis.convergent-series-metric-abelian-groups public
 open import analysis.convergent-series-real-numbers public
 open import analysis.differentiability-constant-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.differentiability-identity-function-on-proper-closed-intervals-real-numbers public
+open import analysis.differentiability-reciprocal-function-on-positive-proper-closed-intervals-real-numbers public
 open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public

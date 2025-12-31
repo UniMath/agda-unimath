@@ -779,6 +779,16 @@ abstract
       ~ℝ y
         by sim-eq-ℝ (left-unit-law-mul-ℝ y)
 
+  cancel-right-mul-div-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) →
+    sim-ℝ ((y *ℝ real-ℝ⁺ x) *ℝ real-inv-ℝ⁺ x) y
+  cancel-right-mul-div-ℝ⁺ x y =
+    tr
+      ( λ z → sim-ℝ z y)
+      ( ( commutative-mul-ℝ (real-inv-ℝ⁺ x) (real-ℝ⁺ x *ℝ y)) ∙
+        ( ap-mul-ℝ (commutative-mul-ℝ (real-ℝ⁺ x) y) refl))
+      ( cancel-left-div-mul-ℝ⁺ x y)
+
 is-equiv-left-mul-ℝ⁺ :
   {l : Level} (x : ℝ⁺ l) → is-equiv (λ (y : ℝ l) → real-ℝ⁺ x *ℝ y)
 is-equiv-left-mul-ℝ⁺ x =
