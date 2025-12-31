@@ -69,12 +69,16 @@ open import metric-spaces.bounded-distance-decompositions-of-metric-spaces publi
 open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
+open import metric-spaces.cauchy-approximations-cauchy-precompletions-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-completions-metric-spaces public
 open import metric-spaces.cauchy-dense-extensions-metric-spaces public
+open import metric-spaces.cauchy-precompletions-cauchy-pseudocompletions-pseudometric-spaces public
+open import metric-spaces.cauchy-precompletions-metric-spaces public
+open import metric-spaces.cauchy-precompletions-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
