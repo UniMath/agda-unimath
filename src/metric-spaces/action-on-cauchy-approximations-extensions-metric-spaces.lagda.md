@@ -15,16 +15,11 @@ open import foundation.universe-levels
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
 open import metric-spaces.extensions-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.pseudometric-spaces
 ```
 
 </details>
