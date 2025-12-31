@@ -73,8 +73,8 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 A [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 `f : C [C M]` in the
-[cauchy precompletion](cauchy-precompletions-pseudometric-spaces.md) `[C M]` of
-a [pseudometric space](metric-space.pseudometric-spaces.md) `M`, is
+[cauchy precompletion](metric-spaces.cauchy-precompletions-pseudometric-spaces.md)
+`[C M]` of a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M`, is
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) if
 and only if it is
 [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) in

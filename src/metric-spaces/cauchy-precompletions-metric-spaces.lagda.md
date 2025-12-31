@@ -78,7 +78,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 The
 {{#concept "Cauchy precompletion" Disambiguation="of a metric space" Agda=cauchy-precompletion-Metric-Space}}
 of a [metric space](metric-spaces.metric-spaces.md) `M` is the
-[Cauchy precompletion](metric-spaces.cauchy-precompletion-pseudometric-spaces.md)
+[Cauchy precompletion](metric-spaces.cauchy-precompletions-pseudometric-spaces.md)
 of its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md),
 i.e. the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md) of

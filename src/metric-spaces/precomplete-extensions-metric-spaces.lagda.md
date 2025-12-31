@@ -43,7 +43,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 ## Idea
 
-An [extension of a metric space](metric-spaces.extensions-metric-spaces.md]
+An [extension of a metric space](metric-spaces.extensions-metric-spaces.md)
 `i : M → N` is called
 {{#concept "precomplete" Disambiguation="extension of metric space" Agda=is-precomplete-prop-extension-Metric-Space}}
 if the
