@@ -117,8 +117,9 @@ module _
   { l1 l2 l3 l4 l5 l6 : Level}
   ( M : Metric-Space l1 l2)
   ( E : extension-Metric-Space l3 l4 M)
-  ( F : extension-Metric-Space l5 l6
-    ( metric-space-extension-Metric-Space M E))
+  ( F :
+    extension-Metric-Space l5 l6
+      ( metric-space-extension-Metric-Space M E))
   where
 
   comp-extension-Metric-Space : extension-Metric-Space l5 l6 M
