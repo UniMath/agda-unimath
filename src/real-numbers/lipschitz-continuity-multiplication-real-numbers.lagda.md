@@ -29,8 +29,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuous-functions-metric-spaces
+open import metric-spaces.continuity-of-functions-at-points-in-metric-spaces
 open import metric-spaces.lipschitz-functions-metric-spaces
+open import metric-spaces.pointwise-continuous-functions-metric-spaces
 open import metric-spaces.uniformly-continuous-functions-metric-spaces
 
 open import order-theory.large-posets
@@ -323,7 +324,7 @@ This remains to be shown.
 abstract
   is-pointwise-continuous-mul-ℝ :
     (l1 l2 : Level) →
-    is-pointwise-continuous-function-Metric-Space
+    is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
       ( ind-Σ mul-ℝ)

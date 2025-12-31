@@ -155,6 +155,7 @@ open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
+open import order-theory.subtypes-strict-preorders public
 open import order-theory.suplattices public
 open import order-theory.supremum-preserving-maps-posets public
 open import order-theory.top-elements-large-posets public
