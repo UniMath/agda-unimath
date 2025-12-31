@@ -83,7 +83,7 @@ module _
     is-limit-is-ε-δ-limit-map-ACω-ℝ :
       is-ε-δ-limit-map-ℝ f x y → is-limit-function-ℝ f x y
     is-limit-is-ε-δ-limit-map-ACω-ℝ =
-      is-limit-is-classical-limit-map-acω-Metric-Space
+      is-limit-is-ε-δ-limit-map-ACω-Metric-Space
         ( acω)
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
