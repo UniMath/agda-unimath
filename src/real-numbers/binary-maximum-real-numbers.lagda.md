@@ -11,6 +11,7 @@ module real-numbers.binary-maximum-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
@@ -29,6 +30,7 @@ open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
 open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
