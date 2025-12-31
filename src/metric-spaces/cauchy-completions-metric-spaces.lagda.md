@@ -138,11 +138,9 @@ module _
   precomplete-extension-cauchy-completion-Metric-Space :
     precomplete-extension-Metric-Space l3 l4 M
   precomplete-extension-cauchy-completion-Metric-Space =
-    ( extension-cauchy-completion-Metric-Space ,
-      is-precomplete-is-complete-extension-Metric-Space
-        ( M)
-        ( extension-cauchy-completion-Metric-Space)
-        ( is-complete-metric-space-cauchy-completion-Metric-Space))
+    precomplete-complete-extension-Metric-Space
+      ( M)
+      ( complete-extension-cauchy-completion-Metric-Space)
 ```
 
 ## Properties

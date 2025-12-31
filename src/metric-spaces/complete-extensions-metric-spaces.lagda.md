@@ -129,12 +129,22 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (M : Metric-Space l1 l2)
-  (E : extension-Metric-Space l3 l4 M)
   where
 
   is-precomplete-is-complete-extension-Metric-Space :
+    (E : extension-Metric-Space l3 l4 M) →
     is-complete-extension-Metric-Space M E →
     is-precomplete-extension-Metric-Space M E
-  is-precomplete-is-complete-extension-Metric-Space H =
+  is-precomplete-is-complete-extension-Metric-Space E H =
     H ∘ map-cauchy-approximation-extension-Metric-Space M E
+
+  precomplete-complete-extension-Metric-Space :
+    complete-extension-Metric-Space l3 l4 M →
+    precomplete-extension-Metric-Space l3 l4 M
+  pr1 (precomplete-complete-extension-Metric-Space C) =
+    extension-complete-extension-Metric-Space M C
+  pr2 (precomplete-complete-extension-Metric-Space C) =
+    is-precomplete-is-complete-extension-Metric-Space
+      ( extension-complete-extension-Metric-Space M C)
+      ( is-complete-metric-space-complete-extension-Metric-Space M C)
 ```
