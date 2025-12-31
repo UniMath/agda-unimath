@@ -126,4 +126,17 @@ module _
     is-complete-Metric-Space metric-space-cauchy-completion-Metric-Space
   is-complete-metric-space-cauchy-completion-Metric-Space =
     pr2 is-cauchy-completion-extension-cauchy-completion-Metric-Space
+
+  complete-extension-cauchy-completion-Metric-Space :
+    complete-extension-Metric-Space l3 l4 M
+  complete-extension-cauchy-completion-Metric-Space =
+    ( extension-cauchy-completion-Metric-Space ,
+      is-complete-metric-space-cauchy-completion-Metric-Space)
+
+  precomplete-extension-cauchy-completion-Metric-Space :
+    precomplete-extension-Metric-Space l3 l4 M
+  precomplete-extension-cauchy-completion-Metric-Space =
+    precomplete-complete-extension-Metric-Space
+      ( M)
+      ( complete-extension-cauchy-completion-Metric-Space)
 ```
