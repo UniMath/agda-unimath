@@ -23,14 +23,14 @@ saying that _`d` is an upper bound on the distance from `x` to `y`_.
 
 The neighborhood relation on a metric space must satisfy the following axioms:
 
-- [Reflexivity](metric-spaces.reflexive-rational-neighborhood-relations.md).
-  Every positive rational `d` is an upper bound on the distance from `x` to
+- [Reflexivity](metric-spaces.reflexive-rational-neighborhood-relations.md):
+  every positive rational `d` is an upper bound on the distance from `x` to
   itself.
-- [Symmetry](metric-spaces.symmetric-rational-neighborhood-relations.md). If `d`
+- [Symmetry](metric-spaces.symmetric-rational-neighborhood-relations.md): if `d`
   is an upper bound on the distance from `x` to `y`, then `d` is an upper bound
   on the distance from `y` to `x`.
-- [Triangularity](metric-spaces.triangular-rational-neighborhood-relations.md).
-  If `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
+- [Triangularity](metric-spaces.triangular-rational-neighborhood-relations.md):
+  if `d` is an upper bound on the distance from `x` to `y`, and `d'` is an upper
   bound on the distance from `y` to `z`, then `d + d'` is an upper bound on the
   distance from `x` to `z`.
 
