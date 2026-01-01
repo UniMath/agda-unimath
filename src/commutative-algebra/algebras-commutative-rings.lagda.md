@@ -102,6 +102,120 @@ module _
       ( left-module-algebra-Commutative-Ring)
       ( left-module-algebra-Commutative-Ring)
       ( bilinear-mul-algebra-Commutative-Ring)
+
+  left-unit-law-scalar-mul-algebra-Commutative-Ring :
+    (x : type-algebra-Commutative-Ring) →
+    scalar-mul-algebra-Commutative-Ring (one-Commutative-Ring R) x ＝ x
+  left-unit-law-scalar-mul-algebra-Commutative-Ring =
+    left-unit-law-mul-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring)
+
+  right-distributive-scalar-mul-add-algebra-Commutative-Ring :
+    (r s : type-Commutative-Ring R) (x : type-algebra-Commutative-Ring) →
+    scalar-mul-algebra-Commutative-Ring (add-Commutative-Ring R r s) x ＝
+    add-algebra-Commutative-Ring
+      ( scalar-mul-algebra-Commutative-Ring r x)
+      ( scalar-mul-algebra-Commutative-Ring s x)
+  right-distributive-scalar-mul-add-algebra-Commutative-Ring =
+    right-distributive-mul-add-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring)
+```
+
+### `(rs)y = r(sy)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  where
+
+  abstract
+    associative-scalar-mul-algebra-Commutative-Ring :
+      (r s : type-Commutative-Ring R) →
+      (x : type-algebra-Commutative-Ring R A) →
+      scalar-mul-algebra-Commutative-Ring R A
+        ( mul-Commutative-Ring R r s)
+        ( x) ＝
+      scalar-mul-algebra-Commutative-Ring R A
+        ( r)
+        ( scalar-mul-algebra-Commutative-Ring R A s x)
+    associative-scalar-mul-algebra-Commutative-Ring =
+      associative-mul-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+```
+
+### `r(xy) = x(ry)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  where
+
+  abstract
+    left-swap-scalar-mul-mul-algebra-Commutative-Ring :
+      (r : type-Commutative-Ring R) (x y : type-algebra-Commutative-Ring R A) →
+      scalar-mul-algebra-Commutative-Ring R A
+        ( r)
+        ( mul-algebra-Commutative-Ring R A x y) ＝
+      mul-algebra-Commutative-Ring R A
+        ( x)
+        ( scalar-mul-algebra-Commutative-Ring R A r y)
+    left-swap-scalar-mul-mul-algebra-Commutative-Ring r x y =
+      inv
+        ( is-homogeneous-map-linear-map-left-module-Commutative-Ring
+          ( R)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( right-linear-map-bilinear-map-left-module-Commutative-Ring
+            ( R)
+            ( left-module-algebra-Commutative-Ring R A)
+            ( left-module-algebra-Commutative-Ring R A)
+            ( left-module-algebra-Commutative-Ring R A)
+            ( bilinear-mul-algebra-Commutative-Ring R A)
+            ( x))
+          ( r)
+          ( y))
+```
+
+### `(rx)y = r(xy)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  where
+
+  abstract
+    associative-scalar-mul-mul-algebra-Commutative-Ring :
+      (r : type-Commutative-Ring R) →
+      (x y : type-algebra-Commutative-Ring R A) →
+      mul-algebra-Commutative-Ring R A
+        ( scalar-mul-algebra-Commutative-Ring R A r x)
+        ( y) ＝
+      scalar-mul-algebra-Commutative-Ring R A
+        ( r)
+        ( mul-algebra-Commutative-Ring R A x y)
+    associative-scalar-mul-mul-algebra-Commutative-Ring r x y =
+      is-homogeneous-map-linear-map-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-linear-map-bilinear-map-left-module-Commutative-Ring
+          ( R)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( bilinear-mul-algebra-Commutative-Ring R A)
+          ( y))
+        ( r)
+        ( x)
 ```
 
 ### Distributivity of multiplication over addition

@@ -197,7 +197,6 @@ module _
 ## See also
 
 - [Bilinear maps on left modules over rings](linear-algebra.bilinear-maps-left-modules-rings.md)
-- [Bilinear maps on vector spaces](linear-algebra.bilinear-maps-vector-spaces.md)
 
 ## External links
 
