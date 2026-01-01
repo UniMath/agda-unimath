@@ -70,11 +70,11 @@ module _
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-diff-ℝ)
 
-  uniformly-continuous-map-diff-ℝ :
+  uniformly-continuous-map-left-diff-ℝ :
     uniformly-continuous-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  uniformly-continuous-map-diff-ℝ =
+  uniformly-continuous-map-left-diff-ℝ =
     uniformly-continuous-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))

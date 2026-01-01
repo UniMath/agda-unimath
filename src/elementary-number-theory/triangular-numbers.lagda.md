@@ -287,7 +287,7 @@ abstract
           ( metric-space-ℚ)
           ( metric-space-ℚ)
           ( uniformly-continuous-map-left-mul-ℚ (rational-ℕ 2))
-          ( uniformly-continuous-map-diff-ℚ one-ℚ))
+          ( uniformly-continuous-map-left-diff-ℚ one-ℚ))
           ( reciprocal-rational-succ-ℕ)
           ( zero-ℚ)
           ( is-zero-limit-reciprocal-rational-succ-ℕ))

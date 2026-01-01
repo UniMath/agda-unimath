@@ -412,22 +412,22 @@ module _
         ( is-isometry-add-ℚ q)
         ( is-isometry-neg-ℚ)
 
-    is-uniformly-continuous-map-diff-ℚ :
+    is-uniformly-continuous-map-left-diff-ℚ :
       is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-    is-uniformly-continuous-map-diff-ℚ =
+    is-uniformly-continuous-map-left-diff-ℚ =
       is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
         ( is-isometry-diff-ℚ)
 
-  uniformly-continuous-map-diff-ℚ :
+  uniformly-continuous-map-left-diff-ℚ :
     uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
-  uniformly-continuous-map-diff-ℚ =
-    ( diff-ℚ q , is-uniformly-continuous-map-diff-ℚ)
+  uniformly-continuous-map-left-diff-ℚ =
+    ( diff-ℚ q , is-uniformly-continuous-map-left-diff-ℚ)
 ```
 
 ### Multiplication of rational numbers is Lipschitz
