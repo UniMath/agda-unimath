@@ -27,7 +27,8 @@ open import group-theory.subsemigroups
 The {{#concept "center" Disambiguation="of a semigroup" Agda=center-Semigroup}}
 of a [semigroup](group-theory.semigroups.md) `G` is the
 [subsemigroup](group-theory.subsemigroups.md) consisting of those elements of
-`G` that are [central](group-theory.central-elements-semigroups.md).
+`G` that are [central](group-theory.central-elements-semigroups.md). The center
+is always a [commutative semigroup](group-theory.commutative-semigroups.md).
 
 ## Definition
 

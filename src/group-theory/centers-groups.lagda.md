@@ -28,9 +28,9 @@ open import group-theory.subgroups
 The
 {{#concept "center" Disambiguation="of a group" WDID=Q1195852 WD="center" Agda=center-Group}}
 of a [group](group-theory.groups.md) `G` is the
-[normal subgroup](group-theory.normal-subgroups.md)
-consisting of those elements that are
-[central](group-theory.central-elements-groups.md) in `G`.
+[normal subgroup](group-theory.normal-subgroups.md) consisting of those elements
+that are [central](group-theory.central-elements-groups.md) in `G`. The center
+is always an [abelian group](group-theory.abelian-groups.md).
 
 ## Definition
 

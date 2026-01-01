@@ -27,7 +27,8 @@ open import group-theory.submonoids
 The {{#concept "center" Disambiguation="of a monoid" Agda=center-Monoid}} of a
 [monoid](group-theory.monoids.md) `M` is the
 [submonoid](group-theory.submonoids.md) consisting of those elements of `M`
-which are [central](group-theory.central-elements-monoids.md).
+which are [central](group-theory.central-elements-monoids.md). The center is
+always a [commutative monoid](group-theory.commutative-monoids.md).
 
 ## Definition
 

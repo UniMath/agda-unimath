@@ -27,10 +27,10 @@ open import ring-theory.subsets-rings
 
 The
 {{#concept "center" WDID=Q30603786 WD="center" Disambiguation="of a ring" Agda=center-Ring}}
-of a [ring](ring-theory.rings.md) `R` is the
-[commutative](commutative-algebra.commutative-rings.md)
-[subring](ring-theory.subrings.md) of `R` consisting of
-[central](ring-theory.central-elements-rings.md) elements of `R`.
+of a [ring](ring-theory.rings.md) `R` is the [subring](ring-theory.subrings.md)
+of `R` consisting of [central](ring-theory.central-elements-rings.md) elements
+of `R`. The center is always a
+[commutative ring](commutative-algebra.commutative-rings.md).
 
 ## Definition
 
