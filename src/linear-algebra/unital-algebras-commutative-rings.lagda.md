@@ -7,16 +7,19 @@ module linear-algebra.unital-algebras-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.algebras-commutative-rings
 open import commutative-algebra.commutative-rings
-open import foundation.propositions
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import group-theory.abelian-groups
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.universe-levels
 open import foundation.unital-binary-operations
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+
+open import linear-algebra.algebras-commutative-rings
 ```
 
 </details>

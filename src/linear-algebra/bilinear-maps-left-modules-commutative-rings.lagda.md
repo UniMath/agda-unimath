@@ -8,13 +8,15 @@ module linear-algebra.bilinear-maps-left-modules-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import linear-algebra.left-modules-commutative-rings
-open import linear-algebra.bilinear-maps-left-modules-rings
-open import foundation.identity-types
-open import foundation.universe-levels
-open import foundation.propositions
+
 open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.subtypes
+open import foundation.universe-levels
+
+open import linear-algebra.bilinear-maps-left-modules-rings
+open import linear-algebra.left-modules-commutative-rings
 ```
 
 </details>
@@ -43,7 +45,8 @@ module _
     type-left-module-Commutative-Ring R Z)
   where
 
-  is-linear-on-left-prop-bimap-left-module-Commutative-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-left-prop-bimap-left-module-Commutative-Ring :
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-linear-on-left-prop-bimap-left-module-Commutative-Ring =
     is-linear-on-left-prop-bimap-left-module-Ring
       ( ring-Commutative-Ring R)
@@ -56,7 +59,8 @@ module _
   is-linear-on-left-bimap-left-module-Commutative-Ring =
     type-Prop is-linear-on-left-prop-bimap-left-module-Commutative-Ring
 
-  is-linear-on-right-prop-bimap-left-module-Commutative-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-right-prop-bimap-left-module-Commutative-Ring :
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-linear-on-right-prop-bimap-left-module-Commutative-Ring =
     is-linear-on-right-prop-bimap-left-module-Ring
       ( ring-Commutative-Ring R)

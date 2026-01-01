@@ -7,14 +7,17 @@ module linear-algebra.algebras-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.left-modules-commutative-rings
 open import commutative-algebra.commutative-rings
-open import linear-algebra.bilinear-maps-left-modules-commutative-rings
+
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
-open import foundation.dependent-pair-types
+
+open import linear-algebra.bilinear-maps-left-modules-commutative-rings
+open import linear-algebra.left-modules-commutative-rings
 ```
 
 </details>

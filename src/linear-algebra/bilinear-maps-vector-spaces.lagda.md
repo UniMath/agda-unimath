@@ -8,12 +8,14 @@ module linear-algebra.bilinear-maps-vector-spaces where
 
 ```agda
 open import commutative-algebra.heyting-fields
-open import linear-algebra.vector-spaces
-open import linear-algebra.bilinear-maps-left-modules-rings
-open import foundation.universe-levels
-open import foundation.propositions
+
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.subtypes
+open import foundation.universe-levels
+
+open import linear-algebra.bilinear-maps-left-modules-rings
+open import linear-algebra.vector-spaces
 ```
 
 </details>

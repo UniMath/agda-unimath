@@ -7,15 +7,17 @@ module linear-algebra.bilinear-maps-left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
 open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
+
 open import ring-theory.rings
-open import foundation.universe-levels
-open import foundation.propositions
-open import foundation.identity-types
-open import foundation.dependent-pair-types
-open import foundation.subtypes
-open import foundation.conjunction
 ```
 
 </details>

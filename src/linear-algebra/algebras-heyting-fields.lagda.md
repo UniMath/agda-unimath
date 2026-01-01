@@ -7,11 +7,14 @@ module linear-algebra.algebras-heyting-fields where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import commutative-algebra.heyting-fields
+
 open import foundation.dependent-pair-types
 open import foundation.sets
+open import foundation.universe-levels
+
 open import group-theory.abelian-groups
+
 open import linear-algebra.algebras-commutative-rings
 open import linear-algebra.vector-spaces
 ```
@@ -19,6 +22,13 @@ open import linear-algebra.vector-spaces
 </details>
 
 ## Idea
+
+An
+{{#concept "algebra" WDID=Q1000660 WD="algebra over a field" Disambiguation="over a Heyting field" Agda=algebra-Heyting-Field}}
+over a [Heyting field](commutative-algebra.heyting-fields.md) `F` is
+[vector space](linear-algebra.vector-spaces.md) `V` over `F` equipped with a
+[bilinear map](linear-algebra.bilinear-maps-vector-spaces.md), called its
+product, `* : V → V → V`.
 
 ## Definition
 
@@ -71,3 +81,13 @@ module _
       ( commutative-ring-Heyting-Field F)
       ( A)
 ```
+
+## See also
+
+- [Algebras over commutative rings](linear-algebra.algebras-commutative-rings.md)
+- [Algebras over ℝ](linear-algebra.algebras-over-the-real-numbers.md)
+
+## External links
+
+- [Algebra over a field](https://en.wikipedia.org/wiki/Algebra_over_a_field) on
+  Wikipedia

@@ -7,13 +7,15 @@ module linear-algebra.associative-algebras-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.algebras-commutative-rings
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.sets
-open import foundation.dependent-pair-types
 open import commutative-algebra.commutative-rings
+
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
+
+open import linear-algebra.algebras-commutative-rings
 ```
 
 </details>

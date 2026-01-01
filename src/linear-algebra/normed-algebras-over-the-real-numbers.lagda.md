@@ -7,15 +7,17 @@ module linear-algebra.normed-algebras-over-the-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.normed-real-vector-spaces
-open import linear-algebra.algebras-over-the-real-numbers
 open import foundation.dependent-pair-types
 open import foundation.propositions
-open import linear-algebra.real-vector-spaces
 open import foundation.subtypes
 open import foundation.universe-levels
-open import real-numbers.multiplication-real-numbers
+
+open import linear-algebra.algebras-over-the-real-numbers
+open import linear-algebra.normed-real-vector-spaces
+open import linear-algebra.real-vector-spaces
+
 open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-real-numbers
 ```
 
 </details>

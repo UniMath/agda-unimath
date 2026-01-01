@@ -7,13 +7,16 @@ module linear-algebra.algebras-over-the-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.algebras-heyting-fields
-open import real-numbers.field-of-real-numbers
-open import foundation.universe-levels
-open import group-theory.abelian-groups
-open import linear-algebra.real-vector-spaces
-open import real-numbers.dedekind-real-numbers
 open import foundation.sets
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+
+open import linear-algebra.algebras-heyting-fields
+open import linear-algebra.real-vector-spaces
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.field-of-real-numbers
 ```
 
 </details>
@@ -52,6 +55,9 @@ module _
 
   type-algebra-ℝ : UU l2
   type-algebra-ℝ = type-Ab ab-add-algebra-ℝ
+
+  add-algebra-ℝ : type-algebra-ℝ → type-algebra-ℝ → type-algebra-ℝ
+  add-algebra-ℝ = add-Ab ab-add-algebra-ℝ
 
   mul-algebra-ℝ : type-algebra-ℝ → type-algebra-ℝ → type-algebra-ℝ
   mul-algebra-ℝ = mul-algebra-Heyting-Field (heyting-field-ℝ l1) A
