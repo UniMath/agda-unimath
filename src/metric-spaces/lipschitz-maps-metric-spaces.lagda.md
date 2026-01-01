@@ -293,13 +293,13 @@ module _
   (C : Metric-Space lc lc')
   where
 
-  comp-is-lipschitz-map-Metric-Space :
+  is-lipschitz-map-comp-Metric-Space :
     (g : map-Metric-Space B C) →
     (f : map-Metric-Space A B) →
     is-lipschitz-map-Metric-Space B C g →
     is-lipschitz-map-Metric-Space A B f →
     is-lipschitz-map-Metric-Space A C (g ∘ f)
-  comp-is-lipschitz-map-Metric-Space g f =
+  is-lipschitz-map-comp-Metric-Space g f =
     map-binary-trunc-Prop
       ( λ (α , Lg) (β , Lf) →
         α *ℚ⁺ β ,
@@ -323,7 +323,7 @@ module _
   comp-lipschitz-map-Metric-Space g f =
     ( map-lipschitz-map-Metric-Space B C g ∘
       map-lipschitz-map-Metric-Space A B f) ,
-    ( comp-is-lipschitz-map-Metric-Space
+    ( is-lipschitz-map-comp-Metric-Space
       ( A)
       ( B)
       ( C)

@@ -330,24 +330,24 @@ module _
         ( commutative-add-ℚ x z)
         ( is-isometry-add-ℚ d y z)
 
-    is-uniformly-continuous-map-add-ℚ :
+    is-uniformly-continuous-map-left-add-ℚ :
       is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-    is-uniformly-continuous-map-add-ℚ =
+    is-uniformly-continuous-map-left-add-ℚ =
       is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
         ( is-isometry-add-ℚ)
 
-  uniformly-continuous-map-add-ℚ :
+  uniformly-continuous-map-left-add-ℚ :
     uniformly-continuous-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
-  uniformly-continuous-map-add-ℚ =
-    ( add-ℚ x , is-uniformly-continuous-map-add-ℚ)
+  uniformly-continuous-map-left-add-ℚ =
+    ( add-ℚ x , is-uniformly-continuous-map-left-add-ℚ)
 ```
 
 ### Negation of rational numbers is an isometry
