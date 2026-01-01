@@ -26,7 +26,7 @@ open import ring-theory.subsets-rings
 ## Idea
 
 The
-{{#concept "center" WDID=Q30603786 WD="center" Disambiguation="of a ring" Agda=center-Ring}}
+{{#concept "center" WDID=Q30603786 WD="center" Disambiguation="of a ring" Agda=subring-center-Ring}}
 of a [ring](ring-theory.rings.md) `R` is the [subring](ring-theory.subrings.md)
 of `R` consisting of [central](ring-theory.central-elements-rings.md) elements
 of `R`. The center is always a
