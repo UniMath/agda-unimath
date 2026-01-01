@@ -346,26 +346,26 @@ module _
   where
 
   abstract
-    modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space :
+    modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space :
       ℚ⁺ → ℚ⁺
-    modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space
+    modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space
       ε =
       let
         (δ , η , _) = split-ℚ⁺ ε
       in min-ℚ⁺ (mf₁ δ) (mf₂ η)
 
-    is-modulus-modulated-ucont-map-product-is-modulated-ucont-binary-map-Metric-Space :
+    is-modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space :
       is-modulus-of-uniform-continuity-map-Metric-Space
         ( product-Metric-Space A B)
         ( C)
         ( rec-product f)
-        ( modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space)
-    is-modulus-modulated-ucont-map-product-is-modulated-ucont-binary-map-Metric-Space
+        ( modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space)
+    is-modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space
       (a , b) ε (a' , b') (Nε'aa' , Nε'bb') =
       let
         (δ , η , δ+η=ε) = split-ℚ⁺ ε
         ε' =
-          modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space
+          modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space
             ( ε)
       in
         tr
@@ -391,12 +391,12 @@ module _
                 ( leq-left-min-ℚ⁺ (mf₁ δ) (mf₂ η))
                 ( Nε'bb'))))
 
-  modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space :
+  modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space :
     modulated-ucont-map-Metric-Space (product-Metric-Space A B) C
-  modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space =
+  modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space =
     ( rec-product f ,
-      modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space ,
-      is-modulus-modulated-ucont-map-product-is-modulated-ucont-binary-map-Metric-Space)
+      modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space ,
+      is-modulus-modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space)
 ```
 
 ### If a binary map is short in each argument, it is a modulated uniformly continuous map on the product metric space
@@ -414,10 +414,10 @@ module _
     is-short-map-Metric-Space A C (λ a → f a b))
   where
 
-  modulated-ucont-map-product-is-short-binary-map-Metric-Space :
+  modulated-ucont-uncurry-map-is-short-binary-map-Metric-Space :
     modulated-ucont-map-Metric-Space (product-Metric-Space A B) C
-  modulated-ucont-map-product-is-short-binary-map-Metric-Space =
-    modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space A B C
+  modulated-ucont-uncurry-map-is-short-binary-map-Metric-Space =
+    modulated-ucont-uncurry-map-is-modulated-ucont-binary-map-Metric-Space A B C
       ( f)
       ( id)
       ( id)
@@ -448,10 +448,10 @@ module _
     (b : type-Metric-Space B) → is-isometry-Metric-Space A C (λ a → f a b))
   where
 
-  modulated-ucont-map-product-is-binary-isometry-Metric-Space :
+  modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space :
     modulated-ucont-map-Metric-Space (product-Metric-Space A B) C
-  modulated-ucont-map-product-is-binary-isometry-Metric-Space =
-    modulated-ucont-map-product-is-short-binary-map-Metric-Space A B C f
+  modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space =
+    modulated-ucont-uncurry-map-is-short-binary-map-Metric-Space A B C f
       ( λ a →
         is-short-map-is-isometry-Metric-Space B C (f a) (is-iso-fa a))
       ( λ b →

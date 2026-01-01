@@ -174,11 +174,11 @@ module _
   where
 
   abstract
-    all-lipschitz-constant-is-weakly-constant-map-Metric-Space :
+    is-lipschitz-constant-map-is-weakly-constant-map-Metric-Space :
       is-weakly-constant-map f →
       ( α : ℚ⁺) →
       is-lipschitz-constant-map-Metric-Space A B f α
-    all-lipschitz-constant-is-weakly-constant-map-Metric-Space H α d x y _ =
+    is-lipschitz-constant-map-is-weakly-constant-map-Metric-Space H α d x y _ =
       sim-eq-Metric-Space B (f x) (f y) (H x y) (α *ℚ⁺ d)
 ```
 
@@ -271,12 +271,12 @@ module _
   where
 
   abstract
-    mul-comp-lipschitz-constant-map-Metric-Space :
+    is-lipschitz-constant-map-comp-Metric-Space :
       (α β : ℚ⁺) →
       is-lipschitz-constant-map-Metric-Space B C g α →
       is-lipschitz-constant-map-Metric-Space A B f β →
       is-lipschitz-constant-map-Metric-Space A C (g ∘ f) (α *ℚ⁺ β)
-    mul-comp-lipschitz-constant-map-Metric-Space α β Hg Hf d x y Nxy =
+    is-lipschitz-constant-map-comp-Metric-Space α β Hg Hf d x y Nxy =
       inv-tr
         ( λ ε → neighborhood-Metric-Space C ε (g (f x)) (g (f y)))
         ( associative-mul-ℚ⁺ α β d)
@@ -303,7 +303,7 @@ module _
     map-binary-trunc-Prop
       ( λ (α , Lg) (β , Lf) →
         α *ℚ⁺ β ,
-        mul-comp-lipschitz-constant-map-Metric-Space A B C g f α β Lg Lf)
+        is-lipschitz-constant-map-comp-Metric-Space A B C g f α β Lg Lf)
 ```
 
 ### Composition of Lipschitz functions

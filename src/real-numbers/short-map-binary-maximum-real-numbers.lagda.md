@@ -125,11 +125,11 @@ module _
         ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
           ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
 
-  short-left-max-ℝ :
+  short-map-left-max-ℝ :
     short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  short-left-max-ℝ =
+  short-map-left-max-ℝ =
     (max-ℝ x , is-short-map-left-max-ℝ)
 
   uniformly-continuous-map-left-max-ℝ : uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
@@ -137,7 +137,7 @@ module _
     uniformly-continuous-map-short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( short-left-max-ℝ)
+      ( short-map-left-max-ℝ)
 ```
 
 ### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
@@ -148,14 +148,14 @@ module _
   where
 
   abstract
-    is-short-map-short-left-max-ℝ :
+    is-short-map-left-max-ℝ :
       is-short-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-of-short-maps-Metric-Space
           ( metric-space-ℝ l2)
           ( metric-space-ℝ (l1 ⊔ l2)))
-        ( short-left-max-ℝ)
-    is-short-map-short-left-max-ℝ d x y Nxy z =
+        ( short-map-left-max-ℝ)
+    is-short-map-left-max-ℝ d x y Nxy z =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( max-ℝ x z)
@@ -165,12 +165,12 @@ module _
         ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
           ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
 
-  short-max-ℝ :
+  short-map-max-ℝ :
     short-map-Metric-Space
       ( metric-space-ℝ l1)
       ( metric-space-of-short-maps-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2)))
-  short-max-ℝ =
-    (short-left-max-ℝ , is-short-map-short-left-max-ℝ)
+  short-map-max-ℝ =
+    (short-map-left-max-ℝ , is-short-map-left-max-ℝ)
 ```

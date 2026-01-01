@@ -189,13 +189,13 @@ clamp-closed-interval-ℝ ((a , b) , a≤b) x =
 
 ```agda
 abstract
-  is-short-clamp-closed-interval-ℝ :
+  is-short-map-clamp-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
     is-short-map-Metric-Space
       ( metric-space-ℝ l3)
       ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
       ( clamp-closed-interval-ℝ [a,b])
-  is-short-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
+  is-short-map-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
     is-short-map-comp-Metric-Space
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
@@ -205,11 +205,11 @@ abstract
       ( is-short-map-left-max-ℝ a)
       ( is-short-map-left-min-ℝ b)
 
-short-clamp-closed-interval-ℝ :
+short-map-clamp-closed-interval-ℝ :
   {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
   short-map-Metric-Space
     ( metric-space-ℝ l3)
     ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
-short-clamp-closed-interval-ℝ [a,b] =
-  ( clamp-closed-interval-ℝ [a,b] , is-short-clamp-closed-interval-ℝ [a,b])
+short-map-clamp-closed-interval-ℝ [a,b] =
+  ( clamp-closed-interval-ℝ [a,b] , is-short-map-clamp-closed-interval-ℝ [a,b])
 ```

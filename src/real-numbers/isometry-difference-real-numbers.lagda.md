@@ -43,12 +43,12 @@ module _
   where
 
   abstract
-    is-isometry-diff-ℝ :
+    is-isometry-left-diff-ℝ :
       is-isometry-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( diff-ℝ x)
-    is-isometry-diff-ℝ =
+    is-isometry-left-diff-ℝ =
       is-isometry-comp-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ l2)
@@ -58,17 +58,17 @@ module _
         ( is-isometry-left-add-ℝ x)
         ( is-isometry-neg-ℝ)
 
-  isometry-diff-ℝ :
+  isometry-left-diff-ℝ :
     isometry-Metric-Space (metric-space-ℝ l2) (metric-space-ℝ (l1 ⊔ l2))
-  isometry-diff-ℝ = (diff-ℝ x , is-isometry-diff-ℝ)
+  isometry-left-diff-ℝ = (diff-ℝ x , is-isometry-left-diff-ℝ)
 
-  short-diff-ℝ :
+  short-map-left-diff-ℝ :
     short-map-Metric-Space (metric-space-ℝ l2) (metric-space-ℝ (l1 ⊔ l2))
-  short-diff-ℝ =
+  short-map-left-diff-ℝ =
     short-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( isometry-diff-ℝ)
+      ( isometry-left-diff-ℝ)
 
   uniformly-continuous-map-left-diff-ℝ :
     uniformly-continuous-map-Metric-Space
@@ -78,5 +78,5 @@ module _
     uniformly-continuous-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( isometry-diff-ℝ)
+      ( isometry-left-diff-ℝ)
 ```

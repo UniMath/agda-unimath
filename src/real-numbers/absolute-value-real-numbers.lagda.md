@@ -338,12 +338,12 @@ module _
   where
 
   abstract
-    is-short-abs-ℝ :
+    is-short-map-abs-ℝ :
       is-short-map-Metric-Space
         ( metric-space-ℝ l)
         ( metric-space-ℝ l)
         ( abs-ℝ)
-    is-short-abs-ℝ d x y I =
+    is-short-map-abs-ℝ d x y I =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( abs-ℝ x)
@@ -399,9 +399,9 @@ module _
               ( y)
               ( left-leq-real-bound-neighborhood-ℝ d x y I))))
 
-  short-abs-ℝ :
+  short-map-abs-ℝ :
     short-map-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
-  short-abs-ℝ = (abs-ℝ , is-short-abs-ℝ)
+  short-map-abs-ℝ = (abs-ℝ , is-short-map-abs-ℝ)
 ```
 
 ### The absolute value of `x` is the square root of `x²`

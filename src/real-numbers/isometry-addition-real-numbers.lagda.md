@@ -97,11 +97,11 @@ module _
       ( metric-space-ℝ (l1 ⊔ l2))
   isometry-right-add-ℝ = ( (λ y → add-ℝ y x) , is-isometry-right-add-ℝ)
 
-  short-left-add-ℝ :
+  short-map-left-add-ℝ :
     short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  short-left-add-ℝ =
+  short-map-left-add-ℝ =
     short-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))

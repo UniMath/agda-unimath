@@ -129,16 +129,23 @@ module _
 
 ```agda
 abstract
-  is-short-neg-ℝ :
+  is-short-map-neg-ℝ :
     {l : Level} →
     is-short-map-Metric-Space
       ( metric-space-ℝ l)
       ( metric-space-ℝ l)
       ( neg-ℝ)
-  is-short-neg-ℝ =
+  is-short-map-neg-ℝ =
     is-short-map-is-isometry-Metric-Space
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
       ( neg-ℝ)
       ( is-isometry-neg-ℝ)
+
+short-map-neg-ℝ :
+  {l : Level} →
+  short-map-Metric-Space
+    ( metric-space-ℝ l)
+    ( metric-space-ℝ l)
+short-map-neg-ℝ = (neg-ℝ , is-short-map-neg-ℝ)
 ```
