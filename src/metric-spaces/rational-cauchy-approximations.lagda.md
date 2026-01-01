@@ -101,6 +101,6 @@ real-limit-cauchy-approximation-ℚ f =
       ( short-map-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ lzero)
-        ( isometry-metric-space-real-ℚ))
+        ( isometry-real-ℚ))
       ( f))
 ```

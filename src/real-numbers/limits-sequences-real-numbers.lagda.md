@@ -107,7 +107,7 @@ module _
       preserves-limits-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
-        ( modulated-ucont-map-product-add-pair-ℝ l1 l2)
+        ( modulated-ucont-map-add-pair-ℝ l1 l2)
         ( pair-sequence u v)
         ( lim-u , lim-v)
         ( is-limit-pair-sequence-Metric-Space

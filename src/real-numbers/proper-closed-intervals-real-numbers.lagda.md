@@ -178,7 +178,8 @@ short-map-clamp-proper-closed-interval-ℝ :
     ( metric-space-ℝ l3)
     ( metric-space-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
 short-map-clamp-proper-closed-interval-ℝ [a,b] =
-  short-map-clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
+  short-map-clamp-closed-interval-ℝ
+    ( closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
 ### Every real number in a proper closed interval is an accumulation point in that proper closed interval
@@ -216,7 +217,7 @@ abstract
           ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
+            ( isometry-real-ℚ))
       short-inclusion =
         short-inclusion-subspace-Metric-Space
           ( metric-space-ℝ l)
@@ -299,7 +300,7 @@ abstract
           ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
+            ( isometry-real-ℚ))
       short-inclusion =
         short-inclusion-subspace-Metric-Space
           ( metric-space-ℝ l)

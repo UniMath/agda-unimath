@@ -304,12 +304,12 @@ module _
   where
 
   abstract
-    is-isometry-add-ℚ :
+    is-isometry-left-add-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-    is-isometry-add-ℚ d y z =
+    is-isometry-left-add-ℚ d y z =
       pair
         ( map-product
           ( preserves-lower-neighborhood-add-ℚ x y z d)
@@ -318,17 +318,17 @@ module _
           ( reflects-lower-neighborhood-add-ℚ x y z d)
           ( reflects-lower-neighborhood-add-ℚ x z y d))
 
-    is-isometry-add-ℚ' :
+    is-isometry-left-add-ℚ' :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ' x)
-    is-isometry-add-ℚ' d y z =
+    is-isometry-left-add-ℚ' d y z =
       binary-tr
         ( λ u v → neighborhood-ℚ d y z ↔ neighborhood-ℚ d u v)
         ( commutative-add-ℚ x y)
         ( commutative-add-ℚ x z)
-        ( is-isometry-add-ℚ d y z)
+        ( is-isometry-left-add-ℚ d y z)
 
     is-uniformly-continuous-map-left-add-ℚ :
       is-uniformly-continuous-map-Metric-Space
@@ -340,7 +340,7 @@ module _
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-        ( is-isometry-add-ℚ)
+        ( is-isometry-left-add-ℚ)
 
   uniformly-continuous-map-left-add-ℚ :
     uniformly-continuous-map-Metric-Space
@@ -397,19 +397,19 @@ module _
   where
 
   abstract
-    is-isometry-diff-ℚ :
+    is-isometry-left-diff-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-    is-isometry-diff-ℚ =
+    is-isometry-left-diff-ℚ =
       is-isometry-comp-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ q)
         ( neg-ℚ)
-        ( is-isometry-add-ℚ q)
+        ( is-isometry-left-add-ℚ q)
         ( is-isometry-neg-ℚ)
 
     is-uniformly-continuous-map-left-diff-ℚ :
@@ -422,7 +422,7 @@ module _
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-        ( is-isometry-diff-ℚ)
+        ( is-isometry-left-diff-ℚ)
 
   uniformly-continuous-map-left-diff-ℚ :
     uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
@@ -438,13 +438,13 @@ module _
   where
 
   abstract
-    is-lipschitz-constant-succ-abs-mul-ℚ :
+    is-lipschitz-constant-succ-map-abs-mul-ℚ :
       is-lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
         ( positive-succ-ℚ⁰⁺ (abs-ℚ x))
-    is-lipschitz-constant-succ-abs-mul-ℚ d y z H =
+    is-lipschitz-constant-succ-map-abs-mul-ℚ d y z H =
       neighborhood-leq-dist-ℚ
         ( positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d)
         ( x *ℚ y)
@@ -470,36 +470,36 @@ module _
               ( succ-ℚ (rational-abs-ℚ x))
               ( succ-leq-ℚ (rational-abs-ℚ x)))))
 
-    lipschitz-constant-succ-abs-mul-ℚ :
+    lipschitz-constant-map-abs-mul-ℚ :
       lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
-    lipschitz-constant-succ-abs-mul-ℚ =
+    lipschitz-constant-map-abs-mul-ℚ =
       ( positive-succ-ℚ⁰⁺ (abs-ℚ x)) ,
-      ( is-lipschitz-constant-succ-abs-mul-ℚ)
+      ( is-lipschitz-constant-succ-map-abs-mul-ℚ)
 
-    is-lipschitz-left-mul-ℚ :
+    is-lipschitz-map-left-mul-ℚ :
       ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x))
-    is-lipschitz-left-mul-ℚ =
-      unit-trunc-Prop lipschitz-constant-succ-abs-mul-ℚ
+    is-lipschitz-map-left-mul-ℚ =
+      unit-trunc-Prop lipschitz-constant-map-abs-mul-ℚ
 
-    is-lipschitz-right-mul-ℚ :
+    is-lipschitz-map-right-mul-ℚ :
       ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x))
-    is-lipschitz-right-mul-ℚ =
+    is-lipschitz-map-right-mul-ℚ =
       is-lipschitz-htpy-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
         ( mul-ℚ' x)
         ( commutative-mul-ℚ x)
-        ( is-lipschitz-left-mul-ℚ)
+        ( is-lipschitz-map-left-mul-ℚ)
 
     is-uniformly-continuous-map-left-mul-ℚ :
       is-uniformly-continuous-map-Metric-Space
@@ -511,7 +511,7 @@ module _
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
-        ( is-lipschitz-left-mul-ℚ)
+        ( is-lipschitz-map-left-mul-ℚ)
 
     is-uniformly-continuous-map-right-mul-ℚ :
       is-uniformly-continuous-map-Metric-Space
@@ -523,7 +523,7 @@ module _
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x)
-        ( is-lipschitz-right-mul-ℚ)
+        ( is-lipschitz-map-right-mul-ℚ)
 
   uniformly-continuous-map-left-mul-ℚ :
     uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ

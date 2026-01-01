@@ -74,12 +74,12 @@ module _
   where
 
   abstract
-    is-lipschitz-right-mul-ℝ :
+    is-lipschitz-map-right-mul-ℝ :
       is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-    is-lipschitz-right-mul-ℝ =
+    is-lipschitz-map-right-mul-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
@@ -113,19 +113,19 @@ module _
                 ≤ real-ℚ⁺ (q *ℚ⁺ ε)
                   by leq-eq-ℝ (mul-real-ℚ _ _)))
 
-    is-lipschitz-left-mul-ℝ :
+    is-lipschitz-map-left-mul-ℝ :
       is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-    is-lipschitz-left-mul-ℝ =
+    is-lipschitz-map-left-mul-ℝ =
       is-lipschitz-htpy-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
         ( mul-ℝ' c)
         ( commutative-mul-ℝ c)
-        ( is-lipschitz-right-mul-ℝ)
+        ( is-lipschitz-map-right-mul-ℝ)
 ```
 
 ## Corollaries
@@ -148,7 +148,7 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-        ( is-lipschitz-right-mul-ℝ l2 c)
+        ( is-lipschitz-map-right-mul-ℝ l2 c)
 
     is-uniformly-continuous-map-left-mul-ℝ :
       is-uniformly-continuous-map-Metric-Space
@@ -160,7 +160,7 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-        ( is-lipschitz-left-mul-ℝ l2 c)
+        ( is-lipschitz-map-left-mul-ℝ l2 c)
 
   uniformly-continuous-map-right-mul-ℝ :
     uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
@@ -188,15 +188,22 @@ module _
     ℝ (l2 ⊔ l5)
   mul-inhabited-totally-bounded-subset-ℝ (x , _) (y , _) = x *ℝ y
 
+  mul-pair-inhabited-totally-bounded-subset-ℝ :
+    type-inhabited-totally-bounded-subset-ℝ X ×
+    type-inhabited-totally-bounded-subset-ℝ Y →
+    ℝ (l2 ⊔ l5)
+  mul-pair-inhabited-totally-bounded-subset-ℝ =
+    rec-product mul-inhabited-totally-bounded-subset-ℝ
+
   abstract
-    is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
+    is-lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ :
       is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
-        ( rec-product mul-inhabited-totally-bounded-subset-ℝ)
-    is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
+        ( mul-pair-inhabited-totally-bounded-subset-ℝ)
+    is-lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open
@@ -206,7 +213,7 @@ module _
                 ( subspace-inhabited-totally-bounded-subset-ℝ X)
                 ( subspace-inhabited-totally-bounded-subset-ℝ Y))
               ( metric-space-ℝ (l2 ⊔ l5))
-              ( rec-product mul-inhabited-totally-bounded-subset-ℝ))
+              ( mul-pair-inhabited-totally-bounded-subset-ℝ))
       in do
         let
           (mx⁰⁺@(mx , _) , is-max-mx) =
@@ -266,15 +273,15 @@ module _
                 ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
                   by leq-eq-ℝ (mul-real-ℚ q (rational-ℚ⁺ ε))))
 
-  lipschitz-mul-inhabited-totally-bounded-subset-ℝ :
+  lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ :
     lipschitz-map-Metric-Space
       ( product-Metric-Space
         ( subspace-inhabited-totally-bounded-subset-ℝ X)
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
       ( metric-space-ℝ (l2 ⊔ l5))
-  lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
-    ( rec-product mul-inhabited-totally-bounded-subset-ℝ ,
-      is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ)
+  lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ =
+    ( mul-pair-inhabited-totally-bounded-subset-ℝ ,
+      is-lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ)
 ```
 
 ### Multiplication is uniformly continuous on the Cartesian product of two inhabited totally bounded subsets of `ℝ`
@@ -287,31 +294,31 @@ module _
   where
 
   abstract
-    is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ :
+    is-uniformly-continuous-map-mul-pair-inhabited-totally-bounded-subset-ℝ :
       is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
-        ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y))
-    is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
+        ( mul-pair-inhabited-totally-bounded-subset-ℝ X Y)
+    is-uniformly-continuous-map-mul-pair-inhabited-totally-bounded-subset-ℝ =
       is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
         ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y))
-        ( is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ X Y)
+        ( is-lipschitz-map-mul-pair-inhabited-totally-bounded-subset-ℝ X Y)
 
-  uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ :
+  uniformly-continuous-map-mul-pair-inhabited-totally-bounded-subset-ℝ :
     uniformly-continuous-map-Metric-Space
       ( product-Metric-Space
         ( subspace-inhabited-totally-bounded-subset-ℝ X)
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
       ( metric-space-ℝ (l2 ⊔ l5))
-  uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
-    ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y) ,
-      is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ)
+  uniformly-continuous-map-mul-pair-inhabited-totally-bounded-subset-ℝ =
+    ( mul-pair-inhabited-totally-bounded-subset-ℝ X Y ,
+      is-uniformly-continuous-map-mul-pair-inhabited-totally-bounded-subset-ℝ)
 ```
 
 ### Multiplication is not uniformly continuous on `ℝ × ℝ`
@@ -322,13 +329,13 @@ This remains to be shown.
 
 ```agda
 abstract
-  is-pointwise-continuous-map-mul-ℝ :
+  is-pointwise-continuous-map-mul-pair-ℝ :
     (l1 l2 : Level) →
     is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( rec-product mul-ℝ)
-  is-pointwise-continuous-map-mul-ℝ l1 l2 (x , y) =
+      ( mul-pair-ℝ)
+  is-pointwise-continuous-map-mul-pair-ℝ l1 l2 (x , y) =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
       open

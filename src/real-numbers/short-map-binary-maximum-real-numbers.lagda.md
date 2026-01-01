@@ -148,14 +148,14 @@ module _
   where
 
   abstract
-    is-short-map-left-max-ℝ :
+    is-short-map-short-map-left-max-ℝ :
       is-short-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-of-short-maps-Metric-Space
           ( metric-space-ℝ l2)
           ( metric-space-ℝ (l1 ⊔ l2)))
         ( short-map-left-max-ℝ)
-    is-short-map-left-max-ℝ d x y Nxy z =
+    is-short-map-short-map-left-max-ℝ d x y Nxy z =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( max-ℝ x z)
@@ -172,5 +172,5 @@ module _
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2)))
   short-map-max-ℝ =
-    (short-map-left-max-ℝ , is-short-map-left-max-ℝ)
+    ( short-map-left-max-ℝ , is-short-map-short-map-left-max-ℝ)
 ```
