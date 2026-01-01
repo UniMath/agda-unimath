@@ -59,14 +59,15 @@ module _
   {l : Level} (G : Semigroup l)
   where
 
-  is-central-element-mul-Semigroup :
-    (x y : type-Semigroup G) →
-    is-central-element-Semigroup G x → is-central-element-Semigroup G y →
-    is-central-element-Semigroup G (mul-Semigroup G x y)
-  is-central-element-mul-Semigroup x y H K z =
-    ( associative-mul-Semigroup G x y z) ∙
-    ( ap (mul-Semigroup G x) (K z)) ∙
-    ( inv (associative-mul-Semigroup G x z y)) ∙
-    ( ap (mul-Semigroup' G y) (H z)) ∙
-    ( associative-mul-Semigroup G z x y)
+  abstract
+    is-central-element-mul-Semigroup :
+      (x y : type-Semigroup G) →
+      is-central-element-Semigroup G x → is-central-element-Semigroup G y →
+      is-central-element-Semigroup G (mul-Semigroup G x y)
+    is-central-element-mul-Semigroup x y H K z =
+      ( associative-mul-Semigroup G x y z) ∙
+      ( ap (mul-Semigroup G x) (K z)) ∙
+      ( inv (associative-mul-Semigroup G x z y)) ∙
+      ( ap (mul-Semigroup' G y) (H z)) ∙
+      ( associative-mul-Semigroup G z x y)
 ```
