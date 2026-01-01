@@ -5,10 +5,13 @@
 ```agda
 module commutative-algebra where
 
+open import commutative-algebra.algebras-commutative-rings public
+open import commutative-algebra.associative-algebras-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
 open import commutative-algebra.category-of-commutative-rings public
+open import commutative-algebra.commutative-algebras-commutative-rings public
 open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
 open import commutative-algebra.convolution-sequences-commutative-rings public
@@ -75,6 +78,8 @@ open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings public
 open import commutative-algebra.transporting-commutative-ring-structure-isomorphisms-abelian-groups public
 open import commutative-algebra.trivial-commutative-rings public
+open import commutative-algebra.unital-algebras-commutative-rings public
+open import commutative-algebra.unital-associative-algebras-commutative-rings public
 open import commutative-algebra.zariski-locale public
 open import commutative-algebra.zariski-topology public
 ```
