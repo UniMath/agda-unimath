@@ -48,14 +48,14 @@ module _
         ( metric-space-ℝ (l1 ⊔ l2))
         ( min-ℝ x)
     is-short-map-left-min-ℝ =
-      is-short-comp-is-short-map-Metric-Space
+      is-short-map-comp-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( neg-ℝ)
         ( λ y → max-ℝ (neg-ℝ x) (neg-ℝ y))
         ( is-short-neg-ℝ)
-        ( is-short-comp-is-short-map-Metric-Space
+        ( is-short-map-comp-Metric-Space
           ( metric-space-ℝ l2)
           ( metric-space-ℝ l2)
           ( metric-space-ℝ (l1 ⊔ l2))

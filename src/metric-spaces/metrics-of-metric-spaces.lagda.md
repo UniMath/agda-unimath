@@ -46,9 +46,9 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-A function `ρ` from two elements of a
-[metric space](metric-spaces.metric-spaces.md) `M` to the
-[nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is a
+A binary function `ρ` on a [metric space](metric-spaces.metric-spaces.md) `M`
+into the [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is
+a
 {{#concept "metric" disambiguation="of a metric space" WD="metric function" WDID=Q865746 Agda=is-metric-of-Metric-Space}}
 of `M` if for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
@@ -271,7 +271,7 @@ module _
         ( isometric-equiv-metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
 ```
 
-### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a function `f : M → N` is an isometry if and only if `dM x y` is similar to `dN (f x) (f y)` for all `x, y : M`
+### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a map `f : M → N` is an isometry if and only if `dM x y` is similar to `dN (f x) (f y)` for all `x, y : M`
 
 ```agda
 module _
@@ -282,7 +282,7 @@ module _
   (dN : distance-function l6 (set-Metric-Space N))
   (is-metric-dM : is-metric-of-Metric-Space M dM)
   (is-metric-dN : is-metric-of-Metric-Space N dN)
-  (f : type-map-Metric-Space M N)
+  (f : map-Metric-Space M N)
   where
 
   abstract
@@ -336,7 +336,7 @@ module _
   (dN : distance-function l6 (set-Metric-Space N))
   (is-metric-dM : is-metric-of-Metric-Space M dM)
   (is-metric-dN : is-metric-of-Metric-Space N dN)
-  (f : type-map-Metric-Space M N)
+  (f : map-Metric-Space M N)
   where
 
   abstract

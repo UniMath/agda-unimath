@@ -136,7 +136,7 @@ abstract
       ( metric-space-ℝ l)
       ( neg-ℝ)
   is-short-neg-ℝ =
-    is-short-is-isometry-Metric-Space
+    is-short-map-is-isometry-Metric-Space
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
       ( neg-ℝ)

@@ -136,21 +136,21 @@ module _
             ≤ real-ℚ⁺ ε
               by preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε))
 
-    is-uniformly-continuous-metric-of-Metric-Space :
+    is-uniformly-continuous-map-metric-of-Metric-Space :
       is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
         ( ind-Σ ρ)
-    is-uniformly-continuous-metric-of-Metric-Space =
+    is-uniformly-continuous-map-metric-of-Metric-Space =
       intro-exists
         ( modulus-of-uniform-continuity-metric-of-Metric-Space)
         ( is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space)
 
-  uniformly-continuous-metric-of-Metric-Space :
+  uniformly-continuous-map-metric-of-Metric-Space :
     uniformly-continuous-map-Metric-Space
       ( product-Metric-Space M M)
       ( metric-space-ℝ⁰⁺ l3)
-  uniformly-continuous-metric-of-Metric-Space =
+  uniformly-continuous-map-metric-of-Metric-Space =
     ( ind-Σ ρ ,
-      is-uniformly-continuous-metric-of-Metric-Space)
+      is-uniformly-continuous-map-metric-of-Metric-Space)
 ```

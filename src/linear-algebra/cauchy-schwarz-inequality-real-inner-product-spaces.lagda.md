@@ -378,7 +378,7 @@ module _
                     ( real-ℚ⁺ ε)))
           in do
             (μ , is-mod-μ) ←
-              is-pointwise-continuous-mul-ℝ _ _
+              is-pointwise-continuous-map-mul-ℝ _ _
                 ( norm-ℝ-Inner-Product-Space V u ,
                   norm-ℝ-Inner-Product-Space V v)
             let δ = μ ε

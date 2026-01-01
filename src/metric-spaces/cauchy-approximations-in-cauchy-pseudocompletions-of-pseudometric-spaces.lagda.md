@@ -302,12 +302,12 @@ module _
           ( v)
           ( Nuv))
 
-  short-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space :
+  short-map-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space :
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M))
       ( cauchy-pseudocompletion-Pseudometric-Space M)
-  short-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space =
+  short-map-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space =
     ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space M ,
       is-short-map-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space)
 ```

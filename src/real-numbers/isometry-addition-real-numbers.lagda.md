@@ -102,7 +102,7 @@ module _
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
   short-left-add-ℝ =
-    short-isometry-Metric-Space
+    short-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-left-add-ℝ)
@@ -167,13 +167,13 @@ module _
 ### Addition is a modulated uniformly continuous function on the product of the metric space of reals with itself
 
 ```agda
-modulated-ucont-add-pair-ℝ :
+modulated-ucont-map-product-add-pair-ℝ :
   (l1 l2 : Level) →
   modulated-ucont-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
-modulated-ucont-add-pair-ℝ l1 l2 =
-  modulated-ucont-binary-isometry-Metric-Space
+modulated-ucont-map-product-add-pair-ℝ l1 l2 =
+  modulated-ucont-map-product-is-binary-isometry-Metric-Space
     ( metric-space-ℝ l1)
     ( metric-space-ℝ l2)
     ( metric-space-ℝ (l1 ⊔ l2))

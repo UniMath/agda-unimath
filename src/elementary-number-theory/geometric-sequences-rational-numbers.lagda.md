@@ -169,9 +169,9 @@ module _
               ( metric-space-ℚ)
               ( metric-space-ℚ)
               ( metric-space-ℚ)
-              ( uniformly-continuous-left-mul-ℚ
+              ( uniformly-continuous-map-left-mul-ℚ
                 ( a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)))
-              ( uniformly-continuous-diff-ℚ one-ℚ))
+              ( uniformly-continuous-map-diff-ℚ one-ℚ))
             ( λ n → power-ℚ n r)
             ( zero-ℚ)
             ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))

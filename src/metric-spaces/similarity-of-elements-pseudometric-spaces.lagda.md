@@ -347,7 +347,7 @@ module _
     preserves-sim-map-short-map-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space A B f)
+      ( short-map-isometry-Pseudometric-Space A B f)
 
   reflects-sim-map-isometry-Pseudometric-Space :
     ( x y : type-Pseudometric-Space A) →

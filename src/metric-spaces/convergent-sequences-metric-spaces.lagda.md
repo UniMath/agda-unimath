@@ -31,7 +31,7 @@ A [sequence](metric-spaces.sequences-metric-spaces.md) in a
 {{#concept "convergent" Disambiguation="sequence in a metric space" Agda=convergent-sequence-Metric-Space}}
 if it has a [limit](metric-spaces.limits-of-sequences-metric-spaces.md).
 [Short maps](metric-spaces.short-maps-metric-spaces.md) and modulated
-[uniformly continuous functions](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
+[uniformly continuous maps](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
 between metric spaces preserve convergent sequences.
 
 ## Definitions

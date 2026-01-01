@@ -89,7 +89,7 @@ module _
 
   isometric-equiv-Pseudometric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Pseudometric-Space' =
-    Σ (type-map-Pseudometric-Space A B)
+    Σ (map-Pseudometric-Space A B)
       (λ f → (is-equiv f) × (is-isometry-Pseudometric-Space A B f))
 ```
 

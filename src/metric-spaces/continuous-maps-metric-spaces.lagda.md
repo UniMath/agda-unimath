@@ -31,9 +31,11 @@ A [map](metric-spaces.maps-metric-spaces.md) `f` between
 {{#concept "continuous" Disambiguation="map between metric spaces at a point" WDID=Q170058 WD="continuous function" Agda=is-continuous-at-point-map-Metric-Space}}
 at a point `x` if `f x` is the
 [limit](metric-spaces.limits-of-maps-metric-spaces.md) of `f` at `x`. I.e.,
-there exists a function `m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an
-`m ε`-neighborhood of `x`, `f x'` is in an `ε`-neighborhood of `f x`. In this
-case, `m` is called a modulus of continuity of `f` at `x`.
+there [exists](foundation.existential-quantification.md) a function
+`m : ℚ⁺ → ℚ⁺` such that whenever `x'` is in an `m ε`-neighborhood of `x`, `f x'`
+is in an `ε`-neighborhood of `f x`. In this case, `m` is called a
+{{#concept "modulus of continuity" Disambiguation="of a map between metric spaces at a point" Agda=is-modulus-of-continuity-at-point-map-Metric-Space}}
+of `f` at `x`.
 
 ## Definitions
 
@@ -42,7 +44,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   (x : type-Metric-Space X)
   where
 
@@ -73,7 +75,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   is-pointwise-continuous-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)

@@ -1,4 +1,4 @@
-# Short functions between metric spaces
+# Short maps between metric spaces
 
 ```agda
 module metric-spaces.short-maps-metric-spaces where
@@ -58,7 +58,7 @@ their images in `B`.
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
   is-short-map-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -110,7 +110,7 @@ module _
   (f : short-map-Metric-Space A B)
   where
 
-  map-short-map-Metric-Space : type-map-Metric-Space A B
+  map-short-map-Metric-Space : map-Metric-Space A B
   map-short-map-Metric-Space =
     map-short-map-Pseudometric-Space
       ( pseudometric-Metric-Space A)
@@ -135,10 +135,10 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-short-map-id-Metric-Space :
-    is-short-map-Metric-Space A A (id-Metric-Space A)
-  is-short-map-id-Metric-Space =
-    is-short-id-Pseudometric-Space
+  is-short-map-id-map-Metric-Space :
+    is-short-map-Metric-Space A A (id-map-Metric-Space A)
+  is-short-map-id-map-Metric-Space =
+    is-short-map-id-map-Pseudometric-Space
       ( pseudometric-Metric-Space A)
 
   id-short-map-Metric-Space : short-map-Metric-Space A A
@@ -146,7 +146,7 @@ module _
     id-short-map-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
-### Equality of short functions between metric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between metric spaces is characterized by homotopy of their carrier maps
 
 ```agda
 module _
@@ -172,7 +172,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-short-map-Metric-Space
 ```
 
-### Composition of short functions
+### Composition of short maps
 
 ```agda
 module _
@@ -182,14 +182,14 @@ module _
   (C : Metric-Space l1c l2c)
   where
 
-  is-short-comp-is-short-map-Metric-Space :
-    (g : type-map-Metric-Space B C) →
-    (f : type-map-Metric-Space A B) →
+  is-short-map-comp-Metric-Space :
+    (g : map-Metric-Space B C) →
+    (f : map-Metric-Space A B) →
     is-short-map-Metric-Space B C g →
     is-short-map-Metric-Space A B f →
     is-short-map-Metric-Space A C (g ∘ f)
-  is-short-comp-is-short-map-Metric-Space =
-    is-short-comp-is-short-map-Pseudometric-Space
+  is-short-map-comp-Metric-Space =
+    is-short-map-comp-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( pseudometric-Metric-Space C)
@@ -279,17 +279,17 @@ module _
   (b : type-Metric-Space B)
   where
 
-  is-short-const-map-Metric-Space :
-    is-short-map-Metric-Space A B (λ _ → b)
-  is-short-const-map-Metric-Space =
-    is-short-constant-function-Pseudometric-Space
+  is-short-map-const-Metric-Space :
+    is-short-map-Metric-Space A B (const-map-Metric-Space A B b)
+  is-short-map-const-Metric-Space =
+    is-short-map-const-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( b)
 
-  short-const-map-Metric-Space : short-map-Metric-Space A B
-  short-const-map-Metric-Space =
-    short-constant-function-Pseudometric-Space
+  const-short-map-Metric-Space : short-map-Metric-Space A B
+  const-short-map-Metric-Space =
+    const-short-map-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( b)
@@ -301,14 +301,14 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
-  is-short-is-isometry-Metric-Space :
+  is-short-map-is-isometry-Metric-Space :
     is-isometry-Metric-Space A B f →
     is-short-map-Metric-Space A B f
-  is-short-is-isometry-Metric-Space =
-    is-short-is-isometry-Pseudometric-Space
+  is-short-map-is-isometry-Metric-Space =
+    is-short-map-is-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( f)
@@ -322,24 +322,24 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  short-isometry-Metric-Space :
+  short-map-isometry-Metric-Space :
     isometry-Metric-Space A B → short-map-Metric-Space A B
-  short-isometry-Metric-Space =
-    short-isometry-Pseudometric-Space
+  short-map-isometry-Metric-Space =
+    short-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
 
-  is-emb-short-isometry-Metric-Space :
-    is-emb short-isometry-Metric-Space
-  is-emb-short-isometry-Metric-Space =
-    is-emb-short-isometry-Pseudometric-Space
+  is-emb-short-map-isometry-Metric-Space :
+    is-emb short-map-isometry-Metric-Space
+  is-emb-short-map-isometry-Metric-Space =
+    is-emb-short-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
 
-  emb-short-isometry-Metric-Space :
+  emb-short-map-isometry-Metric-Space :
     isometry-Metric-Space A B ↪ short-map-Metric-Space A B
-  emb-short-isometry-Metric-Space =
-    emb-short-isometry-Pseudometric-Space
+  emb-short-map-isometry-Metric-Space =
+    emb-short-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
 ```
@@ -347,7 +347,7 @@ module _
 ## See also
 
 - The
-  [category of short functions on metric spaces](metric-spaces.category-of-metric-spaces-and-short-maps.md)
+  [category of short maps on metric spaces](metric-spaces.category-of-metric-spaces-and-short-maps.md)
 
 ## External links
 

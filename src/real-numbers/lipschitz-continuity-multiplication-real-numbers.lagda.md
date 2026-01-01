@@ -137,39 +137,39 @@ module _
   where
 
   abstract
-    is-uniformly-continuous-right-mul-ℝ :
+    is-uniformly-continuous-map-right-mul-ℝ :
       is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
-    is-uniformly-continuous-right-mul-ℝ =
-      is-uniformly-continuous-is-lipschitz-map-Metric-Space
+    is-uniformly-continuous-map-right-mul-ℝ =
+      is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ c)
         ( is-lipschitz-right-mul-ℝ l2 c)
 
-    is-uniformly-continuous-left-mul-ℝ :
+    is-uniformly-continuous-map-left-mul-ℝ :
       is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
-    is-uniformly-continuous-left-mul-ℝ =
-      is-uniformly-continuous-is-lipschitz-map-Metric-Space
+    is-uniformly-continuous-map-left-mul-ℝ =
+      is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( mul-ℝ' c)
         ( is-lipschitz-left-mul-ℝ l2 c)
 
-  uniformly-continuous-right-mul-ℝ :
+  uniformly-continuous-map-right-mul-ℝ :
     uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-right-mul-ℝ =
-    ( mul-ℝ c , is-uniformly-continuous-right-mul-ℝ)
+  uniformly-continuous-map-right-mul-ℝ =
+    ( mul-ℝ c , is-uniformly-continuous-map-right-mul-ℝ)
 
-  uniformly-continuous-left-mul-ℝ :
+  uniformly-continuous-map-left-mul-ℝ :
     uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-left-mul-ℝ =
-    ( mul-ℝ' c , is-uniformly-continuous-left-mul-ℝ)
+  uniformly-continuous-map-left-mul-ℝ =
+    ( mul-ℝ' c , is-uniformly-continuous-map-left-mul-ℝ)
 ```
 
 ### Multiplication is Lipschitz on the Cartesian product of two inhabited totally bounded subsets of ℝ
@@ -286,15 +286,15 @@ module _
   where
 
   abstract
-    is-uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ :
+    is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ :
       is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
         ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y))
-    is-uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ =
-      is-uniformly-continuous-is-lipschitz-map-Metric-Space
+    is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
+      is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
@@ -302,15 +302,15 @@ module _
         ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y))
         ( is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ X Y)
 
-  uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ :
+  uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ :
     uniformly-continuous-map-Metric-Space
       ( product-Metric-Space
         ( subspace-inhabited-totally-bounded-subset-ℝ X)
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
       ( metric-space-ℝ (l2 ⊔ l5))
-  uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ =
+  uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
     ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y) ,
-      is-uniformly-continuous-mul-inhabited-totally-bounded-subset-ℝ)
+      is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ)
 ```
 
 ### Multiplication is not uniformly continuous on `ℝ × ℝ`
@@ -321,13 +321,13 @@ This remains to be shown.
 
 ```agda
 abstract
-  is-pointwise-continuous-mul-ℝ :
+  is-pointwise-continuous-map-mul-ℝ :
     (l1 l2 : Level) →
     is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
       ( ind-Σ mul-ℝ)
-  is-pointwise-continuous-mul-ℝ l1 l2 (x , y) =
+  is-pointwise-continuous-map-mul-ℝ l1 l2 (x , y) =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
       open

@@ -29,7 +29,7 @@ Given a [map](metric-spaces.maps-metric-spaces.md) between
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   im-Metric-Space : Metric-Space (l1 ⊔ l3) l4

@@ -56,7 +56,7 @@ the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
   is-isometry-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -103,7 +103,7 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  map-isometry-Metric-Space : type-map-Metric-Space A B
+  map-isometry-Metric-Space : map-Metric-Space A B
   map-isometry-Metric-Space = pr1 f
 
   is-isometry-map-isometry-Metric-Space :
@@ -121,12 +121,12 @@ module _
   where
 
   is-isometry-id-Metric-Space :
-    is-isometry-Metric-Space A A (id-Metric-Space A)
+    is-isometry-Metric-Space A A (id-map-Metric-Space A)
   is-isometry-id-Metric-Space d x y = id-iff
 
   id-isometry-Metric-Space : isometry-Metric-Space A A
   id-isometry-Metric-Space =
-    id-Metric-Space A , is-isometry-id-Metric-Space
+    id-map-Metric-Space A , is-isometry-id-Metric-Space
 ```
 
 ### Equality of isometries in metric spaces is equivalent to homotopies between their carrier maps
@@ -206,8 +206,8 @@ module _
   where
 
   is-isometry-comp-is-isometry-Metric-Space :
-    (g : type-map-Metric-Space B C) →
-    (f : type-map-Metric-Space A B) →
+    (g : map-Metric-Space B C) →
+    (f : map-Metric-Space A B) →
     is-isometry-Metric-Space B C g →
     is-isometry-Metric-Space A B f →
     is-isometry-Metric-Space A C (g ∘ f)
@@ -296,7 +296,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   (I : is-isometry-Metric-Space A B f)
   (E : is-equiv f)
   where

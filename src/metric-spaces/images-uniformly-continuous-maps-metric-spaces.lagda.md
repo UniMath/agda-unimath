@@ -44,7 +44,7 @@ module _
     im-Metric-Space X Y (map-uniformly-continuous-map-Metric-Space X Y f)
 
   map-unit-im-uniformly-continuous-map-Metric-Space :
-    type-map-Metric-Space X im-uniformly-continuous-map-Metric-Space
+    map-Metric-Space X im-uniformly-continuous-map-Metric-Space
   map-unit-im-uniformly-continuous-map-Metric-Space =
     map-unit-im (map-uniformly-continuous-map-Metric-Space X Y f)
 ```
@@ -56,7 +56,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   is-modulus-of-uniform-continuity-map-unit-im-modulus-of-uniform-continuity-map-Metric-Space :

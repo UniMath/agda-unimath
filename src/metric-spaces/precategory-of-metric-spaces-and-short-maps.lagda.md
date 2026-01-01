@@ -140,7 +140,7 @@ module _
       is-isometry-Metric-Space A B (map-short-map-Metric-Space A B f)) →
     is-iso-Precategory precategory-short-map-Metric-Space {A} {B} f
   is-iso-is-isometric-equiv-short-map-Metric-Space (E , I) =
-    ( short-inverse) ,
+    ( short-map-inverse) ,
     ( ( eq-htpy-map-short-map-Metric-Space
       ( B)
       ( B)
@@ -149,7 +149,7 @@ module _
         ( A)
         ( B)
         ( f)
-        ( short-inverse))
+        ( short-map-inverse))
       ( id-short-map-Metric-Space B)
       ( is-section-map-inv-is-equiv E)) ,
       ( eq-htpy-map-short-map-Metric-Space
@@ -159,15 +159,15 @@ module _
           ( A)
           ( B)
           ( A)
-          ( short-inverse)
+          ( short-map-inverse)
           ( f))
         ( id-short-map-Metric-Space A)
         ( is-retraction-map-inv-is-equiv E)))
       where
 
-      short-inverse : short-map-Metric-Space B A
-      short-inverse =
-        short-isometry-Metric-Space
+      short-map-inverse : short-map-Metric-Space B A
+      short-map-inverse =
+        short-map-isometry-Metric-Space
           ( B)
           ( A)
           ( isometry-inv-is-equiv-isometry-Metric-Space
@@ -177,13 +177,13 @@ module _
             ( E))
 ```
 
-### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence between them
+### A map between metric spaces is a short isomorphism if and only if it is an isometric equivalence
 
 ```agda
 module _
   {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
   equiv-is-isometric-equiv-is-iso-short-map-Metric-Space :
@@ -218,11 +218,11 @@ module _
         ( f , is-short-f)
         ( is-iso-f))
     ( λ (is-equiv-f , is-isometry-f) →
-      is-short-is-isometry-Metric-Space A B f is-isometry-f ,
+      is-short-map-is-isometry-Metric-Space A B f is-isometry-f ,
       is-iso-is-isometric-equiv-short-map-Metric-Space
         ( A)
         ( B)
-        ( f , is-short-is-isometry-Metric-Space A B f is-isometry-f)
+        ( f , is-short-map-is-isometry-Metric-Space A B f is-isometry-f)
         ( is-equiv-f , is-isometry-f))
 ```
 

@@ -69,7 +69,7 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  lemma-short-lim-convergent-cauchy-approximation-Metric-Space :
+  lemma-short-map-lim-convergent-cauchy-approximation-Metric-Space :
     (ε : ℚ⁺) (x y : convergent-cauchy-approximation-Metric-Space A) →
     neighborhood-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
@@ -82,7 +82,7 @@ module _
       ( ε +ℚ⁺ δ)
       ( limit-convergent-cauchy-approximation-Metric-Space A x)
       ( limit-convergent-cauchy-approximation-Metric-Space A y)
-  lemma-short-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy δ =
+  lemma-short-map-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy δ =
     tr
       ( λ d →
         neighborhood-Metric-Space A d
@@ -168,24 +168,25 @@ module _
       ( associative-add-ℚ⁺ ε δ₁ δ₂) ∙
       ( ap (add-ℚ⁺ ε) (eq-add-split-ℚ⁺ δ))
 
-  is-short-limit-convergent-cauchy-approximation-Metric-Space :
+  is-short-map-limit-convergent-cauchy-approximation-Metric-Space :
     is-short-map-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
       ( limit-convergent-cauchy-approximation-Metric-Space A)
-  is-short-limit-convergent-cauchy-approximation-Metric-Space ε x y Nxy =
+  is-short-map-limit-convergent-cauchy-approximation-Metric-Space ε x y Nxy =
     saturated-neighborhood-Metric-Space
       ( A)
       ( ε)
       ( limit-convergent-cauchy-approximation-Metric-Space A x)
       ( limit-convergent-cauchy-approximation-Metric-Space A y)
-      ( lemma-short-lim-convergent-cauchy-approximation-Metric-Space ε x y Nxy)
+      ( lemma-short-map-lim-convergent-cauchy-approximation-Metric-Space ε x y
+        ( Nxy))
 
-  short-limit-convergent-cauchy-approximation-Metric-Space :
+  short-map-limit-convergent-cauchy-approximation-Metric-Space :
     short-map-Metric-Space
       ( metric-space-of-convergent-cauchy-approximations-Metric-Space A)
       ( A)
-  short-limit-convergent-cauchy-approximation-Metric-Space =
+  short-map-limit-convergent-cauchy-approximation-Metric-Space =
     limit-convergent-cauchy-approximation-Metric-Space A ,
-    is-short-limit-convergent-cauchy-approximation-Metric-Space
+    is-short-map-limit-convergent-cauchy-approximation-Metric-Space
 ```

@@ -20,13 +20,13 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-{{#concept "Maps" Disambiguation="between metric spaces" Agda=type-map-Metric-Space}}
+{{#concept "Maps" Disambiguation="between metric spaces" Agda=map-Metric-Space}}
 between [metric spaces](metric-spaces.metric-spaces.md) are functions between
 their carrier types.
 
 ## Definitions
 
-### The set of functions between metric spaces
+### The set of maps between metric spaces
 
 ```agda
 module _
@@ -38,8 +38,8 @@ module _
   set-map-Metric-Space =
     hom-set-Set (set-Metric-Space X) (set-Metric-Space Y)
 
-  type-map-Metric-Space : UU (lx ⊔ ly)
-  type-map-Metric-Space =
+  map-Metric-Space : UU (lx ⊔ ly)
+  map-Metric-Space =
     type-Metric-Space X → type-Metric-Space Y
 ```
 
@@ -50,6 +50,19 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  id-Metric-Space : type-map-Metric-Space M M
-  id-Metric-Space = id
+  id-map-Metric-Space : map-Metric-Space M M
+  id-map-Metric-Space = id
+```
+
+### Constant maps between metric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (b : type-Metric-Space B)
+  where
+
+  const-map-Metric-Space : map-Metric-Space A B
+  const-map-Metric-Space = const (type-Metric-Space A) b
 ```

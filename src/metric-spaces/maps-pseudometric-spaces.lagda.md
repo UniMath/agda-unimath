@@ -7,6 +7,7 @@ module metric-spaces.maps-pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-maps
 open import foundation.function-types
 open import foundation.universe-levels
 
@@ -17,7 +18,7 @@ open import metric-spaces.pseudometric-spaces
 
 ## Idea
 
-{{#concept "Maps" Disambiguation="between pseudometric spaces" Agda=type-map-Pseudometric-Space}}
+{{#concept "Maps" Disambiguation="between pseudometric spaces" Agda=map-Pseudometric-Space}}
 between [pseudometric spaces](metric-spaces.pseudometric-spaces.md) are
 functions between their carrier types.
 
@@ -31,8 +32,8 @@ module _
   (X : Pseudometric-Space lx lx') (Y : Pseudometric-Space ly ly')
   where
 
-  type-map-Pseudometric-Space : UU (lx ⊔ ly)
-  type-map-Pseudometric-Space =
+  map-Pseudometric-Space : UU (lx ⊔ ly)
+  map-Pseudometric-Space =
     type-Pseudometric-Space X → type-Pseudometric-Space Y
 ```
 
@@ -43,6 +44,19 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  id-Pseudometric-Space : type-map-Pseudometric-Space M M
-  id-Pseudometric-Space = id
+  id-map-Pseudometric-Space : map-Pseudometric-Space M M
+  id-map-Pseudometric-Space = id
+```
+
+### Constant maps between pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (b : type-Pseudometric-Space B)
+  where
+
+  const-map-Pseudometric-Space : map-Pseudometric-Space A B
+  const-map-Pseudometric-Space = const (type-Pseudometric-Space A) b
 ```

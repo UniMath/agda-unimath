@@ -130,17 +130,17 @@ module _
 ### The projection maps are short
 
 ```agda
-  is-short-pr1-product-Metric-Space :
+  is-short-map-pr1-product-Metric-Space :
     is-short-map-Metric-Space
       ( product-Metric-Space)
       ( X)
       ( pr1)
-  is-short-pr1-product-Metric-Space _ _ _ = pr1
+  is-short-map-pr1-product-Metric-Space _ _ _ = pr1
 
-  is-short-pr2-product-Metric-Space :
+  is-short-map-pr2-product-Metric-Space :
     is-short-map-Metric-Space
       ( product-Metric-Space)
       ( Y)
       ( pr2)
-  is-short-pr2-product-Metric-Space _ _ _ = pr2
+  is-short-map-pr2-product-Metric-Space _ _ _ = pr2
 ```

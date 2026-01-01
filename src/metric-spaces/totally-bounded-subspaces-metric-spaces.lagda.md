@@ -73,7 +73,7 @@ module _
 
 ## Properties
 
-### The image of a totally bounded subspace under a uniformly continuous function
+### The image of a totally bounded subspace under a uniformly continuous map
 
 ```agda
 im-uniformly-continuous-map-totally-bounded-subspace-Metric-Space :

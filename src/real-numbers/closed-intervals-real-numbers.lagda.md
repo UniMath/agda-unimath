@@ -196,7 +196,7 @@ abstract
       ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
       ( clamp-closed-interval-ℝ [a,b])
   is-short-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
-    is-short-comp-is-short-map-Metric-Space
+    is-short-map-comp-Metric-Space
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)

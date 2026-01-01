@@ -215,14 +215,14 @@ module _
   { l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-short-swap-cauchy-approximation-Metric-Space :
+  is-short-map-swap-cauchy-approximation-Metric-Space :
     is-short-map-Metric-Space
       ( metric-space-of-cauchy-approximations-Metric-Space
         ( metric-space-of-cauchy-approximations-Metric-Space A))
       ( metric-space-of-cauchy-approximations-Metric-Space
         ( metric-space-of-cauchy-approximations-Metric-Space A))
       ( swap-cauchy-approximation-Metric-Space A)
-  is-short-swap-cauchy-approximation-Metric-Space ε U V Nuv δ η =
+  is-short-map-swap-cauchy-approximation-Metric-Space ε U V Nuv δ η =
     Nuv η δ
 ```
 
@@ -241,8 +241,8 @@ module _
         ( metric-space-of-cauchy-approximations-Metric-Space A))
       ( swap-cauchy-approximation-Metric-Space A)
   is-isometry-swap-cauchy-approximation-Metric-Space ε U V =
-    ( is-short-swap-cauchy-approximation-Metric-Space A ε U V ,
-      is-short-swap-cauchy-approximation-Metric-Space
+    ( is-short-map-swap-cauchy-approximation-Metric-Space A ε U V ,
+      is-short-map-swap-cauchy-approximation-Metric-Space
         ( A)
         ( ε)
         ( swap-cauchy-approximation-Metric-Space A U)

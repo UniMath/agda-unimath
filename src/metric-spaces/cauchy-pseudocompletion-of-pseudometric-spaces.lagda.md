@@ -357,7 +357,7 @@ module _
       ( M)
       ( cauchy-pseudocompletion-Pseudometric-Space M)
   short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    short-isometry-Pseudometric-Space
+    short-map-isometry-Pseudometric-Space
       ( M)
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( isometry-cauchy-pseudocompletion-Pseudometric-Space)

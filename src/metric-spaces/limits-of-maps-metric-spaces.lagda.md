@@ -1,4 +1,4 @@
-# Limits of functions between metric spaces
+# Limits of maps between metric spaces
 
 ```agda
 module metric-spaces.limits-of-maps-metric-spaces where
@@ -28,10 +28,12 @@ open import metric-spaces.metric-spaces
 A [map](metric-spaces.maps-metric-spaces.md) `f` between
 [metric spaces](metric-spaces.metric-spaces.md) `X` and `Y` has a
 {{#concept "limit" Disambiguation="of a map between metric spaces at a point" Agda=is-point-limit-map-Metric-Space}}
-`y : Y` at a point `x : X` if there exists a function `m : ℚ⁺ → ℚ⁺` such that
-whenever `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an
-`ε`-neighborhood of `y`. In this case `m` is called a limit modulus of `f` at
-`x`.
+`y : Y` at a point `x : X` if there
+[exists](foundation.existential-quantification.md) a function `m : ℚ⁺ → ℚ⁺` such
+that whenever `x'` is in an `m ε`-neighborhood of `x`, `f x'` is in an
+`ε`-neighborhood of `y`. In this case `m` is called a
+{{#concept "limit modulus" Disambiguation="of a map between metric spaces at a point" Agda=is-modulus-of-point-limit-map-Metric-Space}}
+of `f` at `x`.
 
 ## Definitions
 
@@ -40,7 +42,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   (x : type-Metric-Space X)
   (y : type-Metric-Space Y)
   where

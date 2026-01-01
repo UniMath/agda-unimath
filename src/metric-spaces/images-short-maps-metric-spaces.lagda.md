@@ -38,7 +38,7 @@ module _
     im-Metric-Space X Y (map-short-map-Metric-Space X Y f)
 
   map-unit-im-short-map-Metric-Space :
-    type-map-Metric-Space X im-short-map-Metric-Space
+    map-Metric-Space X im-short-map-Metric-Space
   map-unit-im-short-map-Metric-Space =
     map-unit-im (map-short-map-Metric-Space X Y f)
 ```

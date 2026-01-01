@@ -316,9 +316,9 @@ module _
           ( one-ℚ⁺))
         ( ε +ℚ⁺ δ))
 
-  complete-Discrete-Metric-Space :
+  complete-metric-space-Discrete-Metric-Space :
     Discrete-Metric-Space l1 l2 → Complete-Metric-Space l1 l2
-  complete-Discrete-Metric-Space =
+  complete-metric-space-Discrete-Metric-Space =
     tot is-complete-is-discrete-Metric-Space
 ```
 
@@ -327,13 +327,13 @@ module _
 ```agda
 module _
   {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
-  is-short-is-discrete-domain-map-Metric-Space :
+  is-short-map-is-discrete-domain-Metric-Space :
     is-discrete-Metric-Space A →
     is-short-map-Metric-Space A B f
-  is-short-is-discrete-domain-map-Metric-Space H d x y Nxy =
+  is-short-map-is-discrete-domain-Metric-Space H d x y Nxy =
     sim-eq-Metric-Space
       ( B)
       ( f x)
@@ -341,23 +341,23 @@ module _
       ( ap f (H d x y Nxy))
       ( d)
 
-  is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space :
+  is-locally-constant-map-is-short-map-is-discrete-codomain-Metric-Space :
     is-discrete-Metric-Space B →
     is-short-map-Metric-Space A B f →
     is-locally-constant-map-Metric-Space A B f
-  is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
+  is-locally-constant-map-is-short-map-is-discrete-codomain-Metric-Space
     H K x y =
     elim-exists
       ( Id-Prop (set-Metric-Space B) (f x) (f y))
       ( λ d → H d (f x) (f y) ∘ (K d x y))
 
-  iff-is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space :
+  iff-is-locally-constant-map-is-short-map-is-discrete-codomain-Metric-Space :
     is-discrete-Metric-Space B →
     is-short-map-Metric-Space A B f ↔
     is-locally-constant-map-Metric-Space A B f
-  iff-is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
+  iff-is-locally-constant-map-is-short-map-is-discrete-codomain-Metric-Space
     H =
-    ( is-locally-constant-is-short-is-discrete-codomain-map-Metric-Space
+    ( is-locally-constant-map-is-short-map-is-discrete-codomain-Metric-Space
       H) ,
-    ( is-short-is-locally-constant-map-Metric-Space A B f)
+    ( is-short-map-is-locally-constant-map-Metric-Space A B f)
 ```

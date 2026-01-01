@@ -199,7 +199,7 @@ module _
       ( equivalence-relation-bounded-dist-Metric-Space A)
 
   map-equiv-bounded-distance-decomposition-Metric-Space :
-    type-map-Metric-Space
+    map-Metric-Space
       ( bounded-distance-decomposition-Metric-Space A)
       ( A)
   map-equiv-bounded-distance-decomposition-Metric-Space =

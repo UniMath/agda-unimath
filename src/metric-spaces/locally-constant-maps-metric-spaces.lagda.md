@@ -33,7 +33,7 @@ open import metric-spaces.short-maps-metric-spaces
 
 A [map](metric-spaces.maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is
-{{#concept "locally constant" Disambiguation="function between metric spaces" Agda=is-locally-constant-map-Metric-Space}}
+{{#concept "locally constant" Disambiguation="map between metric spaces" Agda=is-locally-constant-map-Metric-Space}}
 if
 [elements at bounded distance](metric-spaces.elements-at-bounded-distance-metric-spaces.md)
 have [identical](foundation.identity-types.md) images. All locally constant maps
@@ -46,7 +46,7 @@ are [short](metric-spaces.short-maps-metric-spaces.md).
 ```agda
 module _
   {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
   is-locally-constant-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l1')
@@ -76,19 +76,19 @@ module _
 
 ## Properties
 
-### Locally constant functions are short
+### Locally constant maps are short
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : type-map-Metric-Space A B)
+  (f : map-Metric-Space A B)
   where
 
   abstract
-    is-short-is-locally-constant-map-Metric-Space :
+    is-short-map-is-locally-constant-map-Metric-Space :
       is-locally-constant-map-Metric-Space A B f →
       is-short-map-Metric-Space A B f
-    is-short-is-locally-constant-map-Metric-Space H d x y Nxy =
+    is-short-map-is-locally-constant-map-Metric-Space H d x y Nxy =
       sim-eq-Metric-Space
         ( B)
         ( f x)

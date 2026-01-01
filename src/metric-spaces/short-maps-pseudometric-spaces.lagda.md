@@ -1,4 +1,4 @@
-# Short functions between pseudometric spaces
+# Short maps between pseudometric spaces
 
 ```agda
 module metric-spaces.short-maps-pseudometric-spaces where
@@ -9,6 +9,7 @@ module metric-spaces.short-maps-pseudometric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -36,9 +37,9 @@ open import metric-spaces.pseudometric-spaces
 
 ## Idea
 
-A [function](metric-spaces.maps-pseudometric-spaces.md) `f` between two
+A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
-{{#concept "short" Disambiguation="function between pseudometric spaces" Agda=is-short-map-Pseudometric-Space WD="metric map" WDID=Q2713824}}
+{{#concept "short" Disambiguation="map between pseudometric spaces" Agda=is-short-map-Pseudometric-Space WD="metric map" WDID=Q2713824}}
 if the
 [rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
 on `A` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
@@ -49,13 +50,13 @@ their images in `B`.
 
 ## Definitions
 
-### The property of being a short function between pseudometric spaces
+### The property of being a short map between pseudometric spaces
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-map-Pseudometric-Space A B)
+  (f : map-Pseudometric-Space A B)
   where
 
   is-short-map-prop-Pseudometric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -76,7 +77,7 @@ module _
     is-prop-type-Prop is-short-map-prop-Pseudometric-Space
 ```
 
-### The set of short functions between pseudometric spaces
+### The set of short maps between pseudometric spaces
 
 ```agda
 module _
@@ -94,7 +95,7 @@ module _
   (f : short-map-Pseudometric-Space A B)
   where
 
-  map-short-map-Pseudometric-Space : type-map-Pseudometric-Space A B
+  map-short-map-Pseudometric-Space : map-Pseudometric-Space A B
   map-short-map-Pseudometric-Space = pr1 f
 
   is-short-map-short-map-Pseudometric-Space :
@@ -105,24 +106,24 @@ module _
 
 ## Properties
 
-### The identity function on a pseudometric space is short
+### The identity map on a pseudometric space is short
 
 ```agda
 module _
   {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
   where
 
-  is-short-id-Pseudometric-Space :
-    is-short-map-Pseudometric-Space A A (id-Pseudometric-Space A)
-  is-short-id-Pseudometric-Space d x y H = H
+  is-short-map-id-map-Pseudometric-Space :
+    is-short-map-Pseudometric-Space A A (id-map-Pseudometric-Space A)
+  is-short-map-id-map-Pseudometric-Space d x y H = H
 
   id-short-map-Pseudometric-Space :
     short-map-Pseudometric-Space A A
   id-short-map-Pseudometric-Space =
-    ( id-Pseudometric-Space A , is-short-id-Pseudometric-Space)
+    ( id-map-Pseudometric-Space A , is-short-map-id-map-Pseudometric-Space)
 ```
 
-### Equality of short functions between pseudometric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between pseudometric spaces is characterized by homotopy of their carrier maps
 
 ```agda
 module _
@@ -148,7 +149,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-short-map-Pseudometric-Space
 ```
 
-### Composition of short functions between pseudometric spaces
+### Composition of short maps between pseudometric spaces
 
 ```agda
 module _
@@ -158,13 +159,13 @@ module _
   (C : Pseudometric-Space l1c l2c)
   where
 
-  is-short-comp-is-short-map-Pseudometric-Space :
-    (g : type-map-Pseudometric-Space B C) →
-    (f : type-map-Pseudometric-Space A B) →
+  is-short-map-comp-Pseudometric-Space :
+    (g : map-Pseudometric-Space B C) →
+    (f : map-Pseudometric-Space A B) →
     is-short-map-Pseudometric-Space B C g →
     is-short-map-Pseudometric-Space A B f →
     is-short-map-Pseudometric-Space A C (g ∘ f)
-  is-short-comp-is-short-map-Pseudometric-Space g f H K d x y =
+  is-short-map-comp-Pseudometric-Space g f H K d x y =
     H d (f x) (f y) ∘ K d x y
 
   comp-short-map-Pseudometric-Space :
@@ -174,7 +175,7 @@ module _
   comp-short-map-Pseudometric-Space g f =
     ( map-short-map-Pseudometric-Space B C g ∘
       map-short-map-Pseudometric-Space A B f) ,
-    ( is-short-comp-is-short-map-Pseudometric-Space
+    ( is-short-map-comp-Pseudometric-Space
       ( map-short-map-Pseudometric-Space B C g)
       ( map-short-map-Pseudometric-Space A B f)
       ( is-short-map-short-map-Pseudometric-Space B C g)
@@ -262,7 +263,7 @@ module _
       ( λ x → refl)
 ```
 
-### Constant functions between pseudometric spaces are short
+### Constant maps between pseudometric spaces are short
 
 ```agda
 module _
@@ -271,16 +272,17 @@ module _
   (b : type-Pseudometric-Space B)
   where
 
-  is-short-constant-function-Pseudometric-Space :
-    is-short-map-Pseudometric-Space A B (λ _ → b)
-  is-short-constant-function-Pseudometric-Space ε x y H =
+  is-short-map-const-Pseudometric-Space :
+    is-short-map-Pseudometric-Space A B (const-map-Pseudometric-Space A B b)
+  is-short-map-const-Pseudometric-Space ε x y H =
     refl-neighborhood-Pseudometric-Space B ε b
 
-  short-constant-function-Pseudometric-Space :
+  const-short-map-Pseudometric-Space :
     short-map-Pseudometric-Space A B
-  pr1 short-constant-function-Pseudometric-Space _ = b
-  pr2 short-constant-function-Pseudometric-Space =
-    is-short-constant-function-Pseudometric-Space
+  pr1 const-short-map-Pseudometric-Space =
+    const-map-Pseudometric-Space A B b
+  pr2 const-short-map-Pseudometric-Space =
+    is-short-map-const-Pseudometric-Space
 ```
 
 ### Any isometry between pseudometric spaces is short
@@ -289,13 +291,13 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-map-Pseudometric-Space A B)
+  (f : map-Pseudometric-Space A B)
   where
 
-  is-short-is-isometry-Pseudometric-Space :
+  is-short-map-is-isometry-Pseudometric-Space :
     is-isometry-Pseudometric-Space A B f →
     is-short-map-Pseudometric-Space A B f
-  is-short-is-isometry-Pseudometric-Space I =
+  is-short-map-is-isometry-Pseudometric-Space I =
     preserves-neighborhoods-map-isometry-Pseudometric-Space A B (f , I)
 ```
 
@@ -307,31 +309,31 @@ module _
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
   where
 
-  short-isometry-Pseudometric-Space :
+  short-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B → short-map-Pseudometric-Space A B
-  short-isometry-Pseudometric-Space f =
+  short-map-isometry-Pseudometric-Space f =
     map-isometry-Pseudometric-Space A B f ,
-    is-short-is-isometry-Pseudometric-Space
+    is-short-map-is-isometry-Pseudometric-Space
       ( A)
       ( B)
       ( map-isometry-Pseudometric-Space A B f)
       ( is-isometry-map-isometry-Pseudometric-Space A B f)
 
-  is-emb-short-isometry-Pseudometric-Space :
-    is-emb short-isometry-Pseudometric-Space
-  is-emb-short-isometry-Pseudometric-Space =
+  is-emb-short-map-isometry-Pseudometric-Space :
+    is-emb short-map-isometry-Pseudometric-Space
+  is-emb-short-map-isometry-Pseudometric-Space =
     is-emb-right-factor
       ( map-short-map-Pseudometric-Space A B)
-      ( short-isometry-Pseudometric-Space)
+      ( short-map-isometry-Pseudometric-Space)
       ( is-emb-inclusion-subtype
         ( is-short-map-prop-Pseudometric-Space A B))
       ( is-emb-htpy
         ( λ f → refl)
         ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
 
-  emb-short-isometry-Pseudometric-Space :
+  emb-short-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
-  emb-short-isometry-Pseudometric-Space =
-    short-isometry-Pseudometric-Space ,
-    is-emb-short-isometry-Pseudometric-Space
+  emb-short-map-isometry-Pseudometric-Space =
+    short-map-isometry-Pseudometric-Space ,
+    is-emb-short-map-isometry-Pseudometric-Space
 ```

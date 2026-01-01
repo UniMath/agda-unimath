@@ -55,7 +55,7 @@ module _
     map-cauchy-approximation-short-map-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space A B f)
+      ( short-map-isometry-Pseudometric-Space A B f)
 ```
 
 ## Properties
@@ -86,7 +86,7 @@ module _
     preserves-neighborhoods-map-cauchy-approximation-short-map-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space A B f)
+      ( short-map-isometry-Pseudometric-Space A B f)
 
   reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space :
     (d : ℚ⁺) →

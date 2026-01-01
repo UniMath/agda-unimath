@@ -494,7 +494,7 @@ module _
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
   short-map-metric-quotient-Pseudometric-Space =
-    short-isometry-Pseudometric-Space
+    short-map-isometry-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
       ( isometry-metric-quotient-Pseudometric-Space M)
@@ -606,7 +606,7 @@ module _
           ( metric-quotient-Pseudometric-Space M)))
 ```
 
-### The induced short function from the quotient metric space into a metric space
+### The induced short map from the quotient metric space into a metric space
 
 ```agda
 module _
@@ -617,7 +617,7 @@ module _
   where
 
   map-short-map-metric-quotient-Pseudometric-space :
-    type-map-Metric-Space
+    map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
   map-short-map-metric-quotient-Pseudometric-space =
@@ -724,14 +724,14 @@ module _
   where
 
   map-isometry-metric-quotient-Pseudometric-Space :
-    type-map-Metric-Space
+    map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
   map-isometry-metric-quotient-Pseudometric-Space =
     map-short-map-metric-quotient-Pseudometric-space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -744,7 +744,7 @@ module _
     htpy-map-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -763,7 +763,7 @@ module _
     compute-map-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -786,7 +786,7 @@ module _
       is-short-map-short-map-metric-quotient-Pseudometric-Space
         ( A)
         ( B)
-        ( short-isometry-Pseudometric-Space
+        ( short-map-isometry-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f))

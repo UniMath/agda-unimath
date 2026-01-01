@@ -112,7 +112,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
+  (f : map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
   (is-modulus-ucont-f-μ :
     is-modulus-of-uniform-continuity-map-Metric-Space X Y f μ)
   (ε : ℚ⁺) (A : approximation-Metric-Space l5 X (μ ε))
@@ -173,7 +173,7 @@ module _
       ( X)
       ( Y)
       ( map-short-map-Metric-Space X Y f)
-      ( is-modulus-of-uniform-continuity-id-is-short-map-Metric-Space
+      ( is-modulus-of-uniform-continuity-map-id-is-short-map-Metric-Space
         ( X)
         ( Y)
         ( map-short-map-Metric-Space X Y f)
@@ -198,7 +198,7 @@ module _
       ( ε)
   approximation-im-isometry-approximation-Metric-Space =
     approximation-im-short-map-approximation-Metric-Space X Y
-      ( short-isometry-Metric-Space X Y f)
+      ( short-map-isometry-Metric-Space X Y f)
       ( ε)
       ( A)
 ```

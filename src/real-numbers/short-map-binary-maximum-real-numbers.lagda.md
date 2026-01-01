@@ -132,9 +132,9 @@ module _
   short-left-max-ℝ =
     (max-ℝ x , is-short-map-left-max-ℝ)
 
-  uniformly-continuous-left-max-ℝ : uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-left-max-ℝ =
-    uniformly-continuous-short-map-Metric-Space
+  uniformly-continuous-map-left-max-ℝ : uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-map-left-max-ℝ =
+    uniformly-continuous-map-short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( short-left-max-ℝ)

@@ -236,10 +236,10 @@ module _
               by right-unit-law-mul-ℝ _)
           ( preserves-limits-sequence-uniformly-continuous-endo-ℝ
             ( comp-uniformly-continuous-endo-ℝ
-              ( uniformly-continuous-right-mul-ℝ
+              ( uniformly-continuous-map-right-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))
-              ( uniformly-continuous-diff-ℝ one-ℝ))
+              ( uniformly-continuous-map-diff-ℝ one-ℝ))
             ( λ n → power-ℝ n r)
             ( raise-zero-ℝ l)
             ( is-zero-lim-power-le-one-abs-ℝ r |r|<1))

@@ -65,17 +65,17 @@ module _
   short-diff-ℝ :
     short-map-Metric-Space (metric-space-ℝ l2) (metric-space-ℝ (l1 ⊔ l2))
   short-diff-ℝ =
-    short-isometry-Metric-Space
+    short-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-diff-ℝ)
 
-  uniformly-continuous-diff-ℝ :
+  uniformly-continuous-map-diff-ℝ :
     uniformly-continuous-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  uniformly-continuous-diff-ℝ =
-    uniformly-continuous-isometry-Metric-Space
+  uniformly-continuous-map-diff-ℝ =
+    uniformly-continuous-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-diff-ℝ)

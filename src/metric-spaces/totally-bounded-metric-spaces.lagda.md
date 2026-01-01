@@ -83,13 +83,13 @@ module _
 
 ## Properties
 
-### The image of a totally bounded metric space under a uniformly continuous function is totally bounded
+### The image of a totally bounded metric space under a uniformly continuous map is totally bounded
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (μX : modulus-of-total-boundedness-Metric-Space l5 X)
-  (f : type-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   {μf : ℚ⁺ → ℚ⁺}
   (is-muc-μf : is-modulus-of-uniform-continuity-map-Metric-Space X Y f μf)
   where
@@ -139,7 +139,7 @@ module _
             ( μf))
 ```
 
-### The image of a totally bounded metric space under a short function is totally bounded
+### The image of a totally bounded metric space under a short map is totally bounded
 
 ```agda
 module _
@@ -158,7 +158,7 @@ module _
         ( X)
         ( Y)
         ( tbX)
-        ( uniformly-continuous-short-map-Metric-Space X Y f)
+        ( uniformly-continuous-map-short-map-Metric-Space X Y f)
 ```
 
 ### The image of a totally bounded metric space under an isometry is totally bounded
@@ -180,7 +180,7 @@ module _
         ( X)
         ( Y)
         ( tbX)
-        ( short-isometry-Metric-Space X Y f)
+        ( short-map-isometry-Metric-Space X Y f)
 ```
 
 ### Total boundedness is preserved by isometric equivalences

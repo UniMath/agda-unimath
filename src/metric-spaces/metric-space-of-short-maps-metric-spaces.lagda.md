@@ -1,4 +1,4 @@
-# The metric space of short functions between metric spaces
+# The metric space of short maps between metric spaces
 
 ```agda
 module metric-spaces.metric-space-of-short-maps-metric-spaces where
@@ -19,16 +19,16 @@ open import metric-spaces.subspaces-metric-spaces
 
 ## Idea
 
-[Short functions](metric-spaces.short-maps-metric-spaces.md) between
+[Short maps](metric-spaces.short-maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) inherit the
 [metric subspace](metric-spaces.subspaces-metric-spaces.md) structure of the
 [function metric space](metric-spaces.metric-space-of-maps-metric-spaces.md).
 This defines the
-{{#concept "metric space of short functions between metric spaces" Agda=metric-space-of-short-maps-Metric-Space}}.
+{{#concept "metric space of short maps between metric spaces" Agda=metric-space-of-short-maps-Metric-Space}}.
 
 ## Definitions
 
-### The metric space of short functions between metric spaces
+### The metric space of short maps between metric spaces
 
 ```agda
 module _

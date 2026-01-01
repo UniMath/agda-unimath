@@ -148,7 +148,7 @@ module _
   where
 
   inclusion-subspace-Metric-Space :
-    type-map-Metric-Space
+    map-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
   inclusion-subspace-Metric-Space = inclusion-subtype S
@@ -191,7 +191,7 @@ module _
   short-inclusion-subspace-Metric-Space :
     short-map-Metric-Space (subspace-Metric-Space A S) A
   short-inclusion-subspace-Metric-Space =
-    short-isometry-Metric-Space
+    short-map-isometry-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
       ( isometry-inclusion-subspace-Metric-Space A S)
@@ -209,7 +209,7 @@ module _
   uniformly-continuous-inclusion-subspace-Metric-Space :
     uniformly-continuous-map-Metric-Space (subspace-Metric-Space A S) A
   uniformly-continuous-inclusion-subspace-Metric-Space =
-    uniformly-continuous-isometry-Metric-Space
+    uniformly-continuous-map-isometry-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
       ( isometry-inclusion-subspace-Metric-Space A S)

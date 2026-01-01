@@ -281,19 +281,19 @@ module _
   (x : type-Set A)
   where
 
-  is-short-emb-fiber-indexed-sum-Metric-Space :
+  is-short-map-map-emb-fiber-indexed-sum-Metric-Space :
     is-short-map-Metric-Space
       ( P x)
       ( indexed-sum-Metric-Space A P)
       ( map-emb-fiber-indexed-sum-Metric-Space A P x)
-  is-short-emb-fiber-indexed-sum-Metric-Space d px px' Nxx' =
+  is-short-map-map-emb-fiber-indexed-sum-Metric-Space d px px' Nxx' =
     ( refl , Nxx')
 
-  short-emb-fiber-indexed-sum-Metric-Space :
+  short-map-emb-fiber-indexed-sum-Metric-Space :
     short-map-Metric-Space (P x) (indexed-sum-Metric-Space A P)
-  short-emb-fiber-indexed-sum-Metric-Space =
+  short-map-emb-fiber-indexed-sum-Metric-Space =
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
-      is-short-emb-fiber-indexed-sum-Metric-Space)
+      is-short-map-map-emb-fiber-indexed-sum-Metric-Space)
 
   reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space :
     (d : ℚ⁺) (px px' : type-Metric-Space (P x)) →
@@ -322,18 +322,18 @@ module _
         ( e))
       ( Nxx')
 
-  is-isometry-emb-fiber-indexed-sum-Metric-Space :
+  is-isometry-map-emb-fiber-indexed-sum-Metric-Space :
     is-isometry-Metric-Space
       ( P x)
       ( indexed-sum-Metric-Space A P)
       ( map-emb-fiber-indexed-sum-Metric-Space A P x)
-  is-isometry-emb-fiber-indexed-sum-Metric-Space d px px' =
-    ( is-short-emb-fiber-indexed-sum-Metric-Space d px px' ,
+  is-isometry-map-emb-fiber-indexed-sum-Metric-Space d px px' =
+    ( is-short-map-map-emb-fiber-indexed-sum-Metric-Space d px px' ,
       reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space d px px')
 
   isometry-emb-fiber-indexed-Metric-Space :
     isometry-Metric-Space (P x) (indexed-sum-Metric-Space A P)
   isometry-emb-fiber-indexed-Metric-Space =
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
-      is-isometry-emb-fiber-indexed-sum-Metric-Space)
+      is-isometry-map-emb-fiber-indexed-sum-Metric-Space)
 ```

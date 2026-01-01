@@ -213,7 +213,7 @@ abstract
             ( metric-space-proper-closed-interval-ℝ l [a,b])
             ( short-clamp-proper-closed-interval-ℝ [a,b])
             ( short-left-add-ℝ x))
-          ( short-isometry-Metric-Space
+          ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
             ( isometry-metric-space-real-ℚ))
@@ -296,7 +296,7 @@ abstract
             ( metric-space-proper-closed-interval-ℝ l [a,b])
             ( short-clamp-proper-closed-interval-ℝ [a,b])
             ( short-diff-ℝ x))
-          ( short-isometry-Metric-Space
+          ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
             ( isometry-metric-space-real-ℚ))
