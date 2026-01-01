@@ -52,9 +52,10 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-central-element-unit-Monoid : is-central-element-Monoid M (unit-Monoid M)
-  is-central-element-unit-Monoid y =
-    left-unit-law-mul-Monoid M y ∙ inv (right-unit-law-mul-Monoid M y)
+  abstract
+    is-central-element-unit-Monoid : is-central-element-Monoid M (unit-Monoid M)
+    is-central-element-unit-Monoid y =
+      left-unit-law-mul-Monoid M y ∙ inv (right-unit-law-mul-Monoid M y)
 ```
 
 ### The product of two central elements is central
@@ -64,10 +65,11 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-central-element-mul-Monoid :
-    (x y : type-Monoid M) →
-    is-central-element-Monoid M x → is-central-element-Monoid M y →
-    is-central-element-Monoid M (mul-Monoid M x y)
-  is-central-element-mul-Monoid =
-    is-central-element-mul-Semigroup (semigroup-Monoid M)
+  abstract
+    is-central-element-mul-Monoid :
+      (x y : type-Monoid M) →
+      is-central-element-Monoid M x → is-central-element-Monoid M y →
+      is-central-element-Monoid M (mul-Monoid M x y)
+    is-central-element-mul-Monoid =
+      is-central-element-mul-Semigroup (semigroup-Monoid M)
 ```

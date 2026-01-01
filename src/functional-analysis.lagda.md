@@ -7,6 +7,7 @@ open import functional-analysis.absolute-convergence-series-real-banach-spaces p
 open import functional-analysis.additive-complete-metric-abelian-groups-real-banach-spaces public
 open import functional-analysis.convergent-series-real-banach-spaces public
 open import functional-analysis.ratio-test-series-real-banach-spaces public
+open import functional-analysis.real-banach-algebras public
 open import functional-analysis.real-banach-spaces public
 open import functional-analysis.real-hilbert-spaces public
 open import functional-analysis.series-real-banach-spaces public

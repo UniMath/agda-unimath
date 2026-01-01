@@ -87,6 +87,15 @@ module _
 norm-ℝ-Vector-Space : {l1 l2 : Level} → ℝ-Vector-Space l1 l2 → UU (lsuc l1 ⊔ l2)
 norm-ℝ-Vector-Space V = type-subtype (is-norm-prop-seminorm-ℝ-Vector-Space V)
 
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  (n : norm-ℝ-Vector-Space V)
+  where
+
+  map-norm-ℝ-Vector-Space : type-ℝ-Vector-Space V → ℝ l1
+  map-norm-ℝ-Vector-Space = pr1 (pr1 n)
+
 Normed-ℝ-Vector-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Normed-ℝ-Vector-Space l1 l2 = Σ (ℝ-Vector-Space l1 l2) norm-ℝ-Vector-Space
 ```
@@ -285,12 +294,14 @@ module _
 ### The real numbers are a normed vector space over themselves with norm `x ↦ |x|`
 
 ```agda
+norm-abs-ℝ : (l : Level) → norm-ℝ-Vector-Space (real-vector-space-ℝ l)
+norm-abs-ℝ l =
+  ( ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
+    ( λ x |x|~0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-abs-ℝ x |x|~0)))
+
 normed-real-vector-space-ℝ :
   (l : Level) → Normed-ℝ-Vector-Space l (lsuc l)
-normed-real-vector-space-ℝ l =
-  ( real-vector-space-ℝ l ,
-    ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
-    λ x |x|~0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-abs-ℝ x |x|~0))
+normed-real-vector-space-ℝ l = (real-vector-space-ℝ l , norm-abs-ℝ l)
 
 abstract
   eq-metric-space-normed-real-vector-space-metric-space-ℝ :

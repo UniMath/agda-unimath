@@ -1,0 +1,102 @@
+# Algebras over Heyting fields
+
+```agda
+module commutative-algebra.algebras-heyting-fields where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import commutative-algebra.algebras-commutative-rings
+open import commutative-algebra.heyting-fields
+
+open import foundation.dependent-pair-types
+open import foundation.sets
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+
+open import linear-algebra.vector-spaces
+```
+
+</details>
+
+## Idea
+
+An
+{{#concept "algebra" WDID=Q1000660 WD="algebra over a field" Disambiguation="over a Heyting field" Agda=algebra-Heyting-Field}}
+over a [Heyting field](commutative-algebra.heyting-fields.md) `F` is
+[vector space](linear-algebra.vector-spaces.md) `V` over `F` equipped with a
+[bilinear map](linear-algebra.bilinear-maps-vector-spaces.md), called its
+product, `* : V → V → V`.
+
+## Definition
+
+```agda
+algebra-Heyting-Field :
+  {l1 : Level} (l2 : Level) → Heyting-Field l1 → UU (l1 ⊔ lsuc l2)
+algebra-Heyting-Field l2 F =
+  algebra-Commutative-Ring l2 (commutative-ring-Heyting-Field F)
+```
+
+## Properties
+
+```agda
+module _
+  {l1 l2 : Level}
+  (F : Heyting-Field l1)
+  (A : algebra-Heyting-Field l2 F)
+  where
+
+  vector-space-algebra-Heyting-Field : Vector-Space l2 F
+  vector-space-algebra-Heyting-Field = pr1 A
+
+  ab-add-algebra-Heyting-Field : Ab l2
+  ab-add-algebra-Heyting-Field =
+    ab-Vector-Space F vector-space-algebra-Heyting-Field
+
+  set-algebra-Heyting-Field : Set l2
+  set-algebra-Heyting-Field = set-Ab ab-add-algebra-Heyting-Field
+
+  type-algebra-Heyting-Field : UU l2
+  type-algebra-Heyting-Field = type-Ab ab-add-algebra-Heyting-Field
+
+  zero-algebra-Heyting-Field : type-algebra-Heyting-Field
+  zero-algebra-Heyting-Field = zero-Ab ab-add-algebra-Heyting-Field
+
+  add-algebra-Heyting-Field :
+    type-algebra-Heyting-Field → type-algebra-Heyting-Field →
+    type-algebra-Heyting-Field
+  add-algebra-Heyting-Field = add-Ab ab-add-algebra-Heyting-Field
+
+  neg-algebra-Heyting-Field :
+    type-algebra-Heyting-Field → type-algebra-Heyting-Field
+  neg-algebra-Heyting-Field = neg-Ab ab-add-algebra-Heyting-Field
+
+  mul-algebra-Heyting-Field :
+    type-algebra-Heyting-Field → type-algebra-Heyting-Field →
+    type-algebra-Heyting-Field
+  mul-algebra-Heyting-Field =
+    mul-algebra-Commutative-Ring
+      ( commutative-ring-Heyting-Field F)
+      ( A)
+```
+
+### Every Heyting field is an algebra over itself
+
+```agda
+algebra-heyting-field-Heyting-Field :
+  {l : Level} (F : Heyting-Field l) → algebra-Heyting-Field l F
+algebra-heyting-field-Heyting-Field F =
+  algebra-commutative-ring-Commutative-Ring (commutative-ring-Heyting-Field F)
+```
+
+## See also
+
+- [Algebras over commutative rings](commutative-algebra.algebras-commutative-rings.md)
+- [Algebras over ℝ](commutative-algebra.algebras-over-the-real-numbers.md)
+
+## External links
+
+- [Algebra over a field](https://en.wikipedia.org/wiki/Algebra_over_a_field) on
+  Wikipedia
