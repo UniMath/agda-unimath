@@ -23,6 +23,7 @@ open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
+open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
 open import real-numbers.difference-real-numbers public
@@ -33,6 +34,7 @@ open import real-numbers.extensionality-multiplication-bilinear-form-real-number
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
+open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
@@ -98,8 +100,8 @@ open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
-open import real-numbers.short-function-binary-maximum-real-numbers public
-open import real-numbers.short-function-binary-minimum-real-numbers public
+open import real-numbers.short-map-binary-maximum-real-numbers public
+open import real-numbers.short-map-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
 open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
@@ -114,7 +116,7 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
-open import real-numbers.uniformly-continuous-functions-real-numbers public
+open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```
