@@ -84,18 +84,18 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  set-isometry-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  set-isometry-Metric-Space =
+  isometry-set-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  isometry-set-Metric-Space =
     set-subset
-      ( set-map-Metric-Space A B)
+      ( map-set-Metric-Space A B)
       ( is-isometry-prop-Metric-Space A B)
 
   isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  isometry-Metric-Space = type-Set set-isometry-Metric-Space
+  isometry-Metric-Space = type-Set isometry-set-Metric-Space
 
   is-set-isometry-Metric-Space : is-set isometry-Metric-Space
   is-set-isometry-Metric-Space =
-    is-set-type-Set set-isometry-Metric-Space
+    is-set-type-Set isometry-set-Metric-Space
 
 module _
   {l1 l2 l1' l2' : Level}

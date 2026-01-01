@@ -54,7 +54,7 @@ module _
   precategory-short-map-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-short-map-Metric-Space)
+      ( short-map-set-Metric-Space)
       ( λ {A B C} → comp-short-map-Metric-Space A B C)
       ( id-short-map-Metric-Space)
       ( λ {A B C D} → associative-comp-short-map-Metric-Space A B C D)

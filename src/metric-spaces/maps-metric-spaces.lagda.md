@@ -34,8 +34,8 @@ module _
   (X : Metric-Space lx lx') (Y : Metric-Space ly ly')
   where
 
-  set-map-Metric-Space : Set (lx ⊔ ly)
-  set-map-Metric-Space =
+  map-set-Metric-Space : Set (lx ⊔ ly)
+  map-set-Metric-Space =
     hom-set-Set (set-Metric-Space X) (set-Metric-Space Y)
 
   map-Metric-Space : UU (lx ⊔ ly)

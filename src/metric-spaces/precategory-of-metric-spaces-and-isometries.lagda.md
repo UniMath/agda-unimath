@@ -53,7 +53,7 @@ module _
   precategory-isometry-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-isometry-Metric-Space)
+      ( isometry-set-Metric-Space)
       ( λ {A B C} → comp-isometry-Metric-Space A B C)
       ( id-isometry-Metric-Space)
       ( λ {A B C D} → associative-comp-isometry-Metric-Space A B C D)

@@ -92,17 +92,17 @@ module _
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
 
-  set-short-map-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  set-short-map-Metric-Space =
+  short-map-set-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  short-map-set-Metric-Space =
     set-subset
-      ( set-map-Metric-Space A B)
+      ( map-set-Metric-Space A B)
       ( is-short-map-prop-Metric-Space A B)
 
   abstract
     is-set-short-map-Metric-Space :
       is-set short-map-Metric-Space
     is-set-short-map-Metric-Space =
-      is-set-type-Set set-short-map-Metric-Space
+      is-set-type-Set short-map-set-Metric-Space
 
 module _
   {l1 l2 l1' l2' : Level}
