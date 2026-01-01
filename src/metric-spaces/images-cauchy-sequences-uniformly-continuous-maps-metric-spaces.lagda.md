@@ -8,6 +8,7 @@ module metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metric-sp
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -16,9 +17,9 @@ open import lists.sequences
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.images-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.sequences-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -26,79 +27,54 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ## Idea
 
 The composition of a
-[uniformly continuous map](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
+[uniformly continuous map](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
 between [metric spaces](metric-spaces.metric-spaces.md) and a
 [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) is a Cauchy
 sequence.
 
-## Properties
-
-### Uniformly continuous maps between metric spaces preserve Cauchy sequences
+## Proof
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : uniformly-continuous-function-Metric-Space A B)
+  (f : uniformly-continuous-map-Metric-Space A B)
   (x : cauchy-sequence-Metric-Space A)
   where
 
-  seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space :
+  sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space :
     sequence-type-Metric-Space B
-  sequence-map-cauchy-sequence-uniformly-continuous-function-Metric-Space =
+  sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space =
     map-sequence
-      ( map-uniformly-continuous-function-Metric-Space A B f)
-      ( seq-cauchy-sequence-Metric-Space A x)
+      ( map-uniformly-continuous-map-Metric-Space A B f)
+      ( sequence-cauchy-sequence-Metric-Space A x)
 
   abstract
-    is-cauchy-sequence-map-cauchy-sequence-uniformly-continuous-function-Metric-Space :
+    is-cauchy-sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space :
       is-cauchy-sequence-Metric-Space
         ( B)
-        ( seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space)
-    is-cauchy-sequence-uniformly-continuous-map-cauchy-sequence-Metric-Space =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( is-cauchy-sequence-prop-Metric-Space
-              ( B)
-              ( seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space))
-      in do
-        μf ←
-          is-uniformly-continuous-map-uniformly-continuous-function-Metric-Space
+        ( sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space)
+    is-cauchy-sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space =
+      map-binary-trunc-Prop
+        ( λ μf μx →
+          cauchy-modulus-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space
             ( A)
             ( B)
-            ( f)
-        μx ← is-cauchy-sequence-seq-cauchy-sequence-Metric-Space A x
-        unit-trunc-Prop
-          ( cauchy-modulus-modulated-ucont-map-modulated-cauchy-sequence-Metric-Space
-            ( A)
-            ( B)
-            ( map-uniformly-continuous-function-Metric-Space A B f , μf)
-            ( seq-cauchy-sequence-Metric-Space A x , μx))
+            ( map-uniformly-continuous-map-Metric-Space A B f , μf)
+            ( sequence-cauchy-sequence-Metric-Space A x , μx))
+        ( is-uniformly-continuous-map-uniformly-continuous-map-Metric-Space
+          ( A)
+          ( B)
+          ( f))
+        ( is-cauchy-sequence-sequence-cauchy-sequence-Metric-Space A x)
 
   map-cauchy-sequence-uniformly-continuous-map-Metric-Space :
     cauchy-sequence-Metric-Space B
-  map-uniformly-continuous-map-cauchy-sequence-Metric-Space =
-    ( seq-uniformly-continuous-map-seq-cauchy-sequence-Metric-Space ,
-      is-cauchy-sequence-uniformly-continuous-map-cauchy-sequence-Metric-Space)
+  map-cauchy-sequence-uniformly-continuous-map-Metric-Space =
+    ( sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space ,
+      is-cauchy-sequence-map-cauchy-sequence-uniformly-continuous-map-Metric-Space)
 ```
 
-### Short maps between metric spaces preserve Cauchy sequences
+## See also
 
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-function-Metric-Space A B)
-  (u : cauchy-sequence-Metric-Space A)
-  where
-
-  map-cauchy-sequence-short-function-Metric-Space :
-    cauchy-sequence-Metric-Space B
-  map-short-map-cauchy-sequence-Metric-Space =
-    map-uniformly-continuous-map-cauchy-sequence-Metric-Space
-      ( A)
-      ( B)
-      ( uniformly-continuous-short-function-Metric-Space A B f)
-      ( u)
-```
+- [The images of Cauchy sequences under short maps in metric spaces](metric-spaces.images-cauchy-sequences-short-maps-metric-spaces.md)

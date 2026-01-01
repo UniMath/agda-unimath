@@ -82,12 +82,12 @@ module _
   (x : cauchy-sequence-Metric-Space X)
   where
 
-  seq-cauchy-sequence-Metric-Space : sequence-type-Metric-Space X
-  seq-cauchy-sequence-Metric-Space = pr1 x
+  sequence-cauchy-sequence-Metric-Space : sequence-type-Metric-Space X
+  sequence-cauchy-sequence-Metric-Space = pr1 x
 
-  is-cauchy-sequence-seq-cauchy-sequence-Metric-Space :
-    is-cauchy-sequence-Metric-Space X seq-cauchy-sequence-Metric-Space
-  is-cauchy-sequence-seq-cauchy-sequence-Metric-Space = pr2 x
+  is-cauchy-sequence-sequence-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-Metric-Space X sequence-cauchy-sequence-Metric-Space
+  is-cauchy-sequence-sequence-cauchy-sequence-Metric-Space = pr2 x
 ```
 
 ## Properties
@@ -110,26 +110,6 @@ module _
         ( is-lim-x)
 ```
 
-### Uniformly continuous maps between metric spaces preserve Cauchy sequences
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : uniformly-continuous-map-Metric-Space A B)
-  (u : cauchy-sequence-Metric-Space A)
-  where
-```
-
-### Short maps between metric spaces preserve Cauchy sequences
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level} (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-map-Metric-Space A B)
-  (u : cauchy-sequence-Metric-Space A)
-  where
-```
-
 ### Pairing of Cauchy sequences
 
 ```agda
@@ -140,43 +120,43 @@ module _
   (v : cauchy-sequence-Metric-Space B)
   where
 
-  seq-pair-cauchy-sequence-Metric-Space :
+  sequence-pair-cauchy-sequence-Metric-Space :
     sequence-type-Metric-Space (product-Metric-Space A B)
-  seq-pair-cauchy-sequence-Metric-Space =
+  sequence-pair-cauchy-sequence-Metric-Space =
     pair-sequence
-      ( seq-cauchy-sequence-Metric-Space A u)
-      ( seq-cauchy-sequence-Metric-Space B v)
+      ( sequence-cauchy-sequence-Metric-Space A u)
+      ( sequence-cauchy-sequence-Metric-Space B v)
 
   abstract
-    is-cauchy-seq-pair-cauchy-sequence-Metric-Space :
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space :
       is-cauchy-sequence-Metric-Space
         ( product-Metric-Space A B)
-        ( seq-pair-cauchy-sequence-Metric-Space)
-    is-cauchy-seq-pair-cauchy-sequence-Metric-Space =
+        ( sequence-pair-cauchy-sequence-Metric-Space)
+    is-cauchy-sequence-pair-cauchy-sequence-Metric-Space =
       let
         open
           do-syntax-trunc-Prop
             ( is-cauchy-sequence-prop-Metric-Space
               ( product-Metric-Space A B)
-              ( seq-pair-cauchy-sequence-Metric-Space))
+              ( sequence-pair-cauchy-sequence-Metric-Space))
       in do
-        μ-u ← is-cauchy-sequence-seq-cauchy-sequence-Metric-Space A u
-        μ-v ← is-cauchy-sequence-seq-cauchy-sequence-Metric-Space B v
+        μ-u ← is-cauchy-sequence-sequence-cauchy-sequence-Metric-Space A u
+        μ-v ← is-cauchy-sequence-sequence-cauchy-sequence-Metric-Space B v
         unit-trunc-Prop
           ( is-cauchy-seq-pair-modulated-cauchy-sequence-Metric-Space
             ( A)
             ( B)
-            ( seq-cauchy-sequence-Metric-Space A u , μ-u)
-            ( seq-cauchy-sequence-Metric-Space B v , μ-v))
+            ( sequence-cauchy-sequence-Metric-Space A u , μ-u)
+            ( sequence-cauchy-sequence-Metric-Space B v , μ-v))
 
   pair-cauchy-sequence-Metric-Space :
     cauchy-sequence-Metric-Space (product-Metric-Space A B)
   pair-cauchy-sequence-Metric-Space =
-    ( seq-pair-cauchy-sequence-Metric-Space ,
-      is-cauchy-seq-pair-cauchy-sequence-Metric-Space)
+    ( sequence-pair-cauchy-sequence-Metric-Space ,
+      is-cauchy-sequence-pair-cauchy-sequence-Metric-Space)
 ```
 
-### To show a sequence `a` is Cauchy, it suffices to have a modulus function `μ` such that for any `ε`, `a (μ ε)` and `a (μ ε + k)` are in an `ε`-neighborhood
+### To show a sequence `a` is Cauchy, it suffices to exhibit a modulus function `μ` such that for any `ε`, `a (μ ε)` and `a (μ ε + k)` are in an `ε`-neighborhood
 
 ```agda
 module

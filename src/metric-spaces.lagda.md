@@ -99,6 +99,7 @@ open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.images-cauchy-sequences-short-maps-metric-spaces public
 open import metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
 open import metric-spaces.images-metric-spaces public

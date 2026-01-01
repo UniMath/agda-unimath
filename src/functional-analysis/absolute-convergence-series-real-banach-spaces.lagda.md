@@ -184,7 +184,7 @@ module _
         is-cauchy-has-limit-sequence-ℝ
           ( partial-sum-series-ℝ (map-norm-series-ℝ-Banach-Space V σ))
           ( lim-Σnorm , H)
-      is-convergent-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space
+      is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space
         ( V)
         ( σ)
         ( is-cauchy-partial-sum-is-cauchy-partial-sum-norm-series-ℝ-Banach-Space

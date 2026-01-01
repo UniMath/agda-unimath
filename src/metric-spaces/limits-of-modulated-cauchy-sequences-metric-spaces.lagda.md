@@ -59,7 +59,7 @@ module _
   is-limit-modulus-prop-modulated-cauchy-sequence-Metric-Space =
     is-limit-modulus-prop-sequence-Metric-Space
       ( M)
-      ( seq-modulated-cauchy-sequence-Metric-Space M x)
+      ( sequence-modulated-cauchy-sequence-Metric-Space M x)
 
   is-limit-modulus-modulated-cauchy-sequence-Metric-Space :
     type-Metric-Space M → (ℚ⁺ → ℕ) → UU l2
@@ -67,9 +67,9 @@ module _
     type-Prop
       ( is-limit-modulus-prop-modulated-cauchy-sequence-Metric-Space lim μ)
 
-  limit-modulus-seq-modulated-cauchy-sequence-Metric-Space :
+  limit-modulus-sequence-modulated-cauchy-sequence-Metric-Space :
     type-Metric-Space M → UU l2
-  limit-modulus-seq-modulated-cauchy-sequence-Metric-Space lim =
+  limit-modulus-sequence-modulated-cauchy-sequence-Metric-Space lim =
     type-subtype
       ( is-limit-modulus-prop-modulated-cauchy-sequence-Metric-Space lim)
 
@@ -78,7 +78,7 @@ module _
   is-limit-prop-modulated-cauchy-sequence-Metric-Space =
     is-limit-prop-sequence-Metric-Space
       ( M)
-      ( seq-modulated-cauchy-sequence-Metric-Space M x)
+      ( sequence-modulated-cauchy-sequence-Metric-Space M x)
 
   is-limit-modulated-cauchy-sequence-Metric-Space : type-Metric-Space M → UU l2
   is-limit-modulated-cauchy-sequence-Metric-Space lim =
@@ -88,7 +88,7 @@ module _
   has-limit-prop-modulated-cauchy-sequence-Metric-Space =
     has-limit-prop-sequence-Metric-Space
       ( M)
-      ( seq-modulated-cauchy-sequence-Metric-Space M x)
+      ( sequence-modulated-cauchy-sequence-Metric-Space M x)
 
   has-limit-modulated-cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   has-limit-modulated-cauchy-sequence-Metric-Space =
@@ -136,8 +136,8 @@ module _
         ε''⁺@(ε'' , _) = left-summand-split-ℚ⁺ ε'⁺
         n =
           map-modulus-modulated-cauchy-sequence-Metric-Space M x ε''⁺
-        xn = seq-modulated-cauchy-sequence-Metric-Space M x n
-        xm = seq-modulated-cauchy-sequence-Metric-Space M x m
+        xn = sequence-modulated-cauchy-sequence-Metric-Space M x n
+        xm = sequence-modulated-cauchy-sequence-Metric-Space M x m
       in
         monotonic-neighborhood-Metric-Space
           ( M)
@@ -242,7 +242,7 @@ module _
   ( x : cauchy-approximation-Metric-Space M)
   ( lim : type-Metric-Space M)
   ( H :
-    limit-modulus-seq-modulated-cauchy-sequence-Metric-Space
+    limit-modulus-sequence-modulated-cauchy-sequence-Metric-Space
       ( M)
       ( modulated-cauchy-sequence-cauchy-approximation-Metric-Space M x)
       ( lim))
@@ -276,7 +276,7 @@ module _
         x1/n'-l-neighborhood =
           is-modulus-limit-modulus-sequence-Metric-Space
             ( M)
-            ( seq-modulated-cauchy-sequence-Metric-Space
+            ( sequence-modulated-cauchy-sequence-Metric-Space
               ( M)
               ( modulated-cauchy-sequence-cauchy-approximation-Metric-Space
                 ( M)

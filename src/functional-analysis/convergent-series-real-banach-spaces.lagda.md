@@ -91,7 +91,7 @@ module _
   (σ : series-ℝ-Banach-Space V)
   where
 
-  is-convergent-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space :
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space :
     is-cauchy-sequence-ℝ-Banach-Space V
       ( partial-sum-series-ℝ-Banach-Space V σ) →
     is-convergent-series-ℝ-Banach-Space V σ

@@ -23,6 +23,7 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -33,6 +34,7 @@ open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 ```
 
@@ -91,14 +93,14 @@ module _
   map-modulus-modulated-cauchy-sequence-Metric-Space (x , is-cauchy-x) ε⁺ =
     pr1 (is-cauchy-x ε⁺)
 
-  seq-modulated-cauchy-sequence-Metric-Space :
+  sequence-modulated-cauchy-sequence-Metric-Space :
     modulated-cauchy-sequence-Metric-Space → sequence-type-Metric-Space M
-  seq-modulated-cauchy-sequence-Metric-Space = pr1
+  sequence-modulated-cauchy-sequence-Metric-Space = pr1
 
   modulus-modulated-cauchy-sequence-Metric-Space :
     (x : modulated-cauchy-sequence-Metric-Space) →
     cauchy-modulus-sequence-Metric-Space M
-      ( seq-modulated-cauchy-sequence-Metric-Space x)
+      ( sequence-modulated-cauchy-sequence-Metric-Space x)
   modulus-modulated-cauchy-sequence-Metric-Space = pr2
 
   neighborhood-map-modulus-modulated-cauchy-sequence-Metric-Space :
@@ -108,15 +110,15 @@ module _
     neighborhood-Metric-Space
       ( M)
       ( ε⁺)
-      ( seq-modulated-cauchy-sequence-Metric-Space x m)
-      ( seq-modulated-cauchy-sequence-Metric-Space x k)
+      ( sequence-modulated-cauchy-sequence-Metric-Space x m)
+      ( sequence-modulated-cauchy-sequence-Metric-Space x k)
   neighborhood-map-modulus-modulated-cauchy-sequence-Metric-Space
     (x , is-cauchy-x) ε⁺ = pr2 (is-cauchy-x ε⁺)
 
   map-at-map-modulus-modulated-cauchy-sequence-Metric-Space :
     (x : modulated-cauchy-sequence-Metric-Space) (ε⁺ : ℚ⁺) → type-Metric-Space M
   map-at-map-modulus-modulated-cauchy-sequence-Metric-Space x ε⁺ =
-    seq-modulated-cauchy-sequence-Metric-Space
+    sequence-modulated-cauchy-sequence-Metric-Space
       ( x)
       ( map-modulus-modulated-cauchy-sequence-Metric-Space x ε⁺)
 
@@ -127,7 +129,7 @@ module _
       ( M)
       ( ε⁺)
       ( map-at-map-modulus-modulated-cauchy-sequence-Metric-Space x ε⁺)
-      ( seq-modulated-cauchy-sequence-Metric-Space x m)
+      ( sequence-modulated-cauchy-sequence-Metric-Space x m)
   neighborhood-at-map-modulus-modulated-cauchy-sequence-Metric-Space
     x ε⁺ m n≤m =
     let
@@ -207,7 +209,7 @@ module _
   map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
     ℚ⁺ → type-Metric-Space M
   map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space ε =
-    seq-modulated-cauchy-sequence-Metric-Space
+    sequence-modulated-cauchy-sequence-Metric-Space
       ( M)
       ( x)
       ( map-modulus-modulated-cauchy-sequence-Metric-Space M x ε)
@@ -222,8 +224,8 @@ module _
       let
         mε = map-modulus-modulated-cauchy-sequence-Metric-Space M x ε⁺
         mδ = map-modulus-modulated-cauchy-sequence-Metric-Space M x δ⁺
-        xmε = seq-modulated-cauchy-sequence-Metric-Space M x mε
-        xmδ = seq-modulated-cauchy-sequence-Metric-Space M x mδ
+        xmε = sequence-modulated-cauchy-sequence-Metric-Space M x mε
+        xmδ = sequence-modulated-cauchy-sequence-Metric-Space M x mδ
       in
         rec-coproduct
           ( λ mε≤mδ →
@@ -386,8 +388,8 @@ module _
     sequence-type-Metric-Space (product-Metric-Space A B)
   seq-pair-modulated-cauchy-sequence-Metric-Space =
     pair-sequence
-      ( seq-modulated-cauchy-sequence-Metric-Space A u)
-      ( seq-modulated-cauchy-sequence-Metric-Space B v)
+      ( sequence-modulated-cauchy-sequence-Metric-Space A u)
+      ( sequence-modulated-cauchy-sequence-Metric-Space B v)
 
   abstract
     is-cauchy-seq-pair-modulated-cauchy-sequence-Metric-Space :
@@ -487,18 +489,6 @@ module
     modulated-cauchy-sequence-Metric-Space X
   modulated-cauchy-sequence-modulus-neighborhood-add-sequence-Metric-Space H =
     ( a , cauchy-modulus-neighborhood-add-sequence-Metric-Space H)
-```
-
-### The image of a modulated Cauchy sequence under a modulated uniformly continuous map is a modulated Cauchy sequence
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  where
-
-
 ```
 
 ## See also

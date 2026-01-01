@@ -27,7 +27,8 @@ An element `l` of a [metric space](metric-spaces.metric-spaces.md) is the
 {{#concept "limit" Disambiguation="of a Cauchy sequence in a metric spaces" Agda=is-limit-cauchy-sequence-Metric-Space}}
 of a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) `u` in
 the metric space if there [exists](foundation.existential-quantification.md) a
-function `m : ℚ⁺ → ℕ` such that whenever `m ε ≤ n` in `ℕ`, `u n` is in an
+function `m : ℚ⁺ → ℕ`, called the limit modulus of the sequence, such that
+whenever `m ε ≤ n` in `ℕ`, `u n` is in an
 [`ε`-neighborhood](metric-spaces.rational-neighborhood-relations.md) of `l`.
 
 ## Definition
@@ -44,16 +45,16 @@ module _
   is-limit-modulus-prop-cauchy-sequence-Metric-Space =
     is-limit-modulus-prop-sequence-Metric-Space
       ( M)
-      ( seq-cauchy-sequence-Metric-Space M x)
+      ( sequence-cauchy-sequence-Metric-Space M x)
 
   is-limit-modulus-cauchy-sequence-Metric-Space :
     type-Metric-Space M → (ℚ⁺ → ℕ) → UU l2
   is-limit-modulus-cauchy-sequence-Metric-Space lim μ =
     type-Prop (is-limit-modulus-prop-cauchy-sequence-Metric-Space lim μ)
 
-  limit-modulus-seq-cauchy-sequence-Metric-Space :
+  limit-modulus-sequence-cauchy-sequence-Metric-Space :
     type-Metric-Space M → UU l2
-  limit-modulus-seq-cauchy-sequence-Metric-Space lim =
+  limit-modulus-sequence-cauchy-sequence-Metric-Space lim =
     type-subtype (is-limit-modulus-prop-cauchy-sequence-Metric-Space lim)
 
   is-limit-prop-cauchy-sequence-Metric-Space :
@@ -61,7 +62,7 @@ module _
   is-limit-prop-cauchy-sequence-Metric-Space =
     is-limit-prop-sequence-Metric-Space
       ( M)
-      ( seq-cauchy-sequence-Metric-Space M x)
+      ( sequence-cauchy-sequence-Metric-Space M x)
 
   is-limit-cauchy-sequence-Metric-Space : type-Metric-Space M → UU l2
   is-limit-cauchy-sequence-Metric-Space lim =
@@ -71,9 +72,13 @@ module _
   has-limit-prop-cauchy-sequence-Metric-Space =
     has-limit-prop-sequence-Metric-Space
       ( M)
-      ( seq-cauchy-sequence-Metric-Space M x)
+      ( sequence-cauchy-sequence-Metric-Space M x)
 
   has-limit-cauchy-sequence-Metric-Space : UU (l1 ⊔ l2)
   has-limit-cauchy-sequence-Metric-Space =
     type-Prop has-limit-prop-cauchy-sequence-Metric-Space
 ```
+
+## See also
+
+- [Limits of sequences in metric spaces](metric-spaces.limits-of-sequences-metric-spaces.md)

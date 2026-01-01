@@ -105,7 +105,7 @@ add-cauchy-sequence-ℝ :
   {l1 l2 : Level} → cauchy-sequence-ℝ l1 → cauchy-sequence-ℝ l2 →
   cauchy-sequence-ℝ (l1 ⊔ l2)
 add-cauchy-sequence-ℝ {l1} {l2} u v =
-  map-uniformly-continuous-map-cauchy-sequence-Metric-Space
+  map-cauchy-sequence-uniformly-continuous-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
     ( uniformly-continuous-add-pair-ℝ l1 l2)
