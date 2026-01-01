@@ -10,8 +10,12 @@ module foundation.unital-binary-operations where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
+open import foundation.conjunction
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.homotopies
@@ -75,6 +79,40 @@ is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 ```
 
 ## Properties
+
+### Being a unital operation on a set is a proposition
+
+```agda
+module _
+  {l : Level}
+  (A : Set l)
+  (μ : type-Set A → type-Set A → type-Set A)
+  where
+
+  left-unit-law-prop-Set : (e : type-Set A) → Prop l
+  left-unit-law-prop-Set e =
+    Π-Prop (type-Set A) (λ a → Id-Prop A (μ e a) a)
+
+  right-unit-law-prop-Set : (e : type-Set A) → Prop l
+  right-unit-law-prop-Set e =
+    Π-Prop (type-Set A) (λ a → Id-Prop A (μ a e) a)
+
+  abstract
+    all-elements-equal-is-unital-Set :
+      all-elements-equal (is-unital μ)
+    all-elements-equal-is-unital-Set
+      (e₁ , left-unit-e₁ , right-unit-e₁) (e₂ , left-unit-e₂ , right-unit-e₂) =
+      eq-type-subtype
+        ( λ e → left-unit-law-prop-Set e ∧ right-unit-law-prop-Set e)
+        ( inv (right-unit-e₂ e₁) ∙ left-unit-e₁ e₂)
+
+    is-prop-is-unital-Set : is-prop (is-unital μ)
+    is-prop-is-unital-Set =
+      is-prop-all-elements-equal all-elements-equal-is-unital-Set
+
+  is-unital-prop-Set : Prop l
+  is-unital-prop-Set = (is-unital μ , is-prop-is-unital-Set)
+```
 
 ### The unit laws for an operation `μ` with unit `e` can be upgraded to coherent unit laws
 
