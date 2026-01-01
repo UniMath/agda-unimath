@@ -298,6 +298,20 @@ module _
     leq-abs-leq-leq-neg-ℝ = leq-max-leq-leq-ℝ x (neg-ℝ x) y
 ```
 
+### If `x < y` and `-x < y`, then `|x| < y`
+
+```agda
+module _
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
+  where
+
+  abstract opaque
+    unfolding abs-ℝ
+
+    le-abs-le-le-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ x) y → le-ℝ (abs-ℝ x) y
+    le-abs-le-le-neg-ℝ = le-max-le-le-ℝ
+```
+
 ### Triangle inequality
 
 ```agda

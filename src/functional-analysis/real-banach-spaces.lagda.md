@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module linear-algebra.real-banach-spaces where
+module functional-analysis.real-banach-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -30,6 +30,7 @@ open import metric-spaces.metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.nonnegative-real-numbers
 ```
 
 </details>
@@ -92,6 +93,10 @@ module _
   map-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ l1
   map-norm-ℝ-Banach-Space =
     map-norm-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
+
+  nonnegative-norm-ℝ-Banach-Space : type-ℝ-Banach-Space → ℝ⁰⁺ l1
+  nonnegative-norm-ℝ-Banach-Space =
+    nonnegative-norm-Normed-ℝ-Vector-Space normed-vector-space-ℝ-Banach-Space
 
   cauchy-sequence-ℝ-Banach-Space : UU (l1 ⊔ l2)
   cauchy-sequence-ℝ-Banach-Space =
