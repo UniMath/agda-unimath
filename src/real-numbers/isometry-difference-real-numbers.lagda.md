@@ -49,7 +49,7 @@ module _
         ( metric-space-ℝ (l1 ⊔ l2))
         ( diff-ℝ x)
     is-isometry-diff-ℝ =
-      is-isometry-comp-is-isometry-Metric-Space
+      is-isometry-comp-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))

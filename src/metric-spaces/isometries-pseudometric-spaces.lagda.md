@@ -197,13 +197,13 @@ module _
   (C : Pseudometric-Space l1c l2c)
   where
 
-  is-isometry-comp-is-isometry-Pseudometric-Space :
+  is-isometry-comp-Pseudometric-Space :
     (g : map-Pseudometric-Space B C) →
     (f : map-Pseudometric-Space A B) →
     is-isometry-Pseudometric-Space B C g →
     is-isometry-Pseudometric-Space A B f →
     is-isometry-Pseudometric-Space A C (g ∘ f)
-  is-isometry-comp-is-isometry-Pseudometric-Space g f H K d x y =
+  is-isometry-comp-Pseudometric-Space g f H K d x y =
     H d (f x) (f y) ∘iff K d x y
 
   comp-isometry-Pseudometric-Space :
@@ -213,7 +213,7 @@ module _
   comp-isometry-Pseudometric-Space g f =
     ( map-isometry-Pseudometric-Space B C g ∘
       map-isometry-Pseudometric-Space A B f) ,
-    ( is-isometry-comp-is-isometry-Pseudometric-Space
+    ( is-isometry-comp-Pseudometric-Space
       ( map-isometry-Pseudometric-Space B C g)
       ( map-isometry-Pseudometric-Space A B f)
       ( is-isometry-map-isometry-Pseudometric-Space B C g)

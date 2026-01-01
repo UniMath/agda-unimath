@@ -60,8 +60,8 @@ module _
 
   functor-short-map-isometry-Metric-Space :
     functor-Precategory
-      (precategory-isometry-Metric-Space {l1} {l2})
-      (precategory-short-map-Metric-Space {l1} {l2})
+      ( precategory-isometry-Metric-Space {l1} {l2})
+      ( precategory-short-map-Metric-Space {l1} {l2})
   pr1 functor-short-map-isometry-Metric-Space A = A
   pr2 functor-short-map-isometry-Metric-Space =
     ( λ {A B} → short-map-isometry-Metric-Space A B) ,
@@ -95,9 +95,9 @@ module _
 
   is-faithful-functor-short-map-isometry-Metric-Space :
     is-faithful-functor-Precategory
-      (precategory-isometry-Metric-Space)
-      (precategory-short-map-Metric-Space)
-      (functor-short-map-isometry-Metric-Space l1 l2)
+      ( precategory-isometry-Metric-Space)
+      ( precategory-short-map-Metric-Space)
+      ( functor-short-map-isometry-Metric-Space l1 l2)
   is-faithful-functor-short-map-isometry-Metric-Space =
     is-emb-short-map-isometry-Metric-Space
 ```
@@ -111,9 +111,9 @@ module _
 
   is-conservative-functor-short-map-isometry-Metric-Space :
     is-conservative-functor-Precategory
-      (precategory-isometry-Metric-Space)
-      (precategory-short-map-Metric-Space)
-      (functor-short-map-isometry-Metric-Space l1 l2)
+      ( precategory-isometry-Metric-Space)
+      ( precategory-short-map-Metric-Space)
+      ( functor-short-map-isometry-Metric-Space l1 l2)
   is-conservative-functor-short-map-isometry-Metric-Space {A} {B} f H =
     is-iso-is-equiv-isometry-Metric-Space
       ( A)

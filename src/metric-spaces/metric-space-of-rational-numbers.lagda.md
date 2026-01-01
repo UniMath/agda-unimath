@@ -403,7 +403,7 @@ module _
         ( metric-space-ℚ)
         ( diff-ℚ q)
     is-isometry-diff-ℚ =
-      is-isometry-comp-is-isometry-Metric-Space
+      is-isometry-comp-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( metric-space-ℚ)

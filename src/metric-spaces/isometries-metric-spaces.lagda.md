@@ -205,13 +205,13 @@ module _
   (C : Metric-Space l1c l2c)
   where
 
-  is-isometry-comp-is-isometry-Metric-Space :
+  is-isometry-comp-Metric-Space :
     (g : map-Metric-Space B C) →
     (f : map-Metric-Space A B) →
     is-isometry-Metric-Space B C g →
     is-isometry-Metric-Space A B f →
     is-isometry-Metric-Space A C (g ∘ f)
-  is-isometry-comp-is-isometry-Metric-Space g f H K d x y =
+  is-isometry-comp-Metric-Space g f H K d x y =
     H d (f x) (f y) ∘iff K d x y
 
   comp-isometry-Metric-Space :
