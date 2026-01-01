@@ -1,25 +1,33 @@
 # Normed associative algebras over the real numbers
 
 ```agda
-module linear-algebra.normed-associative-algebras-over-the-real-numbers where
+module commutative-algebra.normed-associative-real-algebras where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.associative-algebras-commutative-rings
+open import commutative-algebra.normed-real-algebras
+
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import linear-algebra.associative-algebras-commutative-rings
-open import linear-algebra.normed-algebras-over-the-real-numbers
 open import linear-algebra.normed-real-vector-spaces
 
 open import real-numbers.large-ring-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 ```
 
 </details>
 
 ## Idea
+
+A
+{{#concept "normed associative algebra" Disambiguation="over ℝ" Agda=normed-associative-algebra-ℝ}}
+over the [real numbers](real-numbers.dedekind-real-numbers.md) is a
+[normed algebra over ℝ](commutative-algebra.normed-real-algebras.md) that is
+[associative](commutative-algebra.associative-algebras-commutative-rings.md).
 
 ## Definition
 
@@ -49,3 +57,16 @@ module _
     normed-vector-space-normed-algebra-ℝ
       ( normed-algebra-normed-associative-algebra-ℝ)
 ```
+
+### The real numbers are a normed associative algebra over themselves
+
+```agda
+real-normed-associative-algebra-ℝ :
+  (l : Level) → normed-associative-algebra-ℝ l (lsuc l)
+real-normed-associative-algebra-ℝ l =
+  ( real-normed-algebra-ℝ l , associative-mul-ℝ)
+```
+
+## See also
+
+- [Real Banach algebras](functional-analysis.real-banach-algebras.md)

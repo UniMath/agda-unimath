@@ -7,19 +7,25 @@ module functional-analysis.real-banach-algebras where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.normed-associative-real-algebras
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import functional-analysis.real-banach-spaces
-
-open import linear-algebra.normed-associative-algebras-over-the-real-numbers
 ```
 
 </details>
 
 ## Idea
+
+A {{#concept "real Banach algebra" Agda=ℝ-Banach-Algebra}} is a
+[normed associative algebra over ℝ](commutative-algebra.normed-associative-real-algebras.md)
+for which the associated
+[normed vector space](linear-algebra.normed-real-vector-spaces.md) is a
+[Banach space](functional-analysis.real-banach-spaces.md).
 
 ## Definition
 
@@ -39,3 +45,18 @@ is-banach-normed-associative-algebra-ℝ A =
 ℝ-Banach-Algebra l1 l2 =
   type-subtype (is-banach-prop-normed-associative-algebra-ℝ {l1} {l2})
 ```
+
+## Properties
+
+### The real numbers are a real Banach algebra over themselves
+
+```agda
+real-banach-algebra-ℝ : (l : Level) → ℝ-Banach-Algebra l (lsuc l)
+real-banach-algebra-ℝ l =
+  ( real-normed-associative-algebra-ℝ l ,
+    is-banach-normed-real-vector-space-ℝ l)
+```
+
+## External links
+
+- [Banach algebra](https://en.wikipedia.org/wiki/Banach_algebra) on Wikipedia

@@ -1,21 +1,23 @@
 # Normed algebras over the real numbers
 
 ```agda
-module linear-algebra.normed-algebras-over-the-real-numbers where
+module commutative-algebra.normed-real-algebras where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.algebras-over-the-real-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import linear-algebra.algebras-over-the-real-numbers
 open import linear-algebra.normed-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
 ```
@@ -23,6 +25,13 @@ open import real-numbers.multiplication-real-numbers
 </details>
 
 ## Idea
+
+A
+{{#concept "normed algebra" WDID=Q1999917 WD="normed algebra" Disambiguation="over the real numbers" Agda=normed-algebra-ℝ}}
+over the [real numbers](real-numbers.dedekind-real-numbers.md) is an
+[algebra over ℝ](commutative-algebra.algebras-over-the-real-numbers.md) equipped
+with a [norm](linear-algebra.normed-real-vector-spaces.md) that is
+submultiplicative: for any `x` and `y` in the algebra, `∥xy∥ ≤ ∥x∥ ∥y∥`.
 
 ## Definition
 
@@ -87,3 +96,15 @@ module _
     ( vector-space-normed-algebra-ℝ ,
       norm-normed-algebra-ℝ)
 ```
+
+### The real numbers are a normed algebra over themselves
+
+```agda
+real-normed-algebra-ℝ : (l : Level) → normed-algebra-ℝ l (lsuc l)
+real-normed-algebra-ℝ l =
+  ( real-algebra-ℝ l , norm-abs-ℝ l , λ x y → leq-eq-ℝ (abs-mul-ℝ x y))
+```
+
+## See also
+
+- [Normed associative algebras over ℝ](commutative-algebra.normed-associative-real-algebras.md)

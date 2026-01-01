@@ -294,12 +294,14 @@ module _
 ### The real numbers are a normed vector space over themselves with norm `x ↦ |x|`
 
 ```agda
+norm-abs-ℝ : (l : Level) → norm-ℝ-Vector-Space (real-vector-space-ℝ l)
+norm-abs-ℝ l =
+  ( ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
+    ( λ x |x|~0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-abs-ℝ x |x|~0)))
+
 normed-real-vector-space-ℝ :
   (l : Level) → Normed-ℝ-Vector-Space l (lsuc l)
-normed-real-vector-space-ℝ l =
-  ( real-vector-space-ℝ l ,
-    ( abs-ℝ , triangle-inequality-abs-ℝ , abs-mul-ℝ) ,
-    λ x |x|~0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-abs-ℝ x |x|~0))
+normed-real-vector-space-ℝ l = (real-vector-space-ℝ l , norm-abs-ℝ l)
 
 abstract
   eq-metric-space-normed-real-vector-space-metric-space-ℝ :

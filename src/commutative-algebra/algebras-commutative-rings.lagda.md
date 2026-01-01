@@ -1,7 +1,7 @@
 # Algebras over commutative rings
 
 ```agda
-module linear-algebra.algebras-commutative-rings where
+module commutative-algebra.algebras-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -18,6 +18,7 @@ open import group-theory.abelian-groups
 
 open import linear-algebra.bilinear-maps-left-modules-commutative-rings
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.linear-maps-left-modules-commutative-rings
 ```
 
 </details>
@@ -101,6 +102,61 @@ module _
       ( left-module-algebra-Commutative-Ring)
       ( left-module-algebra-Commutative-Ring)
       ( bilinear-mul-algebra-Commutative-Ring)
+```
+
+### Distributivity of multiplication over addition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  where
+
+  abstract
+    left-distributive-mul-add-algebra-Commutative-Ring :
+      (x y z : type-algebra-Commutative-Ring R A) →
+      mul-algebra-Commutative-Ring R A
+        ( x)
+        ( add-algebra-Commutative-Ring R A y z) ＝
+      add-algebra-Commutative-Ring R A
+        ( mul-algebra-Commutative-Ring R A x y)
+        ( mul-algebra-Commutative-Ring R A x z)
+    left-distributive-mul-add-algebra-Commutative-Ring x =
+      is-additive-map-linear-map-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( right-linear-map-bilinear-map-left-module-Commutative-Ring
+          ( R)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( bilinear-mul-algebra-Commutative-Ring R A)
+          ( x))
+
+    right-distributive-mul-add-algebra-Commutative-Ring :
+      (x y z : type-algebra-Commutative-Ring R A) →
+      mul-algebra-Commutative-Ring R A
+        ( add-algebra-Commutative-Ring R A x y)
+        ( z) ＝
+      add-algebra-Commutative-Ring R A
+        ( mul-algebra-Commutative-Ring R A x z)
+        ( mul-algebra-Commutative-Ring R A y z)
+    right-distributive-mul-add-algebra-Commutative-Ring x y z =
+      is-additive-map-linear-map-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-linear-map-bilinear-map-left-module-Commutative-Ring
+          ( R)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( left-module-algebra-Commutative-Ring R A)
+          ( bilinear-mul-algebra-Commutative-Ring R A)
+          ( z))
+        ( x)
+        ( y)
 ```
 
 ### Zero laws of multiplication

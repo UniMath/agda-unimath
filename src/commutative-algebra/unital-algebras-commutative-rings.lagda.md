@@ -1,12 +1,13 @@
 # Unital algebras over commutative rings
 
 ```agda
-module linear-algebra.unital-algebras-commutative-rings where
+module commutative-algebra.unital-algebras-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.algebras-commutative-rings
 open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
@@ -18,15 +19,13 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-
-open import linear-algebra.algebras-commutative-rings
 ```
 
 </details>
 
 ## Idea
 
-An [algebra](linear-algebra.algebras-commutative-rings.md) over a
+An [algebra](commutative-algebra.algebras-commutative-rings.md) over a
 [commutative ring](commutative-algebra.commutative-rings.md) is
 {{#concept "unital" WDID=Q2621172 WD="unital algebra" Disambiguation="algebra over a commutative ring"}}
 if its multiplication operation is

@@ -1,12 +1,13 @@
 # Algebras over Heyting fields
 
 ```agda
-module linear-algebra.algebras-heyting-fields where
+module commutative-algebra.algebras-heyting-fields where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.algebras-commutative-rings
 open import commutative-algebra.heyting-fields
 
 open import foundation.dependent-pair-types
@@ -15,7 +16,6 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
-open import linear-algebra.algebras-commutative-rings
 open import linear-algebra.vector-spaces
 ```
 
@@ -82,10 +82,19 @@ module _
       ( A)
 ```
 
+### Every Heyting field is an algebra over itself
+
+```agda
+algebra-heyting-field-Heyting-Field :
+  {l : Level} (F : Heyting-Field l) → algebra-Heyting-Field l F
+algebra-heyting-field-Heyting-Field F =
+  algebra-commutative-ring-Commutative-Ring (commutative-ring-Heyting-Field F)
+```
+
 ## See also
 
-- [Algebras over commutative rings](linear-algebra.algebras-commutative-rings.md)
-- [Algebras over ℝ](linear-algebra.algebras-over-the-real-numbers.md)
+- [Algebras over commutative rings](commutative-algebra.algebras-commutative-rings.md)
+- [Algebras over ℝ](commutative-algebra.algebras-over-the-real-numbers.md)
 
 ## External links
 

@@ -6,10 +6,6 @@
 module linear-algebra where
 
 open import linear-algebra.addition-linear-maps-left-modules-rings public
-open import linear-algebra.algebras-commutative-rings public
-open import linear-algebra.algebras-heyting-fields public
-open import linear-algebra.algebras-over-the-real-numbers public
-open import linear-algebra.associative-algebras-commutative-rings public
 open import linear-algebra.bilinear-forms-real-vector-spaces public
 open import linear-algebra.bilinear-maps-left-modules-commutative-rings public
 open import linear-algebra.bilinear-maps-left-modules-rings public
@@ -53,8 +49,6 @@ open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
 open import linear-algebra.negation-linear-maps-left-modules-rings public
-open import linear-algebra.normed-algebras-over-the-real-numbers public
-open import linear-algebra.normed-associative-algebras-over-the-real-numbers public
 open import linear-algebra.normed-real-vector-spaces public
 open import linear-algebra.orthogonality-bilinear-forms-real-vector-spaces public
 open import linear-algebra.orthogonality-real-inner-product-spaces public
@@ -62,7 +56,6 @@ open import linear-algebra.preimages-of-left-module-structures-along-homomorphis
 open import linear-algebra.rational-modules public
 open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
-open import linear-algebra.real-normed-algebras public
 open import linear-algebra.real-vector-spaces public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings public
@@ -84,6 +77,5 @@ open import linear-algebra.tuples-on-euclidean-domains public
 open import linear-algebra.tuples-on-monoids public
 open import linear-algebra.tuples-on-rings public
 open import linear-algebra.tuples-on-semirings public
-open import linear-algebra.unital-algebras-commutative-rings public
 open import linear-algebra.vector-spaces public
 ```

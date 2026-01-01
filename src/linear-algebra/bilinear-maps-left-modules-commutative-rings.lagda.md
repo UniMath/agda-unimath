@@ -17,6 +17,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.bilinear-maps-left-modules-rings
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.linear-maps-left-modules-commutative-rings
 ```
 
 </details>
@@ -41,7 +42,8 @@ module _
   (Y : left-module-Commutative-Ring l3 R)
   (Z : left-module-Commutative-Ring l4 R)
   (f :
-    type-left-module-Commutative-Ring R X → type-left-module-Commutative-Ring R Y →
+    type-left-module-Commutative-Ring R X →
+    type-left-module-Commutative-Ring R Y →
     type-left-module-Commutative-Ring R Z)
   where
 
@@ -113,6 +115,41 @@ module _
     type-left-module-Commutative-Ring R Y →
     type-left-module-Commutative-Ring R Z
   map-bilinear-map-left-module-Commutative-Ring = pr1 f
+```
+
+### Linear maps from bilinear maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (R : Commutative-Ring l1)
+  (X : left-module-Commutative-Ring l2 R)
+  (Y : left-module-Commutative-Ring l3 R)
+  (Z : left-module-Commutative-Ring l4 R)
+  (f : bilinear-map-left-module-Commutative-Ring R X Y Z)
+  where
+
+  left-linear-map-bilinear-map-left-module-Commutative-Ring :
+    (y : type-left-module-Commutative-Ring R Y) →
+    linear-map-left-module-Commutative-Ring R X Z
+  left-linear-map-bilinear-map-left-module-Commutative-Ring =
+    left-linear-map-bilinear-map-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( X)
+      ( Y)
+      ( Z)
+      ( f)
+
+  right-linear-map-bilinear-map-left-module-Commutative-Ring :
+    (x : type-left-module-Commutative-Ring R X) →
+    linear-map-left-module-Commutative-Ring R Y Z
+  right-linear-map-bilinear-map-left-module-Commutative-Ring =
+    right-linear-map-bilinear-map-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( X)
+      ( Y)
+      ( Z)
+      ( f)
 ```
 
 ### Zero laws of bilinear maps
