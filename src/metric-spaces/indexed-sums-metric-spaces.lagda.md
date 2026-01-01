@@ -257,12 +257,12 @@ module _
   (P : type-Set A → Metric-Space lp lp')
   where
 
-  is-locally-constant-base-point-indexed-sum-Metric-Space :
+  is-locally-constant-map-base-point-indexed-sum-Metric-Space :
     is-locally-constant-map-Metric-Space
       ( indexed-sum-Metric-Space A P)
       ( metric-space-discrete-metric-space-Set A)
       ( base-point-indexed-sum-Metric-Space A P)
-  is-locally-constant-base-point-indexed-sum-Metric-Space x y =
+  is-locally-constant-map-base-point-indexed-sum-Metric-Space x y =
     elim-exists
       ( Id-Prop
         ( A)
