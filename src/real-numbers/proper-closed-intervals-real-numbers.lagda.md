@@ -27,7 +27,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 
 open import order-theory.large-posets
@@ -158,27 +158,28 @@ clamp-proper-closed-interval-ℝ [a,b] =
   clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
-### The clamp function is a short function
+### The clamp function is a short map
 
 ```agda
 abstract
-  is-short-clamp-proper-closed-interval-ℝ :
+  is-short-map-clamp-proper-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l2) →
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( metric-space-ℝ l3)
       ( metric-space-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
       ( clamp-proper-closed-interval-ℝ [a,b])
-  is-short-clamp-proper-closed-interval-ℝ [a,b] =
-    is-short-clamp-closed-interval-ℝ
+  is-short-map-clamp-proper-closed-interval-ℝ [a,b] =
+    is-short-map-clamp-closed-interval-ℝ
       ( closed-interval-proper-closed-interval-ℝ [a,b])
 
-short-clamp-proper-closed-interval-ℝ :
+short-map-clamp-proper-closed-interval-ℝ :
   {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l2) →
-  short-function-Metric-Space
+  short-map-Metric-Space
     ( metric-space-ℝ l3)
     ( metric-space-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
-short-clamp-proper-closed-interval-ℝ [a,b] =
-  short-clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
+short-map-clamp-proper-closed-interval-ℝ [a,b] =
+  short-map-clamp-closed-interval-ℝ
+    ( closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
 ### Every real number in a proper closed interval is an accumulation point in that proper closed interval
@@ -202,30 +203,30 @@ abstract
         is-accumulation-point-prop-subset-ℝ
           ( subtype-proper-closed-interval-ℝ _ [a,b])
           ( x)
-      short-clamp-add =
-        comp-short-function-Metric-Space
+      short-map-clamp-add =
+        comp-short-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-ℝ lzero)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( comp-short-function-Metric-Space
+          ( comp-short-map-Metric-Space
             ( metric-space-ℝ lzero)
             ( metric-space-ℝ l)
             ( metric-space-proper-closed-interval-ℝ l [a,b])
-            ( short-clamp-proper-closed-interval-ℝ [a,b])
-            ( short-left-add-ℝ x))
-          ( short-isometry-Metric-Space
+            ( short-map-clamp-proper-closed-interval-ℝ [a,b])
+            ( short-map-left-add-ℝ x))
+          ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
+            ( isometry-real-ℚ))
       short-inclusion =
         short-inclusion-subspace-Metric-Space
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-add =
-        map-cauchy-approximation-short-function-Metric-Space
+        map-cauchy-approximation-short-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( short-clamp-add)
+          ( short-map-clamp-add)
           ( cauchy-approximation-rational-ℚ⁺)
     in
       intro-exists
@@ -244,7 +245,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-function-Metric-Space
+              ( map-cauchy-approximation-short-map-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -257,15 +258,15 @@ abstract
                 by ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-function-Metric-Space
+            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
-              ( comp-short-function-Metric-Space
+              ( comp-short-map-Metric-Space
                 ( metric-space-ℚ)
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
-                ( short-clamp-add))
+                ( short-map-clamp-add))
               ( cauchy-approximation-rational-ℚ⁺)
               ( zero-ℚ)
               ( is-zero-limit-rational-ℚ⁺)))
@@ -285,30 +286,30 @@ abstract
         is-accumulation-point-prop-subset-ℝ
           ( subtype-proper-closed-interval-ℝ _ [a,b])
           ( x)
-      short-clamp-diff =
-        comp-short-function-Metric-Space
+      short-map-clamp-diff =
+        comp-short-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-ℝ lzero)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( comp-short-function-Metric-Space
+          ( comp-short-map-Metric-Space
             ( metric-space-ℝ lzero)
             ( metric-space-ℝ l)
             ( metric-space-proper-closed-interval-ℝ l [a,b])
-            ( short-clamp-proper-closed-interval-ℝ [a,b])
-            ( short-diff-ℝ x))
-          ( short-isometry-Metric-Space
+            ( short-map-clamp-proper-closed-interval-ℝ [a,b])
+            ( short-map-left-diff-ℝ x))
+          ( short-map-isometry-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℝ lzero)
-            ( isometry-metric-space-real-ℚ))
+            ( isometry-real-ℚ))
       short-inclusion =
         short-inclusion-subspace-Metric-Space
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-diff =
-        map-cauchy-approximation-short-function-Metric-Space
+        map-cauchy-approximation-short-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
-          ( short-clamp-diff)
+          ( short-map-clamp-diff)
           ( cauchy-approximation-rational-ℚ⁺)
     in
       intro-exists
@@ -327,7 +328,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-function-Metric-Space
+              ( map-cauchy-approximation-short-map-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -341,15 +342,15 @@ abstract
                   ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-function-Metric-Space
+            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
-              ( comp-short-function-Metric-Space
+              ( comp-short-map-Metric-Space
                 ( metric-space-ℚ)
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
-                ( short-clamp-diff))
+                ( short-map-clamp-diff))
               ( cauchy-approximation-rational-ℚ⁺)
               ( zero-ℚ)
               ( is-zero-limit-rational-ℚ⁺)))

@@ -29,7 +29,7 @@ open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
@@ -353,11 +353,11 @@ module _
       is-isometry-map-cauchy-pseudocompletion-Pseudometric-Space)
 
   short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    short-function-Pseudometric-Space
+    short-map-Pseudometric-Space
       ( M)
       ( cauchy-pseudocompletion-Pseudometric-Space M)
   short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    short-isometry-Pseudometric-Space
+    short-map-isometry-Pseudometric-Space
       ( M)
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( isometry-cauchy-pseudocompletion-Pseudometric-Space)

@@ -29,8 +29,8 @@ open import foundation.universe-levels
 
 open import metric-spaces.equality-of-pseudometric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -51,8 +51,7 @@ following equivalent concepts:
 - an [equivalence](foundation-core.equivalences.md) between their carrier types
   such that the induced map under `map-equiv` is an isometry;
 
-- a function between their carrier types that is both an equivalence and an
-  isometry.
+- a map between their carrier types that is both an equivalence and an isometry.
 
 ## Definitions
 

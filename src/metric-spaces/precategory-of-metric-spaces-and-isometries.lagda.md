@@ -28,8 +28,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -53,7 +53,7 @@ module _
   precategory-isometry-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-isometry-Metric-Space)
+      ( isometry-set-Metric-Space)
       ( λ {A B C} → comp-isometry-Metric-Space A B C)
       ( id-isometry-Metric-Space)
       ( λ {A B C D} → associative-comp-isometry-Metric-Space A B C D)

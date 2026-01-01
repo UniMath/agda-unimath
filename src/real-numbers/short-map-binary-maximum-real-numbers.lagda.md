@@ -1,9 +1,9 @@
-# The binary maximum of real numbers is a short function
+# The binary maximum of real numbers is a short map
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.short-function-binary-maximum-real-numbers where
+module real-numbers.short-map-binary-maximum-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -15,9 +15,9 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import metric-spaces.metric-space-of-short-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.metric-space-of-short-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import order-theory.least-upper-bounds-large-posets
 
@@ -31,7 +31,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-functions-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -40,10 +40,10 @@ open import real-numbers.uniformly-continuous-functions-real-numbers
 
 For any `a : ℝ`, the
 [binary maximum](real-numbers.binary-maximum-real-numbers.md) with `a` is a
-[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
-Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
-[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+Moreover, the map `x ↦ max-ℝ x` is a short map from `ℝ` into the
+[metric space of short maps](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
 of `ℝ`.
 
 ## Proof
@@ -102,7 +102,7 @@ module _
         ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
 ```
 
-### The maximum with a real number is a short function `ℝ → ℝ`
+### The maximum with a real number is a short map `ℝ → ℝ`
 
 ```agda
 module _
@@ -110,12 +110,12 @@ module _
   where
 
   abstract
-    is-short-function-left-max-ℝ :
-      is-short-function-Metric-Space
+    is-short-map-left-max-ℝ :
+      is-short-map-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( max-ℝ x)
-    is-short-function-left-max-ℝ d y z Nyz =
+    is-short-map-left-max-ℝ d y z Nyz =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( max-ℝ x y)
@@ -125,22 +125,23 @@ module _
         ( preserves-lower-neighborhood-leq-left-max-ℝ d x z y
           ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
 
-  short-left-max-ℝ :
-    short-function-Metric-Space
+  short-map-left-max-ℝ :
+    short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  short-left-max-ℝ =
-    (max-ℝ x , is-short-function-left-max-ℝ)
+  short-map-left-max-ℝ =
+    (max-ℝ x , is-short-map-left-max-ℝ)
 
-  uniformly-continuous-left-max-ℝ : uniformly-continuous-function-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-left-max-ℝ =
-    uniformly-continuous-short-function-Metric-Space
+  uniformly-continuous-map-left-max-ℝ :
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-map-left-max-ℝ =
+    uniformly-continuous-map-short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( short-left-max-ℝ)
+      ( short-map-left-max-ℝ)
 ```
 
-### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
+### The binary maximum is a short map from `ℝ` to the metric space of short maps `ℝ → ℝ`
 
 ```agda
 module _
@@ -148,14 +149,14 @@ module _
   where
 
   abstract
-    is-short-function-short-left-max-ℝ :
-      is-short-function-Metric-Space
+    is-short-map-short-map-left-max-ℝ :
+      is-short-map-Metric-Space
         ( metric-space-ℝ l1)
-        ( metric-space-of-short-functions-Metric-Space
+        ( metric-space-of-short-maps-Metric-Space
           ( metric-space-ℝ l2)
           ( metric-space-ℝ (l1 ⊔ l2)))
-        ( short-left-max-ℝ)
-    is-short-function-short-left-max-ℝ d x y Nxy z =
+        ( short-map-left-max-ℝ)
+    is-short-map-short-map-left-max-ℝ d x y Nxy z =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( max-ℝ x z)
@@ -165,12 +166,12 @@ module _
         ( preserves-lower-neighborhood-leq-right-max-ℝ d z y x
           ( right-leq-real-bound-neighborhood-ℝ d x y Nxy))
 
-  short-max-ℝ :
-    short-function-Metric-Space
+  short-map-max-ℝ :
+    short-map-Metric-Space
       ( metric-space-ℝ l1)
-      ( metric-space-of-short-functions-Metric-Space
+      ( metric-space-of-short-maps-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2)))
-  short-max-ℝ =
-    (short-left-max-ℝ , is-short-function-short-left-max-ℝ)
+  short-map-max-ℝ =
+    ( short-map-left-max-ℝ , is-short-map-short-map-left-max-ℝ)
 ```

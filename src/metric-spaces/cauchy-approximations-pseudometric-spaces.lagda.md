@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>

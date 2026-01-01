@@ -37,9 +37,9 @@ open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spac
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -199,7 +199,7 @@ module _
       ( equivalence-relation-bounded-dist-Metric-Space A)
 
   map-equiv-bounded-distance-decomposition-Metric-Space :
-    type-function-Metric-Space
+    map-Metric-Space
       ( bounded-distance-decomposition-Metric-Space A)
       ( A)
   map-equiv-bounded-distance-decomposition-Metric-Space =
@@ -343,7 +343,7 @@ module _
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space :
     cauchy-approximation-Metric-Space A
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space =
-    map-cauchy-approximation-short-function-Metric-Space
+    map-cauchy-approximation-short-map-Metric-Space
       ( subspace-bounded-distance-component-Metric-Space A X)
       ( A)
       ( short-inclusion-subspace-Metric-Space

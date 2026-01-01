@@ -598,6 +598,9 @@ module _
 mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 mul-ℝ' y x = mul-ℝ x y
 
+mul-pair-ℝ : {l1 l2 : Level} → ℝ l1 × ℝ l2 → ℝ (l1 ⊔ l2)
+mul-pair-ℝ = rec-product mul-ℝ
+
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _*ℝ_ = mul-ℝ
