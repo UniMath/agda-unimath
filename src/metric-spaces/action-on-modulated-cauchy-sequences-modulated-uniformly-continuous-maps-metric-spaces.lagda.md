@@ -1,7 +1,7 @@
 # The images of modulated Cauchy sequences under modulated uniformly continuous maps between metric spaces
 
 ```agda
-module metric-spaces.images-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces where
+module metric-spaces.action-on-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>

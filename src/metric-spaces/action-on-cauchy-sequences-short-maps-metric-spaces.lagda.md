@@ -1,7 +1,7 @@
 # The images of Cauchy sequences under short maps between metric spaces
 
 ```agda
-module metric-spaces.images-cauchy-sequences-short-maps-metric-spaces where
+module metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module metric-spaces.images-cauchy-sequences-short-maps-metric-spaces where
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-sequences-metric-spaces
-open import metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
@@ -47,4 +47,4 @@ module _
 
 ## See also
 
-- [The images of Cauchy sequences under uniformly continuous maps in metric spaces](metric-spaces.images-cauchy-sequences-uniformly-continuous-maps-metric-spaces.md)
+- [The images of Cauchy sequences under uniformly continuous maps in metric spaces](metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces.md)

@@ -7,6 +7,8 @@ module metric-spaces.dependent-products-complete-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces

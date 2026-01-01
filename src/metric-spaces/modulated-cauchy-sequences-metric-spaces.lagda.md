@@ -156,46 +156,45 @@ module _
   (H : limit-modulus-sequence-Metric-Space M x lim)
   where
 
-  abstract
-    cauchy-modulus-limit-modulus-sequence-Metric-Space :
-      cauchy-modulus-sequence-Metric-Space M x
-    cauchy-modulus-limit-modulus-sequence-Metric-Space ε⁺@(ε , _) =
-      let
-        (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
-      in
-        ( modulus-limit-modulus-sequence-Metric-Space M x lim H ε'⁺ ,
-          λ m k n≤m n≤k →
-          monotonic-neighborhood-Metric-Space
+  cauchy-modulus-limit-modulus-sequence-Metric-Space :
+    cauchy-modulus-sequence-Metric-Space M x
+  cauchy-modulus-limit-modulus-sequence-Metric-Space ε⁺@(ε , _) =
+    let
+      (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
+    in
+      ( modulus-limit-modulus-sequence-Metric-Space M x lim H ε'⁺ ,
+        λ m k n≤m n≤k →
+        monotonic-neighborhood-Metric-Space
+          ( M)
+          ( x m)
+          ( x k)
+          ( ε'⁺ +ℚ⁺ ε'⁺)
+          ( ε⁺)
+          ( 2ε'<ε)
+          ( triangular-neighborhood-Metric-Space
             ( M)
             ( x m)
+            ( lim)
             ( x k)
-            ( ε'⁺ +ℚ⁺ ε'⁺)
-            ( ε⁺)
-            ( 2ε'<ε)
-            ( triangular-neighborhood-Metric-Space
+            ( ε'⁺)
+            ( ε'⁺)
+            ( symmetric-neighborhood-Metric-Space
               ( M)
-              ( x m)
-              ( lim)
+              ( ε'⁺)
               ( x k)
-              ( ε'⁺)
-              ( ε'⁺)
-              ( symmetric-neighborhood-Metric-Space
-                ( M)
-                ( ε'⁺)
-                ( x k)
-                ( lim)
-                ( is-modulus-limit-modulus-sequence-Metric-Space M x
-                  ( lim)
-                  ( H)
-                  ( ε'⁺)
-                  ( k)
-                  ( n≤k)))
+              ( lim)
               ( is-modulus-limit-modulus-sequence-Metric-Space M x
                 ( lim)
                 ( H)
                 ( ε'⁺)
-                ( m)
-                ( n≤m))))
+                ( k)
+                ( n≤k)))
+            ( is-modulus-limit-modulus-sequence-Metric-Space M x
+              ( lim)
+              ( H)
+              ( ε'⁺)
+              ( m)
+              ( n≤m))))
 ```
 
 ### Correspondence to Cauchy approximations
@@ -214,54 +213,53 @@ module _
       ( x)
       ( map-modulus-modulated-cauchy-sequence-Metric-Space M x ε)
 
-  abstract
-    is-cauchy-approximation-map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
-      is-cauchy-approximation-Metric-Space
-        ( M)
-        ( map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
-    is-cauchy-approximation-map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
-      ε⁺@(ε , _) δ⁺@(δ , _) =
-      let
-        mε = map-modulus-modulated-cauchy-sequence-Metric-Space M x ε⁺
-        mδ = map-modulus-modulated-cauchy-sequence-Metric-Space M x δ⁺
-        xmε = sequence-modulated-cauchy-sequence-Metric-Space M x mε
-        xmδ = sequence-modulated-cauchy-sequence-Metric-Space M x mδ
-      in
-        rec-coproduct
-          ( λ mε≤mδ →
-            monotonic-neighborhood-Metric-Space
+  is-cauchy-approximation-map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
+    is-cauchy-approximation-Metric-Space
+      ( M)
+      ( map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
+  is-cauchy-approximation-map-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
+    ε⁺@(ε , _) δ⁺@(δ , _) =
+    let
+      mε = map-modulus-modulated-cauchy-sequence-Metric-Space M x ε⁺
+      mδ = map-modulus-modulated-cauchy-sequence-Metric-Space M x δ⁺
+      xmε = sequence-modulated-cauchy-sequence-Metric-Space M x mε
+      xmδ = sequence-modulated-cauchy-sequence-Metric-Space M x mδ
+    in
+      rec-coproduct
+        ( λ mε≤mδ →
+          monotonic-neighborhood-Metric-Space
+            ( M)
+            ( xmε)
+            ( xmδ)
+            ( ε⁺)
+            ( ε⁺ +ℚ⁺ δ⁺)
+            ( le-right-add-rational-ℚ⁺ ε δ⁺)
+            ( neighborhood-at-map-modulus-modulated-cauchy-sequence-Metric-Space
               ( M)
-              ( xmε)
-              ( xmδ)
+              ( x)
               ( ε⁺)
-              ( ε⁺ +ℚ⁺ δ⁺)
-              ( le-right-add-rational-ℚ⁺ ε δ⁺)
+              ( mδ)
+              ( mε≤mδ)))
+        ( λ mδ≤mε →
+          monotonic-neighborhood-Metric-Space
+            ( M)
+            ( xmε)
+            ( xmδ)
+            ( δ⁺)
+            ( ε⁺ +ℚ⁺ δ⁺)
+            ( le-left-add-rational-ℚ⁺ δ ε⁺)
+            ( symmetric-neighborhood-Metric-Space
+              ( M)
+              ( δ⁺)
+              ( xmδ)
+              ( xmε)
               ( neighborhood-at-map-modulus-modulated-cauchy-sequence-Metric-Space
                 ( M)
                 ( x)
-                ( ε⁺)
-                ( mδ)
-                ( mε≤mδ)))
-          ( λ mδ≤mε →
-            monotonic-neighborhood-Metric-Space
-              ( M)
-              ( xmε)
-              ( xmδ)
-              ( δ⁺)
-              ( ε⁺ +ℚ⁺ δ⁺)
-              ( le-left-add-rational-ℚ⁺ δ ε⁺)
-              ( symmetric-neighborhood-Metric-Space
-                ( M)
                 ( δ⁺)
-                ( xmδ)
-                ( xmε)
-                ( neighborhood-at-map-modulus-modulated-cauchy-sequence-Metric-Space
-                  ( M)
-                  ( x)
-                  ( δ⁺)
-                  ( mε)
-                  ( mδ≤mε))))
-          ( linear-leq-ℕ mε mδ)
+                ( mε)
+                ( mδ≤mε))))
+        ( linear-leq-ℕ mε mδ)
 
   cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
     cauchy-approximation-Metric-Space M
