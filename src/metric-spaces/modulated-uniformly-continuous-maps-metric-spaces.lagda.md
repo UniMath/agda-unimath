@@ -22,11 +22,14 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuous-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 ```
 
@@ -456,6 +459,22 @@ module _
         is-short-map-is-isometry-Metric-Space B C (f a) (is-iso-fa a))
       ( λ b →
         is-short-map-is-isometry-Metric-Space A C (λ a → f a b) (is-iso-fb b))
+```
+
+### The image of a sequence under a modulated uniformly continuous map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : modulated-ucont-map-Metric-Space X Y)
+  where
+
+  map-modulated-ucont-map-sequence-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-modulated-ucont-map-sequence-Metric-Space =
+    map-sequence (map-modulated-ucont-map-Metric-Space X Y f)
 ```
 
 ## See also

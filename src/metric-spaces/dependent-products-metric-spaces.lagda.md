@@ -15,12 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
@@ -213,57 +208,4 @@ module _
       ( g)
   is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space L ε δ x =
     L x ε δ
-```
-
-### A product of complete metric spaces is complete
-
-```agda
-module _
-  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
-  (Π-complete : (x : A) → is-complete-Metric-Space (P x))
-  where
-
-  limit-cauchy-approximation-Π-is-complete-Metric-Space :
-    cauchy-approximation-Metric-Space (Π-Metric-Space A P) →
-    type-Π-Metric-Space A P
-  limit-cauchy-approximation-Π-is-complete-Metric-Space u x =
-    limit-cauchy-approximation-Complete-Metric-Space
-      ( P x , Π-complete x)
-      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
-
-  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
-    (u : cauchy-approximation-Metric-Space (Π-Metric-Space A P)) →
-    is-limit-cauchy-approximation-Metric-Space
-      ( Π-Metric-Space A P)
-      ( u)
-      ( limit-cauchy-approximation-Π-is-complete-Metric-Space u)
-  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
-    is-limit-limit-cauchy-approximation-Complete-Metric-Space
-      ( P x , Π-complete x)
-      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
-      ( ε)
-      ( δ)
-
-  is-complete-Π-Metric-Space :
-    is-complete-Metric-Space (Π-Metric-Space A P)
-  is-complete-Π-Metric-Space u =
-    ( limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
-      is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u)
-```
-
-### The complete product of complete metric spaces
-
-```agda
-module _
-  {l l1 l2 : Level} (A : UU l) (C : A → Complete-Metric-Space l1 l2)
-  where
-
-  Π-Complete-Metric-Space : Complete-Metric-Space (l ⊔ l1) (l ⊔ l2)
-  pr1 Π-Complete-Metric-Space =
-    Π-Metric-Space A (metric-space-Complete-Metric-Space ∘ C)
-  pr2 Π-Complete-Metric-Space =
-    is-complete-Π-Metric-Space
-      ( A)
-      ( metric-space-Complete-Metric-Space ∘ C)
-      ( is-complete-metric-space-Complete-Metric-Space ∘ C)
 ```

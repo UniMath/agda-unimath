@@ -22,6 +22,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import logic.functoriality-existential-quantification
 
 open import metric-spaces.continuous-maps-metric-spaces
@@ -224,6 +226,22 @@ module _
     uniformly-continuous-map-Metric-Space A B
   uniformly-continuous-map-isometry-Metric-Space =
     tot is-uniformly-continuous-map-is-isometry-Metric-Space
+```
+
+### The image of a sequence under a uniformly continuous map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : uniformly-continuous-map-Metric-Space X Y)
+  where
+
+  map-uniformly-continuous-map-sequence-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-uniformly-continuous-map-sequence-Metric-Space =
+    map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
 ```
 
 ## See also

@@ -270,7 +270,7 @@ module _
           ( cauchy-approximation-modulated-cauchy-sequence-Metric-Space
             ( subspace-Located-Metric-Space X S)
             ( σ ,
-              has-cauchy-modulus-has-limit-modulus-sequence-Metric-Space
+              cauchy-modulus-limit-modulus-sequence-Metric-Space
                 ( metric-space-Located-Metric-Space X)
                 ( pr1 ∘ σ)
                 ( x)

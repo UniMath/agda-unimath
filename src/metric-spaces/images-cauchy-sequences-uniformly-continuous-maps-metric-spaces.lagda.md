@@ -93,7 +93,8 @@ module _
   (u : cauchy-sequence-Metric-Space A)
   where
 
-  map-cauchy-sequence-short-function-Metric-Space : cauchy-sequence-Metric-Space B
+  map-cauchy-sequence-short-function-Metric-Space :
+    cauchy-sequence-Metric-Space B
   map-short-map-cauchy-sequence-Metric-Space =
     map-uniformly-continuous-map-cauchy-sequence-Metric-Space
       ( A)
