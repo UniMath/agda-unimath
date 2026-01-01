@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -357,7 +358,7 @@ module _
       is-modulus-of-uniform-continuity-map-Metric-Space
         ( product-Metric-Space A B)
         ( C)
-        ( ind-Σ f)
+        ( rec-product f)
         ( modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space)
     is-modulus-modulated-ucont-map-product-is-modulated-ucont-binary-map-Metric-Space
       (a , b) ε (a' , b') (Nε'aa' , Nε'bb') =
@@ -393,7 +394,7 @@ module _
   modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space :
     modulated-ucont-map-Metric-Space (product-Metric-Space A B) C
   modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space =
-    ( ind-Σ f ,
+    ( rec-product f ,
       modulus-modulated-ucont-map-product-is-binary-modulated-ucont-map-Metric-Space ,
       is-modulus-modulated-ucont-map-product-is-modulated-ucont-binary-map-Metric-Space)
 ```

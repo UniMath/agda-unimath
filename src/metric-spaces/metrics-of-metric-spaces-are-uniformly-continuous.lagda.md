@@ -13,6 +13,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -99,7 +100,7 @@ module _
       is-modulus-of-uniform-continuity-map-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
-        ( ind-Σ ρ)
+        ( rec-product ρ)
         ( modulus-of-uniform-continuity-metric-of-Metric-Space)
     is-modulus-modulus-of-uniform-continuity-metric-of-Metric-Space
       (x , y) ε (x' , y') (Nε'xx' , Nε'yy') =
@@ -140,7 +141,7 @@ module _
       is-uniformly-continuous-map-Metric-Space
         ( product-Metric-Space M M)
         ( metric-space-ℝ⁰⁺ l3)
-        ( ind-Σ ρ)
+        ( rec-product ρ)
     is-uniformly-continuous-map-metric-of-Metric-Space =
       intro-exists
         ( modulus-of-uniform-continuity-metric-of-Metric-Space)
@@ -151,6 +152,6 @@ module _
       ( product-Metric-Space M M)
       ( metric-space-ℝ⁰⁺ l3)
   uniformly-continuous-map-metric-of-Metric-Space =
-    ( ind-Σ ρ ,
+    ( rec-product ρ ,
       is-uniformly-continuous-map-metric-of-Metric-Space)
 ```

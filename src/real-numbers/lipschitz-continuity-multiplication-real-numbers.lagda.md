@@ -20,6 +20,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -194,7 +195,7 @@ module _
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
-        ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ)
+        ( rec-product mul-inhabited-totally-bounded-subset-ℝ)
     is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -205,7 +206,7 @@ module _
                 ( subspace-inhabited-totally-bounded-subset-ℝ X)
                 ( subspace-inhabited-totally-bounded-subset-ℝ Y))
               ( metric-space-ℝ (l2 ⊔ l5))
-              ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ))
+              ( rec-product mul-inhabited-totally-bounded-subset-ℝ))
       in do
         let
           (mx⁰⁺@(mx , _) , is-max-mx) =
@@ -272,7 +273,7 @@ module _
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
       ( metric-space-ℝ (l2 ⊔ l5))
   lipschitz-mul-inhabited-totally-bounded-subset-ℝ =
-    ( ind-Σ mul-inhabited-totally-bounded-subset-ℝ ,
+    ( rec-product mul-inhabited-totally-bounded-subset-ℝ ,
       is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ)
 ```
 
@@ -292,14 +293,14 @@ module _
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
-        ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y))
+        ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y))
     is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
       is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( product-Metric-Space
           ( subspace-inhabited-totally-bounded-subset-ℝ X)
           ( subspace-inhabited-totally-bounded-subset-ℝ Y))
         ( metric-space-ℝ (l2 ⊔ l5))
-        ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y))
+        ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y))
         ( is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ X Y)
 
   uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ :
@@ -309,7 +310,7 @@ module _
         ( subspace-inhabited-totally-bounded-subset-ℝ Y))
       ( metric-space-ℝ (l2 ⊔ l5))
   uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ =
-    ( ind-Σ (mul-inhabited-totally-bounded-subset-ℝ X Y) ,
+    ( rec-product (mul-inhabited-totally-bounded-subset-ℝ X Y) ,
       is-uniformly-continuous-map-mul-inhabited-totally-bounded-subset-ℝ)
 ```
 
@@ -326,7 +327,7 @@ abstract
     is-pointwise-continuous-map-Metric-Space
       ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
       ( metric-space-ℝ (l1 ⊔ l2))
-      ( ind-Σ mul-ℝ)
+      ( rec-product mul-ℝ)
   is-pointwise-continuous-map-mul-ℝ l1 l2 (x , y) =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -335,7 +336,7 @@ abstract
           ( is-continuous-at-point-prop-map-Metric-Space
             ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
             ( metric-space-ℝ (l1 ⊔ l2))
-            ( ind-Σ mul-ℝ)
+            ( rec-product mul-ℝ)
             ( x , y))
     in do
       (q⁺ , |x|+|y|<q) ←
