@@ -46,7 +46,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-endofunctions-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -234,8 +234,8 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( preserves-limits-sequence-uniformly-continuous-endo-ℝ
-            ( comp-uniformly-continuous-endo-ℝ
+          ( preserves-limits-sequence-uniformly-continuous-endomap-ℝ
+            ( comp-uniformly-continuous-endomap-ℝ
               ( uniformly-continuous-map-right-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))

@@ -31,7 +31,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-endofunctions-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -132,7 +132,8 @@ module _
   short-map-left-max-ℝ =
     (max-ℝ x , is-short-map-left-max-ℝ)
 
-  uniformly-continuous-map-left-max-ℝ : uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-map-left-max-ℝ :
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-map-left-max-ℝ =
     uniformly-continuous-map-short-map-Metric-Space
       ( metric-space-ℝ l2)

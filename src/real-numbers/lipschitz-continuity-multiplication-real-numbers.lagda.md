@@ -52,7 +52,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-endofunctions-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -163,12 +163,12 @@ module _
         ( is-lipschitz-map-left-mul-ℝ l2 c)
 
   uniformly-continuous-map-right-mul-ℝ :
-    uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-map-right-mul-ℝ =
     ( mul-ℝ c , is-uniformly-continuous-map-right-mul-ℝ)
 
   uniformly-continuous-map-left-mul-ℝ :
-    uniformly-continuous-endo-ℝ l2 (l1 ⊔ l2)
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
   uniformly-continuous-map-left-mul-ℝ =
     ( mul-ℝ' c , is-uniformly-continuous-map-left-mul-ℝ)
 ```
@@ -343,7 +343,7 @@ abstract
           ( is-continuous-at-point-prop-map-Metric-Space
             ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
             ( metric-space-ℝ (l1 ⊔ l2))
-            ( rec-product mul-ℝ)
+            ( mul-pair-ℝ)
             ( x , y))
     in do
       (q⁺ , |x|+|y|<q) ←
