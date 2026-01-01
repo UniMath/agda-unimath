@@ -1,4 +1,4 @@
-# The binary maximum of real numbers is a short function
+# The binary maximum of real numbers is a short map
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -40,10 +40,10 @@ open import real-numbers.uniformly-continuous-endomaps-real-numbers
 
 For any `a : ℝ`, the
 [binary maximum](real-numbers.binary-maximum-real-numbers.md) with `a` is a
-[short function](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
-Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
-[metric space of short functions](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
+Moreover, the map `x ↦ max-ℝ x` is a short map from `ℝ` into the
+[metric space of short maps](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
 of `ℝ`.
 
 ## Proof
@@ -102,7 +102,7 @@ module _
         ( preserves-lower-neighborhood-leq-left-max-ℝ z≤y+d)
 ```
 
-### The maximum with a real number is a short function `ℝ → ℝ`
+### The maximum with a real number is a short map `ℝ → ℝ`
 
 ```agda
 module _
@@ -141,7 +141,7 @@ module _
       ( short-map-left-max-ℝ)
 ```
 
-### The binary maximum is a short function from `ℝ` to the metric space of short functions `ℝ → ℝ`
+### The binary maximum is a short map from `ℝ` to the metric space of short maps `ℝ → ℝ`
 
 ```agda
 module _

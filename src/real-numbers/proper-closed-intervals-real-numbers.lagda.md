@@ -158,7 +158,7 @@ clamp-proper-closed-interval-ℝ [a,b] =
   clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
-### The clamp function is a short function
+### The clamp function is a short map
 
 ```agda
 abstract

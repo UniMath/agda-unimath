@@ -59,7 +59,7 @@ The
 of a [real number](real-numbers.dedekind-real-numbers.md) is the
 [binary maximum](real-numbers.binary-maximum-real-numbers.md) of it and its
 [negation](real-numbers.negation-real-numbers.md). The absolute value is a
-[short function](metric-spaces.short-maps-metric-spaces.md) of the
+[short map](metric-spaces.short-maps-metric-spaces.md) of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ```agda
@@ -330,7 +330,7 @@ module _
           ( preserves-leq-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
 ```
 
-### The absolute value is a short function
+### The absolute value is a short map
 
 ```agda
 module _

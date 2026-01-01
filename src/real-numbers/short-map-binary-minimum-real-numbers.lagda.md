@@ -1,4 +1,4 @@
-# The binary minimum of real numbers is a short function
+# The binary minimum of real numbers is a short map
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -29,7 +29,7 @@ open import real-numbers.short-map-binary-maximum-real-numbers
 
 For any `a : ℝ`, the
 [binary minimum](real-numbers.binary-minimum-real-numbers.md) with `a` is a
-[short function](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
 
 ## Proof

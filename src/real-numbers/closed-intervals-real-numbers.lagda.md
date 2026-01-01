@@ -185,7 +185,7 @@ clamp-closed-interval-ℝ ((a , b) , a≤b) x =
     leq-max-leq-leq-ℝ _ _ _ a≤b (leq-left-min-ℝ b x))
 ```
 
-### The clamping function is a short function
+### The clamping function is a short map
 
 ```agda
 abstract
