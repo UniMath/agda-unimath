@@ -165,4 +165,3 @@ module _
 ## See also
 
 - [Bilinear maps on left modules over commutative rings](linear-algebra.bilinear-maps-left-modules-commutative-rings.md)
-- [Bilinear maps on vector spaces](linear-algebra.bilinear-maps-vector-spaces.md)
