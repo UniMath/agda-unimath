@@ -7,18 +7,6 @@ module commutative-algebra.commutative-algebras-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.unital-associative-algebras-commutative-rings
-
-open import commutative-algebra.algebras-commutative-rings
-open import foundation.propositions
-open import ring-theory.rings
-open import foundation.identity-types
-open import foundation.sets
-open import group-theory.abelian-groups
-open import foundation.dependent-pair-types
-open import foundation.subtypes
-open import foundation.universe-levels
 open import commutative-algebra.algebras-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.unital-associative-algebras-commutative-rings
