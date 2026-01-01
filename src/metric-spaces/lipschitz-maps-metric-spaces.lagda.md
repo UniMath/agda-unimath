@@ -220,10 +220,10 @@ module _
   (f : map-Metric-Space A B)
   where
 
-  modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space :
+  modulus-of-uniform-continuity-map-lipschitz-constant-map-Metric-Space :
     lipschitz-constant-map-Metric-Space A B f →
     modulus-of-uniform-continuity-map-Metric-Space A B f
-  modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space
+  modulus-of-uniform-continuity-map-lipschitz-constant-map-Metric-Space
     ( α , L) =
     ( mul-ℚ⁺ (inv-ℚ⁺ α)) ,
     ( λ x d y H →
@@ -239,7 +239,7 @@ module _
     is-uniformly-continuous-map-Metric-Space A B f
   is-uniformly-continuous-map-is-lipschitz-map-Metric-Space =
     map-is-inhabited
-      modulus-of-uniform-continuity-lipschitz-constant-map-Metric-Space
+      modulus-of-uniform-continuity-map-lipschitz-constant-map-Metric-Space
 
 module _
   {l1 l2 l1' l2' : Level}

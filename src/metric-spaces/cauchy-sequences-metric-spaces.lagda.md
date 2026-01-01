@@ -710,7 +710,7 @@ module _
       ( modulus-of-convergence-cauchy-sequence-Metric-Space A u
           (modulus-modulated-ucont-map-Metric-Space A B f ε) ,
         λ m n M≤m M≤n →
-          is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+          is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
             ( A)
             ( B)
             ( f)

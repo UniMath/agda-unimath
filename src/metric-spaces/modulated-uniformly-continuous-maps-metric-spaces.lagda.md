@@ -93,14 +93,14 @@ module _
     modulated-ucont-map-Metric-Space → ℚ⁺ → ℚ⁺
   modulus-modulated-ucont-map-Metric-Space = pr1 ∘ pr2
 
-  is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space :
+  is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space :
     (f : modulated-ucont-map-Metric-Space) →
     is-modulus-of-uniform-continuity-map-Metric-Space
       ( X)
       ( Y)
       ( map-modulated-ucont-map-Metric-Space f)
       ( modulus-modulated-ucont-map-Metric-Space f)
-  is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space =
+  is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space =
     pr2 ∘ pr2
 ```
 
@@ -120,7 +120,7 @@ module _
   is-pointwise-continuous-map-modulated-ucont-map-Metric-Space x =
     intro-exists
       ( modulus-modulated-ucont-map-Metric-Space X Y f)
-      ( is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+      ( is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
         ( X)
         ( Y)
         ( f)
@@ -166,14 +166,14 @@ module _
         ( map-comp-modulated-ucont-map-Metric-Space)
         ( modulus-comp-modulated-ucont-map-Metric-Space)
     is-modulus-comp-modulated-ucont-map-Metric-Space x ε x' Nε'x'' =
-      is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+      is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
         ( Y)
         ( Z)
         ( f)
         ( map-modulated-ucont-map-Metric-Space X Y g x)
         ( ε)
         ( map-modulated-ucont-map-Metric-Space X Y g x')
-        ( is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+        ( is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
           ( X)
           ( Y)
           ( g)
@@ -289,7 +289,7 @@ module _
         ( modulus-product-modulated-ucont-map-Metric-Space)
     is-modulus-product-modulated-ucont-map-Metric-Space
       (a , c) ε (a' , c') (Nε'aa' , Nε'cc') =
-      ( is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+      ( is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
           ( A)
           ( B)
           ( f)
@@ -301,7 +301,7 @@ module _
               ( modulus-modulated-ucont-map-Metric-Space A B f ε)
               ( modulus-modulated-ucont-map-Metric-Space C D g ε))
             ( Nε'aa')) ,
-        is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+        is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
           ( C)
           ( D)
           ( g)

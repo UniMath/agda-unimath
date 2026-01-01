@@ -286,7 +286,7 @@ module _
     modulated-ucont-map-limit-modulus-sequence-Metric-Space (m , is-mod-m) =
       ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
         λ ε n N≤n →
-        is-modulus-of-uniform-continuity-modulus-modulated-ucont-map-Metric-Space
+        is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
           ( A)
           ( B)
           ( f)
