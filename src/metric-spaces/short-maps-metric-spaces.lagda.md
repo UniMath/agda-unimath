@@ -30,6 +30,7 @@ open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.poset-of-rational-neighborhood-relations
 open import metric-spaces.preimages-rational-neighborhood-relations
+open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
@@ -342,6 +343,22 @@ module _
     emb-short-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
+```
+
+### The image of a sequence under a short map between metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : short-map-Metric-Space X Y)
+  where
+
+  map-short-map-sequence-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-short-map-sequence-Metric-Space =
+    map-sequence (map-short-map-Metric-Space X Y f)
 ```
 
 ## See also

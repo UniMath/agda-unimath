@@ -166,7 +166,7 @@ module _
                           ( n)
                           ( n +ℕ k)
                           ( leq-add-ℕ n k)))))))
-        is-convergent-is-cauchy-sequence-partial-sum-series-ℝ
+        is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ
           σ
           ( λ ε →
             ( μ ε ,
