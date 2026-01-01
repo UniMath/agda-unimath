@@ -415,8 +415,8 @@ module _
 
 ## See also
 
-- [Real Banach spaces](linear-algebra.real-banach-spaces.md), normed real vector
-  spaces for which the induced metric space is
+- [Real Banach spaces](functional-analysis.real-banach-spaces.md), normed real
+  vector spaces for which the induced metric space is
   [complete](metric-spaces.complete-metric-spaces.md)
 
 ## External links
