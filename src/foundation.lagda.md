@@ -103,7 +103,6 @@ open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
 open import foundation.coproducts-pullbacks public
-open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
 open import foundation.decidable-dependent-function-types public
@@ -184,6 +183,7 @@ open import foundation.equivalences-cospans public
 open import foundation.equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-slice public
 open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
@@ -318,10 +318,12 @@ open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-coalgebras-maybe public
+open import foundation.morphisms-coslice public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-double-arrows public
 open import foundation.morphisms-inverse-sequential-diagrams public
+open import foundation.morphisms-slice public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public
 open import foundation.morphisms-spans-families-of-types public
