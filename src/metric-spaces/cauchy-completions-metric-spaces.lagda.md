@@ -7,6 +7,7 @@ module metric-spaces.cauchy-completions-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.propositions
@@ -22,6 +23,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
+open import metric-spaces.isometries-extensions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limit-points-cauchy-precompletions-metric-spaces
@@ -145,7 +147,72 @@ module _
 
 ## Properties
 
-### The isometries between a Cauchy completion and the Cauchy precompletion of a metric space
+### A Cauchy completion uniquely extends the Cauchy precompletion
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (C : cauchy-completion-Metric-Space l3 l4 M)
+  where
+
+  is-contr-isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space :
+    is-contr
+      ( isometry-extension-Metric-Space
+        ( M)
+        ( extension-cauchy-precompletion-Metric-Space M)
+        ( extension-cauchy-completion-Metric-Space M C))
+  is-contr-isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space
+    =
+    is-contr-isometry-extension-cauchy-precompletion-precomplete-extension-Metric-Space
+      ( M)
+      ( precomplete-extension-cauchy-completion-Metric-Space M C)
+
+  isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space :
+    isometry-extension-Metric-Space
+      ( M)
+      ( extension-cauchy-precompletion-Metric-Space M)
+      ( extension-cauchy-completion-Metric-Space M C)
+  isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space =
+    center
+      is-contr-isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space
+
+  isometry-cauchy-completion-cauchy-precompletion-Metric-Space :
+    isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-cauchy-completion-Metric-Space M C)
+  isometry-cauchy-completion-cauchy-precompletion-Metric-Space =
+    isometry-metric-space-isometry-extension-Metric-Space
+      ( M)
+      ( extension-cauchy-precompletion-Metric-Space M)
+      ( extension-cauchy-completion-Metric-Space M C)
+      ( isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space)
+
+  abstract
+    coh-triangle-isometry-cauchy-completion-cauchy-precompletion-Metric-Space :
+      coherence-triangle-isometry-extension-Metric-Space
+        ( M)
+        ( extension-cauchy-precompletion-Metric-Space M)
+        ( extension-cauchy-completion-Metric-Space M C)
+        ( isometry-cauchy-completion-cauchy-precompletion-Metric-Space)
+    coh-triangle-isometry-cauchy-completion-cauchy-precompletion-Metric-Space =
+      coh-isometry-extension-Metric-Space
+        ( M)
+        ( extension-cauchy-precompletion-Metric-Space M)
+        ( extension-cauchy-completion-Metric-Space M C)
+        ( isometry-extension-cauchy-completion-cauchy-precompletion-Metric-Space)
+
+  map-cauchy-completion-cauchy-precompletion-Metric-Space :
+    type-cauchy-precompletion-Metric-Space M →
+    type-metric-space-cauchy-completion-Metric-Space M C
+  map-cauchy-completion-cauchy-precompletion-Metric-Space =
+    map-isometry-Metric-Space
+      ( cauchy-precompletion-Metric-Space M)
+      ( metric-space-cauchy-completion-Metric-Space M C)
+      ( isometry-cauchy-completion-cauchy-precompletion-Metric-Space)
+```
+
+### The Cauchy precompletion extends all Cauchy completions
 
 ```agda
 module _
@@ -172,22 +239,4 @@ module _
       ( metric-space-cauchy-completion-Metric-Space M C)
       ( cauchy-precompletion-Metric-Space M)
       ( isometry-cauchy-precompletion-cauchy-completion-Metric-Space)
-
-  isometry-cauchy-completion-cauchy-precompletion-Metric-Space :
-    isometry-Metric-Space
-      ( cauchy-precompletion-Metric-Space M)
-      ( metric-space-cauchy-completion-Metric-Space M C)
-  isometry-cauchy-completion-cauchy-precompletion-Metric-Space =
-    isometry-cauchy-precompletion-precomplete-extension-Metric-Space
-      ( M)
-      ( precomplete-extension-cauchy-completion-Metric-Space M C)
-
-  map-cauchy-completion-cauchy-precompletion-Metric-Space :
-    type-cauchy-precompletion-Metric-Space M →
-    type-metric-space-cauchy-completion-Metric-Space M C
-  map-cauchy-completion-cauchy-precompletion-Metric-Space =
-    map-isometry-Metric-Space
-      ( cauchy-precompletion-Metric-Space M)
-      ( metric-space-cauchy-completion-Metric-Space M C)
-      ( isometry-cauchy-completion-cauchy-precompletion-Metric-Space)
 ```
