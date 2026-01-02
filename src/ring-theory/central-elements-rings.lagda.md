@@ -31,8 +31,8 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  is-central-element-ring-Prop : type-Ring R → Prop l
-  is-central-element-ring-Prop =
+  is-central-element-prop-Ring : type-Ring R → Prop l
+  is-central-element-prop-Ring =
     is-central-element-semiring-Prop (semiring-Ring R)
 
   is-central-element-Ring : type-Ring R → UU l

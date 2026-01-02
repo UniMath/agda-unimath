@@ -47,16 +47,16 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
@@ -80,7 +80,7 @@ Any pseudometric space `M` has an
 quotient; if `M` is a metric space, this is an
 [isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
-Any [short map](metric-spaces.short-functions-pseudometric-spaces.md) (resp.
+Any [short map](metric-spaces.short-maps-pseudometric-spaces.md) (resp.
 isometry) from a pseudometric space to a metric space factors uniquely as a
 short map (resp. isometry) through the metric quotient of its domain. This is
 the
@@ -501,11 +501,11 @@ module _
   where
 
   short-map-metric-quotient-Pseudometric-Space :
-    short-function-Pseudometric-Space
+    short-map-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
   short-map-metric-quotient-Pseudometric-Space =
-    short-isometry-Pseudometric-Space
+    short-map-isometry-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
       ( isometry-metric-quotient-Pseudometric-Space M)
@@ -617,47 +617,47 @@ module _
           ( metric-quotient-Pseudometric-Space M)))
 ```
 
-### The induced short function from the quotient metric space into a metric space
+### The induced short map from the quotient metric space into a metric space
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2)
   (B : Metric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
+  (f : short-map-Pseudometric-Space A (pseudometric-Metric-Space B))
   where
 
-  map-short-function-metric-quotient-Pseudometric-space :
-    type-function-Metric-Space
+  map-short-map-metric-quotient-Pseudometric-space :
+    map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
-  map-short-function-metric-quotient-Pseudometric-space =
+  map-short-map-metric-quotient-Pseudometric-space =
     inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space A)
       ( set-Metric-Space B)
-      ( reflecting-map-short-function-metric-space-Pseudometric-Space A B f)
+      ( reflecting-map-short-map-metric-space-Pseudometric-Space A B f)
 
-  htpy-map-short-function-metric-quotient-Pseudometric-Space :
-    ( ( map-short-function-metric-quotient-Pseudometric-space) ∘
+  htpy-map-short-map-metric-quotient-Pseudometric-Space :
+    ( ( map-short-map-metric-quotient-Pseudometric-space) ∘
       ( map-metric-quotient-Pseudometric-Space A)) ~
-    ( map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f)
-  htpy-map-short-function-metric-quotient-Pseudometric-Space =
+    ( map-short-map-Pseudometric-Space A (pseudometric-Metric-Space B) f)
+  htpy-map-short-map-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space A)
       ( set-Metric-Space B)
-      ( reflecting-map-short-function-metric-space-Pseudometric-Space A B f)
+      ( reflecting-map-short-map-metric-space-Pseudometric-Space A B f)
 
-  compute-map-short-function-metric-quotient-Pseudometric-Space :
+  compute-map-short-map-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space A) →
     (x : type-Pseudometric-Space A) →
     is-in-class-metric-quotient-Pseudometric-Space A X x →
-    map-short-function-metric-quotient-Pseudometric-space X ＝
-    map-short-function-Pseudometric-Space A (pseudometric-Metric-Space B) f x
-  compute-map-short-function-metric-quotient-Pseudometric-Space X x x∈X =
+    map-short-map-metric-quotient-Pseudometric-space X ＝
+    map-short-map-Pseudometric-Space A (pseudometric-Metric-Space B) f x
+  compute-map-short-map-metric-quotient-Pseudometric-Space X x x∈X =
     tr
       ( λ Y →
-        map-short-function-metric-quotient-Pseudometric-space Y ＝
-        map-short-function-Pseudometric-Space
+        map-short-map-metric-quotient-Pseudometric-space Y ＝
+        map-short-map-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f)
@@ -666,15 +666,15 @@ module _
         ( equivalence-relation-sim-Pseudometric-Space A)
         ( X)
         ( x∈X))
-      ( htpy-map-short-function-metric-quotient-Pseudometric-Space x)
+      ( htpy-map-short-map-metric-quotient-Pseudometric-Space x)
 
   abstract
-    is-short-map-short-function-metric-quotient-Pseudometric-Space :
-      is-short-function-Metric-Space
+    is-short-map-short-map-metric-quotient-Pseudometric-Space :
+      is-short-map-Metric-Space
         ( metric-quotient-Pseudometric-Space A)
         ( B)
-        ( map-short-function-metric-quotient-Pseudometric-space)
-    is-short-map-short-function-metric-quotient-Pseudometric-Space
+        ( map-short-map-metric-quotient-Pseudometric-space)
+    is-short-map-short-map-metric-quotient-Pseudometric-Space
       d X Y N⟨X,Y⟩ =
       let
         open
@@ -682,8 +682,8 @@ module _
             ( neighborhood-prop-Metric-Space
               ( B)
               ( d)
-              ( map-short-function-metric-quotient-Pseudometric-space X)
-              ( map-short-function-metric-quotient-Pseudometric-space Y))
+              ( map-short-map-metric-quotient-Pseudometric-space X)
+              ( map-short-map-metric-quotient-Pseudometric-space Y))
         in do
           ( x , x∈X) ←
             is-inhabited-subtype-set-quotient
@@ -697,16 +697,16 @@ module _
           binary-tr
             ( neighborhood-Metric-Space B d)
             ( inv
-              ( compute-map-short-function-metric-quotient-Pseudometric-Space
+              ( compute-map-short-map-metric-quotient-Pseudometric-Space
                 ( X)
                 ( x)
                 ( x∈X)))
             ( inv
-              ( compute-map-short-function-metric-quotient-Pseudometric-Space
+              ( compute-map-short-map-metric-quotient-Pseudometric-Space
                 ( Y)
                 ( y)
                 ( y∈Y)))
-            ( is-short-map-short-function-Pseudometric-Space
+            ( is-short-map-short-map-Pseudometric-Space
               ( A)
               ( pseudometric-Metric-Space B)
               ( f)
@@ -715,13 +715,13 @@ module _
               ( y)
               ( N⟨X,Y⟩ (x , x∈X) (y , y∈Y)))
 
-  short-map-short-function-metric-quotient-Pseudometric-Space :
-    short-function-Metric-Space
+  short-map-short-map-metric-quotient-Pseudometric-Space :
+    short-map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
-  short-map-short-function-metric-quotient-Pseudometric-Space =
-    ( map-short-function-metric-quotient-Pseudometric-space ,
-      is-short-map-short-function-metric-quotient-Pseudometric-Space)
+  short-map-short-map-metric-quotient-Pseudometric-Space =
+    ( map-short-map-metric-quotient-Pseudometric-space ,
+      is-short-map-short-map-metric-quotient-Pseudometric-Space)
 ```
 
 ### Induced isometry from the quotient metric space into a metric space
@@ -735,14 +735,14 @@ module _
   where
 
   map-isometry-metric-quotient-Pseudometric-Space :
-    type-function-Metric-Space
+    map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
   map-isometry-metric-quotient-Pseudometric-Space =
-    map-short-function-metric-quotient-Pseudometric-space
+    map-short-map-metric-quotient-Pseudometric-space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -752,10 +752,10 @@ module _
       ( map-metric-quotient-Pseudometric-Space A)) ~
     ( map-isometry-Pseudometric-Space A (pseudometric-Metric-Space B) f)
   htpy-map-isometry-metric-quotient-Pseudometric-Space =
-    htpy-map-short-function-metric-quotient-Pseudometric-Space
+    htpy-map-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -771,10 +771,10 @@ module _
       ( f)
       ( x)
   compute-map-isometry-metric-quotient-Pseudometric-Space =
-    compute-map-short-function-metric-quotient-Pseudometric-Space
+    compute-map-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space
+      ( short-map-isometry-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f))
@@ -794,10 +794,10 @@ module _
         ( map-isometry-metric-quotient-Pseudometric-Space x)
         ( map-isometry-metric-quotient-Pseudometric-Space y)
     preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space =
-      is-short-map-short-function-metric-quotient-Pseudometric-Space
+      is-short-map-short-map-metric-quotient-Pseudometric-Space
         ( A)
         ( B)
-        ( short-isometry-Pseudometric-Space
+        ( short-map-isometry-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f))

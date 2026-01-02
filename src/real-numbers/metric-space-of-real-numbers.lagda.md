@@ -404,12 +404,12 @@ abstract
 opaque
   unfolding neighborhood-ℝ real-ℚ
 
-  is-isometry-metric-space-real-ℚ :
+  is-isometry-real-ℚ :
     is-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( real-ℚ)
-  is-isometry-metric-space-real-ℚ d x y =
+  is-isometry-real-ℚ d x y =
     pair
       ( map-product
         ( le-le-add-positive-leq-add-positive-ℚ x y d)
@@ -418,12 +418,12 @@ opaque
         ( leq-add-positive-le-le-add-positive-ℚ x y d)
         ( leq-add-positive-le-le-add-positive-ℚ y x d))
 
-isometry-metric-space-real-ℚ :
+isometry-real-ℚ :
   isometry-Metric-Space
     ( metric-space-ℚ)
     ( metric-space-ℝ lzero)
-isometry-metric-space-real-ℚ =
-  ( real-ℚ , is-isometry-metric-space-real-ℚ)
+isometry-real-ℚ =
+  ( real-ℚ , is-isometry-real-ℚ)
 ```
 
 ### Raising real numbers is an isometry
@@ -434,12 +434,12 @@ module _
   where
 
   abstract
-    is-isometry-metric-space-raise-ℝ :
+    is-isometry-raise-ℝ :
       is-isometry-Metric-Space
         ( metric-space-ℝ l0)
         ( metric-space-ℝ (l0 ⊔ l))
         ( raise-ℝ l)
-    pr1 (is-isometry-metric-space-raise-ℝ d x y) =
+    pr1 (is-isometry-raise-ℝ d x y) =
       preserves-neighborhood-sim-ℝ
         ( d)
         ( x)
@@ -448,7 +448,7 @@ module _
         ( raise-ℝ l y)
         ( sim-raise-ℝ l x)
         ( sim-raise-ℝ l y)
-    pr2 (is-isometry-metric-space-raise-ℝ d x y) =
+    pr2 (is-isometry-raise-ℝ d x y) =
       preserves-neighborhood-sim-ℝ
         ( d)
         ( raise-ℝ l x)
@@ -458,12 +458,12 @@ module _
         ( symmetric-sim-ℝ (sim-raise-ℝ l x))
         ( symmetric-sim-ℝ (sim-raise-ℝ l y))
 
-  isometry-metric-space-raise-ℝ :
+  isometry-raise-ℝ :
     isometry-Metric-Space
       ( metric-space-ℝ l0)
       ( metric-space-ℝ (l0 ⊔ l))
-  isometry-metric-space-raise-ℝ =
-    ( raise-ℝ l , is-isometry-metric-space-raise-ℝ)
+  isometry-raise-ℝ =
+    ( raise-ℝ l , is-isometry-raise-ℝ)
 ```
 
 ### Raising rational numbers to real numbers is an isometry
@@ -473,29 +473,29 @@ module _
   (l : Level)
   where
 
-  isometry-metric-space-raise-real-ℚ :
+  isometry-raise-real-ℚ :
     isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ l)
-  isometry-metric-space-raise-real-ℚ =
+  isometry-raise-real-ℚ =
     comp-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( metric-space-ℝ l)
-      ( isometry-metric-space-raise-ℝ l)
-      ( isometry-metric-space-real-ℚ)
+      ( isometry-raise-ℝ l)
+      ( isometry-real-ℚ)
 
   abstract
-    is-isometry-metric-space-raise-real-ℚ :
+    is-isometry-raise-real-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ l)
         ( raise-real-ℚ l)
-    is-isometry-metric-space-raise-real-ℚ =
+    is-isometry-raise-real-ℚ =
       is-isometry-map-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ l)
-        ( isometry-metric-space-raise-real-ℚ)
+        ( isometry-raise-real-ℚ)
 ```
 
 ## References
