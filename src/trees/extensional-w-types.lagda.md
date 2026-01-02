@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-slice
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -21,7 +22,6 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.morphisms-slice
-open import foundation.equivalences-slice
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.torsorial-type-families
