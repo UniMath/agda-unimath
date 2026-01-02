@@ -12,10 +12,10 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
 open import foundation.retractions
 open import foundation.sections
-open import foundation.slice
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications

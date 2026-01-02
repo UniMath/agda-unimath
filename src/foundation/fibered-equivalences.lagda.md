@@ -12,8 +12,8 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.logical-equivalences
+open import foundation.equivalences-slice
 open import foundation.pullbacks
-open import foundation.slice
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

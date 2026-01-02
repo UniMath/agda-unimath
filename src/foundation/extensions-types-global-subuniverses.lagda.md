@@ -37,8 +37,8 @@ open import foundation.universe-levels
 Consider a type `X`. An
 {{#concept "extension" Disambiguation="type in global subuniverse" Agda=extension-type-global-subuniverse}}
 of `X` in a [global subuniverse](foundation.global-subuniverses.md) `𝒫` is an
-object in the [coslice](foundation.coslice.md) under `X` in `𝒫`, i.e., it
-consists of a type `Y` in `𝒫` and a map `f : X → Y`.
+object in the coslice under `X` in `𝒫`, i.e., it consists of a type `Y` in `𝒫`
+and a map `f : X → Y`.
 
 In the above definition of extensions of types in a global subuniverse our aim
 is to capture the most general concept of what it means to be an extension of a

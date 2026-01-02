@@ -10,8 +10,8 @@ open import foundation-core.retractions public
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.coslice
 open import foundation.dependent-pair-types
+open import foundation.morphisms-coslice
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

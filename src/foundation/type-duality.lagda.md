@@ -10,6 +10,7 @@ module foundation.type-duality where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-slice
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
@@ -349,7 +350,7 @@ is-section-Pr1 B = eq-equiv-fam (equiv-fiber-pr1 B)
 is-retraction-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fiber {l1 ⊔ l2} A) ~ id
 is-retraction-Pr1 {A = A} (X , f) =
-  eq-equiv-slice
+  eq-equiv-Slice
     ( Pr1 A (Fiber A (X , f)))
     ( X , f)
     ( equiv-total-fiber f , triangle-map-equiv-total-fiber f)
