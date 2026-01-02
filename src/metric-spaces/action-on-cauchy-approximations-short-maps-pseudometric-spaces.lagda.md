@@ -16,14 +16,14 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
 
 ## Idea
 
-[Short maps](metric-spaces.short-functions-pseudometric-spaces.md) between
+[Short maps](metric-spaces.short-maps-pseudometric-spaces.md) between
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
 [cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 and induce a short map between the
@@ -37,16 +37,16 @@ and induce a short map between the
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A B)
+  (f : short-map-Pseudometric-Space A B)
   where
 
-  map-cauchy-approximation-short-function-Pseudometric-Space :
+  map-cauchy-approximation-short-map-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space A →
     cauchy-approximation-Pseudometric-Space B
-  map-cauchy-approximation-short-function-Pseudometric-Space (u , H) =
-    ( map-short-function-Pseudometric-Space A B f ∘ u ,
+  map-cauchy-approximation-short-map-Pseudometric-Space (u , H) =
+    ( map-short-map-Pseudometric-Space A B f ∘ u ,
       λ ε δ →
-        is-short-map-short-function-Pseudometric-Space
+        is-short-map-short-map-Pseudometric-Space
           ( A)
           ( B)
           ( f)
@@ -64,28 +64,28 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A B)
+  (f : short-map-Pseudometric-Space A B)
   where
 
   abstract
-    preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space :
-      is-short-function-Pseudometric-Space
+    preserves-neighborhoods-map-cauchy-approximation-short-map-Pseudometric-Space :
+      is-short-map-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space A)
         ( cauchy-pseudocompletion-Pseudometric-Space B)
-        ( map-cauchy-approximation-short-function-Pseudometric-Space A B f)
-    preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space
+        ( map-cauchy-approximation-short-map-Pseudometric-Space A B f)
+    preserves-neighborhoods-map-cauchy-approximation-short-map-Pseudometric-Space
       d x y Nxy α β =
-      is-short-map-short-function-Pseudometric-Space A B f
+      is-short-map-short-map-Pseudometric-Space A B f
         ( α +ℚ⁺ β +ℚ⁺ d)
         ( map-cauchy-approximation-Pseudometric-Space A x α)
         ( map-cauchy-approximation-Pseudometric-Space A y β)
         ( Nxy α β)
 
-  short-map-cauchy-approximation-short-function-Pseudometric-Space :
-    short-function-Pseudometric-Space
+  short-map-cauchy-approximation-short-map-Pseudometric-Space :
+    short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space A)
       ( cauchy-pseudocompletion-Pseudometric-Space B)
-  short-map-cauchy-approximation-short-function-Pseudometric-Space =
-    ( map-cauchy-approximation-short-function-Pseudometric-Space A B f ,
-      preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space)
+  short-map-cauchy-approximation-short-map-Pseudometric-Space =
+    ( map-cauchy-approximation-short-map-Pseudometric-Space A B f ,
+      preserves-neighborhoods-map-cauchy-approximation-short-map-Pseudometric-Space)
 ```
