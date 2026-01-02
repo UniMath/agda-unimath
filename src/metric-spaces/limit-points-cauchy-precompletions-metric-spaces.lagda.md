@@ -48,6 +48,7 @@ open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.functions-pseudometric-spaces
+open import metric-spaces.isometries-extensions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limit-points-extensions-metric-spaces
@@ -208,6 +209,49 @@ module _
 ```
 
 ## Properties
+
+### Images are limit points
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Metric-Space l1 l2)
+  (U : extension-Metric-Space l3 l4 M)
+  where
+
+  is-limit-map-cauchy-precompletion-map-extension-Metric-Space :
+    ( x : type-Metric-Space M) →
+    is-limit-cauchy-precompletion-extension-Metric-Space
+      ( M)
+      ( U)
+      ( map-metric-space-extension-Metric-Space M U x)
+      ( map-isometry-cauchy-precompletion-Metric-Space M x)
+  is-limit-map-cauchy-precompletion-map-extension-Metric-Space x (y , y∈[x]) =
+    has-same-limit-map-cauchy-sim-pseudocompletion-extension-Metric-Space
+      ( M)
+      ( U)
+      ( map-metric-space-extension-Metric-Space M U x)
+      ( map-cauchy-pseudocompletion-Metric-Space M x)
+      ( y)
+      ( sim-is-in-class-map-metric-quotient-Pseudometric-Space
+        ( cauchy-pseudocompletion-Metric-Space M)
+        ( map-cauchy-pseudocompletion-Metric-Space M x)
+        ( y)
+        ( y∈[x]))
+      ( is-limit-const-cauchy-approximation-Metric-Space
+        ( metric-space-extension-Metric-Space M U)
+        ( map-metric-space-extension-Metric-Space M U x))
+
+  is-limit-point-map-metric-space-extension-Metric-Space :
+    (x : type-Metric-Space M) →
+    is-limit-cauchy-precompletion-point-extension-Metric-Space
+      ( M)
+      ( U)
+      ( map-metric-space-extension-Metric-Space M U x)
+  is-limit-point-map-metric-space-extension-Metric-Space x =
+    ( map-isometry-cauchy-precompletion-Metric-Space M x ,
+      is-limit-map-cauchy-precompletion-map-extension-Metric-Space x)
+```
 
 ### Limit points are limit points of elements of the Cauchy precompletion
 
@@ -637,6 +681,48 @@ module _
       ( M)
       ( U)
       ( dense-U)
+
+  lemma-coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space :
+    (x : type-Metric-Space M) →
+    is-limit-cauchy-precompletion-point-is-cauchy-dense-extension-Metric-Space
+      ( M)
+      ( U)
+      ( dense-U)
+      ( map-metric-space-extension-Metric-Space M U x) ＝
+    is-limit-point-map-metric-space-extension-Metric-Space
+      ( M)
+      ( U)
+      ( x)
+  lemma-coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
+    x =
+    eq-is-prop
+      ( is-prop-is-limit-cauchy-precompletion-point-extension-Metric-Space
+        ( M)
+        ( U)
+        ( map-metric-space-extension-Metric-Space M U x))
+
+  coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space :
+    coherence-triangle-isometry-extension-Metric-Space
+      ( M)
+      ( U)
+      ( extension-cauchy-precompletion-Metric-Space M)
+      ( isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space)
+  coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
+    =
+    ap pr1 ∘
+    lemma-coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
+
+  isometry-extension-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space :
+    isometry-extension-Metric-Space
+      ( M)
+      ( U)
+      ( extension-cauchy-precompletion-Metric-Space M)
+  pr1
+    isometry-extension-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space =
+    isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
+  pr2
+    isometry-extension-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space =
+    coh-triangle-isometry-cauchy-precompletion-is-cauchy-dense-extension-Metric-Space
 ```
 
 #### The extension from a Cauchy-dense extension into the Cauchy precompletion

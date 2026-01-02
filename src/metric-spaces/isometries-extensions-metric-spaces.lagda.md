@@ -291,3 +291,23 @@ module _
         ( metric-space-extension-Metric-Space M V)
         ( f~g))
 ```
+
+### Equal isometries are homotopic
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (M : Metric-Space l1 l2)
+  (U : extension-Metric-Space l3 l4 M)
+  (V : extension-Metric-Space l5 l6 M)
+  (f g : isometry-extension-Metric-Space M U V)
+  where abstract
+
+  htpy-eq-isometry-extension-Metric-Space :
+    f ＝ g → htpy-isometry-extension-Metric-Space M U V f g
+  htpy-eq-isometry-extension-Metric-Space f＝g =
+    htpy-eq-map-isometry-Metric-Space
+      ( metric-space-extension-Metric-Space M U)
+      ( metric-space-extension-Metric-Space M V)
+      ( ap pr1 f＝g)
+```

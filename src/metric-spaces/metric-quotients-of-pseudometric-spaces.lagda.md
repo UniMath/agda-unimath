@@ -397,6 +397,17 @@ module _
       ( equivalence-relation-sim-Pseudometric-Space M)
       ( X)
       ( x∈X)
+
+  sim-is-in-class-map-metric-quotient-Pseudometric-Space :
+    (x y : type-Pseudometric-Space M) →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( M)
+      ( map-metric-quotient-Pseudometric-Space x)
+      ( y) →
+    sim-Pseudometric-Space M x y
+  sim-is-in-class-map-metric-quotient-Pseudometric-Space =
+    sim-is-in-equivalence-class-quotient-map-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space M)
 ```
 
 ### The mapping from a pseudometric space its quotient metric space is an isometry
