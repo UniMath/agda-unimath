@@ -17,6 +17,7 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.extensions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 ```
 
@@ -51,24 +52,25 @@ module _
       ( pseudometric-space-extension-Pseudometric-Space M E)
       ( isometry-pseudometric-space-extension-Pseudometric-Space M E)
 
-  map-cauchy-approximation-extension-Pseudometric-Space :
-    cauchy-approximation-Pseudometric-Space M →
-    cauchy-approximation-Pseudometric-Space
-      ( pseudometric-space-extension-Pseudometric-Space M E)
-  map-cauchy-approximation-extension-Pseudometric-Space =
+  map-cauchy-pseudcompletion-extension-Pseudometric-Space :
+    map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space M)
+      ( cauchy-pseudocompletion-Pseudometric-Space
+        ( pseudometric-space-extension-Pseudometric-Space M E))
+  map-cauchy-pseudcompletion-extension-Pseudometric-Space =
     map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-space-extension-Pseudometric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Pseudometric-Space)
 
-  is-isometry-map-cauchy-approximation-extension-Pseudometric-Space :
+  is-isometry-map-cauchy-pseudcompletion-extension-Pseudometric-Space :
     is-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-space-extension-Pseudometric-Space M E))
-      ( map-cauchy-approximation-extension-Pseudometric-Space)
-  is-isometry-map-cauchy-approximation-extension-Pseudometric-Space =
+      ( map-cauchy-pseudcompletion-extension-Pseudometric-Space)
+  is-isometry-map-cauchy-pseudcompletion-extension-Pseudometric-Space =
     is-isometry-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Pseudometric-Space
@@ -89,7 +91,7 @@ module _
 
 ## Properties
 
-### The action of metric extensions on Cauchy approximations is natural w.r.t. Cauchy pseudocompletions
+### The action of pseudometric extensions on Cauchy approximations is natural w.r.t. Cauchy pseudocompletions
 
 ```agda
 module _
@@ -98,13 +100,13 @@ module _
   (E : extension-Pseudometric-Space l3 l4 M)
   where
 
-  htpy-map-cauchy-approximation-extension-Pseudometric-Space :
-    ( map-cauchy-approximation-extension-Pseudometric-Space M E ∘
+  htpy-map-cauchy-pseudcompletion-extension-Pseudometric-Space :
+    ( map-cauchy-pseudcompletion-extension-Pseudometric-Space M E ∘
       map-cauchy-pseudocompletion-Pseudometric-Space M) ~
     ( ( map-cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-space-extension-Pseudometric-Space M E)) ∘
       ( map-pseudometric-space-extension-Pseudometric-Space M E))
-  htpy-map-cauchy-approximation-extension-Pseudometric-Space x =
+  htpy-map-cauchy-pseudcompletion-extension-Pseudometric-Space x =
     eq-htpy-cauchy-approximation-Pseudometric-Space
       ( pseudometric-space-extension-Pseudometric-Space M E)
       ( refl-htpy)
