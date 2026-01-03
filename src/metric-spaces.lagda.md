@@ -63,6 +63,7 @@ module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-extensions-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
