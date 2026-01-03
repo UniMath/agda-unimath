@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 ```
 
@@ -55,21 +56,20 @@ module _
       ( pseudometric-space-extension-Pseudometric-Space)
   isometry-pseudometric-space-extension-Pseudometric-Space = pr2 E
 
-  map-isometry-pseudometric-space-extension-Pseudometric-Space :
-    type-Pseudometric-Space P →
-    type-Pseudometric-Space pseudometric-space-extension-Pseudometric-Space
-  map-isometry-pseudometric-space-extension-Pseudometric-Space =
+  map-pseudometric-space-extension-Pseudometric-Space :
+    map-Pseudometric-Space P pseudometric-space-extension-Pseudometric-Space
+  map-pseudometric-space-extension-Pseudometric-Space =
     map-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-extension-Pseudometric-Space)
       ( isometry-pseudometric-space-extension-Pseudometric-Space)
 
-  is-isometry-map-extension-Pseudometric-Space :
+  is-isometry-map-pseudometric-space-extension-Pseudometric-Space :
     is-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-extension-Pseudometric-Space)
-      ( map-isometry-pseudometric-space-extension-Pseudometric-Space)
-  is-isometry-map-extension-Pseudometric-Space =
+      ( map-pseudometric-space-extension-Pseudometric-Space)
+  is-isometry-map-pseudometric-space-extension-Pseudometric-Space =
     is-isometry-map-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-space-extension-Pseudometric-Space)

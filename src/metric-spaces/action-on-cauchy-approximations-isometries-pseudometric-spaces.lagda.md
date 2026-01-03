@@ -20,7 +20,7 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
@@ -48,10 +48,10 @@ module _
     cauchy-approximation-Pseudometric-Space A →
     cauchy-approximation-Pseudometric-Space B
   map-cauchy-approximation-isometry-Pseudometric-Space =
-    map-cauchy-approximation-short-function-Pseudometric-Space
+    map-cauchy-approximation-short-map-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space A B f)
+      ( short-map-isometry-Pseudometric-Space A B f)
 ```
 
 ## Properties
@@ -79,10 +79,10 @@ module _
       ( map-cauchy-approximation-isometry-Pseudometric-Space A B f x)
       ( map-cauchy-approximation-isometry-Pseudometric-Space A B f y)
   preserves-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space =
-    preserves-neighborhoods-map-cauchy-approximation-short-function-Pseudometric-Space
+    preserves-neighborhoods-map-cauchy-approximation-short-map-Pseudometric-Space
       ( A)
       ( B)
-      ( short-isometry-Pseudometric-Space A B f)
+      ( short-map-isometry-Pseudometric-Space A B f)
 
   reflects-neighborhoods-map-cauchy-approximation-isometry-Pseudometric-Space :
     (d : ℚ⁺) →

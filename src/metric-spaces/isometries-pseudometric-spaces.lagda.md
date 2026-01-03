@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.functions-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -33,7 +33,7 @@ open import metric-spaces.rational-neighborhood-relations
 
 ## Idea
 
-A [function](metric-spaces.functions-pseudometric-spaces.md) between
+A [map](metric-spaces.maps-pseudometric-spaces.md) between
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between pseudometric spaces" Agda=is-isometry-Pseudometric-Space}}
 if the
@@ -52,7 +52,7 @@ their images in `B`.
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-function-Pseudometric-Space A B)
+  (f : map-Pseudometric-Space A B)
   where
 
   is-isometry-prop-Pseudometric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -92,7 +92,7 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where
 
-  map-isometry-Pseudometric-Space : type-function-Pseudometric-Space A B
+  map-isometry-Pseudometric-Space : map-Pseudometric-Space A B
   map-isometry-Pseudometric-Space = pr1 f
 
   is-isometry-map-isometry-Pseudometric-Space :
@@ -102,7 +102,7 @@ module _
 
 ## Properties
 
-### The identity function on a pseudometric space is an isometry
+### The identity map on a pseudometric space is an isometry
 
 ```agda
 module _
@@ -110,12 +110,12 @@ module _
   where
 
   is-isometry-id-Pseudometric-Space :
-    is-isometry-Pseudometric-Space A A (id-Pseudometric-Space A)
+    is-isometry-Pseudometric-Space A A (id-map-Pseudometric-Space A)
   is-isometry-id-Pseudometric-Space d x y = id-iff
 
   id-isometry-Pseudometric-Space : isometry-Pseudometric-Space A A
   id-isometry-Pseudometric-Space =
-    ( id-Pseudometric-Space A , is-isometry-id-Pseudometric-Space)
+    ( id-map-Pseudometric-Space A , is-isometry-id-Pseudometric-Space)
 ```
 
 ### Equality of isometries in pseudometric spaces is equivalent to homotopies between their carrier maps
@@ -202,13 +202,13 @@ module _
   (C : Pseudometric-Space l1c l2c)
   where
 
-  is-isometry-comp-is-isometry-Pseudometric-Space :
-    (g : type-function-Pseudometric-Space B C) →
-    (f : type-function-Pseudometric-Space A B) →
+  is-isometry-comp-Pseudometric-Space :
+    (g : map-Pseudometric-Space B C) →
+    (f : map-Pseudometric-Space A B) →
     is-isometry-Pseudometric-Space B C g →
     is-isometry-Pseudometric-Space A B f →
     is-isometry-Pseudometric-Space A C (g ∘ f)
-  is-isometry-comp-is-isometry-Pseudometric-Space g f H K d x y =
+  is-isometry-comp-Pseudometric-Space g f H K d x y =
     H d (f x) (f y) ∘iff K d x y
 
   comp-isometry-Pseudometric-Space :
@@ -218,7 +218,7 @@ module _
   comp-isometry-Pseudometric-Space g f =
     ( map-isometry-Pseudometric-Space B C g ∘
       map-isometry-Pseudometric-Space A B f) ,
-    ( is-isometry-comp-is-isometry-Pseudometric-Space
+    ( is-isometry-comp-Pseudometric-Space
       ( map-isometry-Pseudometric-Space B C g)
       ( map-isometry-Pseudometric-Space A B f)
       ( is-isometry-map-isometry-Pseudometric-Space B C g)
@@ -292,7 +292,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : type-function-Pseudometric-Space A B)
+  (f : map-Pseudometric-Space A B)
   (I : is-isometry-Pseudometric-Space A B f)
   (E : is-equiv f)
   where

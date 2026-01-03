@@ -15,16 +15,12 @@ open import foundation.universe-levels
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
-open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensions-metric-spaces
 open import metric-spaces.extensions-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.pseudometric-spaces
 ```
 
 </details>
@@ -59,24 +55,25 @@ module _
       ( pseudometric-space-extension-Metric-Space M E)
       ( isometry-metric-space-extension-Metric-Space M E)
 
-  map-cauchy-approximation-extension-Metric-Space :
-    cauchy-approximation-Metric-Space M →
-    cauchy-approximation-Metric-Space
-      ( metric-space-extension-Metric-Space M E)
-  map-cauchy-approximation-extension-Metric-Space =
+  map-cauchy-pseudocompletion-extension-Metric-Space :
+    map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-extension-Metric-Space M E))
+  map-cauchy-pseudocompletion-extension-Metric-Space =
     map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
       ( isometry-cauchy-pseudocompletion-extension-Metric-Space)
 
-  is-isometry-map-cauchy-approximation-extension-Metric-Space :
+  is-isometry-map-cauchy-pseudocompletion-extension-Metric-Space :
     is-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
-      ( map-cauchy-approximation-extension-Metric-Space)
-  is-isometry-map-cauchy-approximation-extension-Metric-Space =
+      ( map-cauchy-pseudocompletion-extension-Metric-Space)
+  is-isometry-map-cauchy-pseudocompletion-extension-Metric-Space =
     is-isometry-map-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
@@ -107,7 +104,7 @@ module _
   where
 
   htpy-map-cauchy-approximation-extension-Metric-Space :
-    ( map-cauchy-approximation-extension-Metric-Space M E ∘
+    ( map-cauchy-pseudocompletion-extension-Metric-Space M E ∘
       map-cauchy-pseudocompletion-Metric-Space M) ~
     ( ( map-cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E)) ∘

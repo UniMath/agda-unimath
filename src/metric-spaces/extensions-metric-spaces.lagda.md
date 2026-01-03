@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 ```
@@ -75,8 +76,7 @@ module _
   isometry-metric-space-extension-Metric-Space = pr2 E
 
   map-metric-space-extension-Metric-Space :
-    type-Metric-Space P →
-    type-Metric-Space metric-space-extension-Metric-Space
+    map-Metric-Space P metric-space-extension-Metric-Space
   map-metric-space-extension-Metric-Space =
     map-isometry-Metric-Space
       ( P)
@@ -117,8 +117,9 @@ module _
   { l1 l2 l3 l4 l5 l6 : Level}
   ( M : Metric-Space l1 l2)
   ( E : extension-Metric-Space l3 l4 M)
-  ( F : extension-Metric-Space l5 l6
-    ( metric-space-extension-Metric-Space M E))
+  ( F :
+    extension-Metric-Space l5 l6
+      ( metric-space-extension-Metric-Space M E))
   where
 
   comp-extension-Metric-Space : extension-Metric-Space l5 l6 M
