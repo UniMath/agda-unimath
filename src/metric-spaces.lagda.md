@@ -62,6 +62,8 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-extensions-metric-spaces public
+open import metric-spaces.action-on-cauchy-approximations-extensions-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
@@ -96,6 +98,8 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
+open import metric-spaces.extensions-metric-spaces public
+open import metric-spaces.extensions-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
@@ -105,6 +109,7 @@ open import metric-spaces.images-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
+open import metric-spaces.isometries-extensions-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public

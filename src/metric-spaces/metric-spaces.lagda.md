@@ -317,6 +317,10 @@ module _
   set-Metric-Space : Set l1
   set-Metric-Space =
     (type-Metric-Space A , is-set-type-Metric-Space)
+
+  eq-prop-Metric-Space :
+    (x y : type-Metric-Space A) → Prop l1
+  eq-prop-Metric-Space = Id-Prop set-Metric-Space
 ```
 
 ### Similarity of elements in a metric space is equivalent to equality

@@ -8,20 +8,13 @@ module metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spa
 
 ```agda
 open import elementary-number-theory.addition-positive-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
-open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 ```
