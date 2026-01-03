@@ -35,7 +35,7 @@ open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
@@ -83,7 +83,7 @@ module _
       ( λ u →
         is-convergent-prop-cauchy-approximation-Metric-Space
           ( metric-space-extension-Metric-Space M E)
-          ( map-cauchy-approximation-extension-Metric-Space M E u))
+          ( map-cauchy-pseudocompletion-extension-Metric-Space M E u))
 
   is-precomplete-extension-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-precomplete-extension-Metric-Space =
@@ -153,7 +153,7 @@ module _
     cauchy-approximation-Metric-Space
       metric-space-precomplete-extension-Metric-Space
   map-cauchy-approximation-precomplete-extension-Metric-Space =
-    map-cauchy-approximation-extension-Metric-Space M
+    map-cauchy-pseudocompletion-extension-Metric-Space M
       extension-precomplete-extension-Metric-Space
 
   is-precomplete-extension-precomplete-extension-Metric-Space :
@@ -256,7 +256,7 @@ module _
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E))
-      ( map-cauchy-approximation-extension-Metric-Space M E u)
+      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
       ( map-cauchy-pseudocompletion-Metric-Space
         ( metric-space-extension-Metric-Space M E)
         ( map-isometry-Pseudometric-Space
@@ -283,7 +283,7 @@ module _
     where
 
     eq-mapM-u :
-      map-cauchy-approximation-extension-Metric-Space M E u ＝
+      map-cauchy-pseudocompletion-extension-Metric-Space M E u ＝
       map-cauchy-approximation-isometry-Pseudometric-Space
         ( pseudometric-Metric-Space M)
         ( pseudometric-space-extension-Metric-Space M E)
@@ -373,7 +373,7 @@ module _
   is-limit-coherent-isometry-cauchy-pseudocompletion-extension-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( metric-space-extension-Metric-Space M E)
-      ( map-cauchy-approximation-extension-Metric-Space M E u)
+      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
       ( map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         ( pseudometric-space-extension-Metric-Space M E)
@@ -382,7 +382,7 @@ module _
   is-limit-coherent-isometry-cauchy-pseudocompletion-extension-Metric-Space =
     is-limit-sim-const-cauchy-approximation-Metric-Space
       ( metric-space-extension-Metric-Space M E)
-      ( map-cauchy-approximation-extension-Metric-Space M E u)
+      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
       ( map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         ( pseudometric-space-extension-Metric-Space M E)
@@ -449,7 +449,7 @@ module _
   all-htpy-is-coh-isometry-cauchjy-pseudocompletion-extension-Metric-Space u =
     all-eq-is-limit-cauchy-approximation-Metric-Space
       ( metric-space-extension-Metric-Space M E)
-      ( map-cauchy-approximation-extension-Metric-Space M E u)
+      ( map-cauchy-pseudocompletion-extension-Metric-Space M E u)
       ( map-isometry-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         ( pseudometric-space-extension-Metric-Space M E)
@@ -566,7 +566,7 @@ module _
           ( is-precomplete-extension-precomplete-extension-Metric-Space M E u))
 
     preserves-neighborhoods-map-cauchy-pseudocompletion-precomplete-extension-Metric-Space :
-      is-short-function-Pseudometric-Space
+      is-short-map-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         ( pseudometric-space-precomplete-extension-Metric-Space M E)
         ( map-cauchy-pseudocompletion-precomplete-extension-Metric-Space)
@@ -700,7 +700,7 @@ module _
         ( map-metric-space-precomplete-extension-Metric-Space M E x)
         ( is-limit-limit-convergent-cauchy-approximation-Metric-Space
           ( metric-space-precomplete-extension-Metric-Space M E)
-          ( ( map-cauchy-approximation-extension-Metric-Space M
+          ( ( map-cauchy-pseudocompletion-extension-Metric-Space M
               ( extension-precomplete-extension-Metric-Space M E)
               ( map-cauchy-pseudocompletion-Metric-Space M x)) ,
             is-precomplete-extension-precomplete-extension-Metric-Space M E
