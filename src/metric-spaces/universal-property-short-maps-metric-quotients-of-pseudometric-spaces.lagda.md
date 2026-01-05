@@ -97,7 +97,7 @@ module _
       ( short-map-metric-quotient-Pseudometric-Space P)
 ```
 
-### The induced map from the quotient metric space by an short map in a metric space
+### The induced map from the quotient metric space by a short map in a metric space
 
 ```agda
 module _
