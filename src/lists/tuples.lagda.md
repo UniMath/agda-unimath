@@ -18,14 +18,18 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
+
+open import foundation-core.empty-types
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -77,6 +81,11 @@ module _
     (n : ℕ) → tuple A n → Fin n → A
   component-tuple (succ-ℕ n) (a ∷ v) (inl k) = component-tuple n v k
   component-tuple (succ-ℕ n) (a ∷ v) (inr k) = a
+
+  with-value-tuple :
+    {n : ℕ} → Fin n → A → tuple A n → tuple A n
+  with-value-tuple (inr _) a (x ∷ v) = a ∷ v
+  with-value-tuple (inl i) a (x ∷ v) = x ∷ (with-value-tuple i a v)
 
   infix 6 _∈-tuple_
   data _∈-tuple_ : {n : ℕ} → A → tuple A n → UU l where
@@ -157,6 +166,15 @@ module _
 
   extensionality-tuple : (n : ℕ) → (u v : tuple A n) → (u ＝ v) ≃ Eq-tuple n u v
   extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
+
+  eq-component-eq-tuple :
+    (n : ℕ) →
+    (i : Fin n) →
+    (u : tuple A n) →
+    (v : tuple A n) →
+    u ＝ v →
+    component-tuple n u i ＝ component-tuple n v i
+  eq-component-eq-tuple n i u v refl = refl
 ```
 
 ### The type of tuples of elements in a truncated type is truncated
@@ -251,4 +269,28 @@ compute-tr-tuple :
   tr (tuple A) p (x ∷ v) ＝
   (x ∷ tr (tuple A) (is-injective-succ-ℕ p) v)
 compute-tr-tuple refl v x = refl
+```
+
+### Any tuple of length 0 is the empty tuple
+
+```agda
+zero-empty-tuple :
+  {l : Level} {A : UU l} (v : tuple A zero-ℕ) → v ＝ empty-tuple
+zero-empty-tuple empty-tuple = refl
+```
+
+### The value at the index of a with value call is correct
+
+```agda
+component-tuple-with-value-identity-tuple :
+  {l : Level} →
+  {A : UU l} →
+  {n : ℕ}
+  (v : tuple A n) →
+  (i : Fin n) →
+  (a : A) →
+  component-tuple n (with-value-tuple i a v) i ＝ a
+component-tuple-with-value-identity-tuple (x ∷ v) (inr _) a = refl
+component-tuple-with-value-identity-tuple (x ∷ v) (inl i) a =
+  component-tuple-with-value-identity-tuple v i a
 ```
