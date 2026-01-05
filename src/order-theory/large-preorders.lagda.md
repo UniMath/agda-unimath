@@ -36,7 +36,9 @@ agda-unimath naturally arise as large preorders.
 
 ```agda
 record
-  Large-Preorder (α : Level → Level) (β : Level → Level → Level) : UUω where
+  Large-Preorder (α : Level → Level) (β : Level → Level → Level) : UUω
+  where
+  eta-equality
   constructor
     make-Large-Preorder
   field
