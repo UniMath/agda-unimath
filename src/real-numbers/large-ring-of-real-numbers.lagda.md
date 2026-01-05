@@ -17,14 +17,17 @@ open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.large-additive-group-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 
 open import ring-theory.large-rings
+open import ring-theory.rings
 ```
 
 </details>

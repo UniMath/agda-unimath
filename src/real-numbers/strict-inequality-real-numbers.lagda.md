@@ -602,6 +602,17 @@ module _
     ( irrefutable-sim-or-le-leq-ℝ , leq-irrefutable-sim-or-le-ℝ)
 ```
 
+### Zero is strictly less than one
+
+```agda
+le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
+le-zero-one-ℝ =
+  preserves-le-real-ℚ
+    { zero-ℚ}
+    { one-ℚ}
+    ( le-zero-one-ℚ)
+```
+
 ## References
 
 {{#bibliography}}

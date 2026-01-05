@@ -10,6 +10,7 @@ module real-numbers.apartness-real-numbers where
 open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.binary-transport
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -21,6 +22,7 @@ open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
@@ -146,6 +148,20 @@ apartness-relation-ℝ =
 nonequal-apart-ℝ : {l : Level} (x y : ℝ l) → apart-ℝ x y → x ≠ y
 nonequal-apart-ℝ x y =
   nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
+### Zero is apart from one
+
+```agda
+apart-zero-one-ℝ : apart-ℝ zero-ℝ one-ℝ
+apart-zero-one-ℝ = unit-trunc-Prop (inl le-zero-one-ℝ)
+```
+
+### Zero is not equal to one
+
+```agda
+zero-is-not-one-ℝ : zero-ℝ ≠ one-ℝ
+zero-is-not-one-ℝ = nonequal-apart-ℝ zero-ℝ one-ℝ apart-zero-one-ℝ
 ```
 
 ### Nonapart real numbers are similar
