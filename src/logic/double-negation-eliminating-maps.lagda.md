@@ -20,7 +20,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -314,7 +314,7 @@ module _
       ( F (map-codomain-cartesian-hom-arrow g f α d))
 ```
 
-### Double negation eliminating maps are closed under retracts of maps
+### Double negation eliminating maps are closed under retracts of arrows
 
 ```agda
 module _
@@ -322,14 +322,14 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-double-negation-eliminating-retract-map :
-    f retract-of-map g →
+  is-double-negation-eliminating-retract-arrow :
+    f retract-of-arrow g →
     is-double-negation-eliminating-map g →
     is-double-negation-eliminating-map f
-  is-double-negation-eliminating-retract-map R G x =
+  is-double-negation-eliminating-retract-arrow R G x =
     has-double-negation-elim-retract
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 ```
 
 ### Double negation eliminating maps have Hilbert ε-operators

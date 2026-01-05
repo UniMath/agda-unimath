@@ -22,7 +22,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
@@ -663,7 +663,7 @@ module _
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb F))
 ```
 
-### Double negation stable embeddings are closed under retracts of maps
+### Double negation stable embeddings are closed under retracts of arrows
 
 ```agda
 module _
@@ -671,22 +671,22 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-double-negation-stable-prop-map-retract-map :
-    f retract-of-map g →
+  is-double-negation-stable-prop-map-retract-arrow :
+    f retract-of-arrow g →
     is-double-negation-stable-prop-map g →
     is-double-negation-stable-prop-map f
-  is-double-negation-stable-prop-map-retract-map R G x =
+  is-double-negation-stable-prop-map-retract-arrow R G x =
     is-double-negation-stable-prop-retract
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 
-  is-double-negation-stable-emb-retract-map :
-    f retract-of-map g →
+  is-double-negation-stable-emb-retract-arrow :
+    f retract-of-arrow g →
     is-double-negation-stable-emb g →
     is-double-negation-stable-emb f
-  is-double-negation-stable-emb-retract-map R G =
+  is-double-negation-stable-emb-retract-arrow R G =
     is-double-negation-stable-emb-is-double-negation-stable-prop-map
-      ( is-double-negation-stable-prop-map-retract-map R
+      ( is-double-negation-stable-prop-map-retract-arrow R
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb G))
 ```
 
