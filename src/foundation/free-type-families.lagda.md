@@ -89,7 +89,7 @@ Doubly-Dependent-Fam' :
   {l1 l2 l3 l4 : Level} (l5 l6 : Level) →
   (F : Fam l1 l2) → Dependent-Fam l3 l4 F → UU (l1 ⊔ l3 ⊔ lsuc l5 ⊔ lsuc l6)
 Doubly-Dependent-Fam' l5 l6 (A , B) (X , Y) =
-  (a : A) (x : X a) → Σ (UU l5) (λ U → U → UU l6)
+  (a : A) (x : X a) → Fam l5 l6
 
 compute-Doubly-Dependent-Fam' :
   {l1 l2 l3 l4 l5 l6 : Level} (F : Fam l1 l2) (G : Dependent-Fam l3 l4 F) →
