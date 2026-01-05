@@ -9,13 +9,19 @@ module logic.propositionally-decidable-maps where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.complements-images
 open import foundation.coproduct-types
 open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.double-negation-dense-equality-maps
+open import foundation.equivalences
+open import foundation.full-subtypes
 open import foundation.identity-types
+open import foundation.images
 open import foundation.propositional-truncations
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
@@ -24,6 +30,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.iterating-functions
+open import foundation-core.propositions
 
 open import logic.propositionally-decidable-types
 ```
@@ -184,4 +191,26 @@ module _
       ( is-inhabited-or-empty-f)
       ( is-inhabited-or-empty-map-iterate-has-double-negation-dense-equality-map
         ( n))
+```
+
+## The coproduct decomposition of the codomain of a propositionally decidable map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  coproduct-decomposition-codomain-inhabited-or-empty-map :
+    (f'@(f , F) : inhabited-or-empty-map A B) →
+    B ≃ im f + nonim f
+  coproduct-decomposition-codomain-inhabited-or-empty-map (f , F) =
+    equivalence-reasoning
+    B
+    ≃ Σ B (λ y → is-inhabited-or-empty (fiber f y))
+      by
+        inv-equiv-inclusion-is-full-subtype
+          ( is-inhabited-or-empty-Prop ∘ fiber f)
+          ( F)
+    ≃ im f + nonim f
+      by left-distributive-Σ-coproduct
 ```

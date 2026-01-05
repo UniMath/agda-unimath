@@ -31,6 +31,7 @@ open import foundation.postcomposition-functions
 open import foundation.propositional-maps
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.split-surjective-maps
 open import foundation.structured-type-duality
 open import foundation.subtypes
 open import foundation.surjective-maps
@@ -518,20 +519,32 @@ module _
   map-maybe-decidable-subtype (x , inl x∈S) = unit-Maybe (x , x∈S)
   map-maybe-decidable-subtype (x , inr x∉S) = exception-Maybe
 
+  is-split-surjective-extend-map-maybe-decidable-subtype :
+    is-split-surjective (extend-Maybe map-maybe-decidable-subtype)
+  is-split-surjective-extend-map-maybe-decidable-subtype (inr star) =
+    ( exception-Maybe , refl)
+  is-split-surjective-extend-map-maybe-decidable-subtype (inl (x , x∈S)) =
+    ( unit-Maybe (x , inl x∈S) , refl)
+
   abstract
     is-surjective-extend-map-maybe-decidable-subtype :
       is-surjective (extend-Maybe map-maybe-decidable-subtype)
-    is-surjective-extend-map-maybe-decidable-subtype (inr star) =
-      intro-exists exception-Maybe refl
-    is-surjective-extend-map-maybe-decidable-subtype (inl (x , x∈S)) =
-      intro-exists (unit-Maybe (x , inl x∈S)) refl
+    is-surjective-extend-map-maybe-decidable-subtype =
+      is-surjective-is-split-surjective
+        ( is-split-surjective-extend-map-maybe-decidable-subtype)
+
+  surjection-extend-map-maybe-decidable-subtype :
+    Maybe (Σ X (is-decidable ∘ is-in-decidable-subtype S)) ↠
+    Maybe (type-decidable-subtype S)
+  surjection-extend-map-maybe-decidable-subtype =
+    ( extend-Maybe map-maybe-decidable-subtype ,
+      is-surjective-extend-map-maybe-decidable-subtype)
 
   surjection-maybe-decidable-subtype :
     Maybe X ↠ Maybe (type-decidable-subtype S)
   surjection-maybe-decidable-subtype =
     comp-surjection
-      ( extend-Maybe map-maybe-decidable-subtype ,
-        is-surjective-extend-map-maybe-decidable-subtype)
+      ( surjection-extend-map-maybe-decidable-subtype)
       ( surjection-map-surjection-Maybe
         ( surjection-equiv (equiv-Σ-decide-is-in-decidable-subtype S)))
 ```
