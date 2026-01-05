@@ -158,6 +158,7 @@ open import metric-spaces.totally-bounded-metric-spaces public
 open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
 ```
 
 ## References

@@ -155,19 +155,18 @@ module _
   (f g : short-map-Metric-Space A B)
   where
 
+  htpy-map-short-map-Metric-Space : UU (l1 ⊔ l1')
+  htpy-map-short-map-Metric-Space =
+    map-short-map-Metric-Space A B f ~ map-short-map-Metric-Space A B g
+
   equiv-eq-htpy-map-short-map-Metric-Space :
-    ( f ＝ g) ≃
-    ( map-short-map-Metric-Space A B f ~
-      map-short-map-Metric-Space A B g)
+    (f ＝ g) ≃ htpy-map-short-map-Metric-Space
   equiv-eq-htpy-map-short-map-Metric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
       ( is-short-map-prop-Metric-Space A B) f g
 
-  eq-htpy-map-short-map-Metric-Space :
-    ( map-short-map-Metric-Space A B f ~
-      map-short-map-Metric-Space A B g) →
-    ( f ＝ g)
+  eq-htpy-map-short-map-Metric-Space : htpy-map-short-map-Metric-Space → f ＝ g
   eq-htpy-map-short-map-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-short-map-Metric-Space
 ```
