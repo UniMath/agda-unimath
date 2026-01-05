@@ -58,7 +58,7 @@ Dependent-Fam l3 l4 (A , B) = Σ (A → UU l3) (λ X → (a : A) → X a → UU 
 
 Dependent-Fam' :
   {l1 l2 : Level} (l3 l4 : Level) → Fam l1 l2 → UU (l1 ⊔ lsuc l3 ⊔ lsuc l4)
-Dependent-Fam' l3 l4 (A , B) = (a : A) → Σ (UU l3) (λ X → X → UU l4)
+Dependent-Fam' l3 l4 (A , B) = A → Fam l3 l4
 
 compute-Dependent-Fam' :
   {l1 l2 l3 l4 : Level} (F : Fam l1 l2) →
