@@ -80,13 +80,6 @@ Any pseudometric space `M` has an
 quotient; if `M` is a metric space, this is an
 [isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
 
-Any [short map](metric-spaces.short-maps-pseudometric-spaces.md) (resp.
-isometry) from a pseudometric space to a metric space factors uniquely as a
-short map (resp. isometry) through the metric quotient of its domain. This is
-the
-{{#concept "universal property" Disambiguation="of the metric space quotient of a pseudometric space"}}
-of the metric space quotient.
-
 ## Definitions
 
 ```agda
@@ -604,6 +597,11 @@ module _
         ( isometric-equiv-metric-quotient-Metric-Space'
           ( metric-quotient-Pseudometric-Space M)))
 ```
+
+## See also
+
+- The
+  [universal property of metric quotients and short maps](metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces.md).
 
 ## External links
 
