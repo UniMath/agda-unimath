@@ -28,6 +28,7 @@ open import trees.empty-multisets public
 open import trees.enriched-directed-trees public
 open import trees.equivalences-directed-trees public
 open import trees.equivalences-enriched-directed-trees public
+open import trees.equivalences-polynomial-endofunctors public
 open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
