@@ -98,6 +98,7 @@ open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.functoriality-short-maps-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
 open import metric-spaces.images-metric-spaces public
 open import metric-spaces.images-short-maps-metric-spaces public
