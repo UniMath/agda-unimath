@@ -15,7 +15,7 @@ open import metric-spaces.pointwise-epsilon-delta-continuous-functions-metric-sp
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-open import real-numbers.pointwise-continuous-functions-real-numbers
+open import real-numbers.pointwise-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -58,14 +58,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (f : pointwise-continuous-map-ℝ l1 l2)
+  (f : pointwise-continuous-endomap-ℝ l1 l2)
   where
 
   abstract
-    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-ℝ :
+    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ :
       is-pointwise-ε-δ-continuous-map-ℝ
-        ( map-pointwise-continuous-map-ℝ f)
-    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-ℝ =
+        ( map-pointwise-continuous-endomap-ℝ f)
+    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ =
       is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
@@ -84,7 +84,7 @@ module _
   abstract
     is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-ℝ :
       is-pointwise-ε-δ-continuous-map-ℝ f →
-      is-pointwise-continuous-map-ℝ f
+      is-pointwise-continuous-endomap-ℝ f
     is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-ℝ =
       is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-Metric-Space
         ( acω)
@@ -95,4 +95,4 @@ module _
 
 ## See also
 
-- [Constructively pointwise continuous functions on the real numbers](real-numbers.pointwise-continuous-functions-real-numbers.md)
+- [Constructively pointwise continuous functions on the real numbers](real-numbers.pointwise-continuous-endomaps-real-numbers.md)

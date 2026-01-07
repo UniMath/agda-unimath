@@ -23,8 +23,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuity-of-maps-at-points-in-metric-spaces
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.continuity-of-maps-at-points-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
