@@ -71,6 +71,7 @@ open import real-numbers.minimum-finite-families-real-numbers public
 open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
+open import real-numbers.modulated-cauchy-sequences-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
 open import real-numbers.multiplication-nonzero-real-numbers public
@@ -116,6 +117,7 @@ open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
+open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```
