@@ -530,7 +530,7 @@ module _
                       ( xℝ -ℝ real-ℚ⁺ δ)
                       ( xℝ -ℝ real-ℚ⁺ ε'')
                       ( yℝ)
-                      ( reverses-leq-diff-ℝ
+                      ( reverses-leq-left-diff-ℝ
                         ( xℝ)
                         ( preserves-leq-real-ℚ
                           ( leq-right-min-ℚ _ _)))
@@ -541,7 +541,7 @@ module _
                     ( xℝ -ℝ real-ℚ⁺ ε')
                     ( xℝ -ℝ real-ℚ⁺ ε'')
                     ( yℝ)
-                    ( reverses-leq-diff-ℝ
+                    ( reverses-leq-left-diff-ℝ
                       ( xℝ)
                       ( preserves-leq-real-ℚ
                         ( leq-left-min-ℚ _ _)))
@@ -561,7 +561,7 @@ module _
                   xℝ -ℝ real-ℚ⁺ ε
                   ≤ xℝ -ℝ real-ℚ⁺ ε'
                     by
-                      reverses-leq-diff-ℝ
+                      reverses-leq-left-diff-ℝ
                         ( xℝ)
                         ( leq-le-ℝ (preserves-le-real-ℚ ε'<ε))
                   ≤ z
@@ -578,7 +578,7 @@ module _
                   xℝ -ℝ real-ℚ⁺ ε'
                   ≤ xℝ -ℝ real-ℚ⁺ ε''
                     by
-                      reverses-leq-diff-ℝ
+                      reverses-leq-left-diff-ℝ
                         ( xℝ)
                         ( preserves-leq-real-ℚ
                           ( leq-left-min-ℚ _ _))
@@ -591,7 +591,7 @@ module _
                   yℝ -ℝ real-ℚ⁺ ε
                   ≤ yℝ -ℝ (real-ℚ⁺ (ε' +ℚ⁺ ε'))
                     by
-                      reverses-leq-diff-ℝ
+                      reverses-leq-left-diff-ℝ
                         ( yℝ)
                         ( leq-le-ℝ
                           ( preserves-le-real-ℚ ε'+ε'<ε))
@@ -606,7 +606,7 @@ module _
                   ≤ (yℝ -ℝ real-ℚ⁺ ε'') -ℝ real-ℚ⁺ ε'
                     by
                       preserves-leq-right-add-ℝ _ _ _
-                        ( reverses-leq-diff-ℝ
+                        ( reverses-leq-left-diff-ℝ
                           ( yℝ)
                           ( preserves-leq-real-ℚ
                             ( leq-left-min-ℚ _ _)))

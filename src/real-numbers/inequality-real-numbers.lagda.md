@@ -283,7 +283,7 @@ abstract opaque
 ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
-### The canonical map from rational numbers to the reals preserves and reflects inequality
+### The canonical inclusion of the rational numbers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -303,7 +303,7 @@ module _
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
 ```
 
-### The canonical map from integers to the reals preserves and reflects inequality
+### The canonical inclusion of the integers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -320,7 +320,7 @@ module _
       reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
 ```
 
-### The canonical map from natural numbers to the reals preserves and reflects inequality
+### The canonical inclusion of the natural numbers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -460,7 +460,7 @@ module _
   leq-iff-not-in-lower-cut-ℝ = (not-in-lower-cut-leq-ℝ , leq-not-in-lower-cut-ℝ)
 ```
 
-### If `q` is in the lower cut of `x`, `real-ℚ q ≤ x`
+### If `q` is in the lower cut of `x`, then `real-ℚ q ≤ x`
 
 ```agda
 module _

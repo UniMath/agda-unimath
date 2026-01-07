@@ -730,9 +730,6 @@ abstract
 
 ### If `q ≤ x ⇒ q ≤ y` for every rational `q`, then `x ≤ y`
 
-TODO: this is a property of inequality, not strict inequality, but is much
-easier to prove with strict inequality.
-
 ```agda
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
@@ -769,10 +766,10 @@ strict-preorder-ℝ l =
     transitive-le-ℝ)
 
 abstract
-  extensionality-principle-strict-preorder-ℝ :
+  extensionality-strict-preorder-ℝ :
     (l : Level) →
     extensionality-principle-Strict-Preorder (strict-preorder-ℝ l)
-  extensionality-principle-strict-preorder-ℝ l x y (_ , x~y) =
+  extensionality-strict-preorder-ℝ l x y (_ , x~y) =
     eq-sim-ℝ
       ( sim-le-same-rational-ℝ x y
         ( λ q →
@@ -783,7 +780,7 @@ abstract
 strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
 strict-order-ℝ l =
   ( strict-preorder-ℝ l ,
-    extensionality-principle-strict-preorder-ℝ l)
+    extensionality-strict-preorder-ℝ l)
 ```
 
 ## References
