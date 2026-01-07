@@ -149,7 +149,7 @@ open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
-open import metric-spaces.pointwise-continuous-functions-metric-spaces public
+open import metric-spaces.pointwise-continuous-maps-metric-spaces public
 open import metric-spaces.pointwise-epsilon-delta-continuous-functions-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public

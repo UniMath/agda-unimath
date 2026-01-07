@@ -31,8 +31,8 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
-open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
+open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 ```
 

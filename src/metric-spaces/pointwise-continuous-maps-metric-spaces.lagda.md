@@ -24,11 +24,11 @@ open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces
-open import metric-spaces.maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-maps-metric-spaces
-open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
