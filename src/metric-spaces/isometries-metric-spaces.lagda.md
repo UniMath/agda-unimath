@@ -32,6 +32,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.sequences-metric-spaces
 ```
 
 </details>
@@ -391,4 +392,20 @@ module _
   emb-map-isometry-Metric-Space =
     ( map-isometry-Metric-Space A B f ,
       is-emb-map-isometry-Metric-Space)
+```
+
+### The action on sequences of isometries
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : isometry-Metric-Space X Y)
+  where
+
+  map-sequence-isometry-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-sequence-isometry-Metric-Space =
+    map-sequence (map-isometry-Metric-Space X Y f)
 ```

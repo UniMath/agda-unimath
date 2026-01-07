@@ -181,3 +181,18 @@ modulated-ucont-map-add-pair-ℝ l1 l2 =
     ( is-isometry-left-add-ℝ)
     ( is-isometry-right-add-ℝ)
 ```
+
+### Addition is a modulated uniformly continuous function on the product of the metric space of reals with itself
+
+```agda
+uniformly-continuous-map-add-pair-ℝ :
+  (l1 l2 : Level) →
+  uniformly-continuous-map-Metric-Space
+    ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
+    ( metric-space-ℝ (l1 ⊔ l2))
+uniformly-continuous-map-add-pair-ℝ l1 l2 =
+  uniformly-continuous-map-modulated-ucont-map-Metric-Space
+    ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
+    ( metric-space-ℝ (l1 ⊔ l2))
+    ( modulated-ucont-map-add-pair-ℝ l1 l2)
+```

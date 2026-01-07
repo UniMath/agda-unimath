@@ -91,13 +91,12 @@ module _
   (σ : series-ℝ-Banach-Space V)
   where
 
-  is-convergent-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space :
-    is-cauchy-sequence-Metric-Space
-      ( metric-space-ℝ-Banach-Space V)
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space :
+    is-cauchy-sequence-ℝ-Banach-Space V
       ( partial-sum-series-ℝ-Banach-Space V σ) →
     is-convergent-series-ℝ-Banach-Space V σ
-  is-convergent-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space =
-    is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space =
+    is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
       ( complete-metric-ab-add-ℝ-Banach-Space V)
       ( σ)
 ```
@@ -141,7 +140,7 @@ module _
         ( is-lim))
 ```
 
-### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+### If a series converges, its partial sums are a Cauchy sequence
 
 ```agda
 module _
@@ -150,18 +149,10 @@ module _
   (σ : series-ℝ-Banach-Space V)
   where
 
-  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space :
+  is-cauchy-sequence-partial-sum-series-is-convergent-series-ℝ-Banach-Space :
     is-convergent-series-ℝ-Banach-Space V σ →
-    is-inhabited
-      ( is-cauchy-sequence-Metric-Space
-        ( metric-space-ℝ-Banach-Space V)
-        ( partial-sum-series-ℝ-Banach-Space V σ))
-  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space
-    (lim , is-lim) =
-    map-is-inhabited
-      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
-        ( metric-space-ℝ-Banach-Space V)
-        ( partial-sum-series-ℝ-Banach-Space V σ)
-        ( lim))
-      ( is-lim)
+    is-cauchy-sequence-ℝ-Banach-Space V (partial-sum-series-ℝ-Banach-Space V σ)
+  is-cauchy-sequence-partial-sum-series-is-convergent-series-ℝ-Banach-Space =
+    is-cauchy-has-limit-sequence-Metric-Space
+      ( metric-space-ℝ-Banach-Space V)
 ```

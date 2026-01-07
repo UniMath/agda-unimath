@@ -65,6 +65,9 @@ open import metric-spaces.accumulation-points-subsets-located-metric-spaces publ
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
+open import metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces public
+open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.action-on-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.apartness-located-metric-spaces public
 open import metric-spaces.approximations-located-metric-spaces public
 open import metric-spaces.approximations-metric-spaces public
@@ -90,6 +93,7 @@ open import metric-spaces.continuous-maps-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dense-subsets-metric-spaces public
+open import metric-spaces.dependent-products-complete-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
@@ -109,7 +113,9 @@ open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.limits-of-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-maps-metric-spaces public
+open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-maps-metric-spaces public
 open import metric-spaces.locally-constant-maps-metric-spaces public
@@ -125,11 +131,14 @@ open import metric-spaces.metric-space-of-isometries-metric-spaces public
 open import metric-spaces.metric-space-of-lipschitz-maps-metric-spaces public
 open import metric-spaces.metric-space-of-maps-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
+open import metric-spaces.metric-space-of-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-short-maps-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public
 open import metric-spaces.metrics-of-metric-spaces-are-uniformly-continuous public
+open import metric-spaces.modulated-cauchy-sequences-complete-metric-spaces public
+open import metric-spaces.modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
 open import metric-spaces.nets-located-metric-spaces public
