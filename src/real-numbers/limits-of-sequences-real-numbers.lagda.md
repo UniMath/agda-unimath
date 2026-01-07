@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.limits-sequences-real-numbers where
+module real-numbers.limits-of-sequences-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -98,13 +98,13 @@ module _
   where
 
   abstract
-    preserves-limits-add-sequence-ℝ :
+    is-limit-add-sequence-ℝ :
       is-limit-sequence-Metric-Space
         ( metric-space-ℝ (l1 ⊔ l2))
         ( binary-map-sequence add-ℝ u v)
         ( lim-u +ℝ lim-v)
-    preserves-limits-add-sequence-ℝ =
-      preserves-limits-sequences-modulated-ucont-map-Metric-Space
+    is-limit-add-sequence-ℝ =
+      is-limit-map-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
         ( metric-space-ℝ (l1 ⊔ l2))
         ( modulated-ucont-map-add-pair-ℝ l1 l2)
@@ -128,15 +128,15 @@ module _
   where
 
   abstract
-    preserves-limits-sequence-uniformly-continuous-endomap-ℝ :
+    is-limit-map-sequence-uniformly-continuous-endomap-ℝ :
       is-limit-sequence-ℝ u lim →
       is-limit-sequence-ℝ
         ( map-sequence
           ( map-uniformly-continuous-endomap-ℝ f)
           ( u))
         ( map-uniformly-continuous-endomap-ℝ f lim)
-    preserves-limits-sequence-uniformly-continuous-endomap-ℝ =
-      preserves-limits-sequence-uniformly-continuous-map-Metric-Space
+    is-limit-map-sequence-uniformly-continuous-endomap-ℝ =
+      is-limit-map-sequence-uniformly-continuous-map-Metric-Space
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)
@@ -248,11 +248,9 @@ module _
   where
 
   abstract
-    preserves-is-limit-subsequence-ℝ :
+    is-limit-subsequence-ℝ :
       is-limit-sequence-ℝ u lim-u →
       is-limit-sequence-ℝ (seq-subsequence u v) lim-u
-    preserves-is-limit-subsequence-ℝ =
-      preserves-is-limit-subsequence-Metric-Space
-        ( metric-space-ℝ l)
-        ( v)
+    is-limit-subsequence-ℝ =
+      is-limit-subsequence-Metric-Space (metric-space-ℝ l) v
 ```

@@ -75,20 +75,20 @@ module _
   where
 
   abstract
-    distributive-add-is-limit-sequence-Metric-Ab :
+    is-limit-add-sequence-Metric-Ab :
       is-limit-sequence-Metric-Ab G u lim-u →
       is-limit-sequence-Metric-Ab G v lim-v →
       is-limit-sequence-Metric-Ab
         ( G)
         ( add-sequence-type-Metric-Ab G u v)
         ( add-Metric-Ab G lim-u lim-v)
-    distributive-add-is-limit-sequence-Metric-Ab is-lim-u is-lim-v =
-      preserves-limits-sequences-modulated-ucont-map-Metric-Space
+    is-limit-add-sequence-Metric-Ab is-lim-u is-lim-v =
+      is-limit-map-sequence-modulated-ucont-map-Metric-Space
         ( product-Metric-Space
           ( metric-space-Metric-Ab G)
           ( metric-space-Metric-Ab G))
         ( metric-space-Metric-Ab G)
-        ( modulated-ucont-add-Metric-Ab G)
+        ( modulated-ucont-map-add-pair-Metric-Ab G)
         ( pair-sequence u v)
         ( lim-u , lim-v)
         ( is-limit-pair-sequence-Metric-Space
@@ -109,14 +109,14 @@ module _
   where
 
   abstract
-    neg-is-limit-sequence-Metric-Ab :
+    is-limit-neg-sequence-Metric-Ab :
       is-limit-sequence-Metric-Ab G u lim-u →
       is-limit-sequence-Metric-Ab
         ( G)
         ( neg-sequence-type-Metric-Ab G u)
         ( neg-Metric-Ab G lim-u)
-    neg-is-limit-sequence-Metric-Ab =
-      preserves-limits-sequences-isometry-Metric-Space
+    is-limit-neg-sequence-Metric-Ab =
+      is-limit-map-sequence-isometry-Metric-Space
         ( metric-space-Metric-Ab G)
         ( metric-space-Metric-Ab G)
         ( isometry-neg-Metric-Ab G)

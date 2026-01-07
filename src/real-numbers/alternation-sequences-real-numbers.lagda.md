@@ -23,7 +23,7 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.metric-additive-group-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
@@ -103,6 +103,6 @@ abstract
     is-limit-sequence-ℝ u (raise-zero-ℝ l) →
     is-limit-sequence-ℝ (alternation-sequence-ℝ u) (raise-zero-ℝ l)
   preserves-is-limit-zero-alternation-sequence-ℝ {l} {u} =
-    preserves-is-limit-zero-alternation-sequence-Metric-Ab
+    is-limit-zero-alternation-sequence-Metric-Ab
       ( metric-ab-add-ℝ l)
 ```

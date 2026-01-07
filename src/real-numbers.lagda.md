@@ -56,7 +56,7 @@ open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
-open import real-numbers.limits-sequences-real-numbers public
+open import real-numbers.limits-of-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
 open import real-numbers.located-metric-space-of-real-numbers public

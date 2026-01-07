@@ -27,7 +27,7 @@ open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 ```
@@ -222,14 +222,14 @@ module _
   (G : Metric-Ab l1 l2)
   where
 
-  modulated-ucont-add-Metric-Ab :
+  modulated-ucont-map-add-pair-Metric-Ab :
     modulated-ucont-map-Metric-Space
       ( product-Metric-Space
         ( metric-space-Metric-Ab G)
         ( metric-space-Metric-Ab G))
       ( metric-space-Metric-Ab G)
-  modulated-ucont-add-Metric-Ab =
-    modulated-ucont-binary-isometry-Metric-Space
+  modulated-ucont-map-add-pair-Metric-Ab =
+    modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space
       ( metric-space-Metric-Ab G)
       ( metric-space-Metric-Ab G)
       ( metric-space-Metric-Ab G)

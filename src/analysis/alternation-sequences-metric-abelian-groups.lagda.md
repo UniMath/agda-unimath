@@ -72,7 +72,7 @@ module _
   where
 
   abstract
-    preserves-is-limit-zero-modulus-alternation-sequence-Metric-Ab :
+    is-limit-modulus-zero-alternation-sequence-Metric-Ab :
       (μ : ℚ⁺ → ℕ) →
       is-limit-modulus-sequence-Metric-Ab G a (zero-Metric-Ab G) μ →
       is-limit-modulus-sequence-Metric-Ab
@@ -80,7 +80,7 @@ module _
         ( alternation-sequence-Metric-Ab G a)
         ( zero-Metric-Ab G)
         ( μ)
-    preserves-is-limit-zero-modulus-alternation-sequence-Metric-Ab
+    is-limit-modulus-zero-alternation-sequence-Metric-Ab
       μ is-mod-μ ε n με≤n with is-decidable-is-even-ℕ n
     ... | inl even = is-mod-μ ε n με≤n
     ... | inr odd =
@@ -91,15 +91,15 @@ module _
           ( is-isometry-neg-Metric-Ab G ε (a n) (zero-Metric-Ab G))
           ( is-mod-μ ε n με≤n))
 
-    preserves-is-limit-zero-alternation-sequence-Metric-Ab :
+    is-limit-zero-alternation-sequence-Metric-Ab :
       is-limit-sequence-Metric-Ab G a (zero-Metric-Ab G) →
       is-limit-sequence-Metric-Ab
         ( G)
         ( alternation-sequence-Metric-Ab G a)
         ( zero-Metric-Ab G)
-    preserves-is-limit-zero-alternation-sequence-Metric-Ab =
+    is-limit-zero-alternation-sequence-Metric-Ab =
       map-tot-exists
-        ( preserves-is-limit-zero-modulus-alternation-sequence-Metric-Ab)
+        ( is-limit-modulus-zero-alternation-sequence-Metric-Ab)
 ```
 
 ### Alternating a sequence is an involution
