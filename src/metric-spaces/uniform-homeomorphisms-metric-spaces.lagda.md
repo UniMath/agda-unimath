@@ -22,13 +22,13 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.complete-metric-spaces
-open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.limits-of-cauchy-sequences-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.limits-of-cauchy-sequences-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 

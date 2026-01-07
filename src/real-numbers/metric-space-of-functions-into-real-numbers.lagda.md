@@ -10,8 +10,8 @@ module real-numbers.metric-space-of-functions-into-real-numbers where
 open import foundation.universe-levels
 
 open import metric-spaces.complete-metric-spaces
-open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.dependent-products-complete-metric-spaces
+open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
