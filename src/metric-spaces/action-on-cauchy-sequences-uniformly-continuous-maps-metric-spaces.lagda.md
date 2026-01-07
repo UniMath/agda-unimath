@@ -14,8 +14,8 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.action-on-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.sequences-metric-spaces

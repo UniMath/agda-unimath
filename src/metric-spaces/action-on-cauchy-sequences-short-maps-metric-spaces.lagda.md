@@ -9,8 +9,8 @@ module metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces where
 ```agda
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
