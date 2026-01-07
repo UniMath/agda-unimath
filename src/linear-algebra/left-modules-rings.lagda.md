@@ -9,6 +9,7 @@ module linear-algebra.left-modules-rings where
 ```agda
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -87,8 +88,21 @@ module _
   is-set-type-left-module-Ring = pr2 set-left-module-Ring
 
   add-left-module-Ring :
-    (x y : type-left-module-Ring) → type-left-module-Ring
+    type-left-module-Ring → type-left-module-Ring → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
+
+  ap-add-left-module-Ring :
+    {x x' : type-left-module-Ring} →
+    x ＝ x' →
+    {y y' : type-left-module-Ring} →
+    y ＝ y' →
+    add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring =
+    ap-binary add-left-module-Ring
+
+  diff-left-module-Ring :
+    type-left-module-Ring → type-left-module-Ring → type-left-module-Ring
+  diff-left-module-Ring = right-subtraction-Ab ab-left-module-Ring
 
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
@@ -504,4 +518,38 @@ module _
   left-module-hom-Ring : left-module-Ring l2 R
   left-module-hom-Ring =
     left-module-hom-left-module-Ring R S h (left-module-ring-Ring S)
+```
+
+### Negation is distributive over subtraction
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    distributive-neg-diff-left-module-Ring :
+      (a b : type-left-module-Ring R M) →
+      neg-left-module-Ring R M (diff-left-module-Ring R M a b) ＝
+      diff-left-module-Ring R M b a
+    distributive-neg-diff-left-module-Ring =
+      neg-right-subtraction-Ab (ab-left-module-Ring R M)
+```
+
+### `(a - b) + (b - c) = a - c`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    add-diff-left-module-Ring :
+      (a b c : type-left-module-Ring R M) →
+      add-left-module-Ring R M
+        ( diff-left-module-Ring R M a b)
+        ( diff-left-module-Ring R M b c) ＝
+      diff-left-module-Ring R M a c
+    add-diff-left-module-Ring =
+      add-right-subtraction-Ab (ab-left-module-Ring R M)
 ```

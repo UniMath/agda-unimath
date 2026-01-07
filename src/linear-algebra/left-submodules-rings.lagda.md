@@ -28,6 +28,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
+open import group-theory.subgroups-abelian-groups
 
 open import linear-algebra.left-modules-rings
 open import linear-algebra.subsets-left-modules-rings
@@ -93,6 +94,10 @@ module _
   subset-left-submodule-Ring : subset-left-module-Ring l3 R M
   subset-left-submodule-Ring =
     inclusion-subtype (is-left-submodule-prop-Ring R M) N
+
+  is-in-left-submodule-Ring : type-left-module-Ring R M → UU l3
+  is-in-left-submodule-Ring =
+    is-in-subtype subset-left-submodule-Ring
 
   type-left-submodule-Ring : UU (l2 ⊔ l3)
   type-left-submodule-Ring = type-subtype subset-left-submodule-Ring
@@ -350,6 +355,13 @@ module _
   ab-left-submodule-Ring : Ab (l2 ⊔ l3)
   pr1 ab-left-submodule-Ring = group-left-submodule-Ring
   pr2 ab-left-submodule-Ring = commutative-add-left-submodule-Ring
+
+  subgroup-ab-left-submodule-Ring : Subgroup-Ab l3 (ab-left-module-Ring R M)
+  subgroup-ab-left-submodule-Ring =
+    ( subset-left-submodule-Ring R M N ,
+      contains-zero-left-submodule-Ring R M N ,
+      is-closed-under-addition-left-submodule-Ring R M N _ _ ,
+      is-closed-under-negation-left-submodule-Ring R M N _)
 
   endomorphism-ring-left-submodule-Ring : Ring (l2 ⊔ l3)
   endomorphism-ring-left-submodule-Ring =
