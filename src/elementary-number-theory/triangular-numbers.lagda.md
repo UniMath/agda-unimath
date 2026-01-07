@@ -39,7 +39,7 @@ open import group-theory.groups
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import ring-theory.partial-sums-sequences-semirings
 ```
@@ -282,12 +282,12 @@ abstract
       ( preserves-limits-sequences-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
-        ( comp-uniformly-continuous-function-Metric-Space
+        ( comp-uniformly-continuous-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-ℚ)
           ( metric-space-ℚ)
-          ( uniformly-continuous-left-mul-ℚ (rational-ℕ 2))
-          ( uniformly-continuous-diff-ℚ one-ℚ))
+          ( uniformly-continuous-map-left-mul-ℚ (rational-ℕ 2))
+          ( uniformly-continuous-map-left-diff-ℚ one-ℚ))
           ( reciprocal-rational-succ-ℕ)
           ( zero-ℚ)
           ( is-zero-limit-reciprocal-rational-succ-ℕ))

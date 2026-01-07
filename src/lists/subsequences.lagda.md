@@ -127,3 +127,16 @@ module _
             ( is-strictly-increasing-extract-subsequence u v)
             ( n)))
 ```
+
+## Operations
+
+### The tail subsequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  tail-subsequence : subsequence u
+  tail-subsequence = (succ-ℕ , λ _ _ → id)
+```
