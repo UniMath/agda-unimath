@@ -59,7 +59,7 @@ module _
       ( sequence-map-convergent-sequence-short-map-Metric-Space)
       ( limit-map-convergent-sequence-short-map-Metric-Space)
   is-limit-limit-map-convergent-sequence-short-map-Metric-Space =
-    preserves-limits-sequence-short-map-Metric-Space A B f
+    is-limit-map-sequence-short-map-Metric-Space A B f
       ( seq-convergent-sequence-Metric-Space A u)
       ( limit-convergent-sequence-Metric-Space A u)
       ( is-limit-limit-convergent-sequence-Metric-Space A u)

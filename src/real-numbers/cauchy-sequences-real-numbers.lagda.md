@@ -38,7 +38,7 @@ open import real-numbers.increasing-sequences-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.isometry-addition-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers

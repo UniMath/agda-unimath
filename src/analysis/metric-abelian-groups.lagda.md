@@ -14,16 +14,20 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 ```
@@ -102,6 +106,14 @@ module _
   neg-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG
   neg-Metric-Ab = neg-Ab (ab-Metric-Ab MG)
 
+  abstract
+    neg-zero-Metric-Ab : neg-Metric-Ab zero-Metric-Ab ＝ zero-Metric-Ab
+    neg-zero-Metric-Ab = neg-zero-Ab (ab-Metric-Ab MG)
+
+    neg-neg-Metric-Ab :
+      (x : type-Metric-Ab MG) → neg-Metric-Ab (neg-Metric-Ab x) ＝ x
+    neg-neg-Metric-Ab = neg-neg-Ab (ab-Metric-Ab MG)
+
   diff-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
   diff-Metric-Ab x y = add-Metric-Ab x (neg-Metric-Ab y)
 
@@ -163,6 +175,29 @@ module _
       ( metric-space-Metric-Ab)
   isometry-add-Metric-Ab x = (add-Metric-Ab MG x , is-isometry-add-Metric-Ab x)
 
+  abstract
+    is-isometry-add-Metric-Ab' :
+      (x : type-Metric-Ab MG) →
+      is-isometry-Metric-Space
+        ( metric-space-Metric-Ab)
+        ( metric-space-Metric-Ab)
+        ( add-Metric-Ab' MG x)
+    is-isometry-add-Metric-Ab' x =
+      tr
+        ( is-isometry-Metric-Space
+          ( metric-space-Metric-Ab)
+          ( metric-space-Metric-Ab))
+        ( eq-htpy (commutative-add-Metric-Ab MG x))
+        ( is-isometry-add-Metric-Ab x)
+
+  isometry-add-Metric-Ab' :
+    (x : type-Metric-Ab MG) →
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-add-Metric-Ab' x =
+    ( add-Metric-Ab' MG x , is-isometry-add-Metric-Ab' x)
+
   is-isometry-neg-Metric-Ab :
     is-isometry-Metric-Space
       ( metric-space-Metric-Ab)
@@ -175,4 +210,30 @@ module _
       ( metric-space-Metric-Ab)
       ( metric-space-Metric-Ab)
   isometry-neg-Metric-Ab = (neg-Metric-Ab MG , is-isometry-neg-Metric-Ab)
+```
+
+## Properties
+
+### Addition is a modulated uniformly continuous map from the product metric space of a metric abelian group to the metric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (G : Metric-Ab l1 l2)
+  where
+
+  modulated-ucont-map-add-pair-Metric-Ab :
+    modulated-ucont-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+  modulated-ucont-map-add-pair-Metric-Ab =
+    modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space
+      ( metric-space-Metric-Ab G)
+      ( metric-space-Metric-Ab G)
+      ( metric-space-Metric-Ab G)
+      ( add-Metric-Ab G)
+      ( is-isometry-add-Metric-Ab G)
+      ( is-isometry-add-Metric-Ab' G)
 ```
