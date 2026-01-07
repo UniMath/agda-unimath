@@ -1,4 +1,4 @@
-# Functorialiy of metric quotients of pseudometric spaces and short maps
+# Functoriality of metric quotients of pseudometric spaces and short maps
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
