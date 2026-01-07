@@ -22,6 +22,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import logic.functoriality-existential-quantification
 
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces
@@ -250,6 +252,22 @@ module _
   pointwise-continuous-uniformly-continuous-map-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-is-uniformly-continuous-map-Metric-Space f H)
+```
+
+### The action on sequences of uniformly continuous maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : uniformly-continuous-map-Metric-Space X Y)
+  where
+
+  map-sequence-uniformly-continuous-map-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-sequence-uniformly-continuous-map-Metric-Space =
+    map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
 ```
 
 ## See also

@@ -17,10 +17,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
@@ -61,8 +63,12 @@ is a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in the
 ## Definition
 
 ```agda
+is-cauchy-sequence-prop-ℝ : {l : Level} → sequence (ℝ l) → Prop l
+is-cauchy-sequence-prop-ℝ {l} =
+  is-cauchy-sequence-prop-Metric-Space (metric-space-ℝ l)
+
 is-cauchy-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU l
-is-cauchy-sequence-ℝ {l} = is-cauchy-sequence-Metric-Space (metric-space-ℝ l)
+is-cauchy-sequence-ℝ {l} u = type-Prop (is-cauchy-sequence-prop-ℝ u)
 
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
 cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
@@ -84,17 +90,13 @@ opaque
   has-limit-cauchy-sequence-ℝ {l} =
     has-limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
 
-  lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
-  lim-cauchy-sequence-ℝ {l} =
-    limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
+lim-cauchy-sequence-ℝ : {l : Level} → cauchy-sequence-ℝ l → ℝ l
+lim-cauchy-sequence-ℝ u = pr1 (has-limit-cauchy-sequence-ℝ u)
 
-  abstract
-    is-limit-lim-cauchy-sequence-ℝ :
-      {l : Level} (s : cauchy-sequence-ℝ l) →
-      is-limit-sequence-ℝ (seq-cauchy-sequence-ℝ s) (lim-cauchy-sequence-ℝ s)
-    is-limit-lim-cauchy-sequence-ℝ {l} =
-      is-limit-limit-cauchy-sequence-Complete-Metric-Space
-        ( complete-metric-space-ℝ l)
+is-limit-lim-cauchy-sequence-ℝ :
+  {l : Level} (u : cauchy-sequence-ℝ l) →
+  is-limit-sequence-ℝ (seq-cauchy-sequence-ℝ u) (lim-cauchy-sequence-ℝ u)
+is-limit-lim-cauchy-sequence-ℝ u = pr2 (has-limit-cauchy-sequence-ℝ u)
 ```
 
 ### The sum of Cauchy sequences is a Cauchy sequence
@@ -104,10 +106,10 @@ add-cauchy-sequence-ℝ :
   {l1 l2 : Level} → cauchy-sequence-ℝ l1 → cauchy-sequence-ℝ l2 →
   cauchy-sequence-ℝ (l1 ⊔ l2)
 add-cauchy-sequence-ℝ {l1} {l2} u v =
-  map-modulated-ucont-map-cauchy-sequence-Metric-Space
+  map-cauchy-sequence-uniformly-continuous-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
-    ( modulated-ucont-map-add-pair-ℝ l1 l2)
+    ( uniformly-continuous-map-add-pair-ℝ l1 l2)
     ( pair-cauchy-sequence-Metric-Space
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l2)
@@ -135,12 +137,11 @@ module _
   where
 
   abstract
-    is-cauchy-squeeze-theorem-sequence-ℝ :
-      is-inhabited (is-cauchy-sequence-ℝ b)
+    is-cauchy-squeeze-theorem-sequence-ℝ : is-cauchy-sequence-ℝ b
     is-cauchy-squeeze-theorem-sequence-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
-        open do-syntax-trunc-Prop (is-inhabited-Prop (is-cauchy-sequence-ℝ b))
+        open do-syntax-trunc-Prop (is-cauchy-sequence-prop-ℝ b)
       in do
         (μ , is-mod-μ) ← c-a→0
         let
@@ -191,19 +192,13 @@ module _
                 ( bound ε k m με≤k με≤m)))
 ```
 
-### If a sequence has a limit, there exists a modulus making it a Cauchy sequence
+### If a sequence has a limit, it is Cauchy
 
 ```agda
 abstract
-  exists-cauchy-modulus-has-limit-sequence-ℝ :
+  is-cauchy-has-limit-sequence-ℝ :
     {l : Level} (σ : sequence (ℝ l)) →
-    has-limit-sequence-ℝ σ →
-    is-inhabited (is-cauchy-sequence-ℝ σ)
-  exists-cauchy-modulus-has-limit-sequence-ℝ {l} σ (lim , is-lim) =
-    map-is-inhabited
-      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
-        ( metric-space-ℝ l)
-        ( σ)
-        ( lim))
-      ( is-lim)
+    has-limit-sequence-ℝ σ → is-cauchy-sequence-ℝ σ
+  is-cauchy-has-limit-sequence-ℝ {l} σ =
+    is-cauchy-has-limit-sequence-Metric-Space (metric-space-ℝ l)
 ```
