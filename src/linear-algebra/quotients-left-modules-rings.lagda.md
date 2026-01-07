@@ -26,6 +26,7 @@ open import group-theory.subgroups-abelian-groups
 
 open import linear-algebra.left-modules-rings
 open import linear-algebra.left-submodules-rings
+open import linear-algebra.linear-maps-left-modules-rings
 
 open import ring-theory.rings
 ```
@@ -122,7 +123,7 @@ module _
             ap-add-left-module-Ring R M
               ( right-negative-law-mul-left-module-Ring R M r x)
               ( refl))
-      ( is-closed-under-multiplication-by-scalar-left-submodule-Ring
+      ( is-closed-under-scalar-multiplication-left-submodule-Ring
         ( R)
         ( M)
         ( N)
@@ -263,3 +264,50 @@ module _
       ( left-unit-law-mul-quotient-left-module-Ring)
       ( associative-mul-quotient-left-module-Ring)
 ```
+
+## Properties
+
+### The linear map from `M` to `M/N`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-submodule-Ring l3 R M)
+  where
+
+  abstract
+    is-additive-map-quotient-hom-left-module-Ring :
+      is-additive-map-left-module-Ring
+        ( R)
+        ( M)
+        ( quotient-left-module-Ring R M N)
+        ( map-quotient-hom-left-module-Ring R M N)
+    is-additive-map-quotient-hom-left-module-Ring x y =
+      inv (compute-add-quotient-left-module-Ring R M N x y)
+
+    is-homogeneous-map-quotient-hom-left-module-Ring :
+      is-homogeneous-map-left-module-Ring
+        ( R)
+        ( M)
+        ( quotient-left-module-Ring R M N)
+        ( map-quotient-hom-left-module-Ring R M N)
+    is-homogeneous-map-quotient-hom-left-module-Ring r x =
+      inv (compute-mul-quotient-left-module-Ring R M N r x)
+
+  linear-map-quotient-left-module-Ring :
+    linear-map-left-module-Ring
+      ( R)
+      ( M)
+      ( quotient-left-module-Ring R M N)
+  linear-map-quotient-left-module-Ring =
+    ( map-quotient-hom-left-module-Ring R M N ,
+      is-additive-map-quotient-hom-left-module-Ring ,
+      is-homogeneous-map-quotient-hom-left-module-Ring)
+```
+
+## External links
+
+- [Quotient module](https://en.wikipedia.org/wiki/Quotient_module) on Wikipedia
+- [Quotient module](https://ncatlab.org/nlab/show/quotient+module) on $n$Lab
