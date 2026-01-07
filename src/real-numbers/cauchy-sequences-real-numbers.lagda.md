@@ -73,9 +73,9 @@ is-cauchy-sequence-ℝ {l} u = type-Prop (is-cauchy-sequence-prop-ℝ u)
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
 cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
 
-sequence-cauchy-sequence-ℝ :
+seq-cauchy-sequence-ℝ :
   {l : Level} → cauchy-sequence-ℝ l → sequence (ℝ l)
-sequence-cauchy-sequence-ℝ = pr1
+seq-cauchy-sequence-ℝ = pr1
 ```
 
 ## Properties
@@ -86,7 +86,7 @@ sequence-cauchy-sequence-ℝ = pr1
 opaque
   has-limit-cauchy-sequence-ℝ :
     {l : Level} (u : cauchy-sequence-ℝ l) →
-    has-limit-sequence-ℝ (sequence-cauchy-sequence-ℝ u)
+    has-limit-sequence-ℝ (seq-cauchy-sequence-ℝ u)
   has-limit-cauchy-sequence-ℝ {l} =
     has-limit-cauchy-sequence-Complete-Metric-Space (complete-metric-space-ℝ l)
 
@@ -95,7 +95,7 @@ lim-cauchy-sequence-ℝ u = pr1 (has-limit-cauchy-sequence-ℝ u)
 
 is-limit-lim-cauchy-sequence-ℝ :
   {l : Level} (u : cauchy-sequence-ℝ l) →
-  is-limit-sequence-ℝ (sequence-cauchy-sequence-ℝ u) (lim-cauchy-sequence-ℝ u)
+  is-limit-sequence-ℝ (seq-cauchy-sequence-ℝ u) (lim-cauchy-sequence-ℝ u)
 is-limit-lim-cauchy-sequence-ℝ u = pr2 (has-limit-cauchy-sequence-ℝ u)
 ```
 
@@ -109,7 +109,7 @@ add-cauchy-sequence-ℝ {l1} {l2} u v =
   map-cauchy-sequence-uniformly-continuous-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
-    ( uniformly-continuous-add-pair-ℝ l1 l2)
+    ( uniformly-continuous-map-add-pair-ℝ l1 l2)
     ( pair-cauchy-sequence-Metric-Space
       ( metric-space-ℝ l1)
       ( metric-space-ℝ l2)

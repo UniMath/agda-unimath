@@ -1,4 +1,4 @@
-# The images of Cauchy sequences under short maps between metric spaces
+# The action on Cauchy sequences of short maps between metric spaces
 
 ```agda
 module metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces where
@@ -47,4 +47,4 @@ module _
 
 ## See also
 
-- [The images of Cauchy sequences under uniformly continuous maps in metric spaces](metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces.md)
+- [The action on Cauchy sequences of uniformly continuous maps between metric spaces](metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces.md)

@@ -1,4 +1,4 @@
-# The images of modulated Cauchy sequences under modulated uniformly continuous maps between metric spaces
+# The action on modulated Cauchy sequences of modulated uniformly continuous maps between metric spaces
 
 ```agda
 module metric-spaces.action-on-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces where
@@ -49,10 +49,10 @@ module _
       ( sequence-modulated-cauchy-sequence-Metric-Space A u)
 
   abstract
-    cauchy-modulus-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space :
+    cauchy-modulus-map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space :
       cauchy-modulus-sequence-Metric-Space B
         ( sequence-map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space)
-    cauchy-modulus-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space
+    cauchy-modulus-map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space
       ε =
       let
         (map-f , μf , is-mod-μf) = f
@@ -62,9 +62,9 @@ module _
         ( N ,
           λ n k N≤n N≤k → is-mod-μf (seq-u n) ε (seq-u k) (H n k N≤n N≤k))
 
-  map-modulated-ucont-sequence-modulated-cauchy-sequence-Metric-Space :
+  map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space :
     modulated-cauchy-sequence-Metric-Space B
-  map-modulated-ucont-sequence-modulated-cauchy-sequence-Metric-Space =
+  map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space =
     ( sequence-map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space ,
-      cauchy-modulus-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space)
+      cauchy-modulus-map-modulated-cauchy-sequence-modulated-ucont-map-Metric-Space)
 ```

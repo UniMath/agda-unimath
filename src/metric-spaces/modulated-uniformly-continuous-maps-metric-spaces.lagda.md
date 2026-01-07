@@ -461,7 +461,7 @@ module _
         is-short-map-is-isometry-Metric-Space A C (λ a → f a b) (is-iso-fb b))
 ```
 
-### The image of a sequence under a modulated uniformly continuous map
+### The action on sequences of modulated uniformly continuous maps
 
 ```agda
 module _
@@ -471,9 +471,9 @@ module _
   (f : modulated-ucont-map-Metric-Space X Y)
   where
 
-  map-modulated-ucont-map-sequence-Metric-Space :
+  map-sequence-modulated-ucont-map-Metric-Space :
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
-  map-modulated-ucont-map-sequence-Metric-Space =
+  map-sequence-modulated-ucont-map-Metric-Space =
     map-sequence (map-modulated-ucont-map-Metric-Space X Y f)
 ```
 

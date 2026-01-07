@@ -292,11 +292,11 @@ module _
     pred-nonzero-ℕ (pr1 (smaller-reciprocal-ℚ⁺ ε⁺))
 
   abstract
-    is-modulated-cauchy-sequence-modulated-modulated-cauchy-sequence-cauchy-approximation-Metric-Space :
+    cauchy-modulus-seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space :
       cauchy-modulus-sequence-Metric-Space
         ( M)
         ( seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space)
-    is-modulated-cauchy-sequence-modulated-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
+    cauchy-modulus-seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
       ε⁺@(ε , _) =
       let
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
@@ -368,8 +368,8 @@ module _
   modulated-cauchy-sequence-cauchy-approximation-Metric-Space :
     modulated-cauchy-sequence-Metric-Space M
   modulated-cauchy-sequence-cauchy-approximation-Metric-Space =
-    seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space ,
-    is-modulated-cauchy-sequence-modulated-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
+    ( seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space ,
+      cauchy-modulus-seq-modulated-cauchy-sequence-cauchy-approximation-Metric-Space)
 ```
 
 ### Pairing of modulated Cauchy sequences

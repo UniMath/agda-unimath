@@ -112,9 +112,9 @@ module _
       ( lim))
   where
 
-  modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
+  modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
     ℚ⁺ → ℕ
-  modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
+  modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
     ε⁺@(ε , _) =
       let
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
@@ -123,13 +123,13 @@ module _
         map-modulus-modulated-cauchy-sequence-Metric-Space M x ε''⁺
 
   abstract
-    is-limit-modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
+    is-limit-modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
       is-limit-modulus-modulated-cauchy-sequence-Metric-Space
         ( M)
         ( x)
         ( lim)
-        ( modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
-    is-limit-modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
+        ( modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
+    is-limit-modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
       ε⁺@(ε , _) m n≤m =
       let
         (ε'⁺@(ε' , _) , 2ε'<ε) = bound-double-le-ℚ⁺ ε⁺
@@ -174,18 +174,18 @@ module _
                 ( m)
                 ( n≤m))))
 
-    is-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
+    is-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
       is-limit-modulated-cauchy-sequence-Metric-Space M x lim
-    is-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space =
+    is-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space =
       unit-trunc-Prop
-        ( modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space ,
-          is-limit-modulus-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
+        ( modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space ,
+          is-limit-modulus-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
 
-    has-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
+    has-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space :
       has-limit-modulated-cauchy-sequence-Metric-Space M x
-    has-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space =
+    has-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space =
       ( lim ,
-        is-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
+        is-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space)
 ```
 
 ### If a Cauchy approximation has a limit, its corresponding modulated Cauchy sequence has the same limit
@@ -347,13 +347,13 @@ module _
   where
 
   abstract
-    is-limit-cauchy-approximation-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-is-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space :
       is-limit-modulated-cauchy-sequence-Metric-Space
         ( M)
         ( modulated-cauchy-sequence-cauchy-approximation-Metric-Space M x)
         ( lim) →
       is-limit-cauchy-approximation-Metric-Space M x lim
-    is-limit-cauchy-approximation-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space =
+    is-limit-cauchy-approximation-is-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space =
       rec-trunc-Prop
         ( is-limit-cauchy-approximation-prop-Metric-Space M x lim)
         ( is-limit-cauchy-approximation-limit-modulus-modulated-cauchy-sequence-cauchy-approximation-Metric-Space

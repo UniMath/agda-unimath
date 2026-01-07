@@ -345,7 +345,7 @@ module _
       ( pseudometric-Metric-Space B)
 ```
 
-### The image of a sequence under a short map between metric spaces
+### The action on sequences of short maps
 
 ```agda
 module _
@@ -355,9 +355,9 @@ module _
   (f : short-map-Metric-Space X Y)
   where
 
-  map-short-map-sequence-Metric-Space :
+  map-sequence-short-map-Metric-Space :
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
-  map-short-map-sequence-Metric-Space =
+  map-sequence-short-map-Metric-Space =
     map-sequence (map-short-map-Metric-Space X Y f)
 ```
 

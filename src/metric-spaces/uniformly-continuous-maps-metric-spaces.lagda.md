@@ -228,7 +228,7 @@ module _
     tot is-uniformly-continuous-map-is-isometry-Metric-Space
 ```
 
-### The image of a sequence under a uniformly continuous map
+### The action on sequences of uniformly continuous maps
 
 ```agda
 module _
@@ -238,9 +238,9 @@ module _
   (f : uniformly-continuous-map-Metric-Space X Y)
   where
 
-  map-uniformly-continuous-map-sequence-Metric-Space :
+  map-sequence-uniformly-continuous-map-Metric-Space :
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
-  map-uniformly-continuous-map-sequence-Metric-Space =
+  map-sequence-uniformly-continuous-map-Metric-Space =
     map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
 ```
 

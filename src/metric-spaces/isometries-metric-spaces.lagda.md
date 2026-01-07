@@ -394,7 +394,7 @@ module _
       is-emb-map-isometry-Metric-Space)
 ```
 
-### The image of a sequence under an isometry between metric spaces
+### The action on sequences of isometries
 
 ```agda
 module _
@@ -404,8 +404,8 @@ module _
   (f : isometry-Metric-Space X Y)
   where
 
-  map-isometry-sequence-Metric-Space :
+  map-sequence-isometry-Metric-Space :
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
-  map-isometry-sequence-Metric-Space =
+  map-sequence-isometry-Metric-Space =
     map-sequence (map-isometry-Metric-Space X Y f)
 ```

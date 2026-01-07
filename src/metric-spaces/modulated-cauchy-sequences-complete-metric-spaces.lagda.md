@@ -73,7 +73,7 @@ module _
         ( x)
     has-limit-modulated-cauchy-sequence-Complete-Metric-Space =
       ind-Σ
-        ( has-limit-modulated-cauchy-sequence-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
+        ( has-limit-modulated-cauchy-sequence-is-limit-cauchy-approximation-modulated-cauchy-sequence-Metric-Space
           ( metric-space-Complete-Metric-Space M)
           ( x))
         ( is-complete-metric-space-Complete-Metric-Space
@@ -118,7 +118,7 @@ module _
   is-complete-metric-space-modulated-cauchy-sequences-have-limits-Metric-Space
     x =
     tot
-      ( is-limit-cauchy-approximation-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
+      ( is-limit-cauchy-approximation-is-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
         ( M)
         ( x))
       ( H (modulated-cauchy-sequence-cauchy-approximation-Metric-Space M x))
