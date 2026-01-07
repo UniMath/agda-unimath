@@ -13,6 +13,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.morphisms-cospans
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -44,17 +45,59 @@ both [commute](foundation.commuting-triangles-of-maps.md).
 
 ## Definitions
 
+### The predicate of being an equivalence of cospans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (s : cospan l3 A B) (t : cospan l4 A B)
+  where
+
+  is-equiv-hom-cospan : hom-cospan s t → UU (l3 ⊔ l4)
+  is-equiv-hom-cospan f = is-equiv (map-hom-cospan s t f)
+```
+
 ### Equivalences of cospans
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (s : cospan l3 A B) (t : cospan l4 A B)
   where
 
-  equiv-cospan : cospan l3 A B → cospan l4 A B → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  equiv-cospan c d =
-    Σ ( codomain-cospan c ≃ codomain-cospan d)
-      ( λ e → coherence-hom-cospan c d (map-equiv e))
+  equiv-cospan : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-cospan =
+    Σ ( cospanning-type-cospan s ≃ cospanning-type-cospan t)
+      ( λ e → coherence-hom-cospan s t (map-equiv e))
+
+  equiv-equiv-cospan :
+    equiv-cospan → cospanning-type-cospan s ≃ cospanning-type-cospan t
+  equiv-equiv-cospan = pr1
+
+  map-equiv-cospan :
+    equiv-cospan → cospanning-type-cospan s → cospanning-type-cospan t
+  map-equiv-cospan e = map-equiv (equiv-equiv-cospan e)
+
+  left-triangle-equiv-cospan :
+    (e : equiv-cospan) → left-coherence-hom-cospan s t (map-equiv-cospan e)
+  left-triangle-equiv-cospan e = pr1 (pr2 e)
+
+  right-triangle-equiv-cospan :
+    (e : equiv-cospan) → right-coherence-hom-cospan s t (map-equiv-cospan e)
+  right-triangle-equiv-cospan e = pr2 (pr2 e)
+
+  hom-equiv-cospan : equiv-cospan → hom-cospan s t
+  pr1 (hom-equiv-cospan e) = map-equiv-cospan e
+  pr1 (pr2 (hom-equiv-cospan e)) = left-triangle-equiv-cospan e
+  pr2 (pr2 (hom-equiv-cospan e)) = right-triangle-equiv-cospan e
+
+  is-equiv-equiv-cospan :
+    (e : equiv-cospan) → is-equiv-hom-cospan s t (hom-equiv-cospan e)
+  is-equiv-equiv-cospan e = is-equiv-map-equiv (equiv-equiv-cospan e)
+
+  compute-equiv-cospan :
+    Σ (hom-cospan s t) (is-equiv-hom-cospan s t) ≃ equiv-cospan
+  compute-equiv-cospan = equiv-right-swap-Σ
 ```
 
 ### The identity equivalence of cospans
@@ -82,21 +125,23 @@ module _
   equiv-eq-cospan : (c d : cospan l3 A B) → c ＝ d → equiv-cospan c d
   equiv-eq-cospan c .c refl = id-equiv-cospan c
 
-  is-torsorial-equiv-cospan :
-    (c : cospan l3 A B) → is-torsorial (equiv-cospan c)
-  is-torsorial-equiv-cospan c =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (pr1 c))
-      ( codomain-cospan c , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy' (left-map-cospan c))
-        ( left-map-cospan c , refl-htpy)
-        ( is-torsorial-htpy' (right-map-cospan c)))
+  abstract
+    is-torsorial-equiv-cospan :
+      (c : cospan l3 A B) → is-torsorial (equiv-cospan {l1} {l2} {l3} {l3} c)
+    is-torsorial-equiv-cospan c =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (pr1 c))
+        ( cospanning-type-cospan c , id-equiv)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-htpy' (left-map-cospan c))
+          ( left-map-cospan c , refl-htpy)
+          ( is-torsorial-htpy' (right-map-cospan c)))
 
-  is-equiv-equiv-eq-cospan :
-    (c d : cospan l3 A B) → is-equiv (equiv-eq-cospan c d)
-  is-equiv-equiv-eq-cospan c =
-    fundamental-theorem-id (is-torsorial-equiv-cospan c) (equiv-eq-cospan c)
+  abstract
+    is-equiv-equiv-eq-cospan :
+      (c d : cospan l3 A B) → is-equiv (equiv-eq-cospan c d)
+    is-equiv-equiv-eq-cospan c =
+      fundamental-theorem-id (is-torsorial-equiv-cospan c) (equiv-eq-cospan c)
 
   extensionality-cospan :
     (c d : cospan l3 A B) → (c ＝ d) ≃ (equiv-cospan c d)
