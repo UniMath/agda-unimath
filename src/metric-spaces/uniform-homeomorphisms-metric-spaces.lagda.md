@@ -25,9 +25,9 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.complete-metric-spaces
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -38,7 +38,7 @@ A
 {{#concept "uniform homeomorphism" WDID=Q2789884 WD="uniform isomorphism" Agda=uniform-homeomorphism-Metric-Space}}
 `f` from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space
 `Y` is an [equivalence](foundation.equivalences.md) between `X` and `Y` that is
-[uniformly continuous](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
+[uniformly continuous](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
 in each direction.
 
 ## Definition
@@ -48,29 +48,29 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
-  is-uniform-homeomorphism-prop-function-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-uniform-homeomorphism-prop-function-Metric-Space =
+  is-uniform-homeomorphism-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-uniform-homeomorphism-prop-map-Metric-Space =
     Σ-Prop
       ( is-equiv-Prop f)
       ( λ H →
-        ( is-uniformly-continuous-prop-function-Metric-Space X Y f) ∧
-        ( is-uniformly-continuous-prop-function-Metric-Space
+        ( is-uniformly-continuous-prop-map-Metric-Space X Y f) ∧
+        ( is-uniformly-continuous-prop-map-Metric-Space
           ( Y)
           ( X)
           ( map-inv-is-equiv H)))
 
-  is-uniform-homeomorphism-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-uniform-homeomorphism-function-Metric-Space =
-    type-Prop is-uniform-homeomorphism-prop-function-Metric-Space
+  is-uniform-homeomorphism-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-uniform-homeomorphism-map-Metric-Space =
+    type-Prop is-uniform-homeomorphism-prop-map-Metric-Space
 
 uniform-homeomorphism-Metric-Space :
   {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 uniform-homeomorphism-Metric-Space X Y =
-  type-subtype (is-uniform-homeomorphism-prop-function-Metric-Space X Y)
+  type-subtype (is-uniform-homeomorphism-prop-map-Metric-Space X Y)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -79,7 +79,7 @@ module _
   (f : uniform-homeomorphism-Metric-Space X Y)
   where
 
-  map-uniform-homeomorphism-Metric-Space : type-function-Metric-Space X Y
+  map-uniform-homeomorphism-Metric-Space : map-Metric-Space X Y
   map-uniform-homeomorphism-Metric-Space = pr1 f
 
   is-equiv-map-uniform-homeomorphism-Metric-Space :
@@ -92,7 +92,7 @@ module _
     ( map-uniform-homeomorphism-Metric-Space ,
       is-equiv-map-uniform-homeomorphism-Metric-Space)
 
-  map-inv-uniform-homeomorphism-Metric-Space : type-function-Metric-Space Y X
+  map-inv-uniform-homeomorphism-Metric-Space : map-Metric-Space Y X
   map-inv-uniform-homeomorphism-Metric-Space =
     map-inv-is-equiv is-equiv-map-uniform-homeomorphism-Metric-Space
 
@@ -113,7 +113,7 @@ module _
       ( equiv-uniform-homeomorphism-Metric-Space)
 
   is-uniformly-continuous-map-uniform-homeomorphism-Metric-Space :
-    is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-Metric-Space
       ( X)
       ( Y)
       ( map-uniform-homeomorphism-Metric-Space)
@@ -121,13 +121,13 @@ module _
     pr1 (pr2 (pr2 f))
 
   uniformly-continuous-map-uniform-homeomorphism-Metric-Space :
-    uniformly-continuous-function-Metric-Space X Y
+    uniformly-continuous-map-Metric-Space X Y
   uniformly-continuous-map-uniform-homeomorphism-Metric-Space =
     ( map-uniform-homeomorphism-Metric-Space ,
       is-uniformly-continuous-map-uniform-homeomorphism-Metric-Space)
 
   is-uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space :
-    is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-Metric-Space
       ( Y)
       ( X)
       ( map-inv-uniform-homeomorphism-Metric-Space)
@@ -135,7 +135,7 @@ module _
     pr2 (pr2 (pr2 f))
 
   uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space :
-    uniformly-continuous-function-Metric-Space Y X
+    uniformly-continuous-map-Metric-Space Y X
   uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space =
     ( map-inv-uniform-homeomorphism-Metric-Space ,
       is-uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space)

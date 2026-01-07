@@ -38,20 +38,24 @@ therefore a [Banach space](functional-analysis.real-banach-spaces.md)).
 
 ```agda
 abstract
-  is-complete-euclidean-metric-space-ℝ^ :
+  is-complete-euclidean-metric-space-fin-sequence-ℝ :
     (n : ℕ) (l : Level) →
-    is-complete-Metric-Space (euclidean-metric-space-ℝ^ n l)
-  is-complete-euclidean-metric-space-ℝ^ n l =
+    is-complete-Metric-Space (euclidean-metric-space-fin-sequence-ℝ n l)
+  is-complete-euclidean-metric-space-fin-sequence-ℝ n l =
     preserves-is-complete-uniform-homeomorphism-Metric-Space
       ( function-into-ℝ-Metric-Space (Fin n) l)
-      ( euclidean-metric-space-ℝ^ n l)
-      ( uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ n l)
+      ( euclidean-metric-space-fin-sequence-ℝ n l)
+      ( uniform-homeomorphism-id-product-euclidean-metric-space-fin-sequence-ℝ
+        ( n)
+        ( l))
       ( is-complete-function-into-ℝ-Metric-Space (Fin n) l)
 
-hilbert-space-ℝ^ : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
-hilbert-space-ℝ^ n l =
-  ( inner-product-space-ℝ^ n l , is-complete-euclidean-metric-space-ℝ^ n l)
+hilbert-space-fin-sequence-ℝ : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
+hilbert-space-fin-sequence-ℝ n l =
+  ( inner-product-space-fin-sequence-ℝ n l ,
+    is-complete-euclidean-metric-space-fin-sequence-ℝ n l)
 
-banach-space-ℝ^ : (n : ℕ) (l : Level) → ℝ-Banach-Space l (lsuc l)
-banach-space-ℝ^ n l = banach-space-ℝ-Hilbert-Space (hilbert-space-ℝ^ n l)
+banach-space-fin-sequence-ℝ : (n : ℕ) (l : Level) → ℝ-Banach-Space l (lsuc l)
+banach-space-fin-sequence-ℝ n l =
+  banach-space-ℝ-Hilbert-Space (hilbert-space-fin-sequence-ℝ n l)
 ```
