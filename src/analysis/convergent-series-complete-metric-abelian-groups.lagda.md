@@ -79,7 +79,8 @@ module _
       ( metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ) →
     is-convergent-series-Complete-Metric-Ab G σ
-  is-convergent-cauchy-modulus-partial-sum-series-Complete-Metric-Ab H =
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
+    H =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ , H)
@@ -100,7 +101,7 @@ module _
       is-cauchy-sequence-Metric-Space
         ( metric-space-Complete-Metric-Ab G)
         ( partial-sum-series-Complete-Metric-Ab G σ)
-    is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab =
+    is-cauchy-sequence-partial-sum-series-is-convergent-series-Complete-Metric-Ab =
       is-cauchy-has-limit-sequence-Metric-Space
         ( metric-space-Complete-Metric-Ab G)
 ```

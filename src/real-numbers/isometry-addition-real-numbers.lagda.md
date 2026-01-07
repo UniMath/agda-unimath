@@ -187,12 +187,12 @@ modulated-ucont-map-add-pair-ℝ l1 l2 =
 ```agda
 uniformly-continuous-add-pair-ℝ :
   (l1 l2 : Level) →
-  uniformly-continuous-function-Metric-Space
+  uniformly-continuous-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
 uniformly-continuous-add-pair-ℝ l1 l2 =
-  uniformly-continuous-modulated-ucont-map-Metric-Space
+  uniformly-continuous-map-modulated-ucont-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
-    ( modulated-ucont-add-pair-ℝ l1 l2)
+    ( modulated-ucont-map-add-pair-ℝ l1 l2)
 ```

@@ -16,6 +16,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.propositions
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -62,8 +63,12 @@ is a [Cauchy sequence](metric-spaces.cauchy-sequences-metric-spaces.md) in the
 ## Definition
 
 ```agda
+is-cauchy-sequence-prop-ℝ : {l : Level} → sequence (ℝ l) → Prop l
+is-cauchy-sequence-prop-ℝ {l} =
+  is-cauchy-sequence-prop-Metric-Space (metric-space-ℝ l)
+
 is-cauchy-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU l
-is-cauchy-sequence-ℝ {l} = is-cauchy-sequence-Metric-Space (metric-space-ℝ l)
+is-cauchy-sequence-ℝ {l} u = type-Prop (is-cauchy-sequence-prop-ℝ u)
 
 cauchy-sequence-ℝ : (l : Level) → UU (lsuc l)
 cauchy-sequence-ℝ l = cauchy-sequence-Metric-Space (metric-space-ℝ l)
@@ -91,7 +96,7 @@ lim-cauchy-sequence-ℝ u = pr1 (has-limit-cauchy-sequence-ℝ u)
 is-limit-lim-cauchy-sequence-ℝ :
   {l : Level} (u : cauchy-sequence-ℝ l) →
   is-limit-sequence-ℝ (sequence-cauchy-sequence-ℝ u) (lim-cauchy-sequence-ℝ u)
-is-limit-lim-cauchy-sequence-ℝ = pr2 (has-limit-cauchy-sequence-ℝ u)
+is-limit-lim-cauchy-sequence-ℝ u = pr2 (has-limit-cauchy-sequence-ℝ u)
 ```
 
 ### The sum of Cauchy sequences is a Cauchy sequence
@@ -132,12 +137,11 @@ module _
   where
 
   abstract
-    is-cauchy-squeeze-theorem-sequence-ℝ :
-      is-inhabited (is-cauchy-sequence-ℝ b)
+    is-cauchy-squeeze-theorem-sequence-ℝ : is-cauchy-sequence-ℝ b
     is-cauchy-squeeze-theorem-sequence-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
-        open do-syntax-trunc-Prop (is-inhabited-Prop (is-cauchy-sequence-ℝ b))
+        open do-syntax-trunc-Prop (is-cauchy-sequence-prop-ℝ b)
       in do
         (μ , is-mod-μ) ← c-a→0
         let
