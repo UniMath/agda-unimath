@@ -67,6 +67,9 @@ open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spac
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.action-on-convergent-sequences-modulated-uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.action-on-convergent-sequences-short-maps-metric-spaces public
+open import metric-spaces.action-on-convergent-sequences-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.action-on-modulated-cauchy-sequences-modulated-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.apartness-located-metric-spaces public
 open import metric-spaces.approximations-located-metric-spaces public
