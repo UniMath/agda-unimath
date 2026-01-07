@@ -96,7 +96,7 @@ module _
       ( partial-sum-series-ℝ-Banach-Space V σ) →
     is-convergent-series-ℝ-Banach-Space V σ
   is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ-Banach-Space =
-    is-convergent-series-cauchy-modulus-partial-sum-series-Complete-Metric-Ab
+    is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
       ( complete-metric-ab-add-ℝ-Banach-Space V)
       ( σ)
 ```
@@ -149,7 +149,7 @@ module _
   (σ : series-ℝ-Banach-Space V)
   where
 
-  is-cauchy-sequence-partial-sum-is-convergent-series-ℝ-Banach-Space :
+  is-cauchy-sequence-partial-sum-series-is-convergent-series-ℝ-Banach-Space :
     is-convergent-series-ℝ-Banach-Space V σ →
     is-cauchy-sequence-ℝ-Banach-Space V (partial-sum-series-ℝ-Banach-Space V σ)
   is-cauchy-sequence-partial-sum-series-is-convergent-series-ℝ-Banach-Space =

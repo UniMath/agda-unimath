@@ -26,6 +26,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-sequences-metric-spaces
+open import metric-spaces.modulated-cauchy-sequences-metric-spaces
 
 open import order-theory.large-posets
 
@@ -103,7 +104,7 @@ module _
         lim-modulus-τ ← is-sum-sum-convergent-series-ℝ τ
         let
           cauchy-mod-partial-sum-τ =
-            is-cauchy-has-limit-modulus-sequence-Metric-Space
+            cauchy-modulus-limit-modulus-sequence-Metric-Space
               ( metric-space-ℝ l2)
               ( partial-sum-convergent-series-ℝ τ)
               ( sum-convergent-series-ℝ τ)
@@ -167,15 +168,15 @@ module _
                           ( n +ℕ k)
                           ( leq-add-ℕ n k)))))))
         is-convergent-series-is-cauchy-sequence-partial-sum-series-ℝ
-          σ
-          ( λ ε →
-            ( μ ε ,
-              is-cauchy-modulus-is-cauchy-modulus-sequence-Metric-Space'
-                ( metric-space-ℝ l1)
-                ( partial-sum-series-ℝ σ)
-                ( ε)
-                ( μ ε)
-                ( is-mod'-μ ε)))
+          ( σ)
+          ( unit-trunc-Prop
+            ( cauchy-modulus-neighborhood-add-sequence-Metric-Space
+              ( metric-space-ℝ l1)
+              ( _)
+              ( μ)
+              ( λ ε k →
+                is-symmetric-neighborhood-ℝ _ _ _
+                  ( is-mod'-μ ε _ k (refl-leq-ℕ (μ ε))))))
 
 module _
   {l1 l2 : Level}

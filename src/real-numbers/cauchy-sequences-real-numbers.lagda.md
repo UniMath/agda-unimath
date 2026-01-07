@@ -16,8 +16,8 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import lists.sequences
