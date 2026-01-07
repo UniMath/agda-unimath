@@ -1,9 +1,9 @@
-# Uniformly continuous functions on proper closed intervals of real numbers
+# Uniformly continuous real functions on proper closed intervals of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers where
+module real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -23,7 +23,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.apartness-real-numbers
 open import real-numbers.closed-intervals-real-numbers
@@ -53,7 +53,7 @@ is-ucont-prop-map-proper-closed-interval-ℝ :
   (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) →
   Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
 is-ucont-prop-map-proper-closed-interval-ℝ {l1} {l2} [a,b] =
-  is-uniformly-continuous-prop-function-Metric-Space
+  is-uniformly-continuous-prop-map-Metric-Space
     ( metric-space-proper-closed-interval-ℝ l1 [a,b])
     ( metric-space-ℝ l2)
 
@@ -69,7 +69,7 @@ ucont-map-proper-closed-interval-ℝ :
   (l1 l2 : Level) {l3 l4 : Level} →
   proper-closed-interval-ℝ l3 l4 → UU (lsuc (l1 ⊔ l2) ⊔ l3 ⊔ l4)
 ucont-map-proper-closed-interval-ℝ l1 l2 [a,b] =
-  uniformly-continuous-function-Metric-Space
+  uniformly-continuous-map-Metric-Space
     ( metric-space-proper-closed-interval-ℝ l1 [a,b])
     ( metric-space-ℝ l2)
 ```
