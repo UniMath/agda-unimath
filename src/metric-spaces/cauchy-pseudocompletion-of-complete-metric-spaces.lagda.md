@@ -25,14 +25,14 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
-open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ```
 
@@ -55,7 +55,7 @@ module _
   where
 
   map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    type-function-Pseudometric-Space
+    map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( pseudometric-Metric-Space M)
   map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
@@ -87,13 +87,13 @@ module _
       ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
       ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
 
-  is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    is-short-function-Pseudometric-Space
+  is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+    is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space M)
       ( ( const-cauchy-approximation-Metric-Space M) ∘
         ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
-  is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+  is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
     d x y =
       preserves-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
@@ -112,7 +112,7 @@ module _
         ( d)
 
   is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    is-short-function-Pseudometric-Space
+    is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( pseudometric-Metric-Space M)
       ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space)
@@ -139,7 +139,7 @@ module _
             ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)
             ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y))
           ( ap (add-ℚ⁺' d) (eq-add-split-ℚ⁺ δ) ∙ commutative-add-ℚ⁺ δ d)
-          ( is-short-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
+          ( is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
             ( d)
             ( x)
             ( y)
@@ -148,7 +148,7 @@ module _
             ( right-summand-split-ℚ⁺ δ))
 
   short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    short-function-Pseudometric-Space
+    short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( pseudometric-Metric-Space M)
   short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =

@@ -23,7 +23,7 @@ open import foundation.universe-levels
 open import metric-spaces.closed-subsets-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 
 open import order-theory.closed-intervals-large-posets
@@ -38,8 +38,8 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.short-function-binary-maximum-real-numbers
-open import real-numbers.short-function-binary-minimum-real-numbers
+open import real-numbers.short-map-binary-maximum-real-numbers
+open import real-numbers.short-map-binary-minimum-real-numbers
 ```
 
 </details>
@@ -188,33 +188,33 @@ clamp-closed-interval-ℝ ((a , b) , a≤b) x =
     leq-max-leq-leq-ℝ _ _ _ a≤b (leq-left-min-ℝ b x))
 ```
 
-### The clamping function is a short function
+### The clamping function is a short map
 
 ```agda
 abstract
-  is-short-clamp-closed-interval-ℝ :
+  is-short-map-clamp-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
-    is-short-function-Metric-Space
+    is-short-map-Metric-Space
       ( metric-space-ℝ l3)
       ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
       ( clamp-closed-interval-ℝ [a,b])
-  is-short-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
-    is-short-comp-is-short-function-Metric-Space
+  is-short-map-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
+    is-short-map-comp-Metric-Space
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
       ( metric-space-ℝ _)
       ( max-ℝ a)
       ( min-ℝ b)
-      ( is-short-function-left-max-ℝ a)
-      ( is-short-function-left-min-ℝ b)
+      ( is-short-map-left-max-ℝ a)
+      ( is-short-map-left-min-ℝ b)
 
-short-clamp-closed-interval-ℝ :
+short-map-clamp-closed-interval-ℝ :
   {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
-  short-function-Metric-Space
+  short-map-Metric-Space
     ( metric-space-ℝ l3)
     ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
-short-clamp-closed-interval-ℝ [a,b] =
-  ( clamp-closed-interval-ℝ [a,b] , is-short-clamp-closed-interval-ℝ [a,b])
+short-map-clamp-closed-interval-ℝ [a,b] =
+  ( clamp-closed-interval-ℝ [a,b] , is-short-map-clamp-closed-interval-ℝ [a,b])
 ```
 
 ### If both endpoints of a closed interval `[x, y]` are in a `d`-neighborhood of `z`, then `[x, y] ⊆ neighborhood d z`
