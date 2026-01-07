@@ -88,7 +88,7 @@ open import real-numbers.nonzero-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
-open import real-numbers.product-metric-space-of-real-numbers public
+open import real-numbers.metric-space-of-functions-into-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.rational-approximates-of-real-numbers public

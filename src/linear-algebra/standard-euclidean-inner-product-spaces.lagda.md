@@ -48,7 +48,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
-open import real-numbers.product-metric-space-of-real-numbers
+open import real-numbers.metric-space-of-functions-into-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
@@ -160,7 +160,7 @@ abstract
     (n : ℕ) (l : Level) →
     is-short-function-Metric-Space
       ( euclidean-metric-space-ℝ^ n l)
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( id)
   is-short-map-id-euclidean-product-metric-space-ℝ^ n l ε u v ∥u-v∥≤ε i =
     neighborhood-dist-ℝ
@@ -178,12 +178,12 @@ abstract
     (n : ℕ) (l : Level) →
     is-uniformly-continuous-function-Metric-Space
       ( euclidean-metric-space-ℝ^ n l)
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( id)
   is-uniformly-continuous-map-id-euclidean-product-metric-space-ℝ^ n l =
     is-uniformly-continuous-is-short-function-Metric-Space
       ( euclidean-metric-space-ℝ^ n l)
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( id)
       ( is-short-map-id-euclidean-product-metric-space-ℝ^ n l)
 ```
@@ -196,7 +196,7 @@ abstract
     (n : ℕ) (l : Level) (α : ℚ⁺) →
     leq-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ n)) (real-ℚ⁺ α) →
     is-lipschitz-constant-function-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ^ n l)
       ( id)
       ( α)
@@ -242,7 +242,7 @@ abstract
   is-lipschitz-map-id-product-euclidean-metric-space-ℝ^ :
     (n : ℕ) (l : Level) →
     is-lipschitz-function-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ^ n l)
       ( id)
   is-lipschitz-map-id-product-euclidean-metric-space-ℝ^ n l =
@@ -250,7 +250,7 @@ abstract
       open
         do-syntax-trunc-Prop
           ( is-lipschitz-function-prop-Metric-Space
-            ( Π-metric-space-ℝ (Fin n) l)
+            ( function-into-ℝ-Metric-Space (Fin n) l)
             ( euclidean-metric-space-ℝ^ n l)
             ( id))
     in do
@@ -274,12 +274,12 @@ abstract
   is-uniformly-continuous-map-id-product-euclidean-metric-space-ℝ^ :
     (n : ℕ) (l : Level) →
     is-uniformly-continuous-function-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ^ n l)
       ( id)
   is-uniformly-continuous-map-id-product-euclidean-metric-space-ℝ^ n l =
     is-uniformly-continuous-is-lipschitz-function-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ^ n l)
       ( id)
       ( is-lipschitz-map-id-product-euclidean-metric-space-ℝ^ n l)
@@ -291,7 +291,7 @@ abstract
 uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ :
   (n : ℕ) (l : Level) →
   uniform-homeomorphism-Metric-Space
-    ( Π-metric-space-ℝ (Fin n) l)
+    ( function-into-ℝ-Metric-Space (Fin n) l)
     ( euclidean-metric-space-ℝ^ n l)
 uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ n l =
   ( id ,

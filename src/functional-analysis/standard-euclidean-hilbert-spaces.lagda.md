@@ -20,7 +20,7 @@ open import linear-algebra.standard-euclidean-inner-product-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.uniform-homeomorphisms-metric-spaces
 
-open import real-numbers.product-metric-space-of-real-numbers
+open import real-numbers.metric-space-of-functions-into-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -43,10 +43,10 @@ abstract
     is-complete-Metric-Space (euclidean-metric-space-ℝ^ n l)
   is-complete-euclidean-metric-space-ℝ^ n l =
     preserves-is-complete-uniform-homeomorphism-Metric-Space
-      ( Π-metric-space-ℝ (Fin n) l)
+      ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ^ n l)
       ( uniform-homeomorphism-id-product-euclidean-metric-space-ℝ^ n l)
-      ( is-complete-Π-metric-space-ℝ (Fin n) l)
+      ( is-complete-function-into-ℝ-Metric-Space (Fin n) l)
 
 hilbert-space-ℝ^ : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
 hilbert-space-ℝ^ n l =
