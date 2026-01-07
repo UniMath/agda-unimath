@@ -53,11 +53,11 @@ module _
       ( x)
       ( l)
 
-  map-cauchy-sequence-Complete-Metric-Space :
+  sequence-cauchy-sequence-Complete-Metric-Space :
     cauchy-sequence-Complete-Metric-Space →
     sequence (type-Complete-Metric-Space M)
-  map-cauchy-sequence-Complete-Metric-Space =
-    map-cauchy-sequence-Metric-Space (metric-space-Complete-Metric-Space M)
+  sequence-cauchy-sequence-Complete-Metric-Space =
+    sequence-cauchy-sequence-Metric-Space (metric-space-Complete-Metric-Space M)
 ```
 
 ## Properties

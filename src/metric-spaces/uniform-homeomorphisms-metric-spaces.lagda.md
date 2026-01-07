@@ -25,8 +25,10 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.limits-of-cauchy-sequences-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
@@ -171,50 +173,51 @@ module _
       in do
         (μXY , is-mod-μXY) ←
           is-uniformly-continuous-map-uniform-homeomorphism-Metric-Space X Y f
-        mod-YX ←
-          is-uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space
-            ( X)
-            ( Y)
-            ( f)
         is-complete-metric-space-cauchy-sequences-have-limits-Metric-Space
           ( Y)
           ( λ uY →
             let
               uX : cauchy-sequence-Metric-Space X
               uX =
-                map-modulated-ucont-map-cauchy-sequence-Metric-Space
+                map-cauchy-sequence-uniformly-continuous-map-Metric-Space
                   ( Y)
                   ( X)
-                  ( map-inv-uniform-homeomorphism-Metric-Space X Y f , mod-YX)
+                  ( uniformly-continuous-map-inv-uniform-homeomorphism-Metric-Space
+                    ( X)
+                    ( Y)
+                    ( f))
                   ( uY)
-              lim-uX = limit-cauchy-sequence-Complete-Metric-Space (X , H) uX
-              (μ-uX , is-mod-lim-μ-uX) =
-                limit-modulus-limit-cauchy-sequence-Complete-Metric-Space
-                  ( X , H)
-                  ( uX)
+
+              lim-uX = lim-cauchy-sequence-Complete-Metric-Space (X , H) uX
               lim-uY = map-uniform-homeomorphism-Metric-Space X Y f lim-uX
             in
               ( lim-uY ,
-                intro-exists
-                  ( μ-uX ∘ μXY)
-                  ( λ ε n μ-uXμXY≤n →
-                    tr
-                      ( λ y → neighborhood-Metric-Space Y ε y lim-uY)
-                      ( is-section-map-inv-uniform-homeomorphism-Metric-Space
-                        ( X)
-                        ( Y)
-                        ( f)
-                        ( map-cauchy-sequence-Metric-Space Y uY n))
-                      ( is-mod-μXY
-                        ( map-inv-uniform-homeomorphism-Metric-Space
-                          ( X)
-                          ( Y)
-                          ( f)
-                          ( map-cauchy-sequence-Metric-Space Y uY n))
-                        ( ε)
-                        ( lim-uX)
-                        ( is-mod-lim-μ-uX
-                          ( μXY ε)
-                          ( n)
-                          ( μ-uXμXY≤n))))))
+                elim-exists
+                  ( is-limit-prop-cauchy-sequence-Metric-Space Y uY lim-uY)
+                  ( λ μ-uX is-mod-lim-μ-uX →
+                    intro-exists
+                      ( μ-uX ∘ μXY)
+                      ( λ ε n μ-uXμXY≤n →
+                        tr
+                          ( λ y → neighborhood-Metric-Space Y ε y lim-uY)
+                          ( is-section-map-inv-uniform-homeomorphism-Metric-Space
+                            ( X)
+                            ( Y)
+                            ( f)
+                            ( sequence-cauchy-sequence-Metric-Space Y uY n))
+                          ( is-mod-μXY
+                            ( map-inv-uniform-homeomorphism-Metric-Space
+                              ( X)
+                              ( Y)
+                              ( f)
+                              ( sequence-cauchy-sequence-Metric-Space Y uY n))
+                            ( ε)
+                            ( lim-uX)
+                            ( is-mod-lim-μ-uX
+                              ( μXY ε)
+                              ( n)
+                              ( μ-uXμXY≤n)))))
+                  ( is-limit-lim-cauchy-sequence-Complete-Metric-Space
+                    ( X , H)
+                    ( uX))))
 ```
