@@ -201,6 +201,58 @@ module _
     right-inverse-law-add-Ab (ab-left-module-Ring R M)
 ```
 
+### Interchange laws of addition
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    interchange-add-add-left-module-Ring :
+      (x y z w : type-left-module-Ring R M) →
+      add-left-module-Ring R M
+        ( add-left-module-Ring R M x y)
+        ( add-left-module-Ring R M z w) ＝
+      add-left-module-Ring R M
+        ( add-left-module-Ring R M x z)
+        ( add-left-module-Ring R M y w)
+    interchange-add-add-left-module-Ring =
+      interchange-add-add-Ab (ab-left-module-Ring R M)
+```
+
+### Negation distributes over addition
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    distributive-neg-add-left-module-Ring :
+      (x y : type-left-module-Ring R M) →
+      neg-left-module-Ring R M (add-left-module-Ring R M x y) ＝
+      add-left-module-Ring R M
+        ( neg-left-module-Ring R M x)
+        ( neg-left-module-Ring R M y)
+    distributive-neg-add-left-module-Ring =
+      distributive-neg-add-Ab (ab-left-module-Ring R M)
+```
+
+### `-(-x) = x`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    neg-neg-left-module-Ring :
+      (x : type-left-module-Ring R M) →
+      neg-left-module-Ring R M (neg-left-module-Ring R M x) ＝ x
+    neg-neg-left-module-Ring = neg-neg-Ab (ab-left-module-Ring R M)
+```
+
 ### Unit laws for multiplication
 
 ```agda
@@ -553,3 +605,12 @@ module _
     add-diff-left-module-Ring =
       add-right-subtraction-Ab (ab-left-module-Ring R M)
 ```
+
+## See also
+
+- [Left modules over commutative rings](linear-algebra.left-modules-commutative-rings.md)
+
+## External links
+
+- [Module (mathematics)](<https://en.wikipedia.org/wiki/Module_(mathematics)>)
+  at Wikipedia
