@@ -43,12 +43,12 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.metric-space-of-functions-into-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
-open import real-numbers.metric-space-of-functions-into-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
