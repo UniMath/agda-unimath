@@ -127,10 +127,19 @@ module _
   (f g : isometry-Pseudometric-Space A B)
   where
 
+  htpy-isometry-Pseudometric-Space : UU (l1 ⊔ l1')
+  htpy-isometry-Pseudometric-Space =
+    map-isometry-Pseudometric-Space A B f ~
+    map-isometry-Pseudometric-Space A B g
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  {f g : isometry-Pseudometric-Space A B}
+  where
+
   equiv-eq-htpy-map-isometry-Pseudometric-Space :
-    ( f ＝ g) ≃
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g)
+    (f ＝ g) ≃ htpy-isometry-Pseudometric-Space A B f g
   equiv-eq-htpy-map-isometry-Pseudometric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
@@ -139,16 +148,12 @@ module _
       ( g)
 
   htpy-eq-map-isometry-Pseudometric-Space :
-    ( f ＝ g) →
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g)
+    (f ＝ g) → htpy-isometry-Pseudometric-Space A B f g
   htpy-eq-map-isometry-Pseudometric-Space =
     map-equiv equiv-eq-htpy-map-isometry-Pseudometric-Space
 
   eq-htpy-map-isometry-Pseudometric-Space :
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g) →
-    ( f ＝ g)
+    htpy-isometry-Pseudometric-Space A B f g → (f ＝ g)
   eq-htpy-map-isometry-Pseudometric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Pseudometric-Space
 ```
@@ -239,13 +244,6 @@ module _
     eq-htpy-map-isometry-Pseudometric-Space
       ( A)
       ( B)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-isometry-Pseudometric-Space B)
-        ( f))
-      ( f)
       ( refl-htpy)
 
   right-unit-law-comp-isometry-Pseudometric-Space :
@@ -257,13 +255,6 @@ module _
     eq-htpy-map-isometry-Pseudometric-Space
       ( A)
       ( B)
-      ( f)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-isometry-Pseudometric-Space A))
       ( refl-htpy)
 ```
 
@@ -292,12 +283,6 @@ module _
     eq-htpy-map-isometry-Pseudometric-Space
       ( A)
       ( D)
-      ( comp-isometry-Pseudometric-Space A B D
-        ( comp-isometry-Pseudometric-Space B C D h g)
-        ( f))
-      ( comp-isometry-Pseudometric-Space A C D
-        ( h)
-        ( comp-isometry-Pseudometric-Space A B C g f))
       ( refl-htpy)
 ```
 
@@ -360,10 +345,6 @@ module _
     ( id-isometry-Pseudometric-Space B)
   is-section-isometry-inv-is-equiv-isometry-Pseudometric-Space =
     eq-htpy-map-isometry-Pseudometric-Space B B
-      ( comp-isometry-Pseudometric-Space B A B
-        ( f)
-        ( isometry-inv-is-equiv-isometry-Pseudometric-Space))
-      ( id-isometry-Pseudometric-Space B)
       ( is-section-map-inv-is-equiv E)
 
   is-retraction-isometry-inv-is-equiv-isometry-Pseudometric-Space :
@@ -373,9 +354,5 @@ module _
     ( id-isometry-Pseudometric-Space A)
   is-retraction-isometry-inv-is-equiv-isometry-Pseudometric-Space =
     eq-htpy-map-isometry-Pseudometric-Space A A
-      ( comp-isometry-Pseudometric-Space A B A
-        ( isometry-inv-is-equiv-isometry-Pseudometric-Space)
-        ( f))
-      ( id-isometry-Pseudometric-Space A)
       ( is-retraction-map-inv-is-equiv E)
 ```
