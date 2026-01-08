@@ -51,7 +51,7 @@ Precomposition with the natural
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 
 ```text
-q : P → [P]
+  q : P → [P]
 ```
 
 maps [short maps](metric-spaces.short-maps-metric-spaces.md) `[P] → M` to a
