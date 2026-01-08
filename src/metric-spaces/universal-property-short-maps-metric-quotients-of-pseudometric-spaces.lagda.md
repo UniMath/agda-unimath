@@ -498,8 +498,8 @@ module _
   where
 
   equiv-short-map-metric-quotient-Pseudometric-Space :
-    ( short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M) ≃
-    ( short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+    short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M ≃
+    short-map-Pseudometric-Space P (pseudometric-Metric-Space M)
   equiv-short-map-metric-quotient-Pseudometric-Space =
     ( precomp-short-map-metric-quotient-Pseudometric-Space P M ,
       is-equiv-precomp-short-map-metric-quotient-Pseudometric-Space P M)
