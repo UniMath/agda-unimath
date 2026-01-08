@@ -312,7 +312,7 @@ abstract
 ```agda
 uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin :
   (n : ℕ) (l : Level) →
-  uniform-homeomorphism-Metric-Space
+  uniform-homeo-Metric-Space
     ( function-into-ℝ-Metric-Space (Fin n) l)
     ( euclidean-metric-space-ℝ-Fin n l)
 uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin n l =
