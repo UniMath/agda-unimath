@@ -272,7 +272,7 @@ module _
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where abstract
 
-  is-short-map-short-map-metric-quotient-Pseudometric-Space :
+  is-short-map-exten-short-map-metric-quotient-Pseudometric-Space :
     is-short-map-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
