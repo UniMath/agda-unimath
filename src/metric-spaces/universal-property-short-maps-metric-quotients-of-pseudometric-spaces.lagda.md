@@ -485,7 +485,7 @@ module _
       (precomp-short-map-metric-quotient-Pseudometric-Space P M)
   is-equiv-precomp-short-map-metric-quotient-Pseudometric-Space =
     is-equiv-is-contr-map
-      ( is-contr-map-precomp-short-map-metric-quotient-Pseudometric-Space)
+      is-contr-map-precomp-short-map-metric-quotient-Pseudometric-Space
 ```
 
 ### The equivalence between short maps from a pseudometric space in a metric space and short maps from the metric quotient
