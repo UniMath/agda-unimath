@@ -65,7 +65,7 @@ a pseudometric space to a metric space are
 to short maps from its metric quotient.
 
 Equivalently, the metric quotient satisfies the
-{{#concept "universal property" Disambiguation="of metric quotients and short maps" Agda=is-contr-coh-short-map-metric-quotient-Pseudometric-Space}}
+{{#concept "universal property" Disambiguation="of metric quotients and short maps" Agda=is-contr-extension-short-map-metric-quotient-Pseudometric-Space}}
 of metric quotients: for any short map `f : P → M` from a pseudometric space in
 a metric space, there [uniquely exists](foundation.uniqueness-quantification.md)
 an extension of `f` along `q`, i.e. a short map `g : [P] → M` such that
