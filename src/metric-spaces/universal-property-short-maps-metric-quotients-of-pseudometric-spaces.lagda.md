@@ -339,7 +339,7 @@ module _
     ( map-short-map-metric-quotient-Pseudometric-space P M f ,
       is-short-map-short-map-metric-quotient-Pseudometric-Space P M f)
 
-  extension-short-map-short-map-metric-quotient-Pseudometric-Space :
+  exten-short-map-metric-quotient-Pseudometric-Space :
     extension-short-map-metric-quotient-Pseudometric-Space P M f
   extension-short-map-short-map-metric-quotient-Pseudometric-Space =
     ( short-map-short-map-metric-quotient-Pseudometric-Space ,
