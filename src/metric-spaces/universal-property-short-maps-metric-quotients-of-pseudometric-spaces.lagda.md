@@ -333,7 +333,7 @@ module _
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  short-map-short-map-metric-quotient-Pseudometric-Space :
+  short-map-exten-short-map-metric-quotient-Pseudometric-Space :
     short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M
   short-map-short-map-metric-quotient-Pseudometric-Space =
     ( map-short-map-metric-quotient-Pseudometric-space P M f ,
