@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "standard Euclidean space" WDID=Q17295 WD="Euclidean space"}}
+The {{#concept "standard Euclidean space" WDID=Q17295 WD="Euclidean space" Agda=vector-space-ℝ-Fin}}
 `ℝⁿ` is the [real vector space](linear-algebra.real-vector-spaces.md) of
 [finite sequences](lists.finite-sequences.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) of length `n`.
