@@ -339,22 +339,11 @@ module _
     ( map-short-map-metric-quotient-Pseudometric-space P M f ,
       is-short-map-short-map-metric-quotient-Pseudometric-Space P M f)
 
-  is-extension-short-map-short-map-metric-quotient-Pseudometric-Space :
-    is-extension-short-map-metric-quotient-Pseudometric-Space P M f
-      ( short-map-short-map-metric-quotient-Pseudometric-Space)
-  is-extension-short-map-short-map-metric-quotient-Pseudometric-Space x =
-    compute-map-short-map-metric-quotient-Pseudometric-Space
-      ( P)
-      ( M)
-      ( f)
-      ( map-metric-quotient-Pseudometric-Space P x)
-      ( is-in-class-map-quotient-Pseudometric-Space P x)
-
   extension-short-map-short-map-metric-quotient-Pseudometric-Space :
     extension-short-map-metric-quotient-Pseudometric-Space P M f
   extension-short-map-short-map-metric-quotient-Pseudometric-Space =
     ( short-map-short-map-metric-quotient-Pseudometric-Space ,
-      is-extension-short-map-short-map-metric-quotient-Pseudometric-Space)
+      htpy-map-short-map-metric-quotient-Pseudometric-Space P M f)
 ```
 
 ### All extensions are homotopic to the induced extension
