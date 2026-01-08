@@ -117,9 +117,9 @@ module _
       ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
 
   htpy-map-short-map-metric-quotient-Pseudometric-Space :
-    ( ( map-short-map-metric-quotient-Pseudometric-space) ∘
-      ( map-metric-quotient-Pseudometric-Space P)) ~
-    ( map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f)
+    map-short-map-metric-quotient-Pseudometric-space ∘
+    map-metric-quotient-Pseudometric-Space P ~
+    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   htpy-map-short-map-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space P)
