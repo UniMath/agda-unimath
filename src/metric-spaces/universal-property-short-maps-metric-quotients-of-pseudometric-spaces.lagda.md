@@ -231,7 +231,7 @@ module _
 
 ## Properties
 
-### The induced map from the quotient metric space into a metric space is short
+### The unique extension from the quotient metric space is short
 
 ```agda
 module _
