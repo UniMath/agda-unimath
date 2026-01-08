@@ -127,7 +127,7 @@ module _
       ( set-Metric-Space M)
       ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
 
-  compute-map-short-map-metric-quotient-Pseudometric-Space :
+  compute-map-exten-short-map-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space P) →
     {x : type-Pseudometric-Space P} →
     is-in-class-metric-quotient-Pseudometric-Space P X x →
