@@ -11,6 +11,7 @@ module real-numbers.binary-maximum-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
@@ -29,6 +30,7 @@ open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
 open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -54,10 +56,10 @@ of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
 cuts.
 
 For any `x : ℝ`, `max-ℝ x` is a
-[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
-Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
-[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+Moreover, the map `x ↦ max-ℝ x` is a short map from `ℝ` into the
+[metric space of short maps](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
 of `ℝ`.
 
 ## Definition

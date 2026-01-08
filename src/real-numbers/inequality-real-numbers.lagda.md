@@ -9,7 +9,11 @@ module real-numbers.inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -279,7 +283,7 @@ abstract opaque
 ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
-### The canonical map from rational numbers to the reals preserves and reflects inequality
+### The canonical inclusion of the rational numbers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -297,6 +301,38 @@ module _
 
     iff-leq-real-ℚ : leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
+```
+
+### The canonical inclusion of the integers into the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℤ}
+  where
+
+  abstract
+    preserves-leq-real-ℤ : leq-ℤ x y → leq-ℝ (real-ℤ x) (real-ℤ y)
+    preserves-leq-real-ℤ x≤y =
+      preserves-leq-real-ℚ (preserves-leq-rational-ℤ x≤y)
+
+    reflects-leq-real-ℤ : leq-ℝ (real-ℤ x) (real-ℤ y) → leq-ℤ x y
+    reflects-leq-real-ℤ x≤y =
+      reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
+```
+
+### The canonical inclusion of the natural numbers into the reals preserves and reflects inequality
+
+```agda
+module _
+  {x y : ℕ}
+  where
+
+  abstract
+    preserves-leq-real-ℕ : leq-ℕ x y → leq-ℝ (real-ℕ x) (real-ℕ y)
+    preserves-leq-real-ℕ x≤y = preserves-leq-real-ℤ (leq-int-ℕ x y x≤y)
+
+    reflects-leq-real-ℕ : leq-ℝ (real-ℕ x) (real-ℕ y) → leq-ℕ x y
+    reflects-leq-real-ℕ x≤y = reflects-leq-int-ℕ x y (reflects-leq-real-ℤ x≤y)
 ```
 
 ### Negation reverses inequality on the real numbers
@@ -357,14 +393,14 @@ module _
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
-### Inequality on the real numbers is invariant under raising universe levels
+### Raising either side of an inequality to another universe level
 
 ```agda
 abstract
   preserves-leq-left-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
-  preserves-leq-left-raise-ℝ l {x} {y} =
+  preserves-leq-left-raise-ℝ l {x} =
     preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
 
   preserves-leq-right-raise-ℝ :
@@ -372,6 +408,23 @@ abstract
     leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
   preserves-leq-right-raise-ℝ l {x} {y} =
     preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+```
+
+### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
+
+```agda
+abstract
+  leq-leq-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ (raise-ℝ l x) (raise-ℝ l y) → leq-ℝ x y
+  leq-leq-raise-ℝ l {x} {y} =
+    preserves-leq-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
+
+  leq-raise-leq-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x y → leq-ℝ (raise-ℝ l x) (raise-ℝ l y)
+  leq-raise-leq-ℝ l {x} {y} =
+    preserves-leq-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
 ```
 
 ### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
@@ -405,6 +458,29 @@ module _
 
   leq-iff-not-in-lower-cut-ℝ : leq-ℝ x (real-ℚ q) ↔ ¬ (is-in-lower-cut-ℝ x q)
   leq-iff-not-in-lower-cut-ℝ = (not-in-lower-cut-leq-ℝ , leq-not-in-lower-cut-ℝ)
+```
+
+### If `q` is in the lower cut of `x`, then `real-ℚ q ≤ x`
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ l)
+  where
+
+  abstract opaque
+    unfolding leq-ℝ real-ℚ
+
+    leq-real-is-in-lower-cut-ℝ :
+      {q : ℚ} → is-in-lower-cut-ℝ x q → leq-ℝ (real-ℚ q) x
+    leq-real-is-in-lower-cut-ℝ q<x p p<q = le-lower-cut-ℝ x p<q q<x
+
+abstract
+  leq-raise-real-is-in-lower-cut-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
+    is-in-lower-cut-ℝ x q → leq-ℝ (raise-real-ℚ l q) x
+  leq-raise-real-is-in-lower-cut-ℝ l x q<x =
+    preserves-leq-left-raise-ℝ l (leq-real-is-in-lower-cut-ℝ x q<x)
 ```
 
 ### If `y ≤ q ⇒ x ≤ q` for every rational `q`, then `x ≤ y`

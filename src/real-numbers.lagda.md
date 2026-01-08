@@ -72,6 +72,7 @@ open import real-numbers.minimum-finite-families-real-numbers public
 open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
+open import real-numbers.modulated-cauchy-sequences-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
 open import real-numbers.multiplication-nonzero-real-numbers public
@@ -100,8 +101,8 @@ open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
-open import real-numbers.short-function-binary-maximum-real-numbers public
-open import real-numbers.short-function-binary-minimum-real-numbers public
+open import real-numbers.short-map-binary-maximum-real-numbers public
+open import real-numbers.short-map-binary-minimum-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
 open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
@@ -116,8 +117,9 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
-open import real-numbers.uniformly-continuous-functions-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public
+open import real-numbers.uniformly-continuous-endomaps-real-numbers public
+open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```
