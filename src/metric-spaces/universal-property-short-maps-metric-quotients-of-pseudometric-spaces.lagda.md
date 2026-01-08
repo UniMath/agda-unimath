@@ -59,8 +59,8 @@ maps [short maps](metric-spaces.short-maps-metric-spaces.md) `[P] → M` to a
 [short maps](metric-spaces.short-maps-pseudometric-spaces.md) from `P` to the
 underlying pseudometric space of `M`.
 
-This action is an [equivalence](foundation.equivalences.md) so short maps from a
-pseudometric space to a metric space are
+This action is an [equivalence](foundation.equivalences.md), so short maps from
+a pseudometric space to a metric space are
 {{#concept "equivalent" Disambiguation="short maps of metric quotients of pseudometric spaces Agda=equiv-short-map-metric-quotient-Pseudometric-Space}}
 to short maps from its metric quotient.
 
