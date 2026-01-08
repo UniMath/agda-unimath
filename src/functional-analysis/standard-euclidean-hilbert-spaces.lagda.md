@@ -50,12 +50,12 @@ abstract
         ( l))
       ( is-complete-function-into-ℝ-Metric-Space (Fin n) l)
 
-hilbert-space-ℝ-Fin : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
-hilbert-space-ℝ-Fin n l =
+euclidean-hilbert-space-ℝ-Fin : (n : ℕ) (l : Level) → ℝ-Hilbert-Space l (lsuc l)
+euclidean-hilbert-space-ℝ-Fin n l =
   ( inner-product-space-ℝ-Fin n l ,
     is-complete-euclidean-metric-space-ℝ-Fin n l)
 
-banach-space-ℝ-Fin : (n : ℕ) (l : Level) → ℝ-Banach-Space l (lsuc l)
-banach-space-ℝ-Fin n l =
-  banach-space-ℝ-Hilbert-Space (hilbert-space-ℝ-Fin n l)
+euclidean-banach-space-ℝ-Fin : (n : ℕ) (l : Level) → ℝ-Banach-Space l (lsuc l)
+euclidean-banach-space-ℝ-Fin n l =
+  banach-space-ℝ-Hilbert-Space (euclidean-hilbert-space-ℝ-Fin n l)
 ```
