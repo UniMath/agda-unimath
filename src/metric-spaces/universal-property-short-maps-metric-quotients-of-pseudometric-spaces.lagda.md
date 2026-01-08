@@ -107,7 +107,7 @@ module _
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  map-short-map-metric-quotient-Pseudometric-space :
+  map-exten-short-map-metric-quotient-Pseudometric-space :
     map-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
