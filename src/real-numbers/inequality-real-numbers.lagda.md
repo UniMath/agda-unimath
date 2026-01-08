@@ -302,7 +302,7 @@ module _
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
 ```
 
-### The canonical map from integers to the reals preserves and reflects inequality
+### The inclusion of the integers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -319,7 +319,7 @@ module _
       reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
 ```
 
-### The canonical map from natural numbers to the reals preserves and reflects inequality
+### The inclusion of the natural numbers into the reals preserves and reflects inequality
 
 ```agda
 module _

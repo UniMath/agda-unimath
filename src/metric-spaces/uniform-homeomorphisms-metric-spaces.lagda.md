@@ -1,4 +1,4 @@
-# Uniform homeomorphiss between metric spaces
+# Uniform homeomorphisms between metric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -37,7 +37,7 @@ open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ## Idea
 
 A
-{{#concept "uniform homeomorphism" WDID=Q2789884 WD="uniform isomorphism" Agda=uniform-homeomorphism-Metric-Space}}
+{{#concept "uniform homeomorphism" Disambiguation="between metric spaces" WDID=Q2789884 WD="uniform isomorphism" Agda=uniform-homeomorphism-Metric-Space}}
 `f` from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space
 `Y` is an [equivalence](foundation.equivalences.md) between `X` and `Y` that is
 [uniformly continuous](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
@@ -165,7 +165,7 @@ module _
   where
 
   abstract
-    preserves-is-complete-uniform-homeomorphism-Metric-Space :
+    is-complete-metric-space-uniform-homeomorphism-Metric-Space :
       is-complete-Metric-Space X → is-complete-Metric-Space Y
     preserves-is-complete-uniform-homeomorphism-Metric-Space H =
       let
