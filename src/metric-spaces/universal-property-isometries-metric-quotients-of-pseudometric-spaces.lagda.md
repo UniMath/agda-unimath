@@ -106,12 +106,12 @@ module _
   (f : isometry-Pseudometric-Space A (pseudometric-Metric-Space B))
   where
 
-  map-isometry-metric-quotient-Pseudometric-Space :
+  map-exten-isometry-metric-quotient-Pseudometric-Space :
     map-Metric-Space
       ( metric-quotient-Pseudometric-Space A)
       ( B)
-  map-isometry-metric-quotient-Pseudometric-Space =
-    map-short-map-metric-quotient-Pseudometric-space
+  map-exten-isometry-metric-quotient-Pseudometric-Space =
+    map-exten-short-map-metric-quotient-Pseudometric-space
       ( A)
       ( B)
       ( short-map-isometry-Pseudometric-Space
@@ -124,7 +124,7 @@ module _
       ( map-metric-quotient-Pseudometric-Space A)) ~
     ( map-isometry-Pseudometric-Space A (pseudometric-Metric-Space B) f)
   htpy-map-isometry-metric-quotient-Pseudometric-Space =
-    htpy-map-short-map-metric-quotient-Pseudometric-Space
+    is-extension-exten-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
       ( short-map-isometry-Pseudometric-Space
@@ -143,7 +143,7 @@ module _
       ( f)
       ( x)
   compute-map-isometry-metric-quotient-Pseudometric-Space =
-    compute-map-short-map-metric-quotient-Pseudometric-Space
+    compute-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
       ( short-map-isometry-Pseudometric-Space
@@ -259,7 +259,7 @@ module _
       ( map-isometry-metric-quotient-Pseudometric-Space P M f x)
       ( map-isometry-metric-quotient-Pseudometric-Space P M f y)
   preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space =
-    is-short-map-short-map-metric-quotient-Pseudometric-Space
+    is-short-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( M)
       ( short-map-isometry-Pseudometric-Space
@@ -331,7 +331,7 @@ module _
     coh-triangle-isometry-metric-quotient-Pseudometric-Space P M f
       ( isometry-map-isometry-metric-quotient-Pseudometric-Space)
   coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space =
-    coh-triangle-short-map-short-map-metric-quotient-Pseudometric-Space P M
+    is-extension-exten-metric-quotient-Pseudometric-Space P M
       ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
 
   coh-isometry-map-isometry-metric-quotient-Pseudometric-Space :
@@ -359,7 +359,7 @@ module _
       ( isometry-map-isometry-metric-quotient-Pseudometric-Space P M f)
       ( isometry-coh-isometry-metric-quotient-Pseudometric-Space P M f g)
   all-htpy-coh-isometry-metric-quotient-Pseudometric-Space g =
-    all-htpy-coh-short-map-metric-quotient-Pseudometric-Space
+    all-htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( M)
       ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
@@ -367,7 +367,7 @@ module _
         ( short-map-isometry-Metric-Space (metric-quotient-Pseudometric-Space
           ( P))
           ( M))
-        ( coh-triangle-short-map-metric-quotient-Pseudometric-Space P M
+        ( is-extension-short-map-metric-quotient-Pseudometric-Space P M
           ( short-map-isometry-Pseudometric-Space
             ( P)
             ( pseudometric-Metric-Space M)
