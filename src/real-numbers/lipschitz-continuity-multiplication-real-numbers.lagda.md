@@ -521,7 +521,7 @@ abstract
           open inequality-reasoning-Large-Poset ℝ-Large-Poset
           open do-syntax-trunc-Prop (leq-prop-ℝ x (y *ℝ z +ℝ real-ℚ⁺ η))
         in do
-          (μ , is-mod-μ) ← is-pointwise-continuous-mul-ℝ _ _ (y , z)
+          (μ , is-mod-μ) ← is-pointwise-continuous-map-mul-pair-ℝ _ _ (y , z)
           let δ = μ η
           chain-of-inequalities
             x
