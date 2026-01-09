@@ -59,8 +59,7 @@ abstract
     l [a,b]@(a , b , a<b) (x , a≤x , x≤b) ε =
     let
       motive =
-        ∃
-          ( type-proper-closed-interval-ℝ l [a,b])
+        ∃ ( type-proper-closed-interval-ℝ l [a,b])
           ( λ (y , _) → neighborhood-prop-ℝ l ε x y ∧ subtype-rational-ℝ y)
       open do-syntax-trunc-Prop motive
     in
@@ -95,7 +94,7 @@ abstract
                   ( x)
                   ( b)
                   ( x≤b)
-                  ( leq-le-ℝ (le-raise-real-is-in-lower-cut-ℝ x l q<x)))
+                  ( leq-le-ℝ (le-raise-real-is-in-lower-cut-ℝ l x q<x)))
               ( weakly-monotonic-neighborhood-ℝ
                   ( x)
                   ( raise-real-ℚ l q)
@@ -116,7 +115,7 @@ abstract
                   ( a)
                   ( x)
                   ( raise-real-ℚ l q)
-                  ( leq-le-ℝ (le-raise-real-is-in-upper-cut-ℝ x l x<q))
+                  ( leq-le-ℝ (le-raise-real-is-in-upper-cut-ℝ l x x<q))
                   ( a≤x) ,
                 transitive-leq-ℝ
                   ( raise-real-ℚ l q)

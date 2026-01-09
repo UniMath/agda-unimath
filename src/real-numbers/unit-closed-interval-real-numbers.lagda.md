@@ -156,7 +156,7 @@ module _
                       ( neighborhood-ℝ l ε₁ (raise-real-ℚ l q))
                       ( eq-raise-real-rational-is-rational-ℝ p=pℝ)
                       ( forward-implication
-                        ( is-isometry-metric-space-raise-real-ℚ
+                        ( is-isometry-raise-real-ℚ
                           ( l)
                           ( ε₁)
                           ( q)
