@@ -66,8 +66,8 @@ to isometries from its metric quotient.
 Equivalently, the metric quotient satisfies the
 {{#concept "universal property" Disambiguation="of metric quotients and isometries" Agda=is-contr-coh-isometry-metric-quotient-Pseudometric-Space}}
 of metric quotients and isometries: for any isometry `f : P → M` into a metric
-space `M`, there [uniquely exists](foundation.uniqueness-quantification.md)
-an extension of `f` along `q`, i.e., an isometry `g : [P] → M` such that
+space `M`, there [uniquely exists](foundation.uniqueness-quantification.md) an
+extension of `f` along `q`, i.e., an isometry `g : [P] → M` such that
 
 ```text
 g ∘ q ~ f.
@@ -152,7 +152,9 @@ module _
         ( f))
 ```
 
-### Coherent isometries from the metric quotient in a metric space
+### Extensions of isometries along the natural inclusion into the metric quotient
+
+#### The property of being the extension of an isometry
 
 ```agda
 module _
@@ -163,9 +165,9 @@ module _
   (g : isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M)
   where
 
-  coh-triangle-prop-isometry-metric-quotient-Pseudometric-Space :
+  is-extension-prop-isometry-metric-quotient-Pseudometric-Space :
     Prop (l1 ⊔ l1')
-  coh-triangle-prop-isometry-metric-quotient-Pseudometric-Space =
+  is-extension-prop-isometry-metric-quotient-Pseudometric-Space =
     Π-Prop
       ( type-Pseudometric-Space P)
       ( λ x →
@@ -182,19 +184,22 @@ module _
             ( f)
             ( x)))
 
-  coh-triangle-isometry-metric-quotient-Pseudometric-Space :
-    UU (l1 ⊔ l1')
-  coh-triangle-isometry-metric-quotient-Pseudometric-Space =
+  is-extension-isometry-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l1')
+  is-extension-isometry-metric-quotient-Pseudometric-Space =
     type-Prop
-      coh-triangle-prop-isometry-metric-quotient-Pseudometric-Space
+      is-extension-prop-isometry-metric-quotient-Pseudometric-Space
 
-  is-prop-coh-triangle-isometry-metric-quotient-Pseudometric-Space :
+  is-prop-is-extension-isometry-metric-quotient-Pseudometric-Space :
     is-prop
-      coh-triangle-isometry-metric-quotient-Pseudometric-Space
-  is-prop-coh-triangle-isometry-metric-quotient-Pseudometric-Space =
+      is-extension-isometry-metric-quotient-Pseudometric-Space
+  is-prop-is-extension-isometry-metric-quotient-Pseudometric-Space =
     is-prop-type-Prop
-      coh-triangle-prop-isometry-metric-quotient-Pseudometric-Space
+      is-extension-prop-isometry-metric-quotient-Pseudometric-Space
+```
 
+#### The type of extensions of isometries
+
+```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
@@ -202,40 +207,66 @@ module _
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  coh-isometry-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  coh-isometry-metric-quotient-Pseudometric-Space =
+  extension-isometry-metric-quotient-Pseudometric-Space :
+    UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  extension-isometry-metric-quotient-Pseudometric-Space =
     Σ ( isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M)
-      ( coh-triangle-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( is-extension-isometry-metric-quotient-Pseudometric-Space P M f)
 
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
-  (coh-f : coh-isometry-metric-quotient-Pseudometric-Space P M f)
+  (g : extension-isometry-metric-quotient-Pseudometric-Space P M f)
   where
 
-  isometry-coh-isometry-metric-quotient-Pseudometric-Space :
+  isometry-extension-isometry-metric-quotient-Pseudometric-Space :
     isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M
-  isometry-coh-isometry-metric-quotient-Pseudometric-Space = pr1 coh-f
+  isometry-extension-isometry-metric-quotient-Pseudometric-Space = pr1 g
 
-  map-isometry-coh-isometry-metric-quotient-Pseudometric-Space :
+  map-extension-isometry-metric-quotient-Pseudometric-Space :
     map-Metric-Space (metric-quotient-Pseudometric-Space P) M
-  map-isometry-coh-isometry-metric-quotient-Pseudometric-Space =
+  map-extension-isometry-metric-quotient-Pseudometric-Space =
     map-isometry-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-      ( isometry-coh-isometry-metric-quotient-Pseudometric-Space)
+      ( isometry-extension-isometry-metric-quotient-Pseudometric-Space)
 
-  coh-triangle-coh-isometry-metric-quotient-Pseudometric-Space :
-    coh-triangle-isometry-metric-quotient-Pseudometric-Space P M f
-      isometry-coh-isometry-metric-quotient-Pseudometric-Space
-  coh-triangle-coh-isometry-metric-quotient-Pseudometric-Space = pr2 coh-f
+  is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space :
+    map-extension-isometry-metric-quotient-Pseudometric-Space ∘
+    map-metric-quotient-Pseudometric-Space P ~
+    map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f
+  is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space
+    = pr2 g
 ```
 
 ## Properties
 
-### The induced map from the quotient metric space into a metric space is an isometry
+### Extensions are fibers of the precomposition by the natural inclusion of metric quotients
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
+  where
+
+  compute-extension-fiber-precomp-isometry-metric-quotient-Pseudometric-Space :
+    fiber (precomp-isometry-metric-quotient-Pseudometric-Space P M) f ≃
+    extension-isometry-metric-quotient-Pseudometric-Space P M f
+  compute-extension-fiber-precomp-isometry-metric-quotient-Pseudometric-Space =
+    equiv-tot
+      ( λ g →
+        equiv-eq-htpy-map-isometry-Pseudometric-Space
+          ( P)
+          ( pseudometric-Metric-Space M)
+          ( precomp-isometry-metric-quotient-Pseudometric-Space P M g)
+          ( f))
+```
+
+### The extension if an isometry is an isometry
 
 ```agda
 module _
@@ -245,7 +276,7 @@ module _
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
   where abstract
 
-  preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space :
+  preserves-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space :
     (d : ℚ⁺) →
     (x y : type-metric-quotient-Pseudometric-Space P) →
     neighborhood-metric-quotient-Pseudometric-Space
@@ -258,7 +289,7 @@ module _
       ( d)
       ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f x)
       ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f y)
-  preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space =
+  preserves-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space =
     is-short-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( M)
@@ -267,7 +298,7 @@ module _
         ( pseudometric-Metric-Space M)
         ( f))
 
-  reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space :
+  reflects-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space :
     (d : ℚ⁺) →
     (x y : type-metric-quotient-Pseudometric-Space P) →
     neighborhood-Metric-Space
@@ -280,7 +311,7 @@ module _
       ( d)
       ( x)
       ( y)
-  reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
+  reflects-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space
     d X Y N⟨fX,fY⟩ (x , x∈X) (y , y∈Y) =
     reflects-neighborhoods-map-isometry-Pseudometric-Space
       ( P)
@@ -305,23 +336,23 @@ module _
           ( y∈Y))
         ( N⟨fX,fY⟩))
 
-  is-isometry-map-isometry-metric-quotient-Pseudometric-Space :
+  is-isometry-map-exten-isometry-metric-quotient-Pseudometric-Space :
     is-isometry-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
       ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f)
-  is-isometry-map-isometry-metric-quotient-Pseudometric-Space d x y =
-    ( ( preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
+  is-isometry-map-exten-isometry-metric-quotient-Pseudometric-Space d x y =
+    ( ( preserves-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space
         ( d)
         ( x)
         ( y)) ,
-      ( reflects-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
+      ( reflects-neighborhoods-map-exten-isometry-metric-quotient-Pseudometric-Space
         ( d)
         ( x)
         ( y)))
 ```
 
-### The coherent induced isometry form the quotient metric space
+### The extension induced by an isometry
 
 ```agda
 module _
@@ -331,27 +362,20 @@ module _
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  isometry-map-isometry-metric-quotient-Pseudometric-Space :
+  isometry-exten-isometry-metric-quotient-Pseudometric-Space :
     isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M
-  isometry-map-isometry-metric-quotient-Pseudometric-Space =
+  isometry-exten-isometry-metric-quotient-Pseudometric-Space =
     ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f ,
-      is-isometry-map-isometry-metric-quotient-Pseudometric-Space P M f)
+      is-isometry-map-exten-isometry-metric-quotient-Pseudometric-Space P M f)
 
-  coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space :
-    coh-triangle-isometry-metric-quotient-Pseudometric-Space P M f
-      ( isometry-map-isometry-metric-quotient-Pseudometric-Space)
-  coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space =
-    is-extension-exten-short-map-metric-quotient-Pseudometric-Space P M
-      ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
-
-  coh-isometry-map-isometry-metric-quotient-Pseudometric-Space :
-    coh-isometry-metric-quotient-Pseudometric-Space P M f
-  coh-isometry-map-isometry-metric-quotient-Pseudometric-Space =
-    ( isometry-map-isometry-metric-quotient-Pseudometric-Space ,
-      coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space)
+  exten-isometry-metric-quotient-Pseudometric-Space :
+    extension-isometry-metric-quotient-Pseudometric-Space P M f
+  exten-isometry-metric-quotient-Pseudometric-Space =
+    ( isometry-exten-isometry-metric-quotient-Pseudometric-Space ,
+      is-extension-exten-isometry-metric-quotient-Pseudometric-Space P M f)
 ```
 
-### All coherent isometries from the metric quotient are homotopic to the induced isometry
+### All extensions are homotopic to the induced extension
 
 ```agda
 module _
@@ -359,16 +383,20 @@ module _
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
-  where
+  where abstract
 
-  all-htpy-coh-isometry-metric-quotient-Pseudometric-Space :
-    (g : coh-isometry-metric-quotient-Pseudometric-Space P M f) →
+  all-htpy-map-extension-isometry-metric-quotient-Pseudometric-Space :
+    (g : extension-isometry-metric-quotient-Pseudometric-Space P M f) →
     htpy-map-isometry-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-      ( isometry-map-isometry-metric-quotient-Pseudometric-Space P M f)
-      ( isometry-coh-isometry-metric-quotient-Pseudometric-Space P M f g)
-  all-htpy-coh-isometry-metric-quotient-Pseudometric-Space g =
+      ( isometry-exten-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( isometry-extension-isometry-metric-quotient-Pseudometric-Space
+        ( P)
+        ( M)
+        ( f)
+        ( g))
+  all-htpy-map-extension-isometry-metric-quotient-Pseudometric-Space g =
     all-htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( M)
@@ -385,7 +413,7 @@ module _
         ( g))
 ```
 
-### All coherent isometries from the metric quotient are equal to the coherent induced isometry
+### All extensions are equal to the induced extension
 
 ```agda
 module _
@@ -395,58 +423,38 @@ module _
   (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
   where abstract
 
-  contraction-coh-isometry-metric-quotient-Pseudometric-Space :
-    (g : coh-isometry-metric-quotient-Pseudometric-Space P M f) →
-    coh-isometry-map-isometry-metric-quotient-Pseudometric-Space P M f ＝ g
-  contraction-coh-isometry-metric-quotient-Pseudometric-Space g =
+  contraction-extension-isometry-metric-quotient-Pseudometric-Space :
+    (g : extension-isometry-metric-quotient-Pseudometric-Space P M f) →
+    exten-isometry-metric-quotient-Pseudometric-Space P M f ＝ g
+  contraction-extension-isometry-metric-quotient-Pseudometric-Space g =
     eq-type-subtype
-      ( coh-triangle-prop-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( is-extension-prop-isometry-metric-quotient-Pseudometric-Space P M f)
       ( eq-htpy-map-isometry-Metric-Space
         ( metric-quotient-Pseudometric-Space P)
         ( M)
-        ( all-htpy-coh-isometry-metric-quotient-Pseudometric-Space P M f g))
-```
-
-### The type of coherent isometries from the metric quotient is contractible
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
-  where
-
-  is-contr-coh-isometry-metric-quotient-Pseudometric-Space :
-    is-contr
-      ( coh-isometry-metric-quotient-Pseudometric-Space P M f)
-  is-contr-coh-isometry-metric-quotient-Pseudometric-Space =
-    ( coh-isometry-map-isometry-metric-quotient-Pseudometric-Space P M f ,
-      contraction-coh-isometry-metric-quotient-Pseudometric-Space P M f)
-```
-
-### Coherent isometries from the metric quotient are equivalent to fibers of the precomposition by the natural isometry of metric quotients
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
-  where
-
-  equiv-coh-isometry-fiber-precomp-isometry-metric-quotient-Pseudoemtric-Space :
-    ( fiber (precomp-isometry-metric-quotient-Pseudometric-Space P M) f) ≃
-    ( coh-isometry-metric-quotient-Pseudometric-Space P M f)
-  equiv-coh-isometry-fiber-precomp-isometry-metric-quotient-Pseudoemtric-Space
-    =
-    equiv-tot
-      ( λ g →
-        equiv-eq-htpy-map-isometry-Pseudometric-Space
+        ( all-htpy-map-extension-isometry-metric-quotient-Pseudometric-Space
           ( P)
-          ( pseudometric-Metric-Space M)
-          ( precomp-isometry-metric-quotient-Pseudometric-Space P M g)
-          ( f))
+          ( M)
+          ( f)
+          ( g)))
+```
+
+### The type of extensions of an isometry is contractible
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
+  where
+
+  is-contr-extension-isometry-metric-quotient-Pseudometric-Space :
+    is-contr
+      ( extension-isometry-metric-quotient-Pseudometric-Space P M f)
+  is-contr-extension-isometry-metric-quotient-Pseudometric-Space =
+    ( exten-isometry-metric-quotient-Pseudometric-Space P M f ,
+      contraction-extension-isometry-metric-quotient-Pseudometric-Space P M f)
 ```
 
 ### Precomposing by the natual isometry of metric quotients is an equivalence
@@ -464,19 +472,19 @@ module _
       (fiber (precomp-isometry-metric-quotient-Pseudometric-Space P M) f)
   is-contr-map-precomp-isometry-metric-quotient-Pseudometric-Space f =
     is-contr-equiv
-      ( coh-isometry-metric-quotient-Pseudometric-Space P M f)
-      ( equiv-coh-isometry-fiber-precomp-isometry-metric-quotient-Pseudoemtric-Space
+      ( extension-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( compute-extension-fiber-precomp-isometry-metric-quotient-Pseudometric-Space
         ( P)
         ( M)
         ( f))
-      ( is-contr-coh-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( is-contr-extension-isometry-metric-quotient-Pseudometric-Space P M f)
 
   is-equiv-precomp-isometry-metric-quotient-Pseudometric-Space :
     is-equiv
       (precomp-isometry-metric-quotient-Pseudometric-Space P M)
   is-equiv-precomp-isometry-metric-quotient-Pseudometric-Space =
     is-equiv-is-contr-map
-      ( is-contr-map-precomp-isometry-metric-quotient-Pseudometric-Space)
+      is-contr-map-precomp-isometry-metric-quotient-Pseudometric-Space
 ```
 
 ### The equivalence between isometries from a pseudometric space in a metric space and isometries from the metric quotient
