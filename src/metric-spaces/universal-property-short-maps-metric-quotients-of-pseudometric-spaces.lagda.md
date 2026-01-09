@@ -231,11 +231,12 @@ module _
       ( M)
       ( short-map-extension-short-map-metric-quotient-Pseudometric-Space)
 
-  htpy-map-extension-short-map-metric-quotient-Pseudometric-Space :
+  is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space :
     map-extension-short-map-metric-quotient-Pseudometric-Space ∘
     map-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
-  htpy-map-extension-short-map-metric-quotient-Pseudometric-Space = pr2 g
+  is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space
+    = pr2 g
 ```
 
 ## Properties
@@ -395,7 +396,7 @@ module _
             ( x∈X)
 
         lemma-mhs =
-          htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
+          is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space
             ( P)
             ( M)
             ( f)
