@@ -745,3 +745,23 @@ abstract
         ( one-ℝ⁰⁺)
         ( √x≤1))
 ```
+
+### If `1 ≤ x`, `√x ≤ x`
+
+```agda
+abstract
+  leq-sqrt-leq-one-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ⁰⁺ one-ℝ⁰⁺ x → leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) x
+  leq-sqrt-leq-one-ℝ⁰⁺ x⁰⁺@(x , _) 1≤x =
+    tr
+      ( leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x⁰⁺))
+      ( is-retraction-square-ℝ⁰⁺ x⁰⁺)
+      ( preserves-leq-sqrt-ℝ⁰⁺
+        ( x⁰⁺)
+        ( nonnegative-square-ℝ x)
+        ( binary-tr
+          ( leq-ℝ)
+          ( right-unit-law-mul-ℝ x)
+          ( refl)
+          ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ 1≤x)))
+```
