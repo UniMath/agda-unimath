@@ -132,7 +132,7 @@ module _
     ( map-metric-quotient-Pseudometric-Space Q ∘
       map-short-map-Pseudometric-Space P Q f)
   coh-square-map-hom-metric-quotient-short-map-Pseudometric-Space =
-    is-extension-exten-metric-quotient-Pseudometric-Space
+    is-extension-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space Q)
       ( postcomp-short-map-metric-quotient-Pseudometric-Space P Q f)
