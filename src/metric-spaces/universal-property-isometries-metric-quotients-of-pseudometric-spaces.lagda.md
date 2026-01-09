@@ -119,12 +119,12 @@ module _
         ( pseudometric-Metric-Space B)
         ( f))
 
-  htpy-map-isometry-metric-quotient-Pseudometric-Space :
-    ( ( map-isometry-metric-quotient-Pseudometric-Space) ∘
+  is-extension-exten-isometry-metric-quotient-Pseudometric-Space :
+    ( ( map-exten-isometry-metric-quotient-Pseudometric-Space) ∘
       ( map-metric-quotient-Pseudometric-Space A)) ~
     ( map-isometry-Pseudometric-Space A (pseudometric-Metric-Space B) f)
-  htpy-map-isometry-metric-quotient-Pseudometric-Space =
-    is-extension-exten-metric-quotient-Pseudometric-Space
+  is-extension-exten-isometry-metric-quotient-Pseudometric-Space =
+    is-extension-exten-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
       ( short-map-isometry-Pseudometric-Space
@@ -132,17 +132,17 @@ module _
         ( pseudometric-Metric-Space B)
         ( f))
 
-  compute-map-isometry-metric-quotient-Pseudometric-Space :
+  compute-map-exten-isometry-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space A) →
     {x : type-Pseudometric-Space A} →
     is-in-class-metric-quotient-Pseudometric-Space A X x →
-    map-isometry-metric-quotient-Pseudometric-Space X ＝
+    map-exten-isometry-metric-quotient-Pseudometric-Space X ＝
     map-isometry-Pseudometric-Space
       ( A)
       ( pseudometric-Metric-Space B)
       ( f)
       ( x)
-  compute-map-isometry-metric-quotient-Pseudometric-Space =
+  compute-map-exten-isometry-metric-quotient-Pseudometric-Space =
     compute-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( A)
       ( B)
@@ -256,8 +256,8 @@ module _
     neighborhood-Metric-Space
       ( M)
       ( d)
-      ( map-isometry-metric-quotient-Pseudometric-Space P M f x)
-      ( map-isometry-metric-quotient-Pseudometric-Space P M f y)
+      ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f x)
+      ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f y)
   preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space =
     is-short-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
@@ -273,8 +273,8 @@ module _
     neighborhood-Metric-Space
       ( M)
       ( d)
-      ( map-isometry-metric-quotient-Pseudometric-Space P M f x)
-      ( map-isometry-metric-quotient-Pseudometric-Space P M f y) →
+      ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f x)
+      ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f y) →
     neighborhood-metric-quotient-Pseudometric-Space
       ( P)
       ( d)
@@ -291,15 +291,25 @@ module _
       ( y)
       ( binary-tr
         ( neighborhood-Metric-Space M d)
-        ( compute-map-isometry-metric-quotient-Pseudometric-Space P M f X x∈X)
-        ( compute-map-isometry-metric-quotient-Pseudometric-Space P M f Y y∈Y)
+        ( compute-map-exten-isometry-metric-quotient-Pseudometric-Space
+          ( P)
+          ( M)
+          ( f)
+          ( X)
+          ( x∈X))
+        ( compute-map-exten-isometry-metric-quotient-Pseudometric-Space
+          ( P)
+          ( M)
+          ( f)
+          ( Y)
+          ( y∈Y))
         ( N⟨fX,fY⟩))
 
   is-isometry-map-isometry-metric-quotient-Pseudometric-Space :
     is-isometry-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-      ( map-isometry-metric-quotient-Pseudometric-Space P M f)
+      ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f)
   is-isometry-map-isometry-metric-quotient-Pseudometric-Space d x y =
     ( ( preserves-neighborhoods-map-isometry-metric-quotient-Pseudometric-Space
         ( d)
@@ -324,14 +334,14 @@ module _
   isometry-map-isometry-metric-quotient-Pseudometric-Space :
     isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M
   isometry-map-isometry-metric-quotient-Pseudometric-Space =
-    ( map-isometry-metric-quotient-Pseudometric-Space P M f ,
+    ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f ,
       is-isometry-map-isometry-metric-quotient-Pseudometric-Space P M f)
 
   coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space :
     coh-triangle-isometry-metric-quotient-Pseudometric-Space P M f
       ( isometry-map-isometry-metric-quotient-Pseudometric-Space)
   coh-triangle-isometry-map-isometry-metric-quotient-Pseudometric-Space =
-    is-extension-exten-metric-quotient-Pseudometric-Space P M
+    is-extension-exten-short-map-metric-quotient-Pseudometric-Space P M
       ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
 
   coh-isometry-map-isometry-metric-quotient-Pseudometric-Space :
