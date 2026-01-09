@@ -578,7 +578,7 @@ abstract
     similarity-reasoning-ℝ
       y
       ~ℝ y +ℝ neg-ℝ zero-ℝ
-        by sim-eq-ℝ (inv (ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ y))
+      `  by sim-eq-ℝ (inv (ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ y))
       ~ℝ y +ℝ neg-ℝ (x +ℝ y)
         by
           preserves-sim-left-add-ℝ y _ _
@@ -609,6 +609,23 @@ abstract
     transitive-sim-ℝ _ _ _
       ( sim-eq-ℝ (right-unit-law-add-ℝ _))
       ( preserves-sim-add-ℝ x~0 y~0)
+```
+
+### Adding raised real numbers
+
+```agda
+abstract
+  add-raise-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {y : ℝ l2} →
+    raise-ℝ l3 x +ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+  add-raise-ℝ {l3 = l3} {l4 = l4} {x = x} {y = y} =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 x +ℝ raise-ℝ l4 y
+        ~ℝ x +ℝ y
+          by preserves-sim-add-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)
+        ~ℝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+          by sim-raise-ℝ (l3 ⊔ l4) (x +ℝ y))
 ```
 
 ## See also

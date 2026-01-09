@@ -12,11 +12,14 @@ open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 ```
 
 </details>
@@ -116,4 +119,17 @@ abstract
       ( transitive-sim-ℂ _ _ _
         ( sim-raise-ℂ (l3 ⊔ l4) (z +ℂ w))
         ( preserves-sim-add-ℂ (sim-raise-ℂ' l3 z) (sim-raise-ℂ' l4 w)))
+```
+
+### The inclusion of real numbers preserves addition
+
+```agda
+abstract
+  add-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x +ℂ complex-ℝ y ＝ complex-ℝ (x +ℝ y)
+  add-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( refl)
+      ( add-raise-ℝ ∙ ap (raise-ℝ _) (left-unit-law-add-ℝ _))
 ```

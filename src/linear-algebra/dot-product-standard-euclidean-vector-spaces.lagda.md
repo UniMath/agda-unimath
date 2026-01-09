@@ -45,15 +45,16 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "dot product" WDID=Q181365 WD="scalar product" Disambiguation="of vectors in ℝⁿ" Agda=dot-product-ℝ^}}
+{{#concept "dot product" WDID=Q181365 WD="scalar product" Disambiguation="of vectors in ℝⁿ" Agda=dot-product-ℝ-Fin}}
 of two vectors `u` and `v` in
 [`ℝⁿ`](linear-algebra.standard-euclidean-vector-spaces.md) is `∑ uᵢvᵢ`.
 
 ## Definition
 
 ```agda
-dot-product-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l → ℝ l
-dot-product-ℝ^ n u v = sum-fin-sequence-ℝ n (λ i → u i *ℝ v i)
+dot-product-ℝ-Fin :
+  {n : ℕ} {l : Level} → type-ℝ-Fin n l → type-ℝ-Fin n l → ℝ l
+dot-product-ℝ-Fin {n} u v = sum-fin-sequence-ℝ n (λ i → u i *ℝ v i)
 ```
 
 ## Properties
@@ -62,10 +63,10 @@ dot-product-ℝ^ n u v = sum-fin-sequence-ℝ n (λ i → u i *ℝ v i)
 
 ```agda
 abstract
-  symmetric-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (u v : type-ℝ^ n l) →
-    dot-product-ℝ^ n u v ＝ dot-product-ℝ^ n v u
-  symmetric-dot-product-ℝ^ n u v =
+  symmetric-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (u v : type-ℝ-Fin n l) →
+    dot-product-ℝ-Fin u v ＝ dot-product-ℝ-Fin v u
+  symmetric-dot-product-ℝ-Fin {n} u v =
     htpy-sum-fin-sequence-ℝ n (λ i → commutative-mul-ℝ (u i) (v i))
 ```
 
@@ -73,21 +74,21 @@ abstract
 
 ```agda
 abstract
-  left-distributive-dot-product-add-ℝ^ :
-    (n : ℕ) {l : Level} (u v w : type-ℝ^ n l) →
-    dot-product-ℝ^ n u (add-ℝ^ n v w) ＝
-    dot-product-ℝ^ n u v +ℝ dot-product-ℝ^ n u w
-  left-distributive-dot-product-add-ℝ^ n u v w =
+  left-distributive-dot-product-add-ℝ-Fin :
+    {n : ℕ} {l : Level} (u v w : type-ℝ-Fin n l) →
+    dot-product-ℝ-Fin u (add-ℝ-Fin v w) ＝
+    dot-product-ℝ-Fin u v +ℝ dot-product-ℝ-Fin u w
+  left-distributive-dot-product-add-ℝ-Fin {n} u v w =
     ( htpy-sum-fin-sequence-ℝ
       ( n)
       ( λ i → left-distributive-mul-add-ℝ (u i) (v i) (w i))) ∙
     ( inv (interchange-add-sum-fin-sequence-ℝ _ _ _))
 
-  right-distributive-dot-product-add-ℝ^ :
-    (n : ℕ) {l : Level} (u v w : type-ℝ^ n l) →
-    dot-product-ℝ^ n (add-ℝ^ n u v) w ＝
-    dot-product-ℝ^ n u w +ℝ dot-product-ℝ^ n v w
-  right-distributive-dot-product-add-ℝ^ n u v w =
+  right-distributive-dot-product-add-ℝ-Fin :
+    {n : ℕ} {l : Level} (u v w : type-ℝ-Fin n l) →
+    dot-product-ℝ-Fin (add-ℝ-Fin u v) w ＝
+    dot-product-ℝ-Fin u w +ℝ dot-product-ℝ-Fin v w
+  right-distributive-dot-product-add-ℝ-Fin {n} u v w =
     ( htpy-sum-fin-sequence-ℝ
       ( n)
       ( λ i → right-distributive-mul-add-ℝ (u i) (v i) (w i))) ∙
@@ -98,17 +99,19 @@ abstract
 
 ```agda
 abstract
-  preserves-left-scalar-mul-ℝ^ :
-    (n : ℕ) {l : Level} (c : ℝ l) (u v : type-ℝ^ n l) →
-    dot-product-ℝ^ n (mul-ℝ^ n c u) v ＝ c *ℝ dot-product-ℝ^ n u v
-  preserves-left-scalar-mul-ℝ^ n c u v =
+  preserves-left-scalar-mul-ℝ-Fin :
+    {n : ℕ} {l : Level} (c : ℝ l) (u v : type-ℝ-Fin n l) →
+    dot-product-ℝ-Fin (mul-ℝ-Fin c u) v ＝
+    c *ℝ dot-product-ℝ-Fin u v
+  preserves-left-scalar-mul-ℝ-Fin {n} c u v =
     ( htpy-sum-fin-sequence-ℝ n (λ i → associative-mul-ℝ c (u i) (v i))) ∙
     ( inv (left-distributive-mul-sum-fin-sequence-ℝ n c _))
 
-  preserves-right-scalar-mul-ℝ^ :
-    (n : ℕ) {l : Level} (c : ℝ l) (u v : type-ℝ^ n l) →
-    dot-product-ℝ^ n u (mul-ℝ^ n c v) ＝ c *ℝ dot-product-ℝ^ n u v
-  preserves-right-scalar-mul-ℝ^ n c u v =
+  preserves-right-scalar-mul-ℝ-Fin :
+    {n : ℕ} {l : Level} (c : ℝ l) (u v : type-ℝ-Fin n l) →
+    dot-product-ℝ-Fin u (mul-ℝ-Fin c v) ＝
+    c *ℝ dot-product-ℝ-Fin u v
+  preserves-right-scalar-mul-ℝ-Fin {n} c u v =
     ( htpy-sum-fin-sequence-ℝ n (λ i → left-swap-mul-ℝ (u i) c (v i))) ∙
     ( inv (left-distributive-mul-sum-fin-sequence-ℝ n c _))
 ```
@@ -116,44 +119,45 @@ abstract
 ### The dot product is a bilinear form
 
 ```agda
-bilinear-form-dot-product-ℝ^ :
-  (n : ℕ) (l : Level) → bilinear-form-ℝ-Vector-Space (vector-space-ℝ^ n l)
-bilinear-form-dot-product-ℝ^ n l =
-  ( dot-product-ℝ^ n ,
-    right-distributive-dot-product-add-ℝ^ n ,
-    preserves-left-scalar-mul-ℝ^ n ,
-    left-distributive-dot-product-add-ℝ^ n ,
-    preserves-right-scalar-mul-ℝ^ n)
+bilinear-form-dot-product-ℝ-Fin :
+  (n : ℕ) (l : Level) →
+  bilinear-form-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
+bilinear-form-dot-product-ℝ-Fin n l =
+  ( dot-product-ℝ-Fin ,
+    right-distributive-dot-product-add-ℝ-Fin ,
+    preserves-left-scalar-mul-ℝ-Fin ,
+    left-distributive-dot-product-add-ℝ-Fin ,
+    preserves-right-scalar-mul-ℝ-Fin)
 ```
 
 ### `v · v` is nonnegative
 
 ```agda
 abstract
-  is-nonnegative-diagonal-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (v : type-ℝ^ n l) →
-    is-nonnegative-ℝ (dot-product-ℝ^ n v v)
-  is-nonnegative-diagonal-dot-product-ℝ^ n v =
+  is-nonnegative-diagonal-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) →
+    is-nonnegative-ℝ (dot-product-ℝ-Fin v v)
+  is-nonnegative-diagonal-dot-product-ℝ-Fin {n} v =
     is-nonnegative-real-sum-fin-sequence-ℝ⁰⁺
       ( n)
       ( λ i → nonnegative-square-ℝ (v i))
 
-nonnegative-diagonal-dot-product-ℝ^ :
-  (n : ℕ) {l : Level} (v : type-ℝ^ n l) → ℝ⁰⁺ l
-nonnegative-diagonal-dot-product-ℝ^ n v =
-  ( dot-product-ℝ^ n v v ,
-    is-nonnegative-diagonal-dot-product-ℝ^ n v)
+nonnegative-diagonal-dot-product-ℝ-Fin :
+  {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) → ℝ⁰⁺ l
+nonnegative-diagonal-dot-product-ℝ-Fin v =
+  ( dot-product-ℝ-Fin v v ,
+    is-nonnegative-diagonal-dot-product-ℝ-Fin v)
 ```
 
 ### If `v · v = 0`, `v` is the zero vector
 
 ```agda
 abstract
-  htpy-zero-is-zero-diagonal-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (v : type-ℝ^ n l) →
-    is-zero-ℝ (dot-product-ℝ^ n v v) →
+  htpy-zero-is-zero-diagonal-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) →
+    is-zero-ℝ (dot-product-ℝ-Fin v v) →
     (i : Fin n) → v i ＝ raise-zero-ℝ l
-  htpy-zero-is-zero-diagonal-dot-product-ℝ^ n v v·v=0 i =
+  htpy-zero-is-zero-diagonal-dot-product-ℝ-Fin {n} v v·v=0 i =
     eq-raise-zero-is-zero-ℝ
       ( is-zero-is-zero-square-ℝ
         ( is-all-zero-is-zero-sum-fin-sequence-ℝ⁰⁺
@@ -162,22 +166,22 @@ abstract
           ( v·v=0)
           ( i)))
 
-  extensionality-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (v : type-ℝ^ n l) →
-    is-zero-ℝ (dot-product-ℝ^ n v v) → v ＝ zero-ℝ^ n l
-  extensionality-dot-product-ℝ^ n v v·v=0 =
-    eq-htpy (htpy-zero-is-zero-diagonal-dot-product-ℝ^ n v v·v=0)
+  extensionality-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) →
+    is-zero-ℝ (dot-product-ℝ-Fin v v) → v ＝ zero-ℝ-Fin n l
+  extensionality-dot-product-ℝ-Fin v v·v=0 =
+    eq-htpy (htpy-zero-is-zero-diagonal-dot-product-ℝ-Fin v v·v=0)
 ```
 
 ### If every coordinate of `v : ℝⁿ` has absolute value at most `ε`, `v · v ≤ nε²`
 
 ```agda
 abstract
-  leq-mul-dimension-bound-dot-product-ℝ^ :
-    (n : ℕ) {l1 l2 : Level} (v : type-ℝ^ n l1) (ε : ℝ⁰⁺ l2) →
+  leq-mul-dimension-bound-dot-product-ℝ-Fin :
+    (n : ℕ) {l1 l2 : Level} (v : type-ℝ-Fin n l1) (ε : ℝ⁰⁺ l2) →
     ((i : Fin n) → leq-ℝ (abs-ℝ (v i)) (real-ℝ⁰⁺ ε)) →
-    leq-ℝ (dot-product-ℝ^ n v v) (real-ℕ n *ℝ square-ℝ (real-ℝ⁰⁺ ε))
-  leq-mul-dimension-bound-dot-product-ℝ^ n v ε |vᵢ|≤ε =
+    leq-ℝ (dot-product-ℝ-Fin v v) (real-ℕ n *ℝ square-ℝ (real-ℝ⁰⁺ ε))
+  leq-mul-dimension-bound-dot-product-ℝ-Fin n v ε |vᵢ|≤ε =
     let open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in
       chain-of-inequalities
@@ -202,10 +206,10 @@ abstract
 
 ```agda
 abstract
-  leq-square-diagonal-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (v : type-ℝ^ n l) (i : Fin n) →
-    leq-ℝ (square-ℝ (v i)) (dot-product-ℝ^ n v v)
-  leq-square-diagonal-dot-product-ℝ^ n v =
+  leq-square-diagonal-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) (i : Fin n) →
+    leq-ℝ (square-ℝ (v i)) (dot-product-ℝ-Fin v v)
+  leq-square-diagonal-dot-product-ℝ-Fin {n} v =
     leq-term-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (v i))
 ```
 
@@ -213,20 +217,20 @@ abstract
 
 ```agda
 abstract
-  leq-abs-sqrt-diagonal-dot-product-ℝ^ :
-    (n : ℕ) {l : Level} (v : type-ℝ^ n l) (i : Fin n) →
+  leq-abs-sqrt-diagonal-dot-product-ℝ-Fin :
+    {n : ℕ} {l : Level} (v : type-ℝ-Fin n l) (i : Fin n) →
     leq-ℝ
       ( abs-ℝ (v i))
-      ( real-sqrt-ℝ⁰⁺ (nonnegative-diagonal-dot-product-ℝ^ n v))
-  leq-abs-sqrt-diagonal-dot-product-ℝ^ n v i =
+      ( real-sqrt-ℝ⁰⁺ (nonnegative-diagonal-dot-product-ℝ-Fin v))
+  leq-abs-sqrt-diagonal-dot-product-ℝ-Fin {n} v i =
     binary-tr
       ( leq-ℝ)
       ( inv (eq-abs-sqrt-square-ℝ (v i)))
       ( refl)
       ( preserves-leq-sqrt-ℝ⁰⁺
         ( nonnegative-square-ℝ (v i))
-        ( nonnegative-diagonal-dot-product-ℝ^ n v)
-        ( leq-square-diagonal-dot-product-ℝ^ n v i))
+        ( nonnegative-diagonal-dot-product-ℝ-Fin v)
+        ( leq-square-diagonal-dot-product-ℝ-Fin v i))
 ```
 
 ## See also

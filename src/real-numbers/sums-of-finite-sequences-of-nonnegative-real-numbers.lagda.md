@@ -63,7 +63,7 @@ abstract
     {l : Level} (n : ℕ) (a : fin-sequence (ℝ⁰⁺ l) n) →
     is-nonnegative-ℝ (real-sum-fin-sequence-ℝ⁰⁺ n a)
   is-nonnegative-real-sum-fin-sequence-ℝ⁰⁺ {l} 0 _ =
-    ind-Σ (preserves-is-nonnegative-raise-ℝ l) zero-ℝ⁰⁺
+    ind-Σ (is-nonnegative-raise-ℝ l) zero-ℝ⁰⁺
   is-nonnegative-real-sum-fin-sequence-ℝ⁰⁺ (succ-ℕ n) a =
     is-nonnegative-real-add-ℝ⁰⁺
       ( real-sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl-Fin n) ,
@@ -102,7 +102,7 @@ abstract
     preserves-leq-sum-fin-sequence-ℝ n (real-ℝ⁰⁺ ∘ a) (real-ℝ⁰⁺ ∘ b) aᵢ≤bᵢ
 ```
 
-### If `aₙ` is nonnegative for all `n`, `aᵢ ≤ ∑ aₙ`
+### If `aᵢ` is nonnegative for all `i`, `aᵢ ≤ ∑ aᵢ`
 
 ```agda
 abstract
@@ -124,7 +124,7 @@ abstract
       ( leq-term-sum-fin-sequence-ℝ⁰⁺ n (a ∘ inl) i)
 ```
 
-### If `aₙ` is nonnegative for all `n`, and `∑ aₙ = 0`, then `aₙ = 0` for all `n`
+### If `aᵢ` is nonnegative for all `i`, and `∑ aᵢ = 0`, then `aᵢ = 0` for all `i`
 
 ```agda
 abstract
