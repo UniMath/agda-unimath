@@ -64,7 +64,7 @@ pseudometric space to a metric space are
 to isometries from its metric quotient.
 
 Equivalently, the metric quotient satisfies the
-{{#concept "universal property" Disambiguation="of metric quotients and isometries" Agda=is-contr-coh-isometry-metric-quotient-Pseudometric-Space}}
+{{#concept "universal property" Disambiguation="of metric quotients and isometries" Agda=is-contr-extension-isometry-metric-quotient-Pseudometric-Space}}
 of metric quotients and isometries: for any isometry `f : P → M` into a metric
 space `M`, there [uniquely exists](foundation.uniqueness-quantification.md) an
 extension of `f` along `q`, i.e., an isometry `g : [P] → M` such that
